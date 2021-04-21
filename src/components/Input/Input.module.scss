@@ -17,4 +17,13 @@
     font-size: 17px;
     font-weight: 500;
   }
+
+  &__label {
+    display: block;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 7px;
+    letter-spacing: -0.085em;
+  }
 }

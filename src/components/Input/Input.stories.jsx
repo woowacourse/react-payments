@@ -20,4 +20,5 @@ export const Primary = Template.bind({});
 Primary.args = {
   textAlign: "left",
   placeholder: "입력해주세요",
+  labelText: "라벨 테스트",
 };
