@@ -2,6 +2,7 @@ import { configure, addDecorator } from '@storybook/react';
 
 import * as React from 'react';
 import { ThemeProvider } from 'emotion-theming';
+
 import GlobalStyle from '../src/GlobalStyle';
 import theme from '../src/theme';
 
