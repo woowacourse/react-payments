@@ -1,6 +1,6 @@
 import React from 'react';
 import './card.css';
-import './index.css';
+import '../../index.css';
 
 export default function Card({
   cardCompanyName,

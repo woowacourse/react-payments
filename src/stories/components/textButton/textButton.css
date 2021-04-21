@@ -1,0 +1,16 @@
+.text-button{
+  min-width: 51px;
+  background-color: transparent;
+  color: #04C09E;
+  padding: 10px;
+  border:none;
+  outline:none;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: right;
+  cursor: pointer;
+}
+
+.text-button:hover{
+  text-decoration: underline;
+}
