@@ -1,0 +1,11 @@
+.guide-input {
+  display: inline-block;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+
+  &__label {
+    display: block;
+    margin-bottom: 7px;
+  }
+}
