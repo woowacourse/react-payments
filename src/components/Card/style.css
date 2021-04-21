@@ -1,0 +1,24 @@
+.card {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.card--small {
+  width: 208px;
+  height: 123px;
+}
+
+.card--medium {
+  width: 213px;
+  height: 133px;
+}
+
+.card--large {
+  width: 293.08px;
+  height: 183px;
+}
+
+.card--shadow {
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+}
