@@ -3,3 +3,9 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
+
+button {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
