@@ -16,4 +16,6 @@
   background-color: #fdfdfd;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  padding: 36px 40px;
+  box-sizing: border-box;
 }
