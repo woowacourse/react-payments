@@ -39,7 +39,9 @@
   "devDependencies": {
     "@tailwindcss/postcss7-compat": "^2.1.0",
     "autoprefixer": "^9",
+    "eslint-config-prettier": "^8.2.0",
     "postcss": "^7",
+    "prettier": "2.2.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }
