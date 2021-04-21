@@ -17,12 +17,24 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -38,6 +50,12 @@
     ]
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.2.8",
+    "@storybook/addon-essentials": "^6.2.8",
+    "@storybook/addon-links": "^6.2.8",
+    "@storybook/node-logger": "^6.2.8",
+    "@storybook/preset-create-react-app": "^3.1.7",
+    "@storybook/react": "^6.2.8",
     "@tailwindcss/postcss7-compat": "^2.1.0",
     "autoprefixer": "^9",
     "eslint-config-prettier": "^8.2.0",
@@ -50,5 +68,8 @@
   "lint-staged": {
     "*.{jsx,js}": "eslint",
     "*.{json,html,jsx,js,css,md}": "prettier --write"
+  },
+  "resolutions": {
+    "babel-loader": "8.1.0"
   }
 }
