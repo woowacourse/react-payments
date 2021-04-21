@@ -1,3 +1,4 @@
+import "./app.css";
 import Button from "./components/Button/Button";
 
 function App() {
