@@ -11,7 +11,7 @@
       }
     }
   },
-  "extends": ["plugin:react/recommended", "plugin:prettier/recommended", "airbnb"],
+  "extends": ["plugin:react/recommended", "plugin:prettier/recommended"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -26,6 +26,6 @@
     "import/extensions": "off",
     "react/jsx-filename-extension": "off",
     "react/react-in-jsx-scope": "off",
-    "comma-dangle": "off"
+    "react/prop-types": "off"
   }
 }
