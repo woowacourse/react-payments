@@ -22,6 +22,8 @@
     "react/prefer-stateless-function": "off",
     "react/prop-types": "off",
     "react/destructuring-assignment": "off",
-    "max-classes-per-file": ["error", 3]
+    "max-classes-per-file": ["error", 3],
+    "import/no-extraneous-dependencies": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }
