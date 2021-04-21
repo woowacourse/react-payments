@@ -1,0 +1,51 @@
+.basic-input__label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  color: #525252;
+}
+
+.basic-input__label p {
+  margin: 0 0 8px;
+  width: 100%;
+  display: flex;
+}
+
+.basic-input__label .label-text {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.basic-input__label .letter-counter {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.basic-input__input {
+  background-color: #ecebf1;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  padding: 12px;
+  border: 2px solid transparent;
+  border-radius: 7px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.basic-input__input::placeholder {
+  color: #737373;
+}
+
+.basic-input__input:focus {
+  border: 2px solid #04c09e;
+}
+
+.basic-input__input.text-center {
+  text-align: center;
+}
+
+.basic-input__input.text-left {
+  text-align: left;
+}
