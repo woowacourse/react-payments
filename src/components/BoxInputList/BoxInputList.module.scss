@@ -1,0 +1,58 @@
+.box-input-list {
+  &__label {
+    display: block;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 7px;
+    letter-spacing: -0.085em;
+  }
+
+  &__bottom {
+    display: inline-flex;
+  }
+
+  &__box-input {
+    padding: 0;
+    width: 43px;
+    height: 45px;
+    background-color: #ecebf1;
+    border-radius: 7px;
+    border: none;
+    color: #04c09e;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+    // TODO : 모든 input 에 커서 색갈 적용(SASS 를 이용)
+    caret-color: #04c09e;
+    &:not(:last-child) {
+      margin-right: 7px;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__dot {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 43px;
+    height: 45px;
+
+    &:not(:last-child) {
+      margin-right: 7px;
+    }
+
+    &::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: #04c09e;
+      position: absolute;
+    }
+  }
+}
