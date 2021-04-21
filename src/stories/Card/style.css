@@ -24,7 +24,6 @@
 }
 
 .card__inner {
-  background-color: #efefef;
   position: absolute;
   top: 0;
   right: 0;
@@ -117,7 +116,4 @@
 
 .font-l {
   font-size: 1.2em;
-}
-
-@media (min-width: 500px) {
 }

@@ -7,6 +7,9 @@
 - Input
   - [x] input의 타입, placeholder, 텍스트 중간 정렬 여부를 props로 받는다.
   - [x] 추가적인 input option도 props로 받는다.
+- Header
+  - [x] Header는 title과 뒤로가기 버튼 핸들러를 props로 받는다.
+  - [x] 버튼 핸들러가 없으면 버튼을 감춘다.
 
 ## 카드 추가 페이지
 

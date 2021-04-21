@@ -5,7 +5,7 @@ import "./style.css";
 const Input = ({ type, placeHolder, isCenter = false, option = {} }) => {
   return (
     <input
-      className={isCenter ? "text-center" : ""}
+      className={`input ${isCenter ? "text-center" : ""}`}
       type={type}
       placeholder={placeHolder}
       {...option}

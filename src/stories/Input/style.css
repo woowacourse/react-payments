@@ -4,7 +4,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input {
+.input {
   outline: none;
   border: none;
   border-radius: 8px;
@@ -15,7 +15,7 @@ input {
   color: #04c09e;
 }
 
-input::placeholder {
+.input::placeholder {
   color: #737373;
 }
 
