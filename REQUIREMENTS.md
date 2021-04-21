@@ -1,6 +1,16 @@
 ## 컴포넌트
 
 - Card
-  - [x] 카드의 타입, 사용자 이름, 카드 번호, 만료일을 props로 받는다.
+  - [x] 카드의 타입, 사용자 이름, 카드 번호, 만료일, 카드 사이즈를 props로 받는다.
   - [x] 카드 타입이 UNKNOWN인 경우 기본 카드 템플릿을 띄운다.
   - [x] 카드 번호의 뒤 8자리는 가린다.
+- Input
+  - [ ] input의 타입, placeholder, 텍스트 중간 정렬 여부를 props로 받는다.
+  - [ ] 추가적인 input option도 props로 받는다.
+
+<input
+  type="number"
+  max=10
+  min=1
+  length=5
+   />
