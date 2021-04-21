@@ -3,7 +3,7 @@ import styles from "./Input.module.scss";
 
 const cx = classNames.bind(styles);
 
-const Input = ({ textAlign = "center", placeholder, labelText }) => {
+const Input = ({ textAlign = "center", placeholder, labelText, width }) => {
   return (
     <>
       {!!labelText?.length && (
@@ -11,7 +11,7 @@ const Input = ({ textAlign = "center", placeholder, labelText }) => {
           {labelText}
         </label>
       )}
-      <input className={cx("input")} style={{ textAlign }} placeholder={placeholder}></input>
+      <input className={cx("input")} style={{ textAlign, width }} placeholder={placeholder}></input>
     </>
   );
 };
