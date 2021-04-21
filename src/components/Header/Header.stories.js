@@ -7,8 +7,8 @@ export default {
     text: {
       control: 'text',
     },
+    onClickBackButton: {},
   },
-  onClickBackButton: {},
 };
 
 const Template = (args) => <Header {...args} />;
