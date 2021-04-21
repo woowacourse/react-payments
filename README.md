@@ -25,7 +25,7 @@
 
 > 권장 마감기한 - **4월 27일 화요일**
 
-- [ ] `REQUIREMENTS.md`에 요구 사항 도출
+- [x] `REQUIREMENTS.md`에 요구 사항 도출
 - [ ] `재사용 가능한 Component` 작성
 
 ##### 필수 구현
