@@ -1,7 +1,10 @@
-import styles from './Button.module.scss';
+import classNames from "classnames/bind";
+import styles from "./Button.module.scss";
+
+const cx = classNames.bind(styles);
 
 const Button = ({ children }) => {
-  return <button className={styles.button}>{children}</button>;
+  return <button className={cx("button")}>{children}</button>;
 };
 
 export default Button;
