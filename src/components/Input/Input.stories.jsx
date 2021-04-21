@@ -19,5 +19,5 @@ const Template = (args) => <Input {...args} />;
 export const Primary = Template.bind({});
 Primary.args = {
   textAlign: "left",
-  placeHolder: "입력해주세요",
+  placeholder: "입력해주세요",
 };
