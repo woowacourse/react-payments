@@ -15,18 +15,21 @@ const Card = ({ cardName, backgroundColor, cardNumberList, cardOwner, cardExpira
         <input
           type="text"
           name="카드번호 입력"
+          maxlength="4"
           className={cx("card__number-input", "card__number-input--visible")}
           value={firstCardNumbers.join("")}
         />
         <input
           type="text"
           name="카드번호 입력"
+          maxlength="4"
           className={cx("card__number-input", "card__number-input--visible")}
           value={secondCardNumbers.join("")}
         />
         <input
           type="password"
           name="카드번호 입력"
+          maxlength="4"
           className={cx("card__number-input", "card__number-input--invisible")}
           value={thirdCardNumbers.join("")}
           disabled
@@ -34,6 +37,7 @@ const Card = ({ cardName, backgroundColor, cardNumberList, cardOwner, cardExpira
         <input
           type="password"
           name="카드번호 입력"
+          maxlength="4"
           className={cx("card__number-input", "card__number-input--invisible")}
           value={fourthCardNumbers.join("")}
           disabled
