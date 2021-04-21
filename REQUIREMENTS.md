@@ -7,3 +7,12 @@
 - Input
   - [x] input의 타입, placeholder, 텍스트 중간 정렬 여부를 props로 받는다.
   - [x] 추가적인 input option도 props로 받는다.
+
+## 카드 추가 페이지
+
+- [ ] 카드 추가 페이지의 레이아웃을 구성한다.
+- [ ] 카드 번호 input을 구현한다.
+- [ ] 만료일 input을 구현한다.
+- [ ] 카드 소유자 이름 input을 구현한다.
+- [ ] 보안 코드 input을 구현한다.
+- [ ] 카드 비밀번호 input을 구현한다.
