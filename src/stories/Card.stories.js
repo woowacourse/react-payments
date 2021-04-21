@@ -9,7 +9,7 @@ const Template = (args) => <Card {...args} />;
 
 export const Medium = Template.bind({});
 Medium.args = {
-  size: CARD_SIZE.MEDIUM,
+  size: CARD_SIZE.MD,
   content: {
     cardType: 'XX 카드',
     cardNumber: '1111 2222 3333 4444',
@@ -20,7 +20,7 @@ Medium.args = {
 
 export const Large = Template.bind({});
 Large.args = {
-  size: CARD_SIZE.LARGE,
+  size: CARD_SIZE.LG,
   content: {
     cardType: 'XX 카드',
     cardNumber: '1111 2222 3333 4444',

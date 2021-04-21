@@ -1,8 +1,8 @@
 import Styled from './Card.style';
 
 export const CARD_SIZE = {
-  LARGE: 'LARGE',
-  MEDIUM: 'MEDIUM',
+  LG: 'LG',
+  MD: 'MD',
 };
 
 export const CARD_COLOR = {
@@ -23,7 +23,7 @@ export const Card = ({ size, color, content }) => {
 };
 
 Card.defaultProps = {
-  size: CARD_SIZE.MEDIUM,
+  size: CARD_SIZE.MD,
   color: CARD_COLOR.LIGHT_GRAY,
   content: {
     cardOwner: 'NAME',

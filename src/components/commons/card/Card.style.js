@@ -1,23 +1,23 @@
 import styled from 'styled-components';
 
 const CARD = {
-  LARGE: {
+  LG: {
     width: '293px',
     height: '183px',
   },
-  MEDIUM: {
+  MD: {
     width: '208px',
     height: '130px',
   },
 };
 
 const CARD_TYPE = {
-  LARGE: {
+  LG: {
     fontSize: '12px',
     left: '20px',
     top: '19px',
   },
-  MEDIUM: {
+  MD: {
     fontSize: '10px',
     left: '14px',
     top: '14px',
@@ -25,13 +25,13 @@ const CARD_TYPE = {
 };
 
 const CHIP = {
-  LARGE: {
+  LG: {
     width: '55px',
     height: '36px',
     left: '20px',
     top: '65px',
   },
-  MEDIUM: {
+  MD: {
     width: '39px',
     height: '25px',
     left: '14px',
@@ -40,12 +40,12 @@ const CHIP = {
 };
 
 const CARD_NUMBER = {
-  LARGE: {
+  LG: {
     bottom: '45px',
     fontSize: '18px',
     letterSpacing: '3px',
   },
-  MEDIUM: {
+  MD: {
     bottom: '33px',
     fontSize: '13px',
     letterSpacing: '2px',
@@ -53,11 +53,11 @@ const CARD_NUMBER = {
 };
 
 const CARD_OWNER = {
-  LARGE: {
+  LG: {
     left: '26px',
     bottom: '17px',
   },
-  MEDIUM: {
+  MD: {
     left: '18px',
     bottom: '10px',
     fontSize: '12px',
@@ -65,11 +65,11 @@ const CARD_OWNER = {
 };
 
 const CARD_EXPIRED_DATE = {
-  LARGE: {
+  LG: {
     right: '26px',
     bottom: '17px',
   },
-  MEDIUM: {
+  MD: {
     right: '18px',
     bottom: '10px',
     fontSize: '12px',
