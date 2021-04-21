@@ -1,0 +1,19 @@
+.modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-inner {
+  position: fixed;
+  min-height: 227px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #fdfdfd;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
