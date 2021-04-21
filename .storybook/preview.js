@@ -1,8 +1,9 @@
 import { configure, addDecorator } from '@storybook/react';
-import { makeDecorator } from '@storybook/addons';
 
 import * as React from 'react';
+import { ThemeProvider } from 'emotion-theming';
 import GlobalStyle from '../src/GlobalStyle';
+import theme from '../src/theme';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -13,6 +14,8 @@ export const parameters = {
     },
   },
 };
+
+addDecorator((style) => <ThemeProvider theme={theme}>{style()}</ThemeProvider>);
 
 addDecorator((style) => (
   <>
