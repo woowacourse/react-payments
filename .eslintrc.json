@@ -4,6 +4,13 @@
     "es2021": true,
     "node": true
   },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".ts", ".tsx"]
+      }
+    }
+  },
   "extends": ["plugin:react/recommended", "plugin:prettier/recommended", "airbnb"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -13,8 +20,12 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "prettier", "@typescript-eslint"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "import/extensions": "off",
+    "react/jsx-filename-extension": "off",
+    "react/react-in-jsx-scope": "off",
+    "comma-dangle": "off"
   }
 }
