@@ -15,3 +15,5 @@ code {
 ul {
   list-style: none;
 }
+
+@import "./App.css";

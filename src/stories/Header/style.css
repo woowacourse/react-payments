@@ -1,7 +1,6 @@
 .header {
   display: flex;
   align-items: center;
-  padding-left: 1.1rem;
 }
 
 .header > button {
