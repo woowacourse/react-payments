@@ -1,0 +1,24 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input {
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  background-color: #ecebf1;
+  height: 48px;
+  padding: 11px 10px;
+  font-size: 1.2rem;
+  color: #04c09e;
+}
+
+input::placeholder {
+  color: #737373;
+}
+
+.text-center {
+  text-align: center;
+}

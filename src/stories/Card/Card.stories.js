@@ -1,5 +1,4 @@
 import React from "react";
-
 import Card from "./index";
 import { CARD, CARD_SIZE } from "../constants/card";
 
@@ -9,9 +8,10 @@ export default {
   argTypes: {},
 };
 
-const Template = (args) => <Card {...args} />;
+const Template = args => <Card {...args} />;
 
 export const Unknown = Template.bind({});
+
 Unknown.args = {
   cardType: CARD.UNKNOWN,
   numbers: ["1234", "1234", "1234", "1234"],
