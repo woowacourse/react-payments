@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import './style.css';
 
 export const Card = ({ size, backgroundColor, boxShadow, children, ...props }) => {
-  let classnames = `card card--${size}`;
-  classnames += boxShadow ? ' card--shadow' : '';
+  let classnames = `Card Card--${size}`;
+  classnames += boxShadow ? ' Card--shadow' : '';
 
   return (
     <div className={classnames} style={{ backgroundColor }} {...props}>

@@ -4,7 +4,7 @@ import './style.css';
 
 export const Title = ({ color, fontSize, children, ...props }) => {
   return (
-    <h2 className="title" style={{ color, fontSize }} {...props}>
+    <h2 className="Title" style={{ color, fontSize }} {...props}>
       {children}
     </h2>
   );

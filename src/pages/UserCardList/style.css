@@ -1,0 +1,9 @@
+.UserCardList {
+  padding: 1.7625rem 2.25rem;
+}
+
+.Card--wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 3.75rem;
+}

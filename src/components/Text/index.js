@@ -4,7 +4,7 @@ import './style.css';
 
 export const Text = ({ color, fontSize, textAlign, width, children, ...props }) => {
   return (
-    <span className="text" style={{ color, fontSize, textAlign, width }} {...props}>
+    <span className="Text" style={{ color, fontSize, textAlign, width }} {...props}>
       {children}
     </span>
   );
