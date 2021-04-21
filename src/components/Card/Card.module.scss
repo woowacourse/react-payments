@@ -1,0 +1,75 @@
+.card {
+  max-width: 212px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 17px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  transition: transform 0.5s, box-shadow 0.5s;
+
+  &:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  &__name {
+    color: #383838;
+    font-size: 11.5px;
+    line-height: 12px;
+    font-weight: 600;
+    margin-bottom: 23px;
+  }
+
+  &__chip {
+    width: 42px;
+    height: 27px;
+    background-color: #cbba64;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+
+  &__number {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 8px;
+    margin-bottom: 12px;
+  }
+
+  &__number-input {
+    width: 33px;
+    height: 10px;
+    border: none;
+    background: none;
+    color: #525252;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+
+    &:focus {
+      outline: none;
+    }
+
+    &--visible {
+    }
+
+    &--invisible {
+      text-align: center;
+      letter-spacing: 3px;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4px;
+    color: #525252;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  &__owner {
+  }
+
+  &__expiration {
+  }
+}
