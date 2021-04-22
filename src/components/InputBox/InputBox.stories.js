@@ -10,6 +10,9 @@ export default {
     placeholder: {
       control: 'text',
     },
+    errorMessage: {
+      control: 'text',
+    },
     maxLength: {
       control: 'number',
     },

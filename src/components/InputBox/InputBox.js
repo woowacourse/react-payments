@@ -13,11 +13,12 @@ const InputBox = ({
   type,
   onChange,
   value,
+  errorMessage,
 }) => {
   const uniqueId = nanoid(10);
 
   return (
-    <Styled.Container width={width}>
+    <Styled.Container width={width} errorMessage={errorMessage}>
       <Styled.Header>
         <label htmlFor={uniqueId}>{labelText}</label>
         {hasLengthCounter && (
@@ -30,7 +31,7 @@ const InputBox = ({
         id={uniqueId}
         type={type}
         placeholder={placeholder}
-        maxlength={maxLength}
+        maxLength={maxLength}
         textAlign={textAlign}
         onChange={onChange}
         value={value}
@@ -49,6 +50,7 @@ InputBox.propTypes = {
   type: PropTypes.string,
   onChange: PropTypes.func,
   value: PropTypes.string,
+  errorMessage: PropTypes.string,
 };
 
 InputBox.defaultProps = {
@@ -60,6 +62,7 @@ InputBox.defaultProps = {
   type: 'text',
   onChange: null,
   value: '',
+  errorMessage: '',
 };
 
 export default InputBox;
