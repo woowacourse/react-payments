@@ -1,7 +1,5 @@
 import { Dot, LeftArrow, QuestionMark } from './assets';
 
-export default {
-  Dot,
-  LeftArrow,
-  QuestionMark,
-};
+const Icon = { Dot, LeftArrow, QuestionMark };
+
+export default Icon;
