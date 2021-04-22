@@ -1,4 +1,4 @@
-import CardListPage from './CardListPage';
+import CardListPage from '.';
 
 export default {
   component: CardListPage,

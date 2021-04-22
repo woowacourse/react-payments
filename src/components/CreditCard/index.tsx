@@ -1,17 +1,12 @@
 import { FC } from 'react';
 import { formatNumber2Digits } from '../../utils/format';
+import { CardButton } from '../AddCardButton/styles';
 import Container from '../common/Container';
 import { CreditCardContainer } from './styles';
+import { Card } from '../../types';
 
-interface Props {
-  card: Card;
-}
-
-const CreditCard: FC<Props> = ({ card }) => {
-  const { cardName, cardColor, ownerName, cardNumber, expirationDate } = card;
+const CreditCard: FC<Omit<Card, 'id' | 'cvc'>> = ({ cardName, cardColor, ownerName, cardNumber, expirationDate }) => {
   const { first, second, third, fourth } = cardNumber;
-  const expirationYear = expirationDate.getFullYear() % 100;
-  const expirationMonth = expirationDate.getMonth();
 
   return (
     <CreditCardContainer cardColor={cardColor}>
@@ -26,7 +21,7 @@ const CreditCard: FC<Props> = ({ card }) => {
       <Container flex spaceBetween className="info-wrapper">
         <p>{ownerName}</p>
         <p>
-          {formatNumber2Digits(expirationYear)} / {formatNumber2Digits(expirationMonth)}
+          {formatNumber2Digits(expirationDate.month)} / {formatNumber2Digits(expirationDate.year)}
         </p>
       </Container>
     </CreditCardContainer>

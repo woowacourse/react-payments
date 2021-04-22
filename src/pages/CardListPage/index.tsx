@@ -1,6 +1,7 @@
-import Template from '../components/common/Template';
-import CreditCard from '../components/CreditCard';
-import CardList from '../components/CardList';
+import Template from '../../components/common/Template';
+import CreditCard from '../../components/CreditCard';
+import CardList from '../../components/CardList';
+import { Card } from '../../types';
 
 const dummies: Card[] = [
   {
@@ -14,7 +15,10 @@ const dummies: Card[] = [
       third: 1234,
       fourth: 1234,
     },
-    expirationDate: new Date(),
+    expirationDate: {
+      month: 3,
+      year: 3,
+    },
     cvc: 123,
     nickname: '엄카',
   },
@@ -29,7 +33,10 @@ const dummies: Card[] = [
       third: 1234,
       fourth: 1234,
     },
-    expirationDate: new Date(),
+    expirationDate: {
+      month: 3,
+      year: 3,
+    },
     cvc: 123,
   },
   {
@@ -43,7 +50,10 @@ const dummies: Card[] = [
       third: 1234,
       fourth: 1234,
     },
-    expirationDate: new Date(),
+    expirationDate: {
+      month: 3,
+      year: 3,
+    },
     cvc: 123,
   },
 ];
@@ -56,7 +66,14 @@ const CardListPage = () => {
       <CardList>
         {[...dummies, ...dummies, ...dummies].map(card => (
           <li key={card.id}>
-            <CreditCard card={card} />
+            <CreditCard
+              cardName={card.cardName}
+              cardColor={card.cardColor}
+              ownerName={card.ownerName}
+              cardNumber={card.cardNumber}
+              expirationDate={card.expirationDate}
+              nickname={card.nickname}
+            />
             <span className="nickname">{card?.nickname}</span>
           </li>
         ))}
