@@ -1,10 +1,14 @@
 import { Circle, CIRCLE_SIZE } from '../components/commons/circle/Circle';
+import { COLOR } from '../constants/color';
 
 export default {
   title: 'Circle',
   component: Circle,
   argTypes: {
-    backgroundColor: { control: 'color' },
+    backgroundColor: {
+      options: COLOR,
+      control: { type: 'select' },
+    },
     width: {
       control: { type: 'range', min: 0, max: 1000, step: 50 },
     },
@@ -14,7 +18,7 @@ export default {
   },
 };
 
-const Template = (args) => <Circle {...args}></Circle>;
+const Template = args => <Circle {...args}></Circle>;
 
 export const Default = Template.bind({});
 Default.args = {};

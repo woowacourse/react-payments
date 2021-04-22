@@ -1,0 +1,12 @@
+export const COLOR = {
+  LIGHT_GRAY: '#D2D2D2',
+  RED: '#E24141',
+  BLUE: '#547CE4',
+  GREEN: '#73BC6D',
+  HOT_PINK: '#DE59B9',
+  CYAN: '#94DACD',
+  PINK: '#E76E9A',
+  ORANGE: '#F37D3B',
+  YELLOW: '#FBCD58',
+  MINT: '#04C09E',
+};
