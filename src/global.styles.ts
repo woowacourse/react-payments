@@ -8,9 +8,7 @@ const GlobalStyle = createGlobalStyle`
     user-select: none;
     font-family: 'Noto Sans KR', sans-serif;
     color: #333333;
-  }
-
-  p {
+    padding: 0;
     margin: 0;
   }
 `;

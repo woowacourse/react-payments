@@ -4,15 +4,11 @@ import Container from '../common/Container';
 import { CreditCardContainer } from './styles';
 
 interface Props {
-  cardName: string;
-  cardColor: string;
-  ownerName: string;
-  cardNumber: CardNumber;
-  expirationDate: Date;
-  cvc: number;
+  card: Card;
 }
 
-const CreditCard: FC<Props> = ({ cardName, cardColor, ownerName, cardNumber, expirationDate, cvc }) => {
+const CreditCard: FC<Props> = ({ card }) => {
+  const { cardName, cardColor, ownerName, cardNumber, expirationDate } = card;
   const { first, second, third, fourth } = cardNumber;
   const expirationYear = expirationDate.getFullYear() % 100;
   const expirationMonth = expirationDate.getMonth();
