@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 const Styled = {
-  Button: styled.button((props) => ({
+  Button: styled.button(({ styles }) => ({
     color: '#000',
     fontWeight: '700',
     fontSize: '14px',
-    ...props,
+    ...styles,
   })),
 };
 

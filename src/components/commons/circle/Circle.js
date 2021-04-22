@@ -7,6 +7,10 @@ export const CIRCLE_SIZE = {
   XXS: 'XXS',
 };
 
-export const Circle = ({ children, ...props }) => {
-  return <Styled.Circle {...props}>{children}</Styled.Circle>;
+export const Circle = ({ children, size, color, ...props }) => {
+  return (
+    <Styled.Circle size={size} color={color} styles={props}>
+      {children}
+    </Styled.Circle>
+  );
 };

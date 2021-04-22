@@ -12,7 +12,7 @@ const CARD = {
 };
 
 const Styled = {
-  Card: styled.div(({ size, color, ...props }) => ({
+  Card: styled.div(({ size, color, ...styles }) => ({
     position: 'relative',
     borderRadius: '5px',
     backgroundColor: color || '#E5E5E5',
@@ -23,7 +23,7 @@ const Styled = {
     justifyContent: 'center',
     alignItems: 'center',
     ...CARD[size],
-    ...props,
+    ...styles,
   })),
 };
 

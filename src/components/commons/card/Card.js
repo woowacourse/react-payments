@@ -8,7 +8,7 @@ export const CARD_SIZE = {
 
 export const Card = ({ size, color, children, ...props }) => {
   return (
-    <Styled.Card size={size} color={color} {...props}>
+    <Styled.Card size={size} color={color} styles={props}>
       {children}
     </Styled.Card>
   );
