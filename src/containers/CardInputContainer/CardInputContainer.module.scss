@@ -1,0 +1,30 @@
+.card-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+
+  &__number {
+    width: 100%;
+    margin-bottom: 19px;
+  }
+
+  &__expiration {
+    width: 100%;
+    margin-bottom: 19px;
+  }
+
+  &__owner {
+    width: 100%;
+    margin-bottom: 19px;
+  }
+
+  &__cvc {
+    width: 100%;
+    margin-bottom: 19px;
+  }
+
+  &__password {
+    width: 100%;
+    margin-bottom: 19px;
+  }
+}

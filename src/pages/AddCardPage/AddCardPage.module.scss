@@ -1,0 +1,16 @@
+.add-card-page {
+  &__header {
+    padding: 12px 36px;
+    margin-bottom: 25px;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__card {
+    margin-bottom: 27px;
+  }
+}
