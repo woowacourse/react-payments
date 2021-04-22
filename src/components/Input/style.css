@@ -1,0 +1,33 @@
+.Input {
+  margin: 0.21875rem;
+  border: none;
+  font-size: 1.0125rem;
+  outline-color: #383838;
+  background-color: transparent;
+}
+
+.Input[type='password'] {
+  font-size: 3.3125rem;
+  letter-spacing: -1%;
+}
+
+.Input .Input--start {
+  text-align: start;
+}
+
+.Input--center {
+  text-align: center;
+}
+
+.Input--end {
+  text-align: end;
+}
+
+.Input[type='number']::-webkit-outer-spin-button,
+.Input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.Input[type='number'][type='number'] {
+  -moz-appearance: textfield;
+}
