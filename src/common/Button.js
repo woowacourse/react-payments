@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import { color, fontWeight, fontSize } from '../global.styles';
+import { COLOR, FONT_WEIGHT, FONT_SIZE } from '../global.styles';
 
 const Button = styled.button`
-  color: ${color.mint};
-  background-color: white;
-  font-weight: ${fontWeight.bold};
-  font-size: ${fontSize.small};
+  color: ${COLOR.MAIN.MINT};
+  background-color: ${COLOR.MAIN.WHITE};
+  font-weight: ${FONT_WEIGHT.BOLD};
+  font-size: ${FONT_SIZE.SMALL};
   border: 0;
+  widht: 100%;
 `;
 
 export default Button;
