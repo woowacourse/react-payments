@@ -1,5 +1,9 @@
+.card-wrapper {
+  display: inline-block;
+}
+
 .card {
-  max-width: 212px;
+  width: 212px;
   display: flex;
   flex-direction: column;
   padding: 15px 17px;
@@ -36,12 +40,12 @@
   }
 
   &__number-input {
-    width: 33px;
+    width: 36px;
     height: 10px;
     border: none;
     background: none;
     color: #525252;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     text-align: center;
 
@@ -53,8 +57,8 @@
     }
 
     &--invisible {
+      width: 47px;
       text-align: center;
-      letter-spacing: 3px;
     }
   }
 
@@ -72,4 +76,14 @@
 
   &__expiration {
   }
+}
+
+.card-nickname {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  margin-top: 10px;
+  color: #575757;
 }

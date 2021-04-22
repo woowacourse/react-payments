@@ -20,4 +20,5 @@ Primary.args = {
   ],
   cardOwner: "SUN",
   cardExpiration: "04/21",
+  cardNickName: "카드 별칭",
 };
