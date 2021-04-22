@@ -1,9 +1,9 @@
 import React from 'react';
-import AddCardButton from '../src/components/AddCardButton';
+import AddCardButton from '.';
 
 export default {
   component: AddCardButton,
-  title: 'AddCardButton',
+  title: 'CardList/AddCardButton',
 };
 
 const Template = () => <AddCardButton />;

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { formatNumber2Digits } from '../../utils/format';
-import Container from '../common/container';
+import Container from '../common/Container';
 import { CreditCardContainer } from './styles';
 
 interface Props {

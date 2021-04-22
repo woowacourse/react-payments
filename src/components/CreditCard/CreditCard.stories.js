@@ -1,5 +1,5 @@
 import React from 'react';
-import CreditCard from '../src/components/CreditCard';
+import CreditCard from '.';
 
 export default {
   component: CreditCard,
