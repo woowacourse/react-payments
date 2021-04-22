@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
 const Styled = {
-  TransparentInput: styled.input(({ ...props }) => ({
+  TransparentInput: styled.input(({ styles }) => ({
     backgroundColor: 'transparent',
     border: 'none',
     outline: 'none',
-    ...props,
+    fontSize: '18px',
+    fontWeight: '500',
+    lineHeight: '45px',
+    ...styles,
   })),
 };
 
