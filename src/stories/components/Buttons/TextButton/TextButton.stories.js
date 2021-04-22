@@ -1,5 +1,5 @@
 import React from 'react';
-import TextButton from './TextButton';
+import TextButton from '.';
 
 export default {
   title: 'Buttons/TextButton',

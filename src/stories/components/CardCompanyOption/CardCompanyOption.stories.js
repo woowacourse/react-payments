@@ -1,5 +1,5 @@
 import React from 'react';
-import CardCompanyOption from './CardCompanyOption';
+import CardCompanyOption from '.';
 
 export default {
   title: 'CardCompanyOption',
