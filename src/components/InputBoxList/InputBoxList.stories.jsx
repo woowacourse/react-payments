@@ -1,13 +1,13 @@
 import React from "react";
 
-import BoxInputList from "./BoxInputList";
+import InputBoxList from "./InputBoxList";
 
 export default {
-  title: "Payments/BoxInputList",
-  component: BoxInputList,
+  title: "Payments/InputBoxList",
+  component: InputBoxList,
 };
 
-const Template = (args) => <BoxInputList {...args}></BoxInputList>;
+const Template = (args) => <InputBoxList {...args}></InputBoxList>;
 
 export const Primary = Template.bind({});
 Primary.args = {
