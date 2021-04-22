@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import Styled from './Input.styles';
 
-const Input = ({ id, placeholder, maxLength, width, textAlign, type, onChange, value }) => (
+const Input = ({ inputRef, placeholder, maxLength, width, textAlign, type, onChange, value }) => (
   <Styled.Input
-    id={id}
+    ref={inputRef}
     type={type}
     placeholder={placeholder}
-    maxlength={maxLength}
+    maxLength={maxLength}
     width={width}
     textAlign={textAlign}
     onChange={onChange}
@@ -15,7 +15,10 @@ const Input = ({ id, placeholder, maxLength, width, textAlign, type, onChange, v
 );
 
 Input.propTypes = {
-  id: PropTypes.string.isRequired,
+  inputRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]),
   placeholder: PropTypes.string,
   maxLength: PropTypes.number.isRequired,
   width: PropTypes.string,
@@ -26,6 +29,7 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
+  inputRef: null,
   placeholder: '',
   width: '100%',
   textAlign: 'left',
