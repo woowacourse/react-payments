@@ -1,7 +1,8 @@
+import { FC } from 'react';
 import AddCardButton from '../AddCardButton';
 import { CardListContainer } from './styles';
 
-const CardList = ({ children }) => {
+const CardList: FC = ({ children }) => {
   return (
     <CardListContainer>
       {children}

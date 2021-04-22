@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { formatNumber2Digits } from '../../utils/format';
-import { CardButton } from '../AddCardButton/styles';
 import Container from '../common/Container';
 import { CreditCardContainer } from './styles';
 import { Card } from '../../types';
@@ -18,7 +17,7 @@ const CreditCard: FC<Omit<Card, 'id' | 'cvc'>> = ({ cardName, cardColor, ownerNa
         <span>{'·'.repeat(third.toString().length)}</span>
         <span>{'·'.repeat(fourth.toString().length)}</span>
       </p>
-      <Container flex spaceBetween className="info-wrapper">
+      <Container flex justifyContent="space-between" className="info-wrapper">
         <p>{ownerName}</p>
         <p>
           {formatNumber2Digits(expirationDate.month)} / {formatNumber2Digits(expirationDate.year)}
