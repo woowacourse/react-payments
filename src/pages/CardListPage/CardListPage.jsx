@@ -1,10 +1,12 @@
+import { useState, useLayoutEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./CardListPage.module.scss";
+import { Link } from "react-router-dom";
 
 import Label from "../../components/Label/Label";
 import CardListContainer from "../../containers/CardListContainer/CardListContainer";
 import AddBoxButton from "../../components/AddBoxButton/AddBoxButton";
-import { LABEL_TEXT } from "../../constants";
+import { ANIMATION, LABEL_TEXT, PAGE_PATH } from "../../constants";
 
 const cx = classNames.bind(styles);
 
@@ -39,14 +41,22 @@ const cardMockUps = [
 ];
 
 const CardListPage = ({}) => {
+  const [pageAnimation, setPageAnimation] = useState(ANIMATION.RIGHT_IN);
+
+  useLayoutEffect(() => {
+    setPageAnimation(ANIMATION.RIGHT_IN);
+  }, []);
+
   return (
-    <div className={cx("card-list-page")}>
+    <div className={`${cx("card-list-page")} ${pageAnimation}`}>
       <header className={cx("card-list-page__header")}>
         <Label labelText={LABEL_TEXT.OWNED_CARD} />
       </header>
       <main className={cx("card-list-page__main")}>
         <CardListContainer cards={cardMockUps} />
-        <AddBoxButton />
+        <Link to={PAGE_PATH.ADD}>
+          <AddBoxButton />
+        </Link>
       </main>
     </div>
   );
