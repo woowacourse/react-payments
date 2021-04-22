@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./style.css";
 
 const Input = ({ type, placeHolder, isCenter = false, option = {} }) => {
+  console.log(isCenter);
   return (
     <input
       className={`input ${isCenter ? "text-center" : ""}`}

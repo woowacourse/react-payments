@@ -1,3 +1,5 @@
+import React from "react";
+import "./globalStyle.css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -7,4 +9,4 @@ export const parameters = {
       date: /Date$/,
     },
   },
-}
+};

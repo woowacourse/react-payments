@@ -21,8 +21,8 @@
   left: 35%;
   content: "";
   display: inline-block;
-  height: 0.8rem;
-  width: 0.8rem;
+  height: 0.6rem;
+  width: 0.6rem;
   border-left: 2px solid #525252;
   border-bottom: 2px solid #525252;
   transform: rotate(45deg);
@@ -33,6 +33,7 @@
 }
 
 .header > h2 {
-  line-height: 3;
+  font-size: 1.1rem;
+  line-height: 2.5;
   margin-left: 0.5rem;
 }

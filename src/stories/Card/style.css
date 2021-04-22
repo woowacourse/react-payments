@@ -94,15 +94,15 @@
 
 /* font size for parent */
 .font-small {
-  font-size: 2.6vw;
+  font-size: min(2.6vw, 0.9rem);
 }
 
 .font-medium {
-  font-size: 2.8vw;
+  font-size: min(2.8vw, 1rem);
 }
 
 .font-large {
-  font-size: 3.6vw;
+  font-size: min(3.6vw, 1.3rem);
 }
 
 /* child size */

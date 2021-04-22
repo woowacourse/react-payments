@@ -10,6 +10,7 @@ input::-webkit-inner-spin-button {
   border-radius: 8px;
   background-color: #ecebf1;
   height: 48px;
+  width: 100%;
   padding: 11px 10px;
   font-size: 1.2rem;
   color: #04c09e;

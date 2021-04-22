@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -16,4 +20,10 @@ ul {
   list-style: none;
 }
 
+#root {
+  background-color: #efefef;
+  height: 100%;
+}
+
 @import "./App.css";
+@import "./CardAddition.css";

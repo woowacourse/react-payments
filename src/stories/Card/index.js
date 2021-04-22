@@ -7,7 +7,7 @@ import "../style/background.css";
 
 const Card = ({
   cardType,
-  numbers,
+  numbers = [],
   userName = "",
   expirationDate = "",
   size,
@@ -20,7 +20,7 @@ const Card = ({
       <div className={`card__inner bg-${color}`}>
         <div className="card__inner-card-name font-s">{cardName}</div>
         <div className="card__inner-chip"></div>
-        {cardName !== "" && (
+        {numbers.length !== 0 && (
           <ul className="font-l">
             <li>{firstNumber}</li>
             <li>{secondNumber}</li>
@@ -54,8 +54,8 @@ Card.propTypes = {
     name: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
   }),
-  numbers: PropTypes.arrayOf(PropTypes.string).isRequired,
-  userName: PropTypes.string.isRequired,
-  expirationDate: PropTypes.string.isRequired,
-  size: PropTypes.oneOf(Object.values(CARD_SIZE)),
+  numbers: PropTypes.arrayOf(PropTypes.string),
+  userName: PropTypes.string,
+  expirationDate: PropTypes.string,
+  size: PropTypes.oneOf(Object.values(CARD_SIZE)).isRequired,
 };

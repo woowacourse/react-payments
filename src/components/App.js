@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "../stories/Header";
-import "../style/index.css";
+import CardAddition from "./CardAddition";
 
 const PAGE = {
   HOME: {
@@ -33,7 +33,7 @@ function App() {
         </button>
       </div>
     ),
-    [PAGE.CARD_ADDITION.ID]: <div>card</div>,
+    [PAGE.CARD_ADDITION.ID]: <CardAddition />,
     [PAGE.SUCCESS_CARD_ADDITION.ID]: "",
   };
 
