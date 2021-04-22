@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Label from "../../components/Label/Label";
 import CardListContainer from "../../containers/CardListContainer/CardListContainer";
 import AddBoxButton from "../../components/AddBoxButton/AddBoxButton";
-import { ANIMATION, LABEL_TEXT, PAGE_PATH } from "../../constants";
+import { ANIMATION, HEADER_TEXT, PAGE_PATH } from "../../constants";
 
 const cx = classNames.bind(styles);
 
@@ -50,7 +50,7 @@ const CardListPage = ({}) => {
   return (
     <div className={`${cx("card-list-page")} ${pageAnimation}`}>
       <header className={cx("card-list-page__header")}>
-        <Label labelText={LABEL_TEXT.OWNED_CARD} />
+        <Label labelText={HEADER_TEXT.OWNED_CARD} />
       </header>
       <main className={cx("card-list-page__main")}>
         <CardListContainer cards={cardMockUps} />

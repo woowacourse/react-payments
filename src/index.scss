@@ -15,6 +15,14 @@ html {
 
 a {
   text-decoration: none;
+
+  &:visited {
+    color: #383838;
+  }
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /* Sections

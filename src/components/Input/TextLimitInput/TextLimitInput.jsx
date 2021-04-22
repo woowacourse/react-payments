@@ -6,9 +6,9 @@ import Input from "../Input";
 
 const cx = classNames.bind(styles);
 
-const TextLimitInput = ({ placeholder, labelText, lengthLimit }) => {
+const TextLimitInput = ({ placeholder, labelText, lengthLimit, className = '', inputWidth }) => {
   return (
-    <div className={cx("text-limit-input")}>
+    <div className={`${cx("text-limit-input")} ${className}`}>
       <div className={cx("text-limit-input__top")}>
         <label className={cx("text-limit-input__label")} name={labelText}>
           {labelText}
@@ -16,7 +16,7 @@ const TextLimitInput = ({ placeholder, labelText, lengthLimit }) => {
         {/* TODO : input value 의 length 동적으로 처리하기 */}
         <span className={cx("text-limit-input__length-limit")}>1 / {lengthLimit}</span>
       </div>
-      <Input placeholder={placeholder} textAlign="left" />
+      <Input placeholder={placeholder} textAlign="left" inputWidth={inputWidth} />
     </div>
   );
 };

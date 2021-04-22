@@ -10,14 +10,14 @@ const cx = classNames.bind(styles);
 
 // TODO : 숫자 입력을 받되, 한글자마다 Dot 이 되도록 처리
 
-const GuideInput = ({ labelText, width, guideIcon = questionMark, guideImage = cardCVC }) => {
+const GuideInput = ({ labelText, guideIcon = questionMark, guideImage = cardCVC, className = '', inputWidth }) => {
   return (
-    <div className={cx("guide-input")}>
+    <div className={`${cx("guide-input")} ${className}`}>
       <label className={cx("guide-input__label")} name={labelText}>
         {labelText}
       </label>
       <div className={cx("guide-input__bottom")}>
-        <Input width={width} />
+        <Input inputWidth={inputWidth} />
         <div className={cx("guide-input__guide-icon")}>
           <img src={guideIcon} alt="안내 아이콘" />
         </div>
