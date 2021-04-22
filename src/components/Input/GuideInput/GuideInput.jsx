@@ -8,6 +8,8 @@ import questionMark from "../../../assets/svgs/question-mark.svg";
 
 const cx = classNames.bind(styles);
 
+// TODO : 숫자 입력을 받되, 한글자마다 Dot 이 되도록 처리
+
 const GuideInput = ({ labelText, width, guideIcon = questionMark, guideImage = cardCVC }) => {
   return (
     <div className={cx("guide-input")}>

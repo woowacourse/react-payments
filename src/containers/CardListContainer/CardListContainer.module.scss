@@ -1,0 +1,8 @@
+.card-list-container {
+  display: flex;
+  flex-direction: column;
+
+  &__card {
+    margin-bottom: 26px;
+  }
+}
