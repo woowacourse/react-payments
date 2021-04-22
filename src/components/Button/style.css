@@ -1,0 +1,27 @@
+.Button {
+  border: none;
+}
+
+.Button--submit {
+  color: #04c09e;
+  font-size: 0.875rem;
+}
+
+.Button--question-mark {
+  font-size: 1.25rem;
+  width: 1.6875rem;
+  height: 1.6875rem;
+  border: 1px solid #bababa;
+  border-radius: 50%;
+}
+
+.Button--card-company {
+  width: 2.3125rem;
+  height: 2.3125rem;
+  border-radius: 50%;
+}
+
+.Button--backward {
+  width: 16px;
+  height: 16px;
+}
