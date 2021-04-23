@@ -15,7 +15,7 @@ module.exports = {
         ...defaultColors,
         custom: {
           "gray-100": "#ECEBF1",
-          "gray-200": "#d2d2d2",
+          "gray-200": "#D2D2D2",
           "gray-300": "#525252",
           darkgray: "#383838",
           red: "#E24141",
@@ -27,6 +27,7 @@ module.exports = {
           yellow: "#FBCD58",
           mint: "#04C09E",
           gold: "#CBBA64",
+          white: "#FDFDFD",
         },
       },
     },
