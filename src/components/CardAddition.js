@@ -49,19 +49,20 @@ const unformatExpirationDate = (formattedValue) => {
 
 const CardAddition = (props) => {
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
-  const [cardNumbers, setCardNumbers] = useState([]);
   const [selectionStart, setSelectionStart] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [cardNumbers, setCardNumbers] = useState([]);
+  const [expirationDate, setExpirationDate] = useState({
+    month: "",
+    year: "",
+  });
+  const [username, setUsername] = useState("");
   const [isInputFulfilled, setIsInputFulfilled] = useState({
     cardNumbers: false,
     expirationDate: false,
     username: false,
     cvc: false,
     password: false,
-  });
-  const [expirationDate, setExpirationDate] = useState({
-    month: "",
-    year: "",
   });
 
   const cardNumbersInputRef = useRef();
@@ -169,10 +170,27 @@ const CardAddition = (props) => {
     });
   };
 
+  const onUsernameChange = (event) => {
+    const { value } = event.target;
+
+    if (value.length >= 2) {
+      setIsInputFulfilled((prev) => ({ ...prev, username: true }));
+    } else {
+      setIsInputFulfilled((prev) => ({ ...prev, username: false }));
+    }
+
+    setUsername(value);
+  };
+
   return (
     <>
       <div className="card-addition">
-        <Card cardType={cardType} size={CARD_SIZE.MEDIUM} />
+        <Card
+          cardType={cardType}
+          size={CARD_SIZE.MEDIUM}
+          expirationDate={formatExpirationDate(expirationDate)}
+          userName={username}
+        />
         <form className="card-addition__form">
           <div className="card-addition__number-input mt-standard">
             <label htmlFor="card-number">카드 번호</label>
@@ -203,19 +221,25 @@ const CardAddition = (props) => {
 
           <div className="card-addition__username-input mt-standard">
             <label htmlFor="username">카드 소유자 이름(선택)</label>
-            <span className="card-addition__username-indicator">0/30</span>
+            <span className="card-addition__username-indicator">
+              {username.length}/30
+            </span>
             <Input
               id="username"
               type="text"
               isCenter={true}
               placeHolder="카드에 표시된 이름과 동일하게 입력하세요"
+              value={username}
+              onChange={onUsernameChange}
+              maxLength="30"
+              minLength="2"
             />
           </div>
 
           <div className="card-addition__cvc mt-standard">
             <label htmlFor="cvc">보안 코드(CVC/CVV)</label>
             <div className="card-addition__cvc-inner">
-              <Input id="cvc" type="number" isCenter={true} />
+              <Input id="cvc" type="password" isCenter={true} />
               <div className="card-addition__tool-tip-button">
                 <span>?</span>
               </div>
