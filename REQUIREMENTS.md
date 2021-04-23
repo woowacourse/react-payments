@@ -11,7 +11,7 @@
   - [x] Header는 title과 뒤로가기 버튼 핸들러를 props로 받는다.
   - [x] 버튼 핸들러가 없으면 버튼을 감춘다.
 - Modal
-  - [ ] Modal storybook 컴포넌트를 구현한다.
+  - [x] Modal storybook 컴포넌트를 구현한다.
 - CardTypeRadio
   - [x] 카드 타입, name attribute를 props로 받는다.
 
