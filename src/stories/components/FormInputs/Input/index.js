@@ -16,6 +16,7 @@ export default function Input({
   letterCounter,
   inputMode,
   innerRef,
+  ariaLabelledby,
 }) {
   return (
     <label className="basic-input__label">
@@ -39,6 +40,7 @@ export default function Input({
         onKeyDown={onKeyDown}
         inputMode={inputMode}
         ref={innerRef}
+        aria-labelledby={ariaLabelledby}
       />
     </label>
   );
