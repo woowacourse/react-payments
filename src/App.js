@@ -1,11 +1,16 @@
+import GlobalStyles from './global.styles';
 import React from 'react';
 import Input from './common/Input';
+import { AppWrapper } from './App.styles.js';
 
 function App() {
   return (
-    <div className='App'>
-      <Input />
-    </div>
+    <>
+      <GlobalStyles />
+      <AppWrapper>
+        <Input />
+      </AppWrapper>
+    </>
   );
 }
 
