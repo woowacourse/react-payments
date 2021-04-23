@@ -37,7 +37,7 @@
   right: 0;
 }
 
-.card-addition__cvc {
+.card-addition__secure-code {
   width: 35%;
 }
 
@@ -59,7 +59,7 @@
   transform: translateY(-2px);
 }
 
-.card-addition__cvc-inner {
+.card-addition__secure-code-inner {
   display: flex;
   align-items: center;
 }

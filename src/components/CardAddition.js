@@ -57,11 +57,12 @@ const CardAddition = (props) => {
     year: "",
   });
   const [username, setUsername] = useState("");
+  const [secureCode, setSecureCode] = useState("");
   const [isInputFulfilled, setIsInputFulfilled] = useState({
     cardNumbers: false,
     expirationDate: false,
     username: false,
-    cvc: false,
+    secureCode: false,
     password: false,
   });
 
@@ -182,6 +183,22 @@ const CardAddition = (props) => {
     setUsername(value);
   };
 
+  const onSecureCodeChange = (event) => {
+    const { value } = event.target;
+
+    if (isNonNumberValue(value)) {
+      return;
+    }
+
+    if (value.length === 3) {
+      setIsInputFulfilled((prev) => ({ ...prev, secureCode: true }));
+    } else {
+      setIsInputFulfilled((prev) => ({ ...prev, secureCode: false }));
+    }
+
+    setSecureCode(value);
+  };
+
   return (
     <>
       <div className="card-addition">
@@ -236,10 +253,17 @@ const CardAddition = (props) => {
             />
           </div>
 
-          <div className="card-addition__cvc mt-standard">
-            <label htmlFor="cvc">보안 코드(CVC/CVV)</label>
-            <div className="card-addition__cvc-inner">
-              <Input id="cvc" type="password" isCenter={true} />
+          <div className="card-addition__secure-code mt-standard">
+            <label htmlFor="secure-code">보안 코드(CVC/CVV)</label>
+            <div className="card-addition__secure-code-inner">
+              <Input
+                id="secure-code"
+                type="password"
+                isCenter={true}
+                value={secureCode}
+                onChange={onSecureCodeChange}
+                maxLength="3"
+              />
               <div className="card-addition__tool-tip-button">
                 <span>?</span>
               </div>
