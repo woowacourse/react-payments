@@ -11,6 +11,10 @@ export const INPUT_LABEL_TEXT = Object.freeze({
   CARD_PASSWORD: "카드 비밀번호",
 });
 
+export const BUTTON_TEXT = Object.freeze({
+  NEXT: "다음",
+});
+
 export const PAGE_PATH = Object.freeze({
   ROOT: "/",
   ADD: "/add",

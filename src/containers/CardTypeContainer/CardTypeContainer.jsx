@@ -7,7 +7,12 @@ import CircleButton from "../../components/CircleButton/CircleButton";
 
 const cx = classNames.bind(styles);
 
-const CardTypeContainer = ({ cardTypes, onClick, backDropAnimationClass, bottomSliderAnimationClass }) => {
+const CardTypeContainer = ({
+  cardTypes,
+  hideCardTypeContainer,
+  backDropAnimationClass,
+  bottomSliderAnimationClass,
+}) => {
   const cardTypeItems = cardTypes.map((cardType) => (
     <CircleButton
       className={cx("card-type-container__card-type")}
@@ -18,7 +23,7 @@ const CardTypeContainer = ({ cardTypes, onClick, backDropAnimationClass, bottomS
 
   return (
     <div className={cx("card-type-container")}>
-      <BackDrop className={backDropAnimationClass} onClick={onClick} />
+      <BackDrop className={backDropAnimationClass} backDropClick={hideCardTypeContainer} />
       <BottomSlider className={`${cx("card-type-container__bottom-slider")} ${bottomSliderAnimationClass}`}>
         {cardTypeItems}
       </BottomSlider>

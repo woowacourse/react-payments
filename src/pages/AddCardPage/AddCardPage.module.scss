@@ -13,4 +13,10 @@
   &__card {
     margin-bottom: 27px;
   }
+
+  &__bottom {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0px 10px 10px 0px;
+  }
 }

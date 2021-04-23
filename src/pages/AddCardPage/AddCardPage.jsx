@@ -3,13 +3,14 @@ import classNames from "classnames/bind";
 import styles from "./AddCardPage.module.scss";
 import { Link } from "react-router-dom";
 
-import { PAGE_PATH, HEADER_TEXT } from "../../constants";
+import { PAGE_PATH, HEADER_TEXT, BUTTON_TEXT } from "../../constants";
 
 import CardInputContainer from "../../containers/CardInputContainer/CardInputContainer";
 import CardTypeContainer from "../../containers/CardTypeContainer/CardTypeContainer";
 
 import NavigationButton from "../../components/NavigationButton/NavigationButton";
 import Card from "../../components/Card/Card";
+import Button from "../../components/Button/Button";
 
 const cx = classNames.bind(styles);
 
@@ -114,14 +115,16 @@ const AddCardPage = ({}) => {
         <CardInputContainer />
       </main>
       {pageState.isBottomSliderToggled && (
-        // TODO : onClick 말고 다른 이름으로 핸들러 함수 넘겨주기
         <CardTypeContainer
           cardTypes={cardTypeMockUps}
-          onClick={hideCardTypeContainer}
+          hideCardTypeContainer={hideCardTypeContainer}
           backDropAnimationClass={pageState.backDropAnimation}
           bottomSliderAnimationClass={pageState.sliderAnimation}
         />
       )}
+      <div className={cx("add-card-page__bottom")}>
+        <Button>{BUTTON_TEXT.NEXT}</Button>
+      </div>
     </div>
   );
 };
