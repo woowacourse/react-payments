@@ -12,14 +12,3 @@ export const Default = Template.bind({});
 Default.args = {
   title: 'TEST TITLE',
 };
-
-export const DefaultWidth = Template.bind({});
-DefaultWidth.args = {
-  title: 'TEST TITLE',
-};
-
-export const HalfWidth = Template.bind({});
-HalfWidth.args = {
-  title: 'TEST TITLE',
-  width: 'w-1/2',
-};
