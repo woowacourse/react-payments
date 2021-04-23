@@ -2,16 +2,8 @@ import styled from '@emotion/styled';
 
 const Styled = {
   Container: styled.div`
-    &::after {
-      content: '${(props) => props.errorMessage}';
-      color: red;
-      display: block;
-      position: absolute;
-      font-size: 12px;
-    }
-
     input {
-      box-shadow: ${(props) => (props.errorMessage ? '0 0 0 2px #ff0000 inset' : 'none')};
+      box-shadow: ${(props) => (props.isError ? '0 0 0 2px #ff0000 inset' : 'none')};
       box-sizing: border-box;
     }
   `,

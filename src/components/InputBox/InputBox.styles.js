@@ -7,17 +7,10 @@ const Styled = {
     letter-spacing: -0.085em;
     color: ${(props) => props.theme.color.label};
     position: relative;
-
-    &::after {
-      content: '${(props) => props.errorMessage}';
-      color: red;
-      display: block;
-      position: absolute;
-      font-size: 12px;
-    }
+    margin-bottom: 1.5em;
 
     input {
-      box-shadow: ${(props) => (props.errorMessage ? '0 0 0 2px #ff0000 inset' : 'none')};
+      box-shadow: ${(props) => (props.isError ? '0 0 0 2px #ff0000 inset' : 'none')};
       box-sizing: border-box;
     }
   `,

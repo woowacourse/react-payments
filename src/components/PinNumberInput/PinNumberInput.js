@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import Input from '../Input/Input';
 import Styled from './PinNumberInput.styles';
 import { initArray } from '../../utils';
+import ErrorMessageBox from '../ErrorMessageBox/ErrorMessageBox';
 
-const PinNumberInput = ({ values, dotCount, labelText, errorMessage, onChange }) => {
+const PinNumberInput = ({ values, dotCount, labelText, errorMessage, isError, onChange }) => {
   const [inputRef] = useState(initArray(2, useRef()));
 
   const handleChange = (event) => {
@@ -23,7 +24,7 @@ const PinNumberInput = ({ values, dotCount, labelText, errorMessage, onChange })
   };
 
   return (
-    <Styled.Container errorMessage={errorMessage}>
+    <Styled.Container isError={isError}>
       <Styled.Header>
         <span>{labelText}</span>
       </Styled.Header>
@@ -52,6 +53,7 @@ const PinNumberInput = ({ values, dotCount, labelText, errorMessage, onChange })
           <Styled.PasswordDot key={nanoid(10)} />
         ))}
       </Styled.InputContainer>
+      <ErrorMessageBox errorMessage={errorMessage} />
     </Styled.Container>
   );
 };
@@ -62,6 +64,7 @@ PinNumberInput.propTypes = {
   labelText: PropTypes.string,
   errorMessage: PropTypes.string,
   onChange: PropTypes.func,
+  isError: PropTypes.bool,
 };
 
 PinNumberInput.defaultProps = {
@@ -70,6 +73,7 @@ PinNumberInput.defaultProps = {
   labelText: '',
   errorMessage: '',
   onChange: null,
+  isError: false,
 };
 
 export default PinNumberInput;
