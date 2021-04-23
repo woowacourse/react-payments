@@ -14,6 +14,8 @@
   - [x] Modal storybook 컴포넌트를 구현한다.
 - CardTypeRadio
   - [x] 카드 타입, name attribute를 props로 받는다.
+- Button
+  - [x] innerText와 onClick을 props로 받는다.
 
 ## 카드 추가 페이지
 
