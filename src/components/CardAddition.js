@@ -215,6 +215,7 @@ const CardAddition = (props) => {
       const newPassword = [...prev];
 
       newPassword[dataset.passwordIndex] = value;
+
       if (newPassword.every((password) => password !== "")) {
         setIsInputFulfilled((prev) => ({ ...prev, password: true }));
       }
@@ -223,7 +224,6 @@ const CardAddition = (props) => {
     });
   };
 
-  console.log(isInputFulfilled.password);
   return (
     <>
       <div className="card-addition">
@@ -232,6 +232,7 @@ const CardAddition = (props) => {
           size={CARD_SIZE.MEDIUM}
           expirationDate={formatExpirationDate(expirationDate)}
           userName={username}
+          numbers={cardNumbers}
         />
         <form className="card-addition__form">
           <div className="card-addition__number-input mt-standard">
@@ -332,7 +333,6 @@ const CardAddition = (props) => {
               <Button innerText="다음" />
             </div>
           )}
-          
         </form>
       </div>
       {isModalOpen && (

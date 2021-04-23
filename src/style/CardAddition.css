@@ -113,3 +113,30 @@
   column-gap: 10px;
   row-gap: 20px;
 }
+
+.card-addition__tool-tip-button {
+  position: relative;
+}
+
+.card-addition__tool-tip-button > span {
+  user-select: none;
+}
+
+.card-addition__tool-tip-button:hover {
+  color: white;
+  border-color: white;
+  background-color: #969696;
+}
+
+.card-addition__tool-tip-button:hover:after {
+  position: absolute;
+  top: -2.5rem;
+  left: 2.5rem;
+  content: "";
+  display: inline-flex;
+  width: 15rem;
+  height: 10rem;
+  background-image: url("../asset/secure-code.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
