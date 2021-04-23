@@ -10,6 +10,8 @@ const Button = styled.button<Props>`
   background-color: transparent;
   cursor: pointer;
   padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
   color: ${({ color }) => BAEMINT || color};
 `;
 

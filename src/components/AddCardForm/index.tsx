@@ -11,13 +11,13 @@ const AddCardForm = () => {
       <form>
         <AddCardInputContainer label={'카드번호'}>
           <Container flex alignItems="center" justifyContent="center" backgroundColor={GRAY}>
-            <Input type="number" textCenter min="1111" max="9999" width="14%" />
+            <Input type="number" textCenter min="1111" max="9999" width="16%" />
             -
-            <Input type="number" textCenter min="1111" max="9999" width="14%" />
+            <Input type="number" textCenter min="1111" max="9999" width="16%" />
             -
-            <Input type="password" textCenter maxLength={4} width="14%" />
+            <Input type="password" textCenter maxLength={4} width="16%" />
             -
-            <Input type="password" textCenter maxLength={4} width="14%" />
+            <Input type="password" textCenter maxLength={4} width="16%" />
           </Container>
         </AddCardInputContainer>
         <AddCardInputContainer label={'만료일'} width="40%">

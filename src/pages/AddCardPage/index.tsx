@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import Template from '../../components/common/Template';
+import AddCardForm from '../../components/AddCardForm';
+import AddCardTemplate from '../../components/AddCardTemplate';
 import CreditCard from '../../components/CreditCard';
 
 const title = '카드추가';
@@ -18,16 +19,17 @@ const AddCardPage = () => {
   const [cardColor, setCardColor] = useState('#D2D2D2');
 
   return (
-    <Template title={title} hasPreviousPage>
+    <AddCardTemplate title={title} hasPreviousPage>
       <CreditCard
+        className="credit-card"
         cardColor={cardColor}
         expirationDate={expirationDate}
         cardName={cardName}
         ownerName={ownerName}
         cardNumber={cardNumber}
       />
-      {/* <AddCardForm /> */}
-    </Template>
+      <AddCardForm />
+    </AddCardTemplate>
   );
 };
 

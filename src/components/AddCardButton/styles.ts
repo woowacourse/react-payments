@@ -1,10 +1,8 @@
 import styled from 'styled-components';
-import { CARD } from '../../constants/style';
+import { mdSize } from '../CreditCard/styles';
 
 export const CardButton = styled.button`
-  width: ${CARD.WIDTH};
-  height: ${CARD.HEIGHT};
-  border-radius: ${CARD.BORDER_RADIUS};
+  ${mdSize}
   background-color: #e5e5e5;
   font-size: 3rem;
   font-weight: 500;

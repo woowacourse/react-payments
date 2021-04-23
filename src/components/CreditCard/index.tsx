@@ -4,11 +4,16 @@ import Container from '../common/Container';
 import { CreditCardContainer } from './styles';
 import { Card } from '../../types';
 
-const CreditCard: FC<Omit<Card, 'id' | 'cvc'>> = ({ cardName, cardColor, ownerName, cardNumber, expirationDate }) => {
+interface Props extends Omit<Card, 'id' | 'cvc'> {
+  className?: string;
+  size?: 'lg' | 'md';
+}
+
+const CreditCard: FC<Props> = ({ className, size, cardName, cardColor, ownerName, cardNumber, expirationDate }) => {
   const { first, second, third, fourth } = cardNumber;
 
   return (
-    <CreditCardContainer cardColor={cardColor}>
+    <CreditCardContainer className={className} size={size} cardColor={cardColor}>
       <p className="card-name">{cardName}</p>
       <div className="ic-chip" />
       <p className="card-number">

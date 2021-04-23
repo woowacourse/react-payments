@@ -2,10 +2,12 @@ import styled from 'styled-components';
 
 export const AddCardFormContainer = styled.div`
   .question-mark {
+    width: fit-content;
+    height: fit-content;
     position: relative;
     display: flex;
     align-items: center;
-    margin-left: 1rem;
+    margin: auto 0 auto 1rem;
     cursor: pointer;
 
     &:hover::after {
@@ -15,7 +17,7 @@ export const AddCardFormContainer = styled.div`
       width: 10rem;
       height: 10rem;
       left: 2.5rem;
-      top: -1.5rem;
+      top: -2.5rem;
       background: url('/images/example.png') no-repeat;
     }
   }

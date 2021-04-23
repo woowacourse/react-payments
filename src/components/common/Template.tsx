@@ -1,4 +1,3 @@
-import { title } from 'node:process';
 import { FC } from 'react';
 import styled from 'styled-components';
 
@@ -16,11 +15,12 @@ const Header = styled.header`
 interface Props {
   title: string;
   hasPreviousPage?: boolean;
+  className?: string;
 }
 
-const Template: FC<Props> = ({ children, title, hasPreviousPage }) => {
+const Template: FC<Props> = ({ className, children, title, hasPreviousPage }) => {
   return (
-    <div>
+    <div className={className}>
       <Header>
         {hasPreviousPage && (
           <a>
