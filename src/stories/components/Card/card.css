@@ -40,6 +40,7 @@ svg {
 }
 
 .card__card-number {
+  width: 4%;
   color: #525252;
   font-weight: 500;
 }
@@ -48,16 +49,6 @@ svg {
   stroke: #8a7a2b;
   stroke-width: 2%;
   fill: 0;
-}
-
-.card__user-name {
-  color: #525252;
-  font-weight: 500;
-}
-
-.card__expiration-date {
-  color: #525252;
-  font-weight: 500;
 }
 
 .card__card-number-container {
@@ -72,8 +63,8 @@ svg {
   display: inline-block;
 }
 
-.card__card-number:nth-child(4n):not(:last-child) {
-  margin-right: 6%;
+.card__card-number:nth-child(4n + 1):not(:first-child) {
+  margin-left: 6%;
 }
 
 .dot {
@@ -82,4 +73,23 @@ svg {
   height: 4px;
   border-radius: 50%;
   margin-left: 2%;
+}
+
+.card__card-detail-container {
+  display: flex;
+  justify-content: space-between;
+  height: 15%;
+}
+
+.card__user-name {
+  overflow: hidden;
+  color: #525252;
+  font-weight: 500;
+  word-break: break-all;
+  margin-right: 0.75rem;
+}
+
+.card__expiration-date {
+  color: #525252;
+  font-weight: 500;
 }

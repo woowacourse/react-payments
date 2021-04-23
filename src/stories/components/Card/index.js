@@ -6,12 +6,12 @@ export default function Card({
   cardCompanyName,
   cardColor,
   cardNumber,
-  userName = 'NAME',
-  expirationDate = 'MM/YY',
-  size = 'normal',
+  userName,
+  expirationDate,
+  size,
 }) {
   return (
-    <div className={`card-${size}`} style={cardColor && { backgroundColor: cardColor }}>
+    <div className={`card-${size || 'normal'}`} style={cardColor && { backgroundColor: cardColor }}>
       <div className="card__company-name">{cardCompanyName}</div>
       <div className="card__chip">
         <svg viewBox="0 0 60 39">
@@ -22,17 +22,25 @@ export default function Card({
         </svg>
       </div>
       <div className="card__card-number-container">
-        {cardNumber &&
-          Array.from(cardNumber.replaceAll('-', '')).map((char, index) => {
-            if (index < 8) {
-              return <div className="card__card-number">{char}</div>;
-            }
-            return <div className="card__card-number dot"></div>;
-          })}
+        {Array.from({ length: 16 }).map((_, index) => {
+          if (index < 8) {
+            return <div className="card__card-number">{cardNumber.charAt(index)}</div>;
+          }
+
+          return (
+            <div
+              className={[
+                'card__card-number',
+                'dot',
+                cardNumber.charAt(index) ? '' : 'hidden',
+              ].join(' ')}
+            ></div>
+          );
+        })}
       </div>
-      <div className="d-flex justify-space-between">
-        <div className="card__user-name">{userName}</div>
-        <div className="card__expiration-date">{expirationDate}</div>
+      <div className="card__card-detail-container">
+        <div className="card__user-name">{userName || 'NAME'}</div>
+        <div className="card__expiration-date">{expirationDate || 'MM/YY'}</div>
       </div>
     </div>
   );
