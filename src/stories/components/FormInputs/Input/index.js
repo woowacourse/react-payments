@@ -2,7 +2,11 @@ import React from 'react';
 import './input.css';
 
 export default function Input({
+  value,
+  onChange,
+  onKeyDown,
   width,
+  fontColor,
   label,
   type,
   placeholder,
@@ -10,6 +14,8 @@ export default function Input({
   required,
   maxLength,
   letterCounter,
+  inputMode,
+  innerRef,
 }) {
   return (
     <label className="basic-input__label">
@@ -23,11 +29,16 @@ export default function Input({
       )}
       <input
         className={['basic-input__input', `text-${textAlign}`].join(' ')}
+        value={value}
         type={type}
         placeholder={placeholder}
         required={required}
         maxLength={maxLength}
-        style={{ width }}
+        style={{ width, color: fontColor }}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        inputMode={inputMode}
+        ref={innerRef}
       />
     </label>
   );

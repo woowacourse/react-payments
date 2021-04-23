@@ -1,4 +1,6 @@
 .basic-input__label {
+  width: 100%;
+  margin: 0.75rem 0;
   display: inline-block;
   font-size: 12px;
   font-weight: 500;
@@ -24,10 +26,11 @@
 
 .basic-input__input {
   background-color: #ecebf1;
-  font-size: 18px;
+  color: #04c09e;
+  font-size: 0.8rem;
   font-weight: 500;
-  line-height: 22px;
-  padding: 12px;
+  line-height: 1rem;
+  padding: 0.6rem;
   border: 2px solid transparent;
   border-radius: 7px;
   outline: none;
@@ -48,4 +51,10 @@
 
 .basic-input__input.text-left {
   text-align: left;
+}
+
+.basic-input__input::-webkit-outer-spin-button,
+.basic-input__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
