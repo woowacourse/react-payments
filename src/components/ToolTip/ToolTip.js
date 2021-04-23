@@ -3,7 +3,7 @@ import Styled from './ToolTip.styles';
 
 const ToolTip = ({ buttonText, contentText }) => (
   <Styled.Container>
-    <Styled.Button>{buttonText}</Styled.Button>
+    <Styled.Button type="button">{buttonText}</Styled.Button>
     <Styled.Text>{contentText}</Styled.Text>
   </Styled.Container>
 );

@@ -7,7 +7,7 @@ const Styled = {
     background-color: #ecebf1;
     border-radius: 7px;
     border: none;
-    width: ${(props) => props.width};
+    width: 100%;
     box-sizing: border-box;
   `,
 };

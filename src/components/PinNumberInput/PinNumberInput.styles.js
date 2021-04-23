@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 
 const Styled = {
   Container: styled.div`
+    letter-spacing: -0.085em;
+    color: ${(props) => props.theme.color.label};
     input {
       box-shadow: ${(props) => (props.isError ? '0 0 0 2px #ff0000 inset' : 'none')};
       box-sizing: border-box;
@@ -20,6 +22,10 @@ const Styled = {
     & label {
       margin-right: 7px;
     }
+  `,
+
+  Label: styled.label`
+    width: 39px;
   `,
 
   PasswordDot: styled.div`

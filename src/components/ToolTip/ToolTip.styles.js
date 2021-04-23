@@ -3,12 +3,11 @@ import styled from '@emotion/styled';
 const Styled = {
   Container: styled.div`
     position: relative;
-    display: flex;
+    width: 100%;
   `,
 
   Text: styled.div`
     visibility: hidden;
-    flex: 1;
     position: absolute;
     left: 37px;
     top: -3px;

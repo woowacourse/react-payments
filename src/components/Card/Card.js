@@ -2,8 +2,8 @@
 import PropTypes from 'prop-types';
 import Styled from './Card.styles';
 
-const Card = ({ bgColor, companyName, cardNumbers, ownerName, expiryDate }) => (
-  <Styled.Container bgColor={bgColor}>
+const Card = ({ bgColor, companyName, cardNumbers, ownerName, expiryDate, size }) => (
+  <Styled.Container bgColor={bgColor} size={size}>
     <Styled.CompanyName>{companyName}</Styled.CompanyName>
 
     <Styled.Chip />
@@ -27,6 +27,7 @@ Card.propTypes = {
   cardNumbers: PropTypes.string,
   ownerName: PropTypes.string,
   expiryDate: PropTypes.string,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
 };
 
 Card.defaultProps = {
@@ -35,6 +36,7 @@ Card.defaultProps = {
   cardNumbers: '',
   ownerName: 'NAME',
   expiryDate: 'MM / YY',
+  size: 'medium',
 };
 
 export default Card;

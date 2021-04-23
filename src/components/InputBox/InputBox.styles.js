@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 const Styled = {
   Container: styled.div`
-    width: ${(props) => props.width};
+    width: 100%;
     font-size: 16px;
     letter-spacing: -0.085em;
     color: ${(props) => props.theme.color.label};
@@ -20,6 +20,12 @@ const Styled = {
     justify-content: space-between;
     margin-bottom: 7px;
     font-size: 12px;
+    white-space: nowrap;
+  `,
+
+  Row: styled.div`
+    display: flex;
+    align-items: center;
   `,
 };
 

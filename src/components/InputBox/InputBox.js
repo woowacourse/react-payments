@@ -1,11 +1,11 @@
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import Styled from './InputBox.styles';
 import Input from '../Input/Input';
 import ErrorMessageBox from '../ErrorMessageBox/ErrorMessageBox';
 
 const InputBox = ({
-  width,
   labelText,
   placeholder,
   maxLength,
@@ -14,59 +14,42 @@ const InputBox = ({
   type,
   onChange,
   value,
+  pattern,
+  inputmode,
+  required,
   errorMessage,
   isError,
 }) => {
-  const uniqueId = nanoid(10);
+  const [uniqueId] = useState(nanoid(10));
 
   return (
-    <>
-      <Styled.Container width={width} isError={isError}>
-        <Styled.Header>
-          <label htmlFor={uniqueId}>{labelText}</label>
-          {hasLengthCounter && (
-            <span>
-              {value.length} / {maxLength}
-            </span>
-          )}
-        </Styled.Header>
-        <Input
-          id={uniqueId}
-          type={type}
-          placeholder={placeholder}
-          maxLength={maxLength}
-          textAlign={textAlign}
-          onChange={onChange}
-          value={value}
-        />
-        <ErrorMessageBox errorMessage={errorMessage} />
-      </Styled.Container>
-      <Styled.Container width={width} isError={isError}>
-        <Styled.Header>
-          <label htmlFor={uniqueId}>{labelText}</label>
-          {hasLengthCounter && (
-            <span>
-              {value.length} / {maxLength}
-            </span>
-          )}
-        </Styled.Header>
-        <Input
-          id={uniqueId}
-          type={type}
-          placeholder={placeholder}
-          maxLength={maxLength}
-          textAlign={textAlign}
-          onChange={onChange}
-          value={value}
-        />
-        <ErrorMessageBox errorMessage={errorMessage} />
-      </Styled.Container>
-    </>
+    <Styled.Container isError={isError}>
+      <Styled.Header>
+        <label htmlFor={uniqueId}>{labelText}</label>
+        {hasLengthCounter && (
+          <span>
+            {value.length} / {maxLength}
+          </span>
+        )}
+      </Styled.Header>
+      <Input
+        id={uniqueId}
+        type={type}
+        placeholder={placeholder}
+        maxLength={maxLength}
+        textAlign={textAlign}
+        onChange={onChange}
+        value={value}
+        pattern={pattern}
+        inputmode={inputmode}
+        required={required}
+      />
+      <ErrorMessageBox errorMessage={errorMessage} />
+    </Styled.Container>
   );
 };
 
 InputBox.propTypes = {
-  width: PropTypes.string,
   labelText: PropTypes.string,
   placeholder: PropTypes.string,
   maxLength: PropTypes.number.isRequired,
@@ -77,10 +60,12 @@ InputBox.propTypes = {
   value: PropTypes.string,
   errorMessage: PropTypes.string,
   isError: PropTypes.bool,
+  pattern: PropTypes.string,
+  inputmode: PropTypes.string,
+  required: PropTypes.bool,
 };
 
 InputBox.defaultProps = {
-  width: '100%',
   labelText: '',
   placeholder: '',
   hasLengthCounter: false,
@@ -90,6 +75,9 @@ InputBox.defaultProps = {
   value: '',
   errorMessage: '',
   isError: false,
+  pattern: null,
+  inputmode: '',
+  required: false,
 };
 
 export default InputBox;

@@ -8,10 +8,16 @@ const GlobalStyle = () => (
       body {
         margin: 0;
         padding: 0;
+        overflow: hidden;
+        height: 100vh;
       }
 
       #root {
         font-family: 'Noto Sans KR', sans-serif;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     `}
   />

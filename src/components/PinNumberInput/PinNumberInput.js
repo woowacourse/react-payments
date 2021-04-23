@@ -20,7 +20,7 @@ const PinNumberInput = ({ values, dotCount, labelText, errorMessage, isError, on
     inputRef[Number(index)].value = event.target.value;
     inputRef[Number(index) + 1]?.focus();
 
-    onChange(event);
+    if (onChange) onChange(event);
   };
 
   return (
@@ -33,11 +33,10 @@ const PinNumberInput = ({ values, dotCount, labelText, errorMessage, isError, on
           const key = `pin-${index}`;
 
           return (
-            <label htmlFor={key} key={key}>
+            <Styled.Label htmlFor={key} key={key}>
               <Input
                 id={key}
                 name={key}
-                width="39px"
                 type="password"
                 maxLength={1}
                 textAlign="center"
@@ -45,8 +44,9 @@ const PinNumberInput = ({ values, dotCount, labelText, errorMessage, isError, on
                 inputRef={(el) => (inputRef[index] = el)}
                 onChange={handleChange}
                 value={value}
+                required
               />
-            </label>
+            </Styled.Label>
           );
         })}
         {Array.from({ length: dotCount }).map(() => (
@@ -72,7 +72,7 @@ PinNumberInput.defaultProps = {
   dotCount: 2,
   labelText: '',
   errorMessage: '',
-  onChange: null,
+  onChange: () => {},
   isError: false,
 };
 

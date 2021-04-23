@@ -4,6 +4,16 @@ import { getGrayScale } from '../../utils';
 const Styled = {
   Container: styled.div`
     padding: 19px;
+
+    transform: ${({ size }) => {
+      const info = {
+        small: 'scale(0.63);',
+        medium: 'scale(0.8);',
+      };
+
+      return `${info[size] || 'scale(1.0)'};`;
+    }};
+
     width: 293.08px;
     height: 183px;
     border: none;
@@ -12,6 +22,8 @@ const Styled = {
     background: ${(props) => props.bgColor};
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     position: relative;
+
+    margin: 0 auto;
   `,
 
   Chip: styled.div`
