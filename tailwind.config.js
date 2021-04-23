@@ -27,6 +27,7 @@ module.exports = {
         font: {
           darkgray: "#383838",
           gray: "#525252",
+          mint: "#04C09E",
         },
         "chip-gold": "#CBBA64", //TODO: 이름 바꿔주기
         input: {
