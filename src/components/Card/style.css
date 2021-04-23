@@ -4,6 +4,12 @@
   border-radius: 5px;
 }
 
+.Card--chip {
+  width: 40px;
+  height: 26px;
+  border-radius: 4px;
+}
+
 .Card--small {
   width: 208px;
   height: 123px;

@@ -31,3 +31,9 @@ LoydCard.args = {
   backgroundColor: '#94DACD',
   boxShadow: true,
 };
+
+export const CreditCardChip = Template.bind({});
+CreditCardChip.args = {
+  size: 'chip',
+  backgroundColor: '#cbba64',
+};
