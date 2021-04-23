@@ -22,6 +22,9 @@ module.exports = {
         183: '183px',
         227: '227px',
       },
+      minHeight: {
+        '1/20': '5%',
+      },
       colors: {
         gray: {
           150: '#e5e5e5',
