@@ -28,7 +28,10 @@ module.exports = {
           darkgray: "#383838",
           gray: "#525252",
         },
-        "chip-gold": "#CBBA64",
+        "chip-gold": "#CBBA64", //TODO: 이름 바꿔주기
+        input: {
+          gray: "#ECEBF1",
+        },
       },
     },
   },

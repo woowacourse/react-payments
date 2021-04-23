@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+  .placeholder-center::-webkit-input-placeholder {
+    text-align: center;
+  }
+
+  .placeholder-center:-moz-placeholder {
+    text-align: center;
+  }
+
+  .placeholder-center::-moz-placeholder {
+    text-align: center;
+  }
+
+  .placeholder-center:-ms-input-placeholder {
+    text-align: center;
+  }
+}
