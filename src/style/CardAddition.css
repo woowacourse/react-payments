@@ -101,6 +101,12 @@
   border-radius: 50%;
 }
 
+.card-addition__form-submit {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 80px;
+}
+
 .card-type-radio-box {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

@@ -4,6 +4,7 @@ import { CARD, CARD_SIZE } from "../stories/constants/card";
 import Input from "../stories/Input";
 import Modal from "../stories/Modal";
 import CardTypeRadio from "../stories/CardTypeRadio";
+import Button from "../stories/Button";
 
 const splitCardNumbers = (value) => {
   const splitNumbers = [];
@@ -59,6 +60,8 @@ const CardAddition = (props) => {
   const [username, setUsername] = useState("");
   const [secureCode, setSecureCode] = useState("");
   const [password, setPassword] = useState(["", ""]);
+  // TODO: is- 네이밍은 bool값에 어울림
+  // cardType fulfilled 검사?
   const [isInputFulfilled, setIsInputFulfilled] = useState({
     cardNumbers: false,
     expirationDate: false,
@@ -243,7 +246,6 @@ const CardAddition = (props) => {
               maxLength="25"
             />
           </div>
-
           <div className="card-addition__expiration-input mt-standard">
             <label htmlFor="expiration-date">만료일</label>
             <Input
@@ -257,7 +259,6 @@ const CardAddition = (props) => {
               maxLength="5"
             />
           </div>
-
           <div className="card-addition__username-input mt-standard">
             <label htmlFor="username">카드 소유자 이름(선택)</label>
             <span className="card-addition__username-indicator">
@@ -266,7 +267,6 @@ const CardAddition = (props) => {
             <Input
               id="username"
               type="text"
-              isCenter={true}
               placeHolder="카드에 표시된 이름과 동일하게 입력하세요"
               value={username}
               onChange={onUsernameChange}
@@ -274,7 +274,6 @@ const CardAddition = (props) => {
               minLength="2"
             />
           </div>
-
           <div className="card-addition__secure-code mt-standard">
             <label htmlFor="secure-code">보안 코드(CVC/CVV)</label>
             <div className="card-addition__secure-code-inner">
@@ -291,7 +290,6 @@ const CardAddition = (props) => {
               </div>
             </div>
           </div>
-
           <div className="card-addition__password mt-standard">
             <label>카드비밀번호</label>
             <div className="card-addition__password-inner">
@@ -327,6 +325,14 @@ const CardAddition = (props) => {
               </div>
             </div>
           </div>
+          {Object.values(isInputFulfilled).every(
+            (isFulfilled) => isFulfilled
+          ) && (
+            <div className="card-addition__form-submit">
+              <Button innerText="다음" />
+            </div>
+          )}
+          
         </form>
       </div>
       {isModalOpen && (

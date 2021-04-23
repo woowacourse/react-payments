@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 import "./style.css";
 
-const Button = ({ innerText, onClick }) => {
+const Button = ({ type = "submit", innerText, onClick }) => {
   return (
-    <button className="button" onClick={onClick}>
+    <button type={type} className="button" onClick={onClick}>
       {innerText}
     </button>
   );
