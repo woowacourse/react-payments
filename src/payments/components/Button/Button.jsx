@@ -5,7 +5,7 @@ const Button = props => {
   const { name, className, ...rest } = props;
 
   return (
-    <button className={classNames("font-bold text-sm text-right text-font-mint", className)} {...rest}>
+    <button className={classNames("font-bold text-sm text-right text-custom-mint", className)} {...rest}>
       {name}
     </button>
   );

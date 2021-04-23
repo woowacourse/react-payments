@@ -6,7 +6,10 @@ const Input = props => {
 
   return (
     <input
-      className={classNames("rounded-md bg-input-gray h-11 placeholder-center p-3 text-lg font-medium", className)}
+      className={classNames(
+        "rounded-md bg-custom-gray-100 text-custom-mint h-11 placeholder-center p-3 text-lg font-medium",
+        className
+      )}
       {...rest}
     />
   );

@@ -12,7 +12,7 @@ const CardTemplate = args => <Card {...args} />;
 export const RegisteredCard = CardTemplate.bind({});
 
 RegisteredCard.args = {
-  backgroundColor: "bg-card-green",
+  backgroundColor: "bg-custom-green",
   isRegistered: true,
   width: "w-52",
   height: "h-32",
@@ -25,7 +25,7 @@ RegisteredCard.args = {
 export const UnregisteredCard = CardTemplate.bind({});
 
 UnregisteredCard.args = {
-  backgroundColor: "bg-card-gray",
+  backgroundColor: "bg-custom-gray-200",
   isRegistered: false,
   width: "w-52",
   height: "h-32",
@@ -37,7 +37,7 @@ UnregisteredCard.args = {
 export const CardShapeTemplate = args => <CardShape {...args} />;
 
 CardShapeTemplate.args = {
-  backgroundColor: "bg-card-gray",
+  backgroundColor: "bg-custom-gray-200",
   isRegistered: false,
   width: "w-52",
   height: "h-32",
