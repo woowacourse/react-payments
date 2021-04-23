@@ -8,6 +8,7 @@ const Styled = {
     fontSize: '18px',
     fontWeight: '500',
     lineHeight: '45px',
+    width: '100%',
     ...styles,
   })),
 };
