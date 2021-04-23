@@ -1,35 +1,6 @@
 /* TODO : 폰트 전역적으로 적용하기 */
-
-@keyframes right-in {
-  from {
-    transform: translateX(100vw);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes left-out {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(-100vw);
-    opacity: 0;
-  }
-}
+@import "./animation.scss";
 
 body {
   font-family: "Roboto";
-}
-
-.right-in {
-  animation: right-in 1.5s forwards;
-}
-
-.left-out {
-  animation: left-out 2s forwards;
 }

@@ -1,12 +1,15 @@
+import { useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./AddCardPage.module.scss";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import { PAGE_PATH, HEADER_TEXT } from '../../constants';
+import { PAGE_PATH, HEADER_TEXT } from "../../constants";
 
-import NavigationButton from "../../components/NavigationButton/NavigationButton"
-import Card from "../../components/Card/Card"
-import CardInputContainer from "../../containers/CardInputContainer/CardInputContainer"
+import CardInputContainer from "../../containers/CardInputContainer/CardInputContainer";
+import CardTypeContainer from "../../containers/CardTypeContainer/CardTypeContainer";
+
+import NavigationButton from "../../components/NavigationButton/NavigationButton";
+import Card from "../../components/Card/Card";
 
 const cx = classNames.bind(styles);
 
@@ -21,9 +24,83 @@ const cardMockUp = {
   ],
   cardOwner: "NAME",
   cardExpiration: "MM/YY",
-}
+};
+
+const cardTypeMockUps = [
+  {
+    color: "#E24141",
+    name: "포코카드",
+  },
+  {
+    color: "#04C09E",
+    name: "로이드 카드",
+  },
+  {
+    color: "#E24141",
+    name: "포코카드",
+  },
+  {
+    color: "#E24141",
+    name: "포코카드",
+  },
+  {
+    color: "#E24141",
+    name: "포코카드",
+  },
+  {
+    color: "#E24141",
+    name: "포코카드",
+  },
+  {
+    color: "#E24141",
+    name: "포코카드",
+  },
+  {
+    color: "#E24141",
+    name: "포코카드",
+  },
+];
 
 const AddCardPage = ({}) => {
+  // slider test
+  const [pageState, setPageState] = useState({
+    isBottomSliderToggled: false,
+    backDropAnimation: "fade-out",
+    sliderAnimation: "move-down",
+  });
+
+  const toggleCardTypeContainer = ({ isBottomSliderToggled, backDropAnimation, sliderAnimation }) => {
+    setPageState((state) => ({
+      ...state,
+      isBottomSliderToggled,
+      backDropAnimation,
+      sliderAnimation,
+    }));
+  };
+
+  const showCardTypeContainer = () => {
+    toggleCardTypeContainer({
+      isBottomSliderToggled: true,
+      backDropAnimation: "fade-in",
+      sliderAnimation: "move-up",
+    });
+  };
+
+  const hideCardTypeContainer = () => {
+    toggleCardTypeContainer({
+      isBottomSliderToggled: true,
+      backDropAnimation: "fade-out",
+      sliderAnimation: "move-down",
+    });
+    setTimeout(() => {
+      toggleCardTypeContainer({
+        isBottomSliderToggled: false,
+        backDropAnimation: "fade-out",
+        sliderAnimation: "move-down",
+      });
+    }, 350);
+  };
+
   return (
     <div className={cx("add-card-page")}>
       <header className={cx("add-card-page__header")}>
@@ -31,10 +108,20 @@ const AddCardPage = ({}) => {
           <NavigationButton buttonText={HEADER_TEXT.ADD_CARD} />
         </Link>
       </header>
-      <main className={cx("add-card-page__main")}>
-        <Card className={cx("add-card-page__card")} {...cardMockUp}/>
+      {/* onClick for slider test */}
+      <main className={cx("add-card-page__main")} onClick={showCardTypeContainer}>
+        <Card className={cx("add-card-page__card")} {...cardMockUp} />
         <CardInputContainer />
       </main>
+      {pageState.isBottomSliderToggled && (
+        // TODO : onClick 말고 다른 이름으로 핸들러 함수 넘겨주기
+        <CardTypeContainer
+          cardTypes={cardTypeMockUps}
+          onClick={hideCardTypeContainer}
+          backDropAnimationClass={pageState.backDropAnimation}
+          bottomSliderAnimationClass={pageState.sliderAnimation}
+        />
+      )}
     </div>
   );
 };

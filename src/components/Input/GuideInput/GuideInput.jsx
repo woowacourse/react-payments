@@ -1,6 +1,5 @@
 import classNames from "classnames/bind";
 // TODO : app.css 스토리북에서도 전역으로 적용되도록 수정
-import "../../../app.css";
 import styles from "./GuideInput.module.scss";
 import Input from "../Input";
 import cardCVC from "../../../assets/images/card-cvc.png";
@@ -10,7 +9,7 @@ const cx = classNames.bind(styles);
 
 // TODO : 숫자 입력을 받되, 한글자마다 Dot 이 되도록 처리
 
-const GuideInput = ({ labelText, guideIcon = questionMark, guideImage = cardCVC, className = '', inputWidth }) => {
+const GuideInput = ({ labelText, guideIcon = questionMark, guideImage = cardCVC, className = "", inputWidth }) => {
   return (
     <div className={`${cx("guide-input")} ${className}`}>
       <label className={cx("guide-input__label")} name={labelText}>

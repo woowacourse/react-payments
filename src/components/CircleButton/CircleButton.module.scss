@@ -1,8 +1,10 @@
 .circle-button {
+  position: relative;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  margin-bottom: 14px;
 
   &:hover {
     .circle-button__circle {
@@ -20,6 +22,10 @@
   }
 
   &__text {
+    position: absolute;
+    width: 70px;
+    top: 100%;
+    text-align: center;
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;
