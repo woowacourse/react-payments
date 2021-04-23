@@ -10,7 +10,6 @@ const Root = styled.main`
 
 const NavigationBar = styled.nav`
   position: sticky;
-  box-sizing: border-box;
   top: 0;
   width: 100%;
   padding: 22px 24px;

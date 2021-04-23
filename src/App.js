@@ -3,7 +3,7 @@ import PageHost from './components/PageHost';
 import CardList from './components/pages/CardList';
 import CardRegister from './components/pages/CardRegister';
 import CardCompletion from './components/pages/CardCompletion';
-import GlobalStyle from './styles/font';
+import GlobalStyle from './styles/global';
 
 const PAGES = {
   LIST: {
