@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Card from "../stories/Card";
 import { CARD, CARD_SIZE } from "../stories/constants/card";
 import Input from "../stories/Input";
+import Modal from "../stories/Modal";
+import CardTypeRadio from "../stories/CardTypeRadio";
 
 const splitCardNumbers = (value) => {
   const splitNumbers = [];
@@ -33,10 +35,18 @@ const isNonNumberValue = (value) => {
   return /[^0-9]/g.test(value);
 };
 
-function CardAddition(props) {
+const CardAddition = (props) => {
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
   const [cardNumbers, setCardNumbers] = useState([]);
   const [selectionStart, setSelectionStart] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isInputFulfilled, setIsInputFulfilled] = useState({
+    cardNumbers: false,
+    expirationDate: false,
+    username: false,
+    cvc: false,
+    password: false,
+  });
 
   const cardNumbersInputRef = useRef();
 
@@ -91,8 +101,27 @@ function CardAddition(props) {
 
     const unformattedValue = unformatCardNumbers(updatedCardNumbers);
     const splitNumbers = splitCardNumbers(unformattedValue);
+    const isCardNumbersFulfilled = splitNumbers[3]?.length === 4;
+
+    setIsModalOpen(isCardNumbersFulfilled);
+    setIsInputFulfilled((prev) => ({
+      ...prev,
+      cardNumbers: isCardNumbersFulfilled,
+    }));
 
     setCardNumbers(splitNumbers);
+  };
+
+  const onModalClick = ({ target, currentTarget }) => {
+    if (target === currentTarget) {
+      setIsModalOpen(false);
+      return;
+    }
+  };
+
+  const onRadioChange = ({ target }) => {
+    setCardType(JSON.parse(target.value));
+    setIsModalOpen(false);
   };
 
   return (
@@ -110,7 +139,7 @@ function CardAddition(props) {
               onChange={onCardNumbersChange}
               option={{
                 ref: cardNumbersInputRef,
-                maxlength: "25",
+                maxLength: "25",
               }}
             />
           </div>
@@ -156,7 +185,7 @@ function CardAddition(props) {
                   "aria-label": "첫번째 비밀번호",
                   min: 0,
                   max: 9,
-                  maxlength: 1,
+                  maxLength: 1,
                   required: "required",
                 }}
               />
@@ -167,7 +196,7 @@ function CardAddition(props) {
                   "aria-label": "두번째 비밀번호",
                   min: 0,
                   max: 9,
-                  maxlength: 1,
+                  maxLength: 1,
                   required: "required",
                 }}
               />
@@ -181,8 +210,24 @@ function CardAddition(props) {
           </div>
         </form>
       </div>
+      {isModalOpen && (
+        <Modal onClick={onModalClick}>
+          <form className="card-type-radio-box">
+            {Object.values(CARD)
+              .filter((value) => value.name !== "")
+              .map((value) => (
+                <CardTypeRadio
+                  cardType={value}
+                  groupName="card-type"
+                  isChecked={value.name === cardType.name}
+                  onChange={onRadioChange}
+                />
+              ))}
+          </form>
+        </Modal>
+      )}
     </>
   );
-}
+};
 
 export default CardAddition;

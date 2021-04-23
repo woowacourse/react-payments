@@ -23,4 +23,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: appear 0.2s ease-in-out;
+}
+
+@keyframes appear {
+  0% {
+    transform: translateY(100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
