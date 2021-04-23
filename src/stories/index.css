@@ -5,3 +5,7 @@
 .justify-space-between {
   justify-content: space-between;
 }
+
+.hidden {
+  opacity: 0;
+}
