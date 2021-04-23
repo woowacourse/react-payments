@@ -1,3 +1,4 @@
+// TODO : 페이지 단위로 상수화
 export const HEADER_TEXT = Object.freeze({
   OWNED_CARD: "보유카드",
   ADD_CARD: "카드추가",
@@ -9,6 +10,10 @@ export const INPUT_LABEL_TEXT = Object.freeze({
   CARD_OWNER: "카드 소유자 이름(선택)",
   CARD_CVC: "보안코드(CVC/CVV)",
   CARD_PASSWORD: "카드 비밀번호",
+});
+
+export const LABEL_TEXT = Object.freeze({
+  CARD_ADD_COMPLETE: "카드등록이 완료되었습니다.",
 });
 
 export const BUTTON_TEXT = Object.freeze({

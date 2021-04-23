@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./AddCardPage.module.scss";
-import { Link } from "react-router-dom";
 
 import { PAGE_PATH, HEADER_TEXT, BUTTON_TEXT } from "../../constants";
 
@@ -123,7 +123,9 @@ const AddCardPage = ({}) => {
         />
       )}
       <div className={cx("add-card-page__bottom")}>
-        <Button>{BUTTON_TEXT.NEXT}</Button>
+        <Link to={PAGE_PATH.COMPLETE}>
+          <Button>{BUTTON_TEXT.NEXT}</Button>
+        </Link>
       </div>
     </div>
   );
