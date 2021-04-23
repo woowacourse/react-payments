@@ -3,13 +3,20 @@ import { reset } from 'styled-reset';
 
 const GlobalStyles = createGlobalStyle`
   ${reset}
-  *{
-    box-style: border-box;
+
+  :root {
+    background-color: #F7F9FA;
   }
+
+  *{
+    box-sizing: border-box;
+    color : #383838;
+  }
+
   a{
     text-decoration: none;
     color: inherit;
-}
+  }
 `;
 
 export default GlobalStyles;

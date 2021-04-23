@@ -1,14 +1,26 @@
 import GlobalStyles from './global.styles';
-import React from 'react';
-import Input from './common/Input';
+import React, { useState } from 'react';
+import Card from './common/Card';
+import Nav from './components/Nav';
+
 import { AppWrapper } from './App.styles.js';
 
 function App() {
+  const [newCardInfo, setNewCardInfo] = useState({
+    cardName: 'DEFAULT',
+    numbers: '',
+    user: 'NAME',
+    expireDate: 'MM/YY',
+  });
+
   return (
     <>
       <GlobalStyles />
       <AppWrapper>
-        <Input />
+        <Nav />
+        <div className='card-wrapper'>
+          <Card cardInfos={newCardInfo} setNewCardInfo={setNewCardInfo} />
+        </div>
       </AppWrapper>
     </>
   );

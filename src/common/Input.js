@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { COLOR, FONT_WEIGHT } from '../global.styles';
+import { COLOR, FONT_WEIGHT } from '../constants/constants.js';
 
 const NickNameInput = css`
   color: #383838;

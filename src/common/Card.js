@@ -50,8 +50,8 @@ const CardInfo = css`
 `;
 
 const CardWrapper = styled.div`
-  width: 18.3725rem;
-  height: 11.4375rem;
+  width: 100%;
+  height : 100%;
   padding: 1.2rem 1.5rem;
   border-radius: 5px;
   box-shadow: 3px 3px 5px 0px #00000040;
@@ -65,21 +65,22 @@ const CardWrapper = styled.div`
   }`;
 
 const Card = ({ add, cardInfos }) => {
+  const { cardName, numbers, user, expireDate } = cardInfos;
   return (
-    <CardWrapper add={add} bgColor={CARD[cardInfos?.cardName]}>
+    <CardWrapper add={add} bgColor={CARD[cardName]}>
       {add ? (
         <div className='add'>+</div>
       ) : (
         <>
           <div className='card__column card-name'>
-            {cardInfos?.cardName}카드
+            {cardName !== 'DEFAULT' && cardName}
           </div>
           <div className='card__column'>
             <div className='usim'></div>
           </div>
-          <div className='card__column card-numbers'>{cardInfos?.numbers}</div>
+          <div className='card__column card-numbers'>{numbers}</div>
           <div className='card__column card-details'>
-            <div>{cardInfos?.user}</div> <div>{cardInfos?.expireDate}</div>
+            <div>{user}</div> <div>{expireDate}</div>
           </div>
         </>
       )}
@@ -96,6 +97,16 @@ Card.propTypes = {
     user: PropTypes.string,
     expireDate: PropTypes.string,
   }),
+};
+
+Card.defaultProps = {
+  add: false,
+  cardInfos: {
+    cardName: '',
+    numbers: '',
+    user: 'NAME',
+    expireDate: 'MM/YY',
+  },
 };
 
 export default Card;
