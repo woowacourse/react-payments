@@ -20,9 +20,9 @@ export const CIRCLE_SIZE = {
 };
 
 const Styled = {
-  Circle: styled.div(({ size, color, ...styles }) => ({
+  Circle: styled.div(({ size, styles }) => ({
     borderRadius: '50%',
-    backgroundColor: color || '#000',
+    backgroundColor: '#000',
     width: '5px',
     height: '5px',
     ...CIRCLE_SIZE[size],

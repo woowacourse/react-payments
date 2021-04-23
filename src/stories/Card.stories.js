@@ -18,11 +18,11 @@ const Template = args => <Card {...args} />;
 export const Medium = Template.bind({});
 Medium.args = {
   size: CARD_SIZE.MD,
-  color: COLOR.LIGHT_GRAY,
+  backgroundColor: COLOR.LIGHT_GRAY,
 };
 
 export const Large = Template.bind({});
 Large.args = {
   size: CARD_SIZE.LG,
-  color: COLOR.LIGHT_GRAY,
+  backgroundColor: COLOR.LIGHT_GRAY,
 };

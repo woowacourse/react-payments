@@ -1,4 +1,3 @@
-import { CARD_COLOR } from '../../../constants/color';
 import Styled from './Card.style';
 
 export const CARD_SIZE = {
@@ -6,9 +5,9 @@ export const CARD_SIZE = {
   MD: 'MD',
 };
 
-export const Card = ({ size, color, children, ...props }) => {
+export const Card = ({ size, children, ...props }) => {
   return (
-    <Styled.Card size={size} color={color} styles={props}>
+    <Styled.Card size={size} styles={props}>
       {children}
     </Styled.Card>
   );
@@ -16,5 +15,4 @@ export const Card = ({ size, color, children, ...props }) => {
 
 Card.defaultProps = {
   size: CARD_SIZE.MD,
-  color: CARD_COLOR.LIGHT_GRAY,
 };

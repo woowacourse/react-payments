@@ -3,7 +3,7 @@ import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardPasswordInput.style';
 import { Circle } from '../../commons/circle/Circle';
 
-const CardPasswordInput = () => (
+const CardPasswordInput = props => (
   <>
     <Styled.InputLabelContainer>카드 비밀번호</Styled.InputLabelContainer>
     <Styled.Container>

@@ -12,10 +12,10 @@ const CARD = {
 };
 
 const Styled = {
-  Card: styled.div(({ size, color, ...styles }) => ({
+  Card: styled.div(({ size, styles }) => ({
     position: 'relative',
     borderRadius: '5px',
-    backgroundColor: color || '#E5E5E5',
+    backgroundColor: '#E5E5E5',
     boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.25)',
     color: '#525252',
     fontSize: '30px',
