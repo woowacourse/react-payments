@@ -2,11 +2,10 @@ import styled from 'styled-components';
 
 const Styled = {
   InputLabelContainer: styled.div`
-    display: flex;
-    justify-content: space-between;
     font-size: 12px;
     font-weight: 500;
     margin-bottom: 4px;
+    color: #525252;
   `,
   Container: styled.div`
     display: flex;
@@ -20,7 +19,6 @@ const Styled = {
     justify-content: center;
     align-items: center;
     width: 43px;
-    height: 45px;
     background-color: #ecebf1;
     border-radius: 7px;
   `,
@@ -29,8 +27,8 @@ const Styled = {
     justify-content: center;
     align-items: center;
     width: 43px;
-    height: 45px;
     background-color: transparent;
   `,
 };
+
 export default Styled;

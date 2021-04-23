@@ -7,6 +7,7 @@ const Styled = {
     font-size: 12px;
     font-weight: 500;
     margin-bottom: 4px;
+    color: #525252;
   `,
   InputContainer: styled.div`
     display: flex;
@@ -16,4 +17,5 @@ const Styled = {
     border-radius: 7px;
   `,
 };
+
 export default Styled;
