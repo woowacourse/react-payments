@@ -2,19 +2,19 @@ import styled from 'styled-components';
 
 const size = {
   large: {
-    width: 12 * 1.601,
-    height: '12',
-    fontSize: '1.2',
+    width: 11.5 * 1.601,
+    height: '11.5',
+    fontSize: '1.15',
   },
   medium: {
-    width: 11 * 1.601,
-    height: '11',
-    fontSize: '1.1',
+    width: 8.5 * 1.601,
+    height: '8.5',
+    fontSize: '0.85',
   },
   small: {
-    width: 10.9 * 1.601,
-    height: '10.9',
-    fontSize: '1.09',
+    width: 8.15 * 1.601,
+    height: '8.15',
+    fontSize: '0.815',
   },
 };
 
