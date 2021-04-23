@@ -35,6 +35,18 @@ const isNonNumberValue = (value) => {
   return /[^0-9]/g.test(value);
 };
 
+// expiration Date
+
+const formatExpirationDate = (expirationDate) => {
+  return Object.values(expirationDate)
+    .filter((value) => value !== "")
+    .join("/");
+};
+
+const unformatExpirationDate = (formattedValue) => {
+  return formattedValue.replace("/", "");
+};
+
 const CardAddition = (props) => {
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
   const [cardNumbers, setCardNumbers] = useState([]);
@@ -46,6 +58,10 @@ const CardAddition = (props) => {
     username: false,
     cvc: false,
     password: false,
+  });
+  const [expirationDate, setExpirationDate] = useState({
+    month: "",
+    year: "",
   });
 
   const cardNumbersInputRef = useRef();
@@ -124,6 +140,35 @@ const CardAddition = (props) => {
     setIsModalOpen(false);
   };
 
+  const onExpirationDateChange = ({ target }) => {
+    //숫자가 아니면 제외한다.
+    //TODO: month의 validation을 할것인가
+    const unformattedValue = unformatExpirationDate(target.value);
+
+    //TODO: nonNumber를 긍정으로 바꾸기
+    if (isNonNumberValue(unformattedValue)) {
+      return;
+    }
+
+    const month = unformattedValue.slice(0, 2);
+    const year = unformattedValue.slice(2);
+
+    if (unformattedValue.length >= 4) {
+      setIsInputFulfilled((prev) => {
+        return { ...prev, expirationDate: true };
+      });
+    } else {
+      setIsInputFulfilled((prev) => {
+        return { ...prev, expirationDate: false };
+      });
+    }
+
+    setExpirationDate({
+      month,
+      year,
+    });
+  };
+
   return (
     <>
       <div className="card-addition">
@@ -137,10 +182,8 @@ const CardAddition = (props) => {
               isCenter={true}
               value={formatCardNumbers(cardNumbers)}
               onChange={onCardNumbersChange}
-              option={{
-                ref: cardNumbersInputRef,
-                maxLength: "25",
-              }}
+              ref={cardNumbersInputRef}
+              maxLength="25"
             />
           </div>
 
@@ -151,6 +194,10 @@ const CardAddition = (props) => {
               type="text"
               isCenter={true}
               placeHolder="MM / YY"
+              // TODO: format, unformat 함수 추상화하기
+              value={formatExpirationDate(expirationDate)}
+              onChange={onExpirationDateChange}
+              maxLength="5"
             />
           </div>
 
@@ -181,24 +228,20 @@ const CardAddition = (props) => {
               <Input
                 type="number"
                 isCenter={true}
-                option={{
-                  "aria-label": "첫번째 비밀번호",
-                  min: 0,
-                  max: 9,
-                  maxLength: 1,
-                  required: "required",
-                }}
+                aria-label="첫번째 비밀번호"
+                min="0"
+                max="9"
+                maxLength="1"
+                required="required"
               />
               <Input
                 type="number"
                 isCenter={true}
-                option={{
-                  "aria-label": "두번째 비밀번호",
-                  min: 0,
-                  max: 9,
-                  maxLength: 1,
-                  required: "required",
-                }}
+                aria-label="두번째 비밀번호"
+                min="0"
+                max="9"
+                maxLength="1"
+                required="required"
               />
               <div className="card-addition__dot-wrapper">
                 <span className="card-addition__dot"></span>

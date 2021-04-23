@@ -8,7 +8,7 @@ const Input = ({
   isCenter = false,
   value = "",
   onChange = null,
-  option = {},
+  ...option
 }) => {
   return (
     <input
