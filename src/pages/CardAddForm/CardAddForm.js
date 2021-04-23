@@ -8,6 +8,7 @@ import ToolTip from '../../components/ToolTip/ToolTip';
 import PinNumberInput from '../../components/PinNumberInput/PinNumberInput';
 import Button from '../../components/Button/Button';
 import useInput from '../../hooks/useInput';
+import { isNumeric } from '../../utils';
 
 const CardAddForm = () => {
   const history = useHistory();
@@ -18,6 +19,8 @@ const CardAddForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
+
+  console.log(CVC.value, isNumeric(CVC.value));
 
   return (
     <Container>
@@ -46,7 +49,9 @@ const CardAddForm = () => {
             <Styled.CVC>
               <InputBox
                 type="password"
-                pattern="[0-9]*"
+                pattern="^[0-9]*$"
+                isError={!isNumeric(CVC.value)}
+                errorMessage={!isNumeric(CVC.value) && '숫자를 입력해주세요.'}
                 inputmode="numeric"
                 value={CVC.value}
                 onChange={CVC.onChange}

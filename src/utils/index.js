@@ -21,3 +21,5 @@ export const getGrayScale = (color) => {
 };
 
 export const initArray = (length, fillValue) => Array.from({ length }).map(() => fillValue);
+
+export const isNumeric = (value) => new RegExp(/^[0-9]*$/).test(value);

@@ -9,6 +9,7 @@ const Styled = {
     font-size: 12px;
     min-height: 1em;
     margin: 0;
+    white-space: nowrap;
   `,
 };
 
