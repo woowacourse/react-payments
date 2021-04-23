@@ -1,9 +1,9 @@
 import React from 'react';
-import { UserCardList } from '.';
+import { AddFormPage } from '.';
 
 export default {
-  title: 'Pages/UserCardList',
-  component: UserCardList,
+  title: 'Pages/AddFormPage',
+  component: AddFormPage,
   decorators: [
     (Story) => (
       <div style={{ width: '375px', height: '701px', backgroundColor: '#fff' }}>
@@ -13,6 +13,6 @@ export default {
   ],
 };
 
-const Template = (args) => <UserCardList {...args} />;
+const Template = (args) => <AddFormPage {...args} />;
 
 export const Default = Template.bind({});

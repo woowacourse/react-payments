@@ -1,9 +1,9 @@
 import React from 'react';
-import { UserCardAdditionComplete } from '.';
+import { AddCompletePage } from '.';
 
 export default {
-  title: 'Pages/UserCardAdditionComplete',
-  component: UserCardAdditionComplete,
+  title: 'Pages/AddCompletePage',
+  component: AddCompletePage,
   decorators: [
     (Story) => (
       <div style={{ width: '375px', height: '701px', backgroundColor: '#fff' }}>
@@ -13,6 +13,6 @@ export default {
   ],
 };
 
-const Template = (args) => <UserCardAdditionComplete {...args} />;
+const Template = (args) => <AddCompletePage {...args} />;
 
 export const Default = Template.bind({});

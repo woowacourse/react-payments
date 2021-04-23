@@ -4,13 +4,17 @@
   align-items: center;
 }
 
-.Container--gray {
+.AddForm__Container {
   padding: 1rem 0.8125rem;
   border-radius: 0.4375rem;
   background-color: #ecebf1;
 }
 
-.Container--transparent {
+.AddForm__Container--transparent {
+  background-color: transparent;
+}
+
+.NicknameForm__Container {
   padding: 0.53rem;
   border-bottom: 1.5px solid #737373;
 }

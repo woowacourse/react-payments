@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const UserCardAddition = () => {
+export const AddCardPages = () => {
   return <></>;
 };

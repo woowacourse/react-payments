@@ -1,9 +1,9 @@
-import { UserCardList } from './pages/UserCardList';
+import { CardListPage } from './pages/CardListPage';
 
 function App() {
   return (
     <div className="App">
-      <UserCardList />
+      <CardListPage />
     </div>
   );
 }
