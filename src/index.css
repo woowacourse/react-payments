@@ -17,4 +17,13 @@
   .placeholder-center:-ms-input-placeholder {
     text-align: center;
   }
+
+  .bg-custom-gradient-mint {
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(4, 192, 158, 0.31) 0%,
+      rgba(4, 192, 158, 0.457344) 65.1%,
+      #04c09e 100%
+    );
+  }
 }
