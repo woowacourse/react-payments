@@ -17,6 +17,7 @@ PocoCard.args = {
   height: '130px',
   bank: '포코 카드',
   owner: 'POCO',
+  numbers: ['1111', '2222', '3333', '4444'],
   expirationDate: '04/21',
 };
 
@@ -27,5 +28,6 @@ LoydCard.args = {
   height: '130px',
   bank: '포코 카드',
   owner: 'LOYD',
+  numbers: ['4444', '3333', '2222', '1111'],
   expirationDate: '02/17',
 };
