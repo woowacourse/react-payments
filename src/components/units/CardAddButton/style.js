@@ -5,7 +5,7 @@ const Root = styled.button`
   position: relative;
   width: 208px;
   height: 130px;
-  background-color: ${PALETTE.EMPTY_CARD};
+  background-color: ${PALETTE.ADD_CARD_GRAY};
   border-color: transparent;
   border-radius: 5px;
   font-size: 30px;
