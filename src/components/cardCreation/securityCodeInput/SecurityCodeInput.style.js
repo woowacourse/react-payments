@@ -7,12 +7,17 @@ const Styled = {
     margin-bottom: 4px;
     color: #525252;
   `,
+  Container: styled.div`
+    display: flex;
+    align-items: center;
+  `,
   InputContainer: styled.div`
     display: flex;
     align-items: center;
     background-color: #ecebf1;
     border-radius: 7px;
     width: 84px;
+    margin-right: 11px;
   `,
 };
 
