@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import getGrayScale from '../../utils';
+import { getGrayScale } from '../../utils';
 
 const Styled = {
   Container: styled.div`

@@ -10,7 +10,7 @@ const isHexColor = (colorCode) => colorCode[0] === '#' && colorCode.length === 7
 // ITU-R BT.709 formula
 const getLuma = ([red, green, blue]) => 0.2126 * red + 0.7152 * green + 0.0722 * blue;
 
-const getGrayScale = (color) => {
+export const getGrayScale = (color) => {
   const rgb = isHexColor(color)
     ? hexToRgbArray(color)
     : color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1);
@@ -20,4 +20,4 @@ const getGrayScale = (color) => {
   return luma < 255 / 2;
 };
 
-export default getGrayScale;
+export const initArray = (length, fillValue) => Array.from({ length }).map(() => fillValue);
