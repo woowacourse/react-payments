@@ -58,6 +58,7 @@ const CardAddition = (props) => {
   });
   const [username, setUsername] = useState("");
   const [secureCode, setSecureCode] = useState("");
+  const [password, setPassword] = useState(["", ""]);
   const [isInputFulfilled, setIsInputFulfilled] = useState({
     cardNumbers: false,
     expirationDate: false,
@@ -199,6 +200,27 @@ const CardAddition = (props) => {
     setSecureCode(value);
   };
 
+  const onPasswordChange = (event) => {
+    const { value, dataset } = event.target;
+
+    if (isNonNumberValue(value)) {
+      return;
+    }
+
+    // TODO: useEffect로 fulfilled를 일괄관리?? 만약 하위 컴포넌트로 다 나뉘어지면?
+    setPassword((prev) => {
+      const newPassword = [...prev];
+
+      newPassword[dataset.passwordIndex] = value;
+      if (newPassword.every((password) => password !== "")) {
+        setIsInputFulfilled((prev) => ({ ...prev, password: true }));
+      }
+
+      return newPassword;
+    });
+  };
+
+  console.log(isInputFulfilled.password);
   return (
     <>
       <div className="card-addition">
@@ -274,21 +296,27 @@ const CardAddition = (props) => {
             <label>카드비밀번호</label>
             <div className="card-addition__password-inner">
               <Input
-                type="number"
+                type="password"
                 isCenter={true}
                 aria-label="첫번째 비밀번호"
                 min="0"
                 max="9"
                 maxLength="1"
+                data-password-index="0"
+                value={password[0]}
+                onChange={onPasswordChange}
                 required="required"
               />
               <Input
-                type="number"
+                type="password"
                 isCenter={true}
                 aria-label="두번째 비밀번호"
                 min="0"
                 max="9"
                 maxLength="1"
+                data-password-index="1"
+                value={password[1]}
+                onChange={onPasswordChange}
                 required="required"
               />
               <div className="card-addition__dot-wrapper">
