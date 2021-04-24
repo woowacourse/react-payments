@@ -7,7 +7,8 @@ export default {
 };
 const CardTemplate = (args) => <ColorSelectButton {...args} />;
 export const Default = CardTemplate.bind({});
+
 Default.args = {
-  color: '#E24141',
+  color: 'poco',
   cardName: '우테코카드',
 };

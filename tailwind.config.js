@@ -26,6 +26,15 @@ module.exports = {
         '1/20': '5%',
       },
       colors: {
+        poco: '#E24141',
+        june: '#547CE4',
+        park: '#73BC6D',
+        roid: '#04C09E',
+        tyche: '#FBCD58',
+        eunhyun: '#E76E9A',
+        yujo: '#F37D3B',
+        yunho: '#DE59B9',
+
         gray: {
           150: '#e5e5e5',
           250: '#ECEBF1',

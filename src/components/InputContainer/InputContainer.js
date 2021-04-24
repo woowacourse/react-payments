@@ -5,9 +5,9 @@ const InputContainer = (props) => {
   const { title, children } = props;
 
   return (
-    <div className="flex flex-col mt-5">
+    <div className="flex flex-col mt-5 ">
       <label className="text-xs">{title}</label>
-      <div className="flex mt-1.5">{children}</div>
+      <div className="flex items-center mt-1.5">{children}</div>
     </div>
   );
 };

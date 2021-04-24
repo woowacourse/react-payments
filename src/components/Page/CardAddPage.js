@@ -4,6 +4,7 @@ import Card from '../Card/Card';
 import Input from '../Input/Input';
 import InputContainer from '../InputContainer/InputContainer';
 import TextButton from '../TextButton/TextButton';
+import Tooltip from '../Tooltip/Tooltip';
 
 const CardAddPage = () => {
   return (
@@ -30,7 +31,7 @@ const CardAddPage = () => {
 
         <InputContainer title={'보안코드(CVC/CVV)'}>
           <Input width={'quarter'} type={'number'} maxLength={3} />
-          {/* TODO : tooltip */}
+          <Tooltip content={<img className="" src="images/CVC.png" alt="tooltip cvc images" />} />
         </InputContainer>
 
         <InputContainer title={'카드 비밀번호'}>
