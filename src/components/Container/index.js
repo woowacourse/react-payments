@@ -1,25 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.css';
+import classNames from 'classnames/bind';
+import styles from './style.css';
 
-export const Container = ({ classname, width, height, children, ...props }) => {
+const cx = classNames.bind(styles);
+
+export const Container = ({ className, children, ...props }) => {
+  const containerClass = cx('Container', className);
+
   return (
-    <div className={`Container ${classname}`} style={{ width, height }} {...props}>
+    <div className={containerClass} {...props}>
       {children}
     </div>
   );
 };
 
 Container.propTypes = {
-  classname: PropTypes.string,
-  width: PropTypes.string,
-  height: PropTypes.string,
+  className: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 Container.defaultProps = {
-  classname: '',
-  width: '100%',
-  height: '2.8125rem',
+  className: '',
   children: '',
 };

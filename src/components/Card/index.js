@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.css';
+import classNames from 'classnames/bind';
+import styles from './style.css';
+
+const cx = classNames.bind(styles);
 
 export const Card = ({ size, backgroundColor, boxShadow, children, ...props }) => {
-  let classnames = `Card Card--${size}`;
-  classnames += boxShadow ? ' Card--shadow' : '';
+  const cardClass = cx('Card', `Card--${size}`, { 'Card--shadow': Boolean(boxShadow) });
 
   return (
-    <div className={classnames} style={{ backgroundColor }} {...props}>
+    <div className={cardClass} style={{ backgroundColor }} {...props}>
       {children}
     </div>
   );

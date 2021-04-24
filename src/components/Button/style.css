@@ -1,10 +1,12 @@
 .Button {
+  margin: 0.25rem;
   border: none;
 }
 
 .Button--submit {
   color: #04c09e;
   font-size: 0.875rem;
+  text-align: end;
 }
 
 .Button--question-mark {

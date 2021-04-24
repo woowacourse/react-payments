@@ -1,4 +1,6 @@
 .Label {
+  margin: 0.25rem;
+  min-height: 1rem;
   letter-spacing: -8.5%;
   font-size: 0.75rem;
   color: #525252;

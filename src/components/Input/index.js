@@ -1,46 +1,56 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import './style.css';
+import classnames from 'classnames/bind';
+import { Container } from '..';
+import styles from './style.css';
 
-export const Input = ({ textAlign, width, color, ...props }) => {
-  return <input className={`Input Input--${textAlign}`} style={{ width, color }} {...props} />;
+const cx = classnames.bind(styles);
+
+export const Input = ({ container, className, ...props }) => {
+  const inputClass = cx('Input', `${className}`);
+
+  if (container) {
+    return (
+      <Container className={container}>
+        <input className={inputClass} {...props} />
+      </Container>
+    );
+  }
+  return <input className={inputClass} {...props} />;
 };
 
 Input.propTypes = {
+  container: PropTypes.string,
+  className: PropTypes.string,
   id: PropTypes.string,
   placeholder: PropTypes.string,
-  width: PropTypes.string,
-  color: PropTypes.string,
-  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
   disabled: PropTypes.bool,
   type: PropTypes.oneOf([
+    'submit',
     'text',
-    'search',
-    'url',
-    'tel',
-    'email',
-    'date',
-    'month',
-    'week',
-    'time',
-    'datetime-local',
     'number',
-    'range',
-    'color',
     'password',
     'checkbox',
     'radio',
+    'color',
+    'search',
+    'month',
+    'week',
+    'date',
+    'time',
+    'datetime-local',
+    'range',
+    'url',
+    'tel',
+    'email',
     'file',
-    'submit',
   ]),
 };
 
 Input.defaultProps = {
+  container: null,
+  className: null,
   id: null,
   placeholder: '',
-  width: '1.2rem',
-  color: '#04C09E',
-  textAlign: 'start',
   disabled: false,
   type: 'text',
 };

@@ -2,19 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 24rem;
+  width: 100%;
+  height: 2.8125rem;
 }
 
-.AddForm__Container {
-  padding: 1rem 0.8125rem;
-  border-radius: 0.4375rem;
-  background-color: #ecebf1;
-}
-
-.AddForm__Container--transparent {
-  background-color: transparent;
-}
-
-.NicknameForm__Container {
-  padding: 0.53rem;
-  border-bottom: 1.5px solid #737373;
+.CardPasswordInput {
+  display: flex;
+  flex-direction: row;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Container, Form, Input, Label } from '..';
+import { Button, Form, Input, Label } from '..';
 
 export default {
   title: 'Component/Form',
@@ -15,46 +15,47 @@ export default {
 
 const Template = (args) => <Form {...args} />;
 
+const CardPasswordInput = (
+  <>
+    <div className="CardPasswordInput">
+      {['filled', 'filled', 'transparent', 'transparent'].map((style, index) => (
+        <Input
+          key={index}
+          container={`CardInfoForm__Input__Filler--${style} CardPasswordInput__Filler`}
+          className="CardPasswordInput__Field"
+          type="password"
+          value="3"
+        />
+      ))}
+    </div>
+  </>
+);
+
 export const CardPasswordForm = Template.bind({});
 CardPasswordForm.args = {
   children: (
     <>
-      <Container>
-        <Label>카드 비밀번호</Label>
-        <Container>
-          <Container classname="AddForm__Container" width="2.8125rem">
-            <Input textAlign="center" type="password" value="3" />
-          </Container>
-          <Container classname="AddForm__Container" width="2.8125rem">
-            <Input textAlign="center" type="password" value="3" />
-          </Container>
-          <Container
-            classname="AddForm__Container AddForm__Container--transparent"
-            width="2.8125rem"
-          >
-            <Input disabled textAlign="center" type="password" value="3" />
-          </Container>
-          <Container
-            classname="AddForm__Container AddForm__Container--transparent"
-            width="2.8125rem"
-          >
-            <Input disabled textAlign="center" type="password" value="3" />
-          </Container>
-        </Container>
-      </Container>
+      <Label>카드 비밀번호</Label>
+      {CardPasswordInput}
       <Button onClick={() => {}}>다음</Button>
     </>
   ),
 };
+
+const NicknameInput = (
+  <Input
+    className="CardNicknameInput__Field"
+    container="CardNicknameInput__Filler--transparent"
+    value="엄카"
+  />
+);
 
 export const CardNicknameForm = Template.bind({});
 CardNicknameForm.args = {
   width: '43%',
   children: (
     <>
-      <Container classname="NicknameForm__Container">
-        <Input color="#383838" textAlign="center" value="엄카" width="15rem" />
-      </Container>
+      {NicknameInput}
       <Button onClick={() => {}}>확인</Button>
     </>
   ),
