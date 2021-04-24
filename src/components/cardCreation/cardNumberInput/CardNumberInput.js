@@ -74,7 +74,7 @@ const CardNumberInput = memo(({ cardNumber, setCardNumber }) => {
           styles={transparentInputStyles['0']}
           autoFocus
         />
-        <Styled.Dash>-</Styled.Dash>
+        {cardNumber['0'].length === 4 && <Styled.Dash>-</Styled.Dash>}
         <TransparentInput
           name="1"
           type="number"
@@ -86,7 +86,7 @@ const CardNumberInput = memo(({ cardNumber, setCardNumber }) => {
           styles={transparentInputStyles['1']}
           disabled
         />
-        <Styled.Dash>-</Styled.Dash>
+        {cardNumber['1'].length === 4 && <Styled.Dash>-</Styled.Dash>}
         <TransparentInput
           name="2"
           type="password"
@@ -98,7 +98,7 @@ const CardNumberInput = memo(({ cardNumber, setCardNumber }) => {
           styles={transparentInputStyles['2']}
           disabled
         />
-        <Styled.Dash>-</Styled.Dash>
+        {cardNumber['2'].length === 4 && <Styled.Dash>-</Styled.Dash>}
         <TransparentInput
           name="3"
           type="password"

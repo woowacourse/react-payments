@@ -9,7 +9,7 @@ const Styled = {
   `,
   Dash: styled.span`
     font-size: 18px;
-    color: #737373;
+    color: #04c09e;
   `,
   InputContainer: styled.div`
     display: flex;

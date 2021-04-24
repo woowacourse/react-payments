@@ -80,6 +80,8 @@ const Styled = {
     ...CHIP[size],
   })),
   CardNumber: styled.div(({ size }) => ({
+    display: 'flex',
+    alignItems: 'center',
     position: 'absolute',
     inlineSize: 'fit-content',
     left: '50%',
@@ -87,6 +89,13 @@ const Styled = {
     fontWeight: 700,
     ...CARD_NUMBER[size],
   })),
+  NumberContainer: styled.div`
+    width: 36px;
+    text-align: center;
+    &:not(:last-child) {
+      margin-right: 7px;
+    }
+  `,
   CardOwner: styled.div(({ size }) => ({
     position: 'absolute',
     fontWeight: 700,

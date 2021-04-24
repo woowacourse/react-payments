@@ -42,7 +42,7 @@ const CardCreationPage = ({ setCurrentPage }) => {
         <CreditCard
           content={{
             cardType: '로이드 카드',
-            cardNumber: Object.values(cardNumber).join(' '),
+            cardNumber: Object.values(cardNumber),
             cardOwner,
             cardExpiredDate,
           }}

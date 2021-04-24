@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 import { COLOR } from '../../../constants/color';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './ExpiredDateInput.style';
@@ -10,8 +10,17 @@ const transparentInputStyles = {
 };
 
 const ExpiredDateInput = memo(({ cardExpiredDate, setCardExpiredDate }) => {
+  const $yearInput = useRef(null);
+
   const handleInputChange = ({ target }) => {
+    if (target.value.length > 2) return;
+
     setCardExpiredDate(prevState => ({ ...prevState, [target.name]: target.value }));
+
+    if (target.name === 'month' && target.value.length === 2) {
+      $yearInput.current.disabled = false;
+      $yearInput.current.focus();
+    }
   };
 
   return (
@@ -35,6 +44,7 @@ const ExpiredDateInput = memo(({ cardExpiredDate, setCardExpiredDate }) => {
           min="0"
           max="99"
           placeholder="YY"
+          innerRef={$yearInput}
           value={cardExpiredDate.year}
           onChange={handleInputChange}
           styles={transparentInputStyles}

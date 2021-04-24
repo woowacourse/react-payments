@@ -2,7 +2,7 @@ import { COLOR } from '../../../constants/color';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardPasswordInput.style';
 import { Circle } from '../../commons/circle/Circle';
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 
 const transparentInputStyles = {
   color: COLOR.MINT,
@@ -11,8 +11,14 @@ const transparentInputStyles = {
 };
 
 const CardPasswordInput = memo(({ cardPassword, setCardPassword }) => {
+  const $input1 = useRef(null);
+
   const handleInputChange = ({ target }) => {
     setCardPassword(prevState => ({ ...prevState, [target.name]: target.value }));
+
+    if (target.name === '0' && target.value.length === 1) {
+      $input1.current.focus();
+    }
   };
 
   return (
@@ -36,6 +42,7 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword }) => {
             minLength="1"
             maxLength="1"
             type="password"
+            innerRef={$input1}
             value={cardPassword['1']}
             onChange={handleInputChange}
             styles={transparentInputStyles}
