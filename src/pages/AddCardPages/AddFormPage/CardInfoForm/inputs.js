@@ -1,34 +1,35 @@
+import { createRef, useEffect } from 'react';
 import { Container, Input, Label, Text } from '../../../../components';
 
-export const CardNumberInput = ({
-  firstFourDigits,
-  secondFourDigits,
-  thirdFourDigits,
-  fourthFourDigits,
-}) => {
+export const CardNumberInput = () => {
+  const firstCardNumberInputref = createRef();
   const dash = (
     <Text color="#04C09E" fontSize="0.75rem" textAlign="start" width="1rem">
       -
     </Text>
   );
 
+  useEffect(() => {
+    firstCardNumberInputref.current?.focus();
+  }, []);
+
   return (
     <>
       <Label>카드 번호</Label>
       <Container className="CardInfoForm__Input__Filler--filled CardNumberInput__Filler">
-        <Input className="CardNumberInput__Field" type="number" value={firstFourDigits} />
+        <Input className="CardNumberInput__Field" type="number" ref={firstCardNumberInputref} />
         {dash}
-        <Input className="CardNumberInput__Field" type="number" value={secondFourDigits} />
+        <Input className="CardNumberInput__Field" type="number" />
         {dash}
-        <Input className="CardNumberInput__Field" type="password" value={thirdFourDigits} />
+        <Input className="CardNumberInput__Field" type="password" />
         {dash}
-        <Input className="CardNumberInput__Field" type="password" value={fourthFourDigits} />
+        <Input className="CardNumberInput__Field" type="password" />
       </Container>
     </>
   );
 };
 
-export const ExpirationDateInput = ({ month, year }) => {
+export const ExpirationDateInput = () => {
   const slash = (
     <Text color="#737373" fontSize="0.75rem" textAlign="start" width="1rem">
       /
@@ -39,20 +40,15 @@ export const ExpirationDateInput = ({ month, year }) => {
     <>
       <Label>만료일</Label>
       <Container className="CardInfoForm__Input__Filler--filled ExpirationDateInput__Filler">
-        <Input
-          className="ExpirationDateInput__Field"
-          placeholder="MM"
-          type="number"
-          value={month}
-        />
+        <Input className="ExpirationDateInput__Field" placeholder="MM" type="number" />
         {slash}
-        <Input className="ExpirationDateInput__Field" placeholder="YY" type="number" value={year} />
+        <Input className="ExpirationDateInput__Field" placeholder="YY" type="number" />
       </Container>
     </>
   );
 };
 
-export const UserNameInput = ({ value }) => {
+export const UserNameInput = () => {
   return (
     <>
       <Label>카드 소유자 이름(선택)</Label>
@@ -60,13 +56,12 @@ export const UserNameInput = ({ value }) => {
         className="CardOwnerInput__Field"
         container="CardInfoForm__Input__Filler--filled CardOwnerInput__Filler"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        value={value}
       />
     </>
   );
 };
 
-export const SecurityCodeInput = ({ value }) => {
+export const SecurityCodeInput = () => {
   return (
     <>
       <Label>보안 코드(CVC/CVV)</Label>
@@ -74,13 +69,12 @@ export const SecurityCodeInput = ({ value }) => {
         className="SecurityCodeInput__Field"
         container="CardInfoForm__Input__Filler--filled SecurityCodeInput__Filler"
         type="password"
-        value={value}
       />
     </>
   );
 };
 
-export const PasswordInput = ({ value }) => {
+export const PasswordInput = () => {
   return (
     <>
       <Label>카드 비밀번호</Label>
@@ -91,7 +85,6 @@ export const PasswordInput = ({ value }) => {
             container={`CardInfoForm__Input__Filler--${style} CardPasswordInput__Filler`}
             className="CardPasswordInput__Field"
             type="password"
-            value={value[index]}
           />
         ))}
       </div>

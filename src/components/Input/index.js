@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 import { Container } from '..';
@@ -5,18 +6,20 @@ import styles from './style.css';
 
 const cx = classnames.bind(styles);
 
-export const Input = ({ container, className, ...props }) => {
+export const Input = forwardRef(({ container, className, ...props }, ref) => {
   const inputClass = cx('Input', className);
 
   if (container) {
     return (
       <Container className={container}>
-        <input className={inputClass} {...props} />
+        <input className={inputClass} {...props} ref={ref} />
       </Container>
     );
   }
-  return <input className={inputClass} {...props} />;
-};
+  return <input className={inputClass} {...props} ref={ref} />;
+});
+
+Input.displayName = 'Input';
 
 Input.propTypes = {
   container: PropTypes.string,

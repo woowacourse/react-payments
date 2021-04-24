@@ -19,16 +19,11 @@ export const CardInfoForm = (props) => {
 
   return (
     <Form className="CardInfoForm">
-      <CardNumberInput
-        firstFourDigits={1111}
-        secondFourDigits={1111}
-        thirdFourDigits={1111}
-        fourthFourDigits={1111}
-      />
-      <ExpirationDateInput month="04" year={21} />
-      <UserNameInput value="SUN" />
-      <SecurityCodeInput value="111" />
-      <PasswordInput value="1111" />
+      <CardNumberInput />
+      <ExpirationDateInput />
+      <UserNameInput />
+      <SecurityCodeInput />
+      <PasswordInput />
       <Button onClick={handleCardInfoSubmit}>다음</Button>
     </Form>
   );
