@@ -2,29 +2,23 @@
   "env": {
     "browser": true
   },
-  "extends": ["airbnb", "airbnb/hooks", "plugin:prettier/recommended"],
-  "plugins": ["prettier"],
+  "extends": [
+    "semistandard",
+    "standard-jsx",
+    "standard-react",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "prettier"
+  ],
+  "plugins": ["react", "jsx-a11y"],
   "parserOptions": {
     "sourceType": "module"
   },
   "parser": "babel-eslint",
   "rules": {
-    "no-new": "off",
-    "no-alert": "off",
-    "no-param-reassign": "off",
-    "no-return-assign": "off",
-    "import/extensions": "off",
-    "import/no-cycle": "off",
-    "import/prefer-default-export": "off",
-    "max-depth": ["error", 1],
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/jsx-one-expression-per-line": "off",
-    "react/prefer-stateless-function": "off",
+    "react/jsx-handler-names": "off",
     "react/prop-types": "off",
-    "react/destructuring-assignment": "off",
-    "max-classes-per-file": ["error", 3],
-    "import/no-extraneous-dependencies": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/button-has-type": "off"
   }
 }
