@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { mdSize } from '../CreditCard/styles';
+import { mdSize } from '../../CreditCard/styles';
 
 export const CardButton = styled.button`
   ${mdSize}

@@ -1,15 +1,14 @@
-import { FC } from 'react';
 import { formatNumber2Digits } from '../../utils/format';
 import Container from '../common/Container';
 import { CreditCardContainer } from './styles';
 import { Card } from '../../types';
 
-interface Props extends Omit<Card, 'id' | 'cvc'> {
+interface Props extends Omit<Card, 'id' | 'cvc' | 'password'> {
   className?: string;
   size?: 'lg' | 'md';
 }
 
-const CreditCard: FC<Props> = ({ className, size, cardName, cardColor, ownerName, cardNumber, expirationDate }) => {
+const CreditCard = ({ className, size, cardName, cardColor, ownerName, cardNumber, expDate }: Props) => {
   const { first, second, third, fourth } = cardNumber;
 
   return (
@@ -19,13 +18,14 @@ const CreditCard: FC<Props> = ({ className, size, cardName, cardColor, ownerName
       <p className="card-number">
         <span>{first}</span>
         <span>{second}</span>
-        <span>{'·'.repeat(third.toString().length)}</span>
-        <span>{'·'.repeat(fourth.toString().length)}</span>
+        <span>{'·'.repeat(third.length)}</span>
+        <span>{'·'.repeat(fourth.length)}</span>
       </p>
       <Container flex justifyContent="space-between" className="info-wrapper">
-        <p>{ownerName}</p>
+        <p className="owner-name">{ownerName || 'NAME'}</p>
         <p>
-          {formatNumber2Digits(expirationDate.month)} / {formatNumber2Digits(expirationDate.year)}
+          {expDate.month ? formatNumber2Digits(Number(expDate.month)) : 'MM'} /{' '}
+          {expDate.year ? formatNumber2Digits(Number(expDate.year)) : 'YY'}
         </p>
       </Container>
     </CreditCardContainer>

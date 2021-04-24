@@ -15,7 +15,7 @@ const dummies: Card[] = [
       third: 1234,
       fourth: 1234,
     },
-    expirationDate: {
+    expDate: {
       month: 3,
       year: 3,
     },
@@ -33,7 +33,7 @@ const dummies: Card[] = [
       third: 1234,
       fourth: 1234,
     },
-    expirationDate: {
+    expDate: {
       month: 3,
       year: 3,
     },
@@ -50,7 +50,7 @@ const dummies: Card[] = [
       third: 1234,
       fourth: 1234,
     },
-    expirationDate: {
+    expDate: {
       month: 3,
       year: 3,
     },
@@ -71,7 +71,7 @@ const CardListPage = () => {
               cardColor={card.cardColor}
               ownerName={card.ownerName}
               cardNumber={card.cardNumber}
-              expirationDate={card.expirationDate}
+              expDate={card.expDate}
               nickname={card.nickname}
             />
             <span className="nickname">{card?.nickname}</span>

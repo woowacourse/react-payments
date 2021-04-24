@@ -19,7 +19,7 @@ MediumSize.args = {
     third: 1234,
     fourth: 1234,
   },
-  expirationDate: {
+  expDate: {
     year: 25,
     month: 3,
   },
@@ -39,7 +39,7 @@ LargeSize.args = {
     third: 1234,
     fourth: 1234,
   },
-  expirationDate: {
+  expDate: {
     year: 25,
     month: 3,
   },

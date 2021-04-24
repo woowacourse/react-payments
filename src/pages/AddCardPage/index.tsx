@@ -1,33 +1,11 @@
-import { useState } from 'react';
-import AddCardForm from '../../components/AddCardForm';
-import AddCardTemplate from '../../components/AddCardTemplate';
-import CreditCard from '../../components/CreditCard';
+import AddCardForm from '../../components/AddCard/AddCardForm';
+import AddCardTemplate from '../../components/AddCard/AddCardTemplate';
 
 const title = '카드추가';
 
 const AddCardPage = () => {
-  const [cardName, setCardName] = useState('');
-  const [ownerName, setOwnerName] = useState('');
-  const [cardNumber, setCardNumber] = useState({
-    first: 0,
-    second: 0,
-    third: 0,
-    fourth: 0,
-  });
-  const [expirationDate, setExpirationDate] = useState({ year: 0, month: 0 });
-  const [cvc, setCvc] = useState(0);
-  const [cardColor, setCardColor] = useState('#D2D2D2');
-
   return (
     <AddCardTemplate title={title} hasPreviousPage>
-      <CreditCard
-        className="credit-card"
-        cardColor={cardColor}
-        expirationDate={expirationDate}
-        cardName={cardName}
-        ownerName={ownerName}
-        cardNumber={cardNumber}
-      />
       <AddCardForm />
     </AddCardTemplate>
   );

@@ -1,6 +1,20 @@
 import styled from 'styled-components';
+import { BAEMINT } from '../../../constants/palette';
 
 export const AddCardFormContainer = styled.div`
+  .credit-card {
+    margin: 3rem auto 2rem;
+  }
+
+  .password-dot::after {
+    content: '';
+    width: 0.375em;
+    height: 0.375em;
+    display: block;
+    border-radius: 50%;
+    background-color: ${BAEMINT};
+  }
+
   .question-mark {
     width: fit-content;
     height: fit-content;

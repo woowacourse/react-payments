@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import AddCardButton from '../AddCardButton';
+import AddCardButton from './AddCardButton';
 import { CardListContainer } from './styles';
 
 const CardList: FC = ({ children }) => {

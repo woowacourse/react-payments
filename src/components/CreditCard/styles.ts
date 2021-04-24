@@ -26,6 +26,7 @@ export const CreditCardContainer = styled.div<CreditCardContainerProps>`
   box-sizing: border-box;
   font-weight: 500;
   ${({ size }) => {
+    // TODO: 사이징 lg 안먹음
     console.log(size);
     return size === 'lg' ? lgSize : mdSize;
   }}
@@ -45,6 +46,7 @@ export const CreditCardContainer = styled.div<CreditCardContainerProps>`
 
   .card-number {
     display: flex;
+    height: 2em;
     justify-content: space-between;
     font-size: 1.25em;
     letter-spacing: 0.05em;
@@ -60,5 +62,10 @@ export const CreditCardContainer = styled.div<CreditCardContainerProps>`
   .info-wrapper {
     font-size: 1.125em;
     padding: 0 0.725em;
+
+    .owner-name {
+      overflow-x: hidden;
+      max-width: 10em;
+    }
   }
 `;
