@@ -1,17 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.css';
+import classnames from 'classnames/bind';
+import styles from './style.css';
 
-export const Form = ({ children, ...props }) => {
+const cx = classnames.bind(styles);
+
+export const Form = ({ className, children, ...props }) => {
+  const formClass = cx('Form', className);
+
   return (
-    <form className="Form" {...props}>
+    <form className={formClass} {...props}>
       {children}
     </form>
   );
 };
 
 Form.propTypes = {
+  className: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 
-Form.defaultProps = {};
+Form.defaultProps = {
+  className: '',
+};

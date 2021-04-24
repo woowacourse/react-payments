@@ -6,10 +6,11 @@ import {
   SecurityCodeInput,
   PasswordInput,
 } from './inputs';
+import './style.css';
 
 export const CardInfoForm = () => {
   return (
-    <Form>
+    <Form className="CardInfoForm">
       <CardNumberInput
         firstFourDigits={1111}
         secondFourDigits={1111}

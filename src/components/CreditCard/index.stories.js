@@ -8,7 +8,7 @@ export default {
   decorators: [
     (Story) => (
       <Card backgroundColor="#94DACD" boxShadow size="medium">
-        <Story />{' '}
+        <Story />
       </Card>
     ),
   ],
