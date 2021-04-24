@@ -1,5 +1,6 @@
 import { Button } from './Button';
 import { Card } from './Card';
+import { Circle } from './Circle';
 import { CreditCard } from './CreditCard';
 import { Container } from './Container';
 import { Form } from './Form';
@@ -8,4 +9,4 @@ import { Label } from './Label';
 import { Text } from './Text';
 import { Title } from './Title';
 
-export { Button, Card, CreditCard, Container, Form, Input, Label, Text, Title };
+export { Button, Card, Circle, CreditCard, Container, Form, Input, Label, Text, Title };
