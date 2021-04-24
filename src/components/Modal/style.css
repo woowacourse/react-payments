@@ -1,0 +1,34 @@
+.Modal {
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.25s ease;
+  z-index: 3;
+}
+
+.Modal--open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ModalInner {
+  transition: top 0.25s ease;
+  margin: auto;
+  overflow: auto;
+  background: #fff;
+  border-radius: 5px;
+}
+
+.ModalInner--bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+  padding-bottom: 0.875rem;
+}

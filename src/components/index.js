@@ -6,7 +6,8 @@ import { Container } from './Container';
 import { Form } from './Form';
 import { Input } from './Input';
 import { Label } from './Label';
+import { Modal } from './Modal';
 import { Text } from './Text';
 import { Title } from './Title';
 
-export { Button, Card, Circle, CreditCard, Container, Form, Input, Label, Text, Title };
+export { Button, Card, Circle, CreditCard, Container, Form, Input, Label, Modal, Text, Title };

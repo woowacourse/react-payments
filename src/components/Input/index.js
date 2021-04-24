@@ -6,7 +6,7 @@ import styles from './style.css';
 const cx = classnames.bind(styles);
 
 export const Input = ({ container, className, ...props }) => {
-  const inputClass = cx('Input', `${className}`);
+  const inputClass = cx('Input', className);
 
   if (container) {
     return (
