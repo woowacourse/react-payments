@@ -6,9 +6,17 @@ import {
   SecurityCodeInput,
   PasswordInput,
 } from './inputs';
+import { PAGE } from '../../../../constants';
 import './style.css';
 
-export const CardInfoForm = () => {
+export const CardInfoForm = (props) => {
+  const { setRoute } = props;
+
+  const handleCardInfoSubmit = (e) => {
+    e.preventDefault();
+    setRoute(PAGE.ADD_CARD_COMPELETE);
+  };
+
   return (
     <Form className="CardInfoForm">
       <CardNumberInput
@@ -21,7 +29,7 @@ export const CardInfoForm = () => {
       <UserNameInput value="SUN" />
       <SecurityCodeInput value="111" />
       <PasswordInput value="1111" />
-      <Button onClick={() => {}}>다음</Button>
+      <Button onClick={handleCardInfoSubmit}>다음</Button>
     </Form>
   );
 };

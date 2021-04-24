@@ -18,14 +18,16 @@ const CreditCardPreview = () => {
   );
 };
 
-export const AddCompletePage = () => {
+export const AddCompletePage = (props) => {
+  const { setRoute } = props;
+
   return (
     <div>
       <Text className="AddCompletePage__Text" fontSize="1.5rem">
         카드등록이 완료되었습니다.
       </Text>
       <CreditCardPreview />
-      <CardNicknameForm />
+      <CardNicknameForm setRoute={setRoute} />
     </div>
   );
 };

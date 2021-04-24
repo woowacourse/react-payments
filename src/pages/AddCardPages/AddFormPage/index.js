@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Card, CreditCard, Title } from '../../../components';
 import { CardInfoForm } from './CardInfoForm';
+import { CardCompanySelectModal } from './CardCompanySelectModal';
 import './style.css';
 
 const BackwardButton = () => {
@@ -31,15 +32,20 @@ const CreditCardPreview = () => {
   );
 };
 
-export const AddFormPage = () => {
+export const AddFormPage = (props) => {
+  const { setRoute } = props;
+
   return (
-    <div>
-      <div className="AddFormPage__Title">
-        <BackwardButton />
-        <Title>카드 추가</Title>
+    <>
+      <div className="AddFormPage">
+        <div className="AddFormPage__Title">
+          <BackwardButton />
+          <Title>카드 추가</Title>
+        </div>
+        <CreditCardPreview />
+        <CardInfoForm setRoute={setRoute} />
       </div>
-      <CreditCardPreview />
-      <CardInfoForm />
-    </div>
+      <CardCompanySelectModal />
+    </>
   );
 };

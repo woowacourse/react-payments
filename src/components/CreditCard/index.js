@@ -18,14 +18,14 @@ export const CreditCard = (props) => {
   );
 };
 
-Card.propTypes = {
+CreditCard.propTypes = {
   cardCompany: PropTypes.string,
   cardNumber: PropTypes.string,
   ownerName: PropTypes.string,
   expirationDate: PropTypes.string,
 };
 
-Card.defaultProps = {
+CreditCard.defaultProps = {
   cardCompany: '',
   cardNumber: '0000 0000 ···· ····',
   ownerName: '',

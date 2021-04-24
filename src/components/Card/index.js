@@ -6,7 +6,7 @@ import styles from './style.css';
 const cx = classNames.bind(styles);
 
 export const Card = ({ size, backgroundColor, boxShadow, children, ...props }) => {
-  const cardClass = cx('Card', `Card--${size}`, { 'Card--shadow': Boolean(boxShadow) });
+  const cardClass = cx('Card', { [`Card--${size}`]: size }, { 'Card--shadow': boxShadow });
 
   return (
     <div className={cardClass} style={{ backgroundColor }} {...props}>

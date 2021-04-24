@@ -1,7 +1,15 @@
 import { Button, Form, Input } from '../../../../components';
 import './style.css';
+import { PAGE } from '../../../../constants';
 
-export const CardNicknameForm = () => {
+export const CardNicknameForm = (props) => {
+  const { setRoute } = props;
+
+  const handleNicknameSubmit = (e) => {
+    e.preventDefault();
+    setRoute(PAGE.CARD_LIST);
+  };
+
   return (
     <Form className="CardNicknameForm">
       <Input
@@ -9,7 +17,7 @@ export const CardNicknameForm = () => {
         container="CardNicknameInput__Filler--transparent"
         value="엄카"
       />
-      <Button onClick={() => {}}>확인</Button>
+      <Button onClick={handleNicknameSubmit}>확인</Button>
     </Form>
   );
 };

@@ -1,3 +1,7 @@
 .CardInfoForm {
   margin-top: 1.5rem;
 }
+
+.CardInfoForm > .Label {
+  margin-top: 1rem;
+}

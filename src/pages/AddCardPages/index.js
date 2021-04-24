@@ -1,10 +1,18 @@
 import React from 'react';
-import { CardCompanySelectModal } from './AddFormPage/CardCompanySelectModal';
+import { AddCompletePage } from './AddCompletePage';
+import { AddFormPage } from './AddFormPage';
+import { PAGE } from '../../constants';
 
-export const AddCardPages = () => {
+export const AddCardPage = (props) => {
+  const { route, setRoute } = props;
+
   return (
     <>
-      <CardCompanySelectModal isOpen />
+      {route === PAGE.ADD_CARD_FORM ? (
+        <AddFormPage setRoute={setRoute} />
+      ) : (
+        <AddCompletePage setRoute={setRoute} />
+      )}
     </>
   );
 };
