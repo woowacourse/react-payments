@@ -5,12 +5,12 @@ import { Circle } from '../../commons/circle/Circle';
 
 const transparentInputStyles = {
   color: COLOR.MINT,
-  fontSize: '30px',
+  fontSize: '24px',
   textAlign: 'center',
 };
 
 const CardPasswordInput = () => (
-  <>
+  <div>
     <Styled.InputLabelContainer>카드 비밀번호</Styled.InputLabelContainer>
     <Styled.Container>
       <Styled.InputContainer>
@@ -26,7 +26,7 @@ const CardPasswordInput = () => (
         <Circle styles={{ backgroundColor: COLOR.MINT }} />
       </Styled.CircleContainer>
     </Styled.Container>
-  </>
+  </div>
 );
 
 export default CardPasswordInput;

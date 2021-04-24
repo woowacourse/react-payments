@@ -5,7 +5,7 @@ export { CARD_SIZE } from './Card';
 
 export const CreditCard = ({ size, backgroundColor, content }) => {
   return (
-    <Card size={size} backgroundColor={backgroundColor}>
+    <Card size={size} backgroundColor={backgroundColor} styles={{ margin: '0 auto' }}>
       <Styled.CardType size={size}>{content.cardType}</Styled.CardType>
       <Styled.Chip size={size} />
       <Styled.CardNumber size={size}>{content.cardNumber}</Styled.CardNumber>

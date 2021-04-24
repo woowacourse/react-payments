@@ -2,12 +2,14 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  padding: 22px 28px;
 }
 
 button {
   border: none;
   background-color: transparent;
   outline: none;
+  padding: 0px;
 }
 
 input[type='number']::-webkit-outer-spin-button,

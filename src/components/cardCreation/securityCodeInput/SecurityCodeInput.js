@@ -5,12 +5,12 @@ import Styled from './SecurityCodeInput.style';
 
 const transparentInputStyles = {
   color: COLOR.MINT,
+  fontSize: '24px',
   textAlign: 'center',
-  fontSize: '30px',
 };
 
 const SecurityCodeInput = () => (
-  <>
+  <div>
     <Styled.InputLabelContainer>보안 코드(CVC/CVV)</Styled.InputLabelContainer>
     <Styled.Container>
       <Styled.InputContainer>
@@ -18,7 +18,7 @@ const SecurityCodeInput = () => (
       </Styled.InputContainer>
       <QuestionDescription />
     </Styled.Container>
-  </>
+  </div>
 );
 
 export default SecurityCodeInput;
