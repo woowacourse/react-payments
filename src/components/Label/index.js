@@ -12,11 +12,11 @@ export const Label = ({ children, ...props }) => {
 };
 
 Label.propTypes = {
-  for: PropTypes.string,
+  htmlFor: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
 };
 
 Label.defaultProps = {
-  for: null,
+  htmlFor: null,
   children: '',
 };
