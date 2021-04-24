@@ -90,6 +90,10 @@ const Styled = {
   CardOwner: styled.div(({ size }) => ({
     position: 'absolute',
     fontWeight: 700,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    width: '50%',
     ...CARD_OWNER[size],
   })),
   CardExpiredDate: styled.div(({ size }) => ({
