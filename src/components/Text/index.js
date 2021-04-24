@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.css';
+import classNames from 'classnames/bind';
+import styles from './style.css';
+
+const cx = classNames.bind(styles);
 
 export const Text = ({
+  className,
   color,
   fontSize,
   textAlign,
@@ -12,9 +16,11 @@ export const Text = ({
   children,
   ...props
 }) => {
+  const textClass = cx('Text', className);
+
   return (
     <span
-      className="Text"
+      className={textClass}
       style={{ color, fontSize, textAlign, fontWeight, width, letterSpacing }}
       {...props}
     >
@@ -24,6 +30,7 @@ export const Text = ({
 };
 
 Text.propTypes = {
+  className: PropTypes.string,
   color: PropTypes.string,
   fontSize: PropTypes.string,
   textAlign: PropTypes.oneOf(['start', 'center', 'end']),
@@ -34,6 +41,7 @@ Text.propTypes = {
 };
 
 Text.defaultProps = {
+  className: '',
   color: '#575757',
   fontSize: '1rem',
   fontWeight: '400',

@@ -95,6 +95,8 @@
 /* 카드별명 */
 
 .CardNicknameInput__Filler--transparent {
+  margin: 0 auto;
+  width: 60%;
   padding: 0.53rem;
   border-bottom: 1.5px solid #737373;
 }
