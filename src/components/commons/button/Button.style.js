@@ -5,6 +5,7 @@ const Styled = {
     color: '#000',
     fontWeight: '700',
     fontSize: '14px',
+    cursor: 'pointer',
     ...styles,
   })),
 };

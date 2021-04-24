@@ -5,9 +5,9 @@ export const CARD_SIZE = {
   MD: 'MD',
 };
 
-export const Card = ({ size, children, ...props }) => {
+export const Card = ({ size, children, styles, ...props }) => {
   return (
-    <Styled.Card size={size} styles={props}>
+    <Styled.Card size={size} {...props} styles={styles}>
       {children}
     </Styled.Card>
   );

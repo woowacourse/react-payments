@@ -1,9 +1,11 @@
 import Styled from './BottomModal.style';
 
-export const BottomModal = ({ children, ...props }) => {
+export const BottomModal = ({ children, styles, ...props }) => {
   return (
     <Styled.Dimmer>
-      <Styled.BottomModal styles={props}>{children}</Styled.BottomModal>
+      <Styled.BottomModal {...props} styles={styles}>
+        {children}
+      </Styled.BottomModal>
     </Styled.Dimmer>
   );
 };

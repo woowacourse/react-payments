@@ -9,7 +9,7 @@ const CardOwnerInput = () => (
       <div>3 / 30</div>
     </Styled.InputLabelContainer>
     <Styled.InputContainer>
-      <TransparentInput color={COLOR.MINT} placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
+      <TransparentInput styles={{ color: COLOR.MINT }} placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
     </Styled.InputContainer>
   </>
 );
