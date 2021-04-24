@@ -1,4 +1,4 @@
-import { Input, Label, Text } from '../../../../components';
+import { Container, Input, Label, Text } from '../../../../components';
 
 export const CardNumberInput = ({
   firstFourDigits,
@@ -7,7 +7,7 @@ export const CardNumberInput = ({
   fourthFourDigits,
 }) => {
   const dash = (
-    <Text fontSize="0.75rem" textAlign="start" width="1rem">
+    <Text color="#04C09E" fontSize="0.75rem" textAlign="start" width="1rem">
       -
     </Text>
   );
@@ -15,87 +15,86 @@ export const CardNumberInput = ({
   return (
     <>
       <Label>카드 번호</Label>
-      {[firstFourDigits, secondFourDigits]
-        .map((fourDigit, index) => (
-          <Input
-            key={index}
-            className="CardNumberInput__Field"
-            container="CardInfoForm__Input__Filler--filled CardNumberInput__Filler"
-            type="number"
-            value={fourDigit}
-          />
-        ))
-        .concat(
-          [thirdFourDigits, fourthFourDigits].map((fourDigit, index) => (
-            <Input
-              key={index}
-              className="CardNumberInput__Field"
-              container="CardInfoForm__Input__Filler--transparent CardNumberInput__Filler"
-              type="password"
-              value={fourDigit}
-            />
-          )),
-        )
-        .join(dash)}
+      <Container className="CardInfoForm__Input__Filler--filled CardNumberInput__Filler">
+        <Input className="CardNumberInput__Field" type="number" value={firstFourDigits} />
+        {dash}
+        <Input className="CardNumberInput__Field" type="number" value={secondFourDigits} />
+        {dash}
+        <Input className="CardNumberInput__Field" type="password" value={thirdFourDigits} />
+        {dash}
+        <Input className="CardNumberInput__Field" type="password" value={fourthFourDigits} />
+      </Container>
     </>
   );
 };
 
 export const ExpirationDateInput = ({ month, year }) => {
   const slash = (
-    <Text fontSize="0.75rem" textAlign="start" width="1rem">
+    <Text color="#737373" fontSize="0.75rem" textAlign="start" width="1rem">
       /
     </Text>
   );
 
-  return [month, year]
-    .map((value, index) => (
-      <Input
-        key={index}
-        className="ExpirationDateInput__Field"
-        container="CardInfoForm__Input__Filler--filled ExpirationDateInput__Filler"
-        placeholder="MM"
-        type="number"
-        value={value}
-      />
-    ))
-    .join(slash);
+  return (
+    <>
+      <Label>만료일</Label>
+      <Container className="CardInfoForm__Input__Filler--filled ExpirationDateInput__Filler">
+        <Input
+          className="ExpirationDateInput__Field"
+          placeholder="MM"
+          type="number"
+          value={month}
+        />
+        {slash}
+        <Input className="ExpirationDateInput__Field" placeholder="YY" type="number" value={year} />
+      </Container>
+    </>
+  );
 };
 
 export const UserNameInput = ({ value }) => {
   return (
-    <Input
-      className="CardOwnerInput__Field"
-      container="CardInfoForm__Input__Filler--filled CardOwnerInput__Filler"
-      placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-      value={value}
-    />
+    <>
+      <Label>카드 소유자 이름(선택)</Label>
+      <Input
+        className="CardOwnerInput__Field"
+        container="CardInfoForm__Input__Filler--filled CardOwnerInput__Filler"
+        placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+        value={value}
+      />
+    </>
   );
 };
 
 export const SecurityCodeInput = ({ value }) => {
   return (
-    <Input
-      className="SecurityCodeInput__Field"
-      container="CardInfoForm__Input__Filler--filled SecurityCodeInput__Filler"
-      type="password"
-      value={value}
-    />
+    <>
+      <Label>보안 코드(CVC/CVV)</Label>
+      <Input
+        className="SecurityCodeInput__Field"
+        container="CardInfoForm__Input__Filler--filled SecurityCodeInput__Filler"
+        type="password"
+        value={value}
+      />
+    </>
   );
 };
 
 export const PasswordInput = ({ value }) => {
   return (
-    <div className="CardPasswordInput">
-      {['filled', 'filled', 'transparent', 'transparent'].map((style, index) => (
-        <Input
-          key={index}
-          container={`CardInfoForm__Input__Filler--${style} CardPasswordInput__Filler`}
-          className="CardPasswordInput__Field"
-          type="password"
-          value={value}
-        />
-      ))}
-    </div>
+    <>
+      <Label>카드 비밀번호</Label>
+      <div className="CardPasswordInput">
+        {['filled', 'filled', 'transparent', 'transparent'].map((style, index) => (
+          <Input
+            key={index}
+            container={`CardInfoForm__Input__Filler--${style} CardPasswordInput__Filler`}
+            className="CardPasswordInput__Field"
+            type="password"
+            value={value[index]}
+          />
+        ))}
+      </div>
+    </>
   );
 };
