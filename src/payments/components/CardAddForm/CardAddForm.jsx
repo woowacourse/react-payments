@@ -2,6 +2,7 @@ import React from "react";
 import Card from "../Card/Card";
 import Input from "../Input/Input";
 import InputTitle from "../InputTitle/InputTitle";
+import Button from "../Button/Button";
 
 const CardAddForm = props => (
   <form className="w-full h-full flex flex-col justify-around items-start">
@@ -98,6 +99,9 @@ const CardAddForm = props => (
           </svg>
         </div>
       </div>
+    </div>
+    <div className="flex justify-end items-center w-full h-10">
+      <Button name="다음" />
     </div>
   </form>
 );
