@@ -1,6 +1,7 @@
 .CardCompanyList {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  padding: 0.875rem 3.75rem;
 }
 
 .CardCompanyItem {
