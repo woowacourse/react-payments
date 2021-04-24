@@ -4,10 +4,9 @@ import classNames from "classnames";
 const CardShape = props => (
   <div
     className={classNames(
-      "rounded-md shadow-md p-3 relative cursor-pointer",
+      "rounded-md shadow-md p-3 relative cursor-pointer transform w-52 h-32",
       props.backgroundColor,
-      props.width,
-      props.height
+      props.scale
     )}
   >
     {!props.isRegistered && (

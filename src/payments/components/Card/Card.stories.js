@@ -14,21 +14,23 @@ export const RegisteredCard = CardTemplate.bind({});
 RegisteredCard.args = {
   backgroundColor: "bg-custom-green",
   isRegistered: true,
-  width: "w-52",
-  height: "h-32",
   bank: "국민",
   numbers: ["1234", "4567", "xxxx", "xxxx"],
   ownerName: "KYLE",
   expirationDate: "04/21",
 };
 
+export const LargeRegisteredCard = CardTemplate.bind({});
+
+LargeRegisteredCard.args = {
+  ...RegisteredCard.args,
+  scale: "scale-150",
+};
+
 export const UnregisteredCard = CardTemplate.bind({});
 
 UnregisteredCard.args = {
-  backgroundColor: "bg-custom-gray-200",
   isRegistered: false,
-  width: "w-52",
-  height: "h-32",
   ownerName: "NAME",
   numbers: [],
   expirationDate: "MM/YY",
@@ -37,8 +39,5 @@ UnregisteredCard.args = {
 export const CardShapeTemplate = args => <CardShape {...args} />;
 
 CardShapeTemplate.args = {
-  backgroundColor: "bg-custom-gray-200",
   isRegistered: false,
-  width: "w-52",
-  height: "h-32",
 };

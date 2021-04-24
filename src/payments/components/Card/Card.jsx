@@ -23,15 +23,14 @@ const CardInfo = props => (
 const Card = props => {
   const {
     backgroundColor = "bg-custom-gray-200",
-    width = "w-52",
-    height = "h-32",
+    scale,
     isRegistered = false,
     bank,
     numbers,
     ownerName = "NAME",
     expirationDate = "MM/YY",
   } = props;
-  const cardShapeProps = { backgroundColor, width, height, isRegistered };
+  const cardShapeProps = { backgroundColor, scale, isRegistered };
   const cardInfoProps = { bank, numbers, ownerName, expirationDate };
 
   return (
