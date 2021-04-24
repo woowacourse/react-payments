@@ -1,5 +1,10 @@
 import React from "react";
+import Payments from "./payments/Payments";
 
-const App = () => <h1>Hello :)</h1>;
+const App = () => (
+  <div className="max-w-sm h-full p-5 mx-auto flex flex-col justify-between">
+    <Payments />
+  </div>
+);
 
 export default App;

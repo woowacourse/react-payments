@@ -13,23 +13,15 @@ const CardInfo = props => (
         ))}
       </div>
       <div className="text-sm w-11/12 flex justify-between">
-        <span>{props.ownerName}</span>
-        <span>{props.expirationDate}</span>
+        <span>{props.ownerName || "NAME"}</span>
+        <span>{props.expirationDate || "MM/YY"}</span>
       </div>
     </div>
   </>
 );
 
 const Card = props => {
-  const {
-    backgroundColor = "bg-custom-gray-200",
-    scale,
-    isRegistered = false,
-    bank,
-    numbers,
-    ownerName = "NAME",
-    expirationDate = "MM/YY",
-  } = props;
+  const { backgroundColor, scale, isRegistered, bank, numbers, ownerName, expirationDate } = props;
   const cardShapeProps = { backgroundColor, scale, isRegistered };
   const cardInfoProps = { bank, numbers, ownerName, expirationDate };
 
