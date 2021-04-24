@@ -1,34 +1,42 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import AddCardInputContainer from './AddCardInputContainer';
 import CreditCard from '../../CreditCard';
 import Container from '../../common/Container';
 import Input from '../../common/Input';
 import Button from '../../common/Button';
+import CARD_DATA from '../../../constants/cardData';
 import { GRAY } from '../../../constants/palette';
 import { AddCardFormContainer } from './styles';
-import { getNowYear } from '../../../utils/date';
+
+interface Index {
+  [key: string]: (param: number[]) => void;
+}
 
 const AddCardForm = () => {
   const [cardName, setCardName] = useState('');
   const [ownerName, setOwnerName] = useState('');
-  const [cardNumber, setCardNumber] = useState({
-    first: [],
-    second: [],
-    third: [],
-    fourth: [],
-  });
+  const [firstCardNumber, setFirstCardNumber] = useState<number[]>([]);
+  const [secondCardNumber, setSecondCardNumber] = useState<number[]>([]);
+  const [thirdCardNumber, setThirdCardNumber] = useState<number[]>([]);
+  const [fourthCardNumber, setFourthCardNumber] = useState<number[]>([]);
+
   const [expDate, setExpDate] = useState({ year: '', month: '' });
   const [CVC, setCVC] = useState('');
   const [password, setPassword] = useState('');
-  const [cardColor, setCardColor] = useState('#D2D2D2');
+  const [cardColor, setCardColor] = useState('');
+
+  const setCardNumberMap: Index = {
+    first: setFirstCardNumber,
+    second: setSecondCardNumber,
+    third: setThirdCardNumber,
+    fourth: setFourthCardNumber,
+  };
 
   const onChangeCardNumber = ({ target }: ChangeEvent<HTMLInputElement>, key: string) => {
     if (target.value.length > 4) return;
 
     const inputNumber = target.value.split('').map(chr => Number(chr));
-    const nextCardNumber = { ...cardNumber, [key]: inputNumber };
-
-    setCardNumber(nextCardNumber);
+    setCardNumberMap[key](inputNumber);
   };
 
   const onChangeExpDate = ({ target }: ChangeEvent<HTMLInputElement>, key: string) => {
@@ -48,7 +56,7 @@ const AddCardForm = () => {
   };
 
   const onChangeCVC = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    if (target.value.length > 3) return;
+    if (target.value.length > 3 || isNaN(Number(target.value))) return;
 
     setCVC(target.value);
   };
@@ -62,6 +70,20 @@ const AddCardForm = () => {
     setPassword(nextPassword.join(''));
   };
 
+  useEffect(() => {
+    (() => {
+      if (firstCardNumber.length + secondCardNumber.length === 8) {
+        const { CARD_NAME, COLOR } = CARD_DATA[secondCardNumber[3]];
+
+        setCardName(CARD_NAME);
+        setCardColor(COLOR);
+      } else {
+        setCardName('');
+        setCardColor('');
+      }
+    })();
+  }, [firstCardNumber, secondCardNumber]);
+
   return (
     <AddCardFormContainer>
       <CreditCard
@@ -70,7 +92,12 @@ const AddCardForm = () => {
         expDate={expDate}
         cardName={cardName}
         ownerName={ownerName}
-        cardNumber={cardNumber}
+        cardNumber={{
+          first: firstCardNumber,
+          second: secondCardNumber,
+          third: thirdCardNumber,
+          fourth: fourthCardNumber,
+        }}
       />
       <form>
         <AddCardInputContainer label={'카드번호'}>
@@ -81,7 +108,7 @@ const AddCardForm = () => {
               min="1111"
               max="9999"
               width="16%"
-              value={cardNumber.first.join('')}
+              value={firstCardNumber.join('')}
               onChange={event => onChangeCardNumber(event, 'first')}
             />
             -
@@ -91,7 +118,7 @@ const AddCardForm = () => {
               min="1111"
               max="9999"
               width="16%"
-              value={cardNumber.second.join('')}
+              value={secondCardNumber.join('')}
               onChange={event => onChangeCardNumber(event, 'second')}
             />
             -
@@ -100,7 +127,7 @@ const AddCardForm = () => {
               textCenter
               maxLength={4}
               width="16%"
-              value={cardNumber.third.join('')}
+              value={thirdCardNumber.join('')}
               onChange={event => onChangeCardNumber(event, 'third')}
             />
             -
@@ -109,7 +136,7 @@ const AddCardForm = () => {
               textCenter
               maxLength={4}
               width="16%"
-              value={cardNumber.fourth.join('')}
+              value={fourthCardNumber.join('')}
               onChange={event => onChangeCardNumber(event, 'fourth')}
             />
           </Container>
@@ -152,7 +179,7 @@ const AddCardForm = () => {
         </AddCardInputContainer>
         <AddCardInputContainer label={'보안 코드(CVC/CVV)'}>
           <Container flex justifyContent="center" backgroundColor={GRAY} width="25%">
-            <Input type="number" max="999" textCenter value={CVC} onChange={onChangeCVC} />
+            <Input type="password" max="999" textCenter value={CVC} onChange={onChangeCVC} />
           </Container>
           <Container className="question-mark">
             <img src="/buttons/question-mark-btn.svg" alt="cvc/cvv 도움말" />

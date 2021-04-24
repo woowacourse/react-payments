@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { GRAY } from '../../constants/palette';
 
 interface CreditCardContainerProps {
   cardColor: string;
@@ -20,7 +21,7 @@ const lgSize = css`
 `;
 
 export const CreditCardContainer = styled.div<CreditCardContainerProps>`
-  background: ${({ cardColor }) => cardColor};
+  background: ${({ cardColor }) => cardColor || GRAY};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   padding: 1em;
   box-sizing: border-box;
