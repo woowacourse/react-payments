@@ -26,4 +26,10 @@
       #04c09e 100%
     );
   }
+
+  .left-arrow {
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
 }
