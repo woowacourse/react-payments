@@ -1,5 +1,5 @@
 import Styled from './TransparentInput.style';
 
-export const TransparentInput = ({ styles, ...props }) => {
-  return <Styled.TransparentInput {...props} styles={styles} />;
+export const TransparentInput = ({ styles, innerRef, ...props }) => {
+  return <Styled.TransparentInput ref={innerRef} {...props} styles={styles} />;
 };

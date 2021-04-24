@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button } from '../../components/commons/button/Button';
 import { Header } from '../../components/commons/header/Header';
 import { CreditCard } from '../../components/commons/card/CreditCard';
@@ -12,6 +13,23 @@ import { COLOR } from '../../constants/color';
 import { PAGE } from '../../constants/page';
 
 const CardCreationPage = ({ setCurrentPage }) => {
+  const [cardNumber, setCardNumber] = useState({
+    0: '',
+    1: '',
+    2: '',
+    3: '',
+  });
+  const [cardExpiredDate, setCardExpiredDate] = useState({
+    month: '',
+    year: '',
+  });
+  const [cardOwner, setCardOwner] = useState('');
+  const [securityCode, setSecurityCode] = useState('');
+  const [cardPassword, setCardPassword] = useState({
+    0: '',
+    1: '',
+  });
+
   return (
     <>
       <Header>
@@ -21,13 +39,20 @@ const CardCreationPage = ({ setCurrentPage }) => {
         <span>카드 추가</span>
       </Header>
       <div>
-        <CreditCard />
+        <CreditCard
+          content={{
+            cardType: '로이드 카드',
+            cardNumber: Object.values(cardNumber).join(' '),
+            cardOwner,
+            cardExpiredDate,
+          }}
+        />
         <Styled.Form>
-          <CardNumberInput />
-          <ExpiredDateInput />
-          <CardOwnerInput />
-          <SecurityCodeInput />
-          <CardPasswordInput />
+          <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
+          <ExpiredDateInput cardExpiredDate={cardExpiredDate} setCardExpiredDate={setCardExpiredDate} />
+          <CardOwnerInput cardOwner={cardOwner} setCardOwner={setCardOwner} />
+          <SecurityCodeInput securityCode={securityCode} setSecurityCode={setSecurityCode} />
+          <CardPasswordInput cardPassword={cardPassword} setCardPassword={setCardPassword} />
         </Styled.Form>
       </div>
       <Styled.ButtonContainer>

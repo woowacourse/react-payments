@@ -10,7 +10,9 @@ export const CreditCard = ({ size, backgroundColor, content }) => {
       <Styled.Chip size={size} />
       <Styled.CardNumber size={size}>{content.cardNumber}</Styled.CardNumber>
       <Styled.CardOwner size={size}>{content.cardOwner || 'NAME'}</Styled.CardOwner>
-      <Styled.CardExpiredDate size={size}>{content.cardExpiredDate || 'MM / YY'}</Styled.CardExpiredDate>
+      <Styled.CardExpiredDate size={size}>
+        {`${content.cardExpiredDate.month || 'MM'} / ${content.cardExpiredDate.year || 'YY'}`}
+      </Styled.CardExpiredDate>
     </Card>
   );
 };
