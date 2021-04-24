@@ -2,7 +2,7 @@ import React from 'react';
 import { AddCompletePage } from '.';
 
 export default {
-  title: 'Pages/AddCompletePage',
+  title: 'Pages/AddCardPages/AddCompletePage',
   component: AddCompletePage,
   decorators: [
     (Story) => (
@@ -15,4 +15,4 @@ export default {
 
 const Template = (args) => <AddCompletePage {...args} />;
 
-export const Default = Template.bind({});
+export const _AddCompletePage = Template.bind({});

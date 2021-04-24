@@ -1,0 +1,10 @@
+.CardCompanyList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.CardCompanyItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

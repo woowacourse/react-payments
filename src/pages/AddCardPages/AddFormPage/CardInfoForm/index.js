@@ -1,18 +1,13 @@
 import { Form } from '../../../../components';
-import {
-  CardNumberInputContainer,
-  ExpirationDateInputContainer,
-  UserNameInputContainer,
-  PasswordInputContainer,
-} from './inputContainers';
+import { CardNumberInput, ExpirationDateInput, UserNameInput, PasswordInput } from './inputs';
 
-export const CardInfoForm2 = () => {
+export const CardInfoForm = () => {
   return (
     <Form>
-      <CardNumberInputContainer />
-      <ExpirationDateInputContainer />
-      <UserNameInputContainer />
-      <PasswordInputContainer />
+      <CardNumberInput />
+      <ExpirationDateInput />
+      <UserNameInput />
+      <PasswordInput />
     </Form>
   );
 };

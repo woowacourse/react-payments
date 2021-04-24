@@ -2,7 +2,7 @@ import React from 'react';
 import { AddFormPage } from '.';
 
 export default {
-  title: 'Pages/AddFormPage',
+  title: 'Pages/AddCardPages/AddFormPage',
   component: AddFormPage,
   decorators: [
     (Story) => (
@@ -15,4 +15,4 @@ export default {
 
 const Template = (args) => <AddFormPage {...args} />;
 
-export const Default = Template.bind({});
+export const _AddFormPage = Template.bind({});
