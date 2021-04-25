@@ -5,6 +5,7 @@ const Styled = {
     padding: 0 28px;
   `,
   Row: styled.div`
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: ${(props) => (props.right ? 'flex-end' : 'flex-start')};
