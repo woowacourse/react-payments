@@ -13,24 +13,25 @@ const RegisterInputWrapper = (props) => {
   const helpMark = <Style.HelpMark src={helpSvg} alt="help" />;
 
   const isCardPassword = props.type === INPUT_TYPE.PASSWORD.type;
-  const passwordMark = Array(2).fill(
-    <Style.PasswordMark>
+  const passwordMark = Array.from({ length: 2 }).map((_, idx) => (
+    <Style.PasswordMark key={idx}>
       <img src={EllipseSvg} alt="password-mark" />
     </Style.PasswordMark>
-  );
+  ));
 
   return (
     <Style.Root>
-      <Style.InputHeader>
+      {/* TODO: cardPassword일 때 inputHeader width 조정하기 */}
+      <Style.InputHeader width={isCardPassword ? '100%' : props.width}>
         <Style.Label htmlFor={props.type}>{props.label}</Style.Label>
         {isOwnerName && wordCount}
       </Style.InputHeader>
       <Style.FlexContainer>
-        {Array(props.inputCount).fill(
-          <Style.InputWrapper width={props.width} isMultiple={props.type === INPUT_TYPE.PASSWORD.type}>
+        {Array.from({ length: props.inputCount }).map((_, idx) => (
+          <Style.InputWrapper width={props.width} key={idx} isMultiple={props.type === INPUT_TYPE.PASSWORD.type}>
             {props.children}
           </Style.InputWrapper>
-        )}
+        ))}
         {isSecureCode && helpMark}
         {isCardPassword && passwordMark}
       </Style.FlexContainer>
