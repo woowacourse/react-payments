@@ -10,9 +10,15 @@ const Template = (args) => <Card {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  name: 'NAME',
-  bank: '로이드카드',
-  cardNumbers: ['1234123412341234'],
+  cardNumbers: {
+    0: '1234',
+    1: '1234',
+    2: '1234',
+    3: '1234',
+  },
+  cardCompany: {
+    name: '로이드카드',
+  },
   expiration: '4/30',
 };
 
