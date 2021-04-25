@@ -2,7 +2,6 @@ import styled from 'styled-components/macro';
 import PALETTE from '../../../styles/palette';
 
 const Root = styled.div`
-  width: 375px; // TODO: remove
   display: flex;
   flex-direction: column;
   &: not(: last-child) {
@@ -13,6 +12,7 @@ const Root = styled.div`
 const InputHeader = styled.div`
   display: flex;
   position: relative;
+  width: ${({ width }) => width};
 `;
 
 const Label = styled.label`
