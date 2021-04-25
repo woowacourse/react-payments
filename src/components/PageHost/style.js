@@ -9,14 +9,19 @@ const Root = styled.main`
 `;
 
 const NavigationBar = styled.nav`
+  display: flex;
+  align-itmes: center;
   position: sticky;
   top: 0;
   width: 100%;
   padding: 22px 24px;
+  font-size: 16px;
 `;
 
-const BackButton = styled.img`
-  postion: absolute;
+const NavigationTitle = styled.span`
+  margin-left: 17px;
 `;
 
-export { Root, NavigationBar, BackButton };
+const BackButton = styled.img``;
+
+export { Root, NavigationBar, NavigationTitle, BackButton };

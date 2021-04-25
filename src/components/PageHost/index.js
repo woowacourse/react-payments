@@ -1,11 +1,13 @@
 import React from 'react';
+import backButtonSvg from '../../assets/backbutton.svg';
 import * as Style from './style';
 
 const PageHost = (props) => {
   return (
     <Style.Root>
       <Style.NavigationBar>
-        <span>{props.navigationTitle}</span>
+        {props.hasBackButton && <img src={backButtonSvg} alt="back-button" />}
+        <Style.NavigationTitle>{props.navigationTitle}</Style.NavigationTitle>
       </Style.NavigationBar>
       <div>{props.children}</div>
     </Style.Root>
