@@ -8,7 +8,7 @@
   color: #525252;
 }
 
-.basic-input__label p {
+.basic-input__label div {
   margin: 0 0 8px;
   width: 100%;
   display: flex;

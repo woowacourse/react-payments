@@ -17,31 +17,35 @@ export default function Input({
   inputMode,
   innerRef,
   ariaLabelledby,
+  children,
 }) {
   return (
-    <label className="basic-input__label">
+    <div className="basic-input__label">
       {(label || letterCounter) && (
-        <p>
-          {label && <span className="label-text">{label}</span>}
+        <div>
+          {label && <label className="label-text">{label}</label>}
           {letterCounter && (
             <span className="letter-counter">{`${letterCounter.current}/${letterCounter.max}`}</span>
           )}
-        </p>
+        </div>
       )}
-      <input
-        className={['basic-input__input', `text-${textAlign}`].join(' ')}
-        value={value}
-        type={type}
-        placeholder={placeholder}
-        required={required}
-        maxLength={maxLength}
-        style={{ width, color: fontColor }}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        inputMode={inputMode}
-        ref={innerRef}
-        aria-labelledby={ariaLabelledby}
-      />
-    </label>
+      <div className={['d-flex', 'items-center'].join(' ')}>
+        <input
+          className={['basic-input__input', `text-${textAlign}`].join(' ')}
+          value={value}
+          type={type}
+          placeholder={placeholder}
+          required={required}
+          maxLength={maxLength}
+          style={{ width, color: fontColor }}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          inputMode={inputMode}
+          ref={innerRef}
+          aria-labelledby={ariaLabelledby}
+        />
+        {children}
+      </div>
+    </div>
   );
 }

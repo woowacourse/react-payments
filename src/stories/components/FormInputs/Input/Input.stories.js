@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from '.';
+import { Icon } from '../../';
 
 export default {
   title: 'Form Inputs/Input',
@@ -23,4 +24,21 @@ Default.args = {
     current: 0,
     max: 30,
   },
+  children: (
+    <button
+      type="button"
+      style={{
+        display: 'inherit',
+        background: 'none',
+        outline: '0',
+        border: '0',
+        cursor: 'pointer',
+        margin: '0 0 0 12px',
+        padding: '0',
+        boxSizing: 'content-box',
+      }}
+    >
+      <Icon.QuestionMark size="27px" />
+    </button>
+  ),
 };
