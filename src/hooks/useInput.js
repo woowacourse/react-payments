@@ -1,10 +1,19 @@
 import { useState } from 'react';
 
-export default (defaultValue) => {
+export default (
+  defaultValue,
+  options = {
+    upperCase: false,
+  }
+) => {
   const [value, setValue] = useState(defaultValue);
 
   const onChange = (event) => {
-    setValue(event.target.value);
+    let { value: newValue } = event.target;
+    if (options.upperCase) {
+      newValue = newValue.toUpperCase();
+    }
+    setValue(newValue);
   };
 
   return { value, onChange };

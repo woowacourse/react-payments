@@ -17,8 +17,9 @@ const CardAddForm = () => {
   const history = useHistory();
 
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [ownerName, setOwnerName] = useState('');
+  const [passwordDigits, setPasswordDigits] = useState(['', '']);
 
+  const ownerName = useInput('', { upperCase: true });
   const expiryDate = useInput('');
   const CVC = useInput('');
 
@@ -37,8 +38,15 @@ const CardAddForm = () => {
     });
   };
 
-  const handleChangeOwnerName = (event) => {
-    setOwnerName(event.target.value.toUpperCase());
+  const handleChangePasswordDigits = (event) => {
+    const [, index] = event.target.name.split('-');
+
+    setPasswordDigits((state) => {
+      const newPasswordDigits = [...state];
+      newPasswordDigits[index] = event.target.value;
+
+      return newPasswordDigits;
+    });
   };
 
   const cardNumbersAsNumber = useMemo(() => cardNumbers.join(''), [cardNumbers]);
@@ -68,7 +76,7 @@ const CardAddForm = () => {
         <Card
           bgColor="#d2d2d2"
           cardNumbers={cardNumbersAsNumber}
-          ownerName={ownerName}
+          ownerName={ownerName.value}
           expiryDate={formattedExpiryDate}
         />
         <form onSubmit={handleSubmit}>
@@ -99,8 +107,8 @@ const CardAddForm = () => {
           </Styled.Row>
           <Styled.Row>
             <InputBox
-              value={ownerName}
-              onChange={handleChangeOwnerName}
+              value={ownerName.value}
+              onChange={ownerName.onChange}
               labelText="카드 소유자 이름 (선택)"
               maxLength={30}
               hasLengthCounter
@@ -128,10 +136,11 @@ const CardAddForm = () => {
           <Styled.Row>
             <PinNumberInput
               labelText="카드 비밀번호"
-              values={['', '']}
+              values={passwordDigits}
+              onChange={handleChangePasswordDigits}
               dotCount={2}
-              errorMessage=""
-              isError={false}
+              isError={!isNumeric(passwordDigits.join(''))}
+              errorMessage={!isNumeric(passwordDigits.join('')) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''}
               inputmode="numeric"
               required
             />

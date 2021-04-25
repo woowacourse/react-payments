@@ -20,15 +20,14 @@ const PinNumberInput = ({
   const handleChange = (event) => {
     const [, index] = event.target.name.split('-');
 
+    if (onChange) onChange(event);
+
     if (!event.target.value) {
       inputRef[Number(index) - 1]?.focus();
       return;
     }
 
-    inputRef[Number(index)].value = event.target.value;
     inputRef[Number(index) + 1]?.focus();
-
-    if (onChange) onChange(event);
   };
 
   return (
