@@ -15,7 +15,7 @@ export interface Card {
   cardName: string;
   cardColor: string;
   ownerName: string;
-  password: string;
+  password: [string, string];
   cardNumber: CardNumber;
   expDate: ExpDate;
   cvc: string;

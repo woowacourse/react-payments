@@ -26,7 +26,7 @@ const AddCardForm = () => {
   const [fourthCardNumber, setFourthCardNumber] = useState<number[]>([]);
   const [expDate, setExpDate] = useState({ year: '', month: '' });
   const [CVC, setCVC] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState(['', '']);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const setCardNumberMap: Index = {
@@ -36,26 +36,27 @@ const AddCardForm = () => {
     fourth: setFourthCardNumber,
   };
 
-  const onChangeCardNumber = ({ target }: ChangeEvent<HTMLInputElement>, key: string) => {
-    if (target.value.length > 4) return;
+  const onChangeCardNumber = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>, index: string) => {
+    const inputKey = (nativeEvent as InputEvent).data;
+
+    if (isNaN(Number(inputKey)) || target.value.length > 4) return;
 
     const inputNumber = target.value.split('').map(chr => Number(chr));
-    setCardNumberMap[key](inputNumber);
+    setCardNumberMap[index](inputNumber);
   };
 
-  const onChangeExpDate = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>, key: string) => {
+  const onChangeExpDate = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>, index: string) => {
     const inputKey = (nativeEvent as InputEvent).data;
 
     if (
-      inputKey === '.' ||
-      inputKey === '-' ||
+      isNaN(Number(inputKey)) ||
       target.value.length > 2 ||
-      (key === 'month' && target.valueAsNumber > 12) ||
-      target.valueAsNumber < 0
+      Number(target.value) < 0 ||
+      (index === 'month' && Number(target.value) > 12)
     )
       return;
 
-    const nextExpDate = { ...expDate, [key]: target.value };
+    const nextExpDate = { ...expDate, [index]: target.value };
 
     setExpDate(nextExpDate);
   };
@@ -68,19 +69,22 @@ const AddCardForm = () => {
     setOwnerName(target.value.toUpperCase());
   };
 
-  const onChangeCVC = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    if (target.value.length > 3) return;
+  const onChangeCVC = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>) => {
+    const inputKey = (nativeEvent as InputEvent).data;
+
+    if (isNaN(Number(inputKey)) || target.value.length > 3) return;
 
     setCVC(target.value);
   };
 
-  const onChangePassword = ({ target }: ChangeEvent<HTMLInputElement>, index: number) => {
-    if (target.value.length > 1) return;
+  const onChangePassword = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>, index: number) => {
+    const inputKey = (nativeEvent as InputEvent).data;
 
-    const nextPassword = password.split('');
+    if (isNaN(Number(inputKey)) || target.value.length > 1) return;
 
+    const nextPassword = [...password];
     nextPassword[index] = target.value;
-    setPassword(nextPassword.join(''));
+    setPassword(nextPassword);
   };
 
   const onClickCardBrandButton = (cardBrand: CardBrand) => {
