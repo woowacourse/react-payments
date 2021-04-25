@@ -19,6 +19,7 @@ export default function AddCardForm({
   password,
   setPassword,
   onSetModalContents,
+  setPage,
 }) {
   const [expirationDateErrorMessage, setExpirationDateErrorMessage] = useState('');
   const [userNameErrorMessage, setUserNameErrorMessage] = useState('');
@@ -45,7 +46,16 @@ export default function AddCardForm({
   return (
     <div className="add-card-form__container">
       <Header title="카드추가"></Header>
-      <form className="add-card-form">
+      <form
+        className="add-card-form"
+        onSubmit={(event) => {
+          event.preventDefault();
+
+          if (!isFormCompleted) return;
+
+          setPage('addCardComplete');
+        }}
+      >
         <div className="card-preview">
           <Card
             userName={userName}
@@ -196,12 +206,7 @@ export default function AddCardForm({
 
         <PasswordInput password={password} onSetPassword={onSetPassword}></PasswordInput>
         {isFormCompleted && (
-          <div
-            className="bottom-right-button"
-            onClick={(event) => {
-              event.preventDefault();
-            }}
-          >
+          <div className="bottom-right-button">
             <TextButton text="다음" />
           </div>
         )}
