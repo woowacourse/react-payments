@@ -9,3 +9,7 @@
 .hidden {
   opacity: 0;
 }
+
+.items-center {
+  align-items: center;
+}
