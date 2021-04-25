@@ -5,6 +5,7 @@ export default function Input({
   value,
   onChange,
   onKeyDown,
+  onFocus,
   width,
   fontColor,
   label,
@@ -40,6 +41,7 @@ export default function Input({
           style={{ width, color: fontColor }}
           onChange={onChange}
           onKeyDown={onKeyDown}
+          onFocus={onFocus}
           inputMode={inputMode}
           ref={innerRef}
           aria-labelledby={ariaLabelledby}

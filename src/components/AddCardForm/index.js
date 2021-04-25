@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { CARD_COMPANY } from '../../constants';
 import { Icon, Card, Input, Header, TextButton, PasswordInput } from '../../stories/components';
 import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/formatter';
 import './style.css';
@@ -6,6 +7,8 @@ import './style.css';
 export default function AddCardForm({
   serialNumber,
   setSerialNumber,
+  cardCompany,
+  setCardCompany,
   expirationDate,
   setExpirationDate,
   userName,
@@ -14,6 +17,7 @@ export default function AddCardForm({
   setSecurityCode,
   password,
   setPassword,
+  onSetModalContents,
 }) {
   const inputEl = useRef(null);
 
@@ -24,6 +28,8 @@ export default function AddCardForm({
         <div className="card-preview">
           <Card
             userName={userName}
+            cardCompanyName={CARD_COMPANY[cardCompany]?.NAME}
+            cardColor={CARD_COMPANY[cardCompany]?.COLOR}
             cardNumber={serialNumber}
             expirationDate={MMYYDateFormatter(expirationDate)}
           />
@@ -62,6 +68,21 @@ export default function AddCardForm({
 
             const currentLocation = event.target.selectionStart;
             inputEl.current.setSelectionRange(currentLocation, currentLocation);
+
+            if (serialNumber.length === 8) {
+              inputEl.current.blur();
+              onSetModalContents('cardSelection');
+            }
+
+            if (cardCompany && serialNumber.length < 8) {
+              setCardCompany('');
+            }
+          }}
+          onFocus={() => {
+            if (!cardCompany && serialNumber.length === 8) {
+              inputEl.current.blur();
+              onSetModalContents('cardSelection');
+            }
           }}
           innerRef={inputEl}
           inputMode="numeric"
