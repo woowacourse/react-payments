@@ -38,9 +38,21 @@ const Template = (args) => <InputBox {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
-  labelText: '카드 번호',
+  labelText: '카드 소유자 이름',
   placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
   maxLength: 30,
   hasLabelText: true,
   hasLengthCounter: true,
+};
+
+export const Error = Template.bind({});
+Error.args = {
+  value: '우헤헤',
+  labelText: '카드 소유자 이름',
+  placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
+  maxLength: 30,
+  hasLabelText: true,
+  hasLengthCounter: true,
+  isError: true,
+  errorMessage: '올바른 이름을 입력해주세요.',
 };

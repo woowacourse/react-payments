@@ -9,4 +9,6 @@ export default {
 const Template = (args) => <ErrorMessageBox {...args} />;
 
 export const Basic = Template.bind({});
-Basic.args = {};
+Basic.args = {
+  errorMessage: '에러 메시지입니다',
+};
