@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR, FONT_WEIGHT, FONT_SIZE } from '../global.styles';
+import { COLOR, FONT_WEIGHT, FONT_SIZE } from '../constants/constants';
 
 const Button = styled.button`
   color: ${COLOR.MAIN.MINT};
@@ -7,7 +7,7 @@ const Button = styled.button`
   font-weight: ${FONT_WEIGHT.BOLD};
   font-size: ${FONT_SIZE.SMALL};
   border: 0;
-  widht: 100%;
+  width: 100%;
 `;
 
 export default Button;

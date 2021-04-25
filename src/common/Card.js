@@ -52,6 +52,7 @@ const CardInfo = css`
 const CardWrapper = styled.div`
   width: 100%;
   height : 100%;
+  
   padding: 1.2rem 1.5rem;
   border-radius: 5px;
   box-shadow: 3px 3px 5px 0px #00000040;
@@ -64,8 +65,8 @@ const CardWrapper = styled.div`
   ${({ add }) => (add ? AddCard : CardInfo)}
   }`;
 
-const Card = ({ add, cardInfos }) => {
-  const { cardName, numbers, user, expireDate } = cardInfos;
+const Card = ({ add, cardInfo }) => {
+  const { cardName, numbers, user, expireDate } = cardInfo;
   return (
     <CardWrapper add={add} bgColor={CARD[cardName]}>
       {add ? (
@@ -80,7 +81,7 @@ const Card = ({ add, cardInfos }) => {
           </div>
           <div className='card__column card-numbers'>{numbers}</div>
           <div className='card__column card-details'>
-            <div>{user}</div> <div>{expireDate}</div>
+            <div>{user !== '' ? user : 'NAME'}</div> <div>{expireDate}</div>
           </div>
         </>
       )}
@@ -90,7 +91,7 @@ const Card = ({ add, cardInfos }) => {
 
 Card.propTypes = {
   add: PropTypes.bool,
-  cardInfos: PropTypes.shape({
+  cardInfo: PropTypes.shape({
     cardColor: PropTypes.string,
     cardName: PropTypes.string,
     numbers: PropTypes.string,
@@ -101,7 +102,7 @@ Card.propTypes = {
 
 Card.defaultProps = {
   add: false,
-  cardInfos: {
+  cardInfo: {
     cardName: '',
     numbers: '',
     user: 'NAME',
