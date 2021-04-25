@@ -186,6 +186,9 @@ export default function AddCardForm({
               padding: '0',
               boxSizing: 'content-box',
             }}
+            onClick={() => {
+              onSetModalContents('questionMark');
+            }}
           >
             <Icon.QuestionMark size="27px" />
           </button>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AddCardForm, CardCompanySelection } from './components';
+import { AddCardForm, CardCompanySelection, SecurityCodeGuide } from './components';
 import { Modal } from './stories/components';
 
 function App() {
@@ -46,6 +46,7 @@ function App() {
           {modalContents === 'cardSelection' && (
             <CardCompanySelection onSetCardCompany={onSetCardCompany}></CardCompanySelection>
           )}
+          {modalContents === 'questionMark' && <SecurityCodeGuide></SecurityCodeGuide>}
         </Modal>
       )}
     </>
