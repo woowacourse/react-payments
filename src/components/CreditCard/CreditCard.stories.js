@@ -10,8 +10,10 @@ const Template = args => <CreditCard {...args} />;
 export const MediumSize = Template.bind({});
 
 MediumSize.args = {
-  cardName: 'test123',
-  cardColor: '#547CE4',
+  cardBrand: {
+    name: 'test123',
+    color: '#547CE4',
+  },
   ownerName: 'test123',
   cardNumber: {
     first: 1234,
@@ -30,8 +32,10 @@ MediumSize.args = {
 export const LargeSize = Template.bind({});
 
 LargeSize.args = {
-  cardName: 'test123',
-  cardColor: '#547CE4',
+  cardBrand: {
+    name: 'test123',
+    color: '#547CE4',
+  },
   ownerName: 'test123',
   cardNumber: {
     first: 1234,

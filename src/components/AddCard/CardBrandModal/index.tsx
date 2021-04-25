@@ -10,13 +10,13 @@ interface Props {
   modalClose: () => void;
 }
 
-const CardNameModal: FC<Props> = ({ cardData, onClickCardBrandButton, modalClose }) => {
+const CardBrandModal: FC<Props> = ({ cardData, onClickCardBrandButton, modalClose }) => {
   return (
     <Modal modalClose={modalClose} type="bottom">
       <ButtonContainer>
         {cardData.map((data, index) => (
           <IconButton key={index} backgroundColor={data.color} onClick={() => onClickCardBrandButton(data)}>
-            {data.cardName}
+            {data.name}
           </IconButton>
         ))}
       </ButtonContainer>
@@ -24,4 +24,4 @@ const CardNameModal: FC<Props> = ({ cardData, onClickCardBrandButton, modalClose
   );
 };
 
-export default CardNameModal;
+export default CardBrandModal;

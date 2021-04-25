@@ -53,7 +53,7 @@ const IconButtonContainer = styled.div<IconButtonProps>`
 export const IconButton: FC<IconButtonProps> = ({ children, backgroundColor, onClick }) => {
   return (
     <IconButtonContainer onClick={onClick} backgroundColor={backgroundColor}>
-      <button />
+      <button type="button" />
       <span>{children}</span>
     </IconButtonContainer>
   );

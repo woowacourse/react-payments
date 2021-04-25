@@ -1,7 +1,7 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FocusEvent, useEffect, useRef, useState } from 'react';
 import AddCardInputContainer from './AddCardInputContainer';
 import CreditCard from '../../CreditCard';
-import CardNameModal from '../CardNameModal';
+import CardNameModal from '../CardBrandModal';
 import Container from '../../common/Container';
 import Input from '../../common/Input';
 import Button from '../../common/Button';
@@ -9,6 +9,7 @@ import CARD_DATA from '../../../constants/cardData';
 import { GRAY } from '../../../constants/palette';
 import { AddCardFormContainer } from './styles';
 import { CardBrand } from '../../../types';
+import NicknameModal from '../NicknameModal';
 
 interface Index {
   [key: string]: (param: number[]) => void;
@@ -16,7 +17,7 @@ interface Index {
 
 const AddCardForm = () => {
   const [cardBrand, setCardBrand] = useState({
-    cardName: '',
+    name: '',
     color: '',
   });
   const [ownerName, setOwnerName] = useState('');
@@ -27,7 +28,9 @@ const AddCardForm = () => {
   const [expDate, setExpDate] = useState({ year: '', month: '' });
   const [CVC, setCVC] = useState('');
   const [password, setPassword] = useState(['', '']);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isCardBrandModalVisible, setIsCardBrandModalVisible] = useState(false);
+  const [isNicknameModalVisible, setIsNicknameModalVisible] = useState(false);
+  const [nickname, setNickname] = useState('');
 
   const setCardNumberMap: Index = {
     first: setFirstCardNumber,
@@ -61,6 +64,14 @@ const AddCardForm = () => {
     setExpDate(nextExpDate);
   };
 
+  const onBlurExpDate = ({ target }: FocusEvent<HTMLInputElement>, index: string) => {
+    const value = (target as HTMLInputElement).value;
+
+    if (value.length === 1) {
+      setExpDate({ ...expDate, [index]: '0' + value });
+    }
+  };
+
   const onChangeOwnerName = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const regex = /[^a-zA-Z\s]/g;
 
@@ -89,7 +100,7 @@ const AddCardForm = () => {
 
   const onClickCardBrandButton = (cardBrand: CardBrand) => {
     setCardBrand(cardBrand);
-    setIsModalVisible(false);
+    setIsCardBrandModalVisible(false);
   };
 
   useEffect(() => {
@@ -98,26 +109,52 @@ const AddCardForm = () => {
         const cardData = CARD_DATA[secondCardNumber[3]];
 
         if (!cardData) {
-          setIsModalVisible(true);
+          setIsCardBrandModalVisible(true);
           return;
         }
 
         setCardBrand(cardData);
       } else {
         setCardBrand({
-          cardName: '',
+          name: '',
           color: '',
         });
       }
     })();
   }, [firstCardNumber, secondCardNumber]);
 
+  const isAllInputFilled = () =>
+    firstCardNumber.length === 4 &&
+    secondCardNumber.length === 4 &&
+    thirdCardNumber.length === 4 &&
+    fourthCardNumber.length === 4 &&
+    cardBrand.name &&
+    cardBrand.color &&
+    expDate.month.length === 2 &&
+    expDate.year.length === 2 &&
+    CVC.length === 3 &&
+    password[0].length === 1 &&
+    password[1].length === 1 &&
+    ownerName.length > 0;
+
+  const onClickNextButton = () => {
+    if (!isAllInputFilled()) {
+      alert('입력이 완료되지 않았습니다.');
+      return;
+    }
+
+    setIsNicknameModalVisible(true);
+  };
+
+  const onSubmitCard = () => {
+    alert('카드가 등록되었습니다.');
+  };
+
   return (
     <AddCardFormContainer>
       <CreditCard
         className="credit-card"
-        cardName={cardBrand.cardName}
-        cardColor={cardBrand.color}
+        cardBrand={cardBrand}
         expDate={expDate}
         ownerName={ownerName}
         cardNumber={{
@@ -127,7 +164,7 @@ const AddCardForm = () => {
           fourth: fourthCardNumber,
         }}
       />
-      <form>
+      <form onSubmit={onSubmitCard}>
         <AddCardInputContainer label={'카드번호'}>
           <Container flex alignItems="center" justifyContent="center" backgroundColor={GRAY}>
             <Input
@@ -180,6 +217,7 @@ const AddCardForm = () => {
               width="40%"
               value={expDate.month}
               onChange={event => onChangeExpDate(event, 'month')}
+              onBlur={event => onBlurExpDate(event, 'month')}
             />
             /
             <Input
@@ -191,10 +229,11 @@ const AddCardForm = () => {
               width="40%"
               value={expDate.year}
               onChange={event => onChangeExpDate(event, 'year')}
+              onBlur={event => onBlurExpDate(event, 'year')}
             />
           </Container>
         </AddCardInputContainer>
-        <AddCardInputContainer label={['카드 소유자 이름(선택)', `${ownerName.length} / 30`]}>
+        <AddCardInputContainer label={['카드 소유자 이름', `${ownerName.length} / 30`]}>
           <Container flex justifyContent="center" backgroundColor={GRAY}>
             <Input
               placeholder="카드에 표시된 이름과 동일하게 입력하세요."
@@ -229,15 +268,35 @@ const AddCardForm = () => {
             </Container>
           </Container>
         </AddCardInputContainer>
-        <Button position="bottom-right">다음</Button>
+        <Button type="button" position="bottom-right" onClick={onClickNextButton}>
+          다음
+        </Button>
+
+        {isCardBrandModalVisible && (
+          <CardNameModal
+            cardData={CARD_DATA}
+            onClickCardBrandButton={onClickCardBrandButton}
+            modalClose={() => setIsCardBrandModalVisible(false)}
+          />
+        )}
+
+        {isNicknameModalVisible && (
+          <NicknameModal
+            nickname={nickname}
+            setNickname={setNickname}
+            ownerName={ownerName}
+            cardNumber={{
+              first: firstCardNumber,
+              second: secondCardNumber,
+              third: thirdCardNumber,
+              fourth: fourthCardNumber,
+            }}
+            expDate={expDate}
+            cardBrand={cardBrand}
+            modalClose={() => {}}
+          />
+        )}
       </form>
-      {isModalVisible && (
-        <CardNameModal
-          cardData={CARD_DATA}
-          onClickCardBrandButton={onClickCardBrandButton}
-          modalClose={() => setIsModalVisible(false)}
-        />
-      )}
     </AddCardFormContainer>
   );
 };

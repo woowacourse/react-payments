@@ -11,8 +11,10 @@ const Template = args => <NicknameModal {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  cardName: CARD_DATA[0].cardName,
-  cardColor: CARD_DATA[0].color,
+  cardBrand: {
+    name: CARD_DATA[0].name,
+    color: CARD_DATA[0].color,
+  },
   cardNumber: {
     first: [1, 2, 3, 4],
     second: [1, 2, 3, 4],

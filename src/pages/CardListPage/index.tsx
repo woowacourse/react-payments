@@ -6,8 +6,10 @@ import { Card } from '../../types';
 const dummies: Card[] = [
   {
     id: 1,
-    cardName: '포코카드',
-    cardColor: '#547CE4',
+    cardBrand: {
+      name: '포코카드',
+      color: '#547CE4',
+    },
     ownerName: 'FANO',
     cardNumber: {
       first: [1, 2, 3, 4],
@@ -19,15 +21,16 @@ const dummies: Card[] = [
       month: '3',
       year: '3',
     },
-    password: '12',
-
+    password: ['1', '2'],
     cvc: '123',
     nickname: '엄카',
   },
   {
     id: 2,
-    cardName: '준카드',
-    cardColor: '#547CE4',
+    cardBrand: {
+      name: '포코카드',
+      color: '#547CE4',
+    },
     ownerName: 'FANO',
     cardNumber: {
       first: [1, 2, 3, 4],
@@ -39,13 +42,16 @@ const dummies: Card[] = [
       month: '3',
       year: '3',
     },
-    password: '12',
+    password: ['1', '2'],
     cvc: '123',
+    nickname: '엄카',
   },
   {
     id: 3,
-    cardName: '준카드',
-    cardColor: '#547CE4',
+    cardBrand: {
+      name: '포코카드',
+      color: '#547CE4',
+    },
     ownerName: 'FANO',
     cardNumber: {
       first: [1, 2, 3, 4],
@@ -57,8 +63,9 @@ const dummies: Card[] = [
       month: '3',
       year: '3',
     },
-    password: '12',
+    password: ['1', '2'],
     cvc: '123',
+    nickname: '엄카',
   },
 ];
 
@@ -68,11 +75,10 @@ const CardListPage = () => {
   return (
     <Template title={title}>
       <CardList>
-        {[...dummies, ...dummies, ...dummies].map(card => (
+        {dummies.map(card => (
           <li key={card.id}>
             <CreditCard
-              cardName={card.cardName}
-              cardColor={card.cardColor}
+              cardBrand={card.cardBrand}
               ownerName={card.ownerName}
               cardNumber={card.cardNumber}
               expDate={card.expDate}

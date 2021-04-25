@@ -5,6 +5,11 @@ export interface CardNumber {
   fourth: number[];
 }
 
+export interface CardBrand {
+  name: string;
+  color: string;
+}
+
 export interface ExpDate {
   month: string;
   year: string;
@@ -12,17 +17,11 @@ export interface ExpDate {
 
 export interface Card {
   id: number;
-  cardName: string;
-  cardColor: string;
+  cardBrand: CardBrand;
   ownerName: string;
   password: [string, string];
   cardNumber: CardNumber;
   expDate: ExpDate;
   cvc: string;
   nickname?: string;
-}
-
-export interface CardBrand {
-  color: string;
-  cardName: string;
 }

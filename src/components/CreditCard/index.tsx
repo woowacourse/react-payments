@@ -8,12 +8,13 @@ interface Props extends Omit<Card, 'id' | 'cvc' | 'password'> {
   size?: 'lg' | 'md';
 }
 
-const CreditCard = ({ className, size, cardName, cardColor, ownerName, cardNumber, expDate }: Props) => {
+const CreditCard = ({ className, size, cardBrand, ownerName, cardNumber, expDate }: Props) => {
   const { first, second, third, fourth } = cardNumber;
+  const { name, color } = cardBrand;
 
   return (
-    <CreditCardContainer className={className} size={size} cardColor={cardColor}>
-      <p className="card-name">{cardName}</p>
+    <CreditCardContainer className={className} size={size} cardColor={color}>
+      <p className="card-name">{name}</p>
       <div className="ic-chip" />
       <p className="card-number">
         <span>{first}</span>
