@@ -11,6 +11,7 @@ import PinNumberInput from '../../components/PinNumberInput/PinNumberInput';
 import Button from '../../components/Button/Button';
 import useInput from '../../hooks/useInput';
 import { isNumeric } from '../../utils';
+import MESSAGE from '../../constants/message';
 
 const CardAddForm = () => {
   const history = useHistory();
@@ -76,7 +77,7 @@ const CardAddForm = () => {
               values={cardNumbers}
               onChange={handleChangeCardNumber}
               labelText="카드 번호"
-              errorMessage={!isNumericCardNumbers ? '숫자가 아닌 문자가 입력되었어요' : ''}
+              errorMessage={!isNumericCardNumbers ? MESSAGE.REQUIRE_NUMBER_ONLY : ''}
               isError={!isNumericCardNumbers}
             />
           </Styled.Row>
@@ -85,7 +86,7 @@ const CardAddForm = () => {
               <InputBox
                 value={formattedExpiryDate}
                 isError={isValidExpiryDate}
-                errorMessage={isValidExpiryDate ? '유효하지 않은 만료일 입니다.' : ''}
+                errorMessage={isValidExpiryDate ? MESSAGE.INVALID_EXPIRY_DATE : ''}
                 onChange={expiryDate.onChange}
                 placeholder="MM / YY"
                 labelText="만료일"
@@ -111,7 +112,7 @@ const CardAddForm = () => {
                 type="password"
                 pattern="^[0-9]*$"
                 isError={!isNumeric(CVC.value)}
-                errorMessage={!isNumeric(CVC.value) ? '숫자가 아닌 문자가 입력되었어요' : ''}
+                errorMessage={!isNumeric(CVC.value) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''}
                 inputmode="numeric"
                 value={CVC.value}
                 onChange={CVC.onChange}
@@ -121,7 +122,7 @@ const CardAddForm = () => {
               />
             </Styled.CVC>
             <Styled.ToolTip>
-              <ToolTip buttonText="?" contentText="카드 뒷면의 3자리 숫자를 입력해주세요" />
+              <ToolTip buttonText="?" contentText={MESSAGE.CVC_TOOLTIP} />
             </Styled.ToolTip>
           </Styled.Row>
           <Styled.Row>
