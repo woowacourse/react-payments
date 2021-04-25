@@ -5,16 +5,21 @@ const Styled = {
     position: fixed;
     top: 0;
     left: 0;
+    right: 0;
+    margin: 0 auto;
     width: 100%;
+    max-width: ${(props) => (props.mobile ? '375px' : 'auto')};
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
   `,
   Container: styled.div`
     background-color: #fdfdfd;
     border-radius: 5px 5px 0px 0px;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
+    right: 0;
+    margin: 0 auto;
     width: 100%;
     min-height: 100px;
     padding: 34px;

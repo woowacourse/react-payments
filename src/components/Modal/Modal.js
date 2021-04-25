@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Styled from './Modal.styles';
 
-const Modal = ({ children, onClose }) => {
+const Modal = ({ children, mobile, onClose }) => {
   const handleClose = (event) => {
     if (!onClose) return;
 
@@ -10,7 +10,7 @@ const Modal = ({ children, onClose }) => {
   };
 
   return (
-    <Styled.Dimmer onClick={handleClose}>
+    <Styled.Dimmer onClick={handleClose} mobile={mobile}>
       <Styled.Container>{children}</Styled.Container>
     </Styled.Dimmer>
   );
@@ -18,11 +18,13 @@ const Modal = ({ children, onClose }) => {
 
 Modal.propTypes = {
   children: PropTypes.node,
+  mobile: PropTypes.bool,
   onClose: PropTypes.func,
 };
 
 Modal.defaultProps = {
   children: null,
+  mobile: false,
   onClose: null,
 };
 

@@ -8,4 +8,5 @@ export const Container = styled.main`
   margin: 0 auto;
   border: 1px solid #eeeeee;
   overflow-y: auto;
+  position: relative;
 `;
