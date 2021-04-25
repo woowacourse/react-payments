@@ -65,9 +65,7 @@ const CardNumberInput = ({
 
 CardNumberInput.propTypes = {
   values: PropTypes.arrayOf(PropTypes.string),
-  maskedInputFlags: PropTypes.arrayOf(
-    PropTypes.shape([PropTypes.bool, PropTypes.bool, PropTypes.bool, PropTypes.bool])
-  ),
+  maskedInputFlags: PropTypes.arrayOf(PropTypes.bool),
   labelText: PropTypes.string,
   isError: PropTypes.bool,
   errorMessage: PropTypes.string,
