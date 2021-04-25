@@ -8,6 +8,8 @@
 }
 
 .modal-inner {
+  display: flex;
+  justify-content: center;
   position: fixed;
   min-height: 227px;
   bottom: 0;
