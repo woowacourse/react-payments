@@ -1,31 +1,17 @@
 import React from 'react';
-import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
-import CardNumbersInput from '../../units/CardNumbersInput';
-import ExpirationDateInput from '../../units/ExpirationDateInput';
-import OwnerNameInput from '../../units/OwnerNameInput';
-import SecureCodeInput from '../../units/SecureCodeInput';
-import CardPasswordInput from '../../units/CardPasswordInput';
-import INPUT_TYPE from '../../../constants/inputType';
+import Card from '../../shared/Card';
+import CardRegisterForm from '../../units/CardRegisterForm';
+import PALETTE from '../../../styles/palette';
+import * as Style from './style';
 
 const CardRegister = (props) => {
   return (
-    <>
-      <RegisterInputWrapper {...INPUT_TYPE.CARD_NUMBERS}>
-        <CardNumbersInput />
-      </RegisterInputWrapper>
-      <RegisterInputWrapper {...INPUT_TYPE.EXPIRATION_DATE}>
-        <ExpirationDateInput />
-      </RegisterInputWrapper>
-      <RegisterInputWrapper {...INPUT_TYPE.OWNER_NAME}>
-        <OwnerNameInput />
-      </RegisterInputWrapper>
-      <RegisterInputWrapper {...INPUT_TYPE.SECURE_CODE}>
-        <SecureCodeInput />
-      </RegisterInputWrapper>
-      <RegisterInputWrapper {...INPUT_TYPE.PASSWORD} inputCount={2}>
-        <CardPasswordInput />
-      </RegisterInputWrapper>
-    </>
+    <Style.Root>
+      <Style.CardWrapper>
+        <Card width="213px" height="133px" backgroundColor={PALETTE.EMPTY_CARD_GRAY} isFilled={false} />
+      </Style.CardWrapper>
+      <CardRegisterForm />
+    </Style.Root>
   );
 };
 
