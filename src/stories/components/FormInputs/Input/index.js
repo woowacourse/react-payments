@@ -2,24 +2,17 @@ import React from 'react';
 import './input.css';
 
 export default function Input({
-  value,
-  onChange,
-  onKeyDown,
-  onFocus,
   width,
   fontColor,
   label,
-  type,
-  placeholder,
   textAlign,
-  required,
-  maxLength,
   letterCounter,
-  inputMode,
   innerRef,
   ariaLabelledby,
-  children,
   errorMessage,
+  inputStyle,
+  children,
+  ...props
 }) {
   return (
     <div className="basic-input">
@@ -34,18 +27,10 @@ export default function Input({
       <div className={['d-flex', 'items-center'].join(' ')}>
         <input
           className={['basic-input__input', `text-${textAlign}`].join(' ')}
-          value={value}
-          type={type}
-          placeholder={placeholder}
-          required={required}
-          maxLength={maxLength}
-          style={{ width, color: fontColor }}
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          onFocus={onFocus}
-          inputMode={inputMode}
+          style={inputStyle}
           ref={innerRef}
           aria-labelledby={ariaLabelledby}
+          {...props}
         />
         {children}
       </div>

@@ -58,7 +58,7 @@ export default function AddCardForm({
         <Input
           type="text"
           label="카드번호"
-          width="100%"
+          inputStyle={{ width: '100%' }}
           maxLength="19"
           value={cardSerialNumberFormatter(serialNumber)}
           onKeyDown={(event) => {
@@ -112,7 +112,7 @@ export default function AddCardForm({
         <Input
           type="text"
           label="만료일"
-          width="7rem"
+          inputStyle={{ width: '7rem' }}
           placeholder="MM/YY"
           textAlign="center"
           maxLength="5"
@@ -138,7 +138,7 @@ export default function AddCardForm({
 
         <Input
           type="text"
-          width="100%"
+          inputStyle={{ width: '100%' }}
           label="카드 소유자 이름(선택)"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           letterCounter={{ current: userName.length, max: 30 }}
@@ -160,7 +160,7 @@ export default function AddCardForm({
 
         <Input
           type="password"
-          width="5rem"
+          inputStyle={{ width: '5rem' }}
           label="보안코드(CVC/CVV)"
           maxLength="3"
           inputMode="numeric"
@@ -173,7 +173,6 @@ export default function AddCardForm({
             setSecurityCode(inputValue);
           }}
           textAlign="center"
-          Icon={Icon.QuestionMark}
         >
           <button
             type="button"

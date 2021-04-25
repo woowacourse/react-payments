@@ -7,24 +7,8 @@ export default {
   component: Input,
 };
 
-const Template = (args) => <Input {...args} />;
-
-export const Default = Template.bind({});
-
-Default.args = {
-  width: '318px',
-  label: '이름',
-  type: 'text',
-  placeholder: '이름을 입력하세요',
-  textAlign: 'center',
-  required: false,
-  currentInputLength: 0,
-  maxLength: 30,
-  letterCounter: {
-    current: 0,
-    max: 30,
-  },
-  children: (
+const Template = (args) => (
+  <Input {...args}>
     <button
       type="button"
       style={{
@@ -40,6 +24,22 @@ Default.args = {
     >
       <Icon.QuestionMark size="27px" />
     </button>
-  ),
+  </Input>
+);
+
+export const Default = Template.bind({});
+
+Default.args = {
+  width: '318px',
+  label: '이름',
+  type: 'text',
+  placeholder: '이름을 입력하세요',
+  textAlign: 'center',
+  required: false,
+  maxLength: 30,
+  letterCounter: {
+    current: 0,
+    max: 30,
+  },
   errorMessage: '유효하지 않은 입력입니다.',
 };

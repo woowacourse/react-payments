@@ -15,7 +15,7 @@ export default function PasswordInput({ password, onSetPassword }) {
           return (
             <Input
               type="password"
-              width="2.5rem"
+              inputStyle={{ width: '2.5rem' }}
               maxLength="1"
               inputMode="numeric"
               key={key}
