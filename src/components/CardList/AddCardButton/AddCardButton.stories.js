@@ -1,4 +1,3 @@
-import React from 'react';
 import AddCardButton from '.';
 
 export default {

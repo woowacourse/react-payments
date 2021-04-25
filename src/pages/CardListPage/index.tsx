@@ -1,6 +1,6 @@
-import Template from '../../components/common/Template';
 import CreditCard from '../../components/CreditCard';
 import CardList from '../../components/CardList';
+import Template from '../../components/common/Template';
 import { Card } from '../../types';
 
 const dummies: Card[] = [
@@ -10,16 +10,18 @@ const dummies: Card[] = [
     cardColor: '#547CE4',
     ownerName: 'FANO',
     cardNumber: {
-      first: 1234,
-      second: 1234,
-      third: 1234,
-      fourth: 1234,
+      first: [1, 2, 3, 4],
+      second: [1, 2, 3, 4],
+      third: [1, 2, 3, 4],
+      fourth: [1, 2, 3, 4],
     },
     expDate: {
-      month: 3,
-      year: 3,
+      month: '3',
+      year: '3',
     },
-    cvc: 123,
+    password: '12',
+
+    cvc: '123',
     nickname: '엄카',
   },
   {
@@ -28,16 +30,17 @@ const dummies: Card[] = [
     cardColor: '#547CE4',
     ownerName: 'FANO',
     cardNumber: {
-      first: 1234,
-      second: 1234,
-      third: 1234,
-      fourth: 1234,
+      first: [1, 2, 3, 4],
+      second: [1, 2, 3, 4],
+      third: [1, 2, 3, 4],
+      fourth: [1, 2, 3, 4],
     },
     expDate: {
-      month: 3,
-      year: 3,
+      month: '3',
+      year: '3',
     },
-    cvc: 123,
+    password: '12',
+    cvc: '123',
   },
   {
     id: 3,
@@ -45,16 +48,17 @@ const dummies: Card[] = [
     cardColor: '#547CE4',
     ownerName: 'FANO',
     cardNumber: {
-      first: 1234,
-      second: 1234,
-      third: 1234,
-      fourth: 1234,
+      first: [1, 2, 3, 4],
+      second: [1, 2, 3, 4],
+      third: [1, 2, 3, 4],
+      fourth: [1, 2, 3, 4],
     },
     expDate: {
-      month: 3,
-      year: 3,
+      month: '3',
+      year: '3',
     },
-    cvc: 123,
+    password: '12',
+    cvc: '123',
   },
 ];
 

@@ -1,4 +1,4 @@
-import Template from './Template';
+import Template from '.';
 
 export default {
   component: Template,

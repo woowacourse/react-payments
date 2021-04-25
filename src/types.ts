@@ -21,3 +21,8 @@ export interface Card {
   cvc: string;
   nickname?: string;
 }
+
+export interface CardBrand {
+  color: string;
+  cardName: string;
+}

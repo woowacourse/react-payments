@@ -1,18 +1,20 @@
 import styled from 'styled-components';
-import { BAEMINT } from '../../constants/palette';
+import { BAEMINT } from '../../../constants/palette';
 
 interface Props {
   underline?: boolean;
   textCenter?: boolean;
   width?: string;
+  color?: string;
+  height?: string;
 }
 
 const Input = styled.input<Props>`
-  height: 3.375rem;
+  height: ${({ height }) => height || `3.375rem`};
   border: none;
   outline: none;
   font-size: 1.125rem;
-  color: ${BAEMINT};
+  color: ${({ color }) => color || BAEMINT};
   background-color: transparent;
   width: ${({ width }) => width || '100%'};
   ${({ textCenter }) => textCenter && `text-align: center;`}

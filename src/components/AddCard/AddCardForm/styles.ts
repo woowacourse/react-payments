@@ -35,10 +35,4 @@ export const AddCardFormContainer = styled.div`
       background: url('/images/example.png') no-repeat;
     }
   }
-
-  .submit-btn {
-    position: fixed;
-    bottom: 4%;
-    right: 4%;
-  }
 `;

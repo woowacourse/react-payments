@@ -1,29 +1,33 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import AddCardInputContainer from './AddCardInputContainer';
 import CreditCard from '../../CreditCard';
+import CardNameModal from '../CardNameModal';
 import Container from '../../common/Container';
 import Input from '../../common/Input';
 import Button from '../../common/Button';
 import CARD_DATA from '../../../constants/cardData';
 import { GRAY } from '../../../constants/palette';
 import { AddCardFormContainer } from './styles';
+import { CardBrand } from '../../../types';
 
 interface Index {
   [key: string]: (param: number[]) => void;
 }
 
 const AddCardForm = () => {
-  const [cardName, setCardName] = useState('');
+  const [cardBrand, setCardBrand] = useState({
+    cardName: '',
+    color: '',
+  });
   const [ownerName, setOwnerName] = useState('');
   const [firstCardNumber, setFirstCardNumber] = useState<number[]>([]);
   const [secondCardNumber, setSecondCardNumber] = useState<number[]>([]);
   const [thirdCardNumber, setThirdCardNumber] = useState<number[]>([]);
   const [fourthCardNumber, setFourthCardNumber] = useState<number[]>([]);
-
   const [expDate, setExpDate] = useState({ year: '', month: '' });
   const [CVC, setCVC] = useState('');
   const [password, setPassword] = useState('');
-  const [cardColor, setCardColor] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const setCardNumberMap: Index = {
     first: setFirstCardNumber,
@@ -39,8 +43,17 @@ const AddCardForm = () => {
     setCardNumberMap[key](inputNumber);
   };
 
-  const onChangeExpDate = ({ target }: ChangeEvent<HTMLInputElement>, key: string) => {
-    if (target.value.length > 2 || (key === 'month' && target.valueAsNumber > 12)) return;
+  const onChangeExpDate = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>, key: string) => {
+    const inputKey = (nativeEvent as InputEvent).data;
+
+    if (
+      inputKey === '.' ||
+      inputKey === '-' ||
+      target.value.length > 2 ||
+      (key === 'month' && target.valueAsNumber > 12) ||
+      target.valueAsNumber < 0
+    )
+      return;
 
     const nextExpDate = { ...expDate, [key]: target.value };
 
@@ -56,7 +69,7 @@ const AddCardForm = () => {
   };
 
   const onChangeCVC = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    if (target.value.length > 3 || isNaN(Number(target.value))) return;
+    if (target.value.length > 3) return;
 
     setCVC(target.value);
   };
@@ -70,16 +83,27 @@ const AddCardForm = () => {
     setPassword(nextPassword.join(''));
   };
 
+  const onClickCardBrandButton = (cardBrand: CardBrand) => {
+    setCardBrand(cardBrand);
+    setIsModalVisible(false);
+  };
+
   useEffect(() => {
     (() => {
       if (firstCardNumber.length + secondCardNumber.length === 8) {
-        const { CARD_NAME, COLOR } = CARD_DATA[secondCardNumber[3]];
+        const cardData = CARD_DATA[secondCardNumber[3]];
 
-        setCardName(CARD_NAME);
-        setCardColor(COLOR);
+        if (!cardData) {
+          setIsModalVisible(true);
+          return;
+        }
+
+        setCardBrand(cardData);
       } else {
-        setCardName('');
-        setCardColor('');
+        setCardBrand({
+          cardName: '',
+          color: '',
+        });
       }
     })();
   }, [firstCardNumber, secondCardNumber]);
@@ -88,9 +112,9 @@ const AddCardForm = () => {
     <AddCardFormContainer>
       <CreditCard
         className="credit-card"
-        cardColor={cardColor}
+        cardName={cardBrand.cardName}
+        cardColor={cardBrand.color}
         expDate={expDate}
-        cardName={cardName}
         ownerName={ownerName}
         cardNumber={{
           first: firstCardNumber,
@@ -103,7 +127,7 @@ const AddCardForm = () => {
         <AddCardInputContainer label={'카드번호'}>
           <Container flex alignItems="center" justifyContent="center" backgroundColor={GRAY}>
             <Input
-              type="number"
+              type="text"
               textCenter
               min="1111"
               max="9999"
@@ -113,7 +137,7 @@ const AddCardForm = () => {
             />
             -
             <Input
-              type="number"
+              type="text"
               textCenter
               min="1111"
               max="9999"
@@ -144,7 +168,7 @@ const AddCardForm = () => {
         <AddCardInputContainer label={'만료일'} width="40%">
           <Container flex justifyContent="center" alignItems="center" backgroundColor={GRAY}>
             <Input
-              type="number"
+              type="text"
               placeholder="MM"
               textCenter
               min={1}
@@ -155,7 +179,7 @@ const AddCardForm = () => {
             />
             /
             <Input
-              type="number"
+              type="text"
               placeholder="YY"
               textCenter
               min={0}
@@ -201,8 +225,15 @@ const AddCardForm = () => {
             </Container>
           </Container>
         </AddCardInputContainer>
-        <Button className="submit-btn">다음</Button>
+        <Button position="bottom-right">다음</Button>
       </form>
+      {isModalVisible && (
+        <CardNameModal
+          cardData={CARD_DATA}
+          onClickCardBrandButton={onClickCardBrandButton}
+          modalClose={() => setIsModalVisible(false)}
+        />
+      )}
     </AddCardFormContainer>
   );
 };

@@ -14,10 +14,10 @@ export const mdSize = css`
 `;
 
 const lgSize = css`
-  width: 24rem;
-  height: calc(24rem * 0.63);
-  font-size: 1.2rem;
-  border-radius: 9px;
+  width: 20rem;
+  height: calc(20rem * 0.63);
+  font-size: 1rem;
+  border-radius: 7px;
 `;
 
 export const CreditCardContainer = styled.div<CreditCardContainerProps>`
