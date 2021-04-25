@@ -19,11 +19,12 @@ export default function Input({
   innerRef,
   ariaLabelledby,
   children,
+  errorMessage,
 }) {
   return (
-    <div className="basic-input__label">
+    <div className="basic-input">
       {(label || letterCounter) && (
-        <div>
+        <div className="basic-input__label">
           {label && <label className="label-text">{label}</label>}
           {letterCounter && (
             <span className="letter-counter">{`${letterCounter.current}/${letterCounter.max}`}</span>
@@ -48,6 +49,7 @@ export default function Input({
         />
         {children}
       </div>
+      {errorMessage && <div className="basic-input__error-message">{errorMessage}</div>}
     </div>
   );
 }

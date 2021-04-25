@@ -41,4 +41,5 @@ Default.args = {
       <Icon.QuestionMark size="27px" />
     </button>
   ),
+  errorMessage: '유효하지 않은 입력입니다.',
 };

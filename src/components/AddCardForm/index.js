@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { CARD_COMPANY } from '../../constants';
+import React, { useState, useRef } from 'react';
+import { CARD_COMPANY, ERROR_MESSAGE } from '../../constants';
 import { Icon, Card, Input, Header, TextButton, PasswordInput } from '../../stories/components';
 import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/formatter';
 import './style.css';
@@ -19,6 +19,8 @@ export default function AddCardForm({
   setPassword,
   onSetModalContents,
 }) {
+  const [expirationDateErrorMessage, setExpirationDateErrorMessage] = useState('');
+
   const inputEl = useRef(null);
 
   return (
@@ -98,8 +100,22 @@ export default function AddCardForm({
           maxLength="5"
           value={MMYYDateFormatter(expirationDate)}
           onChange={(event) => {
-            setExpirationDate(event.target.value.replace('/', ''));
+            const expirationDate = event.target.value.replace('/', '');
+
+            setExpirationDate(expirationDate);
+
+            if (expirationDate.length === 4) {
+              const isValidDateFormat = /^(?:0[1-9]|1[0-2])(\d{2})$/.test(expirationDate);
+
+              if (isValidDateFormat) {
+                setExpirationDateErrorMessage('');
+                return;
+              }
+
+              setExpirationDateErrorMessage(ERROR_MESSAGE.INVALID_DATE_FORMAT);
+            }
           }}
+          errorMessage={expirationDateErrorMessage}
         />
 
         <Input
