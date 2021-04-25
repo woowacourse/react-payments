@@ -41,7 +41,7 @@ const PinNumberInput = ({ values, dotCount, labelText, errorMessage, isError, on
                 maxLength={1}
                 textAlign="center"
                 // eslint-disable-next-line no-return-assign
-                inputRef={(el) => (inputRef[index] = el)}
+                ref={(el) => (inputRef[index] = el)}
                 onChange={handleChange}
                 value={value}
                 required

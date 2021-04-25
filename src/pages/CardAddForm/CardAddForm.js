@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router-dom';
+import { useState, useMemo } from 'react';
 import { Container } from '../common/common.styles';
 import Styled from './CardAddForm.styles';
 import Header from '../../components/Header/Header';
@@ -13,6 +14,8 @@ import { isNumeric } from '../../utils';
 const CardAddForm = () => {
   const history = useHistory();
 
+  const [cardNumbers, setCardNumbers] = useState('');
+
   const ownerName = useInput('');
   const CVC = useInput('');
 
@@ -20,16 +23,46 @@ const CardAddForm = () => {
     event.preventDefault();
   };
 
-  console.log(CVC.value, isNumeric(CVC.value));
+  const handleChangeCardNumber = (event) => {
+    setCardNumbers(event.target.value);
+  };
+
+  const formatCardNumber = useMemo(() => {
+    const cardNumberChunks =
+      cardNumbers
+        .replace(/-/g, '')
+        .replace(/\s/g, '')
+        .match(/.{1,4}/g) || [];
+
+    return cardNumberChunks
+      .map((chunk, index) => {
+        if (index <= 1) return chunk;
+
+        return chunk.replace(/[0-9]/g, '•');
+      })
+      .join(' - ');
+  }, [cardNumbers]);
 
   return (
     <Container>
       <Header hasBackButton text="카드 추가" onClickBackButton={history.goBack} />
       <Styled.Container>
-        <Card bgColor="#d2d2d2" ownerName="NAME" expiryDate="MM / YY" />
+        <Card
+          bgColor="#d2d2d2"
+          cardNumbers={formatCardNumber}
+          ownerName={ownerName.value}
+          expiryDate="MM / YY"
+        />
         <form onSubmit={handleSubmit}>
           <Styled.Row>
-            <InputBox labelText="카드 번호" maxLength={16 + 9} textAlign="center" required />
+            <InputBox
+              value={formatCardNumber}
+              onChange={handleChangeCardNumber}
+              labelText="카드 번호"
+              maxLength={16 + 9}
+              textAlign="center"
+              required
+            />
           </Styled.Row>
           <Styled.Row>
             <Styled.ExpiryDate>
@@ -51,7 +84,7 @@ const CardAddForm = () => {
                 type="password"
                 pattern="^[0-9]*$"
                 isError={!isNumeric(CVC.value)}
-                errorMessage={!isNumeric(CVC.value) && '숫자를 입력해주세요.'}
+                errorMessage={!isNumeric(CVC.value) ? '숫자를 입력해주세요.' : ''}
                 inputmode="numeric"
                 value={CVC.value}
                 onChange={CVC.onChange}
