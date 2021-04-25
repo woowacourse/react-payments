@@ -6,6 +6,7 @@ import Header from '../../components/Header/Header';
 import Card from '../../components/Card/Card';
 import InputBox from '../../components/InputBox/InputBox';
 import ToolTip from '../../components/ToolTip/ToolTip';
+import CardNumberInput from '../../components/CardNumberInput/CardNumberInput';
 import PinNumberInput from '../../components/PinNumberInput/PinNumberInput';
 import Button from '../../components/Button/Button';
 import useInput from '../../hooks/useInput';
@@ -14,7 +15,7 @@ import { isNumeric } from '../../utils';
 const CardAddForm = () => {
   const history = useHistory();
 
-  const [cardNumbers, setCardNumbers] = useState('');
+  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [ownerName, setOwnerName] = useState('');
 
   const expiryDate = useInput('');
@@ -25,33 +26,25 @@ const CardAddForm = () => {
   };
 
   const handleChangeCardNumber = (event) => {
-    // TODO: state에 마스킹된 카드 번호가 그대로 들어가는 문제 해결 필요
-    setCardNumbers(event.target.value);
+    const [, , index] = event.target.name.split('-');
+
+    setCardNumbers((state) => {
+      const newCardNumbers = [...state];
+      newCardNumbers[index] = event.target.value;
+
+      return newCardNumbers;
+    });
   };
 
   const handleChangeOwnerName = (event) => {
     setOwnerName(event.target.value.toUpperCase());
   };
 
-  const cardNumbersAsNumber = useMemo(() => cardNumbers.replace(/-/g, '').replace(/\s/g, ''), [
-    cardNumbers,
-  ]);
+  const cardNumbersAsNumber = useMemo(() => cardNumbers.join(''), [cardNumbers]);
 
   const expiryDateAsNumber = useMemo(() => expiryDate.value.replace(/[^0-9]/g, ''), [
     expiryDate.value,
   ]);
-
-  const formattedCardNumber = useMemo(() => {
-    const cardNumberChunks = cardNumbersAsNumber.match(/.{1,4}/g) || [];
-
-    return cardNumberChunks
-      .map((chunk, index) => {
-        if (index <= 1) return chunk;
-
-        return chunk.replace(/[0-9]/g, '•');
-      })
-      .join(' - ');
-  }, [cardNumbersAsNumber]);
 
   const formattedExpiryDate = useMemo(() => {
     const expiryDateChunks = expiryDateAsNumber.match(/.{1,2}/g) || [];
@@ -65,29 +58,26 @@ const CardAddForm = () => {
     [expiryDateAsNumber]
   );
 
+  const isNumericCardNumbers = useMemo(() => cardNumbers.every(isNumeric), [cardNumbers]);
+
   return (
     <Container>
       <Header hasBackButton text="카드 추가" onClickBackButton={history.goBack} />
       <Styled.Container>
         <Card
           bgColor="#d2d2d2"
-          cardNumbers={formattedCardNumber}
+          cardNumbers={cardNumbersAsNumber}
           ownerName={ownerName}
           expiryDate={formattedExpiryDate}
         />
         <form onSubmit={handleSubmit}>
           <Styled.Row>
-            <InputBox
-              pattern="^[0-9]*$"
-              isError={!isNumeric(cardNumbersAsNumber)}
-              errorMessage={!isNumeric(cardNumbersAsNumber) ? '숫자를 입력해주세요.' : ''}
-              inputmode="numeric"
-              value={formattedCardNumber}
+            <CardNumberInput
+              values={cardNumbers}
               onChange={handleChangeCardNumber}
               labelText="카드 번호"
-              maxLength={16 + 9}
-              textAlign="center"
-              required
+              errorMessage={!isNumericCardNumbers ? '숫자가 아닌 문자가 입력되었어요' : ''}
+              isError={!isNumericCardNumbers}
             />
           </Styled.Row>
           <Styled.Row>
@@ -121,7 +111,7 @@ const CardAddForm = () => {
                 type="password"
                 pattern="^[0-9]*$"
                 isError={!isNumeric(CVC.value)}
-                errorMessage={!isNumeric(CVC.value) ? '숫자를 입력해주세요.' : ''}
+                errorMessage={!isNumeric(CVC.value) ? '숫자가 아닌 문자가 입력되었어요' : ''}
                 inputmode="numeric"
                 value={CVC.value}
                 onChange={CVC.onChange}

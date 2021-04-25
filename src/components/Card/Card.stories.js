@@ -28,7 +28,7 @@ export const Basic = Template.bind({});
 Basic.args = {
   bgColor: '#E24141',
   companyName: '로이드카드',
-  cardNumbers: '1234-5678-····-····',
+  cardNumbers: '1234567891011121',
   ownerName: 'DOBBY',
   expiryDate: '12/24',
 };

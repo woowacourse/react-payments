@@ -1,25 +1,37 @@
-// <Card companyInfo={color, name}, cardNumbers, ownerName, expiryDate/>
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Styled from './Card.styles';
 
-const Card = ({ bgColor, companyName, cardNumbers, ownerName, expiryDate, size }) => (
-  <Styled.Container bgColor={bgColor} size={size}>
-    <Styled.CompanyName>{companyName}</Styled.CompanyName>
+const Card = ({ bgColor, companyName, cardNumbers, ownerName, expiryDate, size }) => {
+  const formattedCardNumber = useMemo(() => {
+    const cardNumberChunks = cardNumbers.match(/.{1,4}/g) || [];
 
-    <Styled.Chip />
+    return cardNumberChunks.map((chunk, index) => {
+      if (index <= 1) return chunk;
 
-    <Styled.CardNumbersGroup>
-      {cardNumbers.split('-').map((number, index) => {
-        const key = `${index}-${number}`;
+      return chunk.replace(/[0-9]/g, '•');
+    });
+  }, [cardNumbers]);
 
-        return <Styled.CardNumbers key={key}>{number}</Styled.CardNumbers>;
-      })}
-    </Styled.CardNumbersGroup>
+  return (
+    <Styled.Container bgColor={bgColor} size={size}>
+      <Styled.CompanyName>{companyName}</Styled.CompanyName>
 
-    <Styled.OwnerName>{ownerName}</Styled.OwnerName>
-    <Styled.ExpiryDate>{expiryDate}</Styled.ExpiryDate>
-  </Styled.Container>
-);
+      <Styled.Chip />
+
+      <Styled.CardNumbersGroup>
+        {formattedCardNumber.map((number, index) => {
+          const key = `${index}-${number}`;
+
+          return <Styled.CardNumbers key={key}>{number}</Styled.CardNumbers>;
+        })}
+      </Styled.CardNumbersGroup>
+
+      <Styled.OwnerName>{ownerName}</Styled.OwnerName>
+      <Styled.ExpiryDate>{expiryDate}</Styled.ExpiryDate>
+    </Styled.Container>
+  );
+};
 
 Card.propTypes = {
   bgColor: PropTypes.string,

@@ -21,7 +21,7 @@ const Styled = {
     display: flex;
     align-items: center;
 
-    & label {
+    & input {
       margin-right: 7px;
     }
   `,

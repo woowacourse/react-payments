@@ -6,7 +6,15 @@ import Styled from './PinNumberInput.styles';
 import { initArray } from '../../utils';
 import ErrorMessageBox from '../ErrorMessageBox/ErrorMessageBox';
 
-const PinNumberInput = ({ values, dotCount, labelText, errorMessage, isError, onChange }) => {
+const PinNumberInput = ({
+  values,
+  dotCount,
+  labelText,
+  required,
+  errorMessage,
+  isError,
+  onChange,
+}) => {
   const [inputRef] = useState(initArray(2, useRef()));
 
   const handleChange = (event) => {
@@ -44,7 +52,7 @@ const PinNumberInput = ({ values, dotCount, labelText, errorMessage, isError, on
                 ref={(el) => (inputRef[index] = el)}
                 onChange={handleChange}
                 value={value}
-                required
+                required={required}
               />
             </Styled.Label>
           );
@@ -62,6 +70,7 @@ PinNumberInput.propTypes = {
   values: PropTypes.arrayOf(PropTypes.string),
   dotCount: PropTypes.number,
   labelText: PropTypes.string,
+  required: PropTypes.bool,
   errorMessage: PropTypes.string,
   onChange: PropTypes.func,
   isError: PropTypes.bool,
@@ -71,6 +80,7 @@ PinNumberInput.defaultProps = {
   values: ['', ''],
   dotCount: 2,
   labelText: '',
+  required: false,
   errorMessage: '',
   onChange: () => {},
   isError: false,
