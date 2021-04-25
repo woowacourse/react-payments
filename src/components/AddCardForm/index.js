@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { CARD_COMPANY, ERROR_MESSAGE } from '../../constants';
 import { Icon, Card, Input, Header, TextButton, PasswordInput } from '../../stories/components';
 import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/formatter';
+import { isDigitKey, isValidSerialNumber, isValidDateFormat, isValidUserName } from './validator';
 import './style.css';
 
 export default function AddCardForm({
@@ -20,8 +21,26 @@ export default function AddCardForm({
   onSetModalContents,
 }) {
   const [expirationDateErrorMessage, setExpirationDateErrorMessage] = useState('');
+  const [userNameErrorMessage, setUserNameErrorMessage] = useState('');
 
   const inputEl = useRef(null);
+
+  const isFormCompleted = useMemo(() => {
+    return (
+      isValidSerialNumber(serialNumber) &&
+      cardCompany &&
+      isValidDateFormat(expirationDate) &&
+      securityCode.length === 3 &&
+      password.first &&
+      password.second
+    );
+  }, [serialNumber, cardCompany, expirationDate, securityCode, password]);
+
+  const onSetPassword = (key, value) => {
+    if (isNaN(value)) return;
+
+    setPassword({ ...password, [key]: value });
+  };
 
   return (
     <div className="add-card-form__container">
@@ -41,8 +60,9 @@ export default function AddCardForm({
           label="카드번호"
           width="100%"
           maxLength="19"
+          value={cardSerialNumberFormatter(serialNumber)}
           onKeyDown={(event) => {
-            if (!/^[0-9]{1}$/.test(event.key) && event.key !== 'Backspace') return;
+            if (!isDigitKey(event.key) && event.key !== 'Backspace') return;
 
             const currentLocation =
               event.target.selectionStart - Math.floor(event.target.selectionStart / 5);
@@ -66,8 +86,6 @@ export default function AddCardForm({
           }}
           onChange={(event) => {
             //TODO: '-' 위치가 변화 할 때 생기는 커서 이동 문제 해결 필요함
-            inputEl.current.value = cardSerialNumberFormatter(serialNumber);
-
             const currentLocation = event.target.selectionStart;
             inputEl.current.setSelectionRange(currentLocation, currentLocation);
 
@@ -102,12 +120,12 @@ export default function AddCardForm({
           onChange={(event) => {
             const expirationDate = event.target.value.replace('/', '');
 
+            if (isNaN(expirationDate)) return;
+
             setExpirationDate(expirationDate);
 
             if (expirationDate.length === 4) {
-              const isValidDateFormat = /^(?:0[1-9]|1[0-2])(\d{2})$/.test(expirationDate);
-
-              if (isValidDateFormat) {
+              if (isValidDateFormat(expirationDate)) {
                 setExpirationDateErrorMessage('');
                 return;
               }
@@ -127,14 +145,17 @@ export default function AddCardForm({
           maxLength="30"
           value={userName}
           onChange={(event) => {
-            //TODO: 이름은 영어로만 입력할 수 있습니다. 경고 표시
             const name = event.target.value;
-            if (/[^a-zA-Z ]/.test(name)) {
+
+            if (!isValidUserName(name)) {
+              setUserNameErrorMessage('이름은 영문 및 공백만 입력이 가능합니다.');
               return;
             }
 
             setUserName(event.target.value.toUpperCase());
+            setUserNameErrorMessage('');
           }}
+          errorMessage={userNameErrorMessage}
         />
 
         <Input
@@ -145,7 +166,11 @@ export default function AddCardForm({
           inputMode="numeric"
           value={securityCode}
           onChange={(event) => {
-            setSecurityCode(event.target.value);
+            const inputValue = event.target.value;
+
+            if (isNaN(inputValue)) return;
+
+            setSecurityCode(inputValue);
           }}
           textAlign="center"
           Icon={Icon.QuestionMark}
@@ -167,10 +192,17 @@ export default function AddCardForm({
           </button>
         </Input>
 
-        <PasswordInput password={password} setPassword={setPassword}></PasswordInput>
-        <div className="bottom-right-button">
-          <TextButton text="다음" />
-        </div>
+        <PasswordInput password={password} onSetPassword={onSetPassword}></PasswordInput>
+        {isFormCompleted && (
+          <div
+            className="bottom-right-button"
+            onClick={(event) => {
+              event.preventDefault();
+            }}
+          >
+            <TextButton text="다음" />
+          </div>
+        )}
       </form>
     </div>
   );
