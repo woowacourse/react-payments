@@ -24,11 +24,16 @@ export default function Card({
       <div className="card__card-number-container">
         {Array.from({ length: 16 }).map((_, index) => {
           if (index < 8) {
-            return <div className="card__card-number">{cardNumber.charAt(index)}</div>;
+            return (
+              <div key={index} className="card__card-number">
+                {cardNumber.charAt(index)}
+              </div>
+            );
           }
 
           return (
             <div
+              key={index}
               className={[
                 'card__card-number',
                 'dot',
