@@ -111,7 +111,13 @@ export default function AddCardForm({
           maxLength="30"
           value={userName}
           onChange={(event) => {
-            setUserName(event.target.value);
+            //TODO: 이름은 영어로만 입력할 수 있습니다. 경고 표시
+            const name = event.target.value;
+            if (/[^a-zA-Z ]/.test(name)) {
+              return;
+            }
+
+            setUserName(event.target.value.toUpperCase());
           }}
         />
 
