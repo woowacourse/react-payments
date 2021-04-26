@@ -18,4 +18,6 @@ export default {
   INPUT_TEXT_GRAY: '#737373',
   BOLD_BLACK: '#575757',
   DEFAULT_CYAN: '#04C09E',
+
+  COLOR_SELECTOR_WHITE: '#FDFDFD',
 };
