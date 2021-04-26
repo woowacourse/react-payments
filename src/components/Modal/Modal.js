@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Modal = (props) => {
   return (
     <section
-      className="flex fixed inset-0 z-10 bg-gray-150"
+      className="flex fixed inset-0 z-10 bg-gray-400 bg-opacity-70"
       role="dialog"
       aria-modal="true"
       aria-label="카드사 선택 modal"
@@ -18,7 +18,9 @@ const Modal = (props) => {
     </section>
   );
 };
+
 export default Modal;
+
 Modal.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
