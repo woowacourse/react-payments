@@ -4,7 +4,7 @@ import { Flex } from '../../styles/mixins';
 const Styled = {
   Container: styled.div`
     padding: 0 28px;
-    ${Flex({ direction: 'column', justify: 'center' })};
+    ${Flex({ direction: 'column', justify: 'center', items: 'stretch' })};
 
     height: 100%;
   `,
