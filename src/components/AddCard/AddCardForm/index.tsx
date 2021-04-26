@@ -101,9 +101,14 @@ const AddCardForm = () => {
 
   useEffect(() => {
     onSetCardBrand();
-  }, [cardNumber]);
+  }, [cardNumber[0], cardNumber[1]]);
 
   const onClickNextButton = () => {
+    if (cardBrand.name === '') {
+      onSetCardBrand();
+      return;
+    }
+
     if (!isAllInputFilled({ cardNumber, cardBrand, CVC, expDate, ownerName, password })) {
       alert('입력이 완료되지 않았습니다.');
       return;
