@@ -6,7 +6,7 @@ import {
   CVC_DIGITS,
   EXP_DATE_DIGITS,
   LAST_MONTH,
-  MAX_OWNERNAME_LENGTH,
+  MAX_OWNER_NAME_LENGTH,
 } from '../../../constants/creditCard';
 
 export const isValidCardNumber = (value: string) => isNumberString(value) && value.length <= CARD_NUMBER_DIGITS;
@@ -16,7 +16,7 @@ export const isValidExpMonth = (value: string) =>
 
 export const isValidExpYear = (value: string) => isNumberString(value) && value.length <= EXP_DATE_DIGITS;
 
-export const isValidOwnerName = (value: string) => value.length <= MAX_OWNERNAME_LENGTH && !/[^a-zA-Z\s]/g.test(value);
+export const isValidOwnerName = (value: string) => value.length <= MAX_OWNER_NAME_LENGTH && !/[^a-zA-Z\s]/g.test(value);
 
 export const isValidCVC = (value: string) => isNumberString(value) && value.length <= CVC_DIGITS;
 

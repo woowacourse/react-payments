@@ -10,11 +10,11 @@ import CARD_BRAND from '../../../constants/cardData';
 import { LABEL, PLACEHOLDER } from '../../../constants/addCardForm';
 import {
   CARD_NUMBER_DIGITS,
-  CARD_NUMBER_SEPERATOR,
+  CARD_NUMBER_SEPARATOR,
   EXP_DATE_DIGITS,
   EXP_DATE_WHITESPACE_CHARACTER,
   CVC_DIGITS,
-  MAX_OWNERNAME_LENGTH,
+  MAX_OWNER_NAME_LENGTH,
 } from '../../../constants/creditCard';
 import { ALERT } from '../../../constants/messages';
 import { AddCardFormContainer, AddCardInputContainer } from './styles';
@@ -166,7 +166,7 @@ const AddCardForm = () => {
         cardBrand={cardBrand}
         expDate={expDate}
         ownerName={ownerName}
-        cardNumber={cardNumber.join(CARD_NUMBER_SEPERATOR)}
+        cardNumber={cardNumber.join(CARD_NUMBER_SEPARATOR)}
       />
       <form onSubmit={onSubmitCard}>
         <AddCardInputLabel label={LABEL.CARD_NUMBER}>
@@ -192,7 +192,7 @@ const AddCardForm = () => {
               .reduce(
                 (acc: JSX.Element[], curr, index, array) => [
                   ...acc,
-                  <span key={index + array.length}>{CARD_NUMBER_SEPERATOR}</span>,
+                  <span key={index + array.length}>{CARD_NUMBER_SEPARATOR}</span>,
                   curr,
                 ],
                 []
@@ -226,13 +226,13 @@ const AddCardForm = () => {
             />
           </AddCardInputContainer>
         </AddCardInputLabel>
-        <AddCardInputLabel label={[LABEL.OWNER_NAME, `${ownerName.length} / ${MAX_OWNERNAME_LENGTH}`]}>
+        <AddCardInputLabel label={[LABEL.OWNER_NAME, `${ownerName.length} / ${MAX_OWNER_NAME_LENGTH}`]}>
           <AddCardInputContainer>
             <Input
               placeholder={PLACEHOLDER.OWNER_NAME}
               type="text"
               width="90%"
-              maxLength={MAX_OWNERNAME_LENGTH}
+              maxLength={MAX_OWNER_NAME_LENGTH}
               value={ownerName}
               onChange={onChangeOwnerName}
             />
@@ -285,7 +285,7 @@ const AddCardForm = () => {
             nickname={nickname}
             setNickname={setNickname}
             ownerName={ownerName}
-            cardNumber={cardNumber.join(CARD_NUMBER_SEPERATOR)}
+            cardNumber={cardNumber.join(CARD_NUMBER_SEPARATOR)}
             expDate={expDate}
             cardBrand={cardBrand}
           />
