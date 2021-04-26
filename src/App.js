@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { AddCardForm, CardCompanySelection, SecurityCodeGuide } from './components';
-import { AddCardComplete } from './pages';
+import React, { useEffect, useState } from 'react';
+import { CardCompanySelection, SecurityCodeGuide } from './components';
+import { AddCardForm, AddCardComplete } from './pages';
 import { Modal } from './stories/components';
 
 function App() {
@@ -28,6 +28,21 @@ function App() {
 
     setIsModalOpened(false);
   };
+
+  useEffect(() => {
+    if (page === 'addCardForm') {
+      setSerialNumber('');
+      setCardCompany('');
+      setExpirationDate('');
+      setUserName('');
+      setSecurityCode('');
+      setPassword({ first: '', second: '' });
+    }
+
+    if (page === 'addCardComplete') {
+      setCardNickName('');
+    }
+  }, [page]);
 
   return (
     <>
