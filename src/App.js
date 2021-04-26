@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import GlobalStyle from './GlobalStyle';
 import theme from './theme';

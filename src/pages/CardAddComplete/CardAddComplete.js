@@ -13,7 +13,7 @@ const CardAddComplete = () => {
 
   const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
 
-  if (!location.state.card) return <Redirect to={ROUTE.HOME} />;
+  if (!location.state?.card) return <Redirect to={ROUTE.HOME} />;
 
   const {
     id,
@@ -35,7 +35,9 @@ const CardAddComplete = () => {
       cardList.setValue(newCardList);
     }
 
-    history.push(ROUTE.HOME);
+    history.push({
+      pathname: ROUTE.HOME,
+    });
   };
 
   return (

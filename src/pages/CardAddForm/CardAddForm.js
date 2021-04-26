@@ -85,7 +85,12 @@ const CardAddForm = () => {
 
     cardList.setValue([...cardList.value, newCard]);
 
-    history.push(ROUTE.COMPLETE, { card: newCard });
+    history.push({
+      pathname: ROUTE.COMPLETE,
+      state: {
+        card: newCard,
+      },
+    });
   };
 
   const handleClickCardSelector = (key) => {
