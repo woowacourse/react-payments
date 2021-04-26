@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { COLOR, FONT_SIZE } from '../../constants/constants';
+import { COLOR, FONT_SIZE, FONT_WEIGHT } from '../../constants/constants';
 
 export const NewCardFormWrapper = styled.form`
+  width: 25rem;
+
   .form__column {
     margin-bottom: 10px;
     font-size: ${FONT_SIZE.LARGE};
@@ -63,6 +65,49 @@ export const NewCardFormWrapper = styled.form`
     .input-main {
       display: flex;
       align-items: center;
+    }
+
+    .cvc-container {
+      width: 40%;
+
+      input {
+        margin-right: 0.5rem;
+      }
+
+      .help {
+        border-radius: 50%;
+        border: 1px solid #bababa;
+        min-height: 2rem;
+        min-width: 2rem;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        cursor: pointer;
+        color: #969696;
+        font-size: 1.25rem;
+      }
+    }
+
+    .password-container {
+      width: 50%;
+
+      input {
+        margin-right: 0.5rem;
+        width: 3rem;
+      }
+
+      .privacy-dot {
+        font-weight: ${FONT_WEIGHT.BOLD};
+        font-size: ${FONT_SIZE.MINI};
+        color: ${COLOR.MAIN.MINT};
+        padding: 0 0.5rem;
+        width: 3rem;
+        height: 2.8125rem;
+        margin-right: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 `;

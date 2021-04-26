@@ -200,7 +200,7 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
       </div>
       <div className='form__column'>
         <div className='input-label'>보안 코드(CVC/CVV)</div>
-        <div className='input-main'>
+        <div className='input-main cvc-container'>
           <Input
             type='password'
             name='cvc'
@@ -216,7 +216,7 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
       </div>
       <div className='form__column'>
         <div className='input-label'>카드 비밀번호</div>
-        <div className='input-main'>
+        <div className='input-main password-container'>
           <Input
             type='password'
             value={password.first}
@@ -237,8 +237,8 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
             onChange={onChangePasswordInput}
             required
           />
-          <div className='privacy-dot'>﹒</div>
-          <div className='privacy-dot'>﹒</div>
+          <div className='privacy-dot'>●</div>
+          <div className='privacy-dot'>●</div>
         </div>
         <div className='input-alert'>{errorMessage.password}</div>
       </div>
