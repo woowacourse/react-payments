@@ -1,10 +1,4 @@
-export interface CardNumber {
-  first: number[];
-  second: number[];
-  third: number[];
-  fourth: number[];
-}
-
+export type CardNumber = [string, string, string, string];
 export interface CardBrand {
   name: string;
   color: string;

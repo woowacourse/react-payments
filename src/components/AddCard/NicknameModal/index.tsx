@@ -37,7 +37,6 @@ const NicknameModal: FC<Props> = ({ modalClose, cardBrand, cardNumber, expDate, 
           textCenter
           width="60%"
           height="2rem"
-          defaultValue={cardBrand.name}
         />
 
         <Button type="submit" position="bottom-right">

@@ -15,18 +15,14 @@ MediumSize.args = {
     color: '#547CE4',
   },
   ownerName: 'test123',
-  cardNumber: {
-    first: 1234,
-    second: 1234,
-    third: 1234,
-    fourth: 1234,
-  },
+  cardNumber: ['1234', '1234', '1234', '1234'],
   expDate: {
-    year: 25,
-    month: 3,
+    month: '3',
+    year: '25',
   },
-  cvc: 123,
+  cvc: '123',
   size: 'md',
+  nickName: '닉네임',
 };
 
 export const LargeSize = Template.bind({});
@@ -37,16 +33,12 @@ LargeSize.args = {
     color: '#547CE4',
   },
   ownerName: 'test123',
-  cardNumber: {
-    first: 1234,
-    second: 1234,
-    third: 1234,
-    fourth: 1234,
-  },
+  cardNumber: ['1234', '1234', '1234', '1234'],
   expDate: {
-    year: 25,
-    month: 3,
+    month: '3',
+    year: '25',
   },
-  cvc: 123,
+  cvc: '123',
   size: 'lg',
+  nickName: '닉네임',
 };

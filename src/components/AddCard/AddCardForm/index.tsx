@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FocusEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import AddCardInputContainer from './AddCardInputContainer';
 import CreditCard from '../../CreditCard';
 import CardNameModal from '../CardBrandModal';
@@ -8,7 +8,7 @@ import Button from '../../common/Button';
 import CARD_DATA from '../../../constants/cardData';
 import { GRAY } from '../../../constants/palette';
 import { AddCardFormContainer } from './styles';
-import { CardBrand } from '../../../types';
+import { CardBrand, CardNumber } from '../../../types';
 import NicknameModal from '../NicknameModal';
 
 interface Index {
@@ -21,10 +21,7 @@ const AddCardForm = () => {
     color: '',
   });
   const [ownerName, setOwnerName] = useState('');
-  const [firstCardNumber, setFirstCardNumber] = useState<number[]>([]);
-  const [secondCardNumber, setSecondCardNumber] = useState<number[]>([]);
-  const [thirdCardNumber, setThirdCardNumber] = useState<number[]>([]);
-  const [fourthCardNumber, setFourthCardNumber] = useState<number[]>([]);
+  const [cardNumber, setCardNumber] = useState<CardNumber>(['', '', '', '']);
   const [expDate, setExpDate] = useState({ year: '', month: '' });
   const [CVC, setCVC] = useState('');
   const [password, setPassword] = useState(['', '']);
@@ -32,20 +29,14 @@ const AddCardForm = () => {
   const [isNicknameModalVisible, setIsNicknameModalVisible] = useState(false);
   const [nickname, setNickname] = useState('');
 
-  const setCardNumberMap: Index = {
-    first: setFirstCardNumber,
-    second: setSecondCardNumber,
-    third: setThirdCardNumber,
-    fourth: setFourthCardNumber,
-  };
-
-  const onChangeCardNumber = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>, index: string) => {
+  const onChangeCardNumber = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>, index: number) => {
     const inputKey = (nativeEvent as InputEvent).data;
 
     if (isNaN(Number(inputKey)) || target.value.length > 4) return;
 
-    const inputNumber = target.value.split('').map(chr => Number(chr));
-    setCardNumberMap[index](inputNumber);
+    const nextValue: CardNumber = [...cardNumber];
+    nextValue[index] = target.value;
+    setCardNumber(nextValue);
   };
 
   const onChangeExpDate = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>, index: string) => {
@@ -105,8 +96,8 @@ const AddCardForm = () => {
 
   useEffect(() => {
     (() => {
-      if (firstCardNumber.length + secondCardNumber.length === 8) {
-        const cardData = CARD_DATA[secondCardNumber[3]];
+      if (cardNumber[0].length + cardNumber[1].length === 8) {
+        const cardData = CARD_DATA[Number(cardNumber[1][3])];
 
         if (!cardData) {
           setIsCardBrandModalVisible(true);
@@ -121,13 +112,10 @@ const AddCardForm = () => {
         });
       }
     })();
-  }, [firstCardNumber, secondCardNumber]);
+  }, [cardNumber]);
 
   const isAllInputFilled = () =>
-    firstCardNumber.length === 4 &&
-    secondCardNumber.length === 4 &&
-    thirdCardNumber.length === 4 &&
-    fourthCardNumber.length === 4 &&
+    cardNumber.every(el => el.length === 4) &&
     cardBrand.name &&
     cardBrand.color &&
     expDate.month.length === 2 &&
@@ -143,10 +131,12 @@ const AddCardForm = () => {
       return;
     }
 
+    setNickname(cardBrand.name);
     setIsNicknameModalVisible(true);
   };
 
-  const onSubmitCard = () => {
+  const onSubmitCard = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     alert('카드가 등록되었습니다.');
   };
 
@@ -157,12 +147,7 @@ const AddCardForm = () => {
         cardBrand={cardBrand}
         expDate={expDate}
         ownerName={ownerName}
-        cardNumber={{
-          first: firstCardNumber,
-          second: secondCardNumber,
-          third: thirdCardNumber,
-          fourth: fourthCardNumber,
-        }}
+        cardNumber={cardNumber}
       />
       <form onSubmit={onSubmitCard}>
         <AddCardInputContainer label={'카드번호'}>
@@ -173,8 +158,8 @@ const AddCardForm = () => {
               min="1111"
               max="9999"
               width="16%"
-              value={firstCardNumber.join('')}
-              onChange={event => onChangeCardNumber(event, 'first')}
+              value={cardNumber[0]}
+              onChange={event => onChangeCardNumber(event, 0)}
             />
             -
             <Input
@@ -183,8 +168,8 @@ const AddCardForm = () => {
               min="1111"
               max="9999"
               width="16%"
-              value={secondCardNumber.join('')}
-              onChange={event => onChangeCardNumber(event, 'second')}
+              value={cardNumber[1]}
+              onChange={event => onChangeCardNumber(event, 1)}
             />
             -
             <Input
@@ -192,8 +177,8 @@ const AddCardForm = () => {
               textCenter
               maxLength={4}
               width="16%"
-              value={thirdCardNumber.join('')}
-              onChange={event => onChangeCardNumber(event, 'third')}
+              value={cardNumber[2]}
+              onChange={event => onChangeCardNumber(event, 2)}
             />
             -
             <Input
@@ -201,8 +186,8 @@ const AddCardForm = () => {
               textCenter
               maxLength={4}
               width="16%"
-              value={fourthCardNumber.join('')}
-              onChange={event => onChangeCardNumber(event, 'fourth')}
+              value={cardNumber[3]}
+              onChange={event => onChangeCardNumber(event, 3)}
             />
           </Container>
         </AddCardInputContainer>
@@ -285,12 +270,7 @@ const AddCardForm = () => {
             nickname={nickname}
             setNickname={setNickname}
             ownerName={ownerName}
-            cardNumber={{
-              first: firstCardNumber,
-              second: secondCardNumber,
-              third: thirdCardNumber,
-              fourth: fourthCardNumber,
-            }}
+            cardNumber={cardNumber}
             expDate={expDate}
             cardBrand={cardBrand}
             modalClose={() => {}}

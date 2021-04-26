@@ -11,12 +11,7 @@ const dummies: Card[] = [
       color: '#547CE4',
     },
     ownerName: 'FANO',
-    cardNumber: {
-      first: [1, 2, 3, 4],
-      second: [1, 2, 3, 4],
-      third: [1, 2, 3, 4],
-      fourth: [1, 2, 3, 4],
-    },
+    cardNumber: ['1234', '1234', '1234', '1234'],
     expDate: {
       month: '3',
       year: '3',
@@ -32,12 +27,7 @@ const dummies: Card[] = [
       color: '#547CE4',
     },
     ownerName: 'FANO',
-    cardNumber: {
-      first: [1, 2, 3, 4],
-      second: [1, 2, 3, 4],
-      third: [1, 2, 3, 4],
-      fourth: [1, 2, 3, 4],
-    },
+    cardNumber: ['1234', '1234', '1234', '1234'],
     expDate: {
       month: '3',
       year: '3',
@@ -53,12 +43,7 @@ const dummies: Card[] = [
       color: '#547CE4',
     },
     ownerName: 'FANO',
-    cardNumber: {
-      first: [1, 2, 3, 4],
-      second: [1, 2, 3, 4],
-      third: [1, 2, 3, 4],
-      fourth: [1, 2, 3, 4],
-    },
+    cardNumber: ['1234', '1234', '1234', '1234'],
     expDate: {
       month: '3',
       year: '3',
