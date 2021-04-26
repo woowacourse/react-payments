@@ -11,7 +11,8 @@ const CardAddForm = props => {
   const [numbers] = useState([]);
   const [expirationDate, setExpirationDate] = useState("");
   const [isExpirationDateValid, setExpirationDateValid] = useState(true);
-  const [ownerName] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+  const [isOwnerNameValid, setOwnerNameValid] = useState(true);
   const [securityCode] = useState("");
   const [password] = useState([]);
   const [isToolTipVisible] = useState(false);
@@ -48,6 +49,26 @@ const CardAddForm = props => {
     }
     if (year < currentYear || year > currentYear + 5) {
       throw new Error("Invalid year");
+    }
+  };
+
+  const handleOwnerNameChange = event => {
+    try {
+      const { value } = event.target;
+
+      setOwnerName(value);
+      validateOwnerName(value);
+      setOwnerNameValid(true);
+    } catch (error) {
+      setOwnerNameValid(false);
+    }
+  };
+
+  const validateOwnerName = name => {
+    const rName = /^[가-힣|a-z|A-Z|\s]{0,30}$/;
+
+    if (!rName.test(name)) {
+      throw new Error(`Invalid owner name: ${name}`);
     }
   };
 
@@ -116,6 +137,9 @@ const CardAddForm = props => {
               type="text"
               placeholder="카드에 표시된 이름과 동일하게 입력하세요."
               className="w-full"
+              value={ownerName}
+              isValid={isOwnerNameValid}
+              onChange={handleOwnerNameChange}
             />
           </div>
           <div className="flex flex-col w-full mb-2">
