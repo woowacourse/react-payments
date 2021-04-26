@@ -3,7 +3,12 @@ import { Container, Input, Label, Text } from '../../../../../components';
 import { handleBlockInvalidChar, handleCardNumberInputChange } from './handler';
 import { CARD_NUMBER_UNIT_LENGTH } from '../../../../../constants';
 
-export const CardNumberInput = ({ setCardCompany, setIsModalOpen, setCardNumberInString }) => {
+export const CardNumberInput = ({
+  setCardCompany,
+  setIsModalOpen,
+  setCardNumberInString,
+  expirationDateInputRef,
+}) => {
   const [fourDigit, setFourDigit] = useState({
     first: '',
     second: '',
@@ -20,7 +25,7 @@ export const CardNumberInput = ({ setCardCompany, setIsModalOpen, setCardNumberI
     first: secondCardNumberInput,
     second: thirdCardNumberInput,
     third: fourthCardNumberInput,
-    fourth: null,
+    fourth: expirationDateInputRef,
   };
 
   useEffect(() => {

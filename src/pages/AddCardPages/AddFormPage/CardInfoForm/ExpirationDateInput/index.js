@@ -1,6 +1,7 @@
+import { forwardRef } from 'react';
 import { Container, Input, Label, Text } from '../../../../../components';
 
-export const ExpirationDateInput = () => {
+export const ExpirationDateInput = forwardRef((_, ref) => {
   return (
     <>
       <Label>만료일</Label>
@@ -9,6 +10,7 @@ export const ExpirationDateInput = () => {
           className="ExpirationDateInput__Field"
           placeholder="MM"
           type="number"
+          ref={ref}
           onChange={() => {}}
         />
         <Slash />
@@ -21,7 +23,7 @@ export const ExpirationDateInput = () => {
       </Container>
     </>
   );
-};
+});
 
 function Slash() {
   return (
@@ -30,3 +32,5 @@ function Slash() {
     </Text>
   );
 }
+
+ExpirationDateInput.displayName = 'ExpirationDateInput';

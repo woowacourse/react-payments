@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { Button, Form } from '../../../../components';
 import { CardNumberInput } from './CardNumberInput';
 import { ExpirationDateInput } from './ExpirationDateInput';
@@ -9,7 +10,7 @@ import './style.css';
 
 export const CardInfoForm = (props) => {
   const { setRoute, setCardCompany, setIsModalOpen, setCardNumberInString } = props;
-
+  const expirationDateInputRef = createRef();
   const handleCardInfoSubmit = (e) => {
     e.preventDefault();
     setRoute(PAGE.ADD_CARD_COMPLETE);
@@ -21,8 +22,9 @@ export const CardInfoForm = (props) => {
         setCardCompany={setCardCompany}
         setIsModalOpen={setIsModalOpen}
         setCardNumberInString={setCardNumberInString}
+        expirationDateInputRef={expirationDateInputRef}
       />
-      <ExpirationDateInput />
+      <ExpirationDateInput ref={expirationDateInputRef} />
       <OwnerNameInput />
       <SecurityCodeInput />
       <PasswordInput />

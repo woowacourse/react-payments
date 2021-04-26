@@ -37,7 +37,11 @@ export const handleCardNumberInputChange = (props) => {
 function setCardCompanyAfterValidation(props) {
   const { inputName, slicedInputValue, fourDigit, setCardCompany, setIsModalOpen } = props;
 
-  if (inputName !== 'second' || slicedInputValue.length < 4 || fourDigit.first < 4) {
+  if (
+    inputName !== 'second' ||
+    slicedInputValue.length < CARD_NUMBER_UNIT_LENGTH ||
+    fourDigit.first < CARD_NUMBER_UNIT_LENGTH
+  ) {
     return;
   }
 
@@ -50,6 +54,7 @@ function setCardCompanyAfterValidation(props) {
     setIsModalOpen(true);
     return;
   }
+
   setCardCompany({ name: cardCompany.name, color: cardCompany.color });
 }
 
