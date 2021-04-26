@@ -3,6 +3,11 @@
 body {
   font-family: 'Roboto', sans-serif;
   padding: 22px 28px;
+  min-width: 375px;
+  position: relative;
+  margin: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
 }
 
 button {

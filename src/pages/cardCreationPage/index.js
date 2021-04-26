@@ -39,7 +39,7 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
   return (
     <>
       <Header>
-        <Button styles={{ marginRight: '18px' }}>
+        <Button onClick={() => setCurrentPage(PAGE.CARD_LIST)} styles={{ marginRight: '18px' }}>
           <PrevIcon />
         </Button>
         <span>카드 추가</span>

@@ -12,7 +12,7 @@ const transparentInputStyles = {
 const isValidMonthInput = cardExpiredDate => {
   const month = Number(cardExpiredDate.month);
 
-  return 1 <= month && month <= 12 && !isNaN(month);
+  return 1 <= month && month <= 12 && cardExpiredDate.month.length === 2 && !isNaN(month);
 };
 
 const isValidYearInput = cardExpiredDate => {

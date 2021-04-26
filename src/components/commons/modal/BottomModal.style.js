@@ -9,6 +9,7 @@ const Styled = {
     bottom: '0px',
     backgroundColor: 'rgba(30, 30, 30, 0.55)',
     zIndex: '2',
+    marginBottom: '0px !important',
     ...styles,
   })),
   BottomModal: styled.div(({ styles }) => ({
