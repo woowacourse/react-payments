@@ -107,9 +107,8 @@ const CardAddPage = (props) => {
             {Array.from({ length: 4 }).map((_, index) => {
               const currentKey = Object.keys(cardNumbers)[index];
               return (
-                <>
+                <React.Fragment key={`cardNumber-${currentKey}`}>
                   <Input
-                    key={`cardNumber-${currentKey}`}
                     type={index > 1 ? 'password' : 'text'}
                     maxLength={4}
                     placeholder={'0000'}
@@ -117,7 +116,7 @@ const CardAddPage = (props) => {
                     onChange={(e) => handleCardNumbers(e, currentKey)}
                   />
                   {index === 3 ? '' : <span>-</span>}
-                </>
+                </React.Fragment>
               );
             })}
           </>

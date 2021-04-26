@@ -11,8 +11,6 @@ const InputContainer = (props) => {
     small: 'w-1.5/12',
   };
 
-  console.log(count);
-
   return (
     <div className="flex w-full flex-col mt-5">
       <div className="flex justify-between items-center">
