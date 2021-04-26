@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 import Styled from './Modal.styles';
 
-const Modal = ({ children, mobile, onClose }) => {
+const Modal = ({ children, mobile, onClose }, ref) => {
   const handleClose = (event) => {
     if (!onClose) return;
 
@@ -11,7 +12,9 @@ const Modal = ({ children, mobile, onClose }) => {
 
   return (
     <Styled.Dimmer onClick={handleClose} mobile={mobile}>
-      <Styled.Container>{children}</Styled.Container>
+      <Styled.Container tabIndex={-1} ref={ref}>
+        {children}
+      </Styled.Container>
     </Styled.Dimmer>
   );
 };
@@ -28,4 +31,4 @@ Modal.defaultProps = {
   onClose: null,
 };
 
-export default Modal;
+export default forwardRef(Modal);

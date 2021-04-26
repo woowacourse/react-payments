@@ -2,21 +2,23 @@ import PropTypes from 'prop-types';
 import Styled from './CardSelector.styles';
 import defaultCardURL from '../../assets/pullup.gif';
 
-const CardSelector = ({ logoImageURL, title }) => (
-  <Styled.Container>
-    <Styled.Logo src={logoImageURL} />
+const CardSelector = ({ logo, title, onClick }) => (
+  <Styled.Container onClick={onClick}>
+    <Styled.Logo src={logo} />
     <Styled.Title>{title}</Styled.Title>
   </Styled.Container>
 );
 
 CardSelector.propTypes = {
-  logoImageURL: PropTypes.string,
+  logo: PropTypes.string,
   title: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 CardSelector.defaultProps = {
-  logoImageURL: defaultCardURL,
+  logo: defaultCardURL,
   title: '브랜카드',
+  onClick: () => {},
 };
 
 export default CardSelector;

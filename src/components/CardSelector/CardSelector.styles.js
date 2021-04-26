@@ -9,6 +9,7 @@ const Styled = {
     transition: background-color 0.3s ease;
     border-radius: 10px;
     cursor: pointer;
+    text-align: center;
 
     &:hover,
     &:active {
@@ -18,13 +19,15 @@ const Styled = {
   Logo: styled.img`
     width: 37px;
     height: 37px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 50%;
     margin-bottom: 10px;
+    pointer-events: none;
   `,
   Title: styled.span`
     font-size: 12px;
     letter-spacing: -0.085em;
+    pointer-events: none;
   `,
 };
 

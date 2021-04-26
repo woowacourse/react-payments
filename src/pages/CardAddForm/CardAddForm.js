@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Container } from '../common/common.styles';
 import Styled from './CardAddForm.styles';
 import Header from '../../components/Header/Header';
@@ -9,16 +9,21 @@ import ToolTip from '../../components/ToolTip/ToolTip';
 import CardNumberInput from '../../components/CardNumberInput/CardNumberInput';
 import PinNumberInput from '../../components/PinNumberInput/PinNumberInput';
 import Button from '../../components/Button/Button';
+import CardSelector from '../../components/CardSelector/CardSelector';
 import useInput from '../../hooks/useInput';
+import useModal from '../../hooks/useModal';
 import { isNumeric } from '../../utils';
 import MESSAGE from '../../constants/message';
+import CARD from '../../constants/card';
 
 const CardAddForm = () => {
   const history = useHistory();
 
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [passwordDigits, setPasswordDigits] = useState(['', '']);
+  const [cardCompany, setCardCompany] = useState({});
 
+  const { Modal, modalRef, openModal, closeModal } = useModal(false);
   const ownerName = useInput('', { upperCase: true });
   const expiryDate = useInput('');
   const CVC = useInput('');
@@ -49,6 +54,11 @@ const CardAddForm = () => {
     });
   };
 
+  const handleClickCardSelector = (key) => {
+    setCardCompany(CARD[key]);
+    closeModal();
+  };
+
   const cardNumbersAsNumber = useMemo(() => cardNumbers.join(''), [cardNumbers]);
 
   const expiryDateAsNumber = useMemo(() => expiryDate.value.replace(/[^0-9]/g, ''), [
@@ -69,12 +79,43 @@ const CardAddForm = () => {
 
   const isNumericCardNumbers = useMemo(() => cardNumbers.every(isNumeric), [cardNumbers]);
 
+  // 배민 페이의 경우 모달이 뜨고 닫힐 때, 세번째 카드 번호 input에 focus 시 모달이 다시 뜸
+  // TODO: modal이 떴을 때, focusout(blur) 처리되도록 구현해야 함
+  useEffect(() => {
+    const [firstInput, secondInput] = cardNumbers;
+
+    const isFilledHalf = firstInput.length === 4 && secondInput.length === 4;
+    const isCardCompanySelected = Object.keys(cardCompany).length > 0;
+
+    if (isFilledHalf && !isCardCompanySelected) {
+      const matchedCardCompany = Object.values(CARD).find((company) =>
+        company.bins.some((binNumber) => {
+          const isMatchedFirstInput = firstInput === binNumber.slice(0, 4);
+          const isMatchedSecondInput = secondInput === binNumber.slice(4, 6);
+
+          return binNumber.length === 4
+            ? isMatchedFirstInput
+            : isMatchedFirstInput && isMatchedSecondInput;
+        })
+      );
+
+      if (matchedCardCompany) {
+        setCardCompany(matchedCardCompany);
+      } else {
+        openModal();
+      }
+    } else if (!isFilledHalf && isCardCompanySelected) {
+      setCardCompany({});
+    }
+  }, [cardNumbers, cardNumbersAsNumber, cardCompany, openModal, modalRef]);
+
   return (
     <Container>
       <Header hasBackButton text="카드 추가" onClickBackButton={history.goBack} />
       <Styled.Container>
         <Card
-          bgColor="#d2d2d2"
+          bgColor={cardCompany?.color}
+          companyName={cardCompany?.name}
           cardNumbers={cardNumbersAsNumber}
           ownerName={ownerName.value}
           expiryDate={formattedExpiryDate}
@@ -150,6 +191,18 @@ const CardAddForm = () => {
           </Styled.Row>
         </form>
       </Styled.Container>
+      <Modal mobile>
+        <Styled.CardSelect>
+          {Object.entries(CARD).map(([key, company]) => (
+            <CardSelector
+              key={key}
+              title={company.name}
+              logo={company.logo}
+              onClick={() => handleClickCardSelector(key)}
+            />
+          ))}
+        </Styled.CardSelect>
+      </Modal>
     </Container>
   );
 };

@@ -21,6 +21,10 @@ const Styled = {
     flex: 1;
     margin-left: 0.5em;
   `,
+  CardSelect: styled.div`
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  `,
 };
 
 export default Styled;
