@@ -3,11 +3,12 @@ import BackButton from '../BackButton/BackButton';
 import Card from '../Card/Card';
 import Input from '../Input/Input';
 import InputContainer from '../InputContainer/InputContainer';
+import ModalPage from './ModalPage';
 import TextButton from '../TextButton/TextButton';
 import Tooltip from '../Tooltip/Tooltip';
 
 const CardAddPage = (props) => {
-  const [cardCompany, setCardCompany] = useState({});
+  const [cardCompany, setCardCompany] = useState({ name: '', color: '' });
   const [expirationDate, setExpirationDate] = useState('');
   const [expiration, setExpiration] = useState({ month: '', year: '' });
   const [ownerName, setOwnerName] = useState('');
@@ -17,11 +18,22 @@ const CardAddPage = (props) => {
     second: '',
   });
   const [cardNumbers, setCardNumbers] = useState({
-    0: '',
-    1: '',
-    2: '',
-    3: '',
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
   });
+  const [isModalOpened, setIsModalOpened] = useState(false);
+
+  const handleCardCompany = ({ target }) => {
+    const company = target.closest('li').dataset.company;
+    setCardCompany({
+      name: `${company} 카드`,
+      color: `bg-${company}`,
+    });
+
+    setIsModalOpened(false);
+  };
 
   const handleExpirationInput = ({ target: { value } }, type) => {
     const numberReg = /^[0-9]{1,4}$/gi;
@@ -36,15 +48,20 @@ const CardAddPage = (props) => {
     });
   };
 
-  const handleCardNumbers = ({ target: { value } }, index) => {
+  const handleCardNumbers = ({ target: { value } }, key) => {
     const numberReg = /^[0-9]{1,4}$/gi;
-
     if (!numberReg.test(Number(value))) {
       return;
     }
 
-    setCardNumbers({ ...cardNumbers, [index]: value });
+    setCardNumbers({ ...cardNumbers, [key]: value });
   };
+
+  useEffect(() => {
+    if (cardNumbers.first.length + cardNumbers.second.length === 8 && !cardCompany.name) {
+      setIsModalOpened(true);
+    }
+  }, [cardNumbers, cardCompany]);
 
   const handleOwnerName = ({ target: { value } }) => {
     setOwnerName(value.trimStart());
@@ -78,7 +95,7 @@ const CardAddPage = (props) => {
       <div className="flex  justify-center my-7">
         <Card
           name={ownerName || 'NAME'}
-          expiration={expirationDate.replace(/ /g, '')}
+          expiration={expirationDate}
           cardCompany={cardCompany}
           cardNumbers={cardNumbers}
         />
@@ -87,19 +104,22 @@ const CardAddPage = (props) => {
       <form className="relative">
         <InputContainer title={'카드 번호'} bgColor={'bg-gray-250'}>
           <>
-            {Array.from({ length: 4 }).map((_, index) => (
-              <>
-                <Input
-                  key={`cardNumber${index}`}
-                  type={index > 1 ? 'password' : 'text'}
-                  maxLength={4}
-                  placeHolder={'0000'}
-                  value={cardNumbers[index]}
-                  onChange={(e) => handleCardNumbers(e, index)}
-                />
-                {index === 3 ? '' : <span>-</span>}
-              </>
-            ))}
+            {Array.from({ length: 4 }).map((_, index) => {
+              const currentKey = Object.keys(cardNumbers)[index];
+              return (
+                <>
+                  <Input
+                    key={`cardNumber-${currentKey}`}
+                    type={index > 1 ? 'password' : 'text'}
+                    maxLength={4}
+                    placeholder={'0000'}
+                    value={cardNumbers[currentKey]}
+                    onChange={(e) => handleCardNumbers(e, currentKey)}
+                  />
+                  {index === 3 ? '' : <span>-</span>}
+                </>
+              );
+            })}
           </>
         </InputContainer>
 
@@ -107,7 +127,7 @@ const CardAddPage = (props) => {
           <>
             <Input
               width={'quarter'}
-              placeHolder={'MM'}
+              placeholder={'MM'}
               type={'text'}
               maxLength={2}
               value={expiration.month}
@@ -115,7 +135,7 @@ const CardAddPage = (props) => {
             />
             <Input
               width={'quarter'}
-              placeHolder={'YY'}
+              placeholder={'YY'}
               type={'text'}
               maxLength={2}
               value={expiration.year}
@@ -127,7 +147,7 @@ const CardAddPage = (props) => {
         <InputContainer title={'카드 소유자 이름(선택)'} bgColor={'bg-gray-250'} count={ownerName.length}>
           <Input
             maxLength={30}
-            placeHolder={'카드에 표시된 이름과 동일하게 입력하세요.'}
+            placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
             value={ownerName}
             onChange={handleOwnerName}
             className={'text-left px-3'}
@@ -183,6 +203,8 @@ const CardAddPage = (props) => {
         </InputContainer>
         <TextButton text={'다음'} />
       </form>
+
+      {isModalOpened && <ModalPage onClick={handleCardCompany} />}
     </div>
   );
 };
