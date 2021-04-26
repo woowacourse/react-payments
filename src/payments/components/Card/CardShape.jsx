@@ -8,6 +8,7 @@ const CardShape = props => (
       props.backgroundColor ?? "bg-custom-gray-200",
       props.scale
     )}
+    onClick={props.onClick}
   >
     {!props.isRegistered && (
       <>

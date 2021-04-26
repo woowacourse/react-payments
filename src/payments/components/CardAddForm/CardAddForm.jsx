@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import classNames from "classnames";
+import { ERROR_TYPE, throwError } from "../../../@shared/utils";
 import Card from "../Card/Card";
 import Input from "../Input/Input";
 import InputTitle from "../InputTitle/InputTitle";
 import Button from "../Button/Button";
 import Header from "../Header/Header";
-import { ERROR_TYPE, throwError } from "../../../@shared/utils";
-import classNames from "classnames";
+import BankSelector from "../BankSelector/BankSelector";
+import Dimmer from "../Dimmer/Dimmer";
 
 const CardAddForm = props => {
-  const [backgroundColor] = useState(null);
-  const [bank] = useState(null);
+  const [isBankSelectorVisible, setBankSelectorVisible] = useState(false);
+  const [backgroundColor, setBackgroundColor] = useState(null);
+  const [bank, setBank] = useState(null);
   const [numbers] = useState([]);
   const [expirationDate, setExpirationDate] = useState("");
   const [isExpirationDateValid, setExpirationDateValid] = useState(true);
@@ -20,6 +23,16 @@ const CardAddForm = props => {
   const [isToolTipVisible, setToolTipVisible] = useState(false);
   const [passwords, setPasswords] = useState(Array(2).fill(null));
   const [isPasswordValid, setPasswordValid] = useState(true);
+
+  const handleCardClick = () => {
+    setBankSelectorVisible(!isBankSelectorVisible);
+  };
+
+  const handleBankClick = (backgroundColor, bank) => {
+    setBankSelectorVisible(false);
+    setBackgroundColor(backgroundColor);
+    setBank(bank);
+  };
 
   const handleExpirationDateChange = event => {
     try {
@@ -61,6 +74,7 @@ const CardAddForm = props => {
     }
   };
 
+  // TODO: 30글자 이상 입력되는 것 수정
   const handleOwnerNameChange = event => {
     try {
       const { value } = event.target;
@@ -164,6 +178,7 @@ const CardAddForm = props => {
               expirationDate={expirationDate}
               ownerName={ownerName}
               isRegistered={false}
+              onClick={handleCardClick}
             />
           </div>
           <div className="flex flex-col w-full mb-2">
@@ -306,6 +321,13 @@ const CardAddForm = props => {
       <div className="flex justify-end items-center w-full h-10">
         <Button name="다음" />
       </div>
+
+      {isBankSelectorVisible && (
+        <>
+          <Dimmer />
+          <BankSelector onClick={handleBankClick} />
+        </>
+      )}
     </>
   );
 };
