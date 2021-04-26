@@ -4,24 +4,19 @@ import { nanoid } from 'nanoid';
 import { ScreenContainer } from '../../styles/common.styles';
 import Styled from './CardAddForm.styles';
 import { findCardCompany } from './CardAddForm.services';
-import Header from '../../components/Header/Header';
-import Card from '../../components/Card/Card';
-import InputBox from '../../components/InputBox/InputBox';
-import ToolTip from '../../components/ToolTip/ToolTip';
-import CardNumberInput from '../../components/CardNumberInput/CardNumberInput';
-import PinNumberInput from '../../components/PinNumberInput/PinNumberInput';
-import Button from '../../components/Button/Button';
-import CardSelector from '../../components/CardSelector/CardSelector';
-import useInput from '../../hooks/useInput';
-import useModal from '../../hooks/useModal';
-import useLocalStorage from '../../hooks/useLocalStorage';
-import useMultipleInput from '../../hooks/useMultipleInput';
+import {
+  Header,
+  Card,
+  InputBox,
+  ToolTip,
+  CardNumberInput,
+  PinNumberInput,
+  Button,
+  CardSelector,
+} from '../../components';
+import { useInput, useModal, useLocalStorage, useMultipleInput } from '../../hooks';
 import { isNumeric, initArray } from '../../utils';
-import MESSAGE from '../../constants/message';
-import CARD from '../../constants/card';
-import LOCAL_STORAGE_KEY from '../../constants/localStorageKey';
-import REGEX from '../../constants/regex';
-import ROUTE from '../../constants/route';
+import { CARD, LOCAL_STORAGE_KEY, MESSAGE, REGEX, ROUTE } from '../../constants';
 
 const CardAddForm = () => {
   const history = useHistory();

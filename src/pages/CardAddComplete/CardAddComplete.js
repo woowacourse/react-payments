@@ -1,14 +1,9 @@
 import { useHistory, useLocation, Redirect } from 'react-router-dom';
 import Styled from './CardAddComplete.styles';
-import Card from '../../components/Card/Card';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Button';
+import { Card, Input, Button } from '../../components';
+import { MESSAGE, LOCAL_STORAGE_KEY, ROUTE } from '../../constants';
+import { useInput, useLocalStorage } from '../../hooks';
 import { ScreenContainer } from '../../styles/common.styles';
-import MESSAGE from '../../constants/message';
-import LOCAL_STORAGE_KEY from '../../constants/localStorageKey';
-import useInput from '../../hooks/useInput';
-import useLocalStorage from '../../hooks/useLocalStorage';
-import ROUTE from '../../constants/route';
 
 const CardAddComplete = () => {
   const history = useHistory();

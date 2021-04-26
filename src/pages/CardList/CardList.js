@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import Card from '../../components/Card/Card';
-import LOCAL_STORAGE_KEY from '../../constants/localStorageKey';
-import ROUTE from '../../constants/route';
-import useLocalStorage from '../../hooks/useLocalStorage';
+import { Card } from '../../components';
+import { ROUTE, LOCAL_STORAGE_KEY } from '../../constants';
+import { useLocalStorage } from '../../hooks';
 
 const CardList = () => {
   const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
