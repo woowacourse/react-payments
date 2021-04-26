@@ -5,7 +5,7 @@ import { PAGE } from '../../../../constants';
 import './style.css';
 
 export const CardInfoForm = (props) => {
-  const { setRoute, setCardCompany } = props;
+  const { setRoute, setCardCompany, setIsModalOpen } = props;
 
   const handleCardInfoSubmit = (e) => {
     e.preventDefault();
@@ -14,7 +14,7 @@ export const CardInfoForm = (props) => {
 
   return (
     <Form className="CardInfoForm">
-      <CardNumberInput setCardCompany={setCardCompany} />
+      <CardNumberInput setCardCompany={setCardCompany} setIsModalOpen={setIsModalOpen} />
       <ExpirationDateInput />
       <UserNameInput />
       <SecurityCodeInput />

@@ -6,7 +6,7 @@ export const PAGE = {
 
 export const CARD_NUMBER_UNIT_LENGTH = 4;
 
-export const CARD_COMPANY_INFO = [
+export const CARD_COMPANY_LIST = [
   {
     name: '신한카드',
     color: '#e24141',

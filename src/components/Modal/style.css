@@ -10,6 +10,8 @@
   background: rgba(0, 0, 0, 0.5);
   transition: opacity 0.25s ease;
   z-index: 3;
+  align-items: center;
+  justify-content: center;
 }
 
 .Modal--open {
@@ -17,7 +19,13 @@
   visibility: visible;
 }
 
-.ModalInner {
+.Modal__ViewPort {
+  position: relative;
+  width: 375px;
+  height: 701px;
+}
+
+.Modal__Content {
   transition: top 0.25s ease;
   margin: auto;
   overflow: auto;
@@ -25,7 +33,7 @@
   border-radius: 5px;
 }
 
-.ModalInner--bottom {
+.CardCompanySelectModal--bottom {
   position: absolute;
   bottom: 0;
   width: 100%;

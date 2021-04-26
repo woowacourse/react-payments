@@ -3,7 +3,7 @@ import { Container, Input, Label, Text } from '../../../../../components';
 import { handleBlockInvalidChar, handleCardNumberInputChange } from './handler';
 import { CARD_NUMBER_UNIT_LENGTH } from '../../../../../constants';
 
-export const CardNumberInput = ({ setCardCompany }) => {
+export const CardNumberInput = ({ setCardCompany, setIsModalOpen }) => {
   const [fourDigit, setFourDigit] = useState({
     firstFourDigits: '',
     secondFourDigits: '',
@@ -38,7 +38,14 @@ export const CardNumberInput = ({ setCardCompany }) => {
           name="firstFourDigits"
           value={fourDigit.firstFourDigits}
           onChange={(e) =>
-            handleCardNumberInputChange({ e, nextInput, fourDigit, setFourDigit, setCardCompany })
+            handleCardNumberInputChange({
+              e,
+              nextInput,
+              fourDigit,
+              setFourDigit,
+              setCardCompany,
+              setIsModalOpen,
+            })
           }
           onKeyDown={handleBlockInvalidChar}
         />
@@ -50,7 +57,14 @@ export const CardNumberInput = ({ setCardCompany }) => {
           name="secondFourDigits"
           value={fourDigit.secondFourDigits}
           onChange={(e) =>
-            handleCardNumberInputChange({ e, nextInput, fourDigit, setFourDigit, setCardCompany })
+            handleCardNumberInputChange({
+              e,
+              nextInput,
+              fourDigit,
+              setFourDigit,
+              setCardCompany,
+              setIsModalOpen,
+            })
           }
           onKeyDown={handleBlockInvalidChar}
         />
@@ -62,7 +76,14 @@ export const CardNumberInput = ({ setCardCompany }) => {
           name="thirdFourDigits"
           value={fourDigit.thirdFourDigits}
           onChange={(e) =>
-            handleCardNumberInputChange({ e, nextInput, fourDigit, setFourDigit, setCardCompany })
+            handleCardNumberInputChange({
+              e,
+              nextInput,
+              fourDigit,
+              setFourDigit,
+              setCardCompany,
+              setIsModalOpen,
+            })
           }
           onKeyDown={handleBlockInvalidChar}
         />
@@ -74,7 +95,14 @@ export const CardNumberInput = ({ setCardCompany }) => {
           name="fourthFourDigits"
           value={fourDigit.fourthFourDigits}
           onChange={(e) =>
-            handleCardNumberInputChange({ e, nextInput, fourDigit, setFourDigit, setCardCompany })
+            handleCardNumberInputChange({
+              e,
+              nextInput,
+              fourDigit,
+              setFourDigit,
+              setCardCompany,
+              setIsModalOpen,
+            })
           }
           onKeyDown={handleBlockInvalidChar}
         />

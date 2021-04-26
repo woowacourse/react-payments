@@ -7,19 +7,22 @@ import './style.css';
 export const AddFormPage = (props) => {
   const { setRoute } = props;
   const [cardCompany, setCardCompany] = useState({ name: '', color: '' });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <>
-      <div className="AddFormPage">
-        <div className="AddFormPage__Title">
-          <BackwardButton />
-          <Title>카드 추가</Title>
-        </div>
-        <CreditCardPreview cardCompany={cardCompany} />
-        <CardInfoForm setRoute={setRoute} setCardCompany={setCardCompany} />
+    <div className="AddFormPage">
+      <div className="AddFormPage__Title">
+        <BackwardButton />
+        <Title>카드 추가</Title>
       </div>
-      <CardCompanySelectModal />
-    </>
+      <CreditCardPreview cardCompany={cardCompany} />
+      <CardInfoForm
+        setRoute={setRoute}
+        setCardCompany={setCardCompany}
+        setIsModalOpen={setIsModalOpen}
+      />
+      <CardCompanySelectModal isOpen={isModalOpen} />
+    </div>
   );
 };
 

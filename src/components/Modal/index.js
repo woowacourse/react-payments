@@ -7,11 +7,13 @@ const cx = classnames.bind(styles);
 
 export const Modal = ({ isOpen, className, children, ...props }) => {
   const modalClass = cx('Modal', { 'Modal--open': isOpen });
-  const modalInnerClass = cx('ModalInner', className);
+  const modalContentClass = cx('Modal__Content', className);
 
   return (
     <div className={modalClass} {...props}>
-      <div className={modalInnerClass}>{children}</div>
+      <div className="Modal__ViewPort">
+        <div className={modalContentClass}>{children}</div>
+      </div>
     </div>
   );
 };
