@@ -37,11 +37,9 @@ function setCardCompanyAfterValidation(props) {
     company.patterns.includes(firstSixDigits),
   );
 
-  // TODO: 버튼 클릭으로 카드사 선택 및 Dimmed 클릭으로 모달 창 끄기 구현
   if (!cardCompany) {
     setIsModalOpen(true);
     return;
   }
-
   setCardCompany({ name: cardCompany.name, color: cardCompany.color });
 }

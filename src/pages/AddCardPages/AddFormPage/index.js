@@ -21,7 +21,11 @@ export const AddFormPage = (props) => {
         setCardCompany={setCardCompany}
         setIsModalOpen={setIsModalOpen}
       />
-      <CardCompanySelectModal isOpen={isModalOpen} />
+      <CardCompanySelectModal
+        isOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        setCardCompany={setCardCompany}
+      />
     </div>
   );
 };
