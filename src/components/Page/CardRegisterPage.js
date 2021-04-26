@@ -1,30 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '../Card/Card';
 import CardNameInput from '../CardNameInput/CardNameInput';
 import TextButton from '../TextButton/TextButton';
 
 const CardRegisterPage = (props) => {
+  const { cardCompany, cardNumbers, expiration, ownerName, resetState } = props;
+  const [cardName, setCardName] = useState('');
+
+  const handleCardSubmit = (e) => {
+    e.preventDefault();
+
+    const { value } = e.target.elements['cardName'];
+    setCardName(value);
+    resetState();
+  };
+
   return (
-    <div className="h-full p-5 flex flex-col items-center relative">
+    <form className="h-full p-5 flex flex-col items-center" onSubmit={handleCardSubmit}>
       <h1 className="mt-20 text-2xl text-gray-600">카드 등록이 완료되었습니다.</h1>
       <div className="mt-20 mb-10">
         <Card
-          cardNumbers={{
-            0: '1234',
-            1: '1234',
-            2: '1234',
-            3: '1234',
-          }}
-          cardCompany={{ name: '로이드카드' }}
-          expiration={'11/11'}
           size={'large'}
+          name={ownerName || 'NAME'}
+          expiration={`${expiration.month || 'MM'}/${expiration.year || 'YY'}`}
+          cardCompany={cardCompany}
+          cardNumbers={cardNumbers}
         />
       </div>
-      <CardNameInput />
-      <div className="mt-40 ">
+      <CardNameInput name={'cardName'} />
+      <div className="mt-40">
         <TextButton text={'완료'} />
       </div>
-    </div>
+    </form>
   );
 };
 

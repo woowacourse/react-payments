@@ -5,7 +5,7 @@ const TextButton = (props) => {
   const { text, type = 'submit', color = 'text-green-350' } = props;
 
   return (
-    <button type={type} className={`absolute right-1 ${color} font-bold`}>
+    <button type={type} className={`absolute right-10 ${color} font-bold`}>
       {text}
     </button>
   );

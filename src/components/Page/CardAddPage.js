@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import BackButton from '../BackButton/BackButton';
 import Card from '../Card/Card';
 import Input from '../Input/Input';
@@ -6,6 +6,7 @@ import InputContainer from '../InputContainer/InputContainer';
 import ModalPage from './ModalPage';
 import TextButton from '../TextButton/TextButton';
 import Tooltip from '../Tooltip/Tooltip';
+import CardRegisterPage from './CardRegisterPage';
 
 const CardAddPage = (props) => {
   const [cardCompany, setCardCompany] = useState({ name: '', color: '' });
@@ -23,6 +24,26 @@ const CardAddPage = (props) => {
     fourth: '',
   });
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [isAllValid, setIsAllValid] = useState(false);
+
+  const resetState = () => {
+    setCardCompany({ name: '', color: '' });
+    setExpiration({ month: '', year: '' });
+    setOwnerName('');
+    setSecurityCode('');
+    setPassword({
+      first: '',
+      second: '',
+    });
+    setCardNumbers({
+      first: '',
+      second: '',
+      third: '',
+      fourth: '',
+    });
+    setIsModalOpened(false);
+    setIsAllValid(false);
+  };
 
   const handleCardCompany = ({ target }) => {
     const company = target.closest('li').dataset.company;
@@ -85,7 +106,13 @@ const CardAddPage = (props) => {
     setPassword({ ...password, [name]: value });
   };
 
-  return (
+  const handleCardInfoSubmit = (e) => {
+    e.preventDefault();
+
+    setIsAllValid(true);
+  };
+
+  return !isAllValid ? (
     <div className="p-5">
       <div className="flex items-center">
         <BackButton />
@@ -100,7 +127,7 @@ const CardAddPage = (props) => {
         />
       </div>
 
-      <form className="relative">
+      <form onSubmit={handleCardInfoSubmit}>
         <InputContainer title={'카드 번호'} bgColor={'bg-gray-250'} width={'w-full'}>
           <>
             {Array.from({ length: 4 }).map((_, index) => {
@@ -215,7 +242,14 @@ const CardAddPage = (props) => {
 
       {isModalOpened && <ModalPage onClick={handleCardCompany} />}
     </div>
+  ) : (
+    <CardRegisterPage
+      cardCompany={cardCompany}
+      cardNumbers={cardNumbers}
+      expiration={expiration}
+      ownerName={ownerName}
+      resetState={resetState}
+    />
   );
 };
-
 export default CardAddPage;
