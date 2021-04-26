@@ -140,12 +140,11 @@ const AddCardForm = () => {
     onSetCardBrand();
   }, [cardNumber[0], cardNumber[1]]);
 
+  const isCardBrandEmpty = () =>
+    cardNumber[0].length === CARD_NUMBER_DIGITS && cardNumber[1].length === CARD_NUMBER_DIGITS && cardBrand.name === '';
+
   const onClickNextButton = () => {
-    if (
-      cardNumber[0].length === CARD_NUMBER_DIGITS &&
-      cardNumber[1].length === CARD_NUMBER_DIGITS &&
-      cardBrand.name === ''
-    ) {
+    if (isCardBrandEmpty()) {
       onSetCardBrand();
       return;
     }
