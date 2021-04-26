@@ -1,10 +1,29 @@
-import React from 'react';
+import { useState } from 'react';
 import { Button, Card, CreditCard, Title } from '../../../components';
 import { CardInfoForm } from './CardInfoForm';
 import { CardCompanySelectModal } from './CardCompanySelectModal';
 import './style.css';
 
-const BackwardButton = () => {
+export const AddFormPage = (props) => {
+  const { setRoute } = props;
+  const [cardCompany, setCardCompany] = useState({ name: '', color: '' });
+
+  return (
+    <>
+      <div className="AddFormPage">
+        <div className="AddFormPage__Title">
+          <BackwardButton />
+          <Title>카드 추가</Title>
+        </div>
+        <CreditCardPreview cardCompany={cardCompany} />
+        <CardInfoForm setRoute={setRoute} setCardCompany={setCardCompany} />
+      </div>
+      <CardCompanySelectModal />
+    </>
+  );
+};
+
+function BackwardButton() {
   const size = 16;
   const color = '#525252';
 
@@ -15,37 +34,19 @@ const BackwardButton = () => {
       </svg>
     </Button>
   );
-};
+}
 
-const CreditCardPreview = () => {
+function CreditCardPreview({ cardCompany }) {
   return (
     <div className="CreditCardPreview">
-      <Card backgroundColor="#94DACD" boxShadow size="medium">
+      <Card backgroundColor={cardCompany.color} boxShadow size="medium">
         <CreditCard
-          cardCompany="로이드카드"
-          cardNumber="1111 2222 3333 4444"
-          expirationDate="04/21"
-          ownerName="SUN"
+          cardCompany={cardCompany.name}
+          cardNumber=""
+          expirationDate="MM/YY"
+          ownerName="NAME"
         />
       </Card>
     </div>
   );
-};
-
-export const AddFormPage = (props) => {
-  const { setRoute } = props;
-
-  return (
-    <>
-      <div className="AddFormPage">
-        <div className="AddFormPage__Title">
-          <BackwardButton />
-          <Title>카드 추가</Title>
-        </div>
-        <CreditCardPreview />
-        <CardInfoForm setRoute={setRoute} />
-      </div>
-      <CardCompanySelectModal />
-    </>
-  );
-};
+}

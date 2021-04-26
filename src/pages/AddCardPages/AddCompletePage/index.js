@@ -10,7 +10,7 @@ const CreditCardPreview = () => {
         <CreditCard
           cardCompany="로이드카드"
           cardNumber="1111 2222 3333 4444"
-          expirationDate="04/21"
+          expirationDate="MM/YY"
           ownerName="SUN"
         />
       </Card>
