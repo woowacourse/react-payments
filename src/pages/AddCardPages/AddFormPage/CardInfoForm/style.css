@@ -5,3 +5,14 @@
 .CardInfoForm > .Label {
   margin-top: 1rem;
 }
+
+.CardInfoForm .Dash {
+  text-align: center;
+  color: #04c09e;
+  font-size: 0.75rem;
+  width: 1rem;
+}
+
+.CardInfoForm .Dash--hidden {
+  visibility: hidden;
+}

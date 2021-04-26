@@ -1,29 +1,100 @@
-import { createRef, useEffect } from 'react';
+import { createRef, useEffect, useState } from 'react';
 import { Container, Input, Label, Text } from '../../../../components';
+import { CARD_NUMBER_UNIT_LENGTH } from '../../../../constants';
 
-export const CardNumberInput = () => {
-  const firstCardNumberInputref = createRef();
-  const dash = (
-    <Text color="#04C09E" fontSize="0.75rem" textAlign="start" width="1rem">
+const Dash = ({ length }) => {
+  const className = length === CARD_NUMBER_UNIT_LENGTH ? 'Dash' : 'Dash Dash--hidden';
+  return (
+    <Text className={className} width="1rem">
       -
     </Text>
   );
+};
+
+export const CardNumberInput = () => {
+  const [fourDigit, setFourDigit] = useState({
+    firstFourDigits: '',
+    secondFourDigits: '',
+    thirdFourDigits: '',
+    fourthFourDigits: '',
+  });
+  const firstCardNumberInput = createRef();
+  const secondCardNumberInput = createRef();
+  const thirdCardNumberInput = createRef();
+  const fourthCardNumberInput = createRef();
+
+  const nextInput = {
+    firstFourDigits: secondCardNumberInput,
+    secondFourDigits: thirdCardNumberInput,
+    thirdFourDigits: fourthCardNumberInput,
+    fourthFourDigits: null,
+  };
+
+  const handleBlockInvalidChar = (e) => ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault();
+
+  const handleCardNumberInputChange = ({ target }) => {
+    const inputValue = target.value;
+    const slicedInputValue =
+      inputValue.length > CARD_NUMBER_UNIT_LENGTH
+        ? inputValue.slice(0, CARD_NUMBER_UNIT_LENGTH)
+        : inputValue;
+
+    if (slicedInputValue.length === CARD_NUMBER_UNIT_LENGTH) {
+      nextInput[target.name]?.current.focus();
+    }
+    setFourDigit({
+      ...fourDigit,
+      [target.name]: slicedInputValue,
+    });
+  };
 
   useEffect(() => {
-    firstCardNumberInputref.current?.focus();
+    firstCardNumberInput.current?.focus();
   }, []);
 
   return (
     <>
       <Label>카드 번호</Label>
       <Container className="CardInfoForm__Input__Filler--filled CardNumberInput__Filler">
-        <Input className="CardNumberInput__Field" type="number" ref={firstCardNumberInputref} />
-        {dash}
-        <Input className="CardNumberInput__Field" type="number" />
-        {dash}
-        <Input className="CardNumberInput__Field" type="password" />
-        {dash}
-        <Input className="CardNumberInput__Field" type="password" />
+        <Input
+          className="CardNumberInput__Field"
+          type="number"
+          ref={firstCardNumberInput}
+          name="firstFourDigits"
+          value={fourDigit.firstFourDigits}
+          onChange={handleCardNumberInputChange}
+          onKeyDown={handleBlockInvalidChar}
+        />
+        <Dash length={fourDigit.firstFourDigits.length} />
+        <Input
+          className="CardNumberInput__Field"
+          type="number"
+          ref={secondCardNumberInput}
+          name="secondFourDigits"
+          value={fourDigit.secondFourDigits}
+          onChange={handleCardNumberInputChange}
+          onKeyDown={handleBlockInvalidChar}
+        />
+        <Dash length={fourDigit.secondFourDigits.length} />
+        <Input
+          className="CardNumberInput__Field"
+          type="password"
+          ref={thirdCardNumberInput}
+          name="thirdFourDigits"
+          value={fourDigit.thirdFourDigits}
+          onChange={handleCardNumberInputChange}
+          onKeyDown={handleBlockInvalidChar}
+        />
+        <Dash length={fourDigit.thirdFourDigits.length} />
+        <Input
+          className="CardNumberInput__Field"
+          type="password"
+          ref={fourthCardNumberInput}
+          name="fourthFourDigits"
+          value={fourDigit.fourthFourDigits}
+          onChange={handleCardNumberInputChange}
+          onKeyDown={handleBlockInvalidChar}
+        />
       </Container>
     </>
   );

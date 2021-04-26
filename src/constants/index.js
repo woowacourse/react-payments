@@ -1,5 +1,7 @@
 export const PAGE = {
   CARD_LIST: 'cardList',
   ADD_CARD_FORM: 'addCardForm',
-  ADD_CARD_COMPELETE: 'addCardCompelete',
+  ADD_CARD_COMPLETE: 'addCardComplete',
 };
+
+export const CARD_NUMBER_UNIT_LENGTH = 4;

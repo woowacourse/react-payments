@@ -8,10 +8,6 @@
   color: #04c09e;
 }
 
-.Input[type='password'] {
-  font-size: 2rem;
-}
-
 .Input[type='number']::-webkit-outer-spin-button,
 .Input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
