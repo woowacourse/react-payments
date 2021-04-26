@@ -52,6 +52,7 @@ const PinNumberInput = ({
                 onChange={handleChange}
                 value={value}
                 required={required}
+                pattern="^[0-9]$"
               />
             </Styled.Label>
           );

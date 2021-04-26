@@ -48,7 +48,7 @@ const CardNumberInput = ({
               textAlign="center"
               onChange={handleChange}
               value={value}
-              pattern="^[0-9]*$"
+              pattern="^[0-9]{4}$"
               inputmode="numeric"
               // eslint-disable-next-line no-return-assign
               ref={(el) => (inputRef[index] = el)}

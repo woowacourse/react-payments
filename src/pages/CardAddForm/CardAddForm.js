@@ -142,6 +142,7 @@ const CardAddForm = () => {
                 maxLength={4 + 3}
                 textAlign="center"
                 inputmode="numeric"
+                pattern="^(0[1-9]|1[012])\s\/\s([0-9]){2}$"
                 required
               />
             </Styled.ExpiryDate>
@@ -159,7 +160,7 @@ const CardAddForm = () => {
             <Styled.CVC>
               <InputBox
                 type="password"
-                pattern="^[0-9]*$"
+                pattern="^[0-9]{3}$"
                 isError={!isNumeric(CVC.value)}
                 errorMessage={!isNumeric(CVC.value) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''}
                 inputmode="numeric"
