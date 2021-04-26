@@ -56,11 +56,11 @@
 
 /* 카드 소유자 */
 
-.CardOwnerInput__Filler {
+.OwnerNameInput__Filler {
   width: 100%;
 }
 
-.CardOwnerInput__Field {
+.OwnerNameInput__Field {
   width: 18rem;
 }
 

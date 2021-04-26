@@ -1,6 +1,9 @@
 import { Button, Form } from '../../../../components';
-import { ExpirationDateInput, UserNameInput, SecurityCodeInput, PasswordInput } from './inputs';
 import { CardNumberInput } from './CardNumberInput';
+import { ExpirationDateInput } from './ExpirationDateInput';
+import { OwnerNameInput } from './OwnerNameInput';
+import { SecurityCodeInput } from './SecurityCodeInput';
+import { PasswordInput } from './PasswordInput';
 import { PAGE } from '../../../../constants';
 import './style.css';
 
@@ -16,7 +19,7 @@ export const CardInfoForm = (props) => {
     <Form className="CardInfoForm">
       <CardNumberInput setCardCompany={setCardCompany} setIsModalOpen={setIsModalOpen} />
       <ExpirationDateInput />
-      <UserNameInput />
+      <OwnerNameInput />
       <SecurityCodeInput />
       <PasswordInput />
       <Button onClick={handleCardInfoSubmit}>다음</Button>

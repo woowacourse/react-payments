@@ -33,10 +33,10 @@ ExpirationMonthInput.args = {
   placeholder: 'MM',
 };
 
-export const CardOwnerNameInput = Template.bind({});
-CardOwnerNameInput.args = {
-  container: 'CardInfoForm__Input__Filler--filled CardOwnerInput__Filler',
-  className: 'CardOwnerInput__Field',
+export const OwnerNameNameInput = Template.bind({});
+OwnerNameNameInput.args = {
+  container: 'CardInfoForm__Input__Filler--filled OwnerNameInput__Filler',
+  className: 'OwnerNameInput__Field',
   value: 'SUN',
   placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
 };
