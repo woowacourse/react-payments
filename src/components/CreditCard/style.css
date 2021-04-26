@@ -5,6 +5,7 @@
 
 .CreditCard__CardCompany {
   display: inline-block;
+  height: 0.625em;
   font-size: 0.625em;
   color: #383838;
   margin-bottom: 2.2em;
@@ -14,6 +15,7 @@
   display: flex;
   justify-content: center;
   margin-top: 0.8em;
+  height: 0.85em;
   font-size: 0.85em;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -27,6 +29,7 @@
 }
 
 .CreditCard__OwnerName {
+  height: 0.71em;
   font-size: 0.71em;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -34,6 +37,7 @@
 }
 
 .CreditCard__ExpirationDate {
+  height: 0.71em;
   font-size: 0.71em;
   font-weight: 600;
   letter-spacing: 0.14em;

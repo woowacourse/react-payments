@@ -4,7 +4,15 @@ export const handleBlockInvalidChar = (e) =>
   ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault();
 
 export const handleCardNumberInputChange = (props) => {
-  const { e, nextInput, fourDigit, setFourDigit, setCardCompany, setIsModalOpen } = props;
+  const {
+    e,
+    nextInput,
+    fourDigit,
+    setFourDigit,
+    setCardCompany,
+    setIsModalOpen,
+    setCardNumberInString,
+  } = props;
   const inputValue = e.target.value;
   const inputName = e.target.name;
   const slicedInputValue =
@@ -23,6 +31,7 @@ export const handleCardNumberInputChange = (props) => {
     setCardCompany,
     setIsModalOpen,
   });
+  setCardNumber({ inputName, inputValue, fourDigit, setCardNumberInString });
 };
 
 function setCardCompanyAfterValidation(props) {
@@ -42,4 +51,13 @@ function setCardCompanyAfterValidation(props) {
     return;
   }
   setCardCompany({ name: cardCompany.name, color: cardCompany.color });
+}
+
+function setCardNumber({ inputName, fourDigit, inputValue, setCardNumberInString }) {
+  if (inputName !== 'fourth' || inputValue.length !== CARD_NUMBER_UNIT_LENGTH) {
+    return;
+  }
+
+  const cardNumberInString = [fourDigit.first, fourDigit.second, '····', '····'].join(' ');
+  setCardNumberInString(cardNumberInString);
 }
