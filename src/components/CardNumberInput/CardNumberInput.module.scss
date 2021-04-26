@@ -1,0 +1,66 @@
+.card-number-input {
+  display: inline-flex;
+  flex-direction: column;
+  width: 320px;
+
+  &__label {
+    display: block;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 7px;
+    letter-spacing: -0.085em;
+  }
+
+  &__input-wrapper {
+    width: 100%;
+    background-color: #ecebf1;
+    padding: 10px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #04c09e;
+    border-radius: 7px;
+    border: none;
+    transition: box-shadow 0.5s;
+    letter-spacing: -0.085em;
+  }
+
+  &__input-seperator {
+    display: inline-block;
+    width: 6px;
+    height: 2.2px;
+    background-color: #04c09e;
+  }
+
+  &__input {
+    position: relative;
+    top: -2px;
+    width: 50px;
+    height: 30px;
+    border: none;
+    color: #04c09e;
+    font-size: 20px;
+    font-weight: 500;
+    background: none;
+    &:not(:last-child) {
+      margin-right: 2px;
+    }
+    &:not(:first-child) {
+      margin-left: 2px;
+    }
+    text-align: center;
+
+    &:focus {
+      outline: none;
+    }
+
+    &--dot {
+      position: relative;
+      top: -2px;
+      display: flex;
+      font-size: 28px;
+      letter-spacing: -1px;
+    }
+  }
+}
