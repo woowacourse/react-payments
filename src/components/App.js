@@ -1,28 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { PAGE } from "../constants";
 import Header from "../stories/Header";
 import CardAddition from "./CardAddition";
 import CompleteCardAddition from "./CompleteCardAddition";
-
-const PAGE = {
-  HOME: {
-    ID: "HOME",
-    NAME: "보유카드",
-  },
-  CARD_ADDITION: {
-    ID: "CARD_ADDITION",
-    NAME: "카드추가",
-  },
-  COMPLETE_CARD_ADDITION: {
-    ID: "COMPLETE_CARD_ADDITION",
-    NAME: "",
-  },
-};
+import Home from "./Home";
 
 function App() {
   const [page, setPage] = useState({
     id: PAGE.HOME.ID,
     props: {},
   });
+  const [cardList, setCardList] = useState([]);
+
   //TODO: 네이밍 고민해보기
   const pageHandler = {
     [PAGE.HOME.ID]: null,
@@ -35,25 +24,16 @@ function App() {
   };
   const mainComponent = {
     [PAGE.HOME.ID]: (props) => (
-      <div>
-        home
-        <button
-          onClick={() =>
-            setPage({
-              name: PAGE.CARD_ADDITION.NAME,
-              id: PAGE.CARD_ADDITION.ID,
-            })
-          }
-        >
-          go card addition
-        </button>
-      </div>
+      <Home cardList={cardList} routeTo={setPage} {...props} />
     ),
     [PAGE.CARD_ADDITION.ID]: (props) => (
       <CardAddition onCardInfoSubmit={onCardInfoSubmit} {...props} />
     ),
     [PAGE.COMPLETE_CARD_ADDITION.ID]: (props) => (
-      <CompleteCardAddition {...props} />
+      <CompleteCardAddition
+        onCardAdditionComplete={onCardAdditionComplete}
+        {...props}
+      />
     ),
   };
 
@@ -66,6 +46,20 @@ function App() {
       },
     });
   };
+
+  const onCardAdditionComplete = (card) => {
+    setCardList((prevCardList) => [...prevCardList, card]);
+  };
+
+  //TODO: cardList가 변하면 모두 홈으로 돌아가는 현상에 대해서 논의하기
+  useEffect(() => {
+    setPage({
+      id: PAGE.HOME.ID,
+      props: {
+        cardList,
+      },
+    });
+  }, [cardList]);
 
   return (
     <div className="app">

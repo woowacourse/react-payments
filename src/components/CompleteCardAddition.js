@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import Card from "../stories/Card";
@@ -6,14 +6,21 @@ import Button from "../stories/Button";
 import { CARD_SIZE } from "../stories/constants/card";
 
 function CompleteCardAddition(props) {
-  const {
-    cardType,
-    cardNumbers,
-    expirationDate,
-    username,
-    secureCode,
-    password,
-  } = props.card;
+  const { cardType, cardNumbers, expirationDate, username } = props.card;
+  const [cardDescription, setCardDescription] = useState("");
+
+  const onCardDescriptionChange = ({ target }) => {
+    setCardDescription(target.value);
+  };
+
+  const onDescriptionSubmit = () => {
+    const card = {
+      cardDescription,
+      ...props.card,
+    };
+
+    props.onCardAdditionComplete(card);
+  };
 
   return (
     <div className="complete-card-addition">
@@ -27,8 +34,16 @@ function CompleteCardAddition(props) {
         size={CARD_SIZE.LARGE}
       />
       <form>
-        <input type="text" placeholder="카드 별명을 입력해주세요" />
-        <Button innerText="확인" />
+        <input
+          value={cardDescription}
+          onChange={onCardDescriptionChange}
+          type="text"
+          minLength="1"
+          maxLength="30"
+          placeholder="카드 별명을 입력해주세요"
+          required
+        />
+        <Button innerText="확인" onClick={onDescriptionSubmit} />
       </form>
     </div>
   );
