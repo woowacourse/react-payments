@@ -3,7 +3,7 @@ import InputContainer from './InputContainer';
 
 export default {
   component: InputContainer,
-  title: 'InputContainer',
+  title: 'Items/InputContainer',
 };
 
 const Template = (args) => <InputContainer {...args} />;

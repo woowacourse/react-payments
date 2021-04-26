@@ -2,8 +2,8 @@ import React from 'react';
 import Tooltip from './Tooltip';
 
 export default {
-  component: Tooltip,
-  title: 'Tooltip',
+  component: 'Tooltip',
+  title: 'Items/Tooltip',
 };
 
 const Template = (args) => <Tooltip {...args} />;

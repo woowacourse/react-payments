@@ -3,7 +3,7 @@ import BackButton from './BackButton';
 
 export default {
   component: BackButton,
-  title: 'BackButton',
+  title: 'Items/BackButton',
 };
 
 const Template = () => <BackButton />;

@@ -3,7 +3,7 @@ import Card from './Card';
 
 export default {
   component: Card,
-  title: 'Card',
+  title: 'Items/Card',
 };
 
 const Template = (args) => <Card {...args} />;

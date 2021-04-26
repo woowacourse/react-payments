@@ -3,7 +3,7 @@ import Modal from './Modal';
 
 export default {
   component: Modal,
-  title: 'Modal',
+  title: 'Items/Modal',
 };
 
 const ModalTemplate = (args) => <Modal {...args} />;

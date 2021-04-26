@@ -3,7 +3,7 @@ import CardAddPage from './CardAddPage';
 
 export default {
   component: CardAddPage,
-  title: 'CardAddPage',
+  title: 'Pages/CardAddPage',
 };
 
 const Template = () => <CardAddPage />;

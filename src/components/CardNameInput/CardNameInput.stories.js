@@ -3,7 +3,7 @@ import CardNameInput from './CardNameInput';
 
 export default {
   component: CardNameInput,
-  title: 'CardNameInput',
+  title: 'Items/CardNameInput',
 };
 
 const Template = (args) => <CardNameInput {...args} />;

@@ -3,7 +3,7 @@ import Input from './Input';
 
 export default {
   component: Input,
-  title: 'Input',
+  title: 'Items/Input',
 };
 
 const Template = (props) => <Input {...props} />;

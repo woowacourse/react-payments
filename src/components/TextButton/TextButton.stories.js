@@ -3,7 +3,7 @@ import TextButton from './TextButton';
 
 export default {
   component: TextButton,
-  title: 'TextButton',
+  title: 'Items/TextButton',
 };
 
 const Template = (args) => <TextButton {...args} />;

@@ -3,7 +3,7 @@ import ColorSelectButton from './ColorSelectButton';
 
 export default {
   component: ColorSelectButton,
-  title: 'ColorSelectButton',
+  title: 'Items/ColorSelectButton',
 };
 const CardTemplate = (args) => <ColorSelectButton {...args} />;
 export const Default = CardTemplate.bind({});
