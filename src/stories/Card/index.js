@@ -24,17 +24,16 @@ const Card = ({
           <ul className="font-l">
             <li>{firstNumber}</li>
             <li>{secondNumber}</li>
+
             <li>
-              <span className="dot"></span>
-              <span className="dot"></span>
-              <span className="dot"></span>
-              <span className="dot"></span>
+              {[...Array(numbers[2]?.length || 0)].map((_) => (
+                <span className="dot"></span>
+              ))}
             </li>
             <li>
-              <span className="dot"></span>
-              <span className="dot"></span>
-              <span className="dot"></span>
-              <span className="dot"></span>
+              {[...Array(numbers[3]?.length || 0)].map((_) => (
+                <span className="dot"></span>
+              ))}
             </li>
           </ul>
         )}
