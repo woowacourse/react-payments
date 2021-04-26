@@ -11,8 +11,10 @@ import CardPasswordInput from '../../components/cardCreation/cardPasswordInput/C
 import Styled from './style';
 import { COLOR } from '../../constants/color';
 import { PAGE } from '../../constants/page';
+import CardSelectionModal from '../../components/cardCreation/cardSelectionModal/CardSelectionModal';
 
 const CardCreationPage = ({ setCurrentPage }) => {
+  const [isModalOpened, setModalOpen] = useState(false);
   const [cardNumber, setCardNumber] = useState({
     0: '',
     1: '',
@@ -29,6 +31,7 @@ const CardCreationPage = ({ setCurrentPage }) => {
     0: '',
     1: '',
   });
+  const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: '' });
 
   return (
     <>
@@ -40,15 +43,16 @@ const CardCreationPage = ({ setCurrentPage }) => {
       </Header>
       <div>
         <CreditCard
+          backgroundColor={selectedCardInfo.color}
           content={{
-            cardType: '로이드 카드',
+            cardType: selectedCardInfo.name,
             cardNumber: Object.values(cardNumber),
             cardOwner,
             cardExpiredDate,
           }}
         />
         <Styled.Form>
-          <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
+          <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} setModalOpen={setModalOpen} />
           <ExpiredDateInput cardExpiredDate={cardExpiredDate} setCardExpiredDate={setCardExpiredDate} />
           <CardOwnerInput cardOwner={cardOwner} setCardOwner={setCardOwner} />
           <SecurityCodeInput securityCode={securityCode} setSecurityCode={setSecurityCode} />
@@ -60,6 +64,9 @@ const CardCreationPage = ({ setCurrentPage }) => {
           다음
         </Button>
       </Styled.ButtonContainer>
+      {isModalOpened && (
+        <CardSelectionModal closeModal={() => setModalOpen(false)} setSelectedCardInfo={setSelectedCardInfo} />
+      )}
     </>
   );
 };

@@ -30,7 +30,7 @@ const transparentInputStyles = {
   },
 };
 
-const CardNumberInput = memo(({ cardNumber, setCardNumber }) => {
+const CardNumberInput = memo(({ cardNumber, setCardNumber, setModalOpen }) => {
   const $input1 = useRef(null);
   const $input2 = useRef(null);
   const $input3 = useRef(null);
@@ -50,6 +50,7 @@ const CardNumberInput = memo(({ cardNumber, setCardNumber }) => {
     if (target.name === '1' && target.value.length === 4) {
       $input2.current.disabled = false;
       $input2.current.focus();
+      setModalOpen(true);
 
       return;
     }

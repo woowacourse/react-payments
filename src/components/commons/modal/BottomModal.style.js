@@ -7,7 +7,7 @@ const Styled = {
     left: '0px',
     right: '0px',
     bottom: '0px',
-    backgroundColor: '#E5E5E5',
+    backgroundColor: 'rgba(30, 30, 30, 0.55)',
     ...styles,
   })),
   BottomModal: styled.div(({ styles }) => ({
@@ -15,8 +15,11 @@ const Styled = {
     bottom: '0px',
     width: '100%',
     height: '227px',
-    background: '#FDFDFD',
+    backgroundColor: '#FDFDFD',
     borderRadius: '5px 5px 0px 0px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     ...styles,
   })),
 };
