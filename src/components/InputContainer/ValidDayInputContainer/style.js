@@ -15,7 +15,7 @@ const Container = styled.div`
 `;
 
 const Input = styled.input`
-  width: 20%;
+  width: 23%;
   height: 45%;
   margin: 0;
   padding: 0;

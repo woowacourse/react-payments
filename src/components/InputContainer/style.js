@@ -3,11 +3,12 @@ import styled from 'styled-components';
 const Container = styled.div`
   height: 4rem;
   width: 19.9rem;
-  margin: 0;
+  margin: 0.75rem 0 0.75rem 0;
   color: #525252;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: baseline;
 `;
 
 const Header = styled.div`

@@ -6,9 +6,9 @@ export const ValidDayInputContainer = ({ validDay, handleChange }) => {
   const { month, year } = validDay;
   return (
     <Styled.Container>
-      <Styled.Input value={month} onChange={handleChange} />
+      <Styled.Input name={'month'} value={month} onChange={handleChange} placeholder={'MM'} />
       <span>/</span>
-      <Styled.Input value={year} onChange={handleChange} />
+      <Styled.Input name={'year'} value={year} onChange={handleChange} placeholder={'YY'} />
     </Styled.Container>
   );
 };

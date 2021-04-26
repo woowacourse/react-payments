@@ -7,7 +7,7 @@ export const ValidMessage = ({ validMessage, inputValue, textLength, isVisibleTe
     <Styled.MessageBar>
       <Styled.Message>{validMessage}</Styled.Message>
       {isVisibleTextLength && (
-        <Styled.InputLength>{`${inputValue.length} / ${textLength}`}</Styled.InputLength>
+        <Styled.InputLength>{`${inputValue.length}/${textLength}`}</Styled.InputLength>
       )}
     </Styled.MessageBar>
   );

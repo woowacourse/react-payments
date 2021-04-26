@@ -3,24 +3,24 @@ import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 
 export const NumbersInputContainer = ({ numbers, handleChange }) => {
-  const [firstNumbers, secondNumbers, thirdNumbers, fourthNumbers] = numbers;
+  const { first, second, third, fourth } = numbers;
   return (
     <Styled.Container>
-      <Styled.Input value={firstNumbers} onChange={handleChange} />
+      <Styled.Input name={'first'} value={first} onChange={handleChange} />
       <span>-</span>
-      <Styled.Input value={secondNumbers} onChange={handleChange} />
+      <Styled.Input name={'second'} value={second} onChange={handleChange} />
       <span>-</span>
-      <Styled.BlindInput value={thirdNumbers} onChange={handleChange} />
+      <Styled.BlindInput name={'third'} value={third} onChange={handleChange} />
       <span>-</span>
-      <Styled.BlindInput value={fourthNumbers} onChange={handleChange} />
+      <Styled.BlindInput name={'fourth'} value={fourth} onChange={handleChange} />
     </Styled.Container>
   );
 };
 
 NumbersInputContainer.propTypes = {
-  numbers: PropTypes.array,
+  numbers: PropTypes.object,
 };
 
 NumbersInputContainer.defaultProps = {
-  numbers: ['1111', '2222', '1234', '1234'],
+  numbers: { first: '1111', second: '2222', third: '1234', fourth: '1234' },
 };

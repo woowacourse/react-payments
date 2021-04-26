@@ -5,16 +5,22 @@ const size = {
     width: 11.5 * 1.601,
     height: '11.5',
     fontSize: '1.15',
+    dotSize: '0.35',
+    spacing: '0.15',
   },
   medium: {
     width: 8.5 * 1.601,
     height: '8.5',
     fontSize: '0.85',
+    dotSize: '0.25',
+    spacing: '0.1',
   },
   small: {
     width: 8.15 * 1.601,
     height: '8.15',
     fontSize: '0.815',
+    dotSize: '0.25',
+    spacing: '0.08',
   },
 };
 
@@ -49,7 +55,7 @@ const Container = styled.div`
   width: ${(props) => `${size[props.size].width}rem`};
   height: ${(props) => `${size[props.size].height}rem`};
   border-radius: 0.4rem;
-  box-shadow: 0.25rem 0.25rem 0.375rem 0.125rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0.1rem 0.1rem 0.25rem 0.1rem rgba(0, 0, 0, 0.2);
   background-color: ${(props) => (props.company ? company[props.company].color : '#D2D2D2')};
   margin: 0;
   display: flex;
@@ -99,10 +105,28 @@ const NumbersContainer = styled.div`
 `;
 
 const Numbers = styled.div`
-  letter-spacing: ${(props) => (props.isBlind ? '-0.3rem' : '0.25rem')};
+  letter-spacing: ${(props) => `${size[props.size].spacing}rem`};
   width: 20%;
+  min-width: 20%;
   text-align: center;
   font-weight: 500;
+  color: #525252;
+`;
+
+const BlindNumbers = styled.div`
+  width: 20%;
+  min-width: 20%;
+  height: 65%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+const BlindDot = styled.span`
+  width: ${(props) => `${size[props.size].dotSize}rem`};
+  height: ${(props) => `${size[props.size].dotSize}rem`};
+  border-radius: 50%;
+  background-color: #616161;
 `;
 
 const Footer = styled.div`
@@ -112,6 +136,7 @@ const Footer = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   font-weight: 500;
+  color: #525252;
   font-size: ${(props) => `${size[props.size].fontSize * 0.9}rem`};
   letter-spacing: 0.12rem;
 `;
@@ -129,6 +154,8 @@ export {
   IcChip,
   NumbersContainer,
   Numbers,
+  BlindNumbers,
+  BlindDot,
   Footer,
   Owner,
   ValidDay,

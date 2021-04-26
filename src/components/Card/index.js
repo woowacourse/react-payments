@@ -6,9 +6,6 @@ import * as Styled from './style.js';
  * Primary UI component for user interaction
  */
 export const Card = ({ size, company, numbers, owner, validDay, ...props }) => {
-  const [firstNumbers, secondNumbers, thirdNumbers, fourthNumbers] = numbers;
-  // const hasNumbers = numbers.every((number) => number);
-
   return (
     <Styled.Container size={size} company={company} {...props}>
       <Styled.Inner>
@@ -18,15 +15,25 @@ export const Card = ({ size, company, numbers, owner, validDay, ...props }) => {
         <Styled.Body>
           <Styled.IcChip />
           <Styled.NumbersContainer size={size}>
-            <Styled.Numbers>{firstNumbers && firstNumbers}</Styled.Numbers>
-            <Styled.Numbers>{secondNumbers && secondNumbers}</Styled.Numbers>
-            <Styled.Numbers isBlind={true}>{thirdNumbers && '••••'}</Styled.Numbers>
-            <Styled.Numbers isBlind={true}>{fourthNumbers && '••••'}</Styled.Numbers>
+            <Styled.Numbers size={size}>{numbers.first && numbers.first}</Styled.Numbers>
+            <Styled.Numbers size={size}>{numbers.second && numbers.second}</Styled.Numbers>
+            <Styled.BlindNumbers>
+              {[...Array(numbers.third.length)].map((_, idx) => (
+                <Styled.BlindDot size={size} key={idx} />
+              ))}
+            </Styled.BlindNumbers>
+            <Styled.BlindNumbers>
+              {[...Array(numbers.fourth.length)].map((_, idx) => (
+                <Styled.BlindDot size={size} key={idx} />
+              ))}
+            </Styled.BlindNumbers>
           </Styled.NumbersContainer>
         </Styled.Body>
         <Styled.Footer size={size}>
-          <Styled.Owner>{owner}</Styled.Owner>
-          <Styled.ValidDay>{`${validDay.month}/${validDay.year}`}</Styled.ValidDay>
+          <Styled.Owner>{owner ? owner : 'NAME'}</Styled.Owner>
+          <Styled.ValidDay>
+            {`${validDay.month ? validDay.month : 'MM'}/${validDay.year ? validDay.year : 'YY'}`}
+          </Styled.ValidDay>
         </Styled.Footer>
       </Styled.Inner>
     </Styled.Container>
@@ -45,7 +52,7 @@ Card.propTypes = {
   /**
    * Card numbers sixteen digits { first: [], second: [], third: [], fourth: [] }
    */
-  numbers: PropTypes.array,
+  numbers: PropTypes.object,
   /**
    * Card owner name
    */
@@ -64,11 +71,11 @@ Card.propTypes = {
 Card.defaultProps = {
   size: 'large',
   company: '',
-  numbers: ['', '', '', ''],
+  numbers: { first: '', second: '', third: '', fourth: '' },
   owner: 'NAME',
   validDay: {
     month: 'MM',
     year: 'YY',
   },
-  onClick: undefined,
+  onClick: () => {},
 };

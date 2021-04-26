@@ -11,11 +11,12 @@ const Container = styled.div`
   align-items: center;
   font-size: 1.2rem;
   font-weight: bold;
+  text-align: center;
   color: #04c09e;
 `;
 
-const Input = styled.input`
-  width: 16%;
+const Input = styled.input.attrs({ type: 'number' })`
+  width: 18%;
   height: 45%;
   margin: 0;
   padding: 0;
@@ -24,12 +25,18 @@ const Input = styled.input`
   text-align: center;
   font-size: 1.1rem;
   color: #04c09e;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 const BlindInput = styled.input.attrs({
   type: 'password',
 })`
-  width: 20%;
+  width: 18%;
   height: 45%;
   margin: 0;
   padding: 0;

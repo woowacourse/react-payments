@@ -4,7 +4,7 @@ import { ValidMessage } from './ValidMessage';
 import { NumbersInputContainer } from './NumbersInputContainer';
 import { ValidDayInputContainer } from './ValidDayInputContainer';
 import { OwnerInputContainer } from './OwnerInputContainer';
-import { CVCInputContainer } from './CVCInputContainer';
+import { CvcInputContainer } from './CvcInputContainer';
 import { PasswordInputContainer } from './PasswordInputContainer';
 
 export default {
@@ -35,7 +35,7 @@ OwnerInput.args = {
   title: '카드 소유자 이름 (선택)',
   children: [
     <ValidMessage
-      validMessage={''}
+      validMessage={'카드의 이름과 다릅니다.'}
       isVisibleTextLength={true}
       textLength={30}
       inputValue={'SUN'}
@@ -44,14 +44,20 @@ OwnerInput.args = {
   ],
 };
 
-export const CVCInput = Template.bind({});
-CVCInput.args = {
+export const CvcInput = Template.bind({});
+CvcInput.args = {
   title: '보안 코드 (CVC/CVV)',
-  children: [<ValidMessage validMessage={''} />, <CVCInputContainer />],
+  children: [
+    <ValidMessage validMessage={'보안 코드가 정확하지 않습니다.'} />,
+    <CvcInputContainer />,
+  ],
 };
 
 export const PasswordInput = Template.bind({});
 PasswordInput.args = {
   title: '카드 비밀번호',
-  children: [<ValidMessage validMessage={''} />, <PasswordInputContainer />],
+  children: [
+    <ValidMessage validMessage={'비밀번호가 정확하지 않습니다.'} />,
+    <PasswordInputContainer />,
+  ],
 };
