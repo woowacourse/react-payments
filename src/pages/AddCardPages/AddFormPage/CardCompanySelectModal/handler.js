@@ -5,3 +5,12 @@ export const handleCardCompanySelect = ({ e, setCardCompany, setIsModalOpen }) =
   setCardCompany({ name, color });
   setIsModalOpen(false);
 };
+
+export const handleDimmedAreaClick = ({ e, setIsModalOpen }) => {
+  const Modal = e.currentTarget;
+  const ModalViewPort = Modal.firstChild;
+
+  if (e.target === Modal || e.target === ModalViewPort) {
+    setIsModalOpen(false);
+  }
+};

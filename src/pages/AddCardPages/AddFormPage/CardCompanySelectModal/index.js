@@ -2,12 +2,16 @@
 import React from 'react';
 import './style.css';
 import { Button, Label, Modal } from '../../../../components';
-import { handleCardCompanySelect } from './handler';
+import { handleCardCompanySelect, handleDimmedAreaClick } from './handler';
 import { CARD_COMPANY_LIST } from '../../../../constants';
 
 export const CardCompanySelectModal = ({ isOpen, setCardCompany, setIsModalOpen }) => {
   return (
-    <Modal className="CardCompanySelectModal--bottom" isOpen={isOpen}>
+    <Modal
+      className="CardCompanySelectModal--bottom"
+      isOpen={isOpen}
+      onClick={(e) => handleDimmedAreaClick({ e, setIsModalOpen })}
+    >
       <CardCompanyList setCardCompany={setCardCompany} setIsModalOpen={setIsModalOpen} />
     </Modal>
   );
