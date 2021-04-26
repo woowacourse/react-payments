@@ -11,13 +11,15 @@ import * as Style from './style';
 const CardRegisterForm = (props) => {
   const { CARD_NUMBERS, EXPIRATION_DATE, OWNER_NAME, SECURE_CODE, PASSWORD } = INPUT_TYPE;
 
+  const { setCardNumbers, setExpirationDate } = props;
+
   return (
     <Style.Root>
       <RegisterInputWrapper {...CARD_NUMBERS}>
-        <CardNumbersInput />
+        <CardNumbersInput setCardNumbers={setCardNumbers} />
       </RegisterInputWrapper>
       <RegisterInputWrapper {...EXPIRATION_DATE}>
-        <ExpirationDateInput />
+        <ExpirationDateInput setExpirationDate={setExpirationDate} />
       </RegisterInputWrapper>
       <RegisterInputWrapper {...OWNER_NAME}>
         <OwnerNameInput />
