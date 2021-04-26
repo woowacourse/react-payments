@@ -9,9 +9,17 @@ import NewCardForm from './components/NewCardForm';
 function App() {
   const [newCardInfo, setNewCardInfo] = useState({
     cardName: 'DEFAULT',
-    numbers: '',
+    numbers: {
+      first: '',
+      second: '',
+      third: '',
+      fourth: '',
+    },
     user: '',
-    expireDate: 'MM/YY',
+    expireDate: {
+      month: '',
+      year: '',
+    },
     cvc: '',
     password: {
       first: '',

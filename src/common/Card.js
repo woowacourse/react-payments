@@ -52,7 +52,6 @@ const CardInfo = css`
 const CardWrapper = styled.div`
   width: 100%;
   height : 100%;
-  
   padding: 1.2rem 1.5rem;
   border-radius: 5px;
   box-shadow: 3px 3px 5px 0px #00000040;
@@ -79,9 +78,18 @@ const Card = ({ add, cardInfo }) => {
           <div className='card__column'>
             <div className='usim'></div>
           </div>
-          <div className='card__column card-numbers'>{numbers}</div>
+          <div className='card__column card-numbers'>
+            {Object.values(numbers)
+              .map((number) => number)
+              .join('-')}
+          </div>
           <div className='card__column card-details'>
-            <div>{user !== '' ? user : 'NAME'}</div> <div>{expireDate}</div>
+            <div>{user !== '' ? user : 'NAME'}</div>
+            <div>
+              {Object.values(expireDate)
+                .map((item) => item)
+                .join('/')}
+            </div>
           </div>
         </>
       )}

@@ -3,11 +3,28 @@ import PropTypes from 'prop-types';
 import Input from '../../common/Input';
 import Button from '../../common/Button';
 import { NewCardFormWrapper } from './index.styles';
-import { stringSeparatorFormat } from '../../utils/utils';
-import { useState } from 'react';
 
 const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
-  const [privateNumbers, setPrivateNumbers] = useState('');
+  const onChangeNumbersInput = (e) => {
+    // 카드번호 - 숫자(음수X)인지(입력안되게 막기 밑에메세지), 최대 16글자 이하인지(입력안되게 막기 밑에메세지)
+    // 16글자이면(true 바꾸기), 이하면 false로 바꾸기 - App에서 관리 X, NewCardForm에서 내부 state로 관리하면 될듯, 이거에 따라서 다음버튼 보여짐
+    // value = stringSeparatorFormat(value, 4, '-');
+    setNewCardInfo({
+      ...cardInfo,
+      numbers: { ...numbers, [e.target.name]: e.target.value },
+    });
+  };
+
+  const onChangeExpireDateInput = (e) => {
+    // 만료일 - 숫자(음수X)인지, 최대 4글자 이하인지, 앞의두글자가 01~12 사이 숫자인지, 올해/이번달 이후인지 검증
+    // 4글자이면(true), 아니면 false
+    // value = stringSeparatorFormat(value, 2, '/');
+
+    setNewCardInfo({
+      ...cardInfo,
+      expireDate: { ...expireDate, [e.target.name]: e.target.value },
+    });
+  };
 
   const onChangePasswordInput = (e) => {
     // TODO: 입력값이 숫자(음수X)인지, 최대 1글자 이하인지 검증
@@ -21,25 +38,9 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
   const onChangeCardInput = (e) => {
     let { name, value } = e.target;
     switch (name) {
-      case 'numbers':
-        // 카드번호 - 숫자(음수X)인지(입력안되게 막기 밑에메세지), 최대 16글자 이하인지(입력안되게 막기 밑에메세지)
-        // 16글자이면(true 바꾸기), 이하면 false로 바꾸기 - App에서 관리 X, NewCardForm에서 내부 state로 관리하면 될듯, 이거에 따라서 다음버튼 보여짐
-        value = stringSeparatorFormat(value, 4, '-');
-        setNewCardInfo({ ...cardInfo, [name]: value });
-
-        setPrivateNumbers(
-          value.slice(0, 10) +
-            '*'.repeat(value.length > 10 ? value.length - 10 : 0)
-        );
-        break;
-      case 'expireDate':
-        // 만료일 - 숫자(음수X)인지, 최대 4글자 이하인지, 앞의두글자가 01~12 사이 숫자인지, 올해/이번달 이후인지 검증
-        // 4글자이면(true), 아니면 false
-        value = stringSeparatorFormat(value, 2, '/');
-        break;
       case 'user':
         // 사용자명 - 최대 30글자 이하인지(입력안되게 막기 밑에메세지), 숫자X인지(입력안되게 막기 밑에메세지)
-        // 무조건 true.
+        // 무조건 true=
         value = value.toUpperCase();
         break;
       case 'cvc':
@@ -47,8 +48,9 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
         // 3글자이면(true), 아니면 false
         break;
     }
+
     console.log(value.slice(-1)[0]);
-    if (value.slice(-1)[0] === '*') return;
+
     setNewCardInfo({ ...cardInfo, [name]: value });
   };
 
@@ -58,31 +60,87 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
     //다음 컴포넌트 렌더링
   };
 
-  const { expireDate, user, cvc, password } = cardInfo;
+  const { numbers, expireDate, user, cvc, password } = cardInfo;
 
   return (
     <NewCardFormWrapper onSubmit={onSubmitCardForm}>
       <div className='form__column'>
         <div className='input-label'>카드 번호</div>
-
-        <Input
-          type='text'
-          name='numbers'
-          value={privateNumbers}
-          onChange={onChangeCardInput}
-          required
-        />
+        <div className='input-container'>
+          <Input
+            type='text'
+            name='first'
+            value={numbers.first}
+            onChange={onChangeNumbersInput}
+            minLength='4'
+            maxLength='4'
+            required
+          />
+          <span className='input-separator'>
+            {numbers.first.length === 4 && '-'}
+          </span>
+          <Input
+            type='text'
+            name='second'
+            value={numbers.second}
+            minLength='4'
+            maxLength='4'
+            onChange={onChangeNumbersInput}
+            required
+          />
+          <span className='input-separator'>
+            {numbers.second.length === 4 && '-'}
+          </span>
+          <Input
+            type='password'
+            name='third'
+            value={numbers.third}
+            minLength='4'
+            maxLength='4'
+            onChange={onChangeNumbersInput}
+            required
+          />
+          <span className='input-separator'>
+            {numbers.third.length === 4 && '-'}
+          </span>
+          <Input
+            type='password'
+            minLength='4'
+            maxLength='4'
+            name='fourth'
+            value={numbers.fourth}
+            onChange={onChangeNumbersInput}
+            required
+          />
+        </div>
       </div>
       <div className='form__column'>
         <div className='input-label'>만료일</div>
-        <Input
-          type='text'
-          placeholder='MM / YY'
-          name='expireDate'
-          value={expireDate}
-          onChange={onChangeCardInput}
-          required
-        />
+        <div className='input-container'>
+          <Input
+            type='text'
+            placeholder='MM'
+            name='month'
+            min='01'
+            max='12'
+            minLength='2'
+            maxLength='2'
+            value={expireDate.month}
+            onChange={onChangeExpireDateInput}
+            required
+          />
+          <span className='input-separator gray'>/</span>
+          <Input
+            type='text'
+            placeholder='YY'
+            name='year'
+            minLength='2'
+            maxLength='2'
+            value={expireDate.year}
+            onChange={onChangeExpireDateInput}
+            required
+          />
+        </div>
         <div className='input-label'>
           <div>카드 소유자 이름 (선택)</div>
           <div>{user.length} / 30</div>
@@ -100,12 +158,10 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
         <div className='input-label'>보안 코드(CVC/CVV)</div>
         <div className='input-main'>
           <Input
-            type='number'
+            type='password'
             name='cvc'
             minLength='3'
             maxLength='3'
-            min='001'
-            max='999'
             value={cvc}
             onChange={onChangeCardInput}
             required
@@ -150,9 +206,17 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
 NewCardForm.propTypes = {
   cardInfo: PropTypes.shape({
     cardName: PropTypes.string,
-    numbers: PropTypes.string,
+    numbers: PropTypes.shape({
+      first: PropTypes.string,
+      second: PropTypes.string,
+      third: PropTypes.string,
+      fourth: PropTypes.string,
+    }),
     user: PropTypes.string,
-    expireDate: PropTypes.string,
+    expireDate: PropTypes.shape({
+      month: PropTypes.string,
+      year: PropTypes.string,
+    }),
     cvc: PropTypes.string,
     password: PropTypes.shape({
       first: PropTypes.string,
