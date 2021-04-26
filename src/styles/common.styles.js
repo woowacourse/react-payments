@@ -11,4 +11,5 @@ export const ScreenContainer = styled.main`
   border-color: ${(props) => props.theme.borderColor.default};
   overflow-y: auto;
   position: relative;
+  box-sizing: border-box;
 `;

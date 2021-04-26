@@ -9,7 +9,14 @@ const theme = {
     simple: '#737373',
     default: '#eeeeee',
   },
-  bgColor: '#E5E5E5',
+  bgColor: {
+    input: {
+      default: '#ecebf1',
+    },
+  },
+  hoverColor: {
+    button: '#f5f5f5',
+  },
 };
 
 export default theme;

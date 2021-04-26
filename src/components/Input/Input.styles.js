@@ -10,8 +10,8 @@ const simpleStyle = (props) => css`
   border-bottom-color: ${props.theme.borderColor.simple};
 `;
 
-const defaultStyle = () => css`
-  background-color: #ecebf1;
+const defaultStyle = (props) => css`
+  background-color: ${props.theme.bgColor.input.default};
   border-radius: 7px;
   border: none;
 `;

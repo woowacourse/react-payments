@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Flex } from '../../styles/mixins';
 import { getGrayScale } from '../../utils';
 
 const Styled = {
@@ -42,9 +43,7 @@ const Styled = {
   `,
 
   CardNumbersGroup: styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    ${Flex({ justify: 'center', items: 'center' })};
     font-size: 20px;
     font-weight: 500;
     position: absolute;

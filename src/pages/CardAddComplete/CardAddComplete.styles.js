@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
+import { Flex } from '../../styles/mixins';
 
 const Styled = {
   Container: styled.div`
     padding: 0 28px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    ${Flex({ direction: 'column', justify: 'center' })};
+
     height: 100%;
   `,
 
@@ -28,9 +28,7 @@ const Styled = {
   `,
 
   ButtonContainer: styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    ${Flex({ justify: 'flex-end', items: 'center' })};
     margin-top: 172px;
   `,
 };

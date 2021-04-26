@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Flex } from '../../styles/mixins';
 
 const Styled = {
   Container: styled.div`
@@ -6,11 +7,8 @@ const Styled = {
   `,
   Row: styled.div`
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: ${(props) => (props.right ? 'flex-end' : 'flex-start')};
+    ${(props) => Flex({ items: 'center', justify: props.right ? 'flex-end' : 'flex-start' })};
   `,
-  RowItem: styled.div``,
   ExpiryDate: styled.div`
     width: 137px;
   `,

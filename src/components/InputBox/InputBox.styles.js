@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Flex } from '../../styles/mixins';
 
 const Styled = {
   Container: styled.div`
@@ -16,16 +17,14 @@ const Styled = {
   `,
 
   Header: styled.div`
-    display: flex;
-    justify-content: space-between;
+    ${Flex({ justify: 'space-between' })};
     margin-bottom: 7px;
     font-size: 12px;
     white-space: nowrap;
   `,
 
   Row: styled.div`
-    display: flex;
-    align-items: center;
+    ${Flex({ items: 'center' })};
   `,
 };
 

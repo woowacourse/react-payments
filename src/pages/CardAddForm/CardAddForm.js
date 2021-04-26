@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { nanoid } from 'nanoid';
-import { ScreenContainer } from '../common/common.styles';
+import { ScreenContainer } from '../../styles/common.styles';
 import Styled from './CardAddForm.styles';
 import { findCardCompany } from './CardAddForm.services';
 import Header from '../../components/Header/Header';
@@ -43,7 +43,7 @@ const CardAddForm = () => {
   });
 
   const { Modal, openModal, closeModal } = useModal(false);
-  const ownerName = useInput('', { upperCase: true });
+  const ownerName = useInput('', { numberOnly: true, upperCase: true });
   const expiryDate = useInput('');
   const CVC = useInput('');
 

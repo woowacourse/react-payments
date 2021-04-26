@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
+import { Flex } from '../../styles/mixins';
 
 const Styled = {
   Container: styled.header`
-    display: flex;
-    align-items: center;
+    ${Flex({ items: 'center' })};
   `,
 
   BackButton: styled.button`
