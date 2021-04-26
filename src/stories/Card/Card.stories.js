@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 };
 
-const Template = args => <Card {...args} />;
+const Template = (args) => <Card {...args} />;
 
 export const Unknown = Template.bind({});
 
@@ -24,7 +24,7 @@ export const Small = Template.bind({});
 Small.args = {
   cardType: CARD.POCO,
   numbers: ["1234", "1234", "1234", "1234"],
-  userName: "요술곤듀 밍키",
+  userName: "요술곤듀 밍키 요술곤듀 밍키요술곤듀 밍키요술곤듀 밍키",
   expirationDate: "04/20",
   size: CARD_SIZE.SMALL,
 };

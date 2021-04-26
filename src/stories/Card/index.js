@@ -39,8 +39,12 @@ const Card = ({
           </ul>
         )}
         <div className="card__inner-bottom font-m">
-          <span>{userName === "" ? "NAME" : userName}</span>
-          <span>{expirationDate === "" ? "MM/YY" : expirationDate}</span>
+          <span className="card__inner-bottom-username">
+            {userName === "" ? "NAME" : userName}
+          </span>
+          <span className="card__inner-bottom-expiration-date">
+            {expirationDate === "" ? "MM/YY" : expirationDate}
+          </span>
         </div>
       </div>
     </div>
