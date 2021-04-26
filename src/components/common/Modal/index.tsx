@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, MouseEvent } from 'react';
 import styled, { css } from 'styled-components';
 
 interface Props {
@@ -34,8 +34,14 @@ const ModalInner = styled.div<Pick<Props, 'type'>>`
 `;
 
 const Modal: FC<Props> = ({ children, modalClose, type }) => {
+  const onClickDimmed = ({ target, currentTarget }: MouseEvent<HTMLDivElement>) => {
+    if (!modalClose || target !== currentTarget) return;
+
+    modalClose();
+  };
+
   return (
-    <ModalContainer onClick={modalClose}>
+    <ModalContainer onClick={onClickDimmed}>
       <ModalInner type={type}>{children}</ModalInner>
     </ModalContainer>
   );
