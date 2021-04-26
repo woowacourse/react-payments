@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import GlobalStyle from './src/fonts/font.js';
+import GlobalStyle from './fonts/font';
 
 ReactDOM.render(
   <>
