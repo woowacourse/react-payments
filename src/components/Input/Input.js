@@ -2,7 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = (props) => {
-  const { type = 'text', name = '', maxLength, value, placeHolder = '', onChange, className = '' } = props;
+  const {
+    type = 'text',
+    name = '',
+    maxLength,
+    value,
+    placeHolder = '',
+    onChange,
+    className = '',
+    disabled = false,
+  } = props;
 
   return (
     <input
@@ -14,6 +23,7 @@ const Input = (props) => {
       className={`bg-gray-250 text-green-350 h-10 w-full text-center outline-none focus:border border-gray-400 rounded ${className}`}
       required
       onChange={onChange}
+      disabled={disabled}
     />
   );
 };
@@ -28,4 +38,5 @@ Input.propTypes = {
   textAlign: PropTypes.string,
   maxLength: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };

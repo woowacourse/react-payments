@@ -11,14 +11,18 @@ const CardAddPage = (props) => {
   const [expirationDate, setExpirationDate] = useState('');
   const [expiration, setExpiration] = useState({ month: '', year: '' });
   const [ownerName, setOwnerName] = useState('');
-  const [securityCode, setSecurityCode] = useState(0);
-  const [password, setPassword] = useState(0);
+  const [securityCode, setSecurityCode] = useState('');
+  const [password, setPassword] = useState({
+    first: '',
+    second: '',
+  });
   const [cardNumbers, setCardNumbers] = useState({
     0: '',
     1: '',
     2: '',
     3: '',
   });
+
   const handleExpirationInput = ({ target: { value } }, type) => {
     const numberReg = /^[0-9]{1,4}$/gi;
 
@@ -46,6 +50,25 @@ const CardAddPage = (props) => {
     setOwnerName(value.trimStart());
   };
 
+  const handleSecurityCodeInput = ({ target: { value } }) => {
+    const numberReg = /^[0-9]{1,4}$/gi;
+
+    if (!numberReg.test(Number(value))) {
+      return;
+    }
+
+    setSecurityCode(value);
+  };
+
+  const handlePasswordInput = ({ target: { value, name } }) => {
+    const numberReg = /^[0-9]{1,4}$/gi;
+    if (!numberReg.test(Number(value))) {
+      return;
+    }
+
+    setPassword({ ...password, [name]: value });
+  };
+
   return (
     <div className="p-5">
       <div className="flex items-center">
@@ -60,6 +83,7 @@ const CardAddPage = (props) => {
           cardNumbers={cardNumbers}
         />
       </div>
+
       <form className="relative">
         <InputContainer title={'카드 번호'} bgColor={'bg-gray-250'}>
           <>
@@ -110,18 +134,51 @@ const CardAddPage = (props) => {
           />
         </InputContainer>
 
-        <div className="flex">
-          <InputContainer title={'보안코드(CVC/CVV)'} width={'half'}>
-            <>
-              <Input type={'password'} maxLength={3} />
-              <Tooltip content={<img className="" src="images/CVC.png" alt="tooltip cvc images" />} />
-            </>
-          </InputContainer>
-        </div>
-        <InputContainer title={'카드 비밀번호'} width={'quarter'}>
+        <InputContainer title={'보안코드(CVC/CVV)'} width={'half'}>
           <>
-            <Input width={'small'} type={'password'} placeHolder={'*'} maxLength={1} />
-            <Input width={'small'} type={'password'} placeHolder={'*'} maxLength={1} />
+            <Input type={'password'} maxLength={3} value={securityCode} onChange={handleSecurityCodeInput} />
+            <Tooltip
+              content={<img className="" src="images/CVC.png" alt="카드 뒷면 서명란 끝의 세자리 숫자입니다." />}
+            />
+          </>
+        </InputContainer>
+
+        <InputContainer title={'카드 비밀번호'} width={'half'}>
+          <>
+            <Input
+              className={'mr-1.5'}
+              width={'small'}
+              type={'password'}
+              maxLength={1}
+              value={password.first}
+              name={'first'}
+              onChange={handlePasswordInput}
+            />
+            <Input
+              className={'mr-1.5'}
+              width={'small'}
+              type={'password'}
+              maxLength={1}
+              value={password.second}
+              name={'second'}
+              onChange={handlePasswordInput}
+            />
+            <Input
+              className={'mr-1.5 bg-opacity-0'}
+              width={'small'}
+              type={'password'}
+              maxLength={1}
+              value={'*'}
+              disabled={true}
+            />
+            <Input
+              className={'mr-1.5 bg-opacity-0'}
+              width={'small'}
+              type={'password'}
+              maxLength={1}
+              value={'*'}
+              disabled={true}
+            />
           </>
         </InputContainer>
         <TextButton text={'다음'} />
