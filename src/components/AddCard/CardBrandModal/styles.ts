@@ -8,4 +8,5 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   align-content: space-evenly;
   justify-items: center;
+  outline: none;
 `;
