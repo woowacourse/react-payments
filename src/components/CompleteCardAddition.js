@@ -13,7 +13,9 @@ function CompleteCardAddition(props) {
     setCardDescription(target.value);
   };
 
-  const onDescriptionSubmit = () => {
+  const onDescriptionSubmit = (event) => {
+    event.preventDefault();
+
     const card = {
       cardDescription,
       ...props.card,

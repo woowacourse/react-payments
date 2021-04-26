@@ -79,7 +79,14 @@ const CardAddition = (props) => {
     );
   }, [cardNumbers, selectionStart]);
 
-  const onNextButtonClick = () => {
+  const onNextButtonClick = (event) => {
+    event.preventDefault();
+
+    if (cardType.name === CARD.UNKNOWN.name) {
+      alert("카드 회사를 선택해주세요.");
+      return;
+    }
+
     const card = {
       cardType,
       cardNumbers,
