@@ -9,6 +9,7 @@ interface Props extends Omit<Card, 'id' | 'CVC' | 'password'> {
 }
 
 const CreditCard = ({ className, size, cardBrand, ownerName, cardNumber, expDate }: Props) => {
+  const splitedCardNumber = cardNumber.split('-');
   const { name, color } = cardBrand;
 
   return (
@@ -16,10 +17,10 @@ const CreditCard = ({ className, size, cardBrand, ownerName, cardNumber, expDate
       <p className="card-name">{name}</p>
       <div className="ic-chip" />
       <p className="card-number">
-        <span>{cardNumber[0]}</span>
-        <span>{cardNumber[1]}</span>
-        <span>{'·'.repeat(cardNumber[2].length)}</span>
-        <span>{'·'.repeat(cardNumber[3].length)}</span>
+        <span>{splitedCardNumber[0]}</span>
+        <span>{splitedCardNumber[1]}</span>
+        <span>{'·'.repeat(splitedCardNumber[2].length)}</span>
+        <span>{'·'.repeat(splitedCardNumber[3].length)}</span>
       </p>
       <Container flex justifyContent="space-between" className="info-wrapper">
         <p className="owner-name">{ownerName || 'NAME'}</p>

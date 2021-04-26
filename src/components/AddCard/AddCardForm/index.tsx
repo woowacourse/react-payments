@@ -8,7 +8,7 @@ import Input from '../../common/Input';
 import Button from '../../common/Button';
 import CARD_BRAND from '../../../constants/cardData';
 import { AddCardFormContainer, AddCardInputContainer } from './styles';
-import { CardBrand, CardNumber, ExpDate, Password } from '../../../types';
+import { CardBrand, ExpDate } from '../../../types';
 import {
   isValidCardNumber,
   isValidCVC,
@@ -19,13 +19,16 @@ import {
   isAllInputFilled,
 } from './validator';
 
+export type CardNumberState = [string, string, string, string];
+export type PasswordState = [string, string];
+
 const AddCardForm = () => {
   const [cardBrand, setCardBrand] = useState({ name: '', color: '' });
   const [ownerName, setOwnerName] = useState('');
-  const [cardNumber, setCardNumber] = useState<CardNumber>(['', '', '', '']);
+  const [cardNumber, setCardNumber] = useState<CardNumberState>(['', '', '', '']);
   const [expDate, setExpDate] = useState<ExpDate>({ year: '', month: '' });
   const [CVC, setCVC] = useState('');
-  const [password, setPassword] = useState<Password>(['', '']);
+  const [password, setPassword] = useState<PasswordState>(['', '']);
   const [isCardBrandModalVisible, setIsCardBrandModalVisible] = useState(false);
   const [isNicknameModalVisible, setIsNicknameModalVisible] = useState(false);
   const [nickname, setNickname] = useState('');
@@ -33,7 +36,7 @@ const AddCardForm = () => {
   const onChangeCardNumber = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
     if (!isValidCardNumber(value)) return;
 
-    const nextValue: CardNumber = [...cardNumber];
+    const nextValue: CardNumberState = [...cardNumber];
 
     nextValue[index] = value;
     setCardNumber(nextValue);
@@ -72,7 +75,7 @@ const AddCardForm = () => {
   const onChangePassword = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
     if (!isValidPassword(value)) return;
 
-    const nextPassword: Password = [...password];
+    const nextPassword: PasswordState = [...password];
 
     nextPassword[index] = value;
     setPassword(nextPassword);
@@ -129,7 +132,7 @@ const AddCardForm = () => {
         cardBrand={cardBrand}
         expDate={expDate}
         ownerName={ownerName}
-        cardNumber={cardNumber}
+        cardNumber={cardNumber.join('-')}
       />
       <form onSubmit={onSubmitCard}>
         <AddCardInputLabel label={'카드번호'}>

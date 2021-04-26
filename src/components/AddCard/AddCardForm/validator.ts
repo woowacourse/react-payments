@@ -1,5 +1,7 @@
-import { Card } from '../../../types';
+import { CardNumberState, PasswordState } from '.';
+import { Card, CardBrand } from '../../../types';
 import { isNumberString } from '../../../utils/validator';
+import CardBrandModalStories from '../CardBrandModal/CardBrandModal.stories';
 
 export const isValidCardNumber = (value: string) => isNumberString(value) && value.length <= 4;
 
@@ -13,7 +15,19 @@ export const isValidCVC = (value: string) => isNumberString(value) && value.leng
 
 export const isValidPassword = (value: string) => isNumberString(value) && value.length <= 1;
 
-export const isAllInputFilled = ({ cardNumber, cardBrand, CVC, expDate, ownerName, password }: Card) =>
+interface isAllInputFilledParamType extends Omit<Card, 'cardNumber' | 'password'> {
+  cardNumber: CardNumberState;
+  password: PasswordState;
+}
+
+export const isAllInputFilled = ({
+  cardNumber,
+  cardBrand,
+  CVC,
+  expDate,
+  ownerName,
+  password,
+}: isAllInputFilledParamType) =>
   cardNumber.every(el => el.length === 4) &&
   cardBrand.name &&
   cardBrand.color &&
