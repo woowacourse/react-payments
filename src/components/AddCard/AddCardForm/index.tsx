@@ -141,7 +141,11 @@ const AddCardForm = () => {
   }, [cardNumber[0], cardNumber[1]]);
 
   const onClickNextButton = () => {
-    if (cardBrand.name === '') {
+    if (
+      cardNumber[0].length === CARD_NUMBER_DIGITS &&
+      cardNumber[1].length === CARD_NUMBER_DIGITS &&
+      cardBrand.name === ''
+    ) {
       onSetCardBrand();
       return;
     }
