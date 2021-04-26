@@ -79,6 +79,19 @@ const CardAddition = (props) => {
     );
   }, [cardNumbers, selectionStart]);
 
+  const onNextButtonClick = () => {
+    const card = {
+      cardType,
+      cardNumbers,
+      expirationDate,
+      username,
+      secureCode,
+      password,
+    };
+
+    props.onCardInfoSubmit(card);
+  };
+
   const onCardNumbersChange = (event) => {
     const { value, selectionStart } = event.target;
     const joinedCardNumbers = cardNumbers.join(" - ");
@@ -330,7 +343,7 @@ const CardAddition = (props) => {
             (isFulfilled) => isFulfilled
           ) && (
             <div className="card-addition__form-submit">
-              <Button innerText="다음" />
+              <Button onClick={onNextButtonClick} innerText="다음" />
             </div>
           )}
         </form>
