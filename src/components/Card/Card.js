@@ -22,7 +22,7 @@ const Card = (props) => {
 
   return (
     <div
-      className={`${sizeTable[size]} px-4 py-2 rounded bg-gray-350 ${cardCompany.color} shadow-lg font-mono tracking-wide`}
+      className={`${sizeTable[size]} px-4 py-2 rounded-xl bg-gray-350 ${cardCompany.color} shadow-lg font-mono tracking-wide`}
     >
       <span className={`${size === 'large' ? 'text-sm' : 'text-xxs'} inline-block text-black-500`}>
         {cardCompany.name}

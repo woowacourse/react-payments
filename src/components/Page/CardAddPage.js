@@ -9,7 +9,6 @@ import Tooltip from '../Tooltip/Tooltip';
 
 const CardAddPage = (props) => {
   const [cardCompany, setCardCompany] = useState({ name: '', color: '' });
-  const [expirationDate, setExpirationDate] = useState('');
   const [expiration, setExpiration] = useState({ month: '', year: '' });
   const [ownerName, setOwnerName] = useState('');
   const [securityCode, setSecurityCode] = useState('');
@@ -95,14 +94,14 @@ const CardAddPage = (props) => {
       <div className="flex  justify-center my-7">
         <Card
           name={ownerName || 'NAME'}
-          expiration={expirationDate}
+          expiration={`${expiration.month || 'MM'}/${expiration.year || 'YY'}`}
           cardCompany={cardCompany}
           cardNumbers={cardNumbers}
         />
       </div>
 
       <form className="relative">
-        <InputContainer title={'카드 번호'} bgColor={'bg-gray-250'}>
+        <InputContainer title={'카드 번호'} bgColor={'bg-gray-250'} width={'w-full'}>
           <>
             {Array.from({ length: 4 }).map((_, index) => {
               const currentKey = Object.keys(cardNumbers)[index];
@@ -114,6 +113,7 @@ const CardAddPage = (props) => {
                     placeholder={'0000'}
                     value={cardNumbers[currentKey]}
                     onChange={(e) => handleCardNumbers(e, currentKey)}
+                    className={'px-4'}
                   />
                   {index === 3 ? '' : <span>-</span>}
                 </React.Fragment>
@@ -122,50 +122,60 @@ const CardAddPage = (props) => {
           </>
         </InputContainer>
 
-        <InputContainer title={'만료일'} width={'half'} bgColor={'bg-gray-250'}>
+        <InputContainer title={'만료일'} width={'w-5/12'} bgColor={'bg-gray-250'}>
           <>
             <Input
-              width={'quarter'}
               placeholder={'MM'}
               type={'text'}
               maxLength={2}
               value={expiration.month}
               onChange={(e) => handleExpirationInput(e, 'month')}
+              className={'text-center pl-4'}
             />
+            <span className="text-gray-400 ">/</span>
             <Input
-              width={'quarter'}
               placeholder={'YY'}
               type={'text'}
               maxLength={2}
               value={expiration.year}
               onChange={(e) => handleExpirationInput(e, 'year')}
+              className={'text-center pr-4'}
             />
           </>
         </InputContainer>
 
-        <InputContainer title={'카드 소유자 이름(선택)'} bgColor={'bg-gray-250'} count={ownerName.length}>
+        <InputContainer
+          title={'카드 소유자 이름(선택)'}
+          bgColor={'bg-gray-250'}
+          count={ownerName.length}
+          width={'w-full'}
+        >
           <Input
             maxLength={30}
             placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
             value={ownerName}
             onChange={handleOwnerName}
-            className={'text-left px-3'}
+            className={'px-4'}
           />
         </InputContainer>
 
-        <InputContainer title={'보안코드(CVC/CVV)'} width={'half'}>
+        <InputContainer title={'보안코드(CVC/CVV)'} width={'w-1/3'}>
           <>
-            <Input type={'password'} maxLength={3} value={securityCode} onChange={handleSecurityCodeInput} />
-            <Tooltip
-              content={<img className="" src="images/CVC.png" alt="카드 뒷면 서명란 끝의 세자리 숫자입니다." />}
+            <Input
+              type={'password'}
+              maxLength={3}
+              value={securityCode}
+              className={'px-4 text-center'}
+              onChange={handleSecurityCodeInput}
             />
+            <Tooltip content={<img src="images/CVC.png" alt="카드 뒷면 서명란 끝의 세자리 숫자입니다." />} />
           </>
         </InputContainer>
 
-        <InputContainer title={'카드 비밀번호'} width={'half'}>
+        <InputContainer title={'카드 비밀번호'} width={'w-7/12'}>
           <>
             <Input
-              className={'mr-1.5'}
+              className={'mr-1.5 text-center'}
               width={'small'}
               type={'password'}
               maxLength={1}
@@ -174,7 +184,7 @@ const CardAddPage = (props) => {
               onChange={handlePasswordInput}
             />
             <Input
-              className={'mr-1.5'}
+              className={'mr-1.5 text-center'}
               width={'small'}
               type={'password'}
               maxLength={1}
@@ -183,7 +193,7 @@ const CardAddPage = (props) => {
               onChange={handlePasswordInput}
             />
             <Input
-              className={'mr-1.5 bg-opacity-0'}
+              className={'mr-1.5 bg-opacity-0 text-center'}
               width={'small'}
               type={'password'}
               maxLength={1}
@@ -191,7 +201,7 @@ const CardAddPage = (props) => {
               disabled={true}
             />
             <Input
-              className={'mr-1.5 bg-opacity-0'}
+              className={'mr-1.5 bg-opacity-0 text-center'}
               width={'small'}
               type={'password'}
               maxLength={1}
