@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styled, { css } from 'styled-components';
 
 interface Props {
-  modalClose: () => void;
+  modalClose?: () => void;
   type?: 'bottom' | 'full';
 }
 

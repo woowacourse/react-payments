@@ -1,91 +1,80 @@
 import { ChangeEvent, FocusEvent, FormEvent, useEffect, useRef, useState } from 'react';
-import AddCardInputContainer from './AddCardInputContainer';
-import CreditCard from '../../CreditCard';
-import CardNameModal from '../CardBrandModal';
+import AddCardInputLabel from './AddCardInputLabel';
+import CreditCard from '../../common/CreditCard';
+import CardBrandModal from '../CardBrandModal';
+import NicknameModal from '../NicknameModal';
 import Container from '../../common/Container';
 import Input from '../../common/Input';
 import Button from '../../common/Button';
-import CARD_DATA from '../../../constants/cardData';
-import { GRAY } from '../../../constants/palette';
-import { AddCardFormContainer } from './styles';
-import { CardBrand, CardNumber } from '../../../types';
-import NicknameModal from '../NicknameModal';
-
-interface Index {
-  [key: string]: (param: number[]) => void;
-}
+import CARD_BRAND from '../../../constants/cardData';
+import { AddCardFormContainer, AddCardInputContainer } from './styles';
+import { CardBrand, CardNumber, ExpDate, Password } from '../../../types';
+import {
+  isValidCardNumber,
+  isValidCVC,
+  isValidExpMonth,
+  isValidExpYear,
+  isValidOwnerName,
+  isValidPassword,
+  isAllInputFilled,
+} from './validator';
 
 const AddCardForm = () => {
-  const [cardBrand, setCardBrand] = useState({
-    name: '',
-    color: '',
-  });
+  const [cardBrand, setCardBrand] = useState({ name: '', color: '' });
   const [ownerName, setOwnerName] = useState('');
   const [cardNumber, setCardNumber] = useState<CardNumber>(['', '', '', '']);
-  const [expDate, setExpDate] = useState({ year: '', month: '' });
+  const [expDate, setExpDate] = useState<ExpDate>({ year: '', month: '' });
   const [CVC, setCVC] = useState('');
-  const [password, setPassword] = useState(['', '']);
+  const [password, setPassword] = useState<Password>(['', '']);
   const [isCardBrandModalVisible, setIsCardBrandModalVisible] = useState(false);
   const [isNicknameModalVisible, setIsNicknameModalVisible] = useState(false);
   const [nickname, setNickname] = useState('');
 
-  const onChangeCardNumber = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>, index: number) => {
-    const inputKey = (nativeEvent as InputEvent).data;
-
-    if (isNaN(Number(inputKey)) || target.value.length > 4) return;
+  const onChangeCardNumber = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
+    if (!isValidCardNumber(value)) return;
 
     const nextValue: CardNumber = [...cardNumber];
-    nextValue[index] = target.value;
+
+    nextValue[index] = value;
     setCardNumber(nextValue);
   };
 
-  const onChangeExpDate = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>, index: string) => {
-    const inputKey = (nativeEvent as InputEvent).data;
+  const onChangeExpMonth = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+    if (!isValidExpMonth(value)) return;
 
-    if (
-      isNaN(Number(inputKey)) ||
-      target.value.length > 2 ||
-      Number(target.value) < 0 ||
-      (index === 'month' && Number(target.value) > 12)
-    )
-      return;
-
-    const nextExpDate = { ...expDate, [index]: target.value };
-
-    setExpDate(nextExpDate);
+    setExpDate({ ...expDate, month: value });
   };
 
-  const onBlurExpDate = ({ target }: FocusEvent<HTMLInputElement>, index: string) => {
-    const value = (target as HTMLInputElement).value;
+  const onChangeExpYear = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+    if (!isValidExpYear(value)) return;
 
-    if (value.length === 1) {
-      setExpDate({ ...expDate, [index]: '0' + value });
-    }
+    setExpDate({ ...expDate, year: value });
   };
 
-  const onChangeOwnerName = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const regex = /[^a-zA-Z\s]/g;
+  const onBlurExpDate = ({ target: { value } }: FocusEvent<HTMLInputElement>, index: string) => {
+    if (value.length !== 1) return;
 
-    if (target.value.length > 30 || regex.test(target.value)) return;
-
-    setOwnerName(target.value.toUpperCase());
+    setExpDate({ ...expDate, [index]: '0' + value });
   };
 
-  const onChangeCVC = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>) => {
-    const inputKey = (nativeEvent as InputEvent).data;
+  const onChangeOwnerName = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+    if (!isValidOwnerName(value)) return;
 
-    if (isNaN(Number(inputKey)) || target.value.length > 3) return;
-
-    setCVC(target.value);
+    setOwnerName(value.toUpperCase());
   };
 
-  const onChangePassword = ({ target, nativeEvent }: ChangeEvent<HTMLInputElement>, index: number) => {
-    const inputKey = (nativeEvent as InputEvent).data;
+  const onChangeCVC = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+    if (!isValidCVC(value)) return;
 
-    if (isNaN(Number(inputKey)) || target.value.length > 1) return;
+    setCVC(value);
+  };
 
-    const nextPassword = [...password];
-    nextPassword[index] = target.value;
+  const onChangePassword = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
+    if (!isValidPassword(value)) return;
+
+    const nextPassword: Password = [...password];
+
+    nextPassword[index] = value;
     setPassword(nextPassword);
   };
 
@@ -94,44 +83,32 @@ const AddCardForm = () => {
     setIsCardBrandModalVisible(false);
   };
 
+  const onSetCardBrand = () => {
+    if (cardNumber[0].length !== 4 || cardNumber[1].length !== 4) {
+      setCardBrand({ name: '', color: '' });
+      return;
+    }
+
+    const cardBrand = CARD_BRAND[Number(cardNumber[1][3])];
+
+    if (!cardBrand) {
+      setIsCardBrandModalVisible(true);
+      return;
+    }
+
+    setCardBrand(cardBrand);
+  };
+
   useEffect(() => {
-    (() => {
-      if (cardNumber[0].length + cardNumber[1].length === 8) {
-        const cardData = CARD_DATA[Number(cardNumber[1][3])];
-
-        if (!cardData) {
-          setIsCardBrandModalVisible(true);
-          return;
-        }
-
-        setCardBrand(cardData);
-      } else {
-        setCardBrand({
-          name: '',
-          color: '',
-        });
-      }
-    })();
+    onSetCardBrand();
   }, [cardNumber]);
 
-  const isAllInputFilled = () =>
-    cardNumber.every(el => el.length === 4) &&
-    cardBrand.name &&
-    cardBrand.color &&
-    expDate.month.length === 2 &&
-    expDate.year.length === 2 &&
-    CVC.length === 3 &&
-    password[0].length === 1 &&
-    password[1].length === 1 &&
-    ownerName.length > 0;
-
   const onClickNextButton = () => {
-    if (!isAllInputFilled()) {
+    if (!isAllInputFilled({ cardNumber, cardBrand, CVC, expDate, ownerName, password })) {
       alert('입력이 완료되지 않았습니다.');
       return;
     }
 
-    setNickname(cardBrand.name);
     setIsNicknameModalVisible(true);
   };
 
@@ -150,58 +127,37 @@ const AddCardForm = () => {
         cardNumber={cardNumber}
       />
       <form onSubmit={onSubmitCard}>
-        <AddCardInputContainer label={'카드번호'}>
-          <Container flex alignItems="center" justifyContent="center" backgroundColor={GRAY}>
-            <Input
-              type="text"
-              textCenter
-              min="1111"
-              max="9999"
-              width="16%"
-              value={cardNumber[0]}
-              onChange={event => onChangeCardNumber(event, 0)}
-            />
-            -
-            <Input
-              type="text"
-              textCenter
-              min="1111"
-              max="9999"
-              width="16%"
-              value={cardNumber[1]}
-              onChange={event => onChangeCardNumber(event, 1)}
-            />
-            -
-            <Input
-              type="password"
-              textCenter
-              maxLength={4}
-              width="16%"
-              value={cardNumber[2]}
-              onChange={event => onChangeCardNumber(event, 2)}
-            />
-            -
-            <Input
-              type="password"
-              textCenter
-              maxLength={4}
-              width="16%"
-              value={cardNumber[3]}
-              onChange={event => onChangeCardNumber(event, 3)}
-            />
-          </Container>
-        </AddCardInputContainer>
-        <AddCardInputContainer label={'만료일'} width="40%">
-          <Container flex justifyContent="center" alignItems="center" backgroundColor={GRAY}>
+        <AddCardInputLabel label={'카드번호'}>
+          <AddCardInputContainer>
+            {['text', 'text', 'password', 'password']
+              .map((type, index) => (
+                <Input
+                  key={index}
+                  type={type}
+                  textCenter
+                  maxLength={4}
+                  width="16%"
+                  value={cardNumber[index]}
+                  onChange={event => onChangeCardNumber(event, index)}
+                />
+              ))
+              .reduce(
+                (acc: JSX.Element[], curr, index, array) => [...acc, <span key={index + array.length}>-</span>, curr],
+                []
+              )
+              .slice(1)}
+          </AddCardInputContainer>
+        </AddCardInputLabel>
+        <AddCardInputLabel label={'만료일'} width="40%">
+          <AddCardInputContainer>
             <Input
               type="text"
               placeholder="MM"
               textCenter
-              min={1}
-              max={12}
+              maxLength={2}
               width="40%"
               value={expDate.month}
-              onChange={event => onChangeExpDate(event, 'month')}
+              onChange={onChangeExpMonth}
               onBlur={event => onBlurExpDate(event, 'month')}
             />
             /
@@ -209,57 +165,57 @@ const AddCardForm = () => {
               type="text"
               placeholder="YY"
               textCenter
-              min={0}
-              max={99}
+              maxLength={2}
               width="40%"
               value={expDate.year}
-              onChange={event => onChangeExpDate(event, 'year')}
+              onChange={onChangeExpYear}
               onBlur={event => onBlurExpDate(event, 'year')}
             />
-          </Container>
-        </AddCardInputContainer>
-        <AddCardInputContainer label={['카드 소유자 이름', `${ownerName.length} / 30`]}>
-          <Container flex justifyContent="center" backgroundColor={GRAY}>
+          </AddCardInputContainer>
+        </AddCardInputLabel>
+        <AddCardInputLabel label={['카드 소유자 이름', `${ownerName.length} / 30`]}>
+          <AddCardInputContainer>
             <Input
               placeholder="카드에 표시된 이름과 동일하게 입력하세요."
               type="text"
               width="90%"
+              maxLength={30}
               value={ownerName}
               onChange={onChangeOwnerName}
             />
-          </Container>
-        </AddCardInputContainer>
-        <AddCardInputContainer label={'보안 코드(CVC/CVV)'}>
-          <Container flex justifyContent="center" backgroundColor={GRAY} width="25%">
-            <Input type="password" max="999" textCenter value={CVC} onChange={onChangeCVC} />
-          </Container>
+          </AddCardInputContainer>
+        </AddCardInputLabel>
+        <AddCardInputLabel label={'보안 코드(CVC/CVV)'}>
+          <AddCardInputContainer width="25%">
+            <Input type="password" maxLength={3} textCenter value={CVC} onChange={onChangeCVC} />
+          </AddCardInputContainer>
           <Container className="question-mark">
             <img src="/buttons/question-mark-btn.svg" alt="cvc/cvv 도움말" />
           </Container>
-        </AddCardInputContainer>
-        <AddCardInputContainer label={'카드 비밀번호'}>
+        </AddCardInputLabel>
+        <AddCardInputLabel label={'카드 비밀번호'}>
           <Container flex justifyContent="space-between" width="60%">
-            <Container flex justifyContent="center" backgroundColor={GRAY} width="23%">
+            <AddCardInputContainer width="23%">
               <Input type="password" textCenter value={password[0]} onChange={event => onChangePassword(event, 0)} />
-            </Container>
-            <Container flex justifyContent="center" backgroundColor={GRAY} width="23%">
+            </AddCardInputContainer>
+            <AddCardInputContainer width="23%">
               <Input type="password" textCenter value={password[1]} onChange={event => onChangePassword(event, 1)} />
-            </Container>
-            <Container flex justifyContent="center" alignItems="center" width="23%">
+            </AddCardInputContainer>
+            <AddCardInputContainer width="23%">
               <span className="password-dot" />
-            </Container>
-            <Container flex justifyContent="center" alignItems="center" width="23%">
+            </AddCardInputContainer>
+            <AddCardInputContainer width="23%">
               <span className="password-dot" />
-            </Container>
+            </AddCardInputContainer>
           </Container>
-        </AddCardInputContainer>
+        </AddCardInputLabel>
         <Button type="button" position="bottom-right" onClick={onClickNextButton}>
           다음
         </Button>
 
         {isCardBrandModalVisible && (
-          <CardNameModal
-            cardData={CARD_DATA}
+          <CardBrandModal
+            cardBrands={CARD_BRAND}
             onClickCardBrandButton={onClickCardBrandButton}
             modalClose={() => setIsCardBrandModalVisible(false)}
           />
@@ -273,7 +229,6 @@ const AddCardForm = () => {
             cardNumber={cardNumber}
             expDate={expDate}
             cardBrand={cardBrand}
-            modalClose={() => {}}
           />
         )}
       </form>

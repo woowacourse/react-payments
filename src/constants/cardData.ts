@@ -1,4 +1,4 @@
-const CARD_DATA = [
+const CARD_BRAND = [
   {
     name: '포코카드',
     color: '#E24141',
@@ -33,4 +33,4 @@ const CARD_DATA = [
   },
 ];
 
-export default CARD_DATA;
+export default CARD_BRAND;

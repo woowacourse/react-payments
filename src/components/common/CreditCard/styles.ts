@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { GRAY } from '../../constants/palette';
+import { GRAY } from '../../../constants/palette';
 
 interface CreditCardContainerProps {
   cardColor: string;
@@ -26,11 +26,7 @@ export const CreditCardContainer = styled.div<CreditCardContainerProps>`
   padding: 1em;
   box-sizing: border-box;
   font-weight: 500;
-  ${({ size }) => {
-    // TODO: 사이징 lg 안먹음
-    console.log(size);
-    return size === 'lg' ? lgSize : mdSize;
-  }}
+  ${({ size }) => (size === 'lg' ? lgSize : mdSize)}
 
   .card-name {
     margin-bottom: 2em;

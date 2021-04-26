@@ -1,27 +1,25 @@
-import CreditCard from '../../components/CreditCard';
+import CreditCard from '../../components/common/CreditCard';
 import CardList from '../../components/CardList';
 import Template from '../../components/common/Template';
 import { Card } from '../../types';
 
 const dummies: Card[] = [
   {
-    id: 1,
     cardBrand: {
       name: '포코카드',
       color: '#547CE4',
     },
     ownerName: 'FANO',
-    cardNumber: ['1234', '1234', '1234', '1234'],
+    cardNumber: '1234-1234-1234-1234',
     expDate: {
       month: '3',
       year: '3',
     },
-    password: ['1', '2'],
-    cvc: '123',
+    password: '12',
+    CVC: '123',
     nickname: '엄카',
   },
   {
-    id: 2,
     cardBrand: {
       name: '포코카드',
       color: '#547CE4',
@@ -33,11 +31,10 @@ const dummies: Card[] = [
       year: '3',
     },
     password: ['1', '2'],
-    cvc: '123',
+    CVC: '123',
     nickname: '엄카',
   },
   {
-    id: 3,
     cardBrand: {
       name: '포코카드',
       color: '#547CE4',
@@ -49,7 +46,7 @@ const dummies: Card[] = [
       year: '3',
     },
     password: ['1', '2'],
-    cvc: '123',
+    CVC: '123',
     nickname: '엄카',
   },
 ];

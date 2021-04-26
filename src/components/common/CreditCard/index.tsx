@@ -1,9 +1,9 @@
-import { formatNumber2Digits } from '../../utils/format';
-import Container from '../common/Container';
+import { formatNumber2Digits } from '../../../utils/format';
+import Container from '../Container';
 import { CreditCardContainer } from './styles';
-import { Card } from '../../types';
+import { Card } from '../../../types';
 
-interface Props extends Omit<Card, 'id' | 'cvc' | 'password'> {
+interface Props extends Omit<Card, 'id' | 'CVC' | 'password'> {
   className?: string;
   size?: 'lg' | 'md';
 }

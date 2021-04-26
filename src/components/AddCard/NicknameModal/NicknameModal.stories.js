@@ -1,19 +1,24 @@
+import { useState } from 'react';
 import NicknameModal from '.';
-import CARD_DATA from '../../../constants/cardData';
+import CARD_BRAND from '../../../constants/cardData';
 
 export default {
   component: NicknameModal,
   title: 'Form/NicknameModal',
 };
 
-const Template = args => <NicknameModal {...args} />;
+const Template = args => {
+  const [nickname, setNickname] = useState('');
+
+  return <NicknameModal {...args} nickname={nickname} setNickname={setNickname} />;
+};
 
 export const Default = Template.bind({});
 
 Default.args = {
   cardBrand: {
-    name: CARD_DATA[0].name,
-    color: CARD_DATA[0].color,
+    name: CARD_BRAND[0].name,
+    color: CARD_BRAND[0].color,
   },
   cardNumber: ['1234', '1234', '1234', '1234'],
   expDate: { month: '01', year: '21' },

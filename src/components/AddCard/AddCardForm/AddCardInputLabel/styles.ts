@@ -4,7 +4,7 @@ interface Props {
   width?: string;
 }
 
-export const AddCardInputContainerLabel = styled.label<Props>`
+export const AddCardInputLabelContainer = styled.label<Props>`
   display: block;
   margin-bottom: 1.5rem;
   ${({ width }) => width && `width: ${width};`}

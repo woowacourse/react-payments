@@ -9,13 +9,14 @@ export interface ExpDate {
   year: string;
 }
 
+export type Password = [string, string];
+
 export interface Card {
-  id: number;
   cardBrand: CardBrand;
   ownerName: string;
-  password: [string, string];
+  password: Password;
   cardNumber: CardNumber;
   expDate: ExpDate;
-  cvc: string;
+  CVC: string;
   nickname?: string;
 }

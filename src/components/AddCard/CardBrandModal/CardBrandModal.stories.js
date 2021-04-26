@@ -1,14 +1,14 @@
 import CardBrandModal from '.';
-import CARD_DATA from '../../../constants/cardData';
+import CARD_BRAND from '../../../constants/cardData';
 
 export default {
   component: CardBrandModal,
   title: 'Form/CardBrandModal',
 };
 
-const Template = args => <CardBrandModal {...args}>다음</CardBrandModal>;
+const Template = args => <CardBrandModal {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  cardData: CARD_DATA,
+  cardBrands: CARD_BRAND,
 };

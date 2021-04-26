@@ -1,5 +1,7 @@
+import { FC } from 'react';
 import styled from 'styled-components';
-import { BAEMINT } from '../../../constants/palette';
+import { BAEMINT, GRAY } from '../../../constants/palette';
+import Container from '../../common/Container';
 
 export const AddCardFormContainer = styled.div`
   .credit-card {
@@ -36,3 +38,13 @@ export const AddCardFormContainer = styled.div`
     }
   }
 `;
+
+interface Props {
+  width?: string;
+}
+
+export const AddCardInputContainer: FC<Props> = ({ children, width }) => (
+  <Container flex justifyContent="center" alignItems="center" backgroundColor={GRAY} width={width}>
+    {children}
+  </Container>
+);

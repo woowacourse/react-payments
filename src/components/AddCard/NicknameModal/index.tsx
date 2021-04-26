@@ -1,7 +1,7 @@
 import Modal from '../../common/Modal';
 import Input from '../../common/Input';
-import { FC } from 'react';
-import CreditCard from '../../CreditCard';
+import { ChangeEvent, FC, useEffect } from 'react';
+import CreditCard from '../../common/CreditCard';
 import { CardBrand, CardNumber, ExpDate } from '../../../types';
 import { NicknameContainer } from './styles';
 import Button from '../../common/Button';
@@ -9,16 +9,26 @@ import Button from '../../common/Button';
 interface Props {
   nickname: string;
   setNickname: (nickname: string) => void;
-  modalClose: () => void;
   cardBrand: CardBrand;
   cardNumber: CardNumber;
   expDate: ExpDate;
   ownerName: string;
 }
 
-const NicknameModal: FC<Props> = ({ modalClose, cardBrand, cardNumber, expDate, ownerName, nickname, setNickname }) => {
+const NicknameModal: FC<Props> = ({ cardBrand, cardNumber, expDate, ownerName, nickname, setNickname }) => {
+  const onChangeNickname = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+    if (!value) {
+      setNickname(cardBrand.name);
+    }
+    setNickname(value);
+  };
+
+  useEffect(() => {
+    setNickname(cardBrand.name);
+  }, []);
+
   return (
-    <Modal modalClose={modalClose} type="full">
+    <Modal type="full">
       <NicknameContainer>
         <header>카드등록이 완료되었습니다.</header>
         <CreditCard
@@ -32,7 +42,7 @@ const NicknameModal: FC<Props> = ({ modalClose, cardBrand, cardNumber, expDate, 
         <Input
           color="black"
           value={nickname}
-          onChange={({ target }) => setNickname(target.value)}
+          onChange={onChangeNickname}
           underline
           textCenter
           width="60%"
