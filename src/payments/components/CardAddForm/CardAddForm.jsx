@@ -5,6 +5,7 @@ import InputTitle from "../InputTitle/InputTitle";
 import Button from "../Button/Button";
 import Header from "../Header/Header";
 import { ERROR_TYPE, throwError } from "../../../@shared/utils";
+import classNames from "classnames";
 
 const CardAddForm = props => {
   const [backgroundColor] = useState(null);
@@ -14,9 +15,10 @@ const CardAddForm = props => {
   const [isExpirationDateValid, setExpirationDateValid] = useState(true);
   const [ownerName, setOwnerName] = useState("");
   const [isOwnerNameValid, setOwnerNameValid] = useState(true);
-  const [securityCode] = useState("");
+  const [securityCode, setSecurityCode] = useState("");
+  const [isSecurityCodeValid, setSecurityCodeValid] = useState(true);
+  const [isToolTipVisible, setToolTipVisible] = useState(false);
   const [password] = useState([]);
-  const [isToolTipVisible] = useState(false);
 
   const handleExpirationDateChange = event => {
     try {
@@ -82,6 +84,37 @@ const CardAddForm = props => {
     if (!rName.test(name)) {
       throwError(`Invalid owner name: ${name}`, ERROR_TYPE.VALIDATION);
     }
+  };
+
+  const handleSecurityCodeChange = event => {
+    try {
+      const { value } = event.target;
+      const replacedValue = value.replace(/[\D]/g, "");
+
+      setSecurityCode(replacedValue);
+      validateSecurityCode(replacedValue);
+      setSecurityCodeValid(true);
+    } catch (error) {
+      if (error.type === ERROR_TYPE.VALIDATION) {
+        setSecurityCodeValid(false);
+
+        return;
+      }
+
+      console.error(error.message);
+    }
+  };
+
+  const validateSecurityCode = code => {
+    const rCode = /^[\d]{3,4}$/;
+
+    if (!rCode.test(code)) {
+      throwError(`Invalid security code: ${code}`, ERROR_TYPE.VALIDATION);
+    }
+  };
+
+  const handleToolTipClick = () => {
+    setToolTipVisible(!isToolTipVisible);
   };
 
   return (
@@ -162,7 +195,16 @@ const CardAddForm = props => {
               보안 코드 입력란
             </label>
             <div className="flex items-center">
-              <Input type="password" className="w-20" minLength="3" maxLength="4" value={securityCode} required />
+              <Input
+                type="password"
+                className="w-20"
+                minLength="3"
+                maxLength="4"
+                value={securityCode}
+                onChange={handleSecurityCodeChange}
+                isValid={isSecurityCodeValid}
+                required
+              />
               <svg
                 width="27"
                 height="27"
@@ -170,6 +212,7 @@ const CardAddForm = props => {
                 viewBox="0 0 27 27"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                onClick={handleToolTipClick}
               >
                 <circle cx="13.5" cy="13.5" r="13" fill="white" stroke="#BABABA" />
                 <path
@@ -177,14 +220,12 @@ const CardAddForm = props => {
                   fill="#969696"
                 />
               </svg>
-              {isToolTipVisible && (
-                <>
-                  <span className="w-0 h-0 border-8 border-custom-darkgray left-arrow"></span>
-                  <span className="bg-custom-darkgray rounded-lg p-2 text-custom-white text-xs">
-                    카드 뒷면 서명란 끝의 3~4자리 숫자를 입력해주세요.
-                  </span>
-                </>
-              )}
+              <div className={classNames("flex items-center", isToolTipVisible ? "visible" : "invisible")}>
+                <span className="w-0 h-0 border-8 border-custom-darkgray left-arrow"></span>
+                <span className="bg-custom-darkgray rounded-lg p-2 text-custom-white text-xs">
+                  카드 뒷면 서명란 끝의 3~4자리 숫자를 입력해주세요.
+                </span>
+              </div>
             </div>
           </div>
           <div className="flex flex-col w-full">
