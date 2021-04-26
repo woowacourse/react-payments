@@ -4,6 +4,7 @@ import Input from "../Input/Input";
 import InputTitle from "../InputTitle/InputTitle";
 import Button from "../Button/Button";
 import Header from "../Header/Header";
+import { ERROR_TYPE, throwError } from "../../../@shared/utils";
 
 const CardAddForm = props => {
   const [backgroundColor] = useState(null);
@@ -18,26 +19,31 @@ const CardAddForm = props => {
   const [isToolTipVisible] = useState(false);
 
   const handleExpirationDateChange = event => {
-    const { value } = event.target;
-    const replacedValue = value.replace(/[\D]/g, "");
-    const newValue =
-      replacedValue.length > 2 ? `${replacedValue.slice(0, 2)}/${replacedValue.slice(2)}` : replacedValue;
-
     try {
+      const { value } = event.target;
+      const replacedValue = value.replace(/[\D]/g, "");
+      const newValue =
+        replacedValue.length > 2 ? `${replacedValue.slice(0, 2)}/${replacedValue.slice(2)}` : replacedValue;
+
+      setExpirationDate(newValue);
       validateExpirationDate(replacedValue);
       setExpirationDateValid(true);
 
       // TODO: 커서위치 고정
     } catch (error) {
-      setExpirationDateValid(false);
-    } finally {
-      setExpirationDate(newValue);
+      if (error.type === ERROR_TYPE.VALIDATION) {
+        setExpirationDateValid(false);
+
+        return;
+      }
+
+      console.error(error.message);
     }
   };
 
   const validateExpirationDate = date => {
     if (date.length !== 4) {
-      throw new Error("Invalid date length");
+      throwError("Invalid date", ERROR_TYPE.VALIDATION);
     }
 
     const month = date.slice(0, 2);
@@ -45,10 +51,10 @@ const CardAddForm = props => {
     const currentYear = new Date().getFullYear() - 2000;
 
     if (Number(month) < 1 || Number(month) > 12) {
-      throw new Error("Invalid month");
+      throwError("Invalid month", ERROR_TYPE.VALIDATION);
     }
     if (year < currentYear || year > currentYear + 5) {
-      throw new Error("Invalid year");
+      throwError("Invalid year", ERROR_TYPE.VALIDATION);
     }
   };
 
@@ -60,7 +66,13 @@ const CardAddForm = props => {
       validateOwnerName(value);
       setOwnerNameValid(true);
     } catch (error) {
-      setOwnerNameValid(false);
+      if (error.type === ERROR_TYPE.VALIDATION) {
+        setOwnerNameValid(false);
+
+        return;
+      }
+
+      console.error(error.message);
     }
   };
 
@@ -68,7 +80,7 @@ const CardAddForm = props => {
     const rName = /^[가-힣|a-z|A-Z|\s]{0,30}$/;
 
     if (!rName.test(name)) {
-      throw new Error(`Invalid owner name: ${name}`);
+      throwError(`Invalid owner name: ${name}`, ERROR_TYPE.VALIDATION);
     }
   };
 
