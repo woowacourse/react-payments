@@ -1,8 +1,9 @@
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import { ScreenContainer } from '../common/common.styles';
 import Styled from './CardAddForm.styles';
+import { findCardCompany } from './CardAddForm.services';
 import Header from '../../components/Header/Header';
 import Card from '../../components/Card/Card';
 import InputBox from '../../components/InputBox/InputBox';
@@ -41,7 +42,7 @@ const CardAddForm = () => {
     maxLengthPerInput: 1,
   });
 
-  const { Modal, modalRef, openModal, closeModal } = useModal(false);
+  const { Modal, openModal, closeModal } = useModal(false);
   const ownerName = useInput('', { upperCase: true });
   const expiryDate = useInput('');
   const CVC = useInput('');
@@ -97,25 +98,14 @@ const CardAddForm = () => {
     closeModal();
   };
 
-  // 배민 페이의 경우 모달이 뜨고 닫힐 때, 세번째 카드 번호 input에 focus 시 모달이 다시 뜸
-  // TODO: modal이 떴을 때, focusout(blur) 처리되도록 구현해야 함
-  useEffect(() => {
+  const updateCardCompany = useCallback(() => {
     const [firstInput, secondInput] = cardNumbers.value;
 
     const isFilledHalf = firstInput.length === 4 && secondInput.length === 4;
     const isCardCompanySelected = Object.keys(cardCompany).length > 0;
 
     if (isFilledHalf && !isCardCompanySelected) {
-      const matchedCardCompany = Object.values(CARD).find((company) =>
-        company.bins.some((binNumber) => {
-          const isMatchedFirstInput = firstInput === binNumber.slice(0, 4);
-          const isMatchedSecondInput = secondInput.slice(0, 2) === binNumber.slice(4, 6);
-
-          return binNumber.length === 4
-            ? isMatchedFirstInput
-            : isMatchedFirstInput && isMatchedSecondInput;
-        })
-      );
+      const matchedCardCompany = findCardCompany(firstInput, secondInput);
 
       if (matchedCardCompany) {
         setCardCompany(matchedCardCompany);
@@ -125,7 +115,9 @@ const CardAddForm = () => {
     } else if (!isFilledHalf && isCardCompanySelected) {
       setCardCompany({});
     }
-  }, [cardNumbers.value, cardNumbersAsNumber, cardCompany, openModal, modalRef]);
+  }, [cardNumbers.value, cardCompany, openModal]);
+
+  useEffect(updateCardCompany, [updateCardCompany]);
 
   return (
     <ScreenContainer>
