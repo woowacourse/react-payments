@@ -18,6 +18,8 @@ import MESSAGE from '../../constants/message';
 import CARD from '../../constants/card';
 import LOCAL_STORAGE_KEY from '../../constants/localStorageKey';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import REGEX from '../../constants/regex';
+import ROUTE from '../../constants/route';
 
 const CardAddForm = () => {
   const history = useHistory();
@@ -35,12 +37,12 @@ const CardAddForm = () => {
 
   const cardNumbersAsNumber = useMemo(() => cardNumbers.join(''), [cardNumbers]);
 
-  const expiryDateAsNumber = useMemo(() => expiryDate.value.replace(/[^0-9]/g, ''), [
+  const expiryDateAsNumber = useMemo(() => expiryDate.value.replace(REGEX.NOT_NUMBER, ''), [
     expiryDate.value,
   ]);
 
   const formattedExpiryDate = useMemo(() => {
-    const expiryDateChunks = expiryDateAsNumber.match(/.{1,2}/g) || [];
+    const expiryDateChunks = expiryDateAsNumber.match(REGEX.TEXT_WITH_LENGTH(2)) || [];
     return expiryDateChunks.join(' / ');
   }, [expiryDateAsNumber]);
 
@@ -72,7 +74,7 @@ const CardAddForm = () => {
 
     cardList.setValue([...cardList.value, newCard]);
 
-    history.push('/complete', { card: newCard });
+    history.push(ROUTE.COMPLETE, { card: newCard });
   };
 
   const handleChangeCardNumber = (event) => {
@@ -165,7 +167,7 @@ const CardAddForm = () => {
                 maxLength={4 + 3}
                 textAlign="center"
                 inputmode="numeric"
-                pattern="^(0[1-9]|1[012])\s\/\s([0-9]){2}$"
+                pattern={REGEX.EXPIRY_DATE.source}
                 required
               />
             </Styled.ExpiryDate>
@@ -183,7 +185,7 @@ const CardAddForm = () => {
             <Styled.CVC>
               <InputBox
                 type="password"
-                pattern="^[0-9]{3}$"
+                pattern={REGEX.NUMBER_WITH_LENGTH(3).source}
                 isError={!isNumeric(CVC.value)}
                 errorMessage={!isNumeric(CVC.value) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''}
                 inputmode="numeric"

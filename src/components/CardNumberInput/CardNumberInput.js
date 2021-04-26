@@ -4,6 +4,7 @@ import Input from '../Input/Input';
 import ErrorMessageBox from '../ErrorMessageBox/ErrorMessageBox';
 import Styled from './CardNumberInput.styles';
 import { initArray } from '../../utils';
+import REGEX from '../../constants/regex';
 
 const CardNumberInput = ({
   values,
@@ -48,7 +49,7 @@ const CardNumberInput = ({
               textAlign="center"
               onChange={handleChange}
               value={value}
-              pattern="^[0-9]{4}$"
+              pattern={REGEX.NUMBER_WITH_LENGTH(4).source}
               inputmode="numeric"
               // eslint-disable-next-line no-return-assign
               ref={(el) => (inputRef[index] = el)}

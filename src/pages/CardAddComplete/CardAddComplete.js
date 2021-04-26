@@ -8,6 +8,7 @@ import MESSAGE from '../../constants/message';
 import LOCAL_STORAGE_KEY from '../../constants/localStorageKey';
 import useInput from '../../hooks/useInput';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import ROUTE from '../../constants/route';
 
 const CardAddComplete = () => {
   const history = useHistory();
@@ -17,7 +18,7 @@ const CardAddComplete = () => {
 
   const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
 
-  if (!location.state.card) return <Redirect to="/" />;
+  if (!location.state.card) return <Redirect to={ROUTE.HOME} />;
 
   const {
     id,
@@ -39,7 +40,7 @@ const CardAddComplete = () => {
       cardList.setValue(newCardList);
     }
 
-    history.push('/');
+    history.push(ROUTE.HOME);
   };
 
   return (

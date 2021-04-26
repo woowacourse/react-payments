@@ -5,6 +5,7 @@ import Input from '../Input/Input';
 import Styled from './PinNumberInput.styles';
 import { initArray } from '../../utils';
 import ErrorMessageBox from '../ErrorMessageBox/ErrorMessageBox';
+import REGEX from '../../constants/regex';
 
 const PinNumberInput = ({
   values,
@@ -52,7 +53,7 @@ const PinNumberInput = ({
                 onChange={handleChange}
                 value={value}
                 required={required}
-                pattern="^[0-9]$"
+                pattern={REGEX.NUMBER.source}
               />
             </Styled.Label>
           );
