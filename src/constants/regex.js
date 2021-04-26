@@ -1,5 +1,6 @@
 const REGEX = {
-  NUMBER: /^[0-9]*$/,
+  NUMBER: /[0-9]/g,
+  CONTINUOUS_NUMBER: /^[0-9]*$/,
   NOT_NUMBER: /[^0-9]/g,
   RGB: /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/,
   EXPIRY_DATE: /^(0[1-9]|1[012])\s\/\s([0-9]){2}$/,

@@ -53,7 +53,7 @@ const PinNumberInput = ({
                 onChange={handleChange}
                 value={value}
                 required={required}
-                pattern={REGEX.NUMBER.source}
+                pattern={REGEX.CONTINUOUS_NUMBER.source}
               />
             </Styled.Label>
           );

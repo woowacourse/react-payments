@@ -1,15 +1,16 @@
 import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Styled from './Card.styles';
+import REGEX from '../../constants/regex';
 
 const Card = ({ bgColor, companyName, cardNumbers, ownerName, expiryDate, size }) => {
   const formattedCardNumber = useMemo(() => {
-    const cardNumberChunks = cardNumbers.match(/.{1,4}/g) || [];
+    const cardNumberChunks = cardNumbers.match(REGEX.TEXT_WITH_LENGTH(4)) || [];
 
     return cardNumberChunks.map((chunk, index) => {
       if (index <= 1) return chunk;
 
-      return chunk.replace(/[0-9]/g, '•');
+      return chunk.replace(REGEX.NUMBER, '•');
     });
   }, [cardNumbers]);
 

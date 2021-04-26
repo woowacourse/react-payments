@@ -22,4 +22,4 @@ export const getGrayScale = (color) => {
 
 export const initArray = (length, fillValue) => Array.from({ length }).map(() => fillValue);
 
-export const isNumeric = (value) => new RegExp(REGEX.NUMBER).test(value);
+export const isNumeric = (value) => new RegExp(REGEX.CONTINUOUS_NUMBER).test(value);
