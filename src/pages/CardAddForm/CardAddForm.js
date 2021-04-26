@@ -114,6 +114,11 @@ const CardAddForm = () => {
 
   useEffect(updateCardCompany, [updateCardCompany]);
 
+  useEffect(() => {
+    const [firstCardNumberInput] = cardNumberInputRefs;
+    firstCardNumberInput.focus();
+  }, [cardNumberInputRefs]);
+
   return (
     <ScreenContainer>
       <Header hasBackButton text="카드 추가" onClickBackButton={history.goBack} />

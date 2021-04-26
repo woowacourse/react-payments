@@ -12,7 +12,7 @@ const Modal = forwardRef(({ children, mobile, onClose }, ref) => {
 
   return (
     <Styled.Dimmer onClick={handleClose} mobile={mobile}>
-      <Styled.Container tabIndex={-1} ref={ref}>
+      <Styled.Container tabIndex="-1" ref={ref}>
         {children}
       </Styled.Container>
     </Styled.Dimmer>
