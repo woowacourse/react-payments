@@ -11,72 +11,72 @@ const Template = (args) => <Container {...args} />;
 
 export const CardNumberInputContainer = Template.bind({});
 CardNumberInputContainer.args = {
-  className: 'AddForm__Container',
+  className: 'CardInfoForm__Input__Filler--filled CardNumberInput__Filler',
   children: (
     <>
-      <Input type="number" value="1111" width="4.8rem" />
+      <Input className="CardNumberInput__Field" type="number" value="1111" />
       <Text fontSize="0.75rem" textAlign="start" width="1rem">
         -
       </Text>
-      <Input type="number" value="1111" width="4.8rem" />
+      <Input className="CardNumberInput__Field" type="number" value="1111" />
       <Text fontSize="0.75rem" textAlign="start" width="1rem">
         -
       </Text>
-      <Input type="password" value="1111" width="4.8rem" />
+      <Input className="CardNumberInput__Field" type="password" value="1111" />
       <Text fontSize="0.75rem" textAlign="start" width="1rem">
         -
       </Text>
-      <Input type="password" value="1111" width="4.8rem" />
+      <Input className="CardNumberInput__Field" type="password" value="1111" />
     </>
   ),
 };
 
 export const ExpirationDateInputContainer = Template.bind({});
 ExpirationDateInputContainer.args = {
-  className: 'AddForm__Container',
-  width: '43%',
+  className: 'CardInfoForm__Input__Filler--filled ExpirationDateInput__Filler',
   children: (
     <>
-      <Input placeholder="MM" type="number" value="04" width="2.4rem" />
+      <Input className="ExpirationDateInput__Field" placeholder="MM" type="number" value="04" />
       <Text fontSize="0.75rem" textAlign="start" width="1rem">
         /
       </Text>
-      <Input placeholder="YY" type="number" value="04" width="2.4rem" />
+      <Input className="ExpirationDateInput__Field" placeholder="YY" type="number" value="21" />
     </>
   ),
 };
 
 export const OwnerNameInputContainer = Template.bind({});
 OwnerNameInputContainer.args = {
-  className: 'AddForm__Container',
+  className: 'CardInfoForm__Input__Filler--filled CardOwnerInput__Filler',
   children: (
-    <Input placeholder="카드에 표시된 이름과 동일하게 입력하세요." value="SUN" width="18rem" />
+    <Input
+      className="CardOwnerInput__Field"
+      placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+      value="SUN"
+    />
   ),
 };
 
 export const SecurityCodeInputContainer = Template.bind({});
 SecurityCodeInputContainer.args = {
-  className: 'AddForm__Container',
-  width: '26%',
-  children: <Input type="password" value="123" width="3.6rem" />,
+  className: 'CardInfoForm__Input__Filler--filled SecurityCodeInput__Filler',
+  children: <Input className="SecurityCodeInput__Field" type="password" value="123" />,
 };
 
 export const PasswordInputContainer = Template.bind({});
 PasswordInputContainer.args = {
-  className: 'AddForm__Container',
-  width: '2.8125rem',
-  children: <Input textAlign="center" type="password" value="3" />,
+  className: 'CardInfoForm__Input__Filler--filled CardPasswordInput__Filler',
+  children: <Input className="CardPasswordInput__Field" type="password" value="3" />,
 };
 
 export const PasswordDisabledInputContainer = Template.bind({});
 PasswordDisabledInputContainer.args = {
-  className: 'AddForm__Container AddForm__Container--transparent',
-  width: '2.8125rem',
-  children: <Input disabled textAlign="center" type="password" value="3" />,
+  className: 'CardInfoForm__Input__Filler--transparent CardPasswordInput__Filler',
+  children: <Input className="CardPasswordInput__Field" disabled type="password" value="3" />,
 };
 
 export const NicknameInputContainer = Template.bind({});
 NicknameInputContainer.args = {
-  className: 'NicknameForm__Container',
-  children: <Input color="#383838" textAlign="center" value="엄카" width="15rem" />,
+  className: 'CardNicknameInput__Filler--transparent',
+  children: <Input className="CardNicknameInput__Field" value="엄카" />,
 };
