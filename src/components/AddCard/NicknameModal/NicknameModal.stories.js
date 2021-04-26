@@ -20,7 +20,7 @@ Default.args = {
     name: CARD_BRAND[0].name,
     color: CARD_BRAND[0].color,
   },
-  cardNumber: ['1234', '1234', '1234', '1234'],
+  cardNumber: '1234-1234-1234-1234',
   expDate: { month: '01', year: '21' },
   ownerName: 'FANO',
 };
