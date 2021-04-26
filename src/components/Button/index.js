@@ -20,7 +20,7 @@ Button.propTypes = {
   type: PropTypes.oneOf(['submit', 'reset', 'button']),
   theme: PropTypes.oneOf(['submit', 'question-mark', 'card-company', 'backward']),
   backgroundColor: PropTypes.string,
-  children: PropTypes.oneOfType(['string', 'object']),
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   onClick: PropTypes.func,
 };
 

@@ -17,7 +17,7 @@ export const Form = ({ className, children, ...props }) => {
 
 Form.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  children: PropTypes.any.isRequired,
 };
 
 Form.defaultProps = {

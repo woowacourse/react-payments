@@ -16,7 +16,7 @@ export const Card = ({ size, backgroundColor, boxShadow, children, ...props }) =
 };
 
 Card.propTypes = {
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  size: PropTypes.oneOf(['small', 'medium', 'large', 'chip']),
   backgroundColor: PropTypes.string,
   boxShadow: PropTypes.bool,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
