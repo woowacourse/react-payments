@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 import Styled from './Modal.styles';
 
-const Modal = ({ children, mobile, onClose }, ref) => {
+const Modal = forwardRef(({ children, mobile, onClose }, ref) => {
   const handleClose = (event) => {
     if (!onClose) return;
 
@@ -17,7 +17,9 @@ const Modal = ({ children, mobile, onClose }, ref) => {
       </Styled.Container>
     </Styled.Dimmer>
   );
-};
+});
+
+Modal.displayName = 'Modal';
 
 Modal.propTypes = {
   children: PropTypes.node,
@@ -31,4 +33,4 @@ Modal.defaultProps = {
   onClose: null,
 };
 
-export default forwardRef(Modal);
+export default Modal;
