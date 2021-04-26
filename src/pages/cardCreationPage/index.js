@@ -12,23 +12,12 @@ import Styled from './style';
 import { COLOR } from '../../constants/color';
 import { PAGE } from '../../constants/page';
 
-const CardCreationPage = ({ setCurrentPage }) => {
-  const [cardNumber, setCardNumber] = useState({
-    0: '',
-    1: '',
-    2: '',
-    3: '',
-  });
-  const [cardExpiredDate, setCardExpiredDate] = useState({
-    month: '',
-    year: '',
-  });
+const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
+  const [cardNumber, setCardNumber] = useState({ 0: '', 1: '', 2: '', 3: '' });
+  const [cardExpiredDate, setCardExpiredDate] = useState({ month: '', year: '' });
   const [cardOwner, setCardOwner] = useState('');
   const [securityCode, setSecurityCode] = useState('');
-  const [cardPassword, setCardPassword] = useState({
-    0: '',
-    1: '',
-  });
+  const [cardPassword, setCardPassword] = useState({ 0: '', 1: '' });
   const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: COLOR.LIGHT_GRAY });
 
   const [isValidCardNumber, setValidCardNumber] = useState(false);
@@ -38,12 +27,14 @@ const CardCreationPage = ({ setCurrentPage }) => {
   const [isValidCardPassword, setValidCardPassword] = useState(false);
 
   const isValidAllInput =
-    isValidCardNumber &&
-    isValidCardExpiredDate &&
-    isValidCardOwner &&
-    isValidSecurityCode &&
-    isValidCardPassword &&
-    selectedCardInfo.id;
+    isValidCardNumber && isValidCardExpiredDate && isValidCardOwner && isValidSecurityCode && isValidCardPassword;
+
+  const handleNewCardSubmit = e => {
+    e.preventDefault();
+
+    setNewCardInfo({ cardNumber, cardExpiredDate, cardOwner, selectedCardInfo });
+    setCurrentPage(PAGE.CARD_CREATION_COMPLETE);
+  };
 
   return (
     <>
@@ -63,7 +54,7 @@ const CardCreationPage = ({ setCurrentPage }) => {
             cardExpiredDate,
           }}
         />
-        <Styled.Form>
+        <Styled.Form onSubmit={handleNewCardSubmit}>
           <CardNumberInput
             cardNumber={cardNumber}
             setCardNumber={setCardNumber}
@@ -95,15 +86,11 @@ const CardCreationPage = ({ setCurrentPage }) => {
             isValidCardPassword={isValidCardPassword}
             setValidCardPassword={setValidCardPassword}
           />
+          <Styled.ButtonContainer>
+            {isValidAllInput && <Button styles={{ color: COLOR.MINT }}>다음</Button>}
+          </Styled.ButtonContainer>
         </Styled.Form>
       </div>
-      <Styled.ButtonContainer>
-        {isValidAllInput && (
-          <Button onClick={() => setCurrentPage(PAGE.CARD_CREATION_COMPLETE)} styles={{ color: COLOR.MINT }}>
-            다음
-          </Button>
-        )}
-      </Styled.ButtonContainer>
     </>
   );
 };

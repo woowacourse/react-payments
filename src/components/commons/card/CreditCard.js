@@ -15,10 +15,10 @@ export const CreditCard = ({ size, backgroundColor, content }) => {
       <Styled.CardType size={size}>{content.cardType}</Styled.CardType>
       <Styled.Chip size={size} />
       <Styled.CardNumber size={size}>
-        <Styled.NumberContainer>{content.cardNumber?.[0]}</Styled.NumberContainer>
-        <Styled.NumberContainer>{content.cardNumber?.[1]}</Styled.NumberContainer>
-        <Styled.NumberContainer>{maskNumbers(content.cardNumber?.[2])}</Styled.NumberContainer>
-        <Styled.NumberContainer>{maskNumbers(content.cardNumber?.[3])}</Styled.NumberContainer>
+        <div>{content.cardNumber?.[0]}</div>
+        <div>{content.cardNumber?.[1]}</div>
+        <div>{maskNumbers(content.cardNumber?.[2])}</div>
+        <div>{maskNumbers(content.cardNumber?.[3])}</div>
       </Styled.CardNumber>
       <Styled.CardOwner size={size}>{content.cardOwner || 'NAME'}</Styled.CardOwner>
       <Styled.CardExpiredDate size={size}>

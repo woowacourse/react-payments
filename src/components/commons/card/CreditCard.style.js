@@ -80,22 +80,16 @@ const Styled = {
     ...CHIP[size],
   })),
   CardNumber: styled.div(({ size }) => ({
-    display: 'flex',
-    alignItems: 'center',
+    display: 'grid',
+    width: '80%',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    columnGap: '6px',
     position: 'absolute',
-    inlineSize: 'fit-content',
     left: '50%',
     transform: 'translateX(-50%)',
     fontWeight: 700,
     ...CARD_NUMBER[size],
   })),
-  NumberContainer: styled.div`
-    width: 36px;
-    text-align: center;
-    &:not(:last-child) {
-      margin-right: 7px;
-    }
-  `,
   CardOwner: styled.div(({ size }) => ({
     position: 'absolute',
     fontWeight: 700,
