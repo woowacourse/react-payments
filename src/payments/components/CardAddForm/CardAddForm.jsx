@@ -18,7 +18,8 @@ const CardAddForm = props => {
   const [securityCode, setSecurityCode] = useState("");
   const [isSecurityCodeValid, setSecurityCodeValid] = useState(true);
   const [isToolTipVisible, setToolTipVisible] = useState(false);
-  const [password] = useState([]);
+  const [passwords, setPasswords] = useState(Array(2).fill(null));
+  const [isPasswordValid, setPasswordValid] = useState(true);
 
   const handleExpirationDateChange = event => {
     try {
@@ -115,6 +116,39 @@ const CardAddForm = props => {
 
   const handleToolTipClick = () => {
     setToolTipVisible(!isToolTipVisible);
+  };
+
+  const handlePasswordChange = event => {
+    try {
+      const { value } = event.target;
+      const targetIndex = Number(event.target.name);
+      const replacedValue = value.replace(/[\D]/g, "");
+      const newPasswords = passwords.map((number, index) => (index === targetIndex ? replacedValue : number));
+
+      setPasswords(newPasswords);
+      validatePasswords(newPasswords);
+      setPasswordValid(true);
+    } catch (error) {
+      if (error.type === ERROR_TYPE.VALIDATION) {
+        setPasswordValid(false);
+
+        return;
+      }
+
+      console.error(error.message);
+    }
+  };
+
+  const validatePasswords = passwords => {
+    if (!Array.isArray(passwords)) {
+      throw new TypeError("passwords should be an array");
+    }
+
+    const rCode = /^[\d]{1}$/;
+
+    if (passwords.some(number => !rCode.test(number))) {
+      throwError("Invalid password", ERROR_TYPE.VALIDATION);
+    }
   };
 
   return (
@@ -234,9 +268,27 @@ const CardAddForm = props => {
             </div>
             <div className="flex items-center justify-between w-48">
               <label className="sr-only" htmlFor="card-password-input-1"></label>
-              <Input type="password" className="w-10" minLength="1" maxLength="1" value={password[0]} />
+              <Input
+                type="password"
+                className="w-10 text-center"
+                minLength="1"
+                maxLength="1"
+                name="0"
+                value={passwords[0] || ""}
+                isValid={isPasswordValid}
+                onChange={handlePasswordChange}
+              />
               <label className="sr-only" htmlFor="card-password-input-2"></label>
-              <Input type="password" className="w-10" minLength="1" maxLength="1" value={password[1]} />
+              <Input
+                type="password"
+                className="w-10 text-center"
+                minLength="1"
+                maxLength="1"
+                name="1"
+                value={passwords[1] || ""}
+                isValid={isPasswordValid}
+                onChange={handlePasswordChange}
+              />
               <div className="w-10 flex justify-center">
                 <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="2.5" cy="2.5" r="2.5" fill="#04C09E" />
