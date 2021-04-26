@@ -34,7 +34,7 @@ const CardRegister = (props) => {
         <CardRegisterForm setCardNumbers={setCardNumbers} setExpirationDate={setExpirationDate} />
         <Button text={'다음'} onClick={handleClickNextPage} />
       </Style.Root>
-      {isSelectorOpened && <CardSelector />}
+      {isSelectorOpened && <CardSelector setBankId={setBankId} setSelectorOpened={setSelectorOpened} />}
     </>
   );
 };
