@@ -14,8 +14,8 @@ const Styled = {
       return `${info[size] || 'scale(1.0)'};`;
     }};
 
-    width: 293.08px;
-    height: 183px;
+    width: 320px;
+    height: 200px;
     border: none;
     border-radius: 7px;
     color: ${(props) => (getGrayScale(props.bgColor) ? '#ffffff' : props.theme.color.card)};
@@ -48,7 +48,7 @@ const Styled = {
     font-size: 20px;
     font-weight: 500;
     position: absolute;
-    bottom: 48px;
+    bottom: 64px;
     left: 0;
     right: 0;
   `,
@@ -64,6 +64,8 @@ const Styled = {
     position: absolute;
     bottom: 19px;
     letter-spacing: 0.1em;
+    max-width: 180px;
+    word-break: break-all;
   `,
 
   ExpiryDate: styled.span`
