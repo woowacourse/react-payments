@@ -7,6 +7,16 @@ import Container from '../../common/Container';
 import Input from '../../common/Input';
 import Button from '../../common/Button';
 import CARD_BRAND from '../../../constants/cardData';
+import { LABEL, PLACEHOLDER } from '../../../constants/addCardForm';
+import {
+  CARD_NUMBER_DIGITS,
+  CARD_NUMBER_SEPERATOR,
+  EXP_DATE_DIGITS,
+  EXP_DATE_WHITESPACE_CHARACTER,
+  CVC_DIGITS,
+  MAX_OWNERNAME_LENGTH,
+} from '../../../constants/creditCard';
+import { ALERT } from '../../../constants/messages';
 import { AddCardFormContainer, AddCardInputContainer } from './styles';
 import { CardBrand, ExpDate } from '../../../types';
 import {
@@ -54,10 +64,10 @@ const AddCardForm = () => {
     setExpDate({ ...expDate, year: value });
   };
 
-  const onBlurExpDate = ({ target: { value } }: FocusEvent<HTMLInputElement>, index: string) => {
+  const onBlurExpDate = ({ target: { value } }: FocusEvent<HTMLInputElement>, index: keyof ExpDate) => {
     if (value.length !== 1) return;
 
-    setExpDate({ ...expDate, [index]: '0' + value });
+    setExpDate({ ...expDate, [index]: EXP_DATE_WHITESPACE_CHARACTER + value });
   };
 
   const onChangeOwnerName = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
@@ -72,12 +82,12 @@ const AddCardForm = () => {
     setCVC(value);
   };
 
-  const onChangePassword = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
+  const onChangePassword = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: 0 | 1) => {
     if (!isValidPassword(value)) return;
 
     const nextPassword: PasswordState = [...password];
 
-    nextPassword[index] = value;
+    nextPassword[index as number] = value;
     setPassword(nextPassword);
   };
 
@@ -87,7 +97,7 @@ const AddCardForm = () => {
   };
 
   const onSetCardBrand = () => {
-    if (cardNumber[0].length !== 4 || cardNumber[1].length !== 4) {
+    if (cardNumber[0].length !== CARD_NUMBER_DIGITS || cardNumber[1].length !== CARD_NUMBER_DIGITS) {
       setCardBrand({ name: '', color: '' });
       return;
     }
@@ -113,7 +123,7 @@ const AddCardForm = () => {
     }
 
     if (!isAllInputFilled({ cardNumber, cardBrand, CVC, expDate, ownerName, password })) {
-      alert('입력이 완료되지 않았습니다.');
+      alert(ALERT.SHOULD_FILL_REQUIRED_INPUTS);
       return;
     }
 
@@ -122,7 +132,7 @@ const AddCardForm = () => {
 
   const onSubmitCard = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    alert('카드가 등록되었습니다.');
+    alert(ALERT.CARD_SUBMIT_SUCCESS);
   };
 
   return (
@@ -132,10 +142,10 @@ const AddCardForm = () => {
         cardBrand={cardBrand}
         expDate={expDate}
         ownerName={ownerName}
-        cardNumber={cardNumber.join('-')}
+        cardNumber={cardNumber.join(CARD_NUMBER_SEPERATOR)}
       />
       <form onSubmit={onSubmitCard}>
-        <AddCardInputLabel label={'카드번호'}>
+        <AddCardInputLabel label={LABEL.CARD_NUMBER}>
           <AddCardInputContainer>
             {['text', 'text', 'password', 'password']
               .map((type, index) => (
@@ -143,26 +153,30 @@ const AddCardForm = () => {
                   key={index}
                   type={type}
                   textCenter
-                  maxLength={4}
+                  maxLength={CARD_NUMBER_DIGITS}
                   width="16%"
                   value={cardNumber[index]}
                   onChange={event => onChangeCardNumber(event, index)}
                 />
               ))
               .reduce(
-                (acc: JSX.Element[], curr, index, array) => [...acc, <span key={index + array.length}>-</span>, curr],
+                (acc: JSX.Element[], curr, index, array) => [
+                  ...acc,
+                  <span key={index + array.length}>{CARD_NUMBER_SEPERATOR}</span>,
+                  curr,
+                ],
                 []
               )
               .slice(1)}
           </AddCardInputContainer>
         </AddCardInputLabel>
-        <AddCardInputLabel label={'만료일'} width="40%">
+        <AddCardInputLabel label={LABEL.EXP_DATE} width="40%">
           <AddCardInputContainer>
             <Input
               type="text"
-              placeholder="MM"
+              placeholder={PLACEHOLDER.MONTH}
               textCenter
-              maxLength={2}
+              maxLength={EXP_DATE_DIGITS}
               width="40%"
               value={expDate.month}
               onChange={onChangeExpMonth}
@@ -171,9 +185,9 @@ const AddCardForm = () => {
             /
             <Input
               type="text"
-              placeholder="YY"
+              placeholder={PLACEHOLDER.YEAR}
               textCenter
-              maxLength={2}
+              maxLength={EXP_DATE_DIGITS}
               width="40%"
               value={expDate.year}
               onChange={onChangeExpYear}
@@ -181,27 +195,27 @@ const AddCardForm = () => {
             />
           </AddCardInputContainer>
         </AddCardInputLabel>
-        <AddCardInputLabel label={['카드 소유자 이름', `${ownerName.length} / 30`]}>
+        <AddCardInputLabel label={[LABEL.OWNER_NAME, `${ownerName.length} / ${MAX_OWNERNAME_LENGTH}`]}>
           <AddCardInputContainer>
             <Input
-              placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+              placeholder={PLACEHOLDER.OWNER_NAME}
               type="text"
               width="90%"
-              maxLength={30}
+              maxLength={MAX_OWNERNAME_LENGTH}
               value={ownerName}
               onChange={onChangeOwnerName}
             />
           </AddCardInputContainer>
         </AddCardInputLabel>
-        <AddCardInputLabel label={'보안 코드(CVC/CVV)'}>
+        <AddCardInputLabel label={LABEL.CVC}>
           <AddCardInputContainer width="25%">
-            <Input type="password" maxLength={3} textCenter value={CVC} onChange={onChangeCVC} />
+            <Input type="password" maxLength={CVC_DIGITS} textCenter value={CVC} onChange={onChangeCVC} />
           </AddCardInputContainer>
           <Container className="question-mark">
             <img src="/buttons/question-mark-btn.svg" alt="cvc/cvv 도움말" />
           </Container>
         </AddCardInputLabel>
-        <AddCardInputLabel label={'카드 비밀번호'}>
+        <AddCardInputLabel label={LABEL.PASSWORD}>
           <Container flex justifyContent="space-between" width="60%">
             <AddCardInputContainer width="23%">
               <Input type="password" textCenter value={password[0]} onChange={event => onChangePassword(event, 0)} />
@@ -234,7 +248,7 @@ const AddCardForm = () => {
             nickname={nickname}
             setNickname={setNickname}
             ownerName={ownerName}
-            cardNumber={cardNumber}
+            cardNumber={cardNumber.join(CARD_NUMBER_SEPERATOR)}
             expDate={expDate}
             cardBrand={cardBrand}
           />

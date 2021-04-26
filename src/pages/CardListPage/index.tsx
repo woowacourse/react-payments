@@ -25,12 +25,12 @@ const dummies: Card[] = [
       color: '#547CE4',
     },
     ownerName: 'FANO',
-    cardNumber: ['1234', '1234', '1234', '1234'],
+    cardNumber: '1234-1234-1234-1234',
     expDate: {
       month: '3',
       year: '3',
     },
-    password: ['1', '2'],
+    password: '12',
     CVC: '123',
     nickname: '엄카',
   },
@@ -40,12 +40,12 @@ const dummies: Card[] = [
       color: '#547CE4',
     },
     ownerName: 'FANO',
-    cardNumber: ['1234', '1234', '1234', '1234'],
+    cardNumber: '1234-1234-1234-1234',
     expDate: {
       month: '3',
       year: '3',
     },
-    password: ['1', '2'],
+    password: '12',
     CVC: '123',
     nickname: '엄카',
   },
@@ -58,7 +58,7 @@ const CardListPage = () => {
     <Template title={title}>
       <CardList>
         {dummies.map(card => (
-          <li key={card.id}>
+          <li key={card.cardNumber}>
             <CreditCard
               cardBrand={card.cardBrand}
               ownerName={card.ownerName}

@@ -2,7 +2,7 @@ import Modal from '../../common/Modal';
 import Input from '../../common/Input';
 import { ChangeEvent, FC, useEffect } from 'react';
 import CreditCard from '../../common/CreditCard';
-import { CardBrand, CardNumber, ExpDate } from '../../../types';
+import { CardBrand, ExpDate } from '../../../types';
 import { NicknameContainer } from './styles';
 import Button from '../../common/Button';
 
@@ -10,7 +10,7 @@ interface Props {
   nickname: string;
   setNickname: (nickname: string) => void;
   cardBrand: CardBrand;
-  cardNumber: CardNumber;
+  cardNumber: string;
   expDate: ExpDate;
   ownerName: string;
 }
