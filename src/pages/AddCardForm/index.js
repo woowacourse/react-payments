@@ -1,8 +1,8 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { CARD_COMPANY, ERROR_MESSAGE } from '../../constants';
 import { Icon, Card, Input, Header, TextButton, PasswordInput } from '../../stories/components';
 import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/formatter';
-import { isDigitKey, isValidSerialNumber, isValidDateFormat, isValidUserName } from './validator';
+import { isValidSerialNumber, isValidDateFormat, isValidUserName } from './validator';
 import './style.css';
 
 export default function AddCardForm({
@@ -24,7 +24,7 @@ export default function AddCardForm({
   const [expirationDateErrorMessage, setExpirationDateErrorMessage] = useState('');
   const [userNameErrorMessage, setUserNameErrorMessage] = useState('');
 
-  const inputEl = useRef(null);
+  const serialNumberInputElement = useRef(null);
 
   const isFormCompleted = useMemo(() => {
     return (
@@ -37,10 +37,74 @@ export default function AddCardForm({
     );
   }, [serialNumber, cardCompany, expirationDate, securityCode, password]);
 
+  useEffect(() => {
+    serialNumberInputElement.current.focus();
+  }, [cardCompany]);
+
   const onSetPassword = (key, value) => {
     if (isNaN(value)) return;
 
     setPassword({ ...password, [key]: value });
+  };
+
+  const offsetByInputType = {
+    deleteContentBackward: -1,
+    insertText: 1,
+  };
+
+  const getOffset = (inputType, selectionStart) => {
+    if (inputType === 'insertText') {
+      return selectionStart !== 0 && selectionStart % 5 === 0 ? offsetByInputType[inputType] : 0;
+    }
+
+    if (inputType === 'deleteContentBackward') {
+      return selectionStart !== 0 && (selectionStart + 1) % 5 === 0
+        ? offsetByInputType[inputType]
+        : 0;
+    }
+
+    return 0;
+  };
+
+  const getCurrentSerialNumber = {
+    deleteContentBackward: (serialIndex) => {
+      return serialNumber.slice(0, serialIndex - 1) + serialNumber.slice(serialIndex);
+    },
+    insertText: (serialIndex, insertKey) => {
+      return serialNumber.slice(0, serialIndex) + insertKey + serialNumber.slice(serialIndex);
+    },
+  };
+
+  const onSerialNumberInputChange = (event) => {
+    const inputKey = event.nativeEvent.data;
+    const inputValue = event.target.value.replaceAll('-', '');
+
+    if (isNaN(inputKey)) {
+      event.target.value = cardSerialNumberFormatter(serialNumber);
+      return;
+    }
+
+    const inputType = event.nativeEvent.inputType;
+    const selectionStart = event.target.selectionStart;
+    const offset = getOffset(inputType, selectionStart);
+    const currentLocation = selectionStart + offset;
+
+    const serialIndex =
+      currentLocation - Math.floor(currentLocation / 5) - offsetByInputType[inputType];
+    const currentSerialNumber = getCurrentSerialNumber[inputType](serialIndex, inputKey);
+
+    setSerialNumber(currentSerialNumber);
+    event.target.value = cardSerialNumberFormatter(currentSerialNumber);
+    event.target.setSelectionRange(currentLocation, currentLocation);
+
+    if (inputValue.length === 8) {
+      serialNumberInputElement.current.blur();
+      onSetModalContents('cardSelection');
+    }
+
+    if (cardCompany && inputValue.length < 8) {
+      setCardCompany('');
+    }
   };
 
   return (
@@ -65,56 +129,20 @@ export default function AddCardForm({
             expirationDate={MMYYDateFormatter(expirationDate)}
           />
         </div>
+
         <Input
-          type="text"
+          type="tel"
           label="카드번호"
           inputStyle={{ width: '100%' }}
           maxLength="19"
-          value={cardSerialNumberFormatter(serialNumber)}
-          onKeyDown={(event) => {
-            if (!isDigitKey(event.key) && event.key !== 'Backspace') return;
-
-            const currentLocation =
-              event.target.selectionStart - Math.floor(event.target.selectionStart / 5);
-
-            if (event.key === 'Backspace') {
-              if (currentLocation === 0) return;
-
-              setSerialNumber(
-                serialNumber.slice(0, currentLocation - 1) + serialNumber.slice(currentLocation)
-              );
-              return;
-            }
-
-            if (serialNumber.length === 16) return;
-
-            setSerialNumber(
-              serialNumber.slice(0, currentLocation) +
-                event.key +
-                serialNumber.slice(currentLocation)
-            );
-          }}
-          onChange={(event) => {
-            //TODO: '-' 위치가 변화 할 때 생기는 커서 이동 문제 해결 필요함
-            const currentLocation = event.target.selectionStart;
-            inputEl.current.setSelectionRange(currentLocation, currentLocation);
-
-            if (serialNumber.length === 8) {
-              inputEl.current.blur();
-              onSetModalContents('cardSelection');
-            }
-
-            if (cardCompany && serialNumber.length < 8) {
-              setCardCompany('');
-            }
-          }}
+          onChange={onSerialNumberInputChange}
           onFocus={() => {
             if (!cardCompany && serialNumber.length === 8) {
-              inputEl.current.blur();
+              serialNumberInputElement.current.blur();
               onSetModalContents('cardSelection');
             }
           }}
-          innerRef={inputEl}
+          innerRef={serialNumberInputElement}
           inputMode="numeric"
           textAlign="center"
         />
@@ -142,6 +170,10 @@ export default function AddCardForm({
 
               setExpirationDateErrorMessage(ERROR_MESSAGE.INVALID_DATE_FORMAT);
             }
+          }}
+          onClick={() => {
+            setExpirationDate('');
+            expirationDateErrorMessage && setExpirationDateErrorMessage('');
           }}
           errorMessage={expirationDateErrorMessage}
         />
@@ -186,16 +218,7 @@ export default function AddCardForm({
         >
           <button
             type="button"
-            style={{
-              display: 'inherit',
-              background: 'none',
-              outline: '0',
-              border: '0',
-              cursor: 'pointer',
-              margin: '0 0 0 12px',
-              padding: '0',
-              boxSizing: 'content-box',
-            }}
+            className="security-code-guide-button"
             onClick={() => {
               onSetModalContents('questionMark');
             }}

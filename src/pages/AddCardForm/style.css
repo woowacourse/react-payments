@@ -28,3 +28,14 @@
   bottom: 18px;
   right: 28px;
 }
+
+.security-code-guide-button {
+  display: inherit;
+  background: none;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  margin: 0 0 0 12px;
+  padding: 0;
+  box-sizing: content-box;
+}
