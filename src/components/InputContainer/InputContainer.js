@@ -2,12 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const InputContainer = (props) => {
-  const { title, children } = props;
+  const { title, children, width = 'full', bgColor = '' } = props;
+
+  const widthTable = {
+    full: 'w-full',
+    half: 'w-5/12',
+    quarter: 'w-3/12',
+    small: 'w-1.5/12',
+  };
 
   return (
-    <div className="flex flex-col mt-5 ">
+    <div className="flex w-full flex-col mt-5">
       <label className="text-xs">{title}</label>
-      <div className="flex items-center mt-1.5">{children}</div>
+      <div className={`${widthTable[width]} flex items-center mt-1.5 font-gray-350 ${bgColor} rounded`}>{children}</div>
     </div>
   );
 };

@@ -2,23 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Input = (props) => {
-  const {
-    width = 'full',
-    type = 'text',
-    name = '',
-    maxLength,
-    value,
-    placeHolder = '',
-    textAlign = 'text-center',
-    onChange,
-  } = props;
-
-  const widthTable = {
-    full: 'w-full',
-    half: 'w-5/12',
-    quarter: 'w-3/12',
-    small: 'w-1.5/12',
-  };
+  const { type = 'text', name = '', maxLength, value, placeHolder = '', onChange, className = '' } = props;
 
   return (
     <input
@@ -27,9 +11,9 @@ const Input = (props) => {
       maxLength={maxLength}
       placeHolder={placeHolder}
       value={value}
-      className={`${widthTable[width]}  bg-gray-250 text-green-350 rounded mr-1 h-10 ${textAlign}`}
+      className={`${className} bg-gray-250 mr-1 text-green-350 h-10 w-full text-center outline-none focus:border border-gray-400 rounded`}
       required
-      onChange={props.onChange}
+      onChange={onChange}
     />
   );
 };
@@ -37,7 +21,6 @@ const Input = (props) => {
 export default Input;
 
 Input.propTypes = {
-  width: PropTypes.string,
   type: PropTypes.string,
   name: PropTypes.string,
   placeHolder: PropTypes.number,
