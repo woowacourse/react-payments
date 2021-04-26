@@ -22,13 +22,13 @@ const Styled = {
     background: ${(props) => props.bgColor};
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     position: relative;
-
     margin: 0 auto;
+    box-sizing: border-box;
   `,
 
   Chip: styled.div`
     position: absolute;
-    top: 80px;
+    top: 60px;
     width: 55px;
     height: 36px;
     background-color: #cbba64;
@@ -48,7 +48,7 @@ const Styled = {
     font-size: 20px;
     font-weight: 500;
     position: absolute;
-    bottom: 54px;
+    bottom: 48px;
     left: 0;
     right: 0;
   `,
