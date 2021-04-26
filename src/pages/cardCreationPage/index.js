@@ -11,10 +11,8 @@ import CardPasswordInput from '../../components/cardCreation/cardPasswordInput/C
 import Styled from './style';
 import { COLOR } from '../../constants/color';
 import { PAGE } from '../../constants/page';
-import CardSelectionModal from '../../components/cardCreation/cardSelectionModal/CardSelectionModal';
 
 const CardCreationPage = ({ setCurrentPage }) => {
-  const [isModalOpened, setModalOpen] = useState(false);
   const [cardNumber, setCardNumber] = useState({
     0: '',
     1: '',
@@ -39,6 +37,14 @@ const CardCreationPage = ({ setCurrentPage }) => {
   const [isValidSecurityCode, setValidSecurityCode] = useState(false);
   const [isValidCardPassword, setValidCardPassword] = useState(false);
 
+  const isValidAllInput =
+    isValidCardNumber &&
+    isValidCardExpiredDate &&
+    isValidCardOwner &&
+    isValidSecurityCode &&
+    isValidCardPassword &&
+    selectedCardInfo.id;
+
   return (
     <>
       <Header>
@@ -61,9 +67,10 @@ const CardCreationPage = ({ setCurrentPage }) => {
           <CardNumberInput
             cardNumber={cardNumber}
             setCardNumber={setCardNumber}
-            setModalOpen={setModalOpen}
             isValidCardNumber={isValidCardNumber}
             setValidCardNumber={setValidCardNumber}
+            setSelectedCardInfo={setSelectedCardInfo}
+            selectedCardInfo={selectedCardInfo}
           />
           <ExpiredDateInput
             cardExpiredDate={cardExpiredDate}
@@ -91,13 +98,12 @@ const CardCreationPage = ({ setCurrentPage }) => {
         </Styled.Form>
       </div>
       <Styled.ButtonContainer>
-        <Button onClick={() => setCurrentPage(PAGE.CARD_CREATION_COMPLETE)} styles={{ color: COLOR.MINT }}>
-          다음
-        </Button>
+        {isValidAllInput && (
+          <Button onClick={() => setCurrentPage(PAGE.CARD_CREATION_COMPLETE)} styles={{ color: COLOR.MINT }}>
+            다음
+          </Button>
+        )}
       </Styled.ButtonContainer>
-      {isModalOpened && (
-        <CardSelectionModal closeModal={() => setModalOpen(false)} setSelectedCardInfo={setSelectedCardInfo} />
-      )}
     </>
   );
 };
