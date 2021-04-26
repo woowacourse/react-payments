@@ -5,13 +5,6 @@ import { Input, Text } from '..';
 export default {
   title: 'Component/Container',
   component: Container,
-  decorators: [
-    (Story) => (
-      <div style={{ width: '375px', height: '701px', backgroundColor: '#fff' }}>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 const Template = (args) => <Container {...args} />;

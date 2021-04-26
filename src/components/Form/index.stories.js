@@ -4,13 +4,6 @@ import { Button, Form, Input, Label } from '..';
 export default {
   title: 'Component/Form',
   component: Form,
-  decorators: [
-    (Story) => (
-      <div style={{ width: '375px', height: '701px', backgroundColor: '#fff' }}>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 const Template = (args) => <Form {...args} />;
