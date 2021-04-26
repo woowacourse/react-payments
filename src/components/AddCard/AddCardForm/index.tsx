@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, FormEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FocusEvent, FormEvent, MutableRefObject, useEffect, useRef, useState } from 'react';
 import AddCardInputLabel from './AddCardInputLabel';
 import CreditCard from '../../common/CreditCard';
 import CardBrandModal from '../CardBrandModal';
@@ -43,6 +43,18 @@ const AddCardForm = () => {
   const [isNicknameModalVisible, setIsNicknameModalVisible] = useState(false);
   const [nickname, setNickname] = useState('');
 
+  const secondCardNumberInputRef = useRef<HTMLInputElement>(null);
+  const thirdCardNumberInputRef = useRef<HTMLInputElement>(null);
+  const fourthCardNumberInputRef = useRef<HTMLInputElement>(null);
+  const expYearInputRef = useRef<HTMLInputElement>(null);
+  const secondPasswordInputRef = useRef<HTMLInputElement>(null);
+
+  const focusNextCardNumberInput = (index: number) => {
+    const cardNumberInputRefs = [secondCardNumberInputRef, thirdCardNumberInputRef, fourthCardNumberInputRef];
+
+    cardNumberInputRefs[index].current?.focus();
+  };
+
   const onChangeCardNumber = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
     if (!isValidCardNumber(value)) return;
 
@@ -50,12 +62,20 @@ const AddCardForm = () => {
 
     nextValue[index] = value;
     setCardNumber(nextValue);
+
+    if (nextValue[index].length === CARD_NUMBER_DIGITS && index < 3) {
+      focusNextCardNumberInput(index);
+    }
   };
 
   const onChangeExpMonth = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     if (!isValidExpMonth(value)) return;
 
     setExpDate({ ...expDate, month: value });
+
+    if (value.length === EXP_DATE_DIGITS) {
+      expYearInputRef.current?.focus();
+    }
   };
 
   const onChangeExpYear = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
@@ -89,6 +109,10 @@ const AddCardForm = () => {
 
     nextPassword[index as number] = value;
     setPassword(nextPassword);
+
+    if (index === 0 && value.length === 1) {
+      secondPasswordInputRef.current?.focus();
+    }
   };
 
   const onClickCardBrandButton = (cardBrand: CardBrand) => {
@@ -147,11 +171,17 @@ const AddCardForm = () => {
       <form onSubmit={onSubmitCard}>
         <AddCardInputLabel label={LABEL.CARD_NUMBER}>
           <AddCardInputContainer>
-            {['text', 'text', 'password', 'password']
-              .map((type, index) => (
+            {[
+              { type: 'text', ref: null },
+              { type: 'text', ref: secondCardNumberInputRef },
+              { type: 'password', ref: thirdCardNumberInputRef },
+              { type: 'password', ref: fourthCardNumberInputRef },
+            ]
+              .map(({ type, ref }, index) => (
                 <Input
                   key={index}
                   type={type}
+                  ref={ref}
                   textCenter
                   maxLength={CARD_NUMBER_DIGITS}
                   width="16%"
@@ -185,6 +215,7 @@ const AddCardForm = () => {
             /
             <Input
               type="text"
+              ref={expYearInputRef}
               placeholder={PLACEHOLDER.YEAR}
               textCenter
               maxLength={EXP_DATE_DIGITS}
@@ -221,7 +252,13 @@ const AddCardForm = () => {
               <Input type="password" textCenter value={password[0]} onChange={event => onChangePassword(event, 0)} />
             </AddCardInputContainer>
             <AddCardInputContainer width="23%">
-              <Input type="password" textCenter value={password[1]} onChange={event => onChangePassword(event, 1)} />
+              <Input
+                type="password"
+                ref={secondPasswordInputRef}
+                textCenter
+                value={password[1]}
+                onChange={event => onChangePassword(event, 1)}
+              />
             </AddCardInputContainer>
             <AddCardInputContainer width="23%">
               <span className="password-dot" />
