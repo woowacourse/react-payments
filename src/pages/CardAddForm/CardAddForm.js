@@ -1,5 +1,5 @@
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useState, useMemo, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { ScreenContainer } from '../common/common.styles';
 import Styled from './CardAddForm.styles';
@@ -13,20 +13,33 @@ import Button from '../../components/Button/Button';
 import CardSelector from '../../components/CardSelector/CardSelector';
 import useInput from '../../hooks/useInput';
 import useModal from '../../hooks/useModal';
-import { isNumeric } from '../../utils';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import useMultipleInput from '../../hooks/useMultipleInput';
+import { isNumeric, initArray } from '../../utils';
 import MESSAGE from '../../constants/message';
 import CARD from '../../constants/card';
 import LOCAL_STORAGE_KEY from '../../constants/localStorageKey';
-import useLocalStorage from '../../hooks/useLocalStorage';
 import REGEX from '../../constants/regex';
 import ROUTE from '../../constants/route';
 
 const CardAddForm = () => {
   const history = useHistory();
 
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [passwordDigits, setPasswordDigits] = useState(['', '']);
+  const [cardNumberInputRefs] = useState(initArray(4, useRef()));
+  const [pinNumberInputRefs] = useState(initArray(2, useRef()));
+
   const [cardCompany, setCardCompany] = useState({});
+
+  const cardNumbers = useMultipleInput(['', '', '', ''], {
+    nameSpliter: '-',
+    refs: cardNumberInputRefs,
+    maxLengthPerInput: 4,
+  });
+  const passwordDigits = useMultipleInput(['', ''], {
+    nameSpliter: '-',
+    refs: pinNumberInputRefs,
+    maxLengthPerInput: 1,
+  });
 
   const { Modal, modalRef, openModal, closeModal } = useModal(false);
   const ownerName = useInput('', { upperCase: true });
@@ -35,7 +48,7 @@ const CardAddForm = () => {
 
   const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
 
-  const cardNumbersAsNumber = useMemo(() => cardNumbers.join(''), [cardNumbers]);
+  const cardNumbersAsNumber = useMemo(() => cardNumbers.value.join(''), [cardNumbers.value]);
 
   const expiryDateAsNumber = useMemo(() => expiryDate.value.replace(REGEX.NOT_NUMBER, ''), [
     expiryDate.value,
@@ -53,7 +66,9 @@ const CardAddForm = () => {
     [expiryDateAsNumber]
   );
 
-  const isNumericCardNumbers = useMemo(() => cardNumbers.every(isNumeric), [cardNumbers]);
+  const isNumericCardNumbers = useMemo(() => cardNumbers.value.every(isNumeric), [
+    cardNumbers.value,
+  ]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -77,28 +92,6 @@ const CardAddForm = () => {
     history.push(ROUTE.COMPLETE, { card: newCard });
   };
 
-  const handleChangeCardNumber = (event) => {
-    const [, , index] = event.target.name.split('-');
-
-    setCardNumbers((state) => {
-      const newCardNumbers = [...state];
-      newCardNumbers[index] = event.target.value;
-
-      return newCardNumbers;
-    });
-  };
-
-  const handleChangePasswordDigits = (event) => {
-    const [, index] = event.target.name.split('-');
-
-    setPasswordDigits((state) => {
-      const newPasswordDigits = [...state];
-      newPasswordDigits[index] = event.target.value;
-
-      return newPasswordDigits;
-    });
-  };
-
   const handleClickCardSelector = (key) => {
     setCardCompany(CARD[key]);
     closeModal();
@@ -107,7 +100,7 @@ const CardAddForm = () => {
   // 배민 페이의 경우 모달이 뜨고 닫힐 때, 세번째 카드 번호 input에 focus 시 모달이 다시 뜸
   // TODO: modal이 떴을 때, focusout(blur) 처리되도록 구현해야 함
   useEffect(() => {
-    const [firstInput, secondInput] = cardNumbers;
+    const [firstInput, secondInput] = cardNumbers.value;
 
     const isFilledHalf = firstInput.length === 4 && secondInput.length === 4;
     const isCardCompanySelected = Object.keys(cardCompany).length > 0;
@@ -132,7 +125,7 @@ const CardAddForm = () => {
     } else if (!isFilledHalf && isCardCompanySelected) {
       setCardCompany({});
     }
-  }, [cardNumbers, cardNumbersAsNumber, cardCompany, openModal, modalRef]);
+  }, [cardNumbers.value, cardNumbersAsNumber, cardCompany, openModal, modalRef]);
 
   return (
     <ScreenContainer>
@@ -148,8 +141,9 @@ const CardAddForm = () => {
         <form onSubmit={handleSubmit}>
           <Styled.Row>
             <CardNumberInput
-              values={cardNumbers}
-              onChange={handleChangeCardNumber}
+              ref={cardNumberInputRefs}
+              values={cardNumbers.value}
+              onChange={cardNumbers.onChange}
               labelText="카드 번호"
               errorMessage={!isNumericCardNumbers ? MESSAGE.REQUIRE_NUMBER_ONLY : ''}
               isError={!isNumericCardNumbers}
@@ -202,12 +196,15 @@ const CardAddForm = () => {
           </Styled.Row>
           <Styled.Row>
             <PinNumberInput
+              ref={pinNumberInputRefs}
               labelText="카드 비밀번호"
-              values={passwordDigits}
-              onChange={handleChangePasswordDigits}
+              values={passwordDigits.value}
+              onChange={passwordDigits.onChange}
               dotCount={2}
-              isError={!isNumeric(passwordDigits.join(''))}
-              errorMessage={!isNumeric(passwordDigits.join('')) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''}
+              isError={!isNumeric(passwordDigits.value.join(''))}
+              errorMessage={
+                !isNumeric(passwordDigits.value.join('')) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''
+              }
               inputmode="numeric"
               required
             />

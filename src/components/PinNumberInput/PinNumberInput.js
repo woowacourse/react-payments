@@ -1,37 +1,13 @@
-import { useState, useRef } from 'react';
+import { forwardRef } from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import Input from '../Input/Input';
 import Styled from './PinNumberInput.styles';
-import { initArray } from '../../utils';
 import ErrorMessageBox from '../ErrorMessageBox/ErrorMessageBox';
 import REGEX from '../../constants/regex';
 
-const PinNumberInput = ({
-  values,
-  dotCount,
-  labelText,
-  required,
-  errorMessage,
-  isError,
-  onChange,
-}) => {
-  const [inputRef] = useState(initArray(2, useRef()));
-
-  const handleChange = (event) => {
-    const [, index] = event.target.name.split('-');
-
-    if (onChange) onChange(event);
-
-    if (!event.target.value) {
-      inputRef[Number(index) - 1]?.focus();
-      return;
-    }
-
-    inputRef[Number(index) + 1]?.focus();
-  };
-
-  return (
+const PinNumberInput = forwardRef(
+  ({ values, dotCount, labelText, required, errorMessage, isError, onChange }, ref) => (
     <Styled.Container isError={isError}>
       <Styled.Header>
         <span>{labelText}</span>
@@ -48,9 +24,9 @@ const PinNumberInput = ({
                 type="password"
                 maxLength={1}
                 textAlign="center"
-                // eslint-disable-next-line no-return-assign
-                ref={(el) => (inputRef[index] = el)}
-                onChange={handleChange}
+                // eslint-disable-next-line
+                ref={(el) => (ref[index] = el)}
+                onChange={onChange}
                 value={value}
                 required={required}
                 pattern={REGEX.CONTINUOUS_NUMBER.source}
@@ -64,8 +40,10 @@ const PinNumberInput = ({
       </Styled.InputContainer>
       <ErrorMessageBox errorMessage={errorMessage} />
     </Styled.Container>
-  );
-};
+  )
+);
+
+PinNumberInput.displayName = 'PinNumberInput';
 
 PinNumberInput.propTypes = {
   values: PropTypes.arrayOf(PropTypes.string),
