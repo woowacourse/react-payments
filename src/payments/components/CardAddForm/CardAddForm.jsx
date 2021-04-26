@@ -9,11 +9,47 @@ const CardAddForm = props => {
   const [backgroundColor] = useState(null);
   const [bank] = useState(null);
   const [numbers] = useState([]);
-  const [expirationDate] = useState("");
+  const [expirationDate, setExpirationDate] = useState("");
+  const [isExpirationDateValid, setExpirationDateValid] = useState(true);
   const [ownerName] = useState("");
   const [securityCode] = useState("");
   const [password] = useState([]);
   const [isToolTipVisible] = useState(false);
+
+  const handleExpirationDateChange = event => {
+    const { value } = event.target;
+    const replacedValue = value.replace(/[\D]/g, "");
+    const newValue =
+      replacedValue.length > 2 ? `${replacedValue.slice(0, 2)}/${replacedValue.slice(2)}` : replacedValue;
+
+    try {
+      validateExpirationDate(replacedValue);
+      setExpirationDateValid(true);
+
+      // TODO: 커서위치 고정
+    } catch (error) {
+      setExpirationDateValid(false);
+    } finally {
+      setExpirationDate(newValue);
+    }
+  };
+
+  const validateExpirationDate = date => {
+    if (date.length !== 4) {
+      throw new Error("Invalid date length");
+    }
+
+    const month = date.slice(0, 2);
+    const year = date.slice(2, 4);
+    const currentYear = new Date().getFullYear() - 2000;
+
+    if (Number(month) < 1 || Number(month) > 12) {
+      throw new Error("Invalid month");
+    }
+    if (year < currentYear || year > currentYear + 5) {
+      throw new Error("Invalid year");
+    }
+  };
 
   return (
     <>
@@ -62,6 +98,8 @@ const CardAddForm = props => {
               minLength="5"
               maxLength="5"
               value={expirationDate}
+              isValid={isExpirationDateValid}
+              onChange={handleExpirationDateChange}
               required
             />
           </div>
