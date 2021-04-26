@@ -5,6 +5,10 @@ const theme = {
     button: '#525252',
     card: '#525252',
   },
+  borderColor: {
+    simple: '#737373',
+    default: '#eeeeee',
+  },
   bgColor: '#E5E5E5',
 };
 

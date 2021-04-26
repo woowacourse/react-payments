@@ -13,7 +13,7 @@ const Styled = {
 
     &:hover,
     &:active {
-      background-color: #eeeeee;
+      background-color: ${(props) => props.theme.borderColor.default};
     }
   `,
   Logo: styled.img`
