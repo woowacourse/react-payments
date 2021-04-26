@@ -1,5 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { useState, useMemo, useEffect } from 'react';
+import { nanoid } from 'nanoid';
 import { ScreenContainer } from '../common/common.styles';
 import Styled from './CardAddForm.styles';
 import Header from '../../components/Header/Header';
@@ -15,21 +16,22 @@ import useModal from '../../hooks/useModal';
 import { isNumeric } from '../../utils';
 import MESSAGE from '../../constants/message';
 import CARD from '../../constants/card';
+import LOCAL_STORAGE_KEY from '../../constants/localStorageKey';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 const CardAddForm = () => {
   const history = useHistory();
 
-  const [cardNumbers, setCardNumbers] = useState(['1234', '1234', '1234', '1234']);
-  const [passwordDigits, setPasswordDigits] = useState(['1', '2']);
+  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
+  const [passwordDigits, setPasswordDigits] = useState(['', '']);
   const [cardCompany, setCardCompany] = useState({});
 
   const { Modal, modalRef, openModal, closeModal } = useModal(false);
-  const ownerName = useInput('1234', { upperCase: true });
-  const expiryDate = useInput('12 / 23');
-  const CVC = useInput('123');
+  const ownerName = useInput('', { upperCase: true });
+  const expiryDate = useInput('');
+  const CVC = useInput('');
 
-  const cardList = useLocalStorage('cardList');
+  const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
 
   const cardNumbersAsNumber = useMemo(() => cardNumbers.join(''), [cardNumbers]);
 
@@ -55,11 +57,13 @@ const CardAddForm = () => {
     event.preventDefault();
 
     const newCard = {
+      id: nanoid(10),
       cardNumbers: cardNumbersAsNumber,
       cardCompanyName: cardCompany.name,
       cardCompanyColor: cardCompany.color,
       ownerName: ownerName.value,
       expiryDate: expiryDate.value,
+      nickname: cardCompany.name,
     };
 
     if (!cardList.value) {
