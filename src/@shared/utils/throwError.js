@@ -3,8 +3,8 @@ import { ERROR_TYPE } from "./constants";
 const throwError = (message, type) => {
   const error = new Error(message);
 
-  if (!(type in ERROR_TYPE)) {
-    throw new Error("Invalid error type");
+  if (!Object.values(ERROR_TYPE).includes(type)) {
+    throw new Error("Invalid error type: ", type);
   }
 
   error.type = type;
