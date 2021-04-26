@@ -1,4 +1,4 @@
-import { memo, useRef } from 'react';
+import { memo, useRef, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardNumberInput.style';
@@ -30,10 +30,18 @@ const transparentInputStyles = {
   },
 };
 
-const CardNumberInput = memo(({ cardNumber, setCardNumber, setModalOpen }) => {
+const isValidInput = cardNumber => {
+  return Object.values(cardNumber).every(cardNumber => cardNumber.length === 4 && !isNaN(cardNumber));
+};
+
+const CardNumberInput = memo(({ cardNumber, setCardNumber, setModalOpen, isValidCardNumber, setValidCardNumber }) => {
   const $input1 = useRef(null);
   const $input2 = useRef(null);
   const $input3 = useRef(null);
+
+  useEffect(() => {
+    setValidCardNumber(isValidInput(cardNumber));
+  }, [setValidCardNumber, cardNumber]);
 
   const handleInputChange = ({ target }) => {
     if (target.value.length > 4) return;
@@ -49,7 +57,6 @@ const CardNumberInput = memo(({ cardNumber, setCardNumber, setModalOpen }) => {
 
     if (target.name === '1' && target.value.length === 4) {
       $input2.current.disabled = false;
-      $input2.current.focus();
       setModalOpen(true);
 
       return;
@@ -63,8 +70,8 @@ const CardNumberInput = memo(({ cardNumber, setCardNumber, setModalOpen }) => {
 
   return (
     <div>
-      <Styled.InputLabelContainer>카드 번호</Styled.InputLabelContainer>
-      <Styled.InputContainer>
+      <Styled.InputLabelContainer>카드 번호 {isValidCardNumber && '✔️'}</Styled.InputLabelContainer>
+      <Styled.InputContainer isValidInput={isValidCardNumber}>
         <TransparentInput
           name="0"
           type="number"

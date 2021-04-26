@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR } from '../../../constants/color';
 
 const Styled = {
   InputLabelContainer: styled.div`
@@ -21,6 +22,7 @@ const Styled = {
     width: 43px;
     background-color: #ecebf1;
     border-radius: 7px;
+    border: ${({ isValidInput }) => (isValidInput ? `1px solid ${COLOR.VALID_GREEN}` : 'none')};
   `,
   CircleContainer: styled.div`
     display: flex;

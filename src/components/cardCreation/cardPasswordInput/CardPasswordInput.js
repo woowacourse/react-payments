@@ -1,8 +1,8 @@
+import { memo, useRef, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardPasswordInput.style';
 import { Circle } from '../../commons/circle/Circle';
-import { memo, useRef } from 'react';
 
 const transparentInputStyles = {
   color: COLOR.MINT,
@@ -10,8 +10,16 @@ const transparentInputStyles = {
   textAlign: 'center',
 };
 
-const CardPasswordInput = memo(({ cardPassword, setCardPassword }) => {
+const isValidInput = cardPassword => {
+  return Object.values(cardPassword).every(cardPassword => cardPassword.length === 1 && !isNaN(cardPassword));
+};
+
+const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
   const $input1 = useRef(null);
+
+  useEffect(() => {
+    setValidCardPassword(isValidInput(cardPassword));
+  }, [setValidCardPassword, cardPassword]);
 
   const handleInputChange = ({ target }) => {
     setCardPassword(prevState => ({ ...prevState, [target.name]: target.value }));
@@ -23,9 +31,9 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword }) => {
 
   return (
     <div>
-      <Styled.InputLabelContainer>카드 비밀번호</Styled.InputLabelContainer>
+      <Styled.InputLabelContainer>카드 비밀번호 {isValidCardPassword && '✔️'}</Styled.InputLabelContainer>
       <Styled.Container>
-        <Styled.InputContainer>
+        <Styled.InputContainer isValidInput={isValidCardPassword}>
           <TransparentInput
             name="0"
             minLength="1"
@@ -36,7 +44,7 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword }) => {
             styles={transparentInputStyles}
           />
         </Styled.InputContainer>
-        <Styled.InputContainer>
+        <Styled.InputContainer isValidInput={isValidCardPassword}>
           <TransparentInput
             name="1"
             minLength="1"

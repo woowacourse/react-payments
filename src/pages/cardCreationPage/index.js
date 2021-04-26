@@ -31,7 +31,13 @@ const CardCreationPage = ({ setCurrentPage }) => {
     0: '',
     1: '',
   });
-  const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: '' });
+  const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: COLOR.LIGHT_GRAY });
+
+  const [isValidCardNumber, setValidCardNumber] = useState(false);
+  const [isValidCardExpiredDate, setValidCardExpiredDate] = useState(false);
+  const [isValidCardOwner, setValidCardOwner] = useState(false);
+  const [isValidSecurityCode, setValidSecurityCode] = useState(false);
+  const [isValidCardPassword, setValidCardPassword] = useState(false);
 
   return (
     <>
@@ -52,11 +58,36 @@ const CardCreationPage = ({ setCurrentPage }) => {
           }}
         />
         <Styled.Form>
-          <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} setModalOpen={setModalOpen} />
-          <ExpiredDateInput cardExpiredDate={cardExpiredDate} setCardExpiredDate={setCardExpiredDate} />
-          <CardOwnerInput cardOwner={cardOwner} setCardOwner={setCardOwner} />
-          <SecurityCodeInput securityCode={securityCode} setSecurityCode={setSecurityCode} />
-          <CardPasswordInput cardPassword={cardPassword} setCardPassword={setCardPassword} />
+          <CardNumberInput
+            cardNumber={cardNumber}
+            setCardNumber={setCardNumber}
+            setModalOpen={setModalOpen}
+            isValidCardNumber={isValidCardNumber}
+            setValidCardNumber={setValidCardNumber}
+          />
+          <ExpiredDateInput
+            cardExpiredDate={cardExpiredDate}
+            setCardExpiredDate={setCardExpiredDate}
+            isValidCardExpiredDate={isValidCardExpiredDate}
+            setValidCardExpiredDate={setValidCardExpiredDate}
+          />
+          <CardOwnerInput //
+            cardOwner={cardOwner}
+            setCardOwner={setCardOwner}
+            setValidCardOwner={setValidCardOwner}
+          />
+          <SecurityCodeInput
+            securityCode={securityCode}
+            setSecurityCode={setSecurityCode}
+            isValidSecurityCode={isValidSecurityCode}
+            setValidSecurityCode={setValidSecurityCode}
+          />
+          <CardPasswordInput
+            cardPassword={cardPassword}
+            setCardPassword={setCardPassword}
+            isValidCardPassword={isValidCardPassword}
+            setValidCardPassword={setValidCardPassword}
+          />
         </Styled.Form>
       </div>
       <Styled.ButtonContainer>

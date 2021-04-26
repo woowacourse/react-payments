@@ -30,7 +30,7 @@ export const CreditCard = ({ size, backgroundColor, content }) => {
 
 CreditCard.defaultProps = {
   size: CARD_SIZE.MD,
-  backgroundColor: COLOR.MINT,
+  backgroundColor: COLOR.LIGHT_GRAY,
   content: {
     cardOwner: 'NAME',
     cardExpiredDate: 'MM / YY',
