@@ -2,7 +2,7 @@ import CreditCard from '.';
 
 export default {
   component: CreditCard,
-  title: 'Card/CreditCard',
+  title: 'Common/CreditCard',
 };
 
 const Template = args => <CreditCard {...args} />;
@@ -15,7 +15,7 @@ MediumSize.args = {
     color: '#547CE4',
   },
   ownerName: 'test123',
-  cardNumber: ['1234', '1234', '1234', '1234'],
+  cardNumber: '1234-1234-1234-1234',
   expDate: {
     month: '3',
     year: '25',
@@ -33,7 +33,7 @@ LargeSize.args = {
     color: '#547CE4',
   },
   ownerName: 'test123',
-  cardNumber: ['1234', '1234', '1234', '1234'],
+  cardNumber: '1234-1234-1234-1234',
   expDate: {
     month: '3',
     year: '25',

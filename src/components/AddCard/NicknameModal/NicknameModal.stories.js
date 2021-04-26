@@ -4,7 +4,7 @@ import CARD_BRAND from '../../../constants/cardData';
 
 export default {
   component: NicknameModal,
-  title: 'Form/NicknameModal',
+  title: 'AddCard/NicknameModal',
 };
 
 const Template = args => {

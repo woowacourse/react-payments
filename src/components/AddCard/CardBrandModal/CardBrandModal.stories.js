@@ -3,7 +3,7 @@ import CARD_BRAND from '../../../constants/cardData';
 
 export default {
   component: CardBrandModal,
-  title: 'Form/CardBrandModal',
+  title: 'AddCard/CardBrandModal',
 };
 
 const Template = args => <CardBrandModal {...args} />;

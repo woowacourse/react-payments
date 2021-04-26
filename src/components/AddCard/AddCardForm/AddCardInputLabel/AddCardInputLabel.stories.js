@@ -5,7 +5,7 @@ import Input from '../../../common/Input';
 
 export default {
   component: AddCardInputContainer,
-  title: 'Form/AddCardInputContainer',
+  title: 'AddCard/AddCardInputContainer',
 };
 
 const Template = args => (
