@@ -13,7 +13,7 @@ const CardAddComplete = () => {
 
   const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
 
-  if (!location.state.card) return <Redirect to={ROUTE.HOME} />;
+  if (!location.state?.card) return <Redirect to={ROUTE.HOME} />;
 
   const {
     id,
