@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { useState, useMemo, useEffect } from 'react';
-import { Container } from '../common/common.styles';
+import { ScreenContainer } from '../common/common.styles';
 import Styled from './CardAddForm.styles';
 import Header from '../../components/Header/Header';
 import Card from '../../components/Card/Card';
@@ -15,21 +15,60 @@ import useModal from '../../hooks/useModal';
 import { isNumeric } from '../../utils';
 import MESSAGE from '../../constants/message';
 import CARD from '../../constants/card';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const CardAddForm = () => {
   const history = useHistory();
 
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [passwordDigits, setPasswordDigits] = useState(['', '']);
+  const [cardNumbers, setCardNumbers] = useState(['1234', '1234', '1234', '1234']);
+  const [passwordDigits, setPasswordDigits] = useState(['1', '2']);
   const [cardCompany, setCardCompany] = useState({});
 
   const { Modal, modalRef, openModal, closeModal } = useModal(false);
-  const ownerName = useInput('', { upperCase: true });
-  const expiryDate = useInput('');
-  const CVC = useInput('');
+  const ownerName = useInput('1234', { upperCase: true });
+  const expiryDate = useInput('12 / 23');
+  const CVC = useInput('123');
+
+  const cardList = useLocalStorage('cardList');
+
+  const cardNumbersAsNumber = useMemo(() => cardNumbers.join(''), [cardNumbers]);
+
+  const expiryDateAsNumber = useMemo(() => expiryDate.value.replace(/[^0-9]/g, ''), [
+    expiryDate.value,
+  ]);
+
+  const formattedExpiryDate = useMemo(() => {
+    const expiryDateChunks = expiryDateAsNumber.match(/.{1,2}/g) || [];
+    return expiryDateChunks.join(' / ');
+  }, [expiryDateAsNumber]);
+
+  const isValidExpiryDate = useMemo(
+    () =>
+      expiryDateAsNumber.length > 0 &&
+      !(Number(expiryDateAsNumber.slice(0, 2)) > 0 && Number(expiryDateAsNumber.slice(0, 2)) < 13),
+    [expiryDateAsNumber]
+  );
+
+  const isNumericCardNumbers = useMemo(() => cardNumbers.every(isNumeric), [cardNumbers]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const newCard = {
+      cardNumbers: cardNumbersAsNumber,
+      cardCompanyName: cardCompany.name,
+      cardCompanyColor: cardCompany.color,
+      ownerName: ownerName.value,
+      expiryDate: expiryDate.value,
+    };
+
+    if (!cardList.value) {
+      cardList.setValue([]);
+    }
+
+    cardList.setValue([...cardList.value, newCard]);
+
+    history.push('/complete', { card: newCard });
   };
 
   const handleChangeCardNumber = (event) => {
@@ -58,26 +97,6 @@ const CardAddForm = () => {
     setCardCompany(CARD[key]);
     closeModal();
   };
-
-  const cardNumbersAsNumber = useMemo(() => cardNumbers.join(''), [cardNumbers]);
-
-  const expiryDateAsNumber = useMemo(() => expiryDate.value.replace(/[^0-9]/g, ''), [
-    expiryDate.value,
-  ]);
-
-  const formattedExpiryDate = useMemo(() => {
-    const expiryDateChunks = expiryDateAsNumber.match(/.{1,2}/g) || [];
-    return expiryDateChunks.join(' / ');
-  }, [expiryDateAsNumber]);
-
-  const isValidExpiryDate = useMemo(
-    () =>
-      expiryDateAsNumber.length > 0 &&
-      !(Number(expiryDateAsNumber.slice(0, 2)) > 0 && Number(expiryDateAsNumber.slice(0, 2)) < 13),
-    [expiryDateAsNumber]
-  );
-
-  const isNumericCardNumbers = useMemo(() => cardNumbers.every(isNumeric), [cardNumbers]);
 
   // 배민 페이의 경우 모달이 뜨고 닫힐 때, 세번째 카드 번호 input에 focus 시 모달이 다시 뜸
   // TODO: modal이 떴을 때, focusout(blur) 처리되도록 구현해야 함
@@ -110,7 +129,7 @@ const CardAddForm = () => {
   }, [cardNumbers, cardNumbersAsNumber, cardCompany, openModal, modalRef]);
 
   return (
-    <Container>
+    <ScreenContainer>
       <Header hasBackButton text="카드 추가" onClickBackButton={history.goBack} />
       <Styled.Container>
         <Card
@@ -204,7 +223,8 @@ const CardAddForm = () => {
           ))}
         </Styled.CardSelect>
       </Modal>
-    </Container>
+    </ScreenContainer>
   );
 };
+
 export default CardAddForm;
