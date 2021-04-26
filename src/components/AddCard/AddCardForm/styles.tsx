@@ -34,7 +34,7 @@ export const AddCardFormContainer = styled.div`
       height: 10rem;
       left: 2.5rem;
       top: -2.5rem;
-      background: url('/images/example.png') no-repeat;
+      background: url('./images/example.png') no-repeat;
     }
   }
 `;
