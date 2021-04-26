@@ -72,8 +72,9 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "storybook": "start-storybook -p 6006 -s ./public",
-    "build-storybook": "build-storybook",
-    "deploy": "gh-pages -d build"
+    "build-storybook": "build-storybook -s ./public",
+    "deploy": "gh-pages -d build",
+    "chromatic": "npx chromatic --project-token 0136607c32c6"
   },
   "eslintConfig": {
     "extends": [
@@ -156,6 +157,7 @@
     "@types/styled-components": "^5.1.9",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
+    "chromatic": "^5.6.2",
     "eslint": "^7.24.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.2.0",
