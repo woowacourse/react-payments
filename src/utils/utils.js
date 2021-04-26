@@ -5,3 +5,7 @@ export const stringSeparatorFormat = (str, length, separator) => {
   if (str === '') return str;
   return str.match(new RegExp('.{1,' + length + '}', 'g')).join(separator);
 };
+
+export const isPositiveInteger = (value) => {
+  return Number.isInteger(Number(value));
+};

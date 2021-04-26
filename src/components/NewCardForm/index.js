@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../../common/Input';
 import Button from '../../common/Button';
 import { NewCardFormWrapper } from './index.styles';
+import {
+  getCardNumberMessage,
+  getCVCMessage,
+  getExpireDateMessage,
+  getPasswordMessage,
+  getUserMessage,
+} from './cardFormValidator';
 
 const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
+  const [errorMessage, setErrorMessage] = useState({
+    numbers: '',
+    expireDate: '',
+    user: '',
+    cvc: '',
+    password: '',
+  });
+
   const onChangeNumbersInput = (e) => {
-    // 카드번호 - 숫자(음수X)인지(입력안되게 막기 밑에메세지), 최대 16글자 이하인지(입력안되게 막기 밑에메세지)
-    // 16글자이면(true 바꾸기), 이하면 false로 바꾸기 - App에서 관리 X, NewCardForm에서 내부 state로 관리하면 될듯, 이거에 따라서 다음버튼 보여짐
-    // value = stringSeparatorFormat(value, 4, '-');
+    const message = getCardNumberMessage(e.target.value);
+    setErrorMessage({
+      ...errorMessage,
+      numbers: message,
+    });
+
+    if (message !== '') return;
+
     setNewCardInfo({
       ...cardInfo,
       numbers: { ...numbers, [e.target.name]: e.target.value },
@@ -16,9 +36,13 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
   };
 
   const onChangeExpireDateInput = (e) => {
-    // 만료일 - 숫자(음수X)인지, 최대 4글자 이하인지, 앞의두글자가 01~12 사이 숫자인지, 올해/이번달 이후인지 검증
-    // 4글자이면(true), 아니면 false
-    // value = stringSeparatorFormat(value, 2, '/');
+    const message = getExpireDateMessage(e.target.value);
+    setErrorMessage({
+      ...errorMessage,
+      expireDate: message,
+    });
+
+    if (message !== '') return;
 
     setNewCardInfo({
       ...cardInfo,
@@ -27,8 +51,14 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
   };
 
   const onChangePasswordInput = (e) => {
-    // TODO: 입력값이 숫자(음수X)인지, 최대 1글자 이하인지 검증
-    // 각각 1글자이면(true), 아니면 false
+    const message = getPasswordMessage(e.target.value);
+    setErrorMessage({
+      ...errorMessage,
+      password: message,
+    });
+
+    if (message !== '') return;
+
     setNewCardInfo({
       ...cardInfo,
       password: { ...password, [e.target.name]: e.target.value },
@@ -37,19 +67,25 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
 
   const onChangeCardInput = (e) => {
     let { name, value } = e.target;
+    let message = '';
+
     switch (name) {
       case 'user':
-        // 사용자명 - 최대 30글자 이하인지(입력안되게 막기 밑에메세지), 숫자X인지(입력안되게 막기 밑에메세지)
-        // 무조건 true=
+        message = getUserMessage(value);
         value = value.toUpperCase();
         break;
+
       case 'cvc':
-        // cvc - 3글자인지, 숫자인지
-        // 3글자이면(true), 아니면 false
+        message = getCVCMessage(value);
         break;
     }
 
-    console.log(value.slice(-1)[0]);
+    setErrorMessage({
+      ...errorMessage,
+      [name]: message,
+    });
+
+    if (message !== '') return;
 
     setNewCardInfo({ ...cardInfo, [name]: value });
   };
@@ -57,6 +93,8 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
   // 다음눌렀을때 실행되는 메서드 (App으로 빠질수도 있음)
   const onSubmitCardForm = (e) => {
     e.preventDefault();
+
+    // 만료일 - 올해/이번달 이후인지 검증
     //다음 컴포넌트 렌더링
   };
 
@@ -64,6 +102,7 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
 
   return (
     <NewCardFormWrapper onSubmit={onSubmitCardForm}>
+      {console.log(errorMessage)}
       <div className='form__column'>
         <div className='input-label'>카드 번호</div>
         <div className='input-container'>
@@ -113,10 +152,11 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
             required
           />
         </div>
+        <div className='input-alert'>{errorMessage.numbers}</div>
       </div>
       <div className='form__column'>
         <div className='input-label'>만료일</div>
-        <div className='input-container'>
+        <div className='input-container expire-date-container'>
           <Input
             type='text'
             placeholder='MM'
@@ -141,6 +181,9 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
             required
           />
         </div>
+        <div className='input-alert'>{errorMessage.expireDate}</div>
+      </div>
+      <div className='form__column'>
         <div className='input-label'>
           <div>카드 소유자 이름 (선택)</div>
           <div>{user.length} / 30</div>
@@ -153,6 +196,7 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
           maxLength='30'
           onChange={onChangeCardInput}
         />
+        <div className='input-alert'>{errorMessage.user}</div>
       </div>
       <div className='form__column'>
         <div className='input-label'>보안 코드(CVC/CVV)</div>
@@ -168,6 +212,7 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
           />
           <div className='help'>?</div>
         </div>
+        <div className='input-alert'>{errorMessage.cvc}</div>
       </div>
       <div className='form__column'>
         <div className='input-label'>카드 비밀번호</div>
@@ -195,6 +240,7 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
           <div className='privacy-dot'>﹒</div>
           <div className='privacy-dot'>﹒</div>
         </div>
+        <div className='input-alert'>{errorMessage.password}</div>
       </div>
       <div className='form__column'>
         <Button>다음</Button>

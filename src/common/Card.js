@@ -102,9 +102,17 @@ Card.propTypes = {
   cardInfo: PropTypes.shape({
     cardColor: PropTypes.string,
     cardName: PropTypes.string,
-    numbers: PropTypes.string,
+    numbers: PropTypes.shape({
+      first: PropTypes.string,
+      second: PropTypes.string,
+      third: PropTypes.string,
+      fourth: PropTypes.string,
+    }),
     user: PropTypes.string,
-    expireDate: PropTypes.string,
+    expireDate: PropTypes.shape({
+      month: PropTypes.string,
+      year: PropTypes.string,
+    }),
   }),
 };
 
@@ -112,9 +120,17 @@ Card.defaultProps = {
   add: false,
   cardInfo: {
     cardName: '',
-    numbers: '',
+    numbers: {
+      first: '',
+      second: '',
+      third: '',
+      fourth: '',
+    },
     user: 'NAME',
-    expireDate: 'MM/YY',
+    expireDate: {
+      month: '',
+      year: '',
+    },
   },
 };
 

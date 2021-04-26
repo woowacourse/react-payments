@@ -42,6 +42,24 @@ export const NewCardFormWrapper = styled.form`
       }
     }
 
+    .expire-date-container {
+      width: 40%;
+
+      input[name='month'] {
+        text-align: right;
+      }
+
+      input[name='year'] {
+        text-align: left;
+      }
+    }
+
+    .input-alert {
+      padding: 3px;
+      font-size: ${FONT_SIZE.MINI};
+      color: ${COLOR.CARD.RED};
+    }
+
     .input-main {
       display: flex;
       align-items: center;
