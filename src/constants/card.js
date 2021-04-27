@@ -6,6 +6,8 @@ export const MAX_OWNER_NAME_LENGTH = 30;
 
 export const SECURITY_CODE_LENGTH = 3;
 
+export const PASSWORD_UNIT_LENGTH = 1;
+
 export const CARD_COMPANY_LIST = [
   {
     name: 'KB국민카드',
