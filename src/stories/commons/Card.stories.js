@@ -1,8 +1,8 @@
-import { CARD_SIZE, Card } from '../components/commons/card/Card';
-import { COLOR } from '../constants/color';
+import { Card, CARD_SIZE } from '../../components/commons/card/Card';
+import { COLOR } from '../../constants/color';
 
 export default {
-  title: 'Card',
+  title: 'Commons/Card',
   component: Card,
   argTypes: {
     children: { control: 'text' },

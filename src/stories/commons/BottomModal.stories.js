@@ -1,11 +1,11 @@
-import { BottomModal } from '../components/commons/modal/BottomModal';
+import { BottomModal } from '../../components/commons/modal/BottomModal';
 
 export default {
-  title: 'Modal',
+  title: 'Commons/Modal',
   component: BottomModal,
 };
 
-const Template = (args) => <BottomModal {...args}></BottomModal>;
+const Template = args => <BottomModal {...args}></BottomModal>;
 
 export const Default = Template.bind({});
 Default.args = {};

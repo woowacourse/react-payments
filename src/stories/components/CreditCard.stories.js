@@ -1,8 +1,8 @@
-import { CARD_SIZE, CreditCard } from '../components/commons/card/CreditCard';
-import { COLOR } from '../constants/color';
+import { CARD_SIZE, CreditCard } from '../../components/commons/card/CreditCard';
+import { COLOR } from '../../constants/color';
 
 export default {
-  title: 'CreditCard',
+  title: 'Components/CreditCard',
   component: CreditCard,
   argTypes: {
     backgroundColor: {
@@ -19,7 +19,7 @@ Medium.args = {
   size: CARD_SIZE.MD,
   content: {
     cardType: 'XX 카드',
-    cardNumber: '1111 2222 3333 4444',
+    cardNumber: ['1111', '2222', '3333', '4444'],
     cardOwner: 'Name',
     cardExpiredDate: 'MM / YY',
     backgroundColor: COLOR.MINT,
@@ -31,7 +31,7 @@ Large.args = {
   size: CARD_SIZE.LG,
   content: {
     cardType: 'XX 카드',
-    cardNumber: '1111 2222 3333 4444',
+    cardNumber: ['1111', '2222', '3333', '4444'],
     cardOwner: 'Name',
     cardExpiredDate: 'MM / YY',
     backgroundColor: COLOR.MINT,

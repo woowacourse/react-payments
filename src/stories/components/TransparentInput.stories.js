@@ -1,7 +1,7 @@
-import { TransparentInput } from '../components/commons/input/TransparentInput';
+import { TransparentInput } from '../../components/commons/input/TransparentInput';
 
 export default {
-  title: 'TransparentInput',
+  title: 'Components/TransparentInput',
   component: TransparentInput,
   argTypes: {
     width: { control: 'text' },

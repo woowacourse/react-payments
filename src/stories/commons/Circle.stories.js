@@ -1,8 +1,8 @@
-import { Circle, CIRCLE_SIZE } from '../components/commons/circle/Circle';
-import { COLOR } from '../constants/color';
+import { Circle, CIRCLE_SIZE } from '../../components/commons/circle/Circle';
+import { COLOR } from '../../constants/color';
 
 export default {
-  title: 'Circle',
+  title: 'Commons/Circle',
   component: Circle,
   argTypes: {
     backgroundColor: {

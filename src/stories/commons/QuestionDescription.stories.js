@@ -1,7 +1,7 @@
-import { QuestionDescription } from '../components/commons/questionDescription/QuestionDescription';
+import { QuestionDescription } from '../../components/commons/questionDescription/QuestionDescription';
 
 export default {
-  title: 'QuestionDescription',
+  title: 'Commons/QuestionDescription',
   component: QuestionDescription,
 };
 
