@@ -31,3 +31,16 @@
 .OwnerNameInput__Header .Text {
   margin: 0 0.25rem;
 }
+
+.SecurityCodeInput__Wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.SecurityCodeInput__GuideImage {
+  visibility: hidden;
+}
+
+.SecurityCodeInput__Wrapper > .Button:hover ~ .SecurityCodeInput__GuideImage {
+  visibility: visible;
+}
