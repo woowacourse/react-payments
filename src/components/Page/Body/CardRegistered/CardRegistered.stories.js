@@ -14,6 +14,6 @@ CardRegisteredBody.args = {
     company: '로이드',
     numbers: { first: '1111', second: '2222', third: '3333', fourth: '4444' },
     owner: 'SUN',
-    validDay: { firstDigit: '04', secondDigit: '21' },
+    validDay: { month: '04', year: '21' },
   },
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 import { Card } from '../../../Card';
-import { CardCreateForm } from '../../../CardCreateForm';
+import { CardCreateForm } from '../../../InputForm/CardCreateForm';
 import { Modal } from '../../../Modal';
 import { CardCompanyList } from '../../../Modal/ModalBody/CardCompanyList';
 

@@ -15,8 +15,11 @@ export const Header = ({ titleText, hasButton, ...props }) => {
 };
 
 Header.propTypes = {
-  buttonText: PropTypes.string,
   titleText: PropTypes.string,
+  hasButton: PropTypes.bool,
 };
 
-// Header.defaultProps = {};
+Header.defaultProps = {
+  titleText: 'default title',
+  hasButton: 'false',
+};

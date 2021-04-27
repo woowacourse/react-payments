@@ -17,13 +17,13 @@ const Button = styled.button.attrs({
   background: transparent;
   border: none;
   font-size: 1.1rem;
-  margin-right: 0.8rem;
   font-weight: bold;
 `;
 
 const Title = styled.div`
   height: 100%;
   display: flex;
+  margin-left: 0.8rem;
   align-items: center;
   text-align: center;
 `;

@@ -12,7 +12,6 @@ const Form = styled.form`
 
 const ButtonContainer = styled.div`
   width: 95%;
-  min-height: 10%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
