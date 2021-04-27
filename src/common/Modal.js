@@ -19,7 +19,7 @@ const ModalWrapper = styled.div`
 const ModalInner = styled.div`
   transition: top 0.25s ease;
   width: 100%;
-  height: 227px;
+  height: 270px;
   margin: auto;
   overflow: auto;
   background: #ffffff;
@@ -27,7 +27,7 @@ const ModalInner = styled.div`
   position: absolute;
   left: 0;
   bottom: 0;
-  padding: 2.5rem;
+  padding: 2rem;
 
   @media screen and (max-width: 768px) {
     box-sizing: border-box;

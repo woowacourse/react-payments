@@ -10,7 +10,7 @@ const GlobalStyles = createGlobalStyle`
 
   *{
     box-sizing: border-box;
-    color : #383838;
+    color : #525252;
   }
 
   a{

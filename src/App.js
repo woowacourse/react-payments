@@ -6,6 +6,7 @@ import Nav from './components/Nav';
 
 import { AppWrapper } from './App.styles.js';
 import NewCardForm from './components/NewCardForm';
+import CardColor from './components/ModalContents/CardColor';
 
 function App() {
   const [newCardInfo, setNewCardInfo] = useState({
@@ -37,12 +38,21 @@ function App() {
   //   cardColorModal: <CardColor />,
   // };
 
+  const handleCardColor = (name) => {
+    console.log(name);
+    setNewCardInfo({
+      ...newCardInfo,
+      cardName: name,
+    });
+
+    handleModalClose();
+  };
+
   const handleModalOpen = (content) => {
     setOpenModalContent({
       isModalOpen: true,
-      modalContent: content,
+      modalContent: modalContentsObject[content],
     });
-    console.log(content);
   };
 
   const handleModalClose = () => {
@@ -52,6 +62,10 @@ function App() {
     });
   };
 
+  const modalContentsObject = {
+    cardColor: <CardColor handleCardColor={handleCardColor} />,
+  };
+
   return (
     <>
       <GlobalStyles />
@@ -59,7 +73,7 @@ function App() {
         {console.log(newCardInfo)}
         <Nav />
         <div className='card-wrapper'>
-          <Card cardInfo={newCardInfo} />
+          <Card cardInfo={newCardInfo} handleModalOpen={handleModalOpen} />
         </div>
         <NewCardForm
           cardInfo={newCardInfo}

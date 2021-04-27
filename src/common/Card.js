@@ -59,21 +59,27 @@ const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  cursor: pointer;
   background-color: ${({ add, bgColor }) =>
     add ? COLOR.CARD.DEFAULT : bgColor};
   ${({ add }) => (add ? AddCard : CardInfo)}
   }`;
 
-const Card = ({ add, cardInfo }) => {
+const Card = ({ add, cardInfo, handleModalOpen }) => {
   const { cardName, numbers, user, expireDate } = cardInfo;
+
   return (
-    <CardWrapper add={add} bgColor={CARD[cardName]}>
+    <CardWrapper
+      add={add}
+      bgColor={CARD[cardName]}
+      onClick={() => handleModalOpen('cardColor')}
+    >
       {add ? (
         <div className='add'>+</div>
       ) : (
         <>
           <div className='card__column card-name'>
-            {cardName !== 'DEFAULT' && cardName}
+            {cardName !== 'DEFAULT' && `${cardName} 카드`}
           </div>
           <div className='card__column'>
             <div className='usim'></div>
@@ -98,6 +104,7 @@ const Card = ({ add, cardInfo }) => {
 };
 
 Card.propTypes = {
+  handleModalOpen: PropTypes.func,
   add: PropTypes.bool,
   cardInfo: PropTypes.shape({
     cardColor: PropTypes.string,
