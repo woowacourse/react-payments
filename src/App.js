@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { CardCompanySelection, SecurityCodeGuide } from './components';
 import { AddCardForm, AddCardComplete } from './pages';
 import { Modal } from './components';
+import { CARD_COMPANY } from './constants';
 
 function App() {
   const [page, setPage] = useState('addCardForm');
@@ -25,6 +26,7 @@ function App() {
 
   const onSetCardCompany = (name) => {
     setCardCompany(name);
+    setCardNickName(CARD_COMPANY[name].NAME);
 
     setIsModalOpened(false);
   };
@@ -37,10 +39,6 @@ function App() {
       setUserName('');
       setSecurityCode('');
       setPassword({ first: '', second: '' });
-    }
-
-    if (page === 'addCardComplete') {
-      setCardNickName('');
     }
   }, [page]);
 

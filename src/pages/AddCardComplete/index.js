@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, TextButton } from '../../components';
 import { MMYYDateFormatter } from '../../utils/formatter';
 import { CARD, CARD_COMPANY } from '../../constants';
@@ -27,7 +27,7 @@ export default function AddCardComplete({
       />
       <input
         className="add-card-complete__input"
-        value={cardNickName || CARD_COMPANY[cardCompany].NAME}
+        value={cardNickName}
         onChange={(event) => {
           setCardNickName(event.target.value);
         }}
