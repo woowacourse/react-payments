@@ -45,7 +45,7 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   textAlign: PropTypes.string,
-  length: PropTypes.number.isRequired,
+  length: PropTypes.number,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
 };

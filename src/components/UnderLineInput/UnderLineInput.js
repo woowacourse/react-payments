@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CardNameInput = (props) => {
+const UnderLineInput = (props) => {
   const { name } = props;
 
   return (
@@ -15,8 +15,8 @@ const CardNameInput = (props) => {
   );
 };
 
-export default CardNameInput;
+export default UnderLineInput;
 
-CardNameInput.propTypes = {
+UnderLineInput.propTypes = {
   name: PropTypes.string,
 };

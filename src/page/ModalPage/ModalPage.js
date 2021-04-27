@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from '../Modal/Modal';
-import ColorSelectButton from '../ColorSelectButton/ColorSelectButton';
+import Modal from '../../components/Modal/Modal';
+import ColorSelectButton from '../../components/ColorSelectButton/ColorSelectButton';
 
 const ModalPage = (props) => {
   const { onClick } = props;

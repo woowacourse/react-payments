@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Card from '../Card/Card';
-import CardNameInput from '../CardNameInput/CardNameInput';
-import TextButton from '../TextButton/TextButton';
+import Card from '../../components/Card/Card';
+import UnderLineInput from '../../components/UnderLineInput/UnderLineInput';
+import TextButton from '../../components/TextButton/TextButton';
 
 const CardRegisterPage = (props) => {
   const { cardCompany, cardNumbers, expiration, ownerName, resetState } = props;
@@ -27,7 +27,7 @@ const CardRegisterPage = (props) => {
           cardNumbers={cardNumbers}
         />
       </div>
-      <CardNameInput name={'cardName'} />
+      <UnderLineInput name={'cardName'} />
       <div className="mt-40">
         <TextButton text={'완료'} />
       </div>
