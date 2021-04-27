@@ -12,11 +12,13 @@ const NumberInput = styled(DefaultInput)`
     -webkit-appearance: none;
     margin: 0;
   }
+  text-align: center;
 `;
 
 const PasswordInput = styled(DefaultInput)`
   font: small-caption;
   font-size: 24px;
+  text-align: center;
 `;
 
 const Divider = styled.span`

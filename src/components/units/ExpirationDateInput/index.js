@@ -49,9 +49,9 @@ const ExpirationDateInput = (props) => {
       <Style.InputWrapper>
         <Style.Input
           type="number"
-          width="28px"
+          width="36px"
           placeholder="MM"
-          value={expirationDate.month}
+          value={expirationDate['month']}
           data-date-type="month"
           onChange={handleChangeDate}
           ref={monthInput}
@@ -59,9 +59,9 @@ const ExpirationDateInput = (props) => {
         <Style.Divider>/</Style.Divider>
         <Style.Input
           type="number"
-          width="28px"
+          width="36px"
           placeholder="YY"
-          value={expirationDate.year}
+          value={expirationDate['year']}
           data-date-type="year"
           onChange={handleChangeDate}
           ref={yearInput}
@@ -74,5 +74,9 @@ const ExpirationDateInput = (props) => {
 export default ExpirationDateInput;
 
 ExpirationDateInput.propTypes = {
+  type: PropTypes.string,
+  label: PropTypes.string,
+  width: PropTypes.string,
+  expirationDate: PropTypes.object,
   setExpirationDate: PropTypes.func.isRequired,
 };

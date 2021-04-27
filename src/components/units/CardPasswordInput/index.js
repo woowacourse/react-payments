@@ -38,22 +38,10 @@ const CardPasswordInput = (props) => {
     <>
       <RegisterInputWrapper type={type} label={label} width={width} inputCount={2}>
         <Style.InputWrapper>
-          <Style.PasswordInput
-            type="password"
-            width="20px"
-            data-password-idx="1"
-            onChange={handleChangeNumbers}
-            ref={firstInput}
-          />
+          <Style.PasswordInput type="password" data-password-idx="1" onChange={handleChangeNumbers} ref={firstInput} />
         </Style.InputWrapper>
         <Style.InputWrapper>
-          <Style.PasswordInput
-            type="password"
-            width="20px"
-            data-password-idx="2"
-            onChange={handleChangeNumbers}
-            ref={secondInput}
-          />
+          <Style.PasswordInput type="password" data-password-idx="2" onChange={handleChangeNumbers} ref={secondInput} />
         </Style.InputWrapper>
         {passwordMark}
       </RegisterInputWrapper>

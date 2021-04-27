@@ -38,7 +38,7 @@ const CardNumbersInput = (props) => {
       <Style.InputWrapper>
         <Style.NumberInput
           type="number"
-          width="44px"
+          width="48px"
           min="1000"
           max="9999"
           data-number-idx="1"
@@ -48,7 +48,7 @@ const CardNumbersInput = (props) => {
         <Style.Divider>-</Style.Divider>
         <Style.NumberInput
           type="number"
-          width="44px"
+          width="48px"
           min="1000"
           max="9999"
           data-number-idx="2"
@@ -58,7 +58,7 @@ const CardNumbersInput = (props) => {
         <Style.Divider>-</Style.Divider>
         <Style.PasswordInput
           type="password"
-          width="44px"
+          width="48px"
           data-number-idx={3}
           onChange={handleChangeNumbers}
           ref={thirdInput}
@@ -66,7 +66,7 @@ const CardNumbersInput = (props) => {
         <Style.Divider>-</Style.Divider>
         <Style.PasswordInput
           type="password"
-          width="44px"
+          width="48px"
           data-number-idx={4}
           onChange={handleChangeNumbers}
           ref={fourthInput}

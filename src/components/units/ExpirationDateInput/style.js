@@ -7,6 +7,7 @@ const InputWrapper = styled(DefaultInputWrapper)`
 `;
 
 const Input = styled(DefaultInput)`
+  text-align: center;
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;

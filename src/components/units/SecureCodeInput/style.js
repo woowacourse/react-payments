@@ -6,6 +6,7 @@ const InputWrapper = styled(DefaultInputWrapper)`
 `;
 
 const PasswordInput = styled(DefaultInput)`
+  width: 40px;
   font: small-caption;
   font-size: 24px;
   letter-spacing: 2px;

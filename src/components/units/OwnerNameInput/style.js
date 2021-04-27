@@ -6,7 +6,11 @@ const InputWrapper = styled(DefaultInputWrapper)`
   width: 318px;
 `;
 
-const Input = styled(DefaultInput)``;
+const Input = styled(DefaultInput)`
+  &::-webkit-input-placeholder {
+    font-size: 16px;
+  }
+`;
 
 const Divider = styled.span`
   font-size: 18px;
