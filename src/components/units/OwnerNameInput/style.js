@@ -1,17 +1,12 @@
 import styled from 'styled-components/macro';
 import PALETTE from '../../../styles/palette';
+import { DefaultInputWrapper, DefaultInput } from '../../shared/RegisterInputWrapper/style';
 
-const Input = styled.input`
-  width: ${({ width }) => width};
-  font-size: 18px;
-  color: ${PALETTE.INPUT_TEXT_GRAY};
-  background-color: transparent;
-  border-color: transparent;
-
-  &:focus {
-    outline: none;
-  }
+const InputWrapper = styled(DefaultInputWrapper)`
+  width: 318px;
 `;
+
+const Input = styled(DefaultInput)``;
 
 const Divider = styled.span`
   font-size: 18px;
@@ -19,4 +14,4 @@ const Divider = styled.span`
   margin: 0 4px;
 `;
 
-export { Input, Divider };
+export { InputWrapper, Input, Divider };

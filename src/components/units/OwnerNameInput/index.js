@@ -1,7 +1,9 @@
 import React from 'react';
+import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
 import * as Style from './style';
 
 const OwnerNameInput = (props) => {
+  const { type, label, width, ownerName, setOwnerName } = props;
   const isEnglish = (char) => !/[^A-Za-z\s]/g.test(char);
   const isValidLength = (value) => value.length <= 30;
 
@@ -12,10 +14,18 @@ const OwnerNameInput = (props) => {
 
     setOwnerName(currentValue.toUpperCase());
   };
+
   return (
-    <>
-      <Style.Input width="302px" placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'} />
-    </>
+    <RegisterInputWrapper type={type} label={label} width={width} currentNameLength={ownerName.length}>
+      <Style.InputWrapper>
+        <Style.Input
+          width="302px"
+          placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
+          value={ownerName}
+          onChange={handleChangeName}
+        />
+      </Style.InputWrapper>
+    </RegisterInputWrapper>
   );
 };
 
