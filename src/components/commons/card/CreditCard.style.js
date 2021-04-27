@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const CARD_TYPE = {
   LG: {
-    fontSize: '12px',
+    fontSize: '14px',
     left: '20px',
     top: '19px',
   },
@@ -31,12 +31,12 @@ const CHIP = {
 const CARD_NUMBER = {
   LG: {
     bottom: '45px',
-    fontSize: '18px',
+    fontSize: '20px',
     letterSpacing: '3px',
   },
   MD: {
     bottom: '33px',
-    fontSize: '13px',
+    fontSize: '15px',
     letterSpacing: '2px',
   },
 };

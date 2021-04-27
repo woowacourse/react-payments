@@ -7,7 +7,7 @@ body {
   max-width: 700px;
   position: relative;
   box-sizing: border-box;
-  min-height: 100vh;
+  margin: 0 auto;
 }
 
 button {
@@ -19,8 +19,6 @@ button {
 
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 }
 
