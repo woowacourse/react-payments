@@ -15,6 +15,7 @@ export const CardInfoForm = (props) => {
     setIsModalOpen,
     setCardNumberInString,
     setExpirationDateInString,
+    setOwnerNameInString,
   } = props;
   const expirationDateInputRef = createRef();
   const ownerNameInputRef = createRef();
@@ -36,7 +37,7 @@ export const CardInfoForm = (props) => {
         ownerNameInputRef={ownerNameInputRef}
         setExpirationDateInString={setExpirationDateInString}
       />
-      <OwnerNameInput ref={ownerNameInputRef} />
+      <OwnerNameInput ref={ownerNameInputRef} setOwnerNameInString={setOwnerNameInString} />
       <SecurityCodeInput />
       <PasswordInput />
       <Button onClick={handleCardInfoSubmit}>다음</Button>

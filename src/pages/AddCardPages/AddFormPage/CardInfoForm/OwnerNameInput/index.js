@@ -1,9 +1,10 @@
 import { useState, forwardRef } from 'react';
 import { Input, Label, Text } from '../../../../../components';
-import { handleOwnerNameInputChange } from './handler';
+import { handleOwnerNameInputChange, handleOwnerNameInputBlur } from './handler';
 import { MAX_OWNER_NAME_LENGTH } from '../../../../../constants';
 
-export const OwnerNameInput = forwardRef((_, ref) => {
+export const OwnerNameInput = forwardRef((props, ref) => {
+  const { setOwnerNameInString } = props;
   const [ownerName, setOwnerName] = useState('');
   const [charLength, setCharLength] = useState(0);
   return (
@@ -30,6 +31,7 @@ export const OwnerNameInput = forwardRef((_, ref) => {
         ref={ref}
         value={ownerName}
         onChange={(e) => handleOwnerNameInputChange({ e, setCharLength, setOwnerName })}
+        onBlur={(e) => handleOwnerNameInputBlur({ e, setOwnerNameInString })}
       />
     </>
   );
