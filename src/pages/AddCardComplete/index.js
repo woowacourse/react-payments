@@ -1,5 +1,5 @@
 import React from 'react';
-import { CARD_COMPANY } from '../../constants';
+import { CARD, CARD_COMPANY } from '../../constants';
 import { Card, TextButton } from '../../stories/components';
 import { MMYYDateFormatter } from '../../utils/formatter';
 import './style.css';
@@ -31,7 +31,7 @@ export default function AddCardComplete({
         onChange={(event) => {
           setCardNickName(event.target.value);
         }}
-        maxLength={10}
+        maxLength={CARD.NICKNAME_MAX_LENGTH}
       />
       <div
         className="bottom-right-button"

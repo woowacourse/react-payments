@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';
-import { CARD_COMPANY, ERROR_MESSAGE } from '../../constants';
+import { CARD, CARD_COMPANY, ERROR_MESSAGE } from '../../constants';
 import { Icon, Card, Input, Header, TextButton, PasswordInput } from '../../stories/components';
 import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/formatter';
 import { isValidSerialNumber, isValidDateFormat, isValidUserName } from './validator';
@@ -31,7 +31,7 @@ export default function AddCardForm({
       isValidSerialNumber(serialNumber) &&
       cardCompany &&
       isValidDateFormat(expirationDate) &&
-      securityCode.length === 3 &&
+      securityCode.length === CARD.SECURITY_CODE_LENGTH &&
       password.first &&
       password.second
     );
@@ -54,11 +54,14 @@ export default function AddCardForm({
 
   const getOffset = (inputType, selectionStart) => {
     if (inputType === 'insertText') {
-      return selectionStart !== 0 && selectionStart % 5 === 0 ? offsetByInputType[inputType] : 0;
+      return selectionStart !== 0 && selectionStart % (CARD.SERIAL_NUMBER_UNIT_LENGTH + 1) === 0
+        ? offsetByInputType[inputType]
+        : 0;
     }
 
     if (inputType === 'deleteContentBackward') {
-      return selectionStart !== 0 && (selectionStart + 1) % 5 === 0
+      return selectionStart !== 0 &&
+        (selectionStart + 1) % (CARD.SERIAL_NUMBER_UNIT_LENGTH + 1) === 0
         ? offsetByInputType[inputType]
         : 0;
     }
@@ -90,19 +93,21 @@ export default function AddCardForm({
     const currentLocation = selectionStart + offset;
 
     const serialIndex =
-      currentLocation - Math.floor(currentLocation / 5) - offsetByInputType[inputType];
+      currentLocation -
+      Math.floor(currentLocation / (CARD.SERIAL_NUMBER_UNIT_LENGTH + 1)) -
+      offsetByInputType[inputType];
     const currentSerialNumber = getCurrentSerialNumber[inputType](serialIndex, inputKey);
 
     setSerialNumber(currentSerialNumber);
     event.target.value = cardSerialNumberFormatter(currentSerialNumber);
     event.target.setSelectionRange(currentLocation, currentLocation);
 
-    if (inputValue.length === 8) {
+    if (inputValue.length === CARD.SERIAL_ID_CODE_LENGTH) {
       serialNumberInputElement.current.blur();
       onSetModalContents('cardSelection');
     }
 
-    if (cardCompany && inputValue.length < 8) {
+    if (cardCompany && inputValue.length < CARD.SERIAL_ID_CODE_LENGTH) {
       setCardCompany('');
     }
   };
@@ -137,7 +142,7 @@ export default function AddCardForm({
           maxLength="19"
           onChange={onSerialNumberInputChange}
           onFocus={() => {
-            if (!cardCompany && serialNumber.length === 8) {
+            if (!cardCompany && serialNumber.length === CARD.SERIAL_ID_CODE_LENGTH) {
               serialNumberInputElement.current.blur();
               onSetModalContents('cardSelection');
             }
@@ -162,7 +167,7 @@ export default function AddCardForm({
 
             setExpirationDate(expirationDate);
 
-            if (expirationDate.length === 4) {
+            if (expirationDate.length === CARD.EXPIRATION_DATE_LENGTH) {
               if (isValidDateFormat(expirationDate)) {
                 setExpirationDateErrorMessage('');
                 return;
@@ -183,14 +188,14 @@ export default function AddCardForm({
           inputStyle={{ width: '100%' }}
           label="카드 소유자 이름(선택)"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          letterCounter={{ current: userName.length, max: 30 }}
-          maxLength="30"
+          letterCounter={{ current: userName.length, max: CARD.USER_NAME_MAX_LENGTH }}
+          maxLength={CARD.USER_NAME_MAX_LENGTH}
           value={userName}
           onChange={(event) => {
             const name = event.target.value;
 
             if (!isValidUserName(name)) {
-              setUserNameErrorMessage('이름은 영문 및 공백만 입력이 가능합니다.');
+              setUserNameErrorMessage(ERROR_MESSAGE.INVALID_USER_NAME);
               return;
             }
 

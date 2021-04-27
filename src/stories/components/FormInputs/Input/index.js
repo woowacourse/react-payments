@@ -26,7 +26,7 @@ export default function Input({
       )}
       <div className={['d-flex', 'items-center'].join(' ')}>
         <input
-          className={['basic-input__input', `text-${textAlign}`].join(' ')}
+          className={['basic-input__input', `text-${textAlign}` && ''].join(' ')}
           style={inputStyle}
           ref={innerRef}
           aria-labelledby={ariaLabelledby}
