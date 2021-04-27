@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 import { memo, useRef, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
 import { MONTH, YEAR } from '../../../constants/inputName';
+import { NUMBER_REG_EXR } from '../../../constants/regExp';
+import { hasObjectAnyValue } from '../../../utils/object';
+import { printColorBasedOnBoolean } from '../../../utils/printColor';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './ExpiredDateInput.style';
 
@@ -15,13 +18,13 @@ const transparentInputStyles = {
 const isValidMonthInput = cardExpiredDate => {
   const month = Number(cardExpiredDate[MONTH]);
 
-  return 1 <= month && month <= 12 && cardExpiredDate[MONTH].length === FULL_INPUT_LENGTH && !isNaN(month);
+  return 1 <= month && month <= 12 && cardExpiredDate[MONTH].length === FULL_INPUT_LENGTH;
 };
 
 const isValidYearInput = cardExpiredDate => {
   const year = Number(cardExpiredDate[YEAR]);
 
-  return 0 <= year && cardExpiredDate[YEAR].length === FULL_INPUT_LENGTH && !isNaN(year);
+  return 0 <= year && cardExpiredDate[YEAR].length === FULL_INPUT_LENGTH;
 };
 
 const ExpiredDateInput = memo(
@@ -34,7 +37,7 @@ const ExpiredDateInput = memo(
     }, [setValidCardExpiredDate, cardExpiredDate]);
 
     const handleInputChange = ({ target }) => {
-      if (target.value.length > FULL_INPUT_LENGTH) return;
+      if (target.value.length > FULL_INPUT_LENGTH || !NUMBER_REG_EXR.test(target.value)) return;
 
       setCardExpiredDate(prevState => ({ ...prevState, [target.name]: target.value }));
 
@@ -47,12 +50,13 @@ const ExpiredDateInput = memo(
     return (
       <div>
         <Styled.InputLabelContainer>만료일 {isValidCardExpiredDate && '✔️'}</Styled.InputLabelContainer>
-        <Styled.InputContainer isValidInput={isValidCardExpiredDate}>
+        <Styled.InputContainer
+          validColor={hasObjectAnyValue(cardExpiredDate) && printColorBasedOnBoolean(isValidCardExpiredDate)}
+        >
           <TransparentInput
             name={MONTH}
-            type="number"
-            min="1"
-            max="12"
+            minLength={FULL_INPUT_LENGTH}
+            maxLength={FULL_INPUT_LENGTH}
             placeholder="MM"
             value={cardExpiredDate[MONTH]}
             onChange={handleInputChange}
@@ -61,9 +65,8 @@ const ExpiredDateInput = memo(
           <Styled.Slash>/</Styled.Slash>
           <TransparentInput
             name={YEAR}
-            type="number"
-            min="0"
-            max="99"
+            min={FULL_INPUT_LENGTH}
+            max={FULL_INPUT_LENGTH}
             placeholder="YY"
             innerRef={$yearInput}
             value={cardExpiredDate[YEAR]}

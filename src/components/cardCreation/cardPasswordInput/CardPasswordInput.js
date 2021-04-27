@@ -5,6 +5,8 @@ import { FIRST, SECOND } from '../../../constants/inputName';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardPasswordInput.style';
 import { Circle } from '../../commons/circle/Circle';
+import { printColorBasedOnBoolean } from '../../../utils/printColor';
+import { NUMBER_REG_EXR } from '../../../constants/regExp';
 
 const FULL_INPUT_LENGTH = 1;
 const transparentInputStyles = {
@@ -14,9 +16,7 @@ const transparentInputStyles = {
 };
 
 const isValidInput = cardPassword => {
-  return Object.values(cardPassword).every(
-    cardPassword => cardPassword.length === FULL_INPUT_LENGTH && !isNaN(cardPassword)
-  );
+  return Object.values(cardPassword).every(cardPassword => cardPassword.length === FULL_INPUT_LENGTH);
 };
 
 const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
@@ -27,7 +27,7 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
   }, [setValidCardPassword, cardPassword]);
 
   const handleInputChange = ({ target }) => {
-    if (target.value.length > FULL_INPUT_LENGTH) return;
+    if (target.value.length > FULL_INPUT_LENGTH || !NUMBER_REG_EXR.test(target.value)) return;
 
     setCardPassword(prevState => ({ ...prevState, [target.name]: target.value }));
 
@@ -40,7 +40,7 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
     <div>
       <Styled.InputLabelContainer>카드 비밀번호 {isValidCardPassword && '✔️'}</Styled.InputLabelContainer>
       <Styled.Container>
-        <Styled.InputContainer isValidInput={isValidCardPassword}>
+        <Styled.InputContainer validColor={cardPassword[FIRST] && printColorBasedOnBoolean(true)}>
           <TransparentInput
             name={FIRST}
             minLength={FULL_INPUT_LENGTH}
@@ -51,7 +51,7 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
             styles={transparentInputStyles}
           />
         </Styled.InputContainer>
-        <Styled.InputContainer isValidInput={isValidCardPassword}>
+        <Styled.InputContainer validColor={cardPassword[SECOND] && printColorBasedOnBoolean(true)}>
           <TransparentInput
             name={SECOND}
             minLength={FULL_INPUT_LENGTH}

@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 import { memo, useRef, useEffect, useState } from 'react';
 import { COLOR } from '../../../constants/color';
 import { FIRST, SECOND, THIRD, FOURTH } from '../../../constants/inputName';
+import { NUMBER_REG_EXR } from '../../../constants/regExp';
+import { hasObjectAnyValue } from '../../../utils/object';
+import { printColorBasedOnBoolean } from '../../../utils/printColor';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import CardSelectionModal from '../cardSelectionModal/CardSelectionModal';
 import Styled from './CardNumberInput.style';
@@ -62,7 +65,7 @@ const CardNumberInput = memo(
     }, [isSelectedCardInfo]);
 
     const handleInputChange = ({ target }) => {
-      if (target.value.length > FULL_INPUT_LENGTH) return;
+      if (target.value.length > FULL_INPUT_LENGTH || !NUMBER_REG_EXR.test(target.value)) return;
 
       setCardNumber(prevState => ({ ...prevState, [target.name]: target.value }));
 
@@ -98,12 +101,14 @@ const CardNumberInput = memo(
       <>
         <div>
           <Styled.InputLabelContainer>카드 번호 {isValidCardNumber && '✔️'}</Styled.InputLabelContainer>
-          <Styled.InputContainer isValidInput={isValidCardNumber} onClick={handleInputClick}>
+          <Styled.InputContainer
+            validColor={hasObjectAnyValue(cardNumber) && printColorBasedOnBoolean(isValidCardNumber)}
+            onClick={handleInputClick}
+          >
             <TransparentInput
               name={FIRST}
-              type="number"
-              min="0"
-              max="9999"
+              minLength={FULL_INPUT_LENGTH}
+              maxLength={FULL_INPUT_LENGTH}
               value={cardNumber[FIRST]}
               onChange={handleInputChange}
               styles={transparentInputStyles[FIRST]}
@@ -112,9 +117,8 @@ const CardNumberInput = memo(
             {cardNumber[FIRST].length === FULL_INPUT_LENGTH && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
               name={SECOND}
-              type="number"
-              min="0"
-              max="9999"
+              minLength={FULL_INPUT_LENGTH}
+              maxLength={FULL_INPUT_LENGTH}
               value={cardNumber[SECOND]}
               onChange={handleInputChange}
               innerRef={$secondInput}

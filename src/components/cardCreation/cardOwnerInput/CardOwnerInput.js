@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { memo } from 'react';
 import { COLOR } from '../../../constants/color';
+import { ALPHABET_REG_EXR } from '../../../constants/regExp';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardOwnerInput.style';
 
 const FULL_INPUT_LENGTH = 30;
-const ALPHABET_REG_EXR = /^[a-z]*$/i;
 
 const isValidInput = value => {
   return ALPHABET_REG_EXR.test(value) && value.length <= FULL_INPUT_LENGTH;
