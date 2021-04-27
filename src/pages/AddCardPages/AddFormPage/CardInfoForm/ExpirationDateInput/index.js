@@ -1,7 +1,16 @@
-import { forwardRef } from 'react';
+import { createRef, forwardRef, useState } from 'react';
 import { Container, Input, Label, Text } from '../../../../../components';
+import { handleExpirationDateInputChange } from './handler';
 
-export const ExpirationDateInput = forwardRef((_, ref) => {
+export const ExpirationDateInput = forwardRef((props, monthRef) => {
+  const { ownerNameInputRef } = props;
+  const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
+  const yearRef = createRef();
+  const nextInput = {
+    month: yearRef,
+    year: ownerNameInputRef,
+  };
+
   return (
     <>
       <Label>만료일</Label>
@@ -10,15 +19,20 @@ export const ExpirationDateInput = forwardRef((_, ref) => {
           className="ExpirationDateInput__Field"
           placeholder="MM"
           type="number"
-          ref={ref}
-          onChange={() => {}}
+          name="month"
+          ref={monthRef}
+          value={expirationDate.month}
+          onChange={(e) => handleExpirationDateInputChange({ e, setExpirationDate, nextInput })}
         />
         <Slash />
         <Input
           className="ExpirationDateInput__Field"
           placeholder="YY"
           type="number"
-          onChange={() => {}}
+          name="year"
+          ref={yearRef}
+          value={expirationDate.year}
+          onChange={(e) => handleExpirationDateInputChange({ e, setExpirationDate, nextInput })}
         />
       </Container>
     </>

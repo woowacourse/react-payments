@@ -11,6 +11,7 @@ import './style.css';
 export const CardInfoForm = (props) => {
   const { setRoute, setCardCompany, setIsModalOpen, setCardNumberInString } = props;
   const expirationDateInputRef = createRef();
+  const ownerNameInputRef = createRef();
   const handleCardInfoSubmit = (e) => {
     e.preventDefault();
     setRoute(PAGE.ADD_CARD_COMPLETE);
@@ -24,8 +25,8 @@ export const CardInfoForm = (props) => {
         setCardNumberInString={setCardNumberInString}
         expirationDateInputRef={expirationDateInputRef}
       />
-      <ExpirationDateInput ref={expirationDateInputRef} />
-      <OwnerNameInput />
+      <ExpirationDateInput ref={expirationDateInputRef} ownerNameInputRef={ownerNameInputRef} />
+      <OwnerNameInput ref={ownerNameInputRef} />
       <SecurityCodeInput />
       <PasswordInput />
       <Button onClick={handleCardInfoSubmit}>다음</Button>

@@ -48,3 +48,8 @@ export const CARD_COMPANY_LIST = [
     patterns: ['888888', '888800'],
   },
 ];
+
+export const EXPIRATION_DATE_FORMAT_LENGTH = {
+  month: 2,
+  year: 2,
+};
