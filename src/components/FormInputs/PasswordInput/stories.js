@@ -12,7 +12,5 @@ export const Default = Template.bind({});
 
 Default.args = {
   password: { first: 9, second: 1 },
-  setPassword: () => {
-    console.log('password');
-  },
+  setPassword: () => {},
 };
