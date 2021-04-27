@@ -12,6 +12,7 @@ import CardPasswordInput from '../../components/cardCreation/cardPasswordInput/C
 import Styled from './style';
 import { COLOR } from '../../constants/color';
 import { PAGE } from '../../constants/page';
+import { ALERT_MESSAGE } from '../../constants/message';
 
 const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
   const [cardNumber, setCardNumber] = useState({ 0: '', 1: '', 2: '', 3: '' });
@@ -32,6 +33,8 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
 
   const handleNewCardSubmit = e => {
     e.preventDefault();
+
+    alert(ALERT_MESSAGE.SUCCECC_CARD_CREATE);
 
     setNewCardInfo({ cardNumber, cardExpiredDate, cardOwner, selectedCardInfo });
     setCurrentPage(PAGE.CARD_CREATION_COMPLETE);
