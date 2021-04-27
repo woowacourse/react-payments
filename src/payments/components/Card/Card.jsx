@@ -1,5 +1,6 @@
 import React from "react";
 import { getId } from "../../../@shared/utils";
+import { formatOwnerName } from "../../utils";
 import CardShape from "./CardShape";
 
 const CardInfo = props => (
@@ -13,7 +14,7 @@ const CardInfo = props => (
         ))}
       </div>
       <div className="text-sm w-11/12 flex justify-between">
-        <span>{props.ownerName || "NAME"}</span>
+        <span>{formatOwnerName(props.ownerName) || "NAME"}</span>
         <span>{props.expirationDate || "MM/YY"}</span>
       </div>
     </div>
