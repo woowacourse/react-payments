@@ -1,22 +1,25 @@
 import styled from 'styled-components/macro';
-import PALETTE from '../../../styles/palette';
+import { DefaultInputWrapper, DefaultInput } from '../../shared/RegisterInputWrapper/style';
 
-const Input = styled.input`
-  width: ${({ width }) => width};
-  font-size: 18px;
-  color: ${PALETTE.INPUT_TEXT_GRAY};
-  border-color: transparent;
-  background-color: transparent;
-
-  &:focus {
-    outline: none;
-  }
-
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+const InputWrapper = styled(DefaultInputWrapper)`
+  width: 43px;
+  &: first-child {
+    margin-right: 7px;
   }
 `;
 
-export { Input };
+const PasswordInput = styled(DefaultInput)`
+  font: small-caption;
+  font-size: 24px;
+  letter-spacing: 2px;
+`;
+
+const PasswordMark = styled.div`
+  width: 43px;
+  height: auto;
+  margin-left: 7px;
+  display: flex;
+  justify-content: center;
+`;
+
+export { PasswordInput, InputWrapper, PasswordMark };

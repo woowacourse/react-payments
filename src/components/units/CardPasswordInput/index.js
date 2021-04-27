@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
+import EllipseSvg from '../../../assets/secure-ellipse-cyan.svg';
 import * as Style from './style';
 
 const CardPasswordInput = (props) => {
+  const { type, label, width, setCardPassword } = props;
+
+  const firstInput = useRef(null);
+  const secondInput = useRef(null);
+
+  const passwordMark = Array.from({ length: 2 }).map((_, idx) => (
+    <Style.PasswordMark key={idx}>
+      <img src={EllipseSvg} alt="password-mark" />
+    </Style.PasswordMark>
+  ));
+
   const handleChangeNumbers = (event) => {
     const currentValue = event.target.value;
     const index = Number(event.target.dataset.passwordIdx);
@@ -16,9 +29,34 @@ const CardPasswordInput = (props) => {
 
     setCardPassword((prevPassword) => ({ ...prevPassword, [index]: currentValue }));
   };
+
+  const moveFocusToNextFragment = () => {
+    secondInput.current.focus();
+  };
+
   return (
     <>
-      <Style.Input type="password" width="12px" />
+      <RegisterInputWrapper type={type} label={label} width={width} inputCount={2}>
+        <Style.InputWrapper>
+          <Style.PasswordInput
+            type="password"
+            width="20px"
+            data-password-idx="1"
+            onChange={handleChangeNumbers}
+            ref={firstInput}
+          />
+        </Style.InputWrapper>
+        <Style.InputWrapper>
+          <Style.PasswordInput
+            type="password"
+            width="20px"
+            data-password-idx="2"
+            onChange={handleChangeNumbers}
+            ref={secondInput}
+          />
+        </Style.InputWrapper>
+        {passwordMark}
+      </RegisterInputWrapper>
     </>
   );
 };
