@@ -4,10 +4,13 @@ import CardRegisterForm from '../../units/CardRegisterForm';
 import CardSelector from '../../units/CardSelector';
 import Button from '../../shared/Button';
 import PALETTE from '../../../styles/palette';
+import { dummyBanks } from '../../../mockData';
 import * as Style from './style';
 
 const CardRegister = (props) => {
   const [isSelectorOpened, setSelectorOpened] = useState(false);
+  const [cardColor, setCardColor] = useState(PALETTE.EMPTY_CARD_GRAY);
+
   const [cardNumbers, setCardNumbers] = useState({ 1: '', 2: '', 3: '', 4: '' });
   const [bankId, setBankId] = useState('');
   const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
@@ -25,11 +28,17 @@ const CardRegister = (props) => {
     }
   }, [cardNumbers]);
 
+  useEffect(() => {
+    if (!bankId) return;
+
+    setCardColor(dummyBanks.find(({ id, color, name }) => id === bankId).color);
+  }, [bankId]);
+
   return (
     <>
       <Style.Root>
         <Style.CardWrapper>
-          <Card width="213px" height="133px" backgroundColor={PALETTE.EMPTY_CARD_GRAY} isFilled={false} />
+          <Card width="213px" height="133px" backgroundColor={cardColor} isFilled={false} />
         </Style.CardWrapper>
         <CardRegisterForm
           expirationDate={expirationDate}
