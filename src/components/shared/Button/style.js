@@ -13,6 +13,7 @@ const Root = styled.button`
   font-weight: 700;
   color: ${PALETTE.DEFAULT_CYAN};
   text-align: right;
+  cursor: pointer;
 `;
 
 export { Root };

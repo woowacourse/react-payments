@@ -8,6 +8,8 @@ import { dummyBanks } from '../../../mockData';
 import * as Style from './style';
 
 const CardRegister = (props) => {
+  const { setCardData, handleGoNext } = props;
+
   const [isSelectorOpened, setSelectorOpened] = useState(false);
   const [cardColor, setCardColor] = useState(PALETTE.EMPTY_CARD_GRAY);
   const [cardNumbers, setCardNumbers] = useState({ 1: '', 2: '', 3: '', 4: '' });
@@ -19,7 +21,10 @@ const CardRegister = (props) => {
 
   const isCardNumbersFilled = (numbers) => Object.values(numbers).every((fragment) => fragment.length === 4);
 
-  const handleClickNextPage = () => {};
+  const handleClickNextPage = () => {
+    setCardData({ bankId, cardNumbers, expirationDate, ownerName, secureCode, cardPassword });
+    handleGoNext();
+  };
 
   useEffect(() => {
     if (isCardNumbersFilled(cardNumbers)) {
@@ -57,7 +62,7 @@ const CardRegister = (props) => {
           setSecureCode={setSecureCode}
           setCardPassword={setCardPassword}
         />
-        <Button text={'다음'} onClick={handleClickNextPage} />
+        <Button text={'다음'} onClickButton={handleClickNextPage} />
       </Style.Root>
       {isSelectorOpened && <CardSelector setBankId={setBankId} setSelectorOpened={setSelectorOpened} />}
     </>
