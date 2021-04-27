@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import BackIcon from '../Icon/BackIcon';
 
 const Header = styled.header`
   display: flex;
@@ -24,7 +25,7 @@ const Template: FC<Props> = ({ className, children, title, hasPreviousPage }) =>
       <Header>
         {hasPreviousPage && (
           <a>
-            <img src="./buttons/back-btn.svg" alt="뒤로가기" />
+            <BackIcon />
           </a>
         )}
         <span className="title">{title}</span>

@@ -28,6 +28,7 @@ import {
   isValidPassword,
   isAllInputFilled,
 } from './validator';
+import QuestionIcon from '../../common/Icon/QuestionIcon';
 
 export type CardNumberState = [string, string, string, string];
 export type PasswordState = [string, string];
@@ -247,7 +248,7 @@ const AddCardForm = () => {
             <Input type="password" maxLength={CVC_DIGITS} textCenter value={CVC} onChange={onChangeCVC} />
           </AddCardInputContainer>
           <Container className="question-mark">
-            <img src="./buttons/question-mark-btn.svg" alt="cvc/cvv 도움말" />
+            <QuestionIcon />
           </Container>
         </AddCardInputLabel>
         <AddCardInputLabel label={LABEL.PASSWORD}>
