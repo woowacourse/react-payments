@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 import PALETTE from '../../../styles/palette';
 
 const Root = styled.div`
@@ -8,6 +8,16 @@ const Root = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+`;
+
+const slideup = keyframes`
+  from {
+    height: 0px;
+  }
+
+  to {
+    height: 227px;
+  }
 `;
 
 const SelectorInner = styled.div`
@@ -20,8 +30,8 @@ const SelectorInner = styled.div`
   height: 227px;
   padding: 34px 45px 41px 45px;
   background-color: ${PALETTE.COLOR_SELECTOR_WHITE};
-  border: 1px solid green;
   border-radius: 5px 5px 0px 0px;
+  animation: ${slideup} 0.5s ease;
 `;
 
 export { Root, SelectorInner };
