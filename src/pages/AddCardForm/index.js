@@ -114,7 +114,7 @@ export default function AddCardForm({
 
   return (
     <div className="add-card-form__container">
-      <Header title="카드추가"></Header>
+      <Header title="카드추가" />
       <form
         className="add-card-form"
         onSubmit={(event) => {

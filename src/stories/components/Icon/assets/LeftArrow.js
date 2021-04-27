@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function LeftArrow({ size = '16px', color = '#616161' }) {
+export default function LeftArrow({ size = '16px', color = '#616161', style }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,6 +8,7 @@ export default function LeftArrow({ size = '16px', color = '#616161' }) {
       width={size}
       height={size}
       fill={color}
+      style={style}
     >
       <title>Icon/leftArrow</title>
       <g id="leftArrow">

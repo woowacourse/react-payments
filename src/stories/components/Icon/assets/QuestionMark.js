@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function QuestionMark({ size = '16px', color = '#616161', margin }) {
+export default function QuestionMark({ size = '16px', color = '#616161', style }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,7 +8,7 @@ export default function QuestionMark({ size = '16px', color = '#616161', margin 
       width={size}
       height={size}
       fill={color}
-      style={{ margin: margin || '0' }}
+      style={style}
     >
       <title>Icon/questionMarks</title>
       <g id="questionMark">

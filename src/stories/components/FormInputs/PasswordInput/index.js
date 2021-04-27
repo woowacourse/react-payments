@@ -28,8 +28,8 @@ export default function PasswordInput({ password, onSetPassword }) {
             />
           );
         })}
-        <Icon.Dot size="7px" margin="18px" color="#04C09E" />
-        <Icon.Dot size="7px" margin="18px" color="#04C09E" />
+        <Icon.Dot size="7px" color="#04C09E" style={{ margin: '18px' }} />
+        <Icon.Dot size="7px" color="#04C09E" style={{ margin: '18px' }} />
       </div>
     </div>
   );

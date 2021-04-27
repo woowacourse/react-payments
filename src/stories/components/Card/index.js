@@ -1,6 +1,7 @@
 import React from 'react';
 import './card.css';
 import '../../index.css';
+import { CARD } from '../../../constants';
 
 export default function Card({
   cardCompanyName,
@@ -9,9 +10,13 @@ export default function Card({
   userName,
   expirationDate,
   size,
+  style,
 }) {
   return (
-    <div className={`card-${size || 'normal'}`} style={cardColor && { backgroundColor: cardColor }}>
+    <div
+      className={`card-${size || 'normal'}`}
+      style={{ ...style, backgroundColor: cardColor || '#d2d2d2' }}
+    >
       <div className="card__company-name">{cardCompanyName}</div>
       <div className="card__chip">
         <svg viewBox="0 0 60 39">
@@ -22,8 +27,8 @@ export default function Card({
         </svg>
       </div>
       <div className="card__card-number-container">
-        {Array.from({ length: 16 }).map((_, index) => {
-          if (index < 8) {
+        {Array.from({ length: CARD.SERIAL_NUMBER_LENGTH }).map((_, index) => {
+          if (index < CARD.SERIAL_ID_CODE_LENGTH) {
             return (
               <div key={index} className="card__card-number">
                 {cardNumber.charAt(index)}
