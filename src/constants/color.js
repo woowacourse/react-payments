@@ -3,7 +3,7 @@ export const COLOR = {
   RED: '#E24141',
   BLUE: '#547CE4',
   GREEN: '#73BC6D',
-  VALID_GREEN: '#81c147',
+  VALID_GREEN: '#2ecc71',
   HOT_PINK: '#DE59B9',
   CYAN: '#94DACD',
   PINK: '#E76E9A',

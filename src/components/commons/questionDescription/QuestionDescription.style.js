@@ -26,14 +26,14 @@ const Styled = {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: -155px;
+    top: -175px;
     left: -18px;
-    width: 180px;
-    height: 100px;
+    width: 200px;
+    height: 120px;
     padding: 0px;
     background: #ffffff;
-    border-radius: 10px;
-    border: #bababa solid 2px;
+    border-radius: 4px;
+    border: #04c09e solid 2px;
 
     &:after {
       content: '';
@@ -53,7 +53,7 @@ const Styled = {
       position: absolute;
       border-style: solid;
       border-width: 16px 15px 0;
-      border-color: #bababa transparent;
+      border-color: #04c09e transparent;
       display: block;
       width: 0;
       z-index: 0;
