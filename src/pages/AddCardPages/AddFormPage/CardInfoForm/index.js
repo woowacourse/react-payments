@@ -9,7 +9,13 @@ import { PAGE } from '../../../../constants';
 import './style.css';
 
 export const CardInfoForm = (props) => {
-  const { setRoute, setCardCompany, setIsModalOpen, setCardNumberInString } = props;
+  const {
+    setRoute,
+    setCardCompany,
+    setIsModalOpen,
+    setCardNumberInString,
+    setExpirationDateInString,
+  } = props;
   const expirationDateInputRef = createRef();
   const ownerNameInputRef = createRef();
   const handleCardInfoSubmit = (e) => {
@@ -25,7 +31,11 @@ export const CardInfoForm = (props) => {
         setCardNumberInString={setCardNumberInString}
         expirationDateInputRef={expirationDateInputRef}
       />
-      <ExpirationDateInput ref={expirationDateInputRef} ownerNameInputRef={ownerNameInputRef} />
+      <ExpirationDateInput
+        ref={expirationDateInputRef}
+        ownerNameInputRef={ownerNameInputRef}
+        setExpirationDateInString={setExpirationDateInString}
+      />
       <OwnerNameInput ref={ownerNameInputRef} />
       <SecurityCodeInput />
       <PasswordInput />

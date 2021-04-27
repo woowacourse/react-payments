@@ -8,6 +8,7 @@ export const AddFormPage = (props) => {
   const { setRoute } = props;
   const [cardCompany, setCardCompany] = useState({ name: '', color: '' });
   const [cardNumberInString, setCardNumberInString] = useState('');
+  const [expirationDateInString, setExpirationDateInString] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -16,12 +17,17 @@ export const AddFormPage = (props) => {
         <BackwardButton />
         <Title>카드 추가</Title>
       </div>
-      <CreditCardPreview cardCompany={cardCompany} cardNumberInString={cardNumberInString} />
+      <CreditCardPreview
+        cardCompany={cardCompany}
+        cardNumberInString={cardNumberInString}
+        expirationDateInString={expirationDateInString}
+      />
       <CardInfoForm
         setRoute={setRoute}
         setCardCompany={setCardCompany}
         setIsModalOpen={setIsModalOpen}
         setCardNumberInString={setCardNumberInString}
+        setExpirationDateInString={setExpirationDateInString}
       />
       <CardCompanySelectModal
         isOpen={isModalOpen}
@@ -45,14 +51,14 @@ function BackwardButton() {
   );
 }
 
-function CreditCardPreview({ cardCompany, cardNumberInString }) {
+function CreditCardPreview({ cardCompany, cardNumberInString, expirationDateInString }) {
   return (
     <div className="CreditCardPreview">
       <Card backgroundColor={cardCompany.color} boxShadow size="medium">
         <CreditCard
           cardCompany={cardCompany.name}
           cardNumber={cardNumberInString}
-          expirationDate="MM/YY"
+          expirationDate={expirationDateInString}
           ownerName="NAME"
         />
       </Card>
