@@ -40,6 +40,10 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
   );
 });
 
+SecurityCodeInput.defaultProps = {
+  securityCode: '',
+};
+
 SecurityCodeInput.propTypes = {
   securityCode: PropTypes.string.isRequired,
   setSecurityCode: PropTypes.func.isRequired,

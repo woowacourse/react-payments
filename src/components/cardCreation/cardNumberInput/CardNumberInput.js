@@ -152,9 +152,19 @@ const CardNumberInput = memo(
   }
 );
 
+CardNumberInput.defaultProps = {
+  cardNumber: { [FIRST]: '', [SECOND]: '', [THIRD]: '', [FOURTH]: '' },
+  selectedCardInfo: { id: null, name: '', color: COLOR.LIGHT_GRAY },
+  isValidCardNumber: false,
+};
+
 CardNumberInput.propTypes = {
-  cardNumber: PropTypes.object.isRequired,
-  selectedCardInfo: PropTypes.object.isRequired,
+  cardNumber: PropTypes.objectOf(PropTypes.string).isRequired,
+  selectedCardInfo: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.oneOf([null])]),
+    name: PropTypes.string,
+    color: PropTypes.string,
+  }).isRequired,
   setCardNumber: PropTypes.func.isRequired,
   isValidCardNumber: PropTypes.bool.isRequired,
   setValidCardNumber: PropTypes.func.isRequired,

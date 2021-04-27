@@ -69,8 +69,12 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
   );
 });
 
+CardPasswordInput.defaultProps = {
+  cardPassword: { [FIRST]: '', [SECOND]: '' },
+};
+
 CardPasswordInput.propTypes = {
-  cardPassword: PropTypes.object.isRequired,
+  cardPassword: PropTypes.objectOf(PropTypes.string).isRequired,
   setCardPassword: PropTypes.func.isRequired,
   isValidCardPassword: PropTypes.bool.isRequired,
   setValidCardPassword: PropTypes.func.isRequired,

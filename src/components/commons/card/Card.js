@@ -14,11 +14,11 @@ export const Card = ({ size, children, styles, ...props }) => {
   );
 };
 
+Card.defaultProps = {
+  size: CARD_SIZE.MD,
+};
+
 Card.propTypes = {
   size: PropTypes.oneOf(Object.values(CARD_SIZE)),
   styles: PropTypes.object,
-};
-
-Card.defaultProps = {
-  size: CARD_SIZE.MD,
 };

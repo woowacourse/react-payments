@@ -75,8 +75,12 @@ const ExpiredDateInput = memo(
   }
 );
 
+ExpiredDateInput.defaultProps = {
+  cardExpiredDate: { [MONTH]: '', [YEAR]: '' },
+};
+
 ExpiredDateInput.propTypes = {
-  cardExpiredDate: PropTypes.object.isRequired,
+  cardExpiredDate: PropTypes.objectOf(PropTypes.string).isRequired,
   setCardExpiredDate: PropTypes.func.isRequired,
   isValidCardExpiredDate: PropTypes.bool.isRequired,
   setValidCardExpiredDate: PropTypes.func.isRequired,

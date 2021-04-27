@@ -31,14 +31,14 @@ const CardOwnerInput = memo(({ cardOwner, setCardOwner, setValidCardOwner }) => 
   );
 });
 
+CardOwnerInput.defaultProps = {
+  cardOwner: '',
+};
+
 CardOwnerInput.propTypes = {
   cardOwner: PropTypes.string.isRequired,
   setCardOwner: PropTypes.func.isRequired,
   setValidCardOwner: PropTypes.func.isRequired,
-};
-
-CardOwnerInput.defaultProps = {
-  cardOwner: '',
 };
 
 export default CardOwnerInput;

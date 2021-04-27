@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import Styled from './CreditCard.style';
 import { CARD_SIZE, Card } from './Card';
 import { COLOR } from '../../../constants/color';
+import { FIRST, SECOND, THIRD, FOURTH, MONTH, YEAR } from '../../../constants/inputName';
 export { CARD_SIZE } from './Card';
 
 export const CreditCard = ({ size, backgroundColor, content }) => {
@@ -16,35 +17,45 @@ export const CreditCard = ({ size, backgroundColor, content }) => {
       <Styled.CardType size={size}>{content.cardType}</Styled.CardType>
       <Styled.Chip size={size} />
       <Styled.CardNumber size={size}>
-        <div>{content.cardNumber?.[0]}</div>
-        <div>{content.cardNumber?.[1]}</div>
-        <div>{maskNumbers(content.cardNumber?.[2])}</div>
-        <div>{maskNumbers(content.cardNumber?.[3])}</div>
+        <div>{content.cardNumber?.[FIRST]}</div>
+        <div>{content.cardNumber?.[SECOND]}</div>
+        <div>{maskNumbers(content.cardNumber?.[THIRD])}</div>
+        <div>{maskNumbers(content.cardNumber?.[FOURTH])}</div>
       </Styled.CardNumber>
       <Styled.CardOwner size={size}>{content.cardOwner || 'NAME'}</Styled.CardOwner>
       <Styled.CardExpiredDate size={size}>
-        {`${content.cardExpiredDate?.month || 'MM'} / ${content.cardExpiredDate?.year || 'YY'}`}
+        {`${content.cardExpiredDate?.[MONTH] || 'MM'} / ${content.cardExpiredDate?.[YEAR] || 'YY'}`}
       </Styled.CardExpiredDate>
     </Card>
   );
-};
-
-CreditCard.propTypes = {
-  size: PropTypes.oneOf(Object.values(CARD_SIZE)),
-  backgroundColor: PropTypes.string,
-  content: PropTypes.shape({
-    cardType: PropTypes.string,
-    cardNumber: PropTypes.arrayOf(PropTypes.string),
-    cardOwner: PropTypes.string,
-    cardExpiredDate: PropTypes.object,
-  }),
 };
 
 CreditCard.defaultProps = {
   size: CARD_SIZE.MD,
   backgroundColor: COLOR.LIGHT_GRAY,
   content: {
+    cardType: '',
+    cardNumber: {
+      [FIRST]: '',
+      [SECOND]: '',
+      [THIRD]: '',
+      [FOURTH]: '',
+    },
     cardOwner: 'NAME',
-    cardExpiredDate: 'MM / YY',
+    cardExpiredDate: {
+      [MONTH]: 'MM',
+      [YEAR]: 'YY',
+    },
   },
+};
+
+CreditCard.propTypes = {
+  size: PropTypes.oneOf(Object.values(CARD_SIZE)).isRequired,
+  backgroundColor: PropTypes.string.isRequired,
+  content: PropTypes.shape({
+    cardType: PropTypes.string.isRequired,
+    cardNumber: PropTypes.object.isRequired,
+    cardOwner: PropTypes.string.isRequired,
+    cardExpiredDate: PropTypes.object.isRequired,
+  }),
 };

@@ -32,7 +32,7 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo 
         backgroundColor={selectedCardInfo.color}
         content={{
           cardType: selectedCardInfo.name,
-          cardNumber: Object.values(cardNumber),
+          cardNumber,
           cardOwner,
           cardExpiredDate,
         }}
@@ -56,8 +56,17 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo 
 };
 
 CardCreationCompletePage.propTypes = {
+  newCardInfo: PropTypes.shape({
+    cardNumber: PropTypes.objectOf(PropTypes.string),
+    cardExpiredDate: PropTypes.objectOf(PropTypes.string),
+    cardOwner: PropTypes.string,
+    selectedCardInfo: PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.oneOf([null])]),
+      name: PropTypes.string,
+      color: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
   setCurrentPage: PropTypes.func.isRequired,
-  newCardInfo: PropTypes.object.isRequired,
   setNewCardInfo: PropTypes.func.isRequired,
 };
 

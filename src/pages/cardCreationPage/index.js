@@ -51,7 +51,7 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
           backgroundColor={selectedCardInfo.color}
           content={{
             cardType: selectedCardInfo.name,
-            cardNumber: Object.values(cardNumber),
+            cardNumber,
             cardOwner,
             cardExpiredDate,
           }}
