@@ -112,8 +112,8 @@ const CardAddition = (props) => {
           cardType={cardType}
           size={CARD_SIZE.MEDIUM}
           expirationDate={formatExpirationDate(expirationDate)}
-          userName={username}
-          numbers={cardNumbers}
+          username={username}
+          cardNumbers={cardNumbers}
         />
         <form className="card-addition__form">
           <div className="card-addition__number-input mt-standard">

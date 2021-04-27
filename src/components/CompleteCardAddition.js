@@ -27,11 +27,10 @@ function CompleteCardAddition(props) {
   return (
     <div className="complete-card-addition">
       <h2>카드등록이 완료되었습니다.</h2>
-      {/* TODO: props 네이밍 통일 */}
       <Card
         cardType={cardType}
-        numbers={cardNumbers}
-        userName={username}
+        cardNumbers={cardNumbers}
+        username={username}
         expirationDate={Object.values(expirationDate).join("/")}
         size={CARD_SIZE.LARGE}
       />

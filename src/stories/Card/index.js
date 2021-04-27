@@ -7,12 +7,12 @@ import "../style/background.css";
 
 const Card = ({
   cardType,
-  numbers = [],
-  userName = "",
+  cardNumbers = [],
+  username = "",
   expirationDate = "",
   size,
 }) => {
-  const [firstNumber, secondNumber] = numbers;
+  const [firstNumber, secondNumber] = cardNumbers;
   const { name: cardName, color } = cardType;
 
   return (
@@ -20,18 +20,18 @@ const Card = ({
       <div className={`card__inner bg-${color}`}>
         <div className="card__inner-card-name font-s">{cardName}</div>
         <div className="card__inner-chip"></div>
-        {numbers.length !== 0 && (
+        {cardNumbers.length !== 0 && (
           <ul className="font-l">
             <li>{firstNumber}</li>
             <li>{secondNumber}</li>
 
             <li>
-              {[...Array(numbers[2]?.length || 0)].map((_) => (
+              {[...Array(cardNumbers[2]?.length || 0)].map((_) => (
                 <span className="dot"></span>
               ))}
             </li>
             <li>
-              {[...Array(numbers[3]?.length || 0)].map((_) => (
+              {[...Array(cardNumbers[3]?.length || 0)].map((_) => (
                 <span className="dot"></span>
               ))}
             </li>
@@ -39,7 +39,7 @@ const Card = ({
         )}
         <div className="card__inner-bottom font-m">
           <span className="card__inner-bottom-username">
-            {userName === "" ? "NAME" : userName}
+            {username === "" ? "NAME" : username}
           </span>
           <span className="card__inner-bottom-expiration-date">
             {expirationDate === "" ? "MM/YY" : expirationDate}
@@ -57,8 +57,8 @@ Card.propTypes = {
     name: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
   }),
-  numbers: PropTypes.arrayOf(PropTypes.string),
-  userName: PropTypes.string,
+  cardNumbers: PropTypes.arrayOf(PropTypes.string),
+  username: PropTypes.string,
   expirationDate: PropTypes.string,
   size: PropTypes.oneOf(Object.values(CARD_SIZE)).isRequired,
 };
