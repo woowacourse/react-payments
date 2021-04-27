@@ -4,13 +4,13 @@ import styled from 'styled-components';
 
 const ModalWrapper = styled.div`
   display: flex;
-  position: relative;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background: rgba(0, 0, 0, 0.5);
   transition: opacity 0.25s ease;
   z-index: 2;
@@ -51,8 +51,13 @@ const ModalInner = styled.div`
 // `;
 
 const Modal = ({ handleModalClose, children }) => {
+  const onClickModalDimmed = (e) => {
+    if (e.target !== e.currentTarget) return;
+
+    handleModalClose();
+  };
   return (
-    <ModalWrapper onClick={handleModalClose}>
+    <ModalWrapper onClick={onClickModalDimmed}>
       <ModalInner>{children}</ModalInner>
     </ModalWrapper>
   );

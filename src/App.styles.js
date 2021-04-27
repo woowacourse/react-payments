@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const AppWrapper = styled.div`
   display: flex;
+  position: relative;
   background-color: #fff;
   flex-direction: column;
   justify-content: flex-start;

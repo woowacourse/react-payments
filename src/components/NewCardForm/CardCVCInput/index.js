@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import Input from '../../../common/Input';
 import { CardCVCInputWrapper } from './index.styles';
 
-const CardCVCInput = ({ cvc, errorMessage, onChangeCardInput }) => {
+const CardCVCInput = ({
+  cvc,
+  errorMessage,
+  onChangeCardInput,
+  handleModalOpen,
+}) => {
   return (
     <CardCVCInputWrapper>
       <div className='input-label'>보안 코드(CVC/CVV)</div>
@@ -17,7 +22,9 @@ const CardCVCInput = ({ cvc, errorMessage, onChangeCardInput }) => {
           onChange={onChangeCardInput}
           required
         />
-        <div className='help'>?</div>
+        <div className='help' onClick={() => handleModalOpen('cvc help')}>
+          ?
+        </div>
       </div>
       <div className='input-alert'>{errorMessage}</div>
     </CardCVCInputWrapper>
@@ -28,6 +35,7 @@ CardCVCInput.propTypes = {
   cvc: PropTypes.string,
   errorMessage: PropTypes.string,
   onChangeCardInput: PropTypes.func,
+  handleModalOpen: PropTypes.func,
 };
 
 export default CardCVCInput;

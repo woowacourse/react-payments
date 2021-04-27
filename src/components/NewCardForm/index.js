@@ -15,7 +15,7 @@ import CardUserInput from './CardUserInput';
 import CardCVCInput from './CardCVCInput';
 import CardPasswordInput from './CardPasswordInput';
 
-const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
+const NewCardForm = ({ cardInfo, setNewCardInfo, handleModalOpen }) => {
   const [errorMessage, setErrorMessage] = useState({
     numbers: '',
     expireDate: '',
@@ -108,6 +108,7 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
         cvc={cvc}
         errorMessage={errorMessage.cvc}
         onChangeCardInput={onChangeCardInput}
+        handleModalOpen={handleModalOpen}
       />
       <CardPasswordInput
         password={password}
@@ -143,6 +144,7 @@ NewCardForm.propTypes = {
   }),
 
   setNewCardInfo: PropTypes.func,
+  handleModalOpen: PropTypes.func,
 };
 
 export default NewCardForm;
