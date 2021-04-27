@@ -41,7 +41,7 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo 
         <Styled.InputContainer>
           <TransparentInput
             value={cardNickName}
-            onChange={e => setCardNickName(e.target.value)}
+            onChange={({ target }) => setCardNickName(target.value)}
             styles={transparentInputStyles}
           />
         </Styled.InputContainer>

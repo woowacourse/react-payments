@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { memo, useRef, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
+import { MONTH, YEAR } from '../../../constants/inputName';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './ExpiredDateInput.style';
 
@@ -11,15 +12,15 @@ const transparentInputStyles = {
 };
 
 const isValidMonthInput = cardExpiredDate => {
-  const month = Number(cardExpiredDate.month);
+  const month = Number(cardExpiredDate[MONTH]);
 
-  return 1 <= month && month <= 12 && cardExpiredDate.month.length === 2 && !isNaN(month);
+  return 1 <= month && month <= 12 && cardExpiredDate[MONTH].length === 2 && !isNaN(month);
 };
 
 const isValidYearInput = cardExpiredDate => {
-  const year = Number(cardExpiredDate.year);
+  const year = Number(cardExpiredDate[YEAR]);
 
-  return 0 <= year && cardExpiredDate.year.length === 2 && !isNaN(year);
+  return 0 <= year && cardExpiredDate[YEAR].length === 2 && !isNaN(year);
 };
 
 const ExpiredDateInput = memo(
@@ -36,7 +37,7 @@ const ExpiredDateInput = memo(
 
       setCardExpiredDate(prevState => ({ ...prevState, [target.name]: target.value }));
 
-      if (target.name === 'month' && target.value.length === 2) {
+      if (target.name === MONTH && target.value.length === 2) {
         $yearInput.current.disabled = false;
         $yearInput.current.focus();
       }
@@ -47,24 +48,24 @@ const ExpiredDateInput = memo(
         <Styled.InputLabelContainer>만료일 {isValidCardExpiredDate && '✔️'}</Styled.InputLabelContainer>
         <Styled.InputContainer isValidInput={isValidCardExpiredDate}>
           <TransparentInput
-            name="month"
+            name={MONTH}
             type="number"
             min="1"
             max="12"
             placeholder="MM"
-            value={cardExpiredDate.month}
+            value={cardExpiredDate[MONTH]}
             onChange={handleInputChange}
             styles={transparentInputStyles}
           />
           <Styled.Slash>/</Styled.Slash>
           <TransparentInput
-            name="year"
+            name={YEAR}
             type="number"
             min="0"
             max="99"
             placeholder="YY"
             innerRef={$yearInput}
-            value={cardExpiredDate.year}
+            value={cardExpiredDate[YEAR]}
             onChange={handleInputChange}
             styles={transparentInputStyles}
           />

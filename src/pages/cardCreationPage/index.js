@@ -12,13 +12,14 @@ import CardPasswordInput from '../../components/cardCreation/cardPasswordInput/C
 import Styled from './style';
 import { COLOR } from '../../constants/color';
 import { PAGE } from '../../constants/page';
+import { FIRST, SECOND, THIRD, FOURTH, MONTH, YEAR } from '../../constants/inputName';
 
 const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
-  const [cardNumber, setCardNumber] = useState({ 0: '', 1: '', 2: '', 3: '' });
-  const [cardExpiredDate, setCardExpiredDate] = useState({ month: '', year: '' });
+  const [cardNumber, setCardNumber] = useState({ [FIRST]: '', [SECOND]: '', [THIRD]: '', [FOURTH]: '' });
+  const [cardExpiredDate, setCardExpiredDate] = useState({ [MONTH]: '', [YEAR]: '' });
   const [cardOwner, setCardOwner] = useState('');
   const [securityCode, setSecurityCode] = useState('');
-  const [cardPassword, setCardPassword] = useState({ 0: '', 1: '' });
+  const [cardPassword, setCardPassword] = useState({ [FIRST]: '', [SECOND]: '' });
   const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: COLOR.LIGHT_GRAY });
 
   const [isValidCardNumber, setValidCardNumber] = useState(false);

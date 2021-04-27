@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { memo, useRef, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
+import { FIRST, SECOND } from '../../../constants/inputName';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardPasswordInput.style';
 import { Circle } from '../../commons/circle/Circle';
@@ -16,7 +17,7 @@ const isValidInput = cardPassword => {
 };
 
 const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
-  const $input1 = useRef(null);
+  const $secondInput = useRef(null);
 
   useEffect(() => {
     setValidCardPassword(isValidInput(cardPassword));
@@ -25,8 +26,8 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
   const handleInputChange = ({ target }) => {
     setCardPassword(prevState => ({ ...prevState, [target.name]: target.value }));
 
-    if (target.name === '0' && target.value.length === 1) {
-      $input1.current.focus();
+    if (target.name === FIRST && target.value.length === 1) {
+      $secondInput.current.focus();
     }
   };
 
@@ -36,23 +37,23 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
       <Styled.Container>
         <Styled.InputContainer isValidInput={isValidCardPassword}>
           <TransparentInput
-            name="0"
+            name={FIRST}
             minLength="1"
             maxLength="1"
             type="password"
-            value={cardPassword['0']}
+            value={cardPassword[FIRST]}
             onChange={handleInputChange}
             styles={transparentInputStyles}
           />
         </Styled.InputContainer>
         <Styled.InputContainer isValidInput={isValidCardPassword}>
           <TransparentInput
-            name="1"
+            name={SECOND}
             minLength="1"
             maxLength="1"
             type="password"
-            innerRef={$input1}
-            value={cardPassword['1']}
+            innerRef={$secondInput}
+            value={cardPassword[SECOND]}
             onChange={handleInputChange}
             styles={transparentInputStyles}
           />
