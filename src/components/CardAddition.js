@@ -11,6 +11,7 @@ import useCardNumbers from "../hooks/useCardNumbers";
 import { isNumberValue } from "../utils";
 import useExpirationDate from "../hooks/useExpirationDate";
 import useSecureCode from "../hooks/useSecureCode";
+import useControlledInputValue from "../hooks/useControlledInputValue";
 
 const formatCardNumbers = (numbers) => {
   const hiddenNumbers = numbers
@@ -36,7 +37,7 @@ const CardAddition = (props) => {
     month: "",
     year: "",
   });
-  const [username, setUsername] = useState("");
+  const [username, onUsernameChange] = useControlledInputValue("");
   const [secureCode, onSecureCodeChange] = useSecureCode("");
   const [password, setPassword] = useState(["", ""]);
   // TODO: is- 네이밍은 bool값에 어울림
@@ -104,12 +105,6 @@ const CardAddition = (props) => {
   const onRadioChange = ({ target }) => {
     setCardType(JSON.parse(target.value));
     setIsModalOpen(false);
-  };
-
-  const onUsernameChange = (event) => {
-    const { value } = event.target;
-
-    setUsername(value);
   };
 
   const onPasswordChange = (event) => {
