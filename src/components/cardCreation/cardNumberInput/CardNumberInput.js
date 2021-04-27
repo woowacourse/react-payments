@@ -47,8 +47,8 @@ const CardNumberInput = memo(
     const [isModalOpened, setModalOpen] = useState(false);
 
     const $secondInput = useRef(null);
-    const $ThirdInput = useRef(null);
-    const $FourthInput = useRef(null);
+    const $thirdInput = useRef(null);
+    const $fourthInput = useRef(null);
 
     const isSelectedCardInfo = !!selectedCardInfo.id;
 
@@ -59,8 +59,8 @@ const CardNumberInput = memo(
 
     useEffect(() => {
       if (isSelectedCardInfo) {
-        $ThirdInput.current.disabled = false;
-        $ThirdInput.current.focus();
+        $thirdInput.current.disabled = false;
+        $thirdInput.current.focus();
       }
     }, [isSelectedCardInfo]);
 
@@ -80,13 +80,14 @@ const CardNumberInput = memo(
 
       if (target.name === SECOND) {
         setModalOpen(true);
+        $secondInput.current.blur();
 
         return;
       }
 
       if (target.name === THIRD) {
-        $FourthInput.current.disabled = false;
-        $FourthInput.current.focus();
+        $fourthInput.current.disabled = false;
+        $fourthInput.current.focus();
       }
     };
 
@@ -133,7 +134,7 @@ const CardNumberInput = memo(
               maxLength={FULL_INPUT_LENGTH}
               value={cardNumber[THIRD]}
               onChange={handleInputChange}
-              innerRef={$ThirdInput}
+              innerRef={$thirdInput}
               styles={transparentInputStyles[THIRD]}
               disabled
             />
@@ -145,7 +146,7 @@ const CardNumberInput = memo(
               maxLength={FULL_INPUT_LENGTH}
               value={cardNumber[FOURTH]}
               onChange={handleInputChange}
-              innerRef={$FourthInput}
+              innerRef={$fourthInput}
               styles={transparentInputStyles[FOURTH]}
               disabled
             />
