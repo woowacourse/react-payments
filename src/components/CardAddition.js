@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+
 import Card from "../stories/Card";
 import { CARD, CARD_SIZE } from "../stories/constants/card";
 import Input from "../stories/Input";
@@ -6,19 +7,8 @@ import Modal from "../stories/Modal";
 import CardTypeRadio from "../stories/CardTypeRadio";
 import Button from "../stories/Button";
 
-const splitCardNumbers = (value) => {
-  const splitNumbers = [];
-  let i;
-
-  for (i = 0; i < value.length / 4; i++) {
-    splitNumbers.push(value.slice(i * 4, (i + 1) * 4));
-  }
-  if (value[i * 4] !== undefined) {
-    splitNumbers.push(value.slice(i * 4, (i + 1) * 4));
-  }
-
-  return splitNumbers;
-};
+import useCardNumbers from "../hooks/useCardNumbers";
+import { isNumberValue } from "../utils";
 
 const formatCardNumbers = (numbers) => {
   const hiddenNumbers = numbers
@@ -26,14 +16,6 @@ const formatCardNumbers = (numbers) => {
     .map((value) => "•".repeat(value.length));
 
   return [...numbers.slice(0, 2), ...hiddenNumbers].join(" - ");
-};
-
-const unformatCardNumbers = (formattedValue) => {
-  return formattedValue.replace(/[\s-]/g, "");
-};
-
-const isNonNumberValue = (value) => {
-  return /[^0-9]/g.test(value);
 };
 
 // expiration Date
@@ -49,10 +31,9 @@ const unformatExpirationDate = (formattedValue) => {
 };
 
 const CardAddition = (props) => {
-  const [cardType, setCardType] = useState(CARD.UNKNOWN);
-  const [selectionStart, setSelectionStart] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [cardNumbers, setCardNumbers] = useState([]);
+  const [cardType, setCardType] = useState(CARD.UNKNOWN);
+  const [cardNumbers, selectionStart, onCardNumbersChange] = useCardNumbers([]);
   const [expirationDate, setExpirationDate] = useState({
     month: "",
     year: "",
@@ -79,6 +60,22 @@ const CardAddition = (props) => {
     );
   }, [cardNumbers, selectionStart]);
 
+  useEffect(() => {
+    const isCardNumbersFulfilled = cardNumbers[3]?.length === 4;
+
+    setIsModalOpen(isCardNumbersFulfilled);
+  }, [cardNumbers]);
+
+  useEffect(() => {
+    setIsInputFulfilled({
+      cardNumbers: cardNumbers[3]?.length === 4,
+      expirationDate: (expirationDate.month + expirationDate.year).length === 4,
+      username: username.length >= 2,
+      secureCode: secureCode.length === 3,
+      password: password.every((value) => value !== ""),
+    });
+  }, [cardNumbers, expirationDate, username, secureCode, password]);
+
   const onNextButtonClick = (event) => {
     event.preventDefault();
 
@@ -99,61 +96,6 @@ const CardAddition = (props) => {
     props.onCardInfoSubmit(card);
   };
 
-  const onCardNumbersChange = (event) => {
-    const { value, selectionStart } = event.target;
-    const joinedCardNumbers = cardNumbers.join(" - ");
-    const diff = value.length - joinedCardNumbers.length;
-    let updatedCardNumbers = joinedCardNumbers;
-
-    const mod = selectionStart % 7;
-    if (mod === 0 || mod === 6 || mod === 5) {
-      setSelectionStart(selectionStart + ((8 - mod) % 7));
-    } else {
-      setSelectionStart(selectionStart);
-    }
-
-    switch (true) {
-      case diff > 0:
-        if (isNonNumberValue(value[selectionStart - 1])) {
-          return;
-        }
-
-        updatedCardNumbers =
-          joinedCardNumbers.slice(0, selectionStart - 1) +
-          value[selectionStart - 1] +
-          joinedCardNumbers.slice(selectionStart - 1);
-        break;
-      case diff === 0:
-        if (isNonNumberValue(value[selectionStart - 1])) {
-          return;
-        }
-
-        updatedCardNumbers =
-          joinedCardNumbers.slice(0, selectionStart - 1) +
-          value[selectionStart - 1] +
-          joinedCardNumbers.slice(selectionStart);
-        break;
-      case diff < 0:
-        updatedCardNumbers =
-          joinedCardNumbers.slice(0, selectionStart) +
-          joinedCardNumbers.slice(selectionStart + 1);
-        break;
-      default:
-    }
-
-    const unformattedValue = unformatCardNumbers(updatedCardNumbers);
-    const splitNumbers = splitCardNumbers(unformattedValue);
-    const isCardNumbersFulfilled = splitNumbers[3]?.length === 4;
-
-    setIsModalOpen(isCardNumbersFulfilled);
-    setIsInputFulfilled((prev) => ({
-      ...prev,
-      cardNumbers: isCardNumbersFulfilled,
-    }));
-
-    setCardNumbers(splitNumbers);
-  };
-
   const onModalClick = ({ target, currentTarget }) => {
     if (target === currentTarget) {
       setIsModalOpen(false);
@@ -172,22 +114,12 @@ const CardAddition = (props) => {
     const unformattedValue = unformatExpirationDate(target.value);
 
     //TODO: nonNumber를 긍정으로 바꾸기
-    if (isNonNumberValue(unformattedValue)) {
+    if (!isNumberValue(unformattedValue)) {
       return;
     }
 
     const month = unformattedValue.slice(0, 2);
     const year = unformattedValue.slice(2);
-
-    if (unformattedValue.length >= 4) {
-      setIsInputFulfilled((prev) => {
-        return { ...prev, expirationDate: true };
-      });
-    } else {
-      setIsInputFulfilled((prev) => {
-        return { ...prev, expirationDate: false };
-      });
-    }
 
     setExpirationDate({
       month,
@@ -198,26 +130,14 @@ const CardAddition = (props) => {
   const onUsernameChange = (event) => {
     const { value } = event.target;
 
-    if (value.length >= 2) {
-      setIsInputFulfilled((prev) => ({ ...prev, username: true }));
-    } else {
-      setIsInputFulfilled((prev) => ({ ...prev, username: false }));
-    }
-
     setUsername(value);
   };
 
   const onSecureCodeChange = (event) => {
     const { value } = event.target;
 
-    if (isNonNumberValue(value)) {
+    if (!isNumberValue(value)) {
       return;
-    }
-
-    if (value.length === 3) {
-      setIsInputFulfilled((prev) => ({ ...prev, secureCode: true }));
-    } else {
-      setIsInputFulfilled((prev) => ({ ...prev, secureCode: false }));
     }
 
     setSecureCode(value);
@@ -226,7 +146,7 @@ const CardAddition = (props) => {
   const onPasswordChange = (event) => {
     const { value, dataset } = event.target;
 
-    if (isNonNumberValue(value)) {
+    if (!isNumberValue(value)) {
       return;
     }
 
@@ -235,10 +155,6 @@ const CardAddition = (props) => {
       const newPassword = [...prev];
 
       newPassword[dataset.passwordIndex] = value;
-
-      if (newPassword.every((password) => password !== "")) {
-        setIsInputFulfilled((prev) => ({ ...prev, password: true }));
-      }
 
       return newPassword;
     });
