@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
 import * as Style from './style';
 
 const CardNumbersInput = (props) => {
-  const { setCardNumbers } = props;
+  const { type, label, width, setCardNumbers } = props;
 
   const firstInput = useRef(null);
   const secondInput = useRef(null);
@@ -33,31 +34,45 @@ const CardNumbersInput = (props) => {
   const isFourDigits = (value) => value.length === 4;
 
   return (
-    <>
-      <Style.Input
-        type="number"
-        width="44px"
-        min="1000"
-        max="9999"
-        data-number-idx="1"
-        onChange={handleChangeNumbers}
-        ref={firstInput}
-      />
-      <Style.Divider>-</Style.Divider>
-      <Style.Input
-        type="number"
-        width="44px"
-        min="1000"
-        max="9999"
-        data-number-idx="2"
-        onChange={handleChangeNumbers}
-        ref={secondInput}
-      />
-      <Style.Divider>-</Style.Divider>
-      <Style.Input type="password" width="44px" data-number-idx={3} onChange={handleChangeNumbers} ref={thirdInput} />
-      <Style.Divider>-</Style.Divider>
-      <Style.Input type="password" width="44px" data-number-idx={4} onChange={handleChangeNumbers} ref={fourthInput} />
-    </>
+    <RegisterInputWrapper type={type} label={label} width={width}>
+      <Style.InputWrapper>
+        <Style.NumberInput
+          type="number"
+          width="44px"
+          min="1000"
+          max="9999"
+          data-number-idx="1"
+          onChange={handleChangeNumbers}
+          ref={firstInput}
+        />
+        <Style.Divider>-</Style.Divider>
+        <Style.NumberInput
+          type="number"
+          width="44px"
+          min="1000"
+          max="9999"
+          data-number-idx="2"
+          onChange={handleChangeNumbers}
+          ref={secondInput}
+        />
+        <Style.Divider>-</Style.Divider>
+        <Style.PasswordInput
+          type="password"
+          width="44px"
+          data-number-idx={3}
+          onChange={handleChangeNumbers}
+          ref={thirdInput}
+        />
+        <Style.Divider>-</Style.Divider>
+        <Style.PasswordInput
+          type="password"
+          width="44px"
+          data-number-idx={4}
+          onChange={handleChangeNumbers}
+          ref={fourthInput}
+        />
+      </Style.InputWrapper>
+    </RegisterInputWrapper>
   );
 };
 
