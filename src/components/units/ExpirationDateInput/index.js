@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
 import * as Style from './style';
 
 const ExpirationDateInput = (props) => {
-  const { setExpirationDate } = props;
+  const { type, label, width, expirationDate, setExpirationDate } = props;
 
   const monthInput = useRef(null);
   const yearInput = useRef(null);
@@ -20,7 +21,7 @@ const ExpirationDateInput = (props) => {
     const value = event.target.value;
 
     if (underTwoDigits(value)) {
-    setExpirationDate((prevDate) => ({ ...prevDate, [dateType]: value }));
+      setExpirationDate((prevDate) => ({ ...prevDate, [dateType]: value }));
 
       return;
     }
@@ -43,32 +44,30 @@ const ExpirationDateInput = (props) => {
     yearInput.current.focus();
   };
 
-  const isTwoDigits = (value) => value.length === 2;
-
   return (
-    <>
-      <Style.Input
-        type="number"
-        width="28px"
-        placeholder="MM"
-        data-date-type="month"
-        min="1"
-        max="12"
-        onChange={handleChangeNumbers}
-        ref={monthInput}
-      />
-      <Style.Divider>/</Style.Divider>
-      <Style.Input
-        type="number"
-        width="28px"
-        placeholder="YY"
-        data-date-type="year"
-        min="21"
-        max="29"
-        onChange={handleChangeNumbers}
-        ref={yearInput}
-      />
-    </>
+    <RegisterInputWrapper type={type} label={label} width={width}>
+      <Style.InputWrapper>
+        <Style.Input
+          type="number"
+          width="28px"
+          placeholder="MM"
+          value={expirationDate.month}
+          data-date-type="month"
+          onChange={handleChangeDate}
+          ref={monthInput}
+        />
+        <Style.Divider>/</Style.Divider>
+        <Style.Input
+          type="number"
+          width="28px"
+          placeholder="YY"
+          value={expirationDate.year}
+          data-date-type="year"
+          onChange={handleChangeDate}
+          ref={yearInput}
+        />
+      </Style.InputWrapper>
+    </RegisterInputWrapper>
   );
 };
 
