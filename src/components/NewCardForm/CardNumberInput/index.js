@@ -7,30 +7,68 @@ const CardNumberInput = ({
   numbers,
   errorMessage,
   onChangeCardInputObject,
+
+  setKeyboardTarget,
 }) => {
+  const onChangeNumberInput = (e) => {
+    setKeyboardTarget(e.target.dataset.detail);
+  };
+
   return (
     <CardNumberInputWrapper>
       <div className='input-label'>카드 번호</div>
       <div className='input-container'>
-        {Object.keys(numbers).map((key, index) => (
-          <div className='input__column' key={index}>
-            <Input
-              type='text'
-              name='numbers'
-              data-detail={key}
-              value={numbers[key]}
-              onChange={onChangeCardInputObject}
-              minLength='4'
-              maxLength='4'
-              required
-            />
-            {Object.keys(numbers).length - 1 !== index && (
-              <span className='input-separator'>
-                {numbers[key].length === 4 && '-'}
-              </span>
-            )}
-          </div>
-        ))}
+        <Input
+          type='text'
+          name='numbers'
+          data-detail='first'
+          value={numbers.first}
+          onChange={onChangeCardInputObject}
+          minLength='4'
+          maxLength='4'
+          required
+        />
+        <span className='input-separator'>
+          {numbers.first.length === 4 && '-'}
+        </span>
+        <Input
+          type='text'
+          name='numbers'
+          data-detail='second'
+          value={numbers.second}
+          onChange={onChangeCardInputObject}
+          minLength='4'
+          maxLength='4'
+          required
+        />
+        <span className='input-separator'>
+          {numbers.second.length === 4 && '-'}
+        </span>
+        <Input
+          type='password'
+          name='numbers'
+          data-detail='third'
+          value={numbers.third}
+          onClick={onChangeNumberInput}
+          minLength='4'
+          maxLength='4'
+          readOnly
+          required
+        />
+        <span className='input-separator'>
+          {numbers.third.length === 4 && '-'}
+        </span>
+        <Input
+          type='password'
+          name='numbers'
+          data-detail='fourth'
+          value={numbers.fourth}
+          onClick={onChangeNumberInput}
+          minLength='4'
+          maxLength='4'
+          readOnly
+          required
+        />
       </div>
       <div className='input-alert'>{errorMessage}</div>
     </CardNumberInputWrapper>
@@ -46,5 +84,7 @@ CardNumberInput.propTypes = {
   }),
   errorMessage: PropTypes.string,
   onChangeCardInputObject: PropTypes.func,
+
+  setKeyboardTarget: PropTypes.func,
 };
 export default CardNumberInput;

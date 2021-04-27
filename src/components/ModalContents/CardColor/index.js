@@ -15,6 +15,8 @@ const CardColorWrapper = styled.div`
   cursor: pointer;
 `;
 
+// TODO : style 분리
+
 const CardColor = ({ handleCardColor }) => {
   return (
     <CardColorWrapper>

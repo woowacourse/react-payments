@@ -44,6 +44,7 @@ const FONT_SIZE = {
   NORMAL: '1rem',
   LARGE: '1.125rem',
   XLARGE: '1.3rem',
+  XLLARGE: '2rem',
   XXLARGE: '2.5rem',
 };
 
