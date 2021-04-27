@@ -21,5 +21,5 @@ const ModalPage = (props) => {
 export default ModalPage;
 
 ModalPage.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };

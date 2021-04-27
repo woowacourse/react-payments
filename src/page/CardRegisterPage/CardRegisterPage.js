@@ -42,6 +42,6 @@ CardRegisterPage.propTypes = {
   cardNumbers: PropTypes.object.isRequired,
   expiration: PropTypes.object.isRequired,
   ownerName: PropTypes.string,
-  resetState: PropTypes.func.isRequired,
-  setCardName: PropTypes.func.isRequired,
+  resetState: PropTypes.func,
+  setCardName: PropTypes.func,
 };

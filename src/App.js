@@ -117,6 +117,7 @@ function App() {
           cardNumbers={cardNumbers}
           expiration={expiration}
           ownerName={ownerName}
+          cardName={cardName}
           setIsAllValid={setIsAllValid}
           resetState={resetState}
           setCardName={setCardName}
