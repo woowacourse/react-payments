@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import BackButton from '../../components/BackButton/BackButton';
 import Card from '../../components/Card/Card';
@@ -37,7 +37,7 @@ const CardAddPage = (props) => {
         <h1 className="text-xl ml-4">카드 추가</h1>
       </div>
 
-      <div className="flex  justify-center my-7">
+      <div className="flex justify-center my-7">
         <Card
           name={ownerName || 'NAME'}
           expiration={`${expiration.month || 'MM'}/${expiration.year || 'YY'}`}

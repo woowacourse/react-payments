@@ -1,7 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  purge: ['./src/**/*.{js,jsx}', './public/index.html'],
   darkMode: false,
   theme: {
     extend: {
@@ -23,6 +23,12 @@ module.exports = {
       },
       minHeight: {
         '1/20': '5%',
+      },
+      maxWidth: {
+        375: '375px',
+      },
+      maxHeight: {
+        701: '701px',
       },
       colors: {
         포코: '#E24141',

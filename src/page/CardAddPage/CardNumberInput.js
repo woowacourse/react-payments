@@ -19,7 +19,7 @@ const CardNumberInput = (props) => {
                 placeholder={'0000'}
                 value={cardNumbers[currentKey]}
                 onChange={(e) => handleCardNumbersInput(e, currentKey)}
-                className={'px-4'}
+                className={'px-3.5 text-center'}
               />
               {index === 3 ? '' : <span>-</span>}
             </React.Fragment>
