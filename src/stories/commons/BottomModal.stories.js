@@ -8,9 +8,10 @@ export default {
 const Template = args => <BottomModal {...args}></BottomModal>;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = { closeModal: () => {} };
 
 export const Custom = Template.bind({});
 Custom.args = {
   backgroundColor: 'black',
+  closeModal: () => {},
 };
