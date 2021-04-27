@@ -23,11 +23,6 @@ const Template = args => <Circle {...args}></Circle>;
 export const Default = Template.bind({});
 Default.args = {};
 
-export const XXSmall = Template.bind({});
-XXSmall.args = {
-  size: CIRCLE_SIZE.XXS,
-};
-
 export const XSmall = Template.bind({});
 XSmall.args = {
   size: CIRCLE_SIZE.XS,

@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { memo, useRef, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
+import { EXPIRED_DATE_INPUT } from '../../../constants/input';
+import { PLACEHOLDER } from '../../../constants/message';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './ExpiredDateInput.style';
 
@@ -13,13 +15,22 @@ const transparentInputStyles = {
 const isValidMonthInput = cardExpiredDate => {
   const month = Number(cardExpiredDate.month);
 
-  return 1 <= month && month <= 12 && cardExpiredDate.month.length === 2 && !isNaN(month);
+  return (
+    EXPIRED_DATE_INPUT.RANGE.MONTH.MIN <= month &&
+    month <= EXPIRED_DATE_INPUT.RANGE.MONTH.MAX &&
+    cardExpiredDate.month.length === EXPIRED_DATE_INPUT.LENGTH &&
+    !isNaN(month)
+  );
 };
 
 const isValidYearInput = cardExpiredDate => {
   const year = Number(cardExpiredDate.year);
 
-  return 0 <= year && cardExpiredDate.year.length === 2 && !isNaN(year);
+  return (
+    EXPIRED_DATE_INPUT.RANGE.YEAR.MIN <= year &&
+    cardExpiredDate.year.length === EXPIRED_DATE_INPUT.LENGTH &&
+    !isNaN(year)
+  );
 };
 
 const ExpiredDateInput = memo(
@@ -32,11 +43,11 @@ const ExpiredDateInput = memo(
     }, [setValidCardExpiredDate, cardExpiredDate]);
 
     const handleInputChange = ({ target }) => {
-      if (target.value.length > 2) return;
+      if (target.value.length > EXPIRED_DATE_INPUT.LENGTH) return;
 
       setCardExpiredDate(prevState => ({ ...prevState, [target.name]: target.value }));
 
-      if (target.name === 'month' && target.value.length === 2) {
+      if (target.name === EXPIRED_DATE_INPUT.NAME.MONTH && target.value.length === EXPIRED_DATE_INPUT.LENGTH) {
         $yearInput.current.disabled = false;
         $yearInput.current.focus();
       }
@@ -47,22 +58,22 @@ const ExpiredDateInput = memo(
         <Styled.InputLabelContainer>만료일 {isValidCardExpiredDate && '✔️'}</Styled.InputLabelContainer>
         <Styled.InputContainer isValidInput={isValidCardExpiredDate}>
           <TransparentInput
-            name="month"
             type="number"
-            min="1"
-            max="12"
-            placeholder="MM"
+            name={EXPIRED_DATE_INPUT.NAME.MONTH}
+            min={EXPIRED_DATE_INPUT.RANGE.MONTH.MIN}
+            max={EXPIRED_DATE_INPUT.RANGE.MONTH.MAX}
+            placeholder={PLACEHOLDER.EXPIRED_DATE.MONTH}
             value={cardExpiredDate.month}
             onChange={handleInputChange}
             styles={transparentInputStyles}
           />
           <Styled.Slash>/</Styled.Slash>
           <TransparentInput
-            name="year"
             type="number"
-            min="0"
-            max="99"
-            placeholder="YY"
+            name={EXPIRED_DATE_INPUT.NAME.YEAR}
+            min={EXPIRED_DATE_INPUT.RANGE.YEAR.MIN}
+            max={EXPIRED_DATE_INPUT.RANGE.YEAR.MAX}
+            placeholder={PLACEHOLDER.EXPIRED_DATE.YEAR}
             innerRef={$yearInput}
             value={cardExpiredDate.year}
             onChange={handleInputChange}

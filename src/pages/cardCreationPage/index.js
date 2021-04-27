@@ -13,13 +13,25 @@ import Styled from './style';
 import { COLOR } from '../../constants/color';
 import { PAGE } from '../../constants/page';
 import { ALERT_MESSAGE } from '../../constants/message';
+import { CARD_NUMBER_INPUT, CARD_PASSWORD_INPUT, EXPIRED_DATE_INPUT } from '../../constants/input';
 
 const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
-  const [cardNumber, setCardNumber] = useState({ 0: '', 1: '', 2: '', 3: '' });
-  const [cardExpiredDate, setCardExpiredDate] = useState({ month: '', year: '' });
   const [cardOwner, setCardOwner] = useState('');
   const [securityCode, setSecurityCode] = useState('');
-  const [cardPassword, setCardPassword] = useState({ 0: '', 1: '' });
+  const [cardNumber, setCardNumber] = useState({
+    [CARD_NUMBER_INPUT.NAME.FIRST]: '',
+    [CARD_NUMBER_INPUT.NAME.SECOND]: '',
+    [CARD_NUMBER_INPUT.NAME.THIRD]: '',
+    [CARD_NUMBER_INPUT.NAME.FOURTH]: '',
+  });
+  const [cardExpiredDate, setCardExpiredDate] = useState({
+    [EXPIRED_DATE_INPUT.NAME.MONTH]: '',
+    [EXPIRED_DATE_INPUT.NAME.YEAR]: '',
+  });
+  const [cardPassword, setCardPassword] = useState({
+    [CARD_PASSWORD_INPUT.NAME.FIRST]: '',
+    [CARD_PASSWORD_INPUT.NAME.SECOND]: '',
+  });
   const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: COLOR.LIGHT_GRAY });
 
   const [isValidCardNumber, setValidCardNumber] = useState(false);

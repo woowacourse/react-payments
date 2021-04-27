@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { memo, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
+import { SECURITY_CODE_INPUT } from '../../../constants/input';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import { QuestionDescription } from '../../commons/questionDescription/QuestionDescription';
 import Styled from './SecurityCodeInput.style';
@@ -12,7 +13,7 @@ const transparentInputStyles = {
 };
 
 const isValidInput = securityCode => {
-  return securityCode.length === 3 && !isNaN(securityCode);
+  return securityCode.length === SECURITY_CODE_INPUT.LENGTH && !isNaN(securityCode);
 };
 
 const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurityCode, setValidSecurityCode }) => {
@@ -27,8 +28,8 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
         <Styled.InputContainer isValidInput={isValidSecurityCode}>
           <TransparentInput
             type="password"
-            minLength="3"
-            maxLength="3"
+            minLength={SECURITY_CODE_INPUT.LENGTH}
+            maxLength={SECURITY_CODE_INPUT.LENGTH}
             value={securityCode}
             onChange={({ target }) => setSecurityCode(target.value)}
             styles={transparentInputStyles}

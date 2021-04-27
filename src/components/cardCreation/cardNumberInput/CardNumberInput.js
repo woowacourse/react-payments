@@ -1,29 +1,30 @@
 import PropTypes from 'prop-types';
 import { memo, useRef, useEffect, useState } from 'react';
 import { COLOR } from '../../../constants/color';
+import { CARD_NUMBER_INPUT } from '../../../constants/input';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import CardSelectionModal from '../cardSelectionModal/CardSelectionModal';
 import Styled from './CardNumberInput.style';
 
 const transparentInputStyles = {
-  0: {
+  [CARD_NUMBER_INPUT.NAME.FIRST]: {
     color: COLOR.MINT,
     paddingLeft: '14%',
     textAlign: 'center',
     width: '32%',
   },
-  1: {
+  [CARD_NUMBER_INPUT.NAME.SECOND]: {
     color: COLOR.MINT,
     textAlign: 'center',
     width: '18%',
   },
-  2: {
+  [CARD_NUMBER_INPUT.NAME.THIRD]: {
     color: COLOR.MINT,
     textAlign: 'center',
     width: '18%',
     fontSize: '24px',
   },
-  3: {
+  [CARD_NUMBER_INPUT.NAME.FOURTH]: {
     color: COLOR.MINT,
     paddingRight: '14%',
     textAlign: 'center',
@@ -33,7 +34,9 @@ const transparentInputStyles = {
 };
 
 const isValidCardNumberInput = cardNumber => {
-  return Object.values(cardNumber).every(cardNumber => cardNumber.length === 4 && !isNaN(cardNumber));
+  return Object.values(cardNumber).every(
+    cardNumber => cardNumber.length === CARD_NUMBER_INPUT.LENGTH && !isNaN(cardNumber)
+  );
 };
 
 const CardNumberInput = memo(
@@ -59,31 +62,38 @@ const CardNumberInput = memo(
     }, [isSelectedCardInfo]);
 
     const handleInputChange = ({ target }) => {
-      if (target.value.length > 4) return;
+      if (target.value.length > CARD_NUMBER_INPUT.LENGTH) return;
 
       setCardNumber(prevState => ({ ...prevState, [target.name]: target.value }));
 
-      if (target.name === '0' && target.value.length === 4) {
-        $input1.current.disabled = false;
-        $input1.current.focus();
+      if (target.value.length === CARD_NUMBER_INPUT.LENGTH) {
+        switch (target.name) {
+          case CARD_NUMBER_INPUT.NAME.FIRST:
+            $input1.current.disabled = false;
+            $input1.current.focus();
 
-        return;
-      }
+            break;
+          case CARD_NUMBER_INPUT.NAME.SECOND:
+            setModalOpen(true);
 
-      if (target.name === '1' && target.value.length === 4) {
-        setModalOpen(true);
+            break;
+          case CARD_NUMBER_INPUT.NAME.THIRD:
+            $input3.current.disabled = false;
+            $input3.current.focus();
 
-        return;
-      }
-
-      if (target.name === '2' && target.value.length === 4) {
-        $input3.current.disabled = false;
-        $input3.current.focus();
+            break;
+          default:
+            break;
+        }
       }
     };
 
     const handleInputClick = () => {
-      if (cardNumber['0'].length === 4 && cardNumber['1'].length === 4 && !isSelectedCardInfo) {
+      if (
+        cardNumber[CARD_NUMBER_INPUT.NAME.FIRST].length === CARD_NUMBER_INPUT.LENGTH &&
+        cardNumber[CARD_NUMBER_INPUT.NAME.SECOND].length === CARD_NUMBER_INPUT.LENGTH &&
+        !isSelectedCardInfo
+      ) {
         setModalOpen(true);
       }
     };
@@ -94,49 +104,49 @@ const CardNumberInput = memo(
           <Styled.InputLabelContainer>카드 번호 {isValidCardNumber && '✔️'}</Styled.InputLabelContainer>
           <Styled.InputContainer isValidInput={isValidCardNumber} onClick={handleInputClick}>
             <TransparentInput
-              name="0"
               type="number"
-              min="0"
-              max="9999"
-              value={cardNumber['0']}
+              name={CARD_NUMBER_INPUT.NAME.FIRST}
+              min={CARD_NUMBER_INPUT.RANGE.MIN}
+              max={CARD_NUMBER_INPUT.RANGE.MAX}
+              value={cardNumber[CARD_NUMBER_INPUT.NAME.FIRST]}
               onChange={handleInputChange}
-              styles={transparentInputStyles['0']}
+              styles={transparentInputStyles[CARD_NUMBER_INPUT.NAME.FIRST]}
               autoFocus
             />
-            {cardNumber['0'].length === 4 && <Styled.Dash>-</Styled.Dash>}
+            {cardNumber[CARD_NUMBER_INPUT.NAME.FIRST].length === 4 && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
-              name="1"
               type="number"
-              min="0"
-              max="9999"
-              value={cardNumber['1']}
+              name={CARD_NUMBER_INPUT.NAME.SECOND}
+              min={CARD_NUMBER_INPUT.RANGE.MIN}
+              max={CARD_NUMBER_INPUT.RANGE.MAX}
+              value={cardNumber[CARD_NUMBER_INPUT.NAME.SECOND]}
               onChange={handleInputChange}
               innerRef={$input1}
-              styles={transparentInputStyles['1']}
+              styles={transparentInputStyles[CARD_NUMBER_INPUT.NAME.SECOND]}
               disabled
             />
-            {cardNumber['1'].length === 4 && <Styled.Dash>-</Styled.Dash>}
+            {cardNumber[CARD_NUMBER_INPUT.NAME.SECOND].length === 4 && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
-              name="2"
               type="password"
-              minLength="4"
-              maxLength="4"
-              value={cardNumber['2']}
+              name={CARD_NUMBER_INPUT.NAME.THIRD}
+              minLength={CARD_NUMBER_INPUT.LENGTH}
+              maxLength={CARD_NUMBER_INPUT.LENGTH}
+              value={cardNumber[CARD_NUMBER_INPUT.NAME.THIRD]}
               onChange={handleInputChange}
               innerRef={$input2}
-              styles={transparentInputStyles['2']}
+              styles={transparentInputStyles[CARD_NUMBER_INPUT.NAME.THIRD]}
               disabled
             />
-            {cardNumber['2'].length === 4 && <Styled.Dash>-</Styled.Dash>}
+            {cardNumber[CARD_NUMBER_INPUT.NAME.THIRD].length === 4 && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
-              name="3"
               type="password"
-              minLength="4"
-              maxLength="4"
-              value={cardNumber['3']}
+              name={CARD_NUMBER_INPUT.NAME.FOURTH}
+              minLength={CARD_NUMBER_INPUT.LENGTH}
+              maxLength={CARD_NUMBER_INPUT.LENGTH}
+              value={cardNumber[CARD_NUMBER_INPUT.NAME.FOURTH]}
               onChange={handleInputChange}
               innerRef={$input3}
-              styles={transparentInputStyles['3']}
+              styles={transparentInputStyles[CARD_NUMBER_INPUT.NAME.FOURTH]}
               disabled
             />
           </Styled.InputContainer>

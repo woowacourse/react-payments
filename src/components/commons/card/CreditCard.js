@@ -45,6 +45,6 @@ CreditCard.defaultProps = {
   backgroundColor: COLOR.LIGHT_GRAY,
   content: {
     cardOwner: 'NAME',
-    cardExpiredDate: 'MM / YY',
+    cardExpiredDate: {},
   },
 };

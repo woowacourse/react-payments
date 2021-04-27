@@ -4,6 +4,7 @@ import { COLOR } from '../../../constants/color';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardPasswordInput.style';
 import { Circle } from '../../commons/circle/Circle';
+import { CARD_PASSWORD_INPUT } from '../../../constants/input';
 
 const transparentInputStyles = {
   color: COLOR.MINT,
@@ -12,7 +13,9 @@ const transparentInputStyles = {
 };
 
 const isValidInput = cardPassword => {
-  return Object.values(cardPassword).every(cardPassword => cardPassword.length === 1 && !isNaN(cardPassword));
+  return Object.values(cardPassword).every(
+    cardPassword => cardPassword.length === CARD_PASSWORD_INPUT.LENGTH && !isNaN(cardPassword)
+  );
 };
 
 const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
@@ -25,7 +28,10 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
   const handleInputChange = ({ target }) => {
     setCardPassword(prevState => ({ ...prevState, [target.name]: target.value }));
 
-    if (target.name === '0' && target.value.length === 1) {
+    if (
+      target.name === CARD_PASSWORD_INPUT.NAME.FIRST && //
+      target.value.length === CARD_PASSWORD_INPUT.LENGTH
+    ) {
       $input1.current.focus();
     }
   };
@@ -36,33 +42,33 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
       <Styled.Container>
         <Styled.InputContainer isValidInput={isValidCardPassword}>
           <TransparentInput
-            name="0"
-            minLength="1"
-            maxLength="1"
             type="password"
-            value={cardPassword['0']}
+            name={CARD_PASSWORD_INPUT.NAME.FIRST}
+            minLength={CARD_PASSWORD_INPUT.LENGTH}
+            maxLength={CARD_PASSWORD_INPUT.LENGTH}
+            value={cardPassword[CARD_PASSWORD_INPUT.NAME.FIRST]}
             onChange={handleInputChange}
             styles={transparentInputStyles}
           />
         </Styled.InputContainer>
         <Styled.InputContainer isValidInput={isValidCardPassword}>
           <TransparentInput
-            name="1"
-            minLength="1"
-            maxLength="1"
             type="password"
+            name={CARD_PASSWORD_INPUT.NAME.SECOND}
+            minLength={CARD_PASSWORD_INPUT.LENGTH}
+            maxLength={CARD_PASSWORD_INPUT.LENGTH}
             innerRef={$input1}
-            value={cardPassword['1']}
+            value={cardPassword[CARD_PASSWORD_INPUT.NAME.SECOND]}
             onChange={handleInputChange}
             styles={transparentInputStyles}
           />
         </Styled.InputContainer>
-        <Styled.CircleContainer>
-          <Circle styles={{ backgroundColor: COLOR.MINT }} />
-        </Styled.CircleContainer>
-        <Styled.CircleContainer>
-          <Circle styles={{ backgroundColor: COLOR.MINT }} />
-        </Styled.CircleContainer>
+
+        {[...Array(2)].map((_, idx) => (
+          <Styled.CircleContainer key={`password-${idx + 2}`}>
+            <Circle styles={{ backgroundColor: COLOR.MINT }} />
+          </Styled.CircleContainer>
+        ))}
       </Styled.Container>
     </div>
   );

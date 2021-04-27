@@ -13,10 +13,6 @@ export const CIRCLE_SIZE = {
     width: '5.5px',
     height: '5.5px',
   },
-  XXS: {
-    width: '4px',
-    height: '4px',
-  },
 };
 
 const Styled = {
