@@ -7,7 +7,7 @@ body {
   max-width: 700px;
   position: relative;
   box-sizing: border-box;
-  margin: 0 auto;
+  margin: 0 auto !important;
 }
 
 button {

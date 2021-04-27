@@ -1,4 +1,5 @@
 import CardPasswordInput from '../../components/cardCreation/cardPasswordInput/CardPasswordInput';
+import { FIRST, SECOND } from '../../constants/inputName';
 
 export default {
   title: 'Components/CardPasswordInput',
@@ -12,5 +13,5 @@ Default.args = {
   setCardPassword: () => {},
   setValidCardPassword: () => {},
   isValidCardPassword: true,
-  cardPassword: { 0: '1', 1: '1' },
+  cardPassword: { [FIRST]: '1', [SECOND]: '1' },
 };

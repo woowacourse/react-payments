@@ -1,5 +1,6 @@
 import CardNumberInput from '../../components/cardCreation/cardNumberInput/CardNumberInput';
 import { COLOR } from '../../constants/color';
+import { FIRST, SECOND, THIRD, FOURTH } from '../../constants/inputName';
 
 export default {
   title: 'Components/CardNumberInput',
@@ -13,11 +14,11 @@ Default.args = {
   setCardNumber: () => {},
   setSelectedCardInfo: () => {},
   setValidCardNumber: () => {},
-  cardNumber: { 0: '1111', 1: '2222', 2: '3333', 3: '4444' },
+  cardNumber: { [FIRST]: '1111', [SECOND]: '2222', [THIRD]: '3333', [FOURTH]: '4444' },
   selectedCardInfo: {
     color: COLOR.LIGHT_GRAY,
     id: 1,
-    name: '브랜 카드',
+    name: '디토 카드',
   },
   isValidCardNumber: true,
 };

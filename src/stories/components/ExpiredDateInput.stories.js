@@ -1,4 +1,5 @@
 import ExpiredDateInput from '../../components/cardCreation/expiredDateInput/ExpiredDateInput';
+import { MONTH, YEAR } from '../../constants/inputName';
 
 export default {
   title: 'Components/ExpiredDateInput',
@@ -12,5 +13,5 @@ Default.args = {
   setCardExpiredDate: () => {},
   setValidCardExpiredDate: () => {},
   isValidCardExpiredDate: true,
-  cardExpiredDate: { month: '11', year: '23' },
+  cardExpiredDate: { [MONTH]: '11', [YEAR]: '23' },
 };
