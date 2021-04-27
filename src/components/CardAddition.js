@@ -70,7 +70,7 @@ const CardAddition = (props) => {
     });
   }, [cardNumbers, expirationDate, username, secureCode, password]);
 
-  const onNextButtonClick = (event) => {
+  const onCardInfoSubmit = (event) => {
     event.preventDefault();
 
     if (cardType.name === CARD.UNKNOWN.name) {
@@ -112,7 +112,7 @@ const CardAddition = (props) => {
           username={username}
           cardNumbers={cardNumbers}
         />
-        <form className="card-addition__form">
+        <form onSubmit={onCardInfoSubmit} className="card-addition__form">
           <div className="card-addition__number-input mt-standard">
             <label htmlFor="card-number">카드 번호</label>
             <Input
@@ -207,7 +207,7 @@ const CardAddition = (props) => {
             (isFulfilled) => isFulfilled
           ) && (
             <div className="card-addition__form-submit">
-              <Button onClick={onNextButtonClick} innerText="다음" />
+              <Button innerText="다음" />
             </div>
           )}
         </form>

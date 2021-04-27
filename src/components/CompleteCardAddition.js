@@ -33,7 +33,7 @@ function CompleteCardAddition(props) {
         expirationDate={Object.values(expirationDate).join("/")}
         size={CARD_SIZE.LARGE}
       />
-      <form>
+      <form onSubmit={onDescriptionSubmit}>
         <input
           value={cardDescription}
           onChange={onCardDescriptionChange}
@@ -43,7 +43,7 @@ function CompleteCardAddition(props) {
           placeholder="카드 별명을 입력해주세요"
           required
         />
-        <Button innerText="확인" onClick={onDescriptionSubmit} />
+        <Button innerText="확인"/>
       </form>
     </div>
   );
