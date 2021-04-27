@@ -1,11 +1,25 @@
 import styled from 'styled-components';
 
-const Container = styled.div``;
+// width: 23.4rem;
+const Container = styled.div`
+  width: 100%;
+  height: 43.8rem;
+  display: flex;
+  flex-direction: column;
+`;
 
-const Header = styled.div``;
+const Header = styled.div`
+  width: 100%;
+  height: 8%;
+  margin: 2% 0 4% 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
-const Body = styled.div``;
+const Body = styled.div`
+  width: 100%;
+  height: 95%;
+`;
 
-const Footer = styled.div``;
-
-export { Container, Header, Body, Footer };
+export { Container, Header, Body };

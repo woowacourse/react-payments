@@ -9,7 +9,7 @@ const CardContainer = styled.div`
   align-items: center;
 `;
 
-const CardInputFormContainer = styled.div`
+const CardCreateFormContainer = styled.div`
   width: 100%;
   display: flex;
   margin: 0;
@@ -17,4 +17,4 @@ const CardInputFormContainer = styled.div`
   align-items: center;
 `;
 
-export { CardContainer, CardInputFormContainer };
+export { CardContainer, CardCreateFormContainer };
