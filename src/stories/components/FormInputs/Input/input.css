@@ -46,6 +46,10 @@
   border: 2px solid #04c09e;
 }
 
+.basic-input__input.error:focus {
+  border: 2px solid #ff4242;
+}
+
 .basic-input__input.text-center {
   text-align: center;
 }
