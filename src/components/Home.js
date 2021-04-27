@@ -8,14 +8,7 @@ function Home(props) {
     <>
       <div>
         <p>준비중입니다. - home</p>
-        <button
-          onClick={() =>
-            routeTo({
-              name: PAGE.CARD_ADDITION.NAME,
-              id: PAGE.CARD_ADDITION.ID,
-            })
-          }
-        >
+        <button onClick={routeTo[PAGE.CARD_ADDITION.ID]}>
           카드 추가 하러 가기
         </button>
       </div>

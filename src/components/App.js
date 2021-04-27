@@ -6,65 +6,59 @@ import CompleteCardAddition from "./CompleteCardAddition";
 import Home from "./Home";
 
 function App() {
+  //TODO: name의 네이밍이 애매함, 없는 경우도 있기 때문에
   const [page, setPage] = useState({
     id: PAGE.HOME.ID,
-    props: {},
+    name: PAGE.HOME.NAME,
   });
   const [cardList, setCardList] = useState([]);
+  const [processingCard, setProcessingCard] = useState({});
 
-  //TODO: 네이밍 고민해보기
-  const pageHandler = {
-    [PAGE.HOME.ID]: null,
+  const routeTo = {
+    [PAGE.HOME.ID]: () =>
+      setPage({
+        id: PAGE.HOME.ID,
+        name: PAGE.HOME.NAME,
+      }),
     [PAGE.CARD_ADDITION.ID]: () =>
       setPage({
-        name: PAGE.HOME.NAME,
-        id: PAGE.HOME.ID,
+        id: PAGE.CARD_ADDITION.ID,
+        name: PAGE.CARD_ADDITION.NAME,
       }),
-    [PAGE.COMPLETE_CARD_ADDITION.ID]: null,
-  };
-  const mainComponent = {
-    [PAGE.HOME.ID]: (props) => (
-      <Home cardList={cardList} routeTo={setPage} {...props} />
-    ),
-    [PAGE.CARD_ADDITION.ID]: (props) => (
-      <CardAddition onCardInfoSubmit={onCardInfoSubmit} {...props} />
-    ),
-    [PAGE.COMPLETE_CARD_ADDITION.ID]: (props) => (
-      <CompleteCardAddition
-        onCardAdditionComplete={onCardAdditionComplete}
-        {...props}
-      />
-    ),
+    [PAGE.COMPLETE_CARD_ADDITION.ID]: () =>
+      setPage({
+        id: PAGE.COMPLETE_CARD_ADDITION.ID,
+        name: PAGE.COMPLETE_CARD_ADDITION.NAME,
+      }),
   };
 
   const onCardInfoSubmit = (card) => {
-    setPage({
-      //TODO: name의 네이밍이 애매함, 없는 경우도 있기 때문에
-      id: PAGE.COMPLETE_CARD_ADDITION.ID,
-      props: {
-        card,
-      },
-    });
+    setProcessingCard(card);
+    routeTo[PAGE.COMPLETE_CARD_ADDITION.ID]();
   };
 
   const onCardAdditionComplete = (card) => {
     setCardList((prevCardList) => [...prevCardList, card]);
+    routeTo[PAGE.HOME.ID]();
   };
 
-  //TODO: cardList가 변하면 모두 홈으로 돌아가는 현상에 대해서 논의하기
-  useEffect(() => {
-    setPage({
-      id: PAGE.HOME.ID,
-      props: {
-        cardList,
-      },
-    });
-  }, [cardList]);
+  const mainComponent = {
+    [PAGE.HOME.ID]: <Home cardList={cardList} routeTo={routeTo} />,
+    [PAGE.CARD_ADDITION.ID]: (
+      <CardAddition onCardInfoSubmit={onCardInfoSubmit} />
+    ),
+    [PAGE.COMPLETE_CARD_ADDITION.ID]: (
+      <CompleteCardAddition
+        onCardAdditionComplete={onCardAdditionComplete}
+        card={processingCard}
+      />
+    ),
+  };
 
   return (
     <div className="app">
-      <Header title={page.name} onPageBack={pageHandler[page.id]} />
-      <main>{mainComponent[page.id](page.props)}</main>
+      <Header title={page.name} onPageBack={routeTo[PAGE.HOME.ID]} />
+      <main>{mainComponent[page.id]}</main>
     </div>
   );
 }
