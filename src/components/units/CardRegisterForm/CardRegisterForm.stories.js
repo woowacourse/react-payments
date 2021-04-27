@@ -9,4 +9,8 @@ export default {
 const Template = (args) => <CardRegisterForm {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  expirationDate: { month: '', year: '' },
+  ownerName: '',
+  secureCode: '',
+};
