@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from '../../components/Card/Card';
 import UnderLineInput from '../../components/UnderLineInput/UnderLineInput';
 import TextButton from '../../components/TextButton/TextButton';
+import PropTypes from 'prop-types';
 
 const CardRegisterPage = (props) => {
-  const { cardCompany, cardNumbers, expiration, ownerName, resetState } = props;
-  const [cardName, setCardName] = useState('');
+  const { cardCompany, cardNumbers, expiration, ownerName, resetState, setCardName } = props;
 
   const handleCardSubmit = (e) => {
     e.preventDefault();
@@ -36,3 +36,12 @@ const CardRegisterPage = (props) => {
 };
 
 export default CardRegisterPage;
+
+CardRegisterPage.propTypes = {
+  cardCompany: PropTypes.object.isRequired,
+  cardNumbers: PropTypes.object.isRequired,
+  expiration: PropTypes.object.isRequired,
+  ownerName: PropTypes.string,
+  resetState: PropTypes.func.isRequired,
+  setCardName: PropTypes.func.isRequired,
+};
