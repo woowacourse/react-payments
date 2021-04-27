@@ -74,10 +74,9 @@ const CardAddForm = props => {
     }
   };
 
-  // TODO: 30글자 이상 입력되는 것 수정
   const handleOwnerNameChange = event => {
     try {
-      const { value } = event.target;
+      const value = event.target.value.toUpperCase();
 
       setOwnerName(value);
       validateOwnerName(value);
@@ -94,7 +93,7 @@ const CardAddForm = props => {
   };
 
   const validateOwnerName = name => {
-    const rName = /^[가-힣|a-z|A-Z|\s]{0,30}$/;
+    const rName = /^[가-힣|A-Z|\s]{0,30}$/;
 
     if (!rName.test(name)) {
       throwError(`Invalid owner name: ${name}`, ERROR_TYPE.VALIDATION);
@@ -234,6 +233,8 @@ const CardAddForm = props => {
               value={ownerName}
               isValid={isOwnerNameValid}
               onChange={handleOwnerNameChange}
+              minLength="0"
+              maxLength="30"
             />
           </div>
           <div className="flex flex-col w-full mb-2">
