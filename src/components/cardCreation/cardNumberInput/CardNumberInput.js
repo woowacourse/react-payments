@@ -33,8 +33,10 @@ const transparentInputStyles = {
   },
 };
 
+const FULL_INPUT_LENGTH = 4;
+
 const isValidCardNumberInput = cardNumber => {
-  return Object.values(cardNumber).every(cardNumber => cardNumber.length === 4 && !isNaN(cardNumber));
+  return Object.values(cardNumber).every(cardNumber => cardNumber.length === FULL_INPUT_LENGTH && !isNaN(cardNumber));
 };
 
 const CardNumberInput = memo(
@@ -60,11 +62,11 @@ const CardNumberInput = memo(
     }, [isSelectedCardInfo]);
 
     const handleInputChange = ({ target }) => {
-      if (target.value.length > 4) return;
+      if (target.value.length > FULL_INPUT_LENGTH) return;
 
       setCardNumber(prevState => ({ ...prevState, [target.name]: target.value }));
 
-      if (target.value.length !== 4) return;
+      if (target.value.length !== FULL_INPUT_LENGTH) return;
 
       if (target.name === FIRST) {
         $secondInput.current.disabled = false;
@@ -86,9 +88,10 @@ const CardNumberInput = memo(
     };
 
     const handleInputClick = () => {
-      if (cardNumber[FIRST].length === 4 && cardNumber[SECOND].length === 4 && !isSelectedCardInfo) {
+      cardNumber[FIRST].length === FULL_INPUT_LENGTH &&
+        cardNumber[SECOND].length === FULL_INPUT_LENGTH &&
+        !isSelectedCardInfo &&
         setModalOpen(true);
-      }
     };
 
     return (
@@ -106,7 +109,7 @@ const CardNumberInput = memo(
               styles={transparentInputStyles[FIRST]}
               autoFocus
             />
-            {cardNumber[FIRST].length === 4 && <Styled.Dash>-</Styled.Dash>}
+            {cardNumber[FIRST].length === FULL_INPUT_LENGTH && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
               name={SECOND}
               type="number"
@@ -118,24 +121,24 @@ const CardNumberInput = memo(
               styles={transparentInputStyles[SECOND]}
               disabled
             />
-            {cardNumber[SECOND].length === 4 && <Styled.Dash>-</Styled.Dash>}
+            {cardNumber[SECOND].length === FULL_INPUT_LENGTH && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
               name={THIRD}
               type="password"
-              minLength="4"
-              maxLength="4"
+              minLength={FULL_INPUT_LENGTH}
+              maxLength={FULL_INPUT_LENGTH}
               value={cardNumber[THIRD]}
               onChange={handleInputChange}
               innerRef={$ThirdInput}
               styles={transparentInputStyles[THIRD]}
               disabled
             />
-            {cardNumber[THIRD].length === 4 && <Styled.Dash>-</Styled.Dash>}
+            {cardNumber[THIRD].length === FULL_INPUT_LENGTH && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
               name={FOURTH}
               type="password"
-              minLength="4"
-              maxLength="4"
+              minLength={FULL_INPUT_LENGTH}
+              maxLength={FULL_INPUT_LENGTH}
               value={cardNumber[FOURTH]}
               onChange={handleInputChange}
               innerRef={$FourthInput}

@@ -4,8 +4,10 @@ import { COLOR } from '../../../constants/color';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardOwnerInput.style';
 
+const FULL_INPUT_LENGTH = 30;
+
 const isValidInput = carOwner => {
-  return carOwner.length <= 30;
+  return carOwner.length <= FULL_INPUT_LENGTH;
 };
 
 const CardOwnerInput = memo(({ cardOwner, setCardOwner, setValidCardOwner }) => {
@@ -17,7 +19,9 @@ const CardOwnerInput = memo(({ cardOwner, setCardOwner, setValidCardOwner }) => 
     <div>
       <Styled.InputLabelContainer>
         <div>카드 소유자 이름(선택)</div>
-        <div> {cardOwner.length} / 30</div>
+        <div>
+          {cardOwner.length} / {FULL_INPUT_LENGTH}
+        </div>
       </Styled.InputLabelContainer>
       <Styled.InputContainer>
         <TransparentInput

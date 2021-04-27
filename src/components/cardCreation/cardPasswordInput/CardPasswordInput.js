@@ -6,6 +6,7 @@ import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardPasswordInput.style';
 import { Circle } from '../../commons/circle/Circle';
 
+const FULL_INPUT_LENGTH = 1;
 const transparentInputStyles = {
   color: COLOR.MINT,
   fontSize: '24px',
@@ -13,7 +14,9 @@ const transparentInputStyles = {
 };
 
 const isValidInput = cardPassword => {
-  return Object.values(cardPassword).every(cardPassword => cardPassword.length === 1 && !isNaN(cardPassword));
+  return Object.values(cardPassword).every(
+    cardPassword => cardPassword.length === FULL_INPUT_LENGTH && !isNaN(cardPassword)
+  );
 };
 
 const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
@@ -26,7 +29,7 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
   const handleInputChange = ({ target }) => {
     setCardPassword(prevState => ({ ...prevState, [target.name]: target.value }));
 
-    if (target.name === FIRST && target.value.length === 1) {
+    if (target.name === FIRST && target.value.length === FULL_INPUT_LENGTH) {
       $secondInput.current.focus();
     }
   };
@@ -38,8 +41,8 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
         <Styled.InputContainer isValidInput={isValidCardPassword}>
           <TransparentInput
             name={FIRST}
-            minLength="1"
-            maxLength="1"
+            minLength={FULL_INPUT_LENGTH}
+            maxLength={FULL_INPUT_LENGTH}
             type="password"
             value={cardPassword[FIRST]}
             onChange={handleInputChange}
@@ -49,8 +52,8 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
         <Styled.InputContainer isValidInput={isValidCardPassword}>
           <TransparentInput
             name={SECOND}
-            minLength="1"
-            maxLength="1"
+            minLength={FULL_INPUT_LENGTH}
+            maxLength={FULL_INPUT_LENGTH}
             type="password"
             innerRef={$secondInput}
             value={cardPassword[SECOND]}

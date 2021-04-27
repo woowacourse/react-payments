@@ -5,6 +5,7 @@ import { MONTH, YEAR } from '../../../constants/inputName';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './ExpiredDateInput.style';
 
+const FULL_INPUT_LENGTH = 2;
 const transparentInputStyles = {
   color: COLOR.MINT,
   width: '30%',
@@ -14,13 +15,13 @@ const transparentInputStyles = {
 const isValidMonthInput = cardExpiredDate => {
   const month = Number(cardExpiredDate[MONTH]);
 
-  return 1 <= month && month <= 12 && cardExpiredDate[MONTH].length === 2 && !isNaN(month);
+  return 1 <= month && month <= 12 && cardExpiredDate[MONTH].length === FULL_INPUT_LENGTH && !isNaN(month);
 };
 
 const isValidYearInput = cardExpiredDate => {
   const year = Number(cardExpiredDate[YEAR]);
 
-  return 0 <= year && cardExpiredDate[YEAR].length === 2 && !isNaN(year);
+  return 0 <= year && cardExpiredDate[YEAR].length === FULL_INPUT_LENGTH && !isNaN(year);
 };
 
 const ExpiredDateInput = memo(
@@ -33,11 +34,11 @@ const ExpiredDateInput = memo(
     }, [setValidCardExpiredDate, cardExpiredDate]);
 
     const handleInputChange = ({ target }) => {
-      if (target.value.length > 2) return;
+      if (target.value.length > FULL_INPUT_LENGTH) return;
 
       setCardExpiredDate(prevState => ({ ...prevState, [target.name]: target.value }));
 
-      if (target.name === MONTH && target.value.length === 2) {
+      if (target.name === MONTH && target.value.length === FULL_INPUT_LENGTH) {
         $yearInput.current.disabled = false;
         $yearInput.current.focus();
       }
