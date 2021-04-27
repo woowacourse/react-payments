@@ -55,16 +55,16 @@ const CardAddPage = (props) => {
     setIsModalOpened(false);
   };
 
-  const handleExpirationInput = ({ target: { value } }, type) => {
-    const numberReg = /^[0-9]{1,4}$/gi;
+  const handleExpirationInput = ({ target: { value } }, category) => {
+    const valueAsString = String(value);
 
-    if (!numberReg.test(Number(value))) {
+    if (valueAsString.length > 2) {
       return;
     }
 
     setExpiration({
       ...expiration,
-      [type]: value,
+      [category]: valueAsString.replace(/[^0-9]s/g, ''),
     });
   };
 
@@ -136,7 +136,7 @@ const CardAddPage = (props) => {
                 <React.Fragment key={`cardNumber-${currentKey}`}>
                   <Input
                     type={index > 1 ? 'password' : 'text'}
-                    maxLength={4}
+                    length={4}
                     placeholder={'0000'}
                     value={cardNumbers[currentKey]}
                     onChange={(e) => handleCardNumbers(e, currentKey)}
@@ -153,8 +153,9 @@ const CardAddPage = (props) => {
           <>
             <Input
               placeholder={'MM'}
-              type={'text'}
-              maxLength={2}
+              type={'number'}
+              min={1}
+              max={12}
               value={expiration.month}
               onChange={(e) => handleExpirationInput(e, 'month')}
               className={'text-center pl-4'}
@@ -162,8 +163,8 @@ const CardAddPage = (props) => {
             <span className="text-gray-400 ">/</span>
             <Input
               placeholder={'YY'}
-              type={'text'}
-              maxLength={2}
+              type={'number'}
+              min={21}
               value={expiration.year}
               onChange={(e) => handleExpirationInput(e, 'year')}
               className={'text-center pr-4'}
@@ -178,10 +179,11 @@ const CardAddPage = (props) => {
           width={'w-full'}
         >
           <Input
-            maxLength={30}
+            length={30}
             placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
             value={ownerName}
             onChange={handleOwnerName}
+            required={false}
             className={'px-4'}
           />
         </InputContainer>
@@ -190,7 +192,7 @@ const CardAddPage = (props) => {
           <>
             <Input
               type={'password'}
-              maxLength={3}
+              length={3}
               value={securityCode}
               className={'px-4 text-center'}
               onChange={handleSecurityCodeInput}
@@ -205,7 +207,7 @@ const CardAddPage = (props) => {
               className={'mr-1.5 text-center'}
               width={'small'}
               type={'password'}
-              maxLength={1}
+              length={1}
               value={password.first}
               name={'first'}
               onChange={handlePasswordInput}
@@ -214,7 +216,7 @@ const CardAddPage = (props) => {
               className={'mr-1.5 text-center'}
               width={'small'}
               type={'password'}
-              maxLength={1}
+              length={1}
               value={password.second}
               name={'second'}
               onChange={handlePasswordInput}
@@ -223,7 +225,7 @@ const CardAddPage = (props) => {
               className={'mr-1.5 bg-opacity-0 text-center'}
               width={'small'}
               type={'password'}
-              maxLength={1}
+              length={1}
               value={'*'}
               disabled={true}
             />
@@ -231,7 +233,7 @@ const CardAddPage = (props) => {
               className={'mr-1.5 bg-opacity-0 text-center'}
               width={'small'}
               type={'password'}
-              maxLength={1}
+              length={1}
               value={'*'}
               disabled={true}
             />

@@ -5,7 +5,10 @@ const Input = (props) => {
   const {
     type = 'text',
     name = '',
-    maxLength,
+    min,
+    max,
+    length,
+    required = true,
     value,
     placeholder = '',
     onChange,
@@ -17,11 +20,14 @@ const Input = (props) => {
     <input
       type={type}
       name={name}
-      maxLength={maxLength}
+      min={min}
+      max={max}
+      minLength={length}
+      maxLength={length}
       placeholder={placeholder}
       value={value}
       className={`bg-gray-250 text-green-350 h-10 w-full text-left outline-none focus:border border-gray-400 rounded ${className}`}
-      required
+      required={required}
       onChange={onChange}
       disabled={disabled}
     />
@@ -31,12 +37,14 @@ const Input = (props) => {
 export default Input;
 
 Input.propTypes = {
+  min: PropTypes.number,
+  max: PropTypes.number,
   type: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,
   value: PropTypes.string,
   textAlign: PropTypes.string,
-  maxLength: PropTypes.number.isRequired,
+  length: PropTypes.number.isRequired,
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
 };
