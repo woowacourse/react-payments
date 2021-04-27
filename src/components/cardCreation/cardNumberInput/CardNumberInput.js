@@ -22,14 +22,12 @@ const transparentInputStyles = {
     color: COLOR.MINT,
     textAlign: 'center',
     width: '18%',
-    fontSize: '24px',
   },
   3: {
     color: COLOR.MINT,
     paddingRight: '14%',
     textAlign: 'center',
     width: '32%',
-    fontSize: '24px',
   },
 };
 
@@ -76,6 +74,7 @@ const CardNumberInput = memo(
       }
 
       if (target.name === '1' && isInputFilledUp(target.value)) {
+        $input1.current.blur();
         setModalOpen(true);
 
         return;

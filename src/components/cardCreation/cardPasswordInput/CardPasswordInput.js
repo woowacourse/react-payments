@@ -8,7 +8,6 @@ import { CARD_INPUT } from '../../../constants/standard';
 
 const transparentInputStyles = {
   color: COLOR.MINT,
-  fontSize: '24px',
   textAlign: 'center',
 };
 

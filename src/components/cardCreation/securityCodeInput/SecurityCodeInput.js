@@ -8,7 +8,6 @@ import Styled from './SecurityCodeInput.style';
 
 const transparentInputStyles = {
   color: COLOR.MINT,
-  fontSize: '24px',
   textAlign: 'center',
 };
 
