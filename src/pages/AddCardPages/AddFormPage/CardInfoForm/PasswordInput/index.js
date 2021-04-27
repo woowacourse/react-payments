@@ -11,6 +11,8 @@ export const PasswordInput = () => {
             container={`CardInfoForm__Input__Filler--${style} CardPasswordInput__Filler`}
             className="CardPasswordInput__Field"
             type="password"
+            value={style === 'transparent' ? '1' : ''}
+            disabled={style === 'transparent'}
           />
         ))}
       </div>

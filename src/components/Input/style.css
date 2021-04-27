@@ -13,7 +13,7 @@
   -webkit-appearance: none;
   margin: 0;
 }
-.Input[type='number'][type='number'] {
+.Input[type='number'] {
   -moz-appearance: textfield;
 }
 
@@ -41,7 +41,7 @@
 
 .CardNumberInput__Field {
   width: 2.8125rem;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.2rem;
 }
 
 /* 만료일 */
@@ -51,7 +51,8 @@
 }
 
 .ExpirationDateInput__Field {
-  width: 2.4rem;
+  width: 1.9rem;
+  letter-spacing: 0.2rem;
 }
 
 /* 카드 소유자 */
@@ -71,7 +72,7 @@
 }
 
 .SecurityCodeInput__Field {
-  width: 2.8rem;
+  width: 2rem;
   letter-spacing: 0.3rem;
 }
 

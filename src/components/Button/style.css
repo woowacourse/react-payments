@@ -1,6 +1,7 @@
 .Button {
   margin: 0.25rem;
   border: none;
+  cursor: pointer;
 }
 
 .Button--submit {
