@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Styled = {
   Dimmer: styled.div(({ styles }) => ({
-    position: 'fixed',
+    position: 'absolute',
     top: '0px',
     left: '0px',
     right: '0px',
