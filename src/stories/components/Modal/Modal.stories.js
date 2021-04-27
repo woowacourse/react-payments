@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from '.';
 
-//TODO: modal event, stories에서 Action 넣기
 export default {
   title: 'Modal',
   component: Modal,
