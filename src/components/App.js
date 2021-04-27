@@ -6,10 +6,10 @@ import CompleteCardAddition from "./CompleteCardAddition";
 import Home from "./Home";
 
 function App() {
-  //TODO: name의 네이밍이 애매함, 없는 경우도 있기 때문에
   const [page, setPage] = useState({
     id: PAGE.HOME.ID,
-    name: PAGE.HOME.NAME,
+    headerText: PAGE.HOME.HEADER_TEXT,
+    onPageBack: null,
   });
   const [cardList, setCardList] = useState([]);
   const [processingCard, setProcessingCard] = useState({});
@@ -18,17 +18,20 @@ function App() {
     [PAGE.HOME.ID]: () =>
       setPage({
         id: PAGE.HOME.ID,
-        name: PAGE.HOME.NAME,
+        headerText: PAGE.HOME.HEADER_TEXT,
+        onPageBack: null,
       }),
     [PAGE.CARD_ADDITION.ID]: () =>
       setPage({
         id: PAGE.CARD_ADDITION.ID,
-        name: PAGE.CARD_ADDITION.NAME,
+        headerText: PAGE.CARD_ADDITION.HEADER_TEXT,
+        onPageBack: routeTo[PAGE.HOME.ID],
       }),
     [PAGE.COMPLETE_CARD_ADDITION.ID]: () =>
       setPage({
         id: PAGE.COMPLETE_CARD_ADDITION.ID,
-        name: PAGE.COMPLETE_CARD_ADDITION.NAME,
+        headerText: PAGE.COMPLETE_CARD_ADDITION.HEADER_TEXT,
+        onPageBack: null,
       }),
   };
 
@@ -57,7 +60,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header title={page.name} onPageBack={routeTo[PAGE.HOME.ID]} />
+      <Header title={page.headerText} onPageBack={page.onPageBack} />
       <main>{mainComponent[page.id]}</main>
     </div>
   );
