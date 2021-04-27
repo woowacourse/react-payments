@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import { COLOR } from '../../../constants/color';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import { QuestionDescription } from '../../commons/questionDescription/QuestionDescription';
@@ -17,9 +17,12 @@ const isValidInput = securityCode => {
 };
 
 const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurityCode, setValidSecurityCode }) => {
-  useEffect(() => {
-    setValidSecurityCode(isValidInput(securityCode));
-  }, [setValidSecurityCode, securityCode]);
+  const handleInputChange = ({ target }) => {
+    if (target.value.length > FULL_INPUT_LENGTH) return;
+
+    setSecurityCode(target.value);
+    setValidSecurityCode(isValidInput(target.value));
+  };
 
   return (
     <div>
@@ -31,7 +34,7 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
             minLength={FULL_INPUT_LENGTH}
             maxLength={FULL_INPUT_LENGTH}
             value={securityCode}
-            onChange={({ target }) => setSecurityCode(target.value)}
+            onChange={handleInputChange}
             styles={transparentInputStyles}
           />
         </Styled.InputContainer>

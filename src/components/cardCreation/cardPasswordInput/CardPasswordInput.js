@@ -27,6 +27,8 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
   }, [setValidCardPassword, cardPassword]);
 
   const handleInputChange = ({ target }) => {
+    if (target.value.length > FULL_INPUT_LENGTH) return;
+
     setCardPassword(prevState => ({ ...prevState, [target.name]: target.value }));
 
     if (target.name === FIRST && target.value.length === FULL_INPUT_LENGTH) {

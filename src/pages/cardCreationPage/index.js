@@ -24,12 +24,10 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
 
   const [isValidCardNumber, setValidCardNumber] = useState(false);
   const [isValidCardExpiredDate, setValidCardExpiredDate] = useState(false);
-  const [isValidCardOwner, setValidCardOwner] = useState(false);
   const [isValidSecurityCode, setValidSecurityCode] = useState(false);
   const [isValidCardPassword, setValidCardPassword] = useState(false);
 
-  const isValidAllInput =
-    isValidCardNumber && isValidCardExpiredDate && isValidCardOwner && isValidSecurityCode && isValidCardPassword;
+  const isValidAllInput = isValidCardNumber && isValidCardExpiredDate && isValidSecurityCode && isValidCardPassword;
 
   const handleNewCardSubmit = e => {
     e.preventDefault();
@@ -74,7 +72,6 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
           <CardOwnerInput //
             cardOwner={cardOwner}
             setCardOwner={setCardOwner}
-            setValidCardOwner={setValidCardOwner}
           />
           <SecurityCodeInput
             securityCode={securityCode}
