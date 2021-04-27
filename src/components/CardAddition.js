@@ -9,6 +9,7 @@ import Button from "../stories/Button";
 
 import useCardNumbers from "../hooks/useCardNumbers";
 import { isNumberValue } from "../utils";
+import useExpirationDate from "../hooks/useExpirationDate";
 
 const formatCardNumbers = (numbers) => {
   const hiddenNumbers = numbers
@@ -26,15 +27,11 @@ const formatExpirationDate = (expirationDate) => {
     .join("/");
 };
 
-const unformatExpirationDate = (formattedValue) => {
-  return formattedValue.replace("/", "");
-};
-
 const CardAddition = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
   const [cardNumbers, selectionStart, onCardNumbersChange] = useCardNumbers([]);
-  const [expirationDate, setExpirationDate] = useState({
+  const [expirationDate, onExpirationDateChange] = useExpirationDate({
     month: "",
     year: "",
   });
@@ -106,25 +103,6 @@ const CardAddition = (props) => {
   const onRadioChange = ({ target }) => {
     setCardType(JSON.parse(target.value));
     setIsModalOpen(false);
-  };
-
-  const onExpirationDateChange = ({ target }) => {
-    //숫자가 아니면 제외한다.
-    //TODO: month의 validation을 할것인가
-    const unformattedValue = unformatExpirationDate(target.value);
-
-    //TODO: nonNumber를 긍정으로 바꾸기
-    if (!isNumberValue(unformattedValue)) {
-      return;
-    }
-
-    const month = unformattedValue.slice(0, 2);
-    const year = unformattedValue.slice(2);
-
-    setExpirationDate({
-      month,
-      year,
-    });
   };
 
   const onUsernameChange = (event) => {
