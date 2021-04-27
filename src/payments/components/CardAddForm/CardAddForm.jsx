@@ -21,16 +21,16 @@ const CardAddForm = props => {
   const [backgroundColor, setBackgroundColor] = useState(null);
   const [bank, setBank] = useState(null);
   const [numberInfos, setNumberInfos] = useState(initialNumberInfos);
-  const [isNumberInfosValid, setNumberInfosValid] = useState(true);
+  const [isNumberInfosValid, setNumberInfosValid] = useState(null);
   const [expirationDate, setExpirationDate] = useState("");
-  const [isExpirationDateValid, setExpirationDateValid] = useState(true);
+  const [isExpirationDateValid, setExpirationDateValid] = useState(null);
   const [ownerName, setOwnerName] = useState("");
   const [isOwnerNameValid, setOwnerNameValid] = useState(true);
   const [securityCode, setSecurityCode] = useState("");
-  const [isSecurityCodeValid, setSecurityCodeValid] = useState(true);
+  const [isSecurityCodeValid, setSecurityCodeValid] = useState(null);
   const [isToolTipVisible, setToolTipVisible] = useState(false);
   const [passwords, setPasswords] = useState(Array(2).fill(null));
-  const [isPasswordValid, setPasswordValid] = useState(true);
+  const [isPasswordValid, setPasswordValid] = useState(null);
 
   const handleCardClick = () => {
     setBankSelectorVisible(!isBankSelectorVisible);
@@ -232,7 +232,7 @@ const CardAddForm = props => {
             <div
               className={classNames(
                 "bg-custom-gray-100 rounded-md flex justify-around items-center text-custom-mint text-lg font-medium",
-                !isNumberInfosValid && "ring-2 ring-rose-400"
+                !(isNumberInfosValid ?? true) && "ring-2 ring-rose-400"
               )}
             >
               {numberInfos.map(({ id, type, value }, index) => (
@@ -271,7 +271,7 @@ const CardAddForm = props => {
               minLength="5"
               maxLength="5"
               value={expirationDate}
-              isValid={isExpirationDateValid}
+              isValid={isExpirationDateValid ?? true}
               onChange={handleExpirationDateChange}
               required
             />
@@ -311,7 +311,7 @@ const CardAddForm = props => {
                 maxLength="4"
                 value={securityCode}
                 onChange={handleSecurityCodeChange}
-                isValid={isSecurityCodeValid}
+                isValid={isSecurityCodeValid ?? true}
                 required
               />
               <svg
@@ -350,7 +350,7 @@ const CardAddForm = props => {
                 maxLength="1"
                 name="0"
                 value={passwords[0] || ""}
-                isValid={isPasswordValid}
+                isValid={isPasswordValid ?? true}
                 onChange={handlePasswordChange}
               />
               <label className="sr-only" htmlFor="card-password-input-2"></label>
@@ -361,7 +361,7 @@ const CardAddForm = props => {
                 maxLength="1"
                 name="1"
                 value={passwords[1] || ""}
-                isValid={isPasswordValid}
+                isValid={isPasswordValid ?? true}
                 onChange={handlePasswordChange}
               />
               <div className="w-10 flex justify-center">
@@ -379,7 +379,30 @@ const CardAddForm = props => {
         </div>
       </form>
       <div className="flex justify-end items-center w-full h-10">
-        <Button name="다음" />
+        {[
+          bank,
+          backgroundColor,
+          isNumberInfosValid,
+          isExpirationDateValid,
+          isOwnerNameValid,
+          isSecurityCodeValid,
+          isPasswordValid,
+        ].every(Boolean) && (
+          <Button
+            name="다음"
+            onClick={() => {
+              props.addCardInfo({
+                bank,
+                backgroundColor,
+                numberInfos,
+                expirationDate,
+                ownerName,
+                securityCode,
+                passwords,
+              });
+            }}
+          />
+        )}
       </div>
 
       {isBankSelectorVisible && (

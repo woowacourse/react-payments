@@ -6,12 +6,18 @@ const CARD_ADD_FORM = "cardAddForm";
 const CARD_CONFIRM = "cardConfirm";
 
 const Payments = () => {
-  const [currentPage] = useState(CARD_ADD_FORM);
+  const [currentPage, setCurrentPage] = useState(CARD_ADD_FORM);
+  const [newCardInfo, setNewCardInfo] = useState(null);
+
+  const addCardInfo = newCardInfo => {
+    setNewCardInfo(newCardInfo);
+    setCurrentPage(CARD_CONFIRM);
+  };
 
   return (
     <>
-      {currentPage === CARD_ADD_FORM && <CardAddForm />}
-      {currentPage === CARD_CONFIRM && <CardConfirm />}
+      {currentPage === CARD_ADD_FORM && <CardAddForm addCardInfo={addCardInfo} />}
+      {currentPage === CARD_CONFIRM && <CardConfirm cardInfo={newCardInfo} />}
     </>
   );
 };
