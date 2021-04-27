@@ -1,7 +1,11 @@
 import React from "react";
-import { getId } from "../../../@shared/utils";
-import { formatOwnerName } from "../../utils";
+import { LENGTH } from "../../utils";
 import CardShape from "./CardShape";
+
+const formatOwnerName = name =>
+  name.length <= LENGTH.DISPLAYED_OWNER_NAME_MAX ? name : name.slice(0, LENGTH.DISPLAYED_OWNER_NAME_MAX) + "...";
+
+const formatNumber = (type, value) => (type === "password" ? "*".repeat(value.length) : value);
 
 const CardInfo = props => (
   <>
@@ -9,8 +13,8 @@ const CardInfo = props => (
     <div className="w-10 h-6.5 bg-custom-gold rounded mb-2"></div>
     <div className="flex flex-col text-custom-gray-300 items-center">
       <div className="flex space-x-2.5 text-sm h-5">
-        {props.numbers?.map(number => (
-          <span key={getId()}>{number}</span>
+        {props.numberInfos?.map(({ id, type, value }) => (
+          <span key={id}>{formatNumber(type, value)}</span>
         ))}
       </div>
       <div className="text-sm w-11/12 flex justify-between">
@@ -22,9 +26,9 @@ const CardInfo = props => (
 );
 
 const Card = props => {
-  const { backgroundColor, scale, isRegistered, bank, numbers, ownerName, expirationDate, onClick } = props;
+  const { backgroundColor, scale, isRegistered, bank, numberInfos, ownerName, expirationDate, onClick } = props;
   const cardShapeProps = { backgroundColor, scale, isRegistered, onClick };
-  const cardInfoProps = { bank, numbers, ownerName, expirationDate };
+  const cardInfoProps = { bank, numberInfos, ownerName, expirationDate };
 
   return (
     <CardShape {...cardShapeProps}>

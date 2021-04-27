@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classNames from "classnames";
-import { ERROR_TYPE, throwError } from "../../../@shared/utils";
+import { ERROR_TYPE, getId, throwError } from "../../../@shared/utils";
 import Card from "../Card/Card";
 import Input from "../Input/Input";
 import InputTitle from "../InputTitle/InputTitle";
@@ -9,11 +9,19 @@ import Header from "../Header/Header";
 import BankSelector from "../BankSelector/BankSelector";
 import Dimmer from "../Dimmer/Dimmer";
 
+const initialNumberInfos = [
+  { id: getId(), type: "text", value: "", minLength: "4", maxLength: "4" },
+  { id: getId(), type: "text", value: "", minLength: "4", maxLength: "4" },
+  { id: getId(), type: "password", value: "", minLength: "4", maxLength: "4" },
+  { id: getId(), type: "password", value: "", minLength: "3", maxLength: "4" },
+];
+
 const CardAddForm = props => {
   const [isBankSelectorVisible, setBankSelectorVisible] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState(null);
   const [bank, setBank] = useState(null);
-  const [numbers] = useState([]);
+  const [numberInfos, setNumberInfos] = useState(initialNumberInfos);
+  const [isNumberInfosValid, setNumberInfosValid] = useState(true);
   const [expirationDate, setExpirationDate] = useState("");
   const [isExpirationDateValid, setExpirationDateValid] = useState(true);
   const [ownerName, setOwnerName] = useState("");
@@ -32,6 +40,43 @@ const CardAddForm = props => {
     setBankSelectorVisible(false);
     setBackgroundColor(backgroundColor);
     setBank(bank);
+  };
+
+  const handleNumberInfoChange = event => {
+    try {
+      const { value, name } = event.target;
+      const replacedValue = value.replace(/[\D]/g, "");
+      const targetIndex = Number(name);
+      const newNumberInfos = numberInfos.map((numberInput, index) =>
+        index === targetIndex ? { ...numberInput, value: replacedValue } : numberInput
+      );
+
+      setNumberInfos(newNumberInfos);
+      validateNumberInfos(newNumberInfos);
+      setNumberInfosValid(true);
+    } catch (error) {
+      if (error.type === ERROR_TYPE.VALIDATION) {
+        setNumberInfosValid(false);
+
+        return;
+      }
+
+      console.error(error.message);
+    }
+  };
+
+  const validateNumberInfos = numberInfos => {
+    if (!Array.isArray(numberInfos)) {
+      throw new TypeError("numberInfos should be an array");
+    }
+
+    const isValid = numberInfos.every(({ value, minLength, maxLength }) => {
+      return new RegExp(`^[\\d]{${minLength},${maxLength}}$`).test(value);
+    });
+
+    if (!isValid) {
+      throwError("Invalid numberInfos", ERROR_TYPE.VALIDATION);
+    }
   };
 
   const handleExpirationDateChange = event => {
@@ -136,7 +181,7 @@ const CardAddForm = props => {
       const { value } = event.target;
       const targetIndex = Number(event.target.name);
       const replacedValue = value.replace(/[\D]/g, "");
-      const newPasswords = passwords.map((number, index) => (index === targetIndex ? replacedValue : number));
+      const newPasswords = passwords.map((password, index) => (index === targetIndex ? replacedValue : password));
 
       setPasswords(newPasswords);
       validatePasswords(newPasswords);
@@ -173,7 +218,7 @@ const CardAddForm = props => {
             <Card
               backgroundColor={backgroundColor}
               bank={bank}
-              numbers={numbers}
+              numberInfos={numberInfos}
               expirationDate={expirationDate}
               ownerName={ownerName}
               isRegistered={false}
@@ -184,18 +229,32 @@ const CardAddForm = props => {
             <div className="mb-2 h-6">
               <InputTitle innerText="카드 번호" />
             </div>
-            <label className="sr-only" htmlFor="card-number-input">
-              카드 번호 입력란
-            </label>
-            <Input
-              id="card-number-input"
-              type="text"
-              className="w-full"
-              minLength="18"
-              maxLength="19"
-              value={numbers}
-              required
-            />
+            <div
+              className={classNames(
+                "bg-custom-gray-100 rounded-md flex justify-around items-center text-custom-mint text-lg font-medium",
+                !isNumberInfosValid && "ring-2 ring-rose-400"
+              )}
+            >
+              {numberInfos.map(({ id, type, value }, index) => (
+                <React.Fragment key={id}>
+                  {index > 0 && "-"}
+                  <label className="sr-only" htmlFor={`card-number-input-${index}`}>
+                    {`카드 번호 입력란 ${index}`}
+                  </label>
+                  <Input
+                    id={`card-number-input-${index}`}
+                    type={type}
+                    className="w-1/5 outline-none"
+                    name={index}
+                    minLength="4"
+                    maxLength="4"
+                    value={value}
+                    onChange={handleNumberInfoChange}
+                    required
+                  />
+                </React.Fragment>
+              ))}
+            </div>
           </div>
           <div className="flex flex-col w-full mb-2">
             <div className="mb-2 h-6">

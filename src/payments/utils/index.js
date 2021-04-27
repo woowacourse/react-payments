@@ -1,1 +1,1 @@
-export { default as formatOwnerName } from "./formatOwnerName";
+export { LENGTH } from "./constants";
