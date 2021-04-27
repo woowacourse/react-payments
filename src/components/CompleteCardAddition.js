@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-
 import Card from "../stories/Card";
 import Button from "../stories/Button";
 import { CARD_SIZE } from "../stories/constants/card";
@@ -51,6 +50,7 @@ function CompleteCardAddition(props) {
 }
 
 CompleteCardAddition.propTypes = {
+  onCardAdditionComplete: PropTypes.func.isRequired,
   card: PropTypes.shape({
     cardType: PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -64,7 +64,7 @@ CompleteCardAddition.propTypes = {
     username: PropTypes.string.isRequired,
     secureCode: PropTypes.string.isRequired,
     password: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }),
+  }).isRequired,
 };
 
 export default CompleteCardAddition;

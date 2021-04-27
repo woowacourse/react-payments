@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import "./style.css";
 import "../style/background.css";
 
-const CardTypeRadio = ({ cardType, groupName, isChecked, onChange }) => {
+const CardTypeRadio = ({
+  cardType,
+  groupName,
+  isChecked = false,
+  onChange,
+}) => {
   return (
     <label className="card-type-radio">
       <input
@@ -21,4 +26,12 @@ const CardTypeRadio = ({ cardType, groupName, isChecked, onChange }) => {
 
 export default CardTypeRadio;
 
-CardTypeRadio.propTypes = {};
+CardTypeRadio.propTypes = {
+  cardType: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+  }).isRequired,
+  groupName: PropTypes.string.isRequired,
+  isChecked: PropTypes.bool,
+  onChange: PropTypes.func.isRequired,
+};

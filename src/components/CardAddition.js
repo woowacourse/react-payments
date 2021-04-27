@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import PropTypes from "prop-types";
 import Card from "../stories/Card";
 import { CARD, CARD_SIZE } from "../stories/constants/card";
 import Input from "../stories/Input";
 import Modal from "../stories/Modal";
 import CardTypeRadio from "../stories/CardTypeRadio";
 import Button from "../stories/Button";
-
 import useCardNumbers from "../hooks/useCardNumbers";
 import useExpirationDate from "../hooks/useExpirationDate";
 import useSecureCode from "../hooks/useSecureCode";
@@ -20,8 +19,6 @@ const formatCardNumbers = (numbers) => {
 
   return [...numbers.slice(0, 2), ...hiddenNumbers].join(" - ");
 };
-
-// expiration Date
 
 const formatExpirationDate = (expirationDate) => {
   return Object.values(expirationDate)
@@ -40,7 +37,7 @@ const CardAddition = (props) => {
   const [username, onUsernameChange] = useControlledInputValue("");
   const [secureCode, onSecureCodeChange] = useSecureCode("");
   const [password, onPasswordChange] = usePassword(["", ""]);
-  const [inputVerification, setinputVerification] = useState({
+  const [inputVerification, setInputVerification] = useState({
     cardNumbers: false,
     expirationDate: false,
     username: false,
@@ -64,7 +61,7 @@ const CardAddition = (props) => {
   }, [cardNumbers]);
 
   useEffect(() => {
-    setinputVerification({
+    setInputVerification({
       cardNumbers: cardNumbers[3]?.length === 4,
       expirationDate: (expirationDate.month + expirationDate.year).length === 4,
       username: username.length >= 2,
@@ -233,6 +230,10 @@ const CardAddition = (props) => {
       )}
     </>
   );
+};
+
+CardAddition.propTypes = {
+  onCardInfoSubmit: PropTypes.func.isRequired,
 };
 
 export default CardAddition;

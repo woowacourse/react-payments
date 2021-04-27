@@ -56,7 +56,7 @@ Card.propTypes = {
   cardType: PropTypes.shape({
     name: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
   cardNumbers: PropTypes.arrayOf(PropTypes.string),
   username: PropTypes.string,
   expirationDate: PropTypes.string,

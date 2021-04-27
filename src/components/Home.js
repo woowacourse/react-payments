@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { PAGE } from "../constants";
 
 function Home(props) {
@@ -20,5 +21,25 @@ function Home(props) {
     </>
   );
 }
+
+Home.propTypes = {
+  routeTo: PropTypes.objectOf(PropTypes.func).isRequired,
+  cardList: PropTypes.arrayOf(
+    PropTypes.shape({
+      cardType: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        color: PropTypes.string.isRequired,
+      }),
+      cardNumbers: PropTypes.arrayOf(PropTypes.string).isRequired,
+      expirationDate: PropTypes.shape({
+        month: PropTypes.string.isRequired,
+        year: PropTypes.string.isRequired,
+      }),
+      username: PropTypes.string.isRequired,
+      secureCode: PropTypes.string.isRequired,
+      password: PropTypes.arrayOf(PropTypes.string).isRequired,
+    }).isRequired
+  ),
+};
 
 export default Home;
