@@ -7,7 +7,7 @@ export const CreditCard = ({ size, backgroundColor, content }) => {
   const maskNumbers = numbers => {
     if (!numbers) return;
 
-    return [...Array(numbers.length)].map(() => '⦁');
+    return [...Array(numbers.length)].map(() => '•');
   };
 
   return (

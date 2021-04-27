@@ -87,6 +87,7 @@ const Styled = {
     position: 'absolute',
     left: '50%',
     transform: 'translateX(-50%)',
+    textAlign: 'center',
     fontWeight: 700,
     ...CARD_NUMBER[size],
   })),
