@@ -179,6 +179,7 @@ const CardAddPage = (props) => {
           width={'w-full'}
         >
           <Input
+            minLength={0}
             length={30}
             placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
             value={ownerName}

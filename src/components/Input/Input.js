@@ -7,6 +7,7 @@ const Input = (props) => {
     name = '',
     min,
     max,
+    minLength,
     length,
     required = true,
     value,
@@ -22,7 +23,7 @@ const Input = (props) => {
       name={name}
       min={min}
       max={max}
-      minLength={length}
+      minLength={minLength ?? length}
       maxLength={length}
       placeholder={placeholder}
       value={value}
