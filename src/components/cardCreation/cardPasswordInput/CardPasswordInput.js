@@ -4,6 +4,7 @@ import { COLOR } from '../../../constants/color';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardPasswordInput.style';
 import { Circle } from '../../commons/circle/Circle';
+import { CARD_INPUT } from '../../../constants/standard';
 
 const transparentInputStyles = {
   color: COLOR.MINT,
@@ -12,7 +13,9 @@ const transparentInputStyles = {
 };
 
 const isValidInput = cardPassword => {
-  return Object.values(cardPassword).every(cardPassword => cardPassword.length === 1 && !isNaN(cardPassword));
+  return Object.values(cardPassword).every(
+    cardPassword => cardPassword.length === CARD_INPUT.PASSWORD_UNIT_LENGTH && !isNaN(cardPassword)
+  );
 };
 
 const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
@@ -25,7 +28,7 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
   const handleInputChange = ({ target }) => {
     setCardPassword(prevState => ({ ...prevState, [target.name]: target.value }));
 
-    if (target.name === '0' && target.value.length === 1) {
+    if (target.name === '0' && target.value.length === CARD_INPUT.PASSWORD_UNIT_LENGTH) {
       $input1.current.focus();
     }
   };
@@ -37,8 +40,8 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
         <Styled.InputContainer isValidInput={isValidCardPassword}>
           <TransparentInput
             name="0"
-            minLength="1"
-            maxLength="1"
+            minLength={CARD_INPUT.PASSWORD_UNIT_LENGTH}
+            maxLength={CARD_INPUT.PASSWORD_UNIT_LENGTH}
             type="password"
             value={cardPassword['0']}
             onChange={handleInputChange}
@@ -48,8 +51,8 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
         <Styled.InputContainer isValidInput={isValidCardPassword}>
           <TransparentInput
             name="1"
-            minLength="1"
-            maxLength="1"
+            minLength={CARD_INPUT.PASSWORD_UNIT_LENGTH}
+            maxLength={CARD_INPUT.PASSWORD_UNIT_LENGTH}
             type="password"
             innerRef={$input1}
             value={cardPassword['1']}

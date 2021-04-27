@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { memo, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
+import { CARD_INPUT } from '../../../constants/standard';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import { QuestionDescription } from '../../commons/questionDescription/QuestionDescription';
 import Styled from './SecurityCodeInput.style';
@@ -12,7 +13,7 @@ const transparentInputStyles = {
 };
 
 const isValidInput = securityCode => {
-  return securityCode.length === 3 && !isNaN(securityCode);
+  return securityCode.length === CARD_INPUT.SECURITY_CODE_LENGTH && !isNaN(securityCode);
 };
 
 const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurityCode, setValidSecurityCode }) => {
@@ -27,8 +28,8 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
         <Styled.InputContainer isValidInput={isValidSecurityCode}>
           <TransparentInput
             type="password"
-            minLength="3"
-            maxLength="3"
+            minLength={CARD_INPUT.SECURITY_CODE_LENGTH}
+            maxLength={CARD_INPUT.SECURITY_CODE_LENGTH}
             value={securityCode}
             onChange={({ target }) => setSecurityCode(target.value)}
             styles={transparentInputStyles}

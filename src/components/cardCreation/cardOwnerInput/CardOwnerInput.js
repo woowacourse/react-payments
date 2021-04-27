@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { memo, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
+import { CARD_INPUT } from '../../../constants/standard';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardOwnerInput.style';
 
 const isValidInput = carOwner => {
-  return carOwner.length <= 30;
+  return carOwner.length <= CARD_INPUT.OWNER_MAX_LENGTH;
 };
 
 const CardOwnerInput = memo(({ cardOwner, setCardOwner, setValidCardOwner }) => {
@@ -22,6 +23,7 @@ const CardOwnerInput = memo(({ cardOwner, setCardOwner, setValidCardOwner }) => 
       <Styled.InputContainer>
         <TransparentInput
           value={cardOwner}
+          maxLength={CARD_INPUT.OWNER_MAX_LENGTH}
           onChange={({ target }) => setCardOwner(target.value)}
           styles={{ color: COLOR.MINT }}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."

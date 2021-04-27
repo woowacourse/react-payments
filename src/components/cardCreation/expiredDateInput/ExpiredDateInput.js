@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { memo, useRef, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
+import { CARD_INPUT } from '../../../constants/standard';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './ExpiredDateInput.style';
 
@@ -13,13 +14,13 @@ const transparentInputStyles = {
 const isValidMonthInput = cardExpiredDate => {
   const month = Number(cardExpiredDate.month);
 
-  return 1 <= month && month <= 12 && cardExpiredDate.month.length === 2 && !isNaN(month);
+  return 1 <= month && month <= 12 && cardExpiredDate.month.length === CARD_INPUT.MONTH_LENGTH && !isNaN(month);
 };
 
 const isValidYearInput = cardExpiredDate => {
   const year = Number(cardExpiredDate.year);
 
-  return 0 <= year && cardExpiredDate.year.length === 2 && !isNaN(year);
+  return 0 <= year && cardExpiredDate.year.length === CARD_INPUT.YEAR_LENGTH && !isNaN(year);
 };
 
 const ExpiredDateInput = memo(
@@ -32,11 +33,11 @@ const ExpiredDateInput = memo(
     }, [setValidCardExpiredDate, cardExpiredDate]);
 
     const handleInputChange = ({ target }) => {
-      if (target.value.length > 2) return;
+      if (target.value.length > CARD_INPUT.MONTH_LENGTH) return;
 
       setCardExpiredDate(prevState => ({ ...prevState, [target.name]: target.value }));
 
-      if (target.name === 'month' && target.value.length === 2) {
+      if (target.name === 'month' && target.value.length === CARD_INPUT.MONTH_LENGTH) {
         $yearInput.current.disabled = false;
         $yearInput.current.focus();
       }

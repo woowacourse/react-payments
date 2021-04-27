@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { memo, useRef, useEffect, useState } from 'react';
 import { COLOR } from '../../../constants/color';
+import { CARD_INPUT } from '../../../constants/standard';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import CardSelectionModal from '../cardSelectionModal/CardSelectionModal';
 import Styled from './CardNumberInput.style';
@@ -32,8 +33,12 @@ const transparentInputStyles = {
   },
 };
 
+const isInputFilledUp = input => {
+  return input.length === CARD_INPUT.NUMBER_UNIT_LENGTH;
+};
+
 const isValidCardNumberInput = cardNumber => {
-  return Object.values(cardNumber).every(cardNumber => cardNumber.length === 4 && !isNaN(cardNumber));
+  return Object.values(cardNumber).every(cardNumber => isInputFilledUp(cardNumber) && !isNaN(cardNumber));
 };
 
 const CardNumberInput = memo(
@@ -44,46 +49,46 @@ const CardNumberInput = memo(
     const $input2 = useRef(null);
     const $input3 = useRef(null);
 
-    const isSelectedCardInfo = !!selectedCardInfo.id;
+    const hasSelectedCardInfo = !!selectedCardInfo.id;
 
     useEffect(() => {
-      const isValidInput = isValidCardNumberInput(cardNumber) && isSelectedCardInfo;
+      const isValidInput = isValidCardNumberInput(cardNumber) && hasSelectedCardInfo;
       setValidCardNumber(isValidInput);
-    }, [setValidCardNumber, cardNumber, isSelectedCardInfo]);
+    }, [setValidCardNumber, cardNumber, hasSelectedCardInfo]);
 
     useEffect(() => {
-      if (isSelectedCardInfo) {
+      if (hasSelectedCardInfo) {
         $input2.current.disabled = false;
         $input2.current.focus();
       }
-    }, [isSelectedCardInfo]);
+    }, [hasSelectedCardInfo]);
 
     const handleInputChange = ({ target }) => {
-      if (target.value.length > 4) return;
+      if (target.value.length > CARD_INPUT.NUMBER_UNIT_LENGTH) return;
 
       setCardNumber(prevState => ({ ...prevState, [target.name]: target.value }));
 
-      if (target.name === '0' && target.value.length === 4) {
+      if (target.name === '0' && isInputFilledUp(target.value)) {
         $input1.current.disabled = false;
         $input1.current.focus();
 
         return;
       }
 
-      if (target.name === '1' && target.value.length === 4) {
+      if (target.name === '1' && isInputFilledUp(target.value)) {
         setModalOpen(true);
 
         return;
       }
 
-      if (target.name === '2' && target.value.length === 4) {
+      if (target.name === '2' && isInputFilledUp(target.value)) {
         $input3.current.disabled = false;
         $input3.current.focus();
       }
     };
 
     const handleInputClick = () => {
-      if (cardNumber['0'].length === 4 && cardNumber['1'].length === 4 && !isSelectedCardInfo) {
+      if (isInputFilledUp(cardNumber['0']) && isInputFilledUp(cardNumber['1']) && !hasSelectedCardInfo) {
         setModalOpen(true);
       }
     };
@@ -103,7 +108,7 @@ const CardNumberInput = memo(
               styles={transparentInputStyles['0']}
               autoFocus
             />
-            {cardNumber['0'].length === 4 && <Styled.Dash>-</Styled.Dash>}
+            {isInputFilledUp(cardNumber['0']) && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
               name="1"
               type="number"
@@ -115,24 +120,24 @@ const CardNumberInput = memo(
               styles={transparentInputStyles['1']}
               disabled
             />
-            {cardNumber['1'].length === 4 && <Styled.Dash>-</Styled.Dash>}
+            {isInputFilledUp(cardNumber['1']) && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
               name="2"
               type="password"
-              minLength="4"
-              maxLength="4"
+              minLength={CARD_INPUT.NUMBER_UNIT_LENGTH}
+              maxLength={CARD_INPUT.NUMBER_UNIT_LENGTH}
               value={cardNumber['2']}
               onChange={handleInputChange}
               innerRef={$input2}
               styles={transparentInputStyles['2']}
               disabled
             />
-            {cardNumber['2'].length === 4 && <Styled.Dash>-</Styled.Dash>}
+            {isInputFilledUp(cardNumber['2']) && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
               name="3"
               type="password"
-              minLength="4"
-              maxLength="4"
+              minLength={CARD_INPUT.NUMBER_UNIT_LENGTH}
+              maxLength={CARD_INPUT.NUMBER_UNIT_LENGTH}
               value={cardNumber['3']}
               onChange={handleInputChange}
               innerRef={$input3}

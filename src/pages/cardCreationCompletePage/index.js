@@ -20,13 +20,14 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo 
   const handleNewCardSubmit = e => {
     e.preventDefault();
 
+    alert('카드를 추가하였습니다.');
     setNewCardInfo(prevState => ({ ...prevState, cardNickName }));
     setCurrentPage(PAGE.CARD_LIST);
   };
 
   return (
     <>
-      <Styled.Title>카드등록이 완료되었습니다.</Styled.Title>
+      <Styled.Title>카드 등록이 완료되었습니다.</Styled.Title>
       <CreditCard
         size={CARD_SIZE.LG}
         backgroundColor={selectedCardInfo.color}
@@ -40,9 +41,11 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo 
       <form onSubmit={handleNewCardSubmit}>
         <Styled.InputContainer>
           <TransparentInput
+            placeholder="카드 이름을 입력해주세요."
             value={cardNickName}
             onChange={e => setCardNickName(e.target.value)}
             styles={transparentInputStyles}
+            autoFocus
           />
         </Styled.InputContainer>
         {cardNickName && (
