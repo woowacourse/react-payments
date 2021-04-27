@@ -12,7 +12,7 @@ const Card = ({
   expirationDate = "",
   size,
 }) => {
-  const [firstNumber, secondNumber] = cardNumbers;
+  const [firstNumber, secondNumber, thirdNumber, fourthNumber] = cardNumbers;
   const { name: cardName, color } = cardType;
 
   return (
@@ -26,12 +26,12 @@ const Card = ({
             <li>{secondNumber}</li>
 
             <li>
-              {[...Array(cardNumbers[2]?.length || 0)].map((_) => (
+              {[...Array(thirdNumber?.length || 0)].map((_) => (
                 <span className="dot"></span>
               ))}
             </li>
             <li>
-              {[...Array(cardNumbers[3]?.length || 0)].map((_) => (
+              {[...Array(fourthNumber?.length || 0)].map((_) => (
                 <span className="dot"></span>
               ))}
             </li>

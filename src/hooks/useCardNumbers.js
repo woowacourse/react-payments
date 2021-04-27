@@ -1,20 +1,31 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { CARD_NUMBER, FORMAT_CHAR } from "../constants";
 
 import { isNumberValue } from "../utils";
 
 const unformatCardNumbers = (formattedValue) => {
-  return formattedValue.replace(/[\s-]/g, "");
+  return formattedValue.replace(FORMAT_CHAR.CARD_NUMBERS_SEPARATOR_REG, "");
 };
 
 const splitCardNumbers = (value) => {
   const splitNumbers = [];
   let i;
 
-  for (i = 0; i < value.length / 4; i++) {
-    splitNumbers.push(value.slice(i * 4, (i + 1) * 4));
+  for (i = 0; i < value.length / CARD_NUMBER.LENGTH; i++) {
+    splitNumbers.push(
+      value.slice(
+        i * CARD_NUMBER.PARTIAL_LENGTH,
+        (i + 1) * CARD_NUMBER.PARTIAL_LENGTH
+      )
+    );
   }
-  if (value[i * 4] !== undefined) {
-    splitNumbers.push(value.slice(i * 4, (i + 1) * 4));
+  if (value[i * CARD_NUMBER.PARTIAL_LENGTH] !== undefined) {
+    splitNumbers.push(
+      value.slice(
+        i * CARD_NUMBER.PARTIAL_LENGTH,
+        (i + 1) * CARD_NUMBER.PARTIAL_LENGTH
+      )
+    );
   }
 
   return splitNumbers;
@@ -22,20 +33,32 @@ const splitCardNumbers = (value) => {
 
 const useCardNumbers = (initialCardNumbers) => {
   const [cardNumbers, setCardNumbers] = useState(initialCardNumbers);
-  const [selectionStart, setSelectionStart] = useState(0);
+  const cardNumbersInputRef = useRef();
 
   const onCardNumbersChange = (event) => {
     const { value, selectionStart } = event.target;
-    const joinedCardNumbers = cardNumbers.join(" - ");
+    const joinedCardNumbers = cardNumbers.join(
+      FORMAT_CHAR.CARD_NUMBERS_SEPARATOR
+    );
     const diff = value.length - joinedCardNumbers.length;
     let updatedCardNumbers = joinedCardNumbers;
 
-    const mod = selectionStart % 7;
-    if (mod === 0 || mod === 6 || mod === 5) {
-      setSelectionStart(selectionStart + ((8 - mod) % 7));
-    } else {
-      setSelectionStart(selectionStart);
-    }
+    const mod =
+      CARD_NUMBER.PARTIAL_LENGTH + FORMAT_CHAR.CARD_NUMBERS_SEPARATOR.length;
+    const remainder = selectionStart % mod;
+
+    const isSelectionValid = [
+      ...Array(FORMAT_CHAR.CARD_NUMBERS_SEPARATOR.length),
+    ].every((_, index) => remainder !== (mod - index) % mod);
+
+    const fixedSelectionStart = isSelectionValid
+      ? selectionStart
+      : selectionStart + ((mod + 1 - remainder) % mod);
+
+    cardNumbersInputRef?.current?.setSelectionRange(
+      fixedSelectionStart,
+      fixedSelectionStart
+    );
 
     switch (true) {
       case diff > 0:
@@ -72,7 +95,7 @@ const useCardNumbers = (initialCardNumbers) => {
     setCardNumbers(splitNumbers);
   };
 
-  return [cardNumbers, selectionStart, onCardNumbersChange];
+  return [cardNumbers, cardNumbersInputRef, onCardNumbersChange];
 };
 
 export default useCardNumbers;

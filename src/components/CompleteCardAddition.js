@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Card from "../stories/Card";
 import Button from "../stories/Button";
 import { CARD_SIZE } from "../stories/constants/card";
+import { CARD_DESCRIPTION, FORMAT_CHAR } from "../constants";
 
 function CompleteCardAddition(props) {
   const { cardType, cardNumbers, expirationDate, username } = props.card;
@@ -30,7 +31,9 @@ function CompleteCardAddition(props) {
         cardType={cardType}
         cardNumbers={cardNumbers}
         username={username}
-        expirationDate={Object.values(expirationDate).join("/")}
+        expirationDate={Object.values(expirationDate).join(
+          FORMAT_CHAR.EXPIRATION_DATE_SEPARATOR
+        )}
         size={CARD_SIZE.LARGE}
       />
       <form onSubmit={onDescriptionSubmit}>
@@ -38,12 +41,12 @@ function CompleteCardAddition(props) {
           value={cardDescription}
           onChange={onCardDescriptionChange}
           type="text"
-          minLength="1"
-          maxLength="30"
+          minLength={CARD_DESCRIPTION.MIN_LENGTH}
+          maxLength={CARD_DESCRIPTION.MAX_LENGTH}
           placeholder="카드 별명을 입력해주세요"
           required
         />
-        <Button innerText="확인"/>
+        <Button innerText="확인" />
       </form>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { PAGE } from "../constants";
 import Header from "../stories/Header";
 import CardAddition from "./CardAddition";

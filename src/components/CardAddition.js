@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Card from "../stories/Card";
 import { CARD, CARD_SIZE } from "../stories/constants/card";
@@ -11,25 +11,39 @@ import useExpirationDate from "../hooks/useExpirationDate";
 import useSecureCode from "../hooks/useSecureCode";
 import useControlledInputValue from "../hooks/useControlledInputValue";
 import usePassword from "../hooks/usePassword";
+import {
+  CARD_NUMBER,
+  EXPIRATION_DATE,
+  FORMAT_CHAR,
+  SECURE_CODE_LENGTH,
+  USERNAME,
+} from "../constants";
 
 const formatCardNumbers = (numbers) => {
-  const hiddenNumbers = numbers
-    .slice(2)
-    .map((value) => "•".repeat(value.length));
+  const [firstValue, secondValue, ...restValues] = numbers;
+  const hiddenNumbers = restValues.map((value) =>
+    FORMAT_CHAR.HIDDEN_NUMBER.repeat(value.length)
+  );
 
-  return [...numbers.slice(0, 2), ...hiddenNumbers].join(" - ");
+  return [firstValue, secondValue, ...hiddenNumbers]
+    .filter((value) => value !== undefined)
+    .join(FORMAT_CHAR.CARD_NUMBERS_SEPARATOR);
 };
 
 const formatExpirationDate = (expirationDate) => {
   return Object.values(expirationDate)
     .filter((value) => value !== "")
-    .join("/");
+    .join(FORMAT_CHAR.EXPIRATION_DATE_SEPARATOR);
 };
 
 const CardAddition = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
-  const [cardNumbers, selectionStart, onCardNumbersChange] = useCardNumbers([]);
+  const [
+    cardNumbers,
+    cardNumbersInputRef,
+    onCardNumbersChange,
+  ] = useCardNumbers([]);
   const [expirationDate, onExpirationDateChange] = useExpirationDate({
     month: "",
     year: "",
@@ -45,27 +59,20 @@ const CardAddition = (props) => {
     password: false,
   });
 
-  const cardNumbersInputRef = useRef();
-
   useEffect(() => {
-    cardNumbersInputRef?.current?.setSelectionRange(
-      selectionStart,
-      selectionStart
-    );
-  }, [cardNumbers, selectionStart]);
-
-  useEffect(() => {
-    const isCardNumbersFulfilled = cardNumbers[3]?.length === 4;
-
-    setIsModalOpen(isCardNumbersFulfilled);
-  }, [cardNumbers]);
+    setIsModalOpen(inputVerification.cardNumbers);
+  }, [inputVerification]);
 
   useEffect(() => {
     setInputVerification({
-      cardNumbers: cardNumbers[3]?.length === 4,
-      expirationDate: (expirationDate.month + expirationDate.year).length === 4,
-      username: username.length >= 2,
-      secureCode: secureCode.length === 3,
+      cardNumbers:
+        cardNumbers[CARD_NUMBER.LENGTH - 1]?.length ===
+        CARD_NUMBER.PARTIAL_LENGTH,
+      expirationDate:
+        (expirationDate.month + expirationDate.year).length ===
+        EXPIRATION_DATE.LENGTH,
+      username: username.length >= USERNAME.MIN_LENGTH,
+      secureCode: secureCode.length === SECURE_CODE_LENGTH,
       password: password.every((value) => value !== ""),
     });
   }, [cardNumbers, expirationDate, username, secureCode, password]);
@@ -122,7 +129,8 @@ const CardAddition = (props) => {
               value={formatCardNumbers(cardNumbers)}
               onChange={onCardNumbersChange}
               ref={cardNumbersInputRef}
-              maxLength="25"
+              maxLength={CARD_NUMBER.FORMATTED_LENGTH}
+              required
             />
           </div>
           <div className="card-addition__expiration-input mt-standard">
@@ -134,7 +142,8 @@ const CardAddition = (props) => {
               placeHolder="MM / YY"
               value={formatExpirationDate(expirationDate)}
               onChange={onExpirationDateChange}
-              maxLength="5"
+              maxLength={EXPIRATION_DATE.FORMATTED_LENGTH}
+              required
             />
           </div>
           <div className="card-addition__username-input mt-standard">
@@ -148,8 +157,9 @@ const CardAddition = (props) => {
               placeHolder="카드에 표시된 이름과 동일하게 입력하세요"
               value={username}
               onChange={onUsernameChange}
-              maxLength="30"
-              minLength="2"
+              maxLength={USERNAME.MAX_LENGTH}
+              minLength={USERNAME.MIN_LENGTH}
+              required
             />
           </div>
           <div className="card-addition__secure-code mt-standard">
@@ -161,7 +171,8 @@ const CardAddition = (props) => {
                 isCenter={true}
                 value={secureCode}
                 onChange={onSecureCodeChange}
-                maxLength="3"
+                maxLength={SECURE_CODE_LENGTH}
+                required
               />
               <div className="card-addition__tool-tip-button">
                 <span>?</span>
@@ -181,7 +192,7 @@ const CardAddition = (props) => {
                 data-password-index="0"
                 value={password[0]}
                 onChange={onPasswordChange}
-                required="required"
+                required
               />
               <Input
                 type="password"
@@ -193,7 +204,7 @@ const CardAddition = (props) => {
                 data-password-index="1"
                 value={password[1]}
                 onChange={onPasswordChange}
-                required="required"
+                required
               />
               <div className="card-addition__dot-wrapper">
                 <span className="card-addition__dot"></span>
