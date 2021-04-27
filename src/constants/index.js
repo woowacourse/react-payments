@@ -53,3 +53,5 @@ export const EXPIRATION_DATE_FORMAT_LENGTH = {
   month: 2,
   year: 2,
 };
+
+export const MAX_OWNER_NAME_LENGTH = 30;

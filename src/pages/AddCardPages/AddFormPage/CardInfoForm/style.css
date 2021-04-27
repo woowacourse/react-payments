@@ -16,3 +16,18 @@
 .CardInfoForm .Dash--hidden {
   visibility: hidden;
 }
+
+.OwnerNameInput__Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.OwnerNameInput__Header .Label {
+  flex-grow: 2;
+}
+
+.OwnerNameInput__Header .Text {
+  margin: 0 0.25rem;
+}
