@@ -33,3 +33,7 @@ code {
 .align-self-center {
   align-self: center;
 }
+
+.hidden {
+  opacity: 0;
+}

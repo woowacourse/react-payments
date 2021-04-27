@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardCompanyOption } from '../../stories/components';
+import { CardCompanyOption } from '../';
 import { CARD_COMPANY } from '../../constants';
 import './style.css';
 

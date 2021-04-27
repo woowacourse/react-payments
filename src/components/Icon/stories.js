@@ -2,7 +2,7 @@ import React from 'react';
 import Icon from '.';
 
 export default {
-  title: 'Icon',
+  title: 'Components/Icon',
   component: Icon,
 };
 

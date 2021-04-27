@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CardCompanySelection, SecurityCodeGuide } from './components';
 import { AddCardForm, AddCardComplete } from './pages';
-import { Modal } from './stories/components';
+import { Modal } from './components';
 
 function App() {
   const [page, setPage] = useState('addCardForm');

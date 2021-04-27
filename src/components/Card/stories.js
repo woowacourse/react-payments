@@ -2,8 +2,21 @@ import React from 'react';
 import Card from '.';
 
 export default {
-  title: 'Card',
+  title: 'Components/Card',
   component: Card,
+  argTypes: {
+    expirationDate: {
+      control: {
+        type: 'text',
+      },
+    },
+    cardCompanyName: {
+      control: {
+        type: 'select',
+        options: ['포코카드', '로이드카드', '준카드', '공원카드'],
+      },
+    },
+  },
 };
 
 const Template = (args) => <Card {...args} />;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dot } from '../Icon/assets';
-import './CardCompanyOption.css';
+import './style.css';
 
 export default function CardCompanyOption({ cardCompanyKey, name, color, ...props }) {
   return (

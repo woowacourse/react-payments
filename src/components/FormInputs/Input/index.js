@@ -1,5 +1,5 @@
 import React from 'react';
-import './input.css';
+import './style.css';
 
 export default function Input({
   width,

@@ -1,5 +1,5 @@
 import React from 'react';
-import './textButton.css';
+import './style.css';
 
 export default function TextButton({ text, ...props }) {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import './modal.css';
+import './style.css';
 
 export default function Modal({ onCloseModal, children }) {
   const onDimmedClick = (event) => {

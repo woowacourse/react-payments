@@ -2,7 +2,7 @@ import React from 'react';
 import TextButton from '.';
 
 export default {
-  title: 'Buttons/TextButton',
+  title: 'Components/Buttons/TextButton',
   component: TextButton,
 };
 

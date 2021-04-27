@@ -3,7 +3,7 @@ import Input from '.';
 import { Icon } from '../../';
 
 export default {
-  title: 'Form Inputs/Input',
+  title: 'Components/Form Inputs/Input',
   component: Input,
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import { CARD, CARD_COMPANY } from '../../constants';
-import { Card, TextButton } from '../../stories/components';
+import { Card, TextButton } from '../../components';
 import { MMYYDateFormatter } from '../../utils/formatter';
+import { CARD, CARD_COMPANY } from '../../constants';
 import './style.css';
 import '../../index.css';
 

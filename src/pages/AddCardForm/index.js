@@ -1,6 +1,6 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { CARD, CARD_COMPANY, ERROR_MESSAGE } from '../../constants';
-import { Icon, Card, Input, Header, TextButton, PasswordInput } from '../../stories/components';
+import { Icon, Card, Input, Header, TextButton, PasswordInput } from '../../components';
 import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/formatter';
 import { isValidSerialNumber, isValidDateFormat, isValidUserName } from './validator';
 import './style.css';

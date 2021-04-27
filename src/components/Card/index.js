@@ -1,7 +1,7 @@
 import React from 'react';
-import './card.css';
+import './style.css';
 import '../../index.css';
-import { CARD } from '../../../constants';
+import { CARD } from '../../constants';
 
 export default function Card({
   cardCompanyName,

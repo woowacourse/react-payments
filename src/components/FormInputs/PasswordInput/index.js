@@ -1,8 +1,8 @@
 import React from 'react';
-import Icon from '../../Icon';
-import Input from '../Input';
+import { Input } from '../';
+import { Icon } from '../../';
 import '../../../index.css';
-import './passwordInput.css';
+import './style.css';
 
 export default function PasswordInput({ password, onSetPassword }) {
   return (

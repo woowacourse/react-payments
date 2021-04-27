@@ -2,7 +2,7 @@ import React from 'react';
 import PasswordInput from '.';
 
 export default {
-  title: 'Form Inputs/PasswordInput',
+  title: 'Components/Form Inputs/PasswordInput',
   component: PasswordInput,
 };
 
