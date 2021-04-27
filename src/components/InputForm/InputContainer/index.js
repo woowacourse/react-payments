@@ -26,6 +26,4 @@ InputContainer.propTypes = {
   title: PropTypes.string,
 };
 
-InputContainer.defaultProps = {
-  title: '입력 타이틀',
-};
+InputContainer.defaultProps = {};

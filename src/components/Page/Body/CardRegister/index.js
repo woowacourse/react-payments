@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 import { Card } from '../../../Card';
-import { InputForm } from '../../../InputForm';
+import { CardCreateForm } from '../../../CardCreateForm';
 import { Modal } from '../../../Modal';
 import { CardCompanyList } from '../../../Modal/ModalBody/CardCompanyList';
 
@@ -42,6 +42,21 @@ export const CardRegister = () => {
     setPassword({ ...password, [e.target.name]: e.target.value });
   };
 
+  const isValidEveryInput = () => {
+    return (
+      company &&
+      numbers.first &&
+      numbers.second &&
+      numbers.third &&
+      numbers.fourth &&
+      validDay.month &&
+      validDay.year &&
+      cvc &&
+      password.firstDigit &&
+      password.secondDigit
+    );
+  };
+
   const openModal = () => {
     setIsModalOpened(true);
   };
@@ -62,8 +77,8 @@ export const CardRegister = () => {
           onClick={openModal}
         />
       </Styled.CardContainer>
-      <Styled.CardInputFormContainer>
-        <InputForm
+      <Styled.CardCreateFormContainer>
+        <CardCreateForm
           numbers={{
             value: numbers,
             handleChange: handleNumbersChange,
@@ -73,8 +88,9 @@ export const CardRegister = () => {
           owner={{ value: owner, handleChange: handleOwnerChange, isValid: true }}
           cvc={{ value: cvc, handleChange: handleCvcChange, isValid: true }}
           password={{ value: password, handleChange: handlePasswordChange, isValid: true }}
+          isValidEveryInput={isValidEveryInput()}
         />
-      </Styled.CardInputFormContainer>
+      </Styled.CardCreateFormContainer>
       {isModalOpened && (
         <Modal handleModalClose={closeModal}>
           <CardCompanyList handleCompanyChange={handleCompanyChange} selectedCompany={company} />
@@ -84,6 +100,6 @@ export const CardRegister = () => {
   );
 };
 
-// InputForm.propTypes = {};
+// CardCreateForm.propTypes = {};
 
-// InputForm.defaultProps = {};
+// CardCreateForm.defaultProps = {};

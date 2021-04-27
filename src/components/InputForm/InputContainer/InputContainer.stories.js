@@ -6,6 +6,7 @@ import { ValidDayInputContainer } from './ValidDayInputContainer';
 import { OwnerInputContainer } from './OwnerInputContainer';
 import { CvcInputContainer } from './CvcInputContainer';
 import { PasswordInputContainer } from './PasswordInputContainer';
+import { NickNameInputContainer } from './NickNameInputContainer';
 
 export default {
   title: 'Component/InputContainer',
@@ -60,4 +61,9 @@ PasswordInput.args = {
     <ValidMessage validMessage={'비밀번호가 정확하지 않습니다.'} />,
     <PasswordInputContainer />,
   ],
+};
+
+export const NickNameInput = Template.bind({});
+NickNameInput.args = {
+  children: [<NickNameInputContainer />],
 };

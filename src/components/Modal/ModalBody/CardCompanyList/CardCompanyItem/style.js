@@ -14,9 +14,9 @@ const ColorContainer = styled.span`
   display: flex;
   background: ${(props) => `radial-gradient(
     circle,
-    #FFFFFFDD,
-    ${`${props.color}88`},
-    ${`${props.color}FF`}
+    #FFFFFFDD 0%,
+    ${`${props.color}FF 70%`},
+    ${`${props.color}FF 100%`}
   )`};
 `;
 

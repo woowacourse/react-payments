@@ -40,4 +40,4 @@ CardCompanyList.propTypes = {
   handleCompanyChange: PropTypes.func,
 };
 
-// InputForm.defaultProps = {};
+// CardCreateForm.defaultProps = {};

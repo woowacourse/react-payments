@@ -1,12 +1,12 @@
-import { InputForm } from '.';
+import { CardCreateForm } from '.';
 
 export default {
-  title: 'Component/InputForm',
-  component: InputForm,
+  title: 'Component/CardCreateForm',
+  component: CardCreateForm,
   argTypes: {},
 };
 
-const Template = (args) => <InputForm {...args} />;
+const Template = (args) => <CardCreateForm {...args} />;
 
 export const defaultForm = Template.bind({});
 defaultForm.args = {

@@ -22,4 +22,4 @@ CardCompanyItem.propTypes = {
   isSelected: PropTypes.bool,
 };
 
-// InputForm.defaultProps = {};
+// CardCreateForm.defaultProps = {};

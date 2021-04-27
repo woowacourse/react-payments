@@ -8,11 +8,12 @@ import { ValidDayInputContainer } from '../InputContainer/ValidDayInputContainer
 import { OwnerInputContainer } from '../InputContainer/OwnerInputContainer';
 import { CvcInputContainer } from '../InputContainer/CvcInputContainer';
 import { PasswordInputContainer } from '../InputContainer/PasswordInputContainer';
+import { InputButton } from '../InputButton';
 
 /**
  * Primary UI component for user interaction
  */
-export const InputForm = ({ numbers, validDay, owner, cvc, password }) => {
+export const CardCreateForm = ({ numbers, validDay, owner, cvc, password, isValidEveryInput }) => {
   return (
     <Styled.Form>
       <InputContainer title={'카드 번호'}>
@@ -24,14 +25,12 @@ export const InputForm = ({ numbers, validDay, owner, cvc, password }) => {
         <ValidDayInputContainer validDay={validDay.value} handleChange={validDay.handleChange} />
       </InputContainer>
       <InputContainer title={'카드 소유자 이름 (선택)'}>
-        {!owner.isValid && (
-          <ValidMessage
-            validMessage={'카드의 이름과 다릅니다.'}
-            isVisibleTextLength={true}
-            textLength={30}
-            inputValue={'SUN'}
-          />
-        )}
+        <ValidMessage
+          validMessage={!owner.isValid ? '카드의 이름과 다릅니다.' : ''}
+          isVisibleTextLength={true}
+          textLength={30}
+          inputValue={owner.value}
+        />
         <OwnerInputContainer owner={owner.value} handleChange={owner.handleChange} />
       </InputContainer>
       <InputContainer title={'보안 코드 (CVC/CVV)'}>
@@ -42,11 +41,14 @@ export const InputForm = ({ numbers, validDay, owner, cvc, password }) => {
         {!password.isValid && <ValidMessage validMessage={'비밀번호가 정확하지 않습니다.'} />}
         <PasswordInputContainer password={password.value} handleChange={password.handleChange} />
       </InputContainer>
+      <Styled.ButtonContainer>
+        {isValidEveryInput && <InputButton text={'다음'} />}
+      </Styled.ButtonContainer>
     </Styled.Form>
   );
 };
 
-InputForm.propTypes = {
+CardCreateForm.propTypes = {
   numbers: PropTypes.shape({
     value: PropTypes.object,
     handleChange: PropTypes.func,
@@ -74,7 +76,7 @@ InputForm.propTypes = {
   }),
 };
 
-InputForm.defaultProps = {
+CardCreateForm.defaultProps = {
   numbers: {
     value: { first: '1111', second: '2222', third: '3333', fourth: '4444' },
     handleChange: () => {},

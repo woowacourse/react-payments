@@ -5,10 +5,10 @@ import * as Styled from './style.js';
 /**
  * Primary UI component for user interaction
  */
-export const Header = ({ buttonText, titleText, ...props }) => {
+export const Header = ({ titleText, hasButton, ...props }) => {
   return (
     <Styled.Container>
-      <Styled.Button {...props}>{buttonText}</Styled.Button>
+      {hasButton && <Styled.Button {...props}>{'◀︎'}</Styled.Button>}
       <Styled.Title>{titleText}</Styled.Title>
     </Styled.Container>
   );
