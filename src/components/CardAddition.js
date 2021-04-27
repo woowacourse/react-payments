@@ -10,6 +10,7 @@ import Button from "../stories/Button";
 import useCardNumbers from "../hooks/useCardNumbers";
 import { isNumberValue } from "../utils";
 import useExpirationDate from "../hooks/useExpirationDate";
+import useSecureCode from "../hooks/useSecureCode";
 
 const formatCardNumbers = (numbers) => {
   const hiddenNumbers = numbers
@@ -36,7 +37,7 @@ const CardAddition = (props) => {
     year: "",
   });
   const [username, setUsername] = useState("");
-  const [secureCode, setSecureCode] = useState("");
+  const [secureCode, onSecureCodeChange] = useSecureCode("");
   const [password, setPassword] = useState(["", ""]);
   // TODO: is- 네이밍은 bool값에 어울림
   // cardType fulfilled 검사?
@@ -111,16 +112,6 @@ const CardAddition = (props) => {
     setUsername(value);
   };
 
-  const onSecureCodeChange = (event) => {
-    const { value } = event.target;
-
-    if (!isNumberValue(value)) {
-      return;
-    }
-
-    setSecureCode(value);
-  };
-
   const onPasswordChange = (event) => {
     const { value, dataset } = event.target;
 
@@ -128,7 +119,6 @@ const CardAddition = (props) => {
       return;
     }
 
-    // TODO: useEffect로 fulfilled를 일괄관리?? 만약 하위 컴포넌트로 다 나뉘어지면?
     setPassword((prev) => {
       const newPassword = [...prev];
 
