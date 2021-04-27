@@ -4,6 +4,8 @@ export const EXPIRATION_DATE_FORMAT_LENGTH = { month: 2, year: 2 };
 
 export const MAX_OWNER_NAME_LENGTH = 30;
 
+export const SECURITY_CODE_LENGTH = 3;
+
 export const CARD_COMPANY_LIST = [
   {
     name: 'KB국민카드',

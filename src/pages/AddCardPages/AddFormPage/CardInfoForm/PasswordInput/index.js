@@ -1,6 +1,7 @@
+import { forwardRef } from 'react';
 import { Input, Label } from '../../../../../components';
 
-export const PasswordInput = () => {
+export const PasswordInput = forwardRef((_, ref) => {
   return (
     <>
       <Label>카드 비밀번호</Label>
@@ -13,9 +14,12 @@ export const PasswordInput = () => {
             type="password"
             value={style === 'transparent' ? '1' : ''}
             disabled={style === 'transparent'}
+            ref={index === 0 ? ref : null}
           />
         ))}
       </div>
     </>
   );
-};
+});
+
+PasswordInput.displayName = 'passwordInputRef';

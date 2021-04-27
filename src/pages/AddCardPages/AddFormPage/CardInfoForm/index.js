@@ -19,6 +19,7 @@ export const CardInfoForm = (props) => {
   } = props;
   const expirationDateInputRef = createRef();
   const ownerNameInputRef = createRef();
+  const passwordInputRef = createRef();
   const handleCardInfoSubmit = (e) => {
     e.preventDefault();
     setRoute(PAGE.ADD_CARD_COMPLETE);
@@ -38,8 +39,8 @@ export const CardInfoForm = (props) => {
         setExpirationDateInString={setExpirationDateInString}
       />
       <OwnerNameInput ref={ownerNameInputRef} setOwnerNameInString={setOwnerNameInString} />
-      <SecurityCodeInput />
-      <PasswordInput />
+      <SecurityCodeInput passwordInputRef={passwordInputRef} />
+      <PasswordInput ref={passwordInputRef} />
       <Button onClick={handleCardInfoSubmit}>다음</Button>
     </Form>
   );

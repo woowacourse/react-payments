@@ -13,12 +13,8 @@ export const handleCardNumberInputChange = (props) => {
     setIsModalOpen,
     setCardNumberInString,
   } = props;
-  const inputValue = e.target.value;
   const inputName = e.target.name;
-  const slicedInputValue =
-    inputValue.length > CARD_NUMBER_UNIT_LENGTH
-      ? inputValue.slice(0, CARD_NUMBER_UNIT_LENGTH)
-      : inputValue;
+  const slicedInputValue = e.target.value.slice(0, CARD_NUMBER_UNIT_LENGTH);
 
   if (slicedInputValue.length === CARD_NUMBER_UNIT_LENGTH) {
     nextInput[inputName]?.current.focus();
@@ -31,7 +27,7 @@ export const handleCardNumberInputChange = (props) => {
     setCardCompany,
     setIsModalOpen,
   });
-  setCardNumber({ inputName, inputValue, fourDigit, setCardNumberInString });
+  setCardNumber({ inputName, slicedInputValue, fourDigit, setCardNumberInString });
 };
 
 function setCardCompanyAfterValidation(props) {
@@ -58,8 +54,8 @@ function setCardCompanyAfterValidation(props) {
   setCardCompany({ name: cardCompany.name, color: cardCompany.color });
 }
 
-function setCardNumber({ inputName, fourDigit, inputValue, setCardNumberInString }) {
-  if (inputName !== 'fourth' || inputValue.length !== CARD_NUMBER_UNIT_LENGTH) {
+function setCardNumber({ inputName, fourDigit, slicedInputValue, setCardNumberInString }) {
+  if (inputName !== 'fourth' || slicedInputValue.length !== CARD_NUMBER_UNIT_LENGTH) {
     return;
   }
 
