@@ -15,6 +15,38 @@ const InputHeader = styled.div`
   width: ${({ width }) => width};
 `;
 
+const DefaultInputWrapper = styled.div`
+  display: inline-flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  background-color: ${PALETTE.INPUT_BG_GRAY};
+  border-radius: 7px;
+  border-color: transparent;
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+`;
+
+const DefaultInput = styled.input`
+  width: ${({ width }) => width};
+  font-size: 18px;
+  color: ${PALETTE.DEFAULT_CYAN};
+  border-color: transparent;
+  background-color: transparent;
+
+  &:focus {
+    outline: none;
+  }
+
+  // &::-webkit-outer-spin-button,
+  // &::-webkit-inner-spin-button {
+  //   -webkit-appearance: none;
+  //   margin: 0;
+  // }
+`;
+
 const Label = styled.label`
   font-size: 12px;
   margin-bottom: 3px;
@@ -33,33 +65,4 @@ const FlexContainer = styled.div`
   align-items: center;
 `;
 
-const InputWrapper = styled.div`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: ${({ width }) => width};
-  height: 45px;
-  background-color: ${PALETTE.INPUT_BG_GRAY};
-  border-radius: 7px;
-  border-color: transparent;
-  display: flex;
-  align-items: center;
-  padding: 2px 8px;
-  &: first-child {
-    margin-right: ${({ isMultiple }) => isMultiple && '7px'};
-  }
-`;
-
-const HelpMark = styled.img`
-  margin-left: 11px;
-`;
-
-const PasswordMark = styled.div`
-  width: 43px;
-  height: auto;
-  margin-left: 7px;
-  display: flex;
-  justify-content: center;
-`;
-
-export { Root, InputHeader, Label, WordCount, FlexContainer, InputWrapper, HelpMark, PasswordMark };
+export { Root, InputHeader, DefaultInputWrapper, DefaultInput, Label, WordCount, FlexContainer };
