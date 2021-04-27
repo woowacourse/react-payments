@@ -39,9 +39,11 @@ const CardNumbersWrapper = styled.div`
   transform: translateX(-50%);
 `;
 
-const CardNumberGroup = styled.span`
+const CardNumbersFragment = styled.span`
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  width: 16%;
   font-size: 14px;
   font-weight: 600;
   color: ${PALETTE.DEFAULT_BLACK};
@@ -81,4 +83,4 @@ const ExpirationDate = styled.div`
   opacity: 80%;
 `;
 
-export { Root, Chip, CardName, CardNumbersWrapper, CardNumberGroup, OwnerName, ExpirationDate };
+export { Root, Chip, CardName, CardNumbersWrapper, CardNumbersFragment, OwnerName, ExpirationDate };
