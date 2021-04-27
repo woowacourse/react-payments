@@ -1,5 +1,4 @@
 import React from 'react';
-import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
 import CardNumbersInput from '../../units/CardNumbersInput';
 import ExpirationDateInput from '../../units/ExpirationDateInput';
 import OwnerNameInput from '../../units/OwnerNameInput';
@@ -10,26 +9,24 @@ import * as Style from './style';
 
 const CardRegisterForm = (props) => {
   const { CARD_NUMBERS, EXPIRATION_DATE, OWNER_NAME, SECURE_CODE, PASSWORD } = INPUT_TYPE;
-
-  const { setCardNumbers, setExpirationDate } = props;
+  const {
+    expirationDate,
+    ownerName,
+    setCardNumbers,
+    setExpirationDate,
+    setOwnerName,
+    secureCode,
+    setSecureCode,
+    setCardPassword,
+  } = props;
 
   return (
     <Style.Root>
-      <RegisterInputWrapper {...CARD_NUMBERS}>
-        <CardNumbersInput setCardNumbers={setCardNumbers} />
-      </RegisterInputWrapper>
-      <RegisterInputWrapper {...EXPIRATION_DATE}>
-        <ExpirationDateInput setExpirationDate={setExpirationDate} />
-      </RegisterInputWrapper>
-      <RegisterInputWrapper {...OWNER_NAME}>
-        <OwnerNameInput />
-      </RegisterInputWrapper>
-      <RegisterInputWrapper {...SECURE_CODE}>
-        <SecureCodeInput />
-      </RegisterInputWrapper>
-      <RegisterInputWrapper inputCount={2} {...PASSWORD}>
-        <CardPasswordInput />
-      </RegisterInputWrapper>
+      <CardNumbersInput {...CARD_NUMBERS} setCardNumbers={setCardNumbers} />
+      <ExpirationDateInput {...EXPIRATION_DATE} expirationDate={expirationDate} setExpirationDate={setExpirationDate} />
+      <OwnerNameInput {...OWNER_NAME} ownerName={ownerName} setOwnerName={setOwnerName} />
+      <SecureCodeInput {...SECURE_CODE} secureCode={secureCode} setSecureCode={setSecureCode} />
+      <CardPasswordInput {...PASSWORD} setCardPassword={setCardPassword} />
     </Style.Root>
   );
 };

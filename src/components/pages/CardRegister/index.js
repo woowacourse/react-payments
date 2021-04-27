@@ -11,9 +11,9 @@ const CardRegister = (props) => {
   const [cardNumbers, setCardNumbers] = useState({ 1: '', 2: '', 3: '', 4: '' });
   const [bankId, setBankId] = useState('');
   const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
-  const [ownerNameInput, setOwnerName] = useState('');
+  const [ownerName, setOwnerName] = useState('');
   const [secureCode, setSecureCode] = useState('');
-  const [cardPassword, setCardPassword] = useState('');
+  const [cardPassword, setCardPassword] = useState({ 1: '', 2: '' });
 
   const isCardNumbersFilled = (numbers) => Object.values(numbers).every((fragment) => fragment.length === 4);
 
@@ -31,7 +31,16 @@ const CardRegister = (props) => {
         <Style.CardWrapper>
           <Card width="213px" height="133px" backgroundColor={PALETTE.EMPTY_CARD_GRAY} isFilled={false} />
         </Style.CardWrapper>
-        <CardRegisterForm setCardNumbers={setCardNumbers} setExpirationDate={setExpirationDate} />
+        <CardRegisterForm
+          expirationDate={expirationDate}
+          ownerName={ownerName}
+          setCardNumbers={setCardNumbers}
+          setExpirationDate={setExpirationDate}
+          setOwnerName={setOwnerName}
+          secureCode={secureCode}
+          setSecureCode={setSecureCode}
+          setCardPassword={setCardPassword}
+        />
         <Button text={'다음'} onClick={handleClickNextPage} />
       </Style.Root>
       {isSelectorOpened && <CardSelector setBankId={setBankId} setSelectorOpened={setSelectorOpened} />}
