@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
+import helpSvg from '../../../assets/cvc-help.svg';
+import CVCGuideImg from '../../../assets/cvc_guide.png';
 import * as Style from './style';
 
+const SecureCodeInput = (props) => {
+  const { type, label, width, secureCode, setSecureCode } = props;
+  const [isCVCGuideOpen, setCVCGuideOpen] = useState(false);
 
   const isOverLength = (value) => value.length > 3;
 
@@ -11,9 +17,20 @@ import * as Style from './style';
 
     setSecureCode(currentValue);
   };
+
   return (
     <>
-      <Style.Input type="password" width="36px" />
+      <RegisterInputWrapper type={type} label={label} width={width}>
+        <Style.InputWrapper>
+          <Style.PasswordInput type="password" width="36px" value={secureCode} onChange={handleChangeNumbers} />
+          <Style.HelpMark
+            src={helpSvg}
+            onMouseOver={() => setCVCGuideOpen(true)}
+            onMouseLeave={() => setCVCGuideOpen(false)}
+          />
+          {isCVCGuideOpen && <Style.CVCImg src={CVCGuideImg} />}
+        </Style.InputWrapper>
+      </RegisterInputWrapper>
     </>
   );
 };
