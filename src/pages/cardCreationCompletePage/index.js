@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import Styled from './style';
 import { CreditCard, CARD_SIZE } from '../../components/commons/card/CreditCard';
@@ -52,6 +53,12 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo 
       </form>
     </>
   );
+};
+
+CardCreationCompletePage.propTypes = {
+  setCurrentPage: PropTypes.func.isRequired,
+  newCardInfo: PropTypes.object.isRequired,
+  setNewCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardCreationCompletePage;

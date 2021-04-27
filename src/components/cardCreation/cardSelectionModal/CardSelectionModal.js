@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { CARD } from '../../../constants/card';
 import { Circle, CIRCLE_SIZE } from '../../commons/circle/Circle';
 import { BottomModal } from '../../commons/modal/BottomModal';
@@ -21,6 +22,11 @@ const CardSelectionModal = ({ closeModal, setSelectedCardInfo }) => {
       </Styled.List>
     </BottomModal>
   );
+};
+
+CardSelectionModal.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+  setSelectedCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardSelectionModal;

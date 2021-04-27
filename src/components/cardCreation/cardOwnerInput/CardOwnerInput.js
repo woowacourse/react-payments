@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { memo, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
 import { TransparentInput } from '../../commons/input/TransparentInput';
@@ -29,6 +30,12 @@ const CardOwnerInput = memo(({ cardOwner, setCardOwner, setValidCardOwner }) => 
     </div>
   );
 });
+
+CardOwnerInput.propTypes = {
+  cardOwner: PropTypes.string.isRequired,
+  setCardOwner: PropTypes.func.isRequired,
+  setValidCardOwner: PropTypes.func.isRequired,
+};
 
 CardOwnerInput.defaultProps = {
   cardOwner: '',

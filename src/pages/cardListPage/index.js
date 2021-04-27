@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Header } from '../../components/commons/header/Header';
 import { Button } from '../../components/commons/button/Button';
 import { Card } from '../../components/commons/card/Card';
@@ -15,6 +16,10 @@ const CardListPage = ({ setCurrentPage }) => {
       </Styled.Container>
     </>
   );
+};
+
+CardListPage.propTypes = {
+  setCurrentPage: PropTypes.func.isRequired,
 };
 
 export default CardListPage;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Button } from '../../components/commons/button/Button';
 import { Header } from '../../components/commons/header/Header';
@@ -93,6 +94,11 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
       </div>
     </>
   );
+};
+
+CardCreationPage.propTypes = {
+  setCurrentPage: PropTypes.func.isRequired,
+  setNewCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardCreationPage;

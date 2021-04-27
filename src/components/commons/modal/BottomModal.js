@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Styled from './BottomModal.style';
 
 export const BottomModal = ({ closeModal, children, styles, ...props }) => {
@@ -14,4 +15,9 @@ export const BottomModal = ({ closeModal, children, styles, ...props }) => {
       </Styled.BottomModal>
     </Styled.Dimmer>
   );
+};
+
+BottomModal.propTypes = {
+  closeModal: PropTypes.func,
+  styles: PropTypes.object,
 };

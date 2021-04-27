@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { memo, useRef, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
 import { TransparentInput } from '../../commons/input/TransparentInput';
@@ -72,5 +73,12 @@ const ExpiredDateInput = memo(
     );
   }
 );
+
+ExpiredDateInput.propTypes = {
+  cardExpiredDate: PropTypes.object.isRequired,
+  setCardExpiredDate: PropTypes.func.isRequired,
+  isValidCardExpiredDate: PropTypes.bool.isRequired,
+  setValidCardExpiredDate: PropTypes.func.isRequired,
+};
 
 export default ExpiredDateInput;

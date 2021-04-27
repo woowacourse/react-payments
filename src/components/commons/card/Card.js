@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Styled from './Card.style';
 
 export const CARD_SIZE = {
@@ -11,6 +12,11 @@ export const Card = ({ size, children, styles, ...props }) => {
       {children}
     </Styled.Card>
   );
+};
+
+Card.propTypes = {
+  size: PropTypes.oneOf(Object.values(CARD_SIZE)),
+  styles: PropTypes.object,
 };
 
 Card.defaultProps = {

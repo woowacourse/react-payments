@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Styled from './Button.style';
 
 export const Button = ({ children, styles, ...props }) => {
@@ -6,4 +7,8 @@ export const Button = ({ children, styles, ...props }) => {
       {children}
     </Styled.Button>
   );
+};
+
+Button.propTypes = {
+  styles: PropTypes.object,
 };

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { memo, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
 import { TransparentInput } from '../../commons/input/TransparentInput';
@@ -38,5 +39,12 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
     </div>
   );
 });
+
+SecurityCodeInput.propTypes = {
+  securityCode: PropTypes.string.isRequired,
+  setSecurityCode: PropTypes.func.isRequired,
+  isValidSecurityCode: PropTypes.bool.isRequired,
+  setValidSecurityCode: PropTypes.func.isRequired,
+};
 
 export default SecurityCodeInput;

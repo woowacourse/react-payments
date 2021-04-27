@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Styled from './CreditCard.style';
 import { CARD_SIZE, Card } from './Card';
 import { COLOR } from '../../../constants/color';
@@ -26,6 +27,17 @@ export const CreditCard = ({ size, backgroundColor, content }) => {
       </Styled.CardExpiredDate>
     </Card>
   );
+};
+
+CreditCard.propTypes = {
+  size: PropTypes.oneOf(Object.values(CARD_SIZE)),
+  backgroundColor: PropTypes.string,
+  content: PropTypes.shape({
+    cardType: PropTypes.string,
+    cardNumber: PropTypes.arrayOf(PropTypes.string),
+    cardOwner: PropTypes.string,
+    cardExpiredDate: PropTypes.object,
+  }),
 };
 
 CreditCard.defaultProps = {

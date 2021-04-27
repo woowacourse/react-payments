@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { memo, useRef, useEffect, useState } from 'react';
 import { COLOR } from '../../../constants/color';
 import { TransparentInput } from '../../commons/input/TransparentInput';
@@ -147,5 +148,14 @@ const CardNumberInput = memo(
     );
   }
 );
+
+CardNumberInput.propTypes = {
+  cardNumber: PropTypes.object.isRequired,
+  selectedCardInfo: PropTypes.object.isRequired,
+  setCardNumber: PropTypes.func.isRequired,
+  isValidCardNumber: PropTypes.bool.isRequired,
+  setValidCardNumber: PropTypes.func.isRequired,
+  setSelectedCardInfo: PropTypes.func.isRequired,
+};
 
 export default CardNumberInput;

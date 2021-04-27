@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Styled from './Header.style';
 
 export const Header = ({ children, styles, ...props }) => {
@@ -6,4 +7,8 @@ export const Header = ({ children, styles, ...props }) => {
       {children}
     </Styled.Header>
   );
+};
+
+Header.propTypes = {
+  styles: PropTypes.object,
 };

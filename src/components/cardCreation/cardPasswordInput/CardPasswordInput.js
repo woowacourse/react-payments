@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { memo, useRef, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
 import { TransparentInput } from '../../commons/input/TransparentInput';
@@ -66,5 +67,12 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
     </div>
   );
 });
+
+CardPasswordInput.propTypes = {
+  cardPassword: PropTypes.object.isRequired,
+  setCardPassword: PropTypes.func.isRequired,
+  isValidCardPassword: PropTypes.bool.isRequired,
+  setValidCardPassword: PropTypes.func.isRequired,
+};
 
 export default CardPasswordInput;
