@@ -1,7 +1,16 @@
 import React from 'react';
 import * as Style from './style';
 
-const ExpirationDateInput = (props) => {
+
+  const isOverLength = (value) => value.length > 3;
+
+  const handleChangeNumbers = (event) => {
+    const currentValue = event.target.value;
+    if (isNaN(currentValue)) return;
+    if (isOverLength(currentValue)) return;
+
+    setSecureCode(currentValue);
+  };
   return (
     <>
       <Style.Input type="password" width="36px" />
@@ -9,4 +18,4 @@ const ExpirationDateInput = (props) => {
   );
 };
 
-export default ExpirationDateInput;
+export default SecureCodeInput;
