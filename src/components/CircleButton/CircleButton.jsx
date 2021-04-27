@@ -4,9 +4,9 @@ import styles from "./CircleButton.module.scss";
 
 const cx = classNames.bind(styles);
 
-const CircleButton = ({ buttonText, circleColor, className = "" }) => {
+const CircleButton = ({ buttonText, circleColor, onClick, className = "" }) => {
   return (
-    <div className={`${cx("circle-button")} ${className}`}>
+    <div onClick={onClick} className={`${cx("circle-button")} ${className}`}>
       <div className={cx("circle-button__circle")} style={{ backgroundColor: circleColor }}></div>
       <span className={cx("circle-button__text")}>{buttonText}</span>
     </div>

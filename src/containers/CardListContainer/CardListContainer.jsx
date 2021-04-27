@@ -10,7 +10,7 @@ const CardListContainer = ({ cards }) => {
     return (
       <Card
         className={cx("card-list-container__card")}
-        cardName={card.cardName}
+        cardCompany={card.cardCompany}
         backgroundColor={card.backgroundColor}
         cardNumberList={card.cardNumberList}
         cardOwner={card.cardOwner}

@@ -3,9 +3,9 @@ import styles from "./Input.module.scss";
 
 const cx = classNames.bind(styles);
 
-const Input = ({ textAlign = "center", placeholder, labelText, inputWidth, className = '' }) => {
+const Input = ({ textAlign = "center", placeholder, labelText, inputWidth, className = "", setCardState }) => {
   return (
-    <div className={`${cx("input-wrapper")} ${className}`} style={{width: inputWidth}}>
+    <div className={`${cx("input-wrapper")} ${className}`} style={{ width: inputWidth }}>
       {!!labelText?.length && (
         <label className={cx("input__label")} name={labelText}>
           {labelText}

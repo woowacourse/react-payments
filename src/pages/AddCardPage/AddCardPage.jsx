@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./AddCardPage.module.scss";
+import { getCardColor } from '../../utils/cardCompany';
 
 import { PAGE_PATH, HEADER_TEXT, BUTTON_TEXT } from "../../constants";
 
 import CardInputContainer from "../../containers/CardInputContainer/CardInputContainer";
-import CardTypeContainer from "../../containers/CardTypeContainer/CardTypeContainer";
+import CardCompanySelectContainer from "../../containers/CardCompanySelectContainer/CardCompanySelectContainer";
 
 import NavigationButton from "../../components/NavigationButton/NavigationButton";
 import Card from "../../components/Card/Card";
@@ -14,63 +15,25 @@ import Button from "../../components/Button/Button";
 
 const cx = classNames.bind(styles);
 
-const cardMockUp = {
-  cardName: "",
-  backgroundColor: "#D2D2D2",
-  cardNumberList: [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-  cardOwner: "NAME",
-  cardExpiration: "MM/YY",
-};
+// TODO: 카드 호버 애니메이션 껐다 킬수 있게 만들기
+// TODO: UX 적으로 카드 정보 입력 페이지에서 카드 클릭시 카드사 입력 토글이 켜지도록 할지 결정하기
 
-const cardTypeMockUps = [
-  {
-    color: "#E24141",
-    name: "포코카드",
-  },
-  {
-    color: "#04C09E",
-    name: "로이드 카드",
-  },
-  {
-    color: "#E24141",
-    name: "포코카드",
-  },
-  {
-    color: "#E24141",
-    name: "포코카드",
-  },
-  {
-    color: "#E24141",
-    name: "포코카드",
-  },
-  {
-    color: "#E24141",
-    name: "포코카드",
-  },
-  {
-    color: "#E24141",
-    name: "포코카드",
-  },
-  {
-    color: "#E24141",
-    name: "포코카드",
-  },
-];
-
-const AddCardPage = ({}) => {
-  // slider test
+const AddCardPage = ({
+  cardCompany,
+  cardNumber,
+  cardOwner,
+  cardExpiration,
+  cardCVC,
+  cardPassword,
+  setCardState,
+}) => {
   const [pageState, setPageState] = useState({
     isBottomSliderToggled: false,
     backDropAnimation: "fade-out",
     sliderAnimation: "move-down",
   });
 
-  const toggleCardTypeContainer = ({ isBottomSliderToggled, backDropAnimation, sliderAnimation }) => {
+  const toggleCardCompanyContainer = ({ isBottomSliderToggled, backDropAnimation, sliderAnimation }) => {
     setPageState((state) => ({
       ...state,
       isBottomSliderToggled,
@@ -79,28 +42,30 @@ const AddCardPage = ({}) => {
     }));
   };
 
-  const showCardTypeContainer = () => {
-    toggleCardTypeContainer({
+  const showCardCompanySelectContainer = () => {
+    toggleCardCompanyContainer({
       isBottomSliderToggled: true,
       backDropAnimation: "fade-in",
       sliderAnimation: "move-up",
     });
   };
 
-  const hideCardTypeContainer = () => {
-    toggleCardTypeContainer({
+  const hideCardCompanySelectContainer = () => {
+    toggleCardCompanyContainer({
       isBottomSliderToggled: true,
       backDropAnimation: "fade-out",
       sliderAnimation: "move-down",
     });
     setTimeout(() => {
-      toggleCardTypeContainer({
+      toggleCardCompanyContainer({
         isBottomSliderToggled: false,
         backDropAnimation: "fade-out",
         sliderAnimation: "move-down",
       });
     }, 350);
   };
+
+  // TODO: 카드 번호 Input 이 숫자만 받을 수 있도록 수정하기 
 
   return (
     <div className={cx("add-card-page")}>
@@ -109,23 +74,28 @@ const AddCardPage = ({}) => {
           <NavigationButton buttonText={HEADER_TEXT.ADD_CARD} />
         </Link>
       </header>
-      {/* onClick for slider test */}
-      <main className={cx("add-card-page__main")} onClick={showCardTypeContainer}>
-        <Card className={cx("add-card-page__card")} {...cardMockUp} />
-        <CardInputContainer />
+      <main className={cx("add-card-page__main")}>
+        <Card cardNumber={cardNumber} cardCompany={cardCompany} backgroundColor={getCardColor(cardCompany)} className={cx("add-card-page__card")} />
+        <CardInputContainer
+          cardCompany={cardCompany}
+          cardOwner={cardOwner}
+          cardExpiration={cardExpiration}
+          cardCVC={cardCVC}
+          cardPassword={cardPassword}
+          setCardState={setCardState}
+          showCardCompanySelectContainer={showCardCompanySelectContainer}
+        />
       </main>
       {pageState.isBottomSliderToggled && (
-        <CardTypeContainer
-          cardTypes={cardTypeMockUps}
-          hideCardTypeContainer={hideCardTypeContainer}
+        <CardCompanySelectContainer
+          hideCardCompanySelectContainer={hideCardCompanySelectContainer}
           backDropAnimationClass={pageState.backDropAnimation}
           bottomSliderAnimationClass={pageState.sliderAnimation}
+          setCardState={setCardState}
         />
       )}
       <div className={cx("add-card-page__bottom")}>
-        <Link to={PAGE_PATH.COMPLETE}>
           <Button>{BUTTON_TEXT.NEXT}</Button>
-        </Link>
       </div>
     </div>
   );
