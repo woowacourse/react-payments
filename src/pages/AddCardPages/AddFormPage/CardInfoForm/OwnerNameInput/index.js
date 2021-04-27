@@ -4,6 +4,7 @@ import { handleOwnerNameInputChange } from './handler';
 import { MAX_OWNER_NAME_LENGTH } from '../../../../../constants';
 
 export const OwnerNameInput = forwardRef((_, ref) => {
+  const [ownerName, setOwnerName] = useState('');
   const [charLength, setCharLength] = useState(0);
   return (
     <>
@@ -27,7 +28,8 @@ export const OwnerNameInput = forwardRef((_, ref) => {
         name="ownerNameInput"
         maxLength={MAX_OWNER_NAME_LENGTH}
         ref={ref}
-        onChange={(e) => handleOwnerNameInputChange({ e, setCharLength })}
+        value={ownerName}
+        onChange={(e) => handleOwnerNameInputChange({ e, setCharLength, setOwnerName })}
       />
     </>
   );
