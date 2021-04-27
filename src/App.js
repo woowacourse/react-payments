@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CardAddPage from './page/CardAddPage/CardAddPage';
 import CardRegisterPage from './page/CardRegisterPage/CardRegisterPage';
+import { isNumber } from './utils/validator';
 
 function App() {
   const [cardCompany, setCardCompany] = useState({ name: '', color: '' });
@@ -40,15 +41,25 @@ function App() {
     setIsAllValid(false);
   };
 
+  const handleCardNumbersInput = ({ target: { value } }, key) => {
+    isNumber(value) && setCardNumbers({ ...cardNumbers, [key]: value.trim() });
+  };
+
   const handleCardCompany = ({ target }) => {
     const company = target.closest('li').dataset.company;
+
     setCardCompany({
       name: `${company} 카드`,
       color: `bg-${company}`,
     });
-
     setIsModalOpened(false);
   };
+
+  useEffect(() => {
+    if (cardNumbers.first.length + cardNumbers.second.length === 8 && !cardCompany.name) {
+      setIsModalOpened(true);
+    }
+  }, [cardNumbers, cardCompany]);
 
   const handleExpirationInput = ({ target: { value } }, category) => {
     const valueAsString = String(value);
@@ -63,42 +74,16 @@ function App() {
     });
   };
 
-  const handleCardNumbersInput = ({ target: { value } }, key) => {
-    const numberReg = /^[0-9]{1,4}$/gi;
-    if (!numberReg.test(Number(value))) {
-      return;
-    }
-
-    setCardNumbers({ ...cardNumbers, [key]: value });
-  };
-
-  useEffect(() => {
-    if (cardNumbers.first.length + cardNumbers.second.length === 8 && !cardCompany.name) {
-      setIsModalOpened(true);
-    }
-  }, [cardNumbers, cardCompany]);
-
   const handleOwnerNameInput = ({ target: { value } }) => {
     setOwnerName(value.trimStart());
   };
 
   const handleSecurityCodeInput = ({ target: { value } }) => {
-    const numberReg = /^[0-9]{1,4}$/gi;
-
-    if (!numberReg.test(Number(value))) {
-      return;
-    }
-
-    setSecurityCode(value);
+    isNumber(value) && setSecurityCode(value.trim());
   };
 
   const handlePasswordInput = ({ target: { value, name } }) => {
-    const numberReg = /^[0-9]{1,4}$/gi;
-    if (!numberReg.test(Number(value))) {
-      return;
-    }
-
-    setPassword({ ...password, [name]: value });
+    isNumber(value) && setPassword({ ...password, [name]: value.trim() });
   };
 
   const handleCardInfoSubmit = (e) => {
