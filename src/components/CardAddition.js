@@ -8,7 +8,6 @@ import CardTypeRadio from "../stories/CardTypeRadio";
 import Button from "../stories/Button";
 
 import useCardNumbers from "../hooks/useCardNumbers";
-import { isNumberValue } from "../utils";
 import useExpirationDate from "../hooks/useExpirationDate";
 import useSecureCode from "../hooks/useSecureCode";
 import useControlledInputValue from "../hooks/useControlledInputValue";
@@ -41,9 +40,7 @@ const CardAddition = (props) => {
   const [username, onUsernameChange] = useControlledInputValue("");
   const [secureCode, onSecureCodeChange] = useSecureCode("");
   const [password, onPasswordChange] = usePassword(["", ""]);
-  // TODO: is- 네이밍은 bool값에 어울림
-  // cardType fulfilled 검사?
-  const [isInputFulfilled, setIsInputFulfilled] = useState({
+  const [inputVerification, setinputVerification] = useState({
     cardNumbers: false,
     expirationDate: false,
     username: false,
@@ -67,7 +64,7 @@ const CardAddition = (props) => {
   }, [cardNumbers]);
 
   useEffect(() => {
-    setIsInputFulfilled({
+    setinputVerification({
       cardNumbers: cardNumbers[3]?.length === 4,
       expirationDate: (expirationDate.month + expirationDate.year).length === 4,
       username: username.length >= 2,
@@ -138,7 +135,6 @@ const CardAddition = (props) => {
               type="text"
               isCenter={true}
               placeHolder="MM / YY"
-              // TODO: format, unformat 함수 추상화하기
               value={formatExpirationDate(expirationDate)}
               onChange={onExpirationDateChange}
               maxLength="5"
@@ -210,7 +206,7 @@ const CardAddition = (props) => {
               </div>
             </div>
           </div>
-          {Object.values(isInputFulfilled).every(
+          {Object.values(inputVerification).every(
             (isFulfilled) => isFulfilled
           ) && (
             <div className="card-addition__form-submit">
