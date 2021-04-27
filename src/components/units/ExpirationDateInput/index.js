@@ -8,16 +8,34 @@ const ExpirationDateInput = (props) => {
   const monthInput = useRef(null);
   const yearInput = useRef(null);
 
-  const handleChangeNumbers = (event) => {
-    if (!isTwoDigits(event.target.value)) return;
+  const isValidMonth = (value) => 1 <= value && value <= 12;
+  const isValidYear = (value) => 21 <= value && value < 30;
 
+  const underTwoDigits = (value) => value.length < 2;
+  const overTwoDigits = (value) => value.length > 2;
+
+  // TODO: 분기 처리 개선
+  const handleChangeDate = (event) => {
     const dateType = event.target.dataset.dateType;
     const value = event.target.value;
+
+    if (underTwoDigits(value)) {
     setExpirationDate((prevDate) => ({ ...prevDate, [dateType]: value }));
 
-    if (dateType === 'month') {
-      moveFocusToYearInput();
+      return;
     }
+
+    if (dateType === 'month') {
+      if (!isValidMonth(value)) return;
+
+      moveFocusToYearInput();
+    } else {
+      if (!isValidYear(value)) return;
+    }
+
+    if (overTwoDigits(value)) return;
+
+    setExpirationDate((prevDate) => ({ ...prevDate, [dateType]: value }));
   };
 
   // TODO: month에 1자리수 입력 시 padStart로 0 부여
