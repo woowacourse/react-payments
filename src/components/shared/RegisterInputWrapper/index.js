@@ -26,7 +26,7 @@ const RegisterInputWrapper = (props) => {
 RegisterInputWrapper.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  width: PropTypes.string.isRequired,
+  width: PropTypes.string,
   inputCount: PropTypes.number,
   children: PropTypes.node,
 };
