@@ -2,8 +2,9 @@ import { useState, createRef, forwardRef } from 'react';
 import { Input, Label } from '../../../../../components';
 import { handlePasswordInputChange } from './handler';
 
-export const PasswordInput = forwardRef((_, firstRef) => {
-  const [password, setPassword] = useState({ 0: '', 1: '' });
+export const PasswordInput = forwardRef((props, firstRef) => {
+  const { setPasswordInString } = props;
+  const [password, setPassword] = useState({ first: '', second: '' });
   const secondRef = createRef();
 
   return (
@@ -16,9 +17,17 @@ export const PasswordInput = forwardRef((_, firstRef) => {
             container="CardInfoForm__Input__Filler--filled CardPasswordInput__Filler"
             className="CardPasswordInput__Field"
             type="password"
-            name={index}
+            name={index === 0 ? 'first' : 'second'}
             value={password[index]}
-            onChange={(e) => handlePasswordInputChange({ e, setPassword, secondRef })}
+            onChange={(e) =>
+              handlePasswordInputChange({
+                e,
+                password,
+                setPassword,
+                secondRef,
+                setPasswordInString,
+              })
+            }
             ref={index === 0 ? firstRef : secondRef}
           />
         ))}

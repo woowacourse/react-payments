@@ -44,3 +44,8 @@
 .SecurityCodeInput__Wrapper > .Button:hover ~ .SecurityCodeInput__GuideImage {
   visibility: visible;
 }
+
+.CardInfoForm .Button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}

@@ -2,15 +2,43 @@ import { useState } from 'react';
 import { Button, Card, CreditCard, Title } from '../../../components';
 import { CardInfoForm } from './CardInfoForm';
 import { CardCompanySelectModal } from './CardCompanySelectModal';
+import {
+  CARD_NUMBER_IN_STRING_LENGTH,
+  EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH,
+  SECURITY_CODE_LENGTH,
+  PASSWORD_IN_STRING_LENGTH,
+} from '../../../constants';
 import './style.css';
+
+const initialState = {
+  cardCompany: { name: '', color: '' },
+  cardNumber: '',
+  expirationDate: 'MM/YY',
+  ownerName: 'NAME',
+  securityCode: '',
+  password: '',
+  isModalOpen: false,
+};
 
 export const AddFormPage = (props) => {
   const { setRoute } = props;
-  const [cardCompany, setCardCompany] = useState({ name: '', color: '' });
-  const [cardNumberInString, setCardNumberInString] = useState('');
-  const [expirationDateInString, setExpirationDateInString] = useState('MM/YY');
-  const [ownerNameInString, setOwnerNameInString] = useState('NAME');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [cardCompany, setCardCompany] = useState(initialState.cardCompany);
+  const [cardNumberInString, setCardNumberInString] = useState(initialState.cardNumber);
+  const [expirationDateInString, setExpirationDateInString] = useState(initialState.expirationDate);
+  const [ownerNameInString, setOwnerNameInString] = useState(initialState.ownerName);
+  const [securityCodeInString, setSecurityCodeInString] = useState(initialState.securityCode);
+  const [passwordInString, setPasswordInString] = useState(initialState.password);
+  const [isModalOpen, setIsModalOpen] = useState(initialState.isModalOpen);
+  const isFormFulFilled =
+    cardCompany.name &&
+    cardCompany.color &&
+    cardNumberInString.length === CARD_NUMBER_IN_STRING_LENGTH &&
+    expirationDateInString.length === EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH &&
+    expirationDateInString !== initialState.expirationDate &&
+    ownerNameInString &&
+    ownerNameInString !== initialState.ownerName &&
+    securityCodeInString.length === SECURITY_CODE_LENGTH &&
+    passwordInString.length === PASSWORD_IN_STRING_LENGTH;
 
   return (
     <div className="AddFormPage">
@@ -31,6 +59,9 @@ export const AddFormPage = (props) => {
         setCardNumberInString={setCardNumberInString}
         setExpirationDateInString={setExpirationDateInString}
         setOwnerNameInString={setOwnerNameInString}
+        setSecurityCodeInString={setSecurityCodeInString}
+        setPasswordInString={setPasswordInString}
+        isFormFulFilled={isFormFulFilled}
       />
       <CardCompanySelectModal
         isOpen={isModalOpen}

@@ -4,7 +4,7 @@ import { handleSecurityCodeInputChange } from './handler';
 import cvcImage from '../../../../../images/cvc.png';
 
 export const SecurityCodeInput = (props) => {
-  const { passwordInputRef } = props;
+  const { passwordInputRef, setSecurityCodeInString } = props;
   const [securityCode, setSecurityCode] = useState('');
 
   return (
@@ -15,7 +15,14 @@ export const SecurityCodeInput = (props) => {
           className="SecurityCodeInput__Field"
           container="CardInfoForm__Input__Filler--filled SecurityCodeInput__Filler"
           type="password"
-          onChange={(e) => handleSecurityCodeInputChange({ e, passwordInputRef, setSecurityCode })}
+          onChange={(e) =>
+            handleSecurityCodeInputChange({
+              e,
+              passwordInputRef,
+              setSecurityCode,
+              setSecurityCodeInString,
+            })
+          }
           maxLength="3"
           value={securityCode}
         />

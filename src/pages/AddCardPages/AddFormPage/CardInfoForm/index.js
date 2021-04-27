@@ -16,6 +16,9 @@ export const CardInfoForm = (props) => {
     setCardNumberInString,
     setExpirationDateInString,
     setOwnerNameInString,
+    setSecurityCodeInString,
+    setPasswordInString,
+    isFormFulFilled,
   } = props;
   const expirationDateInputRef = createRef();
   const ownerNameInputRef = createRef();
@@ -39,9 +42,14 @@ export const CardInfoForm = (props) => {
         setExpirationDateInString={setExpirationDateInString}
       />
       <OwnerNameInput ref={ownerNameInputRef} setOwnerNameInString={setOwnerNameInString} />
-      <SecurityCodeInput passwordInputRef={passwordInputRef} />
-      <PasswordInput ref={passwordInputRef} />
-      <Button onClick={handleCardInfoSubmit}>다음</Button>
+      <SecurityCodeInput
+        passwordInputRef={passwordInputRef}
+        setSecurityCodeInString={setSecurityCodeInString}
+      />
+      <PasswordInput ref={passwordInputRef} setPasswordInString={setPasswordInString} />
+      <Button disabled={!isFormFulFilled} onClick={handleCardInfoSubmit}>
+        다음
+      </Button>
     </Form>
   );
 };

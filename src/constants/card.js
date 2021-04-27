@@ -1,12 +1,15 @@
 export const CARD_NUMBER_UNIT_LENGTH = 4;
+export const CARD_NUMBER_IN_STRING_LENGTH = 19;
 
 export const EXPIRATION_DATE_FORMAT_LENGTH = { month: 2, year: 2 };
+export const EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH = 5;
 
 export const MAX_OWNER_NAME_LENGTH = 30;
 
 export const SECURITY_CODE_LENGTH = 3;
 
 export const PASSWORD_UNIT_LENGTH = 1;
+export const PASSWORD_IN_STRING_LENGTH = 2;
 
 export const CARD_COMPANY_LIST = [
   {
