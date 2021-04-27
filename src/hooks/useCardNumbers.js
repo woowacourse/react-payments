@@ -9,24 +9,17 @@ const unformatCardNumbers = (formattedValue) => {
 
 const splitCardNumbers = (value) => {
   const splitNumbers = [];
-  let i;
 
-  for (i = 0; i < value.length / CARD_NUMBER.LENGTH; i++) {
-    splitNumbers.push(
-      value.slice(
-        i * CARD_NUMBER.PARTIAL_LENGTH,
-        (i + 1) * CARD_NUMBER.PARTIAL_LENGTH
-      )
-    );
-  }
-  if (value[i * CARD_NUMBER.PARTIAL_LENGTH] !== undefined) {
-    splitNumbers.push(
-      value.slice(
-        i * CARD_NUMBER.PARTIAL_LENGTH,
-        (i + 1) * CARD_NUMBER.PARTIAL_LENGTH
-      )
-    );
-  }
+  [...Array(Math.ceil(value.length / CARD_NUMBER.PARTIAL_LENGTH))].forEach(
+    (_, index) => {
+      splitNumbers.push(
+        value.slice(
+          index * CARD_NUMBER.PARTIAL_LENGTH,
+          (index + 1) * CARD_NUMBER.PARTIAL_LENGTH
+        )
+      );
+    }
+  );
 
   return splitNumbers;
 };

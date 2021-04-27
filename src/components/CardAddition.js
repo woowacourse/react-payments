@@ -60,8 +60,10 @@ const CardAddition = (props) => {
   });
 
   useEffect(() => {
-    setIsModalOpen(inputVerification.cardNumbers);
-  }, [inputVerification]);
+    setIsModalOpen(
+      cardNumbers[CARD_NUMBER.LENGTH - 1]?.length === CARD_NUMBER.PARTIAL_LENGTH
+    );
+  }, [cardNumbers]);
 
   useEffect(() => {
     setInputVerification({
@@ -230,6 +232,7 @@ const CardAddition = (props) => {
               .filter((value) => value.name !== "")
               .map((value) => (
                 <CardTypeRadio
+                  key={value.name + value.color}
                   cardType={value}
                   groupName="card-type"
                   isChecked={value.name === cardType.name}
