@@ -27,8 +27,8 @@ export const getExpirationDateInString = ({ expirationDate }) => {
   return expirationDateInString;
 };
 
-export const getOwnerNameInString = ({ ownerName, cardInfo }) => {
-  if (!cardInfo.isOwnerNameFilled) {
+export const getOwnerNameInString = ({ ownerName, isOwnerNameFilled }) => {
+  if (!isOwnerNameFilled) {
     return initialCardInfo.ownerName;
   }
   return ownerName;

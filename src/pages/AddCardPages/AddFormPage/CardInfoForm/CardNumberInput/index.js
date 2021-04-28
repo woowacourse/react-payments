@@ -4,13 +4,11 @@ import { handleBlockInvalidChar, handleCardNumberInputChange } from './handler';
 import { CARD_NUMBER_UNIT_LENGTH } from '../../../../../constants';
 
 export const CardNumberInput = ({
-  cardInfo,
+  number,
   setCardInfo,
   setIsModalOpen,
   expirationDateInputRef,
 }) => {
-  const { number } = cardInfo;
-
   const firstCardNumberInput = createRef();
   const secondCardNumberInput = createRef();
   const thirdCardNumberInput = createRef();

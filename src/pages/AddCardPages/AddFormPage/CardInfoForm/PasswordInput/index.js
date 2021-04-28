@@ -4,8 +4,7 @@ import { handlePasswordInputChange } from './handler';
 import { FIRST, SECOND } from '../../../../../constants';
 
 export const PasswordInput = forwardRef((props, firstRef) => {
-  const { cardInfo, setCardInfo } = props;
-  const { password } = cardInfo;
+  const { password, setCardInfo } = props;
   const secondRef = createRef();
 
   return (
@@ -20,14 +19,7 @@ export const PasswordInput = forwardRef((props, firstRef) => {
             type="password"
             name={index === 0 ? FIRST : SECOND}
             value={password[index]}
-            onChange={(e) =>
-              handlePasswordInputChange({
-                e,
-                password,
-                setCardInfo,
-                secondRef,
-              })
-            }
+            onChange={(e) => handlePasswordInputChange({ e, password, setCardInfo, secondRef })}
             ref={index === 0 ? firstRef : secondRef}
           />
         ))}
@@ -46,4 +38,4 @@ export const PasswordInput = forwardRef((props, firstRef) => {
   );
 });
 
-PasswordInput.displayName = 'passwordInputRef';
+PasswordInput.displayName = 'PasswordInput';

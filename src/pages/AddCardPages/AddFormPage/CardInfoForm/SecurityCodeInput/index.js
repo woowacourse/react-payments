@@ -4,7 +4,7 @@ import { SECURITY_CODE_LENGTH } from '../../../../../constants';
 import cvcImage from '../../../../../images/cvc.png';
 
 export const SecurityCodeInput = (props) => {
-  const { cardInfo, setCardInfo, passwordInputRef } = props;
+  const { securityCode, setCardInfo, passwordInputRef } = props;
 
   return (
     <>
@@ -16,7 +16,7 @@ export const SecurityCodeInput = (props) => {
           type="password"
           onChange={(e) => handleSecurityCodeInputChange({ e, setCardInfo, passwordInputRef })}
           maxLength={SECURITY_CODE_LENGTH}
-          value={cardInfo.securityCode}
+          value={securityCode}
         />
         <Button theme="question-mark" type="button">
           ?

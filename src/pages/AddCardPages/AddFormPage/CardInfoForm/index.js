@@ -17,6 +17,7 @@ export const CardInfoForm = (props) => {
     isFormFulFilled,
     setRoute,
   } = props;
+  const { number, expirationDate, ownerName, securityCode, password } = cardInfo;
   const expirationDateInputRef = createRef();
   const ownerNameInputRef = createRef();
   const passwordInputRef = createRef();
@@ -24,29 +25,29 @@ export const CardInfoForm = (props) => {
   return (
     <Form className="CardInfoForm">
       <CardNumberInput
-        cardInfo={cardInfo}
+        number={number}
         setCardInfo={setCardInfo}
         setIsModalOpen={setIsModalOpen}
         expirationDateInputRef={expirationDateInputRef}
       />
       <ExpirationDateInput
-        cardInfo={cardInfo}
+        expirationDate={expirationDate}
         setCardInfo={setCardInfo}
         ref={expirationDateInputRef}
         ownerNameInputRef={ownerNameInputRef}
       />
       <OwnerNameInput
-        initialCardInfo={initialCardInfo}
-        cardInfo={cardInfo}
+        initialOwnerName={initialCardInfo.ownerName}
+        ownerName={ownerName}
         setCardInfo={setCardInfo}
         ref={ownerNameInputRef}
       />
       <SecurityCodeInput
-        cardInfo={cardInfo}
+        securityCode={securityCode}
         setCardInfo={setCardInfo}
         passwordInputRef={passwordInputRef}
       />
-      <PasswordInput cardInfo={cardInfo} setCardInfo={setCardInfo} ref={passwordInputRef} />
+      <PasswordInput password={password} setCardInfo={setCardInfo} ref={passwordInputRef} />
       <Button
         disabled={!isFormFulFilled}
         onClick={(e) =>
@@ -62,16 +63,13 @@ export const CardInfoForm = (props) => {
 function handleCardInfoSubmit({ e, initialCardInfo, cardInfo, setIsModalOpen, setRoute }) {
   e.preventDefault();
 
-  if (isCardNameUnset(cardInfo, initialCardInfo)) {
+  if (isCardNameUnset(cardInfo.company, initialCardInfo.company)) {
     setIsModalOpen(true);
     return;
   }
   setRoute(PAGE.ADD_CARD_COMPLETE);
 }
 
-function isCardNameUnset(cardInfo, initialCardInfo) {
-  return (
-    cardInfo.company.name === initialCardInfo.company.name ||
-    cardInfo.company.color === initialCardInfo.company.color
-  );
+function isCardNameUnset(company, initialCompany) {
+  return company.name === initialCompany.name || company.color === initialCompany.color;
 }

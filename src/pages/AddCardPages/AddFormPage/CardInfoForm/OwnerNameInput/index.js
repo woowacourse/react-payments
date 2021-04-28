@@ -4,8 +4,7 @@ import { handleOwnerNameInputChange, handleOwnerNameInputBlur } from './handler'
 import { MAX_OWNER_NAME_LENGTH } from '../../../../../constants';
 
 export const OwnerNameInput = forwardRef((props, ref) => {
-  const { initialCardInfo, cardInfo, setCardInfo } = props;
-  const { ownerName } = cardInfo;
+  const { initialOwnerName, ownerName, setCardInfo } = props;
 
   return (
     <>
@@ -29,7 +28,7 @@ export const OwnerNameInput = forwardRef((props, ref) => {
         name="ownerNameInput"
         maxLength={MAX_OWNER_NAME_LENGTH}
         ref={ref}
-        value={ownerName === initialCardInfo.ownerName ? '' : ownerName}
+        value={ownerName === initialOwnerName ? '' : ownerName}
         onChange={(e) => handleOwnerNameInputChange({ e, setCardInfo })}
         onBlur={(e) => handleOwnerNameInputBlur({ e, setCardInfo })}
       />

@@ -16,10 +16,10 @@ import './style.css';
 
 export const AddFormPage = (props) => {
   const { setRoute, initialCardInfo, cardInfo, setCardInfo, isModalOpen, setIsModalOpen } = props;
-  const { number, expirationDate, ownerName, company } = cardInfo;
+  const { number, expirationDate, ownerName, company, isOwnerNameFilled } = cardInfo;
   const numberInString = getNumberInString({ number });
   const expirationDateInString = getExpirationDateInString({ expirationDate });
-  const ownerNameInString = getOwnerNameInString({ ownerName, cardInfo });
+  const ownerNameInString = getOwnerNameInString({ ownerName, isOwnerNameFilled });
 
   return (
     <div className="AddFormPage">
@@ -28,7 +28,8 @@ export const AddFormPage = (props) => {
         <Title>카드 추가</Title>
       </div>
       <CreditCardPreview
-        company={company}
+        companyColor={company.color}
+        companyName={company.name}
         numberInString={numberInString}
         expirationDateInString={expirationDateInString}
         ownerNameInString={ownerNameInString}
@@ -70,13 +71,19 @@ function BackwardButton() {
 }
 
 function CreditCardPreview(props) {
-  const { company, numberInString, expirationDateInString, ownerNameInString } = props;
+  const {
+    companyColor,
+    companyName,
+    numberInString,
+    expirationDateInString,
+    ownerNameInString,
+  } = props;
 
   return (
     <div className="CreditCardPreview">
-      <Card backgroundColor={company.color} boxShadow size="medium">
+      <Card backgroundColor={companyColor} boxShadow size="medium">
         <CreditCard
-          cardCompany={company.name}
+          cardCompany={companyName}
           cardNumber={numberInString}
           expirationDate={expirationDateInString}
           ownerName={ownerNameInString}
