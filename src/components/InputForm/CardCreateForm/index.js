@@ -20,7 +20,7 @@ export const CardCreateForm = ({
   cvc,
   password,
   isValidEveryInput,
-  setCurrentPage,
+  // setCurrentPage,
   submitCardDetail,
 }) => {
   return (
@@ -51,9 +51,7 @@ export const CardCreateForm = ({
         <PasswordInputContainer password={password.value} handleChange={password.handleChange} />
       </InputContainer>
       <Styled.ButtonContainer>
-        {isValidEveryInput && (
-          <InputButton text={'다음'} onClick={() => setCurrentPage('cardRegistered')} />
-        )}
+        {isValidEveryInput && <InputButton text={'다음'} />}
       </Styled.ButtonContainer>
     </Styled.Form>
   );

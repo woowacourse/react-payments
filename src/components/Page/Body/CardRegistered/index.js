@@ -15,9 +15,11 @@ export const CardRegistered = ({ card, setCurrentPage, updateCardContent, regist
     setNickName(e.target.value);
   };
 
-  const submitCardNickName = () => {
-    updateCardContent({ nickName });
-    registerCard();
+  const submitCardNickName = (e) => {
+    e.preventDefault();
+
+    registerCard({ ...card, nickName });
+    setCurrentPage('cardList');
   };
 
   return (
@@ -35,7 +37,6 @@ export const CardRegistered = ({ card, setCurrentPage, updateCardContent, regist
       <Styled.CardNickNameFormContainer>
         <NickNameForm
           nickName={{ value: nickName, handleChange: handleNickNameChange }}
-          setCurrentPage={setCurrentPage}
           submitCardNickName={submitCardNickName}
         />
       </Styled.CardNickNameFormContainer>

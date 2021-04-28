@@ -60,15 +60,10 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
   const submitCardDetail = (e) => {
     e.preventDefault();
 
-    // const cardDetail = {
-    //   company: company,
-    //   numbers: [numbers.first, numbers.second, numbers.third, numbers.fourth],
-    //   validDay: [validDay.month, validDay.year],
-    //   cvc: cvc,
-    //   password: [password.firstDigit, password.secondDigit],
-    // };
+    const cardDetail = { company, numbers, validDay, owner, cvc, password };
 
-    // updateCardContent(cardDetail);
+    updateCardContent(cardDetail);
+    setCurrentPage('cardRegistered');
   };
 
   const openModal = () => {
@@ -103,7 +98,6 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
           cvc={{ value: cvc, handleChange: handleCvcChange, isValid: true }}
           password={{ value: password, handleChange: handlePasswordChange, isValid: true }}
           isValidEveryInput={isValidEveryInput()}
-          setCurrentPage={setCurrentPage}
           submitCardDetail={submitCardDetail}
         />
       </Styled.CardCreateFormContainer>

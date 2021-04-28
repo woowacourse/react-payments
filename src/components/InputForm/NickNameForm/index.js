@@ -14,7 +14,7 @@ export const NickNameForm = ({ nickName, setCurrentPage, submitCardNickName }) =
         <NickNameInputContainer nickName={nickName.value} handleChange={nickName.handleChange} />
       </Styled.InputContainer>
       <Styled.ButtonContainer>
-        <InputButton onClick={() => setCurrentPage('cardList')} text={'확인'} />
+        <InputButton text={'확인'} />
       </Styled.ButtonContainer>
     </Styled.Form>
   );

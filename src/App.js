@@ -35,14 +35,12 @@ function App() {
   const [cards, setCards] = useState(registeredCards);
   const [card, setCard] = useState(cardFrame);
 
-  const updateCardContent = (cardInput, callback) => {
-    console.log(cardInput);
-    // TODO: set 비동기에 관해 학습(카드 데이터가 업데이트 되기 전에 렌더 되는 듯.)
-    setCard({ ...card, ...cardInput }, callback);
+  const updateCardContent = (cardInput) => {
+    setCard((card) => ({ ...card, ...cardInput }));
   };
 
-  const registerCard = () => {
-    setCards([...cards, card]);
+  const registerCard = (newCard) => {
+    setCards((cards) => [...cards, newCard]);
   };
 
   const ChildComponents = {
