@@ -21,7 +21,7 @@ export const ExpirationDateInput = forwardRef((props, monthRef) => {
           type="number"
           name="month"
           ref={monthRef}
-          value={expirationDate.month}
+          value={expirationDate.month || ''}
           onChange={(e) => handleExpirationDateInputChange({ e, setCardInfo, nextInput })}
         />
         <Slash />
@@ -31,7 +31,7 @@ export const ExpirationDateInput = forwardRef((props, monthRef) => {
           type="number"
           name="year"
           ref={yearRef}
-          value={expirationDate.year}
+          value={expirationDate.year || ''}
           onChange={(e) =>
             handleExpirationDateInputChange({
               e,
