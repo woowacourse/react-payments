@@ -1,8 +1,9 @@
 import {
   INITIAL_CARD_NUMBER_IN_STRING,
   CARD_NUMBER_UNIT_LENGTH,
-  INITIAL_EXPIRATION_DATE_IN_STRING,
   EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH,
+  INITIAL_EXPIRATION_MONTH,
+  INITIAL_EXPIRATION_YEAR,
   CARD_NUMBER_MASKS,
   SLASH,
 } from './constants';
@@ -17,12 +18,13 @@ export const getNumberInString = ({ number }) => {
 
 export const getExpirationDateInString = ({ expirationDate }) => {
   const expirationDateInString = Object.values(expirationDate).join(SLASH);
+
   if (
-    expirationDateInString < EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH ||
-    expirationDate.month === initialCardInfo.expirationDate.month ||
-    expirationDate.year === initialCardInfo.expirationDate.year
+    expirationDateInString.length < EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH ||
+    expirationDate.month === '' ||
+    expirationDate.year === ''
   ) {
-    return INITIAL_EXPIRATION_DATE_IN_STRING;
+    return `${INITIAL_EXPIRATION_MONTH}${SLASH}${INITIAL_EXPIRATION_YEAR}`;
   }
   return expirationDateInString;
 };

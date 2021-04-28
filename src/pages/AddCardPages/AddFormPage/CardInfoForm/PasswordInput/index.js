@@ -19,7 +19,7 @@ export const PasswordInput = forwardRef((props, firstRef) => {
             className="CardPasswordInput__Field"
             type="password"
             name={index === 0 ? FIRST : SECOND}
-            value={password[index]}
+            value={password[index === 0 ? FIRST : SECOND]}
             onChange={(e) =>
               handlePasswordInputChange({
                 e,
