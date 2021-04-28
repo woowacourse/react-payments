@@ -74,6 +74,8 @@ const CardNumberInput = memo(
 
             break;
           case CARD_NUMBER_INPUT.NAME.SECOND:
+            $input1.current.blur();
+
             setModalOpen(true);
 
             break;

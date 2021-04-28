@@ -5,6 +5,8 @@ import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardPasswordInput.style';
 import { Circle } from '../../commons/circle/Circle';
 import { CARD_PASSWORD_INPUT } from '../../../constants/input';
+import { useState } from 'react';
+import VirtualKeyboardModal from '../virtualKeyboardModal/VirtualKeyboardModal';
 
 const transparentInputStyles = {
   color: COLOR.MINT,
@@ -19,6 +21,8 @@ const isValidInput = cardPassword => {
 };
 
 const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
+  const [isModalOpened, setModalOpen] = useState(false);
+
   const $input1 = useRef(null);
 
   useEffect(() => {
@@ -27,50 +31,55 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
 
   const handleInputChange = ({ target }) => {
     setCardPassword(prevState => ({ ...prevState, [target.name]: target.value }));
-
-    if (
-      target.name === CARD_PASSWORD_INPUT.NAME.FIRST && //
-      target.value.length === CARD_PASSWORD_INPUT.LENGTH
-    ) {
-      $input1.current.focus();
-    }
   };
 
   return (
-    <div>
-      <Styled.InputLabelContainer>카드 비밀번호 {isValidCardPassword && '✔️'}</Styled.InputLabelContainer>
-      <Styled.Container>
-        <Styled.InputContainer isValidInput={isValidCardPassword}>
-          <TransparentInput
-            type="password"
-            name={CARD_PASSWORD_INPUT.NAME.FIRST}
-            minLength={CARD_PASSWORD_INPUT.LENGTH}
-            maxLength={CARD_PASSWORD_INPUT.LENGTH}
-            value={cardPassword[CARD_PASSWORD_INPUT.NAME.FIRST]}
-            onChange={handleInputChange}
-            styles={transparentInputStyles}
-          />
-        </Styled.InputContainer>
-        <Styled.InputContainer isValidInput={isValidCardPassword}>
-          <TransparentInput
-            type="password"
-            name={CARD_PASSWORD_INPUT.NAME.SECOND}
-            minLength={CARD_PASSWORD_INPUT.LENGTH}
-            maxLength={CARD_PASSWORD_INPUT.LENGTH}
-            innerRef={$input1}
-            value={cardPassword[CARD_PASSWORD_INPUT.NAME.SECOND]}
-            onChange={handleInputChange}
-            styles={transparentInputStyles}
-          />
-        </Styled.InputContainer>
+    <>
+      <div>
+        <Styled.InputLabelContainer>카드 비밀번호 {isValidCardPassword && '✔️'}</Styled.InputLabelContainer>
+        <Styled.Container>
+          <Styled.InputContainer isValidInput={isValidCardPassword} onClick={() => setModalOpen(true)}>
+            <TransparentInput
+              type="password"
+              name={CARD_PASSWORD_INPUT.NAME.FIRST}
+              minLength={CARD_PASSWORD_INPUT.LENGTH}
+              maxLength={CARD_PASSWORD_INPUT.LENGTH}
+              value={cardPassword[CARD_PASSWORD_INPUT.NAME.FIRST]}
+              onChange={handleInputChange}
+              styles={transparentInputStyles}
+              disabled
+            />
+          </Styled.InputContainer>
+          <Styled.InputContainer isValidInput={isValidCardPassword} onClick={() => setModalOpen(true)}>
+            <TransparentInput
+              type="password"
+              name={CARD_PASSWORD_INPUT.NAME.SECOND}
+              minLength={CARD_PASSWORD_INPUT.LENGTH}
+              maxLength={CARD_PASSWORD_INPUT.LENGTH}
+              innerRef={$input1}
+              value={cardPassword[CARD_PASSWORD_INPUT.NAME.SECOND]}
+              onChange={handleInputChange}
+              styles={transparentInputStyles}
+              disabled
+            />
+          </Styled.InputContainer>
 
-        {[...Array(2)].map((_, idx) => (
-          <Styled.CircleContainer key={`password-${idx + 2}`}>
-            <Circle styles={{ backgroundColor: COLOR.MINT }} />
-          </Styled.CircleContainer>
-        ))}
-      </Styled.Container>
-    </div>
+          {[...Array(2)].map((_, idx) => (
+            <Styled.CircleContainer key={`password-${idx + 2}`}>
+              <Circle styles={{ backgroundColor: COLOR.MINT }} />
+            </Styled.CircleContainer>
+          ))}
+        </Styled.Container>
+      </div>
+      {isModalOpened && (
+        <VirtualKeyboardModal
+          closeModal={() => setModalOpen(false)}
+          currentInput="cardPassword"
+          state={cardPassword}
+          setState={setCardPassword}
+        />
+      )}
+    </>
   );
 });
 
