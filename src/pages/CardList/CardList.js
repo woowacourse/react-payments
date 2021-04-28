@@ -11,7 +11,7 @@ const CardList = () => {
       <Link to={ROUTE.ADD}>카드 추가하기</Link>
       <ul>
         {cardList.value &&
-          cardList.value.map((card) => {
+          cardList?.value.reverse().map((card) => {
             const {
               id,
               cardNumbers,
