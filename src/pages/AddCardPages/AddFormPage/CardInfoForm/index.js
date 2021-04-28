@@ -19,12 +19,23 @@ export const CardInfoForm = (props) => {
     setSecurityCodeInString,
     setPasswordInString,
     isFormFulFilled,
+    cardCompany,
+    initialState,
   } = props;
   const expirationDateInputRef = createRef();
   const ownerNameInputRef = createRef();
   const passwordInputRef = createRef();
-  const handleCardInfoSubmit = (e) => {
+  const isCardNameUnset = (cardCompany, initialState) =>
+    cardCompany.name === initialState.cardCompany.name ||
+    cardCompany.color === initialState.cardCompany.color;
+
+  const handleCardInfoSubmit = ({ e, cardCompany, setIsModalOpen, initialState }) => {
     e.preventDefault();
+
+    if (isCardNameUnset(cardCompany, initialState)) {
+      setIsModalOpen(true);
+      return;
+    }
     setRoute(PAGE.ADD_CARD_COMPLETE);
   };
 
@@ -47,7 +58,10 @@ export const CardInfoForm = (props) => {
         setSecurityCodeInString={setSecurityCodeInString}
       />
       <PasswordInput ref={passwordInputRef} setPasswordInString={setPasswordInString} />
-      <Button disabled={!isFormFulFilled} onClick={handleCardInfoSubmit}>
+      <Button
+        disabled={!isFormFulFilled}
+        onClick={(e) => handleCardInfoSubmit({ e, cardCompany, setIsModalOpen, initialState })}
+      >
         다음
       </Button>
     </Form>

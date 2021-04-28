@@ -30,8 +30,6 @@ export const AddFormPage = (props) => {
   const [passwordInString, setPasswordInString] = useState(initialState.password);
   const [isModalOpen, setIsModalOpen] = useState(initialState.isModalOpen);
   const isFormFulFilled =
-    cardCompany.name &&
-    cardCompany.color &&
     cardNumberInString.length === CARD_NUMBER_IN_STRING_LENGTH &&
     expirationDateInString.length === EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH &&
     expirationDateInString !== initialState.expirationDate &&
@@ -62,6 +60,8 @@ export const AddFormPage = (props) => {
         setSecurityCodeInString={setSecurityCodeInString}
         setPasswordInString={setPasswordInString}
         isFormFulFilled={isFormFulFilled}
+        cardCompany={cardCompany}
+        initialState={initialState}
       />
       <CardCompanySelectModal
         isOpen={isModalOpen}
