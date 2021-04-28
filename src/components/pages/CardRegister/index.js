@@ -19,18 +19,21 @@ const CardRegister = (props) => {
   const [secureCode, setSecureCode] = useState('');
   const [cardPassword, setCardPassword] = useState({ 1: '', 2: '' });
 
-  const isCardNumbersFilled = (numbers) => Object.values(numbers).every((fragment) => fragment.length === 4);
-
   const handleClickNextPage = () => {
     setCardData({ bankId, cardNumbers, expirationDate, ownerName, secureCode, cardPassword });
     handleGoNext();
   };
 
+  const isCardIdentified =
+    Object.values(cardNumbers)
+      .slice(0, 2)
+      .every((fragment) => fragment.length === 4) && !bankId;
+
   useEffect(() => {
-    if (isCardNumbersFilled(cardNumbers)) {
+    if (isCardIdentified) {
       setSelectorOpened(true);
     }
-  }, [cardNumbers]);
+  }, [isCardIdentified]);
 
   useEffect(() => {
     setCardColor(dummyBanks.find(({ id }) => id === bankId)?.color || PALETTE.EMPTY_CARD_GRAY);

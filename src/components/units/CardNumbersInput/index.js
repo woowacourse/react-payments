@@ -15,12 +15,13 @@ const CardNumbersInput = (props) => {
   const handleChangeNumbers = (event) => {
     if (!isFourDigits(event.target.value)) return;
 
-    const index = event.target.dataset.numberIdx;
+    const index = Number(event.target.dataset.numberIdx);
     const numberFragment = event.target.value;
 
     setCardNumbers((prevNumbers) => ({ ...prevNumbers, [index]: numberFragment }));
 
-    index <= 3 ? moveFocusToNextFragment(Number(index)) : focusOut(Number(index) - 1);
+    // TODO: selector open 시 input에서 일시적으로 focus out
+    index <= 3 ? moveFocusToNextFragment(index) : focusOut(index - 1);
   };
 
   const moveFocusToNextFragment = (index) => {
