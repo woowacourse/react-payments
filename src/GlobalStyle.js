@@ -16,6 +16,24 @@ const GlobalStyle = () => (
         font-family: 'Noto Sans KR', sans-serif;
         height: 100%;
       }
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      a {
+        text-decoration: none;
+        outline: none;
+        color: black;
+        &:hover,
+        &:active,
+        &:visited,
+        &:focus {
+          text-decoration: none;
+        }
+      }
     `}
   />
 );
