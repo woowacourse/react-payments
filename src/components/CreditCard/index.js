@@ -4,10 +4,10 @@ import { Card } from '..';
 import './style.css';
 
 export const CreditCard = (props) => {
-  const { cardCompany, cardNumber, ownerName, expirationDate } = props;
+  const { company, cardNumber, ownerName, expirationDate } = props;
   return (
     <div className="CreditCard">
-      <span className="CreditCard__CardCompany"> {cardCompany}</span>
+      <span className="CreditCard__CardCompany"> {company}</span>
       <Card backgroundColor="#cbba64" size="chip" />
       <span className="CreditCard__CardNumber"> {cardNumber}</span>
       <div className="CreditCard__Line">
@@ -19,14 +19,14 @@ export const CreditCard = (props) => {
 };
 
 CreditCard.propTypes = {
-  cardCompany: PropTypes.string,
+  company: PropTypes.string,
   cardNumber: PropTypes.string,
   ownerName: PropTypes.string,
   expirationDate: PropTypes.string,
 };
 
 CreditCard.defaultProps = {
-  cardCompany: '',
+  company: '',
   cardNumber: '0000 0000 ···· ····',
   ownerName: '',
   expirationDate: '',

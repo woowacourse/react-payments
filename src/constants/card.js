@@ -1,23 +1,22 @@
-export const INITIAL_CARD_NUMBER_IN_STRING = '';
-export const CARD_NUMBER_UNIT_LENGTH = 4;
-export const CARD_NUMBER_IN_STRING_LENGTH = 19;
-export const CARD_NUMBER_MASKS = '····';
-
-export const INITIAL_EXPIRATION_DATE_IN_STRING = 'MM/YY';
-
 export const FIRST = 'first';
 export const SECOND = 'second';
-
-export const EXPIRATION_DATE_FORMAT_LENGTH = { month: 2, year: 2 };
-export const EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH = 5;
 export const SLASH = '/';
+
+export const INITIAL_FORMATTED_CARD_NUMBER = '';
+export const FORMATTED_CARD_NUMBER_LENGTH = 19;
+export const CARD_NUMBER_UNIT_LENGTH = 4;
+export const CARD_NUMBER_MASKS = '····';
+
+export const INITIAL_FORMATTED_EXPIRATION_DATE = 'MM/YY';
+export const FORMATTED_EXPIRATION_DATE_LENGTH = 5;
+export const EXPIRATION_DATE_FORMAT_LENGTH = { month: 2, year: 2 };
 
 export const MAX_OWNER_NAME_LENGTH = 30;
 
 export const SECURITY_CODE_LENGTH = 3;
 
 export const PASSWORD_UNIT_LENGTH = 1;
-export const PASSWORD_IN_STRING_LENGTH = 2;
+export const FORMATTED_PASSWORD_LENGTH = 2;
 
 export const MAX_NICKNAME_LENGTH = 10;
 

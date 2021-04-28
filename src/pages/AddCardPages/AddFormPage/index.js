@@ -2,24 +2,24 @@ import { Button, Card, CreditCard, Title } from '../../../components';
 import { CardInfoForm } from './CardInfoForm';
 import { CardCompanySelectModal } from './CardCompanySelectModal';
 import {
-  CARD_NUMBER_IN_STRING_LENGTH,
-  EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH,
+  FORMATTED_CARD_NUMBER_LENGTH,
+  FORMATTED_EXPIRATION_DATE_LENGTH,
   SECURITY_CODE_LENGTH,
-  PASSWORD_IN_STRING_LENGTH,
+  FORMATTED_PASSWORD_LENGTH,
 } from '../../../constants';
 import {
-  getNumberInString,
-  getExpirationDateInString,
-  getOwnerNameInString,
+  getFormattedNumber,
+  getFormattedExpirationDate,
+  getFormattedOwnerName,
 } from '../../../cardInfoFormatter';
 import './style.css';
 
 export const AddFormPage = (props) => {
   const { setRoute, initialCardInfo, cardInfo, setCardInfo, isModalOpen, setIsModalOpen } = props;
   const { number, expirationDate, ownerName, company, isOwnerNameFilled } = cardInfo;
-  const numberInString = getNumberInString({ number });
-  const expirationDateInString = getExpirationDateInString({ expirationDate });
-  const ownerNameInString = getOwnerNameInString({ ownerName, isOwnerNameFilled });
+  const formattedNumber = getFormattedNumber({ number });
+  const formattedExpirationDate = getFormattedExpirationDate({ expirationDate });
+  const formattedOwnerName = getFormattedOwnerName({ ownerName, isOwnerNameFilled });
 
   return (
     <div className="AddFormPage">
@@ -30,9 +30,9 @@ export const AddFormPage = (props) => {
       <CreditCardPreview
         companyColor={company.color}
         companyName={company.name}
-        numberInString={numberInString}
-        expirationDateInString={expirationDateInString}
-        ownerNameInString={ownerNameInString}
+        formattedNumber={formattedNumber}
+        formattedExpirationDate={formattedExpirationDate}
+        formattedOwnerName={formattedOwnerName}
       />
       <CardInfoForm
         setRoute={setRoute}
@@ -41,9 +41,9 @@ export const AddFormPage = (props) => {
         setCardInfo={setCardInfo}
         setIsModalOpen={setIsModalOpen}
         isFormFulFilled={isFormFulFilled({
-          numberInString,
-          expirationDateInString,
-          ownerNameInString,
+          formattedNumber,
+          formattedExpirationDate,
+          formattedOwnerName,
           cardInfo,
           initialCardInfo,
         })}
@@ -74,19 +74,19 @@ function CreditCardPreview(props) {
   const {
     companyColor,
     companyName,
-    numberInString,
-    expirationDateInString,
-    ownerNameInString,
+    formattedNumber,
+    formattedExpirationDate,
+    formattedOwnerName,
   } = props;
 
   return (
     <div className="CreditCardPreview">
       <Card backgroundColor={companyColor} boxShadow size="medium">
         <CreditCard
-          cardCompany={companyName}
-          cardNumber={numberInString}
-          expirationDate={expirationDateInString}
-          ownerName={ownerNameInString}
+          company={companyName}
+          cardNumber={formattedNumber}
+          expirationDate={formattedExpirationDate}
+          ownerName={formattedOwnerName}
         />
       </Card>
     </div>
@@ -94,19 +94,19 @@ function CreditCardPreview(props) {
 }
 
 function isFormFulFilled({
-  numberInString,
-  expirationDateInString,
-  ownerNameInString,
+  formattedNumber,
+  formattedExpirationDate,
+  formattedOwnerName,
   cardInfo,
   initialCardInfo,
 }) {
   return (
-    numberInString.length === CARD_NUMBER_IN_STRING_LENGTH &&
-    expirationDateInString.length === EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH &&
-    expirationDateInString !== initialCardInfo.expirationDate &&
-    ownerNameInString &&
-    ownerNameInString !== initialCardInfo.ownerName &&
+    formattedNumber.length === FORMATTED_CARD_NUMBER_LENGTH &&
+    formattedExpirationDate.length === FORMATTED_EXPIRATION_DATE_LENGTH &&
+    formattedExpirationDate !== initialCardInfo.expirationDate &&
+    formattedOwnerName &&
+    formattedOwnerName !== initialCardInfo.ownerName &&
     cardInfo.securityCode.length === SECURITY_CODE_LENGTH &&
-    Object.values(cardInfo.password).join('').length === PASSWORD_IN_STRING_LENGTH
+    Object.values(cardInfo.password).join('').length === FORMATTED_PASSWORD_LENGTH
   );
 }

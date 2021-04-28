@@ -1,18 +1,18 @@
 import { Card, CreditCard, Text } from '../../../components';
 import { CardNicknameForm } from './CardNicknameForm';
 import {
-  getNumberInString,
-  getExpirationDateInString,
-  getOwnerNameInString,
+  getFormattedNumber,
+  getFormattedExpirationDate,
+  getFormattedOwnerName,
 } from '../../../cardInfoFormatter';
 import './style.css';
 
 export const AddCompletePage = (props) => {
   const { setRoute, initialCardInfo, cardInfo, setCardInfo } = props;
   const { number, expirationDate, ownerName, company, nickname } = cardInfo;
-  const numberInString = getNumberInString({ number });
-  const expirationDateInString = getExpirationDateInString({ expirationDate });
-  const ownerNameInString = getOwnerNameInString({ ownerName, cardInfo });
+  const formattedNumber = getFormattedNumber({ number });
+  const formattedExpirationDate = getFormattedExpirationDate({ expirationDate });
+  const formattedOwnerName = getFormattedOwnerName({ ownerName, cardInfo });
 
   return (
     <div>
@@ -20,10 +20,11 @@ export const AddCompletePage = (props) => {
         카드등록이 완료되었습니다.
       </Text>
       <CreditCardPreview
-        cardCompany={company}
-        cardNumberInString={numberInString}
-        expirationDateInString={expirationDateInString}
-        ownerNameInString={ownerNameInString}
+        companyColor={company.color}
+        companyName={company.name}
+        formattedNumber={formattedNumber}
+        formattedExpirationDate={formattedExpirationDate}
+        formattedOwnerName={formattedOwnerName}
       />
       <CardNicknameForm
         setRoute={setRoute}
@@ -36,16 +37,22 @@ export const AddCompletePage = (props) => {
 };
 
 function CreditCardPreview(props) {
-  const { cardCompany, cardNumberInString, expirationDateInString, ownerNameInString } = props;
+  const {
+    companyColor,
+    companyName,
+    formattedNumber,
+    formattedExpirationDate,
+    formattedOwnerName,
+  } = props;
 
   return (
     <div className="CreditCardPreview CreditCardPreview--large">
-      <Card backgroundColor={cardCompany.color} boxShadow size="medium">
+      <Card backgroundColor={companyColor} boxShadow size="medium">
         <CreditCard
-          cardCompany={cardCompany.name}
-          cardNumber={cardNumberInString}
-          expirationDate={expirationDateInString}
-          ownerName={ownerNameInString}
+          company={companyName}
+          cardNumber={formattedNumber}
+          expirationDate={formattedExpirationDate}
+          ownerName={formattedOwnerName}
         />
       </Card>
     </div>
