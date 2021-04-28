@@ -1,8 +1,16 @@
+export const INITIAL_CARD_NUMBER_IN_STRING = '';
 export const CARD_NUMBER_UNIT_LENGTH = 4;
 export const CARD_NUMBER_IN_STRING_LENGTH = 19;
+export const CARD_NUMBER_MASKS = '····';
+
+export const INITIAL_EXPIRATION_DATE_IN_STRING = 'MM/YY';
+
+export const FIRST = 'first';
+export const SECOND = 'second';
 
 export const EXPIRATION_DATE_FORMAT_LENGTH = { month: 2, year: 2 };
 export const EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH = 5;
+export const SLASH = '/';
 
 export const MAX_OWNER_NAME_LENGTH = 30;
 
