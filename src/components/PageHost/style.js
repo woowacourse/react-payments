@@ -9,7 +9,7 @@ const Root = styled.main`
 `;
 
 const NavigationBar = styled.nav`
-  display: flex;
+  display: ${({ title }) => (title ? 'flex' : 'none')}};
   align-itmes: center;
   position: sticky;
   top: 0;
