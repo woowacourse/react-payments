@@ -1,9 +1,10 @@
 import { createRef, forwardRef } from 'react';
 import { Container, Input, Label, Text } from '../../../../../components';
 import { handleExpirationDateInputChange } from './handler';
+import { MONTH, YEAR } from '../../../../../constants';
 
 export const ExpirationDateInput = forwardRef((props, monthRef) => {
-  const { expirationDate, setCardInfo, ownerNameInputRef, setformattedExpirationDate } = props;
+  const { expirationDate, setCardInfo, ownerNameInputRef } = props;
   const yearRef = createRef();
   const nextInput = {
     month: yearRef,
@@ -18,28 +19,20 @@ export const ExpirationDateInput = forwardRef((props, monthRef) => {
           className="ExpirationDateInput__Field"
           placeholder="MM"
           type="number"
-          name="month"
+          name={MONTH}
           ref={monthRef}
           value={expirationDate.month}
-          onChange={(e) => handleExpirationDateInputChange({ e, setCardInfo, nextInput })}
+          onChange={(e) => handleExpirationDateInputChange({ e, expirationDate, setCardInfo, nextInput })}
         />
         <Slash />
         <Input
           className="ExpirationDateInput__Field"
           placeholder="YY"
           type="number"
-          name="year"
+          name={YEAR}
           ref={yearRef}
           value={expirationDate.year}
-          onChange={(e) =>
-            handleExpirationDateInputChange({
-              e,
-              setCardInfo,
-              nextInput,
-              setformattedExpirationDate,
-              expirationDate,
-            })
-          }
+          onChange={(e) => handleExpirationDateInputChange({ e, expirationDate, setCardInfo, nextInput })}
         />
       </Container>
     </>

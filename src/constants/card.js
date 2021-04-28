@@ -1,5 +1,8 @@
 export const FIRST = 'first';
 export const SECOND = 'second';
+
+export const MONTH = 'month';
+export const YEAR = 'year';
 export const SLASH = '/';
 
 export const INITIAL_FORMATTED_CARD_NUMBER = '';
@@ -7,9 +10,10 @@ export const FORMATTED_CARD_NUMBER_LENGTH = 19;
 export const CARD_NUMBER_UNIT_LENGTH = 4;
 export const CARD_NUMBER_MASKS = '····';
 
-export const INITIAL_FORMATTED_EXPIRATION_DATE = 'MM/YY';
+export const INITIAL_FORMATTED_EXPIRATION_MONTH = 'MM';
+export const INITIAL_FORMATTED_EXPIRATION_YEAR = 'YY';
 export const FORMATTED_EXPIRATION_DATE_LENGTH = 5;
-export const EXPIRATION_DATE_FORMAT_LENGTH = { month: 2, year: 2 };
+export const EXPIRATION_DATE_LENGTH = { month: 2, year: 2 };
 
 export const MAX_OWNER_NAME_LENGTH = 30;
 
