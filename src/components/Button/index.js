@@ -24,5 +24,5 @@ Button.defaultProps = {
   theme: 'submit',
   backgroundColor: 'transparent',
   children: '',
-  onClick: undefined,
+  onClick: null,
 };
