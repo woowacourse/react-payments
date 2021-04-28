@@ -1,12 +1,12 @@
-import { initialCardInfo } from './App';
 import {
   INITIAL_FORMATTED_CARD_NUMBER,
   CARD_NUMBER_UNIT_LENGTH,
+  CARD_NUMBER_MASKS,
   INITIAL_FORMATTED_EXPIRATION_MONTH,
   INITIAL_FORMATTED_EXPIRATION_YEAR,
   FORMATTED_EXPIRATION_DATE_LENGTH,
-  CARD_NUMBER_MASKS,
   SLASH,
+  INITIAL_FORMATTED_OWNER_NAME,
 } from './constants';
 
 export const getFormattedCardInfo = ({ cardInfo }) => {
@@ -41,7 +41,7 @@ const getFormattedExpirationDate = ({ expirationDate }) => {
 
 const getFormattedOwnerName = ({ ownerName, isOwnerNameFilled }) => {
   if (!isOwnerNameFilled) {
-    return initialCardInfo.ownerName;
+    return INITIAL_FORMATTED_OWNER_NAME;
   }
   return ownerName;
 };

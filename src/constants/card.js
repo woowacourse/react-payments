@@ -15,6 +15,7 @@ export const INITIAL_FORMATTED_EXPIRATION_YEAR = 'YY';
 export const FORMATTED_EXPIRATION_DATE_LENGTH = 5;
 export const EXPIRATION_DATE_LENGTH = { month: 2, year: 2 };
 
+export const INITIAL_FORMATTED_OWNER_NAME = 'NAME';
 export const MAX_OWNER_NAME_LENGTH = 30;
 
 export const SECURITY_CODE_LENGTH = 3;

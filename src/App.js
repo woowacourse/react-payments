@@ -3,11 +3,11 @@ import { CardListPage } from './pages/CardListPage';
 import { AddCardPage } from './pages/AddCardPages';
 import { PAGE } from './constants';
 
-export const initialCardInfo = {
+const initialCardInfo = {
   number: { first: '', second: '', third: '', fourth: '' },
   company: { name: '', color: '' },
   expirationDate: { month: '', year: '' },
-  ownerName: 'NAME',
+  ownerName: '',
   isOwnerNameFilled: false,
   securityCode: '',
   password: { first: '', second: '' },
