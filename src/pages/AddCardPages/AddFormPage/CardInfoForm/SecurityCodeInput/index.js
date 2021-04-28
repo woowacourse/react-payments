@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import { Button, Input, Label } from '../../../../../components';
 import { handleSecurityCodeInputChange } from './handler';
+import { SECURITY_CODE_LENGTH } from '../../../../../constants';
 import cvcImage from '../../../../../images/cvc.png';
 
 export const SecurityCodeInput = (props) => {
-  const { passwordInputRef, setSecurityCodeInString } = props;
-  const [securityCode, setSecurityCode] = useState('');
+  const { cardInfo, setCardInfo, passwordInputRef } = props;
 
   return (
     <>
@@ -15,16 +14,9 @@ export const SecurityCodeInput = (props) => {
           className="SecurityCodeInput__Field"
           container="CardInfoForm__Input__Filler--filled SecurityCodeInput__Filler"
           type="password"
-          onChange={(e) =>
-            handleSecurityCodeInputChange({
-              e,
-              passwordInputRef,
-              setSecurityCode,
-              setSecurityCodeInString,
-            })
-          }
-          maxLength="3"
-          value={securityCode}
+          onChange={(e) => handleSecurityCodeInputChange({ e, setCardInfo, passwordInputRef })}
+          maxLength={SECURITY_CODE_LENGTH}
+          value={cardInfo.securityCode}
         />
         <Button theme="question-mark" type="button">
           ?

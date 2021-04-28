@@ -1,12 +1,12 @@
-import { useState, forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { Input, Label, Text } from '../../../../../components';
 import { handleOwnerNameInputChange, handleOwnerNameInputBlur } from './handler';
 import { MAX_OWNER_NAME_LENGTH } from '../../../../../constants';
 
 export const OwnerNameInput = forwardRef((props, ref) => {
-  const { setOwnerNameInString } = props;
-  const [ownerName, setOwnerName] = useState('');
-  const [charLength, setCharLength] = useState(0);
+  const { initialCardInfo, cardInfo, setCardInfo } = props;
+  const { ownerName } = cardInfo;
+
   return (
     <>
       <div className="OwnerNameInput__Header">
@@ -19,7 +19,7 @@ export const OwnerNameInput = forwardRef((props, ref) => {
           color="#525252"
           width="2rem"
         >
-          {charLength}/{MAX_OWNER_NAME_LENGTH}
+          {`${ownerName.length}/${MAX_OWNER_NAME_LENGTH}`}
         </Text>
       </div>
       <Input
@@ -29,9 +29,9 @@ export const OwnerNameInput = forwardRef((props, ref) => {
         name="ownerNameInput"
         maxLength={MAX_OWNER_NAME_LENGTH}
         ref={ref}
-        value={ownerName}
-        onChange={(e) => handleOwnerNameInputChange({ e, setCharLength, setOwnerName })}
-        onBlur={(e) => handleOwnerNameInputBlur({ e, setOwnerNameInString })}
+        value={ownerName === initialCardInfo.ownerName ? '' : ownerName}
+        onChange={(e) => handleOwnerNameInputChange({ e, setCardInfo })}
+        onBlur={(e) => handleOwnerNameInputBlur({ e, setCardInfo })}
       />
     </>
   );

@@ -7,35 +7,19 @@ import {
   SECURITY_CODE_LENGTH,
   PASSWORD_IN_STRING_LENGTH,
 } from '../../../constants';
+import {
+  getNumberInString,
+  getExpirationDateInString,
+  getOwnerNameInString,
+} from '../../../cardInfoFormatter';
 import './style.css';
 
 export const AddFormPage = (props) => {
-  const {
-    setRoute,
-    initialState,
-    cardCompany,
-    setCardCompany,
-    cardNumberInString,
-    setCardNumberInString,
-    expirationDateInString,
-    setExpirationDateInString,
-    ownerNameInString,
-    setOwnerNameInString,
-    securityCodeInString,
-    setSecurityCodeInString,
-    passwordInString,
-    setPasswordInString,
-    isModalOpen,
-    setIsModalOpen,
-  } = props;
-  const isFormFulFilled =
-    cardNumberInString.length === CARD_NUMBER_IN_STRING_LENGTH &&
-    expirationDateInString.length === EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH &&
-    expirationDateInString !== initialState.expirationDate &&
-    ownerNameInString &&
-    ownerNameInString !== initialState.ownerName &&
-    securityCodeInString.length === SECURITY_CODE_LENGTH &&
-    passwordInString.length === PASSWORD_IN_STRING_LENGTH;
+  const { setRoute, initialCardInfo, cardInfo, setCardInfo, isModalOpen, setIsModalOpen } = props;
+  const { number, expirationDate, ownerName, company } = cardInfo;
+  const numberInString = getNumberInString({ number });
+  const expirationDateInString = getExpirationDateInString({ expirationDate });
+  const ownerNameInString = getOwnerNameInString({ ownerName, cardInfo });
 
   return (
     <div className="AddFormPage">
@@ -44,28 +28,29 @@ export const AddFormPage = (props) => {
         <Title>카드 추가</Title>
       </div>
       <CreditCardPreview
-        cardCompany={cardCompany}
-        cardNumberInString={cardNumberInString}
+        company={company}
+        numberInString={numberInString}
         expirationDateInString={expirationDateInString}
         ownerNameInString={ownerNameInString}
       />
       <CardInfoForm
         setRoute={setRoute}
-        setCardCompany={setCardCompany}
+        initialCardInfo={initialCardInfo}
+        cardInfo={cardInfo}
+        setCardInfo={setCardInfo}
         setIsModalOpen={setIsModalOpen}
-        setCardNumberInString={setCardNumberInString}
-        setExpirationDateInString={setExpirationDateInString}
-        setOwnerNameInString={setOwnerNameInString}
-        setSecurityCodeInString={setSecurityCodeInString}
-        setPasswordInString={setPasswordInString}
-        isFormFulFilled={isFormFulFilled}
-        cardCompany={cardCompany}
-        initialState={initialState}
+        isFormFulFilled={isFormFulFilled({
+          numberInString,
+          expirationDateInString,
+          ownerNameInString,
+          cardInfo,
+          initialCardInfo,
+        })}
       />
       <CardCompanySelectModal
         isOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
-        setCardCompany={setCardCompany}
+        setCardInfo={setCardInfo}
       />
     </div>
   );
@@ -85,18 +70,36 @@ function BackwardButton() {
 }
 
 function CreditCardPreview(props) {
-  const { cardCompany, cardNumberInString, expirationDateInString, ownerNameInString } = props;
+  const { company, numberInString, expirationDateInString, ownerNameInString } = props;
 
   return (
     <div className="CreditCardPreview">
-      <Card backgroundColor={cardCompany.color} boxShadow size="medium">
+      <Card backgroundColor={company.color} boxShadow size="medium">
         <CreditCard
-          cardCompany={cardCompany.name}
-          cardNumber={cardNumberInString}
+          cardCompany={company.name}
+          cardNumber={numberInString}
           expirationDate={expirationDateInString}
           ownerName={ownerNameInString}
         />
       </Card>
     </div>
+  );
+}
+
+function isFormFulFilled({
+  numberInString,
+  expirationDateInString,
+  ownerNameInString,
+  cardInfo,
+  initialCardInfo,
+}) {
+  return (
+    numberInString.length === CARD_NUMBER_IN_STRING_LENGTH &&
+    expirationDateInString.length === EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH &&
+    expirationDateInString !== initialCardInfo.expirationDate &&
+    ownerNameInString &&
+    ownerNameInString !== initialCardInfo.ownerName &&
+    cardInfo.securityCode.length === SECURITY_CODE_LENGTH &&
+    Object.values(cardInfo.password).join('').length === PASSWORD_IN_STRING_LENGTH
   );
 }

@@ -3,8 +3,20 @@ import { CardListPage } from './pages/CardListPage';
 import { AddCardPage } from './pages/AddCardPages';
 import { PAGE } from './constants';
 
-function App() {
+export const initialCardInfo = {
+  number: { first: '', second: '', third: '', fourth: '' },
+  company: { name: '', color: '' },
+  expirationDate: { month: '', year: '' },
+  ownerName: 'NAME',
+  isOwnerNameFilled: false,
+  securityCode: '',
+  password: { first: '', second: '' },
+  nickname: '',
+};
+
+export default function App() {
   const [route, setRoute] = useState(PAGE.CARD_LIST);
+  const [cardInfo, setCardInfo] = useState(initialCardInfo);
   const [nickname, setNickname] = useState('');
 
   return (
@@ -15,6 +27,9 @@ function App() {
         <AddCardPage
           route={route}
           setRoute={setRoute}
+          initialCardInfo={initialCardInfo}
+          cardInfo={cardInfo}
+          setCardInfo={setCardInfo}
           nickname={nickname}
           setNickname={setNickname}
         />
@@ -22,5 +37,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

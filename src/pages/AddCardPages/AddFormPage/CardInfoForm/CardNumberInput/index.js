@@ -1,20 +1,15 @@
-import { createRef, useEffect, useState } from 'react';
+import { createRef, useEffect } from 'react';
 import { Container, Input, Label, Text } from '../../../../../components';
 import { handleBlockInvalidChar, handleCardNumberInputChange } from './handler';
 import { CARD_NUMBER_UNIT_LENGTH } from '../../../../../constants';
 
 export const CardNumberInput = ({
-  setCardCompany,
+  cardInfo,
+  setCardInfo,
   setIsModalOpen,
-  setCardNumberInString,
   expirationDateInputRef,
 }) => {
-  const [fourDigit, setFourDigit] = useState({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-  });
+  const { number } = cardInfo;
 
   const firstCardNumberInput = createRef();
   const secondCardNumberInput = createRef();
@@ -41,77 +36,45 @@ export const CardNumberInput = ({
           type="number"
           ref={firstCardNumberInput}
           name="first"
-          value={fourDigit.first}
+          value={number.first}
           onChange={(e) =>
-            handleCardNumberInputChange({
-              e,
-              nextInput,
-              fourDigit,
-              setFourDigit,
-              setCardCompany,
-              setIsModalOpen,
-              setCardNumberInString,
-            })
+            handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })
           }
           onKeyDown={handleBlockInvalidChar}
         />
-        <Dash length={fourDigit.first.length} />
+        <Dash length={number.first.length} />
         <Input
           className="CardNumberInput__Field"
           type="number"
           ref={secondCardNumberInput}
           name="second"
-          value={fourDigit.second}
+          value={number.second}
           onChange={(e) =>
-            handleCardNumberInputChange({
-              e,
-              nextInput,
-              fourDigit,
-              setFourDigit,
-              setCardCompany,
-              setIsModalOpen,
-              setCardNumberInString,
-            })
+            handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })
           }
           onKeyDown={handleBlockInvalidChar}
         />
-        <Dash length={fourDigit.second.length} />
+        <Dash length={number.second.length} />
         <Input
           className="CardNumberInput__Field"
           type="password"
           ref={thirdCardNumberInput}
           name="third"
-          value={fourDigit.third}
+          value={number.third}
           onChange={(e) =>
-            handleCardNumberInputChange({
-              e,
-              nextInput,
-              fourDigit,
-              setFourDigit,
-              setCardCompany,
-              setIsModalOpen,
-              setCardNumberInString,
-            })
+            handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })
           }
           onKeyDown={handleBlockInvalidChar}
         />
-        <Dash length={fourDigit.third.length} />
+        <Dash length={number.third.length} />
         <Input
           className="CardNumberInput__Field"
           type="password"
           ref={fourthCardNumberInput}
           name="fourth"
-          value={fourDigit.fourth}
+          value={number.fourth}
           onChange={(e) =>
-            handleCardNumberInputChange({
-              e,
-              nextInput,
-              fourDigit,
-              setFourDigit,
-              setCardCompany,
-              setIsModalOpen,
-              setCardNumberInString,
-            })
+            handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })
           }
           onKeyDown={handleBlockInvalidChar}
         />

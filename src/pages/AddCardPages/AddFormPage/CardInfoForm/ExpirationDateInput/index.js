@@ -1,10 +1,10 @@
-import { createRef, forwardRef, useState } from 'react';
+import { createRef, forwardRef } from 'react';
 import { Container, Input, Label, Text } from '../../../../../components';
 import { handleExpirationDateInputChange } from './handler';
 
 export const ExpirationDateInput = forwardRef((props, monthRef) => {
-  const { ownerNameInputRef, setExpirationDateInString } = props;
-  const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
+  const { cardInfo, setCardInfo, ownerNameInputRef, setExpirationDateInString } = props;
+  const { expirationDate } = cardInfo;
   const yearRef = createRef();
   const nextInput = {
     month: yearRef,
@@ -22,7 +22,7 @@ export const ExpirationDateInput = forwardRef((props, monthRef) => {
           name="month"
           ref={monthRef}
           value={expirationDate.month}
-          onChange={(e) => handleExpirationDateInputChange({ e, setExpirationDate, nextInput })}
+          onChange={(e) => handleExpirationDateInputChange({ e, setCardInfo, nextInput })}
         />
         <Slash />
         <Input
@@ -35,7 +35,7 @@ export const ExpirationDateInput = forwardRef((props, monthRef) => {
           onChange={(e) =>
             handleExpirationDateInputChange({
               e,
-              setExpirationDate,
+              setCardInfo,
               nextInput,
               setExpirationDateInString,
               expirationDate,

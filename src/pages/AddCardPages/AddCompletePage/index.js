@@ -1,19 +1,18 @@
-import React from 'react';
-import './style.css';
 import { Card, CreditCard, Text } from '../../../components';
 import { CardNicknameForm } from './CardNicknameForm';
+import {
+  getNumberInString,
+  getExpirationDateInString,
+  getOwnerNameInString,
+} from '../../../cardInfoFormatter';
+import './style.css';
 
 export const AddCompletePage = (props) => {
-  const {
-    setRoute,
-    cardCompany,
-    cardNumberInString,
-    expirationDateInString,
-    ownerNameInString,
-    setNickname,
-    nickname,
-    initialState,
-  } = props;
+  const { setRoute, initialCardInfo, cardInfo, setCardInfo } = props;
+  const { number, expirationDate, ownerName, company, nickname } = cardInfo;
+  const numberInString = getNumberInString({ number });
+  const expirationDateInString = getExpirationDateInString({ expirationDate });
+  const ownerNameInString = getOwnerNameInString({ ownerName, cardInfo });
 
   return (
     <div>
@@ -21,16 +20,16 @@ export const AddCompletePage = (props) => {
         카드등록이 완료되었습니다.
       </Text>
       <CreditCardPreview
-        cardCompany={cardCompany}
-        cardNumberInString={cardNumberInString}
+        cardCompany={company}
+        cardNumberInString={numberInString}
         expirationDateInString={expirationDateInString}
         ownerNameInString={ownerNameInString}
       />
       <CardNicknameForm
         setRoute={setRoute}
         nickname={nickname}
-        setNickname={setNickname}
-        initialState={initialState}
+        setCardInfo={setCardInfo}
+        initialCardInfo={initialCardInfo}
       />
     </div>
   );

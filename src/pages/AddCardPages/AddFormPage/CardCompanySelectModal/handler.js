@@ -1,8 +1,8 @@
-export const handleCardCompanySelect = ({ e, setCardCompany, setIsModalOpen }) => {
+export const handleCardCompanySelect = ({ e, setCardInfo, setIsModalOpen }) => {
   const name = e.target.name;
   const color = e.target.style.backgroundColor;
 
-  setCardCompany({ name, color });
+  setCardInfo((prevState) => ({ ...prevState, company: { name, color } }));
   setIsModalOpen(false);
 };
 

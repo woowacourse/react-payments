@@ -5,26 +5,26 @@ import { Button, Label, Modal } from '../../../../components';
 import { handleCardCompanySelect, handleDimmedAreaClick } from './handler';
 import { CARD_COMPANY_LIST } from '../../../../constants';
 
-export const CardCompanySelectModal = ({ isOpen, setCardCompany, setIsModalOpen }) => {
+export const CardCompanySelectModal = ({ isOpen, setCardInfo, setIsModalOpen }) => {
   return (
     <Modal
       className="CardCompanySelectModal--bottom"
       isOpen={isOpen}
       onClick={(e) => handleDimmedAreaClick({ e, setIsModalOpen })}
     >
-      <CardCompanyList setCardCompany={setCardCompany} setIsModalOpen={setIsModalOpen} />
+      <CardCompanyList setCardInfo={setCardInfo} setIsModalOpen={setIsModalOpen} />
     </Modal>
   );
 };
 
-export function CardCompanyList({ setCardCompany, setIsModalOpen }) {
+export function CardCompanyList({ setCardInfo, setIsModalOpen }) {
   return (
     <ul className="CardCompanyList">
-      {CARD_COMPANY_LIST.map((cardCompany, index) => (
+      {CARD_COMPANY_LIST.map((company, index) => (
         <CardCompanyItem
           key={index}
-          cardCompany={cardCompany}
-          setCardCompany={setCardCompany}
+          company={company}
+          setCardInfo={setCardInfo}
           setIsModalOpen={setIsModalOpen}
         />
       ))}
@@ -32,8 +32,8 @@ export function CardCompanyList({ setCardCompany, setIsModalOpen }) {
   );
 }
 
-function CardCompanyItem({ cardCompany, setCardCompany, setIsModalOpen }) {
-  const { name, color } = cardCompany;
+function CardCompanyItem({ company, setCardInfo, setIsModalOpen }) {
+  const { name, color } = company;
 
   return (
     <li className="CardCompanyItem">
@@ -41,7 +41,7 @@ function CardCompanyItem({ cardCompany, setCardCompany, setIsModalOpen }) {
         name={name}
         backgroundColor={color}
         theme="card-company"
-        onClick={(e) => handleCardCompanySelect({ e, setCardCompany, setIsModalOpen })}
+        onClick={(e) => handleCardCompanySelect({ e, setCardInfo, setIsModalOpen })}
       />
       <Label>{name}</Label>
     </li>

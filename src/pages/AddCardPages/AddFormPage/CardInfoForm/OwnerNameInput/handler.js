@@ -1,17 +1,18 @@
 const regExpOnlyAlphabet = /[^a-zA-Z ]+/g;
 
 export const handleOwnerNameInputChange = (props) => {
-  const { e, setCharLength, setOwnerName } = props;
+  const { e, setCardInfo } = props;
   const inputValue = e.target.value;
   const inputValueOnlyAlphabet = inputValue.replace(regExpOnlyAlphabet, '');
 
-  setOwnerName(inputValueOnlyAlphabet.toUpperCase());
-  setCharLength(inputValue.length);
+  setCardInfo((prevState) => ({
+    ...prevState,
+    ownerName: inputValueOnlyAlphabet.toUpperCase(),
+  }));
 };
 
 export const handleOwnerNameInputBlur = (props) => {
-  const { e, setOwnerNameInString } = props;
-  const inputValue = e.target.value;
+  const { setCardInfo } = props;
 
-  setOwnerNameInString(inputValue);
+  setCardInfo((prevState) => ({ ...prevState, isOwnerNameFilled: true }));
 };

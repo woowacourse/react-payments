@@ -10,60 +10,68 @@ import './style.css';
 
 export const CardInfoForm = (props) => {
   const {
-    setRoute,
-    setCardCompany,
+    initialCardInfo,
+    cardInfo,
+    setCardInfo,
     setIsModalOpen,
-    setCardNumberInString,
-    setExpirationDateInString,
-    setOwnerNameInString,
-    setSecurityCodeInString,
-    setPasswordInString,
     isFormFulFilled,
-    cardCompany,
-    initialState,
+    setRoute,
   } = props;
   const expirationDateInputRef = createRef();
   const ownerNameInputRef = createRef();
   const passwordInputRef = createRef();
-  const isCardNameUnset = (cardCompany, initialState) =>
-    cardCompany.name === initialState.cardCompany.name ||
-    cardCompany.color === initialState.cardCompany.color;
-
-  const handleCardInfoSubmit = ({ e, cardCompany, setIsModalOpen, initialState }) => {
-    e.preventDefault();
-
-    if (isCardNameUnset(cardCompany, initialState)) {
-      setIsModalOpen(true);
-      return;
-    }
-    setRoute(PAGE.ADD_CARD_COMPLETE);
-  };
 
   return (
     <Form className="CardInfoForm">
       <CardNumberInput
-        setCardCompany={setCardCompany}
+        cardInfo={cardInfo}
+        setCardInfo={setCardInfo}
         setIsModalOpen={setIsModalOpen}
-        setCardNumberInString={setCardNumberInString}
         expirationDateInputRef={expirationDateInputRef}
       />
       <ExpirationDateInput
+        cardInfo={cardInfo}
+        setCardInfo={setCardInfo}
         ref={expirationDateInputRef}
         ownerNameInputRef={ownerNameInputRef}
-        setExpirationDateInString={setExpirationDateInString}
       />
-      <OwnerNameInput ref={ownerNameInputRef} setOwnerNameInString={setOwnerNameInString} />
+      <OwnerNameInput
+        initialCardInfo={initialCardInfo}
+        cardInfo={cardInfo}
+        setCardInfo={setCardInfo}
+        ref={ownerNameInputRef}
+      />
       <SecurityCodeInput
+        cardInfo={cardInfo}
+        setCardInfo={setCardInfo}
         passwordInputRef={passwordInputRef}
-        setSecurityCodeInString={setSecurityCodeInString}
       />
-      <PasswordInput ref={passwordInputRef} setPasswordInString={setPasswordInString} />
+      <PasswordInput cardInfo={cardInfo} setCardInfo={setCardInfo} ref={passwordInputRef} />
       <Button
         disabled={!isFormFulFilled}
-        onClick={(e) => handleCardInfoSubmit({ e, cardCompany, setIsModalOpen, initialState })}
+        onClick={(e) =>
+          handleCardInfoSubmit({ e, cardInfo, setIsModalOpen, initialCardInfo, setRoute })
+        }
       >
         다음
       </Button>
     </Form>
   );
 };
+
+function handleCardInfoSubmit({ e, initialCardInfo, cardInfo, setIsModalOpen, setRoute }) {
+  e.preventDefault();
+
+  if (isCardNameUnset(cardInfo, initialCardInfo)) {
+    setIsModalOpen(true);
+    return;
+  }
+  setRoute(PAGE.ADD_CARD_COMPLETE);
+}
+
+function isCardNameUnset(cardInfo, initialCardInfo) {
+  return (
+    cardInfo.company.name === initialCardInfo.company.name ||
+    cardInfo.company.color === initialCardInfo.company.color
+  );
+}
