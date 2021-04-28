@@ -10,6 +10,9 @@ export const AddCompletePage = (props) => {
     cardNumberInString,
     expirationDateInString,
     ownerNameInString,
+    setNickname,
+    nickname,
+    initialState,
   } = props;
 
   return (
@@ -23,7 +26,12 @@ export const AddCompletePage = (props) => {
         expirationDateInString={expirationDateInString}
         ownerNameInString={ownerNameInString}
       />
-      <CardNicknameForm setRoute={setRoute} />
+      <CardNicknameForm
+        setRoute={setRoute}
+        nickname={nickname}
+        setNickname={setNickname}
+        initialState={initialState}
+      />
     </div>
   );
 };

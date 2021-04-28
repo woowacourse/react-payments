@@ -14,7 +14,7 @@ const initialState = {
 };
 
 export const AddCardPage = (props) => {
-  const { route, setRoute } = props;
+  const { route, setRoute, nickname, setNickname } = props;
   const [cardCompany, setCardCompany] = useState(initialState.cardCompany);
   const [cardNumberInString, setCardNumberInString] = useState(initialState.cardNumber);
   const [expirationDateInString, setExpirationDateInString] = useState(initialState.expirationDate);
@@ -47,10 +47,13 @@ export const AddCardPage = (props) => {
       ) : (
         <AddCompletePage
           setRoute={setRoute}
+          initialState={initialState}
           cardCompany={cardCompany}
           cardNumberInString={cardNumberInString}
           expirationDateInString={expirationDateInString}
           ownerNameInString={ownerNameInString}
+          nickname={nickname}
+          setNickname={setNickname}
         />
       )}
     </>

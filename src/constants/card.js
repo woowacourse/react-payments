@@ -11,6 +11,8 @@ export const SECURITY_CODE_LENGTH = 3;
 export const PASSWORD_UNIT_LENGTH = 1;
 export const PASSWORD_IN_STRING_LENGTH = 2;
 
+export const MAX_NICKNAME_LENGTH = 10;
+
 export const CARD_COMPANY_LIST = [
   {
     name: 'KB국민카드',

@@ -1,23 +1,32 @@
+import { createRef, useEffect } from 'react';
 import { Button, Form, Input } from '../../../../components';
+import { handleNicknameInputChange, handleNicknameSubmit } from './handler';
 import './style.css';
-import { PAGE } from '../../../../constants';
 
 export const CardNicknameForm = (props) => {
-  const { setRoute } = props;
+  const { setRoute, setNickname, nickname, initialState } = props;
+  const ref = createRef();
 
-  const handleNicknameSubmit = (e) => {
-    e.preventDefault();
-    setRoute(PAGE.CARD_LIST);
-  };
+  useEffect(() => {
+    ref.current?.focus();
+  }, []);
 
   return (
     <Form className="CardNicknameForm">
       <Input
         className="CardNicknameInput__Field"
+        placeholder="카드 별칭"
         container="CardNicknameInput__Filler--transparent"
-        value="엄카"
+        value={nickname}
+        ref={ref}
+        onChange={(e) => handleNicknameInputChange({ e, setNickname })}
       />
-      <Button onClick={handleNicknameSubmit}>확인</Button>
+      <Button
+        disabled={nickname === initialState.nickname}
+        onClick={(e) => handleNicknameSubmit({ e, setRoute })}
+      >
+        확인
+      </Button>
     </Form>
   );
 };
