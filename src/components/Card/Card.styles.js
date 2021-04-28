@@ -10,7 +10,6 @@ const info = {
 const Styled = {
   Container: styled.div`
     padding: 19px;
-
     transform: ${({ size }) => `${info[size] || 'scale(1.0)'};`};
 
     width: 320px;
@@ -23,6 +22,10 @@ const Styled = {
     position: relative;
     margin: 0 auto;
     box-sizing: border-box;
+
+    & > * {
+      pointer-events: none;
+    }
   `,
 
   Chip: styled.div`

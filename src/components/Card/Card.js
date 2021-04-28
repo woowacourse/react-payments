@@ -3,7 +3,16 @@ import PropTypes from 'prop-types';
 import Styled from './Card.styles';
 import REGEX from '../../constants/regex';
 
-const Card = ({ bgColor, companyName, cardNumbers, ownerName, expiryDate, size }) => {
+const Card = ({
+  bgColor,
+  companyName,
+  cardNumbers,
+  ownerName,
+  expiryDate,
+  size,
+  onClick,
+  ...props
+}) => {
   const formattedCardNumber = useMemo(() => {
     const cardNumberChunks = cardNumbers.match(REGEX.TEXT_WITH_LENGTH(4)) || [];
 
@@ -15,7 +24,7 @@ const Card = ({ bgColor, companyName, cardNumbers, ownerName, expiryDate, size }
   }, [cardNumbers]);
 
   return (
-    <Styled.Container bgColor={bgColor} size={size}>
+    <Styled.Container bgColor={bgColor} size={size} onClick={onClick} {...props}>
       <Styled.CompanyName>{companyName}</Styled.CompanyName>
 
       <Styled.Chip />
@@ -41,6 +50,7 @@ Card.propTypes = {
   ownerName: PropTypes.string,
   expiryDate: PropTypes.string,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
+  onClick: PropTypes.func,
 };
 
 Card.defaultProps = {
@@ -50,6 +60,7 @@ Card.defaultProps = {
   ownerName: 'NAME',
   expiryDate: 'MM / YY',
   size: 'medium',
+  onClick: () => {},
 };
 
 export default Card;

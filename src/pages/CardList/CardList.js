@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Card } from '../../components';
 import { ROUTE, LOCAL_STORAGE_KEY } from '../../constants';
 import { useLocalStorage } from '../../hooks';
@@ -7,6 +7,21 @@ import Styled from './CardList.styles';
 
 const CardList = () => {
   const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
+  const history = useHistory();
+
+  const onClick = (event) => {
+    const {
+      target: { id },
+    } = event;
+
+    const targetCard = cardList.value.find((card) => card.id === id);
+    history.push({
+      pathname: ROUTE.COMPLETE,
+      state: {
+        card: targetCard,
+      },
+    });
+  };
 
   return (
     <ScreenContainer>
@@ -43,6 +58,8 @@ const CardList = () => {
               return (
                 <li key={id}>
                   <Card
+                    id={id}
+                    onClick={onClick}
                     bgColor={cardCompanyColor}
                     companyName={cardCompanyName}
                     cardNumbers={cardNumbers}
