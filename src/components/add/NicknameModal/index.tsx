@@ -1,7 +1,7 @@
 import Modal from '../../common/Modal';
 import Input from '../../common/Input';
 import { ChangeEvent, FC, useEffect } from 'react';
-import CreditCard from '../../common/CreditCard';
+import CreditCard from '../../shared/CreditCard';
 import { CardBrand, ExpDate } from '../../../types';
 import { NicknameContainer } from './styles';
 import Button from '../../common/Button';

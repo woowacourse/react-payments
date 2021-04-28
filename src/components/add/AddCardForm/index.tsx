@@ -1,6 +1,6 @@
 import { ChangeEvent, FocusEvent, FormEvent, MutableRefObject, useEffect, useRef, useState } from 'react';
 import AddCardInputLabel from './AddCardInputLabel';
-import CreditCard from '../../common/CreditCard';
+import CreditCard from '../../shared/CreditCard';
 import CardBrandModal from '../CardBrandModal';
 import NicknameModal from '../NicknameModal';
 import Container from '../../common/Container';

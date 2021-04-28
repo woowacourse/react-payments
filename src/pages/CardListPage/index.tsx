@@ -1,5 +1,5 @@
-import CreditCard from '../../components/common/CreditCard';
-import CardList from '../../components/CardList';
+import CreditCard from '../../components/shared/CreditCard';
+import CardList from '../../components/cardList';
 import Template from '../../components/common/Template';
 import { Card } from '../../types';
 

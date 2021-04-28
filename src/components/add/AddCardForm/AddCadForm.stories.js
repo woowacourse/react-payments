@@ -1,4 +1,4 @@
-import AddCardForm from '.';
+import AddCardForm from '../../Add/AddCardForm';
 
 export default {
   component: AddCardForm,

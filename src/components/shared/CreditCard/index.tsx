@@ -1,5 +1,5 @@
 import { formatNumber2Digits } from '../../../utils/format';
-import Container from '../Container';
+import Container from '../../common/Container';
 import { CreditCardContainer } from './styles';
 import { Card } from '../../../types';
 import { CARD_NUMBER_SEPARATOR, MASK_CHARACTER } from '../../../constants/creditCard';

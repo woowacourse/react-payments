@@ -1,5 +1,5 @@
-import AddCardForm from '../../components/AddCard/AddCardForm';
-import AddCardTemplate from '../../components/AddCard/AddCardTemplate';
+import AddCardForm from '../../components/add/AddCardForm';
+import AddCardTemplate from '../../components/add/AddCardTemplate';
 
 const title = '카드추가';
 
