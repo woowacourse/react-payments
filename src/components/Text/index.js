@@ -19,11 +19,7 @@ export const Text = ({
   const textClass = cx('Text', className);
 
   return (
-    <span
-      className={textClass}
-      style={{ color, fontSize, textAlign, fontWeight, width, letterSpacing }}
-      {...props}
-    >
+    <span className={textClass} style={{ color, fontSize, textAlign, fontWeight, width, letterSpacing }} {...props}>
       {children}
     </span>
   );

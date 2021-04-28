@@ -21,10 +21,7 @@ export const CardNicknameForm = (props) => {
         ref={ref}
         onChange={(e) => handleNicknameInputChange({ e, setCardInfo })}
       />
-      <Button
-        disabled={nickname === initialCardInfo.nickname}
-        onClick={(e) => handleNicknameSubmit({ e, setRoute })}
-      >
+      <Button disabled={nickname === initialCardInfo.nickname} onClick={(e) => handleNicknameSubmit({ e, setRoute })}>
         확인
       </Button>
     </Form>

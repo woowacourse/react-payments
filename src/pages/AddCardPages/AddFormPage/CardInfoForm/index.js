@@ -9,14 +9,7 @@ import { PAGE } from '../../../../constants';
 import './style.css';
 
 export const CardInfoForm = (props) => {
-  const {
-    initialCardInfo,
-    cardInfo,
-    setCardInfo,
-    setIsModalOpen,
-    isFormFulFilled,
-    setRoute,
-  } = props;
+  const { initialCardInfo, cardInfo, setCardInfo, setIsModalOpen, isFormFulFilled, setRoute } = props;
   const { number, expirationDate, ownerName, securityCode, password } = cardInfo;
   const expirationDateInputRef = createRef();
   const ownerNameInputRef = createRef();
@@ -42,17 +35,11 @@ export const CardInfoForm = (props) => {
         setCardInfo={setCardInfo}
         ref={ownerNameInputRef}
       />
-      <SecurityCodeInput
-        securityCode={securityCode}
-        setCardInfo={setCardInfo}
-        passwordInputRef={passwordInputRef}
-      />
+      <SecurityCodeInput securityCode={securityCode} setCardInfo={setCardInfo} passwordInputRef={passwordInputRef} />
       <PasswordInput password={password} setCardInfo={setCardInfo} ref={passwordInputRef} />
       <Button
         disabled={!isFormFulFilled}
-        onClick={(e) =>
-          handleCardInfoSubmit({ e, cardInfo, setIsModalOpen, initialCardInfo, setRoute })
-        }
+        onClick={(e) => handleCardInfoSubmit({ e, cardInfo, setIsModalOpen, initialCardInfo, setRoute })}
       >
         다음
       </Button>

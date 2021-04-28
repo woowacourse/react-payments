@@ -1,7 +1,6 @@
 import { CARD_NUMBER_UNIT_LENGTH, CARD_COMPANY_LIST, SECOND } from '../../../../../constants';
 
-export const handleBlockInvalidChar = (e) =>
-  ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault();
+export const handleBlockInvalidChar = (e) => ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault();
 
 export const handleCardNumberInputChange = (props) => {
   const { e, number, setCardInfo, nextInput, setIsModalOpen } = props;

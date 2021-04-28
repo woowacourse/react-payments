@@ -3,12 +3,7 @@ import { Container, Input, Label, Text } from '../../../../../components';
 import { handleBlockInvalidChar, handleCardNumberInputChange } from './handler';
 import { CARD_NUMBER_UNIT_LENGTH } from '../../../../../constants';
 
-export const CardNumberInput = ({
-  number,
-  setCardInfo,
-  setIsModalOpen,
-  expirationDateInputRef,
-}) => {
+export const CardNumberInput = ({ number, setCardInfo, setIsModalOpen, expirationDateInputRef }) => {
   const firstCardNumberInput = createRef();
   const secondCardNumberInput = createRef();
   const thirdCardNumberInput = createRef();
@@ -35,9 +30,7 @@ export const CardNumberInput = ({
           ref={firstCardNumberInput}
           name="first"
           value={number.first}
-          onChange={(e) =>
-            handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })
-          }
+          onChange={(e) => handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })}
           onKeyDown={handleBlockInvalidChar}
         />
         <Dash length={number.first.length} />
@@ -47,9 +40,7 @@ export const CardNumberInput = ({
           ref={secondCardNumberInput}
           name="second"
           value={number.second}
-          onChange={(e) =>
-            handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })
-          }
+          onChange={(e) => handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })}
           onKeyDown={handleBlockInvalidChar}
         />
         <Dash length={number.second.length} />
@@ -59,9 +50,7 @@ export const CardNumberInput = ({
           ref={thirdCardNumberInput}
           name="third"
           value={number.third}
-          onChange={(e) =>
-            handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })
-          }
+          onChange={(e) => handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })}
           onKeyDown={handleBlockInvalidChar}
         />
         <Dash length={number.third.length} />
@@ -71,9 +60,7 @@ export const CardNumberInput = ({
           ref={fourthCardNumberInput}
           name="fourth"
           value={number.fourth}
-          onChange={(e) =>
-            handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })
-          }
+          onChange={(e) => handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })}
           onKeyDown={handleBlockInvalidChar}
         />
       </Container>

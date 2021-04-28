@@ -5,12 +5,7 @@ import './style.css';
 
 export const Button = ({ type, theme, backgroundColor, children, ...props }) => {
   return (
-    <button
-      type={type}
-      className={['Button', `Button--${theme}`].join(' ')}
-      style={{ backgroundColor }}
-      {...props}
-    >
+    <button type={type} className={['Button', `Button--${theme}`].join(' ')} style={{ backgroundColor }} {...props}>
       {children}
     </button>
   );

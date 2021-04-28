@@ -49,11 +49,7 @@ export const OwnerNameInputContainer = Template.bind({});
 OwnerNameInputContainer.args = {
   className: 'CardInfoForm__Input__Filler--filled OwnerNameInput__Filler',
   children: (
-    <Input
-      className="OwnerNameInput__Field"
-      placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-      value="SUN"
-    />
+    <Input className="OwnerNameInput__Field" placeholder="카드에 표시된 이름과 동일하게 입력하세요." value="SUN" />
   ),
 };
 

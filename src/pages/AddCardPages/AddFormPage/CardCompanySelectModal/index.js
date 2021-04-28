@@ -21,12 +21,7 @@ export function CardCompanyList({ setCardInfo, setIsModalOpen }) {
   return (
     <ul className="CardCompanyList">
       {CARD_COMPANY_LIST.map((company, index) => (
-        <CardCompanyItem
-          key={index}
-          company={company}
-          setCardInfo={setCardInfo}
-          setIsModalOpen={setIsModalOpen}
-        />
+        <CardCompanyItem key={index} company={company} setCardInfo={setCardInfo} setIsModalOpen={setIsModalOpen} />
       ))}
     </ul>
   );

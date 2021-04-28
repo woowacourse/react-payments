@@ -10,14 +10,7 @@ export const OwnerNameInput = forwardRef((props, ref) => {
     <>
       <div className="OwnerNameInput__Header">
         <Label>카드 소유자 이름(선택)</Label>
-        <Text
-          fontSize="0.75rem"
-          fontWeight="600"
-          letterSpacing="0.14em"
-          textAlign="end"
-          color="#525252"
-          width="2rem"
-        >
+        <Text fontSize="0.75rem" fontWeight="600" letterSpacing="0.14em" textAlign="end" color="#525252" width="2rem">
           {`${ownerName.length}/${MAX_OWNER_NAME_LENGTH}`}
         </Text>
       </div>

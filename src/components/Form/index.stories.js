@@ -36,11 +36,7 @@ CardPasswordForm.args = {
 };
 
 const NicknameInput = (
-  <Input
-    className="CardNicknameInput__Field"
-    container="CardNicknameInput__Filler--transparent"
-    value="엄카"
-  />
+  <Input className="CardNicknameInput__Field" container="CardNicknameInput__Filler--transparent" value="엄카" />
 );
 
 export const CardNicknameForm = Template.bind({});

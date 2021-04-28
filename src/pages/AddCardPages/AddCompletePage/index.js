@@ -5,9 +5,7 @@ import './style.css';
 
 export const AddCompletePage = (props) => {
   const { setRoute, initialCardInfo, cardInfo, setCardInfo } = props;
-  const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({
-    cardInfo,
-  });
+  const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({ cardInfo });
   const { company, nickname } = cardInfo;
 
   return (
@@ -33,13 +31,7 @@ export const AddCompletePage = (props) => {
 };
 
 function CreditCardPreview(props) {
-  const {
-    companyColor,
-    companyName,
-    formattedNumber,
-    formattedExpirationDate,
-    formattedOwnerName,
-  } = props;
+  const { companyColor, companyName, formattedNumber, formattedExpirationDate, formattedOwnerName } = props;
 
   return (
     <div className="CreditCardPreview CreditCardPreview--large">
