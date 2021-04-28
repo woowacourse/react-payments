@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Button, Card, CreditCard, Title } from '../../../components';
 import { CardInfoForm } from './CardInfoForm';
 import { CardCompanySelectModal } from './CardCompanySelectModal';
@@ -10,25 +9,25 @@ import {
 } from '../../../constants';
 import './style.css';
 
-const initialState = {
-  cardCompany: { name: '', color: '' },
-  cardNumber: '',
-  expirationDate: 'MM/YY',
-  ownerName: 'NAME',
-  securityCode: '',
-  password: '',
-  isModalOpen: false,
-};
-
 export const AddFormPage = (props) => {
-  const { setRoute } = props;
-  const [cardCompany, setCardCompany] = useState(initialState.cardCompany);
-  const [cardNumberInString, setCardNumberInString] = useState(initialState.cardNumber);
-  const [expirationDateInString, setExpirationDateInString] = useState(initialState.expirationDate);
-  const [ownerNameInString, setOwnerNameInString] = useState(initialState.ownerName);
-  const [securityCodeInString, setSecurityCodeInString] = useState(initialState.securityCode);
-  const [passwordInString, setPasswordInString] = useState(initialState.password);
-  const [isModalOpen, setIsModalOpen] = useState(initialState.isModalOpen);
+  const {
+    setRoute,
+    initialState,
+    cardCompany,
+    setCardCompany,
+    cardNumberInString,
+    setCardNumberInString,
+    expirationDateInString,
+    setExpirationDateInString,
+    ownerNameInString,
+    setOwnerNameInString,
+    securityCodeInString,
+    setSecurityCodeInString,
+    passwordInString,
+    setPasswordInString,
+    isModalOpen,
+    setIsModalOpen,
+  } = props;
   const isFormFulFilled =
     cardNumberInString.length === CARD_NUMBER_IN_STRING_LENGTH &&
     expirationDateInString.length === EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH &&
@@ -85,12 +84,9 @@ function BackwardButton() {
   );
 }
 
-function CreditCardPreview({
-  cardCompany,
-  cardNumberInString,
-  expirationDateInString,
-  ownerNameInString,
-}) {
+function CreditCardPreview(props) {
+  const { cardCompany, cardNumberInString, expirationDateInString, ownerNameInString } = props;
+
   return (
     <div className="CreditCardPreview">
       <Card backgroundColor={cardCompany.color} boxShadow size="medium">

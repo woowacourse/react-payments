@@ -3,31 +3,44 @@ import './style.css';
 import { Card, CreditCard, Text } from '../../../components';
 import { CardNicknameForm } from './CardNicknameForm';
 
-const CreditCardPreview = () => {
-  return (
-    <div className="CreditCardPreview">
-      <Card backgroundColor="#94DACD" boxShadow size="large">
-        <CreditCard
-          cardCompany="로이드카드"
-          cardNumber="1111 2222 3333 4444"
-          expirationDate="MM/YY"
-          ownerName="SUN"
-        />
-      </Card>
-    </div>
-  );
-};
-
 export const AddCompletePage = (props) => {
-  const { setRoute } = props;
+  const {
+    setRoute,
+    cardCompany,
+    cardNumberInString,
+    expirationDateInString,
+    ownerNameInString,
+  } = props;
 
   return (
     <div>
       <Text className="AddCompletePage__Text" fontSize="1.5rem">
         카드등록이 완료되었습니다.
       </Text>
-      <CreditCardPreview />
+      <CreditCardPreview
+        cardCompany={cardCompany}
+        cardNumberInString={cardNumberInString}
+        expirationDateInString={expirationDateInString}
+        ownerNameInString={ownerNameInString}
+      />
       <CardNicknameForm setRoute={setRoute} />
     </div>
   );
 };
+
+function CreditCardPreview(props) {
+  const { cardCompany, cardNumberInString, expirationDateInString, ownerNameInString } = props;
+
+  return (
+    <div className="CreditCardPreview CreditCardPreview--large">
+      <Card backgroundColor={cardCompany.color} boxShadow size="medium">
+        <CreditCard
+          cardCompany={cardCompany.name}
+          cardNumber={cardNumberInString}
+          expirationDate={expirationDateInString}
+          ownerName={ownerNameInString}
+        />
+      </Card>
+    </div>
+  );
+}

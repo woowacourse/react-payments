@@ -16,4 +16,9 @@ body {
   background-color: #fff;
   width: 375px;
   height: 701px;
+  position: relative;
+}
+
+.App {
+  height: 100%;
 }

@@ -8,6 +8,9 @@
   color: #04c09e;
   font-size: 0.875rem;
   text-align: end;
+  position: absolute;
+  bottom: 1rem;
+  right: 0.5rem;
 }
 
 .Button--question-mark {

@@ -92,10 +92,11 @@
 /* 카드별명 */
 
 .CardNicknameInput__Filler--transparent {
-  margin: 0 auto;
+  margin: 0.75rem auto 0;
   width: 60%;
   padding: 0.53rem;
   border-bottom: 1.5px solid #737373;
+  height: unset;
 }
 
 .CardNicknameInput__Field {
