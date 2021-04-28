@@ -1,18 +1,14 @@
 import { Card, CreditCard, Text } from '../../../components';
 import { CardNicknameForm } from './CardNicknameForm';
-import {
-  getFormattedNumber,
-  getFormattedExpirationDate,
-  getFormattedOwnerName,
-} from '../../../cardInfoFormatter';
+import { getFormattedCardInfo } from '../../../cardInfoFormatter';
 import './style.css';
 
 export const AddCompletePage = (props) => {
   const { setRoute, initialCardInfo, cardInfo, setCardInfo } = props;
-  const { number, expirationDate, ownerName, company, nickname } = cardInfo;
-  const formattedNumber = getFormattedNumber({ number });
-  const formattedExpirationDate = getFormattedExpirationDate({ expirationDate });
-  const formattedOwnerName = getFormattedOwnerName({ ownerName, cardInfo });
+  const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({
+    cardInfo,
+  });
+  const { company, nickname } = cardInfo;
 
   return (
     <div>

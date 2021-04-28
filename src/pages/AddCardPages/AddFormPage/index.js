@@ -1,25 +1,19 @@
 import { Button, Card, CreditCard, Title } from '../../../components';
 import { CardInfoForm } from './CardInfoForm';
 import { CardCompanySelectModal } from './CardCompanySelectModal';
+import { getFormattedCardInfo } from '../../../cardInfoFormatter';
 import {
   FORMATTED_CARD_NUMBER_LENGTH,
   FORMATTED_EXPIRATION_DATE_LENGTH,
   SECURITY_CODE_LENGTH,
   FORMATTED_PASSWORD_LENGTH,
 } from '../../../constants';
-import {
-  getFormattedNumber,
-  getFormattedExpirationDate,
-  getFormattedOwnerName,
-} from '../../../cardInfoFormatter';
 import './style.css';
 
 export const AddFormPage = (props) => {
   const { setRoute, initialCardInfo, cardInfo, setCardInfo, isModalOpen, setIsModalOpen } = props;
-  const { number, expirationDate, ownerName, company, isOwnerNameFilled } = cardInfo;
-  const formattedNumber = getFormattedNumber({ number });
-  const formattedExpirationDate = getFormattedExpirationDate({ expirationDate });
-  const formattedOwnerName = getFormattedOwnerName({ ownerName, isOwnerNameFilled });
+  const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({ cardInfo });
+  const { company } = cardInfo;
 
   return (
     <div className="AddFormPage">
@@ -40,44 +34,15 @@ export const AddFormPage = (props) => {
         cardInfo={cardInfo}
         setCardInfo={setCardInfo}
         setIsModalOpen={setIsModalOpen}
-        isFormFulFilled={isFormFulFilled({
-          formattedNumber,
-          formattedExpirationDate,
-          formattedOwnerName,
-          cardInfo,
-          initialCardInfo,
-        })}
+        isFormFulFilled={isFormFulFilled({ cardInfo, initialCardInfo })}
       />
-      <CardCompanySelectModal
-        isOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        setCardInfo={setCardInfo}
-      />
+      <CardCompanySelectModal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setCardInfo={setCardInfo} />
     </div>
   );
 };
 
-function BackwardButton() {
-  const size = 16;
-  const color = '#525252';
-
-  return (
-    <Button theme="backward" onClick={() => {}}>
-      <svg viewBox={`0 0 ${size} ${size}`} height={size} width={size} fill="none">
-        <path d="M8.30426 1L1.36476 8.78658L9.15134 15.7261" stroke={color} strokeWidth="1.5" />
-      </svg>
-    </Button>
-  );
-}
-
 function CreditCardPreview(props) {
-  const {
-    companyColor,
-    companyName,
-    formattedNumber,
-    formattedExpirationDate,
-    formattedOwnerName,
-  } = props;
+  const { companyColor, companyName, formattedNumber, formattedExpirationDate, formattedOwnerName } = props;
 
   return (
     <div className="CreditCardPreview">
@@ -93,20 +58,48 @@ function CreditCardPreview(props) {
   );
 }
 
-function isFormFulFilled({
-  formattedNumber,
-  formattedExpirationDate,
-  formattedOwnerName,
-  cardInfo,
-  initialCardInfo,
-}) {
+function BackwardButton() {
+  const size = 16;
+  const color = '#525252';
+
   return (
-    formattedNumber.length === FORMATTED_CARD_NUMBER_LENGTH &&
-    formattedExpirationDate.length === FORMATTED_EXPIRATION_DATE_LENGTH &&
-    formattedExpirationDate !== initialCardInfo.expirationDate &&
-    formattedOwnerName &&
-    formattedOwnerName !== initialCardInfo.ownerName &&
-    cardInfo.securityCode.length === SECURITY_CODE_LENGTH &&
-    Object.values(cardInfo.password).join('').length === FORMATTED_PASSWORD_LENGTH
+    <Button theme="backward" onClick={() => {}}>
+      <svg viewBox={`0 0 ${size} ${size}`} height={size} width={size} fill="none">
+        <path d="M8.30426 1L1.36476 8.78658L9.15134 15.7261" stroke={color} strokeWidth="1.5" />
+      </svg>
+    </Button>
   );
+}
+
+function isFormFulFilled({ cardInfo, initialCardInfo }) {
+  const { securityCode, password } = cardInfo;
+  const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({ cardInfo });
+
+  return (
+    isNumberFulfilled(formattedNumber) &&
+    isExpirationDateFulfilled(formattedExpirationDate) &&
+    isOwnerNameFulfilled(formattedOwnerName, initialCardInfo.ownerName) &&
+    isSecurityCodeFulfilled(securityCode) &&
+    isPasswordFulfilled(password)
+  );
+}
+
+function isNumberFulfilled(formattedNumber) {
+  return formattedNumber.length === FORMATTED_CARD_NUMBER_LENGTH;
+}
+
+function isExpirationDateFulfilled(formattedExpirationDate) {
+  return formattedExpirationDate.length === FORMATTED_EXPIRATION_DATE_LENGTH;
+}
+
+function isOwnerNameFulfilled(formattedOwnerName, initialOwnerName) {
+  return formattedOwnerName && formattedOwnerName !== initialOwnerName;
+}
+
+function isSecurityCodeFulfilled(securityCode) {
+  return securityCode.length === SECURITY_CODE_LENGTH;
+}
+
+function isPasswordFulfilled(password) {
+  return Object.values(password).join('').length === FORMATTED_PASSWORD_LENGTH;
 }
