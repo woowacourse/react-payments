@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Text, Title } from '../../components';
 import { PAGE } from '../../constants';
 import './style.css';

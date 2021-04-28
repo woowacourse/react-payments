@@ -1,9 +1,8 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react';
-import './style.css';
 import { Button, Label, Modal } from '../../../../components';
 import { handleCardCompanySelect, handleDimmedAreaClick } from './handler';
 import { CARD_COMPANY_LIST } from '../../../../constants';
+import './style.css';
 
 export const CardCompanySelectModal = ({ isOpen, setCardInfo, setIsModalOpen }) => {
   return (
