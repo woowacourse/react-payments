@@ -5,7 +5,7 @@ import './style.css';
 
 export const CardListPage = (props) => {
   const { setRoute } = props;
-  const handleAddButtonClick = (e) => setRoute(PAGE.ADD_CARD_FORM);
+  const handleAddButtonClick = () => setRoute(PAGE.ADD_CARD_FORM);
 
   return (
     <div className="CardListPage">

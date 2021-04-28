@@ -17,12 +17,11 @@ export const initialCardInfo = {
 export default function App() {
   const [route, setRoute] = useState(PAGE.CARD_LIST);
   const [cardInfo, setCardInfo] = useState(initialCardInfo);
-  const [nickname, setNickname] = useState('');
 
   return (
     <div className="App">
       {route === PAGE.CARD_LIST ? (
-        <CardListPage setRoute={setRoute} nickname={nickname} />
+        <CardListPage setRoute={setRoute} />
       ) : (
         <AddCardPage
           route={route}
@@ -30,8 +29,6 @@ export default function App() {
           initialCardInfo={initialCardInfo}
           cardInfo={cardInfo}
           setCardInfo={setCardInfo}
-          nickname={nickname}
-          setNickname={setNickname}
         />
       )}
     </div>
