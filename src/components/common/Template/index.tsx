@@ -24,7 +24,7 @@ const Template: FC<Props> = ({ className, children, title, hasPreviousPage }) =>
       <Header>
         {hasPreviousPage && (
           <a>
-            <img src="buttons/back-btn.svg" alt="뒤로가기" />
+            <img src={process.env.PUBLIC_URL + '/buttons/back-btn.svg'} alt="뒤로가기" />
           </a>
         )}
         <span className="title">{title}</span>
