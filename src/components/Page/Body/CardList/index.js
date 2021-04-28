@@ -8,7 +8,7 @@ import { CardButton } from '../../../Button/CardButton';
  * Primary UI component for user interaction
  */
 
-export const CardList = ({ cards }) => {
+export const CardList = ({ cards, setCurrentPage }) => {
   return (
     <Styled.Container>
       <Styled.CardListContainer>
@@ -17,7 +17,11 @@ export const CardList = ({ cards }) => {
         ))}
       </Styled.CardListContainer>
       <Styled.CardAddButtonContainer>
-        <CardButton />
+        <CardButton
+          onClick={() => {
+            setCurrentPage('cardRegister');
+          }}
+        />
       </Styled.CardAddButtonContainer>
     </Styled.Container>
   );

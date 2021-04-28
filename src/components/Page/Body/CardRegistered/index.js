@@ -7,12 +7,17 @@ import { NickNameForm } from '../../../InputForm/NickNameForm';
 /**
  * Primary UI component for user interaction
  */
-export const CardRegistered = ({ card }) => {
+export const CardRegistered = ({ card, setCurrentPage, updateCardContent, registerCard }) => {
   const { company, numbers, owner, validDay } = card;
   const [nickName, setNickName] = useState(`${owner}의 ${company} 카드`);
 
   const handleNickNameChange = (e) => {
     setNickName(e.target.value);
+  };
+
+  const submitCardNickName = () => {
+    updateCardContent({ nickName });
+    registerCard();
   };
 
   return (
@@ -28,7 +33,11 @@ export const CardRegistered = ({ card }) => {
         />
       </Styled.CardPreviewContainer>
       <Styled.CardNickNameFormContainer>
-        <NickNameForm nickName={{ value: nickName, handleChange: handleNickNameChange }} />
+        <NickNameForm
+          nickName={{ value: nickName, handleChange: handleNickNameChange }}
+          setCurrentPage={setCurrentPage}
+          submitCardNickName={submitCardNickName}
+        />
       </Styled.CardNickNameFormContainer>
     </>
   );

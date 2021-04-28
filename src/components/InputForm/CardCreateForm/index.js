@@ -13,9 +13,18 @@ import { InputButton } from '../InputButton';
 /**
  * Primary UI component for user interaction
  */
-export const CardCreateForm = ({ numbers, validDay, owner, cvc, password, isValidEveryInput }) => {
+export const CardCreateForm = ({
+  numbers,
+  validDay,
+  owner,
+  cvc,
+  password,
+  isValidEveryInput,
+  setCurrentPage,
+  submitCardDetail,
+}) => {
   return (
-    <Styled.Form>
+    <Styled.Form onSubmit={submitCardDetail}>
       <InputContainer title={'카드 번호'}>
         {!numbers.isValid && <ValidMessage validMessage={'카드 번호를 모두 입력해주세요.'} />}
         <NumbersInputContainer numbers={numbers.value} handleChange={numbers.handleChange} />
@@ -42,7 +51,9 @@ export const CardCreateForm = ({ numbers, validDay, owner, cvc, password, isVali
         <PasswordInputContainer password={password.value} handleChange={password.handleChange} />
       </InputContainer>
       <Styled.ButtonContainer>
-        {isValidEveryInput && <InputButton text={'다음'} />}
+        {isValidEveryInput && (
+          <InputButton text={'다음'} onClick={() => setCurrentPage('cardRegistered')} />
+        )}
       </Styled.ButtonContainer>
     </Styled.Form>
   );

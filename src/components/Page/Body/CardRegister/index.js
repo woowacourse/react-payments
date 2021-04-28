@@ -9,7 +9,7 @@ import { CardCompanyList } from '../../../Modal/ModalBody/CardCompanyList';
 /**
  * Primary UI component for user interaction
  */
-export const CardRegister = () => {
+export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
   const [company, setCompany] = useState('');
   const [numbers, setNumbers] = useState({ first: '', second: '', third: '', fourth: '' });
   const [validDay, setValidDay] = useState({ month: '', year: '' });
@@ -57,6 +57,20 @@ export const CardRegister = () => {
     );
   };
 
+  const submitCardDetail = (e) => {
+    e.preventDefault();
+
+    // const cardDetail = {
+    //   company: company,
+    //   numbers: [numbers.first, numbers.second, numbers.third, numbers.fourth],
+    //   validDay: [validDay.month, validDay.year],
+    //   cvc: cvc,
+    //   password: [password.firstDigit, password.secondDigit],
+    // };
+
+    // updateCardContent(cardDetail);
+  };
+
   const openModal = () => {
     setIsModalOpened(true);
   };
@@ -89,6 +103,8 @@ export const CardRegister = () => {
           cvc={{ value: cvc, handleChange: handleCvcChange, isValid: true }}
           password={{ value: password, handleChange: handlePasswordChange, isValid: true }}
           isValidEveryInput={isValidEveryInput()}
+          setCurrentPage={setCurrentPage}
+          submitCardDetail={submitCardDetail}
         />
       </Styled.CardCreateFormContainer>
       {isModalOpened && (

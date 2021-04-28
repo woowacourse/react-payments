@@ -15,7 +15,7 @@ const Container = styled.div`
   color: #04c09e;
 `;
 
-const Input = styled.input.attrs({ type: 'number' })`
+const Input = styled.input.attrs({ type: 'text' })`
   width: 18%;
   height: 45%;
   margin: 0;

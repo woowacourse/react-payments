@@ -7,14 +7,14 @@ import { InputButton } from '../InputButton';
 /**
  * Primary UI component for user interaction
  */
-export const NickNameForm = ({ nickName }) => {
+export const NickNameForm = ({ nickName, setCurrentPage, submitCardNickName }) => {
   return (
-    <Styled.Form>
+    <Styled.Form onSubmit={submitCardNickName}>
       <Styled.InputContainer>
         <NickNameInputContainer nickName={nickName.value} handleChange={nickName.handleChange} />
       </Styled.InputContainer>
       <Styled.ButtonContainer>
-        <InputButton text={'확인'} />
+        <InputButton onClick={() => setCurrentPage('cardList')} text={'확인'} />
       </Styled.ButtonContainer>
     </Styled.Form>
   );
