@@ -8,13 +8,14 @@ const Root = styled.div`
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 5px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  font-size: ${({ size }) => (size === 'large' ? '20px' : '16px')};
 `;
 
 const CardName = styled.div`
   position: absolute;
   top: 10%;
   left: 6%;
-  font-size: 10px;
+  font-size: 0.625em;
   color: ${PALETTE.DEFAULT_BLACK};
 `;
 
@@ -44,7 +45,7 @@ const CardNumbersFragment = styled.span`
   align-items: center;
   justify-content: center;
   width: 16%;
-  font-size: 14px;
+  font-size: 0.875em;
   font-weight: 600;
   color: ${PALETTE.DEFAULT_BLACK};
   letter-spacing: 2px;
@@ -65,7 +66,7 @@ const OwnerName = styled.div`
   position: absolute;
   bottom: 10%;
   left: 8%;
-  font-size: 12px;
+  font-size: 0.75em;
   font-weight: 600;
   letter-spacing: 1px;
   color: ${PALETTE.DEFAULT_BLACK};
@@ -76,7 +77,7 @@ const ExpirationDate = styled.div`
   position: absolute;
   bottom: 10%;
   right: 10%;
-  font-size: 12px;
+  font-size: 0.75em;
   font-weight: 600;
   letter-spacing: 1px;
   color: ${PALETTE.DEFAULT_BLACK};

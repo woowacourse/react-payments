@@ -4,14 +4,14 @@ import SecureEllipseImage from '../../../assets/secure-ellipse.svg';
 import * as Style from './style.js';
 
 const Card = (props) => {
-  const { backgroundColor, width, height, bankName, ownerName, cardNumbers, expirationDate } = props;
+  const { backgroundColor, width, height, size, bankName, ownerName, cardNumbers, expirationDate } = props;
 
   const secureDigits = Array.from({ length: 4 }, (_, idx) => (
     <img key={idx} src={SecureEllipseImage} alt="secure-mark" />
   ));
 
   return (
-    <Style.Root width={width} height={height} backgroundColor={backgroundColor}>
+    <Style.Root width={width} height={height} size={size} backgroundColor={backgroundColor}>
       {<Style.CardName>{bankName}</Style.CardName>}
       <Style.Chip />
       <Style.CardNumbersWrapper>
@@ -32,10 +32,15 @@ Card.propTypes = {
   backgroundColor: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
   height: PropTypes.string.isRequired,
+  size: PropTypes.string,
   bank: PropTypes.string,
   ownerName: PropTypes.string,
   cardNumbers: PropTypes.object,
   expirationDate: PropTypes.object,
+};
+
+Card.defaultProps = {
+  size: 'normal',
 };
 
 export default Card;
