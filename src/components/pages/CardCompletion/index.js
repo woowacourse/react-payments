@@ -34,10 +34,12 @@ const CardCompletion = (props) => {
 };
 
 CardCompletion.propTypes = {
-  bankId: PropTypes.string.isRequired,
-  cardNumbers: PropTypes.object.isRequired,
-  expirationDate: PropTypes.object.isRequired,
-  ownerName: PropTypes.string.isRequired,
+  cardData: PropTypes.shape({
+    bankId: PropTypes.string.isRequired,
+    cardNumbers: PropTypes.object.isRequired,
+    expirationDate: PropTypes.object.isRequired,
+    ownerName: PropTypes.string.isRequired,
+  }),
 };
 
 export default CardCompletion;

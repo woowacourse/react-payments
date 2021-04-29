@@ -20,7 +20,7 @@ const PageHost = (props) => {
 PageHost.propTypes = {
   navigationTitle: PropTypes.string.isRequired,
   hasBackButton: PropTypes.bool.isRequired,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default PageHost;

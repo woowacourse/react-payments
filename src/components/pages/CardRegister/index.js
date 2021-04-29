@@ -38,7 +38,7 @@ const CardRegister = (props) => {
     setCardColor(dummyBanks.find(({ id }) => id === bankId)?.color || PALETTE.EMPTY_CARD_GRAY);
   }, [bankId]);
 
-  const bankName = dummyBanks.find(({ id }) => id === bankId)?.name;
+  const bankName = dummyBanks.find(({ id }) => id === bankId)?.name || '';
 
   const handleCompleteRegister = (event) => {
     event.preventDefault();

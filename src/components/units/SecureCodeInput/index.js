@@ -46,7 +46,7 @@ SecureCodeInput.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
-  secureCode: PropTypes.func.isRequired,
+  secureCode: PropTypes.string.isRequired,
   setSecureCode: PropTypes.func.isRequired,
 };
 
