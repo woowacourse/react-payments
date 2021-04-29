@@ -32,6 +32,12 @@ import {
 export type CardNumberState = [string, string, string, string];
 export type PasswordState = [string, string];
 
+type CardNumberInputRefsIndex = 0 | 1 | 2;
+
+const isInCardNumberInputRefsIndex = (index: number): index is CardNumberInputRefsIndex => {
+  return index >= 0 && index < 3;
+};
+
 const AddCardForm = () => {
   const [cardBrand, setCardBrand] = useState<CardBrand>({ name: '', color: '' });
   const [ownerName, setOwnerName] = useState('');
@@ -49,7 +55,7 @@ const AddCardForm = () => {
   const expYearInputRef = useRef<HTMLInputElement>(null);
   const secondPasswordInputRef = useRef<HTMLInputElement>(null);
 
-  const focusNextCardNumberInput = (index: 0 | 1 | 2) => {
+  const focusNextCardNumberInput = (index: CardNumberInputRefsIndex) => {
     const cardNumberInputRefs = [secondCardNumberInputRef, thirdCardNumberInputRef, fourthCardNumberInputRef];
 
     cardNumberInputRefs[index].current?.focus();
@@ -60,11 +66,17 @@ const AddCardForm = () => {
 
     const nextValue: CardNumberState = [...cardNumber];
 
-    nextValue[index] = value;
+    try {
+      nextValue[index] = value;
+    } catch (error) {
+      console.error('Segmentation Fault: invalid index - ' + error);
+      return;
+    }
+
     setCardNumber(nextValue);
 
-    if (nextValue[index].length === CARD_NUMBER_DIGITS && index < 3) {
-      focusNextCardNumberInput(index as 0 | 1 | 2);
+    if (nextValue[index].length === CARD_NUMBER_DIGITS && isInCardNumberInputRefsIndex(index)) {
+      focusNextCardNumberInput(index);
     }
   };
 
@@ -102,12 +114,18 @@ const AddCardForm = () => {
     setCVC(value);
   };
 
-  const onChangePassword = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: 0 | 1) => {
+  const onChangePassword = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
     if (!isValidPassword(value)) return;
 
     const nextPassword: PasswordState = [...password];
 
-    nextPassword[index] = value;
+    try {
+      nextPassword[index] = value;
+    } catch (error) {
+      console.error('Segmentation Fault: invalid index - ' + error);
+      return;
+    }
+
     setPassword(nextPassword);
 
     if (index === 0 && value.length === 1) {
