@@ -5,7 +5,14 @@ import { Card, Button } from "./common";
 import { CARD_DESCRIPTION, FORMAT_CHAR } from "../constants";
 
 function CompleteCardAddition(props) {
-  const { cardType, cardNumbers, expirationDate, username } = props.card;
+  const {
+    cardId,
+    cardType,
+    cardNumbers,
+    expirationDate,
+    username,
+  } = props.card;
+
   const [cardDescription, setCardDescription] = useState("");
 
   const onCardDescriptionChange = ({ target }) => {
@@ -15,12 +22,7 @@ function CompleteCardAddition(props) {
   const onDescriptionSubmit = (event) => {
     event.preventDefault();
 
-    const card = {
-      cardDescription,
-      ...props.card,
-    };
-
-    props.onCardAdditionComplete(card);
+    props.onCardAdditionComplete(cardId, cardDescription);
   };
 
   return (

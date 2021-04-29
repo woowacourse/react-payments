@@ -4,6 +4,10 @@ export const URL = {
   COMPLETE_CARD_ADDITION: "/CompleteCardAddition",
 };
 
+export const QUERY_STRING_KEY = {
+  ID: "id",
+};
+
 export const FORMAT_CHAR = {
   HIDDEN_NUMBER: "•",
   CARD_NUMBERS_SEPARATOR: " - ",

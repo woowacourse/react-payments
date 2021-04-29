@@ -16,6 +16,7 @@ import {
   SECURE_CODE_LENGTH,
   USERNAME,
 } from "../constants";
+import { getNewId } from "../utils";
 
 const formatCardNumbers = (numbers) => {
   const [firstValue, secondValue, ...restValues] = numbers;
@@ -88,6 +89,7 @@ const CardAddition = (props) => {
     }
 
     const card = {
+      cardId: getNewId(),
       cardType,
       cardNumbers,
       expirationDate,

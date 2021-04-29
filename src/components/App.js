@@ -5,10 +5,10 @@ import CardAddition from "./CardAddition";
 import CompleteCardAddition from "./CompleteCardAddition";
 import Home from "./Home";
 import { Route, Switch, useHistory, useLocation } from "react-router";
+import { QUERY_STRING_KEY } from "../constants.js";
 
 function App() {
   const [cardList, setCardList] = useState([]);
-  const [processingCard, setProcessingCard] = useState({});
   const history = useHistory();
   const location = useLocation();
 
@@ -30,12 +30,27 @@ function App() {
   };
 
   const onCardInfoSubmit = (card) => {
-    setProcessingCard(card);
-    history.replace(URL.COMPLETE_CARD_ADDITION);
+    const newCard = { cardDescription: null, ...card };
+
+    setCardList((prevCardList) => [...prevCardList, newCard]);
+    history.replace(
+      URL.COMPLETE_CARD_ADDITION + `?${QUERY_STRING_KEY.ID}=${newCard.cardId}`
+    );
   };
 
-  const onCardAdditionComplete = (card) => {
-    setCardList((prevCardList) => [...prevCardList, card]);
+  const onCardAdditionComplete = (cardId, cardDescription) => {
+    setCardList((prevCardList) =>
+      prevCardList.map((card) => {
+        if (card.cardId !== cardId) {
+          return card;
+        }
+
+        card.cardDescription = cardDescription;
+
+        return card;
+      })
+    );
+
     history.replace(URL.HOME);
   };
 
@@ -56,7 +71,11 @@ function App() {
           <Route exact path={URL.COMPLETE_CARD_ADDITION}>
             <CompleteCardAddition
               onCardAdditionComplete={onCardAdditionComplete}
-              card={processingCard}
+              card={cardList.find(
+                (card) =>
+                  String(card.cardId) ===
+                  new URLSearchParams(location.search).get(QUERY_STRING_KEY.ID)
+              )}
             />
           </Route>
         </Switch>
