@@ -1,7 +1,8 @@
 import CreditCard from '../../components/shared/CreditCard';
 import CardList from '../../components/cardList';
-import Template from '../../components/common/Template';
+import Template from '../../components/shared/Template';
 import { Card } from '../../types';
+import { CARD_LIST_PAGE_TITLE } from '../../constants/title';
 
 const dummies: Card[] = [
   {
@@ -51,11 +52,9 @@ const dummies: Card[] = [
   },
 ];
 
-const title = '보유카드';
-
 const CardListPage = () => {
   return (
-    <Template title={title}>
+    <Template title={CARD_LIST_PAGE_TITLE}>
       <CardList>
         {dummies.map(card => (
           <li key={card.cardNumber}>
