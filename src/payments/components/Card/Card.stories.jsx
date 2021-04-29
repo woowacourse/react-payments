@@ -7,6 +7,7 @@ export default {
   component: Card,
 };
 
+// eslint-disable-next-line react/jsx-props-no-spreading
 const CardTemplate = args => <Card {...args} />;
 
 export const RegisteredCard = CardTemplate.bind({});

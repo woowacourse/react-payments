@@ -1,17 +1,17 @@
 {
   "name": "react-payments",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
   "dependencies": {
     "@craco/craco": "^6.1.1",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "autoprefixer": "^9",
     "classnames": "^2.3.1",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   },
   "scripts": {
     "start": "craco start",
@@ -25,7 +25,6 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest",
       "plugin:jsx-a11y/recommended",
       "plugin:import/recommended",
       "airbnb",
@@ -42,7 +41,8 @@
           "**/*.stories.*"
         ],
         "rules": {
-          "import/no-anonymous-default-export": "off"
+          "import/no-anonymous-default-export": "off",
+          "react/jsx-props-no-spreading": "off"
         }
       }
     ],
@@ -68,15 +68,13 @@
     "@storybook/preset-create-react-app": "^3.1.7",
     "@storybook/react": "^6.2.8",
     "@tailwindcss/postcss7-compat": "^2.1.0",
-    "autoprefixer": "^9",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.2.0",
     "husky": ">=6",
     "lint-staged": ">=10",
     "postcss": "^7",
     "prettier": "2.2.1",
-    "prettier-plugin-tailwind": "^2.2.10",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "prettier-plugin-tailwind": "^2.2.10"
   },
   "lint-staged": {
     "*.{jsx,js}": "eslint",
