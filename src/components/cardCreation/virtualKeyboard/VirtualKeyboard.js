@@ -3,6 +3,7 @@ import { Button } from '../../commons/button/Button';
 import Styled from './VirtualKeyboard.style';
 import { useState } from 'react';
 import { arrayShuffle } from '../../../utils/shuffle';
+import { randomKey } from '../../../utils/randomKey';
 
 const virtualKeyboardValueList = Array.from({ length: 10 }, (_, i) => i);
 const CONFIRM = '확인';
@@ -19,7 +20,7 @@ const VirtualKeyboard = ({ closeModal, currentInputName, inputValue, setInputVal
       return;
     }
 
-    setShuffledButtonList(arrayShuffle(shuffledButtonList));
+    setShuffledButtonList(arrayShuffle(virtualKeyboardValueList));
 
     if (typeof inputValue === 'string') {
       setSingleInputValue(target.innerText);
@@ -50,7 +51,7 @@ const VirtualKeyboard = ({ closeModal, currentInputName, inputValue, setInputVal
     <BottomModal closeModal={closeModal}>
       <Styled.ButtonContainer onClick={handleButtonClick}>
         {shuffledButtonList.map(value => (
-          <Button type="button" key={value}>
+          <Button type="button" key={randomKey()}>
             {value}
           </Button>
         ))}
