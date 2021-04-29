@@ -12,6 +12,7 @@ const Container = styled.div`
   font-weight: 500;
   font-size: 1.2rem;
   color: #737373;
+  border: ${(props) => (props.isValid ? '0.01rem solid transparent' : '0.01rem solid #f24156')};
 `;
 
 const Input = styled.input.attrs({
@@ -26,8 +27,9 @@ const Input = styled.input.attrs({
   border: none;
   text-align: center;
   font-size: 1.15rem;
-  color: #04c09e;
+  color: #525252;
   font-weight: 500;
+  outline: none;
 `;
 
 export { Container, Input };

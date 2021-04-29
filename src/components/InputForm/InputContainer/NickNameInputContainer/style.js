@@ -12,7 +12,9 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Input = styled.input`
+const Input = styled.input.attrs({
+  autoFocus: 'autoFocus',
+})`
   width: 95%;
   margin: 0;
   padding: 0;
@@ -21,6 +23,7 @@ const Input = styled.input`
   font-weight: 400;
   background: transparent;
   border: none;
+  outline: none;
   text-align: center;
   color: #454545;
 `;

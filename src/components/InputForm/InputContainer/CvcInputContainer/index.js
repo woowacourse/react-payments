@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 
-export const CvcInputContainer = ({ cvc, handleChange }) => {
+export const CvcInputContainer = ({ cvc, isValid, handleChange, handleBlur }) => {
   return (
     <>
-      <Styled.Container>
+      <Styled.Container onBlur={handleBlur} isValid={isValid}>
         <Styled.Input name={'cvc'} value={cvc} onChange={handleChange} />
       </Styled.Container>
       <Styled.HelpSign>?</Styled.HelpSign>

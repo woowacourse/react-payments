@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const Input = styled.input.attrs({
   type: 'text',
-  maxLength: 30,
+  maxLength: 15,
 })`
   width: 92%;
   height: 45%;
@@ -22,8 +22,10 @@ const Input = styled.input.attrs({
   background: transparent;
   border: none;
   font-size: 1.06rem;
-  color: #04c09e;
+  // color: #04c09e;
+  color: #525252;
   font-weight: 500;
+  outline: none;
 `;
 
 export { Container, Input };

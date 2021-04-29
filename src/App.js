@@ -15,18 +15,18 @@ const cardFrame = {
 
 const registeredCards = [
   {
-    nickName: '엄카',
-    company: '포코',
-    numbers: { first: '1111', second: '2222', third: '3333', fourth: '4444' },
-    owner: 'SUN',
-    validDay: { month: '04', year: '21' },
+    nickName: '피터',
+    company: '공원',
+    numbers: { first: '1995', second: '0519', third: '0101', fourth: '0101' },
+    owner: 'HYUN CHEOL',
+    validDay: { month: '18', year: '18' },
   },
   {
-    nickName: '법카',
-    company: '로이드',
-    numbers: { first: '1111', second: '2222', third: '3333', fourth: '4444' },
-    owner: 'SUN',
-    validDay: { month: '04', year: '21' },
+    nickName: '심바',
+    company: '준',
+    numbers: { first: '1994', second: '1017', third: '1001', fourth: '0110' },
+    owner: 'SUN BEAN',
+    validDay: { month: '18', year: '18' },
   },
 ];
 

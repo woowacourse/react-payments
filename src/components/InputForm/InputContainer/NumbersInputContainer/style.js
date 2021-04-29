@@ -12,7 +12,8 @@ const Container = styled.div`
   font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
-  color: #04c09e;
+  color: #737373;
+  border: ${(props) => (props.isValid ? '0.01rem solid transparent' : '0.01rem solid #f24156')};
 `;
 
 const Input = styled.input.attrs({ type: 'text', maxLength: 4 })`
@@ -24,7 +25,8 @@ const Input = styled.input.attrs({ type: 'text', maxLength: 4 })`
   border: none;
   text-align: center;
   font-size: 1.1rem;
-  color: #04c09e;
+  color: #525252;
+  outline: none;
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
@@ -45,7 +47,8 @@ const BlindInput = styled.input.attrs({
   border: none;
   text-align: center;
   font-size: 1.8rem;
-  color: #04c09e;
+  color: ${(props) => (props.isValid ? '#04c09e' : '#525252')};
+  outline: none;
 `;
 
 export { Container, Input, BlindInput };

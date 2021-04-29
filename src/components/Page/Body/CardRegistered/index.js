@@ -7,9 +7,25 @@ import { NickNameForm } from '../../../InputForm/NickNameForm';
 /**
  * Primary UI component for user interaction
  */
-export const CardRegistered = ({ card, setCurrentPage, updateCardContent, registerCard }) => {
+const birds = [
+  '직박구리',
+  '두루미',
+  '할미새사촌',
+  '가마우지',
+  '논병아리',
+  '해오라기',
+  '메추라기',
+  '닭',
+  '꿩',
+  '딱따구리',
+  '느시',
+];
+
+export const CardRegistered = ({ card, setCurrentPage, registerCard }) => {
   const { company, numbers, owner, validDay } = card;
-  const [nickName, setNickName] = useState(`${owner}의 ${company} 카드`);
+  const [nickName, setNickName] = useState(
+    `${owner ? owner : birds[Math.floor(Math.random() * 11)]}의 ${company}카드`
+  );
 
   const handleNickNameChange = (e) => {
     setNickName(e.target.value);

@@ -20,11 +20,12 @@ const Input = styled.input.attrs({
   border-radius: 0.4rem;
   text-align: center;
   font-size: 1.8rem;
-  color: #04c09e;
   margin: 0;
+  color: #525252;
   padding: 0;
   background: #ecebf1;
-  border: none;
+  outline: none;
+  border: ${(props) => (props.isValid ? '0.01rem solid transparent' : '0.01rem solid #f24156')};
 `;
 
 const BilndInput = styled.input.attrs({
@@ -35,7 +36,8 @@ const BilndInput = styled.input.attrs({
   height: 45%;
   text-align: center;
   font-size: 1.4rem;
-  color: #04c09e;
+  // color: #04c09e;
+  color: #525252;
   margin: 0;
   padding: 0;
   background: transparent;

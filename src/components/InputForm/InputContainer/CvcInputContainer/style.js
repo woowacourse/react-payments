@@ -10,6 +10,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border: ${(props) => (props.isValid ? '0.01rem solid transparent' : '0.01rem solid #f24156')};
 `;
 
 const Input = styled.input.attrs({
@@ -25,7 +26,8 @@ const Input = styled.input.attrs({
   text-align: center;
   font-size: 1.7rem;
   letter-spacing: 0.3rem;
-  color: #04c09e;
+  color: #525252;
+  outline: none;
 `;
 
 const HelpSign = styled.span`

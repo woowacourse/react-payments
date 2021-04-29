@@ -7,7 +7,7 @@ import { InputButton } from '../InputButton';
 /**
  * Primary UI component for user interaction
  */
-export const NickNameForm = ({ nickName, setCurrentPage, submitCardNickName }) => {
+export const NickNameForm = ({ nickName, submitCardNickName }) => {
   return (
     <Styled.Form onSubmit={submitCardNickName}>
       <Styled.InputContainer>
