@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Modal = (props) => {
   return (
     <section
-      className="max-w-375 max-h-701 mt-5 p-5 mx-auto flex fixed inset-0 z-10 bg-gray-400 bg-opacity-70 rounded-3xl"
+      className="fixed z-10 inset-0 flex mt-5 mx-auto p-5 max-w-375 max-h-701 bg-gray-400 bg-opacity-70 rounded-3xl"
       role="dialog"
       aria-modal="true"
       aria-label="카드사 선택 modal"

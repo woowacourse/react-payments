@@ -5,9 +5,9 @@ const InputContainer = (props) => {
   const { title, children, width, bgColor = '', count = false } = props;
 
   return (
-    <div className="flex w-full flex-col mt-5">
-      <div className="flex justify-between items-center">
-        <label className="text-xs ">{title}</label>
+    <div className="flex flex-col mt-5 w-full">
+      <div className="flex items-center justify-between">
+        <label className="text-xs">{title}</label>
         <span className="mr-1 text-xs">{count || count === 0 ? `${count}/30` : ''}</span>
       </div>
       <div className={`${width} flex items-center mt-1.5 font-gray-350 ${bgColor} rounded`}>{children}</div>

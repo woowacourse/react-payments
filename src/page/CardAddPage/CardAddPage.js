@@ -34,7 +34,7 @@ const CardAddPage = (props) => {
     <div className="p-5">
       <div className="flex items-center">
         <BackButton />
-        <h1 className="text-xl ml-4">카드 추가</h1>
+        <h1 className="ml-4 text-xl">카드 추가</h1>
       </div>
 
       <div className="flex justify-center my-7">

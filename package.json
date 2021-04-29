@@ -31,6 +31,7 @@
     "lint-staged": "^10.5.4",
     "postcss": "^7",
     "prettier": "^2.2.1",
+    "prettier-plugin-tailwind": "^2.2.10",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   },
   "resolutions": {

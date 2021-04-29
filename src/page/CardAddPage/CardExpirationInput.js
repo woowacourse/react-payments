@@ -18,7 +18,7 @@ const CardExpirationInput = (props) => {
           onChange={(e) => handleExpirationInput(e, 'month')}
           className={'text-center pl-4'}
         />
-        <span className="text-gray-400 ">/</span>
+        <span className="text-gray-400">/</span>
         <Input
           placeholder={'YY'}
           type={'number'}

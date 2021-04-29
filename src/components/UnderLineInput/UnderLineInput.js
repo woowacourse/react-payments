@@ -9,7 +9,7 @@ const UnderLineInput = (props) => {
       type="text"
       placeholder="카드 이름을 입력해주세요."
       maxLength={10}
-      className="border-b border-black-500 w-3/4 text-center outline-none	"
+      className="w-3/4 text-center border-b border-black-500 outline-none"
       name={name}
     />
   );

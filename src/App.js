@@ -93,7 +93,7 @@ function App() {
   };
 
   return (
-    <div className="relative max-w-375 mt-5 p-5 mx-auto bg-white rounded-3xl">
+    <div className="relative mt-5 mx-auto p-5 max-w-375 bg-white rounded-3xl">
       {!isAllValid ? (
         <CardAddPage
           cardNumbers={cardNumbers}

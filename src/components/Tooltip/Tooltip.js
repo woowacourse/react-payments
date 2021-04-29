@@ -13,13 +13,13 @@ const Tooltip = (props) => {
     <div className="relative">
       <button
         type="button"
-        className="w-6 h-6  ml-2 flex justify-center items-center rounded-full ring-1 ring-gray-400 text-lg text-gray-400 focus:outline-none"
+        className="flex items-center justify-center ml-2 w-6 h-6 text-gray-400 text-lg rounded-full focus:outline-none ring-gray-400 ring-1"
         onClick={handleToggleTooltip}
       >
         {innerText}
       </button>
       {isShowTooltip && (
-        <div className="ring-1 rounded-2xl rounded-tl-none ring-gray-400 w-24 absolute left-7 top-4 bg-gray-100">
+        <div className="absolute left-7 top-4 w-24 bg-gray-100 rounded-2xl rounded-tl-none ring-gray-400 ring-1">
           {content}
         </div>
       )}

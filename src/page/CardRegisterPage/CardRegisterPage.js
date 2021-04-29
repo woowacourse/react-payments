@@ -16,9 +16,9 @@ const CardRegisterPage = (props) => {
   };
 
   return (
-    <form className="h-full p-5 flex flex-col items-center" onSubmit={handleCardSubmit}>
-      <h1 className="mt-20 text-2xl text-gray-600">카드 등록이 완료되었습니다.</h1>
-      <div className="mt-20 mb-10">
+    <form className="flex flex-col items-center p-5 h-full" onSubmit={handleCardSubmit}>
+      <h1 className="mt-20 text-gray-600 text-2xl">카드 등록이 완료되었습니다.</h1>
+      <div className="mb-10 mt-20">
         <Card
           size={'large'}
           name={ownerName || 'NAME'}
