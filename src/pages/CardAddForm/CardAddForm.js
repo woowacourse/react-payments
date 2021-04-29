@@ -37,6 +37,7 @@ const CardAddForm = () => {
     maxLengthPerInput: 1,
   });
 
+  // eslint-disable-next-line no-unused-vars
   const { Modal, isModalOpened, openModal, closeModal } = useModal(false);
   const ownerName = useInput('', { numberOnly: true, upperCase: true });
   const expiryDate = useInput('');
@@ -70,29 +71,25 @@ const CardAddForm = () => {
   const isCardCompanySelected = useMemo(() => Object.keys(cardCompany).length > 0, [cardCompany]);
 
   const handleFocusCardNumberInput = (event) => {
-    const [
-      firstCardNumberInput,
-      secondCardNumberInput,
-      thirdCardNumberInput,
-      fourthCardNumberInput,
-    ] = cardNumberInputRefs;
+    const [firstInputRef, secondInputRef, thirdInputRef, fourthInputRef] = cardNumberInputRefs;
 
-    if (event.target === thirdCardNumberInput || event.target === fourthCardNumberInput) {
-      if (firstCardNumberInput.value.length < 4) {
+    const [firstValue, secondValue] = cardNumbers.value;
+
+    if (event.target === thirdInputRef || event.target === fourthInputRef) {
+      if (firstInputRef.value.length < 4) {
         // eslint-disable-next-line no-alert
         alert('카드번호 앞 8자리를 먼저 입력해주세요');
-        firstCardNumberInput?.focus();
+        firstInputRef?.focus();
         return;
       }
 
-      if (secondCardNumberInput.value.length < 4) {
+      if (secondInputRef.value.length < 4) {
         // eslint-disable-next-line no-alert
         alert('카드번호 앞 8자리를 먼저 입력해주세요');
-        secondCardNumberInput?.focus();
-        return;
+        secondInputRef?.focus();
       }
 
-      if (!isCardCompanySelected && !isModalOpened) {
+      if (firstValue === 4 && secondValue === 4 && !isCardCompanySelected && !isModalOpened) {
         openModal();
       }
     }
@@ -129,17 +126,17 @@ const CardAddForm = () => {
     setCardCompany(CARD[key]);
     closeModal();
 
-    const [, , thirdCardNumberInput] = cardNumberInputRefs;
-    thirdCardNumberInput?.focus();
+    const [, , thirdInputRef] = cardNumberInputRefs;
+    thirdInputRef?.focus();
   };
 
   const updateCardCompany = useCallback(() => {
-    const [firstInput, secondInput] = cardNumbers.value;
+    const [firstValue, secondValue] = cardNumbers.value;
 
-    const isFilledHalf = firstInput.length === 4 && secondInput.length === 4;
+    const isFilledHalf = firstValue.length === 4 && secondValue.length === 4;
 
     if (isFilledHalf && !isCardCompanySelected) {
-      const matchedCardCompany = findCardCompany(firstInput, secondInput);
+      const matchedCardCompany = findCardCompany(firstValue, secondValue);
 
       if (matchedCardCompany) {
         setCardCompany(matchedCardCompany);
@@ -154,8 +151,8 @@ const CardAddForm = () => {
   useEffect(updateCardCompany, [updateCardCompany]);
 
   useEffect(() => {
-    const [firstCardNumberInput] = cardNumberInputRefs;
-    firstCardNumberInput?.focus();
+    const [firstInputRef] = cardNumberInputRefs;
+    firstInputRef?.focus();
   }, [cardNumberInputRefs]);
 
   return (
