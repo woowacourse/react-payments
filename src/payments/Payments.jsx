@@ -9,8 +9,8 @@ const Payments = () => {
   const [currentPage, setCurrentPage] = useState(CARD_ADD_FORM);
   const [newCardInfo, setNewCardInfo] = useState(null);
 
-  const addCardInfo = newCardInfo => {
-    setNewCardInfo(newCardInfo);
+  const addCardInfo = cardInfo => {
+    setNewCardInfo(cardInfo);
     setCurrentPage(CARD_CONFIRM);
   };
 

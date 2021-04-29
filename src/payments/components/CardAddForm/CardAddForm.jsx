@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import classNames from "classnames";
-import { ERROR_TYPE, getId, throwError } from "../../../@shared/utils";
+import { ERROR_TYPE, throwError } from "../../../@shared/utils";
 import Card from "../Card/Card";
 import Input from "../Input/Input";
 import InputTitle from "../InputTitle/InputTitle";
@@ -10,10 +12,10 @@ import BankSelector from "../BankSelector/BankSelector";
 import Dimmer from "../Dimmer/Dimmer";
 
 const initialNumberInfos = [
-  { id: getId(), type: "text", value: "", minLength: "4", maxLength: "4" },
-  { id: getId(), type: "text", value: "", minLength: "4", maxLength: "4" },
-  { id: getId(), type: "password", value: "", minLength: "4", maxLength: "4" },
-  { id: getId(), type: "password", value: "", minLength: "3", maxLength: "4" },
+  { id: "number-info-0", type: "text", value: "", minLength: "4", maxLength: "4" },
+  { id: "number-info-1", type: "text", value: "", minLength: "4", maxLength: "4" },
+  { id: "number-info-2", type: "password", value: "", minLength: "4", maxLength: "4" },
+  { id: "number-info-3", type: "password", value: "", minLength: "3", maxLength: "4" },
 ];
 
 const CardAddForm = props => {
@@ -36,10 +38,24 @@ const CardAddForm = props => {
     setBankSelectorVisible(!isBankSelectorVisible);
   };
 
-  const handleBankClick = (backgroundColor, bank) => {
+  const handleBankClick = (bgColor, bankName) => {
     setBankSelectorVisible(false);
-    setBackgroundColor(backgroundColor);
-    setBank(bank);
+    setBackgroundColor(bgColor);
+    setBank(bankName);
+  };
+
+  const validateNumberInfos = infos => {
+    if (!Array.isArray(infos)) {
+      throw new TypeError("numberInfos should be an array");
+    }
+
+    const isValid = infos.every(({ value, minLength, maxLength }) =>
+      new RegExp(`^[\\d]{${minLength},${maxLength}}$`).test(value)
+    );
+
+    if (!isValid) {
+      throwError("Invalid numberInfos", ERROR_TYPE.VALIDATION);
+    }
   };
 
   const handleNumberInfoChange = event => {
@@ -65,17 +81,20 @@ const CardAddForm = props => {
     }
   };
 
-  const validateNumberInfos = numberInfos => {
-    if (!Array.isArray(numberInfos)) {
-      throw new TypeError("numberInfos should be an array");
+  const validateExpirationDate = date => {
+    if (date.length !== 4) {
+      throwError("Invalid date", ERROR_TYPE.VALIDATION);
     }
 
-    const isValid = numberInfos.every(({ value, minLength, maxLength }) => {
-      return new RegExp(`^[\\d]{${minLength},${maxLength}}$`).test(value);
-    });
+    const month = date.slice(0, 2);
+    const year = date.slice(2, 4);
+    const currentYear = new Date().getFullYear() - 2000;
 
-    if (!isValid) {
-      throwError("Invalid numberInfos", ERROR_TYPE.VALIDATION);
+    if (Number(month) < 1 || Number(month) > 12) {
+      throwError("Invalid month", ERROR_TYPE.VALIDATION);
+    }
+    if (year < currentYear || year > currentYear + 5) {
+      throwError("Invalid year", ERROR_TYPE.VALIDATION);
     }
   };
 
@@ -102,20 +121,11 @@ const CardAddForm = props => {
     }
   };
 
-  const validateExpirationDate = date => {
-    if (date.length !== 4) {
-      throwError("Invalid date", ERROR_TYPE.VALIDATION);
-    }
+  const validateOwnerName = name => {
+    const rName = /^[가-힣|A-Z|\s]{0,30}$/;
 
-    const month = date.slice(0, 2);
-    const year = date.slice(2, 4);
-    const currentYear = new Date().getFullYear() - 2000;
-
-    if (Number(month) < 1 || Number(month) > 12) {
-      throwError("Invalid month", ERROR_TYPE.VALIDATION);
-    }
-    if (year < currentYear || year > currentYear + 5) {
-      throwError("Invalid year", ERROR_TYPE.VALIDATION);
+    if (!rName.test(name)) {
+      throwError(`Invalid owner name: ${name}`, ERROR_TYPE.VALIDATION);
     }
   };
 
@@ -137,11 +147,11 @@ const CardAddForm = props => {
     }
   };
 
-  const validateOwnerName = name => {
-    const rName = /^[가-힣|A-Z|\s]{0,30}$/;
+  const validateSecurityCode = code => {
+    const rCode = /^[\d]{3,4}$/;
 
-    if (!rName.test(name)) {
-      throwError(`Invalid owner name: ${name}`, ERROR_TYPE.VALIDATION);
+    if (!rCode.test(code)) {
+      throwError(`Invalid security code: ${code}`, ERROR_TYPE.VALIDATION);
     }
   };
 
@@ -164,16 +174,18 @@ const CardAddForm = props => {
     }
   };
 
-  const validateSecurityCode = code => {
-    const rCode = /^[\d]{3,4}$/;
+  const handleToolTipClick = () => setToolTipVisible(!isToolTipVisible);
 
-    if (!rCode.test(code)) {
-      throwError(`Invalid security code: ${code}`, ERROR_TYPE.VALIDATION);
+  const validatePasswords = newPasswords => {
+    if (!Array.isArray(newPasswords)) {
+      throw new TypeError("passwords should be an array");
     }
-  };
 
-  const handleToolTipClick = () => {
-    setToolTipVisible(!isToolTipVisible);
+    const rCode = /^[\d]{1}$/;
+
+    if (newPasswords.some(number => !rCode.test(number))) {
+      throwError("Invalid password", ERROR_TYPE.VALIDATION);
+    }
   };
 
   const handlePasswordChange = event => {
@@ -197,21 +209,9 @@ const CardAddForm = props => {
     }
   };
 
-  const validatePasswords = passwords => {
-    if (!Array.isArray(passwords)) {
-      throw new TypeError("passwords should be an array");
-    }
-
-    const rCode = /^[\d]{1}$/;
-
-    if (passwords.some(number => !rCode.test(number))) {
-      throwError("Invalid password", ERROR_TYPE.VALIDATION);
-    }
-  };
-
   return (
     <>
-      <Header hasBackButton={true} title={"카드 추가"} />
+      <Header hasBackButton title="카드 추가" />
       <form className="flex flex-col justify-center w-full h-160">
         <div>
           <div className="flex justify-center mb-4 w-full">
@@ -231,24 +231,22 @@ const CardAddForm = props => {
             </div>
             <div
               className={classNames(
-                "flex items-center justify-around text-custom-mint text-lg font-medium bg-custom-gray-100 rounded-md",
+                "flex items-center justify-around w-full text-custom-mint text-lg font-medium bg-custom-gray-100 rounded-md",
                 !(isNumberInfosValid ?? true) && "ring-2 ring-rose-400"
               )}
             >
               {numberInfos.map(({ id, type, value }, index) => (
                 <React.Fragment key={id}>
                   {index > 0 && "-"}
-                  <label className="sr-only" htmlFor={`card-number-input-${index}`}>
-                    {`카드 번호 입력란 ${index}`}
-                  </label>
                   <Input
                     id={`card-number-input-${index}`}
                     type={type}
-                    className="w-1/5 outline-none"
+                    className="w-full outline-none"
                     name={index}
                     minLength="4"
                     maxLength="4"
                     value={value}
+                    label={`카드 번호 입력란 ${index}`}
                     onChange={handleNumberInfoChange}
                     required
                   />
@@ -260,9 +258,7 @@ const CardAddForm = props => {
             <div className="mb-2 h-6">
               <InputTitle innerText="만료일" />
             </div>
-            <label className="sr-only" htmlFor="expiration-date-input">
-              만료일 입력란
-            </label>
+
             <Input
               id="expiration-date-input"
               type="text"
@@ -273,6 +269,7 @@ const CardAddForm = props => {
               value={expirationDate}
               isValid={isExpirationDateValid ?? true}
               onChange={handleExpirationDateChange}
+              label="만료일"
               required
             />
           </div>
@@ -281,9 +278,6 @@ const CardAddForm = props => {
               <InputTitle innerText="카드 소유자 이름(선택)" />
               <span className="text-custom-gray-300 text-xs font-medium">{ownerName.length}/30</span>
             </div>
-            <label className="sr-only" htmlFor="owner-name-input">
-              카드 소유자 이름 입력란
-            </label>
             <Input
               id="owner-name-input"
               type="text"
@@ -292,6 +286,7 @@ const CardAddForm = props => {
               value={ownerName}
               isValid={isOwnerNameValid}
               onChange={handleOwnerNameChange}
+              label="카드 소유자 이름 입력란"
               minLength="0"
               maxLength="30"
             />
@@ -300,11 +295,10 @@ const CardAddForm = props => {
             <div className="mb-2 h-6">
               <InputTitle innerText="보안코드(CVC/CVV)" />
             </div>
-            <label className="sr-only" htmlFor="security-code-input">
-              보안 코드 입력란
-            </label>
+
             <div className="flex items-center">
               <Input
+                id="security-code-input"
                 type="password"
                 className="w-20"
                 minLength="3"
@@ -312,6 +306,7 @@ const CardAddForm = props => {
                 value={securityCode}
                 onChange={handleSecurityCodeChange}
                 isValid={isSecurityCodeValid ?? true}
+                label="보안 코드 입력란"
                 required
               />
               <svg
@@ -330,7 +325,7 @@ const CardAddForm = props => {
                 />
               </svg>
               <div className={classNames("flex items-center", isToolTipVisible ? "visible" : "invisible")}>
-                <span className="left-arrow w-0 h-0 border-8 border-custom-darkgray"></span>
+                <span className="left-arrow w-0 h-0 border-8 border-custom-darkgray" />
                 <span className="p-2 text-custom-white text-xs bg-custom-darkgray rounded-lg">
                   카드 뒷면 서명란 끝의 3~4자리 숫자를 입력해주세요.
                 </span>
@@ -342,8 +337,8 @@ const CardAddForm = props => {
               <InputTitle innerText="카드 비밀번호" />
             </div>
             <div className="flex items-center justify-between w-48">
-              <label className="sr-only" htmlFor="card-password-input-1"></label>
               <Input
+                id="password-input-0"
                 type="password"
                 className="w-10 text-center"
                 minLength="1"
@@ -351,10 +346,11 @@ const CardAddForm = props => {
                 name="0"
                 value={passwords[0] || ""}
                 isValid={isPasswordValid ?? true}
+                label="카드 비밀번호1"
                 onChange={handlePasswordChange}
               />
-              <label className="sr-only" htmlFor="card-password-input-2"></label>
               <Input
+                id="password-input-1"
                 type="password"
                 className="w-10 text-center"
                 minLength="1"
@@ -362,6 +358,7 @@ const CardAddForm = props => {
                 name="1"
                 value={passwords[1] || ""}
                 isValid={isPasswordValid ?? true}
+                label="카드 비밀번호2"
                 onChange={handlePasswordChange}
               />
               <div className="flex justify-center w-10">
@@ -399,6 +396,7 @@ const CardAddForm = props => {
                 ownerName,
                 securityCode,
                 passwords,
+                isRegistered: true,
               });
             }}
           />
@@ -413,6 +411,10 @@ const CardAddForm = props => {
       )}
     </>
   );
+};
+
+CardAddForm.propTypes = {
+  addCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardAddForm;
