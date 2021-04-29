@@ -5,6 +5,12 @@ import { Card } from '../../../Card';
 import { CardCreateForm } from '../../../InputForm/CardCreateForm';
 import { Modal } from '../../../Modal';
 import { CardCompanyList } from '../../../Modal/ModalBody/CardCompanyList';
+import {
+  isEnglishTextType,
+  isMonthType,
+  isNumberType,
+  isValidYearType,
+} from '../../../../utils/validators.js';
 
 /**
  * Primary UI component for user interaction
@@ -23,35 +29,80 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
   };
 
   const handleNumbersChange = (e) => {
-    setNumbers({ ...numbers, [e.target.name]: e.target.value });
+    const inputValue = e.target.value;
+
+    const filteredValue = Array.from(inputValue)
+      .map((text) => (isNumberType(text) ? text : ''))
+      .join('');
+
+    setNumbers({ ...numbers, [e.target.name]: filteredValue });
   };
 
   const handleValidDayChange = (e) => {
-    setValidDay({ ...validDay, [e.target.name]: e.target.value });
+    const inputValue = e.target.value;
+
+    const filteredValue = Array.from(inputValue)
+      .map((text) => (isNumberType(text) ? text : ''))
+      .join('');
+
+    setValidDay({ ...validDay, [e.target.name]: filteredValue });
+  };
+
+  const handleValidDayBlur = (e) => {
+    const inputValue = e.target.value;
+    const inputType = e.target.name;
+
+    if (inputType === 'month' && isMonthType(inputValue)) {
+      return;
+    }
+
+    if (inputType === 'year' && isValidYearType(inputValue)) {
+      return;
+    }
+
+    console.log(inputType);
   };
 
   const handleOwnerChange = (e) => {
-    setOwner(e.target.value);
+    const inputValue = e.target.value;
+
+    const filteredValue = Array.from(inputValue)
+      .map((text) => (isEnglishTextType(text) ? text : ''))
+      .join('');
+
+    setOwner(filteredValue);
   };
 
   const handleCvcChange = (e) => {
-    setCvc(e.target.value);
+    const inputValue = e.target.value;
+
+    const filteredValue = Array.from(inputValue)
+      .map((text) => (isNumberType(text) ? text : ''))
+      .join('');
+
+    setCvc(filteredValue);
   };
 
   const handlePasswordChange = (e) => {
-    setPassword({ ...password, [e.target.name]: e.target.value });
+    const inputValue = e.target.value;
+
+    const filteredValue = Array.from(inputValue)
+      .map((text) => (isNumberType(text) ? text : ''))
+      .join('');
+
+    setPassword({ ...password, [e.target.name]: filteredValue });
   };
 
   const isValidEveryInput = () => {
     return (
       company &&
-      numbers.first &&
-      numbers.second &&
-      numbers.third &&
-      numbers.fourth &&
-      validDay.month &&
-      validDay.year &&
-      cvc &&
+      numbers.first.length === 4 &&
+      numbers.second.length === 4 &&
+      numbers.third.length === 4 &&
+      numbers.fourth.length === 4 &&
+      validDay.month.length === 2 &&
+      validDay.year.length === 2 &&
+      cvc.length === 3 &&
       password.firstDigit &&
       password.secondDigit
     );
@@ -93,7 +144,12 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
             handleChange: handleNumbersChange,
             isValid: true,
           }}
-          validDay={{ value: validDay, handleChange: handleValidDayChange, isValid: true }}
+          validDay={{
+            value: validDay,
+            handleChange: handleValidDayChange,
+            handleBlur: handleValidDayBlur,
+            isValid: true,
+          }}
           owner={{ value: owner, handleChange: handleOwnerChange, isValid: true }}
           cvc={{ value: cvc, handleChange: handleCvcChange, isValid: true }}
           password={{ value: password, handleChange: handlePasswordChange, isValid: true }}

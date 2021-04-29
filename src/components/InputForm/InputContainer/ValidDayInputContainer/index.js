@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 
-export const ValidDayInputContainer = ({ validDay, handleChange }) => {
+export const ValidDayInputContainer = ({ validDay, handleChange, handleBlur }) => {
   const { month, year } = validDay;
   return (
-    <Styled.Container>
+    <Styled.Container onBlur={handleBlur}>
       <Styled.Input name={'month'} value={month} onChange={handleChange} placeholder={'MM'} />
       <span>/</span>
       <Styled.Input name={'year'} value={year} onChange={handleChange} placeholder={'YY'} />

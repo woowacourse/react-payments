@@ -14,7 +14,10 @@ const Container = styled.div`
   color: #737373;
 `;
 
-const Input = styled.input`
+const Input = styled.input.attrs({
+  type: 'text',
+  maxLength: 2,
+})`
   width: 23%;
   height: 45%;
   margin: 0;

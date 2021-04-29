@@ -20,7 +20,6 @@ export const CardCreateForm = ({
   cvc,
   password,
   isValidEveryInput,
-  // setCurrentPage,
   submitCardDetail,
 }) => {
   return (
@@ -31,7 +30,11 @@ export const CardCreateForm = ({
       </InputContainer>
       <InputContainer title={'만료일'}>
         {!validDay.isValid && <ValidMessage validMessage={'유효한 날짜가 아닙니다.'} />}
-        <ValidDayInputContainer validDay={validDay.value} handleChange={validDay.handleChange} />
+        <ValidDayInputContainer
+          validDay={validDay.value}
+          handleChange={validDay.handleChange}
+          handleBlur={validDay.handleBlur}
+        />
       </InputContainer>
       <InputContainer title={'카드 소유자 이름 (선택)'}>
         <ValidMessage

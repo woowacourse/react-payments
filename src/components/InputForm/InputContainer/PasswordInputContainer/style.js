@@ -13,6 +13,7 @@ const Container = styled.div`
 
 const Input = styled.input.attrs({
   type: 'password',
+  maxLength: 1,
 })`
   width: 22%;
   height: 100%;

@@ -11,7 +11,10 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Input = styled.input`
+const Input = styled.input.attrs({
+  type: 'text',
+  maxLength: 30,
+})`
   width: 92%;
   height: 45%;
   margin: 0;

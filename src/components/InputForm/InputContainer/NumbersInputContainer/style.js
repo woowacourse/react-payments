@@ -15,7 +15,7 @@ const Container = styled.div`
   color: #04c09e;
 `;
 
-const Input = styled.input.attrs({ type: 'text' })`
+const Input = styled.input.attrs({ type: 'text', maxLength: 4 })`
   width: 18%;
   height: 45%;
   margin: 0;
@@ -35,6 +35,7 @@ const Input = styled.input.attrs({ type: 'text' })`
 
 const BlindInput = styled.input.attrs({
   type: 'password',
+  maxLength: 4,
 })`
   width: 18%;
   height: 45%;
