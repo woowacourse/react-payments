@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import Styled from './Card.style';
 
-export const CARD_SIZE = {
+export const CARD_SIZE = Object.freeze({
   LG: 'LG',
   MD: 'MD',
-};
+});
 
 export const Card = ({ size, children, styles, ...props }) => {
   return (
