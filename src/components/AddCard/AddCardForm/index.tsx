@@ -280,7 +280,7 @@ const AddCardForm = () => {
           <CardBrandModal
             cardBrands={CARD_BRAND}
             onClickCardBrandButton={onClickCardBrandButton}
-            modalClose={() => setIsCardBrandModalVisible(false)}
+            onClose={() => setIsCardBrandModalVisible(false)}
           />
         )}
 

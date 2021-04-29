@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import PALETTE from '../../../constants/palette';
 
 interface Props {
-  modalClose?: () => void;
+  onClose?: () => void;
   type?: 'bottom' | 'full';
 }
 
@@ -34,11 +34,11 @@ const ModalInner = styled.div<Pick<Props, 'type'>>`
   ${({ type }) => (type === 'full' ? fullType : bottomType)};
 `;
 
-const Modal: FC<Props> = ({ children, modalClose, type }) => {
+const Modal: FC<Props> = ({ children, onClose, type }) => {
   const onClickDimmed = ({ target, currentTarget }: MouseEvent<HTMLDivElement>) => {
-    if (!modalClose || target !== currentTarget) return;
+    if (!onClose || target !== currentTarget) return;
 
-    modalClose();
+    onClose();
   };
 
   return (

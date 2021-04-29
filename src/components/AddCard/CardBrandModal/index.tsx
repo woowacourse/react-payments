@@ -7,10 +7,10 @@ import { CardBrand } from '../../../types';
 interface Props {
   cardBrands: CardBrand[];
   onClickCardBrandButton: (cardBrand: CardBrand) => void;
-  modalClose: () => void;
+  onClose: () => void;
 }
 
-const CardBrandModal: FC<Props> = ({ cardBrands, onClickCardBrandButton, modalClose }) => {
+const CardBrandModal: FC<Props> = ({ cardBrands, onClickCardBrandButton, onClose }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const CardBrandModal: FC<Props> = ({ cardBrands, onClickCardBrandButton, modalCl
   }, []);
 
   return (
-    <Modal modalClose={modalClose} type="bottom">
+    <Modal onClose={onClose} type="bottom">
       <ButtonContainer ref={containerRef} tabIndex={0}>
         {cardBrands.map((brand, index) => (
           <IconButton key={index} backgroundColor={brand.color} onClick={() => onClickCardBrandButton(brand)}>
