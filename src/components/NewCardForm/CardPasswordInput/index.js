@@ -29,8 +29,8 @@ const CardPasswordInput = ({
           />
         ))}
 
-        <div className='privacy-dot'>●</div>
-        <div className='privacy-dot'>●</div>
+        <div className='privacy-dot'>•</div>
+        <div className='privacy-dot'>•</div>
       </div>
       <div className='input-alert'>{errorMessage}</div>
     </CardPasswordInputWrapper>

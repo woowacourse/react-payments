@@ -8,8 +8,10 @@ import { AppWrapper } from './App.styles.js';
 import NewCardForm from './components/NewCardForm';
 import CardColor from './components/ModalContents/CardColor';
 import CVCHelp from './components/ModalContents/CVCHelp';
+import CardAdditionComplete from './components/CardAdditionComplete';
 
 function App() {
+  const [page, setPage] = useState('addCard');
   const [newCardInfo, setNewCardInfo] = useState({
     cardName: 'DEFAULT',
     numbers: {
@@ -30,19 +32,23 @@ function App() {
     },
   });
 
-  const [openModalContent, setOpenModalContent] = useState({
-    isModalOpen: true,
-    modalContent: <CVCHelp />,
-  });
-
   const handleCardColor = (name) => {
     setNewCardInfo({
       ...newCardInfo,
       cardName: name,
     });
-
     handleModalClose();
   };
+
+  const modalContentsObject = {
+    cardColor: <CardColor handleCardColor={handleCardColor} />,
+    cvcHelp: <CVCHelp />,
+  };
+
+  const [openModalContent, setOpenModalContent] = useState({
+    isModalOpen: true,
+    modalContent: modalContentsObject.cardColor,
+  });
 
   const handleModalOpen = (content) => {
     setOpenModalContent({
@@ -58,24 +64,28 @@ function App() {
     });
   };
 
-  const modalContentsObject = {
-    cardColor: <CardColor handleCardColor={handleCardColor} />,
-    cvcHelp: <CVCHelp />,
-  };
-
   return (
     <>
       <GlobalStyles />
       <AppWrapper>
-        <Nav />
-        <div className='card-wrapper'>
-          <Card cardInfo={newCardInfo} handleModalOpen={handleModalOpen} />
-        </div>
-        <NewCardForm
-          cardInfo={newCardInfo}
-          setNewCardInfo={setNewCardInfo}
-          handleModalOpen={handleModalOpen}
-        />
+        {page === 'addCard' && (
+          <>
+            <Nav />
+            <div className='card-wrapper'>
+              <Card cardInfo={newCardInfo} handleModalOpen={handleModalOpen} />
+            </div>
+            <NewCardForm
+              cardInfo={newCardInfo}
+              setNewCardInfo={setNewCardInfo}
+              handleModalOpen={handleModalOpen}
+              setPage={setPage}
+            />
+          </>
+        )}
+        {page === 'cardComplete' && (
+          <CardAdditionComplete newCardInfo={newCardInfo} />
+        )}
+
         {openModalContent.isModalOpen && (
           <Modal handleModalClose={handleModalClose}>
             {openModalContent.modalContent}

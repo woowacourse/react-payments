@@ -23,21 +23,35 @@ const CardInfo = css`
 
     &.card-name {
       margin-bottom: 1.5rem;
+      min-height: 21px;
     }
 
     &.card-numbers {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: ${FONT_SIZE.XLARGE};
+      min-height: 19px;
+      font-size: ${FONT_SIZE.NORMAL};
+      font-weight: ${FONT_WEIGHT.BOLD};
       letter-spacing: 3px;
     }
 
     &.card-details {
       display: flex;
+      min-height: 19px;
       justify-content: space-between;
       align-items: center;
+      font-size: ${FONT_SIZE.NORMAL};
+      font-weight: ${FONT_WEIGHT.BOLD};
       letter-spacing: 1.5px;
+
+      .card-user {
+        max-width: 10rem;
+        max-height: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
     .usim {
@@ -60,10 +74,12 @@ const CardWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  background-color: ${({ add, bgColor }) =>
-    add ? COLOR.CARD.DEFAULT : bgColor};
+  background-color: ${({ bgColor }) =>
+    bgColor !== undefined ? bgColor : COLOR.CARD.DEFAULT};
+
   ${({ add }) => (add ? AddCard : CardInfo)}
-  }`;
+  };
+`;
 
 const Card = ({ add, cardInfo, handleModalOpen }) => {
   const { cardName, numbers, user, expireDate } = cardInfo;
@@ -79,22 +95,21 @@ const Card = ({ add, cardInfo, handleModalOpen }) => {
       ) : (
         <>
           <div className='card__column card-name'>
-            {cardName !== 'DEFAULT' && `${cardName} 카드`}
+            {cardName !== 'DEFAULT' ? `${cardName} 카드` : '  '}
           </div>
           <div className='card__column'>
             <div className='usim'></div>
           </div>
           <div className='card__column card-numbers'>
-            {Object.values(numbers)
-              .map((number) => number)
-              .join('-')}
+            {numbers.first} {numbers.second} {'•'.repeat(numbers.third.length)}{' '}
+            {'•'.repeat(numbers.fourth.length)}
           </div>
           <div className='card__column card-details'>
-            <div>{user !== '' ? user : 'NAME'}</div>
-            <div>
-              {Object.values(expireDate)
-                .map((item) => item)
-                .join('/')}
+            <div className='card-user'>{user !== '' ? user : 'NAME'}</div>
+            <div className='card-date'>
+              {expireDate.month || 'MM'}
+              {'/'}
+              {expireDate.year || 'YY'}
             </div>
           </div>
         </>

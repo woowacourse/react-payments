@@ -15,7 +15,12 @@ import CardUserInput from './CardUserInput';
 import CardCVCInput from './CardCVCInput';
 import CardPasswordInput from './CardPasswordInput';
 
-const NewCardForm = ({ cardInfo, setNewCardInfo, handleModalOpen }) => {
+const NewCardForm = ({
+  cardInfo,
+  setNewCardInfo,
+  handleModalOpen,
+  setPage,
+}) => {
   const [errorMessage, setErrorMessage] = useState({
     numbers: '',
     expireDate: '',
@@ -91,8 +96,12 @@ const NewCardForm = ({ cardInfo, setNewCardInfo, handleModalOpen }) => {
   const onSubmitCardForm = (e) => {
     e.preventDefault();
 
-    // 만료일 - 올해/이번달 이후인지 검증
-    //다음 컴포넌트 렌더링
+    if (cardInfo.cardName === 'DEFAULT') {
+      alert('카드 종류를 선택해주세요!');
+      return;
+    }
+
+    setPage('cardComplete');
   };
 
   const { numbers, expireDate, user, cvc, password } = cardInfo;
@@ -129,8 +138,8 @@ const NewCardForm = ({ cardInfo, setNewCardInfo, handleModalOpen }) => {
         errorMessage={errorMessage.password}
         onChangeCardInputObject={onChangeCardInputObject}
       />
-      <div className='form__column'>
-        {cardFormFlag && <Button>다음</Button>}
+      <div className='card-form-btns'>
+        {cardFormFlag && <Button onClick={onSubmitCardForm}>다음</Button>}
       </div>
     </NewCardFormWrapper>
   );
@@ -158,6 +167,7 @@ NewCardForm.propTypes = {
   }),
 
   setNewCardInfo: PropTypes.func,
+  setPage: PropTypes.func,
   handleModalOpen: PropTypes.func,
 };
 
