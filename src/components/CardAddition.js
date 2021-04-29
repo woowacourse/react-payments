@@ -37,7 +37,6 @@ const formatExpirationDate = (expirationDate) => {
 
 const CardAddition = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
   const [
     cardNumbers,
@@ -52,33 +51,31 @@ const CardAddition = (props) => {
   const [secureCode, onSecureCodeChange] = useSecureCode("");
   const [password, onPasswordChange] = usePassword(["", ""]);
 
-  const [inputVerification, setInputVerification] = useState({
-    cardNumbers: false,
-    expirationDate: false,
-    username: false,
-    secureCode: false,
-    password: false,
-  });
-
   useEffect(() => {
     setIsModalOpen(
       cardNumbers[CARD_NUMBER.LENGTH - 1]?.length === CARD_NUMBER.PARTIAL_LENGTH
     );
   }, [cardNumbers]);
 
-  useEffect(() => {
-    setInputVerification({
-      cardNumbers:
-        cardNumbers[CARD_NUMBER.LENGTH - 1]?.length ===
-        CARD_NUMBER.PARTIAL_LENGTH,
-      expirationDate:
-        (expirationDate.month + expirationDate.year).length ===
-        EXPIRATION_DATE.LENGTH,
-      username: username.length >= USERNAME.MIN_LENGTH,
-      secureCode: secureCode.length === SECURE_CODE_LENGTH,
-      password: password.every((value) => value !== ""),
-    });
-  }, [cardNumbers, expirationDate, username, secureCode, password]);
+  const isAllInputFulfilled = () => {
+    const cardNumbersCondition =
+      cardNumbers[CARD_NUMBER.LENGTH - 1]?.length ===
+      CARD_NUMBER.PARTIAL_LENGTH;
+    const expirationDateCondition =
+      (expirationDate.month + expirationDate.year).length ===
+      EXPIRATION_DATE.LENGTH;
+    const usernameCondition = username.length >= USERNAME.MIN_LENGTH;
+    const secureCodeCondition = secureCode.length === SECURE_CODE_LENGTH;
+    const passwordCondition = password.every((value) => value !== "");
+
+    return (
+      cardNumbersCondition &&
+      expirationDateCondition &&
+      usernameCondition &&
+      secureCodeCondition &&
+      passwordCondition
+    );
+  };
 
   const onCardInfoSubmit = (event) => {
     event.preventDefault();
@@ -218,9 +215,7 @@ const CardAddition = (props) => {
               </div>
             </div>
           </div>
-          {Object.values(inputVerification).every(
-            (isFulfilled) => isFulfilled
-          ) && (
+          {isAllInputFulfilled() && (
             <div className="card-addition__form-submit">
               <Button innerText="다음" />
             </div>
