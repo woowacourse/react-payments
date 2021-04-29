@@ -34,7 +34,9 @@ const App = () => {
 
   return (
     <>
-      {currentPage === PAGE.CARD_LIST && <CardListPage setCurrentPage={setCurrentPage} cardList={cardList} />}
+      {currentPage === PAGE.CARD_LIST && (
+        <CardListPage setCurrentPage={setCurrentPage} cardList={cardList} setCardList={setCardList} />
+      )}
       {currentPage === PAGE.CARD_CREATION && (
         <CardCreationPage setCurrentPage={setCurrentPage} setNewCardInfo={setNewCardInfo} />
       )}
