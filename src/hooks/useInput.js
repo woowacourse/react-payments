@@ -16,5 +16,5 @@ export default (
     setValue(newValue);
   };
 
-  return { value, onChange };
+  return { value, onChange, setValue };
 };

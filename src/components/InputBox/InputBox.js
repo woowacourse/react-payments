@@ -13,10 +13,12 @@ const InputBox = ({
   textAlign,
   type,
   onChange,
+  onFocus,
   value,
   pattern,
   inputmode,
   required,
+  readOnly,
   errorMessage,
   isError,
 }) => {
@@ -39,10 +41,12 @@ const InputBox = ({
         maxLength={maxLength}
         textAlign={textAlign}
         onChange={onChange}
+        onFocus={onFocus}
         value={value}
         pattern={pattern}
         inputmode={inputmode}
         required={required}
+        readOnly={readOnly}
       />
       <ErrorMessageBox errorMessage={errorMessage} />
     </Styled.Container>
@@ -57,12 +61,14 @@ InputBox.propTypes = {
   textAlign: PropTypes.string,
   type: PropTypes.string,
   onChange: PropTypes.func,
+  onFocus: PropTypes.func,
   value: PropTypes.string,
   errorMessage: PropTypes.string,
   isError: PropTypes.bool,
   pattern: PropTypes.string,
   inputmode: PropTypes.string,
   required: PropTypes.bool,
+  readOnly: PropTypes.bool,
 };
 
 InputBox.defaultProps = {
@@ -72,12 +78,14 @@ InputBox.defaultProps = {
   textAlign: 'left',
   type: 'text',
   onChange: null,
+  onFocus: null,
   value: '',
   errorMessage: '',
   isError: false,
   pattern: null,
   inputmode: '',
   required: false,
+  readOnly: false,
 };
 
 export default InputBox;

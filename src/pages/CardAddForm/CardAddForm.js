@@ -45,10 +45,17 @@ const CardAddForm = () => {
 
   const { Modal, openModal, closeModal } = useModal(false);
   const {
-    isModalOpened: isVKModalOpened,
-    VirtualNumericKeyboard,
-    openModal: openVKModal,
-    closeModal: closeVKModal,
+    isModalOpened: isCVCVKModalOpened,
+    VirtualNumericKeyboard: CVCVirtualNumericKeyboard,
+    openModal: openCVCVKModal,
+    closeModal: closeCVCVKModal,
+  } = useVirtualNumericKeyboard(false);
+
+  const {
+    isModalOpened: isPinNumberVKModalOpened,
+    VirtualNumericKeyboard: PinNumberVirtualNumericKeyboard,
+    openModal: openPinNumberVKModal,
+    closeModal: closePinNumberVKModal,
   } = useVirtualNumericKeyboard(false);
 
   const ownerName = useInput('', { numberOnly: true, upperCase: true });
@@ -111,7 +118,19 @@ const CardAddForm = () => {
     closeModal();
   };
 
-  const handleClickVirtualNumericKeyboard = (event) => {
+  const handleClickCVCVirtualNumericKeyboard = (event) => {
+    let newCVC = CVC.value;
+    if (event.target.textContent === 'del') {
+      newCVC = newCVC.slice(0, -1);
+    } else {
+      newCVC += event.target.textContent;
+    }
+    CVC.setValue(newCVC);
+
+    if (newCVC.length === 3) closeCVCVKModal();
+  };
+
+  const handleClickPinNumberVirtualNumericKeyboard = (event) => {
     if (event.target.textContent === 'del') {
       const newDigits = [...passwordDigits.value].slice(-1);
       newDigits.push('');
@@ -121,12 +140,12 @@ const CardAddForm = () => {
 
     const index = pinNumberInputRefs.findIndex((ref) => ref.value === '');
     if (index === -1) {
-      closeVKModal();
+      closePinNumberVKModal();
 
       return;
     }
     if (passwordDigits.value.length === index + 1) {
-      closeVKModal();
+      closePinNumberVKModal();
     }
     passwordDigits.setValueIndex(event.target.textContent, index);
   };
@@ -216,10 +235,15 @@ const CardAddForm = () => {
                 inputmode="numeric"
                 value={CVC.value}
                 onChange={CVC.onChange}
+                onFocus={openCVCVKModal}
                 labelText="보안 코드 (CVC/CVV)"
                 maxLength={3}
+                readOnly
                 required
               />
+              {isCVCVKModalOpened && (
+                <CVCVirtualNumericKeyboard onClick={handleClickCVCVirtualNumericKeyboard} />
+              )}
             </Styled.CVC>
             <Styled.ToolTip>
               <ToolTip buttonText="?" contentText={MESSAGE.CVC_TOOLTIP} />
@@ -232,7 +256,7 @@ const CardAddForm = () => {
               labelText="카드 비밀번호"
               values={passwordDigits.value}
               onChange={passwordDigits.onChange}
-              onFocus={openVKModal}
+              onFocus={openPinNumberVKModal}
               dotCount={2}
               isError={!isNumeric(passwordDigits.value.join(''))}
               errorMessage={
@@ -242,8 +266,10 @@ const CardAddForm = () => {
               required
               readOnly
             />
-            {isVKModalOpened && (
-              <VirtualNumericKeyboard onClick={handleClickVirtualNumericKeyboard} />
+            {isPinNumberVKModalOpened && (
+              <PinNumberVirtualNumericKeyboard
+                onClick={handleClickPinNumberVirtualNumericKeyboard}
+              />
             )}
           </Styled.Row>
           <Styled.Row right>
