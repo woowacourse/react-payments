@@ -22,10 +22,8 @@ const DefaultInputWrapper = styled.div`
   align-items: center;
   height: 45px;
   background-color: ${PALETTE.INPUT_BG_GRAY};
-  border-radius: 7px;
   border-color: transparent;
-  display: flex;
-  align-items: center;
+  border-radius: 7px;
   padding: 2px 8px;
 `;
 
@@ -56,6 +54,7 @@ const WordCount = styled.span`
 
 const FlexContainer = styled.div`
   display: flex;
+  // flex-direction: column;
   align-items: center;
 `;
 

@@ -12,6 +12,8 @@ const CardNumbersInput = (props) => {
   const fourthInput = useRef(null);
   const inputRefs = [firstInput, secondInput, thirdInput, fourthInput];
 
+  const isFourDigits = (value) => value.length === 4;
+
   const handleChangeNumbers = (event) => {
     const index = Number(event.target.dataset.numberIdx);
     const numberFragment = event.target.value;
@@ -32,14 +34,14 @@ const CardNumbersInput = (props) => {
     inputRefs[index].current.blur();
   };
 
-  const isFourDigits = (value) => value.length === 4;
-
   return (
     <RegisterInputWrapper type={type} label={label} width={width}>
       <Style.InputWrapper>
         <Style.NumberInput
           type="number"
           width="54px"
+          min="1000"
+          max="9999"
           value={cardNumbers[1]}
           data-number-idx="1"
           onChange={handleChangeNumbers}
@@ -50,6 +52,8 @@ const CardNumbersInput = (props) => {
         <Style.NumberInput
           type="number"
           width="54px"
+          min="1000"
+          max="9999"
           value={cardNumbers[2]}
           data-number-idx="2"
           onChange={handleChangeNumbers}
@@ -60,6 +64,8 @@ const CardNumbersInput = (props) => {
         <Style.PasswordInput
           type="password"
           width="54px"
+          min="1000"
+          max="9999"
           value={cardNumbers[3]}
           data-number-idx={3}
           onChange={handleChangeNumbers}
@@ -70,6 +76,8 @@ const CardNumbersInput = (props) => {
         <Style.PasswordInput
           type="password"
           width="54px"
+          min="1000"
+          max="9999"
           value={cardNumbers[4]}
           data-number-idx={4}
           onChange={handleChangeNumbers}

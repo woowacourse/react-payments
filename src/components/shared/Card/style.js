@@ -70,6 +70,10 @@ const OwnerName = styled.div`
   font-weight: 600;
   letter-spacing: 1px;
   color: ${PALETTE.DEFAULT_BLACK};
+  text-overflow: clip;
+  width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
   opacity: 80%;
 `;
 

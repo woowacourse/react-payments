@@ -27,12 +27,8 @@ RegisterInputWrapper.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   width: PropTypes.string,
-  inputCount: PropTypes.number,
+  currentNameLength: PropTypes.number,
   children: PropTypes.node,
-};
-
-RegisterInputWrapper.defaultProps = {
-  inputCount: 1,
 };
 
 export default RegisterInputWrapper;
