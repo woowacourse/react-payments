@@ -23,3 +23,5 @@ export const getGrayScale = (color) => {
 export const initArray = (length, fillValue) => Array.from({ length }).map(() => fillValue);
 
 export const isNumeric = (value) => new RegExp(REGEX.CONTINUOUS_NUMBER).test(value);
+
+export const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);

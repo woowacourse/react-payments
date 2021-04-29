@@ -12,5 +12,9 @@ export const ScreenContainer = styled.main`
   overflow-y: auto;
   position: relative;
   box-sizing: border-box;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;

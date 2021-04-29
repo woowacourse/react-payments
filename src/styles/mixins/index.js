@@ -16,9 +16,15 @@ export const MultipleInputHeader = css`
   margin-bottom: 7px;
 `;
 
-export const Flex = ({ direction = 'row', justify = 'flex-start', items = 'flex-start' }) => css`
+export const Flex = ({
+  direction = 'row',
+  justify = 'flex-start',
+  items = 'flex-start',
+  flexWrap = 'nowrap',
+}) => css`
   display: flex;
   flex-direction: ${direction};
   justify-content: ${justify};
   align-items: ${items};
+  flex-wrap: ${flexWrap};
 `;

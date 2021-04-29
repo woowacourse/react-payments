@@ -23,5 +23,23 @@ export default (defaultValue, { nameSpliter = '-', refs, maxLengthPerInput }) =>
     }
   };
 
-  return { value, onChange };
+  const setValueIndex = (_value, index) => {
+    setValue((state) => {
+      const newState = [...state];
+      newState[index] = _value;
+
+      return newState;
+    });
+
+    if (!_value) {
+      refs[Number(index) - 1]?.focus();
+      return;
+    }
+
+    if (_value.length === maxLengthPerInput) {
+      refs[Number(index) + 1]?.focus();
+    }
+  };
+
+  return { value, onChange, setValueIndex, setValue };
 };

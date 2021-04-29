@@ -14,7 +14,13 @@ import {
   Button,
   CardSelector,
 } from '../../components';
-import { useInput, useModal, useLocalStorage, useMultipleInput } from '../../hooks';
+import {
+  useInput,
+  useModal,
+  useLocalStorage,
+  useMultipleInput,
+  useVirtualNumericKeyboard,
+} from '../../hooks';
 import { isNumeric, initArray } from '../../utils';
 import { CARD, LOCAL_STORAGE_KEY, MESSAGE, REGEX, ROUTE } from '../../constants';
 
@@ -38,6 +44,13 @@ const CardAddForm = () => {
   });
 
   const { Modal, openModal, closeModal } = useModal(false);
+  const {
+    isModalOpened: isVKModalOpened,
+    VirtualNumericKeyboard,
+    openModal: openVKModal,
+    closeModal: closeVKModal,
+  } = useVirtualNumericKeyboard(false);
+
   const ownerName = useInput('', { numberOnly: true, upperCase: true });
   const expiryDate = useInput('');
   const CVC = useInput('');
@@ -96,6 +109,26 @@ const CardAddForm = () => {
   const handleClickCardSelector = (key) => {
     setCardCompany(CARD[key]);
     closeModal();
+  };
+
+  const handleClickVirtualNumericKeyboard = (event) => {
+    if (event.target.textContent === 'del') {
+      const newDigits = [...passwordDigits.value].slice(-1);
+      newDigits.push('');
+      passwordDigits.setValue(newDigits);
+      return;
+    }
+
+    const index = pinNumberInputRefs.findIndex((ref) => ref.value === '');
+    if (index === -1) {
+      closeVKModal();
+
+      return;
+    }
+    if (passwordDigits.value.length === index + 1) {
+      closeVKModal();
+    }
+    passwordDigits.setValueIndex(event.target.textContent, index);
   };
 
   const updateCardCompany = useCallback(() => {
@@ -172,6 +205,7 @@ const CardAddForm = () => {
               hasLengthCounter
             />
           </Styled.Row>
+
           <Styled.Row>
             <Styled.CVC>
               <InputBox
@@ -191,12 +225,14 @@ const CardAddForm = () => {
               <ToolTip buttonText="?" contentText={MESSAGE.CVC_TOOLTIP} />
             </Styled.ToolTip>
           </Styled.Row>
+
           <Styled.Row>
             <PinNumberInput
               ref={pinNumberInputRefs}
               labelText="카드 비밀번호"
               values={passwordDigits.value}
               onChange={passwordDigits.onChange}
+              onFocus={openVKModal}
               dotCount={2}
               isError={!isNumeric(passwordDigits.value.join(''))}
               errorMessage={
@@ -204,7 +240,11 @@ const CardAddForm = () => {
               }
               inputmode="numeric"
               required
+              readOnly
             />
+            {isVKModalOpened && (
+              <VirtualNumericKeyboard onClick={handleClickVirtualNumericKeyboard} />
+            )}
           </Styled.Row>
           <Styled.Row right>
             <Button>다음</Button>
