@@ -7,13 +7,7 @@ const CardNumberInput = ({
   numbers,
   errorMessage,
   onChangeCardInputObject,
-
-  setKeyboardTarget,
 }) => {
-  const onChangeNumberInput = (e) => {
-    setKeyboardTarget(e.target.dataset.detail);
-  };
-
   return (
     <CardNumberInputWrapper>
       <div className='input-label'>카드 번호</div>
@@ -49,10 +43,9 @@ const CardNumberInput = ({
           name='numbers'
           data-detail='third'
           value={numbers.third}
-          onClick={onChangeNumberInput}
+          onChange={onChangeCardInputObject}
           minLength='4'
           maxLength='4'
-          readOnly
           required
         />
         <span className='input-separator'>
@@ -63,10 +56,9 @@ const CardNumberInput = ({
           name='numbers'
           data-detail='fourth'
           value={numbers.fourth}
-          onClick={onChangeNumberInput}
+          onChange={onChangeCardInputObject}
           minLength='4'
           maxLength='4'
-          readOnly
           required
         />
       </div>
@@ -84,7 +76,5 @@ CardNumberInput.propTypes = {
   }),
   errorMessage: PropTypes.string,
   onChangeCardInputObject: PropTypes.func,
-
-  setKeyboardTarget: PropTypes.func,
 };
 export default CardNumberInput;

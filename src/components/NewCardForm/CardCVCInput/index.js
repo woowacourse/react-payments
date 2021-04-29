@@ -22,7 +22,7 @@ const CardCVCInput = ({
           onChange={onChangeCardInput}
           required
         />
-        <div className='help' onClick={() => handleModalOpen('cvc help')}>
+        <div className='help' onClick={() => handleModalOpen('cvcHelp')}>
           ?
         </div>
       </div>

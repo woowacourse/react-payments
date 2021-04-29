@@ -1,5 +1,5 @@
 import GlobalStyles from './global.styles';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Card from './common/Card';
 import Modal from './common/Modal';
 import Nav from './components/Nav';
@@ -7,7 +7,7 @@ import Nav from './components/Nav';
 import { AppWrapper } from './App.styles.js';
 import NewCardForm from './components/NewCardForm';
 import CardColor from './components/ModalContents/CardColor';
-import Keyboard from './components/ModalContents/Keyboard';
+import CVCHelp from './components/ModalContents/CVCHelp';
 
 function App() {
   const [newCardInfo, setNewCardInfo] = useState({
@@ -32,14 +32,8 @@ function App() {
 
   const [openModalContent, setOpenModalContent] = useState({
     isModalOpen: true,
-    modalContent: <Keyboard />,
+    modalContent: <CVCHelp />,
   });
-
-  const [keyboardTarget, setKeyboardTarget] = useState('');
-
-  // const modalContentObject = {
-  //   cardColorModal: <CardColor />,
-  // };
 
   const handleCardColor = (name) => {
     setNewCardInfo({
@@ -48,21 +42,6 @@ function App() {
     });
 
     handleModalClose();
-  };
-
-  const handleKeyboardInput = (number) => {
-    // TODO : value가 4글자면 모달 닫기
-    // TODO : 다시 클릭하면 input value 지워주기 (확인은 그냥 모달 창 닫기)
-
-    if (keyboardTarget === '') return;
-
-    setNewCardInfo((prevCardInfo) => ({
-      ...prevCardInfo,
-      numbers: {
-        ...prevCardInfo.numbers,
-        [keyboardTarget]: prevCardInfo.numbers[keyboardTarget] + String(number),
-      },
-    }));
   };
 
   const handleModalOpen = (content) => {
@@ -77,17 +56,11 @@ function App() {
       isModalOpen: false,
       modalContent: '',
     });
-    setKeyboardTarget('');
   };
-
-  useEffect(() => {
-    if (keyboardTarget === '') return;
-    handleModalOpen('keyboard');
-  }, [keyboardTarget]);
 
   const modalContentsObject = {
     cardColor: <CardColor handleCardColor={handleCardColor} />,
-    keyboard: <Keyboard handleKeyboardInput={handleKeyboardInput} />,
+    cvcHelp: <CVCHelp />,
   };
 
   return (
@@ -102,7 +75,6 @@ function App() {
           cardInfo={newCardInfo}
           setNewCardInfo={setNewCardInfo}
           handleModalOpen={handleModalOpen}
-          setKeyboardTarget={setKeyboardTarget}
         />
         {openModalContent.isModalOpen && (
           <Modal handleModalClose={handleModalClose}>

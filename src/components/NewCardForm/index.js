@@ -15,12 +15,7 @@ import CardUserInput from './CardUserInput';
 import CardCVCInput from './CardCVCInput';
 import CardPasswordInput from './CardPasswordInput';
 
-const NewCardForm = ({
-  cardInfo,
-  setNewCardInfo,
-  handleModalOpen,
-  setKeyboardTarget,
-}) => {
+const NewCardForm = ({ cardInfo, setNewCardInfo, handleModalOpen }) => {
   const [errorMessage, setErrorMessage] = useState({
     numbers: '',
     expireDate: '',
@@ -97,7 +92,6 @@ const NewCardForm = ({
         numbers={numbers}
         errorMessage={errorMessage.numbers}
         onChangeCardInputObject={onChangeCardInputObject}
-        setKeyboardTarget={setKeyboardTarget}
       />
       <CardExpireDateInput
         expireDate={expireDate}
@@ -150,7 +144,6 @@ NewCardForm.propTypes = {
 
   setNewCardInfo: PropTypes.func,
   handleModalOpen: PropTypes.func,
-  setKeyboardTarget: PropTypes.func,
 };
 
 export default NewCardForm;
