@@ -84,7 +84,7 @@ const CardNumberInput = memo(
       }
 
       if (target.name === SECOND) {
-        openModal(MODAL_TYPE.DIALOG);
+        openModal(MODAL_TYPE.CARD_SELECTION);
         $secondInput.current.blur();
 
         return;
@@ -95,7 +95,7 @@ const CardNumberInput = memo(
       cardNumber[FIRST].length === FULL_INPUT_LENGTH &&
         cardNumber[SECOND].length === FULL_INPUT_LENGTH &&
         !isSelectedCardInfo &&
-        openModal(MODAL_TYPE.DIALOG);
+        openModal(MODAL_TYPE.CARD_SELECTION);
     };
 
     const handleInputFocus = ({ target }) => {
@@ -158,7 +158,7 @@ const CardNumberInput = memo(
             />
           </Styled.InputContainer>
         </div>
-        {modalType === MODAL_TYPE.DIALOG && isModalOpened && (
+        {modalType === MODAL_TYPE.CARD_SELECTION && isModalOpened && (
           <CardSelectionModal
             BottomModal={BottomModal}
             closeModal={closeModal}

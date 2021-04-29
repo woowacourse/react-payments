@@ -7,7 +7,7 @@ import Styled from './CardSelectionModal.style';
 const CardSelectionModal = ({ BottomModal, closeModal, setSelectedCardInfo }) => {
   const handleItemClick = card => {
     setSelectedCardInfo(card);
-    closeModal(MODAL_TYPE.DIALOG);
+    closeModal(MODAL_TYPE.CARD_SELECTION);
   };
 
   return (
