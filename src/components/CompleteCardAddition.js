@@ -2,9 +2,17 @@ import React, { useState } from "react";
 import { CARD_SIZE } from "./common/constants/card";
 import PropTypes from "prop-types";
 import { Card, Button } from "./common";
-import { CARD_DESCRIPTION, FORMAT_CHAR } from "../constants";
+import { CARD_DESCRIPTION, FORMAT_CHAR, URL } from "../constants";
+import { Redirect } from "react-router";
 
 function CompleteCardAddition(props) {
+  const [cardDescription, setCardDescription] = useState("");
+
+  if (!props.card) {
+    alert("예상치 못한 오류가 발생했습니다.");
+    return <Redirect to={URL.HOME} />;
+  }
+
   const {
     cardId,
     cardType,
@@ -12,8 +20,6 @@ function CompleteCardAddition(props) {
     expirationDate,
     username,
   } = props.card;
-
-  const [cardDescription, setCardDescription] = useState("");
 
   const onCardDescriptionChange = ({ target }) => {
     setCardDescription(target.value);
