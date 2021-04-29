@@ -33,7 +33,7 @@ export type CardNumberState = [string, string, string, string];
 export type PasswordState = [string, string];
 
 const AddCardForm = () => {
-  const [cardBrand, setCardBrand] = useState({ name: '', color: '' });
+  const [cardBrand, setCardBrand] = useState<CardBrand>({ name: '', color: '' });
   const [ownerName, setOwnerName] = useState('');
   const [cardNumber, setCardNumber] = useState<CardNumberState>(['', '', '', '']);
   const [expDate, setExpDate] = useState<ExpDate>({ year: '', month: '' });
@@ -49,7 +49,7 @@ const AddCardForm = () => {
   const expYearInputRef = useRef<HTMLInputElement>(null);
   const secondPasswordInputRef = useRef<HTMLInputElement>(null);
 
-  const focusNextCardNumberInput = (index: number) => {
+  const focusNextCardNumberInput = (index: 0 | 1 | 2) => {
     const cardNumberInputRefs = [secondCardNumberInputRef, thirdCardNumberInputRef, fourthCardNumberInputRef];
 
     cardNumberInputRefs[index].current?.focus();
@@ -64,7 +64,7 @@ const AddCardForm = () => {
     setCardNumber(nextValue);
 
     if (nextValue[index].length === CARD_NUMBER_DIGITS && index < 3) {
-      focusNextCardNumberInput(index);
+      focusNextCardNumberInput(index as 0 | 1 | 2);
     }
   };
 
@@ -107,7 +107,7 @@ const AddCardForm = () => {
 
     const nextPassword: PasswordState = [...password];
 
-    nextPassword[index as number] = value;
+    nextPassword[index] = value;
     setPassword(nextPassword);
 
     if (index === 0 && value.length === 1) {
@@ -121,12 +121,14 @@ const AddCardForm = () => {
   };
 
   const onSetCardBrand = () => {
-    if (cardNumber[0].length !== CARD_NUMBER_DIGITS || cardNumber[1].length !== CARD_NUMBER_DIGITS) {
+    const [firstCardNumber, secondCardNumber] = cardNumber;
+
+    if (firstCardNumber.length !== CARD_NUMBER_DIGITS || secondCardNumber.length !== CARD_NUMBER_DIGITS) {
       setCardBrand({ name: '', color: '' });
       return;
     }
 
-    const cardBrand = CARD_BRAND[Number(cardNumber[1][3])];
+    const cardBrand = CARD_BRAND[Number(secondCardNumber.charAt(3))];
 
     if (!cardBrand) {
       setIsCardBrandModalVisible(true);
@@ -136,12 +138,15 @@ const AddCardForm = () => {
     setCardBrand(cardBrand);
   };
 
-  useEffect(() => {
-    onSetCardBrand();
-  }, [cardNumber[0], cardNumber[1]]);
+  const isCardBrandEmpty = () => {
+    const [firstCardNumber, secondCardNumber] = cardNumber;
 
-  const isCardBrandEmpty = () =>
-    cardNumber[0].length === CARD_NUMBER_DIGITS && cardNumber[1].length === CARD_NUMBER_DIGITS && cardBrand.name === '';
+    return (
+      cardBrand.name === '' &&
+      firstCardNumber.length === CARD_NUMBER_DIGITS &&
+      secondCardNumber.length === CARD_NUMBER_DIGITS
+    );
+  };
 
   const onClickNextButton = () => {
     if (isCardBrandEmpty()) {
@@ -193,6 +198,10 @@ const AddCardForm = () => {
 
       return acc;
     }, []);
+
+  useEffect(() => {
+    onSetCardBrand();
+  }, cardNumber.slice(0, 2));
 
   return (
     <AddCardFormContainer>
