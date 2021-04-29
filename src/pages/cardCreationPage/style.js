@@ -12,7 +12,7 @@ const Styled = {
   `,
   ButtonContainer: styled.div`
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     right: 25px;
   `,
 };

@@ -12,7 +12,7 @@ const Styled = {
   InputContainer: styled.div`
     display: flex;
     align-items: center;
-    padding: 0px 12px;
+    padding: 0 12px;
     background-color: ${COLOR.GRAY_50};
     border-radius: 7px;
   `,

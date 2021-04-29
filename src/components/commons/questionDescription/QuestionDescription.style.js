@@ -31,7 +31,7 @@ const Styled = {
     left: -18px;
     width: 180px;
     height: 100px;
-    padding: 0px;
+    padding: 0;
     background-color: ${COLOR.WHITE};
     border-radius: 10px;
     border: ${COLOR.GRAY_100} solid 2px;
