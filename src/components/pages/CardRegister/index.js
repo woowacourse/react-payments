@@ -23,13 +23,6 @@ const CardRegister = (props) => {
   const [secureCode, setSecureCode] = useState('');
   const [cardPassword, setCardPassword] = useState({ [FIRST]: '', [SECOND]: '' });
 
-  const handleCompleteRegister = (event) => {
-    event.preventDefault();
-
-    setCardData({ bankId, cardNumbers, expirationDate, ownerName, secureCode, cardPassword });
-    handleGoNext();
-  };
-
   const isCardIdentified =
     Object.values(cardNumbers)
       .slice(0, 2)
@@ -46,6 +39,13 @@ const CardRegister = (props) => {
   }, [bankId]);
 
   const bankName = dummyBanks.find(({ id }) => id === bankId)?.name;
+
+  const handleCompleteRegister = (event) => {
+    event.preventDefault();
+
+    setCardData({ bankId, cardNumbers, expirationDate, ownerName, secureCode, cardPassword });
+    handleGoNext();
+  };
 
   return (
     <>
