@@ -39,127 +39,132 @@ const isValidCardNumberInput = cardNumber => {
   );
 };
 
-const CardNumberInput = memo(
-  ({ cardNumber, selectedCardInfo, setCardNumber, isValidCardNumber, setValidCardNumber, setSelectedCardInfo }) => {
-    const [isModalOpened, setModalOpen] = useState(false);
+const CardNumberInput = ({
+  cardNumber,
+  selectedCardInfo,
+  setCardNumber,
+  isValidCardNumber,
+  setValidCardNumber,
+  setSelectedCardInfo,
+}) => {
+  const [isModalOpened, setModalOpen] = useState(false);
 
-    const $input1 = useRef(null);
-    const $input2 = useRef(null);
-    const $input3 = useRef(null);
+  const $input1 = useRef(null);
+  const $input2 = useRef(null);
+  const $input3 = useRef(null);
 
-    const isSelectedCardInfo = !!selectedCardInfo.id;
+  const isSelectedCardInfo = !!selectedCardInfo.id;
 
-    useEffect(() => {
-      const isValidInput = isValidCardNumberInput(cardNumber) && isSelectedCardInfo;
-      setValidCardNumber(isValidInput);
-    }, [setValidCardNumber, cardNumber, isSelectedCardInfo]);
+  useEffect(() => {
+    const isValidInput = isValidCardNumberInput(cardNumber) && isSelectedCardInfo;
+    setValidCardNumber(isValidInput);
+  }, [setValidCardNumber, cardNumber, isSelectedCardInfo]);
 
-    useEffect(() => {
-      if (isSelectedCardInfo) {
-        $input2.current.disabled = false;
-        $input2.current.focus();
+  useEffect(() => {
+    if (isSelectedCardInfo) {
+      $input2.current.disabled = false;
+      $input2.current.focus();
+    }
+  }, [isSelectedCardInfo]);
+
+  const handleInputChange = ({ target }) => {
+    if (target.value.length > CARD_NUMBER_INPUT.LENGTH) return;
+
+    setCardNumber(prevState => ({ ...prevState, [target.name]: target.value }));
+
+    if (target.value.length === CARD_NUMBER_INPUT.LENGTH) {
+      switch (target.name) {
+        case CARD_NUMBER_INPUT.NAME.FIRST:
+          $input1.current.disabled = false;
+          $input1.current.focus();
+
+          break;
+        case CARD_NUMBER_INPUT.NAME.SECOND:
+          $input1.current.blur();
+
+          setModalOpen(true);
+
+          break;
+        case CARD_NUMBER_INPUT.NAME.THIRD:
+          $input3.current.disabled = false;
+          $input3.current.focus();
+
+          break;
+        default:
+          break;
       }
-    }, [isSelectedCardInfo]);
+    }
+  };
 
-    const handleInputChange = ({ target }) => {
-      if (target.value.length > CARD_NUMBER_INPUT.LENGTH) return;
+  const handleInputClick = () => {
+    if (
+      cardNumber[CARD_NUMBER_INPUT.NAME.FIRST].length === CARD_NUMBER_INPUT.LENGTH &&
+      cardNumber[CARD_NUMBER_INPUT.NAME.SECOND].length === CARD_NUMBER_INPUT.LENGTH &&
+      !isSelectedCardInfo
+    ) {
+      setModalOpen(true);
+    }
+  };
 
-      setCardNumber(prevState => ({ ...prevState, [target.name]: target.value }));
-
-      if (target.value.length === CARD_NUMBER_INPUT.LENGTH) {
-        switch (target.name) {
-          case CARD_NUMBER_INPUT.NAME.FIRST:
-            $input1.current.disabled = false;
-            $input1.current.focus();
-
-            break;
-          case CARD_NUMBER_INPUT.NAME.SECOND:
-            $input1.current.blur();
-
-            setModalOpen(true);
-
-            break;
-          case CARD_NUMBER_INPUT.NAME.THIRD:
-            $input3.current.disabled = false;
-            $input3.current.focus();
-
-            break;
-          default:
-            break;
-        }
-      }
-    };
-
-    const handleInputClick = () => {
-      if (
-        cardNumber[CARD_NUMBER_INPUT.NAME.FIRST].length === CARD_NUMBER_INPUT.LENGTH &&
-        cardNumber[CARD_NUMBER_INPUT.NAME.SECOND].length === CARD_NUMBER_INPUT.LENGTH &&
-        !isSelectedCardInfo
-      ) {
-        setModalOpen(true);
-      }
-    };
-
-    return (
-      <>
-        <div>
-          <Styled.InputLabelContainer>카드 번호 {isValidCardNumber && '✔️'}</Styled.InputLabelContainer>
-          <Styled.InputContainer isValidInput={isValidCardNumber} onClick={handleInputClick}>
-            <TransparentInput
-              type="number"
-              name={CARD_NUMBER_INPUT.NAME.FIRST}
-              min={CARD_NUMBER_INPUT.RANGE.MIN}
-              max={CARD_NUMBER_INPUT.RANGE.MAX}
-              value={cardNumber[CARD_NUMBER_INPUT.NAME.FIRST]}
-              onChange={handleInputChange}
-              styles={transparentInputStyles[CARD_NUMBER_INPUT.NAME.FIRST]}
-              autoFocus
-            />
-            {cardNumber[CARD_NUMBER_INPUT.NAME.FIRST].length === 4 && <Styled.Dash>-</Styled.Dash>}
-            <TransparentInput
-              type="number"
-              name={CARD_NUMBER_INPUT.NAME.SECOND}
-              min={CARD_NUMBER_INPUT.RANGE.MIN}
-              max={CARD_NUMBER_INPUT.RANGE.MAX}
-              value={cardNumber[CARD_NUMBER_INPUT.NAME.SECOND]}
-              onChange={handleInputChange}
-              innerRef={$input1}
-              styles={transparentInputStyles[CARD_NUMBER_INPUT.NAME.SECOND]}
-              disabled
-            />
-            {cardNumber[CARD_NUMBER_INPUT.NAME.SECOND].length === 4 && <Styled.Dash>-</Styled.Dash>}
-            <TransparentInput
-              type="password"
-              name={CARD_NUMBER_INPUT.NAME.THIRD}
-              minLength={CARD_NUMBER_INPUT.LENGTH}
-              maxLength={CARD_NUMBER_INPUT.LENGTH}
-              value={cardNumber[CARD_NUMBER_INPUT.NAME.THIRD]}
-              onChange={handleInputChange}
-              innerRef={$input2}
-              styles={transparentInputStyles[CARD_NUMBER_INPUT.NAME.THIRD]}
-              disabled
-            />
-            {cardNumber[CARD_NUMBER_INPUT.NAME.THIRD].length === 4 && <Styled.Dash>-</Styled.Dash>}
-            <TransparentInput
-              type="password"
-              name={CARD_NUMBER_INPUT.NAME.FOURTH}
-              minLength={CARD_NUMBER_INPUT.LENGTH}
-              maxLength={CARD_NUMBER_INPUT.LENGTH}
-              value={cardNumber[CARD_NUMBER_INPUT.NAME.FOURTH]}
-              onChange={handleInputChange}
-              innerRef={$input3}
-              styles={transparentInputStyles[CARD_NUMBER_INPUT.NAME.FOURTH]}
-              disabled
-            />
-          </Styled.InputContainer>
-        </div>
-        {isModalOpened && (
-          <CardSelectionModal closeModal={() => setModalOpen(false)} setSelectedCardInfo={setSelectedCardInfo} />
-        )}
-      </>
-    );
-  }
-);
+  return (
+    <>
+      <div>
+        <Styled.InputLabelContainer>카드 번호 {isValidCardNumber && '✔️'}</Styled.InputLabelContainer>
+        <Styled.InputContainer isValidInput={isValidCardNumber} onClick={handleInputClick}>
+          <TransparentInput
+            type="number"
+            name={CARD_NUMBER_INPUT.NAME.FIRST}
+            min={CARD_NUMBER_INPUT.RANGE.MIN}
+            max={CARD_NUMBER_INPUT.RANGE.MAX}
+            value={cardNumber[CARD_NUMBER_INPUT.NAME.FIRST]}
+            onChange={handleInputChange}
+            styles={transparentInputStyles[CARD_NUMBER_INPUT.NAME.FIRST]}
+            autoFocus
+          />
+          {cardNumber[CARD_NUMBER_INPUT.NAME.FIRST].length === 4 && <Styled.Dash>-</Styled.Dash>}
+          <TransparentInput
+            type="number"
+            name={CARD_NUMBER_INPUT.NAME.SECOND}
+            min={CARD_NUMBER_INPUT.RANGE.MIN}
+            max={CARD_NUMBER_INPUT.RANGE.MAX}
+            value={cardNumber[CARD_NUMBER_INPUT.NAME.SECOND]}
+            onChange={handleInputChange}
+            innerRef={$input1}
+            styles={transparentInputStyles[CARD_NUMBER_INPUT.NAME.SECOND]}
+            disabled
+          />
+          {cardNumber[CARD_NUMBER_INPUT.NAME.SECOND].length === 4 && <Styled.Dash>-</Styled.Dash>}
+          <TransparentInput
+            type="password"
+            name={CARD_NUMBER_INPUT.NAME.THIRD}
+            minLength={CARD_NUMBER_INPUT.LENGTH}
+            maxLength={CARD_NUMBER_INPUT.LENGTH}
+            value={cardNumber[CARD_NUMBER_INPUT.NAME.THIRD]}
+            onChange={handleInputChange}
+            innerRef={$input2}
+            styles={transparentInputStyles[CARD_NUMBER_INPUT.NAME.THIRD]}
+            disabled
+          />
+          {cardNumber[CARD_NUMBER_INPUT.NAME.THIRD].length === 4 && <Styled.Dash>-</Styled.Dash>}
+          <TransparentInput
+            type="password"
+            name={CARD_NUMBER_INPUT.NAME.FOURTH}
+            minLength={CARD_NUMBER_INPUT.LENGTH}
+            maxLength={CARD_NUMBER_INPUT.LENGTH}
+            value={cardNumber[CARD_NUMBER_INPUT.NAME.FOURTH]}
+            onChange={handleInputChange}
+            innerRef={$input3}
+            styles={transparentInputStyles[CARD_NUMBER_INPUT.NAME.FOURTH]}
+            disabled
+          />
+        </Styled.InputContainer>
+      </div>
+      {isModalOpened && (
+        <CardSelectionModal closeModal={() => setModalOpen(false)} setSelectedCardInfo={setSelectedCardInfo} />
+      )}
+    </>
+  );
+};
 
 CardNumberInput.propTypes = {
   cardNumber: PropTypes.object.isRequired,
@@ -170,4 +175,4 @@ CardNumberInput.propTypes = {
   setSelectedCardInfo: PropTypes.func.isRequired,
 };
 
-export default CardNumberInput;
+export default memo(CardNumberInput);

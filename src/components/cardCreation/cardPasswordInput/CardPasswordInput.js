@@ -20,7 +20,7 @@ const isValidInput = cardPassword => {
   );
 };
 
-const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
+const CardPasswordInput = ({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
   const [isModalOpened, setModalOpen] = useState(false);
 
   const $input1 = useRef(null);
@@ -81,7 +81,7 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
       )}
     </>
   );
-});
+};
 
 CardPasswordInput.propTypes = {
   cardPassword: PropTypes.object.isRequired,
@@ -90,4 +90,4 @@ CardPasswordInput.propTypes = {
   setValidCardPassword: PropTypes.func.isRequired,
 };
 
-export default CardPasswordInput;
+export default memo(CardPasswordInput);

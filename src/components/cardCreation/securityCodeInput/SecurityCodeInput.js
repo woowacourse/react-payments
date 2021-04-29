@@ -18,7 +18,7 @@ const isValidInput = securityCode => {
   return securityCode.length === SECURITY_CODE_INPUT.LENGTH && !isNaN(securityCode);
 };
 
-const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurityCode, setValidSecurityCode }) => {
+const SecurityCodeInput = ({ securityCode, setSecurityCode, isValidSecurityCode, setValidSecurityCode }) => {
   const [isModalOpened, setModalOpen] = useState(false);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
       )}
     </>
   );
-});
+};
 
 SecurityCodeInput.propTypes = {
   securityCode: PropTypes.string.isRequired,
@@ -63,4 +63,4 @@ SecurityCodeInput.propTypes = {
   setValidSecurityCode: PropTypes.func.isRequired,
 };
 
-export default SecurityCodeInput;
+export default memo(SecurityCodeInput);

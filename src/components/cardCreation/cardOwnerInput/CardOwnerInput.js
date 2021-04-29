@@ -10,7 +10,7 @@ const isValidInput = carOwner => {
   return carOwner.length <= CARD_OWNER_INPUT.LENGTH.MAX;
 };
 
-const CardOwnerInput = memo(({ cardOwner, setCardOwner, setValidCardOwner }) => {
+const CardOwnerInput = ({ cardOwner, setCardOwner, setValidCardOwner }) => {
   useEffect(() => {
     setValidCardOwner(isValidInput(cardOwner));
   }, [setValidCardOwner, cardOwner]);
@@ -33,7 +33,7 @@ const CardOwnerInput = memo(({ cardOwner, setCardOwner, setValidCardOwner }) => 
       </Styled.InputContainer>
     </div>
   );
-});
+};
 
 CardOwnerInput.propTypes = {
   cardOwner: PropTypes.string.isRequired,
@@ -45,4 +45,4 @@ CardOwnerInput.defaultProps = {
   cardOwner: '',
 };
 
-export default CardOwnerInput;
+export default memo(CardOwnerInput);
