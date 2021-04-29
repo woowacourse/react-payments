@@ -33,12 +33,14 @@ const transparentInputStyles = {
   },
 };
 
-const CardNumberInput = ({ cardNumber, isSelectedCardInfo, setCardNumber, isValidCardNumber, setSelectedCardInfo }) => {
+const CardNumberInput = ({ cardNumber, selectedCardInfo, setCardNumber, isValidCardNumber, setSelectedCardInfo }) => {
   const [isModalOpened, setModalOpen] = useState(false);
 
   const $input1 = useRef(null);
   const $input2 = useRef(null);
   const $input3 = useRef(null);
+
+  const isSelectedCardInfo = !!selectedCardInfo.id;
 
   useEffect(() => {
     if (isSelectedCardInfo) {
