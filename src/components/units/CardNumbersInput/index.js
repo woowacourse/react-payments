@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
+import { FRAGMENT_INDEX } from '../../../constants/constants';
 import * as Style from './style';
 
 const CardNumbersInput = (props) => {
   const { type, label, width, cardNumbers, setCardNumbers } = props;
+  const { FIRST, SECOND, THIRD, FOURTH } = FRAGMENT_INDEX;
 
   const firstInput = useRef(null);
   const secondInput = useRef(null);
@@ -22,7 +24,7 @@ const CardNumbersInput = (props) => {
 
     // TODO: selector open 시 input에서 일시적으로 focus out
     if (isFourDigits(numberFragment)) {
-      index <= 3 ? moveFocusToNextFragment(index) : focusOut(index - 1);
+      index <= THIRD ? moveFocusToNextFragment(index) : focusOut(index - 1);
     }
   };
 
@@ -42,8 +44,8 @@ const CardNumbersInput = (props) => {
           width="54px"
           min="1000"
           max="9999"
-          value={cardNumbers[1]}
-          data-number-idx="1"
+          value={cardNumbers[FIRST]}
+          data-number-idx={FIRST}
           onChange={handleChangeNumbers}
           ref={firstInput}
           required
@@ -54,8 +56,8 @@ const CardNumbersInput = (props) => {
           width="54px"
           min="1000"
           max="9999"
-          value={cardNumbers[2]}
-          data-number-idx="2"
+          value={cardNumbers[SECOND]}
+          data-number-idx={SECOND}
           onChange={handleChangeNumbers}
           ref={secondInput}
           required
@@ -66,8 +68,8 @@ const CardNumbersInput = (props) => {
           width="54px"
           min="1000"
           max="9999"
-          value={cardNumbers[3]}
-          data-number-idx={3}
+          value={cardNumbers[THIRD]}
+          data-number-idx={THIRD}
           onChange={handleChangeNumbers}
           ref={thirdInput}
           required
@@ -78,8 +80,8 @@ const CardNumbersInput = (props) => {
           width="54px"
           min="1000"
           max="9999"
-          value={cardNumbers[4]}
-          data-number-idx={4}
+          value={cardNumbers[FOURTH]}
+          data-number-idx={FOURTH}
           onChange={handleChangeNumbers}
           ref={fourthInput}
           required

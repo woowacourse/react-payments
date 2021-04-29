@@ -27,6 +27,13 @@ export const INPUT_TYPE = {
   },
 };
 
+export const FRAGMENT_INDEX = {
+  FIRST: 1,
+  SECOND: 2,
+  THIRD: 3,
+  FOURTH: 4,
+};
+
 export const DATE_TYPE = {
   MONTH: 'month',
   YEAR: 'year',

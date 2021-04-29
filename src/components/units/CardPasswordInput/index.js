@@ -2,10 +2,12 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
 import EllipseSvg from '../../../assets/secure-ellipse-cyan.svg';
+import { FRAGMENT_INDEX } from '../../../constants/constants';
 import * as Style from './style';
 
 const CardPasswordInput = (props) => {
   const { type, label, cardPassword, setCardPassword } = props;
+  const { FIRST, SECOND } = FRAGMENT_INDEX;
 
   const firstInput = useRef(null);
   const secondInput = useRef(null);
@@ -22,9 +24,9 @@ const CardPasswordInput = (props) => {
 
     if (isNaN(currentValue)) return;
 
-    if (index === 1) {
+    if (index === FIRST) {
       moveFocusToNextFragment();
-    } else if (index === 2) {
+    } else if (index === SECOND) {
       if (currentValue.length > 1) return;
     }
 
@@ -41,8 +43,8 @@ const CardPasswordInput = (props) => {
         <Style.InputWrapper>
           <Style.PasswordInput
             type="password"
-            value={cardPassword[1]}
-            data-password-idx="1"
+            value={cardPassword[FIRST]}
+            data-password-idx={FIRST}
             onChange={handleChangeNumbers}
             ref={firstInput}
             required
@@ -51,8 +53,8 @@ const CardPasswordInput = (props) => {
         <Style.InputWrapper>
           <Style.PasswordInput
             type="password"
-            value={cardPassword[2]}
-            data-password-idx="2"
+            value={cardPassword[SECOND]}
+            data-password-idx={SECOND}
             onChange={handleChangeNumbers}
             ref={secondInput}
             required

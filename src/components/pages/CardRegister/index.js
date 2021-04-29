@@ -6,19 +6,22 @@ import CardRegisterForm from '../../units/CardRegisterForm';
 import CardSelector from '../../units/CardSelector';
 import PALETTE from '../../../styles/palette';
 import { dummyBanks } from '../../../mockData';
+import { FRAGMENT_INDEX, DATE_TYPE } from '../../../constants/constants';
 import * as Style from './style';
 
 const CardRegister = (props) => {
   const { setCardData, handleGoNext } = props;
+  const { FIRST, SECOND, THIRD, FOURTH } = FRAGMENT_INDEX;
+  const { MONTH, YEAR } = DATE_TYPE;
 
   const [isSelectorOpened, setSelectorOpened] = useState(false);
   const [cardColor, setCardColor] = useState(PALETTE.EMPTY_CARD_GRAY);
-  const [cardNumbers, setCardNumbers] = useState({ 1: '', 2: '', 3: '', 4: '' });
+  const [cardNumbers, setCardNumbers] = useState({ [FIRST]: '', [SECOND]: '', [THIRD]: '', [FOURTH]: '' });
   const [bankId, setBankId] = useState('');
-  const [expirationDate, setExpirationDate] = useState({ month: '', year: '' });
+  const [expirationDate, setExpirationDate] = useState({ [MONTH]: '', [YEAR]: '' });
   const [ownerName, setOwnerName] = useState('');
   const [secureCode, setSecureCode] = useState('');
-  const [cardPassword, setCardPassword] = useState({ 1: '', 2: '' });
+  const [cardPassword, setCardPassword] = useState({ [FIRST]: '', [SECOND]: '' });
 
   const handleCompleteRegister = (event) => {
     event.preventDefault();

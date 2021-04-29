@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DATE_TYPE } from '../../../constants/constants';
+import { FRAGMENT_INDEX, DATE_TYPE } from '../../../constants/constants';
 import SecureEllipseImage from '../../../assets/secure-ellipse.svg';
 import * as Style from './style.js';
 
 const Card = (props) => {
   const { backgroundColor, width, height, size, cardNumbers, bankName, ownerName, expirationDate } = props;
+  const { FIRST, SECOND, THIRD, FOURTH } = FRAGMENT_INDEX;
+  const { MONTH, YEAR } = DATE_TYPE;
 
   const showSecureDigits = (length) =>
     Array.from({ length }, (_, idx) => <img key={idx} src={SecureEllipseImage} alt="secure-mark" />);
@@ -15,15 +17,13 @@ const Card = (props) => {
       {<Style.CardName>{bankName}</Style.CardName>}
       <Style.Chip />
       <Style.CardNumbersWrapper>
-        <Style.CardNumbersFragment>{cardNumbers[1]}</Style.CardNumbersFragment>
-        <Style.CardNumbersFragment>{cardNumbers[2]}</Style.CardNumbersFragment>
-        <Style.CardNumbersFragment>{showSecureDigits(cardNumbers[3].length)}</Style.CardNumbersFragment>
-        <Style.CardNumbersFragment>{showSecureDigits(cardNumbers[4].length)}</Style.CardNumbersFragment>
+        <Style.CardNumbersFragment>{cardNumbers[FIRST]}</Style.CardNumbersFragment>
+        <Style.CardNumbersFragment>{cardNumbers[SECOND]}</Style.CardNumbersFragment>
+        <Style.CardNumbersFragment>{showSecureDigits(cardNumbers[THIRD].length)}</Style.CardNumbersFragment>
+        <Style.CardNumbersFragment>{showSecureDigits(cardNumbers[FOURTH].length)}</Style.CardNumbersFragment>
       </Style.CardNumbersWrapper>
       <Style.OwnerName>{`${ownerName || 'NAME'}`}</Style.OwnerName>
-      <Style.ExpirationDate>
-        {`${expirationDate[DATE_TYPE.MONTH] || 'MM'}/${expirationDate[DATE_TYPE.YEAR] || 'YY'}`}
-      </Style.ExpirationDate>
+      <Style.ExpirationDate>{`${expirationDate[MONTH] || 'MM'}/${expirationDate[YEAR] || 'YY'}`}</Style.ExpirationDate>
     </Style.Root>
   );
 };
