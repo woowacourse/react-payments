@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Button Default 1`] = `
+<button
+  className="sc-bdvvaa ifmsCI"
+>
+  확인
+</button>
+`;
+
+exports[`Storyshots Card Card With Another Infos 1`] = `
+<div
+  className="sc-gsDJrp lhRNij"
+  onClick={[Function]}
+>
+  <div
+    className="card__column card-name"
+  >
+     카드
+  </div>
+  <div
+    className="card__column"
+  >
+    <div
+      className="usim"
+    />
+  </div>
+  <div
+    className="card__column card-numbers"
+  >
+    
+     
+    
+     
+    
+     
+    
+  </div>
+  <div
+    className="card__column card-details"
+  >
+    <div
+      className="card-user"
+    >
+      NAME
+    </div>
+    <div
+      className="card-date"
+    >
+      MM
+      /
+      YY
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Card Card With Infos 1`] = `
+<div
+  className="sc-gsDJrp lhRNij"
+  onClick={[Function]}
+>
+  <div
+    className="card__column card-name"
+  >
+     카드
+  </div>
+  <div
+    className="card__column"
+  >
+    <div
+      className="usim"
+    />
+  </div>
+  <div
+    className="card__column card-numbers"
+  >
+    
+     
+    
+     
+    
+     
+    
+  </div>
+  <div
+    className="card__column card-details"
+  >
+    <div
+      className="card-user"
+    >
+      NAME
+    </div>
+    <div
+      className="card-date"
+    >
+      MM
+      /
+      YY
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Card Default 1`] = `
+<div
+  className="sc-gsDJrp hhorLg"
+  onClick={[Function]}
+>
+  <div
+    className="add"
+  >
+    +
+  </div>
+</div>
+`;
+
+exports[`Storyshots Input Default 1`] = `
+<input
+  className="sc-dkPtyc btinLE"
+  value="테스트"
+/>
+`;
+
+exports[`Storyshots Input Nick Name Input 1`] = `
+<input
+  className="sc-dkPtyc iHFnEk"
+  value="테스트"
+/>
+`;
+
+exports[`Storyshots Input Round Input 1`] = `
+<input
+  className="sc-dkPtyc kUsRnf"
+  value="테스트"
+/>
+`;
+
+exports[`Storyshots Input Small Width 1`] = `
+<input
+  className="sc-dkPtyc jNJXHO"
+  value="테스트"
+  width="2.6875rem"
+/>
+`;
+
+exports[`Storyshots Input Text Left 1`] = `
+<input
+  className="sc-dkPtyc eOSvfo"
+  value="테스트"
+/>
+`;
+
+exports[`Storyshots Modal Default 1`] = `
+<div
+  className="sc-hKwCoD brMTuF"
+  onClick={[Function]}
+>
+  <div
+    className="sc-eCImvq dbNsSS"
+  >
+    <div>
+      모달내컴포넌트
+    </div>
+  </div>
+</div>
+`;
