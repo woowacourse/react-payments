@@ -12,8 +12,10 @@ import CardAdditionComplete from './components/CardAdditionComplete';
 
 function App() {
   const [page, setPage] = useState('addCard');
+  const [myCards, setMyCards] = useState([]);
   const [newCardInfo, setNewCardInfo] = useState({
     cardName: 'DEFAULT',
+    cardNickName: '',
     numbers: {
       first: '',
       second: '',
@@ -31,6 +33,34 @@ function App() {
       second: '',
     },
   });
+
+  const resetNewCardInfo = () => {
+    setNewCardInfo({
+      cardName: 'DEFAULT',
+      cardNickName: '',
+      numbers: {
+        first: '',
+        second: '',
+        third: '',
+        fourth: '',
+      },
+      user: '',
+      expireDate: {
+        month: '',
+        year: '',
+      },
+      cvc: '',
+      password: {
+        first: '',
+        second: '',
+      },
+    });
+  };
+
+  const addNewCard = () => {
+    setMyCards([...myCards, newCardInfo]);
+    resetNewCardInfo();
+  };
 
   const handleCardColor = (name) => {
     setNewCardInfo({
@@ -83,7 +113,11 @@ function App() {
           </>
         )}
         {page === 'cardComplete' && (
-          <CardAdditionComplete newCardInfo={newCardInfo} />
+          <CardAdditionComplete
+            newCardInfo={newCardInfo}
+            setNewCardInfo={setNewCardInfo}
+            addNewCard={addNewCard}
+          />
         )}
 
         {openModalContent.isModalOpen && (

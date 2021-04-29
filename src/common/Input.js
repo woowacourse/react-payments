@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components';
-import { COLOR, FONT_WEIGHT } from '../constants/constants.js';
+import { COLOR, FONT_SIZE, FONT_WEIGHT } from '../constants/constants.js';
 
 const NickNameInput = css`
   color: #383838;
   background-color: white;
   font-weight: ${FONT_WEIGHT.LIGHT};
+  font-size: ${FONT_SIZE.LARGE};
   border-radius: 0;
   border-bottom: 1px solid #737373;
 `;
@@ -28,6 +29,10 @@ const Input = styled.input`
   text-align: ${({ textAlign }) => textAlign || 'center'};
   ${({ roundInput }) => roundInput && RoundInput};
   ${({ nickNameInput }) => nickNameInput && NickNameInput}
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export default Input;
