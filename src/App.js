@@ -39,11 +39,7 @@ const App = () => {
         <CardCreationPage setCurrentPage={setCurrentPage} setNewCardInfo={setNewCardInfo} />
       )}
       {currentPage === PAGE.CARD_CREATION_COMPLETE && (
-        <CardCreationCompletePage
-          setCurrentPage={setCurrentPage}
-          newCardInfo={newCardInfo}
-          setNewCardInfo={setNewCardInfo}
-        />
+        <CardCreationCompletePage setCurrentPage={setCurrentPage} newCardInfo={newCardInfo} setCardList={setCardList} />
       )}
     </>
   );
