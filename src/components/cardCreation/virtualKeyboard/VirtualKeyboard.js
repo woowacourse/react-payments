@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { BottomModal } from '../../commons/modal/BottomModal';
 import { Button } from '../../commons/button/Button';
 import Styled from './VirtualKeyboard.style';
@@ -60,6 +61,18 @@ const VirtualKeyboard = ({ closeModal, currentInputName, inputValue, setInputVal
       </Styled.ButtonContainer>
     </BottomModal>
   );
+};
+
+VirtualKeyboard.defaultProps = {
+  currentInputName: '',
+  inputValue: '',
+  maxLength: 0,
+};
+
+VirtualKeyboard.propTypes = {
+  currentInputName: PropTypes.string.isRequired,
+  inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  maxLength: PropTypes.number.isRequired,
 };
 
 export default VirtualKeyboard;
