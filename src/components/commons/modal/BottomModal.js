@@ -1,14 +1,8 @@
 import PropTypes from 'prop-types';
-import { useEffect, useRef } from 'react';
+import { forwardRef } from 'react';
 import Styled from './BottomModal.style';
 
-export const BottomModal = ({ closeModal, children, styles, ...props }) => {
-  const modalRef = useRef(null);
-
-  useEffect(() => {
-    modalRef.current.scrollIntoView();
-  });
-
+export const BottomModal = forwardRef(({ closeModal, children, styles, ...props }, ref) => {
   const handleModalClose = e => {
     if (e.currentTarget === e.target) {
       closeModal();
@@ -17,12 +11,12 @@ export const BottomModal = ({ closeModal, children, styles, ...props }) => {
 
   return (
     <Styled.Dimmer onClick={handleModalClose}>
-      <Styled.BottomModal ref={modalRef} {...props} styles={styles}>
+      <Styled.BottomModal ref={ref} {...props} styles={styles}>
         {children}
       </Styled.BottomModal>
     </Styled.Dimmer>
   );
-};
+});
 
 BottomModal.propTypes = {
   closeModal: PropTypes.func,

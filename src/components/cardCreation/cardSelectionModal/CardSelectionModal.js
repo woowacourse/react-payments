@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 import { CARD } from '../../../constants/card';
+import { MODAL_TYPE } from '../../../hooks/useBottomModal';
 import { Circle, CIRCLE_SIZE } from '../../commons/circle/Circle';
-import { BottomModal } from '../../commons/modal/BottomModal';
 import Styled from './CardSelectionModal.style';
 
-const CardSelectionModal = ({ closeModal, setSelectedCardInfo }) => {
+const CardSelectionModal = ({ BottomModal, closeModal, setSelectedCardInfo }) => {
   const handleItemClick = card => {
     setSelectedCardInfo(card);
-    closeModal();
+    closeModal(MODAL_TYPE.DIALOG);
   };
 
   return (
-    <BottomModal closeModal={closeModal}>
+    <BottomModal>
       <Styled.List>
         {Object.values(CARD).map(card => (
           <Styled.ListItem key={card.id} onClick={() => handleItemClick(card)}>
@@ -25,7 +25,6 @@ const CardSelectionModal = ({ closeModal, setSelectedCardInfo }) => {
 };
 
 CardSelectionModal.propTypes = {
-  closeModal: PropTypes.func.isRequired,
   setSelectedCardInfo: PropTypes.func.isRequired,
 };
 

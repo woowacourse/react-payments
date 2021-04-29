@@ -1,22 +1,22 @@
 import PropTypes from 'prop-types';
-import { BottomModal } from '../../commons/modal/BottomModal';
 import { Button } from '../../commons/button/Button';
 import Styled from './VirtualKeyboard.style';
 import { useState } from 'react';
 import { arrayShuffle } from '../../../utils/shuffle';
 import { randomKey } from '../../../utils/randomKey';
+import { MODAL_TYPE } from '../../../hooks/useBottomModal';
 
 const virtualKeyboardValueList = Array.from({ length: 10 }, (_, i) => i);
 const CONFIRM = '확인';
 const DELETE = '삭제';
 
-const VirtualKeyboard = ({ closeModal, currentInputName, inputValue, setInputValue, maxLength }) => {
+const VirtualKeyboard = ({ BottomModal, closeModal, currentInputName, inputValue, setInputValue, maxLength }) => {
   const [shuffledButtonList, setShuffledButtonList] = useState(arrayShuffle(virtualKeyboardValueList));
 
   const handleButtonClick = ({ target }) => {
     if (target.tagName !== 'BUTTON') return;
     if (target.innerText === CONFIRM) {
-      closeModal();
+      closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
 
       return;
     }
@@ -49,7 +49,7 @@ const VirtualKeyboard = ({ closeModal, currentInputName, inputValue, setInputVal
   };
 
   return (
-    <BottomModal closeModal={closeModal}>
+    <BottomModal>
       <Styled.ButtonContainer onClick={handleButtonClick}>
         {shuffledButtonList.map(value => (
           <Button type="button" key={randomKey()}>

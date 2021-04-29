@@ -7,6 +7,7 @@ import Styled from './CardPasswordInput.style';
 import { Circle } from '../../commons/circle/Circle';
 import { printColorBasedOnBoolean } from '../../../utils/printColor';
 import VirtualKeyboard from '../virtualKeyboard/VirtualKeyboard';
+import { MODAL_TYPE, useBottomModal } from '../../../hooks/useBottomModal';
 
 const FULL_INPUT_LENGTH = 1;
 const transparentInputStyles = {
@@ -16,24 +17,24 @@ const transparentInputStyles = {
 };
 
 const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
-  const [isModalOpened, setModalOpen] = useState(false);
+  const { isModalOpened, openModal, closeModal, BottomModal } = useBottomModal();
   const [currentInputName, setCurrentInputName] = useState(null);
   const $secondInput = useRef(null);
 
   useEffect(() => {
     const isValidInput = Object.values(cardPassword).every(cardPassword => cardPassword.length === FULL_INPUT_LENGTH);
     setValidCardPassword(isValidInput);
-    isValidInput && setModalOpen(false);
+    isValidInput && closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
 
     if (currentInputName === FIRST && cardPassword[FIRST].length === FULL_INPUT_LENGTH) {
       $secondInput.current.focus();
     }
-  }, [setValidCardPassword, currentInputName, cardPassword]);
+  }, [setValidCardPassword, currentInputName, cardPassword, closeModal]);
 
   const handleInputFocus = ({ target }) => {
     setCurrentInputName(target.name);
     setCardPassword(prevState => ({ ...prevState, [target.name]: '' }));
-    setModalOpen(true);
+    openModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
   };
 
   return (
@@ -76,7 +77,8 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
       </div>
       {isModalOpened && (
         <VirtualKeyboard
-          closeModal={() => setModalOpen(false)}
+          BottomModal={BottomModal}
+          closeModal={closeModal}
           currentInputName={currentInputName}
           inputValue={cardPassword}
           setInputValue={setCardPassword}
