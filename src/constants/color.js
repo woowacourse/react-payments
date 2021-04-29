@@ -2,7 +2,7 @@ export const COLOR = {
   WHITE: '#FFF',
   BLACK: '#000',
   BLACK_OPACITY_25: 'rgba(0,0,0,0.25)',
-  GRAY_10: '#FDFDFD',
+  GRAY_10: '#F7F7F7',
   GRAY_50: '#ECEBF1',
   GRAY_80: '#E5E5E5',
   GRAY_100: '#D2D2D2',

@@ -45,7 +45,8 @@ const isValidCardNumberInput = cardNumber => {
 
 const CardNumberInput = memo(
   ({ cardNumber, selectedCardInfo, setCardNumber, isValidCardNumber, setValidCardNumber, setSelectedCardInfo }) => {
-    const [isModalOpened, setModalOpen] = useState(false);
+    const [isCardSelectionModalOpened, setCardSelectionModalOpen] = useState(false);
+    const [isVirtualKeyboardModalOpened, setVirtualKeyboardModalOpen] = useState(false);
     const [currentInputName, setCurrentInputName] = useState(null);
 
     const $secondInput = useRef(null);
@@ -56,7 +57,7 @@ const CardNumberInput = memo(
 
     useEffect(() => {
       const isValidInput = isValidCardNumberInput(cardNumber) && isSelectedCardInfo;
-      isValidInput && setModalOpen(false);
+      isValidInput && setVirtualKeyboardModalOpen(false);
       setValidCardNumber(isValidInput);
 
       if (currentInputName === THIRD && cardNumber[THIRD].length === FULL_INPUT_LENGTH) {
@@ -83,7 +84,7 @@ const CardNumberInput = memo(
       }
 
       if (target.name === SECOND) {
-        setModalOpen(true);
+        setCardSelectionModalOpen(true);
         $secondInput.current.blur();
 
         return;
@@ -94,13 +95,13 @@ const CardNumberInput = memo(
       cardNumber[FIRST].length === FULL_INPUT_LENGTH &&
         cardNumber[SECOND].length === FULL_INPUT_LENGTH &&
         !isSelectedCardInfo &&
-        setModalOpen(true);
+        setCardSelectionModalOpen(true);
     };
 
     const handleInputFocus = ({ target }) => {
       setCardNumber(prevState => ({ ...prevState, [target.name]: '' }));
       setCurrentInputName(target.name);
-      setModalOpen(true);
+      setVirtualKeyboardModalOpen(true);
     };
 
     return (
@@ -157,12 +158,15 @@ const CardNumberInput = memo(
             />
           </Styled.InputContainer>
         </div>
-        {isModalOpened && (
-          <CardSelectionModal closeModal={() => setModalOpen(false)} setSelectedCardInfo={setSelectedCardInfo} />
+        {isCardSelectionModalOpened && (
+          <CardSelectionModal
+            closeModal={() => setCardSelectionModalOpen(false)}
+            setSelectedCardInfo={setSelectedCardInfo}
+          />
         )}
-        {isModalOpened && isSelectedCardInfo && (
+        {isVirtualKeyboardModalOpened && isSelectedCardInfo && (
           <VirtualKeyboard
-            closeModal={() => setModalOpen(false)}
+            closeModal={() => setVirtualKeyboardModalOpen(false)}
             currentInputName={currentInputName}
             inputValue={cardNumber}
             setInputValue={setCardNumber}

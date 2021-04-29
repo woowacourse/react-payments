@@ -3,11 +3,11 @@ import { COLOR } from '../../../constants/color';
 
 const Styled = {
   Dimmer: styled.div(({ styles }) => ({
-    position: 'fixed',
+    position: 'absolute',
     top: '0',
     left: '0',
-    right: '0',
-    bottom: '0',
+    width: '100%',
+    height: '100%',
     backgroundColor: COLOR.GRAY_900_OPACITY_55,
     zIndex: '2',
     marginBottom: '0 !important',
@@ -15,7 +15,7 @@ const Styled = {
   })),
   BottomModal: styled.div(({ styles }) => ({
     position: 'absolute',
-    bottom: '0',
+    bottom: '0px',
     width: '100%',
     height: '227px',
     backgroundColor: COLOR.GRAY_10,
@@ -23,6 +23,7 @@ const Styled = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    transform: 'translateY(227px)',
     ...styles,
   })),
 };
