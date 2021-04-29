@@ -162,6 +162,35 @@ const AddCardForm = () => {
     alert(ALERT.CARD_SUBMIT_SUCCESS);
   };
 
+  const CardNumberInputs = [
+    { type: 'text', ref: null },
+    { type: 'text', ref: secondCardNumberInputRef },
+    { type: 'password', ref: thirdCardNumberInputRef },
+    { type: 'password', ref: fourthCardNumberInputRef },
+  ];
+
+  const AddCardNumberInputs = () =>
+    CardNumberInputs.reduce<React.ReactNode[]>((acc, { type, ref }, index, array) => {
+      if (index) {
+        acc.push(<span key={index + array.length}>{CARD_NUMBER_SEPARATOR}</span>);
+      }
+
+      acc.push(
+        <Input
+          key={index}
+          type={type}
+          ref={ref}
+          textCenter
+          maxLength={CARD_NUMBER_DIGITS}
+          width="16%"
+          value={cardNumber[index]}
+          onChange={event => onChangeCardNumber(event, index)}
+        />
+      );
+
+      return acc;
+    }, []);
+
   return (
     <AddCardFormContainer>
       <CreditCard
@@ -173,35 +202,7 @@ const AddCardForm = () => {
       />
       <form onSubmit={onSubmitCard}>
         <AddCardInputLabel label={LABEL.CARD_NUMBER}>
-          <AddCardInputContainer>
-            {[
-              { type: 'text', ref: null },
-              { type: 'text', ref: secondCardNumberInputRef },
-              { type: 'password', ref: thirdCardNumberInputRef },
-              { type: 'password', ref: fourthCardNumberInputRef },
-            ]
-              .map(({ type, ref }, index) => (
-                <Input
-                  key={index}
-                  type={type}
-                  ref={ref}
-                  textCenter
-                  maxLength={CARD_NUMBER_DIGITS}
-                  width="16%"
-                  value={cardNumber[index]}
-                  onChange={event => onChangeCardNumber(event, index)}
-                />
-              ))
-              .reduce(
-                (acc: JSX.Element[], curr, index, array) => [
-                  ...acc,
-                  <span key={index + array.length}>{CARD_NUMBER_SEPARATOR}</span>,
-                  curr,
-                ],
-                []
-              )
-              .slice(1)}
-          </AddCardInputContainer>
+          <AddCardInputContainer>{AddCardNumberInputs()}</AddCardInputContainer>
         </AddCardInputLabel>
         <AddCardInputLabel label={LABEL.EXP_DATE} width="40%">
           <AddCardInputContainer>
