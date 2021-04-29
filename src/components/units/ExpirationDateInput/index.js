@@ -71,12 +71,12 @@ const ExpirationDateInput = (props) => {
   );
 };
 
-export default ExpirationDateInput;
-
 ExpirationDateInput.propTypes = {
-  type: PropTypes.string,
-  label: PropTypes.string,
-  width: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
   expirationDate: PropTypes.object,
-  setExpirationDate: PropTypes.func.isRequired,
+  setExpirationDate: PropTypes.func,
 };
+
+export default ExpirationDateInput;

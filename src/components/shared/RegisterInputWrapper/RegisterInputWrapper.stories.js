@@ -24,13 +24,13 @@ CardNumbers.args = {
 export const ExpirationDate = Template.bind({});
 ExpirationDate.args = {
   ...INPUT_TYPE.EXPIRATION_DATE,
-  children: <ExpirationDateInput />,
+  children: <ExpirationDateInput expirationDate={{ month: '04', year: '21' }} />,
 };
 
 export const OwnerName = Template.bind({});
 OwnerName.args = {
   ...INPUT_TYPE.OWNER_NAME,
-  children: <OwnerNameInput />,
+  children: <OwnerNameInput ownerName={'ZIG'} />,
 };
 
 export const SecureCode = Template.bind({});

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Card from '../../shared/Card';
 import Button from '../../shared/Button';
 import { dummyBanks } from '../../../mockData';
@@ -6,7 +7,7 @@ import * as Style from './style';
 
 const CardCompletion = (props) => {
   const {
-    cardData: { bankId, cardNumbers, expirationDate, ownerName, secureCode, cardPassword },
+    cardData: { bankId, cardNumbers, expirationDate, ownerName },
   } = props;
 
   const { color: cardColor, name: bankName } = dummyBanks.find(({ id }) => id === bankId);
@@ -30,6 +31,13 @@ const CardCompletion = (props) => {
       <Button text={'확인'} />
     </Style.Root>
   );
+};
+
+CardCompletion.propTypes = {
+  bankId: PropTypes.string.isRequired,
+  cardNumbers: PropTypes.object.isRequired,
+  expirationDate: PropTypes.object.isRequired,
+  ownerName: PropTypes.string.isRequired,
 };
 
 export default CardCompletion;

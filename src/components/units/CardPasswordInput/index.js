@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
 import EllipseSvg from '../../../assets/secure-ellipse-cyan.svg';
 import * as Style from './style';
@@ -47,6 +48,13 @@ const CardPasswordInput = (props) => {
       </RegisterInputWrapper>
     </>
   );
+};
+
+CardPasswordInput.propTypes = {
+  type: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
+  setCardPassword: PropTypes.func,
 };
 
 export default CardPasswordInput;

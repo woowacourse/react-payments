@@ -77,8 +77,11 @@ const CardNumbersInput = (props) => {
   );
 };
 
-export default CardNumbersInput;
-
 CardNumbersInput.propTypes = {
+  type: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
   setCardNumbers: PropTypes.func.isRequired,
 };
+
+export default CardNumbersInput;

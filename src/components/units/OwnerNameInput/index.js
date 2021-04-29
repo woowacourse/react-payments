@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
 import * as Style from './style';
 
@@ -27,6 +28,14 @@ const OwnerNameInput = (props) => {
       </Style.InputWrapper>
     </RegisterInputWrapper>
   );
+};
+
+OwnerNameInput.propTypes = {
+  type: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
+  ownerName: PropTypes.string,
+  setOwnerName: PropTypes.func,
 };
 
 export default OwnerNameInput;
