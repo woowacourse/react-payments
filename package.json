@@ -25,7 +25,16 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:jsx-a11y/recommended",
+      "plugin:import/recommended",
+      "airbnb",
+      "airbnb/hooks",
+      "prettier"
+    ],
+    "plugins": [
+      "jsx-a11y",
+      "import"
     ],
     "overrides": [
       {
@@ -36,7 +45,8 @@
           "import/no-anonymous-default-export": "off"
         }
       }
-    ]
+    ],
+    "ignorePatterns": "node_modules"
   },
   "browserslist": {
     "production": [
@@ -59,6 +69,7 @@
     "@storybook/react": "^6.2.8",
     "@tailwindcss/postcss7-compat": "^2.1.0",
     "autoprefixer": "^9",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.2.0",
     "husky": ">=6",
     "lint-staged": ">=10",
