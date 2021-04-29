@@ -4,7 +4,7 @@ import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
 import * as Style from './style';
 
 const CardNumbersInput = (props) => {
-  const { type, label, width, setCardNumbers } = props;
+  const { type, label, width, cardNumbers, setCardNumbers } = props;
 
   const firstInput = useRef(null);
   const secondInput = useRef(null);
@@ -13,15 +13,15 @@ const CardNumbersInput = (props) => {
   const inputRefs = [firstInput, secondInput, thirdInput, fourthInput];
 
   const handleChangeNumbers = (event) => {
-    if (!isFourDigits(event.target.value)) return;
-
     const index = Number(event.target.dataset.numberIdx);
     const numberFragment = event.target.value;
 
     setCardNumbers((prevNumbers) => ({ ...prevNumbers, [index]: numberFragment }));
 
     // TODO: selector open 시 input에서 일시적으로 focus out
-    index <= 3 ? moveFocusToNextFragment(index) : focusOut(index - 1);
+    if (isFourDigits(numberFragment)) {
+      index <= 3 ? moveFocusToNextFragment(index) : focusOut(index - 1);
+    }
   };
 
   const moveFocusToNextFragment = (index) => {
@@ -39,38 +39,42 @@ const CardNumbersInput = (props) => {
       <Style.InputWrapper>
         <Style.NumberInput
           type="number"
-          width="48px"
-          min="1000"
-          max="9999"
+          width="54px"
+          value={cardNumbers[1]}
           data-number-idx="1"
           onChange={handleChangeNumbers}
           ref={firstInput}
+          required
         />
         <Style.Divider>-</Style.Divider>
         <Style.NumberInput
           type="number"
-          width="48px"
-          min="1000"
-          max="9999"
+          width="54px"
+          value={cardNumbers[2]}
           data-number-idx="2"
           onChange={handleChangeNumbers}
           ref={secondInput}
+          required
         />
         <Style.Divider>-</Style.Divider>
         <Style.PasswordInput
           type="password"
-          width="48px"
+          width="54px"
+          value={cardNumbers[3]}
           data-number-idx={3}
           onChange={handleChangeNumbers}
           ref={thirdInput}
+          required
         />
         <Style.Divider>-</Style.Divider>
         <Style.PasswordInput
           type="password"
-          width="48px"
+          width="54px"
+          value={cardNumbers[4]}
           data-number-idx={4}
           onChange={handleChangeNumbers}
           ref={fourthInput}
+          required
         />
       </Style.InputWrapper>
     </RegisterInputWrapper>

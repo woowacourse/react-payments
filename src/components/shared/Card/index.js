@@ -6,9 +6,8 @@ import * as Style from './style.js';
 const Card = (props) => {
   const { backgroundColor, width, height, size, bankName, ownerName, cardNumbers, expirationDate } = props;
 
-  const secureDigits = Array.from({ length: 4 }, (_, idx) => (
-    <img key={idx} src={SecureEllipseImage} alt="secure-mark" />
-  ));
+  const showSecureDigits = (length) =>
+    Array.from({ length }, (_, idx) => <img key={idx} src={SecureEllipseImage} alt="secure-mark" />);
 
   return (
     <Style.Root width={width} height={height} size={size} backgroundColor={backgroundColor}>
@@ -17,8 +16,8 @@ const Card = (props) => {
       <Style.CardNumbersWrapper>
         <Style.CardNumbersFragment>{cardNumbers[1]}</Style.CardNumbersFragment>
         <Style.CardNumbersFragment>{cardNumbers[2]}</Style.CardNumbersFragment>
-        <Style.CardNumbersFragment>{cardNumbers[3] && secureDigits}</Style.CardNumbersFragment>
-        <Style.CardNumbersFragment>{cardNumbers[4] && secureDigits}</Style.CardNumbersFragment>
+        <Style.CardNumbersFragment>{showSecureDigits(cardNumbers[3].length)}</Style.CardNumbersFragment>
+        <Style.CardNumbersFragment>{showSecureDigits(cardNumbers[4].length)}</Style.CardNumbersFragment>
       </Style.CardNumbersWrapper>
       <Style.OwnerName>{`${ownerName || 'NAME'}`}</Style.OwnerName>
       <Style.ExpirationDate>

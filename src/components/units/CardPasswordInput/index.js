@@ -5,7 +5,7 @@ import EllipseSvg from '../../../assets/secure-ellipse-cyan.svg';
 import * as Style from './style';
 
 const CardPasswordInput = (props) => {
-  const { type, label, width, setCardPassword } = props;
+  const { type, label, width, cardPassword, setCardPassword } = props;
 
   const firstInput = useRef(null);
   const secondInput = useRef(null);
@@ -39,10 +39,24 @@ const CardPasswordInput = (props) => {
     <>
       <RegisterInputWrapper type={type} label={label} width={width} inputCount={2}>
         <Style.InputWrapper>
-          <Style.PasswordInput type="password" data-password-idx="1" onChange={handleChangeNumbers} ref={firstInput} />
+          <Style.PasswordInput
+            type="password"
+            value={cardPassword[1]}
+            data-password-idx="1"
+            onChange={handleChangeNumbers}
+            ref={firstInput}
+            required
+          />
         </Style.InputWrapper>
         <Style.InputWrapper>
-          <Style.PasswordInput type="password" data-password-idx="2" onChange={handleChangeNumbers} ref={secondInput} />
+          <Style.PasswordInput
+            type="password"
+            value={cardPassword[2]}
+            data-password-idx="2"
+            onChange={handleChangeNumbers}
+            ref={secondInput}
+            required
+          />
         </Style.InputWrapper>
         {passwordMark}
       </RegisterInputWrapper>
