@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { GRAY } from '../../../constants/palette';
+import { GRAY, YELLOW } from '../../../constants/palette';
 
 interface CreditCardContainerProps {
   cardColor: string;
@@ -21,7 +21,7 @@ const lgSize = css`
 `;
 
 export const CreditCardContainer = styled.div<CreditCardContainerProps>`
-  background: ${({ cardColor }) => cardColor || GRAY};
+  background: ${({ cardColor }) => cardColor || GRAY[100]};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   padding: 1em;
   box-sizing: border-box;
@@ -34,7 +34,7 @@ export const CreditCardContainer = styled.div<CreditCardContainerProps>`
   }
 
   .ic-chip {
-    background-color: #cbba64;
+    background-color: ${YELLOW[500]};
     width: 4em;
     height: calc(4em * 0.63);
     border-radius: 6px;

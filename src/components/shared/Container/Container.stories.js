@@ -1,5 +1,6 @@
 import React from 'react';
 import Container from '.';
+import { MINT } from '../../../constants/palette';
 
 export default {
   component: Container,
@@ -17,5 +18,5 @@ Default.args = {};
 
 export const BackgroundColor = Template.bind({});
 BackgroundColor.args = {
-  backgroundColor: 'red',
+  backgroundColor: MINT[500],
 };

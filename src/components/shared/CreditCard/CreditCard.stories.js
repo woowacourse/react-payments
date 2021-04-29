@@ -1,4 +1,5 @@
 import CreditCard from '.';
+import { MINT } from '../../../constants/palette';
 
 export default {
   component: CreditCard,
@@ -12,7 +13,7 @@ export const MediumSize = Template.bind({});
 MediumSize.args = {
   cardBrand: {
     name: 'test123',
-    color: '#547CE4',
+    color: MINT[500],
   },
   ownerName: 'test123',
   cardNumber: '1234-1234-1234-1234',
@@ -30,7 +31,7 @@ export const LargeSize = Template.bind({});
 LargeSize.args = {
   cardBrand: {
     name: 'test123',
-    color: '#547CE4',
+    color: MINT[500],
   },
   ownerName: 'test123',
   cardNumber: '1234-1234-1234-1234',

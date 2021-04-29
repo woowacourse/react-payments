@@ -5,6 +5,7 @@ import CreditCard from '../../shared/CreditCard';
 import { CardBrand, ExpDate } from '../../../types';
 import { NicknameContainer } from './styles';
 import Button from '../../shared/Button';
+import { BLACK } from '../../../constants/palette';
 
 interface Props {
   nickname: string;
@@ -40,7 +41,7 @@ const NicknameModal: FC<Props> = ({ cardBrand, cardNumber, expDate, ownerName, n
           size="lg"
         />
         <Input
-          color="black"
+          color={BLACK[900]}
           value={nickname}
           onChange={onChangeNickname}
           underline

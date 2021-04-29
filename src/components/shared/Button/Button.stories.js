@@ -1,4 +1,5 @@
 import Button from '.';
+import { MINT } from '../../../constants/palette';
 
 export default {
   component: Button,
@@ -9,5 +10,5 @@ const Template = args => <Button {...args}>다음</Button>;
 
 export const Default = Template.bind({});
 Default.args = {
-  color: 'red',
+  color: MINT[500],
 };

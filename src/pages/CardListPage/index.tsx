@@ -3,12 +3,13 @@ import CardList from '../../components/cardList';
 import Template from '../../components/shared/Template';
 import { Card } from '../../types';
 import { CARD_LIST_PAGE_TITLE } from '../../constants/title';
+import { BLUE } from '../../constants/palette';
 
 const dummies: Card[] = [
   {
     cardBrand: {
       name: '포코카드',
-      color: '#547CE4',
+      color: BLUE[500],
     },
     ownerName: 'FANO',
     cardNumber: '1234-1234-1234-1234',
@@ -23,7 +24,7 @@ const dummies: Card[] = [
   {
     cardBrand: {
       name: '포코카드',
-      color: '#547CE4',
+      color: BLUE[500],
     },
     ownerName: 'FANO',
     cardNumber: '1234-1234-1234-1234',
@@ -38,7 +39,7 @@ const dummies: Card[] = [
   {
     cardBrand: {
       name: '포코카드',
-      color: '#547CE4',
+      color: BLUE[500],
     },
     ownerName: 'FANO',
     cardNumber: '1234-1234-1234-1234',

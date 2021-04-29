@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BAEMINT } from '../../../constants/palette';
+import { MINT } from '../../../constants/palette';
 
 interface Props {
   underline?: boolean;
@@ -14,7 +14,7 @@ const Input = styled.input<Props>`
   border: none;
   outline: none;
   font-size: 1.125rem;
-  color: ${({ color }) => color || BAEMINT};
+  color: ${({ color }) => color || MINT[500]};
   background-color: transparent;
   width: ${({ width }) => width || '100%'};
   ${({ textCenter }) => textCenter && `text-align: center;`}
