@@ -27,7 +27,7 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
         <Styled.InputContainer isValidInput={isValidSecurityCode}>
           <TransparentInput
             type="password"
-            inputMode="numeric"
+            inputmode="none"
             minLength={CARD_INPUT.SECURITY_CODE_LENGTH}
             maxLength={CARD_INPUT.SECURITY_CODE_LENGTH}
             value={securityCode}
