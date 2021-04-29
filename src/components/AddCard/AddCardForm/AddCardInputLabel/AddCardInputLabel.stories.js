@@ -1,5 +1,5 @@
 import AddCardInputContainer from '.';
-import { GRAY } from '../../../../constants/palette';
+import PALETTE from '../../../../constants/palette';
 import Container from '../../../common/Container';
 import Input from '../../../common/Input';
 
@@ -10,7 +10,7 @@ export default {
 
 const Template = args => (
   <AddCardInputContainer {...args}>
-    <Container backgroundColor={GRAY}>
+    <Container backgroundColor={PALETTE.GRAY_1}>
       <Input width="100%" />
     </Container>
   </AddCardInputContainer>

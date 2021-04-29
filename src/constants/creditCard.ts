@@ -1,7 +1,7 @@
 export const EXP_DATE_WHITESPACE_CHARACTER = '0';
 export const CARD_NUMBER_DIGITS = 4;
 export const CARD_NUMBER_SEPARATOR = '-';
-export const MASK_CHARACTER = '·';
+export const MASK_CHARACTER = '•';
 
 export const EXP_DATE_DIGITS = 2;
 

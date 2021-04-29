@@ -6,8 +6,7 @@ import NicknameModal from '../NicknameModal';
 import Container from '../../common/Container';
 import Input from '../../common/Input';
 import Button from '../../common/Button';
-import CARD_BRAND from '../../../constants/cardData';
-import { LABEL, PLACEHOLDER } from '../../../constants/addCardForm';
+import { LABEL, PLACEHOLDER, CARD_BRAND } from '../../../constants/addCardForm';
 import {
   CARD_NUMBER_DIGITS,
   CARD_NUMBER_SEPARATOR,

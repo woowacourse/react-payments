@@ -1,6 +1,6 @@
 import { FC, MouseEvent, MouseEventHandler } from 'react';
 import styled, { css } from 'styled-components';
-import { BAEMINT, GRAY } from '../../../constants/palette';
+import PALETTE from '../../../constants/palette';
 
 interface Props {
   color?: string;
@@ -20,7 +20,7 @@ const Button = styled.button<Props>`
   padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 500;
-  color: ${({ color }) => BAEMINT || color};
+  color: ${({ color }) => PALETTE.BAEMINT || color};
   ${({ position }) => position === 'bottom-right' && bottomRight}
 `;
 
@@ -45,7 +45,7 @@ const IconButtonContainer = styled.div<IconButtonProps>`
     width: 3.5em;
     height: 3.5em;
     border-radius: 50%;
-    background-color: ${({ backgroundColor }) => backgroundColor || GRAY};
+    background-color: ${({ backgroundColor }) => backgroundColor || PALETTE.GRAY_1};
     margin-bottom: 0.625rem;
   }
 `;

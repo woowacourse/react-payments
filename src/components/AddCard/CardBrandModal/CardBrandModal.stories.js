@@ -1,5 +1,5 @@
 import CardBrandModal from '.';
-import CARD_BRAND from '../../../constants/cardData';
+import { CARD_BRAND } from '../../../constants/addCardForm';
 
 export default {
   component: CardBrandModal,

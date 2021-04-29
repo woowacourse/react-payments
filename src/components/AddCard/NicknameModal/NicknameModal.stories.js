@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import NicknameModal from '.';
-import CARD_BRAND from '../../../constants/cardData';
+import { CARD_BRAND } from '../../../constants/addCardForm';
 
 export default {
   component: NicknameModal,

@@ -1,4 +1,5 @@
 import CreditCard from '.';
+import { CARD_BRAND } from '../../../constants/addCardForm';
 
 export default {
   component: CreditCard,
@@ -10,10 +11,7 @@ const Template = args => <CreditCard {...args} />;
 export const MediumSize = Template.bind({});
 
 MediumSize.args = {
-  cardBrand: {
-    name: 'test123',
-    color: '#547CE4',
-  },
+  cardBrand: CARD_BRAND[0],
   ownerName: 'test123',
   cardNumber: '1234-1234-1234-1234',
   expDate: {
@@ -28,10 +26,7 @@ MediumSize.args = {
 export const LargeSize = Template.bind({});
 
 LargeSize.args = {
-  cardBrand: {
-    name: 'test123',
-    color: '#547CE4',
-  },
+  cardBrand: CARD_BRAND[1],
   ownerName: 'test123',
   cardNumber: '1234-1234-1234-1234',
   expDate: {

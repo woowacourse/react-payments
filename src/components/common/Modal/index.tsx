@@ -1,5 +1,6 @@
 import { FC, MouseEvent } from 'react';
 import styled, { css } from 'styled-components';
+import PALETTE from '../../../constants/palette';
 
 interface Props {
   modalClose?: () => void;
@@ -13,7 +14,7 @@ const ModalContainer = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: ${PALETTE.TRANSLUCENT_BLACK_9};
 `;
 
 const bottomType = css`
@@ -29,8 +30,8 @@ const fullType = css`
 const ModalInner = styled.div<Pick<Props, 'type'>>`
   position: relative;
   width: 100%;
-  background: #fff;
-  ${({ type }) => (type === 'full' ? fullType : bottomType)}
+  background: white;
+  ${({ type }) => (type === 'full' ? fullType : bottomType)};
 `;
 
 const Modal: FC<Props> = ({ children, modalClose, type }) => {

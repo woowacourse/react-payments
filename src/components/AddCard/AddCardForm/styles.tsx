@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { BAEMINT, GRAY } from '../../../constants/palette';
+import PALETTE from '../../../constants/palette';
 import Container from '../../common/Container';
 
 export const AddCardFormContainer = styled.div`
@@ -14,7 +14,7 @@ export const AddCardFormContainer = styled.div`
     height: 0.375em;
     display: block;
     border-radius: 50%;
-    background-color: ${BAEMINT};
+    background-color: ${PALETTE.BAEMINT};
   }
 
   .question-mark {
@@ -44,7 +44,7 @@ interface Props {
 }
 
 export const AddCardInputContainer: FC<Props> = ({ children, width }) => (
-  <Container flex justifyContent="center" alignItems="center" backgroundColor={GRAY} width={width}>
+  <Container flex justifyContent="center" alignItems="center" backgroundColor={PALETTE.GRAY_1} width={width}>
     {children}
   </Container>
 );

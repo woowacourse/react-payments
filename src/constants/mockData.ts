@@ -1,11 +1,9 @@
 import { Card } from '../types';
+import { CARD_BRAND } from './addCardForm';
 
 export const CARD_MOCK_DATA: Card[] = [
   {
-    cardBrand: {
-      name: '포코카드',
-      color: '#547CE4',
-    },
+    cardBrand: CARD_BRAND[0],
     ownerName: 'FANO',
     cardNumber: '1234-1234-1234-1234',
     expDate: {
@@ -17,10 +15,7 @@ export const CARD_MOCK_DATA: Card[] = [
     nickname: '엄카',
   },
   {
-    cardBrand: {
-      name: '포코카드',
-      color: '#547CE4',
-    },
+    cardBrand: CARD_BRAND[1],
     ownerName: 'FANO',
     cardNumber: '1234-1234-1234-1234',
     expDate: {
@@ -29,13 +24,9 @@ export const CARD_MOCK_DATA: Card[] = [
     },
     password: '12',
     CVC: '123',
-    nickname: '엄카',
   },
   {
-    cardBrand: {
-      name: '포코카드',
-      color: '#547CE4',
-    },
+    cardBrand: CARD_BRAND[2],
     ownerName: 'FANO',
     cardNumber: '1234-1234-1234-1234',
     expDate: {
@@ -44,6 +35,6 @@ export const CARD_MOCK_DATA: Card[] = [
     },
     password: '12',
     CVC: '123',
-    nickname: '엄카',
+    nickname: '법카',
   },
 ];
