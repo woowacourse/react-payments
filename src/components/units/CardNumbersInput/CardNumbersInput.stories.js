@@ -10,4 +10,6 @@ export default {
 const Template = (args) => <CardNumbersInput {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  cardNumbers: { 1: '', 2: '', 3: '', 4: '' },
+};

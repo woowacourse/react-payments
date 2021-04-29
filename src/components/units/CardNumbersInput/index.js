@@ -93,6 +93,7 @@ CardNumbersInput.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
+  cardNumbers: PropTypes.object.isRequired,
   setCardNumbers: PropTypes.func.isRequired,
 };
 

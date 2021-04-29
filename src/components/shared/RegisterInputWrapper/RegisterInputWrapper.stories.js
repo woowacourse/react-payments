@@ -18,19 +18,19 @@ const Template = (args) => <RegisterInputWrapper {...args} />;
 export const CardNumbers = Template.bind({});
 CardNumbers.args = {
   ...INPUT_TYPE.CARD_NUMBERS,
-  children: <CardNumbersInput />,
+  children: <CardNumbersInput {...CardNumbersInput.args} />,
 };
 
 export const ExpirationDate = Template.bind({});
 ExpirationDate.args = {
   ...INPUT_TYPE.EXPIRATION_DATE,
-  children: <ExpirationDateInput expirationDate={{ month: '04', year: '21' }} />,
+  children: <ExpirationDateInput {...ExpirationDateInput.args} />,
 };
 
 export const OwnerName = Template.bind({});
 OwnerName.args = {
   ...INPUT_TYPE.OWNER_NAME,
-  children: <OwnerNameInput ownerName={'ZIG'} />,
+  children: <OwnerNameInput {...OwnerNameInput.args} />,
 };
 
 export const SecureCode = Template.bind({});
@@ -42,5 +42,5 @@ SecureCode.args = {
 export const Password = Template.bind({});
 Password.args = {
   ...INPUT_TYPE.PASSWORD,
-  children: <CardPasswordInput />,
+  children: <CardPasswordInput {...CardPasswordInput.args} />,
 };

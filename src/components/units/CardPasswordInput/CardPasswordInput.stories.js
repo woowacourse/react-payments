@@ -10,4 +10,6 @@ export default {
 const Template = (args) => <CardPasswordInput {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  cardPassword: { 1: '', 2: '' },
+};

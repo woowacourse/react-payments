@@ -68,6 +68,7 @@ CardPasswordInput.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
+  cardPassword: PropTypes.object.isRequired,
   setCardPassword: PropTypes.func,
 };
 
