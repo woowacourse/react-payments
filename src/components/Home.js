@@ -1,17 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { PAGE } from "../constants";
+import { Link } from "react-router-dom";
 
 function Home(props) {
-  const { routeTo, cardList } = props;
+  const { cardList } = props;
 
   return (
     <>
       <div>
         <p>준비중입니다. - home</p>
-        <button onClick={routeTo[PAGE.CARD_ADDITION.ID]}>
-          카드 추가 하러 가기
-        </button>
+        <Link to="/CardAddition">
+          <button>카드 추가 하러 가기</button>
+        </Link>
       </div>
       <ul>
         {cardList.map(({ cardDescription, cardNumbers }) => (
@@ -23,7 +23,6 @@ function Home(props) {
 }
 
 Home.propTypes = {
-  routeTo: PropTypes.objectOf(PropTypes.func).isRequired,
   cardList: PropTypes.arrayOf(
     PropTypes.shape({
       cardType: PropTypes.shape({

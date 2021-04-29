@@ -36,6 +36,7 @@ const formatExpirationDate = (expirationDate) => {
 
 const CardAddition = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
   const [
     cardNumbers,
@@ -49,6 +50,7 @@ const CardAddition = (props) => {
   const [username, onUsernameChange] = useControlledInputValue("");
   const [secureCode, onSecureCodeChange] = useSecureCode("");
   const [password, onPasswordChange] = usePassword(["", ""]);
+
   const [inputVerification, setInputVerification] = useState({
     cardNumbers: false,
     expirationDate: false,
