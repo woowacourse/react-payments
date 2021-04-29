@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, FormEvent, MutableRefObject, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FocusEvent, FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import AddCardInputLabel from './AddCardInputLabel';
 import CreditCard from '../../shared/CreditCard';
 import CardBrandModal from '../CardBrandModal';
@@ -162,12 +162,15 @@ const AddCardForm = () => {
     alert(ALERT.CARD_SUBMIT_SUCCESS);
   };
 
-  const CardNumberInputs = [
-    { type: 'text', ref: null },
-    { type: 'text', ref: secondCardNumberInputRef },
-    { type: 'password', ref: thirdCardNumberInputRef },
-    { type: 'password', ref: fourthCardNumberInputRef },
-  ];
+  const CardNumberInputs = useMemo(
+    () => [
+      { type: 'text', ref: null },
+      { type: 'text', ref: secondCardNumberInputRef },
+      { type: 'password', ref: thirdCardNumberInputRef },
+      { type: 'password', ref: fourthCardNumberInputRef },
+    ],
+    [secondCardNumberInputRef, thirdCardNumberInputRef, fourthCardNumberInputRef]
+  );
 
   const AddCardNumberInputs = () =>
     CardNumberInputs.reduce<React.ReactNode[]>((acc, { type, ref }, index, array) => {
