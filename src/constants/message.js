@@ -1,5 +1,6 @@
 export const ALERT_MESSAGE = {
   SUCCECC_CARD_CREATE: '카드 등록에 성공했습니다.',
+  SUCCECC_CARD_UPDATE: '카드 수정에 성공했습니다.',
 };
 
 export const PLACEHOLDER = {

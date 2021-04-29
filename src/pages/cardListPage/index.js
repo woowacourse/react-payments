@@ -18,7 +18,12 @@ const buttonStyles = {
   color: '#525252',
 };
 
-const CardListPage = ({ setCurrentPage, cardList, setCardList }) => {
+const CardListPage = ({ setCurrentPage, cardList, setTargetCardId, setCardList }) => {
+  const handleCardUpdate = id => {
+    setTargetCardId(id);
+    setCurrentPage(PAGE.CARD_CREATION);
+  };
+
   const handleCardDelete = async id => {
     await cardListRef.doc(id).delete();
 
@@ -46,7 +51,7 @@ const CardListPage = ({ setCurrentPage, cardList, setCardList }) => {
             <Styled.NickName>{content.cardNickName}</Styled.NickName>
 
             <Styled.ButtonContainer>
-              <Button className="update-card" styles={buttonStyles}>
+              <Button className="update-card" styles={buttonStyles} onClick={() => handleCardUpdate(id)}>
                 수정하기
               </Button>
               <Button className="delete-card" styles={buttonStyles} onClick={() => handleCardDelete(id)}>
@@ -67,6 +72,7 @@ const CardListPage = ({ setCurrentPage, cardList, setCardList }) => {
 };
 
 CardListPage.propTypes = {
+  setTargetCardId: PropTypes.func.isRequired,
   setCurrentPage: PropTypes.func.isRequired,
   setCardList: PropTypes.func.isRequired,
 };
