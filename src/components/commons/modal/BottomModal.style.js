@@ -19,6 +19,7 @@ const Styled = {
     height: '227px',
     backgroundColor: '#FDFDFD',
     borderRadius: '5px 5px 0px 0px',
+    transform: 'translateY(227px)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

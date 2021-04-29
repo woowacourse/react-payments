@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { BottomModal } from '../modal/BottomModal';
 import Styled from './DecimalKeyboard.style';
 
 const BACKSPACE = 'backspace';
@@ -34,27 +35,26 @@ export const DecimalKeyboard = ({ closeKeyboard, setInput, maxLength }) => {
   };
 
   return (
-    <Styled.Keyboard closeKeyboard={closeKeyboard}>
-      <Styled.NumberContainer>
-        {getRandomSortingArray(TABLE_ITEMS).map((item, index) => (
-          <Styled.Number
-            type="button"
-            className={'number-item ' + (item === '' ? 'empty' : 'number')}
-            key={index}
-            data-input={item === '' ? '' : item}
-            onClick={handleClick}
-          >
-            {item}
-          </Styled.Number>
-        ))}
-        <Styled.Close type="button" onClick={closeKeyboard}>
-          닫기
-        </Styled.Close>
-        <Styled.Backspace type="button" onClick={handleClick} data-input={BACKSPACE}>
-          ⌫
-        </Styled.Backspace>
-      </Styled.NumberContainer>
-    </Styled.Keyboard>
+    <BottomModal closeModal={closeKeyboard} dimmerStyles={{ backgroundColor: 'transparent' }}>
+      <Styled.Keyboard>
+        <Styled.NumberContainer>
+          {getRandomSortingArray(TABLE_ITEMS).map((item, index) => (
+            <Styled.Number
+              type="button"
+              className={'number-item ' + (item === '' ? 'empty' : 'number')}
+              key={index}
+              data-input={item === '' ? '' : item}
+              onClick={handleClick}
+            >
+              {item}
+            </Styled.Number>
+          ))}
+          <Styled.Backspace type="button" onClick={handleClick} data-input={BACKSPACE}>
+            ⌫
+          </Styled.Backspace>
+        </Styled.NumberContainer>
+      </Styled.Keyboard>
+    </BottomModal>
   );
 };
 
