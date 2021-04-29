@@ -10,6 +10,7 @@ import Button from "../Button/Button";
 import Header from "../Header/Header";
 import BankSelector from "../BankSelector/BankSelector";
 import Dimmer from "../Dimmer/Dimmer";
+import Circle from "../Circle/Circle";
 
 const initialNumberInfos = [
   { id: "number-info-0", type: "text", value: "", minLength: "4", maxLength: "4" },
@@ -362,14 +363,10 @@ const CardAddForm = props => {
                 onChange={handlePasswordChange}
               />
               <div className="flex justify-center w-10">
-                <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="2.5" cy="2.5" r="2.5" fill="#04C09E" />
-                </svg>
+                <Circle width="5" height="5" />
               </div>
               <div className="flex justify-center w-10">
-                <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="2.5" cy="2.5" r="2.5" fill="#04C09E" />
-                </svg>
+                <Circle width="5" height="5" />
               </div>
             </div>
           </div>
