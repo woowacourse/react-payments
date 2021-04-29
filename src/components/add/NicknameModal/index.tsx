@@ -1,10 +1,10 @@
-import Modal from '../../common/Modal';
-import Input from '../../common/Input';
+import Modal from '../../shared/Modal';
+import Input from '../../shared/Input';
 import { ChangeEvent, FC, useEffect } from 'react';
 import CreditCard from '../../shared/CreditCard';
 import { CardBrand, ExpDate } from '../../../types';
 import { NicknameContainer } from './styles';
-import Button from '../../common/Button';
+import Button from '../../shared/Button';
 
 interface Props {
   nickname: string;

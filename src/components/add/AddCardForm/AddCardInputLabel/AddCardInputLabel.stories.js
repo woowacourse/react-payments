@@ -1,7 +1,7 @@
 import AddCardInputContainer from '.';
 import { GRAY } from '../../../../constants/palette';
-import Container from '../../../common/Container';
-import Input from '../../../common/Input';
+import Container from '../../../shared/Container';
+import Input from '../../../shared/Input';
 
 export default {
   component: AddCardInputContainer,

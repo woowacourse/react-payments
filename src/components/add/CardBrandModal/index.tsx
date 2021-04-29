@@ -1,5 +1,5 @@
-import Modal from '../../common/Modal';
-import { IconButton } from '../../common/Button';
+import Modal from '../../shared/Modal';
+import { IconButton } from '../../shared/Button';
 import { ButtonContainer } from './styles';
 import { FC, useEffect, useRef } from 'react';
 import { CardBrand } from '../../../types';

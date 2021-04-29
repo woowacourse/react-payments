@@ -3,9 +3,9 @@ import AddCardInputLabel from './AddCardInputLabel';
 import CreditCard from '../../shared/CreditCard';
 import CardBrandModal from '../CardBrandModal';
 import NicknameModal from '../NicknameModal';
-import Container from '../../common/Container';
-import Input from '../../common/Input';
-import Button from '../../common/Button';
+import Container from '../../shared/Container';
+import Input from '../../shared/Input';
+import Button from '../../shared/Button';
 import CARD_BRAND from '../../../constants/cardData';
 import { LABEL, PLACEHOLDER } from '../../../constants/addCardForm';
 import {

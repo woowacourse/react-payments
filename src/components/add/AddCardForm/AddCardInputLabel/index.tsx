@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import Container from '../../../common/Container';
+import Container from '../../../shared/Container';
 import { AddCardInputLabelContainer } from './styles';
 
 interface Props {

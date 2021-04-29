@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { BAEMINT, GRAY } from '../../../constants/palette';
-import Container from '../../common/Container';
+import Container from '../../shared/Container';
 
 export const AddCardFormContainer = styled.div`
   .credit-card {
