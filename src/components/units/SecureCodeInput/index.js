@@ -23,7 +23,13 @@ const SecureCodeInput = (props) => {
     <>
       <RegisterInputWrapper type={type} label={label} width={width}>
         <Style.InputWrapper>
-          <Style.PasswordInput type="password" value={secureCode} onChange={handleChangeNumbers} required />
+          <Style.PasswordInput
+            type="password"
+            aria-label="secure-code-input"
+            value={secureCode}
+            onChange={handleChangeNumbers}
+            required
+          />
           <Style.HelpMark
             src={helpSvg}
             onMouseOver={() => setCVCGuideOpen(true)}

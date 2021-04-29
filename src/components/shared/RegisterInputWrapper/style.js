@@ -15,7 +15,7 @@ const InputHeader = styled.div`
   width: ${({ width }) => width};
 `;
 
-const DefaultInputWrapper = styled.div`
+const DefaultInputWrapper = styled.fieldset`
   display: inline-flex;
   position: relative;
   justify-content: center;

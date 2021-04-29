@@ -49,6 +49,7 @@ const ExpirationDateInput = (props) => {
       <Style.InputWrapper>
         <Style.Input
           type="number"
+          aria-label="expiration-date-input-month"
           width="36px"
           placeholder="MM"
           value={expirationDate[DATE_TYPE.MONTH]}
@@ -60,6 +61,7 @@ const ExpirationDateInput = (props) => {
         <Style.Divider>/</Style.Divider>
         <Style.Input
           type="number"
+          aria-label="expiration-date-input-year"
           width="36px"
           placeholder="YY"
           value={expirationDate[DATE_TYPE.YEAR]}

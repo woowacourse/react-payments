@@ -43,6 +43,7 @@ const CardPasswordInput = (props) => {
         <Style.InputWrapper>
           <Style.PasswordInput
             type="password"
+            aria-label="password-input-1"
             value={cardPassword[FIRST]}
             data-password-idx={FIRST}
             onChange={handleChangeNumbers}
@@ -53,6 +54,7 @@ const CardPasswordInput = (props) => {
         <Style.InputWrapper>
           <Style.PasswordInput
             type="password"
+            aria-label="password-input-2"
             value={cardPassword[SECOND]}
             data-password-idx={SECOND}
             onChange={handleChangeNumbers}

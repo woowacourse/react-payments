@@ -27,7 +27,7 @@ const CardCompletion = (props) => {
           expirationDate={expirationDate}
         />
       </Style.CardWrapper>
-      <Style.AliasInput />
+      <Style.AliasInput aria-label="card-alias-input" />
       <Button text={'확인'} />
     </Style.Root>
   );
