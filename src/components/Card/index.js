@@ -10,7 +10,9 @@ export const Card = ({ size, company, numbers, owner, validDay, ...props }) => {
     <Styled.Container size={size} company={company} {...props}>
       <Styled.Inner>
         <Styled.Header size={size}>
-          <Styled.Company>{company && `${company}카드`}</Styled.Company>
+          <Styled.Company>
+            {company ? `${company}카드` : '클릭하여 카드사를 선택해주세요.'}
+          </Styled.Company>
         </Styled.Header>
         <Styled.Body>
           <Styled.IcChip />
@@ -30,7 +32,7 @@ export const Card = ({ size, company, numbers, owner, validDay, ...props }) => {
           </Styled.NumbersContainer>
         </Styled.Body>
         <Styled.Footer size={size}>
-          <Styled.Owner>{owner ? owner : 'NAME'}</Styled.Owner>
+          <Styled.Owner>{size === 'medium' && !owner ? 'NAME' : owner}</Styled.Owner>
           <Styled.ValidDay>
             {`${validDay.month ? validDay.month : 'MM'}/${validDay.year ? validDay.year : 'YY'}`}
           </Styled.ValidDay>
@@ -72,7 +74,7 @@ Card.defaultProps = {
   size: 'large',
   company: '',
   numbers: { first: '', second: '', third: '', fourth: '' },
-  owner: 'NAME',
+  owner: '',
   validDay: {
     month: 'MM',
     year: 'YY',

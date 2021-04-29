@@ -7,6 +7,7 @@ import * as Styled from './style.js';
  */
 export const Page = ({ children }) => {
   const [BodyComponent, HeaderComponent] = children;
+
   return (
     <Styled.Container>
       <Styled.Header>{HeaderComponent}</Styled.Header>
