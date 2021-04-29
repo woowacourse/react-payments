@@ -212,9 +212,9 @@ const CardAddForm = props => {
   return (
     <>
       <Header hasBackButton={true} title={"카드 추가"} />
-      <form className="w-full h-160 flex flex-col justify-center">
+      <form className="flex flex-col justify-center w-full h-160">
         <div>
-          <div className="w-full flex justify-center mb-4">
+          <div className="flex justify-center mb-4 w-full">
             <Card
               backgroundColor={backgroundColor}
               bank={bank}
@@ -225,13 +225,13 @@ const CardAddForm = props => {
               onClick={handleCardClick}
             />
           </div>
-          <div className="flex flex-col w-full mb-2">
+          <div className="flex flex-col mb-2 w-full">
             <div className="mb-2 h-6">
               <InputTitle innerText="카드 번호" />
             </div>
             <div
               className={classNames(
-                "bg-custom-gray-100 rounded-md flex justify-around items-center text-custom-mint text-lg font-medium",
+                "flex items-center justify-around text-custom-mint text-lg font-medium bg-custom-gray-100 rounded-md",
                 !(isNumberInfosValid ?? true) && "ring-2 ring-rose-400"
               )}
             >
@@ -256,7 +256,7 @@ const CardAddForm = props => {
               ))}
             </div>
           </div>
-          <div className="flex flex-col w-full mb-2">
+          <div className="flex flex-col mb-2 w-full">
             <div className="mb-2 h-6">
               <InputTitle innerText="만료일" />
             </div>
@@ -276,10 +276,10 @@ const CardAddForm = props => {
               required
             />
           </div>
-          <div className="flex flex-col w-full mb-2">
-            <div className="mb-2 h-6 flex justify-between items-center">
+          <div className="flex flex-col mb-2 w-full">
+            <div className="flex items-center justify-between mb-2 h-6">
               <InputTitle innerText="카드 소유자 이름(선택)" />
-              <span className="text-custom-gray-300 font-medium text-xs">{ownerName.length}/30</span>
+              <span className="text-custom-gray-300 text-xs font-medium">{ownerName.length}/30</span>
             </div>
             <label className="sr-only" htmlFor="owner-name-input">
               카드 소유자 이름 입력란
@@ -296,7 +296,7 @@ const CardAddForm = props => {
               maxLength="30"
             />
           </div>
-          <div className="flex flex-col w-full mb-2">
+          <div className="flex flex-col mb-2 w-full">
             <div className="mb-2 h-6">
               <InputTitle innerText="보안코드(CVC/CVV)" />
             </div>
@@ -330,8 +330,8 @@ const CardAddForm = props => {
                 />
               </svg>
               <div className={classNames("flex items-center", isToolTipVisible ? "visible" : "invisible")}>
-                <span className="w-0 h-0 border-8 border-custom-darkgray left-arrow"></span>
-                <span className="bg-custom-darkgray rounded-lg p-2 text-custom-white text-xs">
+                <span className="left-arrow w-0 h-0 border-8 border-custom-darkgray"></span>
+                <span className="p-2 text-custom-white text-xs bg-custom-darkgray rounded-lg">
                   카드 뒷면 서명란 끝의 3~4자리 숫자를 입력해주세요.
                 </span>
               </div>
@@ -364,12 +364,12 @@ const CardAddForm = props => {
                 isValid={isPasswordValid ?? true}
                 onChange={handlePasswordChange}
               />
-              <div className="w-10 flex justify-center">
+              <div className="flex justify-center w-10">
                 <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="2.5" cy="2.5" r="2.5" fill="#04C09E" />
                 </svg>
               </div>
-              <div className="w-10 flex justify-center">
+              <div className="flex justify-center w-10">
                 <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="2.5" cy="2.5" r="2.5" fill="#04C09E" />
                 </svg>
@@ -378,7 +378,7 @@ const CardAddForm = props => {
           </div>
         </div>
       </form>
-      <div className="flex justify-end items-center w-full h-10">
+      <div className="flex items-center justify-end w-full h-10">
         {[
           bank,
           backgroundColor,

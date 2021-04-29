@@ -9,15 +9,15 @@ const formatNumber = (type, value) => (type === "password" ? "*".repeat(value.le
 
 const CardInfo = props => (
   <>
-    <div className="text-xs text-custom-darkgray mb-4 h-4">{props.bank}</div>
-    <div className="w-10 h-6.5 bg-custom-gold rounded mb-2"></div>
-    <div className="flex flex-col text-custom-gray-300 items-center">
-      <div className="flex space-x-2.5 text-sm h-5">
+    <div className="mb-4 h-4 text-custom-darkgray text-xs">{props.bank}</div>
+    <div className="mb-2 w-10 h-6.5 bg-custom-gold rounded"></div>
+    <div className="flex flex-col items-center text-custom-gray-300">
+      <div className="flex h-5 text-sm space-x-2.5">
         {props.numberInfos?.map(({ id, type, value }) => (
           <span key={id}>{formatNumber(type, value)}</span>
         ))}
       </div>
-      <div className="text-sm w-11/12 flex justify-between">
+      <div className="flex justify-between w-11/12 text-sm">
         <span>{formatOwnerName(props.ownerName) || "NAME"}</span>
         <span>{props.expirationDate || "MM/YY"}</span>
       </div>

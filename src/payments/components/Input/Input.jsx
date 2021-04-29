@@ -7,7 +7,7 @@ const Input = props => {
   return (
     <input
       className={classNames(
-        "rounded-md bg-custom-gray-100 text-custom-mint h-11 placeholder-center p-3 text-lg font-medium",
+        "placeholder-center p-3 h-11 text-custom-mint text-lg font-medium bg-custom-gray-100 rounded-md",
         !isValid && "outline-none ring-2 ring-rose-400",
         className
       )}

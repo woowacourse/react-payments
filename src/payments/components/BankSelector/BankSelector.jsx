@@ -15,8 +15,8 @@ const BankSelector = props => {
   ];
 
   return (
-    <div className="flex justify-center items-center rounded-t-md bg-custom-white w-full  h-56 absolute left-0 bottom-0 z-20">
-      <div className="flex flex-wrap m-auto gap-y-6">
+    <div className="absolute z-20 bottom-0 left-0 flex items-center justify-center w-full h-56 bg-custom-white rounded-t-md">
+      <div className="flex flex-wrap gap-y-6 m-auto">
         {bankInfos.map(bankProps => (
           <Bank key={getId()} {...bankProps} onClick={props.onClick} />
         ))}
