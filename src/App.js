@@ -48,9 +48,20 @@ function App() {
   const handleCardCompany = ({ target }) => {
     const company = target.closest('li').dataset.company;
 
+    const companyColorTable = {
+      포코: 'bg-poco',
+      준: 'bg-june',
+      공원: 'bg-park',
+      로이드: 'bg-roid',
+      티케: 'bg-tyche',
+      은현: 'bg-eunhyun',
+      유조: 'bg-yujo',
+      윤호: 'bg-yunho',
+    };
+
     setCardCompany({
       name: `${company} 카드`,
-      color: `bg-${company}`,
+      color: companyColorTable[company],
     });
     setIsModalOpened(false);
   };

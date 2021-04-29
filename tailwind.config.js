@@ -1,7 +1,12 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: ['./src/**/*.{js,jsx}', './public/index.html'],
+  purge: {
+    content: ['./src/**/*.{js,jsx}', './public/index.html'],
+    options: {
+      safelist: ['bg-poco', 'bg-june', 'bg-park', 'bg-roid', 'bg-tyche', 'bg-eunhyun', 'bg-yujo', 'bg-yunho'],
+    },
+  },
   darkMode: false,
   theme: {
     extend: {
@@ -30,16 +35,17 @@ module.exports = {
       maxHeight: {
         701: '701px',
       },
+      backgroundColor: {
+        poco: '#E24141',
+        june: '#547CE4',
+        park: '#73BC6D',
+        roid: '#04C09E',
+        tyche: '#FBCD58',
+        eunhyun: '#E76E9A',
+        yujo: '#F37D3B',
+        yunho: '#DE59B9',
+      },
       colors: {
-        포코: '#E24141',
-        준: '#547CE4',
-        공원: '#73BC6D',
-        로이드: '#04C09E',
-        티케: '#FBCD58',
-        은현: '#E76E9A',
-        유조: '#F37D3B',
-        윤호: '#DE59B9',
-
         gray: {
           150: '#e5e5e5',
           250: '#ECEBF1',
