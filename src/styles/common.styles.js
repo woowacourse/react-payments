@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 // eslint-disable-next-line import/prefer-default-export
 export const ScreenContainer = styled.main`
-  max-width: 375px;
+  max-width: 420px;
   width: 100%;
   height: 100%;
   margin: 0 auto;

@@ -28,6 +28,7 @@ const Styled = {
     font-size: 16px;
     letter-spacing: -0.085em;
     font-weight: 500;
+    margin-left: ${(props) => (props.hasBackButton ? '0' : '36px')};
   `,
 };
 

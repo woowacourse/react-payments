@@ -27,12 +27,22 @@ const Styled = {
     border: none;
     border-radius: 7px;
     color: ${(props) => (getGrayScale(props.bgColor) ? '#ffffff' : props.theme.color.card)};
-    background: ${(props) => props.bgColor};
+    background-color: ${(props) => props.bgColor};
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     margin: 0 auto;
     padding: 19px;
     position: relative;
     box-sizing: border-box;
+  `,
+
+  LabelText: styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    color: ${(props) => props.theme.color.cardItem};
   `,
 
   Chip: styled.div`

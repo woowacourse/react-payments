@@ -1,5 +1,6 @@
 import Button from './Button/Button';
 import Card from './Card/Card';
+import CardAddButton from './Card/CardAddButton';
 import CardNumberInput from './CardNumberInput/CardNumberInput';
 import CardSelector from './CardSelector/CardSelector';
 import ErrorMessageBox from './ErrorMessageBox/ErrorMessageBox';
@@ -13,6 +14,7 @@ import ToolTip from './ToolTip/ToolTip';
 export {
   Button,
   Card,
+  CardAddButton,
   CardNumberInput,
   CardSelector,
   ErrorMessageBox,

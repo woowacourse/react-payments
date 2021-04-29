@@ -1,42 +1,51 @@
 import { Link } from 'react-router-dom';
-import { Card } from '../../components';
+import Styled from './CardList.styles';
+import { Card, CardAddButton, Header } from '../../components';
 import { ROUTE, LOCAL_STORAGE_KEY } from '../../constants';
 import { useLocalStorage } from '../../hooks';
+import { ScreenContainer } from '../../styles/common.styles';
 
 const CardList = () => {
   const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
 
   return (
-    <div>
-      <Link to={ROUTE.ADD}>카드 추가하기</Link>
-      <ul>
-        {cardList.value &&
-          cardList.value.map((card) => {
-            const {
-              id,
-              cardNumbers,
-              cardCompanyName,
-              cardCompanyColor,
-              ownerName,
-              expiryDate,
-              nickname,
-            } = card;
+    <ScreenContainer>
+      <Header text="보유카드" />
+      <Styled.Container>
+        <Styled.CardList>
+          {cardList.value &&
+            cardList.value.map((card) => {
+              const {
+                id,
+                cardNumbers,
+                cardCompanyName,
+                cardCompanyColor,
+                ownerName,
+                expiryDate,
+                nickname,
+              } = card;
 
-            return (
-              <li key={id}>
-                <Card
-                  bgColor={cardCompanyColor}
-                  companyName={cardCompanyName}
-                  cardNumbers={cardNumbers}
-                  ownerName={ownerName}
-                  expiryDate={expiryDate}
-                />
-                카드 별칭 : {nickname}
-              </li>
-            );
-          })}
-      </ul>
-    </div>
+              return (
+                <Styled.CardItem key={id}>
+                  <Card
+                    bgColor={cardCompanyColor}
+                    companyName={cardCompanyName}
+                    cardNumbers={cardNumbers}
+                    ownerName={ownerName}
+                    expiryDate={expiryDate}
+                  />
+                  <Styled.CardNickName>{nickname}</Styled.CardNickName>
+                </Styled.CardItem>
+              );
+            })}
+          <Styled.CardItem>
+            <Link to={ROUTE.ADD}>
+              <CardAddButton />
+            </Link>
+          </Styled.CardItem>
+        </Styled.CardList>
+      </Styled.Container>
+    </ScreenContainer>
   );
 };
 
