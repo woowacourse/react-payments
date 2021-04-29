@@ -4,7 +4,7 @@ import INPUT_TYPE from '../../../constants/inputType';
 import * as Style from './style';
 
 const RegisterInputWrapper = (props) => {
-  const { type, width, label, currentNameLength, children } = props;
+  const { type, label, width, currentNameLength, children } = props;
 
   const isOwnerName = type === INPUT_TYPE.OWNER_NAME.type;
   const wordCount = <Style.WordCount>{`${currentNameLength}/30`}</Style.WordCount>;
@@ -26,9 +26,9 @@ const RegisterInputWrapper = (props) => {
 RegisterInputWrapper.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  width: PropTypes.string,
+  width: PropTypes.string.isRequired,
   currentNameLength: PropTypes.number,
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
 
 export default RegisterInputWrapper;

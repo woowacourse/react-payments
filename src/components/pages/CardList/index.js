@@ -13,9 +13,9 @@ const CardList = (props) => {
             backgroundColor={card.color}
             width="208px"
             height="130px"
-            owner={card.owner}
-            numbers={card.numbers}
+            cardNumbers={card.numbers}
             expirationDate={card.expirationDate}
+            ownerName={card.owner}
           />
           <Style.CardAlias>{card.alias}</Style.CardAlias>
         </Style.CardWrapper>

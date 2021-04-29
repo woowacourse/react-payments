@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import backButtonSvg from '../../assets/backbutton.svg';
 import * as Style from './style';
 
@@ -14,6 +15,12 @@ const PageHost = (props) => {
       <div>{children}</div>
     </Style.Root>
   );
+};
+
+PageHost.propTypes = {
+  navigationTitle: PropTypes.string.isRequired,
+  hasBackButton: PropTypes.bool.isRequired,
+  children: PropTypes.string.isRequired,
 };
 
 export default PageHost;

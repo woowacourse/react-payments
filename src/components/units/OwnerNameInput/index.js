@@ -46,8 +46,8 @@ OwnerNameInput.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
-  ownerName: PropTypes.string,
-  setOwnerName: PropTypes.func,
+  ownerName: PropTypes.string.isRequired,
+  setOwnerName: PropTypes.func.isRequired,
 };
 
 export default OwnerNameInput;

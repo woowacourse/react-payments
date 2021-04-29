@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
 import helpSvg from '../../../assets/cvc-help.svg';
 import CVCGuideImg from '../../../assets/cvc_guide.png';
 import * as Style from './style';
 
 const SecureCodeInput = (props) => {
-  const { type, label, secureCode, setSecureCode } = props;
+  const { type, label, width, secureCode, setSecureCode } = props;
   const [isCVCGuideOpen, setCVCGuideOpen] = useState(false);
 
   const isOverLength = (value) => value.length > 3;
@@ -20,7 +21,7 @@ const SecureCodeInput = (props) => {
 
   return (
     <>
-      <RegisterInputWrapper type={type} label={label}>
+      <RegisterInputWrapper type={type} label={label} width={width}>
         <Style.InputWrapper>
           <Style.PasswordInput type="password" value={secureCode} onChange={handleChangeNumbers} required />
           <Style.HelpMark
@@ -33,6 +34,14 @@ const SecureCodeInput = (props) => {
       </RegisterInputWrapper>
     </>
   );
+};
+
+SecureCodeInput.propTypes = {
+  type: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
+  secureCode: PropTypes.func.isRequired,
+  setSecureCode: PropTypes.func.isRequired,
 };
 
 export default SecureCodeInput;

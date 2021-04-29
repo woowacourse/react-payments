@@ -37,7 +37,7 @@ const CardPasswordInput = (props) => {
 
   return (
     <>
-      <RegisterInputWrapper type={type} label={label} width={width} inputCount={2}>
+      <RegisterInputWrapper type={type} label={label} width={width}>
         <Style.InputWrapper>
           <Style.PasswordInput
             type="password"
@@ -69,7 +69,7 @@ CardPasswordInput.propTypes = {
   label: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
   cardPassword: PropTypes.object.isRequired,
-  setCardPassword: PropTypes.func,
+  setCardPassword: PropTypes.func.isRequired,
 };
 
 export default CardPasswordInput;

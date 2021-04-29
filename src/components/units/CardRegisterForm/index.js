@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CardNumbersInput from '../../units/CardNumbersInput';
 import ExpirationDateInput from '../../units/ExpirationDateInput';
 import OwnerNameInput from '../../units/OwnerNameInput';
@@ -32,6 +33,20 @@ const CardRegisterForm = (props) => {
       <CardPasswordInput {...PASSWORD} cardPassword={cardPassword} setCardPassword={setCardPassword} />
     </Style.Root>
   );
+};
+
+CardRegisterForm.propTypes = {
+  cardNumbers: PropTypes.object.isRequired,
+  expirationDate: PropTypes.object.isRequired,
+  ownerName: PropTypes.string.isRequired,
+  secureCode: PropTypes.string.isRequired,
+  cardPassword: PropTypes.object.isRequired,
+  setCardNumbers: PropTypes.func.isRequired,
+  setExpirationDate: PropTypes.func.isRequired,
+  setOwnerName: PropTypes.func.isRequired,
+  setSecureCode: PropTypes.func.isRequired,
+  setCardPassword: PropTypes.func.isRequired,
+  onSubmitForm: PropTypes.func.isRequired,
 };
 
 export default CardRegisterForm;

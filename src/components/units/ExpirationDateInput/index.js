@@ -76,8 +76,8 @@ ExpirationDateInput.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
-  expirationDate: PropTypes.object,
-  setExpirationDate: PropTypes.func,
+  expirationDate: PropTypes.object.isRequired,
+  setExpirationDate: PropTypes.func.isRequired,
 };
 
 export default ExpirationDateInput;

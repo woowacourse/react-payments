@@ -13,9 +13,9 @@ const CardColorOption = (props) => {
   );
 };
 
-export default CardColorOption;
-
 CardColorOption.propTypes = {
   onClickOption: PropTypes.func.isRequired,
   bankId: PropTypes.string.isRequired,
 };
+
+export default CardColorOption;

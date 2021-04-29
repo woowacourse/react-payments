@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Card from '../../shared/Card';
+import Button from '../../shared/Button';
 import CardRegisterForm from '../../units/CardRegisterForm';
 import CardSelector from '../../units/CardSelector';
-import Button from '../../shared/Button';
 import PALETTE from '../../../styles/palette';
 import { dummyBanks } from '../../../mockData';
 import * as Style from './style';
@@ -75,6 +76,11 @@ const CardRegister = (props) => {
       {isSelectorOpened && <CardSelector setBankId={setBankId} setSelectorOpened={setSelectorOpened} />}
     </>
   );
+};
+
+CardRegister.propTypes = {
+  setCardData: PropTypes.func.isRequired,
+  handleGoNext: PropTypes.func.isRequired,
 };
 
 export default CardRegister;
