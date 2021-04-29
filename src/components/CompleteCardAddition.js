@@ -1,8 +1,7 @@
 import React, { useState } from "react";
+import { CARD_SIZE } from "./common/constants/card";
 import PropTypes from "prop-types";
-import Card from "../stories/Card";
-import Button from "../stories/Button";
-import { CARD_SIZE } from "../stories/constants/card";
+import { Card, Button } from "./common";
 import { CARD_DESCRIPTION, FORMAT_CHAR } from "../constants";
 
 function CompleteCardAddition(props) {

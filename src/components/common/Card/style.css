@@ -1,0 +1,136 @@
+.card {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+
+  box-shadow: 3px 3px 4px 0.5px rgba(0, 0, 0, 0.2);
+}
+
+.card:before {
+  display: block;
+  content: "";
+  padding-top: 62.5%;
+}
+
+.card--large {
+  width: 78%;
+}
+
+.card--medium {
+  width: 56.8%;
+}
+.card--small {
+  width: 55.47%;
+}
+
+.card__inner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.card__inner-card-name {
+  position: absolute;
+  font-size: 0.9rem;
+  color: #383838;
+  top: 9%;
+  left: 6.25%;
+}
+
+.card__inner-chip {
+  width: 18.75%;
+  height: 19.5%;
+  background-color: #cbba64;
+  border-radius: 5px;
+
+  position: absolute;
+  top: 35%;
+  left: 6.25%;
+}
+
+.card__inner ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+
+  position: absolute;
+  top: 50%;
+  left: 9%;
+  right: 9%;
+}
+
+.card__inner ul li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.2rem;
+}
+
+.dot {
+  display: inline-block;
+  width: 0.4em;
+  margin-right: 0.3rem;
+}
+
+.dot:before {
+  display: block;
+  content: "";
+  padding-top: 100%;
+  background-color: #616161;
+  border-radius: 50%;
+}
+
+.card__inner-bottom {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 7.22%;
+  left: 6.25%;
+  right: 6.25%;
+}
+
+.card__inner-bottom-username {
+  position: absolute;
+  left: 0;
+  right: 60%;
+  bottom: 10%;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card__inner-bottom-expiration-date {
+  position: absolute;
+  right: 0;
+  bottom: 10%;
+}
+
+/* font size for parent */
+.font-small {
+  font-size: min(2.3vw, 0.9rem);
+}
+
+.font-medium {
+  font-size: min(2.6vw, 1rem);
+}
+
+.font-large {
+  font-size: min(3.6vw, 1.3rem);
+}
+
+/* child size */
+.font-s {
+  font-size: 1em;
+}
+
+.font-m {
+  font-size: 1.1em;
+}
+
+.font-l {
+  font-size: 1.2em;
+}

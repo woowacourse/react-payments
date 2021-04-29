@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { PAGE } from "../constants";
-import Header from "../stories/Header";
+import { Header } from "./common";
 import CardAddition from "./CardAddition";
 import CompleteCardAddition from "./CompleteCardAddition";
 import Home from "./Home";

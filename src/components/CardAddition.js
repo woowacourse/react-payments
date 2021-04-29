@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import Card from "../stories/Card";
-import { CARD, CARD_SIZE } from "../stories/constants/card";
-import Input from "../stories/Input";
-import Modal from "../stories/Modal";
-import CardTypeRadio from "../stories/CardTypeRadio";
-import Button from "../stories/Button";
-import useCardNumbers from "../hooks/useCardNumbers";
-import useExpirationDate from "../hooks/useExpirationDate";
-import useSecureCode from "../hooks/useSecureCode";
-import useControlledInputValue from "../hooks/useControlledInputValue";
-import usePassword from "../hooks/usePassword";
+import { CARD, CARD_SIZE } from "./common/constants/card";
+import { Card, Input, Modal, CardTypeRadio, Button } from "./common";
+import {
+  useCardNumbers,
+  useExpirationDate,
+  useSecureCode,
+  useControlledInputValue,
+  usePassword,
+} from "../hooks";
 import {
   CARD_NUMBER,
   EXPIRATION_DATE,
