@@ -1,6 +1,6 @@
 import { LOCALE } from '../constants/i18n';
 
-export const formatNumber2Digits = (number: number) =>
+export const formatNumberNDigits = (number: number, digits: number) =>
   number.toLocaleString(LOCALE.KR, {
-    minimumIntegerDigits: 2,
+    minimumIntegerDigits: digits,
   });
