@@ -23,7 +23,10 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
     if (isValidInput(securityCode)) {
       setValidSecurityCode(true);
       setKeyboardOpen(false);
+
+      return;
     }
+    setValidSecurityCode(false);
   }, [setValidSecurityCode, securityCode]);
 
   const handleSecurityInputFocus = () => {
