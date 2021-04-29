@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ModalComponent from '../components/Modal/Modal';
 
@@ -13,18 +13,19 @@ export default (defaultValue = false) => {
 
   const toggleModal = useCallback(() => setModalOpened((state) => !state), []);
 
-  const Modal = useCallback(
-    ({ children, ...props }) => {
-      if (!isModalOpened) return null;
+  useEffect(() => {
+    if (isModalOpened) modalRef.current?.focus();
+  }, [isModalOpened]);
 
-      return (
-        <ModalComponent ref={modalRef} onClose={closeModal} {...props}>
-          {children}
-        </ModalComponent>
-      );
-    },
-    [closeModal, isModalOpened]
-  );
+  const Modal = ({ children, ...props }) => {
+    if (!isModalOpened) return null;
+
+    return (
+      <ModalComponent isOpened={isModalOpened} ref={modalRef} onClose={closeModal} {...props}>
+        {children}
+      </ModalComponent>
+    );
+  };
 
   Modal.propTypes = {
     children: PropTypes.node,

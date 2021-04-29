@@ -11,6 +11,7 @@ const Styled = {
     max-width: ${(props) => (props.mobile ? '375px' : 'auto')};
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
+    visibility: ${(props) => (props.isOpened ? 'visible' : 'hidden')};
   `,
   Container: styled.div`
     background-color: #fdfdfd;
@@ -24,6 +25,7 @@ const Styled = {
     min-height: 100px;
     padding: 34px;
     box-sizing: border-box;
+    outline: none;
   `,
 };
 

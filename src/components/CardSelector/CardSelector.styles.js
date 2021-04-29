@@ -1,15 +1,17 @@
 import styled from '@emotion/styled';
 
 const Styled = {
-  Container: styled.div`
+  Container: styled.button`
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    padding: 18px;
+    padding: 16px;
     transition: background-color 0.3s ease;
     border-radius: 10px;
     cursor: pointer;
     text-align: center;
+    background: none;
+    border: none;
 
     &:hover,
     &:active {

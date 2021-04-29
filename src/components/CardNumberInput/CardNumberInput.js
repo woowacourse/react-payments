@@ -6,7 +6,7 @@ import Styled from './CardNumberInput.styles';
 import REGEX from '../../constants/regex';
 
 const CardNumberInput = forwardRef(
-  ({ values, onChange, labelText, maskedInputFlags, errorMessage, isError }, ref) => (
+  ({ values, onChange, onFocus, labelText, maskedInputFlags, errorMessage, isError }, ref) => (
     <Styled.Container isError={isError}>
       <Styled.Header>
         <span>{labelText}</span>
@@ -22,6 +22,7 @@ const CardNumberInput = forwardRef(
               type={maskedInputFlags[index] ? 'password' : 'text'}
               maxLength="4"
               textAlign="center"
+              onFocus={onFocus}
               onChange={onChange}
               value={value}
               pattern={REGEX.NUMBER_WITH_LENGTH(4).source}
@@ -48,6 +49,7 @@ CardNumberInput.propTypes = {
   isError: PropTypes.bool,
   errorMessage: PropTypes.string,
   onChange: PropTypes.func,
+  onFocus: PropTypes.func,
 };
 
 CardNumberInput.defaultProps = {
@@ -57,6 +59,7 @@ CardNumberInput.defaultProps = {
   isError: false,
   errorMessage: '',
   onChange: () => {},
+  onFocus: () => {},
 };
 
 export default CardNumberInput;
