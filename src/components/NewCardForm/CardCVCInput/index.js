@@ -8,6 +8,7 @@ const CardCVCInput = ({
   errorMessage,
   onChangeCardInput,
   handleModalOpen,
+  cardFormValidation,
 }) => {
   return (
     <CardCVCInputWrapper>
@@ -20,6 +21,7 @@ const CardCVCInput = ({
           maxLength='3'
           value={cvc}
           onChange={onChangeCardInput}
+          onBlur={cardFormValidation}
           required
         />
         <div className='help' onClick={() => handleModalOpen('cvcHelp')}>
@@ -36,6 +38,7 @@ CardCVCInput.propTypes = {
   errorMessage: PropTypes.string,
   onChangeCardInput: PropTypes.func,
   handleModalOpen: PropTypes.func,
+  cardFormValidation: PropTypes.func,
 };
 
 export default CardCVCInput;

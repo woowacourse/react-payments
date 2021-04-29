@@ -7,6 +7,7 @@ const CardNumberInput = ({
   numbers,
   errorMessage,
   onChangeCardInputObject,
+  cardFormValidation,
 }) => {
   return (
     <CardNumberInputWrapper>
@@ -18,6 +19,7 @@ const CardNumberInput = ({
           data-detail='first'
           value={numbers.first}
           onChange={onChangeCardInputObject}
+          onBlur={cardFormValidation}
           minLength='4'
           maxLength='4'
           required
@@ -31,6 +33,7 @@ const CardNumberInput = ({
           data-detail='second'
           value={numbers.second}
           onChange={onChangeCardInputObject}
+          onBlur={cardFormValidation}
           minLength='4'
           maxLength='4'
           required
@@ -44,6 +47,7 @@ const CardNumberInput = ({
           data-detail='third'
           value={numbers.third}
           onChange={onChangeCardInputObject}
+          onBlur={cardFormValidation}
           minLength='4'
           maxLength='4'
           required
@@ -57,6 +61,7 @@ const CardNumberInput = ({
           data-detail='fourth'
           value={numbers.fourth}
           onChange={onChangeCardInputObject}
+          onBlur={cardFormValidation}
           minLength='4'
           maxLength='4'
           required
@@ -76,5 +81,6 @@ CardNumberInput.propTypes = {
   }),
   errorMessage: PropTypes.string,
   onChangeCardInputObject: PropTypes.func,
+  cardFormValidation: PropTypes.func,
 };
 export default CardNumberInput;

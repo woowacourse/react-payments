@@ -7,6 +7,7 @@ const CardPasswordInput = ({
   password,
   errorMessage,
   onChangeCardInputObject,
+  cardFormValidation,
 }) => {
   return (
     <CardPasswordInputWrapper>
@@ -23,6 +24,7 @@ const CardPasswordInput = ({
             name='password'
             data-detail={key}
             onChange={onChangeCardInputObject}
+            onBlur={cardFormValidation}
             required
           />
         ))}
@@ -42,6 +44,7 @@ CardPasswordInput.propTypes = {
   }),
   errorMessage: PropTypes.string,
   onChangeCardInputObject: PropTypes.func,
+  cardFormValidation: PropTypes.func,
 };
 
 export default CardPasswordInput;
