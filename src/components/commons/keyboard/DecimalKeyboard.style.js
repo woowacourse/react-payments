@@ -13,7 +13,7 @@ const Styled = {
     justify-content: center;
     align-items: center;
     z-index: 2;
-    border-top: 1px solid;
+    border: 1px solid;
   `,
   NumberContainer: styled.div`
     display: grid;
@@ -25,7 +25,7 @@ const Styled = {
       '. . . .'
       '. . . .'
       '. . . .'
-      '. . backspace backspace';
+      'close close backspace backspace';
 
     & > .number-item:not(:nth-child(4n-3)) {
       border-left: 1px solid;
@@ -44,7 +44,18 @@ const Styled = {
       cursor: pointer;
     }
     &.number:active {
-      background-color: ${() => COLOR.LIGHT_GRAY};
+      background-color: ${COLOR.LIGHT_GRAY};
+    }
+  `,
+  Close: styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    grid-area: close;
+    cursor: pointer;
+    &:active {
+      background-color: ${COLOR.LIGHT_GRAY};
     }
   `,
   Backspace: styled.button`
@@ -56,7 +67,7 @@ const Styled = {
     grid-area: backspace;
     cursor: pointer;
     &:active {
-      background-color: ${() => COLOR.LIGHT_GRAY};
+      background-color: ${COLOR.LIGHT_GRAY};
     }
   `,
 };

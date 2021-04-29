@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Styled from './DecimalKeyboard.style';
 
 const BACKSPACE = 'backspace';
@@ -10,7 +11,7 @@ const getRandomSortingArray = arr => {
   return [...arr].sort(() => Math.random() - Math.random());
 };
 
-export const DecimalKeyboard = ({ closeKeyboard, setInput }) => {
+export const DecimalKeyboard = ({ closeKeyboard, setInput, maxLength }) => {
   const handleClick = ({ target }) => {
     const input = target.dataset.input;
     if (!input) return;
@@ -22,7 +23,13 @@ export const DecimalKeyboard = ({ closeKeyboard, setInput }) => {
     }
 
     if (NUMBERS.some(number => number === Number(input))) {
-      setInput(prevState => prevState + input);
+      setInput(prevState => {
+        if (prevState.length < maxLength) {
+          return prevState + input;
+        }
+
+        return prevState;
+      });
     }
   };
 
@@ -40,10 +47,23 @@ export const DecimalKeyboard = ({ closeKeyboard, setInput }) => {
             {item}
           </Styled.Number>
         ))}
+        <Styled.Close type="button" onClick={closeKeyboard}>
+          닫기
+        </Styled.Close>
         <Styled.Backspace type="button" onClick={handleClick} data-input={BACKSPACE}>
           ⌫
         </Styled.Backspace>
       </Styled.NumberContainer>
     </Styled.Keyboard>
   );
+};
+
+DecimalKeyboard.propTypes = {
+  closeKeyboard: PropTypes.func,
+  setInput: PropTypes.func,
+  maxLength: PropTypes.number,
+};
+
+DecimalKeyboard.defaultProps = {
+  maxLength: 100,
 };

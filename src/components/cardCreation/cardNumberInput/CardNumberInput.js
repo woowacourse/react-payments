@@ -3,6 +3,7 @@ import { memo, useRef, useEffect, useState } from 'react';
 import { COLOR } from '../../../constants/color';
 import { CARD_INPUT } from '../../../constants/standard';
 import { TransparentInput } from '../../commons/input/TransparentInput';
+import { DecimalKeyboard } from '../../commons/keyboard/DecimalKeyboard';
 import CardSelectionModal from '../cardSelectionModal/CardSelectionModal';
 import Styled from './CardNumberInput.style';
 
@@ -42,6 +43,9 @@ const isValidCardNumberInput = cardNumber => {
 const CardNumberInput = memo(
   ({ cardNumber, selectedCardInfo, setCardNumber, isValidCardNumber, setValidCardNumber, setSelectedCardInfo }) => {
     const [isModalOpened, setModalOpen] = useState(false);
+    const [isKeyboardOpened, setKeyboardOpen] = useState(false);
+    const [input2, setInput2] = useState(''); // 보안 숫자 입력
+    const [input3, setInput3] = useState(''); // 보안 숫자 입력
 
     const $input1 = useRef(null);
     const $input2 = useRef(null);
@@ -61,7 +65,24 @@ const CardNumberInput = memo(
       }
     }, [hasSelectedCardInfo]);
 
-    const handleInputChange = ({ target }) => {
+    useEffect(() => {
+      setCardNumber(prevState => ({ ...prevState, 2: input2 }));
+
+      if (isInputFilledUp(input2)) {
+        $input3.current.disabled = false;
+        isInputFilledUp($input3.current.value) ? setKeyboardOpen(false) : $input3.current.focus();
+      }
+    }, [input2, setCardNumber]);
+
+    useEffect(() => {
+      setCardNumber(prevState => ({ ...prevState, 3: input3 }));
+
+      if (isInputFilledUp(input3)) {
+        setKeyboardOpen(false);
+      }
+    }, [input3, setCardNumber]);
+
+    const handleNormalInputChange = ({ target }) => {
       if (target.value.length > CARD_INPUT.NUMBER_UNIT_LENGTH) return;
 
       setCardNumber(prevState => ({ ...prevState, [target.name]: target.value }));
@@ -79,16 +100,27 @@ const CardNumberInput = memo(
 
         return;
       }
-
-      if (target.name === '2' && isInputFilledUp(target.value)) {
-        $input3.current.disabled = false;
-        $input3.current.focus();
-      }
     };
 
     const handleInputClick = () => {
       if (isInputFilledUp(cardNumber['0']) && isInputFilledUp(cardNumber['1']) && !hasSelectedCardInfo) {
         setModalOpen(true);
+      }
+    };
+
+    const handleSecurityInputFocus = ({ target }) => {
+      setKeyboardOpen(true);
+
+      if (target.name === '2') {
+        setInput2('');
+
+        return;
+      }
+
+      if (target.name === '3') {
+        setInput3('');
+
+        return;
       }
     };
 
@@ -104,7 +136,7 @@ const CardNumberInput = memo(
               max="9999"
               inputmode="numeric"
               value={cardNumber['0']}
-              onChange={handleInputChange}
+              onChange={handleNormalInputChange}
               styles={transparentInputStyles['0']}
               autoFocus
             />
@@ -116,7 +148,7 @@ const CardNumberInput = memo(
               max="9999"
               inputmode="numeric"
               value={cardNumber['1']}
-              onChange={handleInputChange}
+              onChange={handleNormalInputChange}
               innerRef={$input1}
               styles={transparentInputStyles['1']}
               disabled
@@ -128,9 +160,9 @@ const CardNumberInput = memo(
               inputmode="none"
               minLength={CARD_INPUT.NUMBER_UNIT_LENGTH}
               maxLength={CARD_INPUT.NUMBER_UNIT_LENGTH}
-              value={cardNumber['2']}
-              onChange={handleInputChange}
+              value={input2}
               innerRef={$input2}
+              onFocus={handleSecurityInputFocus}
               styles={transparentInputStyles['2']}
               disabled
             />
@@ -141,9 +173,9 @@ const CardNumberInput = memo(
               inputmode="none"
               minLength={CARD_INPUT.NUMBER_UNIT_LENGTH}
               maxLength={CARD_INPUT.NUMBER_UNIT_LENGTH}
-              value={cardNumber['3']}
-              onChange={handleInputChange}
+              value={input3}
               innerRef={$input3}
+              onFocus={handleSecurityInputFocus}
               styles={transparentInputStyles['3']}
               disabled
             />
@@ -151,6 +183,13 @@ const CardNumberInput = memo(
         </div>
         {isModalOpened && (
           <CardSelectionModal closeModal={() => setModalOpen(false)} setSelectedCardInfo={setSelectedCardInfo} />
+        )}
+        {isKeyboardOpened && (
+          <DecimalKeyboard
+            closeKeyboard={() => setKeyboardOpen(false)}
+            setInput={isInputFilledUp(input2) ? setInput3 : setInput2}
+            maxLength={CARD_INPUT.NUMBER_UNIT_LENGTH}
+          />
         )}
       </>
     );
