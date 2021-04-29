@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import { memo, useRef, useEffect } from 'react';
+import { memo, useRef, useEffect, useState } from 'react';
 import { COLOR } from '../../../constants/color';
 import { FIRST, SECOND } from '../../../constants/inputName';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardPasswordInput.style';
 import { Circle } from '../../commons/circle/Circle';
 import { printColorBasedOnBoolean } from '../../../utils/printColor';
-import { NUMBER_REG_EXR } from '../../../constants/regExp';
+import VirtualKeyboard from '../virtualKeyboard/VirtualKeyboard';
 
 const FULL_INPUT_LENGTH = 1;
 const transparentInputStyles = {
@@ -15,62 +15,75 @@ const transparentInputStyles = {
   textAlign: 'center',
 };
 
-const isValidInput = cardPassword => {
-  return Object.values(cardPassword).every(cardPassword => cardPassword.length === FULL_INPUT_LENGTH);
-};
-
 const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
+  const [isModalOpened, setModalOpen] = useState(false);
+  const [currentInputName, setCurrentInputName] = useState(null);
   const $secondInput = useRef(null);
 
   useEffect(() => {
-    setValidCardPassword(isValidInput(cardPassword));
-  }, [setValidCardPassword, cardPassword]);
+    const isValidInput = Object.values(cardPassword).every(cardPassword => cardPassword.length === FULL_INPUT_LENGTH);
+    setValidCardPassword(isValidInput);
+    isValidInput && setModalOpen(false);
 
-  const handleInputChange = ({ target }) => {
-    if (target.value.length > FULL_INPUT_LENGTH || !NUMBER_REG_EXR.test(target.value)) return;
-
-    setCardPassword(prevState => ({ ...prevState, [target.name]: target.value }));
-
-    if (target.name === FIRST && target.value.length === FULL_INPUT_LENGTH) {
+    if (currentInputName === FIRST && cardPassword[FIRST].length === FULL_INPUT_LENGTH) {
       $secondInput.current.focus();
     }
+  }, [setValidCardPassword, currentInputName, cardPassword]);
+
+  const handleInputFocus = ({ target }) => {
+    setCurrentInputName(target.name);
+    setCardPassword(prevState => ({ ...prevState, [target.name]: '' }));
+    setModalOpen(true);
   };
 
   return (
-    <div>
-      <Styled.InputLabelContainer>카드 비밀번호 {isValidCardPassword && '✔️'}</Styled.InputLabelContainer>
-      <Styled.Container>
-        <Styled.InputContainer validColor={cardPassword[FIRST] && printColorBasedOnBoolean(true)}>
-          <TransparentInput
-            name={FIRST}
-            minLength={FULL_INPUT_LENGTH}
-            maxLength={FULL_INPUT_LENGTH}
-            type="password"
-            value={cardPassword[FIRST]}
-            onChange={handleInputChange}
-            styles={transparentInputStyles}
-          />
-        </Styled.InputContainer>
-        <Styled.InputContainer validColor={cardPassword[SECOND] && printColorBasedOnBoolean(true)}>
-          <TransparentInput
-            name={SECOND}
-            minLength={FULL_INPUT_LENGTH}
-            maxLength={FULL_INPUT_LENGTH}
-            type="password"
-            innerRef={$secondInput}
-            value={cardPassword[SECOND]}
-            onChange={handleInputChange}
-            styles={transparentInputStyles}
-          />
-        </Styled.InputContainer>
-        <Styled.CircleContainer>
-          <Circle styles={{ backgroundColor: COLOR.MINT_500 }} />
-        </Styled.CircleContainer>
-        <Styled.CircleContainer>
-          <Circle styles={{ backgroundColor: COLOR.MINT_500 }} />
-        </Styled.CircleContainer>
-      </Styled.Container>
-    </div>
+    <>
+      <div>
+        <Styled.InputLabelContainer>카드 비밀번호 {isValidCardPassword && '✔️'}</Styled.InputLabelContainer>
+        <Styled.Container>
+          <Styled.InputContainer validColor={cardPassword[FIRST] && printColorBasedOnBoolean(true)}>
+            <TransparentInput
+              name={FIRST}
+              minLength={FULL_INPUT_LENGTH}
+              maxLength={FULL_INPUT_LENGTH}
+              type="password"
+              value={cardPassword[FIRST]}
+              onFocus={handleInputFocus}
+              styles={transparentInputStyles}
+              readOnly
+            />
+          </Styled.InputContainer>
+          <Styled.InputContainer validColor={cardPassword[SECOND] && printColorBasedOnBoolean(true)}>
+            <TransparentInput
+              name={SECOND}
+              minLength={FULL_INPUT_LENGTH}
+              maxLength={FULL_INPUT_LENGTH}
+              type="password"
+              innerRef={$secondInput}
+              value={cardPassword[SECOND]}
+              onFocus={handleInputFocus}
+              styles={transparentInputStyles}
+              readOnly
+            />
+          </Styled.InputContainer>
+          <Styled.CircleContainer>
+            <Circle styles={{ backgroundColor: COLOR.MINT_500 }} />
+          </Styled.CircleContainer>
+          <Styled.CircleContainer>
+            <Circle styles={{ backgroundColor: COLOR.MINT_500 }} />
+          </Styled.CircleContainer>
+        </Styled.Container>
+      </div>
+      {isModalOpened && (
+        <VirtualKeyboard
+          closeModal={() => setModalOpen(false)}
+          currentInputName={currentInputName}
+          inputValue={cardPassword}
+          setInputValue={setCardPassword}
+          maxLength={FULL_INPUT_LENGTH}
+        />
+      )}
+    </>
   );
 });
 
