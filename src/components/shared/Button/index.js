@@ -3,9 +3,13 @@ import PropTypes from 'prop-types';
 import * as Style from './style';
 
 const Button = (props) => {
-  const { text, onClickButton } = props;
+  const { text, formId } = props;
 
-  return <Style.Root onClick={onClickButton}>{text}</Style.Root>;
+  return (
+    <Style.Root type="submit" form={formId}>
+      {text}
+    </Style.Root>
+  );
 };
 
 Button.propTypes = {

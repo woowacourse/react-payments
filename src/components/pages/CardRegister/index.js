@@ -19,7 +19,9 @@ const CardRegister = (props) => {
   const [secureCode, setSecureCode] = useState('');
   const [cardPassword, setCardPassword] = useState({ 1: '', 2: '' });
 
-  const handleClickNextPage = () => {
+  const handleCompleteRegister = (event) => {
+    event.preventDefault();
+
     setCardData({ bankId, cardNumbers, expirationDate, ownerName, secureCode, cardPassword });
     handleGoNext();
   };
@@ -56,16 +58,19 @@ const CardRegister = (props) => {
           />
         </Style.CardWrapper>
         <CardRegisterForm
+          cardNumbers={cardNumbers}
           expirationDate={expirationDate}
           ownerName={ownerName}
+          secureCode={secureCode}
+          cardPassword={cardPassword}
           setCardNumbers={setCardNumbers}
           setExpirationDate={setExpirationDate}
           setOwnerName={setOwnerName}
-          secureCode={secureCode}
           setSecureCode={setSecureCode}
           setCardPassword={setCardPassword}
+          onSubmitForm={handleCompleteRegister}
         />
-        <Button text={'다음'} onClickButton={handleClickNextPage} />
+        <Button text={'다음'} formId="register-form" />
       </Style.Root>
       {isSelectorOpened && <CardSelector setBankId={setBankId} setSelectorOpened={setSelectorOpened} />}
     </>

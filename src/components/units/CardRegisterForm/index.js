@@ -10,23 +10,26 @@ import * as Style from './style';
 const CardRegisterForm = (props) => {
   const { CARD_NUMBERS, EXPIRATION_DATE, OWNER_NAME, SECURE_CODE, PASSWORD } = INPUT_TYPE;
   const {
+    cardNumbers,
     expirationDate,
     ownerName,
+    secureCode,
+    cardPassword,
     setCardNumbers,
     setExpirationDate,
     setOwnerName,
-    secureCode,
     setSecureCode,
     setCardPassword,
+    onSubmitForm,
   } = props;
 
   return (
-    <Style.Root>
-      <CardNumbersInput {...CARD_NUMBERS} setCardNumbers={setCardNumbers} />
+    <Style.Root id="register-form" onSubmit={onSubmitForm}>
+      <CardNumbersInput {...CARD_NUMBERS} cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
       <ExpirationDateInput {...EXPIRATION_DATE} expirationDate={expirationDate} setExpirationDate={setExpirationDate} />
       <OwnerNameInput {...OWNER_NAME} ownerName={ownerName} setOwnerName={setOwnerName} />
       <SecureCodeInput {...SECURE_CODE} secureCode={secureCode} setSecureCode={setSecureCode} />
-      <CardPasswordInput {...PASSWORD} setCardPassword={setCardPassword} />
+      <CardPasswordInput {...PASSWORD} cardPassword={cardPassword} setCardPassword={setCardPassword} />
     </Style.Root>
   );
 };

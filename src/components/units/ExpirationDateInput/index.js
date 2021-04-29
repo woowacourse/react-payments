@@ -39,7 +39,6 @@ const ExpirationDateInput = (props) => {
     setExpirationDate((prevDate) => ({ ...prevDate, [dateType]: value }));
   };
 
-  // TODO: month에 1자리수 입력 시 padStart로 0 부여
   const moveFocusToYearInput = () => {
     yearInput.current.focus();
   };
@@ -55,6 +54,7 @@ const ExpirationDateInput = (props) => {
           data-date-type="month"
           onChange={handleChangeDate}
           ref={monthInput}
+          required
         />
         <Style.Divider>/</Style.Divider>
         <Style.Input
@@ -65,6 +65,7 @@ const ExpirationDateInput = (props) => {
           data-date-type="year"
           onChange={handleChangeDate}
           ref={yearInput}
+          required
         />
       </Style.InputWrapper>
     </RegisterInputWrapper>
