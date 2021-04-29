@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, FormEvent, MutableRefObject, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FocusEvent, FormEvent, MutableRefObject, RefObject, useEffect, useRef, useState } from 'react';
 import AddCardInputLabel from './AddCardInputLabel';
 import CreditCard from '../../common/CreditCard';
 import CardBrandModal from '../CardBrandModal';
@@ -34,15 +34,15 @@ export type CardNumberState = [string, string, string, string];
 export type PasswordState = [string, string];
 
 const AddCardForm = () => {
-  const [cardBrand, setCardBrand] = useState({ name: '', color: '' });
-  const [ownerName, setOwnerName] = useState('');
+  const [cardBrand, setCardBrand] = useState<CardBrand>({ name: '', color: '' });
   const [cardNumber, setCardNumber] = useState<CardNumberState>(['', '', '', '']);
   const [expDate, setExpDate] = useState<ExpDate>({ year: '', month: '' });
-  const [CVC, setCVC] = useState('');
   const [password, setPassword] = useState<PasswordState>(['', '']);
-  const [isCardBrandModalVisible, setIsCardBrandModalVisible] = useState(false);
-  const [isNicknameModalVisible, setIsNicknameModalVisible] = useState(false);
-  const [nickname, setNickname] = useState('');
+  const [ownerName, setOwnerName] = useState<string>('');
+  const [nickname, setNickname] = useState<string>('');
+  const [CVC, setCVC] = useState<string>('');
+  const [isCardBrandModalVisible, setIsCardBrandModalVisible] = useState<boolean>(false);
+  const [isNicknameModalVisible, setIsNicknameModalVisible] = useState<boolean>(false);
 
   const secondCardNumberInputRef = useRef<HTMLInputElement>(null);
   const thirdCardNumberInputRef = useRef<HTMLInputElement>(null);
@@ -195,7 +195,7 @@ const AddCardForm = () => {
                 />
               ))
               .reduce(
-                (acc: JSX.Element[], curr, index, array) => [
+                (acc: JSX.Element[], curr: JSX.Element, index, array: JSX.Element[]) => [
                   ...acc,
                   <span key={index + array.length}>{CARD_NUMBER_SEPARATOR}</span>,
                   curr,
