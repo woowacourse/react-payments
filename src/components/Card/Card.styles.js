@@ -2,28 +2,36 @@ import styled from '@emotion/styled';
 import { Flex } from '../../styles/mixins';
 import { getGrayScale } from '../../utils';
 
+const baseWidth = '320px';
+const baseHeight = '200px';
+
+const scaleInfo = {
+  small: 0.63,
+  medium: 0.8,
+  big: 1.0,
+};
+
 const Styled = {
   Container: styled.div`
-    padding: 19px;
+    width: ${({ size }) => `calc(${baseWidth} * ${scaleInfo[size] || 'scale(1.0)'})`};
+    height: ${({ size }) => `calc(${baseHeight} * ${scaleInfo[size] || 'scale(1.0)'})`};
+    position: relative;
+    margin: 0 auto;
+  `,
 
-    transform: ${({ size }) => {
-      const info = {
-        small: 'scale(0.63);',
-        medium: 'scale(0.8);',
-      };
-
-      return `${info[size] || 'scale(1.0)'};`;
-    }};
-
-    width: 320px;
-    height: 200px;
+  Card: styled.div`
+    transform: ${({ size }) => `scale(${scaleInfo[size] || '1.0'})`};
+    transform-origin: left top;
+    width: ${baseWidth};
+    height: ${baseHeight};
     border: none;
     border-radius: 7px;
     color: ${(props) => (getGrayScale(props.bgColor) ? '#ffffff' : props.theme.color.card)};
     background: ${(props) => props.bgColor};
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-    position: relative;
     margin: 0 auto;
+    padding: 19px;
+    position: relative;
     box-sizing: border-box;
   `,
 

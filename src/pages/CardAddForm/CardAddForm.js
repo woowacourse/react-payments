@@ -162,13 +162,15 @@ const CardAddForm = () => {
     <ScreenContainer>
       <Header hasBackButton text="카드 추가" onClickBackButton={history.goBack} />
       <Styled.Container>
-        <Card
-          bgColor={cardCompany?.color}
-          companyName={cardCompany?.name}
-          cardNumbers={cardNumbersAsNumber}
-          ownerName={ownerName.value}
-          expiryDate={formattedExpiryDate}
-        />
+        <Styled.CardContainer>
+          <Card
+            bgColor={cardCompany?.color}
+            companyName={cardCompany?.name}
+            cardNumbers={cardNumbersAsNumber}
+            ownerName={ownerName.value}
+            expiryDate={formattedExpiryDate}
+          />
+        </Styled.CardContainer>
         <form onSubmit={handleSubmit}>
           <Styled.Row>
             <CardNumberInput
