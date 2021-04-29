@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  padding: 22px 28px;
+  min-width: 375px;
+  max-width: 700px;
+  position: relative;
+  box-sizing: border-box;
+  margin: 0 auto !important;
+  color: #525252;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  padding: 0;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
