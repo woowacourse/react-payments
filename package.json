@@ -23,7 +23,7 @@
     "sb": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "build-sb": "build-storybook -s public",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build --profile",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
