@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from 'react';
 import RegisterInputWrapper from './index';
-import INPUT_TYPE from '../../../constants/inputType';
+import { INPUT_TYPE } from '../../../constants/constants';
 import { Default as CardNumbersInput } from '../../units/CardNumbersInput/CardNumbersInput.stories';
 import { Default as ExpirationDateInput } from '../../units/ExpirationDateInput/ExpirationDateInput.stories';
 import { Default as OwnerNameInput } from '../../units/OwnerNameInput/OwnerNameInput.stories';

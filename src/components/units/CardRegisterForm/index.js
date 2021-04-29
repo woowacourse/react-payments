@@ -5,7 +5,7 @@ import ExpirationDateInput from '../../units/ExpirationDateInput';
 import OwnerNameInput from '../../units/OwnerNameInput';
 import SecureCodeInput from '../../units/SecureCodeInput';
 import CardPasswordInput from '../../units/CardPasswordInput';
-import INPUT_TYPE from '../../../constants/inputType';
+import { INPUT_TYPE } from '../../../constants/constants';
 import * as Style from './style';
 
 const CardRegisterForm = (props) => {

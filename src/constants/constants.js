@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-export default {
+export const INPUT_TYPE = {
   CARD_NUMBERS: {
     type: 'cardNumbers',
     label: '카드 번호',
@@ -25,4 +25,9 @@ export default {
     label: '카드 비밀번호',
     width: '43px',
   },
+};
+
+export const DATE_TYPE = {
+  MONTH: 'month',
+  YEAR: 'year',
 };

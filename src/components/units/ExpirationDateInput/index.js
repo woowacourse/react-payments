@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
+import { DATE_TYPE } from '../../../constants/constants';
 import * as Style from './style';
 
 const ExpirationDateInput = (props) => {
@@ -26,7 +27,7 @@ const ExpirationDateInput = (props) => {
       return;
     }
 
-    if (dateType === 'month') {
+    if (dateType === DATE_TYPE.MONTH) {
       if (!isValidMonth(value)) return;
 
       moveFocusToYearInput();
@@ -50,8 +51,8 @@ const ExpirationDateInput = (props) => {
           type="number"
           width="36px"
           placeholder="MM"
-          value={expirationDate['month']}
-          data-date-type="month"
+          value={expirationDate[DATE_TYPE.MONTH]}
+          data-date-type={DATE_TYPE.MONTH}
           onChange={handleChangeDate}
           ref={monthInput}
           required
@@ -61,8 +62,8 @@ const ExpirationDateInput = (props) => {
           type="number"
           width="36px"
           placeholder="YY"
-          value={expirationDate['year']}
-          data-date-type="year"
+          value={expirationDate[DATE_TYPE.YEAR]}
+          data-date-type={DATE_TYPE.YEAR}
           onChange={handleChangeDate}
           ref={yearInput}
           required

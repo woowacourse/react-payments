@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { DATE_TYPE } from '../../../constants/constants';
 import SecureEllipseImage from '../../../assets/secure-ellipse.svg';
 import * as Style from './style.js';
 
@@ -21,7 +22,7 @@ const Card = (props) => {
       </Style.CardNumbersWrapper>
       <Style.OwnerName>{`${ownerName || 'NAME'}`}</Style.OwnerName>
       <Style.ExpirationDate>
-        {`${expirationDate['month'] || 'MM'}/${expirationDate['year'] || 'YY'}`}
+        {`${expirationDate[DATE_TYPE.MONTH] || 'MM'}/${expirationDate[DATE_TYPE.YEAR] || 'YY'}`}
       </Style.ExpirationDate>
     </Style.Root>
   );
