@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR } from '../../../constants/color';
 
 const Styled = {
   InputLabelContainer: styled.div`
@@ -7,13 +8,12 @@ const Styled = {
     font-size: 12px;
     font-weight: 500;
     margin-bottom: 4px;
-    color: #525252;
   `,
   InputContainer: styled.div`
     display: flex;
     align-items: center;
     padding: 0px 12px;
-    background-color: #ecebf1;
+    background-color: ${COLOR.GRAY_50};
     border-radius: 7px;
   `,
 };

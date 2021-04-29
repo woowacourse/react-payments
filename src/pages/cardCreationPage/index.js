@@ -20,7 +20,7 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
   const [cardOwner, setCardOwner] = useState('');
   const [securityCode, setSecurityCode] = useState('');
   const [cardPassword, setCardPassword] = useState({ [FIRST]: '', [SECOND]: '' });
-  const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: COLOR.LIGHT_GRAY });
+  const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: COLOR.GRAY_100 });
 
   const [isValidCardNumber, setValidCardNumber] = useState(false);
   const [isValidCardExpiredDate, setValidCardExpiredDate] = useState(false);
@@ -39,7 +39,7 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
   return (
     <>
       <Header>
-        <Button onClick={() => setCurrentPage(PAGE.CARD_LIST)} styles={{ marginRight: '18px' }}>
+        <Button onClick={() => setCurrentPage(PAGE.CARD_LIST)} styles={{ marginRight: '18px', color: COLOR.GRAY_500 }}>
           <PrevIcon />
         </Button>
         <span>카드 추가</span>
@@ -86,7 +86,7 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
             setValidCardPassword={setValidCardPassword}
           />
           <Styled.ButtonContainer>
-            {isValidAllInput && <Button styles={{ color: COLOR.MINT }}>다음</Button>}
+            {isValidAllInput && <Button styles={{ color: COLOR.MINT_500 }}>다음</Button>}
           </Styled.ButtonContainer>
         </Styled.Form>
       </div>

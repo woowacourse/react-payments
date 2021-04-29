@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR } from '../../../constants/color';
 
 export const CIRCLE_SIZE = {
   LG: {
@@ -22,7 +23,7 @@ export const CIRCLE_SIZE = {
 const Styled = {
   Circle: styled.div(({ size, styles }) => ({
     borderRadius: '50%',
-    backgroundColor: '#000',
+    backgroundColor: COLOR.BLACK,
     width: '5px',
     height: '5px',
     display: 'flex',

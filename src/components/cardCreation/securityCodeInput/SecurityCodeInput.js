@@ -9,7 +9,7 @@ import Styled from './SecurityCodeInput.style';
 
 const FULL_INPUT_LENGTH = 3;
 const transparentInputStyles = {
-  color: COLOR.MINT,
+  color: COLOR.MINT_500,
   fontSize: '24px',
   textAlign: 'center',
 };

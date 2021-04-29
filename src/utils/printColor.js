@@ -1,3 +1,5 @@
+import { COLOR } from '../constants/color';
+
 export const printColorBasedOnBoolean = boolean => {
-  return boolean ? '#81c147' : '#E24141';
+  return boolean ? COLOR.GREEN_400 : COLOR.RED_700;
 };

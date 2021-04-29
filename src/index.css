@@ -8,6 +8,7 @@ body {
   position: relative;
   box-sizing: border-box;
   margin: 0 auto !important;
+  color: #525252;
 }
 
 button {

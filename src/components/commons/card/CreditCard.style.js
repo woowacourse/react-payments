@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR } from '../../../constants/color';
 
 const CARD_TYPE = {
   LG: {
@@ -70,12 +71,12 @@ const CARD_EXPIRED_DATE = {
 const Styled = {
   CardType: styled.div(({ size }) => ({
     position: 'absolute',
-    color: '#383838',
+    color: COLOR.GRAY_700,
     ...CARD_TYPE[size],
   })),
   Chip: styled.div(({ size }) => ({
     position: 'absolute',
-    backgroundColor: '#cbba64',
+    backgroundColor: COLOR.GOLD_400,
     borderRadius: '4px',
     ...CHIP[size],
   })),

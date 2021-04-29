@@ -32,7 +32,7 @@ export const CreditCard = ({ size, backgroundColor, content }) => {
 
 CreditCard.defaultProps = {
   size: CARD_SIZE.MD,
-  backgroundColor: COLOR.LIGHT_GRAY,
+  backgroundColor: COLOR.GRAY_100,
   content: {
     cardType: '',
     cardNumber: {

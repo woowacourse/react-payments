@@ -23,7 +23,6 @@ const Styled = {
     margin-top: 12px;
     font-size: 12px;
     font-weight: 500;
-    color: #525252;
   `,
 };
 

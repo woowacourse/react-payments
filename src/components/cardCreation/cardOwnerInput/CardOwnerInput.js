@@ -30,7 +30,7 @@ const CardOwnerInput = memo(({ cardOwner, setCardOwner }) => {
         <TransparentInput
           value={cardOwner}
           onChange={handleInputChange}
-          styles={{ color: COLOR.MINT }}
+          styles={{ color: COLOR.MINT_500 }}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         />
       </Styled.InputContainer>

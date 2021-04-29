@@ -10,7 +10,7 @@ import { COLOR } from '../../constants/color';
 const transparentInputStyles = {
   textAlign: 'center',
   fontSize: '18px',
-  color: '#383838',
+  color: COLOR.GRAY_700,
 };
 
 const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo }) => {
@@ -47,7 +47,7 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo 
         </Styled.InputContainer>
         {cardNickName && (
           <Styled.ButtonContainer>
-            <Button styles={{ color: COLOR.MINT }}>확인</Button>
+            <Button styles={{ color: COLOR.MINT_500 }}>확인</Button>
           </Styled.ButtonContainer>
         )}
       </form>

@@ -15,7 +15,7 @@ Default.args = {
   setCurrentPage: () => {},
   newCardInfo: {
     selectedCardInfo: {
-      color: COLOR.MINT,
+      color: COLOR.MINT_500,
       id: 1,
       name: '디토 카드',
     },

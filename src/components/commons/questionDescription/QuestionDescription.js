@@ -1,8 +1,14 @@
 import Styled from './QuestionDescription.style';
 import { Circle } from '../circle/Circle';
+import { COLOR } from '../../../constants/color';
 import CVCInfoImage from '../../../assets/CVCInfo.png';
 
-const circleStyles = { width: '27px', height: '27px', backgroundColor: 'transparent', border: '1px solid #BABABA' };
+const circleStyles = {
+  width: '27px',
+  height: '27px',
+  backgroundColor: 'transparent',
+  border: `1px solid ${COLOR.GRAY_150}`,
+};
 
 export const QuestionDescription = () => {
   return (

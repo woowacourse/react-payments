@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR } from '../../../constants/color';
 
 const Styled = {
   Dimmer: styled.div(({ styles }) => ({
@@ -7,7 +8,7 @@ const Styled = {
     left: '0px',
     right: '0px',
     bottom: '0px',
-    backgroundColor: 'rgba(30, 30, 30, 0.55)',
+    backgroundColor: COLOR.GRAY_900_OPACITY_55,
     zIndex: '2',
     marginBottom: '0px !important',
     ...styles,
@@ -17,7 +18,7 @@ const Styled = {
     bottom: '0px',
     width: '100%',
     height: '227px',
-    backgroundColor: '#FDFDFD',
+    backgroundColor: COLOR.GRAY_10,
     borderRadius: '5px 5px 0px 0px',
     display: 'flex',
     justifyContent: 'center',

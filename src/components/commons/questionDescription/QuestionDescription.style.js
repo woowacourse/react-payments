@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR } from '../../../constants/color';
 
 const Styled = {
   QuestionDescription: styled.div`
@@ -14,7 +15,7 @@ const Styled = {
     }
   `,
   QuestionMark: styled.div`
-    color: #969696;
+    color: ${COLOR.GRAY_200};
     font-size: 20px;
   `,
   MessageContainer: styled.div`
@@ -31,16 +32,16 @@ const Styled = {
     width: 180px;
     height: 100px;
     padding: 0px;
-    background: #ffffff;
+    background-color: ${COLOR.WHITE};
     border-radius: 10px;
-    border: #bababa solid 2px;
+    border: ${COLOR.GRAY_100} solid 2px;
 
     &:after {
       content: '';
       position: absolute;
       border-style: solid;
       border-width: 15px 14px 0;
-      border-color: #ffffff transparent;
+      border-color: ${COLOR.WHITE} transparent;
       display: block;
       width: 0;
       z-index: 1;
@@ -53,7 +54,7 @@ const Styled = {
       position: absolute;
       border-style: solid;
       border-width: 16px 15px 0;
-      border-color: #bababa transparent;
+      border-color: ${COLOR.GRAY_100} transparent;
       display: block;
       width: 0;
       z-index: 0;

@@ -11,24 +11,24 @@ import Styled from './CardNumberInput.style';
 
 const transparentInputStyles = {
   [FIRST]: {
-    color: COLOR.MINT,
+    color: COLOR.MINT_500,
     paddingLeft: '14%',
     textAlign: 'center',
     width: '32%',
   },
   [SECOND]: {
-    color: COLOR.MINT,
+    color: COLOR.MINT_500,
     textAlign: 'center',
     width: '18%',
   },
   [THIRD]: {
-    color: COLOR.MINT,
+    color: COLOR.MINT_500,
     textAlign: 'center',
     width: '18%',
     fontSize: '24px',
   },
   [FOURTH]: {
-    color: COLOR.MINT,
+    color: COLOR.MINT_500,
     paddingRight: '14%',
     textAlign: 'center',
     width: '32%',
@@ -162,7 +162,7 @@ const CardNumberInput = memo(
 
 CardNumberInput.defaultProps = {
   cardNumber: { [FIRST]: '', [SECOND]: '', [THIRD]: '', [FOURTH]: '' },
-  selectedCardInfo: { id: null, name: '', color: COLOR.LIGHT_GRAY },
+  selectedCardInfo: { id: null, name: '', color: COLOR.GRAY_100 },
   isValidCardNumber: false,
 };
 

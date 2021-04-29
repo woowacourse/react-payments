@@ -10,7 +10,7 @@ import Styled from './ExpiredDateInput.style';
 
 const FULL_INPUT_LENGTH = 2;
 const transparentInputStyles = {
-  color: COLOR.MINT,
+  color: COLOR.MINT_500,
   width: '30%',
   textAlign: 'center',
 };

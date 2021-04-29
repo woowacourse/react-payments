@@ -10,7 +10,7 @@ import { NUMBER_REG_EXR } from '../../../constants/regExp';
 
 const FULL_INPUT_LENGTH = 1;
 const transparentInputStyles = {
-  color: COLOR.MINT,
+  color: COLOR.MINT_500,
   fontSize: '24px',
   textAlign: 'center',
 };
@@ -64,10 +64,10 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
           />
         </Styled.InputContainer>
         <Styled.CircleContainer>
-          <Circle styles={{ backgroundColor: COLOR.MINT }} />
+          <Circle styles={{ backgroundColor: COLOR.MINT_500 }} />
         </Styled.CircleContainer>
         <Styled.CircleContainer>
-          <Circle styles={{ backgroundColor: COLOR.MINT }} />
+          <Circle styles={{ backgroundColor: COLOR.MINT_500 }} />
         </Styled.CircleContainer>
       </Styled.Container>
     </div>

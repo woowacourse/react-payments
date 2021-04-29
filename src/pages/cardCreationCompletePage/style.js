@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLOR } from '../../constants/color';
 
 const Styled = {
   Title: styled.div`
@@ -6,12 +7,13 @@ const Styled = {
     margin-bottom: 80px;
     font-size: 24px;
     text-align: center;
+    color: ${COLOR.GRAY_700};
   `,
   InputContainer: styled.div`
     margin: 0 auto;
     margin-top: 30px;
     width: 240px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid ${COLOR.BLACK};
   `,
   ButtonContainer: styled.div`
     position: absolute;

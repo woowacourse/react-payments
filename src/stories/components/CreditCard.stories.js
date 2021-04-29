@@ -18,7 +18,7 @@ const Template = args => <CreditCard {...args} />;
 export const Medium = Template.bind({});
 Medium.args = {
   size: CARD_SIZE.MD,
-  backgroundColor: COLOR.MINT,
+  backgroundColor: COLOR.MINT_500,
   content: {
     cardType: '디토 카드',
     cardNumber: { [FIRST]: '1111', [SECOND]: '2222', [THIRD]: '3333', [FOURTH]: '4444' },
@@ -30,7 +30,7 @@ Medium.args = {
 export const Large = Template.bind({});
 Large.args = {
   size: CARD_SIZE.LG,
-  backgroundColor: COLOR.MINT,
+  backgroundColor: COLOR.MINT_500,
   content: {
     cardType: '디토 카드',
     cardNumber: { [FIRST]: '1111', [SECOND]: '2222', [THIRD]: '3333', [FOURTH]: '4444' },
