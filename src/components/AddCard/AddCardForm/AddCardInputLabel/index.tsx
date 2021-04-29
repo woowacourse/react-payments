@@ -12,9 +12,9 @@ const AddCardInputLabel: FC<Props> = ({ label, width, children }) => {
     <AddCardInputLabelContainer width={width}>
       {Array.isArray(label) ? (
         <Container flex justifyContent="space-between">
-          {label.map((el, idx) => (
-            <span key={idx} className="label-text">
-              {el}
+          {label.map((labelText, index) => (
+            <span key={index} className="label-text">
+              {labelText}
             </span>
           ))}
         </Container>
