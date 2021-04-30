@@ -37,6 +37,10 @@ const ERROR_MESSAGE = {
   ONLY_POSITIVE_NUMBER: '숫자만 입력가능합니다.',
 };
 
+const SUCCESS_MESSAGE = {
+  NEW_CARD_REGISTER: '새 카드가 등록되었습니다.',
+};
+
 const INPUT = {
   NAME: {
     CARD: {
@@ -97,6 +101,7 @@ export {
   PAGE,
   MODAL,
   INPUT,
+  SUCCESS_MESSAGE,
   ERROR_MESSAGE,
   IMAGE,
 };

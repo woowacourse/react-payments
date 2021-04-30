@@ -4,6 +4,7 @@ import Button from '../../common/Button';
 import Card from '../../common/Card';
 import Input from '../../common/Input';
 import { CardAdditionCompleteWrapper } from './index.styles';
+import { SUCCESS_MESSAGE } from '../../constants/constant';
 
 const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
   const onChangeNickNameInput = (e) => {
@@ -12,16 +13,16 @@ const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
     setNewCardInfo({ ...newCardInfo, cardNickName: value });
   };
 
-  const onSumbitAddCard = (e) => {
+  const onSubmitAddCard = (e) => {
     e.preventDefault();
 
-    alert('새 카드가 등록되었습니다.');
+    alert(SUCCESS_MESSAGE);
 
     addNewCard();
   };
 
   return (
-    <CardAdditionCompleteWrapper onSubmit={onSumbitAddCard}>
+    <CardAdditionCompleteWrapper onSubmit={onSubmitAddCard}>
       <div className='form__column card-addition-title'>
         <h1>카드등록이 완료되었습니다.</h1>
       </div>
