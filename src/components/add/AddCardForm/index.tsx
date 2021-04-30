@@ -1,33 +1,14 @@
-import { ChangeEvent, FocusEvent, FormEvent, useEffect, useMemo, useRef, useState } from 'react';
-import AddCardInputLabel from './AddCardInputLabel';
+import { FormEvent, useEffect, useState, VFC } from 'react';
 import CreditCard from '../../shared/CreditCard';
 import CardBrandModal from '../CardBrandModal';
 import NicknameModal from '../NicknameModal';
-import Container from '../../shared/Container';
-import Input from '../../shared/Input';
 import Button from '../../shared/Button';
 import CARD_BRAND from '../../../constants/cardData';
-import { LABEL, PLACEHOLDER } from '../../../constants/addCardForm';
-import {
-  CARD_NUMBER_DIGITS,
-  CARD_NUMBER_SEPARATOR,
-  EXP_DATE_DIGITS,
-  EXP_DATE_WHITESPACE_CHARACTER,
-  CVC_DIGITS,
-  MAX_OWNER_NAME_LENGTH,
-} from '../../../constants/creditCard';
+import { CARD_NUMBER_DIGITS, CARD_NUMBER_SEPARATOR } from '../../../constants/creditCard';
 import { ALERT } from '../../../constants/messages';
-import { AddCardFormContainer, AddCardInputContainer } from './styles';
+import { AddCardFormContainer } from './styles';
 import { CardBrand, ExpDate } from '../../../types';
-import {
-  isValidCardNumber,
-  isValidCVC,
-  isValidExpMonth,
-  isValidExpYear,
-  isValidOwnerName,
-  isValidPassword,
-  isAllInputFilled,
-} from './validator';
+import { isAllInputFilled } from './validator';
 import CardNumberInputs from './CardNumberInput';
 import ExpDateInputs from './ExpDateInput';
 import OwnerNameInput from './OwnerNameInput';
@@ -37,7 +18,7 @@ import PasswordInputs from './PasswordInputs';
 export type CardNumberState = [string, string, string, string];
 export type PasswordState = [string, string];
 
-const AddCardForm = () => {
+const AddCardForm: VFC = () => {
   const [cardBrand, setCardBrand] = useState<CardBrand>({ name: '', color: '' });
   const [ownerName, setOwnerName] = useState('');
   const [cardNumber, setCardNumber] = useState<CardNumberState>(['', '', '', '']);

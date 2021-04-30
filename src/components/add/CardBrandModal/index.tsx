@@ -1,7 +1,7 @@
 import Modal from '../../shared/Modal';
 import { IconButton } from '../../shared/Button';
 import { ButtonContainer } from './styles';
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, VFC } from 'react';
 import { CardBrand } from '../../../types';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   modalClose: () => void;
 }
 
-const CardBrandModal: FC<Props> = ({ cardBrands, onClickCardBrandButton, modalClose }) => {
+const CardBrandModal: VFC<Props> = ({ cardBrands, onClickCardBrandButton, modalClose }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

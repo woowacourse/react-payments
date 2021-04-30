@@ -3,11 +3,12 @@ import Container from '../../../shared/Container';
 import { AddCardInputLabelContainer } from './styles';
 
 interface Props {
+  children: React.ReactNode;
   label: string | string[];
   width?: string;
 }
 
-const AddCardInputLabel: FC<Props> = ({ label, width, children }) => {
+const AddCardInputLabel = ({ label, width, children }: Props) => {
   return (
     <AddCardInputLabelContainer width={width}>
       {Array.isArray(label) ? (

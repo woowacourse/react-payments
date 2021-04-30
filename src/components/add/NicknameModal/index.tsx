@@ -1,6 +1,6 @@
 import Modal from '../../shared/Modal';
 import Input from '../../shared/Input';
-import { ChangeEvent, FC, useEffect } from 'react';
+import { ChangeEvent, FC, useEffect, VFC } from 'react';
 import CreditCard from '../../shared/CreditCard';
 import { CardBrand, ExpDate } from '../../../types';
 import { NicknameContainer } from './styles';
@@ -16,12 +16,9 @@ interface Props {
   ownerName: string;
 }
 
-const NicknameModal = ({ cardBrand, cardNumber, expDate, ownerName, nickname, setNickname }: Props) => {
+const NicknameModal: VFC<Props> = ({ cardBrand, cardNumber, expDate, ownerName, nickname, setNickname }) => {
   const onChangeNickname = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!value) {
-      setNickname(cardBrand.name);
-    }
-    setNickname(value);
+    setNickname(value || cardBrand.name);
   };
 
   useEffect(() => {

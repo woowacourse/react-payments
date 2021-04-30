@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React, { ChangeEvent, FocusEvent, forwardRef, RefObject, useRef } from 'react';
+import React, { ChangeEvent, FocusEvent, forwardRef, RefObject, useRef, VFC } from 'react';
 import { EXP_DATE_DIGITS, EXP_DATE_WHITESPACE_CHARACTER } from '../../../../constants/creditCard';
 import { LABEL, PLACEHOLDER } from '../../../../constants/addCardForm';
 import Input from '../../../shared/Input';
@@ -15,26 +15,28 @@ interface ExpDateInputProps {
   onBlur: (event: FocusEvent<HTMLInputElement>, index: keyof ExpDate) => void;
 }
 
-const ExpDateInput = React.forwardRef(({ dateType, expDate, onChange, onBlur }: ExpDateInputProps, ref: any) => (
-  <Input
-    type="text"
-    placeholder={PLACEHOLDER[dateType.toUpperCase() as 'MONTH' | 'YEAR']}
-    textCenter
-    maxLength={EXP_DATE_DIGITS}
-    width="40%"
-    value={expDate[dateType]}
-    onChange={onChange}
-    onBlur={event => onBlur(event, dateType)}
-    ref={ref}
-  />
-));
+const ExpDateInput = React.forwardRef(
+  ({ dateType, expDate, onChange, onBlur }: ExpDateInputProps, ref: React.Ref<HTMLInputElement>) => (
+    <Input
+      type="text"
+      placeholder={PLACEHOLDER[dateType.toUpperCase() as 'MONTH' | 'YEAR']}
+      textCenter
+      maxLength={EXP_DATE_DIGITS}
+      width="40%"
+      value={expDate[dateType]}
+      onChange={onChange}
+      onBlur={event => onBlur(event, dateType)}
+      ref={ref}
+    />
+  )
+);
 
 interface ExpDateInputsProps {
   expDate: ExpDate;
   setExpDate: (expDate: ExpDate) => void;
 }
 
-const ExpDateInputs = ({ expDate, setExpDate }: ExpDateInputsProps) => {
+const ExpDateInputs: VFC<ExpDateInputsProps> = ({ expDate, setExpDate }) => {
   const expYearInputRef = useRef<HTMLInputElement>(null);
 
   const onChangeExpYear = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {

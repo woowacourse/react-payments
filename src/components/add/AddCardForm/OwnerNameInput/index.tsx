@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, VFC } from 'react';
 import { LABEL, PLACEHOLDER } from '../../../../constants/addCardForm';
 import { MAX_OWNER_NAME_LENGTH } from '../../../../constants/creditCard';
 import Input from '../../../shared/Input';
@@ -11,7 +11,7 @@ interface Props {
   setOwnerName: (value: string) => void;
 }
 
-const OwnerNameInput = ({ ownerName, setOwnerName }: Props) => {
+const OwnerNameInput: VFC<Props> = ({ ownerName, setOwnerName }) => {
   const onChangeOwnerName = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     if (!isValidOwnerName(value)) return;
 

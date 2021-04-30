@@ -1,7 +1,7 @@
 import AddCardInputLabel from '../AddCardInputLabel';
 import { AddCardInputContainer } from '../styles';
 import { LABEL } from '../../../../constants/addCardForm';
-import { forwardRef, RefObject, useMemo, useRef } from 'react';
+import { forwardRef, RefObject, useMemo, useRef, VFC } from 'react';
 import { CARD_NUMBER_SEPARATOR } from '../../../../constants/creditCard';
 
 import { ChangeEvent } from 'react';
@@ -42,7 +42,7 @@ const isInCardNumberInputRefsIndex = (index: number): index is CardNumberInputRe
   return index >= 0 && index < 3;
 };
 
-const CardNumberInputs = ({ cardNumber, setCardNumber }: CardNumberInputsProps) => {
+const CardNumberInputs: VFC<CardNumberInputsProps> = ({ cardNumber, setCardNumber }) => {
   const secondCardNumberInputRef = useRef<HTMLInputElement>(null);
   const thirdCardNumberInputRef = useRef<HTMLInputElement>(null);
   const fourthCardNumberInputRef = useRef<HTMLInputElement>(null);

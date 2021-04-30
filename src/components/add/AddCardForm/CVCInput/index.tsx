@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, VFC } from 'react';
 import { LABEL } from '../../../../constants/addCardForm';
 import { CVC_DIGITS } from '../../../../constants/creditCard';
 import Container from '../../../shared/Container';
@@ -12,7 +12,7 @@ interface Props {
   setCVC: (value: string) => void;
 }
 
-const CVCInput = ({ CVC, setCVC }: Props) => {
+const CVCInput: VFC<Props> = ({ CVC, setCVC }) => {
   const onChangeCVC = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     if (!isValidCVC(value)) return;
 
