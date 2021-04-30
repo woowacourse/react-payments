@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
-import { memo, useRef, useEffect } from 'react';
+import { memo, useRef } from 'react';
 import { COLOR } from '../../../constants/color';
 import { EXPIRED_DATE_INPUT } from '../../../constants/input';
 import { PLACEHOLDER } from '../../../constants/message';
-import { isFilledAllNumber } from '../../../utils';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './ExpiredDateInput.style';
 
@@ -13,31 +12,8 @@ const transparentInputStyles = {
   textAlign: 'center',
 };
 
-const isValidMonthInput = cardExpiredDate => {
-  const month = Number(cardExpiredDate.month);
-
-  return (
-    EXPIRED_DATE_INPUT.RANGE.MONTH.MIN <= month &&
-    month <= EXPIRED_DATE_INPUT.RANGE.MONTH.MAX &&
-    isFilledAllNumber(cardExpiredDate.month, EXPIRED_DATE_INPUT.LENGTH)
-  );
-};
-
-const isValidYearInput = cardExpiredDate => {
-  const year = Number(cardExpiredDate.year);
-
-  return (
-    EXPIRED_DATE_INPUT.RANGE.YEAR.MIN <= year && isFilledAllNumber(cardExpiredDate.year, EXPIRED_DATE_INPUT.LENGTH)
-  );
-};
-
-const ExpiredDateInput = ({ cardExpiredDate, setCardExpiredDate, isValidCardExpiredDate, setValidCardExpiredDate }) => {
+const ExpiredDateInput = ({ cardExpiredDate, setCardExpiredDate, isValidCardExpiredDate }) => {
   const $yearInput = useRef(null);
-
-  useEffect(() => {
-    const isValidInput = isValidMonthInput(cardExpiredDate) && isValidYearInput(cardExpiredDate);
-    setValidCardExpiredDate(isValidInput);
-  }, [setValidCardExpiredDate, cardExpiredDate]);
 
   const handleInputChange = ({ target }) => {
     if (target.value.length > EXPIRED_DATE_INPUT.LENGTH) return;
@@ -85,7 +61,6 @@ ExpiredDateInput.propTypes = {
   cardExpiredDate: PropTypes.object.isRequired,
   setCardExpiredDate: PropTypes.func.isRequired,
   isValidCardExpiredDate: PropTypes.bool.isRequired,
-  setValidCardExpiredDate: PropTypes.func.isRequired,
 };
 
 export default memo(ExpiredDateInput);
