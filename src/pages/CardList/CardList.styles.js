@@ -14,7 +14,7 @@ const Styled = {
 
   CardItem: styled.li`
     ${Flex({ direction: 'column', items: 'center' })};
-    margin-bottom: 32px;
+    margin-bottom: ${(props) => (props.noCardName ? '57px' : '32px')};
 
     a {
       text-decoration: none;

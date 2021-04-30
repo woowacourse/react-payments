@@ -106,6 +106,7 @@ const CardAddForm = () => {
       ownerName: ownerName.value,
       expiryDate: expiryDate.value,
       nickname: cardCompany.name,
+      createdAt: new Date(),
     };
 
     if (!cardList.value) {
