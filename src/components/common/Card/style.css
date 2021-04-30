@@ -54,12 +54,12 @@
   list-style: none;
   padding: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 
   position: absolute;
   top: 50%;
-  left: 9%;
-  right: 9%;
+  left: 3%;
+  right: 3%;
 }
 
 .card__inner ul li {

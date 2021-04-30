@@ -12,8 +12,15 @@ const Card = ({
   expirationDate = "",
   size,
 }) => {
-  const [firstNumber, secondNumber, thirdNumber, fourthNumber] = cardNumbers;
+  const [
+    firstNumbers,
+    secondNumbers,
+    thirdNumbers,
+    fourthNumbers,
+  ] = cardNumbers;
   const { name: cardName, color } = cardType;
+
+  console.log(firstNumbers, secondNumbers, thirdNumbers, fourthNumbers);
 
   return (
     <div className={`card card--${size} font-${size}`}>
@@ -22,19 +29,22 @@ const Card = ({
         <div className="card__inner-chip"></div>
         {cardNumbers.length !== 0 && (
           <ul className="font-l">
-            <li>{firstNumber}</li>
-            <li>{secondNumber}</li>
-
-            <li>
-              {[...Array(thirdNumber?.length || 0)].map((_, index) => (
-                <span key={index} className="dot"></span>
-              ))}
-            </li>
-            <li>
-              {[...Array(fourthNumber?.length || 0)].map((_, index) => (
-                <span key={index} className="dot"></span>
-              ))}
-            </li>
+            {firstNumbers && <li>{firstNumbers}</li>}
+            {secondNumbers && <li>{secondNumbers}</li>}
+            {thirdNumbers && (
+              <li>
+                {[...Array(thirdNumbers.length)].map((_, index) => (
+                  <span key={index} className="dot"></span>
+                ))}
+              </li>
+            )}
+            {fourthNumbers && (
+              <li>
+                {[...Array(fourthNumbers.length)].map((_, index) => (
+                  <span key={index} className="dot"></span>
+                ))}
+              </li>
+            )}
           </ul>
         )}
         <div className="card__inner-bottom font-m">
