@@ -10,7 +10,6 @@ const Template = args => <ExpiredDateInput {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   setCardExpiredDate: () => {},
-  setValidCardExpiredDate: () => {},
   isValidCardExpiredDate: true,
   cardExpiredDate: { month: '11', year: '23' },
 };

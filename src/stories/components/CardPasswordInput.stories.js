@@ -10,7 +10,6 @@ const Template = args => <CardPasswordInput {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   setCardPassword: () => {},
-  setValidCardPassword: () => {},
   isValidCardPassword: true,
   cardPassword: { 0: '1', 1: '1' },
 };

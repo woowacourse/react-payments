@@ -12,6 +12,7 @@ import CardPasswordInput from '../../components/cardCreation/cardPasswordInput/C
 import Styled from './style';
 import { COLOR } from '../../constants/color';
 import { PAGE } from '../../constants/page';
+import { isValidCard } from '../../validations/card';
 
 const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
   const [cardNumber, setCardNumber] = useState({ 0: '', 1: '', 2: '', 3: '' });
@@ -20,15 +21,12 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
   const [securityCode, setSecurityCode] = useState('');
   const [cardPassword, setCardPassword] = useState({ 0: '', 1: '' });
   const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: COLOR.LIGHT_GRAY });
-
-  const [isValidCardNumber, setValidCardNumber] = useState(false);
-  const [isValidCardExpiredDate, setValidCardExpiredDate] = useState(false);
-  const [isValidCardOwner, setValidCardOwner] = useState(false);
-  const [isValidSecurityCode, setValidSecurityCode] = useState(false);
-  const [isValidCardPassword, setValidCardPassword] = useState(false);
-
   const isValidAllInput =
-    isValidCardNumber && isValidCardExpiredDate && isValidCardOwner && isValidSecurityCode && isValidCardPassword;
+    isValidCard.Number(Object.values(cardNumber)) &&
+    isValidCard.ExpiredDate(cardExpiredDate) &&
+    isValidCard.Owner(cardOwner) &&
+    isValidCard.SecurityCode(securityCode) &&
+    isValidCard.Password(cardPassword);
 
   const handleNewCardSubmit = e => {
     e.preventDefault();
@@ -59,34 +57,13 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
           <CardNumberInput
             cardNumber={cardNumber}
             setCardNumber={setCardNumber}
-            isValidCardNumber={isValidCardNumber}
-            setValidCardNumber={setValidCardNumber}
             setSelectedCardInfo={setSelectedCardInfo}
             selectedCardInfo={selectedCardInfo}
           />
-          <ExpiredDateInput
-            cardExpiredDate={cardExpiredDate}
-            setCardExpiredDate={setCardExpiredDate}
-            isValidCardExpiredDate={isValidCardExpiredDate}
-            setValidCardExpiredDate={setValidCardExpiredDate}
-          />
-          <CardOwnerInput //
-            cardOwner={cardOwner}
-            setCardOwner={setCardOwner}
-            setValidCardOwner={setValidCardOwner}
-          />
-          <SecurityCodeInput
-            securityCode={securityCode}
-            setSecurityCode={setSecurityCode}
-            isValidSecurityCode={isValidSecurityCode}
-            setValidSecurityCode={setValidSecurityCode}
-          />
-          <CardPasswordInput
-            cardPassword={cardPassword}
-            setCardPassword={setCardPassword}
-            isValidCardPassword={isValidCardPassword}
-            setValidCardPassword={setValidCardPassword}
-          />
+          <ExpiredDateInput cardExpiredDate={cardExpiredDate} setCardExpiredDate={setCardExpiredDate} />
+          <CardOwnerInput cardOwner={cardOwner} setCardOwner={setCardOwner} />
+          <SecurityCodeInput securityCode={securityCode} setSecurityCode={setSecurityCode} />
+          <CardPasswordInput cardPassword={cardPassword} setCardPassword={setCardPassword} />
           <Styled.ButtonContainer>
             {isValidAllInput && <Button styles={{ color: COLOR.MINT }}>다음</Button>}
           </Styled.ButtonContainer>

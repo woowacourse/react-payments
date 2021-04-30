@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { memo, useEffect, useState } from 'react';
 import { COLOR } from '../../../constants/color';
 import { CARD_INPUT } from '../../../constants/standard';
+import { isValidCard } from '../../../validations/card';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import { DecimalKeyboard } from '../../commons/keyboard/DecimalKeyboard';
 import { QuestionDescription } from '../../commons/questionDescription/QuestionDescription';
@@ -12,22 +13,15 @@ const transparentInputStyles = {
   textAlign: 'center',
 };
 
-const isValidInput = securityCode => {
-  return securityCode.length === CARD_INPUT.SECURITY_CODE_LENGTH && !isNaN(securityCode);
-};
-
-const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurityCode, setValidSecurityCode }) => {
+const SecurityCodeInput = memo(({ securityCode, setSecurityCode }) => {
   const [isKeyboardOpened, setKeyboardOpen] = useState(false);
+  const isValidSecurityCode = isValidCard.SecurityCode(securityCode);
 
   useEffect(() => {
-    if (isValidInput(securityCode)) {
-      setValidSecurityCode(true);
+    if (isValidSecurityCode) {
       setKeyboardOpen(false);
-
-      return;
     }
-    setValidSecurityCode(false);
-  }, [setValidSecurityCode, securityCode]);
+  }, [isValidSecurityCode]);
 
   const handleSecurityInputFocus = () => {
     setKeyboardOpen(true);
@@ -67,8 +61,6 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
 SecurityCodeInput.propTypes = {
   securityCode: PropTypes.string.isRequired,
   setSecurityCode: PropTypes.func.isRequired,
-  isValidSecurityCode: PropTypes.bool.isRequired,
-  setValidSecurityCode: PropTypes.func.isRequired,
 };
 
 export default SecurityCodeInput;

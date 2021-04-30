@@ -12,7 +12,6 @@ export const Default = Template.bind({});
 Default.args = {
   setCardNumber: () => {},
   setSelectedCardInfo: () => {},
-  setValidCardNumber: () => {},
   cardNumber: { 0: '1111', 1: '2222', 2: '3333', 3: '4444' },
   selectedCardInfo: {
     color: COLOR.LIGHT_GRAY,

@@ -10,6 +10,5 @@ const Template = args => <CardOwnerInput {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   setCardOwner: () => {},
-  setValidCardOwner: () => {},
   cardOwner: '브랜',
 };

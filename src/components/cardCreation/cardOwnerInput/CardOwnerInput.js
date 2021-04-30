@@ -1,19 +1,11 @@
 import PropTypes from 'prop-types';
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import { COLOR } from '../../../constants/color';
 import { CARD_INPUT } from '../../../constants/standard';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardOwnerInput.style';
 
-const isValidInput = carOwner => {
-  return carOwner.length <= CARD_INPUT.OWNER_MAX_LENGTH;
-};
-
-const CardOwnerInput = memo(({ cardOwner, setCardOwner, setValidCardOwner }) => {
-  useEffect(() => {
-    setValidCardOwner(isValidInput(cardOwner));
-  }, [setValidCardOwner, cardOwner]);
-
+const CardOwnerInput = memo(({ cardOwner, setCardOwner }) => {
   return (
     <div>
       <Styled.InputLabelContainer>
@@ -36,7 +28,6 @@ const CardOwnerInput = memo(({ cardOwner, setCardOwner, setValidCardOwner }) => 
 CardOwnerInput.propTypes = {
   cardOwner: PropTypes.string.isRequired,
   setCardOwner: PropTypes.func.isRequired,
-  setValidCardOwner: PropTypes.func.isRequired,
 };
 
 CardOwnerInput.defaultProps = {

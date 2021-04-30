@@ -6,44 +6,37 @@ import Styled from './CardPasswordInput.style';
 import { Circle } from '../../commons/circle/Circle';
 import { CARD_INPUT } from '../../../constants/standard';
 import { DecimalKeyboard } from '../../commons/keyboard/DecimalKeyboard';
+import { isInputFilledUp } from '../../../utils/isInputFilledUp';
+import { isValidCard } from '../../../validations/card';
 
 const transparentInputStyles = {
   color: COLOR.MINT,
   textAlign: 'center',
 };
 
-const isValidInput = cardPassword => {
-  return Object.values(cardPassword).every(
-    cardPassword => cardPassword.length === CARD_INPUT.PASSWORD_UNIT_LENGTH && !isNaN(cardPassword)
-  );
+const isPasswordFilledUp = input => {
+  return isInputFilledUp(input, CARD_INPUT.PASSWORD_UNIT_LENGTH);
 };
 
-const isInputFilledUp = input => {
-  return input.length === CARD_INPUT.PASSWORD_UNIT_LENGTH;
-};
-
-const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
+const CardPasswordInput = memo(({ cardPassword, setCardPassword }) => {
   const $input1 = useRef(null);
   const [input0, setInput0] = useState('');
   const [input1, setInput1] = useState('');
   const [isKeyboardOpened, setKeyboardOpen] = useState(false);
-
-  useEffect(() => {
-    setValidCardPassword(isValidInput(cardPassword));
-  }, [setValidCardPassword, cardPassword]);
+  const isValidCardPassword = isValidCard.Password(cardPassword);
 
   useEffect(() => {
     setCardPassword(prevState => ({ ...prevState, 0: input0 }));
 
-    if (isInputFilledUp($input1.current.value)) {
+    if (isPasswordFilledUp($input1.current.value)) {
       $input1.current.disabled = false;
-      isInputFilledUp(input0) && $input1.current.focus();
+      isPasswordFilledUp(input0) && $input1.current.focus();
     }
   }, [input0, setCardPassword]);
 
   useEffect(() => {
     setCardPassword(prevState => ({ ...prevState, 1: input1 }));
-    isInputFilledUp(input1) && setKeyboardOpen(false);
+    isPasswordFilledUp(input1) && setKeyboardOpen(false);
   }, [input1, setCardPassword]);
 
   const handleSecurityInputFocus = ({ target }) => {
@@ -104,7 +97,7 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
       {isKeyboardOpened && (
         <DecimalKeyboard
           closeKeyboard={() => setKeyboardOpen(false)}
-          setInput={isInputFilledUp(input0) ? setInput1 : setInput0}
+          setInput={isPasswordFilledUp(input0) ? setInput1 : setInput0}
           maxLength={CARD_INPUT.PASSWORD_UNIT_LENGTH}
         />
       )}
@@ -115,8 +108,6 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
 CardPasswordInput.propTypes = {
   cardPassword: PropTypes.object.isRequired,
   setCardPassword: PropTypes.func.isRequired,
-  isValidCardPassword: PropTypes.bool.isRequired,
-  setValidCardPassword: PropTypes.func.isRequired,
 };
 
 export default CardPasswordInput;
