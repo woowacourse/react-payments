@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { COLOR, FONT_SIZE, FONT_WEIGHT } from '../constants/constants.js';
+import { COLOR, FONT_SIZE, FONT_WEIGHT } from '../constants/constant.js';
 
 const NickNameInput = css`
   color: #383838;
@@ -18,6 +18,7 @@ const RoundInput = css`
 `;
 
 const Input = styled.input`
+  font-size: ${FONT_SIZE.LARGE};
   font-weight: ${FONT_WEIGHT.NORMAL};
   color: ${COLOR.MAIN.MINT};
   background-color: ${COLOR.INPUT.DEFAULT_BG};
@@ -32,6 +33,7 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
+    background-color: #d1cee0;
   }
 `;
 

@@ -34,22 +34,6 @@ const ModalInner = styled.div`
   }
 `;
 
-// const ModalClose = styled.div`
-//   margin: 20px;
-//   width: 20px;
-//   position: absolute;
-//   right: 10px;
-//   top: 10px;
-//   cursor: pointer;
-
-//   .close-x {
-//     stroke: gray;
-//     fill: transparent;
-//     stroke-linecap: round;
-//     stroke-width: 5;
-//   }
-// `;
-
 const Modal = ({ handleModalClose, children }) => {
   const onClickModalDimmed = (e) => {
     if (e.target !== e.currentTarget) return;

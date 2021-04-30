@@ -1,4 +1,4 @@
-import { isPositiveInteger } from '../../utils/utils';
+import { isPositiveInteger } from '../../utils/util';
 
 export const getCardNumberMessage = (value) => {
   if (!isPositiveInteger(value)) {

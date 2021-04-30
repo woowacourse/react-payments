@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FONT_SIZE } from '../../constants/constants';
+import { FONT_SIZE } from '../../constants/constant';
 
 const NavWrapper = styled.div`
   width: 100%;

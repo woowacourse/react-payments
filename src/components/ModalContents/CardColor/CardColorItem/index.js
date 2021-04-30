@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR, FONT_SIZE } from '../../../../constants/constants';
+import { COLOR, FONT_SIZE } from '../../../../constants/constant';
 
 const CardColorItemWrapper = styled.div`
   display: flex;
