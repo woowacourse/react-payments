@@ -6,10 +6,6 @@ import {
   FORMATTED_PASSWORD_LENGTH,
 } from '../../../../constants';
 
-export const isCardNameFulfilled = (company, initialCompany) => {
-  return company.name !== initialCompany.name && company.color !== initialCompany.color;
-};
-
 export const isFormFulFilled = ({ cardInfo, initialCardInfo }) => {
   const { securityCode, password } = cardInfo;
   const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({ cardInfo });
@@ -41,4 +37,8 @@ export const isSecurityCodeFulfilled = (securityCode) => {
 
 export const isPasswordFulfilled = (password) => {
   return Object.values(password).join('').length === FORMATTED_PASSWORD_LENGTH;
+};
+
+export const isCardNameFulfilled = (company, initialCompany) => {
+  return company.name !== initialCompany.name && company.color !== initialCompany.color;
 };
