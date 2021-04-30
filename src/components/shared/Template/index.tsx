@@ -1,21 +1,6 @@
 import { FC } from 'react';
-import styled from 'styled-components';
 import BackIcon from '../../common/Icon/BackIcon';
-
-const PageContainer = styled.div`
-  padding: 1rem 1.125rem;
-`;
-
-const Header = styled.header`
-  display: flex;
-  align-items: center;
-
-  a {
-    display: flex;
-    align-items: center;
-    margin-right: 0.25rem;
-  }
-`;
+import { Header, PageContainer } from './styles';
 
 interface Props {
   title: string;
