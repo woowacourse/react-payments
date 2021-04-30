@@ -8,9 +8,9 @@ import CardUserInput from './CardUserInput';
 import CardCVCInput from './CardCVCInput';
 import CardPasswordInput from './CardPasswordInput';
 
-import Button from '../../common/Button';
 import { cardFormErrorMessages } from './valid';
 import { ERROR_MESSAGE, INPUT, PAGE } from '../../constants/constant';
+import ButtonMenu from '../mixin/ButtonMenu';
 
 const NewCardForm = ({
   cardInfo,
@@ -111,9 +111,7 @@ const NewCardForm = ({
         errorMessage={errorMessage.password}
         onChangeCardInput={onChangeCardInput}
       />
-      <div className='card-form-btns'>
-        {cardFormFilled && <Button onClick={onSubmitCardForm}>다음</Button>}
-      </div>
+      {cardFormFilled && <ButtonMenu>다음</ButtonMenu>}
     </NewCardFormWrapper>
   );
 };

@@ -28,10 +28,6 @@ const ModalInner = styled.div`
   left: 0;
   bottom: 0;
   padding: 2rem;
-
-  @media screen and (max-width: 768px) {
-    box-sizing: border-box;
-  }
 `;
 
 const Modal = ({ handleModalClose, children }) => {

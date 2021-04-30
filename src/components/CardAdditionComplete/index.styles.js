@@ -25,18 +25,4 @@ export const CardAdditionCompleteWrapper = styled.form`
       height: 12rem;
     }
   }
-
-  .card-form-btns {
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-
-    button {
-      cursor: pointer;
-      width: 3rem;
-      height: 2rem;
-    }
-  }
 `;

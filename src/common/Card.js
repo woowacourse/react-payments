@@ -6,7 +6,7 @@ import { CARD, COLOR, FONT_SIZE, FONT_WEIGHT } from '../constants/constant';
 const AddCard = css`
   .add {
     font-size: ${FONT_SIZE.XXLARGE};
-    color : ${COLOR.PLUS}
+    color: ${COLOR.PLUS};
     width: 100%;
     height: 100%;
     display: flex;
@@ -33,7 +33,7 @@ const CardInfo = css`
       min-height: 19px;
       font-size: ${FONT_SIZE.NORMAL};
       font-weight: ${FONT_WEIGHT.BOLD};
-      letter-spacing: 3px;
+      letter-spacing: 2px;
     }
 
     &.card-details {
@@ -65,7 +65,7 @@ const CardInfo = css`
 
 const CardWrapper = styled.div`
   width: 100%;
-  height : 100%;
+  height: 100%;
   padding: 1.2rem 1.5rem;
   border-radius: 5px;
   box-shadow: 3px 3px 5px 0px #00000040;
@@ -78,7 +78,6 @@ const CardWrapper = styled.div`
     bgColor !== undefined ? bgColor : COLOR.CARD.DEFAULT};
 
   ${({ add }) => (add ? AddCard : CardInfo)}
-  };
 `;
 
 const Card = ({ add, cardInfo, handleModalOpen }) => {

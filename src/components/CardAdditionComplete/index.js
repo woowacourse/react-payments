@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../common/Button';
+
 import Card from '../../common/Card';
 import Input from '../../common/Input';
 import { CardAdditionCompleteWrapper } from './index.styles';
 import { SUCCESS_MESSAGE } from '../../constants/constant';
+import ButtonMenu from '../mixin/ButtonMenu';
 
 const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
   const onChangeNickNameInput = (e) => {
@@ -37,9 +38,7 @@ const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
           placeholder='카드 별칭을 입력해주세요.'
         />
       </div>
-      <div className='card-form-btns'>
-        <Button>다음</Button>
-      </div>
+      <ButtonMenu>다음</ButtonMenu>
     </CardAdditionCompleteWrapper>
   );
 };

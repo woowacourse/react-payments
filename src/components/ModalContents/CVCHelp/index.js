@@ -1,12 +1,11 @@
 import React from 'react';
-import { IMAGE } from '../../../constants/constant';
-
+import cvcImage from '../../../assets/cvv-300x300.png';
 import { CVCHelpWrapper } from './index.styles';
 
 const CVCHelp = () => {
   return (
     <CVCHelpWrapper>
-      <img className='cvc-help-img' src={IMAGE.CVC} />
+      <img className='cvc-help-img' src={cvcImage} />
     </CVCHelpWrapper>
   );
 };
