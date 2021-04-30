@@ -9,19 +9,6 @@ import {
   MAX_OWNER_NAME_LENGTH,
 } from '../../../constants/creditCard';
 
-export const isValidCardNumber = (value: string) => isNumberString(value) && value.length <= CARD_NUMBER_DIGITS;
-
-export const isValidExpMonth = (value: string) =>
-  isNumberString(value) && value.length <= EXP_DATE_DIGITS && Number(value) <= LAST_MONTH;
-
-export const isValidExpYear = (value: string) => isNumberString(value) && value.length <= EXP_DATE_DIGITS;
-
-export const isValidOwnerName = (value: string) => value.length <= MAX_OWNER_NAME_LENGTH && !/[^a-zA-Z\s]/g.test(value);
-
-export const isValidCVC = (value: string) => isNumberString(value) && value.length <= CVC_DIGITS;
-
-export const isValidPassword = (value: string) => isNumberString(value) && value.length <= 1;
-
 interface isAllInputFilledParamType extends Omit<Card, 'cardNumber' | 'password'> {
   cardNumber: CardNumberState;
   password: PasswordState;
@@ -44,3 +31,16 @@ export const isAllInputFilled = ({
   password[0].length === 1 &&
   password[1].length === 1 &&
   ownerName.length > 0;
+
+export const isValidCardNumber = (value: string) => isNumberString(value) && value.length <= CARD_NUMBER_DIGITS;
+
+export const isValidExpMonth = (value: string) =>
+  isNumberString(value) && value.length <= EXP_DATE_DIGITS && Number(value) <= LAST_MONTH;
+
+export const isValidExpYear = (value: string) => isNumberString(value) && value.length <= EXP_DATE_DIGITS;
+
+export const isValidOwnerName = (value: string) => value.length <= MAX_OWNER_NAME_LENGTH && !/[^a-zA-Z\s]/g.test(value);
+
+export const isValidCVC = (value: string) => isNumberString(value) && value.length <= CVC_DIGITS;
+
+export const isValidPassword = (value: string) => isNumberString(value) && value.length <= 1;
