@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { CardCompanySelection, SecurityCodeGuide } from './components';
+import { CardCompanySelection, CardList, SecurityCodeGuide } from './components';
 import { AddCardForm, AddCardComplete } from './pages';
 import { Modal } from './components';
 import { CARD_COMPANY } from './constants';
+import { CardsProvider } from './cardsContext';
 
 function App() {
-  const [page, setPage] = useState('addCardForm');
+  const [page, setPage] = useState('cardList');
 
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [modalContents, setModalContents] = useState('cardSelection');
@@ -43,7 +44,8 @@ function App() {
   }, [page]);
 
   return (
-    <>
+    <CardsProvider>
+      {page === 'cardList' && <CardList />}
       {page === 'addCardForm' && (
         <AddCardForm
           serialNumber={serialNumber}
@@ -81,7 +83,7 @@ function App() {
           {modalContents === 'questionMark' && <SecurityCodeGuide />}
         </Modal>
       )}
-    </>
+    </CardsProvider>
   );
 }
 
