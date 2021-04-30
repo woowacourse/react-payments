@@ -169,7 +169,7 @@ const CardAddForm = () => {
             expiryDate={formattedExpiryDate}
           />
         </Styled.CardContainer>
-        <form onSubmit={handleSubmit}>
+        <Styled.Form onSubmit={handleSubmit}>
           <Styled.Row>
             <CardNumberInput
               ref={cardNumberInputRefs}
@@ -244,7 +244,7 @@ const CardAddForm = () => {
           <Styled.Row right>
             <Button>다음</Button>
           </Styled.Row>
-        </form>
+        </Styled.Form>
       </Styled.Container>
       <Modal mobile>
         <Styled.CardSelect>

@@ -8,6 +8,9 @@ const Styled = {
   CardContainer: styled.div`
     margin: 20px 0;
   `,
+  Form: styled.form`
+    margin: 20px 0;
+  `,
   Row: styled.div`
     position: relative;
     ${(props) => Flex({ items: 'center', justify: props.right ? 'flex-end' : 'flex-start' })};
