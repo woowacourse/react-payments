@@ -15,7 +15,7 @@ const InputBox = ({
   onChange,
   value,
   pattern,
-  inputmode,
+  inputMode,
   required,
   errorMessage,
   isError,
@@ -41,7 +41,7 @@ const InputBox = ({
         onChange={onChange}
         value={value}
         pattern={pattern}
-        inputmode={inputmode}
+        inputMode={inputMode}
         required={required}
       />
       <ErrorMessageBox errorMessage={errorMessage} />
@@ -61,7 +61,7 @@ InputBox.propTypes = {
   errorMessage: PropTypes.string,
   isError: PropTypes.bool,
   pattern: PropTypes.string,
-  inputmode: PropTypes.string,
+  inputMode: PropTypes.string,
   required: PropTypes.bool,
 };
 
@@ -76,7 +76,7 @@ InputBox.defaultProps = {
   errorMessage: '',
   isError: false,
   pattern: null,
-  inputmode: '',
+  inputMode: 'text',
   required: false,
 };
 

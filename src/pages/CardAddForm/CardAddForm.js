@@ -192,7 +192,7 @@ const CardAddForm = () => {
                 labelText="만료일"
                 maxLength={4 + 3}
                 textAlign="center"
-                inputmode="numeric"
+                inputMode="numeric"
                 pattern={REGEX.EXPIRY_DATE.source}
                 required
               />
@@ -214,7 +214,7 @@ const CardAddForm = () => {
                 pattern={REGEX.NUMBER_WITH_LENGTH(3).source}
                 isError={!isNumeric(CVC.value)}
                 errorMessage={!isNumeric(CVC.value) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''}
-                inputmode="numeric"
+                inputMode="numeric"
                 value={CVC.value}
                 onChange={CVC.onChange}
                 labelText="보안 코드 (CVC/CVV)"
@@ -237,7 +237,7 @@ const CardAddForm = () => {
               errorMessage={
                 !isNumeric(passwordDigits.value.join('')) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''
               }
-              inputmode="numeric"
+              inputMode="numeric"
               required
             />
           </Styled.Row>

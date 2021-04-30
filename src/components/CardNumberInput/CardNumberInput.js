@@ -26,7 +26,7 @@ const CardNumberInput = forwardRef(
               onChange={onChange}
               value={value}
               pattern={REGEX.NUMBER_WITH_LENGTH(4).source}
-              inputmode="numeric"
+              inputMode="numeric"
               // eslint-disable-next-line
               ref={(el) => (ref[index] = el)}
               required
