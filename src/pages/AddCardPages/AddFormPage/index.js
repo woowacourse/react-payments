@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Button, Card, CreditCard, Title } from '../../../components';
 import { CardInfoForm } from './CardInfoForm';
 import { CardCompanySelectModal } from './CardCompanySelectModal';
@@ -5,9 +6,10 @@ import { getFormattedCardInfo } from '../../../cardInfoFormatter';
 import './style.css';
 
 export const AddFormPage = (props) => {
-  const { setRoute, initialCardInfo, cardInfo, setCardInfo, isModalOpen, setIsModalOpen } = props;
+  const { setRoute, initialCardInfo, cardInfo, setCardInfo } = props;
   const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({ cardInfo });
   const { company } = cardInfo;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="AddFormPage">
