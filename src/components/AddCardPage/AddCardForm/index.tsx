@@ -116,7 +116,7 @@ const AddCardForm = () => {
     }
   };
 
-  const onClickCardBrandButton = (cardBrand: CardBrand) => {
+  const onSelectCardBrand = (cardBrand: CardBrand) => {
     setCardBrand(cardBrand);
     setIsCardBrandModalVisible(false);
   };
@@ -280,7 +280,7 @@ const AddCardForm = () => {
         {isCardBrandModalVisible && (
           <CardBrandModal
             cardBrands={CARD_BRAND}
-            onClickCardBrandButton={onClickCardBrandButton}
+            onSelect={onSelectCardBrand}
             onClose={() => setIsCardBrandModalVisible(false)}
           />
         )}
