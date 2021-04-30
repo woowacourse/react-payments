@@ -4,7 +4,8 @@ import { handleNicknameInputChange, handleNicknameSubmit } from './handler';
 import './style.css';
 
 export const CardNicknameForm = (props) => {
-  const { setRoute, setCardInfo, nickname, initialCardInfo } = props;
+  const { setRoute, cardInfo, setCardInfo, initialNickname, addCard } = props;
+  const { nickname } = cardInfo;
   const ref = createRef();
 
   useEffect(() => {
@@ -21,7 +22,10 @@ export const CardNicknameForm = (props) => {
         ref={ref}
         onChange={(e) => handleNicknameInputChange({ e, setCardInfo })}
       />
-      <Button disabled={nickname === initialCardInfo.nickname} onClick={(e) => handleNicknameSubmit({ e, setRoute })}>
+      <Button
+        disabled={nickname === initialNickname}
+        onClick={(e) => handleNicknameSubmit({ e, setRoute, cardInfo, addCard })}
+      >
         확인
       </Button>
     </Form>

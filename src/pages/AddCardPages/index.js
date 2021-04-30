@@ -3,8 +3,20 @@ import { AddCompletePage } from './AddCompletePage';
 import { AddFormPage } from './AddFormPage';
 import { PAGE } from '../../constants';
 
+const initialCardInfo = {
+  number: { first: '', second: '', third: '', fourth: '' },
+  company: { name: '', color: '' },
+  expirationDate: { month: '', year: '' },
+  ownerName: '',
+  isOwnerNameFilled: false,
+  securityCode: '',
+  password: { first: '', second: '' },
+  nickname: '',
+};
+
 export const AddCardPage = (props) => {
-  const { route, setRoute, initialCardInfo, cardInfo, setCardInfo } = props;
+  const { route, setRoute, addCard } = props;
+  const [cardInfo, setCardInfo] = useState(initialCardInfo);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -24,6 +36,7 @@ export const AddCardPage = (props) => {
           initialCardInfo={initialCardInfo}
           cardInfo={cardInfo}
           setCardInfo={setCardInfo}
+          addCard={addCard}
         />
       )}
     </>

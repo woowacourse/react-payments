@@ -3,33 +3,17 @@ import { CardListPage } from './pages/CardListPage';
 import { AddCardPage } from './pages/AddCardPages';
 import { PAGE } from './constants';
 
-const initialCardInfo = {
-  number: { first: '', second: '', third: '', fourth: '' },
-  company: { name: '', color: '' },
-  expirationDate: { month: '', year: '' },
-  ownerName: '',
-  isOwnerNameFilled: false,
-  securityCode: '',
-  password: { first: '', second: '' },
-  nickname: '',
-};
-
 export default function App() {
   const [route, setRoute] = useState(PAGE.CARD_LIST);
-  const [cardInfo, setCardInfo] = useState(initialCardInfo);
+  const [cardList, setCardList] = useState([]);
+  const addCard = (card) => setCardList((prevList) => [...prevList, card]);
 
   return (
     <div className="App">
       {route === PAGE.CARD_LIST ? (
-        <CardListPage setRoute={setRoute} />
+        <CardListPage cardList={cardList} setRoute={setRoute} />
       ) : (
-        <AddCardPage
-          route={route}
-          setRoute={setRoute}
-          initialCardInfo={initialCardInfo}
-          cardInfo={cardInfo}
-          setCardInfo={setCardInfo}
-        />
+        <AddCardPage addCard={addCard} route={route} setRoute={setRoute} />
       )}
     </div>
   );
