@@ -48,4 +48,14 @@ const FONT_SIZE = {
   XXLARGE: '2.5rem',
 };
 
-export { CARD, FONT_SIZE, FONT_WEIGHT, COLOR };
+const PAGE = {
+  ADD_CARD: 'addCard',
+  CARD_COMPLETE: 'cardComplete',
+};
+
+const MODAL = {
+  CARD_COLOR: 'cardColor',
+  CVC_HELP: 'cvcHelp',
+};
+
+export { CARD, FONT_SIZE, FONT_WEIGHT, COLOR, PAGE, MODAL };
