@@ -3,9 +3,19 @@ import Card from "../Card/Card";
 import Input from "../Input/Input";
 import InputTitle from "../InputTitle/InputTitle";
 import Button from "../Button/Button";
-import Header from "../Header/Header";
+import CardNumbersInput from "./CardNumbersInput";
+import { checkValidation } from "../../utils";
 
-const CardAddForm = props => {
+const initialValidation = {
+  cardNumbers: true,
+  expirationDate: true,
+  ownerName: true,
+  securityCode: true,
+  cardPasswords: true,
+};
+
+const CardAddForm = ({ cardInfo, setCardInfo }) => {
+  const [validation, setValidation] = useState(initialValidation);
   const [backgroundColor] = useState(null);
   const [bank] = useState(null);
   const [numbers] = useState([]);
@@ -15,9 +25,30 @@ const CardAddForm = props => {
   const [password] = useState([]);
   const [isToolTipVisible] = useState(false);
 
+  const handleInputChange = event => {
+    try {
+      const { name, value } = event.target;
+      const targetIndex = Number(event.target.dataset.index);
+      const newValue = !Number.isNaN(targetIndex)
+        ? cardInfo[name].map((prevValue, index) => (index === targetIndex ? value : prevValue))
+        : value;
+
+      setCardInfo({ ...cardInfo, [name]: newValue });
+      checkValidation(name, newValue);
+      setValidation({ ...validation, [name]: true });
+    } catch (error) {
+      if (error.type === "validation") {
+        setValidation({ ...validation, [error.message]: false });
+
+        return;
+      }
+
+      console.error(error.message);
+    }
+  };
+
   return (
     <>
-      <Header hasBackButton={true} title={"카드 추가"} />
       <form className="w-full h-160 flex flex-col justify-center">
         <div>
           <div className="w-full flex justify-center mb-4">
@@ -30,23 +61,11 @@ const CardAddForm = props => {
               isRegistered={false}
             />
           </div>
-          <div className="flex flex-col w-full mb-2">
-            <div className="mb-2 h-6">
-              <InputTitle innerText="카드 번호" />
-            </div>
-            <label className="sr-only" htmlFor="card-number-input">
-              카드 번호 입력란
-            </label>
-            <Input
-              id="card-number-input"
-              type="text"
-              className="w-full"
-              minLength="18"
-              maxLength="19"
-              value={numbers}
-              required
-            />
-          </div>
+          <CardNumbersInput
+            values={cardInfo.cardNumbers}
+            isValid={validation.cardNumbers}
+            onChange={handleInputChange}
+          />
           <div className="flex flex-col w-full mb-2">
             <div className="mb-2 h-6">
               <InputTitle innerText="만료일" />

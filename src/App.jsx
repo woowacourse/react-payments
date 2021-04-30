@@ -15,11 +15,11 @@ const initialCardInfo = {
 };
 
 const App = () => {
-  const [newCardInfo] = useState(initialCardInfo);
+  const [newCardInfo, setNewCardInfo] = useState(initialCardInfo);
 
   return (
     <div className="max-w-sm h-full p-5 mx-auto flex flex-col justify-between">
-      <CardAddForm cardInfo={newCardInfo} />
+      <CardAddForm cardInfo={newCardInfo} setCardInfo={setNewCardInfo} />
     </div>
   );
 };
