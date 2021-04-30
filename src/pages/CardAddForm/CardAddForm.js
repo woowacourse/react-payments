@@ -70,10 +70,14 @@ const CardAddForm = () => {
 
   const isCardCompanySelected = useMemo(() => Object.keys(cardCompany).length > 0, [cardCompany]);
 
+  const isCardNumberEnteredHalf = useMemo(() => {
+    const [firstValue, secondValue] = cardNumbers.value;
+
+    return firstValue.length === 4 && secondValue.length === 4;
+  }, [cardNumbers.value]);
+
   const handleFocusCardNumberInput = (event) => {
     const [firstInputRef, secondInputRef, thirdInputRef, fourthInputRef] = cardNumberInputRefs;
-
-    const [firstValue, secondValue] = cardNumbers.value;
 
     if (event.target === thirdInputRef || event.target === fourthInputRef) {
       if (firstInputRef.value.length < 4) {
@@ -89,7 +93,7 @@ const CardAddForm = () => {
         secondInputRef?.focus();
       }
 
-      if (firstValue === 4 && secondValue === 4 && !isCardCompanySelected && !isModalOpened) {
+      if (isCardNumberEnteredHalf && !isCardCompanySelected && !isModalOpened) {
         openModal();
       }
     }
@@ -134,9 +138,7 @@ const CardAddForm = () => {
   const updateCardCompany = useCallback(() => {
     const [firstValue, secondValue] = cardNumbers.value;
 
-    const isFilledHalf = firstValue.length === 4 && secondValue.length === 4;
-
-    if (isFilledHalf && !isCardCompanySelected) {
+    if (isCardNumberEnteredHalf && !isCardCompanySelected) {
       const matchedCardCompany = findCardCompany(firstValue, secondValue);
 
       if (matchedCardCompany) {
@@ -144,10 +146,10 @@ const CardAddForm = () => {
       } else {
         openModal();
       }
-    } else if (!isFilledHalf && isCardCompanySelected) {
+    } else if (!isCardNumberEnteredHalf && isCardCompanySelected) {
       setCardCompany({});
     }
-  }, [cardNumbers.value, isCardCompanySelected, openModal]);
+  }, [cardNumbers.value, isCardNumberEnteredHalf, isCardCompanySelected, openModal]);
 
   useEffect(updateCardCompany, [updateCardCompany]);
 
