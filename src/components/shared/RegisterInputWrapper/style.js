@@ -29,7 +29,7 @@ const DefaultInputWrapper = styled.fieldset`
 
 const DefaultInput = styled.input`
   width: ${({ width }) => width};
-  font-size: 18px;
+  font-size: 1rem;
   color: ${PALETTE.DEFAULT_CYAN};
   border-color: transparent;
   background-color: transparent;
@@ -54,7 +54,6 @@ const WordCount = styled.span`
 
 const FlexContainer = styled.div`
   display: flex;
-  // flex-direction: column;
   align-items: center;
 `;
 

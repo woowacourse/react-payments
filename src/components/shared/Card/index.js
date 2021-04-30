@@ -14,7 +14,7 @@ const Card = (props) => {
 
   return (
     <Style.Root width={width} height={height} size={size} backgroundColor={backgroundColor}>
-      {<Style.CardName>{bankName}</Style.CardName>}
+      <Style.CardName>{bankName}</Style.CardName>
       <Style.Chip />
       <Style.CardNumbersWrapper>
         <Style.CardNumbersFragment>{cardNumbers[FIRST]}</Style.CardNumbersFragment>

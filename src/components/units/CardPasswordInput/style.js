@@ -9,10 +9,9 @@ const InputWrapper = styled(DefaultInputWrapper)`
 `;
 
 const PasswordInput = styled(DefaultInput)`
-  width: 20px;
+  width: 22px;
   text-align: center;
   font: small-caption;
-  font-size: 24px;
   letter-spacing: 2px;
 `;
 

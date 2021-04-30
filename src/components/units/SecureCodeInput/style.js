@@ -6,10 +6,11 @@ const InputWrapper = styled(DefaultInputWrapper)`
 `;
 
 const PasswordInput = styled(DefaultInput)`
-  width: 40px;
+  width: 56px;
   font: small-caption;
-  font-size: 24px;
+  font-size: 1rem;
   letter-spacing: 2px;
+  text-align: center;
 `;
 
 const HelpMark = styled.img`
