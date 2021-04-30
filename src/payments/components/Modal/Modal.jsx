@@ -6,7 +6,7 @@ const $modalRoot = document.querySelector("#modal-root");
 
 const createDefaultContainer = () => {
   const $container = document.createElement("div");
-  $container.className = "absolute inset-0 w-full h-screen flex justify-end flex-col bg-black bg-opacity-50";
+  $container.className = "absolute inset-0 w-full flex justify-end flex-col bg-black bg-opacity-50";
 
   return $container;
 };

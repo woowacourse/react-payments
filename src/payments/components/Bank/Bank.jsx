@@ -7,7 +7,7 @@ const Bank = ({ backgroundColor, name, onClick }) => {
 
   return (
     <div
-      className="flex flex-col items-center w-1/4 cursor-pointer"
+      className="flex flex-col items-center justify-center cursor-pointer"
       tabIndex="0"
       onKeyUp={handleBankClick}
       onClick={handleBankClick}
