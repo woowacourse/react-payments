@@ -4,7 +4,7 @@ import { getFormattedCardInfo } from '../../../cardInfoFormatter';
 import './style.css';
 
 export const AddCompletePage = (props) => {
-  const { setRoute, initialCardInfo, cardInfo, setCardInfo, addCardInfo } = props;
+  const { setRoute, initialCardInfo, cardInfo, setCardInfo, addCardInfoToList } = props;
   const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({ cardInfo });
   const { company } = cardInfo;
 
@@ -25,7 +25,7 @@ export const AddCompletePage = (props) => {
         cardInfo={cardInfo}
         setCardInfo={setCardInfo}
         initialNickname={initialCardInfo.nickname}
-        addCardInfo={addCardInfo}
+        addCardInfoToList={addCardInfoToList}
       />
     </div>
   );

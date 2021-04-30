@@ -5,11 +5,12 @@ import { ExpirationDateInput } from './ExpirationDateInput';
 import { OwnerNameInput } from './OwnerNameInput';
 import { SecurityCodeInput } from './SecurityCodeInput';
 import { PasswordInput } from './PasswordInput';
-import { PAGE } from '../../../../constants';
+import { handleCardInfoSubmit } from './handler';
+import { isFormFulFilled } from './validator';
 import './style.css';
 
 export const CardInfoForm = (props) => {
-  const { initialCardInfo, cardInfo, setCardInfo, setIsModalOpen, isFormFulFilled, setRoute } = props;
+  const { initialCardInfo, cardInfo, setCardInfo, setIsModalOpen, setRoute } = props;
   const { number, expirationDate, ownerName, securityCode, password } = cardInfo;
   const setNumber = (number) => setCardInfo((prevState) => ({ ...prevState, number }));
   const setCompany = (company) => setCardInfo((prevState) => ({ ...prevState, company }));
@@ -51,7 +52,7 @@ export const CardInfoForm = (props) => {
       />
       <PasswordInput password={password} setPassword={setPassword} ref={passwordInputRef} />
       <Button
-        disabled={!isFormFulFilled}
+        disabled={!isFormFulFilled({ cardInfo, initialCardInfo })}
         onClick={(e) => handleCardInfoSubmit({ e, cardInfo, setIsModalOpen, initialCardInfo, setRoute })}
       >
         다음
@@ -59,17 +60,3 @@ export const CardInfoForm = (props) => {
     </Form>
   );
 };
-
-function handleCardInfoSubmit({ e, initialCardInfo, cardInfo, setIsModalOpen, setRoute }) {
-  e.preventDefault();
-
-  if (isCardNameUnset(cardInfo.company, initialCardInfo.company)) {
-    setIsModalOpen(true);
-    return;
-  }
-  setRoute(PAGE.ADD_CARD_COMPLETE);
-}
-
-function isCardNameUnset(company, initialCompany) {
-  return company.name === initialCompany.name || company.color === initialCompany.color;
-}

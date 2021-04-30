@@ -2,12 +2,6 @@ import { Button, Card, CreditCard, Title } from '../../../components';
 import { CardInfoForm } from './CardInfoForm';
 import { CardCompanySelectModal } from './CardCompanySelectModal';
 import { getFormattedCardInfo } from '../../../cardInfoFormatter';
-import {
-  FORMATTED_CARD_NUMBER_LENGTH,
-  FORMATTED_EXPIRATION_DATE_LENGTH,
-  SECURITY_CODE_LENGTH,
-  FORMATTED_PASSWORD_LENGTH,
-} from '../../../constants';
 import './style.css';
 
 export const AddFormPage = (props) => {
@@ -34,7 +28,6 @@ export const AddFormPage = (props) => {
         cardInfo={cardInfo}
         setCardInfo={setCardInfo}
         setIsModalOpen={setIsModalOpen}
-        isFormFulFilled={isFormFulFilled({ cardInfo, initialCardInfo })}
       />
       <CardCompanySelectModal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setCardInfo={setCardInfo} />
     </div>
@@ -69,37 +62,4 @@ function BackwardButton() {
       </svg>
     </Button>
   );
-}
-
-function isFormFulFilled({ cardInfo, initialCardInfo }) {
-  const { securityCode, password } = cardInfo;
-  const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({ cardInfo });
-
-  return (
-    isNumberFulfilled(formattedNumber) &&
-    isExpirationDateFulfilled(formattedExpirationDate) &&
-    isOwnerNameFulfilled(formattedOwnerName, initialCardInfo.ownerName) &&
-    isSecurityCodeFulfilled(securityCode) &&
-    isPasswordFulfilled(password)
-  );
-}
-
-function isNumberFulfilled(formattedNumber) {
-  return formattedNumber.length === FORMATTED_CARD_NUMBER_LENGTH;
-}
-
-function isExpirationDateFulfilled(formattedExpirationDate) {
-  return formattedExpirationDate.length === FORMATTED_EXPIRATION_DATE_LENGTH;
-}
-
-function isOwnerNameFulfilled(formattedOwnerName, initialOwnerName) {
-  return formattedOwnerName && formattedOwnerName !== initialOwnerName;
-}
-
-function isSecurityCodeFulfilled(securityCode) {
-  return securityCode.length === SECURITY_CODE_LENGTH;
-}
-
-function isPasswordFulfilled(password) {
-  return Object.values(password).join('').length === FORMATTED_PASSWORD_LENGTH;
 }
