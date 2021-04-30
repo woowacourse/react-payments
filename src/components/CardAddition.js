@@ -122,66 +122,72 @@ const CardAddition = (props) => {
         />
         <form onSubmit={onCardInfoSubmit} className="card-addition__form">
           <div className="card-addition__number-input mt-standard">
-            <label htmlFor="card-number">카드 번호</label>
-            <Input
-              id="card-number"
-              type="text"
-              isCenter={true}
-              value={formatCardNumbers(cardNumbers)}
-              onChange={onCardNumbersChange}
-              ref={cardNumbersInputRef}
-              maxLength={CARD_NUMBER.FORMATTED_LENGTH}
-              required
-            />
-          </div>
-          <div className="card-addition__expiration-input mt-standard">
-            <label htmlFor="expiration-date">만료일</label>
-            <Input
-              id="expiration-date"
-              type="text"
-              isCenter={true}
-              placeHolder="MM / YY"
-              value={formatExpirationDate(expirationDate)}
-              onChange={onExpirationDateChange}
-              maxLength={EXPIRATION_DATE.FORMATTED_LENGTH}
-              required
-            />
-          </div>
-          <div className="card-addition__username-input mt-standard">
-            <label htmlFor="username">카드 소유자 이름(선택)</label>
-            <span className="card-addition__username-indicator">
-              {username.length}/30
-            </span>
-            <Input
-              id="username"
-              type="text"
-              placeHolder="카드에 표시된 이름과 동일하게 입력하세요"
-              value={username}
-              onChange={onUsernameChange}
-              maxLength={USERNAME.MAX_LENGTH}
-              minLength={USERNAME.MIN_LENGTH}
-              required
-            />
-          </div>
-          <div className="card-addition__secure-code mt-standard">
-            <label htmlFor="secure-code">보안 코드(CVC/CVV)</label>
-            <div className="card-addition__secure-code-inner">
+            <label>
+              <span>카드 번호</span>
               <Input
-                id="secure-code"
-                type="password"
+                type="text"
                 isCenter={true}
-                value={secureCode}
-                onChange={onSecureCodeChange}
-                maxLength={SECURE_CODE_LENGTH}
+                value={formatCardNumbers(cardNumbers)}
+                onChange={onCardNumbersChange}
+                ref={cardNumbersInputRef}
+                maxLength={CARD_NUMBER.FORMATTED_LENGTH}
                 required
               />
-              <div className="card-addition__tool-tip-button">
-                <span>?</span>
+            </label>
+          </div>
+          <div className="card-addition__expiration-input mt-standard">
+            <label>
+              <span>만료일</span>
+              <Input
+                type="text"
+                isCenter={true}
+                placeHolder="MM / YY"
+                value={formatExpirationDate(expirationDate)}
+                onChange={onExpirationDateChange}
+                maxLength={EXPIRATION_DATE.FORMATTED_LENGTH}
+                required
+              />
+            </label>
+          </div>
+          <div className="card-addition__username-input mt-standard">
+            <label>
+              <span>카드 소유자 이름(선택)</span>
+              <span className="card-addition__username-indicator">
+                {username.length}/30
+              </span>
+              <Input
+                type="text"
+                placeHolder="카드에 표시된 이름과 동일하게 입력하세요"
+                value={username}
+                onChange={onUsernameChange}
+                maxLength={USERNAME.MAX_LENGTH}
+                minLength={USERNAME.MIN_LENGTH}
+                required
+              />
+            </label>
+          </div>
+          <div className="card-addition__secure-code mt-standard">
+            <label>
+              <span>보안 코드(CVC/CVV)</span>
+              <div className="card-addition__secure-code-inner">
+                <Input
+                  type="password"
+                  isCenter={true}
+                  value={secureCode}
+                  onChange={onSecureCodeChange}
+                  maxLength={SECURE_CODE_LENGTH}
+                  required
+                />
+                <div className="card-addition__tool-tip-button">
+                  <span>?</span>
+                </div>
               </div>
-            </div>
+            </label>
           </div>
           <div className="card-addition__password mt-standard">
-            <label>카드비밀번호</label>
+            <label>
+              <span>카드비밀번호</span>
+            </label>
             <div className="card-addition__password-inner">
               <Input
                 type="password"

@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.card-addition__form label {
+.card-addition__form label > span {
   display: inline-block;
   font-size: 0.9rem;
   margin-bottom: 8px;
