@@ -27,14 +27,14 @@ const AddCardPage = ({
   cardPassword,
   setCardState,
 }) => {
-  const [pageState, setPageState] = useState({
+  const [toggleState, setToggleState] = useState({
     isBottomSliderToggled: false,
     backDropAnimation: "fade-out",
     sliderAnimation: "move-down",
   });
 
   const toggleCardCompanyContainer = ({ isBottomSliderToggled, backDropAnimation, sliderAnimation }) => {
-    setPageState((state) => ({
+    setToggleState((state) => ({
       ...state,
       isBottomSliderToggled,
       backDropAnimation,
@@ -86,11 +86,11 @@ const AddCardPage = ({
           showCardCompanySelectContainer={showCardCompanySelectContainer}
         />
       </main>
-      {pageState.isBottomSliderToggled && (
+      {toggleState.isBottomSliderToggled && (
         <CardCompanySelectContainer
           hideCardCompanySelectContainer={hideCardCompanySelectContainer}
-          backDropAnimationClass={pageState.backDropAnimation}
-          bottomSliderAnimationClass={pageState.sliderAnimation}
+          backDropAnimationClass={toggleState.backDropAnimation}
+          bottomSliderAnimationClass={toggleState.sliderAnimation}
           setCardState={setCardState}
         />
       )}

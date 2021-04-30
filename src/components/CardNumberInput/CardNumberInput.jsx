@@ -1,44 +1,23 @@
 import { useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./CardNumberInput.module.scss";
-import { getCardCompany } from "../../utils/cardCompany"
 
 const cx = classNames.bind(styles);
 
-const CardNumberInput = ({ labelText, className, setCardState, showCardCompanySelectContainer, cardCompany}) => {
-  const [cardNumberInput, setCardNumberInput] = useState({
+const CardNumberInput = ({ labelText, className, onCardNumberChange, onCardNumberInputUpdate}) => {
+  const [cardNumberInputState, setCardNumberInputState] = useState({
     firstCardNumberInput: "",
     secondCardNumberInput: "",
     thirdCardNumberInput: "",
     fourthCardNumberInput: "",
   });
 
-  const onCardNumberInputBlur = (event) => {
-    const { value, name } = event.target;
 
-    setCardNumberInput((state) => ({
-      ...state,
-      [name]: value,
-    }));
+  const onCardNumberInputChange = (event) => {
+    onCardNumberChange(event, setCardNumberInputState);
   };
 
-  useEffect(() => {
-    if (Object.keys(cardNumberInput).every((key) => cardNumberInput[key].length === 4)) {
-      const newCardCompany = getCardCompany(Object.keys(cardNumberInput).map((key) => cardNumberInput[key]).join(" "))      
-      showCardCompanySelectContainer();
-      
-      if (newCardCompany) {
-        setCardState("cardCompany", newCardCompany);
-      }
-
-      setCardState("cardNumber", {
-        firstCardNumber: cardNumberInput.firstCardNumberInput,
-        secondCardNumber: cardNumberInput.secondCardNumberInput,
-        thirdCardNumber: cardNumberInput.thirdCardNumberInput,
-        fourthCardNumber: cardNumberInput.fourthCardNumberInput,
-      });
-    }
-  }, [cardNumberInput]);
+  useEffect(() => onCardNumberInputUpdate(cardNumberInputState), [cardNumberInputState]);
 
   return (
     <div className={`${cx("card-number-input")} ${className}`}>
@@ -53,7 +32,7 @@ const CardNumberInput = ({ labelText, className, setCardState, showCardCompanySe
           type="text"
           className={cx("card-number-input__input")}
           maxLength={4}
-          onBlur={onCardNumberInputBlur}
+          onChange={onCardNumberInputChange}
           required
         />
         <span className={cx("card-number-input__input-separator")}></span>
@@ -62,7 +41,7 @@ const CardNumberInput = ({ labelText, className, setCardState, showCardCompanySe
           type="text"
           className={cx("card-number-input__input")}
           maxLength={4}
-          onBlur={onCardNumberInputBlur}
+          onChange={onCardNumberInputChange}
           required
         />
         <span className={cx("card-number-input__input-separator")}></span>
@@ -71,7 +50,7 @@ const CardNumberInput = ({ labelText, className, setCardState, showCardCompanySe
           type="password"
           className={cx("card-number-input__input", "card-number-input__input--dot")}
           maxLength={4}
-          onBlur={onCardNumberInputBlur}
+          onChange={onCardNumberInputChange}
           required
         />
         <span className={cx("card-number-input__input-separator")}></span>
@@ -80,7 +59,7 @@ const CardNumberInput = ({ labelText, className, setCardState, showCardCompanySe
           type="password"
           className={cx("card-number-input__input", "card-number-input__input--dot")}
           maxLength={4}
-          onBlur={onCardNumberInputBlur}
+          onChange={onCardNumberInputChange}
           required
         />
       </div>

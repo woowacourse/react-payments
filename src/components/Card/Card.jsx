@@ -29,6 +29,7 @@ const Card = ({
             maxLength="4"
             className={cx("card__number-input", "card__number-input--visible")}
             defaultValue={firstCardNumber}
+            disabled
           />
           <input
             type="text"
@@ -36,6 +37,7 @@ const Card = ({
             maxLength="4"
             className={cx("card__number-input", "card__number-input--visible")}
             defaultValue={secondCardNumber}
+            disabled
           />
           <input
             type="password"

@@ -37,3 +37,17 @@ export const ANIMATION = Object.freeze({
   RIGHT_IN: "right-in",
   LEFT_OUT: "left-out",
 });
+
+export const STATE_KEY = Object.freeze({
+  CARD_COMPANY: "cardCompany",
+  CARD_NUMBER: "cardNumber",
+  FIRST_CARD_NUMBER: "firstCardNumber",
+  SECOND_CARD_NUMBER: "secondCardNumber",
+  THIRD_CARD_NUMBER: "thirdCardNumber",
+  FOURTH_CARD_NUMBER: "fourthCardNumber",
+  CARD_OWNER: "cardOwner",
+  CARD_EXPIRATION: "cardExpiration",
+  CARD_NICK_NAME: "cardNickName",
+  CARD_CVC: "cardCVC",
+  CARD_PASSWORD: "cardPassword",
+});
