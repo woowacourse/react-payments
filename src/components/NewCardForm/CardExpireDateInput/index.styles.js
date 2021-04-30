@@ -14,18 +14,21 @@ export const CardExpireDateInputWrapper = styled.div`
     letter-spacing: -0.085rem;
   }
 
+  input {
+    &:first-child {
+      text-align: right;
+    }
+    &:last-child {
+      text-align: left;
+    }
+  }
+
   .input-container {
     display: flex;
     background-color: ${COLOR.INPUT.DEFAULT_BG};
     border-radius: 7px;
     justify-content: center;
     align-items: center;
-
-    input {
-      width: 4.375rem;
-      margin: 0 2px;
-      font-size: inherit;
-    }
 
     .input-separator {
       display: inline-block;

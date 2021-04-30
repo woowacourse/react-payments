@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../common/Button';
 import { NewCardFormWrapper } from './index.styles';
-import {
-  getCardNumberMessage,
-  getCVCMessage,
-  getExpireDateMessage,
-  getPasswordMessage,
-  getUserMessage,
-} from './cardFormValidator';
+
 import CardNumberInput from './CardNumberInput';
 import CardExpireDateInput from './CardExpireDateInput';
 import CardUserInput from './CardUserInput';
 import CardCVCInput from './CardCVCInput';
 import CardPasswordInput from './CardPasswordInput';
+
+import Button from '../../common/Button';
+import { cardFormErrorMessages } from './valid';
+import { ERROR_MESSAGE, INPUT, PAGE } from '../../constants/constant';
 
 const NewCardForm = ({
   cardInfo,
@@ -21,6 +18,7 @@ const NewCardForm = ({
   handleModalOpen,
   setPage,
 }) => {
+  const [cardFormFilled, setCardFormFilled] = useState(false);
   const [errorMessage, setErrorMessage] = useState({
     numbers: '',
     expireDate: '',
@@ -29,31 +27,14 @@ const NewCardForm = ({
     password: '',
   });
 
-  const [cardFormFlag, setCardFormFlag] = useState(false);
-  const cardFormValidation = () => {
-    const isFilled =
-      Object.values(cardInfo.numbers).every((number) => number.length === 4) &&
-      Object.values(cardInfo.expireDate).every((date) => date.length === 2) &&
-      Object.values(cardInfo.password).every((pwd) => pwd.length === 1) &&
-      cardInfo.cvc.length === 3;
-
-    setCardFormFlag(isFilled);
-  };
-
-  const messageObject = {
-    numbers: (value) => getCardNumberMessage(value),
-    expireDate: (value) => getExpireDateMessage(value),
-    password: (value) => getPasswordMessage(value),
-  };
-
-  const onChangeCardInputObject = ({
+  const onChangeCardInput = ({
     target: {
       name,
       value,
       dataset: { detail },
     },
   }) => {
-    const message = messageObject[name](value);
+    const message = cardFormErrorMessages[name](value);
     setErrorMessage({
       ...errorMessage,
       [name]: message,
@@ -61,64 +42,58 @@ const NewCardForm = ({
 
     if (message !== '') return;
 
-    setNewCardInfo((prevInfo) => ({
-      ...prevInfo,
-      [name]: { ...prevInfo[name], [detail]: value },
-    }));
+    detail
+      ? setNewCardInfo((prevInfo) => ({
+          ...prevInfo,
+          [name]: { ...prevInfo[name], [detail]: value },
+        }))
+      : setNewCardInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
   };
 
-  const onChangeCardInput = (e) => {
-    let { name, value } = e.target;
-    let message = '';
+  const cardFormValidation = () => {
+    const { numbers, expireDate, password, cvc } = cardInfo;
+    const isFilled =
+      Object.values(numbers).every(
+        (number) => number.length === INPUT.MAX_LENGTH.CARD.NUMBERS
+      ) &&
+      Object.values(expireDate).every(
+        (date) => date.length === INPUT.MAX_LENGTH.CARD.EXPIRE_DATE
+      ) &&
+      Object.values(password).every(
+        (pwd) => pwd.length === INPUT.MAX_LENGTH.CARD.PASSWORD
+      ) &&
+      cvc.length === INPUT.MAX_LENGTH.CARD.CVC;
 
-    switch (name) {
-      case 'user':
-        message = getUserMessage(value);
-        value = value.toUpperCase();
-        break;
-
-      case 'cvc':
-        message = getCVCMessage(value);
-        break;
-    }
-
-    setErrorMessage({
-      ...errorMessage,
-      [name]: message,
-    });
-
-    if (message !== '') return;
-
-    setNewCardInfo({ ...cardInfo, [name]: value });
+    setCardFormFilled(isFilled);
   };
 
-  // 다음눌렀을때 실행되는 메서드 (App으로 빠질수도 있음)
   const onSubmitCardForm = (e) => {
     e.preventDefault();
 
-    if (cardInfo.cardName === 'DEFAULT') {
-      alert('카드 종류를 선택해주세요!');
+    if (cardInfo.cardName === '') {
+      alert(ERROR_MESSAGE.CHOOSE_CARD);
       return;
     }
 
-    setPage('cardComplete');
+    setPage(PAGE.CARD_COMPLETE);
   };
 
-  const { numbers, expireDate, user, cvc, password } = cardInfo;
+  useEffect(() => {
+    cardFormValidation();
+  }, [errorMessage]);
 
+  const { numbers, expireDate, user, cvc, password } = cardInfo;
   return (
     <NewCardFormWrapper onSubmit={onSubmitCardForm}>
       <CardNumberInput
-        cardFormValidation={cardFormValidation}
         numbers={numbers}
         errorMessage={errorMessage.numbers}
-        onChangeCardInputObject={onChangeCardInputObject}
+        onChangeCardInput={onChangeCardInput}
       />
       <CardExpireDateInput
-        cardFormValidation={cardFormValidation}
         expireDate={expireDate}
         errorMessage={errorMessage.expireDate}
-        onChangeCardInputObject={onChangeCardInputObject}
+        onChangeCardInput={onChangeCardInput}
       />
       <CardUserInput
         user={user}
@@ -126,20 +101,18 @@ const NewCardForm = ({
         onChangeCardInput={onChangeCardInput}
       />
       <CardCVCInput
-        cardFormValidation={cardFormValidation}
         cvc={cvc}
         errorMessage={errorMessage.cvc}
         onChangeCardInput={onChangeCardInput}
         handleModalOpen={handleModalOpen}
       />
       <CardPasswordInput
-        cardFormValidation={cardFormValidation}
         password={password}
         errorMessage={errorMessage.password}
-        onChangeCardInputObject={onChangeCardInputObject}
+        onChangeCardInput={onChangeCardInput}
       />
       <div className='card-form-btns'>
-        {cardFormFlag && <Button onClick={onSubmitCardForm}>다음</Button>}
+        {cardFormFilled && <Button onClick={onSubmitCardForm}>다음</Button>}
       </div>
     </NewCardFormWrapper>
   );
@@ -164,11 +137,11 @@ NewCardForm.propTypes = {
       first: PropTypes.string,
       second: PropTypes.string,
     }),
-  }),
+  }).isRequired,
 
-  setNewCardInfo: PropTypes.func,
-  setPage: PropTypes.func,
-  handleModalOpen: PropTypes.func,
+  setNewCardInfo: PropTypes.func.isRequired,
+  setPage: PropTypes.func.isRequired,
+  handleModalOpen: PropTypes.func.isRequired,
 };
 
 export default NewCardForm;

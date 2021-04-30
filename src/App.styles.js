@@ -3,14 +3,14 @@ import styled from 'styled-components';
 export const AppWrapper = styled.div`
   display: flex;
   position: relative;
-  background-color: #fff;
+  background-color: #ffffff;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   width: 450px;
   height: 820px;
   padding: 20px;
-  box-shadow: 1px 1px 1px #ddd;
+  box-shadow: 1px 1px 1px #dddddd;
   margin: 2rem auto;
 
   .card-wrapper {

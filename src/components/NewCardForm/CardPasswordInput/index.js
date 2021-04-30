@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Input from '../../../common/Input';
+
 import { CardPasswordInputWrapper } from './index.styles';
+import Input from '../../../common/Input';
+import { INPUT } from '../../../constants/constant';
 
 const CardPasswordInput = ({
   password,
   errorMessage,
-  onChangeCardInputObject,
+  onChangeCardInput,
   cardFormValidation,
 }) => {
   return (
@@ -18,12 +20,12 @@ const CardPasswordInput = ({
             key={index}
             type='password'
             value={password[key]}
-            maxLength='1'
+            maxLength={INPUT.MAX_LENGTH.CARD.PASSWORD}
             min='0'
             max='9'
-            name='password'
+            name={INPUT.NAME.CARD.PASSWORD}
             data-detail={key}
-            onChange={onChangeCardInputObject}
+            onChange={onChangeCardInput}
             onBlur={cardFormValidation}
             required
           />
@@ -43,7 +45,7 @@ CardPasswordInput.propTypes = {
     second: PropTypes.string,
   }),
   errorMessage: PropTypes.string,
-  onChangeCardInputObject: PropTypes.func,
+  onChangeCardInput: PropTypes.func,
   cardFormValidation: PropTypes.func,
 };
 

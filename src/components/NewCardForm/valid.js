@@ -1,6 +1,6 @@
 import { isPositiveInteger } from '../../utils/util';
 
-export const getCardNumberMessage = (value) => {
+const getCardNumberMessage = (value) => {
   if (!isPositiveInteger(value)) {
     return '숫자만 입력가능합니다.';
   }
@@ -12,7 +12,7 @@ export const getCardNumberMessage = (value) => {
   return '';
 };
 
-export const getExpireDateMessage = (value) => {
+const getExpireDateMessage = (value) => {
   if (!isPositiveInteger(value)) {
     return '숫자만 입력가능합니다.';
   }
@@ -24,19 +24,19 @@ export const getExpireDateMessage = (value) => {
   return '';
 };
 
-export const getPasswordMessage = (value) => {
+const getPasswordMessage = (value) => {
   if (!isPositiveInteger(value)) {
     return '숫자만 입력가능합니다.';
   }
 
   if (value.length > 1) {
-    return '1글자만 입력 가능합니다.';
+    return '최대 1자리 정수만 입력가능합니다.';
   }
 
   return '';
 };
 
-export const getUserMessage = (value) => {
+const getUserMessage = (value) => {
   if (value.length > 30) {
     return '30글자 이하만 입력가능합니다.';
   }
@@ -52,7 +52,7 @@ export const getUserMessage = (value) => {
   return '';
 };
 
-export const getCVCMessage = (value) => {
+const getCVCMessage = (value) => {
   if (!isPositiveInteger(value)) {
     return '숫자만 입력가능합니다.';
   }
@@ -62,4 +62,12 @@ export const getCVCMessage = (value) => {
   }
 
   return '';
+};
+
+export const cardFormErrorMessages = {
+  numbers: (value) => getCardNumberMessage(value),
+  expireDate: (value) => getExpireDateMessage(value),
+  password: (value) => getPasswordMessage(value),
+  user: (value) => getUserMessage(value),
+  cvc: (value) => getCVCMessage(value),
 };

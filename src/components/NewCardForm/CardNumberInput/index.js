@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Input from '../../../common/Input';
 import { CardNumberInputWrapper } from './index.styles';
+import { INPUT } from '../../../constants/constant';
 
 const CardNumberInput = ({
   numbers,
   errorMessage,
-  onChangeCardInputObject,
+  onChangeCardInput,
   cardFormValidation,
 }) => {
   return (
@@ -15,55 +16,55 @@ const CardNumberInput = ({
       <div className='input-container'>
         <Input
           type='text'
-          name='numbers'
+          name={INPUT.NAME.CARD.NUMBERS}
           data-detail='first'
           value={numbers.first}
-          onChange={onChangeCardInputObject}
+          onChange={onChangeCardInput}
           onBlur={cardFormValidation}
-          minLength='4'
-          maxLength='4'
+          minLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
+          maxLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
           required
         />
         <span className='input-separator'>
-          {numbers.first.length === 4 && '-'}
+          {numbers.first.length === INPUT.MAX_LENGTH.CARD.NUMBERS && '-'}
         </span>
         <Input
           type='text'
-          name='numbers'
+          name={INPUT.NAME.CARD.NUMBERS}
           data-detail='second'
           value={numbers.second}
-          onChange={onChangeCardInputObject}
+          onChange={onChangeCardInput}
           onBlur={cardFormValidation}
-          minLength='4'
-          maxLength='4'
+          minLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
+          maxLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
           required
         />
         <span className='input-separator'>
-          {numbers.second.length === 4 && '-'}
+          {numbers.second.length === INPUT.MAX_LENGTH.CARD.NUMBERS && '-'}
         </span>
         <Input
           type='password'
-          name='numbers'
+          name={INPUT.NAME.CARD.NUMBERS}
           data-detail='third'
           value={numbers.third}
-          onChange={onChangeCardInputObject}
+          onChange={onChangeCardInput}
           onBlur={cardFormValidation}
-          minLength='4'
-          maxLength='4'
+          minLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
+          maxLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
           required
         />
         <span className='input-separator'>
-          {numbers.third.length === 4 && '-'}
+          {numbers.third.length === INPUT.MAX_LENGTH.CARD.NUMBERS && '-'}
         </span>
         <Input
           type='password'
-          name='numbers'
+          name={INPUT.NAME.CARD.NUMBERS}
           data-detail='fourth'
           value={numbers.fourth}
-          onChange={onChangeCardInputObject}
+          onChange={onChangeCardInput}
           onBlur={cardFormValidation}
-          minLength='4'
-          maxLength='4'
+          minLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
+          maxLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
           required
         />
       </div>
@@ -80,7 +81,7 @@ CardNumberInput.propTypes = {
     fourth: PropTypes.string,
   }),
   errorMessage: PropTypes.string,
-  onChangeCardInputObject: PropTypes.func,
+  onChangeCardInput: PropTypes.func,
   cardFormValidation: PropTypes.func,
 };
 export default CardNumberInput;

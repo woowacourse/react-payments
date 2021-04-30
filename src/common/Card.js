@@ -95,7 +95,7 @@ const Card = ({ add, cardInfo, handleModalOpen }) => {
       ) : (
         <>
           <div className='card__column card-name'>
-            {cardName !== 'DEFAULT' ? `${cardName} 카드` : '  '}
+            {cardName !== '' && `${cardName} 카드`}
           </div>
           <div className='card__column'>
             <div className='usim'></div>

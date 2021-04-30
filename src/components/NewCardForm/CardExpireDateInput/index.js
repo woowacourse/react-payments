@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Input from '../../../common/Input';
 import { CardExpireDateInputWrapper } from './index.styles';
+import Input from '../../../common/Input';
+import { INPUT } from '../../../constants/constant';
 
 const CardExpireDateInput = ({
   expireDate,
   errorMessage,
-  onChangeCardInputObject,
+  onChangeCardInput,
   cardFormValidation,
 }) => {
   return (
@@ -16,14 +17,14 @@ const CardExpireDateInput = ({
         <Input
           type='text'
           placeholder='MM'
-          name='expireDate'
+          name={INPUT.NAME.CARD.EXPIRE_DATE}
           data-detail='month'
           min='01'
           max='12'
-          minLength='2'
-          maxLength='2'
+          minLength={INPUT.MAX_LENGTH.CARD.EXPIRE_DATE}
+          maxLength={INPUT.MAX_LENGTH.CARD.EXPIRE_DATE}
           value={expireDate.month}
-          onChange={onChangeCardInputObject}
+          onChange={onChangeCardInput}
           onBlur={cardFormValidation}
           required
         />
@@ -31,12 +32,12 @@ const CardExpireDateInput = ({
         <Input
           type='text'
           placeholder='YY'
-          name='expireDate'
+          name={INPUT.NAME.CARD.EXPIRE_DATE}
           data-detail='year'
-          minLength='2'
-          maxLength='2'
+          minLength={INPUT.MAX_LENGTH.CARD.EXPIRE_DATE}
+          maxLength={INPUT.MAX_LENGTH.CARD.EXPIRE_DATE}
           value={expireDate.year}
-          onChange={onChangeCardInputObject}
+          onChange={onChangeCardInput}
           onBlur={cardFormValidation}
           required
         />
@@ -52,7 +53,7 @@ CardExpireDateInput.propTypes = {
     year: PropTypes.string,
   }),
   errorMessage: PropTypes.string,
-  onChangeCardInputObject: PropTypes.func,
+  onChangeCardInput: PropTypes.func,
   cardFormValidation: PropTypes.func,
 };
 

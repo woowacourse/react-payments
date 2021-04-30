@@ -21,7 +21,7 @@ function App() {
   });
   const [myCards, setMyCards] = useState([]);
   const [newCardInfo, setNewCardInfo] = useState({
-    cardName: 'DEFAULT',
+    cardName: '',
     cardNickName: '',
     numbers: {
       first: '',
@@ -56,7 +56,7 @@ function App() {
 
   const resetNewCardInfo = () => {
     setNewCardInfo({
-      cardName: 'DEFAULT',
+      cardName: '',
       cardNickName: '',
       numbers: {
         first: '',
@@ -119,10 +119,12 @@ function App() {
 
         {openModalContent.isModalOpen && (
           <Modal handleModalClose={handleModalClose}>
-            {openModalContent.modalContent === MODAL.CARD_COLOR && (
-              <CardColor handleCardColor={handleCardColor} />
-            )}
-            {openModalContent.modalContent === MODAL.CVC_HELP && <CVCHelp />}
+            <>
+              {openModalContent.modalContent === MODAL.CARD_COLOR && (
+                <CardColor handleCardColor={handleCardColor} />
+              )}
+              {openModalContent.modalContent === MODAL.CVC_HELP && <CVCHelp />}
+            </>
           </Modal>
         )}
       </AppWrapper>

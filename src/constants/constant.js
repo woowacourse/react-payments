@@ -32,6 +32,32 @@ const CARD = {
   썬: COLOR.CARD.YELLOW,
 };
 
+const ERROR_MESSAGE = {
+  CHOOSE_CARD: '카드 종류를 선택해주세요!',
+  ONLY_POSITIVE_NUMBER: '숫자만 입력가능합니다.',
+};
+
+const INPUT = {
+  NAME: {
+    CARD: {
+      NUMBERS: 'numbers',
+      EXPIRE_DATE: 'expireDate',
+      USER: 'user',
+      CVC: 'cvc',
+      PASSWORD: 'password',
+    },
+  },
+  MAX_LENGTH: {
+    CARD: {
+      NUMBERS: 4,
+      EXPIRE_DATE: 2,
+      USER: 30,
+      CVC: 3,
+      PASSWORD: 1,
+    },
+  },
+};
+
 const FONT_WEIGHT = {
   LIGHT: '400',
   NORMAL: '500',
@@ -58,4 +84,13 @@ const MODAL = {
   CVC_HELP: 'cvcHelp',
 };
 
-export { CARD, FONT_SIZE, FONT_WEIGHT, COLOR, PAGE, MODAL };
+export {
+  CARD,
+  FONT_SIZE,
+  FONT_WEIGHT,
+  COLOR,
+  PAGE,
+  MODAL,
+  INPUT,
+  ERROR_MESSAGE,
+};
