@@ -1,18 +1,42 @@
+import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Card } from '../../components';
-import { ROUTE, LOCAL_STORAGE_KEY } from '../../constants';
+import { ROUTE, LOCAL_STORAGE_KEY, MESSAGE } from '../../constants';
 import { useLocalStorage } from '../../hooks';
 import { ScreenContainer } from '../../styles/common.styles';
+
 import Styled from './CardList.styles';
 
+let timer = null;
+
 const CardList = () => {
+  const [deleteMode, setDeleteMode] = useState(false);
+
   const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
   const history = useHistory();
 
-  const onClick = (event) => {
+  const onClickCardContainer = (event) => {
+    const cardId = event.target.getAttribute('data-card-id');
+
+    // eslint-disable-next-line no-alert
+    if (!cardId || !window.confirm(MESSAGE.CARD_REMOVE_CONFIRM)) {
+      if (!event.target.getAttribute('data-is-card')) {
+        setDeleteMode(false);
+      }
+
+      return;
+    }
+
+    const newCardList = cardList.value.filter((card) => card.id !== cardId);
+    cardList.setValue(newCardList);
+  };
+
+  const onClickCard = (event) => {
     const {
       target: { id },
     } = event;
+
+    if (deleteMode) return;
 
     const targetCard = cardList.value.find((card) => card.id === id);
     history.push({
@@ -23,9 +47,23 @@ const CardList = () => {
     });
   };
 
+  const onMouseDown = () => {
+    timer = setTimeout(() => {
+      setDeleteMode(true);
+    }, 2000);
+  };
+
+  const onMouseUp = () => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+  };
+
+  useEffect(() => () => clearTimeout(timer));
+
   return (
     <ScreenContainer>
-      <Styled.Container>
+      <Styled.Container deleteMode={deleteMode} onClick={onClickCardContainer}>
         <Link to={ROUTE.ADD}>
           <Styled.AddCard>
             <svg
@@ -57,14 +95,22 @@ const CardList = () => {
 
               return (
                 <li key={id}>
+                  {deleteMode && (
+                    <Styled.DeleteButton type="button" data-card-id={id}>
+                      X
+                    </Styled.DeleteButton>
+                  )}
                   <Card
                     id={id}
-                    onClick={onClick}
+                    onClick={onClickCard}
                     bgColor={cardCompanyColor}
                     companyName={cardCompanyName}
                     cardNumbers={cardNumbers}
                     ownerName={ownerName}
                     expiryDate={expiryDate}
+                    onMouseDown={onMouseDown}
+                    onMouseUp={onMouseUp}
+                    draggable
                   />
                   <Styled.Row>{nickname}</Styled.Row>
                 </li>

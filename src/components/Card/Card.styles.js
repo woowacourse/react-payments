@@ -11,7 +11,6 @@ const Styled = {
   Container: styled.div`
     padding: 19px;
     transform: ${({ size }) => `${info[size] || 'scale(1.0)'};`};
-
     width: 320px;
     height: 200px;
     border: none;

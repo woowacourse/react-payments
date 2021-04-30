@@ -1,11 +1,16 @@
 import styled from '@emotion/styled';
-import { Flex } from '../../styles/mixins';
+import { Flex, shakingAnimation } from '../../styles/mixins';
 
 const Styled = {
   Container: styled.div`
     padding: 0 28px;
     margin-top: 50px;
+
     ${Flex({ items: 'center', justify: 'center', direction: 'column' })}
+
+    li > div {
+      ${(props) => (props.deleteMode ? shakingAnimation : '')}
+    }
   `,
   AddCard: styled.div`
     width: 320px;
@@ -24,6 +29,22 @@ const Styled = {
   Row: styled.span`
     ${Flex({ items: 'center', justify: 'center', direction: 'column' })}
     margin-bottom: 20px;
+  `,
+
+  DeleteButton: styled.button`
+    color: red;
+    position: absolute;
+    right: 10%;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    z-index: 999;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #eee;
+    }
   `,
 };
 

@@ -24,7 +24,7 @@ const Card = ({
   }, [cardNumbers]);
 
   return (
-    <Styled.Container bgColor={bgColor} size={size} onClick={onClick} {...props}>
+    <Styled.Container bgColor={bgColor} size={size} onClick={onClick} {...props} data-is-card>
       <Styled.CompanyName>{companyName}</Styled.CompanyName>
 
       <Styled.Chip />
@@ -42,7 +42,6 @@ const Card = ({
     </Styled.Container>
   );
 };
-
 Card.propTypes = {
   bgColor: PropTypes.string,
   companyName: PropTypes.string,
@@ -60,6 +59,7 @@ Card.defaultProps = {
   ownerName: 'NAME',
   expiryDate: 'MM / YY',
   size: 'medium',
+
   onClick: () => {},
 };
 
