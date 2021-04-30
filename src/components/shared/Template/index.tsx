@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import BackIcon from '../../common/Icon/BackIcon';
+import BackIcon from '../../shared/Icon/BackIcon';
 import { Header, PageContainer } from './styles';
 
 interface Props {

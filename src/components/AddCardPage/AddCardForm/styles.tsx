@@ -1,7 +1,5 @@
-import { FC } from 'react';
 import styled from 'styled-components';
 import PALETTE from '../../../constants/palette';
-import Container from '../../common/Container';
 
 export const AddCardFormContainer = styled.div`
   .credit-card {
@@ -38,13 +36,3 @@ export const AddCardFormContainer = styled.div`
     }
   }
 `;
-
-interface Props {
-  width?: string;
-}
-
-export const AddCardInputContainer: FC<Props> = ({ children, width }) => (
-  <Container flex justifyContent="center" alignItems="center" backgroundColor={PALETTE.GRAY_1} width={width}>
-    {children}
-  </Container>
-);

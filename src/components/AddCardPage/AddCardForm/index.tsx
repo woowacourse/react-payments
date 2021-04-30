@@ -18,7 +18,8 @@ import Input from '../../shared/Input';
 import CardBrandModal from '../modal/CardBrandModal';
 import NicknameModal from '../modal/NicknameModal';
 import AddCardInputLabel from './AddCardInputLabel';
-import { AddCardFormContainer, AddCardInputContainer } from './styles';
+import AddCardInputContainer from './AddCardInputContainer';
+import { AddCardFormContainer } from './styles';
 import {
   isAllInputFilled,
   isValidCardNumber,
