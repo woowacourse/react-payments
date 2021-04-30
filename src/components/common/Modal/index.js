@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "./style.css";
 
-const Modal = ({ children, onClick }) => {
+const Modal = ({ children, onClick, close }) => {
   return (
     <div className="modal" onClick={onClick}>
       <div className="modal__inner">{children}</div>
