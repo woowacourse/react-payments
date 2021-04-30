@@ -1,5 +1,5 @@
 import React from "react";
-import { getId } from "../../../@shared/utils";
+import { getId } from "../../utils";
 import CardShape from "./CardShape";
 
 const CardInfo = props => (
