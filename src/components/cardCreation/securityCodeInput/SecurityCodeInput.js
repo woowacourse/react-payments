@@ -20,9 +20,35 @@ const isValidInput = securityCode => {
 
 const SecurityCodeInput = ({ securityCode, setSecurityCode, isValidSecurityCode, setValidSecurityCode }) => {
   const [isModalOpened, setModalOpen] = useState(false);
+  const [pressedKeyList, setPressedKeyList] = useState([]);
+
+  useEffect(() => {
+    const lastPressedKey = pressedKeyList.slice(-1)[0] || '';
+
+    switch (lastPressedKey) {
+      case '확인':
+        setModalOpen(false);
+
+        break;
+      case '전체삭제':
+        setSecurityCode('');
+
+        break;
+      default:
+        securityCode.length < SECURITY_CODE_INPUT.LENGTH
+          ? setSecurityCode(prevState => prevState + lastPressedKey)
+          : setModalOpen(false);
+
+        break;
+    }
+  }, [pressedKeyList]);
 
   useEffect(() => {
     setValidSecurityCode(isValidInput(securityCode));
+
+    if (securityCode.length === 3) {
+      setModalOpen(false);
+    }
   }, [setValidSecurityCode, securityCode]);
 
   return (
@@ -45,12 +71,7 @@ const SecurityCodeInput = ({ securityCode, setSecurityCode, isValidSecurityCode,
         </Styled.Container>
       </div>
       {isModalOpened && (
-        <VirtualKeyboardModal
-          closeModal={() => setModalOpen(false)}
-          currentInput="securityCode"
-          state={securityCode}
-          setState={setSecurityCode}
-        />
+        <VirtualKeyboardModal closeModal={() => setModalOpen(false)} setPressedKeyList={setPressedKeyList} />
       )}
     </>
   );

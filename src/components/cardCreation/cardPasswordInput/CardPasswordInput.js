@@ -22,11 +22,44 @@ const isValidInput = cardPassword => {
 
 const CardPasswordInput = ({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
   const [isModalOpened, setModalOpen] = useState(false);
+  const [pressedKeyList, setPressedKeyList] = useState([]);
 
   const $input1 = useRef(null);
 
   useEffect(() => {
+    const lastPressedKey = pressedKeyList.slice(-1)[0] || '';
+
+    switch (lastPressedKey) {
+      case '확인':
+        setModalOpen(false);
+
+        break;
+      case '전체삭제':
+        setCardPassword({
+          [CARD_PASSWORD_INPUT.NAME.FIRST]: '',
+          [CARD_PASSWORD_INPUT.NAME.SECOND]: '',
+        });
+
+        break;
+      default:
+        if (cardPassword[CARD_PASSWORD_INPUT.NAME.FIRST] === '') {
+          setCardPassword(prevState => ({ ...prevState, [CARD_PASSWORD_INPUT.NAME.FIRST]: lastPressedKey }));
+        } else if (cardPassword[CARD_PASSWORD_INPUT.NAME.SECOND] === '') {
+          setCardPassword(prevState => ({ ...prevState, [CARD_PASSWORD_INPUT.NAME.SECOND]: lastPressedKey }));
+        } else {
+          setModalOpen(false);
+        }
+
+        break;
+    }
+  }, [pressedKeyList]);
+
+  useEffect(() => {
     setValidCardPassword(isValidInput(cardPassword));
+
+    if (Object.values(cardPassword).every(password => password !== '')) {
+      setModalOpen(false);
+    }
   }, [setValidCardPassword, cardPassword]);
 
   const handleInputChange = ({ target }) => {
@@ -72,12 +105,7 @@ const CardPasswordInput = ({ cardPassword, setCardPassword, isValidCardPassword,
         </Styled.Container>
       </div>
       {isModalOpened && (
-        <VirtualKeyboardModal
-          closeModal={() => setModalOpen(false)}
-          currentInput="cardPassword"
-          state={cardPassword}
-          setState={setCardPassword}
-        />
+        <VirtualKeyboardModal closeModal={() => setModalOpen(false)} setPressedKeyList={setPressedKeyList} />
       )}
     </>
   );
