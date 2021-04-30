@@ -1,0 +1,25 @@
+.card-list__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.card-list__item-button {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  font-size: 14px;
+  font-weight: 700;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+  transition: background-color 0.8s;
+}
+
+.card-list__item-button:focus {
+  background-color: #e5e5e5;
+}

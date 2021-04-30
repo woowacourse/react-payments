@@ -19,6 +19,7 @@
 }
 
 .card__company-name {
+  text-align: left;
   height: 10%;
   color: #383838;
   font-weight: 500;

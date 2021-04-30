@@ -27,26 +27,27 @@ export default function Card({
         </svg>
       </div>
       <div className="card__card-number-container">
-        {Array.from({ length: CARD.SERIAL_NUMBER_LENGTH }).map((_, index) => {
-          if (index < CARD.SERIAL_ID_CODE_LENGTH) {
-            return (
-              <div key={index} className="card__card-number">
-                {cardNumber.charAt(index)}
-              </div>
-            );
-          }
+        {cardNumber &&
+          Array.from({ length: CARD.SERIAL_NUMBER_LENGTH }).map((_, index) => {
+            if (index < CARD.SERIAL_ID_CODE_LENGTH) {
+              return (
+                <div key={index} className="card__card-number">
+                  {cardNumber.charAt(index)}
+                </div>
+              );
+            }
 
-          return (
-            <div
-              key={index}
-              className={[
-                'card__card-number',
-                'dot',
-                cardNumber.charAt(index) ? '' : 'hidden',
-              ].join(' ')}
-            ></div>
-          );
-        })}
+            return (
+              <div
+                key={index}
+                className={[
+                  'card__card-number',
+                  'dot',
+                  cardNumber.charAt(index) ? '' : 'hidden',
+                ].join(' ')}
+              ></div>
+            );
+          })}
       </div>
       <div className="card__card-detail-container">
         <div className="card__user-name">{userName || 'NAME'}</div>
