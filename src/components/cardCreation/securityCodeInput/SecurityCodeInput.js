@@ -48,6 +48,7 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
             value={securityCode}
             onFocus={handleSecurityInputFocus}
             styles={transparentInputStyles}
+            readOnly
           />
         </Styled.InputContainer>
         <QuestionDescription />

@@ -37,7 +37,7 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
 
     if (isInputFilledUp($input1.current.value)) {
       $input1.current.disabled = false;
-      $input1.current.focus();
+      isInputFilledUp(input0) && $input1.current.focus();
     }
   }, [input0, setCardPassword]);
 
@@ -76,6 +76,7 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
             value={input0}
             onFocus={handleSecurityInputFocus}
             styles={transparentInputStyles}
+            readOnly
           />
         </Styled.InputContainer>
         <Styled.InputContainer isValidInput={isValidCardPassword}>
@@ -90,6 +91,7 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
             onFocus={handleSecurityInputFocus}
             styles={transparentInputStyles}
             disabled
+            readOnly
           />
         </Styled.InputContainer>
         <Styled.CircleContainer>

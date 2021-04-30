@@ -165,6 +165,7 @@ const CardNumberInput = memo(
               onFocus={handleSecurityInputFocus}
               styles={transparentInputStyles['2']}
               disabled
+              readOnly
             />
             {isInputFilledUp(cardNumber['2']) && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
@@ -178,6 +179,7 @@ const CardNumberInput = memo(
               onFocus={handleSecurityInputFocus}
               styles={transparentInputStyles['3']}
               disabled
+              readOnly
             />
           </Styled.InputContainer>
         </div>
