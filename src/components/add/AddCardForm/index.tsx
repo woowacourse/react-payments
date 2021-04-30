@@ -38,6 +38,27 @@ const isInCardNumberInputRefsIndex = (index: number): index is CardNumberInputRe
   return index >= 0 && index < 3;
 };
 
+interface AddCardNumberInputProps {
+  index: number;
+  type: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>, index: number) => void;
+  cardNumber: CardNumberState;
+  ref?: React.RefObject<HTMLInputElement>;
+}
+
+const AddCardNumberInput = ({ index, type, ref, onChange, cardNumber }: AddCardNumberInputProps) => (
+  <Input
+    key={index}
+    type={type}
+    ref={ref}
+    textCenter
+    maxLength={CARD_NUMBER_DIGITS}
+    width="16%"
+    value={cardNumber[index]}
+    onChange={event => onChange(event, index)}
+  />
+);
+
 const AddCardForm = () => {
   const [cardBrand, setCardBrand] = useState<CardBrand>({ name: '', color: '' });
   const [ownerName, setOwnerName] = useState('');
@@ -187,7 +208,7 @@ const AddCardForm = () => {
 
   const CardNumberInputs = useMemo(
     () => [
-      { type: 'text', ref: null },
+      { type: 'text' },
       { type: 'text', ref: secondCardNumberInputRef },
       { type: 'password', ref: thirdCardNumberInputRef },
       { type: 'password', ref: fourthCardNumberInputRef },
@@ -196,26 +217,44 @@ const AddCardForm = () => {
   );
 
   const AddCardNumberInputs = () =>
-    CardNumberInputs.reduce<React.ReactNode[]>((acc, { type, ref }, index, array) => {
-      if (index) {
-        acc.push(<span key={index + array.length}>{CARD_NUMBER_SEPARATOR}</span>);
-      }
+    CardNumberInputs.reduce<React.ReactNode>(
+      (acc, { type, ref }, index, array) => (
+        <>
+          {acc}
+          {!!index && <span key={index + array.length}>{CARD_NUMBER_SEPARATOR}</span>}
+          <AddCardNumberInput
+            index={index}
+            type={type}
+            ref={ref}
+            cardNumber={cardNumber}
+            onChange={onChangeCardNumber}
+          />
+        </>
+      ),
+      null
+    );
 
-      acc.push(
-        <Input
-          key={index}
-          type={type}
-          ref={ref}
-          textCenter
-          maxLength={CARD_NUMBER_DIGITS}
-          width="16%"
-          value={cardNumber[index]}
-          onChange={event => onChangeCardNumber(event, index)}
-        />
-      );
+  // const AddCardNumberInputs = () =>
+  //   CardNumberInputs.reduce<React.ReactNode[]>((acc, { type, ref }, index, array) => {
+  //     if (index) {
+  //       acc.push(<span key={index + array.length}>{CARD_NUMBER_SEPARATOR}</span>);
+  //     }
 
-      return acc;
-    }, []);
+  //     acc.push(
+  //       <Input
+  //         key={index}
+  //         type={type}
+  //         ref={ref}
+  //         textCenter
+  //         maxLength={CARD_NUMBER_DIGITS}
+  //         width="16%"
+  //         value={cardNumber[index]}
+  //         onChange={event => onChangeCardNumber(event, index)}
+  //       />
+  //     );
+
+  //     return acc;
+  //   }, []);
 
   useEffect(() => {
     onSetCardBrand();
