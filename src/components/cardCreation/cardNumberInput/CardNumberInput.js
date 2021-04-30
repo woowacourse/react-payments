@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { memo, useRef, useEffect, useState } from 'react';
 import { COLOR } from '../../../constants/color';
 import { CARD_NUMBER_INPUT } from '../../../constants/input';
+import { isFilledAllNumber } from '../../../utils';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import CardSelectionModal from '../cardSelectionModal/CardSelectionModal';
 import Styled from './CardNumberInput.style';
@@ -33,7 +34,18 @@ const transparentInputStyles = {
   },
 };
 
-const CardNumberInput = ({ cardNumber, selectedCardInfo, setCardNumber, isValidCardNumber, setSelectedCardInfo }) => {
+const isValidCardNumberInput = cardNumber => {
+  return Object.values(cardNumber).every(cardNumber => isFilledAllNumber(cardNumber, CARD_NUMBER_INPUT.LENGTH));
+};
+
+const CardNumberInput = ({
+  cardNumber,
+  selectedCardInfo,
+  setCardNumber,
+  isValidCardNumber,
+  setValidCardNumber,
+  setSelectedCardInfo,
+}) => {
   const [isModalOpened, setModalOpen] = useState(false);
 
   const $input1 = useRef(null);
