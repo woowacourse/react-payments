@@ -7,5 +7,5 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.querySelector("#root")
+  document.querySelector("#app-root")
 );

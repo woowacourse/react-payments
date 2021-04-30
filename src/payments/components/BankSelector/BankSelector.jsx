@@ -14,7 +14,7 @@ const bankInfos = [
 ];
 
 const BankSelector = ({ onClick }) => (
-  <div className="absolute z-20 bottom-0 left-0 flex items-center justify-center w-full h-56 bg-custom-white rounded-t-md">
+  <div className="flex items-center justify-center w-full h-56 bg-custom-white rounded-t-md">
     <div className="flex flex-wrap gap-y-6 m-auto">
       {bankInfos.map(({ backgroundColor, name }) => (
         <Bank key={name} {...{ backgroundColor, name, onClick }} />

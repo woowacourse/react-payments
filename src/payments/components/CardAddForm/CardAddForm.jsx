@@ -9,8 +9,8 @@ import InputTitle from "../InputTitle/InputTitle";
 import Button from "../Button/Button";
 import Header from "../Header/Header";
 import BankSelector from "../BankSelector/BankSelector";
-import Dimmer from "../Dimmer/Dimmer";
 import Circle from "../Circle/Circle";
+import Modal from "../Modal/Modal";
 
 const initialNumberInfos = [
   { id: "number-info-0", type: "text", value: "", minLength: "4", maxLength: "4" },
@@ -406,10 +406,9 @@ const CardAddForm = props => {
       </div>
 
       {isBankSelectorVisible && (
-        <>
-          <Dimmer />
+        <Modal>
           <BankSelector onClick={handleBankClick} />
-        </>
+        </Modal>
       )}
     </>
   );
