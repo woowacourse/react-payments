@@ -4,21 +4,17 @@ const cards = [
   {
     id: 0,
     userName: 'POCO',
-    cardCompany: 'POCO',
-    cardNumber: '1234123412341234',
-    expirationDate: '1212',
+    company: 'POCO',
+    number: '1234123412341234',
+    expirationDate: '12/30',
     securityCode: '123',
     password: { first: '1', second: '2' },
-    cardNickName: 'POCO',
+    nickName: 'POCO',
   },
 ];
 
-const CardsContext = createContext();
+export const CardsContext = createContext();
 
 export function CardsProvider({ children }) {
   return <CardsContext.Provider value={cards}>{children}</CardsContext.Provider>;
-}
-
-export function CardsConsumer({ children }) {
-  return <CardsContext.Consumer>{children}</CardsContext.Consumer>;
 }
