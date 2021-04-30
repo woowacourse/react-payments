@@ -8,10 +8,13 @@ import "../style/background.css";
 const Card = ({
   cardType,
   cardNumbers = [],
-  username = "",
-  expirationDate = "",
+  username,
+  expirationDate,
   size,
 }) => {
+  username = username ? username : "NAME";
+  expirationDate = expirationDate ? expirationDate : "MM/YY";
+
   const [
     firstNumbers,
     secondNumbers,
@@ -19,8 +22,6 @@ const Card = ({
     fourthNumbers,
   ] = cardNumbers;
   const { name: cardName, color } = cardType;
-
-  console.log(firstNumbers, secondNumbers, thirdNumbers, fourthNumbers);
 
   return (
     <div className={`card card--${size} font-${size}`}>
@@ -48,11 +49,9 @@ const Card = ({
           </ul>
         )}
         <div className="card__inner-bottom font-m">
-          <span className="card__inner-bottom-username">
-            {username === "" ? "NAME" : username}
-          </span>
+          <span className="card__inner-bottom-username">{username}</span>
           <span className="card__inner-bottom-expiration-date">
-            {expirationDate === "" ? "MM/YY" : expirationDate}
+            {expirationDate}
           </span>
         </div>
       </div>
