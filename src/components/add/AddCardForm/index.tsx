@@ -18,27 +18,40 @@ import PasswordInputs from './PasswordInputs';
 export type CardNumberState = [string, string, string, string];
 export type PasswordState = [string, string];
 
+interface AddCardFormState {
+  cardBrand: CardBrand;
+  ownerName: string;
+  cardNumber: CardNumberState;
+  expDate: ExpDate;
+  CVC: string;
+  password: PasswordState;
+  nickname: string;
+}
+
 const AddCardForm: VFC = () => {
-  const [cardBrand, setCardBrand] = useState<CardBrand>({ name: '', color: '' });
-  const [ownerName, setOwnerName] = useState('');
-  const [cardNumber, setCardNumber] = useState<CardNumberState>(['', '', '', '']);
-  const [expDate, setExpDate] = useState<ExpDate>({ year: '', month: '' });
-  const [CVC, setCVC] = useState('');
-  const [password, setPassword] = useState<PasswordState>(['', '']);
+  const [formState, setFormState] = useState<AddCardFormState>({
+    cardBrand: { name: '', color: '' },
+    ownerName: '',
+    cardNumber: ['', '', '', ''],
+    expDate: { year: '', month: '' },
+    CVC: '',
+    password: ['', ''],
+    nickname: '',
+  });
+
   const [isCardBrandModalVisible, setIsCardBrandModalVisible] = useState(false);
   const [isNicknameModalVisible, setIsNicknameModalVisible] = useState(false);
-  const [nickname, setNickname] = useState('');
 
   const onClickCardBrandButton = (cardBrand: CardBrand) => {
-    setCardBrand(cardBrand);
+    setFormState({ ...formState, cardBrand });
     setIsCardBrandModalVisible(false);
   };
 
   const onSetCardBrand = () => {
-    const [firstCardNumber, secondCardNumber] = cardNumber;
+    const [firstCardNumber, secondCardNumber] = formState.cardNumber;
 
     if (firstCardNumber.length !== CARD_NUMBER_DIGITS || secondCardNumber.length !== CARD_NUMBER_DIGITS) {
-      setCardBrand({ name: '', color: '' });
+      setFormState({ ...formState, cardBrand: { name: '', color: '' } });
       return;
     }
 
@@ -49,14 +62,14 @@ const AddCardForm: VFC = () => {
       return;
     }
 
-    setCardBrand(cardBrand);
+    setFormState({ ...formState, cardBrand });
   };
 
   const isCardBrandEmpty = () => {
-    const [firstCardNumber, secondCardNumber] = cardNumber;
+    const [firstCardNumber, secondCardNumber] = formState.cardNumber;
 
     return (
-      cardBrand.name === '' &&
+      formState.cardBrand.name === '' &&
       firstCardNumber.length === CARD_NUMBER_DIGITS &&
       secondCardNumber.length === CARD_NUMBER_DIGITS
     );
@@ -67,6 +80,8 @@ const AddCardForm: VFC = () => {
       onSetCardBrand();
       return;
     }
+
+    const { cardNumber, cardBrand, CVC, expDate, ownerName, password } = formState;
 
     if (!isAllInputFilled({ cardNumber, cardBrand, CVC, expDate, ownerName, password })) {
       alert(ALERT.SHOULD_FILL_REQUIRED_INPUTS);
@@ -83,23 +98,32 @@ const AddCardForm: VFC = () => {
 
   useEffect(() => {
     onSetCardBrand();
-  }, cardNumber.slice(0, 2));
+  }, formState.cardNumber.slice(0, 2));
 
   return (
     <AddCardFormContainer>
       <CreditCard
         className="credit-card"
-        cardBrand={cardBrand}
-        expDate={expDate}
-        ownerName={ownerName}
-        cardNumber={cardNumber.join(CARD_NUMBER_SEPARATOR)}
+        cardBrand={formState.cardBrand}
+        expDate={formState.expDate}
+        ownerName={formState.ownerName}
+        cardNumber={formState.cardNumber.join(CARD_NUMBER_SEPARATOR)}
       />
       <form onSubmit={onSubmitCard}>
-        <CardNumberInputs cardNumber={cardNumber} setCardNumber={setCardNumber} />
-        <ExpDateInputs expDate={expDate} setExpDate={setExpDate} />
-        <OwnerNameInput ownerName={ownerName} setOwnerName={setOwnerName} />
-        <CVCInput CVC={CVC} setCVC={setCVC} />
-        <PasswordInputs password={password} setPassword={setPassword} />
+        <CardNumberInputs
+          cardNumber={formState.cardNumber}
+          setCardNumber={cardNumber => setFormState({ ...formState, cardNumber })}
+        />
+        <ExpDateInputs expDate={formState.expDate} setExpDate={expDate => setFormState({ ...formState, expDate })} />
+        <OwnerNameInput
+          ownerName={formState.ownerName}
+          setOwnerName={ownerName => setFormState({ ...formState, ownerName })}
+        />
+        <CVCInput CVC={formState.CVC} setCVC={CVC => setFormState({ ...formState, CVC })} />
+        <PasswordInputs
+          password={formState.password}
+          setPassword={password => setFormState({ ...formState, password })}
+        />
 
         <Button type="button" position="bottom-right" onClick={onClickNextButton}>
           다음
@@ -115,12 +139,12 @@ const AddCardForm: VFC = () => {
 
         {isNicknameModalVisible && (
           <NicknameModal
-            nickname={nickname}
-            setNickname={setNickname}
-            ownerName={ownerName}
-            cardNumber={cardNumber.join(CARD_NUMBER_SEPARATOR)}
-            expDate={expDate}
-            cardBrand={cardBrand}
+            nickname={formState.nickname}
+            setNickname={nickname => setFormState({ ...formState, nickname })}
+            ownerName={formState.ownerName}
+            cardNumber={formState.cardNumber.join(CARD_NUMBER_SEPARATOR)}
+            expDate={formState.expDate}
+            cardBrand={formState.cardBrand}
           />
         )}
       </form>
