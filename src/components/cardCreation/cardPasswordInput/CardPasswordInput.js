@@ -7,6 +7,7 @@ import { Circle } from '../../commons/circle/Circle';
 import { CARD_PASSWORD_INPUT } from '../../../constants/input';
 import { useState } from 'react';
 import VirtualKeyboardModal from '../virtualKeyboardModal/VirtualKeyboardModal';
+import { isFilledAllNumber } from '../../../utils';
 
 const transparentInputStyles = {
   color: COLOR.MINT,
@@ -15,9 +16,7 @@ const transparentInputStyles = {
 };
 
 const isValidInput = cardPassword => {
-  return Object.values(cardPassword).every(
-    cardPassword => cardPassword.length === CARD_PASSWORD_INPUT.LENGTH && !isNaN(cardPassword)
-  );
+  return Object.values(cardPassword).every(cardPassword => isFilledAllNumber(cardPassword, CARD_PASSWORD_INPUT.LENGTH));
 };
 
 const CardPasswordInput = ({ cardPassword, setCardPassword, isValidCardPassword, setValidCardPassword }) => {
@@ -60,7 +59,7 @@ const CardPasswordInput = ({ cardPassword, setCardPassword, isValidCardPassword,
     if (Object.values(cardPassword).every(password => password !== '')) {
       setModalOpen(false);
     }
-  }, [setValidCardPassword, cardPassword]);
+  }, [cardPassword]);
 
   const handleInputChange = ({ target }) => {
     setCardPassword(prevState => ({ ...prevState, [target.name]: target.value }));

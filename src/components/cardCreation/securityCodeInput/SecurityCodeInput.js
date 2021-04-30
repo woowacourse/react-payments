@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { memo, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
 import { SECURITY_CODE_INPUT } from '../../../constants/input';
+import { isFilledAllNumber } from '../../../utils';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import { QuestionDescription } from '../../commons/questionDescription/QuestionDescription';
 import VirtualKeyboardModal from '../virtualKeyboardModal/VirtualKeyboardModal';
@@ -14,9 +15,7 @@ const transparentInputStyles = {
   textAlign: 'center',
 };
 
-const isValidInput = securityCode => {
-  return securityCode.length === SECURITY_CODE_INPUT.LENGTH && !isNaN(securityCode);
-};
+const isValidInput = securityCode => isFilledAllNumber(securityCode, SECURITY_CODE_INPUT.LENGTH);
 
 const SecurityCodeInput = ({ securityCode, setSecurityCode, isValidSecurityCode, setValidSecurityCode }) => {
   const [isModalOpened, setModalOpen] = useState(false);

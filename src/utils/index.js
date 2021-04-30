@@ -9,3 +9,5 @@ export const shuffle = currentArray => {
 
   return array;
 };
+
+export const isFilledAllNumber = (value, targetLength) => value.length === targetLength && !isNaN(value);
