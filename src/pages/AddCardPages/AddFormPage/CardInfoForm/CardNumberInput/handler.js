@@ -3,20 +3,17 @@ import { CARD_NUMBER_UNIT_LENGTH, CARD_COMPANY_LIST, SECOND } from '../../../../
 export const handleBlockInvalidChar = (e) => ['e', 'E', '+', '-'].includes(e.key) && e.preventDefault();
 
 export const handleCardNumberInputChange = (props) => {
-  const { e, number, setCardInfo, nextInput, setIsModalOpen } = props;
+  const { e, number, setNumber, setCompany, nextRef, setIsModalOpen } = props;
   const inputName = e.target.name;
   const slicedInputValue = e.target.value.slice(0, CARD_NUMBER_UNIT_LENGTH);
 
   if (slicedInputValue.length === CARD_NUMBER_UNIT_LENGTH) {
-    nextInput[inputName]?.current.focus();
+    nextRef[inputName]?.current.focus();
   }
-  setCardInfo((prevState) => ({
-    ...prevState,
-    number: { ...number, [inputName]: slicedInputValue },
-  }));
+  setNumber({ ...number, [inputName]: slicedInputValue });
   setCardCompanyAfterValidation({
     number,
-    setCardInfo,
+    setCompany,
     slicedInputValue,
     inputName,
     setIsModalOpen,
@@ -24,7 +21,7 @@ export const handleCardNumberInputChange = (props) => {
 };
 
 function setCardCompanyAfterValidation(props) {
-  const { inputName, slicedInputValue, number, setCardInfo, setIsModalOpen } = props;
+  const { inputName, slicedInputValue, number, setCompany, setIsModalOpen } = props;
 
   if (
     inputName !== SECOND ||
@@ -41,8 +38,5 @@ function setCardCompanyAfterValidation(props) {
     setIsModalOpen(true);
     return;
   }
-  setCardInfo((prevState) => ({
-    ...prevState,
-    company: { name: company.name, color: company.color },
-  }));
+  setCompany({ name: company.name, color: company.color });
 }

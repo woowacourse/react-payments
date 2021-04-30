@@ -6,14 +6,14 @@ import { PAGE } from './constants';
 export default function App() {
   const [route, setRoute] = useState(PAGE.CARD_LIST);
   const [cardList, setCardList] = useState([]);
-  const addCard = (card) => setCardList((prevList) => [...prevList, card]);
+  const addCardInfo = (cardInfo) => setCardList((prevList) => [...prevList, cardInfo]);
 
   return (
     <div className="App">
       {route === PAGE.CARD_LIST ? (
         <CardListPage cardList={cardList} setRoute={setRoute} />
       ) : (
-        <AddCardPage addCard={addCard} route={route} setRoute={setRoute} />
+        <AddCardPage addCardInfo={addCardInfo} route={route} setRoute={setRoute} />
       )}
     </div>
   );

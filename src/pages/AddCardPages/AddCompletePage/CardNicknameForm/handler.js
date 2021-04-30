@@ -1,12 +1,12 @@
 import { PAGE, MAX_NICKNAME_LENGTH } from '../../../../constants';
 
-export const handleNicknameInputChange = ({ e, setCardInfo }) => {
+export const handleNicknameInputChange = ({ e, setNickname }) => {
   const slicedInputValue = e.target.value.slice(0, MAX_NICKNAME_LENGTH);
-  setCardInfo((prevState) => ({ ...prevState, nickname: slicedInputValue }));
+  setNickname(slicedInputValue);
 };
 
-export const handleNicknameSubmit = ({ e, setRoute, cardInfo, addCard }) => {
+export const handleNicknameSubmit = ({ e, setRoute, cardInfo, addCardInfo }) => {
   e.preventDefault();
-  addCard(cardInfo);
+  addCardInfo(cardInfo);
   setRoute(PAGE.CARD_LIST);
 };

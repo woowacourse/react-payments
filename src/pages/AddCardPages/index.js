@@ -15,7 +15,7 @@ const initialCardInfo = {
 };
 
 export const AddCardPage = (props) => {
-  const { route, setRoute, addCard } = props;
+  const { route, setRoute, addCardInfo } = props;
   const [cardInfo, setCardInfo] = useState(initialCardInfo);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -36,7 +36,7 @@ export const AddCardPage = (props) => {
           initialCardInfo={initialCardInfo}
           cardInfo={cardInfo}
           setCardInfo={setCardInfo}
-          addCard={addCard}
+          addCardInfo={addCardInfo}
         />
       )}
     </>

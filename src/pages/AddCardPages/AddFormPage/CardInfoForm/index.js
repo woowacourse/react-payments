@@ -11,6 +11,13 @@ import './style.css';
 export const CardInfoForm = (props) => {
   const { initialCardInfo, cardInfo, setCardInfo, setIsModalOpen, isFormFulFilled, setRoute } = props;
   const { number, expirationDate, ownerName, securityCode, password } = cardInfo;
+  const setNumber = (number) => setCardInfo((prevState) => ({ ...prevState, number }));
+  const setCompany = (company) => setCardInfo((prevState) => ({ ...prevState, company }));
+  const setExpirationDate = (expirationDate) => setCardInfo((prevState) => ({ ...prevState, expirationDate }));
+  const setOwnerName = (ownerName) => setCardInfo((prevState) => ({ ...prevState, ownerName }));
+  const setIsOwnerNameFilled = (isOwnerNameFilled) => setCardInfo((prevState) => ({ ...prevState, isOwnerNameFilled }));
+  const setSecurityCode = (securityCode) => setCardInfo((prevState) => ({ ...prevState, securityCode }));
+  const setPassword = (password) => setCardInfo((prevState) => ({ ...prevState, password }));
   const expirationDateInputRef = createRef();
   const ownerNameInputRef = createRef();
   const passwordInputRef = createRef();
@@ -19,24 +26,30 @@ export const CardInfoForm = (props) => {
     <Form className="CardInfoForm">
       <CardNumberInput
         number={number}
-        setCardInfo={setCardInfo}
+        setNumber={setNumber}
+        setCompany={setCompany}
         setIsModalOpen={setIsModalOpen}
         expirationDateInputRef={expirationDateInputRef}
       />
       <ExpirationDateInput
         expirationDate={expirationDate}
-        setCardInfo={setCardInfo}
+        setExpirationDate={setExpirationDate}
         ref={expirationDateInputRef}
         ownerNameInputRef={ownerNameInputRef}
       />
       <OwnerNameInput
         initialOwnerName={initialCardInfo.ownerName}
         ownerName={ownerName}
-        setCardInfo={setCardInfo}
+        setOwnerName={setOwnerName}
+        setIsOwnerNameFilled={setIsOwnerNameFilled}
         ref={ownerNameInputRef}
       />
-      <SecurityCodeInput securityCode={securityCode} setCardInfo={setCardInfo} passwordInputRef={passwordInputRef} />
-      <PasswordInput password={password} setCardInfo={setCardInfo} ref={passwordInputRef} />
+      <SecurityCodeInput
+        securityCode={securityCode}
+        setSecurityCode={setSecurityCode}
+        passwordInputRef={passwordInputRef}
+      />
+      <PasswordInput password={password} setPassword={setPassword} ref={passwordInputRef} />
       <Button
         disabled={!isFormFulFilled}
         onClick={(e) => handleCardInfoSubmit({ e, cardInfo, setIsModalOpen, initialCardInfo, setRoute })}

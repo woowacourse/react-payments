@@ -4,9 +4,9 @@ import { handleExpirationDateInputChange } from './handler';
 import { MONTH, YEAR } from '../../../../../constants';
 
 export const ExpirationDateInput = forwardRef((props, monthRef) => {
-  const { expirationDate, setCardInfo, ownerNameInputRef } = props;
+  const { expirationDate, setExpirationDate, ownerNameInputRef } = props;
   const yearRef = createRef();
-  const nextInput = {
+  const nextRef = {
     month: yearRef,
     year: ownerNameInputRef,
   };
@@ -22,7 +22,7 @@ export const ExpirationDateInput = forwardRef((props, monthRef) => {
           name={MONTH}
           ref={monthRef}
           value={expirationDate.month}
-          onChange={(e) => handleExpirationDateInputChange({ e, expirationDate, setCardInfo, nextInput })}
+          onChange={(e) => handleExpirationDateInputChange({ e, expirationDate, setExpirationDate, nextRef })}
         />
         <Slash />
         <Input
@@ -32,7 +32,7 @@ export const ExpirationDateInput = forwardRef((props, monthRef) => {
           name={YEAR}
           ref={yearRef}
           value={expirationDate.year}
-          onChange={(e) => handleExpirationDateInputChange({ e, expirationDate, setCardInfo, nextInput })}
+          onChange={(e) => handleExpirationDateInputChange({ e, expirationDate, setExpirationDate, nextRef })}
         />
       </Container>
     </>

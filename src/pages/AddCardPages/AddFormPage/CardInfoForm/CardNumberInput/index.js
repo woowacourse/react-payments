@@ -3,21 +3,21 @@ import { Container, Input, Label, Text } from '../../../../../components';
 import { handleBlockInvalidChar, handleCardNumberInputChange } from './handler';
 import { CARD_NUMBER_UNIT_LENGTH } from '../../../../../constants';
 
-export const CardNumberInput = ({ number, setCardInfo, setIsModalOpen, expirationDateInputRef }) => {
-  const firstCardNumberInput = createRef();
-  const secondCardNumberInput = createRef();
-  const thirdCardNumberInput = createRef();
-  const fourthCardNumberInput = createRef();
-
-  const nextInput = {
-    first: secondCardNumberInput,
-    second: thirdCardNumberInput,
-    third: fourthCardNumberInput,
+export const CardNumberInput = (props) => {
+  const { number, setNumber, setCompany, setIsModalOpen, expirationDateInputRef } = props;
+  const firstRef = createRef();
+  const secondRef = createRef();
+  const thirdRef = createRef();
+  const fourthRef = createRef();
+  const nextRef = {
+    first: secondRef,
+    second: thirdRef,
+    third: fourthRef,
     fourth: expirationDateInputRef,
   };
 
   useEffect(() => {
-    firstCardNumberInput.current?.focus();
+    firstRef.current?.focus();
   }, []);
 
   return (
@@ -27,40 +27,40 @@ export const CardNumberInput = ({ number, setCardInfo, setIsModalOpen, expiratio
         <Input
           className="CardNumberInput__Field"
           type="number"
-          ref={firstCardNumberInput}
+          ref={firstRef}
           name="first"
           value={number.first}
-          onChange={(e) => handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })}
+          onChange={(e) => handleCardNumberInputChange({ e, nextRef, number, setNumber, setCompany, setIsModalOpen })}
           onKeyDown={handleBlockInvalidChar}
         />
         <Dash length={number.first.length} />
         <Input
           className="CardNumberInput__Field"
           type="number"
-          ref={secondCardNumberInput}
+          ref={secondRef}
           name="second"
           value={number.second}
-          onChange={(e) => handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })}
+          onChange={(e) => handleCardNumberInputChange({ e, nextRef, number, setNumber, setCompany, setIsModalOpen })}
           onKeyDown={handleBlockInvalidChar}
         />
         <Dash length={number.second.length} />
         <Input
           className="CardNumberInput__Field"
           type="password"
-          ref={thirdCardNumberInput}
+          ref={thirdRef}
           name="third"
           value={number.third}
-          onChange={(e) => handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })}
+          onChange={(e) => handleCardNumberInputChange({ e, nextRef, number, setNumber, setCompany, setIsModalOpen })}
           onKeyDown={handleBlockInvalidChar}
         />
         <Dash length={number.third.length} />
         <Input
           className="CardNumberInput__Field"
           type="password"
-          ref={fourthCardNumberInput}
+          ref={fourthRef}
           name="fourth"
           value={number.fourth}
-          onChange={(e) => handleCardNumberInputChange({ e, nextInput, number, setCardInfo, setIsModalOpen })}
+          onChange={(e) => handleCardNumberInputChange({ e, nextRef, number, setNumber, setCompany, setIsModalOpen })}
           onKeyDown={handleBlockInvalidChar}
         />
       </Container>
