@@ -28,36 +28,14 @@ import {
   isValidPassword,
   isAllInputFilled,
 } from './validator';
+import CardNumberInputs from './CardNumberInput';
+import ExpDateInputs from './ExpDateInput';
+import OwnerNameInput from './OwnerNameInput';
+import CVCInput from './CVCInput';
+import PasswordInputs from './PasswordInputs';
 
 export type CardNumberState = [string, string, string, string];
 export type PasswordState = [string, string];
-
-type CardNumberInputRefsIndex = 0 | 1 | 2;
-
-const isInCardNumberInputRefsIndex = (index: number): index is CardNumberInputRefsIndex => {
-  return index >= 0 && index < 3;
-};
-
-interface AddCardNumberInputProps {
-  index: number;
-  type: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>, index: number) => void;
-  cardNumber: CardNumberState;
-  ref?: React.RefObject<HTMLInputElement>;
-}
-
-const AddCardNumberInput = ({ index, type, ref, onChange, cardNumber }: AddCardNumberInputProps) => (
-  <Input
-    key={index}
-    type={type}
-    ref={ref}
-    textCenter
-    maxLength={CARD_NUMBER_DIGITS}
-    width="16%"
-    value={cardNumber[index]}
-    onChange={event => onChange(event, index)}
-  />
-);
 
 const AddCardForm = () => {
   const [cardBrand, setCardBrand] = useState<CardBrand>({ name: '', color: '' });
@@ -69,90 +47,6 @@ const AddCardForm = () => {
   const [isCardBrandModalVisible, setIsCardBrandModalVisible] = useState(false);
   const [isNicknameModalVisible, setIsNicknameModalVisible] = useState(false);
   const [nickname, setNickname] = useState('');
-
-  const secondCardNumberInputRef = useRef<HTMLInputElement>(null);
-  const thirdCardNumberInputRef = useRef<HTMLInputElement>(null);
-  const fourthCardNumberInputRef = useRef<HTMLInputElement>(null);
-  const expYearInputRef = useRef<HTMLInputElement>(null);
-  const secondPasswordInputRef = useRef<HTMLInputElement>(null);
-
-  const focusNextCardNumberInput = (index: CardNumberInputRefsIndex) => {
-    const cardNumberInputRefs = [secondCardNumberInputRef, thirdCardNumberInputRef, fourthCardNumberInputRef];
-
-    cardNumberInputRefs[index].current?.focus();
-  };
-
-  const onChangeCardNumber = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
-    if (!isValidCardNumber(value)) return;
-
-    const nextValue: CardNumberState = [...cardNumber];
-
-    try {
-      nextValue[index] = value;
-    } catch (error) {
-      console.error('Segmentation Fault: invalid index - ' + error);
-      return;
-    }
-
-    setCardNumber(nextValue);
-
-    if (nextValue[index].length === CARD_NUMBER_DIGITS && isInCardNumberInputRefsIndex(index)) {
-      focusNextCardNumberInput(index);
-    }
-  };
-
-  const onChangeExpMonth = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!isValidExpMonth(value)) return;
-
-    setExpDate({ ...expDate, month: value });
-
-    if (value.length === EXP_DATE_DIGITS) {
-      expYearInputRef.current?.focus();
-    }
-  };
-
-  const onChangeExpYear = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!isValidExpYear(value)) return;
-
-    setExpDate({ ...expDate, year: value });
-  };
-
-  const onBlurExpDate = ({ target: { value } }: FocusEvent<HTMLInputElement>, index: keyof ExpDate) => {
-    if (value.length !== 1) return;
-
-    setExpDate({ ...expDate, [index]: EXP_DATE_WHITESPACE_CHARACTER + value });
-  };
-
-  const onChangeOwnerName = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!isValidOwnerName(value)) return;
-
-    setOwnerName(value.toUpperCase());
-  };
-
-  const onChangeCVC = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!isValidCVC(value)) return;
-
-    setCVC(value);
-  };
-
-  const onChangePassword = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
-    if (!isValidPassword(value)) return;
-
-    const nextPassword: PasswordState = [...password];
-
-    try {
-      nextPassword[index] = value;
-    } catch (error) {
-      console.error('Segmentation Fault: invalid index - ' + error);
-      return;
-    }
-
-    setPassword(nextPassword);
-
-    if (index === 0 && value.length === 1) {
-      secondPasswordInputRef.current?.focus();
-    }
-  };
 
   const onClickCardBrandButton = (cardBrand: CardBrand) => {
     setCardBrand(cardBrand);
@@ -206,56 +100,6 @@ const AddCardForm = () => {
     alert(ALERT.CARD_SUBMIT_SUCCESS);
   };
 
-  const CardNumberInputs = useMemo(
-    () => [
-      { type: 'text' },
-      { type: 'text', ref: secondCardNumberInputRef },
-      { type: 'password', ref: thirdCardNumberInputRef },
-      { type: 'password', ref: fourthCardNumberInputRef },
-    ],
-    [secondCardNumberInputRef, thirdCardNumberInputRef, fourthCardNumberInputRef]
-  );
-
-  const AddCardNumberInputs = () =>
-    CardNumberInputs.reduce<React.ReactNode>(
-      (acc, { type, ref }, index, array) => (
-        <>
-          {acc}
-          {!!index && <span key={index + array.length}>{CARD_NUMBER_SEPARATOR}</span>}
-          <AddCardNumberInput
-            index={index}
-            type={type}
-            ref={ref}
-            cardNumber={cardNumber}
-            onChange={onChangeCardNumber}
-          />
-        </>
-      ),
-      null
-    );
-
-  // const AddCardNumberInputs = () =>
-  //   CardNumberInputs.reduce<React.ReactNode[]>((acc, { type, ref }, index, array) => {
-  //     if (index) {
-  //       acc.push(<span key={index + array.length}>{CARD_NUMBER_SEPARATOR}</span>);
-  //     }
-
-  //     acc.push(
-  //       <Input
-  //         key={index}
-  //         type={type}
-  //         ref={ref}
-  //         textCenter
-  //         maxLength={CARD_NUMBER_DIGITS}
-  //         width="16%"
-  //         value={cardNumber[index]}
-  //         onChange={event => onChangeCardNumber(event, index)}
-  //       />
-  //     );
-
-  //     return acc;
-  //   }, []);
-
   useEffect(() => {
     onSetCardBrand();
   }, cardNumber.slice(0, 2));
@@ -270,77 +114,12 @@ const AddCardForm = () => {
         cardNumber={cardNumber.join(CARD_NUMBER_SEPARATOR)}
       />
       <form onSubmit={onSubmitCard}>
-        <AddCardInputLabel label={LABEL.CARD_NUMBER}>
-          <AddCardInputContainer>{AddCardNumberInputs()}</AddCardInputContainer>
-        </AddCardInputLabel>
-        <AddCardInputLabel label={LABEL.EXP_DATE} width="40%">
-          <AddCardInputContainer>
-            <Input
-              type="text"
-              placeholder={PLACEHOLDER.MONTH}
-              textCenter
-              maxLength={EXP_DATE_DIGITS}
-              width="40%"
-              value={expDate.month}
-              onChange={onChangeExpMonth}
-              onBlur={event => onBlurExpDate(event, 'month')}
-            />
-            /
-            <Input
-              type="text"
-              ref={expYearInputRef}
-              placeholder={PLACEHOLDER.YEAR}
-              textCenter
-              maxLength={EXP_DATE_DIGITS}
-              width="40%"
-              value={expDate.year}
-              onChange={onChangeExpYear}
-              onBlur={event => onBlurExpDate(event, 'year')}
-            />
-          </AddCardInputContainer>
-        </AddCardInputLabel>
-        <AddCardInputLabel label={[LABEL.OWNER_NAME, `${ownerName.length} / ${MAX_OWNER_NAME_LENGTH}`]}>
-          <AddCardInputContainer>
-            <Input
-              placeholder={PLACEHOLDER.OWNER_NAME}
-              type="text"
-              width="90%"
-              maxLength={MAX_OWNER_NAME_LENGTH}
-              value={ownerName}
-              onChange={onChangeOwnerName}
-            />
-          </AddCardInputContainer>
-        </AddCardInputLabel>
-        <AddCardInputLabel label={LABEL.CVC}>
-          <AddCardInputContainer width="25%">
-            <Input type="password" maxLength={CVC_DIGITS} textCenter value={CVC} onChange={onChangeCVC} />
-          </AddCardInputContainer>
-          <Container className="question-mark">
-            <img src={process.env.PUBLIC_URL + '/buttons/question-mark-btn.svg'} alt="cvc/cvv 도움말" />
-          </Container>
-        </AddCardInputLabel>
-        <AddCardInputLabel label={LABEL.PASSWORD}>
-          <Container flex justifyContent="space-between" width="60%">
-            <AddCardInputContainer width="23%">
-              <Input type="password" textCenter value={password[0]} onChange={event => onChangePassword(event, 0)} />
-            </AddCardInputContainer>
-            <AddCardInputContainer width="23%">
-              <Input
-                type="password"
-                ref={secondPasswordInputRef}
-                textCenter
-                value={password[1]}
-                onChange={event => onChangePassword(event, 1)}
-              />
-            </AddCardInputContainer>
-            <AddCardInputContainer width="23%">
-              <span className="password-dot" />
-            </AddCardInputContainer>
-            <AddCardInputContainer width="23%">
-              <span className="password-dot" />
-            </AddCardInputContainer>
-          </Container>
-        </AddCardInputLabel>
+        <CardNumberInputs cardNumber={cardNumber} setCardNumber={setCardNumber} />
+        <ExpDateInputs expDate={expDate} setExpDate={setExpDate} />
+        <OwnerNameInput ownerName={ownerName} setOwnerName={setOwnerName} />
+        <CVCInput CVC={CVC} setCVC={setCVC} />
+        <PasswordInputs password={password} setPassword={setPassword} />
+
         <Button type="button" position="bottom-right" onClick={onClickNextButton}>
           다음
         </Button>
