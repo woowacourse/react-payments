@@ -246,6 +246,7 @@ const CardAddForm = props => {
                     name={index}
                     minLength="4"
                     maxLength="4"
+                    inputmode="numeric"
                     value={value}
                     label={`카드 번호 입력란 ${index}`}
                     onChange={handleNumberInfoChange}
@@ -267,6 +268,7 @@ const CardAddForm = props => {
               className="w-36"
               minLength="5"
               maxLength="5"
+              inputmode="numeric"
               value={expirationDate}
               isValid={isExpirationDateValid ?? true}
               onChange={handleExpirationDateChange}
@@ -306,6 +308,7 @@ const CardAddForm = props => {
                 maxLength="4"
                 value={securityCode}
                 onChange={handleSecurityCodeChange}
+                inputmode="numeric"
                 isValid={isSecurityCodeValid ?? true}
                 label="보안 코드 입력란"
                 required
@@ -344,6 +347,7 @@ const CardAddForm = props => {
                 className="w-10 text-center"
                 minLength="1"
                 maxLength="1"
+                inputmode="numeric"
                 name="0"
                 value={passwords[0] || ""}
                 isValid={isPasswordValid ?? true}
@@ -357,6 +361,7 @@ const CardAddForm = props => {
                 minLength="1"
                 maxLength="1"
                 name="1"
+                inputmode="numeric"
                 value={passwords[1] || ""}
                 isValid={isPasswordValid ?? true}
                 label="카드 비밀번호2"

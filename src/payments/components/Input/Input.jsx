@@ -16,6 +16,7 @@ const Input = props => {
     onChange,
     value,
     name,
+    inputmode,
   } = props;
 
   return (
@@ -38,6 +39,7 @@ const Input = props => {
             onChange,
             value,
             name,
+            inputMode: inputmode,
           }}
         />
       </label>
@@ -58,6 +60,7 @@ Input.propTypes = {
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   required: PropTypes.bool,
   placeholder: PropTypes.string,
+  inputmode: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -67,6 +70,7 @@ Input.defaultProps = {
   name: Input.id,
   required: false,
   placeholder: "",
+  inputmode: "text",
 };
 
 export default Input;
