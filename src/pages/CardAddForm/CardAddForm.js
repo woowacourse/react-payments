@@ -45,14 +45,12 @@ const CardAddForm = () => {
 
   const { Modal, openModal, closeModal } = useModal(false);
   const {
-    isModalOpened: isCVCVKModalOpened,
     VirtualNumericKeyboard: CVCVirtualNumericKeyboard,
     openModal: openCVCVKModal,
     closeModal: closeCVCVKModal,
   } = useVirtualNumericKeyboard(false);
 
   const {
-    isModalOpened: isPinNumberVKModalOpened,
     VirtualNumericKeyboard: PinNumberVirtualNumericKeyboard,
     openModal: openPinNumberVKModal,
     closeModal: closePinNumberVKModal,
@@ -241,9 +239,7 @@ const CardAddForm = () => {
                 readOnly
                 required
               />
-              {isCVCVKModalOpened && (
-                <CVCVirtualNumericKeyboard onClick={handleClickCVCVirtualNumericKeyboard} />
-              )}
+              <CVCVirtualNumericKeyboard onClick={handleClickCVCVirtualNumericKeyboard} />
             </Styled.CVC>
             <Styled.ToolTip>
               <ToolTip buttonText="?" contentText={MESSAGE.CVC_TOOLTIP} />
@@ -266,11 +262,7 @@ const CardAddForm = () => {
               required
               readOnly
             />
-            {isPinNumberVKModalOpened && (
-              <PinNumberVirtualNumericKeyboard
-                onClick={handleClickPinNumberVirtualNumericKeyboard}
-              />
-            )}
+            <PinNumberVirtualNumericKeyboard onClick={handleClickPinNumberVirtualNumericKeyboard} />
           </Styled.Row>
           <Styled.Row right>
             <Button>다음</Button>
