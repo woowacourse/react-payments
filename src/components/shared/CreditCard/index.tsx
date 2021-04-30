@@ -4,13 +4,14 @@ import { Card } from '../../../types';
 import { CARD_NUMBER_SEPARATOR, MASK_CHARACTER } from '../../../constants/creditCard';
 import { DEFAULT_VALUE } from '../../../constants/creditCard';
 import { formatNumberNDigits } from '../../../utils/format';
+import { VFC } from 'react';
 
 interface Props extends Omit<Card, 'id' | 'CVC' | 'password'> {
   className?: string;
   size?: 'lg' | 'md';
 }
 
-const CreditCard = ({ className, size, cardBrand, ownerName, cardNumber, expDate }: Props) => {
+const CreditCard: VFC<Props> = ({ className, size, cardBrand, ownerName, cardNumber, expDate }) => {
   const splitedCardNumber = cardNumber.split(CARD_NUMBER_SEPARATOR);
   const { name, color } = cardBrand;
 

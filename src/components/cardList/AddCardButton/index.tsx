@@ -1,6 +1,7 @@
+import { VFC } from 'react';
 import { CardButton } from './styles';
 
-const AddCardButton = () => {
+const AddCardButton: VFC = () => {
   return <CardButton>+</CardButton>;
 };
 

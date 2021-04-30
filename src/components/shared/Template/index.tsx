@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import styled from 'styled-components';
 
 const Header = styled.header`
@@ -13,12 +12,13 @@ const Header = styled.header`
 `;
 
 interface Props {
+  children: React.ReactNode;
   title: string;
   hasPreviousPage?: boolean;
   className?: string;
 }
 
-const Template: FC<Props> = ({ className, children, title, hasPreviousPage }) => {
+const Template = ({ className, children, title, hasPreviousPage }: Props) => {
   return (
     <div className={className}>
       <Header>

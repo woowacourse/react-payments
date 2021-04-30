@@ -2,7 +2,11 @@ import { FC } from 'react';
 import AddCardButton from './AddCardButton';
 import { CardListContainer } from './styles';
 
-const CardList: FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const CardList = ({ children }: Props) => {
   return (
     <CardListContainer>
       {children}

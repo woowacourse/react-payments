@@ -16,7 +16,7 @@ interface Props {
   ownerName: string;
 }
 
-const NicknameModal: FC<Props> = ({ cardBrand, cardNumber, expDate, ownerName, nickname, setNickname }) => {
+const NicknameModal = ({ cardBrand, cardNumber, expDate, ownerName, nickname, setNickname }: Props) => {
   const onChangeNickname = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     if (!value) {
       setNickname(cardBrand.name);
