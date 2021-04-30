@@ -42,10 +42,4 @@ export const CardNumberInputWrapper = styled.div`
       color: ${COLOR.MAIN.MINT};
     }
   }
-
-  .input-alert {
-    padding: 3px;
-    font-size: ${FONT_SIZE.MINI};
-    color: ${COLOR.CARD.RED};
-  }
 `;

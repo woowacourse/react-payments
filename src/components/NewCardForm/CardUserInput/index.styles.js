@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR, FONT_SIZE } from '../../../constants/constant';
+import { FONT_SIZE } from '../../../constants/constant';
 
 export const CardUserInputWrapper = styled.div`
   margin-bottom: 10px;
@@ -12,11 +12,5 @@ export const CardUserInputWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     letter-spacing: -0.085rem;
-  }
-
-  .input-alert {
-    padding: 3px;
-    font-size: ${FONT_SIZE.MINI};
-    color: ${COLOR.CARD.RED};
   }
 `;

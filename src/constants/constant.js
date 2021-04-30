@@ -84,6 +84,11 @@ const MODAL = {
   CVC_HELP: 'cvcHelp',
 };
 
+const IMAGE = {
+  CVC:
+    'https://www.notion.so/af84fd78872749cea24952b58e117304#c346fa6980554f37a8789b2f4f705e3a',
+};
+
 export {
   CARD,
   FONT_SIZE,
@@ -93,4 +98,5 @@ export {
   MODAL,
   INPUT,
   ERROR_MESSAGE,
+  IMAGE,
 };

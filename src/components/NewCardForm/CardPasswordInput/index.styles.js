@@ -40,10 +40,4 @@ export const CardPasswordInputWrapper = styled.div`
       align-items: center;
     }
   }
-
-  .input-alert {
-    padding: 3px;
-    font-size: ${FONT_SIZE.MINI};
-    color: ${COLOR.CARD.RED};
-  }
 `;
