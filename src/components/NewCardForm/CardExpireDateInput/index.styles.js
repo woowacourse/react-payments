@@ -32,7 +32,7 @@ export const CardExpireDateInputWrapper = styled.div`
 
     .input-separator {
       display: inline-block;
-      width: 0.8rem;
+      min-width: 0.8rem;
       height: 45px;
       line-height: 41px;
       text-align: center;

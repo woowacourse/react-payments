@@ -17,7 +17,7 @@ const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
   const onSubmitAddCard = (e) => {
     e.preventDefault();
 
-    alert(SUCCESS_MESSAGE);
+    alert(SUCCESS_MESSAGE.NEW_CARD_REGISTER);
 
     addNewCard();
   };

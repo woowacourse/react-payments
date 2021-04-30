@@ -35,9 +35,9 @@ export const CardNumberInputWrapper = styled.div`
 
     .input-separator {
       display: inline-block;
-      width: 0.8rem;
+      min-width: 0.8rem;
       height: 45px;
-      line-height: 41px;
+      line-height: 45px;
       text-align: center;
       color: ${COLOR.MAIN.MINT};
     }
