@@ -6,7 +6,15 @@ import { PLACEHOLDER } from '../../../constants/message';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardOwnerInput.style';
 
-const CardOwnerInput = ({ cardOwner, setCardOwner }) => {
+const isValidInput = cardOwner => {
+  return cardOwner.length <= CARD_OWNER_INPUT.LENGTH.MAX;
+};
+
+const CardOwnerInput = ({ cardOwner, setCardOwner, setValidCardOwner }) => {
+  useEffect(() => {
+    setValidCardOwner(isValidInput(cardOwner));
+  }, [setValidCardOwner, cardOwner]);
+
   return (
     <div>
       <Styled.InputLabelContainer>

@@ -39,6 +39,14 @@ const SecurityCodeInput = ({ securityCode, setSecurityCode, isValidSecurityCode 
     }
   }, [pressedKeyList]);
 
+  useEffect(() => {
+    setValidSecurityCode(isValidInput(securityCode));
+
+    if (securityCode.length === 3) {
+      setModalOpen(false);
+    }
+  }, [setValidSecurityCode, securityCode]);
+
   return (
     <>
       <div>
