@@ -8,7 +8,7 @@ import CardUserInput from './CardUserInput';
 import CardCVCInput from './CardCVCInput';
 import CardPasswordInput from './CardPasswordInput';
 
-import { cardFormErrorMessages } from './valid';
+import { cardFormErrorMessages } from './cardFormValidator';
 import { ERROR_MESSAGE, INPUT, PAGE } from '../../constants/constant';
 import ButtonMenu from '../mixin/ButtonMenu';
 

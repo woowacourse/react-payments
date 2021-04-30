@@ -1,12 +1,13 @@
+import { ERROR_MESSAGE, INPUT } from '../../constants/constant';
 import { isPositiveInteger } from '../../utils/util';
 
 const getCardNumberMessage = (value) => {
   if (!isPositiveInteger(value)) {
-    return '숫자만 입력가능합니다.';
+    return ERROR_MESSAGE.ONLY_POSITIVE_NUMBER;
   }
 
-  if (value.length > 4) {
-    return '최대 4자리 정수만 입력가능합니다.';
+  if (value.length > INPUT.MAX_LENGTH.CARD.NUMBERS) {
+    return ERROR_MESSAGE.MAXIMUM_CARD_NUMBER;
   }
 
   return '';
@@ -14,11 +15,11 @@ const getCardNumberMessage = (value) => {
 
 const getExpireDateMessage = (value) => {
   if (!isPositiveInteger(value)) {
-    return '숫자만 입력가능합니다.';
+    return ERROR_MESSAGE.ONLY_POSITIVE_NUMBER;
   }
 
-  if (value.length > 2) {
-    return '최대 2자리 정수만 입력가능합니다.';
+  if (value.length > INPUT.MAX_LENGTH.CARD.EXPIRE_DATE) {
+    return ERROR_MESSAGE.MAXIMUM_EXPIRE_DATE;
   }
 
   return '';
@@ -26,11 +27,11 @@ const getExpireDateMessage = (value) => {
 
 const getPasswordMessage = (value) => {
   if (!isPositiveInteger(value)) {
-    return '숫자만 입력가능합니다.';
+    return ERROR_MESSAGE.ONLY_POSITIVE_NUMBER;
   }
 
   if (value.length > 1) {
-    return '최대 1자리 정수만 입력가능합니다.';
+    return ERROR_MESSAGE.MAXIMUM_PASSWORD;
   }
 
   return '';
@@ -38,15 +39,11 @@ const getPasswordMessage = (value) => {
 
 const getUserMessage = (value) => {
   if (value.length > 30) {
-    return '30글자 이하만 입력가능합니다.';
+    return ERROR_MESSAGE.MAXIMUM_USER;
   }
 
   if (!isNaN(value.slice(-1)[0])) {
-    return '숫자는 입력할 수 없습니다.';
-  }
-
-  if (value.length > 30) {
-    return '30글자 초과는 입력할 수 없습니다.';
+    return ERROR_MESSAGE.IS_NUMBER;
   }
 
   return '';
@@ -54,11 +51,11 @@ const getUserMessage = (value) => {
 
 const getCVCMessage = (value) => {
   if (!isPositiveInteger(value)) {
-    return '숫자만 입력가능합니다.';
+    return ERROR_MESSAGE.ONLY_POSITIVE_NUMBER;
   }
 
   if (value.length > 3) {
-    return '3글자 초과는 입력할 수 없습니다.';
+    return ERROR_MESSAGE.MAXIMUM_CVC;
   }
 
   return '';
