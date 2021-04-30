@@ -16,12 +16,8 @@ interface Props {
 }
 
 const NicknameModal: FC<Props> = ({ cardBrand, cardNumber, expDate, ownerName, nickname, setNickname }) => {
-  const onChangeNickname = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!value) {
-      setNickname(cardBrand.name);
-    }
-    setNickname(value);
-  };
+  const onChangeNickname = ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
+    setNickname(value || cardBrand.name);
 
   useEffect(() => {
     setNickname(cardBrand.name);
