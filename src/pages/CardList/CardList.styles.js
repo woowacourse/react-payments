@@ -43,7 +43,7 @@ const Styled = {
     cursor: pointer;
 
     &:hover {
-      background-color: #eee;
+      transform: scale(1.2);
     }
   `,
 };
