@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { CardAddForm } from "./components";
+import { CARD_INFO } from "./utils";
 
 const initialCardInfo = {
-  backgroundColor: "",
-  bank: "",
-  cardNumbers: ["", "", "", ""],
-  expirationDate: {
-    month: "",
-    year: "",
-  },
-  ownerName: "",
-  securityCode: "",
-  cardPasswords: ["", ""],
+  [CARD_INFO.BACKGROUND_COLOR]: "",
+  [CARD_INFO.BANK]: "",
+  [CARD_INFO.CARD_NUMBERS]: ["", "", "", ""],
+  [CARD_INFO.EXPIRATION_MONTH]: "",
+  [CARD_INFO.EXPIRATION_YEAR]: "",
+  [CARD_INFO.OWNER_NAME]: "",
+  [CARD_INFO.SECURITY_CODE]: "",
+  [CARD_INFO.CARD_PASSWORDS]: ["", ""],
 };
 
 const App = () => {

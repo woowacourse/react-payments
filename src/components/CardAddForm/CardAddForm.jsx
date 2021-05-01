@@ -4,14 +4,16 @@ import Input from "../Input/Input";
 import InputTitle from "../InputTitle/InputTitle";
 import Button from "../Button/Button";
 import CardNumbersInput from "./CardNumbersInput";
-import { checkValidation } from "../../utils";
+import ExpirationDateInput from "./ExpirationDateInput";
+import { CARD_INFO, checkValidation } from "../../utils";
 
 const initialValidation = {
-  cardNumbers: true,
-  expirationDate: true,
-  ownerName: true,
-  securityCode: true,
-  cardPasswords: true,
+  [CARD_INFO.CARD_NUMBERS]: true,
+  [CARD_INFO.EXPIRATION_MONTH]: true,
+  [CARD_INFO.EXPIRATION_YEAR]: true,
+  [CARD_INFO.OWNER_NAME]: true,
+  [CARD_INFO.SECURITY_CODE]: true,
+  [CARD_INFO.CARD_PASSWORDS]: true,
 };
 
 const CardAddForm = ({ cardInfo, setCardInfo }) => {
@@ -62,28 +64,16 @@ const CardAddForm = ({ cardInfo, setCardInfo }) => {
             />
           </div>
           <CardNumbersInput
-            values={cardInfo.cardNumbers}
+            cardNumbers={cardInfo.cardNumbers}
             isValid={validation.cardNumbers}
             onChange={handleInputChange}
           />
-          <div className="flex flex-col w-full mb-2">
-            <div className="mb-2 h-6">
-              <InputTitle innerText="만료일" />
-            </div>
-            <label className="sr-only" htmlFor="expiration-date-input">
-              만료일 입력란
-            </label>
-            <Input
-              id="expiration-date-input"
-              type="text"
-              placeholder="MM/YY"
-              className="w-36"
-              minLength="5"
-              maxLength="5"
-              value={expirationDate}
-              required
-            />
-          </div>
+          <ExpirationDateInput
+            expirationMonth={cardInfo.expirationMonth}
+            expirationYear={cardInfo.expirationYear}
+            isValid={validation.expirationMonth && validation.expirationYear}
+            onChange={handleInputChange}
+          />
           <div className="flex flex-col w-full mb-2">
             <div className="mb-2 h-6 flex justify-between items-center">
               <InputTitle innerText="카드 소유자 이름(선택)" />
