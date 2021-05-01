@@ -181,9 +181,8 @@ const CardAddForm = () => {
           <Styled.Row>
             <Styled.ExpiryDate>
               <InputBox
+                id="expiry-date"
                 value={formattedExpiryDate}
-                isError={isValidExpiryDate}
-                errorMessage={isValidExpiryDate ? MESSAGE.INVALID_EXPIRY_DATE : ''}
                 onChange={expiryDate.onChange}
                 placeholder="MM / YY"
                 labelText="만료일"
@@ -192,11 +191,14 @@ const CardAddForm = () => {
                 inputmode="numeric"
                 pattern={REGEX.EXPIRY_DATE.source}
                 required
+                isError={isValidExpiryDate}
+                errorMessage={isValidExpiryDate ? MESSAGE.INVALID_EXPIRY_DATE : ''}
               />
             </Styled.ExpiryDate>
           </Styled.Row>
           <Styled.Row>
             <InputBox
+              id="owner-name"
               value={ownerName.value}
               onChange={ownerName.onChange}
               labelText="카드 소유자 이름 (선택)"
@@ -208,15 +210,16 @@ const CardAddForm = () => {
             <Styled.CVC>
               <InputBox
                 type="password"
+                id="cvc"
                 pattern={REGEX.NUMBER_WITH_LENGTH(3).source}
-                isError={!isNumeric(CVC.value)}
-                errorMessage={!isNumeric(CVC.value) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''}
                 inputmode="numeric"
                 value={CVC.value}
                 onChange={CVC.onChange}
                 labelText="보안 코드 (CVC/CVV)"
                 maxLength={3}
                 required
+                isError={!isNumeric(CVC.value)}
+                errorMessage={!isNumeric(CVC.value) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''}
               />
             </Styled.CVC>
             <Styled.ToolTip>
@@ -230,12 +233,12 @@ const CardAddForm = () => {
               values={passwordDigits.value}
               onChange={passwordDigits.onChange}
               dotCount={2}
+              inputmode="numeric"
+              required
               isError={!isNumeric(passwordDigits.value.join(''))}
               errorMessage={
                 !isNumeric(passwordDigits.value.join('')) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''
               }
-              inputmode="numeric"
-              required
             />
           </Styled.Row>
           <Styled.Row right>

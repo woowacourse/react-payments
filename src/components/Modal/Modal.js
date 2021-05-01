@@ -8,7 +8,7 @@ const Modal = forwardRef(({ children, mobile, isOpened, onClose }, ref) => {
     if (!onClose) return;
 
     if (event.currentTarget !== event.target) return;
-    onClose();
+    onClose?.();
   };
 
   return (
