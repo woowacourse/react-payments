@@ -42,6 +42,7 @@ const CardAddition = (props) => {
     cardNumbers,
     cardNumbersInputRef,
     onCardNumbersChange,
+    verifyCardNumberInputsFullFilled,
   ] = useCardNumbers([]);
   const [expirationDate, onExpirationDateChange] = useExpirationDate({
     month: "",
@@ -52,15 +53,11 @@ const CardAddition = (props) => {
   const [password, onPasswordChange] = usePassword(["", ""]);
 
   useEffect(() => {
-    setIsModalOpen(
-      cardNumbers[CARD_NUMBER.LENGTH - 1]?.length === CARD_NUMBER.PARTIAL_LENGTH
-    );
+    setIsModalOpen(verifyCardNumberInputsFullFilled());
   }, [cardNumbers]);
 
   const isAllInputFulfilled = () => {
-    const cardNumbersCondition =
-      cardNumbers[CARD_NUMBER.LENGTH - 1]?.length ===
-      CARD_NUMBER.PARTIAL_LENGTH;
+    const cardNumbersCondition = verifyCardNumberInputsFullFilled();
     const expirationDateCondition =
       (expirationDate.month + expirationDate.year).length ===
       EXPIRATION_DATE.LENGTH;
