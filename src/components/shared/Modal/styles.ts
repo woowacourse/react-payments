@@ -1,7 +1,6 @@
-import { FC, MouseEvent } from 'react';
 import styled, { css } from 'styled-components';
-import PALETTE from '../../../constants/palette';
 import { Props } from '.';
+import PALETTE from '../../../constants/palette';
 
 export const ModalContainer = styled.div`
   display: flex;
