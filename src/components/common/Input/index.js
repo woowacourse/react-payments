@@ -2,25 +2,31 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./style.css";
 
-const Input = ({
-  type,
-  placeHolder,
-  isCenter = false,
-  value = "",
-  onChange = null,
-  ...option
-}) => {
-  return (
-    <input
-      className={`input ${isCenter ? "text-center" : ""}`}
-      type={type}
-      placeholder={placeHolder}
-      value={value}
-      onChange={onChange}
-      {...option}
-    />
-  );
-};
+const Input = React.forwardRef(
+  (
+    {
+      type,
+      placeHolder,
+      isCenter = false,
+      value = "",
+      onChange = null,
+      ...option
+    },
+    ref
+  ) => {
+    return (
+      <input
+        className={`input ${isCenter ? "text-center" : ""}`}
+        type={type}
+        placeholder={placeHolder}
+        value={value}
+        onChange={onChange}
+        {...option}
+        ref={ref}
+      />
+    );
+  }
+);
 
 export default Input;
 

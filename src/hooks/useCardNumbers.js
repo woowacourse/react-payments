@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CARD_NUMBER, FORMAT_CHAR } from "../constants";
 
 import { isNumberValue } from "../utils";
@@ -11,28 +11,31 @@ const splitCardNumbers = (value) => {
   return value.replace(/\D/g, "").match(/.{1,4}/g) || [];
 };
 
-const correctSelectionRange = (selectionStart, inputRef) => {
+const calculateProperSelectionLocation = (curSelection) => {
   const mod =
     CARD_NUMBER.PARTIAL_LENGTH + FORMAT_CHAR.CARD_NUMBERS_SEPARATOR.length;
-  const remainder = selectionStart % mod;
+  const remainder = curSelection % mod;
 
   const isSelectionValid = [
-    ...Array(FORMAT_CHAR.CARD_NUMBERS_SEPARATOR.length),
-  ].every((_, index) => remainder !== (mod - index) % mod);
+    ...Array(FORMAT_CHAR.CARD_NUMBERS_SEPARATOR.length - 1),
+  ].every((_, index) => remainder !== (mod - index - 1) % mod);
 
-  const fixedSelectionStart = isSelectionValid
-    ? selectionStart
-    : selectionStart + ((mod + 1 - remainder) % mod);
-
-  inputRef?.current?.setSelectionRange(
-    fixedSelectionStart,
-    fixedSelectionStart
-  );
+  return isSelectionValid ? curSelection : curSelection + (mod - remainder + 1);
 };
 
 const useCardNumbers = (initialCardNumbers) => {
   const [cardNumbers, setCardNumbers] = useState(initialCardNumbers);
+  const [inputSelectionStart, setInputSelectionStart] = useState(0);
   const cardNumbersInputRef = useRef();
+
+  //input의 selectionStart
+
+  useEffect(() => {
+    cardNumbersInputRef?.current?.setSelectionRange(
+      inputSelectionStart,
+      inputSelectionStart
+    );
+  }, [inputSelectionStart, cardNumbers]);
 
   const onCardNumbersChange = (event) => {
     const { value: inputString, selectionStart } = event.target;
@@ -68,10 +71,23 @@ const useCardNumbers = (initialCardNumbers) => {
     const splitNumbers = splitCardNumbers(unformattedValue);
 
     setCardNumbers(splitNumbers);
-    correctSelectionRange(selectionStart, cardNumbersInputRef);
+    setInputSelectionStart(calculateProperSelectionLocation(selectionStart));
   };
 
-  return [cardNumbers, cardNumbersInputRef, onCardNumbersChange];
+  const verifyCardNumberInputsFullFilled = () => {
+    return [...Array(CARD_NUMBER.LENGTH)]
+      .map(
+        (_, index) => cardNumbers[index]?.length === CARD_NUMBER.PARTIAL_LENGTH
+      )
+      .every((value) => value === true);
+  };
+
+  return [
+    cardNumbers,
+    cardNumbersInputRef,
+    onCardNumbersChange,
+    verifyCardNumberInputsFullFilled,
+  ];
 };
 
 export default useCardNumbers;
