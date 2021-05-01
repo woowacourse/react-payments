@@ -3,8 +3,8 @@ import styles from "./Button.module.scss";
 
 const cx = classNames.bind(styles);
 
-const Button = ({ children }) => {
-  return <button className={cx("button")}>{children}</button>;
+const Button = ({ onClick, children }) => {
+  return <button onClick={onClick} className={cx("button")}>{children}</button>;
 };
 
 export default Button;

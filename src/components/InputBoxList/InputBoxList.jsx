@@ -1,19 +1,19 @@
 import classNames from "classnames/bind";
 import styles from "./InputBoxList.module.scss";
 import {STATE_KEY} from '../../constants';
+import { isNumberText } from "../../utils/cardInputValidation";
 
 const cx = classNames.bind(styles);
 
-const InputBoxList = ({ setAppState, labelText, numbers, dotCount, className = "" }) => {
+const InputBoxList = ({ setCardInputState, labelText, numbers, dotCount, className = "" }) => {
   const onCardPasswordInputChange = (event) => {
     const { value, name: inputIndex } = event.target;
-    if (Number.isNaN(Number(value))) {
-      // TODO : utils 로 빼기
+    if (!isNumberText(value)) {
       event.target.value = event.target.value.slice(0, -1);
       return;
     }
 
-    setAppState(state => {
+    setCardInputState(state => {
       const newCardPassword = [...state[STATE_KEY.CARD_PASSWORD]];
       newCardPassword[Number(inputIndex)] = value
       return {

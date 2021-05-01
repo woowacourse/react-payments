@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./CardNumberInput.module.scss";
-import { STATE_KEY } from '../../constants';
+import { STATE_KEY, CARD_INPUT } from '../../constants';
 import { getCardCompany } from '../../utils/cardCompany';
+import { isAllNumberTextLengthCorrect } from "../../utils/cardInputValidation";
 
 const cx = classNames.bind(styles);
 
-const CardNumberInput = ({ labelText, className, appState, setAppState, showCardCompanySelectContainer}) => {
+const CardNumberInput = ({ labelText, className, cardInputState, setCardInputState, showCardCompanySelectContainer}) => {
   const onCardNumberInputChange = (event) => {
     const { value, name } = event.target;
     
@@ -15,7 +16,7 @@ const CardNumberInput = ({ labelText, className, appState, setAppState, showCard
       return;
     }
 
-    setAppState(state => ({
+    setCardInputState(state => ({
       ...state,
       [STATE_KEY.CARD_NUMBER]: {
         ...state[STATE_KEY.CARD_NUMBER],
@@ -25,18 +26,18 @@ const CardNumberInput = ({ labelText, className, appState, setAppState, showCard
   };
 
   useEffect(() => {
-    if (Object.values(appState[STATE_KEY.CARD_NUMBER]).every((value) => value.length === 4)) {
-      const newCardCompany = getCardCompany(Object.values(appState[STATE_KEY.CARD_NUMBER]).join(" "));
+    if (isAllNumberTextLengthCorrect(cardInputState[STATE_KEY.CARD_NUMBER], CARD_INPUT.CARD_NUMBER_TEXT_LENGTH)) {
+      const newCardCompany = getCardCompany(Object.values(cardInputState[STATE_KEY.CARD_NUMBER]).join(" "));
       if (!newCardCompany) {
         showCardCompanySelectContainer();
       }
 
-      newCardCompany && setAppState(state => ({
+      newCardCompany && setCardInputState(state => ({
         ...state,
         [STATE_KEY.CARD_COMPANY]: newCardCompany
       }));
     }
-  }, [appState[STATE_KEY.CARD_NUMBER]]);
+  }, [cardInputState[STATE_KEY.CARD_NUMBER]]);
 
   return (
     <div className={`${cx("card-number-input")} ${className}`}>

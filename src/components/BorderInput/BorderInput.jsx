@@ -3,8 +3,8 @@ import styles from "./BorderInput.module.scss";
 
 const cx = classNames.bind(styles);
 
-const BorderInput = ({ className }) => {
-  return <input className={`${cx("border-input")} ${className}`}></input>;
+const BorderInput = ({ className, onChange }) => {
+  return <input className={`${cx("border-input")} ${className}`} onChange={onChange}></input>;
 };
 
 export default BorderInput;

@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./CardCompanySelectContainer.module.scss";
 
-import { getAllCardCompanies, getCardColor, isCardCompany } from '../../utils/cardCompany';
+import { getAllCardCompanies, getCardColor } from '../../utils/cardCompany';
 import { STATE_KEY } from '../../constants';
 import BackDrop from "../../components/BackDrop/BackDrop";
 import BottomSlider from "../../components/BottomSlider/BottomSlider";
@@ -13,11 +13,11 @@ const CardCompanySelectContainer = ({
   hideCardCompanySelectContainer,
   backDropAnimationClass,
   bottomSliderAnimationClass,
-  appState,
-  setAppState,
+  cardInputState,
+  setCardInputState,
 }) => {
   const onCircleButtonClick = (cardCompany) => {
-    setAppState(state => ({
+    setCardInputState(state => ({
       ...state,
       [STATE_KEY.CARD_COMPANY]: cardCompany
     }));

@@ -32,6 +32,10 @@ export const CARD_INPUT = Object.freeze({
   CARD_NUMBER_PLACEHOLDER: "0000",
   EXPIRATION_MONTH_PLACEHOLDER: "MM",
   EXPIRATION_YEAR_PLACEHOLDER: "YY",
+  CARD_NUMBER_TEXT_LENGTH: 4,
+  CARD_CVC_TEXT_LENGTH: 3,
+  CARD_EXPIRATION_TEXT_LENGTH: 2,
+  CARD_PASSWORD_LIST_LENGTH: 2,
 });
 
 export const ANIMATION = Object.freeze({
@@ -53,4 +57,5 @@ export const STATE_KEY = Object.freeze({
   CARD_PASSWORD: "cardPassword",
   EXPIRATION_MONTH: "expirationMonth",
   EXPIRATION_YEAR: "expirationYear",
+  CARD_LIST: "cardList",
 });

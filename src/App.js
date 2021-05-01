@@ -8,7 +8,7 @@ import AddCardCompletePage from "./pages/AddCardCompletePage/AddCardCompletePage
 import { STATE_KEY } from "./constants";
 
 function App() {
-  const [appState, setAppState] = useState({
+  const [cardInputState, setCardInputState] = useState({
     [STATE_KEY.CARD_COMPANY]: "",
     [STATE_KEY.CARD_NUMBER]: {
       [STATE_KEY.FIRST_CARD_NUMBER]: "",
@@ -26,17 +26,32 @@ function App() {
     [STATE_KEY.CARD_PASSWORD]: [null, null],
   });
 
+  const [cardListState, setCardListState] = useState([]);
+
+  console.log(cardInputState);
+  console.log("cardListState", cardListState);
+
   return (
     <div className="App">
       <Switch>
         <Route path="/add" exact>
-          <AddCardPage appState={appState} setAppState={setAppState} />
+          <AddCardPage
+            cardInputState={cardInputState}
+            setCardInputState={setCardInputState}
+            cardListState={cardListState}
+            setCardListState={setCardListState}
+          />
         </Route>
         <Route path="/complete" exact>
-          <AddCardCompletePage appState={appState} />
+          <AddCardCompletePage
+            cardInputState={cardInputState}
+            setCardInputState={setCardInputState}
+            cardListState={cardListState}
+            setCardListState={setCardListState}
+          />
         </Route>
         <Route>
-          <CardListPage />
+          <CardListPage cardListState={cardListState} />
         </Route>
       </Switch>
     </div>

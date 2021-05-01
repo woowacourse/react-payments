@@ -1,20 +1,20 @@
-import { useEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./CardExpirationInput.module.scss";
 import { STATE_KEY } from '../../constants';
+import { isNumberText } from "../../utils/cardInputValidation";
 
 const cx = classNames.bind(styles);
 
-const CardExpirationInput = ({ inputWidth = "100%", labelText, className, monthPlaceholder, yearPlaceholder, appState, setAppState }) => {
+const CardExpirationInput = ({ inputWidth = "100%", labelText, className, monthPlaceholder, yearPlaceholder, cardInputState, setCardInputState }) => {
   const onCardExpirationInputChange = (event) => {
     const { value, name } = event.target;
     
-    if (Number.isNaN(Number(value))) {
+    if (!isNumberText(value)) {
       event.target.value = event.target.value.slice(0, -1);
       return;
     }
 
-    setAppState(state => ({
+    setCardInputState(state => ({
       ...state,
       [STATE_KEY.CARD_EXPIRATION]: {
         ...state[STATE_KEY.CARD_EXPIRATION],

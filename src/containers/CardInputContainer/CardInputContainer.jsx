@@ -11,48 +11,48 @@ import InputBoxList from "../../components/InputBoxList/InputBoxList";
 
 const cx = classNames.bind(styles);
 
-const CardInputContainer = ({ appState, setAppState, showCardCompanySelectContainer }) => {
+const CardInputContainer = ({ cardInputState, setCardInputState, showCardCompanySelectContainer }) => {
   return (
     <form className={cx("card-input-container")}>
       <CardNumberInput
-        inputWidth="100%"
         className={cx("card-input-container__number")}
+        inputWidth="100%"
         labelText={INPUT_LABEL_TEXT.CARD_NUMBER}
-        appState={appState}
-        setAppState={setAppState}
+        cardInputState={cardInputState}
+        setCardInputState={setCardInputState}
         showCardCompanySelectContainer={showCardCompanySelectContainer}
       />
       <CardExpirationInput
-        inputWidth="137px"
         className={cx("card-input-container__expiration")}
+        inputWidth="137px"
+        labelText={INPUT_LABEL_TEXT.CARD_EXPIRATION}
         monthPlaceholder={CARD_INPUT.EXPIRATION_MONTH_PLACEHOLDER}
         yearPlaceholder={CARD_INPUT.EXPIRATION_YEAR_PLACEHOLDER}
-        labelText={INPUT_LABEL_TEXT.CARD_EXPIRATION}
-        appState={appState}
-        setAppState={setAppState}
+        cardInputState={cardInputState}
+        setCardInputState={setCardInputState}
       />
       <TextLimitInput
-        inputWidth="100%"
         className={cx("card-input-container__owner")}
+        inputWidth="100%"
+        labelText={INPUT_LABEL_TEXT.CARD_OWNER}
         placeholder={CARD_INPUT.OWNER_PLACEHOLDER}
         lengthLimit={CARD_INPUT.OWNER_NAME_LENGTH_LIMIT}
-        labelText={INPUT_LABEL_TEXT.CARD_OWNER}
-        appState={appState}
-        setAppState={setAppState}
+        cardInputState={cardInputState}
+        setCardInputState={setCardInputState}
       />
       <GuideInput
-        inputWidth="84px"
         className={cx("card-input-container__cvc")}
+        inputWidth="84px"
         labelText={INPUT_LABEL_TEXT.CARD_CVC}
-        setAppState={setAppState}
+        setCardInputState={setCardInputState}
       />
       <InputBoxList
-        numbers={[1, 2]}
-        dotCount={2}
         className={cx("card-input-container__password")}
         labelText={INPUT_LABEL_TEXT.CARD_PASSWORD}
-        appState={appState}
-        setAppState={setAppState}
+        numbers={[1, 2]}
+        dotCount={2}
+        cardInputState={cardInputState}
+        setCardInputState={setCardInputState}
       />
     </form>
   );

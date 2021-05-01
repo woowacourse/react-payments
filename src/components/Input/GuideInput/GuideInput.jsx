@@ -5,19 +5,20 @@ import Input from "../Input";
 import cardCVC from "../../../assets/images/card-cvc.png";
 import questionMark from "../../../assets/svgs/question-mark.svg";
 import { STATE_KEY } from "../../../constants";
+import { isNumberText } from "../../../utils/cardInputValidation";
 
 const cx = classNames.bind(styles);
 
-const GuideInput = ({ setAppState, labelText, guideIcon = questionMark, guideImage = cardCVC, className = "", inputWidth }) => {
+const GuideInput = ({ setCardInputState, labelText, guideIcon = questionMark, guideImage = cardCVC, className = "", inputWidth }) => {
   const onCardCVCInputChange = (event) => {
     const { value } = event.target;
 
-    if (Number.isNaN(Number(value))) {
+    if (!isNumberText(value)) {
       event.target.value = event.target.value.slice(0, -1);
       return;
     }
 
-    setAppState(state => ({
+    setCardInputState(state => ({
       ...state,
       [STATE_KEY.CARD_CVC]: value
     }))
