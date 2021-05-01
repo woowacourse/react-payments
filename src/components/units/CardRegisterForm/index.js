@@ -40,7 +40,7 @@ CardRegisterForm.propTypes = {
   expirationDate: PropTypes.object.isRequired,
   ownerName: PropTypes.string.isRequired,
   secureCode: PropTypes.string.isRequired,
-  cardPassword: PropTypes.object.isRequired,
+  cardPassword: PropTypes.string.isRequired,
   setCardNumbers: PropTypes.func.isRequired,
   setExpirationDate: PropTypes.func.isRequired,
   setOwnerName: PropTypes.func.isRequired,

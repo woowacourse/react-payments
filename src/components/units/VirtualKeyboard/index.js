@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import shuffle from '../../../utils/utils';
 import * as Style from './style';
 
+export const KeyboardPortal = ({ children }) => {
+  const el = document.getElementById('keyboard');
+  return createPortal(children, el);
+};
+
 const VirtualKeyboard = (props) => {
-  const { numberLength } = props;
+  const { setInputNumbers } = props;
 
   const originNumbers = [...Array.from({ length: 10 }, (_, idx) => idx), null, null];
   const [keypadNumbers, setKeypadNumbers] = useState(originNumbers);
-  const [inputNumbers, setInputNumbers] = useState([]);
 
   const onClickKeypad = (event) => {
     const number = event.target.dataset.number;
     if (!number) return;
-    if (inputNumbers.length >= numberLength) return;
 
     setInputNumbers((inputNumbers) => inputNumbers.concat(number));
     setKeypadNumbers(shuffle(keypadNumbers));
@@ -24,22 +28,26 @@ const VirtualKeyboard = (props) => {
   };
 
   const keypads = keypadNumbers.map((num, idx) => (
-    <Style.KeyPad className="keypad-number" key={num || idx * -1} data-number={num} onClick={onClickKeypad}>
+    <Style.Keypad className="keypad-number" key={num || idx * -1} data-number={num} onClick={onClickKeypad}>
       {num}
-    </Style.KeyPad>
+    </Style.Keypad>
   ));
 
+  useEffect(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+  });
+
   return (
-    <Style.Root>
+    <Style.Root className="keyboard-inner">
       {keypads}
-      <Style.KeyPad>NOTHING</Style.KeyPad>
-      <Style.KeyPad onClick={onDeleteKeypad}>DELETE</Style.KeyPad>
+      <Style.Keypad></Style.Keypad>
+      <Style.Keypad onClick={onDeleteKeypad}>DELETE</Style.Keypad>
     </Style.Root>
   );
 };
 
 VirtualKeyboard.propTypes = {
-  numberLength: PropTypes.number.isRequired,
+  setInputNumbers: PropTypes.func.isRequired,
 };
 
 export default VirtualKeyboard;

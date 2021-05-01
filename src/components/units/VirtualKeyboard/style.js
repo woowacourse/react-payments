@@ -3,7 +3,7 @@ import PALETTE from '../../../styles/palette';
 
 const Root = styled.div`
   position: absolute;
-  bottom: 0;
+  width: 100%;
   background-color: ${PALETTE.COLOR_SELECTOR_WHITE};
 
   display: grid;
@@ -15,7 +15,7 @@ const Root = styled.div`
   height: 227px;
 `;
 
-const KeyPad = styled.button`
+const Keypad = styled.button`
   font-size: 1.25rem;
   border: 1px solid ${PALETTE.DEFAULT_CYAN};
   border-radius: 4px;
@@ -33,4 +33,4 @@ const KeyPad = styled.button`
   }
 `;
 
-export { Root, KeyPad };
+export { Root, Keypad };

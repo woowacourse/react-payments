@@ -1,15 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import RegisterInputWrapper from '../../shared/RegisterInputWrapper';
-import EllipseSvg from '../../../assets/secure-ellipse-cyan.svg';
+import VirtualKeyboard, { KeyboardPortal } from '../../units/VirtualKeyboard';
 import { FRAGMENT_INDEX } from '../../../constants/constants';
+import EllipseSvg from '../../../assets/secure-ellipse-cyan.svg';
 import * as Style from './style';
 
 const CardPasswordInput = (props) => {
   const { type, label, cardPassword, setCardPassword } = props;
   const { FIRST, SECOND } = FRAGMENT_INDEX;
+  const [isVirtualKeyboardOpened, setVirtualKeyboardOpened] = useState(false);
 
-  const firstInput = useRef(null);
   const secondInput = useRef(null);
 
   const passwordMark = Array.from({ length: 2 }).map((_, idx) => (
@@ -30,12 +31,18 @@ const CardPasswordInput = (props) => {
       if (currentValue.length > 1) return;
     }
 
-    setCardPassword((prevPassword) => ({ ...prevPassword, [index]: currentValue }));
+    setCardPassword((prevPassword) => prevPassword.concat(currentValue));
   };
 
   const moveFocusToNextFragment = () => {
     secondInput.current.focus();
   };
+
+  useEffect(() => {
+    if (cardPassword.length === 2) {
+      setVirtualKeyboardOpened(false);
+    }
+  }, [cardPassword]);
 
   return (
     <>
@@ -44,10 +51,10 @@ const CardPasswordInput = (props) => {
           <Style.PasswordInput
             type="password"
             aria-label="password-input-1"
-            value={cardPassword[FIRST]}
+            value={cardPassword[0] || ''}
             data-password-idx={FIRST}
             onChange={handleChangeNumbers}
-            ref={firstInput}
+            onFocus={() => setVirtualKeyboardOpened(true)}
             required
           />
         </Style.InputWrapper>
@@ -55,7 +62,7 @@ const CardPasswordInput = (props) => {
           <Style.PasswordInput
             type="password"
             aria-label="password-input-2"
-            value={cardPassword[SECOND]}
+            value={cardPassword[1] || ''}
             data-password-idx={SECOND}
             onChange={handleChangeNumbers}
             ref={secondInput}
@@ -63,6 +70,9 @@ const CardPasswordInput = (props) => {
           />
         </Style.InputWrapper>
         {passwordMark}
+        <KeyboardPortal>
+          {isVirtualKeyboardOpened && <VirtualKeyboard inputNumbers={cardPassword} setInputNumbers={setCardPassword} />}
+        </KeyboardPortal>
       </RegisterInputWrapper>
     </>
   );
@@ -71,7 +81,7 @@ const CardPasswordInput = (props) => {
 CardPasswordInput.propTypes = {
   type: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  cardPassword: PropTypes.object.isRequired,
+  cardPassword: PropTypes.string.isRequired,
   setCardPassword: PropTypes.func.isRequired,
 };
 

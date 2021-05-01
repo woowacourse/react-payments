@@ -21,7 +21,7 @@ const CardRegister = (props) => {
   const [expirationDate, setExpirationDate] = useState({ [MONTH]: '', [YEAR]: '' });
   const [ownerName, setOwnerName] = useState('');
   const [secureCode, setSecureCode] = useState('');
-  const [cardPassword, setCardPassword] = useState({ [FIRST]: '', [SECOND]: '' });
+  const [cardPassword, setCardPassword] = useState('');
 
   const isCardIdentified =
     Object.values(cardNumbers)
