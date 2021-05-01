@@ -4,7 +4,11 @@ import { CardColorWrapper } from './index.styles';
 import { CARD } from '../../../constants/constant';
 import CardColorItem from './CardColorItem';
 
-const CardColor = ({ onClickCardColor }) => {
+const CardColor = ({ addCardColor }) => {
+  const onClickCardColor = ({ currentTarget }) => {
+    addCardColor(currentTarget.getAttribute('name'));
+  };
+
   return (
     <CardColorWrapper>
       {Object.keys(CARD).map((key, index) => (
@@ -20,7 +24,7 @@ const CardColor = ({ onClickCardColor }) => {
 };
 
 CardColor.propTypes = {
-  onClickCardColor: PropTypes.func,
+  addCardColor: PropTypes.func,
 };
 
 export default CardColor;

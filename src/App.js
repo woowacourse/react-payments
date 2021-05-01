@@ -46,7 +46,7 @@ function App() {
     resetNewCardInfo();
   };
 
-  const onClickCardColor = (name) => {
+  const addCardColor = (name) => {
     setNewCardInfo({
       ...newCardInfo,
       cardName: name,
@@ -121,7 +121,7 @@ function App() {
           <Modal onCloseModal={onCloseModal}>
             <>
               {openModalContent.modalContent === MODAL.CARD_COLOR && (
-                <CardColor onClickCardColor={onClickCardColor} />
+                <CardColor addCardColor={addCardColor} />
               )}
               {openModalContent.modalContent === MODAL.CVC_HELP && <CVCHelp />}
             </>

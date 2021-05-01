@@ -4,7 +4,7 @@ import { CardColorItemWrapper } from './index.styles';
 
 const CardColorItem = ({ name, color, onClickCardColor }) => {
   return (
-    <CardColorItemWrapper color={color} onClick={() => onClickCardColor(name)}>
+    <CardColorItemWrapper color={color} name={name} onClick={onClickCardColor}>
       <div className='card-color'></div>
       <div className='card-name'>{name} 카드</div>
     </CardColorItemWrapper>
