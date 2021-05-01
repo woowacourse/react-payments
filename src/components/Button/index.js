@@ -1,16 +1,16 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.css';
+import classnames from 'classnames/bind';
+import styles from './style.css';
 
-export const Button = ({ type, theme, backgroundColor, children, ...props }) => {
+const cx = classnames.bind(styles);
+
+export const Button = ({ className, type, theme, backgroundColor, children, ...props }) => {
+  const buttonClass = cx('Button', `Button--${theme}`);
+
   return (
-    <button
-      type={type}
-      className={['Button', `Button--${theme}`].join(' ')}
-      style={{ backgroundColor }}
-      {...props}
-    >
+    <button type={type} className={buttonClass} style={{ backgroundColor }} {...props}>
       {children}
     </button>
   );
