@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 import styles from './style.css';
+import { COLOR } from '../../constants';
 
 const cx = classnames.bind(styles);
 
@@ -24,7 +25,7 @@ Card.propTypes = {
 
 Card.defaultProps = {
   size: 'small',
-  backgroundColor: '#E5E5E5',
+  backgroundColor: COLOR.CARD_THEME,
   boxShadow: false,
   children: '',
 };

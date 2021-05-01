@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { COLOR } from '../../constants';
 
 export const Circle = ({ color, diameter }) => {
   const radius = diameter / 2;
@@ -22,6 +23,6 @@ Circle.propTypes = {
 };
 
 Circle.defaultProps = {
-  color: '#04C09E',
+  color: COLOR.CIRCLE_THEME,
   diameter: 4,
 };

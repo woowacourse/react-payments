@@ -1,5 +1,6 @@
 export { PAGE } from './page';
 export {
+  COLOR,
   MONTH,
   YEAR,
   FIRST,

@@ -22,6 +22,19 @@ export const SECURITY_CODE_LENGTH = 3;
 export const PASSWORD_UNIT_LENGTH = 1;
 export const PASSWORD_IN_STRING_LENGTH = 2;
 
+export const COLOR = {
+  CARD_THEME: '#E5E5E5',
+  CIRCLE_THEME: '#04C09E',
+  POCO_CARD: '#547CE4',
+  LOYD_CARD: '#94DACD',
+  CREDIT_CARD_CHIP: '#cbba64',
+  NICKNAME_TEXT: '#575757',
+  TITLE_TEXT: '#383838',
+  SLASH_TEXT: '#737373',
+  LABEL: '#525252',
+  SHINHAN_CARD: '#e24141',
+};
+
 export const CARD_COMPANY_LIST = [
   {
     name: 'KB국민카드',

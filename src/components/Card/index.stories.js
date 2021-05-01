@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from '.';
 import { Text } from '../Text';
+import { COLOR } from '../../constants';
 
 export default {
   title: 'Component/Card',
@@ -21,19 +22,19 @@ PlusCard.args = {
 export const PocoCard = Template.bind({});
 PocoCard.args = {
   size: 'medium',
-  backgroundColor: '#547CE4',
+  backgroundColor: COLOR.POCO_CARD,
   boxShadow: true,
 };
 
 export const LoydCard = Template.bind({});
 LoydCard.args = {
   size: 'large',
-  backgroundColor: '#94DACD',
+  backgroundColor: COLOR.LOYD_CARD,
   boxShadow: true,
 };
 
 export const CreditCardChip = Template.bind({});
 CreditCardChip.args = {
   size: 'chip',
-  backgroundColor: '#cbba64',
+  backgroundColor: COLOR.CREDIT_CARD_CHIP,
 };

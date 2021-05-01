@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
+import { COLOR } from '../../constants';
 
 export const Title = ({ color, fontSize, children, ...props }) => {
   return (
@@ -17,6 +18,6 @@ Title.propTypes = {
 };
 
 Title.defaultProps = {
-  color: '#383838',
+  color: COLOR.TITLE_TEXT,
   fontSize: '1rem',
 };

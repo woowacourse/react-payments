@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 import styles from './style.css';
+import { COLOR } from '../../constants';
 
 const cx = classnames.bind(styles);
 
@@ -42,7 +43,7 @@ Text.propTypes = {
 
 Text.defaultProps = {
   className: '',
-  color: '#575757',
+  color: COLOR.NICKNAME_TEXT,
   fontSize: '1rem',
   fontWeight: '400',
   textAlign: 'center',

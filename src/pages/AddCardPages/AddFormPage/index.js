@@ -6,6 +6,7 @@ import {
   EXPIRATION_DATE_IN_STRING_FORMAT_LENGTH,
   SECURITY_CODE_LENGTH,
   PASSWORD_IN_STRING_LENGTH,
+  COLOR,
 } from '../../../constants';
 import {
   getNumberInString,
@@ -58,7 +59,7 @@ export const AddFormPage = (props) => {
 
 function BackwardButton() {
   const size = 16;
-  const color = '#525252';
+  const color = COLOR.LABEL;
 
   return (
     <Button theme="backward" onClick={() => {}}>

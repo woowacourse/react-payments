@@ -1,6 +1,7 @@
 import { createRef, forwardRef } from 'react';
 import { Container, Input, Label, Text } from '../../../../../components';
 import { handleExpirationDateInputChange } from './handler';
+import { COLOR } from '../../../../../constants';
 
 export const ExpirationDateInput = forwardRef((props, monthRef) => {
   const { cardInfo, setCardInfo, ownerNameInputRef, setExpirationDateInString } = props;
@@ -49,7 +50,7 @@ export const ExpirationDateInput = forwardRef((props, monthRef) => {
 
 function Slash() {
   return (
-    <Text color="#737373" fontSize="0.75rem" textAlign="center" width="1rem">
+    <Text color={COLOR.SLASH_TEXT} fontSize="0.75rem" textAlign="center" width="1rem">
       /
     </Text>
   );

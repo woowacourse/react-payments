@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { Input, Label, Text } from '../../../../../components';
 import { handleOwnerNameInputChange, handleOwnerNameInputBlur } from './handler';
-import { MAX_OWNER_NAME_LENGTH } from '../../../../../constants';
+import { MAX_OWNER_NAME_LENGTH, COLOR } from '../../../../../constants';
 
 export const OwnerNameInput = forwardRef((props, ref) => {
   const { initialCardInfo, cardInfo, setCardInfo } = props;
@@ -16,7 +16,7 @@ export const OwnerNameInput = forwardRef((props, ref) => {
           fontWeight="600"
           letterSpacing="0.14em"
           textAlign="end"
-          color="#525252"
+          color={COLOR.LABEL}
           width="2rem"
         >
           {`${ownerName.length}/${MAX_OWNER_NAME_LENGTH}`}

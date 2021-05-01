@@ -1,13 +1,14 @@
 import React from 'react';
 import { CreditCard } from '.';
 import { Card } from '..';
+import { COLOR } from '../../constants';
 
 export default {
   title: 'Component/CreditCard',
   component: CreditCard,
   decorators: [
     (Story) => (
-      <Card backgroundColor="#94DACD" boxShadow size="medium">
+      <Card backgroundColor={COLOR.LOYD_CARD} boxShadow size="medium">
         <Story />
       </Card>
     ),
