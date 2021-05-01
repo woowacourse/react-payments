@@ -41,8 +41,8 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setCardList, ca
     await firestore.collection('cardList').doc(editId).update(content);
 
     setCardList(prevState => {
-      const targetIndex = prevState.findIndex(prev => prev.id === editId);
       const copiedState = [...prevState];
+      const targetIndex = copiedState.findIndex(card => card.id === editId);
       copiedState[targetIndex] = { ...content, id: editId };
 
       return copiedState;
