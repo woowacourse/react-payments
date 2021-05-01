@@ -1,8 +1,9 @@
 import { firestore } from './firebase';
 
+type Collection = 'cards';
+
 const API = {
-  // firebase firestore 기반 db query
-  async getAll<T>(collection: string) {
+  async getAll<T>(collection: Collection) {
     const result: T[] = [];
     const docs = await firestore.collection(collection).get();
 
@@ -11,7 +12,7 @@ const API = {
     return result;
   },
 
-  add<T>(item: T, collection: string) {
+  add<T>(item: T, collection: Collection) {
     return firestore.collection(collection).add(item);
   },
 };
