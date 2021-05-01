@@ -2,6 +2,9 @@
   "name": "react-payments",
   "version": "0.1.0",
   "license": "MIT",
+  "dependencies": {
+    "firebase": "^8.4.3"
+  },
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
