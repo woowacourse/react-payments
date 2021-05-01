@@ -22,6 +22,13 @@ export const SECURITY_CODE_LENGTH = 3;
 export const PASSWORD_UNIT_LENGTH = 1;
 export const PASSWORD_IN_STRING_LENGTH = 2;
 
+export const CARD_NUMBER_INPUT = {
+  FIRST: 0,
+  SECOND: 1,
+  THIRD: 2,
+  FOURTH: 3,
+};
+
 export const COLOR = {
   CARD_THEME: '#E5E5E5',
   CIRCLE_THEME: '#04C09E',

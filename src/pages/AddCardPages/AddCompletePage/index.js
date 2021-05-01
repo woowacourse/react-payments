@@ -9,9 +9,9 @@ import './style.css';
 
 export const AddCompletePage = (props) => {
   const { setRoute, initialCardInfo, cardInfo, setCardInfo } = props;
-  const { number, expirationDate, ownerName, company, nickname } = cardInfo;
-  const numberInString = getNumberInString({ number });
-  const expirationDateInString = getExpirationDateInString({ expirationDate });
+  const { cardNumbers, expirationDate, ownerName, company, nickname } = cardInfo;
+  const numberInString = getNumberInString(cardNumbers);
+  const expirationDateInString = getExpirationDateInString(expirationDate);
   const ownerNameInString = getOwnerNameInString({ ownerName, cardInfo });
 
   return (

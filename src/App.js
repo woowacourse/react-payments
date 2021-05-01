@@ -4,7 +4,7 @@ import { AddCardPage } from './pages/AddCardPages';
 import { PAGE } from './constants';
 
 export const initialCardInfo = {
-  number: { first: '', second: '', third: '', fourth: '' },
+  cardNumbers: [],
   company: { name: '', color: '' },
   expirationDate: { month: '', year: '' },
   ownerName: 'NAME',

@@ -17,9 +17,9 @@ import './style.css';
 
 export const AddFormPage = (props) => {
   const { setRoute, initialCardInfo, cardInfo, setCardInfo, isModalOpen, setIsModalOpen } = props;
-  const { number, expirationDate, ownerName, company } = cardInfo;
-  const numberInString = getNumberInString({ number });
-  const expirationDateInString = getExpirationDateInString({ expirationDate });
+  const { cardNumbers, expirationDate, ownerName, company } = cardInfo;
+  const numberInString = getNumberInString(cardNumbers);
+  const expirationDateInString = getExpirationDateInString(expirationDate);
   const ownerNameInString = getOwnerNameInString({ ownerName, cardInfo });
 
   return (
