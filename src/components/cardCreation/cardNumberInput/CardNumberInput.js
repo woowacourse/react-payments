@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { memo, useRef, useEffect, useState } from 'react';
 import { COLOR } from '../../../constants/color';
-import { FIRST, SECOND, THIRD, FOURTH } from '../../../constants/inputName';
+import { INPUT_NAME, INPUT_LENGTH } from '../../../constants/input';
 import { NUMBER_REG_EXR } from '../../../constants/regExp';
 import { MODAL_TYPE, useBottomModal } from '../../../hooks/useBottomModal';
 import { hasObjectAnyValue } from '../../../utils/object';
@@ -10,6 +10,8 @@ import { TransparentInput } from '../../commons/input/TransparentInput';
 import CardSelectionModal from '../cardSelectionModal/CardSelectionModal';
 import VirtualKeyboard from '../virtualKeyboard/VirtualKeyboard';
 import Styled from './CardNumberInput.style';
+
+const { FIRST, SECOND, THIRD, FOURTH } = INPUT_NAME;
 
 const transparentInputStyles = {
   [FIRST]: {
@@ -38,22 +40,8 @@ const transparentInputStyles = {
   },
 };
 
-const FULL_INPUT_LENGTH = 4;
-
-const isValidCardNumberInput = cardNumber => {
-  return Object.values(cardNumber).every(cardNumber => cardNumber.length === FULL_INPUT_LENGTH && !isNaN(cardNumber));
-};
-
 const CardNumberInput = memo(
-  ({
-    cardNumber,
-    selectedCardInfo,
-    setCardNumber,
-    isValidCardNumber,
-    setValidCardNumber,
-    setSelectedCardInfo,
-    isEditingMode,
-  }) => {
+  ({ cardNumber, selectedCardInfo, setCardNumber, isValidCardNumber, setSelectedCardInfo, isEditingMode }) => {
     const { modalType, isModalOpened, openModal, closeModal, BottomModal } = useBottomModal();
     const [currentInputName, setCurrentInputName] = useState(null);
 
@@ -65,11 +53,10 @@ const CardNumberInput = memo(
     const isSelectedCardInfo = !!selectedCardInfo.cardId;
 
     useEffect(() => {
-      const isValidInput = isValidCardNumberInput(cardNumber) && isSelectedCardInfo;
+      const isValidInput = isValidCardNumber && isSelectedCardInfo;
       isValidInput && modalType === MODAL_TYPE.VIRTUAL_KEYBOARD && closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
-      setValidCardNumber(isValidInput);
 
-      if (currentInputName === THIRD && cardNumber[THIRD].length === FULL_INPUT_LENGTH) {
+      if (currentInputName === THIRD && cardNumber[THIRD].length === INPUT_LENGTH.CARD_NUMBER) {
         $fourthInput.current.focus();
       }
     });
@@ -85,11 +72,11 @@ const CardNumberInput = memo(
     }, [isEditingMode]);
 
     const handleInputChange = ({ target }) => {
-      if (target.value.length > FULL_INPUT_LENGTH || !NUMBER_REG_EXR.test(target.value)) return;
+      if (target.value.length > INPUT_LENGTH.CARD_NUMBER || !NUMBER_REG_EXR.test(target.value)) return;
 
       setCardNumber(prevState => ({ ...prevState, [target.name]: target.value }));
 
-      if (target.value.length !== FULL_INPUT_LENGTH) return;
+      if (target.value.length !== INPUT_LENGTH.CARD_NUMBER) return;
 
       if (target.name === FIRST) {
         $secondInput.current.disabled = false;
@@ -105,8 +92,8 @@ const CardNumberInput = memo(
     };
 
     const handleInputClick = () => {
-      cardNumber[FIRST].length === FULL_INPUT_LENGTH &&
-        cardNumber[SECOND].length === FULL_INPUT_LENGTH &&
+      cardNumber[FIRST].length === INPUT_LENGTH.CARD_NUMBER &&
+        cardNumber[SECOND].length === INPUT_LENGTH.CARD_NUMBER &&
         !isSelectedCardInfo &&
         openModal(MODAL_TYPE.CARD_SELECTION);
     };
@@ -127,43 +114,43 @@ const CardNumberInput = memo(
           >
             <TransparentInput
               name={FIRST}
-              minLength={FULL_INPUT_LENGTH}
-              maxLength={FULL_INPUT_LENGTH}
+              minLength={INPUT_LENGTH.CARD_NUMBER}
+              maxLength={INPUT_LENGTH.CARD_NUMBER}
               value={cardNumber[FIRST]}
               onChange={handleInputChange}
               innerRef={$firstInput}
               styles={transparentInputStyles[FIRST]}
               autoFocus
             />
-            {cardNumber[FIRST].length === FULL_INPUT_LENGTH && <Styled.Dash>-</Styled.Dash>}
+            {cardNumber[FIRST].length === INPUT_LENGTH.CARD_NUMBER && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
               name={SECOND}
-              minLength={FULL_INPUT_LENGTH}
-              maxLength={FULL_INPUT_LENGTH}
+              minLength={INPUT_LENGTH.CARD_NUMBER}
+              maxLength={INPUT_LENGTH.CARD_NUMBER}
               value={cardNumber[SECOND]}
               onChange={handleInputChange}
               innerRef={$secondInput}
               styles={transparentInputStyles[SECOND]}
               disabled
             />
-            {cardNumber[SECOND].length === FULL_INPUT_LENGTH && <Styled.Dash>-</Styled.Dash>}
+            {cardNumber[SECOND].length === INPUT_LENGTH.CARD_NUMBER && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
               name={THIRD}
               type="password"
-              minLength={FULL_INPUT_LENGTH}
-              maxLength={FULL_INPUT_LENGTH}
+              minLength={INPUT_LENGTH.CARD_NUMBER}
+              maxLength={INPUT_LENGTH.CARD_NUMBER}
               value={cardNumber[THIRD]}
               onFocus={handleInputFocus}
               innerRef={$thirdInput}
               styles={transparentInputStyles[THIRD]}
               readOnly
             />
-            {cardNumber[THIRD].length === FULL_INPUT_LENGTH && <Styled.Dash>-</Styled.Dash>}
+            {cardNumber[THIRD].length === INPUT_LENGTH.CARD_NUMBER && <Styled.Dash>-</Styled.Dash>}
             <TransparentInput
               name={FOURTH}
               type="password"
-              minLength={FULL_INPUT_LENGTH}
-              maxLength={FULL_INPUT_LENGTH}
+              minLength={INPUT_LENGTH.CARD_NUMBER}
+              maxLength={INPUT_LENGTH.CARD_NUMBER}
               value={cardNumber[FOURTH]}
               onFocus={handleInputFocus}
               innerRef={$fourthInput}
@@ -186,7 +173,7 @@ const CardNumberInput = memo(
             currentInputName={currentInputName}
             inputValue={cardNumber}
             setInputValue={setCardNumber}
-            maxLength={FULL_INPUT_LENGTH}
+            maxLength={INPUT_LENGTH.CARD_NUMBER}
           />
         )}
       </>
@@ -210,7 +197,6 @@ CardNumberInput.propTypes = {
   }).isRequired,
   setCardNumber: PropTypes.func.isRequired,
   isValidCardNumber: PropTypes.bool.isRequired,
-  setValidCardNumber: PropTypes.func.isRequired,
   setSelectedCardInfo: PropTypes.func.isRequired,
   isEditingMode: PropTypes.bool.isRequired,
 };

@@ -2,8 +2,10 @@ import PropTypes from 'prop-types';
 import Styled from './CreditCard.style';
 import { CARD_SIZE, Card } from './Card';
 import { COLOR } from '../../../constants/color';
-import { FIRST, SECOND, THIRD, FOURTH, MONTH, YEAR } from '../../../constants/inputName';
+import { INPUT_NAME } from '../../../constants/input';
 export { CARD_SIZE } from './Card';
+
+const { FIRST, SECOND, THIRD, FOURTH, MONTH, YEAR } = INPUT_NAME;
 
 export const CreditCard = ({ size, backgroundColor, content }) => {
   const maskNumbers = numbers => {

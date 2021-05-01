@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types';
 import { memo } from 'react';
 import { COLOR } from '../../../constants/color';
+import { INPUT_LENGTH } from '../../../constants/input';
 import { ALPHABET_REG_EXR } from '../../../constants/regExp';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardOwnerInput.style';
 
-const FULL_INPUT_LENGTH = 30;
-
 const isValidInput = value => {
-  return ALPHABET_REG_EXR.test(value) && value.length <= FULL_INPUT_LENGTH;
+  return ALPHABET_REG_EXR.test(value) && value.length <= INPUT_LENGTH.CARD_OWNER;
 };
 
 const CardOwnerInput = memo(({ cardOwner, setCardOwner }) => {
@@ -23,7 +22,7 @@ const CardOwnerInput = memo(({ cardOwner, setCardOwner }) => {
       <Styled.InputLabelContainer>
         <div>카드 소유자 이름(선택)</div>
         <div>
-          {cardOwner.length} / {FULL_INPUT_LENGTH}
+          {cardOwner.length} / {INPUT_LENGTH.CARD_OWNER}
         </div>
       </Styled.InputLabelContainer>
       <Styled.InputContainer>

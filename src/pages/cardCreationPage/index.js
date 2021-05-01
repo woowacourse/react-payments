@@ -9,10 +9,13 @@ import ExpiredDateInput from '../../components/cardCreation/expiredDateInput/Exp
 import CardOwnerInput from '../../components/cardCreation/cardOwnerInput/CardOwnerInput';
 import SecurityCodeInput from '../../components/cardCreation/securityCodeInput/SecurityCodeInput';
 import CardPasswordInput from '../../components/cardCreation/cardPasswordInput/CardPasswordInput';
+import { isValidMonthInput, isValidMultipleInput, isValidYearInput } from '../../validator/cardCreationPage';
 import Styled from './style';
 import { COLOR } from '../../constants/color';
 import { PAGE } from '../../constants/page';
-import { FIRST, SECOND, THIRD, FOURTH, MONTH, YEAR } from '../../constants/inputName';
+import { INPUT_LENGTH, INPUT_NAME } from '../../constants/input';
+
+const { FIRST, SECOND, THIRD, FOURTH, MONTH, YEAR } = INPUT_NAME;
 
 const CardCreationPage = ({ setCurrentPage, setNewCardInfo, cardInfoForEdit }) => {
   const [cardNumber, setCardNumber] = useState({ [FIRST]: '', [SECOND]: '', [THIRD]: '', [FOURTH]: '' });
@@ -22,10 +25,12 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo, cardInfoForEdit }) =
   const [cardPassword, setCardPassword] = useState({ [FIRST]: '', [SECOND]: '' });
   const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: COLOR.GRAY_100 });
 
-  const [isValidCardNumber, setValidCardNumber] = useState(false);
-  const [isValidCardExpiredDate, setValidCardExpiredDate] = useState(false);
-  const [isValidSecurityCode, setValidSecurityCode] = useState(false);
-  const [isValidCardPassword, setValidCardPassword] = useState(false);
+  const isValidCardNumber = isValidMultipleInput(cardNumber, INPUT_LENGTH.CARD_NUMBER);
+  const isValidCardExpiredDate = isValidMonthInput(cardExpiredDate) && isValidYearInput(cardExpiredDate);
+  const isValidSecurityCode = securityCode.length === INPUT_LENGTH.SECURITY_CODE;
+  const isValidCardPassword = isValidMultipleInput(cardPassword, INPUT_LENGTH.CARD_PASSWORD);
+
+  const isValidAllInput = isValidCardNumber && isValidCardExpiredDate && isValidSecurityCode && isValidCardPassword;
 
   useEffect(() => {
     if (!cardInfoForEdit) return;
@@ -37,8 +42,6 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo, cardInfoForEdit }) =
     setCardPassword(cardInfoForEdit.cardPassword);
     setSelectedCardInfo(cardInfoForEdit.selectedCardInfo);
   }, [cardInfoForEdit]);
-
-  const isValidAllInput = isValidCardNumber && isValidCardExpiredDate && isValidSecurityCode && isValidCardPassword;
 
   const handleNewCardSubmit = e => {
     e.preventDefault();
@@ -78,7 +81,6 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo, cardInfoForEdit }) =
             cardNumber={cardNumber}
             setCardNumber={setCardNumber}
             isValidCardNumber={isValidCardNumber}
-            setValidCardNumber={setValidCardNumber}
             setSelectedCardInfo={setSelectedCardInfo}
             selectedCardInfo={selectedCardInfo}
             isEditingMode={!!cardInfoForEdit}
@@ -87,7 +89,6 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo, cardInfoForEdit }) =
             cardExpiredDate={cardExpiredDate}
             setCardExpiredDate={setCardExpiredDate}
             isValidCardExpiredDate={isValidCardExpiredDate}
-            setValidCardExpiredDate={setValidCardExpiredDate}
           />
           <CardOwnerInput //
             cardOwner={cardOwner}
@@ -97,13 +98,11 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo, cardInfoForEdit }) =
             securityCode={securityCode}
             setSecurityCode={setSecurityCode}
             isValidSecurityCode={isValidSecurityCode}
-            setValidSecurityCode={setValidSecurityCode}
           />
           <CardPasswordInput
             cardPassword={cardPassword}
             setCardPassword={setCardPassword}
             isValidCardPassword={isValidCardPassword}
-            setValidCardPassword={setValidCardPassword}
           />
           <Styled.ButtonContainer>
             {isValidAllInput && <Button styles={{ color: COLOR.MINT_500 }}>다음</Button>}

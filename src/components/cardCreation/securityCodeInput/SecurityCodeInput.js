@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { memo, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
+import { INPUT_LENGTH } from '../../../constants/input';
 import { MODAL_TYPE, useBottomModal } from '../../../hooks/useBottomModal';
 import { printColorBasedOnBoolean } from '../../../utils/printColor';
 import { TransparentInput } from '../../commons/input/TransparentInput';
@@ -8,22 +9,18 @@ import { QuestionDescription } from '../../commons/questionDescription/QuestionD
 import VirtualKeyboard from '../virtualKeyboard/VirtualKeyboard';
 import Styled from './SecurityCodeInput.style';
 
-const FULL_INPUT_LENGTH = 3;
 const transparentInputStyles = {
   color: COLOR.MINT_500,
   fontSize: '24px',
   textAlign: 'center',
 };
 
-const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurityCode, setValidSecurityCode }) => {
+const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurityCode }) => {
   const { isModalOpened, openModal, closeModal, BottomModal } = useBottomModal();
 
-  const isValidInput = securityCode.length === FULL_INPUT_LENGTH;
-
   useEffect(() => {
-    setValidSecurityCode(isValidInput);
-    isValidInput && closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
-  }, [setValidSecurityCode, isValidInput, closeModal]);
+    isValidSecurityCode && closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
+  }, [isValidSecurityCode, closeModal]);
 
   const handleInputFocus = () => {
     setSecurityCode('');
@@ -38,8 +35,8 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
           <Styled.InputContainer validColor={securityCode && printColorBasedOnBoolean(isValidSecurityCode)}>
             <TransparentInput
               type="password"
-              minLength={FULL_INPUT_LENGTH}
-              maxLength={FULL_INPUT_LENGTH}
+              minLength={INPUT_LENGTH.SECURITY_CODE}
+              maxLength={INPUT_LENGTH.SECURITY_CODE}
               value={securityCode}
               onFocus={handleInputFocus}
               styles={transparentInputStyles}
@@ -55,7 +52,7 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
           closeModal={closeModal}
           inputValue={securityCode}
           setInputValue={setSecurityCode}
-          maxLength={FULL_INPUT_LENGTH}
+          maxLength={INPUT_LENGTH.SECURITY_CODE}
         />
       )}
     </>
@@ -70,7 +67,6 @@ SecurityCodeInput.propTypes = {
   securityCode: PropTypes.string.isRequired,
   setSecurityCode: PropTypes.func.isRequired,
   isValidSecurityCode: PropTypes.bool.isRequired,
-  setValidSecurityCode: PropTypes.func.isRequired,
 };
 
 export default SecurityCodeInput;
