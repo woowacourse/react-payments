@@ -2610,6 +2610,7 @@
     loader-utils "^2.0.0"
 
 "@tailwindcss/postcss7-compat@^2.1.0", "tailwindcss@npm:@tailwindcss/postcss7-compat":
+  name tailwindcss
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@tailwindcss/postcss7-compat/-/postcss7-compat-2.1.2.tgz#4ae2a3a3c05622ee04307997b0f8bea5c8dbc2b6"
   integrity sha512-bH2kw6uyqLnDMP8wzDUsis5ovrsRzfHEyiL1McADvqlW54g6y0KVHX1xzO7PH8Fl5s0Sq8vDOAp4+3V8MEcZ9g==
@@ -13376,6 +13377,11 @@ tailwind-classes-sorter@^0.2.5:
   integrity sha512-7S0AaDitt+Fjy9m3v0GrQ/KZrCswNDD25SSXX9U/HIB5h9lk0ImSkq/VVcnzu78cRQxR0fFfvHYFdfcqN3dCGA==
   dependencies:
     find-up "^5.0.0"
+
+tailwindcss-only-child@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/tailwindcss-only-child/-/tailwindcss-only-child-1.0.0.tgz#f6325f13ae68d62695a7a6cc859ad388dae83eea"
+  integrity sha512-D3+K3AOQ0yxx0aM+eb0TbR0O2DIsEDR0Ez/d5YxwdUi7jDzMkq/d56kKitsNZsYE4KObZC6dD/f4r+VhcJQh+A==
 
 tailwindcss@^1.8.13:
   version "1.9.6"

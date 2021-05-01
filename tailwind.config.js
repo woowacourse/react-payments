@@ -1,4 +1,5 @@
 const defaultColors = require("tailwindcss/colors");
+const onlyChild = require("tailwindcss-only-child");
 
 module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
@@ -40,7 +41,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      width: ["only"],
+    },
   },
-  plugins: [],
+  plugins: [onlyChild],
 };
