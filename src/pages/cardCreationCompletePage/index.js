@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Styled from './style';
 import { CreditCard, CARD_SIZE } from '../../components/commons/card/CreditCard';
 import { TransparentInput } from '../../components/commons/input/TransparentInput';
 import { Button } from '../../components/commons/button/Button';
 import { PAGE } from '../../constants/page';
 import { COLOR } from '../../constants/color';
+import { firestore } from '../../firebase';
 
 const transparentInputStyles = {
   textAlign: 'center',
@@ -13,15 +14,39 @@ const transparentInputStyles = {
   color: COLOR.GRAY_700,
 };
 
-const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo }) => {
-  const [cardNickName, setCardNickName] = useState('');
-  const { selectedCardInfo, cardNumber, cardOwner, cardExpiredDate } = newCardInfo;
+const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setCardList, cardNicknameForEdit }) => {
+  const [cardNickname, setCardNickname] = useState('');
+  const { selectedCardInfo, cardNumber, cardOwner, cardExpiredDate, id: editId } = newCardInfo;
+
+  useEffect(() => {
+    cardNicknameForEdit && setCardNickname(cardNicknameForEdit);
+  }, [cardNicknameForEdit]);
 
   const handleNewCardSubmit = e => {
     e.preventDefault();
 
-    setNewCardInfo(prevState => ({ ...prevState, cardNickName }));
+    cardNicknameForEdit ? editCardInfo() : addNewCardInfo();
+
     setCurrentPage(PAGE.CARD_LIST);
+  };
+
+  const addNewCardInfo = async () => {
+    const content = { ...newCardInfo, cardNickname };
+    const response = await firestore.collection('cardList').add(content);
+    setCardList(prevState => [...prevState, { ...content, id: response.id }]);
+  };
+
+  const editCardInfo = async () => {
+    const content = { ...newCardInfo, cardNickname };
+    await firestore.collection('cardList').doc(editId).update(content);
+
+    setCardList(prevState => {
+      const targetIndex = prevState.findIndex(prev => prev.id === editId);
+      const copiedState = [...prevState];
+      copiedState[targetIndex] = { ...content, id: editId };
+
+      return copiedState;
+    });
   };
 
   return (
@@ -40,12 +65,12 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo 
       <form onSubmit={handleNewCardSubmit}>
         <Styled.InputContainer>
           <TransparentInput
-            value={cardNickName}
-            onChange={({ target }) => setCardNickName(target.value)}
+            value={cardNickname}
+            onChange={({ target }) => setCardNickname(target.value)}
             styles={transparentInputStyles}
           />
         </Styled.InputContainer>
-        {cardNickName && (
+        {cardNickname && (
           <Styled.ButtonContainer>
             <Button styles={{ color: COLOR.MINT_500 }}>확인</Button>
           </Styled.ButtonContainer>
@@ -67,7 +92,7 @@ CardCreationCompletePage.propTypes = {
     }).isRequired,
   }).isRequired,
   setCurrentPage: PropTypes.func.isRequired,
-  setNewCardInfo: PropTypes.func.isRequired,
+  cardNicknameForEdit: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 export default CardCreationCompletePage;

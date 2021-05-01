@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../../components/commons/button/Button';
 import { Header } from '../../components/commons/header/Header';
 import { CreditCard } from '../../components/commons/card/CreditCard';
@@ -14,7 +14,7 @@ import { COLOR } from '../../constants/color';
 import { PAGE } from '../../constants/page';
 import { FIRST, SECOND, THIRD, FOURTH, MONTH, YEAR } from '../../constants/inputName';
 
-const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
+const CardCreationPage = ({ setCurrentPage, setNewCardInfo, cardInfoForEdit }) => {
   const [cardNumber, setCardNumber] = useState({ [FIRST]: '', [SECOND]: '', [THIRD]: '', [FOURTH]: '' });
   const [cardExpiredDate, setCardExpiredDate] = useState({ [MONTH]: '', [YEAR]: '' });
   const [cardOwner, setCardOwner] = useState('');
@@ -27,12 +27,31 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
   const [isValidSecurityCode, setValidSecurityCode] = useState(false);
   const [isValidCardPassword, setValidCardPassword] = useState(false);
 
+  useEffect(() => {
+    if (!cardInfoForEdit) return;
+
+    setCardNumber(cardInfoForEdit.cardNumber);
+    setCardExpiredDate(cardInfoForEdit.cardExpiredDate);
+    setCardOwner(cardInfoForEdit.cardOwner);
+    setSecurityCode(cardInfoForEdit.securityCode);
+    setCardPassword(cardInfoForEdit.cardPassword);
+    setSelectedCardInfo(cardInfoForEdit.selectedCardInfo);
+  }, [cardInfoForEdit]);
+
   const isValidAllInput = isValidCardNumber && isValidCardExpiredDate && isValidSecurityCode && isValidCardPassword;
 
   const handleNewCardSubmit = e => {
     e.preventDefault();
 
-    setNewCardInfo({ cardNumber, cardExpiredDate, cardOwner, selectedCardInfo });
+    setNewCardInfo(prevState => ({
+      ...prevState,
+      cardNumber,
+      cardExpiredDate,
+      cardOwner,
+      securityCode,
+      cardPassword,
+      selectedCardInfo,
+    }));
     setCurrentPage(PAGE.CARD_CREATION_COMPLETE);
   };
 
@@ -62,6 +81,7 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
             setValidCardNumber={setValidCardNumber}
             setSelectedCardInfo={setSelectedCardInfo}
             selectedCardInfo={selectedCardInfo}
+            isEditingMode={!!cardInfoForEdit}
           />
           <ExpiredDateInput
             cardExpiredDate={cardExpiredDate}
@@ -97,6 +117,7 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
 CardCreationPage.propTypes = {
   setCurrentPage: PropTypes.func.isRequired,
   setNewCardInfo: PropTypes.func.isRequired,
+  cardInfoForEdit: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]).isRequired,
 };
 
 export default CardCreationPage;

@@ -45,19 +45,28 @@ const isValidCardNumberInput = cardNumber => {
 };
 
 const CardNumberInput = memo(
-  ({ cardNumber, selectedCardInfo, setCardNumber, isValidCardNumber, setValidCardNumber, setSelectedCardInfo }) => {
+  ({
+    cardNumber,
+    selectedCardInfo,
+    setCardNumber,
+    isValidCardNumber,
+    setValidCardNumber,
+    setSelectedCardInfo,
+    isEditingMode,
+  }) => {
     const { modalType, isModalOpened, openModal, closeModal, BottomModal } = useBottomModal();
     const [currentInputName, setCurrentInputName] = useState(null);
 
+    const $firstInput = useRef(null);
     const $secondInput = useRef(null);
     const $thirdInput = useRef(null);
     const $fourthInput = useRef(null);
 
-    const isSelectedCardInfo = !!selectedCardInfo.id;
+    const isSelectedCardInfo = !!selectedCardInfo.cardId;
 
     useEffect(() => {
       const isValidInput = isValidCardNumberInput(cardNumber) && isSelectedCardInfo;
-      isValidInput && closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
+      isValidInput && modalType === MODAL_TYPE.VIRTUAL_KEYBOARD && closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
       setValidCardNumber(isValidInput);
 
       if (currentInputName === THIRD && cardNumber[THIRD].length === FULL_INPUT_LENGTH) {
@@ -66,8 +75,14 @@ const CardNumberInput = memo(
     });
 
     useEffect(() => {
-      isSelectedCardInfo && $thirdInput.current.focus();
+      isSelectedCardInfo && !$thirdInput.current.value && $thirdInput.current.focus();
     }, [isSelectedCardInfo]);
+
+    useEffect(() => {
+      if (!isEditingMode) return;
+
+      $secondInput.current.disabled = false;
+    }, [isEditingMode]);
 
     const handleInputChange = ({ target }) => {
       if (target.value.length > FULL_INPUT_LENGTH || !NUMBER_REG_EXR.test(target.value)) return;
@@ -86,8 +101,6 @@ const CardNumberInput = memo(
       if (target.name === SECOND) {
         openModal(MODAL_TYPE.CARD_SELECTION);
         $secondInput.current.blur();
-
-        return;
       }
     };
 
@@ -118,6 +131,7 @@ const CardNumberInput = memo(
               maxLength={FULL_INPUT_LENGTH}
               value={cardNumber[FIRST]}
               onChange={handleInputChange}
+              innerRef={$firstInput}
               styles={transparentInputStyles[FIRST]}
               autoFocus
             />
@@ -184,6 +198,7 @@ CardNumberInput.defaultProps = {
   cardNumber: { [FIRST]: '', [SECOND]: '', [THIRD]: '', [FOURTH]: '' },
   selectedCardInfo: { id: null, name: '', color: COLOR.GRAY_100 },
   isValidCardNumber: false,
+  isEditingMode: false,
 };
 
 CardNumberInput.propTypes = {
@@ -197,6 +212,7 @@ CardNumberInput.propTypes = {
   isValidCardNumber: PropTypes.bool.isRequired,
   setValidCardNumber: PropTypes.func.isRequired,
   setSelectedCardInfo: PropTypes.func.isRequired,
+  isEditingMode: PropTypes.bool.isRequired,
 };
 
 export default CardNumberInput;

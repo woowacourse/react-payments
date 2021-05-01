@@ -14,7 +14,7 @@ const CardSelectionModal = ({ BottomModal, closeModal, setSelectedCardInfo }) =>
     <BottomModal>
       <Styled.List>
         {Object.values(CARD).map(card => (
-          <Styled.ListItem key={card.id} onClick={() => handleItemClick(card)}>
+          <Styled.ListItem key={card.cardId} onClick={() => handleItemClick(card)}>
             <Circle size={CIRCLE_SIZE.LG} styles={{ backgroundColor: card.color }} />
             <Styled.CardName>{card.name}</Styled.CardName>
           </Styled.ListItem>
