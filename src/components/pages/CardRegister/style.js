@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 
-const Root = styled.section`
+const Root = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 28px;

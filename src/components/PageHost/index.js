@@ -12,7 +12,7 @@ const PageHost = (props) => {
         {hasBackButton && <img src={backButtonSvg} alt="back-button" />}
         <Style.NavigationTitle>{navigationTitle}</Style.NavigationTitle>
       </Style.NavigationBar>
-      <div>{children}</div>
+      <section>{children}</section>
     </Style.Root>
   );
 };

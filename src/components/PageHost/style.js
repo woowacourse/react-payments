@@ -10,18 +10,17 @@ const Root = styled.main`
 
 const NavigationBar = styled.nav`
   display: ${({ title }) => (title ? 'flex' : 'none')}};
-  align-itmes: center;
+  background-color: #ffffff;
   position: sticky;
   top: 0;
   width: 100%;
   padding: 22px 24px;
   font-size: 16px;
+  z-index: 10;
 `;
 
 const NavigationTitle = styled.span`
   margin-left: 17px;
 `;
 
-const BackButton = styled.img``;
-
-export { Root, NavigationBar, NavigationTitle, BackButton };
+export { Root, NavigationBar, NavigationTitle };
