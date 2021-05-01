@@ -17,8 +17,8 @@ export default function AddCardComplete({
   const history = useHistory();
 
   const onCardNickNameSubmit = (event) => {
-    console.log('click');
     event.preventDefault();
+
     history.push('/addCardForm');
   };
 
