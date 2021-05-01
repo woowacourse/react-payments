@@ -21,7 +21,7 @@ const Input = styled(DefaultInput)`
 const ErrorMessage = styled.div`
   display: ${({ isValid }) => (isValid ? 'none' : 'inline')};
   transform: translateY(-16px);
-  font-size: 4px;
+  font-size: 0.25rem;
   color: red;
 `;
 

@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 import PALETTE from '../../../styles/palette';
 
 const Root = styled.button`
-  width: 51px;
+  width: 60px;
   height: 34px;
   position: absolute;
   bottom: 16px;

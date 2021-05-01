@@ -17,8 +17,9 @@ const NumberInput = styled(DefaultInput)`
 
 const PasswordInput = styled(DefaultInput)`
   font: small-caption;
-  font-size: 24px;
+  font-size: 1rem;
   text-align: center;
+  letter-spacing: 2px;
 `;
 
 const Divider = styled.span`
