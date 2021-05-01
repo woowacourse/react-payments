@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useRef, VFC } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useMemo, useRef, VFC } from 'react';
 import { CardNumberState } from '../..';
 import { LABEL } from '../../../../../constants/addCardForm';
 import { CARD_NUMBER_DIGITS, CARD_NUMBER_SEPARATOR } from '../../../../../constants/creditCard';
@@ -16,6 +16,39 @@ const CardNumberInput: VFC<Props> = ({ cardNumber, setCardNumber }) => {
   const secondCardNumberInputRef = useRef<HTMLInputElement>(null);
   const thirdCardNumberInputRef = useRef<HTMLInputElement>(null);
   const fourthCardNumberInputRef = useRef<HTMLInputElement>(null);
+
+  const cardNumberInputInfo = [
+    { type: 'text', ref: null },
+    { type: 'text', ref: secondCardNumberInputRef },
+    { type: 'password', ref: thirdCardNumberInputRef },
+    { type: 'password', ref: fourthCardNumberInputRef },
+  ];
+
+  const createCardNumberInput = () =>
+    cardNumberInputInfo
+      .map(({ type, ref }, index) => (
+        <Input
+          key={index}
+          type={type}
+          ref={ref}
+          textCenter
+          maxLength={CARD_NUMBER_DIGITS}
+          width="16%"
+          value={cardNumber[index]}
+          onChange={event => onChangeCardNumber(event, index)}
+        />
+      ))
+      .reduce(
+        (acc: JSX.Element[], curr: JSX.Element, index, array: JSX.Element[]) => [
+          ...acc,
+          <span key={index + array.length}>{CARD_NUMBER_SEPARATOR}</span>,
+          curr,
+        ],
+        []
+      )
+      .slice(1);
+
+  const cardNumberInput = useMemo(() => createCardNumberInput(), [cardNumberInputInfo]);
 
   const onChangeCardNumber = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
     if (!isValidCardNumber(value)) return;
@@ -38,35 +71,7 @@ const CardNumberInput: VFC<Props> = ({ cardNumber, setCardNumber }) => {
 
   return (
     <AddCardInputLabel label={LABEL.CARD_NUMBER}>
-      <AddCardInputContainer>
-        {[
-          { type: 'text', ref: null },
-          { type: 'text', ref: secondCardNumberInputRef },
-          { type: 'password', ref: thirdCardNumberInputRef },
-          { type: 'password', ref: fourthCardNumberInputRef },
-        ]
-          .map(({ type, ref }, index) => (
-            <Input
-              key={index}
-              type={type}
-              ref={ref}
-              textCenter
-              maxLength={CARD_NUMBER_DIGITS}
-              width="16%"
-              value={cardNumber[index]}
-              onChange={event => onChangeCardNumber(event, index)}
-            />
-          ))
-          .reduce(
-            (acc: JSX.Element[], curr: JSX.Element, index, array: JSX.Element[]) => [
-              ...acc,
-              <span key={index + array.length}>{CARD_NUMBER_SEPARATOR}</span>,
-              curr,
-            ],
-            []
-          )
-          .slice(1)}
-      </AddCardInputContainer>
+      <AddCardInputContainer>{cardNumberInput}</AddCardInputContainer>
     </AddCardInputLabel>
   );
 };
