@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Styled from './Card.styles';
 import REGEX from '../../constants/regex';
@@ -13,15 +12,17 @@ const Card = ({
   onClick,
   ...props
 }) => {
-  const formattedCardNumber = useMemo(() => {
-    const cardNumberChunks = cardNumbers.match(REGEX.TEXT_WITH_LENGTH(4)) || [];
+  const formattedCardNumber =
+    (() => {
+      const cardNumberChunks = cardNumbers.match(REGEX.TEXT_WITH_LENGTH(4)) || [];
 
-    return cardNumberChunks.map((chunk, index) => {
-      if (index <= 1) return chunk;
+      return cardNumberChunks.map((chunk, index) => {
+        if (index <= 1) return chunk;
 
-      return chunk.replace(REGEX.NUMBER, '•');
-    });
-  }, [cardNumbers]);
+        return chunk.replace(REGEX.NUMBER, '•');
+      });
+    },
+    [cardNumbers]);
 
   return (
     <Styled.Container bgColor={bgColor} size={size} onClick={onClick} {...props} data-is-card>
