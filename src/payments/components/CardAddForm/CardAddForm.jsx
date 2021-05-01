@@ -22,7 +22,7 @@ const initialNumberInfos = [
 const CardAddForm = props => {
   const [isBankSelectorVisible, setBankSelectorVisible] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState(null);
-  const [bank, setBank] = useState(null);
+  const [bank, setBank] = useState("");
   const [numberInfos, setNumberInfos] = useState(initialNumberInfos);
   const [isNumberInfosValid, setNumberInfosValid] = useState(null);
   const [expirationDate, setExpirationDate] = useState("");
