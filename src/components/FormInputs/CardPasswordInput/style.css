@@ -1,4 +1,4 @@
-.password-input__container {
+.card-password-input__container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -9,14 +9,14 @@
   color: #525252;
 }
 
-.password-input__title {
+.card-password-input__title {
   font-size: inherit;
   margin: 0 0 8px;
   width: 100%;
   display: flex;
 }
 
-.password-input__content {
+.card-password-input__content {
   display: grid;
   grid-template-columns: repeat(4, 40px);
   align-items: flex-start;

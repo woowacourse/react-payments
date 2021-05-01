@@ -35,6 +35,7 @@ export default function AddCardComplete({
       />
       <form onSubmit={onCardNickNameSubmit}>
         <input
+          id="card-nickname"
           className="add-card-complete__input"
           value={cardNickName}
           onChange={(event) => {

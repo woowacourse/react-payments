@@ -30,6 +30,7 @@ const Template = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
+  id: 'input-id',
   width: '318px',
   label: '이름',
   type: 'text',

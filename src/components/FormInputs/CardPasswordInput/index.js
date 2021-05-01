@@ -1,18 +1,19 @@
 import React from 'react';
-import { Input } from '../';
-import { Icon } from '../../';
+import { Input } from '..';
+import { Icon } from '../..';
 import '../../../index.css';
 import './style.css';
 
-export default function PasswordInput({ password, onSetPassword }) {
+export default function CardPasswordInput({ password, onSetPassword }) {
   return (
-    <div className="password-input__container">
-      <label className="password-input__title" id="card-password">
+    <div className="card-password-input__container">
+      <label className="card-password-input__title" htmlFor="card-password-first">
         카드 비밀번호
       </label>
-      <div className="password-input__content">
+      <div className="card-password-input__content">
         {Object.entries(password).map(([key, value]) => (
           <Input
+            id={`card-password-${key}`}
             type="password"
             inputStyle={{ width: '2.5rem' }}
             maxLength="1"

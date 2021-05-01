@@ -1,6 +1,14 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { CARD, CARD_COMPANY, ERROR_MESSAGE } from '../../constants';
-import { Icon, Card, Input, Header, TextButton, PasswordInput } from '../../components';
+import {
+  Icon,
+  Card,
+  Input,
+  Header,
+  TextButton,
+  InputWithCounter,
+  CardPasswordInput,
+} from '../../components';
 import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/formatter';
 import { isValidSerialNumber, isValidDateFormat, isValidUserName } from './validator';
 import './style.css';
@@ -146,6 +154,7 @@ export default function AddCardForm({
         </div>
 
         <Input
+          id="card-number"
           type="tel"
           label="카드번호"
           inputStyle={{ width: '100%' }}
@@ -157,12 +166,13 @@ export default function AddCardForm({
               onSetModalContents('cardSelection');
             }
           }}
-          innerRef={serialNumberInputElement}
+          forwardRef={serialNumberInputElement}
           inputMode="numeric"
           textAlign="center"
         />
 
         <Input
+          id="expiration-date"
           type="text"
           label="만료일"
           inputStyle={{ width: '7rem' }}
@@ -193,7 +203,8 @@ export default function AddCardForm({
           errorMessage={expirationDateErrorMessage}
         />
 
-        <Input
+        <InputWithCounter
+          id="user-name"
           type="text"
           inputStyle={{ width: '100%' }}
           label="카드 소유자 이름(선택)"
@@ -216,6 +227,7 @@ export default function AddCardForm({
         />
 
         <Input
+          id="card-security-code"
           type="password"
           inputStyle={{ width: '5rem' }}
           label="보안코드(CVC/CVV)"
@@ -242,7 +254,7 @@ export default function AddCardForm({
           </button>
         </Input>
 
-        <PasswordInput password={password} onSetPassword={onSetPassword}></PasswordInput>
+        <CardPasswordInput password={password} onSetPassword={onSetPassword}></CardPasswordInput>
         {isFormCompleted && (
           <div className="bottom-right-button">
             <TextButton>다음</TextButton>

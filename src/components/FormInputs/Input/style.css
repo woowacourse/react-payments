@@ -9,19 +9,8 @@
 }
 
 .basic-input__label {
+  display: block;
   margin: 0 0 0.25rem;
-  width: 100%;
-  display: flex;
-}
-
-.basic-input__label .label-text {
-  flex-grow: 1;
-  text-align: left;
-}
-
-.basic-input__label .letter-counter {
-  flex-grow: 1;
-  text-align: right;
 }
 
 .basic-input__input {
