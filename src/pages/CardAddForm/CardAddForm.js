@@ -192,6 +192,7 @@ const CardAddForm = () => {
           <Styled.Row>
             <Styled.ExpiryDate>
               <InputBox
+                id="expiry-date-input-box"
                 value={formattedExpiryDate}
                 isError={isValidExpiryDate}
                 errorMessage={isValidExpiryDate ? MESSAGE.INVALID_EXPIRY_DATE : ''}
@@ -208,6 +209,7 @@ const CardAddForm = () => {
           </Styled.Row>
           <Styled.Row>
             <InputBox
+              id="owner-name-input-box"
               value={ownerName.value}
               onChange={ownerName.onChange}
               labelText="카드 소유자 이름 (선택)"
@@ -219,6 +221,7 @@ const CardAddForm = () => {
           <Styled.Row>
             <Styled.CVC>
               <InputBox
+                id="password-input-box"
                 type="password"
                 pattern={REGEX.NUMBER_WITH_LENGTH(3).source}
                 isError={!isNumeric(CVC.value)}

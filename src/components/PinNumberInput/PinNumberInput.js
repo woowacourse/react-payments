@@ -1,5 +1,4 @@
 import { forwardRef } from 'react';
-import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import Input from '../Input/Input';
 import Styled from './PinNumberInput.styles';
@@ -51,9 +50,11 @@ const PinNumberInput = forwardRef(
             </Styled.Label>
           );
         })}
-        {Array.from({ length: dotCount }).map(() => (
-          <Styled.PasswordDot key={nanoid(10)} />
-        ))}
+        {Array.from({ length: dotCount }).map((_, index) => {
+          const key = `dot-${index}`;
+
+          return <Styled.PasswordDot key={key} />;
+        })}
       </Styled.InputContainer>
       <ErrorMessageBox errorMessage={errorMessage} />
     </Styled.Container>
