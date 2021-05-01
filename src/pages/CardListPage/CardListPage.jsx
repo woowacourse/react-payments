@@ -10,36 +10,7 @@ import { ANIMATION, HEADER_TEXT, PAGE_PATH } from "../../constants";
 
 const cx = classNames.bind(styles);
 
-const cardMockUps = [
-  {
-    cardCompany: "포코카드",
-    backgroundColor: "#547CE4",
-    cardNumberList: [
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ],
-    cardOwner: "SUN",
-    cardExpiration: "04/21",
-    cardNickName: "엄카",
-  },
-  {
-    cardCompany: "로이드 카드",
-    backgroundColor: "red",
-    cardNumberList: [
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-      [0, 0, 0, 0],
-    ],
-    cardOwner: "SUN",
-    cardExpiration: "04/21",
-    cardNickName: "법카",
-  },
-];
-
-const CardListPage = ({}) => {
+const CardListPage = ({ cardListState }) => {
   const [pageAnimation, setPageAnimation] = useState(ANIMATION.RIGHT_IN);
 
   useLayoutEffect(() => {
@@ -52,7 +23,7 @@ const CardListPage = ({}) => {
         <Label labelText={HEADER_TEXT.OWNED_CARD} />
       </header>
       <main className={cx("card-list-page__main")}>
-        <CardListContainer cards={cardMockUps} />
+        <CardListContainer cardListState={cardListState} />
         <Link to={PAGE_PATH.ADD}>
           <AddBoxButton />
         </Link>
