@@ -13,6 +13,9 @@ import Circle from "../Circle/Circle";
 import Modal from "../Modal/Modal";
 import QuestionIcon from "../ToolTip/QuestionIcon";
 import ToolTip from "../ToolTip/ToolTip";
+import InputBox from "../InputBox/InputBox";
+import InputLabel from "../InputLabel/InputLabel";
+import InputContent from "../InputContent/InputContent";
 
 const initialNumberInfos = [
   { id: "number-info-0", type: "text", value: "", minLength: "4", maxLength: "4" },
@@ -231,7 +234,7 @@ const CardAddForm = ({ addCardInfo }) => {
   return (
     <>
       <Header hasBackButton title="카드 추가" />
-      <form className="flex flex-col justify-center w-full h-160">
+      <form className="flex flex-col justify-between w-full h-full">
         <div>
           <div className="flex justify-center mb-4 w-full">
             <Card
@@ -244,79 +247,90 @@ const CardAddForm = ({ addCardInfo }) => {
               onClick={handleCardClick}
             />
           </div>
-          <div className="flex flex-col mb-2 w-full">
-            <div className="mb-2 h-6">
-              <InputTitle innerText="카드 번호" />
-            </div>
-            <div
-              className={classNames(
-                "flex items-center justify-around w-full text-custom-mint text-lg font-medium bg-custom-gray-100 rounded-md",
-                !isNumberInfosValid && "ring-2 ring-rose-400"
-              )}
-            >
-              {numberInfos.map(({ id, type, value }, index) => (
-                <React.Fragment key={id}>
-                  {index > 0 && "-"}
-                  <Input
-                    id={`card-number-input-${index}`}
-                    type={type}
-                    className="w-full outline-none"
-                    name={index}
-                    minLength="4"
-                    maxLength="4"
-                    inputmode="numeric"
-                    value={value}
-                    label={`카드 번호 입력란 ${index}`}
-                    onChange={handleNumberInfoChange}
-                    required
-                  />
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-          <div className="flex flex-col mb-2 w-full">
-            <div className="mb-2 h-6">
-              <InputTitle innerText="만료일" />
-            </div>
 
-            <Input
-              id="expiration-date-input"
-              type="text"
-              placeholder="MM/YY"
-              className="w-36"
-              minLength="5"
-              maxLength="5"
-              inputmode="numeric"
-              value={expirationDate}
-              isValid={isExpirationDateValid}
-              onChange={handleExpirationDateChange}
-              label="만료일"
-              required
-            />
-          </div>
-          <div className="flex flex-col mb-2 w-full">
-            <div className="flex items-center justify-between mb-2 h-6">
+          <InputBox>
+            <InputLabel>
+              <InputTitle innerText="카드 번호" />
+            </InputLabel>
+
+            <InputContent>
+              <div
+                className={classNames(
+                  "flex items-center justify-around w-full text-custom-mint text-lg font-medium bg-custom-gray-100 rounded-md",
+                  !isNumberInfosValid && "ring-2 ring-rose-400"
+                )}
+              >
+                {numberInfos.map(({ id, type, value }, index) => (
+                  <React.Fragment key={id}>
+                    {index > 0 && <span>-</span>}
+                    <Input
+                      id={`card-number-input-${index}`}
+                      type={type}
+                      className="w-full outline-none"
+                      name={index}
+                      minLength="4"
+                      maxLength="4"
+                      inputmode="numeric"
+                      value={value}
+                      label={`카드 번호 입력란 ${index}`}
+                      onChange={handleNumberInfoChange}
+                      required
+                    />
+                  </React.Fragment>
+                ))}
+              </div>
+            </InputContent>
+          </InputBox>
+
+          <InputBox>
+            <InputLabel>
+              <InputTitle innerText="만료일" />
+            </InputLabel>
+
+            <InputContent>
+              <Input
+                id="expiration-date-input"
+                type="text"
+                placeholder="MM/YY"
+                className="w-36"
+                minLength="5"
+                maxLength="5"
+                inputmode="numeric"
+                value={expirationDate}
+                isValid={isExpirationDateValid}
+                onChange={handleExpirationDateChange}
+                label="만료일"
+                required
+              />
+            </InputContent>
+          </InputBox>
+
+          <InputBox>
+            <InputLabel>
               <InputTitle innerText="카드 소유자 이름(선택)" />
               <span className="text-custom-gray-300 text-xs font-medium">{ownerName.length}/30</span>
-            </div>
-            <Input
-              id="owner-name-input"
-              type="text"
-              placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-              className="w-full"
-              value={ownerName}
-              isValid={isOwnerNameValid}
-              onChange={handleOwnerNameChange}
-              label="카드 소유자 이름 입력란"
-              minLength="0"
-              maxLength="30"
-            />
-          </div>
-          <div className="flex flex-col mb-2 w-full">
-            <div className="mb-2 h-6">
+            </InputLabel>
+            <InputContent>
+              <Input
+                id="owner-name-input"
+                type="text"
+                placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+                className="w-full"
+                value={ownerName}
+                isValid={isOwnerNameValid}
+                onChange={handleOwnerNameChange}
+                label="카드 소유자 이름 입력란"
+                minLength="0"
+                maxLength="30"
+              />
+            </InputContent>
+          </InputBox>
+
+          <InputBox>
+            <InputLabel>
               <InputTitle innerText="보안코드(CVC/CVV)" />
-            </div>
-            <div className="flex items-center">
+            </InputLabel>
+            <InputContent>
               <Input
                 id="security-code-input"
                 type="password"
@@ -332,13 +346,14 @@ const CardAddForm = ({ addCardInfo }) => {
               />
               <QuestionIcon onClick={handleToolTipClick} />
               <ToolTip isVisible={isToolTipVisible} />
-            </div>
-          </div>
-          <div className="flex flex-col w-full">
-            <div className="mb-2 h-6">
+            </InputContent>
+          </InputBox>
+
+          <InputBox>
+            <InputLabel>
               <InputTitle innerText="카드 비밀번호" />
-            </div>
-            <div className="flex items-center justify-between w-48">
+            </InputLabel>
+            <InputContent>
               <Input
                 id="password-input-0"
                 type="password"
@@ -371,14 +386,14 @@ const CardAddForm = ({ addCardInfo }) => {
               <div className="flex justify-center w-10">
                 <Circle width="5" height="5" />
               </div>
-            </div>
-          </div>
+            </InputContent>
+          </InputBox>
         </div>
-
-        <div className="flex items-center justify-end w-full h-10">
-          {isNextButtonVisible && (
+        {isNextButtonVisible && (
+          <div className="flex justify-end">
             <Button
               name="다음"
+              className="h-10"
               onClick={() => {
                 addCardInfo({
                   bank,
@@ -392,9 +407,10 @@ const CardAddForm = ({ addCardInfo }) => {
                 });
               }}
             />
-          )}
-        </div>
+          </div>
+        )}
       </form>
+
       {isBankSelectorVisible && (
         <Modal>
           <BankSelector onClick={handleBankClick} />

@@ -8,7 +8,7 @@ const Button = props => {
   return (
     <button
       type={type === "submit" ? "submit" : "button"}
-      className={classNames("text-right text-custom-mint text-sm font-bold", className)}
+      className={classNames("w-max text-custom-mint text-sm font-bold", className)}
       onClick={onClick}
     >
       {name}
