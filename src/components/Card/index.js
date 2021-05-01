@@ -14,8 +14,8 @@ export default function Card({
 }) {
   return (
     <div
-      className={`card-${size || 'normal'}`}
-      style={{ ...style, backgroundColor: cardColor || '#d2d2d2' }}
+      className={`card-${size ?? 'normal'}`}
+      style={{ ...style, backgroundColor: cardColor ?? '#d2d2d2' }}
     >
       <div className="card__company-name">{cardCompanyName}</div>
       <div className="card__chip">
