@@ -2,9 +2,9 @@ import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
 import { Container } from '..';
-import styles from './style.css';
+import componentStyles from './style.css';
 
-const cx = classnames.bind(styles);
+const cx = classnames.bind(componentStyles);
 
 export const Input = forwardRef(({ container, className, ...props }, ref) => {
   const inputClass = cx('Input', className);

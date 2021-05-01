@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
-import styles from './style.css';
+import componentStyles from './style.css';
 
-const cx = classnames.bind(styles);
+const cx = classnames.bind(componentStyles);
 
 export const Form = ({ className, children, ...props }) => {
   const formClass = cx('Form', className);
