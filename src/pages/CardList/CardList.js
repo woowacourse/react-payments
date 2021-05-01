@@ -2,18 +2,17 @@ import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Card } from '../../components';
 import { ROUTE, LOCAL_STORAGE_KEY, MESSAGE } from '../../constants';
-import { useLocalStorage } from '../../hooks';
+import { useLocalStorage, useMousePressTimer } from '../../hooks';
 import { ScreenContainer } from '../../styles/common.styles';
 
 import Styled from './CardList.styles';
-
-let timer = null;
 
 const CardList = () => {
   const [deleteMode, setDeleteMode] = useState(false);
 
   const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
   const history = useHistory();
+  const { onMouseDown, onMouseUp, clearTimer } = useMousePressTimer(2000);
 
   const onClickCardContainer = (event) => {
     const cardId = event.target.getAttribute('data-card-id');
@@ -47,19 +46,11 @@ const CardList = () => {
     });
   };
 
-  const onMouseDown = () => {
-    timer = setTimeout(() => {
-      setDeleteMode(true);
-    }, 2000);
+  const handleMouseDown = () => {
+    onMouseDown(() => setDeleteMode(true));
   };
 
-  const onMouseUp = () => {
-    if (timer) {
-      clearTimeout(timer);
-    }
-  };
-
-  useEffect(() => () => clearTimeout(timer));
+  useEffect(() => () => clearTimer());
 
   return (
     <ScreenContainer>
@@ -108,7 +99,7 @@ const CardList = () => {
                     cardNumbers={cardNumbers}
                     ownerName={ownerName}
                     expiryDate={expiryDate}
-                    onMouseDown={onMouseDown}
+                    onMouseDown={handleMouseDown}
                     onMouseUp={onMouseUp}
                     draggable
                   />
