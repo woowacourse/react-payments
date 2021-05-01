@@ -1,0 +1,9 @@
+.app {
+  max-width: 500px;
+  min-width: 290px;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 1.1rem 3rem;
+  background-color: white;
+}
