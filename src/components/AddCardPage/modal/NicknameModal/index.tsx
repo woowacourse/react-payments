@@ -4,7 +4,7 @@ import Button from '../../../shared/Button';
 import Input from '../../../shared/Input';
 import Modal from '../../../shared/Modal';
 import CreditCard from '../../../shared/CreditCard';
-import { NicknameContainer } from './styles';
+import { NicknameContainer, ResultCreditCard } from './styles';
 
 interface Props {
   nickname: string;
@@ -27,8 +27,7 @@ const NicknameModal: FC<Props> = ({ cardBrand, cardNumber, expDate, ownerName, n
     <Modal type="full">
       <NicknameContainer>
         <header>카드등록이 완료되었습니다.</header>
-        <CreditCard
-          className="result-card"
+        <ResultCreditCard
           cardBrand={cardBrand}
           cardNumber={cardNumber}
           expDate={expDate}

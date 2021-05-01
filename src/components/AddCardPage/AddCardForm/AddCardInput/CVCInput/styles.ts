@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Container from '../../../../shared/Container';
 
-export const QuestionMarkContainer = styled(Container)`
+export const QuestionMarkContainer = styled.div`
   width: fit-content;
   height: fit-content;
   position: relative;

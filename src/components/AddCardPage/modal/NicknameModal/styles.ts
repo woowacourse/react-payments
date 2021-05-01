@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CreditCard from '../../../shared/CreditCard';
 
 export const NicknameContainer = styled.div`
   height: 100%;
@@ -11,8 +12,8 @@ export const NicknameContainer = styled.div`
     font-size: 1.25rem;
     margin-bottom: 5rem;
   }
+`;
 
-  .result-card {
-    margin-bottom: 2.5rem;
-  }
+export const ResultCreditCard = styled(CreditCard)`
+  margin-bottom: 2.5rem;
 `;

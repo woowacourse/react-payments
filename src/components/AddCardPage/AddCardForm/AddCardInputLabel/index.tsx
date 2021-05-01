@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Container from '../../../shared/Container';
-import { AddCardInputLabelContainer } from './styles';
+import { AddCardInputLabelContainer, LabelText } from './styles';
 
 interface Props {
   label: string | string[];
@@ -13,13 +13,11 @@ const AddCardInputLabel: FC<Props> = ({ label, width, children }) => {
       {Array.isArray(label) ? (
         <Container flex justifyContent="space-between">
           {label.map((labelText, index) => (
-            <span key={index} className="label-text">
-              {labelText}
-            </span>
+            <LabelText key={index}>{labelText}</LabelText>
           ))}
         </Container>
       ) : (
-        <span className="label-text">{label}</span>
+        <LabelText>{label}</LabelText>
       )}
       <Container flex>{children}</Container>
     </AddCardInputLabelContainer>

@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import PALETTE from '../../../constants/palette';
+import Container from '../Container';
 
 interface CreditCardContainerProps {
   cardColor: string;
@@ -20,6 +21,12 @@ const lgSize = css`
   border-radius: 7px;
 `;
 
+export const CardNameContainer = styled.p``;
+export const IcChip = styled.div``;
+export const CardNumberContainer = styled.p``;
+export const InfoContainer = styled(Container)``;
+export const OwnerNameContainer = styled.p``;
+
 export const CreditCardContainer = styled.div<CreditCardContainerProps>`
   background: ${({ cardColor }) => cardColor || PALETTE.GRAY_1};
   box-shadow: 3px 3px 5px ${PALETTE.TRANSLUCENT_BLACK_3};
@@ -28,12 +35,12 @@ export const CreditCardContainer = styled.div<CreditCardContainerProps>`
   font-weight: 500;
   ${({ size }) => (size === 'lg' ? lgSize : mdSize)}
 
-  .card-name {
+  ${CardNameContainer} {
     margin-bottom: 2em;
     height: 1.25em;
   }
 
-  .ic-chip {
+  ${IcChip} {
     background-color: ${PALETTE.DARK_YELLOW};
     width: 4em;
     height: calc(4em * 0.63);
@@ -41,7 +48,7 @@ export const CreditCardContainer = styled.div<CreditCardContainerProps>`
     margin-bottom: 0.725em;
   }
 
-  .card-number {
+  ${CardNumberContainer} {
     display: flex;
     height: 2em;
     justify-content: space-between;
@@ -56,11 +63,11 @@ export const CreditCardContainer = styled.div<CreditCardContainerProps>`
     }
   }
 
-  .info-wrapper {
+  ${InfoContainer} {
     font-size: 1.125em;
     padding: 0 0.725em;
 
-    .owner-name {
+    ${OwnerNameContainer} {
       overflow-x: hidden;
       max-width: 10em;
     }

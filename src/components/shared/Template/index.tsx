@@ -5,19 +5,18 @@ import { Header, PageContainer } from './styles';
 interface Props {
   title: string;
   hasPreviousPage?: boolean;
-  className?: string;
 }
 
-const Template: FC<Props> = ({ className, children, title, hasPreviousPage }) => {
+const Template: FC<Props> = ({ children, title, hasPreviousPage }) => {
   return (
-    <PageContainer className={className}>
+    <PageContainer>
       <Header>
         {hasPreviousPage && (
           <a>
             <BackIcon />
           </a>
         )}
-        <span className="title">{title}</span>
+        <span>{title}</span>
       </Header>
       {children}
     </PageContainer>

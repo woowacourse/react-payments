@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+export const NickName = styled.span``;
+
 export const CardListContainer = styled.ul`
   height: 75vh;
   display: flex;
@@ -17,7 +19,7 @@ export const CardListContainer = styled.ul`
     margin-bottom: 4.25rem;
     position: relative;
 
-    .nickname {
+    ${NickName} {
       position: absolute;
       left: 50%;
       bottom: -2rem;
