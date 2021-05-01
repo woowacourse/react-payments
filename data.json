@@ -1,0 +1,104 @@
+{
+  "cardList": [
+    {
+      "cardNumber": {
+        "first": "1234",
+        "second": "2222",
+        "third": "9620",
+        "fourth": "2209"
+      },
+      "cardExpiredDate": {
+        "month": "12",
+        "year": "23"
+      },
+      "cardOwner": "ASD",
+      "selectedCardInfo": {
+        "cardId": 8,
+        "name": "썬 카드",
+        "color": "#FBCD58"
+      },
+      "cardNickname": "aaa",
+      "securityCode": "953",
+      "cardPassword": {
+        "first": "2",
+        "second": "1"
+      },
+      "id": 2
+    },
+    {
+      "cardNumber": {
+        "first": "4444",
+        "second": "1234",
+        "third": "9264",
+        "fourth": "5026"
+      },
+      "cardExpiredDate": {
+        "month": "12",
+        "year": "23"
+      },
+      "cardOwner": "ZXCQWE",
+      "selectedCardInfo": {
+        "cardId": 3,
+        "name": "공원 카드",
+        "color": "#73BC6D"
+      },
+      "cardNickname": "qqq",
+      "securityCode": "953",
+      "cardPassword": {
+        "first": "2",
+        "second": "1"
+      },
+      "id": 3
+    },
+    {
+      "cardNumber": {
+        "first": "1234",
+        "second": "1234",
+        "third": "8867",
+        "fourth": "0495"
+      },
+      "cardExpiredDate": {
+        "month": "12",
+        "year": "23"
+      },
+      "cardOwner": "ZXC",
+      "securityCode": "309",
+      "cardPassword": {
+        "first": "5",
+        "second": "6"
+      },
+      "selectedCardInfo": {
+        "cardId": 2,
+        "name": "준 카드",
+        "color": "#547CE4"
+      },
+      "cardNickname": "zxc",
+      "id": 4
+    },
+    {
+      "cardNumber": {
+        "first": "1234",
+        "second": "1234",
+        "third": "3954",
+        "fourth": "6299"
+      },
+      "cardExpiredDate": {
+        "month": "12",
+        "year": "23"
+      },
+      "cardOwner": "ASD",
+      "securityCode": "482",
+      "cardPassword": {
+        "first": "1",
+        "second": "8"
+      },
+      "selectedCardInfo": {
+        "cardId": 3,
+        "name": "공원 카드",
+        "color": "#73BC6D"
+      },
+      "cardNickname": "ssqq",
+      "id": 5
+    }
+  ]
+}

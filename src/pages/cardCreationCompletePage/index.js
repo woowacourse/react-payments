@@ -6,7 +6,8 @@ import { TransparentInput } from '../../components/commons/input/TransparentInpu
 import { Button } from '../../components/commons/button/Button';
 import { PAGE } from '../../constants/page';
 import { COLOR } from '../../constants/color';
-import { firestore } from '../../firebase';
+import { httpClient } from '../../api/httpClient';
+import { PATH, RETURN_TYPE } from '../../constants/api';
 
 const transparentInputStyles = {
   textAlign: 'center',
@@ -18,27 +19,28 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setCardList, ca
   const [cardNickname, setCardNickname] = useState('');
   const { selectedCardInfo, cardNumber, cardOwner, cardExpiredDate, id: editId } = newCardInfo;
 
+  const content = { ...newCardInfo, cardNickname };
+
   useEffect(() => {
     cardNicknameForEdit && setCardNickname(cardNicknameForEdit);
   }, [cardNicknameForEdit]);
 
-  const handleNewCardSubmit = e => {
+  const handleCardSubmit = e => {
     e.preventDefault();
 
-    cardNicknameForEdit ? editCardInfo() : addNewCardInfo();
+    cardNicknameForEdit ? editCard() : addCard();
 
     setCurrentPage(PAGE.CARD_LIST);
   };
 
-  const addNewCardInfo = async () => {
-    const content = { ...newCardInfo, cardNickname };
-    const response = await firestore.collection('cardList').add(content);
-    setCardList(prevState => [...prevState, { ...content, id: response.id }]);
+  const addCard = async () => {
+    const result = await httpClient.post({ path: PATH.CARD_LIST, body: content, returnType: RETURN_TYPE.JSON });
+
+    setCardList(prevState => [...prevState, { ...content, id: result.id }]);
   };
 
-  const editCardInfo = async () => {
-    const content = { ...newCardInfo, cardNickname };
-    await firestore.collection('cardList').doc(editId).update(content);
+  const editCard = async () => {
+    await httpClient.put({ path: `${PATH.CARD_LIST}/${editId}`, body: content });
 
     setCardList(prevState => {
       const copiedState = [...prevState];
@@ -62,7 +64,7 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setCardList, ca
           cardExpiredDate,
         }}
       />
-      <form onSubmit={handleNewCardSubmit}>
+      <form onSubmit={handleCardSubmit}>
         <Styled.InputContainer>
           <TransparentInput
             value={cardNickname}
@@ -93,6 +95,7 @@ CardCreationCompletePage.propTypes = {
   }).isRequired,
   setCurrentPage: PropTypes.func.isRequired,
   cardNicknameForEdit: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  setCardList: PropTypes.func.isRequired,
 };
 
 export default CardCreationCompletePage;

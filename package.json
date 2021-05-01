@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^8.4.3",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -16,7 +15,8 @@
     "build": "react-scripts build",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "chromatic": "npx chromatic --project-token 074d53fb2aac"
+    "chromatic": "npx chromatic --project-token 074d53fb2aac",
+    "json": "json-server --watch data.json --port 4000"
   },
   "eslintConfig": {
     "extends": [

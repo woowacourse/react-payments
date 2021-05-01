@@ -5,7 +5,9 @@ import { Card } from '../../components/commons/card/Card';
 import Styled from './style';
 import { PAGE } from '../../constants/page';
 import { CreditCard } from '../../components/commons/card/CreditCard';
-import { firestore } from '../../firebase';
+import { httpClient } from '../../api/httpClient';
+import { PATH } from '../../constants/api';
+import { useEffect } from 'react';
 
 const CardListPage = ({ setCurrentPage, cardList, setCardInfoForEdit, setCardList }) => {
   const handleCardEdit = cardInfo => {
@@ -14,7 +16,7 @@ const CardListPage = ({ setCurrentPage, cardList, setCardInfoForEdit, setCardLis
   };
 
   const handleCardDelete = async deleteId => {
-    await firestore.collection('cardList').doc(deleteId).delete();
+    await httpClient.delete({ path: `${PATH.CARD_LIST}/${deleteId}` });
 
     setCardList(prevState => {
       const copiedState = [...prevState];
@@ -23,6 +25,10 @@ const CardListPage = ({ setCurrentPage, cardList, setCardInfoForEdit, setCardLis
       return filteredCardList;
     });
   };
+
+  useEffect(() => {
+    setCardInfoForEdit({});
+  }, [setCardInfoForEdit]);
 
   const creditCardList = cardList.map(card => (
     <Styled.CardItem key={card.id}>

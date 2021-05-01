@@ -3,7 +3,8 @@ import CardCreationPage from './pages/cardCreationPage';
 import CardListPage from './pages/cardListPage';
 import CardCreationCompletePage from './pages/cardCreationCompletePage';
 import { PAGE } from './constants/page';
-import { firestore } from './firebase';
+import { httpClient } from './api/httpClient';
+import { PATH, RETURN_TYPE } from './constants/api';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState(PAGE.CARD_LIST);
@@ -23,9 +24,9 @@ const App = () => {
 
   useEffect(() => {
     const setInitialCardList = async () => {
-      const cardData = await firestore.collection('cardList').get();
+      const cardList = await httpClient.get({ path: PATH.CARD_LIST, returnType: RETURN_TYPE.JSON });
 
-      setCardList(cardData.docs.map(v => ({ ...v.data(), id: v.id })));
+      setCardList(cardList);
     };
 
     setInitialCardList();
@@ -52,7 +53,6 @@ const App = () => {
         <CardCreationCompletePage
           setCurrentPage={setCurrentPage}
           newCardInfo={cardInfo}
-          setNewCardInfo={setCardInfo}
           setCardList={setCardList}
           cardNicknameForEdit={isCardEditMode && cardInfo.cardNickname}
         />
