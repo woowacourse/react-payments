@@ -4,6 +4,7 @@ import PALETTE from '../../../styles/palette';
 const Root = styled.div`
   position: absolute;
   width: 100%;
+  max-width: 375px;
   background-color: ${PALETTE.COLOR_SELECTOR_WHITE};
 
   display: grid;
@@ -11,7 +12,6 @@ const Root = styled.div`
   grid-template-columns: repeat(4, 1fr);
 
   border-color: transparent;
-  width: 100%;
   height: 227px;
 `;
 
