@@ -6,7 +6,7 @@ const CardShape = ({ backgroundColor, scale, onClick, isRegistered, children }) 
   <div
     className={classNames(
       "relative p-3 w-52 h-32 rounded-md shadow-md cursor-pointer transform",
-      backgroundColor,
+      backgroundColor || "bg-custom-gray-200",
       scale
     )}
     role="button"
@@ -26,14 +26,13 @@ const CardShape = ({ backgroundColor, scale, onClick, isRegistered, children }) 
 
 CardShape.propTypes = {
   isRegistered: PropTypes.bool.isRequired,
-  backgroundColor: PropTypes.string,
+  backgroundColor: PropTypes.string.isRequired,
   scale: PropTypes.string,
   onClick: PropTypes.func,
   children: PropTypes.element,
 };
 
 CardShape.defaultProps = {
-  backgroundColor: "bg-custom-gray-200",
   scale: "scale-100",
   onClick: null,
   children: null,
