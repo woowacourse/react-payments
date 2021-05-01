@@ -28,9 +28,10 @@ export const PAGE_PATH = Object.freeze({
 
 export const CARD_INPUT = Object.freeze({
   OWNER_NAME_LENGTH_LIMIT: 30,
-  EXPIRATION_PLACEHOLDER: "MM / YY",
   OWNER_PLACEHOLDER: "카드에 표시된 이름과 동일하게 입력하세요.",
   CARD_NUMBER_PLACEHOLDER: "0000",
+  EXPIRATION_MONTH_PLACEHOLDER: "MM",
+  EXPIRATION_YEAR_PLACEHOLDER: "YY",
 });
 
 export const ANIMATION = Object.freeze({
@@ -50,4 +51,6 @@ export const STATE_KEY = Object.freeze({
   CARD_NICK_NAME: "cardNickName",
   CARD_CVC: "cardCVC",
   CARD_PASSWORD: "cardPassword",
+  EXPIRATION_MONTH: "expirationMonth",
+  EXPIRATION_YEAR: "expirationYear",
 });

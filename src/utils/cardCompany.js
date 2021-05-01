@@ -5,37 +5,33 @@ const preprocessing = (cardNumber) => {
 };
 
 export const isCardCompany = (cardCompany) => {
-  return !!Object.keys(cardInfo).find(
-    (key) => cardInfo[key].name === cardCompany
-  );
+  return !!Object.values(cardInfo).find((card) => card.name === cardCompany);
 };
 
 export const getCardCompany = (cardNumber) => {
   cardNumber = preprocessing(cardNumber);
 
-  const cardInfoKey = Object.keys(cardInfo).find((key) =>
-    cardInfo[key]["bins"].some((binNumber) =>
+  const card = Object.values(cardInfo).find((card) =>
+    card["bins"].some((binNumber) =>
       cardNumber.includes(binNumber.replace(/[\s]/g, ""))
     )
   );
 
-  return cardInfo[cardInfoKey]?.name;
+  return card?.name;
 };
 
-// TODO : CardType 이름이 맞나?
 export const getCardColor = (cardCompany) => {
   if (!isCardCompany(cardCompany)) {
     return "#D2D2D2";
   }
 
-  const cardInfoKey = Object.keys(cardInfo).find(
-    (key) => cardInfo[key].name === cardCompany
+  const card = Object.values(cardInfo).find(
+    (card) => card.name === cardCompany
   );
 
-  return cardInfo[cardInfoKey]?.color;
+  return card?.color;
 };
 
-// TODO : companyName 이름이 맞나?
 export const getAllCardCompanies = () => {
-  return Object.keys(cardInfo).map((key) => cardInfo[key].name);
+  return Object.values(cardInfo).map((card) => card.name);
 };

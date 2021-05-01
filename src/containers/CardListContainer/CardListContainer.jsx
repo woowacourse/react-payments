@@ -9,6 +9,7 @@ const CardListContainer = ({ cards }) => {
   const cardList = cards.map((card) => {
     return (
       <Card
+        key={card.cardNickName}
         className={cx("card-list-container__card")}
         cardCompany={card.cardCompany}
         backgroundColor={card.backgroundColor}

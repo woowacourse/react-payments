@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./AddCardPage.module.scss";
 import { getCardColor } from '../../utils/cardCompany';
+import useToggle from '../../hooks/toggleHook';
 
-import { PAGE_PATH, HEADER_TEXT, BUTTON_TEXT } from "../../constants";
+import { PAGE_PATH, HEADER_TEXT, BUTTON_TEXT, STATE_KEY } from "../../constants";
 
 import CardInputContainer from "../../containers/CardInputContainer/CardInputContainer";
 import CardCompanySelectContainer from "../../containers/CardCompanySelectContainer/CardCompanySelectContainer";
@@ -16,56 +16,12 @@ import Button from "../../components/Button/Button";
 const cx = classNames.bind(styles);
 
 // TODO: 카드 호버 애니메이션 껐다 킬수 있게 만들기
-// TODO: UX 적으로 카드 정보 입력 페이지에서 카드 클릭시 카드사 입력 토글이 켜지도록 할지 결정하기
 
 const AddCardPage = ({
-  cardCompany,
-  cardNumber,
-  cardOwner,
-  cardExpiration,
-  cardCVC,
-  cardPassword,
-  setCardState,
+  appState,
+  setAppState,
 }) => {
-  const [toggleState, setToggleState] = useState({
-    isBottomSliderToggled: false,
-    backDropAnimation: "fade-out",
-    sliderAnimation: "move-down",
-  });
-
-  const toggleCardCompanyContainer = ({ isBottomSliderToggled, backDropAnimation, sliderAnimation }) => {
-    setToggleState((state) => ({
-      ...state,
-      isBottomSliderToggled,
-      backDropAnimation,
-      sliderAnimation,
-    }));
-  };
-
-  const showCardCompanySelectContainer = () => {
-    toggleCardCompanyContainer({
-      isBottomSliderToggled: true,
-      backDropAnimation: "fade-in",
-      sliderAnimation: "move-up",
-    });
-  };
-
-  const hideCardCompanySelectContainer = () => {
-    toggleCardCompanyContainer({
-      isBottomSliderToggled: true,
-      backDropAnimation: "fade-out",
-      sliderAnimation: "move-down",
-    });
-    setTimeout(() => {
-      toggleCardCompanyContainer({
-        isBottomSliderToggled: false,
-        backDropAnimation: "fade-out",
-        sliderAnimation: "move-down",
-      });
-    }, 350);
-  };
-
-  // TODO: 카드 번호 Input 이 숫자만 받을 수 있도록 수정하기 
+  const toggle = useToggle();
 
   return (
     <div className={cx("add-card-page")}>
@@ -75,23 +31,27 @@ const AddCardPage = ({
         </Link>
       </header>
       <main className={cx("add-card-page__main")}>
-        <Card cardNumber={cardNumber} cardCompany={cardCompany} backgroundColor={getCardColor(cardCompany)} className={cx("add-card-page__card")} />
+        <Card 
+          className={cx("add-card-page__card")}
+          cardOwner={appState[STATE_KEY.CARD_OWNER]}
+          cardNumber={appState[STATE_KEY.CARD_NUMBER]} 
+          cardCompany={appState[STATE_KEY.CARD_COMPANY]} 
+          cardExpiration={appState[STATE_KEY.CARD_EXPIRATION]} 
+          backgroundColor={getCardColor(appState[STATE_KEY.CARD_COMPANY])} 
+        />
         <CardInputContainer
-          cardCompany={cardCompany}
-          cardOwner={cardOwner}
-          cardExpiration={cardExpiration}
-          cardCVC={cardCVC}
-          cardPassword={cardPassword}
-          setCardState={setCardState}
-          showCardCompanySelectContainer={showCardCompanySelectContainer}
+          appState={appState}
+          setAppState={setAppState}
+          showCardCompanySelectContainer={toggle.setToggled}
         />
       </main>
-      {toggleState.isBottomSliderToggled && (
+      {toggle.state.isToggled && (
         <CardCompanySelectContainer
-          hideCardCompanySelectContainer={hideCardCompanySelectContainer}
-          backDropAnimationClass={toggleState.backDropAnimation}
-          bottomSliderAnimationClass={toggleState.sliderAnimation}
-          setCardState={setCardState}
+          appState={appState}
+          setAppState={setAppState}
+          hideCardCompanySelectContainer={toggle.setUntoggled}
+          backDropAnimationClass={toggle.state.fadeAnimation}
+          bottomSliderAnimationClass={toggle.state.moveAnimation}
         />
       )}
       <div className={cx("add-card-page__bottom")}>
