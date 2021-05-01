@@ -4,13 +4,14 @@ import CardListPage from './pages/cardListPage';
 import CardCreationCompletePage from './pages/cardCreationCompletePage';
 import { BrowserRouter, Redirect, Route } from 'react-router-dom';
 import { CardValidator } from './validations/card';
+import { INPUT } from './constants';
 
 const App = () => {
   const [newCardInfo, setNewCardInfo] = useState({
-    cardNumber: {},
-    cardExpiredDate: {},
+    cardNumber: { [INPUT.FIRST]: '', [INPUT.SECOND]: '', [INPUT.THIRD]: '', [INPUT.FOURTH]: '' },
+    cardExpiredDate: { [INPUT.MONTH]: '', [INPUT.YEAR]: '' },
     cardOwner: '',
-    selectedCardInfo: {},
+    selectedCardInfo: { id: null, name: '', color: '' },
     cardNickName: '',
   });
 

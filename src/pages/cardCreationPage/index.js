@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '../../components/commons/button/Button';
 import { Header } from '../../components/commons/header/Header';
 import { CreditCard } from '../../components/commons/card/CreditCard';
@@ -13,6 +13,11 @@ import Styled from './style';
 import { COLOR, INPUT } from '../../constants';
 import { CardValidator } from '../../validations/card';
 import { Link, withRouter } from 'react-router-dom';
+
+const handleBeforeUnload = e => {
+  e.preventDefault();
+  e.returnValue = '';
+};
 
 const CardCreationPage = ({ history, setNewCardInfo }) => {
   const [cardNumber, setCardNumber] = useState({
@@ -32,6 +37,13 @@ const CardCreationPage = ({ history, setNewCardInfo }) => {
     CardValidator.Owner(cardOwner) &&
     CardValidator.SecurityCode(securityCode) &&
     CardValidator.Password(cardPassword);
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  });
 
   const handleNewCardSubmit = e => {
     e.preventDefault();
