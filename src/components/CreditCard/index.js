@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Card } from '..';
 import './style.css';
 import { COLOR } from '../../constants';
+import { getNumberInString } from '../../cardInfoFormatter';
 
 export const CreditCard = (props) => {
   const { cardCompany, cardNumber, ownerName, expirationDate } = props;
@@ -28,7 +29,7 @@ CreditCard.propTypes = {
 
 CreditCard.defaultProps = {
   cardCompany: '',
-  cardNumber: '0000 0000 ···· ····',
+  cardNumber: getNumberInString(['0000', '0000', '····', '····']),
   ownerName: '',
   expirationDate: '',
 };
