@@ -23,7 +23,7 @@ function App() {
     [STATE_KEY.CARD_OWNER]: "",
     [STATE_KEY.CARD_NICK_NAME]: "",
     [STATE_KEY.CARD_CVC]: "",
-    [STATE_KEY.CARD_PASSWORD]: [],
+    [STATE_KEY.CARD_PASSWORD]: [null, null],
   });
 
   return (

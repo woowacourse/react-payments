@@ -51,6 +51,7 @@ const CardInputContainer = ({ appState, setAppState, showCardCompanySelectContai
         dotCount={2}
         className={cx("card-input-container__password")}
         labelText={INPUT_LABEL_TEXT.CARD_PASSWORD}
+        appState={appState}
         setAppState={setAppState}
       />
     </form>

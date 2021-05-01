@@ -1,11 +1,30 @@
 import classNames from "classnames/bind";
 import styles from "./InputBoxList.module.scss";
+import {STATE_KEY} from '../../constants';
 
 const cx = classNames.bind(styles);
 
-const InputBoxList = ({ labelText, numbers, dotCount, className = "" }) => {
+const InputBoxList = ({ setAppState, labelText, numbers, dotCount, className = "" }) => {
+  const onCardPasswordInputChange = (event) => {
+    const { value, name: inputIndex } = event.target;
+    if (Number.isNaN(Number(value))) {
+      // TODO : utils 로 빼기
+      event.target.value = event.target.value.slice(0, -1);
+      return;
+    }
+
+    setAppState(state => {
+      const newCardPassword = [...state[STATE_KEY.CARD_PASSWORD]];
+      newCardPassword[Number(inputIndex)] = value
+      return {
+        ...state,
+        [STATE_KEY.CARD_PASSWORD]: newCardPassword
+      }
+    });
+  }
+
   const inputBoxes = numbers.map((number, index) => (
-    <input key={index} type="password" maxLength="1" className={cx("input-box-list__input-box")}></input>
+    <input maxLength="1" key={index} name={index} type="password" className={cx("input-box-list__input-box")} onChange={onCardPasswordInputChange}></input>
   ));
   const dots = [...Array(dotCount)].map((_, index) => <div key={index} className={cx("input-box-list__dot")}></div>);
 
