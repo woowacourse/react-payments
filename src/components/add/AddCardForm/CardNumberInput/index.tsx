@@ -1,11 +1,10 @@
 import AddCardInputLabel from '../AddCardInputLabel';
 import { AddCardInputContainer } from '../styles';
 import { LABEL } from '../../../../constants/addCardForm';
-import { forwardRef, RefObject, useMemo, useRef, VFC } from 'react';
-import { CARD_NUMBER_SEPARATOR } from '../../../../constants/creditCard';
-
+import { forwardRef, useMemo, useRef, VFC } from 'react';
+import { CARD_NUMBER_SEPARATOR, CARD_NUMBER_DIGITS } from '../../../../constants/creditCard';
+import { ALERT } from '../../../../constants/messages';
 import { ChangeEvent } from 'react';
-import { CARD_NUMBER_DIGITS } from '../../../../constants/creditCard';
 import Input from '../../../shared/Input';
 import { CardNumberState } from '../../AddCardForm';
 import { isValidCardNumber } from '../validator';
@@ -61,6 +60,7 @@ const CardNumberInputs: VFC<CardNumberInputsProps> = ({ cardNumber, setCardNumbe
       nextValue[index] = value;
     } catch (error) {
       console.error('Segmentation Fault: invalid index - ' + error);
+      alert(ALERT.SYSTEM_ERROR);
       return;
     }
 

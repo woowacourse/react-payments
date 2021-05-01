@@ -1,6 +1,7 @@
 import { ChangeEvent, useRef, VFC } from 'react';
 import { PasswordState } from '..';
 import { LABEL } from '../../../../constants/addCardForm';
+import { ALERT } from '../../../../constants/messages';
 import Container from '../../../shared/Container';
 import Input from '../../../shared/Input';
 import AddCardInputLabel from '../AddCardInputLabel';
@@ -24,6 +25,7 @@ const PasswordInputs: VFC<Props> = ({ password, setPassword }) => {
       nextPassword[index] = value;
     } catch (error) {
       console.error('Segmentation Fault: invalid index - ' + error);
+      alert(ALERT.SYSTEM_ERROR);
       return;
     }
 
