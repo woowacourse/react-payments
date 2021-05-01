@@ -42,5 +42,4 @@ Default.args = {
   password: { first: '0', second: '0' },
   setPassword: () => {},
   onSetModalContents: () => {},
-  setPage: () => {},
 };

@@ -4,6 +4,7 @@ import { Icon, Card, Input, Header, TextButton, PasswordInput } from '../../comp
 import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/formatter';
 import { isValidSerialNumber, isValidDateFormat, isValidUserName } from './validator';
 import './style.css';
+import { useHistory } from 'react-router-dom';
 
 export default function AddCardForm({
   serialNumber,
@@ -19,12 +20,13 @@ export default function AddCardForm({
   password,
   setPassword,
   onSetModalContents,
-  setPage,
 }) {
   const [expirationDateErrorMessage, setExpirationDateErrorMessage] = useState('');
   const [userNameErrorMessage, setUserNameErrorMessage] = useState('');
 
   const serialNumberInputElement = useRef(null);
+
+  const history = useHistory();
 
   const isFormCompleted = useMemo(() => {
     return (
@@ -40,6 +42,15 @@ export default function AddCardForm({
   useEffect(() => {
     serialNumberInputElement.current.focus();
   }, [cardCompany]);
+
+  useEffect(() => {
+    setSerialNumber('');
+    setCardCompany('');
+    setExpirationDate('');
+    setUserName('');
+    setSecurityCode('');
+    setPassword({ first: '', second: '' });
+  }, []);
 
   const onSetPassword = (key, value) => {
     if (isNaN(value)) return;
@@ -112,19 +123,18 @@ export default function AddCardForm({
     }
   };
 
+  const onCardFormSubmit = (event) => {
+    event.preventDefault();
+
+    if (!isFormCompleted) return;
+
+    history.push('/addCardComplete');
+  };
+
   return (
     <div className="add-card-form__container">
       <Header title="카드추가" />
-      <form
-        className="add-card-form"
-        onSubmit={(event) => {
-          event.preventDefault();
-
-          if (!isFormCompleted) return;
-
-          setPage('addCardComplete');
-        }}
-      >
+      <form className="add-card-form" onSubmit={onCardFormSubmit}>
         <div className="card-preview">
           <Card
             userName={userName}
