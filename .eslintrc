@@ -16,7 +16,6 @@
   },
   "parser": "babel-eslint",
   "rules": {
-    "react/jsx-handler-names": "off",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "react/button-has-type": "off"
