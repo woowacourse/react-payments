@@ -26,16 +26,16 @@ const CardAddForm = ({ addCardInfo }) => {
   const [backgroundColor, setBackgroundColor] = useState("");
   const [bank, setBank] = useState("");
   const [numberInfos, setNumberInfos] = useState(initialNumberInfos);
-  const [isNumberInfosValid, setNumberInfosValid] = useState(null);
+  const [isNumberInfosValid, setNumberInfosValid] = useState(true);
   const [expirationDate, setExpirationDate] = useState("");
-  const [isExpirationDateValid, setExpirationDateValid] = useState(null);
+  const [isExpirationDateValid, setExpirationDateValid] = useState(true);
   const [ownerName, setOwnerName] = useState("");
   const [isOwnerNameValid, setOwnerNameValid] = useState(true);
   const [securityCode, setSecurityCode] = useState("");
-  const [isSecurityCodeValid, setSecurityCodeValid] = useState(null);
+  const [isSecurityCodeValid, setSecurityCodeValid] = useState(true);
   const [isToolTipVisible, setToolTipVisible] = useState(false);
-  const [passwords, setPasswords] = useState(Array(2).fill(null));
-  const [isPasswordValid, setPasswordValid] = useState(null);
+  const [passwords, setPasswords] = useState(Array(2).fill(""));
+  const [isPasswordValid, setPasswordValid] = useState(true);
   const isMountedRef = useRef(false);
 
   useEffect(() => {
@@ -251,7 +251,7 @@ const CardAddForm = ({ addCardInfo }) => {
             <div
               className={classNames(
                 "flex items-center justify-around w-full text-custom-mint text-lg font-medium bg-custom-gray-100 rounded-md",
-                !(isNumberInfosValid ?? true) && "ring-2 ring-rose-400"
+                !isNumberInfosValid && "ring-2 ring-rose-400"
               )}
             >
               {numberInfos.map(({ id, type, value }, index) => (
@@ -288,7 +288,7 @@ const CardAddForm = ({ addCardInfo }) => {
               maxLength="5"
               inputmode="numeric"
               value={expirationDate}
-              isValid={isExpirationDateValid ?? true}
+              isValid={isExpirationDateValid}
               onChange={handleExpirationDateChange}
               label="만료일"
               required
@@ -326,7 +326,7 @@ const CardAddForm = ({ addCardInfo }) => {
                 value={securityCode}
                 onChange={handleSecurityCodeChange}
                 inputmode="numeric"
-                isValid={isSecurityCodeValid ?? true}
+                isValid={isSecurityCodeValid}
                 label="보안 코드 입력란"
                 required
               />
@@ -348,7 +348,7 @@ const CardAddForm = ({ addCardInfo }) => {
                 inputmode="numeric"
                 name="0"
                 value={passwords[0] || ""}
-                isValid={isPasswordValid ?? true}
+                isValid={isPasswordValid}
                 label="카드 비밀번호1"
                 onChange={handlePasswordChange}
               />
@@ -361,7 +361,7 @@ const CardAddForm = ({ addCardInfo }) => {
                 name="1"
                 inputmode="numeric"
                 value={passwords[1] || ""}
-                isValid={isPasswordValid ?? true}
+                isValid={isPasswordValid}
                 label="카드 비밀번호2"
                 onChange={handlePasswordChange}
               />
