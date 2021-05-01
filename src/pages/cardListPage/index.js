@@ -5,7 +5,8 @@ import { Card } from '../../components/commons/card/Card';
 import Styled from './style';
 import { PAGE } from '../../constants/page';
 
-const CardListPage = ({ setCurrentPage }) => {
+const CardListPage = ({ setCurrentPage, ...props }) => {
+  console.log(setCurrentPage, props);
   return (
     <>
       <Header>보유카드</Header>

@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import { memo, useRef } from 'react';
-import { COLOR } from '../../../constants/color';
-import { CARD_INPUT } from '../../../constants/standard';
-import { isValidCard } from '../../../validations/card';
+import { COLOR, CARD_INPUT, INPUT } from '../../../constants';
+import { CardValidator } from '../../../validations/card';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './ExpiredDateInput.style';
 
@@ -14,14 +13,14 @@ const transparentInputStyles = {
 
 const ExpiredDateInput = memo(({ cardExpiredDate, setCardExpiredDate }) => {
   const $yearInput = useRef(null);
-  const isValidCardExpiredDate = isValidCard.ExpiredDate(cardExpiredDate);
+  const CardValidatorExpiredDate = CardValidator.ExpiredDate(cardExpiredDate);
 
   const handleInputChange = ({ target }) => {
     if (target.value.length > CARD_INPUT.MONTH_LENGTH) return;
 
     setCardExpiredDate(prevState => ({ ...prevState, [target.name]: target.value }));
 
-    if (target.name === 'month' && target.value.length === CARD_INPUT.MONTH_LENGTH) {
+    if (target.name === INPUT.MONTH && target.value.length === CARD_INPUT.MONTH_LENGTH) {
       $yearInput.current.disabled = false;
       $yearInput.current.focus();
     }
@@ -29,10 +28,10 @@ const ExpiredDateInput = memo(({ cardExpiredDate, setCardExpiredDate }) => {
 
   return (
     <div>
-      <Styled.InputLabelContainer>만료일 {isValidCardExpiredDate && '✔️'}</Styled.InputLabelContainer>
-      <Styled.InputContainer isValidInput={isValidCardExpiredDate}>
+      <Styled.InputLabelContainer>만료일 {CardValidatorExpiredDate && '✔️'}</Styled.InputLabelContainer>
+      <Styled.InputContainer isValidInput={CardValidatorExpiredDate}>
         <TransparentInput
-          name="month"
+          name={INPUT.MONTH}
           type="number"
           min="1"
           max="12"
@@ -44,7 +43,7 @@ const ExpiredDateInput = memo(({ cardExpiredDate, setCardExpiredDate }) => {
         />
         <Styled.Slash>/</Styled.Slash>
         <TransparentInput
-          name="year"
+          name={INPUT.YEAR}
           type="number"
           min="0"
           max="99"

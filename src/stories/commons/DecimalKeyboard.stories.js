@@ -11,4 +11,5 @@ const Template = args => <DecimalKeyboard {...args}></DecimalKeyboard>;
 export const Default = Template.bind({});
 Default.args = {
   closeKeyboard: () => {},
+  setInput: () => {},
 };

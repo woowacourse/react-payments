@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { memo, useEffect, useState } from 'react';
 import { COLOR } from '../../../constants/color';
 import { CARD_INPUT } from '../../../constants/standard';
-import { isValidCard } from '../../../validations/card';
+import { CardValidator } from '../../../validations/card';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import { DecimalKeyboard } from '../../commons/keyboard/DecimalKeyboard';
 import { QuestionDescription } from '../../commons/questionDescription/QuestionDescription';
@@ -15,7 +15,7 @@ const transparentInputStyles = {
 
 const SecurityCodeInput = memo(({ securityCode, setSecurityCode }) => {
   const [isKeyboardOpened, setKeyboardOpen] = useState(false);
-  const isValidSecurityCode = isValidCard.SecurityCode(securityCode);
+  const isValidSecurityCode = CardValidator.SecurityCode(securityCode);
 
   useEffect(() => {
     if (isValidSecurityCode) {

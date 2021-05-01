@@ -6,3 +6,12 @@ export const CARD_INPUT = {
   SECURITY_CODE_LENGTH: 3,
   PASSWORD_UNIT_LENGTH: 1,
 };
+
+export const INPUT = {
+  FIRST: '0',
+  SECOND: '1',
+  THIRD: '2',
+  FOURTH: '3',
+  MONTH: 'month',
+  YEAR: 'year',
+};

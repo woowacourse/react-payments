@@ -10,23 +10,27 @@ import CardOwnerInput from '../../components/cardCreation/cardOwnerInput/CardOwn
 import SecurityCodeInput from '../../components/cardCreation/securityCodeInput/SecurityCodeInput';
 import CardPasswordInput from '../../components/cardCreation/cardPasswordInput/CardPasswordInput';
 import Styled from './style';
-import { COLOR } from '../../constants/color';
-import { PAGE } from '../../constants/page';
-import { isValidCard } from '../../validations/card';
+import { COLOR, PAGE, INPUT } from '../../constants';
+import { CardValidator } from '../../validations/card';
 
 const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
-  const [cardNumber, setCardNumber] = useState({ 0: '', 1: '', 2: '', 3: '' });
-  const [cardExpiredDate, setCardExpiredDate] = useState({ month: '', year: '' });
+  const [cardNumber, setCardNumber] = useState({
+    [INPUT.FIRST]: '',
+    [INPUT.SECOND]: '',
+    [INPUT.THIRD]: '',
+    [INPUT.FOURTH]: '',
+  });
+  const [cardExpiredDate, setCardExpiredDate] = useState({ [INPUT.MONTH]: '', [INPUT.YEAR]: '' });
   const [cardOwner, setCardOwner] = useState('');
   const [securityCode, setSecurityCode] = useState('');
-  const [cardPassword, setCardPassword] = useState({ 0: '', 1: '' });
+  const [cardPassword, setCardPassword] = useState({ [INPUT.FIRST]: '', [INPUT.SECOND]: '' });
   const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: COLOR.LIGHT_GRAY });
   const isValidAllInput =
-    isValidCard.Number(Object.values(cardNumber)) &&
-    isValidCard.ExpiredDate(cardExpiredDate) &&
-    isValidCard.Owner(cardOwner) &&
-    isValidCard.SecurityCode(securityCode) &&
-    isValidCard.Password(cardPassword);
+    CardValidator.Number(Object.values(cardNumber)) &&
+    CardValidator.ExpiredDate(cardExpiredDate) &&
+    CardValidator.Owner(cardOwner) &&
+    CardValidator.SecurityCode(securityCode) &&
+    CardValidator.Password(cardPassword);
 
   const handleNewCardSubmit = e => {
     e.preventDefault();

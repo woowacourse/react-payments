@@ -1,7 +1,7 @@
 import { CARD_INPUT } from '../constants/standard';
 import { isInputFilledUp } from '../utils/isInputFilledUp';
 
-export const isValidCard = {
+export const CardValidator = {
   Number: cardNumber => {
     return Object.values(cardNumber).every(
       cardNumber => isInputFilledUp(cardNumber, CARD_INPUT.NUMBER_UNIT_LENGTH) && !isNaN(cardNumber)

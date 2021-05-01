@@ -18,5 +18,5 @@ Default.args = {
     id: 1,
     name: '브랜 카드',
   },
-  isValidCardNumber: true,
+  CardValidatorNumber: true,
 };
