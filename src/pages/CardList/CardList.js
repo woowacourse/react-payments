@@ -27,7 +27,7 @@ const CardList = () => {
       return;
     }
 
-    const newCardList = cardList.value.filter((card) => card.id !== cardId);
+    const newCardList = cardList.value.filter((card) => card.id !== cardId).reverse();
     cardList.setValue(newCardList);
   };
 
