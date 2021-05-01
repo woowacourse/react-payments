@@ -36,10 +36,14 @@ const CardListPage = ({ setCurrentPage, cardList, setCardInfoForEdit, setCardLis
         }}
       />
       <Styled.CardNickname>{card.cardNickname}</Styled.CardNickname>
-      <div>
-        <Button onClick={() => handleCardEdit(card)}>수정하기</Button>
-        <Button onClick={() => handleCardDelete(card.id)}>삭제하기</Button>
-      </div>
+      <Styled.ButtonContainer>
+        <Button styles={{ color: 'inherit' }} onClick={() => handleCardEdit(card)}>
+          수정하기
+        </Button>
+        <Button styles={{ color: 'inherit' }} onClick={() => handleCardDelete(card.id)}>
+          삭제하기
+        </Button>
+      </Styled.ButtonContainer>
     </Styled.CardItem>
   ));
 
