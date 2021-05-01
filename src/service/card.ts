@@ -7,5 +7,5 @@ export const requestCards = async () => {
 };
 
 export const requestAddCard = (card: Card) => {
-  API.add<Card>(COLLECTION.CARDS, card);
+  API.add<Card>(card, COLLECTION.CARDS);
 };

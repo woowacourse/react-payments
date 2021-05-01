@@ -11,7 +11,7 @@ const API = {
     return result;
   },
 
-  add<T>(collection: string, item: T) {
+  add<T>(item: T, collection: string) {
     return firestore.collection(collection).add(item);
   },
 };
