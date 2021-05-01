@@ -6,7 +6,7 @@ const API = {
     const result: T[] = [];
     const docs = await firestore.collection(collection).get();
 
-    docs.forEach(doc => result.push(doc.data() as T));
+    docs.forEach(doc => result.push({ id: doc.id, ...(doc.data() as T) }));
 
     return result;
   },
