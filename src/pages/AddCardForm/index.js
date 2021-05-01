@@ -185,7 +185,7 @@ export default function AddCardForm({
               onSetModalContents('cardSelection');
             }
           }}
-          forwardRef={serialNumberInputElement}
+          ref={serialNumberInputElement}
           inputMode="numeric"
           textAlign="center"
           errorMessage={cardNumberErrorMessage}

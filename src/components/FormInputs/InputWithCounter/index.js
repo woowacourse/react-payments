@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Input } from '../';
 import './style.css';
 
-export default function InputWithCounter({
-  id,
-  width,
-  fontColor,
-  label,
-  textAlign,
-  letterCounter,
-  forwardRef,
-  ariaLabelledby,
-  errorMessage,
-  inputStyle,
-  children,
-  ...props
-}) {
-  return (
+export default forwardRef(
+  (
+    {
+      id,
+      width,
+      fontColor,
+      label,
+      textAlign,
+      letterCounter,
+      ariaLabelledby,
+      errorMessage,
+      inputStyle,
+      children,
+      ...props
+    },
+    ref
+  ) => (
     <div className="input-with-counter">
       <Input
         id={id}
@@ -24,7 +26,7 @@ export default function InputWithCounter({
         fontColor={fontColor}
         label={label}
         textAlign={textAlign}
-        forwardRef={forwardRef}
+        ref={ref}
         ariaLabelledby={ariaLabelledby}
         errorMessage={errorMessage}
         inputStyle={inputStyle}
@@ -35,5 +37,5 @@ export default function InputWithCounter({
         <span className="letter-counter">{`${letterCounter.current}/${letterCounter.max}`}</span>
       )}
     </div>
-  );
-}
+  )
+);

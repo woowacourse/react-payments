@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import './style.css';
 
-export default function Input({
-  id,
-  width,
-  fontColor,
-  label,
-  textAlign,
-  forwardRef,
-  ariaLabelledby,
-  errorMessage,
-  inputStyle,
-  children,
-  ...props
-}) {
-  return (
+export default forwardRef(
+  (
+    {
+      id,
+      width,
+      fontColor,
+      label,
+      textAlign,
+      ariaLabelledby,
+      errorMessage,
+      inputStyle,
+      children,
+      ...props
+    },
+    ref
+  ) => (
     <div className="basic-input">
       {label && (
         <label className="basic-input__label" htmlFor={id}>
@@ -30,7 +32,7 @@ export default function Input({
             textAlign ? `text-${textAlign}` : '',
           ].join(' ')}
           style={inputStyle}
-          ref={forwardRef}
+          ref={ref}
           aria-labelledby={ariaLabelledby ?? label}
           {...props}
         />
@@ -38,5 +40,5 @@ export default function Input({
       </div>
       {errorMessage && <div className="basic-input__error-message">{errorMessage}</div>}
     </div>
-  );
-}
+  )
+);
