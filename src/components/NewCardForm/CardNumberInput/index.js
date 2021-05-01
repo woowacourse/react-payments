@@ -4,12 +4,7 @@ import Input from '../../../common/Input';
 import { CardNumberInputWrapper } from './index.styles';
 import { INPUT } from '../../../constants/constant';
 
-const CardNumberInput = ({
-  numbers,
-  errorMessage,
-  onChangeCardInput,
-  cardFormValidation,
-}) => {
+const CardNumberInput = ({ numbers, errorMessage, onChangeCardInput }) => {
   return (
     <CardNumberInputWrapper>
       <div className='input-label'>카드 번호</div>
@@ -20,7 +15,7 @@ const CardNumberInput = ({
           data-detail='first'
           value={numbers.first}
           onChange={onChangeCardInput}
-          onBlur={cardFormValidation}
+          onBlur={onChangeCardInput}
           min='0'
           max='9999'
           minLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
@@ -36,7 +31,7 @@ const CardNumberInput = ({
           data-detail='second'
           value={numbers.second}
           onChange={onChangeCardInput}
-          onBlur={cardFormValidation}
+          onBlur={onChangeCardInput}
           min='0'
           max='9999'
           minLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
@@ -52,7 +47,7 @@ const CardNumberInput = ({
           data-detail='third'
           value={numbers.third}
           onChange={onChangeCardInput}
-          onBlur={cardFormValidation}
+          onBlur={onChangeCardInput}
           minLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
           maxLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
           required
@@ -66,7 +61,7 @@ const CardNumberInput = ({
           data-detail='fourth'
           value={numbers.fourth}
           onChange={onChangeCardInput}
-          onBlur={cardFormValidation}
+          onBlur={onChangeCardInput}
           minLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
           maxLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
           required
@@ -86,6 +81,5 @@ CardNumberInput.propTypes = {
   }),
   errorMessage: PropTypes.string,
   onChangeCardInput: PropTypes.func,
-  cardFormValidation: PropTypes.func,
 };
 export default CardNumberInput;

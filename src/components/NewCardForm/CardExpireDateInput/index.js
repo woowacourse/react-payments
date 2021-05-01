@@ -8,7 +8,6 @@ const CardExpireDateInput = ({
   expireDate,
   errorMessage,
   onChangeCardInput,
-  cardFormValidation,
 }) => {
   return (
     <CardExpireDateInputWrapper>
@@ -25,7 +24,7 @@ const CardExpireDateInput = ({
           maxLength={INPUT.MAX_LENGTH.CARD.EXPIRE_DATE}
           value={expireDate.month}
           onChange={onChangeCardInput}
-          onBlur={cardFormValidation}
+          onBlur={onChangeCardInput}
           required
         />
         <span className='input-separator gray'>/</span>
@@ -39,7 +38,7 @@ const CardExpireDateInput = ({
           maxLength={INPUT.MAX_LENGTH.CARD.EXPIRE_DATE}
           value={expireDate.year}
           onChange={onChangeCardInput}
-          onBlur={cardFormValidation}
+          onBlur={onChangeCardInput}
           required
         />
       </div>
@@ -55,7 +54,6 @@ CardExpireDateInput.propTypes = {
   }),
   errorMessage: PropTypes.string,
   onChangeCardInput: PropTypes.func,
-  cardFormValidation: PropTypes.func,
 };
 
 export default CardExpireDateInput;

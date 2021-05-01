@@ -50,7 +50,7 @@ const NewCardForm = ({
       : setNewCardInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
   };
 
-  const cardFormValidation = () => {
+  const cardFormFilledValidation = () => {
     const { numbers, expireDate, password, cvc } = cardInfo;
     const isFilled =
       Object.values(numbers).every(
@@ -79,8 +79,8 @@ const NewCardForm = ({
   };
 
   useEffect(() => {
-    cardFormValidation();
-  }, [errorMessage]);
+    cardFormFilledValidation();
+  }, [cardInfo]);
 
   const { numbers, expireDate, user, cvc, password } = cardInfo;
   return (

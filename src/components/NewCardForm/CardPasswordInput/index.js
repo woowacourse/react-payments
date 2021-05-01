@@ -5,12 +5,7 @@ import { CardPasswordInputWrapper } from './index.styles';
 import Input from '../../../common/Input';
 import { INPUT } from '../../../constants/constant';
 
-const CardPasswordInput = ({
-  password,
-  errorMessage,
-  onChangeCardInput,
-  cardFormValidation,
-}) => {
+const CardPasswordInput = ({ password, errorMessage, onChangeCardInput }) => {
   return (
     <CardPasswordInputWrapper>
       <div className='input-label'>카드 비밀번호</div>
@@ -26,7 +21,7 @@ const CardPasswordInput = ({
             name={INPUT.NAME.CARD.PASSWORD}
             data-detail={key}
             onChange={onChangeCardInput}
-            onBlur={cardFormValidation}
+            onBlur={onChangeCardInput}
             required
           />
         ))}
@@ -46,7 +41,6 @@ CardPasswordInput.propTypes = {
   }),
   errorMessage: PropTypes.string,
   onChangeCardInput: PropTypes.func,
-  cardFormValidation: PropTypes.func,
 };
 
 export default CardPasswordInput;
