@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { ERROR_TYPE, throwError } from "../../../@shared/utils";
@@ -21,9 +21,9 @@ const initialNumberInfos = [
   { id: "number-info-3", type: "password", value: "", minLength: "3", maxLength: "4" },
 ];
 
-const CardAddForm = props => {
+const CardAddForm = ({ addCardInfo }) => {
   const [isBankSelectorVisible, setBankSelectorVisible] = useState(false);
-  const [backgroundColor, setBackgroundColor] = useState(null);
+  const [backgroundColor, setBackgroundColor] = useState("");
   const [bank, setBank] = useState("");
   const [numberInfos, setNumberInfos] = useState(initialNumberInfos);
   const [isNumberInfosValid, setNumberInfosValid] = useState(null);
@@ -36,6 +36,22 @@ const CardAddForm = props => {
   const [isToolTipVisible, setToolTipVisible] = useState(false);
   const [passwords, setPasswords] = useState(Array(2).fill(null));
   const [isPasswordValid, setPasswordValid] = useState(null);
+  const isMountedRef = useRef(false);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+  }, []);
+
+  const isNextButtonVisible = [
+    isMountedRef.current,
+    bank,
+    backgroundColor,
+    isNumberInfosValid,
+    isExpirationDateValid,
+    isOwnerNameValid,
+    isSecurityCodeValid,
+    isPasswordValid,
+  ].every(Boolean);
 
   const handleCardClick = () => {
     setBankSelectorVisible(!isBankSelectorVisible);
@@ -300,7 +316,6 @@ const CardAddForm = props => {
             <div className="mb-2 h-6">
               <InputTitle innerText="보안코드(CVC/CVV)" />
             </div>
-
             <div className="flex items-center">
               <Input
                 id="security-code-input"
@@ -361,19 +376,11 @@ const CardAddForm = props => {
         </div>
       </form>
       <div className="flex items-center justify-end w-full h-10">
-        {[
-          bank,
-          backgroundColor,
-          isNumberInfosValid,
-          isExpirationDateValid,
-          isOwnerNameValid,
-          isSecurityCodeValid,
-          isPasswordValid,
-        ].every(Boolean) && (
+        {isNextButtonVisible && (
           <Button
             name="다음"
             onClick={() => {
-              props.addCardInfo({
+              addCardInfo({
                 bank,
                 backgroundColor,
                 numberInfos,
