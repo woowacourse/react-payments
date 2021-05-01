@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, TextButton } from '../../components';
-import { MMYYDateFormatter } from '../../utils/formatter';
 import { CARD, CARD_COMPANY } from '../../constants';
 import './style.css';
 import '../../index.css';
@@ -30,7 +29,7 @@ export default function AddCardComplete({
         companyName={CARD_COMPANY[cardCompany].NAME}
         color={CARD_COMPANY[cardCompany].COLOR}
         number={serialNumber}
-        expirationDate={MMYYDateFormatter(expirationDate)}
+        expirationDate={expirationDate}
         size="large"
       />
       <form onSubmit={onCardNickNameSubmit}>
