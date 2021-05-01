@@ -7,7 +7,7 @@ export const isValidSerialNumber = (serialNumber) => {
 };
 
 export const isValidDateFormat = (date) => {
-  return /^(?:0[1-9]|1[0-2])(\d{2})$/.test(date);
+  return /^(?:0[1-9]|1[0-2])\/(\d{2})$/.test(date);
 };
 
 export const isValidUserName = (userName) => {

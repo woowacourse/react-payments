@@ -29,6 +29,7 @@ export default function AddCardForm({
   setPassword,
   onSetModalContents,
 }) {
+  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState('');
   const [expirationDateErrorMessage, setExpirationDateErrorMessage] = useState('');
   const [userNameErrorMessage, setUserNameErrorMessage] = useState('');
 
@@ -95,6 +96,9 @@ export default function AddCardForm({
     insertText: (serialIndex, insertKey) => {
       return serialNumber.slice(0, serialIndex) + insertKey + serialNumber.slice(serialIndex);
     },
+    insertFromPaste: () => {
+      throw new Error('붙여 넣기는 할 수 없습니다.');
+    },
   };
 
   const onSerialNumberInputChange = (event) => {
@@ -111,23 +115,33 @@ export default function AddCardForm({
     const offset = getOffset(inputType, selectionStart);
     const currentLocation = selectionStart + offset;
 
-    const serialIndex =
-      currentLocation -
-      Math.floor(currentLocation / (CARD.SERIAL_NUMBER_UNIT_LENGTH + 1)) -
-      offsetByInputType[inputType];
-    const currentSerialNumber = getCurrentSerialNumber[inputType](serialIndex, inputKey);
+    try {
+      const serialIndex =
+        currentLocation -
+        Math.floor(currentLocation / (CARD.SERIAL_NUMBER_UNIT_LENGTH + 1)) -
+        offsetByInputType[inputType];
+      const currentSerialNumber = getCurrentSerialNumber[inputType](serialIndex, inputKey);
 
-    setSerialNumber(currentSerialNumber);
-    event.target.value = cardSerialNumberFormatter(currentSerialNumber);
-    event.target.setSelectionRange(currentLocation, currentLocation);
+      const value = cardSerialNumberFormatter(currentSerialNumber);
 
-    if (inputValue.length === CARD.SERIAL_ID_CODE_LENGTH) {
-      serialNumberInputElement.current.blur();
-      onSetModalContents('cardSelection');
-    }
+      event.target.value = value;
+      setSerialNumber(currentSerialNumber);
+      setCardNumberErrorMessage('');
 
-    if (cardCompany && inputValue.length < CARD.SERIAL_ID_CODE_LENGTH) {
-      setCardCompany('');
+      event.target.setSelectionRange(currentLocation, currentLocation);
+
+      if (inputValue.length === CARD.SERIAL_ID_CODE_LENGTH) {
+        serialNumberInputElement.current.blur();
+        onSetModalContents('cardSelection');
+      }
+
+      if (cardCompany && inputValue.length < CARD.SERIAL_ID_CODE_LENGTH) {
+        setCardCompany('');
+      }
+    } catch (error) {
+      setSerialNumber('');
+      event.target.value = '';
+      setCardNumberErrorMessage(error.message);
     }
   };
 
@@ -149,7 +163,7 @@ export default function AddCardForm({
             companyName={CARD_COMPANY[cardCompany]?.NAME}
             color={CARD_COMPANY[cardCompany]?.COLOR}
             number={serialNumber}
-            expirationDate={MMYYDateFormatter(expirationDate)}
+            expirationDate={expirationDate}
           />
         </div>
 
@@ -169,6 +183,7 @@ export default function AddCardForm({
           forwardRef={serialNumberInputElement}
           inputMode="numeric"
           textAlign="center"
+          errorMessage={cardNumberErrorMessage}
         />
 
         <Input
@@ -179,21 +194,26 @@ export default function AddCardForm({
           placeholder="MM/YY"
           textAlign="center"
           maxLength="5"
-          value={MMYYDateFormatter(expirationDate)}
+          value={expirationDate}
           onChange={(event) => {
-            const expirationDate = event.target.value.replace('/', '');
+            const inputValue = event.target.value.replace('/', '');
+            try {
+              if (isNaN(inputValue)) throw Error('숫자만 입력가능합니다.');
 
-            if (isNaN(expirationDate)) return;
+              const formattedDate = MMYYDateFormatter(inputValue);
+              setExpirationDate(formattedDate);
 
-            setExpirationDate(expirationDate);
+              if (formattedDate.length === CARD.EXPIRATION_DATE_LENGTH) {
+                if (isValidDateFormat(formattedDate)) {
+                  setExpirationDateErrorMessage('');
+                  return;
+                }
 
-            if (expirationDate.length === CARD.EXPIRATION_DATE_LENGTH) {
-              if (isValidDateFormat(expirationDate)) {
-                setExpirationDateErrorMessage('');
-                return;
+                setExpirationDateErrorMessage(ERROR_MESSAGE.INVALID_DATE_FORMAT);
               }
-
-              setExpirationDateErrorMessage(ERROR_MESSAGE.INVALID_DATE_FORMAT);
+            } catch (error) {
+              setExpirationDate('');
+              setExpirationDateErrorMessage(error.message);
             }
           }}
           onClick={() => {
