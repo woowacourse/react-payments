@@ -138,9 +138,9 @@ export default function AddCardForm({
         <div className="card-preview">
           <Card
             userName={userName}
-            cardCompanyName={CARD_COMPANY[cardCompany]?.NAME}
-            cardColor={CARD_COMPANY[cardCompany]?.COLOR}
-            cardNumber={serialNumber}
+            companyName={CARD_COMPANY[cardCompany]?.NAME}
+            color={CARD_COMPANY[cardCompany]?.COLOR}
+            number={serialNumber}
             expirationDate={MMYYDateFormatter(expirationDate)}
           />
         </div>
