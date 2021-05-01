@@ -235,7 +235,7 @@ export default function AddCardForm({
         <PasswordInput password={password} onSetPassword={onSetPassword}></PasswordInput>
         {isFormCompleted && (
           <div className="bottom-right-button">
-            <TextButton text="다음" />
+            <TextButton>다음</TextButton>
           </div>
         )}
       </form>

@@ -40,11 +40,12 @@ export default function AddCardComplete({
         }}
       >
         <TextButton
-          text="확인"
           onClick={() => {
             setPage('addCardForm');
           }}
-        />
+        >
+          확인
+        </TextButton>
       </div>
     </div>
   );
