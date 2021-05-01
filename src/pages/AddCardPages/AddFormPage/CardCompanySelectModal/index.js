@@ -5,7 +5,9 @@ import { Button, Label, Modal } from '../../../../components';
 import { handleCardCompanySelect, handleDimmedAreaClick } from './handler';
 import { CARD_COMPANY_LIST } from '../../../../constants';
 
-export const CardCompanySelectModal = ({ isOpen, setCardInfo, setIsModalOpen }) => {
+export const CardCompanySelectModal = (props) => {
+  const { isOpen, setCardInfo, setIsModalOpen } = props;
+
   return (
     <Modal
       className="CardCompanySelectModal--bottom"

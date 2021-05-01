@@ -3,12 +3,8 @@ import { Container, Input, Label, Text } from '../../../../../components';
 import { handleBlockInvalidChar, handleCardNumberInputChange } from './handler';
 import { CARD_NUMBER_UNIT_LENGTH } from '../../../../../constants';
 
-export const CardNumberInput = ({
-  cardInfo,
-  setCardInfo,
-  setIsModalOpen,
-  expirationDateInputRef,
-}) => {
+export const CardNumberInput = (props) => {
+  const { cardInfo, setCardInfo, setIsModalOpen, expirationDateInputRef } = props;
   const { number } = cardInfo;
 
   const firstCardNumberInput = createRef();
