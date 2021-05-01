@@ -21,7 +21,7 @@ const Input = props => {
 
   return (
     <>
-      <label htmlFor={id}>
+      <label className="only:w-full" htmlFor={id}>
         <span className="sr-only">{label}</span>
         <input
           className={classNames(
