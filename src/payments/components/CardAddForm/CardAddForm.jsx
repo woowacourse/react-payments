@@ -374,27 +374,27 @@ const CardAddForm = ({ addCardInfo }) => {
             </div>
           </div>
         </div>
-      </form>
-      <div className="flex items-center justify-end w-full h-10">
-        {isNextButtonVisible && (
-          <Button
-            name="다음"
-            onClick={() => {
-              addCardInfo({
-                bank,
-                backgroundColor,
-                numberInfos,
-                expirationDate,
-                ownerName,
-                securityCode,
-                passwords,
-                isRegistered: true,
-              });
-            }}
-          />
-        )}
-      </div>
 
+        <div className="flex items-center justify-end w-full h-10">
+          {isNextButtonVisible && (
+            <Button
+              name="다음"
+              onClick={() => {
+                addCardInfo({
+                  bank,
+                  backgroundColor,
+                  numberInfos,
+                  expirationDate,
+                  ownerName,
+                  securityCode,
+                  passwords,
+                  isRegistered: true,
+                });
+              }}
+            />
+          )}
+        </div>
+      </form>
       {isBankSelectorVisible && (
         <Modal>
           <BankSelector onClick={handleBankClick} />
