@@ -30,11 +30,11 @@ const ModalInner = styled.div`
   padding: 2rem;
 `;
 
-const Modal = ({ handleModalClose, children }) => {
+const Modal = ({ onCloseModal, children }) => {
   const onClickModalDimmed = (e) => {
     if (e.target !== e.currentTarget) return;
 
-    handleModalClose();
+    onCloseModal();
   };
   return (
     <ModalWrapper onClick={onClickModalDimmed}>
@@ -44,7 +44,7 @@ const Modal = ({ handleModalClose, children }) => {
 };
 
 Modal.propTypes = {
-  handleModalClose: PropTypes.func.isRequired,
+  onCloseModal: PropTypes.func.isRequired,
   children: PropTypes.object.isRequired,
 };
 

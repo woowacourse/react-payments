@@ -12,12 +12,7 @@ import { cardFormErrorMessages } from './cardFormValidator';
 import { ERROR_MESSAGE, INPUT, PAGE } from '../../constants/constant';
 import ButtonMenu from '../mixin/ButtonMenu';
 
-const NewCardForm = ({
-  cardInfo,
-  setNewCardInfo,
-  handleModalOpen,
-  setPage,
-}) => {
+const NewCardForm = ({ cardInfo, setNewCardInfo, onOpenModal, setPage }) => {
   const [cardFormFilled, setCardFormFilled] = useState(false);
   const [errorMessage, setErrorMessage] = useState({
     numbers: '',
@@ -104,7 +99,7 @@ const NewCardForm = ({
         cvc={cvc}
         errorMessage={errorMessage.cvc}
         onChangeCardInput={onChangeCardInput}
-        handleModalOpen={handleModalOpen}
+        onOpenModal={onOpenModal}
       />
       <CardPasswordInput
         password={password}
@@ -139,7 +134,7 @@ NewCardForm.propTypes = {
 
   setNewCardInfo: PropTypes.func.isRequired,
   setPage: PropTypes.func.isRequired,
-  handleModalOpen: PropTypes.func.isRequired,
+  onOpenModal: PropTypes.func.isRequired,
 };
 
 export default NewCardForm;

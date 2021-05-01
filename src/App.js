@@ -46,12 +46,12 @@ function App() {
     resetNewCardInfo();
   };
 
-  const handleCardColor = (name) => {
+  const onClickCardColor = (name) => {
     setNewCardInfo({
       ...newCardInfo,
       cardName: name,
     });
-    handleModalClose();
+    onCloseModal();
   };
 
   const resetNewCardInfo = () => {
@@ -77,14 +77,14 @@ function App() {
     });
   };
 
-  const handleModalOpen = (modalContent) => {
+  const onOpenModal = (modalContent) => {
     setOpenModalContent({
       isModalOpen: true,
       modalContent,
     });
   };
 
-  const handleModalClose = () => {
+  const onCloseModal = () => {
     setOpenModalContent({
       isModalOpen: false,
       modalContent: '',
@@ -99,12 +99,12 @@ function App() {
           <>
             <Nav />
             <div className='card-wrapper'>
-              <Card cardInfo={newCardInfo} handleModalOpen={handleModalOpen} />
+              <Card cardInfo={newCardInfo} onOpenModal={onOpenModal} />
             </div>
             <NewCardForm
               cardInfo={newCardInfo}
               setNewCardInfo={setNewCardInfo}
-              handleModalOpen={handleModalOpen}
+              onOpenModal={onOpenModal}
               setPage={setPage}
             />
           </>
@@ -118,10 +118,10 @@ function App() {
         )}
 
         {openModalContent.isModalOpen && (
-          <Modal handleModalClose={handleModalClose}>
+          <Modal onCloseModal={onCloseModal}>
             <>
               {openModalContent.modalContent === MODAL.CARD_COLOR && (
-                <CardColor handleCardColor={handleCardColor} />
+                <CardColor onClickCardColor={onClickCardColor} />
               )}
               {openModalContent.modalContent === MODAL.CVC_HELP && <CVCHelp />}
             </>

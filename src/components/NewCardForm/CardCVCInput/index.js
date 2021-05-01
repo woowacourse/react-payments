@@ -8,10 +8,10 @@ const CardCVCInput = ({
   cvc,
   errorMessage,
   onChangeCardInput,
-  handleModalOpen,
+  onOpenModal,
 }) => {
   const onClickCVCHelp = () => {
-    handleModalOpen(MODAL.CVC_HELP);
+    onOpenModal(MODAL.CVC_HELP);
   };
 
   return (
@@ -41,7 +41,7 @@ CardCVCInput.propTypes = {
   cvc: PropTypes.string,
   errorMessage: PropTypes.string,
   onChangeCardInput: PropTypes.func,
-  handleModalOpen: PropTypes.func,
+  onOpenModal: PropTypes.func,
 };
 
 export default CardCVCInput;

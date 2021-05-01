@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CardColorItemWrapper } from './index.styles';
 
-const CardColorItem = ({ name, color, handleCardColor }) => {
+const CardColorItem = ({ name, color, onClickCardColor }) => {
   return (
-    <CardColorItemWrapper color={color} onClick={() => handleCardColor(name)}>
+    <CardColorItemWrapper color={color} onClick={() => onClickCardColor(name)}>
       <div className='card-color'></div>
       <div className='card-name'>{name} 카드</div>
     </CardColorItemWrapper>
@@ -14,7 +14,7 @@ const CardColorItem = ({ name, color, handleCardColor }) => {
 CardColorItem.propTypes = {
   name: PropTypes.string,
   color: PropTypes.string,
-  handleCardColor: PropTypes.func,
+  onClickCardColor: PropTypes.func,
 };
 
 export default CardColorItem;
