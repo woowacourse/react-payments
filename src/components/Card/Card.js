@@ -2,6 +2,16 @@ import PropTypes from 'prop-types';
 import Styled from './Card.styles';
 import REGEX from '../../constants/regex';
 
+const getFormattedCardNumber = (cardNumbers) => {
+  const cardNumberChunks = cardNumbers.match(REGEX.TEXT_WITH_LENGTH(4)) || [];
+
+  return cardNumberChunks.map((chunk, index) => {
+    if (index <= 1) return chunk;
+
+    return chunk.replace(REGEX.NUMBER, '•');
+  });
+};
+
 const Card = ({
   bgColor,
   companyName,
@@ -11,38 +21,24 @@ const Card = ({
   size,
   onClick,
   ...props
-}) => {
-  const formattedCardNumber =
-    (() => {
-      const cardNumberChunks = cardNumbers.match(REGEX.TEXT_WITH_LENGTH(4)) || [];
+}) => (
+  <Styled.Container bgColor={bgColor} size={size} onClick={onClick} {...props} data-is-card>
+    <Styled.CompanyName>{companyName}</Styled.CompanyName>
 
-      return cardNumberChunks.map((chunk, index) => {
-        if (index <= 1) return chunk;
+    <Styled.Chip />
 
-        return chunk.replace(REGEX.NUMBER, '•');
-      });
-    },
-    [cardNumbers]);
+    <Styled.CardNumbersGroup>
+      {getFormattedCardNumber(cardNumbers).map((number, index) => {
+        const key = `${index}-${number}`;
 
-  return (
-    <Styled.Container bgColor={bgColor} size={size} onClick={onClick} {...props} data-is-card>
-      <Styled.CompanyName>{companyName}</Styled.CompanyName>
+        return <Styled.CardNumbers key={key}>{number}</Styled.CardNumbers>;
+      })}
+    </Styled.CardNumbersGroup>
 
-      <Styled.Chip />
-
-      <Styled.CardNumbersGroup>
-        {formattedCardNumber.map((number, index) => {
-          const key = `${index}-${number}`;
-
-          return <Styled.CardNumbers key={key}>{number}</Styled.CardNumbers>;
-        })}
-      </Styled.CardNumbersGroup>
-
-      <Styled.OwnerName>{ownerName}</Styled.OwnerName>
-      <Styled.ExpiryDate>{expiryDate}</Styled.ExpiryDate>
-    </Styled.Container>
-  );
-};
+    <Styled.OwnerName>{ownerName}</Styled.OwnerName>
+    <Styled.ExpiryDate>{expiryDate}</Styled.ExpiryDate>
+  </Styled.Container>
+);
 Card.propTypes = {
   bgColor: PropTypes.string,
   companyName: PropTypes.string,

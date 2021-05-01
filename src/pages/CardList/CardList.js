@@ -82,7 +82,7 @@ const CardList = () => {
         </Link>
         <ul>
           {cardList.value &&
-            cardList?.value.reverse().map((card) => {
+            cardList.value?.reverse().map((card) => {
               const {
                 id,
                 cardNumbers,

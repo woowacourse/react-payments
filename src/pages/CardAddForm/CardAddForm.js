@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import { ScreenContainer } from '../../styles/common.styles';
@@ -62,27 +62,20 @@ const CardAddForm = () => {
 
   const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
 
-  const cardNumbersAsNumber = useMemo(() => cardNumbers.value.join(''), [cardNumbers.value]);
+  const cardNumbersAsNumber = cardNumbers.value.join('');
 
-  const expiryDateAsNumber = useMemo(() => expiryDate.value.replace(REGEX.NOT_NUMBER, ''), [
-    expiryDate.value,
-  ]);
+  const expiryDateAsNumber = expiryDate.value.replace(REGEX.NOT_NUMBER, '');
 
-  const formattedExpiryDate = useMemo(() => {
+  const formattedExpiryDate = (() => {
     const expiryDateChunks = expiryDateAsNumber.match(REGEX.TEXT_WITH_LENGTH(2)) || [];
     return expiryDateChunks.join(' / ');
-  }, [expiryDateAsNumber]);
+  })();
 
-  const isValidExpiryDate = useMemo(
-    () =>
-      expiryDateAsNumber.length > 0 &&
-      !(Number(expiryDateAsNumber.slice(0, 2)) > 0 && Number(expiryDateAsNumber.slice(0, 2)) < 13),
-    [expiryDateAsNumber]
-  );
+  const isValidExpiryDate =
+    expiryDateAsNumber.length > 0 &&
+    !(Number(expiryDateAsNumber.slice(0, 2)) > 0 && Number(expiryDateAsNumber.slice(0, 2)) < 13);
 
-  const isNumericCardNumbers = useMemo(() => cardNumbers.value.every(isNumeric), [
-    cardNumbers.value,
-  ]);
+  const isNumericCardNumbers = cardNumbers.value.every(isNumeric);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -148,7 +141,7 @@ const CardAddForm = () => {
     passwordDigits.setValueIndex(event.target.textContent, index);
   };
 
-  const updateCardCompany = useCallback(() => {
+  const updateCardCompany = () => {
     const [firstInput, secondInput] = cardNumbers.value;
 
     const isFilledHalf = firstInput.length === 4 && secondInput.length === 4;
@@ -165,7 +158,7 @@ const CardAddForm = () => {
     } else if (!isFilledHalf && isCardCompanySelected) {
       setCardCompany({});
     }
-  }, [cardNumbers.value, cardCompany, openModal]);
+  };
 
   useEffect(updateCardCompany, [updateCardCompany]);
 
@@ -269,6 +262,7 @@ const CardAddForm = () => {
           </Styled.Row>
         </form>
       </Styled.Container>
+
       <Modal mobile>
         <Styled.CardSelect>
           {Object.entries(CARD).map(([key, company]) => (

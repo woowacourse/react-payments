@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 export default (key, defaultValue = '') => {
   const [currentValue, setCurrentValue] = useState(() => {
@@ -11,13 +11,13 @@ export default (key, defaultValue = '') => {
     }
   });
 
-  const parsedValue = useMemo(() => {
+  const parsedValue = (() => {
     try {
       return JSON.parse(currentValue);
     } catch (error) {
       return currentValue;
     }
-  }, [currentValue]);
+  })();
 
   const setValue = (value) => {
     try {
