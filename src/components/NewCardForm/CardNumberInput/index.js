@@ -15,12 +15,14 @@ const CardNumberInput = ({
       <div className='input-label'>카드 번호</div>
       <div className='input-container'>
         <Input
-          type='text'
+          type='number'
           name={INPUT.NAME.CARD.NUMBERS}
           data-detail='first'
           value={numbers.first}
           onChange={onChangeCardInput}
           onBlur={cardFormValidation}
+          min='0'
+          max='9999'
           minLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
           maxLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
           required
@@ -29,12 +31,14 @@ const CardNumberInput = ({
           {numbers.first.length === INPUT.MAX_LENGTH.CARD.NUMBERS && '-'}
         </span>
         <Input
-          type='text'
+          type='number'
           name={INPUT.NAME.CARD.NUMBERS}
           data-detail='second'
           value={numbers.second}
           onChange={onChangeCardInput}
           onBlur={cardFormValidation}
+          min='0'
+          max='9999'
           minLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
           maxLength={INPUT.MAX_LENGTH.CARD.NUMBERS}
           required
