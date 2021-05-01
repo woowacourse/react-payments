@@ -347,7 +347,7 @@ const CardAddForm = ({ addCardInfo }) => {
                 maxLength="1"
                 inputmode="numeric"
                 name="0"
-                value={passwords[0] || ""}
+                value={passwords[0]}
                 isValid={isPasswordValid}
                 label="카드 비밀번호1"
                 onChange={handlePasswordChange}
@@ -360,7 +360,7 @@ const CardAddForm = ({ addCardInfo }) => {
                 maxLength="1"
                 name="1"
                 inputmode="numeric"
-                value={passwords[1] || ""}
+                value={passwords[1]}
                 isValid={isPasswordValid}
                 label="카드 비밀번호2"
                 onChange={handlePasswordChange}
