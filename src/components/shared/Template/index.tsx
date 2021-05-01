@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import styled from 'styled-components';
 
 const Header = styled.header`
@@ -18,7 +19,7 @@ interface Props {
   className?: string;
 }
 
-const Template = ({ className, children, title, hasPreviousPage }: Props) => {
+const Template: FC<Props> = ({ className, children, title, hasPreviousPage }) => {
   return (
     <div className={className}>
       <Header>

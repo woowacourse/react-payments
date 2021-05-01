@@ -8,7 +8,7 @@ interface Props {
   width?: string;
 }
 
-const AddCardInputLabel = ({ label, width, children }: Props) => {
+const AddCardInputLabel: FC<Props> = ({ label, width, children }) => {
   return (
     <AddCardInputLabelContainer width={width}>
       {Array.isArray(label) ? (

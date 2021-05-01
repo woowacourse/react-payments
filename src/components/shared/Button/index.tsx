@@ -24,12 +24,6 @@ const Button = styled.button<Props>`
   ${({ position }) => position === 'bottom-right' && bottomRight}
 `;
 
-interface IconButtonProps {
-  children: React.ReactNode;
-  backgroundColor?: string;
-  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
-}
-
 const IconButtonContainer = styled.div<IconButtonProps>`
   display: flex;
   align-items: center;
@@ -51,7 +45,13 @@ const IconButtonContainer = styled.div<IconButtonProps>`
   }
 `;
 
-export const IconButton = ({ children, backgroundColor, onClick }: IconButtonProps) => {
+interface IconButtonProps {
+  children: React.ReactNode;
+  backgroundColor?: string;
+  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+}
+
+export const IconButton: FC<IconButtonProps> = ({ children, backgroundColor, onClick }) => {
   return (
     <IconButtonContainer onClick={onClick} backgroundColor={backgroundColor}>
       <button type="button" />

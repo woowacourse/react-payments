@@ -1,11 +1,5 @@
-import { MouseEvent } from 'react';
+import { FC, MouseEvent } from 'react';
 import styled, { css } from 'styled-components';
-
-interface Props {
-  children: React.ReactNode;
-  modalClose?: () => void;
-  type?: 'bottom' | 'full';
-}
 
 const ModalContainer = styled.div`
   display: flex;
@@ -34,7 +28,13 @@ const ModalInner = styled.div<Pick<Props, 'type'>>`
   ${({ type }) => (type === 'full' ? fullType : bottomType)}
 `;
 
-const Modal = ({ children, modalClose, type }: Props) => {
+interface Props {
+  children: React.ReactNode;
+  modalClose?: () => void;
+  type?: 'bottom' | 'full';
+}
+
+const Modal: FC<Props> = ({ children, modalClose, type }) => {
   const onClickDimmed = ({ target, currentTarget }: MouseEvent<HTMLDivElement>) => {
     if (!modalClose || target !== currentTarget) return;
 

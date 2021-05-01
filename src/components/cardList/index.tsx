@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const CardList = ({ children }: Props) => {
+const CardList: FC<Props> = ({ children }) => {
   return (
     <CardListContainer>
       {children}
