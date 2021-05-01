@@ -8,20 +8,7 @@ const unformatCardNumbers = (formattedValue) => {
 };
 
 const splitCardNumbers = (value) => {
-  const splitNumbers = [];
-
-  [...Array(Math.ceil(value.length / CARD_NUMBER.PARTIAL_LENGTH))].forEach(
-    (_, index) => {
-      splitNumbers.push(
-        value.slice(
-          index * CARD_NUMBER.PARTIAL_LENGTH,
-          (index + 1) * CARD_NUMBER.PARTIAL_LENGTH
-        )
-      );
-    }
-  );
-
-  return splitNumbers;
+  return value.replace(/\D/g, "").match(/.{1,4}/g) || [];
 };
 
 const useCardNumbers = (initialCardNumbers) => {
