@@ -30,3 +30,30 @@ ul {
   list-style: none;
   padding: 0;
 }
+
+a {
+  font-weight: bold;
+  font-size: 2rem;
+  display: block;
+  margin: 20px;
+}
+a {
+  all: unset;
+}
+a:link {
+  text-decoration: none;
+  color: #3f464d;
+}
+a:visited {
+  text-decoration: none;
+  color: #3f464d;
+}
+a:active {
+  text-decoration: none;
+  color: #3f464d;
+}
+a:hover {
+  text-decoration: none;
+  color: tomato;
+  cursor: pointer;
+}

@@ -10,10 +10,11 @@ import CardOwnerInput from '../../components/cardCreation/cardOwnerInput/CardOwn
 import SecurityCodeInput from '../../components/cardCreation/securityCodeInput/SecurityCodeInput';
 import CardPasswordInput from '../../components/cardCreation/cardPasswordInput/CardPasswordInput';
 import Styled from './style';
-import { COLOR, PAGE, INPUT } from '../../constants';
+import { COLOR, INPUT } from '../../constants';
 import { CardValidator } from '../../validations/card';
+import { Link, withRouter } from 'react-router-dom';
 
-const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
+const CardCreationPage = ({ history, setNewCardInfo }) => {
   const [cardNumber, setCardNumber] = useState({
     [INPUT.FIRST]: '',
     [INPUT.SECOND]: '',
@@ -26,7 +27,7 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
   const [cardPassword, setCardPassword] = useState({ [INPUT.FIRST]: '', [INPUT.SECOND]: '' });
   const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: COLOR.LIGHT_GRAY });
   const isValidAllInput =
-    CardValidator.Number(Object.values(cardNumber)) &&
+    CardValidator.Number(cardNumber) &&
     CardValidator.ExpiredDate(cardExpiredDate) &&
     CardValidator.Owner(cardOwner) &&
     CardValidator.SecurityCode(securityCode) &&
@@ -36,15 +37,17 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
     e.preventDefault();
 
     setNewCardInfo({ cardNumber, cardExpiredDate, cardOwner, selectedCardInfo });
-    setCurrentPage(PAGE.CARD_CREATION_COMPLETE);
+    history.push('/complete');
   };
 
   return (
     <>
       <Header>
-        <Button onClick={() => setCurrentPage(PAGE.CARD_LIST)} styles={{ marginRight: '18px' }}>
-          <PrevIcon />
-        </Button>
+        <Link to="/">
+          <Button styles={{ marginRight: '18px' }}>
+            <PrevIcon />
+          </Button>
+        </Link>
         <span>카드 추가</span>
       </Header>
       <div>
@@ -82,4 +85,4 @@ CardCreationPage.propTypes = {
   setNewCardInfo: PropTypes.func.isRequired,
 };
 
-export default CardCreationPage;
+export default withRouter(CardCreationPage);

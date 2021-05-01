@@ -4,8 +4,8 @@ import Styled from './style';
 import { CreditCard, CARD_SIZE } from '../../components/commons/card/CreditCard';
 import { TransparentInput } from '../../components/commons/input/TransparentInput';
 import { Button } from '../../components/commons/button/Button';
-import { PAGE } from '../../constants/page';
 import { COLOR } from '../../constants/color';
+import { withRouter } from 'react-router';
 
 const transparentInputStyles = {
   textAlign: 'center',
@@ -13,7 +13,7 @@ const transparentInputStyles = {
   color: '#383838',
 };
 
-const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo }) => {
+const CardCreationCompletePage = ({ history, newCardInfo, setNewCardInfo }) => {
   const [cardNickName, setCardNickName] = useState('');
   const { selectedCardInfo, cardNumber, cardOwner, cardExpiredDate } = newCardInfo;
 
@@ -22,7 +22,7 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo 
 
     alert('카드를 추가하였습니다.');
     setNewCardInfo(prevState => ({ ...prevState, cardNickName }));
-    setCurrentPage(PAGE.CARD_LIST);
+    history.push('/');
   };
 
   return (
@@ -59,9 +59,8 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo 
 };
 
 CardCreationCompletePage.propTypes = {
-  setCurrentPage: PropTypes.func.isRequired,
   newCardInfo: PropTypes.object.isRequired,
   setNewCardInfo: PropTypes.func.isRequired,
 };
 
-export default CardCreationCompletePage;
+export default withRouter(CardCreationCompletePage);
