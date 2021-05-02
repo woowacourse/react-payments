@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Card } from '../../components';
-import { ROUTE, MESSAGE, STORAGE_KEY } from '../../constants';
+import { ROUTE, MESSAGE, STORAGE_KEY, MOUSE_PRESS_DELAY } from '../../constants';
 import { useServerAPI, useMousePressTimer } from '../../hooks';
 import { ScreenContainer } from '../../styles/common.styles';
 
@@ -13,7 +13,7 @@ const CardList = () => {
   const cardList = useServerAPI(STORAGE_KEY.CARD_LIST);
 
   const history = useHistory();
-  const { onMouseDown, onMouseUp, clearTimer } = useMousePressTimer(2000);
+  const { onMouseDown, onMouseUp, clearTimer } = useMousePressTimer(MOUSE_PRESS_DELAY);
 
   const onClickCardContainer = (event) => {
     const cardId = event.target.getAttribute('data-card-id');

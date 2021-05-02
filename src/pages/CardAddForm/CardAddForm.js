@@ -22,25 +22,44 @@ import {
   useServerAPI,
 } from '../../hooks';
 import { isNumeric, initArray } from '../../utils';
-import { CARD, DELETE_KEY, STORAGE_KEY, MESSAGE, REGEX, ROUTE } from '../../constants';
+import {
+  CARD,
+  DELETE_KEY,
+  STORAGE_KEY,
+  MESSAGE,
+  REGEX,
+  ROUTE,
+  NUM_OF_CARD_NUMBER_INPUT_SECTION,
+  NUM_OF_PIN_NUMBER_INPUT_SECTION,
+  NUM_OF_CARD_NUMBER_PER_INPUT_SECTION,
+  NUM_OF_PIN_NUMBER_PER_INPUT_SECTION,
+  HALF_NUM_OF_EXPIRY_INPUT,
+  MAX_MONTH,
+  EXPIRY_INPUT_SEPARATOR,
+} from '../../constants';
+
+const initState = {
+  cardNumbers: ['', '', '', ''],
+  pinNumbers: ['', ''],
+};
 
 const CardAddForm = () => {
   const history = useHistory();
 
-  const [cardNumberInputRefs] = useState(initArray(4, useRef()));
-  const [pinNumberInputRefs] = useState(initArray(2, useRef()));
+  const [cardNumberInputRefs] = useState(initArray(NUM_OF_CARD_NUMBER_INPUT_SECTION, useRef()));
+  const [pinNumberInputRefs] = useState(initArray(NUM_OF_PIN_NUMBER_INPUT_SECTION, useRef()));
 
   const [cardCompany, setCardCompany] = useState({});
 
-  const cardNumbers = useMultipleInput(['', '', '', ''], {
+  const cardNumbers = useMultipleInput(initState.cardNumbers, {
     nameSpliter: '-',
     refs: cardNumberInputRefs,
-    maxLengthPerInput: 4,
+    maxLengthPerInput: NUM_OF_CARD_NUMBER_PER_INPUT_SECTION,
   });
-  const passwordDigits = useMultipleInput(['', ''], {
+  const passwordDigits = useMultipleInput(initState.pinNumbers, {
     nameSpliter: '-',
     refs: pinNumberInputRefs,
-    maxLengthPerInput: 1,
+    maxLengthPerInput: NUM_OF_PIN_NUMBER_PER_INPUT_SECTION,
   });
 
   const { Modal, openModal, closeModal } = useModal(false);
@@ -68,12 +87,15 @@ const CardAddForm = () => {
 
   const formattedExpiryDate = (() => {
     const expiryDateChunks = expiryDateAsNumber.match(REGEX.TEXT_WITH_LENGTH(2)) || [];
-    return expiryDateChunks.join(' / ');
+    return expiryDateChunks.join(EXPIRY_INPUT_SEPARATOR);
   })();
 
   const isValidExpiryDate =
     expiryDateAsNumber.length > 0 &&
-    !(Number(expiryDateAsNumber.slice(0, 2)) > 0 && Number(expiryDateAsNumber.slice(0, 2)) < 13);
+    !(
+      Number(expiryDateAsNumber.slice(0, HALF_NUM_OF_EXPIRY_INPUT)) > 0 &&
+      Number(expiryDateAsNumber.slice(0, HALF_NUM_OF_EXPIRY_INPUT)) <= MAX_MONTH
+    );
 
   const isNumericCardNumbers = cardNumbers.value.every(isNumeric);
 
@@ -144,7 +166,9 @@ const CardAddForm = () => {
   const updateCardCompany = () => {
     const [firstInput, secondInput] = cardNumbers.value;
 
-    const isFilledHalf = firstInput.length === 4 && secondInput.length === 4;
+    const isFilledHalf =
+      firstInput.length === NUM_OF_CARD_NUMBER_PER_INPUT_SECTION &&
+      secondInput.length === NUM_OF_CARD_NUMBER_PER_INPUT_SECTION;
     const isCardCompanySelected = Object.keys(cardCompany).length > 0;
 
     if (isFilledHalf && !isCardCompanySelected) {
@@ -199,7 +223,7 @@ const CardAddForm = () => {
                 onChange={expiryDate.onChange}
                 placeholder="MM / YY"
                 labelText="만료일"
-                maxLength={4 + 3}
+                maxLength={NUM_OF_CARD_NUMBER_PER_INPUT_SECTION * 2 - 1}
                 textAlign="center"
                 inputmode="numeric"
                 pattern={REGEX.EXPIRY_DATE.source}
