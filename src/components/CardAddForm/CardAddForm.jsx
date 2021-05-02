@@ -29,9 +29,10 @@ const CardAddForm = ({ cardInfo, setCardInfo }) => {
     try {
       const { name, value } = event.target;
       const targetIndex = Number(event.target.dataset.index);
+      const replacedValue = replaceValue(name, value);
       const newValue = !Number.isNaN(targetIndex)
-        ? cardInfo[name].map((prevValue, index) => (index === targetIndex ? value : prevValue))
-        : replaceValue(name, value);
+        ? cardInfo[name].map((prevValue, index) => (index === targetIndex ? replacedValue : prevValue))
+        : replacedValue;
 
       setCardInfo({ ...cardInfo, [name]: newValue });
       checkValidation(name, newValue);
