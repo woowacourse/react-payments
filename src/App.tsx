@@ -9,8 +9,8 @@ function App() {
       <GlobalStyle />
       <div className="App">
         <CardsStateProvider>
-          <CardListPage />
-          {/* <AddCardPage /> */}
+          {/* <CardListPage /> */}
+          <AddCardPage />
         </CardsStateProvider>
       </div>
     </>

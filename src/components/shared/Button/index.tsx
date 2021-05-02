@@ -1,6 +1,7 @@
 import { FC, MouseEvent, MouseEventHandler } from 'react';
 import styled, { css } from 'styled-components';
 import { GRAY, MINT } from '../../../constants/palette';
+import { vibrate } from '../../../utils/vibrate';
 
 interface Props {
   color?: string;
@@ -23,6 +24,10 @@ const Button = styled.button<Props>`
   color: ${({ color }) => color || MINT[500]};
   ${({ position }) => position === 'bottom-right' && bottomRight}
 `;
+
+Button.defaultProps = {
+  onTouchStart: () => vibrate(),
+};
 
 const IconButtonContainer = styled.div<IconButtonProps>`
   display: flex;
@@ -53,7 +58,7 @@ interface IconButtonProps {
 
 export const IconButton: FC<IconButtonProps> = ({ children, backgroundColor, onClick }) => {
   return (
-    <IconButtonContainer onClick={onClick} backgroundColor={backgroundColor}>
+    <IconButtonContainer onClick={onClick} onTouchStart={() => vibrate()} backgroundColor={backgroundColor}>
       <button type="button" />
       <span>{children}</span>
     </IconButtonContainer>
