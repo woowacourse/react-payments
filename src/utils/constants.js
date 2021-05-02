@@ -30,6 +30,10 @@ export const LENGTH = {
     MIN: 3,
     MAX: 4,
   },
+  CARD_PASSWORDS: {
+    MIN: 1,
+    MAX: 1,
+  },
 };
 
 export const REG_EXP = {

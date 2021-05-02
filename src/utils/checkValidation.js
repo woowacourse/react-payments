@@ -43,12 +43,23 @@ const validateSecurityCode = code => {
   return LENGTH.SECURITY_CODE.MIN <= code.length && code.length <= LENGTH.SECURITY_CODE.MAX;
 };
 
+const validateCardPasswords = cardPasswords => {
+  if (!Array.isArray(cardPasswords)) {
+    throw new TypeError("cardPasswords should be an array");
+  }
+
+  return cardPasswords.every(
+    password => LENGTH.CARD_PASSWORDS.MIN <= password.length && password.length <= LENGTH.CARD_PASSWORDS.MAX
+  );
+};
+
 const validation = {
   [CARD_INFO.CARD_NUMBERS]: validateCardNumbers,
   [CARD_INFO.EXPIRATION_MONTH]: validateExpirationMonth,
   [CARD_INFO.EXPIRATION_YEAR]: validateExpirationYear,
   [CARD_INFO.OWNER_NAME]: validateOwnerName,
   [CARD_INFO.SECURITY_CODE]: validateSecurityCode,
+  [CARD_INFO.CARD_PASSWORDS]: validateCardPasswords,
 };
 
 const checkValidation = (inputName, value) => {
