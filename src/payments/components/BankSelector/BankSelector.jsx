@@ -14,7 +14,7 @@ const bankInfos = [
 ];
 
 const BankSelector = ({ onClick }) => (
-  <div className="grid-cols-4	w-full grid p-6 h-56 bg-custom-white rounded-t-md">
+  <div className="grid-cols-4	w-full grid mx-auto p-6 max-w-lg h-56 bg-custom-white rounded-t-md">
     {bankInfos.map(({ backgroundColor, name }) => (
       <Bank key={name} {...{ backgroundColor, name, onClick }} />
     ))}
