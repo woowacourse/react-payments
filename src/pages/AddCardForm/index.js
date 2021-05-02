@@ -164,7 +164,7 @@ export default function AddCardForm() {
 
   return (
     <div className="add-card-form__container">
-      <Header title="카드추가" />
+      <Header leftIcon={<Icon.LeftArrow size="16px" color="#525252" />}>{'카드추가'}</Header>
       <form className="add-card-form" onSubmit={onCardFormSubmit}>
         <div className="card-preview">
           <Card

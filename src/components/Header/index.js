@@ -1,12 +1,11 @@
 import React from 'react';
-import { Icon } from '../';
 import './style.css';
 
-export default function Header({ title }) {
+export default function Header({ leftIcon, children }) {
   return (
     <div className="header">
-      <Icon.LeftArrow size="16px" color="#525252" />
-      <h1 className="header__title">{title}</h1>
+      {leftIcon}
+      <h1 className="header__title">{children}</h1>
     </div>
   );
 }
