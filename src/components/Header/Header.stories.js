@@ -16,9 +16,9 @@ CardAdder.args = {
   title: "카드 추가",
 };
 
-export const CardConfirm = Template.bind({});
+export const CardAddCompletion = Template.bind({});
 
-CardConfirm.args = {
+CardAddCompletion.args = {
   hasBackButton: false,
 };
 

@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 import Card from "../Card/Card";
 import Header from "../Header/Header";
 
-const CardConfirm = props => (
+const CardAddCompletion = props => (
   <>
     <Header hasBackButton={false} />
     <section className="w-full h-160 flex flex-col justify-center">
@@ -21,4 +21,4 @@ const CardConfirm = props => (
   </>
 );
 
-export default CardConfirm;
+export default CardAddCompletion;
