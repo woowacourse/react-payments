@@ -14,7 +14,7 @@ import {
 } from '../../components';
 import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/formatter';
 import { isValidSerialNumber, isValidDateFormat, isValidUserName } from './validator';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import ValidationError from '../../error/ValidationError';
 import './style.css';
 
@@ -164,7 +164,15 @@ export default function AddCardForm() {
 
   return (
     <div className="add-card-form__container">
-      <Header leftIcon={<Icon.LeftArrow size="16px" color="#525252" />}>{'카드추가'}</Header>
+      <Header
+        leftIcon={
+          <Link to="/">
+            <Icon.LeftArrow size="16px" color="#525252" />
+          </Link>
+        }
+      >
+        {'카드추가'}
+      </Header>
       <form className="add-card-form" onSubmit={onCardFormSubmit}>
         <div className="card-preview">
           <Card

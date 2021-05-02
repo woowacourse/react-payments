@@ -29,7 +29,7 @@ export default function AddCardComplete({ addCards }) {
 
   return (
     <div className={'add-card-complete__container'}>
-      <h1 className="add-card-complete__title">카드 등록이 완료되었습니다.</h1>
+      <h1 className="add-card-complete__title">{'카드 등록이 완료되었습니다.'}</h1>
       <Card
         userName={userName}
         companyName={CARD_COMPANY[cardCompany].NAME}
