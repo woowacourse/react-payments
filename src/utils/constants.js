@@ -25,6 +25,7 @@ export const LENGTH = {
   OWNER_NAME: {
     MIN: 0,
     MAX: 30,
+    CARD_DISPLAY: 10,
   },
   SECURITY_CODE: {
     MIN: 3,

@@ -14,15 +14,15 @@ const CardInfo = props => (
       </div>
       <div className="text-sm w-11/12 flex justify-between">
         <span>{props.ownerName || "NAME"}</span>
-        <span>{props.expirationDate || "MM/YY"}</span>
+        <span>{props.expirationDate === "/" ? "MM/YY" : props.expirationDate}</span>
       </div>
     </div>
   </>
 );
 
 const Card = props => {
-  const { backgroundColor, scale, isRegistered, bank, numbers, ownerName, expirationDate } = props;
-  const cardShapeProps = { backgroundColor, scale, isRegistered };
+  const { backgroundColor, scale, isRegistered, bank, numbers, ownerName, expirationDate, onClick } = props;
+  const cardShapeProps = { backgroundColor, scale, isRegistered, onClick };
   const cardInfoProps = { bank, numbers, ownerName, expirationDate };
 
   return (

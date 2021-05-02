@@ -17,7 +17,7 @@ const App = () => {
   const [newCardInfo, setNewCardInfo] = useState(initialCardInfo);
 
   return (
-    <div className="max-w-sm h-full p-5 mx-auto flex flex-col justify-between">
+    <div className="relative max-w-sm h-full p-5 mx-auto flex flex-col justify-between">
       <CardAddForm cardInfo={newCardInfo} setCardInfo={setNewCardInfo} />
     </div>
   );

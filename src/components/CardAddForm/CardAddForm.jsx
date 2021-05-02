@@ -6,7 +6,9 @@ import ExpirationDateInput from "./ExpirationDateInput";
 import OwnerNameInput from "./OwnerNameInput";
 import SecurityCodeInput from "./SecurityCodeInput";
 import CardPasswordInput from "./CardPasswordInput";
-import { CARD_INFO, checkValidation, replaceValue } from "../../utils";
+import { CARD_INFO, checkValidation, LENGTH, replaceValue } from "../../utils";
+import Dimmer from "../Dimmer/Dimmer";
+import BankSelector from "../BankSelector/BankSelector";
 
 const initialValidation = {
   [CARD_INFO.CARD_NUMBERS]: true,
@@ -19,8 +21,16 @@ const initialValidation = {
 
 const CardAddForm = ({ cardInfo, setCardInfo }) => {
   const [validation, setValidation] = useState(initialValidation);
-  const [backgroundColor] = useState(null);
-  const [bank] = useState(null);
+  const [isBankSelectorVisible, setBankSelectorVisible] = useState(false);
+
+  const handleBankSelectorVisible = () => {
+    setBankSelectorVisible(!isBankSelectorVisible);
+  };
+
+  const handleBankClick = (backgroundColor, bank) => {
+    setCardInfo({ ...cardInfo, [CARD_INFO.BACKGROUND_COLOR]: backgroundColor, [CARD_INFO.BANK]: bank });
+    handleBankSelectorVisible();
+  };
 
   const handleInputChange = event => {
     try {
@@ -48,17 +58,18 @@ const CardAddForm = ({ cardInfo, setCardInfo }) => {
   return (
     <>
       <form className="w-full h-160 flex flex-col justify-center">
+        <div className="w-full flex justify-center mb-4">
+          <Card
+            backgroundColor={cardInfo.backgroundColor}
+            bank={cardInfo.bank}
+            numbers={cardInfo.cardNumbers}
+            expirationDate={cardInfo.expirationMonth + "/" + cardInfo.expirationYear}
+            ownerName={cardInfo.ownerName.slice(0, LENGTH.OWNER_NAME.CARD_DISPLAY)}
+            isRegistered={false}
+            onClick={handleBankSelectorVisible}
+          />
+        </div>
         <div>
-          <div className="w-full flex justify-center mb-4">
-            <Card
-              backgroundColor={backgroundColor}
-              bank={bank}
-              numbers={cardInfo.cardNumbers}
-              expirationDate={cardInfo.expirationDate}
-              ownerName={cardInfo.ownerName}
-              isRegistered={false}
-            />
-          </div>
           <div className="flex flex-col w-full mb-2">
             <CardNumbersInput
               cardNumbers={cardInfo.cardNumbers}
@@ -96,10 +107,16 @@ const CardAddForm = ({ cardInfo, setCardInfo }) => {
             />
           </div>
         </div>
+        <div className="flex justify-end items-center w-full h-10">
+          <Button name="다음" />
+        </div>
       </form>
-      <div className="flex justify-end items-center w-full h-10">
-        <Button name="다음" />
-      </div>
+      {isBankSelectorVisible && (
+        <>
+          <Dimmer onClick={handleBankSelectorVisible} />
+          <BankSelector onClick={handleBankClick} />
+        </>
+      )}
     </>
   );
 };
