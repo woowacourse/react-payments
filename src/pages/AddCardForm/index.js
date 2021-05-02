@@ -8,28 +8,27 @@ import {
   TextButton,
   InputWithCounter,
   CardPasswordInput,
+  Modal,
+  CardCompanySelection,
+  SecurityCodeGuide,
 } from '../../components';
 import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/formatter';
 import { isValidSerialNumber, isValidDateFormat, isValidUserName } from './validator';
-import './style.css';
 import { useHistory } from 'react-router-dom';
 import ValidationError from '../../error/ValidationError';
+import './style.css';
 
-export default function AddCardForm({
-  serialNumber,
-  setSerialNumber,
-  cardCompany,
-  setCardCompany,
-  expirationDate,
-  setExpirationDate,
-  userName,
-  setUserName,
-  securityCode,
-  setSecurityCode,
-  password,
-  setPassword,
-  onSetModalContents,
-}) {
+export default function AddCardForm() {
+  const [serialNumber, setSerialNumber] = useState('');
+  const [expirationDate, setExpirationDate] = useState('');
+  const [userName, setUserName] = useState('');
+  const [securityCode, setSecurityCode] = useState('');
+  const [password, setPassword] = useState({ first: '', second: '' });
+  const [cardCompany, setCardCompany] = useState('');
+
+  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [modalContents, setModalContents] = useState('cardSelection');
+
   const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState('');
   const [expirationDateErrorMessage, setExpirationDateErrorMessage] = useState('');
   const [userNameErrorMessage, setUserNameErrorMessage] = useState('');
@@ -53,14 +52,17 @@ export default function AddCardForm({
     serialNumberInputElement.current.focus();
   }, [cardCompany]);
 
-  useEffect(() => {
-    setSerialNumber('');
-    setCardCompany('');
-    setExpirationDate('');
-    setUserName('');
-    setSecurityCode('');
-    setPassword({ first: '', second: '' });
-  }, []);
+  const onSetModalContents = (name) => {
+    setModalContents(name);
+
+    setIsModalOpened(true);
+  };
+
+  const onSetCardCompany = (name) => {
+    setCardCompany(name);
+
+    setIsModalOpened(false);
+  };
 
   const onSetPassword = (key, value) => {
     if (isNaN(value)) return;
@@ -155,7 +157,9 @@ export default function AddCardForm({
 
     if (!isFormCompleted) return;
 
-    history.push('/addCardComplete');
+    history.push('/addCardComplete', {
+      card: { serialNumber, expirationDate, userName, cardCompany },
+    });
   };
 
   return (
@@ -292,6 +296,14 @@ export default function AddCardForm({
           </div>
         )}
       </form>
+      {isModalOpened && (
+        <Modal onCloseModal={() => setIsModalOpened(false)}>
+          {modalContents === 'cardSelection' && (
+            <CardCompanySelection onSetCardCompany={onSetCardCompany}></CardCompanySelection>
+          )}
+          {modalContents === 'questionMark' && <SecurityCodeGuide />}
+        </Modal>
+      )}
     </div>
   );
 }

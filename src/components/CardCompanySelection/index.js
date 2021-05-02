@@ -11,7 +11,7 @@ export default function CardCompanySelection({ onSetCardCompany }) {
           key={key}
           name={NAME}
           color={COLOR}
-          onClick={(event) => {
+          onClick={() => {
             onSetCardCompany(key);
           }}
         />

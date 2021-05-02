@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, TextButton } from '../../components';
 import { CARD, CARD_COMPANY } from '../../constants';
 import './style.css';
 import '../../index.css';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 
-export default function AddCardComplete({
-  userName,
-  cardCompany,
-  serialNumber,
-  expirationDate,
-  cardNickName,
-  setCardNickName,
-}) {
+export default function AddCardComplete({}) {
+  const [cardNickName, setCardNickName] = useState('');
+
   const history = useHistory();
+  const location = useLocation();
+  const {
+    state: {
+      card: { userName, serialNumber, expirationDate, cardCompany },
+    },
+  } = location;
+
+  useEffect(() => {
+    setCardNickName(CARD_COMPANY[cardCompany].NAME);
+  }, []);
 
   const onCardNickNameSubmit = (event) => {
     event.preventDefault();
