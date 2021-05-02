@@ -30,7 +30,7 @@ export const CardPasswordInputWrapper = styled.div`
     .privacy-dot {
       font-weight: ${FONT_WEIGHT.BOLD};
       font-size: ${FONT_SIZE.NORMAL};
-      color: ${COLOR.MAIN.MINT};
+      color: ${COLOR.MINT};
       padding: 0 0.5rem;
       width: 3rem;
       height: 2.8125rem;

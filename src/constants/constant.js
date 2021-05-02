@@ -1,35 +1,28 @@
 const COLOR = {
-  MAIN: {
-    MINT: '#04c09e',
-    WHITE: '#FFFFFF',
-  },
+  DEFAULT: '#d2d2d2',
+  DEFAULT_BG: '#ECEBF1',
+  DEFAULT_DARK: '#575757',
+  RED: '#E24141',
+  BLUE: '#547cE4',
+  GREEN: '#73bc6D',
+  HOT_PINK: '#DE59B9',
+  PINK: '#E76E9A',
+  ORANGE: '#F37D3B',
+  YELLOW: '#FBCD58',
 
-  CARD: {
-    DEFAULT: '#d2d2d2',
-    RED: '#E24141',
-    BLUE: '#547cE4',
-    GREEN: '#73bc6D',
-    HOTPINK: '#DE59B9',
-    PINK: '#E76E9A',
-    ORANGE: '#F37D3B',
-    YELLOW: '#FBCD58',
-    PLUS: '#575757',
-  },
-
-  INPUT: {
-    DEFAULT_BG: '#ECEBF1',
-  },
+  MINT: '#04c09e',
+  WHITE: '#FFFFFF',
 };
 
 const CARD = {
-  포코: COLOR.CARD.RED,
-  준: COLOR.CARD.BLUE,
-  공원: COLOR.CARD.GREEN,
-  브랜: COLOR.CARD.HOTPINK,
-  로이드: COLOR.MAIN.MINT,
-  도비: COLOR.CARD.PINK,
-  콜린: COLOR.CARD.ORANGE,
-  썬: COLOR.CARD.YELLOW,
+  포코: COLOR.RED,
+  준: COLOR.BLUE,
+  공원: COLOR.GREEN,
+  브랜: COLOR.HOT_PINK,
+  로이드: COLOR.MINT,
+  도비: COLOR.PINK,
+  콜린: COLOR.ORANGE,
+  썬: COLOR.YELLOW,
 };
 
 const ERROR_MESSAGE = {

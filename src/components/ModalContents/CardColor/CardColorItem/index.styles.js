@@ -13,7 +13,7 @@ export const CardColorItemWrapper = styled.div`
     border-radius: 50%;
     width: 2.8rem;
     height: 2.8rem;
-    background-color: ${({ color }) => color || COLOR.CARD.DEFAULT};
+    background-color: ${({ color }) => color || COLOR.DEFAULT};
   }
 
   .card-name {

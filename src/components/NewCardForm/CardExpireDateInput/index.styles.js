@@ -25,7 +25,7 @@ export const CardExpireDateInputWrapper = styled.div`
 
   .input-container {
     display: flex;
-    background-color: ${COLOR.INPUT.DEFAULT_BG};
+    background-color: ${COLOR.DEFAULT_BG};
     border-radius: 7px;
     justify-content: center;
     align-items: center;
@@ -36,11 +36,11 @@ export const CardExpireDateInputWrapper = styled.div`
       height: 45px;
       line-height: 41px;
       text-align: center;
-      color: ${COLOR.MAIN.MINT};
+      color: ${COLOR.MINT};
     }
 
     .gray {
-      color: ${COLOR.MAIN.DEFAULT};
+      color: ${COLOR.DEFAULT};
     }
   }
 

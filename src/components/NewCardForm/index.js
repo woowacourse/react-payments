@@ -135,7 +135,7 @@ const NewCardForm = ({
           errorMessage={errorMessage.password}
           onChangeCardInput={onChangeCardInput}
         />
-        <ButtonMenu disable={cardFormFilled}>다음</ButtonMenu>
+        <ButtonMenu visible={cardFormFilled}>다음</ButtonMenu>
       </NewCardFormWrapper>
       {openModalContent.isModalOpen && (
         <Modal onCloseModal={onCloseModal}>

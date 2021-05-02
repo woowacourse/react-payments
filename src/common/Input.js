@@ -20,8 +20,8 @@ const RoundInput = css`
 const Input = styled.input`
   font-size: ${FONT_SIZE.LARGE};
   font-weight: ${FONT_WEIGHT.NORMAL};
-  color: ${COLOR.MAIN.MINT};
-  background-color: ${COLOR.INPUT.DEFAULT_BG};
+  color: ${COLOR.MINT};
+  background-color: ${COLOR.DEFAULT_BG};
   height: 2.8125rem;
   border: 0;
   padding: 0 0.5rem;

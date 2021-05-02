@@ -6,7 +6,7 @@ import { CARD, COLOR, FONT_SIZE, FONT_WEIGHT } from '../constants/constant';
 const AddCard = css`
   .add {
     font-size: ${FONT_SIZE.XXLARGE};
-    color: ${COLOR.PLUS};
+    color: ${COLOR.DEFAULT_DARK};
     width: 100%;
     height: 100%;
     display: flex;
@@ -75,7 +75,7 @@ const CardWrapper = styled.div`
   justify-content: space-between;
   cursor: pointer;
   background-color: ${({ bgColor }) =>
-    bgColor !== undefined ? bgColor : COLOR.CARD.DEFAULT};
+    bgColor !== undefined ? bgColor : COLOR.DEFAULT};
 
   ${({ addCard }) => (addCard ? AddCard : CardInfo)}
 `;

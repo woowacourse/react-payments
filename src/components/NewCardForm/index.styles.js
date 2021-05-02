@@ -9,7 +9,7 @@ export const NewCardFormWrapper = styled.form`
   .input-alert {
     padding: 3px;
     font-size: ${FONT_SIZE.MINI};
-    color: ${COLOR.CARD.RED};
+    color: ${COLOR.RED};
     min-height: 1.2rem;
   }
 `;

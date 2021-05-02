@@ -16,7 +16,7 @@ export const CardNumberInputWrapper = styled.div`
 
   .input-container {
     display: flex;
-    background-color: ${COLOR.INPUT.DEFAULT_BG};
+    background-color: ${COLOR.DEFAULT_BG};
     border-radius: 7px;
     justify-content: center;
     align-items: center;
@@ -39,7 +39,7 @@ export const CardNumberInputWrapper = styled.div`
       height: 45px;
       line-height: 45px;
       text-align: center;
-      color: ${COLOR.MAIN.MINT};
+      color: ${COLOR.MINT};
     }
   }
 `;

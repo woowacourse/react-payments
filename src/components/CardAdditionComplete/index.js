@@ -39,7 +39,7 @@ const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
           placeholder='카드 별칭을 입력해주세요.'
         />
       </div>
-      <ButtonMenu>다음</ButtonMenu>
+      <ButtonMenu visible>다음</ButtonMenu>
     </CardAdditionCompleteWrapper>
   );
 };
