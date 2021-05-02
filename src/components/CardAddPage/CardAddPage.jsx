@@ -19,7 +19,7 @@ const initialValidation = {
   [CARD_INFO.CARD_PASSWORDS]: true,
 };
 
-const CardAddForm = ({ cardInfo, setCardInfo }) => {
+const CardAddPage = ({ cardInfo, setCardInfo }) => {
   const [validation, setValidation] = useState(initialValidation);
   const [isBankSelectorVisible, setBankSelectorVisible] = useState(false);
 
@@ -121,4 +121,4 @@ const CardAddForm = ({ cardInfo, setCardInfo }) => {
   );
 };
 
-export default CardAddForm;
+export default CardAddPage;

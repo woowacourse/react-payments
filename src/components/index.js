@@ -1,1 +1,1 @@
-export { default as CardAddForm } from "./CardAddForm/CardAddForm";
+export { default as CardAddPage } from "./CardAddPage/CardAddPage";

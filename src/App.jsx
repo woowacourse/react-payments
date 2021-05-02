@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CardAddForm } from "./components";
+import { CardAddPage } from "./components";
 import { CARD_INFO } from "./utils";
 
 const initialCardInfo = {
@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <div className="relative max-w-sm h-full p-5 mx-auto flex flex-col justify-between">
-      <CardAddForm cardInfo={newCardInfo} setCardInfo={setNewCardInfo} />
+      <CardAddPage cardInfo={newCardInfo} setCardInfo={setNewCardInfo} />
     </div>
   );
 };
