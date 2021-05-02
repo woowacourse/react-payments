@@ -1,10 +1,11 @@
 import { createContext, FC, useContext, useEffect, useState } from 'react';
-import { requestAddCard, requestCards } from '../service/card';
+import { requestAddCard, requestCards, requestEditNickname } from '../service/card';
 import { Card } from '../types';
 
 interface State {
   cards: Card[];
-  addCard: (card: Card) => void;
+  addCard: (card: Card) => Promise<string>;
+  editNickname: (nickname: string, id: string) => void;
 }
 
 const CardsStateContext = createContext<State | null>(null);
@@ -22,11 +23,24 @@ const CardsStateProvider: FC<Props> = ({ children }) => {
   };
 
   const addCard = async (card: Card) => {
+    let docId = '';
+
     try {
-      await requestAddCard(card);
+      docId = await requestAddCard(card);
       updateCards();
     } catch (error) {
       // TODO: error 표시 + 이전 뎁스로 이동
+    }
+
+    return docId;
+  };
+
+  const editNickname = async (nickname: string, id: string) => {
+    try {
+      await requestEditNickname(nickname, id);
+      updateCards();
+    } catch (error) {
+      // TODO: error 핸들링
     }
   };
 
@@ -41,7 +55,7 @@ const CardsStateProvider: FC<Props> = ({ children }) => {
     })();
   }, [shouldUpdate]);
 
-  const value = { cards, addCard };
+  const value = { cards, addCard, editNickname };
 
   return <CardsStateContext.Provider value={value}>{children}</CardsStateContext.Provider>;
 };

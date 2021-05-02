@@ -1,21 +1,20 @@
 import { FormEvent, useEffect, useState, VFC } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
+import { CardBrand, ExpDate } from '../../../types';
+import { AddCardFormContainer } from './styles';
+import { useCards } from '../../../context/CardsStateContext';
 import CreditCard from '../../shared/CreditCard';
-import CardBrandModal from '../CardBrandModal';
-import NicknameModal from '../NicknameModal';
 import Button from '../../shared/Button';
+import CardBrandModal from '../CardBrandModal';
 import CARD_BRAND from '../../../constants/cardData';
 import { CARD_NUMBER_DIGITS, CARD_NUMBER_SEPARATOR } from '../../../constants/creditCard';
 import { ALERT } from '../../../constants/messages';
-import { AddCardFormContainer } from './styles';
-import { CardBrand, ExpDate } from '../../../types';
 import { isAllInputFilled } from './validator';
 import CardNumberInputs from './CardNumberInput';
 import ExpDateInputs from './ExpDateInput';
 import OwnerNameInput from './OwnerNameInput';
 import CVCInput from './CVCInput';
 import PasswordInputs from './PasswordInputs';
-import { useCards } from '../../../context/CardsStateContext';
-import { RouteComponentProps, withRouter } from 'react-router';
 
 export type CardNumberState = [string, string, string, string];
 export type PasswordState = [string, string];
@@ -27,7 +26,6 @@ interface AddCardFormState {
   expDate: ExpDate;
   CVC: string;
   password: PasswordState;
-  nickname: string;
 }
 
 const AddCardForm: VFC<RouteComponentProps> = ({ history }) => {
@@ -38,11 +36,9 @@ const AddCardForm: VFC<RouteComponentProps> = ({ history }) => {
     expDate: { year: '', month: '' },
     CVC: '',
     password: ['', ''],
-    nickname: '',
   });
 
   const [isCardBrandModalVisible, setIsCardBrandModalVisible] = useState(false);
-  const [isNicknameModalVisible, setIsNicknameModalVisible] = useState(false);
 
   const onClickCardBrandButton = (cardBrand: CardBrand) => {
     setFormState({ ...formState, cardBrand });
@@ -77,7 +73,11 @@ const AddCardForm: VFC<RouteComponentProps> = ({ history }) => {
     );
   };
 
-  const onClickNextButton = () => {
+  const { addCard } = useCards();
+
+  const onSubmitCard = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     if (isCardBrandEmpty()) {
       onSetCardBrand();
       return;
@@ -90,17 +90,14 @@ const AddCardForm: VFC<RouteComponentProps> = ({ history }) => {
       return;
     }
 
-    setIsNicknameModalVisible(true);
-  };
+    const cardId = await addCard({
+      ...formState,
+      cardNumber: formState.cardNumber.join('-'),
+      password: formState.password.join(''),
+      nickname: cardBrand.name,
+    });
 
-  const { addCard } = useCards();
-
-  const onSubmitCard = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    await addCard({ ...formState, cardNumber: formState.cardNumber.join('-'), password: formState.password.join('') });
-    alert(ALERT.CARD_SUBMIT_SUCCESS);
-    history.push('/');
+    history.push(`/edit/${cardId}`);
   };
 
   useEffect(() => {
@@ -132,26 +129,13 @@ const AddCardForm: VFC<RouteComponentProps> = ({ history }) => {
           setPassword={password => setFormState({ ...formState, password })}
         />
 
-        <Button type="button" position="bottom-right" onClick={onClickNextButton}>
-          다음
-        </Button>
+        <Button position="bottom-right">다음</Button>
 
         {isCardBrandModalVisible && (
           <CardBrandModal
             cardBrands={CARD_BRAND}
             onClickCardBrandButton={onClickCardBrandButton}
             modalClose={() => setIsCardBrandModalVisible(false)}
-          />
-        )}
-
-        {isNicknameModalVisible && (
-          <NicknameModal
-            nickname={formState.nickname}
-            setNickname={nickname => setFormState({ ...formState, nickname })}
-            ownerName={formState.ownerName}
-            cardNumber={formState.cardNumber.join(CARD_NUMBER_SEPARATOR)}
-            expDate={formState.expDate}
-            cardBrand={formState.cardBrand}
           />
         )}
       </form>

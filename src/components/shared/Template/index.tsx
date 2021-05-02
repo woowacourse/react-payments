@@ -22,7 +22,7 @@ const Header = styled.header`
 
 interface Props extends RouteComponentProps {
   children: React.ReactNode;
-  title: string;
+  title?: string;
   hasPreviousPage?: boolean;
   className?: string;
 }

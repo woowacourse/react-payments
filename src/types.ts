@@ -15,6 +15,6 @@ export interface Card {
   cardNumber: string;
   expDate: ExpDate;
   CVC: string;
+  nickname: string;
   id?: string;
-  nickname?: string;
 }

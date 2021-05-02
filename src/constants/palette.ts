@@ -1,5 +1,6 @@
 export const GRAY = {
   100: '#ECEBF1',
+  200: '#cccccc',
   300: '#333333',
 };
 

@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+import { IconButtonContainer } from '../shared/Button';
 
 export const CardListContainer = styled.ul`
   height: 75vh;
+  padding-top: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,9 +16,16 @@ export const CardListContainer = styled.ul`
   }
 
   .card-item {
-    margin-bottom: 4.25rem;
     position: relative;
+    margin-bottom: 4.25rem;
     cursor: pointer;
+
+    ${IconButtonContainer} {
+      position: absolute;
+      right: -1.5em;
+      top: -1.5em;
+      z-index: 2;
+    }
 
     .nickname {
       position: absolute;
@@ -24,6 +33,17 @@ export const CardListContainer = styled.ul`
       bottom: -2rem;
       transform: translateX(-50%);
       font-weight: 500;
+      display: flex;
+    }
+
+    .nickname.edit {
+      cursor: text;
+      img {
+        width: 1.2rem;
+        position: absolute;
+        right: -1.25rem;
+        top: -0.5rem;
+      }
     }
   }
 `;

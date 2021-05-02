@@ -6,13 +6,15 @@ import { DEFAULT_VALUE } from '../../../constants/creditCard';
 import { formatNumberNDigits } from '../../../utils/format';
 import { VFC } from 'react';
 
-interface Props extends Omit<Card, 'id' | 'CVC' | 'password'> {
+interface Props extends Omit<Card, 'id' | 'CVC' | 'password' | 'nickname'> {
   className?: string;
   size?: 'lg' | 'md';
 }
 
 const CreditCard: VFC<Props> = ({ className, size, cardBrand, ownerName, cardNumber, expDate }) => {
-  const splitedCardNumber = cardNumber.split(CARD_NUMBER_SEPARATOR);
+  const [firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber] = cardNumber.split(
+    CARD_NUMBER_SEPARATOR
+  );
   const { name, color } = cardBrand;
 
   return (
@@ -20,10 +22,10 @@ const CreditCard: VFC<Props> = ({ className, size, cardBrand, ownerName, cardNum
       <p className="card-name">{name}</p>
       <div className="ic-chip" />
       <p className="card-number">
-        <span>{splitedCardNumber[0]}</span>
-        <span>{splitedCardNumber[1]}</span>
-        <span>{MASK_CHARACTER.repeat(splitedCardNumber[2].length)}</span>
-        <span>{MASK_CHARACTER.repeat(splitedCardNumber[3].length)}</span>
+        <span>{firstCardNumber}</span>
+        <span>{secondCardNumber}</span>
+        <span>{MASK_CHARACTER.repeat(thirdCardNumber?.length)}</span>
+        <span>{MASK_CHARACTER.repeat(fourthCardNumber?.length)}</span>
       </p>
       <Container flex justifyContent="space-between" className="info-wrapper">
         <p className="owner-name">{ownerName || DEFAULT_VALUE.OWNER_NAME}</p>
