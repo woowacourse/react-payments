@@ -28,5 +28,7 @@ export default (entity) => {
     getEntity();
   }, [getEntity]);
 
+  useEffect(() => () => setValue([]), []);
+
   return { value, setValue, getEntity, updateEntity, addEntity, deleteEntity };
 };
