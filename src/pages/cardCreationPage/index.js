@@ -65,12 +65,10 @@ const CardCreationPage = ({ history, setNewCardInfo }) => {
       <div>
         <CreditCard
           backgroundColor={selectedCardInfo.color}
-          content={{
-            cardType: selectedCardInfo.name,
-            cardNumber: Object.values(cardNumber),
-            cardOwner,
-            cardExpiredDate,
-          }}
+          cardType={selectedCardInfo.name}
+          cardNumber={Object.values(cardNumber)}
+          cardOwner={cardOwner}
+          cardExpiredDate={cardExpiredDate}
         />
         <Styled.Form onSubmit={handleNewCardSubmit}>
           <CardNumberInput

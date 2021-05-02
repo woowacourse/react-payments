@@ -1,11 +1,12 @@
+import axios from 'axios';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 import { useState } from 'react';
 import Styled from './style';
 import { CreditCard, CARD_SIZE } from '../../components/commons/card/CreditCard';
 import { TransparentInput } from '../../components/commons/input/TransparentInput';
 import { Button } from '../../components/commons/button/Button';
 import { COLOR } from '../../constants/color';
-import { withRouter } from 'react-router';
 
 const transparentInputStyles = {
   textAlign: 'center',
@@ -20,6 +21,9 @@ const CardCreationCompletePage = ({ history, newCardInfo, setNewCardInfo }) => {
   const handleNewCardSubmit = e => {
     e.preventDefault();
 
+    const data = { selectedCardInfo, cardNumber, cardOwner, cardNickName };
+    axios.post('http://localhost:4000/cards', data);
+
     alert('카드를 추가하였습니다.');
     setNewCardInfo(prevState => ({ ...prevState, cardNickName }));
     history.push('/');
@@ -31,12 +35,10 @@ const CardCreationCompletePage = ({ history, newCardInfo, setNewCardInfo }) => {
       <CreditCard
         size={CARD_SIZE.LG}
         backgroundColor={selectedCardInfo.color}
-        content={{
-          cardType: selectedCardInfo.name,
-          cardNumber: Object.values(cardNumber),
-          cardOwner,
-          cardExpiredDate,
-        }}
+        cardType={selectedCardInfo.name}
+        cardNumber={Object.values(cardNumber)}
+        cardOwner={cardOwner}
+        cardExpiredDate={cardExpiredDate}
       />
       <form onSubmit={handleNewCardSubmit}>
         <Styled.InputContainer>
