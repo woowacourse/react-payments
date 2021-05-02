@@ -6,7 +6,6 @@ import { ButtonMenuWrapper } from './index.styles';
 const ButtonMenu = ({ children, visible }) => {
   return (
     <ButtonMenuWrapper>
-      {console.log(visible)}
       <Button visible={visible}>{children}</Button>
     </ButtonMenuWrapper>
   );
