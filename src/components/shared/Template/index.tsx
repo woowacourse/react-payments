@@ -9,6 +9,8 @@ const TemplateContainer = styled.div`
 const Header = styled.header`
   display: flex;
   align-items: center;
+  font-size: 1.125rem;
+  font-weight: 600;
 
   a {
     display: flex;

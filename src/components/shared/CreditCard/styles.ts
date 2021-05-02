@@ -27,6 +27,11 @@ export const CreditCardContainer = styled.div<CreditCardContainerProps>`
   box-sizing: border-box;
   font-weight: 500;
   ${({ size }) => (size === 'lg' ? lgSize : mdSize)}
+  transition:transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-0.3rem);
+  }
 
   .card-name {
     margin-bottom: 2em;
