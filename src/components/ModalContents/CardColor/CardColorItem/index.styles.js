@@ -6,6 +6,7 @@ export const CardColorItemWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px 0;
 
   .card-color {
     margin: 0 auto 0.5rem auto;

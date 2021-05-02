@@ -19,7 +19,7 @@ const ModalWrapper = styled.div`
 const ModalInner = styled.div`
   transition: top 0.25s ease;
   width: 100%;
-  height: 270px;
+  min-height: 270px;
   margin: auto;
   overflow: auto;
   background: #ffffff;
