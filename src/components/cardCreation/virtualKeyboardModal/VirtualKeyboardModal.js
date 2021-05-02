@@ -20,13 +20,11 @@ const VirtualKeyboardModal = ({ closeModal, setPressedKeyList }) => {
   return (
     <BottomModal closeModal={closeModal}>
       <Styled.List>
-        {getRandomKeyboardElements().map(value => {
-          return (
-            <Styled.ListItem id={`keyboard-${value}`} onClick={handleItemClick}>
-              {value}
-            </Styled.ListItem>
-          );
-        })}
+        {getRandomKeyboardElements().map(value => (
+          <Styled.ListItem key={`keyboard-${value}`} onClick={handleItemClick}>
+            {value}
+          </Styled.ListItem>
+        ))}
       </Styled.List>
     </BottomModal>
   );
