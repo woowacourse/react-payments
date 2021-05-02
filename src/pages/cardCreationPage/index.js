@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { Button } from '../../components/commons/button/Button';
 import { Header } from '../../components/commons/header/Header';
 import { CreditCard } from '../../components/commons/card/CreditCard';
@@ -13,17 +12,14 @@ import { isValidMonthInput, isValidMultipleInput, isValidYearInput } from '../..
 import Styled from './style';
 import { COLOR } from '../../constants/color';
 import { PAGE } from '../../constants/page';
-import { INPUT_LENGTH, INPUT_NAME } from '../../constants/input';
+import { INPUT_LENGTH } from '../../constants/input';
+import CardDataContext from '../../context/CardDataContext';
 
-const { FIRST, SECOND, THIRD, FOURTH, MONTH, YEAR } = INPUT_NAME;
-
-const CardCreationPage = ({ setCurrentPage, setNewCardInfo, cardInfoForEdit }) => {
-  const [cardNumber, setCardNumber] = useState({ [FIRST]: '', [SECOND]: '', [THIRD]: '', [FOURTH]: '' });
-  const [cardExpiredDate, setCardExpiredDate] = useState({ [MONTH]: '', [YEAR]: '' });
-  const [cardOwner, setCardOwner] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
-  const [cardPassword, setCardPassword] = useState({ [FIRST]: '', [SECOND]: '' });
-  const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: COLOR.GRAY_100 });
+const CardCreationPage = () => {
+  const {
+    cardInfo: { cardNumber, cardExpiredDate, securityCode, cardPassword, cardOwner, selectedCardInfo },
+    setCurrentPage,
+  } = useContext(CardDataContext);
 
   const isValidCardNumber = isValidMultipleInput(cardNumber, INPUT_LENGTH.CARD_NUMBER);
   const isValidCardExpiredDate = isValidMonthInput(cardExpiredDate) && isValidYearInput(cardExpiredDate);
@@ -32,29 +28,9 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo, cardInfoForEdit }) =
 
   const isValidAllInput = isValidCardNumber && isValidCardExpiredDate && isValidSecurityCode && isValidCardPassword;
 
-  useEffect(() => {
-    if (!cardInfoForEdit) return;
-
-    setCardNumber(cardInfoForEdit.cardNumber);
-    setCardExpiredDate(cardInfoForEdit.cardExpiredDate);
-    setCardOwner(cardInfoForEdit.cardOwner);
-    setSecurityCode(cardInfoForEdit.securityCode);
-    setCardPassword(cardInfoForEdit.cardPassword);
-    setSelectedCardInfo(cardInfoForEdit.selectedCardInfo);
-  }, [cardInfoForEdit]);
-
   const handleNewCardSubmit = e => {
     e.preventDefault();
 
-    setNewCardInfo(prevState => ({
-      ...prevState,
-      cardNumber,
-      cardExpiredDate,
-      cardOwner,
-      securityCode,
-      cardPassword,
-      selectedCardInfo,
-    }));
     setCurrentPage(PAGE.CARD_CREATION_COMPLETE);
   };
 
@@ -79,31 +55,15 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo, cardInfoForEdit }) =
         <Styled.Form onSubmit={handleNewCardSubmit}>
           <CardNumberInput
             cardNumber={cardNumber}
-            setCardNumber={setCardNumber}
             isValidCardNumber={isValidCardNumber}
-            setSelectedCardInfo={setSelectedCardInfo}
             selectedCardInfo={selectedCardInfo}
-            isEditingMode={!!cardInfoForEdit}
           />
-          <ExpiredDateInput
-            cardExpiredDate={cardExpiredDate}
-            setCardExpiredDate={setCardExpiredDate}
-            isValidCardExpiredDate={isValidCardExpiredDate}
-          />
+          <ExpiredDateInput cardExpiredDate={cardExpiredDate} isValidCardExpiredDate={isValidCardExpiredDate} />
           <CardOwnerInput //
             cardOwner={cardOwner}
-            setCardOwner={setCardOwner}
           />
-          <SecurityCodeInput
-            securityCode={securityCode}
-            setSecurityCode={setSecurityCode}
-            isValidSecurityCode={isValidSecurityCode}
-          />
-          <CardPasswordInput
-            cardPassword={cardPassword}
-            setCardPassword={setCardPassword}
-            isValidCardPassword={isValidCardPassword}
-          />
+          <SecurityCodeInput securityCode={securityCode} isValidSecurityCode={isValidSecurityCode} />
+          <CardPasswordInput cardPassword={cardPassword} isValidCardPassword={isValidCardPassword} />
           <Styled.ButtonContainer>
             {isValidAllInput && <Button styles={{ color: COLOR.MINT_500 }}>다음</Button>}
           </Styled.ButtonContainer>
@@ -111,12 +71,6 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo, cardInfoForEdit }) =
       </div>
     </>
   );
-};
-
-CardCreationPage.propTypes = {
-  setCurrentPage: PropTypes.func.isRequired,
-  setNewCardInfo: PropTypes.func.isRequired,
-  cardInfoForEdit: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]).isRequired,
 };
 
 export default CardCreationPage;

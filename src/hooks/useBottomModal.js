@@ -4,11 +4,11 @@ import { BottomModal as BottomModalComponent } from '../components/commons/modal
 const MODAL_TYPE = Object.freeze({
   VIRTUAL_KEYBOARD: 'virtual_keyboard',
   CARD_SELECTION: 'card_selection',
-  DEFAULT: 'default',
+  IDLE: 'idle',
 });
 
 const useBottomModal = () => {
-  const [modalType, setModalType] = useState(MODAL_TYPE.DEFAULT);
+  const [modalType, setModalType] = useState(MODAL_TYPE.IDLE);
   const [isModalOpened, setModalOpen] = useState(false);
   const modalRef = useRef(null);
 

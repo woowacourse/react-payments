@@ -1,12 +1,16 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import { CARD } from '../../../constants/card';
+import CardDataContext from '../../../context/CardDataContext';
 import { MODAL_TYPE } from '../../../hooks/useBottomModal';
 import { Circle, CIRCLE_SIZE } from '../../commons/circle/Circle';
 import Styled from './CardSelectionModal.style';
 
-const CardSelectionModal = ({ BottomModal, closeModal, setSelectedCardInfo }) => {
+const CardSelectionModal = ({ BottomModal, closeModal }) => {
+  const { setCardInfo } = useContext(CardDataContext);
+
   const handleItemClick = card => {
-    setSelectedCardInfo(card);
+    setCardInfo(prevState => ({ ...prevState, selectedCardInfo: card }));
     closeModal(MODAL_TYPE.CARD_SELECTION);
   };
 
@@ -25,7 +29,8 @@ const CardSelectionModal = ({ BottomModal, closeModal, setSelectedCardInfo }) =>
 };
 
 CardSelectionModal.propTypes = {
-  setSelectedCardInfo: PropTypes.func.isRequired,
+  BottomModal: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
 
 export default CardSelectionModal;

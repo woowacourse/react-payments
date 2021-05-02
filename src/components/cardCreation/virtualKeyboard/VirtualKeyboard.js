@@ -1,17 +1,19 @@
 import PropTypes from 'prop-types';
 import { Button } from '../../commons/button/Button';
 import Styled from './VirtualKeyboard.style';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { arrayShuffle } from '../../../utils/shuffle';
 import { randomKey } from '../../../utils/randomKey';
 import { MODAL_TYPE } from '../../../hooks/useBottomModal';
+import CardDataContext from '../../../context/CardDataContext';
 
 const virtualKeyboardValueList = Array.from({ length: 10 }, (_, i) => i);
 const CONFIRM = '확인';
 const DELETE = '삭제';
 
-const VirtualKeyboard = ({ BottomModal, closeModal, currentInputName, inputValue, setInputValue, maxLength }) => {
+const VirtualKeyboard = ({ BottomModal, closeModal, currentInputName, inputValue, maxLength, targetKey }) => {
   const [shuffledButtonList, setShuffledButtonList] = useState(arrayShuffle(virtualKeyboardValueList));
+  const { setCardInfo } = useContext(CardDataContext);
 
   const handleButtonClick = ({ target }) => {
     if (target.tagName !== 'BUTTON') return;
@@ -35,17 +37,22 @@ const VirtualKeyboard = ({ BottomModal, closeModal, currentInputName, inputValue
   const setSingleInputValue = value => {
     if (inputValue.length >= maxLength && value !== DELETE) return;
 
-    setInputValue(prevState => (value === DELETE ? prevState.slice(0, -1) : prevState + value));
+    setCardInfo(prevState => ({
+      ...prevState,
+      [targetKey]: value === DELETE ? inputValue.slice(0, -1) : inputValue + value,
+    }));
   };
 
   const setMultipleInputValue = value => {
     if (inputValue[currentInputName].length >= maxLength && value !== DELETE) return;
 
-    setInputValue(prevState => ({
-      ...prevState,
-      [currentInputName]:
-        value === DELETE ? prevState[currentInputName].slice(0, -1) : prevState[currentInputName] + value,
-    }));
+    setCardInfo(prevState => {
+      const copiedValue = { ...inputValue };
+      copiedValue[currentInputName] =
+        value === DELETE ? copiedValue[currentInputName].slice(0, -1) : copiedValue[currentInputName] + value;
+
+      return { ...prevState, [targetKey]: copiedValue };
+    });
   };
 
   return (
@@ -56,8 +63,8 @@ const VirtualKeyboard = ({ BottomModal, closeModal, currentInputName, inputValue
             {value}
           </Button>
         ))}
-        <Button type="button">확인</Button>
-        <Button type="button">삭제</Button>
+        <Button type="button">{CONFIRM}</Button>
+        <Button type="button">{DELETE}</Button>
       </Styled.ButtonContainer>
     </BottomModal>
   );
@@ -70,9 +77,12 @@ VirtualKeyboard.defaultProps = {
 };
 
 VirtualKeyboard.propTypes = {
+  BottomModal: PropTypes.func.isRequired,
   currentInputName: PropTypes.string.isRequired,
   inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   maxLength: PropTypes.number.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  targetKey: PropTypes.string.isRequired,
 };
 
 export default VirtualKeyboard;

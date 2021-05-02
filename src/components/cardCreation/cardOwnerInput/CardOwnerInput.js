@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import { memo } from 'react';
+import { memo, useContext } from 'react';
 import { COLOR } from '../../../constants/color';
 import { INPUT_LENGTH } from '../../../constants/input';
 import { ALPHABET_REG_EXR } from '../../../constants/regExp';
+import CardDataContext from '../../../context/CardDataContext';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import Styled from './CardOwnerInput.style';
 
@@ -10,11 +10,16 @@ const isValidInput = value => {
   return ALPHABET_REG_EXR.test(value) && value.length <= INPUT_LENGTH.CARD_OWNER;
 };
 
-const CardOwnerInput = memo(({ cardOwner, setCardOwner }) => {
+const CardOwnerInput = memo(() => {
+  const {
+    cardInfo: { cardOwner },
+    setCardInfo,
+  } = useContext(CardDataContext);
+
   const handleInputChange = ({ target }) => {
     if (!isValidInput(target.value)) return;
 
-    setCardOwner(target.value.toUpperCase());
+    setCardInfo(prevState => ({ ...prevState, cardOwner: target.value.toUpperCase() }));
   };
 
   return (
@@ -36,14 +41,5 @@ const CardOwnerInput = memo(({ cardOwner, setCardOwner }) => {
     </div>
   );
 });
-
-CardOwnerInput.defaultProps = {
-  cardOwner: '',
-};
-
-CardOwnerInput.propTypes = {
-  cardOwner: PropTypes.string.isRequired,
-  setCardOwner: PropTypes.func.isRequired,
-};
 
 export default CardOwnerInput;

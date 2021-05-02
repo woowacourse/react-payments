@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { memo, useRef, useEffect, useState } from 'react';
+import { memo, useRef, useEffect, useState, useContext } from 'react';
 import { COLOR } from '../../../constants/color';
 import { INPUT_LENGTH, INPUT_NAME } from '../../../constants/input';
 import { TransparentInput } from '../../commons/input/TransparentInput';
@@ -8,6 +8,7 @@ import { Circle } from '../../commons/circle/Circle';
 import { printColorBasedOnBoolean } from '../../../utils/printColor';
 import VirtualKeyboard from '../virtualKeyboard/VirtualKeyboard';
 import { MODAL_TYPE, useBottomModal } from '../../../hooks/useBottomModal';
+import CardDataContext from '../../../context/CardDataContext';
 
 const { FIRST, SECOND } = INPUT_NAME;
 
@@ -17,9 +18,14 @@ const transparentInputStyles = {
   textAlign: 'center',
 };
 
-const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPassword }) => {
+const CardPasswordInput = memo(({ isValidCardPassword }) => {
   const { isModalOpened, openModal, closeModal, BottomModal } = useBottomModal();
   const [currentInputName, setCurrentInputName] = useState(null);
+  const {
+    cardInfo: { cardPassword },
+    setCardInfo,
+  } = useContext(CardDataContext);
+
   const $secondInput = useRef(null);
 
   useEffect(() => {
@@ -32,7 +38,12 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
 
   const handleInputFocus = ({ target }) => {
     setCurrentInputName(target.name);
-    setCardPassword(prevState => ({ ...prevState, [target.name]: '' }));
+    setCardInfo(prevState => {
+      const copiedCardPassword = { ...cardPassword };
+      copiedCardPassword[target.name] = '';
+
+      return { ...prevState, cardPassword: copiedCardPassword };
+    });
     openModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
   };
 
@@ -80,21 +91,15 @@ const CardPasswordInput = memo(({ cardPassword, setCardPassword, isValidCardPass
           closeModal={closeModal}
           currentInputName={currentInputName}
           inputValue={cardPassword}
-          setInputValue={setCardPassword}
           maxLength={INPUT_LENGTH.CARD_PASSWORD}
+          targetKey="cardPassword"
         />
       )}
     </>
   );
 });
 
-CardPasswordInput.defaultProps = {
-  cardPassword: { [FIRST]: '', [SECOND]: '' },
-};
-
 CardPasswordInput.propTypes = {
-  cardPassword: PropTypes.objectOf(PropTypes.string).isRequired,
-  setCardPassword: PropTypes.func.isRequired,
   isValidCardPassword: PropTypes.bool.isRequired,
 };
 

@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import { memo, useEffect } from 'react';
+import { memo, useContext, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
 import { INPUT_LENGTH } from '../../../constants/input';
+import CardDataContext from '../../../context/CardDataContext';
 import { MODAL_TYPE, useBottomModal } from '../../../hooks/useBottomModal';
 import { printColorBasedOnBoolean } from '../../../utils/printColor';
 import { TransparentInput } from '../../commons/input/TransparentInput';
@@ -15,15 +16,20 @@ const transparentInputStyles = {
   textAlign: 'center',
 };
 
-const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurityCode }) => {
+const SecurityCodeInput = memo(({ isValidSecurityCode }) => {
   const { isModalOpened, openModal, closeModal, BottomModal } = useBottomModal();
+
+  const {
+    cardInfo: { securityCode },
+    setCardInfo,
+  } = useContext(CardDataContext);
 
   useEffect(() => {
     isValidSecurityCode && closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
   }, [isValidSecurityCode, closeModal]);
 
   const handleInputFocus = () => {
-    setSecurityCode('');
+    setCardInfo(prevState => ({ ...prevState, securityCode: '' }));
     openModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
   };
 
@@ -51,8 +57,8 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
           BottomModal={BottomModal}
           closeModal={closeModal}
           inputValue={securityCode}
-          setInputValue={setSecurityCode}
           maxLength={INPUT_LENGTH.SECURITY_CODE}
+          targetKey="securityCode"
         />
       )}
     </>
@@ -60,12 +66,10 @@ const SecurityCodeInput = memo(({ securityCode, setSecurityCode, isValidSecurity
 });
 
 SecurityCodeInput.defaultProps = {
-  securityCode: '',
+  isValidSecurityCode: false,
 };
 
 SecurityCodeInput.propTypes = {
-  securityCode: PropTypes.string.isRequired,
-  setSecurityCode: PropTypes.func.isRequired,
   isValidSecurityCode: PropTypes.bool.isRequired,
 };
 

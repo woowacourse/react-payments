@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import Styled from './style';
 import { CreditCard, CARD_SIZE } from '../../components/commons/card/CreditCard';
 import { TransparentInput } from '../../components/commons/input/TransparentInput';
@@ -8,6 +8,7 @@ import { PAGE } from '../../constants/page';
 import { COLOR } from '../../constants/color';
 import { httpClient } from '../../api/httpClient';
 import { PATH, RETURN_TYPE } from '../../constants/api';
+import CardDataContext from '../../context/CardDataContext';
 
 const transparentInputStyles = {
   textAlign: 'center',
@@ -15,37 +16,36 @@ const transparentInputStyles = {
   color: COLOR.GRAY_700,
 };
 
-const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setCardList, cardNicknameForEdit }) => {
-  const [cardNickname, setCardNickname] = useState('');
-  const { selectedCardInfo, cardNumber, cardOwner, cardExpiredDate, id: editId } = newCardInfo;
+const CardCreationCompletePage = ({ setCardList }) => {
+  const { cardInfo, editCardId, setCardInfo, setCurrentPage } = useContext(CardDataContext);
 
-  const content = { ...newCardInfo, cardNickname };
+  const { cardNumber, cardExpiredDate, cardOwner, selectedCardInfo, cardNickname } = cardInfo;
 
-  useEffect(() => {
-    cardNicknameForEdit && setCardNickname(cardNicknameForEdit);
-  }, [cardNicknameForEdit]);
+  const handleInputChange = ({ target }) => {
+    setCardInfo(prevState => ({ ...prevState, cardNickname: target.value }));
+  };
 
   const handleCardSubmit = e => {
     e.preventDefault();
 
-    cardNicknameForEdit ? editCard() : addCard();
+    editCardId ? editCard() : addCard();
 
     setCurrentPage(PAGE.CARD_LIST);
   };
 
   const addCard = async () => {
-    const result = await httpClient.post({ path: PATH.CARD_LIST, body: content, returnType: RETURN_TYPE.JSON });
+    const result = await httpClient.post({ path: PATH.CARD_LIST, body: cardInfo, returnType: RETURN_TYPE.JSON });
 
-    setCardList(prevState => [...prevState, { ...content, id: result.id }]);
+    setCardList(prevState => [...prevState, { ...cardInfo, id: result.id }]);
   };
 
   const editCard = async () => {
-    await httpClient.put({ path: `${PATH.CARD_LIST}/${editId}`, body: content });
+    await httpClient.put({ path: `${PATH.CARD_LIST}/${editCardId}`, body: cardInfo });
 
     setCardList(prevState => {
       const copiedState = [...prevState];
-      const targetIndex = copiedState.findIndex(card => card.id === editId);
-      copiedState[targetIndex] = { ...content, id: editId };
+      const targetIndex = copiedState.findIndex(card => card.id === editCardId);
+      copiedState[targetIndex] = { ...cardInfo, id: editCardId };
 
       return copiedState;
     });
@@ -66,11 +66,7 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setCardList, ca
       />
       <form onSubmit={handleCardSubmit}>
         <Styled.InputContainer>
-          <TransparentInput
-            value={cardNickname}
-            onChange={({ target }) => setCardNickname(target.value)}
-            styles={transparentInputStyles}
-          />
+          <TransparentInput value={cardNickname} onChange={handleInputChange} styles={transparentInputStyles} />
         </Styled.InputContainer>
         {cardNickname && (
           <Styled.ButtonContainer>
@@ -83,18 +79,6 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setCardList, ca
 };
 
 CardCreationCompletePage.propTypes = {
-  newCardInfo: PropTypes.shape({
-    cardNumber: PropTypes.objectOf(PropTypes.string),
-    cardExpiredDate: PropTypes.objectOf(PropTypes.string),
-    cardOwner: PropTypes.string,
-    selectedCardInfo: PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.oneOf([null])]),
-      name: PropTypes.string,
-      color: PropTypes.string,
-    }).isRequired,
-  }).isRequired,
-  setCurrentPage: PropTypes.func.isRequired,
-  cardNicknameForEdit: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   setCardList: PropTypes.func.isRequired,
 };
 

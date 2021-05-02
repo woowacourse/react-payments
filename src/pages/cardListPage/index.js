@@ -7,11 +7,15 @@ import { PAGE } from '../../constants/page';
 import { CreditCard } from '../../components/commons/card/CreditCard';
 import { httpClient } from '../../api/httpClient';
 import { PATH } from '../../constants/api';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import CardDataContext from '../../context/CardDataContext';
 
-const CardListPage = ({ setCurrentPage, cardList, setCardInfoForEdit, setCardList }) => {
+const CardListPage = ({ cardList, setCardList, setEditCardId, resetCardInfo }) => {
+  const { setCardInfo, setCurrentPage } = useContext(CardDataContext);
+
   const handleCardEdit = cardInfo => {
-    setCardInfoForEdit(cardInfo);
+    setEditCardId(cardInfo.id);
+    setCardInfo(cardInfo);
     setCurrentPage(PAGE.CARD_CREATION);
   };
 
@@ -27,8 +31,9 @@ const CardListPage = ({ setCurrentPage, cardList, setCardInfoForEdit, setCardLis
   };
 
   useEffect(() => {
-    setCardInfoForEdit({});
-  }, [setCardInfoForEdit]);
+    setEditCardId(null);
+    resetCardInfo();
+  }, [setEditCardId, resetCardInfo]);
 
   const creditCardList = cardList.map(card => (
     <Styled.CardItem key={card.id}>
@@ -69,10 +74,10 @@ const CardListPage = ({ setCurrentPage, cardList, setCardInfoForEdit, setCardLis
 };
 
 CardListPage.propTypes = {
-  setCurrentPage: PropTypes.func.isRequired,
-  setCardInfoForEdit: PropTypes.func.isRequired,
   cardList: PropTypes.arrayOf(PropTypes.object).isRequired,
   setCardList: PropTypes.func.isRequired,
+  setEditCardId: PropTypes.func.isRequired,
+  resetCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardListPage;

@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
-import { memo, useRef } from 'react';
+import { memo, useContext, useRef } from 'react';
 import { COLOR } from '../../../constants/color';
 import { INPUT_NAME, INPUT_LENGTH } from '../../../constants/input';
 import { NUMBER_REG_EXR } from '../../../constants/regExp';
+import CardDataContext from '../../../context/CardDataContext';
 import { hasObjectAnyValue } from '../../../utils/object';
 import { printColorBasedOnBoolean } from '../../../utils/printColor';
 import { TransparentInput } from '../../commons/input/TransparentInput';
@@ -16,13 +17,25 @@ const transparentInputStyles = {
   textAlign: 'center',
 };
 
-const ExpiredDateInput = memo(({ cardExpiredDate, setCardExpiredDate, isValidCardExpiredDate }) => {
+const ExpiredDateInput = memo(({ isValidCardExpiredDate }) => {
   const $yearInput = useRef(null);
+  const {
+    cardInfo: { cardExpiredDate },
+    setCardInfo,
+  } = useContext(CardDataContext);
 
   const handleInputChange = ({ target }) => {
     if (target.value.length > INPUT_LENGTH.EXPIRED_DATE || !NUMBER_REG_EXR.test(target.value)) return;
 
-    setCardExpiredDate(prevState => ({ ...prevState, [target.name]: target.value }));
+    setCardInfo(prevState => {
+      const copiedCardInfo = { ...prevState };
+      const targetCardExpiredDate = { ...copiedCardInfo.cardExpiredDate };
+      targetCardExpiredDate[target.name] = target.value;
+
+      copiedCardInfo.cardExpiredDate = targetCardExpiredDate;
+
+      return copiedCardInfo;
+    });
 
     if (target.name === MONTH && target.value.length === INPUT_LENGTH.EXPIRED_DATE) {
       $yearInput.current.disabled = false;
@@ -61,13 +74,7 @@ const ExpiredDateInput = memo(({ cardExpiredDate, setCardExpiredDate, isValidCar
   );
 });
 
-ExpiredDateInput.defaultProps = {
-  cardExpiredDate: { [MONTH]: '', [YEAR]: '' },
-};
-
 ExpiredDateInput.propTypes = {
-  cardExpiredDate: PropTypes.objectOf(PropTypes.string).isRequired,
-  setCardExpiredDate: PropTypes.func.isRequired,
   isValidCardExpiredDate: PropTypes.bool.isRequired,
 };
 
