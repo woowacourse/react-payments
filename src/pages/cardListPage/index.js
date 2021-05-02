@@ -8,16 +8,26 @@ import { PAGE } from '../../constants/page';
 import { CreditCard } from '../../components/commons/card/CreditCard';
 import { useContext } from 'react';
 import { TargetCardIdContext } from '../../contexts/TargetCardIdContext';
+import { CONFIRM_MESSAGE } from '../../constants/message';
 
 const cardListRef = firestore.collection('cardList');
 
-const buttonStyles = {
-  border: '1px solid #525252',
+const updateButtonStyles = {
+  border: '1px solid #04C09E',
   borderRadius: '6px',
   height: '36px',
   width: '46%',
   display: 'none',
-  color: '#525252',
+  color: '#04C09E',
+};
+
+const deleteButtonStyles = {
+  border: '1px solid #919191',
+  borderRadius: '6px',
+  height: '36px',
+  width: '46%',
+  display: 'none',
+  color: '#919191',
 };
 
 const CardListPage = ({ setCurrentPage, cardList, setCardList }) => {
@@ -29,6 +39,8 @@ const CardListPage = ({ setCurrentPage, cardList, setCardList }) => {
   };
 
   const handleCardDelete = async id => {
+    if (!window.confirm(CONFIRM_MESSAGE.DELETE_CARD)) return;
+
     await cardListRef.doc(id).delete();
 
     setCardList(prevState => [...prevState.filter(state => state.id !== id)]);
@@ -55,10 +67,10 @@ const CardListPage = ({ setCurrentPage, cardList, setCardList }) => {
             <Styled.NickName>{content.cardNickName}</Styled.NickName>
 
             <Styled.ButtonContainer>
-              <Button className="update-card" styles={buttonStyles} onClick={() => handleCardUpdate(id)}>
+              <Button className="update-card" styles={updateButtonStyles} onClick={() => handleCardUpdate(id)}>
                 수정하기
               </Button>
-              <Button className="delete-card" styles={buttonStyles} onClick={() => handleCardDelete(id)}>
+              <Button className="delete-card" styles={deleteButtonStyles} onClick={() => handleCardDelete(id)}>
                 삭제하기
               </Button>
             </Styled.ButtonContainer>
