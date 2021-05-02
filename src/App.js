@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AddCardForm, AddCardComplete } from './pages';
 import { Route, BrowserRouter } from 'react-router-dom';
+import CardList from './pages/CardList';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -13,7 +14,10 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Route exact path={['/', '/addCardForm']}>
+        <Route exact path="/">
+          <CardList cards={cards} />
+        </Route>
+        <Route exact path="/addCardForm">
           <AddCardForm />
         </Route>
         <Route exact path="/addCardComplete">
