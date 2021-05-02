@@ -14,6 +14,7 @@ import ExpDateInputs from './ExpDateInput';
 import OwnerNameInput from './OwnerNameInput';
 import CVCInput from './CVCInput';
 import PasswordInputs from './PasswordInputs';
+import { useCards } from '../../../context/CardsStateContext';
 
 export type CardNumberState = [string, string, string, string];
 export type PasswordState = [string, string];
@@ -91,8 +92,12 @@ const AddCardForm: VFC = () => {
     setIsNicknameModalVisible(true);
   };
 
-  const onSubmitCard = (event: FormEvent<HTMLFormElement>) => {
+  const { addCard } = useCards();
+
+  const onSubmitCard = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    await addCard({ ...formState, cardNumber: formState.cardNumber.join('-'), password: formState.password.join('') });
     alert(ALERT.CARD_SUBMIT_SUCCESS);
   };
 

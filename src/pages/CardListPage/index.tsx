@@ -1,4 +1,4 @@
-import { useCards } from '../../context/CardContext';
+import { useCards } from '../../context/CardsStateContext';
 import CreditCard from '../../components/shared/CreditCard';
 import CardList from '../../components/cardList';
 import Template from '../../components/shared/Template';
