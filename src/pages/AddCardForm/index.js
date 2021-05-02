@@ -8,15 +8,13 @@ import {
   TextButton,
   InputWithCounter,
   CardPasswordInput,
-  Modal,
-  CardCompanySelection,
-  SecurityCodeGuide,
 } from '../../components';
 import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/formatter';
 import { isValidSerialNumber, isValidDateFormat, isValidUserName } from './validator';
 import { Link, useHistory } from 'react-router-dom';
 import ValidationError from '../../error/ValidationError';
 import './style.css';
+import AddCardFormModal from './Modal';
 
 export default function AddCardForm() {
   const [serialNumber, setSerialNumber] = useState('');
@@ -305,12 +303,11 @@ export default function AddCardForm() {
         )}
       </form>
       {isModalOpened && (
-        <Modal onCloseModal={() => setIsModalOpened(false)}>
-          {modalContents === 'cardSelection' && (
-            <CardCompanySelection onSetCardCompany={onSetCardCompany}></CardCompanySelection>
-          )}
-          {modalContents === 'questionMark' && <SecurityCodeGuide />}
-        </Modal>
+        <AddCardFormModal
+          onCloseModal={() => setIsModalOpened(false)}
+          modalContents={modalContents}
+          onSetCardCompany={onSetCardCompany}
+        />
       )}
     </div>
   );
