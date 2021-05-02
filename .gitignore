@@ -24,3 +24,7 @@ yarn-error.log*
 
 # eslint
 .eslintcache
+
+# storybook
+storybook-static
+build-storybook.log

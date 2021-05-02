@@ -1,7 +1,6 @@
 {
   "name": "react-payments",
   "version": "0.1.0",
-  "private": false,
   "license": "MIT",
   "dependencies": {
     "@craco/craco": "^6.1.1",
@@ -21,8 +20,10 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "deploy": "NODE_DEBUG=gh-pages gh-pages -d build"
   },
+  "homepage": "https://bigsaigon333.github.io/react-payments",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -69,8 +70,10 @@
     "@storybook/preset-create-react-app": "^3.1.7",
     "@storybook/react": "^6.2.8",
     "@tailwindcss/postcss7-compat": "^2.1.0",
+    "chromatic": "^5.8.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.2.0",
+    "gh-pages": "^3.1.0",
     "husky": ">=6",
     "lint-staged": ">=10",
     "postcss": "^7",
