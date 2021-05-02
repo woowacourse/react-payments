@@ -8,11 +8,23 @@ import CardUserInput from './CardUserInput';
 import CardCVCInput from './CardCVCInput';
 import CardPasswordInput from './CardPasswordInput';
 
-import { cardFormErrorMessages } from './cardFormValidator';
-import { ERROR_MESSAGE, INPUT, PAGE } from '../../constants/constant';
-import ButtonMenu from '../mixin/ButtonMenu';
+import CardColor from '../../components/ModalContents/CardColor';
+import CVCHelp from '../../components/ModalContents/CVCHelp';
 
-const NewCardForm = ({ cardInfo, setNewCardInfo, onOpenModal, setPage }) => {
+import { cardFormErrorMessages } from './cardFormValidator';
+import { ERROR_MESSAGE, INPUT, MODAL, PAGE } from '../../constants/constant';
+import ButtonMenu from '../mixin/ButtonMenu';
+import Modal from '../../common/Modal';
+
+const NewCardForm = ({
+  cardInfo,
+  setNewCardInfo,
+  onOpenModal,
+  onCloseModal,
+  setPage,
+  openModalContent,
+  setOpenModalContent,
+}) => {
   const [cardFormFilled, setCardFormFilled] = useState(false);
   const [errorMessage, setErrorMessage] = useState({
     numbers: '',
@@ -21,6 +33,14 @@ const NewCardForm = ({ cardInfo, setNewCardInfo, onOpenModal, setPage }) => {
     cvc: '',
     password: '',
   });
+
+  const addCardColor = (name) => {
+    setNewCardInfo({
+      ...cardInfo,
+      cardName: name,
+    });
+    onCloseModal();
+  };
 
   const onChangeCardInput = ({
     target: {
@@ -78,37 +98,56 @@ const NewCardForm = ({ cardInfo, setNewCardInfo, onOpenModal, setPage }) => {
     cardFormFilledValidation();
   }, [cardInfo]);
 
+  useEffect(() => {
+    setOpenModalContent({
+      isModalOpen: true,
+      modalContent: MODAL.CARD_COLOR,
+    });
+  }, []);
+
   const { numbers, expireDate, user, cvc, password } = cardInfo;
   return (
-    <NewCardFormWrapper onSubmit={onSubmitCardForm}>
-      <CardNumberInput
-        numbers={numbers}
-        errorMessage={errorMessage.numbers}
-        onChangeCardInput={onChangeCardInput}
-      />
-      <CardExpireDateInput
-        expireDate={expireDate}
-        errorMessage={errorMessage.expireDate}
-        onChangeCardInput={onChangeCardInput}
-      />
-      <CardUserInput
-        user={user}
-        errorMessage={errorMessage.user}
-        onChangeCardInput={onChangeCardInput}
-      />
-      <CardCVCInput
-        cvc={cvc}
-        errorMessage={errorMessage.cvc}
-        onChangeCardInput={onChangeCardInput}
-        onOpenModal={onOpenModal}
-      />
-      <CardPasswordInput
-        password={password}
-        errorMessage={errorMessage.password}
-        onChangeCardInput={onChangeCardInput}
-      />
-      <ButtonMenu disable={cardFormFilled}>다음</ButtonMenu>
-    </NewCardFormWrapper>
+    <>
+      <NewCardFormWrapper onSubmit={onSubmitCardForm}>
+        <CardNumberInput
+          numbers={numbers}
+          errorMessage={errorMessage.numbers}
+          onChangeCardInput={onChangeCardInput}
+        />
+        <CardExpireDateInput
+          expireDate={expireDate}
+          errorMessage={errorMessage.expireDate}
+          onChangeCardInput={onChangeCardInput}
+        />
+        <CardUserInput
+          user={user}
+          errorMessage={errorMessage.user}
+          onChangeCardInput={onChangeCardInput}
+        />
+        <CardCVCInput
+          cvc={cvc}
+          errorMessage={errorMessage.cvc}
+          onChangeCardInput={onChangeCardInput}
+          onOpenModal={onOpenModal}
+        />
+        <CardPasswordInput
+          password={password}
+          errorMessage={errorMessage.password}
+          onChangeCardInput={onChangeCardInput}
+        />
+        <ButtonMenu disable={cardFormFilled}>다음</ButtonMenu>
+      </NewCardFormWrapper>
+      {openModalContent.isModalOpen && (
+        <Modal onCloseModal={onCloseModal}>
+          <>
+            {openModalContent.modalContent === MODAL.CARD_COLOR && (
+              <CardColor addCardColor={addCardColor} />
+            )}
+            {openModalContent.modalContent === MODAL.CVC_HELP && <CVCHelp />}
+          </>
+        </Modal>
+      )}
+    </>
   );
 };
 
@@ -136,6 +175,12 @@ NewCardForm.propTypes = {
   setNewCardInfo: PropTypes.func.isRequired,
   setPage: PropTypes.func.isRequired,
   onOpenModal: PropTypes.func.isRequired,
+  onCloseModal: PropTypes.func.isRequired,
+  openModalContent: PropTypes.shape({
+    isModalOpen: PropTypes.bool,
+    modalContent: PropTypes.string,
+  }),
+  setOpenModalContent: PropTypes.func.isRequired,
 };
 
 export default NewCardForm;

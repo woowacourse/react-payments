@@ -5,19 +5,15 @@ import GlobalStyles from './global.styles';
 import NewCardForm from './components/NewCardForm';
 import CardAdditionComplete from './components/CardAdditionComplete';
 import Nav from './components/mixin/Nav';
-import CardColor from './components/ModalContents/CardColor';
-import CVCHelp from './components/ModalContents/CVCHelp';
 
 import Card from './common/Card';
-import Modal from './common/Modal';
-
-import { MODAL, PAGE } from './constants/constant';
+import { PAGE } from './constants/constant';
 
 function App() {
   const [page, setPage] = useState(PAGE.ADD_CARD);
   const [openModalContent, setOpenModalContent] = useState({
-    isModalOpen: true,
-    modalContent: MODAL.CARD_COLOR,
+    isModalOpen: false,
+    modalContent: '',
   });
   const [myCards, setMyCards] = useState([]);
   const [newCardInfo, setNewCardInfo] = useState({
@@ -44,14 +40,6 @@ function App() {
   const addNewCard = () => {
     setMyCards([...myCards, newCardInfo]);
     resetNewCardInfo();
-  };
-
-  const addCardColor = (name) => {
-    setNewCardInfo({
-      ...newCardInfo,
-      cardName: name,
-    });
-    onCloseModal();
   };
 
   const resetNewCardInfo = () => {
@@ -105,7 +93,10 @@ function App() {
               cardInfo={newCardInfo}
               setNewCardInfo={setNewCardInfo}
               onOpenModal={onOpenModal}
+              onCloseModal={onCloseModal}
               setPage={setPage}
+              openModalContent={openModalContent}
+              setOpenModalContent={setOpenModalContent}
             />
           </>
         )}
@@ -115,17 +106,6 @@ function App() {
             setNewCardInfo={setNewCardInfo}
             addNewCard={addNewCard}
           />
-        )}
-
-        {openModalContent.isModalOpen && (
-          <Modal onCloseModal={onCloseModal}>
-            <>
-              {openModalContent.modalContent === MODAL.CARD_COLOR && (
-                <CardColor addCardColor={addCardColor} />
-              )}
-              {openModalContent.modalContent === MODAL.CVC_HELP && <CVCHelp />}
-            </>
-          </Modal>
         )}
       </AppWrapper>
     </>
