@@ -7,6 +7,7 @@ import Home from "./Home";
 import { Route, Switch, useHistory, useLocation } from "react-router";
 import { QUERY_STRING_KEY } from "../constants.js";
 
+//arrow function으로 바꾸기
 function App() {
   const [cardList, setCardList] = useState([]);
   const history = useHistory();
@@ -29,7 +30,7 @@ function App() {
     },
   };
 
-  const onCardInfoSubmit = (card) => {
+  const onNewCardAdd = (card) => {
     const newCard = { cardDescription: null, ...card };
 
     setCardList((prevCardList) => [...prevCardList, newCard]);
@@ -66,7 +67,7 @@ function App() {
             <Home cardList={cardList} />
           </Route>
           <Route exact path={URL.CARD_ADDITION}>
-            <CardAddition onCardInfoSubmit={onCardInfoSubmit} />
+            <CardAddition onNewCardAdd={onNewCardAdd} />
           </Route>
           <Route exact path={URL.COMPLETE_CARD_ADDITION}>
             <CompleteCardAddition
