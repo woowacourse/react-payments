@@ -22,8 +22,13 @@ export const LENGTH = {
     MIN: 2,
     MAX: 2,
   },
+  OWNER_NAME: {
+    MIN: 0,
+    MAX: 30,
+  },
 };
 
 export const REG_EXP = {
   CARD_NUMBERS: new RegExp(`^[\\d]{${LENGTH.CARD_NUMBER.MIN},${LENGTH.CARD_NUMBER.MAX}}$`),
+  OWNER_NAME: new RegExp(`^[가-힣|A-Z|\\s]{${LENGTH.OWNER_NAME.MIN},${LENGTH.OWNER_NAME.MAX}}$`),
 };

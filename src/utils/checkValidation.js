@@ -27,22 +27,31 @@ const validateExpirationYear = year => {
   return Math.abs(Number(year) - currentYear) <= 5;
 };
 
+const validateOwnerName = name => {
+  if (typeof name !== "string") {
+    throw new TypeError("ownerName should be a string");
+  }
+
+  return REG_EXP.OWNER_NAME.test(name);
+};
+
 const validation = {
   [CARD_INFO.CARD_NUMBERS]: validateCardNumbers,
   [CARD_INFO.EXPIRATION_MONTH]: validateExpirationMonth,
   [CARD_INFO.EXPIRATION_YEAR]: validateExpirationYear,
+  [CARD_INFO.OWNER_NAME]: validateOwnerName,
 };
 
-const checkValidation = (name, value) => {
+const checkValidation = (inputName, value) => {
   try {
-    if (!Object.values(CARD_INFO).includes(name)) {
+    if (!Object.values(CARD_INFO).includes(inputName)) {
       throw new TypeError("Invalid validation name");
     }
-    console.log(value);
-    const isValid = validation[name](value);
+
+    const isValid = validation[inputName](value);
 
     if (!isValid) {
-      throwError(name, ERROR_TYPE.VALIDATION);
+      throwError(inputName, ERROR_TYPE.VALIDATION);
     }
   } catch (error) {
     throw error;

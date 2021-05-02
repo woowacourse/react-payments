@@ -6,7 +6,7 @@ import InputTitle from "../InputTitle/InputTitle";
 
 const ExpirationDateInput = ({ expirationMonth, expirationYear, isValid, onChange }) => {
   return (
-    <div className="flex flex-col mb-2">
+    <>
       <div className="mb-2 h-6">
         <InputTitle innerText="만료일" />
       </div>
@@ -48,7 +48,7 @@ const ExpirationDateInput = ({ expirationMonth, expirationYear, isValid, onChang
           required
         />
       </div>
-    </div>
+    </>
   );
 };
 

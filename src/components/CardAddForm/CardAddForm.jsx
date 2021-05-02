@@ -5,7 +5,8 @@ import InputTitle from "../InputTitle/InputTitle";
 import Button from "../Button/Button";
 import CardNumbersInput from "./CardNumbersInput";
 import ExpirationDateInput from "./ExpirationDateInput";
-import { CARD_INFO, checkValidation } from "../../utils";
+import OwnerNameInput from "./OwnerNameInput";
+import { CARD_INFO, checkValidation, replaceValue } from "../../utils";
 
 const initialValidation = {
   [CARD_INFO.CARD_NUMBERS]: true,
@@ -20,9 +21,6 @@ const CardAddForm = ({ cardInfo, setCardInfo }) => {
   const [validation, setValidation] = useState(initialValidation);
   const [backgroundColor] = useState(null);
   const [bank] = useState(null);
-  const [numbers] = useState([]);
-  const [expirationDate] = useState("");
-  const [ownerName] = useState("");
   const [securityCode] = useState("");
   const [password] = useState([]);
   const [isToolTipVisible] = useState(false);
@@ -33,7 +31,7 @@ const CardAddForm = ({ cardInfo, setCardInfo }) => {
       const targetIndex = Number(event.target.dataset.index);
       const newValue = !Number.isNaN(targetIndex)
         ? cardInfo[name].map((prevValue, index) => (index === targetIndex ? value : prevValue))
-        : value;
+        : replaceValue(name, value);
 
       setCardInfo({ ...cardInfo, [name]: newValue });
       checkValidation(name, newValue);
@@ -57,36 +55,32 @@ const CardAddForm = ({ cardInfo, setCardInfo }) => {
             <Card
               backgroundColor={backgroundColor}
               bank={bank}
-              numbers={numbers}
-              expirationDate={expirationDate}
-              ownerName={ownerName}
+              numbers={cardInfo.cardNumbers}
+              expirationDate={cardInfo.expirationDate}
+              ownerName={cardInfo.ownerName}
               isRegistered={false}
             />
           </div>
-          <CardNumbersInput
-            cardNumbers={cardInfo.cardNumbers}
-            isValid={validation.cardNumbers}
-            onChange={handleInputChange}
-          />
-          <ExpirationDateInput
-            expirationMonth={cardInfo.expirationMonth}
-            expirationYear={cardInfo.expirationYear}
-            isValid={validation.expirationMonth && validation.expirationYear}
-            onChange={handleInputChange}
-          />
           <div className="flex flex-col w-full mb-2">
-            <div className="mb-2 h-6 flex justify-between items-center">
-              <InputTitle innerText="카드 소유자 이름(선택)" />
-              <span className="text-custom-gray-300 font-medium text-xs">{ownerName.length}/30</span>
-            </div>
-            <label className="sr-only" htmlFor="owner-name-input">
-              카드 소유자 이름 입력란
-            </label>
-            <Input
-              id="owner-name-input"
-              type="text"
-              placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-              className="w-full"
+            <CardNumbersInput
+              cardNumbers={cardInfo.cardNumbers}
+              isValid={validation.cardNumbers}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="flex flex-col mb-2">
+            <ExpirationDateInput
+              expirationMonth={cardInfo.expirationMonth}
+              expirationYear={cardInfo.expirationYear}
+              isValid={validation.expirationMonth && validation.expirationYear}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="flex flex-col w-full mb-2">
+            <OwnerNameInput
+              ownerName={cardInfo.ownerName}
+              isValid={validation.ownerName}
+              onChange={handleInputChange}
             />
           </div>
           <div className="flex flex-col w-full mb-2">
