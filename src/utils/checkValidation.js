@@ -1,4 +1,4 @@
-import { CARD_INFO, ERROR_TYPE, REG_EXP } from "./constants";
+import { CARD_INFO, ERROR_TYPE, LENGTH, REG_EXP } from "./constants";
 import throwError from "./throwError";
 
 const validateCardNumbers = cardNumbers => {
@@ -35,11 +35,20 @@ const validateOwnerName = name => {
   return REG_EXP.OWNER_NAME.test(name);
 };
 
+const validateSecurityCode = code => {
+  if (typeof code !== "string") {
+    throw new TypeError("securityCode should be a string");
+  }
+
+  return LENGTH.SECURITY_CODE.MIN <= code.length && code.length <= LENGTH.SECURITY_CODE.MAX;
+};
+
 const validation = {
   [CARD_INFO.CARD_NUMBERS]: validateCardNumbers,
   [CARD_INFO.EXPIRATION_MONTH]: validateExpirationMonth,
   [CARD_INFO.EXPIRATION_YEAR]: validateExpirationYear,
   [CARD_INFO.OWNER_NAME]: validateOwnerName,
+  [CARD_INFO.SECURITY_CODE]: validateSecurityCode,
 };
 
 const checkValidation = (inputName, value) => {

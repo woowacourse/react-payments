@@ -26,9 +26,13 @@ export const LENGTH = {
     MIN: 0,
     MAX: 30,
   },
+  SECURITY_CODE: {
+    MIN: 3,
+    MAX: 4,
+  },
 };
 
 export const REG_EXP = {
-  CARD_NUMBERS: new RegExp(`^[\\d]{${LENGTH.CARD_NUMBER.MIN},${LENGTH.CARD_NUMBER.MAX}}$`),
+  CARD_NUMBERS: new RegExp(`^[\\d]{${LENGTH.CARD_NUMBER.MIN},${LENGTH.CARD_NUMBER.MAX}}$`), // TODO: 정규식 -> 길이 판별
   OWNER_NAME: new RegExp(`^[가-힣|A-Z|\\s]{${LENGTH.OWNER_NAME.MIN},${LENGTH.OWNER_NAME.MAX}}$`),
 };
