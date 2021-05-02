@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Card } from '../../components';
-import { ROUTE, LOCAL_STORAGE_KEY, MESSAGE } from '../../constants';
-import { useLocalStorage, useMousePressTimer } from '../../hooks';
+import { ROUTE, MESSAGE, STORAGE_KEY } from '../../constants';
+import { useCardData, useMousePressTimer } from '../../hooks';
 import { ScreenContainer } from '../../styles/common.styles';
 
 import Styled from './CardList.styles';
@@ -10,7 +10,7 @@ import Styled from './CardList.styles';
 const CardList = () => {
   const [deleteMode, setDeleteMode] = useState(false);
 
-  const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
+  const cardList = useCardData(STORAGE_KEY.CARD_LIST);
   const history = useHistory();
   const { onMouseDown, onMouseUp, clearTimer } = useMousePressTimer(2000);
 

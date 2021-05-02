@@ -1,0 +1,49 @@
+{
+  "cardList": [
+    {
+      "id": "kYz0A2krJB",
+      "cardNumbers": "5389038112312333",
+      "cardCompanyName": "테스트 카드",
+      "cardCompanyColor": "#E83D45",
+      "ownerName": "J",
+      "expiryDate": "12 / 30",
+      "nickname": "BC카드"
+    },
+    {
+      "id": "yFekFdv5PW",
+      "cardNumbers": "0381123312312312",
+      "cardCompanyName": "신한카드",
+      "cardCompanyColor": "#0b1966",
+      "ownerName": "2839",
+      "expiryDate": "01 / 11",
+      "nickname": "123"
+    },
+    {
+      "id": "oAj3m_JmTk",
+      "cardNumbers": "1312321312312312",
+      "cardCompanyName": "BC카드",
+      "cardCompanyColor": "#E83D45",
+      "ownerName": "13123",
+      "expiryDate": "12 / 31",
+      "nickname": "BC카드"
+    },
+    {
+      "id": "mpI4tt_xOE",
+      "cardNumbers": "9490038112312312",
+      "cardCompanyName": "하나카드",
+      "cardCompanyColor": "#018374",
+      "ownerName": "12312",
+      "expiryDate": "12 / 22",
+      "nickname": "zzzzz"
+    },
+    {
+      "id": "V5qlNRNIx5",
+      "cardNumbers": "2131232131231233",
+      "cardCompanyName": "KB국민카드",
+      "cardCompanyColor": "#ffbc00",
+      "ownerName": "1231232",
+      "expiryDate": "12 / 31",
+      "nickname": "123213"
+    }
+  ]
+}

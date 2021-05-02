@@ -22,7 +22,7 @@ import {
   useVirtualNumericKeyboard,
 } from '../../hooks';
 import { isNumeric, initArray } from '../../utils';
-import { CARD, DELETE_KEY, LOCAL_STORAGE_KEY, MESSAGE, REGEX, ROUTE } from '../../constants';
+import { CARD, DELETE_KEY, STORAGE_KEY, MESSAGE, REGEX, ROUTE } from '../../constants';
 
 const CardAddForm = () => {
   const history = useHistory();
@@ -60,7 +60,7 @@ const CardAddForm = () => {
   const expiryDate = useInput('');
   const CVC = useInput('');
 
-  const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
+  const cardList = useLocalStorage(STORAGE_KEY.CARD_LIST);
 
   const cardNumbersAsNumber = cardNumbers.value.join('');
 

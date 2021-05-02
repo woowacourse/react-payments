@@ -10,7 +10,7 @@ import ROUTE from './constants/route';
 const App = () => (
   <ThemeProvider theme={theme}>
     <GlobalStyle />
-
+    <span>{process.env.REACT_APP_ENV}</span>
     <Router>
       <Switch>
         <Route exact path={ROUTE.HOME} component={CardList} />

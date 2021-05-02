@@ -1,7 +1,7 @@
 import { useHistory, useLocation, Redirect } from 'react-router-dom';
 import Styled from './CardAddComplete.styles';
 import { Card, Input, Button } from '../../components';
-import { MESSAGE, LOCAL_STORAGE_KEY, ROUTE } from '../../constants';
+import { MESSAGE, STORAGE_KEY, ROUTE } from '../../constants';
 import { useInput, useLocalStorage } from '../../hooks';
 import { ScreenContainer } from '../../styles/common.styles';
 
@@ -11,7 +11,7 @@ const CardAddComplete = () => {
 
   const nickname = useInput('');
 
-  const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
+  const cardList = useLocalStorage(STORAGE_KEY.CARD_LIST);
 
   if (!location.state?.card) return <Redirect to={ROUTE.HOME} />;
 
