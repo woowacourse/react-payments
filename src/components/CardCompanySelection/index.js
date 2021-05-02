@@ -9,11 +9,10 @@ export default function CardCompanySelection({ onSetCardCompany }) {
       {Object.entries(CARD_COMPANY).map(([key, { NAME, COLOR }]) => (
         <CardCompanyOption
           key={key}
-          cardCompanyKey={key}
           name={NAME}
           color={COLOR}
           onClick={(event) => {
-            onSetCardCompany(event.currentTarget.dataset.cardCompanyKey);
+            onSetCardCompany(key);
           }}
         />
       ))}
