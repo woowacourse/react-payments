@@ -1,13 +1,13 @@
 import React from "react";
-import CardNumberInput from "./CardNumberInput";
+import CardNumberInput from "./SeperatedInputList";
 
 export default {
-  title: "Payments/CardNumberInput",
+  title: "Payments/SeperatedInputList",
   component: CardNumberInput,
   argTypes: {},
 };
 
-const Template = (args) => <CardNumberInput {...args} />;
+const Template = (args) => <SeperatedInputList {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {};
