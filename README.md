@@ -47,21 +47,21 @@
 
 ### 필수 요구사항
 
-- [ ] `Controlled` & `Uncontrolled Components`에 입각하여 `Form` 핸들링
-- [ ] `Context API`를 활용해 전역 상태 관리 및 계층 재구성
+- [x] `Controlled` & `Uncontrolled Components`에 입각하여 `Form` 핸들링
+- [x] `Context API`를 활용해 전역 상태 관리 및 계층 재구성
 
 #### 필수 구현
 
-- [ ] 카드 목록
+- [x] 카드 목록
 
 ### 심화 요구사항
 
 - [ ] `Storybook` 스냅샷 테스트
-- [ ] 비동기 통신
-  - [ ] 다양한 도구를 활용 (예 JSON Server, Strapi 등등)
-  - [ ] 등록된 카드 정보를 CRUD 합니다.
-- [ ] 나열된 카드 클릭시 `카드 추가 확인` 화면 재활용
-  - [ ] 별칭 수정 가능
+- [x] 비동기 통신
+  - [x] 다양한 도구를 활용 (예 JSON Server, Strapi 등등)
+  - [x] 등록된 카드 정보를 CRUD 합니다.
+- [x] 나열된 카드 클릭시 `카드 추가 확인` 화면 재활용
+  - [x] 별칭 수정 가능
 
 ## 👏 Contributing
 
