@@ -77,19 +77,19 @@ const CardWrapper = styled.div`
   background-color: ${({ bgColor }) =>
     bgColor !== undefined ? bgColor : COLOR.CARD.DEFAULT};
 
-  ${({ add }) => (add ? AddCard : CardInfo)}
+  ${({ addCard }) => (addCard ? AddCard : CardInfo)}
 `;
 
-const Card = ({ add, cardInfo, onOpenModal }) => {
+const Card = ({ addCard, cardInfo, onOpenModal }) => {
   const { cardName, numbers, user, expireDate } = cardInfo;
 
   return (
     <CardWrapper
-      add={add}
+      addCard={addCard}
       bgColor={CARD[cardName]}
       onClick={() => onOpenModal('cardColor')}
     >
-      {add ? (
+      {addCard ? (
         <div className='add'>+</div>
       ) : (
         <>
@@ -119,7 +119,7 @@ const Card = ({ add, cardInfo, onOpenModal }) => {
 
 Card.propTypes = {
   onOpenModal: PropTypes.func,
-  add: PropTypes.bool,
+  addCard: PropTypes.bool,
   cardInfo: PropTypes.shape({
     cardColor: PropTypes.string,
     cardName: PropTypes.string,
@@ -138,7 +138,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-  add: false,
+  addCard: false,
   cardInfo: {
     cardName: '',
     numbers: {
