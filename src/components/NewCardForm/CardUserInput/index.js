@@ -20,6 +20,7 @@ const CardUserInput = ({ user, errorMessage, onChangeCardInput }) => {
         value={user}
         maxLength={INPUT.MAX_LENGTH.CARD.USER}
         onChange={onChangeCardInput}
+        onBlur={onChangeCardInput}
       />
       <div className='input-alert'>{errorMessage}</div>
     </CardUserInputWrapper>

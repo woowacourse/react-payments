@@ -8,6 +8,8 @@ const Button = styled.button`
   font-size: ${FONT_SIZE.SMALL};
   border: 0;
   width: 100%;
+
+  visibility: ${({ disabled }) => (disabled ? 'visible' : 'hidden')};
 `;
 
 export default Button;
