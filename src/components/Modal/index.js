@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
-import componentStyles from './style.css';
+import componentStyles from './index.module.css';
 
 const cx = classnames.bind(componentStyles);
 
 export const Modal = ({ isOpen, className, children, ...props }) => {
-  const modalClass = cx('Modal', { 'Modal--open': isOpen });
+  const modalClass = cx('Modal', { isOpen });
   const modalContentClass = cx('Modal__Content', className);
+  const modalViewClass = cx('Modal__ViewPort');
 
   return (
     <div className={modalClass} {...props}>
-      <div className="Modal__ViewPort">
+      <div className={modalViewClass}>
         <div className={modalContentClass}>{children}</div>
       </div>
     </div>

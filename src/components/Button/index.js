@@ -2,12 +2,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
-import componentStyles from './style.css';
+import componentStyles from './index.module.css';
 
 const cx = classnames.bind(componentStyles);
-
 export const Button = ({ className, type, theme, backgroundColor, children, ...props }) => {
-  const buttonClass = cx('Button', `Button--${theme}`);
+  const buttonClass = cx('Button', `${theme}`);
 
   return (
     <button type={type} className={buttonClass} style={{ backgroundColor }} {...props}>

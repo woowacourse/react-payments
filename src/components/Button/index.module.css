@@ -4,7 +4,7 @@
   cursor: pointer;
 }
 
-.Button--submit {
+.submit {
   color: #04c09e;
   font-size: 0.875rem;
   text-align: end;
@@ -13,7 +13,7 @@
   right: 0.5rem;
 }
 
-.Button--question-mark {
+.question-mark {
   font-size: 1.25rem;
   width: 1.6875rem;
   height: 1.6875rem;
@@ -22,13 +22,13 @@
   border-radius: 50%;
 }
 
-.Button--card-company {
+.card-company {
   width: 2.3125rem;
   height: 2.3125rem;
   border-radius: 50%;
 }
 
-.Button--backward {
+.backward {
   width: 1.25rem;
   height: 1.25rem;
 }

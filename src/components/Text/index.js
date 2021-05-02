@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames/bind';
-import componentStyles from './style.css';
+import componentStyles from './index.module.css';
 import { COLOR } from '../../constants';
 
 const cx = classnames.bind(componentStyles);

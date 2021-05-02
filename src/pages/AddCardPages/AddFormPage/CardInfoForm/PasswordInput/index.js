@@ -1,5 +1,5 @@
 import { createRef, forwardRef } from 'react';
-import { Input, Label } from '../../../../../components';
+import { Input, Label, Container } from '../../../../../components';
 import { handlePasswordInputChange } from './handler';
 import { FIRST, SECOND } from '../../../../../constants';
 
@@ -11,7 +11,7 @@ export const PasswordInput = forwardRef((props, firstRef) => {
   return (
     <>
       <Label>카드 비밀번호</Label>
-      <div className="CardPasswordInput">
+      <Container className="CardPasswordInput">
         {[...Array(2)].map((_, index) => (
           <Input
             key={`filled-${index}`}
@@ -41,7 +41,7 @@ export const PasswordInput = forwardRef((props, firstRef) => {
             disabled
           />
         ))}
-      </div>
+      </Container>
     </>
   );
 });

@@ -5,27 +5,27 @@
   background-color: #d2d2d2;
 }
 
-.Card--chip {
+.chip {
   width: 40px;
   height: 26px;
   border-radius: 4px;
 }
 
-.Card--small {
+.small {
   width: 208px;
   height: 123px;
 }
 
-.Card--medium {
+.medium {
   width: 213px;
   height: 133px;
 }
 
-.Card--large {
+.large {
   width: 293.08px;
   height: 183px;
 }
 
-.Card--shadow {
+.boxShadow {
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 }
