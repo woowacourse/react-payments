@@ -1,4 +1,5 @@
 import { ChangeEvent, useRef, VFC } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
 import { PasswordState } from '..';
 import { LABEL } from '../../../../constants/addCardForm';
 import { ALERT } from '../../../../constants/messages';
@@ -8,12 +9,12 @@ import AddCardInputLabel from '../AddCardInputLabel';
 import { AddCardInputContainer } from '../styles';
 import { isValidPassword } from '../validator';
 
-interface Props {
+interface Props extends RouteComponentProps {
   password: PasswordState;
   setPassword: (password: PasswordState) => void;
 }
 
-const PasswordInputs: VFC<Props> = ({ password, setPassword }) => {
+const PasswordInputs: VFC<Props> = ({ password, setPassword, history }) => {
   const secondPasswordInputRef = useRef<HTMLInputElement>(null);
 
   const onChangePassword = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
@@ -26,6 +27,7 @@ const PasswordInputs: VFC<Props> = ({ password, setPassword }) => {
     } catch (error) {
       console.error('Segmentation Fault: invalid index - ' + error);
       alert(ALERT.SYSTEM_ERROR);
+      history.replace('/');
       return;
     }
 
@@ -62,4 +64,4 @@ const PasswordInputs: VFC<Props> = ({ password, setPassword }) => {
   );
 };
 
-export default PasswordInputs;
+export default withRouter(PasswordInputs);

@@ -15,6 +15,7 @@ import OwnerNameInput from './OwnerNameInput';
 import CVCInput from './CVCInput';
 import PasswordInputs from './PasswordInputs';
 import { useCards } from '../../../context/CardsStateContext';
+import { RouteComponentProps, withRouter } from 'react-router';
 
 export type CardNumberState = [string, string, string, string];
 export type PasswordState = [string, string];
@@ -29,7 +30,7 @@ interface AddCardFormState {
   nickname: string;
 }
 
-const AddCardForm: VFC = () => {
+const AddCardForm: VFC<RouteComponentProps> = ({ history }) => {
   const [formState, setFormState] = useState<AddCardFormState>({
     cardBrand: { name: '', color: '' },
     ownerName: '',
@@ -99,6 +100,7 @@ const AddCardForm: VFC = () => {
 
     await addCard({ ...formState, cardNumber: formState.cardNumber.join('-'), password: formState.password.join('') });
     alert(ALERT.CARD_SUBMIT_SUCCESS);
+    history.push('/');
   };
 
   useEffect(() => {
@@ -157,4 +159,4 @@ const AddCardForm: VFC = () => {
   );
 };
 
-export default AddCardForm;
+export default withRouter(AddCardForm);

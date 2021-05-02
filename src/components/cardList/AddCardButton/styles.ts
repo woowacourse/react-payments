@@ -8,4 +8,5 @@ export const CardButton = styled.button`
   font-size: 3rem;
   font-weight: 500;
   border: none;
+  cursor: pointer;
 `;

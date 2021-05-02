@@ -11,7 +11,7 @@ const CardListPage = () => {
     <Template title={CARD_LIST_PAGE_TITLE}>
       <CardList>
         {cards.map(card => (
-          <li key={card.id} data-id={card.id}>
+          <li key={card.id} className="card-item" data-id={card.id}>
             <CreditCard
               cardBrand={card.cardBrand}
               ownerName={card.ownerName}

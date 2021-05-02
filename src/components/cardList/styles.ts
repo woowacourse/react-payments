@@ -13,9 +13,10 @@ export const CardListContainer = styled.ul`
     display: none;
   }
 
-  li {
+  .card-item {
     margin-bottom: 4.25rem;
     position: relative;
+    cursor: pointer;
 
     .nickname {
       position: absolute;

@@ -8,6 +8,7 @@ import { ChangeEvent } from 'react';
 import Input from '../../../shared/Input';
 import { CardNumberState } from '../../AddCardForm';
 import { isValidCardNumber } from '../validator';
+import { RouteComponentProps, withRouter } from 'react-router';
 
 interface CardNumberInputProps {
   index: number;
@@ -30,7 +31,7 @@ const CardNumberInput = forwardRef<HTMLInputElement, CardNumberInputProps>(
   )
 );
 
-interface CardNumberInputsProps {
+interface CardNumberInputsProps extends RouteComponentProps {
   cardNumber: CardNumberState;
   setCardNumber: (cardNumber: CardNumberState) => void;
 }
@@ -41,7 +42,7 @@ const isInCardNumberInputRefsIndex = (index: number): index is CardNumberInputRe
   return index >= 0 && index < 3;
 };
 
-const CardNumberInputs: VFC<CardNumberInputsProps> = ({ cardNumber, setCardNumber }) => {
+const CardNumberInputs: VFC<CardNumberInputsProps> = ({ cardNumber, setCardNumber, history }) => {
   const secondCardNumberInputRef = useRef<HTMLInputElement>(null);
   const thirdCardNumberInputRef = useRef<HTMLInputElement>(null);
   const fourthCardNumberInputRef = useRef<HTMLInputElement>(null);
@@ -61,6 +62,7 @@ const CardNumberInputs: VFC<CardNumberInputsProps> = ({ cardNumber, setCardNumbe
     } catch (error) {
       console.error('Segmentation Fault: invalid index - ' + error);
       alert(ALERT.SYSTEM_ERROR);
+      history.replace('/');
       return;
     }
 
@@ -105,4 +107,4 @@ const CardNumberInputs: VFC<CardNumberInputsProps> = ({ cardNumber, setCardNumbe
   );
 };
 
-export default CardNumberInputs;
+export default withRouter(CardNumberInputs);
