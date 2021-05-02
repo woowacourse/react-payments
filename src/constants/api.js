@@ -1,4 +1,4 @@
-export const API_END_POINT = 'http://localhost:4000';
+export const API_END_POINT = 'https://ditto-payment-server.herokuapp.com';
 
 export const PATH = { CARD_LIST: '/cardList' };
 
