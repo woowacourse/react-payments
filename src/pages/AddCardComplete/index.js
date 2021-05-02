@@ -5,14 +5,14 @@ import './style.css';
 import '../../index.css';
 import { useHistory, useLocation } from 'react-router';
 
-export default function AddCardComplete({}) {
+export default function AddCardComplete({ addCards }) {
   const [cardNickName, setCardNickName] = useState('');
 
   const history = useHistory();
   const location = useLocation();
   const {
     state: {
-      card: { userName, serialNumber, expirationDate, cardCompany },
+      card: { serialNumber, expirationDate, userName, securityCode, password, cardCompany },
     },
   } = location;
 
@@ -23,6 +23,7 @@ export default function AddCardComplete({}) {
   const onCardNickNameSubmit = (event) => {
     event.preventDefault();
 
+    addCards({ userName, serialNumber, expirationDate, securityCode, password, cardCompany });
     history.push('/addCardForm');
   };
 

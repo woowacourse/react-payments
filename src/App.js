@@ -6,6 +6,7 @@ function App() {
   const [cards, setCards] = useState([]);
 
   const addCards = (card) => {
+    console.log(cards);
     setCards([...cards, card]);
   };
 
@@ -16,7 +17,7 @@ function App() {
           <AddCardForm />
         </Route>
         <Route exact path="/addCardComplete">
-          <AddCardComplete />
+          <AddCardComplete addCards={addCards} />
         </Route>
       </BrowserRouter>
     </>

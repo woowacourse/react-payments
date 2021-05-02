@@ -158,7 +158,7 @@ export default function AddCardForm() {
     if (!isFormCompleted) return;
 
     history.push('/addCardComplete', {
-      card: { serialNumber, expirationDate, userName, cardCompany },
+      card: { serialNumber, expirationDate, userName, securityCode, password, cardCompany },
     });
   };
 
