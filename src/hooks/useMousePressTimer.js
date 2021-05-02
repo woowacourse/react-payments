@@ -1,24 +1,25 @@
 import { useState } from 'react';
 
-let timer = null;
-
 export default (defaultDelay) => {
   const [delay, setDelay] = useState(defaultDelay);
+  const [timer, setTimer] = useState(null);
 
   const onMouseDown = (cb) => {
-    timer = setTimeout(() => {
-      cb();
-    }, delay);
+    setTimer(
+      setTimeout(() => {
+        cb();
+      }, delay)
+    );
   };
 
   const onMouseUp = () => {
     if (timer) {
-      clearTimeout(timer);
+      clearTimeout();
     }
   };
 
   const clearTimer = () => {
-    clearTimeout(timer);
+    setTimer(null);
   };
 
   return { delay, onMouseDown, onMouseUp, setDelay, clearTimer };
