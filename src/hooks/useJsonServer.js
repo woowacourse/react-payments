@@ -6,7 +6,7 @@ export default (entity) => {
 
   const getEntity = useCallback(async () => {
     const entities = await requestCardByType('GET', `/${entity}`);
-    setValue(entities);
+    setValue(entities.reverse());
   }, [entity]);
 
   const updateEntity = async (target) => {

@@ -35,12 +35,12 @@ export default (key, defaultValue = '') => {
   };
 
   const updateEntity = (value) => {
-    const newValueList = parsedValue.filter((_value) => _value.id !== value.id).reverse();
+    const newValueList = parsedValue.filter((_value) => _value.id !== value.id);
     setValue([...newValueList, value]);
   };
 
   const deleteEntity = (id) => {
-    const newValueList = parsedValue.filter((_value) => _value.id !== id).reverse();
+    const newValueList = parsedValue.filter((_value) => _value.id !== id);
     setValue(newValueList);
   };
 
