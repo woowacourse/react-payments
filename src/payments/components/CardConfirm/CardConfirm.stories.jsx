@@ -1,4 +1,5 @@
 import React from "react";
+import { RegisteredCard } from "../Card/Card.stories";
 import CardConfirm from "./CardConfirm";
 
 export default {
@@ -6,12 +7,8 @@ export default {
   component: CardConfirm,
 };
 
-export const PlainCardConfirm = args => <CardConfirm {...args} />;
+export const Template = args => <CardConfirm {...args} />;
 
-PlainCardConfirm.args = {
-  backgroundColor: "bg-custom-green",
-  bank: "국민",
-  numbers: ["1234", "4567", "xxxx", "xxxx"],
-  ownerName: "KYLE",
-  expirationDate: "04/21",
+Template.args = {
+  cardInfo: { ...RegisteredCard.args },
 };

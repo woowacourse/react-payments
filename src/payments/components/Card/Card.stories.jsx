@@ -7,7 +7,6 @@ export default {
   component: Card,
 };
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const CardTemplate = args => <Card {...args} />;
 
 export const RegisteredCard = CardTemplate.bind({});
@@ -16,7 +15,7 @@ RegisteredCard.args = {
   backgroundColor: "bg-custom-green",
   isRegistered: true,
   bank: "국민",
-  numbers: ["1234", "4567", "xxxx", "xxxx"],
+  numberInfos: ["1234", "4567", "xxxx", "xxxx"],
   ownerName: "KYLE",
   expirationDate: "04/21",
 };
@@ -33,7 +32,7 @@ export const UnregisteredCard = CardTemplate.bind({});
 UnregisteredCard.args = {
   isRegistered: false,
   ownerName: "NAME",
-  numbers: [],
+  numberInfos: [],
   expirationDate: "MM/YY",
 };
 
