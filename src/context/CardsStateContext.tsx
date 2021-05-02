@@ -1,11 +1,12 @@
 import { createContext, FC, useContext, useEffect, useState } from 'react';
-import { requestAddCard, requestCards, requestEditNickname } from '../service/card';
+import { requestAddCard, requestCards, requestEditNickname, requestDeleteCard } from '../service/card';
 import { Card } from '../types';
 
 interface State {
   cards: Card[];
   addCard: (card: Card) => Promise<string>;
   editNickname: (nickname: string, id: string) => void;
+  deleteCard: (id: string) => void;
 }
 
 const CardsStateContext = createContext<State | null>(null);
@@ -35,6 +36,11 @@ const CardsStateProvider: FC<Props> = ({ children }) => {
     return docId;
   };
 
+  const deleteCard = async (id: string) => {
+    await requestDeleteCard(id);
+    updateCards();
+  };
+
   const editNickname = async (nickname: string, id: string) => {
     try {
       await requestEditNickname(nickname, id);
@@ -55,7 +61,7 @@ const CardsStateProvider: FC<Props> = ({ children }) => {
     })();
   }, [shouldUpdate]);
 
-  const value = { cards, addCard, editNickname };
+  const value = { cards, addCard, editNickname, deleteCard };
 
   return <CardsStateContext.Provider value={value}>{children}</CardsStateContext.Provider>;
 };

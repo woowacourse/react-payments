@@ -8,3 +8,5 @@ export const requestCards = () => API.getAll<Card>('cards');
 export const requestAddCard = (card: Card) => API.add<Card>(card, 'cards');
 
 export const requestEditNickname = (nickname: string, id: string) => API.editById<Card>({ nickname }, id, 'cards');
+
+export const requestDeleteCard = (id: string) => API.deleteById<Card>(id, 'cards');

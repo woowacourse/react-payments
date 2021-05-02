@@ -27,6 +27,10 @@ const API = {
   editById<T>(item: Partial<T>, id: string, collection: Collection) {
     return firestore.collection(collection).doc(id).update(item);
   },
+
+  deleteById<T>(id: string, collection: Collection) {
+    return firestore.collection(collection).doc(id).delete();
+  },
 };
 
 export default API;

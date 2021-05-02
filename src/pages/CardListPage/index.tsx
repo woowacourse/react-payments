@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, VFC } from 'react';
 import { useCards } from '../../context/CardsStateContext';
 import CreditCard from '../../components/shared/CreditCard';
 import CardList from '../../components/cardList';
@@ -6,11 +6,12 @@ import Template from '../../components/shared/Template';
 import { CARD_LIST_PAGE_TITLE } from '../../constants/title';
 import { withVibration } from '../../utils/vibrate';
 import { IconButton } from '../../components/shared/Button';
+import { RouteComponentProps } from 'react-router';
 
 const EDIT_MODE_VIBRATION_TIME = 200;
 
-const CardListPage = () => {
-  const { cards } = useCards();
+const CardListPage: VFC<RouteComponentProps> = ({ history }) => {
+  const { cards, deleteCard } = useCards();
   const [isEditMode, setIsEditMode] = useState(false);
 
   let timerId: NodeJS.Timeout | null = null;
@@ -31,6 +32,12 @@ const CardListPage = () => {
     timerId = null;
   };
 
+  const onClickDeleteCard = (id: string) => {
+    if (!window.confirm('정말 삭제하시겠습니까?')) return;
+
+    deleteCard(id);
+  };
+
   return (
     <Template title={CARD_LIST_PAGE_TITLE}>
       <CardList>
@@ -44,7 +51,7 @@ const CardListPage = () => {
             onMouseUp={onTouchEnd}
           >
             {isEditMode && (
-              <IconButton backgroundImage={'/buttons/close-btn.png'} onClick={() => alert(card.id + ' 이름 삭제!')} />
+              <IconButton backgroundImage={'/buttons/close-btn.png'} onClick={() => onClickDeleteCard(card.id || '')} />
             )}
             <CreditCard
               cardBrand={card.cardBrand}
@@ -53,7 +60,7 @@ const CardListPage = () => {
               expDate={card.expDate}
             />
             {isEditMode ? (
-              <span className="nickname edit" onClick={() => alert(card.id + '이름 수정!')}>
+              <span className="nickname edit" onClick={() => history.push(`/edit/${card.id}`)}>
                 {card.nickname} <img src={process.env.PUBLIC_URL + '/images/pencil-icon.svg'} />
               </span>
             ) : (
