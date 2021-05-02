@@ -1,3 +1,9 @@
+export const PAGE = {
+  CARD_LIST: "cardList",
+  CARD_ADD: "cardAdd",
+  CARD_ADD_COMPLETION: "cardAddCompletion",
+};
+
 export const ERROR_TYPE = {
   VALIDATION: "validation",
 };
@@ -11,6 +17,7 @@ export const CARD_INFO = {
   OWNER_NAME: "ownerName",
   SECURITY_CODE: "securityCode",
   CARD_PASSWORDS: "cardPasswords",
+  NICKNAME: "nickname",
 };
 
 export const LENGTH = {
@@ -34,6 +41,10 @@ export const LENGTH = {
   CARD_PASSWORDS: {
     MIN: 1,
     MAX: 1,
+  },
+  NICKNAME: {
+    MIN: 1,
+    MAX: 10,
   },
 };
 

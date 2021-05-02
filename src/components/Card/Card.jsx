@@ -20,8 +20,7 @@ const CardInfo = props => (
   </>
 );
 
-const Card = props => {
-  const { backgroundColor, scale, isRegistered, bank, numbers, ownerName, expirationDate, onClick } = props;
+const Card = ({ backgroundColor, scale, isRegistered, bank, numbers, ownerName, expirationDate, onClick }) => {
   const cardShapeProps = { backgroundColor, scale, isRegistered, onClick };
   const cardInfoProps = { bank, numbers, ownerName, expirationDate };
 

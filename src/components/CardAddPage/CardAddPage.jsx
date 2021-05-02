@@ -11,15 +11,15 @@ import Dimmer from "../Dimmer/Dimmer";
 import BankSelector from "../BankSelector/BankSelector";
 
 const initialValidation = {
-  [CARD_INFO.CARD_NUMBERS]: true,
-  [CARD_INFO.EXPIRATION_MONTH]: true,
-  [CARD_INFO.EXPIRATION_YEAR]: true,
+  [CARD_INFO.CARD_NUMBERS]: null,
+  [CARD_INFO.EXPIRATION_MONTH]: null,
+  [CARD_INFO.EXPIRATION_YEAR]: null,
   [CARD_INFO.OWNER_NAME]: true,
-  [CARD_INFO.SECURITY_CODE]: true,
-  [CARD_INFO.CARD_PASSWORDS]: true,
+  [CARD_INFO.SECURITY_CODE]: null,
+  [CARD_INFO.CARD_PASSWORDS]: null,
 };
 
-const CardAddPage = ({ cardInfo, setCardInfo }) => {
+const CardAddPage = ({ cardInfo, setCardInfo, routeTo }) => {
   const [validation, setValidation] = useState(initialValidation);
   const [isBankSelectorVisible, setBankSelectorVisible] = useState(false);
 
@@ -55,9 +55,14 @@ const CardAddPage = ({ cardInfo, setCardInfo }) => {
     }
   };
 
+  const handleCardInfoSubmit = event => {
+    event.preventDefault();
+    routeTo();
+  };
+
   return (
     <>
-      <form className="w-full h-160 flex flex-col justify-center">
+      <form className="w-full h-160 flex flex-col justify-center" onSubmit={handleCardInfoSubmit}>
         <div className="w-full flex justify-center mb-4">
           <Card
             backgroundColor={cardInfo.backgroundColor}
@@ -73,7 +78,7 @@ const CardAddPage = ({ cardInfo, setCardInfo }) => {
           <div className="flex flex-col w-full mb-2">
             <CardNumbersInput
               cardNumbers={cardInfo.cardNumbers}
-              isValid={validation.cardNumbers}
+              isValid={validation.cardNumbers ?? true}
               onChange={handleInputChange}
             />
           </div>
@@ -81,7 +86,7 @@ const CardAddPage = ({ cardInfo, setCardInfo }) => {
             <ExpirationDateInput
               expirationMonth={cardInfo.expirationMonth}
               expirationYear={cardInfo.expirationYear}
-              isValid={validation.expirationMonth && validation.expirationYear}
+              isValid={(validation.expirationMonth && validation.expirationYear) ?? true}
               onChange={handleInputChange}
             />
           </div>
@@ -95,21 +100,23 @@ const CardAddPage = ({ cardInfo, setCardInfo }) => {
           <div className="flex flex-col w-full mb-2">
             <SecurityCodeInput
               securityCode={cardInfo.securityCode}
-              isValid={validation.securityCode}
+              isValid={validation.securityCode ?? true}
               onChange={handleInputChange}
             />
           </div>
           <div className="flex flex-col w-full">
             <CardPasswordInput
               cardPasswords={cardInfo.cardPasswords}
-              isValid={validation.cardPasswords}
+              isValid={validation.cardPasswords ?? true}
               onChange={handleInputChange}
             />
           </div>
         </div>
-        <div className="flex justify-end items-center w-full h-10">
-          <Button name="다음" />
-        </div>
+        {cardInfo.backgroundColor && cardInfo.bank && Object.values(validation).every(Boolean) && (
+          <div className="flex justify-end items-center w-full h-10">
+            <Button name="다음" type="submit" />
+          </div>
+        )}
       </form>
       {isBankSelectorVisible && (
         <>

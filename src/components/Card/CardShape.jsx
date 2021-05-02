@@ -4,9 +4,10 @@ import classNames from "classnames";
 const CardShape = ({ backgroundColor, scale, isRegistered, children, onClick }) => (
   <div
     className={classNames(
-      "rounded-md shadow-md p-3 relative cursor-pointer transform w-52 h-32",
+      "rounded-md shadow-md p-3 relative transform w-52 h-32",
       backgroundColor || "bg-custom-gray-200",
-      scale
+      scale,
+      typeof onClick === "function" && "cursor-pointer"
     )}
     onClick={onClick}
   >
