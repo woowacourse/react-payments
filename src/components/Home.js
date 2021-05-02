@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-function Home(props) {
+const Home = (props) => {
   const { cardList } = props;
 
   return (
@@ -20,7 +20,7 @@ function Home(props) {
       </ul>
     </>
   );
-}
+};
 
 Home.propTypes = {
   cardList: PropTypes.arrayOf(

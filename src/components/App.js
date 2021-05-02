@@ -7,8 +7,7 @@ import Home from "./Home";
 import { Route, Switch, useHistory, useLocation } from "react-router";
 import { QUERY_STRING_KEY } from "../constants.js";
 
-//arrow function으로 바꾸기
-function App() {
+const App = () => {
   const [cardList, setCardList] = useState([]);
   const history = useHistory();
   const location = useLocation();
@@ -83,6 +82,6 @@ function App() {
       </main>
     </div>
   );
-}
+};
 
 export default App;

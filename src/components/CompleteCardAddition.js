@@ -5,7 +5,7 @@ import { Card, Button } from "./common";
 import { CARD_DESCRIPTION, FORMAT_CHAR, URL } from "../constants";
 import { Redirect } from "react-router";
 
-function CompleteCardAddition(props) {
+const CompleteCardAddition = (props) => {
   const [cardDescription, setCardDescription] = useState("");
 
   if (!props.card) {
@@ -57,7 +57,7 @@ function CompleteCardAddition(props) {
       </form>
     </div>
   );
-}
+};
 
 CompleteCardAddition.propTypes = {
   onCardAdditionComplete: PropTypes.func.isRequired,
