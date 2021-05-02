@@ -6,7 +6,7 @@ import useMultipleInput from './useMultipleInput';
 import useVirtualNumericKeyboard from './useVirtualNumericKeyboard';
 import useMousePressTimer from './useMousePressTimer';
 
-const useCardData = process.env.REACT_APP_ENV === 'stage' ? useJsonServer : useLocalStorage;
+const useCardData = process.env.REACT_APP_ENV === 'stage' ? useLocalStorage : useJsonServer;
 
 export {
   useInput,

@@ -17,9 +17,9 @@ import {
 import {
   useInput,
   useModal,
-  useLocalStorage,
   useMultipleInput,
   useVirtualNumericKeyboard,
+  useCardData,
 } from '../../hooks';
 import { isNumeric, initArray } from '../../utils';
 import { CARD, DELETE_KEY, STORAGE_KEY, MESSAGE, REGEX, ROUTE } from '../../constants';
@@ -60,7 +60,7 @@ const CardAddForm = () => {
   const expiryDate = useInput('');
   const CVC = useInput('');
 
-  const cardList = useLocalStorage(STORAGE_KEY.CARD_LIST);
+  const cardList = useCardData(STORAGE_KEY.CARD_LIST);
 
   const cardNumbersAsNumber = cardNumbers.value.join('');
 
@@ -94,7 +94,11 @@ const CardAddForm = () => {
       cardList.setValue([]);
     }
 
-    cardList.setValue([...cardList.value, newCard]);
+    if (process.env.REACT_APP_ENV === 'stage') {
+      cardList.setValue([...cardList.value, newCard]);
+    } else {
+      cardList.addEntity(newCard);
+    }
 
     history.push({
       pathname: ROUTE.COMPLETE,

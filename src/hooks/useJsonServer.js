@@ -1,25 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import requestCardByType from '../services/requestCard';
 
 export default (entity) => {
   const [value, setValue] = useState();
 
-  const getEntity = async () => {
+  const getEntity = useCallback(async () => {
     const entities = await requestCardByType('GET', `/${entity}`);
     setValue(entities);
-  };
+  }, [entity]);
 
   const updateEntity = async (target) => {
     await requestCardByType('PATCH', `/${entity}/${target.id}`, target);
+    getEntity();
   };
 
-  const deleteEntity = async (target) => {
-    await requestCardByType('DELETE', `/${entity}/${target.id}`);
+  const addEntity = async (target) => {
+    await requestCardByType('POST', `/${entity}`, target);
+    getEntity();
+  };
+
+  const deleteEntity = async (targetId) => {
+    await requestCardByType('DELETE', `/${entity}/${targetId}`);
+    getEntity();
   };
 
   useEffect(() => {
     getEntity();
   }, [getEntity]);
 
-  return { value, setValue, getEntity, updateEntity, deleteEntity };
+  return { value, setValue, getEntity, updateEntity, addEntity, deleteEntity };
 };

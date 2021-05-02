@@ -1,4 +1,4 @@
-const BASE_URL = `http://localhost:${process.env.REACT_APP_PORT}/cards`;
+const BASE_URL = `http://localhost:${process.env.REACT_APP_JSON_SERVER_PORT}`;
 
 const initialReturnValues = {
   GET: [],
@@ -6,10 +6,17 @@ const initialReturnValues = {
   DELETE: false,
 };
 
+const headers = {
+  'Content-Type': 'application/json; charset=UTF-8',
+};
+
 const request = {
-  get: (query) => fetch(BASE_URL + query),
-  patch: (query, body) => fetch(BASE_URL + query, { method: 'PATCH', body }),
-  delete: (query) => fetch(BASE_URL + query, { method: 'DELETE' }),
+  get: (query) => fetch(BASE_URL + query, { method: 'GET', headers }),
+  patch: (query, body) =>
+    fetch(BASE_URL + query, { method: 'PATCH', headers, body: JSON.stringify(body) }),
+  post: (query, body) =>
+    fetch(BASE_URL + query, { method: 'POST', headers, body: JSON.stringify(body) }),
+  delete: (query) => fetch(BASE_URL + query, { method: 'DELETE', headers }),
 };
 
 const requestCardByType = async (type, query, body) => {
@@ -23,6 +30,10 @@ const requestCardByType = async (type, query, body) => {
         return json;
       case 'PATCH':
         res = await request.patch(query, body);
+
+        return res.ok;
+      case 'POST':
+        res = await request.post(query, body);
 
         return res.ok;
       case 'DELETE':

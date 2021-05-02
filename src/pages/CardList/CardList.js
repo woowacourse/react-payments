@@ -11,6 +11,9 @@ const CardList = () => {
   const [deleteMode, setDeleteMode] = useState(false);
 
   const cardList = useCardData(STORAGE_KEY.CARD_LIST);
+
+  console.log(cardList.value);
+
   const history = useHistory();
   const { onMouseDown, onMouseUp, clearTimer } = useMousePressTimer(2000);
 
@@ -25,9 +28,12 @@ const CardList = () => {
 
       return;
     }
-
-    const newCardList = cardList.value.filter((card) => card.id !== cardId).reverse();
-    cardList.setValue(newCardList);
+    if (process.env.REACT_APP_ENV === 'stage') {
+      const newCardList = cardList.value.filter((card) => card.id !== cardId).reverse();
+      cardList.setValue(newCardList);
+    } else {
+      cardList.deleteEntity(cardId);
+    }
   };
 
   const onClickCard = (event) => {

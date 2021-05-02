@@ -2,7 +2,7 @@ import { useHistory, useLocation, Redirect } from 'react-router-dom';
 import Styled from './CardAddComplete.styles';
 import { Card, Input, Button } from '../../components';
 import { MESSAGE, STORAGE_KEY, ROUTE } from '../../constants';
-import { useInput, useLocalStorage } from '../../hooks';
+import { useCardData, useInput } from '../../hooks';
 import { ScreenContainer } from '../../styles/common.styles';
 
 const CardAddComplete = () => {
@@ -11,7 +11,7 @@ const CardAddComplete = () => {
 
   const nickname = useInput('');
 
-  const cardList = useLocalStorage(STORAGE_KEY.CARD_LIST);
+  const cardList = useCardData(STORAGE_KEY.CARD_LIST);
 
   if (!location.state?.card) return <Redirect to={ROUTE.HOME} />;
 
@@ -32,7 +32,11 @@ const CardAddComplete = () => {
       const targetCard = newCardList.find((card) => card.id === id);
       targetCard.nickname = nickname.value;
 
-      cardList.setValue(newCardList);
+      if (process.env.REACT_APP_ENV === 'stage') {
+        cardList.setValue(newCardList);
+      } else {
+        cardList.updateEntity(targetCard);
+      }
     }
 
     history.push({
