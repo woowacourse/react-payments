@@ -4,4 +4,6 @@ import MESSAGE from './message';
 import REGEX from './regex';
 import ROUTE from './route';
 
-export { CARD, LOCAL_STORAGE_KEY, MESSAGE, REGEX, ROUTE };
+const DELETE_KEY = 'del';
+
+export { CARD, LOCAL_STORAGE_KEY, MESSAGE, REGEX, ROUTE, DELETE_KEY };

@@ -22,7 +22,7 @@ import {
   useVirtualNumericKeyboard,
 } from '../../hooks';
 import { isNumeric, initArray } from '../../utils';
-import { CARD, LOCAL_STORAGE_KEY, MESSAGE, REGEX, ROUTE } from '../../constants';
+import { CARD, DELETE_KEY, LOCAL_STORAGE_KEY, MESSAGE, REGEX, ROUTE } from '../../constants';
 
 const CardAddForm = () => {
   const history = useHistory();
@@ -111,7 +111,7 @@ const CardAddForm = () => {
 
   const handleClickCVCVirtualNumericKeyboard = (event) => {
     let newCVC = CVC.value;
-    if (event.target.textContent === 'del') {
+    if (event.target.textContent === DELETE_KEY) {
       newCVC = newCVC.slice(0, -1);
     } else {
       newCVC += event.target.textContent;
@@ -122,7 +122,7 @@ const CardAddForm = () => {
   };
 
   const handleClickPinNumberVirtualNumericKeyboard = (event) => {
-    if (event.target.textContent === 'del') {
+    if (event.target.textContent === DELETE_KEY) {
       const newDigits = [...passwordDigits.value].slice(-1);
       newDigits.push('');
       passwordDigits.setValue(newDigits);

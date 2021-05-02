@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { DELETE_KEY } from '../../constants';
 import { shuffle } from '../../utils';
 import Button from '../Button/Button';
 import Styled from './VirtualNumericKeyboard.styles';
@@ -11,7 +12,7 @@ const VirtualNumericKeyboard = ({ onClick, onBlur }) => (
       </Button>
     ))}
     <Button type="button" onClick={onClick}>
-      del
+      {DELETE_KEY}
     </Button>
   </Styled.Container>
 );
