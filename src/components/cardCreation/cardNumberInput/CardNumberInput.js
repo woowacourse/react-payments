@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { memo, useRef, useEffect, useState, useContext } from 'react';
+import { useRef, useEffect, useState, useContext } from 'react';
 import { COLOR } from '../../../constants/color';
 import { INPUT_NAME, INPUT_LENGTH } from '../../../constants/input';
 import { NUMBER_REG_EXR } from '../../../constants/regExp';
@@ -41,7 +41,7 @@ const transparentInputStyles = {
   },
 };
 
-const CardNumberInput = memo(({ isValidCardNumber }) => {
+const CardNumberInput = ({ isValidCardNumber }) => {
   const { modalType, isModalOpened, openModal, closeModal, BottomModal } = useBottomModal();
   const [currentInputName, setCurrentInputName] = useState(null);
   const {
@@ -190,7 +190,7 @@ const CardNumberInput = memo(({ isValidCardNumber }) => {
       )}
     </>
   );
-});
+};
 
 CardNumberInput.defaultProps = {
   isValidCardNumber: false,

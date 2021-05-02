@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { memo, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { COLOR } from '../../../constants/color';
 import { INPUT_LENGTH } from '../../../constants/input';
 import CardDataContext from '../../../context/CardDataContext';
@@ -16,7 +16,7 @@ const transparentInputStyles = {
   textAlign: 'center',
 };
 
-const SecurityCodeInput = memo(({ isValidSecurityCode }) => {
+const SecurityCodeInput = ({ isValidSecurityCode }) => {
   const { isModalOpened, openModal, closeModal, BottomModal } = useBottomModal();
 
   const {
@@ -63,7 +63,7 @@ const SecurityCodeInput = memo(({ isValidSecurityCode }) => {
       )}
     </>
   );
-});
+};
 
 SecurityCodeInput.defaultProps = {
   isValidSecurityCode: false,

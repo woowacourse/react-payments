@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { memo, useContext, useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { COLOR } from '../../../constants/color';
 import { INPUT_NAME, INPUT_LENGTH } from '../../../constants/input';
 import { NUMBER_REG_EXR } from '../../../constants/regExp';
@@ -17,7 +17,7 @@ const transparentInputStyles = {
   textAlign: 'center',
 };
 
-const ExpiredDateInput = memo(({ isValidCardExpiredDate }) => {
+const ExpiredDateInput = ({ isValidCardExpiredDate }) => {
   const $yearInput = useRef(null);
   const {
     cardInfo: { cardExpiredDate },
@@ -72,7 +72,7 @@ const ExpiredDateInput = memo(({ isValidCardExpiredDate }) => {
       </Styled.InputContainer>
     </div>
   );
-});
+};
 
 ExpiredDateInput.propTypes = {
   isValidCardExpiredDate: PropTypes.bool.isRequired,

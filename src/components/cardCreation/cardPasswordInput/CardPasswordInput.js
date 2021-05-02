@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { memo, useRef, useEffect, useState, useContext } from 'react';
+import { useRef, useEffect, useState, useContext } from 'react';
 import { COLOR } from '../../../constants/color';
 import { INPUT_LENGTH, INPUT_NAME } from '../../../constants/input';
 import { TransparentInput } from '../../commons/input/TransparentInput';
@@ -18,7 +18,7 @@ const transparentInputStyles = {
   textAlign: 'center',
 };
 
-const CardPasswordInput = memo(({ isValidCardPassword }) => {
+const CardPasswordInput = ({ isValidCardPassword }) => {
   const { isModalOpened, openModal, closeModal, BottomModal } = useBottomModal();
   const [currentInputName, setCurrentInputName] = useState(null);
   const {
@@ -97,7 +97,7 @@ const CardPasswordInput = memo(({ isValidCardPassword }) => {
       )}
     </>
   );
-});
+};
 
 CardPasswordInput.propTypes = {
   isValidCardPassword: PropTypes.bool.isRequired,

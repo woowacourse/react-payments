@@ -1,4 +1,4 @@
-import { memo, useContext } from 'react';
+import { useContext } from 'react';
 import { COLOR } from '../../../constants/color';
 import { INPUT_LENGTH } from '../../../constants/input';
 import { ALPHABET_REG_EXR } from '../../../constants/regExp';
@@ -10,7 +10,7 @@ const isValidInput = value => {
   return ALPHABET_REG_EXR.test(value) && value.length <= INPUT_LENGTH.CARD_OWNER;
 };
 
-const CardOwnerInput = memo(() => {
+const CardOwnerInput = () => {
   const {
     cardInfo: { cardOwner },
     setCardInfo,
@@ -40,6 +40,6 @@ const CardOwnerInput = memo(() => {
       </Styled.InputContainer>
     </div>
   );
-});
+};
 
 export default CardOwnerInput;

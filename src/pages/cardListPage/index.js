@@ -22,12 +22,7 @@ const CardListPage = ({ cardList, setCardList, setEditCardId, resetCardInfo }) =
   const handleCardDelete = async deleteId => {
     await httpClient.delete({ path: `${PATH.CARD_LIST}/${deleteId}` });
 
-    setCardList(prevState => {
-      const copiedState = [...prevState];
-      const filteredCardList = copiedState.filter(card => card.id !== deleteId);
-
-      return filteredCardList;
-    });
+    setCardList(prevState => prevState.filter(card => card.id !== deleteId));
   };
 
   useEffect(() => {
