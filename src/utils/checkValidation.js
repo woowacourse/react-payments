@@ -6,7 +6,9 @@ const validateCardNumbers = cardNumbers => {
     throw new TypeError("cardNumbers should be an array");
   }
 
-  return cardNumbers.every(number => REG_EXP.CARD_NUMBERS.test(number));
+  return cardNumbers.every(
+    cardNumber => LENGTH.CARD_NUMBER.MIN <= cardNumber.length && cardNumber.length <= LENGTH.CARD_NUMBER.MAX
+  );
 };
 
 const validateExpirationMonth = month => {

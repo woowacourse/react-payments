@@ -1,4 +1,12 @@
-import { CARD_INFO } from "./constants";
+import { CARD_INFO, LENGTH } from "./constants";
+
+const replaceOwnerName = name => {
+  if (name.length > LENGTH.OWNER_NAME.MAX) {
+    name = name.slice(LENGTH.OWNER_NAME.MIN, LENGTH.OWNER_NAME.MAX);
+  }
+
+  return name.toUpperCase();
+};
 
 const replaceValue = (inputName, value) => {
   try {
@@ -9,7 +17,7 @@ const replaceValue = (inputName, value) => {
       throw new TypeError(`${inputName} should be a string`);
     }
     if (inputName === CARD_INFO.OWNER_NAME) {
-      return value.toUpperCase();
+      return replaceOwnerName(value);
     }
 
     return value.replace(/[\D]/g, "");

@@ -5,8 +5,8 @@ import CardNumbersInput from "./CardNumbersInput";
 import ExpirationDateInput from "./ExpirationDateInput";
 import OwnerNameInput from "./OwnerNameInput";
 import SecurityCodeInput from "./SecurityCodeInput";
-import { CARD_INFO, checkValidation, replaceValue } from "../../utils";
 import CardPasswordInput from "./CardPasswordInput";
+import { CARD_INFO, checkValidation, replaceValue } from "../../utils";
 
 const initialValidation = {
   [CARD_INFO.CARD_NUMBERS]: true,
