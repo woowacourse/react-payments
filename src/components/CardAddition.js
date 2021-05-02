@@ -19,13 +19,15 @@ import {
 import { getNewId } from "../utils";
 
 const formatCardNumbers = (numbers) => {
-  const [firstValue, secondValue, ...restValues] = numbers;
-  const hiddenNumbers = restValues.map((value) =>
+  const [...firstTwoNumbers] = numbers.slice(0, 2);
+  const [...secondTwoNumbers] = numbers.slice(2);
+
+  const hiddenNumbers = secondTwoNumbers.map((value) =>
     FORMAT_CHAR.HIDDEN_NUMBER.repeat(value.length)
   );
 
-  return [firstValue, secondValue, ...hiddenNumbers]
-    .filter((value) => value !== undefined)
+  return [...firstTwoNumbers, ...hiddenNumbers]
+    .map((number) => (number ? number : ""))
     .join(FORMAT_CHAR.CARD_NUMBERS_SEPARATOR);
 };
 
