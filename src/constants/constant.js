@@ -35,9 +35,12 @@ const CARD = {
 const ERROR_MESSAGE = {
   CHOOSE_CARD: '카드 종류를 선택해주세요!',
   ONLY_POSITIVE_NUMBER: '숫자만 입력가능합니다.',
+  IS_NUMBER: '숫자는 입력이 불가능합니다.',
   MAXIMUM_CARD_NUMBER: '최대 4자리 정수만 입력가능합니다.',
   MAXIMUM_EXPIRE_DATE: '최대 2자리 정수만 입력가능합니다.',
   MAXIMUM_PASSWORD: '최대 1자리 정수만 입력가능합니다.',
+  MAXIMUM_USER: '최대 30자리까지만 입력 가능합니다.',
+  MAXIMUM_CVC: '최대 3자리 정수만 입력가능합니다.',
 };
 
 const SUCCESS_MESSAGE = {

@@ -9,7 +9,7 @@ const Button = styled.button`
   border: 0;
   width: 100%;
 
-  visibility: ${({ disabled }) => (disabled ? 'visible' : 'hidden')};
+  visibility: ${({ disable }) => (disable ? 'visible' : 'hidden')};
 `;
 
 export default Button;

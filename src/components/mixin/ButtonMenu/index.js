@@ -3,22 +3,22 @@ import PropTypes from 'prop-types';
 import Button from '../../../common/Button';
 import { ButtonMenuWrapper } from './index.styles';
 
-const ButtonMenu = ({ children, disabled }) => {
+const ButtonMenu = ({ children, disable }) => {
   return (
     <ButtonMenuWrapper>
-      {console.log(disabled)}
-      <Button disabled={disabled}>{children}</Button>
+      {console.log(disable)}
+      <Button disable={disable}>{children}</Button>
     </ButtonMenuWrapper>
   );
 };
 
 ButtonMenu.propTypes = {
   children: PropTypes.node,
-  disabled: PropTypes.bool,
+  disable: PropTypes.bool,
 };
 
 ButtonMenu.defaultTypes = {
-  disabled: false,
+  disable: false,
 };
 
 export default ButtonMenu;

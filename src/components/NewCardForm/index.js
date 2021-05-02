@@ -107,7 +107,7 @@ const NewCardForm = ({ cardInfo, setNewCardInfo, onOpenModal, setPage }) => {
         errorMessage={errorMessage.password}
         onChangeCardInput={onChangeCardInput}
       />
-      <ButtonMenu disabled={cardFormFilled}>다음</ButtonMenu>
+      <ButtonMenu disable={cardFormFilled}>다음</ButtonMenu>
     </NewCardFormWrapper>
   );
 };
