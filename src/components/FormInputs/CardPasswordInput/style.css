@@ -1,0 +1,24 @@
+.card-password-input__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0.75rem 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  color: #525252;
+}
+
+.card-password-input__title {
+  font-size: inherit;
+  margin: 0 0 8px;
+  width: 100%;
+  display: flex;
+}
+
+.card-password-input__content {
+  display: grid;
+  grid-template-columns: repeat(4, 40px);
+  align-items: flex-start;
+  column-gap: 10px;
+}
