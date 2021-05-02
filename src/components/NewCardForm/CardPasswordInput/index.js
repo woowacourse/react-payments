@@ -10,11 +10,11 @@ const CardPasswordInput = ({ password, errorMessage, onChangeCardInput }) => {
     <CardPasswordInputWrapper>
       <div className='input-label'>카드 비밀번호</div>
       <div className='input-main password-container'>
-        {Object.keys(password).map((key, index) => (
+        {Object.entries(password).map(([key, value], index) => (
           <Input
             key={index}
             type='password'
-            value={password[key]}
+            value={value}
             maxLength={INPUT.MAX_LENGTH.CARD.PASSWORD}
             min='0'
             max='9'

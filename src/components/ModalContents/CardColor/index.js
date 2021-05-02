@@ -11,11 +11,11 @@ const CardColor = ({ addCardColor }) => {
 
   return (
     <CardColorWrapper>
-      {Object.keys(CARD).map((key, index) => (
+      {Object.entries(CARD).map(([name, value], index) => (
         <CardColorItem
           key={index}
-          color={CARD[key]}
-          name={key}
+          color={value}
+          name={name}
           onClickCardColor={onClickCardColor}
         />
       ))}
