@@ -1,0 +1,142 @@
+.card-addition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-addition__form {
+  width: 100%;
+}
+
+.card-addition__form label > span {
+  display: inline-block;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.mt-standard {
+  margin-top: 20px;
+}
+
+.card-addition__number-input {
+  width: 100%;
+}
+
+.card-addition__expiration-input {
+  width: 40%;
+}
+
+.card-addition__username-input {
+  position: relative;
+  width: 100%;
+}
+
+.card-addition__username-indicator {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.card-addition__secure-code {
+  width: 35%;
+}
+
+.card-addition__tool-tip-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 2rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid #bababa;
+  color: #969696;
+  font-size: 1.3rem;
+  margin-left: 15px;
+}
+
+.card-addition__tool-tip-button > span {
+  transform: translateY(-2px);
+}
+
+.card-addition__secure-code-inner {
+  display: flex;
+  align-items: center;
+}
+
+.card-addition__password {
+  width: 100%;
+}
+
+.card-addition__password-inner {
+  display: flex;
+  align-items: center;
+}
+
+.card-addition__password-inner > input {
+  width: 48px;
+  margin-right: 10px;
+}
+
+.card-addition__dot-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+}
+
+.card-addition__dot {
+  display: inline-block;
+  width: 0.4em;
+  margin-right: 0.3rem;
+}
+
+.card-addition__dot:before {
+  display: block;
+  content: "";
+  padding-top: 100%;
+  background-color: #04c09e;
+  border-radius: 50%;
+}
+
+.card-addition__form-submit {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 80px;
+}
+
+.card-type-radio-box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 10px;
+  row-gap: 20px;
+}
+
+.card-addition__tool-tip-button {
+  position: relative;
+}
+
+.card-addition__tool-tip-button > span {
+  user-select: none;
+}
+
+.card-addition__tool-tip-button:hover {
+  color: white;
+  border-color: white;
+  background-color: #969696;
+}
+
+.card-addition__tool-tip-button:hover:after {
+  position: absolute;
+  top: -2.5rem;
+  left: 2.5rem;
+  content: "";
+  display: inline-flex;
+  width: 15rem;
+  height: 10rem;
+  background-image: url("../asset/secure-code.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}

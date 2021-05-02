@@ -1,0 +1,41 @@
+.complete-card-addition {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.complete-card-addition h2 {
+  font-weight: normal;
+  margin: 7rem 0;
+}
+
+.complete-card-addition form {
+  width: 100%;
+  height: 30vh;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.complete-card-addition input {
+  width: 65%;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #383838;
+  padding: 0.5rem 0;
+  border: none;
+  border-bottom: 1px solid #737373;
+  outline: none;
+}
+
+.complete-card-addition input::placeholder {
+  color: #737373;
+}
+
+.complete-card-addition button {
+  align-self: flex-end;
+}
