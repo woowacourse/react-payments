@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import { memo, useRef, useEffect, useState } from 'react';
+import { memo, useRef, useEffect, useState, useContext } from 'react';
 import { COLOR } from '../../../constants/color';
 import { CARD_NUMBER_INPUT } from '../../../constants/input';
+import { TargetCardIdContext } from '../../../contexts/TargetCardIdContext';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import CardSelectionModal from '../cardSelectionModal/CardSelectionModal';
 import Styled from './CardNumberInput.style';
@@ -34,6 +35,8 @@ const transparentInputStyles = {
 };
 
 const CardNumberInput = ({ cardNumber, isSelectedCardInfo, setCardNumber, isValidCardNumber, setSelectedCardInfo }) => {
+  const { state } = useContext(TargetCardIdContext);
+
   const [isModalOpened, setModalOpen] = useState(false);
 
   const $input1 = useRef(null);
@@ -83,6 +86,11 @@ const CardNumberInput = ({ cardNumber, isSelectedCardInfo, setCardNumber, isVali
       !isSelectedCardInfo
     ) {
       setModalOpen(true);
+    }
+
+    if (state.targetCardId !== '') {
+      $input1.current.disabled = false;
+      $input3.current.disabled = false;
     }
   };
 

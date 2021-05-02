@@ -22,7 +22,7 @@ const App = () => {
   const [cardList, setCardList] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getAllData = async () => {
       const snapshot = await cardListRef.get();
       let cards = [];
 
@@ -32,7 +32,7 @@ const App = () => {
       setCardList(cards);
     };
 
-    fetchData();
+    getAllData();
   }, []);
 
   return (

@@ -18,22 +18,25 @@ const transparentInputStyles = {
   color: '#383838',
 };
 
-const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, targetCardId, setCardList }) => {
-  const { actions } = useContext(TargetCardIdContext);
+const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setCardList }) => {
+  const { state, actions } = useContext(TargetCardIdContext);
 
   const [cardNickName, setCardNickName] = useState('');
   const { selectedCardInfo, cardNumber, cardOwner, cardExpiredDate } = newCardInfo;
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await cardListRef.doc(targetCardId).get();
+    const getTargetData = async () => {
+      const response = await cardListRef.doc(state.targetCardId).get();
+
+      if (!response.exists) return;
+
       const { cardNickName } = response.data();
 
       setCardNickName(cardNickName);
     };
 
-    if (targetCardId) {
-      fetchData();
+    if (state.targetCardId) {
+      getTargetData();
     }
   }, []);
 
@@ -42,15 +45,15 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, targetCardId, s
 
     const content = { ...newCardInfo, cardNickName };
 
-    const resposne = targetCardId
-      ? await cardListRef.doc(targetCardId).update(content) // 기존 정보 수정
+    const response = state.targetCardId
+      ? await cardListRef.doc(state.targetCardId).update(content) // 기존 정보 수정
       : await cardListRef.add(content); // 새로 추가
 
-    targetCardId ? alert(ALERT_MESSAGE.SUCCECC_CARD_UPDATE) : alert(ALERT_MESSAGE.SUCCECC_CARD_CREATE);
+    state.targetCardId ? alert(ALERT_MESSAGE.SUCCECC_CARD_UPDATE) : alert(ALERT_MESSAGE.SUCCECC_CARD_CREATE);
 
     setCardList(prevState => [
-      ...prevState.filter(card => card.id !== targetCardId),
-      { id: targetCardId || resposne.id, content },
+      ...prevState.filter(card => card.id !== state.targetCardId),
+      { id: state.targetCardId || response.id, content },
     ]);
     actions.setTargetCardId('');
     setCurrentPage(PAGE.CARD_LIST);

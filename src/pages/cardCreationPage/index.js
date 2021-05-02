@@ -48,7 +48,7 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
   const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: COLOR.LIGHT_GRAY });
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getTargetData = async () => {
       const response = await cardListRef.doc(state.targetCardId).get();
       const { cardNumber, cardExpiredDate, cardOwner, securityCode, cardPassword, selectedCardInfo } = response.data();
 
@@ -61,7 +61,7 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
     };
 
     if (state.targetCardId) {
-      fetchData();
+      getTargetData();
     }
   }, []);
 
