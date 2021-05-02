@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { ERROR_TYPE, throwError } from "../../../@shared/utils";
@@ -39,21 +39,15 @@ const CardAddForm = ({ addCardInfo }) => {
   const [isToolTipVisible, setToolTipVisible] = useState(false);
   const [passwords, setPasswords] = useState(Array(2).fill(""));
   const [isPasswordValid, setPasswordValid] = useState(true);
-  const isMountedRef = useRef(false);
-
-  useEffect(() => {
-    isMountedRef.current = true;
-  }, []);
 
   const isNextButtonVisible = [
-    isMountedRef.current,
-    bank,
-    backgroundColor,
-    isNumberInfosValid,
-    isExpirationDateValid,
+    bank !== "",
+    backgroundColor !== "",
+    numberInfos.every(({ value }) => value !== "") && isNumberInfosValid,
+    expirationDate !== "" && isExpirationDateValid,
     isOwnerNameValid,
-    isSecurityCodeValid,
-    isPasswordValid,
+    securityCode !== "" && isSecurityCodeValid,
+    passwords.every(Boolean) && isPasswordValid,
   ].every(Boolean);
 
   const handleCardClick = () => {
@@ -231,10 +225,25 @@ const CardAddForm = ({ addCardInfo }) => {
     }
   };
 
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    addCardInfo({
+      bank,
+      backgroundColor,
+      numberInfos,
+      expirationDate,
+      ownerName,
+      securityCode,
+      passwords,
+      isRegistered: true,
+    });
+  };
+
   return (
     <>
       <Header hasBackButton title="카드 추가" />
-      <form className="flex flex-col justify-between w-full h-full">
+      <form className="flex flex-col justify-between w-full h-full" onSubmit={handleSubmit}>
         <div>
           <div className="flex justify-center mb-4 w-full">
             <Card
@@ -391,22 +400,7 @@ const CardAddForm = ({ addCardInfo }) => {
         </div>
         {isNextButtonVisible && (
           <div className="flex justify-end">
-            <Button
-              name="다음"
-              className="h-10"
-              onClick={() => {
-                addCardInfo({
-                  bank,
-                  backgroundColor,
-                  numberInfos,
-                  expirationDate,
-                  ownerName,
-                  securityCode,
-                  passwords,
-                  isRegistered: true,
-                });
-              }}
-            />
+            <Button type="submit" name="다음" className="h-10" />
           </div>
         )}
       </form>
