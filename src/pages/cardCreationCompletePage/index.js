@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { firestore } from '../../firebase';
 import Styled from './style';
 import { CreditCard, CARD_SIZE } from '../../components/commons/card/CreditCard';
@@ -8,6 +8,7 @@ import { Button } from '../../components/commons/button/Button';
 import { PAGE } from '../../constants/page';
 import { COLOR } from '../../constants/color';
 import { ALERT_MESSAGE } from '../../constants/message';
+import { TargetCardIdContext } from '../../contexts/TargetCardIdContext';
 
 const cardListRef = firestore.collection('cardList');
 
@@ -17,7 +18,9 @@ const transparentInputStyles = {
   color: '#383838',
 };
 
-const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, targetCardId, setCardList, setTargetCardId }) => {
+const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, targetCardId, setCardList }) => {
+  const { actions } = useContext(TargetCardIdContext);
+
   const [cardNickName, setCardNickName] = useState('');
   const { selectedCardInfo, cardNumber, cardOwner, cardExpiredDate } = newCardInfo;
 
@@ -49,7 +52,7 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, targetCardId, s
       ...prevState.filter(card => card.id !== targetCardId),
       { id: targetCardId || resposne.id, content },
     ]);
-    setTargetCardId('');
+    actions.setTargetCardId('');
     setCurrentPage(PAGE.CARD_LIST);
   };
 

@@ -6,6 +6,8 @@ import { Card, CARD_SIZE } from '../../components/commons/card/Card';
 import Styled from './style';
 import { PAGE } from '../../constants/page';
 import { CreditCard } from '../../components/commons/card/CreditCard';
+import { useContext } from 'react';
+import { TargetCardIdContext } from '../../contexts/TargetCardIdContext';
 
 const cardListRef = firestore.collection('cardList');
 
@@ -18,9 +20,11 @@ const buttonStyles = {
   color: '#525252',
 };
 
-const CardListPage = ({ setCurrentPage, cardList, setTargetCardId, setCardList }) => {
+const CardListPage = ({ setCurrentPage, cardList, setCardList }) => {
+  const { actions } = useContext(TargetCardIdContext);
+
   const handleCardUpdate = id => {
-    setTargetCardId(id);
+    actions.setTargetCardId(id);
     setCurrentPage(PAGE.CARD_CREATION);
   };
 
@@ -72,7 +76,6 @@ const CardListPage = ({ setCurrentPage, cardList, setTargetCardId, setCardList }
 };
 
 CardListPage.propTypes = {
-  setTargetCardId: PropTypes.func.isRequired,
   setCurrentPage: PropTypes.func.isRequired,
   setCardList: PropTypes.func.isRequired,
 };

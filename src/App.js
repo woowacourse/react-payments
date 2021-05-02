@@ -4,6 +4,7 @@ import CardCreationPage from './pages/cardCreationPage';
 import CardListPage from './pages/cardListPage';
 import CardCreationCompletePage from './pages/cardCreationCompletePage';
 import { PAGE } from './constants/page';
+import { TargetCardIdProvider } from './contexts/TargetCardIdContext';
 
 const cardListRef = firestore.collection('cardList');
 
@@ -19,7 +20,6 @@ const App = () => {
     cardPassword: {},
   });
   const [cardList, setCardList] = useState([]);
-  const [targetCardId, setTargetCardId] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,33 +36,17 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <TargetCardIdProvider>
       {currentPage === PAGE.CARD_LIST && (
-        <CardListPage
-          setCurrentPage={setCurrentPage}
-          cardList={cardList}
-          setTargetCardId={setTargetCardId}
-          setCardList={setCardList}
-        />
+        <CardListPage setCurrentPage={setCurrentPage} cardList={cardList} setCardList={setCardList} />
       )}
       {currentPage === PAGE.CARD_CREATION && (
-        <CardCreationPage
-          setCurrentPage={setCurrentPage}
-          targetCardId={targetCardId}
-          setNewCardInfo={setNewCardInfo}
-          setTargetCardId={setTargetCardId}
-        />
+        <CardCreationPage setCurrentPage={setCurrentPage} setNewCardInfo={setNewCardInfo} />
       )}
       {currentPage === PAGE.CARD_CREATION_COMPLETE && (
-        <CardCreationCompletePage
-          setCurrentPage={setCurrentPage}
-          newCardInfo={newCardInfo}
-          targetCardId={targetCardId}
-          setCardList={setCardList}
-          setTargetCardId={setTargetCardId}
-        />
+        <CardCreationCompletePage setCurrentPage={setCurrentPage} newCardInfo={newCardInfo} setCardList={setCardList} />
       )}
-    </>
+    </TargetCardIdProvider>
   );
 };
 
