@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Card } from '../../components';
 import { ROUTE, MESSAGE, STORAGE_KEY } from '../../constants';
-import { useCardData, useMousePressTimer } from '../../hooks';
+import { useServerAPI, useMousePressTimer } from '../../hooks';
 import { ScreenContainer } from '../../styles/common.styles';
 
 import Styled from './CardList.styles';
@@ -10,9 +10,7 @@ import Styled from './CardList.styles';
 const CardList = () => {
   const [deleteMode, setDeleteMode] = useState(false);
 
-  const cardList = useCardData(STORAGE_KEY.CARD_LIST);
-
-  console.log(cardList.value);
+  const cardList = useServerAPI(STORAGE_KEY.CARD_LIST);
 
   const history = useHistory();
   const { onMouseDown, onMouseUp, clearTimer } = useMousePressTimer(2000);
@@ -28,12 +26,8 @@ const CardList = () => {
 
       return;
     }
-    if (process.env.REACT_APP_ENV === 'stage') {
-      const newCardList = cardList.value.filter((card) => card.id !== cardId).reverse();
-      cardList.setValue(newCardList);
-    } else {
-      cardList.deleteEntity(cardId);
-    }
+
+    cardList.deleteEntity(cardId);
   };
 
   const onClickCard = (event) => {

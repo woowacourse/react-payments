@@ -19,7 +19,7 @@ import {
   useModal,
   useMultipleInput,
   useVirtualNumericKeyboard,
-  useCardData,
+  useServerAPI,
 } from '../../hooks';
 import { isNumeric, initArray } from '../../utils';
 import { CARD, DELETE_KEY, STORAGE_KEY, MESSAGE, REGEX, ROUTE } from '../../constants';
@@ -60,7 +60,7 @@ const CardAddForm = () => {
   const expiryDate = useInput('');
   const CVC = useInput('');
 
-  const cardList = useCardData(STORAGE_KEY.CARD_LIST);
+  const cardList = useServerAPI(STORAGE_KEY.CARD_LIST);
 
   const cardNumbersAsNumber = cardNumbers.value.join('');
 
@@ -94,11 +94,7 @@ const CardAddForm = () => {
       cardList.setValue([]);
     }
 
-    if (process.env.REACT_APP_ENV === 'stage') {
-      cardList.setValue([...cardList.value, newCard]);
-    } else {
-      cardList.addEntity(newCard);
-    }
+    cardList.addEntity(newCard);
 
     history.push({
       pathname: ROUTE.COMPLETE,

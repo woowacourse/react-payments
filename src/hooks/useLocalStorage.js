@@ -30,5 +30,19 @@ export default (key, defaultValue = '') => {
     }
   };
 
-  return { value: parsedValue, setValue };
+  const addEntity = (value) => {
+    setValue([...parsedValue, value]);
+  };
+
+  const updateEntity = (value) => {
+    const newValueList = parsedValue.filter((_value) => _value.id !== value.id).reverse();
+    setValue([...newValueList, value]);
+  };
+
+  const deleteEntity = (id) => {
+    const newValueList = parsedValue.filter((_value) => _value.id !== id).reverse();
+    setValue(newValueList);
+  };
+
+  return { value: parsedValue, setValue, addEntity, updateEntity, deleteEntity };
 };

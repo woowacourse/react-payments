@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import requestCardByType from '../services/requestCard';
+import requestCardByType from '../api/requestCard';
 
 export default (entity) => {
   const [value, setValue] = useState();
