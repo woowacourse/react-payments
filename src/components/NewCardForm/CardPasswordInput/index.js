@@ -13,6 +13,7 @@ const CardPasswordInput = ({ password, errorMessage, onChangeCardInput }) => {
         {Object.entries(password).map(([key, value], index) => (
           <Input
             key={index}
+            label='카드 비밀번호'
             type='password'
             value={value}
             maxLength={INPUT.MAX_LENGTH.CARD.PASSWORD}

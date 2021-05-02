@@ -15,6 +15,7 @@ const CardExpireDateInput = ({
       <div className='input-container expire-date-container'>
         <Input
           type='number'
+          label='만료 월'
           placeholder='MM'
           name={INPUT.NAME.CARD.EXPIRE_DATE}
           data-detail='month'
@@ -30,6 +31,7 @@ const CardExpireDateInput = ({
         <span className='input-separator gray'>/</span>
         <Input
           type='number'
+          label='만료 년'
           placeholder='YY'
           name={INPUT.NAME.CARD.EXPIRE_DATE}
           data-detail='year'

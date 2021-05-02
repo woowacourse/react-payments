@@ -5,7 +5,7 @@ import { CVCHelpWrapper } from './index.styles';
 const CVCHelp = () => {
   return (
     <CVCHelpWrapper>
-      <img className='cvc-help-img' src={cvcImage} />
+      <img className='cvc-help-img' alt='cvc 설명 이미지' src={cvcImage} />
     </CVCHelpWrapper>
   );
 };

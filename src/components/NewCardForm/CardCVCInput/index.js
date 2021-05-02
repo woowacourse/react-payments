@@ -20,6 +20,7 @@ const CardCVCInput = ({
       <div className='input-main cvc-container'>
         <Input
           type='password'
+          label='보안 코드'
           name={INPUT.NAME.CARD.CVC}
           minLength={INPUT.MAX_LENGTH.CARD.CVC}
           maxLength={INPUT.MAX_LENGTH.CARD.CVC}

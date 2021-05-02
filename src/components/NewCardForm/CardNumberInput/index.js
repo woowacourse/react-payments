@@ -11,6 +11,7 @@ const CardNumberInput = ({ numbers, errorMessage, onChangeCardInput }) => {
       <div className='input-container'>
         <Input
           type='number'
+          label='카드 번호 첫번째'
           name={INPUT.NAME.CARD.NUMBERS}
           data-detail='first'
           value={numbers.first}
@@ -27,6 +28,7 @@ const CardNumberInput = ({ numbers, errorMessage, onChangeCardInput }) => {
         </span>
         <Input
           type='number'
+          label='카드 번호 두번째'
           name={INPUT.NAME.CARD.NUMBERS}
           data-detail='second'
           value={numbers.second}
@@ -43,6 +45,7 @@ const CardNumberInput = ({ numbers, errorMessage, onChangeCardInput }) => {
         </span>
         <Input
           type='password'
+          label='카드 번호 세번째'
           name={INPUT.NAME.CARD.NUMBERS}
           data-detail='third'
           value={numbers.third}
@@ -57,6 +60,7 @@ const CardNumberInput = ({ numbers, errorMessage, onChangeCardInput }) => {
         </span>
         <Input
           type='password'
+          label='카드 번호 네번째'
           name={INPUT.NAME.CARD.NUMBERS}
           data-detail='fourth'
           value={numbers.fourth}

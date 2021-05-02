@@ -33,6 +33,7 @@ const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
       <div className='form__column'>
         <Input
           nickNameInput
+          label='카드 별칭'
           value={newCardInfo.cardNickName}
           onChange={onChangeNickNameInput}
           placeholder='카드 별칭을 입력해주세요.'
