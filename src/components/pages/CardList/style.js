@@ -12,6 +12,8 @@ const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
+
   &: not(: last-child) {
     margin-bottom: 26px;
   }

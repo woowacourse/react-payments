@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../shared/Card';
 import Button from '../../shared/Button';
@@ -7,27 +7,44 @@ import * as Style from './style';
 
 const CardCompletion = (props) => {
   const {
-    cardData: { bankId, cardNumbers, expirationDate, ownerName },
-    handleGoNext,
+    cardData: { bankId, cardNumbers, expirationDate, ownerName, cardAlias },
+    handleConfirmPage,
+    isEditing,
+    cardId,
   } = props;
 
-  const [cardAlias, setCardAlias] = useState('');
+  const [aliasInput, setAliasInput] = useState('');
 
-  const handleRegisterCard = (event) => {
-    event.preventDefault();
-
-    firestore.collection('cards').add({ bankId, cardNumbers, expirationDate, ownerName, cardAlias });
-    handleGoNext();
-  };
+  const pageTitle = isEditing ? '카드 별칭을 수정해주세요' : '카드등록이 완료되었습니다.';
 
   const handleChangeAlias = (event) => {
     const value = event.target.value;
-    setCardAlias(value);
+    setAliasInput(value);
   };
+
+  const handleRegisterCard = async (event) => {
+    event.preventDefault();
+
+    if (isEditing) {
+      await updateCardAlias();
+    } else {
+      firestore.collection('cards').add({ bankId, cardNumbers, expirationDate, ownerName, cardAlias });
+    }
+
+    handleConfirmPage();
+  };
+
+  const updateCardAlias = async () => {
+    await firestore.collection('cards').doc(cardId).update({ cardAlias: aliasInput });
+  };
+
+  useEffect(() => {
+    if (isEditing) setAliasInput(cardAlias);
+  }, []);
 
   return (
     <Style.Root>
-      <Style.Title>카드등록이 완료되었습니다.</Style.Title>
+      <Style.Title>{pageTitle}</Style.Title>
       <Style.CardWrapper>
         <Card
           width="293px"
@@ -40,7 +57,7 @@ const CardCompletion = (props) => {
         />
       </Style.CardWrapper>
       <form id="alias-form" onSubmit={handleRegisterCard}>
-        <Style.AliasInput aria-label="card-alias-input" value={cardAlias} onChange={handleChangeAlias} />
+        <Style.AliasInput aria-label="card-alias-input" value={aliasInput} onChange={handleChangeAlias} />
         <Button type="submit" formId="alias-form" text="확인" />
       </form>
     </Style.Root>
@@ -54,7 +71,13 @@ CardCompletion.propTypes = {
     expirationDate: PropTypes.object.isRequired,
     ownerName: PropTypes.string.isRequired,
   }),
-  handleGoNext: PropTypes.func.isRequired,
+  handleConfirmPage: PropTypes.func.isRequired,
+  isEditing: PropTypes.bool.isRequired,
+  cardId: PropTypes.string,
+};
+
+CardCompletion.defaultProps = {
+  isEditing: false,
 };
 
 export default CardCompletion;

@@ -6,7 +6,7 @@ import * as Style from './style';
 
 const CardList = (props) => {
   const [cards, setCards] = useState([]);
-  const { handleAddCard } = props;
+  const { handleAddCard, handleGoUpdate } = props;
 
   useEffect(() => {
     let cardsData = [];
@@ -19,10 +19,16 @@ const CardList = (props) => {
     fetchData();
   }, []);
 
+  const handleUpdateCardAlias = (event) => {
+    const cardId = event.currentTarget.dataset.cardId;
+
+    handleGoUpdate(cardId);
+  };
+
   return (
     <Style.Root>
       {cards.map((card) => (
-        <Style.CardWrapper key={card.id}>
+        <Style.CardWrapper key={card.id} data-card-id={card.id} onClick={handleUpdateCardAlias}>
           <Card
             width="208px"
             height="130px"
@@ -31,7 +37,7 @@ const CardList = (props) => {
             ownerName={card.data.ownerName}
             expirationDate={card.data.expirationDate}
           />
-          <Style.CardAlias>{card.data.alias}</Style.CardAlias>
+          <Style.CardAlias>{card.data.cardAlias}</Style.CardAlias>
         </Style.CardWrapper>
       ))}
       <Style.CardAddButton onClick={handleAddCard}>+</Style.CardAddButton>
@@ -41,6 +47,7 @@ const CardList = (props) => {
 
 CardList.propTypes = {
   handleAddCard: PropTypes.func.isRequired,
+  handleGoUpdate: PropTypes.func.isRequired,
 };
 
 export default CardList;

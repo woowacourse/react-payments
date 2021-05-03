@@ -13,7 +13,6 @@ const CardRegister = (props) => {
   const { MONTH, YEAR } = DATE_TYPE;
 
   const [isSelectorOpened, setSelectorOpened] = useState(false);
-  // const [cardColor, setCardColor] = useState(PALETTE.EMPTY_CARD_GRAY);
   const [cardNumbers, setCardNumbers] = useState({ [FIRST]: '', [SECOND]: '', [THIRD]: '', [FOURTH]: '' });
   const [bankId, setBankId] = useState('');
   const [expirationDate, setExpirationDate] = useState({ [MONTH]: '', [YEAR]: '' });
