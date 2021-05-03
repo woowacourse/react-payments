@@ -1,4 +1,4 @@
-import { createRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { Button, Form, Input } from '../../../../components';
 import { handleNicknameInputChange, handleNicknameSubmit } from './handler';
 
@@ -6,7 +6,7 @@ export const CardNicknameForm = (props) => {
   const { setRoute, cardInfo, setCardInfo, initialNickname, addCardInfoToList } = props;
   const setNickname = (nickname) => setCardInfo((prevState) => ({ ...prevState, nickname }));
   const { nickname } = cardInfo;
-  const ref = createRef();
+  const ref = useRef();
 
   useEffect(() => {
     ref.current?.focus();

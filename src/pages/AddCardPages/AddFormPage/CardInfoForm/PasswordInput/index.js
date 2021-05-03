@@ -1,11 +1,11 @@
-import { createRef, forwardRef } from 'react';
+import { useRef, forwardRef } from 'react';
 import { Input, Label } from '../../../../../components';
 import { handlePasswordInputChange } from './handler';
 import { FIRST, SECOND } from '../../../../../constants';
 
 export const PasswordInput = forwardRef((props, firstRef) => {
   const { password, setPassword } = props;
-  const secondRef = createRef();
+  const secondRef = useRef();
 
   return (
     <>

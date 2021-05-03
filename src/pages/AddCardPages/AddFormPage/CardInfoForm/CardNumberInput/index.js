@@ -1,14 +1,14 @@
-import { createRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { Container, Input, Label, Text } from '../../../../../components';
 import { handleBlockInvalidChar, handleCardNumberInputChange } from './handler';
 import { CARD_NUMBER_UNIT_LENGTH } from '../../../../../constants';
 
 export const CardNumberInput = (props) => {
   const { number, setNumber, setCompany, setIsModalOpen, expirationDateInputRef } = props;
-  const firstRef = createRef();
-  const secondRef = createRef();
-  const thirdRef = createRef();
-  const fourthRef = createRef();
+  const firstRef = useRef();
+  const secondRef = useRef();
+  const thirdRef = useRef();
+  const fourthRef = useRef();
   const nextRef = {
     first: secondRef,
     second: thirdRef,

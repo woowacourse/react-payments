@@ -1,4 +1,4 @@
-import { createRef } from 'react';
+import { useRef } from 'react';
 import { Button, Form } from '../../../../components';
 import { CardNumberInput } from './CardNumberInput';
 import { ExpirationDateInput } from './ExpirationDateInput';
@@ -18,9 +18,9 @@ export const CardInfoForm = (props) => {
   const setIsOwnerNameFilled = (isOwnerNameFilled) => setCardInfo((prevState) => ({ ...prevState, isOwnerNameFilled }));
   const setSecurityCode = (securityCode) => setCardInfo((prevState) => ({ ...prevState, securityCode }));
   const setPassword = (password) => setCardInfo((prevState) => ({ ...prevState, password }));
-  const expirationDateInputRef = createRef();
-  const ownerNameInputRef = createRef();
-  const passwordInputRef = createRef();
+  const expirationDateInputRef = useRef();
+  const ownerNameInputRef = useRef();
+  const passwordInputRef = useRef();
 
   return (
     <Form className="CardInfoForm">
