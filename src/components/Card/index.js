@@ -4,9 +4,9 @@ import '../../index.css';
 import { CARD } from '../../constants';
 
 export default function Card({
-  cardCompanyName,
-  cardColor,
-  cardNumber,
+  companyName,
+  color,
+  number,
   userName,
   expirationDate,
   size,
@@ -14,10 +14,10 @@ export default function Card({
 }) {
   return (
     <div
-      className={`card-${size || 'normal'}`}
-      style={{ ...style, backgroundColor: cardColor || '#d2d2d2' }}
+      className={`card-${size ?? 'normal'}`}
+      style={{ ...style, backgroundColor: color ?? '#d2d2d2' }}
     >
-      <div className="card__company-name">{cardCompanyName}</div>
+      <div className="card__company-name">{companyName}</div>
       <div className="card__chip">
         <svg viewBox="0 0 60 39">
           <path
@@ -27,12 +27,12 @@ export default function Card({
         </svg>
       </div>
       <div className="card__card-number-container">
-        {cardNumber &&
+        {number &&
           Array.from({ length: CARD.SERIAL_NUMBER_LENGTH }).map((_, index) => {
             if (index < CARD.SERIAL_ID_CODE_LENGTH) {
               return (
                 <div key={index} className="card__card-number">
-                  {cardNumber.charAt(index)}
+                  {number.charAt(index)}
                 </div>
               );
             }
@@ -40,11 +40,9 @@ export default function Card({
             return (
               <div
                 key={index}
-                className={[
-                  'card__card-number',
-                  'dot',
-                  cardNumber.charAt(index) ? '' : 'hidden',
-                ].join(' ')}
+                className={['card__card-number', 'dot', number.charAt(index) ? '' : 'hidden'].join(
+                  ' '
+                )}
               ></div>
             );
           })}

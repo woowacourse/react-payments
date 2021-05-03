@@ -1,9 +1,18 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';
 import { CARD, CARD_COMPANY, ERROR_MESSAGE } from '../../constants';
-import { Icon, Card, Input, Header, TextButton, PasswordInput } from '../../components';
+import {
+  Icon,
+  Card,
+  Input,
+  Header,
+  TextButton,
+  InputWithCounter,
+  CardPasswordInput,
+} from '../../components';
 import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/formatter';
 import { isValidSerialNumber, isValidDateFormat, isValidUserName } from './validator';
 import './style.css';
+import { useHistory } from 'react-router-dom';
 
 export default function AddCardForm({
   serialNumber,
@@ -19,12 +28,14 @@ export default function AddCardForm({
   password,
   setPassword,
   onSetModalContents,
-  setPage,
 }) {
+  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState('');
   const [expirationDateErrorMessage, setExpirationDateErrorMessage] = useState('');
   const [userNameErrorMessage, setUserNameErrorMessage] = useState('');
 
   const serialNumberInputElement = useRef(null);
+
+  const history = useHistory();
 
   const isFormCompleted = useMemo(() => {
     return (
@@ -40,6 +51,15 @@ export default function AddCardForm({
   useEffect(() => {
     serialNumberInputElement.current.focus();
   }, [cardCompany]);
+
+  useEffect(() => {
+    setSerialNumber('');
+    setCardCompany('');
+    setExpirationDate('');
+    setUserName('');
+    setSecurityCode('');
+    setPassword({ first: '', second: '' });
+  }, []);
 
   const onSetPassword = (key, value) => {
     if (isNaN(value)) return;
@@ -76,6 +96,9 @@ export default function AddCardForm({
     insertText: (serialIndex, insertKey) => {
       return serialNumber.slice(0, serialIndex) + insertKey + serialNumber.slice(serialIndex);
     },
+    insertFromPaste: () => {
+      throw new Error('붙여 넣기는 할 수 없습니다.');
+    },
   };
 
   const onSerialNumberInputChange = (event) => {
@@ -92,50 +115,60 @@ export default function AddCardForm({
     const offset = getOffset(inputType, selectionStart);
     const currentLocation = selectionStart + offset;
 
-    const serialIndex =
-      currentLocation -
-      Math.floor(currentLocation / (CARD.SERIAL_NUMBER_UNIT_LENGTH + 1)) -
-      offsetByInputType[inputType];
-    const currentSerialNumber = getCurrentSerialNumber[inputType](serialIndex, inputKey);
+    try {
+      const serialIndex =
+        currentLocation -
+        Math.floor(currentLocation / (CARD.SERIAL_NUMBER_UNIT_LENGTH + 1)) -
+        offsetByInputType[inputType];
+      const currentSerialNumber = getCurrentSerialNumber[inputType](serialIndex, inputKey);
 
-    setSerialNumber(currentSerialNumber);
-    event.target.value = cardSerialNumberFormatter(currentSerialNumber);
-    event.target.setSelectionRange(currentLocation, currentLocation);
+      const value = cardSerialNumberFormatter(currentSerialNumber);
 
-    if (inputValue.length === CARD.SERIAL_ID_CODE_LENGTH) {
-      serialNumberInputElement.current.blur();
-      onSetModalContents('cardSelection');
+      event.target.value = value;
+      setSerialNumber(currentSerialNumber);
+      setCardNumberErrorMessage('');
+
+      event.target.setSelectionRange(currentLocation, currentLocation);
+
+      if (inputValue.length === CARD.SERIAL_ID_CODE_LENGTH) {
+        serialNumberInputElement.current.blur();
+        onSetModalContents('cardSelection');
+      }
+
+      if (cardCompany && inputValue.length < CARD.SERIAL_ID_CODE_LENGTH) {
+        setCardCompany('');
+      }
+    } catch (error) {
+      setSerialNumber('');
+      event.target.value = '';
+      setCardNumberErrorMessage(error.message);
     }
+  };
 
-    if (cardCompany && inputValue.length < CARD.SERIAL_ID_CODE_LENGTH) {
-      setCardCompany('');
-    }
+  const onCardFormSubmit = (event) => {
+    event.preventDefault();
+
+    if (!isFormCompleted) return;
+
+    history.push('/addCardComplete');
   };
 
   return (
     <div className="add-card-form__container">
       <Header title="카드추가" />
-      <form
-        className="add-card-form"
-        onSubmit={(event) => {
-          event.preventDefault();
-
-          if (!isFormCompleted) return;
-
-          setPage('addCardComplete');
-        }}
-      >
+      <form className="add-card-form" onSubmit={onCardFormSubmit}>
         <div className="card-preview">
           <Card
             userName={userName}
-            cardCompanyName={CARD_COMPANY[cardCompany]?.NAME}
-            cardColor={CARD_COMPANY[cardCompany]?.COLOR}
-            cardNumber={serialNumber}
-            expirationDate={MMYYDateFormatter(expirationDate)}
+            companyName={CARD_COMPANY[cardCompany]?.NAME}
+            color={CARD_COMPANY[cardCompany]?.COLOR}
+            number={serialNumber}
+            expirationDate={expirationDate}
           />
         </div>
 
         <Input
+          id="card-number"
           type="tel"
           label="카드번호"
           inputStyle={{ width: '100%' }}
@@ -147,33 +180,40 @@ export default function AddCardForm({
               onSetModalContents('cardSelection');
             }
           }}
-          innerRef={serialNumberInputElement}
+          forwardRef={serialNumberInputElement}
           inputMode="numeric"
           textAlign="center"
+          errorMessage={cardNumberErrorMessage}
         />
 
         <Input
+          id="expiration-date"
           type="text"
           label="만료일"
           inputStyle={{ width: '7rem' }}
           placeholder="MM/YY"
           textAlign="center"
           maxLength="5"
-          value={MMYYDateFormatter(expirationDate)}
+          value={expirationDate}
           onChange={(event) => {
-            const expirationDate = event.target.value.replace('/', '');
+            const inputValue = event.target.value.replace('/', '');
+            try {
+              if (isNaN(inputValue)) throw Error('숫자만 입력가능합니다.');
 
-            if (isNaN(expirationDate)) return;
+              const formattedDate = MMYYDateFormatter(inputValue);
+              setExpirationDate(formattedDate);
 
-            setExpirationDate(expirationDate);
+              if (formattedDate.length === CARD.EXPIRATION_DATE_LENGTH) {
+                if (isValidDateFormat(formattedDate)) {
+                  setExpirationDateErrorMessage('');
+                  return;
+                }
 
-            if (expirationDate.length === CARD.EXPIRATION_DATE_LENGTH) {
-              if (isValidDateFormat(expirationDate)) {
-                setExpirationDateErrorMessage('');
-                return;
+                setExpirationDateErrorMessage(ERROR_MESSAGE.INVALID_DATE_FORMAT);
               }
-
-              setExpirationDateErrorMessage(ERROR_MESSAGE.INVALID_DATE_FORMAT);
+            } catch (error) {
+              setExpirationDate('');
+              setExpirationDateErrorMessage(error.message);
             }
           }}
           onClick={() => {
@@ -183,7 +223,8 @@ export default function AddCardForm({
           errorMessage={expirationDateErrorMessage}
         />
 
-        <Input
+        <InputWithCounter
+          id="user-name"
           type="text"
           inputStyle={{ width: '100%' }}
           label="카드 소유자 이름(선택)"
@@ -206,6 +247,7 @@ export default function AddCardForm({
         />
 
         <Input
+          id="card-security-code"
           type="password"
           inputStyle={{ width: '5rem' }}
           label="보안코드(CVC/CVV)"
@@ -232,10 +274,10 @@ export default function AddCardForm({
           </button>
         </Input>
 
-        <PasswordInput password={password} onSetPassword={onSetPassword}></PasswordInput>
+        <CardPasswordInput password={password} onSetPassword={onSetPassword}></CardPasswordInput>
         {isFormCompleted && (
           <div className="bottom-right-button">
-            <TextButton text="다음" />
+            <TextButton>다음</TextButton>
           </div>
         )}
       </form>

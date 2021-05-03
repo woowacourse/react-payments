@@ -30,5 +30,4 @@ Default.args = {
   expirationDate: '0911',
   cardNickName: '리틀로이드',
   setCardNickName: () => {},
-  setPage: () => {},
 };

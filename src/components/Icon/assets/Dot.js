@@ -1,13 +1,13 @@
 import React from 'react';
 
-export default function Dot({ size = '16px', color = '#616161', style }) {
+export default function Dot({ size, color, style }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 16 16"
-      width={size}
-      height={size}
-      fill={color}
+      width={size ?? '16px'}
+      height={size ?? '16px'}
+      fill={color ?? '#616161'}
       style={style}
     >
       <title>Icon/dot</title>

@@ -2,12 +2,12 @@ import React from 'react';
 import './style.css';
 
 export default function Input({
+  id,
   width,
   fontColor,
   label,
   textAlign,
-  letterCounter,
-  innerRef,
+  forwardRef,
   ariaLabelledby,
   errorMessage,
   inputStyle,
@@ -16,24 +16,22 @@ export default function Input({
 }) {
   return (
     <div className="basic-input">
-      {(label || letterCounter) && (
-        <div className="basic-input__label">
-          {label && <label className="label-text">{label}</label>}
-          {letterCounter && (
-            <span className="letter-counter">{`${letterCounter.current}/${letterCounter.max}`}</span>
-          )}
-        </div>
+      {label && (
+        <label className="basic-input__label" htmlFor={id}>
+          {label}
+        </label>
       )}
       <div className={['d-flex', 'items-center'].join(' ')}>
         <input
+          id={id}
           className={[
             `basic-input__input`,
             errorMessage ? 'error' : '',
             textAlign ? `text-${textAlign}` : '',
           ].join(' ')}
           style={inputStyle}
-          ref={innerRef}
-          aria-labelledby={ariaLabelledby}
+          ref={forwardRef}
+          aria-labelledby={ariaLabelledby ?? label}
           {...props}
         />
         {children}
