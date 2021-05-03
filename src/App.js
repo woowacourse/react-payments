@@ -50,10 +50,20 @@ const App = () => {
     setCurrentPage(PAGES.EDITING);
   };
 
+  const handleGoBack = () => {
+    if (currentPage === PAGES.REGISTER) {
+      setCurrentPage(PAGES.LIST);
+    }
+  };
+
   return (
     <>
       <GlobalStyle />
-      <PageHost navigationTitle={currentPage.title} hasBackButton={currentPage.hasBackButton}>
+      <PageHost
+        navigationTitle={currentPage.title}
+        hasBackButton={currentPage.hasBackButton}
+        handleGoBack={handleGoBack}
+      >
         {currentPage === PAGES.LIST && <CardList handleAddCard={handleAddCard} handleGoUpdate={handleGoUpdate} />}
         {currentPage === PAGES.REGISTER && (
           <CardRegister setCardData={setCurrentCardData} handleGoNext={handleConfirmPage} />
