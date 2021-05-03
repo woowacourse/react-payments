@@ -80,14 +80,14 @@ const CardWrapper = styled.div`
   ${({ addCard }) => (addCard ? AddCard : CardInfo)}
 `;
 
-const Card = ({ addCard, cardInfo, onOpenModal }) => {
+const Card = ({ addCard, cardInfo, onClickCard }) => {
   const { cardName, numbers, user, expireDate } = cardInfo;
 
   return (
     <CardWrapper
       addCard={addCard}
       bgColor={CARD[cardName]}
-      onClick={() => onOpenModal('cardColor')}
+      onClick={onClickCard}
     >
       {addCard ? (
         <div className='add'>+</div>
@@ -118,7 +118,7 @@ const Card = ({ addCard, cardInfo, onOpenModal }) => {
 };
 
 Card.propTypes = {
-  onOpenModal: PropTypes.func,
+  onClickCard: PropTypes.func,
   addCard: PropTypes.bool,
   cardInfo: PropTypes.shape({
     cardColor: PropTypes.string,

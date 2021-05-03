@@ -7,10 +7,11 @@ import CardAdditionComplete from './components/CardAdditionComplete';
 import Nav from './components/mixin/Nav';
 
 import Card from './common/Card';
-import { PAGE } from './constants/constant';
+import { MODAL, PAGE } from './constants/constant';
+import CardList from './components/CardList/index.js';
 
 function App() {
-  const [page, setPage] = useState(PAGE.ADD_CARD);
+  const [page, setPage] = useState(PAGE.CARD_LIST);
   const [openModalContent, setOpenModalContent] = useState({
     isModalOpen: false,
     modalContent: '',
@@ -40,6 +41,7 @@ function App() {
   const addNewCard = () => {
     setMyCards([...myCards, newCardInfo]);
     resetNewCardInfo();
+    setPage(PAGE.CARD_LIST);
   };
 
   const resetNewCardInfo = () => {
@@ -87,7 +89,10 @@ function App() {
           <>
             <Nav />
             <div className='card-wrapper'>
-              <Card cardInfo={newCardInfo} onOpenModal={onOpenModal} />
+              <Card
+                cardInfo={newCardInfo}
+                onClickCard={() => onOpenModal(MODAL.CARD_COLOR)}
+              />
             </div>
             <NewCardForm
               cardInfo={newCardInfo}
@@ -106,6 +111,12 @@ function App() {
             setNewCardInfo={setNewCardInfo}
             addNewCard={addNewCard}
           />
+        )}
+        {page === PAGE.CARD_LIST && (
+          <>
+            <Nav />
+            <CardList myCards={myCards} setPage={setPage} />
+          </>
         )}
       </AppWrapper>
     </>

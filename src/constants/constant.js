@@ -80,6 +80,7 @@ const FONT_SIZE = {
 const PAGE = {
   ADD_CARD: 'addCard',
   CARD_COMPLETE: 'cardComplete',
+  CARD_LIST: 'cardList',
 };
 
 const MODAL = {
