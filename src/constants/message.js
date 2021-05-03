@@ -10,6 +10,7 @@ const MESSAGE = {
     '카드는 등록되었지만 닉네임을 설정하지 못했어요! 추후에 닉네임을 수정해주세요',
   CARD_NUMBER_NOT_ENTERED_HALF: '카드번호 앞 8자리를 먼저 입력해주세요',
   CARD_DELETE_CONFIRM: '카드를 정말로 삭제하시겠어요?',
+  CARD_NICKNAME_EDIT: '변경할 별칭을 입력해주세요',
 };
 
 export default MESSAGE;

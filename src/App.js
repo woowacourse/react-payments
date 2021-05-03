@@ -15,7 +15,7 @@ const App = () => (
       <Switch>
         <Route exact path={ROUTE.HOME} component={CardList} />
         <Route exact path={ROUTE.ADD} component={CardAddForm} />
-        <Route exact path={ROUTE.COMPLETE} component={CardAddComplete} />
+        <Route exact path={[ROUTE.COMPLETE, ROUTE.EDIT]} component={CardAddComplete} />
       </Switch>
     </Router>
   </ThemeProvider>

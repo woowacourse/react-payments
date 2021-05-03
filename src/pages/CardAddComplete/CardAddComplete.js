@@ -1,4 +1,4 @@
-import { useHistory, useLocation, Redirect } from 'react-router-dom';
+import { useHistory, useLocation, Redirect, useRouteMatch, Link } from 'react-router-dom';
 import Styled from './CardAddComplete.styles';
 import { Card, Input, Button, Spinner } from '../../components';
 import { API, MESSAGE, ROUTE } from '../../constants';
@@ -8,6 +8,8 @@ import { ScreenContainer } from '../../styles/common.styles';
 const CardAddComplete = () => {
   const history = useHistory();
   const location = useLocation();
+  const { path } = useRouteMatch();
+
   const nickname = useInput('');
   const [updateCard, fetchUpdateCard] = useFetch(`${API.BASE_URL}/${location?.state?.card?.id}`, {
     method: API.METHOD.PUT,
@@ -43,7 +45,10 @@ const CardAddComplete = () => {
   return (
     <ScreenContainer>
       <Styled.Container>
-        <Styled.Header>{MESSAGE.CARD_ADD_COMPLETE}</Styled.Header>
+        <Styled.Header>
+          {path === ROUTE.COMPLETE && MESSAGE.CARD_ADD_COMPLETE}
+          {path === ROUTE.EDIT && MESSAGE.CARD_NICKNAME_EDIT}
+        </Styled.Header>
         <Card
           size="large"
           bgColor={cardCompanyColor}
@@ -65,6 +70,11 @@ const CardAddComplete = () => {
             />
           </Styled.InputContainer>
           <Styled.ButtonContainer>
+            {path === ROUTE.EDIT && (
+              <Button as={Link} to="/">
+                취소
+              </Button>
+            )}
             {updateCard.status === API.STATUS.PENDING ? <Spinner /> : <Button>확인</Button>}
           </Styled.ButtonContainer>
         </form>

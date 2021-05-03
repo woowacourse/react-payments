@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Styled from './CardList.styles';
 import { Card, CardAddButton, Header, Spinner, ErrorPage } from '../../components';
 import { API, MESSAGE, ROUTE } from '../../constants';
@@ -7,11 +7,13 @@ import { ScreenContainer } from '../../styles/common.styles';
 import { useFetch, useModal } from '../../hooks';
 
 const CardList = () => {
-  const [selectedCardId, setSelectedCardId] = useState(null);
+  const history = useHistory();
+
+  const [selectedCard, setSelectedCard] = useState(null);
   const { Modal, openModal, closeModal } = useModal();
 
   const [cardList, fetchCardList] = useFetch(API.BASE_URL);
-  const [deleteCard, fetchDeleteCard] = useFetch(`${API.BASE_URL}/${selectedCardId}`, {
+  const [deleteCard, fetchDeleteCard] = useFetch(`${API.BASE_URL}/${selectedCard?.id}`, {
     method: API.METHOD.DELETE,
   });
 
@@ -33,8 +35,17 @@ const CardList = () => {
     closeModal();
   };
 
-  const handleOpenCardMenu = (cardId) => {
-    setSelectedCardId(cardId);
+  const handleEditCard = async () => {
+    history.push({
+      pathname: ROUTE.EDIT,
+      state: {
+        card: selectedCard,
+      },
+    });
+  };
+
+  const handleOpenCardMenu = (card) => {
+    setSelectedCard(card);
     openModal();
   };
 
@@ -70,7 +81,7 @@ const CardList = () => {
               } = card;
 
               return (
-                <Styled.CardItem key={id} onClick={() => handleOpenCardMenu(id)}>
+                <Styled.CardItem key={id} onClick={() => handleOpenCardMenu(card)}>
                   <Card
                     bgColor={cardCompanyColor}
                     companyName={cardCompanyName}
@@ -90,7 +101,7 @@ const CardList = () => {
       </Styled.Container>
       <Modal mobile>
         <Styled.CardMenu>
-          <Styled.CardMenuItem>카드 별칭 수정</Styled.CardMenuItem>
+          <Styled.CardMenuItem onClick={handleEditCard}>카드 별칭 수정</Styled.CardMenuItem>
 
           {deleteCard.status === API.STATUS.PENDING ? (
             <Styled.CardMenuItem>
