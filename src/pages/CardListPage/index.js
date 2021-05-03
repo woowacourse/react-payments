@@ -11,7 +11,7 @@ export const CardListPage = (props) => {
       <Heading>보유카드</Heading>
       <button className="Card__AddButton" onClick={handleAddButtonClick}>
         <Card>
-          <Text fontSize="1.875rem">+</Text>
+          <Text className="CardListPage__Text">+</Text>
         </Card>
       </button>
     </div>

@@ -16,3 +16,9 @@
   outline: inherit;
   cursor: pointer;
 }
+
+.CardListPage__Text {
+  width: 100%;
+  font-size: 1.875rem;
+  text-align: center;
+}

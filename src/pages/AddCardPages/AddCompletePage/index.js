@@ -10,9 +10,7 @@ export const AddCompletePage = (props) => {
 
   return (
     <div>
-      <Text className="AddCompletePage__Text" fontSize="1.5rem">
-        카드등록이 완료되었습니다.
-      </Text>
+      <Text className="AddCompletePage__Text">카드등록이 완료되었습니다.</Text>
       <CreditCardPreview
         companyColor={company.color}
         companyName={company.name}

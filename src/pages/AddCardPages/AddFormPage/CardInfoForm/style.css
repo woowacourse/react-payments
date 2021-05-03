@@ -6,15 +6,22 @@
   margin-top: 1rem;
 }
 
-.CardInfoForm .Dash {
+.CardNumberInput__Separator {
   text-align: center;
   color: #04c09e;
   font-size: 0.75rem;
   width: 1rem;
 }
 
-.CardInfoForm .Dash--hidden {
+.CardNumberInput__Separator--hidden {
   visibility: hidden;
+}
+
+.ExpirationDateInput__Separator {
+  color: #737373;
+  font-size: 0.75rem;
+  text-align: center;
+  width: 1rem;
 }
 
 .OwnerNameInput__Header {
@@ -28,8 +35,14 @@
   flex-grow: 2;
 }
 
-.OwnerNameInput__Header .Text {
+.OwnerNameInput__Header__Text {
   margin: 0 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-align: end;
+  color: #525252;
+  width: 2rem;
 }
 
 .SecurityCodeInput__Wrapper {

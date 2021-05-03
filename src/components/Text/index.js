@@ -5,21 +5,9 @@ import styles from './style.css';
 
 const cx = classNames.bind(styles);
 
-export const Text = ({
-  className,
-  color,
-  fontSize,
-  textAlign,
-  fontWeight,
-  width,
-  letterSpacing,
-  children,
-  ...props
-}) => {
-  const textClass = cx('Text', className);
-
+export const Text = ({ className, style, children, ...rest }) => {
   return (
-    <span className={textClass} style={{ color, fontSize, textAlign, fontWeight, width, letterSpacing }} {...props}>
+    <span className={cx('Text', className)} style={style} {...rest}>
       {children}
     </span>
   );
@@ -27,21 +15,15 @@ export const Text = ({
 
 Text.propTypes = {
   className: PropTypes.string,
-  color: PropTypes.string,
-  fontSize: PropTypes.string,
-  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  fontWeight: PropTypes.string,
+  style: PropTypes.shape({
+    color: PropTypes.string,
+    textAlign: PropTypes.string,
+    fontSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    fontWeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    letterSpacing: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    wordSpacing: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    textIndent: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    lineHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }),
   children: PropTypes.string.isRequired,
-  width: PropTypes.string,
-  letterSpacing: PropTypes.string,
-};
-
-Text.defaultProps = {
-  className: '',
-  color: '#575757',
-  fontSize: '1rem',
-  fontWeight: '400',
-  textAlign: 'center',
-  width: '100%',
-  letterSpacing: '0%',
 };

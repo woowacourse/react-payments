@@ -24,7 +24,7 @@ export const ExpirationDateInput = forwardRef((props, monthRef) => {
           value={expirationDate.month}
           onChange={(e) => handleExpirationDateInputChange({ e, expirationDate, setExpirationDate, nextRef })}
         />
-        <Slash />
+        <Text className="ExpirationDateInput__Separator">/</Text>
         <Input
           className="ExpirationDateInput__Field"
           placeholder="YY"
@@ -38,13 +38,5 @@ export const ExpirationDateInput = forwardRef((props, monthRef) => {
     </>
   );
 });
-
-function Slash() {
-  return (
-    <Text color="#737373" fontSize="0.75rem" textAlign="center" width="1rem">
-      /
-    </Text>
-  );
-}
 
 ExpirationDateInput.displayName = 'ExpirationDateInput';

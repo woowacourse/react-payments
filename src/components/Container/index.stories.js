@@ -15,17 +15,11 @@ CardNumberInputContainer.args = {
   children: (
     <>
       <Input className="CardNumberInput__Field" type="number" value="1111" />
-      <Text fontSize="0.75rem" textAlign="start" width="1rem">
-        -
-      </Text>
+      <Text className="CardNumberInput__Separator">-</Text>
       <Input className="CardNumberInput__Field" type="number" value="1111" />
-      <Text fontSize="0.75rem" textAlign="start" width="1rem">
-        -
-      </Text>
+      <Text className="CardNumberInput__Separator">-</Text>
       <Input className="CardNumberInput__Field" type="password" value="1111" />
-      <Text fontSize="0.75rem" textAlign="start" width="1rem">
-        -
-      </Text>
+      <Text className="CardNumberInput__Separator">-</Text>
       <Input className="CardNumberInput__Field" type="password" value="1111" />
     </>
   ),
@@ -37,9 +31,7 @@ ExpirationDateInputContainer.args = {
   children: (
     <>
       <Input className="ExpirationDateInput__Field" placeholder="MM" type="number" value="04" />
-      <Text fontSize="0.75rem" textAlign="start" width="1rem">
-        /
-      </Text>
+      <Text className="ExpirationDateInput__Separator">/</Text>
       <Input className="ExpirationDateInput__Field" placeholder="YY" type="number" value="21" />
     </>
   ),

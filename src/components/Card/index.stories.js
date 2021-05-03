@@ -11,11 +11,7 @@ const Template = (args) => <Card {...args} />;
 
 export const PlusCard = Template.bind({});
 PlusCard.args = {
-  children: (
-    <Text fontSize="1.875rem" textAlign="center">
-      +
-    </Text>
-  ),
+  children: <Text className="CardListPage__Text">+</Text>,
 };
 
 export const PocoCard = Template.bind({});
