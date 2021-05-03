@@ -1,40 +1,13 @@
 {
   "cardList": [
     {
-      "id": "8-PBaIqUvv",
-      "cardNumbers": "1231283901283902",
-      "cardCompanyName": "KB국민카드",
-      "cardCompanyColor": "#ffbc00",
-      "ownerName": "DFHDSJKFHK",
-      "expiryDate": "11 / 11",
-      "nickname": "0000"
-    },
-    {
-      "id": "k1Lvu9qK-6",
-      "cardNumbers": "1232131231231231",
+      "id": "6BcLYrHw43",
+      "cardNumbers": "2138219038091283",
       "cardCompanyName": "NH농협카드",
       "cardCompanyColor": "#1FB25A",
-      "ownerName": "12321321",
+      "ownerName": "123213",
       "expiryDate": "11 / 11",
-      "nickname": "김정혁"
-    },
-    {
-      "id": "stasjwXH1w",
-      "cardNumbers": "1283921803981209",
-      "cardCompanyName": "BC카드",
-      "cardCompanyColor": "#E83D45",
-      "ownerName": "123123",
-      "expiryDate": "11 / 11",
-      "nickname": "BC카드"
-    },
-    {
-      "id": "yl_W0_i0Df",
-      "cardNumbers": "1231232131231111",
-      "cardCompanyName": "삼성카드",
-      "cardCompanyColor": "#0c4da2",
-      "ownerName": "12312312",
-      "expiryDate": "11 / 11",
-      "nickname": "삼성카드"
+      "nickname": "218390123"
     }
   ]
 }

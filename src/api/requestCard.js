@@ -1,11 +1,5 @@
 import { BASE_URL, FETCH_METHOD } from '../constants/api';
 
-const initialReturnValues = {
-  GET: [],
-  PATCH: false,
-  DELETE: false,
-};
-
 const headers = {
   'Content-Type': 'application/json; charset=UTF-8',
 };
@@ -19,30 +13,42 @@ const request = {
   delete: (query) => fetch(BASE_URL + query, { method: FETCH_METHOD.DELETE, headers }),
 };
 
-const requestCardByType = async (type, query, body) => {
-  let res = null;
-  let json = null;
+const initialReturnValues = {
+  GET: [],
+  PATCH: false,
+  DELETE: false,
+};
+
+const requestRouter = {
+  [FETCH_METHOD.GET]: async (query) => {
+    const res = await request.get(query);
+    const json = await res.json();
+
+    return json;
+  },
+  [FETCH_METHOD.PATCH]: async (query, body) => {
+    const res = await request.patch(query, body);
+    const json = await res.json();
+
+    return json;
+  },
+  [FETCH_METHOD.POST]: async (query, body) => {
+    const res = await request.post(query, body);
+    const json = await res.json();
+
+    return json;
+  },
+  [FETCH_METHOD.DELETE]: async (query) => {
+    const res = await request.delete(query);
+    const json = await res.json();
+
+    return json;
+  },
+};
+
+const requestCardByType = async (type, ...args) => {
   try {
-    switch (type) {
-      case FETCH_METHOD.GET:
-        res = await request.get(query);
-        json = await res.json();
-        return json;
-      case FETCH_METHOD.PATCH:
-        res = await request.patch(query, body);
-
-        return res.ok;
-      case FETCH_METHOD.POST:
-        res = await request.post(query, body);
-
-        return res.ok;
-      case FETCH_METHOD.DELETE:
-        res = await request.delete(query);
-
-        return res.ok;
-      default:
-        throw new Error('Unknown type');
-    }
+    return await requestRouter[type](...args);
   } catch (error) {
     console.error(error.message);
     return initialReturnValues[type];

@@ -23,7 +23,7 @@
     "start:stage": "export REACT_APP_ENV=stage && react-scripts start",
     "start:dev": "export REACT_APP_ENV=dev && react-scripts start",
     "start:server": "json-server --watch db.json --port 3001",
-    "build": "react-scripts build",
+    "build": "export REACT_APP_ENV=stage && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",

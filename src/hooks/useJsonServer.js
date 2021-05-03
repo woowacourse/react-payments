@@ -1,28 +1,30 @@
 import { useCallback, useEffect, useState } from 'react';
-import requestCardByType from '../api/requestCard';
+import requestEntity from '../api/requestCard';
 import { FETCH_METHOD } from '../constants/api';
 
 export default (entity) => {
   const [value, setValue] = useState();
 
   const getEntity = useCallback(async () => {
-    const entities = await requestCardByType(FETCH_METHOD.GET, `/${entity}`);
+    const entities = await requestEntity(FETCH_METHOD.GET, `/${entity}`);
     setValue(entities.reverse());
   }, [entity]);
 
   const updateEntity = async (target) => {
-    await requestCardByType(FETCH_METHOD.PATCH, `/${entity}/${target.id}`, target);
-    getEntity();
+    const newEntity = await requestEntity(FETCH_METHOD.PATCH, `/${entity}/${target.id}`, target);
+    const newValue = value.filter((v) => v.id !== newEntity.id);
+    setValue([...newValue, newEntity]);
   };
 
   const addEntity = async (target) => {
-    await requestCardByType(FETCH_METHOD.POST, `/${entity}`, target);
-    getEntity();
+    const newEntity = await requestEntity(FETCH_METHOD.POST, `/${entity}`, target);
+    setValue([...value, newEntity]);
   };
 
   const deleteEntity = async (targetId) => {
-    await requestCardByType(FETCH_METHOD.DELETE, `/${entity}/${targetId}`);
-    getEntity();
+    await requestEntity(FETCH_METHOD.DELETE, `/${entity}/${targetId}`);
+    const newValue = value.filter((v) => v.id !== targetId);
+    setValue(newValue);
   };
 
   useEffect(() => {
