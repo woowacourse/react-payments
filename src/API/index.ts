@@ -1,4 +1,4 @@
-import { firestore } from './firebase';
+import { firestore, getFirestoreTimestamp } from './firebase';
 
 type Collection = 'cards';
 
@@ -18,17 +18,15 @@ const API = {
     return { id: docRef.id, ...(docRef.data() as T) };
   },
 
-  async add<T>(item: T, collection: Collection) {
-    const docRef = await firestore.collection(collection).add(item);
-
-    return docRef.id;
+  add<T>(item: T, collection: Collection) {
+    return firestore.collection(collection).add({ ...item, createdAt: getFirestoreTimestamp() });
   },
 
   editById<T>(item: Partial<T>, id: string, collection: Collection) {
     return firestore.collection(collection).doc(id).update(item);
   },
 
-  deleteById<T>(id: string, collection: Collection) {
+  deleteById(id: string, collection: Collection) {
     return firestore.collection(collection).doc(id).delete();
   },
 };
