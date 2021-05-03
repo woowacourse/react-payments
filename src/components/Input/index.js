@@ -6,20 +6,16 @@ import styles from './style.css';
 
 const cx = classnames.bind(styles);
 
-export const Input = forwardRef(({ container, className, ...props }, ref) => {
-  const inputClass = cx('Input', className);
-
+export const Input = forwardRef(({ container, className, ...rest }, ref) => {
   if (container) {
     return (
       <Container className={container}>
-        <input className={inputClass} {...props} ref={ref} />
+        <input className={cx('Input', className)} {...rest} ref={ref} />
       </Container>
     );
   }
-  return <input className={inputClass} {...props} ref={ref} />;
+  return <input className={cx('Input', className)} {...rest} ref={ref} />;
 });
-
-Input.displayName = 'Input';
 
 Input.propTypes = {
   container: PropTypes.string,
@@ -29,6 +25,8 @@ Input.propTypes = {
   disabled: PropTypes.bool,
   type: PropTypes.oneOf([
     'submit',
+    'button',
+    'reset',
     'text',
     'number',
     'password',
@@ -46,14 +44,13 @@ Input.propTypes = {
     'tel',
     'email',
     'file',
-  ]),
+    'image',
+    'hidden',
+  ]).isRequired,
 };
 
 Input.defaultProps = {
-  container: null,
-  className: null,
-  id: null,
-  placeholder: '',
-  disabled: false,
   type: 'text',
 };
+
+Input.displayName = 'Input';

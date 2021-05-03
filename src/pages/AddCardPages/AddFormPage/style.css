@@ -27,7 +27,30 @@
   opacity: 0.5;
 }
 
+.CardInfoForm__Input__Filler--filled {
+  border-radius: 0.4375rem;
+  margin: 0.25rem;
+  background-color: #ecebf1;
+}
+
+.CardInfoForm__Input__Filler--transparent {
+  border-radius: 0.4375rem;
+  margin: 0.25rem;
+  background-color: transparent;
+}
+
 /* 카드번호 입력 */
+
+.CardNumberInput__Filler {
+  width: 100%;
+  border-radius: 0.4375rem;
+  margin: 0.25rem;
+}
+
+.CardNumberInput__Field {
+  width: 2.8125rem;
+  letter-spacing: 0.2rem;
+}
 
 .CardNumberInput__Separator {
   text-align: center;
@@ -41,6 +64,15 @@
 }
 
 /* 만료일 입력 */
+
+.ExpirationDateInput__Filler {
+  width: 43%;
+}
+
+.ExpirationDateInput__Field {
+  width: 1.9rem;
+  letter-spacing: 0.2rem;
+}
 
 .ExpirationDateInput__Separator {
   color: #737373;
@@ -68,11 +100,28 @@
   width: 2rem;
 }
 
+.OwnerNameInput__Filler {
+  width: 100%;
+}
+
+.OwnerNameInput__Field {
+  width: 18rem;
+}
+
 /* 보안코드 입력 */
 
 .SecurityCodeInput__Wrapper {
   display: flex;
   align-items: center;
+}
+
+.SecurityCodeInput__Filler {
+  width: 26%;
+}
+
+.SecurityCodeInput__Field {
+  width: 2rem;
+  letter-spacing: 0.3rem;
 }
 
 .SecurityCodeInput__GuideImage {
@@ -81,6 +130,19 @@
 
 .SecurityCodeInput__Wrapper > .Button:hover ~ .SecurityCodeInput__GuideImage {
   visibility: visible;
+}
+
+/* 비밀번호 입력 */
+
+.CardPasswordInput__Filler {
+  width: 2.8125rem;
+  border-radius: 0.4375rem;
+  margin: 0.25rem;
+}
+
+.CardPasswordInput__Field {
+  width: 1.2rem;
+  text-align: center;
 }
 
 /* 카드사 선택 모달 */

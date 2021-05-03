@@ -21,5 +21,5 @@ Modal.propTypes = {
   isOpen: PropTypes.bool,
   className: PropTypes.string,
   styles: PropTypes.object,
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
