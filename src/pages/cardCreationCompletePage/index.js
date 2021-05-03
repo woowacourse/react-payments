@@ -7,6 +7,7 @@ import { CreditCard, CARD_SIZE } from '../../components/commons/card/CreditCard'
 import { TransparentInput } from '../../components/commons/input/TransparentInput';
 import { Button } from '../../components/commons/button/Button';
 import { COLOR } from '../../constants/color';
+import { STATUS_OK_CODE, URL } from '../../constants';
 
 const transparentInputStyles = {
   textAlign: 'center',
@@ -23,9 +24,9 @@ const CardCreationCompletePage = ({ history, newCardInfo, setNewCardInfo }) => {
 
     try {
       const data = { selectedCardInfo, cardNumber, cardOwner, cardExpiredDate, cardNickname };
-      const response = await axios.post('http://localhost:4000/cards', data);
+      const response = await axios.post(URL.CARDS, data);
 
-      if (response.status === 201) {
+      if (response.status === STATUS_OK_CODE.POST) {
         alert('카드를 추가하였습니다.');
         setNewCardInfo(prevState => ({ ...prevState, cardNickname }));
         history.push('/');

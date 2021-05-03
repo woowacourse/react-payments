@@ -7,6 +7,7 @@ import Styled from './style';
 import { Link } from 'react-router-dom';
 import { CreditCard } from '../../components/commons/card/CreditCard';
 import { ReactComponent as Spinner } from '../../assets/spinner.svg';
+import { STATUS_OK_CODE, URL } from '../../constants';
 
 const CardListPage = () => {
   const [isLoading, setLoading] = useState(true);
@@ -17,9 +18,9 @@ const CardListPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/cards');
+        const response = await axios.get(URL.CARDS);
 
-        if (response.status === 200) {
+        if (response.status === STATUS_OK_CODE.GET) {
           setCardList(response.data);
           setLoading(false);
 
@@ -62,11 +63,14 @@ const CardListPage = () => {
   const handleCardDelete = async cardId => {
     if (window.confirm('해당 카드를 삭제하시겠습니까?')) {
       try {
-        const response = await axios.delete(`http://localhost:4000/cards/${cardId}`);
+        const response = await axios.delete(`${URL.CARDS}${cardId}`);
 
-        if (response.status === 200) {
+        if (response.status === STATUS_OK_CODE.DELETE) {
           setCardList(prevState => prevState.filter(card => card.id !== cardId));
+
+          return;
         }
+        alert('카드를 삭제하는데 실패했습니다.\n잠시 후 다시 시도해주세요.');
       } catch {
         alert('카드를 삭제하는데 실패했습니다.\n잠시 후 다시 시도해주세요.');
       }

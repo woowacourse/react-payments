@@ -6,6 +6,7 @@ import { CreditCard, CARD_SIZE } from '../../components/commons/card/CreditCard'
 import { TransparentInput } from '../../components/commons/input/TransparentInput';
 import { Button } from '../../components/commons/button/Button';
 import { COLOR } from '../../constants/color';
+import { STATUS_OK_CODE, URL } from '../../constants';
 
 const transparentInputStyles = {
   textAlign: 'center',
@@ -29,9 +30,9 @@ const CardNicknameChangePage = ({ history, location }) => {
 
     try {
       const data = { cardNickname: cardNickname };
-      const response = await axios.patch(`http://localhost:4000/cards/${id}`, data);
+      const response = await axios.patch(`${URL.CARDS}${id}`, data);
 
-      if (response.statusText === 'OK') {
+      if (response.status === STATUS_OK_CODE.PATCH) {
         alert('카드 정보를 수정하였습니다.');
         history.push('/');
 
