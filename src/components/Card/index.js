@@ -17,8 +17,8 @@ export const Card = ({ size, company, numbers, owner, validDay, ...props }) => {
         <Styled.Body>
           <Styled.IcChip />
           <Styled.NumbersContainer size={size}>
-            <Styled.Numbers size={size}>{numbers.first && numbers.first}</Styled.Numbers>
-            <Styled.Numbers size={size}>{numbers.second && numbers.second}</Styled.Numbers>
+            <Styled.Numbers size={size}>{numbers.first}</Styled.Numbers>
+            <Styled.Numbers size={size}>{numbers.second}</Styled.Numbers>
             <Styled.BlindNumbers>
               {[...Array(numbers.third.length)].map((_, idx) => (
                 <Styled.BlindDot size={size} key={idx} />
