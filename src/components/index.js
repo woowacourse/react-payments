@@ -8,6 +8,6 @@ import { Input } from './Input';
 import { Label } from './Label';
 import { Modal } from './Modal';
 import { Text } from './Text';
-import { Title } from './Title';
+import { Heading } from './Heading';
 
-export { Button, Card, Circle, CreditCard, Container, Form, Input, Label, Modal, Text, Title };
+export { Button, Card, Circle, CreditCard, Container, Form, Input, Label, Modal, Text, Heading };

@@ -3,12 +3,12 @@
   height: 100%;
 }
 
-.AddFormPage__Title {
+.AddFormPage__Heading {
   display: flex;
   align-items: center;
 }
 
-.AddFormPage__Title > .Button--backward {
+.AddFormPage__Heading > .Button--backward {
   margin-right: 1.5rem;
 }
 

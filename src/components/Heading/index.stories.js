@@ -1,12 +1,12 @@
 import React from 'react';
-import { Title } from '.';
+import { Heading } from '.';
 
 export default {
-  title: 'Component/Title',
-  component: Title,
+  title: 'Component/Heading',
+  component: Heading,
 };
 
-const Template = (args) => <Title {...args} />;
+const Template = (args) => <Heading {...args} />;
 
 export const CardList = Template.bind({});
 CardList.args = {

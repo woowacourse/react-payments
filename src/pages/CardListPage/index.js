@@ -1,4 +1,4 @@
-import { Card, Text, Title } from '../../components';
+import { Card, Text, Heading } from '../../components';
 import { PAGE } from '../../constants';
 import './style.css';
 
@@ -8,7 +8,7 @@ export const CardListPage = (props) => {
 
   return (
     <div className="CardListPage">
-      <Title>보유카드</Title>
+      <Heading>보유카드</Heading>
       <button className="Card__AddButton" onClick={handleAddButtonClick}>
         <Card>
           <Text fontSize="1.875rem">+</Text>

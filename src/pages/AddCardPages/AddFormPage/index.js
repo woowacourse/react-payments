@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Card, CreditCard, Title } from '../../../components';
+import { Button, Card, CreditCard, Heading } from '../../../components';
 import { CardInfoForm } from './CardInfoForm';
 import { CardCompanySelectModal } from './CardCompanySelectModal';
 import { getFormattedCardInfo } from '../../../cardInfoFormatter';
@@ -13,9 +13,9 @@ export const AddFormPage = (props) => {
 
   return (
     <div className="AddFormPage">
-      <div className="AddFormPage__Title">
+      <div className="AddFormPage__Heading">
         <BackwardButton />
-        <Title>카드 추가</Title>
+        <Heading>카드 추가</Heading>
       </div>
       <CreditCardPreview
         companyColor={company.color}
