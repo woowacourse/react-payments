@@ -24,7 +24,3 @@ ul {
   background-color: #efefef;
   height: 100%;
 }
-
-@import "./App.css";
-@import "./CardAddition.css";
-@import "./CompleteCardAddition.css";
