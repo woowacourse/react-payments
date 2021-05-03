@@ -87,7 +87,9 @@ function App() {
       <AppWrapper>
         {page === PAGE.ADD_CARD && (
           <>
-            <Nav />
+            <Nav onClickBackButton={() => setPage(PAGE.CARD_LIST)}>
+              카드 추가
+            </Nav>
             <div className='card-wrapper'>
               <Card
                 cardInfo={newCardInfo}
@@ -114,7 +116,7 @@ function App() {
         )}
         {page === PAGE.CARD_LIST && (
           <>
-            <Nav />
+            <Nav>보유 카드</Nav>
             <CardList myCards={myCards} setPage={setPage} />
           </>
         )}

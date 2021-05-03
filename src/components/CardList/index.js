@@ -2,16 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../common/Card';
 import { PAGE } from '../../constants/constant';
+import { CardListWrapper } from './index.styles';
 
 const CardList = ({ myCards, setPage }) => {
   return (
-    <div>
-      {console.log(myCards)}
-      {myCards.map((card) => {
-        <Card cardInfo={card} />;
-      })}
-      <Card addCard onClickCard={() => setPage(PAGE.ADD_CARD)} />
-    </div>
+    <>
+      <CardListWrapper>
+        {myCards.map((card, index) => (
+          <div key={index} className='card'>
+            <Card cardInfo={card} />
+          </div>
+        ))}
+        <div className='card add-card'>
+          <Card addCard onClickCard={() => setPage(PAGE.ADD_CARD)} />
+        </div>
+      </CardListWrapper>
+    </>
   );
 };
 
