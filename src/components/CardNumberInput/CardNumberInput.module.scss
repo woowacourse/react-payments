@@ -39,7 +39,6 @@
 
   &__input {
     position: relative;
-    top: -2px;
     width: 50px;
     height: 30px;
     border: none;
@@ -61,10 +60,9 @@
 
     &--dot {
       position: relative;
-      top: -2px;
       display: flex;
-      font-size: 28px;
-      letter-spacing: -1px;
+      font-size: 20px;
+      letter-spacing: -8px;
     }
   }
 }

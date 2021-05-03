@@ -13,7 +13,6 @@ const CardCompanySelectContainer = ({
   hideCardCompanySelectContainer,
   backDropAnimationClass,
   bottomSliderAnimationClass,
-  cardInputState,
   setCardInputState,
 }) => {
   const onCircleButtonClick = (cardCompany) => {
@@ -24,7 +23,6 @@ const CardCompanySelectContainer = ({
     hideCardCompanySelectContainer();
   }
 
-  // TODO : 리뷰어에게 전부 같은 이름으로 파라미터 이름 적용해도 되는지 물어보기
   const cardCompanyList = getAllCardCompanies();
   const cardCompanyItems = cardCompanyList.map((cardCompany) => (
     <CircleButton

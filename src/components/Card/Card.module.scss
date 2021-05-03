@@ -3,23 +3,19 @@
 }
 
 .card {
-  width: 220px;
   display: flex;
   flex-direction: column;
+  width: 245px;
+  min-height: 146px;
   padding: 15px 17px;
   border-radius: 5px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  transition: all 1s;
-
-  &:hover {
-    transform: translate(-3px, -3px);
-    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.25);
-  }
 
   &__type {
-    color: #383838;
+    color: rgb(233, 233, 233);
     font-size: 11.5px;
     line-height: 12px;
+    min-height: 12px;
     font-weight: 600;
     margin-bottom: 23px;
   }
@@ -44,7 +40,8 @@
     height: 10px;
     border: none;
     background: none;
-    color: #525252;
+    color: rgb(233, 233, 233);
+    // color: #525252;
     font-size: 13px;
     font-weight: bold;
     text-align: center;
@@ -54,6 +51,7 @@
     }
 
     &--visible {
+      letter-spacing: 2px;
     }
 
     &--invisible {
@@ -66,7 +64,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0 4px;
-    color: #525252;
+    color: rgb(233, 233, 233);
     font-size: 15px;
     font-weight: bold;
   }

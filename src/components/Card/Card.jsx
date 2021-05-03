@@ -6,7 +6,6 @@ const cx = classNames.bind(styles);
 const initialCardNumber = { firstCardNumber: "", secondCardNumber: "", thirdCardNumber: "", fourthCardNumber: "" };
 const initialCardExpiration = {expirationMonth: "", expirationYear: ""}
 
-// TODO : 배경색에 따라 글자 색이 바뀌도록 만들기
 const Card = ({
   cardCompany = "",
   backgroundColor = "#D2D2D2",

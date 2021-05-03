@@ -1,4 +1,3 @@
-// TODO : 페이지 단위로 상수화
 export const HEADER_TEXT = Object.freeze({
   OWNED_CARD: "보유카드",
   ADD_CARD: "카드추가",

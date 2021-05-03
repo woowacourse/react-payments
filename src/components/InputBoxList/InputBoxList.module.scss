@@ -23,7 +23,6 @@
     text-align: center;
     font-weight: bold;
     font-size: 22px;
-    // TODO : 모든 input 에 커서 색갈 적용(SASS 를 이용)
     caret-color: #04c09e;
     &:not(:last-child) {
       margin-right: 7px;

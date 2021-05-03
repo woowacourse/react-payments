@@ -1,5 +1,4 @@
 import classNames from "classnames/bind";
-// TODO : app.css 스토리북에서도 전역으로 적용되도록 수정
 import styles from "./TextLimitInput.module.scss";
 import Input from "../Input";
 import { STATE_KEY } from "../../../constants";

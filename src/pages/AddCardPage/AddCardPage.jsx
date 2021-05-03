@@ -16,12 +16,9 @@ import Button from "../../components/Button/Button";
 
 const cx = classNames.bind(styles);
 
-// TODO: 카드 호버 애니메이션 껐다 킬수 있게 만들기
-
 const AddCardPage = ({
   cardInputState,
   setCardInputState,
-  cardListState,
   setCardListState
 }) => {
   const toggle = useToggle();

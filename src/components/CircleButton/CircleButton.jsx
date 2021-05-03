@@ -13,7 +13,6 @@ const CircleButton = ({ buttonText, circleColor, onClick, className = "" }) => {
   );
 };
 
-// TODO: 전체 컴포넌트에 prop-type 넣기
 CircleButton.propTypes = {
   buttonText: PropTypes.string,
   circleColor: PropTypes.string,

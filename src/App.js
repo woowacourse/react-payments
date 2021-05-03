@@ -28,9 +28,6 @@ function App() {
 
   const [cardListState, setCardListState] = useState([]);
 
-  console.log(cardInputState);
-  console.log("cardListState", cardListState);
-
   return (
     <div className="App">
       <Switch>

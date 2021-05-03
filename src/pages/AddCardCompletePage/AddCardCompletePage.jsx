@@ -14,7 +14,6 @@ import { isSameCardNumber } from "../../utils/cardInputValidation"
 
 
 const cx = classNames.bind(styles);
-// TODO : 카드 크기 조절하기
 const AddCardCompletePage = ({ cardInputState, setCardInputState, cardListState, setCardListState }) => {
   const onCardNicknameChange = (event) => {
     const { value } = event.target;
