@@ -1,15 +1,16 @@
 import { TextButton } from '../../../components';
 import { CARD } from '../../../constants';
+import './style.css';
 
-export default function Form({ onCardNickNameSubmit, cardNickName, setCardNickName }) {
+export default function Form({ onSubmitNickName, nickName, setNickName }) {
   return (
-    <form onSubmit={onCardNickNameSubmit}>
+    <form className="add-card-complete" onSubmit={onSubmitNickName}>
       <input
         id="card-nickname"
         className="add-card-complete__input"
-        value={cardNickName}
+        value={nickName}
         onChange={(event) => {
-          setCardNickName(event.target.value);
+          setNickName(event.target.value);
         }}
         maxLength={CARD.NICKNAME_MAX_LENGTH}
       />

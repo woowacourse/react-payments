@@ -11,5 +11,5 @@ const Template = (args) => <CardCompanySelection {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  onSetCardCompany: () => {},
+  setCardCompany: () => {},
 };

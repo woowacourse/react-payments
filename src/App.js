@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { AddCard, AddCardComplete } from './pages';
+import { AddCard, AddCardComplete, CardList } from './pages';
 import { Route, BrowserRouter } from 'react-router-dom';
-import CardList from './pages/CardList';
 
 function App() {
   const [cards, setCards] = useState([]);
 
   const addCards = (card) => {
-    console.log(cards);
     setCards([...cards, card]);
   };
 

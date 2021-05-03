@@ -8,7 +8,7 @@ import Form from './Form';
 import Header from './Header';
 
 export default function AddCardComplete({ addCards }) {
-  const [cardNickName, setCardNickName] = useState('');
+  const [nickName, setNickName] = useState('');
 
   const history = useHistory();
   const location = useLocation();
@@ -20,14 +20,23 @@ export default function AddCardComplete({ addCards }) {
   } = location;
 
   useEffect(() => {
-    setCardNickName(CARD_COMPANY[cardCompany].NAME);
+    setNickName(CARD_COMPANY[cardCompany].NAME);
   }, []);
 
-  const onCardNickNameSubmit = (event) => {
+  const onSubmitNickName = (event) => {
     event.preventDefault();
 
-    addCards({ userName, serialNumber, expirationDate, securityCode, password, cardCompany });
-    history.push('/cardList');
+    addCards({
+      userName,
+      serialNumber,
+      expirationDate,
+      securityCode,
+      password,
+      cardCompany,
+      nickName,
+    });
+
+    history.push('/');
   };
 
   return (
@@ -37,15 +46,11 @@ export default function AddCardComplete({ addCards }) {
         userName={userName}
         companyName={CARD_COMPANY[cardCompany].NAME}
         color={CARD_COMPANY[cardCompany].COLOR}
-        number={serialNumber}
+        serialNumber={serialNumber}
         expirationDate={expirationDate}
         size="large"
       />
-      <Form
-        onCardNickNameSubmit={onCardNickNameSubmit}
-        cardNickName={cardNickName}
-        setCardNickName={setCardNickName}
-      />
+      <Form onSubmitNickName={onSubmitNickName} nickName={nickName} setNickName={setNickName} />
     </div>
   );
 }

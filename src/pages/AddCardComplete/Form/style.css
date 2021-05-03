@@ -1,0 +1,20 @@
+.add-card-complete {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  flex-grow: 1;
+}
+.add-card-complete__input {
+  height: 4rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  text-align: center;
+  color: #383838;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 32px;
+  border-bottom: 0.12rem solid #737373;
+  margin: 3rem 0 5rem;
+}

@@ -8,7 +8,7 @@ export default function Preview({ userName, cardCompany, serialNumber, expiratio
         userName={userName}
         companyName={CARD_COMPANY[cardCompany]?.NAME}
         color={CARD_COMPANY[cardCompany]?.COLOR}
-        number={serialNumber}
+        serialNumber={serialNumber}
         expirationDate={expirationDate}
       />
     </div>

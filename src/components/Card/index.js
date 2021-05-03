@@ -6,7 +6,7 @@ import { CARD } from '../../constants';
 export default function Card({
   companyName,
   color,
-  number,
+  serialNumber,
   userName,
   expirationDate,
   size,
@@ -31,7 +31,7 @@ export default function Card({
           if (index < CARD.SERIAL_ID_CODE_LENGTH) {
             return (
               <div key={index} className="card__card-number">
-                {number.charAt(index)}
+                {serialNumber.charAt(index)}
               </div>
             );
           }
@@ -39,9 +39,11 @@ export default function Card({
           return (
             <div
               key={index}
-              className={['card__card-number', 'dot', number.charAt(index) ? '' : 'hidden'].join(
-                ' '
-              )}
+              className={[
+                'card__card-number',
+                'dot',
+                serialNumber.charAt(index) ? '' : 'hidden',
+              ].join(' ')}
             ></div>
           );
         })}
