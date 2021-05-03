@@ -1,4 +1,4 @@
-import "./index.css";
+import "./style.css";
 import React from "react";
 import PropTypes from "prop-types";
 import { CARD_SIZE, URL } from "../../constants";
@@ -20,10 +20,11 @@ const MyCardList = (props) => {
           카드 추가 하러 가기
         </button>
       </div>
-      <ul>
+      <ul className="my-card-list">
         {cardList.map((card) => (
           <li key={card.cardNumbers.join("")}>
             <Card {...card} size={CARD_SIZE.SMALL} />
+            <p>{card.cardDescription}</p>
           </li>
         ))}
       </ul>
