@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AddCard, Card } from '../../components';
+import { Card } from '../../components';
+import AddCardButton from './AddCardButton';
+import Header from './Header';
 import './style.css';
 
 export default function CardList({ cards }) {
   return (
     <div className="card-list">
-      <h1 className="card-list__title">보유 카드</h1>
+      <Header />
       <li className="card-list__list">
         {cards.map((card, index) => (
           <ul key={index} className="card-list__item">
@@ -15,7 +17,7 @@ export default function CardList({ cards }) {
           </ul>
         ))}
         <Link to="/addCard">
-          <AddCard />
+          <AddCardButton />
         </Link>
       </li>
     </div>

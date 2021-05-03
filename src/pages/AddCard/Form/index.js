@@ -11,7 +11,7 @@ import SecurityCode from './SecurityCode';
 import FormModal from './Modal';
 import Password from './Password';
 
-export default function AddCardForm() {
+export default function Form() {
   const [serialNumber, setSerialNumber] = useState('');
   const [expirationDate, setExpirationDate] = useState('');
   const [userName, setUserName] = useState('');

@@ -1,8 +1,7 @@
 import React from 'react';
 import './style.css';
-import '../../index.css';
 
-export default function AddCard({ style, color }) {
+export default function AddCardButton({ style, color }) {
   return (
     <button className="add-card" style={{ ...style, backgroundColor: color ?? '#e5e5e5' }}>
       <svg className="add-card__plus" viewBox="0 0 20 20">

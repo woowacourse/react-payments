@@ -1,7 +1,6 @@
-.header {
+.add-card-header {
   width: 100%;
-  height: 72px;
-  padding: 22px 10px;
+  padding: 1rem 0 0.5rem 1.5rem;
   box-sizing: border-box;
   display: flex;
   background-color: #ffffff;
@@ -10,7 +9,7 @@
   align-items: center;
 }
 
-.header__title {
+.add-card-header__title {
   font-size: inherit;
   font-weight: inherit;
   margin-left: 1rem;

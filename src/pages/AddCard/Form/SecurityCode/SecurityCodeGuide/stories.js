@@ -2,7 +2,7 @@ import React from 'react';
 import SecurityCodeGuide from '.';
 
 export default {
-  title: 'Components/SecurityCodeGuide',
+  title: 'Page/AddCard/SecurityCodeGuide',
   component: SecurityCodeGuide,
 };
 
