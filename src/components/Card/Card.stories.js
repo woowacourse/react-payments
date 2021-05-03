@@ -14,7 +14,7 @@ export const Unknown = Template.bind({});
 
 Unknown.args = {
   cardType: CARD.UNKNOWN,
-  numbers: ["1234", "1234", "1234", "1234"],
+  cardNumbers: ["1234", "1234", "1234", "1234"],
   userName: "",
   expirationDate: "",
   size: CARD_SIZE.SMALL,
@@ -23,7 +23,7 @@ Unknown.args = {
 export const Small = Template.bind({});
 Small.args = {
   cardType: CARD.POCO,
-  numbers: ["1234", "1234", "1234", "1234"],
+  cardNumbers: ["1234", "1234", "1234", "1234"],
   userName: "요술곤듀 밍키 요술곤듀 밍키요술곤듀 밍키요술곤듀 밍키",
   expirationDate: "04/20",
   size: CARD_SIZE.SMALL,
@@ -32,7 +32,7 @@ Small.args = {
 export const Medium = Template.bind({});
 Medium.args = {
   cardType: CARD.POCO,
-  numbers: ["1234", "1234", "1234", "1234"],
+  cardNumbers: ["1234", "1234", "1234", "1234"],
   userName: "요술곤듀 밍키",
   expirationDate: "04/20",
   size: CARD_SIZE.MEDIUM,
