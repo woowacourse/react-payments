@@ -3,6 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { CARD_SIZE, URL } from "../../constants";
 import { Card } from "../../components";
+import CardAdditionButton from "../../components/CardAdditionButton";
 
 const MyCardList = (props) => {
   const { cardList } = props;
@@ -10,16 +11,6 @@ const MyCardList = (props) => {
 
   return (
     <>
-      <div>
-        <p>준비중입니다. - home</p>
-        <button
-          onClick={() => {
-            props.routeTo(URL.CARD_ADDITION);
-          }}
-        >
-          카드 추가 하러 가기
-        </button>
-      </div>
       <ul className="my-card-list">
         {cardList.map((card) => (
           <li key={card.cardNumbers.join("")}>
@@ -27,6 +18,14 @@ const MyCardList = (props) => {
             <p>{card.cardDescription}</p>
           </li>
         ))}
+        <li>
+          <CardAdditionButton
+            size={CARD_SIZE.SMALL}
+            onClick={() => {
+              props.routeTo(URL.CARD_ADDITION);
+            }}
+          />
+        </li>
       </ul>
     </>
   );
