@@ -5,9 +5,9 @@ import styles from './style.css';
 
 const cx = classNames.bind(styles);
 
-export const Text = ({ className, style, children, ...rest }) => {
+export const Text = ({ className, children, ...rest }) => {
   return (
-    <span className={cx('Text', className)} style={style} {...rest}>
+    <span className={cx('Text', className)} {...rest}>
       {children}
     </span>
   );
@@ -15,15 +15,5 @@ export const Text = ({ className, style, children, ...rest }) => {
 
 Text.propTypes = {
   className: PropTypes.string,
-  style: PropTypes.shape({
-    color: PropTypes.string,
-    textAlign: PropTypes.string,
-    fontSize: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    fontWeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    letterSpacing: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    wordSpacing: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    textIndent: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    lineHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  }),
   children: PropTypes.string.isRequired,
 };
