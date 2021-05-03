@@ -2,7 +2,7 @@ import React from "react";
 import Input from "./index";
 
 export default {
-  title: "Example/Input",
+  title: "Components/Input",
   component: Input,
   argTypes: {},
 };

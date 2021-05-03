@@ -1,9 +1,9 @@
 import React from "react";
-import { CARD } from "../constants/card";
+import { CARD } from "../../constants";
 import CardTypeRadio from "./index";
 
 export default {
-  title: "Example/CardTypeRadio",
+  title: "Components/CardTypeRadio",
   component: CardTypeRadio,
   argTypes: {},
 };

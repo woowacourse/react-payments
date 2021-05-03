@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { URL } from "../constants";
-import { Header } from "./common";
+import { Header } from "../components";
 import CardAddition from "./CardAddition";
 import CompleteCardAddition from "./CompleteCardAddition";
 import Home from "./Home";

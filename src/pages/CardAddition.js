@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { CARD } from "./common/constants/card";
-import { Modal, CardTypeRadio } from "./common";
+import { CARD } from "../constants";
+import { Modal, CardTypeRadio } from "../components";
 import CardAdditionForm from "./CardAdditionForm";
 
 const CardAddition = (props) => {

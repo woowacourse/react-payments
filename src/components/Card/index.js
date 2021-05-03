@@ -1,17 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { CARD_SIZE } from "../constants/card";
+import { CARD_SIZE } from "../../constants";
 import "./style.css";
 import "../style/background.css";
 
 const Card = ({
   cardType,
   cardNumbers = [],
-  username = "",
-  expirationDate = "",
+  username,
+  expirationDate,
   size,
 }) => {
+  username = username ? username : "NAME";
+  expirationDate = expirationDate ? expirationDate : "MM/YY";
+
   const [
     firstNumbers,
     secondNumbers,
@@ -19,8 +22,6 @@ const Card = ({
     fourthNumbers,
   ] = cardNumbers;
   const { name: cardName, color } = cardType;
-
-  console.log(firstNumbers, secondNumbers, thirdNumbers, fourthNumbers);
 
   return (
     <div className={`card card--${size} font-${size}`}>
@@ -33,14 +34,14 @@ const Card = ({
             {secondNumbers && <li>{secondNumbers}</li>}
             {thirdNumbers && (
               <li>
-                {[...Array(thirdNumbers)].map((_, index) => (
+                {[...Array(thirdNumbers.length)].map((_, index) => (
                   <span key={index} className="dot"></span>
                 ))}
               </li>
             )}
             {fourthNumbers && (
               <li>
-                {[...Array(fourthNumbers)].map((_, index) => (
+                {[...Array(fourthNumbers.length)].map((_, index) => (
                   <span key={index} className="dot"></span>
                 ))}
               </li>
@@ -48,11 +49,9 @@ const Card = ({
           </ul>
         )}
         <div className="card__inner-bottom font-m">
-          <span className="card__inner-bottom-username">
-            {username === "" ? "NAME" : username}
-          </span>
+          <span className="card__inner-bottom-username">{username}</span>
           <span className="card__inner-bottom-expiration-date">
-            {expirationDate === "" ? "MM/YY" : expirationDate}
+            {expirationDate}
           </span>
         </div>
       </div>
