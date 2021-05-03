@@ -31,13 +31,13 @@ export const CardInfoForm = (props) => {
         setNumber={setNumber}
         setCompany={setCompany}
         setIsModalOpen={setIsModalOpen}
-        expirationDateInputRef={expirationDateInputRef}
+        refToBeFocusedNext={expirationDateInputRef}
       />
       <ExpirationDateInput
         expirationDate={expirationDate}
         setExpirationDate={setExpirationDate}
         ref={expirationDateInputRef}
-        ownerNameInputRef={ownerNameInputRef}
+        refToBeFocusedNext={ownerNameInputRef}
       />
       <OwnerNameInput
         initialOwnerName={initialCardInfo.ownerName}
@@ -49,7 +49,7 @@ export const CardInfoForm = (props) => {
       <SecurityCodeInput
         securityCode={securityCode}
         setSecurityCode={setSecurityCode}
-        passwordInputRef={passwordInputRef}
+        refToBeFocusedNext={passwordInputRef}
       />
       <PasswordInput password={password} setPassword={setPassword} ref={passwordInputRef} />
       <Button

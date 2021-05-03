@@ -4,7 +4,7 @@ import { handleBlockInvalidChar, handleCardNumberInputChange } from './handler';
 import { CARD_NUMBER_UNIT_LENGTH } from '../../../../../constants';
 
 export const CardNumberInput = (props) => {
-  const { number, setNumber, setCompany, setIsModalOpen, expirationDateInputRef } = props;
+  const { number, setNumber, setCompany, setIsModalOpen, refToBeFocusedNext } = props;
   const firstRef = useRef();
   const secondRef = useRef();
   const thirdRef = useRef();
@@ -13,7 +13,7 @@ export const CardNumberInput = (props) => {
     first: secondRef,
     second: thirdRef,
     third: fourthRef,
-    fourth: expirationDateInputRef,
+    fourth: refToBeFocusedNext,
   };
 
   useEffect(() => {

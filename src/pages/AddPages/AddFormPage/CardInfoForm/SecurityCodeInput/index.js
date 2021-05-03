@@ -3,7 +3,7 @@ import { SECURITY_CODE_LENGTH } from '../../../../../constants';
 import cvcImage from '../../../../../images/cvc.png';
 
 export const SecurityCodeInput = (props) => {
-  const { securityCode, setSecurityCode, passwordInputRef } = props;
+  const { securityCode, setSecurityCode, refToBeFocusedNext } = props;
 
   return (
     <>
@@ -13,7 +13,7 @@ export const SecurityCodeInput = (props) => {
           className="SecurityCodeInput__Field"
           container="CardInfoForm__Input__Filler--filled SecurityCodeInput__Filler"
           type="password"
-          onChange={(e) => handleSecurityCodeInputChange({ e, setSecurityCode, passwordInputRef })}
+          onChange={(e) => handleSecurityCodeInputChange({ e, setSecurityCode, passwordInputRef: refToBeFocusedNext })}
           maxLength={SECURITY_CODE_LENGTH}
           value={securityCode}
         />
