@@ -55,6 +55,14 @@ const validateCardPasswords = cardPasswords => {
   );
 };
 
+const validateNickname = name => {
+  if (typeof name !== "string") {
+    throw new TypeError("nickname should be a string");
+  }
+
+  return REG_EXP.NICKNAME.test(name);
+};
+
 const validation = {
   [CARD_INFO.CARD_NUMBERS]: validateCardNumbers,
   [CARD_INFO.EXPIRATION_MONTH]: validateExpirationMonth,
@@ -62,6 +70,7 @@ const validation = {
   [CARD_INFO.OWNER_NAME]: validateOwnerName,
   [CARD_INFO.SECURITY_CODE]: validateSecurityCode,
   [CARD_INFO.CARD_PASSWORDS]: validateCardPasswords,
+  [CARD_INFO.NICKNAME]: validateNickname,
 };
 
 const checkValidation = (inputName, value) => {

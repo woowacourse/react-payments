@@ -47,11 +47,12 @@ export const LENGTH = {
     MAX: 1,
   },
   NICKNAME: {
-    MIN: 1,
+    MIN: 0,
     MAX: 10,
   },
 };
 
 export const REG_EXP = {
   OWNER_NAME: new RegExp(`^[가-힣|A-Z|\\s]{${LENGTH.OWNER_NAME.MIN},${LENGTH.OWNER_NAME.MAX}}$`),
+  NICKNAME: new RegExp(`^[가-힣|A-Z|\\s]{${LENGTH.NICKNAME.MIN},${LENGTH.NICKNAME.MAX}}$`),
 };

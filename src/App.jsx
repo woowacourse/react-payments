@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CardAddPage, CardAddCompletion } from "./components";
-import { CARD_INFO, PAGE, setLocalStorage } from "./utils";
+import { CARD_INFO, checkValidation, getLocalStorage, PAGE, replaceValue, setLocalStorage } from "./utils";
 import { LS_KEY } from "./utils";
 
 const initialCardInfo = {
@@ -15,12 +15,56 @@ const initialCardInfo = {
   [CARD_INFO.NICKNAME]: "",
 };
 
+const initialValidation = {
+  [CARD_INFO.BACKGROUND_COLOR]: null,
+  [CARD_INFO.BANK]: null,
+  [CARD_INFO.CARD_NUMBERS]: null,
+  [CARD_INFO.EXPIRATION_MONTH]: null,
+  [CARD_INFO.EXPIRATION_YEAR]: null,
+  [CARD_INFO.OWNER_NAME]: true,
+  [CARD_INFO.SECURITY_CODE]: null,
+  [CARD_INFO.CARD_PASSWORDS]: null,
+  [CARD_INFO.NICKNAME]: true,
+};
+
 const App = () => {
-  const [currentPage, setCurrentPage] = useState(PAGE.CARD_ADD_COMPLETION);
+  const [currentPage, setCurrentPage] = useState(PAGE.CARD_ADD);
+  const [cardInfos] = useState(getLocalStorage(LS_KEY.CARD_INFOS) ?? []);
   const [newCardInfo, setNewCardInfo] = useState(initialCardInfo);
+  const [validation, setValidation] = useState(initialValidation);
+
+  const addBank = (backgroundColor, bank) => {
+    setNewCardInfo({ ...newCardInfo, [CARD_INFO.BACKGROUND_COLOR]: backgroundColor, [CARD_INFO.BANK]: bank });
+    setValidation({ ...validation, [CARD_INFO.BACKGROUND_COLOR]: true, [CARD_INFO.BANK]: true });
+  };
+
+  const handleInputChange = event => {
+    try {
+      const { name, value, dataset } = event.target;
+      const targetIndex = Number(dataset.index);
+      const replacedValue = replaceValue(name, value);
+      const newValue = !Number.isNaN(targetIndex)
+        ? newCardInfo[name].map((prevValue, index) => (index === targetIndex ? replacedValue : prevValue))
+        : replacedValue;
+
+      setNewCardInfo({ ...newCardInfo, [name]: newValue });
+      checkValidation(name, newValue);
+      setValidation({ ...validation, [name]: true });
+    } catch (error) {
+      if (error.type === "validation") {
+        setValidation({ ...validation, [error.message]: false });
+
+        return;
+      }
+
+      console.error(error.message);
+    }
+  };
 
   const submitCardInfo = () => {
-    setLocalStorage(LS_KEY.CARD_INFOS, newCardInfo);
+    const newCardInfos = [...cardInfos, newCardInfo];
+
+    setLocalStorage(LS_KEY.CARD_INFOS, newCardInfos);
   };
 
   return (
@@ -28,14 +72,16 @@ const App = () => {
       {currentPage === PAGE.CARD_ADD && (
         <CardAddPage
           cardInfo={newCardInfo}
-          setCardInfo={setNewCardInfo}
-          routeTo={() => setCurrentPage(PAGE.CARD_ADD_COMPLETION)}
+          validation={validation}
+          addBank={addBank}
+          onInputChange={handleInputChange}
+          routeToNext={() => setCurrentPage(PAGE.CARD_ADD_COMPLETION)}
         />
       )}
       {currentPage === PAGE.CARD_ADD_COMPLETION && (
         <CardAddCompletion
           cardInfo={newCardInfo}
-          setCardInfo={setNewCardInfo}
+          onInputChange={handleInputChange}
           submitCardInfo={submitCardInfo}
           routeToNext={() => setCurrentPage(PAGE.CARD_LIST)}
         />

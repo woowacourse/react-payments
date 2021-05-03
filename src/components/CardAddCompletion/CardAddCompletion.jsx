@@ -1,20 +1,9 @@
 import React from "react";
 import Button from "../Button/Button";
 import Card from "../Card/Card";
-import { CARD_INFO, LENGTH, replaceValue } from "../../utils";
+import { CARD_INFO, LENGTH } from "../../utils";
 
-const CardAddCompletion = ({ cardInfo, setCardInfo, submitCardInfo, routeToNext }) => {
-  const handleInputChange = event => {
-    try {
-      const { name, value } = event.target;
-      const replacedValue = replaceValue(name, value);
-
-      setCardInfo({ ...cardInfo, [CARD_INFO.NICKNAME]: replacedValue });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+const CardAddCompletion = ({ cardInfo, onInputChange, submitCardInfo, routeToNext }) => {
   const handleFormSubmit = event => {
     event.preventDefault();
 
@@ -43,7 +32,7 @@ const CardAddCompletion = ({ cardInfo, setCardInfo, submitCardInfo, routeToNext 
               min={LENGTH.NICKNAME.MIN}
               max={LENGTH.NICKNAME.MAX}
               value={cardInfo.nickname}
-              onChange={handleInputChange}
+              onChange={onInputChange}
             />
           </div>
           <div className="flex justify-end items-center w-full h-10">
