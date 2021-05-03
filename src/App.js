@@ -6,18 +6,21 @@ import CardList from './pages/CardList/CardList';
 import CardAddForm from './pages/CardAddForm/CardAddForm';
 import CardAddComplete from './pages/CardAddComplete/CardAddComplete';
 import ROUTE from './constants/route';
+import { CardListProvider } from './contexts/CardList';
 
 const App = () => (
   <ThemeProvider theme={theme}>
     <GlobalStyle />
 
-    <Router>
-      <Switch>
-        <Route exact path={ROUTE.HOME} component={CardList} />
-        <Route exact path={ROUTE.ADD} component={CardAddForm} />
-        <Route exact path={ROUTE.COMPLETE} component={CardAddComplete} />
-      </Switch>
-    </Router>
+    <CardListProvider>
+      <Router>
+        <Switch>
+          <Route exact path={ROUTE.HOME} component={CardList} />
+          <Route exact path={ROUTE.ADD} component={CardAddForm} />
+          <Route exact path={ROUTE.COMPLETE} component={CardAddComplete} />
+        </Switch>
+      </Router>
+    </CardListProvider>
   </ThemeProvider>
 );
 

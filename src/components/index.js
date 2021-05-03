@@ -10,6 +10,8 @@ import InputBox from './InputBox/InputBox';
 import Modal from './Modal/Modal';
 import PinNumberInput from './PinNumberInput/PinNumberInput';
 import ToolTip from './ToolTip/ToolTip';
+import Spinner from './Spinner/Spinner';
+import ErrorPage from './ErrorPage/ErrorPage';
 
 export {
   Button,
@@ -24,4 +26,6 @@ export {
   Modal,
   PinNumberInput,
   ToolTip,
+  Spinner,
+  ErrorPage,
 };

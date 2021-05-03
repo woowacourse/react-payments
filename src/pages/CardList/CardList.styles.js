@@ -6,6 +6,10 @@ const Styled = {
     margin: 65px 0;
   `,
 
+  Spinner: styled.div`
+    ${Flex({ justify: 'center', items: 'center' })};
+  `,
+
   CardList: styled.ul`
     margin: 0;
     padding: 0;
