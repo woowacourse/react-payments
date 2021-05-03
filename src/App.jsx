@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { CardAddPage, CardAddCompletion } from "./components";
-import { CARD_INFO, checkValidation, getLocalStorage, PAGE, replaceValue, setLocalStorage } from "./utils";
+import { CardAddPage, CardAddCompletion, CardListPage } from "./components";
+import { CARD_INFO, checkValidation, getId, getLocalStorage, PAGE, replaceValue, setLocalStorage } from "./utils";
 import { LS_KEY } from "./utils";
 
 const initialCardInfo = {
@@ -28,8 +28,8 @@ const initialValidation = {
 };
 
 const App = () => {
-  const [currentPage, setCurrentPage] = useState(PAGE.CARD_ADD);
-  const [cardInfos] = useState(getLocalStorage(LS_KEY.CARD_INFOS) ?? []);
+  const [currentPage, setCurrentPage] = useState(PAGE.CARD_LIST);
+  const [cardInfos, setCardInfos] = useState(getLocalStorage(LS_KEY.CARD_INFOS) ?? []);
   const [newCardInfo, setNewCardInfo] = useState(initialCardInfo);
   const [validation, setValidation] = useState(initialValidation);
 
@@ -62,9 +62,10 @@ const App = () => {
   };
 
   const submitCardInfo = () => {
-    const newCardInfos = [...cardInfos, newCardInfo];
+    const newCardInfos = [...cardInfos, { id: getId(), cardInfo: newCardInfo }];
 
     setLocalStorage(LS_KEY.CARD_INFOS, newCardInfos);
+    setCardInfos(newCardInfos);
   };
 
   return (
@@ -85,6 +86,9 @@ const App = () => {
           submitCardInfo={submitCardInfo}
           routeToNext={() => setCurrentPage(PAGE.CARD_LIST)}
         />
+      )}
+      {currentPage === PAGE.CARD_LIST && (
+        <CardListPage cardInfos={cardInfos} routeToNext={() => setCurrentPage(PAGE.CARD_ADD)} />
       )}
     </div>
   );
