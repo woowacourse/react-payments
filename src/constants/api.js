@@ -1,10 +1,16 @@
 const API = {
-  BASE_URL: 'http://localhost:3001/cardList',
+  BASE_URL: 'http://192.168.0.3:3001/cardList',
   STATUS: {
     INITIAL: 'initial',
     PENDING: 'pending',
     SUCCESS: 'success',
     FAILURE: 'failure',
+  },
+  METHOD: {
+    GET: 'get',
+    POST: 'post',
+    PUT: 'put',
+    DELETE: 'delete',
   },
 };
 

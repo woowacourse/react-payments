@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { API } from '../constants';
 
-export default (url, { method = 'get' } = {}) => {
+export default (url, { method = API.METHOD.GET } = {}) => {
   const [state, setState] = useState({
     data: null,
     status: API.STATUS.INITIAL,

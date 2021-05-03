@@ -10,7 +10,7 @@ const CardAddComplete = () => {
   const location = useLocation();
   const nickname = useInput('');
   const [updateCard, fetchUpdateCard] = useFetch(`${API.BASE_URL}/${location?.state?.card?.id}`, {
-    method: 'put',
+    method: API.METHOD.PUT,
   });
 
   if (!location.state?.card) return <Redirect to={ROUTE.HOME} />;
@@ -34,7 +34,7 @@ const CardAddComplete = () => {
 
       if (response.status === API.STATUS.FAILURE) {
         // eslint-disable-next-line no-alert
-        alert('카드는 등록되었지만 닉네임을 설정하지 못했어요! 추후에 닉네임을 수정해주세요');
+        alert(MESSAGE.NICKNAME_SUBMIT_FAILED);
       }
     }
 

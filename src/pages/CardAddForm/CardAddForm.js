@@ -23,7 +23,7 @@ import { API, CARD, MESSAGE, REGEX, ROUTE } from '../../constants';
 const CardAddForm = () => {
   const history = useHistory();
 
-  const [createCard, fetchCreateCard] = useFetch(API.BASE_URL, { method: 'post' });
+  const [createCard, fetchCreateCard] = useFetch(API.BASE_URL, { method: API.METHOD.POST });
 
   const [cardNumberInputRefs] = useState(initArray(4, useRef()));
   const [pinNumberInputRefs] = useState(initArray(2, useRef()));
@@ -82,13 +82,13 @@ const CardAddForm = () => {
 
     if (event.target === thirdInputRef || event.target === fourthInputRef) {
       if (firstInputRef.value.length < 4) {
-        alert('카드번호 앞 8자리를 먼저 입력해주세요');
+        alert(MESSAGE.CARD_NUMBER_NOT_ENTERED_HALF);
         firstInputRef?.focus();
         return;
       }
 
       if (secondInputRef.value.length < 4) {
-        alert('카드번호 앞 8자리를 먼저 입력해주세요');
+        alert(MESSAGE.CARD_NUMBER_NOT_ENTERED_HALF);
         secondInputRef?.focus();
       }
 
@@ -115,7 +115,7 @@ const CardAddForm = () => {
     const response = await fetchCreateCard(newCard);
 
     if (response.status === API.STATUS.FAILURE) {
-      alert('카드를 추가하지 못했어요! 다시 시도해주세요');
+      alert(MESSAGE.CARD_ADD_FAILED);
       return;
     }
 
