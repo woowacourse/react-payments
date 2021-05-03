@@ -1,10 +1,8 @@
 import React from 'react';
-import { Input } from '..';
-import { Icon } from '../..';
-import '../../../index.css';
+import { Input, Icon } from '../../../../components';
 import './style.css';
 
-export default function CardPasswordInput({ password, onSetPassword }) {
+export default function Password({ password, onSetPassword }) {
   return (
     <div className="card-password-input__container">
       <label className="card-password-input__title" htmlFor="card-password-first">

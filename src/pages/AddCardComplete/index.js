@@ -24,7 +24,7 @@ export default function AddCardComplete({ addCards }) {
     event.preventDefault();
 
     addCards({ userName, serialNumber, expirationDate, securityCode, password, cardCompany });
-    history.push('/addCardForm');
+    history.push('/cardList');
   };
 
   return (

@@ -1,9 +1,9 @@
 import React from 'react';
-import { CardCompanyOption } from '../';
-import { CARD_COMPANY } from '../../constants';
+import { CARD_COMPANY } from '../../../../../constants';
+import CardCompanyOption from '../CardCompanyOption';
 import './style.css';
 
-export default function CardCompanySelection({ onSetCardCompany }) {
+export default function CardCompanySelection({ setCardCompany }) {
   return (
     <div className="card-company-selection">
       {Object.entries(CARD_COMPANY).map(([key, { NAME, COLOR }]) => (
@@ -12,7 +12,7 @@ export default function CardCompanySelection({ onSetCardCompany }) {
           name={NAME}
           color={COLOR}
           onClick={() => {
-            onSetCardCompany(key);
+            setCardCompany(key);
           }}
         />
       ))}

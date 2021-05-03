@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AddCardForm, AddCardComplete } from './pages';
+import { AddCard, AddCardComplete } from './pages';
 import { Route, BrowserRouter } from 'react-router-dom';
 import CardList from './pages/CardList';
 
@@ -17,8 +17,8 @@ function App() {
         <Route exact path="/">
           <CardList cards={cards} />
         </Route>
-        <Route exact path="/addCardForm">
-          <AddCardForm />
+        <Route exact path="/addCard">
+          <AddCard />
         </Route>
         <Route exact path="/addCardComplete">
           <AddCardComplete addCards={addCards} />

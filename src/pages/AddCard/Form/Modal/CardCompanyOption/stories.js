@@ -2,7 +2,7 @@ import React from 'react';
 import CardCompanyOption from '.';
 
 export default {
-  title: 'Components/CardCompanyOption',
+  title: 'Page/AddCard/CardCompanyOption',
   component: CardCompanyOption,
 };
 

@@ -14,7 +14,7 @@ export default function CardList({ cards }) {
             <span className="item__nick-name">{card.nickName}</span>
           </ul>
         ))}
-        <Link to="/addCardForm">
+        <Link to="/addCard">
           <AddCard />
         </Link>
       </li>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dot } from '../Icon/assets';
+import { Dot } from '../../../../../components/Icon/assets';
 import './style.css';
 
 export default function CardCompanyOption({ name, color, ...props }) {

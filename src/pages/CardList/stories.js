@@ -1,9 +1,17 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router';
 import CardList from '.';
 
 export default {
   title: 'Page/CardList',
   component: CardList,
+  decorators: [
+    (Story) => (
+      <MemoryRouter initialEntries={['/']}>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 };
 
 const Template = (args) => <CardList {...args} />;
@@ -12,7 +20,7 @@ export const Default = Template.bind({});
 
 // TODO 모델추가
 Default.args = {
-  CardList: [
+  cards: [
     {
       userName: 'POCO',
       companyName: '포코카드',

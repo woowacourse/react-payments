@@ -1,9 +1,17 @@
 import React from 'react';
+import { MemoryRouter } from 'react-router';
 import AddCardComplete from '.';
 
 export default {
   title: 'Page/AddCardComplete',
   component: AddCardComplete,
+  decorators: [
+    (Story) => (
+      <MemoryRouter initialEntries={['/']}>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
   argTypes: {
     expirationDate: {
       control: {
