@@ -14,24 +14,30 @@ const transparentInputStyles = {
   color: '#383838',
 };
 
-const CardCreationCompletePage = ({ history, newCardInfo, setNewCardInfo }) => {
-  const [cardNickname, setcardNickname] = useState('');
-  const { selectedCardInfo, cardNumber, cardOwner, cardExpiredDate } = newCardInfo;
+const CardNicknameChangePage = ({ history, location, setNewCardInfo }) => {
+  const {
+    id,
+    selectedCardInfo,
+    cardNumber,
+    cardOwner,
+    cardExpiredDate,
+    cardNickname: originalNickname,
+  } = location.cardInfo;
+  const [cardNickname, setcardNickname] = useState(originalNickname);
 
   const handleNewCardSubmit = e => {
     e.preventDefault();
 
-    const data = { selectedCardInfo, cardNumber, cardOwner, cardNickname };
-    axios.post('http://localhost:4000/cards', data);
-
-    alert('카드를 추가하였습니다.');
+    const data = { cardNickname: cardNickname };
+    axios.patch(`http://localhost:4000/cards/${id}`, data);
+    alert('카드 정보를 수정하였습니다.');
     setNewCardInfo(prevState => ({ ...prevState, cardNickname }));
     history.push('/');
   };
 
   return (
     <>
-      <Styled.Title>카드 등록이 완료되었습니다.</Styled.Title>
+      <Styled.Title>카드 별칭 수정</Styled.Title>
       <CreditCard
         size={CARD_SIZE.LG}
         backgroundColor={selectedCardInfo.color}
@@ -60,9 +66,9 @@ const CardCreationCompletePage = ({ history, newCardInfo, setNewCardInfo }) => {
   );
 };
 
-CardCreationCompletePage.propTypes = {
-  newCardInfo: PropTypes.object.isRequired,
+CardNicknameChangePage.propTypes = {
+  cardInfo: PropTypes.object.isRequired,
   setNewCardInfo: PropTypes.func.isRequired,
 };
 
-export default withRouter(CardCreationCompletePage);
+export default withRouter(CardNicknameChangePage);

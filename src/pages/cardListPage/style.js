@@ -26,7 +26,7 @@ const Styled = {
     flex-direction: column;
     align-items: center;
   `,
-  CardNickName: styled.div`
+  CardNickname: styled.div`
     margin-top: 10px;
     font-size: 14px;
     font-weight: 700;

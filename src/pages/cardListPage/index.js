@@ -49,14 +49,16 @@ const CardListPage = () => {
       <Styled.Container>
         {cardData.map(card => (
           <Styled.CardContainer>
-            <CreditCard
-              backgroundColor={card.selectedCardInfo.color}
-              cardType={card.selectedCardInfo.name}
-              cardNumber={Object.values(card.cardNumber)}
-              cardOwner={card.cardOwner}
-              cardExpiredDate={card.cardExpiredDate}
-            />
-            <Styled.CardNickName>{card.cardNickName}</Styled.CardNickName>
+            <Link to={{ pathname: `/change/${card.id}`, cardInfo: card }}>
+              <CreditCard
+                backgroundColor={card.selectedCardInfo.color}
+                cardType={card.selectedCardInfo.name}
+                cardNumber={Object.values(card.cardNumber)}
+                cardOwner={card.cardOwner}
+                cardExpiredDate={card.cardExpiredDate}
+              />
+            </Link>
+            <Styled.CardNickname>{card.cardNickname}</Styled.CardNickname>
           </Styled.CardContainer>
         ))}
         <Link to="/create">

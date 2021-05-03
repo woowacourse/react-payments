@@ -2,7 +2,8 @@ import { useState } from 'react';
 import CardCreationPage from './pages/cardCreationPage';
 import CardListPage from './pages/cardListPage';
 import CardCreationCompletePage from './pages/cardCreationCompletePage';
-import { BrowserRouter, Redirect, Route } from 'react-router-dom';
+import CardNicknameChangePage from './pages/cardNicknameChangePage';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { CardValidator } from './validations/card';
 import { INPUT } from './constants';
 
@@ -12,26 +13,28 @@ const App = () => {
     cardExpiredDate: { [INPUT.MONTH]: '', [INPUT.YEAR]: '' },
     cardOwner: '',
     selectedCardInfo: { id: null, name: '', color: '' },
-    cardNickName: '',
+    cardNickname: '',
   });
 
   const isValidAccess = CardValidator.Number(newCardInfo.cardNumber);
 
   return (
     <BrowserRouter>
-      <Route exact path="/" render={() => <CardListPage />} />
-      <Route exact path="/create" render={() => <CardCreationPage setNewCardInfo={setNewCardInfo} />} />
-      <Route
-        exact
-        path="/complete"
-        render={() =>
-          isValidAccess ? (
-            <CardCreationCompletePage newCardInfo={newCardInfo} setNewCardInfo={setNewCardInfo} />
-          ) : (
-            <Redirect to="/" />
-          )
-        }
-      />
+      <Switch>
+        <Route exact path="/" render={() => <CardListPage />} />
+        <Route path="/create" render={() => <CardCreationPage setNewCardInfo={setNewCardInfo} />} />
+        <Route
+          path="/complete"
+          render={() =>
+            isValidAccess ? (
+              <CardCreationCompletePage newCardInfo={newCardInfo} setNewCardInfo={setNewCardInfo} />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
+        />
+        <Route path="/change" render={() => <CardNicknameChangePage setNewCardInfo={setNewCardInfo} />} />
+      </Switch>
     </BrowserRouter>
   );
 };
