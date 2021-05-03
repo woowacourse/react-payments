@@ -1,5 +1,4 @@
 import React from "react";
-import { Router } from "react-router";
 import { CARD } from "../../constants";
 import MyCardList from "./MyCardList";
 
@@ -19,10 +18,7 @@ Basic.args = {
       cardId: 1,
       cardType: CARD.SUN,
       cardNumbers: ["1111", "2222", "3333", "4444"],
-      expirationDate: {
-        month: "5",
-        year: "12",
-      },
+      expirationDate: "05/24",
       username: "권미키",
       cardDescription: "권미키 카드",
     },
@@ -30,10 +26,7 @@ Basic.args = {
       cardId: 2,
       cardType: CARD.SUN,
       cardNumbers: ["2222", "3333", "4444", "5555"],
-      expirationDate: {
-        month: "4",
-        year: "96",
-      },
+      expirationDate: "04/96",
       username: "오미키",
       cardDescription: "오미키 카드",
     },
