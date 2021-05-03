@@ -5,14 +5,13 @@ import styles from './style.css';
 
 const cx = classnames.bind(styles);
 
-export const Modal = ({ isOpen, className, children, ...props }) => {
-  const modalClass = cx('Modal', { 'Modal--open': isOpen });
-  const modalContentClass = cx('Modal__Content', className);
-
+export const Modal = ({ isOpen, className, style, children, ...rest }) => {
   return (
-    <div className={modalClass} {...props}>
+    <div className={cx('Modal', { 'Modal--open': isOpen })} {...rest}>
       <div className="Modal__ViewPort">
-        <div className={modalContentClass}>{children}</div>
+        <div className={cx('Modal__Content', className)} style={style}>
+          {children}
+        </div>
       </div>
     </div>
   );
@@ -21,5 +20,6 @@ export const Modal = ({ isOpen, className, children, ...props }) => {
 Modal.propTypes = {
   isOpen: PropTypes.bool,
   className: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  styles: PropTypes.object,
+  children: PropTypes.node,
 };

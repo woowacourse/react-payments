@@ -7,7 +7,6 @@ import { SecurityCodeInput } from './SecurityCodeInput';
 import { PasswordInput } from './PasswordInput';
 import { handleCardInfoSubmit } from './handler';
 import { isFormFulFilled } from './validator';
-import './style.css';
 
 export const CardInfoForm = (props) => {
   const { initialCardInfo, cardInfo, setCardInfo, setIsModalOpen, setRoute } = props;

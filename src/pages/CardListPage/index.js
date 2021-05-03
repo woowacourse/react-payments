@@ -9,9 +9,9 @@ export const CardListPage = (props) => {
   return (
     <div className="CardListPage">
       <Heading>보유카드</Heading>
-      <button className="Card__AddButton" onClick={handleAddButtonClick}>
+      <button className="CardListPage__AddButton" onClick={handleAddButtonClick}>
         <Card>
-          <Text className="CardListPage__Text">+</Text>
+          <Text className="CardListPage__AddSign">+</Text>
         </Card>
       </button>
     </div>

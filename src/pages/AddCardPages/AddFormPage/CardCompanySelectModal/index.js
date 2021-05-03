@@ -2,7 +2,6 @@
 import { Button, Label, Modal } from '../../../../components';
 import { handleCardCompanySelect, handleDimmedAreaClick } from './handler';
 import { CARD_COMPANY_LIST } from '../../../../constants';
-import './style.css';
 
 export const CardCompanySelectModal = ({ isOpen, setCardInfo, setIsModalOpen }) => {
   return (
@@ -30,7 +29,7 @@ function CardCompanyItem({ company, setCardInfo, setIsModalOpen }) {
   const { name, color } = company;
 
   return (
-    <li className="CardCompanyItem">
+    <li className="CardCompanyList__Item">
       <Button
         name={name}
         backgroundColor={color}

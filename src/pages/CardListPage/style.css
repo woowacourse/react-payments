@@ -5,7 +5,7 @@
   align-items: flex-start;
 }
 
-.Card__AddButton {
+.CardListPage__AddButton {
   margin-top: 3.75rem;
   align-self: center;
   padding: 0;
@@ -17,8 +17,14 @@
   cursor: pointer;
 }
 
-.CardListPage__Text {
+.CardListPage__AddSign {
   width: 100%;
   font-size: 1.875rem;
   text-align: center;
+}
+
+.CreditCardPreview {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
 }
