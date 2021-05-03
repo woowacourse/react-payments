@@ -3,7 +3,7 @@
   border-radius: 5px;
   overflow: hidden;
 
-  box-shadow: 3px 3px 4px 0.5px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 4px 1px rgba(0, 0, 0, 0.2);
 }
 
 .card:before {
