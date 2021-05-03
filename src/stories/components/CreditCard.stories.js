@@ -1,6 +1,8 @@
 import { CARD_SIZE, CreditCard } from '../../components/commons/card/CreditCard';
 import { COLOR } from '../../constants/color';
-import { FIRST, SECOND, THIRD, FOURTH, MONTH, YEAR } from '../../constants/inputName';
+import { INPUT_NAME } from '../../constants/input';
+
+const { FIRST, SECOND, THIRD, FOURTH, MONTH, YEAR } = INPUT_NAME;
 
 export default {
   title: 'Components/CreditCard',

@@ -53,7 +53,8 @@
     "@storybook/react": "^6.2.8",
     "chromatic": "^5.6.2",
     "eslint-config-prettier": "^8.2.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "storybook": "^6.2.9"
   },
   "resolutions": {
     "babel-loader": "8.1.0"

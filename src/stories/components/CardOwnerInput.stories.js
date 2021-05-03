@@ -8,8 +8,4 @@ export default {
 const Template = args => <CardOwnerInput {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
-  setCardOwner: () => {},
-  setValidCardOwner: () => {},
-  cardOwner: '디토',
-};
+Default.args = {};
