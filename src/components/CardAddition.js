@@ -67,7 +67,7 @@ const CardAddition = (props) => {
   useEffect(() => {
     setInputVerification({
       cardNumbers:
-        cardNumbers.length !== 0 &&
+        cardNumbers.length === CARD_NUMBER.LENGTH &&
         cardNumbers.every(
           (number) => number.length === CARD_NUMBER.PARTIAL_LENGTH
         ),
