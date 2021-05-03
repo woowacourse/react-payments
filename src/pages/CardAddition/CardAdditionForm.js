@@ -5,17 +5,17 @@ import {
   FORMAT_CHAR,
   SECURE_CODE_LENGTH,
   USERNAME,
-} from "../constants";
+} from "../../constants";
 import {
   useCardNumbers,
   useControlledInputValue,
   useExpirationDate,
   usePassword,
   useSecureCode,
-} from "../hooks";
-import { getNewId } from "../utils";
-import { Button, Card, Input } from "../components";
-import { CARD, CARD_SIZE } from "../constants";
+} from "../../hooks";
+import { getNewId } from "../../utils";
+import { Button, Card, Input } from "../../components";
+import { CARD, CARD_SIZE } from "../../constants";
 import PropTypes from "prop-types";
 
 const formatCardNumbers = (numbers) => {

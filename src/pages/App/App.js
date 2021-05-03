@@ -1,11 +1,12 @@
+import "./App.css";
 import { useState } from "react";
-import { URL } from "../constants";
-import { Header } from "../components";
-import CardAddition from "./CardAddition";
-import CompleteCardAddition from "./CompleteCardAddition";
-import Home from "./Home";
+import { URL } from "../../constants";
+import { Header } from "../../components";
+import CardAddition from "../CardAddition/CardAddition";
+import CompleteCardAddition from "../CompleteCardAddition/CompleteCardAddition";
+import Home from "../Home/Home";
 import { Route, Switch, useHistory, useLocation } from "react-router";
-import { QUERY_STRING_KEY } from "../constants.js";
+import { QUERY_STRING_KEY } from "../../constants.js";
 
 const App = () => {
   const [cardList, setCardList] = useState([]);
