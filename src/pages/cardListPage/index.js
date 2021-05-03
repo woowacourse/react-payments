@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Header } from '../../components/commons/header/Header';
 import { Button } from '../../components/commons/button/Button';
@@ -11,20 +11,45 @@ import { ReactComponent as Spinner } from '../../assets/spinner.svg';
 const CardListPage = () => {
   const [isLoading, setLoading] = useState(true);
   const [isServerOK, setServerOK] = useState(true);
-  const [cardData, setCardData] = useState(null);
+  const [clickedCardId, setClickedCardId] = useState(null);
+  const cardData = useRef(null);
+  console.log(
+    'isLoading:',
+    isLoading,
+    'isServerOk:',
+    isServerOK,
+    'clickedCardid:',
+    clickedCardId,
+    'cardData:',
+    cardData
+  );
+
+  const handleCardClick = cardId => {
+    setClickedCardId(prev => {
+      if (prev === cardId) {
+        return null;
+      }
+      return cardId;
+    });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log('in');
       try {
         const response = await axios.get('http://localhost:4000/cards');
-        setCardData(response.data);
+        cardData.current = response.data;
+        console.log(response.data);
         setLoading(false);
       } catch {
         setServerOK(false);
       }
     };
     fetchData();
-  });
+    return () => {
+      console.log('out');
+    };
+  }, []);
 
   if (!isServerOK) {
     return (
@@ -47,9 +72,13 @@ const CardListPage = () => {
     <>
       <Header>보유카드</Header>
       <Styled.Container>
-        {cardData.map(card => (
+        {cardData.current.map(card => (
           <Styled.CardContainer>
-            <Link to={{ pathname: `/change/${card.id}`, cardInfo: card }}>
+            <div
+              onClick={() => {
+                handleCardClick(card.id);
+              }}
+            >
               <CreditCard
                 backgroundColor={card.selectedCardInfo.color}
                 cardType={card.selectedCardInfo.name}
@@ -57,8 +86,16 @@ const CardListPage = () => {
                 cardOwner={card.cardOwner}
                 cardExpiredDate={card.cardExpiredDate}
               />
-            </Link>
+            </div>
             <Styled.CardNickname>{card.cardNickname}</Styled.CardNickname>
+            {clickedCardId === card.id && (
+              <Styled.ButtonContainer>
+                <Link to={{ pathname: `/change/${card.id}`, cardInfo: card }}>
+                  <Styled.EditButton type="button">✍️ 수정</Styled.EditButton>
+                </Link>
+                <Styled.DeleteButton type="button">🗑️ 삭제</Styled.DeleteButton>
+              </Styled.ButtonContainer>
+            )}
           </Styled.CardContainer>
         ))}
         <Link to="/create">

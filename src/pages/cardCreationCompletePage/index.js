@@ -18,11 +18,11 @@ const CardCreationCompletePage = ({ history, newCardInfo, setNewCardInfo }) => {
   const [cardNickname, setcardNickname] = useState('');
   const { selectedCardInfo, cardNumber, cardOwner, cardExpiredDate } = newCardInfo;
 
-  const handleNewCardSubmit = e => {
+  const handleNewCardSubmit = async e => {
     e.preventDefault();
 
     const data = { selectedCardInfo, cardNumber, cardOwner, cardNickname };
-    axios.post('http://localhost:4000/cards', data);
+    await axios.post('http://localhost:4000/cards', data);
 
     alert('카드를 추가하였습니다.');
     setNewCardInfo(prevState => ({ ...prevState, cardNickname }));

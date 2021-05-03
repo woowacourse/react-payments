@@ -22,6 +22,7 @@ const Styled = {
     }
   `,
   CardContainer: styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,6 +32,18 @@ const Styled = {
     font-size: 14px;
     font-weight: 700;
     color: ${COLOR.DARK_GRAY};
+  `,
+  ButtonContainer: styled.div`
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  `,
+  EditButton: styled.div`
+    cursor: pointer;
+  `,
+  DeleteButton: styled.div`
+    cursor: pointer;
   `,
 };
 

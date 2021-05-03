@@ -14,7 +14,7 @@ const transparentInputStyles = {
   color: '#383838',
 };
 
-const CardNicknameChangePage = ({ history, location, setNewCardInfo }) => {
+const CardNicknameChangePage = ({ history, location }) => {
   const {
     id,
     selectedCardInfo,
@@ -25,13 +25,13 @@ const CardNicknameChangePage = ({ history, location, setNewCardInfo }) => {
   } = location.cardInfo;
   const [cardNickname, setcardNickname] = useState(originalNickname);
 
-  const handleNewCardSubmit = e => {
+  const handleNewCardSubmit = async e => {
     e.preventDefault();
 
     const data = { cardNickname: cardNickname };
-    axios.patch(`http://localhost:4000/cards/${id}`, data);
+    await axios.patch(`http://localhost:4000/cards/${id}`, data);
+
     alert('카드 정보를 수정하였습니다.');
-    setNewCardInfo(prevState => ({ ...prevState, cardNickname }));
     history.push('/');
   };
 
@@ -68,7 +68,6 @@ const CardNicknameChangePage = ({ history, location, setNewCardInfo }) => {
 
 CardNicknameChangePage.propTypes = {
   cardInfo: PropTypes.object.isRequired,
-  setNewCardInfo: PropTypes.func.isRequired,
 };
 
 export default withRouter(CardNicknameChangePage);
