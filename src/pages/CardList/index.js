@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Card, Header } from '..';
+import { Card, Header } from '../../components';
 import { CardsContext } from '../../cardsContext';
 import { CARD_COMPANY } from '../../constants';
 import './style.css';
@@ -19,9 +19,9 @@ export default function CardList() {
             key={card.id}
           >
             <Card
-              cardCompanyName={CARD_COMPANY[card.company].NAME}
-              cardColor={CARD_COMPANY[card.company].COLOR}
-              cardNumber={card.number}
+              companyName={CARD_COMPANY[card.company].NAME}
+              color={CARD_COMPANY[card.company].COLOR}
+              number={card.number}
               userName={card.userName}
               expirationDate={card.expirationDate}
             />

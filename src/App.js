@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CardCompanySelection, SecurityCodeGuide } from './components';
-import { AddCardForm, AddCardComplete } from './pages';
+import { AddCardForm, AddCardComplete, CardList } from './pages';
 import { Modal } from './components';
 import { CARD_COMPANY } from './constants';
 import { Route, BrowserRouter } from 'react-router-dom';
@@ -34,7 +34,10 @@ function App() {
   return (
     <CardsProvider>
       <BrowserRouter>
-        <Route exact path={['/', '/addCardForm']}>
+        <Route path="/">
+          <CardList></CardList>
+        </Route>
+        <Route exact path="/addCardForm">
           <AddCardForm
             serialNumber={serialNumber}
             setSerialNumber={setSerialNumber}
