@@ -23,7 +23,7 @@ const initialCardState = {
   password: [],
 };
 
-function App() {
+const App = () => {
   const [page, setPage] = useState({
     id: PAGE.HOME.ID,
     headerText: PAGE.HOME.HEADER_TEXT,
@@ -73,6 +73,6 @@ function App() {
       <main>{mainComponent[page.id]}</main>
     </div>
   );
-}
+};
 
 export default App;

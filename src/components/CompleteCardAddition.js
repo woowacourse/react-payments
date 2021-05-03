@@ -5,7 +5,7 @@ import Button from "../stories/Button";
 import { CARD_SIZE } from "../stories/constants/card";
 import { CARD_DESCRIPTION, FORMAT_CHAR } from "../constants";
 
-function CompleteCardAddition(props) {
+const CompleteCardAddition = (props) => {
   const { cardType, cardNumbers, expirationDate, username } = props.card;
   const [cardDescription, setCardDescription] = useState("");
 
@@ -50,7 +50,7 @@ function CompleteCardAddition(props) {
       </form>
     </div>
   );
-}
+};
 
 CompleteCardAddition.propTypes = {
   onCardAdditionComplete: PropTypes.func.isRequired,

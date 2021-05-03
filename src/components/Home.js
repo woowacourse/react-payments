@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { PAGE } from "../constants";
 
-function Home(props) {
+const Home = (props) => {
   const { routeTo, cardList } = props;
 
   return (
@@ -20,7 +20,7 @@ function Home(props) {
       </ul>
     </>
   );
-}
+};
 
 Home.propTypes = {
   routeTo: PropTypes.func.isRequired,
