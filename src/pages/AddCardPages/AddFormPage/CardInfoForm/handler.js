@@ -1,4 +1,4 @@
-import { PAGE } from '../../../../constants';
+import { ROUTE } from '../../../../constants';
 import { isCardNameFulfilled } from './validator';
 
 export const handleCardInfoSubmit = ({ e, initialCardInfo, cardInfo, setIsModalOpen, setRoute }) => {
@@ -8,5 +8,5 @@ export const handleCardInfoSubmit = ({ e, initialCardInfo, cardInfo, setIsModalO
     setIsModalOpen(true);
     return;
   }
-  setRoute(PAGE.ADD_CARD_COMPLETE);
+  setRoute(ROUTE.ADD_COMPLETE);
 };

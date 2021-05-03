@@ -1,5 +1,7 @@
-export const PAGE = {
-  CARD_LIST: 'cardList',
-  ADD_CARD_FORM: 'addCardForm',
-  ADD_CARD_COMPLETE: 'addCardComplete',
+export const ROUTE = {
+  HOME: '/',
+  LIST: '/list',
+  ADD: '/add',
+  ADD_FORM: '/add/form',
+  ADD_COMPLETE: '/add/complete',
 };

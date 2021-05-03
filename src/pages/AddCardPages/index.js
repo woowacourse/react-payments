@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AddCompletePage } from './AddCompletePage';
 import { AddFormPage } from './AddFormPage';
-import { PAGE } from '../../constants';
+import { ROUTE } from '../../constants';
 
 const initialCardInfo = {
   number: { first: '', second: '', third: '', fourth: '' },
@@ -20,7 +20,7 @@ export const AddCardPage = (props) => {
 
   return (
     <>
-      {route === PAGE.ADD_CARD_FORM ? (
+      {route === ROUTE.ADD_FORM ? (
         <AddFormPage
           setRoute={setRoute}
           initialCardInfo={initialCardInfo}

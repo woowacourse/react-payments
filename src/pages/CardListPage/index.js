@@ -1,10 +1,10 @@
 import { Card, Text, Heading } from '../../components';
-import { PAGE } from '../../constants';
+import { ROUTE } from '../../constants';
 import './style.css';
 
 export const CardListPage = (props) => {
   const { setRoute } = props;
-  const handleAddButtonClick = () => setRoute(PAGE.ADD_CARD_FORM);
+  const handleAddButtonClick = () => setRoute(ROUTE.ADD_FORM);
 
   return (
     <div className="CardListPage">
