@@ -1,11 +1,17 @@
 import { useContext } from 'react';
 import { Card, Header } from '../../components';
 import { CardsContext } from '../../cardsContext';
-import { CARD_COMPANY } from '../../constants';
+import { CARD_COMPANY, PATH } from '../../constants';
 import './style.css';
+import { useHistory } from 'react-router';
 
 export default function CardList() {
   const cards = useContext(CardsContext);
+  const history = useHistory();
+
+  const onAddButtonClick = () => {
+    history.push(PATH.ADD_CARD_FORM);
+  };
 
   return (
     <div>
@@ -29,7 +35,12 @@ export default function CardList() {
           </button>
         ))}
 
-        <button type="button" className="card-list__item-button" aria-label="카드 추가">
+        <button
+          type="button"
+          className="card-list__item-button"
+          aria-label="카드 추가"
+          onClick={onAddButtonClick}
+        >
           <Card />
         </button>
       </main>

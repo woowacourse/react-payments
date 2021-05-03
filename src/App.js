@@ -34,7 +34,7 @@ function App() {
   return (
     <CardsProvider>
       <BrowserRouter>
-        <Route path="/">
+        <Route exact path="/">
           <CardList></CardList>
         </Route>
         <Route exact path="/addCardForm">
