@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CARD_NUMBER, FORMAT_CHAR } from "../constants";
 
 import { isNumberValue } from "../utils";
@@ -26,8 +26,15 @@ const splitCardNumbers = (value) => {
 
 const useCardNumbers = (initialCardNumbers) => {
   const [cardNumbers, setCardNumbers] = useState(initialCardNumbers);
-  // TODO: ref 고민해보기
+  const [cursorLocation, setCursorLocation] = useState(0);
   const cardNumbersInputRef = useRef();
+
+  useEffect(() => {
+    cardNumbersInputRef?.current?.setSelectionRange(
+      cursorLocation,
+      cursorLocation
+    );
+  }, [cursorLocation, cardNumbers]);
 
   const onCardNumbersChange = (event) => {
     const { value, selectionStart } = event.target;
@@ -48,11 +55,6 @@ const useCardNumbers = (initialCardNumbers) => {
     const fixedSelectionStart = isSelectionValid
       ? selectionStart
       : selectionStart + ((mod + 1 - remainder) % mod);
-
-    cardNumbersInputRef?.current?.setSelectionRange(
-      fixedSelectionStart,
-      fixedSelectionStart
-    );
 
     switch (true) {
       case diff > 0:
@@ -86,6 +88,7 @@ const useCardNumbers = (initialCardNumbers) => {
     const unformattedValue = unformatCardNumbers(updatedCardNumbers);
     const splitNumbers = splitCardNumbers(unformattedValue);
 
+    setCursorLocation(fixedSelectionStart);
     setCardNumbers(splitNumbers);
   };
 

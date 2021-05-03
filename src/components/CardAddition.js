@@ -66,7 +66,6 @@ const CardAddition = (props) => {
   });
 
   useEffect(() => {
-    console.log(inputVerification.cardNumbers);
     setIsVisibleModal(inputVerification.cardNumbers);
   }, [inputVerification.cardNumbers]);
 
@@ -93,7 +92,6 @@ const CardAddition = (props) => {
       alert("카드 회사를 선택해주세요.");
       return;
     }
-    console.log(passwords);
     const card = {
       cardType,
       cardNumbers,
