@@ -15,7 +15,7 @@ export default function App() {
           <Route exact path={[ROUTE.HOME, ROUTE.LIST]}>
             <ListPage cardList={cardList} />
           </Route>
-          <Route exact path={ROUTE.ADD}>
+          <Route path={ROUTE.ADD}>
             <AddPages addCardInfoToList={addCardInfoToList} />
           </Route>
         </Switch>
