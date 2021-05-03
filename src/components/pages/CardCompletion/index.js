@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../shared/Card';
 import Button from '../../shared/Button';
 import { dummyBanks } from '../../../mockData';
+import { firestore } from '../../../firebase';
 import * as Style from './style';
 
 const CardCompletion = (props) => {
@@ -10,7 +11,21 @@ const CardCompletion = (props) => {
     cardData: { bankId, cardNumbers, expirationDate, ownerName },
   } = props;
 
+  const [cardAlias, setCardAlias] = useState('');
   const { color: cardColor, name: bankName } = dummyBanks.find(({ id }) => id === bankId);
+
+  const cardsRef = firestore.collection('cards');
+
+  const handleRegisterCard = (event) => {
+    event.preventDefault();
+
+    cardsRef.add({ bankId, cardNumbers, expirationDate, ownerName, cardAlias });
+  };
+
+  const handleChangeAlias = (event) => {
+    const value = event.target.value;
+    setCardAlias(value);
+  };
 
   return (
     <Style.Root>
@@ -27,8 +42,10 @@ const CardCompletion = (props) => {
           expirationDate={expirationDate}
         />
       </Style.CardWrapper>
-      <Style.AliasInput aria-label="card-alias-input" />
-      <Button text={'확인'} />
+      <form id="alias-form" onSubmit={handleRegisterCard}>
+        <Style.AliasInput aria-label="card-alias-input" value={cardAlias} onChange={handleChangeAlias} />
+        <Button type="submit" formId="alias-form" text="확인" />
+      </form>
     </Style.Root>
   );
 };

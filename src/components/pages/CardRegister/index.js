@@ -77,7 +77,7 @@ const CardRegister = (props) => {
           setCardPassword={setCardPassword}
           onSubmitForm={handleCompleteRegister}
         />
-        <Button text={'다음'} formId="register-form" />
+        <Button type="submit" text="다음" formId="register-form" />
       </Style.Root>
       {isSelectorOpened && <CardSelector setBankId={setBankId} setSelectorOpened={setSelectorOpened} />}
     </>
