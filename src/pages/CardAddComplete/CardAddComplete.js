@@ -33,7 +33,6 @@ const CardAddComplete = () => {
       const response = await fetchUpdateCard(targetCard);
 
       if (response.status === API.STATUS.FAILURE) {
-        // eslint-disable-next-line no-alert
         alert(MESSAGE.NICKNAME_SUBMIT_FAILED);
       }
     }

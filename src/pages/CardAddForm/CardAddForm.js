@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { nanoid } from 'nanoid';
