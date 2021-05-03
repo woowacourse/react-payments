@@ -4,7 +4,7 @@ import { API } from '../constants';
 export default (url, { method = 'get' } = {}) => {
   const [state, setState] = useState({
     data: null,
-    status: API.STATUS.INIT,
+    status: API.STATUS.INITIAL,
   });
 
   const fetchData = useCallback(
@@ -27,10 +27,12 @@ export default (url, { method = 'get' } = {}) => {
         const data = await response.json();
 
         setState({ data, status: API.STATUS.SUCCESS });
+        return { data, status: API.STATUS.SUCCESS };
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error(error);
         setState((prevState) => ({ ...prevState, status: API.STATUS.FAILURE }));
+        return { status: API.STATUS.FAILURE };
       }
     },
     [method, url]

@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { nanoid } from 'nanoid';
@@ -13,13 +14,16 @@ import {
   PinNumberInput,
   Button,
   CardSelector,
+  Spinner,
 } from '../../components';
-import { useInput, useModal, useLocalStorage, useMultipleInput } from '../../hooks';
+import { useInput, useModal, useMultipleInput, useFetch } from '../../hooks';
 import { isNumeric, initArray } from '../../utils';
-import { CARD, LOCAL_STORAGE_KEY, MESSAGE, REGEX, ROUTE } from '../../constants';
+import { API, CARD, MESSAGE, REGEX, ROUTE } from '../../constants';
 
 const CardAddForm = () => {
   const history = useHistory();
+
+  const [createCard, fetchCreateCard] = useFetch(API.BASE_URL, { method: 'post' });
 
   const [cardNumberInputRefs] = useState(initArray(4, useRef()));
   const [pinNumberInputRefs] = useState(initArray(2, useRef()));
@@ -37,13 +41,10 @@ const CardAddForm = () => {
     maxLengthPerInput: 1,
   });
 
-  // eslint-disable-next-line no-unused-vars
   const { Modal, isModalOpened, openModal, closeModal } = useModal(false);
   const ownerName = useInput('', { numberOnly: true, upperCase: true });
   const expiryDate = useInput('');
   const CVC = useInput('');
-
-  const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
 
   const cardNumbersAsNumber = useMemo(() => cardNumbers.value.join(''), [cardNumbers.value]);
 
@@ -81,14 +82,12 @@ const CardAddForm = () => {
 
     if (event.target === thirdInputRef || event.target === fourthInputRef) {
       if (firstInputRef.value.length < 4) {
-        // eslint-disable-next-line no-alert
         alert('카드번호 앞 8자리를 먼저 입력해주세요');
         firstInputRef?.focus();
         return;
       }
 
       if (secondInputRef.value.length < 4) {
-        // eslint-disable-next-line no-alert
         alert('카드번호 앞 8자리를 먼저 입력해주세요');
         secondInputRef?.focus();
       }
@@ -99,7 +98,7 @@ const CardAddForm = () => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const newCard = {
@@ -113,11 +112,12 @@ const CardAddForm = () => {
       createdAt: new Date(),
     };
 
-    if (!cardList.value) {
-      cardList.setValue([]);
-    }
+    const response = await fetchCreateCard(newCard);
 
-    cardList.setValue([...cardList.value, newCard]);
+    if (response.status === API.STATUS.FAILURE) {
+      alert('카드를 추가하지 못했어요! 다시 시도해주세요');
+      return;
+    }
 
     history.push({
       pathname: ROUTE.COMPLETE,
@@ -244,7 +244,7 @@ const CardAddForm = () => {
             />
           </Styled.Row>
           <Styled.Row right>
-            <Button>다음</Button>
+            {createCard.status === API.STATUS.PENDING ? <Spinner /> : <Button>다음</Button>}
           </Styled.Row>
         </Styled.Form>
       </Styled.Container>

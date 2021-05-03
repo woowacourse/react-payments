@@ -1,22 +1,21 @@
 import { useHistory, useLocation, Redirect } from 'react-router-dom';
 import Styled from './CardAddComplete.styles';
-import { Card, Input, Button } from '../../components';
-import { MESSAGE, LOCAL_STORAGE_KEY, ROUTE } from '../../constants';
-import { useInput, useLocalStorage } from '../../hooks';
+import { Card, Input, Button, Spinner } from '../../components';
+import { API, MESSAGE, ROUTE } from '../../constants';
+import { useFetch, useInput } from '../../hooks';
 import { ScreenContainer } from '../../styles/common.styles';
 
 const CardAddComplete = () => {
   const history = useHistory();
   const location = useLocation();
-
   const nickname = useInput('');
-
-  const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
+  const [updateCard, fetchUpdateCard] = useFetch(`${API.BASE_URL}/${location?.state?.card?.id}`, {
+    method: 'put',
+  });
 
   if (!location.state?.card) return <Redirect to={ROUTE.HOME} />;
 
   const {
-    id,
     cardCompanyName,
     cardCompanyColor,
     ownerName,
@@ -24,15 +23,19 @@ const CardAddComplete = () => {
     cardNumbers,
   } = location.state.card;
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (nickname.value) {
-      const newCardList = cardList.value;
-      const targetCard = newCardList.find((card) => card.id === id);
-      targetCard.nickname = nickname.value;
+    const targetCard = location.state.card;
 
-      cardList.setValue(newCardList);
+    if (nickname.value) {
+      targetCard.nickname = nickname.value;
+      const response = await fetchUpdateCard(targetCard);
+
+      if (response.status === API.STATUS.FAILURE) {
+        // eslint-disable-next-line no-alert
+        alert('카드는 등록되었지만 닉네임을 설정하지 못했어요! 추후에 닉네임을 수정해주세요');
+      }
     }
 
     history.push(ROUTE.HOME);
@@ -63,7 +66,7 @@ const CardAddComplete = () => {
             />
           </Styled.InputContainer>
           <Styled.ButtonContainer>
-            <Button>확인</Button>
+            {updateCard.status === API.STATUS.PENDING ? <Spinner /> : <Button>확인</Button>}
           </Styled.ButtonContainer>
         </form>
       </Styled.Container>
