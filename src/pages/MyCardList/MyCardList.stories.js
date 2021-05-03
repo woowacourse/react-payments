@@ -24,7 +24,7 @@ Basic.args = {
     },
     {
       cardId: 2,
-      cardType: CARD.SUN,
+      cardType: CARD.JUN,
       cardNumbers: ["2222", "3333", "4444", "5555"],
       expirationDate: "04/96",
       username: "오미키",

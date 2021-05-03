@@ -1,4 +1,4 @@
-import "./index.css";
+import "./style.css";
 import { useState } from "react";
 import { URL } from "../../constants";
 import { Header } from "../../components";
