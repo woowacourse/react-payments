@@ -60,16 +60,17 @@ const CardAddition = (props) => {
   });
 
   useEffect(() => {
-    setIsModalOpen(
-      cardNumbers[CARD_NUMBER.LENGTH - 1]?.length === CARD_NUMBER.PARTIAL_LENGTH
-    );
-  }, [cardNumbers]);
+    console.log(inputVerification.cardNumbers);
+    setIsModalOpen(inputVerification.cardNumbers);
+  }, [inputVerification.cardNumbers]);
 
   useEffect(() => {
     setInputVerification({
       cardNumbers:
-        cardNumbers[CARD_NUMBER.LENGTH - 1]?.length ===
-        CARD_NUMBER.PARTIAL_LENGTH,
+        cardNumbers.length !== 0 &&
+        cardNumbers.every(
+          (number) => number.length === CARD_NUMBER.PARTIAL_LENGTH
+        ),
       expirationDate:
         (expirationDate.month + expirationDate.year).length ===
         EXPIRATION_DATE.LENGTH,
