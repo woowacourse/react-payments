@@ -13,7 +13,7 @@ function App() {
     <>
       <BrowserRouter>
         <Route exact path="/">
-          <CardList cards={cards} />
+          <CardList cards={cards} setCards={setCards} />
         </Route>
         <Route exact path="/addCard">
           <AddCard />

@@ -6,8 +6,9 @@ import '../../index.css';
 import { useHistory, useLocation } from 'react-router';
 import Form from './Form';
 import Header from './Header';
+import Api from '../../api';
 
-export default function AddCardComplete({ addCards }) {
+export default function AddCardComplete() {
   const [nickName, setNickName] = useState('');
 
   const history = useHistory();
@@ -23,10 +24,10 @@ export default function AddCardComplete({ addCards }) {
     setNickName(CARD_COMPANY[cardCompany].NAME);
   }, []);
 
-  const onSubmitNickName = (event) => {
+  const onSubmitNickName = async (event) => {
     event.preventDefault();
 
-    addCards({
+    await Api.card.post({
       userName,
       serialNumber,
       expirationDate,
