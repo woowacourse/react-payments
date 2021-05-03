@@ -8,6 +8,4 @@ export default {
 const Template = args => <CardCreationPage {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
-  setNewCardInfo: () => {},
-};
+Default.args = {};

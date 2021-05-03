@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { withRouter } from 'react-router';
+import { withRouter, Redirect } from 'react-router';
 import { useState } from 'react';
 import Styled from './style';
 import { CreditCard, CARD_SIZE } from '../../components/commons/card/CreditCard';
@@ -15,15 +15,11 @@ const transparentInputStyles = {
 };
 
 const CardNicknameChangePage = ({ history, location }) => {
-  const {
-    id,
-    selectedCardInfo,
-    cardNumber,
-    cardOwner,
-    cardExpiredDate,
-    cardNickname: originalNickname,
-  } = location.cardInfo;
-  const [cardNickname, setcardNickname] = useState(originalNickname);
+  const [cardNickname, setcardNickname] = useState(location.cardInfo?.cardNickname);
+
+  if (!location.cardInfo) return <Redirect to="/" />;
+
+  const { id, selectedCardInfo, cardNumber, cardOwner, cardExpiredDate } = location.cardInfo;
 
   const handleNewCardSubmit = async e => {
     e.preventDefault();

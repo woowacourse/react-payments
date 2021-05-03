@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { Button } from '../../components/commons/button/Button';
 import { Header } from '../../components/commons/header/Header';
@@ -19,7 +18,7 @@ const handleBeforeUnload = e => {
   e.returnValue = '';
 };
 
-const CardCreationPage = ({ history, setNewCardInfo }) => {
+const CardCreationPage = ({ history }) => {
   const [cardNumber, setCardNumber] = useState({
     [INPUT.FIRST]: '',
     [INPUT.SECOND]: '',
@@ -47,9 +46,8 @@ const CardCreationPage = ({ history, setNewCardInfo }) => {
 
   const handleNewCardSubmit = e => {
     e.preventDefault();
-
-    setNewCardInfo({ cardNumber, cardExpiredDate, cardOwner, selectedCardInfo });
-    history.push('/complete');
+    const cardInfo = { cardNumber, cardExpiredDate, cardOwner, selectedCardInfo, cardPassword, securityCode };
+    history.push({ pathname: '/complete', cardInfo });
   };
 
   return (
@@ -88,10 +86,6 @@ const CardCreationPage = ({ history, setNewCardInfo }) => {
       </div>
     </>
   );
-};
-
-CardCreationPage.propTypes = {
-  setNewCardInfo: PropTypes.func.isRequired,
 };
 
 export default withRouter(CardCreationPage);
