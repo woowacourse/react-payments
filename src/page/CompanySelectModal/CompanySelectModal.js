@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from '../../components/Modal/Modal';
 import ColorSelectButton from '../../components/ColorSelectButton/ColorSelectButton';
 
-const ModalPage = (props) => {
+const CompanySelectModal = (props) => {
   const { onClick } = props;
   const cardCompanies = ['포코', '준', '공원', '로이드', '티케', '은현', '유조', '윤호'];
 
@@ -18,8 +18,8 @@ const ModalPage = (props) => {
   );
 };
 
-export default ModalPage;
+export default CompanySelectModal;
 
-ModalPage.propTypes = {
+CompanySelectModal.propTypes = {
   onClick: PropTypes.func,
 };

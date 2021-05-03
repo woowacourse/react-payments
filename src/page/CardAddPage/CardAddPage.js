@@ -2,7 +2,7 @@ import React from 'react';
 
 import BackButton from '../../components/BackButton/BackButton';
 import Card from '../../components/Card/Card';
-import ModalPage from '../ModalPage/ModalPage';
+import CompanySelectModal from '../CompanySelectModal/CompanySelectModal';
 import TextButton from '../../components/TextButton/TextButton';
 
 import CardNumberInput from './CardNumberInput';
@@ -55,7 +55,7 @@ const CardAddPage = (props) => {
         <TextButton text={'다음'} />
       </form>
 
-      {isModalOpened && <ModalPage onClick={handleCardCompany} />}
+      {isModalOpened && <CompanySelectModal onClick={handleCardCompany} />}
     </div>
   );
 };
