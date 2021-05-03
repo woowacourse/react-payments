@@ -70,9 +70,11 @@ const App = () => {
           <Route exact path={URL.HOME}>
             <MyCardList cardList={cardList} routeTo={routeTo} />
           </Route>
+
           <Route exact path={URL.CARD_ADDITION}>
             <CardAddition onNewCardAdd={onNewCardAdd} />
           </Route>
+
           <Route exact path={URL.COMPLETE_CARD_ADDITION}>
             <CompleteCardAddition
               onCardAdditionComplete={onCardAdditionComplete}
