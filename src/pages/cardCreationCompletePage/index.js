@@ -21,12 +21,21 @@ const CardCreationCompletePage = ({ history, newCardInfo, setNewCardInfo }) => {
   const handleNewCardSubmit = async e => {
     e.preventDefault();
 
-    const data = { selectedCardInfo, cardNumber, cardOwner, cardNickname };
-    await axios.post('http://localhost:4000/cards', data);
+    try {
+      const data = { selectedCardInfo, cardNumber, cardOwner, cardExpiredDate, cardNickname };
+      const response = await axios.post('http://localhost:4000/cards', data);
 
-    alert('카드를 추가하였습니다.');
-    setNewCardInfo(prevState => ({ ...prevState, cardNickname }));
-    history.push('/');
+      if (response.status === 201) {
+        alert('카드를 추가하였습니다.');
+        setNewCardInfo(prevState => ({ ...prevState, cardNickname }));
+        history.push('/');
+
+        return;
+      }
+      alert('카드 추가에 실패하였습니다.\n잠시 후 다시 시도해주세요.');
+    } catch {
+      alert('카드 추가에 실패하였습니다.\n잠시 후 다시 시도해주세요.');
+    }
   };
 
   return (

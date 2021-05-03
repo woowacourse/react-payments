@@ -91,7 +91,6 @@ const CardCreationPage = ({ history, setNewCardInfo }) => {
 };
 
 CardCreationPage.propTypes = {
-  setCurrentPage: PropTypes.func.isRequired,
   setNewCardInfo: PropTypes.func.isRequired,
 };
 

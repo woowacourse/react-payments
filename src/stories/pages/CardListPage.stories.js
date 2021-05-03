@@ -8,6 +8,4 @@ export default {
 const Template = args => <CardListPage {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
-  setCurrentPage: () => {},
-};
+Default.args = {};

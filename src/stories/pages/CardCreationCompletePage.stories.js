@@ -11,7 +11,6 @@ const Template = args => <CardCreationCompletePage {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   setNewCardInfo: () => {},
-  setCurrentPage: () => {},
   newCardInfo: {
     selectedCardInfo: {
       color: COLOR.LIGHT_GRAY,

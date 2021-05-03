@@ -1,5 +1,4 @@
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import { useState } from 'react';
 import Styled from './style';
@@ -28,11 +27,20 @@ const CardNicknameChangePage = ({ history, location }) => {
   const handleNewCardSubmit = async e => {
     e.preventDefault();
 
-    const data = { cardNickname: cardNickname };
-    await axios.patch(`http://localhost:4000/cards/${id}`, data);
+    try {
+      const data = { cardNickname: cardNickname };
+      const response = await axios.patch(`http://localhost:4000/cards/${id}`, data);
 
-    alert('카드 정보를 수정하였습니다.');
-    history.push('/');
+      if (response.statusText === 'OK') {
+        alert('카드 정보를 수정하였습니다.');
+        history.push('/');
+
+        return;
+      }
+      alert('카드 정보 수정에 실패하였습니다.\n잠시 후 다시 시도해주세요.');
+    } catch {
+      alert('카드 정보 수정에 실패하였습니다.\n잠시 후 다시 시도해주세요.');
+    }
   };
 
   return (
@@ -64,10 +72,6 @@ const CardNicknameChangePage = ({ history, location }) => {
       </form>
     </>
   );
-};
-
-CardNicknameChangePage.propTypes = {
-  cardInfo: PropTypes.object.isRequired,
 };
 
 export default withRouter(CardNicknameChangePage);

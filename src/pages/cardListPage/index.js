@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Header } from '../../components/commons/header/Header';
 import { Button } from '../../components/commons/button/Button';
@@ -12,43 +12,25 @@ const CardListPage = () => {
   const [isLoading, setLoading] = useState(true);
   const [isServerOK, setServerOK] = useState(true);
   const [clickedCardId, setClickedCardId] = useState(null);
-  const cardData = useRef(null);
-  console.log(
-    'isLoading:',
-    isLoading,
-    'isServerOk:',
-    isServerOK,
-    'clickedCardid:',
-    clickedCardId,
-    'cardData:',
-    cardData
-  );
-
-  const handleCardClick = cardId => {
-    setClickedCardId(prev => {
-      if (prev === cardId) {
-        return null;
-      }
-      return cardId;
-    });
-  };
+  const [cardList, setCardList] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log('in');
       try {
         const response = await axios.get('http://localhost:4000/cards');
-        cardData.current = response.data;
-        console.log(response.data);
-        setLoading(false);
+
+        if (response.status === 200) {
+          setCardList(response.data);
+          setLoading(false);
+
+          return;
+        }
+        setServerOK(false);
       } catch {
         setServerOK(false);
       }
     };
     fetchData();
-    return () => {
-      console.log('out');
-    };
   }, []);
 
   if (!isServerOK) {
@@ -68,12 +50,35 @@ const CardListPage = () => {
     );
   }
 
+  const handleCardClick = cardId => {
+    setClickedCardId(prev => {
+      if (prev === cardId) {
+        return null;
+      }
+      return cardId;
+    });
+  };
+
+  const handleCardDelete = async cardId => {
+    if (window.confirm('해당 카드를 삭제하시겠습니까?')) {
+      try {
+        const response = await axios.delete(`http://localhost:4000/cards/${cardId}`);
+
+        if (response.status === 200) {
+          setCardList(prevState => prevState.filter(card => card.id !== cardId));
+        }
+      } catch {
+        alert('카드를 삭제하는데 실패했습니다.\n잠시 후 다시 시도해주세요.');
+      }
+    }
+  };
+
   return (
     <>
       <Header>보유카드</Header>
       <Styled.Container>
-        {cardData.current.map(card => (
-          <Styled.CardContainer>
+        {cardList.map(card => (
+          <Styled.CardContainer key={card.id}>
             <div
               onClick={() => {
                 handleCardClick(card.id);
@@ -93,7 +98,14 @@ const CardListPage = () => {
                 <Link to={{ pathname: `/change/${card.id}`, cardInfo: card }}>
                   <Styled.EditButton type="button">✍️ 수정</Styled.EditButton>
                 </Link>
-                <Styled.DeleteButton type="button">🗑️ 삭제</Styled.DeleteButton>
+                <Styled.DeleteButton
+                  type="button"
+                  onClick={() => {
+                    handleCardDelete(card.id);
+                  }}
+                >
+                  🗑️ 삭제
+                </Styled.DeleteButton>
               </Styled.ButtonContainer>
             )}
           </Styled.CardContainer>
