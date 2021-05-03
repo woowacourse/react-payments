@@ -50,17 +50,22 @@ const App = () => {
     routeTo(PAGE.HOME.ID);
   };
 
-  const mainComponent = {
-    [PAGE.HOME.ID]: <Home cardList={cardList} routeTo={routeTo} />,
-    [PAGE.CARD_ADDITION.ID]: (
-      <CardAddition onCardInfoSubmit={onCardInfoSubmit} />
-    ),
-    [PAGE.COMPLETE_CARD_ADDITION.ID]: (
-      <CompleteCardAddition
-        onCardAdditionComplete={onCardAdditionComplete}
-        card={processingCard}
-      />
-    ),
+  const getMainComponent = (pageId) => {
+    switch (pageId) {
+      case PAGE.HOME.ID:
+        return <Home cardList={cardList} routeTo={routeTo} />;
+      case PAGE.CARD_ADDITION.ID:
+        return <CardAddition onCardInfoSubmit={onCardInfoSubmit} />;
+      case PAGE.COMPLETE_CARD_ADDITION.ID:
+        return (
+          <CompleteCardAddition
+            onCardAdditionComplete={onCardAdditionComplete}
+            card={processingCard}
+          />
+        );
+      default:
+        return <p>404: Page Not Found</p>;
+    }
   };
 
   return (
@@ -70,7 +75,7 @@ const App = () => {
         routeTo={routeTo}
         prevPage={page.prevPage}
       />
-      <main>{mainComponent[page.id]}</main>
+      <main>{getMainComponent(page.id)}</main>
     </div>
   );
 };
