@@ -23,7 +23,6 @@ const Styled = {
     margin: 0 auto;
     width: 100%;
     min-height: 100px;
-    padding: 34px;
     box-sizing: border-box;
     outline: none;
   `,
