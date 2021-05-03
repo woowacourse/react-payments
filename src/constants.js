@@ -59,7 +59,7 @@ export const SECURE_CODE_LENGTH = 3;
 export const PASSWORD = {
   MIN_VALUE_PER_UNIT: 0,
   MAX_VALUE_PER_UNIT: 9,
-  MAX_LENGTH_PER_UNIT: 9,
+  MAX_LENGTH_PER_UNIT: 1,
 };
 
 export const CARD_DESCRIPTION = {
