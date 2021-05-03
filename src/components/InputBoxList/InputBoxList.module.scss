@@ -1,3 +1,5 @@
+@use "../../assets/scss/index.scss" as *;
+
 .input-box-list {
   &__label {
     display: block;
@@ -13,24 +15,19 @@
   }
 
   &__input-box {
+    @include plain-input;
     padding: 0;
     width: 43px;
     height: 45px;
-    background-color: #ecebf1;
+    background-color: $inputBackgroundColor;
     border-radius: 7px;
-    border: none;
-    color: #04c09e;
+    color: $primaryColor;
     text-align: center;
     font-weight: bold;
     font-size: 22px;
-    // TODO : 모든 input 에 커서 색갈 적용(SASS 를 이용)
-    caret-color: #04c09e;
+    caret-color: $primaryColor;
     &:not(:last-child) {
       margin-right: 7px;
-    }
-
-    &:focus {
-      outline: none;
     }
   }
 
@@ -51,7 +48,7 @@
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background-color: #04c09e;
+      background-color: $primaryColor;
       position: absolute;
     }
   }

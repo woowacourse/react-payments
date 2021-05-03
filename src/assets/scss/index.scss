@@ -1,2 +1,5 @@
-@forward 'mixins';
-@forward 'variables';
+@forward 'mixins/shadow';
+@forward 'mixins/normalize';
+
+@forward 'variables/color';
+@forward 'variables/size';

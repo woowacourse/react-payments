@@ -1,3 +1,5 @@
+@use "../../assets/scss/index.scss" as *;
+
 .label {
-  color: #383838;
+  color: $textColor;
 }

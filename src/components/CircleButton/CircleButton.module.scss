@@ -1,3 +1,5 @@
+@use "../../assets/scss/index.scss" as *;
+
 .circle-button {
   position: relative;
   display: inline-flex;
@@ -29,6 +31,6 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;
-    color: #525252;
+    color: $inputTextColor;
   }
 }
