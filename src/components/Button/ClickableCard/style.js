@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const CardButtonContainer = styled.div`
+const ClickableCardContainer = styled.div`
   width: 13.05rem;
   height: 8.15rem;
   border-radius: 0.4rem;
@@ -21,4 +21,4 @@ const PlusSign = styled.span`
   align-items: center;
 `;
 
-export { CardButtonContainer, PlusSign };
+export { ClickableCardContainer, PlusSign };

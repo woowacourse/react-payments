@@ -2,7 +2,7 @@
 import * as Styled from './style.js';
 import PropTypes from 'prop-types';
 import { CardItem } from './CardItem';
-import { CardButton } from '../../../Button/CardButton';
+import { ClickableCard } from '../../../Button/ClickableCard';
 
 /**
  * Primary UI component for user interaction
@@ -17,7 +17,7 @@ export const CardList = ({ cards, setCurrentPage }) => {
         ))}
       </Styled.CardListContainer>
       <Styled.CardAddButtonContainer>
-        <CardButton
+        <ClickableCard
           onClick={() => {
             setCurrentPage('cardRegister');
           }}

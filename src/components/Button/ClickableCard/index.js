@@ -5,14 +5,14 @@ import * as Styled from './style.js';
 /**
  * Primary UI component for user interaction
  */
-export const CardButton = ({ ...props }) => {
+export const ClickableCard = ({ ...props }) => {
   return (
-    <Styled.CardButtonContainer {...props}>
+    <Styled.ClickableCardContainer {...props}>
       <Styled.PlusSign>+</Styled.PlusSign>
-    </Styled.CardButtonContainer>
+    </Styled.ClickableCardContainer>
   );
 };
 
-// CardButton.propTypes = {};
+// ClickableCard.propTypes = {};
 
-// CardButton.defaultProps = {};
+// ClickableCard.defaultProps = {};
