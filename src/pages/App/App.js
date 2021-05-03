@@ -13,28 +13,15 @@ const App = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const PAGE = {
-    [URL.HOME]: {
-      HEADER_TEXT: "보유카드",
-      onPageBack: null,
-    },
-    [URL.CARD_ADDITION]: {
-      HEADER_TEXT: "카드추가",
-      onPageBack: () => {
-        history.replace(URL.HOME);
-      },
-    },
-    [URL.COMPLETE_CARD_ADDITION]: {
-      HEADER_TEXT: "",
-      onPageBack: null,
-    },
+  const routeTo = (url) => {
+    history.replace(url);
   };
 
   const onNewCardAdd = (card) => {
     const newCard = { cardDescription: null, ...card };
 
     setCardList((prevCardList) => [...prevCardList, newCard]);
-    history.replace(
+    routeTo(
       URL.COMPLETE_CARD_ADDITION + `?${QUERY_STRING_KEY.ID}=${newCard.cardId}`
     );
   };
@@ -52,7 +39,24 @@ const App = () => {
       })
     );
 
-    history.replace(URL.HOME);
+    routeTo(URL.HOME);
+  };
+
+  const PAGE = {
+    [URL.HOME]: {
+      HEADER_TEXT: "보유카드",
+      onPageBack: null,
+    },
+    [URL.CARD_ADDITION]: {
+      HEADER_TEXT: "카드추가",
+      onPageBack: () => {
+        routeTo(URL.HOME);
+      },
+    },
+    [URL.COMPLETE_CARD_ADDITION]: {
+      HEADER_TEXT: "",
+      onPageBack: null,
+    },
   };
 
   return (
@@ -64,7 +68,7 @@ const App = () => {
       <main>
         <Switch>
           <Route exact path={URL.HOME}>
-            <Home cardList={cardList} />
+            <Home cardList={cardList} routeTo={routeTo} />
           </Route>
           <Route exact path={URL.CARD_ADDITION}>
             <CardAddition onNewCardAdd={onNewCardAdd} />
