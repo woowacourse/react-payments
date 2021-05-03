@@ -29,7 +29,7 @@ const Card = (props) => {
       </span>
       <div className={`w-1/5 h-1/5 ${size === 'large' ? 'mt-8' : 'mt-4'} rounded-md bg-yellow-450`}></div>
       <ul className={`flex mt-3 text-sm ${heightTable[size]} items-center mx-1`}>
-        {Array.from({ length: 4 }).map((_, index) => {
+        {Object.keys(cardNumbers).map((_, index) => {
           const currentKey = Object.keys(cardNumbers)[index];
           return (
             <li
