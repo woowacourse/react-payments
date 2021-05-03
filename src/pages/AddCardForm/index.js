@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react';
-import { CARD, CARD_COMPANY, ERROR_MESSAGE } from '../../constants';
+import { CARD, CARD_COMPANY, ERROR_MESSAGE, PATH } from '../../constants';
 import {
   Icon,
   Card,
@@ -150,7 +150,7 @@ export default function AddCardForm({
 
     if (!isFormCompleted) return;
 
-    history.push('/addCardComplete');
+    history.push(PATH.ADD_CARD_COMPLETE);
   };
 
   return (

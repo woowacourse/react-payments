@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, TextButton } from '../../components';
-import { CARD, CARD_COMPANY } from '../../constants';
+import { CARD, CARD_COMPANY, PATH } from '../../constants';
 import './style.css';
 import '../../index.css';
 import { useHistory } from 'react-router';
@@ -18,7 +18,7 @@ export default function AddCardComplete({
   const onCardNickNameSubmit = (event) => {
     event.preventDefault();
 
-    history.push('/addCardForm');
+    history.push(PATH.ROOT);
   };
 
   return (

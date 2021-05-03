@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CardCompanySelection, SecurityCodeGuide } from './components';
 import { AddCardForm, AddCardComplete, CardList } from './pages';
 import { Modal } from './components';
-import { CARD_COMPANY } from './constants';
+import { CARD_COMPANY, PATH } from './constants';
 import { Route, BrowserRouter } from 'react-router-dom';
 import { CardsProvider } from './cardsContext';
 
@@ -34,10 +34,10 @@ function App() {
   return (
     <CardsProvider>
       <BrowserRouter>
-        <Route exact path="/">
+        <Route exact path={PATH.ROOT}>
           <CardList></CardList>
         </Route>
-        <Route exact path="/addCardForm">
+        <Route exact path={PATH.ADD_CARD_FORM}>
           <AddCardForm
             serialNumber={serialNumber}
             setSerialNumber={setSerialNumber}
@@ -54,7 +54,7 @@ function App() {
             onSetModalContents={onSetModalContents}
           />
         </Route>
-        <Route exact path="/addCardComplete">
+        <Route exact path={PATH.ADD_CARD_COMPLETE}>
           <AddCardComplete
             serialNumber={serialNumber}
             cardCompany={cardCompany}
