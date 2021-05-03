@@ -26,6 +26,7 @@ const splitCardNumbers = (value) => {
 
 const useCardNumbers = (initialCardNumbers) => {
   const [cardNumbers, setCardNumbers] = useState(initialCardNumbers);
+  // TODO: ref 고민해보기
   const cardNumbersInputRef = useRef();
 
   const onCardNumbersChange = (event) => {

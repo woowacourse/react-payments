@@ -52,7 +52,12 @@ const CardAddition = (props) => {
   });
   const [username, onUsernameChange] = useControlledInputValue("");
   const [secureCode, onSecureCodeChange] = useSecureCode("");
-  const [password, onPasswordChange] = usePassword(["", ""]);
+  const [
+    firstPassword,
+    secondPassword,
+    passwords,
+    onPasswordChange,
+  ] = usePassword(["", ""]);
   const [inputVerification, setInputVerification] = useState({
     cardNumbers: false,
     expirationDate: false,
@@ -78,9 +83,9 @@ const CardAddition = (props) => {
         EXPIRATION_DATE.LENGTH,
       username: username.length >= USERNAME.MIN_LENGTH,
       secureCode: secureCode.length === SECURE_CODE_LENGTH,
-      password: password.every((value) => value !== ""),
+      password: passwords.every((value) => value !== ""),
     });
-  }, [cardNumbers, expirationDate, username, secureCode, password]);
+  }, [cardNumbers, expirationDate, username, secureCode, passwords]);
 
   const onCardInfoSubmit = (event) => {
     event.preventDefault();
@@ -96,7 +101,7 @@ const CardAddition = (props) => {
       expirationDate,
       username,
       secureCode,
-      password,
+      passwords,
     };
 
     props.onCardInfoSubmit(card);
@@ -195,7 +200,7 @@ const CardAddition = (props) => {
                 max={PASSWORD.MAX_VALUE_PER_UNIT}
                 maxLength={PASSWORD.MAX_LENGTH_PER_UNIT}
                 data-password-index="0"
-                value={password[0]}
+                value={firstPassword}
                 onChange={onPasswordChange}
                 required
               />
@@ -207,7 +212,7 @@ const CardAddition = (props) => {
                 max={PASSWORD.MAX_VALUE_PER_UNIT}
                 maxLength={PASSWORD.MAX_LENGTH_PER_UNIT}
                 data-password-index="1"
-                value={password[1]}
+                value={secondPassword}
                 onChange={onPasswordChange}
                 required
               />

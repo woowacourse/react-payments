@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { isNumberValue } from "../utils";
 
-const usePassword = (initialValue) => {
-  const [password, setPassword] = useState(initialValue);
+const usePassword = (initialValue = []) => {
+  if (!Array.isArray(initialValue)) {
+    throw new Error("Invalid parameter. Expected an Array");
+  }
+
+  const [passwords, setPassword] = useState(initialValue);
 
   const onPasswordChange = (event) => {
     const { value, dataset } = event.target;
@@ -20,7 +24,9 @@ const usePassword = (initialValue) => {
     });
   };
 
-  return [password, onPasswordChange];
+  const [firstPassword, secondPassword] = passwords;
+
+  return [firstPassword, secondPassword, passwords, onPasswordChange];
 };
 
 export default usePassword;
