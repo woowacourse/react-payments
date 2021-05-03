@@ -1,4 +1,4 @@
-import { BackwardButton } from './BackwardButton';
+import { BackwardIcon } from './BackwardIcon';
 import { Button } from './Button';
 import { Card } from './Card';
 import { Circle } from './Circle';
@@ -11,4 +11,4 @@ import { Modal } from './Modal';
 import { Text } from './Text';
 import { Heading } from './Heading';
 
-export { BackwardButton, Button, Card, Circle, CreditCardPreview, Container, Form, Input, Label, Modal, Text, Heading };
+export { BackwardIcon, Button, Card, Circle, CreditCardPreview, Container, Form, Input, Label, Modal, Text, Heading };

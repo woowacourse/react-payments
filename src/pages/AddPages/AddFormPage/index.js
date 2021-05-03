@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { BackwardButton, CreditCardPreview, Heading } from '../../../components';
+import { Button, CreditCardPreview, Heading } from '../../../components';
 import { CardInfoForm } from './CardInfoForm';
 import { CardCompanySelectModal } from './CardCompanySelectModal';
 import { getFormattedCardInfo } from '../../../cardInfoFormatter';
 import './style.css';
+import { BackwardIcon } from '../../../components/BackwardIcon';
 
 export const AddFormPage = (props) => {
   const { initialCardInfo, cardInfo, setCardInfo } = props;
@@ -14,7 +15,9 @@ export const AddFormPage = (props) => {
   return (
     <div className="AddFormPage">
       <div className="AddFormPage__Heading">
-        <BackwardButton />
+        <Button className="AddFormPage__BackwardButton">
+          <BackwardIcon />
+        </Button>
         <Heading>카드 추가</Heading>
       </div>
       <CreditCardPreview

@@ -8,6 +8,12 @@
   align-items: center;
 }
 
+.AddFormPage__BackwardButton {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 1.5rem;
+}
+
 /* 카드 정보 작성 폼 */
 
 .CardInfoForm {
