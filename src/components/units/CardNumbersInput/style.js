@@ -7,6 +7,7 @@ const InputWrapper = styled(DefaultInputWrapper)`
 `;
 
 const NumberInput = styled(DefaultInput)`
+  width: 54px;
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -16,6 +17,7 @@ const NumberInput = styled(DefaultInput)`
 `;
 
 const PasswordInput = styled(DefaultInput)`
+  width: 54px;
   font: small-caption;
   font-size: 1rem;
   text-align: center;

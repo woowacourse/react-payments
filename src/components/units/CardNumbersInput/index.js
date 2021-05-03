@@ -42,7 +42,6 @@ const CardNumbersInput = (props) => {
         <Style.NumberInput
           type="number"
           aria-label="card-numbers-input-1"
-          width="54px"
           min="1000"
           max="9999"
           value={cardNumbers[FIRST]}
@@ -55,7 +54,6 @@ const CardNumbersInput = (props) => {
         <Style.NumberInput
           type="number"
           aria-label="card-numbers-input-2"
-          width="54px"
           min="1000"
           max="9999"
           value={cardNumbers[SECOND]}
@@ -68,7 +66,6 @@ const CardNumbersInput = (props) => {
         <Style.PasswordInput
           type="password"
           aria-label="card-numbers-input-3"
-          width="54px"
           min="1000"
           max="9999"
           value={cardNumbers[THIRD]}
@@ -81,7 +78,6 @@ const CardNumbersInput = (props) => {
         <Style.PasswordInput
           type="password"
           aria-label="card-numbers-input-4"
-          width="54px"
           min="1000"
           max="9999"
           value={cardNumbers[FOURTH]}

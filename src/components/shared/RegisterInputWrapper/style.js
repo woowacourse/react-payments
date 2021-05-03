@@ -4,7 +4,7 @@ import PALETTE from '../../../styles/palette';
 const Root = styled.div`
   display: flex;
   flex-direction: column;
-  &: not(: last-child) {
+  &:not(:last-child) {
     margin-bottom: 19px;
   }
 `;
@@ -28,7 +28,6 @@ const DefaultInputWrapper = styled.fieldset`
 `;
 
 const DefaultInput = styled.input`
-  width: ${({ width }) => width};
   font-size: 1rem;
   color: ${PALETTE.DEFAULT_CYAN};
   border-color: transparent;

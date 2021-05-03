@@ -27,7 +27,7 @@ const AliasInput = styled.input`
   font-size: 18px;
   text-align: center;
 
-  &: focus {
+  &:focus {
     outline: none;
     border-bottom: 1.5px solid ${PALETTE.DEFAULT_CYAN};
   }

@@ -13,6 +13,7 @@ const InputWrapper = styled(DefaultInputWrapper)`
 `;
 
 const Input = styled(DefaultInput)`
+  width: 302px;
   &::-webkit-input-placeholder {
     font-size: 16px;
   }

@@ -34,11 +34,13 @@ const CardRegister = (props) => {
     }
   }, [isCardIdentified]);
 
-  useEffect(() => {
-    setCardColor(dummyBanks.find(({ id }) => id === bankId)?.color || PALETTE.EMPTY_CARD_GRAY);
-  }, [bankId]);
+  const getBank = (bankId) => dummyBanks.find(({ id }) => id === bankId);
+  const bankName = getBank(bankId)?.name || '';
 
-  const bankName = dummyBanks.find(({ id }) => id === bankId)?.name || '';
+  useEffect(() => {
+    const bank = getBank(bankId);
+    setCardColor(bank?.color || PALETTE.EMPTY_CARD_GRAY);
+  }, [bankId]);
 
   const handleCompleteRegister = (event) => {
     event.preventDefault();

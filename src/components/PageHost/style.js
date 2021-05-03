@@ -9,7 +9,7 @@ const Root = styled.main`
 `;
 
 const NavigationBar = styled.nav`
-  display: ${({ title }) => (title ? 'flex' : 'none')}};
+  display: ${({ title }) => (title ? 'flex' : 'none')};
   background-color: #ffffff;
   position: sticky;
   top: 0;

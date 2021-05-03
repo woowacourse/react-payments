@@ -30,7 +30,6 @@ const OwnerNameInput = (props) => {
       <RegisterInputWrapper type={type} label={label} width={width} currentNameLength={ownerName.length}>
         <Style.InputWrapper isValid={isInputValid}>
           <Style.Input
-            width="302px"
             aria-label="owner-name-input"
             placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
             value={ownerName}

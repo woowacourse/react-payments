@@ -2,7 +2,6 @@
 import React from 'react';
 import CardRegister from './index';
 
-// TODO: CardSelector의 width 조정
 export default {
   title: 'pages/CardRegister',
   component: CardRegister,
