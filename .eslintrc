@@ -1,0 +1,23 @@
+{
+  "env": {
+    "browser": true
+  },
+  "extends": [
+    "semistandard",
+    "standard-jsx",
+    "standard-react",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "prettier"
+  ],
+  "plugins": ["react", "jsx-a11y"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/button-has-type": "off"
+  }
+}

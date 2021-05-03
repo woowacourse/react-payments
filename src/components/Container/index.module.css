@@ -1,0 +1,14 @@
+.Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 24rem;
+  width: 100%;
+  height: 2.8125rem;
+}
+
+.CardPasswordInput {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 0.25rem;
+}

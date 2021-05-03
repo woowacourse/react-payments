@@ -1,0 +1,19 @@
+.AddFormPage {
+  margin: 1.5rem 1.25rem;
+  height: 100%;
+}
+
+.AddFormPage__Title {
+  display: flex;
+  align-items: center;
+}
+
+.AddFormPage__Title > .Button--backward {
+  margin-right: 1.5rem;
+}
+
+.CreditCardPreview {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+}

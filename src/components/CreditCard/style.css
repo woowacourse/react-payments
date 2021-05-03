@@ -1,0 +1,45 @@
+.CreditCard {
+  padding: 0.875em;
+  width: 100%;
+}
+
+.CreditCard__CardCompany {
+  display: inline-block;
+  height: 0.625em;
+  font-size: 0.625em;
+  color: #383838;
+  margin-bottom: 2.2em;
+}
+
+.CreditCard__CardNumber {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.8em;
+  height: 0.85em;
+  font-size: 0.85em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: #525252;
+}
+
+.CreditCard__Line {
+  margin-top: 0.5em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.CreditCard__OwnerName {
+  height: 0.71em;
+  font-size: 0.71em;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: #525252;
+}
+
+.CreditCard__ExpirationDate {
+  height: 0.71em;
+  font-size: 0.71em;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: #525252;
+}

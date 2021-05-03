@@ -1,0 +1,17 @@
+.CardCompanyList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 1rem;
+  padding: 0.875rem 2rem;
+}
+
+.CardCompanyItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.CardNicknameForm .Button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}

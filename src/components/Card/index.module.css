@@ -1,0 +1,31 @@
+.Card {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #d2d2d2;
+}
+
+.chip {
+  width: 40px;
+  height: 26px;
+  border-radius: 4px;
+}
+
+.small {
+  width: 208px;
+  height: 123px;
+}
+
+.medium {
+  width: 213px;
+  height: 133px;
+}
+
+.large {
+  width: 293.08px;
+  height: 183px;
+}
+
+.boxShadow {
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+}
