@@ -16,6 +16,8 @@
 
 .CardInfoForm {
   margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .CardInfoForm > .Label {
