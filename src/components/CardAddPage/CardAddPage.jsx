@@ -6,11 +6,12 @@ import ExpirationDateInput from "./ExpirationDateInput";
 import OwnerNameInput from "./OwnerNameInput";
 import SecurityCodeInput from "./SecurityCodeInput";
 import CardPasswordInput from "./CardPasswordInput";
-import { LENGTH } from "../../utils";
 import Dimmer from "../Dimmer/Dimmer";
 import BankSelector from "../BankSelector/BankSelector";
+import Header from "../Header/Header";
+import { LENGTH } from "../../utils";
 
-const CardAddPage = ({ cardInfo, validation, addBank, onInputChange, routeToNext }) => {
+const CardAddPage = ({ cardInfo, validation, addBank, onInputChange, routeToBack, routeToNext }) => {
   const [isBankSelectorVisible, setBankSelectorVisible] = useState(false);
 
   const handleBankSelectorVisible = () => {
@@ -29,6 +30,7 @@ const CardAddPage = ({ cardInfo, validation, addBank, onInputChange, routeToNext
 
   return (
     <>
+      <Header title={"카드 추가"} hasBackButton={true} onClick={routeToBack} />
       <form className="w-full h-160 flex flex-col justify-center" onSubmit={handleFormSubmit}>
         <div className="w-full flex justify-center mb-4">
           <Card

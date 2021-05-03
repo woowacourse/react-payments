@@ -69,13 +69,14 @@ const App = () => {
   };
 
   return (
-    <div className="relative max-w-sm h-full p-5 mx-auto flex flex-col justify-between">
+    <div className="relative max-w-sm h-full p-5 mx-auto flex flex-col">
       {currentPage === PAGE.CARD_ADD && (
         <CardAddPage
           cardInfo={newCardInfo}
           validation={validation}
           addBank={addBank}
           onInputChange={handleInputChange}
+          routeToBack={() => setCurrentPage(PAGE.CARD_LIST)}
           routeToNext={() => setCurrentPage(PAGE.CARD_ADD_COMPLETION)}
         />
       )}

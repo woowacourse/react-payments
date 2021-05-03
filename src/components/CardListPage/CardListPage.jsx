@@ -2,11 +2,13 @@ import React from "react";
 import { LENGTH } from "../../utils";
 import Card from "../Card/Card";
 import CardShape from "../Card/CardShape";
+import Header from "../Header/Header";
 
 const CardListPage = ({ cardInfos, routeToNext }) => {
   return (
     <>
-      <section className="flex flex-col justify-center h-full items-center">
+      <Header title={"보유카드"} hasBackButton={false} />
+      <section className="flex flex-col h-full items-center">
         {cardInfos.map(({ id, cardInfo }) => (
           <React.Fragment key={id}>
             <Card
