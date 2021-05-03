@@ -7,16 +7,33 @@ import { ScreenContainer } from '../../styles/common.styles';
 import { useFetch, useModal } from '../../hooks';
 
 const CardList = () => {
-  // eslint-disable-next-line no-unused-vars
   const [selectedCardId, setSelectedCardId] = useState(null);
-  const { Modal, openModal } = useModal();
+  const { Modal, openModal, closeModal } = useModal();
 
   const [cardList, fetchCardList] = useFetch(API.BASE_URL);
+  const [deleteCard, fetchDeleteCard] = useFetch(`${API.BASE_URL}/${selectedCardId}`, {
+    method: API.METHOD.DELETE,
+  });
+
   const sortedCardList = [...(cardList.data || [])].sort((a, b) =>
     b.createdAt.localeCompare(a.createdAt)
   );
 
-  const handleClickCard = (cardId) => {
+  const handleDeleteCard = async () => {
+    if (window.confirm(MESSAGE.CARD_DELETE_CONFIRM)) {
+      try {
+        await fetchDeleteCard();
+        fetchCardList();
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error(error);
+      }
+    }
+
+    closeModal();
+  };
+
+  const handleOpenCardMenu = (cardId) => {
     setSelectedCardId(cardId);
     openModal();
   };
@@ -53,7 +70,7 @@ const CardList = () => {
               } = card;
 
               return (
-                <Styled.CardItem key={id} onClick={() => handleClickCard(id)}>
+                <Styled.CardItem key={id} onClick={() => handleOpenCardMenu(id)}>
                   <Card
                     bgColor={cardCompanyColor}
                     companyName={cardCompanyName}
@@ -74,7 +91,16 @@ const CardList = () => {
       <Modal mobile>
         <Styled.CardMenu>
           <Styled.CardMenuItem>카드 별칭 수정</Styled.CardMenuItem>
-          <Styled.CardMenuItem delete>카드 삭제</Styled.CardMenuItem>
+
+          {deleteCard.status === API.STATUS.PENDING ? (
+            <Styled.CardMenuItem>
+              <Spinner />
+            </Styled.CardMenuItem>
+          ) : (
+            <Styled.CardMenuItem delete onClick={handleDeleteCard}>
+              카드 삭제
+            </Styled.CardMenuItem>
+          )}
         </Styled.CardMenu>
       </Modal>
     </ScreenContainer>
