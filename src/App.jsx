@@ -66,6 +66,7 @@ const App = () => {
 
     setLocalStorage(LS_KEY.CARD_INFOS, newCardInfos);
     setCardInfos(newCardInfos);
+    setNewCardInfo(initialCardInfo);
   };
 
   return (
