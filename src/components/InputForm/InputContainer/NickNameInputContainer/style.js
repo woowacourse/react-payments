@@ -1,15 +1,13 @@
 import styled from 'styled-components';
+import { FlexCenter } from '../../../../utils/style/FlexCenter';
 
-const Container = styled.div`
+const Container = styled(FlexCenter)`
   height: 2rem;
   width: 15.1rem;
   border-width: 0 0 0.13rem 0;
   border-style: solid;
   border-color: #7a7a7a;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Input = styled.input.attrs({

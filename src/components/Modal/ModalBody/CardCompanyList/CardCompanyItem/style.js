@@ -1,10 +1,8 @@
 import styled from 'styled-components';
+import { FlexCenter } from '../../../../../utils/style/FlexCenter';
 
-const Container = styled.div`
-  display: flex;
+const Container = styled(FlexCenter)`
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 `;
 
 const ColorContainer = styled.span`

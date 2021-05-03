@@ -1,15 +1,13 @@
 import styled from 'styled-components';
 import cvcImg from '../../../assets/cvc.png';
+import { FlexCenter } from '../../../../utils/style/FlexCenter';
 
-const Container = styled.div`
+const Container = styled(FlexCenter)`
   height: 100%;
   width: 29%;
   background-color: #ecebf1;
   border-radius: 0.4rem;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: ${(props) => (props.isValid ? '0.01rem solid transparent' : '0.01rem solid #f24156')};
 `;
 
@@ -30,12 +28,9 @@ const Input = styled.input.attrs({
   outline: none;
 `;
 
-const HelpSign = styled.span`
+const HelpSign = styled(FlexCenter)`
   width: 1.6rem;
   height: 1.6rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin-left: 0.7rem;
   border: 0.08rem solid #bababa;
   border-radius: 50%;

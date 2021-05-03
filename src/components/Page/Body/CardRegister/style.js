@@ -1,20 +1,15 @@
 import styled from 'styled-components';
+import { FlexCenter } from '../../../../utils/style/FlexCenter';
 
-const CardContainer = styled.div`
+const CardContainer = styled(FlexCenter)`
   width: 100%;
-  display: flex;
-  justify-content: center;
   margin: 0;
   margin-bottom: 1rem;
-  align-items: center;
 `;
 
-const CardCreateFormContainer = styled.div`
+const CardCreateFormContainer = styled(FlexCenter)`
   width: 100%;
-  display: flex;
   margin: 0;
-  justify-content: center;
-  align-items: center;
 `;
 
 export { CardContainer, CardCreateFormContainer };

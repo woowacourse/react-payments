@@ -1,14 +1,12 @@
 import styled from 'styled-components';
+import { FlexCenter } from '../../../../utils/style/FlexCenter';
 
-const Container = styled.div`
+const Container = styled(FlexCenter)`
   height: 100%;
   width: 45%;
   background-color: #ecebf1;
   border-radius: 0.4rem;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-weight: 500;
   font-size: 1.2rem;
   color: #737373;

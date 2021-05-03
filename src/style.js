@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
+import { FlexCenter } from './utils/style/FlexCenter';
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -8,14 +9,11 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Container = styled.div`
+const Container = styled(FlexCenter)`
   width: 100vw;
   height: 100vh;
   margin: 0 auto;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: #292929;
 `;
 

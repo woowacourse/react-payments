@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FlexCenter } from '../../utils/style/FlexCenter';
 
 const size = {
   large: {
@@ -51,26 +52,20 @@ const company = {
   },
 };
 
-const Container = styled.div`
+const Container = styled(FlexCenter)`
   width: ${(props) => `${size[props.size].width}rem`};
   height: ${(props) => `${size[props.size].height}rem`};
   border-radius: 0.4rem;
   box-shadow: 0.1rem 0.1rem 0.25rem 0.1rem rgba(0, 0, 0, 0.2);
   background-color: ${(props) => (props.company ? company[props.company].color : '#D2D2D2')};
   margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
-const Inner = styled.div`
+const Inner = styled(FlexCenter)`
   margin: 0;
   width: 87%;
   height: 82%;
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Header = styled.div`

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FlexCenter } from '../../utils/style/FlexCenter';
 
 const Modal = styled.div`
   position: absolute;
@@ -14,14 +15,11 @@ const Modal = styled.div`
   justify-content: flex-end;
 `;
 
-const ModalInner = styled.div`
+const ModalInner = styled(FlexCenter)`
   min-width: 23.5rem;
   min-height: 14.2rem;
   background-color: white;
-  display: flex;
   margin: 0;
-  justify-content: center;
-  align-items: center;
   border-radius: 0.5rem 0.5rem 0 0;
 `;
 

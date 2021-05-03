@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FlexCenter } from '../../utils/style/FlexCenter';
 
 // width: 23.4rem;
 const Container = styled.div`
@@ -11,13 +12,10 @@ const Container = styled.div`
   border-radius: 1rem;
 `;
 
-const Header = styled.div`
+const Header = styled(FlexCenter)`
   width: 96%;
   height: 8%;
   margin: 2% 2% 6% 2%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const Body = styled.div`
