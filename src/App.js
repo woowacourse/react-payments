@@ -8,6 +8,7 @@ import { httpClient } from './api/httpClient';
 import { PATH, RETURN_TYPE } from './constants/api';
 import { INPUT_NAME } from './constants/input';
 import { COLOR } from './constants/color';
+import { LoadingCircle } from './components/commons/loadingCircle/LoadingCircle';
 
 const { FIRST, SECOND, THIRD, FOURTH, MONTH, YEAR } = INPUT_NAME;
 
@@ -26,6 +27,7 @@ const App = () => {
   const [cardList, setCardList] = useState([]);
   const [cardInfo, setCardInfo] = useState(cardData);
   const [editCardId, setEditCardId] = useState(null);
+  const [isLoading, setLoading] = useState(true);
 
   const resetCardInfo = () => {
     setCardInfo(cardData);
@@ -35,6 +37,7 @@ const App = () => {
     const setInitialCardList = async () => {
       const cardList = await httpClient.get({ path: PATH.CARD_LIST, returnType: RETURN_TYPE.JSON });
 
+      setLoading(false);
       setCardList(cardList);
     };
 
@@ -44,14 +47,17 @@ const App = () => {
   return (
     <>
       <CardDataContext.Provider value={{ cardInfo, editCardId, setCardInfo, setCurrentPage }}>
-        {currentPage === PAGE.CARD_LIST && (
-          <CardListPage
-            cardList={cardList}
-            setCardList={setCardList}
-            setEditCardId={setEditCardId}
-            resetCardInfo={resetCardInfo}
-          />
-        )}
+        {currentPage === PAGE.CARD_LIST &&
+          (isLoading ? (
+            <LoadingCircle />
+          ) : (
+            <CardListPage
+              cardList={cardList}
+              setCardList={setCardList}
+              setEditCardId={setEditCardId}
+              resetCardInfo={resetCardInfo}
+            />
+          ))}
         {currentPage === PAGE.CARD_CREATION && <CardCreationPage />}
         {currentPage === PAGE.CARD_CREATION_COMPLETE && (
           <CardCreationCompletePage setCardList={setCardList} setEditCardId={setEditCardId} />
