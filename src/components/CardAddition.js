@@ -15,6 +15,7 @@ import {
   CARD_NUMBER,
   EXPIRATION_DATE,
   FORMAT_CHAR,
+  PASSWORD,
   SECURE_CODE_LENGTH,
   USERNAME,
 } from "../constants";
@@ -36,6 +37,7 @@ const formatExpirationDate = (expirationDate) => {
     .join(FORMAT_CHAR.EXPIRATION_DATE_SEPARATOR);
 };
 
+// TODO: 카드 정보를 하나의 클래스로 정의해서 관리?
 const CardAddition = (props) => {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
@@ -189,9 +191,9 @@ const CardAddition = (props) => {
                 type="password"
                 isCenter={true}
                 aria-label="첫번째 비밀번호"
-                min="0"
-                max="9"
-                maxLength="1"
+                min={PASSWORD.MIN_VALUE_PER_UNIT}
+                max={PASSWORD.MAX_VALUE_PER_UNIT}
+                maxLength={PASSWORD.MAX_LENGTH_PER_UNIT}
                 data-password-index="0"
                 value={password[0]}
                 onChange={onPasswordChange}
@@ -201,9 +203,9 @@ const CardAddition = (props) => {
                 type="password"
                 isCenter={true}
                 aria-label="두번째 비밀번호"
-                min="0"
-                max="9"
-                maxLength="1"
+                min={PASSWORD.MIN_VALUE_PER_UNIT}
+                max={PASSWORD.MAX_VALUE_PER_UNIT}
+                maxLength={PASSWORD.MAX_LENGTH_PER_UNIT}
                 data-password-index="1"
                 value={password[1]}
                 onChange={onPasswordChange}
