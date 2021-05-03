@@ -21,6 +21,7 @@ const Home = (props) => {
                 expirationDate={`${card.expirationDate.month}/${card.expirationDate.year}`}
                 size={CARD_SIZE.SMALL}
               />
+              <h3>{card.description}</h3>
             </li>
           ))}
         </ul>
@@ -46,6 +47,7 @@ Home.propTypes = {
       username: PropTypes.string.isRequired,
       secureCode: PropTypes.string.isRequired,
       passwords: PropTypes.arrayOf(PropTypes.string).isRequired,
+      description: PropTypes.string,
     })
   ),
 };

@@ -17,7 +17,7 @@ const CompleteCardAddition = (props) => {
     event.preventDefault();
 
     const card = {
-      cardDescription,
+      description: cardDescription,
       ...props.card,
     };
 
