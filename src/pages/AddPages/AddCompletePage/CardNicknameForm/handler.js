@@ -5,8 +5,8 @@ export const handleNicknameInputChange = ({ e, setNickname }) => {
   setNickname(slicedInputValue);
 };
 
-export const handleNicknameSubmit = ({ e, setRoute, cardInfo, addCardInfoToList }) => {
+export const handleNicknameSubmit = ({ e, cardInfo, addCardInfoToList, history }) => {
   e.preventDefault();
   addCardInfoToList(cardInfo);
-  setRoute(ROUTE.LIST);
+  history.push(ROUTE.HOME);
 };

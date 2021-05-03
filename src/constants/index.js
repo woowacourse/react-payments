@@ -1,4 +1,4 @@
-export { ROUTE } from './page';
+export { ROUTE } from './route';
 export {
   CARD_COMPANY_LIST,
   INITIAL_FORMATTED_CARD_NUMBER,

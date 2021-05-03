@@ -1,12 +1,14 @@
 import { useRef, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Button, Form, Input } from '../../../../components';
 import { handleNicknameInputChange, handleNicknameSubmit } from './handler';
 
 export const CardNicknameForm = (props) => {
-  const { setRoute, cardInfo, setCardInfo, initialNickname, addCardInfoToList } = props;
+  const { cardInfo, setCardInfo, initialNickname, addCardInfoToList } = props;
   const setNickname = (nickname) => setCardInfo((prevState) => ({ ...prevState, nickname }));
   const { nickname } = cardInfo;
   const ref = useRef();
+  const history = useHistory();
 
   useEffect(() => {
     ref.current?.focus();
@@ -25,7 +27,7 @@ export const CardNicknameForm = (props) => {
       <Button
         className="CardNicknameForm__Submit_Button"
         disabled={nickname === initialNickname}
-        onClick={(e) => handleNicknameSubmit({ e, setRoute, cardInfo, addCardInfoToList })}
+        onClick={(e) => handleNicknameSubmit({ e, cardInfo, addCardInfoToList, history })}
       >
         확인
       </Button>

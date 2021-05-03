@@ -4,7 +4,7 @@ import { getFormattedCardInfo } from '../../../cardInfoFormatter';
 import './style.css';
 
 export const AddCompletePage = (props) => {
-  const { setRoute, initialCardInfo, cardInfo, setCardInfo, addCardInfoToList } = props;
+  const { initialCardInfo, cardInfo, setCardInfo, addCardInfoToList } = props;
   const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({ cardInfo });
   const { company } = cardInfo;
 
@@ -20,7 +20,6 @@ export const AddCompletePage = (props) => {
         expirationDate={formattedExpirationDate}
       />
       <CardNicknameForm
-        setRoute={setRoute}
         cardInfo={cardInfo}
         setCardInfo={setCardInfo}
         initialNickname={initialCardInfo.nickname}

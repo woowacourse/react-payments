@@ -6,7 +6,7 @@ import { getFormattedCardInfo } from '../../../cardInfoFormatter';
 import './style.css';
 
 export const AddFormPage = (props) => {
-  const { setRoute, initialCardInfo, cardInfo, setCardInfo } = props;
+  const { initialCardInfo, cardInfo, setCardInfo } = props;
   const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({ cardInfo });
   const { company } = cardInfo;
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +25,6 @@ export const AddFormPage = (props) => {
         expirationDate={formattedExpirationDate}
       />
       <CardInfoForm
-        setRoute={setRoute}
         initialCardInfo={initialCardInfo}
         cardInfo={cardInfo}
         setCardInfo={setCardInfo}

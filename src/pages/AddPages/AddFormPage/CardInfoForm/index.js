@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Button, Form } from '../../../../components';
 import { CardNumberInput } from './CardNumberInput';
 import { ExpirationDateInput } from './ExpirationDateInput';
@@ -9,7 +10,7 @@ import { handleCardInfoSubmit } from './handler';
 import { isFormFulFilled } from './validator';
 
 export const CardInfoForm = (props) => {
-  const { initialCardInfo, cardInfo, setCardInfo, setIsModalOpen, setRoute } = props;
+  const { initialCardInfo, cardInfo, setCardInfo, setIsModalOpen } = props;
   const { number, expirationDate, ownerName, securityCode, password } = cardInfo;
   const setNumber = (number) => setCardInfo((prevState) => ({ ...prevState, number }));
   const setCompany = (company) => setCardInfo((prevState) => ({ ...prevState, company }));
@@ -21,6 +22,7 @@ export const CardInfoForm = (props) => {
   const expirationDateInputRef = useRef();
   const ownerNameInputRef = useRef();
   const passwordInputRef = useRef();
+  const history = useHistory();
 
   return (
     <Form className="CardInfoForm">
@@ -53,7 +55,7 @@ export const CardInfoForm = (props) => {
       <Button
         className="CardInfoForm__Submit_Button"
         disabled={!isFormFulFilled({ cardInfo, initialCardInfo })}
-        onClick={(e) => handleCardInfoSubmit({ e, cardInfo, setIsModalOpen, initialCardInfo, setRoute })}
+        onClick={(e) => handleCardInfoSubmit({ e, cardInfo, setIsModalOpen, initialCardInfo, history })}
       >
         다음
       </Button>

@@ -1,10 +1,11 @@
+import { useHistory } from 'react-router-dom';
 import { Card, Text, Heading } from '../../components';
 import { ROUTE } from '../../constants';
 import './style.css';
 
-export const ListPage = (props) => {
-  const { setRoute } = props;
-  const handleAddButtonClick = () => setRoute(ROUTE.ADD_FORM);
+export const ListPage = () => {
+  const history = useHistory();
+  const handleAddButtonClick = () => history.push(ROUTE.ADD);
 
   return (
     <div className="ListPage">
