@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { URL } from "../../constants";
 
+// TODO: MyCardList로 컴포넌트명 변경
 const Home = (props) => {
   const { cardList } = props;
 
@@ -9,9 +10,13 @@ const Home = (props) => {
     <>
       <div>
         <p>준비중입니다. - home</p>
-        <Link to="/CardAddition">
-          <button>카드 추가 하러 가기</button>
-        </Link>
+        <button
+          onClick={() => {
+            props.routeTo(URL.CARD_ADDITION);
+          }}
+        >
+          카드 추가 하러 가기
+        </button>
       </div>
       <ul>
         {cardList.map(({ cardDescription, cardNumbers }) => (

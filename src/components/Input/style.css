@@ -5,6 +5,7 @@ input::-webkit-inner-spin-button {
 }
 
 .input {
+  box-sizing: border-box;
   outline: none;
   border: none;
   border-radius: 8px;
