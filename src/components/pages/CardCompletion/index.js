@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../shared/Card';
 import Button from '../../shared/Button';
-import { dummyBanks } from '../../../mockData';
 import { firestore } from '../../../firebase';
 import * as Style from './style';
 
@@ -12,14 +11,11 @@ const CardCompletion = (props) => {
   } = props;
 
   const [cardAlias, setCardAlias] = useState('');
-  const { color: cardColor, name: bankName } = dummyBanks.find(({ id }) => id === bankId);
-
-  const cardsRef = firestore.collection('cards');
 
   const handleRegisterCard = (event) => {
     event.preventDefault();
 
-    cardsRef.add({ bankId, cardNumbers, expirationDate, ownerName, cardAlias });
+    firestore.collection('cards').add({ bankId, cardNumbers, expirationDate, ownerName, cardAlias });
   };
 
   const handleChangeAlias = (event) => {
@@ -35,10 +31,9 @@ const CardCompletion = (props) => {
           width="293px"
           height="183px"
           size="large"
-          backgroundColor={cardColor}
-          ownerName={ownerName}
-          bankName={bankName}
+          bankId={bankId}
           cardNumbers={cardNumbers}
+          ownerName={ownerName}
           expirationDate={expirationDate}
         />
       </Style.CardWrapper>

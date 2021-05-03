@@ -24,4 +24,16 @@ const CardAlias = styled.div`
   height: 26px;
 `;
 
-export { Root, CardWrapper, CardAlias };
+const CardAddButton = styled.button`
+  position: relative;
+  width: 208px;
+  height: 130px;
+  background-color: ${PALETTE.ADD_CARD_GRAY};
+  border-color: transparent;
+  border-radius: 5px;
+  font-size: 30px;
+  cursor: pointer;
+  color: ${PALETTE.BOLD_BLACK};
+`;
+
+export { Root, CardWrapper, CardAlias, CardAddButton };

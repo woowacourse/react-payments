@@ -24,12 +24,14 @@ const PAGES = {
 };
 
 const App = () => {
-  const [currentPage, setCurrentPage] = useState(PAGES.REGISTER);
-  const [cardData, setCardData] = useState({});
+  const [currentPage, setCurrentPage] = useState(PAGES.LIST);
+  const [currentCardData, setCurrentCardData] = useState({});
 
   const handleGoNext = () => {
     if (currentPage === PAGES.REGISTER) {
       setCurrentPage(PAGES.COMPLETION);
+    } else if (currentPage === PAGES.COMPLETION) {
+      setCurrentPage(PAGES.LIST);
     }
   };
 
@@ -37,7 +39,11 @@ const App = () => {
     <>
       <GlobalStyle />
       <PageHost navigationTitle={currentPage.title} hasBackButton={currentPage.backButton}>
-        {currentPage.content({ handleGoNext, cardData, setCardData })}
+        {currentPage === PAGES.LIST && <CardList />}
+        {currentPage === PAGES.REGISTER && (
+          <CardRegister setCardData={setCurrentCardData} handleGoNext={handleGoNext} />
+        )}
+        {currentPage === PAGES.COMPLETION && <CardCompletion cardData={currentCardData} handleGoNext={handleGoNext} />}
       </PageHost>
     </>
   );

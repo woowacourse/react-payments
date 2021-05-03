@@ -4,8 +4,6 @@ import Card from '../../shared/Card';
 import Button from '../../shared/Button';
 import CardRegisterForm from '../../units/CardRegisterForm';
 import CardSelector from '../../units/CardSelector';
-import PALETTE from '../../../styles/palette';
-import { dummyBanks } from '../../../mockData';
 import { FRAGMENT_INDEX, DATE_TYPE } from '../../../constants/constants';
 import * as Style from './style';
 
@@ -15,7 +13,7 @@ const CardRegister = (props) => {
   const { MONTH, YEAR } = DATE_TYPE;
 
   const [isSelectorOpened, setSelectorOpened] = useState(false);
-  const [cardColor, setCardColor] = useState(PALETTE.EMPTY_CARD_GRAY);
+  // const [cardColor, setCardColor] = useState(PALETTE.EMPTY_CARD_GRAY);
   const [cardNumbers, setCardNumbers] = useState({ [FIRST]: '', [SECOND]: '', [THIRD]: '', [FOURTH]: '' });
   const [bankId, setBankId] = useState('');
   const [expirationDate, setExpirationDate] = useState({ [MONTH]: '', [YEAR]: '' });
@@ -34,17 +32,8 @@ const CardRegister = (props) => {
     }
   }, [isCardIdentified]);
 
-  useEffect(() => {
-    const bank = dummyBanks.find(({ id }) => id === bankId);
-    const color = bank?.color || PALETTE.EMPTY_CARD_GRAY;
-    setCardColor(color);
-  }, [bankId]);
-
-  const bankName = dummyBanks.find(({ id }) => id === bankId)?.name || '';
-
   const handleCompleteRegister = (event) => {
     event.preventDefault();
-    event.reportValidity();
 
     setCardData({ bankId, cardNumbers, expirationDate, ownerName, secureCode, cardPassword });
     handleGoNext();
@@ -57,10 +46,9 @@ const CardRegister = (props) => {
           <Card
             width="213px"
             height="133px"
-            backgroundColor={cardColor}
-            ownerName={ownerName}
-            bankName={bankName}
+            bankId={bankId}
             cardNumbers={cardNumbers}
+            ownerName={ownerName}
             expirationDate={expirationDate}
           />
         </Style.CardWrapper>
