@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { withRouter, Redirect } from 'react-router';
 import { useState } from 'react';
 import Styled from './style';
@@ -6,7 +5,7 @@ import { CreditCard, CARD_SIZE } from '../../components/commons/card/CreditCard'
 import { TransparentInput } from '../../components/commons/input/TransparentInput';
 import { Button } from '../../components/commons/button/Button';
 import { COLOR } from '../../constants/color';
-import { STATUS_OK_CODE, URL } from '../../constants';
+import { firestore } from '../../firebase';
 
 const transparentInputStyles = {
   textAlign: 'center',
@@ -16,6 +15,7 @@ const transparentInputStyles = {
 
 const CardNicknameChangePage = ({ history, location }) => {
   const [cardNickname, setcardNickname] = useState(location.cardInfo?.cardNickname);
+  const cardListRef = firestore.collection('cardList');
 
   if (!location.cardInfo) return <Redirect to="/" />;
 
@@ -25,16 +25,10 @@ const CardNicknameChangePage = ({ history, location }) => {
     e.preventDefault();
 
     try {
-      const data = { cardNickname: cardNickname };
-      const response = await axios.patch(`${URL.CARDS}${id}`, data);
+      await cardListRef.doc(id).update({ cardNickname: cardNickname });
 
-      if (response.status === STATUS_OK_CODE.PATCH) {
-        alert('카드 정보를 수정하였습니다.');
-        history.push('/');
-
-        return;
-      }
-      alert('카드 정보 수정에 실패하였습니다.\n잠시 후 다시 시도해주세요.');
+      alert('카드 정보를 수정하였습니다.');
+      history.push('/');
     } catch {
       alert('카드 정보 수정에 실패하였습니다.\n잠시 후 다시 시도해주세요.');
     }

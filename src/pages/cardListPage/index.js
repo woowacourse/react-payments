@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect, useRef } from 'react';
 import { Header } from '../../components/commons/header/Header';
 import { Button } from '../../components/commons/button/Button';
 import { Card } from '../../components/commons/card/Card';
@@ -7,26 +6,25 @@ import Styled from './style';
 import { Link } from 'react-router-dom';
 import { CreditCard } from '../../components/commons/card/CreditCard';
 import { ReactComponent as Spinner } from '../../assets/spinner.svg';
-import { STATUS_OK_CODE, URL } from '../../constants';
+import { firestore } from '../../firebase';
 
 const CardListPage = () => {
   const [isLoading, setLoading] = useState(true);
   const [isServerOK, setServerOK] = useState(true);
   const [clickedCardId, setClickedCardId] = useState(null);
   const [cardList, setCardList] = useState(null);
+  const cardListRef = useRef(firestore.collection('cardList'));
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(URL.CARDS);
+        const response = await cardListRef.current.get();
+        const cards = [];
 
-        if (response.status === STATUS_OK_CODE.GET) {
-          setCardList(response.data);
-          setLoading(false);
-
-          return;
-        }
-        setServerOK(false);
+        setLoading(false);
+        if (response.empty) return;
+        response.forEach(doc => cards.push({ id: doc.id, ...doc.data() }));
+        setCardList(cards);
       } catch {
         setServerOK(false);
       }
@@ -63,15 +61,11 @@ const CardListPage = () => {
   const handleCardDelete = async cardId => {
     if (window.confirm('해당 카드를 삭제하시겠습니까?')) {
       try {
-        const response = await axios.delete(`${URL.CARDS}${cardId}`);
+        await cardListRef.doc(cardId).delete();
 
-        if (response.status === STATUS_OK_CODE.DELETE) {
-          setCardList(prevState => prevState.filter(card => card.id !== cardId));
-
-          return;
-        }
-        alert('카드를 삭제하는데 실패했습니다.\n잠시 후 다시 시도해주세요.');
-      } catch {
+        setCardList(prevState => prevState.filter(card => card.id !== cardId));
+        alert('카드를 삭제하였습니다.');
+      } catch (e) {
         alert('카드를 삭제하는데 실패했습니다.\n잠시 후 다시 시도해주세요.');
       }
     }
@@ -81,7 +75,7 @@ const CardListPage = () => {
     <>
       <Header>보유카드</Header>
       <Styled.Container>
-        {cardList.map(card => (
+        {cardList?.map(card => (
           <Styled.CardContainer key={card.id}>
             <div
               onClick={() => {

@@ -7,6 +7,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
+    "firebase": "^8.4.3",
     "json-server": "^0.16.3",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
@@ -24,7 +25,8 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "chromatic": "npx chromatic --project-token 1a6312506a45",
-    "server": "json-server ./data.json --port 4000"
+    "server": "json-server ./data.json --port 4000",
+    "deploy": "react-scripts build && json-server ./data.json --port 4000"
   },
   "eslintConfig": {
     "extends": [

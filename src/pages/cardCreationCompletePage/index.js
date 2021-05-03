@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { withRouter, Redirect } from 'react-router';
 import { useState } from 'react';
 import Styled from './style';
@@ -6,7 +5,7 @@ import { CreditCard, CARD_SIZE } from '../../components/commons/card/CreditCard'
 import { TransparentInput } from '../../components/commons/input/TransparentInput';
 import { Button } from '../../components/commons/button/Button';
 import { COLOR } from '../../constants/color';
-import { STATUS_OK_CODE, URL } from '../../constants';
+import { firestore } from '../../firebase';
 
 const transparentInputStyles = {
   textAlign: 'center',
@@ -20,12 +19,13 @@ const CardCreationCompletePage = ({ history, location }) => {
   if (!location.cardInfo) return <Redirect to="/" />;
 
   const { cardNumber, cardExpiredDate, cardOwner, selectedCardInfo, cardPassword, securityCode } = location.cardInfo;
+  const cardListRef = firestore.collection('cardList');
 
   const handleNewCardSubmit = async e => {
     e.preventDefault();
 
     try {
-      const data = {
+      const cardInfo = {
         cardNumber,
         cardExpiredDate,
         cardOwner,
@@ -34,15 +34,11 @@ const CardCreationCompletePage = ({ history, location }) => {
         securityCode,
         cardNickname,
       };
-      const response = await axios.post(URL.CARDS, data);
 
-      if (response.status === STATUS_OK_CODE.POST) {
-        alert('카드를 추가하였습니다.');
-        history.push({ pathname: '/', cardInfo: data });
+      await cardListRef.add(cardInfo);
 
-        return;
-      }
-      alert('카드 추가에 실패하였습니다.\n잠시 후 다시 시도해주세요.');
+      alert('카드를 추가하였습니다.');
+      history.push({ pathname: '/', cardInfo });
     } catch {
       alert('카드 추가에 실패하였습니다.\n잠시 후 다시 시도해주세요.');
     }
