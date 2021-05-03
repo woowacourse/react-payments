@@ -20,12 +20,12 @@ const CardList = () => {
     <ScreenContainer>
       <Header text="보유카드" />
       <Styled.Container>
-        {cardList.isFetching && (
+        {cardList.status === API.STATUS.PENDING && (
           <Styled.Spinner>
             <Spinner />
           </Styled.Spinner>
         )}
-        {!cardList.isFetching && !cardList.error && cardList.data && (
+        {cardList.status === API.STATUS.SUCCESS && cardList.data && (
           <Styled.CardList>
             <Styled.CardItem noCardName>
               <Link to={ROUTE.ADD}>
@@ -58,7 +58,7 @@ const CardList = () => {
             })}
           </Styled.CardList>
         )}
-        {!cardList.isFetching && cardList.error && (
+        {cardList.status === API.STATUS.FAILURE && (
           <ErrorPage message={MESSAGE.ERROR_PAGE_CARD_LIST} />
         )}
       </Styled.Container>
