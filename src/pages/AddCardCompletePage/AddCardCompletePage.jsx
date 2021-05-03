@@ -1,12 +1,13 @@
 import { useState, useMemo } from "react";
 
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./AddCardCompletePage.module.scss";
 
 import useCardList from "../../hooks/cardListHook";
 
 import { LABEL_TEXT, STATE_KEY, PAGE_PATH } from "../../constants";
+import appConfirm from "../../utils/appConfirm";
 
 import Label from "../../components/Label/Label";
 import Card from "../../components/Card/Card";
@@ -20,10 +21,20 @@ const AddCardCompletePage = ({ cardListState, setCardListState }) => {
   const cardListHook = useCardList(cardListState, setCardListState);
   const [cardNickName, setCardNickName] = useState("");
   const [lastAddedCard] = useMemo(() => cardListState.slice(-1), [cardListState]);
-  console.log(lastAddedCard);
-  const onAddCardCompleteButtonClick = () => {
+  const history = useHistory();
+
+  const onCardNickNameRegisterButtonClick = () => {
     lastAddedCard[STATE_KEY.CARD_NICK_NAME] = cardNickName;
     cardListHook.updateCardItem(lastAddedCard.cardNumber, lastAddedCard);
+    history.push(PAGE_PATH.ROOT);
+  };
+
+  const onPageMoveButtonClick = () => {
+    if (!appConfirm.confirmNickNameRegistration()) {
+      return;
+    }
+
+    history.push(PAGE_PATH.ROOT);
   };
 
   const onCardNickNameInputChange = (event) => {
@@ -46,13 +57,11 @@ const AddCardCompletePage = ({ cardListState, setCardListState }) => {
         <BorderInput onInputChange={onCardNickNameInputChange} className={cx("add-card-complete-page__input")} />
       </main>
       <div className={cx("add-card-complete-page__bottom")}>
-        <Link to={PAGE_PATH.ROOT}>
-          {cardNickName !== "" ? (
-            <Button onClick={onAddCardCompleteButtonClick}>확인</Button>
-          ) : (
-            <Button>넘어가기</Button>
-          )}
-        </Link>
+        {cardNickName !== "" ? (
+          <Button onClick={onCardNickNameRegisterButtonClick}>확인</Button>
+        ) : (
+          <Button onClick={onPageMoveButtonClick}>넘어가기</Button>
+        )}
       </div>
     </div>
   );

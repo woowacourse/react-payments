@@ -1,2 +1,2 @@
-@import "./variables.scss";
-@import "./mixins.scss";
+@forward 'mixins';
+@forward 'variables';

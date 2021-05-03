@@ -61,3 +61,7 @@ export const STATE_KEY = Object.freeze({
   EXPIRATION_YEAR: "expirationYear",
   CARD_LIST: "cardList",
 });
+
+export const CONFIRM_MESSAGE = Object.freeze({
+  OMIT_NICKNAME_REGISTRATION: "카드 별칭을 지정하지 않고 넘어가시겠습니까?",
+});
