@@ -39,9 +39,7 @@ const CompleteCardAddition = (props) => {
         cardType={cardType}
         cardNumbers={cardNumbers}
         username={username}
-        expirationDate={Object.values(expirationDate).join(
-          FORMAT_CHAR.EXPIRATION_DATE_SEPARATOR
-        )}
+        expirationDate={expirationDate}
         size={CARD_SIZE.LARGE}
       />
       <form onSubmit={onDescriptionSubmit}>
