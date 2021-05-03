@@ -1,11 +1,13 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import PropTypes from 'prop-types';
-import './style.css';
+import classnames from 'classnames/bind';
+import styles from './style.css';
 
-export const Label = ({ children, ...props }) => {
+const cx = classnames.bind(styles);
+
+export const Label = ({ className, children, ...rest }) => {
   return (
-    <label className="Label" {...props}>
+    <label className={cx('Label', className)} {...rest}>
       {children}
     </label>
   );
@@ -13,10 +15,5 @@ export const Label = ({ children, ...props }) => {
 
 Label.propTypes = {
   htmlFor: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-};
-
-Label.defaultProps = {
-  htmlFor: null,
-  children: '',
+  children: PropTypes.node,
 };

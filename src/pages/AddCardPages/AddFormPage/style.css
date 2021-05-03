@@ -58,10 +58,6 @@
   margin-top: 1rem;
 }
 
-.OwnerNameInput__Header .Label {
-  flex-grow: 2;
-}
-
 .OwnerNameInput__Header__Text {
   margin: 0 0.25rem;
   font-size: 0.75rem;
