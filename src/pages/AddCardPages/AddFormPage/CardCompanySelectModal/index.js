@@ -26,17 +26,15 @@ export function CardCompanyList({ setCardInfo, setIsModalOpen }) {
 }
 
 function CardCompanyItem({ company, setCardInfo, setIsModalOpen }) {
-  const { name, color } = company;
-
   return (
     <li className="CardCompanyList__Item">
       <Button
-        name={name}
-        backgroundColor={color}
-        theme="card-company"
+        className="CardCompanyList__Item__Button"
+        name={company.name}
+        style={{ backgroundColor: company.color }}
         onClick={(e) => handleCardCompanySelect({ e, setCardInfo, setIsModalOpen })}
       />
-      <Label>{name}</Label>
+      <Label>{company.name}</Label>
     </li>
   );
 }

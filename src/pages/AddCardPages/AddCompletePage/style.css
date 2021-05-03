@@ -15,7 +15,16 @@
   margin-top: 3rem;
 }
 
-.CardNicknameForm .Button:disabled {
+.CardNicknameForm__Submit_Button {
+  color: #04c09e;
+  font-size: 0.875rem;
+  text-align: end;
+  position: absolute;
+  bottom: 1rem;
+  right: 0.5rem;
+}
+
+.CardNicknameForm__Submit_Button:disabled {
   cursor: default;
   opacity: 0.5;
 }

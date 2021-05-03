@@ -51,6 +51,7 @@ export const CardInfoForm = (props) => {
       />
       <PasswordInput password={password} setPassword={setPassword} ref={passwordInputRef} />
       <Button
+        className="CardInfoForm__Submit_Button"
         disabled={!isFormFulFilled({ cardInfo, initialCardInfo })}
         onClick={(e) => handleCardInfoSubmit({ e, cardInfo, setIsModalOpen, initialCardInfo, setRoute })}
       >

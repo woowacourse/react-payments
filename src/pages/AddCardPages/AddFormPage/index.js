@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, CreditCardPreview, Heading } from '../../../components';
+import { BackwardButton, CreditCardPreview, Heading } from '../../../components';
 import { CardInfoForm } from './CardInfoForm';
 import { CardCompanySelectModal } from './CardCompanySelectModal';
 import { getFormattedCardInfo } from '../../../cardInfoFormatter';
@@ -35,16 +35,3 @@ export const AddFormPage = (props) => {
     </div>
   );
 };
-
-function BackwardButton() {
-  const size = 16;
-  const color = '#525252';
-
-  return (
-    <Button theme="backward" onClick={() => {}}>
-      <svg viewBox={`0 0 ${size} ${size}`} height={size} width={size} fill="none">
-        <path d="M8.30426 1L1.36476 8.78658L9.15134 15.7261" stroke={color} strokeWidth="1.5" />
-      </svg>
-    </Button>
-  );
-}

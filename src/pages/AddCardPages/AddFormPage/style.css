@@ -8,10 +8,6 @@
   align-items: center;
 }
 
-.AddFormPage__Heading > .Button--backward {
-  margin-right: 1.5rem;
-}
-
 /* 카드 정보 작성 폼 */
 
 .CardInfoForm {
@@ -24,7 +20,16 @@
   margin-top: 1rem;
 }
 
-.CardInfoForm .Button:disabled {
+.CardInfoForm__Submit_Button {
+  color: #04c09e;
+  font-size: 0.875rem;
+  text-align: end;
+  position: absolute;
+  bottom: 1rem;
+  right: 0.5rem;
+}
+
+.CardInfoForm__Submit_Button:disabled {
   cursor: default;
   opacity: 0.5;
 }
@@ -126,11 +131,21 @@
   letter-spacing: 0.3rem;
 }
 
-.SecurityCodeInput__GuideImage {
+.SecurityCodeInput__Guide__Button {
+  margin-left: 0.75rem;
+  font-size: 1.25rem;
+  width: 1.6875rem;
+  height: 1.6875rem;
+  color: #969696;
+  border: 1px solid #bababa;
+  border-radius: 50%;
+}
+
+.SecurityCodeInput__Guide__Image {
   visibility: hidden;
 }
 
-.SecurityCodeInput__Wrapper > .Button:hover ~ .SecurityCodeInput__GuideImage {
+.SecurityCodeInput__Wrapper > .Button:hover ~ .SecurityCodeInput__Guide__Image {
   visibility: visible;
 }
 
@@ -168,4 +183,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.CardCompanyList__Item__Button {
+  width: 2.3125rem;
+  height: 2.3125rem;
+  border-radius: 50%;
 }

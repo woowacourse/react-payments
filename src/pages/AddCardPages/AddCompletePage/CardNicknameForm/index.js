@@ -23,6 +23,7 @@ export const CardNicknameForm = (props) => {
         onChange={(e) => handleNicknameInputChange({ e, setNickname })}
       />
       <Button
+        className="CardNicknameForm__Submit_Button"
         disabled={nickname === initialNickname}
         onClick={(e) => handleNicknameSubmit({ e, setRoute, cardInfo, addCardInfoToList })}
       >

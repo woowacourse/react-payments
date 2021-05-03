@@ -18,10 +18,10 @@ export const SecurityCodeInput = (props) => {
           maxLength={SECURITY_CODE_LENGTH}
           value={securityCode}
         />
-        <Button theme="question-mark" type="button">
+        <Button className="SecurityCodeInput__Guide__Button" type="button">
           ?
         </Button>
-        <img className="SecurityCodeInput__GuideImage" width="80" src={cvcImage} alt="cvc" />
+        <img className="SecurityCodeInput__Guide__Image" width="80" src={cvcImage} alt="cvc" />
       </div>
     </>
   );
