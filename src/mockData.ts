@@ -1,7 +1,7 @@
 import { BLUE } from './constants/palette';
 import { Card } from './types';
 
-export const cardDummies: Card[] = [
+export const cardDummies = [
   {
     cardBrand: {
       name: '포코카드',

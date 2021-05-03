@@ -5,7 +5,7 @@ type Collection = 'cards';
 const API = {
   async getAll<T>(collection: Collection) {
     const result: T[] = [];
-    const docsRef = await firestore.collection(collection).get();
+    const docsRef = await firestore.collection(collection).orderBy('createdAt', 'asc').get();
 
     docsRef.forEach(doc => result.push({ id: doc.id, ...(doc.data() as T) }));
 

@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import EditNicknameForm from '../../components/edit/EditNicknameForm';
 import Template from '../../components/shared/Template';
 import { requestCard } from '../../service/card';
-import { Card, CardBrand, ExpDate } from '../../types';
+import { Card, CardBrand, CardForSubmit, ExpDate } from '../../types';
 
 interface Props {
   nickname: string;
@@ -17,6 +17,7 @@ interface Props {
 const EditNicknamePage: FC<Props> = () => {
   const { id } = useParams<{ id: string }>();
   const [card, setCard] = useState<Card>({
+    id: '',
     CVC: '',
     cardBrand: { color: '', name: '' },
     cardNumber: '',
@@ -26,8 +27,8 @@ const EditNicknamePage: FC<Props> = () => {
     },
     ownerName: '',
     password: '',
-    id: '',
     nickname: '',
+    createdAt: '',
   });
 
   useEffect(() => {

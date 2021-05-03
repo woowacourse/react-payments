@@ -6,7 +6,7 @@ import { DEFAULT_VALUE } from '../../../constants/creditCard';
 import { formatNumberNDigits } from '../../../utils/format';
 import { VFC } from 'react';
 
-interface Props extends Omit<Card, 'id' | 'CVC' | 'password' | 'nickname'> {
+interface Props extends Pick<Card, 'cardBrand' | 'ownerName' | 'cardNumber' | 'expDate'> {
   className?: string;
   size?: 'lg' | 'md';
 }

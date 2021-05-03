@@ -1,10 +1,10 @@
 import { createContext, FC, useContext, useEffect, useState } from 'react';
 import { requestAddCard, requestCards, requestEditNickname, requestDeleteCard } from '../service/card';
-import { Card } from '../types';
+import { Card, CardForSubmit } from '../types';
 
 interface State {
   cards: Card[];
-  addCard: (card: Card) => Promise<string>;
+  addCard: (card: CardForSubmit) => Promise<string>;
   editNickname: (nickname: string, id: string) => void;
   deleteCard: (id: string) => void;
 }
@@ -23,7 +23,7 @@ const CardsStateProvider: FC<Props> = ({ children }) => {
     setShouldUpdate(!shouldUpdate);
   };
 
-  const addCard = async (card: Card) => {
+  const addCard = async (card: CardForSubmit) => {
     let docId = '';
 
     try {
