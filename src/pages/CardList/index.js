@@ -1,12 +1,9 @@
-import { useContext } from 'react';
 import { Card, Header } from '../../components';
-import { CardsContext } from '../../cardsContext';
+import { useHistory } from 'react-router';
 import { CARD_COMPANY, PATH } from '../../constants';
 import './style.css';
-import { useHistory } from 'react-router';
 
-export default function CardList() {
-  const cards = useContext(CardsContext);
+export default function CardList({ cards }) {
   const history = useHistory();
 
   const onAddButtonClick = () => {

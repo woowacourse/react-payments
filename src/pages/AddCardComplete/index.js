@@ -1,18 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, TextButton } from '../../components';
-import { CARD, CARD_COMPANY, PATH } from '../../constants';
+import { CARD, PATH } from '../../constants';
 import './style.css';
 import '../../index.css';
 import { useHistory } from 'react-router';
 
-export default function AddCardComplete({
-  userName,
-  cardCompany,
-  serialNumber,
-  expirationDate,
-  cardNickName,
-  setCardNickName,
-}) {
+export default function AddCardComplete({}) {
+  const [cardNickName, setCardNickName] = useState('');
   const history = useHistory();
 
   const onCardNickNameSubmit = (event) => {
@@ -25,11 +19,11 @@ export default function AddCardComplete({
     <div className={'add-card-complete__container'}>
       <h1 className="add-card-complete__title">카드 등록이 완료되었습니다.</h1>
       <Card
-        userName={userName}
-        companyName={CARD_COMPANY[cardCompany].NAME}
-        color={CARD_COMPANY[cardCompany].COLOR}
-        number={serialNumber}
-        expirationDate={expirationDate}
+        // userName={userName}
+        // companyName={CARD_COMPANY[cardCompany].NAME}
+        // color={CARD_COMPANY[cardCompany].COLOR}
+        // number={serialNumber}
+        // expirationDate={expirationDate}
         size="large"
       />
       <form onSubmit={onCardNickNameSubmit}>

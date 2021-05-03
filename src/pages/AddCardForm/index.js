@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { CARD, CARD_COMPANY, ERROR_MESSAGE, PATH } from '../../constants';
 import {
   Icon,
@@ -13,22 +13,19 @@ import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/format
 import { isValidSerialNumber, isValidDateFormat, isValidUserName } from './validator';
 import './style.css';
 import { useHistory } from 'react-router-dom';
+import { CardsContext } from '../../cardsContext';
+import { idGenerator } from '../../utils/idGenerator';
 
-export default function AddCardForm({
-  serialNumber,
-  setSerialNumber,
-  cardCompany,
-  setCardCompany,
-  expirationDate,
-  setExpirationDate,
-  userName,
-  setUserName,
-  securityCode,
-  setSecurityCode,
-  password,
-  setPassword,
-  onSetModalContents,
-}) {
+export default function AddCardForm({ onSetModalContents, cardCompany, setCardCompany }) {
+  const dispatch = useContext(CardsContext);
+
+  const [serialNumber, setSerialNumber] = useState('');
+
+  const [expirationDate, setExpirationDate] = useState('');
+  const [userName, setUserName] = useState('');
+  const [securityCode, setSecurityCode] = useState('');
+  const [password, setPassword] = useState({ first: '', second: '' });
+
   const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState('');
   const [expirationDateErrorMessage, setExpirationDateErrorMessage] = useState('');
   const [userNameErrorMessage, setUserNameErrorMessage] = useState('');
@@ -37,29 +34,17 @@ export default function AddCardForm({
 
   const history = useHistory();
 
-  const isFormCompleted = useMemo(() => {
-    return (
-      isValidSerialNumber(serialNumber) &&
-      cardCompany &&
-      isValidDateFormat(expirationDate) &&
-      securityCode.length === CARD.SECURITY_CODE_LENGTH &&
-      password.first &&
-      password.second
-    );
-  }, [serialNumber, cardCompany, expirationDate, securityCode, password]);
+  const isFormCompleted =
+    isValidSerialNumber(serialNumber) &&
+    cardCompany &&
+    isValidDateFormat(expirationDate) &&
+    securityCode.length === CARD.SECURITY_CODE_LENGTH &&
+    password.first &&
+    password.second;
 
   useEffect(() => {
     serialNumberInputElement.current.focus();
   }, [cardCompany]);
-
-  useEffect(() => {
-    setSerialNumber('');
-    setCardCompany('');
-    setExpirationDate('');
-    setUserName('');
-    setSecurityCode('');
-    setPassword({ first: '', second: '' });
-  }, []);
 
   const onSetPassword = (key, value) => {
     if (isNaN(value)) return;
@@ -150,6 +135,18 @@ export default function AddCardForm({
 
     if (!isFormCompleted) return;
 
+    const newCard = {
+      id: idGenerator.getId(),
+      userName: userName,
+      company: cardCompany,
+      number: serialNumber,
+      expirationDate: expirationDate,
+      securityCode: securityCode,
+      password: { first: password.first, second: password.second },
+      nickName: cardCompany,
+    };
+
+    dispatch({ type: 'ADD_CARD', card: newCard });
     history.push(PATH.ADD_CARD_COMPLETE);
   };
 
