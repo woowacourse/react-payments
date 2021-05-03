@@ -1,11 +1,11 @@
-.CardListPage {
+.ListPage {
   display: flex;
   padding: 1.7625rem 2.25rem;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.CardListPage__AddButton {
+.ListPage__AddButton {
   margin-top: 3.75rem;
   align-self: center;
   padding: 0;
@@ -17,12 +17,12 @@
   cursor: pointer;
 }
 
-.CardListPage__AddSign {
+.ListPage__AddSign {
   width: 100%;
   font-size: 1.875rem;
   text-align: center;
 }
 
-.CardListPage__CreditCardPreview {
+.ListPage__CreditCardPreview {
   transform: scale(0.95);
 }

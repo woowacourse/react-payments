@@ -11,7 +11,7 @@ const Template = (args) => <Card {...args} />;
 
 export const PlusCard = Template.bind({});
 PlusCard.args = {
-  children: <Text className="CardListPage__Text">+</Text>,
+  children: <Text className="ListPage__Text">+</Text>,
 };
 
 export const PocoCard = Template.bind({});

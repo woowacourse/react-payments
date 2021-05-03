@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from '..';
-import { CardCompanyList } from '../../pages/AddCardPages/AddFormPage/CardCompanySelectModal';
+import { CardCompanyList } from '../../pages/AddPages/AddFormPage/CardCompanySelectModal';
 
 export default {
   title: 'Component/Modal',

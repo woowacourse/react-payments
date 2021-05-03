@@ -2,7 +2,7 @@ import React from 'react';
 import { AddCompletePage } from '.';
 
 export default {
-  title: 'Pages/AddCardPages/AddCompletePage',
+  title: 'Pages/AddPages/AddCompletePage',
   component: AddCompletePage,
 };
 

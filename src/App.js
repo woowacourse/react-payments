@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { CardListPage } from './pages/CardListPage';
-import { AddCardPage } from './pages/AddCardPages';
+import { ListPage } from './pages/ListPage';
+import { AddCardPage } from './pages/AddPages';
 import { ROUTE } from './constants';
 
 export default function App() {
@@ -11,7 +11,7 @@ export default function App() {
   return (
     <div className="App">
       {route === ROUTE.LIST ? (
-        <CardListPage cardList={cardList} setRoute={setRoute} />
+        <ListPage cardList={cardList} setRoute={setRoute} />
       ) : (
         <AddCardPage addCardInfoToList={addCardInfoToList} route={route} setRoute={setRoute} />
       )}

@@ -2,7 +2,7 @@ import React from 'react';
 import { AddFormPage } from '.';
 
 export default {
-  title: 'Pages/AddCardPages/AddFormPage',
+  title: 'Pages/AddPages/AddFormPage',
   component: AddFormPage,
 };
 

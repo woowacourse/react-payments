@@ -2,7 +2,7 @@ import React from 'react';
 import { CardCompanySelectModal } from '.';
 
 export default {
-  title: 'Pages/AddCardPages/AddFormPage/CardCompanySelectModal',
+  title: 'Pages/AddPages/AddFormPage/CardCompanySelectModal',
   component: CardCompanySelectModal,
 };
 

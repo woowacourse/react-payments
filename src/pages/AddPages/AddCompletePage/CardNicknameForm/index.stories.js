@@ -2,7 +2,7 @@ import React from 'react';
 import { CardNicknameForm } from '.';
 
 export default {
-  title: 'Pages/AddCardPages/AddCompletePage/CardNicknameForm',
+  title: 'Pages/AddPages/AddCompletePage/CardNicknameForm',
   component: CardNicknameForm,
 };
 
