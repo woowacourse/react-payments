@@ -5,7 +5,7 @@ import { getCardColor } from '../../utils/cardCompany';
 import useToggle from '../../hooks/toggleHook';
 import { isAllCardInputCorrect } from "../../utils/cardInputValidation";
 
-import { PAGE_PATH, HEADER_TEXT, BUTTON_TEXT, STATE_KEY } from "../../constants";
+import { PAGE_PATH, HEADER_TEXT, BUTTON_TEXT, STATE_KEY } from "../../utils/constants";
 
 import CardInputContainer from "../../containers/CardInputContainer/CardInputContainer";
 import CardCompanySelectContainer from "../../containers/CardCompanySelectContainer/CardCompanySelectContainer";

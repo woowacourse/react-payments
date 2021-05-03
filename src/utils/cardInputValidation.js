@@ -1,4 +1,4 @@
-import { STATE_KEY, CARD_INPUT } from "../constants";
+import { STATE_KEY, CARD_INPUT } from "./constants";
 import { isCardCompany } from "./cardCompany";
 
 export const isAllNumberTextLengthCorrect = (numberText, length) => {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import classNames from "classnames/bind";
 import styles from "./AddCardCompletePage.module.scss";
 
-import { LABEL_TEXT, STATE_KEY, PAGE_PATH } from "../../constants";
+import { LABEL_TEXT, STATE_KEY, PAGE_PATH } from "../../utils/constants";
 
 import Label from "../../components/Label/Label";
 import Card from "../../components/Card/Card";

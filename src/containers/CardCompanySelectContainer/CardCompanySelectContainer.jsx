@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import styles from "./CardCompanySelectContainer.module.scss";
 
 import { getAllCardCompanies, getCardColor } from '../../utils/cardCompany';
-import { STATE_KEY } from '../../constants';
+import { STATE_KEY } from '../../utils/constants';
 import BackDrop from "../../components/BackDrop/BackDrop";
 import BottomSlider from "../../components/BottomSlider/BottomSlider";
 import CircleButton from "../../components/CircleButton/CircleButton";

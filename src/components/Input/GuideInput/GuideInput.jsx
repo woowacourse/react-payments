@@ -3,7 +3,7 @@ import styles from "./GuideInput.module.scss";
 import Input from "../Input";
 import cardCVC from "../../../assets/images/card-cvc.png";
 import questionMark from "../../../assets/svgs/question-mark.svg";
-import { STATE_KEY } from "../../../constants";
+import { STATE_KEY } from "../../../utils/constants";
 import { isNumberText } from "../../../utils/cardInputValidation";
 
 const cx = classNames.bind(styles);

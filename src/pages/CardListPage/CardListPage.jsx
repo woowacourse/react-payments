@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Label from "../../components/Label/Label";
 import CardListContainer from "../../containers/CardListContainer/CardListContainer";
 import AddBoxButton from "../../components/AddBoxButton/AddBoxButton";
-import { ANIMATION, HEADER_TEXT, PAGE_PATH } from "../../constants";
+import { ANIMATION, HEADER_TEXT, PAGE_PATH } from "../../utils/constants";
 
 const cx = classNames.bind(styles);
 

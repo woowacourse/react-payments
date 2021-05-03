@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./CardNumberInput.module.scss";
-import { STATE_KEY, CARD_INPUT } from '../../constants';
+import { STATE_KEY, CARD_INPUT } from '../../utils/constants';
 import { getCardCompany } from '../../utils/cardCompany';
 import { isAllNumberTextLengthCorrect } from "../../utils/cardInputValidation";
 

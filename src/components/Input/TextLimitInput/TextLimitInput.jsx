@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./TextLimitInput.module.scss";
 import Input from "../Input";
-import { STATE_KEY } from "../../../constants";
+import { STATE_KEY } from "../../../utils/constants";
 import { isNumberText } from "../../../utils/cardInputValidation";
 
 const cx = classNames.bind(styles);

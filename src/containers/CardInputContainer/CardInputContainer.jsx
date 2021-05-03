@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./CardInputContainer.module.scss";
 
-import { INPUT_LABEL_TEXT, CARD_INPUT } from "../../constants";
+import { INPUT_LABEL_TEXT, CARD_INPUT } from "../../utils/constants";
 
 import CardExpirationInput from "../../components/CardExpirationInput/CardExpirationInput";
 import CardNumberInput from "../../components/CardNumberInput/CardNumberInput";

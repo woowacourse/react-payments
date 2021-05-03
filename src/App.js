@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import CardListPage from "./pages/CardListPage/CardListPage";
 import AddCardPage from "./pages/AddCardPage/AddCardPage";
 import AddCardCompletePage from "./pages/AddCardCompletePage/AddCardCompletePage";
-import { STATE_KEY } from "./constants";
+import { STATE_KEY } from "./utils/constants";
 
 function App() {
   const [cardInputState, setCardInputState] = useState({
