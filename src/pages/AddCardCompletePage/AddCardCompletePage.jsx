@@ -1,8 +1,9 @@
+import { useState, useMemo } from "react";
+
 import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./AddCardCompletePage.module.scss";
 
-import useCardNickName from "../../hooks/cardNickNameHook";
 import useCardList from "../../hooks/cardListHook";
 
 import { LABEL_TEXT, STATE_KEY, PAGE_PATH } from "../../constants";
@@ -15,13 +16,19 @@ import { getCardColor } from "../../utils/cardCompany";
 
 const cx = classNames.bind(styles);
 
-const AddCardCompletePage = ({ cardState, setCardStateByKey, cardListState, setCardListState }) => {
-  const cardNickNameHook = useCardNickName(cardState, setCardStateByKey);
+const AddCardCompletePage = ({ cardListState, setCardListState }) => {
   const cardListHook = useCardList(cardListState, setCardListState);
-
+  const [cardNickName, setCardNickName] = useState("");
+  const [lastAddedCard] = useMemo(() => cardListState.slice(-1), [cardListState]);
+  console.log(lastAddedCard);
   const onAddCardCompleteButtonClick = () => {
-    const nickNameUpdatedCard = { ...cardState };
-    cardListHook.updateCardItem(cardState.cardNumber, nickNameUpdatedCard);
+    lastAddedCard[STATE_KEY.CARD_NICK_NAME] = cardNickName;
+    cardListHook.updateCardItem(lastAddedCard.cardNumber, lastAddedCard);
+  };
+
+  const onCardNickNameInputChange = (event) => {
+    const { value } = event.target;
+    setCardNickName(value);
   };
 
   return (
@@ -30,23 +37,22 @@ const AddCardCompletePage = ({ cardState, setCardStateByKey, cardListState, setC
         <Label size="large" className={cx("add-card-complete-page__label")} labelText={LABEL_TEXT.CARD_ADD_COMPLETE} />
         <Card
           className={cx("add-card-complete-page__card")}
-          cardOwner={cardState[STATE_KEY.CARD_OWNER]}
-          cardNumber={cardState[STATE_KEY.CARD_NUMBER]}
-          cardCompany={cardState[STATE_KEY.CARD_COMPANY]}
-          cardExpiration={cardState[STATE_KEY.CARD_EXPIRATION]}
-          backgroundColor={getCardColor(cardState[STATE_KEY.CARD_COMPANY])}
+          cardOwner={lastAddedCard[STATE_KEY.CARD_OWNER]}
+          cardNumber={lastAddedCard[STATE_KEY.CARD_NUMBER]}
+          cardCompany={lastAddedCard[STATE_KEY.CARD_COMPANY]}
+          cardExpiration={lastAddedCard[STATE_KEY.CARD_EXPIRATION]}
+          backgroundColor={getCardColor(lastAddedCard[STATE_KEY.CARD_COMPANY])}
         />
-        <BorderInput
-          onInputChange={cardNickNameHook.onCardNickNameInputChange}
-          className={cx("add-card-complete-page__input")}
-        />
+        <BorderInput onInputChange={onCardNickNameInputChange} className={cx("add-card-complete-page__input")} />
       </main>
       <div className={cx("add-card-complete-page__bottom")}>
-        {cardNickNameHook.cardNickName !== "" && (
-          <Link to={PAGE_PATH.ROOT}>
+        <Link to={PAGE_PATH.ROOT}>
+          {cardNickName !== "" ? (
             <Button onClick={onAddCardCompleteButtonClick}>확인</Button>
-          </Link>
-        )}
+          ) : (
+            <Button>넘어가기</Button>
+          )}
+        </Link>
       </div>
     </div>
   );

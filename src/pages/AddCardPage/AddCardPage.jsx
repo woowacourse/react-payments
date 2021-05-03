@@ -17,12 +17,13 @@ import Button from "../../components/Button/Button";
 
 const cx = classNames.bind(styles);
 
-const AddCardPage = ({ cardState, setCardStateByKey, cardListState, setCardListState }) => {
+const AddCardPage = ({ cardState, setCardStateByKey, cardListState, setCardListState, setCardStateEmpty }) => {
   const toggle = useToggle();
   const cardListHook = useCardList(cardListState, setCardListState);
 
   const onAddCardButtonClick = () => {
     cardListHook.addCardItem({ ...cardState });
+    setCardStateEmpty();
   };
 
   return (
