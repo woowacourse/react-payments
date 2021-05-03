@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CardAddPage, CardAddCompletion } from "./components";
-import { CARD_INFO, PAGE } from "./utils";
+import { CARD_INFO, PAGE, setLocalStorage } from "./utils";
+import { LS_KEY } from "./utils";
 
 const initialCardInfo = {
   [CARD_INFO.BACKGROUND_COLOR]: "",
@@ -18,6 +19,10 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(PAGE.CARD_ADD_COMPLETION);
   const [newCardInfo, setNewCardInfo] = useState(initialCardInfo);
 
+  const submitCardInfo = () => {
+    setLocalStorage(LS_KEY.CARD_INFOS, newCardInfo);
+  };
+
   return (
     <div className="relative max-w-sm h-full p-5 mx-auto flex flex-col justify-between">
       {currentPage === PAGE.CARD_ADD && (
@@ -31,7 +36,8 @@ const App = () => {
         <CardAddCompletion
           cardInfo={newCardInfo}
           setCardInfo={setNewCardInfo}
-          routeTo={() => setCurrentPage(PAGE.CARD_LIST)}
+          submitCardInfo={submitCardInfo}
+          routeToNext={() => setCurrentPage(PAGE.CARD_LIST)}
         />
       )}
     </div>

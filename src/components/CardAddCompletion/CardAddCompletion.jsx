@@ -1,10 +1,9 @@
 import React from "react";
 import Button from "../Button/Button";
 import Card from "../Card/Card";
-import Header from "../Header/Header";
 import { CARD_INFO, LENGTH, replaceValue } from "../../utils";
 
-const CardAddCompletion = ({ cardInfo, setCardInfo, routeTo }) => {
+const CardAddCompletion = ({ cardInfo, setCardInfo, submitCardInfo, routeToNext }) => {
   const handleInputChange = event => {
     try {
       const { name, value } = event.target;
@@ -16,11 +15,17 @@ const CardAddCompletion = ({ cardInfo, setCardInfo, routeTo }) => {
     }
   };
 
+  const handleFormSubmit = event => {
+    event.preventDefault();
+
+    submitCardInfo();
+    routeToNext();
+  };
+
   return (
     <>
-      <Header hasBackButton={false} />
       <section className="w-full h-160 flex flex-col justify-center">
-        <form>
+        <form onSubmit={handleFormSubmit}>
           <div className="w-full h-full flex flex-col items-center">
             <h1 className="text-2xl mb-24">카드등록이 완료되었습니다.</h1>
             <Card

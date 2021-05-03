@@ -1,3 +1,7 @@
+export const LS_KEY = {
+  CARD_INFOS: "cardInfos",
+};
+
 export const PAGE = {
   CARD_LIST: "cardList",
   CARD_ADD: "cardAdd",
