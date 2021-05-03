@@ -2,12 +2,12 @@ import styled, { css } from 'styled-components';
 import { COLOR, FONT_SIZE, FONT_WEIGHT } from '../constants/constants.js';
 
 const NickNameInput = css`
-  color: #383838;
-  background-color: white;
+  color: ${COLOR.INPUT.FONT};
+  background-color: ${COLOR.MAIN.WHITE};
   font-weight: ${FONT_WEIGHT.LIGHT};
   font-size: ${FONT_SIZE.LARGE};
   border-radius: 0;
-  border-bottom: 1px solid #737373;
+  border-bottom: 1px solid ${COLOR.MAIN.BORDER};
 `;
 
 const RoundInput = css`

@@ -1,16 +1,17 @@
 import { createGlobalStyle } from 'styled-components';
 import { reset } from 'styled-reset';
+import { COLOR } from './constants/constants';
 
 const GlobalStyles = createGlobalStyle`
   ${reset}
 
   :root {
-    background-color: #F7F9FA;
+    background-color: ${COLOR.MAIN.BG};
   }
 
   *{
     box-sizing: border-box;
-    color : #525252;
+    color : ${COLOR.MAIN.GLOBAL_FONT};
   }
 
   a{

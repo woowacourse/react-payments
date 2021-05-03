@@ -2,6 +2,9 @@ const COLOR = {
   MAIN: {
     MINT: '#04c09e',
     WHITE: '#FFFFFF',
+    GLOBAL_FONT: '#525252',
+    BG: '#F7F9FA',
+    BORDER: '#737373',
   },
 
   CARD: {
@@ -14,10 +17,30 @@ const COLOR = {
     ORANGE: '#F37D3B',
     YELLOW: '#FBCD58',
     PLUS: '#575757',
+    BOX_SHADOW: '#00000040',
   },
 
   INPUT: {
     DEFAULT_BG: '#ECEBF1',
+    FONT: '#383838',
+  },
+
+  USIM: {
+    BG: '#cbba64',
+  },
+
+  MODAL: {
+    BG: 'rgba(0, 0, 0, 0.5)',
+  },
+
+  KEYBOARD: {
+    BG: '#efefef',
+    BORDER: '#ddd',
+  },
+
+  CVC: {
+    FONT: '#969696',
+    BORDER: '#bababa',
   },
 };
 

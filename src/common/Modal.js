@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { COLOR } from '../constants/constants';
 
 const ModalWrapper = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ const ModalWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: ${COLOR.MODAL.BG};
   transition: opacity 0.25s ease;
   z-index: 2;
 `;
@@ -22,7 +23,7 @@ const ModalInner = styled.div`
   height: 270px;
   margin: auto;
   overflow: auto;
-  background: #ffffff;
+  background: ${COLOR.MAIN.WHITE};
   border-radius: 10px 10px 0px 0px;
   position: absolute;
   left: 0;

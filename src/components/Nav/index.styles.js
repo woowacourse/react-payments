@@ -14,7 +14,7 @@ const NavWrapper = styled.div`
     width: 0.7rem;
     height: 0.7rem;
     margin: 0 0.5rem 0 0.2rem;
-    border: 2.5px solid #525252;
+    border: 2.5px solid ${FONT.COLOR.GLOBAL_FONT};
     border-top: 0;
     border-right: 0;
     box-sizing: border-box;

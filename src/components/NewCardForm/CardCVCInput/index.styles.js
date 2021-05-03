@@ -34,14 +34,14 @@ export const CardCVCInputWrapper = styled.div`
 
     .help {
       border-radius: 50%;
-      border: 1px solid #bababa;
+      border: 1px solid ${COLOR.CVC.BORDER};
       min-height: 2rem;
       min-width: 2rem;
       align-items: center;
       justify-content: center;
       display: flex;
       cursor: pointer;
-      color: #969696;
+      color: ${COLOR.CVC.FONT};
       font-size: 1.25rem;
     }
   }

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FONT_SIZE, FONT_WEIGHT } from '../../../constants/constants';
+import { COLOR, FONT_SIZE, FONT_WEIGHT } from '../../../constants/constants';
 
 export const KeyboardWrapper = styled.div`
   .keyboard-nodes {
@@ -14,16 +14,16 @@ export const KeyboardWrapper = styled.div`
       align-items: center;
       border-radius: 5px;
       font-size: ${FONT_SIZE.XLLARGE};
-      box-shadow: 2px 2px 2px #ddd;
-      background-color: #efefef;
-      color: #525252;
+      box-shadow: 2px 2px 2px ${COLOR.KEYBOARD.BORDER};
+      background-color: ${COLOR.KEYBOARD.BG};
+      color: ${COLOR.MAIN.GLOBAL_FONT};
       width: 3.75rem;
       height: 3.75rem;
       cursor: pointer;
 
       &:hover {
         background-color: white;
-        border: 1px solid #ddd;
+        border: 1px solid ${COLOR.KEYBOARD.BORDER};
       }
     }
   }
@@ -35,7 +35,7 @@ export const KeyboardWrapper = styled.div`
     background-color: orange;
     color: white;
     font-weight: ${FONT_WEIGHT.BOLD};
-    box-shadow: 2px 2px 2px #ddd;
+    box-shadow: 2px 2px 2px ${COLOR.KEYBOARD.BORDER};
     cursor: pointer;
   }
 `;

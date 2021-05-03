@@ -58,7 +58,7 @@ const CardInfo = css`
       width: 4rem;
       height: 2.5rem;
       border-radius: 4px;
-      background-color: #cbba64;
+      background-color: ${COLOR.USIM.BG};
     }
   }
 `;
@@ -68,7 +68,7 @@ const CardWrapper = styled.div`
   height : 100%;
   padding: 1.2rem 1.5rem;
   border-radius: 5px;
-  box-shadow: 3px 3px 5px 0px #00000040;
+  box-shadow: 3px 3px 5px 0px ${COLOR.CARD.BOX_SHADOW};
   font-size: ${FONT_SIZE.LARGE};
   display: flex;
   flex-direction: column;
@@ -105,11 +105,9 @@ const Card = ({ add, cardInfo, handleModalOpen }) => {
             {'•'.repeat(numbers.fourth.length)}
           </div>
           <div className='card__column card-details'>
-            <div className='card-user'>{user !== '' ? user : 'NAME'}</div>
+            <div className='card-user'>{user || 'NAME'}</div>
             <div className='card-date'>
-              {expireDate.month || 'MM'}
-              {'/'}
-              {expireDate.year || 'YY'}
+              {expireDate.month || 'MM'}/{expireDate.year || 'YY'}
             </div>
           </div>
         </>
@@ -141,17 +139,17 @@ Card.propTypes = {
 Card.defaultProps = {
   add: false,
   cardInfo: {
-    cardName: '',
+    cardName: 'NAME',
     numbers: {
       first: '',
       second: '',
       third: '',
       fourth: '',
     },
-    user: 'NAME',
+    user: '',
     expireDate: {
-      month: '',
-      year: '',
+      month: 'MM',
+      year: 'YY',
     },
   },
 };
