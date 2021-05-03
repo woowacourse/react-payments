@@ -1,5 +1,7 @@
 import "../style/background.css";
 import "./style.css";
+import PropTypes from "prop-types";
+import { CARD_SIZE } from "../../constants";
 
 const CardAdditionButton = ({ size, onClick }) => {
   return (
@@ -12,6 +14,11 @@ const CardAdditionButton = ({ size, onClick }) => {
       </div>
     </button>
   );
+};
+
+CardAdditionButton.propTypes = {
+  size: PropTypes.oneOf(Object.values(CARD_SIZE)).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default CardAdditionButton;
