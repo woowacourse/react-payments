@@ -7,41 +7,36 @@ import * as Style from './style';
 const ExpirationDateInput = (props) => {
   const { type, label, width, expirationDate, setExpirationDate } = props;
 
+  const { MONTH, YEAR } = DATE_TYPE;
   const monthInput = useRef(null);
   const yearInput = useRef(null);
 
   const isValidMonth = (value) => 1 <= value && value <= 12;
-  const isValidYear = (value) => 21 <= value && value < 30;
+  const isValidYear = (value) => value >= 21;
 
-  const underTwoDigits = (value) => value.length < 2;
-  const overTwoDigits = (value) => value.length > 2;
+  const isTwoDigits = (value) => value.length === 2;
 
-  // TODO: 분기 처리 개선
-  const handleChangeDate = (event) => {
-    const dateType = event.target.dataset.dateType;
+  const handleChangeMonth = (event) => {
     const value = event.target.value;
 
-    if (underTwoDigits(value)) {
-      setExpirationDate((prevDate) => ({ ...prevDate, [dateType]: value }));
-
-      return;
-    }
-
-    if (dateType === DATE_TYPE.MONTH) {
+    if (isTwoDigits(value)) {
       if (!isValidMonth(value)) return;
 
-      moveFocusToYearInput();
-    } else {
-      if (!isValidYear(value)) return;
+      yearInput.current.focus();
     }
-
-    if (overTwoDigits(value)) return;
-
-    setExpirationDate((prevDate) => ({ ...prevDate, [dateType]: value }));
+    setExpirationDate((prevDate) => ({ ...prevDate, [MONTH]: value }));
   };
 
-  const moveFocusToYearInput = () => {
-    yearInput.current.focus();
+  const handleChangeYear = (event) => {
+    const value = event.target.value;
+
+    if (isTwoDigits(value)) {
+      if (!isValidYear(value)) return;
+
+      yearInput.current.blur();
+    }
+
+    setExpirationDate((prevDate) => ({ ...prevDate, [YEAR]: value }));
   };
 
   return (
@@ -52,9 +47,9 @@ const ExpirationDateInput = (props) => {
           aria-label="expiration-date-input-month"
           width="44px"
           placeholder="MM"
-          value={expirationDate[DATE_TYPE.MONTH]}
-          data-date-type={DATE_TYPE.MONTH}
-          onChange={handleChangeDate}
+          value={expirationDate[MONTH]}
+          data-date-type={MONTH}
+          onChange={handleChangeMonth}
           ref={monthInput}
           required
         />
@@ -64,9 +59,9 @@ const ExpirationDateInput = (props) => {
           aria-label="expiration-date-input-year"
           width="44px"
           placeholder="YY"
-          value={expirationDate[DATE_TYPE.YEAR]}
-          data-date-type={DATE_TYPE.YEAR}
-          onChange={handleChangeDate}
+          value={expirationDate[YEAR]}
+          data-date-type={YEAR}
+          onChange={handleChangeYear}
           ref={yearInput}
           required
         />

@@ -35,13 +35,16 @@ const CardRegister = (props) => {
   }, [isCardIdentified]);
 
   useEffect(() => {
-    setCardColor(dummyBanks.find(({ id }) => id === bankId)?.color || PALETTE.EMPTY_CARD_GRAY);
+    const bank = dummyBanks.find(({ id }) => id === bankId);
+    const color = bank?.color || PALETTE.EMPTY_CARD_GRAY;
+    setCardColor(color);
   }, [bankId]);
 
   const bankName = dummyBanks.find(({ id }) => id === bankId)?.name || '';
 
   const handleCompleteRegister = (event) => {
     event.preventDefault();
+    event.reportValidity();
 
     setCardData({ bankId, cardNumbers, expirationDate, ownerName, secureCode, cardPassword });
     handleGoNext();
