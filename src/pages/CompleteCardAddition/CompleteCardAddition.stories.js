@@ -1,6 +1,6 @@
 import React from "react";
 import { CARD } from "../../constants";
-import CompleteCardAddition from "./CompleteCardAddition";
+import CompleteCardAddition from ".";
 
 export default {
   title: "Pages/CompleteCardAddition",

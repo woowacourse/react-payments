@@ -1,5 +1,5 @@
 import React from "react";
-import CardAddition from "./CardAddition";
+import CardAddition from ".";
 
 export default {
   title: "Pages/CardAddition",

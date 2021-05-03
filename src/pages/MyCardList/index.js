@@ -1,9 +1,12 @@
+import "./index.css";
 import React from "react";
 import PropTypes from "prop-types";
-import { URL } from "../../constants";
+import { CARD_SIZE, URL } from "../../constants";
+import { Card } from "../../components";
 
 const MyCardList = (props) => {
   const { cardList } = props;
+  console.log(cardList);
 
   return (
     <>
@@ -18,8 +21,10 @@ const MyCardList = (props) => {
         </button>
       </div>
       <ul>
-        {cardList.map(({ cardDescription, cardNumbers }) => (
-          <li key={cardNumbers.join("")}>{cardDescription}</li>
+        {cardList.map((card) => (
+          <li key={card.cardNumbers.join("")}>
+            <Card {...card} size={CARD_SIZE.SMALL} />
+          </li>
         ))}
       </ul>
     </>
@@ -34,10 +39,7 @@ MyCardList.propTypes = {
         color: PropTypes.string.isRequired,
       }),
       cardNumbers: PropTypes.arrayOf(PropTypes.string).isRequired,
-      expirationDate: PropTypes.shape({
-        month: PropTypes.string.isRequired,
-        year: PropTypes.string.isRequired,
-      }),
+      expirationDate: PropTypes.string.isRequired,
       username: PropTypes.string.isRequired,
       secureCode: PropTypes.string.isRequired,
       password: PropTypes.arrayOf(PropTypes.string).isRequired,
