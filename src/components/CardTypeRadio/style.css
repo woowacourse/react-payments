@@ -18,12 +18,7 @@
   font-size: 0.9rem;
 }
 
-.card-type-radio > input {
-  position: absolute;
-  opacity: 0;
-}
-
-.card-type-radio > input:checked ~ .card-type-radio__logo::after {
+.card-type-radio input:checked ~ .card-type-radio__logo::after {
   content: "";
   position: absolute;
   top: 0;

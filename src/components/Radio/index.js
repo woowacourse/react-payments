@@ -1,6 +1,8 @@
-const Radio = ({ name, value, checked, onChange, children }) => {
+import "./style.css";
+
+const Radio = ({ className, name, value, checked, onChange, children }) => {
   return (
-    <label className="radio">
+    <label className={`${className} radio`}>
       <input
         type="radio"
         name={name}

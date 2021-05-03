@@ -1,7 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
 import "./style.css";
 import "../style/background.css";
+import React from "react";
+import PropTypes from "prop-types";
+import Radio from "../Radio";
 
 const CardTypeRadio = ({
   cardType,
@@ -10,17 +11,16 @@ const CardTypeRadio = ({
   onChange,
 }) => {
   return (
-    <label className="card-type-radio">
-      <input
-        type="radio"
-        name={groupName}
-        value={JSON.stringify(cardType)}
-        checked={isChecked}
-        onChange={onChange}
-      />
+    <Radio
+      className="card-type-radio"
+      name={groupName}
+      value={JSON.stringify(cardType)}
+      checked={isChecked}
+      onChange={onChange}
+    >
       <div className={`card-type-radio__logo bg-${cardType.color}`}></div>
       <p>{cardType.name}</p>
-    </label>
+    </Radio>
   );
 };
 
