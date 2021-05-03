@@ -6,4 +6,5 @@
   margin: 0 auto;
   padding: 0 1.1rem 3rem;
   background-color: white;
+  overflow-y: scroll;
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Card from "../stories/Card";
-import Button from "../stories/Button";
+import SimpleButton from "../stories/SimpleButton";
 import { CARD_SIZE } from "../stories/constants/card";
 import { CARD_DESCRIPTION, FORMAT_CHAR } from "../constants";
 
@@ -46,7 +46,7 @@ const CompleteCardAddition = (props) => {
           placeholder="카드 별명을 입력해주세요"
           required
         />
-        <Button innerText="확인" />
+        <SimpleButton innerText="확인" />
       </form>
     </div>
   );
@@ -66,7 +66,7 @@ CompleteCardAddition.propTypes = {
     }),
     username: PropTypes.string.isRequired,
     secureCode: PropTypes.string.isRequired,
-    password: PropTypes.arrayOf(PropTypes.string).isRequired,
+    passwords: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
 };
 

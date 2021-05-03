@@ -1,3 +1,5 @@
+/* TODO: background color css 변수 활용하기 */
+
 * {
   box-sizing: border-box;
 }
@@ -18,6 +20,13 @@ code {
 
 ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border: none;
+  outline: none;
 }
 
 #root {
@@ -28,3 +37,4 @@ ul {
 @import "./App.css";
 @import "./CardAddition.css";
 @import "./CompleteCardAddition.css";
+@import "./Home.css";

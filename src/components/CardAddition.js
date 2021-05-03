@@ -5,7 +5,7 @@ import { CARD, CARD_SIZE } from "../stories/constants/card";
 import Input from "../stories/Input";
 import Modal from "../stories/Modal";
 import CardTypeRadio from "../stories/CardTypeRadio";
-import Button from "../stories/Button";
+import SimpleButton from "../stories/SimpleButton";
 import useCardNumbers from "../hooks/useCardNumbers";
 import useExpirationDate from "../hooks/useExpirationDate";
 import useSecureCode from "../hooks/useSecureCode";
@@ -94,7 +94,7 @@ const CardAddition = (props) => {
       alert("카드 회사를 선택해주세요.");
       return;
     }
-
+    console.log(passwords);
     const card = {
       cardType,
       cardNumbers,
@@ -228,7 +228,7 @@ const CardAddition = (props) => {
             (isFulfilled) => isFulfilled
           ) && (
             <div className="card-addition__form-submit">
-              <Button innerText="다음" />
+              <SimpleButton innerText="다음" />
             </div>
           )}
         </form>

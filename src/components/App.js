@@ -8,29 +8,14 @@ import Home from "./Home";
 import router from "../router";
 import { PAGE } from "../constants";
 
-const initialCardState = {
-  cardType: {
-    name: "",
-    color: "",
-  },
-  cardNumbers: [],
-  expirationDate: {
-    month: "",
-    year: "",
-  },
-  username: "",
-  secureCode: "",
-  password: [],
-};
-
 const App = () => {
   const [page, setPage] = useState({
     id: PAGE.HOME.ID,
     headerText: PAGE.HOME.HEADER_TEXT,
     prevPage: "",
   });
-  const [cardList, setCardList] = useState([initialCardState]);
-  const [processingCard, setProcessingCard] = useState(initialCardState);
+  const [cardList, setCardList] = useState([]);
+  const [processingCard, setProcessingCard] = useState({});
 
   const routeTo = (pageId) => {
     const pageInfo = router[pageId];

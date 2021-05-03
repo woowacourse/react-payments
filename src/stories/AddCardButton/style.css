@@ -1,0 +1,29 @@
+.add-card-button {
+  position: relative;
+  border-radius: 5px;
+  width: 55.47%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.add-card-button:after {
+  content: "";
+  display: block;
+  padding-top: 62.5%;
+}
+
+.add-card-button__inner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: #e5e5e5;
+  color: #575757;
+  font-size: 3.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

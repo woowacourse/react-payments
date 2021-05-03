@@ -1,23 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { PAGE } from "../constants";
+import Card from "../stories/Card";
+import { CARD_SIZE } from "../stories/constants/card";
+import AddCardButton from "../stories/AddCardButton";
 
 const Home = (props) => {
   const { routeTo, cardList } = props;
 
   return (
     <>
-      <div>
-        <p>준비중입니다. - home</p>
-        <button onClick={() => routeTo(PAGE.CARD_ADDITION.ID)}>
-          카드 추가 하러 가기
-        </button>
+      <div className="card-list">
+        <ul>
+          {cardList.map((card) => (
+            <li key={card.cardNumbers.join("")}>
+              <Card
+                cardType={card.cardType}
+                cardNumbers={card.cardNumbers}
+                username={card.username}
+                expirationDate={`${card.expirationDate.month}/${card.expirationDate.year}`}
+                size={CARD_SIZE.SMALL}
+              />
+            </li>
+          ))}
+        </ul>
+        <AddCardButton onClick={() => routeTo(PAGE.CARD_ADDITION.ID)} />
       </div>
-      <ul>
-        {cardList.map(({ cardDescription, cardNumbers }) => (
-          <li key={cardNumbers.join("")}>{cardDescription}</li>
-        ))}
-      </ul>
     </>
   );
 };
@@ -37,8 +45,8 @@ Home.propTypes = {
       }),
       username: PropTypes.string.isRequired,
       secureCode: PropTypes.string.isRequired,
-      password: PropTypes.arrayOf(PropTypes.string).isRequired,
-    }).isRequired
+      passwords: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
   ),
 };
 

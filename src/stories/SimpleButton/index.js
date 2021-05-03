@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "./style.css";
 
-const Button = ({ type = "submit", innerText, onClick }) => {
+const SimpleButton = ({ type = "submit", innerText, onClick }) => {
   return (
     <button type={type} className="button" onClick={onClick}>
       {innerText}
@@ -11,9 +11,9 @@ const Button = ({ type = "submit", innerText, onClick }) => {
   );
 };
 
-export default Button;
+export default SimpleButton;
 
-Button.propTypes = {
+SimpleButton.propTypes = {
   type: PropTypes.string,
   innerText: PropTypes.string.isRequired,
   onClick: PropTypes.func,
