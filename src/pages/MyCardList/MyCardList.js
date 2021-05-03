@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { URL } from "../../constants";
 
-// TODO: MyCardList로 컴포넌트명 변경
-const Home = (props) => {
+const MyCardList = (props) => {
   const { cardList } = props;
 
   return (
@@ -27,7 +26,7 @@ const Home = (props) => {
   );
 };
 
-Home.propTypes = {
+MyCardList.propTypes = {
   cardList: PropTypes.arrayOf(
     PropTypes.shape({
       cardType: PropTypes.shape({
@@ -46,4 +45,4 @@ Home.propTypes = {
   ),
 };
 
-export default Home;
+export default MyCardList;

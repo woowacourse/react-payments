@@ -1,15 +1,15 @@
 import React from "react";
 import { Router } from "react-router";
 import { CARD } from "../../constants";
-import Home from "./Home";
+import MyCardList from "./MyCardList";
 
 export default {
   title: "Pages/Home",
-  component: Home,
+  component: MyCardList,
   argTypes: {},
 };
 
-const Template = (args) => <Home {...args} />;
+const Template = (args) => <MyCardList {...args} />;
 
 export const Basic = Template.bind({});
 
