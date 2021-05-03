@@ -4,14 +4,7 @@ import { STATE_KEY } from "../../constants";
 
 const cx = classNames.bind(styles);
 
-const CardExpirationInput = ({
-  inputWidth = "100%",
-  labelText,
-  className,
-  monthPlaceholder,
-  yearPlaceholder,
-  onInputChange,
-}) => {
+const CardExpirationInput = ({ labelText, className, monthPlaceholder, yearPlaceholder, onInputChange }) => {
   return (
     <div className={`${cx("card-expiration-input")} ${className}`}>
       {!!labelText?.length && (
@@ -19,7 +12,7 @@ const CardExpirationInput = ({
           {labelText}
         </label>
       )}
-      <div className={cx("card-expiration-input__input-wrapper")} style={{ width: inputWidth }}>
+      <div className={cx("card-expiration-input__input-wrapper")}>
         <input
           name={STATE_KEY.EXPIRATION_MONTH}
           type="text"

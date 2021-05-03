@@ -8,13 +8,12 @@ const Input = ({
   textAlign = "center",
   placeholder,
   labelText,
-  inputWidth,
   className = "",
   onChange,
   maxLength,
 }) => {
   return (
-    <div className={`${cx("input-wrapper")} ${className}`} style={{ width: inputWidth }}>
+    <div className={`${cx("input-wrapper")} ${className}`}>
       {!!labelText?.length && (
         <label className={cx("input__label")} name={labelText}>
           {labelText}

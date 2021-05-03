@@ -11,14 +11,8 @@ import { ANIMATION, HEADER_TEXT, PAGE_PATH } from "../../constants";
 const cx = classNames.bind(styles);
 
 const CardListPage = ({ cardListState }) => {
-  const [pageAnimation, setPageAnimation] = useState(ANIMATION.RIGHT_IN);
-
-  useLayoutEffect(() => {
-    setPageAnimation(ANIMATION.RIGHT_IN);
-  }, []);
-
   return (
-    <div className={`${cx("card-list-page")} ${pageAnimation}`}>
+    <div className={`${cx("card-list-page")} ${ANIMATION.FADE_IN}`}>
       <header className={cx("card-list-page__header")}>
         <Label labelText={HEADER_TEXT.OWNED_CARD} />
       </header>

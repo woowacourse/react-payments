@@ -1,5 +1,9 @@
 .card-list-page {
+  padding-top: 118px;
   &__header {
+    position: fixed;
+    top: 0;
+    left: 0;
     padding: 20px 36px;
     margin-bottom: 36px;
   }

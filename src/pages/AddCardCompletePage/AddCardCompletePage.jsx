@@ -6,7 +6,7 @@ import styles from "./AddCardCompletePage.module.scss";
 
 import useCardList from "../../hooks/cardListHook";
 
-import { LABEL_TEXT, STATE_KEY, PAGE_PATH } from "../../constants";
+import { LABEL_TEXT, STATE_KEY, PAGE_PATH, ANIMATION } from "../../constants";
 import appConfirm from "../../utils/appConfirm";
 
 import Label from "../../components/Label/Label";
@@ -44,7 +44,7 @@ const AddCardCompletePage = ({ cardListState, setCardListState }) => {
 
   return (
     <div className={cx("add-card-complete-page")}>
-      <main className={cx("add-card-complete-page__main")}>
+      <main className={`${cx("add-card-complete-page__main")} ${ANIMATION.FADE_IN}`}>
         <Label size="large" className={cx("add-card-complete-page__label")} labelText={LABEL_TEXT.CARD_ADD_COMPLETE} />
         <Card
           className={cx("add-card-complete-page__card")}

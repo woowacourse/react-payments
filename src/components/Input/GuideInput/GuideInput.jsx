@@ -7,21 +7,14 @@ import questionMark from "../../../assets/svgs/question-mark.svg";
 
 const cx = classNames.bind(styles);
 
-const GuideInput = ({
-  labelText,
-  guideIcon = questionMark,
-  guideImage = cardCVC,
-  className = "",
-  inputWidth,
-  onInputChange,
-}) => {
+const GuideInput = ({ labelText, guideIcon = questionMark, guideImage = cardCVC, className = "", onInputChange }) => {
   return (
     <div className={`${cx("guide-input")} ${className}`}>
       <label className={cx("guide-input__label")} name={labelText}>
         {labelText}
       </label>
       <div className={cx("guide-input__bottom")}>
-        <Input onChange={onInputChange} maxLength="3" type="password" inputWidth={inputWidth} />
+        <Input className={cx("guide-input__input")} onChange={onInputChange} maxLength="3" type="password" />
         <div className={cx("guide-input__guide-icon")}>
           <img src={guideIcon} alt="안내 아이콘" />
         </div>

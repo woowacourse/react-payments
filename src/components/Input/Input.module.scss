@@ -1,9 +1,5 @@
 @use "../../assets/scss/index.scss" as *;
 
-.input-wrapper {
-  display: inline-block;
-}
-
 .input {
   width: 100%;
   background-color: $inputBackgroundColor;

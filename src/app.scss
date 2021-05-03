@@ -1,10 +1,11 @@
-/* TODO : 폰트 전역적으로 적용하기 */
 @import "./animation.scss";
+@import "./mediaQueries.scss";
 
 body {
   font-family: "Roboto";
 }
 
 .App {
+  margin: 0 auto;
   padding: 0 24px;
 }

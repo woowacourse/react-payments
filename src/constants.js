@@ -41,6 +41,8 @@ export const CARD_INPUT = Object.freeze({
 });
 
 export const ANIMATION = Object.freeze({
+  FADE_IN: "fade-in",
+  FADE_OUT: "fade-out",
   RIGHT_IN: "right-in",
   LEFT_OUT: "left-out",
 });

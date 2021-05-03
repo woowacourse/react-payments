@@ -51,7 +51,6 @@ const CardInputContainer = ({ cardState, setCardStateByKey, showCardCompanySelec
       />
       <CardExpirationInput
         className={cx("card-input-container__expiration")}
-        inputWidth="137px"
         labelText={INPUT_LABEL_TEXT.CARD_EXPIRATION}
         monthPlaceholder={CARD_INPUT.EXPIRATION_MONTH_PLACEHOLDER}
         yearPlaceholder={CARD_INPUT.EXPIRATION_YEAR_PLACEHOLDER}
@@ -59,7 +58,6 @@ const CardInputContainer = ({ cardState, setCardStateByKey, showCardCompanySelec
       />
       <TextLimitInput
         className={cx("card-input-container__owner")}
-        inputWidth="100%"
         labelText={INPUT_LABEL_TEXT.CARD_OWNER}
         placeholder={CARD_INPUT.OWNER_PLACEHOLDER}
         lengthLimit={CARD_INPUT.OWNER_NAME_LENGTH_LIMIT}
@@ -68,7 +66,6 @@ const CardInputContainer = ({ cardState, setCardStateByKey, showCardCompanySelec
       />
       <GuideInput
         className={cx("card-input-container__cvc")}
-        inputWidth="84px"
         labelText={INPUT_LABEL_TEXT.CARD_CVC}
         onInputChange={cardCVCHook.onCardCVCInputChange}
       />

@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import styles from "./AddCardPage.module.scss";
 import { getCardColor } from "../../utils/cardCompany";
 import { isAllCardInputCorrect } from "../../utils/cardInputValidation";
-import { PAGE_PATH, HEADER_TEXT, BUTTON_TEXT, STATE_KEY } from "../../constants";
+import { PAGE_PATH, HEADER_TEXT, BUTTON_TEXT, STATE_KEY, ANIMATION } from "../../constants";
 
 import useToggle from "../../hooks/toggleHook";
 import useCardList from "../../hooks/cardListHook";
@@ -33,7 +33,7 @@ const AddCardPage = ({ cardState, setCardStateByKey, cardListState, setCardListS
           <NavigationButton buttonText={HEADER_TEXT.ADD_CARD} />
         </Link>
       </header>
-      <main className={cx("add-card-page__main")}>
+      <main className={`${cx("add-card-page__main")} ${ANIMATION.FADE_IN}`}>
         <Card
           className={cx("add-card-page__card")}
           cardOwner={cardState[STATE_KEY.CARD_OWNER]}

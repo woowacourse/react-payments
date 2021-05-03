@@ -16,9 +16,9 @@
   &__input-wrapper {
     width: 100%;
     background-color: $inputBackgroundColor;
-    padding: 10px 12px;
+    padding: 10px 40px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     color: $primaryColor;
     border-radius: 7px;
@@ -57,7 +57,7 @@
 
     &--dot {
       position: relative;
-      top: -2px;
+      top: 1px;
       display: flex;
       font-size: 28px;
       letter-spacing: -1px;

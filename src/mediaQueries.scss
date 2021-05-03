@@ -1,0 +1,17 @@
+@use "./assets/scss/index.scss" as *;
+
+.App {
+  width: 375px;
+}
+
+@include breakpoint(tablet) {
+  .App {
+    width: 720px;
+  }
+}
+
+@include breakpoint(desktop) {
+  .App {
+    width: 900px;
+  }
+}
