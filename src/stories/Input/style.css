@@ -8,16 +8,16 @@ input::-webkit-inner-spin-button {
   outline: none;
   border: none;
   border-radius: 8px;
-  background-color: #ecebf1;
+  background-color: var(--color-light-purple);
   height: 48px;
   width: 100%;
   padding: 11px 10px;
   font-size: 1.2rem;
-  color: #04c09e;
+  color: var(--color-mint);
 }
 
 .input::placeholder {
-  color: #737373;
+  color: var(--color-gray-400);
 }
 
 .text-center {

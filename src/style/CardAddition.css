@@ -49,8 +49,8 @@
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  border: 1px solid #bababa;
-  color: #969696;
+  border: 1px solid var(--color-gray-200);
+  color: var(--color-gray-300);
   font-size: 1.3rem;
   margin-left: 15px;
 }
@@ -97,7 +97,7 @@
   display: block;
   content: "";
   padding-top: 100%;
-  background-color: #04c09e;
+  background-color: var(--color-mint);
   border-radius: 50%;
 }
 
@@ -125,7 +125,7 @@
 .card-addition__tool-tip-button:hover {
   color: white;
   border-color: white;
-  background-color: #969696;
+  background-color: var(--color-gray-300);
 }
 
 .card-addition__tool-tip-button:hover:after {

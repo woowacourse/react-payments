@@ -23,13 +23,13 @@
   display: inline-block;
   height: 0.6rem;
   width: 0.6rem;
-  border-left: 2px solid #525252;
-  border-bottom: 2px solid #525252;
+  border-left: 2px solid var(--color-gray-500);
+  border-bottom: 2px solid var(--color-gray-500);
   transform: rotate(45deg);
 }
 
 .header > button:hover {
-  background-color: #e7e7e7;
+  background-color: var(--color-gray-100);
 }
 
 .header > h2 {

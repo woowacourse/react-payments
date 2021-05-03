@@ -1,4 +1,16 @@
-/* TODO: background color css 변수 활용하기 */
+:root {
+  --color-gray-100: #e7e7e7;
+  --color-gray-200: #b7b7b7;
+  --color-gray-300: #979797;
+  --color-gray-400: #777;
+  --color-gray-500: #575757;
+  --color-gray-550: #676767;
+  --color-gray-600: #373737;
+
+  --color-gold: #cbba64;
+  --color-light-purple: #ecebf1;
+  --color-mint: #04c09e;
+}
 
 * {
   box-sizing: border-box;

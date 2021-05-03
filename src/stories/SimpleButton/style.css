@@ -1,7 +1,7 @@
 .button {
   outline: none;
   border: 0;
-  color: #04c09e;
+  color: var(--color-mint);
   font-size: 1.1rem;
   cursor: pointer;
   border-radius: 10px;
@@ -12,5 +12,5 @@
 }
 
 .button:hover {
-  background-color: #e7e7e7;
+  background-color: var(--color-gray-100);
 }

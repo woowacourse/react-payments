@@ -35,7 +35,7 @@
 .card__inner-card-name {
   position: absolute;
   font-size: 0.9rem;
-  color: #383838;
+  color: var(--color-gray-600);
   top: 9%;
   left: 6.25%;
 }
@@ -43,7 +43,7 @@
 .card__inner-chip {
   width: 18.75%;
   height: 19.5%;
-  background-color: #cbba64;
+  background-color: var(--color-gold);
   border-radius: 5px;
 
   position: absolute;
@@ -80,7 +80,7 @@
   display: block;
   content: "";
   padding-top: 100%;
-  background-color: #616161;
+  background-color: var(--color-gray-550);
   border-radius: 50%;
 }
 

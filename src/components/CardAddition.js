@@ -37,7 +37,6 @@ const formatExpirationDate = (expirationDate) => {
     .join(FORMAT_CHAR.EXPIRATION_DATE_SEPARATOR);
 };
 
-// TODO: 카드 정보를 하나의 클래스로 정의해서 관리?
 const CardAddition = (props) => {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
@@ -233,7 +232,6 @@ const CardAddition = (props) => {
           )}
         </form>
       </div>
-      {/* TODO: useMemo 해주어야할까? */}
       {isVisibleModal && (
         <Modal onClick={onModalClick}>
           <form className="card-type-radio-box">
