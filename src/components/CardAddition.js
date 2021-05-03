@@ -37,7 +37,7 @@ const formatExpirationDate = (expirationDate) => {
 };
 
 const CardAddition = (props) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
   const [
     cardNumbers,
@@ -61,7 +61,7 @@ const CardAddition = (props) => {
 
   useEffect(() => {
     console.log(inputVerification.cardNumbers);
-    setIsModalOpen(inputVerification.cardNumbers);
+    setIsVisibleModal(inputVerification.cardNumbers);
   }, [inputVerification.cardNumbers]);
 
   useEffect(() => {
@@ -102,14 +102,14 @@ const CardAddition = (props) => {
 
   const onModalClick = ({ target, currentTarget }) => {
     if (target === currentTarget) {
-      setIsModalOpen(false);
+      setIsVisibleModal(false);
       return;
     }
   };
 
   const onRadioChange = ({ target }) => {
     setCardType(JSON.parse(target.value));
-    setIsModalOpen(false);
+    setIsVisibleModal(false);
   };
 
   return (
@@ -226,7 +226,7 @@ const CardAddition = (props) => {
           )}
         </form>
       </div>
-      {isModalOpen && (
+      {isVisibleModal && (
         <Modal onClick={onModalClick}>
           <form className="card-type-radio-box">
             {Object.values(CARD)
