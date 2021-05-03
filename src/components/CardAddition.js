@@ -233,6 +233,7 @@ const CardAddition = (props) => {
           )}
         </form>
       </div>
+      {/* TODO: useMemo 해주어야할까? */}
       {isVisibleModal && (
         <Modal onClick={onModalClick}>
           <form className="card-type-radio-box">

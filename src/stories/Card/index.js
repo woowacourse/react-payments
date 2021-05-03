@@ -26,12 +26,12 @@ const Card = ({
             <li>{secondNumber}</li>
 
             <li>
-              {[...Array(thirdNumber?.length || 0)].map((_, index) => (
+              {[...Array(thirdNumber?.length ?? 0)].map((_, index) => (
                 <span key={index} className="dot"></span>
               ))}
             </li>
             <li>
-              {[...Array(fourthNumber?.length || 0)].map((_, index) => (
+              {[...Array(fourthNumber?.length ?? 0)].map((_, index) => (
                 <span key={index} className="dot"></span>
               ))}
             </li>
