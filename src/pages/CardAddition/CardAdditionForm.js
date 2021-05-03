@@ -31,12 +31,6 @@ const formatCardNumbers = (numbers) => {
     .join(FORMAT_CHAR.CARD_NUMBERS_SEPARATOR);
 };
 
-const formatExpirationDate = (expirationDate) => {
-  return Object.values(expirationDate)
-    .filter((value) => value !== "")
-    .join(FORMAT_CHAR.EXPIRATION_DATE_SEPARATOR);
-};
-
 const CardAdditionForm = (props) => {
   const [
     cardNumbers,
@@ -44,10 +38,7 @@ const CardAdditionForm = (props) => {
     onCardNumbersChange,
     verifyCardNumberInputsFullFilled,
   ] = useCardNumbers([]);
-  const [expirationDate, onExpirationDateChange] = useExpirationDate({
-    month: "",
-    year: "",
-  });
+  const [expirationDate, onExpirationDateChange] = useExpirationDate("");
   const [username, onUsernameChange] = useControlledInputValue("");
   const [secureCode, onSecureCodeChange] = useSecureCode("");
   const [password, onPasswordChange] = usePassword(["", ""]);
@@ -76,8 +67,7 @@ const CardAdditionForm = (props) => {
   const isAllInputFulfilled = () => {
     const cardNumbersCondition = verifyCardNumberInputsFullFilled();
     const expirationDateCondition =
-      (expirationDate.month + expirationDate.year).length ===
-      EXPIRATION_DATE.LENGTH;
+      expirationDate.length === EXPIRATION_DATE.LENGTH;
     const usernameCondition = username.length >= USERNAME.MIN_LENGTH;
     const secureCodeCondition = secureCode.length === SECURE_CODE_LENGTH;
     const passwordCondition = password.every((value) => value !== "");
@@ -101,7 +91,7 @@ const CardAdditionForm = (props) => {
         <Card
           cardType={props.cardType}
           size={CARD_SIZE.MEDIUM}
-          expirationDate={formatExpirationDate(expirationDate)}
+          expirationDate={expirationDate}
           username={username}
           cardNumbers={cardNumbers}
         />
@@ -128,7 +118,7 @@ const CardAdditionForm = (props) => {
             type="text"
             isCenter={true}
             placeHolder="MM / YY"
-            value={formatExpirationDate(expirationDate)}
+            value={expirationDate}
             onChange={onExpirationDateChange}
             maxLength={EXPIRATION_DATE.FORMATTED_LENGTH}
             required

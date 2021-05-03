@@ -17,10 +17,8 @@ Basic.args = {
     cardId: 1,
     cardType: CARD.SUN,
     cardNumbers: ["1111", "2222", "3333", "4444"],
-    expirationDate: {
-      month: "5",
-      year: "12",
-    },
+    expirationDate: "05/24",
     username: "권미키",
+    cardDescription: "권미키 카드",
   },
 };

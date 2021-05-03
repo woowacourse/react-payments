@@ -6,6 +6,20 @@ const unformatExpirationDate = (formattedValue) => {
   return formattedValue.replace(FORMAT_CHAR.EXPIRATION_DATE_SEPARATOR, "");
 };
 
+const formatExpirationDate = (unformattedExpirationDate) => {
+  const month = unformattedExpirationDate.slice(
+    0,
+    EXPIRATION_DATE.MONTH_LENGTH
+  );
+  const year = unformattedExpirationDate.slice(EXPIRATION_DATE.MONTH_LENGTH);
+
+  if (year) {
+    return month + "/" + year;
+  }
+
+  return month;
+};
+
 const useExpirationDate = (initialValue) => {
   const [expirationDate, setExpirationDate] = useState(initialValue);
 
@@ -16,13 +30,7 @@ const useExpirationDate = (initialValue) => {
       return;
     }
 
-    const month = unformattedValue.slice(0, EXPIRATION_DATE.MONTH_LENGTH);
-    const year = unformattedValue.slice(EXPIRATION_DATE.MONTH_LENGTH);
-
-    setExpirationDate({
-      month,
-      year,
-    });
+    setExpirationDate(formatExpirationDate(unformattedValue));
   };
 
   return [expirationDate, onExpirationDateChange];
