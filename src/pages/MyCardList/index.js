@@ -7,7 +7,6 @@ import CardAdditionButton from "../../components/CardAdditionButton";
 
 const MyCardList = (props) => {
   const { cardList } = props;
-  console.log(cardList);
 
   return (
     <>

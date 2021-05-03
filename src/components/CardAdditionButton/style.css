@@ -2,6 +2,7 @@
   border: none;
   outline: none;
   cursor: pointer;
+  box-shadow: none;
 }
 
 .card-addition-button:hover {
