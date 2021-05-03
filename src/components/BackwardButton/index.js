@@ -26,8 +26,8 @@ export const BackwardButton = ({ className, size, color, strokeWidth }) => {
 
 BackwardButton.propTypes = {
   className: PropTypes.string,
-  size: PropTypes.oneOf([PropTypes.string, PropTypes.number]).isRequired,
-  strokeWidth: PropTypes.oneOf([PropTypes.string, PropTypes.number]).isRequired,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  strokeWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   color: PropTypes.string.isRequired,
 };
 
