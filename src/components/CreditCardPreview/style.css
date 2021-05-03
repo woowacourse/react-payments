@@ -1,9 +1,15 @@
-.CreditCard {
+.CreditCardPreview {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.CreditCardPreview__Wrapper {
   padding: 0.875em;
   width: 100%;
 }
 
-.CreditCard__CardCompany {
+.CreditCardPreview__CardCompany {
   display: inline-block;
   height: 0.625em;
   font-size: 0.625em;
@@ -11,7 +17,14 @@
   margin-bottom: 2.2em;
 }
 
-.CreditCard__CardNumber {
+.CreditCardPreview__IC_Chip {
+  width: 40px;
+  height: 26px;
+  border-radius: 4px;
+  background-color: #cbba64;
+}
+
+.CreditCardPreview__CardNumber {
   display: flex;
   justify-content: center;
   margin-top: 0.8em;
@@ -22,13 +35,13 @@
   color: #525252;
 }
 
-.CreditCard__Line {
+.CreditCardPreview__Line {
   margin-top: 0.5em;
   display: flex;
   justify-content: space-between;
 }
 
-.CreditCard__OwnerName {
+.CreditCardPreview__OwnerName {
   height: 0.71em;
   font-size: 0.71em;
   font-weight: 600;
@@ -36,7 +49,7 @@
   color: #525252;
 }
 
-.CreditCard__ExpirationDate {
+.CreditCardPreview__ExpirationDate {
   height: 0.71em;
   font-size: 0.71em;
   font-weight: 600;

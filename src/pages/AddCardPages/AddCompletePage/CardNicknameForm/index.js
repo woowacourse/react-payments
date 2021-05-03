@@ -1,7 +1,6 @@
 import { createRef, useEffect } from 'react';
 import { Button, Form, Input } from '../../../../components';
 import { handleNicknameInputChange, handleNicknameSubmit } from './handler';
-import './style.css';
 
 export const CardNicknameForm = (props) => {
   const { setRoute, cardInfo, setCardInfo, initialNickname, addCardInfoToList } = props;

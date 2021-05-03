@@ -5,7 +5,17 @@
   font-size: 1.5rem;
 }
 
-.CreditCardPreview--large {
+.AddCompletePage__CreditCardPreview {
   transform: scale(1.4);
-  margin-bottom: 2.5rem;
+}
+
+.CardNicknameForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+.CardNicknameForm .Button:disabled {
+  cursor: default;
+  opacity: 0.5;
 }

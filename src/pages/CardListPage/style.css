@@ -23,8 +23,6 @@
   text-align: center;
 }
 
-.CreditCardPreview {
-  display: flex;
-  justify-content: center;
-  margin-top: 0.75rem;
+.CardListPage__CreditCardPreview {
+  transform: scale(0.95);
 }

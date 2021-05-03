@@ -1,29 +1,10 @@
 .Card {
   display: flex;
   align-items: center;
-  border-radius: 5px;
-  background-color: #d2d2d2;
-}
-
-.Card--chip {
-  width: 40px;
-  height: 26px;
-  border-radius: 4px;
-}
-
-.Card--small {
-  width: 208px;
-  height: 123px;
-}
-
-.Card--medium {
   width: 213px;
   height: 133px;
-}
-
-.Card--large {
-  width: 293.08px;
-  height: 183px;
+  border-radius: 5px;
+  background-color: #e5e5e5;
 }
 
 .Card--shadow {

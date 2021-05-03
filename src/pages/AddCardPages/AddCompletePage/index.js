@@ -1,4 +1,4 @@
-import { Card, CreditCard, Text } from '../../../components';
+import { CreditCardPreview, Text } from '../../../components';
 import { CardNicknameForm } from './CardNicknameForm';
 import { getFormattedCardInfo } from '../../../cardInfoFormatter';
 import './style.css';
@@ -12,11 +12,12 @@ export const AddCompletePage = (props) => {
     <div>
       <Text className="AddCompletePage__Text">카드등록이 완료되었습니다.</Text>
       <CreditCardPreview
+        className="AddCompletePage__CreditCardPreview"
         companyColor={company.color}
         companyName={company.name}
-        formattedNumber={formattedNumber}
-        formattedExpirationDate={formattedExpirationDate}
-        formattedOwnerName={formattedOwnerName}
+        cardNumber={formattedNumber}
+        ownerName={formattedOwnerName}
+        expirationDate={formattedExpirationDate}
       />
       <CardNicknameForm
         setRoute={setRoute}
@@ -28,20 +29,3 @@ export const AddCompletePage = (props) => {
     </div>
   );
 };
-
-function CreditCardPreview(props) {
-  const { companyColor, companyName, formattedNumber, formattedExpirationDate, formattedOwnerName } = props;
-
-  return (
-    <div className="CreditCardPreview CreditCardPreview--large">
-      <Card backgroundColor={companyColor} boxShadow size="medium">
-        <CreditCard
-          company={companyName}
-          cardNumber={formattedNumber}
-          expirationDate={formattedExpirationDate}
-          ownerName={formattedOwnerName}
-        />
-      </Card>
-    </div>
-  );
-}

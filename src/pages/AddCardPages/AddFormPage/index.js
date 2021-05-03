@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Card, CreditCard, Heading } from '../../../components';
+import { Button, CreditCardPreview, Heading } from '../../../components';
 import { CardInfoForm } from './CardInfoForm';
 import { CardCompanySelectModal } from './CardCompanySelectModal';
 import { getFormattedCardInfo } from '../../../cardInfoFormatter';
@@ -20,9 +20,9 @@ export const AddFormPage = (props) => {
       <CreditCardPreview
         companyColor={company.color}
         companyName={company.name}
-        formattedNumber={formattedNumber}
-        formattedExpirationDate={formattedExpirationDate}
-        formattedOwnerName={formattedOwnerName}
+        cardNumber={formattedNumber}
+        ownerName={formattedOwnerName}
+        expirationDate={formattedExpirationDate}
       />
       <CardInfoForm
         setRoute={setRoute}
@@ -35,23 +35,6 @@ export const AddFormPage = (props) => {
     </div>
   );
 };
-
-function CreditCardPreview(props) {
-  const { companyColor, companyName, formattedNumber, formattedExpirationDate, formattedOwnerName } = props;
-
-  return (
-    <div className="CreditCardPreview">
-      <Card backgroundColor={companyColor} boxShadow size="medium">
-        <CreditCard
-          company={companyName}
-          cardNumber={formattedNumber}
-          expirationDate={formattedExpirationDate}
-          ownerName={formattedOwnerName}
-        />
-      </Card>
-    </div>
-  );
-}
 
 function BackwardButton() {
   const size = 16;

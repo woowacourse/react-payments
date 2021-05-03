@@ -16,20 +16,17 @@ PlusCard.args = {
 
 export const PocoCard = Template.bind({});
 PocoCard.args = {
-  size: 'medium',
-  backgroundColor: '#547CE4',
-  boxShadow: true,
+  style: { backgroundColor: '#547CE4' },
+  hasShadow: true,
 };
 
 export const LoydCard = Template.bind({});
 LoydCard.args = {
-  size: 'large',
-  backgroundColor: '#94DACD',
-  boxShadow: true,
+  style: { backgroundColor: '#94DACD' },
+  hasShadow: true,
 };
 
 export const CreditCardChip = Template.bind({});
 CreditCardChip.args = {
-  size: 'chip',
-  backgroundColor: '#cbba64',
+  className: 'CreditCardPreview__IC_Chip',
 };

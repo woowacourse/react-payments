@@ -1,20 +1,20 @@
 import React from 'react';
-import { CreditCard } from '.';
+import { CreditCardPreview } from '.';
 import { Card } from '..';
 
 export default {
-  title: 'Component/CreditCard',
-  component: CreditCard,
+  title: 'Component/CreditCardPreview',
+  component: CreditCardPreview,
   decorators: [
     (Story) => (
-      <Card backgroundColor="#94DACD" boxShadow size="medium">
+      <Card hasShadow style={{ backgroundColor: '#94DACD' }}>
         <Story />
       </Card>
     ),
   ],
 };
 
-const Template = (args) => <CreditCard {...args} />;
+const Template = (args) => <CreditCardPreview {...args} />;
 
 export const LoydCreditCard = Template.bind({});
 LoydCreditCard.args = {

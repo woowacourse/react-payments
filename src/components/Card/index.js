@@ -5,26 +5,16 @@ import styles from './style.css';
 
 const cx = classNames.bind(styles);
 
-export const Card = ({ size, backgroundColor, boxShadow, children, ...props }) => {
-  const cardClass = cx('Card', { [`Card--${size}`]: size }, { 'Card--shadow': boxShadow });
-
+export const Card = ({ className, hasShadow, children, ...rest }) => {
   return (
-    <div className={cardClass} style={{ backgroundColor }} {...props}>
+    <div className={cx('Card', { 'Card--shadow': hasShadow }, className)} {...rest}>
       {children}
     </div>
   );
 };
 
 Card.propTypes = {
-  size: PropTypes.oneOf(['small', 'medium', 'large', 'chip']),
-  backgroundColor: PropTypes.string,
-  boxShadow: PropTypes.bool,
+  className: PropTypes.string,
+  hasShadow: PropTypes.bool,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-};
-
-Card.defaultProps = {
-  size: 'small',
-  backgroundColor: '#E5E5E5',
-  boxShadow: false,
-  children: '',
 };
