@@ -1,11 +1,20 @@
 import { CARD_INFO, LENGTH } from "./constants";
 
-const replaceOwnerName = name => {
-  if (name.length > LENGTH.OWNER_NAME.MAX) {
-    name = name.slice(LENGTH.OWNER_NAME.MIN, LENGTH.OWNER_NAME.MAX);
+const replaceOwnerName = ownerName => {
+  if (ownerName.length > LENGTH.OWNER_NAME.MAX) {
+    ownerName = ownerName.slice(LENGTH.OWNER_NAME.MIN, LENGTH.OWNER_NAME.MAX);
   }
 
-  return name.toUpperCase();
+  return ownerName.toUpperCase();
+};
+
+const replaceNickname = nickname => {
+  return nickname.slice(0, LENGTH.NICKNAME.MAX);
+};
+
+const replace = {
+  [CARD_INFO.OWNER_NAME]: replaceOwnerName,
+  [CARD_INFO.NICKNAME]: replaceNickname,
 };
 
 const replaceValue = (inputName, value) => {
@@ -16,11 +25,8 @@ const replaceValue = (inputName, value) => {
     if (typeof value !== "string") {
       throw new TypeError(`${inputName} should be a string`);
     }
-    if (inputName === CARD_INFO.OWNER_NAME) {
-      return replaceOwnerName(value);
-    }
 
-    return value.replace(/[\D]/g, "");
+    return replace[inputName] ? replace[inputName](value) : value.replace(/[\D]/g, "");
   } catch (error) {
     throw error;
   }

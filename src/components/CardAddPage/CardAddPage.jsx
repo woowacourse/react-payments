@@ -34,8 +34,8 @@ const CardAddPage = ({ cardInfo, setCardInfo, routeTo }) => {
 
   const handleInputChange = event => {
     try {
-      const { name, value } = event.target;
-      const targetIndex = Number(event.target.dataset.index);
+      const { name, value, dataset } = event.target;
+      const targetIndex = Number(dataset.index);
       const replacedValue = replaceValue(name, value);
       const newValue = !Number.isNaN(targetIndex)
         ? cardInfo[name].map((prevValue, index) => (index === targetIndex ? replacedValue : prevValue))
