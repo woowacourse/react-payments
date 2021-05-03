@@ -1,4 +1,4 @@
-import "./CompleteCardAddition.css";
+import "./index.css";
 import React, { useState } from "react";
 import { CARD_SIZE } from "../../constants";
 import PropTypes from "prop-types";
@@ -68,10 +68,7 @@ CompleteCardAddition.propTypes = {
       color: PropTypes.string.isRequired,
     }),
     cardNumbers: PropTypes.arrayOf(PropTypes.string).isRequired,
-    expirationDate: PropTypes.shape({
-      month: PropTypes.string.isRequired,
-      year: PropTypes.string.isRequired,
-    }),
+    expirationDate: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
     secureCode: PropTypes.string.isRequired,
     password: PropTypes.arrayOf(PropTypes.string).isRequired,

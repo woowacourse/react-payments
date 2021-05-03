@@ -67,7 +67,8 @@ const CardAdditionForm = (props) => {
   const isAllInputFulfilled = () => {
     const cardNumbersCondition = verifyCardNumberInputsFullFilled();
     const expirationDateCondition =
-      expirationDate.length === EXPIRATION_DATE.LENGTH;
+      expirationDate.length ===
+      EXPIRATION_DATE.LENGTH + FORMAT_CHAR.EXPIRATION_DATE_SEPARATOR.length;
     const usernameCondition = username.length >= USERNAME.MIN_LENGTH;
     const secureCodeCondition = secureCode.length === SECURE_CODE_LENGTH;
     const passwordCondition = password.every((value) => value !== "");

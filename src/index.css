@@ -16,10 +16,6 @@ code {
     monospace;
 }
 
-ul {
-  list-style: none;
-}
-
 #root {
   background-color: #efefef;
   height: 100%;

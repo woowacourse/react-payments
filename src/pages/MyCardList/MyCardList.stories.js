@@ -1,6 +1,6 @@
 import React from "react";
 import { CARD } from "../../constants";
-import MyCardList from "./MyCardList";
+import MyCardList from ".";
 
 export default {
   title: "Pages/Home",

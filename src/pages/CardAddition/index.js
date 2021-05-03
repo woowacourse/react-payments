@@ -1,4 +1,4 @@
-import "./CardAddition.css";
+import "./index.css";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { CARD } from "../../constants";
