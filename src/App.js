@@ -34,6 +34,24 @@ function App() {
     },
   });
 
+  const handleCardColor = (name) => {
+    setNewCardInfo({
+      ...newCardInfo,
+      cardName: name,
+    });
+    handleModalClose();
+  };
+
+  const modalContentsObject = {
+    cardColor: <CardColor handleCardColor={handleCardColor} />,
+    cvcHelp: <CVCHelp />,
+  };
+
+  const [openModalContent, setOpenModalContent] = useState({
+    isModalOpen: true,
+    modalContent: modalContentsObject.cardColor,
+  });
+
   const resetNewCardInfo = () => {
     setNewCardInfo({
       cardName: 'DEFAULT',
@@ -61,24 +79,6 @@ function App() {
     setMyCards([...myCards, newCardInfo]);
     resetNewCardInfo();
   };
-
-  const handleCardColor = (name) => {
-    setNewCardInfo({
-      ...newCardInfo,
-      cardName: name,
-    });
-    handleModalClose();
-  };
-
-  const modalContentsObject = {
-    cardColor: <CardColor handleCardColor={handleCardColor} />,
-    cvcHelp: <CVCHelp />,
-  };
-
-  const [openModalContent, setOpenModalContent] = useState({
-    isModalOpen: true,
-    modalContent: modalContentsObject.cardColor,
-  });
 
   const handleModalOpen = (content) => {
     setOpenModalContent({
