@@ -35,7 +35,7 @@ const CardAddCompletion = ({ cardInfo, onInputChange, submitCardInfo, routeToNex
               onChange={onInputChange}
             />
           </div>
-          <div className="flex justify-end items-center w-full h-10">
+          <div className="flex justify-end items-center w-full h-10 absolute bottom-5 right-5">
             <Button name="확인" />
           </div>
         </form>

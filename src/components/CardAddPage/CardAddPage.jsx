@@ -78,7 +78,7 @@ const CardAddPage = ({ cardInfo, validation, addBank, onInputChange, routeToBack
           </div>
         </div>
         {Object.values(validation).every(Boolean) && (
-          <div className="flex justify-end items-center w-full h-10">
+          <div className="flex justify-end items-center w-full h-10 absolute bottom-5 right-5">
             <Button name="다음" type="submit" />
           </div>
         )}
