@@ -6,8 +6,8 @@ import { ExpirationDateInput } from './ExpirationDateInput';
 import { OwnerNameInput } from './OwnerNameInput';
 import { SecurityCodeInput } from './SecurityCodeInput';
 import { PasswordInput } from './PasswordInput';
-import { handleCardInfoSubmit } from './handler';
-import { isFormFulFilled } from './validator';
+import { isFormFulFilled, isCardNameFulfilled } from './validator';
+import { ROUTE } from '../../../../constants';
 
 export const CardInfoForm = (props) => {
   const { initialCardInfo, cardInfo, setCardInfo, setIsModalOpen } = props;
@@ -62,3 +62,13 @@ export const CardInfoForm = (props) => {
     </Form>
   );
 };
+
+function handleCardInfoSubmit({ e, initialCardInfo, cardInfo, setIsModalOpen, history }) {
+  e.preventDefault();
+
+  if (!isCardNameFulfilled(cardInfo.company, initialCardInfo.company)) {
+    setIsModalOpen(true);
+    return;
+  }
+  history.push(ROUTE.ADD_COMPLETE);
+}

@@ -1,6 +1,5 @@
 import { forwardRef } from 'react';
 import { Input, Label, Text } from '../../../../../components';
-import { handleOwnerNameInputChange, handleOwnerNameInputBlur } from './handler';
 import { MAX_OWNER_NAME_LENGTH } from '../../../../../constants';
 
 export const OwnerNameInput = forwardRef((props, ref) => {
@@ -26,5 +25,19 @@ export const OwnerNameInput = forwardRef((props, ref) => {
     </>
   );
 });
+
+const regExpOnlyAlphabet = /[^a-zA-Z ]+/g;
+
+function handleOwnerNameInputChange(props) {
+  const { e, setOwnerName } = props;
+  const inputValue = e.target.value;
+  const inputValueOnlyAlphabet = inputValue.replace(regExpOnlyAlphabet, '');
+
+  setOwnerName(inputValueOnlyAlphabet.toUpperCase());
+}
+
+export const handleOwnerNameInputBlur = ({ setIsOwnerNameFilled }) => {
+  setIsOwnerNameFilled(true);
+};
 
 OwnerNameInput.displayName = 'OwnerNameInput';

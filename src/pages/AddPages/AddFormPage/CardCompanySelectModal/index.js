@@ -1,6 +1,5 @@
 /* eslint-disable react/no-array-index-key */
 import { Button, Label, Modal } from '../../../../components';
-import { handleCardCompanySelect, handleDimmedAreaClick } from './handler';
 import { CARD_COMPANY_LIST } from '../../../../constants';
 
 export const CardCompanySelectModal = ({ isOpen, setCardInfo, setIsModalOpen }) => {
@@ -37,4 +36,21 @@ function CardCompanyItem({ company, setCardInfo, setIsModalOpen }) {
       <Label>{company.name}</Label>
     </li>
   );
+}
+
+function handleCardCompanySelect({ e, setCardInfo, setIsModalOpen }) {
+  const name = e.target.name;
+  const color = e.target.style.backgroundColor;
+
+  setCardInfo((prevState) => ({ ...prevState, company: { name, color } }));
+  setIsModalOpen(false);
+}
+
+function handleDimmedAreaClick({ e, setIsModalOpen }) {
+  const Modal = e.currentTarget;
+  const ModalViewPort = Modal.firstChild;
+
+  if (e.target === Modal || e.target === ModalViewPort) {
+    setIsModalOpen(false);
+  }
 }

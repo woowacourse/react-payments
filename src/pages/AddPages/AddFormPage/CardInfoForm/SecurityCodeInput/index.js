@@ -1,5 +1,4 @@
 import { Button, Input, Label } from '../../../../../components';
-import { handleSecurityCodeInputChange } from './handler';
 import { SECURITY_CODE_LENGTH } from '../../../../../constants';
 import cvcImage from '../../../../../images/cvc.png';
 
@@ -26,3 +25,13 @@ export const SecurityCodeInput = (props) => {
     </>
   );
 };
+
+function handleSecurityCodeInputChange(props) {
+  const { e, setSecurityCode, passwordInputRef } = props;
+  const slicedInputValue = e.target.value.slice(0, SECURITY_CODE_LENGTH);
+
+  if (slicedInputValue.length === SECURITY_CODE_LENGTH) {
+    passwordInputRef.current.focus();
+  }
+  setSecurityCode(slicedInputValue);
+}

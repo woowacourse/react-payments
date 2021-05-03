@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Form, Input } from '../../../../components';
-import { handleNicknameInputChange, handleNicknameSubmit } from './handler';
+import { MAX_NICKNAME_LENGTH, ROUTE } from '../../../../constants';
 
 export const CardNicknameForm = (props) => {
   const { cardInfo, setCardInfo, initialNickname, addCardInfoToList } = props;
@@ -34,3 +34,14 @@ export const CardNicknameForm = (props) => {
     </Form>
   );
 };
+
+function handleNicknameInputChange({ e, setNickname }) {
+  const slicedInputValue = e.target.value.slice(0, MAX_NICKNAME_LENGTH);
+  setNickname(slicedInputValue);
+}
+
+function handleNicknameSubmit({ e, cardInfo, addCardInfoToList, history }) {
+  e.preventDefault();
+  addCardInfoToList(cardInfo);
+  history.push(ROUTE.HOME);
+}

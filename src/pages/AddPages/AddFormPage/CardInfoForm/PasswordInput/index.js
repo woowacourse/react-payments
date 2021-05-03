@@ -1,7 +1,6 @@
 import { useRef, forwardRef } from 'react';
 import { Input, Label } from '../../../../../components';
-import { handlePasswordInputChange } from './handler';
-import { FIRST, SECOND } from '../../../../../constants';
+import { FIRST, SECOND, PASSWORD_UNIT_LENGTH } from '../../../../../constants';
 
 export const PasswordInput = forwardRef((props, firstRef) => {
   const { password, setPassword } = props;
@@ -37,5 +36,16 @@ export const PasswordInput = forwardRef((props, firstRef) => {
     </>
   );
 });
+
+function handlePasswordInputChange(props) {
+  const { e, password, setPassword, secondRef } = props;
+  const inputName = e.target.name;
+  const slicedInputValue = e.target.value.slice(0, PASSWORD_UNIT_LENGTH);
+
+  if (inputName === FIRST && slicedInputValue.length === PASSWORD_UNIT_LENGTH) {
+    secondRef?.current.focus();
+  }
+  setPassword({ ...password, [inputName]: slicedInputValue });
+}
 
 PasswordInput.displayName = 'PasswordInput';

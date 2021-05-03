@@ -1,7 +1,6 @@
 import { useRef, forwardRef } from 'react';
 import { Container, Input, Label, Text } from '../../../../../components';
-import { handleExpirationDateInputChange } from './handler';
-import { MONTH, YEAR } from '../../../../../constants';
+import { MONTH, YEAR, EXPIRATION_DATE_LENGTH } from '../../../../../constants';
 
 export const ExpirationDateInput = forwardRef((props, monthRef) => {
   const { expirationDate, setExpirationDate, ownerNameInputRef } = props;
@@ -38,5 +37,16 @@ export const ExpirationDateInput = forwardRef((props, monthRef) => {
     </>
   );
 });
+
+function handleExpirationDateInputChange(props) {
+  const { e, expirationDate, setExpirationDate, nextRef } = props;
+  const inputName = e.target.name;
+  const slicedInputValue = e.target.value.slice(0, EXPIRATION_DATE_LENGTH[inputName]);
+
+  if (slicedInputValue.length === EXPIRATION_DATE_LENGTH[inputName]) {
+    nextRef[inputName]?.current.focus();
+  }
+  setExpirationDate({ ...expirationDate, [inputName]: slicedInputValue });
+}
 
 ExpirationDateInput.displayName = 'ExpirationDateInput';
