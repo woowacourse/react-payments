@@ -8,17 +8,14 @@ import GlobalStyle from './styles/global';
 const PAGES = {
   LIST: {
     title: '보유카드',
-    content: (props) => <CardList {...props} />,
     backButton: false,
   },
   REGISTER: {
     title: '카드추가',
-    content: (props) => <CardRegister {...props} />,
     backButton: true,
   },
   COMPLETION: {
     title: '',
-    content: (props) => <CardCompletion {...props} />,
     backButton: false,
   },
 };
@@ -28,7 +25,9 @@ const App = () => {
   const [currentCardData, setCurrentCardData] = useState({});
 
   const handleGoNext = () => {
-    if (currentPage === PAGES.REGISTER) {
+    if (currentPage === PAGES.LIST) {
+      setCurrentPage(PAGES.REGISTER);
+    } else if (currentPage === PAGES.REGISTER) {
       setCurrentPage(PAGES.COMPLETION);
     } else if (currentPage === PAGES.COMPLETION) {
       setCurrentPage(PAGES.LIST);
@@ -39,7 +38,7 @@ const App = () => {
     <>
       <GlobalStyle />
       <PageHost navigationTitle={currentPage.title} hasBackButton={currentPage.backButton}>
-        {currentPage === PAGES.LIST && <CardList />}
+        {currentPage === PAGES.LIST && <CardList handleAddCard={handleGoNext} />}
         {currentPage === PAGES.REGISTER && (
           <CardRegister setCardData={setCurrentCardData} handleGoNext={handleGoNext} />
         )}

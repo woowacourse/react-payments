@@ -8,6 +8,7 @@ import * as Style from './style';
 const CardCompletion = (props) => {
   const {
     cardData: { bankId, cardNumbers, expirationDate, ownerName },
+    handleGoNext,
   } = props;
 
   const [cardAlias, setCardAlias] = useState('');
@@ -16,6 +17,7 @@ const CardCompletion = (props) => {
     event.preventDefault();
 
     firestore.collection('cards').add({ bankId, cardNumbers, expirationDate, ownerName, cardAlias });
+    handleGoNext();
   };
 
   const handleChangeAlias = (event) => {
@@ -52,6 +54,7 @@ CardCompletion.propTypes = {
     expirationDate: PropTypes.object.isRequired,
     ownerName: PropTypes.string.isRequired,
   }),
+  handleGoNext: PropTypes.func.isRequired,
 };
 
 export default CardCompletion;
