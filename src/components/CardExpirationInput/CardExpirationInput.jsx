@@ -1,28 +1,17 @@
 import classNames from "classnames/bind";
 import styles from "./CardExpirationInput.module.scss";
-import { STATE_KEY } from '../../constants';
-import { isNumberText } from "../../utils/cardInputValidation";
+import { STATE_KEY } from "../../constants";
 
 const cx = classNames.bind(styles);
 
-const CardExpirationInput = ({ inputWidth = "100%", labelText, className, monthPlaceholder, yearPlaceholder, cardInputState, setCardInputState }) => {
-  const onCardExpirationInputChange = (event) => {
-    const { value, name } = event.target;
-    
-    if (!isNumberText(value)) {
-      event.target.value = event.target.value.slice(0, -1);
-      return;
-    }
-
-    setCardInputState(state => ({
-      ...state,
-      [STATE_KEY.CARD_EXPIRATION]: {
-        ...state[STATE_KEY.CARD_EXPIRATION],
-        [name]: value
-      }
-    }))
-  };
-
+const CardExpirationInput = ({
+  inputWidth = "100%",
+  labelText,
+  className,
+  monthPlaceholder,
+  yearPlaceholder,
+  onInputChange,
+}) => {
   return (
     <div className={`${cx("card-expiration-input")} ${className}`}>
       {!!labelText?.length && (
@@ -30,13 +19,13 @@ const CardExpirationInput = ({ inputWidth = "100%", labelText, className, monthP
           {labelText}
         </label>
       )}
-      <div className={cx("card-expiration-input__input-wrapper")} style={{width: inputWidth}}>
+      <div className={cx("card-expiration-input__input-wrapper")} style={{ width: inputWidth }}>
         <input
           name={STATE_KEY.EXPIRATION_MONTH}
           type="text"
           className={cx("card-expiration-input__input")}
           maxLength={2}
-          onChange={onCardExpirationInputChange}
+          onChange={onInputChange}
           placeholder={monthPlaceholder}
           required
         />
@@ -46,7 +35,7 @@ const CardExpirationInput = ({ inputWidth = "100%", labelText, className, monthP
           type="text"
           className={cx("card-expiration-input__input")}
           maxLength={2}
-          onChange={onCardExpirationInputChange}
+          onChange={onInputChange}
           placeholder={yearPlaceholder}
           required
         />

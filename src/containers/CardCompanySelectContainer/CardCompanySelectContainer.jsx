@@ -1,8 +1,9 @@
 import classNames from "classnames/bind";
 import styles from "./CardCompanySelectContainer.module.scss";
 
-import { getAllCardCompanies, getCardColor } from '../../utils/cardCompany';
-import { STATE_KEY } from '../../constants';
+import useCardCompany from "../../hooks/cardCompanyHook";
+
+import { getAllCardCompanies, getCardColor } from "../../utils/cardCompany";
 import BackDrop from "../../components/BackDrop/BackDrop";
 import BottomSlider from "../../components/BottomSlider/BottomSlider";
 import CircleButton from "../../components/CircleButton/CircleButton";
@@ -10,21 +11,18 @@ import CircleButton from "../../components/CircleButton/CircleButton";
 const cx = classNames.bind(styles);
 
 const CardCompanySelectContainer = ({
+  cardState,
+  setCardStateByKey,
   hideCardCompanySelectContainer,
-  backDropAnimationClass,
-  bottomSliderAnimationClass,
-  cardInputState,
-  setCardInputState,
+  backDropAnimation,
+  bottomSliderAnimation,
 }) => {
+  const cardCompanyHook = useCardCompany(cardState, setCardStateByKey);
   const onCircleButtonClick = (cardCompany) => {
-    setCardInputState(state => ({
-      ...state,
-      [STATE_KEY.CARD_COMPANY]: cardCompany
-    }));
+    cardCompanyHook.setCardCompanyState(cardCompany);
     hideCardCompanySelectContainer();
-  }
+  };
 
-  // TODO : 리뷰어에게 전부 같은 이름으로 파라미터 이름 적용해도 되는지 물어보기
   const cardCompanyList = getAllCardCompanies();
   const cardCompanyItems = cardCompanyList.map((cardCompany) => (
     <CircleButton
@@ -38,8 +36,8 @@ const CardCompanySelectContainer = ({
 
   return (
     <div className={cx("card-company-select-container")}>
-      <BackDrop className={backDropAnimationClass} backDropClick={hideCardCompanySelectContainer} />
-      <BottomSlider className={`${cx("card-company-select-container__bottom-slider")} ${bottomSliderAnimationClass}`}>
+      <BackDrop className={backDropAnimation} backDropClick={hideCardCompanySelectContainer} />
+      <BottomSlider className={`${cx("card-company-select-container__bottom-slider")} ${bottomSliderAnimation}`}>
         {cardCompanyItems}
       </BottomSlider>
     </div>

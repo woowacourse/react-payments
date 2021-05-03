@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./AddCardPage.module.scss";
-import { getCardColor } from '../../utils/cardCompany';
-import useToggle from '../../hooks/toggleHook';
+import { getCardColor } from "../../utils/cardCompany";
 import { isAllCardInputCorrect } from "../../utils/cardInputValidation";
-
 import { PAGE_PATH, HEADER_TEXT, BUTTON_TEXT, STATE_KEY } from "../../constants";
+
+import useToggle from "../../hooks/toggleHook";
+import useCardList from "../../hooks/cardListHook";
 
 import CardInputContainer from "../../containers/CardInputContainer/CardInputContainer";
 import CardCompanySelectContainer from "../../containers/CardCompanySelectContainer/CardCompanySelectContainer";
@@ -16,18 +17,13 @@ import Button from "../../components/Button/Button";
 
 const cx = classNames.bind(styles);
 
-// TODO: 카드 호버 애니메이션 껐다 킬수 있게 만들기
-
-const AddCardPage = ({
-  cardInputState,
-  setCardInputState,
-  cardListState,
-  setCardListState
-}) => {
+const AddCardPage = ({ cardState, setCardStateByKey, cardListState, setCardListState }) => {
   const toggle = useToggle();
+  const cardListHook = useCardList(cardListState, setCardListState);
+
   const onAddCardButtonClick = () => {
-    setCardListState(state => [...state, {...cardInputState}])
-  }
+    cardListHook.addCardItem({ ...cardState });
+  };
 
   return (
     <div className={cx("add-card-page")}>
@@ -37,31 +33,35 @@ const AddCardPage = ({
         </Link>
       </header>
       <main className={cx("add-card-page__main")}>
-        <Card 
+        <Card
           className={cx("add-card-page__card")}
-          cardOwner={cardInputState[STATE_KEY.CARD_OWNER]}
-          cardNumber={cardInputState[STATE_KEY.CARD_NUMBER]} 
-          cardCompany={cardInputState[STATE_KEY.CARD_COMPANY]} 
-          cardExpiration={cardInputState[STATE_KEY.CARD_EXPIRATION]} 
-          backgroundColor={getCardColor(cardInputState[STATE_KEY.CARD_COMPANY])} 
+          cardOwner={cardState[STATE_KEY.CARD_OWNER]}
+          cardNumber={cardState[STATE_KEY.CARD_NUMBER]}
+          cardCompany={cardState[STATE_KEY.CARD_COMPANY]}
+          cardExpiration={cardState[STATE_KEY.CARD_EXPIRATION]}
+          backgroundColor={getCardColor(cardState[STATE_KEY.CARD_COMPANY])}
         />
         <CardInputContainer
-          cardInputState={cardInputState}
-          setCardInputState={setCardInputState}
+          cardState={cardState}
+          setCardStateByKey={setCardStateByKey}
           showCardCompanySelectContainer={toggle.setToggled}
         />
       </main>
       {toggle.state.isToggled && (
         <CardCompanySelectContainer
-          cardInputState={cardInputState}
-          setCardInputState={setCardInputState}
+          cardState={cardState}
+          setCardStateByKey={setCardStateByKey}
           hideCardCompanySelectContainer={toggle.setUntoggled}
-          backDropAnimationClass={toggle.state.fadeAnimation}
-          bottomSliderAnimationClass={toggle.state.moveAnimation}
+          backDropAnimation={toggle.state.fadeAnimation}
+          bottomSliderAnimation={toggle.state.moveAnimation}
         />
       )}
       <div className={cx("add-card-page__bottom")}>
-        {isAllCardInputCorrect(cardInputState) && <Link to={PAGE_PATH.COMPLETE}><Button onClick={onAddCardButtonClick}>{BUTTON_TEXT.NEXT}</Button></Link>}  
+        {isAllCardInputCorrect(cardState) && (
+          <Link to={PAGE_PATH.COMPLETE}>
+            <Button onClick={onAddCardButtonClick}>{BUTTON_TEXT.NEXT}</Button>
+          </Link>
+        )}
       </div>
     </div>
   );

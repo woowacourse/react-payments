@@ -3,7 +3,16 @@ import styles from "./Input.module.scss";
 
 const cx = classNames.bind(styles);
 
-const Input = ({ type="text", textAlign = "center", placeholder, labelText, inputWidth, className = "", onChange, maxLength }) => {
+const Input = ({
+  type = "text",
+  textAlign = "center",
+  placeholder,
+  labelText,
+  inputWidth,
+  className = "",
+  onChange,
+  maxLength,
+}) => {
   return (
     <div className={`${cx("input-wrapper")} ${className}`} style={{ width: inputWidth }}>
       {!!labelText?.length && (
@@ -11,7 +20,14 @@ const Input = ({ type="text", textAlign = "center", placeholder, labelText, inpu
           {labelText}
         </label>
       )}
-      <input type={type} maxLength={maxLength} className={cx("input")} style={{ textAlign }} placeholder={placeholder} onChange={onChange}></input>
+      <input
+        type={type}
+        maxLength={maxLength}
+        className={cx("input")}
+        style={{ textAlign }}
+        placeholder={placeholder}
+        onChange={onChange}
+      ></input>
     </div>
   );
 };

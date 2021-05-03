@@ -27,7 +27,7 @@ function App() {
   });
 
   const setCardStateByKey = (cardStateKey, cardStateValue) => {
-    if (!(appStateKey in appState)) {
+    if (!(cardStateKey in cardState)) {
       return;
     }
 

@@ -1,36 +1,35 @@
 import classNames from "classnames/bind";
-// TODO : app.css 스토리북에서도 전역으로 적용되도록 수정
 import styles from "./TextLimitInput.module.scss";
 import Input from "../Input";
-import { STATE_KEY } from "../../../constants";
-import { isNumberText } from "../../../utils/cardInputValidation";
 
 const cx = classNames.bind(styles);
 
-const TextLimitInput = ({ cardInputState, setCardInputState, placeholder, labelText, lengthLimit, className = "", inputWidth }) => {
-  const onCardOwnerInputChange = (event) => {
-    const { value } = event.target
-
-    if (isNumberText(value) && value !== "") {
-      event.target.value = event.target.value.slice(0, -1);
-      return;
-    }
-
-    setCardInputState(state => ({
-      ...state,
-      [STATE_KEY.CARD_OWNER]: value
-    }));
-  }
-
+const TextLimitInput = ({
+  cardOwnerState,
+  placeholder,
+  labelText,
+  lengthLimit,
+  className = "",
+  inputWidth,
+  onInputChange,
+}) => {
   return (
     <div className={`${cx("text-limit-input")} ${className}`}>
       <div className={cx("text-limit-input__top")}>
         <label className={cx("text-limit-input__label")} name={labelText}>
           {labelText}
         </label>
-        <span className={cx("text-limit-input__length-limit")}>{cardInputState[STATE_KEY.CARD_OWNER].length} / {lengthLimit}</span>
+        <span className={cx("text-limit-input__length-limit")}>
+          {cardOwnerState.length} / {lengthLimit}
+        </span>
       </div>
-      <Input maxLength={lengthLimit} onChange={onCardOwnerInputChange} placeholder={placeholder} textAlign="left" inputWidth={inputWidth} />
+      <Input
+        maxLength={lengthLimit}
+        onChange={onInputChange}
+        placeholder={placeholder}
+        textAlign="left"
+        inputWidth={inputWidth}
+      />
     </div>
   );
 };

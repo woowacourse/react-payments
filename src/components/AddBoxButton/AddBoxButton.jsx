@@ -3,7 +3,7 @@ import styles from "./AddBoxButton.module.scss";
 
 const cx = classNames.bind(styles);
 
-const AddBoxButton = ({}) => {
+const AddBoxButton = () => {
   return <div className={cx("add-box-button")}>+</div>;
 };
 
