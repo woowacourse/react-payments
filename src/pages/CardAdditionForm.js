@@ -14,8 +14,8 @@ import {
   useSecureCode,
 } from "../hooks";
 import { getNewId } from "../utils";
-import { Button, Card, Input } from "./common";
-import { CARD, CARD_SIZE } from "./common/constants/card";
+import { Button, Card, Input } from "../components";
+import { CARD, CARD_SIZE } from "../constants";
 import PropTypes from "prop-types";
 
 const formatCardNumbers = (numbers) => {

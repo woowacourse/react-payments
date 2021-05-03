@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "./index";
 
 export default {
-  title: "Example/Modal",
+  title: "Components/Modal",
   component: Modal,
   argTypes: {},
 };

@@ -1,9 +1,9 @@
 import React from "react";
 import Card from "./index";
-import { CARD, CARD_SIZE } from "../constants/card";
+import { CARD, CARD_SIZE } from "../../constants";
 
 export default {
-  title: "Example/Card",
+  title: "Components/Card",
   component: Card,
   argTypes: {},
 };
