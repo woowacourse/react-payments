@@ -141,15 +141,20 @@
   border-radius: 50%;
 }
 
+.SecurityCodeInput__Guide__Button:hover ~ .SecurityCodeInput__Guide__Image {
+  visibility: visible;
+}
+
 .SecurityCodeInput__Guide__Image {
   visibility: hidden;
 }
 
-.SecurityCodeInput__Wrapper > .Button:hover ~ .SecurityCodeInput__Guide__Image {
-  visibility: visible;
-}
-
 /* 비밀번호 입력 */
+
+.CardPasswordInput {
+  display: flex;
+  flex-direction: row;
+}
 
 .CardPasswordInput__Filler {
   width: 2.8125rem;
