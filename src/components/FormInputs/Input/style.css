@@ -25,6 +25,7 @@
   outline: none;
   box-sizing: border-box;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .basic-input__input::placeholder {

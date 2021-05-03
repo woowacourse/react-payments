@@ -4,7 +4,7 @@ import { Icon } from '../..';
 import '../../../index.css';
 import './style.css';
 
-export default function CardPasswordInput({ password, onSetPassword }) {
+export default function CardPasswordInput({ name, password, onSetPassword }) {
   return (
     <div className="card-password-input__container">
       <label className="card-password-input__title" htmlFor="card-password-first">
@@ -14,6 +14,7 @@ export default function CardPasswordInput({ password, onSetPassword }) {
         {Object.entries(password).map(([key, value]) => (
           <Input
             id={`card-password-${key}`}
+            name={name}
             type="password"
             inputStyle={{ width: '2.5rem' }}
             maxLength="1"
@@ -21,7 +22,7 @@ export default function CardPasswordInput({ password, onSetPassword }) {
             key={key}
             value={value}
             onChange={(event) => {
-              onSetPassword(key, event.target.value);
+              onSetPassword(key, event);
             }}
             textAlign="center"
             ariaLabelledby="card-password"

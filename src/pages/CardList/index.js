@@ -18,7 +18,7 @@ export default function CardList({ cards }) {
           <button
             type="button"
             className="card-list__item-button"
-            aria-label={`${card.nickName} 카드 별칭 수정`}
+            aria-label={`${card.nickname} 카드 별칭 수정`}
             key={card.id}
           >
             <Card
@@ -28,7 +28,7 @@ export default function CardList({ cards }) {
               userName={card.userName}
               expirationDate={card.expirationDate}
             />
-            <p>{card.nickName}</p>
+            <p>{card.nickname}</p>
           </button>
         ))}
 
