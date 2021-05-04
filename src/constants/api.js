@@ -5,6 +5,7 @@ const API = {
     PENDING: 'pending',
     SUCCESS: 'success',
     FAILURE: 'failure',
+    CANCELED: 'canceled',
   },
   METHOD: {
     GET: 'get',
