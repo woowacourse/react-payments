@@ -4,7 +4,7 @@ import GlobalStyle from './GlobalStyle';
 import theme from './theme';
 import CardList from './pages/CardList/CardList';
 import CardAddForm from './pages/CardAddForm/CardAddForm';
-import CardAddComplete from './pages/CardAddComplete/CardAddComplete';
+import CardEditNickname from './pages/CardEditNickname/CardEditNickname';
 import ROUTE from './constants/route';
 
 const App = () => (
@@ -15,7 +15,7 @@ const App = () => (
       <Switch>
         <Route exact path={ROUTE.HOME} component={CardList} />
         <Route exact path={ROUTE.ADD} component={CardAddForm} />
-        <Route exact path={[ROUTE.COMPLETE, ROUTE.EDIT]} component={CardAddComplete} />
+        <Route exact path={[ROUTE.COMPLETE, ROUTE.EDIT]} component={CardEditNickname} />
       </Switch>
     </Router>
   </ThemeProvider>

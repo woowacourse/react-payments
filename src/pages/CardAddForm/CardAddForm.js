@@ -22,7 +22,9 @@ import { API, CARD, MESSAGE, REGEX, ROUTE } from '../../constants';
 const CardAddForm = () => {
   const history = useHistory();
 
-  const [createCard, fetchCreateCard] = useFetch(API.BASE_URL, { method: API.METHOD.POST });
+  const [createCard, fetchCreateCard] = useFetch(API.BASE_URL, {
+    method: API.METHOD.POST,
+  });
 
   const [cardNumberInputRefs] = useState(initArray(4, useRef()));
   const [pinNumberInputRefs] = useState(initArray(2, useRef()));

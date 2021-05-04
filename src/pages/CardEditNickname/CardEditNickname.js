@@ -1,11 +1,11 @@
 import { useHistory, useLocation, Redirect, useRouteMatch, Link } from 'react-router-dom';
-import Styled from './CardAddComplete.styles';
+import Styled from './CardEditNickname.styles';
 import { Card, Input, Button, Spinner } from '../../components';
 import { API, MESSAGE, ROUTE } from '../../constants';
 import { useFetch, useInput } from '../../hooks';
 import { ScreenContainer } from '../../styles/common.styles';
 
-const CardAddComplete = () => {
+const CardEditNickname = () => {
   const history = useHistory();
   const location = useLocation();
   const { path } = useRouteMatch();
@@ -30,11 +30,18 @@ const CardAddComplete = () => {
 
     const targetCard = location.state.card;
 
-    if (nickname.value) {
-      targetCard.nickname = nickname.value;
-      const response = await fetchUpdateCard(targetCard);
+    if (!nickname.value) return;
 
-      if (response.status === API.STATUS.FAILURE) {
+    targetCard.nickname = nickname.value;
+    const response = await fetchUpdateCard(targetCard);
+
+    if (response.status === API.STATUS.FAILURE) {
+      if (path === ROUTE.EDIT) {
+        alert(MESSAGE.NICKNAME_EDIT_FAILED);
+        return;
+      }
+
+      if (path === ROUTE.COMPLETE) {
         alert(MESSAGE.NICKNAME_SUBMIT_FAILED);
       }
     }
@@ -70,12 +77,18 @@ const CardAddComplete = () => {
             />
           </Styled.InputContainer>
           <Styled.ButtonContainer>
-            {path === ROUTE.EDIT && (
-              <Button as={Link} to="/">
-                취소
-              </Button>
+            {updateCard.status === API.STATUS.PENDING ? (
+              <Spinner />
+            ) : (
+              path === ROUTE.EDIT && (
+                <>
+                  <Button as={Link} to="/">
+                    취소
+                  </Button>
+                  <Button>확인</Button>
+                </>
+              )
             )}
-            {updateCard.status === API.STATUS.PENDING ? <Spinner /> : <Button>확인</Button>}
           </Styled.ButtonContainer>
         </form>
       </Styled.Container>
@@ -83,4 +96,4 @@ const CardAddComplete = () => {
   );
 };
 
-export default CardAddComplete;
+export default CardEditNickname;
