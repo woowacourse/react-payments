@@ -1,35 +1,46 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Card } from '../../components';
 import AddCardButton from './AddCardButton';
 import Header from './Header';
-import { CARD_COMPANY } from '../../constants';
-import './style.css';
 import Api from '../../api';
+import Item from './Item';
+import './style.css';
 
 export default function CardList({ cards, setCards }) {
   useEffect(() => {
-    (async () => {
-      const data = await Api.card.get();
-      const cards = data.docs.map((doc) => doc.data());
-      cards.sort(({ timestamp: a }, { timestamp: b }) => a - b);
-      setCards(cards);
-    })();
+    updateCardList();
   }, []);
+
+  const updateCardList = async () => {
+    const data = await Api.card.get();
+    const cards = data.docs.map((doc) => doc.data());
+    cards.sort(({ timestamp: a }, { timestamp: b }) => a - b);
+
+    setCards(cards);
+  };
+
+  const onUpdateCard = async (newCardData) => {
+    await Api.card.put(newCardData);
+    await updateCardList();
+  };
+
+  const onDeleteCard = async (serialNumber) => {
+    await Api.card.delete(serialNumber);
+    await updateCardList();
+  };
 
   return (
     <div className="card-list">
       <Header />
       <li className="card-list__list">
         {cards.map((card, index) => (
-          <ul key={index} className="card-list__item">
-            <Card
-              {...card}
-              companyName={CARD_COMPANY[card.cardCompany].NAME}
-              color={CARD_COMPANY[card.cardCompany].COLOR}
-            ></Card>
-            <span className="item__nick-name">{card.nickName}</span>
-          </ul>
+          <Item
+            key={card.timestamp}
+            card={card}
+            index={index}
+            onUpdateCard={onUpdateCard}
+            onDeleteCard={onDeleteCard}
+          />
         ))}
         <Link to="/addCard">
           <AddCardButton />
