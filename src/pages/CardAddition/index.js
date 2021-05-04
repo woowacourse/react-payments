@@ -1,9 +1,10 @@
 import "./style.css";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { CARD } from "../../constants";
-import { Modal, CardTypeRadio } from "../../components";
+import { CARD, SECURE_CODE_LENGTH } from "../../constants";
+import { Modal, CardTypeRadio, VirtualKeyboard } from "../../components";
 import CardAdditionForm from "./CardAdditionForm";
+import { useVirtualKeyboardInput } from "../../hooks";
 
 const CardAddition = (props) => {
   const [isCardTypeModalVisible, setIsCardTypeModalVisible] = useState(false);
@@ -11,6 +12,11 @@ const CardAddition = (props) => {
     false
   );
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
+  const [
+    secureCode,
+    insertSecureCode,
+    deleteSecureCode,
+  ] = useVirtualKeyboardInput("", SECURE_CODE_LENGTH);
 
   const onRadioChange = ({ target }) => {
     setCardType(JSON.parse(target.value));
@@ -24,6 +30,7 @@ const CardAddition = (props) => {
         setCardTypeModalVisibility={setIsCardTypeModalVisible}
         setVirtualKeyboardModalVisibility={setIsVirtualKeyboardVisible}
         onNewCardAdd={props.onNewCardAdd}
+        secureCode={secureCode}
       />
 
       <Modal
@@ -53,19 +60,10 @@ const CardAddition = (props) => {
           setIsVirtualKeyboardVisible(false);
         }}
       >
-        <form className="card-type-radio-box">
-          {Object.values(CARD)
-            .filter((value) => value.name !== "")
-            .map((value) => (
-              <CardTypeRadio
-                key={value.name + value.color}
-                cardType={value}
-                groupName="card-type"
-                isChecked={value.name === cardType.name}
-                onChange={onRadioChange}
-              />
-            ))}
-        </form>
+        <VirtualKeyboard
+          insertInputChar={insertSecureCode}
+          deleteInputChar={deleteSecureCode}
+        />
       </Modal>
     </>
   );
