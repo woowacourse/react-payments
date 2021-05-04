@@ -1,0 +1,36 @@
+.Input {
+  border: none;
+  outline-color: #383838;
+  background-color: transparent;
+  width: 1.2rem;
+  text-align: start;
+  font-size: 1.0125rem;
+  color: #04c09e;
+}
+
+.Input[type='number']::-webkit-outer-spin-button,
+.Input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.Input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+
+
+/* 카드별명 */
+
+.CardNicknameInput__Filler--transparent {
+  margin: 0.75rem auto 0;
+  width: 60%;
+  padding: 0.53rem;
+  border-bottom: 1.5px solid #737373;
+  height: unset;
+}
+
+.CardNicknameInput__Field {
+  text-align: center;
+  color: #383838;
+  width: 15rem;
+}

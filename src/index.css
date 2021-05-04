@@ -1,0 +1,24 @@
+@font-face {
+  font-family: Roboto;
+  src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+}
+
+body {
+  font-family: Roboto;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e5e5;
+}
+
+#root {
+  background-color: #fff;
+  width: 375px;
+  height: 701px;
+  position: relative;
+}
+
+.App {
+  height: 100%;
+}
