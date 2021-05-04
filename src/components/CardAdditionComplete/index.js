@@ -15,9 +15,8 @@ const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
   const onSumbitAddCard = (e) => {
     e.preventDefault();
 
-    alert('새 카드가 등록되었습니다.');
-
     addNewCard();
+    alert('새 카드가 등록되었습니다.');
   };
 
   return (
