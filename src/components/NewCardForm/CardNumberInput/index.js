@@ -13,59 +13,22 @@ const CardNumberInput = ({
     <CardNumberInputWrapper>
       <div className='input-label'>카드 번호</div>
       <div className='input-container'>
-        <Input
-          type='text'
-          name='numbers'
-          data-detail='first'
-          value={numbers.first}
-          onChange={onChangeCardInputObject}
-          onBlur={cardFormValidation}
-          minLength='4'
-          maxLength='4'
-          required
-        />
-        <span className='input-separator'>
-          {numbers.first.length === 4 && '-'}
-        </span>
-        <Input
-          type='text'
-          name='numbers'
-          data-detail='second'
-          value={numbers.second}
-          onChange={onChangeCardInputObject}
-          onBlur={cardFormValidation}
-          minLength='4'
-          maxLength='4'
-          required
-        />
-        <span className='input-separator'>
-          {numbers.second.length === 4 && '-'}
-        </span>
-        <Input
-          type='password'
-          name='numbers'
-          data-detail='third'
-          value={numbers.third}
-          onChange={onChangeCardInputObject}
-          onBlur={cardFormValidation}
-          minLength='4'
-          maxLength='4'
-          required
-        />
-        <span className='input-separator'>
-          {numbers.third.length === 4 && '-'}
-        </span>
-        <Input
-          type='password'
-          name='numbers'
-          data-detail='fourth'
-          value={numbers.fourth}
-          onChange={onChangeCardInputObject}
-          onBlur={cardFormValidation}
-          minLength='4'
-          maxLength='4'
-          required
-        />
+        {Object.keys(numbers).map((key, index) => {
+          return (
+            <Input
+              key={index}
+              type='text'
+              name='numbers'
+              data-detail={key}
+              value={numbers[key]}
+              onChange={onChangeCardInputObject}
+              onBlur={cardFormValidation}
+              minLength='4'
+              maxLength='4'
+              required
+            />
+          );
+        })}
       </div>
       <div className='input-alert'>{errorMessage}</div>
     </CardNumberInputWrapper>

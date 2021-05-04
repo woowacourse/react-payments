@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Nav from '../../components/Nav';
+import Nav from '../Nav';
 import Card from '../../common/Card';
-import NewCardForm from '../../components/NewCardForm';
+import NewCardForm from '../NewCardForm';
 import AddCardWrapper from './index.styles';
 
 function AddCard({ newCardInfo, handleModalOpen, setNewCardInfo, setPage }) {

@@ -3,7 +3,7 @@ import Modal from './common/Modal';
 import CardColor from './components/ModalContents/CardColor';
 import CVCHelp from './components/ModalContents/CVCHelp';
 import CardAdditionComplete from './components/CardAdditionComplete';
-import AddCard from './page/AddCard';
+import AddCard from './components/AddCard';
 import AppWrapper from './App.styles.js';
 import GlobalStyles from './global.styles';
 
