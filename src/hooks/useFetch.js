@@ -44,8 +44,8 @@ export default (url, { method = API.METHOD.GET } = {}) => {
           return { data: null, status: API.STATUS.CANCELED };
         }
 
-        setState((prevState) => ({ ...prevState, status: API.STATUS.FAILURE }));
-        return { status: API.STATUS.FAILURE };
+        setState({ data: null, status: API.STATUS.FAILURE });
+        return { data: null, status: API.STATUS.FAILURE };
       }
     },
     [method, url, signal]
