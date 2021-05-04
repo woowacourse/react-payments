@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState, VFC } from 'react';
+import { FocusEvent, FormEvent, useEffect, useState, VFC } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router';
 import { CardBrand, ExpDate } from '../../../types';
 import { AddCardFormContainer } from './styles';

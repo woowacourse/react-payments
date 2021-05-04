@@ -9,6 +9,7 @@ const ModalContainer = styled.div`
   bottom: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.6);
+  z-index: 99;
 `;
 
 const bottomType = css`
@@ -26,15 +27,17 @@ const ModalInner = styled.div<Pick<Props, 'type'>>`
   width: 100%;
   background: #fff;
   ${({ type }) => (type === 'full' ? fullType : bottomType)}
+  z-index: 999;
 `;
 
 interface Props {
+  className?: string;
   children: React.ReactNode;
   modalClose?: () => void;
   type?: 'bottom' | 'full';
 }
 
-const Modal: FC<Props> = ({ children, modalClose, type }) => {
+const Modal: FC<Props> = ({ children, modalClose, type, className }) => {
   const onClickDimmed = ({ target, currentTarget }: MouseEvent<HTMLDivElement>) => {
     if (!modalClose || target !== currentTarget) return;
 
@@ -42,7 +45,7 @@ const Modal: FC<Props> = ({ children, modalClose, type }) => {
   };
 
   return (
-    <ModalContainer onClick={onClickDimmed}>
+    <ModalContainer className={className} onClick={onClickDimmed}>
       <ModalInner type={type}>{children}</ModalInner>
     </ModalContainer>
   );

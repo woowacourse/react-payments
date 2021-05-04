@@ -1,6 +1,7 @@
 import { createContext, FC, useContext, useEffect, useState } from 'react';
 import { requestAddCard, requestCards, requestEditNickname, requestDeleteCard } from '../service/card';
 import { Card, CardForSubmit } from '../types';
+import { DocumentReference, DocumentData } from '@firebase/firestore-types';
 
 interface State {
   cards: Card[];
@@ -27,7 +28,9 @@ const CardsStateProvider: FC<Props> = ({ children }) => {
     let docId = '';
 
     try {
-      docId = await requestAddCard(card);
+      const { id } = await requestAddCard(card);
+
+      docId = id;
       updateCards();
     } catch (error) {
       // TODO: error 표시 + 이전 뎁스로 이동
@@ -76,4 +79,4 @@ const useCards = () => {
   return context;
 };
 
-export { CardsStateProvider, useCards };
+export { CardsStateContext, CardsStateProvider, useCards };

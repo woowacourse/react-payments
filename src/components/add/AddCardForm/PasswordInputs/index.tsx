@@ -5,6 +5,7 @@ import { LABEL } from '../../../../constants/addCardForm';
 import { ALERT } from '../../../../constants/messages';
 import Container from '../../../shared/Container';
 import Input from '../../../shared/Input';
+import VirtualKeyboardNumberInput from '../../../shared/VirtualKeyboardInput';
 import AddCardInputLabel from '../AddCardInputLabel';
 import { AddCardInputContainer } from '../styles';
 import { isValidPassword } from '../validator';
@@ -17,7 +18,7 @@ interface Props extends RouteComponentProps {
 const PasswordInputs: VFC<Props> = ({ password, setPassword, history }) => {
   const secondPasswordInputRef = useRef<HTMLInputElement>(null);
 
-  const onChangePassword = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
+  const onChangePassword = (value: string, index: number) => {
     if (!isValidPassword(value)) return;
 
     const nextPassword: PasswordState = [...password];
@@ -42,15 +43,22 @@ const PasswordInputs: VFC<Props> = ({ password, setPassword, history }) => {
     <AddCardInputLabel label={LABEL.PASSWORD}>
       <Container flex justifyContent="space-between" width="60%">
         <AddCardInputContainer width="23%">
-          <Input type="password" textCenter value={password[0]} onChange={event => onChangePassword(event, 0)} />
+          <VirtualKeyboardNumberInput
+            type="password"
+            textCenter
+            maxLength={1}
+            value={password[0]}
+            onChange={value => onChangePassword(value, 0)}
+          />
         </AddCardInputContainer>
         <AddCardInputContainer width="23%">
-          <Input
+          <VirtualKeyboardNumberInput
             type="password"
             ref={secondPasswordInputRef}
             textCenter
+            maxLength={1}
             value={password[1]}
-            onChange={event => onChangePassword(event, 1)}
+            onChange={value => onChangePassword(value, 1)}
           />
         </AddCardInputContainer>
         <AddCardInputContainer width="23%">

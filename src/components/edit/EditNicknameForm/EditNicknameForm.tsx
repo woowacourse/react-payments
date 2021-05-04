@@ -1,12 +1,12 @@
 import { useEffect, useState, VFC } from 'react';
 import { RouteComponentProps, useParams, withRouter } from 'react-router';
-import { BLACK } from '../../constants/palette';
-import { useCards } from '../../context/CardsStateContext';
-import { EditNicknameFormContainer } from '../../pages/NicknameEditPage/styles';
-import { Card } from '../../types';
-import Button from '../shared/Button';
-import CreditCard from '../shared/CreditCard';
-import Input from '../shared/Input';
+import { BLACK } from '../../../constants/palette';
+import { useCards } from '../../../context/CardsStateContext';
+import { Card } from '../../../types';
+import Button from '../../shared/Button';
+import CreditCard from '../../shared/CreditCard';
+import Input from '../../shared/Input';
+import { EditNicknameFormContainer } from './styles';
 
 interface Props extends RouteComponentProps {
   card: Card;

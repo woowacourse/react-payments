@@ -1,3 +1,4 @@
+import { resourceLimits } from 'node:worker_threads';
 import { firestore, getFirestoreTimestamp } from './firebase';
 
 type Collection = 'cards';
@@ -15,7 +16,10 @@ const API = {
   async getById<T>(id: string, collection: Collection) {
     const docRef = await firestore.collection(collection).doc(id).get();
 
-    return { id: docRef.id, ...(docRef.data() as T) };
+    const data = docRef.data();
+    const result = { id: docRef.id, ...(data as T) };
+
+    return result;
   },
 
   add<T>(item: T, collection: Collection) {

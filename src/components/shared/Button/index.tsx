@@ -6,6 +6,8 @@ import { vibrate } from '../../../utils/vibrate';
 interface Props {
   color?: string;
   position?: 'bottom-right';
+  width?: string;
+  height?: string;
 }
 
 const bottomRight = css`
@@ -23,6 +25,8 @@ const Button = styled.button<Props>`
   font-weight: 500;
   color: ${({ color }) => color || MINT[500]};
   ${({ position }) => position === 'bottom-right' && bottomRight}
+  ${({ width }) => width && `width: ${width};`}
+  ${({ height }) => height && `height: ${height};`}
 `;
 
 Button.defaultProps = {

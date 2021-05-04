@@ -1,5 +1,7 @@
 import GlobalStyle from '../src/global.styles';
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
+import StoryRouter from 'storybook-react-router';
+import { CardsStateProvider } from '../src/context/CardsStateContext';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -16,10 +18,13 @@ export const parameters = {
 };
 
 export const decorators = [
+  StoryRouter(),
   Story => (
     <>
       <GlobalStyle />
-      <Story />
+      <CardsStateProvider>
+        <Story />
+      </CardsStateProvider>
     </>
   ),
 ];

@@ -1,20 +1,11 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import { useParams } from 'react-router';
-import EditNicknameForm from '../../components/edit/EditNicknameForm';
+import EditNicknameForm from '../../components/edit/EditNicknameForm/EditNicknameForm';
 import Template from '../../components/shared/Template';
 import { requestCard } from '../../service/card';
-import { Card, CardBrand, CardForSubmit, ExpDate } from '../../types';
+import { Card } from '../../types';
 
-interface Props {
-  nickname: string;
-  setNickname: (nickname: string) => void;
-  cardBrand: CardBrand;
-  cardNumber: string;
-  expDate: ExpDate;
-  ownerName: string;
-}
-
-const EditNicknamePage: FC<Props> = () => {
+const EditNicknamePage: VFC = () => {
   const { id } = useParams<{ id: string }>();
   const [card, setCard] = useState<Card>({
     id: '',
@@ -33,8 +24,9 @@ const EditNicknamePage: FC<Props> = () => {
 
   useEffect(() => {
     (async () => {
-      const cardData = await requestCard(id);
+      if (!id) return;
 
+      const cardData = await requestCard(id);
       setCard(cardData);
     })();
   }, []);

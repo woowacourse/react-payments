@@ -3,7 +3,7 @@ import { CardsStateProvider } from './context/CardsStateContext';
 import AddCardPage from './pages/AddCardPage';
 import CardListPage from './pages/CardListPage';
 import { Route, Switch } from 'react-router';
-import EditNicknamePage from './pages/NicknameEditPage';
+import EditNicknamePage from './pages/EditNicknamePage';
 
 function App() {
   return (
