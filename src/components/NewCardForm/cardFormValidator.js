@@ -67,3 +67,9 @@ export const getCVCMessage = (value) => {
 
   return '';
 };
+
+export const messageObject = {
+  numbers: (value) => getCardNumberMessage(value),
+  expireDate: (value) => getExpireDateMessage(value),
+  password: (value) => getPasswordMessage(value),
+};

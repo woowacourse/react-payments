@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import Button from '../../common/Button';
 import { NewCardFormWrapper } from './index.styles';
 import {
-  getCardNumberMessage,
   getCVCMessage,
-  getExpireDateMessage,
-  getPasswordMessage,
   getUserMessage,
+  messageObject,
 } from './cardFormValidator';
 import CardNumberInput from './CardNumberInput';
 import CardExpireDateInput from './CardExpireDateInput';
@@ -45,12 +43,6 @@ const NewCardForm = ({
       cardInfo.cvc.length === Number(CARD_INFOS_LENGTH.CVC);
 
     setCardFormFlag(isFilled);
-  };
-
-  const messageObject = {
-    numbers: (value) => getCardNumberMessage(value),
-    expireDate: (value) => getExpireDateMessage(value),
-    password: (value) => getPasswordMessage(value),
   };
 
   const onChangeCardInputObject = ({
@@ -146,7 +138,6 @@ const NewCardForm = ({
         onChangeCardInputObject={onChangeCardInputObject}
       />
       <div className='card-form-btns'>
-        {console.log(cardFormFlag)}
         {cardFormFlag && <Button onClick={onSubmitCardForm}>다음</Button>}
       </div>
     </NewCardFormWrapper>
