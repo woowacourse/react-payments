@@ -11,10 +11,10 @@ import {
   useControlledInputValue,
   useExpirationDate,
   usePassword,
-  useSecureCode,
+  useVirtualKeyboardInput,
 } from "../../hooks";
 import { getNewId } from "../../utils";
-import { Button, Card, Input } from "../../components";
+import { Button, Card, Input, VirtualKeyboardInput } from "../../components";
 import { CARD, CARD_SIZE } from "../../constants";
 import PropTypes from "prop-types";
 
@@ -40,7 +40,6 @@ const CardAdditionForm = (props) => {
   ] = useCardNumbers([]);
   const [expirationDate, onExpirationDateChange] = useExpirationDate("");
   const [username, onUsernameChange] = useControlledInputValue("");
-  const [secureCode, onSecureCodeChange] = useSecureCode("");
   const [password, onPasswordChange] = usePassword(["", ""]);
 
   const onCardInfoSubmit = (event) => {
@@ -57,7 +56,7 @@ const CardAdditionForm = (props) => {
       cardNumbers,
       expirationDate,
       username,
-      secureCode,
+      secureCode: props.secureCode,
       password,
     };
 
@@ -70,7 +69,7 @@ const CardAdditionForm = (props) => {
       expirationDate.length ===
       EXPIRATION_DATE.LENGTH + FORMAT_CHAR.EXPIRATION_DATE_SEPARATOR.length;
     const usernameCondition = username.length >= USERNAME.MIN_LENGTH;
-    const secureCodeCondition = secureCode.length === SECURE_CODE_LENGTH;
+    const secureCodeCondition = props.secureCode.length === SECURE_CODE_LENGTH;
     const passwordCondition = password.every((value) => value !== "");
 
     return (
@@ -152,16 +151,10 @@ const CardAdditionForm = (props) => {
                 props.setVirtualKeyboardModalVisibility(true);
               }}
             >
-              <Input
+              <VirtualKeyboardInput
                 type="password"
                 isCenter={true}
-                value={secureCode}
-                onChange={(event) => {
-                  onSecureCodeChange(event);
-                }}
-                maxLength={SECURE_CODE_LENGTH}
-                disabled="true"
-                required
+                valueByState={props.secureCode}
               />
             </div>
             <div className="card-addition__tool-tip-button">
