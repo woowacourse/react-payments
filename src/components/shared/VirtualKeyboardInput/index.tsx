@@ -11,7 +11,7 @@ interface Props {
   onChange: (value: string) => void;
 }
 
-const VirtualKeyboardNumberInput = forwardRef<HTMLInputElement, Props>(
+const VirtualKeyboardInput = forwardRef<HTMLInputElement, Props>(
   ({ value, onChange, type, textCenter, maxLength, width }, ref) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -47,4 +47,4 @@ const VirtualKeyboardNumberInput = forwardRef<HTMLInputElement, Props>(
   }
 );
 
-export default VirtualKeyboardNumberInput;
+export default VirtualKeyboardInput;

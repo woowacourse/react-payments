@@ -5,7 +5,7 @@ import { LABEL } from '../../../../constants/addCardForm';
 import { ALERT } from '../../../../constants/messages';
 import Container from '../../../shared/Container';
 import Input from '../../../shared/Input';
-import VirtualKeyboardNumberInput from '../../../shared/VirtualKeyboardInput';
+import VirtualKeyboardInput from '../../../shared/VirtualKeyboardInput';
 import AddCardInputLabel from '../AddCardInputLabel';
 import { AddCardInputContainer } from '../styles';
 import { isValidPassword } from '../validator';
@@ -44,7 +44,7 @@ const PasswordInputs: VFC<Props> = ({ password, setPassword, history }) => {
     <AddCardInputLabel label={LABEL.PASSWORD}>
       <Container flex justifyContent="space-between" width="60%">
         <AddCardInputContainer width="23%">
-          <VirtualKeyboardNumberInput
+          <VirtualKeyboardInput
             type="password"
             textCenter
             maxLength={1}
@@ -53,7 +53,7 @@ const PasswordInputs: VFC<Props> = ({ password, setPassword, history }) => {
           />
         </AddCardInputContainer>
         <AddCardInputContainer width="23%">
-          <VirtualKeyboardNumberInput
+          <VirtualKeyboardInput
             type="password"
             ref={secondPasswordInputRef}
             textCenter

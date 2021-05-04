@@ -3,7 +3,7 @@ import { LABEL } from '../../../../constants/addCardForm';
 import { CVC_DIGITS } from '../../../../constants/creditCard';
 import Container from '../../../shared/Container';
 import Input from '../../../shared/Input';
-import VirtualKeyboardNumberInput from '../../../shared/VirtualKeyboardInput';
+import VirtualKeyboardInput from '../../../shared/VirtualKeyboardInput';
 import AddCardInputLabel from '../AddCardInputLabel';
 import { AddCardInputContainer } from '../styles';
 import { isValidCVC } from '../validator';
@@ -23,7 +23,7 @@ const CVCInput: VFC<Props> = ({ CVC, setCVC }) => {
   return (
     <AddCardInputLabel label={LABEL.CVC} width="50%">
       <AddCardInputContainer>
-        <VirtualKeyboardNumberInput
+        <VirtualKeyboardInput
           type="password"
           maxLength={CVC_DIGITS}
           textCenter

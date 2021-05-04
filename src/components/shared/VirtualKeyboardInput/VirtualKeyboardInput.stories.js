@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import VirtualKeyboardNumberInput from '.';
+import VirtualKeyboardInput from '.';
 
 export default {
-  component: VirtualKeyboardNumberInput,
+  component: VirtualKeyboardInput,
   title: 'Common/VirtualKeyboardInput',
 };
 
 const TemplateStorybook = args => {
   const [str, setStr] = useState('');
 
-  return <VirtualKeyboardNumberInput state={str} setState={setStr} {...args} />;
+  return <VirtualKeyboardInput state={str} setState={setStr} {...args} />;
 };
 
 export const Default = TemplateStorybook.bind({});

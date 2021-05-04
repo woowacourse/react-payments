@@ -8,7 +8,7 @@ import Input from '../../../shared/Input';
 import { CardNumberState } from '../../AddCardForm';
 import { isValidCardNumber } from '../validator';
 import { RouteComponentProps, withRouter } from 'react-router';
-import VirtualKeyboardNumberInput from '../../../shared/VirtualKeyboardInput';
+import VirtualKeyboardInput from '../../../shared/VirtualKeyboardInput';
 
 interface CardNumberInputProps {
   index: number;
@@ -30,7 +30,7 @@ const CardNumberInput = forwardRef<HTMLInputElement, CardNumberInputProps>(
         onChange={({ target: { value } }) => onChange(value, index)}
       />
     ) : (
-      <VirtualKeyboardNumberInput
+      <VirtualKeyboardInput
         type={type}
         ref={ref}
         maxLength={CARD_NUMBER_DIGITS}
