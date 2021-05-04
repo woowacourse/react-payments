@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import ModalComponent from '../components/Modal/Modal';
 
@@ -9,7 +9,7 @@ export default (defaultValue = false) => {
 
   const openModal = () => setModalOpened(true);
 
-  const closeModal = () => setModalOpened(false);
+  const closeModal = useCallback(() => setModalOpened(false), []);
 
   const toggleModal = () => setModalOpened((state) => !state);
 

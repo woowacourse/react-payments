@@ -24,11 +24,11 @@ import {
 import { isNumeric, initArray } from '../../utils';
 import {
   CARD,
-  DELETE_KEY,
   STORAGE_KEY,
   MESSAGE,
   REGEX,
   ROUTE,
+  LENGTH_OF_CVC_INPUT,
   NUM_OF_CARD_NUMBER_INPUT_SECTION,
   NUM_OF_PIN_NUMBER_INPUT_SECTION,
   NUM_OF_CARD_NUMBER_PER_INPUT_SECTION,
@@ -63,21 +63,55 @@ const CardAddForm = () => {
   });
 
   const { Modal, openModal, closeModal } = useModal(false);
+
+  const ownerName = useInput('', { numberOnly: true, upperCase: true });
+  const expiryDate = useInput('');
+  const CVC = useInput('');
+
+  const addCVCNumber = (number) => {
+    CVC.setValue((state) => {
+      const newState = (state + number).slice(0, LENGTH_OF_CVC_INPUT);
+
+      CVC.setValue(newState);
+    });
+  };
+
+  const deleteCVCNumber = () => CVC.setValue((state) => state.slice(0, -1));
+
+  const emptyIndex = passwordDigits.value.findIndex((value) => value === '');
+
+  const addPasswordDigit = (number) => {
+    passwordDigits.setValue((state) => {
+      const newState = [...state];
+      newState[emptyIndex] = number;
+
+      return newState;
+    });
+  };
+
+  const deletePasswordDigit = () => {
+    const filledIndex = pinNumberInputRefs.reverse().findIndex((ref) => ref.value !== '');
+    if (filledIndex === -1) return;
+
+    passwordDigits.setValue((state) => {
+      const newState = [...state];
+      newState[NUM_OF_PIN_NUMBER_INPUT_SECTION - filledIndex - 1] = '';
+
+      return newState;
+    });
+  };
+
   const {
     VirtualNumericKeyboard: CVCVirtualNumericKeyboard,
     openModal: openCVCVKModal,
     closeModal: closeCVCVKModal,
-  } = useVirtualNumericKeyboard(false);
+  } = useVirtualNumericKeyboard(false, addCVCNumber, deleteCVCNumber);
 
   const {
     VirtualNumericKeyboard: PinNumberVirtualNumericKeyboard,
     openModal: openPinNumberVKModal,
     closeModal: closePinNumberVKModal,
-  } = useVirtualNumericKeyboard(false);
-
-  const ownerName = useInput('', { numberOnly: true, upperCase: true });
-  const expiryDate = useInput('');
-  const CVC = useInput('');
+  } = useVirtualNumericKeyboard(false, addPasswordDigit, deletePasswordDigit);
 
   const cardList = useServerAPI(STORAGE_KEY.CARD_LIST);
 
@@ -131,38 +165,6 @@ const CardAddForm = () => {
     closeModal();
   };
 
-  const handleClickCVCVirtualNumericKeyboard = (event) => {
-    let newCVC = CVC.value;
-    if (event.target.textContent === DELETE_KEY) {
-      newCVC = newCVC.slice(0, -1);
-    } else {
-      newCVC += event.target.textContent;
-    }
-    CVC.setValue(newCVC);
-
-    if (newCVC.length === 3) closeCVCVKModal();
-  };
-
-  const handleClickPinNumberVirtualNumericKeyboard = (event) => {
-    if (event.target.textContent === DELETE_KEY) {
-      const newDigits = [...passwordDigits.value].slice(-1);
-      newDigits.push('');
-      passwordDigits.setValue(newDigits);
-      return;
-    }
-
-    const index = pinNumberInputRefs.findIndex((ref) => ref.value === '');
-    if (index === -1) {
-      closePinNumberVKModal();
-
-      return;
-    }
-    if (passwordDigits.value.length === index + 1) {
-      closePinNumberVKModal();
-    }
-    passwordDigits.setValueIndex(event.target.textContent, index);
-  };
-
   const updateCardCompany = () => {
     const [firstInput, secondInput] = cardNumbers.value;
 
@@ -190,6 +192,18 @@ const CardAddForm = () => {
     const [firstCardNumberInput] = cardNumberInputRefs;
     firstCardNumberInput.focus();
   }, [cardNumberInputRefs]);
+
+  useEffect(() => {
+    if (CVC.value.length === LENGTH_OF_CVC_INPUT) {
+      closeCVCVKModal();
+    }
+  }, [CVC.value, closeCVCVKModal]);
+
+  useEffect(() => {
+    if (emptyIndex === -1) {
+      closePinNumberVKModal();
+    }
+  }, [emptyIndex, closePinNumberVKModal]);
 
   return (
     <ScreenContainer>
@@ -259,7 +273,7 @@ const CardAddForm = () => {
                 readOnly
                 required
               />
-              <CVCVirtualNumericKeyboard onClick={handleClickCVCVirtualNumericKeyboard} />
+              <CVCVirtualNumericKeyboard />
             </Styled.CVC>
             <Styled.ToolTip>
               <ToolTip buttonText="?" contentText={MESSAGE.CVC_TOOLTIP} />
@@ -274,15 +288,15 @@ const CardAddForm = () => {
               onChange={passwordDigits.onChange}
               onFocus={openPinNumberVKModal}
               dotCount={2}
-              isError={!isNumeric(passwordDigits.value.join(''))}
+              isError={!isNumeric(passwordDigits.value?.join(''))}
               errorMessage={
-                !isNumeric(passwordDigits.value.join('')) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''
+                !isNumeric(passwordDigits.value?.join('')) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''
               }
               inputmode="numeric"
               required
               readOnly
             />
-            <PinNumberVirtualNumericKeyboard onClick={handleClickPinNumberVirtualNumericKeyboard} />
+            <PinNumberVirtualNumericKeyboard />
           </Styled.Row>
           <Styled.Row right>
             <Button>다음</Button>
