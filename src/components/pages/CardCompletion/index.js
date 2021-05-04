@@ -28,7 +28,7 @@ const CardCompletion = (props) => {
     if (isEditing) {
       await updateCardAlias();
     } else {
-      firestore.collection('cards').add({ bankId, cardNumbers, expirationDate, ownerName, cardAlias });
+      firestore.collection('cards').add({ bankId, cardNumbers, expirationDate, ownerName, cardAlias: aliasInput });
     }
 
     handleConfirmPage();

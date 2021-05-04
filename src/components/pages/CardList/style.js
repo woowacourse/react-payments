@@ -12,11 +12,25 @@ const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   cursor: pointer;
 
   &: not(: last-child) {
     margin-bottom: 26px;
   }
+`;
+
+const SettingButton = styled.img`
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 14px;
+  cursor: pointer;
+
+  &: hover {
+    transform: scale(1.2);
+  }
+  transition: transform 0.2s;
 `;
 
 const CardAlias = styled.div`
@@ -38,4 +52,4 @@ const CardAddButton = styled.button`
   color: ${PALETTE.BOLD_BLACK};
 `;
 
-export { Root, CardWrapper, CardAlias, CardAddButton };
+export { Root, CardWrapper, SettingButton, CardAlias, CardAddButton };
