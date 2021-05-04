@@ -17,6 +17,7 @@ interface Props extends RouteComponentProps {
 
 const PasswordInputs: VFC<Props> = ({ password, setPassword, history }) => {
   const secondPasswordInputRef = useRef<HTMLInputElement>(null);
+  const [firstDigit, secondDigit] = password;
 
   const onChangePassword = (value: string, index: number) => {
     if (!isValidPassword(value)) return;
@@ -47,7 +48,7 @@ const PasswordInputs: VFC<Props> = ({ password, setPassword, history }) => {
             type="password"
             textCenter
             maxLength={1}
-            value={password[0]}
+            value={firstDigit}
             onChange={value => onChangePassword(value, 0)}
           />
         </AddCardInputContainer>
@@ -57,7 +58,7 @@ const PasswordInputs: VFC<Props> = ({ password, setPassword, history }) => {
             ref={secondPasswordInputRef}
             textCenter
             maxLength={1}
-            value={password[1]}
+            value={secondDigit}
             onChange={value => onChangePassword(value, 1)}
           />
         </AddCardInputContainer>

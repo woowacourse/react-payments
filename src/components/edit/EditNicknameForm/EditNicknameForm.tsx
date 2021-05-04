@@ -1,5 +1,6 @@
 import { useEffect, useState, VFC } from 'react';
 import { RouteComponentProps, useParams, withRouter } from 'react-router';
+import { ALERT } from '../../../constants/messages';
 import { BLACK } from '../../../constants/palette';
 import { useCards } from '../../../context/CardsStateContext';
 import { Card } from '../../../types';
@@ -14,10 +15,15 @@ interface Props extends RouteComponentProps {
 
 const EditNicknameForm: VFC<Props> = ({ card, history }) => {
   const [nickname, setNickname] = useState(card.nickname);
-  const { editNickname } = useCards();
+  const { editNickname, hasError } = useCards();
 
   const onSubmitNickname = () => {
     editNickname(nickname, card.id as string);
+
+    if (hasError) {
+      alert(ALERT.EDIT_NICKNAME_ERROR);
+    }
+
     history.push('/');
   };
 

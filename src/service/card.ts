@@ -1,12 +1,47 @@
 import API from '../API';
 import { Card, CardForSubmit } from '../types';
 
-export const requestCard = async (id: string) => API.getById<Card>(id, 'cards');
+export const requestCards = () => {
+  try {
+    return API.getAll<Card>('cards');
+  } catch (error) {
+    console.error('API ERROR(requestCards): ' + error);
+    throw error;
+  }
+};
 
-export const requestCards = () => API.getAll<Card>('cards');
+export const requestCard = (id: string) => {
+  try {
+    return API.getById<Card>(id, 'cards');
+  } catch (error) {
+    console.error('API ERROR(requestCard): ' + error);
+    throw error;
+  }
+};
 
-export const requestAddCard = (card: CardForSubmit) => API.add<CardForSubmit>(card, 'cards');
+export const requestAddCard = (card: CardForSubmit) => {
+  try {
+    return API.add<CardForSubmit>(card, 'cards');
+  } catch (error) {
+    console.error('API ERROR(requestAddCard): ' + error);
+    throw error;
+  }
+};
 
-export const requestEditNickname = (nickname: string, id: string) => API.editById<Card>({ nickname }, id, 'cards');
+export const requestEditNickname = (nickname: string, id: string) => {
+  try {
+    API.editById<Card>({ nickname }, id, 'cards');
+  } catch (error) {
+    console.error('API ERROR(requestEditNickname): ' + error);
+    throw error;
+  }
+};
 
-export const requestDeleteCard = (id: string) => API.deleteById(id, 'cards');
+export const requestDeleteCard = (id: string) => {
+  try {
+    API.deleteById(id, 'cards');
+  } catch (error) {
+    console.error('API ERROR(requestDeleteCard): ' + error);
+    throw error;
+  }
+};

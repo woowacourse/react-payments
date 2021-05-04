@@ -1,4 +1,4 @@
-import { useState, VFC } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import { useCards } from '../../context/CardsStateContext';
 import CreditCard from '../../components/shared/CreditCard';
 import CardList from '../../components/cardList';
@@ -7,11 +7,12 @@ import { CARD_LIST_PAGE_TITLE } from '../../constants/title';
 import { withVibration } from '../../utils/vibrate';
 import { IconButton } from '../../components/shared/Button';
 import { RouteComponentProps } from 'react-router';
+import { ALERT } from '../../constants/messages';
 
 const EDIT_MODE_VIBRATION_TIME = 200;
 
 const CardListPage: VFC<RouteComponentProps> = ({ history }) => {
-  const { cards, deleteCard } = useCards();
+  const { cards, deleteCard, hasError } = useCards();
   const [isEditMode, setIsEditMode] = useState(false);
 
   let timerId: NodeJS.Timeout | null = null;
@@ -36,7 +37,15 @@ const CardListPage: VFC<RouteComponentProps> = ({ history }) => {
     if (!window.confirm('정말 삭제하시겠습니까?')) return;
 
     deleteCard(id);
+    if (hasError) {
+      alert(ALERT.DELETE_CARD_ERROR);
+      history.push('/');
+    }
   };
+
+  useEffect(() => {
+    if (hasError) alert(ALERT.GET_CARD_LIST_ERROR);
+  }, []);
 
   return (
     <Template title={CARD_LIST_PAGE_TITLE}>

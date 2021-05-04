@@ -16,13 +16,7 @@ const VirtualKeyboardNumberInput = forwardRef<HTMLInputElement, Props>(
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const onFocusInput = () => {
-      console.log('ho');
       setIsModalVisible(true);
-    };
-
-    const onBlurInput = () => {
-      console.log('hi');
-      setIsModalVisible(false);
     };
 
     const closeModal = () => {

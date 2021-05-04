@@ -73,7 +73,7 @@ const AddCardForm: VFC<RouteComponentProps> = ({ history }) => {
     );
   };
 
-  const { addCard } = useCards();
+  const { addCard, hasError } = useCards();
 
   const onSubmitCard = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -96,6 +96,12 @@ const AddCardForm: VFC<RouteComponentProps> = ({ history }) => {
       password: formState.password.join(''),
       nickname: cardBrand.name,
     });
+
+    if (hasError) {
+      alert(ALERT.ADD_CARD_ERROR);
+      history.push('/');
+      return;
+    }
 
     history.push(`/edit/${cardId}`);
   };

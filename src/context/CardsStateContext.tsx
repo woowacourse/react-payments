@@ -8,6 +8,7 @@ interface State {
   addCard: (card: CardForSubmit) => Promise<string>;
   editNickname: (nickname: string, id: string) => void;
   deleteCard: (id: string) => void;
+  hasError: boolean;
 }
 
 const CardsStateContext = createContext<State | null>(null);
@@ -19,12 +20,14 @@ interface Props {
 const CardsStateProvider: FC<Props> = ({ children }) => {
   const [cards, setCards] = useState<Card[]>([]);
   const [shouldUpdate, setShouldUpdate] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const updateCards = () => {
     setShouldUpdate(!shouldUpdate);
   };
 
   const addCard = async (card: CardForSubmit) => {
+    setHasError(false);
     let docId = '';
 
     try {
@@ -33,23 +36,31 @@ const CardsStateProvider: FC<Props> = ({ children }) => {
       docId = id;
       updateCards();
     } catch (error) {
-      // TODO: error 표시 + 이전 뎁스로 이동
+      setHasError(true);
     }
 
     return docId;
   };
 
   const deleteCard = async (id: string) => {
-    await requestDeleteCard(id);
-    updateCards();
+    setHasError(false);
+
+    try {
+      await requestDeleteCard(id);
+      updateCards();
+    } catch (error) {
+      setHasError(true);
+    }
   };
 
   const editNickname = async (nickname: string, id: string) => {
+    setHasError(false);
+
     try {
       await requestEditNickname(nickname, id);
       updateCards();
     } catch (error) {
-      // TODO: error 핸들링
+      setHasError(true);
     }
   };
 
@@ -59,12 +70,13 @@ const CardsStateProvider: FC<Props> = ({ children }) => {
         const cards = await requestCards();
         setCards(cards);
       } catch (error) {
-        //TODO: error 표시 + 앱이 아예 동작안하게?
+        setHasError(true);
+        setCards([]);
       }
     })();
   }, [shouldUpdate]);
 
-  const value = { cards, addCard, editNickname, deleteCard };
+  const value = { cards, addCard, editNickname, deleteCard, hasError };
 
   return <CardsStateContext.Provider value={value}>{children}</CardsStateContext.Provider>;
 };
