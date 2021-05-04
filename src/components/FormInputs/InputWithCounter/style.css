@@ -1,0 +1,14 @@
+.input-with-counter {
+  width: 100%;
+  position: relative;
+}
+
+.letter-counter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  color: #525252;
+}
