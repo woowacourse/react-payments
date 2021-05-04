@@ -12,7 +12,7 @@ const CardList = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   const { Modal, openModal, closeModal } = useModal();
 
-  const [cardList, fetchCardList] = useFetch(API.BASE_URL);
+  const [cardList, fetchCardList, cancelFetchCardList] = useFetch(API.BASE_URL);
   const [deleteCard, fetchDeleteCard] = useFetch(`${API.BASE_URL}/${selectedCard?.id}`, {
     method: API.METHOD.DELETE,
   });
@@ -51,7 +51,9 @@ const CardList = () => {
 
   useEffect(() => {
     fetchCardList();
-  }, [fetchCardList]);
+
+    return () => cancelFetchCardList();
+  }, [fetchCardList, cancelFetchCardList]);
 
   return (
     <ScreenContainer>

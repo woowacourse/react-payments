@@ -6,6 +6,12 @@ export default (url, { method = API.METHOD.GET } = {}) => {
     data: null,
     status: API.STATUS.INITIAL,
   });
+  const [abortController] = useState(new AbortController());
+  const { signal } = abortController;
+
+  const cancel = useCallback(() => {
+    abortController.abort();
+  }, [abortController]);
 
   const fetchData = useCallback(
     async (body) => {
@@ -16,6 +22,7 @@ export default (url, { method = API.METHOD.GET } = {}) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        signal,
       };
 
       if (body) {
@@ -26,6 +33,11 @@ export default (url, { method = API.METHOD.GET } = {}) => {
         const response = await fetch(url, options);
         const data = await response.json();
 
+        if (signal.aborted) {
+          setState({ data: null, status: API.STATUS.FAILURE });
+          return { data, status: API.STATUS.FAILURE };
+        }
+
         setState({ data, status: API.STATUS.SUCCESS });
         return { data, status: API.STATUS.SUCCESS };
       } catch (error) {
@@ -35,8 +47,8 @@ export default (url, { method = API.METHOD.GET } = {}) => {
         return { status: API.STATUS.FAILURE };
       }
     },
-    [method, url]
+    [method, url, signal]
   );
 
-  return [state, fetchData];
+  return [state, fetchData, cancel];
 };
