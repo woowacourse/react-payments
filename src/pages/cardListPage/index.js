@@ -61,7 +61,7 @@ const CardListPage = () => {
   const handleCardDelete = async cardId => {
     if (window.confirm('해당 카드를 삭제하시겠습니까?')) {
       try {
-        await cardListRef.doc(cardId).delete();
+        await cardListRef.current.doc(cardId).delete();
 
         setCardList(prevState => prevState.filter(card => card.id !== cardId));
         alert('카드를 삭제하였습니다.');
