@@ -1,0 +1,3 @@
+.virtual-keyboard-input:focus input {
+  border: 1px solid black;
+}

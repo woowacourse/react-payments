@@ -10,6 +10,7 @@ const Input = React.forwardRef(
       isCenter = false,
       value = "",
       onChange = null,
+      disabled = false,
       ...option
     },
     ref
@@ -21,6 +22,7 @@ const Input = React.forwardRef(
         placeholder={placeHolder}
         value={value}
         onChange={onChange}
+        disabled={disabled}
         {...option}
         ref={ref}
       />
@@ -36,5 +38,6 @@ Input.propTypes = {
   isCenter: PropTypes.bool,
   value: PropTypes.string,
   onChange: PropTypes.func,
+  disabled: PropTypes.bool,
   option: PropTypes.object,
 };

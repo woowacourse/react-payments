@@ -7,6 +7,8 @@ const useSecureCode = (initialValue) => {
   const onSecureCodeChange = (event) => {
     const { value } = event.target;
 
+    console.log("하하");
+
     if (!isNumberValue(value)) {
       return;
     }

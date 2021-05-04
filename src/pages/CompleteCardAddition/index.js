@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { CARD_SIZE } from "../../constants";
 import PropTypes from "prop-types";
 import { Card, Button } from "../../components";
-import { CARD_DESCRIPTION, FORMAT_CHAR, URL } from "../../constants";
+import { CARD_DESCRIPTION, URL } from "../../constants";
 import { Redirect } from "react-router";
 
 const CompleteCardAddition = (props) => {
