@@ -26,7 +26,7 @@ export const Default = Template.bind({});
 Default.args = {
   companyName: '로이드카드',
   number: '1234123434561234',
-  userName: 'bran',
+  serialNumber: 'bran',
   expirationDate: '11/21',
 };
 
@@ -36,7 +36,7 @@ Large.args = {
   companyName: '로이드카드',
   color: '#04C092',
   number: '1234123434561234',
-  userName: 'bran',
+  serialNumber: 'bran',
   expirationDate: '11/21',
   size: 'large',
 };

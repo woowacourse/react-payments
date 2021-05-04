@@ -41,7 +41,7 @@ export default function AddCardComplete() {
   };
 
   return (
-    <div className={'add-card-complete__container'}>
+    <div className="add-card-complete__container">
       <Header />
       <Card
         userName={userName}

@@ -18,7 +18,6 @@ const Template = (args) => <CardList {...args} />;
 
 export const Default = Template.bind({});
 
-// TODO 모델추가
 Default.args = {
   cards: [
     {
@@ -38,4 +37,5 @@ Default.args = {
       nickName: '법카',
     },
   ],
+  setCards: () => {},
 };
