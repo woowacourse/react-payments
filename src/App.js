@@ -8,9 +8,7 @@ import AppWrapper from './App.styles.js';
 import GlobalStyles from './global.styles';
 
 function App() {
-  const [page, setPage] = useState('addCard');
-  const [myCards, setMyCards] = useState([]);
-  const [newCardInfo, setNewCardInfo] = useState({
+  const defaultCardInfo = {
     cardName: 'DEFAULT',
     cardNickName: '',
     numbers: {
@@ -29,7 +27,10 @@ function App() {
       first: '',
       second: '',
     },
-  });
+  };
+  const [page, setPage] = useState('addCard');
+  const [myCards, setMyCards] = useState([]);
+  const [newCardInfo, setNewCardInfo] = useState(defaultCardInfo);
 
   const handleCardColor = (name) => {
     setNewCardInfo({
@@ -50,26 +51,7 @@ function App() {
   });
 
   const resetNewCardInfo = () => {
-    setNewCardInfo({
-      cardName: 'DEFAULT',
-      cardNickName: '',
-      numbers: {
-        first: '',
-        second: '',
-        third: '',
-        fourth: '',
-      },
-      user: '',
-      expireDate: {
-        month: '',
-        year: '',
-      },
-      cvc: '',
-      password: {
-        first: '',
-        second: '',
-      },
-    });
+    setNewCardInfo(defaultCardInfo);
   };
 
   const addNewCard = () => {
