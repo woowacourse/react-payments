@@ -8,6 +8,13 @@ const Root = styled.section`
   padding: 40px 0px;
 `;
 
+const Spinner = styled.img`
+  display: ${({ isShowing }) => (isShowing ? 'block' : 'none')};
+  width: 40px;
+  position: fixed;
+  top: 50%;
+`;
+
 const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -41,6 +48,7 @@ const CardAlias = styled.div`
 `;
 
 const CardAddButton = styled.button`
+  display: ${({ isShowing }) => (isShowing ? 'block' : 'none')};
   position: relative;
   width: 208px;
   height: 130px;
@@ -52,4 +60,4 @@ const CardAddButton = styled.button`
   color: ${PALETTE.BOLD_BLACK};
 `;
 
-export { Root, CardWrapper, SettingButton, CardAlias, CardAddButton };
+export { Root, Spinner, CardWrapper, SettingButton, CardAlias, CardAddButton };
