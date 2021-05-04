@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { CARD, COLOR, FONT_SIZE, FONT_WEIGHT } from '../constants/style';
 
 const AddCard = css`
-  .add {
+  .cardMode {
     font-size: ${FONT_SIZE.XXLARGE};
     color : ${COLOR.PLUS}
     width: 100%;
@@ -77,21 +77,21 @@ const CardWrapper = styled.div`
   background-color: ${({ bgColor }) =>
     bgColor !== undefined ? bgColor : COLOR.CARD.DEFAULT};
 
-  ${({ add }) => (add ? AddCard : CardInfo)}
+  ${({ cardMode }) => (cardMode ? AddCard : CardInfo)}
   };
 `;
 
-const Card = ({ add, cardInfo, handleModalOpen }) => {
+const Card = ({ cardMode, cardInfo, handleModalOpen }) => {
   const { cardName, numbers, user, expireDate } = cardInfo;
 
   return (
     <CardWrapper
-      add={add}
+      cardMode={cardMode}
       bgColor={CARD[cardName]}
       onClick={() => handleModalOpen('cardColor')}
     >
-      {add ? (
-        <div className='add'>+</div>
+      {cardMode ? (
+        <div className='cardMode'>+</div>
       ) : (
         <>
           <div className='card__column card-name'>
@@ -118,7 +118,7 @@ const Card = ({ add, cardInfo, handleModalOpen }) => {
 
 Card.propTypes = {
   handleModalOpen: PropTypes.func,
-  add: PropTypes.bool,
+  cardMode: PropTypes.bool,
   cardInfo: PropTypes.shape({
     cardColor: PropTypes.string,
     cardName: PropTypes.string,
@@ -137,7 +137,7 @@ Card.propTypes = {
 };
 
 Card.defaultProps = {
-  add: false,
+  cardMode: false,
   cardInfo: {
     cardName: 'NAME',
     numbers: {
