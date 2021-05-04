@@ -1,0 +1,90 @@
+{
+  "name": "react-payments",
+  "version": "0.1.0",
+  "license": "MIT",
+  "dependencies": {
+    "@craco/craco": "^6.1.1",
+    "autoprefixer": "^9",
+    "classnames": "^2.3.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "tailwindcss-only-child": "^1.0.0"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public",
+    "deploy": "NODE_DEBUG=gh-pages gh-pages -d build"
+  },
+  "homepage": "https://bigsaigon333.github.io/react-payments",
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "plugin:jsx-a11y/recommended",
+      "plugin:import/recommended",
+      "airbnb",
+      "airbnb/hooks",
+      "prettier"
+    ],
+    "plugins": [
+      "jsx-a11y",
+      "import"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off",
+          "react/jsx-props-no-spreading": "off"
+        }
+      }
+    ],
+    "ignorePatterns": "node_modules"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.2.8",
+    "@storybook/addon-essentials": "^6.2.8",
+    "@storybook/addon-links": "^6.2.8",
+    "@storybook/node-logger": "^6.2.8",
+    "@storybook/preset-create-react-app": "^3.1.7",
+    "@storybook/react": "^6.2.8",
+    "@tailwindcss/postcss7-compat": "^2.1.0",
+    "chromatic": "^5.8.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.2.0",
+    "gh-pages": "^3.1.0",
+    "husky": ">=6",
+    "lint-staged": ">=10",
+    "postcss": "^7",
+    "prettier": "2.2.1",
+    "prettier-plugin-tailwind": "^2.2.10"
+  },
+  "lint-staged": {
+    "*.{jsx,js}": "eslint",
+    "*.{json,html,jsx,js,css,md}": "prettier --write"
+  },
+  "resolutions": {
+    "babel-loader": "8.1.0"
+  }
+}
