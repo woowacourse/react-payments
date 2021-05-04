@@ -13,3 +13,7 @@ const idMaker = (function* () {
 export const getNewId = () => {
   return idMaker.next().value;
 };
+
+export const shuffle = (array) => {
+  array.sort(() => Math.random() - 0.5);
+};

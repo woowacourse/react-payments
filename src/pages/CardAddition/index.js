@@ -6,48 +6,67 @@ import { Modal, CardTypeRadio } from "../../components";
 import CardAdditionForm from "./CardAdditionForm";
 
 const CardAddition = (props) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isCardTypeModalVisible, setIsCardTypeModalVisible] = useState(false);
+  const [isVirtualKeyboardVisible, setIsVirtualKeyboardVisible] = useState(
+    false
+  );
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
-
-  const onModalClick = ({ target, currentTarget }) => {
-    if (target === currentTarget) {
-      setIsModalVisible(false);
-      return;
-    }
-  };
 
   const onRadioChange = ({ target }) => {
     setCardType(JSON.parse(target.value));
-    setIsModalVisible(false);
+    setIsCardTypeModalVisible(false);
   };
 
   return (
     <>
       <CardAdditionForm
         cardType={cardType}
-        setCardTypeModalVisibility={(visibility) => {
-          setIsModalVisible(visibility);
-        }}
+        setCardTypeModalVisibility={setIsCardTypeModalVisible}
+        setVirtualKeyboardModalVisibility={setIsVirtualKeyboardVisible}
         onNewCardAdd={props.onNewCardAdd}
       />
 
-      {isModalVisible && (
-        <Modal onClick={onModalClick}>
-          <form className="card-type-radio-box">
-            {Object.values(CARD)
-              .filter((value) => value.name !== "")
-              .map((value) => (
-                <CardTypeRadio
-                  key={value.name + value.color}
-                  cardType={value}
-                  groupName="card-type"
-                  isChecked={value.name === cardType.name}
-                  onChange={onRadioChange}
-                />
-              ))}
-          </form>
-        </Modal>
-      )}
+      <Modal
+        isVisible={isCardTypeModalVisible}
+        close={() => {
+          setIsCardTypeModalVisible(false);
+        }}
+      >
+        <form className="card-type-radio-box">
+          {Object.values(CARD)
+            .filter((value) => value.name !== "")
+            .map((value) => (
+              <CardTypeRadio
+                key={value.name + value.color}
+                cardType={value}
+                groupName="card-type"
+                isChecked={value.name === cardType.name}
+                onChange={onRadioChange}
+              />
+            ))}
+        </form>
+      </Modal>
+
+      <Modal
+        isVisible={isVirtualKeyboardVisible}
+        close={() => {
+          setIsVirtualKeyboardVisible(false);
+        }}
+      >
+        <form className="card-type-radio-box">
+          {Object.values(CARD)
+            .filter((value) => value.name !== "")
+            .map((value) => (
+              <CardTypeRadio
+                key={value.name + value.color}
+                cardType={value}
+                groupName="card-type"
+                isChecked={value.name === cardType.name}
+                onChange={onRadioChange}
+              />
+            ))}
+        </form>
+      </Modal>
     </>
   );
 };

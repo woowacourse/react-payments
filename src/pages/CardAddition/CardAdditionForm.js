@@ -147,14 +147,23 @@ const CardAdditionForm = (props) => {
         <label>
           <span>보안 코드(CVC/CVV)</span>
           <div className="card-addition__secure-code-inner">
-            <Input
-              type="password"
-              isCenter={true}
-              value={secureCode}
-              onChange={onSecureCodeChange}
-              maxLength={SECURE_CODE_LENGTH}
-              required
-            />
+            <div
+              onClick={() => {
+                props.setVirtualKeyboardModalVisibility(true);
+              }}
+            >
+              <Input
+                type="password"
+                isCenter={true}
+                value={secureCode}
+                onChange={(event) => {
+                  onSecureCodeChange(event);
+                }}
+                maxLength={SECURE_CODE_LENGTH}
+                disabled="true"
+                required
+              />
+            </div>
             <div className="card-addition__tool-tip-button">
               <span>?</span>
             </div>
