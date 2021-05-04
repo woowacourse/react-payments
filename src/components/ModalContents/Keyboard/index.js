@@ -1,23 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { shuffleNumbers } from '../../../utils/utils';
-import { KeyboardWrapper } from './index.styles';
+import {
+  KeyboardWrapper,
+  KeyboardNodes,
+  KeyboardNode,
+  KeyboardEnter,
+} from './index.styles';
 
 const Keyboard = ({ handleKeyboardInput }) => {
   return (
     <KeyboardWrapper>
-      <div className='keyboard-nodes'>
+      <KeyboardNodes>
         {shuffleNumbers(0, 9).map((number) => (
-          <div
+          <KeyboardNode
             key={number}
-            className='keyboard-node'
             onClick={() => handleKeyboardInput(number)}
           >
             {number}
-          </div>
+          </KeyboardNode>
         ))}
-      </div>
-      <div className='keyboard-enter'>확인</div>
+      </KeyboardNodes>
+      <KeyboardEnter>확인</KeyboardEnter>
     </KeyboardWrapper>
   );
 };
