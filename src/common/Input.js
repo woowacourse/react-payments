@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { COLOR, FONT_SIZE, FONT_WEIGHT } from '../constants/constants.js';
+import { COLOR, FONT_SIZE, FONT_WEIGHT } from '../constants/style.js';
 
 const NickNameInput = css`
   color: ${COLOR.INPUT.FONT};

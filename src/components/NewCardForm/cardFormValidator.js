@@ -1,12 +1,16 @@
+import {
+  CARD_INFOS_LENGTH,
+  VALIDATION_MESSAGE,
+} from '../../constants/validation';
 import { isPositiveInteger } from '../../utils/utils';
 
 export const getCardNumberMessage = (value) => {
   if (!isPositiveInteger(value)) {
-    return '숫자만 입력가능합니다.';
+    return VALIDATION_MESSAGE.NUMBER_ONLY;
   }
 
-  if (value.length > 4) {
-    return '최대 4자리 정수만 입력가능합니다.';
+  if (value.length > CARD_INFOS_LENGTH.CARD) {
+    return VALIDATION_MESSAGE.MAX_LENGTH.CARD;
   }
 
   return '';
@@ -14,11 +18,11 @@ export const getCardNumberMessage = (value) => {
 
 export const getExpireDateMessage = (value) => {
   if (!isPositiveInteger(value)) {
-    return '숫자만 입력가능합니다.';
+    return VALIDATION_MESSAGE.NUMBER_ONLY;
   }
 
-  if (value.length > 2) {
-    return '최대 2자리 정수만 입력가능합니다.';
+  if (value.length > CARD_INFOS_LENGTH.EXPIRE_DATE) {
+    return VALIDATION_MESSAGE.MAX_LENGTH.EXPIRE_DATE;
   }
 
   return '';
@@ -26,27 +30,27 @@ export const getExpireDateMessage = (value) => {
 
 export const getPasswordMessage = (value) => {
   if (!isPositiveInteger(value)) {
-    return '숫자만 입력가능합니다.';
+    return VALIDATION_MESSAGE.NUMBER_ONLY;
   }
 
-  if (value.length > 1) {
-    return '1글자만 입력 가능합니다.';
+  if (value.length > CARD_INFOS_LENGTH.PASSWORD) {
+    return VALIDATION_MESSAGE.MAX_LENGTH.PASSWORD;
   }
 
   return '';
 };
 
 export const getUserMessage = (value) => {
-  if (value.length > 30) {
-    return '30글자 이하만 입력가능합니다.';
+  if (value.length > CARD_INFOS_LENGTH.USER_NAME) {
+    return VALIDATION_MESSAGE.MAX_LENGTH.USER_NAME;
   }
 
   if (!isNaN(value.slice(-1)[0])) {
     return '숫자는 입력할 수 없습니다.';
   }
 
-  if (value.length > 30) {
-    return '30글자 초과는 입력할 수 없습니다.';
+  if (value.length > CARD_INFOS_LENGTH.USER_NAME) {
+    return VALIDATION_MESSAGE.MAX_LENGTH.USER_NAME;
   }
 
   return '';
@@ -54,11 +58,11 @@ export const getUserMessage = (value) => {
 
 export const getCVCMessage = (value) => {
   if (!isPositiveInteger(value)) {
-    return '숫자만 입력가능합니다.';
+    return VALIDATION_MESSAGE.NUMBER_ONLY;
   }
 
   if (value.length > 3) {
-    return '3글자 초과는 입력할 수 없습니다.';
+    return VALIDATION_MESSAGE.MAX_LENGTH.CVC;
   }
 
   return '';

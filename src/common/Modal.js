@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { COLOR } from '../constants/constants';
+import { COLOR } from '../constants/style';
 
 const ModalWrapper = styled.div`
   display: flex;

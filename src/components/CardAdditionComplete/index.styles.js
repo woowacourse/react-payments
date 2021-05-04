@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FONT_SIZE, FONT_WEIGHT } from '../../constants/constants';
+import { FONT_SIZE, FONT_WEIGHT } from '../../constants/style';
 
 export const CardAdditionCompleteWrapper = styled.form`
   position: relative;

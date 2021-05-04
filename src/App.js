@@ -1,14 +1,11 @@
-import GlobalStyles from './global.styles';
 import React, { useState } from 'react';
-import Card from './common/Card';
 import Modal from './common/Modal';
-import Nav from './components/Nav';
-
-import { AppWrapper } from './App.styles.js';
-import NewCardForm from './components/NewCardForm';
 import CardColor from './components/ModalContents/CardColor';
 import CVCHelp from './components/ModalContents/CVCHelp';
 import CardAdditionComplete from './components/CardAdditionComplete';
+import AddCard from './page/AddCard';
+import AppWrapper from './App.styles.js';
+import GlobalStyles from './global.styles';
 
 function App() {
   const [page, setPage] = useState('addCard');
@@ -99,18 +96,12 @@ function App() {
       <GlobalStyles />
       <AppWrapper>
         {page === 'addCard' && (
-          <>
-            <Nav />
-            <div className='card-wrapper'>
-              <Card cardInfo={newCardInfo} handleModalOpen={handleModalOpen} />
-            </div>
-            <NewCardForm
-              cardInfo={newCardInfo}
-              setNewCardInfo={setNewCardInfo}
-              handleModalOpen={handleModalOpen}
-              setPage={setPage}
-            />
-          </>
+          <AddCard
+            newCardInfo={newCardInfo}
+            handleModalOpen={handleModalOpen}
+            setNewCardInfo={setNewCardInfo}
+            setPage={setPage}
+          />
         )}
         {page === 'cardComplete' && (
           <CardAdditionComplete

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR, FONT_WEIGHT, FONT_SIZE } from '../constants/constants';
+import { COLOR, FONT_WEIGHT, FONT_SIZE } from '../constants/style';
 
 const Button = styled.button`
   color: ${COLOR.MAIN.MINT};

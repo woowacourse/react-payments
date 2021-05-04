@@ -14,6 +14,7 @@ import CardExpireDateInput from './CardExpireDateInput';
 import CardUserInput from './CardUserInput';
 import CardCVCInput from './CardCVCInput';
 import CardPasswordInput from './CardPasswordInput';
+import { CARD_INFOS_LENGTH } from '../../constants/validation';
 
 const NewCardForm = ({
   cardInfo,
@@ -32,10 +33,16 @@ const NewCardForm = ({
   const [cardFormFlag, setCardFormFlag] = useState(false);
   const cardFormValidation = () => {
     const isFilled =
-      Object.values(cardInfo.numbers).every((number) => number.length === 4) &&
-      Object.values(cardInfo.expireDate).every((date) => date.length === 2) &&
-      Object.values(cardInfo.password).every((pwd) => pwd.length === 1) &&
-      cardInfo.cvc.length === 3;
+      Object.values(cardInfo.numbers).every(
+        (number) => number.length === Number(CARD_INFOS_LENGTH.CARD)
+      ) &&
+      Object.values(cardInfo.expireDate).every(
+        (date) => date.length === Number(CARD_INFOS_LENGTH.EXPIRE_DATE)
+      ) &&
+      Object.values(cardInfo.password).every(
+        (pwd) => pwd.length === Number(CARD_INFOS_LENGTH.PASSWORD)
+      ) &&
+      cardInfo.cvc.length === Number(CARD_INFOS_LENGTH.CVC);
 
     setCardFormFlag(isFilled);
   };
@@ -139,6 +146,7 @@ const NewCardForm = ({
         onChangeCardInputObject={onChangeCardInputObject}
       />
       <div className='card-form-btns'>
+        {console.log(cardFormFlag)}
         {cardFormFlag && <Button onClick={onSubmitCardForm}>다음</Button>}
       </div>
     </NewCardFormWrapper>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR, FONT_SIZE, FONT_WEIGHT } from '../../../constants/constants';
+import { COLOR, FONT_SIZE, FONT_WEIGHT } from '../../../constants/style';
 
 export const KeyboardWrapper = styled.div`
   .keyboard-nodes {
