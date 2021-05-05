@@ -25,7 +25,7 @@ const CardShape = ({ backgroundColor, scale, onClick, isRegistered, children }) 
 );
 
 CardShape.propTypes = {
-  isRegistered: PropTypes.bool.isRequired,
+  isRegistered: PropTypes.bool,
   backgroundColor: PropTypes.string,
   scale: PropTypes.string,
   onClick: PropTypes.func,
@@ -33,6 +33,7 @@ CardShape.propTypes = {
 };
 
 CardShape.defaultProps = {
+  isRegistered: false,
   backgroundColor: "bg-custom-gray-200",
   scale: "scale-100",
   onClick: null,
