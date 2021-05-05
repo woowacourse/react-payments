@@ -8,8 +8,8 @@ import { MODAL_TYPE } from '../../../hooks/useBottomModal';
 import CardDataContext from '../../../context/CardDataContext';
 
 const virtualKeyboardValueList = Array.from({ length: 10 }, (_, i) => i);
-const CONFIRM = '확인';
-const DELETE = '삭제';
+const VIRTUAL_KEYBOARD_CONFIRM_TEXT = '확인';
+const VIRTUAL_KEYBOARD_DELETE_TEXT = '삭제';
 
 const VirtualKeyboard = ({ BottomModal, closeModal, currentInputName, inputValue, maxLength, targetKey }) => {
   const [shuffledButtonList, setShuffledButtonList] = useState(arrayShuffle(virtualKeyboardValueList));
@@ -17,7 +17,7 @@ const VirtualKeyboard = ({ BottomModal, closeModal, currentInputName, inputValue
 
   const handleButtonClick = ({ target }) => {
     if (target.tagName !== 'BUTTON') return;
-    if (target.innerText === CONFIRM) {
+    if (target.innerText === VIRTUAL_KEYBOARD_CONFIRM_TEXT) {
       closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
 
       return;
@@ -35,21 +35,23 @@ const VirtualKeyboard = ({ BottomModal, closeModal, currentInputName, inputValue
   };
 
   const setSingleInputValue = value => {
-    if (inputValue.length >= maxLength && value !== DELETE) return;
+    if (inputValue.length >= maxLength && value !== VIRTUAL_KEYBOARD_DELETE_TEXT) return;
 
     setCardInfo(prevState => ({
       ...prevState,
-      [targetKey]: value === DELETE ? inputValue.slice(0, -1) : inputValue + value,
+      [targetKey]: value === VIRTUAL_KEYBOARD_DELETE_TEXT ? inputValue.slice(0, -1) : inputValue + value,
     }));
   };
 
   const setMultipleInputValue = value => {
-    if (inputValue[currentInputName].length >= maxLength && value !== DELETE) return;
+    if (inputValue[currentInputName].length >= maxLength && value !== VIRTUAL_KEYBOARD_DELETE_TEXT) return;
 
     setCardInfo(prevState => {
       const copiedValue = { ...inputValue };
       copiedValue[currentInputName] =
-        value === DELETE ? copiedValue[currentInputName].slice(0, -1) : copiedValue[currentInputName] + value;
+        value === VIRTUAL_KEYBOARD_DELETE_TEXT
+          ? copiedValue[currentInputName].slice(0, -1)
+          : copiedValue[currentInputName] + value;
 
       return { ...prevState, [targetKey]: copiedValue };
     });
@@ -63,8 +65,8 @@ const VirtualKeyboard = ({ BottomModal, closeModal, currentInputName, inputValue
             {value}
           </Button>
         ))}
-        <Button type="button">{CONFIRM}</Button>
-        <Button type="button">{DELETE}</Button>
+        <Button type="button">{VIRTUAL_KEYBOARD_CONFIRM_TEXT}</Button>
+        <Button type="button">{VIRTUAL_KEYBOARD_DELETE_TEXT}</Button>
       </Styled.ButtonContainer>
     </BottomModal>
   );
