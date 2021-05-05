@@ -9,7 +9,3 @@ export const ClickableCard = ({ ...props }) => {
     </Styled.ClickableCardContainer>
   );
 };
-
-// ClickableCard.propTypes = {};
-
-// ClickableCard.defaultProps = {};

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 import { Card } from '../../../Card';
 import { NickNameForm } from '../../../InputForm/NickNameForm';
@@ -45,6 +45,17 @@ export const CardRegistered = ({ card, setCurrentPage, registerCard }) => {
   );
 };
 
-// CardCreateForm.propTypes = {};
-
-// CardCreateForm.defaultProps = {};
+CardRegistered.propTypes = {
+  card: PropTypes.shape({
+    nickName: PropTypes.string,
+    company: PropTypes.string, 
+    numbers: PropTypes.shape({
+      first: PropTypes.string,
+      second: PropTypes.string,
+      third: PropTypes.string,
+      fourth: PropTypes.string,
+    })
+  }), 
+  setCurrentPage: PropTypes.func, 
+  registerCard: PropTypes.func,
+};

@@ -19,6 +19,9 @@ export const OwnerInputContainer = ({ owner, type, maxLength, handleChange }) =>
 
 OwnerInputContainer.propTypes = {
   owner: PropTypes.string,
+  type: PropTypes.string,
+  maxLength: PropTypes.number,
+  handleChange: PropTypes.func,
 };
 
 OwnerInputContainer.defaultProps = {

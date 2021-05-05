@@ -116,6 +116,8 @@ CardCreateForm.propTypes = {
     handleChange: PropTypes.func,
     isValid: PropTypes.object,
   }),
+  isValidEveryInput: PropTypes.bool,
+  submitCardDetail: PropTypes.func,
 };
 
 CardCreateForm.defaultProps = {

@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 import { NickNameInputContainer } from '../InputContainer/NickNameInputContainer';
 import { InputButton } from '../InputButton';
@@ -17,6 +17,9 @@ export const NickNameForm = ({ nickName, submitCardNickName }) => {
   );
 };
 
-NickNameForm.propTypes = {};
+NickNameForm.propTypes = {
+  nickName: PropTypes.string,
+  submitCardNickName: PropTypes.func,
+};
 
 NickNameForm.defaultProps = {};

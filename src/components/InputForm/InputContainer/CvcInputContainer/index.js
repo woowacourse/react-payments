@@ -15,6 +15,11 @@ export const CvcInputContainer = ({ cvc, isValid, type, maxLength, handleChange,
 
 CvcInputContainer.propTypes = {
   cvc: PropTypes.string,
+  isValid: PropTypes.bool,
+  type: PropTypes.string,
+  maxLength: PropTypes.number,
+  handleChange: PropTypes.func,
+  handleBlur: PropTypes.func,
 };
 
 CvcInputContainer.defaultProps = {

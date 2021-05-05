@@ -28,5 +28,3 @@ export const CardItem = ({ card }) => {
 CardItem.propTypes = {
   card: PropTypes.object,
 };
-
-// CardItem.defaultProps = {};

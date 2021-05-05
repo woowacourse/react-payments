@@ -20,10 +20,8 @@ export const InputContainer = ({ title, children }) => {
 };
 
 InputContainer.propTypes = {
-  /**
-   * InputContainer title
-   */
   title: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.elementType]),
 };
 
 InputContainer.defaultProps = {};

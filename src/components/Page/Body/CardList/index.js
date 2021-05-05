@@ -32,6 +32,7 @@ export const CardList = ({ cards, setCurrentPage }) => {
 
 CardList.propTypes = {
   cards: PropTypes.array,
+  setCurrentPage: PropTypes.func,
 };
 
 CardList.defaultProps = {};

@@ -19,6 +19,9 @@ export const NumbersInputContainer = ({ numbers, isValid, handleChange, handleBl
 
 NumbersInputContainer.propTypes = {
   numbers: PropTypes.object,
+  isValid: PropTypes.bool,
+  handleChange: PropTypes.func,
+  handleBlur: PropTypes.func,
 };
 
 NumbersInputContainer.defaultProps = {

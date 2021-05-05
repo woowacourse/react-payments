@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 import { Card } from '../../../Card';
 import { CardCreateForm } from '../../../InputForm/CardCreateForm';
@@ -13,9 +13,6 @@ import {
 } from '../../../../utils/validators.js';
 import { PageBody } from '../../../../utils/style/Page.js';
 
-/**
- * Primary UI component for user interaction
- */
 export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
   const [company, setCompany] = useState('');
   const [numbers, setNumbers] = useState({ first: '', second: '', third: '', fourth: '' });
@@ -245,6 +242,9 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
   );
 };
 
-// CardCreateForm.propTypes = {};
+CardCreateForm.propTypes = {
+  setCurrentPage: PropTypes.func, 
+  updateCardContent: PropTypes.func,
+};
 
 // CardCreateForm.defaultProps = {};

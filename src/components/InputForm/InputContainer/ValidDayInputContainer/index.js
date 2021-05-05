@@ -15,6 +15,9 @@ export const ValidDayInputContainer = ({ validDay, isValid, handleChange, handle
 
 ValidDayInputContainer.propTypes = {
   validDay: PropTypes.object,
+  isValid: PropTypes.bool,
+  handleChange: PropTypes.func,
+  handleBlur: PropTypes.func,
 };
 
 ValidDayInputContainer.defaultProps = {

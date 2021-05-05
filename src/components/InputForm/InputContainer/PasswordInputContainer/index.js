@@ -30,6 +30,9 @@ export const PasswordInputContainer = ({ password, isValid, handleChange, handle
 
 PasswordInputContainer.propTypes = {
   password: PropTypes.object,
+  isValid: PropTypes.bool,
+  handleChange: PropTypes.func,
+  handleBlur: PropTypes.func,
 };
 
 PasswordInputContainer.defaultProps = {

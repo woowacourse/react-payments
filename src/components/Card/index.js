@@ -50,13 +50,18 @@ Card.propTypes = {
    */
   size: PropTypes.oneOf(['large', 'medium', 'small']),
   /**
-   * Card Compony
+   * Card Company
    */
   company: PropTypes.oneOf(['', '포코', '준', '공원', '브랜', '로이드', '도비', '콜린', '썬']),
   /**
    * Card numbers sixteen digits { first: [], second: [], third: [], fourth: [] }
    */
-  numbers: PropTypes.object,
+  numbers: PropTypes.shape({
+    first: PropTypes.string,
+    second: PropTypes.string,
+    third: PropTypes.string,
+    fourth: PropTypes.string,
+  }),
   /**
    * Card owner name
    */
@@ -64,7 +69,10 @@ Card.propTypes = {
   /**
    * Card validDay { month, year }
    */
-  validDay: PropTypes.object,
+  validDay: PropTypes.shape({
+    month: PropTypes.string,
+    year: PropTypes.string,
+  }),
 
   /**
    * Card choose company button
