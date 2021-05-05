@@ -2,26 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 
-/**
- * Primary UI component for user interaction
- */
-export const InputContainer = ({ title, children }) => {
-  const [ValidMessage, InputBody] = children;
-
+export const InputContainer = ({ title, validMessage, inputValue, textLength, isVisibleTextLength, children }) => {
   return (
     <Styled.Container>
       <Styled.Header>
         <Styled.Title>{title}</Styled.Title>
-        <Styled.ValidMessage>{ValidMessage}</Styled.ValidMessage>
+        {validMessage && (
+          <Styled.ValidMessage>
+            <Styled.MessageBar>
+              <Styled.Message>{validMessage}</Styled.Message>
+              {isVisibleTextLength && (
+                <Styled.InputLength>{`${inputValue.length}/${textLength}`}</Styled.InputLength>
+              )}
+            </Styled.MessageBar>
+          </Styled.ValidMessage>
+        )}
       </Styled.Header>
-      <Styled.Body>{InputBody}</Styled.Body>
+      <Styled.Body>{children}</Styled.Body>
     </Styled.Container>
   );
 };
 
 InputContainer.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.elementType]),
+  validMessage: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  inputValue: PropTypes.string,
+  textLength: PropTypes.number,
+  isVisibleTextLength: PropTypes.bool,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.elementType, PropTypes.array]),
 };
 
-InputContainer.defaultProps = {};
+InputContainer.defaultProps = {
+  validMessage: '',
+  isVisibleTextLength: false,
+};

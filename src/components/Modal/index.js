@@ -21,7 +21,5 @@ export const Modal = ({ handleModalClose, children }) => {
 
 Modal.propTypes = {
   handleModalClose: PropTypes.func,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.elementType]),
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.elementType, PropTypes.array]),
 };
-
-// Modal.defaultProps = {};

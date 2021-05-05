@@ -18,7 +18,10 @@ export const NickNameForm = ({ nickName, submitCardNickName }) => {
 };
 
 NickNameForm.propTypes = {
-  nickName: PropTypes.string,
+  nickName: PropTypes.shape({
+    name: PropTypes.string,
+    color: PropTypes.string,
+  }),
   submitCardNickName: PropTypes.func,
 };
 

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 import { InputContainer } from '../InputContainer';
-import { ValidMessage } from '../InputContainer/ValidMessage';
 import { NumbersInputContainer } from '../InputContainer/NumbersInputContainer';
 import { ValidDayInputContainer } from '../InputContainer/ValidDayInputContainer';
 import { OwnerInputContainer } from '../InputContainer/OwnerInputContainer';
@@ -34,8 +33,10 @@ export const CardCreateForm = ({
 
   return (
     <Styled.Form onSubmit={submitCardDetail}>
-      <InputContainer title={INPUT_TITLE.CARD_NUMBER}>
-        {hasInvalidNumbers() && <ValidMessage validMessage={VALID_MESSAGES[hasInvalidNumbers()]} />}
+      <InputContainer 
+        title={INPUT_TITLE.CARD_NUMBER}
+        validMessage={hasInvalidNumbers() && VALID_MESSAGES[hasInvalidNumbers()]}
+      >
         <NumbersInputContainer
           numbers={numbers.value}
           isValid={!hasInvalidNumbers()}
@@ -43,8 +44,10 @@ export const CardCreateForm = ({
           handleBlur={numbers.handleBlur}
         />
       </InputContainer>
-      <InputContainer title={INPUT_TITLE.VALID_DAY}>
-        {hasInvalidDay() && <ValidMessage validMessage={VALID_MESSAGES[hasInvalidDay()]} />}
+      <InputContainer 
+        title={INPUT_TITLE.VALID_DAY}
+        validMessage={hasInvalidDay() && VALID_MESSAGES[hasInvalidDay()]}
+      >
         <ValidDayInputContainer
           validDay={validDay.value}
           isValid={!hasInvalidDay()}
@@ -52,17 +55,19 @@ export const CardCreateForm = ({
           handleBlur={validDay.handleBlur}
         />
       </InputContainer>
-      <InputContainer title={INPUT_TITLE.OWNER}>
-        <ValidMessage
-          validMessage={!owner.isValid ? VALID_MESSAGES[owner] : ''}
-          isVisibleTextLength={true}
-          textLength={15}
-          inputValue={owner.value}
-        />
+      <InputContainer 
+        title={INPUT_TITLE.OWNER}
+        validMessage={!owner.isValid ? VALID_MESSAGES[owner] : ''}
+        isVisibleTextLength={true}
+        textLength={15}
+        inputValue={owner.value}
+      >
         <OwnerInputContainer owner={owner.value} type={'text'} maxLength={15} handleChange={owner.handleChange} />
       </InputContainer>
-      <InputContainer title={INPUT_TITLE.CVC}>
-        {!cvc.isValid && <ValidMessage validMessage={VALID_MESSAGES['cvc']} />}
+      <InputContainer
+        title={INPUT_TITLE.CVC}
+        validMessage={!cvc.isValid && VALID_MESSAGES['cvc']}
+      >
         <CvcInputContainer
           cvc={cvc.value}
           isValid={cvc.isValid}
@@ -72,10 +77,10 @@ export const CardCreateForm = ({
           handleBlur={cvc.handleBlur}
         />
       </InputContainer>
-      <InputContainer title={INPUT_TITLE.PASSWORD}>
-        {hasInvalidPassword() && (
-          <ValidMessage validMessage={VALID_MESSAGES[hasInvalidPassword()]} />
-        )}
+      <InputContainer 
+        title={INPUT_TITLE.PASSWORD}
+        validMessage={hasInvalidPassword() && VALID_MESSAGES[hasInvalidPassword()]}
+      >
         <PasswordInputContainer
           password={password.value}
           isValid={!hasInvalidPassword()}

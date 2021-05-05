@@ -41,4 +41,22 @@ const Body = styled.div`
   align-items: center;
 `;
 
-export { Container, Header, Title, ValidMessage, Body };
+const MessageBar = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Message = styled.span`
+  font-weight: 400;
+  color: #f24156;
+  overflow: visible;
+`;
+
+const InputLength = styled.span`
+  font-weight: 600;
+  word-spacing: -0.05rem;
+`;
+
+
+export { Container, Header, Title, ValidMessage, MessageBar, Message, InputLength, Body };

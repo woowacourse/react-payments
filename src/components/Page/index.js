@@ -11,7 +11,7 @@ export const Page = ({ children }) => {
 };
 
 Page.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.elementType]),
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.elementType, PropTypes.array]),
 };
 
 Page.defaultProps = {};
