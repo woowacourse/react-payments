@@ -46,7 +46,7 @@ const isTargetInputCompleted = targetInputValue => {
 };
 
 const CardNumberInput = ({ isValidCardNumber }) => {
-  const { modalType, isModalOpened, openModal, closeModal, BottomModal } = useBottomModal();
+  const { modalType, isModalOpened, openModal, closeModal } = useBottomModal();
   const [currentInputName, setCurrentInputName] = useState(null);
   const {
     cardInfo: { cardNumber, selectedCardInfo },
@@ -187,18 +187,15 @@ const CardNumberInput = ({ isValidCardNumber }) => {
       </div>
       {isModalOpened &&
         (modalType === MODAL_TYPE.CARD_SELECTION ? (
-          <CardSelectionModal BottomModal={BottomModal} closeModal={closeModal} />
+          <CardSelectionModal closeModal={closeModal} />
         ) : (
-          modalType === MODAL_TYPE.VIRTUAL_KEYBOARD && (
-            <VirtualKeyboard
-              BottomModal={BottomModal}
-              closeModal={closeModal}
-              currentInputName={currentInputName}
-              inputValue={cardNumber}
-              maxLength={INPUT_LENGTH.CARD_NUMBER}
-              targetKey="cardNumber"
-            />
-          )
+          <VirtualKeyboard
+            closeModal={closeModal}
+            currentInputName={currentInputName}
+            inputValue={cardNumber}
+            maxLength={INPUT_LENGTH.CARD_NUMBER}
+            targetKey="cardNumber"
+          />
         ))}
     </>
   );

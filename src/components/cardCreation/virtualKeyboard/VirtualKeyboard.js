@@ -6,12 +6,13 @@ import { arrayShuffle } from '../../../utils/shuffle';
 import { randomKey } from '../../../utils/randomKey';
 import { MODAL_TYPE } from '../../../hooks/useBottomModal';
 import CardDataContext from '../../../context/CardDataContext';
+import { BottomModal } from '../../commons/modal/BottomModal';
 
 const virtualKeyboardValueList = Array.from({ length: 10 }, (_, i) => i);
 const VIRTUAL_KEYBOARD_CONFIRM_TEXT = '확인';
 const VIRTUAL_KEYBOARD_DELETE_TEXT = '삭제';
 
-const VirtualKeyboard = ({ BottomModal, closeModal, currentInputName, inputValue, maxLength, targetKey }) => {
+const VirtualKeyboard = ({ closeModal, currentInputName, inputValue, maxLength, targetKey }) => {
   const [shuffledButtonList, setShuffledButtonList] = useState(arrayShuffle(virtualKeyboardValueList));
   const { setCardInfo } = useContext(CardDataContext);
 
@@ -58,7 +59,7 @@ const VirtualKeyboard = ({ BottomModal, closeModal, currentInputName, inputValue
   };
 
   return (
-    <BottomModal>
+    <BottomModal closeModal={closeModal.bind(null, MODAL_TYPE.VIRTUAL_KEYBOARD)}>
       <Styled.ButtonContainer>
         {shuffledButtonList.map(value => (
           <Button type="button" key={randomKey()} onClick={handleNumberClick}>
@@ -83,7 +84,6 @@ VirtualKeyboard.defaultProps = {
 };
 
 VirtualKeyboard.propTypes = {
-  BottomModal: PropTypes.func.isRequired,
   currentInputName: PropTypes.string.isRequired,
   inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   maxLength: PropTypes.number.isRequired,

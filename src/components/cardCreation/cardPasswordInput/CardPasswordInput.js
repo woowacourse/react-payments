@@ -19,7 +19,7 @@ const transparentInputStyles = {
 };
 
 const CardPasswordInput = ({ isValidCardPassword }) => {
-  const { isModalOpened, openModal, closeModal, BottomModal } = useBottomModal();
+  const { isModalOpened, openModal, closeModal } = useBottomModal();
   const [currentInputName, setCurrentInputName] = useState(null);
   const {
     cardInfo: { cardPassword },
@@ -87,7 +87,6 @@ const CardPasswordInput = ({ isValidCardPassword }) => {
       </div>
       {isModalOpened && (
         <VirtualKeyboard
-          BottomModal={BottomModal}
           closeModal={closeModal}
           currentInputName={currentInputName}
           inputValue={cardPassword}

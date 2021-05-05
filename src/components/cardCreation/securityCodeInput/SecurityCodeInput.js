@@ -17,7 +17,7 @@ const transparentInputStyles = {
 };
 
 const SecurityCodeInput = ({ isValidSecurityCode }) => {
-  const { isModalOpened, openModal, closeModal, BottomModal } = useBottomModal();
+  const { isModalOpened, openModal, closeModal } = useBottomModal();
 
   const {
     cardInfo: { securityCode },
@@ -54,7 +54,6 @@ const SecurityCodeInput = ({ isValidSecurityCode }) => {
       </div>
       {isModalOpened && (
         <VirtualKeyboard
-          BottomModal={BottomModal}
           closeModal={closeModal}
           inputValue={securityCode}
           maxLength={INPUT_LENGTH.SECURITY_CODE}

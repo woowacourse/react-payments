@@ -4,9 +4,10 @@ import { CARD } from '../../../constants/card';
 import CardDataContext from '../../../context/CardDataContext';
 import { MODAL_TYPE } from '../../../hooks/useBottomModal';
 import { Circle, CIRCLE_SIZE } from '../../commons/circle/Circle';
+import { BottomModal } from '../../commons/modal/BottomModal';
 import Styled from './CardSelectionModal.style';
 
-const CardSelectionModal = ({ BottomModal, closeModal }) => {
+const CardSelectionModal = ({ closeModal }) => {
   const { setCardInfo } = useContext(CardDataContext);
 
   const handleItemClick = card => {
@@ -15,7 +16,7 @@ const CardSelectionModal = ({ BottomModal, closeModal }) => {
   };
 
   return (
-    <BottomModal>
+    <BottomModal closeModal={closeModal.bind(null, MODAL_TYPE.CARD_SELECTION)}>
       <Styled.List>
         {Object.values(CARD).map(card => (
           <Styled.ListItem key={card.cardId} onClick={() => handleItemClick(card)}>
@@ -29,7 +30,6 @@ const CardSelectionModal = ({ BottomModal, closeModal }) => {
 };
 
 CardSelectionModal.propTypes = {
-  BottomModal: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
 };
 
