@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './style.js';
+import { GUIDE_MESSAGES } from '../../utils/constants/messages.js';
 
-/**
- * Primary UI component for user interaction
- */
 export const Card = ({ size, company, numbers, owner, validDay, ...props }) => {
   return (
     <Styled.Container size={size} company={company} {...props}>
       <Styled.Inner>
         <Styled.Header size={size}>
           <Styled.Company>
-            {company ? `${company}카드` : '클릭하여 카드사를 선택해주세요.'}
+            {company ? `${company}카드` : GUIDE_MESSAGES.CHOOSE_CARD_COMPANY}
           </Styled.Company>
         </Styled.Header>
         <Styled.Body>
@@ -32,9 +30,13 @@ export const Card = ({ size, company, numbers, owner, validDay, ...props }) => {
           </Styled.NumbersContainer>
         </Styled.Body>
         <Styled.Footer size={size}>
-          <Styled.Owner>{size === 'medium' && !owner ? 'NAME' : owner}</Styled.Owner>
+          <Styled.Owner>
+            {size === 'medium' && !owner ? GUIDE_MESSAGES.CARD_OWNER : owner}
+          </Styled.Owner>
           <Styled.ValidDay>
-            {`${validDay.month ? validDay.month : 'MM'}/${validDay.year ? validDay.year : 'YY'}`}
+            {`${validDay.month ? validDay.month : GUIDE_MESSAGES.VALID_DATE_MONTH}/${
+              validDay.year ? validDay.year : GUIDE_MESSAGES.VALID_DATE_YEAR
+            }`}
           </Styled.ValidDay>
         </Styled.Footer>
       </Styled.Inner>

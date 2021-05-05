@@ -9,23 +9,7 @@ import { OwnerInputContainer } from '../InputContainer/OwnerInputContainer';
 import { CvcInputContainer } from '../InputContainer/CvcInputContainer';
 import { PasswordInputContainer } from '../InputContainer/PasswordInputContainer';
 import { InputButton } from '../InputButton';
-
-/**
- * Primary UI component for user interaction
- */
-
-const validMessages = {
-  first: '첫 번째 카드번호를 입력해주세요.',
-  second: '두 번째 카드번호를 입력해주세요.',
-  third: '세 번째 카드번호를 입력해주세요.',
-  fourth: '네 번째 카드번호를 입력해주세요.',
-  month: '유효한 월을 입력해주세요. (1월부터 12월)',
-  year: '유효한 년도를 입력해주세요. (올해부터 5년 이내)',
-  owner: '카드의 이름과 다릅니다.',
-  cvc: '보안코드를 입력해주세요.',
-  firstDigit: '비밀번호 첫 번째 자리를 입력해주세요.',
-  secondDigit: '비밀번호 두 번째 자리를 입력해주세요.',
-};
+import { INPUT_TITLE, VALID_MESSAGES } from '../../../utils/constants/messages.js';
 
 export const CardCreateForm = ({
   numbers,
@@ -50,8 +34,8 @@ export const CardCreateForm = ({
 
   return (
     <Styled.Form onSubmit={submitCardDetail}>
-      <InputContainer title={'카드 번호'}>
-        {hasInvalidNumbers() && <ValidMessage validMessage={validMessages[hasInvalidNumbers()]} />}
+      <InputContainer title={INPUT_TITLE.CARD_NUMBER}>
+        {hasInvalidNumbers() && <ValidMessage validMessage={VALID_MESSAGES[hasInvalidNumbers()]} />}
         <NumbersInputContainer
           numbers={numbers.value}
           isValid={!hasInvalidNumbers()}
@@ -59,8 +43,8 @@ export const CardCreateForm = ({
           handleBlur={numbers.handleBlur}
         />
       </InputContainer>
-      <InputContainer title={'만료일'}>
-        {hasInvalidDay() && <ValidMessage validMessage={validMessages[hasInvalidDay()]} />}
+      <InputContainer title={INPUT_TITLE.VALID_DAY}>
+        {hasInvalidDay() && <ValidMessage validMessage={VALID_MESSAGES[hasInvalidDay()]} />}
         <ValidDayInputContainer
           validDay={validDay.value}
           isValid={!hasInvalidDay()}
@@ -68,17 +52,17 @@ export const CardCreateForm = ({
           handleBlur={validDay.handleBlur}
         />
       </InputContainer>
-      <InputContainer title={'카드 소유자 이름 (선택)'}>
+      <InputContainer title={INPUT_TITLE.OWNER}>
         <ValidMessage
-          validMessage={!owner.isValid ? validMessages[owner] : ''}
+          validMessage={!owner.isValid ? VALID_MESSAGES[owner] : ''}
           isVisibleTextLength={true}
           textLength={15}
           inputValue={owner.value}
         />
         <OwnerInputContainer owner={owner.value} type={'text'} maxLength={15} handleChange={owner.handleChange} />
       </InputContainer>
-      <InputContainer title={'보안 코드 (CVC/CVV)'}>
-        {!cvc.isValid && <ValidMessage validMessage={validMessages['cvc']} />}
+      <InputContainer title={INPUT_TITLE.CVC}>
+        {!cvc.isValid && <ValidMessage validMessage={VALID_MESSAGES['cvc']} />}
         <CvcInputContainer
           cvc={cvc.value}
           isValid={cvc.isValid}
@@ -88,9 +72,9 @@ export const CardCreateForm = ({
           handleBlur={cvc.handleBlur}
         />
       </InputContainer>
-      <InputContainer title={'카드 비밀번호'}>
+      <InputContainer title={INPUT_TITLE.PASSWORD}>
         {hasInvalidPassword() && (
-          <ValidMessage validMessage={validMessages[hasInvalidPassword()]} />
+          <ValidMessage validMessage={VALID_MESSAGES[hasInvalidPassword()]} />
         )}
         <PasswordInputContainer
           password={password.value}

@@ -4,9 +4,6 @@ import * as Styled from './style.js';
 import { NickNameInputContainer } from '../InputContainer/NickNameInputContainer';
 import { InputButton } from '../InputButton';
 
-/**
- * Primary UI component for user interaction
- */
 export const NickNameForm = ({ nickName, submitCardNickName }) => {
   return (
     <Styled.Form onSubmit={submitCardNickName}>

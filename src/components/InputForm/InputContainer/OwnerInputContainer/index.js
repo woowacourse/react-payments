@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './style.js';
+import { GUIDE_MESSAGES } from '../../../../utils/constants/messages.js';
 
 export const OwnerInputContainer = ({ owner, type, maxLength, handleChange }) => {
   return (
@@ -10,7 +11,7 @@ export const OwnerInputContainer = ({ owner, type, maxLength, handleChange }) =>
         type={type}
         maxLength={maxLength}
         onChange={handleChange}
-        placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
+        placeholder={GUIDE_MESSAGES.OWNER_PLACEHOLDER}
       />
     </Styled.Container>
   );
