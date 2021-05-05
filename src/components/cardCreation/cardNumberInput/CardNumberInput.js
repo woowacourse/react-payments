@@ -117,6 +117,8 @@ const CardNumberInput = ({ isValidCardNumber }) => {
   };
 
   const handleInputFocus = ({ target }) => {
+    if (!isSelectedCardInfo) return;
+
     setCardInfo(prevState => {
       const copiedCardNumber = { ...cardNumber };
       copiedCardNumber[target.name] = '';
@@ -183,19 +185,21 @@ const CardNumberInput = ({ isValidCardNumber }) => {
           />
         </Styled.InputContainer>
       </div>
-      {modalType === MODAL_TYPE.CARD_SELECTION && isModalOpened && (
-        <CardSelectionModal BottomModal={BottomModal} closeModal={closeModal} />
-      )}
-      {modalType === MODAL_TYPE.VIRTUAL_KEYBOARD && isModalOpened && isSelectedCardInfo && (
-        <VirtualKeyboard
-          BottomModal={BottomModal}
-          closeModal={closeModal}
-          currentInputName={currentInputName}
-          inputValue={cardNumber}
-          maxLength={INPUT_LENGTH.CARD_NUMBER}
-          targetKey="cardNumber"
-        />
-      )}
+      {isModalOpened &&
+        (modalType === MODAL_TYPE.CARD_SELECTION ? (
+          <CardSelectionModal BottomModal={BottomModal} closeModal={closeModal} />
+        ) : (
+          modalType === MODAL_TYPE.VIRTUAL_KEYBOARD && (
+            <VirtualKeyboard
+              BottomModal={BottomModal}
+              closeModal={closeModal}
+              currentInputName={currentInputName}
+              inputValue={cardNumber}
+              maxLength={INPUT_LENGTH.CARD_NUMBER}
+              targetKey="cardNumber"
+            />
+          )
+        ))}
     </>
   );
 };
