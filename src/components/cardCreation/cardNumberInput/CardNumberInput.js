@@ -41,6 +41,10 @@ const transparentInputStyles = {
   },
 };
 
+const isTargetInputCompleted = targetInputValue => {
+  return targetInputValue.length === INPUT_LENGTH.CARD_NUMBER;
+};
+
 const CardNumberInput = ({ isValidCardNumber }) => {
   const { modalType, isModalOpened, openModal, closeModal, BottomModal } = useBottomModal();
   const [currentInputName, setCurrentInputName] = useState(null);
@@ -55,16 +59,21 @@ const CardNumberInput = ({ isValidCardNumber }) => {
   const isSelectedCardInfo = !!selectedCardInfo.cardId;
 
   useEffect(() => {
-    const isValidInput = isValidCardNumber && isSelectedCardInfo;
-    isValidInput && modalType === MODAL_TYPE.VIRTUAL_KEYBOARD && closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
+    const isDoneTyping = isValidCardNumber && isSelectedCardInfo;
 
-    if (currentInputName === THIRD && cardNumber[THIRD].length === INPUT_LENGTH.CARD_NUMBER) {
+    if (isDoneTyping && modalType === MODAL_TYPE.VIRTUAL_KEYBOARD) {
+      closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
+    }
+
+    if (currentInputName === THIRD && isTargetInputCompleted(cardNumber[THIRD])) {
       $fourthInput.current.focus();
     }
   });
 
   useEffect(() => {
-    isSelectedCardInfo && !$thirdInput.current.value && $thirdInput.current.focus();
+    if (isSelectedCardInfo && !$thirdInput.current.value) {
+      $thirdInput.current.focus();
+    }
   }, [isSelectedCardInfo, $thirdInput]);
 
   useEffect(() => {
@@ -83,7 +92,7 @@ const CardNumberInput = ({ isValidCardNumber }) => {
       return { ...prevState, cardNumber: copiedCardNumber };
     });
 
-    if (target.value.length !== INPUT_LENGTH.CARD_NUMBER) return;
+    if (!isTargetInputCompleted(target.value)) return;
 
     if (target.name === FIRST) {
       $secondInput.current.disabled = false;
@@ -99,10 +108,12 @@ const CardNumberInput = ({ isValidCardNumber }) => {
   };
 
   const handleInputClick = () => {
-    cardNumber[FIRST].length === INPUT_LENGTH.CARD_NUMBER &&
-      cardNumber[SECOND].length === INPUT_LENGTH.CARD_NUMBER &&
-      !isSelectedCardInfo &&
+    const isNumberInputCompleted =
+      isTargetInputCompleted(cardNumber[FIRST]) && isTargetInputCompleted(cardNumber[SECOND]);
+
+    if (isNumberInputCompleted && !isSelectedCardInfo) {
       openModal(MODAL_TYPE.CARD_SELECTION);
+    }
   };
 
   const handleInputFocus = ({ target }) => {
