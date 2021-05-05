@@ -44,7 +44,7 @@ const ExpiredDateInput = ({ isValidCardExpiredDate }) => {
   };
 
   return (
-    <div>
+    <>
       <Styled.InputLabelContainer>만료일 {isValidCardExpiredDate && '✔️'}</Styled.InputLabelContainer>
       <Styled.InputContainer
         validColor={hasObjectAnyValue(cardExpiredDate) && printColorBasedOnBoolean(isValidCardExpiredDate)}
@@ -70,7 +70,7 @@ const ExpiredDateInput = ({ isValidCardExpiredDate }) => {
           styles={transparentInputStyles}
         />
       </Styled.InputContainer>
-    </div>
+    </>
   );
 };
 
