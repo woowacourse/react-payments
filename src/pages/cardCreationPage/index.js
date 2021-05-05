@@ -8,7 +8,7 @@ import ExpiredDateInput from '../../components/cardCreation/expiredDateInput/Exp
 import CardOwnerInput from '../../components/cardCreation/cardOwnerInput/CardOwnerInput';
 import SecurityCodeInput from '../../components/cardCreation/securityCodeInput/SecurityCodeInput';
 import CardPasswordInput from '../../components/cardCreation/cardPasswordInput/CardPasswordInput';
-import { isValidMonthInput, isValidMultipleInput, isValidYearInput } from '../../validator/cardCreationPage';
+import { isValidExpiredDate, isValidMultipleInput } from '../../validator/cardCreationPage';
 import Styled from './style';
 import { COLOR } from '../../constants/color';
 import { PAGE } from '../../constants/page';
@@ -22,7 +22,7 @@ const CardCreationPage = () => {
   } = useContext(CardDataContext);
 
   const isValidCardNumber = isValidMultipleInput(cardNumber, INPUT_LENGTH.CARD_NUMBER);
-  const isValidCardExpiredDate = isValidMonthInput(cardExpiredDate) && isValidYearInput(cardExpiredDate);
+  const isValidCardExpiredDate = isValidExpiredDate(cardExpiredDate);
   const isValidSecurityCode = securityCode.length === INPUT_LENGTH.SECURITY_CODE;
   const isValidCardPassword = isValidMultipleInput(cardPassword, INPUT_LENGTH.CARD_PASSWORD);
 

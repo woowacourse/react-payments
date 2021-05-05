@@ -1,19 +1,39 @@
 import { INPUT_LENGTH, INPUT_NAME } from '../constants/input';
 
 export const isValidMultipleInput = (multipleInput, totalLength) => {
-  return Object.values(multipleInput).every(
-    multipleInput => multipleInput.length === totalLength && !isNaN(multipleInput)
-  );
+  try {
+    if (multipleInput.constructor !== Object) {
+      throw new Error('multipleInput은 객체여야 합니다.');
+    }
+
+    return Object.values(multipleInput).every(
+      multipleInput => multipleInput.length === totalLength && !isNaN(multipleInput)
+    );
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-export const isValidMonthInput = cardExpiredDate => {
-  const month = Number(cardExpiredDate[INPUT_NAME.MONTH]);
+export const isValidExpiredDate = cardExpiredDate => {
+  try {
+    if (cardExpiredDate.constructor !== Object) {
+      throw new Error('cardExpiredDate는 객체여야 합니다.');
+    }
 
-  return 1 <= month && month <= 12 && cardExpiredDate[INPUT_NAME.MONTH].length === INPUT_LENGTH.EXPIRED_DATE;
+    return isValidMonthInput(cardExpiredDate[INPUT_NAME.MONTH]) && isValidYearInput(cardExpiredDate[INPUT_NAME.YEAR]);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-export const isValidYearInput = cardExpiredDate => {
-  const year = Number(cardExpiredDate[INPUT_NAME.YEAR]);
+export const isValidMonthInput = month => {
+  const monthAsNumber = Number(month);
 
-  return 0 <= year && cardExpiredDate[INPUT_NAME.YEAR].length === INPUT_LENGTH.EXPIRED_DATE;
+  return 1 <= monthAsNumber && monthAsNumber <= 12 && month.length === INPUT_LENGTH.EXPIRED_DATE;
+};
+
+export const isValidYearInput = year => {
+  const yearAsNumber = Number(year);
+
+  return 0 <= yearAsNumber && year.length === INPUT_LENGTH.EXPIRED_DATE;
 };
