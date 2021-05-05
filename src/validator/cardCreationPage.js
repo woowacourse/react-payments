@@ -1,8 +1,12 @@
 import { INPUT_LENGTH, INPUT_NAME } from '../constants/input';
 
+const isValidInputType = input => {
+  return input.constructor === Object;
+};
+
 export const isValidMultipleInput = (multipleInput, totalLength) => {
   try {
-    if (multipleInput.constructor !== Object) {
+    if (!isValidInputType(multipleInput)) {
       throw new Error('multipleInput은 객체여야 합니다.');
     }
 
@@ -16,7 +20,7 @@ export const isValidMultipleInput = (multipleInput, totalLength) => {
 
 export const isValidExpiredDate = cardExpiredDate => {
   try {
-    if (cardExpiredDate.constructor !== Object) {
+    if (!isValidInputType(cardExpiredDate)) {
       throw new Error('cardExpiredDate는 객체여야 합니다.');
     }
 
