@@ -1,39 +1,44 @@
-import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Styled from './Card.styles';
 import REGEX from '../../constants/regex';
 
-const Card = ({ bgColor, companyName, cardNumbers, ownerName, expiryDate, size }) => {
-  const formattedCardNumber = useMemo(() => {
-    const cardNumberChunks = cardNumbers.match(REGEX.TEXT_WITH_LENGTH(4)) || [];
+const getFormattedCardNumber = (cardNumbers) => {
+  const cardNumberChunks = cardNumbers.match(REGEX.TEXT_WITH_LENGTH(4)) || [];
 
-    return cardNumberChunks.map((chunk, index) => {
-      if (index <= 1) return chunk;
+  return cardNumberChunks.map((chunk, index) => {
+    if (index <= 1) return chunk;
 
-      return chunk.replace(REGEX.NUMBER, '•');
-    });
-  }, [cardNumbers]);
-
-  return (
-    <Styled.Container bgColor={bgColor} size={size}>
-      <Styled.CompanyName>{companyName}</Styled.CompanyName>
-
-      <Styled.Chip />
-
-      <Styled.CardNumbersGroup>
-        {formattedCardNumber.map((number, index) => {
-          const key = `${index}-${number}`;
-
-          return <Styled.CardNumbers key={key}>{number}</Styled.CardNumbers>;
-        })}
-      </Styled.CardNumbersGroup>
-
-      <Styled.OwnerName>{ownerName}</Styled.OwnerName>
-      <Styled.ExpiryDate>{expiryDate}</Styled.ExpiryDate>
-    </Styled.Container>
-  );
+    return chunk.replace(REGEX.NUMBER, '•');
+  });
 };
 
+const Card = ({
+  bgColor,
+  companyName,
+  cardNumbers,
+  ownerName,
+  expiryDate,
+  size,
+  onClick,
+  ...props
+}) => (
+  <Styled.Container bgColor={bgColor} size={size} onClick={onClick} {...props} data-is-card>
+    <Styled.CompanyName>{companyName}</Styled.CompanyName>
+
+    <Styled.Chip />
+
+    <Styled.CardNumbersGroup>
+      {getFormattedCardNumber(cardNumbers).map((number, index) => {
+        const key = `${index}-${number}`;
+
+        return <Styled.CardNumbers key={key}>{number}</Styled.CardNumbers>;
+      })}
+    </Styled.CardNumbersGroup>
+
+    <Styled.OwnerName>{ownerName}</Styled.OwnerName>
+    <Styled.ExpiryDate>{expiryDate}</Styled.ExpiryDate>
+  </Styled.Container>
+);
 Card.propTypes = {
   bgColor: PropTypes.string,
   companyName: PropTypes.string,
@@ -41,6 +46,7 @@ Card.propTypes = {
   ownerName: PropTypes.string,
   expiryDate: PropTypes.string,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
+  onClick: PropTypes.func,
 };
 
 Card.defaultProps = {
@@ -50,6 +56,8 @@ Card.defaultProps = {
   ownerName: 'NAME',
   expiryDate: 'MM / YY',
   size: 'medium',
+
+  onClick: () => {},
 };
 
 export default Card;

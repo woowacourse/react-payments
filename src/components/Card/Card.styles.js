@@ -2,19 +2,15 @@ import styled from '@emotion/styled';
 import { Flex } from '../../styles/mixins';
 import { getGrayScale } from '../../utils';
 
+const info = {
+  small: 'scale(0.63);',
+  medium: 'scale(0.8);',
+};
+
 const Styled = {
   Container: styled.div`
     padding: 19px;
-
-    transform: ${({ size }) => {
-      const info = {
-        small: 'scale(0.63);',
-        medium: 'scale(0.8);',
-      };
-
-      return `${info[size] || 'scale(1.0)'};`;
-    }};
-
+    transform: ${({ size }) => `${info[size] || 'scale(1.0)'};`};
     width: 320px;
     height: 200px;
     border: none;
@@ -25,6 +21,10 @@ const Styled = {
     position: relative;
     margin: 0 auto;
     box-sizing: border-box;
+
+    & > * {
+      pointer-events: none;
+    }
   `,
 
   Chip: styled.div`

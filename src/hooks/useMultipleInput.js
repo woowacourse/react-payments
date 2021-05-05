@@ -23,5 +23,5 @@ export default (defaultValue, { nameSpliter = '-', refs, maxLengthPerInput }) =>
     }
   };
 
-  return { value, onChange };
+  return { value, onChange, setValue };
 };

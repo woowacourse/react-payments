@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 import { ScreenContainer } from '../../styles/common.styles';
@@ -14,57 +14,124 @@ import {
   Button,
   CardSelector,
 } from '../../components';
-import { useInput, useModal, useLocalStorage, useMultipleInput } from '../../hooks';
+import {
+  useInput,
+  useModal,
+  useMultipleInput,
+  useVirtualNumericKeyboard,
+  useServerAPI,
+} from '../../hooks';
 import { isNumeric, initArray } from '../../utils';
-import { CARD, LOCAL_STORAGE_KEY, MESSAGE, REGEX, ROUTE } from '../../constants';
+import {
+  CARD,
+  STORAGE_KEY,
+  MESSAGE,
+  REGEX,
+  ROUTE,
+  LENGTH_OF_CVC_INPUT,
+  NUM_OF_CARD_NUMBER_INPUT_SECTION,
+  NUM_OF_PIN_NUMBER_INPUT_SECTION,
+  NUM_OF_CARD_NUMBER_PER_INPUT_SECTION,
+  NUM_OF_PIN_NUMBER_PER_INPUT_SECTION,
+  HALF_NUM_OF_EXPIRY_INPUT,
+  MAX_MONTH,
+  EXPIRY_INPUT_SEPARATOR,
+} from '../../constants';
+
+const initState = {
+  cardNumbers: ['', '', '', ''],
+  pinNumbers: ['', ''],
+};
 
 const CardAddForm = () => {
   const history = useHistory();
 
-  const [cardNumberInputRefs] = useState(initArray(4, useRef()));
-  const [pinNumberInputRefs] = useState(initArray(2, useRef()));
+  const [cardNumberInputRefs] = useState(initArray(NUM_OF_CARD_NUMBER_INPUT_SECTION, useRef()));
+  const [pinNumberInputRefs] = useState(initArray(NUM_OF_PIN_NUMBER_INPUT_SECTION, useRef()));
 
   const [cardCompany, setCardCompany] = useState({});
 
-  const cardNumbers = useMultipleInput(['', '', '', ''], {
+  const cardNumbers = useMultipleInput(initState.cardNumbers, {
     nameSpliter: '-',
     refs: cardNumberInputRefs,
-    maxLengthPerInput: 4,
+    maxLengthPerInput: NUM_OF_CARD_NUMBER_PER_INPUT_SECTION,
   });
-  const passwordDigits = useMultipleInput(['', ''], {
+  const passwordDigits = useMultipleInput(initState.pinNumbers, {
     nameSpliter: '-',
     refs: pinNumberInputRefs,
-    maxLengthPerInput: 1,
+    maxLengthPerInput: NUM_OF_PIN_NUMBER_PER_INPUT_SECTION,
   });
 
   const { Modal, openModal, closeModal } = useModal(false);
+
   const ownerName = useInput('', { numberOnly: true, upperCase: true });
   const expiryDate = useInput('');
   const CVC = useInput('');
 
-  const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
+  const addCVCNumber = (number) => {
+    CVC.setValue((state) => {
+      const newState = (state + number).slice(0, LENGTH_OF_CVC_INPUT);
 
-  const cardNumbersAsNumber = useMemo(() => cardNumbers.value.join(''), [cardNumbers.value]);
+      CVC.setValue(newState);
+    });
+  };
 
-  const expiryDateAsNumber = useMemo(() => expiryDate.value.replace(REGEX.NOT_NUMBER, ''), [
-    expiryDate.value,
-  ]);
+  const deleteCVCNumber = () => CVC.setValue((state) => state.slice(0, -1));
 
-  const formattedExpiryDate = useMemo(() => {
+  const emptyIndex = passwordDigits.value.findIndex((value) => value === '');
+
+  const addPasswordDigit = (number) => {
+    passwordDigits.setValue((state) => {
+      const newState = [...state];
+      newState[emptyIndex] = number;
+
+      return newState;
+    });
+  };
+
+  const deletePasswordDigit = () => {
+    const filledIndex = pinNumberInputRefs.reverse().findIndex((ref) => ref.value !== '');
+    if (filledIndex === -1) return;
+
+    passwordDigits.setValue((state) => {
+      const newState = [...state];
+      newState[NUM_OF_PIN_NUMBER_INPUT_SECTION - filledIndex - 1] = '';
+
+      return newState;
+    });
+  };
+
+  const {
+    VirtualNumericKeyboard: CVCVirtualNumericKeyboard,
+    openModal: openCVCVKModal,
+    closeModal: closeCVCVKModal,
+  } = useVirtualNumericKeyboard(false, addCVCNumber, deleteCVCNumber);
+
+  const {
+    VirtualNumericKeyboard: PinNumberVirtualNumericKeyboard,
+    openModal: openPinNumberVKModal,
+    closeModal: closePinNumberVKModal,
+  } = useVirtualNumericKeyboard(false, addPasswordDigit, deletePasswordDigit);
+
+  const cardList = useServerAPI(STORAGE_KEY.CARD_LIST);
+
+  const cardNumbersAsNumber = cardNumbers.value.join('');
+
+  const expiryDateAsNumber = expiryDate.value.replace(REGEX.NOT_NUMBER, '');
+
+  const formattedExpiryDate = (() => {
     const expiryDateChunks = expiryDateAsNumber.match(REGEX.TEXT_WITH_LENGTH(2)) || [];
-    return expiryDateChunks.join(' / ');
-  }, [expiryDateAsNumber]);
+    return expiryDateChunks.join(EXPIRY_INPUT_SEPARATOR);
+  })();
 
-  const isValidExpiryDate = useMemo(
-    () =>
-      expiryDateAsNumber.length > 0 &&
-      !(Number(expiryDateAsNumber.slice(0, 2)) > 0 && Number(expiryDateAsNumber.slice(0, 2)) < 13),
-    [expiryDateAsNumber]
-  );
+  const isValidExpiryDate =
+    expiryDateAsNumber.length > 0 &&
+    !(
+      Number(expiryDateAsNumber.slice(0, HALF_NUM_OF_EXPIRY_INPUT)) > 0 &&
+      Number(expiryDateAsNumber.slice(0, HALF_NUM_OF_EXPIRY_INPUT)) <= MAX_MONTH
+    );
 
-  const isNumericCardNumbers = useMemo(() => cardNumbers.value.every(isNumeric), [
-    cardNumbers.value,
-  ]);
+  const isNumericCardNumbers = cardNumbers.value.every(isNumeric);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -83,7 +150,7 @@ const CardAddForm = () => {
       cardList.setValue([]);
     }
 
-    cardList.setValue([...cardList.value, newCard]);
+    cardList.addEntity(newCard);
 
     history.push({
       pathname: ROUTE.COMPLETE,
@@ -98,10 +165,12 @@ const CardAddForm = () => {
     closeModal();
   };
 
-  const updateCardCompany = useCallback(() => {
+  const updateCardCompany = () => {
     const [firstInput, secondInput] = cardNumbers.value;
 
-    const isFilledHalf = firstInput.length === 4 && secondInput.length === 4;
+    const isFilledHalf =
+      firstInput.length === NUM_OF_CARD_NUMBER_PER_INPUT_SECTION &&
+      secondInput.length === NUM_OF_CARD_NUMBER_PER_INPUT_SECTION;
     const isCardCompanySelected = Object.keys(cardCompany).length > 0;
 
     if (isFilledHalf && !isCardCompanySelected) {
@@ -115,7 +184,7 @@ const CardAddForm = () => {
     } else if (!isFilledHalf && isCardCompanySelected) {
       setCardCompany({});
     }
-  }, [cardNumbers.value, cardCompany, openModal]);
+  };
 
   useEffect(updateCardCompany, [updateCardCompany]);
 
@@ -123,6 +192,18 @@ const CardAddForm = () => {
     const [firstCardNumberInput] = cardNumberInputRefs;
     firstCardNumberInput.focus();
   }, [cardNumberInputRefs]);
+
+  useEffect(() => {
+    if (CVC.value.length === LENGTH_OF_CVC_INPUT) {
+      closeCVCVKModal();
+    }
+  }, [CVC.value, closeCVCVKModal]);
+
+  useEffect(() => {
+    if (emptyIndex === -1) {
+      closePinNumberVKModal();
+    }
+  }, [emptyIndex, closePinNumberVKModal]);
 
   return (
     <ScreenContainer>
@@ -149,13 +230,14 @@ const CardAddForm = () => {
           <Styled.Row>
             <Styled.ExpiryDate>
               <InputBox
+                id="expiry-date-input-box"
                 value={formattedExpiryDate}
                 isError={isValidExpiryDate}
                 errorMessage={isValidExpiryDate ? MESSAGE.INVALID_EXPIRY_DATE : ''}
                 onChange={expiryDate.onChange}
                 placeholder="MM / YY"
                 labelText="만료일"
-                maxLength={4 + 3}
+                maxLength={NUM_OF_CARD_NUMBER_PER_INPUT_SECTION * 2 - 1}
                 textAlign="center"
                 inputmode="numeric"
                 pattern={REGEX.EXPIRY_DATE.source}
@@ -165,6 +247,7 @@ const CardAddForm = () => {
           </Styled.Row>
           <Styled.Row>
             <InputBox
+              id="owner-name-input-box"
               value={ownerName.value}
               onChange={ownerName.onChange}
               labelText="카드 소유자 이름 (선택)"
@@ -172,9 +255,11 @@ const CardAddForm = () => {
               hasLengthCounter
             />
           </Styled.Row>
+
           <Styled.Row>
             <Styled.CVC>
               <InputBox
+                id="password-input-box"
                 type="password"
                 pattern={REGEX.NUMBER_WITH_LENGTH(3).source}
                 isError={!isNumeric(CVC.value)}
@@ -182,35 +267,43 @@ const CardAddForm = () => {
                 inputmode="numeric"
                 value={CVC.value}
                 onChange={CVC.onChange}
+                onFocus={openCVCVKModal}
                 labelText="보안 코드 (CVC/CVV)"
                 maxLength={3}
+                readOnly
                 required
               />
+              <CVCVirtualNumericKeyboard />
             </Styled.CVC>
             <Styled.ToolTip>
               <ToolTip buttonText="?" contentText={MESSAGE.CVC_TOOLTIP} />
             </Styled.ToolTip>
           </Styled.Row>
+
           <Styled.Row>
             <PinNumberInput
               ref={pinNumberInputRefs}
               labelText="카드 비밀번호"
               values={passwordDigits.value}
               onChange={passwordDigits.onChange}
+              onFocus={openPinNumberVKModal}
               dotCount={2}
-              isError={!isNumeric(passwordDigits.value.join(''))}
+              isError={!isNumeric(passwordDigits.value?.join(''))}
               errorMessage={
-                !isNumeric(passwordDigits.value.join('')) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''
+                !isNumeric(passwordDigits.value?.join('')) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''
               }
               inputmode="numeric"
               required
+              readOnly
             />
+            <PinNumberVirtualNumericKeyboard />
           </Styled.Row>
           <Styled.Row right>
             <Button>다음</Button>
           </Styled.Row>
         </form>
       </Styled.Container>
+
       <Modal mobile>
         <Styled.CardSelect>
           {Object.entries(CARD).map(([key, company]) => (

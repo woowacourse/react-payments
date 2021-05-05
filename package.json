@@ -9,6 +9,8 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "express": "^4.17.1",
+    "json-server": "^0.16.3",
     "nanoid": "^3.1.22",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
@@ -18,8 +20,10 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start:stage": "export REACT_APP_ENV=stage && react-scripts start",
+    "start:dev": "export REACT_APP_ENV=dev && react-scripts start",
+    "start:server": "json-server --watch db.json --port 3001",
+    "build": "export REACT_APP_ENV=stage && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",

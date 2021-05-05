@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 export default (key, defaultValue = '') => {
   const [currentValue, setCurrentValue] = useState(() => {
@@ -11,13 +11,13 @@ export default (key, defaultValue = '') => {
     }
   });
 
-  const parsedValue = useMemo(() => {
+  const parsedValue = (() => {
     try {
       return JSON.parse(currentValue);
     } catch (error) {
       return currentValue;
     }
-  }, [currentValue]);
+  })();
 
   const setValue = (value) => {
     try {
@@ -30,5 +30,19 @@ export default (key, defaultValue = '') => {
     }
   };
 
-  return { value: parsedValue, setValue };
+  const addEntity = (value) => {
+    setValue([...parsedValue, value]);
+  };
+
+  const updateEntity = (value) => {
+    const newValueList = parsedValue.filter((_value) => _value.id !== value.id);
+    setValue([...newValueList, value]);
+  };
+
+  const deleteEntity = (id) => {
+    const newValueList = parsedValue.filter((_value) => _value.id !== id);
+    setValue(newValueList);
+  };
+
+  return { value: parsedValue, setValue, addEntity, updateEntity, deleteEntity };
 };
