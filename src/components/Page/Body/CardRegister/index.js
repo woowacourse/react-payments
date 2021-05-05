@@ -11,6 +11,7 @@ import {
   isNumberType,
   isValidYearType,
 } from '../../../../utils/validators.js';
+import { PageBody } from '../../../../utils/style/Page.js';
 
 /**
  * Primary UI component for user interaction
@@ -188,7 +189,7 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
   };
 
   return (
-    <>
+    <PageBody>
       <Styled.CardContainer>
         <Card
           size={'medium'}
@@ -240,7 +241,7 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
           <CardCompanyList handleCompanyChange={handleCompanyChange} selectedCompany={company} />
         </Modal>
       )}
-    </>
+    </PageBody>
   );
 };
 

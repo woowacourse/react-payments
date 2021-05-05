@@ -45,12 +45,12 @@ function App() {
 
   const ChildComponents = {
     cardRegister: [
-      <CardRegister setCurrentPage={setCurrentPage} updateCardContent={updateCardContent} />,
       <Header
         titleText={'카드 추가'}
         hasButton={true}
         onClick={() => setCurrentPage('cardList')}
       />,
+      <CardRegister setCurrentPage={setCurrentPage} updateCardContent={updateCardContent} />,
     ],
     cardRegistered: [
       <CardRegistered
@@ -61,8 +61,8 @@ function App() {
       />,
     ],
     cardList: [
-      <CardList cards={cards} setCurrentPage={setCurrentPage} />,
       <Header titleText={'보유카드'} hasButton={false} />,
+      <CardList cards={cards} setCurrentPage={setCurrentPage} />,
     ],
   };
 
