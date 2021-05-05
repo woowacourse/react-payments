@@ -3,7 +3,7 @@ import PageHost from './components/PageHost';
 import CardList from './components/pages/CardList';
 import CardRegister from './components/pages/CardRegister';
 import CardCompletion from './components/pages/CardCompletion';
-import { firestore } from './firebase';
+import { getCardByIdRequest } from './request';
 import GlobalStyle from './styles/global';
 
 const PAGES = {
@@ -43,11 +43,15 @@ const App = () => {
   };
 
   const handleGoUpdate = async (cardId) => {
-    const cardData = await firestore.collection('cards').doc(cardId).get();
+    try {
+      const cardData = await getCardByIdRequest(cardId);
 
-    setCurrentCardId(cardData.id);
-    setCurrentCardData(cardData.data());
-    setCurrentPage(PAGES.EDITING);
+      setCurrentCardId(cardData.id);
+      setCurrentCardData(cardData.data());
+      setCurrentPage(PAGES.EDITING);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleGoBack = () => {

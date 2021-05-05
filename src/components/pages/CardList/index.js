@@ -3,33 +3,35 @@ import PropTypes from 'prop-types';
 import Card from '../../shared/Card';
 import ActionSheet from '../../shared/ActionSheet';
 import Snackbar from '../../shared/Snackbar';
-import { useSnackbar } from '../../../hooks';
-import { firestore } from '../../../firebase';
+import { useSnackbar } from '../../../hooks/useSnackbar';
+import { getCardsRequest, deleteCardRequest } from '../../../request';
 import cardSettingImg from '../../../assets/card_setting.png';
 import spinnerGif from '../../../assets/spinner.gif';
 import * as Style from './style';
 
 const CardList = (props) => {
+  const { handleAddCard, handleGoUpdate } = props;
+
   const [cards, setCards] = useState([]);
   const [isLoaded, setLoaded] = useState(false);
   const [actionSheetOpen, setActionSheetOpen] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState('');
-  const { handleAddCard, handleGoUpdate } = props;
   const [isSnackbarShowing, setSnackbarShowing] = useSnackbar();
 
-  let cardsData = [];
-  const fetchData = async () => {
-    const snapshot = await firestore.collection('cards').get();
-    snapshot.forEach((doc) => cardsData.push({ id: doc.id, data: doc.data() }));
-    setCards(cardsData);
-    setLoaded(true);
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const cardsData = await getCardsRequest();
+        setCards(cardsData);
+        setLoaded(true);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     fetchData();
   }, []);
 
-  const handleUpdateCardAlias = (event) => {
+  const handleupdateCardRequestAlias = (event) => {
     const cardId = event.currentTarget.dataset.cardId;
 
     handleGoUpdate(cardId);
@@ -45,19 +47,22 @@ const CardList = (props) => {
   const deleteCard = async () => {
     if (!window.confirm('정말 삭제하시겠습니까?')) return;
 
-    firestore
-      .collection('cards')
-      .doc(selectedCardId)
-      .delete()
-      .then(() => {})
-      .catch((error) => {
-        console.error(error);
-      });
+    try {
+      deleteCardRequest(selectedCardId);
+    } catch (error) {
+      console.error(error);
+    }
 
     setActionSheetOpen(false);
     setSnackbarShowing(true);
 
-    await fetchData();
+    try {
+      const cardsData = await getCardsRequest();
+      setCards(cardsData);
+      setLoaded(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const actionSheetOptions = { 삭제: deleteCard };
@@ -67,7 +72,7 @@ const CardList = (props) => {
       <Style.Root>
         <Style.Spinner src={spinnerGif} alt="spinner" isShowing={!isLoaded} />
         {cards.map((card) => (
-          <Style.CardWrapper key={card.id} data-card-id={card.id} onClick={handleUpdateCardAlias}>
+          <Style.CardWrapper key={card.id} data-card-id={card.id} onClick={handleupdateCardRequestAlias}>
             <Card
               width="208px"
               height="130px"

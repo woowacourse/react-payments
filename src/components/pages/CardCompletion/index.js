@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../shared/Card';
 import Button from '../../shared/Button';
-import { firestore } from '../../../firebase';
+import { addCardRequest, updateCardRequest } from '../../../request';
 import * as Style from './style';
 
 const CardCompletion = (props) => {
@@ -28,19 +28,29 @@ const CardCompletion = (props) => {
     if (isEditing) {
       await updateCardAlias();
     } else {
-      firestore.collection('cards').add({ bankId, cardNumbers, expirationDate, ownerName, cardAlias: aliasInput });
+      try {
+        addCardRequest({ bankId, cardNumbers, expirationDate, ownerName, cardAlias: aliasInput });
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     handleConfirmPage();
   };
 
   const updateCardAlias = async () => {
-    await firestore.collection('cards').doc(cardId).update({ cardAlias: aliasInput });
+    try {
+      await updateCardRequest(cardId, { cardAlias: aliasInput });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
-    if (isEditing) setAliasInput(cardAlias);
-  }, []);
+    if (isEditing) {
+      setAliasInput(cardAlias);
+    }
+  }, [isEditing, cardAlias]);
 
   return (
     <Style.Root>
