@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 import Card from "../Card/Card";
 import Header from "../Header/Header";
 
-const CardConfirm = ({ cardInfo }) => {
+const CardConfirm = ({ cardInfo, onConfirmClick }) => {
   const { backgroundColor, isRegistered, bank, numberInfos, ownerName, expirationDate, onClick } = cardInfo;
 
   return (
@@ -25,7 +25,7 @@ const CardConfirm = ({ cardInfo }) => {
         </div>
       </section>
       <div className="flex items-center justify-end w-full h-10">
-        <Button>확인</Button>
+        <Button onClick={onConfirmClick}>확인</Button>
       </div>
     </>
   );
@@ -33,6 +33,7 @@ const CardConfirm = ({ cardInfo }) => {
 
 CardConfirm.propTypes = {
   cardInfo: PropTypes.shape(Card.propTypes).isRequired,
+  onConfirmClick: PropTypes.func.isRequired,
 };
 
 export default CardConfirm;
