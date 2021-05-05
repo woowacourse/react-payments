@@ -144,7 +144,7 @@ const CardNumberInput = ({ isValidCardNumber }) => {
             maxLength={INPUT_LENGTH.CARD_NUMBER}
             value={cardNumber[FIRST]}
             onChange={handleInputChange}
-            innerRef={$firstInput}
+            ref={$firstInput}
             styles={transparentInputStyles[FIRST]}
             autoFocus
           />
@@ -155,7 +155,7 @@ const CardNumberInput = ({ isValidCardNumber }) => {
             maxLength={INPUT_LENGTH.CARD_NUMBER}
             value={cardNumber[SECOND]}
             onChange={handleInputChange}
-            innerRef={$secondInput}
+            ref={$secondInput}
             styles={transparentInputStyles[SECOND]}
             disabled
           />
@@ -167,7 +167,7 @@ const CardNumberInput = ({ isValidCardNumber }) => {
             maxLength={INPUT_LENGTH.CARD_NUMBER}
             value={cardNumber[THIRD]}
             onFocus={handleInputFocus}
-            innerRef={$thirdInput}
+            ref={$thirdInput}
             styles={transparentInputStyles[THIRD]}
             readOnly
           />
@@ -179,7 +179,7 @@ const CardNumberInput = ({ isValidCardNumber }) => {
             maxLength={INPUT_LENGTH.CARD_NUMBER}
             value={cardNumber[FOURTH]}
             onFocus={handleInputFocus}
-            innerRef={$fourthInput}
+            ref={$fourthInput}
             styles={transparentInputStyles[FOURTH]}
             readOnly
           />

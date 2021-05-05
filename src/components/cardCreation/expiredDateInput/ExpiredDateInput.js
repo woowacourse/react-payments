@@ -64,7 +64,7 @@ const ExpiredDateInput = ({ isValidCardExpiredDate }) => {
           min={INPUT_LENGTH.EXPIRED_DATE}
           max={INPUT_LENGTH.EXPIRED_DATE}
           placeholder="YY"
-          innerRef={$yearInput}
+          ref={$yearInput}
           value={cardExpiredDate[YEAR]}
           onChange={handleInputChange}
           styles={transparentInputStyles}

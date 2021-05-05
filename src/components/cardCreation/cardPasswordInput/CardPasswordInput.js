@@ -70,7 +70,7 @@ const CardPasswordInput = ({ isValidCardPassword }) => {
               minLength={INPUT_LENGTH.CARD_PASSWORD}
               maxLength={INPUT_LENGTH.CARD_PASSWORD}
               type="password"
-              innerRef={$secondInput}
+              ref={$secondInput}
               value={cardPassword[SECOND]}
               onFocus={handleInputFocus}
               styles={transparentInputStyles}
