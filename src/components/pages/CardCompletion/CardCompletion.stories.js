@@ -12,7 +12,7 @@ const Template = (args) => <CardCompletion {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   cardData: {
-    bankId: '1',
+    bankId: '1p',
     cardNumbers: { 1: '1111', 2: '1234', 3: '4321', 4: '4444' },
     expirationDate: { month: '04', year: '21' },
     ownerName: 'COLLIN',
