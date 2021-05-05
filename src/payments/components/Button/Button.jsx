@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 
 const Button = props => {
-  const { name, type, className, onClick } = props;
+  const { children, type, className, onClick } = props;
 
   return (
     <button
@@ -11,13 +11,13 @@ const Button = props => {
       className={classNames("w-max text-custom-mint text-sm font-bold", className)}
       onClick={onClick}
     >
-      {name}
+      {children}
     </button>
   );
 };
 
 Button.propTypes = {
-  name: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   type: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,

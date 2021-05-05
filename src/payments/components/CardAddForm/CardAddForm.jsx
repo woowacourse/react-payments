@@ -259,7 +259,7 @@ const CardAddForm = ({ addCardInfo }) => {
 
           <InputBox>
             <InputLabel>
-              <InputTitle innerText="카드 번호" />
+              <InputTitle>카드 번호</InputTitle>
             </InputLabel>
 
             <InputContent>
@@ -293,7 +293,7 @@ const CardAddForm = ({ addCardInfo }) => {
 
           <InputBox>
             <InputLabel>
-              <InputTitle innerText="만료일" />
+              <InputTitle>만료일</InputTitle>
             </InputLabel>
 
             <InputContent>
@@ -316,7 +316,7 @@ const CardAddForm = ({ addCardInfo }) => {
 
           <InputBox>
             <InputLabel>
-              <InputTitle innerText="카드 소유자 이름(선택)" />
+              <InputTitle>카드 소유자 이름(선택)</InputTitle>
               <span className="text-custom-gray-300 text-xs font-medium">{ownerName.length}/30</span>
             </InputLabel>
             <InputContent>
@@ -337,7 +337,7 @@ const CardAddForm = ({ addCardInfo }) => {
 
           <InputBox>
             <InputLabel>
-              <InputTitle innerText="보안코드(CVC/CVV)" />
+              <InputTitle>보안코드(CVC/CVV)</InputTitle>
             </InputLabel>
             <InputContent>
               <Input
@@ -354,13 +354,13 @@ const CardAddForm = ({ addCardInfo }) => {
                 required
               />
               <QuestionIcon onClick={handleToolTipClick} />
-              <ToolTip isVisible={isToolTipVisible} />
+              <ToolTip isVisible={isToolTipVisible}>카드 뒷면 서명란 끝의 3~4자리 숫자를 입력해주세요.</ToolTip>
             </InputContent>
           </InputBox>
 
           <InputBox>
             <InputLabel>
-              <InputTitle innerText="카드 비밀번호" />
+              <InputTitle>카드 비밀번호</InputTitle>
             </InputLabel>
             <InputContent>
               <Input
@@ -400,7 +400,9 @@ const CardAddForm = ({ addCardInfo }) => {
         </div>
         {isNextButtonVisible && (
           <div className="flex justify-end">
-            <Button type="submit" name="다음" className="h-10" />
+            <Button type="submit" className="h-10">
+              다음
+            </Button>
           </div>
         )}
       </form>

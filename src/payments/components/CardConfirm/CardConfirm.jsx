@@ -5,7 +5,7 @@ import Card from "../Card/Card";
 import Header from "../Header/Header";
 
 const CardConfirm = ({ cardInfo }) => {
-  const { backgroundColor, scale, isRegistered, bank, numberInfos, ownerName, expirationDate, onClick } = cardInfo;
+  const { backgroundColor, isRegistered, bank, numberInfos, ownerName, expirationDate, onClick } = cardInfo;
 
   return (
     <>
@@ -17,7 +17,7 @@ const CardConfirm = ({ cardInfo }) => {
             <Card
               isRegistered
               scale="scale-150"
-              {...{ backgroundColor, scale, isRegistered, bank, numberInfos, ownerName, expirationDate, onClick }}
+              {...{ backgroundColor, isRegistered, bank, numberInfos, ownerName, expirationDate, onClick }}
             />
 
             <input className="mt-16 text-center text-custom-darkgray text-lg font-normal border-b-2 border-custom-gray-250 focus:outline-none" />
@@ -25,7 +25,7 @@ const CardConfirm = ({ cardInfo }) => {
         </div>
       </section>
       <div className="flex items-center justify-end w-full h-10">
-        <Button name="확인" />
+        <Button>확인</Button>
       </div>
     </>
   );
