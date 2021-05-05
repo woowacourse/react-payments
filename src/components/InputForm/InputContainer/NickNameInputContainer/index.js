@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 
-export const NickNameInputContainer = ({ nickName, handleChange }) => {
+export const NickNameInputContainer = ({ nickName, autoFocus, handleChange }) => {
   return (
     <>
       <Styled.Container>
-        <Styled.Input name={'nickName'} value={nickName} onChange={handleChange} />
+        <Styled.Input name={'nickName'} autoFocus={autoFocus} value={nickName} onChange={handleChange} />
       </Styled.Container>
     </>
   );

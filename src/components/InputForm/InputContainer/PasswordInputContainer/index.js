@@ -9,17 +9,21 @@ export const PasswordInputContainer = ({ password, isValid, handleChange, handle
       <Styled.Input
         name={'firstDigit'}
         value={firstDigit}
+        type={'password'}
+        maxLength={1}
         onChange={handleChange}
         isValid={isValid}
       />
       <Styled.Input
         name={'secondDigit'}
         value={secondDigit}
+        type={'password'}
+        maxLength={1}
         onChange={handleChange}
         isValid={isValid}
       />
-      <Styled.BilndInput value={0} />
-      <Styled.BilndInput value={0} />
+      <Styled.BilndInput value={0} type={'password'} disabled={'disabled'} />
+      <Styled.BilndInput value={0} type={'password'} disabled={'disabled'} />
     </Styled.Container>
   );
 };

@@ -11,10 +11,7 @@ const Container = styled(FlexCenter)`
   border: ${(props) => (props.isValid ? '0.01rem solid transparent' : '0.01rem solid #f24156')};
 `;
 
-const Input = styled.input.attrs({
-  type: 'password',
-  maxLength: 3,
-})`
+const Input = styled.input`
   width: 50%;
   height: 45%;
   margin: 0;

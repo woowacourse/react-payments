@@ -6,13 +6,13 @@ export const NumbersInputContainer = ({ numbers, isValid, handleChange, handleBl
   const { first, second, third, fourth } = numbers;
   return (
     <Styled.Container onBlur={handleBlur} isValid={isValid}>
-      <Styled.Input name={'first'} value={first} onChange={handleChange} />
+      <Styled.Input name={'first'} type={'text'} maxLength={4} value={first} onChange={handleChange} />
       <span>-</span>
-      <Styled.Input name={'second'} value={second} onChange={handleChange} />
+      <Styled.Input name={'second'} type={'text'} maxLength={4} value={second} onChange={handleChange} />
       <span>-</span>
-      <Styled.BlindInput name={'third'} value={third} onChange={handleChange} />
+      <Styled.BlindInput name={'third'} type={'password'} maxLength={4} value={third} onChange={handleChange} />
       <span>-</span>
-      <Styled.BlindInput name={'fourth'} value={fourth} onChange={handleChange} />
+      <Styled.BlindInput name={'fourth'} type={'password'} maxLength={4} value={fourth} onChange={handleChange} />
     </Styled.Container>
   );
 };

@@ -11,10 +11,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Input = styled.input.attrs({
-  type: 'password',
-  maxLength: 1,
-})`
+const Input = styled.input`
   width: 22%;
   height: 100%;
   border-radius: 0.4rem;
@@ -28,10 +25,7 @@ const Input = styled.input.attrs({
   border: ${(props) => (props.isValid ? '0.01rem solid transparent' : '0.01rem solid #f24156')};
 `;
 
-const BilndInput = styled.input.attrs({
-  type: 'password',
-  disabled: 'disabled',
-})`
+const BilndInput = styled.input`
   width: 22%;
   height: 45%;
   text-align: center;

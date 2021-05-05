@@ -10,9 +10,7 @@ const Container = styled(FlexCenter)`
   margin: 0;
 `;
 
-const Input = styled.input.attrs({
-  autoFocus: 'autoFocus',
-})`
+const Input = styled.input`
   width: 95%;
   margin: 0;
   padding: 0;

@@ -13,10 +13,7 @@ const Container = styled(FlexCenter)`
   border: ${(props) => (props.isValid ? '0.01rem solid transparent' : '0.01rem solid #f24156')};
 `;
 
-const Input = styled.input.attrs({
-  type: 'text',
-  maxLength: 2,
-})`
+const Input = styled.input`
   width: 23%;
   height: 45%;
   margin: 0;

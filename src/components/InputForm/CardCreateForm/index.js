@@ -75,13 +75,15 @@ export const CardCreateForm = ({
           textLength={15}
           inputValue={owner.value}
         />
-        <OwnerInputContainer owner={owner.value} handleChange={owner.handleChange} />
+        <OwnerInputContainer owner={owner.value} type={'text'} maxLength={15} handleChange={owner.handleChange} />
       </InputContainer>
       <InputContainer title={'보안 코드 (CVC/CVV)'}>
         {!cvc.isValid && <ValidMessage validMessage={validMessages['cvc']} />}
         <CvcInputContainer
           cvc={cvc.value}
           isValid={cvc.isValid}
+          type={'password'}
+          maxLength={3}
           handleChange={cvc.handleChange}
           handleBlur={cvc.handleBlur}
         />
