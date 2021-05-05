@@ -24,7 +24,7 @@ const initialNumberInfos = [
   { id: "number-info-3", type: "password", value: "", minLength: "3", maxLength: "4" },
 ];
 
-const CardAddForm = ({ addCardInfo }) => {
+const CardAddForm = ({ addCardInfo, onBackButtonClick }) => {
   const [isBankSelectorVisible, setBankSelectorVisible] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("");
   const [bank, setBank] = useState("");
@@ -242,7 +242,7 @@ const CardAddForm = ({ addCardInfo }) => {
 
   return (
     <>
-      <Header hasBackButton title="카드 추가" />
+      <Header hasBackButton title="카드 추가" onBackButtonClick={onBackButtonClick} />
       <form className="flex flex-col justify-between w-full h-full" onSubmit={handleSubmit}>
         <div>
           <div className="flex justify-center mb-4 w-full">
@@ -418,6 +418,7 @@ const CardAddForm = ({ addCardInfo }) => {
 
 CardAddForm.propTypes = {
   addCardInfo: PropTypes.func.isRequired,
+  onBackButtonClick: PropTypes.func.isRequired,
 };
 
 export default CardAddForm;
