@@ -7,7 +7,7 @@ import CardList from "./components/CardList/CardList";
 let index = -1;
 
 const Payments = () => {
-  const [currentPage, setCurrentPage] = useState(PAGE.CARD_ADD_FORM);
+  const [currentPage, setCurrentPage] = useState(PAGE.CARD_LIST);
   const [newCardInfo, setNewCardInfo] = useState(null);
   const [cardInfosList, setCardInfosList] = useState([]);
 
