@@ -50,10 +50,7 @@ const CardNumberInput = ({ isValidCardNumber }) => {
     setCardInfo,
   } = useContext(CardDataContext);
 
-  const $firstInput = useRef(null);
-  const $secondInput = useRef(null);
-  const $thirdInput = useRef(null);
-  const $fourthInput = useRef(null);
+  const [$firstInput, $secondInput, $thirdInput, $fourthInput] = [...Array(INPUT_LENGTH.CARD_NUMBER)].map(useRef);
 
   const isSelectedCardInfo = !!selectedCardInfo.cardId;
 
@@ -68,13 +65,13 @@ const CardNumberInput = ({ isValidCardNumber }) => {
 
   useEffect(() => {
     isSelectedCardInfo && !$thirdInput.current.value && $thirdInput.current.focus();
-  }, [isSelectedCardInfo]);
+  }, [isSelectedCardInfo, $thirdInput]);
 
   useEffect(() => {
     if (!editCardId) return;
 
     $secondInput.current.disabled = false;
-  }, [editCardId]);
+  }, [editCardId, $secondInput]);
 
   const handleInputChange = ({ target }) => {
     if (target.value.length > INPUT_LENGTH.CARD_NUMBER || !NUMBER_REG_EXR.test(target.value)) return;
