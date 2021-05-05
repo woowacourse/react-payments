@@ -18,6 +18,11 @@ const MessageContainer = styled.div`
   font-weight: 400;
   justify-content: center;
   align-items: flex-end;
+
+  h1 {
+    font-weight: 400;
+    font-size: 1.5rem;
+  }
 `;
 
 const CardPreviewContainer = styled(FlexCenter)`

@@ -25,7 +25,9 @@ export const CardRegistered = ({ card, setCurrentPage, registerCard }) => {
 
   return (
     <Styled.PageContainer>
-      <Styled.MessageContainer>{GUIDE_MESSAGES.CARD_REGISTERED}</Styled.MessageContainer>
+      <Styled.MessageContainer>
+        <h1>{GUIDE_MESSAGES.CARD_REGISTERED}</h1>
+      </Styled.MessageContainer>
       <Styled.CardPreviewContainer>
         <Card
           size={'large'}

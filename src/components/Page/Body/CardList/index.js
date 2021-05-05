@@ -15,16 +15,20 @@ export const CardList = ({ cards, setCurrentPage }) => {
       <Styled.Container>
         <Styled.CardListContainer>
           {cards.map((card, idx) => (
-            <CardItem key={idx} card={card} />
+            <li key={idx}>
+              <CardItem key={idx} card={card} />
+            </li>
           ))}
+          <li>
+            <Styled.CardAddButtonContainer>
+              <ClickableCard
+                onClick={() => {
+                  setCurrentPage('cardRegister');
+                }}
+              />
+            </Styled.CardAddButtonContainer>
+          </li>
         </Styled.CardListContainer>
-        <Styled.CardAddButtonContainer>
-          <ClickableCard
-            onClick={() => {
-              setCurrentPage('cardRegister');
-            }}
-          />
-        </Styled.CardAddButtonContainer>
       </Styled.Container>
     </PageBody>
   );

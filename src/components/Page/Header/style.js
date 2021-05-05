@@ -10,22 +10,4 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Button = styled.button.attrs({
-  type: 'button',
-})`
-  color: black;
-  background: transparent;
-  border: none;
-  font-size: 1.1rem;
-  font-weight: bold;
-`;
-
-const Title = styled.div`
-  height: 100%;
-  display: flex;
-  margin-left: 0.8rem;
-  align-items: center;
-  text-align: center;
-`;
-
-export { Container, Button, Title };
+export { Container };

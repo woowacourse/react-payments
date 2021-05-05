@@ -10,6 +10,7 @@ const ColorContainer = styled.span`
   height: 2.3rem;
   border-radius: 50%;
   display: flex;
+  cursor: pointer;
   background: ${(props) => `radial-gradient(
     circle,
     #FFFFFFDD 0%,

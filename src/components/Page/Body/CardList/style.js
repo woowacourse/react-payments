@@ -12,10 +12,15 @@ const Container = styled.div`
   overflow: auto;
 `;
 
-const CardListContainer = styled(FlexCenter)`
-  width: 100%;
+const CardListContainer = styled.ul`
+  display: flex;
+  list-style: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   margin: 0;
+  padding: 0;
 `;
 
 const CardAddButtonContainer = styled(FlexCenter)`

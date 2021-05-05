@@ -7,6 +7,7 @@ const ClickableCardContainer = styled(FlexCenter)`
   border-radius: 0.4rem;
   background-color: #e5e5e5;
   margin: 0;
+  cursor: pointer;
 `;
 
 const PlusSign = styled(FlexCenter)`
@@ -14,7 +15,6 @@ const PlusSign = styled(FlexCenter)`
   margin: 0 auto;
   font-size: 2.3rem;
   color: #575757;
-  cursor: pointer;
 `;
 
 export { ClickableCardContainer, PlusSign };

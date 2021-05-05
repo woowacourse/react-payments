@@ -31,7 +31,7 @@ export const Card = ({ size, company, numbers, owner, validDay, ...props }) => {
         </Styled.Body>
         <Styled.Footer size={size}>
           <Styled.Owner>
-            {size === 'medium' && !owner ? GUIDE_MESSAGES.CARD_OWNER : owner}
+            {!owner ? GUIDE_MESSAGES.CARD_OWNER : owner}
           </Styled.Owner>
           <Styled.ValidDay>
             {`${validDay.month ? validDay.month : GUIDE_MESSAGES.VALID_DATE_MONTH}/${

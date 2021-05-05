@@ -6,6 +6,7 @@ import { CardRegister } from './components/Page/Body/CardRegister';
 import { CardRegistered } from './components/Page/Body/CardRegistered';
 import { CARD_FRAME, REGISTERED_CARDS } from './utils/constants/card';
 import { PAGE_TITLE } from './utils/constants/messages';
+import * as Styled from './style';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('cardList');
@@ -22,11 +23,10 @@ function App() {
 
   const ChildComponents = {
     cardRegister: [
-      <Header
-        titleText={PAGE_TITLE.CARD_REGISTER}
-        hasButton={true}
-        onClick={() => setCurrentPage('cardList')}
-      />,
+      <Header>
+        <Styled.Button onClick={() => setCurrentPage('cardList')}>{'◀︎'}</Styled.Button>
+        <Styled.Title>{PAGE_TITLE.CARD_REGISTER}</Styled.Title>
+      </Header>,
       <CardRegister setCurrentPage={setCurrentPage} updateCardContent={updateCardContent} />,
     ],
     cardRegistered: [
@@ -38,7 +38,9 @@ function App() {
       />,
     ],
     cardList: [
-      <Header titleText={PAGE_TITLE.CARD_LIST} hasButton={false} />,
+      <Header>
+        <Styled.Title>{PAGE_TITLE.CARD_LIST}</Styled.Title>
+      </Header>,
       <CardList cards={cards} setCurrentPage={setCurrentPage} />,
     ],
   };
