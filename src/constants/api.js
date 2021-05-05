@@ -1,5 +1,5 @@
 const API = {
-  BASE_URL: 'http://192.168.0.3:3001/cardList',
+  BASE_URL: 'https://woowacourse-react-payments.herokuapp.com/cardList',
   STATUS: {
     INITIAL: 'initial',
     PENDING: 'pending',
