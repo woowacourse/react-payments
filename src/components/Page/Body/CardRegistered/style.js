@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import { FlexCenter } from '../../../../utils/style/FlexCenter';
 
-const PageContainer = styled(FlexCenter)`
+const PageContainer = styled.main`
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const MessageContainer = styled.div`
