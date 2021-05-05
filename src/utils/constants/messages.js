@@ -27,3 +27,8 @@ export const INPUT_TITLE = {
   CVC: '보안 코드 (CVC/CVV)',
   PASSWORD: '카드 비밀번호',
 }
+
+export const PAGE_TITLE = {
+  CARD_REGISTER: '카드 추가',
+  CARD_LIST: '보유카드',
+}

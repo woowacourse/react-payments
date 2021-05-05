@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import * as Styled from './style.js';
 import { Card } from '../../../Card';
 import { NickNameForm } from '../../../InputForm/NickNameForm';
-import { PageBody } from '../../../../utils/style/Page.js';
 import { GUIDE_MESSAGES } from '../../../../utils/constants/messages.js';
 import { CARD_NAME_BIRDS } from '../../../../utils/constants/card.js';
 
@@ -25,7 +24,7 @@ export const CardRegistered = ({ card, setCurrentPage, registerCard }) => {
   };
 
   return (
-    <PageBody>
+    <Styled.PageContainer>
       <Styled.MessageContainer>{GUIDE_MESSAGES.CARD_REGISTERED}</Styled.MessageContainer>
       <Styled.CardPreviewContainer>
         <Card
@@ -42,7 +41,7 @@ export const CardRegistered = ({ card, setCurrentPage, registerCard }) => {
           submitCardNickName={submitCardNickName}
         />
       </Styled.CardNickNameFormContainer>
-    </PageBody>
+    </Styled.PageContainer>
   );
 };
 

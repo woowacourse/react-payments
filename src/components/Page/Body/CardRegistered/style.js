@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { FlexCenter } from '../../../../utils/style/FlexCenter';
 
+const PageContainer = styled(FlexCenter)`
+  flex-direction: column;
+`;
+
 const MessageContainer = styled.div`
   width: 100%;
   height: 6rem;
@@ -23,4 +27,4 @@ const CardNickNameFormContainer = styled(FlexCenter)`
   margin: 0;
 `;
 
-export { MessageContainer, CardPreviewContainer, CardNickNameFormContainer };
+export { MessageContainer, CardPreviewContainer, PageContainer, CardNickNameFormContainer };

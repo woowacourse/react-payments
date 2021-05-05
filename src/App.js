@@ -5,6 +5,7 @@ import { CardList } from './components/Page/Body/CardList';
 import { CardRegister } from './components/Page/Body/CardRegister';
 import { CardRegistered } from './components/Page/Body/CardRegistered';
 import { CARD_FRAME, REGISTERED_CARDS } from './utils/constants/card';
+import { PAGE_TITLE } from './utils/constants/messages';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('cardList');
@@ -22,7 +23,7 @@ function App() {
   const ChildComponents = {
     cardRegister: [
       <Header
-        titleText={'카드 추가'}
+        titleText={PAGE_TITLE.CARD_REGISTER}
         hasButton={true}
         onClick={() => setCurrentPage('cardList')}
       />,
@@ -37,7 +38,7 @@ function App() {
       />,
     ],
     cardList: [
-      <Header titleText={'보유카드'} hasButton={false} />,
+      <Header titleText={PAGE_TITLE.CARD_LIST} hasButton={false} />,
       <CardList cards={cards} setCurrentPage={setCurrentPage} />,
     ],
   };
