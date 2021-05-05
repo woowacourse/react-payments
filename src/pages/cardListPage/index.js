@@ -43,12 +43,8 @@ const CardListPage = ({ cardList, setCardList, setEditCardId, resetCardInfo }) =
       />
       <Styled.CardNickname>{card.cardNickname}</Styled.CardNickname>
       <Styled.ButtonContainer>
-        <Button styles={{ color: 'inherit' }} onClick={() => handleCardEdit(card)}>
-          수정하기
-        </Button>
-        <Button styles={{ color: 'inherit' }} onClick={() => handleCardDelete(card.id)}>
-          삭제하기
-        </Button>
+        <Button onClick={() => handleCardEdit(card)}>수정하기</Button>
+        <Button onClick={() => handleCardDelete(card.id)}>삭제하기</Button>
       </Styled.ButtonContainer>
     </Styled.CardItem>
   ));
