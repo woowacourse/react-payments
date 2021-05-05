@@ -15,43 +15,43 @@ const VirtualKeyboard = ({ BottomModal, closeModal, currentInputName, inputValue
   const [shuffledButtonList, setShuffledButtonList] = useState(arrayShuffle(virtualKeyboardValueList));
   const { setCardInfo } = useContext(CardDataContext);
 
-  const handleButtonClick = ({ target }) => {
-    if (target.tagName !== 'BUTTON') return;
-    if (target.innerText === VIRTUAL_KEYBOARD_CONFIRM_TEXT) {
-      closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
-
-      return;
-    }
-
+  const handleNumberClick = ({ target }) => {
     setShuffledButtonList(arrayShuffle(virtualKeyboardValueList));
 
     if (typeof inputValue === 'string') {
-      setSingleInputValue(target.innerText);
+      setSingleInputValue(inputValue + target.innerText);
 
       return;
     }
 
-    setMultipleInputValue(target.innerText);
+    setMultipleInputValue(inputValue[currentInputName] + target.innerText);
   };
 
-  const setSingleInputValue = value => {
-    if (inputValue.length >= maxLength && value !== VIRTUAL_KEYBOARD_DELETE_TEXT) return;
+  const handleDeleteTextClick = () => {
+    if (typeof inputValue === 'string') {
+      setSingleInputValue(inputValue.slice(0, -1));
+
+      return;
+    }
+
+    setMultipleInputValue(inputValue[currentInputName].slice(0, -1));
+  };
+
+  const setSingleInputValue = changedValue => {
+    if (inputValue.length >= maxLength) return;
 
     setCardInfo(prevState => ({
       ...prevState,
-      [targetKey]: value === VIRTUAL_KEYBOARD_DELETE_TEXT ? inputValue.slice(0, -1) : inputValue + value,
+      [targetKey]: changedValue,
     }));
   };
 
-  const setMultipleInputValue = value => {
-    if (inputValue[currentInputName].length >= maxLength && value !== VIRTUAL_KEYBOARD_DELETE_TEXT) return;
+  const setMultipleInputValue = changedValue => {
+    if (inputValue[currentInputName].length >= maxLength) return;
 
     setCardInfo(prevState => {
       const copiedValue = { ...inputValue };
-      copiedValue[currentInputName] =
-        value === VIRTUAL_KEYBOARD_DELETE_TEXT
-          ? copiedValue[currentInputName].slice(0, -1)
-          : copiedValue[currentInputName] + value;
+      copiedValue[currentInputName] = changedValue;
 
       return { ...prevState, [targetKey]: copiedValue };
     });
@@ -59,14 +59,18 @@ const VirtualKeyboard = ({ BottomModal, closeModal, currentInputName, inputValue
 
   return (
     <BottomModal>
-      <Styled.ButtonContainer onClick={handleButtonClick}>
+      <Styled.ButtonContainer>
         {shuffledButtonList.map(value => (
-          <Button type="button" key={randomKey()}>
+          <Button type="button" key={randomKey()} onClick={handleNumberClick}>
             {value}
           </Button>
         ))}
-        <Button type="button">{VIRTUAL_KEYBOARD_CONFIRM_TEXT}</Button>
-        <Button type="button">{VIRTUAL_KEYBOARD_DELETE_TEXT}</Button>
+        <Button type="button" onClick={() => closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD)}>
+          {VIRTUAL_KEYBOARD_CONFIRM_TEXT}
+        </Button>
+        <Button type="button" onClick={handleDeleteTextClick}>
+          {VIRTUAL_KEYBOARD_DELETE_TEXT}
+        </Button>
       </Styled.ButtonContainer>
     </BottomModal>
   );
