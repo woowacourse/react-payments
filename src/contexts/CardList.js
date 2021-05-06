@@ -1,3 +1,5 @@
+// Note: 현재 사용하지 않는 코드
+
 import { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { API } from '../constants';
