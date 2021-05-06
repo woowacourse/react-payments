@@ -80,14 +80,14 @@ const CardEditNickname = () => {
             {updateCard.status === API.STATUS.PENDING ? (
               <Spinner />
             ) : (
-              path === ROUTE.EDIT && (
-                <>
+              <>
+                {path === ROUTE.EDIT && (
                   <Button as={Link} to="/">
                     취소
                   </Button>
-                  <Button>확인</Button>
-                </>
-              )
+                )}
+                <Button>확인</Button>
+              </>
             )}
           </Styled.ButtonContainer>
         </form>
