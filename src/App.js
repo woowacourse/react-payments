@@ -117,7 +117,11 @@ function App() {
         {page === PAGE.CARD_LIST && (
           <>
             <Nav>보유 카드</Nav>
-            <CardList myCards={myCards} setPage={setPage} />
+            <CardList
+              myCards={myCards}
+              setPage={setPage}
+              setNewCardInfo={setNewCardInfo}
+            />
           </>
         )}
       </AppWrapper>

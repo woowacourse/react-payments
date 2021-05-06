@@ -19,6 +19,7 @@ const NavWrapper = styled.div`
     border-right: 0;
     box-sizing: border-box;
     transform: rotate(45deg);
+    cursor: pointer;
   }
 
   .nav-text {
