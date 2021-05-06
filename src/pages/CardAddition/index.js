@@ -5,6 +5,7 @@ import {
   CARD,
   SECURE_CODE_LENGTH,
   PASSWORD_INPUT_LENGTH,
+  VIRTUAL_KEYBOARD_TARGET_INPUT,
 } from "../../constants";
 import { Modal, CardTypeRadio, VirtualKeyboard } from "../../components";
 import CardAdditionForm from "./CardAdditionForm";
@@ -16,7 +17,6 @@ const CardAddition = (props) => {
     cardTypeSelection: false,
     virtualKeyboard: false,
   });
-
   const [virtualKeyboardInterface, setVirtualKeyboardInterface] = useState({
     insertInputChar: null,
     deleteInputChar: null,
@@ -68,15 +68,15 @@ const CardAddition = (props) => {
     let insertInputChar, deleteInputChar;
 
     switch (key) {
-      case "secureCode":
+      case VIRTUAL_KEYBOARD_TARGET_INPUT.SECURE_CODE:
         insertInputChar = insertSecureCode;
         deleteInputChar = deleteSecureCode;
         break;
-      case "firstPassword":
+      case VIRTUAL_KEYBOARD_TARGET_INPUT.FIRST_PASSWORD:
         insertInputChar = insertFirstPassword;
         deleteInputChar = deleteFirstPassword;
         break;
-      case "secondPassword":
+      case VIRTUAL_KEYBOARD_TARGET_INPUT.SECOND_PASSWORD:
         insertInputChar = insertSecondPassword;
         deleteInputChar = deleteSecondPassword;
         break;
