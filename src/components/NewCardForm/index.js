@@ -6,7 +6,7 @@ import {
   getCVCMessage,
   getUserMessage,
   messageObject,
-} from './cardFormValidator';
+} from '../../utils/cardFormValidator';
 import CardNumberInput from './CardNumberInput';
 import CardExpireDateInput from './CardExpireDateInput';
 import CardUserInput from './CardUserInput';

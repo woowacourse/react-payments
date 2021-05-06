@@ -1,8 +1,5 @@
-import {
-  CARD_INFOS_LENGTH,
-  VALIDATION_MESSAGE,
-} from '../../constants/validation';
-import { isPositiveInteger } from '../../utils/utils';
+import { CARD_INFOS_LENGTH, VALIDATION_MESSAGE } from '../constants/validation';
+import { isPositiveInteger } from '../utils/utils';
 
 export const getCardNumberMessage = (value) => {
   if (!isPositiveInteger(value)) {
