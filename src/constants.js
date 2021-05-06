@@ -102,3 +102,9 @@ export const CARD_SIZE = {
   MEDIUM: "medium",
   LARGE: "large",
 };
+
+export const VIRTUAL_KEYBOARD_TARGET_INPUT = {
+  SECURE_CODE: "secureCode",
+  FIRST_PASSWORD: "firstPassword",
+  SECOND_PASSWORD: "secondPassword",
+};

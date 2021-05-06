@@ -5,6 +5,7 @@ import {
   FORMAT_CHAR,
   SECURE_CODE_LENGTH,
   USERNAME,
+  VIRTUAL_KEYBOARD_TARGET_INPUT,
 } from "../../constants";
 import {
   useCardNumbers,
@@ -148,7 +149,9 @@ const CardAdditionForm = (props) => {
           <div className="card-addition__secure-code-inner">
             <div
               onClick={() => {
-                props.setVirtualKeyboardTarget("secureCode");
+                props.setVirtualKeyboardTarget(
+                  VIRTUAL_KEYBOARD_TARGET_INPUT.SECURE_CODE
+                );
                 props.setIsModalVisible({
                   virtualKeyboard: verifyCardNumberInputsFullFilled(),
                 });
@@ -174,7 +177,9 @@ const CardAdditionForm = (props) => {
           <div
             className="card-addition__password-inner__password"
             onClick={() => {
-              props.setVirtualKeyboardTarget("firstPassword");
+              props.setVirtualKeyboardTarget(
+                VIRTUAL_KEYBOARD_TARGET_INPUT.FIRST_PASSWORD
+              );
               props.setIsModalVisible({
                 virtualKeyboard: verifyCardNumberInputsFullFilled(),
               });
@@ -191,7 +196,9 @@ const CardAdditionForm = (props) => {
           <div
             className="card-addition__password-inner__password"
             onClick={() => {
-              props.setVirtualKeyboardTarget("secondPassword");
+              props.setVirtualKeyboardTarget(
+                VIRTUAL_KEYBOARD_TARGET_INPUT.SECOND_PASSWORD
+              );
               props.setIsModalVisible({
                 virtualKeyboard: verifyCardNumberInputsFullFilled(),
               });
