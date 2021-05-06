@@ -65,24 +65,26 @@ const CardAddition = (props) => {
   });
 
   const changeVirtualKeyboardInterface = (key) => {
-    let insertInputChar, deleteInputChar;
+    const interfaceMap = {
+      [VIRTUAL_KEYBOARD_TARGET_INPUT.SECURE_CODE]: [
+        insertSecureCode,
+        deleteSecureCode,
+      ],
+      [VIRTUAL_KEYBOARD_TARGET_INPUT.FIRST_PASSWORD]: [
+        insertFirstPassword,
+        deleteFirstPassword,
+      ],
+      [VIRTUAL_KEYBOARD_TARGET_INPUT.SECOND_PASSWORD]: [
+        insertSecondPassword,
+        deleteSecondPassword,
+      ],
+    };
 
-    switch (key) {
-      case VIRTUAL_KEYBOARD_TARGET_INPUT.SECURE_CODE:
-        insertInputChar = insertSecureCode;
-        deleteInputChar = deleteSecureCode;
-        break;
-      case VIRTUAL_KEYBOARD_TARGET_INPUT.FIRST_PASSWORD:
-        insertInputChar = insertFirstPassword;
-        deleteInputChar = deleteFirstPassword;
-        break;
-      case VIRTUAL_KEYBOARD_TARGET_INPUT.SECOND_PASSWORD:
-        insertInputChar = insertSecondPassword;
-        deleteInputChar = deleteSecondPassword;
-        break;
-      default:
-        return;
+    if (!interfaceMap[key]) {
+      return;
     }
+
+    const [insertInputChar, deleteInputChar] = interfaceMap[key];
 
     setVirtualKeyboardInterface({
       insertInputChar,
