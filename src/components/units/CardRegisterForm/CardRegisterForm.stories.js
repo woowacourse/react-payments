@@ -15,4 +15,10 @@ Default.args = {
   ownerName: '',
   secureCode: '',
   cardPassword: { 1: '', 2: '' },
+  setCardNumbers: () => {},
+  setExpirationDate: () => {},
+  setOwnerName: () => {},
+  setSecureCode: () => {},
+  setCardPassword: () => {},
+  onSubmitForm: () => {},
 };

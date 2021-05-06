@@ -9,6 +9,7 @@ import * as Style from './style';
 
 const CardRegister = (props) => {
   const { setCardData, handleGoNext } = props;
+
   const { FIRST, SECOND, THIRD, FOURTH } = FRAGMENT_INDEX;
   const { MONTH, YEAR } = DATE_TYPE;
 

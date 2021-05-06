@@ -14,11 +14,15 @@ const Template = (args) => <PageHost {...args} />;
 export const CardRegisterPage = Template.bind({});
 CardRegisterPage.args = {
   navigationTitle: '카드추가',
-  children: <CardRegister />,
+  hasBackButton: true,
+  handleGoBack: () => {},
+  children: <CardRegister {...CardRegister.args} />,
 };
 
 export const CardCompletionPage = Template.bind({});
 CardCompletionPage.args = {
   navigationTitle: '',
+  hasBackButton: false,
+  handleGoBack: () => {},
   children: <CardCompletion {...CardCompletion.args} />,
 };

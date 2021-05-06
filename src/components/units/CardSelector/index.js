@@ -16,13 +16,7 @@ const CardSelector = (props) => {
     <Style.Root>
       <Style.SelectorInner>
         {dummyBanks.map((bank) => (
-          <CardColorOption
-            key={bank.id}
-            bankId={bank.id}
-            color={bank.color}
-            bankName={bank.name}
-            onClickOption={handleSelectColor}
-          />
+          <CardColorOption key={bank.id} bankId={bank.id} onClickOption={handleSelectColor} />
         ))}
       </Style.SelectorInner>
     </Style.Root>
