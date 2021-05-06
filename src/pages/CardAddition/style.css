@@ -73,7 +73,7 @@
   align-items: center;
 }
 
-.card-addition__password-inner > input {
+.card-addition__password-inner__password input {
   width: 48px;
   margin-right: 10px;
 }

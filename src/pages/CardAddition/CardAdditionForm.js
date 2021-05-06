@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   CARD_NUMBER,
   EXPIRATION_DATE,
@@ -10,8 +10,6 @@ import {
   useCardNumbers,
   useControlledInputValue,
   useExpirationDate,
-  usePassword,
-  useVirtualKeyboardInput,
 } from "../../hooks";
 import { getNewId } from "../../utils";
 import { Button, Card, Input, VirtualKeyboardInput } from "../../components";
@@ -40,7 +38,6 @@ const CardAdditionForm = (props) => {
   ] = useCardNumbers([]);
   const [expirationDate, onExpirationDateChange] = useExpirationDate("");
   const [username, onUsernameChange] = useControlledInputValue("");
-  const [password, onPasswordChange] = usePassword(["", ""]);
 
   const onCardInfoSubmit = (event) => {
     event.preventDefault();
@@ -57,7 +54,8 @@ const CardAdditionForm = (props) => {
       expirationDate,
       username,
       secureCode: props.secureCode,
-      password,
+      firstPassword: props.firstPassword,
+      secondPassword: props.secondPassword,
     };
 
     props.onNewCardAdd(card);
@@ -70,7 +68,7 @@ const CardAdditionForm = (props) => {
       EXPIRATION_DATE.LENGTH + FORMAT_CHAR.EXPIRATION_DATE_SEPARATOR.length;
     const usernameCondition = username.length >= USERNAME.MIN_LENGTH;
     const secureCodeCondition = props.secureCode.length === SECURE_CODE_LENGTH;
-    const passwordCondition = password.every((value) => value !== "");
+    const passwordCondition = props.firstPassword && props.secondPassword;
 
     return (
       cardNumbersCondition &&
@@ -82,7 +80,9 @@ const CardAdditionForm = (props) => {
   };
 
   useEffect(() => {
-    props.setCardTypeModalVisibility(verifyCardNumberInputsFullFilled());
+    props.setIsModalVisible({
+      cardTypeSelection: verifyCardNumberInputsFullFilled(),
+    });
   }, [cardNumbers]);
 
   return (
@@ -148,13 +148,16 @@ const CardAdditionForm = (props) => {
           <div className="card-addition__secure-code-inner">
             <div
               onClick={() => {
-                props.setVirtualKeyboardModalVisibility(true);
+                props.setVirtualKeyboardTarget("secureCode");
+                props.setIsModalVisible({
+                  virtualKeyboard: verifyCardNumberInputsFullFilled(),
+                });
               }}
             >
               <VirtualKeyboardInput
                 type="password"
                 isCenter={true}
-                valueByState={props.secureCode}
+                value={props.secureCode}
               />
             </div>
             <div className="card-addition__tool-tip-button">
@@ -168,30 +171,40 @@ const CardAdditionForm = (props) => {
           <span>카드비밀번호</span>
         </label>
         <div className="card-addition__password-inner">
-          <Input
-            type="password"
-            isCenter={true}
-            aria-label="첫번째 비밀번호"
-            min="0"
-            max="9"
-            maxLength="1"
-            data-password-index="0"
-            value={password[0]}
-            onChange={onPasswordChange}
-            required
-          />
-          <Input
-            type="password"
-            isCenter={true}
-            aria-label="두번째 비밀번호"
-            min="0"
-            max="9"
-            maxLength="1"
-            data-password-index="1"
-            value={password[1]}
-            onChange={onPasswordChange}
-            required
-          />
+          <div
+            className="card-addition__password-inner__password"
+            onClick={() => {
+              props.setVirtualKeyboardTarget("firstPassword");
+              props.setIsModalVisible({
+                virtualKeyboard: verifyCardNumberInputsFullFilled(),
+              });
+            }}
+          >
+            <VirtualKeyboardInput
+              type="password"
+              isCenter={true}
+              aria-label="첫번째 비밀번호"
+              value={props.firstPassword}
+              required
+            />
+          </div>
+          <div
+            className="card-addition__password-inner__password"
+            onClick={() => {
+              props.setVirtualKeyboardTarget("secondPassword");
+              props.setIsModalVisible({
+                virtualKeyboard: verifyCardNumberInputsFullFilled(),
+              });
+            }}
+          >
+            <VirtualKeyboardInput
+              type="password"
+              isCenter={true}
+              aria-label="두번째 비밀번호"
+              value={props.secondPassword}
+              required
+            />
+          </div>
           <div className="card-addition__dot-wrapper">
             <span className="card-addition__dot"></span>
           </div>

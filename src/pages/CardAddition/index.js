@@ -1,42 +1,120 @@
 import "./style.css";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { CARD, SECURE_CODE_LENGTH } from "../../constants";
+import {
+  CARD,
+  SECURE_CODE_LENGTH,
+  PASSWORD_INPUT_LENGTH,
+} from "../../constants";
 import { Modal, CardTypeRadio, VirtualKeyboard } from "../../components";
 import CardAdditionForm from "./CardAdditionForm";
 import { useVirtualKeyboardInput } from "../../hooks";
 
 const CardAddition = (props) => {
-  const [isCardTypeModalVisible, setIsCardTypeModalVisible] = useState(false);
-  const [isVirtualKeyboardVisible, setIsVirtualKeyboardVisible] = useState(
-    false
-  );
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
+  const [isModalVisible, setIsModalVisible] = useState({
+    cardTypeSelection: false,
+    virtualKeyboard: false,
+  });
+
+  const [virtualKeyboardInterface, setVirtualKeyboardInterface] = useState({
+    insertInputChar: null,
+    deleteInputChar: null,
+  });
+
   const [
     secureCode,
     insertSecureCode,
     deleteSecureCode,
-  ] = useVirtualKeyboardInput("", SECURE_CODE_LENGTH);
+  ] = useVirtualKeyboardInput({
+    initialValue: "",
+    maxLength: SECURE_CODE_LENGTH,
+    onInputFullfilled: () => {
+      setIsModalVisible({
+        virtualKeyboard: false,
+      });
+    },
+  });
 
-  const onRadioChange = ({ target }) => {
+  const [
+    firstPassword,
+    insertFirstPassword,
+    deleteFirstPassword,
+  ] = useVirtualKeyboardInput({
+    initialValue: "",
+    maxLength: PASSWORD_INPUT_LENGTH,
+    onInputFullfilled: () => {
+      setIsModalVisible({
+        virtualKeyboard: false,
+      });
+    },
+  });
+
+  const [
+    secondPassword,
+    insertSecondPassword,
+    deleteSecondPassword,
+  ] = useVirtualKeyboardInput({
+    initialValue: "",
+    maxLength: PASSWORD_INPUT_LENGTH,
+    onInputFullfilled: () => {
+      setIsModalVisible({
+        virtualKeyboard: false,
+      });
+    },
+  });
+
+  const changeVirtualKeyboardInterface = (key) => {
+    let insertInputChar, deleteInputChar;
+
+    switch (key) {
+      case "secureCode":
+        insertInputChar = insertSecureCode;
+        deleteInputChar = deleteSecureCode;
+        break;
+      case "firstPassword":
+        insertInputChar = insertFirstPassword;
+        deleteInputChar = deleteFirstPassword;
+        break;
+      case "secondPassword":
+        insertInputChar = insertSecondPassword;
+        deleteInputChar = deleteSecondPassword;
+        break;
+      default:
+        return;
+    }
+
+    setVirtualKeyboardInterface({
+      insertInputChar,
+      deleteInputChar,
+    });
+  };
+
+  const onCardTypeRadioSelected = ({ target }) => {
     setCardType(JSON.parse(target.value));
-    setIsCardTypeModalVisible(false);
+    setIsModalVisible({
+      cardTypeSelection: false,
+    });
   };
 
   return (
     <>
       <CardAdditionForm
-        cardType={cardType}
-        setCardTypeModalVisibility={setIsCardTypeModalVisible}
-        setVirtualKeyboardModalVisibility={setIsVirtualKeyboardVisible}
+        setIsModalVisible={setIsModalVisible}
+        setVirtualKeyboardTarget={changeVirtualKeyboardInterface}
         onNewCardAdd={props.onNewCardAdd}
+        cardType={cardType}
         secureCode={secureCode}
+        firstPassword={firstPassword}
+        secondPassword={secondPassword}
       />
 
       <Modal
-        isVisible={isCardTypeModalVisible}
+        isVisible={isModalVisible.cardTypeSelection}
         close={() => {
-          setIsCardTypeModalVisible(false);
+          setIsModalVisible({
+            cardTypeSelection: false,
+          });
         }}
       >
         <form className="card-type-radio-box">
@@ -48,21 +126,23 @@ const CardAddition = (props) => {
                 cardType={value}
                 groupName="card-type"
                 isChecked={value.name === cardType.name}
-                onChange={onRadioChange}
+                onChange={onCardTypeRadioSelected}
               />
             ))}
         </form>
       </Modal>
 
       <Modal
-        isVisible={isVirtualKeyboardVisible}
+        isVisible={isModalVisible.virtualKeyboard}
         close={() => {
-          setIsVirtualKeyboardVisible(false);
+          setIsModalVisible({
+            virtualKeyboard: false,
+          });
         }}
       >
         <VirtualKeyboard
-          insertInputChar={insertSecureCode}
-          deleteInputChar={deleteSecureCode}
+          insertInputChar={virtualKeyboardInterface.insertInputChar}
+          deleteInputChar={virtualKeyboardInterface.deleteInputChar}
         />
       </Modal>
     </>

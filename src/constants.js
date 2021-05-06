@@ -51,6 +51,8 @@ export const USERNAME = {
 
 export const SECURE_CODE_LENGTH = 3;
 
+export const PASSWORD_INPUT_LENGTH = 1;
+
 export const CARD_DESCRIPTION = {
   MIN_LENGTH: 1,
   MAX_LENGTH: 30,
