@@ -187,9 +187,8 @@ const CardAddForm = () => {
           <Styled.Row>
             <Styled.ExpiryDate>
               <InputBox
+                id="expiry-date"
                 value={formattedExpiryDate}
-                isError={isValidExpiryDate}
-                errorMessage={isValidExpiryDate ? MESSAGE.INVALID_EXPIRY_DATE : ''}
                 onChange={expiryDate.onChange}
                 placeholder="MM / YY"
                 labelText="만료일"
@@ -198,11 +197,14 @@ const CardAddForm = () => {
                 inputMode="numeric"
                 pattern={REGEX.EXPIRY_DATE.source}
                 required
+                isError={isValidExpiryDate}
+                errorMessage={isValidExpiryDate ? MESSAGE.INVALID_EXPIRY_DATE : ''}
               />
             </Styled.ExpiryDate>
           </Styled.Row>
           <Styled.Row>
             <InputBox
+              id="owner-name"
               value={ownerName.value}
               onChange={ownerName.onChange}
               labelText="카드 소유자 이름 (선택)"
@@ -214,6 +216,7 @@ const CardAddForm = () => {
             <Styled.CVC>
               <InputBox
                 type="password"
+                id="cvc"
                 pattern={REGEX.NUMBER_WITH_LENGTH(3).source}
                 isError={!isNumeric(CVC.value)}
                 errorMessage={!isNumeric(CVC.value) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''}
@@ -236,12 +239,12 @@ const CardAddForm = () => {
               values={passwordDigits.value}
               onChange={passwordDigits.onChange}
               dotCount={2}
+              inputMode="numeric"
+              required
               isError={!isNumeric(passwordDigits.value.join(''))}
               errorMessage={
                 !isNumeric(passwordDigits.value.join('')) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''
               }
-              inputMode="numeric"
-              required
             />
           </Styled.Row>
           <Styled.Row right>
