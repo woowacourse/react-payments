@@ -1,16 +1,28 @@
 import { useState } from "react";
 
-const useVirtualKeyboardInput = (initialValue, maxLength) => {
+const useVirtualKeyboardInput = ({
+  initialValue,
+  maxLength,
+  onInputFullfilled,
+}) => {
   const [virtualKeyboardInput, setVirtualKeyboardInput] = useState(
     initialValue
   );
 
   const insertInputChar = (value) => {
-    if (virtualKeyboardInput.length === maxLength) {
-      return false;
-    }
+    setVirtualKeyboardInput((prevValue) => {
+      const newValue = prevValue + value;
 
-    setVirtualKeyboardInput((prevValue) => prevValue + value);
+      if (newValue.length > maxLength) {
+        return prevValue;
+      }
+
+      if (newValue.length === maxLength) {
+        onInputFullfilled(prevValue);
+      }
+
+      return newValue;
+    });
 
     return true;
   };
