@@ -9,8 +9,5 @@ const Template = args => <SecurityCodeInput {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  setSecurityCode: () => {},
-  setValidSecurityCode: () => {},
   isValidSecurityCode: true,
-  securityCode: '111',
 };

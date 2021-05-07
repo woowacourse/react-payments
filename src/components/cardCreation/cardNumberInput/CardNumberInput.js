@@ -1,14 +1,18 @@
 import PropTypes from 'prop-types';
-import { memo, useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useContext } from 'react';
 import { COLOR } from '../../../constants/color';
-import { FIRST, SECOND, THIRD, FOURTH } from '../../../constants/inputName';
+import { INPUT_NAME, INPUT_LENGTH } from '../../../constants/input';
 import { NUMBER_REG_EXR } from '../../../constants/regExp';
+import CardDataContext from '../../../context/CardDataContext';
+import { MODAL_TYPE, useBottomModal } from '../../../hooks/useBottomModal';
 import { hasObjectAnyValue } from '../../../utils/object';
 import { printColorBasedOnBoolean } from '../../../utils/printColor';
 import { TransparentInput } from '../../commons/input/TransparentInput';
 import CardSelectionModal from '../cardSelectionModal/CardSelectionModal';
 import VirtualKeyboard from '../virtualKeyboard/VirtualKeyboard';
 import Styled from './CardNumberInput.style';
+
+const { FIRST, SECOND, THIRD, FOURTH } = INPUT_NAME;
 
 const transparentInputStyles = {
   [FIRST]: {
@@ -37,164 +41,172 @@ const transparentInputStyles = {
   },
 };
 
-const FULL_INPUT_LENGTH = 4;
-
-const isValidCardNumberInput = cardNumber => {
-  return Object.values(cardNumber).every(cardNumber => cardNumber.length === FULL_INPUT_LENGTH && !isNaN(cardNumber));
+const isTargetInputCompleted = targetInputValue => {
+  return targetInputValue.length === INPUT_LENGTH.CARD_NUMBER;
 };
 
-const CardNumberInput = memo(
-  ({ cardNumber, selectedCardInfo, setCardNumber, isValidCardNumber, setValidCardNumber, setSelectedCardInfo }) => {
-    const [isCardSelectionModalOpened, setCardSelectionModalOpen] = useState(false);
-    const [isVirtualKeyboardModalOpened, setVirtualKeyboardModalOpen] = useState(false);
-    const [currentInputName, setCurrentInputName] = useState(null);
+const CardNumberInput = ({ isValidCardNumber }) => {
+  const { modalType, isModalOpened, openModal, closeModal } = useBottomModal();
+  const [currentInputName, setCurrentInputName] = useState(null);
+  const {
+    cardInfo: { cardNumber, selectedCardInfo },
+    editCardId,
+    setCardInfo,
+  } = useContext(CardDataContext);
 
-    const $secondInput = useRef(null);
-    const $thirdInput = useRef(null);
-    const $fourthInput = useRef(null);
+  const [$firstInput, $secondInput, $thirdInput, $fourthInput] = [...Array(INPUT_LENGTH.CARD_NUMBER)].map(useRef);
 
-    const isSelectedCardInfo = !!selectedCardInfo.id;
+  const isSelectedCardInfo = !!selectedCardInfo.cardId;
 
-    useEffect(() => {
-      const isValidInput = isValidCardNumberInput(cardNumber) && isSelectedCardInfo;
-      isValidInput && setVirtualKeyboardModalOpen(false);
-      setValidCardNumber(isValidInput);
+  useEffect(() => {
+    const isDoneTyping = isValidCardNumber && isSelectedCardInfo;
 
-      if (currentInputName === THIRD && cardNumber[THIRD].length === FULL_INPUT_LENGTH) {
-        $fourthInput.current.focus();
-      }
-    }, [setValidCardNumber, cardNumber, isSelectedCardInfo, currentInputName]);
+    if (isDoneTyping && modalType === MODAL_TYPE.VIRTUAL_KEYBOARD) {
+      closeModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
+    }
 
-    useEffect(() => {
-      isSelectedCardInfo && $thirdInput.current.focus();
-    }, [isSelectedCardInfo]);
+    if (currentInputName === THIRD && isTargetInputCompleted(cardNumber[THIRD])) {
+      $fourthInput.current.focus();
+    }
+  });
 
-    const handleInputChange = ({ target }) => {
-      if (target.value.length > FULL_INPUT_LENGTH || !NUMBER_REG_EXR.test(target.value)) return;
+  useEffect(() => {
+    if (isSelectedCardInfo && !$thirdInput.current.value) {
+      $thirdInput.current.focus();
+    }
+  }, [isSelectedCardInfo, $thirdInput]);
 
-      setCardNumber(prevState => ({ ...prevState, [target.name]: target.value }));
+  useEffect(() => {
+    if (!editCardId) return;
 
-      if (target.value.length !== FULL_INPUT_LENGTH) return;
+    $secondInput.current.disabled = false;
+  }, [editCardId, $secondInput]);
 
-      if (target.name === FIRST) {
-        $secondInput.current.disabled = false;
-        $secondInput.current.focus();
+  const handleInputChange = ({ target }) => {
+    if (target.value.length > INPUT_LENGTH.CARD_NUMBER || !NUMBER_REG_EXR.test(target.value)) return;
 
-        return;
-      }
+    setCardInfo(prevState => {
+      const copiedCardNumber = { ...cardNumber };
+      copiedCardNumber[target.name] = target.value;
 
-      if (target.name === SECOND) {
-        setCardSelectionModalOpen(true);
-        $secondInput.current.blur();
+      return { ...prevState, cardNumber: copiedCardNumber };
+    });
 
-        return;
-      }
-    };
+    if (!isTargetInputCompleted(target.value)) return;
 
-    const handleInputClick = () => {
-      cardNumber[FIRST].length === FULL_INPUT_LENGTH &&
-        cardNumber[SECOND].length === FULL_INPUT_LENGTH &&
-        !isSelectedCardInfo &&
-        setCardSelectionModalOpen(true);
-    };
+    if (target.name === FIRST) {
+      $secondInput.current.disabled = false;
+      $secondInput.current.focus();
 
-    const handleInputFocus = ({ target }) => {
-      setCardNumber(prevState => ({ ...prevState, [target.name]: '' }));
-      setCurrentInputName(target.name);
-      setVirtualKeyboardModalOpen(true);
-    };
+      return;
+    }
 
-    return (
-      <>
-        <div>
-          <Styled.InputLabelContainer>카드 번호 {isValidCardNumber && '✔️'}</Styled.InputLabelContainer>
-          <Styled.InputContainer
-            validColor={hasObjectAnyValue(cardNumber) && printColorBasedOnBoolean(isValidCardNumber)}
-            onClick={handleInputClick}
-          >
-            <TransparentInput
-              name={FIRST}
-              minLength={FULL_INPUT_LENGTH}
-              maxLength={FULL_INPUT_LENGTH}
-              value={cardNumber[FIRST]}
-              onChange={handleInputChange}
-              styles={transparentInputStyles[FIRST]}
-              autoFocus
-            />
-            {cardNumber[FIRST].length === FULL_INPUT_LENGTH && <Styled.Dash>-</Styled.Dash>}
-            <TransparentInput
-              name={SECOND}
-              minLength={FULL_INPUT_LENGTH}
-              maxLength={FULL_INPUT_LENGTH}
-              value={cardNumber[SECOND]}
-              onChange={handleInputChange}
-              innerRef={$secondInput}
-              styles={transparentInputStyles[SECOND]}
-              disabled
-            />
-            {cardNumber[SECOND].length === FULL_INPUT_LENGTH && <Styled.Dash>-</Styled.Dash>}
-            <TransparentInput
-              name={THIRD}
-              type="password"
-              minLength={FULL_INPUT_LENGTH}
-              maxLength={FULL_INPUT_LENGTH}
-              value={cardNumber[THIRD]}
-              onFocus={handleInputFocus}
-              innerRef={$thirdInput}
-              styles={transparentInputStyles[THIRD]}
-              readOnly
-            />
-            {cardNumber[THIRD].length === FULL_INPUT_LENGTH && <Styled.Dash>-</Styled.Dash>}
-            <TransparentInput
-              name={FOURTH}
-              type="password"
-              minLength={FULL_INPUT_LENGTH}
-              maxLength={FULL_INPUT_LENGTH}
-              value={cardNumber[FOURTH]}
-              onFocus={handleInputFocus}
-              innerRef={$fourthInput}
-              styles={transparentInputStyles[FOURTH]}
-              readOnly
-            />
-          </Styled.InputContainer>
-        </div>
-        {isCardSelectionModalOpened && (
-          <CardSelectionModal
-            closeModal={() => setCardSelectionModalOpen(false)}
-            setSelectedCardInfo={setSelectedCardInfo}
+    if (target.name === SECOND) {
+      openModal(MODAL_TYPE.CARD_SELECTION);
+      $secondInput.current.blur();
+    }
+  };
+
+  const handleInputClick = () => {
+    const isNumberInputCompleted =
+      isTargetInputCompleted(cardNumber[FIRST]) && isTargetInputCompleted(cardNumber[SECOND]);
+
+    if (isNumberInputCompleted && !isSelectedCardInfo) {
+      openModal(MODAL_TYPE.CARD_SELECTION);
+    }
+  };
+
+  const handleInputFocus = ({ target }) => {
+    if (!isSelectedCardInfo) return;
+
+    setCardInfo(prevState => {
+      const copiedCardNumber = { ...cardNumber };
+      copiedCardNumber[target.name] = '';
+
+      return { ...prevState, cardNumber: copiedCardNumber };
+    });
+
+    setCurrentInputName(target.name);
+    openModal(MODAL_TYPE.VIRTUAL_KEYBOARD);
+  };
+
+  return (
+    <>
+      <div>
+        <Styled.InputLabelContainer>카드 번호 {isValidCardNumber && '✔️'}</Styled.InputLabelContainer>
+        <Styled.InputContainer
+          validColor={hasObjectAnyValue(cardNumber) && printColorBasedOnBoolean(isValidCardNumber)}
+          onClick={handleInputClick}
+        >
+          <TransparentInput
+            name={FIRST}
+            minLength={INPUT_LENGTH.CARD_NUMBER}
+            maxLength={INPUT_LENGTH.CARD_NUMBER}
+            value={cardNumber[FIRST]}
+            onChange={handleInputChange}
+            ref={$firstInput}
+            styles={transparentInputStyles[FIRST]}
+            autoFocus
           />
-        )}
-        {isVirtualKeyboardModalOpened && isSelectedCardInfo && (
+          {cardNumber[FIRST].length === INPUT_LENGTH.CARD_NUMBER && <Styled.Dash>-</Styled.Dash>}
+          <TransparentInput
+            name={SECOND}
+            minLength={INPUT_LENGTH.CARD_NUMBER}
+            maxLength={INPUT_LENGTH.CARD_NUMBER}
+            value={cardNumber[SECOND]}
+            onChange={handleInputChange}
+            ref={$secondInput}
+            styles={transparentInputStyles[SECOND]}
+            disabled
+          />
+          {cardNumber[SECOND].length === INPUT_LENGTH.CARD_NUMBER && <Styled.Dash>-</Styled.Dash>}
+          <TransparentInput
+            name={THIRD}
+            type="password"
+            minLength={INPUT_LENGTH.CARD_NUMBER}
+            maxLength={INPUT_LENGTH.CARD_NUMBER}
+            value={cardNumber[THIRD]}
+            onFocus={handleInputFocus}
+            ref={$thirdInput}
+            styles={transparentInputStyles[THIRD]}
+            readOnly
+          />
+          {cardNumber[THIRD].length === INPUT_LENGTH.CARD_NUMBER && <Styled.Dash>-</Styled.Dash>}
+          <TransparentInput
+            name={FOURTH}
+            type="password"
+            minLength={INPUT_LENGTH.CARD_NUMBER}
+            maxLength={INPUT_LENGTH.CARD_NUMBER}
+            value={cardNumber[FOURTH]}
+            onFocus={handleInputFocus}
+            ref={$fourthInput}
+            styles={transparentInputStyles[FOURTH]}
+            readOnly
+          />
+        </Styled.InputContainer>
+      </div>
+      {isModalOpened &&
+        (modalType === MODAL_TYPE.CARD_SELECTION ? (
+          <CardSelectionModal closeModal={closeModal} />
+        ) : (
           <VirtualKeyboard
-            closeModal={() => setVirtualKeyboardModalOpen(false)}
+            closeModal={closeModal}
             currentInputName={currentInputName}
             inputValue={cardNumber}
-            setInputValue={setCardNumber}
-            maxLength={FULL_INPUT_LENGTH}
+            maxLength={INPUT_LENGTH.CARD_NUMBER}
+            targetKey="cardNumber"
           />
-        )}
-      </>
-    );
-  }
-);
+        ))}
+    </>
+  );
+};
 
 CardNumberInput.defaultProps = {
-  cardNumber: { [FIRST]: '', [SECOND]: '', [THIRD]: '', [FOURTH]: '' },
-  selectedCardInfo: { id: null, name: '', color: COLOR.GRAY_100 },
   isValidCardNumber: false,
 };
 
 CardNumberInput.propTypes = {
-  cardNumber: PropTypes.objectOf(PropTypes.string).isRequired,
-  selectedCardInfo: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.oneOf([null])]),
-    name: PropTypes.string,
-    color: PropTypes.string,
-  }).isRequired,
-  setCardNumber: PropTypes.func.isRequired,
   isValidCardNumber: PropTypes.bool.isRequired,
-  setValidCardNumber: PropTypes.func.isRequired,
-  setSelectedCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardNumberInput;

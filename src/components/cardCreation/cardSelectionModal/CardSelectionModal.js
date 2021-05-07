@@ -1,20 +1,25 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import { CARD } from '../../../constants/card';
+import CardDataContext from '../../../context/CardDataContext';
+import { MODAL_TYPE } from '../../../hooks/useBottomModal';
 import { Circle, CIRCLE_SIZE } from '../../commons/circle/Circle';
 import { BottomModal } from '../../commons/modal/BottomModal';
 import Styled from './CardSelectionModal.style';
 
-const CardSelectionModal = ({ closeModal, setSelectedCardInfo }) => {
+const CardSelectionModal = ({ closeModal }) => {
+  const { setCardInfo } = useContext(CardDataContext);
+
   const handleItemClick = card => {
-    setSelectedCardInfo(card);
-    closeModal();
+    setCardInfo(prevState => ({ ...prevState, selectedCardInfo: card }));
+    closeModal(MODAL_TYPE.CARD_SELECTION);
   };
 
   return (
-    <BottomModal closeModal={closeModal}>
+    <BottomModal closeModal={closeModal.bind(null, MODAL_TYPE.CARD_SELECTION)}>
       <Styled.List>
         {Object.values(CARD).map(card => (
-          <Styled.ListItem key={card.id} onClick={() => handleItemClick(card)}>
+          <Styled.ListItem key={card.cardId} onClick={() => handleItemClick(card)}>
             <Circle size={CIRCLE_SIZE.LG} styles={{ backgroundColor: card.color }} />
             <Styled.CardName>{card.name}</Styled.CardName>
           </Styled.ListItem>
@@ -26,7 +31,6 @@ const CardSelectionModal = ({ closeModal, setSelectedCardInfo }) => {
 
 CardSelectionModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
-  setSelectedCardInfo: PropTypes.func.isRequired,
 };
 
 export default CardSelectionModal;

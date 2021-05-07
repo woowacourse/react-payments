@@ -3,11 +3,11 @@ import { useEffect, useRef } from 'react';
 import Styled from './BottomModal.style';
 
 export const BottomModal = ({ closeModal, children, styles, ...props }) => {
-  const modalRef = useRef(null);
+  const $modalRef = useRef(null);
 
   useEffect(() => {
-    modalRef.current.scrollIntoView();
-  });
+    $modalRef.current?.scrollIntoView();
+  }, []);
 
   const handleModalClose = e => {
     if (e.currentTarget === e.target) {
@@ -17,7 +17,7 @@ export const BottomModal = ({ closeModal, children, styles, ...props }) => {
 
   return (
     <Styled.Dimmer onClick={handleModalClose}>
-      <Styled.BottomModal ref={modalRef} {...props} styles={styles}>
+      <Styled.BottomModal ref={$modalRef} {...props} styles={styles}>
         {children}
       </Styled.BottomModal>
     </Styled.Dimmer>
@@ -25,6 +25,6 @@ export const BottomModal = ({ closeModal, children, styles, ...props }) => {
 };
 
 BottomModal.propTypes = {
-  closeModal: PropTypes.func,
+  closeModal: PropTypes.func.isRequired,
   styles: PropTypes.object,
 };
