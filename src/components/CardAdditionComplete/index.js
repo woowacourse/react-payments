@@ -3,7 +3,7 @@ import React from 'react';
 import Card from '../../common/Card';
 import Input from '../../common/Input';
 import { CardAdditionCompleteWrapper } from './index.styles';
-import { PAGE, SUCCESS_MESSAGE } from '../../constants/constant';
+import { PAGE } from '../../constants/constant';
 import ButtonMenu from '../mixin/ButtonMenu';
 import { useContext } from 'react';
 import { CardListContext } from '../../data/context/CardListContext';
@@ -11,8 +11,8 @@ import { PageContext } from '../../data/context/PageContext';
 import { CardContext } from '../../data/context/CardContext';
 
 const CardAdditionComplete = () => {
-  const { cardInfo, setCardInfo } = useContext(CardContext);
-  const { addNewCard } = useContext(CardListContext);
+  const { cardInfo, setCardInfo, cardId } = useContext(CardContext);
+  const { addNewCard, modifyCardNickName } = useContext(CardListContext);
   const { setPage } = useContext(PageContext);
 
   const onChangeNickNameInput = (e) => {
@@ -24,9 +24,10 @@ const CardAdditionComplete = () => {
   const onSubmitAddCard = (e) => {
     e.preventDefault();
 
-    alert(SUCCESS_MESSAGE.NEW_CARD_REGISTER);
+    cardId
+      ? modifyCardNickName(cardId, cardInfo.cardNickName)
+      : addNewCard(cardInfo);
 
-    addNewCard(cardInfo);
     setPage(PAGE.CARD_LIST);
   };
 

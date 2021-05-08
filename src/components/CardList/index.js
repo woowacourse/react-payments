@@ -13,10 +13,11 @@ import Nav from '../mixin/Nav';
 const CardList = () => {
   const { cards, deleteCard } = useContext(CardListContext);
   const { setPage } = useContext(PageContext);
-  const { setCardInfo } = useContext(CardContext);
+  const { setCardInfo, setCardId } = useContext(CardContext);
 
-  const onClickChangeName = (card) => {
+  const onClickChangeName = (key, card) => {
     setCardInfo(card);
+    setCardId(key);
     setPage(PAGE.CARD_COMPLETE);
   };
 
@@ -35,7 +36,7 @@ const CardList = () => {
               <div className='card-menus'>
                 <div
                   className='card-menu change-name'
-                  onClick={() => onClickChangeName(card)}
+                  onClick={() => onClickChangeName(key, card)}
                 >
                   별칭 변경
                 </div>

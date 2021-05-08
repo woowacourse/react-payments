@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export const CardContext = React.createContext();
 
 export const CardProvider = ({ children }) => {
+  const [cardId, setCardId] = useState('');
   const [cardInfo, setCardInfo] = useState({
     cardName: '',
     cardNickName: '',
@@ -26,7 +27,7 @@ export const CardProvider = ({ children }) => {
   });
 
   return (
-    <CardContext.Provider value={{ cardInfo, setCardInfo }}>
+    <CardContext.Provider value={{ cardId, setCardId, cardInfo, setCardInfo }}>
       {children}
     </CardContext.Provider>
   );
