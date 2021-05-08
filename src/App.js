@@ -41,7 +41,7 @@ function App() {
 
   const addNewCard = () => {
     db.collection('cards')
-      .add(newCardInfo)
+      .add(Object.assign(newCardInfo, { modifiedDate: Date.now() }))
       .then(() => {
         resetNewCardInfo();
         setPage(PAGE.CARD_LIST);

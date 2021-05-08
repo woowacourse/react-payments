@@ -10,6 +10,7 @@ const CardList = ({ myCards, setMyCards, setPage, setNewCardInfo }) => {
   const getMyCards = async () => {
     const dbCards = await db
       .collection('cards')
+      .orderBy('modifiedDate', 'desc')
       .get()
       .then((querySnapshot) => {
         const dbCards = {};
@@ -18,7 +19,7 @@ const CardList = ({ myCards, setMyCards, setPage, setNewCardInfo }) => {
       })
       .catch(() => {
         alert(
-          '카드 목록을 불러오는데 실패했습니다. 오류가 지속되면 문의해주시기 바랍니다.'
+          '카드 목록을 불러오는데 실패했습니다. 해당 오류가 지속되면 관리자에게 문의해주시기 바랍니다.'
         );
       });
     setMyCards(dbCards);
@@ -27,6 +28,22 @@ const CardList = ({ myCards, setMyCards, setPage, setNewCardInfo }) => {
   const onClickChangeName = (card) => {
     setNewCardInfo(card);
     setPage(PAGE.CARD_COMPLETE);
+  };
+
+  const onClickDeleteCard = (id) => {
+    setLoading(true);
+    db.collection('cards')
+      .doc(id)
+      .delete()
+      .then(() => {
+        alert('카드가 성공적으로 제거되었습니다.');
+        setLoading(false);
+      })
+      .catch(() => {
+        alert(
+          '카드를 제거하는데 실패했습니다. 해당 오류가 지속되면 관리자에게 문의해주시기 바랍니다.'
+        );
+      });
   };
 
   useEffect(() => {
@@ -49,7 +66,12 @@ const CardList = ({ myCards, setMyCards, setPage, setNewCardInfo }) => {
                   >
                     별칭 변경
                   </div>
-                  <div className='card-menu delete-card'>카드 삭제</div>
+                  <div
+                    className='card-menu delete-card'
+                    onClick={() => onClickDeleteCard(key)}
+                  >
+                    카드 삭제
+                  </div>
                 </div>
               </div>
 
