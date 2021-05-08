@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+
 import { NewCardFormWrapper } from './index.styles';
 
 import CardNumberInput from './CardNumberInput';
@@ -18,16 +18,13 @@ import Modal from '../../../common/Modal';
 import { useContext } from 'react';
 import { PageContext } from '../../../data/context/PageContext';
 import { CardContext } from '../../../data/context/CardContext';
+import { ModalContext } from '../../../data/context/ModalContext';
 
-const NewCardForm = ({
-  onOpenModal,
-  onCloseModal,
-
-  openModalContent,
-  setOpenModalContent,
-}) => {
+const NewCardForm = () => {
   const { cardInfo, setCardInfo } = useContext(CardContext);
   const { setPage } = useContext(PageContext);
+  const { modal, onOpenModal, onCloseModal } = useContext(ModalContext);
+
   const [cardFormFilled, setCardFormFilled] = useState(false);
   const [errorMessage, setErrorMessage] = useState({
     numbers: '',
@@ -102,10 +99,7 @@ const NewCardForm = ({
   }, [cardInfo]);
 
   useEffect(() => {
-    setOpenModalContent({
-      isModalOpen: true,
-      modalContent: MODAL.CARD_COLOR,
-    });
+    onOpenModal(MODAL.CARD_COLOR);
   }, []);
 
   const { numbers, expireDate, user, cvc, password } = cardInfo;
@@ -140,28 +134,18 @@ const NewCardForm = ({
         />
         <ButtonMenu visible={cardFormFilled}>다음</ButtonMenu>
       </NewCardFormWrapper>
-      {openModalContent.isModalOpen && (
+      {modal.isModalOpen && (
         <Modal onCloseModal={onCloseModal}>
           <>
-            {openModalContent.modalContent === MODAL.CARD_COLOR && (
+            {modal.modalContent === MODAL.CARD_COLOR && (
               <CardColor addCardColor={addCardColor} />
             )}
-            {openModalContent.modalContent === MODAL.CVC_HELP && <CVCHelp />}
+            {modal.modalContent === MODAL.CVC_HELP && <CVCHelp />}
           </>
         </Modal>
       )}
     </>
   );
-};
-
-NewCardForm.propTypes = {
-  onOpenModal: PropTypes.func.isRequired,
-  onCloseModal: PropTypes.func.isRequired,
-  openModalContent: PropTypes.shape({
-    isModalOpen: PropTypes.bool,
-    modalContent: PropTypes.string,
-  }),
-  setOpenModalContent: PropTypes.func.isRequired,
 };
 
 export default NewCardForm;
