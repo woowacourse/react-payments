@@ -48,6 +48,12 @@ const CardPasswordInput = ({ cardPassword, setCardPassword, isValidCardPassword 
     }
   }, [pressedKeyList]);
 
+  useEffect(() => {
+    if (Object.values(cardPassword).every(password => password !== '')) {
+      setModalOpen(false);
+    }
+  }, [cardPassword]);
+
   const handleInputChange = ({ target }) => {
     setCardPassword(prevState => ({ ...prevState, [target.name]: target.value }));
   };

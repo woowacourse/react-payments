@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { firestore } from '../../firebase';
 import { Button } from '../../components/commons/button/Button';
 import { Header } from '../../components/commons/header/Header';
 import { CreditCard } from '../../components/commons/card/CreditCard';
@@ -12,41 +13,22 @@ import CardPasswordInput from '../../components/cardCreation/cardPasswordInput/C
 import Styled from './style';
 import { COLOR } from '../../constants/color';
 import { PAGE } from '../../constants/page';
-import { ALERT_MESSAGE } from '../../constants/message';
+import { CARD_NUMBER_INPUT, CARD_PASSWORD_INPUT, EXPIRED_DATE_INPUT } from '../../constants/input';
+import { TargetCardIdContext } from '../../contexts/TargetCardIdContext';
 import {
-  CARD_NUMBER_INPUT,
-  CARD_OWNER_INPUT,
-  CARD_PASSWORD_INPUT,
-  EXPIRED_DATE_INPUT,
-  SECURITY_CODE_INPUT,
-} from '../../constants/input';
-import { isFilledAllNumber } from '../../utils';
+  isValidCardNumberInput,
+  isValidCardOwnerInput,
+  isValidCardPasswordInput,
+  isValidMonthInput,
+  isValidSecurityCodeInput,
+  isValidYearInput,
+} from './validates';
 
-const isValidCardNumberInput = cardNumber => {
-  return Object.values(cardNumber).every(cardNumber => isFilledAllNumber(cardNumber, CARD_NUMBER_INPUT.LENGTH));
-};
-const isValidMonthInput = cardExpiredDate => {
-  const month = Number(cardExpiredDate.month);
-
-  return (
-    EXPIRED_DATE_INPUT.RANGE.MONTH.MIN <= month &&
-    month <= EXPIRED_DATE_INPUT.RANGE.MONTH.MAX &&
-    isFilledAllNumber(cardExpiredDate.month, EXPIRED_DATE_INPUT.LENGTH)
-  );
-};
-const isValidYearInput = cardExpiredDate => {
-  const year = Number(cardExpiredDate.year);
-
-  return (
-    EXPIRED_DATE_INPUT.RANGE.YEAR.MIN <= year && isFilledAllNumber(cardExpiredDate.year, EXPIRED_DATE_INPUT.LENGTH)
-  );
-};
-const isValidCardOwnerInput = cardOwner => cardOwner.length <= CARD_OWNER_INPUT.LENGTH.MAX;
-const isValidSecurityCodeInput = securityCode => isFilledAllNumber(securityCode, SECURITY_CODE_INPUT.LENGTH);
-const isValidCardPasswordInput = cardPassword =>
-  Object.values(cardPassword).every(cardPassword => isFilledAllNumber(cardPassword, CARD_PASSWORD_INPUT.LENGTH));
+const cardListRef = firestore.collection('cardList');
 
 const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
+  const { state, actions } = useContext(TargetCardIdContext);
+
   const [cardOwner, setCardOwner] = useState('');
   const [securityCode, setSecurityCode] = useState('');
   const [cardNumber, setCardNumber] = useState({
@@ -65,6 +47,24 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
   });
   const [selectedCardInfo, setSelectedCardInfo] = useState({ id: null, name: '', color: COLOR.LIGHT_GRAY });
 
+  useEffect(() => {
+    const getTargetData = async () => {
+      const response = await cardListRef.doc(state.targetCardId).get();
+      const { cardNumber, cardExpiredDate, cardOwner, securityCode, cardPassword, selectedCardInfo } = response.data();
+
+      setCardNumber(cardNumber);
+      setCardExpiredDate(cardExpiredDate);
+      setCardOwner(cardOwner);
+      setSecurityCode(securityCode);
+      setCardPassword(cardPassword);
+      setSelectedCardInfo(selectedCardInfo);
+    };
+
+    if (state.targetCardId) {
+      getTargetData();
+    }
+  }, []);
+
   const isSelectedCardInfo = !!selectedCardInfo.id;
   const isValidCardNumber = isValidCardNumberInput(cardNumber) && isSelectedCardInfo;
   const isValidCardExpiredDate = isValidMonthInput(cardExpiredDate) && isValidYearInput(cardExpiredDate);
@@ -78,16 +78,19 @@ const CardCreationPage = ({ setCurrentPage, setNewCardInfo }) => {
   const handleNewCardSubmit = e => {
     e.preventDefault();
 
-    alert(ALERT_MESSAGE.SUCCECC_CARD_CREATE);
-
-    setNewCardInfo({ cardNumber, cardExpiredDate, cardOwner, selectedCardInfo });
+    setNewCardInfo({ cardNumber, cardExpiredDate, cardOwner, securityCode, cardPassword, selectedCardInfo });
     setCurrentPage(PAGE.CARD_CREATION_COMPLETE);
+  };
+
+  const handlePrevIconClick = () => {
+    actions.setTargetCardId('');
+    setCurrentPage(PAGE.CARD_LIST);
   };
 
   return (
     <>
       <Header>
-        <Button onClick={() => setCurrentPage(PAGE.CARD_LIST)} styles={{ marginRight: '18px' }}>
+        <Button onClick={handlePrevIconClick} styles={{ marginRight: '18px' }}>
           <PrevIcon />
         </Button>
         <span>카드 추가</span>

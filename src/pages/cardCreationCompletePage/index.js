@@ -1,11 +1,16 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { firestore } from '../../firebase';
 import Styled from './style';
 import { CreditCard, CARD_SIZE } from '../../components/commons/card/CreditCard';
 import { TransparentInput } from '../../components/commons/input/TransparentInput';
 import { Button } from '../../components/commons/button/Button';
 import { PAGE } from '../../constants/page';
 import { COLOR } from '../../constants/color';
+import { ALERT_MESSAGE } from '../../constants/message';
+import { TargetCardIdContext } from '../../contexts/TargetCardIdContext';
+
+const cardListRef = firestore.collection('cardList');
 
 const transparentInputStyles = {
   textAlign: 'center',
@@ -13,14 +18,44 @@ const transparentInputStyles = {
   color: '#383838',
 };
 
-const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo }) => {
+const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setCardList }) => {
+  const { state, actions } = useContext(TargetCardIdContext);
+
   const [cardNickName, setCardNickName] = useState('');
   const { selectedCardInfo, cardNumber, cardOwner, cardExpiredDate } = newCardInfo;
 
-  const handleNewCardSubmit = e => {
+  useEffect(() => {
+    const getTargetData = async () => {
+      const response = await cardListRef.doc(state.targetCardId).get();
+
+      if (!response.exists) return;
+
+      const { cardNickName } = response.data();
+
+      setCardNickName(cardNickName);
+    };
+
+    if (state.targetCardId) {
+      getTargetData();
+    }
+  }, []);
+
+  const handleNewCardSubmit = async e => {
     e.preventDefault();
 
-    setNewCardInfo(prevState => ({ ...prevState, cardNickName }));
+    const content = { ...newCardInfo, cardNickName };
+
+    const response = state.targetCardId
+      ? await cardListRef.doc(state.targetCardId).update(content) // 기존 정보 수정
+      : await cardListRef.add(content); // 새로 추가
+
+    state.targetCardId ? alert(ALERT_MESSAGE.SUCCECC_CARD_UPDATE) : alert(ALERT_MESSAGE.SUCCECC_CARD_CREATE);
+
+    setCardList(prevState => [
+      ...prevState.filter(card => card.id !== state.targetCardId),
+      { id: state.targetCardId || response.id, content },
+    ]);
+    actions.setTargetCardId('');
     setCurrentPage(PAGE.CARD_LIST);
   };
 
@@ -58,7 +93,7 @@ const CardCreationCompletePage = ({ setCurrentPage, newCardInfo, setNewCardInfo 
 CardCreationCompletePage.propTypes = {
   setCurrentPage: PropTypes.func.isRequired,
   newCardInfo: PropTypes.object.isRequired,
-  setNewCardInfo: PropTypes.func.isRequired,
+  setCardList: PropTypes.func.isRequired,
 };
 
 export default CardCreationCompletePage;
