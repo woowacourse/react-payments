@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import NavWrapper from './index.styles';
 
-const Nav = ({ onClickBackButton, children }) => {
+import { PageContext } from '../../../data/context/PageContext';
+import { PAGE } from '../../../constants/constant';
+
+const Nav = ({ children }) => {
+  const { page, setPage } = useContext(PageContext);
   return (
     <NavWrapper>
-      {onClickBackButton && (
-        <div className='back-button' onClick={onClickBackButton}></div>
+      {page === PAGE.ADD_CARD && (
+        <div
+          className='back-button'
+          onClick={() => setPage(PAGE.CARD_LIST)}
+        ></div>
       )}
 
       <div className='nav-text'>{children}</div>
@@ -15,7 +22,6 @@ const Nav = ({ onClickBackButton, children }) => {
 };
 
 Nav.propTypes = {
-  onClickBackButton: PropTypes.func,
   children: PropTypes.string,
 };
 

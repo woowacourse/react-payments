@@ -4,10 +4,16 @@ import PropTypes from 'prop-types';
 import Card from '../../common/Card';
 import Input from '../../common/Input';
 import { CardAdditionCompleteWrapper } from './index.styles';
-import { SUCCESS_MESSAGE } from '../../constants/constant';
+import { PAGE, SUCCESS_MESSAGE } from '../../constants/constant';
 import ButtonMenu from '../mixin/ButtonMenu';
+import { useContext } from 'react';
+import { CardListContext } from '../../data/context/CardListContext';
+import { PageContext } from '../../data/context/PageContext';
 
-const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
+const CardAdditionComplete = ({ newCardInfo, setNewCardInfo }) => {
+  const { addNewCard } = useContext(CardListContext);
+  const { setPage } = useContext(PageContext);
+
   const onChangeNickNameInput = (e) => {
     const { value } = e.target;
 
@@ -19,7 +25,8 @@ const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
 
     alert(SUCCESS_MESSAGE.NEW_CARD_REGISTER);
 
-    addNewCard();
+    addNewCard(newCardInfo);
+    setPage(PAGE.CARD_LIST);
   };
 
   return (
@@ -66,7 +73,6 @@ CardAdditionComplete.propTypes = {
     }),
   }),
   setNewCardInfo: PropTypes.func,
-  addNewCard: PropTypes.func,
 };
 
 export default CardAdditionComplete;

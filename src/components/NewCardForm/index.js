@@ -15,16 +15,19 @@ import { cardFormErrorMessages } from './cardFormValidator';
 import { ERROR_MESSAGE, INPUT, MODAL, PAGE } from '../../constants/constant';
 import ButtonMenu from '../mixin/ButtonMenu';
 import Modal from '../../common/Modal';
+import { useContext } from 'react';
+import { PageContext } from '../../data/context/PageContext';
 
 const NewCardForm = ({
   cardInfo,
   setNewCardInfo,
   onOpenModal,
   onCloseModal,
-  setPage,
+
   openModalContent,
   setOpenModalContent,
 }) => {
+  const { setPage } = useContext(PageContext);
   const [cardFormFilled, setCardFormFilled] = useState(false);
   const [errorMessage, setErrorMessage] = useState({
     numbers: '',
@@ -173,7 +176,6 @@ NewCardForm.propTypes = {
   }).isRequired,
 
   setNewCardInfo: PropTypes.func.isRequired,
-  setPage: PropTypes.func.isRequired,
   onOpenModal: PropTypes.func.isRequired,
   onCloseModal: PropTypes.func.isRequired,
   openModalContent: PropTypes.shape({
