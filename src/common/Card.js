@@ -89,6 +89,7 @@ const Card = ({ addCard, cardInfo, onClickCard }) => {
       bgColor={CARD[cardName]}
       onClick={onClickCard}
     >
+      {console.log(cardName, numbers, user, expireDate)}
       {addCard ? (
         <div className='add'>+</div>
       ) : (

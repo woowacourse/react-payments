@@ -9,6 +9,7 @@ import Nav from './components/mixin/Nav';
 import Card from './common/Card';
 import { MODAL, PAGE } from './constants/constant';
 import CardList from './components/CardList/index.js';
+import { db } from './data/firebase.js';
 
 function App() {
   const [page, setPage] = useState(PAGE.CARD_LIST);
@@ -16,7 +17,7 @@ function App() {
     isModalOpen: false,
     modalContent: '',
   });
-  const [myCards, setMyCards] = useState([]);
+  const [myCards, setMyCards] = useState({});
   const [newCardInfo, setNewCardInfo] = useState({
     cardName: '',
     cardNickName: '',
@@ -39,9 +40,12 @@ function App() {
   });
 
   const addNewCard = () => {
-    setMyCards([...myCards, newCardInfo]);
-    resetNewCardInfo();
-    setPage(PAGE.CARD_LIST);
+    db.collection('cards')
+      .add(newCardInfo)
+      .then(() => {
+        resetNewCardInfo();
+        setPage(PAGE.CARD_LIST);
+      });
   };
 
   const resetNewCardInfo = () => {
@@ -119,6 +123,7 @@ function App() {
             <Nav>보유 카드</Nav>
             <CardList
               myCards={myCards}
+              setMyCards={setMyCards}
               setPage={setPage}
               setNewCardInfo={setNewCardInfo}
             />
