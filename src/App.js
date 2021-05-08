@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CardAddPage from './page/CardAddPage/CardAddPage';
 import CardRegisterPage from './page/CardRegisterPage/CardRegisterPage';
 import { isNumber } from './utils/validator';
+import { PAGE } from './utils/constant';
 
 function App() {
   const [cardCompany, setCardCompany] = useState({ name: '', color: '' });
@@ -19,7 +20,7 @@ function App() {
     fourth: '',
   });
   const [isModalOpened, setIsModalOpened] = useState(false);
-  const [isAllValid, setIsAllValid] = useState(false);
+  const [pageRouter, setPageRouter] = useState(PAGE.MAIN);
   const [cardName, setCardName] = useState('');
 
   const resetState = () => {
@@ -38,7 +39,7 @@ function App() {
       fourth: '',
     });
     setIsModalOpened(false);
-    setIsAllValid(false);
+    setPageRouter(PAGE.MAIN);
   };
 
   const handleCardNumbersInput = ({ target: { value } }, key) => {
@@ -100,42 +101,48 @@ function App() {
   const handleCardInfoSubmit = (e) => {
     e.preventDefault();
 
-    setIsAllValid(true);
+    setPageRouter(PAGE.REGISTER);
   };
 
-  return (
-    <div className="relative mt-5 mx-auto p-5 max-w-375 bg-white rounded-3xl">
-      {!isAllValid ? (
-        <CardAddPage
-          cardNumbers={cardNumbers}
-          cardCompany={cardCompany}
-          expiration={expiration}
-          ownerName={ownerName}
-          securityCode={securityCode}
-          password={password}
-          isModalOpened={isModalOpened}
-          handleCardNumbersInput={handleCardNumbersInput}
-          handleCardCompany={handleCardCompany}
-          handleExpirationInput={handleExpirationInput}
-          handleOwnerNameInput={handleOwnerNameInput}
-          handleSecurityCodeInput={handleSecurityCodeInput}
-          handlePasswordInput={handlePasswordInput}
-          handleCardInfoSubmit={handleCardInfoSubmit}
-        />
-      ) : (
-        <CardRegisterPage
-          cardCompany={cardCompany}
-          cardNumbers={cardNumbers}
-          expiration={expiration}
-          ownerName={ownerName}
-          cardName={cardName}
-          setIsAllValid={setIsAllValid}
-          resetState={resetState}
-          setCardName={setCardName}
-        />
-      )}
-    </div>
-  );
+  const Page = {
+    CardAddPage: (
+      <CardAddPage
+        cardNumbers={cardNumbers}
+        cardCompany={cardCompany}
+        expiration={expiration}
+        ownerName={ownerName}
+        securityCode={securityCode}
+        password={password}
+        isModalOpened={isModalOpened}
+        handleCardNumbersInput={handleCardNumbersInput}
+        handleCardCompany={handleCardCompany}
+        handleExpirationInput={handleExpirationInput}
+        handleOwnerNameInput={handleOwnerNameInput}
+        handleSecurityCodeInput={handleSecurityCodeInput}
+        handlePasswordInput={handlePasswordInput}
+        handleCardInfoSubmit={handleCardInfoSubmit}
+      />
+    ),
+
+    CardRegisterPage: (
+      <CardRegisterPage
+        cardCompany={cardCompany}
+        cardNumbers={cardNumbers}
+        expiration={expiration}
+        ownerName={ownerName}
+        cardName={cardName}
+        resetState={resetState}
+        setCardName={setCardName}
+      />
+    ),
+  };
+
+  const pageTable = {
+    [PAGE.MAIN]: Page.CardAddPage,
+    [PAGE.REGISTER]: Page.CardRegisterPage,
+  };
+
+  return <div className="relative mt-5 mx-auto p-5 max-w-375 bg-white rounded-3xl">{pageTable[pageRouter]}</div>;
 }
 
 export default App;
