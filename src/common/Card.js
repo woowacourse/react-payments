@@ -6,7 +6,7 @@ import { CARD, COLOR, FONT_SIZE, FONT_WEIGHT } from '../constants/style';
 const AddCard = css`
   .cardMode {
     font-size: ${FONT_SIZE.XXLARGE};
-    color : ${COLOR.PLUS}
+    color: ${COLOR.PLUS};
     width: 100%;
     height: 100%;
     display: flex;
