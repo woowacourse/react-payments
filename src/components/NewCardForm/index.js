@@ -51,7 +51,6 @@ const NewCardForm = ({ cardInfo, setCardInfo }) => {
     },
   }) => {
     const message = messageObject[name](value);
-
     setErrorMessage({
       ...errorMessage,
       [name]: message,
