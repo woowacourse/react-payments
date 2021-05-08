@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CardExpireDateInputWrapper } from './index.styles';
-import Input from '../../../common/Input';
-import { INPUT } from '../../../constants/constant';
+import Input from '../../../../common/Input';
+import { INPUT } from '../../../../constants/constant';
 
 const CardExpireDateInput = ({
   expireDate,

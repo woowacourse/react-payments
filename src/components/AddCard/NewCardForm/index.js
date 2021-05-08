@@ -8,16 +8,16 @@ import CardUserInput from './CardUserInput';
 import CardCVCInput from './CardCVCInput';
 import CardPasswordInput from './CardPasswordInput';
 
-import CardColor from '../../components/ModalContents/CardColor';
-import CVCHelp from '../../components/ModalContents/CVCHelp';
+import CardColor from '../../ModalContents/CardColor';
+import CVCHelp from '../../ModalContents/CVCHelp';
 
 import { cardFormErrorMessages } from './cardFormValidator';
-import { ERROR_MESSAGE, INPUT, MODAL, PAGE } from '../../constants/constant';
-import ButtonMenu from '../mixin/ButtonMenu';
-import Modal from '../../common/Modal';
+import { ERROR_MESSAGE, INPUT, MODAL, PAGE } from '../../../constants/constant';
+import ButtonMenu from '../../mixin/ButtonMenu';
+import Modal from '../../../common/Modal';
 import { useContext } from 'react';
-import { PageContext } from '../../data/context/PageContext';
-import { CardContext } from '../../data/context/CardContext';
+import { PageContext } from '../../../data/context/PageContext';
+import { CardContext } from '../../../data/context/CardContext';
 
 const NewCardForm = ({
   onOpenModal,

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 
 import Nav from '../mixin/Nav';
 import Card from '../../common/Card';
-import NewCardForm from '../NewCardForm';
+import NewCardForm from './NewCardForm';
 import { MODAL } from '../../constants/constant';
 import { CardContext } from '../../data/context/CardContext';
 
