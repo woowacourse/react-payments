@@ -36,12 +36,26 @@ export const CardListProvider = ({ children }) => {
       });
   };
 
+  const deleteCard = (id) => {
+    db.collection('cards')
+      .doc(id)
+      .delete()
+      .then(() => {
+        alert('카드가 성공적으로 제거되었습니다.');
+      })
+      .catch(() => {
+        alert(
+          '카드를 제거하는데 실패했습니다. 해당 오류가 지속되면 관리자에게 문의해주시기 바랍니다.'
+        );
+      });
+  };
+
   useEffect(() => {
     getMyCards();
   }, []);
 
   return (
-    <CardListContext.Provider value={{ cards, addNewCard }}>
+    <CardListContext.Provider value={{ cards, addNewCard, deleteCard }}>
       {children}
     </CardListContext.Provider>
   );

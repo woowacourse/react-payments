@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import Card from '../../common/Card';
 import { PAGE } from '../../constants/constant';
 import { CardListWrapper } from './index.styles';
-import { db } from '../../data/firebase';
+
 import { CardListContext } from '../../data/context/CardListContext';
 import { useContext } from 'react';
 import { PageContext } from '../../data/context/PageContext';
 import { CardContext } from '../../data/context/CardContext';
+import Nav from '../mixin/Nav';
 
 const CardList = () => {
-  const { cards } = useContext(CardListContext);
+  const { cards, deleteCard } = useContext(CardListContext);
   const { setPage } = useContext(PageContext);
   const { setCardInfo } = useContext(CardContext);
 
@@ -20,21 +21,12 @@ const CardList = () => {
   };
 
   const onClickDeleteCard = (id) => {
-    db.collection('cards')
-      .doc(id)
-      .delete()
-      .then(() => {
-        alert('카드가 성공적으로 제거되었습니다.');
-      })
-      .catch(() => {
-        alert(
-          '카드를 제거하는데 실패했습니다. 해당 오류가 지속되면 관리자에게 문의해주시기 바랍니다.'
-        );
-      });
+    deleteCard(id);
   };
 
   return (
     <>
+      <Nav>보유 카드</Nav>
       <CardListWrapper>
         {Object.entries(cards).map(([key, card]) => (
           <div key={key} className='card'>

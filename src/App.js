@@ -2,16 +2,15 @@ import React, { useContext } from 'react';
 import { AppWrapper } from './App.styles.js';
 import GlobalStyles from './global.styles';
 
+import AddCard from './components/AddCard/index.js';
 import CardAdditionComplete from './components/CardAdditionComplete';
-import Nav from './components/mixin/Nav';
-
-import { PAGE } from './constants/constant';
 import CardList from './components/CardList/index.js';
 
+import { PAGE } from './constants/constant';
+
 import { CardListProvider } from './data/context/CardListContext.js';
-import { PageContext } from './data/context/PageContext.js';
 import { CardProvider } from './data/context/CardContext.js';
-import AddCard from './components/AddCard/index.js';
+import { PageContext } from './data/context/PageContext.js';
 
 function App() {
   const { page } = useContext(PageContext);
@@ -24,12 +23,7 @@ function App() {
           <AppWrapper>
             {page === PAGE.ADD_CARD && <AddCard />}
             {page === PAGE.CARD_COMPLETE && <CardAdditionComplete />}
-            {page === PAGE.CARD_LIST && (
-              <>
-                <Nav>보유 카드</Nav>
-                <CardList />
-              </>
-            )}
+            {page === PAGE.CARD_LIST && <CardList />}
           </AppWrapper>
         </CardProvider>
       </CardListProvider>
