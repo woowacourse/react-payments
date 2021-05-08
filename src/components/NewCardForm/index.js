@@ -17,16 +17,16 @@ import ButtonMenu from '../mixin/ButtonMenu';
 import Modal from '../../common/Modal';
 import { useContext } from 'react';
 import { PageContext } from '../../data/context/PageContext';
+import { CardContext } from '../../data/context/CardContext';
 
 const NewCardForm = ({
-  cardInfo,
-  setNewCardInfo,
   onOpenModal,
   onCloseModal,
 
   openModalContent,
   setOpenModalContent,
 }) => {
+  const { cardInfo, setCardInfo } = useContext(CardContext);
   const { setPage } = useContext(PageContext);
   const [cardFormFilled, setCardFormFilled] = useState(false);
   const [errorMessage, setErrorMessage] = useState({
@@ -38,7 +38,7 @@ const NewCardForm = ({
   });
 
   const addCardColor = (name) => {
-    setNewCardInfo({
+    setCardInfo({
       ...cardInfo,
       cardName: name,
     });
@@ -62,11 +62,11 @@ const NewCardForm = ({
     if (message !== '') return;
 
     detail
-      ? setNewCardInfo((prevInfo) => ({
+      ? setCardInfo((prevInfo) => ({
           ...prevInfo,
           [name]: { ...prevInfo[name], [detail]: value },
         }))
-      : setNewCardInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
+      : setCardInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
   };
 
   const cardFormFilledValidation = () => {
@@ -155,27 +155,6 @@ const NewCardForm = ({
 };
 
 NewCardForm.propTypes = {
-  cardInfo: PropTypes.shape({
-    cardName: PropTypes.string,
-    numbers: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-      third: PropTypes.string,
-      fourth: PropTypes.string,
-    }),
-    user: PropTypes.string,
-    expireDate: PropTypes.shape({
-      month: PropTypes.string,
-      year: PropTypes.string,
-    }),
-    cvc: PropTypes.string,
-    password: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-    }),
-  }).isRequired,
-
-  setNewCardInfo: PropTypes.func.isRequired,
   onOpenModal: PropTypes.func.isRequired,
   onCloseModal: PropTypes.func.isRequired,
   openModalContent: PropTypes.shape({

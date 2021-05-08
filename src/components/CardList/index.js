@@ -7,13 +7,15 @@ import { db } from '../../data/firebase';
 import { CardListContext } from '../../data/context/CardListContext';
 import { useContext } from 'react';
 import { PageContext } from '../../data/context/PageContext';
+import { CardContext } from '../../data/context/CardContext';
 
-const CardList = ({ setNewCardInfo }) => {
+const CardList = () => {
   const { cards } = useContext(CardListContext);
   const { setPage } = useContext(PageContext);
+  const { setCardInfo } = useContext(CardContext);
 
   const onClickChangeName = (card) => {
-    setNewCardInfo(card);
+    setCardInfo(card);
     setPage(PAGE.CARD_COMPLETE);
   };
 
