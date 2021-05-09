@@ -1,113 +1,35 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { AppWrapper } from './App.styles.js';
 import GlobalStyles from './global.styles';
 
-import NewCardForm from './components/NewCardForm';
+import AddCard from './components/AddCard/index.js';
 import CardAdditionComplete from './components/CardAdditionComplete';
-import Nav from './components/mixin/Nav';
+import CardList from './components/CardList/index.js';
 
-import Card from './common/Card';
 import { PAGE } from './constants/constant';
 
+import { CardListProvider } from './data/context/CardListContext.js';
+import { CardProvider } from './data/context/CardContext.js';
+import { PageContext } from './data/context/PageContext.js';
+import { ModalProvider } from './data/context/ModalContext.js';
+
 function App() {
-  const [page, setPage] = useState(PAGE.ADD_CARD);
-  const [openModalContent, setOpenModalContent] = useState({
-    isModalOpen: false,
-    modalContent: '',
-  });
-  const [myCards, setMyCards] = useState([]);
-  const [newCardInfo, setNewCardInfo] = useState({
-    cardName: '',
-    cardNickName: '',
-    numbers: {
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    },
-    user: '',
-    expireDate: {
-      month: '',
-      year: '',
-    },
-    cvc: '',
-    password: {
-      first: '',
-      second: '',
-    },
-  });
-
-  const addNewCard = () => {
-    setMyCards([...myCards, newCardInfo]);
-    resetNewCardInfo();
-  };
-
-  const resetNewCardInfo = () => {
-    setNewCardInfo({
-      cardName: '',
-      cardNickName: '',
-      numbers: {
-        first: '',
-        second: '',
-        third: '',
-        fourth: '',
-      },
-      user: '',
-      expireDate: {
-        month: '',
-        year: '',
-      },
-      cvc: '',
-      password: {
-        first: '',
-        second: '',
-      },
-    });
-  };
-
-  const onOpenModal = (modalContent) => {
-    setOpenModalContent({
-      isModalOpen: true,
-      modalContent,
-    });
-  };
-
-  const onCloseModal = () => {
-    setOpenModalContent({
-      isModalOpen: false,
-      modalContent: '',
-    });
-  };
+  const { page } = useContext(PageContext);
 
   return (
     <>
       <GlobalStyles />
-      <AppWrapper>
-        {page === PAGE.ADD_CARD && (
-          <>
-            <Nav />
-            <div className='card-wrapper'>
-              <Card cardInfo={newCardInfo} onOpenModal={onOpenModal} />
-            </div>
-            <NewCardForm
-              cardInfo={newCardInfo}
-              setNewCardInfo={setNewCardInfo}
-              onOpenModal={onOpenModal}
-              onCloseModal={onCloseModal}
-              setPage={setPage}
-              openModalContent={openModalContent}
-              setOpenModalContent={setOpenModalContent}
-            />
-          </>
-        )}
-        {page === PAGE.CARD_COMPLETE && (
-          <CardAdditionComplete
-            newCardInfo={newCardInfo}
-            setNewCardInfo={setNewCardInfo}
-            addNewCard={addNewCard}
-          />
-        )}
-      </AppWrapper>
+      <ModalProvider>
+        <CardListProvider>
+          <CardProvider>
+            <AppWrapper>
+              {page === PAGE.ADD_CARD && <AddCard />}
+              {page === PAGE.CARD_COMPLETE && <CardAdditionComplete />}
+              {page === PAGE.CARD_LIST && <CardList />}
+            </AppWrapper>
+          </CardProvider>
+        </CardListProvider>
+      </ModalProvider>
     </>
   );
 }

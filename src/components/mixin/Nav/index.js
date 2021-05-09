@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import NavWrapper from './index.styles';
 
-const Nav = () => {
+import { PageContext } from '../../../data/context/PageContext';
+import { PAGE } from '../../../constants/constant';
+
+const Nav = ({ children }) => {
+  const { page, setPage } = useContext(PageContext);
+
+  const onClickOpenCardList = () => {
+    setPage(PAGE.CARD_LIST);
+  };
+
   return (
     <NavWrapper>
-      <div className='back-button'></div>
-      <div className='nav-text'>카드 추가</div>
+      {page === PAGE.ADD_CARD && (
+        <div className='back-button' onClick={onClickOpenCardList}></div>
+      )}
+
+      <div className='nav-text'>{children}</div>
     </NavWrapper>
   );
+};
+
+Nav.propTypes = {
+  children: PropTypes.string,
 };
 
 export default Nav;

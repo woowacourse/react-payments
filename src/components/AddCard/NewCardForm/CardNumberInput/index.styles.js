@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLOR, FONT_SIZE } from '../../../constants/constant';
+import { COLOR, FONT_SIZE } from '../../../../constants/constant';
 
 export const CardNumberInputWrapper = styled.div`
   margin-bottom: 10px;

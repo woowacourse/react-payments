@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CardUserInputWrapper } from './index.styles';
-import Input from '../../../common/Input';
-import { INPUT } from '../../../constants/constant';
+import Input from '../../../../common/Input';
+import { INPUT } from '../../../../constants/constant';
 
 const CardUserInput = ({ user, errorMessage, onChangeCardInput }) => {
   return (

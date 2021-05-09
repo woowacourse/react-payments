@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Input from '../../../common/Input';
+import Input from '../../../../common/Input';
 import { CardCVCInputWrapper } from './index.styles';
-import { INPUT, MODAL } from '../../../constants/constant';
+import { INPUT, MODAL } from '../../../../constants/constant';
 
 const CardCVCInput = ({
   cvc,

@@ -1,5 +1,5 @@
-import { ERROR_MESSAGE, INPUT } from '../../constants/constant';
-import { isPositiveInteger } from '../../utils/util';
+import { ERROR_MESSAGE, INPUT } from '../../../constants/constant';
+import { isPositiveInteger } from '../../../utils/util';
 
 const getCardNumberMessage = (value) => {
   if (!isPositiveInteger(value)) {

@@ -1,25 +1,34 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Card from '../../common/Card';
 import Input from '../../common/Input';
 import { CardAdditionCompleteWrapper } from './index.styles';
-import { SUCCESS_MESSAGE } from '../../constants/constant';
+import { PAGE } from '../../constants/constant';
 import ButtonMenu from '../mixin/ButtonMenu';
+import { useContext } from 'react';
+import { CardListContext } from '../../data/context/CardListContext';
+import { PageContext } from '../../data/context/PageContext';
+import { CardContext } from '../../data/context/CardContext';
 
-const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
+const CardAdditionComplete = () => {
+  const { cardInfo, setCardInfo, cardId } = useContext(CardContext);
+  const { addNewCard, modifyCardNickName } = useContext(CardListContext);
+  const { setPage } = useContext(PageContext);
+
   const onChangeNickNameInput = (e) => {
     const { value } = e.target;
 
-    setNewCardInfo({ ...newCardInfo, cardNickName: value });
+    setCardInfo({ ...cardInfo, cardNickName: value });
   };
 
   const onSubmitAddCard = (e) => {
     e.preventDefault();
 
-    alert(SUCCESS_MESSAGE.NEW_CARD_REGISTER);
+    cardId
+      ? modifyCardNickName(cardId, cardInfo.cardNickName)
+      : addNewCard(cardInfo);
 
-    addNewCard();
+    setPage(PAGE.CARD_LIST);
   };
 
   return (
@@ -28,13 +37,13 @@ const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
         <h1>카드등록이 완료되었습니다.</h1>
       </div>
       <div className='form__column card-info'>
-        <Card cardInfo={newCardInfo} />
+        <Card cardInfo={cardInfo} />
       </div>
       <div className='form__column'>
         <Input
           nickNameInput
           label='카드 별칭'
-          value={newCardInfo.cardNickName}
+          value={cardInfo.cardNickName}
           onChange={onChangeNickNameInput}
           placeholder='카드 별칭을 입력해주세요.'
         />
@@ -42,31 +51,6 @@ const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
       <ButtonMenu visible>다음</ButtonMenu>
     </CardAdditionCompleteWrapper>
   );
-};
-
-CardAdditionComplete.propTypes = {
-  newCardInfo: PropTypes.shape({
-    cardName: PropTypes.string,
-    cardNickName: PropTypes.string,
-    numbers: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-      third: PropTypes.string,
-      fourth: PropTypes.string,
-    }),
-    user: PropTypes.string,
-    expireDate: PropTypes.shape({
-      month: PropTypes.string,
-      year: PropTypes.string,
-    }),
-    cvc: PropTypes.string,
-    password: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-    }),
-  }),
-  setNewCardInfo: PropTypes.func,
-  addNewCard: PropTypes.func,
 };
 
 export default CardAdditionComplete;
