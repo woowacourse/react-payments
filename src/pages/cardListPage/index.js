@@ -59,15 +59,17 @@ const CardListPage = () => {
   };
 
   const handleCardDelete = async cardId => {
-    if (window.confirm('해당 카드를 삭제하시겠습니까?')) {
-      try {
-        await cardListRef.current.doc(cardId).delete();
+    if (!window.confirm('해당 카드를 삭제하시겠습니까?')) {
+      return;
+    }
 
-        setCardList(prevState => prevState.filter(card => card.id !== cardId));
-        alert('카드를 삭제하였습니다.');
-      } catch (e) {
-        alert('카드를 삭제하는데 실패했습니다.\n잠시 후 다시 시도해주세요.');
-      }
+    try {
+      await cardListRef.current.doc(cardId).delete();
+
+      setCardList(prevState => prevState.filter(card => card.id !== cardId));
+      alert('카드를 삭제하였습니다.');
+    } catch (e) {
+      alert('카드를 삭제하는데 실패했습니다.\n잠시 후 다시 시도해주세요.');
     }
   };
 
