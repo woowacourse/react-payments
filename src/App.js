@@ -1,74 +1,27 @@
 import React, { useState } from 'react';
-import { CardCompanySelection, SecurityCodeGuide } from './components';
-import { AddCardForm, AddCardComplete } from './pages';
-import { Modal } from './components';
-import { CARD_COMPANY } from './constants';
+import { AddCard, AddCardComplete, CardList } from './pages';
 import { Route, BrowserRouter } from 'react-router-dom';
 
 function App() {
-  const [isModalOpened, setIsModalOpened] = useState(false);
-  const [modalContents, setModalContents] = useState('cardSelection');
+  const [cards, setCards] = useState([]);
 
-  const [serialNumber, setSerialNumber] = useState('');
-  const [cardCompany, setCardCompany] = useState('');
-  const [expirationDate, setExpirationDate] = useState('');
-  const [userName, setUserName] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
-  const [password, setPassword] = useState({ first: '', second: '' });
-  const [cardNickName, setCardNickName] = useState('');
-
-  const onSetModalContents = (name) => {
-    setModalContents(name);
-
-    setIsModalOpened(true);
-  };
-
-  const onSetCardCompany = (name) => {
-    setCardCompany(name);
-    setCardNickName(CARD_COMPANY[name].NAME);
-
-    setIsModalOpened(false);
+  const addCards = (card) => {
+    setCards([...cards, card]);
   };
 
   return (
     <>
       <BrowserRouter>
-        <Route exact path={['/', '/addCardForm']}>
-          <AddCardForm
-            serialNumber={serialNumber}
-            setSerialNumber={setSerialNumber}
-            cardCompany={cardCompany}
-            setCardCompany={setCardCompany}
-            expirationDate={expirationDate}
-            setExpirationDate={setExpirationDate}
-            userName={userName}
-            setUserName={setUserName}
-            securityCode={securityCode}
-            setSecurityCode={setSecurityCode}
-            password={password}
-            setPassword={setPassword}
-            onSetModalContents={onSetModalContents}
-          />
+        <Route exact path="/">
+          <CardList cards={cards} setCards={setCards} />
+        </Route>
+        <Route exact path="/addCard">
+          <AddCard />
         </Route>
         <Route exact path="/addCardComplete">
-          <AddCardComplete
-            serialNumber={serialNumber}
-            cardCompany={cardCompany}
-            expirationDate={expirationDate}
-            userName={userName}
-            cardNickName={cardNickName}
-            setCardNickName={setCardNickName}
-          />
+          <AddCardComplete addCards={addCards} />
         </Route>
       </BrowserRouter>
-      {isModalOpened && (
-        <Modal onCloseModal={() => setIsModalOpened(false)}>
-          {modalContents === 'cardSelection' && (
-            <CardCompanySelection onSetCardCompany={onSetCardCompany}></CardCompanySelection>
-          )}
-          {modalContents === 'questionMark' && <SecurityCodeGuide />}
-        </Modal>
-      )}
     </>
   );
 }

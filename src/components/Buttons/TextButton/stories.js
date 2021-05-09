@@ -6,10 +6,8 @@ export default {
   component: TextButton,
 };
 
-const Template = (args) => <TextButton {...args} />;
+const Template = (args) => <TextButton {...args}>다음</TextButton>;
 
 export const Default = Template.bind({});
 
-Default.args = {
-  text: '다음',
-};
+Default.args = {};
