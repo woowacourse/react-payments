@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { db } from '../firebase';
-import { SUCCESS_MESSAGE } from '../../constants/constant';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '../../constants/constant';
 
 export const CardListContext = React.createContext();
 
@@ -19,9 +19,7 @@ export const CardListProvider = ({ children }) => {
           setCards(dbCards);
         },
         () => {
-          alert(
-            '카드 목록을 불러오는데 실패했습니다. 해당 오류가 지속되면 관리자에게 문의해주시기 바랍니다.'
-          );
+          alert(ERROR_MESSAGE.LOAD_CARD_LIST);
         }
       );
   };
@@ -33,9 +31,7 @@ export const CardListProvider = ({ children }) => {
         alert(SUCCESS_MESSAGE.NEW_CARD_REGISTER);
       })
       .catch(() => {
-        alert(
-          '카드를 추가하는데 실패했습니다. 해당 오류가 지속되면 관리자에게 문의해주시기 바랍니다.'
-        );
+        alert(ERROR_MESSAGE.ADD_CARD);
       });
   };
 
@@ -46,12 +42,10 @@ export const CardListProvider = ({ children }) => {
         cardNickName: nickname,
       })
       .then(() => {
-        alert('카드 별칭을 성공적으로 수정했습니다');
+        alert(SUCCESS_MESSAGE.MODIFY_NICK_NAME);
       })
       .catch(() => {
-        alert(
-          '카드 별칭을 수정하는 실패했습니다. 해당 오류가 지속되면 관리자에게 문의해주시기 바랍니다.'
-        );
+        alert(ERROR_MESSAGE.MODIFY_NICK_NAME);
       });
   };
 
@@ -60,12 +54,10 @@ export const CardListProvider = ({ children }) => {
       .doc(id)
       .delete()
       .then(() => {
-        alert('카드가 성공적으로 제거되었습니다.');
+        alert(SUCCESS_MESSAGE.REMOVE_CARD);
       })
       .catch(() => {
-        alert(
-          '카드를 제거하는데 실패했습니다. 해당 오류가 지속되면 관리자에게 문의해주시기 바랍니다.'
-        );
+        alert(ERROR_MESSAGE.REMOVE_CARD);
       });
   };
 

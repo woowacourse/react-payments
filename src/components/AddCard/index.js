@@ -11,14 +11,15 @@ const AddCard = () => {
   const { cardInfo } = useContext(CardContext);
   const { onOpenModal } = useContext(ModalContext);
 
+  const onClickOpenCardColor = () => {
+    onOpenModal(MODAL.CARD_COLOR);
+  };
+
   return (
     <>
       <Nav>카드 추가</Nav>
       <div className='card-wrapper'>
-        <Card
-          cardInfo={cardInfo}
-          onClickCard={() => onOpenModal(MODAL.CARD_COLOR)}
-        />
+        <Card cardInfo={cardInfo} onClickCard={onClickOpenCardColor} />
       </div>
       <NewCardForm />
     </>

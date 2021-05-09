@@ -7,13 +7,15 @@ import { PAGE } from '../../../constants/constant';
 
 const Nav = ({ children }) => {
   const { page, setPage } = useContext(PageContext);
+
+  const onClickOpenCardList = () => {
+    setPage(PAGE.CARD_LIST);
+  };
+
   return (
     <NavWrapper>
       {page === PAGE.ADD_CARD && (
-        <div
-          className='back-button'
-          onClick={() => setPage(PAGE.CARD_LIST)}
-        ></div>
+        <div className='back-button' onClick={onClickOpenCardList}></div>
       )}
 
       <div className='nav-text'>{children}</div>

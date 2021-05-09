@@ -34,10 +34,20 @@ const ERROR_MESSAGE = {
   MAXIMUM_PASSWORD: '최대 1자리 정수만 입력가능합니다.',
   MAXIMUM_USER: '최대 30자리까지만 입력 가능합니다.',
   MAXIMUM_CVC: '최대 3자리 정수만 입력가능합니다.',
+  LOAD_CARD_LIST:
+    '카드 목록을 불러오는데 실패했습니다. 해당 오류가 지속되면 관리자에게 문의해주시기 바랍니다.',
+  ADD_CARD:
+    '카드를 추가하는데 실패했습니다. 해당 오류가 지속되면 관리자에게 문의해주시기 바랍니다.',
+  MODIFY_NICK_NAME:
+    '카드 별칭을 수정하는 실패했습니다. 해당 오류가 지속되면 관리자에게 문의해주시기 바랍니다.',
+  REMOVE_CARD:
+    '카드를 제거하는데 실패했습니다. 해당 오류가 지속되면 관리자에게 문의해주시기 바랍니다.',
 };
 
 const SUCCESS_MESSAGE = {
   NEW_CARD_REGISTER: '새 카드가 등록되었습니다.',
+  MODIFY_NICK_NAME: '카드 별칭을 성공적으로 수정했습니다',
+  REMOVE_CARD: '카드가 성공적으로 제거되었습니다.',
 };
 
 const INPUT = {
