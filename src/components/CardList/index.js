@@ -15,6 +15,9 @@ const CardList = () => {
   const { setPage } = useContext(PageContext);
   const { setCardInfo, setCardId } = useContext(CardContext);
 
+  const onClickChangePage = () => {
+    setPage(PAGE.ADD_CARD);
+  };
   const onClickChangeName = (key, card) => {
     setCardInfo(card);
     setCardId(key);
@@ -53,7 +56,7 @@ const CardList = () => {
           </div>
         ))}
         <div className='card add-card'>
-          <Card addCard onClickCard={() => setPage(PAGE.ADD_CARD)} />
+          <Card addCard onClickCard={onClickChangePage} />
         </div>
       </CardListWrapper>
     </>
