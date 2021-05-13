@@ -33,7 +33,7 @@ const EditNicknameForm: VFC<Props> = ({ card, history }) => {
 
   return (
     <EditNicknameFormContainer onSubmit={onSubmitNickname}>
-      <header>{'카드등록이 완료되었습니다.'}</header>
+      <header>카드등록이 완료되었습니다.</header>
       <CreditCard
         className="result-card"
         cardBrand={card.cardBrand}
@@ -52,7 +52,7 @@ const EditNicknameForm: VFC<Props> = ({ card, history }) => {
         height="2rem"
       />
       <Button type="submit" position="bottom-right">
-        {'확인'}
+        확인
       </Button>
     </EditNicknameFormContainer>
   );
