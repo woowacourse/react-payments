@@ -14,7 +14,7 @@ const VirtualKeyboardModal: VFC<Props> = ({ onChange, modalClose, value }) => {
   const numbersWithWhiteSpace = [...Array(12)].map((_, idx) => (idx < 10 ? idx.toString() : ''));
   const shuffled = useMemo(() => shuffle(numbersWithWhiteSpace), []);
 
-  const Buttons = () =>
+  const createKeyboardButtons = () =>
     shuffled.map((el, idx) =>
       el ? (
         <Button key={idx} type="button" width="25%" height="25%" onClick={() => onChange(value + el)}>
@@ -27,7 +27,7 @@ const VirtualKeyboardModal: VFC<Props> = ({ onChange, modalClose, value }) => {
 
   return (
     <VirtualKeyboardModalContainer type="bottom" modalClose={modalClose}>
-      {Buttons()}
+      {createKeyboardButtons()}
       <Container inlineBlock width="50%" height="10px" />
       <Button type="button" width="50%" height="25%" onClick={() => onChange(value.substring(0, value.length - 1))}>
         {'<'}
