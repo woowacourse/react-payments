@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { IconButtonContainer } from '../shared/Button';
+import { Z_INDEX_LAYER } from '../../constants/style';
 
 export const CardListContainer = styled.ul`
   height: 75vh;
@@ -24,7 +25,7 @@ export const CardListContainer = styled.ul`
       position: absolute;
       right: -1.5em;
       top: -1.5em;
-      z-index: 2;
+      z-index: ${Z_INDEX_LAYER.MIDDLE_GROUND};
     }
 
     .nickname {

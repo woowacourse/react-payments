@@ -1,5 +1,6 @@
 import { FC, MouseEvent } from 'react';
 import styled, { css } from 'styled-components';
+import { Z_INDEX_LAYER } from '../../../constants/style';
 
 const ModalContainer = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ const ModalContainer = styled.div`
   bottom: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 99;
+  z-index: ${Z_INDEX_LAYER.BACK_GROUND};
 `;
 
 const bottomType = css`
@@ -27,7 +28,7 @@ const ModalInner = styled.div<Pick<Props, 'type'>>`
   width: 100%;
   background: #fff;
   ${({ type }) => (type === 'full' ? fullType : bottomType)}
-  z-index: 999;
+  z-index: ${Z_INDEX_LAYER.MIDDLE_GROUND};
 `;
 
 interface Props {

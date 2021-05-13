@@ -30,7 +30,7 @@ export const requestAddCard = (card: CardForSubmit) => {
 
 export const requestEditNickname = (nickname: string, id: string) => {
   try {
-    API.editById<Card>({ nickname }, id, 'cards');
+    return API.editById<Card>({ nickname }, id, 'cards');
   } catch (error) {
     console.error('API ERROR(requestEditNickname): ' + error);
     throw error;
@@ -39,7 +39,7 @@ export const requestEditNickname = (nickname: string, id: string) => {
 
 export const requestDeleteCard = (id: string) => {
   try {
-    API.deleteById(id, 'cards');
+    return API.deleteById(id, 'cards');
   } catch (error) {
     console.error('API ERROR(requestDeleteCard): ' + error);
     throw error;

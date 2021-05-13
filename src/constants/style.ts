@@ -1,0 +1,5 @@
+export enum Z_INDEX_LAYER {
+  FORE_GROUND = 999,
+  MIDDLE_GROUND = 333,
+  BACK_GROUND = 99,
+}
