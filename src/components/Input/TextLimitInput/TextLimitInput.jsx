@@ -4,7 +4,7 @@ import Input from "../Input";
 
 const cx = classNames.bind(styles);
 
-const TextLimitInput = ({ cardOwnerState, placeholder, labelText, lengthLimit, className = "", onInputChange }) => {
+const TextLimitInput = ({ textLength = 0, placeholder, labelText, lengthLimit, className = "", onInputChange }) => {
   return (
     <div className={`${cx("text-limit-input")} ${className}`}>
       <div className={cx("text-limit-input__top")}>
@@ -12,7 +12,7 @@ const TextLimitInput = ({ cardOwnerState, placeholder, labelText, lengthLimit, c
           {labelText}
         </label>
         <span className={cx("text-limit-input__length-limit")}>
-          {cardOwnerState.length} / {lengthLimit}
+          {textLength} / {lengthLimit}
         </span>
       </div>
       <Input maxLength={lengthLimit} onChange={onInputChange} placeholder={placeholder} textAlign="left" />

@@ -61,7 +61,7 @@ const CardInputContainer = ({ cardState, setCardStateByKey, showCardCompanySelec
         labelText={INPUT_LABEL_TEXT.CARD_OWNER}
         placeholder={CARD_INPUT.OWNER_PLACEHOLDER}
         lengthLimit={CARD_INPUT.OWNER_NAME_LENGTH_LIMIT}
-        cardOwnerState={cardOwnerHook.cardOwnerState}
+        textLength={cardOwnerHook.cardOwnerState.length}
         onInputChange={cardOwnerHook.onCardOwnerInputChange}
       />
       <GuideInput
