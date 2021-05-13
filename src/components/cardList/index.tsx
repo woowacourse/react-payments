@@ -1,13 +1,15 @@
 import { FC } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { useHistory } from 'react-router';
 import AddCardButton from './AddCardButton';
 import { CardListContainer } from './styles';
 
-interface Props extends RouteComponentProps {
+interface Props {
   children: React.ReactNode;
 }
 
-const CardList: FC<Props> = ({ children, history }) => {
+const CardList: FC<Props> = ({ children }) => {
+  const history = useHistory();
+
   return (
     <CardListContainer>
       {children}
@@ -18,4 +20,4 @@ const CardList: FC<Props> = ({ children, history }) => {
   );
 };
 
-export default withRouter(CardList);
+export default CardList;

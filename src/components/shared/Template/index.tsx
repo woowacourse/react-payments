@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
 const TemplateContainer = styled.div`
@@ -20,14 +20,16 @@ const Header = styled.header`
   }
 `;
 
-interface Props extends RouteComponentProps {
+interface Props {
   children: React.ReactNode;
   title?: string;
   hasPreviousPage?: boolean;
   className?: string;
 }
 
-const Template: FC<Props> = ({ className, children, title, hasPreviousPage, history }) => {
+const Template: FC<Props> = ({ className, children, title, hasPreviousPage }) => {
+  const history = useHistory();
+
   return (
     <TemplateContainer className={className}>
       <Header>
@@ -43,4 +45,4 @@ const Template: FC<Props> = ({ className, children, title, hasPreviousPage, hist
   );
 };
 
-export default withRouter(Template);
+export default Template;

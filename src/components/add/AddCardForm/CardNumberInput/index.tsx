@@ -7,8 +7,8 @@ import { ALERT } from '../../../../constants/messages';
 import Input from '../../../shared/Input';
 import { CardNumberState } from '../../AddCardForm';
 import { isValidCardNumber } from '../validator';
-import { RouteComponentProps, withRouter } from 'react-router';
 import VirtualKeyboardInput from '../../../shared/VirtualKeyboardInput';
+import { useHistory } from 'react-router';
 
 interface CardNumberInputProps {
   index: number;
@@ -42,7 +42,7 @@ const CardNumberInput = forwardRef<HTMLInputElement, CardNumberInputProps>(
     )
 );
 
-interface CardNumberInputsProps extends RouteComponentProps {
+interface CardNumberInputsProps {
   cardNumber: CardNumberState;
   setCardNumber: (cardNumber: CardNumberState) => void;
 }
@@ -53,7 +53,8 @@ const isInCardNumberInputRefsIndex = (index: number): index is CardNumberInputRe
   return index >= 0 && index < 3;
 };
 
-const CardNumberInputs: VFC<CardNumberInputsProps> = ({ cardNumber, setCardNumber, history }) => {
+const CardNumberInputs: VFC<CardNumberInputsProps> = ({ cardNumber, setCardNumber }) => {
+  const history = useHistory();
   const secondCardNumberInputRef = useRef<HTMLInputElement>(null);
   const thirdCardNumberInputRef = useRef<HTMLInputElement>(null);
   const fourthCardNumberInputRef = useRef<HTMLInputElement>(null);
@@ -118,4 +119,4 @@ const CardNumberInputs: VFC<CardNumberInputsProps> = ({ cardNumber, setCardNumbe
   );
 };
 
-export default withRouter(CardNumberInputs);
+export default CardNumberInputs;

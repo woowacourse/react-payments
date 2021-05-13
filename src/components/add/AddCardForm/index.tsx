@@ -1,5 +1,5 @@
-import { FocusEvent, FormEvent, useEffect, useState, VFC } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { FormEvent, useEffect, useState, VFC } from 'react';
+import { useHistory } from 'react-router';
 import { CardBrand, ExpDate } from '../../../types';
 import { AddCardFormContainer } from './styles';
 import { useCards } from '../../../context/CardsStateContext';
@@ -28,7 +28,8 @@ interface AddCardFormState {
   password: PasswordState;
 }
 
-const AddCardForm: VFC<RouteComponentProps> = ({ history }) => {
+const AddCardForm: VFC = () => {
+  const history = useHistory();
   const [formState, setFormState] = useState<AddCardFormState>({
     cardBrand: { name: '', color: '' },
     ownerName: '',
@@ -149,4 +150,4 @@ const AddCardForm: VFC<RouteComponentProps> = ({ history }) => {
   );
 };
 
-export default withRouter(AddCardForm);
+export default AddCardForm;

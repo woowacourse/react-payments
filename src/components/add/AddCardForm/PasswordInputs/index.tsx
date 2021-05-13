@@ -1,21 +1,21 @@
 import { ChangeEvent, useRef, VFC } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { useHistory } from 'react-router';
 import { PasswordState } from '..';
 import { LABEL } from '../../../../constants/addCardForm';
 import { ALERT } from '../../../../constants/messages';
 import Container from '../../../shared/Container';
-import Input from '../../../shared/Input';
 import VirtualKeyboardInput from '../../../shared/VirtualKeyboardInput';
 import AddCardInputLabel from '../AddCardInputLabel';
 import { AddCardInputContainer } from '../styles';
 import { isValidPassword } from '../validator';
 
-interface Props extends RouteComponentProps {
+interface Props {
   password: PasswordState;
   setPassword: (password: PasswordState) => void;
 }
 
-const PasswordInputs: VFC<Props> = ({ password, setPassword, history }) => {
+const PasswordInputs: VFC<Props> = ({ password, setPassword }) => {
+  const history = useHistory();
   const secondPasswordInputRef = useRef<HTMLInputElement>(null);
   const [firstDigit, secondDigit] = password;
 
@@ -73,4 +73,4 @@ const PasswordInputs: VFC<Props> = ({ password, setPassword, history }) => {
   );
 };
 
-export default withRouter(PasswordInputs);
+export default PasswordInputs;

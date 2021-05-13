@@ -1,5 +1,5 @@
 import { useEffect, useState, VFC } from 'react';
-import { RouteComponentProps, useParams, withRouter } from 'react-router';
+import { useHistory } from 'react-router';
 import { ALERT } from '../../../constants/messages';
 import { BLACK } from '../../../constants/palette';
 import { useCards } from '../../../context/CardsStateContext';
@@ -9,11 +9,12 @@ import CreditCard from '../../shared/CreditCard';
 import Input from '../../shared/Input';
 import { EditNicknameFormContainer } from './styles';
 
-interface Props extends RouteComponentProps {
+interface Props {
   card: Card;
 }
 
-const EditNicknameForm: VFC<Props> = ({ card, history }) => {
+const EditNicknameForm: VFC<Props> = ({ card }) => {
+  const history = useHistory();
   const [nickname, setNickname] = useState(card.nickname);
   const { editNickname, hasError } = useCards();
 
@@ -58,4 +59,4 @@ const EditNicknameForm: VFC<Props> = ({ card, history }) => {
   );
 };
 
-export default withRouter(EditNicknameForm);
+export default EditNicknameForm;
