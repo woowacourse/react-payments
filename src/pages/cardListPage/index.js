@@ -18,6 +18,10 @@ const CardListPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (!navigator.onLine) {
+          throw new Error('인터넷 연결을 확인해주세요.');
+        }
+
         const response = await cardListRef.current.get();
         const cards = [];
 
@@ -64,6 +68,10 @@ const CardListPage = () => {
     }
 
     try {
+      if (!navigator.onLine) {
+        throw new Error('인터넷 연결을 확인해주세요.');
+      }
+
       await cardListRef.current.doc(cardId).delete();
 
       setCardList(prevState => prevState.filter(card => card.id !== cardId));

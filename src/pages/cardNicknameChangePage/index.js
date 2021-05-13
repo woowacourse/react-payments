@@ -25,6 +25,10 @@ const CardNicknameChangePage = ({ history, location }) => {
     e.preventDefault();
 
     try {
+      if (!navigator.onLine) {
+        throw new Error('인터넷 연결을 확인해주세요.');
+      }
+
       await cardListRef.doc(id).update({ cardNickname: cardNickname });
 
       alert('카드 정보를 수정하였습니다.');

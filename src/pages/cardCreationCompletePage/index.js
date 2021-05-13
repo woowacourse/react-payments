@@ -25,6 +25,10 @@ const CardCreationCompletePage = ({ history, location }) => {
     e.preventDefault();
 
     try {
+      if (!navigator.onLine) {
+        throw new Error('인터넷 연결을 확인해주세요.');
+      }
+
       const cardInfo = {
         cardNumber,
         cardExpiredDate,
