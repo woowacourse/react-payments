@@ -23,13 +23,7 @@ const CVCInput: VFC<Props> = ({ CVC, setCVC }) => {
   return (
     <AddCardInputLabel label={LABEL.CVC} width="50%">
       <AddCardInputContainer>
-        <VirtualKeyboardInput
-          type="password"
-          maxLength={CVC_DIGITS}
-          textCenter
-          value={CVC}
-          onChange={value => onChangeCVC(value)}
-        />
+        <VirtualKeyboardInput type="password" maxLength={CVC_DIGITS} textCenter value={CVC} onChange={onChangeCVC} />
       </AddCardInputContainer>
       <Container className="question-mark">
         <img src={process.env.PUBLIC_URL + '/buttons/question-mark-btn.svg'} alt="cvc/cvv 도움말" />
