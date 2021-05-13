@@ -1,4 +1,4 @@
-@use "../../assets/scss/index.scss" as *;
+@use "../../../assets/scss/index.scss" as *;
 
 .seperated-input-list {
   display: inline-flex;
@@ -16,7 +16,7 @@
   &__input-wrapper {
     width: 100%;
     background-color: $inputBackgroundColor;
-    padding: 10px 40px;
+    padding: 10px 30px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -42,7 +42,7 @@
     @include plain-input;
     position: relative;
     top: -2px;
-    width: 50px;
+    width: 62px;
     height: 30px;
     color: $primaryColor;
     font-size: 20px;
@@ -60,7 +60,6 @@
       top: 1px;
       display: flex;
       font-size: 28px;
-      letter-spacing: -1px;
     }
   }
 }

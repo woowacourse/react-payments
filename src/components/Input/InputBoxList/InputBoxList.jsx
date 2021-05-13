@@ -15,6 +15,7 @@ const InputBoxList = ({ onInputChange, labelText, inputCount = 2, dotCount = 2, 
       onChange={onInputChange}
     />
   ));
+
   const dots = [...Array(dotCount)].map((_, index) => <div key={index} className={cx("input-box-list__dot")}></div>);
 
   return (
