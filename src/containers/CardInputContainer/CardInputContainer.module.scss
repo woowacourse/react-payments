@@ -42,31 +42,3 @@
     margin-bottom: 19px;
   }
 }
-
-@mixin tablet--card-input-container {
-  .card-input-container {
-    &__expiration {
-      width: 137px;
-      margin-bottom: 19px;
-    }
-
-    &__cvc {
-      width: 122px;
-      margin-bottom: 19px;
-    }
-  }
-}
-
-@mixin desktop--card-input-container {
-  .card-input-container {
-    &__expiration {
-      width: 500px;
-      margin-bottom: 19px;
-    }
-
-    &__cvc {
-      width: 122px;
-      margin-bottom: 19px;
-    }
-  }
-}

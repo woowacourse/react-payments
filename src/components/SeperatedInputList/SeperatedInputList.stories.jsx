@@ -1,9 +1,9 @@
 import React from "react";
-import CardNumberInput from "./SeperatedInputList";
+import SeperatedInputList from "./SeperatedInputList";
 
 export default {
   title: "Payments/SeperatedInputList",
-  component: CardNumberInput,
+  component: SeperatedInputList,
   argTypes: {},
 };
 

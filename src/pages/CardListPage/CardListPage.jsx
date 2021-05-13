@@ -1,4 +1,3 @@
-import { useState, useLayoutEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./CardListPage.module.scss";
 import { Link } from "react-router-dom";

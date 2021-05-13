@@ -10,15 +10,15 @@ const Template = (args) => <Card {...args}>확인</Card>;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  cardName: "포코카드",
+  cardCompany: "포코카드",
   backgroundColor: "#547CE4",
-  cardNumberList: [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
+  cardNumber: {
+    firstCardNumber: "1234",
+    secondCardNumber: "1234",
+    thirdCardNumber: "1234",
+    fourthCardNumber: "1234",
+  },
   cardOwner: "SUN",
-  cardExpiration: "04/21",
+  cardExpiration: ["04", "21"],
   cardNickName: "카드 별칭",
 };

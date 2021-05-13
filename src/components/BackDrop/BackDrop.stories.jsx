@@ -1,7 +1,7 @@
 import React from "react";
 
 import BackDrop from "./BackDrop";
-import Card from "../Card/Card"
+import Card from "../Card/Card";
 
 export default {
   title: "Payments/BackDrop",
@@ -10,17 +10,18 @@ export default {
 
 // TEST CODE
 const cardArgs = {
-  cardName: "포코카드",
+  cardCompany: "포코카드",
   backgroundColor: "#547CE4",
-  cardNumberList: [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
+  cardNumber: {
+    firstCardNumber: "1234",
+    secondCardNumber: "1234",
+    thirdCardNumber: "1234",
+    fourthCardNumber: "1234",
+  },
   cardOwner: "SUN",
-  cardExpiration: "04/21",
-}
+  cardExpiration: ["04", "21"],
+  cardNickName: "카드 별칭",
+};
 
 const Template = (args) => (
   <>
@@ -31,5 +32,5 @@ const Template = (args) => (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  zIndex: -1
+  zIndex: -1,
 };

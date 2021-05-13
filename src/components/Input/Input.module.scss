@@ -1,7 +1,12 @@
 @use "../../assets/scss/index.scss" as *;
 
+.input-wrapper {
+  display: inline-block;
+}
+
 .input {
   width: 100%;
+  box-sizing: border-box;
   background-color: $inputBackgroundColor;
   font-size: 18px;
   color: $primaryColor;
