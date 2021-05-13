@@ -15,7 +15,7 @@ import CardExpirationInput from "../../components/CardExpirationInput/CardExpira
 import SeperatedInputList from "../../components/SeperatedInputList/SeperatedInputList";
 import GuideInput from "../../components/Input/GuideInput/GuideInput";
 import TextLimitInput from "../../components/Input/TextLimitInput/TextLimitInput";
-import InputBoxList from "../../components/InputBoxList/InputBoxList";
+import InputBoxList from "../../components/Input/InputBoxList/InputBoxList";
 import { isAllNumberTextLengthCorrect } from "../../utils/cardInputValidation";
 import { getCardCompany } from "../../utils/cardCompany";
 
