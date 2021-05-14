@@ -3,6 +3,7 @@ import PageHost from './components/PageHost';
 import CardList from './components/pages/CardList';
 import CardRegister from './components/pages/CardRegister';
 import CardCompletion from './components/pages/CardCompletion';
+import CardEdit from './components/pages/CardEdit';
 import { getCardByIdRequest } from './request';
 import GlobalStyle from './styles/global';
 
@@ -76,12 +77,7 @@ const App = () => {
           <CardCompletion cardData={currentCardData} handleConfirmPage={handleConfirmPage} />
         )}
         {currentPage === PAGES.EDITING && (
-          <CardCompletion
-            cardData={currentCardData}
-            handleConfirmPage={handleConfirmPage}
-            isEditing={true}
-            cardId={currentCardId}
-          />
+          <CardEdit cardData={currentCardData} cardId={currentCardId} handleConfirmPage={handleConfirmPage} />
         )}
       </PageHost>
     </>
