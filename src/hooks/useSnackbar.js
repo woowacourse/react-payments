@@ -1,17 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
+import SnackbarComponent from '../components/shared/Snackbar';
 
 const useSnackbar = () => {
   const [isSnackbarShowing, setSnackbarShowing] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
-  useEffect(() => {
-    if (isSnackbarShowing) {
-      setTimeout(() => {
-        setSnackbarShowing(false);
-      }, 2000);
-    }
-  }, [isSnackbarShowing]);
+  const openSnackbar = useCallback((message, delay = 2000) => {
+    setSnackbarShowing(true);
+    setSnackbarMessage(message);
+    setTimeout(() => {
+      setSnackbarShowing(false);
+    }, delay);
+  }, []);
 
-  return [isSnackbarShowing, setSnackbarShowing];
+  const Snackbar = () => <SnackbarComponent isShowing={isSnackbarShowing} message={snackbarMessage} />;
+
+  return { Snackbar, openSnackbar };
 };
 
-export { useSnackbar };
+export default useSnackbar;

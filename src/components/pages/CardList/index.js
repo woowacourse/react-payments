@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../shared/Card';
 import ActionSheet from '../../shared/ActionSheet';
-import Snackbar from '../../shared/Snackbar';
-import { useSnackbar } from '../../../hooks/useSnackbar';
+import useSnackbar from '../../../hooks/useSnackbar';
 import { getCardsRequest, deleteCardRequest } from '../../../request';
 import cardSettingImg from '../../../assets/card_setting.png';
 import spinnerGif from '../../../assets/spinner.gif';
@@ -16,7 +15,7 @@ const CardList = (props) => {
   const [isLoaded, setLoaded] = useState(false);
   const [actionSheetOpen, setActionSheetOpen] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState('');
-  const [isSnackbarShowing, setSnackbarShowing] = useSnackbar();
+  const { Snackbar, openSnackbar } = useSnackbar();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,18 +48,19 @@ const CardList = (props) => {
 
     try {
       deleteCardRequest(selectedCardId);
+      openSnackbar('카드를 삭제했습니다.');
     } catch (error) {
       console.error(error);
     }
 
     setActionSheetOpen(false);
-    setSnackbarShowing(true);
 
     try {
       const cardsData = await getCardsRequest();
       setCards(cardsData);
       setLoaded(true);
     } catch (error) {
+      openSnackbar('데이터를 로드하는 데 실패했습니다.');
       console.error(error);
     }
   };
@@ -90,7 +90,7 @@ const CardList = (props) => {
         </Style.CardAddButton>
       </Style.Root>
       <ActionSheet options={actionSheetOptions} isOpen={actionSheetOpen} setActionSheetOpen={setActionSheetOpen} />
-      <Snackbar message={'카드가 삭제되었습니다.'} isShowing={isSnackbarShowing} />
+      <Snackbar />
     </>
   );
 };
