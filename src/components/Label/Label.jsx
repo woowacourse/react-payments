@@ -10,12 +10,12 @@ const Label = ({ className, labelText, size }) => {
   };
 
   return (
-    <div
+    <label
       className={`${cx("label")} ${className}`}
       style={{ fontSize: textSize[size] ? textSize[size] : textSize.small }}
     >
       {labelText}
-    </div>
+    </label>
   );
 };
 

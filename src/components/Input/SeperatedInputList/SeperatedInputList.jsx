@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./SeperatedInputList.module.scss";
 import Input from "../Input.jsx";
+import { Fragment } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -14,9 +15,8 @@ const SeperatedInputList = ({
   inputNames = [],
 }) => {
   const InputList = inputNames.map((inputName, index) => (
-    <>
+    <Fragment key={inputName}>
       <Input
-        key={inputName}
         name={inputName}
         type={index <= inputNames.length - passwordInputCount - 1 ? "text" : "password"}
         className={cx("seperated-input-list__input")}
@@ -27,7 +27,7 @@ const SeperatedInputList = ({
       {index !== inputNames.length - 1 && (
         <span className={cx("seperated-input-list__input-separator")}>{seperator}</span>
       )}
-    </>
+    </Fragment>
   ));
 
   return (

@@ -18,7 +18,7 @@ const CardCompanySelectContainer = ({
   bottomSliderAnimation,
 }) => {
   const cardCompanyHook = useCardCompany(cardState, setCardStateByKey);
-  const onCircleButtonClick = (cardCompany) => {
+  const onCardCompanySelect = (cardCompany) => {
     cardCompanyHook.setCardCompanyState(cardCompany);
     hideCardCompanySelectContainer();
   };
@@ -30,7 +30,7 @@ const CardCompanySelectContainer = ({
       className={cx("card-company-select-container__card-company")}
       buttonText={cardCompany}
       circleColor={getCardColor(cardCompany)}
-      onClick={() => onCircleButtonClick(cardCompany)}
+      onClick={() => onCardCompanySelect(cardCompany)}
     />
   ));
 

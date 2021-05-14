@@ -21,7 +21,7 @@ const AddCardPage = ({ cardState, setCardStateByKey, cardListState, setCardListS
   const toggle = useToggle();
   const cardListHook = useCardList(cardListState, setCardListState);
 
-  const onAddCardButtonClick = () => {
+  const onCardAdd = () => {
     cardListHook.addCardItem({ ...cardState });
     setCardStateEmpty();
   };
@@ -60,7 +60,7 @@ const AddCardPage = ({ cardState, setCardStateByKey, cardListState, setCardListS
       <div className={cx("add-card-page__bottom")}>
         {isAllCardInputCorrect(cardState) && (
           <Link to={PAGE_PATH.COMPLETE}>
-            <Button onClick={onAddCardButtonClick}>{BUTTON_TEXT.NEXT}</Button>
+            <Button onClick={onCardAdd}>{BUTTON_TEXT.NEXT}</Button>
           </Link>
         )}
       </div>

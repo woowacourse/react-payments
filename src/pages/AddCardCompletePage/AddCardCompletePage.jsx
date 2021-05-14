@@ -23,13 +23,13 @@ const AddCardCompletePage = ({ cardListState, setCardListState }) => {
   const [lastAddedCard] = useMemo(() => cardListState.slice(-1), [cardListState]);
   const history = useHistory();
 
-  const onCardNickNameRegisterButtonClick = () => {
+  const onCardNickNameRegister = () => {
     lastAddedCard[STATE_KEY.CARD_NICK_NAME] = cardNickName;
     cardListHook.updateCardItem(lastAddedCard.cardNumber, lastAddedCard);
     history.push(PAGE_PATH.ROOT);
   };
 
-  const onPageMoveButtonClick = () => {
+  const onPageMove = () => {
     if (!appConfirm.confirmNickNameRegistration()) {
       return;
     }
@@ -37,7 +37,7 @@ const AddCardCompletePage = ({ cardListState, setCardListState }) => {
     history.push(PAGE_PATH.ROOT);
   };
 
-  const onCardNickNameInputChange = (event) => {
+  const onCardNickNameChange = (event) => {
     const { value } = event.target;
     setCardNickName(value);
   };
@@ -54,13 +54,13 @@ const AddCardCompletePage = ({ cardListState, setCardListState }) => {
           cardExpiration={lastAddedCard[STATE_KEY.CARD_EXPIRATION]}
           backgroundColor={getCardColor(lastAddedCard[STATE_KEY.CARD_COMPANY])}
         />
-        <BorderInput onInputChange={onCardNickNameInputChange} className={cx("add-card-complete-page__input")} />
+        <BorderInput onInputChange={onCardNickNameChange} className={cx("add-card-complete-page__input")} />
       </main>
       <div className={cx("add-card-complete-page__bottom")}>
         {cardNickName !== "" ? (
-          <Button onClick={onCardNickNameRegisterButtonClick}>확인</Button>
+          <Button onClick={onCardNickNameRegister}>확인</Button>
         ) : (
-          <Button onClick={onPageMoveButtonClick}>넘어가기</Button>
+          <Button onClick={onPageMove}>넘어가기</Button>
         )}
       </div>
     </div>
