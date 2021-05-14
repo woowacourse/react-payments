@@ -28,18 +28,16 @@ const CardsStateProvider: FC<Props> = ({ children }) => {
 
   const addCard = async (card: CardForSubmit) => {
     setHasError(false);
-    let docId = '';
 
     try {
       const { id } = await requestAddCard(card);
 
-      docId = id;
       updateCards();
+      return id;
     } catch (error) {
       setHasError(true);
+      return '';
     }
-
-    return docId;
   };
 
   const deleteCard = async (id: string) => {
