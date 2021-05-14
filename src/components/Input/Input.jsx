@@ -9,6 +9,7 @@ const Input = ({
   placeholder,
   labelText,
   className = "",
+  name,
   onChange,
   maxLength,
 }) => {
@@ -21,6 +22,7 @@ const Input = ({
       )}
       <input
         type={type}
+        name={name}
         maxLength={maxLength}
         className={cx("input")}
         style={{ textAlign }}

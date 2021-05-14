@@ -1,11 +1,35 @@
 import classNames from "classnames/bind";
 import styles from "./SeperatedInputList.module.scss";
 import Input from "../Input.jsx";
-import { STATE_KEY } from "../../../constants";
 
 const cx = classNames.bind(styles);
 
-const SeperatedInputList = ({ labelText, className, onInputChange, maxInputLength = 4 }) => {
+const SeperatedInputList = ({
+  labelText,
+  className,
+  onInputChange,
+  maxInputLength = 4,
+  seperator,
+  passwordInputCount = 0,
+  inputNames = [],
+}) => {
+  const InputList = inputNames.map((inputName, index) => (
+    <>
+      <Input
+        key={inputName}
+        name={inputName}
+        type={index <= inputNames.length - passwordInputCount - 1 ? "text" : "password"}
+        className={cx("seperated-input-list__input")}
+        maxLength={maxInputLength}
+        onChange={onInputChange}
+        required
+      />
+      {index !== inputNames.length - 1 && (
+        <span className={cx("seperated-input-list__input-separator")}>{seperator}</span>
+      )}
+    </>
+  ));
+
   return (
     <div className={`${cx("seperated-input-list")} ${className}`}>
       {!!labelText?.length && (
@@ -13,43 +37,7 @@ const SeperatedInputList = ({ labelText, className, onInputChange, maxInputLengt
           {labelText}
         </label>
       )}
-      <div className={cx("seperated-input-list__input-wrapper")}>
-        <Input
-          name={STATE_KEY.FIRST_CARD_NUMBER}
-          type="text"
-          className={cx("seperated-input-list__input")}
-          maxLength={maxInputLength}
-          onChange={onInputChange}
-          required
-        />
-        <span className={cx("seperated-input-list__input-separator")}></span>
-        <Input
-          name={STATE_KEY.SECOND_CARD_NUMBER}
-          type="text"
-          className={cx("seperated-input-list__input")}
-          maxLength={maxInputLength}
-          onChange={onInputChange}
-          required
-        />
-        <span className={cx("seperated-input-list__input-separator")}></span>
-        <Input
-          name={STATE_KEY.THIRD_CARD_NUMBER}
-          type="password"
-          className={cx("seperated-input-list__input", "seperated-input-list__input--dot")}
-          maxLength={maxInputLength}
-          onChange={onInputChange}
-          required
-        />
-        <span className={cx("seperated-input-list__input-separator")}></span>
-        <Input
-          name={STATE_KEY.FOURTH_CARD_NUMBER}
-          type="password"
-          className={cx("seperated-input-list__input", "seperated-input-list__input--dot")}
-          maxLength={maxInputLength}
-          onChange={onInputChange}
-          required
-        />
-      </div>
+      <div className={cx("seperated-input-list__input-wrapper")}>{InputList}</div>
     </div>
   );
 };

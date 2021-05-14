@@ -16,7 +16,7 @@
   &__input-wrapper {
     width: 100%;
     background-color: $inputBackgroundColor;
-    padding: 10px 30px;
+    padding: 10px 5px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -33,9 +33,13 @@
 
   &__input-separator {
     display: inline-block;
-    width: 6px;
-    height: 2.2px;
-    background-color: $primaryColor;
+    font-weight: bold;
+    &:not(:last-child) {
+      margin-right: 6px;
+    }
+    &:not(:first-child) {
+      margin-left: 6px;
+    }
   }
 
   &__input {

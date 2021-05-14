@@ -11,8 +11,7 @@ import useCardPassword from "../../hooks/cardPasswordHook";
 
 import { INPUT_LABEL_TEXT, CARD_INPUT } from "../../constants";
 
-import CardExpirationInput from "../../components/CardExpirationInput/CardExpirationInput";
-import SeperatedInputList from "../../components/SeperatedInputList/SeperatedInputList";
+import SeperatedInputList from "../../components/Input/SeperatedInputList/SeperatedInputList";
 import GuideInput from "../../components/Input/GuideInput/GuideInput";
 import TextLimitInput from "../../components/Input/TextLimitInput/TextLimitInput";
 import InputBoxList from "../../components/Input/InputBoxList/InputBoxList";
@@ -30,31 +29,35 @@ const CardInputContainer = ({ cardState, setCardStateByKey, showCardCompanySelec
   const cardPasswordHook = useCardPassword(cardState, setCardStateByKey);
 
   useEffect(() => {
-    if (isAllNumberTextLengthCorrect(cardNumberHook.cardNumberState, CARD_INPUT.CARD_NUMBER_TEXT_LENGTH)) {
-      const newCardCompany = getCardCompany(Object.values(cardNumberHook.cardNumberState).join(" "));
-      if (!newCardCompany) {
-        showCardCompanySelectContainer();
-        return;
-      }
-
-      newCardCompany && cardCompanyHook.setCardCompanyState(newCardCompany);
+    if (!isAllNumberTextLengthCorrect(cardNumberHook.cardNumberState, CARD_INPUT.CARD_NUMBER_TEXT_LENGTH)) {
+      return;
     }
+
+    const newCardCompany = getCardCompany(Object.values(cardNumberHook.cardNumberState).join(" "));
+    if (!newCardCompany) {
+      showCardCompanySelectContainer();
+      return;
+    }
+
+    newCardCompany && cardCompanyHook.setCardCompanyState(newCardCompany);
   }, [cardNumberHook.cardNumberState]);
 
   return (
     <form className={cx("card-input-container")}>
       <SeperatedInputList
         className={cx("card-input-container__number")}
-        inputWidth="100%"
         labelText={INPUT_LABEL_TEXT.CARD_NUMBER}
         onInputChange={cardNumberHook.onCardNumberInputChange}
+        inputNames={Object.keys(cardNumberHook.cardNumberState)}
+        seperator={"-"}
+        passwordInputCount={2}
       />
-      <CardExpirationInput
+      <SeperatedInputList
         className={cx("card-input-container__expiration")}
         labelText={INPUT_LABEL_TEXT.CARD_EXPIRATION}
-        monthPlaceholder={CARD_INPUT.EXPIRATION_MONTH_PLACEHOLDER}
-        yearPlaceholder={CARD_INPUT.EXPIRATION_YEAR_PLACEHOLDER}
         onInputChange={cardExpirationHook.onCardExpirationInputChange}
+        inputNames={Object.keys(cardExpirationHook.cardExpirationState)}
+        seperator={"/"}
       />
       <TextLimitInput
         className={cx("card-input-container__owner")}
