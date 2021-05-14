@@ -17,23 +17,19 @@ const Template = args => <CreditCard {...args} />;
 export const Medium = Template.bind({});
 Medium.args = {
   size: CARD_SIZE.MD,
-  content: {
-    cardType: 'XX 카드',
-    cardNumber: ['1111', '2222', '3333', '4444'],
-    cardOwner: 'Name',
-    cardExpiredDate: 'MM / YY',
-    backgroundColor: COLOR.MINT,
-  },
+  cardType: 'XX 카드',
+  cardNumber: ['1111', '2222', '3333', '4444'],
+  cardOwner: 'Name',
+  cardExpiredDate: 'MM / YY',
+  backgroundColor: COLOR.MINT,
 };
 
 export const Large = Template.bind({});
 Large.args = {
   size: CARD_SIZE.LG,
-  content: {
-    cardType: 'XX 카드',
-    cardNumber: ['1111', '2222', '3333', '4444'],
-    cardOwner: 'Name',
-    cardExpiredDate: 'MM / YY',
-    backgroundColor: COLOR.MINT,
-  },
+  cardType: 'XX 카드',
+  cardNumber: ['1111', '2222', '3333', '4444'],
+  cardOwner: 'Name',
+  cardExpiredDate: 'MM / YY',
+  backgroundColor: COLOR.MINT,
 };

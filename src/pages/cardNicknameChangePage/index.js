@@ -13,13 +13,13 @@ const transparentInputStyles = {
   color: '#383838',
 };
 
-const CardCreationCompletePage = ({ history, location }) => {
-  const [cardNickname, setcardNickname] = useState('');
+const CardNicknameChangePage = ({ history, location }) => {
+  const [cardNickname, setcardNickname] = useState(location.cardInfo?.cardNickname);
+  const cardListRef = firestore.collection('cardList');
 
   if (!location.cardInfo) return <Redirect to="/" />;
 
-  const { cardNumber, cardExpiredDate, cardOwner, selectedCardInfo, cardPassword, securityCode } = location.cardInfo;
-  const cardListRef = firestore.collection('cardList');
+  const { id, selectedCardInfo, cardNumber, cardOwner, cardExpiredDate } = location.cardInfo;
 
   const handleNewCardSubmit = async e => {
     e.preventDefault();
@@ -29,28 +29,18 @@ const CardCreationCompletePage = ({ history, location }) => {
         throw new Error('인터넷 연결을 확인해주세요.');
       }
 
-      const cardInfo = {
-        cardNumber,
-        cardExpiredDate,
-        cardOwner,
-        selectedCardInfo,
-        cardPassword,
-        securityCode,
-        cardNickname,
-      };
+      await cardListRef.doc(id).update({ cardNickname: cardNickname });
 
-      await cardListRef.add(cardInfo);
-
-      alert('카드를 추가하였습니다.');
-      history.push({ pathname: '/', cardInfo });
+      alert('카드 정보를 수정하였습니다.');
+      history.push('/');
     } catch {
-      alert('카드 추가에 실패하였습니다.\n잠시 후 다시 시도해주세요.');
+      alert('카드 정보 수정에 실패하였습니다.\n잠시 후 다시 시도해주세요.');
     }
   };
 
   return (
     <>
-      <Styled.Title>카드 등록이 완료되었습니다.</Styled.Title>
+      <Styled.Title>카드 별칭 수정</Styled.Title>
       <CreditCard
         size={CARD_SIZE.LG}
         backgroundColor={selectedCardInfo.color}
@@ -79,4 +69,4 @@ const CardCreationCompletePage = ({ history, location }) => {
   );
 };
 
-export default withRouter(CardCreationCompletePage);
+export default withRouter(CardNicknameChangePage);

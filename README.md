@@ -15,6 +15,10 @@
 ✔️ `재사용 가능한 Component`를 직접 작성하고 사용합니다.  
 ✔️ `Controlled` & `Uncontrolled Components`에 입각하여 `Form`을 핸들링합니다.
 
+## 🌎 [데모페이지](https://yungo1846-react-payments.netlify.app/)
+
+<img src="./src/assets/payments2.gif">
+
 ## 📝 Requirements
 
 ### 공통 요구사항
@@ -49,27 +53,14 @@
 - [x] [이전 버튼], [다음 버튼]을 누르면 원하는 페이지로 갈 수 있다.
 - [x] 현재 페이지 이름을 헤더에 출력한다.
 
-### Step2
+## 🥦 step2
 
-> 권장 마감기한 - **5월 4일 화요일**
+### 메인 페이지
 
-### 필수 요구사항
-
-- [ ] `Controlled` & `Uncontrolled Components`에 입각하여 `Form` 핸들링
-- [ ] `Context API`를 활용해 전역 상태 관리 및 계층 재구성
-
-#### 필수 구현
-
-- [ ] 카드 목록
-
-### 심화 요구사항
-
-- [ ] `Storybook` 스냅샷 테스트
-- [ ] 비동기 통신
-  - [ ] 다양한 도구를 활용 (예 JSON Server, Strapi 등등)
-  - [ ] 등록된 카드 정보를 CRUD 합니다.
-- [ ] 나열된 카드 클릭시 `카드 추가 확인` 화면 재활용
-  - [ ] 별칭 수정 가능
+- [x] 카드 등록이 완료된 카드들을 보여준다.
+- [x] 카드를 누르면 수정과 삭제 버튼이 보여진다.
+  - [x] 수정 버튼을 누르면 카드의 별칭을 수정할 수 있다.
+  - [x] 삭제 버튼을 누르면 카드를 삭제할 수 있다.
 
 ## 👏 Contributing
 

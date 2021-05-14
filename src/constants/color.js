@@ -10,4 +10,5 @@ export const COLOR = {
   ORANGE: '#F37D3B',
   YELLOW: '#FBCD58',
   MINT: '#04C09E',
+  DARK_GRAY: '#575757',
 };
