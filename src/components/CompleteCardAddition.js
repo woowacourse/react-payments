@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Card from "../stories/Card";
 import SimpleButton from "../stories/SimpleButton";
-import { CARD_SIZE } from "../stories/constants/card";
+import { CARD_SIZE } from "../constants";
 import { CARD_DESCRIPTION, FORMAT_CHAR } from "../constants";
 
-const CompleteCardAddition = (props) => {
-  const { cardType, cardNumbers, expirationDate, username } = props.card;
+const CompleteCardAddition = ({ card, onCardAdditionComplete }) => {
+  const { cardType, cardNumbers, expirationDate, username } = card;
   const [cardDescription, setCardDescription] = useState("");
 
   const onCardDescriptionChange = ({ target }) => {
@@ -16,12 +16,12 @@ const CompleteCardAddition = (props) => {
   const onDescriptionSubmit = (event) => {
     event.preventDefault();
 
-    const card = {
+    const completedCard = {
       description: cardDescription,
-      ...props.card,
+      ...card,
     };
 
-    props.onCardAdditionComplete(card);
+    onCardAdditionComplete(completedCard);
   };
 
   return (
@@ -56,6 +56,7 @@ CompleteCardAddition.propTypes = {
   onCardAdditionComplete: PropTypes.func.isRequired,
   card: PropTypes.shape({
     cardType: PropTypes.shape({
+      id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
       color: PropTypes.string.isRequired,
     }),
@@ -66,7 +67,7 @@ CompleteCardAddition.propTypes = {
     }),
     username: PropTypes.string.isRequired,
     secureCode: PropTypes.string.isRequired,
-    passwords: PropTypes.arrayOf(PropTypes.string).isRequired,
+    password: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
 };
 

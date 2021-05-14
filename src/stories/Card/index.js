@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { CARD_SIZE } from "../constants/card";
+import { CARD_SIZE } from "../../constants";
 import "./style.css";
 import "../style/background.css";
 

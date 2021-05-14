@@ -66,3 +66,18 @@ export const CARD_DESCRIPTION = {
   MIN_LENGTH: 1,
   MAX_LENGTH: 30,
 };
+
+export const UNKNOWN_CARD_TYPE = { id: "", name: "", color: "gray" };
+
+export const CARD_SIZE = {
+  SMALL: "small",
+  MEDIUM: "medium",
+  LARGE: "large",
+};
+
+export const MESSAGE = {
+  ERROR: {
+    POST_CARD_LIST: "카드를 등록할 수 없습니다. 다시 한 번 시도해주세요.",
+    DELETE_CARD_LIST: "카드를 삭제할 수 없습니다. 다시 한 번 시도해주세요.",
+  }
+}

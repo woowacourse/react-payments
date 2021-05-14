@@ -7,6 +7,7 @@ import Home from "./Home";
 
 import router from "../router";
 import { PAGE } from "../constants";
+import { postCardList} from "../APIs";
 
 const App = () => {
   const [page, setPage] = useState({
@@ -14,7 +15,6 @@ const App = () => {
     headerText: PAGE.HOME.HEADER_TEXT,
     prevPage: "",
   });
-  const [cardList, setCardList] = useState([]);
   const [processingCard, setProcessingCard] = useState({});
 
   const routeTo = (pageId) => {
@@ -30,15 +30,22 @@ const App = () => {
     routeTo(PAGE.COMPLETE_CARD_ADDITION.ID);
   };
 
-  const onCardAdditionComplete = (card) => {
-    setCardList((prevCardList) => [...prevCardList, card]);
+  const onCardAdditionComplete = async (card) => {
+    const { isSucceeded, message } = await postCardList(card);
+
+    if (!isSucceeded) {
+      alert(message);
+
+      return;
+    }
+
     routeTo(PAGE.HOME.ID);
   };
 
   const getMainComponent = (pageId) => {
     switch (pageId) {
       case PAGE.HOME.ID:
-        return <Home cardList={cardList} routeTo={routeTo} />;
+        return <Home routeTo={routeTo} />;
       case PAGE.CARD_ADDITION.ID:
         return <CardAddition onCardInfoSubmit={onCardInfoSubmit} />;
       case PAGE.COMPLETE_CARD_ADDITION.ID:

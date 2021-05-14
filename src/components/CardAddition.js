@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Card from "../stories/Card";
-import { CARD, CARD_SIZE } from "../stories/constants/card";
+import { CARD_SIZE, UNKNOWN_CARD_TYPE } from "../constants";
 import Input from "../stories/Input";
 import Modal from "../stories/Modal";
-import CardTypeRadio from "../stories/CardTypeRadio";
 import SimpleButton from "../stories/SimpleButton";
 import useCardNumbers from "../hooks/useCardNumbers";
 import useExpirationDate from "../hooks/useExpirationDate";
@@ -19,6 +18,7 @@ import {
   SECURE_CODE_LENGTH,
   USERNAME,
 } from "../constants";
+import CardTypeSelector from "./CardTypeSelector";
 
 const formatCardNumbers = (numbers) => {
   const [firstValue, secondValue, ...restValues] = numbers;
@@ -39,7 +39,7 @@ const formatExpirationDate = (expirationDate) => {
 
 const CardAddition = (props) => {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
-  const [cardType, setCardType] = useState(CARD.UNKNOWN);
+  const [cardType, setCardType] = useState(UNKNOWN_CARD_TYPE);
   const [
     cardNumbers,
     cardNumbersInputRef,
@@ -88,17 +88,18 @@ const CardAddition = (props) => {
   const onCardInfoSubmit = (event) => {
     event.preventDefault();
 
-    if (cardType.name === CARD.UNKNOWN.name) {
+    if (cardType.id === UNKNOWN_CARD_TYPE.id) {
       alert("카드 회사를 선택해주세요.");
       return;
     }
+
     const card = {
       cardType,
       cardNumbers,
       expirationDate,
       username,
       secureCode,
-      passwords,
+      password: Number(passwords.join("")),
     };
 
     props.onCardInfoSubmit(card);
@@ -232,19 +233,10 @@ const CardAddition = (props) => {
       </div>
       {isVisibleModal && (
         <Modal onClick={onModalClick}>
-          <form className="card-type-radio-box">
-            {Object.values(CARD)
-              .filter((value) => value.name !== "")
-              .map((value) => (
-                <CardTypeRadio
-                  key={value.name + value.color}
-                  cardType={value}
-                  groupName="card-type"
-                  isChecked={value.name === cardType.name}
-                  onChange={onRadioChange}
-                />
-              ))}
-          </form>
+          <CardTypeSelector
+            cardTypeName={cardType.name}
+            onRadioChange={onRadioChange}
+          />
         </Modal>
       )}
     </>

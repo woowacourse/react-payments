@@ -1,12 +1,41 @@
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
-import { PAGE } from "../constants";
-import Card from "../stories/Card";
-import { CARD_SIZE } from "../stories/constants/card";
-import AddCardButton from "../stories/AddCardButton";
 
-const Home = (props) => {
-  const { routeTo, cardList } = props;
+import Card from "../stories/Card";
+import AddCardButton from "../stories/Button/AddCardButton";
+import { getCardList, deleteCardList } from "../APIs";
+import { PAGE } from "../constants";
+import { CARD_SIZE } from "../constants";
+import Icofont from "react-icofont";
+
+const Home = ({ routeTo }) => {
+  const [cardList, setCardList] = useState([]);
+
+  const setCardListByFetch = useCallback(async () => {
+    const fetchedCardList = await getCardList();
+    
+    setCardList(fetchedCardList);
+  }, [setCardList]);
+
+  const onDeleteButtonClick = async (id) => {
+    if (!window.confirm("정말로 카드를 삭제하시겠습니까?")) {
+      return;
+    }
+
+    const { isSucceeded, message } = await deleteCardList(id);
+
+    if (!isSucceeded) {
+      alert(message);
+
+      return;
+    }
+
+    setCardListByFetch();
+  };
+
+  useEffect(() => {
+    setCardListByFetch();
+  }, [setCardListByFetch]);
 
   return (
     <>
@@ -22,6 +51,9 @@ const Home = (props) => {
                 size={CARD_SIZE.SMALL}
               />
               <h3>{card.description}</h3>
+              <button type="button" onClick={() => onDeleteButtonClick(card.id)}>
+                <Icofont icon="close-circled" />
+              </button>
             </li>
           ))}
         </ul>
@@ -33,23 +65,6 @@ const Home = (props) => {
 
 Home.propTypes = {
   routeTo: PropTypes.func.isRequired,
-  cardList: PropTypes.arrayOf(
-    PropTypes.shape({
-      cardType: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        color: PropTypes.string.isRequired,
-      }),
-      cardNumbers: PropTypes.arrayOf(PropTypes.string).isRequired,
-      expirationDate: PropTypes.shape({
-        month: PropTypes.string.isRequired,
-        year: PropTypes.string.isRequired,
-      }),
-      username: PropTypes.string.isRequired,
-      secureCode: PropTypes.string.isRequired,
-      passwords: PropTypes.arrayOf(PropTypes.string).isRequired,
-      description: PropTypes.string,
-    })
-  ),
 };
 
 export default Home;

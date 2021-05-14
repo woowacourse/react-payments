@@ -7,6 +7,7 @@ const CardTypeRadio = ({
   cardType,
   groupName,
   isChecked = false,
+  value,
   onChange,
 }) => {
   return (
@@ -14,7 +15,7 @@ const CardTypeRadio = ({
       <input
         type="radio"
         name={groupName}
-        value={JSON.stringify(cardType)}
+        value={value}
         checked={isChecked}
         onChange={onChange}
       />
@@ -33,5 +34,6 @@ CardTypeRadio.propTypes = {
   }).isRequired,
   groupName: PropTypes.string.isRequired,
   isChecked: PropTypes.bool,
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };

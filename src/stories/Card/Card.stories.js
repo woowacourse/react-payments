@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./index";
-import { CARD, CARD_SIZE } from "../constants/card";
+import { CARD_SIZE } from "../../constants";
 
 export default {
   title: "Example/Card",
@@ -13,7 +13,10 @@ const Template = (args) => <Card {...args} />;
 export const Unknown = Template.bind({});
 
 Unknown.args = {
-  cardType: CARD.UNKNOWN,
+  cardType: {
+    name: "",
+    color: "gray",
+  },
   cardNumbers: ["1234", "1234", "1234", "1234"],
   username: "",
   expirationDate: "",
@@ -22,7 +25,10 @@ Unknown.args = {
 
 export const Small = Template.bind({});
 Small.args = {
-  cardType: CARD.POCO,
+  cardType: {
+    name: "포코 카드",
+    color: "red",
+  },
   cardNumbers: ["1234", "1234", "1234", "1234"],
   username: "요술곤듀 밍키 요술곤듀 밍키요술곤듀 밍키요술곤듀 밍키",
   expirationDate: "04/20",
@@ -31,7 +37,10 @@ Small.args = {
 
 export const Medium = Template.bind({});
 Medium.args = {
-  cardType: CARD.POCO,
+  cardType: {
+    name: "포코 카드",
+    color: "red",
+  },
   cardNumbers: ["1234", "1234", "1234", "1234"],
   username: "요술곤듀 밍키",
   expirationDate: "04/20",
@@ -40,7 +49,10 @@ Medium.args = {
 
 export const Large = Template.bind({});
 Large.args = {
-  cardType: CARD.POCO,
+  cardType: {
+    name: "포코 카드",
+    color: "red",
+  },
   cardNumbers: ["1234", "1234", "1234", "1234"],
   username: "요술곤듀 밍키",
   expirationDate: "04/20",
