@@ -12,5 +12,5 @@ const Template = (args) => <CardRegister {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   setCardData: () => {},
-  handleGoNext: () => {},
+  handleMovePage: () => {},
 };

@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import Card from '../../shared/Card';
 import Button from '../../shared/Button';
 import { updateCardRequest } from '../../../request';
+import PAGES from '../../../constants/pages';
 import * as Style from './style';
 
 const CardEdit = (props) => {
   const {
     cardData: { bankId, cardNumbers, expirationDate, ownerName, cardAlias },
-    handleConfirmPage,
+    handleMovePage,
     cardId,
   } = props;
 
@@ -30,7 +31,7 @@ const CardEdit = (props) => {
       console.error(error);
     }
 
-    handleConfirmPage();
+    handleMovePage(PAGES.LIST);
   };
 
   return (
@@ -56,7 +57,7 @@ const CardEdit = (props) => {
 };
 
 CardEdit.propTypes = {
-  handleConfirmPage: PropTypes.func.isRequired,
+  handleMovePage: PropTypes.func.isRequired,
   cardId: PropTypes.string.isRequired,
 };
 

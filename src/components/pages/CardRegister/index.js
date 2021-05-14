@@ -5,10 +5,11 @@ import Button from '../../shared/Button';
 import CardRegisterForm from '../../units/CardRegisterForm';
 import CardSelector from '../../units/CardSelector';
 import { FRAGMENT_INDEX, DATE_TYPE } from '../../../constants/constants';
+import PAGES from '../../../constants/pages';
 import * as Style from './style';
 
 const CardRegister = (props) => {
-  const { setCardData, handleGoNext } = props;
+  const { setCardData, handleMovePage } = props;
 
   const { FIRST, SECOND, THIRD, FOURTH } = FRAGMENT_INDEX;
   const { MONTH, YEAR } = DATE_TYPE;
@@ -36,7 +37,7 @@ const CardRegister = (props) => {
     event.preventDefault();
 
     setCardData({ bankId, cardNumbers, expirationDate, ownerName, secureCode, cardPassword });
-    handleGoNext();
+    handleMovePage(PAGES.COMPLETION);
   };
 
   return (
@@ -74,7 +75,7 @@ const CardRegister = (props) => {
 
 CardRegister.propTypes = {
   setCardData: PropTypes.func.isRequired,
-  handleGoNext: PropTypes.func.isRequired,
+  handleMovePage: PropTypes.func.isRequired,
 };
 
 export default CardRegister;

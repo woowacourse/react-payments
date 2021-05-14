@@ -17,5 +17,5 @@ Default.args = {
     expirationDate: { month: '04', year: '21' },
     ownerName: 'COLLIN',
   },
-  handleConfirmPage: () => {},
+  handleMovePage: () => {},
 };

@@ -5,39 +5,14 @@ import CardRegister from './components/pages/CardRegister';
 import CardCompletion from './components/pages/CardCompletion';
 import CardEdit from './components/pages/CardEdit';
 import { getCardByIdRequest } from './request';
+import PAGES from '../src/constants/pages';
 import GlobalStyle from './styles/global';
-
-const PAGES = {
-  LIST: {
-    title: '보유카드',
-    hasBackButton: false,
-  },
-  REGISTER: {
-    title: '카드추가',
-    hasBackButton: true,
-  },
-  COMPLETION: {
-    title: '',
-    hasBackButton: false,
-  },
-  EDITING: {
-    title: '',
-    hasBackButton: true,
-  },
-};
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState(PAGES.LIST);
-  const [currentCardId, setCurrentCardId] = useState('');
-  const [currentCardData, setCurrentCardData] = useState({});
-
-  const handleConfirmPage = () => {
-    if (currentPage === PAGES.REGISTER) {
-      setCurrentPage(PAGES.COMPLETION);
-    } else if (currentPage === PAGES.COMPLETION || currentPage === PAGES.EDITING) {
-      setCurrentPage(PAGES.LIST);
-    }
-  };
+  const [registeringCardData, setRegisteringCardData] = useState({});
+  const [editingCardId, setEditingCardId] = useState('');
+  const [editingCardData, setEditingCardData] = useState({});
 
   const handleAddCard = () => {
     setCurrentPage(PAGES.REGISTER);
@@ -47,15 +22,19 @@ const App = () => {
     try {
       const cardData = await getCardByIdRequest(cardId);
 
-      setCurrentCardId(cardData.id);
-      setCurrentCardData(cardData.data());
+      setEditingCardId(cardData.id);
+      setEditingCardData(cardData.data());
       setCurrentPage(PAGES.EDITING);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleGoBack = () => {
+  const handleMovePage = (page) => {
+    setCurrentPage(page);
+  };
+
+  const handleGoBack = (page) => {
     if (currentPage === PAGES.REGISTER) {
       setCurrentPage(PAGES.LIST);
     }
@@ -71,13 +50,13 @@ const App = () => {
       >
         {currentPage === PAGES.LIST && <CardList handleAddCard={handleAddCard} handleGoUpdate={handleGoUpdate} />}
         {currentPage === PAGES.REGISTER && (
-          <CardRegister setCardData={setCurrentCardData} handleGoNext={handleConfirmPage} />
+          <CardRegister setCardData={setRegisteringCardData} handleMovePage={handleMovePage} />
         )}
         {currentPage === PAGES.COMPLETION && (
-          <CardCompletion cardData={currentCardData} handleConfirmPage={handleConfirmPage} />
+          <CardCompletion cardData={registeringCardData} handleMovePage={handleMovePage} />
         )}
         {currentPage === PAGES.EDITING && (
-          <CardEdit cardData={currentCardData} cardId={currentCardId} handleConfirmPage={handleConfirmPage} />
+          <CardEdit cardData={editingCardData} cardId={editingCardId} handleMovePage={handleMovePage} />
         )}
       </PageHost>
     </>

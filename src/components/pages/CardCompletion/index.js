@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import Card from '../../shared/Card';
 import Button from '../../shared/Button';
 import { addCardRequest } from '../../../request';
+import PAGES from '../../../constants/pages';
 import * as Style from './style';
 
 const CardCompletion = (props) => {
   const {
     cardData: { bankId, cardNumbers, expirationDate, ownerName },
-    handleConfirmPage,
+    handleMovePage,
   } = props;
 
   const [aliasInput, setAliasInput] = useState('');
@@ -29,7 +30,7 @@ const CardCompletion = (props) => {
       console.error(error);
     }
 
-    handleConfirmPage();
+    handleMovePage(PAGES.LIST);
   };
 
   return (
@@ -61,7 +62,7 @@ CardCompletion.propTypes = {
     expirationDate: PropTypes.object.isRequired,
     ownerName: PropTypes.string.isRequired,
   }),
-  handleConfirmPage: PropTypes.func.isRequired,
+  handleMovePage: PropTypes.func.isRequired,
 };
 
 export default CardCompletion;

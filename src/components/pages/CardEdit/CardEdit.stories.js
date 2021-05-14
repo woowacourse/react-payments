@@ -18,6 +18,6 @@ Default.args = {
     ownerName: 'COLLIN',
     cardAlias: '법카',
   },
-  handleConfirmPage: () => {},
+  handleMovePage: () => {},
   cardId: 1,
 };

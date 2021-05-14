@@ -25,6 +25,7 @@ const CardList = (props) => {
         setLoaded(true);
       } catch (error) {
         console.error(error);
+        setLoaded(true);
       }
     };
     fetchData();
