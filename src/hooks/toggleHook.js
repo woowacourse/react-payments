@@ -14,7 +14,7 @@ const useToggle = () => {
       fadeAnimation: "fade-in",
       moveAnimation: "move-up",
     }));
-  }, [setState]);
+  }, []);
 
   const setUntoggled = useCallback(() => {
     setState((state) => ({
@@ -31,7 +31,7 @@ const useToggle = () => {
         moveAnimation: "move-down",
       }));
     }, 350);
-  }, [setState]);
+  }, []);
 
   return {
     state,

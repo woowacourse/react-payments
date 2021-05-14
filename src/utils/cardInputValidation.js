@@ -1,16 +1,22 @@
 import { STATE_KEY, CARD_INPUT } from "../constants";
 import { isCardCompany } from "./cardCompany";
 
-export const isAllNumberTextLengthCorrect = (numberText, length) => {
-  if (numberText instanceof Object) {
-    return Object.values(numberText).every((value) => value.length === length);
+export const isAllTextFilledInList = (numberTextList, length) => {
+  if (!numberTextList instanceof Array) {
+    return;
   }
-  if (numberText instanceof Array) {
-    return numberText.every((value) => value.length === length);
-  }
+
+  return numberTextList.every((value) => value.length === length);
 };
 
-// 이제 여기 Object 도 받을 수 있게 하거나 cardNumber 검사로 퉁쳐야함
+export const isAllTextFilledInObject = (numberTextObject, length) => {
+  if (!numberTextObject instanceof Object) {
+    return;
+  }
+
+  return Object.values(numberTextObject).every((value) => value.length === length);
+};
+
 export const isNumberText = (text) => {
   return !Number.isNaN(Number(text));
 };
@@ -18,13 +24,13 @@ export const isNumberText = (text) => {
 export const isCorrectCardNumber = (cardNumber) => {
   return (
     Object.values(cardNumber).every((value) => isNumberText(value)) &&
-    isAllNumberTextLengthCorrect(cardNumber, CARD_INPUT.CARD_NUMBER_TEXT_LENGTH)
+    isAllTextFilledInObject(cardNumber, CARD_INPUT.CARD_NUMBER_TEXT_LENGTH)
   );
 };
 
 export const isCorrectCardExpiration = (cardExpiration) => {
   return (
-    isAllNumberTextLengthCorrect(cardExpiration, CARD_INPUT.CARD_EXPIRATION_TEXT_LENGTH) &&
+    isAllTextFilledInObject(cardExpiration, CARD_INPUT.CARD_EXPIRATION_TEXT_LENGTH) &&
     cardExpiration.expirationMonth.match(/0[1-9]|1[0-2]/) &&
     cardExpiration.expirationYear.match(/2[0-9]/)
   );

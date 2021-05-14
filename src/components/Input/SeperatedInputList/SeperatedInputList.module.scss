@@ -3,6 +3,7 @@
 .seperated-input-list {
   display: inline-flex;
   flex-direction: column;
+  position: relative;
 
   &__label {
     display: block;
@@ -69,5 +70,19 @@
 
   &__input-block-wrapper {
     display: inline-block;
+  }
+
+  &__placeholder {
+    position: absolute;
+    font-weight: bold;
+    color: $placeholderColor;
+    padding: 2px;
+    width: 100%;
+    text-align: center;
+    z-index: 0;
+    background-color: $inputBackgroundColor;
+    pointer-events: none;
+    bottom: 20%;
+    align-self: center;
   }
 }

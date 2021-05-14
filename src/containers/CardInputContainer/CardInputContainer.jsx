@@ -15,7 +15,7 @@ import SeperatedInputList from "../../components/Input/SeperatedInputList/Sepera
 import GuideInput from "../../components/Input/GuideInput/GuideInput";
 import TextLimitInput from "../../components/Input/TextLimitInput/TextLimitInput";
 import InputBoxList from "../../components/Input/InputBoxList/InputBoxList";
-import { isAllNumberTextLengthCorrect } from "../../utils/cardInputValidation";
+import { isAllTextFilledInObject } from "../../utils/cardInputValidation";
 import { getCardCompany } from "../../utils/cardCompany";
 
 const cx = classNames.bind(styles);
@@ -29,7 +29,7 @@ const CardInputContainer = ({ cardState, setCardStateByKey, showCardCompanySelec
   const cardPasswordHook = useCardPassword(cardState, setCardStateByKey);
 
   useEffect(() => {
-    if (!isAllNumberTextLengthCorrect(cardNumberHook.cardNumberState, CARD_INPUT.CARD_NUMBER_TEXT_LENGTH)) {
+    if (!isAllTextFilledInObject(cardNumberHook.cardNumberState, CARD_INPUT.CARD_NUMBER_TEXT_LENGTH)) {
       return;
     }
 
@@ -57,7 +57,9 @@ const CardInputContainer = ({ cardState, setCardStateByKey, showCardCompanySelec
         labelText={INPUT_LABEL_TEXT.CARD_EXPIRATION}
         onInputChange={cardExpirationHook.onCardExpirationInputChange}
         inputNames={Object.keys(cardExpirationHook.cardExpirationState)}
+        placeholder={"MM / YY"}
         seperator={"/"}
+        maxInputLength={2}
       />
       <TextLimitInput
         className={cx("card-input-container__owner")}

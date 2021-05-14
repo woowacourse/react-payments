@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./SeperatedInputList.module.scss";
 import Input from "../Input.jsx";
-import { Fragment } from "react";
+import { Fragment, useRef } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -12,6 +12,7 @@ const SeperatedInputList = ({
   maxInputLength = 4,
   seperator,
   passwordInputCount = 0,
+  placeholder,
   inputNames = [],
 }) => {
   const InputList = inputNames.map((inputName, index) => (
@@ -30,6 +31,16 @@ const SeperatedInputList = ({
     </Fragment>
   ));
 
+  const placeholderEl = useRef(null);
+
+  const onInputWrapperClick = (event) => {
+    if (!event.currentTarget.contains(document.activeElement) || !placeholderEl.current) {
+      return;
+    }
+
+    placeholderEl.current.style.display = "none";
+  };
+
   return (
     <div className={`${cx("seperated-input-list")} ${className}`}>
       {!!labelText?.length && (
@@ -37,7 +48,14 @@ const SeperatedInputList = ({
           {labelText}
         </label>
       )}
-      <div className={cx("seperated-input-list__input-wrapper")}>{InputList}</div>
+      <div className={cx("seperated-input-list__input-wrapper")} onClick={onInputWrapperClick}>
+        {InputList}
+      </div>
+      {placeholder && (
+        <span className={cx("seperated-input-list__placeholder")} ref={placeholderEl}>
+          {placeholder}
+        </span>
+      )}
     </div>
   );
 };
