@@ -4,7 +4,7 @@ import styles from "./Card.module.scss";
 const cx = classNames.bind(styles);
 
 const initialCardNumber = { firstCardNumber: "", secondCardNumber: "", thirdCardNumber: "", fourthCardNumber: "" };
-const initialCardExpiration = {expirationMonth: "", expirationYear: ""}
+const initialCardExpiration = { expirationMonth: "", expirationYear: "" };
 
 // TODO : 배경색에 따라 글자 색이 바뀌도록 만들기
 const Card = ({
@@ -17,6 +17,9 @@ const Card = ({
   className,
 }) => {
   const { firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber } = cardNumber;
+
+  const cardExpirationText =
+    Object.values(cardExpiration).every((value) => value !== "") && Object.values(cardExpiration).join(" / ");
 
   return (
     <div className={cx("card-wrapper", className)}>
@@ -59,7 +62,7 @@ const Card = ({
         </div>
         <div className={cx("card__bottom")}>
           <span className={cx("card__owner")}>{cardOwner}</span>
-          <span className={cx("card__expiration")}>{Object.values(cardExpiration).every(value => value !== "") && Object.values(cardExpiration).join(" / ")}</span>
+          <span className={cx("card__expiration")}>{cardExpirationText}</span>
         </div>
       </div>
       {!!cardNickName?.length && <label className={cx("card-nickname")}>{cardNickName}</label>}
