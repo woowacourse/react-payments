@@ -1,12 +1,11 @@
+import PAGE from '../../constants/pages';
 import Template from '../shared/Template';
 
 import CardList from './CardList';
 
-const TITLE = '보유카드';
-
 const CardListPage = () => {
   return (
-    <Template title={TITLE}>
+    <Template title={PAGE.CARD_LIST.NAME}>
       <CardList />
     </Template>
   );

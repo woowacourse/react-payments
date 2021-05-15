@@ -1,24 +1,26 @@
 import { useEffect, useState, VFC } from 'react';
-import { fetchCards } from '../../../firebase/api';
+import { Link } from 'react-router-dom';
+import PAGE from '../../../constants/pages';
+import { fetchCards, StoredCard } from '../../../firebase/api';
 import { Card } from '../../../types';
 import CreditCard from '../../shared/CreditCard';
 import AddCardButton from './AddCardButton';
 import { CardListContainer, NickName } from './styles';
 
 const CardList: VFC = () => {
-  const [cards, setCards] = useState<Omit<Card, 'password' | 'CVC'>[]>([]);
+  const [cards, setCards] = useState<StoredCard[]>([]);
 
   useEffect(() => {
     (async () => {
       const responseData = await fetchCards();
-      setCards(responseData);
+      setCards(responseData as StoredCard[]);
     })();
   }, []);
 
   return (
     <CardListContainer>
       {cards.map(card => (
-        <li key={card.cardNumber}>
+        <li key={card.id}>
           <CreditCard
             cardBrand={card.cardBrand}
             ownerName={card.ownerName}
@@ -30,7 +32,9 @@ const CardList: VFC = () => {
         </li>
       ))}
       <li>
-        <AddCardButton />
+        <Link to={PAGE.ADD_CARD.PATH}>
+          <AddCardButton />
+        </Link>
       </li>
     </CardListContainer>
   );

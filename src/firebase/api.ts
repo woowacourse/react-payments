@@ -3,16 +3,22 @@ import fireStore from './firebase';
 
 const COLLECTION = { CARDS: 'cards' };
 
+export interface StoredCard extends Card {
+  id: string;
+}
+
 export const fetchCards = async () => {
   try {
-    let cards: Card[] = [];
+    let cards: StoredCard[] = [];
     const docs = await fireStore.collection(COLLECTION.CARDS).get();
 
-    docs.forEach(querySnapshot => cards.push(querySnapshot.data() as Card));
+    docs.forEach(querySnapshot =>
+      cards.push({ id: querySnapshot.id, ...(querySnapshot.data() as Card) } as StoredCard)
+    );
 
     return cards;
   } catch (e) {
-    return [];
+    return {};
   }
 };
 
