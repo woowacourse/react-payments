@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
-import { Input, Label, Text } from '../../../../../components';
-import { MAX_OWNER_NAME_LENGTH } from '../../../../../constants';
+import { Input, Label, Text } from '../../../../components';
+import { MAX_OWNER_NAME_LENGTH } from '../../../../constants';
 
 export const OwnerNameInput = forwardRef((props, ref) => {
   const { initialOwnerName, ownerName, setOwnerName, setIsOwnerNameFilled } = props;

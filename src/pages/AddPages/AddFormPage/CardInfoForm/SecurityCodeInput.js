@@ -1,6 +1,6 @@
-import { Button, Input, Label } from '../../../../../components';
-import { SECURITY_CODE_LENGTH } from '../../../../../constants';
-import cvcImage from '../../../../../images/cvc.png';
+import { Button, Input, Label } from '../../../../components';
+import { SECURITY_CODE_LENGTH } from '../../../../constants';
+import cvcImage from '../../../../images/cvc.png';
 
 export const SecurityCodeInput = (props) => {
   const { securityCode, setSecurityCode, refToBeFocusedNext } = props;

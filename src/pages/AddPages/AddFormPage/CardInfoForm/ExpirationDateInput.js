@@ -1,9 +1,10 @@
 import { useRef, forwardRef } from 'react';
-import { Container, Input, Label, Text } from '../../../../../components';
-import { MONTH, YEAR, EXPIRATION_DATE_LENGTH } from '../../../../../constants';
+import { Container, Input, Label, Text } from '../../../../components';
+import { MONTH, YEAR, EXPIRATION_DATE_LENGTH } from '../../../../constants';
 
 export const ExpirationDateInput = forwardRef((props, monthRef) => {
   const { expirationDate, setExpirationDate, refToBeFocusedNext } = props;
+
   const yearRef = useRef();
   const nextRef = {
     month: yearRef,

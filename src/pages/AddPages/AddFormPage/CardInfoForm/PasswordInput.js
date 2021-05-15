@@ -1,6 +1,6 @@
 import { useRef, forwardRef } from 'react';
-import { Input, Label } from '../../../../../components';
-import { FIRST, SECOND, PASSWORD_UNIT_LENGTH } from '../../../../../constants';
+import { Input, Label } from '../../../../components';
+import { FIRST, SECOND, PASSWORD_UNIT_LENGTH } from '../../../../constants';
 
 export const PasswordInput = forwardRef((props, firstRef) => {
   const { password, setPassword } = props;
