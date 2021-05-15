@@ -3,12 +3,15 @@ export default function reducer(state, action) {
     case 'ADD_CARD':
       return { cards: state.cards.concat(action.card) };
     case 'EDIT_NICKNAME':
-      const targetCard = state.cards.find((card) => card.id === action.id);
-      targetCard.nickname = action.nickname;
+      return {
+        cards: state.cards.map((card) => {
+          if (card.id === action.id) {
+            card.nickname = action.nickname;
+          }
 
-      const newCards = state.cards.filter((card) => card.id !== action.id).concat(targetCard);
-
-      return { cards: newCards };
+          return card;
+        }),
+      };
     default:
       return state;
   }

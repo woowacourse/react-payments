@@ -1,9 +1,9 @@
 import React from 'react';
-import AddCardComplete from '.';
+import EditCardNickname from '.';
 
 export default {
-  title: 'Page/AddCardComplete',
-  component: AddCardComplete,
+  title: 'Page/EditCardNickname',
+  component: EditCardNickname,
   argTypes: {
     expirationDate: {
       control: {
@@ -19,7 +19,7 @@ export default {
   },
 };
 
-const Template = (args) => <AddCardComplete {...args} />;
+const Template = (args) => <EditCardNickname {...args} />;
 
 export const Default = Template.bind({});
 

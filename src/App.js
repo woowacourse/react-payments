@@ -3,7 +3,7 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import { CardsContext } from './cardsContext';
 import reducer from './reducer';
 import { PATH } from './constants';
-import { AddCardForm, AddCardComplete, CardList } from './pages';
+import { AddCardForm, EditCardNickname, CardList } from './pages';
 
 const initialState = {
   cards: [
@@ -31,8 +31,8 @@ function App() {
         <Route exact path={PATH.ADD_CARD_FORM} render={() => <AddCardForm cards={cards} />} />
         <Route
           exact
-          path={`${PATH.ADD_CARD_COMPLETE}/:id`}
-          render={() => <AddCardComplete cards={cards} />}
+          path={`${PATH.EDIT_CARD_NICKNAME}/:id`}
+          render={() => <EditCardNickname cards={cards} />}
         />
       </BrowserRouter>
     </CardsContext.Provider>

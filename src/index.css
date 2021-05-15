@@ -35,6 +35,11 @@ ul {
   list-style: none;
 }
 
+input {
+  border: none;
+  outline: none;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
@@ -79,6 +84,10 @@ code {
   top: 0;
 }
 
+.bg-transparent {
+  background-color: transparent;
+}
+
 .bg-color-white {
   background-color: #ffffff;
 }
@@ -105,6 +114,10 @@ code {
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.pt-3 {
+  padding-top: 0.75rem;
 }
 
 header {
@@ -145,14 +158,56 @@ header {
   margin-bottom: 1.25rem;
 }
 
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+.mb-20 {
+  margin-bottom: 5rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.font-weight-400 {
+  font-weight: 400;
+}
+
 .font-weight-700 {
   font-weight: 700;
+}
+
+.font-color-gray-700 {
+  color: #383838;
 }
 
 .font-color-gray-500 {
   color: #575757;
 }
 
+.text-l {
+  font-size: large;
+}
+
+.text-xl {
+  font-size: x-large;
+}
+
 .text-xxl {
   font-size: xx-large;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.bottom-right-button {
+  position: absolute;
+  bottom: 18px;
+  right: 28px;
 }

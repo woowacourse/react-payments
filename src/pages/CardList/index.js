@@ -10,7 +10,7 @@ export default function CardList({ cards }) {
   };
 
   const goEditCardNickname = (id) => () => {
-    history.push(`${PATH.ADD_CARD_COMPLETE}/${id}`);
+    history.push(`${PATH.EDIT_CARD_NICKNAME}/${id}`);
   };
 
   return (

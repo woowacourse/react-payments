@@ -23,12 +23,6 @@
   margin-bottom: 2rem;
 }
 
-.bottom-right-button {
-  position: absolute;
-  bottom: 18px;
-  right: 28px;
-}
-
 .security-code-guide-button {
   display: inherit;
   background: none;

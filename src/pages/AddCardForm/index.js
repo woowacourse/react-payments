@@ -180,7 +180,7 @@ export default function AddCardForm({ cards }) {
 
     reset();
 
-    history.push(`${PATH.ADD_CARD_COMPLETE}/${newCardId}`);
+    history.push(`${PATH.EDIT_CARD_NICKNAME}/${newCardId}`);
   };
 
   return (

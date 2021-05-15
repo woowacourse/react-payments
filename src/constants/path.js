@@ -1,7 +1,7 @@
 const PATH = {
   ROOT: '/',
   ADD_CARD_FORM: '/addCardForm',
-  ADD_CARD_COMPLETE: '/addCardComplete',
+  EDIT_CARD_NICKNAME: '/editCardNickname',
 };
 
 export default PATH;
