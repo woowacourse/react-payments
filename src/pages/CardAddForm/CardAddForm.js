@@ -13,37 +13,39 @@ import {
   PinNumberInput,
   Button,
   CardSelector,
+  Spinner,
 } from '../../components';
-import { useInput, useModal, useLocalStorage, useMultipleInput } from '../../hooks';
+import { useInput, useModal, useMultipleInput, useFetch } from '../../hooks';
 import { isNumeric, initArray } from '../../utils';
-import { CARD, LOCAL_STORAGE_KEY, MESSAGE, REGEX, ROUTE } from '../../constants';
+import { API, CARD, FORM, MESSAGE, REGEX, ROUTE } from '../../constants';
 
 const CardAddForm = () => {
   const history = useHistory();
 
-  const [cardNumberInputRefs] = useState(initArray(4, useRef()));
-  const [pinNumberInputRefs] = useState(initArray(2, useRef()));
+  const [createCard, fetchCreateCard] = useFetch(API.BASE_URL, {
+    method: API.METHOD.POST,
+  });
+
+  const [cardNumberInputRefs] = useState(initArray(FORM.CARD_NUMBER.COUNT, useRef()));
+  const [pinNumberInputRefs] = useState(initArray(FORM.PIN_NUMBER.COUNT, useRef()));
 
   const [cardCompany, setCardCompany] = useState({});
 
   const cardNumbers = useMultipleInput(['', '', '', ''], {
     nameSpliter: '-',
     refs: cardNumberInputRefs,
-    maxLengthPerInput: 4,
+    maxLengthPerInput: FORM.CARD_NUMBER.MAX_LENGTH,
   });
   const passwordDigits = useMultipleInput(['', ''], {
     nameSpliter: '-',
     refs: pinNumberInputRefs,
-    maxLengthPerInput: 1,
+    maxLengthPerInput: FORM.PIN_NUMBER.MAX_LENGTH,
   });
 
-  // eslint-disable-next-line no-unused-vars
   const { Modal, isModalOpened, openModal, closeModal } = useModal(false);
   const ownerName = useInput('', { numberOnly: true, upperCase: true });
   const expiryDate = useInput('');
   const CVC = useInput('');
-
-  const cardList = useLocalStorage(LOCAL_STORAGE_KEY.CARD_LIST);
 
   const cardNumbersAsNumber = useMemo(() => cardNumbers.value.join(''), [cardNumbers.value]);
 
@@ -57,12 +59,14 @@ const CardAddForm = () => {
     return expiryDateChunks.join(' / ');
   }, [expiryDateAsNumber]);
 
-  const isValidExpiryDate = useMemo(
-    () =>
+  const isValidExpiryDate = useMemo(() => {
+    const month = Number(expiryDateAsNumber.slice(0, 2));
+
+    return (
       expiryDateAsNumber.length > 0 &&
-      !(Number(expiryDateAsNumber.slice(0, 2)) > 0 && Number(expiryDateAsNumber.slice(0, 2)) < 13),
-    [expiryDateAsNumber]
-  );
+      !(month >= FORM.EXPIRY_DATE.MIN_MONTH && month <= FORM.EXPIRY_DATE.MAX_MONTH)
+    );
+  }, [expiryDateAsNumber]);
 
   const isNumericCardNumbers = useMemo(() => cardNumbers.value.every(isNumeric), [
     cardNumbers.value,
@@ -70,32 +74,39 @@ const CardAddForm = () => {
 
   const isCardCompanySelected = useMemo(() => Object.keys(cardCompany).length > 0, [cardCompany]);
 
+  const isCardNumberEnteredHalf = useMemo(() => {
+    const [firstValue, secondValue] = cardNumbers.value;
+
+    return (
+      firstValue.length === FORM.CARD_NUMBER.MAX_LENGTH &&
+      secondValue.length === FORM.CARD_NUMBER.MAX_LENGTH
+    );
+  }, [cardNumbers.value]);
+
   const handleFocusCardNumberInput = (event) => {
     const [firstInputRef, secondInputRef, thirdInputRef, fourthInputRef] = cardNumberInputRefs;
 
-    const [firstValue, secondValue] = cardNumbers.value;
+    if (event.target !== thirdInputRef && event.target !== fourthInputRef) return;
 
-    if (event.target === thirdInputRef || event.target === fourthInputRef) {
-      if (firstInputRef.value.length < 4) {
-        // eslint-disable-next-line no-alert
-        alert('카드번호 앞 8자리를 먼저 입력해주세요');
-        firstInputRef?.focus();
-        return;
-      }
+    if (firstInputRef.value.length < FORM.CARD_NUMBER.MAX_LENGTH) {
+      alert(MESSAGE.CARD.FORM_VALIDATE.NUMBER_NOT_ENTERED_HALF);
+      firstInputRef?.focus();
+      return;
+    }
 
-      if (secondInputRef.value.length < 4) {
-        // eslint-disable-next-line no-alert
-        alert('카드번호 앞 8자리를 먼저 입력해주세요');
-        secondInputRef?.focus();
-      }
+    if (secondInputRef.value.length < FORM.CARD_NUMBER.MAX_LENGTH) {
+      alert(MESSAGE.CARD.FORM_VALIDATE.NUMBER_NOT_ENTERED_HALF);
+      secondInputRef?.focus();
+    }
 
-      if (firstValue === 4 && secondValue === 4 && !isCardCompanySelected && !isModalOpened) {
-        openModal();
-      }
+    const isCardCompanyNotDetected = isCardNumberEnteredHalf && !isCardCompanySelected;
+
+    if (isCardCompanyNotDetected && !isModalOpened) {
+      openModal();
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const newCard = {
@@ -106,13 +117,15 @@ const CardAddForm = () => {
       ownerName: ownerName.value,
       expiryDate: expiryDate.value,
       nickname: cardCompany.name,
+      createdAt: new Date(),
     };
 
-    if (!cardList.value) {
-      cardList.setValue([]);
-    }
+    const response = await fetchCreateCard(newCard);
 
-    cardList.setValue([...cardList.value, newCard]);
+    if (response.status === API.STATUS.FAILURE) {
+      alert(MESSAGE.CARD.ADD.FAILED);
+      return;
+    }
 
     history.push({
       pathname: ROUTE.COMPLETE,
@@ -133,9 +146,7 @@ const CardAddForm = () => {
   const updateCardCompany = useCallback(() => {
     const [firstValue, secondValue] = cardNumbers.value;
 
-    const isFilledHalf = firstValue.length === 4 && secondValue.length === 4;
-
-    if (isFilledHalf && !isCardCompanySelected) {
+    if (isCardNumberEnteredHalf && !isCardCompanySelected) {
       const matchedCardCompany = findCardCompany(firstValue, secondValue);
 
       if (matchedCardCompany) {
@@ -143,10 +154,10 @@ const CardAddForm = () => {
       } else {
         openModal();
       }
-    } else if (!isFilledHalf && isCardCompanySelected) {
+    } else if (!isCardNumberEnteredHalf && isCardCompanySelected) {
       setCardCompany({});
     }
-  }, [cardNumbers.value, isCardCompanySelected, openModal]);
+  }, [cardNumbers.value, isCardNumberEnteredHalf, isCardCompanySelected, openModal]);
 
   useEffect(updateCardCompany, [updateCardCompany]);
 
@@ -159,14 +170,16 @@ const CardAddForm = () => {
     <ScreenContainer>
       <Header hasBackButton text="카드 추가" onClickBackButton={history.goBack} />
       <Styled.Container>
-        <Card
-          bgColor={cardCompany?.color}
-          companyName={cardCompany?.name}
-          cardNumbers={cardNumbersAsNumber}
-          ownerName={ownerName.value}
-          expiryDate={formattedExpiryDate}
-        />
-        <form onSubmit={handleSubmit}>
+        <Styled.CardContainer>
+          <Card
+            bgColor={cardCompany?.color}
+            companyName={cardCompany?.name}
+            cardNumbers={cardNumbersAsNumber}
+            ownerName={ownerName.value}
+            expiryDate={formattedExpiryDate}
+          />
+        </Styled.CardContainer>
+        <Styled.Form onSubmit={handleSubmit}>
           <Styled.Row>
             <CardNumberInput
               ref={cardNumberInputRefs}
@@ -174,7 +187,9 @@ const CardAddForm = () => {
               onChange={cardNumbers.onChange}
               onFocus={handleFocusCardNumberInput}
               labelText="카드 번호"
-              errorMessage={!isNumericCardNumbers ? MESSAGE.REQUIRE_NUMBER_ONLY : ''}
+              errorMessage={
+                !isNumericCardNumbers ? MESSAGE.CARD.FORM_VALIDATE.REQUIRE_NUMBER_ONLY : ''
+              }
               isError={!isNumericCardNumbers}
             />
           </Styled.Row>
@@ -186,13 +201,15 @@ const CardAddForm = () => {
                 onChange={expiryDate.onChange}
                 placeholder="MM / YY"
                 labelText="만료일"
-                maxLength={4 + 3}
+                maxLength={FORM.EXPIRY_DATE.MAX_LENGTH}
                 textAlign="center"
-                inputmode="numeric"
+                inputMode="numeric"
                 pattern={REGEX.EXPIRY_DATE.source}
                 required
                 isError={isValidExpiryDate}
-                errorMessage={isValidExpiryDate ? MESSAGE.INVALID_EXPIRY_DATE : ''}
+                errorMessage={
+                  isValidExpiryDate ? MESSAGE.CARD.FORM_VALIDATE.INVALID_EXPIRY_DATE : ''
+                }
               />
             </Styled.ExpiryDate>
           </Styled.Row>
@@ -202,7 +219,7 @@ const CardAddForm = () => {
               value={ownerName.value}
               onChange={ownerName.onChange}
               labelText="카드 소유자 이름 (선택)"
-              maxLength={30}
+              maxLength={FORM.OWNER_NAME.MAX_LENGTH}
               hasLengthCounter
             />
           </Styled.Row>
@@ -211,19 +228,21 @@ const CardAddForm = () => {
               <InputBox
                 type="password"
                 id="cvc"
-                pattern={REGEX.NUMBER_WITH_LENGTH(3).source}
-                inputmode="numeric"
+                pattern={REGEX.NUMBER_WITH_LENGTH(FORM.CVC.MAX_LENGTH).source}
+                isError={!isNumeric(CVC.value)}
+                errorMessage={
+                  !isNumeric(CVC.value) ? MESSAGE.CARD.FORM_VALIDATE.REQUIRE_NUMBER_ONLY : ''
+                }
+                inputMode="numeric"
                 value={CVC.value}
                 onChange={CVC.onChange}
                 labelText="보안 코드 (CVC/CVV)"
-                maxLength={3}
+                maxLength={FORM.CVC.MAX_LENGTH}
                 required
-                isError={!isNumeric(CVC.value)}
-                errorMessage={!isNumeric(CVC.value) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''}
               />
             </Styled.CVC>
             <Styled.ToolTip>
-              <ToolTip buttonText="?" contentText={MESSAGE.CVC_TOOLTIP} />
+              <ToolTip buttonText="?" contentText={MESSAGE.TOOLTIP.CVC} />
             </Styled.ToolTip>
           </Styled.Row>
           <Styled.Row>
@@ -232,19 +251,21 @@ const CardAddForm = () => {
               labelText="카드 비밀번호"
               values={passwordDigits.value}
               onChange={passwordDigits.onChange}
-              dotCount={2}
-              inputmode="numeric"
+              dotCount={FORM.PIN_NUMBER.DOT_COUNT}
+              inputMode="numeric"
               required
               isError={!isNumeric(passwordDigits.value.join(''))}
               errorMessage={
-                !isNumeric(passwordDigits.value.join('')) ? MESSAGE.REQUIRE_NUMBER_ONLY : ''
+                !isNumeric(passwordDigits.value.join(''))
+                  ? MESSAGE.CARD.FORM_VALIDATE.REQUIRE_NUMBER_ONLY
+                  : ''
               }
             />
           </Styled.Row>
           <Styled.Row right>
-            <Button>다음</Button>
+            {createCard.status === API.STATUS.PENDING ? <Spinner /> : <Button>다음</Button>}
           </Styled.Row>
-        </form>
+        </Styled.Form>
       </Styled.Container>
       <Modal mobile>
         <Styled.CardSelect>

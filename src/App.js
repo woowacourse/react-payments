@@ -1,10 +1,10 @@
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import GlobalStyle from './GlobalStyle';
 import theme from './theme';
 import CardList from './pages/CardList/CardList';
 import CardAddForm from './pages/CardAddForm/CardAddForm';
-import CardAddComplete from './pages/CardAddComplete/CardAddComplete';
+import CardEditNickname from './pages/CardEditNickname/CardEditNickname';
 import ROUTE from './constants/route';
 
 const App = () => (
@@ -15,7 +15,8 @@ const App = () => (
       <Switch>
         <Route exact path={ROUTE.HOME} component={CardList} />
         <Route exact path={ROUTE.ADD} component={CardAddForm} />
-        <Route exact path={ROUTE.COMPLETE} component={CardAddComplete} />
+        <Route exact path={[ROUTE.COMPLETE, ROUTE.EDIT]} component={CardEditNickname} />
+        <Redirect to={ROUTE.HOME} path="*" />
       </Switch>
     </Router>
   </ThemeProvider>

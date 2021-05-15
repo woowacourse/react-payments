@@ -1,3 +1,5 @@
+// Note: 현재 사용하지 않는 코드
+
 /* eslint-disable no-console */
 import { useState, useMemo } from 'react';
 

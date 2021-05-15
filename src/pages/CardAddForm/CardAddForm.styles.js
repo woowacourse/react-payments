@@ -5,6 +5,12 @@ const Styled = {
   Container: styled.div`
     padding: 0 28px;
   `,
+  CardContainer: styled.div`
+    margin: 20px 0;
+  `,
+  Form: styled.form`
+    margin: 20px 0;
+  `,
   Row: styled.div`
     position: relative;
     ${(props) => Flex({ items: 'center', justify: props.right ? 'flex-end' : 'flex-start' })};
@@ -22,6 +28,7 @@ const Styled = {
   CardSelect: styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    padding: 34px;
   `,
 };
 

@@ -30,6 +30,10 @@ const Styled = {
   ButtonContainer: styled.div`
     ${Flex({ justify: 'flex-end', items: 'center' })};
     margin-top: 172px;
+
+    a {
+      text-decoration: none;
+    }
   `,
 };
 

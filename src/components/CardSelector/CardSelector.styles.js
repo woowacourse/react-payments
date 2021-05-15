@@ -15,7 +15,7 @@ const Styled = {
 
     &:hover,
     &:active {
-      background-color: ${(props) => props.theme.borderColor.default};
+      background-color: ${(props) => props.theme.hoverColor.button};
     }
   `,
   Logo: styled.img`

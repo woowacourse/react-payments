@@ -10,7 +10,7 @@ const BackIcon = (
 const Header = ({ text, hasBackButton, onClickBackButton }) => (
   <Styled.Container>
     {hasBackButton && <Styled.BackButton onClick={onClickBackButton}>{BackIcon}</Styled.BackButton>}
-    <Styled.Title>{text}</Styled.Title>
+    <Styled.Title hasBackButton={hasBackButton}>{text}</Styled.Title>
   </Styled.Container>
 );
 

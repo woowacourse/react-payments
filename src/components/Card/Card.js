@@ -15,21 +15,23 @@ const Card = ({ bgColor, companyName, cardNumbers, ownerName, expiryDate, size }
   }, [cardNumbers]);
 
   return (
-    <Styled.Container bgColor={bgColor} size={size}>
-      <Styled.CompanyName>{companyName}</Styled.CompanyName>
+    <Styled.Container size={size}>
+      <Styled.Card bgColor={bgColor} size={size}>
+        <Styled.CompanyName>{companyName}</Styled.CompanyName>
 
-      <Styled.Chip />
+        <Styled.Chip />
 
-      <Styled.CardNumbersGroup>
-        {formattedCardNumber.map((number, index) => {
-          const key = `${index}-${number}`;
+        <Styled.CardNumbersGroup>
+          {formattedCardNumber.map((number, index) => {
+            const key = `${index}-${number}`;
 
-          return <Styled.CardNumbers key={key}>{number}</Styled.CardNumbers>;
-        })}
-      </Styled.CardNumbersGroup>
+            return <Styled.CardNumbers key={key}>{number}</Styled.CardNumbers>;
+          })}
+        </Styled.CardNumbersGroup>
 
-      <Styled.OwnerName>{ownerName}</Styled.OwnerName>
-      <Styled.ExpiryDate>{expiryDate}</Styled.ExpiryDate>
+        <Styled.OwnerName>{ownerName}</Styled.OwnerName>
+        <Styled.ExpiryDate>{expiryDate}</Styled.ExpiryDate>
+      </Styled.Card>
     </Styled.Container>
   );
 };
