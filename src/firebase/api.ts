@@ -27,5 +27,6 @@ export const addCard = async (card: Omit<Card, 'password' | 'CVC'>) => {
     await fireStore.collection(COLLECTION.CARDS).add(card);
   } catch (e) {
     console.error('Error adding document: ', e);
+    throw new Error('카드를 추가하지 못했습니다!');
   }
 };

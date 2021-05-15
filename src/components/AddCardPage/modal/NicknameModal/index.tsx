@@ -7,6 +7,8 @@ import CreditCard from '../../../shared/CreditCard';
 import { NicknameContainer, ResultCreditCard } from './styles';
 import fireStore from '../../../../firebase/firebase';
 import { addCard } from '../../../../firebase/api';
+import { useHistory } from 'react-router';
+import PAGE from '../../../../constants/pages';
 
 interface Props {
   nickname: string;
@@ -23,6 +25,7 @@ const NicknameModal: FC<Props> = ({ cardBrand, cardNumber, expDate, ownerName, n
   }, []);
 
   const onChangeNickname = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => setNickname(value);
+  const history = useHistory();
 
   const onBlurNickname = () => {
     if (nickname !== '') return;
@@ -31,9 +34,15 @@ const NicknameModal: FC<Props> = ({ cardBrand, cardNumber, expDate, ownerName, n
   };
 
   const onAddCard = async (event: FormEvent) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    addCard({ cardBrand, cardNumber, expDate, ownerName, nickname });
+      await addCard({ cardBrand, cardNumber, expDate, ownerName, nickname });
+      alert('새로운 카드를 추가했습니다!');
+      history.push(PAGE.CARD_LIST.PATH);
+    } catch (e) {
+      alert(e.message);
+    }
   };
 
   return (
