@@ -8,6 +8,9 @@ import {
   TextButton,
   InputWithCounter,
   CardPasswordInput,
+  Modal,
+  CardCompanySelection,
+  SecurityCodeGuide,
 } from '../../components';
 import { cardSerialNumberFormatter, MMYYDateFormatter } from '../../utils/formatter';
 import { isValidSerialNumber, isValidDateFormat, isValidUserName } from './validator';
@@ -15,20 +18,18 @@ import './style.css';
 import { useHistory } from 'react-router-dom';
 import { CardsContext } from '../../cardsContext';
 import { idGenerator } from '../../utils/idGenerator';
+import useForm from '../../hooks/useForm';
 
-export default function AddCardForm({
-  onSetModalContents,
-  number,
-  company,
-  expirationDate,
-  userName,
-  securityCode,
-  password,
-  onInputChange,
-  setInput,
-  setCurrentCardId,
-  reset,
-}) {
+const initialAddCardForm = {
+  number: '',
+  company: '',
+  expirationDate: '',
+  userName: '',
+  securityCode: '',
+  password: { first: '', second: '' },
+};
+
+export default function AddCardForm({ cards }) {
   const dispatch = useContext(CardsContext);
 
   const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState('');
@@ -39,6 +40,22 @@ export default function AddCardForm({
   const serialNumberInputElement = useRef(null);
 
   const history = useHistory();
+
+  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [modalContents, setModalContents] = useState('cardSelection');
+
+  const onSetModalContents = (name) => {
+    setModalContents(name);
+
+    setIsModalOpened(true);
+  };
+
+  const [
+    { number, company, expirationDate, userName, securityCode, password },
+    onInputChange,
+    setInput,
+    reset,
+  ] = useForm(initialAddCardForm);
 
   const isFormCompleted =
     isValidSerialNumber(number) &&
@@ -159,7 +176,6 @@ export default function AddCardForm({
       nickname: company,
     };
 
-    setCurrentCardId(newCardId);
     dispatch({ type: 'ADD_CARD', card: newCard });
 
     reset();
@@ -311,6 +327,18 @@ export default function AddCardForm({
           </div>
         )}
       </form>
+
+      {isModalOpened && (
+        <Modal onCloseModal={() => setIsModalOpened(false)}>
+          {modalContents === 'cardSelection' && (
+            <CardCompanySelection
+              onCloseModal={() => setIsModalOpened(false)}
+              setInput={setInput}
+            ></CardCompanySelection>
+          )}
+          {modalContents === 'questionMark' && <SecurityCodeGuide />}
+        </Modal>
+      )}
     </div>
   );
 }
