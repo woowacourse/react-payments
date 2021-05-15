@@ -1,4 +1,4 @@
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import GlobalStyle from './GlobalStyle';
 import theme from './theme';
@@ -16,6 +16,7 @@ const App = () => (
         <Route exact path={ROUTE.HOME} component={CardList} />
         <Route exact path={ROUTE.ADD} component={CardAddForm} />
         <Route exact path={[ROUTE.COMPLETE, ROUTE.EDIT]} component={CardEditNickname} />
+        <Redirect to={ROUTE.HOME} path="*" />
       </Switch>
     </Router>
   </ThemeProvider>

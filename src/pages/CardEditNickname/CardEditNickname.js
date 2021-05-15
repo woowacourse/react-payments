@@ -1,7 +1,7 @@
 import { useHistory, useLocation, Redirect, useRouteMatch, Link } from 'react-router-dom';
 import Styled from './CardEditNickname.styles';
 import { Card, Input, Button, Spinner } from '../../components';
-import { API, MESSAGE, ROUTE } from '../../constants';
+import { API, FORM, MESSAGE, ROUTE } from '../../constants';
 import { useFetch, useInput } from '../../hooks';
 import { ScreenContainer } from '../../styles/common.styles';
 
@@ -37,12 +37,12 @@ const CardEditNickname = () => {
 
     if (response.status === API.STATUS.FAILURE) {
       if (path === ROUTE.EDIT) {
-        alert(MESSAGE.NICKNAME_EDIT_FAILED);
+        alert(MESSAGE.NICKNAME.EDIT.FAILED);
         return;
       }
 
       if (path === ROUTE.COMPLETE) {
-        alert(MESSAGE.NICKNAME_SUBMIT_FAILED);
+        alert(MESSAGE.NICKNAME.SUBMIT.FAILED);
       }
     }
 
@@ -53,8 +53,8 @@ const CardEditNickname = () => {
     <ScreenContainer>
       <Styled.Container>
         <Styled.Header>
-          {path === ROUTE.COMPLETE && MESSAGE.CARD_ADD_COMPLETE}
-          {path === ROUTE.EDIT && MESSAGE.CARD_NICKNAME_EDIT}
+          {path === ROUTE.COMPLETE && MESSAGE.CARD.ADD.COMPLETE}
+          {path === ROUTE.EDIT && MESSAGE.NICKNAME.HEADER}
         </Styled.Header>
         <Card
           size="large"
@@ -71,7 +71,7 @@ const CardEditNickname = () => {
               textAlign="center"
               placeholder="카드 별칭 (선택)"
               autoFocus
-              maxLength={10}
+              maxLength={FORM.NICKNAME.MAX_LENGTH}
               value={nickname.value}
               onChange={nickname.onChange}
             />

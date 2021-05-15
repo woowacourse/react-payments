@@ -11,5 +11,5 @@ const Template = (args) => <ErrorPage {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
-  message: MESSAGE.ERROR_PAGE_DEFAULT,
+  message: MESSAGE.ERROR_PAGE.DEFAULT,
 };

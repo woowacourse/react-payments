@@ -4,6 +4,7 @@ import Input from '../Input/Input';
 import ErrorMessageBox from '../ErrorMessageBox/ErrorMessageBox';
 import Styled from './CardNumberInput.styles';
 import REGEX from '../../constants/regex';
+import { FORM } from '../../constants';
 
 const CardNumberInput = forwardRef(
   ({ values, onChange, onFocus, labelText, maskedInputFlags, errorMessage, isError }, ref) => (
@@ -20,12 +21,12 @@ const CardNumberInput = forwardRef(
               key={key}
               name={key}
               type={maskedInputFlags[index] ? 'password' : 'text'}
-              maxLength="4"
+              maxLength={FORM.CARD_NUMBER.MAX_LENGTH}
               textAlign="center"
               onFocus={onFocus}
               onChange={onChange}
               value={value}
-              pattern={REGEX.NUMBER_WITH_LENGTH(4).source}
+              pattern={REGEX.NUMBER_WITH_LENGTH(FORM.CARD_NUMBER.MAX_LENGTH).source}
               inputMode="numeric"
               // eslint-disable-next-line
               ref={(el) => (ref[index] = el)}

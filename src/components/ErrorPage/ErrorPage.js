@@ -16,7 +16,7 @@ ErrorPage.propTypes = {
 };
 
 ErrorPage.defaultProps = {
-  message: MESSAGE.ERROR_PAGE_DEFAULT,
+  message: MESSAGE.ERROR_PAGE.DEFAULT,
 };
 
 export default ErrorPage;

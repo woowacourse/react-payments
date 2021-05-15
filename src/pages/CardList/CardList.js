@@ -22,7 +22,7 @@ const CardList = () => {
   );
 
   const handleDeleteCard = async () => {
-    if (window.confirm(MESSAGE.CARD_DELETE_CONFIRM)) {
+    if (window.confirm(MESSAGE.CARD.DELETE.CONFIRM)) {
       try {
         await fetchDeleteCard();
         fetchCardList();
@@ -98,7 +98,7 @@ const CardList = () => {
           </Styled.CardList>
         )}
         {cardList.status === API.STATUS.FAILURE && (
-          <ErrorPage message={MESSAGE.ERROR_PAGE_CARD_LIST} />
+          <ErrorPage message={MESSAGE.ERROR_PAGE.CARD_LIST} />
         )}
       </Styled.Container>
       <Modal mobile>
