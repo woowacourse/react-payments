@@ -40,7 +40,7 @@ function App() {
       fourth: '',
     });
     setIsModalOpened(false);
-    setPageRouter(PAGE.ADD);
+    setPageRouter(PAGE.LIST);
   };
 
   const handleCardNumbersInput = ({ target: { value } }, key) => {
@@ -115,6 +115,7 @@ function App() {
         securityCode={securityCode}
         password={password}
         isModalOpened={isModalOpened}
+        setPageRouter={setPageRouter}
         handleCardNumbersInput={handleCardNumbersInput}
         handleCardCompany={handleCardCompany}
         handleExpirationInput={handleExpirationInput}
