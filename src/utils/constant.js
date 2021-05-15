@@ -1,4 +1,5 @@
 export const PAGE = {
-  MAIN: 'MAIN',
+  ADD: 'ADD',
   REGISTER: 'REGISTER',
+  LIST: 'LIST',
 };
