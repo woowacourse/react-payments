@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const NicknameContainer = styled.div`
+export const EditNicknameFormContainer = styled.form`
   height: 100%;
   display: flex;
   flex-direction: column;

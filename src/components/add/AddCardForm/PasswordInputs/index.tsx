@@ -1,9 +1,10 @@
 import { ChangeEvent, useRef, VFC } from 'react';
+import { useHistory } from 'react-router';
 import { PasswordState } from '..';
 import { LABEL } from '../../../../constants/addCardForm';
 import { ALERT } from '../../../../constants/messages';
 import Container from '../../../shared/Container';
-import Input from '../../../shared/Input';
+import VirtualKeyboardInput from '../../../shared/VirtualKeyboardInput';
 import AddCardInputLabel from '../AddCardInputLabel';
 import { AddCardInputContainer } from '../styles';
 import { isValidPassword } from '../validator';
@@ -14,9 +15,11 @@ interface Props {
 }
 
 const PasswordInputs: VFC<Props> = ({ password, setPassword }) => {
+  const history = useHistory();
   const secondPasswordInputRef = useRef<HTMLInputElement>(null);
+  const [firstDigit, secondDigit] = password;
 
-  const onChangePassword = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
+  const onChangePassword = (value: string, index: number) => {
     if (!isValidPassword(value)) return;
 
     const nextPassword: PasswordState = [...password];
@@ -26,6 +29,7 @@ const PasswordInputs: VFC<Props> = ({ password, setPassword }) => {
     } catch (error) {
       console.error('Segmentation Fault: invalid index - ' + error);
       alert(ALERT.SYSTEM_ERROR);
+      history.replace('/');
       return;
     }
 
@@ -40,15 +44,22 @@ const PasswordInputs: VFC<Props> = ({ password, setPassword }) => {
     <AddCardInputLabel label={LABEL.PASSWORD}>
       <Container flex justifyContent="space-between" width="60%">
         <AddCardInputContainer width="23%">
-          <Input type="password" textCenter value={password[0]} onChange={event => onChangePassword(event, 0)} />
+          <VirtualKeyboardInput
+            type="password"
+            textCenter
+            maxLength={1}
+            value={firstDigit}
+            onChange={value => onChangePassword(value, 0)}
+          />
         </AddCardInputContainer>
         <AddCardInputContainer width="23%">
-          <Input
+          <VirtualKeyboardInput
             type="password"
             ref={secondPasswordInputRef}
             textCenter
-            value={password[1]}
-            onChange={event => onChangePassword(event, 1)}
+            maxLength={1}
+            value={secondDigit}
+            onChange={value => onChangePassword(value, 1)}
           />
         </AddCardInputContainer>
         <AddCardInputContainer width="23%">

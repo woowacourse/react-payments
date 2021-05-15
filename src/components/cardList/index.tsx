@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useHistory } from 'react-router';
 import AddCardButton from './AddCardButton';
 import { CardListContainer } from './styles';
 
@@ -7,10 +8,12 @@ interface Props {
 }
 
 const CardList: FC<Props> = ({ children }) => {
+  const history = useHistory();
+
   return (
     <CardListContainer>
       {children}
-      <li>
+      <li className="card-item" onClick={() => history.push('/register')}>
         <AddCardButton />
       </li>
     </CardListContainer>

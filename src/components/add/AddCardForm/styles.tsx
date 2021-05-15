@@ -41,10 +41,11 @@ export const AddCardFormContainer = styled.div`
 
 interface Props {
   width?: string;
+  margin?: string;
 }
 
-export const AddCardInputContainer: FC<Props> = ({ children, width }) => (
-  <Container flex justifyContent="center" alignItems="center" backgroundColor={GRAY[100]} width={width}>
+export const AddCardInputContainer: FC<Props> = ({ children, width, margin }) => (
+  <Container flex justifyContent="center" alignItems="center" backgroundColor={GRAY[100]} width={width} margin={margin}>
     {children}
   </Container>
 );

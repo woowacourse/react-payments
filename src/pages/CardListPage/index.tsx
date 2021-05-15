@@ -1,72 +1,80 @@
+import { useEffect, useState, VFC } from 'react';
+import { useCards } from '../../context/CardsStateContext';
 import CreditCard from '../../components/shared/CreditCard';
 import CardList from '../../components/cardList';
 import Template from '../../components/shared/Template';
-import { Card } from '../../types';
 import { CARD_LIST_PAGE_TITLE } from '../../constants/title';
-import { BLUE } from '../../constants/palette';
+import { withVibration } from '../../utils/vibrate';
+import { IconButton } from '../../components/shared/Button';
+import { RouteComponentProps } from 'react-router';
+import { ALERT } from '../../constants/messages';
 
-const dummies: Card[] = [
-  {
-    cardBrand: {
-      name: '포코카드',
-      color: BLUE[500],
-    },
-    ownerName: 'FANO',
-    cardNumber: '1234-1234-1234-1234',
-    expDate: {
-      month: '3',
-      year: '3',
-    },
-    password: '12',
-    CVC: '123',
-    nickname: '엄카',
-  },
-  {
-    cardBrand: {
-      name: '포코카드',
-      color: BLUE[500],
-    },
-    ownerName: 'FANO',
-    cardNumber: '1234-1234-1234-1234',
-    expDate: {
-      month: '3',
-      year: '3',
-    },
-    password: '12',
-    CVC: '123',
-    nickname: '엄카',
-  },
-  {
-    cardBrand: {
-      name: '포코카드',
-      color: BLUE[500],
-    },
-    ownerName: 'FANO',
-    cardNumber: '1234-1234-1234-1234',
-    expDate: {
-      month: '3',
-      year: '3',
-    },
-    password: '12',
-    CVC: '123',
-    nickname: '엄카',
-  },
-];
+const EDIT_MODE_VIBRATION_TIME = 200;
 
-const CardListPage = () => {
+const CardListPage: VFC<RouteComponentProps> = ({ history }) => {
+  const { cards, deleteCard, hasError } = useCards();
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  let timerId: NodeJS.Timeout | null = null;
+
+  const onTouchStart = () => {
+    const PRESS_DURATION = 1000;
+
+    timerId = setTimeout(
+      () => withVibration(() => setIsEditMode(!isEditMode), EDIT_MODE_VIBRATION_TIME),
+      PRESS_DURATION
+    );
+  };
+
+  const onTouchEnd = () => {
+    if (!timerId) return;
+
+    clearTimeout(timerId);
+    timerId = null;
+  };
+
+  const onClickDeleteCard = (id: string) => {
+    if (!window.confirm('정말 삭제하시겠습니까?')) return;
+
+    deleteCard(id);
+    if (hasError) {
+      alert(ALERT.DELETE_CARD_ERROR);
+      history.push('/');
+    }
+  };
+
+  useEffect(() => {
+    if (hasError) alert(ALERT.GET_CARD_LIST_ERROR);
+  }, []);
+
   return (
     <Template title={CARD_LIST_PAGE_TITLE}>
       <CardList>
-        {dummies.map(card => (
-          <li key={card.cardNumber}>
+        {cards.map(card => (
+          <li
+            key={card.id}
+            className="card-item"
+            onMouseDown={onTouchStart}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+            onMouseUp={onTouchEnd}
+          >
+            {isEditMode && (
+              <IconButton backgroundImage={'/buttons/close-btn.png'} onClick={() => onClickDeleteCard(card.id || '')} />
+            )}
             <CreditCard
               cardBrand={card.cardBrand}
               ownerName={card.ownerName}
               cardNumber={card.cardNumber}
               expDate={card.expDate}
-              nickname={card.nickname}
             />
-            <span className="nickname">{card?.nickname}</span>
+            {isEditMode ? (
+              <span className="nickname edit" onClick={() => history.push(`/edit/${card.id}`)}>
+                {card.nickname} <img src={process.env.PUBLIC_URL + '/images/pencil-icon.svg'} />
+              </span>
+            ) : (
+              <span className="nickname">{card.nickname}</span>
+            )}
           </li>
         ))}
       </CardList>

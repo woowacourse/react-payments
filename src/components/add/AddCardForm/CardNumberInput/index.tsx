@@ -4,30 +4,42 @@ import { LABEL } from '../../../../constants/addCardForm';
 import { forwardRef, useMemo, useRef, VFC } from 'react';
 import { CARD_NUMBER_SEPARATOR, CARD_NUMBER_DIGITS } from '../../../../constants/creditCard';
 import { ALERT } from '../../../../constants/messages';
-import { ChangeEvent } from 'react';
 import Input from '../../../shared/Input';
 import { CardNumberState } from '../../AddCardForm';
 import { isValidCardNumber } from '../validator';
+import VirtualKeyboardInput from '../../../shared/VirtualKeyboardInput';
+import { useHistory } from 'react-router';
 
 interface CardNumberInputProps {
   index: number;
   type: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>, index: number) => void;
+  onChange: (value: string, index: number) => void;
   cardNumber: CardNumberState;
 }
 
 const CardNumberInput = forwardRef<HTMLInputElement, CardNumberInputProps>(
-  ({ index, type, onChange, cardNumber }, ref) => (
-    <Input
-      type={type}
-      ref={ref}
-      textCenter
-      maxLength={CARD_NUMBER_DIGITS}
-      width="16%"
-      value={cardNumber[index]}
-      onChange={event => onChange(event, index)}
-    />
-  )
+  ({ index, type, onChange, cardNumber }, ref) =>
+    type === 'text' ? (
+      <Input
+        type={type}
+        ref={ref}
+        textCenter
+        maxLength={CARD_NUMBER_DIGITS}
+        width="16%"
+        value={cardNumber[index]}
+        onChange={({ target: { value } }) => onChange(value, index)}
+      />
+    ) : (
+      <VirtualKeyboardInput
+        type={type}
+        ref={ref}
+        maxLength={CARD_NUMBER_DIGITS}
+        textCenter
+        width="16%"
+        value={cardNumber[index]}
+        onChange={value => onChange(value, index)}
+      />
+    )
 );
 
 interface CardNumberInputsProps {
@@ -42,6 +54,7 @@ const isInCardNumberInputRefsIndex = (index: number): index is CardNumberInputRe
 };
 
 const CardNumberInputs: VFC<CardNumberInputsProps> = ({ cardNumber, setCardNumber }) => {
+  const history = useHistory();
   const secondCardNumberInputRef = useRef<HTMLInputElement>(null);
   const thirdCardNumberInputRef = useRef<HTMLInputElement>(null);
   const fourthCardNumberInputRef = useRef<HTMLInputElement>(null);
@@ -51,7 +64,7 @@ const CardNumberInputs: VFC<CardNumberInputsProps> = ({ cardNumber, setCardNumbe
     cardNumberInputRefs[index].current?.focus();
   };
 
-  const onChangeCardNumber = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
+  const onChangeCardNumber = (value: string, index: number) => {
     if (!isValidCardNumber(value)) return;
 
     const nextValue: CardNumberState = [...cardNumber];
@@ -61,6 +74,7 @@ const CardNumberInputs: VFC<CardNumberInputsProps> = ({ cardNumber, setCardNumbe
     } catch (error) {
       console.error('Segmentation Fault: invalid index - ' + error);
       alert(ALERT.SYSTEM_ERROR);
+      history.replace('/');
       return;
     }
 
@@ -92,7 +106,7 @@ const CardNumberInputs: VFC<CardNumberInputsProps> = ({ cardNumber, setCardNumbe
           type={type}
           ref={ref}
           cardNumber={cardNumber}
-          onChange={event => onChangeCardNumber(event, index)}
+          onChange={value => onChangeCardNumber(value, index)}
         />,
       ],
       []

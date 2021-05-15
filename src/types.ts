@@ -9,11 +9,15 @@ export interface ExpDate {
 }
 
 export interface Card {
+  id: string;
+  createdAt: string;
   cardBrand: CardBrand;
   ownerName: string;
   password: string;
   cardNumber: string;
   expDate: ExpDate;
   CVC: string;
-  nickname?: string;
+  nickname: string;
 }
+
+export type CardForSubmit = Omit<Card, 'id' | 'createdAt'>;

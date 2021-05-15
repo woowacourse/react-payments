@@ -1,13 +1,14 @@
 import { FormEvent, useEffect, useState, VFC } from 'react';
+import { useHistory } from 'react-router';
+import { CardBrand, ExpDate } from '../../../types';
+import { AddCardFormContainer } from './styles';
+import { useCards } from '../../../context/CardsStateContext';
 import CreditCard from '../../shared/CreditCard';
-import CardBrandModal from '../CardBrandModal';
-import NicknameModal from '../NicknameModal';
 import Button from '../../shared/Button';
+import CardBrandModal from '../CardBrandModal';
 import CARD_BRAND from '../../../constants/cardData';
 import { CARD_NUMBER_DIGITS, CARD_NUMBER_SEPARATOR } from '../../../constants/creditCard';
 import { ALERT } from '../../../constants/messages';
-import { AddCardFormContainer } from './styles';
-import { CardBrand, ExpDate } from '../../../types';
 import { isAllInputFilled } from './validator';
 import CardNumberInputs from './CardNumberInput';
 import ExpDateInputs from './ExpDateInput';
@@ -25,10 +26,10 @@ interface AddCardFormState {
   expDate: ExpDate;
   CVC: string;
   password: PasswordState;
-  nickname: string;
 }
 
 const AddCardForm: VFC = () => {
+  const history = useHistory();
   const [formState, setFormState] = useState<AddCardFormState>({
     cardBrand: { name: '', color: '' },
     ownerName: '',
@@ -36,11 +37,9 @@ const AddCardForm: VFC = () => {
     expDate: { year: '', month: '' },
     CVC: '',
     password: ['', ''],
-    nickname: '',
   });
 
   const [isCardBrandModalVisible, setIsCardBrandModalVisible] = useState(false);
-  const [isNicknameModalVisible, setIsNicknameModalVisible] = useState(false);
 
   const onClickCardBrandButton = (cardBrand: CardBrand) => {
     setFormState({ ...formState, cardBrand });
@@ -75,7 +74,11 @@ const AddCardForm: VFC = () => {
     );
   };
 
-  const onClickNextButton = () => {
+  const { addCard, hasError } = useCards();
+
+  const onSubmitCard = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     if (isCardBrandEmpty()) {
       onSetCardBrand();
       return;
@@ -88,12 +91,20 @@ const AddCardForm: VFC = () => {
       return;
     }
 
-    setIsNicknameModalVisible(true);
-  };
+    const cardId = await addCard({
+      ...formState,
+      cardNumber: formState.cardNumber.join('-'),
+      password: formState.password.join(''),
+      nickname: cardBrand.name,
+    });
 
-  const onSubmitCard = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    alert(ALERT.CARD_SUBMIT_SUCCESS);
+    if (hasError) {
+      alert(ALERT.ADD_CARD_ERROR);
+      history.push('/');
+      return;
+    }
+
+    history.push(`/edit/${cardId}`);
   };
 
   useEffect(() => {
@@ -125,26 +136,13 @@ const AddCardForm: VFC = () => {
           setPassword={password => setFormState({ ...formState, password })}
         />
 
-        <Button type="button" position="bottom-right" onClick={onClickNextButton}>
-          다음
-        </Button>
+        <Button position="bottom-right">다음</Button>
 
         {isCardBrandModalVisible && (
           <CardBrandModal
             cardBrands={CARD_BRAND}
             onClickCardBrandButton={onClickCardBrandButton}
             modalClose={() => setIsCardBrandModalVisible(false)}
-          />
-        )}
-
-        {isNicknameModalVisible && (
-          <NicknameModal
-            nickname={formState.nickname}
-            setNickname={nickname => setFormState({ ...formState, nickname })}
-            ownerName={formState.ownerName}
-            cardNumber={formState.cardNumber.join(CARD_NUMBER_SEPARATOR)}
-            expDate={formState.expDate}
-            cardBrand={formState.cardBrand}
           />
         )}
       </form>

@@ -22,7 +22,7 @@ export const isValidCVC = (value: string) => isNumberString(value) && value.leng
 
 export const isValidPassword = (value: string) => isNumberString(value) && value.length <= 1;
 
-interface isAllInputFilledParamType extends Omit<Card, 'cardNumber' | 'password'> {
+interface isAllInputFilledParamType extends Pick<Card, 'cardBrand' | 'CVC' | 'expDate' | 'ownerName'> {
   cardNumber: CardNumberState;
   password: PasswordState;
 }

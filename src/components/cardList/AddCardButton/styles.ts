@@ -8,4 +8,10 @@ export const CardButton = styled.button`
   font-size: 3rem;
   font-weight: 500;
   border: none;
+  cursor: pointer;
+  transition: background 0.15s ease-in;
+
+  &:hover {
+    background-color: ${GRAY[200]};
+  }
 `;

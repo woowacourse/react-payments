@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { MINT } from '../../../constants/palette';
+import { vibrate } from '../../../utils/vibrate';
 
 interface Props {
   underline?: boolean;
@@ -29,5 +30,9 @@ const Input = styled.input<Props>`
     -moz-appearance: textfield;
   }
 `;
+
+Input.defaultProps = {
+  onTouchEnd: () => vibrate(),
+};
 
 export default Input;

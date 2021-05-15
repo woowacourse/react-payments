@@ -1,10 +1,13 @@
 import { FC, MouseEvent, MouseEventHandler } from 'react';
 import styled, { css } from 'styled-components';
 import { GRAY, MINT } from '../../../constants/palette';
+import { vibrate } from '../../../utils/vibrate';
 
 interface Props {
   color?: string;
   position?: 'bottom-right';
+  width?: string;
+  height?: string;
 }
 
 const bottomRight = css`
@@ -22,9 +25,23 @@ const Button = styled.button<Props>`
   font-weight: 500;
   color: ${({ color }) => color || MINT[500]};
   ${({ position }) => position === 'bottom-right' && bottomRight}
+  ${({ width }) => width && `width: ${width};`}
+  ${({ height }) => height && `height: ${height};`}
 `;
 
-const IconButtonContainer = styled.div<IconButtonProps>`
+Button.defaultProps = {
+  onTouchStart: () => vibrate(),
+};
+
+interface IconButtonProps {
+  children?: React.ReactNode;
+  backgroundColor?: string;
+  backgroundImage?: string;
+  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  className?: string;
+}
+
+export const IconButtonContainer = styled.div<IconButtonProps>`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -33,7 +50,7 @@ const IconButtonContainer = styled.div<IconButtonProps>`
   font-weight: 400;
   font-size: 0.9em;
 
-  button {
+  .icon {
     cursor: pointer;
     border: 0;
     outline: none;
@@ -42,19 +59,21 @@ const IconButtonContainer = styled.div<IconButtonProps>`
     border-radius: 50%;
     background-color: ${({ backgroundColor }) => backgroundColor || GRAY[100]};
     margin-bottom: 0.625rem;
+    ${({ backgroundImage }) => backgroundImage && `background: url(${process.env.PUBLIC_URL + backgroundImage});`}
+    background-size: cover;
   }
 `;
 
-interface IconButtonProps {
-  children: React.ReactNode;
-  backgroundColor?: string;
-  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
-}
-
-export const IconButton: FC<IconButtonProps> = ({ children, backgroundColor, onClick }) => {
+export const IconButton: FC<IconButtonProps> = ({ className, children, backgroundColor, backgroundImage, onClick }) => {
   return (
-    <IconButtonContainer onClick={onClick} backgroundColor={backgroundColor}>
-      <button type="button" />
+    <IconButtonContainer
+      className={className}
+      onClick={onClick}
+      onTouchStart={() => vibrate()}
+      backgroundColor={backgroundColor}
+      backgroundImage={backgroundImage}
+    >
+      <div className="icon"> </div>
       <span>{children}</span>
     </IconButtonContainer>
   );

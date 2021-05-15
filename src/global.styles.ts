@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     user-select: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
     font-family: 'Noto Sans KR', sans-serif;
     color: ${GRAY[300]};
     padding: 0;
