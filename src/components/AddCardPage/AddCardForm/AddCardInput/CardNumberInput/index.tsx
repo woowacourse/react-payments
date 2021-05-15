@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useMemo, useRef, VFC } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useRef, VFC } from 'react';
 import { CardNumberState } from '../..';
 import { LABEL } from '../../../../../constants/addCardForm';
 import { CARD_NUMBER_DIGITS, CARD_NUMBER_SEPARATOR } from '../../../../../constants/creditCard';
@@ -48,8 +48,6 @@ const CardNumberInput: VFC<Props> = ({ cardNumber, setCardNumber }) => {
       )
       .slice(1);
 
-  const cardNumberInput = useMemo(() => createCardNumberInput(), [cardNumberInputInfo]);
-
   const onChangeCardNumber = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
     if (!isValidCardNumber(value)) return;
 
@@ -71,7 +69,7 @@ const CardNumberInput: VFC<Props> = ({ cardNumber, setCardNumber }) => {
 
   return (
     <AddCardInputLabel label={LABEL.CARD_NUMBER}>
-      <AddCardInputContainer>{cardNumberInput}</AddCardInputContainer>
+      <AddCardInputContainer>{createCardNumberInput()}</AddCardInputContainer>
     </AddCardInputLabel>
   );
 };
