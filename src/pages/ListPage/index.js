@@ -13,31 +13,32 @@ export const ListPage = () => {
 
   return (
     <div className="ListPage">
-      <Heading>보유카드</Heading>
-      <ul className="ListPage__UnorderedList">
+      <Heading className="ListPage__Heading">보유카드</Heading>
+      <ul className="List">
         {cardList.map((cardInfo, index) => {
           const { company, nickname } = cardInfo;
           const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({ cardInfo });
           return (
-            <li key={index}>
+            <li key={index} className="ListItem__Card">
               <CreditCardPreview
-                className="ListPage__UnorderedList__CreditCardPreview"
                 companyColor={company.color}
                 companyName={company.name}
                 cardNumber={formattedNumber}
                 ownerName={formattedOwnerName}
                 expirationDate={formattedExpirationDate}
               />
-              <span className="ListPage__UnorderedList__Nickname">{nickname}</span>
+              <span className="ListItem__Card__Nickname">{nickname}</span>
             </li>
           );
         })}
+        <li className="ListItem__Add">
+          <button className="ListItem__Add__Button" onClick={handleAddButtonClick}>
+            <Card>
+              <Text className="ListItem__Add__Sign">+</Text>
+            </Card>
+          </button>
+        </li>
       </ul>
-      <button className="ListPage__AddButton" onClick={handleAddButtonClick}>
-        <Card>
-          <Text className="ListPage__AddButton__AddSign">+</Text>
-        </Card>
-      </button>
     </div>
   );
 };

@@ -1,26 +1,30 @@
 .ListPage {
   display: flex;
-  padding: 1.8rem 2.25rem;
   height: 100%;
   flex-direction: column;
   align-items: flex-start;
-  max-height: calc(100% - 5.5rem);
-  overflow: scroll;
 }
 
-.ListPage__UnorderedList {
+.ListPage__Heading {
+  padding: 1.8rem 2.25rem;
+}
+
+.List {
+  width: 95%;
   list-style-type: none;
   align-self: center;
   padding: 0;
   margin: 0;
+  max-height: calc(100% - 5.5rem);
+  overflow: auto;
 }
 
-.ListPage__UnorderedList__CreditCardPreview {
+.ListItem__Card {
   transform: scale(0.95);
   margin: 1.5rem 0 0.5rem;
 }
 
-.ListPage__UnorderedList__Nickname {
+.ListItem__Card__Nickname {
   margin: 0.25rem 0 0.5rem;
   display: flex;
   justify-content: center;
@@ -28,11 +32,15 @@
   font-weight: 600;
 }
 
-.ListPage__AddButton {
+.ListItem__Add {
+  display: flex;
+  justify-content: center;
   transform: scale(0.95);
   margin: 1.5rem 0 0.5rem;
-  align-self: center;
   padding: 0;
+}
+
+.ListItem__Add__Button {
   font: inherit;
   color: inherit;
   background: none;
@@ -41,7 +49,7 @@
   cursor: pointer;
 }
 
-.ListPage__AddButton__AddSign {
+.ListItem__Add__Sign {
   width: 100%;
   font-size: 1.875rem;
   text-align: center;
