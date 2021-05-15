@@ -1,0 +1,13 @@
+@use "../variables/size" as *;
+
+@mixin breakpoint($size) {
+  @if $size == tablet {
+    @media screen and (min-width: $tablet) {
+      @content;
+    }
+  } @else if $size == desktop {
+    @media screen and (min-width: $desktop) {
+      @content;
+    }
+  }
+}

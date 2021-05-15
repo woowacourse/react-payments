@@ -1,0 +1,19 @@
+@use "../../assets/scss/index.scss" as *;
+
+.add-box-button {
+  width: $cardWidth;
+  min-height: $cardMinHeight;
+  border-radius: 5px;
+  background: #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: box-shadow 0.5s;
+  font-size: 36px;
+  color: #575757;
+
+  &:hover {
+    @include shadow-1;
+  }
+}

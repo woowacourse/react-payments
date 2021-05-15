@@ -1,0 +1,85 @@
+@keyframes right-in {
+  from {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes left-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100vw);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes move-up {
+  from {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes move-down {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.right-in {
+  animation: right-in 1.5s forwards;
+}
+
+.left-out {
+  animation: left-out 2s forwards;
+}
+
+.fade-in {
+  animation: fade-in 1s forwards;
+}
+
+.fade-out {
+  animation: fade-out 0.35s forwards;
+}
+
+.move-up {
+  animation: move-up 1s forwards;
+}
+
+.move-down {
+  animation: move-down 1s forwards;
+}

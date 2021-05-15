@@ -1,0 +1,20 @@
+@use "../../assets/scss/index.scss" as *;
+
+.card-list-page {
+  padding-top: 118px;
+  &__header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px 36px;
+    background-color: $LightColor;
+    margin-bottom: 36px;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

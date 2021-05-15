@@ -1,0 +1,44 @@
+@use "../../assets/scss/index.scss" as *;
+
+.card-input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__number {
+    width: 100%;
+    margin-bottom: 19px;
+  }
+
+  &__expiration {
+    width: 137px;
+    margin-bottom: 19px;
+    @include breakpoint(tablet) {
+      width: 257px;
+    }
+    @include breakpoint(desktop) {
+      width: 307px;
+    }
+  }
+
+  &__owner {
+    width: 100%;
+    margin-bottom: 19px;
+  }
+
+  &__cvc {
+    width: 122px;
+    margin-bottom: 19px;
+    @include breakpoint(tablet) {
+      width: 220px;
+    }
+    @include breakpoint(desktop) {
+      width: 257px;
+    }
+  }
+
+  &__password {
+    width: 100%;
+    margin-bottom: 19px;
+  }
+}

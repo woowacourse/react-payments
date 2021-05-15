@@ -1,0 +1,15 @@
+@mixin plain-input {
+  background: none;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin plain-button {
+  border: none;
+  background: none;
+  &:focus {
+    outline: none;
+  }
+}

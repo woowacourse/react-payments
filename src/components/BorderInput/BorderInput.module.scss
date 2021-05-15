@@ -1,0 +1,11 @@
+@use "../../assets/scss/index.scss" as *;
+
+.border-input {
+  @include plain-input;
+
+  border-bottom: 1.5px solid $placeholderColor;
+  font-size: 16px;
+  color: $textColor;
+  line-height: 21px;
+  text-align: center;
+}

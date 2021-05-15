@@ -1,0 +1,17 @@
+@use "../../assets/scss/index.scss" as *;
+
+.button {
+  @include plain-button;
+
+  color: #04c09e;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 10px 20px;
+  transition: color 0.5s;
+  cursor: pointer;
+
+  &:hover {
+    color: #8ce2d3;
+  }
+}
