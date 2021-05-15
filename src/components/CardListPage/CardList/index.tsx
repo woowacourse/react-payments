@@ -1,14 +1,23 @@
-import { FC } from 'react';
-import { CARD_MOCK_DATA } from '../../../constants/mockData';
+import { useEffect, useState, VFC } from 'react';
+import { fetchCards } from '../../../firebase/api';
 import { Card } from '../../../types';
 import CreditCard from '../../shared/CreditCard';
 import AddCardButton from './AddCardButton';
 import { CardListContainer, NickName } from './styles';
 
-const CardList: FC = ({ children }) => {
+const CardList: VFC = () => {
+  const [cards, setCards] = useState<Omit<Card, 'password' | 'CVC'>[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const responseData = await fetchCards();
+      setCards(responseData);
+    })();
+  }, []);
+
   return (
     <CardListContainer>
-      {CARD_MOCK_DATA.map((card: Card) => (
+      {cards.map(card => (
         <li key={card.cardNumber}>
           <CreditCard
             cardBrand={card.cardBrand}
