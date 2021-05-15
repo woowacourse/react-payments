@@ -1,9 +1,10 @@
-import { useRef, forwardRef } from 'react';
+import { useRef, forwardRef, useContext } from 'react';
+import { CardInfoContext } from '../../../../contexts';
 import { Input, Label } from '../../../../components';
 import { FIRST, SECOND, PASSWORD_UNIT_LENGTH } from '../../../../constants';
 
-export const PasswordInput = forwardRef((props, firstRef) => {
-  const { password, setPassword } = props;
+export const PasswordInput = forwardRef((_, firstRef) => {
+  const { password, setPassword } = useContext(CardInfoContext);
   const secondRef = useRef();
 
   return (

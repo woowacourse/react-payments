@@ -1,9 +1,11 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useContext } from 'react';
+import { CardInfoContext } from '../../../../contexts';
 import { Container, Input, Label, Text } from '../../../../components';
 import { CARD_NUMBER_UNIT_LENGTH, CARD_COMPANY_LIST, SECOND } from '../../../../constants';
 
 export const CardNumberInput = (props) => {
-  const { number, setNumber, setCompany, setIsModalOpen, refToBeFocusedNext } = props;
+  const { setIsModalOpen, refToBeFocusedNext } = props;
+  const { number, setNumber, setCompany } = useContext(CardInfoContext);
 
   const firstRef = useRef();
   const secondRef = useRef();

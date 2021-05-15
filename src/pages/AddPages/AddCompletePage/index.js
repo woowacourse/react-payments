@@ -1,12 +1,13 @@
+import { useContext } from 'react';
+import { CardInfoContext } from '../../../contexts';
 import { CreditCardPreview, Text } from '../../../components';
 import { CardNicknameForm } from './CardNicknameForm';
 import { getFormattedCardInfo } from '../../../cardInfoFormatter';
 import './style.css';
 
-export const AddCompletePage = (props) => {
-  const { initialCardInfo, cardInfo, setCardInfo } = props;
+export const AddCompletePage = () => {
+  const { cardInfo, company } = useContext(CardInfoContext);
   const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({ cardInfo });
-  const { company } = cardInfo;
 
   return (
     <div>
@@ -19,7 +20,7 @@ export const AddCompletePage = (props) => {
         ownerName={formattedOwnerName}
         expirationDate={formattedExpirationDate}
       />
-      <CardNicknameForm cardInfo={cardInfo} setCardInfo={setCardInfo} initialNickname={initialCardInfo.nickname} />
+      <CardNicknameForm />
     </div>
   );
 };

@@ -1,13 +1,11 @@
 import { useRef, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { CardInfoContext, CardListContext } from '../../../../contexts';
 import { Button, Form, Input } from '../../../../components';
 import { MAX_NICKNAME_LENGTH, ROUTE } from '../../../../constants';
-import { CardListContext } from '../../../../contexts';
 
-export const CardNicknameForm = (props) => {
-  const { cardInfo, setCardInfo, initialNickname } = props;
-  const setNickname = (nickname) => setCardInfo((prevState) => ({ ...prevState, nickname }));
-  const { nickname } = cardInfo;
+export const CardNicknameForm = () => {
+  const { cardInfo, nickname, setNickname, initialNickname } = useContext(CardInfoContext);
   const { addCard } = useContext(CardListContext);
   const ref = useRef();
   const history = useHistory();

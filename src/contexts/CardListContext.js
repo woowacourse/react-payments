@@ -5,7 +5,15 @@ export const CardListContext = createContext();
 export const CardListContextProvider = ({ children }) => {
   const [cardList, setCardList] = useState([]);
 
-  const addCard = (card) => setCardList((prevList) => [...prevList, card]);
+  const addCard = (card) => {
+    const cardClone = {
+      ...card,
+      number: { ...card.number },
+      company: { ...card.company },
+      password: { ...card.password },
+    };
+    setCardList((prevList) => [...prevList, cardClone]);
+  };
   const reset = () => setCardList(() => []);
 
   return (

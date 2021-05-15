@@ -1,31 +1,20 @@
-import { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { AddCompletePage } from './AddCompletePage';
 import { AddFormPage } from './AddFormPage';
 import { ROUTE } from '../../constants';
-
-const initialCardInfo = {
-  number: { first: '', second: '', third: '', fourth: '' },
-  company: { name: '', color: '' },
-  expirationDate: { month: '', year: '' },
-  ownerName: '',
-  isOwnerNameFilled: false,
-  securityCode: '',
-  password: { first: '', second: '' },
-  nickname: '',
-};
+import { CardInfoContextProvider } from '../../contexts';
 
 export const AddPages = () => {
-  const [cardInfo, setCardInfo] = useState(initialCardInfo);
-
   return (
-    <Switch>
-      <Route exact path={ROUTE.ADD}>
-        <AddFormPage initialCardInfo={initialCardInfo} cardInfo={cardInfo} setCardInfo={setCardInfo} />
-      </Route>
-      <Route path={ROUTE.ADD_COMPLETE}>
-        <AddCompletePage initialCardInfo={initialCardInfo} cardInfo={cardInfo} setCardInfo={setCardInfo} />
-      </Route>
-    </Switch>
+    <CardInfoContextProvider>
+      <Switch>
+        <Route exact path={ROUTE.ADD}>
+          <AddFormPage />
+        </Route>
+        <Route path={ROUTE.ADD_COMPLETE}>
+          <AddCompletePage />
+        </Route>
+      </Switch>
+    </CardInfoContextProvider>
   );
 };

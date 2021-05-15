@@ -1,9 +1,10 @@
-import { forwardRef } from 'react';
+import { forwardRef, useContext } from 'react';
+import { CardInfoContext } from '../../../../contexts';
 import { Input, Label, Text } from '../../../../components';
 import { MAX_OWNER_NAME_LENGTH } from '../../../../constants';
 
-export const OwnerNameInput = forwardRef((props, ref) => {
-  const { initialOwnerName, ownerName, setOwnerName, setIsOwnerNameFilled } = props;
+export const OwnerNameInput = forwardRef((_, ref) => {
+  const { initialOwnerName, ownerName, setOwnerName, setIsOwnerNameFilled } = useContext(CardInfoContext);
 
   return (
     <>
