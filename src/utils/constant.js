@@ -3,3 +3,7 @@ export const PAGE = {
   REGISTER: 'REGISTER',
   LIST: 'LIST',
 };
+
+export const KEY = {
+  CARDS: 'CARDS',
+};

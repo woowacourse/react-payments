@@ -22,7 +22,6 @@ function App() {
   });
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [pageRouter, setPageRouter] = useState(PAGE.LIST);
-  const [cardName, setCardName] = useState('');
 
   const resetState = () => {
     setCardCompany({ name: '', color: '' });
@@ -132,9 +131,7 @@ function App() {
         cardNumbers={cardNumbers}
         expiration={expiration}
         ownerName={ownerName}
-        cardName={cardName}
         resetState={resetState}
-        setCardName={setCardName}
       />
     ),
 

@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '../../components/Card/Card';
 import UnderLineInput from '../../components/UnderLineInput/UnderLineInput';
 import TextButton from '../../components/TextButton/TextButton';
 import PropTypes from 'prop-types';
+import { KEY } from '../../utils/constant';
 
 const CardRegisterPage = (props) => {
-  const { cardCompany, cardNumbers, expiration, ownerName, resetState, setCardName } = props;
+  const { cardCompany, cardNumbers, expiration, ownerName, resetState } = props;
+
+  const [cardName, setCardName] = useState('');
+
+  const cards = JSON.parse(localStorage.getItem(KEY.CARDS)) ?? [];
+
+  const handleCardName = ({ target: { value } }) => {
+    setCardName(value);
+  };
 
   const handleCardSubmit = (e) => {
     e.preventDefault();
 
-    const { value } = e.target.elements['cardName'];
-    setCardName(value);
+    localStorage.setItem(
+      KEY.CARDS,
+      JSON.stringify([...cards, { cardCompany, cardNumbers, expiration, ownerName, cardName }])
+    );
+
     resetState();
   };
 
@@ -27,7 +39,7 @@ const CardRegisterPage = (props) => {
           cardNumbers={cardNumbers}
         />
       </div>
-      <UnderLineInput name={'cardName'} />
+      <UnderLineInput name={'cardName'} onChange={handleCardName} />
       <div className="mt-40">
         <TextButton text={'완료'} />
       </div>
@@ -43,5 +55,4 @@ CardRegisterPage.propTypes = {
   expiration: PropTypes.object.isRequired,
   ownerName: PropTypes.string,
   resetState: PropTypes.func,
-  setCardName: PropTypes.func,
 };
