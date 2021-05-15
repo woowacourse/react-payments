@@ -11,39 +11,43 @@ export default function CardList({ cards }) {
   };
 
   return (
-    <div>
-      <Header title="카드 목록"></Header>
-      <main className="card-list__container">
+    <>
+      <Header title="카드 목록" className="fixed top-0"></Header>
+      <ul className="card-list__container">
         {cards?.map((card) => (
-          <button
-            type="button"
-            className="card-list__item-button"
-            aria-label={`${card.nickname} 카드 별칭 수정`}
-            key={card.id}
-            onClick={() => {
-              history.push(`${PATH.ADD_CARD_COMPLETE}/${card.id}`);
-            }}
-          >
-            <Card
-              companyName={CARD_COMPANY[card.company].NAME}
-              color={CARD_COMPANY[card.company].COLOR}
-              number={card.number}
-              userName={card.userName}
-              expirationDate={card.expirationDate}
-            />
-            <p>{card.nickname}</p>
-          </button>
+          <li className="card-list__item">
+            <button
+              type="button"
+              className="card-list__item-button"
+              aria-label={`${card.nickname} 카드 별칭 수정`}
+              key={card.id}
+              onClick={() => {
+                history.push(`${PATH.ADD_CARD_COMPLETE}/${card.id}`);
+              }}
+            >
+              <Card
+                companyName={CARD_COMPANY[card.company].NAME}
+                color={CARD_COMPANY[card.company].COLOR}
+                number={card.number}
+                userName={card.userName}
+                expirationDate={card.expirationDate}
+              />
+              <p>{card.nickname}</p>
+            </button>
+          </li>
         ))}
 
-        <button
-          type="button"
-          className="card-list__item-button"
-          aria-label="카드 추가"
-          onClick={onAddButtonClick}
-        >
-          <Card />
-        </button>
-      </main>
-    </div>
+        <li className="card-list__item">
+          <button
+            type="button"
+            className="card-list__add-card-button"
+            aria-label="카드 추가"
+            onClick={onAddButtonClick}
+          >
+            +
+          </button>
+        </li>
+      </ul>
+    </>
   );
 }
