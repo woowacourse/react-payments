@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, TextButton } from '../../components';
 import { CARD, CARD_COMPANY, PATH } from '../../constants';
 import './style.css';
 import '../../index.css';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import useForm from '../../hooks/useForm';
 import { useContext } from 'react';
 import { CardsContext } from '../../cardsContext';
 
-export default function AddCardComplete({ cards, currentCardId }) {
+export default function AddCardComplete({ cards }) {
+  const history = useHistory();
+  const { id } = useParams();
+  const currentCardId = Number(id);
+
   const card = cards.find((card) => card.id === currentCardId);
   const { company, number, expirationDate, userName, nickname } = card;
   const [{ cardNickname }, onInputChange, reset] = useForm({ cardNickname: nickname });
 
   const dispatch = useContext(CardsContext);
-
-  const history = useHistory();
 
   const onCardNickNameSubmit = (event) => {
     event.preventDefault();

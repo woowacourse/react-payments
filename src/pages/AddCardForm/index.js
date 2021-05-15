@@ -164,7 +164,7 @@ export default function AddCardForm({
 
     reset();
 
-    history.push(PATH.ADD_CARD_COMPLETE);
+    history.push(`${PATH.ADD_CARD_COMPLETE}/${newCardId}`);
   };
 
   return (

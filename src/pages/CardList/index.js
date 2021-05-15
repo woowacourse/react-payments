@@ -20,6 +20,9 @@ export default function CardList({ cards }) {
             className="card-list__item-button"
             aria-label={`${card.nickname} 카드 별칭 수정`}
             key={card.id}
+            onClick={() => {
+              history.push(`${PATH.ADD_CARD_COMPLETE}/${card.id}`);
+            }}
           >
             <Card
               companyName={CARD_COMPANY[card.company].NAME}

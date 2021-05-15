@@ -75,7 +75,7 @@ function App() {
             reset={reset}
           />
         </Route>
-        <Route exact path={PATH.ADD_CARD_COMPLETE}>
+        <Route exact path={`${PATH.ADD_CARD_COMPLETE}/:id`}>
           <AddCardComplete cards={cards} currentCardId={currentCardId} />
         </Route>
       </BrowserRouter>
