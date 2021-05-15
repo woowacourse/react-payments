@@ -1,12 +1,36 @@
 .ListPage {
   display: flex;
-  padding: 1.7625rem 2.25rem;
+  padding: 1.8rem 2.25rem;
+  height: 100%;
   flex-direction: column;
   align-items: flex-start;
+  max-height: calc(100% - 5.5rem);
+  overflow: scroll;
+}
+
+.ListPage__UnorderedList {
+  list-style-type: none;
+  align-self: center;
+  padding: 0;
+  margin: 0;
+}
+
+.ListPage__UnorderedList__CreditCardPreview {
+  transform: scale(0.95);
+  margin: 1.5rem 0 0.5rem;
+}
+
+.ListPage__UnorderedList__Nickname {
+  margin: 0.25rem 0 0.5rem;
+  display: flex;
+  justify-content: center;
+  color: #575757;
+  font-weight: 600;
 }
 
 .ListPage__AddButton {
-  margin-top: 3.75rem;
+  transform: scale(0.95);
+  margin: 1.5rem 0 0.5rem;
   align-self: center;
   padding: 0;
   font: inherit;
@@ -17,12 +41,8 @@
   cursor: pointer;
 }
 
-.ListPage__AddSign {
+.ListPage__AddButton__AddSign {
   width: 100%;
   font-size: 1.875rem;
   text-align: center;
-}
-
-.ListPage__CreditCardPreview {
-  transform: scale(0.95);
 }
