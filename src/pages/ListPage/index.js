@@ -1,11 +1,13 @@
+import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Card, CreditCardPreview, Text, Heading } from '../../components';
 import { getFormattedCardInfo } from '../../cardInfoFormatter';
+import { CardListContext } from '../../contexts';
 import { ROUTE } from '../../constants';
 import './style.css';
 
-export const ListPage = (props) => {
-  const { cardList } = props;
+export const ListPage = () => {
+  const { cardList } = useContext(CardListContext);
   const history = useHistory();
   const handleAddButtonClick = () => history.push(ROUTE.ADD);
 

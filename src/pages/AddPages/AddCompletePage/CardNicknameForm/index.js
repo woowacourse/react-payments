@@ -1,12 +1,14 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Form, Input } from '../../../../components';
 import { MAX_NICKNAME_LENGTH, ROUTE } from '../../../../constants';
+import { CardListContext } from '../../../../contexts';
 
 export const CardNicknameForm = (props) => {
-  const { cardInfo, setCardInfo, initialNickname, addCardInfoToList } = props;
+  const { cardInfo, setCardInfo, initialNickname } = props;
   const setNickname = (nickname) => setCardInfo((prevState) => ({ ...prevState, nickname }));
   const { nickname } = cardInfo;
+  const { addCard } = useContext(CardListContext);
   const ref = useRef();
   const history = useHistory();
 
@@ -27,7 +29,7 @@ export const CardNicknameForm = (props) => {
       <Button
         className="CardNicknameForm__Submit_Button"
         disabled={nickname === initialNickname}
-        onClick={(e) => handleNicknameSubmit({ e, cardInfo, addCardInfoToList, history })}
+        onClick={(e) => handleNicknameSubmit({ e, cardInfo, addCard, history })}
       >
         확인
       </Button>
@@ -40,8 +42,9 @@ function handleNicknameInputChange({ e, setNickname }) {
   setNickname(slicedInputValue);
 }
 
-function handleNicknameSubmit({ e, cardInfo, addCardInfoToList, history }) {
+function handleNicknameSubmit({ e, cardInfo, addCard, history }) {
   e.preventDefault();
-  addCardInfoToList(cardInfo);
+
+  addCard(cardInfo);
   history.push(ROUTE.HOME);
 }

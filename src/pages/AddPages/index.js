@@ -15,8 +15,7 @@ const initialCardInfo = {
   nickname: '',
 };
 
-export const AddPages = (props) => {
-  const { addCardInfoToList } = props;
+export const AddPages = () => {
   const [cardInfo, setCardInfo] = useState(initialCardInfo);
 
   return (
@@ -25,12 +24,7 @@ export const AddPages = (props) => {
         <AddFormPage initialCardInfo={initialCardInfo} cardInfo={cardInfo} setCardInfo={setCardInfo} />
       </Route>
       <Route path={ROUTE.ADD_COMPLETE}>
-        <AddCompletePage
-          initialCardInfo={initialCardInfo}
-          cardInfo={cardInfo}
-          setCardInfo={setCardInfo}
-          addCardInfoToList={addCardInfoToList}
-        />
+        <AddCompletePage initialCardInfo={initialCardInfo} cardInfo={cardInfo} setCardInfo={setCardInfo} />
       </Route>
     </Switch>
   );
