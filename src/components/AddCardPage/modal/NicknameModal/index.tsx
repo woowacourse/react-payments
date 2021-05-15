@@ -16,8 +16,13 @@ interface Props {
 }
 
 const NicknameModal: FC<Props> = ({ cardBrand, cardNumber, expDate, ownerName, nickname, setNickname }) => {
-  const onChangeNickname = ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
-    setNickname(value || cardBrand.name);
+  const onChangeNickname = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => setNickname(value);
+
+  const onBlurNickname = () => {
+    if (nickname !== '') return;
+
+    setNickname(cardBrand.name);
+  };
 
   useEffect(() => {
     setNickname(cardBrand.name);
@@ -38,6 +43,7 @@ const NicknameModal: FC<Props> = ({ cardBrand, cardNumber, expDate, ownerName, n
           color="black"
           value={nickname}
           onChange={onChangeNickname}
+          onBlur={onBlurNickname}
           underline
           textCenter
           width="60%"
