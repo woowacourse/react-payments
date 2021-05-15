@@ -1,5 +1,5 @@
-import GlobalStyle from './global.styles';
 import AddCardPage from './components/AddCardPage';
+import GlobalStyle from './global.styles';
 
 function App() {
   return (

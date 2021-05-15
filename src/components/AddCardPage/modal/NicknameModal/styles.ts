@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import CreditCard from '../../../shared/CreditCard';
 
-export const NicknameContainer = styled.div`
+export const NicknameContainer = styled.form`
   height: 100%;
   display: flex;
   flex-direction: column;

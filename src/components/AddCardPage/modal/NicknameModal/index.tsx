@@ -1,10 +1,12 @@
-import { ChangeEvent, FC, useEffect } from 'react';
+import { ChangeEvent, FC, FormEvent, useEffect } from 'react';
 import { CardBrand, ExpDate } from '../../../../types';
 import Button from '../../../shared/Button';
 import Input from '../../../shared/Input';
 import Modal from '../../../shared/Modal';
 import CreditCard from '../../../shared/CreditCard';
 import { NicknameContainer, ResultCreditCard } from './styles';
+import fireStore from '../../../../firebase/firebase';
+import { addCard } from '../../../../firebase/api';
 
 interface Props {
   nickname: string;
@@ -16,6 +18,10 @@ interface Props {
 }
 
 const NicknameModal: FC<Props> = ({ cardBrand, cardNumber, expDate, ownerName, nickname, setNickname }) => {
+  useEffect(() => {
+    setNickname(cardBrand.name);
+  }, []);
+
   const onChangeNickname = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => setNickname(value);
 
   const onBlurNickname = () => {
@@ -24,13 +30,15 @@ const NicknameModal: FC<Props> = ({ cardBrand, cardNumber, expDate, ownerName, n
     setNickname(cardBrand.name);
   };
 
-  useEffect(() => {
-    setNickname(cardBrand.name);
-  }, []);
+  const onAddCard = async (event: FormEvent) => {
+    event.preventDefault();
+
+    addCard({ cardBrand, cardNumber, expDate, ownerName, nickname });
+  };
 
   return (
     <Modal type="full">
-      <NicknameContainer>
+      <NicknameContainer onSubmit={onAddCard}>
         <header>카드등록이 완료되었습니다.</header>
         <ResultCreditCard
           cardBrand={cardBrand}

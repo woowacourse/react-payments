@@ -103,18 +103,18 @@ const AddCardForm = () => {
             onClose={() => setIsCardBrandModalVisible(false)}
           />
         )}
-
-        {isNicknameModalVisible && (
-          <NicknameModal
-            nickname={nickname}
-            setNickname={setNickname}
-            ownerName={ownerName}
-            cardNumber={cardNumber.join(CARD_NUMBER_SEPARATOR)}
-            expDate={expDate}
-            cardBrand={cardBrand}
-          />
-        )}
       </form>
+
+      {isNicknameModalVisible && (
+        <NicknameModal
+          nickname={nickname}
+          setNickname={setNickname}
+          ownerName={ownerName}
+          cardNumber={cardNumber.join(CARD_NUMBER_SEPARATOR)}
+          expDate={expDate}
+          cardBrand={cardBrand}
+        />
+      )}
     </div>
   );
 };
