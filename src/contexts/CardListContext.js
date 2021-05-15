@@ -6,11 +6,7 @@ export const CardListContextProvider = ({ children }) => {
   const [cardList, setCardList] = useState([]);
 
   const addCard = (card) => {
-    const cardClone = {
-      ...card,
-      number: { ...card.number },
-      company: { ...card.company },
-      password: { ...card.password },
+    setCardList((prevList) => [...prevList, deepCopy(card)]);
     };
     setCardList((prevList) => [...prevList, cardClone]);
   };

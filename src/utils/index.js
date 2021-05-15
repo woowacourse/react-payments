@@ -1,3 +1,4 @@
+import { deepCopy } from './deepCopy';
 import { httpClient } from './httpClient';
 
-export { httpClient };
+export { deepCopy, httpClient };
