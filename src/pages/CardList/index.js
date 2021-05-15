@@ -12,7 +12,9 @@ export default function CardList({ cards }) {
 
   return (
     <>
-      <Header title="카드 목록" className="fixed top-0"></Header>
+      <Header>
+        <h1 className="header__title">보유 카드</h1>
+      </Header>
       <ul className="card-list__container">
         {cards?.map((card) => (
           <li className="card-list__item">

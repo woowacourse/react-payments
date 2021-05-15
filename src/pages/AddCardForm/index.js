@@ -185,7 +185,12 @@ export default function AddCardForm({ cards }) {
 
   return (
     <div className="add-card-form__container">
-      <Header title="카드추가" />
+      <Header>
+        <button type="button">
+          <Icon.LeftArrow size="16px" color="#525252" />
+        </button>
+        <h1>카드 추가</h1>
+      </Header>
       <form className="add-card-form" onSubmit={onCardFormSubmit}>
         <div className="card-preview">
           <Card

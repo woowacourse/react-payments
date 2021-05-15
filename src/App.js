@@ -1,9 +1,9 @@
 import React, { useReducer } from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
-import { AddCardForm, AddCardComplete, CardList } from './pages';
-import { PATH } from './constants';
 import { CardsContext } from './cardsContext';
 import reducer from './reducer';
+import { PATH } from './constants';
+import { AddCardForm, AddCardComplete, CardList } from './pages';
 
 const initialState = {
   cards: [
