@@ -4,23 +4,23 @@ import { CARD, ERROR_MESSAGE } from '../../../constants';
 import { isValidUserName } from '../validator';
 
 const UserNameInput = ({ userName, onInputChange }) => {
-  const [userNameErrorMessage, setUserNameErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = (event) => {
     const name = event.target.value;
 
     if (!isValidUserName(name)) {
-      setUserNameErrorMessage(ERROR_MESSAGE.INVALID_USER_NAME);
+      setErrorMessage(ERROR_MESSAGE.INVALID_USER_NAME);
       return;
     }
 
-    setUserNameErrorMessage('');
+    setErrorMessage('');
     onInputChange(event);
   };
 
   const checkValidity = () => {
     if (isValidUserName(userName)) {
-      setUserNameErrorMessage('');
+      setErrorMessage('');
     }
   };
 
@@ -37,7 +37,7 @@ const UserNameInput = ({ userName, onInputChange }) => {
       value={userName}
       onChange={onChange}
       onBlur={checkValidity}
-      errorMessage={userNameErrorMessage}
+      errorMessage={errorMessage}
     />
   );
 };
