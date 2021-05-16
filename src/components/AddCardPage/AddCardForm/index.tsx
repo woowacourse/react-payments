@@ -104,12 +104,16 @@ const AddCardForm = () => {
 
       {isNicknameModalVisible && (
         <NicknameModal
+          cardInfo={{
+            cardBrand,
+            cardNumber: cardNumber.join(CARD_NUMBER_SEPARATOR),
+            expDate,
+            ownerName,
+            password: password.join(''),
+            CVC,
+          }}
           nickname={nickname}
           setNickname={setNickname}
-          ownerName={ownerName}
-          cardNumber={cardNumber.join(CARD_NUMBER_SEPARATOR)}
-          expDate={expDate}
-          cardBrand={cardBrand}
         />
       )}
     </div>
