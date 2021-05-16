@@ -20,13 +20,13 @@ import { getCardCompany } from "../../utils/cardCompany";
 
 const cx = classNames.bind(styles);
 
-const CardInputContainer = ({ cardState, setCardStateByKey, showCardCompanySelectContainer }) => {
-  const cardNumberHook = useCardNumber(cardState, setCardStateByKey);
-  const cardExpirationHook = useCardExpiration(cardState, setCardStateByKey);
-  const cardOwnerHook = useCardOwner(cardState, setCardStateByKey);
-  const cardCompanyHook = useCardCompany(cardState, setCardStateByKey);
-  const cardCVCHook = useCardCVC(cardState, setCardStateByKey);
-  const cardPasswordHook = useCardPassword(cardState, setCardStateByKey);
+const CardInputContainer = ({ showCardCompanySelectContainer }) => {
+  const cardNumberHook = useCardNumber();
+  const cardExpirationHook = useCardExpiration();
+  const cardOwnerHook = useCardOwner();
+  const cardCompanyHook = useCardCompany();
+  const cardCVCHook = useCardCVC();
+  const cardPasswordHook = useCardPassword();
 
   useEffect(() => {
     if (!isAllTextFilledInObject(cardNumberHook.cardNumberState, CARD_INPUT.CARD_NUMBER_TEXT_LENGTH)) {

@@ -10,14 +10,9 @@ import CircleButton from "../../components/CircleButton/CircleButton";
 
 const cx = classNames.bind(styles);
 
-const CardCompanySelectContainer = ({
-  cardState,
-  setCardStateByKey,
-  hideCardCompanySelectContainer,
-  backDropAnimation,
-  bottomSliderAnimation,
-}) => {
-  const cardCompanyHook = useCardCompany(cardState, setCardStateByKey);
+const CardCompanySelectContainer = ({ hideCardCompanySelectContainer, backDropAnimation, bottomSliderAnimation }) => {
+  const cardCompanyHook = useCardCompany();
+
   const onCardCompanySelect = (cardCompany) => {
     cardCompanyHook.setCardCompanyState(cardCompany);
     hideCardCompanySelectContainer();

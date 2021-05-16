@@ -14,10 +14,13 @@ import CardCompanySelectContainer from "../../containers/CardCompanySelectContai
 import NavigationButton from "../../components/NavigationButton/NavigationButton";
 import Card from "../../components/Card/Card";
 import Button from "../../components/Button/Button";
+import { useContext } from "react";
+import AppContext from "../../contexts/appContext";
 
 const cx = classNames.bind(styles);
 
-const AddCardPage = ({ cardState, setCardStateByKey, cardListState, setCardListState, setCardStateEmpty }) => {
+const AddCardPage = () => {
+  const { cardState, cardListState, setCardListState, setCardStateEmpty } = useContext(AppContext);
   const toggle = useToggle();
   const cardListHook = useCardList(cardListState, setCardListState);
 
@@ -42,16 +45,10 @@ const AddCardPage = ({ cardState, setCardStateByKey, cardListState, setCardListS
           cardExpiration={cardState[STATE_KEY.CARD_EXPIRATION]}
           backgroundColor={getCardColor(cardState[STATE_KEY.CARD_COMPANY])}
         />
-        <CardInputContainer
-          cardState={cardState}
-          setCardStateByKey={setCardStateByKey}
-          showCardCompanySelectContainer={toggle.setToggled}
-        />
+        <CardInputContainer showCardCompanySelectContainer={toggle.setToggled} />
       </main>
       {toggle.state.isToggled && (
         <CardCompanySelectContainer
-          cardState={cardState}
-          setCardStateByKey={setCardStateByKey}
           hideCardCompanySelectContainer={toggle.setUntoggled}
           backDropAnimation={toggle.state.fadeAnimation}
           bottomSliderAnimation={toggle.state.moveAnimation}

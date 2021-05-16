@@ -1,12 +1,16 @@
+import { useContext } from "react";
 import classNames from "classnames/bind";
 import styles from "./CardListContainer.module.scss";
 import { getCardColor } from "../../utils/cardCompany";
 
 import Card from "../../components/Card/Card";
+import AppContext from "../../contexts/appContext";
 
 const cx = classNames.bind(styles);
 
-const CardListContainer = ({ cardListState }) => {
+const CardListContainer = () => {
+  const { cardListState } = useContext(AppContext);
+
   const cardList = cardListState.map((card) => {
     return (
       <Card

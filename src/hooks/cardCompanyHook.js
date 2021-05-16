@@ -1,8 +1,11 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { STATE_KEY } from "../constants";
+import AppContext from "../contexts/appContext";
 import { isNumberText } from "../utils/cardInputValidation";
 
-const useCardCompany = (cardState, setCardStateByKey) => {
+const useCardCompany = () => {
+  const { setCardStateByKey } = useContext(AppContext);
+
   const setCardCompanyState = useCallback(
     (cardCompany) => {
       setCardStateByKey(STATE_KEY.CARD_COMPANY, cardCompany);

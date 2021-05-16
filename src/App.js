@@ -6,6 +6,7 @@ import CardListPage from "./pages/CardListPage/CardListPage";
 import AddCardPage from "./pages/AddCardPage/AddCardPage";
 import AddCardCompletePage from "./pages/AddCardCompletePage/AddCardCompletePage";
 import { STATE_KEY } from "./constants";
+import AppContext from "./contexts/appContext";
 
 const initialCardState = {
   [STATE_KEY.CARD_COMPANY]: "",
@@ -27,6 +28,7 @@ const initialCardState = {
 
 function App() {
   const [cardState, setCardState] = useState(initialCardState);
+  const [cardListState, setCardListState] = useState([]);
 
   const setCardStateByKey = (cardStateKey, cardStateValue) => {
     if (!(cardStateKey in cardState)) {
@@ -43,32 +45,21 @@ function App() {
     setCardState({ ...initialCardState });
   };
 
-  const [cardListState, setCardListState] = useState([]);
-
   return (
     <div className="App">
-      <Switch>
-        <Route path="/add" exact>
-          <AddCardPage
-            cardState={cardState}
-            setCardStateByKey={setCardStateByKey}
-            cardListState={cardListState}
-            setCardListState={setCardListState}
-            setCardStateEmpty={setCardStateEmpty}
-          />
-        </Route>
-        <Route path="/complete" exact>
-          <AddCardCompletePage
-            cardState={cardState}
-            setCardStateByKey={setCardStateByKey}
-            cardListState={cardListState}
-            setCardListState={setCardListState}
-          />
-        </Route>
-        <Route>
-          <CardListPage cardListState={cardListState} />
-        </Route>
-      </Switch>
+      <AppContext.Provider value={{ cardState, cardListState, setCardStateByKey, setCardStateEmpty, setCardListState }}>
+        <Switch>
+          <Route path="/add" exact>
+            <AddCardPage />
+          </Route>
+          <Route path="/complete" exact>
+            <AddCardCompletePage />
+          </Route>
+          <Route>
+            <CardListPage />
+          </Route>
+        </Switch>
+      </AppContext.Provider>
     </div>
   );
 }

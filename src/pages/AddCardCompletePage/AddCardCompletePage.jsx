@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
 
 import { useHistory } from "react-router-dom";
 import classNames from "classnames/bind";
@@ -14,13 +14,14 @@ import Card from "../../components/Card/Card";
 import BorderInput from "../../components/BorderInput/BorderInput";
 import Button from "../../components/Button/Button";
 import { getCardColor } from "../../utils/cardCompany";
+import AppContext from "../../contexts/appContext";
 
 const cx = classNames.bind(styles);
 
-const AddCardCompletePage = ({ cardListState, setCardListState }) => {
-  const cardListHook = useCardList(cardListState, setCardListState);
+const AddCardCompletePage = () => {
+  const cardListHook = useCardList();
   const [cardNickName, setCardNickName] = useState("");
-  const [lastAddedCard] = useMemo(() => cardListState.slice(-1), [cardListState]);
+  const [lastAddedCard] = useMemo(() => cardListHook.cardListState.slice(-1), [cardListHook.cardListState]);
   const history = useHistory();
 
   const onCardNickNameRegister = () => {

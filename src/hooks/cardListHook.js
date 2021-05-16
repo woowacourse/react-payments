@@ -1,7 +1,10 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
+import AppContext from "../contexts/appContext";
 import { isAllCardInputCorrect, isSameCardNumber } from "../utils/cardInputValidation";
 
-const useCardList = (cardListState, setCardListState) => {
+const useCardList = () => {
+  const { cardListState, setCardListState } = useContext(AppContext);
+
   const addCardItem = useCallback(
     (card) => {
       if (!isAllCardInputCorrect(card)) {
@@ -31,6 +34,7 @@ const useCardList = (cardListState, setCardListState) => {
   );
 
   return {
+    cardListState,
     addCardItem,
     updateCardItem,
   };

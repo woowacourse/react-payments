@@ -1,7 +1,10 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { STATE_KEY } from "../constants";
+import AppContext from "../contexts/appContext";
 
-const useCardNickName = (cardState, setCardStateByKey) => {
+const useCardNickName = () => {
+  const { cardState, setCardStateByKey } = useContext(AppContext);
+
   const cardNickName = cardState[STATE_KEY.CARD_NICK_NAME];
 
   const setCardNickNameState = useCallback(
