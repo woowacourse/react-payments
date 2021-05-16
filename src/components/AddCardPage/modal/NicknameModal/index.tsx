@@ -1,14 +1,14 @@
 import { ChangeEvent, FC, FormEvent, useEffect } from 'react';
+import { useHistory } from 'react-router';
+import { ALERT } from '../../../../constants/messages';
+import PAGE from '../../../../constants/pages';
+import { addCard } from '../../../../firebase/api';
+import useDebounceCallback from '../../../../hooks/useDebounceCallback';
 import { CardBrand, ExpDate } from '../../../../types';
 import Button from '../../../shared/Button';
 import Input from '../../../shared/Input';
 import Modal from '../../../shared/Modal';
-import CreditCard from '../../../shared/CreditCard';
 import { NicknameContainer, ResultCreditCard } from './styles';
-import fireStore from '../../../../firebase/firebase';
-import { addCard } from '../../../../firebase/api';
-import { useHistory } from 'react-router';
-import PAGE from '../../../../constants/pages';
 
 interface Props {
   nickname: string;
@@ -34,20 +34,22 @@ const NicknameModal: FC<Props> = ({ cardBrand, cardNumber, expDate, ownerName, n
   };
 
   const onAddCard = async (event: FormEvent) => {
-    try {
-      event.preventDefault();
+    event.preventDefault();
 
+    try {
       await addCard({ cardBrand, cardNumber, expDate, ownerName, nickname });
-      alert('새로운 카드를 추가했습니다!');
+      alert(ALERT.CARD_SUBMIT_SUCCESS);
       history.push(PAGE.CARD_LIST.PATH);
     } catch (e) {
       alert(e.message);
     }
   };
 
+  const debouncedOnAddCard = useDebounceCallback(onAddCard, 500);
+
   return (
     <Modal type="full">
-      <NicknameContainer onSubmit={onAddCard}>
+      <NicknameContainer onSubmit={debouncedOnAddCard}>
         <header>카드등록이 완료되었습니다.</header>
         <ResultCreditCard
           cardBrand={cardBrand}
