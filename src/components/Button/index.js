@@ -18,7 +18,7 @@ Button.propTypes = {
   className: PropTypes.string,
   type: PropTypes.oneOf(['submit', 'reset', 'button']).isRequired,
   onClick: PropTypes.func,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  children: PropTypes.node,
 };
 
 Button.defaultProps = {

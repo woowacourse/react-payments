@@ -33,16 +33,27 @@
 }
 
 .ListItem__Card {
+  position: relative;
   transform: scale(0.95);
-  margin: 0.5rem 0 1.5rem;
+  margin: 1rem 0 2.5rem;
 }
 
 .ListItem__Card__Nickname {
-  margin: 0.25rem 0 0.5rem;
+  margin: 0.75rem 0;
   display: flex;
   justify-content: center;
   color: #575757;
   font-weight: 600;
+}
+
+.ListItem__Card__DeleteButton {
+  position: absolute;
+  top: 0.2rem;
+  right: 1.4rem;
+}
+
+.ListItem__Card__DeleteButton:hover {
+  animation: wave-animation 0.3s infinite;
 }
 
 .ListItem__Add {
@@ -62,8 +73,25 @@
   cursor: pointer;
 }
 
+.ListItem__Add__Button:hover .ListItem__Add__Sign {
+  animation: wave-animation 0.5s infinite;
+}
+
 .ListItem__Add__Sign {
   width: 100%;
   font-size: 1.875rem;
   text-align: center;
+}
+
+@keyframes wave-animation {
+  0%,
+  100% {
+    transform: scale(1.15) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.15) rotate(20deg);
+  }
+  75% {
+    transform: scale(1.15) rotate(-15deg);
+  }
 }
