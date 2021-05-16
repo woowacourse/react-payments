@@ -10,6 +10,12 @@ export const ListPage = () => {
   const { cardList, deleteCard } = useContext(CardListContext);
   const history = useHistory();
   const handleAddButtonClick = () => history.push(ROUTE.ADD);
+  const handleDeleteButtonClick = (id) => {
+    if (!window.confirm('정말로 카드를 삭제하시겠습니까?')) {
+      return;
+    }
+    deleteCard(id);
+  };
 
   return (
     <div className="ListPage">
@@ -29,7 +35,7 @@ export const ListPage = () => {
               />
               <span className="ListItem__Card__Nickname">{nickname}</span>
               <Button className="ListItem__Card__DeleteButton">
-                <TrashCanIcon width="1.1rem" color="#888" onClick={() => deleteCard(id)} />
+                <TrashCanIcon width="1.1rem" color="#888" onClick={() => handleDeleteButtonClick(id)} />
               </Button>
             </li>
           );
