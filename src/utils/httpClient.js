@@ -7,7 +7,7 @@ export const httpClient = async ({ url, method = HTTP_METHOD.GET, body }) => {
     const response = await fetch(url, options);
 
     if (!response.ok) {
-      throw new Error('요청 실패');
+      throw new Error('HTTP 요청 실패');
     }
     const body = await response.json();
 
@@ -28,6 +28,10 @@ function getOptions(method, body) {
   switch (method) {
     case HTTP_METHOD.GET:
       return defaultOptions;
+
+    case HTTP_METHOD.DELETE:
+      return defaultOptions;
+
     default:
       return {
         ...defaultOptions,

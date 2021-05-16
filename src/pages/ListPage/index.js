@@ -7,7 +7,7 @@ import { ROUTE } from '../../constants';
 import './style.css';
 
 export const ListPage = () => {
-  const { cardList } = useContext(CardListContext);
+  const { cardList, deleteCard } = useContext(CardListContext);
   const history = useHistory();
   const handleAddButtonClick = () => history.push(ROUTE.ADD);
 
@@ -29,7 +29,7 @@ export const ListPage = () => {
               />
               <span className="ListItem__Card__Nickname">{nickname}</span>
               <Button className="ListItem__Card__DeleteButton">
-                <TrashCanIcon width="1.1rem" color="#888" />
+                <TrashCanIcon width="1.1rem" color="#888" onClick={() => deleteCard(id)} />
               </Button>
             </li>
           );

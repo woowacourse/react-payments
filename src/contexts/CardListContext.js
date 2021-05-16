@@ -39,10 +39,22 @@ export const CardListContextProvider = ({ children }) => {
     }
   };
 
+  const deleteCard = async (cardId) => {
+    const filteredList = [...cardList].filter((v) => v.id !== cardId);
+
+    try {
+      await httpClient({ url: `${url}/${cardId}`, method: HTTP_METHOD.DELETE });
+
+      setCardList(() => filteredList);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const resetCardList = () => setCardList(() => []);
 
   return (
-    <CardListContext.Provider value={{ cardList, setCardList, addCard, resetCardList }}>
+    <CardListContext.Provider value={{ cardList, setCardList, addCard, deleteCard, resetCardList }}>
       {children}
     </CardListContext.Provider>
   );
