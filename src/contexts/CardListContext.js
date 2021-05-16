@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect } from 'react';
-import { deepCopy, httpClient, idGenerator } from '../utils';
+import { deepCopy, httpClient } from '../utils';
 import { DB_ENDPOINT, HTTP_METHOD } from '../constants';
 
 const url = DB_ENDPOINT.CARDS;
@@ -12,7 +12,8 @@ export const CardListContextProvider = ({ children }) => {
   const readCards = async () => {
     try {
       const body = await httpClient({ url, method: HTTP_METHOD.GET });
-      setCardList(body);
+
+      setCardList(() => body);
     } catch (error) {
       console.error(error);
     }
@@ -23,11 +24,13 @@ export const CardListContextProvider = ({ children }) => {
   }, []);
 
   const addCard = async (card) => {
+    const newCard = { ...deepCopy(card) };
+
     try {
       const body = await httpClient({
         url,
         method: HTTP_METHOD.POST,
-        body: JSON.stringify({ id: idGenerator(), ...deepCopy(card) }),
+        body: JSON.stringify(newCard),
       });
 
       setCardList((prevList) => [...prevList, body]);
