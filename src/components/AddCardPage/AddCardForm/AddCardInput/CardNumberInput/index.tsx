@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useRef, VFC } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 import { LABEL } from '../../../../../constants/addCardForm';
 import { CARD_NUMBER_DIGITS, CARD_NUMBER_SEPARATOR } from '../../../../../constants/creditCard';
 import { CardNumberState } from '../../../../../types';
@@ -12,7 +12,7 @@ interface Props {
   setCardNumber: Dispatch<SetStateAction<CardNumberState>>;
 }
 
-const CardNumberInput: VFC<Props> = ({ cardNumber, setCardNumber }) => {
+const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
   const secondCardNumberInputRef = useRef<HTMLInputElement>(null);
   const thirdCardNumberInputRef = useRef<HTMLInputElement>(null);
   const fourthCardNumberInputRef = useRef<HTMLInputElement>(null);

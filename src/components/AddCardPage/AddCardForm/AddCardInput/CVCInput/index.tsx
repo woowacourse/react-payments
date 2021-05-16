@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, VFC } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { LABEL } from '../../../../../constants/addCardForm';
 import { CVC_DIGITS } from '../../../../../constants/creditCard';
 import QuestionIcon from '../../../../shared/Icon/QuestionIcon';
@@ -13,7 +13,7 @@ interface Props {
   setCVC: Dispatch<SetStateAction<string>>;
 }
 
-const CVCInput: VFC<Props> = ({ CVC, setCVC }) => {
+const CVCInput = ({ CVC, setCVC }: Props) => {
   const onChangeCVC = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     if (!isValidCVC(value)) return;
 

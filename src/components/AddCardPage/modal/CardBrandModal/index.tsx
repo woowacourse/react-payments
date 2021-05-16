@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { CardBrand } from '../../../../types';
 import { IconButton } from '../../../shared/Button/IconButton';
 import Modal from '../../../shared/Modal';
@@ -10,7 +10,7 @@ interface Props {
   onClose: () => void;
 }
 
-const CardBrandModal: FC<Props> = ({ cardBrands, onSelect, onClose }) => {
+const CardBrandModal = ({ cardBrands, onSelect, onClose }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
