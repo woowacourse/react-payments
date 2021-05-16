@@ -92,7 +92,7 @@ export default function AddCardForm() {
     dispatch({ type: 'ADD_CARD', card: newCard });
     reset();
 
-    history.push(`${PATH.EDIT_CARD_NICKNAME}/${newCardId}`);
+    history.push(`${PATH.EDIT_CARD_NICKNAME}/${newCardId}/new`);
   };
 
   return (

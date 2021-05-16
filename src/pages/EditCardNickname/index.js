@@ -9,7 +9,7 @@ import './style.css';
 
 export default function EditCardNickname({ cards }) {
   const history = useHistory();
-  const { id } = useParams();
+  const { id, state } = useParams();
   const dispatch = useContext(CardsContext);
 
   const currentCardId = Number(id);
@@ -25,13 +25,17 @@ export default function EditCardNickname({ cards }) {
     history.push(PATH.ROOT);
   };
 
+  console.log(history);
+
   return (
     <div
       className={
         'contents add-card-complete__container d-flex flex-col items-center justify-content-center '
       }
     >
-      <h1 className="text-xl font-weight-400 mb-20 mt-10">카드 등록이 완료되었습니다.</h1>
+      <h1 className="text-xl font-weight-400 mb-20 mt-10">
+        {state === 'new' && '카드 등록이 완료되었습니다.'}
+      </h1>
       <Card
         userName={userName}
         companyName={CARD_COMPANY[company].NAME}

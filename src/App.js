@@ -31,7 +31,7 @@ function App() {
         <Route exact path={PATH.ADD_CARD_FORM} render={() => <AddCardForm cards={cards} />} />
         <Route
           exact
-          path={`${PATH.EDIT_CARD_NICKNAME}/:id`}
+          path={`${PATH.EDIT_CARD_NICKNAME}/:id/:state?`}
           render={() => <EditCardNickname cards={cards} />}
         />
       </BrowserRouter>
