@@ -25,7 +25,7 @@ export const CardListContextProvider = ({ children }) => {
   }, []);
 
   const addCard = async (card) => {
-    const newCard = { ...deepCopy(card) };
+    const newCard = deepCopy(card);
 
     try {
       const body = await httpClient({
