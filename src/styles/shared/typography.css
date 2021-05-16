@@ -1,0 +1,36 @@
+/* font size */
+.text-l {
+  font-size: large;
+}
+
+.text-xl {
+  font-size: x-large;
+}
+
+.text-xxl {
+  font-size: xx-large;
+}
+
+/* text align */
+
+.text-center {
+  text-align: center;
+}
+
+/* font weight */
+.font-weight-400 {
+  font-weight: 400;
+}
+
+.font-weight-700 {
+  font-weight: 700;
+}
+
+/* color */
+.font-color-gray-700 {
+  color: #383838;
+}
+
+.font-color-gray-500 {
+  color: #575757;
+}
