@@ -1,3 +1,6 @@
+export type CardNumberState = [string, string, string, string];
+export type PasswordState = [string, string];
+
 export interface CardBrand {
   name: string;
   color: string;

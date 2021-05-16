@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction, useRef, VFC } from 'react';
-import { PasswordState } from '../..';
 import { LABEL } from '../../../../../constants/addCardForm';
+import { PasswordState } from '../../../../../types';
 import Container from '../../../../shared/Container';
 import Input from '../../../../shared/Input';
 import AddCardInputContainer from '../../AddCardInputContainer';

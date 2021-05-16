@@ -1,14 +1,14 @@
-import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import BackIcon from '../../shared/Icon/BackIcon';
 import { Header, PageContainer } from './styles';
 
 interface Props {
+  children: React.ReactNode;
   title: string;
   prevPagePath?: string;
 }
 
-const Template: FC<Props> = ({ children, title, prevPagePath }) => {
+const Template = ({ children, title, prevPagePath }: Props) => {
   return (
     <PageContainer>
       <Header>

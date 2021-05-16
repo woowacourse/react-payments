@@ -1,13 +1,14 @@
-import { FC } from 'react';
-import Container from '../../../shared/Container';
+import React from 'react';
 import PALETTE from '../../../../constants/palette';
+import Container from '../../../shared/Container';
 
 interface Props {
+  children: React.ReactNode;
   width?: string;
   backgroundColor?: string;
 }
 
-export const AddCardInputContainer: FC<Props> = ({ children, width, backgroundColor }) => (
+export const AddCardInputContainer = ({ children, width, backgroundColor }: Props) => (
   <Container
     flex
     justifyContent="center"

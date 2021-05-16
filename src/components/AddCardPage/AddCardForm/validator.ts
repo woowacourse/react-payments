@@ -1,6 +1,3 @@
-import { CardNumberState, PasswordState } from '.';
-import { Card } from '../../../types';
-import { isNumberString } from '../../../utils/validator';
 import {
   CARD_NUMBER_DIGITS,
   CVC_DIGITS,
@@ -8,6 +5,8 @@ import {
   LAST_MONTH,
   MAX_OWNER_NAME_LENGTH,
 } from '../../../constants/creditCard';
+import { Card, CardNumberState, PasswordState } from '../../../types';
+import { isNumberString } from '../../../utils/validator';
 
 interface isAllInputFilledParamType extends Omit<Card, 'cardNumber' | 'password'> {
   cardNumber: CardNumberState;

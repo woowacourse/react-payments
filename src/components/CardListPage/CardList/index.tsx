@@ -1,13 +1,12 @@
-import { useEffect, useState, VFC } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PAGE from '../../../constants/pages';
 import { fetchCards, StoredCard } from '../../../firebase/api';
-import { Card } from '../../../types';
 import CreditCard from '../../shared/CreditCard';
 import AddCardButton from './AddCardButton';
 import { CardListContainer, NickName } from './styles';
 
-const CardList: VFC = () => {
+const CardList = () => {
   const [cards, setCards] = useState<StoredCard[]>([]);
 
   useEffect(() => {

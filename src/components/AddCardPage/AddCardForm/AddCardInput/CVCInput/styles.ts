@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Container from '../../../../shared/Container';
 
 export const QuestionMarkContainer = styled.div`
   width: fit-content;

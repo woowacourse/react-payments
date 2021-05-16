@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction, useRef, VFC } from 'react';
-import { CardNumberState } from '../..';
 import { LABEL } from '../../../../../constants/addCardForm';
 import { CARD_NUMBER_DIGITS, CARD_NUMBER_SEPARATOR } from '../../../../../constants/creditCard';
+import { CardNumberState } from '../../../../../types';
 import Input from '../../../../shared/Input';
 import AddCardInputContainer from '../../AddCardInputContainer';
 import AddCardInputLabel from '../../AddCardInputLabel';
