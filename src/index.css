@@ -141,7 +141,7 @@ header {
 }
 
 .contents {
-  padding: 100px 0 72px;
+  padding: 100px 28px 72px;
   margin: 0;
   height: 100%;
 }
@@ -210,4 +210,16 @@ header {
   position: absolute;
   bottom: 18px;
   right: 28px;
+}
+
+.relative {
+  position: relative;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
+.ml-3 {
+  margin-left: 0.75rem;
 }

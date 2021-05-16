@@ -38,13 +38,10 @@ export default function CardList({ cards }) {
           </li>
         ))}
 
-        <li
-          role="button"
-          aria-label="카드 추가"
-          className="card bg-color-gray-100 shadow d-flex flex-col justify-center items-center"
-          onClick={goAddCardForm}
-        >
-          <span className="text-xxl">+</span>
+        <li role="button" aria-label="카드 추가" onClick={goAddCardForm}>
+          <div className="card bg-color-gray-100 shadow d-flex flex-col justify-center items-center">
+            <span className="text-xxl">+</span>
+          </div>
         </li>
       </ul>
     </>
