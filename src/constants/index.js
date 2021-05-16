@@ -1,5 +1,6 @@
 export { DB_ENDPOINT, HTTP_METHOD } from './api';
 export { ROUTE } from './route';
+export { MESSAGE } from './message';
 export {
   CARD_COMPANY_LIST,
   INITIAL_FORMATTED_CARD_NUMBER,

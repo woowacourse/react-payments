@@ -1,6 +1,6 @@
 import { useState, createContext, useEffect } from 'react';
 import { deepCopy, httpClient } from '../utils';
-import { DB_ENDPOINT, HTTP_METHOD } from '../constants';
+import { DB_ENDPOINT, HTTP_METHOD, MESSAGE } from '../constants';
 
 const url = DB_ENDPOINT.CARDS;
 
@@ -15,6 +15,7 @@ export const CardListContextProvider = ({ children }) => {
 
       setCardList(() => body);
     } catch (error) {
+      window.alert(MESSAGE.CARD_READ_FAILED);
       console.error(error);
     }
   };
@@ -35,6 +36,7 @@ export const CardListContextProvider = ({ children }) => {
 
       setCardList((prevList) => [...prevList, body]);
     } catch (error) {
+      window.alert(MESSAGE.CARD_ADD_FAILED);
       console.error(error);
     }
   };
@@ -47,14 +49,13 @@ export const CardListContextProvider = ({ children }) => {
 
       setCardList(() => filteredList);
     } catch (error) {
+      window.alert(MESSAGE.CARD_DELETE_FAILED);
       console.error(error);
     }
   };
 
-  const resetCardList = () => setCardList(() => []);
-
   return (
-    <CardListContext.Provider value={{ cardList, setCardList, addCard, deleteCard, resetCardList }}>
+    <CardListContext.Provider value={{ cardList, setCardList, addCard, deleteCard }}>
       {children}
     </CardListContext.Provider>
   );

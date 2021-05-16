@@ -13,7 +13,7 @@ export const httpClient = async ({ url, method = HTTP_METHOD.GET, body }) => {
 
     return body;
   } catch (error) {
-    console.error(error);
+    throw new Error(error);
   }
 };
 

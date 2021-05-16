@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Button, Card, CreditCardPreview, Text, TrashCanIcon, Heading } from '../../components';
 import { getFormattedCardInfo } from '../../cardInfoFormatter';
 import { CardListContext } from '../../contexts';
-import { ROUTE } from '../../constants';
+import { ROUTE, MESSAGE } from '../../constants';
 import './style.css';
 
 export const ListPage = () => {
@@ -11,7 +11,7 @@ export const ListPage = () => {
   const history = useHistory();
   const handleAddButtonClick = () => history.push(ROUTE.ADD);
   const handleDeleteButtonClick = (id) => {
-    if (!window.confirm('정말로 카드를 삭제하시겠습니까?')) {
+    if (!window.confirm(MESSAGE.CARD_DELETE_CONFIRM)) {
       return;
     }
     deleteCard(id);
