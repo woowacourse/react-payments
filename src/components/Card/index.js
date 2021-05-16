@@ -1,7 +1,7 @@
 import React from 'react';
-import './style.css';
-import '../../index.css';
 import { CARD } from '../../constants';
+import './style.css';
+import '../../styles/index.css';
 
 export default function Card({
   companyName,
@@ -16,6 +16,7 @@ export default function Card({
     <div
       className={`card-${size ?? 'normal'}`}
       style={{ ...style, backgroundColor: color ?? '#d2d2d2' }}
+      aria-label="카드 이미지"
     >
       <div className="card__company-name">{companyName}</div>
       <div className="card__chip">

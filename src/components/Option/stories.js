@@ -1,12 +1,12 @@
 import React from 'react';
-import CardCompanyOption from '.';
+import Option from '.';
 
 export default {
-  title: 'Components/CardCompanyOption',
-  component: CardCompanyOption,
+  title: 'Components/Option',
+  component: Option,
 };
 
-const Template = (args) => <CardCompanyOption {...args} />;
+const Template = (args) => <Option {...args} />;
 
 export const Default = Template.bind({});
 

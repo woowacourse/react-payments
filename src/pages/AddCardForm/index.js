@@ -8,7 +8,7 @@ import {
   TextButton,
   CardPasswordInput,
   Modal,
-  CardCompanySelection,
+  Select,
 } from '../../components';
 import { useHistory } from 'react-router-dom';
 import { CardsContext } from '../../cardsContext';
@@ -176,10 +176,13 @@ export default function AddCardForm() {
       {isModalOpened && (
         <Modal onCloseModal={() => setIsModalOpened(false)}>
           {modalContents === 'cardSelection' && (
-            <CardCompanySelection
-              onCloseModal={() => setIsModalOpened(false)}
-              setInput={setInput}
-            ></CardCompanySelection>
+            <Select
+              options={CARD_COMPANY}
+              onSelect={(key) => {
+                setInput('company', key);
+                setIsModalOpened(false);
+              }}
+            ></Select>
           )}
           {modalContents === 'questionMark' && <SecurityCodeGuide />}
         </Modal>

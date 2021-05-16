@@ -1,4 +1,4 @@
-.card-company-option {
+.option {
   width: 74px;
   display: flex;
   flex-direction: column;
@@ -14,6 +14,6 @@
   font-weight: 500;
 }
 
-.card-company-option__label {
+.option__label {
   margin: 10px 0 0;
 }

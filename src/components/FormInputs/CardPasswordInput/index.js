@@ -1,8 +1,8 @@
 import React from 'react';
 import { Input } from '..';
 import { Icon } from '../..';
-import '../../../index.css';
 import './style.css';
+import '../../../styles/index.css';
 
 export default function CardPasswordInput({ name, password, onSetPassword }) {
   return (
