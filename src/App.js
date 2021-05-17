@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Header } from './components/Page/Header';
-import { Page } from './components/Page';
 import { CardList } from './components/Page/Body/CardList';
 import { CardRegister } from './components/Page/Body/CardRegister';
 import { CardRegistered } from './components/Page/Body/CardRegistered';
+import * as Styled from './style.js';
 
 const cardFrame = {
   nickName: '',
@@ -43,14 +43,21 @@ function App() {
     setCards((cards) => [...cards, newCard]);
   };
 
-  const ChildComponents = {
+  const HeaderComponent = {
     cardRegister: [
-      <CardRegister setCurrentPage={setCurrentPage} updateCardContent={updateCardContent} />,
       <Header
         titleText={'카드 추가'}
         hasButton={true}
         onClick={() => setCurrentPage('cardList')}
       />,
+    ],
+    cardRegistered: null,
+    cardList: [<Header titleText={'보유카드'} hasButton={false} />],
+  };
+
+  const BodyComponent = {
+    cardRegister: [
+      <CardRegister setCurrentPage={setCurrentPage} updateCardContent={updateCardContent} />,
     ],
     cardRegistered: [
       <CardRegistered
@@ -60,16 +67,14 @@ function App() {
         registerCard={registerCard}
       />,
     ],
-    cardList: [
-      <CardList cards={cards} setCurrentPage={setCurrentPage} />,
-      <Header titleText={'보유카드'} hasButton={false} />,
-    ],
+    cardList: [<CardList cards={cards} setCurrentPage={setCurrentPage} />],
   };
 
   return (
-    <div className="App">
-      <Page>{ChildComponents[currentPage]}</Page>
-    </div>
+    <Styled.Page>
+      <Styled.Header>{HeaderComponent[currentPage]}</Styled.Header>
+      <Styled.Body>{BodyComponent[currentPage]}</Styled.Body>
+    </Styled.Page>
   );
 }
 
