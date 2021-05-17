@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import Card from "../stories/Card";
-import { CARD_SIZE, UNKNOWN_CARD_TYPE } from "../constants";
-import Input from "../stories/Input";
-import Modal from "../stories/Modal";
-import SimpleButton from "../stories/SimpleButton";
+
+import CardTypeSelector from "./CardTypeSelector";
+import Card from "./shared/Card";
+import Input from "./shared/Input";
+import Modal from "./shared/Modal";
+import SimpleButton from "./shared/SimpleButton";
+
 import useCardNumbers from "../hooks/useCardNumbers";
 import useExpirationDate from "../hooks/useExpirationDate";
 import useSecureCode from "../hooks/useSecureCode";
 import useControlledInputValue from "../hooks/useControlledInputValue";
 import usePassword from "../hooks/usePassword";
+import { CARD_SIZE, UNKNOWN_CARD_TYPE } from "../constants";
 import {
   CARD_NUMBER,
   EXPIRATION_DATE,
@@ -18,7 +21,6 @@ import {
   SECURE_CODE_LENGTH,
   USERNAME,
 } from "../constants";
-import CardTypeSelector from "./CardTypeSelector";
 
 const formatCardNumbers = (numbers) => {
   const [firstValue, secondValue, ...restValues] = numbers;

@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import CardTypeRadio from "../stories/CardTypeRadio";
+import CardTypeRadio from "./shared/CardTypeRadio";
 import { getCardType } from "../APIs";
 
 const CardTypeSelector = ({ cardTypeName, onRadioChange }) => {

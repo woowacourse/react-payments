@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Card from "../stories/Card";
-import SimpleButton from "../stories/SimpleButton";
+
+import Card from "./shared/Card";
+import SimpleButton from "./shared/SimpleButton";
+
 import { CARD_SIZE } from "../constants";
 import { CARD_DESCRIPTION, FORMAT_CHAR } from "../constants";
 

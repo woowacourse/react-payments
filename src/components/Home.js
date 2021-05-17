@@ -1,12 +1,13 @@
 import React, { useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 
-import Card from "../stories/Card";
-import AddCardButton from "../stories/Button/AddCardButton";
+import Card from "./shared/Card";
+import AddCardButton from "./shared/Button/AddCardButton";
+
 import { getCardList, deleteCardList } from "../APIs";
+import Icofont from "react-icofont";
 import { PAGE } from "../constants";
 import { CARD_SIZE } from "../constants";
-import Icofont from "react-icofont";
 
 const Home = ({ routeTo }) => {
   const [cardList, setCardList] = useState([]);
