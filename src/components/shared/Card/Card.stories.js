@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./index";
-import { CARD_SIZE } from "../../constants";
+import { CARD_SIZE } from "../../../constants";
 
 export default {
   title: "Example/Card",
