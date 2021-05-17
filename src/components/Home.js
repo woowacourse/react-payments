@@ -5,13 +5,14 @@ import Card from "./shared/Card";
 import AddCardButton from "./shared/Button/AddCardButton";
 import BinarySelectButton from "./shared/Button/BinarySelectButton";
 
-import { getCardList, deleteCardList } from "../APIs";
-import { PAGE } from "../constants";
-import { CARD_SIZE } from "../constants";
+import { getCardList, deleteCardList, putCardDescription } from "../APIs";
+import { MESSAGE, PAGE, CARD_SIZE } from "../constants";
 
 const Home = ({ routeTo }) => {
   const [cardList, setCardList] = useState([]);
-  const [cardClickedList, setCardClickedList] = useState({});
+  const [optionSelectVisibilities, setOptionSelectVisibilities] = useState({});
+  const [cardUpdateInputVisibilities, setCardUpdateInputVisibilities] = useState({});
+  const [cardDescriptionInputValue, setCardDescriptionInputValue] = useState("");
 
   const setCardListByFetch = useCallback(async () => {
     const fetchedCardList = await getCardList();
@@ -19,42 +20,86 @@ const Home = ({ routeTo }) => {
     setCardList(fetchedCardList);
   }, [setCardList]);
 
-  const initCardClickedList = useCallback(() => {
-    const clickedList = cardList.reduce((acc, card) => {
+  const getInitialVisibilities = useCallback(() => {
+    return cardList.reduce((acc, card) => {
       acc[card.id] = false;
 
       return acc;
     }, {})
+  }, [cardList]);
 
-    setCardClickedList(clickedList);
-  }, [cardList, setCardClickedList]);
+  const initVisibilities = useCallback(() => {
+    const initialVisibilities = getInitialVisibilities();
+
+    setOptionSelectVisibilities(initialVisibilities);
+    setCardUpdateInputVisibilities(initialVisibilities);
+  }, [getInitialVisibilities])
 
   const onBackgroundClick = ({ target, currentTarget }) => {
     const isOuterOfCard = target === currentTarget || target.localName === "li" || target.localName === "ul"
 
     if (isOuterOfCard) {
-      initCardClickedList();
+      initVisibilities();
     }
   };
 
   const onCardItemClick = (currentId) => {
-    const clickedList = Object
-      .entries(cardClickedList)
-      .reduce((acc, [id, clicked]) => {
-        if (id === String(currentId)) {
-          acc[id] = !clicked;
-        } else {
-          acc[id] = false;
-        }
+    setCardUpdateInputVisibilities(getInitialVisibilities);
+
+    const visibilities = 
+      Object.entries(optionSelectVisibilities)
+        .reduce((acc, [id, isVisible]) => {
+          if (id === String(currentId)) {
+            acc[id] = !isVisible;
+          } else {
+            acc[id] = false;
+          }
+
+          return acc;
+      }, {});
+
+    setOptionSelectVisibilities(visibilities);
+  };
+
+  const onUpdateButtonClick = (currentId, currentDescription) => {
+    setOptionSelectVisibilities(getInitialVisibilities());
+
+    const visibilities = 
+    Object.keys(cardUpdateInputVisibilities)
+      .reduce((acc, id) => {
+        acc[id] = (id === String(currentId));
 
         return acc;
     }, {});
 
-    setCardClickedList(clickedList);
+    setCardUpdateInputVisibilities(visibilities);
+    setCardDescriptionInputValue(currentDescription);
+  }
+
+  const onCardDescriptionInputValueChange = ({ target }) => {
+    setCardDescriptionInputValue(target.value);
+  };
+
+  const onCardDescriptionInputValueSubmit = async (event, id) => {
+    event.preventDefault();
+
+    if (!window.confirm(MESSAGE.CONFIRM.PUT_CARD_DESCRIPTION)) {
+      return;
+    }
+
+    const { isSucceeded, message } = await putCardDescription(id, cardDescriptionInputValue);
+
+    if (!isSucceeded) {
+      alert(message);
+
+      return;
+    }
+
+    setCardListByFetch();
   };
 
   const onDeleteButtonClick = async (id) => {
-    if (!window.confirm("정말로 카드를 삭제하시겠습니까?")) {
+    if (!window.confirm(MESSAGE.CONFIRM.DELETE_CARD_LIST)) {
       return;
     }
 
@@ -74,8 +119,8 @@ const Home = ({ routeTo }) => {
   }, [setCardListByFetch]);
 
   useEffect(() => {
-    initCardClickedList();
-  }, [initCardClickedList]);
+    initVisibilities();
+  }, [initVisibilities]);
 
   return (
     <>
@@ -83,10 +128,10 @@ const Home = ({ routeTo }) => {
         <ul>
           {cardList.map((card) => (
             <li key={card.cardNumbers.join("")}>
-              {cardClickedList[card.id] && 
+              {optionSelectVisibilities[card.id] && 
                 <div className="card-list__update-delete-button">
                   <BinarySelectButton 
-                    firstOption={{name: "카드별명 수정", handler: () => {} }}
+                    firstOption={{name: "카드별명 수정", handler: () => onUpdateButtonClick(card.id, card.description) }}
                     secondOption={{name: "삭제", handler: () => onDeleteButtonClick(card.id) }}
                   />
                 </div>}
@@ -98,7 +143,19 @@ const Home = ({ routeTo }) => {
                 size={CARD_SIZE.SMALL}
                 onClick={() => onCardItemClick(card.id)}
               />
-              <h3>{card.description}</h3>
+              {cardUpdateInputVisibilities[card.id]
+                ? <form 
+                    className="card-list__update-card-desc"
+                    onSubmit={(event) => onCardDescriptionInputValueSubmit(event, card.id)}
+                  >
+                    <input 
+                      type="text"
+                      value={cardDescriptionInputValue}
+                      onChange={onCardDescriptionInputValueChange}
+                    />
+                    <button>수정</button>
+                  </form>
+                : <h3>{card.description}</h3>}
             </li>
           ))}
         </ul>

@@ -20,7 +20,7 @@ const getCardList = async () => {
 
 const postCardList = async (card) => {
   try {
-    const res = await axios.post("/cards", card)
+    const res = await axios.post("/cards", card);
 
     if (res.status !== 200) {
       throw new Error(`${res.status}: API call error`);
@@ -29,14 +29,36 @@ const postCardList = async (card) => {
     return {
       isSucceeded: true,
       message: "",
-    }
+    };
   } catch(error) {
     console.error(error);
 
     return {
       isSucceeded: false,
       message: MESSAGE.ERROR.POST_CARD_LIST,
+    };
+  }
+};
+
+const putCardDescription = async (id, description) => {
+  try {
+    const res = await axios.put("/cards/description", { id, description });
+
+    if (res.status !== 200) {
+      throw new Error(`${res.status}: API call error`);
     }
+
+    return {
+      isSucceeded: true,
+      message: "",
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      isSucceeded: false,
+      message: MESSAGE.ERROR.PUT_CARD_DESCRIPTION,
+    };
   }
 };
 
@@ -63,4 +85,4 @@ const deleteCardList = async (cardId) => {
   }
 };
 
-export { getCardList, postCardList, deleteCardList };
+export { getCardList, postCardList, putCardDescription, deleteCardList };

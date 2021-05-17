@@ -18,3 +18,36 @@
   position: absolute;
   transform: translateY(-120%);
 }
+
+.card-list__update-card-desc {
+  margin: 1rem 0;
+  height: 1.5rem;
+  width: 10rem;
+  position: relative;
+}
+
+.card-list__update-card-desc > input[type="text"] {
+  text-align: center;
+  width: 100%;
+  font-size: 1.17rem;
+  font-weight: 700;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.card-list__update-card-desc > button {
+  width: 3rem;
+  height: 1.4rem;
+  border-radius: 0.4rem;
+  position: absolute;
+  transform: translateX(15%);
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-600);
+  font-weight: 700;
+}
+
+.card-list__update-card-desc > button:hover {
+  background-color: var(--color-gray-300);
+  color: var(--color-gray-600);
+}

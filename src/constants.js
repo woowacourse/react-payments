@@ -78,6 +78,11 @@ export const CARD_SIZE = {
 export const MESSAGE = {
   ERROR: {
     POST_CARD_LIST: "카드를 등록할 수 없습니다. 다시 한 번 시도해주세요.",
+    PUT_CARD_DESCRIPTION: "카드 별명을 등록할 수 없습니다. 다시 한 번 시도해주세요.",
     DELETE_CARD_LIST: "카드를 삭제할 수 없습니다. 다시 한 번 시도해주세요.",
-  }
+  },
+  CONFIRM: {
+    PUT_CARD_DESCRIPTION: "정말로 카드 별명을 수정하시겠습니까?",
+    DELETE_CARD_LIST: "정말로 카드를 삭제하시겠습니까?",
+  },
 }
