@@ -3,16 +3,17 @@ export const isNumberType = (text) => {
   return pattern.test(text);
 };
 
-export const isMonthType = (text) => {
-  const pattern = /([0][1-9])|([1][0,1,2])/g;
-  return pattern.test(text);
-};
-
-export const isValidYearType = (yearText) => {
-  const currentYear = new Date().getFullYear() % 100;
-  const yearInput = Number(yearText);
-  const isValidYearInput = yearInput >= currentYear && yearInput <= currentYear + 5;
-  return isValidYearInput;
+export const isValidDateType = {
+  month: (text) => {
+    const pattern = /([0][1-9])|([1][0,1,2])/g;
+    return pattern.test(text);
+  },
+  year: (yearText) => {
+    const currentYear = new Date().getFullYear() % 100;
+    const yearInput = Number(yearText);
+    const isValidYearInput = yearInput >= currentYear && yearInput <= currentYear + 5;
+    return isValidYearInput;
+  },
 };
 
 export const isEnglishTextType = (text) => {

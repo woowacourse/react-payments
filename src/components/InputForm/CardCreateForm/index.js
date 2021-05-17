@@ -28,6 +28,7 @@ const validMessages = {
 };
 
 export const CardCreateForm = ({
+  formRef,
   numbers,
   validDay,
   owner,
@@ -49,7 +50,7 @@ export const CardCreateForm = ({
   };
 
   return (
-    <Styled.Form onSubmit={submitCardDetail}>
+    <Styled.Form ref={formRef} onSubmit={submitCardDetail}>
       <InputContainer title={'카드 번호'}>
         {hasInvalidNumbers() && <ValidMessage validMessage={validMessages[hasInvalidNumbers()]} />}
         <NumbersInputContainer

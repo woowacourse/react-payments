@@ -1,27 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 // import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 import { Card } from '../../../Card';
 import { CardCreateForm } from '../../../InputForm/CardCreateForm';
 import { Modal } from '../../../Modal';
 import { CardCompanyList } from '../../../Modal/ModalBody/CardCompanyList';
-import {
-  isEnglishTextType,
-  isMonthType,
-  isNumberType,
-  isValidYearType,
-} from '../../../../utils/validators.js';
+import { isEnglishTextType, isNumberType, isValidDateType } from '../../../../utils/validators.js';
 
 /**
  * Primary UI component for user interaction
  */
+
 export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
   const [company, setCompany] = useState('');
-  const [numbers, setNumbers] = useState({ first: '', second: '', third: '', fourth: '' });
-  const [validDay, setValidDay] = useState({ month: '', year: '' });
+  const [numbers, setNumbers] = useState({
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+    latelyType: 'first',
+  });
+  const [validDay, setValidDay] = useState({ month: '', year: '', latelyType: 'month' });
   const [owner, setOwner] = useState('');
   const [cvc, setCvc] = useState('');
-  const [password, setPassword] = useState({ firstDigit: '', secondDigit: '' });
+  const [password, setPassword] = useState({
+    firstDigit: '',
+    secondDigit: '',
+    latelyType: 'firstDigit',
+  });
   const [inputValid, setInputValid] = useState({
     company: true,
     first: true,
@@ -35,10 +41,12 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
     secondDigit: true,
   });
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const formRef = useRef();
 
   const handleCompanyChange = (companyName) => {
     setInputValid((inputValid) => ({ ...inputValid, company: true }));
     setCompany(companyName);
+    closeModal();
   };
 
   const handleNumbersChange = (e) => {
@@ -49,25 +57,39 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
       .map((text) => (isNumberType(text) ? text : ''))
       .join('');
 
-    setNumbers((numbers) => ({ ...numbers, [inputType]: filteredValue }));
+    setNumbers((numbers) => ({ ...numbers, [inputType]: filteredValue, latelyType: inputType }));
   };
 
-  const handleNumbersBlur = (e) => {
-    const inputValue = e.target.value;
-    const inputType = e.target.name;
+  useEffect(() => {
+    const inputType = numbers.latelyType;
+    const inputValue = numbers[inputType];
+
+    if (inputValue.length !== 4) return;
 
     setInputValid((inputValid) => ({ ...inputValid, [inputType]: true }));
 
-    if (inputValue.length !== 4) {
-      setInputValid((inputValid) => ({ ...inputValid, [inputType]: false }));
+    const emptyValue = Object.keys(numbers).find((key) => !numbers[key]);
+
+    if (!emptyValue) {
       return;
     }
 
-    const invalidNumber = Object.keys(numbers).find((key) => !numbers[key]);
+    formRef.current[emptyValue].focus();
+  }, [numbers, formRef]);
 
-    if (invalidNumber) {
-      setInputValid((inputValid) => ({ ...inputValid, [invalidNumber]: false }));
-    }
+  const handleNumbersBlur = (e) => {
+    if (e.relatedTarget !== null && e.currentTarget === e.relatedTarget.parentNode) return;
+
+    Object.keys(numbers).forEach((key) => {
+      if (key === 'latelyType') return;
+
+      if (!numbers[key] || numbers[key].length !== 4) {
+        setInputValid((inputValid) => ({ ...inputValid, [key]: false }));
+        return;
+      }
+
+      setInputValid((inputValid) => ({ ...inputValid, [key]: true }));
+    });
   };
 
   const handleValidDayChange = (e) => {
@@ -78,23 +100,39 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
       .map((text) => (isNumberType(text) ? text : ''))
       .join('');
 
-    setValidDay((validDay) => ({ ...validDay, [inputType]: filteredValue }));
+    setValidDay((validDay) => ({ ...validDay, [inputType]: filteredValue, latelyType: inputType }));
   };
 
+  useEffect(() => {
+    const inputType = validDay.latelyType;
+    const inputValue = validDay[inputType];
+
+    if (inputValue.length !== 2) return;
+
+    if (isValidDateType[inputType](inputValue)) {
+      setInputValid((inputValid) => ({ ...inputValid, [inputType]: true }));
+    }
+
+    const emptyValue = Object.keys(validDay).find((key) => !validDay[key]);
+
+    if (!emptyValue) return;
+
+    formRef.current[emptyValue].focus();
+  }, [validDay, formRef]);
+
   const handleValidDayBlur = (e) => {
-    const inputValue = e.target.value;
-    const inputType = e.target.name;
+    if (e.relatedTarget !== null && e.currentTarget === e.relatedTarget.parentNode) return;
 
-    setInputValid((inputValid) => ({ ...inputValid, [inputType]: true }));
+    Object.keys(validDay).forEach((key) => {
+      if (key === 'latelyType') return;
 
-    if ((inputType === 'month' && !isMonthType(inputValue)) || !validDay['month']) {
-      setInputValid((inputValid) => ({ ...inputValid, month: false }));
-      return;
-    }
+      if (!validDay[key] || !isValidDateType[key](validDay[key])) {
+        setInputValid((inputValid) => ({ ...inputValid, [key]: false }));
+        return;
+      }
 
-    if ((inputType === 'year' && !isValidYearType(inputValue)) || !validDay['year']) {
-      setInputValid((inputValid) => ({ ...inputValid, year: false }));
-    }
+      setInputValid((inputValid) => ({ ...inputValid, [key]: true }));
+    });
   };
 
   const handleOwnerChange = (e) => {
@@ -117,14 +155,21 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
     setCvc(filteredValue);
   };
 
-  const handleCvcBlur = (e) => {
-    const inputValue = e.target.value;
+  useEffect(() => {
+    if (cvc.length !== 3) return;
 
     setInputValid((inputValid) => ({ ...inputValid, cvc: true }));
+  }, [cvc]);
 
-    if (inputValue.length !== 3) {
+  const handleCvcBlur = (e) => {
+    if (e.relatedTarget !== null && e.currentTarget === e.relatedTarget.parentNode) return;
+
+    if (!cvc || cvc.length !== 3) {
       setInputValid((inputValid) => ({ ...inputValid, cvc: false }));
+      return;
     }
+
+    setInputValid((inputValid) => ({ ...inputValid, cvc: true }));
   };
 
   const handlePasswordChange = (e) => {
@@ -135,25 +180,35 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
       .map((text) => (isNumberType(text) ? text : ''))
       .join('');
 
-    setPassword((password) => ({ ...password, [inputType]: filteredValue }));
+    setPassword((password) => ({ ...password, [inputType]: filteredValue, latelyType: inputType }));
   };
 
-  const handlePasswordBlur = (e) => {
-    const inputValue = e.target.value;
-    const inputType = e.target.name;
+  useEffect(() => {
+    const inputType = password.latelyType;
+    const inputValue = password[inputType];
+
+    if (inputValue.length !== 1) return;
 
     setInputValid((inputValid) => ({ ...inputValid, [inputType]: true }));
 
-    if (inputValue.length !== 1) {
-      setInputValid((inputValid) => ({ ...inputValid, [inputType]: false }));
-      return;
-    }
+    const emptyValue = Object.keys(password).find((key) => !password[key]);
 
-    const invalidDigit = Object.keys(password).find((key) => !password[key]);
+    if (!emptyValue) return;
 
-    if (invalidDigit) {
-      setInputValid((inputValid) => ({ ...inputValid, [invalidDigit]: false }));
-    }
+    formRef.current[emptyValue].focus();
+  }, [password, formRef]);
+
+  const handlePasswordBlur = (e) => {
+    if (e.relatedTarget !== null && e.currentTarget === e.relatedTarget.parentNode) return;
+
+    Object.keys(password).forEach((key) => {
+      if (!password[key]) {
+        setInputValid((inputValid) => ({ ...inputValid, [key]: false }));
+        return;
+      }
+
+      setInputValid((inputValid) => ({ ...inputValid, [key]: true }));
+    });
   };
 
   const hasSubmittedEveryInput = () => {
@@ -201,6 +256,7 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
       </Styled.CardContainer>
       <Styled.CardCreateFormContainer>
         <CardCreateForm
+          formRef={formRef}
           numbers={{
             value: numbers,
             handleChange: handleNumbersChange,
