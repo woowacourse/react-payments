@@ -3,6 +3,7 @@
   height: 80vh;
   overflow-y: scroll;
   text-align: center;
+  position: relative;
 }
 
 .card-list > ul > li {
@@ -13,17 +14,7 @@
   margin: 4rem 0;
 }
 
-.card-list > ul > li > button {
-  display: none;
+.card-list__update-delete-button {
   position: absolute;
-  top: -2rem;
-  right: 6rem;
-
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--color-gray-500);
-}
-
-.card-list > ul > li:hover > button {
-  display: block;
+  transform: translateY(-120%);
 }

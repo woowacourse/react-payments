@@ -11,12 +11,13 @@ const Card = ({
   username = "",
   expirationDate = "",
   size,
+  ...props
 }) => {
   const [firstNumber, secondNumber, thirdNumber, fourthNumber] = cardNumbers;
   const { name: cardName, color } = cardType;
 
   return (
-    <div className={`card card--${size} font-${size}`}>
+    <div className={`card card--${size} font-${size}`} {...props}>
       <div className={`card__inner bg-${color}`}>
         <div className="card__inner-card-name font-s">{cardName}</div>
         <div className="card__inner-chip"></div>
