@@ -39,21 +39,31 @@
     display: flex;
     justify-content: space-between;
     padding: 0 8px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
 
-  &__number-input {
-    @include plain-input;
-    width: 40px;
-    height: 12px;
+  &__number-digits {
     color: $inputTextColor;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     text-align: center;
+    letter-spacing: 2px;
+  }
 
-    &--invisible {
-      width: 47px;
-      text-align: center;
+  &__number-dots {
+    display: flex;
+    align-items: center;
+    color: $inputTextColor;
+  }
+
+  &__number-dot {
+    width: 5px;
+    height: 5px;
+    background-color: $inputTextColor;
+    border-radius: 50%;
+
+    &:not(:last-child) {
+      margin-right: 4px;
     }
   }
 
