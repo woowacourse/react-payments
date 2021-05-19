@@ -4,18 +4,17 @@ import Card from '../../shared/Card';
 import Button from '../../shared/Button';
 import CardRegisterForm from '../../units/CardRegisterForm';
 import CardSelector from '../../units/CardSelector';
-import PALETTE from '../../../styles/palette';
-import { dummyBanks } from '../../../mockData';
 import { FRAGMENT_INDEX, DATE_TYPE } from '../../../constants/constants';
+import PAGES from '../../../constants/pages';
 import * as Style from './style';
 
 const CardRegister = (props) => {
-  const { setCardData, handleGoNext } = props;
+  const { setCardData, handleMovePage } = props;
+
   const { FIRST, SECOND, THIRD, FOURTH } = FRAGMENT_INDEX;
   const { MONTH, YEAR } = DATE_TYPE;
 
   const [isSelectorOpened, setSelectorOpened] = useState(false);
-  const [cardColor, setCardColor] = useState(PALETTE.EMPTY_CARD_GRAY);
   const [cardNumbers, setCardNumbers] = useState({ [FIRST]: '', [SECOND]: '', [THIRD]: '', [FOURTH]: '' });
   const [bankId, setBankId] = useState('');
   const [expirationDate, setExpirationDate] = useState({ [MONTH]: '', [YEAR]: '' });
@@ -34,17 +33,11 @@ const CardRegister = (props) => {
     }
   }, [isCardIdentified]);
 
-  useEffect(() => {
-    setCardColor(dummyBanks.find(({ id }) => id === bankId)?.color || PALETTE.EMPTY_CARD_GRAY);
-  }, [bankId]);
-
-  const bankName = dummyBanks.find(({ id }) => id === bankId)?.name || '';
-
   const handleCompleteRegister = (event) => {
     event.preventDefault();
 
     setCardData({ bankId, cardNumbers, expirationDate, ownerName, secureCode, cardPassword });
-    handleGoNext();
+    handleMovePage(PAGES.COMPLETION);
   };
 
   return (
@@ -54,10 +47,9 @@ const CardRegister = (props) => {
           <Card
             width="213px"
             height="133px"
-            backgroundColor={cardColor}
-            ownerName={ownerName}
-            bankName={bankName}
+            bankId={bankId}
             cardNumbers={cardNumbers}
+            ownerName={ownerName}
             expirationDate={expirationDate}
           />
         </Style.CardWrapper>
@@ -74,7 +66,7 @@ const CardRegister = (props) => {
           setCardPassword={setCardPassword}
           onSubmitForm={handleCompleteRegister}
         />
-        <Button text={'다음'} formId="register-form" />
+        <Button type="submit" text="다음" formId="register-form" />
       </Style.Root>
       {isSelectorOpened && <CardSelector setBankId={setBankId} setSelectorOpened={setSelectorOpened} />}
     </>
@@ -83,7 +75,7 @@ const CardRegister = (props) => {
 
 CardRegister.propTypes = {
   setCardData: PropTypes.func.isRequired,
-  handleGoNext: PropTypes.func.isRequired,
+  handleMovePage: PropTypes.func.isRequired,
 };
 
 export default CardRegister;

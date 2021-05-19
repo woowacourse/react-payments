@@ -1,0 +1,1695 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots PageHost Card Completion Page 1`] = `
+<main
+  className="style__Root-uptixt-0 kbvCcB"
+>
+  <nav
+    className="style__NavigationBar-uptixt-1 iYjQqF"
+    title=""
+  >
+    <span
+      className="style__NavigationTitle-uptixt-2 irdEgL"
+    >
+      
+    </span>
+  </nav>
+  <section>
+    <section
+      className="style__Root-sc-1060gje-0 iDCYho"
+    >
+      <h3
+        className="style__Title-sc-1060gje-1 bZPFcS"
+      >
+        카드등록이 완료되었습니다.
+      </h3>
+      <div
+        className="style__CardWrapper-sc-1060gje-2 hmktTm"
+      >
+        <div
+          className="style__Root-sw8tc6-0 jkUHtG"
+          height="183px"
+          size="large"
+          width="293px"
+        >
+          <div
+            className="style__CardName-sw8tc6-1 jJIFBF"
+          >
+            포코 카드
+          </div>
+          <div
+            className="style__Chip-sw8tc6-2 DzUbZ"
+          />
+          <div
+            className="style__CardNumbersWrapper-sw8tc6-3 cBhBAO"
+          >
+            <span
+              className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+            >
+              1111
+            </span>
+            <span
+              className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+            >
+              1234
+            </span>
+            <span
+              className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+            >
+              <img
+                alt="secure-mark"
+                src="secure-ellipse.svg"
+              />
+              <img
+                alt="secure-mark"
+                src="secure-ellipse.svg"
+              />
+              <img
+                alt="secure-mark"
+                src="secure-ellipse.svg"
+              />
+              <img
+                alt="secure-mark"
+                src="secure-ellipse.svg"
+              />
+            </span>
+            <span
+              className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+            >
+              <img
+                alt="secure-mark"
+                src="secure-ellipse.svg"
+              />
+              <img
+                alt="secure-mark"
+                src="secure-ellipse.svg"
+              />
+              <img
+                alt="secure-mark"
+                src="secure-ellipse.svg"
+              />
+              <img
+                alt="secure-mark"
+                src="secure-ellipse.svg"
+              />
+            </span>
+          </div>
+          <div
+            className="style__OwnerName-sw8tc6-5 dwYEPq"
+          >
+            COLLIN
+          </div>
+          <div
+            className="style__ExpirationDate-sw8tc6-6 hHZLxr"
+          >
+            04/21
+          </div>
+        </div>
+      </div>
+      <form
+        id="alias-form"
+        onSubmit={[Function]}
+      >
+        <input
+          aria-label="card-alias-input"
+          className="style__AliasInput-sc-1060gje-3 eIOjFS"
+          onChange={[Function]}
+          value=""
+        />
+        <button
+          className="style__Root-sc-1jvhv8q-0 bwUrMX"
+          form="alias-form"
+          type="submit"
+        >
+          확인
+        </button>
+      </form>
+    </section>
+  </section>
+</main>
+`;
+
+exports[`Storyshots PageHost Card Register Page 1`] = `
+<main
+  className="style__Root-uptixt-0 kbvCcB"
+>
+  <nav
+    className="style__NavigationBar-uptixt-1 dTkZiY"
+    title="카드추가"
+  >
+    <img
+      alt="back-button"
+      className="style__BackButton-uptixt-3 cjqdCC"
+      onClick={[Function]}
+      src="backbutton.svg"
+    />
+    <span
+      className="style__NavigationTitle-uptixt-2 irdEgL"
+    >
+      카드추가
+    </span>
+  </nav>
+  <section>
+    <div
+      className="style__Root-sc-14i3h4l-0 fCopeu"
+    >
+      <div
+        className="style__CardWrapper-sc-14i3h4l-1 bKwaxM"
+      >
+        <div
+          className="style__Root-sw8tc6-0 ddmYxF"
+          height="133px"
+          size="normal"
+          width="213px"
+        >
+          <div
+            className="style__CardName-sw8tc6-1 jJIFBF"
+          >
+            
+          </div>
+          <div
+            className="style__Chip-sw8tc6-2 DzUbZ"
+          />
+          <div
+            className="style__CardNumbersWrapper-sw8tc6-3 cBhBAO"
+          >
+            <span
+              className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+            >
+              
+            </span>
+            <span
+              className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+            >
+              
+            </span>
+            <span
+              className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+            />
+            <span
+              className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+            />
+          </div>
+          <div
+            className="style__OwnerName-sw8tc6-5 dwYEPq"
+          >
+            NAME
+          </div>
+          <div
+            className="style__ExpirationDate-sw8tc6-6 hHZLxr"
+          >
+            MM/YY
+          </div>
+        </div>
+      </div>
+      <form
+        className="style__Root-sc-1rnuj1y-0 bAJWrD"
+        id="register-form"
+        onSubmit={[Function]}
+      >
+        <div
+          className="style__Root-sc-3f4wah-0 grbWQA"
+        >
+          <div
+            className="style__InputHeader-sc-3f4wah-1 dgyPDM"
+            width="318px"
+          >
+            <label
+              className="style__Label-sc-3f4wah-4 gMvGmA"
+              htmlFor="cardNumbers"
+            >
+              카드 번호
+            </label>
+          </div>
+          <div
+            className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+          >
+            <fieldset
+              className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-ysvvnc-0 bsuQmi bXHXtL"
+            >
+              <input
+                aria-label="card-numbers-input-1"
+                className="style__DefaultInput-sc-3f4wah-3 style__NumberInput-ysvvnc-1 dRKcLM lcxbRh"
+                data-number-idx={1}
+                onChange={[Function]}
+                onInput={[Function]}
+                onInvalid={[Function]}
+                pattern="^[0-9]{4}$"
+                required={true}
+                type="text"
+                value=""
+                width="54px"
+              />
+              <span
+                className="style__Divider-ysvvnc-3 cUPmfy"
+              >
+                -
+              </span>
+              <input
+                aria-label="card-numbers-input-2"
+                className="style__DefaultInput-sc-3f4wah-3 style__NumberInput-ysvvnc-1 dRKcLM lcxbRh"
+                data-number-idx={2}
+                onChange={[Function]}
+                onInput={[Function]}
+                onInvalid={[Function]}
+                pattern="^[0-9]{4}$"
+                required={true}
+                type="text"
+                value=""
+                width="54px"
+              />
+              <span
+                className="style__Divider-ysvvnc-3 cUPmfy"
+              >
+                -
+              </span>
+              <input
+                aria-label="card-numbers-input-3"
+                className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-ysvvnc-2 dRKcLM jvUoAJ"
+                data-number-idx={3}
+                onChange={[Function]}
+                onInput={[Function]}
+                onInvalid={[Function]}
+                pattern="^[0-9]{4}$"
+                required={true}
+                type="password"
+                value=""
+                width="54px"
+              />
+              <span
+                className="style__Divider-ysvvnc-3 cUPmfy"
+              >
+                -
+              </span>
+              <input
+                aria-label="card-numbers-input-4"
+                className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-ysvvnc-2 dRKcLM jvUoAJ"
+                data-number-idx={4}
+                onChange={[Function]}
+                onInput={[Function]}
+                onInvalid={[Function]}
+                pattern="^[0-9]{4}$"
+                required={true}
+                type="password"
+                value=""
+                width="54px"
+              />
+            </fieldset>
+          </div>
+        </div>
+        <div
+          className="style__Root-sc-3f4wah-0 grbWQA"
+        >
+          <div
+            className="style__InputHeader-sc-3f4wah-1 diodMT"
+            width="137px"
+          >
+            <label
+              className="style__Label-sc-3f4wah-4 gMvGmA"
+              htmlFor="expirationDate"
+            >
+              만료일
+            </label>
+          </div>
+          <div
+            className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+          >
+            <fieldset
+              className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-sc-13qly49-0 bsuQmi jHWbuV"
+            >
+              <input
+                aria-label="expiration-date-input-month"
+                className="style__DefaultInput-sc-3f4wah-3 style__Input-sc-13qly49-1 fWEmGR cPseaH"
+                data-date-type="month"
+                onChange={[Function]}
+                placeholder="MM"
+                required={true}
+                type="number"
+                value=""
+                width="44px"
+              />
+              <span
+                className="style__Divider-sc-13qly49-2 doZxfy"
+              >
+                /
+              </span>
+              <input
+                aria-label="expiration-date-input-year"
+                className="style__DefaultInput-sc-3f4wah-3 style__Input-sc-13qly49-1 fWEmGR cPseaH"
+                data-date-type="year"
+                onChange={[Function]}
+                placeholder="YY"
+                required={true}
+                type="number"
+                value=""
+                width="44px"
+              />
+            </fieldset>
+          </div>
+        </div>
+        <div
+          className="style__Root-n8loax-0 itiQKy"
+        >
+          <div
+            className="style__Root-sc-3f4wah-0 grbWQA"
+          >
+            <div
+              className="style__InputHeader-sc-3f4wah-1 dgyPDM"
+              width="318px"
+            >
+              <label
+                className="style__Label-sc-3f4wah-4 gMvGmA"
+                htmlFor="ownerName"
+              >
+                카드 소유자 이름(선택)
+              </label>
+              <span
+                className="style__WordCount-sc-3f4wah-5 eDoEkq"
+              >
+                0/30
+              </span>
+            </div>
+            <div
+              className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+            >
+              <fieldset
+                className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-n8loax-1 bsuQmi lhqhBZ"
+              >
+                <input
+                  aria-label="owner-name-input"
+                  className="style__DefaultInput-sc-3f4wah-3 style__Input-n8loax-2 eYdAmk dRGhbr"
+                  onChange={[Function]}
+                  placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+                  value=""
+                  width="302px"
+                />
+              </fieldset>
+            </div>
+          </div>
+          <div
+            className="style__ErrorMessage-n8loax-3 hVPrMh"
+          >
+            이름은 영어로만 입력해주세요
+          </div>
+        </div>
+        <div
+          className="style__Root-sc-3f4wah-0 grbWQA"
+        >
+          <div
+            className="style__InputHeader-sc-3f4wah-1 gWZEBq"
+            width="84px"
+          >
+            <label
+              className="style__Label-sc-3f4wah-4 gMvGmA"
+              htmlFor="secureCode"
+            >
+              보안코드(CVC/CVV)
+            </label>
+          </div>
+          <div
+            className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+          >
+            <fieldset
+              className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-sc-4rmjlh-0 bsuQmi gYylQG"
+            >
+              <input
+                aria-label="secure-code-input"
+                className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-sc-4rmjlh-1 ePeBaZ bBjHqR"
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={true}
+                type="password"
+                value=""
+              />
+              <img
+                className="style__HelpMark-sc-4rmjlh-2 bpvqmv"
+                onMouseLeave={[Function]}
+                onMouseOver={[Function]}
+                src="cvc-help.svg"
+              />
+            </fieldset>
+          </div>
+        </div>
+        <div
+          className="style__Root-sc-3f4wah-0 grbWQA"
+        >
+          <div
+            className="style__InputHeader-sc-3f4wah-1 jjKhPy"
+            width="100%"
+          >
+            <label
+              className="style__Label-sc-3f4wah-4 gMvGmA"
+              htmlFor="password"
+            >
+              카드 비밀번호
+            </label>
+          </div>
+          <div
+            className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+          >
+            <fieldset
+              className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-sc-6108u1-0 bsuQmi iSBKpl"
+            >
+              <input
+                aria-label="password-input-1"
+                className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-sc-6108u1-1 ePeBaZ dikJAV"
+                data-password-idx={1}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={true}
+                type="password"
+                value=""
+              />
+            </fieldset>
+            <fieldset
+              className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-sc-6108u1-0 bsuQmi iSBKpl"
+            >
+              <input
+                aria-label="password-input-2"
+                className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-sc-6108u1-1 ePeBaZ dikJAV"
+                data-password-idx={2}
+                onChange={[Function]}
+                required={true}
+                type="password"
+                value=""
+              />
+            </fieldset>
+            <div
+              className="style__PasswordMark-sc-6108u1-2 Pjsxp"
+            >
+              <img
+                alt="password-mark"
+                src="secure-ellipse-cyan.svg"
+              />
+            </div>
+            <div
+              className="style__PasswordMark-sc-6108u1-2 Pjsxp"
+            >
+              <img
+                alt="password-mark"
+                src="secure-ellipse-cyan.svg"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+      <button
+        className="style__Root-sc-1jvhv8q-0 bwUrMX"
+        form="register-form"
+        type="submit"
+      >
+        다음
+      </button>
+    </div>
+  </section>
+</main>
+`;
+
+exports[`Storyshots pages/CardCompletion Default 1`] = `
+<section
+  className="style__Root-sc-1060gje-0 iDCYho"
+>
+  <h3
+    className="style__Title-sc-1060gje-1 bZPFcS"
+  >
+    카드등록이 완료되었습니다.
+  </h3>
+  <div
+    className="style__CardWrapper-sc-1060gje-2 hmktTm"
+  >
+    <div
+      className="style__Root-sw8tc6-0 jkUHtG"
+      height="183px"
+      size="large"
+      width="293px"
+    >
+      <div
+        className="style__CardName-sw8tc6-1 jJIFBF"
+      >
+        포코 카드
+      </div>
+      <div
+        className="style__Chip-sw8tc6-2 DzUbZ"
+      />
+      <div
+        className="style__CardNumbersWrapper-sw8tc6-3 cBhBAO"
+      >
+        <span
+          className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+        >
+          1111
+        </span>
+        <span
+          className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+        >
+          1234
+        </span>
+        <span
+          className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+        >
+          <img
+            alt="secure-mark"
+            src="secure-ellipse.svg"
+          />
+          <img
+            alt="secure-mark"
+            src="secure-ellipse.svg"
+          />
+          <img
+            alt="secure-mark"
+            src="secure-ellipse.svg"
+          />
+          <img
+            alt="secure-mark"
+            src="secure-ellipse.svg"
+          />
+        </span>
+        <span
+          className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+        >
+          <img
+            alt="secure-mark"
+            src="secure-ellipse.svg"
+          />
+          <img
+            alt="secure-mark"
+            src="secure-ellipse.svg"
+          />
+          <img
+            alt="secure-mark"
+            src="secure-ellipse.svg"
+          />
+          <img
+            alt="secure-mark"
+            src="secure-ellipse.svg"
+          />
+        </span>
+      </div>
+      <div
+        className="style__OwnerName-sw8tc6-5 dwYEPq"
+      >
+        COLLIN
+      </div>
+      <div
+        className="style__ExpirationDate-sw8tc6-6 hHZLxr"
+      >
+        04/21
+      </div>
+    </div>
+  </div>
+  <form
+    id="alias-form"
+    onSubmit={[Function]}
+  >
+    <input
+      aria-label="card-alias-input"
+      className="style__AliasInput-sc-1060gje-3 eIOjFS"
+      onChange={[Function]}
+      value=""
+    />
+    <button
+      className="style__Root-sc-1jvhv8q-0 bwUrMX"
+      form="alias-form"
+      type="submit"
+    >
+      확인
+    </button>
+  </form>
+</section>
+`;
+
+exports[`Storyshots pages/CardList Default 1`] = `
+Array [
+  <section
+    className="style__Root-sc-69kg52-0 esmzMn"
+  >
+    <img
+      alt="spinner"
+      className="style__Spinner-sc-69kg52-1 dvGSZb"
+      src="spinner.gif"
+    />
+    <button
+      className="style__CardAddButton-sc-69kg52-5 lmPXIe"
+      onClick={[Function]}
+    >
+      +
+    </button>
+  </section>,
+  <div
+    className="style__Root-sc-1t6ljqz-0 dhbWqy"
+    onClick={[Function]}
+  >
+    <div
+      className="style__ActionSheetInner-sc-1t6ljqz-1 hEgWHh"
+    >
+      <button
+        className="style__Option-sc-1t6ljqz-2 iyfbur"
+        color="#FF0000"
+        onClick={[Function]}
+      >
+        삭제
+      </button>
+      <button
+        className="style__Option-sc-1t6ljqz-2 bXqZDM"
+        onClick={[Function]}
+      >
+        닫기
+      </button>
+    </div>
+  </div>,
+  <div
+    className="style__Root-sc-1esxeb-0 exrSVy"
+  >
+    <div
+      className="style__SnackbarInner-sc-1esxeb-1 dRqhuB"
+    >
+      카드가 삭제되었습니다.
+    </div>
+  </div>,
+]
+`;
+
+exports[`Storyshots pages/CardRegister Default 1`] = `
+<div
+  className="style__Root-sc-14i3h4l-0 fCopeu"
+>
+  <div
+    className="style__CardWrapper-sc-14i3h4l-1 bKwaxM"
+  >
+    <div
+      className="style__Root-sw8tc6-0 ddmYxF"
+      height="133px"
+      size="normal"
+      width="213px"
+    >
+      <div
+        className="style__CardName-sw8tc6-1 jJIFBF"
+      >
+        
+      </div>
+      <div
+        className="style__Chip-sw8tc6-2 DzUbZ"
+      />
+      <div
+        className="style__CardNumbersWrapper-sw8tc6-3 cBhBAO"
+      >
+        <span
+          className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+        >
+          
+        </span>
+        <span
+          className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+        >
+          
+        </span>
+        <span
+          className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+        />
+        <span
+          className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+        />
+      </div>
+      <div
+        className="style__OwnerName-sw8tc6-5 dwYEPq"
+      >
+        NAME
+      </div>
+      <div
+        className="style__ExpirationDate-sw8tc6-6 hHZLxr"
+      >
+        MM/YY
+      </div>
+    </div>
+  </div>
+  <form
+    className="style__Root-sc-1rnuj1y-0 bAJWrD"
+    id="register-form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="style__Root-sc-3f4wah-0 grbWQA"
+    >
+      <div
+        className="style__InputHeader-sc-3f4wah-1 dgyPDM"
+        width="318px"
+      >
+        <label
+          className="style__Label-sc-3f4wah-4 gMvGmA"
+          htmlFor="cardNumbers"
+        >
+          카드 번호
+        </label>
+      </div>
+      <div
+        className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+      >
+        <fieldset
+          className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-ysvvnc-0 bsuQmi bXHXtL"
+        >
+          <input
+            aria-label="card-numbers-input-1"
+            className="style__DefaultInput-sc-3f4wah-3 style__NumberInput-ysvvnc-1 dRKcLM lcxbRh"
+            data-number-idx={1}
+            onChange={[Function]}
+            onInput={[Function]}
+            onInvalid={[Function]}
+            pattern="^[0-9]{4}$"
+            required={true}
+            type="text"
+            value=""
+            width="54px"
+          />
+          <span
+            className="style__Divider-ysvvnc-3 cUPmfy"
+          >
+            -
+          </span>
+          <input
+            aria-label="card-numbers-input-2"
+            className="style__DefaultInput-sc-3f4wah-3 style__NumberInput-ysvvnc-1 dRKcLM lcxbRh"
+            data-number-idx={2}
+            onChange={[Function]}
+            onInput={[Function]}
+            onInvalid={[Function]}
+            pattern="^[0-9]{4}$"
+            required={true}
+            type="text"
+            value=""
+            width="54px"
+          />
+          <span
+            className="style__Divider-ysvvnc-3 cUPmfy"
+          >
+            -
+          </span>
+          <input
+            aria-label="card-numbers-input-3"
+            className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-ysvvnc-2 dRKcLM jvUoAJ"
+            data-number-idx={3}
+            onChange={[Function]}
+            onInput={[Function]}
+            onInvalid={[Function]}
+            pattern="^[0-9]{4}$"
+            required={true}
+            type="password"
+            value=""
+            width="54px"
+          />
+          <span
+            className="style__Divider-ysvvnc-3 cUPmfy"
+          >
+            -
+          </span>
+          <input
+            aria-label="card-numbers-input-4"
+            className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-ysvvnc-2 dRKcLM jvUoAJ"
+            data-number-idx={4}
+            onChange={[Function]}
+            onInput={[Function]}
+            onInvalid={[Function]}
+            pattern="^[0-9]{4}$"
+            required={true}
+            type="password"
+            value=""
+            width="54px"
+          />
+        </fieldset>
+      </div>
+    </div>
+    <div
+      className="style__Root-sc-3f4wah-0 grbWQA"
+    >
+      <div
+        className="style__InputHeader-sc-3f4wah-1 diodMT"
+        width="137px"
+      >
+        <label
+          className="style__Label-sc-3f4wah-4 gMvGmA"
+          htmlFor="expirationDate"
+        >
+          만료일
+        </label>
+      </div>
+      <div
+        className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+      >
+        <fieldset
+          className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-sc-13qly49-0 bsuQmi jHWbuV"
+        >
+          <input
+            aria-label="expiration-date-input-month"
+            className="style__DefaultInput-sc-3f4wah-3 style__Input-sc-13qly49-1 fWEmGR cPseaH"
+            data-date-type="month"
+            onChange={[Function]}
+            placeholder="MM"
+            required={true}
+            type="number"
+            value=""
+            width="44px"
+          />
+          <span
+            className="style__Divider-sc-13qly49-2 doZxfy"
+          >
+            /
+          </span>
+          <input
+            aria-label="expiration-date-input-year"
+            className="style__DefaultInput-sc-3f4wah-3 style__Input-sc-13qly49-1 fWEmGR cPseaH"
+            data-date-type="year"
+            onChange={[Function]}
+            placeholder="YY"
+            required={true}
+            type="number"
+            value=""
+            width="44px"
+          />
+        </fieldset>
+      </div>
+    </div>
+    <div
+      className="style__Root-n8loax-0 itiQKy"
+    >
+      <div
+        className="style__Root-sc-3f4wah-0 grbWQA"
+      >
+        <div
+          className="style__InputHeader-sc-3f4wah-1 dgyPDM"
+          width="318px"
+        >
+          <label
+            className="style__Label-sc-3f4wah-4 gMvGmA"
+            htmlFor="ownerName"
+          >
+            카드 소유자 이름(선택)
+          </label>
+          <span
+            className="style__WordCount-sc-3f4wah-5 eDoEkq"
+          >
+            0/30
+          </span>
+        </div>
+        <div
+          className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+        >
+          <fieldset
+            className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-n8loax-1 bsuQmi lhqhBZ"
+          >
+            <input
+              aria-label="owner-name-input"
+              className="style__DefaultInput-sc-3f4wah-3 style__Input-n8loax-2 eYdAmk dRGhbr"
+              onChange={[Function]}
+              placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+              value=""
+              width="302px"
+            />
+          </fieldset>
+        </div>
+      </div>
+      <div
+        className="style__ErrorMessage-n8loax-3 hVPrMh"
+      >
+        이름은 영어로만 입력해주세요
+      </div>
+    </div>
+    <div
+      className="style__Root-sc-3f4wah-0 grbWQA"
+    >
+      <div
+        className="style__InputHeader-sc-3f4wah-1 gWZEBq"
+        width="84px"
+      >
+        <label
+          className="style__Label-sc-3f4wah-4 gMvGmA"
+          htmlFor="secureCode"
+        >
+          보안코드(CVC/CVV)
+        </label>
+      </div>
+      <div
+        className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+      >
+        <fieldset
+          className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-sc-4rmjlh-0 bsuQmi gYylQG"
+        >
+          <input
+            aria-label="secure-code-input"
+            className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-sc-4rmjlh-1 ePeBaZ bBjHqR"
+            onChange={[Function]}
+            onFocus={[Function]}
+            required={true}
+            type="password"
+            value=""
+          />
+          <img
+            className="style__HelpMark-sc-4rmjlh-2 bpvqmv"
+            onMouseLeave={[Function]}
+            onMouseOver={[Function]}
+            src="cvc-help.svg"
+          />
+        </fieldset>
+      </div>
+    </div>
+    <div
+      className="style__Root-sc-3f4wah-0 grbWQA"
+    >
+      <div
+        className="style__InputHeader-sc-3f4wah-1 jjKhPy"
+        width="100%"
+      >
+        <label
+          className="style__Label-sc-3f4wah-4 gMvGmA"
+          htmlFor="password"
+        >
+          카드 비밀번호
+        </label>
+      </div>
+      <div
+        className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+      >
+        <fieldset
+          className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-sc-6108u1-0 bsuQmi iSBKpl"
+        >
+          <input
+            aria-label="password-input-1"
+            className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-sc-6108u1-1 ePeBaZ dikJAV"
+            data-password-idx={1}
+            onChange={[Function]}
+            onFocus={[Function]}
+            required={true}
+            type="password"
+            value=""
+          />
+        </fieldset>
+        <fieldset
+          className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-sc-6108u1-0 bsuQmi iSBKpl"
+        >
+          <input
+            aria-label="password-input-2"
+            className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-sc-6108u1-1 ePeBaZ dikJAV"
+            data-password-idx={2}
+            onChange={[Function]}
+            required={true}
+            type="password"
+            value=""
+          />
+        </fieldset>
+        <div
+          className="style__PasswordMark-sc-6108u1-2 Pjsxp"
+        >
+          <img
+            alt="password-mark"
+            src="secure-ellipse-cyan.svg"
+          />
+        </div>
+        <div
+          className="style__PasswordMark-sc-6108u1-2 Pjsxp"
+        >
+          <img
+            alt="password-mark"
+            src="secure-ellipse-cyan.svg"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+  <button
+    className="style__Root-sc-1jvhv8q-0 bwUrMX"
+    form="register-form"
+    type="submit"
+  >
+    다음
+  </button>
+</div>
+`;
+
+exports[`Storyshots shared/ActionSheet Default 1`] = `
+<div
+  className="style__Root-sc-1t6ljqz-0 fSAsHh"
+  onClick={[Function]}
+>
+  <div
+    className="style__ActionSheetInner-sc-1t6ljqz-1 hEgWHh"
+  >
+    <button
+      className="style__Option-sc-1t6ljqz-2 iyfbur"
+      color="#FF0000"
+      onClick={[Function]}
+    >
+      삭제
+    </button>
+    <button
+      className="style__Option-sc-1t6ljqz-2 bXqZDM"
+      onClick={[Function]}
+    >
+      닫기
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Storyshots shared/Button Default 1`] = `
+<button
+  className="style__Root-sc-1jvhv8q-0 bwUrMX"
+  type="submit"
+>
+  다음
+</button>
+`;
+
+exports[`Storyshots shared/Card Loyd Card 1`] = `
+<div
+  className="style__Root-sw8tc6-0 epaZox"
+  height="130px"
+  size="normal"
+  width="208px"
+>
+  <div
+    className="style__CardName-sw8tc6-1 jJIFBF"
+  >
+    로이드 카드
+  </div>
+  <div
+    className="style__Chip-sw8tc6-2 DzUbZ"
+  />
+  <div
+    className="style__CardNumbersWrapper-sw8tc6-3 cBhBAO"
+  >
+    <span
+      className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+    >
+      4444
+    </span>
+    <span
+      className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+    >
+      3333
+    </span>
+    <span
+      className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+    >
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+    </span>
+    <span
+      className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+    >
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+    </span>
+  </div>
+  <div
+    className="style__OwnerName-sw8tc6-5 dwYEPq"
+  >
+    LOYD
+  </div>
+  <div
+    className="style__ExpirationDate-sw8tc6-6 hHZLxr"
+  >
+    02/17
+  </div>
+</div>
+`;
+
+exports[`Storyshots shared/Card Poco Card 1`] = `
+<div
+  className="style__Root-sw8tc6-0 fXbcaJ"
+  height="130px"
+  size="normal"
+  width="208px"
+>
+  <div
+    className="style__CardName-sw8tc6-1 jJIFBF"
+  >
+    포코 카드
+  </div>
+  <div
+    className="style__Chip-sw8tc6-2 DzUbZ"
+  />
+  <div
+    className="style__CardNumbersWrapper-sw8tc6-3 cBhBAO"
+  >
+    <span
+      className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+    >
+      1111
+    </span>
+    <span
+      className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+    >
+      2222
+    </span>
+    <span
+      className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+    >
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+    </span>
+    <span
+      className="style__CardNumbersFragment-sw8tc6-4 jZVbVe"
+    >
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+      <img
+        alt="secure-mark"
+        src="secure-ellipse.svg"
+      />
+    </span>
+  </div>
+  <div
+    className="style__OwnerName-sw8tc6-5 dwYEPq"
+  >
+    POCO
+  </div>
+  <div
+    className="style__ExpirationDate-sw8tc6-6 hHZLxr"
+  >
+    04/21
+  </div>
+</div>
+`;
+
+exports[`Storyshots shared/Snackbar Default 1`] = `
+<div
+  className="style__Root-sc-1esxeb-0 exrSVy"
+>
+  <div
+    className="style__SnackbarInner-sc-1esxeb-1 gejBkN"
+  >
+    스낵바 메시지 기본
+  </div>
+</div>
+`;
+
+exports[`Storyshots units/CardColorOption Doby Card Option 1`] = `
+<div
+  className="style__Root-sc-1nvsclt-0 bAFuoC"
+>
+  <button
+    className="style__Circle-sc-1nvsclt-1 cmBZGH"
+    color="#E76E9A"
+    data-bank-id="6d"
+    onClick={[Function]}
+  />
+  <span
+    className="style__BankName-sc-1nvsclt-2 irydFi"
+  >
+    도비 카드
+  </span>
+</div>
+`;
+
+exports[`Storyshots units/CardColorOption Poco Card Option 1`] = `
+<div
+  className="style__Root-sc-1nvsclt-0 bAFuoC"
+>
+  <button
+    className="style__Circle-sc-1nvsclt-1 jaTvDl"
+    color="#E24141"
+    data-bank-id="1p"
+    onClick={[Function]}
+  />
+  <span
+    className="style__BankName-sc-1nvsclt-2 irydFi"
+  >
+    포코 카드
+  </span>
+</div>
+`;
+
+exports[`Storyshots units/CardRegisterForm Default 1`] = `
+<form
+  className="style__Root-sc-1rnuj1y-0 bAJWrD"
+  id="register-form"
+  onSubmit={[Function]}
+>
+  <div
+    className="style__Root-sc-3f4wah-0 grbWQA"
+  >
+    <div
+      className="style__InputHeader-sc-3f4wah-1 dgyPDM"
+      width="318px"
+    >
+      <label
+        className="style__Label-sc-3f4wah-4 gMvGmA"
+        htmlFor="cardNumbers"
+      >
+        카드 번호
+      </label>
+    </div>
+    <div
+      className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+    >
+      <fieldset
+        className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-ysvvnc-0 bsuQmi bXHXtL"
+      >
+        <input
+          aria-label="card-numbers-input-1"
+          className="style__DefaultInput-sc-3f4wah-3 style__NumberInput-ysvvnc-1 dRKcLM lcxbRh"
+          data-number-idx={1}
+          onChange={[Function]}
+          onInput={[Function]}
+          onInvalid={[Function]}
+          pattern="^[0-9]{4}$"
+          required={true}
+          type="text"
+          value=""
+          width="54px"
+        />
+        <span
+          className="style__Divider-ysvvnc-3 cUPmfy"
+        >
+          -
+        </span>
+        <input
+          aria-label="card-numbers-input-2"
+          className="style__DefaultInput-sc-3f4wah-3 style__NumberInput-ysvvnc-1 dRKcLM lcxbRh"
+          data-number-idx={2}
+          onChange={[Function]}
+          onInput={[Function]}
+          onInvalid={[Function]}
+          pattern="^[0-9]{4}$"
+          required={true}
+          type="text"
+          value=""
+          width="54px"
+        />
+        <span
+          className="style__Divider-ysvvnc-3 cUPmfy"
+        >
+          -
+        </span>
+        <input
+          aria-label="card-numbers-input-3"
+          className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-ysvvnc-2 dRKcLM jvUoAJ"
+          data-number-idx={3}
+          onChange={[Function]}
+          onInput={[Function]}
+          onInvalid={[Function]}
+          pattern="^[0-9]{4}$"
+          required={true}
+          type="password"
+          value=""
+          width="54px"
+        />
+        <span
+          className="style__Divider-ysvvnc-3 cUPmfy"
+        >
+          -
+        </span>
+        <input
+          aria-label="card-numbers-input-4"
+          className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-ysvvnc-2 dRKcLM jvUoAJ"
+          data-number-idx={4}
+          onChange={[Function]}
+          onInput={[Function]}
+          onInvalid={[Function]}
+          pattern="^[0-9]{4}$"
+          required={true}
+          type="password"
+          value=""
+          width="54px"
+        />
+      </fieldset>
+    </div>
+  </div>
+  <div
+    className="style__Root-sc-3f4wah-0 grbWQA"
+  >
+    <div
+      className="style__InputHeader-sc-3f4wah-1 diodMT"
+      width="137px"
+    >
+      <label
+        className="style__Label-sc-3f4wah-4 gMvGmA"
+        htmlFor="expirationDate"
+      >
+        만료일
+      </label>
+    </div>
+    <div
+      className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+    >
+      <fieldset
+        className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-sc-13qly49-0 bsuQmi jHWbuV"
+      >
+        <input
+          aria-label="expiration-date-input-month"
+          className="style__DefaultInput-sc-3f4wah-3 style__Input-sc-13qly49-1 fWEmGR cPseaH"
+          data-date-type="month"
+          onChange={[Function]}
+          placeholder="MM"
+          required={true}
+          type="number"
+          value=""
+          width="44px"
+        />
+        <span
+          className="style__Divider-sc-13qly49-2 doZxfy"
+        >
+          /
+        </span>
+        <input
+          aria-label="expiration-date-input-year"
+          className="style__DefaultInput-sc-3f4wah-3 style__Input-sc-13qly49-1 fWEmGR cPseaH"
+          data-date-type="year"
+          onChange={[Function]}
+          placeholder="YY"
+          required={true}
+          type="number"
+          value=""
+          width="44px"
+        />
+      </fieldset>
+    </div>
+  </div>
+  <div
+    className="style__Root-n8loax-0 itiQKy"
+  >
+    <div
+      className="style__Root-sc-3f4wah-0 grbWQA"
+    >
+      <div
+        className="style__InputHeader-sc-3f4wah-1 dgyPDM"
+        width="318px"
+      >
+        <label
+          className="style__Label-sc-3f4wah-4 gMvGmA"
+          htmlFor="ownerName"
+        >
+          카드 소유자 이름(선택)
+        </label>
+        <span
+          className="style__WordCount-sc-3f4wah-5 eDoEkq"
+        >
+          0/30
+        </span>
+      </div>
+      <div
+        className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+      >
+        <fieldset
+          className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-n8loax-1 bsuQmi lhqhBZ"
+        >
+          <input
+            aria-label="owner-name-input"
+            className="style__DefaultInput-sc-3f4wah-3 style__Input-n8loax-2 eYdAmk dRGhbr"
+            onChange={[Function]}
+            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+            value=""
+            width="302px"
+          />
+        </fieldset>
+      </div>
+    </div>
+    <div
+      className="style__ErrorMessage-n8loax-3 hVPrMh"
+    >
+      이름은 영어로만 입력해주세요
+    </div>
+  </div>
+  <div
+    className="style__Root-sc-3f4wah-0 grbWQA"
+  >
+    <div
+      className="style__InputHeader-sc-3f4wah-1 gWZEBq"
+      width="84px"
+    >
+      <label
+        className="style__Label-sc-3f4wah-4 gMvGmA"
+        htmlFor="secureCode"
+      >
+        보안코드(CVC/CVV)
+      </label>
+    </div>
+    <div
+      className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+    >
+      <fieldset
+        className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-sc-4rmjlh-0 bsuQmi gYylQG"
+      >
+        <input
+          aria-label="secure-code-input"
+          className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-sc-4rmjlh-1 ePeBaZ bBjHqR"
+          onChange={[Function]}
+          onFocus={[Function]}
+          required={true}
+          type="password"
+          value=""
+        />
+        <img
+          className="style__HelpMark-sc-4rmjlh-2 bpvqmv"
+          onMouseLeave={[Function]}
+          onMouseOver={[Function]}
+          src="cvc-help.svg"
+        />
+      </fieldset>
+    </div>
+  </div>
+  <div
+    className="style__Root-sc-3f4wah-0 grbWQA"
+  >
+    <div
+      className="style__InputHeader-sc-3f4wah-1 jjKhPy"
+      width="100%"
+    >
+      <label
+        className="style__Label-sc-3f4wah-4 gMvGmA"
+        htmlFor="password"
+      >
+        카드 비밀번호
+      </label>
+    </div>
+    <div
+      className="style__FlexContainer-sc-3f4wah-6 bIXSBw"
+    >
+      <fieldset
+        className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-sc-6108u1-0 bsuQmi iSBKpl"
+      >
+        <input
+          aria-label="password-input-1"
+          className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-sc-6108u1-1 ePeBaZ dikJAV"
+          data-password-idx={1}
+          onChange={[Function]}
+          onFocus={[Function]}
+          required={true}
+          type="password"
+          value=""
+        />
+      </fieldset>
+      <fieldset
+        className="style__DefaultInputWrapper-sc-3f4wah-2 style__InputWrapper-sc-6108u1-0 bsuQmi iSBKpl"
+      >
+        <input
+          aria-label="password-input-2"
+          className="style__DefaultInput-sc-3f4wah-3 style__PasswordInput-sc-6108u1-1 ePeBaZ dikJAV"
+          data-password-idx={2}
+          onChange={[Function]}
+          required={true}
+          type="password"
+          value=""
+        />
+      </fieldset>
+      <div
+        className="style__PasswordMark-sc-6108u1-2 Pjsxp"
+      >
+        <img
+          alt="password-mark"
+          src="secure-ellipse-cyan.svg"
+        />
+      </div>
+      <div
+        className="style__PasswordMark-sc-6108u1-2 Pjsxp"
+      >
+        <img
+          alt="password-mark"
+          src="secure-ellipse-cyan.svg"
+        />
+      </div>
+    </div>
+  </div>
+</form>
+`;
+
+exports[`Storyshots units/CardSelector Default 1`] = `
+<div
+  className="style__Root-sc-1qjsyna-0 eGjEer"
+>
+  <div
+    className="style__SelectorInner-sc-1qjsyna-1 hEeoMO"
+  >
+    <div
+      className="style__Root-sc-1nvsclt-0 bAFuoC"
+    >
+      <button
+        className="style__Circle-sc-1nvsclt-1 jaTvDl"
+        color="#E24141"
+        data-bank-id="1p"
+        onClick={[Function]}
+      />
+      <span
+        className="style__BankName-sc-1nvsclt-2 irydFi"
+      >
+        포코 카드
+      </span>
+    </div>
+    <div
+      className="style__Root-sc-1nvsclt-0 bAFuoC"
+    >
+      <button
+        className="style__Circle-sc-1nvsclt-1 dIPujy"
+        color="#547CE4"
+        data-bank-id="2j"
+        onClick={[Function]}
+      />
+      <span
+        className="style__BankName-sc-1nvsclt-2 irydFi"
+      >
+        준 카드
+      </span>
+    </div>
+    <div
+      className="style__Root-sc-1nvsclt-0 bAFuoC"
+    >
+      <button
+        className="style__Circle-sc-1nvsclt-1 eEZneF"
+        color="#73BC6D"
+        data-bank-id="3k"
+        onClick={[Function]}
+      />
+      <span
+        className="style__BankName-sc-1nvsclt-2 irydFi"
+      >
+        공원 카드
+      </span>
+    </div>
+    <div
+      className="style__Root-sc-1nvsclt-0 bAFuoC"
+    >
+      <button
+        className="style__Circle-sc-1nvsclt-1 ismzTQ"
+        color="#DE59B9"
+        data-bank-id="4b"
+        onClick={[Function]}
+      />
+      <span
+        className="style__BankName-sc-1nvsclt-2 irydFi"
+      >
+        브랜 카드
+      </span>
+    </div>
+    <div
+      className="style__Root-sc-1nvsclt-0 bAFuoC"
+    >
+      <button
+        className="style__Circle-sc-1nvsclt-1 ibnKQB"
+        color="#04C09E"
+        data-bank-id="5l"
+        onClick={[Function]}
+      />
+      <span
+        className="style__BankName-sc-1nvsclt-2 irydFi"
+      >
+        로이드 카드
+      </span>
+    </div>
+    <div
+      className="style__Root-sc-1nvsclt-0 bAFuoC"
+    >
+      <button
+        className="style__Circle-sc-1nvsclt-1 cmBZGH"
+        color="#E76E9A"
+        data-bank-id="6d"
+        onClick={[Function]}
+      />
+      <span
+        className="style__BankName-sc-1nvsclt-2 irydFi"
+      >
+        도비 카드
+      </span>
+    </div>
+    <div
+      className="style__Root-sc-1nvsclt-0 bAFuoC"
+    >
+      <button
+        className="style__Circle-sc-1nvsclt-1 jMRCep"
+        color="#F37D3B"
+        data-bank-id="7c"
+        onClick={[Function]}
+      />
+      <span
+        className="style__BankName-sc-1nvsclt-2 irydFi"
+      >
+        콜린 카드
+      </span>
+    </div>
+    <div
+      className="style__Root-sc-1nvsclt-0 bAFuoC"
+    >
+      <button
+        className="style__Circle-sc-1nvsclt-1 diRkHY"
+        color="#FBCD58"
+        data-bank-id="8s"
+        onClick={[Function]}
+      />
+      <span
+        className="style__BankName-sc-1nvsclt-2 irydFi"
+      >
+        썬 카드
+      </span>
+    </div>
+  </div>
+</div>
+`;

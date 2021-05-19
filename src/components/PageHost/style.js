@@ -23,4 +23,8 @@ const NavigationTitle = styled.span`
   margin-left: 17px;
 `;
 
-export { Root, NavigationBar, NavigationTitle };
+const BackButton = styled.img`
+  cursor: pointer;
+`;
+
+export { Root, NavigationBar, NavigationTitle, BackButton };

@@ -19,10 +19,10 @@ const CardNumbersInput = (props) => {
   const handleChangeNumbers = (event) => {
     const index = Number(event.target.dataset.numberIdx);
     const numberFragment = event.target.value;
+    if (isNaN(numberFragment)) return;
 
     setCardNumbers((prevNumbers) => ({ ...prevNumbers, [index]: numberFragment }));
 
-    // TODO: selector open 시 input에서 일시적으로 focus out
     if (isFourDigits(numberFragment)) {
       index <= THIRD ? moveFocusToNextFragment(index) : focusOut(index - 1);
     }
@@ -36,31 +36,41 @@ const CardNumbersInput = (props) => {
     inputRefs[index].current.blur();
   };
 
+  const handleInvalidInput = (event) => {
+    event.target.setCustomValidity('숫자를 4자리로 입력해 주세요.');
+  };
+
+  const clearValidity = (event) => {
+    event.target.setCustomValidity('');
+  };
+
   return (
     <RegisterInputWrapper type={type} label={label} width={width}>
       <Style.InputWrapper>
         <Style.NumberInput
-          type="number"
+          type="text"
           aria-label="card-numbers-input-1"
           width="54px"
-          min="1000"
-          max="9999"
           value={cardNumbers[FIRST]}
+          pattern="^[0-9]{4}$"
           data-number-idx={FIRST}
           onChange={handleChangeNumbers}
+          onInvalid={handleInvalidInput}
+          onInput={clearValidity}
           ref={firstInput}
           required
         />
         <Style.Divider>-</Style.Divider>
         <Style.NumberInput
-          type="number"
+          type="text"
           aria-label="card-numbers-input-2"
           width="54px"
-          min="1000"
-          max="9999"
           value={cardNumbers[SECOND]}
+          pattern="^[0-9]{4}$"
           data-number-idx={SECOND}
           onChange={handleChangeNumbers}
+          onInvalid={handleInvalidInput}
+          onInput={clearValidity}
           ref={secondInput}
           required
         />
@@ -69,11 +79,12 @@ const CardNumbersInput = (props) => {
           type="password"
           aria-label="card-numbers-input-3"
           width="54px"
-          min="1000"
-          max="9999"
           value={cardNumbers[THIRD]}
+          pattern="^[0-9]{4}$"
           data-number-idx={THIRD}
           onChange={handleChangeNumbers}
+          onInvalid={handleInvalidInput}
+          onInput={clearValidity}
           ref={thirdInput}
           required
         />
@@ -82,11 +93,12 @@ const CardNumbersInput = (props) => {
           type="password"
           aria-label="card-numbers-input-4"
           width="54px"
-          min="1000"
-          max="9999"
           value={cardNumbers[FOURTH]}
+          pattern="^[0-9]{4}$"
           data-number-idx={FOURTH}
           onChange={handleChangeNumbers}
+          onInvalid={handleInvalidInput}
+          onInput={clearValidity}
           ref={fourthInput}
           required
         />

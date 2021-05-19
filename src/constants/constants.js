@@ -23,7 +23,7 @@ export const INPUT_TYPE = {
   PASSWORD: {
     type: 'password',
     label: '카드 비밀번호',
-    width: '43px',
+    width: '100%',
   },
 };
 

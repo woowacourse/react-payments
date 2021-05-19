@@ -2,30 +2,31 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../../shared/Card';
 import Button from '../../shared/Button';
-import { addCardRequest } from '../../../request';
+import { updateCardRequest } from '../../../request';
 import PAGES from '../../../constants/pages';
 import * as Style from './style';
 
-const CardCompletion = (props) => {
+const CardEdit = (props) => {
   const {
-    cardData: { bankId, cardNumbers, expirationDate, ownerName },
+    cardData: { bankId, cardNumbers, expirationDate, ownerName, cardAlias },
     handleMovePage,
+    cardId,
   } = props;
 
-  const [aliasInput, setAliasInput] = useState('');
+  const [aliasInput, setAliasInput] = useState(cardAlias);
 
-  const pageTitle = '카드등록이 완료되었습니다.';
+  const pageTitle = '카드 별칭을 수정해주세요';
 
   const handleChangeAlias = (event) => {
     const value = event.target.value;
     setAliasInput(value);
   };
 
-  const handleRegisterCard = async (event) => {
+  const updateCardAlias = async (event) => {
     event.preventDefault();
 
     try {
-      addCardRequest({ bankId, cardNumbers, expirationDate, ownerName, cardAlias: aliasInput });
+      await updateCardRequest(cardId, { cardAlias: aliasInput });
     } catch (error) {
       console.error(error);
     }
@@ -47,7 +48,7 @@ const CardCompletion = (props) => {
           expirationDate={expirationDate}
         />
       </Style.CardWrapper>
-      <form id="alias-form" onSubmit={handleRegisterCard}>
+      <form id="alias-form" onSubmit={updateCardAlias}>
         <Style.AliasInput aria-label="card-alias-input" value={aliasInput} onChange={handleChangeAlias} />
         <Button type="submit" formId="alias-form" text="확인" />
       </form>
@@ -55,14 +56,9 @@ const CardCompletion = (props) => {
   );
 };
 
-CardCompletion.propTypes = {
-  cardData: PropTypes.shape({
-    bankId: PropTypes.string.isRequired,
-    cardNumbers: PropTypes.object.isRequired,
-    expirationDate: PropTypes.object.isRequired,
-    ownerName: PropTypes.string.isRequired,
-  }),
+CardEdit.propTypes = {
   handleMovePage: PropTypes.func.isRequired,
+  cardId: PropTypes.string.isRequired,
 };
 
-export default CardCompletion;
+export default CardEdit;

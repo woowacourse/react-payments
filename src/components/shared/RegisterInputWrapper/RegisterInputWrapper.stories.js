@@ -36,7 +36,7 @@ OwnerName.args = {
 export const SecureCode = Template.bind({});
 SecureCode.args = {
   ...INPUT_TYPE.SECURE_CODE,
-  children: <SecureCodeInput />,
+  children: <SecureCodeInput {...SecureCodeInput.args} />,
 };
 
 export const Password = Template.bind({});

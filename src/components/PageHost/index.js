@@ -4,12 +4,12 @@ import backButtonSvg from '../../assets/backbutton.svg';
 import * as Style from './style';
 
 const PageHost = (props) => {
-  const { navigationTitle, hasBackButton, children } = props;
+  const { navigationTitle, hasBackButton, handleGoBack, children } = props;
 
   return (
     <Style.Root>
       <Style.NavigationBar title={navigationTitle}>
-        {hasBackButton && <img src={backButtonSvg} alt="back-button" />}
+        {hasBackButton && <Style.BackButton src={backButtonSvg} alt="back-button" onClick={handleGoBack} />}
         <Style.NavigationTitle>{navigationTitle}</Style.NavigationTitle>
       </Style.NavigationBar>
       <section>{children}</section>
@@ -21,6 +21,7 @@ PageHost.propTypes = {
   navigationTitle: PropTypes.string.isRequired,
   hasBackButton: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
+  handleGoBack: PropTypes.func,
 };
 
 export default PageHost;

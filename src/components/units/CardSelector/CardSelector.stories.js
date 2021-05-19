@@ -10,4 +10,7 @@ export default {
 const Template = (args) => <CardSelector {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  setBankId: () => {},
+  setSelectorOpened: () => {},
+};
