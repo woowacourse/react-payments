@@ -3,7 +3,7 @@ import { STATE_KEY } from "../constants";
 import AppContext from "../contexts/appContext";
 import { isNumberText } from "../utils/cardInputValidation";
 
-const useCardCVC = () => {
+const useCardOwner = () => {
   const { cardState, setCardStateByKey } = useContext(AppContext);
 
   const cardOwnerState = cardState[STATE_KEY.CARD_OWNER];
@@ -35,4 +35,4 @@ const useCardCVC = () => {
   };
 };
 
-export default useCardCVC;
+export default useCardOwner;
