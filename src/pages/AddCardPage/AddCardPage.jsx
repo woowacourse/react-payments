@@ -8,8 +8,8 @@ import { PAGE_PATH, HEADER_TEXT, BUTTON_TEXT, STATE_KEY, ANIMATION } from "../..
 import useToggle from "../../hooks/toggleHook";
 import useCardList from "../../hooks/cardListHook";
 
-import CardInputContainer from "../../containers/CardInputContainer/CardInputContainer";
-import CardCompanySelectContainer from "../../containers/CardCompanySelectContainer/CardCompanySelectContainer";
+import CardInputSection from "../../sections/CardInputSection/CardInputSection";
+import CardCompanySelectSection from "../../sections/CardCompanySelectSection/CardCompanySelectSection";
 
 import NavigationButton from "../../components/NavigationButton/NavigationButton";
 import Card from "../../components/Card/Card";
@@ -45,11 +45,11 @@ const AddCardPage = () => {
           cardExpiration={cardState[STATE_KEY.CARD_EXPIRATION]}
           backgroundColor={getCardColor(cardState[STATE_KEY.CARD_COMPANY])}
         />
-        <CardInputContainer showCardCompanySelectContainer={toggle.setToggled} />
+        <CardInputSection showCardCompanySelectSection={toggle.setToggled} />
       </main>
       {toggle.state.isToggled && (
-        <CardCompanySelectContainer
-          hideCardCompanySelectContainer={toggle.setUntoggled}
+        <CardCompanySelectSection
+          hideCardCompanySelectSection={toggle.setUntoggled}
           backDropAnimation={toggle.state.fadeAnimation}
           bottomSliderAnimation={toggle.state.moveAnimation}
         />

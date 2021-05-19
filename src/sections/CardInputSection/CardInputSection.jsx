@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import classNames from "classnames/bind";
-import styles from "./CardInputContainer.module.scss";
+import styles from "./CardInputSection.module.scss";
 
 import useCardNumber from "../../hooks/cardNumberHook";
 import useCardCompany from "../../hooks/cardCompanyHook";
@@ -20,7 +20,7 @@ import { getCardCompany } from "../../utils/cardCompany";
 
 const cx = classNames.bind(styles);
 
-const CardInputContainer = ({ showCardCompanySelectContainer }) => {
+const CardInputSection = ({ showCardCompanySelectSection }) => {
   const cardNumberHook = useCardNumber();
   const cardExpirationHook = useCardExpiration();
   const cardOwnerHook = useCardOwner();
@@ -35,7 +35,7 @@ const CardInputContainer = ({ showCardCompanySelectContainer }) => {
 
     const newCardCompany = getCardCompany(Object.values(cardNumberHook.cardNumberState).join(" "));
     if (!newCardCompany) {
-      showCardCompanySelectContainer();
+      showCardCompanySelectSection();
       return;
     }
 
@@ -85,4 +85,4 @@ const CardInputContainer = ({ showCardCompanySelectContainer }) => {
   );
 };
 
-export default CardInputContainer;
+export default CardInputSection;

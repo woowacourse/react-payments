@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import styles from "./CardCompanySelectContainer.module.scss";
+import styles from "./CardCompanySelectSection.module.scss";
 
 import useCardCompany from "../../hooks/cardCompanyHook";
 
@@ -10,12 +10,12 @@ import CircleButton from "../../components/CircleButton/CircleButton";
 
 const cx = classNames.bind(styles);
 
-const CardCompanySelectContainer = ({ hideCardCompanySelectContainer, backDropAnimation, bottomSliderAnimation }) => {
+const CardCompanySelectSection = ({ hideCardCompanySelectSection, backDropAnimation, bottomSliderAnimation }) => {
   const cardCompanyHook = useCardCompany();
 
   const onCardCompanySelect = (cardCompany) => {
     cardCompanyHook.setCardCompanyState(cardCompany);
-    hideCardCompanySelectContainer();
+    hideCardCompanySelectSection();
   };
 
   const cardCompanyList = getAllCardCompanies();
@@ -31,7 +31,7 @@ const CardCompanySelectContainer = ({ hideCardCompanySelectContainer, backDropAn
 
   return (
     <div className={cx("card-company-select-container")}>
-      <BackDrop className={backDropAnimation} backDropClick={hideCardCompanySelectContainer} />
+      <BackDrop className={backDropAnimation} backDropClick={hideCardCompanySelectSection} />
       <BottomSlider className={`${cx("card-company-select-container__bottom-slider")} ${bottomSliderAnimation}`}>
         {cardCompanyItems}
       </BottomSlider>
@@ -39,4 +39,4 @@ const CardCompanySelectContainer = ({ hideCardCompanySelectContainer, backDropAn
   );
 };
 
-export default CardCompanySelectContainer;
+export default CardCompanySelectSection;
