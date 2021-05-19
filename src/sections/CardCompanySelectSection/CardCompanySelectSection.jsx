@@ -1,31 +1,21 @@
 import classNames from "classnames/bind";
 import styles from "./CardCompanySelectSection.module.scss";
 
-import useCardCompany from "../../hooks/useCardCompany";
-
-import { getAllCardCompanies, getCardColor } from "../../utils/cardCompany";
+import { getAllCardCompanies } from "../../utils/cardCompany";
 import BackDrop from "../../components/BackDrop/BackDrop";
 import BottomSlider from "../../components/BottomSlider/BottomSlider";
-import CircleButton from "../../components/CircleButton/CircleButton";
+import CardCompanyButton from "../../containers/CardCompanyButton/CardCompanyButton";
 
 const cx = classNames.bind(styles);
 
 const CardCompanySelectSection = ({ hideCardCompanySelectSection, backDropAnimation, bottomSliderAnimation }) => {
-  const { setCardCompanyState } = useCardCompany();
-
-  const onCardCompanySelect = (cardCompany) => {
-    setCardCompanyState(cardCompany);
-    hideCardCompanySelectSection();
-  };
-
   const cardCompanyList = getAllCardCompanies();
   const cardCompanyItems = cardCompanyList.map((cardCompany) => (
-    <CircleButton
+    <CardCompanyButton
       key={cardCompany}
       className={cx("card-company-select-container__card-company")}
-      buttonText={cardCompany}
-      circleColor={getCardColor(cardCompany)}
-      onClick={() => onCardCompanySelect(cardCompany)}
+      onCardCompanySelect={hideCardCompanySelectSection}
+      cardCompany={cardCompany}
     />
   ));
 
