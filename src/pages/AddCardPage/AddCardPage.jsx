@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./AddCardPage.module.scss";
 import { getCardColor } from "../../utils/cardCompany";
@@ -23,18 +23,23 @@ const AddCardPage = () => {
   const { cardState, setCardStateEmpty } = useContext(AppContext);
   const toggle = useToggle();
   const { addCardItem } = useCardList();
+  const history = useHistory();
+
+  const onMoveToCardListPage = () => {
+    setCardStateEmpty();
+    history.push(PAGE_PATH.ROOT);
+  };
 
   const onCardAdd = () => {
     addCardItem({ ...cardState });
     setCardStateEmpty();
+    history.push(PAGE_PATH.COMPLETE);
   };
 
   return (
     <div className={cx("add-card-page")}>
       <header className={cx("add-card-page__header")}>
-        <Link to={PAGE_PATH.ROOT}>
-          <NavigationButton buttonText={HEADER_TEXT.ADD_CARD} />
-        </Link>
+        <NavigationButton buttonText={HEADER_TEXT.ADD_CARD} onClick={onMoveToCardListPage} />
       </header>
       <main className={`${cx("add-card-page__main")} ${ANIMATION.FADE_IN}`}>
         <Card
@@ -56,11 +61,7 @@ const AddCardPage = () => {
         />
       )}
       <div className={cx("add-card-page__bottom")}>
-        {isAllCardInputCorrect(cardState) && (
-          <Link to={PAGE_PATH.COMPLETE}>
-            <Button onClick={onCardAdd}>{BUTTON_TEXT.NEXT}</Button>
-          </Link>
-        )}
+        {isAllCardInputCorrect(cardState) && <Button onClick={onCardAdd}>{BUTTON_TEXT.NEXT}</Button>}
       </div>
     </div>
   );
