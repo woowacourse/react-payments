@@ -11,7 +11,7 @@ import { useContext } from "react";
 
 const cx = classNames.bind(styles);
 
-const CardListPage = ({}) => {
+const CardListPage = () => {
   const { cardListState } = useContext(AppContext);
 
   return (
