@@ -5,8 +5,8 @@ import { getCardColor } from "../../utils/cardCompany";
 import { isAllCardInputCorrect } from "../../utils/cardInputValidation";
 import { PAGE_PATH, HEADER_TEXT, BUTTON_TEXT, STATE_KEY, ANIMATION } from "../../constants";
 
-import useToggle from "../../hooks/toggleHook";
-import useCardList from "../../hooks/cardListHook";
+import useToggle from "../../hooks/useToggle";
+import useCardList from "../../hooks/useCardList";
 
 import CardInputSection from "../../sections/CardInputSection/CardInputSection";
 import CardCompanySelectSection from "../../sections/CardCompanySelectSection/CardCompanySelectSection";
@@ -20,12 +20,12 @@ import AppContext from "../../contexts/appContext";
 const cx = classNames.bind(styles);
 
 const AddCardPage = () => {
-  const { cardState, cardListState, setCardListState, setCardStateEmpty } = useContext(AppContext);
+  const { cardState, setCardStateEmpty } = useContext(AppContext);
   const toggle = useToggle();
-  const cardListHook = useCardList(cardListState, setCardListState);
+  const { addCardItem } = useCardList();
 
   const onCardAdd = () => {
-    cardListHook.addCardItem({ ...cardState });
+    addCardItem({ ...cardState });
     setCardStateEmpty();
   };
 

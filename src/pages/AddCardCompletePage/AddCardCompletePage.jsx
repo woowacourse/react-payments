@@ -1,10 +1,10 @@
-import { useState, useMemo, useContext } from "react";
+import { useState, useMemo } from "react";
 
 import { useHistory } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./AddCardCompletePage.module.scss";
 
-import useCardList from "../../hooks/cardListHook";
+import useCardList from "../../hooks/useCardList";
 
 import { LABEL_TEXT, STATE_KEY, PAGE_PATH, ANIMATION } from "../../constants";
 import appConfirm from "../../utils/appConfirm";
@@ -14,19 +14,18 @@ import Card from "../../components/Card/Card";
 import BorderInput from "../../components/BorderInput/BorderInput";
 import Button from "../../components/Button/Button";
 import { getCardColor } from "../../utils/cardCompany";
-import AppContext from "../../contexts/appContext";
 
 const cx = classNames.bind(styles);
 
 const AddCardCompletePage = () => {
-  const cardListHook = useCardList();
+  const { cardListState, updateCardItem } = useCardList();
   const [cardNickName, setCardNickName] = useState("");
-  const [lastAddedCard] = useMemo(() => cardListHook.cardListState.slice(-1), [cardListHook.cardListState]);
+  const [lastAddedCard] = useMemo(() => cardListState.slice(-1), [cardListState]);
   const history = useHistory();
 
   const onCardNickNameRegister = () => {
     lastAddedCard[STATE_KEY.CARD_NICK_NAME] = cardNickName;
-    cardListHook.updateCardItem(lastAddedCard.cardNumber, lastAddedCard);
+    updateCardItem(lastAddedCard.cardNumber, lastAddedCard);
     history.push(PAGE_PATH.ROOT);
   };
 

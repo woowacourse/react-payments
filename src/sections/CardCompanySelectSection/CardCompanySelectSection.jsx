@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./CardCompanySelectSection.module.scss";
 
-import useCardCompany from "../../hooks/cardCompanyHook";
+import useCardCompany from "../../hooks/useCardCompany";
 
 import { getAllCardCompanies, getCardColor } from "../../utils/cardCompany";
 import BackDrop from "../../components/BackDrop/BackDrop";
@@ -11,10 +11,10 @@ import CircleButton from "../../components/CircleButton/CircleButton";
 const cx = classNames.bind(styles);
 
 const CardCompanySelectSection = ({ hideCardCompanySelectSection, backDropAnimation, bottomSliderAnimation }) => {
-  const cardCompanyHook = useCardCompany();
+  const { setCardCompanyState } = useCardCompany();
 
   const onCardCompanySelect = (cardCompany) => {
-    cardCompanyHook.setCardCompanyState(cardCompany);
+    setCardCompanyState(cardCompany);
     hideCardCompanySelectSection();
   };
 
