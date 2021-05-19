@@ -3,7 +3,7 @@ import { STATE_KEY } from "../constants";
 import AppContext from "../contexts/appContext";
 import { isNumberText } from "../utils/cardInputValidation";
 
-const usePasswordCompany = () => {
+const useCardPassword = () => {
   const { cardState, setCardStateByKey } = useContext(AppContext);
 
   const cardPassword = cardState[STATE_KEY.CARD_PASSWORD];
@@ -35,4 +35,4 @@ const usePasswordCompany = () => {
   };
 };
 
-export default usePasswordCompany;
+export default useCardPassword;
