@@ -44,6 +44,7 @@ const AddCardPage = () => {
           cardCompany={cardState[STATE_KEY.CARD_COMPANY]}
           cardExpiration={cardState[STATE_KEY.CARD_EXPIRATION]}
           backgroundColor={getCardColor(cardState[STATE_KEY.CARD_COMPANY])}
+          onClick={toggle.setToggled}
         />
         <CardInputSection showCardCompanySelectSection={toggle.setToggled} />
       </main>

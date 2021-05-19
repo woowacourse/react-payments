@@ -15,6 +15,7 @@ const Card = ({
   cardExpiration = initialCardExpiration,
   cardNickName = "",
   className,
+  onClick,
 }) => {
   const { firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber } = cardNumber;
 
@@ -28,9 +29,11 @@ const Card = ({
   const cardExpirationText =
     Object.values(cardExpiration).every((value) => value !== "") && Object.values(cardExpiration).join(" / ");
 
+  const clickableClass = onClick ? "card--clickable" : "";
+
   return (
     <div className={cx("card-wrapper", className)}>
-      <div className={cx("card")} style={{ backgroundColor }}>
+      <div className={cx("card", clickableClass)} style={{ backgroundColor }} onClick={onClick}>
         <span className={cx("card__type")}>{cardCompany}</span>
         <div className={cx("card__chip")}></div>
         <div className={cx("card__number")}>
