@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const UnderLineInput = (props) => {
-  const { name } = props;
+  const { name, onChange } = props;
 
   return (
     <input
@@ -11,6 +11,7 @@ const UnderLineInput = (props) => {
       maxLength={10}
       className="w-3/4 text-center border-b border-black-500 outline-none"
       name={name}
+      onChange={onChange}
     />
   );
 };
@@ -19,4 +20,5 @@ export default UnderLineInput;
 
 UnderLineInput.propTypes = {
   name: PropTypes.string,
+  onChange: PropTypes.func,
 };

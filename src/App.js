@@ -3,6 +3,7 @@ import CardAddPage from './page/CardAddPage/CardAddPage';
 import CardRegisterPage from './page/CardRegisterPage/CardRegisterPage';
 import { isNumber } from './utils/validator';
 import { PAGE } from './utils/constant';
+import CardListPage from './page/CardListPage/CardListPage';
 
 function App() {
   const [cardCompany, setCardCompany] = useState({ name: '', color: '' });
@@ -20,8 +21,7 @@ function App() {
     fourth: '',
   });
   const [isModalOpened, setIsModalOpened] = useState(false);
-  const [pageRouter, setPageRouter] = useState(PAGE.MAIN);
-  const [cardName, setCardName] = useState('');
+  const [pageRouter, setPageRouter] = useState(PAGE.LIST);
 
   const resetState = () => {
     setCardCompany({ name: '', color: '' });
@@ -39,7 +39,7 @@ function App() {
       fourth: '',
     });
     setIsModalOpened(false);
-    setPageRouter(PAGE.MAIN);
+    setPageRouter(PAGE.LIST);
   };
 
   const handleCardNumbersInput = ({ target: { value } }, key) => {
@@ -114,6 +114,7 @@ function App() {
         securityCode={securityCode}
         password={password}
         isModalOpened={isModalOpened}
+        setPageRouter={setPageRouter}
         handleCardNumbersInput={handleCardNumbersInput}
         handleCardCompany={handleCardCompany}
         handleExpirationInput={handleExpirationInput}
@@ -130,19 +131,20 @@ function App() {
         cardNumbers={cardNumbers}
         expiration={expiration}
         ownerName={ownerName}
-        cardName={cardName}
         resetState={resetState}
-        setCardName={setCardName}
       />
     ),
+
+    CardListPage: <CardListPage setPageRouter={setPageRouter} />,
   };
 
   const pageTable = {
-    [PAGE.MAIN]: Page.CardAddPage,
+    [PAGE.ADD]: Page.CardAddPage,
     [PAGE.REGISTER]: Page.CardRegisterPage,
+    [PAGE.LIST]: Page.CardListPage,
   };
 
-  return <div className="relative mt-5 mx-auto p-5 max-w-375 bg-white rounded-3xl">{pageTable[pageRouter]}</div>;
+  return <div className="relative mt-5 mx-auto p-5 w-375 h-701 bg-white rounded-3xl">{pageTable[pageRouter]}</div>;
 }
 
 export default App;

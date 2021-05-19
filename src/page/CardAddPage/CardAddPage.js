@@ -11,6 +11,7 @@ import CardOwnerNameInput from './CardOwnerNameInput';
 import CardSecurityCodeInput from './CardSecurityCodeInput';
 import CardPasswordInput from './CardPasswordInput';
 import PropTypes from 'prop-types';
+import { PAGE } from '../../utils/constant';
 
 const CardAddPage = (props) => {
   const {
@@ -21,6 +22,7 @@ const CardAddPage = (props) => {
     securityCode,
     password,
     isModalOpened,
+    setPageRouter,
     handleCardNumbersInput,
     handleCardCompany,
     handleExpirationInput,
@@ -30,10 +32,14 @@ const CardAddPage = (props) => {
     handleCardInfoSubmit,
   } = props;
 
+  const handleBackButton = () => {
+    setPageRouter(PAGE.LIST);
+  };
+
   return (
     <div className="p-5">
       <div className="flex items-center">
-        <BackButton />
+        <BackButton onClick={handleBackButton} />
         <h1 className="ml-4 text-xl">카드 추가</h1>
       </div>
 
@@ -69,6 +75,7 @@ CardAddPage.propTypes = {
   securityCode: PropTypes.string.isRequired,
   password: PropTypes.object.isRequired,
   isModalOpened: PropTypes.bool.isRequired,
+  setPageRouter: PropTypes.func.isRequired,
   handleCardNumbersInput: PropTypes.func.isRequired,
   handleCardCompany: PropTypes.func.isRequired,
   handleExpirationInput: PropTypes.func.isRequired,
