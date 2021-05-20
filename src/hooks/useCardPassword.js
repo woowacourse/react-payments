@@ -1,7 +1,6 @@
 import { useCallback, useContext } from "react";
 import { STATE_KEY } from "../constants";
 import AppContext from "../contexts/appContext";
-import { isNumberText } from "../utils/cardInputValidation";
 
 const useCardPassword = () => {
   const { cardState, setCardStateByKey } = useContext(AppContext);
@@ -15,23 +14,9 @@ const useCardPassword = () => {
     [setCardStateByKey]
   );
 
-  const onCardPasswordInputChange = useCallback(
-    (event) => {
-      const { value, name: inputIndex } = event.target;
-      if (!isNumberText(value)) {
-        event.target.value = event.target.value.slice(0, -1);
-        return;
-      }
-
-      const newCardPassword = [...cardPassword];
-      newCardPassword[Number(inputIndex)] = value;
-      setCardPasswordState(newCardPassword);
-    },
-    [cardPassword, setCardPasswordState]
-  );
-
   return {
-    onCardPasswordInputChange,
+    cardPassword,
+    setCardPasswordState,
   };
 };
 

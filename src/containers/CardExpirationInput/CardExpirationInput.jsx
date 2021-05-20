@@ -1,9 +1,24 @@
 import SeperatedInputList from "../../components/Input/SeperatedInputList/SeperatedInputList";
 import { INPUT_LABEL_TEXT } from "../../constants";
 import useCardExpiration from "../../hooks/useCardExpiration";
+import { isNumberText } from "../../utils/cardInputValidation";
 
 const CardExpirationInput = ({ className }) => {
-  const { cardExpirationState, onCardExpirationInputChange } = useCardExpiration();
+  const { cardExpirationState, setCardExpirationState } = useCardExpiration();
+
+  const onCardExpirationInputChange = (event) => {
+    const { value, name } = event.target;
+
+    if (!isNumberText(value)) {
+      event.target.value = event.target.value.slice(0, -1);
+      return;
+    }
+
+    setCardExpirationState({
+      ...cardExpirationState,
+      [name]: value,
+    });
+  };
 
   return (
     <SeperatedInputList

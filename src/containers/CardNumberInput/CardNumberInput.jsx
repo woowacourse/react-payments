@@ -1,9 +1,28 @@
 import SeperatedInputList from "../../components/Input/SeperatedInputList/SeperatedInputList";
 import useCardNumber from "../../hooks/useCardNumber";
 import { INPUT_LABEL_TEXT } from "../../constants";
+import { isNumberText } from "../../utils/cardInputValidation";
 
 const CardNumberInput = ({ className }) => {
-  const { cardNumberState, onCardNumberInputChange } = useCardNumber();
+  const { cardNumberState, setCardNumberState } = useCardNumber();
+
+  const onCardNumberInputChange = (event) => {
+    const { value, name } = event.target;
+
+    if (!isNumberText(value)) {
+      event.target.value = event.target.value.slice(0, -1);
+      return;
+    }
+
+    if (!(name in cardNumberState)) {
+      return;
+    }
+
+    setCardNumberState({
+      ...cardNumberState,
+      [name]: value,
+    });
+  };
 
   return (
     <SeperatedInputList
