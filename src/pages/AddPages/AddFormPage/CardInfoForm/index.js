@@ -1,24 +1,19 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
+import { CardInfoContext } from '../../../../contexts';
 import { Button, Form } from '../../../../components';
-import { CardNumberInput } from './CardNumberInput';
-import { ExpirationDateInput } from './ExpirationDateInput';
-import { OwnerNameInput } from './OwnerNameInput';
-import { SecurityCodeInput } from './SecurityCodeInput';
-import { PasswordInput } from './PasswordInput';
-import { isFormFulFilled, isCardNameFulfilled } from './validator';
+import { CardNumberInput } from './CardNumberInput.js';
+import { ExpirationDateInput } from './ExpirationDateInput.js';
+import { OwnerNameInput } from './OwnerNameInput.js';
+import { SecurityCodeInput } from './SecurityCodeInput.js';
+import { PasswordInput } from './PasswordInput.js';
+import { isFormFulFilled, isCardNameFulfilled } from './validator.js';
 import { ROUTE } from '../../../../constants';
 
 export const CardInfoForm = (props) => {
-  const { initialCardInfo, cardInfo, setCardInfo, setIsModalOpen } = props;
-  const { number, expirationDate, ownerName, securityCode, password } = cardInfo;
-  const setNumber = (number) => setCardInfo((prevState) => ({ ...prevState, number }));
-  const setCompany = (company) => setCardInfo((prevState) => ({ ...prevState, company }));
-  const setExpirationDate = (expirationDate) => setCardInfo((prevState) => ({ ...prevState, expirationDate }));
-  const setOwnerName = (ownerName) => setCardInfo((prevState) => ({ ...prevState, ownerName }));
-  const setIsOwnerNameFilled = (isOwnerNameFilled) => setCardInfo((prevState) => ({ ...prevState, isOwnerNameFilled }));
-  const setSecurityCode = (securityCode) => setCardInfo((prevState) => ({ ...prevState, securityCode }));
-  const setPassword = (password) => setCardInfo((prevState) => ({ ...prevState, password }));
+  const { cardInfo, initialCardInfo } = useContext(CardInfoContext);
+  const { setIsModalOpen } = props;
+
   const expirationDateInputRef = useRef();
   const ownerNameInputRef = useRef();
   const passwordInputRef = useRef();
@@ -26,32 +21,11 @@ export const CardInfoForm = (props) => {
 
   return (
     <Form className="CardInfoForm">
-      <CardNumberInput
-        number={number}
-        setNumber={setNumber}
-        setCompany={setCompany}
-        setIsModalOpen={setIsModalOpen}
-        refToBeFocusedNext={expirationDateInputRef}
-      />
-      <ExpirationDateInput
-        expirationDate={expirationDate}
-        setExpirationDate={setExpirationDate}
-        ref={expirationDateInputRef}
-        refToBeFocusedNext={ownerNameInputRef}
-      />
-      <OwnerNameInput
-        initialOwnerName={initialCardInfo.ownerName}
-        ownerName={ownerName}
-        setOwnerName={setOwnerName}
-        setIsOwnerNameFilled={setIsOwnerNameFilled}
-        ref={ownerNameInputRef}
-      />
-      <SecurityCodeInput
-        securityCode={securityCode}
-        setSecurityCode={setSecurityCode}
-        refToBeFocusedNext={passwordInputRef}
-      />
-      <PasswordInput password={password} setPassword={setPassword} ref={passwordInputRef} />
+      <CardNumberInput setIsModalOpen={setIsModalOpen} refToBeFocusedNext={expirationDateInputRef} />
+      <ExpirationDateInput ref={expirationDateInputRef} refToBeFocusedNext={ownerNameInputRef} />
+      <OwnerNameInput ref={ownerNameInputRef} />
+      <SecurityCodeInput refToBeFocusedNext={passwordInputRef} />
+      <PasswordInput ref={passwordInputRef} />
       <Button
         className="CardInfoForm__Submit_Button"
         disabled={!isFormFulFilled({ cardInfo, initialCardInfo })}

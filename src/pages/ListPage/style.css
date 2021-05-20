@@ -1,14 +1,70 @@
 .ListPage {
   display: flex;
-  padding: 1.7625rem 2.25rem;
+  height: 100%;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.ListPage__AddButton {
-  margin-top: 3.75rem;
+.ListPage__Heading {
+  padding: 1.8rem 2.25rem;
+}
+
+.List {
+  width: 93%;
+  list-style-type: none;
   align-self: center;
   padding: 0;
+  margin: 0;
+  max-height: calc(100% - 7rem);
+  overflow: auto;
+}
+
+.List::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+.List::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  border-radius: 0.5rem;
+}
+
+.List::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.ListItem__Card {
+  position: relative;
+  transform: scale(0.95);
+  margin: 1rem 0 2.5rem;
+}
+
+.ListItem__Card__Nickname {
+  margin: 0.75rem 0;
+  display: flex;
+  justify-content: center;
+  color: #575757;
+  font-weight: 600;
+}
+
+.ListItem__Card__DeleteButton {
+  position: absolute;
+  top: 0.2rem;
+  right: 1.4rem;
+}
+
+.ListItem__Card__DeleteButton:hover {
+  animation: wave-animation 0.3s infinite;
+}
+
+.ListItem__Add {
+  display: flex;
+  justify-content: center;
+  transform: scale(0.95);
+  margin: 1.5rem 0 0.5rem;
+  padding: 0;
+}
+
+.ListItem__Add__Button {
   font: inherit;
   color: inherit;
   background: none;
@@ -17,12 +73,25 @@
   cursor: pointer;
 }
 
-.ListPage__AddSign {
+.ListItem__Add__Button:hover .ListItem__Add__Sign {
+  animation: wave-animation 0.5s infinite;
+}
+
+.ListItem__Add__Sign {
   width: 100%;
   font-size: 1.875rem;
   text-align: center;
 }
 
-.ListPage__CreditCardPreview {
-  transform: scale(0.95);
+@keyframes wave-animation {
+  0%,
+  100% {
+    transform: scale(1.15) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.15) rotate(20deg);
+  }
+  75% {
+    transform: scale(1.15) rotate(-15deg);
+  }
 }

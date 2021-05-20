@@ -1,21 +1,23 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useHistory } from 'react-router';
+import { CardInfoContext } from '../../../contexts/CardInfoContext';
 import { Button, CreditCardPreview, Heading } from '../../../components';
 import { CardInfoForm } from './CardInfoForm';
 import { CardCompanySelectModal } from './CardCompanySelectModal';
 import { getFormattedCardInfo } from '../../../cardInfoFormatter';
-import './style.css';
 import { BackwardIcon } from '../../../components/BackwardIcon';
+import './style.css';
 
-export const AddFormPage = (props) => {
-  const { initialCardInfo, cardInfo, setCardInfo } = props;
+export const AddFormPage = () => {
+  const history = useHistory();
+  const { cardInfo, company } = useContext(CardInfoContext);
   const { formattedNumber, formattedExpirationDate, formattedOwnerName } = getFormattedCardInfo({ cardInfo });
-  const { company } = cardInfo;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="AddFormPage">
       <div className="AddFormPage__Heading">
-        <Button className="AddFormPage__BackwardButton">
+        <Button className="AddFormPage__BackwardButton" onClick={() => history.goBack()}>
           <BackwardIcon />
         </Button>
         <Heading>카드 추가</Heading>
@@ -27,13 +29,8 @@ export const AddFormPage = (props) => {
         ownerName={formattedOwnerName}
         expirationDate={formattedExpirationDate}
       />
-      <CardInfoForm
-        initialCardInfo={initialCardInfo}
-        cardInfo={cardInfo}
-        setCardInfo={setCardInfo}
-        setIsModalOpen={setIsModalOpen}
-      />
-      <CardCompanySelectModal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setCardInfo={setCardInfo} />
+      <CardInfoForm setIsModalOpen={setIsModalOpen} />
+      <CardCompanySelectModal isOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </div>
   );
 };

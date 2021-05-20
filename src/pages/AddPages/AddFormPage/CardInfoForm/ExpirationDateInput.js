@@ -1,9 +1,12 @@
-import { useRef, forwardRef } from 'react';
-import { Container, Input, Label, Text } from '../../../../../components';
-import { MONTH, YEAR, EXPIRATION_DATE_LENGTH } from '../../../../../constants';
+import { useRef, forwardRef, useContext } from 'react';
+import { CardInfoContext } from '../../../../contexts';
+import { Container, Input, Label, Text } from '../../../../components';
+import { MONTH, YEAR, EXPIRATION_DATE_LENGTH } from '../../../../constants';
 
 export const ExpirationDateInput = forwardRef((props, monthRef) => {
-  const { expirationDate, setExpirationDate, refToBeFocusedNext } = props;
+  const { refToBeFocusedNext } = props;
+  const { expirationDate, setExpirationDate } = useContext(CardInfoContext);
+
   const yearRef = useRef();
   const nextRef = {
     month: yearRef,
