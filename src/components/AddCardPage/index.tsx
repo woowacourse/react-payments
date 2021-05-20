@@ -1,11 +1,10 @@
 import AddCardForm from './AddCardForm';
 import Template from '../shared/Template';
-
-const TITLE = '카드추가';
+import PAGE from '../../constants/pages';
 
 const AddCardPage = () => {
   return (
-    <Template title={TITLE} hasPreviousPage>
+    <Template title={PAGE.ADD_CARD.NAME} prevPagePath={PAGE.CARD_LIST.PATH}>
       <AddCardForm />
     </Template>
   );

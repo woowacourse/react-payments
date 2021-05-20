@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { CARD_BRAND } from '../../../constants/addCardForm';
 import { CARD_NUMBER_DIGITS, CARD_NUMBER_SEPARATOR } from '../../../constants/creditCard';
 import { ALERT } from '../../../constants/messages';
-import { CardBrand, ExpDate } from '../../../types';
+import { CardBrand, CardNumberState, ExpDate, PasswordState } from '../../../types';
 import Button from '../../shared/Button';
 import CardBrandModal from '../modal/CardBrandModal';
 import NicknameModal from '../modal/NicknameModal';
@@ -13,9 +13,6 @@ import OwnerNameInput from './AddCardInput/OwnerNameInput/index ';
 import PasswordInput from './AddCardInput/PasswordInput';
 import { AddCardFormCreditCard } from './styles';
 import { isAllInputFilled } from './validator';
-
-export type CardNumberState = [string, string, string, string];
-export type PasswordState = [string, string];
 
 const AddCardForm = () => {
   const [cardBrand, setCardBrand] = useState<CardBrand>({ name: '', color: '' });
@@ -103,18 +100,22 @@ const AddCardForm = () => {
             onClose={() => setIsCardBrandModalVisible(false)}
           />
         )}
-
-        {isNicknameModalVisible && (
-          <NicknameModal
-            nickname={nickname}
-            setNickname={setNickname}
-            ownerName={ownerName}
-            cardNumber={cardNumber.join(CARD_NUMBER_SEPARATOR)}
-            expDate={expDate}
-            cardBrand={cardBrand}
-          />
-        )}
       </form>
+
+      {isNicknameModalVisible && (
+        <NicknameModal
+          cardInfo={{
+            cardBrand,
+            cardNumber: cardNumber.join(CARD_NUMBER_SEPARATOR),
+            expDate,
+            ownerName,
+            password: password.join(''),
+            CVC,
+          }}
+          nickname={nickname}
+          setNickname={setNickname}
+        />
+      )}
     </div>
   );
 };

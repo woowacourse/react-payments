@@ -1,6 +1,6 @@
-import { ChangeEvent, Dispatch, SetStateAction, useRef, VFC } from 'react';
-import { PasswordState } from '../..';
+import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 import { LABEL } from '../../../../../constants/addCardForm';
+import { PasswordState } from '../../../../../types';
 import Container from '../../../../shared/Container';
 import Input from '../../../../shared/Input';
 import AddCardInputContainer from '../../AddCardInputContainer';
@@ -13,7 +13,7 @@ interface Props {
   setPassword: Dispatch<SetStateAction<PasswordState>>;
 }
 
-const PasswordInput: VFC<Props> = ({ password, setPassword }) => {
+const PasswordInput = ({ password, setPassword }: Props) => {
   const secondPasswordInputRef = useRef<HTMLInputElement>(null);
 
   const onChangePassword = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: 0 | 1) => {

@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, FocusEvent, SetStateAction, useRef, VFC } from 'react';
+import { ChangeEvent, Dispatch, FocusEvent, SetStateAction, useRef } from 'react';
 import { LABEL, PLACEHOLDER } from '../../../../../constants/addCardForm';
 import { EXP_DATE_DIGITS, EXP_DATE_WHITESPACE_CHARACTER } from '../../../../../constants/creditCard';
 import { ExpDate } from '../../../../../types';
@@ -12,7 +12,7 @@ interface Props {
   setExpDate: Dispatch<SetStateAction<ExpDate>>;
 }
 
-const ExpDateInput: VFC<Props> = ({ expDate, setExpDate }) => {
+const ExpDateInput = ({ expDate, setExpDate }: Props) => {
   const expYearInputRef = useRef<HTMLInputElement>(null);
 
   const onChangeExpMonth = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {

@@ -1,7 +1,7 @@
-import { ChangeEvent, Dispatch, SetStateAction, useMemo, useRef, VFC } from 'react';
-import { CardNumberState } from '../..';
+import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 import { LABEL } from '../../../../../constants/addCardForm';
 import { CARD_NUMBER_DIGITS, CARD_NUMBER_SEPARATOR } from '../../../../../constants/creditCard';
+import { CardNumberState } from '../../../../../types';
 import Input from '../../../../shared/Input';
 import AddCardInputContainer from '../../AddCardInputContainer';
 import AddCardInputLabel from '../../AddCardInputLabel';
@@ -12,7 +12,7 @@ interface Props {
   setCardNumber: Dispatch<SetStateAction<CardNumberState>>;
 }
 
-const CardNumberInput: VFC<Props> = ({ cardNumber, setCardNumber }) => {
+const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
   const secondCardNumberInputRef = useRef<HTMLInputElement>(null);
   const thirdCardNumberInputRef = useRef<HTMLInputElement>(null);
   const fourthCardNumberInputRef = useRef<HTMLInputElement>(null);
@@ -48,8 +48,6 @@ const CardNumberInput: VFC<Props> = ({ cardNumber, setCardNumber }) => {
       )
       .slice(1);
 
-  const cardNumberInput = useMemo(() => createCardNumberInput(), [cardNumberInputInfo]);
-
   const onChangeCardNumber = ({ target: { value } }: ChangeEvent<HTMLInputElement>, index: number) => {
     if (!isValidCardNumber(value)) return;
 
@@ -71,7 +69,7 @@ const CardNumberInput: VFC<Props> = ({ cardNumber, setCardNumber }) => {
 
   return (
     <AddCardInputLabel label={LABEL.CARD_NUMBER}>
-      <AddCardInputContainer>{cardNumberInput}</AddCardInputContainer>
+      <AddCardInputContainer>{createCardNumberInput()}</AddCardInputContainer>
     </AddCardInputLabel>
   );
 };

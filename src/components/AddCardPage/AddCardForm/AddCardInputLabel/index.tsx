@@ -1,13 +1,13 @@
-import { FC } from 'react';
 import Container from '../../../shared/Container';
 import { AddCardInputLabelContainer, LabelText } from './styles';
 
 interface Props {
+  children: React.ReactNode;
   label: string | string[];
   width?: string;
 }
 
-const AddCardInputLabel: FC<Props> = ({ label, width, children }) => {
+const AddCardInputLabel = ({ children, label, width }: Props) => {
   return (
     <AddCardInputLabelContainer width={width}>
       {Array.isArray(label) ? (

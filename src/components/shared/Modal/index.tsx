@@ -1,12 +1,13 @@
-import { FC, MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 import { ModalContainer, ModalInner } from './styles';
 
 export interface Props {
+  children: React.ReactNode;
   onClose?: () => void;
   type?: 'bottom' | 'full';
 }
 
-const Modal: FC<Props> = ({ children, onClose, type }) => {
+const Modal = ({ children, onClose, type }: Props) => {
   const onClickDimmed = ({ target, currentTarget }: MouseEvent<HTMLDivElement>) => {
     if (!onClose || target !== currentTarget) return;
 

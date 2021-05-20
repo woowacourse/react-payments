@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, VFC } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { LABEL, PLACEHOLDER } from '../../../../../constants/addCardForm';
 import { MAX_OWNER_NAME_LENGTH } from '../../../../../constants/creditCard';
 import Input from '../../../../shared/Input';
@@ -11,7 +11,7 @@ interface Props {
   setOwnerName: Dispatch<SetStateAction<string>>;
 }
 
-const OwnerNameInput: VFC<Props> = ({ ownerName, setOwnerName }) => {
+const OwnerNameInput = ({ ownerName, setOwnerName }: Props) => {
   const onChangeOwnerName = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     if (!isValidOwnerName(value)) return;
 

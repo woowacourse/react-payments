@@ -1,6 +1,5 @@
-import { FC } from 'react';
-
 interface Props {
+  children: React.ReactNode;
   ariaLabel: string;
   width: string;
   height: string;
@@ -8,7 +7,7 @@ interface Props {
   file?: string;
 }
 
-const Icon: FC<Props> = ({ children, ariaLabel, width, height, viewBox, file }) => {
+const Icon = ({ children, ariaLabel, width, height, viewBox, file }: Props) => {
   return (
     <svg
       role="img"

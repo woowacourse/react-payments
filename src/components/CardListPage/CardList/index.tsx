@@ -1,15 +1,25 @@
-import { FC } from 'react';
-import { CARD_MOCK_DATA } from '../../../constants/mockData';
-import { Card } from '../../../types';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import PAGE from '../../../constants/pages';
+import { fetchCards, StoredCard } from '../../../firebase/api';
 import CreditCard from '../../shared/CreditCard';
 import AddCardButton from './AddCardButton';
 import { CardListContainer, NickName } from './styles';
 
-const CardList: FC = ({ children }) => {
+const CardList = () => {
+  const [cards, setCards] = useState<StoredCard[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const responseData = await fetchCards();
+      setCards(responseData as StoredCard[]);
+    })();
+  }, []);
+
   return (
     <CardListContainer>
-      {CARD_MOCK_DATA.map((card: Card) => (
-        <li key={card.cardNumber}>
+      {cards.map(card => (
+        <li key={card.id}>
           <CreditCard
             cardBrand={card.cardBrand}
             ownerName={card.ownerName}
@@ -21,7 +31,9 @@ const CardList: FC = ({ children }) => {
         </li>
       ))}
       <li>
-        <AddCardButton />
+        <Link to={PAGE.ADD_CARD.PATH}>
+          <AddCardButton />
+        </Link>
       </li>
     </CardListContainer>
   );
