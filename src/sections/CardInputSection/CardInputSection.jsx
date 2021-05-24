@@ -22,7 +22,6 @@ const CardInputSection = ({ showCardCompanySelectSection }) => {
   const { setCardCompanyState } = useCardCompany();
 
   useEffect(() => {
-    console.log(cardNumberState);
     if (!isAllTextFilledInObject(cardNumberState, CARD_INPUT.CARD_NUMBER_TEXT_LENGTH)) {
       return;
     }

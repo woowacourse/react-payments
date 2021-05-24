@@ -7,6 +7,7 @@ import { PAGE_PATH, HEADER_TEXT, BUTTON_TEXT, STATE_KEY, ANIMATION } from "../..
 
 import useToggle from "../../hooks/useToggle";
 import useCardList from "../../hooks/useCardList";
+import useCardInputValidation from "../../hooks/useCardInputValidation";
 
 import CardInputSection from "../../sections/CardInputSection/CardInputSection";
 import CardCompanySelectSection from "../../sections/CardCompanySelectSection/CardCompanySelectSection";
@@ -14,13 +15,15 @@ import CardCompanySelectSection from "../../sections/CardCompanySelectSection/Ca
 import NavigationButton from "../../components/NavigationButton/NavigationButton";
 import Card from "../../components/Card/Card";
 import Button from "../../components/Button/Button";
-import { useContext } from "react";
-import AppContext from "../../contexts/appContext";
+import { useContext, useState } from "react";
+import { AppContext } from "../../contexts/appContext";
+import ErrorText from "../../components/ErrorText/ErrorText";
 
 const cx = classNames.bind(styles);
 
 const AddCardPage = () => {
   const { cardState, setCardStateEmpty } = useContext(AppContext);
+  const { validationMessage, setCardInputValidationMessage } = useCardInputValidation();
   const toggle = useToggle();
   const { addCardItem } = useCardList();
   const history = useHistory();
@@ -31,6 +34,10 @@ const AddCardPage = () => {
   };
 
   const onCardAdd = () => {
+    if (!isAllCardInputCorrect(cardState)) {
+      setCardInputValidationMessage(cardState);
+      return;
+    }
     addCardItem({ ...cardState });
     setCardStateEmpty();
     history.push(PAGE_PATH.COMPLETE);
@@ -51,6 +58,9 @@ const AddCardPage = () => {
           backgroundColor={getCardColor(cardState[STATE_KEY.CARD_COMPANY])}
           onClick={toggle.setToggled}
         />
+        {validationMessage[STATE_KEY.CARD_COMPANY] !== "" && (
+          <ErrorText>{validationMessage[STATE_KEY.CARD_COMPANY]}</ErrorText>
+        )}
         <CardInputSection showCardCompanySelectSection={toggle.setToggled} />
       </main>
       {toggle.state.isToggled && (
@@ -61,7 +71,7 @@ const AddCardPage = () => {
         />
       )}
       <div className={cx("add-card-page__bottom")}>
-        {isAllCardInputCorrect(cardState) && <Button onClick={onCardAdd}>{BUTTON_TEXT.NEXT}</Button>}
+        <Button onClick={onCardAdd}>{BUTTON_TEXT.NEXT}</Button>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import styles from "./CardListSection.module.scss";
 import { getCardColor } from "../../utils/cardCompany";
 
 import Card from "../../components/Card/Card";
-import AppContext from "../../contexts/appContext";
+import { AppContext } from "../../contexts/appContext";
 
 const cx = classNames.bind(styles);
 

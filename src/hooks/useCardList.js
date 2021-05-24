@@ -1,5 +1,5 @@
 import { useCallback, useContext } from "react";
-import AppContext from "../contexts/appContext";
+import { AppContext } from "../contexts/appContext";
 import { isAllCardInputCorrect, isSameCardNumber } from "../utils/cardInputValidation";
 
 const useCardList = () => {

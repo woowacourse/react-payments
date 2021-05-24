@@ -6,7 +6,7 @@ import Label from "../../components/Label/Label";
 import CardListSection from "../../sections/CardListSection/CardListSection";
 import AddBoxButton from "../../components/AddBoxButton/AddBoxButton";
 import { ANIMATION, HEADER_TEXT, PAGE_PATH } from "../../constants";
-import AppContext from "../../contexts/appContext";
+import { AppContext } from "../../contexts/appContext";
 import { useContext } from "react";
 
 const cx = classNames.bind(styles);
