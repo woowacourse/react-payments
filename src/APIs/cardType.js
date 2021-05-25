@@ -49,9 +49,11 @@ const getById = (() => {
   };
 })();
 
+const DEFAULT_VALUE = Symbol("defaultValue");
+
 const cardType = {
-  get: async (id = "") => {
-    if (id === "") {
+  get: async (id = DEFAULT_VALUE) => {
+    if (id === DEFAULT_VALUE) {
       return await getAll();
     } else {
       return await getById(id);
