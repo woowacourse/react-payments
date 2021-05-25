@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import CardTypeRadio from "./shared/CardTypeRadio";
-import apiRequest from "../APIs";
+import apiRequest from "../apiRequest";
 
 const CardTypeSelector = ({ cardTypeName, onRadioChange }) => {
   const [cardTypes, setCardTypes] = useState([]);

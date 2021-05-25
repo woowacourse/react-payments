@@ -7,7 +7,7 @@ import Home from "./Home";
 
 import router from "../router";
 import { PAGE } from "../constants";
-import apiRequest from "../APIs";
+import apiRequest from "../apiRequest";
 
 const App = () => {
   const [page, setPage] = useState({

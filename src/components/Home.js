@@ -5,7 +5,7 @@ import Card from "./shared/Card";
 import AddCardButton from "./shared/Button/AddCardButton";
 import BinarySelectButton from "./shared/Button/BinarySelectButton";
 
-import apiRequest from "../APIs";
+import apiRequest from "../apiRequest";
 import { MESSAGE, PAGE, CARD_SIZE } from "../constants";
 
 const Home = ({ routeTo }) => {
