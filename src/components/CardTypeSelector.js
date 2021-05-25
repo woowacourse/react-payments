@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import CardTypeRadio from "./shared/CardTypeRadio";
-import { getCardType } from "../APIs";
+import apiRequest from "../APIs";
 
 const CardTypeSelector = ({ cardTypeName, onRadioChange }) => {
   const [cardTypes, setCardTypes] = useState([]);
 
   useEffect(() => {
     const fetchCardTypes = async () => {
-      const fetchedCardTypes = await getCardType();
+      const fetchedCardTypes = await apiRequest.cardType.get();
 
       setCardTypes(fetchedCardTypes);
     };

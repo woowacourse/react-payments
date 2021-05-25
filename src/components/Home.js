@@ -5,7 +5,7 @@ import Card from "./shared/Card";
 import AddCardButton from "./shared/Button/AddCardButton";
 import BinarySelectButton from "./shared/Button/BinarySelectButton";
 
-import { getCardList, deleteCardList, putCardDescription } from "../APIs";
+import apiRequest from "../APIs";
 import { MESSAGE, PAGE, CARD_SIZE } from "../constants";
 
 const Home = ({ routeTo }) => {
@@ -15,7 +15,7 @@ const Home = ({ routeTo }) => {
   const [cardDescriptionInputValue, setCardDescriptionInputValue] = useState("");
 
   const setCardListByFetch = useCallback(async () => {
-    const fetchedCardList = await getCardList();
+    const fetchedCardList = await apiRequest.cardList.get();
     
     setCardList(fetchedCardList);
   }, [setCardList]);
@@ -87,7 +87,7 @@ const Home = ({ routeTo }) => {
       return;
     }
 
-    const { isSucceeded, message } = await putCardDescription(id, cardDescriptionInputValue);
+    const { isSucceeded, message } = await apiRequest.cardList.putDescription(id, cardDescriptionInputValue);
 
     if (!isSucceeded) {
       alert(message);
@@ -103,7 +103,7 @@ const Home = ({ routeTo }) => {
       return;
     }
 
-    const { isSucceeded, message } = await deleteCardList(id);
+    const { isSucceeded, message } = await apiRequest.cardList.delete(id);
 
     if (!isSucceeded) {
       alert(message);

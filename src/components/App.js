@@ -7,7 +7,7 @@ import Home from "./Home";
 
 import router from "../router";
 import { PAGE } from "../constants";
-import { postCardList} from "../APIs";
+import apiRequest from "../APIs";
 
 const App = () => {
   const [page, setPage] = useState({
@@ -31,7 +31,7 @@ const App = () => {
   };
 
   const onCardAdditionComplete = async (card) => {
-    const { isSucceeded, message } = await postCardList(card);
+    const { isSucceeded, message } = await apiRequest.cardList.post(card);
 
     if (!isSucceeded) {
       alert(message);

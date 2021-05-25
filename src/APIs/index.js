@@ -1,7 +1,15 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://woowa-payments-api.herokuapp.com";
+import cardType from "./cardType";
+import cardList from "./cardList";
+
+axios.defaults.baseURL = "http://woowa-payments-api.herokuapp.com";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
-export { getCardType } from "./cardType";
-export { getCardList, postCardList, putCardDescription, deleteCardList } from "./cardList";
+
+const apiRequest = {
+  cardType,
+  cardList,
+};
+
+export default apiRequest;

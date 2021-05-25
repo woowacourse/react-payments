@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const getCardTypesAll = (() => {
+const getAll = (() => {
   const EMPTY = [];
   let cache = EMPTY;
 
@@ -12,6 +12,7 @@ const getCardTypesAll = (() => {
         if (res.status !== 200) {
           throw new Error(`${res.status}: API call error`);
         }
+
         cache = res.data;
       } catch (error) {
         console.error(error);
@@ -24,7 +25,7 @@ const getCardTypesAll = (() => {
   };
 })();
 
-const getCardTypeById = (() => {
+const getById = (() => {
   const cache = new Map();
 
   return async (id) => {
@@ -48,12 +49,14 @@ const getCardTypeById = (() => {
   };
 })();
 
-const getCardType = async (id = "") => {
-  if (id === "") {
-    return await getCardTypesAll();
-  } else {
-    return await getCardTypeById(id);
+const cardType = {
+  get: async (id = "") => {
+    if (id === "") {
+      return await getAll();
+    } else {
+      return await getById(id);
+    }
   }
-};
+}
 
-export { getCardType };
+export default cardType;
