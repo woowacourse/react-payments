@@ -64,7 +64,6 @@ const putCardDescription = async (id, description) => {
 
 const deleteCardList = async (cardId) => {
   try {
-    console.log(cardId);
     const res = await axios.delete(`/cards?id=${cardId}`);
 
     if (res.status !== 200) {
