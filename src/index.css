@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer utilities {
+  .placeholder-center::-webkit-input-placeholder {
+    text-align: center;
+  }
+
+  .placeholder-center:-moz-placeholder {
+    text-align: center;
+  }
+
+  .placeholder-center::-moz-placeholder {
+    text-align: center;
+  }
+
+  .placeholder-center:-ms-input-placeholder {
+    text-align: center;
+  }
+
+  .bg-custom-gradient-mint {
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(4, 192, 158, 0.31) 0%,
+      rgba(4, 192, 158, 0.457344) 65.1%,
+      #04c09e 100%
+    );
+  }
+
+  .left-arrow {
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+}
