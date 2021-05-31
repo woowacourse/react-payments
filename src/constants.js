@@ -56,7 +56,33 @@ export const USERNAME = {
 
 export const SECURE_CODE_LENGTH = 3;
 
+export const PASSWORD = {
+  MIN_VALUE_PER_UNIT: 0,
+  MAX_VALUE_PER_UNIT: 9,
+  MAX_LENGTH_PER_UNIT: 1,
+};
+
 export const CARD_DESCRIPTION = {
   MIN_LENGTH: 1,
   MAX_LENGTH: 30,
 };
+
+export const UNKNOWN_CARD_TYPE = { id: "", name: "", color: "gray" };
+
+export const CARD_SIZE = {
+  SMALL: "small",
+  MEDIUM: "medium",
+  LARGE: "large",
+};
+
+export const MESSAGE = {
+  ERROR: {
+    POST_CARD_LIST: "카드를 등록할 수 없습니다. 다시 한 번 시도해주세요.",
+    PUT_CARD_DESCRIPTION: "카드 별명을 등록할 수 없습니다. 다시 한 번 시도해주세요.",
+    DELETE_CARD_LIST: "카드를 삭제할 수 없습니다. 다시 한 번 시도해주세요.",
+  },
+  CONFIRM: {
+    PUT_CARD_DESCRIPTION: "정말로 카드 별명을 수정하시겠습니까?",
+    DELETE_CARD_LIST: "정말로 카드를 삭제하시겠습니까?",
+  },
+}

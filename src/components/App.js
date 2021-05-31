@@ -1,36 +1,21 @@
 import { useState } from "react";
 
-import Header from "../stories/Header";
+import Header from "./shared/Header";
 import CardAddition from "./CardAddition";
 import CompleteCardAddition from "./CompleteCardAddition";
 import Home from "./Home";
 
 import router from "../router";
 import { PAGE } from "../constants";
+import apiRequest from "../apiRequest";
 
-const initialCardState = {
-  cardType: {
-    name: "",
-    color: "",
-  },
-  cardNumbers: [],
-  expirationDate: {
-    month: "",
-    year: "",
-  },
-  username: "",
-  secureCode: "",
-  password: [],
-};
-
-function App() {
+const App = () => {
   const [page, setPage] = useState({
     id: PAGE.HOME.ID,
     headerText: PAGE.HOME.HEADER_TEXT,
     prevPage: "",
   });
-  const [cardList, setCardList] = useState([initialCardState]);
-  const [processingCard, setProcessingCard] = useState(initialCardState);
+  const [processingCard, setProcessingCard] = useState({});
 
   const routeTo = (pageId) => {
     const pageInfo = router[pageId];
@@ -45,22 +30,34 @@ function App() {
     routeTo(PAGE.COMPLETE_CARD_ADDITION.ID);
   };
 
-  const onCardAdditionComplete = (card) => {
-    setCardList((prevCardList) => [...prevCardList, card]);
+  const onCardAdditionComplete = async (card) => {
+    const { isSucceeded, message } = await apiRequest.cardList.post(card);
+
+    if (!isSucceeded) {
+      alert(message);
+
+      return;
+    }
+
     routeTo(PAGE.HOME.ID);
   };
 
-  const mainComponent = {
-    [PAGE.HOME.ID]: <Home cardList={cardList} routeTo={routeTo} />,
-    [PAGE.CARD_ADDITION.ID]: (
-      <CardAddition onCardInfoSubmit={onCardInfoSubmit} />
-    ),
-    [PAGE.COMPLETE_CARD_ADDITION.ID]: (
-      <CompleteCardAddition
-        onCardAdditionComplete={onCardAdditionComplete}
-        card={processingCard}
-      />
-    ),
+  const getMainComponent = (pageId) => {
+    switch (pageId) {
+      case PAGE.HOME.ID:
+        return <Home routeTo={routeTo} />;
+      case PAGE.CARD_ADDITION.ID:
+        return <CardAddition onCardInfoSubmit={onCardInfoSubmit} />;
+      case PAGE.COMPLETE_CARD_ADDITION.ID:
+        return (
+          <CompleteCardAddition
+            onCardAdditionComplete={onCardAdditionComplete}
+            card={processingCard}
+          />
+        );
+      default:
+        return <p>404: Page Not Found</p>;
+    }
   };
 
   return (
@@ -70,9 +67,9 @@ function App() {
         routeTo={routeTo}
         prevPage={page.prevPage}
       />
-      <main>{mainComponent[page.id]}</main>
+      <main>{getMainComponent(page.id)}</main>
     </div>
   );
-}
+};
 
 export default App;

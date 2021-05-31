@@ -1,5 +1,5 @@
 .complete-card-addition {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,15 +25,15 @@
   width: 65%;
   text-align: center;
   font-size: 1.2rem;
-  color: #383838;
+  color: var(--color-gray-600);
   padding: 0.5rem 0;
   border: none;
-  border-bottom: 1px solid #737373;
+  border-bottom: 1px solid var(--color-gray-400);
   outline: none;
 }
 
 .complete-card-addition input::placeholder {
-  color: #737373;
+  color: var(--color-gray-400);
 }
 
 .complete-card-addition button {

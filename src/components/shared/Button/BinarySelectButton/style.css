@@ -1,0 +1,27 @@
+.binary-select-button {
+  display: flex;
+  width: 15rem;
+  height: 1.8rem;
+  border-radius: 0.7rem;
+  overflow: hidden;
+}
+
+.binary-select-button > button {
+  width: 50%;
+  height: 100%;
+  color: var(--color-gray-100);
+  background-color: var(--color-gray-500);
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  /* background: none; */
+}
+
+.binary-select-button > button:first-child {
+  border-right: 1px solid var(--color-gray-100);
+}
+
+.binary-select-button > button:hover {
+  background-color: var(--color-gray-300);
+  color: var(--color-gray-600);
+}

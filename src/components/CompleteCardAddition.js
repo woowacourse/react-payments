@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Card from "../stories/Card";
-import Button from "../stories/Button";
-import { CARD_SIZE } from "../stories/constants/card";
+
+import Card from "./shared/Card";
+import SimpleButton from "./shared/SimpleButton";
+
+import { CARD_SIZE } from "../constants";
 import { CARD_DESCRIPTION, FORMAT_CHAR } from "../constants";
 
-function CompleteCardAddition(props) {
-  const { cardType, cardNumbers, expirationDate, username } = props.card;
+const CompleteCardAddition = ({ card, onCardAdditionComplete }) => {
+  const { cardType, cardNumbers, expirationDate, username } = card;
   const [cardDescription, setCardDescription] = useState("");
 
   const onCardDescriptionChange = ({ target }) => {
@@ -16,12 +18,12 @@ function CompleteCardAddition(props) {
   const onDescriptionSubmit = (event) => {
     event.preventDefault();
 
-    const card = {
-      cardDescription,
-      ...props.card,
+    const completedCard = {
+      description: cardDescription,
+      ...card,
     };
 
-    props.onCardAdditionComplete(card);
+    onCardAdditionComplete(completedCard);
   };
 
   return (
@@ -46,16 +48,17 @@ function CompleteCardAddition(props) {
           placeholder="카드 별명을 입력해주세요"
           required
         />
-        <Button innerText="확인" />
+        <SimpleButton innerText="확인" />
       </form>
     </div>
   );
-}
+};
 
 CompleteCardAddition.propTypes = {
   onCardAdditionComplete: PropTypes.func.isRequired,
   card: PropTypes.shape({
     cardType: PropTypes.shape({
+      id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
       color: PropTypes.string.isRequired,
     }),

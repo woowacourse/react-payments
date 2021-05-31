@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import Card from "../stories/Card";
-import { CARD, CARD_SIZE } from "../stories/constants/card";
-import Input from "../stories/Input";
-import Modal from "../stories/Modal";
-import CardTypeRadio from "../stories/CardTypeRadio";
-import Button from "../stories/Button";
+
+import CardTypeSelector from "./CardTypeSelector";
+import Card from "./shared/Card";
+import Input from "./shared/Input";
+import Modal from "./shared/Modal";
+import SimpleButton from "./shared/SimpleButton";
+
 import useCardNumbers from "../hooks/useCardNumbers";
 import useExpirationDate from "../hooks/useExpirationDate";
 import useSecureCode from "../hooks/useSecureCode";
 import useControlledInputValue from "../hooks/useControlledInputValue";
 import usePassword from "../hooks/usePassword";
+import { CARD_SIZE, UNKNOWN_CARD_TYPE } from "../constants";
 import {
   CARD_NUMBER,
   EXPIRATION_DATE,
   FORMAT_CHAR,
+  PASSWORD,
   SECURE_CODE_LENGTH,
   USERNAME,
 } from "../constants";
@@ -37,8 +40,8 @@ const formatExpirationDate = (expirationDate) => {
 };
 
 const CardAddition = (props) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [cardType, setCardType] = useState(CARD.UNKNOWN);
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [cardType, setCardType] = useState(UNKNOWN_CARD_TYPE);
   const [
     cardNumbers,
     cardNumbersInputRef,
@@ -50,7 +53,12 @@ const CardAddition = (props) => {
   });
   const [username, onUsernameChange] = useControlledInputValue("");
   const [secureCode, onSecureCodeChange] = useSecureCode("");
-  const [password, onPasswordChange] = usePassword(["", ""]);
+  const [
+    firstPassword,
+    secondPassword,
+    passwords,
+    onPasswordChange,
+  ] = usePassword(["", ""]);
   const [inputVerification, setInputVerification] = useState({
     cardNumbers: false,
     expirationDate: false,
@@ -60,29 +68,29 @@ const CardAddition = (props) => {
   });
 
   useEffect(() => {
-    setIsModalOpen(
-      cardNumbers[CARD_NUMBER.LENGTH - 1]?.length === CARD_NUMBER.PARTIAL_LENGTH
-    );
-  }, [cardNumbers]);
+    setIsVisibleModal(inputVerification.cardNumbers);
+  }, [inputVerification.cardNumbers]);
 
   useEffect(() => {
     setInputVerification({
       cardNumbers:
-        cardNumbers[CARD_NUMBER.LENGTH - 1]?.length ===
-        CARD_NUMBER.PARTIAL_LENGTH,
+        cardNumbers.length === CARD_NUMBER.LENGTH &&
+        cardNumbers.every(
+          (number) => number.length === CARD_NUMBER.PARTIAL_LENGTH
+        ),
       expirationDate:
         (expirationDate.month + expirationDate.year).length ===
         EXPIRATION_DATE.LENGTH,
       username: username.length >= USERNAME.MIN_LENGTH,
       secureCode: secureCode.length === SECURE_CODE_LENGTH,
-      password: password.every((value) => value !== ""),
+      password: passwords.every((value) => value !== ""),
     });
-  }, [cardNumbers, expirationDate, username, secureCode, password]);
+  }, [cardNumbers, expirationDate, username, secureCode, passwords]);
 
   const onCardInfoSubmit = (event) => {
     event.preventDefault();
 
-    if (cardType.name === CARD.UNKNOWN.name) {
+    if (cardType.id === UNKNOWN_CARD_TYPE.id) {
       alert("카드 회사를 선택해주세요.");
       return;
     }
@@ -93,7 +101,7 @@ const CardAddition = (props) => {
       expirationDate,
       username,
       secureCode,
-      password,
+      password: Number(passwords.join("")),
     };
 
     props.onCardInfoSubmit(card);
@@ -101,14 +109,14 @@ const CardAddition = (props) => {
 
   const onModalClick = ({ target, currentTarget }) => {
     if (target === currentTarget) {
-      setIsModalOpen(false);
+      setIsVisibleModal(false);
       return;
     }
   };
 
   const onRadioChange = ({ target }) => {
     setCardType(JSON.parse(target.value));
-    setIsModalOpen(false);
+    setIsVisibleModal(false);
   };
 
   return (
@@ -188,11 +196,11 @@ const CardAddition = (props) => {
                 type="password"
                 isCenter={true}
                 aria-label="첫번째 비밀번호"
-                min="0"
-                max="9"
-                maxLength="1"
+                min={PASSWORD.MIN_VALUE_PER_UNIT}
+                max={PASSWORD.MAX_VALUE_PER_UNIT}
+                maxLength={PASSWORD.MAX_LENGTH_PER_UNIT}
                 data-password-index="0"
-                value={password[0]}
+                value={firstPassword}
                 onChange={onPasswordChange}
                 required
               />
@@ -200,11 +208,11 @@ const CardAddition = (props) => {
                 type="password"
                 isCenter={true}
                 aria-label="두번째 비밀번호"
-                min="0"
-                max="9"
-                maxLength="1"
+                min={PASSWORD.MIN_VALUE_PER_UNIT}
+                max={PASSWORD.MAX_VALUE_PER_UNIT}
+                maxLength={PASSWORD.MAX_LENGTH_PER_UNIT}
                 data-password-index="1"
-                value={password[1]}
+                value={secondPassword}
                 onChange={onPasswordChange}
                 required
               />
@@ -220,26 +228,17 @@ const CardAddition = (props) => {
             (isFulfilled) => isFulfilled
           ) && (
             <div className="card-addition__form-submit">
-              <Button innerText="다음" />
+              <SimpleButton innerText="다음" />
             </div>
           )}
         </form>
       </div>
-      {isModalOpen && (
+      {isVisibleModal && (
         <Modal onClick={onModalClick}>
-          <form className="card-type-radio-box">
-            {Object.values(CARD)
-              .filter((value) => value.name !== "")
-              .map((value) => (
-                <CardTypeRadio
-                  key={value.name + value.color}
-                  cardType={value}
-                  groupName="card-type"
-                  isChecked={value.name === cardType.name}
-                  onChange={onRadioChange}
-                />
-              ))}
-          </form>
+          <CardTypeSelector
+            cardTypeName={cardType.name}
+            onRadioChange={onRadioChange}
+          />
         </Modal>
       )}
     </>

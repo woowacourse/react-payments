@@ -14,8 +14,10 @@
   - [x] Modal storybook 컴포넌트를 구현한다.
 - CardTypeRadio
   - [x] 카드 타입, name attribute를 props로 받는다.
-- Button
+- SimpleButton
   - [x] innerText와 onClick을 props로 받는다.
+- AddCardButton
+  - [x] onClick을 props로 받는다.
 
 ## 카드 추가 페이지
 
@@ -37,3 +39,8 @@
 - [x] 카드 추가 완료 페이지의 레이아웃을 구성한다.
 - [x] 카드 추가 페이지에서 카드의 별명을 설정할 수 있다.
 - [x] 확인 버튼을 누르면 새로운 카드가 등록된다.
+
+## 보유 카드 페이지
+
+- [x] 현재 등록되어 있는 카드를 보여준다.
+- [x] 카드 추가 버튼을 누르면 카드 추가 페이지로 이동한다.

@@ -1,5 +1,4 @@
-import React from "react";
-import "./globalStyle.css";
+import "../src/style/index.css";
 
 const customViewports = {
   appS: {
