@@ -8,8 +8,8 @@ const CardList = ({ cardInfosList, onAddCardClick }) => (
   <>
     <Header title="보유카드" />
     <div className="flex flex-col items-center space-y-16">
-      {cardInfosList.map(({ id, backgroundColor, bank, numberInfos, ownerName, expirationDate }) => (
-        <Card key={id} isRegistered {...{ backgroundColor, bank, numberInfos, ownerName, expirationDate }} />
+      {cardInfosList.map(({ id, bank, backgroundColor, cardNumbers, expirationDate, ownerName }) => (
+        <Card key={id} isRegistered {...{ bank, backgroundColor, cardNumbers, expirationDate, ownerName }} />
       ))}
       <CardShape onClick={onAddCardClick} />
     </div>

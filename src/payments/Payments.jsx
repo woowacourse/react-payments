@@ -14,7 +14,7 @@ const Payments = () => {
   const addCardInfo = cardInfo => {
     index += 1;
 
-    setNewCardInfo({ id: index, ...cardInfo });
+    setNewCardInfo({ ...cardInfo, id: index });
     setCurrentPage(PAGE.CARD_CONFIRM);
     setCardInfosList([...cardInfosList, cardInfo]);
   };
@@ -25,13 +25,16 @@ const Payments = () => {
 
   const handleAddCardClick = () => setCurrentPage(PAGE.CARD_ADD_FORM);
 
-  const getPage = {
-    [PAGE.CARD_ADD_FORM]: () => <CardAddForm addCardInfo={addCardInfo} onBackButtonClick={handleBackButtonClick} />,
-    [PAGE.CARD_CONFIRM]: () => <CardConfirm cardInfo={newCardInfo} onConfirmClick={handleConfirmClick} />,
-    [PAGE.CARD_LIST]: () => <CardList cardInfosList={cardInfosList} onAddCardClick={handleAddCardClick} />,
-  };
-
-  return getPage?.[currentPage]() ?? throwError(`Invalid Page: ${String(currentPage)}`);
+  switch (currentPage) {
+    case PAGE.CARD_ADD_FORM:
+      return <CardAddForm addCardInfo={addCardInfo} onBackButtonClick={handleBackButtonClick} />;
+    case PAGE.CARD_CONFIRM:
+      return <CardConfirm cardInfo={newCardInfo} onConfirmClick={handleConfirmClick} />;
+    case PAGE.CARD_LIST:
+      return <CardList cardInfosList={cardInfosList} onAddCardClick={handleAddCardClick} />;
+    default:
+      return throwError(`Invalid Page: ${String(currentPage)}`);
+  }
 };
 
 export default Payments;

@@ -5,7 +5,7 @@ import Button from "../../components/Button/Button";
 import Header from "../../components/Header/Header";
 
 const CardConfirm = ({ cardInfo, onConfirmClick }) => {
-  const { backgroundColor, isRegistered, bank, numberInfos, ownerName, expirationDate, onClick } = cardInfo;
+  const { bank, backgroundColor, cardNumbers, expirationDate, ownerName, onClick } = cardInfo;
 
   return (
     <>
@@ -17,7 +17,7 @@ const CardConfirm = ({ cardInfo, onConfirmClick }) => {
             <Card
               isRegistered
               scale="scale-150"
-              {...{ backgroundColor, isRegistered, bank, numberInfos, ownerName, expirationDate, onClick }}
+              {...{ bank, backgroundColor, cardNumbers, expirationDate, ownerName, onClick }}
             />
 
             <input className="mt-16 text-center text-custom-darkgray text-lg font-normal border-b-2 border-custom-gray-250 focus:outline-none" />

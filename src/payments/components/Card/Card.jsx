@@ -3,11 +3,11 @@ import CardShape from "./CardShape";
 import CardInfo from "./CardInfo";
 
 const Card = props => {
-  const { backgroundColor, scale, isRegistered, bank, numberInfos, ownerName, expirationDate, onClick } = props;
+  const { scale, isRegistered, bank, backgroundColor, cardNumbers, expirationDate, ownerName, onClick } = props;
 
   return (
     <CardShape {...{ backgroundColor, scale, isRegistered, onClick }}>
-      <CardInfo {...{ bank, numberInfos, ownerName, expirationDate }} />
+      <CardInfo {...{ bank, cardNumbers, ownerName, expirationDate }} />
     </CardShape>
   );
 };

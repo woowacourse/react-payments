@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer utilities {
   .placeholder-center::-webkit-input-placeholder {
     text-align: center;
@@ -31,5 +32,19 @@
     border-top-color: transparent;
     border-bottom-color: transparent;
     border-left-color: transparent;
+  }
+
+  @-moz-document url-prefix() {
+    .appearance-textfield {
+      -moz-appearance: textfield;
+    }
+  }
+
+  @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+    .appearance-textfield::-webkit-inner-spin-button,
+    .appearance-textfield::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 }
