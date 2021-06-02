@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { throwError, PAGE } from "../@shared/utils";
-import CardAddForm from "./components/CardAddForm/CardAddForm";
-import CardConfirm from "./components/CardConfirm/CardConfirm";
-import CardList from "./components/CardList/CardList";
+import CardAddForm from "./pages/CardAddForm/CardAddForm";
+import CardConfirm from "./pages/CardConfirm/CardConfirm";
+import CardList from "./pages/CardList/CardList";
 
 let index = -1;
 

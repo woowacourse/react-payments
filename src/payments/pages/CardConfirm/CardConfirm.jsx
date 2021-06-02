@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "../Button/Button";
-import Card from "../Card/Card";
-import Header from "../Header/Header";
+import Card from "../../components/Card/Card";
+import Button from "../../components/Button/Button";
+import Header from "../../components/Header/Header";
 
 const CardConfirm = ({ cardInfo, onConfirmClick }) => {
   const { backgroundColor, isRegistered, bank, numberInfos, ownerName, expirationDate, onClick } = cardInfo;

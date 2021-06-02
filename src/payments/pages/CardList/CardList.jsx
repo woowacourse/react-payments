@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Header from "../Header/Header";
-import Card from "../Card/Card";
-import CardShape from "../Card/CardShape";
+import Header from "../../components/Header/Header";
+import Card from "../../components/Card/Card";
+import CardShape from "../../components/Card/CardShape";
 
 const CardList = ({ cardInfosList, onAddCardClick }) => (
   <>

@@ -3,19 +3,19 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { ERROR_TYPE, throwError } from "../../../@shared/utils";
-import Card from "../Card/Card";
-import Input from "../Input/Input";
-import InputTitle from "../InputTitle/InputTitle";
-import Button from "../Button/Button";
-import Header from "../Header/Header";
-import BankSelector from "../BankSelector/BankSelector";
-import Circle from "../Circle/Circle";
-import Modal from "../Modal/Modal";
-import QuestionIcon from "../ToolTip/QuestionIcon";
-import ToolTip from "../ToolTip/ToolTip";
-import InputBox from "../InputBox/InputBox";
-import InputLabel from "../InputLabel/InputLabel";
-import InputContent from "../InputContent/InputContent";
+import Card from "../../components/Card/Card";
+import Input from "../../components/Input/Input";
+import InputTitle from "../../components/InputTitle/InputTitle";
+import Button from "../../components/Button/Button";
+import Header from "../../components/Header/Header";
+import BankSelector from "../../components/BankSelector/BankSelector";
+import Circle from "../../components/Circle/Circle";
+import Modal from "../../components/Modal/Modal";
+import QuestionIcon from "../../components/ToolTip/QuestionIcon";
+import ToolTip from "../../components/ToolTip/ToolTip";
+import InputBox from "../../components/InputBox/InputBox";
+import InputLabel from "../../components/InputLabel/InputLabel";
+import InputContent from "../../components/InputContent/InputContent";
 
 const initialNumberInfos = [
   { id: "number-info-0", type: "text", value: "", minLength: "4", maxLength: "4" },
