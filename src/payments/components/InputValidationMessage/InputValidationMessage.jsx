@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const InputValidationMessage = ({ id, children }) => (
-  <span id={id} className="py-2 text-rose-600 text-sm">
+  <p id={id} className="flex py-2 text-rose-600 text-xs">
     {children}
-  </span>
+  </p>
 );
 
 InputValidationMessage.propTypes = {

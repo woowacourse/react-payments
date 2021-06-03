@@ -1,6 +1,6 @@
 export const cardNumberInfos = [
-  { id: "card-number-info-0", type: "number", minLength: "4", maxLength: "4", label: "첫번째 카드번호 입력창" },
-  { id: "card-number-info-1", type: "number", minLength: "4", maxLength: "4", label: "두번째 카드번호 입력창" },
+  { id: "card-number-info-0", type: "text", minLength: "4", maxLength: "4", label: "첫번째 카드번호 입력창" },
+  { id: "card-number-info-1", type: "text", minLength: "4", maxLength: "4", label: "두번째 카드번호 입력창" },
   { id: "card-number-info-2", type: "password", minLength: "4", maxLength: "4", label: "세번째 카드번호 입력창" },
   { id: "card-number-info-3", type: "password", minLength: "3", maxLength: "4", label: "네번째 카드번호 입력창" },
 ];
