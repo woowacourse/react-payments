@@ -13,7 +13,7 @@ import { useModal } from '../../../../hooks/useModal.js';
  */
 
 export const CardRegister = () => {
-  const { setCurrentPage, updateCardContent } = useContext(PaymentContext);
+  const { setCurrentPage, registerCard } = useContext(PaymentContext);
   const { isModalOpened, openModal, closeModal } = useModal();
   const {
     formRef,
@@ -30,7 +30,7 @@ export const CardRegister = () => {
   const submitCardDetail = (e) => {
     e.preventDefault();
 
-    const cardDetail = {
+    const card = {
       company: company.value,
       numbers: numbers.value,
       validDay: validDay.value,
@@ -39,7 +39,7 @@ export const CardRegister = () => {
       password: password.value,
     };
 
-    updateCardContent(cardDetail);
+    registerCard(card);
     setCurrentPage('cardRegistered');
   };
 

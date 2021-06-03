@@ -1,48 +1,33 @@
 import React, { createContext, useState } from 'react';
+import { getCardId, getCardNickName } from '../utils/getCardInfo';
 
-const cardFrame = {
-  nickName: '',
-  company: '',
-  numbers: { first: '', second: '', third: '', fourth: '' },
-  owner: '',
-  validDay: { firstDigit: '', secondDigit: '' },
-};
-
-const registeredCards = [
-  {
-    nickName: '피터',
-    company: '공원',
-    numbers: { first: '1995', second: '0519', third: '0101', fourth: '0101' },
-    owner: 'HYUN CHEOL',
-    validDay: { month: '18', year: '18' },
-  },
-  {
-    nickName: '심바',
-    company: '준',
-    numbers: { first: '1994', second: '1017', third: '1001', fourth: '0110' },
-    owner: 'SUN BEAN',
-    validDay: { month: '18', year: '18' },
-  },
-];
+const registeredCards = {};
 
 export const PaymentContext = createContext();
 
 export const PaymentContextProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState('cardList');
   const [cards, setCards] = useState(registeredCards);
-  const [card, setCard] = useState(cardFrame);
+  const [cardId, setCardId] = useState(null);
 
-  const updateCardContent = (cardInput) => {
-    setCard((card) => ({ ...card, ...cardInput }));
+  const registerCard = (card) => {
+    const cardId = getCardId();
+    const nickName = getCardNickName(card.company, card.owner);
+
+    setCards((cards) => ({ ...cards, [cardId]: { ...card, nickName } }));
+    setCardId(cardId);
   };
 
-  const registerCard = (newCard) => {
-    setCards((cards) => [...cards, newCard]);
+  const updateCard = (nickName) => {
+    const card = cards[cardId];
+
+    setCards((cards) => ({ ...cards, [cardId]: { ...card, nickName } }));
+    setCardId(null);
   };
 
   return (
     <PaymentContext.Provider
-      value={{ currentPage, card, cards, setCurrentPage, updateCardContent, registerCard }}
+      value={{ currentPage, cards, cardId, setCurrentPage, registerCard, updateCard }}
     >
       {children}
     </PaymentContext.Provider>

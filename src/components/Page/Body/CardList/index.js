@@ -14,7 +14,7 @@ export const CardList = () => {
   return (
     <Styled.Container>
       <Styled.CardListContainer>
-        {cards.map((card, idx) => (
+        {Object.values(cards).map((card, idx) => (
           <CardItem key={idx} card={card} />
         ))}
       </Styled.CardListContainer>
