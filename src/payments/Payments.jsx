@@ -1,9 +1,9 @@
 import React, { useReducer } from "react";
 import { throwError, PAGE } from "../@shared/utils";
-import CardAddForm from "./pages/CardAddForm/CardAddForm";
-import CardConfirm from "./pages/CardConfirm/CardConfirm";
-import CardList from "./pages/CardList/CardList";
 import paymentsReducer, { addNewCardInfo, editCardInfo, movePage } from "./PaymentReducer";
+import CardAddForm from "./components/CardAddForm/CardAddForm";
+import CardConfirm from "./components/CardConfirm/CardConfirm";
+import CardList from "./components/CardList/CardList";
 
 const initialState = {
   page: PAGE.CARD_LIST,

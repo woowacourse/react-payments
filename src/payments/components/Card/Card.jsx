@@ -2,7 +2,7 @@ import React from "react";
 import CardShape from "./CardShape";
 import CardInfo from "./CardInfo";
 import { LENGTH } from "../../utils";
-import { cardNumberInfos } from "../../pages/CardAddForm/inputInfos";
+import { cardNumberInfos } from "../CardAddForm/inputInfos";
 
 const formatOwnerName = name =>
   name.length <= LENGTH.DISPLAYED_OWNER_NAME_MAX ? name : `${name.slice(0, LENGTH.DISPLAYED_OWNER_NAME_MAX)}...`;

@@ -2,20 +2,20 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-import Card from "../../components/Card/Card";
-import Input from "../../components/Input/Input";
-import InputTitle from "../../components/InputTitle/InputTitle";
-import Button from "../../components/Button/Button";
-import Header from "../../components/Header/Header";
-import BankSelector from "../../components/BankSelector/BankSelector";
-import Circle from "../../components/Circle/Circle";
-import Modal from "../../components/Modal/Modal";
-import QuestionIcon from "../../components/ToolTip/QuestionIcon";
-import ToolTip from "../../components/ToolTip/ToolTip";
-import InputBox from "../../components/InputBox/InputBox";
-import InputLabel from "../../components/InputLabel/InputLabel";
-import InputContent from "../../components/InputContent/InputContent";
-import InputValidationMessage from "../../components/InputValidationMessage/InputValidationMessage";
+import Card from "../Card/Card";
+import Input from "../Input/Input";
+import InputTitle from "../InputTitle/InputTitle";
+import Button from "../Button/Button";
+import Header from "../Header/Header";
+import BankSelector from "../BankSelector/BankSelector";
+import Circle from "../Circle/Circle";
+import Modal from "../Modal/Modal";
+import QuestionIcon from "../ToolTip/QuestionIcon";
+import ToolTip from "../ToolTip/ToolTip";
+import InputBox from "../InputBox/InputBox";
+import InputLabel from "../InputLabel/InputLabel";
+import InputContent from "../InputContent/InputContent";
+import InputValidationMessage from "../InputValidationMessage/InputValidationMessage";
 import { useInputs, useInput } from "../../hooks/useInputs";
 import { cardNumberInfos, expirationDateInfos, passwordInfos } from "./inputInfos";
 import {
@@ -117,6 +117,7 @@ const CardAddForm = ({ addCardInfo, onBackButtonClick }) => {
       <form
         className="flex flex-col justify-between w-full h-full"
         aria-describedby="form-error"
+        noValidate
         onSubmit={handleSubmit}
       >
         <div>

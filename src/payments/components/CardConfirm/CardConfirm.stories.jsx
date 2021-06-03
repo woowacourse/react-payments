@@ -1,5 +1,5 @@
 import React from "react";
-import { RegisteredCard } from "../../components/Card/Card.stories";
+import { RegisteredCard } from "../Card/Card.stories";
 import CardConfirm from "./CardConfirm";
 
 export default {

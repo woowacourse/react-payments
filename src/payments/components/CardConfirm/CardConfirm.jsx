@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Card from "../../components/Card/Card";
-import Button from "../../components/Button/Button";
-import Header from "../../components/Header/Header";
+import Card from "../Card/Card";
+import Button from "../Button/Button";
+import Header from "../Header/Header";
 import { useInput } from "../../hooks/useInputs";
 
 const CardConfirm = ({ cardInfo, editCardInfo }) => {
