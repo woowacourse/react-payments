@@ -25,9 +25,27 @@ export const PaymentContextProvider = ({ children }) => {
     setCardId(null);
   };
 
+  const deleteCard = () => {
+    setCards((cards) => {
+      delete cards[cardId];
+
+      return { ...cards };
+    });
+    setCardId(null);
+  };
+
   return (
     <PaymentContext.Provider
-      value={{ currentPage, cards, cardId, setCurrentPage, registerCard, updateCard }}
+      value={{
+        currentPage,
+        cards,
+        cardId,
+        setCurrentPage,
+        setCardId,
+        registerCard,
+        updateCard,
+        deleteCard,
+      }}
     >
       {children}
     </PaymentContext.Provider>

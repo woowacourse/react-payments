@@ -7,11 +7,11 @@ import { Card } from '../../../../Card';
  * Primary UI component for user interaction
  */
 
-export const CardItem = ({ card }) => {
+export const CardItem = ({ card, ...props }) => {
   const { company, numbers, owner, validDay, nickName } = card;
   return (
     <>
-      <Styled.Container>
+      <Styled.Container {...props}>
         <Card
           size={'small'}
           company={company}
