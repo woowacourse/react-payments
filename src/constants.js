@@ -108,3 +108,5 @@ export const VIRTUAL_KEYBOARD_TARGET_INPUT = {
   FIRST_PASSWORD: "firstPassword",
   SECOND_PASSWORD: "secondPassword",
 };
+
+export const VIRTUAL_KEYBOARD_DELETION_INPUT = null;

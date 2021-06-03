@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { CARD_SIZE } from "../../constants";
+import { CARD_SIZE } from "../../../constants";
 import "./style.css";
-import "../style/background.css";
+import "../../@style/background.css";
 
 const Card = ({
   cardType,

@@ -3,14 +3,17 @@ import {
   CARD_NUMBER,
   EXPIRATION_DATE,
   FORMAT_CHAR,
+  PASSWORD_INPUT_LENGTH,
   SECURE_CODE_LENGTH,
   USERNAME,
+  VIRTUAL_KEYBOARD_DELETION_INPUT,
   VIRTUAL_KEYBOARD_TARGET_INPUT,
 } from "../../constants";
 import {
   useCardNumbers,
   useControlledInputValue,
   useExpirationDate,
+  useVirtualKeyboardInput,
 } from "../../hooks";
 import { getNewId } from "../../utils";
 import { Button, Card, Input, VirtualKeyboardInput } from "../../components";
@@ -30,46 +33,76 @@ const formatCardNumbers = (numbers) => {
     .join(FORMAT_CHAR.CARD_NUMBERS_SEPARATOR);
 };
 
-const CardAdditionForm = (props) => {
+const CardAdditionForm = ({
+  onNewCardSubmit,
+  virtualKeyboardModal,
+  cardTypeSelectionModal,
+}) => {
   const [
     cardNumbers,
     cardNumbersInputRef,
     onCardNumbersChange,
-    verifyCardNumberInputsFullFilled,
+    isCardNumbersFullfilled,
   ] = useCardNumbers([]);
+  const [cardType, setCardType] = useState(CARD.UNKNOWN);
   const [expirationDate, onExpirationDateChange] = useExpirationDate("");
   const [username, onUsernameChange] = useControlledInputValue("");
+  //TODO: secureCodeKeyboard로 이름바꾸기
+  const secureCode = useVirtualKeyboardInput({
+    initialValue: "",
+    maxLength: SECURE_CODE_LENGTH,
+    onInputFullfilled: () => {
+      virtualKeyboardModal.closeModal();
+    },
+  });
+
+  const firstPassword = useVirtualKeyboardInput({
+    initialValue: "",
+    maxLength: PASSWORD_INPUT_LENGTH,
+    onInputFullfilled: () => {
+      virtualKeyboardModal.closeModal();
+    },
+  });
+
+  const secondPassword = useVirtualKeyboardInput({
+    initialValue: "",
+    maxLength: PASSWORD_INPUT_LENGTH,
+    onInputFullfilled: () => {
+      virtualKeyboardModal.closeModal();
+    },
+  });
 
   const onCardInfoSubmit = (event) => {
     event.preventDefault();
 
-    if (props.cardType.name === CARD.UNKNOWN.name) {
+    if (cardType.name === CARD.UNKNOWN.name) {
       alert("카드 회사를 선택해주세요.");
       return;
     }
 
     const card = {
       cardId: getNewId(),
-      cardType: props.cardType,
+      cardType,
       cardNumbers,
       expirationDate,
       username,
-      secureCode: props.secureCode,
-      firstPassword: props.firstPassword,
-      secondPassword: props.secondPassword,
+      secureCode: secureCode.currentInput,
+      firstPassword: firstPassword.currentInput,
+      secondPassword: secondPassword.currentInput,
     };
 
-    props.onNewCardAdd(card);
+    onNewCardSubmit(card);
   };
 
   const isAllInputFulfilled = () => {
-    const cardNumbersCondition = verifyCardNumberInputsFullFilled();
+    const cardNumbersCondition = isCardNumbersFullfilled;
     const expirationDateCondition =
       expirationDate.length ===
       EXPIRATION_DATE.LENGTH + FORMAT_CHAR.EXPIRATION_DATE_SEPARATOR.length;
     const usernameCondition = username.length >= USERNAME.MIN_LENGTH;
-    const secureCodeCondition = props.secureCode.length === SECURE_CODE_LENGTH;
-    const passwordCondition = props.firstPassword && props.secondPassword;
+    const secureCodeCondition =
+      secureCode.currentInput.length === SECURE_CODE_LENGTH;
+    const passwordCondition = firstPassword && secondPassword;
 
     return (
       cardNumbersCondition &&
@@ -81,16 +114,54 @@ const CardAdditionForm = (props) => {
   };
 
   useEffect(() => {
-    props.setIsModalVisible({
-      cardTypeSelection: verifyCardNumberInputsFullFilled(),
-    });
-  }, [cardNumbers]);
+    if (!isCardNumbersFullfilled) {
+      return;
+    }
 
+    cardTypeSelectionModal.openModal();
+  }, [isCardNumbersFullfilled]);
+
+  useEffect(() => {
+    const {
+      dataPassage: {
+        data: { cardType },
+      },
+    } = cardTypeSelectionModal;
+
+    if (!cardType) {
+      return;
+    }
+
+    setCardType(cardType);
+  }, [cardTypeSelectionModal.dataPassage.data.cardType]);
+
+  useEffect(() => {
+    const {
+      dataPassage: {
+        data: { targetInput, virtualKeyboardInput },
+      },
+    } = virtualKeyboardModal;
+
+    const virtualKeyboardMap = {
+      secureCode,
+      firstPassword,
+      secondPassword,
+    };
+
+    if (virtualKeyboardInput === VIRTUAL_KEYBOARD_DELETION_INPUT) {
+      virtualKeyboardMap[targetInput]?.deleteInputChar();
+      return;
+    }
+
+    virtualKeyboardMap[targetInput]?.insertInputChar(virtualKeyboardInput);
+  }, [virtualKeyboardModal.dataPassage.data.virtualKeyboardInput]);
+
+  //TODO: onClick 내부 바깥으로 빼기
   return (
     <form onSubmit={onCardInfoSubmit} className="card-addition__form">
       <div className="card-addition">
         <Card
-          cardType={props.cardType}
+          cardType={cardType}
           size={CARD_SIZE.MEDIUM}
           expirationDate={expirationDate}
           username={username}
@@ -149,18 +220,17 @@ const CardAdditionForm = (props) => {
           <div className="card-addition__secure-code-inner">
             <div
               onClick={() => {
-                props.setVirtualKeyboardTarget(
+                virtualKeyboardModal.dataPassage.passData(
+                  "targetInput",
                   VIRTUAL_KEYBOARD_TARGET_INPUT.SECURE_CODE
                 );
-                props.setIsModalVisible({
-                  virtualKeyboard: verifyCardNumberInputsFullFilled(),
-                });
+                virtualKeyboardModal.openModal();
               }}
             >
               <VirtualKeyboardInput
                 type="password"
                 isCenter={true}
-                value={props.secureCode}
+                value={secureCode.currentInput}
               />
             </div>
             <div className="card-addition__tool-tip-button">
@@ -177,38 +247,36 @@ const CardAdditionForm = (props) => {
           <div
             className="card-addition__password-inner__password"
             onClick={() => {
-              props.setVirtualKeyboardTarget(
+              virtualKeyboardModal.dataPassage.passData(
+                "targetInput",
                 VIRTUAL_KEYBOARD_TARGET_INPUT.FIRST_PASSWORD
               );
-              props.setIsModalVisible({
-                virtualKeyboard: verifyCardNumberInputsFullFilled(),
-              });
+              virtualKeyboardModal.openModal();
             }}
           >
             <VirtualKeyboardInput
               type="password"
               isCenter={true}
               aria-label="첫번째 비밀번호"
-              value={props.firstPassword}
+              value={firstPassword.currentInput}
               required
             />
           </div>
           <div
             className="card-addition__password-inner__password"
             onClick={() => {
-              props.setVirtualKeyboardTarget(
+              virtualKeyboardModal.dataPassage.passData(
+                "targetInput",
                 VIRTUAL_KEYBOARD_TARGET_INPUT.SECOND_PASSWORD
               );
-              props.setIsModalVisible({
-                virtualKeyboard: verifyCardNumberInputsFullFilled(),
-              });
+              virtualKeyboardModal.openModal();
             }}
           >
             <VirtualKeyboardInput
               type="password"
               isCenter={true}
               aria-label="두번째 비밀번호"
-              value={props.secondPassword}
+              value={secondPassword.currentInput}
               required
             />
           </div>
@@ -230,11 +298,22 @@ const CardAdditionForm = (props) => {
 };
 
 CardAdditionForm.propTypes = {
-  cardType: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-  }).isRequired,
-  setCardTypeModalVisibility: PropTypes.func.isRequired,
+  virtualKeyboardModal: PropTypes.shape({
+    openModal: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired,
+    dataPassage: PropTypes.shape({
+      data: PropTypes.any.isRequired,
+      passData: PropTypes.func.isRequired,
+    }).isRequired,
+  }),
+  cardTypeSelectionModal: PropTypes.shape({
+    openModal: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired,
+    dataPassage: PropTypes.shape({
+      data: PropTypes.any.isRequired,
+      passData: PropTypes.func.isRequired,
+    }).isRequired,
+  }),
   onNewCardAdd: PropTypes.func.isRequired,
 };
 

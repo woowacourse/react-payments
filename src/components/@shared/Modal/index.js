@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "./style.css";
 
-const Modal = ({ isVisible, children, close }) => {
+const Modal = ({ children, isVisible, close }) => {
   const onModalClick = ({ target, currentTarget }) => {
     if (target === currentTarget) {
       close();
@@ -23,6 +23,7 @@ const Modal = ({ isVisible, children, close }) => {
 export default Modal;
 
 Modal.propTypes = {
-  children: PropTypes.element,
-  close: PropTypes.func,
+  children: PropTypes.element.isRequired,
+  isVisible: PropTypes.bool.isRequired,
+  close: PropTypes.func.isRequired,
 };

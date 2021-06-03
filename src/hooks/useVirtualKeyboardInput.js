@@ -5,12 +5,10 @@ const useVirtualKeyboardInput = ({
   maxLength,
   onInputFullfilled,
 }) => {
-  const [virtualKeyboardInput, setVirtualKeyboardInput] = useState(
-    initialValue
-  );
+  const [currentInput, setCurrentInput] = useState(initialValue);
 
   const insertInputChar = (value) => {
-    setVirtualKeyboardInput((prevValue) => {
+    setCurrentInput((prevValue) => {
       const newValue = prevValue + value;
 
       if (newValue.length > maxLength) {
@@ -23,15 +21,13 @@ const useVirtualKeyboardInput = ({
 
       return newValue;
     });
-
-    return true;
   };
 
   const deleteInputChar = () => {
-    setVirtualKeyboardInput((prevValue) => prevValue.replace(/\d$/, ""));
+    setCurrentInput((prevValue) => prevValue.replace(/\d$/, ""));
   };
 
-  return [virtualKeyboardInput, insertInputChar, deleteInputChar];
+  return { currentInput, insertInputChar, deleteInputChar };
 };
 
 export default useVirtualKeyboardInput;
