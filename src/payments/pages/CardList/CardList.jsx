@@ -4,12 +4,15 @@ import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
 import CardShape from "../../components/Card/CardShape";
 
-const CardList = ({ cardInfosList, onAddCardClick }) => (
+const CardList = ({ cardInfos, onAddCardClick }) => (
   <>
     <Header title="보유카드" />
-    <div className="flex flex-col items-center space-y-16">
-      {cardInfosList.map(({ id, bank, backgroundColor, cardNumbers, expirationDate, ownerName }) => (
-        <Card key={id} isRegistered {...{ bank, backgroundColor, cardNumbers, expirationDate, ownerName }} />
+    <div className="flex flex-col items-center">
+      {cardInfos.map(({ id, bank, backgroundColor, cardNumbers, expirationDate, ownerName, nickname }) => (
+        <React.Fragment key={id}>
+          <Card isRegistered {...{ bank, backgroundColor, cardNumbers, expirationDate, ownerName }} />
+          <p className="mb-6 mt-3 text-sm font-medium">{nickname}</p>
+        </React.Fragment>
       ))}
       <CardShape onClick={onAddCardClick} />
     </div>
@@ -17,7 +20,7 @@ const CardList = ({ cardInfosList, onAddCardClick }) => (
 );
 
 CardList.propTypes = {
-  cardInfosList: PropTypes.arrayOf(PropTypes.shape(Card.propTypes)).isRequired,
+  cardInfos: PropTypes.arrayOf(PropTypes.shape(Card.propTypes)).isRequired,
   onAddCardClick: PropTypes.func.isRequired,
 };
 

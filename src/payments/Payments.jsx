@@ -1,39 +1,47 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { throwError, PAGE } from "../@shared/utils";
 import CardAddForm from "./pages/CardAddForm/CardAddForm";
 import CardConfirm from "./pages/CardConfirm/CardConfirm";
 import CardList from "./pages/CardList/CardList";
+import paymentsReducer, { addNewCardInfo, editCardInfo, movePage } from "./PaymentReducer";
 
-let index = -1;
+const initialState = {
+  page: PAGE.CARD_LIST,
+  cardInfos: [],
+};
 
 const Payments = () => {
-  const [currentPage, setCurrentPage] = useState(PAGE.CARD_LIST);
-  const [newCardInfo, setNewCardInfo] = useState(null);
-  const [cardInfosList, setCardInfosList] = useState([]);
+  const [state, dispatch] = useReducer(paymentsReducer, initialState);
 
   const addCardInfo = cardInfo => {
-    index += 1;
-
-    setNewCardInfo({ ...cardInfo, id: index });
-    setCurrentPage(PAGE.CARD_CONFIRM);
-    setCardInfosList([...cardInfosList, cardInfo]);
+    dispatch(addNewCardInfo(cardInfo));
+    dispatch(movePage(PAGE.CARD_CONFIRM));
   };
 
-  const handleBackButtonClick = () => setCurrentPage(PAGE.CARD_LIST);
+  const editNewCardInfo = ({ id, cardInfo }) => {
+    dispatch(editCardInfo({ id, cardInfo }));
+    dispatch(movePage(PAGE.CARD_LIST));
+  };
 
-  const handleConfirmClick = () => setCurrentPage(PAGE.CARD_LIST);
+  const moveToCardListPage = () => {
+    dispatch(movePage(PAGE.CARD_LIST));
+  };
 
-  const handleAddCardClick = () => setCurrentPage(PAGE.CARD_ADD_FORM);
+  const moveToCardAddForm = () => {
+    dispatch(movePage(PAGE.CARD_ADD_FORM));
+  };
 
-  switch (currentPage) {
+  const { page, cardInfos } = state;
+
+  switch (page) {
     case PAGE.CARD_ADD_FORM:
-      return <CardAddForm addCardInfo={addCardInfo} onBackButtonClick={handleBackButtonClick} />;
+      return <CardAddForm addCardInfo={addCardInfo} onBackButtonClick={moveToCardListPage} />;
     case PAGE.CARD_CONFIRM:
-      return <CardConfirm cardInfo={newCardInfo} onConfirmClick={handleConfirmClick} />;
+      return <CardConfirm cardInfo={[...cardInfos].pop()} editCardInfo={editNewCardInfo} />;
     case PAGE.CARD_LIST:
-      return <CardList cardInfosList={cardInfosList} onAddCardClick={handleAddCardClick} />;
+      return <CardList cardInfos={cardInfos} onAddCardClick={moveToCardAddForm} />;
     default:
-      return throwError(`Invalid Page: ${String(currentPage)}`);
+      return throwError(`Invalid Page: ${String(page)}`);
   }
 };
 
