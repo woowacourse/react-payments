@@ -1,8 +1,8 @@
 import "./style.css";
-import "../style/background.css";
+import "../@style/background.css";
 import React from "react";
 import PropTypes from "prop-types";
-import Radio from "../Radio";
+import Radio from "../@shared/Radio";
 
 const CardTypeRadio = ({
   cardType,

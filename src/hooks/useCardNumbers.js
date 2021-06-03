@@ -26,9 +26,8 @@ const calculateProperSelectionLocation = (curSelection) => {
 const useCardNumbers = (initialCardNumbers) => {
   const [cardNumbers, setCardNumbers] = useState(initialCardNumbers);
   const [inputSelectionStart, setInputSelectionStart] = useState(0);
+  const [isCardNumbersFullfilled, setIsCardNumbersFullFilled] = useState(false);
   const cardNumbersInputRef = useRef();
-
-  //input의 selectionStart
 
   useEffect(() => {
     cardNumbersInputRef?.current?.setSelectionRange(
@@ -36,6 +35,16 @@ const useCardNumbers = (initialCardNumbers) => {
       inputSelectionStart
     );
   }, [inputSelectionStart, cardNumbers]);
+
+  useEffect(() => {
+    const isFullfilled = [...Array(CARD_NUMBER.LENGTH)]
+      .map(
+        (_, index) => cardNumbers[index]?.length === CARD_NUMBER.PARTIAL_LENGTH
+      )
+      .every((value) => value === true);
+
+    setIsCardNumbersFullFilled(isFullfilled);
+  }, [cardNumbers]);
 
   const onCardNumbersChange = (event) => {
     const { value: inputString, selectionStart } = event.target;
@@ -74,19 +83,11 @@ const useCardNumbers = (initialCardNumbers) => {
     setInputSelectionStart(calculateProperSelectionLocation(selectionStart));
   };
 
-  const verifyCardNumberInputsFullFilled = () => {
-    return [...Array(CARD_NUMBER.LENGTH)]
-      .map(
-        (_, index) => cardNumbers[index]?.length === CARD_NUMBER.PARTIAL_LENGTH
-      )
-      .every((value) => value === true);
-  };
-
   return [
     cardNumbers,
     cardNumbersInputRef,
     onCardNumbersChange,
-    verifyCardNumberInputsFullFilled,
+    isCardNumbersFullfilled,
   ];
 };
 

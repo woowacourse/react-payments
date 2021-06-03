@@ -1,5 +1,5 @@
 import "./style.css";
-import Input from "../Input";
+import Input from "../@shared/Input";
 
 const VirtualKeyboardInput = ({ isCenter, value }) => {
   return (

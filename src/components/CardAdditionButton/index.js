@@ -1,4 +1,4 @@
-import "../style/background.css";
+import "../@style/background.css";
 import "./style.css";
 import PropTypes from "prop-types";
 import { CARD_SIZE } from "../../constants";
