@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useContext, useState } from 'react';
 import * as Styled from './style.js';
 import { Card } from '../../../Card';
 import { NickNameForm } from '../../../InputForm/NickNameForm';
+import { PaymentContext } from '../../../../contexts/PaymentContextProvider.js';
 
 /**
  * Primary UI component for user interaction
@@ -21,7 +21,8 @@ const birds = [
   '느시',
 ];
 
-export const CardRegistered = ({ card, setCurrentPage, registerCard }) => {
+export const CardRegistered = () => {
+  const { card, setCurrentPage, registerCard } = useContext(PaymentContext);
   const { company, numbers, owner, validDay } = card;
   const [nickName, setNickName] = useState(
     `${owner ? owner : birds[Math.floor(Math.random() * 11)]}의 ${company}카드`
@@ -40,7 +41,7 @@ export const CardRegistered = ({ card, setCurrentPage, registerCard }) => {
 
   return (
     <>
-      <Styled.MessageContainer>{'카드 등록이 완료되었습니다.'}</Styled.MessageContainer>
+      <Styled.MessageContainer>{'카드의 닉네임을 입력해주세요.'}</Styled.MessageContainer>
       <Styled.CardPreviewContainer>
         <Card
           size={'large'}
@@ -59,7 +60,3 @@ export const CardRegistered = ({ card, setCurrentPage, registerCard }) => {
     </>
   );
 };
-
-// CardCreateForm.propTypes = {};
-
-// CardCreateForm.defaultProps = {};

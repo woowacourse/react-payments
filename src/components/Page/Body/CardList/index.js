@@ -1,14 +1,16 @@
-// import PropTypes from 'prop-types';
 import * as Styled from './style.js';
-import PropTypes from 'prop-types';
 import { CardItem } from './CardItem';
 import { CardButton } from '../../../Button/CardButton';
+import { useContext } from 'react';
+import { PaymentContext } from '../../../../contexts/PaymentContextProvider';
 
 /**
  * Primary UI component for user interaction
  */
 
-export const CardList = ({ cards, setCurrentPage }) => {
+export const CardList = () => {
+  const { cards, setCurrentPage } = useContext(PaymentContext);
+
   return (
     <Styled.Container>
       <Styled.CardListContainer>
@@ -26,9 +28,3 @@ export const CardList = ({ cards, setCurrentPage }) => {
     </Styled.Container>
   );
 };
-
-CardList.propTypes = {
-  cards: PropTypes.array,
-};
-
-CardList.defaultProps = {};

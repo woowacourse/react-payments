@@ -1,17 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import * as Styled from './style.js';
 import { Card } from '../../../Card';
 import { CardCreateForm } from '../../../InputForm/CardCreateForm';
 import { Modal } from '../../../Modal';
 import { CardCompanyList } from '../../../Modal/ModalBody/CardCompanyList';
 import { isEnglishTextType, isNumberType, isValidDateType } from '../../../../utils/validators.js';
+import { PaymentContext } from '../../../../contexts/PaymentContextProvider';
 
 /**
  * Primary UI component for user interaction
  */
 
-export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
+export const CardRegister = () => {
+  const { setCurrentPage, updateCardContent } = useContext(PaymentContext);
+
   const [company, setCompany] = useState('');
   const [numbers, setNumbers] = useState({
     first: '',
@@ -299,7 +301,3 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
     </>
   );
 };
-
-// CardCreateForm.propTypes = {};
-
-// CardCreateForm.defaultProps = {};
