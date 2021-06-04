@@ -1,5 +1,5 @@
 import "./style.css";
-import { useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { URL } from "../constants";
 import { Header } from "../components";
 import CardAddition from "./CardAddition";
@@ -7,6 +7,7 @@ import CompleteCardAddition from "./CompleteCardAddition";
 import MyCardList from "./MyCardList";
 import { Route, Switch, useHistory, useLocation } from "react-router";
 import { QUERY_STRING_KEY } from "../constants.js";
+import { CardAdditionContext } from "../context/CardAdditionContext";
 
 const App = () => {
   const [cardList, setCardList] = useState([]);
@@ -17,7 +18,7 @@ const App = () => {
     history.replace(url);
   };
 
-  const onNewCardAdd = (card) => {
+  const addNewCard = (card) => {
     const newCard = { cardDescription: null, ...card };
 
     setCardList((prevCardList) => [...prevCardList, newCard]);
@@ -59,6 +60,10 @@ const App = () => {
     },
   };
 
+  const CardAdditionContextValue = useRef({
+    addNewCard,
+  });
+
   return (
     <div className="app">
       <Header
@@ -72,7 +77,11 @@ const App = () => {
           </Route>
 
           <Route exact path={URL.CARD_ADDITION}>
-            <CardAddition onNewCardAdd={onNewCardAdd} />
+            <CardAdditionContext.Provider
+              value={CardAdditionContextValue.current}
+            >
+              <CardAddition />
+            </CardAdditionContext.Provider>
           </Route>
 
           <Route exact path={URL.COMPLETE_CARD_ADDITION}>
