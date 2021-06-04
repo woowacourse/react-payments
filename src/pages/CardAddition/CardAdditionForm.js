@@ -99,7 +99,6 @@ const CardAdditionForm = ({
     onNewCardSubmit(card);
   };
 
-  //TODO: onClick 내부 바깥으로 빼기
   return (
     <form onSubmit={onCardInfoSubmit} className="card-addition__form">
       <div className="card-addition">
@@ -126,6 +125,7 @@ const CardAdditionForm = ({
           />
         </label>
       </div>
+
       <div className="card-addition__expiration-input mt-standard">
         <label>
           <span>만료일</span>
@@ -140,6 +140,7 @@ const CardAdditionForm = ({
           />
         </label>
       </div>
+
       <div className="card-addition__username-input mt-standard">
         <label>
           <span>카드 소유자 이름(선택)</span>
@@ -157,6 +158,7 @@ const CardAdditionForm = ({
           />
         </label>
       </div>
+
       <div className="card-addition__secure-code mt-standard">
         <label>
           <span>보안 코드(CVC/CVV)</span>
@@ -178,6 +180,7 @@ const CardAdditionForm = ({
           </div>
         </label>
       </div>
+
       <div className="card-addition__password mt-standard">
         <label>
           <span>카드비밀번호</span>
