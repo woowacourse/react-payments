@@ -1,42 +1,40 @@
 import "./style.css";
 import React from "react";
 import PropTypes from "prop-types";
-import { VIRTUAL_KEYBOARD_DELETION_INPUT } from "../../constants";
 import CardAdditionForm from "./CardAdditionForm";
-import { useModal } from "../../hooks";
+import { useModalInterface } from "../../hooks";
 import VirtualKeyboardModal from "../../components/VirtualKeyboardModal";
 import CardTypeSelectionModal from "../../components/CardTypeSelectionModal";
+import { CARD } from "../../constants";
 
 const CardAddition = ({ onNewCardAdd }) => {
-  //TODO: modalInterface로 바꾸기
-  const cardTypeSelectionModal = useModal({
-    cardType: null,
+  const cardTypeSelectionModalInterface = useModalInterface({
+    cardType: CARD.UNKNOWN,
   });
-  const virtualKeyboardModal = useModal({
-    targetInput: null,
-    virtualKeyboardInput: VIRTUAL_KEYBOARD_DELETION_INPUT,
+  const virtualKeyboardModalInterface = useModalInterface({
+    targetInput: "",
+    charInsertion: "",
+    charDeletion: false,
   });
 
-  //TODO: virtual 키보드가 현재 타겟변수를 내려받도록 수정하기
-  //TODO: form이 onSubmit을 받도록 수정
   return (
     <>
       <CardAdditionForm
         onNewCardSubmit={onNewCardAdd}
-        virtualKeyboardModal={virtualKeyboardModal}
-        cardTypeSelectionModal={cardTypeSelectionModal}
+        cardTypeSelectionModalInterface={cardTypeSelectionModalInterface}
+        virtualKeyboardModalInterface={virtualKeyboardModalInterface}
       />
 
       <CardTypeSelectionModal
-        isVisible={cardTypeSelectionModal.isModalVisible}
-        close={cardTypeSelectionModal.closeModal}
-        dataPassage={cardTypeSelectionModal.dataPassage}
+        isVisible={cardTypeSelectionModalInterface.isModalVisible}
+        close={cardTypeSelectionModalInterface.closeModal}
+        dataPassage={cardTypeSelectionModalInterface.dataPassage}
       />
 
       <VirtualKeyboardModal
-        isVisible={virtualKeyboardModal.isModalVisible}
-        close={virtualKeyboardModal.closeModal}
-        dataPassage={virtualKeyboardModal.dataPassage}
+        isVisible={virtualKeyboardModalInterface.isModalVisible}
+        close={virtualKeyboardModalInterface.closeModal}
+        dataPassage={virtualKeyboardModalInterface.dataPassage}
       />
     </>
   );

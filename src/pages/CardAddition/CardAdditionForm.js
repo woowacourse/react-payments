@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import {
   CARD_NUMBER,
   EXPIRATION_DATE,
@@ -6,103 +5,59 @@ import {
   PASSWORD_INPUT_LENGTH,
   SECURE_CODE_LENGTH,
   USERNAME,
-  VIRTUAL_KEYBOARD_DELETION_INPUT,
   VIRTUAL_KEYBOARD_TARGET_INPUT,
 } from "../../constants";
 import {
-  useCardNumbers,
-  useControlledInputValue,
-  useExpirationDate,
-  useVirtualKeyboardInput,
+  useCardNumbersInput,
+  useControlledInput,
+  useExpirationDateInput,
+  useModalCardTypeInput,
+  useModalVirtualKeyboardInput,
 } from "../../hooks";
 import { getNewId } from "../../utils";
 import { Button, Card, Input, VirtualKeyboardInput } from "../../components";
 import { CARD, CARD_SIZE } from "../../constants";
 import PropTypes from "prop-types";
 
-const formatCardNumbers = (numbers) => {
-  const [...firstTwoNumbers] = numbers.slice(0, 2);
-  const [...secondTwoNumbers] = numbers.slice(2);
-
-  const hiddenNumbers = secondTwoNumbers.map((value) =>
-    FORMAT_CHAR.HIDDEN_NUMBER.repeat(value.length)
-  );
-
-  return [...firstTwoNumbers, ...hiddenNumbers]
-    .map((number) => (number ? number : ""))
-    .join(FORMAT_CHAR.CARD_NUMBERS_SEPARATOR);
-};
-
 const CardAdditionForm = ({
   onNewCardSubmit,
-  virtualKeyboardModal,
-  cardTypeSelectionModal,
+  cardTypeSelectionModalInterface,
+  virtualKeyboardModalInterface,
 }) => {
-  const [
-    cardNumbers,
-    cardNumbersInputRef,
-    onCardNumbersChange,
-    isCardNumbersFullfilled,
-  ] = useCardNumbers([]);
-  const [cardType, setCardType] = useState(CARD.UNKNOWN);
-  const [expirationDate, onExpirationDateChange] = useExpirationDate("");
-  const [username, onUsernameChange] = useControlledInputValue("");
-  //TODO: secureCodeKeyboard로 이름바꾸기
-  const secureCode = useVirtualKeyboardInput({
-    initialValue: "",
+  const cardNumbersInput = useCardNumbersInput({
+    onCardNumbersFullfilled: cardTypeSelectionModalInterface.openModal,
+  });
+  const cardTypeInput = useModalCardTypeInput({
+    modalInterface: cardTypeSelectionModalInterface,
+  });
+  const expirationDateInput = useExpirationDateInput("");
+  const usernameInput = useControlledInput("");
+  const secureCodeInput = useModalVirtualKeyboardInput({
+    targetInputType: VIRTUAL_KEYBOARD_TARGET_INPUT.SECURE_CODE,
     maxLength: SECURE_CODE_LENGTH,
-    onInputFullfilled: () => {
-      virtualKeyboardModal.closeModal();
-    },
+    modalInterface: virtualKeyboardModalInterface,
   });
-
-  const firstPassword = useVirtualKeyboardInput({
-    initialValue: "",
+  const firstPasswordInput = useModalVirtualKeyboardInput({
+    targetInputType: VIRTUAL_KEYBOARD_TARGET_INPUT.FIRST_PASSWORD,
     maxLength: PASSWORD_INPUT_LENGTH,
-    onInputFullfilled: () => {
-      virtualKeyboardModal.closeModal();
-    },
+    modalInterface: virtualKeyboardModalInterface,
   });
-
-  const secondPassword = useVirtualKeyboardInput({
-    initialValue: "",
+  const secondPasswordInput = useModalVirtualKeyboardInput({
+    targetInputType: VIRTUAL_KEYBOARD_TARGET_INPUT.SECOND_PASSWORD,
     maxLength: PASSWORD_INPUT_LENGTH,
-    onInputFullfilled: () => {
-      virtualKeyboardModal.closeModal();
-    },
+    modalInterface: virtualKeyboardModalInterface,
   });
-
-  const onCardInfoSubmit = (event) => {
-    event.preventDefault();
-
-    if (cardType.name === CARD.UNKNOWN.name) {
-      alert("카드 회사를 선택해주세요.");
-      return;
-    }
-
-    const card = {
-      cardId: getNewId(),
-      cardType,
-      cardNumbers,
-      expirationDate,
-      username,
-      secureCode: secureCode.currentInput,
-      firstPassword: firstPassword.currentInput,
-      secondPassword: secondPassword.currentInput,
-    };
-
-    onNewCardSubmit(card);
-  };
 
   const isAllInputFulfilled = () => {
-    const cardNumbersCondition = isCardNumbersFullfilled;
+    const cardNumbersCondition = cardNumbersInput.isFullfilled;
     const expirationDateCondition =
-      expirationDate.length ===
+      expirationDateInput.value.length ===
       EXPIRATION_DATE.LENGTH + FORMAT_CHAR.EXPIRATION_DATE_SEPARATOR.length;
-    const usernameCondition = username.length >= USERNAME.MIN_LENGTH;
+    const usernameCondition = usernameInput.value.length >= USERNAME.MIN_LENGTH;
     const secureCodeCondition =
-      secureCode.currentInput.length === SECURE_CODE_LENGTH;
-    const passwordCondition = firstPassword && secondPassword;
+      secureCodeInput.value.length === SECURE_CODE_LENGTH;
+    const passwordCondition =
+      firstPasswordInput.value && secondPasswordInput.value;
 
     return (
       cardNumbersCondition &&
@@ -113,59 +68,38 @@ const CardAdditionForm = ({
     );
   };
 
-  useEffect(() => {
-    if (!isCardNumbersFullfilled) {
+  const onCardInfoSubmit = (event) => {
+    event.preventDefault();
+
+    if (cardTypeInput.value.name === CARD.UNKNOWN.name) {
+      alert("카드 회사를 선택해주세요.");
       return;
     }
 
-    cardTypeSelectionModal.openModal();
-  }, [isCardNumbersFullfilled]);
-
-  useEffect(() => {
-    const {
-      dataPassage: {
-        data: { cardType },
-      },
-    } = cardTypeSelectionModal;
-
-    if (!cardType) {
-      return;
-    }
-
-    setCardType(cardType);
-  }, [cardTypeSelectionModal.dataPassage.data.cardType]);
-
-  useEffect(() => {
-    const {
-      dataPassage: {
-        data: { targetInput, virtualKeyboardInput },
-      },
-    } = virtualKeyboardModal;
-
-    const virtualKeyboardMap = {
-      secureCode,
-      firstPassword,
-      secondPassword,
+    const card = {
+      cardId: getNewId(),
+      cardType: cardTypeInput.value,
+      cardNumbers: cardNumbersInput.value,
+      expirationDate: expirationDateInput.value,
+      username: usernameInput.value,
+      secureCode: secureCodeInput.value,
+      firstPassword: firstPasswordInput.value,
+      secondPassword: secondPasswordInput.value,
     };
 
-    if (virtualKeyboardInput === VIRTUAL_KEYBOARD_DELETION_INPUT) {
-      virtualKeyboardMap[targetInput]?.deleteInputChar();
-      return;
-    }
-
-    virtualKeyboardMap[targetInput]?.insertInputChar(virtualKeyboardInput);
-  }, [virtualKeyboardModal.dataPassage.data.virtualKeyboardInput]);
+    onNewCardSubmit(card);
+  };
 
   //TODO: onClick 내부 바깥으로 빼기
   return (
     <form onSubmit={onCardInfoSubmit} className="card-addition__form">
       <div className="card-addition">
         <Card
-          cardType={cardType}
+          cardType={cardTypeInput.value}
           size={CARD_SIZE.MEDIUM}
-          expirationDate={expirationDate}
-          username={username}
-          cardNumbers={cardNumbers}
+          expirationDate={expirationDateInput.value}
+          username={usernameInput.value}
+          cardNumbers={cardNumbersInput.value}
         />
       </div>
 
@@ -175,9 +109,9 @@ const CardAdditionForm = ({
           <Input
             type="text"
             isCenter={true}
-            value={formatCardNumbers(cardNumbers)}
-            onChange={onCardNumbersChange}
-            ref={cardNumbersInputRef}
+            value={cardNumbersInput.formattedValue}
+            onChange={cardNumbersInput.onChange}
+            ref={cardNumbersInput.ref}
             maxLength={CARD_NUMBER.FORMATTED_LENGTH}
             required
           />
@@ -190,8 +124,8 @@ const CardAdditionForm = ({
             type="text"
             isCenter={true}
             placeHolder="MM / YY"
-            value={expirationDate}
-            onChange={onExpirationDateChange}
+            value={expirationDateInput.value}
+            onChange={expirationDateInput.onChange}
             maxLength={EXPIRATION_DATE.FORMATTED_LENGTH}
             required
           />
@@ -201,13 +135,13 @@ const CardAdditionForm = ({
         <label>
           <span>카드 소유자 이름(선택)</span>
           <span className="card-addition__username-indicator">
-            {username.length}/30
+            {usernameInput.value.length}/30
           </span>
           <Input
             type="text"
             placeHolder="카드에 표시된 이름과 동일하게 입력하세요"
-            value={username}
-            onChange={onUsernameChange}
+            value={usernameInput.value}
+            onChange={usernameInput.onChange}
             maxLength={USERNAME.MAX_LENGTH}
             minLength={USERNAME.MIN_LENGTH}
             required
@@ -220,17 +154,17 @@ const CardAdditionForm = ({
           <div className="card-addition__secure-code-inner">
             <div
               onClick={() => {
-                virtualKeyboardModal.dataPassage.passData(
+                virtualKeyboardModalInterface.dataPassage.passData(
                   "targetInput",
                   VIRTUAL_KEYBOARD_TARGET_INPUT.SECURE_CODE
                 );
-                virtualKeyboardModal.openModal();
+                virtualKeyboardModalInterface.openModal();
               }}
             >
               <VirtualKeyboardInput
                 type="password"
                 isCenter={true}
-                value={secureCode.currentInput}
+                value={secureCodeInput.value}
               />
             </div>
             <div className="card-addition__tool-tip-button">
@@ -247,36 +181,36 @@ const CardAdditionForm = ({
           <div
             className="card-addition__password-inner__password"
             onClick={() => {
-              virtualKeyboardModal.dataPassage.passData(
+              virtualKeyboardModalInterface.dataPassage.passData(
                 "targetInput",
                 VIRTUAL_KEYBOARD_TARGET_INPUT.FIRST_PASSWORD
               );
-              virtualKeyboardModal.openModal();
+              virtualKeyboardModalInterface.openModal();
             }}
           >
             <VirtualKeyboardInput
               type="password"
               isCenter={true}
               aria-label="첫번째 비밀번호"
-              value={firstPassword.currentInput}
+              value={firstPasswordInput.value}
               required
             />
           </div>
           <div
             className="card-addition__password-inner__password"
             onClick={() => {
-              virtualKeyboardModal.dataPassage.passData(
+              virtualKeyboardModalInterface.dataPassage.passData(
                 "targetInput",
                 VIRTUAL_KEYBOARD_TARGET_INPUT.SECOND_PASSWORD
               );
-              virtualKeyboardModal.openModal();
+              virtualKeyboardModalInterface.openModal();
             }}
           >
             <VirtualKeyboardInput
               type="password"
               isCenter={true}
               aria-label="두번째 비밀번호"
-              value={secondPassword.currentInput}
+              value={secondPasswordInput.value}
               required
             />
           </div>
@@ -298,7 +232,8 @@ const CardAdditionForm = ({
 };
 
 CardAdditionForm.propTypes = {
-  virtualKeyboardModal: PropTypes.shape({
+  onNewCardSubmit: PropTypes.func.isRequired,
+  virtualKeyboardModalInterface: PropTypes.shape({
     openModal: PropTypes.func.isRequired,
     closeModal: PropTypes.func.isRequired,
     dataPassage: PropTypes.shape({
@@ -306,7 +241,7 @@ CardAdditionForm.propTypes = {
       passData: PropTypes.func.isRequired,
     }).isRequired,
   }),
-  cardTypeSelectionModal: PropTypes.shape({
+  cardTypeSelectionModalInterface: PropTypes.shape({
     openModal: PropTypes.func.isRequired,
     closeModal: PropTypes.func.isRequired,
     dataPassage: PropTypes.shape({
@@ -314,7 +249,6 @@ CardAdditionForm.propTypes = {
       passData: PropTypes.func.isRequired,
     }).isRequired,
   }),
-  onNewCardAdd: PropTypes.func.isRequired,
 };
 
 export default CardAdditionForm;

@@ -70,7 +70,7 @@ CompleteCardAddition.propTypes = {
     username: PropTypes.string.isRequired,
     secureCode: PropTypes.string.isRequired,
     password: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
+  }),
 };
 
 export default CompleteCardAddition;

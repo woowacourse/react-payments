@@ -1,7 +1,20 @@
 import { useEffect, useRef, useState } from "react";
-import { CARD_NUMBER, FORMAT_CHAR } from "../constants";
+import { CARD_NUMBER, FORMAT_CHAR } from "../../constants";
+import { isNumberValue } from "../../utils";
+import PropTypes from "prop-types";
 
-import { isNumberValue } from "../utils";
+const formatCardNumbers = (numbers) => {
+  const [...firstTwoNumbers] = numbers.slice(0, 2);
+  const [...secondTwoNumbers] = numbers.slice(2);
+
+  const hiddenNumbers = secondTwoNumbers.map((value) =>
+    FORMAT_CHAR.HIDDEN_NUMBER.repeat(value.length)
+  );
+
+  return [...firstTwoNumbers, ...hiddenNumbers]
+    .map((number) => (number ? number : ""))
+    .join(FORMAT_CHAR.CARD_NUMBERS_SEPARATOR);
+};
 
 const unformatCardNumbers = (formattedValue) => {
   return formattedValue.replace(FORMAT_CHAR.CARD_NUMBERS_SEPARATOR_REG, "");
@@ -23,28 +36,14 @@ const calculateProperSelectionLocation = (curSelection) => {
   return isSelectionValid ? curSelection : curSelection + (mod - remainder + 1);
 };
 
-const useCardNumbers = (initialCardNumbers) => {
+const useCardNumbersInput = ({
+  initialCardNumbers = [],
+  onCardNumbersFullfilled = () => {},
+}) => {
   const [cardNumbers, setCardNumbers] = useState(initialCardNumbers);
   const [inputSelectionStart, setInputSelectionStart] = useState(0);
   const [isCardNumbersFullfilled, setIsCardNumbersFullFilled] = useState(false);
   const cardNumbersInputRef = useRef();
-
-  useEffect(() => {
-    cardNumbersInputRef?.current?.setSelectionRange(
-      inputSelectionStart,
-      inputSelectionStart
-    );
-  }, [inputSelectionStart, cardNumbers]);
-
-  useEffect(() => {
-    const isFullfilled = [...Array(CARD_NUMBER.LENGTH)]
-      .map(
-        (_, index) => cardNumbers[index]?.length === CARD_NUMBER.PARTIAL_LENGTH
-      )
-      .every((value) => value === true);
-
-    setIsCardNumbersFullFilled(isFullfilled);
-  }, [cardNumbers]);
 
   const onCardNumbersChange = (event) => {
     const { value: inputString, selectionStart } = event.target;
@@ -83,12 +82,43 @@ const useCardNumbers = (initialCardNumbers) => {
     setInputSelectionStart(calculateProperSelectionLocation(selectionStart));
   };
 
-  return [
-    cardNumbers,
-    cardNumbersInputRef,
-    onCardNumbersChange,
-    isCardNumbersFullfilled,
-  ];
+  useEffect(() => {
+    cardNumbersInputRef?.current?.setSelectionRange(
+      inputSelectionStart,
+      inputSelectionStart
+    );
+  }, [inputSelectionStart, cardNumbers]);
+
+  useEffect(() => {
+    const isFullfilled = [...Array(CARD_NUMBER.LENGTH)]
+      .map(
+        (_, index) => cardNumbers[index]?.length === CARD_NUMBER.PARTIAL_LENGTH
+      )
+      .every((value) => value === true);
+
+    setIsCardNumbersFullFilled(isFullfilled);
+  }, [cardNumbers]);
+
+  useEffect(() => {
+    if (!isCardNumbersFullfilled) {
+      return;
+    }
+
+    onCardNumbersFullfilled();
+  }, [isCardNumbersFullfilled]);
+
+  return {
+    value: cardNumbers,
+    formattedValue: formatCardNumbers(cardNumbers),
+    ref: cardNumbersInputRef,
+    onChange: onCardNumbersChange,
+    isFullfilled: isCardNumbersFullfilled,
+  };
 };
 
-export default useCardNumbers;
+export default useCardNumbersInput;
+
+useCardNumbersInput.propTypes = {
+  initialCardNumbers: PropTypes.array,
+  onCardNumbersFullfilled: PropTypes.func,
+};
