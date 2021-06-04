@@ -34,7 +34,7 @@ const SerialNumberInput = ({ number, company, setInput, onSetModalContents, forw
     return 0;
   };
 
-  const getCurrentSerialNumber = {
+  const currentSerialNumberByInputType = {
     deleteContentBackward: (serialIndex) => {
       return number.slice(0, serialIndex - 1) + number.slice(serialIndex);
     },
@@ -65,7 +65,7 @@ const SerialNumberInput = ({ number, company, setInput, onSetModalContents, forw
         currentLocation -
         Math.floor(currentLocation / (CARD.SERIAL_NUMBER_UNIT_LENGTH + 1)) -
         offsetByInputType[inputType];
-      const currentSerialNumber = getCurrentSerialNumber[inputType](serialIndex, inputKey);
+      const currentSerialNumber = currentSerialNumberByInputType[inputType](serialIndex, inputKey);
       const value = cardSerialNumberFormatter(currentSerialNumber);
 
       event.target.value = value;
