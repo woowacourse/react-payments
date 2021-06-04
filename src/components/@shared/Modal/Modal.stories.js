@@ -12,5 +12,6 @@ const Template = (args) => <Modal {...args} />;
 export const Basic = Template.bind({});
 
 Basic.args = {
+  isVisible: true,
   children: <div>hello</div>,
 };

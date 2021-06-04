@@ -1,8 +1,9 @@
+import { useRef } from "react";
 import { shuffle } from "../../utils";
 import "./style.css";
 
 const VirtualKeyboard = ({ insertInputChar, deleteInputChar }) => {
-  const keyInputs = [
+  const keyInputs = useRef([
     { value: "1", key: 1 },
     { value: "2", key: 2 },
     { value: "3", key: 3 },
@@ -15,24 +16,24 @@ const VirtualKeyboard = ({ insertInputChar, deleteInputChar }) => {
     { value: "0", key: 10 },
     { value: "", key: 11 },
     { value: "", key: 12 },
-  ];
-
-  shuffle(keyInputs);
+  ]);
 
   const onNumberClick = ({ target }) => {
     const value = target.dataset.number;
 
     insertInputChar(value);
+    shuffle(keyInputs.current);
   };
 
   const onDeletionClick = () => {
     deleteInputChar();
+    shuffle(keyInputs.current);
   };
 
   return (
     <>
       <div className="virtual-keyboard">
-        {keyInputs.map((keyInput) => (
+        {keyInputs.current.map((keyInput) => (
           <button
             key={keyInput.key}
             className={`key-input ${keyInput.value || "visible-none"}`}
