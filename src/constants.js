@@ -114,6 +114,7 @@ export const VIRTUAL_KEYBOARD_TARGET_INPUT = {
 };
 
 export const MODAL_DATA_KEY = {
+  TARGET_INPUT: "targetInput",
   CHAR_INSERTION: "charInsertion",
   CHAR_DELETION: "charDeletion",
 };

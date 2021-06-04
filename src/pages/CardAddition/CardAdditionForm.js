@@ -17,7 +17,7 @@ import {
 } from "../../hooks";
 import { getNewId } from "../../utils";
 import { Button, Card, Input, VirtualKeyboardInput } from "../../components";
-import { CARD, CARD_SIZE } from "../../constants";
+import { CARD, CARD_SIZE, MODAL_DATA_KEY } from "../../constants";
 import PropTypes from "prop-types";
 
 const CardAdditionForm = ({
@@ -48,6 +48,14 @@ const CardAdditionForm = ({
     maxLength: PASSWORD_INPUT_LENGTH,
     modalInterface: virtualKeyboardModalInterface,
   });
+
+  const openVirtualKeyboard = (targetInput) => () => {
+    virtualKeyboardModalInterface.dataPassage.passData(
+      MODAL_DATA_KEY.TARGET_INPUT,
+      targetInput
+    );
+    virtualKeyboardModalInterface.openModal();
+  };
 
   const isAllInputFulfilled = () => {
     const cardNumbersCondition = cardNumbersInput.isFullfilled;
@@ -154,13 +162,9 @@ const CardAdditionForm = ({
           <span>보안 코드(CVC/CVV)</span>
           <div className="card-addition__secure-code-inner">
             <div
-              onClick={() => {
-                virtualKeyboardModalInterface.dataPassage.passData(
-                  "targetInput",
-                  VIRTUAL_KEYBOARD_TARGET_INPUT.SECURE_CODE
-                );
-                virtualKeyboardModalInterface.openModal();
-              }}
+              onClick={openVirtualKeyboard(
+                VIRTUAL_KEYBOARD_TARGET_INPUT.SECURE_CODE
+              )}
             >
               <VirtualKeyboardInput
                 type="password"
@@ -181,13 +185,9 @@ const CardAdditionForm = ({
         <div className="card-addition__password-inner">
           <div
             className="card-addition__password-inner__password"
-            onClick={() => {
-              virtualKeyboardModalInterface.dataPassage.passData(
-                "targetInput",
-                VIRTUAL_KEYBOARD_TARGET_INPUT.FIRST_PASSWORD
-              );
-              virtualKeyboardModalInterface.openModal();
-            }}
+            onClick={openVirtualKeyboard(
+              VIRTUAL_KEYBOARD_TARGET_INPUT.FIRST_PASSWORD
+            )}
           >
             <VirtualKeyboardInput
               type="password"
@@ -199,13 +199,9 @@ const CardAdditionForm = ({
           </div>
           <div
             className="card-addition__password-inner__password"
-            onClick={() => {
-              virtualKeyboardModalInterface.dataPassage.passData(
-                "targetInput",
-                VIRTUAL_KEYBOARD_TARGET_INPUT.SECOND_PASSWORD
-              );
-              virtualKeyboardModalInterface.openModal();
-            }}
+            onClick={openVirtualKeyboard(
+              VIRTUAL_KEYBOARD_TARGET_INPUT.SECOND_PASSWORD
+            )}
           >
             <VirtualKeyboardInput
               type="password"
