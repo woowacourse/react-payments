@@ -31,7 +31,6 @@ const CardTypeSelectionModal = ({ isVisible, close, dataPassage }) => {
 
 export default CardTypeSelectionModal;
 
-// TODO: cardType: PropTypes.any.isRequired, -> string으로 바꾸기
 CardTypeSelectionModal.propTypes = {
   isVisible: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,

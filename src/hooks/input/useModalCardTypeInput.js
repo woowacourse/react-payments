@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PropType from "prop-types";
 import { CARD } from "../../constants";
+import useEffectAfterInitialize from "../@shared/useEffectAfterInitialize";
 
 const useModalCardTypeInput = ({ modalInterface }) => {
-  //TODO: CARD.UNKNOWN 상태 cardAddition page에도 정의되어있음, 분산되어있는거 하나라 합치기
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
 
   const {
@@ -12,7 +12,7 @@ const useModalCardTypeInput = ({ modalInterface }) => {
     },
   } = modalInterface;
 
-  useEffect(() => {
+  useEffectAfterInitialize(() => {
     if (!selectedCardType) {
       return;
     }

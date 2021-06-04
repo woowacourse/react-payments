@@ -5,15 +5,14 @@ import CardAdditionForm from "./CardAdditionForm";
 import { useModalInterface } from "../../hooks";
 import VirtualKeyboardModal from "../../components/VirtualKeyboardModal";
 import CardTypeSelectionModal from "../../components/CardTypeSelectionModal";
-import { CARD } from "../../constants";
 
 const CardAddition = ({ onNewCardAdd }) => {
   const cardTypeSelectionModalInterface = useModalInterface({
-    cardType: CARD.UNKNOWN,
+    cardType: null,
   });
   const virtualKeyboardModalInterface = useModalInterface({
-    targetInput: "",
-    charInsertion: "",
+    targetInput: null,
+    charInsertion: null,
     charDeletion: false,
   });
 
