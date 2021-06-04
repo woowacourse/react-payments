@@ -2,11 +2,11 @@ import React from "react";
 import Modal from "../@shared/Modal";
 import CardTypeRadio from "../CardTypeRadio";
 import PropTypes from "prop-types";
-import { CARD } from "../../constants";
+import { CARD, MODAL_DATA_KEY } from "../../constants";
 
 const CardTypeSelectionModal = ({ isVisible, close, dataPassage }) => {
   const onCardTypeRadioSelected = ({ target }) => {
-    dataPassage.passData("cardType", JSON.parse(target.value));
+    dataPassage.passData(MODAL_DATA_KEY.CARD_TYPE, JSON.parse(target.value));
     close();
   };
 

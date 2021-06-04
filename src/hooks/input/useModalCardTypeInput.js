@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropType from "prop-types";
 import { CARD } from "../../constants";
-import useEffectAfterInitialize from "../@shared/useEffectAfterInitialize";
+import { useEffectAfterInitialize } from "..";
 
 const useModalCardTypeInput = ({ modalInterface }) => {
   const [cardType, setCardType] = useState(CARD.UNKNOWN);
