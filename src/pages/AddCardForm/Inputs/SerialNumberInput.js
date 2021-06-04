@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input } from '../../../components';
-import { CARD } from '../../../constants';
+import { CARD, ERROR_MESSAGE } from '../../../constants';
 import useCheckValidity from '../../../hooks/useCheckValidity';
 import { cardSerialNumberFormatter } from '../../../utils/formatter';
 import { isValidSerialNumber } from './../validator';
@@ -9,7 +9,7 @@ const SerialNumberInput = ({ number, company, setInput, onSetModalContents, forw
   const [error, setError, checkValidity] = useCheckValidity(
     isValidSerialNumber,
     number,
-    '올바른 카드번호를 입력하세요'
+    ERROR_MESSAGE.INVALID_SERIAL_NUMBER
   );
 
   const offsetByInputType = {
@@ -42,7 +42,7 @@ const SerialNumberInput = ({ number, company, setInput, onSetModalContents, forw
       return number.slice(0, serialIndex) + insertKey + number.slice(serialIndex);
     },
     insertFromPaste: () => {
-      throw new Error('붙여 넣기는 할 수 없습니다.');
+      throw new Error(ERROR_MESSAGE.CANNOT_PASTE);
     },
   };
 

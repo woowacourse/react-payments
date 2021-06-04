@@ -16,7 +16,7 @@ const ExpirationDateInput = ({ expirationDate, setInput }) => {
     const inputValue = event.target.value.replace('/', '');
 
     try {
-      if (isNaN(inputValue)) throw Error('숫자만 입력가능합니다.');
+      if (isNaN(inputValue)) throw Error(ERROR_MESSAGE.ONLY_NUMBER_INPUT);
 
       const formattedDate = MMYYDateFormatter(inputValue);
       setInput('expirationDate', formattedDate);

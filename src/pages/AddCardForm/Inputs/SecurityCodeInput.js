@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Icon, Input } from '../../../components';
+import { ERROR_MESSAGE } from '../../../constants';
 
 const SecurityCodeInput = ({ securityCode, onInputChange, onSetModalContents }) => {
   const [error, setError] = useState('');
@@ -8,7 +9,7 @@ const SecurityCodeInput = ({ securityCode, onInputChange, onSetModalContents }) 
     const value = event.target.value;
 
     if (isNaN(value)) {
-      setError('숫자만 입력할 수 있습니다.');
+      setError(ERROR_MESSAGE.ONLY_NUMBER_INPUT);
       return;
     }
 
