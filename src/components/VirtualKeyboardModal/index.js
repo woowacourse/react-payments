@@ -2,14 +2,15 @@ import React from "react";
 import Modal from "../@shared/Modal";
 import VirtualKeyboard from "../VirtualKeyboard";
 import PropTypes from "prop-types";
+import { MODAL_DATA_KEY } from "../../constants";
 
 const VirtualKeyboardModal = ({ isVisible, close, dataPassage }) => {
   const transferCharInsertionToInput = (value) => {
-    dataPassage.passData("charInsertion", value);
+    dataPassage.passData(MODAL_DATA_KEY.CHAR_INSERTION, value);
   };
 
   const transferCharDeletionToInput = () => {
-    dataPassage.passData("charDeletion", true);
+    dataPassage.passData(MODAL_DATA_KEY.CHAR_DELETION, true);
   };
 
   return (
@@ -29,9 +30,9 @@ VirtualKeyboardModal.propTypes = {
   close: PropTypes.func.isRequired,
   dataPassage: PropTypes.shape({
     data: PropTypes.shape({
-      targetInput: PropTypes.string.isRequired,
-      charInsertion: PropTypes.string.isRequired,
-      charDeletion: PropTypes.bool.isRequired,
+      targetInput: PropTypes.string,
+      charInsertion: PropTypes.string,
+      charDeletion: PropTypes.bool,
     }).isRequired,
     passData: PropTypes.func.isRequired,
   }),

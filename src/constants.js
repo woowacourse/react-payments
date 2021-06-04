@@ -4,6 +4,10 @@ export const URL = {
   COMPLETE_CARD_ADDITION: "/CompleteCardAddition",
 };
 
+export const ALERT_MESSAGE = {
+  PLEASE_SELECT_CARD_CORP: "카드 회사를 선택해주세요.",
+};
+
 export const QUERY_STRING_KEY = {
   ID: "id",
 };
@@ -107,4 +111,13 @@ export const VIRTUAL_KEYBOARD_TARGET_INPUT = {
   SECURE_CODE: "secureCode",
   FIRST_PASSWORD: "firstPassword",
   SECOND_PASSWORD: "secondPassword",
+};
+
+export const MODAL_DATA_KEY = {
+  CHAR_INSERTION: "charInsertion",
+  CHAR_DELETION: "charDeletion",
+};
+
+export const MODAL_RESERVED_KEYWORD = {
+  WAIT_FOR_INSERTION: "waitForInsertion",
 };

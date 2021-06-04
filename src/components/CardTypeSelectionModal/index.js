@@ -36,7 +36,7 @@ CardTypeSelectionModal.propTypes = {
   close: PropTypes.func.isRequired,
   dataPassage: PropTypes.shape({
     data: PropTypes.shape({
-      cardType: PropTypes.any.isRequired,
+      cardType: PropTypes.any,
     }).isRequired,
     passData: PropTypes.func.isRequired,
   }),
