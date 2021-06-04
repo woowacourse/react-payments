@@ -33,7 +33,6 @@ const VirtualKeyboard = ({ insertInputChar, deleteInputChar }) => {
     <>
       <div className="virtual-keyboard">
         {keyInputs.map((keyInput) => (
-          //TODO: Button을 재활용할까...?
           <button
             key={keyInput.key}
             className={`key-input ${keyInput.value || "visible-none"}`}

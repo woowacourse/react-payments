@@ -37,7 +37,7 @@ const useModalVirtualKeyboardInput = ({
   };
 
   useEffect(() => {
-    if (charInsertion === "") {
+    if (charInsertion === "" || charInsertion === null) {
       return;
     }
 
