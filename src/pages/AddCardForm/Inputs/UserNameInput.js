@@ -30,6 +30,7 @@ const UserNameInput = ({ userName, onInputChange }) => {
       maxLength={CARD.USER_NAME_MAX_LENGTH}
       value={userName}
       onChange={onChange}
+      onBlur={() => setError('')}
       errorMessage={error}
     />
   );

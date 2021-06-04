@@ -1,15 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { CARD, CARD_COMPANY, PATH } from '../../constants';
-import {
-  Icon,
-  Card,
-  Input,
-  Header,
-  TextButton,
-  CardPasswordInput,
-  Modal,
-  Select,
-} from '../../components';
+import { Icon, Card, Header, TextButton, CardPasswordInput, Modal, Select } from '../../components';
 import { useHistory } from 'react-router-dom';
 import { CardsContext } from '../../cardsContext';
 import { idGenerator } from '../../utils/idGenerator';
@@ -17,6 +8,7 @@ import useForm from '../../hooks/useForm';
 import SerialNumberInput from './Inputs/SerialNumberInput';
 import ExpirationDateInput from './Inputs/ExpirationDateInput';
 import UserNameInput from './Inputs/UserNameInput';
+import SecurityCodeInput from './Inputs/SecurityCodeInput';
 import { ReactComponent as SecurityCodeGuide } from '../../assets/securityGuideImage.svg';
 
 const initialAddCardForm = {
@@ -38,8 +30,6 @@ export default function AddCardForm() {
     setInput,
     reset,
   ] = useForm(initialAddCardForm);
-
-  const [securityCodeErrorMessage, setSecurityCodeErrorMessage] = useState('');
 
   const serialInputElement = useRef(null);
 
@@ -127,39 +117,11 @@ export default function AddCardForm() {
         <ExpirationDateInput expirationDate={expirationDate} setInput={setInput} />
         <UserNameInput userName={userName} onInputChange={onInputChange} />
 
-        <Input
-          id="card-security-code"
-          name="securityCode"
-          type="password"
-          inputStyle={{ width: '5rem' }}
-          label="보안코드(CVC/CVV)"
-          maxLength="3"
-          inputmode="numeric"
-          value={securityCode}
-          onChange={(event) => {
-            const inputValue = event.target.value;
-
-            if (isNaN(inputValue)) {
-              setSecurityCodeErrorMessage('숫자만 입력할 수 있습니다.');
-              return;
-            }
-
-            setSecurityCodeErrorMessage('');
-            onInputChange(event);
-          }}
-          textAlign="center"
-          errorMessage={securityCodeErrorMessage}
-        >
-          <button
-            type="button"
-            className="ml-3"
-            onClick={() => {
-              onSetModalContents('questionMark');
-            }}
-          >
-            <Icon.QuestionMark size="27px" />
-          </button>
-        </Input>
+        <SecurityCodeInput
+          securityCode={securityCode}
+          onInputChange={onInputChange}
+          onSetModalContents={onSetModalContents}
+        />
 
         <CardPasswordInput
           name="password"

@@ -25,8 +25,6 @@ export default function EditCardNickname({ cards }) {
     history.push(PATH.ROOT);
   };
 
-  console.log(history);
-
   return (
     <div
       className={
