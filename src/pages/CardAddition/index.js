@@ -6,8 +6,9 @@ import { useModalInterface } from "../../hooks";
 import VirtualKeyboardModal from "../../components/VirtualKeyboardModal";
 import CardTypeSelectionModal from "../../components/CardTypeSelectionModal";
 import { MODAL_DATA_KEY } from "../../constants";
+import { CardAdditionContext } from "../../context/CardAdditionContext";
 
-const CardAddition = ({ onNewCardAdd }) => {
+const CardAddition = () => {
   const cardTypeSelectionModalInterface = useModalInterface({
     [MODAL_DATA_KEY.CARD_TYPE]: null,
   });
@@ -19,11 +20,15 @@ const CardAddition = ({ onNewCardAdd }) => {
 
   return (
     <>
-      <CardAdditionForm
-        onNewCardSubmit={onNewCardAdd}
-        cardTypeSelectionModalInterface={cardTypeSelectionModalInterface}
-        virtualKeyboardModalInterface={virtualKeyboardModalInterface}
-      />
+      <CardAdditionContext.Consumer>
+        {({ addNewCard }) => (
+          <CardAdditionForm
+            onNewCardSubmit={addNewCard}
+            cardTypeSelectionModalInterface={cardTypeSelectionModalInterface}
+            virtualKeyboardModalInterface={virtualKeyboardModalInterface}
+          />
+        )}
+      </CardAdditionContext.Consumer>
 
       <CardTypeSelectionModal
         isVisible={cardTypeSelectionModalInterface.isModalVisible}
