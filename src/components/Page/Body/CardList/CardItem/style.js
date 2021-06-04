@@ -8,6 +8,10 @@ const Container = styled.div`
   margin: 0;
   margin-bottom: 1.5rem;
   align-items: center;
+
+  & > div {
+    cursor: pointer;
+  }
 `;
 
 const CardNickName = styled.span`

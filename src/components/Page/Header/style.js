@@ -18,6 +18,7 @@ const Button = styled.button.attrs({
   border: none;
   font-size: 1.1rem;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 const Title = styled.div`

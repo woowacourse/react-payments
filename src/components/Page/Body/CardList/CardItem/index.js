@@ -11,13 +11,14 @@ export const CardItem = ({ card, ...props }) => {
   const { company, numbers, owner, validDay, nickName } = card;
   return (
     <>
-      <Styled.Container {...props}>
+      <Styled.Container>
         <Card
           size={'small'}
           company={company}
           numbers={numbers}
           owner={owner}
           validDay={validDay}
+          {...props}
         />
         <Styled.CardNickName>{nickName}</Styled.CardNickName>
       </Styled.Container>
