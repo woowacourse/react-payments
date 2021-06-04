@@ -4,24 +4,18 @@ import { CARD, ERROR_MESSAGE } from '../../../constants';
 import { isValidUserName } from '../validator';
 
 const UserNameInput = ({ userName, onInputChange }) => {
-  const [errorMessage, setErrorMessage] = useState('');
+  const [error, setError] = useState('');
 
   const onChange = (event) => {
     const name = event.target.value;
 
     if (!isValidUserName(name)) {
-      setErrorMessage(ERROR_MESSAGE.INVALID_USER_NAME);
+      setError(ERROR_MESSAGE.INVALID_USER_NAME);
       return;
     }
 
-    setErrorMessage('');
+    setError('');
     onInputChange(event);
-  };
-
-  const checkValidity = () => {
-    if (isValidUserName(userName)) {
-      setErrorMessage('');
-    }
   };
 
   return (
@@ -36,8 +30,7 @@ const UserNameInput = ({ userName, onInputChange }) => {
       maxLength={CARD.USER_NAME_MAX_LENGTH}
       value={userName}
       onChange={onChange}
-      onBlur={checkValidity}
-      errorMessage={errorMessage}
+      errorMessage={error}
     />
   );
 };

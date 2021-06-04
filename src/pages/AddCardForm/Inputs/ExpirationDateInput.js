@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input } from '../../../components';
-import { CARD, ERROR_MESSAGE } from '../../../constants';
+import { ERROR_MESSAGE } from '../../../constants';
+import useCheckValidity from '../../../hooks/useCheckValidity';
 import { MMYYDateFormatter } from '../../../utils/formatter';
 import { isValidDateFormat } from './../validator';
 
 const ExpirationDateInput = ({ expirationDate, setInput }) => {
-  const [errorMessage, setErrorMessage] = useState('');
+  const [error, setError, checkValidity] = useCheckValidity(
+    isValidDateFormat,
+    expirationDate,
+    ERROR_MESSAGE.INVALID_EXPIRATION_DATE
+  );
 
   const onChange = (event) => {
     const inputValue = event.target.value.replace('/', '');
@@ -15,24 +20,14 @@ const ExpirationDateInput = ({ expirationDate, setInput }) => {
 
       const formattedDate = MMYYDateFormatter(inputValue);
       setInput('expirationDate', formattedDate);
-
-      if (formattedDate.length === CARD.EXPIRATION_DATE_LENGTH) {
-        if (isValidDateFormat(formattedDate)) {
-          setErrorMessage('');
-          return;
-        }
-
-        setErrorMessage(ERROR_MESSAGE.INVALID_DATE_FORMAT);
-      }
     } catch (error) {
       setInput('expirationDate', '');
-      setErrorMessage(error.message);
+      setError(error.message);
     }
   };
 
   const onClick = () => {
     setInput('expirationDate', '');
-    setErrorMessage('');
   };
 
   return (
@@ -47,7 +42,8 @@ const ExpirationDateInput = ({ expirationDate, setInput }) => {
       value={expirationDate}
       onChange={onChange}
       onClick={onClick}
-      errorMessage={errorMessage}
+      onBlur={checkValidity}
+      errorMessage={error}
     />
   );
 };

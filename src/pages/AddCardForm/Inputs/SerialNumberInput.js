@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input } from '../../../components';
 import { CARD } from '../../../constants';
+import useCheckValidity from '../../../hooks/useCheckValidity';
 import { cardSerialNumberFormatter } from '../../../utils/formatter';
 import { isValidSerialNumber } from './../validator';
 
 const SerialNumberInput = ({ number, company, setInput, onSetModalContents, forwardRef }) => {
-  const isValid = isValidSerialNumber(number);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [error, setError, checkValidity] = useCheckValidity(
+    isValidSerialNumber,
+    number,
+    '올바른 카드번호를 입력하세요'
+  );
 
   const offsetByInputType = {
     deleteContentBackward: -1,
@@ -67,7 +71,6 @@ const SerialNumberInput = ({ number, company, setInput, onSetModalContents, forw
       event.target.value = value;
 
       setInput('number', currentSerialNumber);
-      setErrorMessage('');
 
       event.target.setSelectionRange(currentLocation, currentLocation);
 
@@ -82,12 +85,8 @@ const SerialNumberInput = ({ number, company, setInput, onSetModalContents, forw
     } catch (error) {
       setInput('number', '');
       event.target.value = number;
-      setErrorMessage(error.message);
+      setError(error.message);
     }
-  };
-
-  const checkValidity = () => {
-    isValid ? setErrorMessage('') : setErrorMessage('카드 번호가 올바르지 않습니다.');
   };
 
   const onCompanySelectModalOpen = () => {
@@ -109,7 +108,7 @@ const SerialNumberInput = ({ number, company, setInput, onSetModalContents, forw
       forwardRef={forwardRef}
       inputMode="numeric"
       textAlign="center"
-      errorMessage={errorMessage}
+      errorMessage={error}
     />
   );
 };

@@ -1,5 +1,5 @@
 const ERROR_MESSAGE = {
-  INVALID_DATE_FORMAT: '유효하지 않은 날짜 형식입니다.',
+  INVALID_EXPIRATION_DATE: '만료일을 정확히 입력하세요',
   INVALID_USER_NAME: '이름은 영문 및 공백만 입력이 가능합니다.',
 };
 
