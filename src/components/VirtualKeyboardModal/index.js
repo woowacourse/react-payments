@@ -2,18 +2,14 @@ import React from "react";
 import Modal from "../@shared/Modal";
 import VirtualKeyboard from "../VirtualKeyboard";
 import PropTypes from "prop-types";
-import { VIRTUAL_KEYBOARD_DELETION_INPUT } from "../../constants";
 
 const VirtualKeyboardModal = ({ isVisible, close, dataPassage }) => {
   const transferCharInsertionToInput = (value) => {
-    dataPassage.passData("virtualKeyboardInput", value);
+    dataPassage.passData("charInsertion", value);
   };
 
   const transferCharDeletionToInput = () => {
-    dataPassage.passData(
-      "virtualKeyboardInput",
-      VIRTUAL_KEYBOARD_DELETION_INPUT
-    );
+    dataPassage.passData("charDeletion", true);
   };
 
   return (
@@ -29,13 +25,13 @@ const VirtualKeyboardModal = ({ isVisible, close, dataPassage }) => {
 export default VirtualKeyboardModal;
 
 VirtualKeyboardModal.propTypes = {
-  children: PropTypes.element.isRequired,
   isVisible: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
   dataPassage: PropTypes.shape({
     data: PropTypes.shape({
       targetInput: PropTypes.string.isRequired,
-      virtualKeyboardInput: PropTypes.string.isRequired,
+      charInsertion: PropTypes.string.isRequired,
+      charDeletion: PropTypes.bool.isRequired,
     }).isRequired,
     passData: PropTypes.func.isRequired,
   }),

@@ -20,7 +20,7 @@ const CardTypeSelectionModal = ({ isVisible, close, dataPassage }) => {
               key={value.name + value.color}
               cardType={value}
               groupName="card-type"
-              isChecked={value.name === ""}
+              isChecked={value.name === dataPassage.data.cardType?.name}
               onChange={onCardTypeRadioSelected}
             />
           ))}
@@ -31,14 +31,13 @@ const CardTypeSelectionModal = ({ isVisible, close, dataPassage }) => {
 
 export default CardTypeSelectionModal;
 
+// TODO: cardType: PropTypes.any.isRequired, -> string으로 바꾸기
 CardTypeSelectionModal.propTypes = {
-  children: PropTypes.element.isRequired,
   isVisible: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
   dataPassage: PropTypes.shape({
     data: PropTypes.shape({
-      targetInput: PropTypes.string.isRequired,
-      virtualKeyboardInput: PropTypes.string.isRequired,
+      cardType: PropTypes.any.isRequired,
     }).isRequired,
     passData: PropTypes.func.isRequired,
   }),

@@ -1,6 +1,7 @@
-export { default as useCardNumbers } from "./useCardNumbers";
-export { default as useControlledInputValue } from "./useControlledInputValue";
-export { default as useExpirationDate } from "./useExpirationDate";
-export { default as usePassword } from "./usePassword";
-export { default as useVirtualKeyboardInput } from "./useVirtualKeyboardInput";
-export { default as useModal } from "./useModal";
+export { default as useCardNumbersInput } from "./input/useCardNumbersInput";
+export { default as useControlledInput } from "./input/useControlledInput";
+export { default as useExpirationDateInput } from "./input/useExpirationDateInput";
+export { default as useModalVirtualKeyboardInput } from "./input/useModalVirtualKeyboardInput";
+export { default as useModalCardTypeInput } from "./input/useModalCardTypeInput";
+
+export { default as useModalInterface } from "./modal/useModalInterface";

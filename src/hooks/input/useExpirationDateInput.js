@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { EXPIRATION_DATE, FORMAT_CHAR } from "../constants";
-import { isNumberValue } from "../utils";
+import { EXPIRATION_DATE, FORMAT_CHAR } from "../../constants";
+import { isNumberValue } from "../../utils";
 
 const unformatExpirationDate = (formattedValue) => {
   return formattedValue.replace(FORMAT_CHAR.EXPIRATION_DATE_SEPARATOR, "");
@@ -20,7 +20,7 @@ const formatExpirationDate = (unformattedExpirationDate) => {
   return month;
 };
 
-const useExpirationDate = (initialValue) => {
+const useExpirationDateInput = (initialValue) => {
   const [expirationDate, setExpirationDate] = useState(initialValue);
 
   const onExpirationDateChange = ({ target }) => {
@@ -33,7 +33,7 @@ const useExpirationDate = (initialValue) => {
     setExpirationDate(formatExpirationDate(unformattedValue));
   };
 
-  return [expirationDate, onExpirationDateChange];
+  return { value: expirationDate, onChange: onExpirationDateChange };
 };
 
-export default useExpirationDate;
+export default useExpirationDateInput;

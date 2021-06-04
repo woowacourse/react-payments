@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-const useModal = (initialPassageData) => {
+const useModalInterface = (initialPassageData) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [data, setData] = useState(initialPassageData);
 
   const passData = (key, value) => {
     if (data[key] === undefined) {
       console.error(
-        "useModal - passData() 에러 : 해당 key 값이 존재하지 않습니다."
+        "useModalInterface - passData() 에러 : 해당 key 값이 존재하지 않습니다."
       );
       return;
     }
@@ -34,4 +34,4 @@ const useModal = (initialPassageData) => {
   return { isModalVisible, openModal, closeModal, dataPassage };
 };
 
-export default useModal;
+export default useModalInterface;

@@ -8,7 +8,7 @@ const VirtualKeyboardInput = ({ isCenter, value }) => {
         type="password"
         isCenter={isCenter}
         value={value}
-        disabled="true"
+        disabled={true}
         required
       />
     </div>
