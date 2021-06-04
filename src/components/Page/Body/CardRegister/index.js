@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import * as Styled from './style.js';
 import { Card } from '../../../Card';
 import { CardCreateForm } from '../../../InputForm/CardCreateForm';
@@ -26,6 +26,11 @@ export const CardRegister = () => {
     isValidEveryInput,
     hasSubmittedEveryInput,
   } = useCardCreateForm();
+
+  /* eslint-disable react-hooks/exhaustive-deps */
+  useEffect(() => {
+    closeModal();
+  }, [company.value]);
 
   const submitCardDetail = (e) => {
     e.preventDefault();
