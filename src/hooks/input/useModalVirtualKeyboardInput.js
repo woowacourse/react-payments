@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PropType from "prop-types";
+import { MODAL_DATA_KEY, MODAL_RESERVED_KEYWORD } from "../../constants";
 
 const useModalVirtualKeyboardInput = ({
   targetInputType,
@@ -37,7 +38,10 @@ const useModalVirtualKeyboardInput = ({
   };
 
   useEffect(() => {
-    if (charInsertion === "" || charInsertion === null) {
+    if (
+      charInsertion === MODAL_RESERVED_KEYWORD.WAIT_FOR_INSERTION ||
+      charInsertion === null
+    ) {
       return;
     }
 
@@ -45,9 +49,11 @@ const useModalVirtualKeyboardInput = ({
       return;
     }
 
-    //TODO: 키값 모두 상수화 하기
     insertInputChar(charInsertion);
-    passData("charInsertion", "");
+    passData(
+      MODAL_DATA_KEY.CHAR_INSERTION,
+      MODAL_RESERVED_KEYWORD.WAIT_FOR_INSERTION
+    );
   }, [charInsertion]);
 
   useEffect(() => {
@@ -59,7 +65,7 @@ const useModalVirtualKeyboardInput = ({
       return;
     }
 
-    passData("charDeletion", false);
+    passData(MODAL_DATA_KEY.CHAR_DELETION, false);
     deleteInputChar();
   }, [charDeletion]);
 

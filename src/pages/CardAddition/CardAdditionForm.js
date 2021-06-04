@@ -1,4 +1,5 @@
 import {
+  ALERT_MESSAGE,
   CARD_NUMBER,
   EXPIRATION_DATE,
   FORMAT_CHAR,
@@ -72,7 +73,7 @@ const CardAdditionForm = ({
     event.preventDefault();
 
     if (cardTypeInput.value.name === CARD.UNKNOWN.name) {
-      alert("카드 회사를 선택해주세요.");
+      alert(ALERT_MESSAGE.PLEASE_SELECT_CARD_CORP);
       return;
     }
 
