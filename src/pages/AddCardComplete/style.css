@@ -1,0 +1,26 @@
+.add-card-complete__container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-card-complete__title {
+  margin-bottom: 7rem;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.add-card-complete__input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  text-align: center;
+  color: #383838;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 32px;
+  border-bottom: 0.12rem solid #737373;
+  margin: 3rem 0 5rem;
+}

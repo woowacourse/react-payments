@@ -1,0 +1,19 @@
+.card-company-option {
+  width: 74px;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  cursor: pointer;
+  color: #525252;
+  font-weight: 500;
+}
+
+.card-company-option__label {
+  margin: 10px 0 0;
+}
