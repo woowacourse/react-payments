@@ -1,0 +1,5 @@
+.select {
+  display: grid;
+  grid-template: repeat(2, 1fr) / repeat(4, 1fr);
+  row-gap: 2rem;
+}

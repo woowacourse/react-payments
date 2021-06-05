@@ -20,6 +20,7 @@
 }
 
 .card__company-name {
+  text-align: left;
   height: 10%;
   color: #383838;
   font-weight: 500;
@@ -34,7 +35,7 @@
   margin: 12% 0 8%;
 }
 
-svg {
+.card__chip svg {
   border-radius: 10%;
 }
 

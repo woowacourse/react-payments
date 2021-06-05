@@ -1,7 +1,7 @@
 import React from 'react';
-import './style.css';
-import '../../index.css';
 import { CARD } from '../../constants';
+import './style.css';
+import '../../styles/index.css';
 
 export default function Card({
   companyName,
@@ -16,6 +16,7 @@ export default function Card({
     <div
       className={`card-${size ?? 'normal'}`}
       style={{ ...style, backgroundColor: color ?? '#d2d2d2' }}
+      aria-label="카드 이미지"
     >
       <div className="card__company-name">{companyName}</div>
       <div className="card__chip">
@@ -27,24 +28,25 @@ export default function Card({
         </svg>
       </div>
       <div className="card__card-number-container">
-        {Array.from({ length: CARD.SERIAL_NUMBER_LENGTH }).map((_, index) => {
-          if (index < CARD.SERIAL_ID_CODE_LENGTH) {
-            return (
-              <div key={index} className="card__card-number">
-                {number.charAt(index)}
-              </div>
-            );
-          }
+        {number &&
+          Array.from({ length: CARD.SERIAL_NUMBER_LENGTH }).map((_, index) => {
+            if (index < CARD.SERIAL_ID_CODE_LENGTH) {
+              return (
+                <div key={index} className="card__card-number">
+                  {number.charAt(index)}
+                </div>
+              );
+            }
 
-          return (
-            <div
-              key={index}
-              className={['card__card-number', 'dot', number.charAt(index) ? '' : 'hidden'].join(
-                ' '
-              )}
-            ></div>
-          );
-        })}
+            return (
+              <div
+                key={index}
+                className={['card__card-number', 'dot', number.charAt(index) ? '' : 'hidden'].join(
+                  ' '
+                )}
+              ></div>
+            );
+          })}
       </div>
       <div className="card__card-detail-container">
         <div className="card__user-name">{userName || 'NAME'}</div>

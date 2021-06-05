@@ -11,5 +11,5 @@ const Template = (args) => <TextButton {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  text: '다음',
+  children: '다음',
 };
