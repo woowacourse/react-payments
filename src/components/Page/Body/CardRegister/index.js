@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import * as Styled from './style.js';
+import React, { useContext, useState } from 'react';
+
 import { Card } from '../../../Card';
-import { CardCreateForm } from '../../../InputForm/CardCreateForm';
 import { Modal } from '../../../Modal';
+import { CardCreateForm } from '../../../InputForm/CardCreateForm';
 import { CardCompanyList } from '../../../Modal/ModalBody/CardCompanyList';
+
 import {
   isEnglishTextType,
   isMonthType,
   isNumberType,
   isValidYearType,
 } from '../../../../utils/validators.js';
-import { PageBody } from '../../../../utils/style/Page.js';
+import { CardContext } from '../../../../contexts/CardContextProvider.js';
+import { PageContext } from '../../../../contexts/PageContextProvider.js';
 
-export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
+import { PageBody } from '../../../../utils/style/Page.js';
+import * as Styled from './style.js';
+
+export const CardRegister = () => {
+  const { updateCardContent, generateCardId } = useContext(CardContext);
+  const { setCurrentPage } = useContext(PageContext);
+
   const [company, setCompany] = useState('');
   const [numbers, setNumbers] = useState({ first: '', second: '', third: '', fourth: '' });
   const [validDay, setValidDay] = useState({ month: '', year: '' });
@@ -156,10 +163,10 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
 
   const hasSubmittedEveryInput = () => {
     return (
-      company &&
+      Boolean(company) &&
       Object.values(numbers).every((value) => value) &&
       Object.values(validDay).every((value) => value) &&
-      cvc &&
+      Boolean(cvc) &&
       Object.values(password).every((value) => value)
     );
   };
@@ -171,7 +178,15 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
   const submitCardDetail = (e) => {
     e.preventDefault();
 
-    const cardDetail = { company, numbers, validDay, owner, cvc, password };
+    const cardDetail = {
+      company,
+      numbers,
+      validDay,
+      owner,
+      cvc,
+      password,
+      cardId: generateCardId(),
+    };
 
     updateCardContent(cardDetail);
     setCurrentPage('cardRegistered');
@@ -241,10 +256,3 @@ export const CardRegister = ({ setCurrentPage, updateCardContent }) => {
     </PageBody>
   );
 };
-
-CardCreateForm.propTypes = {
-  setCurrentPage: PropTypes.func, 
-  updateCardContent: PropTypes.func,
-};
-
-// CardCreateForm.defaultProps = {};
