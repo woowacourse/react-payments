@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { Card } from '../../../Card';
 import { Modal } from '../../../Modal';
@@ -18,7 +18,7 @@ import { PageBody } from '../../../../utils/style/Page.js';
 import * as Styled from './style.js';
 
 export const CardRegister = () => {
-  const { updateCardContent, generateCardId } = useContext(CardContext);
+  const { updateCardContent, resetCurrentCard, generateCardId } = useContext(CardContext);
   const { setCurrentPage } = useContext(PageContext);
 
   const [company, setCompany] = useState('');
@@ -40,6 +40,10 @@ export const CardRegister = () => {
     secondDigit: true,
   });
   const [isModalOpened, setIsModalOpened] = useState(false);
+
+  useEffect(() => {
+    resetCurrentCard();
+  }, [resetCurrentCard]);
 
   const handleCompanyChange = (companyName) => {
     setInputValid((inputValid) => ({ ...inputValid, company: true }));
