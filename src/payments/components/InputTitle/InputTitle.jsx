@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const InputTitle = ({ innerText }) => <span className="text-custom-gray-300 text-xs font-medium">{innerText}</span>;
+const InputTitle = ({ children }) => <span className="text-custom-gray-300 text-xs font-medium">{children}</span>;
 
 InputTitle.propTypes = {
-  innerText: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default InputTitle;

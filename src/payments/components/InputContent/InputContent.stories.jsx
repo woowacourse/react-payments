@@ -1,5 +1,4 @@
 import React from "react";
-import { getId } from "../../../@shared/utils";
 import Circle from "../Circle/Circle";
 import Input from "../Input/Input";
 import {
@@ -26,10 +25,10 @@ export const CardNumberInputContent = Template.bind({});
 CardNumberInputContent.args = {
   children: (
     <>
-      <Input key={getId()} {...CardNumberInput.args} />
-      <Input key={getId()} {...CardNumberInput.args} />
-      <Input key={getId()} {...CardNumberInput.args} type="password" />
-      <Input key={getId()} {...CardNumberInput.args} type="password" />
+      <Input key="0" {...CardNumberInput.args} />
+      <Input key="1" {...CardNumberInput.args} />
+      <Input key="2" {...CardNumberInput.args} type="password" />
+      <Input key="3" {...CardNumberInput.args} type="password" />
     </>
   ),
 };

@@ -1,25 +1,48 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
+import { throwError, PAGE } from "../@shared/utils";
+import paymentsReducer, { addNewCardInfo, editCardInfo, movePage } from "./PaymentReducer";
 import CardAddForm from "./components/CardAddForm/CardAddForm";
 import CardConfirm from "./components/CardConfirm/CardConfirm";
+import CardList from "./components/CardList/CardList";
 
-const CARD_ADD_FORM = "cardAddForm";
-const CARD_CONFIRM = "cardConfirm";
+const initialState = {
+  page: PAGE.CARD_LIST,
+  cardInfos: [],
+};
 
 const Payments = () => {
-  const [currentPage, setCurrentPage] = useState(CARD_ADD_FORM);
-  const [newCardInfo, setNewCardInfo] = useState(null);
+  const [state, dispatch] = useReducer(paymentsReducer, initialState);
 
   const addCardInfo = cardInfo => {
-    setNewCardInfo(cardInfo);
-    setCurrentPage(CARD_CONFIRM);
+    dispatch(addNewCardInfo(cardInfo));
+    dispatch(movePage(PAGE.CARD_CONFIRM));
   };
 
-  return (
-    <>
-      {currentPage === CARD_ADD_FORM && <CardAddForm addCardInfo={addCardInfo} />}
-      {currentPage === CARD_CONFIRM && <CardConfirm cardInfo={newCardInfo} />}
-    </>
-  );
+  const editNewCardInfo = ({ id, cardInfo }) => {
+    dispatch(editCardInfo({ id, cardInfo }));
+    dispatch(movePage(PAGE.CARD_LIST));
+  };
+
+  const moveToCardListPage = () => {
+    dispatch(movePage(PAGE.CARD_LIST));
+  };
+
+  const moveToCardAddForm = () => {
+    dispatch(movePage(PAGE.CARD_ADD_FORM));
+  };
+
+  const { page, cardInfos } = state;
+
+  switch (page) {
+    case PAGE.CARD_ADD_FORM:
+      return <CardAddForm addCardInfo={addCardInfo} onBackButtonClick={moveToCardListPage} />;
+    case PAGE.CARD_CONFIRM:
+      return <CardConfirm cardInfo={[...cardInfos].pop()} editCardInfo={editNewCardInfo} />;
+    case PAGE.CARD_LIST:
+      return <CardList cardInfos={cardInfos} onAddCardClick={moveToCardAddForm} />;
+    default:
+      return throwError(`Invalid Page: ${String(page)}`);
+  }
 };
 
 export default Payments;

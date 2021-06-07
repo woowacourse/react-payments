@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
-import { ERROR_TYPE, throwError } from "../../../@shared/utils";
+import cx from "classnames";
 import Card from "../Card/Card";
 import Input from "../Input/Input";
 import InputTitle from "../InputTitle/InputTitle";
@@ -16,39 +15,66 @@ import ToolTip from "../ToolTip/ToolTip";
 import InputBox from "../InputBox/InputBox";
 import InputLabel from "../InputLabel/InputLabel";
 import InputContent from "../InputContent/InputContent";
+import InputValidationMessage from "../InputValidationMessage/InputValidationMessage";
+import { useInputs, useInput } from "../../hooks/useInputs";
+import { cardNumberInfos, expirationDateInfos, passwordInfos } from "./inputInfos";
+import {
+  validateCardNumbers,
+  validateExpirationDate,
+  validateOwnerName,
+  validateSecurityCode,
+  validatePasswords,
+} from "./validator";
 
-const initialNumberInfos = [
-  { id: "number-info-0", type: "text", value: "", minLength: "4", maxLength: "4" },
-  { id: "number-info-1", type: "text", value: "", minLength: "4", maxLength: "4" },
-  { id: "number-info-2", type: "password", value: "", minLength: "4", maxLength: "4" },
-  { id: "number-info-3", type: "password", value: "", minLength: "3", maxLength: "4" },
-];
+const initialCardNumberValues = Object.fromEntries(cardNumberInfos.map(({ id }) => [id, ""]));
 
-const CardAddForm = ({ addCardInfo }) => {
+const initialExpirationDateValues = Object.fromEntries(expirationDateInfos.map(({ id }) => [id, ""]));
+
+const initialPasswordValues = Object.fromEntries(passwordInfos.map(({ id }) => [id, ""]));
+
+const CardAddForm = ({ addCardInfo, onBackButtonClick }) => {
+  const [formErrorMessage, setFormErrorMessage] = useState("");
   const [isBankSelectorVisible, setBankSelectorVisible] = useState(false);
-  const [backgroundColor, setBackgroundColor] = useState("");
-  const [bank, setBank] = useState("");
-  const [numberInfos, setNumberInfos] = useState(initialNumberInfos);
-  const [isNumberInfosValid, setNumberInfosValid] = useState(true);
-  const [expirationDate, setExpirationDate] = useState("");
-  const [isExpirationDateValid, setExpirationDateValid] = useState(true);
-  const [ownerName, setOwnerName] = useState("");
-  const [isOwnerNameValid, setOwnerNameValid] = useState(true);
-  const [securityCode, setSecurityCode] = useState("");
-  const [isSecurityCodeValid, setSecurityCodeValid] = useState(true);
   const [isToolTipVisible, setToolTipVisible] = useState(false);
-  const [passwords, setPasswords] = useState(Array(2).fill(""));
-  const [isPasswordValid, setPasswordValid] = useState(true);
 
-  const isNextButtonVisible = [
-    bank !== "",
-    backgroundColor !== "",
-    numberInfos.every(({ value }) => value !== "") && isNumberInfosValid,
-    expirationDate !== "" && isExpirationDateValid,
-    isOwnerNameValid,
-    securityCode !== "" && isSecurityCodeValid,
-    passwords.every(Boolean) && isPasswordValid,
-  ].every(Boolean);
+  const [bank, setBank] = useState("");
+  const [backgroundColor, setBackgroundColor] = useState("");
+
+  const [
+    cardNumberValues,
+    handleCardNumberValuesChange,
+    { error: cardNumberError, touched: cardNumberTouched },
+  ] = useInputs(initialCardNumberValues, { validate: validateCardNumbers });
+
+  const [
+    expirationDateValues,
+    handleExpirationDateValuesChange,
+    { error: expirationDateError, touched: expirationDateTouched },
+  ] = useInputs(initialExpirationDateValues, { validate: validateExpirationDate });
+
+  const [ownerName, handleOwnerNameChange, { error: ownerNameError, touched: ownerNameTouched }] = useInput("", {
+    validate: validateOwnerName,
+  });
+
+  const [
+    securityCode,
+    handleSecurityCodeChange,
+    { error: securityCodeError, touched: securityCodeTouched },
+  ] = useInput("", { validate: validateSecurityCode });
+
+  const [
+    passwordValues,
+    handlePasswordsChange,
+    { error: passwordError, touched: passwordTouched },
+  ] = useInputs(initialPasswordValues, { validate: validatePasswords });
+
+  const validateForm = () => {
+    if (bank === "" || backgroundColor === "") {
+      return "카드회사를 선택해주세요.";
+    }
+
+    return [cardNumberError, expirationDateError, ownerNameError, securityCodeError, passwordError].find(Boolean) ?? "";
+  };
 
   const handleCardClick = () => {
     setBankSelectorVisible(!isBankSelectorVisible);
@@ -60,198 +86,45 @@ const CardAddForm = ({ addCardInfo }) => {
     setBank(bankName);
   };
 
-  const validateNumberInfos = infos => {
-    if (!Array.isArray(infos)) {
-      throw new TypeError("numberInfos should be an array");
-    }
-
-    const isValid = infos.every(({ value, minLength, maxLength }) =>
-      new RegExp(`^[\\d]{${minLength},${maxLength}}$`).test(value)
-    );
-
-    if (!isValid) {
-      throwError("Invalid numberInfos", ERROR_TYPE.VALIDATION);
-    }
-  };
-
-  const handleNumberInfoChange = event => {
-    try {
-      const { value, name } = event.target;
-      const replacedValue = value.replace(/[\D]/g, "");
-      const targetIndex = Number(name);
-      const newNumberInfos = numberInfos.map((numberInput, index) =>
-        index === targetIndex ? { ...numberInput, value: replacedValue } : numberInput
-      );
-
-      setNumberInfos(newNumberInfos);
-      validateNumberInfos(newNumberInfos);
-      setNumberInfosValid(true);
-    } catch (error) {
-      if (error.type === ERROR_TYPE.VALIDATION) {
-        setNumberInfosValid(false);
-
-        return;
-      }
-
-      console.error(error.message);
-    }
-  };
-
-  const validateExpirationDate = date => {
-    if (date.length !== 4) {
-      throwError("Invalid date", ERROR_TYPE.VALIDATION);
-    }
-
-    const month = date.slice(0, 2);
-    const year = date.slice(2, 4);
-    const currentYear = new Date().getFullYear() - 2000;
-
-    if (Number(month) < 1 || Number(month) > 12) {
-      throwError("Invalid month", ERROR_TYPE.VALIDATION);
-    }
-    if (year < currentYear || year > currentYear + 5) {
-      throwError("Invalid year", ERROR_TYPE.VALIDATION);
-    }
-  };
-
-  const handleExpirationDateChange = event => {
-    try {
-      const { value } = event.target;
-      const replacedValue = value.replace(/[\D]/g, "");
-      const newValue =
-        replacedValue.length > 2 ? `${replacedValue.slice(0, 2)}/${replacedValue.slice(2)}` : replacedValue;
-
-      setExpirationDate(newValue);
-      validateExpirationDate(replacedValue);
-      setExpirationDateValid(true);
-
-      // TODO: 커서위치 고정
-    } catch (error) {
-      if (error.type === ERROR_TYPE.VALIDATION) {
-        setExpirationDateValid(false);
-
-        return;
-      }
-
-      console.error(error.message);
-    }
-  };
-
-  const validateOwnerName = name => {
-    const rName = /^[가-힣|A-Z|\s]{0,30}$/;
-
-    if (!rName.test(name)) {
-      throwError(`Invalid owner name: ${name}`, ERROR_TYPE.VALIDATION);
-    }
-  };
-
-  const handleOwnerNameChange = event => {
-    try {
-      const value = event.target.value.toUpperCase();
-
-      setOwnerName(value);
-      validateOwnerName(value);
-      setOwnerNameValid(true);
-    } catch (error) {
-      if (error.type === ERROR_TYPE.VALIDATION) {
-        setOwnerNameValid(false);
-
-        return;
-      }
-
-      console.error(error.message);
-    }
-  };
-
-  const validateSecurityCode = code => {
-    const rCode = /^[\d]{3,4}$/;
-
-    if (!rCode.test(code)) {
-      throwError(`Invalid security code: ${code}`, ERROR_TYPE.VALIDATION);
-    }
-  };
-
-  const handleSecurityCodeChange = event => {
-    try {
-      const { value } = event.target;
-      const replacedValue = value.replace(/[\D]/g, "");
-
-      setSecurityCode(replacedValue);
-      validateSecurityCode(replacedValue);
-      setSecurityCodeValid(true);
-    } catch (error) {
-      if (error.type === ERROR_TYPE.VALIDATION) {
-        setSecurityCodeValid(false);
-
-        return;
-      }
-
-      console.error(error.message);
-    }
-  };
-
   const handleToolTipClick = () => setToolTipVisible(!isToolTipVisible);
 
-  const validatePasswords = newPasswords => {
-    if (!Array.isArray(newPasswords)) {
-      throw new TypeError("passwords should be an array");
-    }
+  const bindCardInfo = () => {
+    const cardNumbers = cardNumberInfos.map(({ id }) => cardNumberValues[id]);
 
-    const rCode = /^[\d]{1}$/;
+    const expirationDate = expirationDateInfos.map(({ id }) => expirationDateValues[id]);
 
-    if (newPasswords.some(number => !rCode.test(number))) {
-      throwError("Invalid password", ERROR_TYPE.VALIDATION);
-    }
-  };
+    const passwords = passwordInfos.map(({ id }) => passwordValues[id]);
 
-  const handlePasswordChange = event => {
-    try {
-      const { value } = event.target;
-      const targetIndex = Number(event.target.name);
-      const replacedValue = value.replace(/[\D]/g, "");
-      const newPasswords = passwords.map((password, index) => (index === targetIndex ? replacedValue : password));
-
-      setPasswords(newPasswords);
-      validatePasswords(newPasswords);
-      setPasswordValid(true);
-    } catch (error) {
-      if (error.type === ERROR_TYPE.VALIDATION) {
-        setPasswordValid(false);
-
-        return;
-      }
-
-      console.error(error.message);
-    }
+    return { bank, backgroundColor, cardNumbers, expirationDate, ownerName, securityCode, passwords };
   };
 
   const handleSubmit = event => {
     event.preventDefault();
 
-    addCardInfo({
-      bank,
-      backgroundColor,
-      numberInfos,
-      expirationDate,
-      ownerName,
-      securityCode,
-      passwords,
-      isRegistered: true,
-    });
+    const error = validateForm();
+
+    if (error) {
+      setFormErrorMessage(error);
+      return;
+    }
+
+    addCardInfo(bindCardInfo());
   };
 
   return (
     <>
-      <Header hasBackButton title="카드 추가" />
-      <form className="flex flex-col justify-between w-full h-full" onSubmit={handleSubmit}>
+      <Header hasBackButton title="카드 추가" onBackButtonClick={onBackButtonClick} />
+      <form
+        className="flex flex-col justify-between w-full h-full"
+        aria-describedby="form-error"
+        noValidate
+        onSubmit={handleSubmit}
+      >
         <div>
           <div className="flex justify-center mb-4 w-full">
             <Card
-              backgroundColor={backgroundColor}
-              bank={bank}
-              numberInfos={numberInfos}
-              expirationDate={expirationDate}
-              ownerName={ownerName}
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...bindCardInfo()}
               isRegistered={false}
               onClick={handleCardClick}
             />
@@ -259,64 +132,83 @@ const CardAddForm = ({ addCardInfo }) => {
 
           <InputBox>
             <InputLabel>
-              <InputTitle innerText="카드 번호" />
+              <InputTitle>카드 번호</InputTitle>
             </InputLabel>
 
             <InputContent>
               <div
-                className={classNames(
+                className={cx(
                   "flex items-center justify-around w-full text-custom-mint text-lg font-medium bg-custom-gray-100 rounded-md",
-                  !isNumberInfosValid && "ring-2 ring-rose-400"
+                  cardNumberTouched && cardNumberError && "ring-2 ring-rose-400"
                 )}
+                aria-describedby="card-number-error"
               >
-                {numberInfos.map(({ id, type, value }, index) => (
+                {cardNumberInfos.map(({ id, type, minLength, maxLength, label }, index) => (
                   <React.Fragment key={id}>
                     {index > 0 && <span>-</span>}
                     <Input
-                      id={`card-number-input-${index}`}
+                      id={id}
                       type={type}
-                      className="w-full outline-none"
-                      name={index}
-                      minLength="4"
-                      maxLength="4"
+                      label={label}
+                      className="appearance-textfield w-full outline-none"
+                      name={id}
+                      minLength={minLength}
+                      maxLength={maxLength}
+                      value={cardNumberValues[id]}
+                      onChange={handleCardNumberValuesChange}
                       inputmode="numeric"
-                      value={value}
-                      label={`카드 번호 입력란 ${index}`}
-                      onChange={handleNumberInfoChange}
-                      required
                     />
                   </React.Fragment>
                 ))}
               </div>
             </InputContent>
+            <InputValidationMessage id="card-number-error">
+              {cardNumberTouched ? cardNumberError : ""}
+            </InputValidationMessage>
           </InputBox>
 
           <InputBox>
             <InputLabel>
-              <InputTitle innerText="만료일" />
+              <InputTitle>만료일</InputTitle>
             </InputLabel>
 
             <InputContent>
-              <Input
-                id="expiration-date-input"
-                type="text"
-                placeholder="MM/YY"
-                className="w-36"
-                minLength="5"
-                maxLength="5"
-                inputmode="numeric"
-                value={expirationDate}
-                isValid={isExpirationDateValid}
-                onChange={handleExpirationDateChange}
-                label="만료일"
-                required
-              />
+              <div
+                className={cx(
+                  "text-custom-mint text-lg font-medium bg-custom-gray-100 rounded-md",
+                  expirationDateTouched && expirationDateError && "ring-2 ring-rose-400"
+                )}
+                aria-describedby="expiration-date-error"
+              >
+                {expirationDateInfos.map(({ id, placeholder, label }, index) => (
+                  <React.Fragment key={id}>
+                    {index > 0 && <span>/</span>}
+                    <Input
+                      id={id}
+                      type="text"
+                      placeholder={placeholder}
+                      className="appearance-textfield w-14 outline-none"
+                      minLength="2"
+                      maxLength="2"
+                      inputmode="numeric"
+                      name={id}
+                      value={expirationDateValues[id]}
+                      onChange={handleExpirationDateValuesChange}
+                      label={label}
+                    />
+                  </React.Fragment>
+                ))}
+              </div>
             </InputContent>
+
+            <InputValidationMessage id="expiration-date-error">
+              {expirationDateTouched ? expirationDateError : ""}
+            </InputValidationMessage>
           </InputBox>
 
           <InputBox>
             <InputLabel>
-              <InputTitle innerText="카드 소유자 이름(선택)" />
+              <InputTitle>카드 소유자 이름(선택)</InputTitle>
               <span className="text-custom-gray-300 text-xs font-medium">{ownerName.length}/30</span>
             </InputLabel>
             <InputContent>
@@ -324,85 +216,90 @@ const CardAddForm = ({ addCardInfo }) => {
                 id="owner-name-input"
                 type="text"
                 placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-                className="w-full"
+                className={cx("w-full outline-none", ownerNameTouched && ownerNameError && "ring-2 ring-rose-400")}
                 value={ownerName}
-                isValid={isOwnerNameValid}
                 onChange={handleOwnerNameChange}
                 label="카드 소유자 이름 입력란"
                 minLength="0"
                 maxLength="30"
+                aria-describedby="owner-name-error"
               />
             </InputContent>
+            <InputValidationMessage id="owner-name-error">
+              {ownerNameTouched ? ownerNameError : ""}
+            </InputValidationMessage>
           </InputBox>
 
           <InputBox>
             <InputLabel>
-              <InputTitle innerText="보안코드(CVC/CVV)" />
+              <InputTitle>보안코드(CVC/CVV)</InputTitle>
             </InputLabel>
             <InputContent>
               <Input
                 id="security-code-input"
                 type="password"
-                className="w-20"
+                className={cx("w-20 outline-none", securityCodeTouched && securityCodeError && "ring-2 ring-rose-400")}
                 minLength="3"
                 maxLength="4"
                 value={securityCode}
                 onChange={handleSecurityCodeChange}
                 inputmode="numeric"
-                isValid={isSecurityCodeValid}
                 label="보안 코드 입력란"
-                required
+                aria-describedby="security-code-error"
               />
               <QuestionIcon onClick={handleToolTipClick} />
-              <ToolTip isVisible={isToolTipVisible} />
+              <ToolTip isVisible={isToolTipVisible}>카드 뒷면 서명란 끝의 3~4자리 숫자를 입력해주세요.</ToolTip>
             </InputContent>
+
+            <InputValidationMessage id="security-code-error">
+              {securityCodeTouched ? securityCodeError : ""}
+            </InputValidationMessage>
           </InputBox>
 
           <InputBox>
             <InputLabel>
-              <InputTitle innerText="카드 비밀번호" />
+              <InputTitle>카드 비밀번호</InputTitle>
             </InputLabel>
             <InputContent>
-              <Input
-                id="password-input-0"
-                type="password"
-                className="w-10 text-center"
-                minLength="1"
-                maxLength="1"
-                inputmode="numeric"
-                name="0"
-                value={passwords[0]}
-                isValid={isPasswordValid}
-                label="카드 비밀번호1"
-                onChange={handlePasswordChange}
-              />
-              <Input
-                id="password-input-1"
-                type="password"
-                className="w-10 text-center"
-                minLength="1"
-                maxLength="1"
-                name="1"
-                inputmode="numeric"
-                value={passwords[1]}
-                isValid={isPasswordValid}
-                label="카드 비밀번호2"
-                onChange={handlePasswordChange}
-              />
-              <div className="flex justify-center w-10">
-                <Circle width="5" height="5" />
-              </div>
-              <div className="flex justify-center w-10">
-                <Circle width="5" height="5" />
-              </div>
+              <section className="flex items-center w-full space-x-2" aria-describedby="password-error">
+                {passwordInfos.map(({ id, label }) => (
+                  <Input
+                    key={id}
+                    id={id}
+                    type="password"
+                    className={cx(
+                      "w-10 text-center outline-none",
+                      passwordTouched && passwordError && "ring-2 ring-rose-400"
+                    )}
+                    minLength="1"
+                    maxLength="1"
+                    inputmode="numeric"
+                    name={id}
+                    value={passwordValues[id]}
+                    label={label}
+                    onChange={handlePasswordsChange}
+                  />
+                ))}
+                <div className="flex justify-center w-10">
+                  <Circle width="5" height="5" />
+                </div>
+                <div className="flex justify-center w-10">
+                  <Circle width="5" height="5" />
+                </div>
+              </section>
             </InputContent>
+            <InputValidationMessage id="password-error">{passwordTouched ? passwordError : ""}</InputValidationMessage>
           </InputBox>
         </div>
-        {isNextButtonVisible && (
-          <div className="flex justify-end">
-            <Button type="submit" name="다음" className="h-10" />
-          </div>
-        )}
+
+        <div className="flex items-center justify-between h-10">
+          <InputValidationMessage id="form-error">
+            <span className="text-center text-sm">{formErrorMessage}</span>
+          </InputValidationMessage>
+          <Button type="submit" className="px-2 py-1 rounded focus:outline-none focus:ring-blue-400 focus:ring-2">
+            다음
+          </Button>
+        </div>
       </form>
 
       {isBankSelectorVisible && (
@@ -416,6 +313,7 @@ const CardAddForm = ({ addCardInfo }) => {
 
 CardAddForm.propTypes = {
   addCardInfo: PropTypes.func.isRequired,
+  onBackButtonClick: PropTypes.func.isRequired,
 };
 
 export default CardAddForm;

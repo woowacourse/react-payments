@@ -11,5 +11,5 @@ const Template = args => <Button {...args} />;
 export const PlainButton = Template.bind({});
 
 PlainButton.args = {
-  name: "다음",
+  children: "다음",
 };
