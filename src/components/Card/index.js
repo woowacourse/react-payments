@@ -4,6 +4,7 @@ import * as Styled from './style.js';
 import { GUIDE_MESSAGES } from '../../utils/constants/messages.js';
 
 export const Card = ({ size, company, numbers, owner, validDay, ...props }) => {
+  const validMonthDisplay = Number(validDay.month) < 10 ? `0${validDay.month}` : validDay.month;
   return (
     <Styled.Container size={size} company={company} {...props}>
       <Styled.Inner>
@@ -32,7 +33,7 @@ export const Card = ({ size, company, numbers, owner, validDay, ...props }) => {
         <Styled.Footer size={size}>
           <Styled.Owner>{!owner ? GUIDE_MESSAGES.CARD_OWNER : owner}</Styled.Owner>
           <Styled.ValidDay>
-            {`${validDay.month ? validDay.month : GUIDE_MESSAGES.VALID_DATE_MONTH}/${
+            {`${validDay.month ? validMonthDisplay : GUIDE_MESSAGES.VALID_DATE_MONTH}/${
               validDay.year ? validDay.year : GUIDE_MESSAGES.VALID_DATE_YEAR
             }`}
           </Styled.ValidDay>

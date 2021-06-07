@@ -2,7 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 
-export const InputContainer = ({ title, validMessage, inputValue, textLength, isVisibleTextLength, children }) => {
+export const InputContainer = ({
+  title,
+  validMessage,
+  inputValue,
+  textLength,
+  isVisibleTextLength,
+  children,
+}) => {
   return (
     <Styled.Container>
       <Styled.Header>
@@ -29,10 +36,10 @@ InputContainer.propTypes = {
   inputValue: PropTypes.string,
   textLength: PropTypes.number,
   isVisibleTextLength: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.elementType, PropTypes.array]),
-};
-
-InputContainer.defaultProps = {
-  validMessage: '',
-  isVisibleTextLength: false,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.elementType,
+    PropTypes.array,
+  ]),
 };

@@ -8,7 +8,11 @@ export const NickNameForm = ({ nickName, submitCardNickName }) => {
   return (
     <Styled.Form onSubmit={submitCardNickName}>
       <Styled.InputContainer>
-        <NickNameInputContainer nickName={nickName.value} autoFocus={'autoFocus'} handleChange={nickName.handleChange} />
+        <NickNameInputContainer
+          nickName={nickName.value}
+          autoFocus={'autoFocus'}
+          handleChange={nickName.handleChange}
+        />
       </Styled.InputContainer>
       <Styled.ButtonContainer>
         <InputButton text={'확인'} />
@@ -24,5 +28,3 @@ NickNameForm.propTypes = {
   }),
   submitCardNickName: PropTypes.func,
 };
-
-NickNameForm.defaultProps = {};

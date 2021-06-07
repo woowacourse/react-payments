@@ -6,13 +6,16 @@ import { PageHeader } from '../../../utils/style/Page.js';
 export const Header = ({ children }) => {
   return (
     <PageHeader>
-      <Styled.Container>
-        {children}
-      </Styled.Container>
+      <Styled.Container>{children}</Styled.Container>
     </PageHeader>
   );
 };
 
 Header.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.elementType, PropTypes.array]),
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.elementType,
+    PropTypes.array,
+  ]),
 };

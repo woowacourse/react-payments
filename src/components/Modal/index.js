@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './style.js';
 
-/**
- * Primary UI component for user interaction
- */
 export const Modal = ({ handleModalClose, children }) => {
   const closeModal = (e) => {
     if (e.target !== e.currentTarget) return;
@@ -21,5 +18,10 @@ export const Modal = ({ handleModalClose, children }) => {
 
 Modal.propTypes = {
   handleModalClose: PropTypes.func,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.elementType, PropTypes.array]),
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.elementType,
+    PropTypes.array,
+  ]),
 };
