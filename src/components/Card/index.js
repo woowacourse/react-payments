@@ -30,9 +30,7 @@ export const Card = ({ size, company, numbers, owner, validDay, ...props }) => {
           </Styled.NumbersContainer>
         </Styled.Body>
         <Styled.Footer size={size}>
-          <Styled.Owner>
-            {!owner ? GUIDE_MESSAGES.CARD_OWNER : owner}
-          </Styled.Owner>
+          <Styled.Owner>{!owner ? GUIDE_MESSAGES.CARD_OWNER : owner}</Styled.Owner>
           <Styled.ValidDay>
             {`${validDay.month ? validDay.month : GUIDE_MESSAGES.VALID_DATE_MONTH}/${
               validDay.year ? validDay.year : GUIDE_MESSAGES.VALID_DATE_YEAR
@@ -45,49 +43,18 @@ export const Card = ({ size, company, numbers, owner, validDay, ...props }) => {
 };
 
 Card.propTypes = {
-  /**
-   * Card size
-   */
   size: PropTypes.oneOf(['large', 'medium', 'small']),
-  /**
-   * Card Company
-   */
   company: PropTypes.oneOf(['', '포코', '준', '공원', '브랜', '로이드', '도비', '콜린', '썬']),
-  /**
-   * Card numbers sixteen digits { first: [], second: [], third: [], fourth: [] }
-   */
   numbers: PropTypes.shape({
     first: PropTypes.string,
     second: PropTypes.string,
     third: PropTypes.string,
     fourth: PropTypes.string,
   }),
-  /**
-   * Card owner name
-   */
   owner: PropTypes.string,
-  /**
-   * Card validDay { month, year }
-   */
   validDay: PropTypes.shape({
     month: PropTypes.string,
     year: PropTypes.string,
   }),
-
-  /**
-   * Card choose company button
-   */
   onClick: PropTypes.func,
-};
-
-Card.defaultProps = {
-  size: 'large',
-  company: '',
-  numbers: { first: '', second: '', third: '', fourth: '' },
-  owner: '',
-  validDay: {
-    month: 'MM',
-    year: 'YY',
-  },
-  onClick: () => {},
 };

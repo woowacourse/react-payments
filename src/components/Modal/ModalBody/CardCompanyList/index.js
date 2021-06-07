@@ -1,10 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import * as Styled from './style.js';
-import { CardCompanyItem } from './CardCompanyItem';
-import { CARD_COMPANIES } from '../../../../utils/constants/card.js';
+import React, { useContext } from 'react';
 
-export const CardCompanyList = ({ selectedCompany, handleCompanyChange }) => {
+import { CardCompanyItem } from './CardCompanyItem';
+
+import { CARD_COMPANIES } from '../../../../utils/constants/card.js';
+import { CardFormContext } from '../../../../contexts/CardFormContextProvider.js';
+
+import * as Styled from './style.js';
+
+export const CardCompanyList = () => {
+  const { company: selectedCompany, setCompany, setCompanyValidity } = useContext(CardFormContext);
+
+  const handleCompanyChange = (companyName) => {
+    setCompanyValidity((companyValidity) => ({ ...companyValidity, company: true }));
+    setCompany(companyName);
+  };
+
   return (
     <Styled.Container>
       {CARD_COMPANIES.map((company, idx) => (
@@ -21,10 +31,3 @@ export const CardCompanyList = ({ selectedCompany, handleCompanyChange }) => {
     </Styled.Container>
   );
 };
-
-CardCompanyList.propTypes = {
-  selectedCompany: PropTypes.string,
-  handleCompanyChange: PropTypes.func,
-};
-
-// CardCreateForm.defaultProps = {};

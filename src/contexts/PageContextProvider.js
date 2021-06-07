@@ -8,6 +8,7 @@ import { Header } from '../components/Page/Header';
 import { PAGE_TITLE } from '../utils/constants/messages';
 
 import { Button, Title } from '../style';
+import CardFormContextProvider from './CardFormContextProvider';
 
 const PageContext = createContext();
 
@@ -15,20 +16,26 @@ const PageContextProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState('cardList');
 
   const pages = {
-    cardRegister: [
-      <Header>
-        <Button onClick={() => setCurrentPage('cardList')}>{'◀︎'}</Button>
-        <Title>{PAGE_TITLE.CARD_REGISTER}</Title>
-      </Header>,
-      <CardRegister />,
-    ],
-    cardRegistered: [<CardRegistered />],
-    cardList: [
-      <Header>
-        <Title>{PAGE_TITLE.CARD_LIST}</Title>
-      </Header>,
-      <CardList />,
-    ],
+    cardRegister: (
+      <>
+        <Header>
+          <Button onClick={() => setCurrentPage('cardList')}>{'◀︎'}</Button>
+          <Title>{PAGE_TITLE.CARD_REGISTER}</Title>
+        </Header>
+        <CardFormContextProvider>
+          <CardRegister />
+        </CardFormContextProvider>
+      </>
+    ),
+    cardRegistered: <CardRegistered />,
+    cardList: (
+      <>
+        <Header>
+          <Title>{PAGE_TITLE.CARD_LIST}</Title>
+        </Header>
+        <CardList />
+      </>
+    ),
   };
 
   const renderCurrentPage = () => {
