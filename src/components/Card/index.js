@@ -5,6 +5,7 @@ import { GUIDE_MESSAGES } from '../../utils/constants/messages.js';
 
 export const Card = ({ size, company, numbers, owner, validDay, ...props }) => {
   const validMonthDisplay = Number(validDay.month) < 10 ? `0${validDay.month}` : validDay.month;
+
   return (
     <Styled.Container size={size} company={company} {...props}>
       <Styled.Inner>

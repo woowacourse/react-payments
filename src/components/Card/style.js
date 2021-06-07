@@ -59,7 +59,7 @@ const Container = styled(FlexCenter)`
   box-shadow: 0.1rem 0.1rem 0.25rem 0.1rem rgba(0, 0, 0, 0.2);
   background-color: ${(props) => (props.company ? company[props.company].color : '#D2D2D2')};
   margin: 0;
-  ${(props) => props.size === 'medium' && 'cursor: pointer'}
+  ${(props) => props.size !== 'large' && 'cursor: pointer'}
 `;
 
 const Inner = styled(FlexCenter)`
