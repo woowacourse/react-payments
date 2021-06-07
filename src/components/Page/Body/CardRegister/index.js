@@ -5,7 +5,7 @@ import { CardCreateForm } from '../../../InputForm/CardCreateForm';
 import { Modal } from '../../../Modal';
 import { CardCompanyList } from '../../../Modal/ModalBody/CardCompanyList';
 import { PaymentContext } from '../../../../contexts/PaymentContextProvider';
-import { useCardCreateForm } from '../../../../hooks/useCardCreateForm.js';
+import { useCardCreate } from '../../../../hooks/useCardCreate.js';
 import { useModal } from '../../../../hooks/useModal.js';
 
 /**
@@ -25,7 +25,7 @@ export const CardRegister = () => {
     password,
     isValidEveryInput,
     hasSubmittedEveryInput,
-  } = useCardCreateForm();
+  } = useCardCreate();
 
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
@@ -68,7 +68,7 @@ export const CardRegister = () => {
           owner={owner}
           cvc={cvc}
           password={password}
-          isValidEveryInput={isValidEveryInput() && hasSubmittedEveryInput()}
+          hasSubmittedValidInput={isValidEveryInput() && hasSubmittedEveryInput()}
           submitCardDetail={submitCardDetail}
         />
       </Styled.CardCreateFormContainer>
