@@ -1,25 +1,57 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './style.js';
+import { CardFormContext } from '../../../../contexts/CardFormContextProvider.js';
+import { isNumberType } from '../../../../utils/validators.js';
 
-export const PasswordInputContainer = ({ password, isValid, handleChange, handleBlur }) => {
-  const { firstDigit, secondDigit } = password;
+export const PasswordInputContainer = ({ isValid }) => {
+  const { password, setPassword, setPasswordValidity } = useContext(CardFormContext);
+
+  const handlePasswordChange = (e) => {
+    const inputValue = e.target.value;
+    const inputType = e.target.name;
+
+    const filteredValue = Array.from(inputValue)
+      .map((text) => (isNumberType(text) ? text : ''))
+      .join('');
+
+    setPassword((password) => ({ ...password, [inputType]: filteredValue }));
+  };
+
+  const handlePasswordBlur = (e) => {
+    const inputValue = e.target.value;
+    const inputType = e.target.name;
+
+    setPasswordValidity((passwordValidity) => ({ ...passwordValidity, [inputType]: true }));
+
+    if (inputValue.length !== 1) {
+      setPasswordValidity((passwordValidity) => ({ ...passwordValidity, [inputType]: false }));
+      return;
+    }
+
+    const invalidDigit = Object.keys(password).find((key) => !password[key]);
+
+    if (invalidDigit) {
+      setPasswordValidity((passwordValidity) => ({ ...passwordValidity, [invalidDigit]: false }));
+    }
+  };
+
   return (
-    <Styled.Container onBlur={handleBlur}>
+    <Styled.Container onBlur={handlePasswordBlur}>
       <Styled.Input
         name={'firstDigit'}
-        value={firstDigit}
+        value={password.firstDigit}
         type={'password'}
         maxLength={1}
-        onChange={handleChange}
+        onChange={handlePasswordChange}
         isValid={isValid}
       />
       <Styled.Input
         name={'secondDigit'}
-        value={secondDigit}
+        value={password.secondDigit}
         type={'password'}
         maxLength={1}
-        onChange={handleChange}
+        onChange={handlePasswordChange}
         isValid={isValid}
       />
       <Styled.BilndInput value={0} type={'password'} disabled={'disabled'} />
@@ -29,12 +61,5 @@ export const PasswordInputContainer = ({ password, isValid, handleChange, handle
 };
 
 PasswordInputContainer.propTypes = {
-  password: PropTypes.object,
   isValid: PropTypes.bool,
-  handleChange: PropTypes.func,
-  handleBlur: PropTypes.func,
-};
-
-PasswordInputContainer.defaultProps = {
-  password: { firstDigit: 1, secondDigit: 2 },
 };

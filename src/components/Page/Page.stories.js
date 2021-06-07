@@ -3,8 +3,9 @@ import { Header } from '../Page/Header';
 import { CardRegister } from '../Page/Body/CardRegister';
 import { CardRegistered } from '../Page/Body/CardRegistered';
 import { CardList } from '../Page/Body/CardList';
-
 import { Page } from '../Page';
+import { PAGE_TITLE } from '../../utils/constants/messages';
+import * as Styled from './style';
 
 export default {
   title: 'Component/Page',
@@ -16,7 +17,13 @@ const Template = (args) => <Page {...args} />;
 
 export const CardRegisterPage = Template.bind({});
 CardRegisterPage.args = {
-  children: [<CardRegister />, <Header titleText={'카드 추가'} hasButton={true} />],
+  children: [
+    <Header>
+      <Styled.Button>{'◀︎'}</Styled.Button>
+      <Styled.Title>{PAGE_TITLE.CARD_REGISTER}</Styled.Title>
+    </Header>,
+    <CardRegister />, 
+  ],
 };
 
 export const CardRegisteredPage = Template.bind({});
@@ -36,6 +43,9 @@ CardRegisteredPage.args = {
 export const CardListPage = Template.bind({});
 CardListPage.args = {
   children: [
+    <Header>
+      <Styled.Title>{PAGE_TITLE.CARD_LIST}</Styled.Title>
+    </Header>,
     <CardList
       cards={[
         {
@@ -68,6 +78,5 @@ CardListPage.args = {
         },
       ]}
     />,
-    <Header titleText={'보유카드'} hasButton={false} />,
   ],
 };

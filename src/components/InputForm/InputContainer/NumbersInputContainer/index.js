@@ -1,29 +1,73 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import * as Styled from './style.js';
+import { CardFormContext } from '../../../../contexts/CardFormContextProvider.js';
+import { isNumberType } from '../../../../utils/validators.js';
 
-export const NumbersInputContainer = ({ numbers, isValid, handleChange, handleBlur }) => {
-  const { first, second, third, fourth } = numbers;
+export const NumbersInputContainer = ({ isValid }) => {
+  const { numbers, setNumbers, setNumbersValidity } = useContext(CardFormContext);
+
+  const handleNumbersChange = (e) => {
+    const inputValue = e.target.value;
+    const inputType = e.target.name;
+
+    const filteredValue = Array.from(inputValue)
+      .map((text) => (isNumberType(text) ? text : ''))
+      .join('');
+
+    setNumbers((numbers) => ({ ...numbers, [inputType]: filteredValue }));
+  };
+
+  const handleNumbersBlur = (e) => {
+    const inputValue = e.target.value;
+    const inputType = e.target.name;
+
+    setNumbersValidity((numbersValidity) => ({ ...numbersValidity, [inputType]: true }));
+
+    if (inputValue.length !== 4) {
+      setNumbersValidity((numbersValidity) => ({ ...numbersValidity, [inputType]: false }));
+      return;
+    }
+
+    const invalidNumber = Object.keys(numbers).find((key) => !numbers[key]);
+
+    if (invalidNumber) {
+      setNumbersValidity((numbersValidity) => ({ ...numbersValidity, [invalidNumber]: false }));
+    }
+  };
+
   return (
-    <Styled.Container onBlur={handleBlur} isValid={isValid}>
-      <Styled.Input name={'first'} type={'text'} maxLength={4} value={first} onChange={handleChange} />
+    <Styled.Container onBlur={handleNumbersBlur} isValid={isValid}>
+      <Styled.Input
+        name={'first'}
+        type={'text'}
+        maxLength={4}
+        value={numbers.first}
+        onChange={handleNumbersChange}
+      />
       <span>-</span>
-      <Styled.Input name={'second'} type={'text'} maxLength={4} value={second} onChange={handleChange} />
+      <Styled.Input
+        name={'second'}
+        type={'text'}
+        maxLength={4}
+        value={numbers.second}
+        onChange={handleNumbersChange}
+      />
       <span>-</span>
-      <Styled.BlindInput name={'third'} type={'password'} maxLength={4} value={third} onChange={handleChange} />
+      <Styled.BlindInput
+        name={'third'}
+        type={'password'}
+        maxLength={4}
+        value={numbers.third}
+        onChange={handleNumbersChange}
+      />
       <span>-</span>
-      <Styled.BlindInput name={'fourth'} type={'password'} maxLength={4} value={fourth} onChange={handleChange} />
+      <Styled.BlindInput
+        name={'fourth'}
+        type={'password'}
+        maxLength={4}
+        value={numbers.fourth}
+        onChange={handleNumbersChange}
+      />
     </Styled.Container>
   );
-};
-
-NumbersInputContainer.propTypes = {
-  numbers: PropTypes.object,
-  isValid: PropTypes.bool,
-  handleChange: PropTypes.func,
-  handleBlur: PropTypes.func,
-};
-
-NumbersInputContainer.defaultProps = {
-  numbers: { first: '1111', second: '2222', third: '1234', fourth: '1234' },
 };

@@ -12,10 +12,15 @@ const Container = styled.div`
   overflow: auto;
 `;
 
-const CardListContainer = styled(FlexCenter)`
-  width: 100%;
+const CardListContainer = styled.ul`
+  display: flex;
+  list-style: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   margin: 0;
+  padding: 0;
 `;
 
 const CardAddButtonContainer = styled(FlexCenter)`
@@ -23,4 +28,19 @@ const CardAddButtonContainer = styled(FlexCenter)`
   margin: 0;
 `;
 
-export { Container, CardListContainer, CardAddButtonContainer };
+const CardItemContainer = styled(FlexCenter)`
+  width: 100%;
+  flex-direction: column;
+  margin: 0;
+  margin-bottom: 1.5rem;
+`;
+
+const CardNickName = styled(FlexCenter)`
+  width: 100%;
+  margin: 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #575757;
+`;
+
+export { Container, CardListContainer, CardAddButtonContainer, CardItemContainer, CardNickName };

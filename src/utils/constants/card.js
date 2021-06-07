@@ -13,6 +13,7 @@ export const REGISTERED_CARDS = [
     numbers: { first: '1995', second: '0519', third: '0101', fourth: '0101' },
     owner: 'HYUN CHEOL',
     validDay: { month: '18', year: '18' },
+    cardId: 0,
   },
   {
     nickName: '심바',
@@ -20,6 +21,7 @@ export const REGISTERED_CARDS = [
     numbers: { first: '1994', second: '1017', third: '1001', fourth: '0110' },
     owner: 'SUN BEAN',
     validDay: { month: '18', year: '18' },
+    cardId: 1,
   },
 ];
 

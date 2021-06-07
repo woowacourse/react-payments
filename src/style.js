@@ -17,4 +17,24 @@ const Container = styled(FlexCenter)`
   background-color: #292929;
 `;
 
-export { Container, GlobalStyle };
+const Button = styled.button`
+  color: black;
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+`;
+
+const Title = styled.h1`
+  font-weight: 400;
+  font-size: 1rem;
+  height: 100%;
+  display: flex;
+  margin-left: 0.8rem;
+  align-items: center;
+  text-align: center;
+`;
+
+export { Container, GlobalStyle, Button, Title };
