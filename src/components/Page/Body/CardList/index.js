@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 
-import { CardItem } from './CardItem';
 import { ClickableCard } from '../../../Button/ClickableCard';
 
 import { CardContext } from '../../../../contexts/CardContextProvider.js';
@@ -8,6 +7,7 @@ import { PageContext } from '../../../../contexts/PageContextProvider.js';
 
 import { PageBody } from '../../../../utils/style/Page.js';
 import * as Styled from './style.js';
+import { Card } from '../../../Card';
 
 export const CardList = () => {
   const { cards, setCurrentCard } = useContext(CardContext);
@@ -19,14 +19,20 @@ export const CardList = () => {
         <Styled.CardListContainer>
           {cards.map((card, idx) => (
             <li key={idx}>
-              <CardItem
-                key={idx}
-                card={card}
-                onClick={() => {
-                  setCurrentCard(card);
-                  setCurrentPage('cardRegistered');
-                }}
-              />
+              <Styled.CardItemContainer>
+                <Card
+                  size={'small'}
+                  company={card.company}
+                  numbers={card.numbers}
+                  owner={card.owner}
+                  validDay={card.validDay}
+                  onClick={() => {
+                    setCurrentCard(card);
+                    setCurrentPage('cardRegistered');
+                  }}
+                />
+                <Styled.CardNickName>{card.nickName}</Styled.CardNickName>
+              </Styled.CardItemContainer>
             </li>
           ))}
           <li>
