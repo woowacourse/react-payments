@@ -58,5 +58,4 @@ const InputLength = styled.span`
   word-spacing: -0.05rem;
 `;
 
-
 export { Container, Header, Title, ValidMessage, MessageBar, Message, InputLength, Body };

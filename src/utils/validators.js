@@ -4,8 +4,9 @@ export const isNumberType = (text) => {
 };
 
 export const isMonthType = (text) => {
-  const pattern = /([0][1-9])|([1][0,1,2])/g;
-  return pattern.test(text);
+  const pattern = /[1-9]|([0][1-9])|([1][0,1,2])/g;
+  const isNumberInRange = Number(text) >= 1 && Number(text) <= 12;
+  return pattern.test(text) && isNumberInRange;
 };
 
 export const isValidYearType = (yearText) => {

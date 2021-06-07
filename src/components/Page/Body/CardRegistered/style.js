@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import { FlexCenter } from '../../../../utils/style/FlexCenter';
 
-const PageContainer = styled(FlexCenter)`
+const PageContainer = styled.main`
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const MessageContainer = styled.div`
@@ -15,6 +18,11 @@ const MessageContainer = styled.div`
   font-weight: 400;
   justify-content: center;
   align-items: flex-end;
+
+  h1 {
+    font-weight: 400;
+    font-size: 1.5rem;
+  }
 `;
 
 const CardPreviewContainer = styled(FlexCenter)`

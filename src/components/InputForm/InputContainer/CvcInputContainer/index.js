@@ -1,12 +1,42 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import * as Styled from './style.js';
+import { CardFormContext } from '../../../../contexts/CardFormContextProvider.js';
+import { isNumberType } from '../../../../utils/validators.js';
 
-export const CvcInputContainer = ({ cvc, isValid, type, maxLength, handleChange, handleBlur }) => {
+export const CvcInputContainer = ({ isValid, type, maxLength }) => {
+  const { cvc, setCvc, setCvcValidity } = useContext(CardFormContext);
+
+  const handleCvcChange = (e) => {
+    const inputValue = e.target.value;
+
+    const filteredValue = Array.from(inputValue)
+      .map((text) => (isNumberType(text) ? text : ''))
+      .join('');
+
+    setCvc(filteredValue);
+  };
+
+  const handleCvcBlur = (e) => {
+    const inputValue = e.target.value;
+
+    setCvcValidity(true);
+
+    if (inputValue.length !== 3) {
+      setCvcValidity(false);
+    }
+  };
+
   return (
     <>
-      <Styled.Container onBlur={handleBlur} isValid={isValid}>
-        <Styled.Input name={'cvc'} value={cvc} type={type} maxLength={maxLength} onChange={handleChange} />
+      <Styled.Container onBlur={handleCvcBlur} isValid={isValid}>
+        <Styled.Input
+          name={'cvc'}
+          value={cvc}
+          type={type}
+          maxLength={maxLength}
+          onChange={handleCvcChange}
+        />
       </Styled.Container>
       <Styled.HelpSign>?</Styled.HelpSign>
     </>
@@ -14,14 +44,7 @@ export const CvcInputContainer = ({ cvc, isValid, type, maxLength, handleChange,
 };
 
 CvcInputContainer.propTypes = {
-  cvc: PropTypes.string,
   isValid: PropTypes.bool,
   type: PropTypes.string,
   maxLength: PropTypes.number,
-  handleChange: PropTypes.func,
-  handleBlur: PropTypes.func,
-};
-
-CvcInputContainer.defaultProps = {
-  cvc: '111',
 };
