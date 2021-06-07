@@ -15,7 +15,7 @@ import CardCompanySelectSection from "../../sections/CardCompanySelectSection/Ca
 import NavigationButton from "../../components/NavigationButton/NavigationButton";
 import Card from "../../components/Card/Card";
 import Button from "../../components/Button/Button";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../contexts/appContext";
 import ErrorText from "../../components/ErrorText/ErrorText";
 

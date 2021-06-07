@@ -32,7 +32,7 @@ const CardInputSection = ({ showCardCompanySelectSection }) => {
       return;
     }
 
-    newCardCompany && setCardCompanyState(newCardCompany);
+    setCardCompanyState(newCardCompany);
   }, [cardNumberState]);
 
   return (
