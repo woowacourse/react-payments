@@ -8,6 +8,7 @@ const Button = styled.button.attrs({
   border: none;
   font-weight: bold;
   font-size: 1rem;
+  cursor: pointer;
 `;
 
 export { Button };

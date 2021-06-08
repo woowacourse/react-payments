@@ -7,7 +7,7 @@ import { Card } from '../../../../Card';
  * Primary UI component for user interaction
  */
 
-export const CardItem = ({ card }) => {
+export const CardItem = ({ card, ...props }) => {
   const { company, numbers, owner, validDay, nickName } = card;
   return (
     <>
@@ -18,6 +18,7 @@ export const CardItem = ({ card }) => {
           numbers={numbers}
           owner={owner}
           validDay={validDay}
+          {...props}
         />
         <Styled.CardNickName>{nickName}</Styled.CardNickName>
       </Styled.Container>

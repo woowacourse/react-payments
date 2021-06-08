@@ -34,7 +34,7 @@ export const CardCreateForm = ({
   owner,
   cvc,
   password,
-  isValidEveryInput,
+  hasSubmittedValidInput,
   submitCardDetail,
 }) => {
   const hasInvalidNumbers = () => {
@@ -99,7 +99,7 @@ export const CardCreateForm = ({
         />
       </InputContainer>
       <Styled.ButtonContainer>
-        {isValidEveryInput && <InputButton text={'다음'} />}
+        {hasSubmittedValidInput && <InputButton text={'다음'} />}
       </Styled.ButtonContainer>
     </Styled.Form>
   );

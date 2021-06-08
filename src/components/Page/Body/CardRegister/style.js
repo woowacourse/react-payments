@@ -7,6 +7,7 @@ const CardContainer = styled.div`
   margin: 0;
   margin-bottom: 1rem;
   align-items: center;
+  cursor: pointer;
 `;
 
 const CardCreateFormContainer = styled.div`
