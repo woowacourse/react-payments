@@ -19,4 +19,6 @@ export const CardWrapper = styled.div`
 export const CardListTitle = styled.h1`
   font-weight: bold;
   font-size: 1.5rem;
+  margin: 1.5rem 0;
+  text-align: center;
 `;

@@ -13,13 +13,9 @@ import CardUserInput from './CardUserInput';
 import CardCVCInput from './CardCVCInput';
 import CardPasswordInput from './CardPasswordInput';
 import { CARD_INFOS_LENGTH } from '../../constants/validation';
+import { useHistory } from 'react-router-dom';
 
-const NewCardForm = ({
-  cardInfo,
-  setNewCardInfo,
-  handleModalOpen,
-  setPage,
-}) => {
+const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
   const [errorMessage, setErrorMessage] = useState({
     numbers: '',
     expireDate: '',
@@ -81,17 +77,14 @@ const NewCardForm = ({
         break;
     }
 
-    setErrorMessage({
-      ...errorMessage,
-      [name]: message,
-    });
+    setErrorMessage({ ...errorMessage, [name]: message });
 
     if (message !== '') return;
 
     setNewCardInfo({ ...cardInfo, [name]: value });
   };
 
-  // 다음눌렀을때 실행되는 메서드 (App으로 빠질수도 있음)
+  const history = useHistory();
   const onSubmitCardForm = (e) => {
     e.preventDefault();
 
@@ -100,7 +93,7 @@ const NewCardForm = ({
       return;
     }
 
-    setPage('cardComplete');
+    history.push('/completed');
   };
 
   const { numbers, expireDate, user, cvc, password } = cardInfo;
@@ -129,7 +122,6 @@ const NewCardForm = ({
         cvc={cvc}
         errorMessage={errorMessage.cvc}
         onChangeCardInput={onChangeCardInput}
-        handleModalOpen={handleModalOpen}
       />
       <CardPasswordInput
         cardFormValidation={cardFormValidation}
@@ -166,8 +158,6 @@ NewCardForm.propTypes = {
   }),
 
   setNewCardInfo: PropTypes.func,
-  setPage: PropTypes.func,
-  handleModalOpen: PropTypes.func,
 };
 
 export default NewCardForm;

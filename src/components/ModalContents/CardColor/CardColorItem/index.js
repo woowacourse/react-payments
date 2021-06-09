@@ -1,38 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { COLOR, FONT_SIZE } from '../../../../constants/style';
+import { CardColorItemWrapper, CardColor, CardName } from './index.styles';
 
-const CardColorItemWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const CardColorItem = ({ name, color, handleCardColor, setIsModalOpen }) => {
+  const pickColor = () => {
+    handleCardColor(name);
+    setIsModalOpen(false);
+  };
 
-  .card-color {
-    margin: 0 auto 0.5rem auto;
-    border-radius: 50%;
-    width: 2.8rem;
-    height: 2.8rem;
-    background-color: ${({ color }) => color || COLOR.CARD.DEFAULT};
-  }
-
-  .card-name {
-    font-size: ${FONT_SIZE.SMALL};
-    letter-spacing: -0.085rem;
-  }
-`;
-
-const CardColorItem = ({ name, color, handleCardColor }) => {
   return (
-    <CardColorItemWrapper color={color} onClick={() => handleCardColor(name)}>
-      <div className='card-color'></div>
-      <div className='card-name'>{name} 카드</div>
+    <CardColorItemWrapper onClick={pickColor}>
+      <CardColor color={color} />
+      <CardName>{name} 카드</CardName>
     </CardColorItemWrapper>
   );
 };
 
 CardColorItem.propTypes = {
+  setIsModalOpen: PropTypes.func,
   name: PropTypes.string,
   color: PropTypes.string,
   handleCardColor: PropTypes.func,

@@ -1,31 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Card from '../../common/Card';
+import useCard from '../../hooks/useCard';
 import { CardListContainer, CardWrapper, CardListTitle } from './index.styles';
 
 const CardList = () => {
-  const [cardList, setCardList] = useState([]);
-  const getCards = async () => {
-    try {
-      const response = await fetch('http://localhost:4000/cards')
-        .then((response) => response.json())
-        .then((result) => result);
-
-      return response;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(async () => {
-    setCardList(await getCards());
-  }, []);
+  const { cardList } = useCard();
 
   return (
     <CardListContainer style={{ overflow: 'scroll' }}>
-      <CardListTitle>✨ 나의 카드 목록</CardListTitle>
+      <CardListTitle>✨ 나의 카드 목록 ✨</CardListTitle>
       {cardList.map((card, index) => (
         <CardWrapper key={index}>
-          <Card cardInfo={card} />
+          <Card cardInfo={card} disableClick />
         </CardWrapper>
       ))}
     </CardListContainer>

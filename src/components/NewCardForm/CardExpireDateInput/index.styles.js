@@ -40,6 +40,7 @@ export const CardExpireDateInputWrapper = styled.div`
       color: ${COLOR.MAIN.DEFAULT};
     }
   }
+
   .input-alert {
     padding: 3px;
     font-size: ${FONT_SIZE.MINI};

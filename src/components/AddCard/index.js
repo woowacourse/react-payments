@@ -2,22 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Nav from '../Nav';
 import Card from '../../common/Card';
+import Modal from '../../common/Modal';
 import NewCardForm from '../NewCardForm';
+import useModal from '../../hooks/useModal';
+import CardColor from '../ModalContents/CardColor';
 import AddCardWrapper from './index.styles';
 
-function AddCard({ newCardInfo, handleModalOpen, setNewCardInfo, setPage }) {
+function AddCard({ newCardInfo, setCardInfo, handleCardColor }) {
+  const { isModalOpen, setIsModalOpen, onClickModalDimmed } = useModal();
+
   return (
     <AddCardWrapper>
       <Nav />
-      <div className='card-wrapper'>
-        <Card cardInfo={newCardInfo} handleModalOpen={handleModalOpen} />
-      </div>
-      <NewCardForm
-        cardInfo={newCardInfo}
-        setNewCardInfo={setNewCardInfo}
-        handleModalOpen={handleModalOpen}
-        setPage={setPage}
-      />
+      <AddCardWrapper>
+        <Card
+          cardInfo={newCardInfo}
+          setIsModalOpen={setIsModalOpen}
+          handleCardColor={handleCardColor}
+        />
+      </AddCardWrapper>
+      <NewCardForm cardInfo={newCardInfo} setNewCardInfo={setCardInfo} />
+
+      <Modal isModalOpen={isModalOpen} onClickModalDimmed={onClickModalDimmed}>
+        <CardColor
+          handleCardColor={handleCardColor}
+          setIsModalOpen={setIsModalOpen}
+        />
+      </Modal>
     </AddCardWrapper>
   );
 }
@@ -43,9 +54,9 @@ AddCard.propTypes = {
       second: PropTypes.string,
     }),
   }),
-  handleModalOpen: PropTypes.func,
-  setNewCardInfo: PropTypes.func,
-  setPage: PropTypes.func,
+
+  setCardInfo: PropTypes.func,
+  handleCardColor: PropTypes.func,
 };
 
 export default AddCard;
