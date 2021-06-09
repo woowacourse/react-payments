@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import Modal from './common/Modal';
 import CardColor from './components/ModalContents/CardColor';
 import CVCHelp from './components/ModalContents/CVCHelp';
@@ -6,6 +7,7 @@ import CardAdditionComplete from './components/CardAdditionComplete';
 import AddCard from './components/AddCard';
 import AppWrapper from './App.styles.js';
 import GlobalStyles from './global.styles';
+import CardList from './components/CardList';
 
 function App() {
   const defaultCardInfo = {
@@ -90,8 +92,11 @@ function App() {
             newCardInfo={newCardInfo}
             setNewCardInfo={setNewCardInfo}
             addNewCard={addNewCard}
+            setPage={setPage}
           />
         )}
+
+        {page === 'cardList' && <CardList />}
 
         {openModalContent.isModalOpen && (
           <Modal handleModalClose={handleModalClose}>

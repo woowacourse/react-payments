@@ -8,6 +8,14 @@ const GlobalStyles = createGlobalStyle`
   :root {
     background-color: ${COLOR.MAIN.BG};
   }
+  
+  html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
   *{
     box-sizing: border-box;

@@ -49,8 +49,13 @@ const CardInfo = css`
         max-width: 10rem;
         max-height: 1rem;
         white-space: nowrap;
-        overflow: hidden;
+        overflow-y: visible;
+        overflow-x: clip;
         text-overflow: ellipsis;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
     }
 
@@ -65,7 +70,7 @@ const CardInfo = css`
 
 const CardWrapper = styled.div`
   width: 100%;
-  height : 100%;
+  height: 100%;
   padding: 1.2rem 1.5rem;
   border-radius: 5px;
   box-shadow: 3px 3px 5px 0px ${COLOR.CARD.BOX_SHADOW};
@@ -77,8 +82,12 @@ const CardWrapper = styled.div`
   background-color: ${({ bgColor }) =>
     bgColor !== undefined ? bgColor : COLOR.CARD.DEFAULT};
 
-  ${({ cardMode }) => (cardMode ? AddCard : CardInfo)}
-  };
+  ${({ cardMode }) => (cardMode ? AddCard : CardInfo)};
+
+  & > *:not(:last-child) {
+    color: white;
+    text-shadow: 0.5px 0.5px 1px #000000;
+  }
 `;
 
 const Card = ({ cardMode, cardInfo, handleModalOpen }) => {
