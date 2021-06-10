@@ -7,10 +7,13 @@ const GlobalStyles = createGlobalStyle`
 
   :root {
     background-color: ${COLOR.MAIN.BG};
+    margin: 2rem 0;
+
+    
   }
   
   html, body {
-    height: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
