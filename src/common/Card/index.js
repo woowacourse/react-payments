@@ -11,8 +11,10 @@ import {
   CardDate,
   USIM,
 } from './index.styles';
+import { useHistory } from 'react-router';
 
 const Card = ({ cardInfo, cardMode, setIsModalOpen, disableClick }) => {
+  const history = useHistory();
   const { cardName, numbers, user, expireDate } = cardInfo;
 
   const pickColor = () => {
@@ -20,9 +22,13 @@ const Card = ({ cardInfo, cardMode, setIsModalOpen, disableClick }) => {
     setIsModalOpen(true);
   };
 
+  const linkToAddCard = () => {
+    history.push('/');
+  };
+
   return (
     <CardWrapper
-      onClick={pickColor}
+      onClick={cardMode ? linkToAddCard : pickColor}
       cardMode={cardMode}
       bgColor={CARD[cardName]}
     >

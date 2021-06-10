@@ -14,6 +14,7 @@ const CardList = () => {
   return (
     <CardListContainer>
       <CardListTitle>✨ 나의 카드 목록 ✨</CardListTitle>
+      <Card cardMode />
       {cardList.map((card, index) => (
         <CardWrapper key={index}>
           <Card cardInfo={card} disableClick />
