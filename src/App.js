@@ -6,42 +6,21 @@ import AddCard from './components/AddCard';
 import AppWrapper from './App.styles.js';
 import GlobalStyles from './global.styles';
 import CardList from './components/CardList';
-import useAddCardForm from './hooks/useAddCardForm';
+import { CardContextProvider } from './context/CardContext';
 
 function App() {
-  const {
-    cardInfo,
-    setCardInfo,
-    addNewCard,
-    handleCardColor,
-  } = useAddCardForm();
-
   return (
     <BrowserRouter>
       <GlobalStyles />
-      <AppWrapper>
-        <Switch>
-          <Route exact path='/'>
-            <AddCard
-              newCardInfo={cardInfo}
-              setCardInfo={setCardInfo}
-              handleCardColor={handleCardColor}
-            />
-          </Route>
-          <Route
-            path='/completed'
-            render={() => (
-              <CardAdditionComplete
-                newCardInfo={cardInfo}
-                setNewCardInfo={setCardInfo}
-                addNewCard={addNewCard}
-              />
-            )}
-          />
-
-          <Route path='/lists' component={CardList} />
-        </Switch>
-      </AppWrapper>
+      <CardContextProvider>
+        <AppWrapper>
+          <Switch>
+            <Route exact path='/' component={AddCard} />
+            <Route path='/completed' component={CardAdditionComplete} />
+            <Route path='/lists' component={CardList} />
+          </Switch>
+        </AppWrapper>
+      </CardContextProvider>
     </BrowserRouter>
   );
 }

@@ -12,8 +12,9 @@ import {
   USIM,
 } from './index.styles';
 
-const Card = ({ cardMode, cardInfo, setIsModalOpen, disableClick }) => {
+const Card = ({ cardInfo, cardMode, setIsModalOpen, disableClick }) => {
   const { cardName, numbers, user, expireDate } = cardInfo;
+
   const pickColor = () => {
     if (disableClick) return;
     setIsModalOpen(true);

@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import Button from '../../common/Button';
 import Card from '../../common/Card';
 import Input from '../../common/Input';
@@ -14,13 +13,15 @@ import {
 } from './index.styles';
 import useModal from '../../hooks/useModal';
 import { postNewCard } from '../../service/card';
+import { CardContext } from '../../context/CardContext';
 
-const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
+const CardAdditionComplete = () => {
   const history = useHistory();
   const { setIsModalOpen } = useModal();
+  const { cardInfo, setCardInfo, addNewCard } = useContext(CardContext);
 
   const onChangeNickNameInput = ({ target }) => {
-    setNewCardInfo({ ...newCardInfo, cardNickName: target.value });
+    setCardInfo({ ...cardInfo, cardNickName: target.value });
   };
 
   const {
@@ -31,7 +32,7 @@ const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
     expireDate,
     cvc,
     password,
-  } = newCardInfo;
+  } = cardInfo;
 
   const { first, second, third, fourth } = numbers;
   const { month, year } = expireDate;
@@ -66,7 +67,7 @@ const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
       </CardAdditionTitle>
       <CardInfo>
         <Card
-          cardInfo={newCardInfo}
+          cardInfo={cardInfo}
           setIsModalOpen={setIsModalOpen}
           disableClick
         />
@@ -74,7 +75,7 @@ const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
       <FormColumn>
         <Input
           nickNameInput
-          value={newCardInfo.cardNickName}
+          value={cardInfo.cardNickName}
           onChange={onChangeNickNameInput}
           placeholder='카드 별칭을 입력해주세요.'
         />
@@ -84,32 +85,6 @@ const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
       </CardFormButtons>
     </CardAdditionCompleteWrapper>
   );
-};
-
-CardAdditionComplete.propTypes = {
-  newCardInfo: PropTypes.shape({
-    id: PropTypes.string,
-    cardName: PropTypes.string,
-    cardNickName: PropTypes.string,
-    numbers: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-      third: PropTypes.string,
-      fourth: PropTypes.string,
-    }),
-    user: PropTypes.string,
-    expireDate: PropTypes.shape({
-      month: PropTypes.string,
-      year: PropTypes.string,
-    }),
-    cvc: PropTypes.string,
-    password: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-    }),
-  }),
-  setNewCardInfo: PropTypes.func,
-  addNewCard: PropTypes.func,
 };
 
 export default CardAdditionComplete;

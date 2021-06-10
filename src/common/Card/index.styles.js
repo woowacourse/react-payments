@@ -22,7 +22,9 @@ export const CardColumn = styled.div`
 export const CardName = styled.div`
   margin-bottom: 1.5rem;
   min-height: 21px;
+  font-weight: ${FONT_WEIGHT.BOLD};
 `;
+
 export const CardNumbers = styled.div`
   display: flex;
   justify-content: center;
@@ -82,8 +84,10 @@ export const CardWrapper = styled.div`
 
   ${({ cardMode }) => (cardMode ? AddCard : CardColumn)};
 
-  & > *:not(:last-child) {
-    color: white;
-    text-shadow: 0.5px 0.5px 1px #000000;
+  text-shadow: ${({ bgColor }) =>
+    bgColor !== undefined && `1px 1px 3px #00000030`};
+
+  * {
+    color: #ffffff;
   }
 `;

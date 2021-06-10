@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
     justify-content: center;
   }
 
-  *{
+  * {
     box-sizing: border-box;
     color : ${COLOR.MAIN.GLOBAL_FONT};
   }

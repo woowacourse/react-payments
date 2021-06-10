@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import Button from '../../common/Button';
 import { NewCardFormWrapper } from './index.styles';
 import {
@@ -13,9 +14,11 @@ import CardUserInput from './CardUserInput';
 import CardCVCInput from './CardCVCInput';
 import CardPasswordInput from './CardPasswordInput';
 import { CARD_INFOS_LENGTH } from '../../constants/validation';
-import { useHistory } from 'react-router-dom';
 
-const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
+const NewCardForm = ({ cardInfo, setCardInfo }) => {
+  const { numbers, expireDate, user, cvc, password } = cardInfo;
+
+  const [cardFormFlag, setCardFormFlag] = useState(false);
   const [errorMessage, setErrorMessage] = useState({
     numbers: '',
     expireDate: '',
@@ -24,7 +27,6 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
     password: '',
   });
 
-  const [cardFormFlag, setCardFormFlag] = useState(false);
   const cardFormValidation = () => {
     const isFilled =
       Object.values(cardInfo.numbers).every(
@@ -49,6 +51,7 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
     },
   }) => {
     const message = messageObject[name](value);
+
     setErrorMessage({
       ...errorMessage,
       [name]: message,
@@ -56,7 +59,7 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
 
     if (message !== '') return;
 
-    setNewCardInfo((prevInfo) => ({
+    setCardInfo((prevInfo) => ({
       ...prevInfo,
       [name]: { ...prevInfo[name], [detail]: value },
     }));
@@ -81,7 +84,7 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
 
     if (message !== '') return;
 
-    setNewCardInfo({ ...cardInfo, [name]: value });
+    setCardInfo({ ...cardInfo, [name]: value });
   };
 
   const history = useHistory();
@@ -95,8 +98,6 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
 
     history.push('/completed');
   };
-
-  const { numbers, expireDate, user, cvc, password } = cardInfo;
 
   return (
     <NewCardFormWrapper onSubmit={onSubmitCardForm}>
@@ -137,27 +138,8 @@ const NewCardForm = ({ cardInfo, setNewCardInfo }) => {
 };
 
 NewCardForm.propTypes = {
-  cardInfo: PropTypes.shape({
-    cardName: PropTypes.string,
-    numbers: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-      third: PropTypes.string,
-      fourth: PropTypes.string,
-    }),
-    user: PropTypes.string,
-    expireDate: PropTypes.shape({
-      month: PropTypes.string,
-      year: PropTypes.string,
-    }),
-    cvc: PropTypes.string,
-    password: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-    }),
-  }),
-
-  setNewCardInfo: PropTypes.func,
+  cardInfo: PropTypes.object,
+  setCardInfo: PropTypes.func,
 };
 
 export default NewCardForm;

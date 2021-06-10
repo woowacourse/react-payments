@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { CARD } from '../../../constants/style';
 import CardColorItem from './CardColorItem';
 import CardColorWrapper from './index.styles';
+import { CardContext } from '../../../context/CardContext';
 
-const CardColor = ({ handleCardColor, setIsModalOpen }) => {
+const CardColor = ({ setIsModalOpen }) => {
+  const { handleCardColor } = useContext(CardContext);
+
   return (
     <CardColorWrapper>
       {Object.keys(CARD).map((key, index) => (

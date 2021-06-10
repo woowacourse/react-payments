@@ -13,49 +13,57 @@ export const CardExpireDateInputWrapper = styled.div`
     align-items: center;
     letter-spacing: -0.085rem;
   }
+`;
 
-  .input-container {
-    display: flex;
-    background-color: ${COLOR.INPUT.DEFAULT_BG};
-    border-radius: 7px;
-    justify-content: center;
-    align-items: center;
+export const InputLabel = styled.div`
+  font-size: ${FONT_SIZE.SMALL};
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  letter-spacing: -0.085rem;
+`;
 
-    input {
-      width: 4.375rem;
-      margin: 0 2px;
-      font-size: inherit;
-    }
+export const InputAlert = styled.div`
+  padding: 3px;
+  font-size: ${FONT_SIZE.MINI};
+  color: ${COLOR.CARD.RED};
+`;
 
-    .input-separator {
-      display: inline-block;
-      width: 0.8rem;
-      height: 45px;
-      line-height: 41px;
-      text-align: center;
-      color: ${COLOR.MAIN.MINT};
-    }
+export const InputContainer = styled.div`
+  display: flex;
+  background-color: ${COLOR.INPUT.DEFAULT_BG};
+  border-radius: 7px;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
 
-    .gray {
-      color: ${COLOR.MAIN.DEFAULT};
-    }
+  input {
+    width: 4.225rem;
+    margin: 0 2px;
+    font-size: inherit;
   }
 
-  .input-alert {
-    padding: 3px;
-    font-size: ${FONT_SIZE.MINI};
-    color: ${COLOR.CARD.RED};
+  .gray {
+    color: ${COLOR.MAIN.DEFAULT};
+  }
+`;
+
+export const InputSeperator = styled.span`
+  display: inline-block;
+  width: 0.8rem;
+  height: 45px;
+  line-height: 41px;
+  text-align: center;
+  color: ${COLOR.MAIN.MINT};
+`;
+
+export const ExpireDateContainer = styled.div`
+  input[name='month'] {
+    text-align: right;
   }
 
-  .expire-date-container {
-    width: 40%;
-
-    input[name='month'] {
-      text-align: right;
-    }
-
-    input[name='year'] {
-      text-align: left;
-    }
+  input[name='year'] {
+    text-align: left;
   }
 `;
