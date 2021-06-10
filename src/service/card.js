@@ -3,7 +3,7 @@ import { fetchOptions } from './API';
 export const getCards = async () => {
   try {
     const response = await fetch(
-      'http://localhost:4000/cards'
+      'https://git.heroku.com/ddongule-payments-api.git/cards'
     ).then((response) => response.json());
 
     return response;
@@ -14,7 +14,10 @@ export const getCards = async () => {
 
 export const postNewCard = async (history, body) => {
   try {
-    await fetch('http://localhost:4000/cards', fetchOptions('POST', body));
+    await fetch(
+      'https://git.heroku.com/ddongule-payments-api.git/cards',
+      fetchOptions('POST', body)
+    );
 
     history.push('/lists');
   } catch (error) {
