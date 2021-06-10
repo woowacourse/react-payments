@@ -12,14 +12,12 @@ export const getCards = async () => {
   }
 };
 
-export const postNewCard = async (history, body) => {
+export const postNewCard = async (body) => {
   try {
     await fetch(
       'https://ddongule-payments.herokuapp.com/cards',
       fetchOptions('POST', body)
     );
-
-    history.push('/lists');
   } catch (error) {
     console.error(error);
   }

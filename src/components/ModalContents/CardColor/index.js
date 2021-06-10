@@ -4,10 +4,8 @@ import { CARD } from '../../../constants/style';
 import CardColorItem from './CardColorItem';
 import CardColorWrapper from './index.styles';
 import { CardContext } from '../../../context/CardContext';
-import useModal from '../../../hooks/useModal';
 
-const CardColor = () => {
-  const { setIsModalOpen } = useModal();
+const CardColor = ({ setIsModalOpen }) => {
   const { handleCardColor } = useContext(CardContext);
 
   return (

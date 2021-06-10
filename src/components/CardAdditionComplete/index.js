@@ -54,10 +54,11 @@ const CardAdditionComplete = () => {
   const onSubmitAddCard = async (e) => {
     e.preventDefault();
 
+    await postNewCard(body);
     addNewCard();
-    postNewCard(history, body);
 
     alert('새 카드가 등록되었습니다.');
+    history.push('/lists');
   };
 
   return (

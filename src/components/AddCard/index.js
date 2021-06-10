@@ -21,7 +21,7 @@ function AddCard() {
       <NewCardForm cardInfo={cardInfo} setCardInfo={setCardInfo} />
 
       <Modal isModalOpen={isModalOpen} onClickModalDimmed={onClickModalDimmed}>
-        <CardColor />
+        <CardColor setIsModalOpen={setIsModalOpen} />
       </Modal>
     </AddCardWrapper>
   );
