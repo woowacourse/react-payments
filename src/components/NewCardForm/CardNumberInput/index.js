@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Input from '../../../common/Input';
-import { CardNumberInputWrapper } from './index.styles';
+import {
+  CardNumberInputWrapper,
+  InputContainer,
+  InputLabel,
+  InputAlert,
+} from './index.styles';
 
 const CardNumberInput = ({
   numbers,
@@ -11,26 +16,29 @@ const CardNumberInput = ({
 }) => {
   return (
     <CardNumberInputWrapper>
-      <div className='input-label'>카드 번호</div>
-      <div className='input-container'>
+      <InputLabel>카드 번호</InputLabel>
+      <InputContainer>
         {Object.keys(numbers).map((key, index) => {
           return (
-            <Input
-              key={index}
-              type='text'
-              name='numbers'
-              data-detail={key}
-              value={numbers[key]}
-              onChange={onChangeCardInputObject}
-              onBlur={cardFormValidation}
-              minLength='4'
-              maxLength='4'
-              required
-            />
+            <>
+              <Input
+                key={index}
+                type='text'
+                name='numbers'
+                data-detail={key}
+                value={numbers[key]}
+                onChange={onChangeCardInputObject}
+                onBlur={cardFormValidation}
+                minLength='4'
+                maxLength='4'
+                required
+              />
+              <span />
+            </>
           );
         })}
-      </div>
-      <div className='input-alert'>{errorMessage}</div>
+      </InputContainer>
+      <InputAlert>{errorMessage}</InputAlert>
     </CardNumberInputWrapper>
   );
 };

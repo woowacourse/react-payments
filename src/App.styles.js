@@ -12,7 +12,7 @@ const AppWrapper = styled.div`
   height: 820px;
   padding: 20px;
   box-shadow: 1px 1px 1px ${COLOR.KEYBOARD.BORDER};
-  margin: 2rem auto;
+  margin: 0 auto;
 `;
 
 export default AppWrapper;

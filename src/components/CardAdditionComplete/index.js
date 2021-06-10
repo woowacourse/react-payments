@@ -1,70 +1,90 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import Button from '../../common/Button';
 import Card from '../../common/Card';
 import Input from '../../common/Input';
-import { CardAdditionCompleteWrapper } from './index.styles';
+import { v4 as uuidv4 } from 'uuid';
+import { useHistory } from 'react-router-dom';
+import {
+  CardAdditionCompleteWrapper,
+  CardAdditionTitle,
+  FormColumn,
+  CardInfo,
+  CardFormButtons,
+} from './index.styles';
+import useModal from '../../hooks/useModal';
+import { postNewCard } from '../../service/card';
+import { CardContext } from '../../context/CardContext';
 
-const CardAdditionComplete = ({ newCardInfo, setNewCardInfo, addNewCard }) => {
-  const onChangeNickNameInput = (e) => {
-    const { value } = e.target;
+const CardAdditionComplete = () => {
+  const history = useHistory();
+  const { setIsModalOpen } = useModal();
+  const { cardInfo, setCardInfo, addNewCard } = useContext(CardContext);
 
-    setNewCardInfo({ ...newCardInfo, cardNickName: value });
+  const onChangeNickNameInput = ({ target }) => {
+    setCardInfo({ ...cardInfo, cardNickName: target.value });
   };
 
-  const onSumbitAddCard = (e) => {
+  const {
+    cardName,
+    cardNickName,
+    numbers,
+    user,
+    expireDate,
+    cvc,
+    password,
+  } = cardInfo;
+
+  const { first, second, third, fourth } = numbers;
+  const { month, year } = expireDate;
+
+  const body = {
+    id: uuidv4(),
+    cardName,
+    cardNickName,
+    user,
+    cvc,
+    numbers: { first, second, third, fourth },
+    expireDate: { month, year },
+    password: {
+      first: password.first,
+      second: password.second,
+    },
+  };
+
+  const onSubmitAddCard = async (e) => {
     e.preventDefault();
 
     addNewCard();
+    postNewCard(history, body);
+
     alert('새 카드가 등록되었습니다.');
   };
 
   return (
-    <CardAdditionCompleteWrapper onSubmit={onSumbitAddCard}>
-      <div className='form__column card-addition-title'>
+    <CardAdditionCompleteWrapper onSubmit={onSubmitAddCard}>
+      <CardAdditionTitle>
         <h1>카드등록이 완료되었습니다.</h1>
-      </div>
-      <div className='form__column card-info'>
-        <Card cardInfo={newCardInfo} />
-      </div>
-      <div className='form__column'>
+      </CardAdditionTitle>
+      <CardInfo>
+        <Card
+          cardInfo={cardInfo}
+          setIsModalOpen={setIsModalOpen}
+          disableClick
+        />
+      </CardInfo>
+      <FormColumn>
         <Input
           nickNameInput
-          value={newCardInfo.cardNickName}
+          value={cardInfo.cardNickName}
           onChange={onChangeNickNameInput}
           placeholder='카드 별칭을 입력해주세요.'
         />
-      </div>
-      <div className='card-form-btns'>
+      </FormColumn>
+      <CardFormButtons>
         <Button>다음</Button>
-      </div>
+      </CardFormButtons>
     </CardAdditionCompleteWrapper>
   );
-};
-
-CardAdditionComplete.propTypes = {
-  newCardInfo: PropTypes.shape({
-    cardName: PropTypes.string,
-    cardNickName: PropTypes.string,
-    numbers: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-      third: PropTypes.string,
-      fourth: PropTypes.string,
-    }),
-    user: PropTypes.string,
-    expireDate: PropTypes.shape({
-      month: PropTypes.string,
-      year: PropTypes.string,
-    }),
-    cvc: PropTypes.string,
-    password: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-    }),
-  }),
-  setNewCardInfo: PropTypes.func,
-  addNewCard: PropTypes.func,
 };
 
 export default CardAdditionComplete;
