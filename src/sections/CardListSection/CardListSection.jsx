@@ -1,12 +1,16 @@
+import { useContext } from "react";
 import classNames from "classnames/bind";
-import styles from "./CardListContainer.module.scss";
+import styles from "./CardListSection.module.scss";
 import { getCardColor } from "../../utils/cardCompany";
 
 import Card from "../../components/Card/Card";
+import { AppContext } from "../../contexts/appContext";
 
 const cx = classNames.bind(styles);
 
-const CardListContainer = ({ cardListState }) => {
+const CardListSection = () => {
+  const { cardListState } = useContext(AppContext);
+
   const cardList = cardListState.map((card) => {
     return (
       <Card
@@ -24,4 +28,4 @@ const CardListContainer = ({ cardListState }) => {
   return <div className={cx("card-list-container")}>{cardList}</div>;
 };
 
-export default CardListContainer;
+export default CardListSection;

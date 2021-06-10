@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./AddCardCompletePage.module.scss";
 
-import useCardList from "../../hooks/cardListHook";
+import useCardList from "../../hooks/useCardList";
 
 import { LABEL_TEXT, STATE_KEY, PAGE_PATH, ANIMATION } from "../../constants";
 import appConfirm from "../../utils/appConfirm";
@@ -17,15 +17,15 @@ import { getCardColor } from "../../utils/cardCompany";
 
 const cx = classNames.bind(styles);
 
-const AddCardCompletePage = ({ cardListState, setCardListState }) => {
-  const cardListHook = useCardList(cardListState, setCardListState);
+const AddCardCompletePage = () => {
+  const { cardListState, updateCardItem } = useCardList();
   const [cardNickName, setCardNickName] = useState("");
   const [lastAddedCard] = useMemo(() => cardListState.slice(-1), [cardListState]);
   const history = useHistory();
 
   const onCardNickNameRegister = () => {
     lastAddedCard[STATE_KEY.CARD_NICK_NAME] = cardNickName;
-    cardListHook.updateCardItem(lastAddedCard.cardNumber, lastAddedCard);
+    updateCardItem(lastAddedCard.cardNumber, lastAddedCard);
     history.push(PAGE_PATH.ROOT);
   };
 

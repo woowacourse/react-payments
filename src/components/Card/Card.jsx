@@ -15,50 +15,32 @@ const Card = ({
   cardExpiration = initialCardExpiration,
   cardNickName = "",
   className,
+  onClick,
 }) => {
   const { firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber } = cardNumber;
+
+  const thirdCardNumberDots = [...Array(thirdCardNumber.length)].map(() => (
+    <div className={cx("card__number-dot")}></div>
+  ));
+  const fourthCardNumberDots = [...Array(fourthCardNumber.length)].map(() => (
+    <div className={cx("card__number-dot")}></div>
+  ));
 
   const cardExpirationText =
     Object.values(cardExpiration).every((value) => value !== "") && Object.values(cardExpiration).join(" / ");
 
+  const clickableClass = onClick ? "card--clickable" : "";
+
   return (
     <div className={cx("card-wrapper", className)}>
-      <div className={cx("card")} style={{ backgroundColor }}>
+      <div className={cx("card", clickableClass)} style={{ backgroundColor }} onClick={onClick}>
         <span className={cx("card__type")}>{cardCompany}</span>
         <div className={cx("card__chip")}></div>
         <div className={cx("card__number")}>
-          <input
-            type="text"
-            name="카드번호 입력"
-            maxLength="4"
-            className={cx("card__number-input", "card__number-input--visible")}
-            defaultValue={firstCardNumber}
-            disabled
-          />
-          <input
-            type="text"
-            name="카드번호 입력"
-            maxLength="4"
-            className={cx("card__number-input", "card__number-input--visible")}
-            defaultValue={secondCardNumber}
-            disabled
-          />
-          <input
-            type="password"
-            name="카드번호 입력"
-            maxLength="4"
-            className={cx("card__number-input", "card__number-input--invisible")}
-            defaultValue={thirdCardNumber}
-            disabled
-          />
-          <input
-            type="password"
-            name="카드번호 입력"
-            maxLength="4"
-            className={cx("card__number-input", "card__number-input--invisible")}
-            defaultValue={fourthCardNumber}
-            disabled
-          />
+          <div className={cx("card__number-digits", "card__number-digits--visible")}>{firstCardNumber}</div>
+          <div className={cx("card__number-digits", "card__number-digits--visible")}>{secondCardNumber}</div>
+          <div className={cx("card__number-digits", "card__number-dots")}>{thirdCardNumberDots}</div>
+          <div className={cx("card__number-digits", "card__number-dots")}>{fourthCardNumberDots}</div>
         </div>
         <div className={cx("card__bottom")}>
           <span className={cx("card__owner")}>{cardOwner}</span>

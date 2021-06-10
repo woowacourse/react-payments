@@ -1,0 +1,6 @@
+@use "../../assets/scss/index.scss" as *;
+
+.error-text {
+  font-size: 10px;
+  color: $errorTextColor;
+}

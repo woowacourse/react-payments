@@ -6,6 +6,7 @@ import CardListPage from "./pages/CardListPage/CardListPage";
 import AddCardPage from "./pages/AddCardPage/AddCardPage";
 import AddCardCompletePage from "./pages/AddCardCompletePage/AddCardCompletePage";
 import { STATE_KEY } from "./constants";
+import { AppContext, InputValidationContext } from "./contexts/appContext";
 
 const initialCardState = {
   [STATE_KEY.CARD_COMPANY]: "",
@@ -25,8 +26,19 @@ const initialCardState = {
   [STATE_KEY.CARD_PASSWORD]: [null, null],
 };
 
+const initialCardInputValidationState = {
+  [STATE_KEY.CARD_COMPANY]: "",
+  [STATE_KEY.CARD_NUMBER]: "",
+  [STATE_KEY.CARD_EXPIRATION]: "",
+  [STATE_KEY.CARD_OWNER]: "",
+  [STATE_KEY.CARD_CVC]: "",
+  [STATE_KEY.CARD_PASSWORD]: "",
+};
+
 function App() {
   const [cardState, setCardState] = useState(initialCardState);
+  const [cardListState, setCardListState] = useState([]);
+  const [validationMessage, setValidationMessage] = useState(initialCardInputValidationState);
 
   const setCardStateByKey = (cardStateKey, cardStateValue) => {
     if (!(cardStateKey in cardState)) {
@@ -43,32 +55,23 @@ function App() {
     setCardState({ ...initialCardState });
   };
 
-  const [cardListState, setCardListState] = useState([]);
-
   return (
     <div className="App">
-      <Switch>
-        <Route path="/add" exact>
-          <AddCardPage
-            cardState={cardState}
-            setCardStateByKey={setCardStateByKey}
-            cardListState={cardListState}
-            setCardListState={setCardListState}
-            setCardStateEmpty={setCardStateEmpty}
-          />
-        </Route>
-        <Route path="/complete" exact>
-          <AddCardCompletePage
-            cardState={cardState}
-            setCardStateByKey={setCardStateByKey}
-            cardListState={cardListState}
-            setCardListState={setCardListState}
-          />
-        </Route>
-        <Route>
-          <CardListPage cardListState={cardListState} />
-        </Route>
-      </Switch>
+      <AppContext.Provider value={{ cardState, cardListState, setCardStateByKey, setCardStateEmpty, setCardListState }}>
+        <Switch>
+          <Route path="/add" exact>
+            <InputValidationContext.Provider value={{ validationMessage, setValidationMessage }}>
+              <AddCardPage />
+            </InputValidationContext.Provider>
+          </Route>
+          <Route path="/complete" exact>
+            <AddCardCompletePage />
+          </Route>
+          <Route>
+            <CardListPage />
+          </Route>
+        </Switch>
+      </AppContext.Provider>
     </div>
   );
 }
