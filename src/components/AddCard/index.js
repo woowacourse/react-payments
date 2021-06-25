@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import Nav from '../Nav';
-import Card from '../../common/Card';
+
+import AddCardWrapper from './index.styles';
+import Card from '../Card';
+import CardColor from '../ModalContents/CardColor';
+import { CardContext } from '../../context/CardContext';
 import Modal from '../../common/Modal';
+import Nav from '../Nav';
 import NewCardForm from '../NewCardForm';
 import useModal from '../../hooks/useModal';
-import CardColor from '../ModalContents/CardColor';
-import AddCardWrapper from './index.styles';
-import { CardContext } from '../../context/CardContext';
 
 function AddCard() {
   const { isModalOpen, setIsModalOpen, onClickModalDimmed } = useModal();

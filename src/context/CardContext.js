@@ -29,9 +29,6 @@ export const CardContextProvider = ({ children }) => {
   const [addCardInfo, setAddCardInfo] = useState([]);
   const [cardInfo, setCardInfo] = useState(defaultCardInfo);
 
-  console.log(addCardInfo);
-  console.log(cardInfo);
-
   const addNewCard = () => {
     setAddCardInfo([...addCardInfo, cardInfo]);
     resetNewCardInfo();

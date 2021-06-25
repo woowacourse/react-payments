@@ -1,19 +1,20 @@
-import React, { useContext } from 'react';
-import Button from '../../common/Button';
-import Card from '../../common/Card';
-import Input from '../../common/Input';
-import { v4 as uuidv4 } from 'uuid';
-import { useHistory } from 'react-router-dom';
 import {
   CardAdditionCompleteWrapper,
   CardAdditionTitle,
-  FormColumn,
-  CardInfo,
   CardFormButtons,
+  CardInfo,
+  FormColumn,
 } from './index.styles';
-import useModal from '../../hooks/useModal';
-import { postNewCard } from '../../service/card';
+import React, { useContext } from 'react';
+
+import Button from '../../common/Button';
+import Card from '../Card';
 import { CardContext } from '../../context/CardContext';
+import Input from '../../common/Input';
+import { postNewCard } from '../../service/card';
+import { useHistory } from 'react-router-dom';
+import useModal from '../../hooks/useModal';
+import { v4 as uuidv4 } from 'uuid';
 
 const CardAdditionComplete = () => {
   const history = useHistory();
@@ -67,11 +68,7 @@ const CardAdditionComplete = () => {
         <h1>카드등록이 완료되었습니다.</h1>
       </CardAdditionTitle>
       <CardInfo>
-        <Card
-          cardInfo={cardInfo}
-          setIsModalOpen={setIsModalOpen}
-          disableClick
-        />
+        <Card setIsModalOpen={setIsModalOpen} disableClick />
       </CardInfo>
       <FormColumn>
         <Input
