@@ -1,12 +1,13 @@
-import React from 'react';
-import Card from '../../common/Card';
-import useCard from '../../hooks/useCard';
 import {
   CardListContainer,
-  CardWrapper,
   CardListTitle,
+  CardWrapper,
   NickName,
 } from './index.styles';
+
+import Card from '../../common/Card';
+import React from 'react';
+import useCard from '../../hooks/useCard';
 
 const CardList = () => {
   const { cardList } = useCard();

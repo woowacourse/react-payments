@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+
 import PropTypes from 'prop-types';
 
 export const CardContext = createContext(null);
@@ -25,11 +26,14 @@ export const defaultCardInfo = {
 };
 
 export const CardContextProvider = ({ children }) => {
-  const [myCards, setMyCards] = useState([]);
+  const [addCardInfo, setAddCardInfo] = useState([]);
   const [cardInfo, setCardInfo] = useState(defaultCardInfo);
 
+  console.log(addCardInfo);
+  console.log(cardInfo);
+
   const addNewCard = () => {
-    setMyCards([...myCards, cardInfo]);
+    setAddCardInfo([...addCardInfo, cardInfo]);
     resetNewCardInfo();
   };
 
