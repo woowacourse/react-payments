@@ -34,6 +34,21 @@ export const CardContextProvider = ({ children }) => {
     resetNewCardInfo();
   };
 
+  const changeCardNickName = ({ target }) => {
+    setCardInfo({ ...cardInfo, cardNickName: target.value });
+  };
+
+  const changeCardName = (name, value) => {
+    setCardInfo({ ...cardInfo, [name]: value });
+  };
+
+  const setNewCardInfo = (name, detail, value) => {
+    setCardInfo((prevInfo) => ({
+      ...prevInfo,
+      [name]: { ...prevInfo[name], [detail]: value },
+    }));
+  };
+
   const handleCardColor = (name) => {
     setCardInfo({ ...cardInfo, cardName: name });
   };
@@ -45,6 +60,9 @@ export const CardContextProvider = ({ children }) => {
       value={{
         cardInfo,
         setCardInfo,
+        setNewCardInfo,
+        changeCardName,
+        changeCardNickName,
         handleCardColor,
         addNewCard,
         resetNewCardInfo,

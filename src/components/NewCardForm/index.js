@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
-import Button from '../../common/Button';
-import { NewCardFormWrapper } from './index.styles';
 import {
   getCVCMessage,
   getUserMessage,
   messageObject,
 } from '../../utils/cardFormValidator';
-import CardNumberInput from './CardNumberInput';
-import CardExpireDateInput from './CardExpireDateInput';
-import CardUserInput from './CardUserInput';
-import CardCVCInput from './CardCVCInput';
-import CardPasswordInput from './CardPasswordInput';
-import { CARD_INFOS_LENGTH } from '../../constants/validation';
 
-const NewCardForm = ({ cardInfo, setCardInfo }) => {
+import Button from '../../common/Button';
+import { CARD_INFOS_LENGTH } from '../../constants/validation';
+import CardCVCInput from './CardCVCInput';
+import CardExpireDateInput from './CardExpireDateInput';
+import CardNumberInput from './CardNumberInput';
+import CardPasswordInput from './CardPasswordInput';
+import CardUserInput from './CardUserInput';
+import { NewCardFormWrapper } from './index.styles';
+import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+
+const NewCardForm = ({ cardInfo, changeCardName, setNewCardInfo }) => {
   const { numbers, expireDate, user, cvc, password } = cardInfo;
 
   const [cardFormFlag, setCardFormFlag] = useState(false);
@@ -58,10 +59,7 @@ const NewCardForm = ({ cardInfo, setCardInfo }) => {
 
     if (message !== '') return;
 
-    setCardInfo((prevInfo) => ({
-      ...prevInfo,
-      [name]: { ...prevInfo[name], [detail]: value },
-    }));
+    setNewCardInfo(name, detail, value);
   };
 
   const onChangeCardInput = (e) => {
@@ -83,7 +81,7 @@ const NewCardForm = ({ cardInfo, setCardInfo }) => {
 
     if (message !== '') return;
 
-    setCardInfo({ ...cardInfo, [name]: value });
+    changeCardName(name, value);
   };
 
   const history = useHistory();
@@ -138,7 +136,8 @@ const NewCardForm = ({ cardInfo, setCardInfo }) => {
 
 NewCardForm.propTypes = {
   cardInfo: PropTypes.object,
-  setCardInfo: PropTypes.func,
+  changeCardName: PropTypes.func,
+  setNewCardInfo: PropTypes.func,
 };
 
 export default NewCardForm;

@@ -19,11 +19,7 @@ import { v4 as uuidv4 } from 'uuid';
 const CardAdditionComplete = () => {
   const history = useHistory();
   const { setIsModalOpen } = useModal();
-  const { cardInfo, setCardInfo, addNewCard } = useContext(CardContext);
-
-  const onChangeNickNameInput = ({ target }) => {
-    setCardInfo({ ...cardInfo, cardNickName: target.value });
-  };
+  const { cardInfo, changeCardNickName, addNewCard } = useContext(CardContext);
 
   const {
     cardName,
@@ -78,7 +74,7 @@ const CardAdditionComplete = () => {
         <Input
           nickNameInput
           value={cardInfo.cardNickName}
-          onChange={onChangeNickNameInput}
+          onChange={changeCardNickName}
           placeholder='카드 별칭을 입력해주세요.'
         />
       </FormColumn>

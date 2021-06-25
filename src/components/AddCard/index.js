@@ -11,7 +11,7 @@ import useModal from '../../hooks/useModal';
 
 function AddCard() {
   const { isModalOpen, setIsModalOpen, onClickModalDimmed } = useModal();
-  const { cardInfo, setCardInfo } = useContext(CardContext);
+  const { cardInfo, changeCardName, setNewCardInfo } = useContext(CardContext);
 
   return (
     <AddCardWrapper>
@@ -19,7 +19,11 @@ function AddCard() {
       <AddCardWrapper>
         <Card cardInfo={cardInfo} setIsModalOpen={setIsModalOpen} />
       </AddCardWrapper>
-      <NewCardForm cardInfo={cardInfo} setCardInfo={setCardInfo} />
+      <NewCardForm
+        cardInfo={cardInfo}
+        changeCardName={changeCardName}
+        setNewCardInfo={setNewCardInfo}
+      />
 
       <Modal isModalOpen={isModalOpen} onClickModalDimmed={onClickModalDimmed}>
         <CardColor setIsModalOpen={setIsModalOpen} />
