@@ -1,16 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { CARD } from '../../constants/style';
 import {
-  CardWrapper,
+  AddCard,
   CardColumn,
+  CardDate,
+  CardDetails,
   CardName,
   CardNumbers,
-  CardDetails,
   CardUser,
-  CardDate,
+  CardWrapper,
   USIM,
 } from './index.styles';
+
+import { CARD } from '../../constants/style';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { useHistory } from 'react-router';
 
 const Card = ({ cardInfo, cardMode, setIsModalOpen, disableClick }) => {
@@ -33,7 +35,7 @@ const Card = ({ cardInfo, cardMode, setIsModalOpen, disableClick }) => {
       bgColor={CARD[cardName]}
     >
       {cardMode ? (
-        <div className='cardMode'>+</div>
+        <AddCard>+</AddCard>
       ) : (
         <>
           <CardColumn>

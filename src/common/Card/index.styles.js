@@ -1,17 +1,16 @@
-import styled, { css } from 'styled-components';
 import { COLOR, FONT_SIZE, FONT_WEIGHT } from '../../constants/style';
 
-export const AddCard = css`
-  .cardMode {
-    font-size: ${FONT_SIZE.XXLARGE};
-    color: ${COLOR.PLUS};
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: ${FONT_WEIGHT.BOLD};
-  }
+import styled from 'styled-components';
+
+export const AddCard = styled.div`
+  font-size: ${FONT_SIZE.XXLARGE};
+  color: ${COLOR.PLUS};
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: ${FONT_WEIGHT.BOLD};
 `;
 
 export const CardColumn = styled.div`
