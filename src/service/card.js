@@ -9,6 +9,8 @@ export const getCards = async () => {
     return response;
   } catch (error) {
     console.error(error);
+
+    return [];
   }
 };
 

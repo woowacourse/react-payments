@@ -5,7 +5,7 @@ import {
   NickName,
 } from './index.styles';
 
-import Card from '../../common/Card';
+import Card from '../Card';
 import React from 'react';
 import useCard from '../../hooks/useCard';
 

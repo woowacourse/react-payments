@@ -8,7 +8,7 @@ import {
 import React, { useContext } from 'react';
 
 import Button from '../../common/Button';
-import Card from '../Card';
+import Card from '../../common/Card';
 import { CardContext } from '../../context/CardContext';
 import Input from '../../common/Input';
 import { postNewCard } from '../../service/card';
@@ -68,7 +68,11 @@ const CardAdditionComplete = () => {
         <h1>카드등록이 완료되었습니다.</h1>
       </CardAdditionTitle>
       <CardInfo>
-        <Card setIsModalOpen={setIsModalOpen} disableClick />
+        <Card
+          cardInfo={cardInfo}
+          setIsModalOpen={setIsModalOpen}
+          disableClick
+        />
       </CardInfo>
       <FormColumn>
         <Input
