@@ -9,10 +9,10 @@ const AppWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 450px;
-  height: 820px;
+  min-height: 100%;
   padding: 20px;
   box-shadow: 1px 1px 1px ${COLOR.KEYBOARD.BORDER};
-  margin: 2rem auto;
+  margin: 0 auto;
 `;
 
 export default AppWrapper;

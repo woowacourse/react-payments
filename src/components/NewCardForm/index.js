@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Button from '../../common/Button';
-import { NewCardFormWrapper } from './index.styles';
 import {
   getCVCMessage,
   getUserMessage,
   messageObject,
 } from '../../utils/cardFormValidator';
-import CardNumberInput from './CardNumberInput';
-import CardExpireDateInput from './CardExpireDateInput';
-import CardUserInput from './CardUserInput';
-import CardCVCInput from './CardCVCInput';
-import CardPasswordInput from './CardPasswordInput';
-import { CARD_INFOS_LENGTH } from '../../constants/validation';
 
-const NewCardForm = ({
-  cardInfo,
-  setNewCardInfo,
-  handleModalOpen,
-  setPage,
-}) => {
+import Button from '../../common/Button';
+import { CARD_INFOS_LENGTH } from '../../constants/validation';
+import CardCVCInput from './CardCVCInput';
+import CardExpireDateInput from './CardExpireDateInput';
+import CardNumberInput from './CardNumberInput';
+import CardPasswordInput from './CardPasswordInput';
+import CardUserInput from './CardUserInput';
+import { NewCardFormWrapper } from './index.styles';
+import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+
+const NewCardForm = ({ cardInfo, changeCardName, setNewCardInfo }) => {
+  const { numbers, expireDate, user, cvc, password } = cardInfo;
+
+  const [cardFormFlag, setCardFormFlag] = useState(false);
   const [errorMessage, setErrorMessage] = useState({
     numbers: '',
     expireDate: '',
@@ -28,7 +28,6 @@ const NewCardForm = ({
     password: '',
   });
 
-  const [cardFormFlag, setCardFormFlag] = useState(false);
   const cardFormValidation = () => {
     const isFilled =
       Object.values(cardInfo.numbers).every(
@@ -60,10 +59,7 @@ const NewCardForm = ({
 
     if (message !== '') return;
 
-    setNewCardInfo((prevInfo) => ({
-      ...prevInfo,
-      [name]: { ...prevInfo[name], [detail]: value },
-    }));
+    setNewCardInfo(name, detail, value);
   };
 
   const onChangeCardInput = (e) => {
@@ -81,17 +77,14 @@ const NewCardForm = ({
         break;
     }
 
-    setErrorMessage({
-      ...errorMessage,
-      [name]: message,
-    });
+    setErrorMessage({ ...errorMessage, [name]: message });
 
     if (message !== '') return;
 
-    setNewCardInfo({ ...cardInfo, [name]: value });
+    changeCardName(name, value);
   };
 
-  // 다음눌렀을때 실행되는 메서드 (App으로 빠질수도 있음)
+  const history = useHistory();
   const onSubmitCardForm = (e) => {
     e.preventDefault();
 
@@ -100,10 +93,8 @@ const NewCardForm = ({
       return;
     }
 
-    setPage('cardComplete');
+    history.push('/completed');
   };
-
-  const { numbers, expireDate, user, cvc, password } = cardInfo;
 
   return (
     <NewCardFormWrapper onSubmit={onSubmitCardForm}>
@@ -129,7 +120,6 @@ const NewCardForm = ({
         cvc={cvc}
         errorMessage={errorMessage.cvc}
         onChangeCardInput={onChangeCardInput}
-        handleModalOpen={handleModalOpen}
       />
       <CardPasswordInput
         cardFormValidation={cardFormValidation}
@@ -145,29 +135,9 @@ const NewCardForm = ({
 };
 
 NewCardForm.propTypes = {
-  cardInfo: PropTypes.shape({
-    cardName: PropTypes.string,
-    numbers: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-      third: PropTypes.string,
-      fourth: PropTypes.string,
-    }),
-    user: PropTypes.string,
-    expireDate: PropTypes.shape({
-      month: PropTypes.string,
-      year: PropTypes.string,
-    }),
-    cvc: PropTypes.string,
-    password: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-    }),
-  }),
-
+  cardInfo: PropTypes.object,
+  changeCardName: PropTypes.func,
   setNewCardInfo: PropTypes.func,
-  setPage: PropTypes.func,
-  handleModalOpen: PropTypes.func,
 };
 
 export default NewCardForm;

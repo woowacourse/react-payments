@@ -1,51 +1,35 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Nav from '../Nav';
-import Card from '../../common/Card';
-import NewCardForm from '../NewCardForm';
-import AddCardWrapper from './index.styles';
+import React, { useContext } from 'react';
 
-function AddCard({ newCardInfo, handleModalOpen, setNewCardInfo, setPage }) {
+import AddCardWrapper from './index.styles';
+import Card from '../Card';
+import CardColor from '../ModalContents/CardColor';
+import { CardContext } from '../../context/CardContext';
+import Modal from '../../common/Modal';
+import Nav from '../Nav';
+import NewCardForm from '../NewCardForm';
+import useModal from '../../hooks/useModal';
+
+function AddCard() {
+  const { isModalOpen, setIsModalOpen, onClickModalDimmed } = useModal();
+  const { cardInfo, changeCardName, setNewCardInfo } = useContext(CardContext);
+
   return (
     <AddCardWrapper>
       <Nav />
-      <div className='card-wrapper'>
-        <Card cardInfo={newCardInfo} handleModalOpen={handleModalOpen} />
-      </div>
+      <AddCardWrapper>
+        <Card cardInfo={cardInfo} setIsModalOpen={setIsModalOpen} />
+      </AddCardWrapper>
       <NewCardForm
-        cardInfo={newCardInfo}
+        cardInfo={cardInfo}
+        changeCardName={changeCardName}
         setNewCardInfo={setNewCardInfo}
-        handleModalOpen={handleModalOpen}
-        setPage={setPage}
       />
+
+      <Modal isModalOpen={isModalOpen} onClickModalDimmed={onClickModalDimmed}>
+        <CardColor setIsModalOpen={setIsModalOpen} />
+      </Modal>
     </AddCardWrapper>
   );
 }
-
-AddCard.propTypes = {
-  newCardInfo: PropTypes.shape({
-    cardName: PropTypes.string,
-    cardNickName: PropTypes.string,
-    numbers: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-      third: PropTypes.string,
-      fourth: PropTypes.string,
-    }),
-    user: PropTypes.string,
-    expireDate: PropTypes.shape({
-      month: PropTypes.string,
-      year: PropTypes.string,
-    }),
-    cvc: PropTypes.string,
-    password: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-    }),
-  }),
-  handleModalOpen: PropTypes.func,
-  setNewCardInfo: PropTypes.func,
-  setPage: PropTypes.func,
-};
 
 export default AddCard;

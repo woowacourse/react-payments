@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { COLOR, FONT_SIZE, FONT_WEIGHT } from '../constants/style.js';
+import { COLOR, FONT_SIZE, FONT_WEIGHT } from '../../constants/style.js';
 
 const NickNameInput = css`
   color: ${COLOR.INPUT.FONT};
@@ -30,7 +30,7 @@ const Input = styled.input`
   ${({ roundInput }) => roundInput && RoundInput};
   ${({ nickNameInput }) => nickNameInput && NickNameInput}
 
-  &:focus {
+  :focus {
     outline: none;
   }
 `;

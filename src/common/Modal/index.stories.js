@@ -14,5 +14,5 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   children: <div>모달내컴포넌트</div>,
-  handleModalClose: () => {},
+  setIsModalOpenClose: () => {},
 };
