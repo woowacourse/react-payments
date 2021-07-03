@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import BackButton from '../../components/BackButton/BackButton';
 import Card from '../../components/Card/Card';
@@ -10,25 +10,18 @@ import CardExpirationInput from './CardExpirationInput';
 import CardOwnerNameInput from './CardOwnerNameInput';
 import CardSecurityCodeInput from './CardSecurityCodeInput';
 import CardPasswordInput from './CardPasswordInput';
-import PropTypes from 'prop-types';
+
+import { PaymentsContext } from '../../contexts/PaymentsContextProvider';
 
 const CardAddPage = (props) => {
-  const {
-    cardNumbers,
-    cardCompany,
-    expiration,
-    ownerName,
-    securityCode,
-    password,
-    isModalOpened,
-    handleCardNumbersInput,
-    handleCardCompany,
-    handleExpirationInput,
-    handleOwnerNameInput,
-    handleSecurityCodeInput,
-    handlePasswordInput,
-    handleCardInfoSubmit,
-  } = props;
+  const { isModalOpened, handleModalOpen, handleModalClosed } = props;
+  const { cardNumbers, cardCompany, expiration, ownerName, handleCardInfoSubmit } = useContext(PaymentsContext);
+
+  useEffect(() => {
+    if (cardNumbers.value.first.length + cardNumbers.value.second.length === 8 && !cardCompany.value.name) {
+      handleModalOpen();
+    }
+  }, [cardNumbers.value, cardCompany.value, handleModalOpen]);
 
   return (
     <div className="p-5">
@@ -39,41 +32,24 @@ const CardAddPage = (props) => {
 
       <div className="flex justify-center my-7">
         <Card
-          name={ownerName || 'NAME'}
-          expiration={`${expiration.month || 'MM'}/${expiration.year || 'YY'}`}
-          cardCompany={cardCompany}
-          cardNumbers={cardNumbers}
+          name={ownerName.value || 'NAME'}
+          expiration={`${expiration.value.month || 'MM'}/${expiration.value.year || 'YY'}`}
+          cardCompany={cardCompany.value}
+          cardNumbers={cardNumbers.value}
         />
       </div>
 
       <form onSubmit={handleCardInfoSubmit}>
-        <CardNumberInput cardNumbers={cardNumbers} handleCardNumbersInput={handleCardNumbersInput} />
-        <CardExpirationInput expiration={expiration} handleExpirationInput={handleExpirationInput} />
-        <CardOwnerNameInput ownerName={ownerName} handleOwnerNameInput={handleOwnerNameInput} />
-        <CardSecurityCodeInput securityCode={securityCode} handleSecurityCodeInput={handleSecurityCodeInput} />
-        <CardPasswordInput password={password} handlePasswordInput={handlePasswordInput} />
+        <CardNumberInput />
+        <CardExpirationInput />
+        <CardOwnerNameInput />
+        <CardSecurityCodeInput />
+        <CardPasswordInput />
         <TextButton text={'다음'} />
       </form>
 
-      {isModalOpened && <ModalPage onClick={handleCardCompany} />}
+      {isModalOpened && <ModalPage handleModalClosed={handleModalClosed} />}
     </div>
   );
 };
 export default CardAddPage;
-
-CardAddPage.propTypes = {
-  cardNumbers: PropTypes.object.isRequired,
-  cardCompany: PropTypes.object.isRequired,
-  expiration: PropTypes.object.isRequired,
-  ownerName: PropTypes.string,
-  securityCode: PropTypes.string.isRequired,
-  password: PropTypes.object.isRequired,
-  isModalOpened: PropTypes.bool.isRequired,
-  handleCardNumbersInput: PropTypes.func.isRequired,
-  handleCardCompany: PropTypes.func.isRequired,
-  handleExpirationInput: PropTypes.func.isRequired,
-  handleOwnerNameInput: PropTypes.func.isRequired,
-  handleSecurityCodeInput: PropTypes.func.isRequired,
-  handlePasswordInput: PropTypes.func.isRequired,
-  handleCardInfoSubmit: PropTypes.func.isRequired,
-};
