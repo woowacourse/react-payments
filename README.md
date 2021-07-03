@@ -25,7 +25,7 @@
 
 > 권장 마감기한 - **4월 27일 화요일**
 
-- [ ] `REQUIREMENTS.md`에 요구 사항 도출
+- [x] `REQUIREMENTS.md`에 요구 사항 도출
 - [ ] `재사용 가능한 Component` 작성
 
 ##### 필수 구현
@@ -40,35 +40,3 @@
 - [ ] 가상 키보드
   - [ ] 마스킹 처리된 값 입력시 사용
   - [ ] 숫자를 랜덤으로 배열
-
-### Step2
-
-> 권장 마감기한 - **5월 4일 화요일**
-
-### 필수 요구사항
-
-- [ ] `Controlled` & `Uncontrolled Components`에 입각하여 `Form` 핸들링
-- [ ] `Context API`를 활용해 전역 상태 관리 및 계층 재구성
-
-#### 필수 구현
-
-- [ ] 카드 목록
-
-### 심화 요구사항
-
-- [ ] `Storybook` 스냅샷 테스트
-- [ ] 비동기 통신
-  - [ ] 다양한 도구를 활용 (예 JSON Server, Strapi 등등)
-  - [ ] 등록된 카드 정보를 CRUD 합니다.
-- [ ] 나열된 카드 클릭시 `카드 추가 확인` 화면 재활용
-  - [ ] 별칭 수정 가능
-
-## 👏 Contributing
-
-만약 미션 수행 중에 개선사항이 보인다면, 언제든 자유롭게 PR을 보내주세요.
-
-<br>
-
-## 🐞 Bug Report
-
-버그를 발견한다면, [Issues](https://github.com/woowacourse/react-payments/issues)에 등록해주세요.
