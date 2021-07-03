@@ -1,18 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Card from '../../components/Card/Card';
 import UnderLineInput from '../../components/UnderLineInput/UnderLineInput';
 import TextButton from '../../components/TextButton/TextButton';
-import PropTypes from 'prop-types';
+import { PaymentsContext } from '../../contexts/PaymentsContextProvider';
+import { PAGE } from '../../utils/constants';
 
 const CardRegisterPage = (props) => {
-  const { cardCompany, cardNumbers, expiration, ownerName, resetState, setCardName } = props;
+  const { setPageRouter } = props;
+  const { cardCompany, cardNumbers, expiration, ownerName, cardName } = useContext(PaymentsContext);
+
+  const cards = JSON.parse(localStorage.getItem('cards')) ?? [];
 
   const handleCardSubmit = (e) => {
     e.preventDefault();
 
-    const { value } = e.target.elements['cardName'];
-    setCardName(value);
-    resetState();
+    localStorage.setItem(
+      'cards',
+      JSON.stringify([
+        ...cards,
+        {
+          cardCompany: cardCompany.value,
+          cardNumbers: cardNumbers.value,
+          expiration: expiration.value,
+          ownerName: ownerName.value,
+          cardName: cardName.value,
+        },
+      ])
+    );
+
+    setPageRouter(PAGE.LIST);
   };
 
   return (
@@ -21,27 +37,18 @@ const CardRegisterPage = (props) => {
       <div className="mt-20 mb-10">
         <Card
           size={'large'}
-          name={ownerName || 'NAME'}
-          expiration={`${expiration.month || 'MM'}/${expiration.year || 'YY'}`}
-          cardCompany={cardCompany}
-          cardNumbers={cardNumbers}
+          name={ownerName.value || 'NAME'}
+          expiration={`${expiration.value.month || 'MM'}/${expiration.value.year || 'YY'}`}
+          cardCompany={cardCompany.value}
+          cardNumbers={cardNumbers.value}
         />
       </div>
-      <UnderLineInput name={'cardName'} />
+      <UnderLineInput name="cardName" onChange={cardName.handleChange} />
       <div className="mt-40">
-        <TextButton text={'완료'} />
+        <TextButton text="완료" />
       </div>
     </form>
   );
 };
 
 export default CardRegisterPage;
-
-CardRegisterPage.propTypes = {
-  cardCompany: PropTypes.object.isRequired,
-  cardNumbers: PropTypes.object.isRequired,
-  expiration: PropTypes.object.isRequired,
-  ownerName: PropTypes.string,
-  resetState: PropTypes.func.isRequired,
-  setCardName: PropTypes.func.isRequired,
-};
