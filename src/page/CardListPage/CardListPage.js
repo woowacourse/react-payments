@@ -16,7 +16,7 @@ const CardListPage = (props) => {
   return (
     <div className="p-5">
       <h1 className="ml-1 text-xl">보유카드</h1>
-      <ul className="flex flex-col items-center mt-10">
+      <ul className="flex flex-col items-center mt-10 max-h-450 overflow-y-scroll">
         {cards.map((card, index) => (
           <li key={index} className="mt-5">
             <Card
