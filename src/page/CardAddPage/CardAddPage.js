@@ -12,10 +12,24 @@ import CardSecurityCodeInput from './CardSecurityCodeInput';
 import CardPasswordInput from './CardPasswordInput';
 
 import { PaymentsContext } from '../../contexts/PaymentsContextProvider';
+import { PAGE } from '../../utils/constants';
 
 const CardAddPage = (props) => {
-  const { isModalOpened, handleModalOpen, handleModalClosed } = props;
-  const { cardNumbers, cardCompany, expiration, ownerName, handleCardInfoSubmit } = useContext(PaymentsContext);
+  const { isModalOpened, handleModalOpen, handleModalClosed, setPageRouter } = props;
+  const { cardNumbers, cardCompany, expiration, ownerName, securityCode, password, cardName } = useContext(
+    PaymentsContext
+  );
+
+  useEffect(() => {
+    cardNumbers.reset();
+    cardCompany.reset();
+    expiration.reset();
+    ownerName.reset();
+    securityCode.reset();
+    password.reset();
+    cardName.reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (cardNumbers.value.first.length + cardNumbers.value.second.length === 8 && !cardCompany.value.name) {
@@ -23,10 +37,16 @@ const CardAddPage = (props) => {
     }
   }, [cardNumbers.value, cardCompany.value, handleModalOpen]);
 
+  const handleSubmitCardForm = (e) => {
+    e.preventDefault();
+
+    setPageRouter(PAGE.REGISTER);
+  };
+
   return (
     <div className="p-5">
       <div className="flex items-center">
-        <BackButton />
+        <BackButton onClick={() => setPageRouter(PAGE.LIST)} />
         <h1 className="text-xl ml-4">카드 추가</h1>
       </div>
 
@@ -39,13 +59,13 @@ const CardAddPage = (props) => {
         />
       </div>
 
-      <form onSubmit={handleCardInfoSubmit}>
+      <form onSubmit={handleSubmitCardForm}>
         <CardNumberInput />
         <CardExpirationInput />
         <CardOwnerNameInput />
         <CardSecurityCodeInput />
         <CardPasswordInput />
-        <TextButton text={'다음'} />
+        <TextButton text="다음" />
       </form>
 
       {isModalOpened && <ModalPage handleModalClosed={handleModalClosed} />}

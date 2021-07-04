@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
 export const useExpiration = () => {
-  const [expiration, setExpiration] = useState({ month: '', year: '' });
+  const initialState = { month: '', year: '' };
+  const [expiration, setExpiration] = useState(initialState);
 
   const handleExpirationInput = ({ target: { value } }, category) => {
     const valueAsString = String(value);
@@ -17,6 +18,7 @@ export const useExpiration = () => {
     expiration: {
       value: expiration,
       handleChange: handleExpirationInput,
+      reset: () => setExpiration(initialState),
     },
   };
 };

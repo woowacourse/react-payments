@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
 export const useOwnerName = () => {
-  const [ownerName, setOwnerName] = useState('');
+  const initialState = '';
+  const [ownerName, setOwnerName] = useState(initialState);
 
   const handleOwnerNameInput = ({ target: { value } }) => {
     setOwnerName(value.trimStart());
@@ -11,6 +12,7 @@ export const useOwnerName = () => {
     ownerName: {
       value: ownerName,
       handleChange: handleOwnerNameInput,
+      reset: () => setOwnerName(initialState),
     },
   };
 };

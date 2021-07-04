@@ -1,6 +1,5 @@
-import { useState } from 'react';
-
 import { useCardCompany } from './useCardCompany';
+import { useCardName } from './useCardName';
 import { useCardNumbers } from './useCardNumbers';
 import { useExpiration } from './useExpiration';
 import { useOwnerName } from './useOwnerName';
@@ -14,19 +13,7 @@ export const usePayments = () => {
   const { ownerName } = useOwnerName();
   const { securityCode } = useSecurityCode();
   const { password } = usePassword();
-
-  const [isAllValid, setIsAllValid] = useState(false);
-  const [cardName, setCardName] = useState('');
-
-  const resetState = () => {
-    setIsAllValid(false);
-  };
-
-  const handleCardInfoSubmit = (e) => {
-    e.preventDefault();
-
-    setIsAllValid(true);
-  };
+  const { cardName } = useCardName();
 
   return {
     cardNumbers,
@@ -35,10 +22,6 @@ export const usePayments = () => {
     ownerName,
     securityCode,
     password,
-    isAllValid,
-    setIsAllValid,
-    setCardName,
-    resetState,
-    handleCardInfoSubmit,
+    cardName,
   };
 };

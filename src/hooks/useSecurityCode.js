@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { isNumber } from '../utils/validator';
 
 export const useSecurityCode = () => {
-  const [securityCode, setSecurityCode] = useState('');
+  const initialState = '';
+  const [securityCode, setSecurityCode] = useState(initialState);
 
   const handleSecurityCodeInput = ({ target: { value } }) => {
     isNumber(value) && setSecurityCode(value.trim());
@@ -12,6 +13,7 @@ export const useSecurityCode = () => {
     securityCode: {
       value: securityCode,
       handleChange: handleSecurityCodeInput,
+      reset: () => setSecurityCode(initialState),
     },
   };
 };

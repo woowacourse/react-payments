@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
 export const useCardCompany = () => {
-  const [cardCompany, setCardCompany] = useState({ name: '', color: '' });
+  const initialState = { name: '', color: '' };
+
+  const [cardCompany, setCardCompany] = useState(initialState);
 
   const handleCardCompany = ({ target }) => {
     const company = target.closest('li').dataset.company;
@@ -16,6 +18,7 @@ export const useCardCompany = () => {
     cardCompany: {
       value: cardCompany,
       handleChange: handleCardCompany,
+      reset: () => setCardCompany(initialState),
     },
   };
 };

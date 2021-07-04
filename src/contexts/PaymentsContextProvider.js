@@ -5,17 +5,7 @@ import { usePayments } from '../hooks/usePayment';
 export const PaymentsContext = createContext();
 
 export const PaymentsContextProvider = ({ children }) => {
-  const {
-    cardNumbers,
-    cardCompany,
-    expiration,
-    ownerName,
-    securityCode,
-    password,
-    setCardName,
-    resetState,
-    handleCardInfoSubmit,
-  } = usePayments();
+  const { cardNumbers, cardCompany, expiration, ownerName, securityCode, password, cardName } = usePayments();
 
   return (
     <PaymentsContext.Provider
@@ -26,9 +16,7 @@ export const PaymentsContextProvider = ({ children }) => {
         ownerName,
         securityCode,
         password,
-        setCardName,
-        resetState,
-        handleCardInfoSubmit,
+        cardName,
       }}
     >
       {children}
