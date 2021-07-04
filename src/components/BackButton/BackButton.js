@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 const BackButton = (props) => {
   const { onClick } = props;
@@ -13,8 +13,8 @@ const BackButton = (props) => {
   );
 };
 
+export default BackButton;
+
 BackButton.protoTypes = {
   onClick: PropTypes.func,
 };
-
-export default BackButton;

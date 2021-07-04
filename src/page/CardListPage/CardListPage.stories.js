@@ -1,4 +1,5 @@
 import React from 'react';
+
 import CardListPage from './CardListPage';
 
 export default {

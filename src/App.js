@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+
 import { PaymentsContextProvider } from './contexts/PaymentsContextProvider';
 import { useModal } from './hooks/useModal';
-
 import CardAddPage from './page/CardAddPage/CardAddPage';
 import CardListPage from './page/CardListPage/CardListPage';
 import CardRegisterPage from './page/CardRegisterPage/CardRegisterPage';

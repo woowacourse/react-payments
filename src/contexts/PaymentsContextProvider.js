@@ -1,10 +1,12 @@
+import PropTypes from 'prop-types';
 import React, { createContext } from 'react';
 
 import { usePayments } from '../hooks/usePayment';
 
 export const PaymentsContext = createContext();
 
-export const PaymentsContextProvider = ({ children }) => {
+export const PaymentsContextProvider = (props) => {
+  const { children } = props;
   const { cardNumbers, cardCompany, expiration, ownerName, securityCode, password, cardName } = usePayments();
 
   return (
@@ -22,4 +24,8 @@ export const PaymentsContextProvider = ({ children }) => {
       {children}
     </PaymentsContext.Provider>
   );
+};
+
+PaymentsContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

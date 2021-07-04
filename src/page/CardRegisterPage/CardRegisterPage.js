@@ -1,7 +1,9 @@
+import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
+
 import Card from '../../components/Card/Card';
-import UnderLineInput from '../../components/UnderLineInput/UnderLineInput';
 import TextButton from '../../components/TextButton/TextButton';
+import UnderLineInput from '../../components/UnderLineInput/UnderLineInput';
 import { PaymentsContext } from '../../contexts/PaymentsContextProvider';
 import { PAGE } from '../../utils/constants';
 
@@ -52,3 +54,7 @@ const CardRegisterPage = (props) => {
 };
 
 export default CardRegisterPage;
+
+CardRegisterPage.propTypes = {
+  setPageRouter: PropTypes.func.isRequired,
+};

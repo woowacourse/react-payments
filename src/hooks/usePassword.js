@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { isNumber } from '../utils/validator';
 
 export const usePassword = () => {

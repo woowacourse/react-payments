@@ -1,18 +1,17 @@
+import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 
 import BackButton from '../../components/BackButton/BackButton';
 import Card from '../../components/Card/Card';
-import ModalPage from '../ModalPage/ModalPage';
 import TextButton from '../../components/TextButton/TextButton';
-
-import CardNumberInput from './CardNumberInput';
-import CardExpirationInput from './CardExpirationInput';
-import CardOwnerNameInput from './CardOwnerNameInput';
-import CardSecurityCodeInput from './CardSecurityCodeInput';
-import CardPasswordInput from './CardPasswordInput';
-
 import { PaymentsContext } from '../../contexts/PaymentsContextProvider';
 import { PAGE } from '../../utils/constants';
+import ModalPage from '../ModalPage/ModalPage';
+import CardExpirationInput from './CardExpirationInput';
+import CardNumberInput from './CardNumberInput';
+import CardOwnerNameInput from './CardOwnerNameInput';
+import CardPasswordInput from './CardPasswordInput';
+import CardSecurityCodeInput from './CardSecurityCodeInput';
 
 const CardAddPage = (props) => {
   const { isModalOpened, handleModalOpen, handleModalClosed, setPageRouter } = props;
@@ -73,3 +72,10 @@ const CardAddPage = (props) => {
   );
 };
 export default CardAddPage;
+
+CardAddPage.protoTypes = {
+  isModalOpened: PropTypes.bool.isRequired,
+  handleModalOpen: PropTypes.func.isRequired,
+  handleModalClosed: PropTypes.func.isRequired,
+  setPageRouter: PropTypes.func.isRequired,
+};

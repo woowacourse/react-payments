@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
-import Modal from '../../components/Modal/Modal';
+
 import ColorSelectButton from '../../components/ColorSelectButton/ColorSelectButton';
+import Modal from '../../components/Modal/Modal';
 import { PaymentsContext } from '../../contexts/PaymentsContextProvider';
 
 const ModalPage = (props) => {
@@ -26,3 +28,7 @@ const ModalPage = (props) => {
 };
 
 export default ModalPage;
+
+ModalPage.propTypes = {
+  setPageRouter: PropTypes.func.isRequired,
+};

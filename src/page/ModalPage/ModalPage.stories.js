@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ModalPage from './ModalPage';
 
 export default {
