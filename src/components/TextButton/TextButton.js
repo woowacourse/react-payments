@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 const TextButton = (props) => {
   const { text, type = 'submit', color = 'text-green-350' } = props;

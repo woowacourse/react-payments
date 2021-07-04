@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 const Card = (props) => {
   const { size = 'middle', name = 'NAME', expiration, cardCompany, cardNumbers } = props;

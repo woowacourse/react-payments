@@ -1,7 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 const Modal = (props) => {
+  const { width, height, children } = props;
+
   return (
     <section
       className="max-w-375 max-h-701 mt-5 p-5 mx-auto flex fixed inset-0 z-10 bg-gray-400 bg-opacity-70 rounded-3xl"
@@ -11,9 +13,9 @@ const Modal = (props) => {
     >
       <div
         className={`absolute flex items-center p-7 rounded-3xl rounded-b-none bg-white left-0 bottom-0 
-        ${props.width || 'w-full'} ${props.height || 'h-227'}`}
+        ${width || 'w-full'} ${height || 'h-227'}`}
       >
-        {props.children}
+        {children}
       </div>
     </section>
   );

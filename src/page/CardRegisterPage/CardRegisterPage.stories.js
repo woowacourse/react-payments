@@ -1,4 +1,5 @@
 import React from 'react';
+
 import CardRegisterPage from './CardRegisterPage';
 
 export default {

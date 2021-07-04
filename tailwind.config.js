@@ -28,6 +28,7 @@ module.exports = {
         375: '375px',
       },
       maxHeight: {
+        450: '450px',
         701: '701px',
       },
       colors: {

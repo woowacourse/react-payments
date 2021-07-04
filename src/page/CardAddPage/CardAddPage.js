@@ -1,79 +1,81 @@
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { useContext, useEffect } from 'react';
 
 import BackButton from '../../components/BackButton/BackButton';
 import Card from '../../components/Card/Card';
-import ModalPage from '../ModalPage/ModalPage';
 import TextButton from '../../components/TextButton/TextButton';
-
-import CardNumberInput from './CardNumberInput';
+import { PaymentsContext } from '../../contexts/PaymentsContextProvider';
+import { PAGE } from '../../utils/constants';
+import ModalPage from '../ModalPage/ModalPage';
 import CardExpirationInput from './CardExpirationInput';
+import CardNumberInput from './CardNumberInput';
 import CardOwnerNameInput from './CardOwnerNameInput';
-import CardSecurityCodeInput from './CardSecurityCodeInput';
 import CardPasswordInput from './CardPasswordInput';
-import PropTypes from 'prop-types';
+import CardSecurityCodeInput from './CardSecurityCodeInput';
 
 const CardAddPage = (props) => {
-  const {
-    cardNumbers,
-    cardCompany,
-    expiration,
-    ownerName,
-    securityCode,
-    password,
-    isModalOpened,
-    handleCardNumbersInput,
-    handleCardCompany,
-    handleExpirationInput,
-    handleOwnerNameInput,
-    handleSecurityCodeInput,
-    handlePasswordInput,
-    handleCardInfoSubmit,
-  } = props;
+  const { isModalOpened, handleModalOpen, handleModalClosed, setPageRouter } = props;
+  const { cardNumbers, cardCompany, expiration, ownerName, securityCode, password, cardName } = useContext(
+    PaymentsContext
+  );
+
+  useEffect(() => {
+    cardNumbers.reset();
+    cardCompany.reset();
+    expiration.reset();
+    ownerName.reset();
+    securityCode.reset();
+    password.reset();
+    cardName.reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (cardNumbers.value.first.length + cardNumbers.value.second.length === 8 && !cardCompany.value.name) {
+      handleModalOpen();
+    }
+  }, [cardNumbers.value, cardCompany.value, handleModalOpen]);
+
+  const handleSubmitCardForm = (e) => {
+    e.preventDefault();
+
+    setPageRouter(PAGE.REGISTER);
+  };
 
   return (
     <div className="p-5">
       <div className="flex items-center">
-        <BackButton />
+        <BackButton onClick={() => setPageRouter(PAGE.LIST)} />
         <h1 className="text-xl ml-4">카드 추가</h1>
       </div>
 
       <div className="flex justify-center my-7">
         <Card
-          name={ownerName || 'NAME'}
-          expiration={`${expiration.month || 'MM'}/${expiration.year || 'YY'}`}
-          cardCompany={cardCompany}
-          cardNumbers={cardNumbers}
+          name={ownerName.value || 'NAME'}
+          expiration={`${expiration.value.month || 'MM'}/${expiration.value.year || 'YY'}`}
+          cardCompany={cardCompany.value}
+          cardNumbers={cardNumbers.value}
         />
       </div>
 
-      <form onSubmit={handleCardInfoSubmit}>
-        <CardNumberInput cardNumbers={cardNumbers} handleCardNumbersInput={handleCardNumbersInput} />
-        <CardExpirationInput expiration={expiration} handleExpirationInput={handleExpirationInput} />
-        <CardOwnerNameInput ownerName={ownerName} handleOwnerNameInput={handleOwnerNameInput} />
-        <CardSecurityCodeInput securityCode={securityCode} handleSecurityCodeInput={handleSecurityCodeInput} />
-        <CardPasswordInput password={password} handlePasswordInput={handlePasswordInput} />
-        <TextButton text={'다음'} />
+      <form onSubmit={handleSubmitCardForm}>
+        <CardNumberInput />
+        <CardExpirationInput />
+        <CardOwnerNameInput />
+        <CardSecurityCodeInput />
+        <CardPasswordInput />
+        <TextButton text="다음" />
       </form>
 
-      {isModalOpened && <ModalPage onClick={handleCardCompany} />}
+      {isModalOpened && <ModalPage handleModalClosed={handleModalClosed} />}
     </div>
   );
 };
 export default CardAddPage;
 
-CardAddPage.propTypes = {
-  cardNumbers: PropTypes.object.isRequired,
-  cardCompany: PropTypes.object.isRequired,
-  expiration: PropTypes.object.isRequired,
-  ownerName: PropTypes.string,
-  securityCode: PropTypes.string.isRequired,
-  password: PropTypes.object.isRequired,
+CardAddPage.protoTypes = {
   isModalOpened: PropTypes.bool.isRequired,
-  handleCardNumbersInput: PropTypes.func.isRequired,
-  handleCardCompany: PropTypes.func.isRequired,
-  handleExpirationInput: PropTypes.func.isRequired,
-  handleOwnerNameInput: PropTypes.func.isRequired,
-  handleSecurityCodeInput: PropTypes.func.isRequired,
-  handlePasswordInput: PropTypes.func.isRequired,
-  handleCardInfoSubmit: PropTypes.func.isRequired,
+  handleModalOpen: PropTypes.func.isRequired,
+  handleModalClosed: PropTypes.func.isRequired,
+  setPageRouter: PropTypes.func.isRequired,
 };

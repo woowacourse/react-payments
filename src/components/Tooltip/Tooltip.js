@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
 const Tooltip = (props) => {
   const { innerText = '?', content } = props;
@@ -28,6 +28,7 @@ const Tooltip = (props) => {
 };
 
 export default Tooltip;
+
 Tooltip.propTypes = {
   innerText: PropTypes.string,
   content: PropTypes.element.isRequired,

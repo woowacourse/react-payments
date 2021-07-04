@@ -1,128 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+
+import { PaymentsContextProvider } from './contexts/PaymentsContextProvider';
+import { useModal } from './hooks/useModal';
 import CardAddPage from './page/CardAddPage/CardAddPage';
+import CardListPage from './page/CardListPage/CardListPage';
 import CardRegisterPage from './page/CardRegisterPage/CardRegisterPage';
-import { isNumber } from './utils/validator';
+import { PAGE } from './utils/constants';
 
 function App() {
-  const [cardCompany, setCardCompany] = useState({ name: '', color: '' });
-  const [expiration, setExpiration] = useState({ month: '', year: '' });
-  const [ownerName, setOwnerName] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
-  const [password, setPassword] = useState({
-    first: '',
-    second: '',
-  });
-  const [cardNumbers, setCardNumbers] = useState({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-  });
-  const [isModalOpened, setIsModalOpened] = useState(false);
-  const [isAllValid, setIsAllValid] = useState(false);
-  const [cardName, setCardName] = useState('');
+  const { isModalOpen, handleModalOpen, handleModalClosed } = useModal();
 
-  const resetState = () => {
-    setCardCompany({ name: '', color: '' });
-    setExpiration({ month: '', year: '' });
-    setOwnerName('');
-    setSecurityCode('');
-    setPassword({
-      first: '',
-      second: '',
-    });
-    setCardNumbers({
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    });
-    setIsModalOpened(false);
-    setIsAllValid(false);
+  const [pageRouter, setPageRouter] = useState(PAGE.LIST);
+
+  const Page = {
+    CardAddPage: (
+      <CardAddPage
+        isModalOpened={isModalOpen}
+        handleModalOpen={handleModalOpen}
+        handleModalClosed={handleModalClosed}
+        setPageRouter={setPageRouter}
+      />
+    ),
+    CardRegisterPage: <CardRegisterPage setPageRouter={setPageRouter} />,
+    CardListPage: <CardListPage setPageRouter={setPageRouter} />,
   };
 
-  const handleCardNumbersInput = ({ target: { value } }, key) => {
-    isNumber(value) && setCardNumbers({ ...cardNumbers, [key]: value.trim() });
-  };
-
-  const handleCardCompany = ({ target }) => {
-    const company = target.closest('li').dataset.company;
-
-    setCardCompany({
-      name: `${company} 카드`,
-      color: `bg-${company}`,
-    });
-    setIsModalOpened(false);
-  };
-
-  useEffect(() => {
-    if (cardNumbers.first.length + cardNumbers.second.length === 8 && !cardCompany.name) {
-      setIsModalOpened(true);
-    }
-  }, [cardNumbers, cardCompany]);
-
-  const handleExpirationInput = ({ target: { value } }, category) => {
-    const valueAsString = String(value);
-
-    if (valueAsString.length > 2) {
-      return;
-    }
-
-    setExpiration({
-      ...expiration,
-      [category]: valueAsString.replace(/[^0-9]s/g, ''),
-    });
-  };
-
-  const handleOwnerNameInput = ({ target: { value } }) => {
-    setOwnerName(value.trimStart());
-  };
-
-  const handleSecurityCodeInput = ({ target: { value } }) => {
-    isNumber(value) && setSecurityCode(value.trim());
-  };
-
-  const handlePasswordInput = ({ target: { value, name } }) => {
-    isNumber(value) && setPassword({ ...password, [name]: value.trim() });
-  };
-
-  const handleCardInfoSubmit = (e) => {
-    e.preventDefault();
-
-    setIsAllValid(true);
+  const pageTable = {
+    [PAGE.ADD]: Page.CardAddPage,
+    [PAGE.REGISTER]: Page.CardRegisterPage,
+    [PAGE.LIST]: Page.CardListPage,
   };
 
   return (
-    <div className="relative max-w-375 mt-5 p-5 mx-auto bg-white rounded-3xl">
-      {!isAllValid ? (
-        <CardAddPage
-          cardNumbers={cardNumbers}
-          cardCompany={cardCompany}
-          expiration={expiration}
-          ownerName={ownerName}
-          securityCode={securityCode}
-          password={password}
-          isModalOpened={isModalOpened}
-          handleCardNumbersInput={handleCardNumbersInput}
-          handleCardCompany={handleCardCompany}
-          handleExpirationInput={handleExpirationInput}
-          handleOwnerNameInput={handleOwnerNameInput}
-          handleSecurityCodeInput={handleSecurityCodeInput}
-          handlePasswordInput={handlePasswordInput}
-          handleCardInfoSubmit={handleCardInfoSubmit}
-        />
-      ) : (
-        <CardRegisterPage
-          cardCompany={cardCompany}
-          cardNumbers={cardNumbers}
-          expiration={expiration}
-          ownerName={ownerName}
-          setIsAllValid={setIsAllValid}
-          resetState={resetState}
-          setCardName={setCardName}
-        />
-      )}
-    </div>
+    <PaymentsContextProvider>
+      <div className="relative max-w-375 mt-5 p-5 mx-auto bg-white rounded-3xl">{pageTable[pageRouter]}</div>
+    </PaymentsContextProvider>
   );
 }
 
