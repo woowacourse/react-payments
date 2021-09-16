@@ -1,0 +1,20 @@
+.card-addition-button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.card-addition-button:hover {
+  border: 1px solid black;
+}
+
+.card-addition-button .card__inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-addition-button span {
+  font-size: 3rem;
+}

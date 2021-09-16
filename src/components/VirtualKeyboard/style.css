@@ -1,0 +1,55 @@
+.virtual-keyboard {
+  font-size: 20px;
+}
+
+.key-input {
+  width: 5rem;
+  height: 3rem;
+  background-color: #eeecec;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.key-input:active {
+  background-color: #dddddd;
+}
+
+.delete-container {
+  grid-column: 3/5;
+  background-color: #eeecec;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.virtual-keyboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 1px;
+  gap: 1px;
+}
+
+.visible-none {
+  visibility: hidden;
+}
+
+.delete-container__button {
+  width: 100%;
+  height: 100%;
+  background-color: #eeecec;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.delete-container__button:active {
+  background-color: #dddddd;
+}

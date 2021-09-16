@@ -1,3 +1,20 @@
+# STEP 2
+
+## 보유 카드 리스트 페이지
+
+- [x] 카드 추가 버튼 컴포넌트 구현
+- [x] 소유중인 카드 리스트를 보여준다.
+
+## 필수 요구 사항 체크
+
+- [x] storybook 상호 작용 테스트
+- [x] Storybook 상호 작용 테스트
+- [x] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
+- [ ] Context API를 활용해 전역 상태 관리 및 계층 재구성
+- [x] 카드 목록
+
+# STEP 1
+
 ## 컴포넌트
 
 - Card
