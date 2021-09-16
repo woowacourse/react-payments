@@ -1,0 +1,13 @@
+.card-list-page {
+  &__header {
+    padding: 20px 36px;
+    margin-bottom: 36px;
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

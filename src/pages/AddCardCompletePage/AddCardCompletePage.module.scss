@@ -1,0 +1,31 @@
+.add-card-complete-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__label {
+    margin-top: 113px;
+    text-align: center;
+    margin-bottom: 61px;
+  }
+
+  &__card {
+    margin: 14px;
+  }
+
+  &__input {
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0px 10px 10px 0px;
+  }
+}

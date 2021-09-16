@@ -1,0 +1,19 @@
+.add-box-button {
+  display: flex;
+  align-items: center;
+  width: 245px;
+  height: 146px;
+  border-radius: 5px;
+  background: #e5e5e5;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 36px;
+  color: #575757;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  transition: all 1s;
+
+  &:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.25);
+  }
+}

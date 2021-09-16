@@ -1,0 +1,35 @@
+.input-wrapper {
+  display: inline-block;
+}
+
+.input {
+  width: 100%;
+  background-color: #ecebf1;
+  font-size: 18px;
+  color: #04c09e;
+  border-radius: 7px;
+  padding: 13px 12px;
+  border: none;
+  font-weight: 500;
+  transition: box-shadow 0.5s;
+  letter-spacing: -0.085em;
+
+  &:focus {
+    outline: none;
+    box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.25);
+  }
+
+  &::placeholder {
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  &__label {
+    display: block;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 7px;
+    letter-spacing: -0.085em;
+  }
+}

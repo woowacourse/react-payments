@@ -1,0 +1,40 @@
+.guide-input {
+  display: inline-block;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+
+  &__label {
+    display: block;
+    margin-bottom: 7px;
+  }
+
+  &__bottom {
+    display: flex;
+    position: relative;
+    align-items: center;
+  }
+
+  &__guide-icon {
+    margin-left: 11px;
+    margin-right: 11px;
+    cursor: pointer;
+
+    &:hover {
+      + .guide-input__guide-image {
+        display: block;
+      }
+    }
+  }
+
+  &__guide-image {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    width: 100px;
+    height: 65px;
+    border-radius: 10px;
+    top: -12px;
+    left: 130px;
+  }
+}

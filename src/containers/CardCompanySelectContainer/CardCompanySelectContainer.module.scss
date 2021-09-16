@@ -1,0 +1,15 @@
+.card-company-select-container {
+  &__card-company {
+  }
+
+  &__back-drop {
+    animation: fade-in 0.5s forwards;
+  }
+
+  &__bottom-slider {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 26px;
+    row-gap: 26px;
+  }
+}
