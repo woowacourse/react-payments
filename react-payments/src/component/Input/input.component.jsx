@@ -8,6 +8,7 @@ const Input = ({ required, inputClass, inputInfo, connector }) => {
       {inputInfo.map(({ type, placeholder }, idx) => (
         <Fragment key={uuid()}>
           {idx && connector ? <p className="connector">{connector}</p> : null}
+
           <input
             className="input-basic"
             required={required}
