@@ -28,17 +28,9 @@ const InputContainer = styled.input`
   width: ${(props) => props.width}px;
   height: 45px;
   background-color: #ecebf1;
+  color: #04c09e;
   border: none;
   border-radius: 7px;
-
-  ::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  ::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
 
   &::placeholder {
     color: #737373;
