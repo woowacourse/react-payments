@@ -1,0 +1,50 @@
+{
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx"]
+      }
+    }
+  },
+  "extends": ["airbnb-base", "prettier", "react-app"],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-var": "error",
+    "max-depth": ["error", 2],
+    "no-console": "warn",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "linebreak-style": "off",
+    "import/extensions": "off",
+    "no-alert": "off",
+    "operator-linebreak": "off",
+    "comma-dangle": "off",
+    "object-curly-newline": "off",
+    "class-methods-use-this": "off",
+    "implicit-arrow-linebreak": "off",
+    "consistent-return": "off",
+    "object-shorthand": "off",
+    "lines-between-class-members": [
+      "error",
+      "always",
+      { "exceptAfterSingleLine": true }
+    ],
+    "no-underscore-dangle": "off",
+    "no-restricted-globals": "off",
+    "no-unused-expressions": [
+      "warn",
+      { "allowShortCircuit": true, "allowTernary": true }
+    ]
+  }
+}
