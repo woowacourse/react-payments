@@ -1,5 +1,5 @@
-import PageTitle from './PageTitle';
 import React from 'react';
+import PageTitle from './PageTitle';
 
 export default {
   title: 'CardAddition/PageTitle',
