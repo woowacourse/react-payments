@@ -8,7 +8,7 @@ export default function CardExpiration() {
   return (
     <InputContainer>
       <InputTitle>만료일</InputTitle>
-      <InputBox width="50%">
+      <InputBox width="40%">
         <InputBasic type="text" placeholder="MM" />
         <InputBasic type="text" placeholder="YY" />
       </InputBox>

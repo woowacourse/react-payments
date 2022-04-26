@@ -4,6 +4,7 @@ import PageTitle from './components/PageTitle';
 import styled from 'styled-components';
 import CardNumber from './components/CardNumber';
 import CardExpiration from './components/CardExpiration';
+import CardOwner from './components/CardOwner';
 
 const CardAdditionContainer = styled.div`
   height: 100%;
@@ -17,10 +18,10 @@ function CardAddition() {
       <Card />
       <CardNumber />
       <CardExpiration />
-      {/* <CardOwner />
-      <CardCvc />
+      <CardOwner />
+      {/* <CardCvc />
       <CardPassword />
-      <NextButton /> */}
+      <NextButton />  */}
     </CardAdditionContainer>
   );
 }

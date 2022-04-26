@@ -5,6 +5,6 @@ export default styled.span`
   align-items: center;
   font-size: 12px;
   line-height: 14px;
-  margin-bottom: 4px;
+  margin-bottom: ${(props) => props.marginBottom || '4px'}
   color: #525252;
 `;
