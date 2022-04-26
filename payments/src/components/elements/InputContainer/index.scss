@@ -18,6 +18,13 @@
   }
 }
 
+.input__container--inputs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
 .text-align-left {
   input {
     text-align: left;
