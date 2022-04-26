@@ -9,7 +9,10 @@ function AddCard() {
 
   return (
     <>
-      <h2 className="page-title">카드 추가</h2>
+      <div className="header-wrapper">
+        <div className="back-button" />
+        <h2 className="page-title">카드 추가</h2>
+      </div>
       <div className="card-box">
         <div className="empty-card">
           <div className="card-top" />
