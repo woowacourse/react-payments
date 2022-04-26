@@ -2,14 +2,14 @@ import FormInput from './components/common/FormInput';
 import { v4 as uuid } from 'uuid';
 
 const cardNumberInputInfoList = [
-  { id: uuid(), type: 'text' },
-  { id: uuid(), type: 'text' },
-  { id: uuid(), type: 'password' },
+  { id: uuid(), type: 'text', className: 'mr-n15' },
+  { id: uuid(), type: 'text', className: 'mr-n15' },
+  { id: uuid(), type: 'password', className: 'mr-n15' },
   { id: uuid(), type: 'password' },
 ];
 
 const expiryDateInputInfoList = [
-  { id: uuid(), type: 'text', placeholder: 'MM' },
+  { id: uuid(), type: 'text', placeholder: 'MM', className: 'mr-n15' },
   { id: uuid(), type: 'text', placeholder: 'YY' },
 ];
 
