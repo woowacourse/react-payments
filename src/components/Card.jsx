@@ -62,7 +62,7 @@ const CardBottomInfo = styled.div`
   justify-content: space-between;
 `;
 
-export default function Card({ cardName, cardNumber, cardOwner, cardExpirationDate }) {
+export default function Card({ cardName, cardNumber, cardOwner, cardExpiration }) {
   return (
     <SmallCard>
       <CardTop>
@@ -77,7 +77,7 @@ export default function Card({ cardName, cardNumber, cardOwner, cardExpirationDa
         </CardBottomNumber>
         <CardBottomInfo>
           <CardText>{cardOwner}</CardText>
-          <CardText>{cardExpirationDate}</CardText>
+          <CardText>{cardExpiration}</CardText>
         </CardBottomInfo>
       </CardBottom>
     </SmallCard>

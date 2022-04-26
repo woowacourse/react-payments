@@ -13,5 +13,5 @@ CardExample.args = {
   cardName: '클린카드',
   cardNumber: '0000-1111-2222-3333',
   cardOwner: 'HONG GIL DONG',
-  cardExpirationDate: '05 / 12',
+  cardExpiration: '05 / 12',
 };
