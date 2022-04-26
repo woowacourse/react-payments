@@ -25,7 +25,7 @@ function CardAddPage() {
       <CardSection>
         <Card
           companyName={'포코카드'}
-          cardNumbers={[1111, 2222, 3333, 4444]}
+          cardNumbers={['1111', '2222', '3333', '4444']}
           ownerName={'SUN'}
           expiredDate={{ month: 12, year: 24 }}
         />

@@ -29,10 +29,10 @@ const IC = styled.div`
 const CardNumberContainer = styled.p`
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 5px;
   margin-top: 15px;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 13px;
   line-height: 14px;
   letter-spacing: 0.1em;
   color: #525252;
@@ -59,7 +59,9 @@ function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
       <IC />
       <CardNumberContainer>
         {cardNumbers.map((cardNumber, index) => (
-          <span key={cardNumber + index}>{index >= 2 ? '●●●●' : cardNumber}</span>
+          <span key={cardNumber + index}>
+            {index >= 2 ? '●'.repeat(cardNumber.length) : cardNumber}
+          </span>
         ))}
       </CardNumberContainer>
       <CardBottomContainer>
