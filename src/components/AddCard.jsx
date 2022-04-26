@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function AddCard() {
+  const [cardNumber, setCardNumber] = useState('');
+  const [expireDate, setExpireDate] = useState('');
+  const [ownerName, setOwnerName] = useState('');
+  const [securityCode, setSecurityCode] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <>
       <h2 className="page-title">카드 추가</h2>
