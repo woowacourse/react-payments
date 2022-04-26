@@ -1,0 +1,49 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-basic {
+  background-color: #ecebf1;
+  height: 45px;
+  width: 100%;
+  text-align: center;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: #9ca3af;
+  border: none;
+  border-radius: 0.25rem;
+  color: #04c09e;
+  font-size: 18px;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  margin-top: 0.375rem;
+  color: #d3d3d3;
+  border-radius: 0.25rem;
+  background-color: #ecebf1;
+}
+
+.connector {
+  color: #04c09e;
+  font-size: 18px;
+}
+
+.default-input {
+  width: 318px;
+}
+
+.expire-date-input {
+  width: 137px;
+}
+
+.security-code-input {
+  width: 84px;
+}
+
+.card-password-input {
+  width: 43px;
+}
