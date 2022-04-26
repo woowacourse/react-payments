@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const HeadSection = styled.section`
+const HeadContainer = styled.div`
   display: flex;
   padding: 22px 24px 0;
   gap: 18px;
@@ -21,10 +21,10 @@ const Title = styled.span`
 
 function Head({ title }) {
   return (
-    <HeadSection>
+    <HeadContainer>
       <BackButton>＜</BackButton>
       <Title>{title}</Title>
-    </HeadSection>
+    </HeadContainer>
   );
 }
 

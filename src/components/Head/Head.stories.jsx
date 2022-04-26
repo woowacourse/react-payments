@@ -2,14 +2,14 @@ import React from 'react';
 import Head from '.';
 
 export default {
-  title: 'Example/Heading',
+  title: 'Example/Head',
   component: Head,
 };
 
 const Template = args => <Head {...args} />;
 
-export const CarAdd = Template.bind({});
+export const CardAdd = Template.bind({});
 
-CarAdd.args = {
+CardAdd.args = {
   title: '카드 추가',
 };
