@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-
 function App() {
   return (
     <div></div>
