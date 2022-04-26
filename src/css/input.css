@@ -30,9 +30,11 @@
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;
-  border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
+  color: #04c09e;
+  font-weight: 500;
+  font-size: 18px;
 }
 
 .input-underline {

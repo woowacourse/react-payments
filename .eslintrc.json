@@ -37,9 +37,19 @@
       { "blankLine": "always", "prev": "*", "next": "return" },
       { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" },
       { "blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"] }
-    ]
+    ],
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": ["off"],
+    "react/prop-types": "off"
   },
   "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "@types"]
+      },
+      "typescript": {} // 프로젝트 Root의 tsconfig.json을 찾는다.
+    },
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
     }
