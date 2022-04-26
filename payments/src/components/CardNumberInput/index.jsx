@@ -1,29 +1,13 @@
 import "./index.scss";
 import InputContainer from "../elements/InputContainer";
 import { InputContents } from "../elements/InputContents";
-import { useCallback, useRef } from "react";
+import useControllInput from "../../hooks/useControllInput";
 
 const CardNumberInput = () => {
-  const itemRef = useRef([]);
-
-  const onChange = useCallback((e) => {
-    const limitInputLength = (e) => {
-      e.target.value = e.target.value.substring(0, 4);
-    };
-
-    const autoFocus = (e) => {
-      const currentIndex = itemRef.current.indexOf(e.target);
-      itemRef.current[Math.min(currentIndex + 1, 3)].focus();
-    };
-
-    if (e.target.value.length >= 4) {
-      limitInputLength(e);
-      autoFocus(e);
-    }
-  }, []);
+  const { itemRef, onChange } = useControllInput(4);
 
   return (
-    <div>
+    <div className="card-number__input__container">
       <InputContainer labelName={"카드번호"} classList={[""]}>
         <InputContents
           onChange={onChange}

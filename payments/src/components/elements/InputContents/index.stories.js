@@ -1,8 +1,8 @@
-import InputContainer, { InputContents } from ".";
+import { InputContents } from ".";
 
 export default {
   title: "Input",
-  component: InputContainer,
+  component: InputContents,
 };
 
 export const numberInput = () => <InputContents type="number" />;
