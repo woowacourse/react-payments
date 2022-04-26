@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputBasic } from './InputBasic';
+import { InputBasic } from '../components/InputBasic';
 
 export default {
   title: 'Example/InputBasic',
@@ -8,8 +8,16 @@ export default {
 
 const Template = (args) => <InputBasic {...args} />;
 
-export const CardNumberInput = Template.bind({});
-CardNumberInput.args = {
+export const TextInput = Template.bind({});
+TextInput.args = {
   type: 'text',
   placeholder: 'test holder',
+  value: '1234',
+};
+
+export const PasswordInput = Template.bind({});
+PasswordInput.args = {
+  type: 'password',
+  placeholder: 'test holder',
+  value: '1234',
 };

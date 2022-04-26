@@ -1,14 +1,11 @@
 import React from 'react';
 
-import { InputBox } from './InputBox';
-import { InputBasic } from './InputBasic';
+import { InputBox } from '../components/InputBox';
+import { InputBasic } from '../components/InputBasic';
 
 export default {
   title: 'Example/InputBox',
   component: InputBox,
-  parameters: {
-    layout: 'fullscreen',
-  },
 };
 
 const Template = (args) => <InputBox {...args} />;
