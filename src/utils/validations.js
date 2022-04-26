@@ -17,3 +17,7 @@ export const isNotValidMonth = inputValue => {
 export const isNotAlphabet = inputValue => {
   return inputValue.match(/^[a-zA-Z]*$/) === null;
 };
+
+export const isLengthBelow = (inputValue, length) => {
+  return inputValue.length < length;
+};

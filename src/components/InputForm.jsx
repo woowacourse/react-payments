@@ -1,7 +1,13 @@
 import React from 'react';
 import Input from './Input';
 import PropTypes from 'prop-types';
-import { hasSpace, isLengthOver, isNotAlphabet, isNotNumber } from '../utils/validations';
+import {
+  hasSpace,
+  isLengthBelow,
+  isLengthOver,
+  isNotAlphabet,
+  isNotNumber,
+} from '../utils/validations';
 import { objectToString } from '../utils/util';
 
 function InputForm({
@@ -103,7 +109,27 @@ function InputForm({
 
   const onClickNextButton = e => {
     e.preventDefault();
-    // 완전히 입력되었다면 ?
+
+    console.log(securityCode);
+    if (Object.keys(cardNumber).some(key => isLengthBelow(cardNumber[key], 4))) {
+      alert('카드 번호를 완벽히 입력해주세요');
+      return;
+    }
+
+    if (Object.keys(expirationDate).some(key => isLengthBelow(expirationDate[key], 2))) {
+      alert('만료일을 완벽히 입력해주세요');
+      return;
+    }
+
+    if (isLengthBelow(securityCode, 3)) {
+      alert('CVC/CVV를 완벽히 입력해주세요');
+      return;
+    }
+
+    if (Object.keys(password).some(key => isLengthBelow(password[key], 1))) {
+      alert('비밀번호를 완벽히 입력해주세요');
+      return;
+    }
 
     alert(`카드 번호는 ${objectToString(cardNumber)} 입니다 \n
     만료일 ${objectToString(expirationDate, '/')} 입니다 \n
@@ -112,7 +138,7 @@ function InputForm({
     비밀번호 ${objectToString(password)} \n`);
   };
   return (
-    <form>
+    <form onSubmit={onClickNextButton}>
       <Input labelTitle="카드번호">
         <div className="input-box">
           <input
@@ -210,7 +236,7 @@ function InputForm({
         <input className="input-basic w-15" type="password" disabled />
         <input className="input-basic w-15" type="password" disabled />
       </Input>
-      <button className="button-box" onSubmit={onClickNextButton}>
+      <button className="button-box">
         <span className="button-text">다음</span>
       </button>
     </form>
