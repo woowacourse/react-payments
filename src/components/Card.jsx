@@ -9,7 +9,7 @@ const SmallCard = styled.div`
 
   width: 208px;
   height: 130px;
-
+  padding: 10px;
   font-size: 30px;
   color: #575757;
 
@@ -28,20 +28,20 @@ const CardTop = styled.div`
   align-items: center;
 `;
 
+const CardMiddle = styled(CardTop)`
+  margin-left: 30px;
+`;
+
+const CardBottom = styled(CardTop)`
+  flex-direction: column;
+`;
+
 const CardText = styled.span`
   margin: 0 16px;
   font-size: 14px;
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
-`;
-
-const CardMiddle = styled.div`
-  width: 100%;
-  height: 100%;
-  margin-left: 30px;
-  display: flex;
-  align-items: center;
 `;
 
 const SmallCardChip = styled.div`
@@ -54,49 +54,30 @@ const SmallCardChip = styled.div`
   border-radius: 4px;
 `;
 
-const CardBottom = styled.div`
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const CardBottomNumber = styled.div`
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+const CardBottomNumber = styled.div``;
 
 const CardBottomInfo = styled.div`
   width: 100%;
-  height: 100%;
-
   display: flex;
-  align-items: center;
   justify-content: space-between;
 `;
 
-export default function Card() {
+export default function Card({ cardName, cardNumber, cardOwner, cardExpirationDate }) {
   return (
     <SmallCard>
       <CardTop>
-        <CardText>클린카드</CardText>
+        <CardText>{cardName}</CardText>
       </CardTop>
       <CardMiddle>
         <SmallCardChip></SmallCardChip>
       </CardMiddle>
       <CardBottom>
         <CardBottomNumber>
-          <CardText>1111 - 2222 - oooo - oooo</CardText>
+          <CardText>{cardNumber}</CardText>
         </CardBottomNumber>
         <CardBottomInfo>
-          <CardText>NAME</CardText>
-          <CardText>MM / YY</CardText>
+          <CardText>{cardOwner}</CardText>
+          <CardText>{cardExpirationDate}</CardText>
         </CardBottomInfo>
       </CardBottom>
     </SmallCard>
