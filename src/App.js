@@ -1,30 +1,13 @@
 import React from 'react';
 import Input from './components/Input';
+import Card from './components/Card';
 
 function App() {
   return (
     <div className="root">
       <div className="app">
         <h2 className="page-title"> 카드 추가 </h2>
-        <div className="card-box">
-          <div className="small-card">
-            <div className="card-top">
-              <span className="card-text">클린카드</span>
-            </div>
-            <div className="card-middle">
-              <div className="small-card__chip"></div>
-            </div>
-            <div className="card-bottom">
-              <div className="card-bottom__number">
-                <span className="card-text">1111 - 2222 - oooo - oooo</span>
-              </div>
-              <div className="card-bottom__info">
-                <span className="card-text">YUJO</span>
-                <span className="card-text">12 / 23</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Card cardNumber="1111-2222-3333-4444" expirationDate="08/17" ownerName="Harry"></Card>
         <Input labelTitle="카드번호">
           <div className="input-box">
             <input className="input-basic" type="text" value="1111" />

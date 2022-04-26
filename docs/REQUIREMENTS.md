@@ -12,6 +12,12 @@
 
 ### Input 컴포넌트
 
-- [] Input을 그려주고, 입력값의 상태를 변경한다.
+- [ ] Input을 그려주고, 입력값의 상태를 변경한다.
   - [x] label title, input element를 인자로 받는다.
   - [x] 완성된 input Component를 반환한다.
+
+### Card 컴포넌트
+
+- [ ] Card를 그려주고 Input 입력에 따라 카드의 각 부분을 출력해준다.
+  - [x] 카드번호, 만료일, 카드 소유자 이름, 보안코드, 카드 비밀번호를 인자로 받는다.
+  - [x] 완성된 Card Component를 반환한다.
