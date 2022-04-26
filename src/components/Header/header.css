@@ -1,0 +1,36 @@
+header {
+  display: flex;
+  padding: 10px;
+}
+
+.back-button {
+  width: 44px;
+  height: 44px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.arrow {
+  border-left: 1px solid #111;
+  border-bottom: 1px solid #111;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+}
+
+.back-button:hover > .arrow {
+  border-left: 1px solid #04c09e;
+  border-bottom: 1px solid #04c09e;
+}
+
+.back-button:active > .arrow {
+  border-left: 1px solid #04c09e;
+  border-bottom: 1px solid #04c09e;
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 16px;
+}
