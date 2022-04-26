@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Head = styled.section`
+const HeadSection = styled.section`
   display: flex;
   padding: 22px 24px 0;
   gap: 18px;
@@ -8,6 +8,7 @@ const Head = styled.section`
 
 const BackButton = styled.button`
   background-color: #fff;
+  border: none;
 `;
 
 const Title = styled.span`
@@ -18,13 +19,13 @@ const Title = styled.span`
   color: #383838;
 `;
 
-function Heading({ title }) {
+function Head({ title }) {
   return (
-    <Head>
+    <HeadSection>
       <BackButton>＜</BackButton>
       <Title>{title}</Title>
-    </Head>
+    </HeadSection>
   );
 }
 
-export default Heading;
+export default Head;

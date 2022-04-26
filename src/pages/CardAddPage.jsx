@@ -1,4 +1,4 @@
-import Heading from '../components/Heading';
+import Head from '../components/Head';
 import styled from 'styled-components';
 
 const Page = styled.div`
@@ -11,7 +11,7 @@ const Page = styled.div`
 function CardAddPage() {
   return (
     <Page>
-      <Heading />
+      <Head title="카드 추가" />
     </Page>
   );
 }
