@@ -65,8 +65,8 @@ function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
         ))}
       </CardNumberContainer>
       <CardBottomContainer>
-        <span>{ownerName}</span>
-        <span>{`${month}/${year}`}</span>
+        <span>{ownerName || 'NAME'}</span>
+        <span>{expiredDate ? `${month}/${year}` : 'MM/YY'}</span>
       </CardBottomContainer>
     </CardContainer>
   );

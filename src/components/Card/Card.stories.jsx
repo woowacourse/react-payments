@@ -4,6 +4,9 @@ import Card from '.';
 export default {
   title: 'Example/Card',
   component: Card,
+  argTypes: {
+    expiredDate: { control: { type: 'object' } },
+  },
 };
 
 const Template = args => <Card {...args} />;
