@@ -1,8 +1,14 @@
 import React from "react";
-import "./label.css";
+import styled from "styled-components";
 
 const Label = (props) => {
-  return <label htmlFor={props.id}>{props.description}</label>;
+  return (
+    <LabelContainer htmlFor={props.id}>{props.description}</LabelContainer>
+  );
 };
 
+const LabelContainer = styled.label`
+  color: #525252;
+  font-size: 12px;
+`;
 export default Label;
