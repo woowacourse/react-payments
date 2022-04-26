@@ -8,7 +8,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // 성능 측정하기를 원한다면, 로그함수를 인자로 넘기면 성능을 콘솔에 찍어줍니다.
