@@ -1,0 +1,25 @@
+.input__container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  label {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: #525252;
+  }
+  div {
+    background-color: #ecebf1;
+    border-radius: 7px;
+    border: none;
+    height: 45px;
+  }
+}
+
+.text-align-left {
+  input {
+    text-align: left;
+  }
+}
