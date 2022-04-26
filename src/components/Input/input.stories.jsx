@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "./index";
+import CardNumberInput from "./CardNumberInput";
 
 export default {
   title: "Input",
@@ -7,6 +8,7 @@ export default {
 };
 
 const Template = (args) => <Input {...args} />;
+const CardNumberTemplate = (args) => <CardNumberInput {...args} />;
 
 export const Password = Template.bind({});
 
@@ -15,12 +17,9 @@ Password.args = {
   placeholder: "",
 };
 
-export const CardNumber = Template.bind({});
+export const CardNumber = CardNumberTemplate.bind({});
 
-CardNumber.args = {
-  width: 318,
-  placeholder: "",
-};
+CardNumber.args = {};
 
 export const UserName = Template.bind({});
 
