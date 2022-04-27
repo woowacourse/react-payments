@@ -4,19 +4,18 @@ import Container from '../styles/Container';
 import InputTitle from '../styles/InputTitle';
 import InputBox from '../styles/InputBox';
 import InputBasic from '../styles/InputBasic';
+import TipButton from './TipButton';
 import InputContainer from '../styles/InputContainer';
 
-export default function CardNumber() {
+export default function CardCvc() {
   return (
     <Container>
-      <InputTitle>카드 번호</InputTitle>
+      <InputTitle>보안코드(CVC/CVV)</InputTitle>
       <InputBox>
-        <InputContainer>
-          <InputBasic type="text" maxLength="4" width="23%" />
-          <InputBasic type="text" maxLength="4" width="23%" />
-          <InputBasic type="password" maxLength="4" width="23%" />
-          <InputBasic type="password" maxLength="4" width="23%" />
+        <InputContainer width="23%">
+          <InputBasic type="text" maxLength="4" />
         </InputContainer>
+        <TipButton />
       </InputBox>
     </Container>
   );

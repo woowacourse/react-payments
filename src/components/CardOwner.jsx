@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import InputContainer from '../styles/InputContainer';
+import Container from '../styles/Container';
 import InputTitle from '../styles/InputTitle';
 import InputBox from '../styles/InputBox';
 import InputBasic from '../styles/InputBasic';
+import InputContainer from '../styles/InputContainer';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ const NameLength = styled.p`
 
 export default function CardOwner() {
   return (
-    <InputContainer>
+    <Container>
       <TitleWrapper>
         <InputTitle marginBottom="0px">카드소유자 이름(선택)</InputTitle>
         <NameLength>
@@ -29,8 +30,10 @@ export default function CardOwner() {
         </NameLength>
       </TitleWrapper>
       <InputBox>
-        <InputBasic type="text" maxLength="30" />
+        <InputContainer>
+          <InputBasic type="text" maxLength="30" />
+        </InputContainer>
       </InputBox>
-    </InputContainer>
+    </Container>
   );
 }

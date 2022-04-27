@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  margin: 16px 0;
+  display: flex;
+  width: ${(props) => props.width || '100%'};
+  background-color: #ecebf1;
+  border-radius: 0.25rem;
 `;

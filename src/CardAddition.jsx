@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import CardNumber from './components/CardNumber';
 import CardExpiration from './components/CardExpiration';
 import CardOwner from './components/CardOwner';
+import CardCvc from './components/CardCvc';
+import CardPassword from './components/CardPassword';
+import MoveButton from './components/MoveButton';
 
 const CardAdditionContainer = styled.div`
   height: 100%;
@@ -19,9 +22,9 @@ function CardAddition() {
       <CardNumber />
       <CardExpiration />
       <CardOwner />
-      {/* <CardCvc />
+      <CardCvc />
       <CardPassword />
-      <NextButton />  */}
+      <MoveButton />
     </CardAdditionContainer>
   );
 }
