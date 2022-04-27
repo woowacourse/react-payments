@@ -87,35 +87,31 @@ function InputForm({
   return (
     <form onSubmit={onClickNextButton}>
       <Input labelTitle="카드번호">
-        <div className="input-box">
-          {Object.keys(cardNumber).map(stateKey => (
-            <input
-              key={uid(stateKey)}
-              className="input-basic"
-              type={stateKey === 'first' || stateKey === 'second' ? 'text' : 'password'}
-              value={cardNumber[stateKey]}
-              onChange={e => onChangeCardNumber(stateKey, e)}
-              maxLength={4}
-              required
-            />
-          ))}
-        </div>
+        {Object.keys(cardNumber).map(stateKey => (
+          <input
+            key={uid(stateKey)}
+            className="input-basic"
+            type={stateKey === 'first' || stateKey === 'second' ? 'text' : 'password'}
+            value={cardNumber[stateKey]}
+            onChange={e => onChangeCardNumber(stateKey, e)}
+            maxLength={4}
+            required
+          />
+        ))}
       </Input>
-      <Input labelTitle="만료일" hasBox>
-        <div className="input-box w-50">
-          {Object.keys(expirationDate).map(stateKey => (
-            <input
-              key={uid(stateKey)}
-              className="input-basic"
-              type="number"
-              placeholder={stateKey === 'month' ? 'MM' : 'YY'}
-              value={expirationDate[stateKey]}
-              onChange={e => onChangeExpirationDate(stateKey, e)}
-              maxLength={2}
-              required
-            />
-          ))}
-        </div>
+      <Input labelTitle="만료일" inputSize="w-50">
+        {Object.keys(expirationDate).map(stateKey => (
+          <input
+            key={uid(stateKey)}
+            className="input-basic"
+            type="text"
+            placeholder={stateKey === 'month' ? 'MM' : 'YY'}
+            value={expirationDate[stateKey]}
+            onChange={e => onChangeExpirationDate(stateKey, e)}
+            maxLength={2}
+            required
+          />
+        ))}
       </Input>
       <Input labelTitle="카드 소유자 이름(선택)">
         <input
@@ -127,9 +123,9 @@ function InputForm({
           maxLength={30}
         />
       </Input>
-      <Input labelTitle="보안코드(CVC/CVV)">
+      <Input labelTitle="보안코드(CVC/CVV)" inputSize="w-25">
         <input
-          className="input-basic w-25"
+          className="input-basic"
           type="password"
           value={securityCode}
           onChange={onChangeSecurityCode}
@@ -137,20 +133,20 @@ function InputForm({
           required
         />
       </Input>
-      <Input labelTitle="카드 비밀번호">
+      <Input labelTitle="카드 비밀번호" inputSize="w-50">
         {Object.keys(password).map(stateKey => (
           <input
             key={uid(stateKey)}
-            className="input-basic w-15"
-            type="number"
+            className="input-basic"
+            type="text"
             value={password[stateKey]}
             onChange={e => onChangePassword(stateKey, e)}
             maxLength={1}
             required
           />
         ))}
-        <input className="input-basic w-15" type="password" disabled />
-        <input className="input-basic w-15" type="password" disabled />
+        <input className="input-basic" type="password" disabled />
+        <input className="input-basic" type="password" disabled />
       </Input>
       <button className="button-box">
         <span className="button-text">다음</span>
