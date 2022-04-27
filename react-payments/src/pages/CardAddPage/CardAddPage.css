@@ -1,0 +1,6 @@
+.card-add-page {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  gap: 7px;
+}
