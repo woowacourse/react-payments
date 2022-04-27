@@ -16,6 +16,11 @@ export const CardRegisterPage = () => {
     fourthNumber: '',
   });
 
+  const [expireDate, setExpireDate] = useState({
+    month: '',
+    year: '',
+  });
+
   const [checkInputs, setCheckInputs] = useState({
     cardNumbers: false,
     cardExpireDate: false,
@@ -31,7 +36,10 @@ export const CardRegisterPage = () => {
         cardNumbers={cardNumbers}
         handleCardNumbersInput={setCardNumbers}
       />
-      <CardExpireDateInputForm />
+      <CardExpireDateInputForm
+        expireDate={expireDate}
+        handleExpireDateInput={setExpireDate}
+      />
       <CardOwnerInputForm />
       <CVCInputForm />
       <CardPasswordInputForm />
