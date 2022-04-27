@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const InputContainer = styled.div`
+  position: ${props => props.position || 'static'};
   width: 100%;
   margin: 16px 0;
   background-color: black;
@@ -37,8 +38,19 @@ const Input = styled.input`
   border-radius: 0.25rem;
 `;
 
+const DotContainer = styled.div`
+  background-color: #ecebf1;
+  height: 45px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+`;
+
 const Span = styled.span`
   padding: 8px;
 `;
 
-export { InputContainer, InputWrapper, Label, Input, Span };
+export { InputContainer, InputWrapper, Label, Input, DotContainer, Span };
