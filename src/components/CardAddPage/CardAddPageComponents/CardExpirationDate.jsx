@@ -20,10 +20,20 @@ function CardExpirationDate({ cardNumbers, setCardNumbers }) {
     });
   };
 
+  const handleMonthOnFocusOut = (event) => {
+    if (event.target.value === '1') {
+      event.target.value = '01';
+    }
+
+    setCardNumbers({
+      ...cardNumbers,
+      month: event.target.value,
+    });
+  };
+
   const handleYearOnInput = (event) => {
     const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
     event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(regExp, '');
-
     let { value, name } = event.target;
 
     if (value.length > 2) {
@@ -46,6 +56,7 @@ function CardExpirationDate({ cardNumbers, setCardNumbers }) {
           type="text"
           placeholder="MM"
           onInput={handleMonthOnInput}
+          onBlur={handleMonthOnFocusOut}
           value={cardNumbers.month}
           required
         />
