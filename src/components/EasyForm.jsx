@@ -4,14 +4,20 @@ const EasyForm = ({ children, initialValues, onSubmit }) => {
   const [values, setValues] = useState(initialValues);
   const [submitting, setSubmitting] = useState(false);
 
-  const handleChange = (name, callback) => {
+  const handleChange = (name, value) => {
     if (!Object.prototype.hasOwnProperty.call(values, name)) {
       throw new Error('invalid field name');
     }
 
+    if (typeof value !== 'function') {
+      setValues(value);
+
+      return;
+    }
+
     setValues((prevState) => ({
       ...prevState,
-      [name]: callback(prevState[name]),
+      [name]: value(prevState[name]),
     }));
   };
 
