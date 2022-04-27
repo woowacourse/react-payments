@@ -3,7 +3,13 @@ import styled from 'styled-components';
 import { Span } from '.';
 
 // TODO: 스타일
-const Paragraph = styled.p``;
+const Paragraph = styled.p`
+  margin: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+`;
 
 function LetterCounter({ currentLength, maxLength }) {
   return (
