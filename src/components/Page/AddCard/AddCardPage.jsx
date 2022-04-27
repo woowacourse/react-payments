@@ -2,11 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../../Button";
 import Header from "../../Header";
-import { useState } from "react";
 import CardNumber from "./CardNumber";
-import ExpiredNumber from "./ExpiredDate";
+import ExpiredDate from "./ExpiredDate";
 import CardOwnerName from "./CardOwnerName";
-import { checkCardNumber } from "../../../validation";
+import {
+  checkCardNumber,
+  checkExpiredMonth,
+  checkExpiredYear,
+} from "../../../validation";
 
 import Card from "../../Card";
 import Password from "./Password";
@@ -19,11 +22,16 @@ const AddCardPage = () => {
     useInputValue({ validation: checkCardNumber });
   const [secondCardNumber, isSecondCardNumberError, onChangeSecondCardNumber] =
     useInputValue({ validation: checkCardNumber });
-  const [thirdCardNumber, isThridCardNumberError, onChangeThirdCardNumber] =
+  const [thirdCardNumber, isThirdCardNumberError, onChangeThirdCardNumber] =
     useInputValue({ validation: checkCardNumber });
   const [fourthCardNumber, isFourthCardNumberError, onChangeFourthCardNumber] =
     useInputValue({ validation: checkCardNumber });
 
+  const [expiredMonth, isExpiredMonthError, onChangeExpiredMonth] =
+    useInputValue({ validation: checkExpiredMonth });
+  const [expiredYear, isExpiredYearError, onChangeExpiredYear] = useInputValue({
+    validation: checkExpiredYear,
+  });
   return (
     <Container>
       <Header title="카드 추가" />
@@ -43,7 +51,12 @@ const AddCardPage = () => {
         onChangeThirdCardNumber={onChangeThirdCardNumber}
         onChangeFourthCardNumber={onChangeFourthCardNumber}
       />
-      <ExpiredNumber />
+      <ExpiredDate
+        expiredMonth={expiredMonth}
+        expiredYear={expiredYear}
+        onChangeExpiredMonth={onChangeExpiredMonth}
+        onChangeExpiredYear={onChangeExpiredYear}
+      />
       <CardOwnerName />
       <SecureCode />
       <Password />

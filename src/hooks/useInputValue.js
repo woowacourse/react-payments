@@ -6,6 +6,7 @@ const useInputValue = ({ validation }) => {
 
   const onChangeValue = ({ target }) => {
     setValue(target.value);
+    console.log(target.value, validation(target.value));
     if (validation && !validation(target.value)) {
       setError(true);
     }
