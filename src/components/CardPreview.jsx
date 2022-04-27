@@ -11,13 +11,13 @@ const propTypes = {
   }),
 };
 
-const CardPreview = ({ company, number, ownerName, expiryDate, handleModal }) => {
+const CardPreview = ({ company, number, ownerName, expiryDate, theme, handleModal }) => {
   const { first, second, third, fourth } = number;
   const { month, year } = expiryDate;
 
   return (
     <div className="card-box">
-      <div className="empty-card" onClick={handleModal}>
+      <div className="empty-card" onClick={handleModal} style={{ backgroundColor: theme }}>
         <div className="card-top">
           <span className="card-text">{company}</span>
         </div>

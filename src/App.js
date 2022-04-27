@@ -32,14 +32,14 @@ const cardPasswordInputInfoList = [
 ];
 
 const cardCompanyList = [
-  { id: uuid(), name: '포코 카드', color: '#E24141' },
-  { id: uuid(), name: '준 카드', color: '#547CE4' },
-  { id: uuid(), name: '공원 카드', color: '#73BC6D' },
-  { id: uuid(), name: '브랜 카드', color: '#DE59B9' },
-  { id: uuid(), name: '로이드 카드', color: '#04C09E' },
-  { id: uuid(), name: '도비 카드', color: '#E76E9A' },
-  { id: uuid(), name: '록바 카드', color: '#F37D3B' },
-  { id: uuid(), name: '무비 카드', color: '#FBCD58' },
+  { id: uuid(), name: '포코 카드', theme: '#E24141' },
+  { id: uuid(), name: '준 카드', theme: '#547CE4' },
+  { id: uuid(), name: '공원 카드', theme: '#73BC6D' },
+  { id: uuid(), name: '브랜 카드', theme: '#DE59B9' },
+  { id: uuid(), name: '로이드 카드', theme: '#04C09E' },
+  { id: uuid(), name: '도비 카드', theme: '#E76E9A' },
+  { id: uuid(), name: '록바 카드', theme: '#F37D3B' },
+  { id: uuid(), name: '무비 카드', theme: '#FBCD58' },
 ];
 
 function App() {
@@ -61,7 +61,7 @@ function App() {
       first: '',
       second: '',
     },
-    color: '',
+    theme: '',
   });
 
   useEffect(() => {
@@ -69,7 +69,7 @@ function App() {
   }, [cardInfo]);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const { number, ownerName, expiryDate, company } = cardInfo;
+  const { number, ownerName, expiryDate, company, theme } = cardInfo;
 
   const handleModal = useCallback(() => {
     setModalVisible(!modalVisible);
@@ -96,10 +96,11 @@ function App() {
     });
   };
 
-  const onClickCompany = (name) => {
+  const onClickCompany = (name, theme) => {
     setCardInfo((prevCardInfo) => ({
       ...prevCardInfo,
       company: name,
+      theme,
     }));
 
     handleModal();
@@ -113,6 +114,7 @@ function App() {
         expiryDate={expiryDate}
         company={company}
         handleModal={handleModal}
+        theme={theme}
       />
       <FormInput
         item="number"
@@ -150,11 +152,12 @@ function App() {
         cardInfo={cardInfo}
         onChange={onChange}
       />
+
       {modalVisible && (
         <Modal handleModal={handleModal}>
           <div className="flex-wrap">
-            {cardCompanyList.map(({ name, id, color }) => (
-              <CardCompany key={id} name={name} color={color} onClickCompany={onClickCompany} />
+            {cardCompanyList.map(({ name, id, theme }) => (
+              <CardCompany key={id} name={name} theme={theme} onClickCompany={onClickCompany} />
             ))}
           </div>
         </Modal>

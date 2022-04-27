@@ -60,6 +60,7 @@ const FormInput = ({ className, item, inputTitle, inputInfoList, cardInfo, onCha
             name={name}
             type={type}
             className={`input-basic ${className}`}
+            style={{ color: cardInfo.theme }}
             placeholder={placeholder}
             value={typeof cardInfo[item] === 'object' ? cardInfo[item][name] : cardInfo[item]}
             onChange={(e) => onChange(e, item)}
