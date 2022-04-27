@@ -1,7 +1,7 @@
 import React from 'react';
 import Input from '../Input';
 import PropTypes from 'prop-types';
-import { isNotAlphabet } from '../../utils/validations';
+import { isAlphabetOrSpace } from '../../utils/validations';
 import { objectToString } from '../../utils/util';
 import { uid } from 'react-uid';
 import { checkFormCompletion, isNumberInRange } from './validation';
@@ -43,11 +43,9 @@ function InputForm({
       target: { value },
     } = e;
 
-    if (isNotAlphabet(value)) {
-      return;
+    if (isAlphabetOrSpace(value)) {
+      setOwnerName(value.toUpperCase());
     }
-
-    setOwnerName(value.toUpperCase());
   };
 
   const onChangeSecurityCode = e => {

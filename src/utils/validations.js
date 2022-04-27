@@ -14,8 +14,8 @@ export const isNotValidMonth = inputValue => {
   return monthValue < 1 || monthValue > 12;
 };
 
-export const isNotAlphabet = inputValue => {
-  return inputValue.match(/^[a-zA-Z]*$/) === null;
+export const isAlphabetOrSpace = inputValue => {
+  return inputValue.match(/^[a-zA-Z]*$/) !== null || hasSpace(inputValue);
 };
 
 export const isLengthBelow = (inputValue, length) => {
