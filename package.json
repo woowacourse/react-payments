@@ -17,33 +17,6 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "airbnb"
-    ],
-    "ignorePatterns": [
-      "src/stories/*",
-      "*.stories.*"
-    ],
-    "rules": {
-      "react/react-in-jsx-scope": "off",
-      "import/no-extraneous-dependencies": "off",
-      "react/jsx-filename-extension": "off",
-      "react/self-closing-comp": "warn"
-    },
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -68,6 +41,8 @@
     "@storybook/react": "^6.4.22",
     "@storybook/testing-library": "^0.0.11",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "webpack": "^5.72.0"
   }
 }
