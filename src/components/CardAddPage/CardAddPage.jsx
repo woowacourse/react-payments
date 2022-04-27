@@ -19,6 +19,8 @@ function CardAddPage(props) {
     number4: '',
     month: '',
     year: '',
+    owner: '',
+    cvc: '',
   });
 
   const handleOnChange = (event) => {
@@ -39,7 +41,7 @@ function CardAddPage(props) {
       {/* 만료일 */}
       <CardExpirationDate cardNumbers={cardNumbers} onChange={handleOnChange} />
       {/* 카드 소유자 이름 */}
-      <CardOwner />
+      <CardOwner cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
       {/* 보안 코드  */}
       <CVC />
       {/* 카드 비밀번호 */}

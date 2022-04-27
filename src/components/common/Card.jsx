@@ -1,6 +1,14 @@
 import React from 'react';
 
 function Card({ isEmpty, handleCardAdd, cardNumbers }) {
+  const processing = (cardNumbers) => {
+    console.log(cardNumbers);
+    if (cardNumbers.owner === '') {
+      return 'NAME';
+    }
+    return cardNumbers.owner.slice(15);
+  };
+
   return (
     <div className="card-box">
       <div className="empty-card" onClick={handleCardAdd}>
@@ -26,7 +34,9 @@ function Card({ isEmpty, handleCardAdd, cardNumbers }) {
               </div>
               <div className="card-bottom-position">
                 <div className="card-bottom__info">
-                  <span className="card-text">NAME</span>
+                  <span className="card-text">
+                    {cardNumbers.owner === '' ? 'NAME' : cardNumbers.owner.slice(0, 7)}
+                  </span>
                   <span className="card-text">
                     {cardNumbers.month || 'MM'} / {cardNumbers.year || 'YY'}
                   </span>
