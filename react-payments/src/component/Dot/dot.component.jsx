@@ -1,8 +1,8 @@
 import "./dot.css";
 
-const Dot = () => {
+const Dot = ({ dotClass }) => {
   return (
-    <div className="dot-container">
+    <div className={`dot-container ${dotClass}`}>
       <div className="dot" />
     </div>
   );

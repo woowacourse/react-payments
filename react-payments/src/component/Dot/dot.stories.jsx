@@ -6,3 +6,11 @@ export default {
 };
 
 export const DefaultDot = (args) => <Dot {...args} />;
+DefaultDot.args = {
+  dotClass: "password-form",
+};
+
+export const CardNumberDot = (args) => <Dot {...args} />;
+CardNumberDot.args = {
+  dotClass: "card-number",
+};
