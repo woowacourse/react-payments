@@ -12,7 +12,7 @@ import CVC from './CardAddPageComponents/CVC';
 import CardPassword from './CardAddPageComponents/CardPassword';
 import PrevPageButton from './CardAddPageComponents/PrevPageButton';
 
-function CardAddPage(props) {
+function CardAddPage() {
   const [cardNumbers, setCardNumbers] = useState({
     number1: '',
     number2: '',
@@ -26,33 +26,17 @@ function CardAddPage(props) {
     password2: '',
   });
 
-  const handleOnChange = (event) => {
-    const { value, name } = event.target;
-    setCardNumbers({
-      ...cardNumbers,
-      [name]: value,
-    });
-
-    console.log(cardNumbers);
-  };
-
   return (
     <div className="app">
       <PrevPageButton />
       <PageTitle title="카드추가" />
       <Card isEmpty={false} cardNumbers={cardNumbers} />
-      {/* 카드 번호  */}
-      <CardInputForm>
+      <CardInputForm cardNumbers={cardNumbers}>
         <CardNumber cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
-        {/* 만료일 */}
         <CardExpirationDate cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
-        {/* 카드 소유자 이름 */}
         <CardOwner cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
-        {/* 보안 코드  */}
         <CVC cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
-        {/* 카드 비밀번호 */}
         <CardPassword cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
-        {/* 다음 버튼  */}
         <NextPageButton text="다음" />
       </CardInputForm>
     </div>
