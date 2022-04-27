@@ -23,6 +23,13 @@ export const CardRegisterPage = () => {
 
   const [ownerName, setOwnerName] = useState('');
 
+  const [CVC, setCVC] = useState('');
+
+  const [password, setPassword] = useState({
+    firstNumber: '',
+    secondNumber: '',
+  });
+
   const [checkInputs, setCheckInputs] = useState({
     cardNumbers: false,
     cardExpireDate: false,
@@ -46,8 +53,11 @@ export const CardRegisterPage = () => {
         ownerName={ownerName}
         handleOwnerNameInput={setOwnerName}
       />
-      <CVCInputForm />
-      <CardPasswordInputForm />
+      <CVCInputForm CVC={CVC} handleCVCInput={setCVC} />
+      <CardPasswordInputForm
+        password={password}
+        handlePasswordInput={setPassword}
+      />
     </>
   );
 };
