@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Input, InputContainer, Span, Label } from './common';
+import QuestionContainer from './common/QuestionIcon';
 
 const MAX_CARD_CODE = 3;
+const CVC_EXPLANATION = 'hihi asfdsafd asdfasdfa asfdasfasf';
 
 const validator = value => {
   if (value.includes(' ') || Number.isNaN(Number(value))) {
@@ -35,6 +37,7 @@ function CardSecurityCode(props) {
       <Label>보안코드(CVC/CVV)</Label>
       <Span>
         <Input type="password" maxLength="3" onChange={handleInputChange} value={cardCode} />
+        <QuestionContainer textContent={CVC_EXPLANATION} />
       </Span>
     </InputContainer>
   );
