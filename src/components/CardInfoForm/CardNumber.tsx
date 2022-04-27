@@ -15,7 +15,7 @@ export default function CardNumber({ cardNumbers, onChange }) {
               onChange={e => onChange(e, index)}
               maxLength={4}
             />
-            {index !== 3 ? <span>-</span> : null}
+            {index !== 3 ? <span className="card-number-delimiter">-</span> : null}
           </React.Fragment>
         ))}
       </div>

@@ -38,7 +38,7 @@ input[type="number"]::-webkit-inner-spin-button {
   border-radius: 15px;
 }
 
-.app {
+.App {
   height: 100%;
   padding: 16px 24px;
 }

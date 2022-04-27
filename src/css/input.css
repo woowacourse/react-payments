@@ -2,6 +2,10 @@
   margin: 16px 0;
 }
 
+.password-input-container > .input-basic + .input-basic {
+  margin-left: 7px;
+}
+
 .input-container-top {
   display: flex;
   justify-content: space-between;
@@ -16,10 +20,6 @@
   color: #d3d3d3;
   border-radius: 0.25rem;
   background-color: #ecebf1;
-}
-
-.input-box > span {
-  color: #04c09e;
 }
 
 .input-title {
@@ -82,9 +82,19 @@
 
 .cvc-image {
   position: absolute;
-  top: 0px;
+  top: -30px;
   left: 70px;
-  /* bottom: 10px;
-  right: 10px; */
-  width: 200px;
+  width: 160px;
+}
+
+.rest-password-box {
+  background-color: white;
+}
+
+.card-number-delimiter {
+  color: #04c09e;
+}
+
+.expired-date-delimiter {
+  color: #737373;
 }

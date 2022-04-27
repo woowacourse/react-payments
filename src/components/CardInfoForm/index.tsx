@@ -18,12 +18,12 @@ export default function CardInfoForm({
   const { cardNumbers, expiredDate, userName, securityCode, password } = cardInfo;
 
   return (
-    <div>
+    <form>
       <CardNumber cardNumbers={cardNumbers} onChange={onChangeCardNumber} />
       <ExpiredDate expiredDate={expiredDate} onChange={onChangeExpiredDate} />
       <CardUserName cardUserName={userName} onChange={onChangeUserName} onBlur={onBlurUserName} />
       <SecurityCode securityCode={securityCode} onChange={onChangeSecurityCode} />
       <CardPassword password={password} onChange={onChangePassword} />
-    </div>
+    </form>
   );
 }
