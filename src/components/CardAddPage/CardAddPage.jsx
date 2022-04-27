@@ -21,6 +21,8 @@ function CardAddPage(props) {
     year: '',
     owner: '',
     cvc: '',
+    password1: '',
+    password2: '',
   });
 
   const handleOnChange = (event) => {
@@ -29,6 +31,8 @@ function CardAddPage(props) {
       ...cardNumbers,
       [name]: value,
     });
+
+    console.log(cardNumbers);
   };
 
   return (
@@ -45,7 +49,7 @@ function CardAddPage(props) {
       {/* 보안 코드  */}
       <CVC cardNumbers={cardNumbers} onChange={handleOnChange} />
       {/* 카드 비밀번호 */}
-      <CardPassword />
+      <CardPassword cardNumbers={cardNumbers} onChange={handleOnChange} />
       {/* 다음 버튼  */}
       <NextPageButton />
     </div>
