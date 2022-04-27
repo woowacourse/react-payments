@@ -17,6 +17,7 @@ CardNumber.args = {
   maxLength: 4,
   placeholder: "",
 };
+
 export const CardSecretNumber = Template.bind({});
 CardSecretNumber.args = {
   type: "password",
