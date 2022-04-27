@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '../components/Card.jsx';
 import '../css/index.css';
+import '../css/App.css';
 
 export default {
   title: 'Card',

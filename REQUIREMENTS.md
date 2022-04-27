@@ -29,7 +29,7 @@
 - [x] AddCardForm 컴포넌트 구현
 
   - [x] 카드 정보를 제출한다
-  - [ ] CardForm 스토리북 작성
+  - [x] AddCardForm 스토리북 작성
 
 - [ ] Helper 컴포넌트 구현
 
