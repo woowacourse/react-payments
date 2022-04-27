@@ -26,9 +26,7 @@ export default function Card({ cardInfo }) {
               );
             })}
           </div>
-          <div className="card-bottom__info">
-            <span className="card-text card-user-name">{userName}</span>
-          </div>
+          <span className="card-text card-user-name">{userName || "NAME"}</span>
         </div>
       </div>
     </div>

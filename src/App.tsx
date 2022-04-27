@@ -2,7 +2,9 @@ import React, { useState } from "react";
 
 import Card from "./components/Card";
 import CardInfoForm from "./components/CardInfoForm";
+import Header from "./components/Header";
 import REGEXP from "./contants/regexp";
+
 interface CardInfo {
   cardNumbers: CardNumbers;
   expiredDate: ExpiredDate;
@@ -112,12 +114,10 @@ function App() {
       });
     }
   };
-  // 재사용가능한 컴포넌트가 비즈니스 로직을 가지기 어렵다.
-  // onChange 6개 이 정도 될것이다.
-  // Input을 컴포넌트를 수정하는 방향보다, useInput custom hook 으로 분리하는 방향이
 
   return (
     <div className="App">
+      <Header />
       <Card cardInfo={cardInfo} />
       <CardInfoForm
         cardInfo={cardInfo}

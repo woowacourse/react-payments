@@ -3,6 +3,7 @@
 @import "./button.css";
 @import "./modal.css";
 @import "./utils.css";
+@import "./header.css";
 
 * {
   box-sizing: border-box;
@@ -45,14 +46,4 @@ input[type="number"]::-webkit-inner-spin-button {
 .App {
   height: 100%;
   padding: 16px 24px;
-}
-
-.page-title {
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 22px;
-  display: flex;
-  align-items: center;
-
-  color: #383838;
 }
