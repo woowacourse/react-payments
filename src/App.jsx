@@ -1,10 +1,12 @@
 import "./App.css";
-import Input from './components/Input/Input'
+import AddPage from "./pages/AddPage";
 
 function App() {
-  return <div className="App">
-    <Input />
-  </div>;
+  return (
+  <div className="App">
+    <AddPage />
+  </div>
+  );
 }
 
 export default App;

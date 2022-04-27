@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import {CardWrapper, CardTop, CardMiddle, CardBottom, CardText, CardBottomNumber, CardBottomInfo} from "./style";
 
-function Card({size, company, cardNumbers, owner, dueMonth, dueDate}) {
+function Card({size, company, cardNumbers, owner, dueDate}) {
+  const [dueMonth, dueYear] = dueDate;
+
   return (
     <CardWrapper size={size}>
        <CardTop>
@@ -16,7 +18,7 @@ function Card({size, company, cardNumbers, owner, dueMonth, dueDate}) {
           </CardBottomNumber>
           <CardBottomInfo>
             <CardText>{owner}</CardText>
-            <CardText>{dueMonth} / {dueDate}</CardText>
+            <CardText>{dueMonth}/{dueYear}</CardText>
           </CardBottomInfo>
         </CardBottom>
     </CardWrapper>
@@ -29,33 +31,17 @@ Card.propTypes = {
    */
   company: PropTypes.string.isRequired,
   /**
-   * 카드번호(첫번째)
+   * 카드번호 배열
    */
-  firstNumber: PropTypes.string,
-  /**
-   * 카드번호(두번째)
-   */
-  secondNumber: PropTypes.string,
-  /**
-   * 카드번호(세번째)
-   */
-  thirdNumber: PropTypes.string,
-  /**
-   * 카드번호(네번째)
-   */
-   fourthNumber: PropTypes.string,
+   cardNumbers: PropTypes.array,
   /**
    * 소유자
    */
   owner: PropTypes.string,
   /**
-   * 만료일(월)
+   * 만료일
    */
-  dueMonth: PropTypes.string,
-  /**
-   * 만료일(일)
-   */
-  dueDate: PropTypes.string
+  dueDate: PropTypes.array
 }
  
 
