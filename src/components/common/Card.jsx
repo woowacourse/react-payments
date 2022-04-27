@@ -27,7 +27,9 @@ function Card({ isEmpty, handleCardAdd, cardNumbers }) {
               <div className="card-bottom-position">
                 <div className="card-bottom__info">
                   <span className="card-text">NAME</span>
-                  <span className="card-text">MM / YY</span>
+                  <span className="card-text">
+                    {cardNumbers.month || 'MM'} / {cardNumbers.year || 'YY'}
+                  </span>
                 </div>
               </div>
             </div>

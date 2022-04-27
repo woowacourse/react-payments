@@ -17,7 +17,17 @@ function CardAddPage(props) {
     number2: '',
     number3: '',
     number4: '',
+    month: '',
+    year: '',
   });
+
+  const handleOnChange = (event) => {
+    const { value, name } = event.target;
+    setCardNumbers({
+      ...cardNumbers,
+      [name]: value,
+    });
+  };
 
   return (
     <div className="app">
@@ -25,9 +35,9 @@ function CardAddPage(props) {
       <PageTitle title="카드추가" />
       <Card isEmpty={false} cardNumbers={cardNumbers} />
       {/* 카드 번호  */}
-      <CardNumber cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
+      <CardNumber cardNumbers={cardNumbers} onChange={handleOnChange} />
       {/* 만료일 */}
-      <CardExpirationDate />
+      <CardExpirationDate cardNumbers={cardNumbers} onChange={handleOnChange} />
       {/* 카드 소유자 이름 */}
       <CardOwner />
       {/* 보안 코드  */}

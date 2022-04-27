@@ -1,15 +1,6 @@
 import React from 'react';
 
-function CardNumber({ cardNumbers, setCardNumbers }) {
-  const handleOnChange = (event) => {
-    const { value, name } = event.target;
-    console.log(value);
-    setCardNumbers({
-      ...cardNumbers,
-      [name]: value,
-    });
-    console.log(cardNumbers);
-  };
+function CardNumber({ cardNumbers, onChange }) {
   return (
     <div className="input-container">
       <span className="input-title">카드 번호</span>
@@ -19,7 +10,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
           className="input-basic"
           maxLength="4"
           type="text"
-          onChange={handleOnChange}
+          onChange={onChange}
           value={cardNumbers.number1}
         />
         <input
@@ -27,7 +18,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
           className="input-basic"
           maxLength="4"
           type="text"
-          onChange={handleOnChange}
+          onChange={onChange}
           value={cardNumbers.number2}
         />
         <input
@@ -35,7 +26,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
           className="input-basic"
           maxLength="4"
           type="password"
-          onChange={handleOnChange}
+          onChange={onChange}
           value={cardNumbers.number3}
         />
         <input
@@ -43,7 +34,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
           className="input-basic"
           maxLength="4"
           type="password"
-          onChange={handleOnChange}
+          onChange={onChange}
           value={cardNumbers.number4}
         />
       </div>
