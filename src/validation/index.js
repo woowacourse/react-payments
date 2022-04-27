@@ -11,3 +11,7 @@ export const checkExpiredYear = (year) => {
   const nowYear = String(new Date().getFullYear()).slice(2, 4);
   return checkCardNumber(year) && year > nowYear;
 };
+
+export const checkOwnerName = (name) => {
+  return name.length < 30 && REG_EXP.CHARACTER_ONLY.test(name);
+};

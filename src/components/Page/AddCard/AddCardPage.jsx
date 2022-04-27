@@ -9,6 +9,7 @@ import {
   checkCardNumber,
   checkExpiredMonth,
   checkExpiredYear,
+  checkOwnerName,
 } from "../../../validation";
 
 import Card from "../../Card";
@@ -31,6 +32,10 @@ const AddCardPage = () => {
     useInputValue({ validation: checkExpiredMonth });
   const [expiredYear, isExpiredYearError, onChangeExpiredYear] = useInputValue({
     validation: checkExpiredYear,
+  });
+
+  const [ownerName, isOwnerNameError, onChangeOwnerName] = useInputValue({
+    validation: checkOwnerName,
   });
   return (
     <Container>
@@ -57,7 +62,10 @@ const AddCardPage = () => {
         onChangeExpiredMonth={onChangeExpiredMonth}
         onChangeExpiredYear={onChangeExpiredYear}
       />
-      <CardOwnerName />
+      <CardOwnerName
+        ownerName={ownerName}
+        onChangeOwnerName={onChangeOwnerName}
+      />
       <SecureCode />
       <Password />
       <Button></Button>

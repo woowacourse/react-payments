@@ -3,7 +3,7 @@ import FieldSet from "../../FieldSet";
 import styled from "styled-components";
 import Input from "../../Input";
 
-const CardOwnerName = () => {
+const CardOwnerName = ({ ownerName, onChangeOwnerName }) => {
   return (
     <Container>
       <MaxNumberIndicator>03/30</MaxNumberIndicator>
@@ -18,6 +18,8 @@ const CardOwnerName = () => {
             size="large"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             maxLength="30"
+            value={ownerName}
+            onChange={onChangeOwnerName}
           />
         }
       </FieldSet>
