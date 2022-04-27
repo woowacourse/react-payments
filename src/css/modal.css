@@ -8,8 +8,10 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  position: absolute;
 
   background: #fff;
+
   z-index: 10;
 }
 

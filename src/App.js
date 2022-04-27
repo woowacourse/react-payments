@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import FormInput from './components/common/FormInput';
 import CardPreview from './components/CardPreview';
+import Modal from './components/common/Modal';
+import CardCompany from './components/CardCompany';
 
 const cardNumberInputInfoList = [
   { id: uuid(), type: 'text', className: 'mr-n15', name: 'first' },
@@ -29,9 +31,20 @@ const cardPasswordInputInfoList = [
   { id: uuid(), type: 'password', className: 'w-15' },
 ];
 
+const cardCompanyList = [
+  { id: uuid(), name: '포코 카드', color: '#E24141' },
+  { id: uuid(), name: '준 카드', color: '#547CE4' },
+  { id: uuid(), name: '공원 카드', color: '#73BC6D' },
+  { id: uuid(), name: '브랜 카드', color: '#DE59B9' },
+  { id: uuid(), name: '로이드 카드', color: '#04C09E' },
+  { id: uuid(), name: '도비 카드', color: '#E76E9A' },
+  { id: uuid(), name: '록바 카드', color: '#F37D3B' },
+  { id: uuid(), name: '무비 카드', color: '#FBCD58' },
+];
+
 function App() {
   const [cardInfo, setCardInfo] = useState({
-    company: '클린카드',
+    company: '',
     number: {
       first: '',
       second: '',
@@ -48,8 +61,19 @@ function App() {
       first: '',
       second: '',
     },
+    color: '',
   });
+
+  useEffect(() => {
+    console.log(cardInfo);
+  }, [cardInfo]);
+
+  const [modalVisible, setModalVisible] = useState(false);
   const { number, ownerName, expiryDate, company } = cardInfo;
+
+  const handleModal = useCallback(() => {
+    setModalVisible(!modalVisible);
+  }, [modalVisible]);
 
   const onChange = ({ target }, item) => {
     const { name, value } = target;
@@ -72,13 +96,23 @@ function App() {
     });
   };
 
+  const onClickCompany = (name) => {
+    setCardInfo((prevCardInfo) => ({
+      ...prevCardInfo,
+      company: name,
+    }));
+
+    handleModal();
+  };
+
   return (
-    <>
+    <div>
       <CardPreview
         number={number}
         ownerName={ownerName}
         expiryDate={expiryDate}
         company={company}
+        handleModal={handleModal}
       />
       <FormInput
         item="number"
@@ -116,7 +150,16 @@ function App() {
         cardInfo={cardInfo}
         onChange={onChange}
       />
-    </>
+      {modalVisible && (
+        <Modal handleModal={handleModal}>
+          <div className="flex-wrap">
+            {cardCompanyList.map(({ name, id, color }) => (
+              <CardCompany key={id} name={name} color={color} onClickCompany={onClickCompany} />
+            ))}
+          </div>
+        </Modal>
+      )}
+    </div>
   );
 }
 
