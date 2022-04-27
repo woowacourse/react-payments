@@ -13,7 +13,7 @@ export default function CardCvc() {
       <InputTitle>보안코드(CVC/CVV)</InputTitle>
       <InputBox>
         <InputContainer width="23%">
-          <InputBasic type="text" maxLength="4" />
+          <InputBasic type="text" maxLength="3" />
         </InputContainer>
         <TipButton />
       </InputBox>

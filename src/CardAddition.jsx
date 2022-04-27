@@ -24,7 +24,7 @@ function CardAddition() {
       <CardOwner />
       <CardCvc />
       <CardPassword />
-      <MoveButton />
+      <MoveButton>다음</MoveButton>
     </CardAdditionContainer>
   );
 }

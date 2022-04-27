@@ -18,8 +18,8 @@ export default function CardPassword() {
     <Container>
       <InputTitle>카드 비밀번호</InputTitle>
       <ExtendedInputBox>
-        <InputBasic width="43px" />
-        <InputBasic width="43px" />
+        <InputBasic width="43px" maxLength="1" />
+        <InputBasic width="43px" maxLength="1" />
         <Wrapper>
           <Circle size="5px" color="#04C09E" />
         </Wrapper>
