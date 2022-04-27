@@ -11,8 +11,8 @@ export default function CardExpiration() {
       <InputTitle>만료일</InputTitle>
       <InputBox>
         <InputContainer width="40%">
-          <InputBasic type="text" placeholder="MM" width="48%" />
-          <InputBasic type="text" placeholder="YY" width="48%" />
+          <InputBasic type="text" placeholder="MM" width="48%" maxLength="2" />
+          <InputBasic type="text" placeholder="YY" width="48%" maxLength="2" />
         </InputContainer>
       </InputBox>
     </Container>
