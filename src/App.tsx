@@ -1,10 +1,9 @@
-import React from "react";
-import CardOwnerNameInput from "./components/atom/CardOwnerNameInput";
+import CardPasswordFieldset from "./components/molecules/CardPasswordFieldset";
 
 function App() {
   return (
     <>
-      <CardOwnerNameInput />
+      <CardPasswordFieldset />
     </>
   );
 }
