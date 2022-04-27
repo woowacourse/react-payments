@@ -49,9 +49,9 @@ function CardAddPage(props) {
         {/* 카드 소유자 이름 */}
         <CardOwner cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
         {/* 보안 코드  */}
-        <CVC cardNumbers={cardNumbers} onChange={handleOnChange} />
+        <CVC cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
         {/* 카드 비밀번호 */}
-        <CardPassword cardNumbers={cardNumbers} onChange={handleOnChange} />
+        <CardPassword cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
         {/* 다음 버튼  */}
         <NextPageButton text="다음" />
       </CardInputForm>
