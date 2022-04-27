@@ -65,6 +65,9 @@ const CardBottomInfo = styled.div`
 `;
 
 export default function Card({ cardName, cardNumber, cardOwner, cardExpiration }) {
+  const cardExpirationContent = () =>
+    cardExpiration[0] || cardExpiration[1] ? cardExpiration.join('/') : 'MM/YY';
+
   return (
     <SmallCard>
       <CardTop>
@@ -82,7 +85,7 @@ export default function Card({ cardName, cardNumber, cardOwner, cardExpiration }
         </CardBottomNumber>
         <CardBottomInfo>
           <CardText>{cardOwner}</CardText>
-          <CardText>{cardExpiration}</CardText>
+          <CardText>{cardExpirationContent()}</CardText>
         </CardBottomInfo>
       </CardBottom>
     </SmallCard>

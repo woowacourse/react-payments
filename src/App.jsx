@@ -24,7 +24,17 @@ const reducer = (state, action) => {
         cardNumber,
       };
     }
-    case 'SET_CARD_EXPIRATION':
+    case 'SET_CARD_EXPIRATION': {
+      const cardExpiration = [...state.cardExpiration];
+      const { value, index } = action;
+
+      cardExpiration[index] = value;
+
+      return {
+        ...state,
+        cardExpiration,
+      };
+    }
     case 'SET_CARD_OWNER':
     case 'SET_CARD_CVC':
     case 'SET_CARD_PASSWORD':
