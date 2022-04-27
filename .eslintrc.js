@@ -35,5 +35,6 @@ module.exports = {
         devDependencies: ['.storybook/**', 'stories/**'],
       },
     ],
+    'react/prop-types': [0],
   },
 };
