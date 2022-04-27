@@ -12,7 +12,7 @@ const SecureCodeInput = () => {
   return (
     <div className="secure__input__container">
       <InputLabel>보안코드(CVC/CVV)</InputLabel>
-      <InputContainer labelName={"보안코드(CVC/CVV)"}>
+      <InputContainer>
         <Input
           ref={itemRef}
           type="password"
