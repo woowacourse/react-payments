@@ -5,7 +5,7 @@ const InputBasicStyle = styled.input`
   background-color: #ecebf1;
   color: #04c09e;
   height: 45px;
-  width: 100%;
+  width: ${(props) => props.width || '100%'};
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -15,9 +15,10 @@ const InputBasicStyle = styled.input`
   border-radius: 0.25rem;
 `;
 
-export const InputBasic = ({ type, placeholder, value, onChange }) => {
+export const InputBasic = ({ type, placeholder, value, onChange, width }) => {
   return (
     <InputBasicStyle
+      width={width}
       type={type}
       placeholder={placeholder}
       value={value}

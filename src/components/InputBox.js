@@ -8,8 +8,9 @@ const InputBoxStyle = styled.div`
   color: #d3d3d3;
   border-radius: 0.25rem;
   background-color: #ecebf1;
+  width: ${(props) => props.width || 'unset'};
 `;
 
-export const InputBox = ({ children }) => {
-  return <InputBoxStyle>{children}</InputBoxStyle>;
+export const InputBox = ({ children, width }) => {
+  return <InputBoxStyle width={width}>{children}</InputBoxStyle>;
 };
