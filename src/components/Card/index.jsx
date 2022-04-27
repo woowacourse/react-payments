@@ -18,7 +18,7 @@ function Card({ cardInformation: { cardNumber, expirationDate, ownerName } }) {
             <span className="card-text">{objectToString(cardNumber, ' ', 2)}</span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text">{ownerName}</span>
+            <span className="card-text owner-name">{ownerName}</span>
             <span className="card-text">{objectToString(expirationDate, '/')}</span>
           </div>
         </div>

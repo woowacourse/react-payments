@@ -125,6 +125,11 @@
   vertical-align: middle;
   font-weight: 400;
 }
+.card-text.owner-name {
+  width: 150px;
+  overflow: hidden;
+  word-wrap: break-word;
+}
 
 .card-text__big {
   margin: 0 16px;
