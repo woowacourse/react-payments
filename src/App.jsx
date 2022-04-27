@@ -3,8 +3,9 @@ import CardNumberInput from "./CardNumberInput.jsx";
 import CardPasswordInput from "./CardPasswordInput.jsx";
 import CardSecurityCodeInput from "./CardSecurityCodeInput.jsx";
 import CardExpireDateInput from "./CardExpireDateInput.jsx";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CardPreview from "./CardPreview.jsx";
+import Button from "./Button.jsx";
 
 function App() {
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
@@ -12,6 +13,7 @@ function App() {
   const [holderName, setHolderName] = useState("");
   const [securityCode, setSecurityCode] = useState("");
   const [password, setPassword] = useState(["", ""]);
+  const [canProceed, setCanProceed] = useState(false);
 
   const handleCardNumberUpdate = ({ target: { value } }, order) => {
     if (!Number.isInteger(Number(value)) || value.length > 4) return;
@@ -73,6 +75,27 @@ function App() {
     });
   };
 
+  const handleCardInfoSubmit = () => {
+    alert("카드가 정상적으로 등록되었습니다!");
+  };
+
+  const isValidCardInfo = useCallback(() => {
+    return (
+      cardNumber.join("").length === 16 &&
+      expireDate.join("").length === 4 &&
+      securityCode.length === 3 &&
+      password.join("").length === 2
+    );
+  }, [cardNumber, expireDate, securityCode, password]);
+
+  useEffect(() => {
+    if (isValidCardInfo()) {
+      setCanProceed(true);
+    } else {
+      setCanProceed(false);
+    }
+  }, [isValidCardInfo]);
+
   return (
     <div className="App">
       <CardPreview
@@ -97,6 +120,7 @@ function App() {
         onChange={handleSecurityCodeUpdate}
       />
       <CardPasswordInput password={password} onChange={handlePasswordUpdate} />
+      {canProceed && <Button text="다음" onClick={handleCardInfoSubmit} />}
     </div>
   );
 }
