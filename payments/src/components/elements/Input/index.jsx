@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import "./index.scss";
 
-export const InputContents = forwardRef((props, ref) => (
+export const Input = forwardRef((props, ref) => (
   <input
     ref={ref}
     onChange={props.onChange}
