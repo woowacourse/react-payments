@@ -1,4 +1,4 @@
-import AddCardPage from "./components/Page/AddCardPage";
+import AddCardPage from "./components/Page/AddCard";
 const App = () => {
   return (
     <main>

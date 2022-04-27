@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "../Button";
-import Header from "../Header";
-import FieldSet from "../FieldSet";
-import CardNumberInput from "../Input/CardNumberInput";
-import Input from "../Input";
-import AskMark from "../AskMark";
-import DotMark from "../DotMark";
-import Card from "../Card";
-import ExpiredDateInput from "../Input/ExpiredDateInput";
+import Button from "../../Button";
+import Header from "../../Header";
+import FieldSet from "../../FieldSet";
+import CardNumberInput from "../../Input/CardNumberInput";
+import Input from "../../Input";
+import AskMark from "../../AskMark";
+import DotMark from "../../DotMark";
+import Card from "../../Card";
+import ExpiredDateInput from "../../Input/ExpiredDateInput";
 
 const AddCardPage = () => {
   return (
