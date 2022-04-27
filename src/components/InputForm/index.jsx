@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from './Input';
+import Input from '../Input';
 import PropTypes from 'prop-types';
 import {
   hasSpace,
@@ -7,8 +7,8 @@ import {
   isLengthOver,
   isNotAlphabet,
   isNotNumber,
-} from '../utils/validations';
-import { objectToString } from '../utils/util';
+} from '../../utils/validations';
+import { objectToString } from '../../utils/util';
 
 function InputForm({
   cardNumber,
@@ -110,7 +110,6 @@ function InputForm({
   const onClickNextButton = e => {
     e.preventDefault();
 
-    console.log(securityCode);
     if (Object.keys(cardNumber).some(key => isLengthBelow(cardNumber[key], 4))) {
       alert('카드 번호를 완벽히 입력해주세요');
       return;
