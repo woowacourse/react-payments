@@ -9,6 +9,7 @@ import {
   isNotNumber,
 } from '../../utils/validations';
 import { objectToString } from '../../utils/util';
+import { uid } from 'react-uid';
 
 function InputForm({
   cardNumber,
@@ -140,60 +141,33 @@ function InputForm({
     <form onSubmit={onClickNextButton}>
       <Input labelTitle="카드번호">
         <div className="input-box">
-          <input
-            className="input-basic"
-            type="number"
-            value={cardNumber['first']}
-            onChange={e => onChangeCardNumber('first', e)}
-            maxLength={4}
-            required
-          />
-          <input
-            className="input-basic"
-            type="number"
-            value={cardNumber['second']}
-            onChange={e => onChangeCardNumber('second', e)}
-            maxLength={4}
-            required
-          />
-          <input
-            className="input-basic"
-            type="password"
-            value={cardNumber['third']}
-            onChange={e => onChangeCardNumber('third', e)}
-            maxLength={4}
-            required
-          />
-          <input
-            className="input-basic"
-            type="password"
-            value={cardNumber['forth']}
-            onChange={e => onChangeCardNumber('forth', e)}
-            maxLength={4}
-            required
-          />
+          {Object.keys(cardNumber).map(stateKey => (
+            <input
+              key={uid(stateKey)}
+              className="input-basic"
+              type={stateKey === 'first' || stateKey === 'second' ? 'number' : 'password'}
+              value={cardNumber[stateKey]}
+              onChange={e => onChangeCardNumber(stateKey, e)}
+              maxLength={4}
+              required
+            />
+          ))}
         </div>
       </Input>
       <Input labelTitle="만료일" hasBox>
         <div className="input-box w-50">
-          <input
-            className="input-basic"
-            type="number"
-            placeholder="MM"
-            value={expirationDate['month']}
-            onChange={e => onChangeExpirationDate('month', e)}
-            maxLength={2}
-            required
-          />
-          <input
-            className="input-basic"
-            type="number"
-            placeholder="YY"
-            value={expirationDate['year']}
-            onChange={e => onChangeExpirationDate('year', e)}
-            maxLength={2}
-            required
-          />
+          {Object.keys(expirationDate).map(stateKey => (
+            <input
+              key={uid(stateKey)}
+              className="input-basic"
+              type="number"
+              placeholder={stateKey === 'month' ? 'MM' : 'YY'}
+              value={expirationDate[stateKey]}
+              onChange={e => onChangeExpirationDate(stateKey, e)}
+              maxLength={2}
+              required
+            />
+          ))}
         </div>
       </Input>
       <Input labelTitle="카드 소유자 이름(선택)">
@@ -216,22 +190,17 @@ function InputForm({
         />
       </Input>
       <Input labelTitle="카드 비밀번호">
-        <input
-          className="input-basic w-15"
-          type="number"
-          value={password['first']}
-          onChange={e => onChangePassword('first', e)}
-          maxLength={1}
-          required
-        />
-        <input
-          className="input-basic w-15"
-          type="number"
-          value={password['second']}
-          onChange={e => onChangePassword('second', e)}
-          maxLength={1}
-          required
-        />
+        {Object.keys(password).map(stateKey => (
+          <input
+            key={uid(stateKey)}
+            className="input-basic w-15"
+            type="number"
+            value={password[stateKey]}
+            onChange={e => onChangePassword(stateKey, e)}
+            maxLength={1}
+            required
+          />
+        ))}
         <input className="input-basic w-15" type="password" disabled />
         <input className="input-basic w-15" type="password" disabled />
       </Input>
