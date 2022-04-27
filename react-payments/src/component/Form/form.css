@@ -19,3 +19,9 @@
   gap: 10px;
   align-items: center;
 }
+
+.security-code-container {
+  align-items: center;
+  gap: 20px;
+  display: flex;
+}

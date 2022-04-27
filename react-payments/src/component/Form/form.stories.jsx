@@ -20,6 +20,7 @@ CardNumberForm.args = {
   connector: "-",
   inputClass: "default-input",
   label: "카드 번호",
+  name: "card-number",
 };
 
 export const ExpireDateForm = Template.bind({});
@@ -33,6 +34,7 @@ ExpireDateForm.args = {
   connector: "/",
   inputClass: "expire-date-input",
   label: "만료일",
+  name: "expire-date",
 };
 
 export const CardUserForm = Template.bind({});
@@ -44,6 +46,7 @@ CardUserForm.args = {
   ],
   inputClass: "default-input",
   label: "카드 소유자 이름 (선택)",
+  name: "card-user",
 };
 
 export const SecurityCodeForm = Template.bind({});
@@ -53,6 +56,7 @@ SecurityCodeForm.args = {
   inputInfo: [{ type: "password" }],
   inputClass: "security-code-input",
   label: "보안 코드(CVC/CVV)",
+  name: "security-code",
 };
 
 export const CardPasswordForm = Template.bind({});
@@ -62,4 +66,5 @@ CardPasswordForm.args = {
   inputInfo: [{ type: "password" }],
   inputClass: "card-password-input",
   label: "카드 비밀번호",
+  name: "card-password",
 };
