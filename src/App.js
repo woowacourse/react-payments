@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import FormInput from './components/common/FormInput';
+import CardPreview from './components/CardPreview';
 
 const cardNumberInputInfoList = [
   { id: uuid(), type: 'text', className: 'mr-n15', name: 'first' },
@@ -30,6 +31,7 @@ const cardPasswordInputInfoList = [
 
 function App() {
   const [cardInfo, setCardInfo] = useState({
+    company: '클린카드',
     number: {
       first: '',
       second: '',
@@ -47,6 +49,7 @@ function App() {
       second: '',
     },
   });
+  const { number, ownerName, expiryDate, company } = cardInfo;
 
   const onChange = ({ target }, item) => {
     const { name, value } = target;
@@ -71,6 +74,12 @@ function App() {
 
   return (
     <>
+      <CardPreview
+        number={number}
+        ownerName={ownerName}
+        expiryDate={expiryDate}
+        company={company}
+      />
       <FormInput
         item="number"
         inputTitle="카드 번호"
