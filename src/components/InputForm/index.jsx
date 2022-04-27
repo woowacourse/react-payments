@@ -1,15 +1,10 @@
 import React from 'react';
 import Input from '../Input';
 import PropTypes from 'prop-types';
-import {
-  hasSpace,
-  isLengthBelow,
-  isLengthOver,
-  isNotAlphabet,
-  isNotNumber,
-} from '../../utils/validations';
+import { isNotAlphabet } from '../../utils/validations';
 import { objectToString } from '../../utils/util';
 import { uid } from 'react-uid';
+import { checkFormCompletion, isNumberInRange } from './validation';
 
 function InputForm({
   cardNumber,
@@ -27,38 +22,20 @@ function InputForm({
     const {
       target: { value: cardNumber, maxLength },
     } = e;
-    if (hasSpace(cardNumber)) {
-      return;
-    }
 
-    if (isNotNumber(cardNumber)) {
-      return;
+    if (isNumberInRange(cardNumber, maxLength)) {
+      setCardNumber(prev => ({ ...prev, [`${key}`]: cardNumber }));
     }
-
-    if (isLengthOver(cardNumber, maxLength)) {
-      return;
-    }
-
-    setCardNumber(prev => ({ ...prev, [`${key}`]: cardNumber }));
   };
 
   const onChangeExpirationDate = (key, e) => {
     const {
-      target: { value, maxLength },
+      target: { value: date, maxLength },
     } = e;
-    if (hasSpace(value)) {
-      return;
-    }
 
-    if (isNotNumber(value)) {
-      return;
+    if (isNumberInRange(date, maxLength)) {
+      setExpirationDate(prev => ({ ...prev, [`${key}`]: date }));
     }
-
-    if (isLengthOver(value, maxLength)) {
-      return;
-    }
-
-    setExpirationDate(prev => ({ ...prev, [`${key}`]: value }));
   };
 
   const onChangeOwnerName = e => {
@@ -75,68 +52,40 @@ function InputForm({
 
   const onChangeSecurityCode = e => {
     const {
-      target: { value },
+      target: { value: securityCode, maxLength },
     } = e;
 
-    if (hasSpace(value)) {
-      return;
+    if (isNumberInRange(securityCode, maxLength)) {
+      setSecurityCode(securityCode);
     }
-
-    if (isNotNumber(value)) {
-      return;
-    }
-
-    if (isLengthOver(value, 3)) {
-      return;
-    }
-
-    setSecurityCode(value);
   };
 
   const onChangePassword = (key, e) => {
     const {
-      target: { value },
+      target: { value, maxLength },
     } = e;
 
-    if (isNotNumber(value)) {
-      return;
+    if (isNumberInRange(value, maxLength)) {
+      setPassword(prev => ({ ...prev, [`${key}`]: value }));
     }
-
-    if (isLengthOver(value, 1)) {
-      return;
-    }
-    setPassword(prev => ({ ...prev, [`${key}`]: value }));
   };
 
   const onClickNextButton = e => {
     e.preventDefault();
 
-    if (Object.keys(cardNumber).some(key => isLengthBelow(cardNumber[key], 4))) {
-      alert('카드 번호를 완벽히 입력해주세요');
-      return;
+    try {
+      if (checkFormCompletion({ cardNumber, expirationDate, securityCode, password })) {
+        alert(`카드 번호는 ${objectToString(cardNumber)} 입니다 \n
+        만료일 ${objectToString(expirationDate, '/')} 입니다 \n
+        카드 소유자 이름 ${ownerName} 입니다 \n
+        보안코드 ${securityCode} 입니다 \n
+        비밀번호 ${objectToString(password)} \n`);
+      }
+    } catch ({ message }) {
+      alert(message);
     }
-
-    if (Object.keys(expirationDate).some(key => isLengthBelow(expirationDate[key], 2))) {
-      alert('만료일을 완벽히 입력해주세요');
-      return;
-    }
-
-    if (isLengthBelow(securityCode, 3)) {
-      alert('CVC/CVV를 완벽히 입력해주세요');
-      return;
-    }
-
-    if (Object.keys(password).some(key => isLengthBelow(password[key], 1))) {
-      alert('비밀번호를 완벽히 입력해주세요');
-      return;
-    }
-
-    alert(`카드 번호는 ${objectToString(cardNumber)} 입니다 \n
-    만료일 ${objectToString(expirationDate, '/')} 입니다 \n
-    카드 소유자 이름 ${ownerName} 입니다 \n
-    보안코드 ${securityCode} 입니다 \n
-    비밀번호 ${objectToString(password)} \n`);
   };
+
   return (
     <form onSubmit={onClickNextButton}>
       <Input labelTitle="카드번호">
@@ -145,7 +94,7 @@ function InputForm({
             <input
               key={uid(stateKey)}
               className="input-basic"
-              type={stateKey === 'first' || stateKey === 'second' ? 'number' : 'password'}
+              type={stateKey === 'first' || stateKey === 'second' ? 'text' : 'password'}
               value={cardNumber[stateKey]}
               onChange={e => onChangeCardNumber(stateKey, e)}
               maxLength={4}
@@ -186,6 +135,7 @@ function InputForm({
           type="password"
           value={securityCode}
           onChange={onChangeSecurityCode}
+          maxLength={3}
           required
         />
       </Input>
