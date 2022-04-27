@@ -24,18 +24,26 @@ function App() {
   };
 
   const handleExpireDateUpdate = ({ target: { value } }, order) => {
-    if (!/^\d{0,2}$/.test(value)) return;
+    const parsedValue =
+      value.startsWith("0") && value.length !== 1 ? value.slice(1) : value;
+
+    if (!/^\d{0,2}$/.test(parsedValue)) return;
 
     if (
       order === 0 &&
+      value !== "0" &&
       value !== "" &&
-      (Number(value) > 12 || Number(value) < 1)
-    )
+      (Number(parsedValue) > 12 || Number(parsedValue) < 1)
+    ) {
       return;
+    }
 
     setExpireDate((prevValue) => {
       const newValue = [...prevValue];
-      newValue[order] = value;
+      newValue[order] =
+        parsedValue.length === 1 && Number(parsedValue) !== 0
+          ? `0${parsedValue}`
+          : parsedValue;
 
       return newValue;
     });
