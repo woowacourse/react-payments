@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 
 import PropTypes from 'prop-types';
@@ -13,7 +14,21 @@ const getButtonSize = size => {
   }
 };
 
-export default function Button({
+const StyledButton = styled.button`
+  background: ${props => props.bgColor};
+  border: ${props => props.border};
+  border-radius: ${props => props.shape === 'circle' && '50%'};
+  color: ${props => props.color};
+  cursor: pointer;
+  font-size: ${props => props.buttonStyle.fontSize};
+  font-weight: ${props => props.fontWeight};
+  height: ${props => props.buttonStyle.height};
+  margin: ${props => props.margin?.t || '0'} ${props => props.margin?.r || '0'}
+    ${props => props.margin?.b || '0'} ${props => props.margin?.l || '0'};
+  width: ${props => props.shape === 'circle' && props.buttonStyle.height};
+`;
+
+function Button({
   bgColor,
   border,
   className,
@@ -26,22 +41,19 @@ export default function Button({
   onClickFunc,
 }) {
   const buttonStyle = getButtonSize(size);
-  const StyledButton = styled.button`
-    background: ${bgColor};
-    border: ${border};
-    border-radius: ${shape === 'circle' && '50%'};
-    color: ${color};
-    cursor: pointer;
-    font-size: ${buttonStyle.fontSize};
-    font-weight: ${fontWeight};
-    height: ${buttonStyle.height};
-    margin: ${margin?.t || '0'} ${margin?.r || '0'} ${margin?.b || '0'}
-      ${margin?.l || '0'};
-    width: ${shape === 'circle' && buttonStyle.height};
-  `;
-
   return (
-    <StyledButton className={className} onClick={onClickFunc}>
+    <StyledButton
+      bgColor={bgColor}
+      border={border}
+      buttonStyle={buttonStyle}
+      color={color}
+      content={content}
+      fontWeight={fontWeight}
+      margin={margin}
+      shape={shape}
+      className={className}
+      onClick={onClickFunc}
+    >
       {content}
     </StyledButton>
   );
@@ -68,3 +80,5 @@ Button.propTypes = {
   size: PropTypes.string,
   onClickFunc: PropTypes.func.isRequired,
 };
+
+export default memo(Button);

@@ -1,0 +1,7 @@
+body {
+  font-family: 'Roboto', 'Malgun Gothic';
+}
+
+::placeholder {
+  font-family: 'Roboto', 'Malgun Gothic' !important;
+}

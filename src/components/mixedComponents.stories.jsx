@@ -11,16 +11,16 @@ export default {
   argTypes: {},
 };
 
-const StyledDiv = styled.div`
+const CardOwnerNameLength = styled.div`
   color: #525252;
   font-size: 12px;
-  position: absolute;
+  float: right;
   left: 318px;
 `;
 
 const CardOwnerNameTemplate = args => (
   <>
-    <StyledDiv>0/30</StyledDiv>
+    <CardOwnerNameLength>0/30</CardOwnerNameLength>
     <Input {...args} />
   </>
 );
@@ -57,7 +57,7 @@ CVC.args = {
   },
 };
 
-const StyledSpan = styled.span`
+const Bullet = styled.span`
   color: #04c09e;
   margin-right: 35px;
 `;
@@ -66,8 +66,8 @@ const CardPasswordTemplate = args => (
   <>
     <Input {...args.labeled} />
     <Input {...args.noLabeled} />
-    <StyledSpan>•</StyledSpan>
-    <StyledSpan>•</StyledSpan>
+    <Bullet>•</Bullet>
+    <Bullet>•</Bullet>
   </>
 );
 

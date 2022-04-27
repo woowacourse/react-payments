@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import Button from './Button';
 import Card from './Card';
 import Input from './Input';
-import { CardOwnerName } from './mixedComponents.stories';
 
 export default {
   title: 'Example/Page',
@@ -48,7 +47,7 @@ const CardOwnerNameLength = styled.div`
   color: #525252;
   font-size: 12px;
   left: 348px;
-  position: absolute;
+  float: right;
 `;
 
 const Bullet = styled.span`

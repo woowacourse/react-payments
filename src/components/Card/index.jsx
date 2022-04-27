@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 
 import PropTypes from 'prop-types';
@@ -31,67 +32,60 @@ const getCardSize = size => {
   }
 };
 
-export default function Card({
-  bgColor,
-  className,
-  name,
-  number,
-  size,
-  title,
-  validDate,
-}) {
+const StyledCard = styled.div`
+  background: ${props => props.bgColor};
+  box-shadow: 3px 3px 5px #00000040;
+  border-radius: 5px;
+  height: ${props => props.cardStyle.card.height};
+  width: ${props => props.cardStyle.card.width};
+  padding: 19px;
+`;
+const Title = styled.div`
+  color: #383838;
+  font-size: ${props => props.cardStyle.title.size};
+  height: ${props => props.cardStyle.title.size};
+  margin-bottom: ${props => props.cardStyle.title.marginBottom};
+`;
+const Magnet = styled.div`
+  background: #cbba64;
+  border-radius: 4px;
+  height: ${props => props.cardStyle.magnet.height};
+  margin-bottom: ${props => props.cardStyle.magnet.marginBottom};
+  width: ${props => props.cardStyle.magnet.width};
+`;
+const NumberSet = styled.div`
+  color: #525252;
+  font-weight: bold;
+  font-size: ${props => props.cardStyle.detail.size};
+  height: ${props => props.cardStyle.detail.size};
+  margin-bottom: ${props => props.cardStyle.numberSet.marginBottom};
+  text-align: center;
+`;
+const OwnerName = styled.span`
+  color: #525252;
+  font-weight: bold;
+  font-size: ${props => props.cardStyle.detail.size};
+  height: ${props => props.cardStyle.detail.size};
+`;
+const ValidDate = styled.span`
+  color: #525252;
+  float: right;
+  font-weight: bold;
+  font-size: ${props => props.cardStyle.detail.size};
+  height: ${props => props.cardStyle.detail.size};
+`;
+
+function Card({ bgColor, className, name, number, size, title, validDate }) {
   const cardStyle = getCardSize(size);
-  const StyledCard = styled.div`
-    background: ${bgColor};
-    box-shadow: 3px 3px 5px #00000040;
-    border-radius: 5px;
-    height: ${cardStyle.card.height};
-    width: ${cardStyle.card.width};
-    padding: 19px;
-  `;
-  const Title = styled.div`
-    color: #383838;
-    font-size: ${cardStyle.title.size};
-    height: ${cardStyle.title.size};
-    margin-bottom: ${cardStyle.title.marginBottom};
-  `;
-  const Magnet = styled.div`
-    background: #cbba64;
-    border-radius: 4px;
-    height: ${cardStyle.magnet.height};
-    margin-bottom: ${cardStyle.magnet.marginBottom};
-    width: ${cardStyle.magnet.width};
-  `;
-  const NumberSet = styled.div`
-    color: #525252;
-    font-weight: bold;
-    font-size: ${cardStyle.detail.size};
-    height: ${cardStyle.detail.size};
-    margin-bottom: ${cardStyle.numberSet.marginBottom};
-    text-align: center;
-  `;
-  const OwnerName = styled.span`
-    color: #525252;
-    font-weight: bold;
-    font-size: ${cardStyle.detail.size};
-    height: ${cardStyle.detail.size};
-  `;
-  const ValidDate = styled.span`
-    color: #525252;
-    float: right;
-    font-weight: bold;
-    font-size: ${cardStyle.detail.size};
-    height: ${cardStyle.detail.size};
-  `;
 
   return (
-    <StyledCard className={className}>
-      <Title>{title}</Title>
-      <Magnet />
+    <StyledCard className={className} bgColor={bgColor} cardStyle={cardStyle}>
+      <Title cardStyle={cardStyle}>{title}</Title>
+      <Magnet cardStyle={cardStyle} />
       <div>
-        <NumberSet>{number}</NumberSet>
-        <OwnerName>{name}</OwnerName>
-        <ValidDate>{validDate}</ValidDate>
+        <NumberSet cardStyle={cardStyle}>{number}</NumberSet>
+        <OwnerName cardStyle={cardStyle}>{name}</OwnerName>
+        <ValidDate cardStyle={cardStyle}>{validDate}</ValidDate>
       </div>
     </StyledCard>
   );
@@ -112,3 +106,5 @@ Card.propTypes = {
   title: PropTypes.string,
   validDate: PropTypes.string,
 };
+
+export default memo(Card);
