@@ -36,6 +36,7 @@ const reducer = (state, action) => {
       };
     }
     case 'SET_CARD_OWNER':
+      return { ...state, cardOwner: action.value };
     case 'SET_CARD_CVC':
     case 'SET_CARD_PASSWORD':
     default:

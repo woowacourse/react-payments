@@ -16,12 +16,12 @@ const CardAdditionContainer = styled.div`
 `;
 
 function CardAddition() {
-  const { cardNumber, cardExpiration } = useContext(CardContext);
+  const { cardNumber, cardExpiration, cardOwner } = useContext(CardContext);
 
   return (
     <CardAdditionContainer>
       <PageTitle hasPrevButton={true} title="카드 추가" />
-      <Card cardNumber={cardNumber} cardExpiration={cardExpiration} />
+      <Card cardNumber={cardNumber} cardExpiration={cardExpiration} cardOwner={cardOwner} />
       <CardNumber />
       <CardExpiration />
       <CardOwner />
