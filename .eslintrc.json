@@ -6,7 +6,10 @@
   },
   "extends": ["airbnb", "plugin:prettier/recommended"],
   "rules": {
+    "no-unused-vars": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "warn",
+    "react/prop-types": "warn",
+    "react/require-default-props": "warn"
   }
 }
