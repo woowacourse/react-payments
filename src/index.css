@@ -217,6 +217,7 @@ input::-webkit-inner-spin-button {
   color: #d3d3d3;
   border-radius: 0.25rem;
   background-color: #ecebf1;
+  /* color: #04c09e; */
 }
 
 .input-wrapper {
@@ -247,6 +248,7 @@ input::-webkit-inner-spin-button {
   border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
+  color: #04c09e;
 }
 
 .input-security {
@@ -381,6 +383,7 @@ input::-webkit-inner-spin-button {
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+  color: #04c09e;
 }
 
 .prev-page-button {
