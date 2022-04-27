@@ -3,16 +3,16 @@ import styled from "styled-components";
 
 const Header = (props) => {
   return (
-    <HeaderContainer>
+    <Container>
       <BackButton>
         <Arrow />
       </BackButton>
       <Title>{props.title}</Title>
-    </HeaderContainer>
+    </Container>
   );
 };
 
-const HeaderContainer = styled.header`
+const Container = styled.header`
   display: flex;
   padding: 10px;
 `;

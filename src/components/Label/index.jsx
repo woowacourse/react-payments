@@ -2,12 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const Label = (props) => {
-  return (
-    <LabelContainer htmlFor={props.id}>{props.description}</LabelContainer>
-  );
+  return <Container htmlFor={props.id}>{props.description}</Container>;
 };
 
-const LabelContainer = styled.label`
+const Container = styled.label`
   color: #525252;
   font-size: 12px;
 `;

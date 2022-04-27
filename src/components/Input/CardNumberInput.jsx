@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const CardNumberInput = (props) => {
   return (
-    <CardNumberInputContainer>
+    <Container>
       <Input type="number" width="96" textAlign="right" value={1234} />
       <DashContainer>-</DashContainer>
       <Input type="number" width="45" value={5678} />
@@ -11,11 +11,11 @@ const CardNumberInput = (props) => {
       <Input type="password" width="45" value={1234} />
       <DashContainer>-</DashContainer>
       <Input type="password" width="96" textAlign="left" value={1234} />
-    </CardNumberInputContainer>
+    </Container>
   );
 };
 
-const CardNumberInputContainer = styled.div`
+const Container = styled.div`
   width: fit-content;
   height: fit-content;
   background-color: #ecebf1;

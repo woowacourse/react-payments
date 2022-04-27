@@ -11,7 +11,7 @@ const Input = ({
   textAlign = "center",
 }) => {
   return (
-    <InputContainer
+    <Container
       placeholder={placeholder}
       type={type}
       id={id}
@@ -23,7 +23,7 @@ const Input = ({
   );
 };
 
-const InputContainer = styled.input`
+const Container = styled.input`
   text-align: ${(props) => props.textAlign};
   width: ${(props) => props.width}px;
   height: 45px;

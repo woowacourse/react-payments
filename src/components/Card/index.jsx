@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Card = ({ name, expiredDate, cardName, cardNumber }) => {
   return (
-    <CardContainer>
+    <Container>
       <EmptyCard>
         <CardTop>
           <CardName>{cardName}의 카드</CardName>
@@ -24,11 +24,11 @@ const Card = ({ name, expiredDate, cardName, cardNumber }) => {
           </CardBottomInfo>
         </CardBottom>
       </EmptyCard>
-    </CardContainer>
+    </Container>
   );
 };
 
-const CardContainer = styled.div`
+const Container = styled.div`
   position: relative;
   display: flex;
   align-items: center;

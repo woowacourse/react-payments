@@ -3,15 +3,15 @@ import styled from "styled-components";
 
 const ExpiredDateInput = (props) => {
   return (
-    <ExpiredDateInputContainer>
-      <Input type="text" width="65" textAlign="right" value={11} />
+    <Container>
+      <Input type="text" width="65" textAlign="right" placeholder={"MM"} />
       <SlashContainer>/</SlashContainer>
-      <Input type="text" width="65" textAlign="left" value={23} />
-    </ExpiredDateInputContainer>
+      <Input type="text" width="65" textAlign="left" placeholder={"YY"} />
+    </Container>
   );
 };
 
-const ExpiredDateInputContainer = styled.div`
+const Container = styled.div`
   width: fit-content;
   height: fit-content;
   background-color: #ecebf1;
