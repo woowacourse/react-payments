@@ -6,6 +6,7 @@ const transformToCardFormat = (str: string) => {
   const arr = [0, 4, 8, 12].map(startIndex => str.substr(startIndex, 4));
   arr[2] = '*'.repeat(arr[2].length);
   arr[3] = '*'.repeat(arr[3].length);
+  // @todo -사이에 space추가하기
   return arr.filter(str => str.length > 0).join('-');
 }
 
