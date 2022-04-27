@@ -7,6 +7,7 @@ export const InputContainer = styled.div`
 export const InputTitle = styled.span`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   font-size: 12px;
   line-height: 14px;

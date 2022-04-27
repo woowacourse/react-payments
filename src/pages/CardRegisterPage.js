@@ -21,6 +21,8 @@ export const CardRegisterPage = () => {
     year: '',
   });
 
+  const [ownerName, setOwnerName] = useState('');
+
   const [checkInputs, setCheckInputs] = useState({
     cardNumbers: false,
     cardExpireDate: false,
@@ -40,7 +42,10 @@ export const CardRegisterPage = () => {
         expireDate={expireDate}
         handleExpireDateInput={setExpireDate}
       />
-      <CardOwnerInputForm />
+      <CardOwnerInputForm
+        ownerName={ownerName}
+        handleOwnerNameInput={setOwnerName}
+      />
       <CVCInputForm />
       <CardPasswordInputForm />
     </>
