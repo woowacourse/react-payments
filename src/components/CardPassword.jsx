@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import Container from '../styles/Container';
@@ -7,6 +7,7 @@ import InputBox from '../styles/InputBox';
 import InputBasic from '../styles/InputBasic';
 import Wrapper from './Wrapper';
 import Circle from './Circle';
+import CardContext from '../CardContext';
 
 const ExtendedInputBox = styled(InputBox)`
   width: 220px;
@@ -14,12 +15,30 @@ const ExtendedInputBox = styled(InputBox)`
 `;
 
 export default function CardPassword() {
+  const { cardPassword, dispatch } = useContext(CardContext);
+
+  const onChangeInput = (index) => (e) => {
+    dispatch({ type: 'SET_CARD_PASSWORD', value: e.target.value, index });
+  };
+
   return (
     <Container>
       <InputTitle>카드 비밀번호</InputTitle>
       <ExtendedInputBox>
-        <InputBasic width="43px" maxLength="1" />
-        <InputBasic width="43px" maxLength="1" />
+        <InputBasic
+          type="password"
+          width="43px"
+          maxLength="1"
+          value={cardPassword[0]}
+          onChange={onChangeInput(0)}
+        />
+        <InputBasic
+          type="password"
+          width="43px"
+          maxLength="1"
+          value={cardPassword[1]}
+          onChange={onChangeInput(1)}
+        />
         <Wrapper>
           <Circle size="5px" color="#04C09E" />
         </Wrapper>

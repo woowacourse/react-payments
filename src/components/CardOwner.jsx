@@ -21,6 +21,11 @@ const NameLength = styled.p`
   color: ${(props) => props.color || '#525252'};
 `;
 
+const InputBasicLeft = styled(InputBasic)`
+  text-align: left;
+  padding-left: 30px;
+`;
+
 export default function CardOwner() {
   const { cardOwner, dispatch } = useContext(CardContext);
 
@@ -39,7 +44,7 @@ export default function CardOwner() {
       </TitleWrapper>
       <InputBox>
         <InputContainer>
-          <InputBasic type="text" maxLength="30" onChange={onChangeInput} />
+          <InputBasicLeft type="text" maxLength="30" onChange={onChangeInput} />
         </InputContainer>
       </InputBox>
     </Container>

@@ -42,7 +42,6 @@ const CardText = styled.span`
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
-  width: 30px;
   display: inline-block;
 `;
 
@@ -72,6 +71,10 @@ const CardTextEllipsis = styled(CardText)`
   white-space: nowrap;
 `;
 
+const CardNumber = styled(CardText)`
+  width: 30px;
+`;
+
 export default function Card({ cardName, cardNumber, cardOwner, cardExpiration }) {
   const cardExpirationContent = () =>
     cardExpiration[0] || cardExpiration[1] ? cardExpiration.join('/') : 'MM/YY';
@@ -86,10 +89,10 @@ export default function Card({ cardName, cardNumber, cardOwner, cardExpiration }
       </CardMiddle>
       <CardBottom>
         <CardBottomNumber>
-          <CardText>{cardNumber[0]}</CardText>
-          <CardText>{cardNumber[1]}</CardText>
-          <CardText>{'•'.repeat(cardNumber[2].length)}</CardText>
-          <CardText>{'•'.repeat(cardNumber[3].length)}</CardText>
+          <CardNumber>{cardNumber[0]}</CardNumber>
+          <CardNumber>{cardNumber[1]}</CardNumber>
+          <CardNumber>{'•'.repeat(cardNumber[2].length)}</CardNumber>
+          <CardNumber>{'•'.repeat(cardNumber[3].length)}</CardNumber>
         </CardBottomNumber>
         <CardBottomInfo>
           <CardTextEllipsis>{cardOwner || 'NAME'}</CardTextEllipsis>
