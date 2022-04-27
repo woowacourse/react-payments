@@ -11,7 +11,7 @@ const Template = args => <Input {...args} />;
 
 export const CardNumber = Template.bind({});
 CardNumber.args = {
-  type: "number",
+  type: "text",
   width: "",
   onChange: () => {},
   maxLength: 4,

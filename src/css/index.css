@@ -4,6 +4,10 @@
 @import "./modal.css";
 @import "./utils.css";
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   display: flex;
   flex-direction: column;

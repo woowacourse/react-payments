@@ -79,6 +79,7 @@
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .card-middle {
@@ -120,10 +121,19 @@
 .card-text {
   margin: 0 16px;
 
-  font-size: 14px;
+  font-size: 10px;
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
+}
+
+.card-numbers-text {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  text-align: center;
+  padding: 0 10px;
+  font-size: 12px;
 }
 
 .card-text__big {
@@ -133,4 +143,24 @@
   line-height: 20px;
   vertical-align: middle;
   font-weight: 400;
+}
+
+.card-number {
+  width: 100%;
+  display: inline-block;
+}
+
+.card-number:nth-of-type(1),
+.card-number:nth-of-type(2) {
+  letter-spacing: 2px;
+}
+.card-number:nth-of-type(3),
+.card-number:nth-of-type(4) {
+  letter-spacing: -2px;
+}
+
+.card-expired-date {
+  display: inline-block;
+  width: 16px;
+  text-align: center;
 }

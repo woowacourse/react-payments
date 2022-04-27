@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import Card from "./components/Card";
 import CardInfoForm from "./components/CardInfoForm";
 import REGEXP from "./contants/regexp";
 interface CardInfo {
@@ -117,6 +118,7 @@ function App() {
 
   return (
     <div className="App">
+      <Card cardInfo={cardInfo} />
       <CardInfoForm
         cardInfo={cardInfo}
         onChangeCardNumber={onChangeCardNumber}
