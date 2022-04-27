@@ -11,6 +11,10 @@
   background-color: #ecebf1;
 }
 
+.input-box > span {
+  color: #04c09e;
+}
+
 .input-title {
   display: flex;
   align-items: center;
