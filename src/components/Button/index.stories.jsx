@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "./";
 
 const Template = (args) => <Button {...args} />;
 

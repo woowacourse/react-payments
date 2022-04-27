@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
-import './button.css'
+import {ButtonWrapper} from './style'
 
 function Button({label, color}){
-  return(<button type="button" className="button-basic" style={color && { color }}>{label}</button>)
+  return(<ButtonWrapper type="button" color={color}>{label}</ButtonWrapper>)
 }
 
 Button.propTypes = {
+  color: PropTypes.string,
   /**
    * Button contents
    */
