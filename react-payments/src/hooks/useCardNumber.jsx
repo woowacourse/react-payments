@@ -9,6 +9,9 @@ const useCardNumber = () => {
   });
 
   const onChangeCardNumber = (e) => {
+    if (e.target.value.length > 4) {
+      return;
+    }
     setCardNumber({
       ...cardNumber,
       [e.target.name]: e.target.value,

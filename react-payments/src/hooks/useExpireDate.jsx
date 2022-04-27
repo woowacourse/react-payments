@@ -7,6 +7,9 @@ const useExpireDate = () => {
   });
 
   const onChangeExpireDate = (e) => {
+    if (e.target.value.length > 2) {
+      return;
+    }
     setExpireDate({
       ...expireDate,
       [e.target.name]: e.target.value,

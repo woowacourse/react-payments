@@ -7,6 +7,9 @@ const useCardPassword = () => {
   });
 
   const onChangeCardPassword = (e) => {
+    if (e.target.value.length > 1) {
+      return;
+    }
     setCardPassword({
       ...cardPassword,
       [e.target.name]: e.target.value,
