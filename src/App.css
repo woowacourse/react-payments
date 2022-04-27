@@ -1,0 +1,11 @@
+.field {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid;
+  margin: 2rem;
+}
+
+.input {
+  margin: 0;
+  padding: 0;
+}
