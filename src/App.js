@@ -15,13 +15,13 @@ const expiryDateInputInfoList = [
   { id: uuid(), type: 'text', placeholder: 'YY', name: 'year' },
 ];
 
-const cardOwnerNameInfoList = [
+const cardOwnerNameInputInfoList = [
   { id: uuid(), type: 'text', placeholder: '카드에 표시된 이름과 동일하게 입력하세요.' },
 ];
 
-const privacyCodeInfoList = [{ id: uuid(), type: 'password', className: 'w-25' }];
+const privacyCodeInputInfoList = [{ id: uuid(), type: 'password', className: 'w-25' }];
 
-const cardPasswordInfoList = [
+const cardPasswordInputInfoList = [
   { id: uuid(), type: 'password', className: 'w-15', name: 'first' },
   { id: uuid(), type: 'password', className: 'w-15', name: 'second' },
   { id: uuid(), type: 'password', className: 'w-15' },
@@ -89,21 +89,21 @@ function App() {
       <FormInput
         item="ownerName"
         inputTitle="카드 소유자 이름(선택)"
-        inputInfoList={cardOwnerNameInfoList}
+        inputInfoList={cardOwnerNameInputInfoList}
         cardInfo={cardInfo}
         onChange={onChange}
       />
       <FormInput
         item="privacyCode"
         inputTitle="보안코드(CVC/CVV)"
-        inputInfoList={privacyCodeInfoList}
+        inputInfoList={privacyCodeInputInfoList}
         onChange={onChange}
         cardInfo={cardInfo}
       />
       <FormInput
         item="password"
         inputTitle="카드 비밀번호"
-        inputInfoList={cardPasswordInfoList}
+        inputInfoList={cardPasswordInputInfoList}
         cardInfo={cardInfo}
         onChange={onChange}
       />
