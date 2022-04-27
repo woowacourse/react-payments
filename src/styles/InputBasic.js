@@ -11,4 +11,6 @@ export default styled.input`
   outline: 2px solid transparent;
   outline-offset: 2px;
   border: none;
+  color: #04c09e;
+  font-weight: 600;
 `;

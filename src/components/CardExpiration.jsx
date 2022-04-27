@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import Container from '../styles/Container';
 import InputTitle from '../styles/InputTitle';
@@ -6,13 +6,24 @@ import InputBox from '../styles/InputBox';
 import InputBasic from '../styles/InputBasic';
 import InputContainer from '../styles/InputContainer';
 import CardContext from '../CardContext';
+import validator from '../validations/validator';
+import ErrorMessage from '../styles/ErrorMessage';
 
 export default function CardExpiration() {
-  const { cardExpiration, dispatch } = useContext(CardContext);
+  const { cardExpiration, cardExpirationErrorMessage, dispatch } = useContext(CardContext);
 
   const onChangeInput = (index) => (e) => {
     dispatch({ type: 'SET_CARD_EXPIRATION', value: e.target.value, index });
   };
+
+  useEffect(() => {
+    const validationResult = validator.checkCardExpiration(cardExpiration);
+
+    dispatch({
+      type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE',
+      errorMessage: validationResult.success ? '' : validationResult.message,
+    });
+  }, [cardExpiration]);
 
   return (
     <Container>
@@ -37,6 +48,7 @@ export default function CardExpiration() {
           />
         </InputContainer>
       </InputBox>
+      <ErrorMessage>{cardExpirationErrorMessage}</ErrorMessage>
     </Container>
   );
 }

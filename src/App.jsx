@@ -5,10 +5,15 @@ import CardContext from './CardContext';
 
 const initialState = {
   cardNumber: ['', '', '', ''],
+  cardNumberErrorMessage: '',
   cardExpiration: ['', ''],
+  cardExpirationErrorMessage: '',
   cardOwner: '',
+  cardOwnerErrorMessage: '',
   cardCvc: '',
+  cardCvcErrorMessage: '',
   cardPassword: ['', ''],
+  cardPasswordErrorMessage: '',
 };
 
 const reducer = (state, action) => {
@@ -24,6 +29,14 @@ const reducer = (state, action) => {
         cardNumber,
       };
     }
+
+    case 'SET_CARD_NUMBER_ERROR_MESSAGE': {
+      return {
+        ...state,
+        cardNumberErrorMessage: action.errorMessage,
+      };
+    }
+
     case 'SET_CARD_EXPIRATION': {
       const cardExpiration = [...state.cardExpiration];
       const { value, index } = action;
@@ -35,10 +48,36 @@ const reducer = (state, action) => {
         cardExpiration,
       };
     }
-    case 'SET_CARD_OWNER':
+
+    case 'SET_CARD_EXPIRATION_ERROR_MESSAGE': {
+      return {
+        ...state,
+        cardExpirationErrorMessage: action.errorMessage,
+      };
+    }
+
+    case 'SET_CARD_OWNER': {
       return { ...state, cardOwner: action.value };
-    case 'SET_CARD_CVC':
+    }
+
+    case 'SET_CARD_OWNER_ERROR_MESSAGE': {
+      return {
+        ...state,
+        cardOwnerErrorMessage: action.errorMessage,
+      };
+    }
+
+    case 'SET_CARD_CVC': {
       return { ...state, cardCvc: action.value };
+    }
+
+    case 'SET_CARD_CVC_ERROR_MESSAGE': {
+      return {
+        ...state,
+        cardCvcErrorMessage: action.errorMessage,
+      };
+    }
+
     case 'SET_CARD_PASSWORD': {
       const cardPassword = [...state.cardPassword];
       const { value, index } = action;
@@ -50,17 +89,42 @@ const reducer = (state, action) => {
         cardPassword,
       };
     }
+
+    case 'SET_CARD_PASSWORD_ERROR_MESSAGE': {
+      return {
+        ...state,
+        cardPasswordErrorMessage: action.errorMessage,
+      };
+    }
+
     default:
       return state;
   }
 };
 
 function App() {
-  const [{ cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword }, dispatch] = useReducer(
-    reducer,
-    initialState,
-  );
-  const value = { cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword, dispatch };
+  const [
+    {
+      cardNumber,
+      cardNumberErrorMessage,
+      cardExpirationErrorMessage,
+      cardExpiration,
+      cardOwner,
+      cardCvc,
+      cardPassword,
+    },
+    dispatch,
+  ] = useReducer(reducer, initialState);
+  const value = {
+    cardNumber,
+    cardNumberErrorMessage,
+    cardExpirationErrorMessage,
+    cardExpiration,
+    cardOwner,
+    cardCvc,
+    cardPassword,
+    dispatch,
+  };
 
   return (
     <div className="App">

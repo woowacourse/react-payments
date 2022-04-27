@@ -12,6 +12,7 @@ const SmallCard = styled.div`
   padding: 10px;
   font-size: 30px;
   color: #575757;
+  margin-bottom: 16px;
 
   background: #e5e5e5;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);

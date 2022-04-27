@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import Container from '../styles/Container';
 import InputTitle from '../styles/InputTitle';
@@ -6,13 +6,24 @@ import InputBox from '../styles/InputBox';
 import InputBasic from '../styles/InputBasic';
 import InputContainer from '../styles/InputContainer';
 import CardContext from '../CardContext';
+import validator from '../validations/validator';
+import ErrorMessage from '../styles/ErrorMessage';
 
 export default function CardNumber() {
-  const { cardNumber, dispatch } = useContext(CardContext);
+  const { cardNumber, cardNumberErrorMessage, dispatch } = useContext(CardContext);
 
   const onChangeInput = (index) => (e) => {
     dispatch({ type: 'SET_CARD_NUMBER', value: e.target.value, index });
   };
+
+  useEffect(() => {
+    const validationResult = validator.checkCardNumber(cardNumber);
+
+    dispatch({
+      type: 'SET_CARD_NUMBER_ERROR_MESSAGE',
+      errorMessage: validationResult.success ? '' : validationResult.message,
+    });
+  }, [cardNumber]);
 
   return (
     <Container>
@@ -49,6 +60,7 @@ export default function CardNumber() {
           />
         </InputContainer>
       </InputBox>
+      <ErrorMessage>{cardNumberErrorMessage}</ErrorMessage>
     </Container>
   );
 }

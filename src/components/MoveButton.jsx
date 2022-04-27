@@ -14,12 +14,15 @@ const MoveButtonStyled = styled.button`
   font-weight: 700;
   font-size: 14px;
   background-color: transparent;
+  &:disabled {
+    color: #e5e5e5;
+  }
 `;
 
-export default function MoveButton({ children }) {
+export default function MoveButton({ disabled, children }) {
   return (
     <MoveWrapperStyled>
-      <MoveButtonStyled>{children}</MoveButtonStyled>
+      <MoveButtonStyled disabled={disabled}>{children}</MoveButtonStyled>
     </MoveWrapperStyled>
   );
 }

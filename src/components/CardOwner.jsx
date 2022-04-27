@@ -18,7 +18,7 @@ const NameLength = styled.p`
   margin: 0;
   letter-spacing: -0.05em;
   font-size: 12px;
-  color: ${(props) => props.color || '#525252'};
+  color: ${(props) => props.color};
 `;
 
 const InputBasicLeft = styled(InputBasic)`
@@ -32,7 +32,7 @@ export default function CardOwner() {
   const onChangeInput = (e) => {
     dispatch({ type: 'SET_CARD_OWNER', value: e.target.value });
   };
-  const nameLengthColor = () => cardOwner.length > 30 && '#E24141';
+  const nameLengthColor = () => (cardOwner.length > 30 ? '#E24141' : '#525252');
 
   return (
     <Container>

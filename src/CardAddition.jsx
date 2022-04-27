@@ -16,7 +16,9 @@ const CardAdditionContainer = styled.div`
 `;
 
 function CardAddition() {
-  const { cardNumber, cardExpiration, cardOwner } = useContext(CardContext);
+  const { cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword } = useContext(CardContext);
+
+  console.log(cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword);
 
   return (
     <CardAdditionContainer>
@@ -27,7 +29,7 @@ function CardAddition() {
       <CardOwner />
       <CardCvc />
       <CardPassword />
-      <MoveButton>다음</MoveButton>
+      <MoveButton disabled={true}>다음</MoveButton>
     </CardAdditionContainer>
   );
 }
