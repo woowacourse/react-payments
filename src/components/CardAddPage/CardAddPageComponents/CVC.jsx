@@ -27,6 +27,7 @@ function CVC({ cardNumbers, setCardNumbers }) {
         type="password"
         onInput={handleOnInput}
         value={cardNumbers.cvc}
+        required
       />
       <Tooltip />
     </div>

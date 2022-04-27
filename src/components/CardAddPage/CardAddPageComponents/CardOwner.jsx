@@ -32,6 +32,7 @@ function CardOwner({ cardNumbers, setCardNumbers }) {
         className="input-basic"
         onInput={handleOnInput}
         value={cardNumbers.owner}
+        required
       />
     </div>
   );

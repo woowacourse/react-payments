@@ -47,6 +47,7 @@ function CardExpirationDate({ cardNumbers, setCardNumbers }) {
           placeholder="MM"
           onInput={handleMonthOnInput}
           value={cardNumbers.month}
+          required
         />
         <input
           name="year"
@@ -55,6 +56,7 @@ function CardExpirationDate({ cardNumbers, setCardNumbers }) {
           placeholder="YY"
           onInput={handleYearOnInput}
           value={cardNumbers.year}
+          required
         />
       </div>
     </div>

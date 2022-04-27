@@ -26,6 +26,7 @@ function CardPassword({ cardNumbers, setCardNumbers }) {
         type="password"
         onInput={handleOnInput}
         value={cardNumbers.password1}
+        required
       />
       <input
         name="password2"
@@ -33,6 +34,7 @@ function CardPassword({ cardNumbers, setCardNumbers }) {
         type="password"
         onInput={handleOnInput}
         value={cardNumbers.password2}
+        required
       />
       <input
         className="input-basic w-15 input-password-hidden"
