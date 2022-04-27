@@ -24,9 +24,11 @@ function Card({ isEmpty, handleCardAdd, cardNumbers }) {
                   {'ㆍ'.repeat(cardNumbers?.number4.length)}
                 </div>
               </div>
-              <div className="card-bottom__info">
-                <span className="card-text">NAME</span>
-                <span className="card-text">MM / YY</span>
+              <div className="card-bottom-position">
+                <div className="card-bottom__info">
+                  <span className="card-text">NAME</span>
+                  <span className="card-text">MM / YY</span>
+                </div>
               </div>
             </div>
           </>

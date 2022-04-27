@@ -47,6 +47,7 @@ input {
 }
 
 .empty-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -190,6 +191,12 @@ input {
 .hidden-card-number-letter-spacing {
   font-size: 22px;
   letter-spacing: -10px;
+}
+
+.card-bottom-position {
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
 }
 
 /* input */
