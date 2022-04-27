@@ -4,7 +4,7 @@ import FieldSet from "../../FieldSet";
 import Input from "../../Input";
 import AskMark from "../../AskMark";
 
-const SecureCode = () => {
+const SecureCode = ({ secureCode, onChangeSecureCode }) => {
   return (
     <FieldSet
       id="secureCode"
@@ -13,7 +13,13 @@ const SecureCode = () => {
     >
       {
         <SecureCodeInputContainer>
-          <Input id="secureCode" size="medium" maxLength={3} />
+          <Input
+            id="secureCode"
+            size="medium"
+            maxLength={3}
+            value={secureCode}
+            onChange={onChangeSecureCode}
+          />
           <AskMark />
         </SecureCodeInputContainer>
       }

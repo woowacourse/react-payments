@@ -6,10 +6,11 @@ import CardNumber from "./CardNumber";
 import ExpiredDate from "./ExpiredDate";
 import CardOwnerName from "./CardOwnerName";
 import {
-  checkCardNumber,
   checkExpiredMonth,
   checkExpiredYear,
+  checkNumberOnly,
   checkOwnerName,
+  checkSecureCode,
 } from "../../../validation";
 
 import Card from "../../Card";
@@ -20,13 +21,13 @@ import useInputValue from "../../../hooks/useInputValue";
 
 const AddCardPage = () => {
   const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] =
-    useInputValue({ validation: checkCardNumber });
+    useInputValue({ validation: checkNumberOnly });
   const [secondCardNumber, isSecondCardNumberError, onChangeSecondCardNumber] =
-    useInputValue({ validation: checkCardNumber });
+    useInputValue({ validation: checkNumberOnly });
   const [thirdCardNumber, isThirdCardNumberError, onChangeThirdCardNumber] =
-    useInputValue({ validation: checkCardNumber });
+    useInputValue({ validation: checkNumberOnly });
   const [fourthCardNumber, isFourthCardNumberError, onChangeFourthCardNumber] =
-    useInputValue({ validation: checkCardNumber });
+    useInputValue({ validation: checkNumberOnly });
 
   const [expiredMonth, isExpiredMonthError, onChangeExpiredMonth] =
     useInputValue({ validation: checkExpiredMonth });
@@ -37,6 +38,11 @@ const AddCardPage = () => {
   const [ownerName, isOwnerNameError, onChangeOwnerName] = useInputValue({
     validation: checkOwnerName,
   });
+
+  const [secureCode, isSecureCodeError, onChangeSecureCode] = useInputValue({
+    validation: checkSecureCode,
+  });
+
   return (
     <Container>
       <Header title="카드 추가" />
@@ -66,7 +72,10 @@ const AddCardPage = () => {
         ownerName={ownerName}
         onChangeOwnerName={onChangeOwnerName}
       />
-      <SecureCode />
+      <SecureCode
+        secureCode={secureCode}
+        onChangeSecureCode={onChangeSecureCode}
+      />
       <Password />
       <Button></Button>
     </Container>
