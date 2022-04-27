@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { InputBox } from '../components/InputBox';
-import { InputBasic } from '../components/InputBasic';
+import { InputBox } from '../components/common/InputBox';
+import { InputBasic } from '../components/common/InputBasic';
 
 export default {
   title: 'Example/InputBox',

@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { InputBasic } from './InputBasic';
-import { InputBox } from './InputBox';
+import { InputBasic } from '../components/common/InputBasic';
+import { InputBox } from '../components/common/InputBox';
 
 const InputContainer = styled.div`
   margin: 16px 0;
 `;
+
 const InputTitle = styled.span`
   display: flex;
   align-items: center;
@@ -19,7 +20,7 @@ const InputTitle = styled.span`
   color: #525252;
 `;
 
-export const CardPage = () => {
+export const CardRegisterPage = () => {
   return (
     <div>
       <InputContainer>

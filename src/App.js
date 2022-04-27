@@ -1,10 +1,10 @@
 import './App.css';
-import { CardPage } from './components/CardPage';
+import { CardRegisterPage } from './pages/CardRegisterPage';
 
 function App() {
   return (
     <div className="App">
-      <CardPage />
+      <CardRegisterPage />
     </div>
   );
 }
