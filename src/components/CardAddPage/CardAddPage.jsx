@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Card from '../common/Card';
 import PageTitle from '../common/PageTitle';
@@ -12,13 +12,20 @@ import CardPassword from './CardAddPageComponents/CardPassword';
 import PrevPageButton from './CardAddPageComponents/PrevPageButton';
 
 function CardAddPage(props) {
+  const [cardNumbers, setCardNumbers] = useState({
+    number1: '',
+    number2: '',
+    number3: '',
+    number4: '',
+  });
+
   return (
     <div className="app">
       <PrevPageButton />
       <PageTitle title="카드추가" />
-      <Card isEmpty={false} />
+      <Card isEmpty={false} cardNumbers={cardNumbers} />
       {/* 카드 번호  */}
-      <CardNumber />
+      <CardNumber cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
       {/* 만료일 */}
       <CardExpirationDate />
       {/* 카드 소유자 이름 */}

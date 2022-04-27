@@ -183,6 +183,15 @@ input {
   width: 90%;
 }
 
+.card-number-letter-spacing {
+  letter-spacing: 1.5px;
+}
+
+.hidden-card-number-letter-spacing {
+  font-size: 22px;
+  letter-spacing: -10px;
+}
+
 /* input */
 .input-container {
   margin: 16px 0;

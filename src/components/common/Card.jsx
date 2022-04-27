@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Card({ isEmpty, handleCardAdd }) {
+function Card({ isEmpty, handleCardAdd, cardNumbers }) {
   return (
     <div className="card-box">
       <div className="empty-card" onClick={handleCardAdd}>
@@ -15,10 +15,14 @@ function Card({ isEmpty, handleCardAdd }) {
 
             <div className="card-bottom">
               <div className="card-text card-number-flex">
-                <div>0000</div>
-                <div>1111</div>
-                <div>2222</div>
-                <div>3333</div>
+                <div className="card-number-letter-spacing">{cardNumbers?.number1}</div>
+                <div className="card-number-letter-spacing">{cardNumbers?.number2}</div>
+                <div className="hidden-card-number-letter-spacing">
+                  {'ㆍ'.repeat(cardNumbers?.number3.length)}
+                </div>
+                <div className="hidden-card-number-letter-spacing">
+                  {'ㆍ'.repeat(cardNumbers?.number4.length)}
+                </div>
               </div>
               <div className="card-bottom__info">
                 <span className="card-text">NAME</span>
