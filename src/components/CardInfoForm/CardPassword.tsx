@@ -10,14 +10,14 @@ export default function CardPassword({ password, onChange }) {
         type="password"
         width="w-15"
         value={password[0] || ""}
-        onChange={onChange}
+        onChange={e => onChange(e, 0)}
         maxLength={1}
       />
       <Input
         type="password"
         width="w-15"
         value={password[1] || ""}
-        onChange={onChange}
+        onChange={e => onChange(e, 1)}
         maxLength={1}
       />
       {/* <input className="input-basic w-15" type="password" /> */}
