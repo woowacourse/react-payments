@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Card({ isRegistered }) {
+function Card({ isRegistered, handleCardAdd }) {
   return (
     <div className="card-box">
-      <div className="empty-card">
+      <div className="empty-card" onClick={handleCardAdd}>
         {isRegistered ? (
           <>
             <div className="card-top"></div>
