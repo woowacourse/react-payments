@@ -4,7 +4,15 @@
 }
 
 .button-text {
-  margin-right: 10px;
+  background-color: #fff;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.button-text:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }
 
 .back-button {

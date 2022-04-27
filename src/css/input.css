@@ -46,3 +46,8 @@
 
   border-bottom: 1px solid #383838;
 }
+
+.owner-name-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
