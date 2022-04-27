@@ -18,6 +18,7 @@ export const ValidDate = Template.bind({});
 ValidDate.args = {
   description: '만료일',
   placeholder: 'MM / YY',
+  width: '137px',
 };
 
 export const CardOwnerName = Template.bind({});

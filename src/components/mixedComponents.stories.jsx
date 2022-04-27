@@ -7,7 +7,7 @@ import Input from './Input';
 
 export default {
   title: 'Example/MixedComponents',
-  component: Input,
+  component: [Input, Button],
   argTypes: {},
 };
 

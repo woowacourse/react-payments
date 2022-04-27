@@ -33,6 +33,7 @@ const getCardSize = size => {
 
 export default function Card({
   bgColor,
+  className,
   name,
   number,
   size,
@@ -84,7 +85,7 @@ export default function Card({
   `;
 
   return (
-    <StyledCard>
+    <StyledCard className={className}>
       <Title>{title}</Title>
       <Magnet />
       <div>
@@ -98,11 +99,13 @@ export default function Card({
 
 Card.defaultProps = {
   name: 'NAME',
+  size: 'medium',
   validDate: 'MM/YY',
 };
 
 Card.propTypes = {
   bgColor: PropTypes.string,
+  className: PropTypes.string,
   name: PropTypes.string,
   number: PropTypes.string,
   size: PropTypes.string,

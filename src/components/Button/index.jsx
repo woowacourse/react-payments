@@ -16,6 +16,7 @@ const getButtonSize = size => {
 export default function Button({
   bgColor,
   border,
+  className,
   color,
   content,
   fontWeight,
@@ -30,6 +31,7 @@ export default function Button({
     border: ${border};
     border-radius: ${shape === 'circle' && '50%'};
     color: ${color};
+    cursor: pointer;
     font-size: ${buttonStyle.fontSize};
     font-weight: ${fontWeight};
     height: ${buttonStyle.height};
@@ -38,7 +40,11 @@ export default function Button({
     width: ${shape === 'circle' && buttonStyle.height};
   `;
 
-  return <StyledButton onClick={onClickFunc}>{content}</StyledButton>;
+  return (
+    <StyledButton className={className} onClick={onClickFunc}>
+      {content}
+    </StyledButton>
+  );
 }
 
 Button.defaultProps = {
@@ -53,6 +59,7 @@ Button.defaultProps = {
 Button.propTypes = {
   bgColor: PropTypes.string,
   border: PropTypes.string,
+  className: PropTypes.string,
   color: PropTypes.string,
   content: PropTypes.node.isRequired,
   fontWeight: PropTypes.string,
