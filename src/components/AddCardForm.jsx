@@ -76,6 +76,9 @@ function AddCardForm(props) {
           length={MAX_LENGTH.SECURITY_CODE}
           validators={{ isOverMaxLength, isNaN: Number.isNaN }}
         />
+        <div className="help-tip">
+          <p>카드 뒷면 끝 세 자리를 입력해주세요.</p>
+        </div>
       </div>
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
