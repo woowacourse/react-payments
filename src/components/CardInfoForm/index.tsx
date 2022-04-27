@@ -10,7 +10,8 @@ export default function CardInfoForm({
   cardInfo,
   onChangeCardNumber,
   onChangeExpiredDate,
-  // onChangeCardUserName,
+  onChangeUserName,
+  onBlurUserName,
   // onChangeSecurityCode,
   // onChangePassword,
 }) {
@@ -20,8 +21,8 @@ export default function CardInfoForm({
     <div>
       <CardNumber cardNumbers={cardNumbers} onChange={onChangeCardNumber} />
       <ExpiredDate expiredDate={expiredDate} onChange={onChangeExpiredDate} />
-      {/* <CardUserName cardUserName={userName} onChange={onChangeCardUserName} />
-      <SecurityCode securityCode={securityCode} onChange={() => {}} />
+      <CardUserName cardUserName={userName} onChange={onChangeUserName} onBlur={onBlurUserName} />
+      {/* <SecurityCode securityCode={securityCode} onChange={() => {}} />
       <CardPassword password={password} onChange={() => {}} /> */}
     </div>
   );
