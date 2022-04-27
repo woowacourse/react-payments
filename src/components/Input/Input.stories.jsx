@@ -33,7 +33,7 @@ OwnerName.args = {
   type: 'text',
   width: '318px',
   placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
-  isCenter: true,
+  isCenter: false,
   maxLength: 30,
 };
 
