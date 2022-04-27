@@ -1,6 +1,6 @@
 import React from "react";
 
-import Input from "../components/Input";
+import Input from "../elements/Input";
 
 export default {
   component: Input,

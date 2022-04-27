@@ -1,6 +1,6 @@
 import React from "react";
 
-import Input from "./Input";
+import Input from "../../elements/Input";
 
 export default function CardNumber({ cardNumbers, onChange }) {
   return (
