@@ -4,7 +4,7 @@ import { useState } from "react";
 const HelpBox = () => {
   const [isShown, setIsShown] = useState(false);
   return (
-    <div class="help-box-container">
+    <div className="help-box-container">
       <div
         className="help-box"
         onMouseEnter={() => setIsShown(true)}

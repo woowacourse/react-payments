@@ -1,24 +1,28 @@
-import { Fragment } from "react";
+import { Fragment, memo } from "react";
 import "./input.css";
-import { v4 as uuid } from "uuid";
 
-const Input = ({ required, inputClass, inputInfo, connector }) => {
-  return (
-    <div className={`input-box ${inputClass}`}>
-      {inputInfo.map(({ type, placeholder }, idx) => (
-        <Fragment key={uuid()}>
-          {idx && connector ? <p className="connector">{connector}</p> : null}
+const InputContainer = memo(
+  ({ required, inputClass, inputInfo, connector, onChange }) => {
+    return (
+      <div className={`input-box ${inputClass}`}>
+        {inputInfo.map(({ type, placeholder, name, value }, idx) => (
+          <Fragment key={idx}>
+            {idx && connector ? <p className="connector">{connector}</p> : null}
 
-          <input
-            className="input-basic"
-            required={required}
-            type={type}
-            placeholder={placeholder}
-          />
-        </Fragment>
-      ))}
-    </div>
-  );
-};
+            <input
+              name={name}
+              className="input-basic"
+              required={required}
+              type={type}
+              placeholder={placeholder}
+              onChange={onChange}
+              value={value}
+            />
+          </Fragment>
+        ))}
+      </div>
+    );
+  }
+);
 
-export default Input;
+export default InputContainer;

@@ -6,7 +6,6 @@ input::-webkit-inner-spin-button {
 
 .input-basic {
   background-color: #ecebf1;
-  height: 45px;
   width: 100%;
   text-align: center;
   outline: 2px solid transparent;

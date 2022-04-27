@@ -1,5 +1,4 @@
 import Dot from "../Dot/dot.component";
-import { v4 as uuid } from "uuid";
 import "./card.css";
 
 const Card = ({ name, month, year, cardNumbers }) => {
@@ -15,14 +14,14 @@ const Card = ({ name, month, year, cardNumbers }) => {
             {cardNumbers.map((cardNumber, idx) => {
               if (idx >= 2) {
                 return (
-                  <div className="card-dot-container">
-                    {Array.from(cardNumber).map((_) => (
-                      <Dot dotClass="card-number" key={uuid()} />
+                  <div className="card-dot-container" key={idx}>
+                    {Array.from(cardNumber).map((_, idx) => (
+                      <Dot dotClass="card-number" key={"dot" + idx} />
                     ))}
                   </div>
                 );
               }
-              return <p>{cardNumber}</p>;
+              return <p key={idx}>{cardNumber}</p>;
             })}
           </div>
           <div className="card-bottom__info">

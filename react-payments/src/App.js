@@ -1,7 +1,8 @@
 import "./App.css";
+import CardAddPage from "./pages/CardAddPage/CardAddPage.component";
 
 function App() {
-  return <div className="app"></div>;
+  return <CardAddPage />;
 }
 
 export default App;

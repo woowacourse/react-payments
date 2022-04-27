@@ -1,11 +1,11 @@
-import Input from "./input.component";
+import InputContainer from "./input.component";
 
 export default {
   title: "Input",
-  component: Input,
+  component: InputContainer,
 };
 
-const Template = (args) => <Input {...args} />;
+const Template = (args) => <InputContainer {...args} />;
 
 export const CardNumberInput = Template.bind({});
 
