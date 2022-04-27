@@ -1,0 +1,13 @@
+.next-link {
+  font-weight: 700;
+  font-size: 14px;
+  color: #04c09e;
+  cursor: pointer;
+}
+
+.back-link {
+  font-weight: 500;
+  font-size: 20px;
+  color: #525252;
+  cursor: pointer;
+}
