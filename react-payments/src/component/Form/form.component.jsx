@@ -13,12 +13,8 @@ const Form = (props) => {
         <div className="password-container">
           <Input {...props} />
           <Input {...props} />
-          <div className="dot-container">
-            <Dot dotClass="password-form" />
-          </div>
-          <div className="dot-container">
-            <Dot dotClass="password-form" />
-          </div>
+          <Dot dotClass="password-form" />
+          <Dot dotClass="password-form" />
         </div>
       )}
     </div>
