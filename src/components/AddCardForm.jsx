@@ -80,29 +80,19 @@ function AddCardForm(props) {
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
         <Input
-          size="w-15"
+          size="w-15 mr-10"
           type="password"
           length={MAX_LENGTH.PASSWORD}
           validators={{ isOverMaxLength, isNaN: Number.isNaN }}
         />
         <Input
-          size="w-15"
+          size="w-15 mr-10"
           type="password"
           length={MAX_LENGTH.PASSWORD}
           validators={{ isOverMaxLength, isNaN: Number.isNaN }}
         />
-        <Input
-          size="w-15"
-          type="password"
-          length={MAX_LENGTH.PASSWORD}
-          validators={{ isOverMaxLength, isNaN: Number.isNaN }}
-        />
-        <Input
-          size="w-15"
-          type="password"
-          length={MAX_LENGTH.PASSWORD}
-          validators={{ isOverMaxLength, isNaN: Number.isNaN }}
-        />
+        <div className="dot" />
+        <div className="dot" />
       </div>
       <div className="button-box">
         <button type="submit" className="button-text">

@@ -19,3 +19,12 @@
   justify-content: left;
   align-items: center;
 }
+
+.dot {
+  width: 5px;
+  height: 5px;
+  background-color: #04c09e;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 25px;
+}
