@@ -5,7 +5,10 @@ const propTypes = {
   company: PropTypes.string,
   number: PropTypes.object,
   ownerName: PropTypes.string,
-  expiryDate: PropTypes.object,
+  expiryDate: PropTypes.shape({
+    month: PropTypes.string,
+    year: PropTypes.string,
+  }),
 };
 
 const CardPreview = ({ company, number, ownerName, expiryDate }) => {
