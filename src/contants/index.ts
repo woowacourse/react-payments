@@ -1,0 +1,3 @@
+const MAX_USER_NAME_LENGTH = 30;
+
+export { MAX_USER_NAME_LENGTH };
