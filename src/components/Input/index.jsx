@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Input = ({
   placeholder,
-  type,
+  type = "text",
   id,
   width,
   length,

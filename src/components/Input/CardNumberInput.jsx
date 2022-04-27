@@ -4,13 +4,13 @@ import styled from "styled-components";
 const CardNumberInput = (props) => {
   return (
     <Container>
-      <Input type="number" width="96" textAlign="right" value={1234} />
+      <Input width="96" textAlign="right" value={1234} />
       <DashContainer>-</DashContainer>
-      <Input type="number" width="45" value={5678} />
+      <Input width="45" value={5678} />
       <DashContainer>-</DashContainer>
-      <Input type="password" width="45" value={1234} />
+      <Input width="45" value={1234} />
       <DashContainer>-</DashContainer>
-      <Input type="password" width="96" textAlign="left" value={1234} />
+      <Input width="96" textAlign="left" value={1234} />
     </Container>
   );
 };
@@ -26,6 +26,7 @@ const DashContainer = styled.span`
   width: 10px;
   height: 45px;
   margin: 0 10px;
+  color: #111;
 `;
 
 export default CardNumberInput;
