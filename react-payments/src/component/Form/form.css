@@ -21,7 +21,18 @@
 }
 
 .security-code-container {
-  align-items: center;
-  gap: 20px;
   display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.user-name-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.max-user-name-count {
+  font-size: 14px;
+  color: #525252;
 }
