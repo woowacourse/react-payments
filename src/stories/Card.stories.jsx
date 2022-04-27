@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '../components/Card.jsx';
-import '../css/card.css';
+import '../css/index.css';
 
 export default {
   title: 'Card',
