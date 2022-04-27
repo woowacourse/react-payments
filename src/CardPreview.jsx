@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes, { string } from "prop-types";
 
 const CardContainer = styled.div`
   display: flex;
@@ -83,3 +84,9 @@ export default function CardPreview({ cardNumber, holderName, expireDate }) {
     </CardContainer>
   );
 }
+
+CardPreview.propTypes = {
+  cardNumber: PropTypes.arrayOf(string),
+  holderName: PropTypes.string,
+  expireDate: PropTypes.arrayOf(string),
+};
