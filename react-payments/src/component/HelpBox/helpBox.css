@@ -13,6 +13,13 @@
   align-items: center;
   font-size: 20px;
   padding-top: 1px;
+  cursor: pointer;
+}
+
+.help-box:hover {
+  color: white;
+  background-color: #80deea;
+  border: 1px solid white;
 }
 
 .help-modal {
