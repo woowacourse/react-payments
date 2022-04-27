@@ -38,17 +38,6 @@ module.exports = {
       name: '💚 ci:\tAdd or update regards to build process',
     },
   ],
-  scopes: [
-    { name: 'todo' },
-    { name: 'ui' },
-    { name: 'element' },
-    { name: 'domain' },
-    { name: 'validation' },
-    { name: 'router' },
-    { name: 'util' },
-    { name: 'test' },
-    { name: 'settings' },
-  ],
   allowCustomScopes: true,
   allowBreakingChanges: ['feat', 'fix'],
   // skip any questions you want
