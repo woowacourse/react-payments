@@ -41,7 +41,7 @@ function CardAddPage(props) {
       <PageTitle title="카드추가" />
       <Card isEmpty={false} cardNumbers={cardNumbers} />
       {/* 카드 번호  */}
-      <CardNumber cardNumbers={cardNumbers} onChange={handleOnChange} />
+      <CardNumber cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
       {/* 만료일 */}
       <CardExpirationDate cardNumbers={cardNumbers} onChange={handleOnChange} />
       {/* 카드 소유자 이름 */}

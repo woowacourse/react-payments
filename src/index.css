@@ -37,6 +37,12 @@ input {
   font-size: 16px;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* card */
 .card-box {
   display: flex;
@@ -241,6 +247,10 @@ input {
   border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
+}
+
+.input-security {
+  -webkit-text-security: disc;
 }
 
 .input-underline {

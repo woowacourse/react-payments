@@ -2,7 +2,6 @@ import React from 'react';
 
 function CardOwner({ cardNumbers, setCardNumbers }) {
   const handleOnChange = (event) => {
-    console.log(event.target.value.length);
     const { value, name } = event.target;
 
     if (value.length > 30) {
