@@ -6,7 +6,9 @@ import Input from "../../Input";
 const CardOwnerName = ({ ownerName, onChangeOwnerName }) => {
   return (
     <Container>
-      <MaxNumberIndicator>03/30</MaxNumberIndicator>
+      <MaxNumberIndicator>
+        {ownerName.length < 10 ? `0${ownerName.length}` : ownerName.length}/30
+      </MaxNumberIndicator>
       <FieldSet
         id="cardOwnerName"
         description="카드 소유자 이름(선택)"
