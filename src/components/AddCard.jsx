@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Card from './Card';
 
 function AddCard() {
   const [cardNumber, setCardNumber] = useState('');
@@ -6,6 +7,7 @@ function AddCard() {
   const [ownerName, setOwnerName] = useState('');
   const [securityCode, setSecurityCode] = useState('');
   const [password, setPassword] = useState('');
+  const [isEmptyCard, setIsEmptyCard] = useState(true);
 
   return (
     <>
@@ -13,20 +15,12 @@ function AddCard() {
         <div className="back-button" />
         <h2 className="page-title">카드 추가</h2>
       </div>
-      <div className="card-box">
-        <div className="empty-card">
-          <div className="card-top" />
-          <div className="card-middle">
-            <div className="small-card__chip" />
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__info">
-              <span className="card-text">NAME</span>
-              <span className="card-text">MM / YY</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Card
+        isEmptyCard={isEmptyCard}
+        cardNumber={cardNumber}
+        expireDate={expireDate}
+        ownerName={ownerName}
+      />
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
@@ -40,6 +34,7 @@ function AddCard() {
         <span className="input-title">만료일</span>
         <div className="input-box w-50">
           <input className="input-basic" type="text" placeholder="MM" />
+          /
           <input className="input-basic" type="text" placeholder="YY" />
         </div>
       </div>
