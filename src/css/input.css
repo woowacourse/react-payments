@@ -58,3 +58,33 @@
 
   border-bottom: 1px solid #383838;
 }
+
+.cvc-container {
+  position: relative;
+  display: inline-block;
+}
+
+.cvc-guide {
+  border: 1px solid #bababa;
+  color: #bababa;
+  border-radius: 50%;
+  width: 27px;
+  height: 27px;
+  line-height: 27px;
+  text-align: center;
+  display: inline-block;
+  margin-left: 11px;
+  font-weight: 700;
+  font-size: 20px;
+  padding: 3px 0 0 2px;
+  cursor: pointer;
+}
+
+.cvc-image {
+  position: absolute;
+  top: 0px;
+  left: 70px;
+  /* bottom: 10px;
+  right: 10px; */
+  width: 200px;
+}
