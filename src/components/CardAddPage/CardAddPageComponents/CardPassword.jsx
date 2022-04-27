@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-function CardPassword({ cardNumbers, setCardNumbers }) {
+function CardPassword({ cardInfo, setCardInfo }) {
   const handleOnInput = (event) => {
     const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
     event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(regExp, '');
@@ -11,8 +11,8 @@ function CardPassword({ cardNumbers, setCardNumbers }) {
       value = value.slice(0, 1);
     }
 
-    setCardNumbers({
-      ...cardNumbers,
+    setCardInfo({
+      ...cardInfo,
       [name]: value,
     });
   };
@@ -25,7 +25,7 @@ function CardPassword({ cardNumbers, setCardNumbers }) {
         className="input-basic w-15 input-password"
         type="password"
         onInput={handleOnInput}
-        value={cardNumbers.password1}
+        value={cardInfo.password1}
         required
       />
       <input
@@ -33,7 +33,7 @@ function CardPassword({ cardNumbers, setCardNumbers }) {
         className="input-basic w-15 input-password"
         type="password"
         onInput={handleOnInput}
-        value={cardNumbers.password2}
+        value={cardInfo.password2}
         required
       />
       <input

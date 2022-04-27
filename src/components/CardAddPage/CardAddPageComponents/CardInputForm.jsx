@@ -1,11 +1,11 @@
 import React from 'react';
 import checkCardInfo from '../../../validator';
 
-function CardInputForm({ cardNumbers, children }) {
+function CardInputForm({ cardInfo, children }) {
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
-    const { number1, number2, number3, number4, month, year, cvc } = cardNumbers;
+    const { number1, number2, number3, number4, month, year, cvc } = cardInfo;
 
     try {
       checkCardInfo({ number1, number2, number3, number4, month, year, cvc });

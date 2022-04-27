@@ -1,7 +1,7 @@
 import React from 'react';
 import Tooltip from './Tooltip';
 
-function CVC({ cardNumbers, setCardNumbers }) {
+function CVC({ cardInfo, setCardInfo }) {
   const handleOnInput = (event) => {
     const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
     event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(regExp, '');
@@ -12,8 +12,8 @@ function CVC({ cardNumbers, setCardNumbers }) {
       value = value.slice(0, 3);
     }
 
-    setCardNumbers({
-      ...cardNumbers,
+    setCardInfo({
+      ...cardInfo,
       [name]: value,
     });
   };
@@ -26,7 +26,7 @@ function CVC({ cardNumbers, setCardNumbers }) {
         className="input-basic w-25"
         type="password"
         onInput={handleOnInput}
-        value={cardNumbers.cvc}
+        value={cardInfo.cvc}
         required
       />
       <Tooltip />

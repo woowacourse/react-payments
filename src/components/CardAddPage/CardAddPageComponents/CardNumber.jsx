@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CardNumber({ cardNumbers, setCardNumbers }) {
+function CardNumber({ cardInfo, setCardInfo }) {
   const handleOnInput = (event) => {
     const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
 
@@ -12,8 +12,8 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
       value = value.slice(0, 4);
     }
 
-    setCardNumbers({
-      ...cardNumbers,
+    setCardInfo({
+      ...cardInfo,
       [name]: value,
     });
   };
@@ -29,7 +29,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
           className="input-basic"
           type="text"
           onInput={handleOnInput}
-          value={cardNumbers.number1}
+          value={cardInfo.number1}
           required
         />
         <input
@@ -37,7 +37,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
           className="input-basic"
           type="text"
           onInput={handleOnInput}
-          value={cardNumbers.number2}
+          value={cardInfo.number2}
           required
         />
         <input
@@ -45,7 +45,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
           className="input-basic"
           type="password"
           onInput={handleOnInput}
-          value={cardNumbers.number3}
+          value={cardInfo.number3}
           required
         />
         <input
@@ -53,7 +53,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
           className="input-basic"
           type="password"
           onInput={handleOnInput}
-          value={cardNumbers.number4}
+          value={cardInfo.number4}
           required
         />
       </div>

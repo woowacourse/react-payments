@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Card({ isEmpty, handleCardAdd, cardNumbers }) {
+function Card({ isEmpty, handleCardAdd, cardInfo }) {
   return (
     <div className="card-box">
       <div className="empty-card" onClick={handleCardAdd}>
@@ -15,22 +15,22 @@ function Card({ isEmpty, handleCardAdd, cardNumbers }) {
 
             <div className="card-bottom">
               <div className="card-text card-number-flex">
-                <div className="card-number-letter-spacing">{cardNumbers?.number1}</div>
-                <div className="card-number-letter-spacing">{cardNumbers?.number2}</div>
+                <div className="card-number-letter-spacing">{cardInfo?.number1}</div>
+                <div className="card-number-letter-spacing">{cardInfo?.number2}</div>
                 <div className="hidden-card-number-letter-spacing">
-                  {'ㆍ'.repeat(cardNumbers?.number3.length)}
+                  {'ㆍ'.repeat(cardInfo?.number3.length)}
                 </div>
                 <div className="hidden-card-number-letter-spacing">
-                  {'ㆍ'.repeat(cardNumbers?.number4.length)}
+                  {'ㆍ'.repeat(cardInfo?.number4.length)}
                 </div>
               </div>
               <div className="card-bottom-position">
                 <div className="card-bottom__info">
                   <span className="card-text">
-                    {cardNumbers.owner === '' ? 'NAME' : cardNumbers.owner.slice(0, 7)}
+                    {cardInfo.owner === '' ? 'NAME' : cardInfo.owner.slice(0, 7)}
                   </span>
                   <span className="card-text">
-                    {cardNumbers.month || 'MM'} / {cardNumbers.year || 'YY'}
+                    {cardInfo.month || 'MM'} / {cardInfo.year || 'YY'}
                   </span>
                 </div>
               </div>

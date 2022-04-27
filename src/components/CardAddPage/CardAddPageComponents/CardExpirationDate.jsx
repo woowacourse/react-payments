@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CardExpirationDate({ cardNumbers, setCardNumbers }) {
+function CardExpirationDate({ cardInfo, setCardInfo }) {
   const handleMonthOnInput = (event) => {
     if (event.target.value >= 2 && event.target.value <= 9) {
       event.target.value = '0' + event.target.value;
@@ -14,8 +14,8 @@ function CardExpirationDate({ cardNumbers, setCardNumbers }) {
       value = value.slice(0, 2);
     }
 
-    setCardNumbers({
-      ...cardNumbers,
+    setCardInfo({
+      ...cardInfo,
       [name]: value,
     });
   };
@@ -25,8 +25,8 @@ function CardExpirationDate({ cardNumbers, setCardNumbers }) {
       event.target.value = '01';
     }
 
-    setCardNumbers({
-      ...cardNumbers,
+    setCardInfo({
+      ...cardInfo,
       month: event.target.value,
     });
   };
@@ -40,8 +40,8 @@ function CardExpirationDate({ cardNumbers, setCardNumbers }) {
       value = value.slice(0, 2);
     }
 
-    setCardNumbers({
-      ...cardNumbers,
+    setCardInfo({
+      ...cardInfo,
       [name]: value,
     });
   };
@@ -57,7 +57,7 @@ function CardExpirationDate({ cardNumbers, setCardNumbers }) {
           placeholder="MM"
           onInput={handleMonthOnInput}
           onBlur={handleMonthOnFocusOut}
-          value={cardNumbers.month}
+          value={cardInfo.month}
           required
         />
         <input
@@ -66,7 +66,7 @@ function CardExpirationDate({ cardNumbers, setCardNumbers }) {
           type="text"
           placeholder="YY"
           onInput={handleYearOnInput}
-          value={cardNumbers.year}
+          value={cardInfo.year}
           required
         />
       </div>
