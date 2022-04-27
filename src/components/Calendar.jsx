@@ -6,9 +6,7 @@ const CalendarContainer = styled.div`
   position: relative;
 `;
 
-const SelectBox = styled.div`
-  border: 1px solid #000;
-`;
+const SelectBox = styled.div``;
 
 const SelectLayer = styled.div`
   display: ${props => (props.isShown ? 'block' : 'none')};

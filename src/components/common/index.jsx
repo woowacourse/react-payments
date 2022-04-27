@@ -2,15 +2,14 @@ import styled from 'styled-components';
 
 const InputContainer = styled.div`
   position: ${props => props.position || 'static'};
-  width: 100%;
+  width: ${props => props.width || '100%'};
   margin: 16px 0;
-  background-color: black;
 `;
 
 const InputWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;s
+  width: ${props => props.width || '100%'};
   margin-top: 0.375rem;
   color: ${props => props.color};
   border-radius: 0.25rem;
@@ -29,17 +28,15 @@ const Label = styled.label`
 const Input = styled.input`
   background-color: #ecebf1;
   height: 45px;
+  min-width: 50px;
   width: 100%;
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;
-  border-color: #9ca3af;
-  border: 1px solid #000;
-  border-radius: 0.25rem;
+  border: none;
 `;
 
 const DotContainer = styled.div`
-  background-color: #ecebf1;
   height: 45px;
   width: 100%;
   display: flex;
@@ -50,7 +47,7 @@ const DotContainer = styled.div`
 `;
 
 const Span = styled.span`
-  padding: 8px;
+  padding: ${props => props.padding || '8px'};
 `;
 
 export { InputContainer, InputWrapper, Label, Input, DotContainer, Span };

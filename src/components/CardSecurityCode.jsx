@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, InputContainer, Span, Label } from './common';
+import { Input, InputContainer, Span, Label, InputWrapper } from './common';
 import QuestionContainer from './common/QuestionIcon';
 
 const MAX_CARD_CODE = 3;
@@ -33,12 +33,14 @@ function CardSecurityCode(props) {
   };
 
   return (
-    <InputContainer>
+    <InputContainer position="relative" width="40%">
       <Label>보안코드(CVC/CVV)</Label>
-      <Span>
-        <Input type="password" maxLength="3" onChange={handleInputChange} value={cardCode} />
-        <QuestionContainer textContent={CVC_EXPLANATION} />
-      </Span>
+      <InputWrapper width="80%">
+        <Span>
+          <Input type="password" maxLength="3" onChange={handleInputChange} value={cardCode} />
+        </Span>
+      </InputWrapper>
+      <QuestionContainer textContent={CVC_EXPLANATION} />
     </InputContainer>
   );
 }

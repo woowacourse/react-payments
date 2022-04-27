@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import { Input, InputContainer, Label, InputWrapper } from './common';
 import InactiveContainer from './common/InactiveContainer';
+
+const InputPasswordWrapper = styled.div`
+  display: flex;
+  gap: 1em;
+  width: 50%;
+`;
 
 const MAX_PASSWORD_UNIT = 1;
 
@@ -40,12 +47,16 @@ function CardPassword() {
   return (
     <InputContainer>
       <Label>카드 비밀번호</Label>
-      <InputWrapper>
-        <Input type="password" maxLength={1} name="pwdNoA" onChange={handleInputChange} value={pwd.pwdNoA} />
-        <Input type="password" maxLength={1} name="pwdNoB" onChange={handleInputChange} value={pwd.pwdNoB} />
+      <InputPasswordWrapper>
+        <InputWrapper>
+          <Input type="password" maxLength={1} name="pwdNoA" onChange={handleInputChange} value={pwd.pwdNoA} />
+        </InputWrapper>
+        <InputWrapper>
+          <Input type="password" maxLength={1} name="pwdNoB" onChange={handleInputChange} value={pwd.pwdNoB} />
+        </InputWrapper>
         <InactiveContainer />
         <InactiveContainer />
-      </InputWrapper>
+      </InputPasswordWrapper>
     </InputContainer>
   );
 }

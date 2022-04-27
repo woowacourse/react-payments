@@ -18,7 +18,7 @@ function DueDate() {
   return (
     <InputContainer>
       <Label>만료일</Label>
-      <InputWrapper color={hyphenPrimaryColor}>
+      <InputWrapper color={hyphenPrimaryColor} width="50%">
         <Calendar items={months.current} setItem={setMonth} placeholder="MM" />
         <Span>/</Span>
         <Calendar items={years.current} setItem={setYear} placeholder="YY" />

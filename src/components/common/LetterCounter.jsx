@@ -8,15 +8,19 @@ const Paragraph = styled.p`
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #fff;
+
+  font-size: 12px;
+  line-height: 14px;
+  margin-bottom: 4px;
+  color: #525252;
 `;
 
 function LetterCounter({ currentLength, maxLength }) {
   return (
     <Paragraph>
-      <Span>{currentLength || 0}</Span>
-      <Span>/</Span>
-      <Span>{maxLength || 0}</Span>
+      <Span padding="0">{currentLength || 0}</Span>
+      <Span padding="0">/</Span>
+      <Span padding="0">{maxLength || 0}</Span>
     </Paragraph>
   );
 }
