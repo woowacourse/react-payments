@@ -3,13 +3,13 @@ import styled from "styled-components";
 
 const Button = ({ content, type = "button", name }) => {
   return (
-    <ButtonContainer type={type} name={name}>
+    <Container type={type} name={name}>
       {content}
-    </ButtonContainer>
+    </Container>
   );
 };
 
-const ButtonContainer = styled.button`
+const Container = styled.button`
   width: 44px;
   height: 44px;
   color: #04c09e;
