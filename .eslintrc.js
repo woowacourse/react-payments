@@ -8,6 +8,7 @@ module.exports = {
     'plugin:react/recommended',
     'airbnb',
     'plugin:prettier/recommended',
+    'plugin:storybook/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -20,10 +21,19 @@ module.exports = {
   rules: {
     'react/function-component-definition': [
       2,
-      { namedComponents: 'arrow-function' },
+      {
+        namedComponents: 'arrow-function',
+      },
     ],
     'class-methods-use-this': [0],
     'no-alert': 'warn',
     'no-console': 'warn',
+    'react/jsx-props-no-spreading': [0],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: ['.storybook/**', 'stories/**'],
+      },
+    ],
   },
 };
