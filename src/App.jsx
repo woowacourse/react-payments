@@ -4,6 +4,7 @@ import CardPasswordInput from "./CardPasswordInput.jsx";
 import CardSecurityCodeInput from "./CardSecurityCodeInput.jsx";
 import CardExpireDateInput from "./CardExpireDateInput.jsx";
 import { useState } from "react";
+import CardPreview from "./CardPreview.jsx";
 
 function App() {
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
@@ -74,6 +75,11 @@ function App() {
 
   return (
     <div className="App">
+      <CardPreview
+        cardNumber={cardNumber}
+        holderName={holderName}
+        expireDate={expireDate}
+      />
       <CardNumberInput
         cardNumber={cardNumber}
         onChange={handleCardNumberUpdate}
