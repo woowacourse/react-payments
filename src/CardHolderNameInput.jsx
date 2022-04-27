@@ -14,7 +14,6 @@ const StyledInputCounter = styled.p`
 `;
 
 function InputCounter({ currLength = "0", maxLength }) {
-  console.log(currLength);
   return (
     <StyledInputCounter>
       {currLength}/{maxLength}
