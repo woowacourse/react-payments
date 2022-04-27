@@ -89,6 +89,16 @@ function App() {
     setCardInfo(prevCardInfo => ({ ...prevCardInfo, userName: prevCardInfo.userName.trim() }));
   };
 
+  const onChangeSecurityCode = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+    const inputValue = e.target.value;
+
+    if (inputValue === "" || REGEXP.NUMBER.test(inputValue)) {
+      setCardInfo(prevCardInfo => ({
+        ...prevCardInfo,
+        securityCode: inputValue,
+      }));
+    }
+  };
   // 재사용가능한 컴포넌트가 비즈니스 로직을 가지기 어렵다.
   // onChange 6개 이 정도 될것이다.
   // Input을 컴포넌트를 수정하는 방향보다, useInput custom hook 으로 분리하는 방향이
@@ -101,6 +111,7 @@ function App() {
         onChangeExpiredDate={onChangeExpiredDate}
         onChangeUserName={onChangeUserName}
         onBlurUserName={onBlurUserName}
+        onChangeSecurityCode={onChangeSecurityCode}
       />
     </div>
   );
