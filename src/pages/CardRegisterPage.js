@@ -1,64 +1,40 @@
 import React from 'react';
-import styled from 'styled-components';
+import { useState } from 'react';
 
-import { InputBasic } from '../components/common/InputBasic';
-import { InputBox } from '../components/common/InputBox';
-
-const InputContainer = styled.div`
-  margin: 16px 0;
-`;
-
-const InputTitle = styled.span`
-  display: flex;
-  align-items: center;
-
-  font-size: 12px;
-  line-height: 14px;
-
-  margin-bottom: 4px;
-
-  color: #525252;
-`;
+import { Card } from '../components/common/Card';
+import { CardExpireDateInputForm } from '../components/cardRegister/CardExpireDateInputForm';
+import { CardNumbersInputForm } from '../components/cardRegister/CardNumbersInputForm';
+import { CardOwnerInputForm } from '../components/cardRegister/CardOwnerInputForm';
+import { CardPasswordInputForm } from '../components/cardRegister/CardPasswordInputForm';
+import { CVCInputForm } from '../components/cardRegister/CVCInputForm';
 
 export const CardRegisterPage = () => {
+  const [cardNumbers, setCardNumbers] = useState({
+    firstNumber: '',
+    secondNumber: '',
+    thirdNumber: '',
+    fourthNumber: '',
+  });
+
+  const [checkInputs, setCheckInputs] = useState({
+    cardNumbers: false,
+    cardExpireDate: false,
+    cardOwner: false,
+    cardCVC: false,
+    cardPassword: false,
+  });
+
   return (
-    <div>
-      <InputContainer>
-        <InputTitle>카드 번호</InputTitle>
-        <InputBox>
-          <InputBasic type="text" />
-          <InputBasic type="text" />
-          <InputBasic type="text" />
-          <InputBasic type="text" />
-        </InputBox>
-      </InputContainer>
-      <InputContainer>
-        <InputTitle>만료일</InputTitle>
-        <InputBox width="50%">
-          <InputBasic type="text" placeholder="MM" />
-          /
-          <InputBasic type="text" placeholder="YY" />
-        </InputBox>
-      </InputContainer>
-      <InputContainer>
-        <InputTitle>카드 소유자 이름(선택)</InputTitle>
-        <InputBasic type="text" value="유세지" />
-      </InputContainer>
-      <InputContainer>
-        <InputTitle>보안카드(CVC/CVV)</InputTitle>
-        <InputBox width="25%">
-          <InputBasic type="password" value="111" />
-        </InputBox>
-      </InputContainer>
-      <InputContainer>
-        <InputTitle>카드 비밀번호</InputTitle>
-        <InputBox width="50%">
-          <InputBasic type="password" width="15%" value="1" />
-          <InputBasic type="password" width="15%" value="1" />
-          <InputBasic type="password" width="15%" value="1" />
-          <InputBasic type="password" width="15%" value="1" />
-        </InputBox>
-      </InputContainer>
-    </div>
+    <>
+      <Card cardNumbers={cardNumbers} />
+      <CardNumbersInputForm
+        cardNumbers={cardNumbers}
+        handleCardNumbersInput={setCardNumbers}
+      />
+      <CardExpireDateInputForm />
+      <CardOwnerInputForm />
+      <CVCInputForm />
+      <CardPasswordInputForm />
+    </>
   );
 };

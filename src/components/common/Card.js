@@ -78,7 +78,7 @@ const CardText = styled.span`
   font-weight: 400;
 `;
 
-export const Card = ({ type }) => {
+export const Card = ({ cardNumbers }) => {
   return (
     <CardBox>
       <SmallCard>
@@ -90,7 +90,7 @@ export const Card = ({ type }) => {
         </CardMiddle>
         <CardBottom>
           <CardBottom__number>
-            <CardText>1111 - 2222 - oooo - oooo</CardText>
+            <CardText></CardText>
           </CardBottom__number>
           <CardBottom__info>
             <CardText>YOU SE JI</CardText>
