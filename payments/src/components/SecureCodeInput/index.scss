@@ -1,6 +1,7 @@
 .secure__input__container {
   display: grid;
-  width: 30%;
+  width: 50%;
+  max-width: 150px;
   grid-template-areas:
     "il il il"
     "ic ic hb";
