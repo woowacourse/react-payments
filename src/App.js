@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Card from './components/Card';
 import InputForm from './components/InputForm';
-import { objectToString } from './utils/util';
 
 function App() {
   const [cardNumber, setCardNumber] = useState({
@@ -29,11 +28,7 @@ function App() {
     <div className="root">
       <div className="app">
         <h2 className="page-title"> 카드 추가 </h2>
-        <Card
-          cardNumber={objectToString(cardNumber, ' ')}
-          expirationDate={objectToString(expirationDate, '/')}
-          ownerName={ownerName}
-        ></Card>
+        <Card cardNumber={cardNumber} expirationDate={expirationDate} ownerName={ownerName}></Card>
         <InputForm
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}

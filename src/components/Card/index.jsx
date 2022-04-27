@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { objectToString } from '../../utils/util';
 
 function Card(props) {
   const { cardNumber, expirationDate, ownerName } = props;
@@ -15,11 +16,11 @@ function Card(props) {
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">{cardNumber}</span>
+            <span className="card-text">{objectToString(cardNumber, ' ')}</span>
           </div>
           <div className="card-bottom__info">
             <span className="card-text">{ownerName}</span>
-            <span className="card-text">{expirationDate}</span>
+            <span className="card-text">{objectToString(expirationDate, '/')}</span>
           </div>
         </div>
       </div>
@@ -28,8 +29,8 @@ function Card(props) {
 }
 
 Card.propTypes = {
-  cardNumber: PropTypes.string,
-  expirationDate: PropTypes.string,
+  cardNumber: PropTypes.object,
+  expirationDate: PropTypes.object,
   ownerName: PropTypes.string,
 };
 
