@@ -1,34 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
+import Input from "./Input.jsx";
+import InputField from "./InputField.jsx";
 
-export default function CardExpireDateInput() {
-  const [inputValueList, setInputValueList] = useState(["", ""]);
-
-  const handleInputUpdate = ({ target: { value } }, order) => {
-    if (!/^\d{0,2}$/.test(value)) return;
-
-    if (order === 0 && (Number(value) > 12 || Number(value) < 1)) return;
-
-    setInputValueList((prevValueList) => {
-      const newValueList = [...prevValueList];
-      newValueList[order] = value;
-
-      return newValueList;
-    });
-  };
-
+export default function CardExpireDateInput({ expireDate, onChange }) {
   return (
-    <fieldset>
-      <legend>만료일</legend>
-      <input
+    <InputField labelText="만료일">
+      <Input
+        placeholder="MM"
         type="text"
-        value={inputValueList[0]}
-        onChange={(e) => handleInputUpdate(e, 0)}
+        value={expireDate[0]}
+        onChange={(e) => onChange(e, 0)}
       />
-      <input
+      <p>/</p>
+      <Input
+        placeholder="YY"
         type="text"
-        value={inputValueList[1]}
-        onChange={(e) => handleInputUpdate(e, 1)}
+        value={expireDate[1]}
+        onChange={(e) => onChange(e, 1)}
       />
-    </fieldset>
+    </InputField>
   );
 }

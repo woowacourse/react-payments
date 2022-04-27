@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
+import PropTypes, { string } from "prop-types";
 
 export const StyledInput = styled.input`
+  // 텍스트 선택 커서 색상 설정
+  caret-color: #000000;
   color: #04c09e;
   font-size: 18px;
   font-weight: 600;
@@ -20,17 +22,27 @@ export const StyledInput = styled.input`
   }
 `;
 
-export default function Input({ name, type, placeholder }) {
-  return <StyledInput type={type} name={name} placeholder={placeholder} />;
+export default function Input({ name, type, placeholder, value, onChange }) {
+  return (
+    <StyledInput
+      type={type}
+      name={name}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+    />
+  );
 }
 
 Input.propTypes = {
   name: PropTypes.string,
   type: PropTypes.oneOf(["text", "number", "password"]),
   placeholder: PropTypes.string,
+  width: string,
 };
 
 Input.defaultProps = {
   name: "default name",
   type: "text",
+  width: "100px",
 };

@@ -6,6 +6,7 @@ const StyledInputField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 7px;
+  position: relative;
 `;
 
 const StyledLabel = styled.label`
@@ -16,15 +17,17 @@ const StyledLabel = styled.label`
 `;
 
 const StyledInputWrapper = styled.div`
+  display: flex;
   background: #ecebf1;
   border-radius: 7px;
   width: max-content;
   padding: 12px;
 `;
 
-export default function InputField({ labelText, children }) {
+export default function InputField({ labelText, children, OptionalComponent }) {
   return (
     <StyledInputField>
+      {OptionalComponent}
       <StyledLabel>{labelText}</StyledLabel>
       <StyledInputWrapper>{children}</StyledInputWrapper>
     </StyledInputField>

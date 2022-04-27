@@ -1,45 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
+import Input from "./Input";
+import InputField from "./InputField";
 
-export default function CardNumberInput() {
-  const [inputValueList, setInputValueList] = useState(["", "", "", ""]);
-
-  const handleInputUpdate = ({ target: { value } }, order) => {
-    if (!Number.isInteger(Number(value)) || value.length > 4) return;
-
-    setInputValueList((prevValueList) => {
-      const newValueList = [...prevValueList];
-      newValueList[order] = value;
-
-      return newValueList;
-    });
-  };
-
+export default function CardNumberInput({ cardNumber, onChange }) {
   return (
-    <fieldset style={{ display: "flex" }}>
-      <legend>카드 비밀번호</legend>
-      <input
+    <InputField labelText="카드 번호">
+      <Input
         type="number"
-        value={inputValueList[0]}
-        onChange={(e) => handleInputUpdate(e, 0)}
+        value={cardNumber[0]}
+        onChange={(e) => onChange(e, 0)}
       />
-      {inputValueList[0].length === 4 && <p>-</p>}
-      <input
+      {cardNumber[0].length === 4 && <p>-</p>}
+      <Input
         type="number"
-        value={inputValueList[1]}
-        onChange={(e) => handleInputUpdate(e, 1)}
+        value={cardNumber[1]}
+        onChange={(e) => onChange(e, 1)}
       />
-      {inputValueList[1].length === 4 && <p>-</p>}
-      <input
+      {cardNumber[1].length === 4 && <p>-</p>}
+      <Input
         type="password"
-        value={inputValueList[2]}
-        onChange={(e) => handleInputUpdate(e, 2)}
+        value={cardNumber[2]}
+        onChange={(e) => onChange(e, 2)}
       />
-      {inputValueList[2].length === 4 && <p>-</p>}
-      <input
+      {cardNumber[2].length === 4 && <p>-</p>}
+      <Input
         type="password"
-        value={inputValueList[3]}
-        onChange={(e) => handleInputUpdate(e, 3)}
+        value={cardNumber[3]}
+        onChange={(e) => onChange(e, 3)}
       />
-    </fieldset>
+    </InputField>
   );
 }

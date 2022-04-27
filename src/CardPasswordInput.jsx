@@ -1,35 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
+import Input from "./Input.jsx";
+import InputField from "./InputField.jsx";
 
-export default function CardPasswordInput() {
-  const [inputValueList, setInputValueList] = useState(["", ""]);
-
-  const handleInputUpdate = ({ target: { value } }, order) => {
-    if (!Number.isInteger(Number(value)) || value.length > 1) return;
-
-    setInputValueList((prevValueList) => {
-      const newValueList = [...prevValueList];
-      newValueList[order] = value;
-
-      return newValueList;
-    });
-  };
-
+export default function CardPasswordInput({ password, onChange }) {
   return (
-    <fieldset>
-      <legend htmlFor="card-password">카드 비밀번호</legend>
-      <input
+    <InputField labelText="카드 비밀번호">
+      <Input
         type="password"
-        name="card-password"
-        value={inputValueList[0]}
-        onChange={(e) => handleInputUpdate(e, 0)}
+        value={password[0]}
+        onChange={(e) => onChange(e, 0)}
       />
-      <input
+      <Input
         type="password"
-        name="card-password"
-        value={inputValueList[1]}
-        onChange={(e) => handleInputUpdate(e, 1)}
+        value={password[1]}
+        onChange={(e) => onChange(e, 1)}
       />
-      ..
-    </fieldset>
+    </InputField>
   );
 }
