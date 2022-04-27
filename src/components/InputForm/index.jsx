@@ -147,8 +147,10 @@ function InputForm({
             required
           />
         ))}
-        <input className="input-basic" type="password" disabled />
-        <input className="input-basic" type="password" disabled />
+        <div className="inputted-password">*</div>
+        <div className="inputted-password">*</div>
+        {/* <input className="input-basic" type="password" disabled /> */}
+        {/* <input className="input-basic" type="password" disabled /> */}
       </Input>
       <button className="button-box">
         <span className="button-text">다음</span>
