@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes, { string } from "prop-types";
+import PropTypes from "prop-types";
 
 export const StyledInput = styled.input`
   // 텍스트 선택 커서 색상 설정
@@ -38,7 +38,7 @@ Input.propTypes = {
   name: PropTypes.string,
   type: PropTypes.oneOf(["text", "number", "password"]),
   placeholder: PropTypes.string,
-  width: string,
+  width: PropTypes.string,
 };
 
 Input.defaultProps = {
