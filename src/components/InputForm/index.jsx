@@ -5,18 +5,11 @@ import { isAlphabetOrSpace } from '../../utils/validations';
 import { objectToString } from '../../utils/util';
 import { uid } from 'react-uid';
 import { checkFormCompletion, isNumberInRange } from './validation';
+import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
 
 function InputForm({
-  cardNumber,
-  setCardNumber,
-  expirationDate,
-  setExpirationDate,
-  ownerName,
-  setOwnerName,
-  securityCode,
-  setSecurityCode,
-  password,
-  setPassword,
+  cardInput: { cardNumber, expirationDate, ownerName, securityCode, password },
+  cardInputDispatch,
 }) {
   const onChangeCardNumber = (key, e) => {
     const {
@@ -24,7 +17,7 @@ function InputForm({
     } = e;
 
     if (isNumberInRange(cardNumber, maxLength)) {
-      setCardNumber(prev => ({ ...prev, [`${key}`]: cardNumber }));
+      cardInputDispatch({ type: 'CHANGE_CARD_NUMBER', payload: { cardNumber, key } });
     }
   };
 
@@ -34,17 +27,20 @@ function InputForm({
     } = e;
 
     if (isNumberInRange(date, maxLength)) {
-      setExpirationDate(prev => ({ ...prev, [`${key}`]: date }));
+      cardInputDispatch({ type: 'CHANGE_EXPIRATION_DATE', payload: { date, key } });
     }
   };
 
   const onChangeOwnerName = e => {
     const {
-      target: { value },
+      target: { value: ownerName },
     } = e;
 
-    if (isAlphabetOrSpace(value)) {
-      setOwnerName(value.toUpperCase());
+    if (isAlphabetOrSpace(ownerName)) {
+      cardInputDispatch({
+        type: 'CHANGE_OWNER_NAME',
+        payload: { ownerName: ownerName.toUpperCase() },
+      });
     }
   };
 
@@ -54,17 +50,23 @@ function InputForm({
     } = e;
 
     if (isNumberInRange(securityCode, maxLength)) {
-      setSecurityCode(securityCode);
+      cardInputDispatch({
+        type: 'CHANGE_SECURITY_CODE',
+        payload: { securityCode },
+      });
     }
   };
 
   const onChangePassword = (key, e) => {
     const {
-      target: { value, maxLength },
+      target: { value: password, maxLength },
     } = e;
 
-    if (isNumberInRange(value, maxLength)) {
-      setPassword(prev => ({ ...prev, [`${key}`]: value }));
+    if (isNumberInRange(password, maxLength)) {
+      cardInputDispatch({
+        type: 'CHANGE_PASSWORD',
+        payload: { password, key },
+      });
     }
   };
 
@@ -156,16 +158,14 @@ function InputForm({
 }
 
 InputForm.propTypes = {
-  cardNumber: PropTypes.object,
-  setCardNumber: PropTypes.func,
-  expirationDate: PropTypes.object,
-  setExpirationDate: PropTypes.func,
-  ownerName: PropTypes.string,
-  setOwnerName: PropTypes.func,
-  securityCode: PropTypes.string,
-  setSecurityCode: PropTypes.func,
-  password: PropTypes.object,
-  setPassword: PropTypes.func,
+  cardInput: PropTypes.shape({
+    cardNumber: CARD_NUMBER_TYPE,
+    expirationDate: EXPIRATION_DATE_TYPE,
+    ownerName: PropTypes.string,
+    securityCode: PropTypes.string,
+    password: PASSWORD_TYPE,
+  }),
+  cardInputDispatch: PropTypes.func,
 };
 
 export default InputForm;

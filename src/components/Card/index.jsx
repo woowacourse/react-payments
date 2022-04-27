@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { objectToString } from '../../utils/util';
+import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
 
-function Card(props) {
-  const { cardNumber, expirationDate, ownerName } = props;
-
+function Card({ cardInformation: { cardNumber, expirationDate, ownerName } }) {
   return (
     <div className="card-box">
       <div className="small-card">
@@ -29,9 +28,13 @@ function Card(props) {
 }
 
 Card.propTypes = {
-  cardNumber: PropTypes.object,
-  expirationDate: PropTypes.object,
-  ownerName: PropTypes.string,
+  cardInformation: PropTypes.shape({
+    cardNumber: CARD_NUMBER_TYPE,
+    expirationDate: EXPIRATION_DATE_TYPE,
+    ownerName: PropTypes.string,
+    securityCode: PropTypes.string,
+    password: PASSWORD_TYPE,
+  }),
 };
 
 export default Card;

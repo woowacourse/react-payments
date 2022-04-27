@@ -1,46 +1,78 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import Card from './components/Card';
 import InputForm from './components/InputForm';
+const cardInputReducer = (state, action) => {
+  const { type, payload } = action;
 
-function App() {
-  const [cardNumber, setCardNumber] = useState({
+  switch (type) {
+    case 'CHANGE_CARD_NUMBER': {
+      const { key, cardNumber } = payload;
+      return {
+        ...state,
+        cardNumber: { ...state.cardNumber, [`${key}`]: cardNumber },
+      };
+    }
+    case 'CHANGE_EXPIRATION_DATE': {
+      const { key, date } = payload;
+      return {
+        ...state,
+        expirationDate: { ...state.expirationDate, [`${key}`]: date },
+      };
+    }
+
+    case 'CHANGE_OWNER_NAME': {
+      const { ownerName } = payload;
+      return {
+        ...state,
+        ownerName,
+      };
+    }
+    case 'CHANGE_SECURITY_CODE': {
+      const { securityCode } = payload;
+      return {
+        ...state,
+        securityCode: securityCode,
+      };
+    }
+    case 'CHANGE_PASSWORD': {
+      const { key, password } = payload;
+      return {
+        ...state,
+        password: { ...state.password, [`${key}`]: password },
+      };
+    }
+    default:
+      throw new Error();
+  }
+};
+
+const defaultCardInputState = {
+  cardNumber: {
     first: '',
     second: '',
     third: '',
     forth: '',
-  });
-
-  const [expirationDate, setExpirationDate] = useState({
+  },
+  expirationDate: {
     month: '',
     year: '',
-  });
-
-  const [ownerName, setOwnerName] = useState('');
-
-  const [securityCode, setSecurityCode] = useState('');
-
-  const [password, setPassword] = useState({
+  },
+  ownerName: '',
+  securityCode: '',
+  password: {
     first: '',
     second: '',
-  });
+  },
+};
+function App() {
+  const [cardInput, cardInputDispatch] = useReducer(cardInputReducer, defaultCardInputState);
 
   return (
     <div className="root">
       <div className="app">
         <h2 className="page-title"> 카드 추가 </h2>
-        <Card cardNumber={cardNumber} expirationDate={expirationDate} ownerName={ownerName}></Card>
-        <InputForm
-          cardNumber={cardNumber}
-          setCardNumber={setCardNumber}
-          expirationDate={expirationDate}
-          setExpirationDate={setExpirationDate}
-          ownerName={ownerName}
-          setOwnerName={setOwnerName}
-          securityCode={securityCode}
-          setSecurityCode={setSecurityCode}
-          password={password}
-          setPassword={setPassword}
-        ></InputForm>
+        <Card cardInformation={cardInput}></Card>
+        <InputForm cardInput={cardInput} cardInputDispatch={cardInputDispatch}></InputForm>
       </div>
     </div>
   );

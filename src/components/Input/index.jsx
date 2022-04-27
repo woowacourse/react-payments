@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Input(props) {
-  const { labelTitle, inputSize = '', children } = props;
-
+function Input({ labelTitle, inputSize = '', children }) {
   return (
     <div className="input-container">
       <span className="input-title">{labelTitle}</span>
