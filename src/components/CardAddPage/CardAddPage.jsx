@@ -4,6 +4,7 @@ import Card from '../common/Card';
 import PageTitle from '../common/PageTitle';
 import NextPageButton from '../common/NextPageButton';
 
+import CardInputForm from './CardAddPageComponents/CardInputForm';
 import CardNumber from './CardAddPageComponents/CardNumber';
 import CardExpirationDate from './CardAddPageComponents/CardExpirationDate';
 import CardOwner from './CardAddPageComponents/CardOwner';
@@ -41,17 +42,19 @@ function CardAddPage(props) {
       <PageTitle title="카드추가" />
       <Card isEmpty={false} cardNumbers={cardNumbers} />
       {/* 카드 번호  */}
-      <CardNumber cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
-      {/* 만료일 */}
-      <CardExpirationDate cardNumbers={cardNumbers} onChange={handleOnChange} />
-      {/* 카드 소유자 이름 */}
-      <CardOwner cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
-      {/* 보안 코드  */}
-      <CVC cardNumbers={cardNumbers} onChange={handleOnChange} />
-      {/* 카드 비밀번호 */}
-      <CardPassword cardNumbers={cardNumbers} onChange={handleOnChange} />
-      {/* 다음 버튼  */}
-      <NextPageButton />
+      <CardInputForm>
+        <CardNumber cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
+        {/* 만료일 */}
+        <CardExpirationDate cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
+        {/* 카드 소유자 이름 */}
+        <CardOwner cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
+        {/* 보안 코드  */}
+        <CVC cardNumbers={cardNumbers} onChange={handleOnChange} />
+        {/* 카드 비밀번호 */}
+        <CardPassword cardNumbers={cardNumbers} onChange={handleOnChange} />
+        {/* 다음 버튼  */}
+        <NextPageButton text="다음" />
+      </CardInputForm>
     </div>
   );
 }

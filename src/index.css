@@ -387,3 +387,11 @@ input::-webkit-inner-spin-button {
   font-size: 20px;
   cursor: pointer;
 }
+
+.next-page-button {
+  cursor: pointer;
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+}

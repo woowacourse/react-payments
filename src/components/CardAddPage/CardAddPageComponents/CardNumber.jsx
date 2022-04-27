@@ -1,7 +1,9 @@
 import React from 'react';
 
 function CardNumber({ cardNumbers, setCardNumbers }) {
-  const handleOnChange = (event) => {
+  const handleOnInput = (event) => {
+    event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+
     let { value, name } = event.target;
 
     if (value.length > 4) {
@@ -12,9 +14,9 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
       ...cardNumbers,
       [name]: value,
     });
-
-    console.log(cardNumbers);
   };
+
+  // form submit에서 minLength에 대한 validation 필요
 
   return (
     <div className="input-container">
@@ -23,30 +25,34 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
         <input
           name="number1"
           className="input-basic"
-          type="number"
-          onChange={handleOnChange}
+          type="text"
+          onInput={handleOnInput}
           value={cardNumbers.number1}
+          required
         />
         <input
           name="number2"
           className="input-basic"
-          type="number"
-          onChange={handleOnChange}
+          type="text"
+          onInput={handleOnInput}
           value={cardNumbers.number2}
+          required
         />
         <input
           name="number3"
-          className="input-basic input-security"
-          type="number"
-          onChange={handleOnChange}
+          className="input-basic"
+          type="password"
+          onInput={handleOnInput}
           value={cardNumbers.number3}
+          required
         />
         <input
           name="number4"
-          className="input-basic input-security"
-          type="number"
-          onChange={handleOnChange}
+          className="input-basic"
+          type="password"
+          onInput={handleOnInput}
           value={cardNumbers.number4}
+          required
         />
       </div>
     </div>

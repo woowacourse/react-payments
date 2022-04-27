@@ -1,9 +1,11 @@
 import React from 'react';
 
-function NextPageButton(props) {
+function NextPageButton({ text }) {
   return (
     <div className="button-box">
-      <span className="button-text">다음</span>
+      <button type="submit" className="button-text next-page-button">
+        {text}
+      </button>
     </div>
   );
 }
