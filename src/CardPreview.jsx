@@ -1,31 +1,85 @@
 import React from "react";
+import styled from "styled-components";
+
+const CardContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 10px 0;
+`;
+
+const SmallCard = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 213px;
+  min-height: 133px;
+  padding: 14px 16px;
+
+  background: #94dacd;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+
+  font-size: 10px;
+  line-height: 12px;
+  vertical-align: middle;
+  font-weight: 400;
+`;
+
+const CardName = styled.p`
+  margin-bottom: 20px;
+`;
+
+const CardChip = styled.div`
+  width: 40px;
+  height: 26px;
+
+  background: #cbba64;
+  border-radius: 4px;
+
+  margin-bottom: 15px;
+`;
+
+const CardNumber = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10px;
+  margin-bottom: 12px;
+`;
+
+const CardBottomSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 10px;
+`;
+
+const CardHolderName = styled.p`
+  width: 45%;
+  word-wrap: break-word;
+`;
+
+const CardExpireDate = styled.p``;
 
 export default function CardPreview({ cardNumber, holderName, expireDate }) {
   return (
-    <div className="card-box">
-      <div className="small-card">
-        <div className="card-top">
-          <span className="card-text">클린카드</span>
-        </div>
-        <div className="card-middle">
-          <div className="small-card__chip"></div>
-        </div>
-        <div className="card-bottom">
-          <div className="card-bottom__number">
-            <span className="card-text">
-              {cardNumber[0]} - {cardNumber[1]} -{" "}
-              {"•".repeat(cardNumber[2].length)} -{" "}
-              {"•".repeat(cardNumber[2].length)}
-            </span>
-          </div>
-          <div className="card-bottom__info">
-            <span className="card-text holder-name">{holderName}</span>
-            <span className="card-text">
-              {expireDate[0]} / {expireDate[1]}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <CardContainer>
+      <SmallCard>
+        <CardName>클린카드</CardName>
+        <CardChip />
+        <CardNumber>
+          {cardNumber[0]} {cardNumber[1]} {"•".repeat(cardNumber[2].length)}{" "}
+          {"•".repeat(cardNumber[3].length)}
+        </CardNumber>
+        <CardBottomSection>
+          <CardHolderName>{holderName}</CardHolderName>
+          <CardExpireDate>
+            {expireDate[0]} / {expireDate[1]}
+          </CardExpireDate>
+        </CardBottomSection>
+      </SmallCard>
+    </CardContainer>
   );
 }
