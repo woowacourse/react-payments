@@ -1,5 +1,5 @@
 import React from "react";
-import AddCardPage from ".";
+import AddCardPage from "./AddCardPage";
 
 export default {
   title: "AddCardPage",

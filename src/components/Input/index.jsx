@@ -16,6 +16,7 @@ const Input = ({
   maxLength,
   value,
   textAlign = "center",
+  onChange,
 }) => {
   return (
     <Container
@@ -26,6 +27,7 @@ const Input = ({
       maxLength={maxLength}
       value={value}
       textAlign={textAlign}
+      onChange={onChange}
     />
   );
 };

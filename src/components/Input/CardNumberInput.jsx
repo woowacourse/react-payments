@@ -1,16 +1,47 @@
 import Input from ".";
 import styled from "styled-components";
 
-const CardNumberInput = (props) => {
+const CardNumberInput = ({
+  onChangeFirstCardNumber,
+  onChangeSecondCardNumber,
+  onChangeThirdCardNumber,
+  onChangeFourthCardNumber,
+  firstCardNumber,
+  secondCardNumber,
+  thirdCardNumber,
+  fourthCardNumber,
+}) => {
   return (
     <Container>
-      <Input size="medium" textAlign="right" value={1234} />
+      <Input
+        size="medium"
+        textAlign="right"
+        value={firstCardNumber}
+        onChange={onChangeFirstCardNumber}
+        maxLength={4}
+      />
       <DashContainer>-</DashContainer>
-      <Input size="medium" value={5678} />
+      <Input
+        size="medium"
+        value={secondCardNumber}
+        onChange={onChangeSecondCardNumber}
+        maxLength={4}
+      />
       <DashContainer>-</DashContainer>
-      <Input size="medium" value={1234} />
+      <Input
+        size="medium"
+        value={thirdCardNumber}
+        onChange={onChangeThirdCardNumber}
+        maxLength={4}
+      />
       <DashContainer>-</DashContainer>
-      <Input size="medium" textAlign="left" value={1234} />
+      <Input
+        size="medium"
+        textAlign="left"
+        value={fourthCardNumber}
+        onChange={onChangeFourthCardNumber}
+        maxLength={4}
+      />
     </Container>
   );
 };
