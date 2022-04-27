@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '../Input';
 import PropTypes from 'prop-types';
 import { isAlphabetOrSpace } from '../../utils/validations';
@@ -11,6 +11,8 @@ function InputForm({
   cardInput: { cardNumber, expirationDate, ownerName, securityCode, password },
   cardInputDispatch,
 }) {
+  const [isComplete, setIsComplete] = useState(false);
+
   const onChangeCardNumber = (key, e) => {
     const {
       target: { value: cardNumber, maxLength },
@@ -86,6 +88,16 @@ function InputForm({
     }
   };
 
+  useEffect(() => {
+    try {
+      if (checkFormCompletion({ cardNumber, expirationDate, securityCode, password })) {
+        setIsComplete(true);
+      }
+    } catch (e) {
+      setIsComplete(false);
+    }
+  }, [cardNumber, expirationDate, ownerName, securityCode, password]);
+
   return (
     <form onSubmit={onClickNextButton}>
       <Input labelTitle="카드번호">
@@ -134,6 +146,7 @@ function InputForm({
           maxLength={3}
           required
         />
+        <div className="help-content">?</div>
       </Input>
       <Input labelTitle="카드 비밀번호" inputSize="w-50">
         {Object.keys(password).map(stateKey => (
@@ -149,12 +162,12 @@ function InputForm({
         ))}
         <div className="inputted-password">*</div>
         <div className="inputted-password">*</div>
-        {/* <input className="input-basic" type="password" disabled /> */}
-        {/* <input className="input-basic" type="password" disabled /> */}
       </Input>
-      <button className="button-box">
-        <span className="button-text">다음</span>
-      </button>
+      {isComplete && (
+        <button className="button-box">
+          <span className="button-text">다음</span>
+        </button>
+      )}
     </form>
   );
 }
