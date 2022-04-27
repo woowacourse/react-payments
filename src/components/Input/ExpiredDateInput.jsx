@@ -4,9 +4,9 @@ import styled from "styled-components";
 const ExpiredDateInput = (props) => {
   return (
     <Container>
-      <Input type="text" width="65" textAlign="right" placeholder={"MM"} />
+      <Input type="text" size="medium" textAlign="right" placeholder={"MM"} />
       <SlashContainer>/</SlashContainer>
-      <Input type="text" width="65" textAlign="left" placeholder={"YY"} />
+      <Input type="text" size="medium" textAlign="left" placeholder={"YY"} />
     </Container>
   );
 };

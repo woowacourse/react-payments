@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const Header = (props) => {
   return (
@@ -10,6 +11,10 @@ const Header = (props) => {
       <Title>{props.title}</Title>
     </Container>
   );
+};
+
+Header.propTypes = {
+  title: PropTypes.string,
 };
 
 const Container = styled.header`

@@ -4,13 +4,13 @@ import styled from "styled-components";
 const CardNumberInput = (props) => {
   return (
     <Container>
-      <Input width="96" textAlign="right" value={1234} />
+      <Input size="medium" textAlign="right" value={1234} />
       <DashContainer>-</DashContainer>
-      <Input width="45" value={5678} />
+      <Input size="medium" value={5678} />
       <DashContainer>-</DashContainer>
-      <Input width="45" value={1234} />
+      <Input size="medium" value={1234} />
       <DashContainer>-</DashContainer>
-      <Input width="96" textAlign="left" value={1234} />
+      <Input size="medium" textAlign="left" value={1234} />
     </Container>
   );
 };

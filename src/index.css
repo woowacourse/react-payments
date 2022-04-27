@@ -13,9 +13,9 @@ body {
 }
 
 main {
-  background-color: grey;
-  width: 375px;
-  height: 701px;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
 }
 
 code {

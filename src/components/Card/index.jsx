@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const Card = ({ name, expiredDate, cardName, cardNumber }) => {
   return (
@@ -26,6 +27,13 @@ const Card = ({ name, expiredDate, cardName, cardNumber }) => {
       </EmptyCard>
     </Container>
   );
+};
+
+Card.propTypes = {
+  cardName: PropTypes.string,
+  name: PropTypes.string,
+  expiredDate: PropTypes.string,
+  CardNumber: PropTypes.array,
 };
 
 const Container = styled.div`

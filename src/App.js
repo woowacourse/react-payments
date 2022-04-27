@@ -1,10 +1,8 @@
-import Card from "./components/Card";
-import Header from "./components/Header";
+import AddCardPage from "./components/Page/AddCardPage";
 const App = () => {
   return (
     <main>
-      <Header />
-      <Card cardNumber={[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]} />
+      <AddCardPage />
     </main>
   );
 };

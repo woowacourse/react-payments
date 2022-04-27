@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Label from "../Label/index";
 import ErrorMessage from "../ErrorMessage/index";
+import PropTypes from "prop-types";
 
 const FieldSet = ({ id, description, children, errorMessage }) => {
   return (
@@ -11,6 +12,13 @@ const FieldSet = ({ id, description, children, errorMessage }) => {
       <ErrorMessage message={errorMessage} />
     </Container>
   );
+};
+
+FieldSet.propTypes = {
+  id: PropTypes.string,
+  description: PropTypes.string,
+  errorMessage: PropTypes.string,
+  children: PropTypes.element,
 };
 
 const Container = styled.fieldset`
