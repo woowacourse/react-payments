@@ -11,6 +11,7 @@ import {
   checkNumberOnly,
   checkOwnerName,
   checkSecureCode,
+  checkPassword,
 } from "../../../validation";
 
 import Card from "../../Card";
@@ -43,6 +44,15 @@ const AddCardPage = () => {
     validation: checkSecureCode,
   });
 
+  const [firstPassword, isFirstPasswordError, onChangeFirstPassword] =
+    useInputValue({
+      validation: checkPassword,
+    });
+
+  const [secondPassword, isSecondPasswordError, onChangeSecondPassword] =
+    useInputValue({
+      validation: checkPassword,
+    });
   return (
     <Container>
       <Header title="카드 추가" />
@@ -76,7 +86,12 @@ const AddCardPage = () => {
         secureCode={secureCode}
         onChangeSecureCode={onChangeSecureCode}
       />
-      <Password />
+      <Password
+        firstPassword={firstPassword}
+        onChangeFirstPassword={onChangeFirstPassword}
+        secondPassword={secondPassword}
+        onChangeSecondPassword={onChangeSecondPassword}
+      />
       <Button></Button>
     </Container>
   );

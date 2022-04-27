@@ -4,7 +4,12 @@ import FieldSet from "../../FieldSet";
 import Input from "../../Input";
 import DotMark from "../../DotMark";
 
-const Password = () => {
+const Password = ({
+  firstPassword,
+  secondPassword,
+  onChangeFirstPassword,
+  onChangeSecondPassword,
+}) => {
   return (
     <FieldSet
       id="password"
@@ -13,8 +18,22 @@ const Password = () => {
     >
       {
         <PasswordInputContainer>
-          <Input type="password" id="password" size="small" maxLength={1} />
-          <Input type="password" id="password" size="small" maxLength={1} />
+          <Input
+            type="password"
+            id="password"
+            size="small"
+            maxLength={1}
+            value={firstPassword}
+            onChange={onChangeFirstPassword}
+          />
+          <Input
+            type="password"
+            id="password"
+            size="small"
+            maxLength={1}
+            value={secondPassword}
+            onChange={onChangeSecondPassword}
+          />
           <DotMark />
           <DotMark />
         </PasswordInputContainer>

@@ -19,3 +19,7 @@ export const checkOwnerName = (name) => {
 export const checkSecureCode = (secureCode) => {
   return checkNumberOnly(secureCode) && secureCode.length === 3;
 };
+
+export const checkPassword = (password) => {
+  return checkNumberOnly(password) && password.length === 1;
+};
