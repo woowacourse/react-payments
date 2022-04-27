@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import PropTypes from 'prop-types';
 
-const getButtonSizeTemplate = size => {
+const getButtonSize = size => {
   switch (size) {
     case 'small':
       return { height: '25px', fontSize: '14px' };
@@ -19,11 +19,12 @@ export default function Button({
   color,
   content,
   fontWeight,
+  margin,
   shape,
   size,
   onClickFunc,
 }) {
-  const buttonStyle = getButtonSizeTemplate(size);
+  const buttonStyle = getButtonSize(size);
   const StyledButton = styled.button`
     background: ${bgColor};
     border: ${border};
@@ -32,6 +33,8 @@ export default function Button({
     font-size: ${buttonStyle.fontSize};
     font-weight: ${fontWeight};
     height: ${buttonStyle.height};
+    margin: ${margin?.t || '0'} ${margin?.r || '0'} ${margin?.b || '0'}
+      ${margin?.l || '0'};
     width: ${shape === 'circle' && buttonStyle.height};
   `;
 
@@ -53,6 +56,7 @@ Button.propTypes = {
   color: PropTypes.string,
   content: PropTypes.node.isRequired,
   fontWeight: PropTypes.string,
+  margin: PropTypes.object,
   shape: PropTypes.string,
   size: PropTypes.string,
   onClickFunc: PropTypes.func.isRequired,
