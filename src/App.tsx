@@ -2,14 +2,15 @@ import React, { useState } from "react";
 
 import CardInfoForm from "./components/CardInfoForm";
 import REGEXP from "./contants/regexp";
-
 interface CardInfo {
-  cardNumbers: string[]; // 4자리 이면 좋겠다.
+  cardNumbers: CardNumbers; // 4자리 이면 좋겠다.
   expiredDate: ExpiredDate;
   userName: string;
   securityCode: number | null; // 3자리
   password: number[];
 }
+
+type CardNumbers = [string, string, string, string];
 
 interface ExpiredDate {
   month: number | null;
@@ -17,7 +18,7 @@ interface ExpiredDate {
 }
 
 const initialCardInfo: CardInfo = {
-  cardNumbers: [],
+  cardNumbers: ["", "", "", ""],
   expiredDate: { month: null, year: null },
   userName: "",
   securityCode: null,
@@ -30,9 +31,10 @@ function App() {
   const onChangeCardNumber = (e: React.ChangeEvent<HTMLInputElement>, index) => {
     const inputValue = e.target.value;
 
+    console.log(e.target);
     if (inputValue === "" || REGEXP.NUMBER.test(inputValue)) {
       setCardInfo(prevCardInfo => {
-        const newCardNumbers = [...prevCardInfo.cardNumbers];
+        const newCardNumbers: CardNumbers = [...prevCardInfo.cardNumbers];
 
         newCardNumbers[index] = inputValue;
 

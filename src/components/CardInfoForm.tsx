@@ -5,7 +5,7 @@ import CardNumber from "./CardNumber";
 export default function CardInfoForm({ cardInfo, onChangeCardNumber }) {
   return (
     <div>
-      <CardNumber cardInfo={cardInfo} onChange={onChangeCardNumber} />
+      <CardNumber cardNumbers={cardInfo.cardNumbers} onChange={onChangeCardNumber} />
     </div>
   );
 }
