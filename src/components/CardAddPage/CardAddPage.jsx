@@ -16,7 +16,7 @@ function CardAddPage(props) {
     <div className="app">
       <PrevPageButton />
       <PageTitle title="카드추가" />
-      <Card />
+      <Card isEmpty={false} />
       {/* 카드 번호  */}
       <CardNumber />
       {/* 만료일 */}

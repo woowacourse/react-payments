@@ -1,10 +1,12 @@
 import React from 'react';
 
-function Card({ isRegistered, handleCardAdd }) {
+function Card({ isEmpty, handleCardAdd }) {
   return (
     <div className="card-box">
       <div className="empty-card" onClick={handleCardAdd}>
-        {isRegistered ? (
+        {isEmpty ? (
+          '+'
+        ) : (
           <>
             <div className="card-top"></div>
             <div className="card-middle">
@@ -17,8 +19,6 @@ function Card({ isRegistered, handleCardAdd }) {
               </div>
             </div>
           </>
-        ) : (
-          '+'
         )}
       </div>
     </div>

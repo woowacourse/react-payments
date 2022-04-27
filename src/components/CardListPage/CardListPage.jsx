@@ -11,9 +11,9 @@ function CardListPage({ setPage }) {
     <div className="app">
       <PageTitle title="보유카드" />
       {/* 등록된 카드 map 돌리기 */}
-      <Card isRegistered={true} />
+      <Card isEmpty={false} />
       {/* 빈 카드 */}
-      <Card isRegistered={false} handleCardAdd={handleCardAdd} />
+      <Card isEmpty={true} handleCardAdd={handleCardAdd} />
     </div>
   );
 }
