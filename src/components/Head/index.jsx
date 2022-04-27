@@ -8,7 +8,6 @@ const HeadContainer = styled.div`
 
 const BackButton = styled.button`
   background-color: #fff;
-  border: none;
 `;
 
 const Title = styled.span`
