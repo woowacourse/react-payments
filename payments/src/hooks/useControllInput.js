@@ -1,11 +1,11 @@
 import { useCallback, useRef } from "react";
 
-const useControllInput = ({ maxlength, isNumber }) => {
+const useControllInput = ({ maxLength, isNumber }) => {
   const itemRef = useRef([]);
 
   const onChange = useCallback((e) => {
     const limitInputLength = (e) => {
-      e.target.value = e.target.value.substring(0, maxlength);
+      e.target.value = e.target.value.substring(0, maxLength);
     };
 
     const autoFocus = (e) => {
@@ -17,7 +17,7 @@ const useControllInput = ({ maxlength, isNumber }) => {
     if (isNumber) {
       e.target.value = e.target.value.replace(/[^\d]/g, "").replace(".", "");
     }
-    if (e.target.value.length >= maxlength) {
+    if (e.target.value.length >= maxLength) {
       limitInputLength(e);
       autoFocus(e);
     }

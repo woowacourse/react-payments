@@ -7,6 +7,7 @@ export const Input = forwardRef((props, ref) => (
     onChange={props.onChange}
     type={props.type}
     maxLength={props.maxLength}
+    value={props.value}
     placeholder={props.placeholder}
     className="input__contents"
   />
