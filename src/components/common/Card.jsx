@@ -1,14 +1,6 @@
 import React from 'react';
 
 function Card({ isEmpty, handleCardAdd, cardNumbers }) {
-  const processing = (cardNumbers) => {
-    console.log(cardNumbers);
-    if (cardNumbers.owner === '') {
-      return 'NAME';
-    }
-    return cardNumbers.owner.slice(15);
-  };
-
   return (
     <div className="card-box">
       <div className="empty-card" onClick={handleCardAdd}>
