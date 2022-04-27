@@ -13,9 +13,10 @@ const StyledInput = styled.input`
   color: #737373;
 `;
 
-function Input({ width, type, maxLength, isCenter, placeholder, onChange }) {
+function Input({ value, width, type, maxLength, isCenter, placeholder, onChange }) {
   return (
     <StyledInput
+      value={value}
       width={width}
       type={type}
       maxLength={maxLength}

@@ -30,6 +30,7 @@ const CardNumberContainer = styled.p`
   display: flex;
   justify-content: center;
   gap: 5px;
+  height: 10px;
   margin-top: 15px;
   font-weight: 700;
   font-size: 13px;
@@ -66,7 +67,7 @@ function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
       </CardNumberContainer>
       <CardBottomContainer>
         <span>{ownerName || 'NAME'}</span>
-        <span>{expiredDate ? `${month}/${year}` : 'MM/YY'}</span>
+        <span>{month && year ? `${month}/${year}` : 'MM/YY'}</span>
       </CardBottomContainer>
     </CardContainer>
   );

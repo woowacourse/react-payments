@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Input from '../Input';
 import InputLabel from '../InputLabel';
@@ -5,7 +6,7 @@ import InputLabel from '../InputLabel';
 const LabeledInputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 7px;
 `;
 
 const LabeledInputHeader = styled.div`
@@ -29,19 +30,27 @@ const LengthChecker = styled.p`
 
 function LabeledInput({
   value,
+  handleInputChange,
   headerWidth,
   isShowLengthChecker,
   countInput,
   inputProps,
   inputLabelProps,
 }) {
+  const [tempValue, setTempValue] = useState('');
+
+  const onChange = ({ target }) => {
+    setTempValue(target.value);
+  };
+
   return (
     <LabeledInputContainer>
       <LabeledInputHeader width={headerWidth}>
         <InputLabel {...inputLabelProps} />
         {isShowLengthChecker ? (
           <LengthChecker>
-            <span>{value.length}</span> / <span>{inputProps.maxLength}</span>
+            <span>{value ? value.length : tempValue.length}</span> /{' '}
+            <span>{inputProps.maxLength}</span>
           </LengthChecker>
         ) : (
           ''
@@ -49,7 +58,12 @@ function LabeledInput({
       </LabeledInputHeader>
       <LabeledInputBody>
         {Array.from({ length: countInput }).map((_, index) => (
-          <Input key={index} {...inputProps} />
+          <Input
+            key={index}
+            value={value || tempValue}
+            onChange={handleInputChange || onChange}
+            {...inputProps}
+          />
         ))}
       </LabeledInputBody>
     </LabeledInputContainer>
