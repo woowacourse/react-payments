@@ -5,8 +5,8 @@ function CardExpirationDate({ cardNumbers, setCardNumbers }) {
     if (event.target.value >= 2 && event.target.value <= 9) {
       event.target.value = '0' + event.target.value;
     }
-
-    event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+    event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(regExp, '');
 
     let { value, name } = event.target;
 
@@ -21,7 +21,8 @@ function CardExpirationDate({ cardNumbers, setCardNumbers }) {
   };
 
   const handleYearOnInput = (event) => {
-    event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+    event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(regExp, '');
 
     let { value, name } = event.target;
 

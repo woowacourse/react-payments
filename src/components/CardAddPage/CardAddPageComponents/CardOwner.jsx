@@ -1,11 +1,15 @@
 import React from 'react';
 
 function CardOwner({ cardNumbers, setCardNumbers }) {
-  const handleOnChange = (event) => {
-    const { value, name } = event.target;
+  const handleOnInput = (event) => {
+    // event.target.value = event.target.value.replace(/[^A-Za-z.]/g, '').replace(/(\..*)\./g, '$1');
+    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+    event.target.value = event.target.value.replace(/[^A-Za-z.]/g, '').replace(regExp, '');
+
+    let { value, name } = event.target;
 
     if (value.length > 30) {
-      value.slice(0, 30);
+      value = value.slice(0, 30);
     }
 
     setCardNumbers({
@@ -26,9 +30,7 @@ function CardOwner({ cardNumbers, setCardNumbers }) {
         name="owner"
         type="text"
         className="input-basic"
-        minLength="1"
-        maxLength="30"
-        onChange={handleOnChange}
+        onInput={handleOnInput}
         value={cardNumbers.owner}
       />
     </div>

@@ -2,7 +2,9 @@ import React from 'react';
 
 function CardNumber({ cardNumbers, setCardNumbers }) {
   const handleOnInput = (event) => {
-    event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');
+    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+
+    event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(regExp, '');
 
     let { value, name } = event.target;
 
