@@ -177,6 +177,12 @@ input {
   font-weight: 400;
 }
 
+.card-number-flex {
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+}
+
 /* input */
 .input-container {
   margin: 16px 0;
