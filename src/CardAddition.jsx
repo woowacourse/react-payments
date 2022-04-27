@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Card from './components/Card';
 import PageTitle from './components/PageTitle';
 import styled from 'styled-components';
@@ -8,6 +8,7 @@ import CardOwner from './components/CardOwner';
 import CardCvc from './components/CardCvc';
 import CardPassword from './components/CardPassword';
 import MoveButton from './components/MoveButton';
+import CardContext from './CardContext';
 
 const CardAdditionContainer = styled.div`
   height: 100%;
@@ -15,10 +16,12 @@ const CardAdditionContainer = styled.div`
 `;
 
 function CardAddition() {
+  const { cardNumber } = useContext(CardContext);
+
   return (
     <CardAdditionContainer>
       <PageTitle hasPrevButton={true} title="카드 추가" />
-      <Card />
+      <Card cardNumber={cardNumber} />
       <CardNumber />
       <CardExpiration />
       <CardOwner />

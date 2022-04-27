@@ -1,5 +1,5 @@
 import React from 'react';
-import MoveButton from './MoveButton';
+import MoveButton from '../components/MoveButton';
 
 export default {
   title: 'CardAddition/MoveButton',

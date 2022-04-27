@@ -37,11 +37,13 @@ const CardBottom = styled(CardTop)`
 `;
 
 const CardText = styled.span`
-  margin: 0 16px;
+  margin: 0 10px;
   font-size: 14px;
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
+  width: 30px;
+  display: inline-block;
 `;
 
 const SmallCardChip = styled.div`
@@ -73,7 +75,10 @@ export default function Card({ cardName, cardNumber, cardOwner, cardExpiration }
       </CardMiddle>
       <CardBottom>
         <CardBottomNumber>
-          <CardText>{cardNumber}</CardText>
+          <CardText>{cardNumber[0]}</CardText>
+          <CardText>{cardNumber[1]}</CardText>
+          <CardText>{'•'.repeat(cardNumber[2].length)}</CardText>
+          <CardText>{'•'.repeat(cardNumber[3].length)}</CardText>
         </CardBottomNumber>
         <CardBottomInfo>
           <CardText>{cardOwner}</CardText>
