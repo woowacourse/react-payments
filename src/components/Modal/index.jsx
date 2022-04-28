@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const Modal = ({ children, onClickDimmed }) => {
   return (
@@ -8,6 +9,11 @@ const Modal = ({ children, onClickDimmed }) => {
       {children}
     </Container>
   );
+};
+
+Modal.propTypes = {
+  children: PropTypes.element,
+  onClickDimmed: PropTypes.func,
 };
 
 const Dimmed = styled.div`

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import Selector from "./Selector";
 
 const Palette = ({ onClickCardSelector }) => {
@@ -51,6 +52,10 @@ const Palette = ({ onClickCardSelector }) => {
       </SelectorContainer>
     </Container>
   );
+};
+
+Palette.propTypes = {
+  onClickCardSelector: PropTypes.func,
 };
 
 const Container = styled.div`

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import { ColorType } from "../../constant";
 
 const Selector = ({ color, name, onClick }) => {
@@ -9,6 +10,12 @@ const Selector = ({ color, name, onClick }) => {
       <DescriptionContainer>{name}</DescriptionContainer>
     </Container>
   );
+};
+
+Selector.propTypes = {
+  color: PropTypes.string,
+  name: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 const Container = styled.div`
