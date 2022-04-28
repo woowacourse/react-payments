@@ -5,17 +5,21 @@ import "./index.scss";
 import InputLabel from "../elements/label";
 import { Fragment } from "react";
 
+const INPUT_LENGTH = 2;
+const NUM_OF_INPUT = 2;
+const BACKSPACE_KEY_CODE = 8;
+
 const ExpiredDateInput = ({ state, updateForm }) => {
-  const { itemRef, controllInput, autoFocusBackward } = useControllInput({
-    maxLength: 2,
-    isNumber: true,
-  });
+  const { itemRef, controllInput, autoFocusBackward, blockCharacter } =
+    useControllInput({
+      maxLength: INPUT_LENGTH,
+    });
 
   return (
     <div className="expire__input__container">
       <InputLabel>만료일</InputLabel>
       <InputContainer>
-        {new Array(2).fill().map((_, idx) => (
+        {new Array(NUM_OF_INPUT).fill().map((_, idx) => (
           <Fragment key={idx}>
             <Input
               placeholder={idx === 0 ? "MM" : "YY"}
@@ -26,13 +30,14 @@ const ExpiredDateInput = ({ state, updateForm }) => {
               }}
               onChange={({ target }) => {
                 controllInput(target);
+                blockCharacter(target);
                 updateForm({
                   type: "expiredDate",
                   payload: { value: target.value, index: idx },
                 });
               }}
               onKeyDown={(e) => {
-                if (e.keyCode === 8 && e.target.value === "") {
+                if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {
                   autoFocusBackward(e.target);
                 }
               }}

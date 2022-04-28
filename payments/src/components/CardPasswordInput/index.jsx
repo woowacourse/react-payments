@@ -3,16 +3,21 @@ import { Input } from "../elements/Input";
 import InputContainer from "../elements/InputContainer";
 import InputLabel from "../elements/label";
 import "./index.scss";
+
+const INPUT_LENGTH = 1;
+const NUM_OF_INPUT = 2;
+const BACKSPACE_KEY_CODE = 8;
+
 const CardPasswordInput = ({ state, updateForm }) => {
-  const { itemRef, controllInput, autoFocusBackward } = useControllInput({
-    maxLength: 1,
-    isNumber: true,
-  });
+  const { itemRef, controllInput, autoFocusBackward, blockCharacter } =
+    useControllInput({
+      maxLength: INPUT_LENGTH,
+    });
   return (
     <div className="password__input__container">
       <InputLabel>카드비밀번호</InputLabel>
       <div className="password__inputs">
-        {new Array(2).fill().map((_, idx) => (
+        {new Array(NUM_OF_INPUT).fill().map((_, idx) => (
           <div className="password__input" key={idx}>
             <InputContainer>
               <Input
@@ -22,6 +27,7 @@ const CardPasswordInput = ({ state, updateForm }) => {
                 }}
                 value={state[idx]}
                 onChange={({ target }) => {
+                  blockCharacter(target);
                   controllInput(target);
                   updateForm({
                     type: "password",
@@ -29,7 +35,10 @@ const CardPasswordInput = ({ state, updateForm }) => {
                   });
                 }}
                 onKeyDown={(e) => {
-                  if (e.keyCode === 8 && e.target.value === "") {
+                  if (
+                    e.keyCode === BACKSPACE_KEY_CODE &&
+                    e.target.value === ""
+                  ) {
                     autoFocusBackward(e.target);
                   }
                 }}

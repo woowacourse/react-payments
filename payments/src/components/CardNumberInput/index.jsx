@@ -5,19 +5,24 @@ import useControllInput from "../../hooks/useControllInput";
 import InputLabel from "../elements/label";
 import { Fragment } from "react";
 
+const INPUT_LENGTH = 4;
+const NUM_OF_INPUT = 4;
+const BACKSPACE_KEY_CODE = 8;
+
 const CardNumberInput = ({ state, updateForm }) => {
-  const { itemRef, controllInput, autoFocusBackward } = useControllInput({
-    maxLength: 4,
-    isNumber: true,
-  });
+  const { itemRef, controllInput, autoFocusBackward, blockCharacter } =
+    useControllInput({
+      maxLength: INPUT_LENGTH,
+    });
   return (
     <div className="card-number__input__container">
       <InputLabel>카드 번호</InputLabel>
       <InputContainer>
-        {new Array(4).fill().map((_, idx) => (
+        {new Array(NUM_OF_INPUT).fill().map((_, idx) => (
           <Fragment key={idx}>
             <Input
               onChange={({ target }) => {
+                blockCharacter(target);
                 controllInput(target);
                 updateForm({
                   type: "cardNumber",
@@ -25,16 +30,16 @@ const CardNumberInput = ({ state, updateForm }) => {
                 });
               }}
               onKeyDown={(e) => {
-                if (e.keyCode === 8 && e.target.value === "") {
+                if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {
                   autoFocusBackward(e.target);
                 }
               }}
               value={state[idx]}
               ref={(el) => (itemRef.current[idx] = el)}
               type={idx > 1 ? "password" : "text"}
-              maxLength="4"
+              maxLength={INPUT_LENGTH}
             />
-            {idx === 3 ? "" : "-"}
+            {idx === NUM_OF_INPUT - 1 ? "" : "-"}
           </Fragment>
         ))}
       </InputContainer>

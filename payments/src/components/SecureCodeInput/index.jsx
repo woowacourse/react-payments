@@ -4,10 +4,11 @@ import "./index.scss";
 import InputLabel from "../elements/label";
 import useControllInput from "../../hooks/useControllInput";
 
+const INPUT_LENGTH = 3;
+
 const SecureCodeInput = ({ state, updateForm }) => {
-  const { itemRef, controllInput } = useControllInput({
-    maxLength: 3,
-    isNumber: true,
+  const { itemRef, controllInput, blockCharacter } = useControllInput({
+    maxLength: INPUT_LENGTH,
   });
   return (
     <div className="secure__input__container">
@@ -21,6 +22,7 @@ const SecureCodeInput = ({ state, updateForm }) => {
           maxLength="3"
           value={state}
           onChange={({ target }) => {
+            blockCharacter(target);
             controllInput(target);
             updateForm({
               type: "secureCode",

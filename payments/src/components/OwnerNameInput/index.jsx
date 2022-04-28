@@ -4,10 +4,11 @@ import InputContainer from "../elements/InputContainer";
 import InputLabel from "../elements/label";
 import "./index.scss";
 
+const INPUT_LENGTH = 30;
+
 const OwnerNameInput = ({ state, updateForm }) => {
   const { itemRef, controllInput } = useControllInput({
-    maxLength: 30,
-    isNumber: false,
+    maxLength: INPUT_LENGTH,
   });
   return (
     <div className="ownername__input__container">
