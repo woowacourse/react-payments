@@ -13,5 +13,5 @@ const Template = (args) => <CardSecurityField {...args} />;
 
 export const DefaultCardSecurityField = Template.bind({});
 DefaultCardSecurityField.args = {
-  securityCode: '•••',
+  securityCode: '123',
 };

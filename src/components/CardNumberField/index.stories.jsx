@@ -13,5 +13,5 @@ const Template = (args) => <CardNumberField {...args} />;
 
 export const DefaultCardNumberField = Template.bind({});
 DefaultCardNumberField.args = {
-  cardNumber: '1111-2222-••••-••••',
+  cardNumber: ['1234', '1234', '1234', '1234'],
 };

@@ -13,9 +13,9 @@ const Template = (args) => <Card {...args} />;
 
 export const Compy = Template.bind({});
 Compy.args = {
-  companyName: '콤피 카드',
-  cardNumber: '1111-2222-••••-••••',
-  userName: '류콤피',
+  companyName: '콤피 카드 🦖',
+  cardNumber: ['1234', '1234', '1234', '1234'],
+  userName: 'COMPY RYU',
   expireMonth: '05',
   expireYear: '28',
 };

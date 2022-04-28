@@ -13,5 +13,5 @@ const Template = (args) => <CardPasswordField {...args} />;
 
 export const DefaultCardPasswordField = Template.bind({});
 DefaultCardPasswordField.args = {
-  cardPassword: '••',
+  cardPassword: '11',
 };
