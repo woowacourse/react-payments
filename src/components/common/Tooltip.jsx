@@ -5,14 +5,17 @@ import { TOOLTIP_TYPES } from '../../constants';
 const Tooltip = ({ type }) => {
   const [isHover, setIsHover] = useState(false);
 
+  const handleMouseEnter = () => setIsHover(true);
+  const handleMouseLeave = () => setIsHover(false);
+
   return (
     <div className="tooltip">
-      <TooltipIcon onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} />
+      <TooltipIcon onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
       {isHover && (
         <div
-          onMouseEnter={() => setIsHover(true)}
-          onMouseLeave={() => setIsHover(false)}
           className="tooltip-content"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           {TOOLTIP_TYPES[type]}
         </div>

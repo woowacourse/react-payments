@@ -4,11 +4,11 @@
 @import './modal.css';
 @import './utils.css';
 @import './tooltip.css';
+@import './palette.css';
 
 body {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   align-items: center;
   background-color: #dddddd;
   margin-top: 30px;
@@ -25,12 +25,13 @@ input {
 }
 
 .root {
-  background-color: #fff;
   width: 375px;
-  min-width: 375px;
   height: 700px;
+
   position: relative;
+
   border-radius: 15px;
+  background-color: #fff;
 }
 
 .app {
@@ -38,7 +39,7 @@ input {
   padding: 16px 24px;
 }
 
-.header-wrapper {
+.header-container {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -47,11 +48,12 @@ input {
 }
 
 .page-title {
+  display: flex;
+  align-items: center;
+
   font-weight: 500;
   font-size: 16px;
   line-height: 22px;
-  display: flex;
-  align-items: center;
 
   color: #383838;
 }
@@ -63,68 +65,4 @@ input {
 
   font-size: 12px;
   color: #525252;
-}
-
-.font-red {
-  color: #e24141;
-}
-
-.font-blue {
-  color: #547ce4;
-}
-
-.font-green {
-  color: #73bc6d;
-}
-
-.font-hot-pink {
-  color: #de59b9;
-}
-
-.font-mint {
-  color: #04c09e;
-}
-
-.font-pink {
-  color: #e76e9a;
-}
-
-.font-orange {
-  color: #f37d3b;
-}
-
-.font-yellow {
-  color: #fbcd58;
-}
-
-.bg-red {
-  background-color: #e24141;
-}
-
-.bg-blue {
-  background-color: #547ce4;
-}
-
-.bg-green {
-  background-color: #73bc6d;
-}
-
-.bg-hot-pink {
-  background-color: #de59b9;
-}
-
-.bg-mint {
-  background-color: #04c09e;
-}
-
-.bg-pink {
-  background-color: #e76e9a;
-}
-
-.bg-orange {
-  background-color: #f37d3b;
-}
-
-.bg-yellow {
-  background-color: #fbcd58;
 }

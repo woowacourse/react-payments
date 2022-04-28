@@ -1,6 +1,6 @@
 const Header = ({ title, children }) => {
   return (
-    <div className="header-wrapper">
+    <div className="header-container">
       {children}
       <h2 className="page-title">{title}</h2>
     </div>

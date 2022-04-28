@@ -18,6 +18,14 @@
   align-items: center;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.tracking-wide {
+  letter-spacing: 2px;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -68,12 +76,4 @@
 
 .w-5 {
   width: 5%;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.tracking-wide {
-  letter-spacing: 2px;
 }
