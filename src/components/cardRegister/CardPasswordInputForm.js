@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import { CARD_INFO_TYPES } from '../../reducer/types';
+
 import { InputBasic } from '../common/InputBasic';
 import { InputBox } from '../common/InputBox';
 import { InputContainer, InputTitle } from '../common/styled';
@@ -16,7 +18,7 @@ export const CardPasswordInputForm = ({
     }
 
     handlePasswordInput({
-      type: 'setPassword',
+      type: CARD_INFO_TYPES.SET_PASSWORD,
       payload: { key: name, password: e.nativeEvent.data },
     });
   };

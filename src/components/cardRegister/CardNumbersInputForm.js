@@ -3,6 +3,7 @@ import { createRef } from 'react';
 import { useRef } from 'react';
 
 import { MAX_LENGTH } from '../../constants/card';
+import { CARD_INFO_TYPES } from '../../reducer/types';
 
 import { InputBasic } from '../common/InputBasic';
 import { InputBox } from '../common/InputBox';
@@ -31,7 +32,7 @@ export const CardNumbersInputForm = ({
     }
 
     handleCardNumbersInput({
-      type: 'setCardNumber',
+      type: CARD_INFO_TYPES.SET_CARD_NUMBER,
       payload: { key: name, cardNumber: e.target.value },
     });
   };

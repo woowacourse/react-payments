@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { MAX_LENGTH } from '../../constants/card';
+import { CARD_INFO_TYPES } from '../../reducer/types';
 
 import { InputBasic } from '../common/InputBasic';
 import { InputContainer, InputTitle } from '../common/styled';
@@ -12,7 +13,7 @@ export const CardOwnerInputForm = ({ ownerName, handleOwnerNameInput }) => {
     }
 
     handleOwnerNameInput({
-      type: 'setOwnerName',
+      type: CARD_INFO_TYPES.SET_OWNER_NAME,
       payload: { ownerName: e.target.value },
     });
   };

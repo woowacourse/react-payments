@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { CARD_INFO_TYPES } from '../../reducer/types';
+
 import styled from 'styled-components';
 
 const GridColumnsStyle = styled.div`
@@ -36,7 +38,10 @@ export const CardSelectModal = ({
   handleCardTypeCheck,
 }) => {
   const handleCardTypeSelect = (cardType) => {
-    handleCardType({ type: 'setCardType', payload: { cardType } });
+    handleCardType({
+      type: CARD_INFO_TYPES.SET_CARD_TYPE,
+      payload: { cardType },
+    });
     handleCardTypeCheck(true);
     closeModal();
   };

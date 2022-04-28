@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import { CARD_INFO_TYPES } from '../../reducer/types';
+
 import { InputBasic } from '../common/InputBasic';
 import { InputBox } from '../common/InputBox';
 import { InputContainer, InputTitle } from '../common/styled';
@@ -27,7 +29,7 @@ export const CardExpireDateInputForm = ({
     }
 
     handleExpireDateInput({
-      type: 'setExpireDate',
+      type: CARD_INFO_TYPES.SET_EXPIRE_DATE,
       payload: { key: 'month', date: e.target.value },
     });
   };
@@ -38,7 +40,7 @@ export const CardExpireDateInputForm = ({
     }
 
     handleExpireDateInput({
-      type: 'setExpireDate',
+      type: CARD_INFO_TYPES.SET_EXPIRE_DATE,
       payload: { key: 'year', date: e.target.value },
     });
   };

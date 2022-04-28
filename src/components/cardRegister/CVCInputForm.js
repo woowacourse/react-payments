@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { MAX_LENGTH } from '../../constants/card';
+import { CARD_INFO_TYPES } from '../../reducer/types';
 
 import { InputBasic } from '../common/InputBasic';
 import { InputBox } from '../common/InputBox';
@@ -18,7 +19,10 @@ export const CVCInputForm = ({
       return;
     }
 
-    handleCVCInput({ type: 'setCVC', payload: { CVC: e.target.value } });
+    handleCVCInput({
+      type: CARD_INFO_TYPES.SET_CVC,
+      payload: { CVC: e.target.value },
+    });
   };
 
   useEffect(() => {
