@@ -49,7 +49,7 @@ const CardAppPage = () => {
   const [cardInfo, setCardInfo] = useState(initialCardInfo);
   const [modalVisible, setModalVisible] = useState(false);
   const [isfullFilled, setIsFullFilled] = useState(false);
-  const { number, ownerName, expiryDate, company, theme } = cardInfo;
+  const { number, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
 
   useEffect(() => {
     if (checkFullFilled(cardInfo)) {
@@ -116,23 +116,26 @@ const CardAppPage = () => {
         item="number"
         inputTitle="카드 번호"
         inputInfoList={cardNumberInputInfoList}
-        cardInfo={cardInfo}
+        inputValue={number}
         onChange={handleChange}
+        theme={theme}
       />
       <FormInput
         className="w-50"
         item="expiryDate"
         inputTitle="만료일"
         inputInfoList={expiryDateInputInfoList}
-        cardInfo={cardInfo}
+        inputValue={expiryDate}
         onChange={handleChange}
+        theme={theme}
       />
       <FormInput
         item="ownerName"
         inputTitle="카드 소유자 이름(선택)"
         inputInfoList={cardOwnerNameInputInfoList}
-        cardInfo={cardInfo}
+        inputValue={ownerName}
         onChange={handleChange}
+        theme={theme}
       >
         <div className="owner-name-length">
           {ownerName.length} / {INPUT_MAX_LENGTH.OWNER_NAME}
@@ -143,7 +146,8 @@ const CardAppPage = () => {
         inputTitle="보안코드(CVC/CVV)"
         inputInfoList={privacyCodeInputInfoList}
         onChange={handleChange}
-        cardInfo={cardInfo}
+        inputValue={privacyCode}
+        theme={theme}
       >
         <Tooltip type="PRIVACY_CODE" />
       </FormInput>
@@ -151,8 +155,9 @@ const CardAppPage = () => {
         item="password"
         inputTitle="카드 비밀번호"
         inputInfoList={cardPasswordInputInfoList}
-        cardInfo={cardInfo}
+        inputValue={password}
         onChange={handleChange}
+        theme={theme}
       />
       {isfullFilled && (
         <Button theme={theme} className="next-button">

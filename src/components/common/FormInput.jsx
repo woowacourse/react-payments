@@ -29,13 +29,7 @@ const propTypes = {
   /**
    * card information for input value
    */
-  cardInfo: PropTypes.shape({
-    number: PropTypes.object.isRequired,
-    expiryDate: PropTypes.object.isRequired,
-    ownerName: PropTypes.string,
-    privacyCode: PropTypes.string.isRequired,
-    password: PropTypes.object.isRequired,
-  }),
+  inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
    * handle change event of input tag
    */
@@ -54,7 +48,8 @@ const FormInput = ({
   item,
   inputTitle,
   inputInfoList,
-  cardInfo,
+  inputValue,
+  theme,
   onChange,
   children,
 }) => {
@@ -66,8 +61,8 @@ const FormInput = ({
           <input
             key={id}
             name={name}
-            className={`input-basic ${className} font-${cardInfo.theme}`}
-            value={isObject(cardInfo[item]) ? cardInfo[item][name] : cardInfo[item]}
+            className={`input-basic ${className} font-${theme}`}
+            value={isObject(inputValue) ? inputValue[name] : inputValue}
             onChange={(e) => onChange(e, item)}
             {...rest}
           />
