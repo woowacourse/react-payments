@@ -1,7 +1,8 @@
 {
-  "homepage": "https://uk960214.github.io/react-payments",
   "name": "react-payments",
   "version": "0.1.0",
+  "homepage": "https://soyi47.github.io/react-payments",
+  "description": "<우아한테크코스 4기 프론트엔드> level 2 - 페이먼츠",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
