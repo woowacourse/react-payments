@@ -1,5 +1,6 @@
 import Input from ".";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const CardNumberInput = ({
   onChangeFirstCardNumber,
@@ -46,6 +47,17 @@ const CardNumberInput = ({
       />
     </Container>
   );
+};
+
+CardNumberInput.propTypes = {
+  onChangeFirstCardNumber: PropTypes.func,
+  onChangeSecondCardNumber: PropTypes.func,
+  onChangeThirdCardNumber: PropTypes.func,
+  onChangeFourthCardNumber: PropTypes.func,
+  firstCardNumber: PropTypes.string,
+  secondCardNumber: PropTypes.string,
+  thirdCardNumber: PropTypes.string,
+  fourthCardNumber: PropTypes.string,
 };
 
 const Container = styled.div`

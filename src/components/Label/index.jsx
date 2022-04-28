@@ -1,8 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
-const Label = (props) => {
-  return <Container htmlFor={props.id}>{props.description}</Container>;
+const Label = ({ id, description }) => {
+  return <Container htmlFor={id}>{description}</Container>;
+};
+
+Label.propTypes = {
+  id: PropTypes.string,
+  description: PropTypes.string,
 };
 
 const Container = styled.label`

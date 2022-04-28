@@ -1,8 +1,6 @@
 import React from "react";
 import Fieldset from "./index";
-import Input from "../Input/index";
 import CardNumberInput from "../Input/CardNumberInput";
-import ExpriedDataInput from "../Input/ExpiredDateInput";
 
 export default {
   title: "FieldSet",

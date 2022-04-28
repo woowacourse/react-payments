@@ -3,6 +3,7 @@ import styled from "styled-components";
 import FieldSet from "../../FieldSet";
 import Input from "../../Input";
 import AskMark from "../../AskMark";
+import PropTypes from "prop-types";
 
 const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
   return (
@@ -26,6 +27,12 @@ const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
       }
     </FieldSet>
   );
+};
+
+SecureCode.propTypes = {
+  secureCode: PropTypes.string,
+  onChangeSecureCode: PropTypes.func,
+  isError: PropTypes.bool,
 };
 
 const SecureCodeInputContainer = styled.div`

@@ -1,5 +1,6 @@
 import Input from ".";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const ExpiredDateInput = ({
   expiredMonth,
@@ -28,6 +29,13 @@ const ExpiredDateInput = ({
       />
     </Container>
   );
+};
+
+ExpiredDateInput.propTypes = {
+  expiredMonth: PropTypes.string,
+  expiredYear: PropTypes.string,
+  onChangeExpiredMonth: PropTypes.func,
+  onChangeExpiredYear: PropTypes.func,
 };
 
 const Container = styled.div`

@@ -85,11 +85,16 @@ const AddCardPage = () => {
     );
   });
 
+  const onSubmitCardForm = (e) => {
+    e.preventDefault();
+    alert("카드 등록이 완료되었습니다!❤️🧡💛💚💙💜");
+  };
+
   return (
-    <Container>
+    <Container onSubmit={onSubmitCardForm}>
       <Header title="카드 추가" />
       <Card
-        cardName="카드"
+        cardName="블랙 카드😎"
         name={ownerName}
         expiredMonth={expiredMonth}
         expiredYear={expiredYear}
@@ -140,14 +145,16 @@ const AddCardPage = () => {
       />
       {isValidatedForm && isValidatedValueLength && (
         <ButtonContainer>
-          <Button name="submitButton">다음</Button>
+          <Button name="submitButton" type="submit">
+            다음
+          </Button>
         </ButtonContainer>
       )}
     </Container>
   );
 };
 
-const Container = styled.section`
+const Container = styled.form`
   display: flex;
   flex-direction: column;
   position: relative;

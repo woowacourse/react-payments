@@ -1,6 +1,7 @@
 import React from "react";
 import FieldSet from "../../FieldSet";
 import CardNumberInput from "../../Input/CardNumberInput";
+import PropTypes from "prop-types";
 
 const CardNumber = ({
   firstCardNumber,
@@ -36,4 +37,15 @@ const CardNumber = ({
   );
 };
 
+CardNumber.propTypes = {
+  firstCardNumber: PropTypes.string,
+  secondCardNumber: PropTypes.string,
+  thirdCardNumber: PropTypes.string,
+  fourthCardNumber: PropTypes.string,
+  onChangeFirstCardNumber: PropTypes.func,
+  onChangeSecondCardNumber: PropTypes.func,
+  onChangeThirdCardNumber: PropTypes.func,
+  onChangeFourthCardNumber: PropTypes.func,
+  isError: PropTypes.bool,
+};
 export default CardNumber;

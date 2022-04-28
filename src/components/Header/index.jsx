@@ -34,11 +34,11 @@ const BackButton = styled.button`
   border: none;
   cursor: pointer;
   margin-left: 5px;
-  &::hover > div {
+  &:hover > div {
     border-left: 1px solid #04c09e;
     border-bottom: 1px solid #04c09e;
   }
-  &::active > div {
+  &:active > div {
     border-left: 1px solid #04c09e;
     border-bottom: 1px solid #04c09e;
   }

@@ -1,6 +1,7 @@
 import React from "react";
 import FieldSet from "../../FieldSet";
 import ExpiredDateInput from "../../Input/ExpiredDateInput";
+import PropTypes from "prop-types";
 
 const ExpiredDate = ({
   expiredMonth,
@@ -26,6 +27,13 @@ const ExpiredDate = ({
       }
     </FieldSet>
   );
+};
+
+ExpiredDate.propTypes = {
+  expiredYear: PropTypes.string,
+  onChangeExpiredMonth: PropTypes.func,
+  onChangeExpiredYear: PropTypes.func,
+  isError: PropTypes.bool,
 };
 
 export default ExpiredDate;

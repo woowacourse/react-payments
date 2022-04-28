@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const Button = ({ children, type = "button", name }) => {
   return (
@@ -7,6 +8,12 @@ const Button = ({ children, type = "button", name }) => {
       {children}
     </Container>
   );
+};
+
+Button.propTypes = {
+  children: PropTypes.element,
+  type: PropTypes.string,
+  name: PropTypes.string,
 };
 
 const Container = styled.button`
@@ -19,4 +26,5 @@ const Container = styled.button`
   border: none;
   cursor: pointer;
 `;
+
 export default Button;

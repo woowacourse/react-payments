@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import FieldSet from "../../FieldSet";
 import Input from "../../Input";
 import DotMark from "../../DotMark";
+import PropTypes from "prop-types";
 
 const Password = ({
   firstPassword,
@@ -42,6 +43,14 @@ const Password = ({
       }
     </FieldSet>
   );
+};
+
+Password.propType = {
+  firstPassword: PropTypes.string,
+  secondPassword: PropTypes.string,
+  onChangeFirstPassword: PropTypes.func,
+  onChangeSecondPassword: PropTypes.func,
+  isError: PropTypes.bool,
 };
 
 const PasswordInputContainer = styled.div`

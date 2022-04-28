@@ -2,6 +2,7 @@ import React from "react";
 import FieldSet from "../../FieldSet";
 import styled from "styled-components";
 import Input from "../../Input";
+import PropTypes from "prop-types";
 
 const showOwnerNameLength = (ownerName) => {
   return ownerName.length < 10
@@ -32,6 +33,12 @@ const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
       </FieldSet>
     </Container>
   );
+};
+
+CardOwnerName.propTypes = {
+  ownerName: PropTypes.string,
+  onChangeOwnerName: PropTypes.func,
+  isError: PropTypes.bool,
 };
 
 const Container = styled.div`
