@@ -9,6 +9,7 @@ export const Input = forwardRef((props, ref) => (
     maxLength={props.maxLength}
     value={props.value}
     placeholder={props.placeholder}
+    onKeyDown={props.onKeyDown}
     className="input__contents"
   />
 ));

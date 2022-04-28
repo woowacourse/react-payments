@@ -1,5 +1,5 @@
-import { useState } from "react";
 import CardPasswordInput from ".";
+import useCard from "../../hooks/useCard";
 
 export default {
   title: "CardPasswordInput",
@@ -7,25 +7,8 @@ export default {
 };
 
 export const CardPassword = () => {
-  const [form, setForm] = useState({
-    cardNumber: ["", "", "", ""],
-    expiredDate: ["", ""],
-    ownerName: "",
-    secureCode: "",
-    password: ["", ""],
-  });
-
-  const updatePassword = (number, index) => {
-    setForm({
-      ...form,
-      password: [
-        ...password.slice(0, index),
-        number,
-        ...password.slice(index + 1),
-      ],
-    });
-  };
+  const [form, dispatch] = useCard();
   const { password } = form;
 
-  return <CardPasswordInput state={password} updateForm={updatePassword} />;
+  return <CardPasswordInput state={password} updateForm={dispatch} />;
 };

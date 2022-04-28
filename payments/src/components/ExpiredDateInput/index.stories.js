@@ -1,5 +1,5 @@
-import { useState } from "react";
 import ExpiredDateInput from ".";
+import useCard from "../../hooks/useCard";
 
 export default {
   title: "ExpiredDateInput",
@@ -7,22 +7,9 @@ export default {
 };
 
 export const ExpiredDate = () => {
-  const [form, setForm] = useState({
-    expiredDate: ["", ""],
-  });
+  const [form, dispatch] = useCard();
 
   const { expiredDate } = form;
-  const updateExpiredDate = (number, index) => {
-    setForm({
-      ...form,
-      expiredDate: [
-        ...expiredDate.slice(0, index),
-        number,
-        ...expiredDate.slice(index + 1),
-      ],
-    });
-  };
-  return (
-    <ExpiredDateInput state={expiredDate} updateForm={updateExpiredDate} />
-  );
+
+  return <ExpiredDateInput state={expiredDate} updateForm={dispatch} />;
 };

@@ -4,7 +4,7 @@ import InputContainer from "../elements/InputContainer";
 import InputLabel from "../elements/label";
 import "./index.scss";
 const CardPasswordInput = ({ state, updateForm }) => {
-  const { itemRef, controllInput } = useControllInput({
+  const { itemRef, controllInput, autoFocusBackward } = useControllInput({
     maxLength: 1,
     isNumber: true,
   });
@@ -27,6 +27,11 @@ const CardPasswordInput = ({ state, updateForm }) => {
                     type: "password",
                     payload: { value: target.value, index: idx },
                   });
+                }}
+                onKeyDown={(e) => {
+                  if (e.keyCode === 8 && e.target.value === "") {
+                    autoFocusBackward(e.target);
+                  }
                 }}
               />
             </InputContainer>

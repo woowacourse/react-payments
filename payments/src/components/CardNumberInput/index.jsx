@@ -6,7 +6,7 @@ import InputLabel from "../elements/label";
 import { Fragment } from "react";
 
 const CardNumberInput = ({ state, updateForm }) => {
-  const { itemRef, controllInput } = useControllInput({
+  const { itemRef, controllInput, autoFocusBackward } = useControllInput({
     maxLength: 4,
     isNumber: true,
   });
@@ -23,6 +23,11 @@ const CardNumberInput = ({ state, updateForm }) => {
                   type: "cardNumber",
                   payload: { value: target.value, index: idx },
                 });
+              }}
+              onKeyDown={(e) => {
+                if (e.keyCode === 8 && e.target.value === "") {
+                  autoFocusBackward(e.target);
+                }
               }}
               value={state[idx]}
               ref={(el) => (itemRef.current[idx] = el)}
