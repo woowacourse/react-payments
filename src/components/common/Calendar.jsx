@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import { Input } from './common';
-import Modal from './common/Modal';
+import { Input } from './styled';
+import Modal from './Modal';
 
 const CalendarContainer = styled.div``;
 
@@ -42,13 +42,11 @@ const Item = styled.li`
 function Calendar({ items, placeholder, setItem, dimensions }) {
   const inputRef = useRef(null);
   const [isShown, setIsShown] = useState();
-  const [selectedDate, setSelectedDate] = useState();
   const handleClickBox = () => {
     setIsShown(!isShown);
   };
 
   const handleClickDate = m => {
-    setSelectedDate(m);
     handleClickBox();
     inputRef.current.value = m;
 

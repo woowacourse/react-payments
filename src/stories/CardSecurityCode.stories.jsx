@@ -1,5 +1,5 @@
 import React from 'react';
-import CardSecurityCode from './CardSecurityCode';
+import CardSecurityCode from '../components/CardSecurityCode';
 
 export default {
   title: 'CardSecurityCode',

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Input, InputContainer, Label, InputWrapper } from './common';
+import { Input, InputContainer, Label, InputWrapper } from './common/styled';
 import InactiveContainer from './common/InactiveContainer';
 import ErrorMessage from './common/ErrorMessage';
 

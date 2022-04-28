@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LetterCounter from './LetterCounter';
+import LetterCounter from '../components/common/LetterCounter';
 
 export default {
   title: 'LetterCounter',

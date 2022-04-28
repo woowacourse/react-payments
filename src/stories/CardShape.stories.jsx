@@ -1,5 +1,5 @@
 import React from 'react';
-import CardShape from './CardShape';
+import CardShape from '../components/CardShape';
 
 export default {
   title: 'CardShape',

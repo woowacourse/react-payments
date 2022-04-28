@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { hyphenPrimaryColor } from '../style';
-import Calendar from './Calendar';
-import { InputContainer, InputWrapper, Span, Label } from './common';
+import Calendar from './common/Calendar';
+import { InputContainer, InputWrapper, Span, Label } from './common/styled';
 
 const getList = (length, n) => Array.from({ length }, (_, i) => `${i + n}`.slice(2));
 

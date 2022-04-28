@@ -1,5 +1,5 @@
 import React from 'react';
-import CardPassword from './CardPassword';
+import CardPassword from './components/CardPassword';
 
 export default {
   title: 'CardPassword',

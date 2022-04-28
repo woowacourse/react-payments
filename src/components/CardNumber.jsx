@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { hyphenPrimaryColor } from '../style';
 import ErrorMessage from './common/ErrorMessage';
-import { Input, InputContainer, InputWrapper, Label, Span } from './common';
+import { Input, InputContainer, InputWrapper, Label, Span } from './common/styled';
 
 const MAX_CARD_NUMBER_UNIT = 4;
 

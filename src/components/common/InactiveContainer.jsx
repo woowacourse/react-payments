@@ -1,6 +1,6 @@
 import React from 'react';
 import { BsDot } from 'react-icons/bs';
-import { DotContainer } from '.';
+import { DotContainer } from './styled';
 
 function InactiveContainer() {
   return (

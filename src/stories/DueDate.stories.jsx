@@ -1,5 +1,5 @@
 import React from 'react';
-import DueDate from './DueDate';
+import DueDate from '../components/DueDate';
 
 export default {
   title: 'DueDate',

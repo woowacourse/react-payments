@@ -1,6 +1,6 @@
 import React from 'react';
 
-import QuestionIcon from './QuestionIcon';
+import QuestionIcon from '../components/common/QuestionIcon';
 
 export default {
   title: 'QuestionIcon',

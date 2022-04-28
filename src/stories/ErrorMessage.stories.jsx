@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from '../components/common/ErrorMessage';
 
 export default {
   title: 'ErrorMessage',

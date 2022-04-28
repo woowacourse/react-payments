@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Span } from '.';
+import { Span } from './styled';
 
 // TODO: 스타일
 const Paragraph = styled.p`

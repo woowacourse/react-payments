@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Input, InputContainer, Label } from './common';
+import { Input, InputContainer, Label } from './common/styled';
 import ErrorMessage from './common/ErrorMessage';
 import LetterCounter from './common/LetterCounter';
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ErrorMessage from './common/ErrorMessage';
-import { Input, InputContainer, Span, Label, InputWrapper } from './common';
+import { Input, InputContainer, Span, Label, InputWrapper } from './common/styled';
 import QuestionContainer from './common/QuestionIcon';
 
 const MAX_CARD_CODE = 3;

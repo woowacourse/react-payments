@@ -1,5 +1,5 @@
 import React from 'react';
-import CardOwner from './CardOwner';
+import CardOwner from '../components/CardOwner';
 
 export default {
   title: 'CardOwner',

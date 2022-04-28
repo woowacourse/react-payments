@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Span } from './common';
+import { Span } from './common/styled';
 
 const CardContainer = styled.div`
   display: flex;

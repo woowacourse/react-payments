@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Calendar from './Calendar';
+import Calendar from '../components/common/Calendar';
 
 export default {
   title: 'Calendar',
