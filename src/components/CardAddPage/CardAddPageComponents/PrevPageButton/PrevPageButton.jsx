@@ -1,7 +1,11 @@
 import React from 'react';
 
-function PrevPageButton() {
-  return <span className="prev-page-button">{'<'}</span>;
+function PrevPageButton({ setPage }) {
+  const handlePrevPageButtonClick = () => {
+    setPage('listPage');
+  };
+
+  return <div className="prev-page-button" onClick={handlePrevPageButtonClick}></div>;
 }
 
 export default PrevPageButton;
