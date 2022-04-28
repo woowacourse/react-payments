@@ -9,3 +9,7 @@ export default {
 const Template = (args) => <MoveButton {...args} />;
 
 export const CardExample = Template.bind({});
+CardExample.args = {
+  disabled: true,
+  children: '다음',
+};

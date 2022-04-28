@@ -1,4 +1,9 @@
+import { useReducer } from 'react';
 import CardContext from '../src/CardContext';
+import useInitialAppValue from '../src/hooks/useInitialAppValue';
+import { initialState, reducer } from '../src/reducers';
+
+initialState.dispatch = () => null;
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -10,24 +15,12 @@ export const parameters = {
   },
 };
 
-const initialState = {
-  cardNumber: ['', '', '', ''],
-  cardNumberErrorMessage: '',
-  cardExpiration: ['', ''],
-  cardExpirationErrorMessage: '',
-  cardOwner: '',
-  cardOwnerErrorMessage: '',
-  cardCvc: '',
-  cardCvcErrorMessage: '',
-  cardPassword: ['', ''],
-  cardPasswordErrorMessage: '',
-  cardCompanyIndex: -1,
-  modalFlag: false,
-  dispatch: () => null,
-};
-
 export const decorators = [
   (Story) => {
-    return <CardContext.Provider value={initialState}>{Story()}</CardContext.Provider>;
+    return (
+      <CardContext.Provider value={useInitialAppValue(reducer, initialState)}>
+        {Story()}
+      </CardContext.Provider>
+    );
   },
 ];

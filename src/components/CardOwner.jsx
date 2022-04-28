@@ -56,6 +56,7 @@ export default function CardOwner() {
             type="text"
             maxLength="30"
             color={cardColor}
+            value={cardOwner}
             onChange={onChangeInput}
           />
         </InputContainer>
