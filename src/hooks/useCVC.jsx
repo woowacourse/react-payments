@@ -1,15 +1,13 @@
-import useInput from './useInput';
+import { useState, useCallback } from 'react';
 
 export default function useCVC(initialValue) {
-  const [CVC, onChangeFunc] = useInput(initialValue);
+  const [CVC, setCVC] = useState(initialValue);
 
-  const setCVC = e => {
-    if (!/^$|^[0-9]{0,4}$/.test(e.target.value)) return;
+  const handler = useCallback(({ target: { value } }) => {
+    if (!/^$|^[0-9]{0,3}$/.test(value)) return;
 
-    if (e.target.value.length <= 3) {
-      onChangeFunc(e);
-    }
-  };
+    setCVC(value);
+  }, []);
 
-  return [CVC, setCVC];
+  return [CVC, handler];
 }

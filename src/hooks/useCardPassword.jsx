@@ -1,13 +1,13 @@
-import useInput from './useInput';
+import { useState, useCallback } from 'react';
 
 export default function useCardPassword(initialValue) {
-  const [password, onChangeFunc] = useInput(initialValue);
+  const [password, setPassword] = useState(initialValue);
 
-  const setPassword = e => {
-    if (!/^$|^[0-9]{0,1}$/.test(e.target.value)) return;
+  const handler = useCallback(({ target: { value } }) => {
+    if (!/^$|^[0-9]{0,1}$/.test(value)) return;
 
-    onChangeFunc(e);
-  };
+    setPassword(value);
+  }, []);
 
-  return [password, setPassword];
+  return [password, handler];
 }

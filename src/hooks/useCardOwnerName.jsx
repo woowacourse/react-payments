@@ -1,13 +1,13 @@
-import useInput from './useInput';
+import { useState, useCallback } from 'react';
 
 export default function useCardOwnerName(initialValue) {
-  const [cardOwnerName, onChangeFunc] = useInput(initialValue);
+  const [cardOwnerName, setCardOwnerName] = useState(initialValue);
 
-  const setCardOwnerName = e => {
-    if (e.target.value.length <= 30) {
-      onChangeFunc(e);
+  const handler = useCallback(({ target: { value } }) => {
+    if (value.length <= 30) {
+      setCardOwnerName(value);
     }
-  };
+  }, []);
 
-  return [cardOwnerName, setCardOwnerName];
+  return [cardOwnerName, handler];
 }
