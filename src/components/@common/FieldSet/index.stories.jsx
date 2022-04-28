@@ -1,6 +1,6 @@
 import FieldSet from '.';
 import TextField from '../TextField';
-import '../../../index.css'; // 루트 디렉터리 세팅하기!
+import 'index.css';
 
 export default {
   title: 'Component/@Common/FieldSet',
@@ -16,10 +16,10 @@ const Template = (args) => (
   </FieldSet>
 );
 
-const field = Template.bind({});
-field.args = {};
+const DefaultFieldSet = Template.bind({});
+DefaultFieldSet.args = {
+  title: '기본 타이틀',
+  errorMessage: '기본 에러 메시지입니다!',
+};
 
-const testField = Template.bind({});
-testField.args = {};
-
-export { field, testField };
+export { DefaultFieldSet };
