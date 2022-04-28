@@ -15,7 +15,7 @@ const validator = {
     }
 
     if (0 < cardExpiration.join('').length && cardExpiration.join('').length < 4) {
-      throw new Error('카드 만료일에 월 2자리(MM) 및 년 2자리(MM)를 모두 입력해주세요.');
+      throw new Error('카드 만료월과 만료년을 각각 2자리씩 모두 입력해주세요.');
     }
 
     if (Number(cardExpiration[0]) < 1 || Number(cardExpiration[0]) > 12) {

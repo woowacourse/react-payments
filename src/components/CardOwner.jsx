@@ -10,8 +10,6 @@ import CardContext from '../CardContext';
 import validator from '../validations/validator';
 import ErrorMessage from './ErrorMessage';
 
-import CARD_COMPANIES from '../constants';
-
 const TitleWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -30,16 +28,14 @@ const InputBasicLeft = styled(InputBasic)`
   padding-left: 30px;
 `;
 
-export default function CardOwner() {
-  const { cardOwner, cardOwnerErrorMessage, cardCompanyIndex, dispatch } = useContext(CardContext);
+export default function CardOwner({ color }) {
+  const { cardOwner, cardOwnerErrorMessage, dispatch } = useContext(CardContext);
 
   const onChangeInput = (e) => {
     dispatch({ type: 'SET_CARD_OWNER', value: e.target.value });
   };
 
   const nameLengthColor = () => (cardOwner.length > 30 ? '#E24141' : '#525252');
-
-  const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
 
   return (
     <Container>
@@ -55,7 +51,7 @@ export default function CardOwner() {
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             type="text"
             maxLength="30"
-            color={cardColor}
+            color={color}
             value={cardOwner}
             onChange={onChangeInput}
           />

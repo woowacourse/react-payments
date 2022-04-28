@@ -10,8 +10,6 @@ import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
 
-import CARD_COMPANIES from '../constants';
-
 const ExtendedInputContainer = styled(InputContainer)`
   justify-content: space-between;
 `;
@@ -23,7 +21,7 @@ const Hyphen = styled.p`
   color: ${({ color }) => color || '#737373'};
 `;
 
-export default function CardNumber() {
+export default function CardNumber({ color }) {
   const { cardNumber, cardNumberErrorMessage, cardCompanyIndex, dispatch } =
     useContext(CardContext);
 
@@ -37,8 +35,6 @@ export default function CardNumber() {
 
   const validate = (value) => value.join('').length > 0 && validator.checkCardNumber(value);
 
-  const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
-
   return (
     <Container>
       <InputTitle>카드 번호</InputTitle>
@@ -48,37 +44,37 @@ export default function CardNumber() {
             width="20%"
             type="text"
             maxLength="4"
-            color={cardColor}
+            color={color}
             value={cardNumber[0]}
             onChange={onChangeInput(0)}
             onFocus={onFocusInput}
           />
-          <Hyphen color={cardColor}>-</Hyphen>
+          <Hyphen color={color}>-</Hyphen>
           <InputBasic
             width="20%"
             type="text"
             maxLength="4"
-            color={cardColor}
+            color={color}
             value={cardNumber[1]}
             onChange={onChangeInput(1)}
             onFocus={onFocusInput}
           />
-          <Hyphen color={cardColor}>-</Hyphen>
+          <Hyphen color={color}>-</Hyphen>
           <InputBasic
             width="20%"
             type="password"
             maxLength="4"
-            color={cardColor}
+            color={color}
             value={cardNumber[2]}
             onChange={onChangeInput(2)}
             onFocus={onFocusInput}
           />
-          <Hyphen color={cardColor}>-</Hyphen>
+          <Hyphen color={color}>-</Hyphen>
           <InputBasic
             width="20%"
             type="password"
             maxLength="4"
-            color={cardColor}
+            color={color}
             value={cardNumber[3]}
             onChange={onChangeInput(3)}
             onFocus={onFocusInput}

@@ -11,6 +11,7 @@ import MoveButton from './components/MoveButton';
 import CardContext from './CardContext';
 import CardListModal from './components/CardListModal';
 import validator from '../src/validations/validator';
+import CARD_COMPANIES from './constants';
 
 const CardAdditionContainer = styled.div`
   height: 100%;
@@ -48,8 +49,12 @@ function CardAddition() {
   }, []);
 
   const submitCard = () => {
-    console.log(cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword);
+    alert(cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword);
   };
+
+  const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
+
+  const cardName = cardCompanyIndex === -1 ? '' : CARD_COMPANIES[cardCompanyIndex].NAME;
 
   return (
     <CardAdditionContainer>
@@ -59,14 +64,16 @@ function CardAddition() {
         cardNumber={cardNumber}
         cardExpiration={cardExpiration}
         cardOwner={cardOwner}
+        cardName={cardName}
+        color={cardColor}
         onClick={onClickCard}
       />
-      <CardNumber />
-      <CardExpiration />
-      <CardOwner />
-      <CardCvc />
-      <CardPassword />
-      <MoveButton onClick={submitCard} disabled={validateAllInputs()}>
+      <CardNumber color={cardColor} />
+      <CardExpiration color={cardColor} />
+      <CardOwner color={cardColor} />
+      <CardCvc color={cardColor} />
+      <CardPassword color={cardColor} />
+      <MoveButton onClick={submitCard} disabled={validateAllInputs()} color={cardColor}>
         다음
       </MoveButton>
       <CardListModal />

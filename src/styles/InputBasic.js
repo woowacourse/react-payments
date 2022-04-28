@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { lighten } from 'polished';
 
 export default styled.input`
   background-color: #ecebf1;
@@ -15,6 +16,6 @@ export default styled.input`
   color: ${({ color }) => color};
 
   &::placeholder {
-    color: ${({ color }) => color};
+    color: ${({ color }) => lighten(0.2, color)};
   }
 `;

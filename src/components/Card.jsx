@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-
-import CARD_COMPANIES from '../constants';
 import validator from '../validations/validator';
 import ErrorMessage from './ErrorMessage';
 import CardContext from '../CardContext';
@@ -82,22 +80,25 @@ const CardNumber = styled(CardText)`
   width: 30px;
 `;
 
-export default function Card({ cardCompanyIndex, cardNumber, cardOwner, cardExpiration, onClick }) {
+export default function Card({
+  cardCompanyIndex,
+  cardNumber,
+  cardOwner,
+  cardExpiration,
+  cardName,
+  onClick,
+  color,
+}) {
   const { cardCompanyErrorMessage } = useContext(CardContext);
 
   const cardExpirationContent = () =>
     cardExpiration[0] || cardExpiration[1] ? cardExpiration.join('/') : 'MM/YY';
 
-  const cardColor = () =>
-    cardCompanyIndex === -1 ? '#e5e5e5' : CARD_COMPANIES[cardCompanyIndex].COLOR;
-
-  const cardName = () => (cardCompanyIndex === -1 ? '' : CARD_COMPANIES[cardCompanyIndex].NAME);
-
   return (
     <>
-      <SmallCard onClick={onClick} color={cardColor()}>
+      <SmallCard onClick={onClick} color={color}>
         <CardTop>
-          <CardText>{cardName()}</CardText>
+          <CardText>{cardName}</CardText>
         </CardTop>
         <CardMiddle>
           <SmallCardChip></SmallCardChip>

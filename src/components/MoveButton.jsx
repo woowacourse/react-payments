@@ -9,20 +9,25 @@ const MoveWrapperStyled = styled.div`
 
 const MoveButtonStyled = styled.button`
   cursor: pointer;
-  color: #04c09e;
+  color: #fff;
+  background-color: ${({ color }) => color};
   border: 0;
   font-weight: 700;
   font-size: 14px;
-  background-color: transparent;
+  border-radius: 8px;
+  width: 100%;
+  height: 35px;
   &:disabled {
-    color: #e5e5e5;
+    color: #fff;
+    cursor: default;
+    background-color: #e5e5e5;
   }
 `;
 
-export default function MoveButton({ onClick, disabled, children }) {
+export default function MoveButton({ onClick, disabled, children, color }) {
   return (
     <MoveWrapperStyled>
-      <MoveButtonStyled onClick={onClick} disabled={disabled}>
+      <MoveButtonStyled color={color} onClick={onClick} disabled={disabled}>
         {children}
       </MoveButtonStyled>
     </MoveWrapperStyled>
