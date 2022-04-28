@@ -1,7 +1,6 @@
 import Button from "../elements/Button";
 
 const validateCardNum = ({ cardNumber }) => {
-  console.log(cardNumber);
   if (cardNumber.join("").length !== 16) {
     throw new Error("카드 번호를 16자리 모두 입력해주세요");
   }

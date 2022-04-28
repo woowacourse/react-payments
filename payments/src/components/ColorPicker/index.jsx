@@ -26,6 +26,7 @@ const ColorPicker = ({ visible, setVisible, updateForm }) => {
       <div ref={modalCotnets} className="palette">
         {cardCategory.map((card) => (
           <Color
+            key={card.color}
             name={card.name}
             color={card.color}
             updateForm={updateForm}
