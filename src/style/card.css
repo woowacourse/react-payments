@@ -28,7 +28,8 @@
 }
 
 .card-not-empty {
-  background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+  background-image: url('../images/card.png');
+  background-size: 207px 160px;
 }
 
 .small-card {
