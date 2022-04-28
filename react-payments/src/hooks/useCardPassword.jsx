@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { MAX_LENGTH } from "../constants";
+import { checkNextFocus, checkPrevFocus, isOverMaxLength } from "../util";
 
 const useCardPassword = () => {
   const [cardPassword, setCardPassword] = useState({
@@ -6,30 +8,29 @@ const useCardPassword = () => {
     second: "",
   });
 
-  const onChangeCardPassword = (e) => {
-    if (e.target.value.length > 1) {
+  const onChangeCardPassword = ({ target }) => {
+    if (isOverMaxLength(target, MAX_LENGTH.CARD_PASSWORD)) {
       return;
     }
 
-    if (
-      cardPassword[e.target.name].length < e.target.value.length &&
-      e.target.value.length === 1 &&
-      e.target.name !== "second"
-    ) {
-      e.target.parentNode.nextSibling.children[0].focus();
-    }
+    const nextElement = target.parentNode.nextSibling?.children[0];
+    const prevElement = target.parentNode.previousSibling?.children[0];
 
-    if (
-      cardPassword[e.target.name].length > e.target.value.length &&
-      e.target.value.length === 0 &&
-      e.target.name !== "first"
-    ) {
-      e.target.parentNode.previousSibling.children[0].focus();
-    }
+    checkNextFocus({
+      target,
+      value: cardPassword,
+      maxLength: MAX_LENGTH.CARD_PASSWORD,
+      nextElement,
+    });
+    checkPrevFocus({
+      target,
+      value: cardPassword,
+      prevElement,
+    });
 
     setCardPassword({
       ...cardPassword,
-      [e.target.name]: e.target.value,
+      [target.name]: target.value,
     });
   };
 

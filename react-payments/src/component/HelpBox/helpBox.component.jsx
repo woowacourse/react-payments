@@ -1,5 +1,6 @@
 import "./helpBox.css";
 import { useState } from "react";
+import { HELP_MESSAGE } from "../../constants";
 
 const HelpBox = () => {
   const [isShown, setIsShown] = useState(false);
@@ -12,9 +13,7 @@ const HelpBox = () => {
       >
         ?
       </div>
-      {isShown && (
-        <div className="help-modal">카드 뒷면의 3자리 숫자를 입력해주세요.</div>
-      )}
+      {isShown && <div className="help-modal">{HELP_MESSAGE}</div>}
     </div>
   );
 };

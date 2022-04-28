@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { MAX_LENGTH } from "../constants";
+import { isOverMaxLength } from "../util";
 
 const useSecurityCode = () => {
   const [securityCode, setSecurityCode] = useState("");
 
-  const onChangeSecurityCode = (e) => {
-    if (e.target.value.length > 3) {
+  const onChangeSecurityCode = ({ target }) => {
+    if (isOverMaxLength(target, MAX_LENGTH.SECURITY_CODE)) {
       return;
     }
-    setSecurityCode(e.target.value);
+    setSecurityCode(target.value);
   };
 
   return [securityCode, onChangeSecurityCode];

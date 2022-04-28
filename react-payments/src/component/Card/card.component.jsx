@@ -1,3 +1,4 @@
+import { MIDDLE_CARD_NUMBER_LENGTH } from "../../constants";
 import Dot from "../Dot/dot.component";
 import "./card.css";
 
@@ -19,7 +20,7 @@ const Card = ({
         <div className="card-bottom">
           <div className="card-number-text">
             {cardNumbers.map((cardNumber, idx) => {
-              if (idx >= 2) {
+              if (idx >= MIDDLE_CARD_NUMBER_LENGTH) {
                 return (
                   <div className="card-dot-container" key={idx}>
                     {Array.from(cardNumber).map((_, idx) => (

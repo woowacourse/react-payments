@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { checkNextFocus, checkPrevFocus, isOverMaxLength } from "../util";
+import { MAX_LENGTH } from "../constants";
 
 const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState({
@@ -8,30 +10,29 @@ const useCardNumber = () => {
     fourth: "",
   });
 
-  const onChangeCardNumber = (e) => {
-    if (e.target.value.length > 4) {
+  const onChangeCardNumber = ({ target }) => {
+    if (isOverMaxLength(target, MAX_LENGTH.CARD_NUMBER)) {
       return;
     }
 
-    if (
-      cardNumber[e.target.name].length < e.target.value.length &&
-      e.target.value.length === 4 &&
-      e.target.name !== "fourth"
-    ) {
-      e.target.nextSibling.nextSibling.focus();
-    }
+    const nextElement = target.nextSibling?.nextSibling;
+    const prevElement = target.previousSibling?.previousSibling;
 
-    if (
-      cardNumber[e.target.name].length > e.target.value.length &&
-      e.target.value.length === 0 &&
-      e.target.name !== "first"
-    ) {
-      e.target.previousSibling.previousSibling.focus();
-    }
+    checkNextFocus({
+      target,
+      value: cardNumber,
+      maxLength: MAX_LENGTH.CARD_NUMBER,
+      nextElement,
+    });
+    checkPrevFocus({
+      target,
+      value: cardNumber,
+      prevElement,
+    });
 
     setCardNumber({
       ...cardNumber,
-      [e.target.name]: e.target.value,
+      [target.name]: target.value,
     });
   };
 

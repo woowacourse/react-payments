@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { MAX_LENGTH } from "../constants";
+import { checkNextFocus, checkPrevFocus, isOverMaxLength } from "../util";
 
 const useExpireDate = () => {
   const [expireDate, setExpireDate] = useState({
@@ -6,30 +8,29 @@ const useExpireDate = () => {
     second: "",
   });
 
-  const onChangeExpireDate = (e) => {
-    if (e.target.value.length > 2) {
+  const onChangeExpireDate = ({ target }) => {
+    if (isOverMaxLength(target, MAX_LENGTH.EXPIRE_DATE)) {
       return;
     }
 
-    if (
-      expireDate[e.target.name].length < e.target.value.length &&
-      e.target.value.length === 2 &&
-      e.target.name !== "second"
-    ) {
-      e.target.nextSibling.nextSibling.focus();
-    }
+    const nextElement = target.nextSibling?.nextSibling;
+    const prevElement = target.previousSibling?.previousSibling;
 
-    if (
-      expireDate[e.target.name].length > e.target.value.length &&
-      e.target.value.length === 0 &&
-      e.target.name !== "first"
-    ) {
-      e.target.previousSibling.previousSibling.focus();
-    }
+    checkNextFocus({
+      target,
+      value: expireDate,
+      maxLength: MAX_LENGTH.EXPIRE_DATE,
+      nextElement,
+    });
+    checkPrevFocus({
+      target,
+      value: expireDate,
+      prevElement,
+    });
 
     setExpireDate({
       ...expireDate,
-      [e.target.name]: e.target.value,
+      [target.name]: target.value,
     });
   };
 

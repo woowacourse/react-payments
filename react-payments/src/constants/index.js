@@ -37,3 +37,15 @@ export const defaultCardInfo = {
   cardType: "",
   colorType: "empty-color",
 };
+
+export const MAX_LENGTH = {
+  CARD_NUMBER: 4,
+  CARD_PASSWORD: 1,
+  EXPIRE_DATE: 2,
+  SECURITY_CODE: 3,
+  USER_NAME: 30,
+};
+
+export const MIDDLE_CARD_NUMBER_LENGTH = 2;
+
+export const HELP_MESSAGE = "카드 뒷면의 3자리 숫자를 입력해주세요.";
