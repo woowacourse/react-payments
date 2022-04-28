@@ -8,6 +8,8 @@ import InputBasic from '../styles/InputBasic';
 import Wrapper from './Wrapper';
 import Circle from './Circle';
 import CardContext from '../CardContext';
+import ErrorMessage from './ErrorMessage';
+import validator from '../validations/validator';
 
 const ExtendedInputBox = styled(InputBox)`
   width: 220px;
@@ -15,11 +17,13 @@ const ExtendedInputBox = styled(InputBox)`
 `;
 
 export default function CardPassword() {
-  const { cardPassword, dispatch } = useContext(CardContext);
+  const { cardPassword, cardPasswordErrorMessage, dispatch } = useContext(CardContext);
 
   const onChangeInput = (index) => (e) => {
     dispatch({ type: 'SET_CARD_PASSWORD', value: e.target.value, index });
   };
+
+  const validate = (value) => value.join('') && validator.checkCardPassword(value);
 
   return (
     <Container>
@@ -46,6 +50,9 @@ export default function CardPassword() {
           <Circle size="5px" color="#04C09E" />
         </Wrapper>
       </ExtendedInputBox>
+      <ErrorMessage value={cardPassword} validate={validate} type="SET_CARD_PASSWORD_ERROR_MESSAGE">
+        {cardPasswordErrorMessage}
+      </ErrorMessage>
     </Container>
   );
 }

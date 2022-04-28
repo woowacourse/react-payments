@@ -10,12 +10,12 @@ const ErrorMessageStyled = styled.p`
   color: #e24141;
 `;
 
-export default function ErrorMessage({ value, children, validation, type }) {
+export default function ErrorMessage({ value, children, validate, type }) {
   const { dispatch } = useContext(CardContext);
 
   useEffect(() => {
     try {
-      validation(value);
+      validate(value);
       dispatch({
         type: type,
         errorMessage: '',

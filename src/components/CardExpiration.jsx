@@ -43,7 +43,7 @@ export default function CardExpiration() {
       </InputBox>
       <ErrorMessage
         value={cardExpiration}
-        validation={validate}
+        validate={validate}
         type="SET_CARD_EXPIRATION_ERROR_MESSAGE"
       >
         {cardExpirationErrorMessage}

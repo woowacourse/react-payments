@@ -52,7 +52,7 @@ export default function CardOwner() {
       </InputBox>
       <ErrorMessage
         value={cardOwner}
-        validation={validator.checkCardOwner}
+        validate={validator.checkCardOwner}
         type="SET_CARD_OWNER_ERROR_MESSAGE"
       >
         {cardOwnerErrorMessage}

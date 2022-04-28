@@ -39,6 +39,26 @@ const validator = {
       throw new Error('이름은 30글자 이내로 입력해주세요.');
     }
   },
+
+  checkCardCvc(cardCvc) {
+    if (!Number.isInteger(Number(cardCvc))) {
+      throw new Error('보안코드에 숫자만 입력해주세요.');
+    }
+
+    if (cardCvc.length !== 3) {
+      throw new Error('보안코드는 3개의 수를 입력해주세요.');
+    }
+  },
+
+  checkCardPassword(cardPassword) {
+    if (cardPassword.some((number) => !Number.isInteger(Number(number)))) {
+      throw new Error('비밀번호에 숫자만 입력해주세요.');
+    }
+
+    if (cardPassword.some((number) => !number)) {
+      throw new Error('비밀번호 앞 자리 2개를 입력해주세요.');
+    }
+  },
 };
 
 export default validator;

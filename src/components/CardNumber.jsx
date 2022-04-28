@@ -53,7 +53,7 @@ export default function CardNumber() {
           />
         </InputContainer>
       </InputBox>
-      <ErrorMessage value={cardNumber} validation={validate} type="SET_CARD_NUMBER_ERROR_MESSAGE">
+      <ErrorMessage value={cardNumber} validate={validate} type="SET_CARD_NUMBER_ERROR_MESSAGE">
         {cardNumberErrorMessage}
       </ErrorMessage>
     </Container>
