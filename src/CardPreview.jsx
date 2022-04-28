@@ -7,7 +7,7 @@ const CardContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  margin: 10px 0;
+  margin-bottom: 25px;
 `;
 
 const SmallCard = styled.div`
@@ -77,7 +77,7 @@ export default function CardPreview({ cardNumber, holderName, expireDate }) {
         <CardBottomSection>
           <CardHolderName>{holderName}</CardHolderName>
           <CardExpireDate>
-            {expireDate[0]} / {expireDate[1]}
+            {expireDate[0]} {expireDate[0].length !== 0 && "/"} {expireDate[1]}
           </CardExpireDate>
         </CardBottomSection>
       </SmallCard>

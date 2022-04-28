@@ -6,6 +6,9 @@ import CardExpireDateInput from "./CardExpireDateInput.jsx";
 import { useCallback, useEffect, useState } from "react";
 import CardPreview from "./CardPreview.jsx";
 import Button from "./Button.jsx";
+import GlobalStyle from "./globalStyles.jsx";
+import { CardInfoForm } from "./App.elements.jsx";
+import PageHeader from "./PageHeader.jsx";
 
 function App() {
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
@@ -98,29 +101,37 @@ function App() {
 
   return (
     <div className="App">
+      <GlobalStyle />
+      <PageHeader />
       <CardPreview
         cardNumber={cardNumber}
         holderName={holderName}
         expireDate={expireDate}
       />
-      <CardNumberInput
-        cardNumber={cardNumber}
-        onChange={handleCardNumberUpdate}
-      />
-      <CardExpireDateInput
-        expireDate={expireDate}
-        onChange={handleExpireDateUpdate}
-      />
-      <CardHolderNameInput
-        holderName={holderName}
-        onChange={handleHolderNameUpdate}
-      />
-      <CardSecurityCodeInput
-        securityCode={securityCode}
-        onChange={handleSecurityCodeUpdate}
-      />
-      <CardPasswordInput password={password} onChange={handlePasswordUpdate} />
-      {canProceed && <Button text="다음" onClick={handleCardInfoSubmit} />}
+      <CardInfoForm>
+        <CardNumberInput
+          cardNumber={cardNumber}
+          onChange={handleCardNumberUpdate}
+        />
+        <CardExpireDateInput
+          expireDate={expireDate}
+          onChange={handleExpireDateUpdate}
+        />
+        <CardHolderNameInput
+          holderName={holderName}
+          onChange={handleHolderNameUpdate}
+        />
+        <CardSecurityCodeInput
+          securityCode={securityCode}
+          onChange={handleSecurityCodeUpdate}
+        />
+        <CardPasswordInput
+          password={password}
+          onChange={handlePasswordUpdate}
+        />
+      </CardInfoForm>
+      {true && <Button text="다음" onClick={handleCardInfoSubmit} />}
+      {/* {canProceed && <Button text="다음" onClick={handleCardInfoSubmit} />} */}
     </div>
   );
 }

@@ -28,12 +28,16 @@ export default function CardHolderNameInput({ holderName, onChange }) {
       OptionalComponent={
         <InputCounter currLength={holderName.length} maxLength="30" />
       }
+      wrapperWidth="100%"
+      horizontalAlign="flex-start"
     >
       <Input
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         type="text"
         value={holderName}
         onChange={onChange}
+        width="100%"
+        textAlign="left"
       />
     </InputField>
   );

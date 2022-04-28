@@ -8,7 +8,11 @@ const StyledIconContainer = styled.div`
   position: relative;
 `;
 
-const StyledIcon = styled.img``;
+const StyledIcon = styled.img`
+  &:hover {
+    cursor: pointer;
+  }
+`;
 
 const StyledDescription = styled.p`
   ${(props) => !props.isOpen && `display: none;`}
@@ -54,6 +58,7 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
     <InputField
       labelText="보안 코드(CVC/CVV)"
       OptionalComponent={<HelpIcon description={cvcHelperDescription} />}
+      wrapperWidth="85px"
     >
       <Input type="password" value={securityCode} onChange={onChange} />
     </InputField>

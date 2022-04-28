@@ -10,9 +10,13 @@ const StyledButton = styled.button`
   background-color: inherit;
 
   color: #04c09e;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 16px;
-  font-weight: 600;
+  font-weight: bold;
+
+  position: absolute;
+  right: 20px;
+  bottom: 25px;
 
   &:hover {
     cursor: pointer;

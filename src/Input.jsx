@@ -9,20 +9,43 @@ export const StyledInput = styled.input`
   font-size: 18px;
   font-weight: 600;
   line-height: 21px;
-  text-align: center;
+  text-align: ${(props) => props.textAlign};
 
   background-color: transparent;
-  width: ${(p) => p.width};
+  width: ${(props) => props.width};
 
   outline: none;
   border: none;
 
+  /* 숫자 입력란 화살표 숨김 */
+  /* Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  &[type="number"] {
+    -moz-appearance: textfield;
+  }
+  /* ************************** */
+
   &::placeholder {
+    font-size: 14px;
     color: #737373;
   }
 `;
 
-export default function Input({ name, type, placeholder, value, onChange }) {
+export default function Input({
+  name,
+  type,
+  placeholder,
+  value,
+  onChange,
+  width,
+  textAlign,
+}) {
   return (
     <StyledInput
       type={type}
@@ -30,6 +53,8 @@ export default function Input({ name, type, placeholder, value, onChange }) {
       placeholder={placeholder}
       value={value}
       onChange={onChange}
+      width={width}
+      textAlign={textAlign}
     />
   );
 }
@@ -44,5 +69,6 @@ Input.propTypes = {
 Input.defaultProps = {
   name: "default name",
   type: "text",
-  width: "100px",
+  width: "70px",
+  textAlign: "center",
 };

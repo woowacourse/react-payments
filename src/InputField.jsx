@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 const StyledInputField = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 7px;
   position: relative;
 `;
@@ -18,9 +19,11 @@ const StyledLabel = styled.label`
 
 const StyledInputWrapper = styled.div`
   display: flex;
+  justify-content: ${(props) => props.align};
+  /* justify-content: space-around; */
   background: #ecebf1;
   border-radius: 7px;
-  width: max-content;
+  width: ${(props) => props.width};
   padding: 12px;
 `;
 
@@ -30,12 +33,20 @@ const StyledInputContainer = styled.div`
   gap: 10px;
 `;
 
-export default function InputField({ labelText, children, OptionalComponent }) {
+export default function InputField({
+  labelText,
+  children,
+  OptionalComponent,
+  wrapperWidth,
+  horizontalAlign,
+}) {
   return (
     <StyledInputField>
       <StyledLabel>{labelText}</StyledLabel>
       <StyledInputContainer>
-        <StyledInputWrapper>{children}</StyledInputWrapper>
+        <StyledInputWrapper width={wrapperWidth} align={horizontalAlign}>
+          {children}
+        </StyledInputWrapper>
         {OptionalComponent}
       </StyledInputContainer>
     </StyledInputField>
@@ -48,6 +59,7 @@ InputField.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
+  wrapperWidth: PropTypes.string,
 };
 
 InputField.defaultProps = {
