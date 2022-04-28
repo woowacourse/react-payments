@@ -13,29 +13,23 @@ const cardNumberFormatter = (cardNumber) => cardNumber.replace(/[^0-9]/g, '');
 
 function reducer(state, { type, contents }) {
   const newState = { ...state };
-  const updateState = {
-    cardNumber: () => {
-      const { index, value } = contents;
-      newState.cardNumber[index] = cardNumberFormatter(value);
-    },
-    expireMonth: () => {
-      newState.expireMonth = contents;
-    },
-    expireYear: () => {
-      newState.expireYear = contents;
-    },
-    userName: () => {
-      newState.userName = contents.toUpperCase();
-    },
-    securityCode: () => {
-      newState.securityCode = contents;
-    },
-    cardPassword: () => {
-      newState.cardPassword = contents;
-    },
-  };
 
-  updateState[type]();
+  switch (type) {
+    case 'cardNumber':
+      {
+        const { index, value } = contents;
+        newState.cardNumber[index] = cardNumberFormatter(value);
+      }
+      break;
+
+    case 'userName':
+      newState.userName = contents.toUpperCase();
+      break;
+
+    default:
+      newState[type] = contents;
+      break;
+  }
 
   return newState;
 }
