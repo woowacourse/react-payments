@@ -16,6 +16,7 @@
   grid-area: na;
   margin: 5px 5px 15px 5px;
   font-size: 12px;
+  word-break: break-all;
 }
 
 .rfid {
@@ -38,9 +39,15 @@
     letter-spacing: -3px;
   }
 }
+
 .footer {
   grid-area: ft;
   display: flex;
   justify-content: space-between;
   padding: 7px;
+  font-size: 13px;
+  .owner__name {
+    word-break: break-all;
+    margin-right: 30px;
+  }
 }
