@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input, InputContainer, Label } from './common';
+import ErrorMessage from './common/ErrorMessage';
 import LetterCounter from './common/LetterCounter';
 
 const MAX_NAME_LENGTH = 30;
 
 const convertToUpperCase = word => word.toUpperCase();
-
 const notAlphabet = word => /[^a-zA-Z\s]/.test(word);
+
 const validator = value => {
   if (notAlphabet(value)) {
     throw new Error('영어만 입력해 주세요.');
@@ -17,29 +18,47 @@ const validator = value => {
   }
 };
 
-function CardOwner() {
+function CardOwner({ cardOwnerName, correctOwnerNameCallback }) {
   const [ownerName, setOwnerName] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleInputChange = ({ target: { value } }) => {
     try {
       validator(value);
     } catch (err) {
-      console.log(err.message);
+      setErrorMessage(err.message);
       return;
     }
     setOwnerName(convertToUpperCase(value));
   };
+
+  const correctOwnerName = cardOwnerName === ownerName;
+  const handleInputFocus = () => {
+    if (!correctOwnerName) setErrorMessage('카드에 표시된 이름과 동일하게 입력하세요.');
+  };
+
+  useEffect(() => {
+    correctOwnerNameCallback(correctOwnerName);
+
+    if (correctOwnerName) setErrorMessage('');
+  }, [correctOwnerNameCallback, correctOwnerName]);
+
   return (
     <InputContainer position="relative">
-      <LetterCounter maxLength={30} currentLength={ownerName.length} />
-      <Label>카드 소유자 이름(선택)</Label>
-      <Input
-        type="text"
-        placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        maxLength="30"
-        onChange={handleInputChange}
-        value={ownerName}
-        required
-      />
+      <div>
+        <LetterCounter maxLength={30} currentLength={ownerName.length} />
+        <Label>카드 소유자 이름(선택)</Label>
+        <Input
+          type="text"
+          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          maxLength="30"
+          onChange={handleInputChange}
+          value={ownerName}
+          required
+          onFocus={handleInputFocus}
+        />
+      </div>
+      <ErrorMessage>{errorMessage}</ErrorMessage>
     </InputContainer>
   );
 }
