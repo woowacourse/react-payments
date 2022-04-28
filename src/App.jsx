@@ -1,3 +1,11 @@
+import { memo } from 'react';
+
+import useCardNumber from './hooks/useCardNumber';
+import useCardOwnerName from './hooks/useCardOwnerName';
+import useCVC from './hooks/useCVC';
+import useCardPassword from './hooks/useCardPassword';
+import useValidDate from './hooks/useValidDate';
+
 import styled from 'styled-components';
 
 import Button from './components/Button';
@@ -5,6 +13,8 @@ import Card from './components/Card';
 import Input from './components/Input';
 
 import { ReactComponent as Arrow } from './assets/arrow.svg';
+
+import { RULE } from './constants';
 
 const StyledPage = styled.div`
   background: #fff;
@@ -53,25 +63,51 @@ const NextButton = styled(Button)`
 `;
 
 function App() {
+  const [cardNumber, setCardNumber] = useCardNumber('');
+  const [cardOwnerName, setCardOwnerName] = useCardOwnerName('');
+  const [validDate, setValidDate] = useValidDate('');
+  const [CVC, setCVC] = useCVC('');
+  const [firstPassword, setFirstPassword] = useCardPassword('');
+  const [secondPassword, setSecondPassword] = useCardPassword('');
+
   return (
     <StyledPage>
       <Header>
         <Button size="small" content={<Arrow />} />
         <Title>카드 추가</Title>
       </Header>
-      <StyledCard bgColor="#D2D2D2" size="medium" />
+      <StyledCard
+        bgColor="#D2D2D2"
+        size="medium"
+        name={cardOwnerName}
+        validDate={validDate}
+      />
       <InputGroup>
         <div>
-          <Input description="카드 번호" />
+          <Input
+            description="카드 번호"
+            value={cardNumber}
+            onChangeFunc={setCardNumber}
+          />
         </div>
         <div>
-          <Input description="만료일" placeholder="MM / YY" width="137px" />
+          <Input
+            description="만료일"
+            placeholder="MM / YY"
+            width="137px"
+            value={validDate}
+            onChangeFunc={setValidDate}
+          />
         </div>
         <div>
-          <CardOwnerNameLength>0/30</CardOwnerNameLength>
+          <CardOwnerNameLength>
+            {cardOwnerName.length}/{RULE.CARD_OWNER_NAME_MAX_LENGTH}
+          </CardOwnerNameLength>
           <Input
             description="카드 소유자 이름 (선택)"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+            value={cardOwnerName}
+            onChangeFunc={setCardOwnerName}
           />
         </div>
         <div>
@@ -79,6 +115,8 @@ function App() {
             description="보안 코드(CVC/CVV)"
             type="password"
             width="84px"
+            value={CVC}
+            onChangeFunc={setCVC}
           />
           <Button
             border="1px solid #BABABA"
@@ -95,8 +133,16 @@ function App() {
             margin={{ r: '7px' }}
             type="password"
             width="43px"
+            value={firstPassword}
+            onChangeFunc={setFirstPassword}
           />
-          <Input margin={{ r: '26px' }} type="password" width="43px" />
+          <Input
+            margin={{ r: '26px' }}
+            type="password"
+            width="43px"
+            value={secondPassword}
+            onChangeFunc={setSecondPassword}
+          />
           <Bullet>•</Bullet>
           <Bullet>•</Bullet>
         </div>
@@ -106,5 +152,4 @@ function App() {
   );
 }
 
-// export default memo(App);
-export default App;
+export default memo(App);
