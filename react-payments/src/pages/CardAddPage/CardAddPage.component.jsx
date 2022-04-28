@@ -1,9 +1,11 @@
 import Card from "../../component/Card/card.component";
 import Form from "../../component/Form/form.component";
 import Header from "../../component/Header/Header.component";
+import LinkButton from "../../component/LinkButton/linkButton.component";
 import useCardNumber from "../../hooks/useCardNumber";
 import useCardPassword from "../../hooks/useCardPassword";
 import useExpireDate from "../../hooks/useExpireDate";
+import useReady from "../../hooks/useReady";
 import useSecurityCode from "../../hooks/useSecurityCode";
 import useUserName from "../../hooks/useUserName";
 import "./CardAddPage.css";
@@ -14,6 +16,14 @@ const CardAddPage = () => {
   const [userName, onChangeUserName] = useUserName();
   const [securityCode, onChangeSecurityCode] = useSecurityCode();
   const [cardPassword, onChangeCardPassword] = useCardPassword();
+  const [ready, checkReady] = useReady(
+    cardNumber,
+    expireDate,
+    securityCode,
+    cardPassword
+  );
+
+  checkReady();
 
   return (
     <div className="card-add-page">
@@ -90,6 +100,7 @@ const CardAddPage = () => {
         onChange={onChangeCardPassword}
         value={cardPassword}
       />
+      {ready && <LinkButton linkLabel="다음" linkClass="next-link" />}
     </div>
   );
 };
