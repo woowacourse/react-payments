@@ -11,10 +11,6 @@ export default {
 const Template = args => <Input {...args} />;
 
 export const CardNumberInput = Template.bind({});
-export const ExpirationDateInput = Template.bind({});
-export const OwnerNameInput = Template.bind({});
-export const SecurityCodeInput = Template.bind({});
-export const PasswordInput = Template.bind({});
 
 CardNumberInput.args = {
   labelTitle: '카드번호',
@@ -28,6 +24,8 @@ CardNumberInput.args = {
     />
   )),
 };
+
+export const ExpirationDateInput = Template.bind({});
 
 ExpirationDateInput.args = {
   labelTitle: '만료일',
@@ -44,6 +42,8 @@ ExpirationDateInput.args = {
   )),
 };
 
+export const OwnerNameInput = Template.bind({});
+
 OwnerNameInput.args = {
   labelTitle: '카드 소유자 이름(선택)',
   children: (
@@ -56,11 +56,15 @@ OwnerNameInput.args = {
   ),
 };
 
+export const SecurityCodeInput = Template.bind({});
+
 SecurityCodeInput.args = {
   labelTitle: '보안코드(CVC/CVV)',
   inputSize: 'w-25',
   children: <input className="input-basic" type="password" maxLength={3} required />,
 };
+
+export const PasswordInput = Template.bind({});
 
 PasswordInput.args = {
   labelTitle: '카드 비밀번호',
