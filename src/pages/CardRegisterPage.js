@@ -1,7 +1,9 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 
-import { COMPONENTS } from '../constants/card';
+import { cardInfoReducer } from '../reducer/cardInfo';
+
+import { COMPONENTS, initialCardInfo } from '../constants/card';
 
 import { CardExpireDateInputForm } from '../components/CardRegister/CardExpireDateInputForm';
 import { CardNumbersInputForm } from '../components/CardRegister/CardNumbersInputForm';
@@ -14,7 +16,6 @@ import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 import { PageTitle } from '../components/common/PageTitle';
 import { ModalSelector } from '../components/common/ModalSelector';
-import { useReducer } from 'react';
 
 const CARD_TYPES = [
   { name: '포코', color: 'gold' },
@@ -27,78 +28,8 @@ const CARD_TYPES = [
   { name: '록바', color: '#FBCD58' },
 ];
 
-const reducer = (state, action) => {
-  const { type, payload } = action;
-
-  switch (type) {
-    case 'setCardNumber': {
-      const { key, cardNumber } = payload;
-
-      return {
-        ...state,
-        cardNumbers: { ...state.cardNumbers, [key]: cardNumber },
-      };
-    }
-    case 'setExpireDate': {
-      const { key, date } = payload;
-
-      return { ...state, expireDate: { ...state.expireDate, [key]: date } };
-    }
-    case 'setOwnerName': {
-      const { ownerName } = payload;
-
-      return { ...state, ownerName };
-    }
-    case 'setCVC': {
-      const { CVC } = payload;
-
-      return { ...state, CVC };
-    }
-    case 'setPassword': {
-      const { key, password } = payload;
-
-      return {
-        ...state,
-        password: { ...state.password, [key]: password },
-      };
-    }
-    case 'setCardType': {
-      const { cardType } = payload;
-
-      return {
-        ...state,
-        cardType,
-      };
-    }
-    default:
-      throw new Error('NO SUCH TYPE');
-  }
-};
-const initialCardInfo = {
-  cardNumbers: {
-    firstNumber: '',
-    secondNumber: '',
-    thirdNumber: '',
-    fourthNumber: '',
-  },
-  expireDate: {
-    month: '',
-    year: '',
-  },
-  ownerName: '',
-  CVC: '',
-  password: {
-    firstNumber: '',
-    secondNumber: '',
-  },
-  cardType: {
-    name: '',
-    backgroundColor: '',
-  },
-};
-
 export const CardRegisterPage = () => {
-  const [cardInfo, dispatch] = useReducer(reducer, initialCardInfo);
+  const [cardInfo, dispatch] = useReducer(cardInfoReducer, initialCardInfo);
 
   const [openedModalComponent, setOpenedModalComponent] = useState('');
 

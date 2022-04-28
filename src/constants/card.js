@@ -11,3 +11,26 @@ export const MAX_LENGTH = {
   OWNER_NAME: 30,
   EACH_CARD_NUMBER: 4,
 };
+
+export const initialCardInfo = {
+  cardNumbers: {
+    firstNumber: '',
+    secondNumber: '',
+    thirdNumber: '',
+    fourthNumber: '',
+  },
+  expireDate: {
+    month: '',
+    year: '',
+  },
+  ownerName: '',
+  CVC: '',
+  password: {
+    firstNumber: '',
+    secondNumber: '',
+  },
+  cardType: {
+    name: '',
+    backgroundColor: '',
+  },
+};
