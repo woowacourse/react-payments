@@ -3,6 +3,7 @@ import Input from "./UIComponents/Input/Input.jsx";
 import InputField from "./UIComponents/InputField/InputField.jsx";
 import styled from "styled-components";
 import HelpIconImage from "../assets/images/questionMark.svg";
+import { CREATE_MASKED_CHARACTERS } from "../constants.js";
 
 const StyledIconContainer = styled.div`
   position: relative;
@@ -50,21 +51,21 @@ function HelpIcon({ description }) {
   );
 }
 
-const cvcHelperDescription =
+const SECURITY_CODE_DESCRIPTION =
   "CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.";
 
 export default function CardSecurityCodeInput({ securityCode, onChange }) {
   return (
     <InputField
       labelText="보안 코드(CVC/CVV)"
-      OptionalComponent={<HelpIcon description={cvcHelperDescription} />}
+      OptionalComponent={<HelpIcon description={SECURITY_CODE_DESCRIPTION} />}
       wrapperWidth="85px"
     >
       <Input
         type="password"
         value={securityCode}
         onChange={onChange}
-        placeholder="• • •"
+        placeholder={CREATE_MASKED_CHARACTERS(3)}
         width="100%"
       />
     </InputField>

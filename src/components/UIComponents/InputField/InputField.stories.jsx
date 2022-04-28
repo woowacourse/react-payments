@@ -14,13 +14,13 @@ const DefaultInput = InputTemplate.bind({});
 
 export const Default = Template.bind({});
 Default.args = {
-  labelText: "sample label",
+  labelText: "default input",
   children: <DefaultInput placeholder="placeholder" />,
 };
 
 export const TwoInputs = Template.bind({});
 TwoInputs.args = {
-  labelText: "sample label",
+  labelText: "two inputs",
   children: [
     <DefaultInput placeholder="placeholder" />,
     "/",
@@ -30,7 +30,7 @@ TwoInputs.args = {
 
 export const FourInputs = Template.bind({});
 FourInputs.args = {
-  labelText: "sample label",
+  labelText: "four inputs",
   children: [
     <DefaultInput placeholder="placeholder" />,
     "-",

@@ -2,6 +2,7 @@ import React from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import InputField from "./UIComponents/InputField/InputField.jsx";
 import styled from "styled-components";
+import { CARD_INFO_RULES } from "../constants.js";
 
 const StyledInputCounter = styled.p`
   position: absolute;
@@ -26,7 +27,10 @@ export default function CardHolderNameInput({ holderName, onChange }) {
     <InputField
       labelText="카드 소유자 이름 (선택)"
       OptionalComponent={
-        <InputCounter currLength={holderName.length} maxLength="30" />
+        <InputCounter
+          currLength={holderName.length}
+          maxLength={CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH}
+        />
       }
       wrapperWidth="100%"
       horizontalAlign="flex-start"

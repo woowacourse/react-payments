@@ -20,7 +20,6 @@ const StyledLabel = styled.label`
 const StyledInputWrapper = styled.div`
   display: flex;
   justify-content: ${(props) => props.align};
-  /* justify-content: space-around; */
   background: #ecebf1;
   border-radius: 7px;
   width: ${(props) => props.width};
@@ -60,8 +59,5 @@ InputField.propTypes = {
     PropTypes.node,
   ]),
   wrapperWidth: PropTypes.string,
-};
-
-InputField.defaultProps = {
-  labelText: "sample label",
+  horizontalAlign: PropTypes.oneOf(["flex-start", "center", "space-around"]),
 };

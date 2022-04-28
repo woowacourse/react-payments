@@ -1,4 +1,5 @@
 import React from "react";
+import { CREATE_MASKED_CHARACTERS } from "../constants";
 import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
 
@@ -27,14 +28,14 @@ export default function CardNumberInput({ cardNumber, onChange }) {
         type="password"
         value={cardNumber[2]}
         onChange={(e) => onChange(e, 2)}
-        placeholder="• • • •"
+        placeholder={CREATE_MASKED_CHARACTERS(4)}
       />
       <p>-</p>
       <Input
         type="password"
         value={cardNumber[3]}
         onChange={(e) => onChange(e, 3)}
-        placeholder="• • • •"
+        placeholder={CREATE_MASKED_CHARACTERS(4)}
       />
     </InputField>
   );

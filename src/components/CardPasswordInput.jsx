@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import styled from "styled-components";
+import { CREATE_MASKED_CHARACTERS } from "../constants.js";
 
 const StyledInputField = styled.div`
   display: flex;
@@ -44,7 +45,7 @@ export default function CardPasswordInput({ password, onChange }) {
             value={password[0]}
             onChange={(e) => onChange(e, 0)}
             width="100%"
-            placeholder="•"
+            placeholder={CREATE_MASKED_CHARACTERS(1)}
           />
         </StyledInputWrapper>
         <StyledInputWrapper width="45px">
@@ -53,7 +54,7 @@ export default function CardPasswordInput({ password, onChange }) {
             value={password[1]}
             onChange={(e) => onChange(e, 1)}
             width="100%"
-            placeholder="•"
+            placeholder={CREATE_MASKED_CHARACTERS(1)}
           />
         </StyledInputWrapper>
       </StyledInputContainer>

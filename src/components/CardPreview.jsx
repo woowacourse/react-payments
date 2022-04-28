@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes, { string } from "prop-types";
+import { CREATE_MASKED_CHARACTERS } from "../constants";
 
 const CardContainer = styled.div`
   display: flex;
@@ -71,8 +72,9 @@ export default function CardPreview({ cardNumber, holderName, expireDate }) {
         <CardName>클린카드</CardName>
         <CardChip />
         <CardNumber>
-          {cardNumber[0]} {cardNumber[1]} {"•".repeat(cardNumber[2].length)}{" "}
-          {"•".repeat(cardNumber[3].length)}
+          {cardNumber[0]} {cardNumber[1]}{" "}
+          {CREATE_MASKED_CHARACTERS(cardNumber[2].length)}{" "}
+          {CREATE_MASKED_CHARACTERS(cardNumber[3].length)}
         </CardNumber>
         <CardBottomSection>
           <CardHolderName>{holderName}</CardHolderName>

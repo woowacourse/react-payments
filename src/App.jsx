@@ -14,6 +14,7 @@ import {
   CardSecurityCodeInput,
   CardExpireDateInput,
 } from "./components";
+import { CARD_REGISTER_SUCCESS_MESSAGE, CARD_INFO_RULES } from "./constants.js";
 
 function App() {
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
@@ -24,7 +25,11 @@ function App() {
   const [canProceed, setCanProceed] = useState(false);
 
   const handleCardNumberUpdate = ({ target: { value } }, order) => {
-    if (!Number.isInteger(Number(value)) || value.length > 4) return;
+    if (
+      !Number.isInteger(Number(value)) ||
+      value.length > CARD_INFO_RULES.NUMBER_UNIT_LENGTH
+    )
+      return;
 
     setCardNumber((prevValue) => {
       const newValue = [...prevValue];
@@ -61,13 +66,21 @@ function App() {
   };
 
   const handleHolderNameUpdate = ({ target: { value } }) => {
-    if (!/^[a-z]*$/i.test(value) || value.length > 30) return;
+    if (
+      !/^[a-z]*$/i.test(value) ||
+      value.length > CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH
+    )
+      return;
 
     setHolderName(value.toUpperCase());
   };
 
   const handleSecurityCodeUpdate = ({ target: { value } }) => {
-    if (!Number.isInteger(Number(value)) || value.length > 3) return;
+    if (
+      !Number.isInteger(Number(value)) ||
+      value.length > CARD_INFO_RULES.SECURITY_CODE_LENGTH
+    )
+      return;
 
     setSecurityCode(value);
   };
@@ -84,15 +97,23 @@ function App() {
   };
 
   const handleCardInfoSubmit = () => {
-    alert("카드가 정상적으로 등록되었습니다!");
+    alert(CARD_REGISTER_SUCCESS_MESSAGE);
   };
 
   const isValidCardInfo = useCallback(() => {
+    const {
+      NUMBER_UNIT_COUNT,
+      NUMBER_UNIT_LENGTH,
+      EXPIRE_DATE_LENGTH,
+      SECURITY_CODE_LENGTH,
+      PASSWORD_LENGTH,
+    } = CARD_INFO_RULES;
+
     return (
-      cardNumber.join("").length === 16 &&
-      expireDate.join("").length === 4 &&
-      securityCode.length === 3 &&
-      password.join("").length === 2
+      cardNumber.join("").length === NUMBER_UNIT_COUNT * NUMBER_UNIT_LENGTH &&
+      expireDate.join("").length === EXPIRE_DATE_LENGTH &&
+      securityCode.length === SECURITY_CODE_LENGTH &&
+      password.join("").length === PASSWORD_LENGTH
     );
   }, [cardNumber, expireDate, securityCode, password]);
 
