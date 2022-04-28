@@ -12,7 +12,7 @@ function App() {
     cardInfo,
     resetCardInfo,
     onChangeCardNumber,
-    onChangeExpiredDate,
+    onChangeExpirationDate,
     onChangeUserName,
     onBlurUserName,
     onChangeSecurityCode,
@@ -28,7 +28,7 @@ function App() {
       <CardInfoForm
         cardInfo={cardInfo}
         onChangeCardNumber={onChangeCardNumber}
-        onChangeExpiredDate={onChangeExpiredDate}
+        onChangeExpirationDate={onChangeExpirationDate}
         onChangeUserName={onChangeUserName}
         onBlurUserName={onBlurUserName}
         onChangeSecurityCode={onChangeSecurityCode}

@@ -1,6 +1,6 @@
 interface CardInfo {
   cardNumbers: CardNumbers;
-  expiredDate: ExpiredDate;
+  expirationDate: ExpirationDate;
   userName: string;
   securityCode: string;
   password: Password;
@@ -10,9 +10,9 @@ type CardNumbers = [string, string, string, string];
 
 type Password = [string, string];
 
-interface ExpiredDate {
+interface ExpirationDate {
   month: string;
   year: string;
 }
 
-export type { CardInfo, CardNumbers, ExpiredDate, Password };
+export type { CardInfo, CardNumbers, ExpirationDate, Password };

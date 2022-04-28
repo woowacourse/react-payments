@@ -5,7 +5,7 @@ import { CardInfo, CardNumbers, Password } from "../types";
 
 const initialCardInfo: CardInfo = {
   cardNumbers: ["", "", "", ""],
-  expiredDate: { month: "", year: "" },
+  expirationDate: { month: "", year: "" },
   userName: "",
   securityCode: "",
   password: ["", ""],
@@ -37,7 +37,7 @@ export const useCardInfo = () => {
     }
   };
 
-  const onChangeExpiredDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       value,
       dataset: { key },
@@ -45,15 +45,15 @@ export const useCardInfo = () => {
 
     if (value === "" || REGEXP.NUMBER.test(value)) {
       setCardInfo(prevCardInfo => {
-        const newExpiredDate = {
-          ...prevCardInfo.expiredDate,
+        const newExpirationDate = {
+          ...prevCardInfo.expirationDate,
         };
 
-        newExpiredDate[key] = value;
+        newExpirationDate[key] = value;
 
         return {
           ...prevCardInfo,
-          expiredDate: newExpiredDate,
+          expirationDate: newExpirationDate,
         };
       });
     }
@@ -112,7 +112,7 @@ export const useCardInfo = () => {
     cardInfo,
     resetCardInfo,
     onChangeCardNumber,
-    onChangeExpiredDate,
+    onChangeExpirationDate,
     onChangeUserName,
     onBlurUserName,
     onChangeSecurityCode,

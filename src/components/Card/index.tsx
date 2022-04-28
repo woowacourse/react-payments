@@ -3,7 +3,7 @@ import React from "react";
 import { CardInfo } from "../../types";
 
 export default function Card({ cardInfo }: { cardInfo: CardInfo }) {
-  const { cardNumbers, expiredDate, userName } = cardInfo;
+  const { cardNumbers, expirationDate, userName } = cardInfo;
 
   return (
     <div className="card-box">
@@ -11,8 +11,8 @@ export default function Card({ cardInfo }: { cardInfo: CardInfo }) {
         <div className="card-top">
           <span className="card-text"></span>
           <span className="card-text">
-            <span className="card-expired-date">{expiredDate.month || "MM"}</span> /{" "}
-            <span className="card-expired-date">{expiredDate.year || "YY"}</span>
+            <span className="card-expiration-date">{expirationDate.month || "MM"}</span> /{" "}
+            <span className="card-expiration-date">{expirationDate.year || "YY"}</span>
           </span>
         </div>
         <div className="card-middle">

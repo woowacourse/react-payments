@@ -1,39 +1,42 @@
 import { CARD_VALID_PERIOD } from "../contants";
-import { CardInfo, CardNumbers, ExpiredDate, Password } from "../types";
+import { CardInfo, CardNumbers, ExpirationDate, Password } from "../types";
 
-type Validator = (value) => boolean;
+type Validator<T> = (value: T) => boolean;
 
 export type Validators = {
-  [P in keyof CardInfo]: Validator;
+  [K in keyof CardInfo]: Validator<CardInfo[K]>;
 };
 
 const validateCardNumbers = (cardNumbers: CardNumbers) =>
   cardNumbers.every(cardNumber => cardNumber.length === 4);
 
-const validateExpiredDateLength = (expiredDate: ExpiredDate) =>
-  Object.keys(expiredDate).every(key => expiredDate[key].length === 2);
+const validateExpirationDateLength = (expirationDate: ExpirationDate) =>
+  Object.keys(expirationDate).every(key => expirationDate[key].length === 2);
 
-const validateMonth = (expiredDate: ExpiredDate) =>
-  Number(expiredDate.month) >= 1 && Number(expiredDate.month) <= 12;
+const validateMonth = (expirationDate: ExpirationDate) =>
+  Number(expirationDate.month) >= 1 && Number(expirationDate.month) <= 12;
 
-const validateDate = (expiredDate: ExpiredDate) => {
+const validateDate = (expirationDate: ExpirationDate) => {
   const date = new Date();
   const year = date.getFullYear() % 100;
   const month = date.getMonth() + 1;
 
-  if (Number(expiredDate.year) < year) return false;
-  if (Number(expiredDate.year) > year + CARD_VALID_PERIOD) return false;
-  if (Number(expiredDate.year) === year && Number(expiredDate.month) < month) return false;
-  if (Number(expiredDate.year) === year + CARD_VALID_PERIOD && Number(expiredDate.month) > month)
+  if (Number(expirationDate.year) < year) return false;
+  if (Number(expirationDate.year) > year + CARD_VALID_PERIOD) return false;
+  if (Number(expirationDate.year) === year && Number(expirationDate.month) < month) return false;
+  if (
+    Number(expirationDate.year) === year + CARD_VALID_PERIOD &&
+    Number(expirationDate.month) > month
+  )
     return false;
 
   return true;
 };
 
-const expiredDateValidators = [validateExpiredDateLength, validateMonth, validateDate];
+const expirationDateValidators = [validateExpirationDateLength, validateMonth, validateDate];
 
-const validateExpiredDate = (expiredDate: ExpiredDate) =>
-  expiredDateValidators.every(validator => validator(expiredDate));
+const validateExpirationDate = (expirationDate: ExpirationDate) =>
+  expirationDateValidators.every(validator => validator(expirationDate));
 
 const validateUserName = (userName: string) => userName.length > 0;
 
@@ -43,7 +46,7 @@ const validatePassword = (password: Password) => password.every(number => number
 
 const cardInfoValidator = {
   cardNumbers: validateCardNumbers,
-  expiredDate: validateExpiredDate,
+  expirationDate: validateExpirationDate,
   userName: validateUserName,
   securityCode: validateSecurityCode,
   password: validatePassword,

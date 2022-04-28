@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { CardInfoValidation } from "../../hooks/useCardInfoValidation";
 import { CardInfo } from "../../types";
-import CardExpiredDate from "./CardExpiredDate";
+import CardExpirationDate from "./CardExpirationDate";
 import CardNumber from "./CardNumber";
 import CardPassword from "./CardPassword";
 import CardSecurityCode from "./CardSecurityCode";
@@ -11,7 +11,7 @@ import CardUserName from "./CardUserName";
 interface CardInfoFormProps {
   cardInfo: CardInfo;
   onChangeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeExpiredDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeExpirationDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlurUserName: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   onChangeSecurityCode: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -23,7 +23,7 @@ interface CardInfoFormProps {
 export default function CardInfoForm({
   cardInfo,
   onChangeCardNumber,
-  onChangeExpiredDate,
+  onChangeExpirationDate,
   onChangeUserName,
   onBlurUserName,
   onChangeSecurityCode,
@@ -31,11 +31,11 @@ export default function CardInfoForm({
   resetCardInfo,
   cardInfoValidation,
 }: CardInfoFormProps) {
-  const { cardNumbers, expiredDate, userName, securityCode, password } = cardInfo;
+  const { cardNumbers, expirationDate, userName, securityCode, password } = cardInfo;
   const [isNextButtonShown, setIsNextButtonShown] = useState(true);
   const {
     isCardNumbersValid,
-    isExpiredDateValid,
+    isExpirationDateValid,
     isUserNameValid,
     isSecurityCodeValid,
     isPasswordValid,
@@ -59,10 +59,10 @@ export default function CardInfoForm({
         onChange={onChangeCardNumber}
         isValid={isCardNumbersValid}
       />
-      <CardExpiredDate
-        expiredDate={expiredDate}
-        onChange={onChangeExpiredDate}
-        isValid={isExpiredDateValid}
+      <CardExpirationDate
+        expirationDate={expirationDate}
+        onChange={onChangeExpirationDate}
+        isValid={isExpirationDateValid}
       />
       <CardUserName
         cardUserName={userName}

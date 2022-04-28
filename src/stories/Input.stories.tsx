@@ -27,8 +27,8 @@ CardSecretNumber.args = {
   placeholder: "",
 };
 
-export const ExpiredDate = Template.bind({});
-ExpiredDate.args = {
+export const ExpirationDate = Template.bind({});
+ExpirationDate.args = {
   type: "text",
   width: "",
   onChange: () => {},

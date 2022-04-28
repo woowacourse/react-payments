@@ -12,7 +12,7 @@ export const Default = Template.bind({});
 Default.args = {
   cardInfo: {
     cardNumbers: ["1234", "1234", "1234", "1234"],
-    expiredDate: { month: "12", year: "23" },
+    expirationDate: { month: "12", year: "23" },
     userName: "EUI JIN",
   },
 };
