@@ -1,5 +1,5 @@
 import Layout from './components/common/Layout';
-import CardAppPage from './page/CardAddPage';
+import CardAppPage from './page/cardAdd';
 
 const App = () => {
   return (
