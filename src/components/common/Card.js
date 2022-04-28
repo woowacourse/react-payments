@@ -1,5 +1,8 @@
 import React from 'react';
+
 import styled from 'styled-components';
+
+import { Shimmer } from './Shimmer';
 
 const CardBox = styled.div`
   display: flex;
@@ -9,6 +12,7 @@ const CardBox = styled.div`
   margin: 10px 0;
 `;
 const SmallCard = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -92,7 +96,7 @@ export const Card = ({
   cardNumbers,
   expireDate,
   ownerName,
-  handleModalVisible,
+  openModal,
 }) => {
   const formattedCardNumbers = Object.values(cardNumbers)
     .map((number, idx) => (idx <= 1 ? number : '•'.repeat(number.length)))
@@ -100,7 +104,7 @@ export const Card = ({
 
   return (
     <CardBox>
-      <SmallCard backgroundColor={cardType.color} onClick={handleModalVisible}>
+      <SmallCard backgroundColor={cardType.color} onClick={openModal}>
         <CardTop>
           <CardText>{cardType.name}카드</CardText>
         </CardTop>
@@ -119,6 +123,7 @@ export const Card = ({
             </CardText>
           </CardBottom__info>
         </CardBottom>
+        <Shimmer />
       </SmallCard>
     </CardBox>
   );
