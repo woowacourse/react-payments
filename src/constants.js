@@ -6,4 +6,13 @@ const ERROR_MESSAGE = {
   CVC: '보안코드가 잘못 입력되었습니다. 보안코드는 3자리로 입력해주세요.',
 };
 
-export default ERROR_MESSAGE;
+const MONTH = {
+  JANUARY: '1',
+  FEBRUARY: 2,
+  SEPTEMBER: 9,
+  LEADING_ZERO: '0',
+};
+
+const EXPIRATION_DATE_LIMIT_LENGTH = 2;
+
+export { ERROR_MESSAGE, MONTH, EXPIRATION_DATE_LIMIT_LENGTH };

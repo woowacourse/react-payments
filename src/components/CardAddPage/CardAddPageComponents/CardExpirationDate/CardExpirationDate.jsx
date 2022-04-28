@@ -1,17 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { MONTH, EXPIRATION_DATE_LIMIT_LENGTH } from '../../../../constants';
+import { inputNumberOnly, limitInputLength } from '../../../../utils';
+
 function CardExpirationDate({ cardInfo, setCardInfo }) {
   const handleMonthOnInput = (event) => {
-    if (event.target.value >= 2 && event.target.value <= 9) {
-      event.target.value = '0' + event.target.value;
-    }
-    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
-    event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(regExp, '');
     let { value, name } = event.target;
-    if (value.length > 2) {
-      value = value.slice(0, 2);
+    value = inputNumberOnly(value);
+
+    if (value >= MONTH.FEBRUARY && value <= MONTH.SEPTEMBER) {
+      value = MONTH.LEADING_ZERO + value;
     }
+
+    if (value.length > EXPIRATION_DATE_LIMIT_LENGTH) {
+      value = limitInputLength(value, EXPIRATION_DATE_LIMIT_LENGTH);
+    }
+
     setCardInfo({
       ...cardInfo,
       [name]: value,
@@ -19,22 +24,26 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
   };
 
   const handleMonthOnFocusOut = (event) => {
-    if (event.target.value === '1') {
-      event.target.value = '01';
+    let { value } = event.target;
+
+    if (value === MONTH.JANUARY) {
+      value = MONTH.LEADING_ZERO + MONTH.JANUARY;
     }
+
     setCardInfo({
       ...cardInfo,
-      month: event.target.value,
+      month: value,
     });
   };
 
   const handleYearOnInput = (event) => {
-    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
-    event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(regExp, '');
     let { value, name } = event.target;
-    if (value.length > 2) {
-      value = value.slice(0, 2);
+    value = inputNumberOnly(value);
+
+    if (value.length > EXPIRATION_DATE_LIMIT_LENGTH) {
+      value = limitInputLength(value, EXPIRATION_DATE_LIMIT_LENGTH);
     }
+
     setCardInfo({
       ...cardInfo,
       [name]: value,
