@@ -46,7 +46,6 @@ const CardChip = styled.div`
 const CardNumber = styled.p`
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 10px;
   margin-bottom: 12px;
 `;
@@ -72,8 +71,8 @@ export default function CardPreview({ cardNumber, holderName, expireDate }) {
         <CardName>클린카드</CardName>
         <CardChip />
         <CardNumber>
-          {cardNumber[0]} {cardNumber[1]}{" "}
-          {CREATE_MASKED_CHARACTERS(cardNumber[2].length)}{" "}
+          {cardNumber[0]}&nbsp;&nbsp;&nbsp;{cardNumber[1]}&nbsp;&nbsp;&nbsp;
+          {CREATE_MASKED_CHARACTERS(cardNumber[2].length)}&nbsp;&nbsp;&nbsp;
           {CREATE_MASKED_CHARACTERS(cardNumber[3].length)}
         </CardNumber>
         <CardBottomSection>

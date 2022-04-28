@@ -134,7 +134,7 @@ function App() {
         holderName={holderName}
         expireDate={expireDate}
       />
-      <CardInfoForm>
+      <CardInfoForm autoComplete="off">
         <CardNumberInput
           cardNumber={cardNumber}
           onChange={handleCardNumberUpdate}

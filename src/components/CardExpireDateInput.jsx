@@ -5,7 +5,7 @@ import InputField from "./UIComponents/InputField/InputField.jsx";
 export default function CardExpireDateInput({ expireDate, onChange }) {
   return (
     <InputField
-      labelText="만료일"
+      labelText="만료일 (MM/YY)"
       wrapperWidth="135px"
       horizontalAlign="center"
     >
