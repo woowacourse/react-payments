@@ -61,6 +61,7 @@ input {
 }
 
 .App {
+  max-width: 320px;
   height: 100%;
   padding: 24px;
   background-color: #fff;
