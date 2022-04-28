@@ -31,14 +31,14 @@ const ModalItemNameStyle = styled.span`
 
 export const CardSelectModal = ({
   cardTypes,
-  handleVisible,
+  closeModal,
   handleCardType,
   handleCardTypeCheck,
 }) => {
   const handleCardTypeSelect = (card) => {
     handleCardType(card);
     handleCardTypeCheck(true);
-    handleVisible();
+    closeModal();
   };
 
   return (

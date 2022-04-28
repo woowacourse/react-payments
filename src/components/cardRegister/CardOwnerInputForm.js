@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { MAX_LENGTH } from '../../constants/card';
+
 import { InputBasic } from '../common/InputBasic';
 import { InputContainer, InputTitle } from '../common/styled';
 
 export const CardOwnerInputForm = ({ ownerName, handleOwnerNameInput }) => {
   const handleOwnerNameChange = (e) => {
-    if (e.target.value.length > 30) {
+    if (e.target.value.length > MAX_LENGTH.OWNER_NAME) {
       return;
     }
 

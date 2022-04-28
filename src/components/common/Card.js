@@ -18,12 +18,13 @@ const SmallCard = styled.div`
   align-items: center;
   justify-content: center;
 
-  width: 208px;
-  height: 130px;
+  width: 236px;
+  height: 145px;
 
   background: ${(props) => props.backgroundColor || '#D2D2D2'};
 
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   border-radius: 5px;
   cursor: pointer;
 `;

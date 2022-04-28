@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import { MAX_LENGTH } from '../../constants/card';
+
 import { InputBasic } from '../common/InputBasic';
 import { InputBox } from '../common/InputBox';
 import { QuestionMark } from '../common/QuestionMark';
@@ -9,10 +11,10 @@ export const CVCInputForm = ({
   CVC,
   handleCVCInput,
   handleCardCVCCheck,
-  handleModalVisible,
+  openModal,
 }) => {
   const handleCVCChange = (e) => {
-    if (isNaN(e.nativeEvent.data) || e.target.value.length > 3) {
+    if (isNaN(e.nativeEvent.data) || e.target.value.length > MAX_LENGTH.CVC) {
       return;
     }
 
@@ -20,7 +22,7 @@ export const CVCInputForm = ({
   };
 
   useEffect(() => {
-    const isCVCCompleted = CVC.length === 3;
+    const isCVCCompleted = CVC.length === MAX_LENGTH.CVC;
 
     handleCardCVCCheck(isCVCCompleted);
   }, [CVC]);
@@ -32,7 +34,7 @@ export const CVCInputForm = ({
         <InputBox width="25%">
           <InputBasic type="password" value={CVC} onChange={handleCVCChange} />
         </InputBox>
-        <QuestionMark onClick={handleModalVisible} />
+        <QuestionMark onClick={openModal} />
       </FlexWrapper>
     </InputContainer>
   );

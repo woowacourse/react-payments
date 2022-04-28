@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { InputBasic } from '../common/InputBasic';
 import { InputBox } from '../common/InputBox';
 import { InputContainer, InputTitle } from '../common/styled';
 import Dot from '../common/Dot';
-import { useEffect } from 'react';
 
 export const CardPasswordInputForm = ({
   password,
@@ -12,7 +11,7 @@ export const CardPasswordInputForm = ({
   handleCardPasswordCheck,
 }) => {
   const handlePasswordChange = (e, name) => {
-    if (isNaN(e.nativeEvent.data)) {
+    if (isNaN(e.nativeEvent.data) || e.target.value.length > 1) {
       return;
     }
 
@@ -33,16 +32,16 @@ export const CardPasswordInputForm = ({
       <InputBox
         width="50%"
         backgroundColor="transparent"
-        justifyContent={'space-between'}
+        justifyContent="space-between"
       >
         <InputBasic
-          value={password?.firstNumber}
+          value={password.firstNumber || ''}
           onChange={(e) => handlePasswordChange(e, 'firstNumber')}
           type="password"
           width="20%"
         />
         <InputBasic
-          value={password?.secondNumber}
+          value={password.secondNumber || ''}
           onChange={(e) => handlePasswordChange(e, 'secondNumber')}
           type="password"
           width="20%"

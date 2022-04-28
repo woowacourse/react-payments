@@ -36,9 +36,9 @@ const ModalStyle = styled.div`
   flex-direction: column;
 `;
 
-export const Modal = ({ children, visible, handleVisible }) => {
+export const Modal = ({ children, visible, closeModal }) => {
   return (
-    <ModalDimmedStyle onClick={handleVisible} isVisible={visible}>
+    <ModalDimmedStyle onClick={closeModal} isVisible={visible}>
       <ModalStyle>{children}</ModalStyle>
     </ModalDimmedStyle>
   );

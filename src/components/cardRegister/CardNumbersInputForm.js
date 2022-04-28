@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import { MAX_LENGTH } from '../../constants/card';
+
 import { InputBasic } from '../common/InputBasic';
 import { InputBox } from '../common/InputBox';
 import { InputContainer, InputTitle } from '../common/styled';
@@ -16,10 +18,13 @@ export const CardNumbersInputForm = ({
   cardNumbers,
   handleCardNumbersInput,
   handleCardNumberCheck,
-  handleModalVisible,
+  openModal,
 }) => {
   const handleNumberChange = (e, name) => {
-    if (isNaN(e.nativeEvent.data) || e.target.value.length > 4) {
+    if (
+      isNaN(e.nativeEvent.data) ||
+      e.target.value.length > MAX_LENGTH.EACH_CARD_NUMBER
+    ) {
       return;
     }
 
@@ -28,13 +33,13 @@ export const CardNumbersInputForm = ({
 
   useEffect(() => {
     const isCardNumbersCompleted = Object.values(cardNumbers).every(
-      (number) => number.length === 4
+      (number) => number.length === MAX_LENGTH.EACH_CARD_NUMBER
     );
 
     handleCardNumberCheck(isCardNumbersCompleted);
 
     if (cardType.name === '' && isCardNumbersCompleted) {
-      handleModalVisible();
+      openModal();
     }
   }, [cardNumbers]);
 

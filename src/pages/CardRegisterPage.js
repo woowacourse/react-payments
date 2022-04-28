@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
+import { COMPONENTS } from '../constants/card';
+
 import { CardExpireDateInputForm } from '../components/CardRegister/CardExpireDateInputForm';
 import { CardNumbersInputForm } from '../components/CardRegister/CardNumbersInputForm';
 import { CardOwnerInputForm } from '../components/CardRegister/CardOwnerInputForm';
@@ -31,66 +33,55 @@ export const CardRegisterPage = () => {
     thirdNumber: '',
     fourthNumber: '',
   });
-
   const [expireDate, setExpireDate] = useState({
     month: '',
     year: '',
   });
-
   const [ownerName, setOwnerName] = useState('');
-
   const [CVC, setCVC] = useState('');
-
   const [password, setPassword] = useState({
     firstNumber: '',
     secondNumber: '',
   });
-
   const [cardType, setCardType] = useState({
     name: '',
     backgroundColor: '',
   });
 
-  const [modalVisible, setModalVisible] = useState('');
+  const [openedModalComponent, setOpenedModalComponent] = useState('');
 
-  const modalSelector = (subject) => {
-    return () => setModalVisible(subject);
-  };
-
-  const [checkInputs, setCheckInputs] = useState({
+  const [checkInputCompleted, setCheckInputCompleted] = useState({
     cardNumbers: false,
     cardExpireDate: false,
     cardCVC: false,
     cardPassword: false,
     cardType: false,
   });
-
   const checkerFactory = (subject) => {
     const key = subject;
 
     return (isCompleted) => {
-      setCheckInputs((prev) => ({ ...prev, [key]: isCompleted }));
+      setCheckInputCompleted((prev) => ({ ...prev, [key]: isCompleted }));
     };
   };
 
   const [allCompleted, setAllCompleted] = useState(false);
-
   useEffect(() => {
-    setAllCompleted(Object.values(checkInputs).every((check) => check));
-  }, [checkInputs]);
+    setAllCompleted(Object.values(checkInputCompleted).every((check) => check));
+  }, [checkInputCompleted]);
 
   const loadModal = () => {
-    switch (modalVisible) {
-      case 'cardType':
+    switch (openedModalComponent) {
+      case COMPONENTS.CARD_TYPE:
         return (
           <CardSelectModal
             cardTypes={CARD_TYPES}
-            handleVisible={() => setModalVisible('')}
+            closeModal={() => setOpenedModalComponent('')}
             handleCardType={setCardType}
-            handleCardTypeCheck={checkerFactory('cardType')}
+            handleCardTypeCheck={checkerFactory(COMPONENTS.CARD_TYPE)}
           />
         );
-      case 'cardCVC':
+      case COMPONENTS.CVC:
         return <CVCHelperModal />;
       default:
         return <div>no data</div>;
@@ -105,19 +96,19 @@ export const CardRegisterPage = () => {
         cardNumbers={cardNumbers}
         expireDate={expireDate}
         ownerName={ownerName}
-        handleModalVisible={modalSelector('cardType')}
+        openModal={() => setOpenedModalComponent(COMPONENTS.CARD_TYPE)}
       />
       <CardNumbersInputForm
         cardType={cardType}
         cardNumbers={cardNumbers}
-        handleModalVisible={modalSelector('cardType')}
         handleCardNumbersInput={setCardNumbers}
-        handleCardNumberCheck={checkerFactory('cardNumbers')}
+        handleCardNumberCheck={checkerFactory(COMPONENTS.NUMBERS)}
+        openModal={() => setOpenedModalComponent(COMPONENTS.CARD_TYPE)}
       />
       <CardExpireDateInputForm
         expireDate={expireDate}
         handleExpireDateInput={setExpireDate}
-        handleCardExpireCheck={checkerFactory('cardExpireDate')}
+        handleCardExpireCheck={checkerFactory(COMPONENTS.EXPIRE_DATE)}
       />
       <CardOwnerInputForm
         ownerName={ownerName}
@@ -126,16 +117,19 @@ export const CardRegisterPage = () => {
       <CVCInputForm
         CVC={CVC}
         handleCVCInput={setCVC}
-        handleCardCVCCheck={checkerFactory('cardCVC')}
-        handleModalVisible={modalSelector('cardCVC')}
+        handleCardCVCCheck={checkerFactory(COMPONENTS.CVC)}
+        openModal={() => setOpenedModalComponent(COMPONENTS.CVC)}
       />
       <CardPasswordInputForm
         password={password}
         handlePasswordInput={setPassword}
-        handleCardPasswordCheck={checkerFactory('cardPassword')}
+        handleCardPasswordCheck={checkerFactory(COMPONENTS.PASSWORD)}
       />
-      <Modal visible={modalVisible} handleVisible={() => setModalVisible('')}>
-        {modalVisible && loadModal()}
+      <Modal
+        visible={openedModalComponent}
+        closeModal={() => setOpenedModalComponent('')}
+      >
+        {openedModalComponent && loadModal()}
       </Modal>
 
       <Button disabled={allCompleted ? false : true}>다음</Button>
