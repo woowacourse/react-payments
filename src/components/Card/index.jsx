@@ -7,16 +7,15 @@ function Card({ companyName, cardNumber, userName, expireMonth, expireYear }) {
         <div className="card-top">
           <span className="card-text">{companyName}</span>
         </div>
-        <div className="card-middle">
-          <div className="small-card__chip" />
-        </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
             <span className="card-text">{cardNumber}</span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text">{userName}</span>
-            <span className="card-text">{`${expireMonth} / ${expireYear}`}</span>
+            <span className="card-text user-name">{userName}</span>
+            <span className="card-text expire-date">
+              {expireMonth && expireYear && `${expireMonth} / ${expireYear}`}
+            </span>
           </div>
         </div>
       </div>
@@ -25,11 +24,11 @@ function Card({ companyName, cardNumber, userName, expireMonth, expireYear }) {
 }
 
 Card.defaultProps = {
-  companyName: '콤피 카드',
-  cardNumber: '1111-2222-3333-4444',
-  userName: '류콤피',
-  expireMonth: '05',
-  expireYear: '28',
+  companyName: '',
+  cardNumber: '',
+  userName: '',
+  expireMonth: '',
+  expireYear: '',
 };
 
 Card.propTypes = {

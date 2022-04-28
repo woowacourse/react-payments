@@ -1,18 +1,21 @@
 import Card from '.';
-import '../../index.css'; // 루트 디렉터리 세팅하기!
+import 'index.css';
 
 export default {
   title: 'Component/Card',
   component: Card,
   parameters: {
-    // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'centered',
   },
 };
 
 const Template = (args) => <Card {...args} />;
 
-export const Samsung = Template.bind({});
-Samsung.args = {
-  name: '삼성 카드',
+export const Compy = Template.bind({});
+Compy.args = {
+  companyName: '콤피 카드',
+  cardNumber: '1111-2222-••••-••••',
+  userName: '류콤피',
+  expireMonth: '05',
+  expireYear: '28',
 };
