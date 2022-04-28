@@ -4,12 +4,12 @@ import Label from "../Label/index";
 import ErrorMessage from "../ErrorMessage/index";
 import PropTypes from "prop-types";
 
-const FieldSet = ({ id, description, children, errorMessage }) => {
+const FieldSet = ({ id, description, children, errorMessage, isError }) => {
   return (
     <Container>
       <Label id={id} description={description} />
       {children}
-      <ErrorMessage message={errorMessage} />
+      {isError && <ErrorMessage message={errorMessage} />}
     </Container>
   );
 };

@@ -107,26 +107,36 @@ const AddCardPage = () => {
         onChangeSecondCardNumber={onChangeSecondCardNumber}
         onChangeThirdCardNumber={onChangeThirdCardNumber}
         onChangeFourthCardNumber={onChangeFourthCardNumber}
+        isError={
+          isFirstCardNumberError ||
+          isSecondCardNumberError ||
+          isThirdCardNumberError ||
+          isFourthCardNumberError
+        }
       />
       <ExpiredDate
         expiredMonth={expiredMonth}
         expiredYear={expiredYear}
         onChangeExpiredMonth={onChangeExpiredMonth}
         onChangeExpiredYear={onChangeExpiredYear}
+        isError={isExpiredMonthError || isExpiredYearError}
       />
       <CardOwnerName
         ownerName={ownerName}
         onChangeOwnerName={onChangeOwnerName}
+        isError={isOwnerNameError}
       />
       <SecureCode
         secureCode={secureCode}
         onChangeSecureCode={onChangeSecureCode}
+        isError={isSecureCodeError}
       />
       <Password
         firstPassword={firstPassword}
         onChangeFirstPassword={onChangeFirstPassword}
         secondPassword={secondPassword}
         onChangeSecondPassword={onChangeSecondPassword}
+        isError={isFirstPasswordError || isSecondPasswordError}
       />
       {isValidatedForm && isValidatedValueLength && (
         <ButtonContainer>

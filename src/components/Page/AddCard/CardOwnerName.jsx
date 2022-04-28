@@ -9,7 +9,7 @@ const showOwnerNameLength = (ownerName) => {
     : `${ownerName.length}/30`;
 };
 
-const CardOwnerName = ({ ownerName, onChangeOwnerName }) => {
+const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
   return (
     <Container>
       <MaxNumberIndicator>{showOwnerNameLength(ownerName)}</MaxNumberIndicator>
@@ -17,6 +17,7 @@ const CardOwnerName = ({ ownerName, onChangeOwnerName }) => {
         id="cardOwnerName"
         description="카드 소유자 이름(선택)"
         errorMessage="이름은 30자 이하여야 합니다."
+        isError={isError}
       >
         {
           <Input

@@ -9,12 +9,14 @@ const Password = ({
   secondPassword,
   onChangeFirstPassword,
   onChangeSecondPassword,
+  isError,
 }) => {
   return (
     <FieldSet
       id="password"
       description="카드 비밀번호"
       errorMessage="올바른 비밀번호를 입력해주세요."
+      isError={isError}
     >
       {
         <PasswordInputContainer>

@@ -11,12 +11,14 @@ const CardNumber = ({
   onChangeSecondCardNumber,
   onChangeThirdCardNumber,
   onChangeFourthCardNumber,
+  isError,
 }) => {
   return (
     <FieldSet
       id="cardNumber"
       description="카드 번호"
       errorMessage="유효한 카드 번호를 입력하세요."
+      isError={isError}
     >
       {
         <CardNumberInput

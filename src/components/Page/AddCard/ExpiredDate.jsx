@@ -7,12 +7,14 @@ const ExpiredDate = ({
   expiredYear,
   onChangeExpiredMonth,
   onChangeExpiredYear,
+  isError,
 }) => {
   return (
     <FieldSet
       id="expiredNumber"
       description="만료일"
       errorMessage="유효한 만료 숫자를 입력하세요"
+      isError={isError}
     >
       {
         <ExpiredDateInput
