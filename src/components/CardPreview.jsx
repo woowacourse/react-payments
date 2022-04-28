@@ -53,7 +53,7 @@ const CardPreview = ({ cardInfo, isCardFront, handleModal, handleCardPosition })
             <div className="card-back">
               <div className="small-card__chip"></div>
               <div className="card-back__info">
-                이 카드를 도난 분실하면 일주일 이내로 연락 바랍니다.
+                이 카드를 도난 분실하면 일주일 이내로 연락 주시기 바랍니다.
               </div>
             </div>
           </>
