@@ -2,7 +2,7 @@ import React from "react";
 import { useAppDispatch, useAppState } from "../../../hooks/hooks";
 import { createAction } from "../../Provider";
 import { ActionType } from "../../../types";
-import { isNum } from "../../../utils";
+import { isNum, removeWhiteSpaces, removeSlash } from "../../../utils";
 import ExpiredPeriodInput from "./ExpiredPeriodInput";
 
 function ExpiredPeriodInputContainer() {
@@ -12,54 +12,59 @@ function ExpiredPeriodInputContainer() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
-    // value의 총 길이는 5을 넘으면 안 된다
-    if (value.length > 7) return;
 
+    const lastChar = value.slice(-1);
     // 입력할 때
-    if (expiredPeriod.length < value.length) {
-      const lastChar = value.slice(-1);
+    const pureExpiredPeriod = removeWhiteSpaces(removeSlash(value));
+    if (expiredPeriod.length < pureExpiredPeriod.length) {
+
+      // 유효기간의 총 길이는 5을 넘으면 안 된다
+      if (expiredPeriod.length >= 4) return;
+
       // 입력값의 마지막 글자가 숫자여야 한다
       if (!isNum(lastChar)) return;
 
-      // value의 길이가 2이고 value값이 0일 때
+      // value의 길이가 2이고 value값이 0일 때 => 00누른경우
       if (value.length === 2 && Number(value) === 0) {
         dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, '0'));
         return;
       }
 
-      // 입력값의 길이가 3이면 /를 추가해준다
-      if (value.length === 3) {
-        const period = value.slice(0, 2) + ' / ' + lastChar;
-        dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, period));
-        return;
-      }
       // 첫번째 입력값으로 2이상의 숫자가 입력되면 0을 앞에 붙여준다
       if (value.length === 1 && Number(lastChar) > 1) {
-        dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, '0' + value));
+        dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, '0' + lastChar));
         return;
       }
+
       // value가 12 초과라면 01/3
-      if (Number(value) > 12) {
-        const period = '0' + value.slice(0, 1) + ' / ' + lastChar
+      if (value.length === 2 && Number(value) > 12) {
+        const period = '0' + value.slice(0, 1) + lastChar
         dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, period));
         return;
       }
 
-      dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, value));
+      dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, expiredPeriod + lastChar));
       return;
     }
+
     // 년도의 첫번째 숫자를 지울때 /도 같이 지워준다
     // 12 / 
     if (value.length === 5) {
-      dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, value.slice(0, 2)));
+      dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, expiredPeriod.slice(0, 2)));
       return;
     }
 
-    dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, value));
-    
+    // 삭제할때
+    dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, expiredPeriod.slice(0, expiredPeriod.length - 1)));
   }
 
-  return <ExpiredPeriodInput onChange={handleChange} value={expiredPeriod} />
+  const transform = (str: string) => {
+    const left = str.slice(0, 2);
+    const right = str.slice(2, 4);
+    return right ? left + ' / ' + right : left;
+  };
+
+  return <ExpiredPeriodInput onChange={handleChange} value={transform(expiredPeriod)} />
 }
 
 export default ExpiredPeriodInputContainer;
