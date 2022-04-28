@@ -1,0 +1,20 @@
+.tooltip {
+  position: relative;
+}
+.tooltip-content {
+  min-width: 200px;
+
+  background: #696868db;
+
+  color: white;
+  padding: 15px;
+  border-radius: 15px;
+
+  position: absolute;
+  left: -5px;
+  bottom: 30px;
+  font-size: 13px;
+  line-height: 1.4;
+
+  white-space: pre-wrap;
+}

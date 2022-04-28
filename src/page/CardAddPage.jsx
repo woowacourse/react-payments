@@ -9,6 +9,7 @@ import Header from '../components/common/Header';
 import Button from '../components/common/Button';
 
 import { ReactComponent as PrevIcon } from '../assets/prev_icon.svg';
+import Tooltip from '../components/common/Tooltip';
 
 const cardNumberInputInfoList = [
   { id: uuid(), type: 'text', className: 'mr-n15 tracking-wide', name: 'first' },
@@ -165,14 +166,18 @@ const CardAppPage = () => {
         inputInfoList={cardOwnerNameInputInfoList}
         cardInfo={cardInfo}
         onChange={handleChange}
-      />
+      >
+        <div className="owner-name-length">{ownerName.length} / 30</div>
+      </FormInput>
       <FormInput
         item="privacyCode"
         inputTitle="보안코드(CVC/CVV)"
         inputInfoList={privacyCodeInputInfoList}
         onChange={handleChange}
         cardInfo={cardInfo}
-      />
+      >
+        <Tooltip type="PRIVACY_CODE" />
+      </FormInput>
       <FormInput
         item="password"
         inputTitle="카드 비밀번호"

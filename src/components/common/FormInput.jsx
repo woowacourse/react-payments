@@ -48,7 +48,15 @@ const defaultProps = {
 };
 
 // component
-const FormInput = ({ className, item, inputTitle, inputInfoList, cardInfo, onChange }) => {
+const FormInput = ({
+  className,
+  item,
+  inputTitle,
+  inputInfoList,
+  cardInfo,
+  onChange,
+  children,
+}) => {
   return (
     <div className="input-container">
       <label className="input-title">{inputTitle}</label>
@@ -66,6 +74,7 @@ const FormInput = ({ className, item, inputTitle, inputInfoList, cardInfo, onCha
             disabled={isDisabled}
           />
         ))}
+        {children}
       </div>
     </div>
   );

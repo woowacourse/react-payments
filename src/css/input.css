@@ -9,6 +9,7 @@
   color: #d3d3d3;
   border-radius: 7px;
   gap: 7px;
+  position: relative;
 }
 
 .input-title {

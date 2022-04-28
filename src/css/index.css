@@ -3,6 +3,7 @@
 @import './button.css';
 @import './modal.css';
 @import './utils.css';
+@import './tooltip.css';
 
 body {
   display: flex;
@@ -53,4 +54,13 @@ input {
   align-items: center;
 
   color: #383838;
+}
+
+.owner-name-length {
+  position: absolute;
+  top: -20px;
+  right: 0;
+
+  font-size: 12px;
+  color: #525252;
 }
