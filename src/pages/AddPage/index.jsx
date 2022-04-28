@@ -15,6 +15,7 @@ import CardOwnerForm from './CardOwnerForm'
 import CardCVCForm from "./CardCVCForm";
 import CardPasswordForm from "./CardPasswordForm";
 
+import { ReactComponent as Arrow } from '../../assets/arrow.svg';
 import { CARD_NUMBER, DUE_DATE, OWNER, CVC, PASSWORD, COLORS,MONTH } from '../../constant'
 
 function AddPage() {
@@ -122,9 +123,7 @@ function AddPage() {
     <PageWrapper>
       <HeaderWrapper>
         <Button>
-          <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8.30426 1L1.36476 8.78658L9.15134 15.7261" stroke="#525252" strokeWidth="1.5"/>
-          </svg>
+          <Arrow />
         </Button>
         <h2>카드 추가</h2>
       </HeaderWrapper>
