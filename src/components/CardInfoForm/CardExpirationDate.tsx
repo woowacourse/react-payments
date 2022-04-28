@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import { validateExpirationDateLength } from "../../lib/validation";
 import { ExpirationDate } from "../../types";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
@@ -17,7 +18,7 @@ export default function CardExpirationDate({
   const [hasValue, setHasValue] = useState(false);
 
   useEffect(() => {
-    setHasValue(!!expirationDate.month && !!expirationDate.month);
+    setHasValue(validateExpirationDateLength(expirationDate));
   }, [expirationDate]);
 
   return (

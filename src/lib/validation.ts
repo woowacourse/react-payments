@@ -10,7 +10,7 @@ export type Validators = {
 const validateCardNumbers = (cardNumbers: CardNumbers) =>
   cardNumbers.every(cardNumber => cardNumber.length === 4);
 
-const validateExpirationDateLength = (expirationDate: ExpirationDate) =>
+export const validateExpirationDateLength = (expirationDate: ExpirationDate) =>
   Object.keys(expirationDate).every(key => expirationDate[key].length === 2);
 
 const validateMonth = (expirationDate: ExpirationDate) =>
