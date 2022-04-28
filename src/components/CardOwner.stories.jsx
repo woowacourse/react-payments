@@ -5,17 +5,17 @@ export default {
   title: 'CardOwner',
   component: CardOwner,
   argTypes: {
-    cardOwnerName: { control: 'text' },
+    ownerName: { control: 'text' },
   },
 };
 
 const Template = args => {
-  const correctOwnerNameCallback = () => {};
-  return <CardOwner {...args} correctOwnerNameCallback={correctOwnerNameCallback} />;
+  const ownerNameCallback = () => {};
+  return <CardOwner {...args} ownerNameCallback={ownerNameCallback} />;
 };
 
 export const Primary = Template.bind({});
 
 Primary.args = {
-  cardOwnerName: 'COKE TAETAE',
+  ownerName: '',
 };

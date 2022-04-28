@@ -18,7 +18,7 @@ const validator = value => {
   }
 };
 
-function CardOwner({ cardOwnerName, correctOwnerNameCallback }) {
+function CardOwner({ ownerNameCallback }) {
   const [ownerName, setOwnerName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -32,16 +32,9 @@ function CardOwner({ cardOwnerName, correctOwnerNameCallback }) {
     setOwnerName(convertToUpperCase(value));
   };
 
-  const correctOwnerName = cardOwnerName === ownerName;
-  const handleInputFocus = () => {
-    if (!correctOwnerName) setErrorMessage('카드에 표시된 이름과 동일하게 입력하세요.');
-  };
-
   useEffect(() => {
-    correctOwnerNameCallback(correctOwnerName);
-
-    if (correctOwnerName) setErrorMessage('');
-  }, [correctOwnerNameCallback, correctOwnerName]);
+    ownerNameCallback(ownerName);
+  }, [ownerName, ownerNameCallback]);
 
   return (
     <InputContainer position="relative">
@@ -55,7 +48,6 @@ function CardOwner({ cardOwnerName, correctOwnerNameCallback }) {
           onChange={handleInputChange}
           value={ownerName}
           required
-          onFocus={handleInputFocus}
         />
       </div>
       <ErrorMessage>{errorMessage}</ErrorMessage>
