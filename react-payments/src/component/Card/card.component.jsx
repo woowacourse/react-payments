@@ -11,7 +11,7 @@ const Card = ({
   toggleModal,
 }) => {
   return (
-    <div className="card-box" onClick={toggleModal}>
+    <div className="card-box" onClick={toggleModal} data-testId="card">
       <div className={`card ${cardTypeInfo.colorType}`}>
         <div className="card-top">{cardTypeInfo.cardType}</div>
         <div className="card-middle">

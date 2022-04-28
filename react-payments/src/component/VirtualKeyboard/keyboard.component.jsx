@@ -12,15 +12,20 @@ const VirtualKeyboard = ({
         <div
           className="keyboard"
           key={idx}
+          data-testId={keyboard}
           onClick={() => onClickVirtualKeyboard(keyboard)}
         >
           {keyboard}
         </div>
       ))}
-      <div className="keyboard" onClick={onClickBackspaceButton}>
+      <div
+        className="keyboard"
+        onClick={onClickBackspaceButton}
+        data-testId="⬅️"
+      >
         ⬅️
       </div>
-      <div className="keyboard" onClick={onClickCloseButton}>
+      <div className="keyboard" onClick={onClickCloseButton} data-testId="X">
         X
       </div>
     </div>

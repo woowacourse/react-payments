@@ -9,6 +9,7 @@ const InputContainer = ({
   onChange,
   onFocusIn,
   onKeyDown,
+  formType,
 }) => {
   return (
     <div className={`input-box ${inputClass}`}>
@@ -26,6 +27,7 @@ const InputContainer = ({
             value={value}
             onFocus={onFocusIn}
             onKeyDown={onKeyDown}
+            data-testId={`${formType}-${idx}`}
           />
         </Fragment>
       ))}

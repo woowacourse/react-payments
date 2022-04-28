@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import VirtualKeyboard from "./keyboard.component";
 
 export default {
@@ -8,4 +9,8 @@ export default {
 const Template = (args) => <VirtualKeyboard {...args} />;
 
 export const DefaultVirtualKeyboard = Template.bind({});
-DefaultVirtualKeyboard.args = {};
+DefaultVirtualKeyboard.args = {
+  onClickVirtualKeyboard: action("clickVirtualKeyboard"),
+  onClickCloseButton: action("clickCloseButton"),
+  onClickBackspaceButton: action("clickBackSpaceButton"),
+};

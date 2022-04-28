@@ -8,6 +8,7 @@ const HelpBox = () => {
     <div className="help-box-container">
       <div
         className="help-box"
+        role="button"
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
       >

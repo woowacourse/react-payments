@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import Form from "./form.component";
 
 export default {
@@ -53,18 +54,29 @@ export const SecurityCodeForm = Template.bind({});
 
 SecurityCodeForm.args = {
   required: true,
-  inputInfo: [{ type: "password" }],
+  inputInfo: [{ type: "password", value: "" }],
   inputClass: "security-code-input",
   label: "보안 코드(CVC/CVV)",
+  formType: "security-code",
   name: "security-code",
+  onClickVirtualKeyboard: action("clickVirtualKeyboard"),
+  onClickCloseButton: action("clickCloseButton"),
+  onClickBackspaceButton: action("clickBackSpaceButton"),
 };
 
 export const CardPasswordForm = Template.bind({});
 
 CardPasswordForm.args = {
   required: true,
-  inputInfo: [{ type: "password" }],
   inputClass: "card-password-input",
   label: "카드 비밀번호",
   name: "card-password",
+  formType: "card-password",
+  value: {
+    first: "",
+    second: "",
+  },
+  onClickVirtualKeyboard: action("clickVirtualKeyboard"),
+  onClickCloseButton: action("clickCloseButton"),
+  onClickBackspaceButton: action("clickBackSpaceButton"),
 };
