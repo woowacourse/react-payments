@@ -108,6 +108,7 @@ export const CardRegisterPage = () => {
         handleModalVisible={modalSelector('cardType')}
       />
       <CardNumbersInputForm
+        cardType={cardType}
         cardNumbers={cardNumbers}
         handleModalVisible={modalSelector('cardType')}
         handleCardNumbersInput={setCardNumbers}

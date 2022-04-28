@@ -13,6 +13,7 @@ const DEFAULT_CARD_NUMBERS_TYPE = [
 ];
 
 export const CardNumbersInputForm = ({
+  cardType,
   cardNumbers,
   handleCardNumbersInput,
   handleCardNumberCheck,
@@ -33,7 +34,7 @@ export const CardNumbersInputForm = ({
 
     handleCardNumberCheck(isCardNumbersCompleted);
 
-    if (isCardNumbersCompleted) {
+    if (cardType.name === '' && isCardNumbersCompleted) {
       handleModalVisible();
     }
   }, [cardNumbers]);
