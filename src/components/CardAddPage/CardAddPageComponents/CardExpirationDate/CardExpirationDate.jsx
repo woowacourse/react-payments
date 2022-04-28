@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { MONTH, EXPIRATION_DATE_LIMIT_LENGTH } from '../../../../constants';
+import { MONTH, LIMIT_LENGTH } from '../../../../constants';
 import { inputNumberOnly, limitInputLength } from '../../../../utils';
 
 function CardExpirationDate({ cardInfo, setCardInfo }) {
@@ -13,8 +13,8 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
       value = MONTH.LEADING_ZERO + value;
     }
 
-    if (value.length > EXPIRATION_DATE_LIMIT_LENGTH) {
-      value = limitInputLength(value, EXPIRATION_DATE_LIMIT_LENGTH);
+    if (value.length > LIMIT_LENGTH.EXPIRATION_DATE) {
+      value = limitInputLength(value, LIMIT_LENGTH.EXPIRATION_DATE);
     }
 
     setCardInfo({
@@ -40,8 +40,8 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
     let { value, name } = event.target;
     value = inputNumberOnly(value);
 
-    if (value.length > EXPIRATION_DATE_LIMIT_LENGTH) {
-      value = limitInputLength(value, EXPIRATION_DATE_LIMIT_LENGTH);
+    if (value.length > LIMIT_LENGTH.EXPIRATION_DATE) {
+      value = limitInputLength(value, LIMIT_LENGTH.EXPIRATION_DATE);
     }
 
     setCardInfo({

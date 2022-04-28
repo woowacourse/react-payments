@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { LIMIT_LENGTH } from '../../../../constants';
+import { limitInputLength, inputNumberOnly } from '../../../../utils';
+
 function CardNumber({ cardInfo, setCardInfo }) {
   const handleOnInput = (event) => {
-    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
-
-    event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(regExp, '');
-
     let { value, name } = event.target;
+    value = inputNumberOnly(value);
 
-    if (value.length > 4) {
-      value = value.slice(0, 4);
+    if (value.length > LIMIT_LENGTH.CARD_NUMBER) {
+      value = limitInputLength(value, LIMIT_LENGTH.CARD_NUMBER);
     }
 
     setCardInfo({
@@ -18,8 +18,6 @@ function CardNumber({ cardInfo, setCardInfo }) {
       [name]: value,
     });
   };
-
-  // form submit에서 minLength에 대한 validation 필요
 
   return (
     <div className="input-container">
