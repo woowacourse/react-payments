@@ -20,15 +20,18 @@ function CardPasswordField({ cardPassword, onChange }) {
   };
 
   return (
-    <FieldSet title="카드 비밀번호" inputWidth={25} errorMessage={errorMessage}>
+    <FieldSet title="카드 비밀번호" inputWidth={50} errorMessage={errorMessage}>
       <TextField
         type="password"
         name="cardPassword"
         value={cardPassword}
         onChange={onChange}
         onBlur={onBlurCardPassword}
-        maxLength={CARD_PASSWORD.MAX_LENGTH}
+        placeholder="앞 2자리"
+        maxLength={CARD_PASSWORD.LENGTH}
       />
+      <div className="input-security-masking"></div>
+      <div className="input-security-masking"></div>
     </FieldSet>
   );
 }
