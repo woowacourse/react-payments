@@ -4,7 +4,7 @@
 
 - 페어 : 마르코, 아놀드
 - [데모페이지](https://sweet-sprite-876774.netlify.app/)
-- [스토리북 배포페이지](https://626aa58effc760004af7707e-xtupdrtkcs.chromatic.com/)
+- [스토리북 배포페이지](https://626aa58effc760004af7707e-qoyswlxepr.chromatic.com/)
 
 ## 로컬 구동방법
 
@@ -92,7 +92,7 @@
     - [x] 2개의 인풋이 모두 채워져야 한다.
 
 - [x] 페이지 이동 버튼
-- [ ] Storybook 상호 작용 테스트
+- [x] Storybook 상호 작용 테스트
   - 각각의 컴포넌트를 만들 때마다 스토리북 코드 작성 후 테스트한다.
 
 ## 심화 요구사항
