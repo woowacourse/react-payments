@@ -9,7 +9,7 @@ function InputBox({size, background, border, children, error}){
       size={size}
       error={error}
       >
-        {children}
+      {children}
     </InputWrapper>
   )
 } 

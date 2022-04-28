@@ -5,6 +5,7 @@ const InputWrapper = styled.div`
   align-items: center;
   height: 45px;
   border-radius: 7px;
+  box-sizing: border-box;
 
   background: ${(props) =>
     props.background ||

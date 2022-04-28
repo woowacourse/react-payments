@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const PageWrapper = styled.div`
-  height: 700px;
+  height: 710px;
   width: 375px;
   background-color: white;
   padding: 25px;
@@ -73,6 +73,10 @@ const FormWrapper = styled.div`
   }
 `;
 
+const HelpTextWrapper = styled.div`
+  font-size: 12px;
+`;
+
 export {
   PageWrapper,
   HeaderWrapper,
@@ -83,4 +87,5 @@ export {
   CVCWrapper,
   FooterWrapper,
   FormWrapper,
+  HelpTextWrapper,
 };
