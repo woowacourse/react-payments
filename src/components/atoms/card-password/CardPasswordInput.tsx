@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
-import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 
-const style = css({
+const Input = styled.input(() => ({
   backgroundColor: '#ECEBF1',
   height: '45px',
   width: '43px',
@@ -17,7 +17,7 @@ const style = css({
   '&:disabled': {
     backgroundColor: 'white',
   }
-});
+}));
 
 type Props = {
   value?: string,
@@ -31,8 +31,8 @@ const CardPasswordInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
     <>
       { 
         disabled ? 
-          <input css={style} disabled placeholder='•' />
-          : <input id="card-password-input" autoComplete="off" css={style} type="text" onChange={onChange} value={value} placeholder='' ref={ref} />
+          <Input disabled placeholder='•' />
+          : <Input id="card-password-input" autoComplete="off" type="text" onChange={onChange} value={value} placeholder='' ref={ref} />
       }
     </>
   )

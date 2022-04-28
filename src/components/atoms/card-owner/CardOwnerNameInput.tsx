@@ -1,13 +1,12 @@
 import React from "react";
-import { css } from "@emotion/react";
-import { MAX_NAME_LENGTH } from "../../../constants";
+import styled from "@emotion/styled";
 
 type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
 }
 
-const style = css({
+const Input = styled.input(() => ({
   backgroundColor: '#ECEBF1',
   height: '45px',
   width: '100%',
@@ -20,10 +19,10 @@ const style = css({
   '&:focus': {
     boxShadow: 'none',
   }
-});
+}))
 
 function CardOwnerNameInput({ onChange, value }: Props) {
-  return <input id="card-owner-name-input" css={style} type="text" onChange={onChange} value={value} placeholder='카드에 표시된 이름과 동일하게 입력하세요.' />
+  return <Input id="card-owner-name-input" type="text" onChange={onChange} value={value} placeholder='카드에 표시된 이름과 동일하게 입력하세요.' />
 }
 
 export default CardOwnerNameInput;

@@ -1,12 +1,12 @@
 import React from "react";
-import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 
 type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
 }
 
-const style = css({
+const Input = styled.input(() => ({
   backgroundColor: '#ECEBF1',
   height: '45px',
   width: '100%',
@@ -19,10 +19,10 @@ const style = css({
   '&:focus': {
     boxShadow: 'none',
   }
-});
+}));
 
 function ExpiredPeriodInput({ onChange, value }: Props) {
-  return <input css={style} type="text" onChange={onChange} value={value} placeholder='MM / YY' />
+  return  <Input type="text" onChange={onChange} value={value} placeholder='MM / YY' />
 }
 
 export default ExpiredPeriodInput;
