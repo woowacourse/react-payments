@@ -2,8 +2,11 @@ import Card from "../../component/Card/card.component";
 import Form from "../../component/Form/form.component";
 import Header from "../../component/Header/Header.component";
 import LinkButton from "../../component/LinkButton/linkButton.component";
+import Modal from "../../component/Modal/modal.component";
+import useCanShowModal from "../../hooks/useCanShowModal";
 import useCardNumber from "../../hooks/useCardNumber";
 import useCardPassword from "../../hooks/useCardPassword";
+import useCardTypeInfo from "../../hooks/useCardTypeInfo";
 import useExpireDate from "../../hooks/useExpireDate";
 import useReady from "../../hooks/useReady";
 import useSecurityCode from "../../hooks/useSecurityCode";
@@ -22,6 +25,8 @@ const CardAddPage = () => {
     securityCode,
     cardPassword
   );
+  const [cardTypeInfo, onClickCardType] = useCardTypeInfo();
+  const [canShowModal, toggleModal] = useCanShowModal();
 
   checkReady();
 
@@ -33,6 +38,8 @@ const CardAddPage = () => {
         name={userName}
         month={expireDate[0]}
         year={expireDate[1]}
+        cardTypeInfo={cardTypeInfo}
+        toggleModal={toggleModal}
       />
       <Form
         required={true}
@@ -101,6 +108,9 @@ const CardAddPage = () => {
         value={cardPassword}
       />
       {ready && <LinkButton linkLabel="다음" linkClass="next-link" />}
+      {canShowModal && (
+        <Modal toggleModal={toggleModal} onClickCardType={onClickCardType} />
+      )}
     </div>
   );
 };

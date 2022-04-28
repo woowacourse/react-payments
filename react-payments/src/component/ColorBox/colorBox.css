@@ -1,9 +1,8 @@
 .color-box-container {
-  width: 47px;
   height: 62px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
 }
 
@@ -11,6 +10,11 @@
   width: 37px;
   height: 37px;
   border-radius: 50%;
+  cursor: pointer;
+}
+
+.selected {
+  filter: brightness(50%);
 }
 
 .color-box-text {

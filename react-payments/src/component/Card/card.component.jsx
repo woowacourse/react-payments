@@ -1,11 +1,18 @@
 import Dot from "../Dot/dot.component";
 import "./card.css";
 
-const Card = ({ name, month, year, cardNumbers }) => {
+const Card = ({
+  name,
+  month,
+  year,
+  cardNumbers,
+  cardTypeInfo,
+  toggleModal,
+}) => {
   return (
-    <div className="card-box">
-      <div className="empty-card">
-        <div className="card-top"></div>
+    <div className="card-box" onClick={toggleModal}>
+      <div className={`card ${cardTypeInfo.colorType}`}>
+        <div className="card-top">{cardTypeInfo.cardType}</div>
         <div className="card-middle">
           <div className="small-card__chip"></div>
         </div>
