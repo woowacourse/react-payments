@@ -19,7 +19,7 @@ export default function InputContainer({
   return (
     <div className="input-container">
       <div className="input-container-top">
-        <span className="input-title">{inputTitle}</span>
+        <label className="input-title">{inputTitle}</label>
         {isValid ? <SuccessMessage /> : shouldShowError && <FailMessage />}
       </div>
       {children}
