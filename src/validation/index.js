@@ -1,3 +1,5 @@
+import { INPUT_TYPE } from '../constant';
+
 export default {
   validateCardNumbers: cardNumbers => {
     const cardNumbersRegex = /[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}/;
@@ -52,6 +54,6 @@ export default {
   },
 
   isInvalidInputData: (regex, data, inputType) => {
-    return !regex.test(data) && inputType !== 'deleteContentBackward';
+    return !regex.test(data) && inputType !== INPUT_TYPE.BACKWARD;
   },
 };

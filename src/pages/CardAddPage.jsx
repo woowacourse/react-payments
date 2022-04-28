@@ -13,7 +13,9 @@ import {
   ownerNameInputRegex,
   numberRegex,
 } from '../constant/regularExpression';
+import { INPUT_TYPE } from '../constant';
 import MESSAGE from '../constant/message';
+import { CARD_NUMBER_MARK, CARD_NUMBER_SEPARATOR, DATE_SEPARATOR } from '../constant/mark';
 
 function CardAddPage() {
   const [companyName, setCompanyName] = useState('포코카드');
@@ -32,19 +34,21 @@ function CardAddPage() {
 
   const convertedCardNumbers = useMemo(() => {
     return cardNumbers.map((cardNumber, index) =>
-      index >= 2 ? '●'.repeat(cardNumber.length) : cardNumber
+      index >= 2 ? CARD_NUMBER_MARK.repeat(cardNumber.length) : cardNumber
     );
   }, [cardNumbers]);
 
   const convertedExpiredDate = useMemo(() => {
     return expiredDate.month || expiredDate.year
-      ? `${expiredDate.month}${expiredDate.month.length === 2 ? '/' : ''}${expiredDate.year}`
+      ? `${expiredDate.month}${expiredDate.month.length === 2 ? DATE_SEPARATOR : ''}${
+          expiredDate.year
+        }`
       : '';
   }, [expiredDate]);
 
   useEffect(() => {
     setCardAddCondition({
-      cardNumbers: validator.validateCardNumbers(cardNumbers.join('-')),
+      cardNumbers: validator.validateCardNumbers(cardNumbers.join(CARD_NUMBER_SEPARATOR)),
       expiredDate: validator.validateExpiredDate(convertedExpiredDate),
       ownerName: validator.validateOwnerName(ownerName),
       securityNumber: validator.validateSecurityNumber(securityNumber),
@@ -57,7 +61,7 @@ function CardAddPage() {
       return;
     }
 
-    const inputCardNumbers = target.value.split('-');
+    const inputCardNumbers = target.value.split(CARD_NUMBER_SEPARATOR);
     const targetIndex = convertedCardNumbers.findIndex(
       (numbers, index) => numbers !== inputCardNumbers[index]
     );
@@ -80,7 +84,7 @@ function CardAddPage() {
 
     const numberIndex = inputCardNumbers[targetIndex]
       .split('')
-      .findIndex(char => char === '0' || Number(char));
+      .findIndex(char => isNumberCharacter(char));
 
     if (isNotNumber(numberIndex)) {
       return;
@@ -110,6 +114,10 @@ function CardAddPage() {
     return targetIndex < 2;
   };
 
+  const isNumberCharacter = char => {
+    return char === '0' || Number(char);
+  };
+
   const isNotNumber = numberIndex => {
     return numberIndex === -1;
   };
@@ -124,13 +132,13 @@ function CardAddPage() {
       return;
     }
 
-    const [month, year] = target.value.split('/');
+    const [month, year] = target.value.split(DATE_SEPARATOR);
 
     setExpiredDate({ month: month || '', year: year || '' });
   };
 
   const isRemoveSlash = (inputType, inputValue) => {
-    return inputType === 'deleteContentBackward' && inputValue.length === 2;
+    return inputType === INPUT_TYPE.BACKWARD && inputValue.length === 2;
   };
 
   const handleChangeOwnerNameInput = ({ nativeEvent: { data, inputType }, target }) => {

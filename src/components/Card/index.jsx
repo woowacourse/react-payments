@@ -6,6 +6,7 @@ import {
   CardBottomContainer,
   CardOwnerName,
 } from '../../style/card';
+import { PLACEHOLDER } from '../../constant';
 
 function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
   return (
@@ -18,8 +19,8 @@ function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
         ))}
       </CardNumberContainer>
       <CardBottomContainer>
-        <CardOwnerName>{ownerName || 'NAME'}</CardOwnerName>
-        <span>{expiredDate ? expiredDate : 'MM/YY'}</span>
+        <CardOwnerName>{ownerName || PLACEHOLDER.NAME}</CardOwnerName>
+        <span>{expiredDate ? expiredDate : PLACEHOLDER.DATE}</span>
       </CardBottomContainer>
     </CardContainer>
   );
