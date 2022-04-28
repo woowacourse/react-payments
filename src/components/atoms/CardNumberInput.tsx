@@ -1,5 +1,8 @@
 import { css } from "@emotion/react";
 import React, { useState } from "react";
+import { useAppDispatch, useAppState } from "../../hooks/hooks";
+import { ActionType } from "../../types";
+import { createAction } from "../Provider";
 
 const isNum = (str: string) => !Number.isNaN(Number(str));
 const transformToCardFormat = (str: string) => {
@@ -26,7 +29,8 @@ const style = css({
 });
 
 function CardNumberInput() {
-  const [cardNumber, setCardNumber] = useState<string>('');
+  const { cardNumber } = useAppState();
+  const dispatch = useAppDispatch();
 
   const handleCardNumberInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -39,12 +43,13 @@ function CardNumberInput() {
     if (cardNumber.length < str.length) {
       // 숫자가 아니라면 아웃!
       if (!isNum(lastChar)) return;
-      setCardNumber(cardNumber + lastChar);
+      dispatch(createAction<string>(ActionType.INPUT_CARDNUMBER, cardNumber + lastChar));
       return;
     }
 
     // 값을 지우는 경우
-    setCardNumber(cardNumber.substring(0, cardNumber.length - 1));
+    const cn = cardNumber.substring(0, cardNumber.length - 1);
+    dispatch(createAction<string>(ActionType.INPUT_CARDNUMBER, cn));
   }
 
   return(

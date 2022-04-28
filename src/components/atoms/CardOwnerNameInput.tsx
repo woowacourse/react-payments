@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { css } from "@emotion/react";
+import { useAppDispatch, useAppState } from "../../hooks/hooks";
+import { ActionType } from "../../types";
+import { createAction } from "../Provider";
 
 const style = css({
   backgroundColor: '#ECEBF1',
@@ -21,7 +24,8 @@ const MAX_NAME_LENGTH = 30;
 const isEnglish = (str: string) => !/[^A-Za-z]/.test(str);
 
 function CardOwnerNameInput() {
-  const [name, setName] = useState<string>('');
+  const { name } = useAppState();
+  const dispatch = useAppDispatch();
 
   const handleChage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value: name } = event.target;
@@ -36,7 +40,7 @@ function CardOwnerNameInput() {
     const upperName = name.toUpperCase();
 
     // name을 업데이트 한다
-    setName(upperName);
+    dispatch(createAction<string>(ActionType.INPUT_NAME, upperName));
   }
 
   return(

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { css } from "@emotion/react";
+import { useAppDispatch, useAppState } from "../../hooks/hooks";
+import { createAction } from "../Provider";
+import { ActionType } from "../../types";
 
 const style = css({
   backgroundColor: '#ECEBF1',
@@ -22,7 +25,8 @@ const isNum = (str: string) => str.replace(/\s/g, '') && !Number.isNaN(Number(st
 const transformNumToBullet = (str: string) => '•'.repeat(str.length);
 
 function CVCInput() {
-  const [cvc, setCVC] = useState<string>('');
+  const { cvc } = useAppState();
+  const dispatch = useAppDispatch();
 
   const handleChage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
@@ -32,11 +36,11 @@ function CVCInput() {
 
     if (cvc.length < value.length) {
       if (!isNum(lastChar)) return;
-      setCVC(cvc + lastChar);
+      dispatch(createAction(ActionType.INPUT_CVC, cvc + lastChar));
       return;
     }
 
-    setCVC(cvc.slice(0, cvc.length - 1));
+    dispatch(createAction(ActionType.INPUT_CVC, cvc.slice(0, cvc.length - 1)));
   }
 
   return(
