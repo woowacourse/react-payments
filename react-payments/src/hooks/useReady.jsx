@@ -1,39 +1,28 @@
 import { useState } from "react";
 
-const isInValidCardNumber = (cardNumber) =>
-  Object.values(cardNumber).some((number) => number.length !== 4);
-
-const isInValidExpireDate = (expireDate) =>
-  Object.values(expireDate).some((date) => date.length !== 2);
-
-const isInValidSecurityCode = (securityCode) => securityCode.length !== 3;
-
-const isInValidCardPassword = (cardPassword) =>
-  Object.values(cardPassword).some((password) => password.length !== 1);
-
 const isInValidCardType = (cardType) => !cardType;
 
 const isReady = ({
-  cardNumber,
-  expireDate,
-  securityCode,
-  cardPassword,
+  cardNumberReady,
+  expireDateReady,
+  securityCodeReady,
+  cardPasswordReady,
   cardType,
 }) => {
-  return !(
-    isInValidCardNumber(cardNumber) ||
-    isInValidExpireDate(expireDate) ||
-    isInValidSecurityCode(securityCode) ||
-    isInValidCardPassword(cardPassword) ||
-    isInValidCardType(cardType)
+  return (
+    cardNumberReady &&
+    expireDateReady &&
+    securityCodeReady &&
+    cardPasswordReady &&
+    !isInValidCardType(cardType)
   );
 };
 
 const useReady = ({
-  cardNumber,
-  expireDate,
-  securityCode,
-  cardPassword,
+  cardNumberReady,
+  expireDateReady,
+  securityCodeReady,
+  cardPasswordReady,
   cardType,
 }) => {
   const [ready, setReady] = useState(false);
@@ -41,10 +30,10 @@ const useReady = ({
   const checkReady = () => {
     if (
       isReady({
-        cardNumber,
-        expireDate,
-        securityCode,
-        cardPassword,
+        cardNumberReady,
+        expireDateReady,
+        securityCodeReady,
+        cardPasswordReady,
         cardType,
       }) !== ready
     ) {

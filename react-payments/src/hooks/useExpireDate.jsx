@@ -2,11 +2,26 @@ import { useState } from "react";
 import { MAX_LENGTH } from "../constants";
 import { checkNextFocus, checkPrevFocus, isOverMaxLength } from "../util";
 
+const isInValidExpireDate = (expireDate) => {
+  return (
+    Object.values(expireDate).some(
+      (date) => date.length !== MAX_LENGTH.EXPIRE_DATE
+    ) || Number(expireDate.first) > 12
+  );
+};
+
 const useExpireDate = () => {
   const [expireDate, setExpireDate] = useState({
     first: "",
     second: "",
   });
+  const [expireDateReady, setExpireDateReady] = useState(false);
+
+  const checkReady = () => {
+    if (isInValidExpireDate(expireDate) === expireDateReady) {
+      setExpireDateReady((prev) => !prev);
+    }
+  };
 
   const onChangeExpireDate = ({ target }) => {
     if (isOverMaxLength(target, MAX_LENGTH.EXPIRE_DATE)) {
@@ -35,7 +50,9 @@ const useExpireDate = () => {
   };
 
   const { first, second } = expireDate;
-  return [[first, second], onChangeExpireDate];
+  checkReady();
+
+  return [[first, second], onChangeExpireDate, expireDateReady];
 };
 
 export default useExpireDate;

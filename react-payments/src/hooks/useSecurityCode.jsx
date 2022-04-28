@@ -1,8 +1,18 @@
 import { useState } from "react";
 import { MAX_LENGTH } from "../constants";
 
+const isInValidSecurityCode = (securityCode) =>
+  securityCode.length !== MAX_LENGTH.SECURITY_CODE;
+
 const useSecurityCode = () => {
   const [securityCode, setSecurityCode] = useState("");
+  const [securityCodeReady, setSecurityCodeReady] = useState(false);
+
+  const checkReady = () => {
+    if (isInValidSecurityCode(securityCode) === securityCodeReady) {
+      setSecurityCodeReady((prev) => !prev);
+    }
+  };
 
   const onChangeSecurityCode = ({ target }) => {
     setSecurityCode(target.value);
@@ -23,11 +33,14 @@ const useSecurityCode = () => {
     setSecurityCode((prev) => prev.slice(0, -1));
   };
 
+  checkReady();
+
   return [
     securityCode,
     onClickSecurityVirtualKeyboard,
     onClickSecurityBackspaceButton,
     onChangeSecurityCode,
+    securityCodeReady,
   ];
 };
 

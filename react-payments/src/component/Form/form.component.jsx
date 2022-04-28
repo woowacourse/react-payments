@@ -4,6 +4,8 @@ import HelpBox from "../HelpBox/helpBox.component";
 import "./form.css";
 import VirtualKeyboard from "../VirtualKeyboard/keyboard.component";
 import useKeyboardOn from "../../hooks/useKeyboardOn";
+import MessageBlock from "../MessageBlock/messageBlock.component";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants";
 
 const labelEnum = {
   "card-user": (props) => (
@@ -101,6 +103,16 @@ const Form = (props) => {
       ) : (
         <InputContainer {...props} />
       )}
+      {props.required &&
+        (props.ready ? (
+          <MessageBlock messageClass="success-message">
+            {SUCCESS_MESSAGE}
+          </MessageBlock>
+        ) : (
+          <MessageBlock messageClass="error-message">
+            {ERROR_MESSAGE[formType]}
+          </MessageBlock>
+        ))}
     </div>
   );
 };

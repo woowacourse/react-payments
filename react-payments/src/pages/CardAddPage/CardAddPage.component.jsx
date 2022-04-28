@@ -15,27 +15,29 @@ import useUserName from "../../hooks/useUserName";
 import "./CardAddPage.css";
 
 const CardAddPage = () => {
-  const [cardNumber, onChange] = useCardNumber();
-  const [expireDate, onChangeExpireDate] = useExpireDate();
+  const [cardNumber, onChange, cardNumberReady] = useCardNumber();
+  const [expireDate, onChangeExpireDate, expireDateReady] = useExpireDate();
   const [userName, onChangeUserName] = useUserName();
   const [
     securityCode,
     onClickSecurityVirtualKeyboard,
     onClickSecurityBackspaceButton,
     onChangeSecurityCode,
+    securityCodeReady,
   ] = useSecurityCode();
   const [
     cardPassword,
     onClickCardPasswordBackspaceButton,
     onClickCardPasswordVirtualKeyboard,
     onChangeCardPassword,
+    cardPasswordReady,
   ] = useCardPassword();
   const [cardTypeInfo, onClickCardType] = useCardTypeInfo();
   const [ready, checkReady] = useReady({
-    cardNumber,
-    expireDate,
-    securityCode,
-    cardPassword,
+    cardNumberReady,
+    expireDateReady,
+    securityCodeReady,
+    cardPasswordReady,
     cardType: cardTypeInfo.cardType,
   });
   const [canShowModal, toggleModal] = useCanShowModal();
@@ -66,6 +68,7 @@ const CardAddPage = () => {
         label="카드 번호"
         formType="card-number"
         onChange={onChange}
+        ready={cardNumberReady}
       />
       <Form
         required={true}
@@ -88,6 +91,7 @@ const CardAddPage = () => {
         label="만료일"
         formType="expire-date"
         onChange={onChangeExpireDate}
+        ready={expireDateReady}
       />
       <Form
         required={false}
@@ -112,6 +116,7 @@ const CardAddPage = () => {
         onChangeSecurityCode={onChangeSecurityCode}
         onClickVirtualKeyboard={onClickSecurityVirtualKeyboard}
         onClickBackspaceButton={onClickSecurityBackspaceButton}
+        ready={securityCodeReady}
       />
       <Form
         required={true}
@@ -122,6 +127,7 @@ const CardAddPage = () => {
         onChangeCardPassword={onChangeCardPassword}
         onClickVirtualKeyboard={onClickCardPasswordVirtualKeyboard}
         onClickBackspaceButton={onClickCardPasswordBackspaceButton}
+        ready={cardPasswordReady}
       />
       {ready && <LinkButton linkLabel="다음" linkClass="next-link" />}
       {canShowModal && (

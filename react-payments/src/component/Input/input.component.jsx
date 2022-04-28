@@ -27,7 +27,7 @@ const InputContainer = ({
             value={value}
             onFocus={onFocusIn}
             onKeyDown={onKeyDown}
-            data-testId={`${formType}-${idx}`}
+            data-testid={`${formType}-${idx}`}
           />
         </Fragment>
       ))}

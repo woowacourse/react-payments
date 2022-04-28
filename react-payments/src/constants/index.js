@@ -49,3 +49,12 @@ export const MAX_LENGTH = {
 export const MIDDLE_CARD_NUMBER_LENGTH = 2;
 
 export const HELP_MESSAGE = "카드 뒷면의 3자리 숫자를 입력해주세요.";
+
+export const ERROR_MESSAGE = {
+  "card-number": "빈칸없이 입력을 완료해주세요",
+  "expire-date": "월은 12이하로 빈칸없이 입력해주세요",
+  "security-code": `${MAX_LENGTH.SECURITY_CODE}개의 숫자를 입력해주세요`,
+  "card-password": `비밀번호 앞 2자리를 입력해주세요`,
+};
+
+export const SUCCESS_MESSAGE = "성공적으로 입력됐습니다";

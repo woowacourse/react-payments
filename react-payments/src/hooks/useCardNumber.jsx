@@ -2,6 +2,11 @@ import { useState } from "react";
 import { checkNextFocus, checkPrevFocus, isOverMaxLength } from "../util";
 import { MAX_LENGTH } from "../constants";
 
+const isInValidCardNumber = (cardNumber) =>
+  Object.values(cardNumber).some(
+    (number) => number.length !== MAX_LENGTH.CARD_NUMBER
+  );
+
 const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState({
     first: "",
@@ -9,6 +14,13 @@ const useCardNumber = () => {
     third: "",
     fourth: "",
   });
+  const [cardNumberReady, setCardNumberReady] = useState(false);
+
+  const checkReady = () => {
+    if (isInValidCardNumber(cardNumber) === cardNumberReady) {
+      setCardNumberReady((prevReady) => !prevReady);
+    }
+  };
 
   const onChangeCardNumber = ({ target }) => {
     if (isOverMaxLength(target, MAX_LENGTH.CARD_NUMBER)) {
@@ -37,7 +49,9 @@ const useCardNumber = () => {
   };
 
   const { first, second, third, fourth } = cardNumber;
-  return [[first, second, third, fourth], onChangeCardNumber];
+  checkReady();
+
+  return [[first, second, third, fourth], onChangeCardNumber, cardNumberReady];
 };
 
 export default useCardNumber;

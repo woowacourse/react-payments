@@ -1,11 +1,21 @@
 import { useState } from "react";
 import { MAX_LENGTH } from "../constants";
 
+const isInValidCardPassword = (cardPassword) =>
+  Object.values(cardPassword).some((password) => password.length !== 1);
+
 const useCardPassword = () => {
   const [cardPassword, setCardPassword] = useState({
     first: "",
     second: "",
   });
+  const [cardPasswordReady, setCardPasswordReady] = useState(false);
+
+  const checkReady = () => {
+    if (isInValidCardPassword(cardPassword) === cardPasswordReady) {
+      setCardPasswordReady((prev) => !prev);
+    }
+  };
 
   const onChangeCardPassword = ({ target }) => {
     setCardPassword({
@@ -43,11 +53,14 @@ const useCardPassword = () => {
     });
   };
 
+  checkReady();
+
   return [
     cardPassword,
     onClickCardPasswordBackspaceButton,
     onClickCardPasswordVirtualKeyboard,
     onChangeCardPassword,
+    cardPasswordReady,
   ];
 };
 

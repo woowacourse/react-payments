@@ -1,0 +1,12 @@
+.message-container {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.error-message {
+  color: tomato;
+}
+
+.success-message {
+  color: #7dcd00;
+}
