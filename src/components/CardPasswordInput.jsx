@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "./Input.jsx";
+import Input from "./UIComponents/Input/Input.jsx";
 import styled from "styled-components";
 
 const StyledInputField = styled.div`

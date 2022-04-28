@@ -1,6 +1,6 @@
 import React from "react";
-import Input from "./Input.jsx";
-import InputField from "./InputField.jsx";
+import Input from "./UIComponents/Input/Input.jsx";
+import InputField from "./UIComponents/InputField/InputField.jsx";
 
 export default function CardExpireDateInput({ expireDate, onChange }) {
   return (

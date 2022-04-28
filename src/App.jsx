@@ -1,14 +1,19 @@
-import CardHolderNameInput from "./CardHolderNameInput.jsx";
-import CardNumberInput from "./CardNumberInput.jsx";
-import CardPasswordInput from "./CardPasswordInput.jsx";
-import CardSecurityCodeInput from "./CardSecurityCodeInput.jsx";
-import CardExpireDateInput from "./CardExpireDateInput.jsx";
 import { useCallback, useEffect, useState } from "react";
-import CardPreview from "./CardPreview.jsx";
-import Button from "./Button.jsx";
+
 import GlobalStyle from "./globalStyles.jsx";
-import { CardInfoForm } from "./App.elements.jsx";
+
 import PageHeader from "./PageHeader.jsx";
+import CardInfoForm from "./CardInfoForm.jsx";
+import Button from "./components/UIComponents/Button/Button.jsx";
+
+import {
+  CardPreview,
+  CardHolderNameInput,
+  CardNumberInput,
+  CardPasswordInput,
+  CardSecurityCodeInput,
+  CardExpireDateInput,
+} from "./components";
 
 function App() {
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);

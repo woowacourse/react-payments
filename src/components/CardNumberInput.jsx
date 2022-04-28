@@ -1,6 +1,6 @@
 import React from "react";
-import Input from "./Input";
-import InputField from "./InputField";
+import Input from "./UIComponents/Input/Input";
+import InputField from "./UIComponents/InputField/InputField";
 
 export default function CardNumberInput({ cardNumber, onChange }) {
   return (

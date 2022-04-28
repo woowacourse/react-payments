@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Input from "./Input.jsx";
-import InputField from "./InputField.jsx";
+import Input from "./UIComponents/Input/Input.jsx";
+import InputField from "./UIComponents/InputField/InputField.jsx";
 import styled from "styled-components";
-import HelpIconImage from "./questionMark.svg";
+import HelpIconImage from "../assets/images/questionMark.svg";
 
 const StyledIconContainer = styled.div`
   position: relative;
