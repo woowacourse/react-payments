@@ -6,11 +6,15 @@ export default styled.input`
   border-color: #9ca3af;
   padding-left: 5px;
   height: 45px;
-  width: ${(props) => props.width || '100%'};
+  width: ${({ width }) => width || '100%'};
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;
   border: none;
-  color: #04c09e;
+  color: ${({ color }) => color || '#737373'};
   font-weight: 600;
+
+  &::placeholder {
+    color: ${({ color }) => color || '#737373'};
+  }
 `;

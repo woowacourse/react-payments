@@ -9,14 +9,19 @@ import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
 
+import CARD_COMPANIES from '../constants';
+
 export default function CardExpiration() {
-  const { cardExpiration, cardExpirationErrorMessage, dispatch } = useContext(CardContext);
+  const { cardExpiration, cardExpirationErrorMessage, cardCompanyIndex, dispatch } =
+    useContext(CardContext);
 
   const onChangeInput = (index) => (e) => {
     dispatch({ type: 'SET_CARD_EXPIRATION', value: e.target.value, index });
   };
 
   const validate = (value) => value.join('') && validator.checkCardExpiration(value);
+
+  const cardColor = cardCompanyIndex === -1 ? false : CARD_COMPANIES[cardCompanyIndex].COLOR;
 
   return (
     <Container>
@@ -28,6 +33,7 @@ export default function CardExpiration() {
             placeholder="MM"
             width="48%"
             maxLength="2"
+            color={cardColor}
             value={cardExpiration[0]}
             onChange={onChangeInput(0)}
           />
@@ -36,6 +42,7 @@ export default function CardExpiration() {
             placeholder="YY"
             width="48%"
             maxLength="2"
+            color={cardColor}
             value={cardExpiration[1]}
             onChange={onChangeInput(1)}
           />

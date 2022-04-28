@@ -10,8 +10,10 @@ import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
 
+import CARD_COMPANIES from '../constants';
+
 export default function CardCvc() {
-  const { cardCvc, cardCvcErrorMessage, dispatch } = useContext(CardContext);
+  const { cardCvc, cardCvcErrorMessage, cardCompanyIndex, dispatch } = useContext(CardContext);
 
   const onChangeInput = (e) => {
     dispatch({ type: 'SET_CARD_CVC', value: e.target.value });
@@ -19,12 +21,20 @@ export default function CardCvc() {
 
   const validate = (value) => value && validator.checkCardCvc(value);
 
+  const cardColor = cardCompanyIndex === -1 ? false : CARD_COMPANIES[cardCompanyIndex].COLOR;
+
   return (
     <Container>
       <InputTitle>보안코드(CVC/CVV)</InputTitle>
       <InputBox>
         <InputContainer width="23%">
-          <InputBasic type="password" maxLength="3" value={cardCvc} onChange={onChangeInput} />
+          <InputBasic
+            type="password"
+            maxLength="3"
+            value={cardCvc}
+            color={cardColor}
+            onChange={onChangeInput}
+          />
         </InputContainer>
         <TipButton />
       </InputBox>
