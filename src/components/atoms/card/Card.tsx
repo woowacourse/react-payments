@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-const CardDiv = styled.div(() => ({
+const CardDiv = styled.div(({ color }: { color?: string }) => ({
   width: '208px',
   height: '130px',
   padding: '14px',
   marginBottom: '20px',
 
-  background: '#e5e5e5',
+  background: color ? color : '#e5e5e5',
   boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.25)',
   borderRadius: '5px',
 
@@ -55,23 +55,26 @@ type Props = {
   cardNumber: string,
   name: string,
   expiredPeriod: string,
+  isActive: boolean,
+  color?: string,
+  cardName?: string,
 }
 
-function Card({ cardNumber, name, expiredPeriod }: Props) {
+function Card({ cardNumber, name, expiredPeriod, isActive, color, cardName }: Props) {
+  const cn = isActive ? (cardName ? cardName : '로이드카드') : '';
+  const _color = isActive ? (color ? color : '#94DACD') : undefined;
   return (
-    <>
-      <CardDiv className="card">
-        <div className="type">로이드카드</div>
-        <div className="chip-container">
-          <div className="chip"></div>
-        </div>
-        <div className="number">{cardNumber}</div>
-        <div className="info">
-          <OwnerNameSpan name={name}>{name}</OwnerNameSpan>
-          <span className="expired-period">{expiredPeriod}</span>
-        </div>
-      </CardDiv>
-    </>
+    <CardDiv className="card" color={_color}>
+      <div className="type">{cn}</div>
+      <div className="chip-container">
+        <div className="chip"></div>
+      </div>
+      <div className="number">{cardNumber}</div>
+      <div className="info">
+        <OwnerNameSpan name={name}>{name}</OwnerNameSpan>
+        <span className="expired-period">{expiredPeriod}</span>
+      </div>
+    </CardDiv>
   )
 }
 

@@ -4,7 +4,7 @@ import { transformNumToBullet, transformToMMYY } from "../../../utils";
 import Card from "./Card";
 
 function CardContainer() {
-  const { cardNumber, name, expiredPeriod } = useAppState();
+  const { cardNumber, name, expiredPeriod, cvc, password } = useAppState();
 
   const transform = (str: string) => {
     return [4, 8, 12 ,16].map((index) => {
@@ -16,8 +16,12 @@ function CardContainer() {
     }).filter((part: string) => part).join(' ');
   }
 
+  const isActive = !!(cardNumber.length === 16 && expiredPeriod.length === 4 && name.length > 0 && cvc.length === 3 && password[0] && password[1]);
+
+  console.log('isActive : ', isActive);
+
   return (
-    <Card cardNumber={transform(cardNumber)} name={name} expiredPeriod={transformToMMYY(expiredPeriod)}></Card>
+    <Card isActive={isActive} cardNumber={transform(cardNumber)} name={name} expiredPeriod={transformToMMYY(expiredPeriod)}></Card>
   )
 }
 
