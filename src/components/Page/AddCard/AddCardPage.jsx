@@ -77,7 +77,18 @@ const AddCardPage = () => {
         !isFirstPasswordError &&
         !isSecondPasswordError
     );
-  });
+  }, [
+    isFirstCardNumberError,
+    isSecondCardNumberError,
+    isThirdCardNumberError,
+    isFourthCardNumberError,
+    isExpiredMonthError,
+    isExpiredYearError,
+    isOwnerNameError,
+    isSecureCodeError,
+    isFirstPasswordError,
+    isSecondPasswordError
+  ]);
 
   useEffect(() => {
     setIsValidatedValueLength(
@@ -91,7 +102,17 @@ const AddCardPage = () => {
         expiredMonth.length > 0 &&
         expiredYear.length > 0
     );
-  });
+  },
+    [firstCardNumber,
+      secondCardNumber,
+      thirdCardNumber,
+      fourthCardNumber,
+      firstPassword,
+      secondPassword,
+      secureCode,
+      expiredMonth,
+      expiredYear
+    ]);
 
   const onSubmitCardForm = (e) => {
     e.preventDefault();
