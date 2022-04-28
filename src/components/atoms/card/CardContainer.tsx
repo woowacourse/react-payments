@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppState } from "../../../hooks/hooks";
-import { transformNumToBullet } from "../../../utils";
+import { transformNumToBullet, transformToMMYY } from "../../../utils";
 import Card from "./Card";
 
 function CardContainer() {
@@ -17,7 +17,7 @@ function CardContainer() {
   }
 
   return (
-    <Card cardNumber={transform(cardNumber)} name={name} expiredPeriod={expiredPeriod}></Card>
+    <Card cardNumber={transform(cardNumber)} name={name} expiredPeriod={transformToMMYY(expiredPeriod)}></Card>
   )
 }
 

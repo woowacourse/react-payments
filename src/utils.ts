@@ -15,3 +15,9 @@ export const transformToCardFormat = (str: string) => {
 export const isEnglish = (str: string) => !/[^A-Za-z]/.test(str);
 
 export const transformNumToBullet = (str: string) => '•'.repeat(str.length);
+
+export const transformToMMYY = (str: string) => {
+  const left = str.slice(0, 2);
+  const right = str.slice(2, 4);
+  return right ? left + ' / ' + right : left;
+};

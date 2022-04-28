@@ -2,7 +2,7 @@ import React from "react";
 import { useAppDispatch, useAppState } from "../../../hooks/hooks";
 import { createAction } from "../../Provider";
 import { ActionType } from "../../../types";
-import { isNum, removeWhiteSpaces, removeSlash } from "../../../utils";
+import { isNum, removeWhiteSpaces, removeSlash, transformToMMYY } from "../../../utils";
 import ExpiredPeriodInput from "./ExpiredPeriodInput";
 
 function ExpiredPeriodInputContainer() {
@@ -58,13 +58,7 @@ function ExpiredPeriodInputContainer() {
     dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, expiredPeriod.slice(0, expiredPeriod.length - 1)));
   }
 
-  const transform = (str: string) => {
-    const left = str.slice(0, 2);
-    const right = str.slice(2, 4);
-    return right ? left + ' / ' + right : left;
-  };
-
-  return <ExpiredPeriodInput onChange={handleChange} value={transform(expiredPeriod)} />
+  return <ExpiredPeriodInput onChange={handleChange} value={transformToMMYY(expiredPeriod)} />
 }
 
 export default ExpiredPeriodInputContainer;
