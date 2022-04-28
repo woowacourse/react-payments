@@ -29,7 +29,7 @@ function AddCard() {
     });
   };
 
-  const addCard = (submittedCard) => {
+  const alertAddedCard = (submittedCard) => {
     alert(`카드를 추가하였습니다. ${submittedCard.ownerName}의 카드`);
   };
 
@@ -40,7 +40,7 @@ function AddCard() {
         <h2 className="page-title">카드 추가</h2>
       </div>
       <Card card={card} />
-      <AddCardForm updateCard={updateCard} addCard={addCard} />
+      <AddCardForm updateCard={updateCard} addCard={alertAddedCard} />
     </>
   );
 }
