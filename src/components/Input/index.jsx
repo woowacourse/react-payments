@@ -1,16 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { useMouseHover } from '../../hooks/useMouseHover';
 
 function Input({ labelTitle, inputSize = '', helpText, children }) {
-  const [isMouseOver, setIsMouseOver] = useState(false);
-
-  const onMouseOver = () => {
-    setIsMouseOver(true);
-  };
-
-  const onMouseLeave = () => {
-    setIsMouseOver(false);
-  };
+  const [isMouseOver, onMouseOver, onMouseLeave] = useMouseHover();
 
   return (
     <div className="input-container">
