@@ -5,4 +5,12 @@ export default {
   component: Card,
 };
 
-export const card = () => <Card />;
+export const card = () => (
+  <Card
+    state={{
+      cardNumber: ["1234", "5678", "1234", "1234"],
+      expiredDate: ["12", "12"],
+      ownerName: "비녀",
+    }}
+  />
+);
