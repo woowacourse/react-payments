@@ -88,16 +88,16 @@ export default function Card({ cardCompanyIndex, cardNumber, cardOwner, cardExpi
   const cardExpirationContent = () =>
     cardExpiration[0] || cardExpiration[1] ? cardExpiration.join('/') : 'MM/YY';
 
+  const cardColor = () =>
+    cardCompanyIndex === -1 ? '#e5e5e5' : CARD_COMPANIES[cardCompanyIndex].COLOR;
+
+  const cardName = () => (cardCompanyIndex === -1 ? '' : CARD_COMPANIES[cardCompanyIndex].NAME);
+
   return (
     <>
-      <SmallCard
-        onClick={onClick}
-        color={cardCompanyIndex === -1 ? '#e5e5e5' : CARD_COMPANIES[cardCompanyIndex].COLOR}
-      >
+      <SmallCard onClick={onClick} color={cardColor()}>
         <CardTop>
-          <CardText>
-            {cardCompanyIndex === -1 ? '' : CARD_COMPANIES[cardCompanyIndex].NAME}
-          </CardText>
+          <CardText>{cardName()}</CardText>
         </CardTop>
         <CardMiddle>
           <SmallCardChip></SmallCardChip>
