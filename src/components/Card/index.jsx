@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { ColorType } from "../../constant";
 
 const Card = ({
   name,
+  color = "red",
   expiredMonth,
   expiredYear,
   cardName,
@@ -11,10 +13,11 @@ const Card = ({
   secondCardNumber,
   thirdCardNumber,
   fourthCardNumber,
+  onClick,
 }) => {
   return (
-    <Container>
-      <EmptyCard>
+    <Container onClick={onClick}>
+      <EmptyCard color={color}>
         <CardTop>
           <CardName>{cardName}</CardName>
         </CardTop>
@@ -84,7 +87,7 @@ const EmptyCard = styled.div`
   font-size: 30px;
   color: #575757;
 
-  background: #e5e5e5;
+  background: ${(props) => ColorType[props.color]};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 

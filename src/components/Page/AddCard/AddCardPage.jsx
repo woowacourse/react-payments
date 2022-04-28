@@ -20,7 +20,8 @@ import {
 } from "../../../validation";
 
 import Card from "../../Card";
-
+import Modal from "../../Modal";
+import Palette from "../../Palette";
 import useInputValue from "../../../hooks/useInputValue";
 
 const AddCardPage = () => {
@@ -59,6 +60,10 @@ const AddCardPage = () => {
       validation: checkPassword,
     });
 
+  const [cardType, setCardType] = useState("red");
+
+  const [isModalOpened, setIsModalOpened] = useState(false);
+
   useEffect(() => {
     setIsValidatedForm(
       !isFirstCardNumberError &&
@@ -93,6 +98,18 @@ const AddCardPage = () => {
     alert("카드 등록이 완료되었습니다!❤️🧡💛💚💙💜");
   };
 
+  const openModal = () => {
+    setIsModalOpened(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpened(false);
+  };
+
+  const onClickCardSelector = (type) => () => {
+    setCardType(type);
+  };
+
   return (
     <Container onSubmit={onSubmitCardForm}>
       <Header title="카드 추가" />
@@ -105,6 +122,8 @@ const AddCardPage = () => {
         secondCardNumber={secondCardNumber}
         thirdCardNumber={thirdCardNumber}
         fourthCardNumber={fourthCardNumber}
+        color={cardType}
+        onClick={openModal}
       />
       <CardNumber
         firstCardNumber={firstCardNumber}
@@ -152,6 +171,11 @@ const AddCardPage = () => {
             다음
           </Button>
         </ButtonContainer>
+      )}
+      {isModalOpened && (
+        <Modal onClickDimmed={closeModal}>
+          <Palette onClickCardSelector={onClickCardSelector} />
+        </Modal>
       )}
     </Container>
   );
