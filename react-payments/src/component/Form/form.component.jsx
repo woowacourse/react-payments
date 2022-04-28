@@ -2,8 +2,8 @@ import Dot from "../Dot/dot.component";
 import InputContainer from "../Input/input.component";
 import HelpBox from "../HelpBox/helpBox.component";
 import "./form.css";
-import { useState } from "react";
 import VirtualKeyboard from "../VirtualKeyboard/keyboard.component";
+import useKeyboardOn from "../../hooks/useKeyboardOn";
 
 const labelEnum = {
   "card-user": (props) => (
@@ -80,19 +80,8 @@ const inputEnum = {
 
 const Form = (props) => {
   const { formType } = props;
-  const [keyboardOn, setKeyboardOn] = useState(false);
-
-  const onFocusIn = () => {
-    setKeyboardOn(true);
-  };
-
-  const onClickCloseButton = () => {
-    setKeyboardOn(false);
-  };
-
-  const onKeyDown = (e) => {
-    e.preventDefault();
-  };
+  const [keyboardOn, onFocusIn, onClickCloseButton, onKeyDown] =
+    useKeyboardOn();
 
   return (
     <div className="input-container">
