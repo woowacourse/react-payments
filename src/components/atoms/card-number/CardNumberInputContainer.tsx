@@ -12,12 +12,14 @@ function CardNumberInputContainer() {
   const handleCardNumberInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const lastChar = value.charAt(value.length - 1);
-    const str = removeWhiteSpaces(value).split('-').join('');
-    // 20글자 이상 입력한 경우
-    if (cardNumber.length >= 20) return;
+    const pureCardNumber = removeWhiteSpaces(value).split('-').join('');
 
     // 값을 추가하는 경우 
-    if (cardNumber.length < str.length) {
+    if (cardNumber.length < pureCardNumber.length) {
+
+      // 16글자 이상 입력한 경우
+      if (cardNumber.length >= 16) return;
+
       // 숫자가 아니라면 아웃!
       if (!isNum(lastChar)) return;
       dispatch(createAction(ActionType.INPUT_CARDNUMBER, cardNumber + lastChar));
