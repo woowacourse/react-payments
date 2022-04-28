@@ -25,6 +25,7 @@ function CardUserNameField({ userName, onChange }) {
         name="userName"
         maxLength={USER_NAME.MAX_LENGTH}
         value={userName}
+        placeholder="소유자명은 영문만 입력 가능"
         onBlur={onBlurUserName}
         onChange={onChange}
       />
