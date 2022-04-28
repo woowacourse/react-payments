@@ -17,3 +17,17 @@
 
   margin-right: 20px;
 }
+
+.change-button {
+  position: absolute;
+  top: 205px;
+  right: 10px;
+
+  width: 55px;
+  padding: 8px 0;
+  background-color: #a3a1a1;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  font-size: 12px;
+  color: #e3dede;
+}

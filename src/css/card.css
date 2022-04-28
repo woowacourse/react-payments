@@ -158,7 +158,38 @@
 
 .card-add-button {
   font-size: 90px;
-  font-weight: 300;
+  font-weight: 500;
   position: absolute;
   top: 28px;
+}
+
+.card-black-line {
+  width: 108%;
+  height: 40px;
+  background: black;
+}
+
+.card-white-line {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  width: 70%;
+  height: 30px;
+
+  margin-right: 25px;
+  padding-right: 10px;
+  font-size: 14px;
+  background: white;
+}
+
+.card-back {
+  width: 90%;
+  margin-top: 10px;
+  display: flex;
+  gap: 5px;
+}
+
+.card-back__info {
+  font-size: 10px;
 }

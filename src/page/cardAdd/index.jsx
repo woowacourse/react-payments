@@ -49,6 +49,7 @@ const CardAppPage = () => {
   const [cardInfo, setCardInfo] = useState(initialCardInfo);
   const [modalVisible, setModalVisible] = useState(false);
   const [isfullFilled, setIsFullFilled] = useState(false);
+  const [isCardFront, setIsCardFront] = useState(false);
   const { number, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
 
   useEffect(() => {
@@ -83,6 +84,10 @@ const CardAppPage = () => {
     });
   };
 
+  const handleCardPosition = useCallback(() => {
+    setIsCardFront((prevCardFront) => !prevCardFront);
+  }, []);
+
   const handleClickCompany = (company, theme) => {
     setCardInfo((prevCardInfo) => ({
       ...prevCardInfo,
@@ -113,12 +118,10 @@ const CardAppPage = () => {
         </Button>
       </Header>
       <CardPreview
-        number={number}
-        ownerName={ownerName}
-        expiryDate={expiryDate}
-        company={company}
+        cardInfo={cardInfo}
+        isCardFront={isCardFront}
         handleModal={handleModal}
-        theme={theme}
+        handleCardPosition={handleCardPosition}
       />
       <FormInput
         item="number"
