@@ -16,7 +16,7 @@ function DueDate({ dimensions, cardDateCallback, setIsCorrectCardDate }) {
   const [year, setYear] = useState('YY');
 
   useEffect(() => {
-    const isCorrect = month.length === 2 && year.length === 2;
+    const isCorrect = !!(Number(month) && Number(year));
 
     cardDateCallback(`${month} / ${year}`);
     setIsCorrectCardDate(isCorrect);
