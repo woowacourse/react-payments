@@ -1,5 +1,7 @@
 export const removeWhiteSpaces = (str: string) => str.replace(/\s/g, '');
 
+export const removeSlash = (str: string) => str.replace(/\//g, '');
+
 export const isNum = (str: string) => removeWhiteSpaces(str) && !Number.isNaN(Number(str));
 
 export const transformToCardFormat = (str: string) => {
