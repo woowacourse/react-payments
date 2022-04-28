@@ -7,14 +7,11 @@ import ExpiredDateInput from "../../components/ExpiredDateInput";
 import OwnerNameInput from "../../components/OwnerNameInput";
 import SecureCodeInput from "../../components/SecureCodeInput";
 import useCard from "../../hooks/useCard";
+import NextButton from "../../components/NextButton";
 
 const CardAdd = () => {
   const [form, dispatch] = useCard();
   const { cardNumber, expiredDate, ownerName, secureCode, password } = form;
-
-  const submit = () => {
-    console.log(form);
-  };
 
   return (
     <div className="card-add">
@@ -32,11 +29,7 @@ const CardAdd = () => {
           <CardPasswordInput state={password} updateForm={dispatch} />
         </form>
       </div>
-      <div className="next--button">
-        <button type="button" onClick={submit}>
-          다음
-        </button>
-      </div>
+      <NextButton state={form} />
     </div>
   );
 };
