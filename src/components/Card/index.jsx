@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import PropTypes from 'prop-types';
 
@@ -34,40 +34,50 @@ const getCardSize = size => {
 };
 
 const StyledCard = styled.div`
-  background: ${props => props.bgColor};
   box-shadow: 3px 3px 5px #00000040;
   border-radius: 5px;
-  height: ${props => props.cardStyle.card.height};
-  width: ${props => props.cardStyle.card.width};
   padding: 19px;
+
+  ${({ bgColor, cardStyle }) => css`
+    background: ${bgColor};
+    height: ${cardStyle.card.height};
+    width: ${cardStyle.card.width};
+  `};
 `;
 const Title = styled.div`
   color: #383838;
-  font-size: ${props => props.cardStyle.title.size};
-  height: ${props => props.cardStyle.title.size};
-  margin-bottom: ${props => props.cardStyle.title.marginBottom};
+
+  ${({ cardStyle }) => css`
+    font-size: ${cardStyle.title.size};
+    height: ${cardStyle.title.size};
+    margin-bottom: ${cardStyle.title.marginBottom};
+  `}
 `;
 const Magnet = styled.div`
   background: #cbba64;
   border-radius: 4px;
-  height: ${props => props.cardStyle.magnet.height};
-  margin-bottom: ${props => props.cardStyle.magnet.marginBottom};
-  width: ${props => props.cardStyle.magnet.width};
+
+  ${({ cardStyle }) => css`
+    height: ${cardStyle.magnet.height};
+    margin-bottom: ${cardStyle.magnet.marginBottom};
+    width: ${cardStyle.magnet.width};
+  `}
 `;
 const NumberSet = styled.div`
   color: #525252;
   font-weight: bold;
-  font-size: ${props => props.cardStyle.detail.size};
-  height: ${props => props.cardStyle.detail.height};
-  margin-bottom: ${props => props.cardStyle.numberSet.marginBottom};
   text-align: center;
+
+  ${({ cardStyle }) => css`
+    font-size: ${cardStyle.detail.size};
+    height: ${cardStyle.detail.height};
+    margin-bottom: ${cardStyle.numberSet.marginBottom};
+  `}
 `;
 const OwnerName = styled.span`
   color: #525252;
   display: inline-block;
   font-weight: bold;
-  font-size: ${props => props.cardStyle.detail.size};
-  height: ${props => props.cardStyle.detail.height};
   overflow-x: hidden;
   overflow-y: scroll;
   width: 130px;
@@ -76,13 +86,21 @@ const OwnerName = styled.span`
   ::-webkit-scrollbar {
     display: none;
   }
+
+  ${({ cardStyle }) => css`
+    font-size: ${cardStyle.detail.size};
+    height: ${cardStyle.detail.height};
+  `}
 `;
 const ValidDate = styled.span`
   color: #525252;
   float: right;
   font-weight: bold;
-  font-size: ${props => props.cardStyle.detail.size};
-  height: ${props => props.cardStyle.detail.height};
+
+  ${({ cardStyle }) => css`
+    font-size: ${cardStyle.detail.size};
+    height: ${cardStyle.detail.height};
+  `}
 `;
 
 function Card({ bgColor, className, name, number, size, title, validDate }) {

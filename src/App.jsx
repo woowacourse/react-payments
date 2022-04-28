@@ -1,12 +1,12 @@
 import { memo } from 'react';
 
+import styled from 'styled-components';
+
 import useCardNumber from './hooks/useCardNumber';
+import useValidDate from './hooks/useValidDate';
 import useCardOwnerName from './hooks/useCardOwnerName';
 import useCVC from './hooks/useCVC';
 import useCardPassword from './hooks/useCardPassword';
-import useValidDate from './hooks/useValidDate';
-
-import styled from 'styled-components';
 
 import Button from './components/Button';
 import Card from './components/Card';
