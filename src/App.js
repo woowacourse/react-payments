@@ -1,9 +1,9 @@
-import Card from './components/Card';
+import CardAdd from './pages/CardAdd';
 
 function App() {
   return (
     <div className="App">
-      <Card />
+      <CardAdd />
     </div>
   );
 }
