@@ -91,7 +91,7 @@ function App() {
         bgColor="#ADD8E6"
         size="medium"
         name={cardOwnerName}
-        number={encryptedCardNumber}
+        number={encryptedCardNumber.split('-').join(' ')}
         validDate={validDate}
       />
       <InputGroup>
