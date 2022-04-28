@@ -10,6 +10,23 @@ const useExpireDate = () => {
     if (e.target.value.length > 2) {
       return;
     }
+
+    if (
+      expireDate[e.target.name].length < e.target.value.length &&
+      e.target.value.length === 2 &&
+      e.target.name !== "second"
+    ) {
+      e.target.nextSibling.nextSibling.focus();
+    }
+
+    if (
+      expireDate[e.target.name].length > e.target.value.length &&
+      e.target.value.length === 0 &&
+      e.target.name !== "first"
+    ) {
+      e.target.previousSibling.previousSibling.focus();
+    }
+
     setExpireDate({
       ...expireDate,
       [e.target.name]: e.target.value,

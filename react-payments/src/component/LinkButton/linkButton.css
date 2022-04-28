@@ -3,6 +3,7 @@
   font-size: 14px;
   color: #04c09e;
   cursor: pointer;
+  align-self: flex-end;
 }
 
 .back-link {
