@@ -33,6 +33,12 @@ const validator = {
       throw new Error('입력하신 만료일은 이미 경과되었습니다.');
     }
   },
+
+  checkCardOwner(cardOwner) {
+    if (cardOwner.length > 30) {
+      throw new Error('이름은 30글자 이내로 입력해주세요.');
+    }
+  },
 };
 
 export default validator;

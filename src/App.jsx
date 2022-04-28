@@ -107,22 +107,28 @@ function App() {
     {
       cardNumber,
       cardNumberErrorMessage,
-      cardExpirationErrorMessage,
       cardExpiration,
+      cardExpirationErrorMessage,
       cardOwner,
+      cardOwnerErrorMessage,
       cardCvc,
+      cardCvcErrorMessage,
       cardPassword,
+      cardPasswordErrorMessage,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
   const value = {
     cardNumber,
     cardNumberErrorMessage,
-    cardExpirationErrorMessage,
     cardExpiration,
+    cardExpirationErrorMessage,
     cardOwner,
+    cardOwnerErrorMessage,
     cardCvc,
+    cardCvcErrorMessage,
     cardPassword,
+    cardPasswordErrorMessage,
     dispatch,
   };
 
