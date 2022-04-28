@@ -4,12 +4,25 @@ import { RULE } from '../constants';
 
 export default function useCardNumber(initialValue) {
   const [cardNumber, setCardNumber] = useState(initialValue);
+  const [encryptedCardNumber, setEncryptedCardNumber] = useState(initialValue);
 
   const handler = useCallback(({ target: { value } }) => {
-    if (value.length >= RULE.CARD_NUMBER_MAX_LENGTH) return;
+    const numbers = value.replaceAll('-', '');
+    if (numbers.length > RULE.CARD_NUMBER_MAX_LENGTH) return;
 
-    setCardNumber(value);
+    setCardNumber(numbers);
+
+    let processedNumbers = numbers;
+
+    if (numbers.length > 8) {
+      processedNumbers = numbers.slice(0, 8) + '•'.repeat(numbers.length - 8);
+    }
+
+    // 정규식: 숫자와 • 4개 단위마다 '-'를 넣어준다.
+    setEncryptedCardNumber(
+      processedNumbers.match(/[\d•]{1,4}/g)?.join('-') ?? initialValue
+    );
   }, []);
 
-  return [cardNumber, handler];
+  return [cardNumber, handler, encryptedCardNumber];
 }

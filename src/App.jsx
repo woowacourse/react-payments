@@ -16,7 +16,7 @@ import { ReactComponent as Arrow } from './assets/arrow.svg';
 
 import { RULE } from './constants';
 
-const StyledPage = styled.div`
+const StyledPage = styled.form`
   background: #fff;
   box-sizing: border-box;
   display: flex;
@@ -63,13 +63,12 @@ const NextButton = styled(Button)`
 `;
 
 function App() {
-  const [cardNumber, setCardNumber] = useCardNumber('');
+  const [cardNumber, setCardNumber, encryptedCardNumber] = useCardNumber('');
   const [cardOwnerName, setCardOwnerName] = useCardOwnerName('');
   const [validDate, setValidDate] = useValidDate('');
   const [CVC, setCVC] = useCVC('');
   const [firstPassword, setFirstPassword] = useCardPassword('');
   const [secondPassword, setSecondPassword] = useCardPassword('');
-
   const requiredList = [
     cardNumber,
     validDate,
@@ -88,13 +87,14 @@ function App() {
         bgColor="#D2D2D2"
         size="medium"
         name={cardOwnerName}
+        number={encryptedCardNumber}
         validDate={validDate}
       />
       <InputGroup>
         <div>
           <Input
             description="카드 번호"
-            value={cardNumber}
+            value={encryptedCardNumber}
             onChangeFunc={setCardNumber}
           />
         </div>

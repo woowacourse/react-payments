@@ -24,7 +24,7 @@ const getCardSize = size => {
           marginBottom: '12px',
         },
         detail: {
-          size: '20px',
+          size: '17px',
           height: '22px',
         },
       };
