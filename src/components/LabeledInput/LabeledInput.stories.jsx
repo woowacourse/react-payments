@@ -17,7 +17,7 @@ export const SecurityNumber = Template.bind({});
 export const Password = Template.bind({});
 
 CardNumbers.args = {
-  // value: '',
+  value: '',
   isShowLengthChecker: false,
   invalidMessage: MESSAGE.INVALID_CARD_NUMBER,
   countInput: 1,

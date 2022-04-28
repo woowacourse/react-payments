@@ -26,13 +26,17 @@ function LabeledInput({
   };
 
   const isShowInvalidMessage = () => {
-    if (countInput >= 2) {
+    if (isMultipleInput(countInput)) {
       return inputProps.isValid || value.join('').length === 0;
     }
 
     return value
       ? inputProps.isValid || value.length === 0
       : inputProps.isValid || tempValue.length === 0;
+  };
+
+  const isMultipleInput = countInput => {
+    return countInput >= 2;
   };
 
   return (
@@ -49,7 +53,7 @@ function LabeledInput({
         )}
       </LabeledInputHeader>
       <LabeledInputBody>
-        {countInput >= 2 ? (
+        {isMultipleInput(countInput) ? (
           Array.from({ length: countInput }).map((_, index) => (
             <Input
               key={index}

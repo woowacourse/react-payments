@@ -62,18 +62,18 @@ function CardAddPage() {
       (numbers, index) => numbers !== inputCardNumbers[index]
     );
 
-    if (inputCardNumbers.join().length < convertedCardNumbers.join().length) {
+    if (isEnterBackKey(inputCardNumbers, convertedCardNumbers)) {
       const newCardNumbers = cardNumbers.filter((_, index) => index !== targetIndex);
       setCardNumbers(newCardNumbers);
       return;
     }
 
-    if (targetIndex === -1) {
+    if (isFirstEnterOrDashEnter(targetIndex)) {
       setCardNumbers(cardNumbers.concat([inputCardNumbers[inputCardNumbers.length - 1]]));
       return;
     }
 
-    if (targetIndex < 2) {
+    if (isFirstPartOrSecondPart(targetIndex)) {
       setCardNumbers(inputCardNumbers);
       return;
     }
@@ -82,7 +82,7 @@ function CardAddPage() {
       .split('')
       .findIndex(char => char === '0' || Number(char));
 
-    if (numberIndex == -1) {
+    if (isNotNumber(numberIndex)) {
       return;
     }
 
@@ -98,12 +98,28 @@ function CardAddPage() {
     setCardNumbers(newCardNumbers);
   };
 
+  const isEnterBackKey = (inputCardNumbers, convertedCardNumbers) => {
+    return inputCardNumbers.join().length < convertedCardNumbers.join().length;
+  };
+
+  const isFirstEnterOrDashEnter = targetIndex => {
+    return targetIndex === -1;
+  };
+
+  const isFirstPartOrSecondPart = targetIndex => {
+    return targetIndex < 2;
+  };
+
+  const isNotNumber = numberIndex => {
+    return numberIndex === -1;
+  };
+
   const handleChangeExpiredDateInput = ({ nativeEvent: { data, inputType }, target }) => {
     if (validator.isInvalidInputData(expiredDateInputRegex, data, inputType)) {
       return;
     }
 
-    if (inputType === 'deleteContentBackward' && target.value.length === 2) {
+    if (isRemoveSlash(inputType, target.value)) {
       setExpiredDate({ month: expiredDate.month[0], year: '' });
       return;
     }
@@ -111,6 +127,10 @@ function CardAddPage() {
     const [month, year] = target.value.split('/');
 
     setExpiredDate({ month: month || '', year: year || '' });
+  };
+
+  const isRemoveSlash = (inputType, inputValue) => {
+    return inputType === 'deleteContentBackward' && inputValue.length === 2;
   };
 
   const handleChangeOwnerNameInput = ({ nativeEvent: { data, inputType }, target }) => {
@@ -129,12 +149,14 @@ function CardAddPage() {
     setSecurityNumber(target.value);
   };
 
-  const handleChangePassword = ({ nativeEvent: { data, inputType }, target }, index) => {
+  const handleChangePassword = ({ nativeEvent: { data, inputType }, target }, childIndex) => {
     if (validator.isInvalidInputData(numberRegex, data, inputType)) {
       return;
     }
 
-    const updatedPassword = password.map((number, aaa) => (aaa === index ? target.value : number));
+    const updatedPassword = password.map((number, index) =>
+      index === childIndex ? target.value : number
+    );
     setPassword(updatedPassword);
   };
 
