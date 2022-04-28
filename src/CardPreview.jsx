@@ -54,11 +54,11 @@ const CardBottomSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 10px;
+  height: 10px;
 `;
 
 const CardHolderName = styled.p`
-  width: 45%;
+  width: 55%;
   word-wrap: break-word;
 `;
 
