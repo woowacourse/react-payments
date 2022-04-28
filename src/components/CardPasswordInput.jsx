@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import styled from "styled-components";
 import { CREATE_MASKED_CHARACTERS } from "../constants.js";
@@ -35,28 +35,40 @@ const StyledInputContainer = styled.div`
 `;
 
 export default function CardPasswordInput({ password, onChange }) {
+  const [focusInputIndex, setFocusInputIndex] = useState(0);
+  const inputRef = useRef([]);
+
+  useEffect(() => {
+    if (inputRef.current[focusInputIndex].value.length === 1) {
+      const index = password.findIndex(
+        (passwordDigit) => passwordDigit.length !== 1
+      );
+      inputRef.current[index]?.focus();
+    }
+  }, [password, focusInputIndex]);
+
+  useEffect(() => {
+    inputRef.current[focusInputIndex].focus();
+  }, [focusInputIndex]);
+
   return (
     <StyledInputField>
       <StyledLabel>카드 비밀번호 앞 두 자리</StyledLabel>
       <StyledInputContainer>
-        <StyledInputWrapper width="45px">
-          <Input
-            type="password"
-            value={password[0]}
-            onChange={(e) => onChange(e, 0)}
-            width="100%"
-            placeholder={CREATE_MASKED_CHARACTERS(1)}
-          />
-        </StyledInputWrapper>
-        <StyledInputWrapper width="45px">
-          <Input
-            type="password"
-            value={password[1]}
-            onChange={(e) => onChange(e, 1)}
-            width="100%"
-            placeholder={CREATE_MASKED_CHARACTERS(1)}
-          />
-        </StyledInputWrapper>
+        {Array.from({ length: 2 }).map((_, index) => (
+          <StyledInputWrapper width="45px">
+            <Input
+              key={index}
+              type="password"
+              value={password[index]}
+              onChange={(e) => onChange(e, index)}
+              width="100%"
+              placeholder={CREATE_MASKED_CHARACTERS(1)}
+              onFocus={() => setFocusInputIndex(index)}
+              ref={(element) => (inputRef.current[index] = element)}
+            />
+          </StyledInputWrapper>
+        ))}
       </StyledInputContainer>
     </StyledInputField>
   );

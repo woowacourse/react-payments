@@ -37,27 +37,11 @@ export const StyledInput = styled.input`
   }
 `;
 
-export default function Input({
-  name,
-  type,
-  placeholder,
-  value,
-  onChange,
-  width,
-  textAlign,
-}) {
-  return (
-    <StyledInput
-      type={type}
-      name={name}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      width={width}
-      textAlign={textAlign}
-    />
-  );
-}
+const Input = React.forwardRef((props, ref) => {
+  return <StyledInput {...props} ref={ref} />;
+});
+
+export default Input;
 
 Input.propTypes = {
   name: PropTypes.string,
