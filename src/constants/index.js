@@ -8,8 +8,9 @@ const ACTION_TYPE = {
 };
 
 const CARD_NUMBER = {
+  UNIT_COUNT: 4,
   UNIT_LENGTH: 4,
-  MAX_LENGTH: 19,
+  MASKING_INDEX: 2,
 };
 
 const EXPIRE_DATE = {

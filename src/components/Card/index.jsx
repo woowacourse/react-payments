@@ -1,5 +1,18 @@
 import PropTypes from 'prop-types';
 
+const cardNumberFormatter = (cardNumber) => {
+  const newCardNumber = [...cardNumber].map((unit) => (unit === '' ? '0000' : unit));
+  const maskingIndexes = [2, 3];
+
+  maskingIndexes.forEach((index) => {
+    if (newCardNumber.length <= index) return;
+
+    newCardNumber[index] = '⦁'.repeat(newCardNumber[index].length);
+  });
+
+  return newCardNumber.join('-');
+};
+
 function Card({ companyName, cardNumber, userName, expireMonth, expireYear }) {
   return (
     <div className="card-box">
@@ -9,7 +22,7 @@ function Card({ companyName, cardNumber, userName, expireMonth, expireYear }) {
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">{cardNumber}</span>
+            <span className="card-text">{cardNumberFormatter(cardNumber)}</span>
           </div>
           <div className="card-bottom__info">
             <span className="card-text user-name">{userName}</span>
@@ -25,7 +38,7 @@ function Card({ companyName, cardNumber, userName, expireMonth, expireYear }) {
 
 Card.defaultProps = {
   companyName: '',
-  cardNumber: '',
+  cardNumber: ['', '', '', ''],
   userName: '',
   expireMonth: '',
   expireYear: '',
@@ -33,7 +46,7 @@ Card.defaultProps = {
 
 Card.propTypes = {
   companyName: PropTypes.string,
-  cardNumber: PropTypes.string,
+  cardNumber: PropTypes.arrayOf(PropTypes.string),
   userName: PropTypes.string,
   expireMonth: PropTypes.string,
   expireYear: PropTypes.string,

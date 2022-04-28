@@ -23,13 +23,13 @@ function CardAdd() {
   const { cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword } = state;
   const { isComplete } = state;
 
-  const onChangeTextField = ({ target }) => {
+  const onChangeTextField = ({ target }, option = {}) => {
     const textField = target.name;
 
     const dispatchAction = {
       cardNumber: () => ({
         type: ACTION_TYPE.UPDATE_CARD_NUMBER,
-        contents: target.value,
+        contents: { index: option.index, value: target.value },
       }),
       expireMonth: () => ({
         type: ACTION_TYPE.UPDATE_EXPIRE_MONTH,
@@ -81,7 +81,7 @@ function CardAdd() {
     <>
       <Header>카드 추가</Header>
       <Card
-        companyName="티거 카드"
+        companyName="티거 카드 🐯"
         cardNumber={cardNumber}
         userName={userName}
         expireMonth={expireMonth}

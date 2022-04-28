@@ -2,7 +2,7 @@ import { useEffect, useReducer, useState } from 'react';
 import { ACTION_TYPE, CARD_NUMBER } from 'constants';
 
 const initialState = {
-  cardNumber: '',
+  cardNumber: ['', '', '', ''],
   expireMonth: '',
   expireYear: '',
   userName: '',
@@ -10,17 +10,14 @@ const initialState = {
   cardPassword: '',
 };
 
-const cardNumberFormatter = (cardNumber) =>
-  cardNumber
-    .match(new RegExp(`[0-9]{1,${CARD_NUMBER.UNIT_LENGTH}}`, 'g'))
-    ?.filter((_, index) => index < CARD_NUMBER.UNIT_LENGTH)
-    ?.join('-');
+const cardNumberFormatter = (cardNumber) => cardNumber.replace(/[^0-9]/g, '');
 
 function reducer(state, { type, contents }) {
   const newState = { ...state };
   const updateState = {
     [ACTION_TYPE.UPDATE_CARD_NUMBER]: () => {
-      newState.cardNumber = cardNumberFormatter(contents);
+      const { index, value } = contents;
+      newState.cardNumber[index] = cardNumberFormatter(value);
     },
     [ACTION_TYPE.UPDATE_EXPIRE_MONTH]: () => {
       newState.expireMonth = contents;
