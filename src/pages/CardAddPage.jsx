@@ -3,6 +3,7 @@ import Head from '../components/Head';
 import styled from 'styled-components';
 import Card from '../components/Card';
 import LabeledInput from '../components/LabeledInput';
+import SubmitButton from '../components/SubmitButton';
 import validator from '../validation';
 
 const Page = styled.div`
@@ -26,6 +27,11 @@ const Form = styled.form`
   flex-direction: column;
   padding: 25px 28px 16px;
   gap: 19px;
+`;
+
+const SubmitButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 function CardAddPage() {
@@ -63,6 +69,8 @@ function CardAddPage() {
       securityNumber: validator.validateSecurityNumber(securityNumber),
       password: validator.validatePassword(password.join('')),
     });
+
+    console.log(Object.values(permission).every(value => value === true));
   }, [cardNumbers, expiredDate, ownerName, securityNumber, password]);
 
   const handleChangeCardNumbersInput = ({ nativeEvent: { data, inputType }, target }) => {
@@ -149,6 +157,14 @@ function CardAddPage() {
     setPassword(updatedPassword);
   };
 
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    if (Object.values(permission).every(value => value === true)) {
+      alert('카드 정보가 저장되었습니다.');
+    }
+  };
+
   return (
     <Page>
       <Head title="카드 추가" />
@@ -160,7 +176,7 @@ function CardAddPage() {
           expiredDate={convertedExpiredDate}
         />
       </CardSection>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <LabeledInput
           value={convertedCardNumbers.join('-')}
           isShowLengthChecker={false}
@@ -240,6 +256,14 @@ function CardAddPage() {
             label: '카드 비밀번호',
           }}
         />
+        <SubmitButtonContainer>
+          <SubmitButton
+            label="다음"
+            width={'51px'}
+            height={'34px'}
+            hidden={Object.values(permission).some(value => value === false)}
+          />
+        </SubmitButtonContainer>
       </Form>
     </Page>
   );

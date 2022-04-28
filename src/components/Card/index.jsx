@@ -52,8 +52,6 @@ const CardBottomContainer = styled.div`
 `;
 
 function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
-  // const { month, year } = expiredDate;
-
   return (
     <CardContainer>
       <CardCompanyName>{companyName}</CardCompanyName>
