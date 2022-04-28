@@ -66,22 +66,16 @@ function CardNumber({ cardNumberCallback }) {
   const isCorrectCardNumber = Object.values(cardNumbers).join('').length === 16;
 
   const handleInputFocus = target => {
-    console.log(target);
-
     if (!isCorrectCardNumber) {
       setErrorMessage('모든 숫자를 입력해주세요.');
     }
   };
 
   useEffect(() => {
-    // console.dir(cardNoARef.current, 'cardNoARef');
-    // cardNoCRef.current.focus();
-
     setErrorMessage('');
     cardNumberCallback(convertToCardNumberString(cardNumbers));
   }, [cardNumbers, cardNumberCallback, isCorrectCardNumber]);
 
-  // console.log('CardNumber render');
   return (
     <InputContainer>
       <Label>카드 번호</Label>
