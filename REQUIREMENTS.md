@@ -6,6 +6,13 @@
 - [데모페이지](https://sweet-sprite-876774.netlify.app/)
 - [스토리북 배포페이지](https://626aa58effc760004af7707e-xtupdrtkcs.chromatic.com/)
 
+## 로컬 구동방법
+
+1. 클론: [레포](https://github.com/wonsss/react-payments) step1 클론
+2. 패키지 설치: `npm install`
+3. 로컬 실행: `npm run start`
+4. 스토리북 로컬 실행: `npm run storybook`
+
 ## States
 
 - 카드번호(숫자 12자리)
