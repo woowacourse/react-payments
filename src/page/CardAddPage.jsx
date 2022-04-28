@@ -5,6 +5,10 @@ import FormInput from '../components/common/FormInput';
 import CardPreview from '../components/CardPreview';
 import Modal from '../components/common/Modal';
 import CardCompany from '../components/CardCompany';
+import Header from '../components/common/Header';
+import Button from '../components/common/Button';
+
+import { ReactComponent as PrevIcon } from '../assets/prev_icon.svg';
 
 const cardNumberInputInfoList = [
   { id: uuid(), type: 'text', className: 'mr-n15 tracking-wide', name: 'first' },
@@ -127,6 +131,11 @@ const CardAppPage = () => {
 
   return (
     <div>
+      <Header title="카드 추가">
+        <Button>
+          <PrevIcon />
+        </Button>
+      </Header>
       <CardPreview
         number={number}
         ownerName={ownerName}
@@ -171,7 +180,10 @@ const CardAppPage = () => {
         cardInfo={cardInfo}
         onChange={handleChange}
       />
-
+      {/* TODO : 추후, visible에 따른 렌더링 여부 적용 */}
+      <Button theme={theme} className="next-button">
+        다음
+      </Button>
       {modalVisible && (
         <Modal handleModal={handleModal}>
           <div className="flex-wrap">

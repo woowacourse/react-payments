@@ -37,9 +37,17 @@ input {
   padding: 16px 24px;
 }
 
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
 .page-title {
   font-weight: 500;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 22px;
   display: flex;
   align-items: center;
