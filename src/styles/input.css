@@ -69,6 +69,8 @@
   font-size: 12px;
   text-align: center;
   width: 200px;
+
+  animation: show 0.5s ease-in;
 }
 
 input.error {
