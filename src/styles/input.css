@@ -23,6 +23,7 @@
   color: #d3d3d3;
   border-radius: 0.25rem;
   background-color: #ecebf1;
+  position: relative;
 }
 
 .input-container-top {
@@ -63,12 +64,15 @@
   border-bottom: 1px solid #383838;
 }
 
-.cvc-container {
-  position: relative;
+.user-guide-container {
+  position: absolute;
   display: inline-block;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -40px;
 }
 
-.cvc-guide {
+.user-guide {
   border: 1px solid #bababa;
   color: #bababa;
   border-radius: 50%;
@@ -84,10 +88,10 @@
   cursor: pointer;
 }
 
-.cvc-image {
+.user-guide-content {
   position: absolute;
   top: -30px;
-  left: 70px;
+  left: 80px;
   width: 160px;
 }
 
