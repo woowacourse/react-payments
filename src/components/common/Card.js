@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Dot from './Dot';
 
 const CardBox = styled.div`
   display: flex;
@@ -17,7 +18,8 @@ const SmallCard = styled.div`
   width: 208px;
   height: 130px;
 
-  background: #94dacd;
+  background: ${(props) => props.backgroundColor || '#94dacd'};
+
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 `;
@@ -71,30 +73,44 @@ const CardBottom__info = styled.div`
 `;
 const CardText = styled.span`
   margin: 0 16px;
+  max-width: 50%;
 
-  font-size: 14px;
+  font-size: 12px;
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
+  word-break: break-all;
+`;
+const CardNumbersText = styled(CardText)`
+  max-width: 100%;
+  font-size: 14px;
+  letter-spacing: 2px;
 `;
 
-export const Card = ({ cardNumbers }) => {
+export const Card = ({ cardType, cardNumbers, expireDate, ownerName }) => {
+  const formattedCardNumbers = Object.values(cardNumbers)
+    .map((number, idx) => (idx <= 1 ? number : '•'.repeat(number.length)))
+    .join(' ');
+
   return (
     <CardBox>
-      <SmallCard>
+      <SmallCard backgroundColor={cardType.color}>
         <CardTop>
-          <CardText>클린카드</CardText>
+          <CardText>{cardType.name}카드</CardText>
         </CardTop>
         <CardMiddle>
-          <SmallCard_chip></SmallCard_chip>
+          <SmallCard_chip />
         </CardMiddle>
         <CardBottom>
           <CardBottom__number>
-            <CardText></CardText>
+            <CardNumbersText>{formattedCardNumbers}</CardNumbersText>
           </CardBottom__number>
           <CardBottom__info>
-            <CardText>YOU SE JI</CardText>
-            <CardText>12 / 23</CardText>
+            <CardText>{ownerName ? ownerName : 'NAME'}</CardText>
+            <CardText>
+              {expireDate.month ? expireDate.month : 'MM'}/
+              {expireDate.year ? expireDate.year : 'YY'}
+            </CardText>
           </CardBottom__info>
         </CardBottom>
       </SmallCard>
