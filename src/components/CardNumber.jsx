@@ -17,12 +17,18 @@ export default function CardNumber() {
   };
 
   useEffect(() => {
-    const validationResult = validator.checkCardNumber(cardNumber);
-
-    dispatch({
-      type: 'SET_CARD_NUMBER_ERROR_MESSAGE',
-      errorMessage: validationResult.success ? '' : validationResult.message,
-    });
+    try {
+      validator.checkCardNumber(cardNumber);
+      dispatch({
+        type: 'SET_CARD_NUMBER_ERROR_MESSAGE',
+        errorMessage: '',
+      });
+    } catch ({ message }) {
+      dispatch({
+        type: 'SET_CARD_NUMBER_ERROR_MESSAGE',
+        errorMessage: message,
+      });
+    }
   }, [cardNumber]);
 
   return (

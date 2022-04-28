@@ -17,12 +17,18 @@ export default function CardExpiration() {
   };
 
   useEffect(() => {
-    const validationResult = validator.checkCardExpiration(cardExpiration);
-
-    dispatch({
-      type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE',
-      errorMessage: validationResult.success ? '' : validationResult.message,
-    });
+    try {
+      validator.checkCardExpiration(cardExpiration);
+      dispatch({
+        type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE',
+        errorMessage: '',
+      });
+    } catch ({ message }) {
+      dispatch({
+        type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE',
+        errorMessage: message,
+      });
+    }
   }, [cardExpiration]);
 
   return (
