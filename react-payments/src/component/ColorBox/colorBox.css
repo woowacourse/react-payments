@@ -14,7 +14,8 @@
 }
 
 .selected {
-  filter: brightness(50%);
+  color: #00bcd4;
+  text-decoration: underline;
 }
 
 .color-box-text {
