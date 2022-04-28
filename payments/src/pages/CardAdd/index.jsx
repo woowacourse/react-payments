@@ -8,30 +8,35 @@ import OwnerNameInput from "../../components/OwnerNameInput";
 import SecureCodeInput from "../../components/SecureCodeInput";
 import useCard from "../../hooks/useCard";
 import NextButton from "../../components/NextButton";
+import ColorPicker from "../../components/ColorPicker";
+import { useState } from "react";
 
 const CardAdd = () => {
   const [form, dispatch] = useCard();
+  const [visible, setVisible] = useState(false);
   const { cardNumber, expiredDate, ownerName, secureCode, password } = form;
 
   return (
-    <div className="card-add">
-      <header>
-        <button>{"<"}</button>
-        <p>카드 추가</p>
-      </header>
-      <div className="card-add__container">
-        <Card state={form} />
-        <form>
-          <CardNumberInput state={cardNumber} updateForm={dispatch} />
-          <ExpiredDateInput state={expiredDate} updateForm={dispatch} />
-          <OwnerNameInput state={ownerName} updateForm={dispatch} />
-          <SecureCodeInput state={secureCode} updateForm={dispatch} />
-          <CardPasswordInput state={password} updateForm={dispatch} />
-        </form>
+    <>
+      <div className="card-add">
+        <header>
+          <button>{"<"}</button>
+          <p>카드 추가</p>
+        </header>
+        <div className="card-add__container">
+          <Card state={form} setVisible={setVisible} />
+          <form>
+            <CardNumberInput state={cardNumber} updateForm={dispatch} />
+            <ExpiredDateInput state={expiredDate} updateForm={dispatch} />
+            <OwnerNameInput state={ownerName} updateForm={dispatch} />
+            <SecureCodeInput state={secureCode} updateForm={dispatch} />
+            <CardPasswordInput state={password} updateForm={dispatch} />
+          </form>
+        </div>
+        <NextButton state={form} />
       </div>
-      <NextButton state={form} />
-    </div>
+      <ColorPicker visible={visible} setVisible={setVisible} />
+    </>
   );
 };
-
 export default CardAdd;

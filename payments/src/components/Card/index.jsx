@@ -1,8 +1,15 @@
 import "./index.scss";
 
-const Card = ({ state: { cardNumber, expiredDate, ownerName } }) => {
+const Card = ({
+  state: { cardNumber, expiredDate, ownerName },
+  setVisible,
+}) => {
   return (
-    <div>
+    <div
+      onClick={() => {
+        setVisible(true);
+      }}
+    >
       <div className="card__container">
         <p className="card__name">동키콩 카드</p>
         <div className="rfid"></div>

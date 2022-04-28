@@ -34,11 +34,22 @@ const validateArray = [
 ];
 
 const NextButton = ({ state }) => {
+  const { cardNumber, expiredDate, ownerName } = state;
+
   const submit = () => {
     try {
       validateArray.forEach((validateFunc) => {
         validateFunc(state);
       });
+      if (
+        window.confirm(`입력하신 카드정보가
+      카드번호:${cardNumber.join("-")}
+      카드 만료일:${expiredDate.join("/")}
+      카드 소유자 이름:${ownerName === "" ? "임꺽정" : ownerName} 이
+      맞습니까`)
+      ) {
+        alert("카드가 등록되었습니다");
+      }
     } catch (e) {
       alert(e.message);
     }
