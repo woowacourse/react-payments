@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
+import { useEffect, useRef } from "react";
 
-import { InputBasic } from '../common/InputBasic';
-import { InputBox } from '../common/InputBox';
-import { InputContainer, InputTitle } from '../common/styled';
-import Dot from '../common/Dot';
-import { useEffect } from 'react';
+import { InputBasic } from "../common/InputBasic";
+import { InputBox } from "../common/InputBox";
+import { InputContainer, InputTitle } from "../common/styled";
+import Dot from "../common/Dot";
 
 export const CardPasswordInputForm = ({
   password,
@@ -19,10 +19,16 @@ export const CardPasswordInputForm = ({
     handlePasswordInput((prev) => ({ ...prev, [name]: e.nativeEvent.data }));
   };
 
+  const passwordInputRefs = useRef([]);
+
   useEffect(() => {
-    const isCompletePassword = Object.values(password).every(
-      (number) => number
-    );
+    const isCompletePassword = Object.values(password).every((number, i) => {
+      if (number) {
+        passwordInputRefs.current[i + 1]?.focus();
+        return true;
+      }
+      return false;
+    });
 
     handleCardPasswordCheck(isCompletePassword);
   }, [password]);
@@ -33,17 +39,19 @@ export const CardPasswordInputForm = ({
       <InputBox
         width="50%"
         backgroundColor="transparent"
-        justifyContent={'space-between'}
+        justifyContent={"space-between"}
       >
         <InputBasic
           value={password?.firstNumber}
-          onChange={(e) => handlePasswordChange(e, 'firstNumber')}
+          onChange={(e) => handlePasswordChange(e, "firstNumber")}
+          inputRef={(elem) => (passwordInputRefs.current[0] = elem)}
           type="password"
           width="20%"
         />
         <InputBasic
           value={password?.secondNumber}
-          onChange={(e) => handlePasswordChange(e, 'secondNumber')}
+          onChange={(e) => handlePasswordChange(e, "secondNumber")}
+          inputRef={(elem) => (passwordInputRefs.current[1] = elem)}
           type="password"
           width="20%"
         />

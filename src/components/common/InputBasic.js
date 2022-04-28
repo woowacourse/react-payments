@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const InputBasicStyle = styled.input`
   background-color: #ecebf1;
   color: #04c09e;
   height: 45px;
-  width: ${(props) => props.width || '100%'};
+  width: ${(props) => props.width || "100%"};
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -15,11 +15,19 @@ const InputBasicStyle = styled.input`
   border-radius: 0.25rem;
 `;
 
-export const InputBasic = ({ type, placeholder, value, onChange, width }) => {
+export const InputBasic = ({
+  type,
+  placeholder,
+  value,
+  onChange,
+  width,
+  inputRef,
+}) => {
   return (
     <InputBasicStyle
       width={width}
       type={type}
+      ref={inputRef}
       placeholder={placeholder}
       value={value}
       onChange={onChange}
