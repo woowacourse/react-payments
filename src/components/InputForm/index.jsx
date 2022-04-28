@@ -31,7 +31,7 @@ function InputForm({
     e.preventDefault();
 
     try {
-      if (checkFormValidation({ cardNumber, expirationDate, securityCode, password })) {
+      if (checkFormValidation({ expirationDate })) {
         alert(`카드 번호는 ${objectToString(cardNumber)} 입니다 \n
         만료일 ${objectToString(expirationDate, '/')} 입니다 \n
         카드 소유자 이름 ${ownerName} 입니다 \n
