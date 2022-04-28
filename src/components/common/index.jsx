@@ -41,6 +41,9 @@ const Input = styled.input`
   &:focus {
     outline: 1px solid #a0a0a0;
   }
+  &:disabled {
+    color: #000;
+  }
 `;
 
 const DotContainer = styled.div`
