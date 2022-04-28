@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ErrorMessage from './common/ErrorMessage';
 import { Input, InputContainer, Span, Label, InputWrapper } from './common';
 import QuestionContainer from './common/QuestionIcon';
 
 const MAX_CARD_CODE = 3;
-const CVC_EXPLANATION = 'hihi asfdsafd asdfasdfa asfdasfasf';
+const CVC_EXPLANATION = `CVC번호는 카드뒷면의 7자리 숫자 중 뒷 3자리입니다.`;
 
 const validator = value => {
   if (value.includes(' ') || Number.isNaN(Number(value))) {
@@ -19,28 +20,40 @@ const validator = value => {
   }
 };
 
-function CardSecurityCode(props) {
+function CardSecurityCode({ correctSecurityCodeCallback }) {
   const [cardCode, setCardCode] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = ({ target: { value } }) => {
     try {
       validator(value);
     } catch (err) {
-      console.log(err.message);
+      setErrorMessage(err.message);
       return;
     }
     setCardCode(value);
   };
 
+  useEffect(() => {
+    const isCorrectSecurityCode = MAX_CARD_CODE === cardCode.length;
+
+    if (isCorrectSecurityCode) setErrorMessage('');
+
+    correctSecurityCodeCallback(isCorrectSecurityCode);
+  }, [correctSecurityCodeCallback, cardCode]);
+
   return (
     <InputContainer position="relative" width="40%">
-      <Label>보안코드(CVC/CVV)</Label>
-      <InputWrapper width="80%">
-        <Span>
-          <Input type="password" maxLength="3" onChange={handleInputChange} value={cardCode} />
-        </Span>
-      </InputWrapper>
-      <QuestionContainer textContent={CVC_EXPLANATION} />
+      <div>
+        <Label>보안코드(CVC/CVV)</Label>
+        <InputWrapper width="80%">
+          <Span>
+            <Input type="password" maxLength="3" onChange={handleInputChange} value={cardCode} />
+          </Span>
+        </InputWrapper>
+        <QuestionContainer>{CVC_EXPLANATION}</QuestionContainer>
+      </div>
+      <ErrorMessage>{errorMessage}</ErrorMessage>
     </InputContainer>
   );
 }

@@ -11,7 +11,7 @@ const QuestionContainer = styled.div`
 const TextArea = styled.p`
   display: ${props => (props.isShown ? 'block' : 'none')};
   position: absolute;
-  min-width: 110px;
+  min-width: 200px;
   bottom: 10px;
   left: 40px;
   padding: 4px 4px 4px 16px;
@@ -25,7 +25,7 @@ const TextArea = styled.p`
   }
 `;
 
-function QuestionIcon({ textContent }) {
+function QuestionIcon({ children: textContent }) {
   const [isShown, setIsShown] = useState();
 
   const handleClickBox = () => {

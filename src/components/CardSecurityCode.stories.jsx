@@ -6,4 +6,9 @@ export default {
   component: CardSecurityCode,
 };
 
-export const cardSecurityCode = () => <CardSecurityCode />;
+const Template = args => {
+  const correctSecurityCodeCallback = () => {};
+  return <CardSecurityCode {...args} correctSecurityCodeCallback={correctSecurityCodeCallback} />;
+};
+
+export const Primary = Template.bind({});
