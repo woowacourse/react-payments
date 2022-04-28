@@ -5,28 +5,36 @@ import '../../index.css';
 export default {
   title: 'Payment/Input',
   component: Input,
+  argTypes: {
+    isCenter: { control: { type: 'boolean' } },
+    backgroundColor: { control: { type: 'color' } },
+    color: { control: { type: 'color' } },
+    isValid: { control: { type: 'boolean' } },
+  },
 };
 
 const Template = args => <Input {...args} />;
 
-export const Default = Template.bind({});
+export const CardNumbers = Template.bind({});
 export const Month = Template.bind({});
 export const OwnerName = Template.bind({});
 export const SecurityNumber = Template.bind({});
 export const Password = Template.bind({});
 
-Default.args = {
+CardNumbers.args = {
   type: 'text',
   width: '318px',
-  placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
+  maxLength: 19,
+  placeholder: 'ex. 0000-0000-0000-0000',
+  isValid: false,
 };
 
 Month.args = {
   type: 'text',
   placeholder: 'MM / YY',
   width: '137px',
-  isCenter: true,
   maxLength: 5,
+  isValid: false,
 };
 
 OwnerName.args = {
@@ -35,6 +43,7 @@ OwnerName.args = {
   placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
   isCenter: false,
   maxLength: 30,
+  isValid: false,
 };
 
 SecurityNumber.args = {
@@ -42,6 +51,7 @@ SecurityNumber.args = {
   width: '84px',
   isCenter: true,
   maxLength: 3,
+  isValid: false,
 };
 
 Password.args = {
@@ -49,4 +59,5 @@ Password.args = {
   width: '43px',
   isCenter: true,
   maxLength: 1,
+  isValid: false,
 };

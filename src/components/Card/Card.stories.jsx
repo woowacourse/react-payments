@@ -3,10 +3,10 @@ import Card from '.';
 import '../../index.css';
 
 export default {
-  title: 'Example/Card',
+  title: 'Payment/Card',
   component: Card,
   argTypes: {
-    expiredDate: { control: { type: 'object' } },
+    expiredDate: { control: { type: 'text' } },
   },
 };
 
@@ -18,5 +18,5 @@ Small.args = {
   companyName: '포코카드',
   cardNumbers: ['1111', '2222', '3333', '4444'],
   ownerName: 'SUN',
-  expiredDate: { month: 12, year: 24 },
+  expiredDate: '12/22',
 };

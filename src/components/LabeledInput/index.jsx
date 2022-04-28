@@ -64,7 +64,9 @@ function LabeledInput({
       return inputProps.isValid || value.join('').length === 0;
     }
 
-    return inputProps.isValid || value.length === 0;
+    return value
+      ? inputProps.isValid || value.length === 0
+      : inputProps.isValid || tempValue.length === 0;
   };
 
   return (
