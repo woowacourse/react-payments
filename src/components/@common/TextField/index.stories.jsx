@@ -1,5 +1,5 @@
 import TextField from '.';
-import '../../../index.css'; // 루트 디렉터리 세팅하기!
+import 'index.css';
 
 export default {
   title: 'Component/@Common/TextField',
@@ -12,12 +12,13 @@ export default {
 const Template = (args) => <TextField {...args} />;
 
 const StringField = Template.bind({});
-StringField.args = {};
+StringField.args = {
+  placeholder: '문자열 입력창',
+};
 
 const NumberField = Template.bind({});
-NumberField.args = {};
+NumberField.args = {
+  placeholder: '숫자 입력창',
+};
 
-const PasswordField = Template.bind({});
-PasswordField.args = {};
-
-export { StringField, NumberField, PasswordField };
+export { StringField, NumberField };
