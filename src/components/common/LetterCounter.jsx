@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { LABEL_PRIMARY_COLOR } from '../../style';
 import { Span } from './styled';
 
-// TODO: 스타일
 const Paragraph = styled.p`
   margin: 0;
   position: absolute;

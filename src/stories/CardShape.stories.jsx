@@ -9,6 +9,7 @@ export default {
     cardNumber: { control: 'text' },
     cardOwner: { control: 'text' },
     cardDate: { control: 'text' },
+    dimensions: { control: 'object' },
   },
 };
 
@@ -21,4 +22,8 @@ Primary.args = {
   cardNumber: '0000-0000-****-****',
   cardOwner: 'COKE TAETAE',
   cardDate: '05 / 21',
+  dimensions: {
+    width: 754,
+    height: 200,
+  },
 };

@@ -6,7 +6,7 @@ export default {
   component: Calendar,
   argTypes: {
     items: { control: 'array' },
-    placeholder: { control: 'text' },
+    dimensions: { control: 'object' },
   },
 };
 
@@ -18,5 +18,8 @@ export const Primary = Template.bind({});
 
 Primary.args = {
   items: [1, 2, 3, 4],
-  placeholder: 'MM',
+  dimensions: {
+    width: 754,
+    height: 200,
+  },
 };

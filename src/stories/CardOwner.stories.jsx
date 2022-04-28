@@ -11,7 +11,10 @@ export default {
 
 const Template = args => {
   const ownerNameCallback = () => {};
-  return <CardOwner {...args} ownerNameCallback={ownerNameCallback} />;
+  const correctOwnerNameCallback = () => {};
+  return (
+    <CardOwner {...args} ownerNameCallback={ownerNameCallback} correctOwnerNameCallback={correctOwnerNameCallback} />
+  );
 };
 
 export const Primary = Template.bind({});
