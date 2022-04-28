@@ -33,6 +33,7 @@ const ModalStyle = styled.div`
 
   background: #fff;
   z-index: 10;
+  flex-direction: column;
 `;
 
 export const Modal = ({ children, visible, handleVisible }) => {

@@ -7,6 +7,7 @@ const GridColumnsStyle = styled.div`
   justify-content: center;
   align-items: center;
   grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
 `;
 const ModalItemContainerStyle = styled.div`
   display: flex;
