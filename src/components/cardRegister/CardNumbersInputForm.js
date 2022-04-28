@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { createRef } from 'react';
+import { useRef } from 'react';
 
 import { MAX_LENGTH } from '../../constants/card';
 
@@ -28,7 +30,10 @@ export const CardNumbersInputForm = ({
       return;
     }
 
-    handleCardNumbersInput((prev) => ({ ...prev, [name]: e.target.value }));
+    handleCardNumbersInput({
+      type: 'setCardNumber',
+      payload: { key: name, cardNumber: e.target.value },
+    });
   };
 
   useEffect(() => {
@@ -43,13 +48,17 @@ export const CardNumbersInputForm = ({
     }
   }, [cardNumbers]);
 
+  const refs = Array.from({ length: 4 }, () => useRef());
+  // console.log(refs);
+
   return (
     <InputContainer>
       <InputTitle>카드 번호</InputTitle>
       <InputBox color="#04c09e" padding="0 50px">
-        {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }) => (
+        {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }, index) => (
           <InputBasic
             key={name}
+            ref={refs[index]}
             value={cardNumbers?.[name]}
             onChange={(e) => handleNumberChange(e, name)}
             type={type}

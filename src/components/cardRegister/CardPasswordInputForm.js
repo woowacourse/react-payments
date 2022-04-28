@@ -15,7 +15,10 @@ export const CardPasswordInputForm = ({
       return;
     }
 
-    handlePasswordInput((prev) => ({ ...prev, [name]: e.nativeEvent.data }));
+    handlePasswordInput({
+      type: 'setPassword',
+      payload: { key: name, password: e.nativeEvent.data },
+    });
   };
 
   useEffect(() => {

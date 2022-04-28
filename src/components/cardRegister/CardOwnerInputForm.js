@@ -11,7 +11,10 @@ export const CardOwnerInputForm = ({ ownerName, handleOwnerNameInput }) => {
       return;
     }
 
-    handleOwnerNameInput(e.target.value);
+    handleOwnerNameInput({
+      type: 'setOwnerName',
+      payload: { ownerName: e.target.value },
+    });
   };
 
   return (

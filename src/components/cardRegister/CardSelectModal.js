@@ -35,8 +35,8 @@ export const CardSelectModal = ({
   handleCardType,
   handleCardTypeCheck,
 }) => {
-  const handleCardTypeSelect = (card) => {
-    handleCardType(card);
+  const handleCardTypeSelect = (cardType) => {
+    handleCardType({ type: 'setCardType', payload: { cardType } });
     handleCardTypeCheck(true);
     closeModal();
   };

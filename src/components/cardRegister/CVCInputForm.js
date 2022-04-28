@@ -18,7 +18,7 @@ export const CVCInputForm = ({
       return;
     }
 
-    handleCVCInput(e.target.value);
+    handleCVCInput({ type: 'setCVC', payload: { CVC: e.target.value } });
   };
 
   useEffect(() => {

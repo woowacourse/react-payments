@@ -26,7 +26,10 @@ export const CardExpireDateInputForm = ({
       e.target.value = '00';
     }
 
-    handleExpireDateInput((prev) => ({ ...prev, month: e.target.value }));
+    handleExpireDateInput({
+      type: 'setExpireDate',
+      payload: { key: 'month', date: e.target.value },
+    });
   };
 
   const handleYearInput = (e) => {
@@ -34,7 +37,10 @@ export const CardExpireDateInputForm = ({
       return;
     }
 
-    handleExpireDateInput((prev) => ({ ...prev, year: e.target.value }));
+    handleExpireDateInput({
+      type: 'setExpireDate',
+      payload: { key: 'year', date: e.target.value },
+    });
   };
 
   useEffect(() => {

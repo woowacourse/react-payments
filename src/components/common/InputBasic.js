@@ -1,4 +1,5 @@
 import React from 'react';
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 const InputBasicStyle = styled.input`
@@ -15,14 +16,17 @@ const InputBasicStyle = styled.input`
   border-radius: 0.25rem;
 `;
 
-export const InputBasic = ({ type, placeholder, value, onChange, width }) => {
-  return (
-    <InputBasicStyle
-      width={width}
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-    />
-  );
-};
+export const InputBasic = forwardRef(
+  ({ type, placeholder, value, onChange, width }, ref) => {
+    return (
+      <InputBasicStyle
+        width={width}
+        ref={ref}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+      />
+    );
+  }
+);

@@ -93,10 +93,7 @@ const CardNumbersText = styled(CardText)`
 `;
 
 export const Card = ({
-  cardType,
-  cardNumbers,
-  expireDate,
-  ownerName,
+  cardInfo: { cardType, cardNumbers, expireDate, ownerName },
   openModal,
 }) => {
   const formattedCardNumbers = Object.values(cardNumbers)

@@ -14,6 +14,7 @@ import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 import { PageTitle } from '../components/common/PageTitle';
 import { ModalSelector } from '../components/common/ModalSelector';
+import { useReducer } from 'react';
 
 const CARD_TYPES = [
   { name: '포코', color: 'gold' },
@@ -26,27 +27,78 @@ const CARD_TYPES = [
   { name: '록바', color: '#FBCD58' },
 ];
 
-export const CardRegisterPage = () => {
-  const [cardNumbers, setCardNumbers] = useState({
+const reducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case 'setCardNumber': {
+      const { key, cardNumber } = payload;
+
+      return {
+        ...state,
+        cardNumbers: { ...state.cardNumbers, [key]: cardNumber },
+      };
+    }
+    case 'setExpireDate': {
+      const { key, date } = payload;
+
+      return { ...state, expireDate: { ...state.expireDate, [key]: date } };
+    }
+    case 'setOwnerName': {
+      const { ownerName } = payload;
+
+      return { ...state, ownerName };
+    }
+    case 'setCVC': {
+      const { CVC } = payload;
+
+      return { ...state, CVC };
+    }
+    case 'setPassword': {
+      const { key, password } = payload;
+
+      return {
+        ...state,
+        password: { ...state.password, [key]: password },
+      };
+    }
+    case 'setCardType': {
+      const { cardType } = payload;
+
+      return {
+        ...state,
+        cardType,
+      };
+    }
+    default:
+      throw new Error('NO SUCH TYPE');
+  }
+};
+const initialCardInfo = {
+  cardNumbers: {
     firstNumber: '',
     secondNumber: '',
     thirdNumber: '',
     fourthNumber: '',
-  });
-  const [expireDate, setExpireDate] = useState({
+  },
+  expireDate: {
     month: '',
     year: '',
-  });
-  const [ownerName, setOwnerName] = useState('');
-  const [CVC, setCVC] = useState('');
-  const [password, setPassword] = useState({
+  },
+  ownerName: '',
+  CVC: '',
+  password: {
     firstNumber: '',
     secondNumber: '',
-  });
-  const [cardType, setCardType] = useState({
+  },
+  cardType: {
     name: '',
     backgroundColor: '',
-  });
+  },
+};
+
+export const CardRegisterPage = () => {
+  const [cardInfo, dispatch] = useReducer(reducer, initialCardInfo);
 
   const [openedModalComponent, setOpenedModalComponent] = useState('');
 
@@ -74,37 +126,34 @@ export const CardRegisterPage = () => {
     <>
       <PageTitle>카드 추가</PageTitle>
       <Card
-        cardType={cardType}
-        cardNumbers={cardNumbers}
-        expireDate={expireDate}
-        ownerName={ownerName}
+        cardInfo={cardInfo}
         openModal={() => setOpenedModalComponent(COMPONENTS.CARD_TYPE)}
       />
       <CardNumbersInputForm
-        cardType={cardType}
-        cardNumbers={cardNumbers}
-        handleCardNumbersInput={setCardNumbers}
+        cardType={cardInfo.cardType}
+        cardNumbers={cardInfo.cardNumbers}
+        handleCardNumbersInput={dispatch}
         handleCardNumberCheck={checkerFactory(COMPONENTS.NUMBERS)}
         openModal={() => setOpenedModalComponent(COMPONENTS.CARD_TYPE)}
       />
       <CardExpireDateInputForm
-        expireDate={expireDate}
-        handleExpireDateInput={setExpireDate}
+        expireDate={cardInfo.expireDate}
+        handleExpireDateInput={dispatch}
         handleCardExpireCheck={checkerFactory(COMPONENTS.EXPIRE_DATE)}
       />
       <CardOwnerInputForm
-        ownerName={ownerName}
-        handleOwnerNameInput={setOwnerName}
+        ownerName={cardInfo.ownerName}
+        handleOwnerNameInput={dispatch}
       />
       <CVCInputForm
-        CVC={CVC}
-        handleCVCInput={setCVC}
+        CVC={cardInfo.CVC}
+        handleCVCInput={dispatch}
         handleCardCVCCheck={checkerFactory(COMPONENTS.CVC)}
         openModal={() => setOpenedModalComponent(COMPONENTS.CVC)}
       />
       <CardPasswordInputForm
-        password={password}
-        handlePasswordInput={setPassword}
+        password={cardInfo.password}
+        handlePasswordInput={dispatch}
         handleCardPasswordCheck={checkerFactory(COMPONENTS.PASSWORD)}
       />
       <ModalSelector
@@ -117,7 +166,7 @@ export const CardRegisterPage = () => {
           name={COMPONENTS.CARD_TYPE}
           cardTypes={CARD_TYPES}
           closeModal={() => setOpenedModalComponent('')}
-          handleCardType={setCardType}
+          handleCardType={dispatch}
           handleCardTypeCheck={checkerFactory(COMPONENTS.CARD_TYPE)}
         />
         <CVCHelperModal name={COMPONENTS.CVC} />
