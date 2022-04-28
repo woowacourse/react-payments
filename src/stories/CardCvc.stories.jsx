@@ -9,3 +9,6 @@ export default {
 const Template = (args) => <CardCvc {...args} />;
 
 export const Example = Template.bind({});
+Example.args = {
+  color: '#04C09E',
+};

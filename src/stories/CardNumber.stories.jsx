@@ -9,3 +9,6 @@ export default {
 const Template = (args) => <CardNumber {...args} />;
 
 export const Example = Template.bind({});
+Example.args = {
+  color: '#04C09E',
+};

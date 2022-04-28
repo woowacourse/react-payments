@@ -10,7 +10,8 @@ const Template = (args) => <Card {...args} />;
 
 export const PocoCard = Template.bind({});
 PocoCard.args = {
-  cardCompanyIndex: 0,
+  cardName: '포코 카드',
+  color: '#E24141',
   cardNumber: ['1234', '5678', '4567', '7890'],
   cardOwner: '마르코',
   cardExpiration: ['05', '23'],
@@ -18,7 +19,8 @@ PocoCard.args = {
 
 export const JuneCard = Template.bind({});
 JuneCard.args = {
-  cardCompanyIndex: 1,
+  cardName: '준 카드',
+  color: '#547CE4',
   cardNumber: ['1234', '5678', '4567', '7890'],
   cardOwner: '마르코',
   cardExpiration: ['05', '23'],
@@ -26,7 +28,8 @@ JuneCard.args = {
 
 export const GongOneCard = Template.bind({});
 GongOneCard.args = {
-  cardCompanyIndex: 2,
+  cardName: '공원 카드',
+  color: '#73BC6D',
   cardNumber: ['1234', '5678', '4567', '7890'],
   cardOwner: '마르코',
   cardExpiration: ['05', '23'],
@@ -34,7 +37,8 @@ GongOneCard.args = {
 
 export const BranCard = Template.bind({});
 BranCard.args = {
-  cardCompanyIndex: 3,
+  cardName: '브랜 카드',
+  color: '#DE59B9',
   cardNumber: ['1234', '5678', '4567', '7890'],
   cardOwner: '마르코',
   cardExpiration: ['05', '23'],
@@ -42,7 +46,8 @@ BranCard.args = {
 
 export const LoydCard = Template.bind({});
 LoydCard.args = {
-  cardCompanyIndex: 4,
+  cardName: '로이드 카드',
+  color: '#04C09E',
   cardNumber: ['1234', '5678', '4567', '7890'],
   cardOwner: '마르코',
   cardExpiration: ['05', '23'],
@@ -50,7 +55,8 @@ LoydCard.args = {
 
 export const DobbyCard = Template.bind({});
 DobbyCard.args = {
-  cardCompanyIndex: 5,
+  cardName: '도비 카드',
+  color: '#E76E9A',
   cardNumber: ['1234', '5678', '4567', '7890'],
   cardOwner: '마르코',
   cardExpiration: ['05', '23'],
@@ -58,7 +64,8 @@ DobbyCard.args = {
 
 export const CollinCard = Template.bind({});
 CollinCard.args = {
-  cardCompanyIndex: 6,
+  cardName: '콜린 카드',
+  color: '#F37D3B',
   cardNumber: ['1234', '5678', '4567', '7890'],
   cardOwner: '마르코',
   cardExpiration: ['05', '23'],
@@ -66,7 +73,8 @@ CollinCard.args = {
 
 export const SunCard = Template.bind({});
 SunCard.args = {
-  cardCompanyIndex: 7,
+  cardName: '썬 카드',
+  color: '#FBCD58',
   cardNumber: ['1234', '5678', '4567', '7890'],
   cardOwner: '마르코',
   cardExpiration: ['05', '23'],
