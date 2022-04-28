@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import FieldSet from "../../FieldSet";
 import Input from "../../Input";
@@ -20,7 +20,7 @@ const Password = ({
         <PasswordInputContainer>
           <Input
             type="password"
-            id="password"
+            id="firstPassword"
             size="small"
             maxLength={1}
             value={firstPassword}
@@ -28,7 +28,7 @@ const Password = ({
           />
           <Input
             type="password"
-            id="password"
+            id="secondPassword"
             size="small"
             maxLength={1}
             value={secondPassword}

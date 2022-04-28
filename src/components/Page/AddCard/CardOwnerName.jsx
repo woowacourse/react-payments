@@ -3,12 +3,16 @@ import FieldSet from "../../FieldSet";
 import styled from "styled-components";
 import Input from "../../Input";
 
+const showOwnerNameLength = (ownerName) => {
+  return ownerName.length < 10
+    ? `0${ownerName.length}/30`
+    : `${ownerName.length}/30`;
+};
+
 const CardOwnerName = ({ ownerName, onChangeOwnerName }) => {
   return (
     <Container>
-      <MaxNumberIndicator>
-        {ownerName.length < 10 ? `0${ownerName.length}` : ownerName.length}/30
-      </MaxNumberIndicator>
+      <MaxNumberIndicator>{showOwnerNameLength(ownerName)}</MaxNumberIndicator>
       <FieldSet
         id="cardOwnerName"
         description="카드 소유자 이름(선택)"
@@ -19,7 +23,7 @@ const CardOwnerName = ({ ownerName, onChangeOwnerName }) => {
             id="cardOwnerName"
             size="large"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-            maxLength="30"
+            maxLength={30}
             value={ownerName}
             onChange={onChangeOwnerName}
           />

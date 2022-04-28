@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const Button = ({ content, type = "button", name }) => {
+const Button = ({ children, type = "button", name }) => {
   return (
     <Container type={type} name={name}>
-      {content}
+      {children}
     </Container>
   );
 };

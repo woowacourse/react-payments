@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Button from "../../Button";
 import Header from "../../Header";
@@ -21,6 +21,9 @@ import SecureCode from "./SecureCode";
 import useInputValue from "../../../hooks/useInputValue";
 
 const AddCardPage = () => {
+  const [isValidatedForm, setIsValidatedForm] = useState(false);
+  const [isValidatedValueLength, setIsValidatedValueLength] = useState(false);
+
   const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] =
     useInputValue({ validation: checkNumberOnly });
   const [secondCardNumber, isSecondCardNumberError, onChangeSecondCardNumber] =
@@ -29,7 +32,6 @@ const AddCardPage = () => {
     useInputValue({ validation: checkNumberOnly });
   const [fourthCardNumber, isFourthCardNumberError, onChangeFourthCardNumber] =
     useInputValue({ validation: checkNumberOnly });
-
   const [expiredMonth, isExpiredMonthError, onChangeExpiredMonth] =
     useInputValue({ validation: checkExpiredMonth });
   const [expiredYear, isExpiredYearError, onChangeExpiredYear] = useInputValue({
@@ -53,6 +55,36 @@ const AddCardPage = () => {
     useInputValue({
       validation: checkPassword,
     });
+
+  useEffect(() => {
+    setIsValidatedForm(
+      !isFirstCardNumberError &&
+        !isSecondCardNumberError &&
+        !isThirdCardNumberError &&
+        !isFourthCardNumberError &&
+        !isExpiredMonthError &&
+        !isExpiredYearError &&
+        !isOwnerNameError &&
+        !isSecureCodeError &&
+        !isFirstPasswordError &&
+        !isSecondPasswordError
+    );
+  });
+
+  useEffect(() => {
+    setIsValidatedValueLength(
+      firstCardNumber.length > 0 &&
+        secondCardNumber.length > 0 &&
+        thirdCardNumber.length > 0 &&
+        fourthCardNumber.length > 0 &&
+        firstPassword.length > 0 &&
+        secondPassword.length > 0 &&
+        secureCode.length > 0 &&
+        expiredMonth.length > 0 &&
+        expiredYear.length > 0
+    );
+  });
+
   return (
     <Container>
       <Header title="카드 추가" />
@@ -92,7 +124,11 @@ const AddCardPage = () => {
         secondPassword={secondPassword}
         onChangeSecondPassword={onChangeSecondPassword}
       />
-      <Button></Button>
+      {isValidatedForm && isValidatedValueLength && (
+        <ButtonContainer>
+          <Button name="submitButton">다음</Button>
+        </ButtonContainer>
+      )}
     </Container>
   );
 };
@@ -100,6 +136,13 @@ const AddCardPage = () => {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
+  position: relative;
+`;
+
+const ButtonContainer = styled.div`
+  position: absolute;
+  right: 20px;
+  bottom: -20px;
 `;
 
 export default AddCardPage;

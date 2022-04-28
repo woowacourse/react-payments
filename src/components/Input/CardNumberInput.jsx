@@ -30,6 +30,7 @@ const CardNumberInput = ({
       <DashContainer>-</DashContainer>
       <Input
         size="medium"
+        type="password"
         value={thirdCardNumber}
         onChange={onChangeThirdCardNumber}
         maxLength={4}
@@ -38,6 +39,7 @@ const CardNumberInput = ({
       <Input
         size="medium"
         textAlign="left"
+        type="password"
         value={fourthCardNumber}
         onChange={onChangeFourthCardNumber}
         maxLength={4}
