@@ -1,20 +1,4 @@
-import styled from 'styled-components';
-
-const StyledInput = styled.input`
-  width: ${props => props.width};
-  height: 45px;
-  background: ${props => props.backgroundColor};
-  border-radius: 7px;
-  padding: 12px;
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 21px;
-  text-align: ${props => props.textAlign};
-  color: ${props => props.color};
-  &:focus {
-    outline-color: ${props => (props.isValid ? '#04c09e' : 'red')};
-  }
-`;
+import { StyledInput } from '../../style/addForm';
 
 function Input({
   value,

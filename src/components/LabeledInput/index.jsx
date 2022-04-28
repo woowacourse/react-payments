@@ -1,47 +1,13 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import Input from '../Input';
 import InputLabel from '../InputLabel';
-
-const LabeledInputContainer = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  gap: 7px;
-`;
-
-const LabeledInputHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: ${props => props.width || '100%'};
-`;
-
-const LabeledInputBody = styled.div`
-  display: flex;
-  gap: 4px;
-`;
-
-const LengthChecker = styled.p`
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
-  letter-spacing: -0.05em;
-  color: #525252;
-`;
-
-const LabeledInputFooter = styled.span`
-  position: absolute;
-  word-break: normal;
-  bottom: -14px;
-  width: 300px;
-  overflow: visible;
-
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
-  letter-spacing: -0.085em;
-  color: red;
-`;
+import {
+  LabeledInputContainer,
+  LabeledInputHeader,
+  LabeledInputBody,
+  LengthChecker,
+  LabeledInputFooter,
+} from '../../style/addForm';
 
 function LabeledInput({
   value,
