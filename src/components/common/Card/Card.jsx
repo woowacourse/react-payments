@@ -28,7 +28,7 @@ function Card({ isEmpty, handleCardAdd, cardInfo }) {
               <div className="card-bottom-position">
                 <div className="card-bottom__info">
                   <span className="card-text">
-                    {cardInfo.owner === '' ? 'NAME' : cardInfo.owner.slice(0, 7)}
+                    {cardInfo.owner === '' ? 'NAME' : cardInfo.owner.slice(0, 10)}
                   </span>
                   <span className="card-text">
                     {cardInfo.month || 'MM'} / {cardInfo.year || 'YY'}

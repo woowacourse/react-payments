@@ -12,8 +12,15 @@
 }
 
 .prev-page-button {
-  font-size: 20px;
+  position: absolute;
   cursor: pointer;
+  width: 11px;
+  height: 11px;
+  border-bottom: 1.5px solid #525252;
+  border-left: 1.5px solid #525252;
+  transform: rotate(45deg);
+  left: 20px;
+  top: 19px;
 }
 
 .next-page-button {
