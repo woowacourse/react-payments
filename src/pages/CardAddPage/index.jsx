@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import Card from "../../components/Card";
 import Button from "../../components/Button";
+
 import CardNumberForm from "./CardNumberForm";
 import CardDueDateForm from "./CardDueDateForm";
 import CardOwnerForm from "./CardOwnerForm";
@@ -13,7 +14,6 @@ import {
   CardWrapper,
   FooterWrapper,
 } from "./style";
-
 import {
   CARD_NUMBER,
   DUE_DATE,
@@ -160,14 +160,14 @@ function CardAddPage() {
       </CardWrapper>
       <CardNumberForm
         cardNumbers={cardNumbers}
-        cardNumberInputRefs={cardNumberInputRefs}
         handleCardNumber={handleCardNumber}
+        cardNumberInputRefs={cardNumberInputRefs}
       />
       <CardDueDateForm
         dueDate={dueDate}
-        error={error}
-        dueYearInputRef={dueYearInputRef}
         handleDueDate={handleDueDate}
+        dueYearInputRef={dueYearInputRef}
+        error={error}
       />
       <CardOwnerForm owner={owner} handleOwner={handleOwner} />
       <CardCVCForm cvc={cvc} handleCvc={handleCvc} />

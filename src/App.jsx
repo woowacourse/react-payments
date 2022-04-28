@@ -1,5 +1,5 @@
-import CardAddPage from "./pages/CardAddPage";
 import { ThemeProvider } from "styled-components";
+import CardAddPage from "./pages/CardAddPage";
 import theme from "./theme";
 
 function App() {

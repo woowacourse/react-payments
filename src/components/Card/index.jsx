@@ -42,6 +42,10 @@ function Card({ size, company, cardNumbers, owner, dueMonth, dueYear }) {
 
 Card.propTypes = {
   /**
+   * 카드 크기 타입
+   */
+  size: PropTypes.string,
+  /**
    * 카드사
    */
   company: PropTypes.string.isRequired,

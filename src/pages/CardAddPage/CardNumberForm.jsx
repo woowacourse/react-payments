@@ -5,8 +5,8 @@ import { FormWrapper } from "./style";
 
 function CardNumberForm({
   cardNumbers,
-  cardNumberInputRefs,
   handleCardNumber,
+  cardNumberInputRefs,
 }) {
   return (
     <FormWrapper>
