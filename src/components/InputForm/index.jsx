@@ -17,6 +17,16 @@ function InputForm({
 
   const inputElementsRef = useRef([]);
 
+  useEffect(() => {
+    try {
+      if (checkFormCompletion({ cardNumber, expirationDate, securityCode, password })) {
+        setIsComplete(true);
+      }
+    } catch (e) {
+      setIsComplete(false);
+    }
+  }, [cardNumber, expirationDate, ownerName, securityCode, password]);
+
   const onClickNextButton = e => {
     e.preventDefault();
 
@@ -33,16 +43,6 @@ function InputForm({
     }
   };
 
-  useEffect(() => {
-    try {
-      if (checkFormCompletion({ cardNumber, expirationDate, securityCode, password })) {
-        setIsComplete(true);
-      }
-    } catch (e) {
-      setIsComplete(false);
-    }
-  }, [cardNumber, expirationDate, ownerName, securityCode, password]);
-
   return (
     <form onSubmit={onClickNextButton}>
       <CardNumberInput
@@ -52,7 +52,7 @@ function InputForm({
         startIndex={0}
       ></CardNumberInput>
       <ExpirationDateInput
-        cardNumber={expirationDate}
+        expirationDate={expirationDate}
         cardInputDispatch={cardInputDispatch}
         inputElementsRef={inputElementsRef}
         startIndex={4}
