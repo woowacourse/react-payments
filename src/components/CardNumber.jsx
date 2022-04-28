@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { hyphenPrimaryColor } from '../style';
 import ErrorMessage from './common/ErrorMessage';
 import { Input, InputContainer, InputWrapper, Label, Span } from './common';
@@ -20,11 +20,17 @@ const validator = value => {
 };
 
 const convertToCardNumberString = numbers => {
-  const [cardNoA, cardNoB] = Object.values(numbers);
-  return `${cardNoA} ${cardNoB} **** ****`;
+  const [cardNoA, cardNoB, cardNoC, cardNoD] = Object.values(numbers);
+  return `${cardNoA} ${cardNoB} ${'*'.repeat(cardNoC.length)} ${'*'.repeat(cardNoD.length)}`;
 };
 
 function CardNumber({ cardNumberCallback }) {
+  const cardNoARef = useRef(null);
+  const cardNoBRef = useRef(null);
+  const cardNoCRef = useRef(null);
+  const cardNoDRef = useRef(null);
+  const cardNoRefs = [cardNoARef, cardNoBRef, cardNoCRef, cardNoDRef];
+
   const [cardNumbers, setCardNumbers] = useState({
     cardNoA: '',
     cardNoB: '',
@@ -35,6 +41,14 @@ function CardNumber({ cardNumberCallback }) {
 
   const handleInputChange = e => {
     const { name, value } = e.target;
+    cardNoRefs.every((cardNoRef, index) => {
+      if (e.target === cardNoRef.current && cardNoRef.current.value.length === 4) {
+        if (index === cardNoRefs.length - 1) return false;
+        cardNoRefs[index + 1].current.focus();
+        return false;
+      }
+      return true;
+    });
 
     try {
       validator(value);
@@ -51,17 +65,17 @@ function CardNumber({ cardNumberCallback }) {
 
   const isCorrectCardNumber = Object.values(cardNumbers).join('').length === 16;
 
-  const handleInputFocus = () => {
+  const handleInputFocus = target => {
+    console.log(target);
+
     if (!isCorrectCardNumber) {
       setErrorMessage('모든 숫자를 입력해주세요.');
     }
   };
 
   useEffect(() => {
-    if (!isCorrectCardNumber) {
-      cardNumberCallback('');
-      return;
-    }
+    // console.dir(cardNoARef.current, 'cardNoARef');
+    // cardNoCRef.current.focus();
 
     setErrorMessage('');
     cardNumberCallback(convertToCardNumberString(cardNumbers));
@@ -73,30 +87,50 @@ function CardNumber({ cardNumberCallback }) {
       <Label>카드 번호</Label>
       <InputWrapper color={hyphenPrimaryColor} onFocus={handleInputFocus}>
         <Span>
-          <Input type="text" onChange={handleInputChange} maxLength={4} name="cardNoA" value={cardNumbers.cardNoA} />
-        </Span>
-        <Span>-</Span>
-        <Span>
-          <Input type="text" onChange={handleInputChange} maxLength={4} name="cardNoB" value={cardNumbers.cardNoB} />
-        </Span>
-        <Span>-</Span>
-        <Span>
           <Input
-            type="password"
+            ref={cardNoARef}
+            type="text"
             onChange={handleInputChange}
             maxLength={4}
-            name="cardNoC"
-            value={cardNumbers.cardNoC}
+            name="cardNoA"
+            value={cardNumbers.cardNoA}
+            placeholder="1234"
           />
         </Span>
         <Span>-</Span>
         <Span>
           <Input
+            ref={cardNoBRef}
+            type="text"
+            onChange={handleInputChange}
+            maxLength={4}
+            name="cardNoB"
+            value={cardNumbers.cardNoB}
+            placeholder="1234"
+          />
+        </Span>
+        <Span>-</Span>
+        <Span>
+          <Input
+            ref={cardNoCRef}
+            type="password"
+            onChange={handleInputChange}
+            maxLength={4}
+            name="cardNoC"
+            value={cardNumbers.cardNoC}
+            placeholder="****"
+          />
+        </Span>
+        <Span>-</Span>
+        <Span>
+          <Input
+            ref={cardNoDRef}
             type="password"
             onChange={handleInputChange}
             maxLength={4}
             name="cardNoD"
             value={cardNumbers.cardNoD}
+            placeholder="****"
           />
         </Span>
       </InputWrapper>
