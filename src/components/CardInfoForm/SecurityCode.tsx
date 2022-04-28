@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
 import CVC from "../../assets/cvcImage.png";
-import Input from "../../elements/Input";
+import Input from "../common/Input";
+import InputContainer from "../common/InputContainer";
 
-export default function SecurityCode({ securityCode, onChange }) {
+export default function SecurityCode({ securityCode, onChange, isValid }) {
   const [isCvcShown, setIsCvcShown] = useState(false);
 
   return (
-    <div className="input-container">
-      <span className="input-title">보안코드(CVC/CVV)</span>
+    <InputContainer inputTitle="보안 코드(CVC/CVV)" isValid={isValid}>
       <Input
         type="password"
         size="small"
@@ -27,6 +27,6 @@ export default function SecurityCode({ securityCode, onChange }) {
         </span>
         {isCvcShown && <img className="cvc-image" src={CVC} alt="cvc" />}
       </div>
-    </div>
+    </InputContainer>
   );
 }

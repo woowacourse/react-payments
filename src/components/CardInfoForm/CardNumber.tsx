@@ -1,11 +1,11 @@
 import React from "react";
 
-import Input from "../../elements/Input";
+import Input from "../common/Input";
+import InputContainer from "../common/InputContainer";
 
-export default function CardNumber({ cardNumbers, onChange }) {
+export default function CardNumber({ cardNumbers, onChange, isValid }) {
   return (
-    <div className="input-container">
-      <span className="input-title">카드 번호</span>
+    <InputContainer inputTitle="카드번호" isValid={isValid}>
       <div className="input-box">
         {cardNumbers.map((cardNumber, index) => (
           <React.Fragment key={index}>
@@ -21,6 +21,7 @@ export default function CardNumber({ cardNumbers, onChange }) {
           </React.Fragment>
         ))}
       </div>
-    </div>
+    </InputContainer>
+    // </div>
   );
 }

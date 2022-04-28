@@ -18,9 +18,10 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" 
   size?: "tiny" | "small" | "medium" | "large" | "full";
   align?: "right" | "left" | "center";
   maxLength?: number;
+  classes?: string;
 }
 
-export default function Input({ size, maxLength, onChange, align, ...props }: InputProps) {
+export default function Input({ size, maxLength, onChange, classes, align, ...props }: InputProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > maxLength) return;
     onChange?.(e);
@@ -28,7 +29,7 @@ export default function Input({ size, maxLength, onChange, align, ...props }: In
 
   return (
     <input
-      className={`input-basic ${sizeTag[size]} ${alignTag[align]}`}
+      className={`input-basic ${classes} ${sizeTag[size]} ${alignTag[align]}`}
       onChange={handleChange}
       {...props}
     />

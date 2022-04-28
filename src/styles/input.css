@@ -1,14 +1,17 @@
 .input-container {
   margin: 18px 0;
+  position: relative;
+  color: #525252;
 }
 
-.password-input-container > .input-basic + .input-basic {
+.password-input + .password-input {
   margin-left: 7px;
 }
 
-.input-container-top {
-  display: flex;
-  justify-content: space-between;
+.card-user-name-length {
+  position: absolute;
+  top: 0;
+  right: 0;
   font-size: 12px;
   color: #525252;
 }
@@ -22,15 +25,16 @@
   background-color: #ecebf1;
 }
 
-.input-title {
-  display: flex;
-  align-items: center;
+.input-container-top {
+  font-size: 12px;
+  margin-bottom: 4px;
+}
 
+.input-title {
   font-size: 12px;
   line-height: 14px;
 
-  margin-bottom: 4px;
-  color: #525252;
+  margin-right: 10px;
 }
 
 .input-basic {
@@ -42,7 +46,7 @@
   outline-offset: 2px;
   border: none;
   border-radius: 0.25rem;
-  color: #04c09e;
+  color: #525252;
   font-weight: 500;
   font-size: 18px;
 }
@@ -97,4 +101,10 @@
 
 .expired-date-delimiter {
   color: #737373;
+}
+
+.success-message {
+  font-size: 12px;
+  color: #78e08f;
+  font-weight: 700;
 }

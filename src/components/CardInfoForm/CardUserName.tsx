@@ -1,17 +1,12 @@
 import React from "react";
 
 import { MAX_USER_NAME_LENGTH } from "../../contants";
-import Input from "../../elements/Input";
+import Input from "../common/Input";
+import InputContainer from "../common/InputContainer";
 
-export default function CardUserName({ cardUserName, onChange, onBlur }) {
+export default function CardUserName({ cardUserName, onChange, onBlur, isValid }) {
   return (
-    <div className="input-container">
-      <div className="input-container-top">
-        <span className="input-title">카드 소유자 이름(선택)</span>
-        <span>
-          {cardUserName.length}/{MAX_USER_NAME_LENGTH}
-        </span>
-      </div>
+    <InputContainer inputTitle="카드 소유자 이름(선택)" isValid={isValid}>
       <Input
         value={cardUserName}
         type="text"
@@ -23,6 +18,9 @@ export default function CardUserName({ cardUserName, onChange, onBlur }) {
         name="userName"
         align="left"
       />
-    </div>
+      <span className="card-user-name-length">
+        {cardUserName.length}/{MAX_USER_NAME_LENGTH}
+      </span>
+    </InputContainer>
   );
 }

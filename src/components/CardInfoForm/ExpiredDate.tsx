@@ -1,11 +1,11 @@
 import React from "react";
 
-import Input from "../../elements/Input";
+import Input from "../common/Input";
+import InputContainer from "../common/InputContainer";
 
-export default function ExpiredDate({ expiredDate, onChange }) {
+export default function ExpiredDate({ expiredDate, onChange, isValid }) {
   return (
-    <div className="input-container">
-      <span className="input-title">만료일</span>
+    <InputContainer inputTitle="만료일" isValid={isValid}>
       <div className="input-box w-50 flex-center">
         <Input
           type="text"
@@ -29,6 +29,6 @@ export default function ExpiredDate({ expiredDate, onChange }) {
           data-key="year"
         />
       </div>
-    </div>
+    </InputContainer>
   );
 }
