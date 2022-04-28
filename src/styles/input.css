@@ -51,3 +51,27 @@
   text-align: center;
   color: #04c09e;
 }
+
+.help-content {
+  border: 1px solid #bababa;
+  border-radius: 100%;
+  width: 32px;
+  text-align: center;
+  padding-left: 1px;
+  padding-top: 1px;
+}
+
+.help-content-text {
+  position: absolute;
+  right: 30px;
+
+  color: #04c09e;
+  font-size: 12px;
+  text-align: center;
+  width: 200px;
+}
+
+input.error {
+  border: 1px solid red;
+  outline: 1px solid red;
+}

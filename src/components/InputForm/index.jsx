@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { isAlphabetOrSpace } from '../../utils/validations';
 import { objectToString } from '../../utils/util';
 import { uid } from 'react-uid';
-import { checkFormCompletion, isNumberInRange } from './validation';
+import { checkFormCompletion, checkFormValidation, isNumberInRange } from './validation';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
 
 function InputForm({
@@ -76,7 +76,7 @@ function InputForm({
     e.preventDefault();
 
     try {
-      if (checkFormCompletion({ cardNumber, expirationDate, securityCode, password })) {
+      if (checkFormValidation({ cardNumber, expirationDate, securityCode, password })) {
         alert(`카드 번호는 ${objectToString(cardNumber)} 입니다 \n
         만료일 ${objectToString(expirationDate, '/')} 입니다 \n
         카드 소유자 이름 ${ownerName} 입니다 \n
@@ -137,7 +137,11 @@ function InputForm({
           maxLength={30}
         />
       </Input>
-      <Input labelTitle="보안코드(CVC/CVV)" inputSize="w-25">
+      <Input
+        labelTitle="보안코드(CVC/CVV)"
+        inputSize="w-25"
+        helpText="카드 뒷면 서명란 또는 신용카드 번호 오른쪽 상단에 기재된 3자리 숫자"
+      >
         <input
           className="input-basic"
           type="password"
@@ -146,7 +150,6 @@ function InputForm({
           maxLength={3}
           required
         />
-        <div className="help-content">?</div>
       </Input>
       <Input labelTitle="카드 비밀번호" inputSize="w-50">
         {Object.keys(password).map(stateKey => (
