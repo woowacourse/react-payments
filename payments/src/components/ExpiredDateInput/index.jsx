@@ -3,6 +3,7 @@ import InputContainer from "../elements/InputContainer";
 import { Input } from "../elements/Input";
 import "./index.scss";
 import InputLabel from "../elements/label";
+import { Fragment } from "react";
 
 const ExpiredDateInput = ({ state, updateForm }) => {
   const { itemRef, controllInput } = useControllInput({
@@ -18,31 +19,23 @@ const ExpiredDateInput = ({ state, updateForm }) => {
     <div className="expire__input__container">
       <InputLabel>만료일</InputLabel>
       <InputContainer>
-        <Input
-          placeholder="MM"
-          type="text"
-          value={state[0]}
-          ref={(el) => {
-            itemRef.current[0] = el;
-          }}
-          onChange={(e) => {
-            controllInput(e);
-            update(e.target.value, 0);
-          }}
-        />
-        /
-        <Input
-          placeholder="YY"
-          type="text"
-          value={state[1]}
-          ref={(el) => {
-            itemRef.current[1] = el;
-          }}
-          onChange={(e) => {
-            controllInput(e);
-            update(e.target.value, 1);
-          }}
-        />
+        {new Array(2).fill().map((_, idx) => (
+          <Fragment key={idx}>
+            <Input
+              placeholder={idx === 0 ? "MM" : "YY"}
+              type="text"
+              value={state[idx]}
+              ref={(el) => {
+                itemRef.current[idx] = el;
+              }}
+              onChange={(e) => {
+                controllInput(e);
+                update(e.target.value, idx);
+              }}
+            />
+            {idx === 0 ? "/" : ""}
+          </Fragment>
+        ))}
       </InputContainer>
     </div>
   );

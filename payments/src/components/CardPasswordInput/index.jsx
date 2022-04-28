@@ -12,36 +12,23 @@ const CardPasswordInput = ({ state, updateForm }) => {
     <div className="password__input__container">
       <InputLabel>카드비밀번호</InputLabel>
       <div className="password__inputs">
-        <div className="password__input">
-          <InputContainer>
-            <Input
-              type="text"
-              ref={(el) => {
-                itemRef.current[0] = el;
-              }}
-              value={state[0]}
-              onChange={(e) => {
-                controllInput(e);
-                updateForm(e.target.value, 0);
-              }}
-            />
-          </InputContainer>
-        </div>
-        <div className="password__input">
-          <InputContainer>
-            <Input
-              type="text"
-              ref={(el) => {
-                itemRef.current[1] = el;
-              }}
-              value={state[1]}
-              onChange={(e) => {
-                controllInput(e);
-                updateForm(e.target.value, 1);
-              }}
-            />
-          </InputContainer>
-        </div>
+        {new Array(2).fill().map((_, idx) => (
+          <div className="password__input" key={idx}>
+            <InputContainer>
+              <Input
+                type="text"
+                ref={(el) => {
+                  itemRef.current[idx] = el;
+                }}
+                value={state[idx]}
+                onChange={(e) => {
+                  controllInput(e);
+                  updateForm(e.target.value, idx);
+                }}
+              />
+            </InputContainer>
+          </div>
+        ))}
         <div className="password__input">
           <div className="dot"></div>
         </div>
