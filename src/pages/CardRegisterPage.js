@@ -1,14 +1,16 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-import { Card } from '../components/common/Card';
-import { CardExpireDateInputForm } from '../components/cardRegister/CardExpireDateInputForm';
-import { CardNumbersInputForm } from '../components/cardRegister/CardNumbersInputForm';
-import { CardOwnerInputForm } from '../components/cardRegister/CardOwnerInputForm';
-import { CardPasswordInputForm } from '../components/cardRegister/CardPasswordInputForm';
-import { CVCInputForm } from '../components/cardRegister/CVCInputForm';
-import { CardSelectModal } from '../components/cardRegister/CardSelectModal';
+import { CardExpireDateInputForm } from '../components/CardRegister/CardExpireDateInputForm';
+import { CardNumbersInputForm } from '../components/CardRegister/CardNumbersInputForm';
+import { CardOwnerInputForm } from '../components/CardRegister/CardOwnerInputForm';
+import { CardPasswordInputForm } from '../components/CardRegister/CardPasswordInputForm';
+import { CVCInputForm } from '../components/CardRegister/CVCInputForm';
+import { CardSelectModal } from '../components/CardRegister/CardSelectModal';
+import { CVCHelperModal } from '../components/CardRegister/CVCHelperModal';
 import { Button } from '../components/common/Button';
+import { Card } from '../components/common/Card';
+import { Modal } from '../components/common/Modal';
 
 const CARD_TYPES = [
   { name: '포코', color: 'gold' },
@@ -48,7 +50,11 @@ export const CardRegisterPage = () => {
     backgroundColor: '',
   });
 
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState('');
+
+  const modalSelector = (subject) => {
+    return () => setModalVisible(subject);
+  };
 
   const [checkInputs, setCheckInputs] = useState({
     cardNumbers: false,
@@ -72,6 +78,24 @@ export const CardRegisterPage = () => {
     setAllCompleted(Object.values(checkInputs).every((check) => check));
   }, [checkInputs]);
 
+  const loadModal = () => {
+    switch (modalVisible) {
+      case 'cardType':
+        return (
+          <CardSelectModal
+            cardTypes={CARD_TYPES}
+            handleVisible={() => setModalVisible('')}
+            handleCardType={setCardType}
+            handleCardTypeCheck={checkerFactory('cardType')}
+          />
+        );
+      case 'cardCVC':
+        return <CVCHelperModal />;
+      default:
+        return <div>no data</div>;
+    }
+  };
+
   return (
     <>
       <Card
@@ -79,11 +103,11 @@ export const CardRegisterPage = () => {
         cardNumbers={cardNumbers}
         expireDate={expireDate}
         ownerName={ownerName}
-        handleModalVisible={() => setModalVisible(true)}
+        handleModalVisible={modalSelector('cardType')}
       />
       <CardNumbersInputForm
         cardNumbers={cardNumbers}
-        handleModalVisible={() => setModalVisible(true)}
+        handleModalVisible={modalSelector('cardType')}
         handleCardNumbersInput={setCardNumbers}
         handleCardNumberCheck={checkerFactory('cardNumbers')}
       />
@@ -100,19 +124,17 @@ export const CardRegisterPage = () => {
         CVC={CVC}
         handleCVCInput={setCVC}
         handleCardCVCCheck={checkerFactory('cardCVC')}
+        handleModalVisible={modalSelector('cardCVC')}
       />
       <CardPasswordInputForm
         password={password}
         handlePasswordInput={setPassword}
         handleCardPasswordCheck={checkerFactory('cardPassword')}
       />
-      <CardSelectModal
-        visible={modalVisible}
-        setVisible={setModalVisible}
-        cardTypes={CARD_TYPES}
-        handleCardType={setCardType}
-        handleCardTypeCheck={checkerFactory('cardType')}
-      />
+      <Modal visible={modalVisible} handleVisible={() => setModalVisible('')}>
+        {modalVisible && loadModal()}
+      </Modal>
+
       <Button disabled={allCompleted ? false : true}>다음</Button>
     </>
   );

@@ -5,7 +5,12 @@ import { InputBox } from '../common/InputBox';
 import { QuestionMark } from '../common/QuestionMark';
 import { FlexWrapper, InputContainer, InputTitle } from '../common/styled';
 
-export const CVCInputForm = ({ CVC, handleCVCInput, handleCardCVCCheck }) => {
+export const CVCInputForm = ({
+  CVC,
+  handleCVCInput,
+  handleCardCVCCheck,
+  handleModalVisible,
+}) => {
   const handleCVCChange = (e) => {
     if (isNaN(e.nativeEvent.data) || e.target.value.length > 3) {
       return;
@@ -27,7 +32,7 @@ export const CVCInputForm = ({ CVC, handleCVCInput, handleCardCVCCheck }) => {
         <InputBox width="25%">
           <InputBasic type="password" value={CVC} onChange={handleCVCChange} />
         </InputBox>
-        <QuestionMark handler={() => {}} />
+        <QuestionMark onClick={handleModalVisible} />
       </FlexWrapper>
     </InputContainer>
   );

@@ -37,7 +37,7 @@ const ModalStyle = styled.div`
 
 export const Modal = ({ children, visible, handleVisible }) => {
   return (
-    <ModalDimmedStyle onClick={() => handleVisible(false)} isVisible={visible}>
+    <ModalDimmedStyle onClick={handleVisible} isVisible={visible}>
       <ModalStyle>{children}</ModalStyle>
     </ModalDimmedStyle>
   );

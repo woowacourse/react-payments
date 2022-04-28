@@ -14,9 +14,9 @@ const QuestionMarkContainerStyle = styled.div`
   justify-content: center;
 `;
 
-export const QuestionMark = ({ handler }) => {
+export const QuestionMark = ({ onClick }) => {
   return (
-    <QuestionMarkContainerStyle onClick={handler}>
+    <QuestionMarkContainerStyle onClick={onClick}>
       <div>?</div>
     </QuestionMarkContainerStyle>
   );

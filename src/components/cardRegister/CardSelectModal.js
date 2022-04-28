@@ -2,8 +2,6 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-import { Modal } from '../common/Modal';
-
 const GridColumnsStyle = styled.div`
   display: grid;
   justify-content: center;
@@ -32,30 +30,27 @@ const ModalItemNameStyle = styled.span`
 
 export const CardSelectModal = ({
   cardTypes,
+  handleVisible,
   handleCardType,
-  visible,
-  setVisible,
   handleCardTypeCheck,
 }) => {
   const handleCardTypeSelect = (card) => {
-    setVisible(false);
     handleCardType(card);
     handleCardTypeCheck(true);
+    handleVisible();
   };
 
   return (
-    <Modal visible={visible} handleVisible={setVisible}>
-      <GridColumnsStyle col={4}>
-        {cardTypes.map((card) => (
-          <ModalItemContainerStyle
-            key={card.name}
-            onClick={() => handleCardTypeSelect(card)}
-          >
-            <ModalItemDotStyle backgroundColor={card.color} />
-            <ModalItemNameStyle>{card.name} 카드</ModalItemNameStyle>
-          </ModalItemContainerStyle>
-        ))}
-      </GridColumnsStyle>
-    </Modal>
+    <GridColumnsStyle col={4}>
+      {cardTypes.map((card) => (
+        <ModalItemContainerStyle
+          key={card.name}
+          onClick={() => handleCardTypeSelect(card)}
+        >
+          <ModalItemDotStyle backgroundColor={card.color} />
+          <ModalItemNameStyle>{card.name} 카드</ModalItemNameStyle>
+        </ModalItemContainerStyle>
+      ))}
+    </GridColumnsStyle>
   );
 };
