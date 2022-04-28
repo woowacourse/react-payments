@@ -21,6 +21,7 @@ CardNumberForm.args = {
   connector: "-",
   inputClass: "default-input",
   label: "카드 번호",
+  formType: "card-number",
   name: "card-number",
 };
 
@@ -35,6 +36,7 @@ ExpireDateForm.args = {
   connector: "/",
   inputClass: "expire-date-input",
   label: "만료일",
+  formType: "expire-date",
   name: "expire-date",
 };
 
