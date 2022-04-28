@@ -130,8 +130,7 @@ function App() {
           onChange={handlePasswordUpdate}
         />
       </CardInfoForm>
-      {true && <Button text="다음" onClick={handleCardInfoSubmit} />}
-      {/* {canProceed && <Button text="다음" onClick={handleCardInfoSubmit} />} */}
+      {canProceed && <Button text="다음" onClick={handleCardInfoSubmit} />}
     </div>
   );
 }
