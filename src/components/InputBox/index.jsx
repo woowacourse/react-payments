@@ -1,17 +1,16 @@
-import {InputWrapper} from './style';
+import { InputWrapper } from "./style";
 
-
-function InputBox({size, background, border, children, error}){
-  return(
-    <InputWrapper  
+function InputBox({ size, background, border, children, error }) {
+  return (
+    <InputWrapper
       background={background}
       border={border}
       size={size}
       error={error}
-      >
-        {children}
+    >
+      {children}
     </InputWrapper>
-  )
-} 
+  );
+}
 
-export default InputBox
+export default InputBox;

@@ -1,14 +1,16 @@
-import InputBox from '../../components/InputBox'
-import { Input } from '../../components/Input/style'
-import { OwnerHeader, FormWrapper } from './style'
-import { OWNER } from '../../constant'
+import InputBox from "../../components/InputBox";
+import { Input } from "../../components/Input/style";
+import { OwnerHeader, FormWrapper } from "./style";
+import { OWNER } from "../../constant";
 
- function CardOwnerForm({owner, handleOwner}) {
+function CardOwnerForm({ owner, handleOwner }) {
   return (
     <FormWrapper>
       <OwnerHeader>
         <label>카드 소유자 이름 (선택)</label>
-        <div>{owner.length}/{OWNER.MAX_LENGTH}</div>
+        <div>
+          {owner.length}/{OWNER.MAX_LENGTH}
+        </div>
       </OwnerHeader>
       <InputBox>
         <Input
@@ -19,7 +21,7 @@ import { OWNER } from '../../constant'
         />
       </InputBox>
     </FormWrapper>
-  )
+  );
 }
 
-export default CardOwnerForm
+export default CardOwnerForm;

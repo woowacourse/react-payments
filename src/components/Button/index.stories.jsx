@@ -5,7 +5,6 @@ const Template = (args) => <Button {...args} />;
 export default {
   title: "Button",
   component: Button,
- 
 };
 
 export const Primary = Template.bind({});

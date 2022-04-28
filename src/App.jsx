@@ -1,12 +1,12 @@
-import AddPage from "./pages/AddPage";
+import CardAddPage from "./pages/CardAddPage";
 import { ThemeProvider } from "styled-components";
 import theme from "./theme";
 
 function App() {
   return (
-  <ThemeProvider theme={theme}>
-    <AddPage />
-  </ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <CardAddPage />
+    </ThemeProvider>
   );
 }
 
