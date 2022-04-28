@@ -15,6 +15,8 @@ import CardOwnerForm from './CardOwnerForm'
 import CardCVCForm from "./CardCVCForm";
 import CardPasswordForm from "./CardPasswordForm";
 
+import { CARD_NUMBER, DUE_DATE, OWNER, CVC, PASSWORD, COLORS } from '../../constant'
+
 function AddPage() {
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
   const [dueDate, setDueDate] = useState({ month: "", year: "" });
@@ -25,11 +27,11 @@ function AddPage() {
 
   useEffect(() => {
     setAllRequired(
-      cardNumbers.join("").length >= 16 &&
-        dueDate.month.length >= 2 &&
-        dueDate.year.length >= 2 &&
+      cardNumbers.join("").length >= CARD_NUMBER.UNIT_LENGTH * 4 &&
+        dueDate.month.length >= DUE_DATE.UNIT_LENGTH &&
+        dueDate.year.length >= DUE_DATE.UNIT_LENGTH &&
         owner &&
-        cvc.length >= 3 &&
+        cvc.length >= CVC.UNIT_LENGTH &&
         password.firstPassword &&
         password.secondPassword
     );
@@ -55,7 +57,7 @@ function AddPage() {
   }
 
   const handleCardNumber = (index, {target:{value}}) => {
-    if (value.length > 4 || isNaN(value)) return;
+    if (value.length > CARD_NUMBER.UNIT_LENGTH || isNaN(value)) return;
 
     setCardNumbers((prev) => {
       const newState = [...prev];
@@ -63,35 +65,35 @@ function AddPage() {
       return newState;
     });
  
-    if(value.length >= 4){
+    if(value.length >= CARD_NUMBER.UNIT_LENGTH) {
       focusNextNumberInput(index + 1);
     }
   };
 
   const handleDueDate = (key, {target:{value}}) => {
-    if (value.length > 2) return;
+    if (value.length > DUE_DATE.UNIT_LENGTH) return;
 
     setDueDate({ ...dueDate, [key]: value });
 
-    if(value.length >= 2) {
+    if(value.length >= DUE_DATE.UNIT_LENGTH) {
       dueYearInputRef.current.focus();
     }
   };
 
   const handleOwner = ({target:{value}}) => {
-    if (value.length > 30) return;
+    if (value.length > OWNER.MAX_LENGTH) return;
 
     setOwner(value);
   };
 
   const handleCvc = ({target:{value}}) => {
-    if (value.length > 3 || isNaN(value)) return;
+    if (value.length > CVC.UNIT_LENGTH || isNaN(value)) return;
 
     setCvc(value);
   };
 
   const handlePassword = (key, {target:{value}}) => {
-    if (value.length > 1 || isNaN(value)) return;
+    if (value.length > PASSWORD.UNIT_LENGTH || isNaN(value)) return;
 
     setPassword({...password, [key]: value});
 
@@ -126,7 +128,7 @@ function AddPage() {
       <CardCVCForm cvc={cvc} handleCvc={handleCvc} />
       <CardPasswordForm password={password} handlePassword={handlePassword} secondPasswordInputRef={secondPasswordInputRef} />
       <FooterWrapper> 
-        <Button color={allRequired ? '#04C09E': 'gray'}>다음</Button>
+        <Button color={allRequired ? COLORS.MINT : COLORS.DARK_GRAY}>다음</Button>
       </FooterWrapper>
     </PageWrapper>
   );

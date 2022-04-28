@@ -37,7 +37,7 @@ const OwnerHeader = styled.div`
     font-size: 12px;
     margin-bottom: 10px;
     display: inline-block;
-    color: #525252;
+    color: ${({ theme }) => theme.colors.DARK_GRAY};
   }
 `;
 
