@@ -3,7 +3,7 @@ import { useCallback, useRef } from "react";
 const useControllInput = ({ maxLength, isNumber }) => {
   const itemRef = useRef([]);
 
-  const onChange = useCallback((e) => {
+  const controllInput = useCallback((e) => {
     const limitInputLength = (e) => {
       e.target.value = e.target.value.substring(0, maxLength);
     };
@@ -23,6 +23,6 @@ const useControllInput = ({ maxLength, isNumber }) => {
     }
   }, []);
 
-  return { itemRef, onChange };
+  return { itemRef, controllInput };
 };
 export default useControllInput;

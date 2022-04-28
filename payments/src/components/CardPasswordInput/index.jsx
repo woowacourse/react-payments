@@ -4,7 +4,7 @@ import InputContainer from "../elements/InputContainer";
 import InputLabel from "../elements/label";
 import "./index.scss";
 const CardPasswordInput = ({ state, updateForm }) => {
-  const { itemRef, onChange } = useControllInput({
+  const { itemRef, controllInput } = useControllInput({
     maxLength: 1,
     isNumber: true,
   });
@@ -21,7 +21,7 @@ const CardPasswordInput = ({ state, updateForm }) => {
               }}
               value={state[0]}
               onChange={(e) => {
-                onChange(e);
+                controllInput(e);
                 updateForm(e.target.value, 0);
               }}
             />
@@ -36,7 +36,7 @@ const CardPasswordInput = ({ state, updateForm }) => {
               }}
               value={state[1]}
               onChange={(e) => {
-                onChange(e);
+                controllInput(e);
                 updateForm(e.target.value, 1);
               }}
             />

@@ -5,7 +5,7 @@ import InputLabel from "../elements/label";
 import "./index.scss";
 
 const OwnerNameInput = ({ state, updateForm }) => {
-  const { itemRef, onChange } = useControllInput({
+  const { itemRef, controllInput } = useControllInput({
     maxLength: 30,
     isNumber: false,
   });
@@ -30,7 +30,7 @@ const OwnerNameInput = ({ state, updateForm }) => {
           value={state}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           onChange={(e) => {
-            onChange(e);
+            controllInput(e);
             update(e);
           }}
         />

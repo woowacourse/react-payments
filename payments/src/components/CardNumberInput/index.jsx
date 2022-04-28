@@ -5,7 +5,7 @@ import useControllInput from "../../hooks/useControllInput";
 import InputLabel from "../elements/label";
 
 const CardNumberInput = ({ state, updateForm }) => {
-  const { itemRef, onChange } = useControllInput({
+  const { itemRef, controllInput } = useControllInput({
     maxLength: 4,
     isNumber: true,
   });
@@ -20,7 +20,7 @@ const CardNumberInput = ({ state, updateForm }) => {
       <InputContainer>
         <Input
           onChange={(e) => {
-            onChange(e);
+            controllInput(e);
             updateNumber(e, 0);
           }}
           value={state[0]}
@@ -30,7 +30,7 @@ const CardNumberInput = ({ state, updateForm }) => {
         -
         <Input
           onChange={(e) => {
-            onChange(e);
+            controllInput(e);
             updateNumber(e, 1);
           }}
           value={state[1]}
@@ -40,7 +40,7 @@ const CardNumberInput = ({ state, updateForm }) => {
         -
         <Input
           onChange={(e) => {
-            onChange(e);
+            controllInput(e);
             updateNumber(e, 2);
           }}
           value={state[2]}
@@ -51,7 +51,7 @@ const CardNumberInput = ({ state, updateForm }) => {
         -
         <Input
           onChange={(e) => {
-            onChange(e);
+            controllInput(e);
             updateNumber(e, 3);
           }}
           value={state[3]}

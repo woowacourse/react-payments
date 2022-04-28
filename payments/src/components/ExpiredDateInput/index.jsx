@@ -5,7 +5,7 @@ import "./index.scss";
 import InputLabel from "../elements/label";
 
 const ExpiredDateInput = ({ state, updateForm }) => {
-  const { itemRef, onChange } = useControllInput({
+  const { itemRef, controllInput } = useControllInput({
     maxLength: 2,
     isNumber: true,
   });
@@ -26,7 +26,7 @@ const ExpiredDateInput = ({ state, updateForm }) => {
             itemRef.current[0] = el;
           }}
           onChange={(e) => {
-            onChange(e);
+            controllInput(e);
             update(e.target.value, 0);
           }}
         />
@@ -39,7 +39,7 @@ const ExpiredDateInput = ({ state, updateForm }) => {
             itemRef.current[1] = el;
           }}
           onChange={(e) => {
-            onChange(e);
+            controllInput(e);
             update(e.target.value, 1);
           }}
         />

@@ -5,7 +5,7 @@ import InputLabel from "../elements/label";
 import useControllInput from "../../hooks/useControllInput";
 
 const SecureCodeInput = ({ state, updateForm }) => {
-  const { itemRef, onChange } = useControllInput({
+  const { itemRef, controllInput } = useControllInput({
     maxLength: 3,
     isNumber: true,
   });
@@ -21,7 +21,7 @@ const SecureCodeInput = ({ state, updateForm }) => {
           maxLength="3"
           value={state}
           onChange={(e) => {
-            onChange(e);
+            controllInput(e);
             updateForm(e.target.value);
           }}
         />
