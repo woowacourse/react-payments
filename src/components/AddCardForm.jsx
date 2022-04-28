@@ -4,7 +4,7 @@ import Input from './Input';
 import { isOverMaxLength, isOutOfRange } from '../util';
 import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../constants';
 
-function AddCardForm({ updateCard }) {
+function AddCardForm({ updateCard, addCard }) {
   const [cardForm, setCardForm] = useState({
     firstCardNumber: '',
     secondCardNumber: '',
@@ -25,6 +25,7 @@ function AddCardForm({ updateCard }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    addCard(cardForm);
   };
 
   const updateCardForm = (name, value) => {
