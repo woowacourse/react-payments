@@ -4,14 +4,17 @@ import PropTypes from 'prop-types';
 function Card({ isEmpty, handleCardAdd, cardInfo }) {
   return (
     <div className="card-box">
-      <div className="empty-card" onClick={handleCardAdd}>
+      <div
+        className={isEmpty ? 'card-container card-empty' : 'card-container card-not-empty'}
+        onClick={handleCardAdd}
+      >
         {isEmpty ? (
           '+'
         ) : (
           <>
             <div className="card-top"></div>
             <div className="card-middle">
-              <div className="small-card__chip"></div>
+              <div className="small-card__chip blinking"></div>
             </div>
 
             <div className="card-bottom">
