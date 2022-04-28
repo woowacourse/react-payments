@@ -4,8 +4,13 @@ import { InputBasic } from '../common/InputBasic';
 import { InputBox } from '../common/InputBox';
 import { InputContainer, InputTitle } from '../common/styled';
 import Dot from '../common/Dot';
+import { useEffect } from 'react';
 
-export const CardPasswordInputForm = ({ password, handlePasswordInput }) => {
+export const CardPasswordInputForm = ({
+  password,
+  handlePasswordInput,
+  handleCardPasswordCheck,
+}) => {
   const handlePasswordChange = (e, name) => {
     if (isNaN(e.nativeEvent.data)) {
       return;
@@ -13,6 +18,14 @@ export const CardPasswordInputForm = ({ password, handlePasswordInput }) => {
 
     handlePasswordInput((prev) => ({ ...prev, [name]: e.nativeEvent.data }));
   };
+
+  useEffect(() => {
+    const isCompletePassword = Object.values(password).every(
+      (number) => number
+    );
+
+    handleCardPasswordCheck(isCompletePassword);
+  }, [password]);
 
   return (
     <InputContainer>

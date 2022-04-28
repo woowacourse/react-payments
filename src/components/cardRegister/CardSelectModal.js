@@ -1,7 +1,8 @@
 import React from 'react';
-import { Modal } from '../common/Modal';
 
 import styled from 'styled-components';
+
+import { Modal } from '../common/Modal';
 
 const GridColumnsStyle = styled.div`
   display: grid;
@@ -34,10 +35,12 @@ export const CardSelectModal = ({
   handleCardType,
   visible,
   setVisible,
+  handleCardTypeCheck,
 }) => {
   const handleCardTypeSelect = (card) => {
     setVisible(false);
     handleCardType(card);
+    handleCardTypeCheck(true);
   };
 
   return (
@@ -49,7 +52,7 @@ export const CardSelectModal = ({
             onClick={() => handleCardTypeSelect(card)}
           >
             <ModalItemDotStyle backgroundColor={card.color} />
-            <ModalItemNameStyle>{card.name}</ModalItemNameStyle>
+            <ModalItemNameStyle>{card.name} 카드</ModalItemNameStyle>
           </ModalItemContainerStyle>
         ))}
       </GridColumnsStyle>

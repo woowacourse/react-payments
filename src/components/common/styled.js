@@ -16,3 +16,10 @@ export const InputTitle = styled.span`
 
   color: #525252;
 `;
+
+export const FlexWrapper = styled.div`
+  display: flex;
+  justify-content: ${(props) => props.justifyContent || 'unset'};
+  align-items: ${(props) => props.alignItems || 'unset'};
+  gap: ${(props) => props.gap || 'unset'};
+`;

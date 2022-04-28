@@ -52,21 +52,18 @@ export const CardRegisterPage = () => {
   const [checkInputs, setCheckInputs] = useState({
     cardNumbers: false,
     cardExpireDate: false,
-    cardOwner: false,
     cardCVC: false,
     cardPassword: false,
     cardType: false,
   });
 
-  useEffect(() => {
-    if (Object.values(cardNumbers).every((number) => number.length === 4)) {
-      setModalVisible(true);
-      setCheckInputs((prev) => ({ ...prev, cardNumbers: true }));
-    } else {
-      setModalVisible(false);
-      setCheckInputs((prev) => ({ ...prev, cardNumbers: false }));
-    }
-  }, [cardNumbers]);
+  const checkerFactory = (subject) => {
+    const key = subject;
+
+    return (isCompleted) => {
+      setCheckInputs((prev) => ({ ...prev, [key]: isCompleted }));
+    };
+  };
 
   return (
     <>
@@ -78,26 +75,35 @@ export const CardRegisterPage = () => {
       />
       <CardNumbersInputForm
         cardNumbers={cardNumbers}
+        handleModalVisible={setModalVisible}
         handleCardNumbersInput={setCardNumbers}
+        handleCardNumberCheck={checkerFactory('cardNumbers')}
       />
       <CardExpireDateInputForm
         expireDate={expireDate}
         handleExpireDateInput={setExpireDate}
+        handleCardExpireCheck={checkerFactory('cardExpireDate')}
       />
       <CardOwnerInputForm
         ownerName={ownerName}
         handleOwnerNameInput={setOwnerName}
       />
-      <CVCInputForm CVC={CVC} handleCVCInput={setCVC} />
+      <CVCInputForm
+        CVC={CVC}
+        handleCVCInput={setCVC}
+        handleCardCVCCheck={checkerFactory('cardCVC')}
+      />
       <CardPasswordInputForm
         password={password}
         handlePasswordInput={setPassword}
+        handleCardPasswordCheck={checkerFactory('cardPassword')}
       />
       <CardSelectModal
         visible={modalVisible}
         setVisible={setModalVisible}
         cardTypes={CARD_TYPES}
         handleCardType={setCardType}
+        handleCardTypeCheck={checkerFactory('cardType')}
       />
     </>
   );

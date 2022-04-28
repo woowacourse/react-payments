@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { InputBasic } from '../common/InputBasic';
 import { InputBox } from '../common/InputBox';
@@ -7,15 +7,23 @@ import { InputContainer, InputTitle } from '../common/styled';
 export const CardExpireDateInputForm = ({
   expireDate,
   handleExpireDateInput,
+  handleCardExpireCheck,
 }) => {
   const handleMonthInput = (e) => {
-    if (
-      isNaN(e.nativeEvent.data) ||
-      e.target.value.length > 2 ||
-      parseInt(e.target.value) > 12 ||
-      parseInt(e.target.value) < 1
-    ) {
+    if (isNaN(e.nativeEvent.data) || parseInt(e.target.value) > 12) {
       return;
+    }
+
+    if (e.target.value.length === 3) {
+      e.target.value = parseInt(e.target.value);
+    }
+
+    if (e.target.value.length === 1) {
+      e.target.value = '0' + e.target.value;
+    }
+
+    if (e.target.value === '0' || e.target.value === '00') {
+      e.target.value = '00';
     }
 
     handleExpireDateInput((prev) => ({ ...prev, month: e.target.value }));
@@ -28,6 +36,37 @@ export const CardExpireDateInputForm = ({
 
     handleExpireDateInput((prev) => ({ ...prev, year: e.target.value }));
   };
+
+  useEffect(() => {
+    if (expireDate.year === '' || expireDate.month === '') {
+      return;
+    }
+
+    const isCardExpireDateCompleted = () => {
+      const currentDate = new Date();
+      const currentYear = String(currentDate.getFullYear()).slice(2, 4);
+      const currentMonth = currentDate.getMonth() + 1;
+
+      if (parseInt(expireDate.year) < parseInt(currentYear)) {
+        return false;
+      }
+
+      if (
+        expireDate.year === currentYear &&
+        parseInt(expireDate.month) < currentMonth
+      ) {
+        return false;
+      }
+
+      if (parseInt(expireDate.month) > 12 || parseInt(expireDate.month) < 1) {
+        return false;
+      }
+
+      return true;
+    };
+
+    handleCardExpireCheck(isCardExpireDateCompleted());
+  }, [expireDate]);
 
   return (
     <InputContainer>
