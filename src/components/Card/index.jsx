@@ -25,6 +25,7 @@ const getCardSize = size => {
         },
         detail: {
           size: '20px',
+          height: '22px',
         },
       };
     case 'large':
@@ -57,22 +58,31 @@ const NumberSet = styled.div`
   color: #525252;
   font-weight: bold;
   font-size: ${props => props.cardStyle.detail.size};
-  height: ${props => props.cardStyle.detail.size};
+  height: ${props => props.cardStyle.detail.height};
   margin-bottom: ${props => props.cardStyle.numberSet.marginBottom};
   text-align: center;
 `;
 const OwnerName = styled.span`
   color: #525252;
+  display: inline-block;
   font-weight: bold;
   font-size: ${props => props.cardStyle.detail.size};
-  height: ${props => props.cardStyle.detail.size};
+  height: ${props => props.cardStyle.detail.height};
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 130px;
+  word-break: break-all;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const ValidDate = styled.span`
   color: #525252;
   float: right;
   font-weight: bold;
   font-size: ${props => props.cardStyle.detail.size};
-  height: ${props => props.cardStyle.detail.size};
+  height: ${props => props.cardStyle.detail.height};
 `;
 
 function Card({ bgColor, className, name, number, size, title, validDate }) {
@@ -83,18 +93,16 @@ function Card({ bgColor, className, name, number, size, title, validDate }) {
       <Title cardStyle={cardStyle}>{title}</Title>
       <Magnet cardStyle={cardStyle} />
       <div>
-        <NumberSet cardStyle={cardStyle}>{number}</NumberSet>
-        <OwnerName cardStyle={cardStyle}>{name}</OwnerName>
-        <ValidDate cardStyle={cardStyle}>{validDate}</ValidDate>
+        <NumberSet cardStyle={cardStyle}>{number || ''}</NumberSet>
+        <OwnerName cardStyle={cardStyle}>{name || 'NAME'}</OwnerName>
+        <ValidDate cardStyle={cardStyle}>{validDate || 'MM/YY'}</ValidDate>
       </div>
     </StyledCard>
   );
 }
 
 Card.defaultProps = {
-  name: 'NAME',
   size: 'medium',
-  validDate: 'MM/YY',
 };
 
 Card.propTypes = {
