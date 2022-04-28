@@ -66,8 +66,7 @@ const FormInput = ({
           <input
             key={id}
             name={name}
-            className={`input-basic ${className}`}
-            style={{ color: cardInfo.theme }}
+            className={`input-basic ${className} font-${cardInfo.theme}`}
             value={isObject(cardInfo[item]) ? cardInfo[item][name] : cardInfo[item]}
             onChange={(e) => onChange(e, item)}
             {...rest}

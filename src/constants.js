@@ -11,14 +11,14 @@ export const DEFAULT_CARD_INFO = {
 };
 
 export const THEME = {
-  RED: '#E24141',
-  BLUE: '#547CE4',
-  GREEN: '#73BC6D',
-  HOT_PINK: '#DE59B9',
-  MINT: '#04C09E',
-  PINK: '#E76E9A',
-  ORANGE: '#F37D3B',
-  YELLOW: '#FBCD58',
+  RED: 'red',
+  BLUE: 'blue',
+  GREEN: 'green',
+  HOT_PINK: 'hot-pink',
+  MINT: 'mint',
+  PINK: 'pink',
+  ORANGE: 'orange',
+  YELLOW: 'yellow',
 };
 
 export const COMPANY = {

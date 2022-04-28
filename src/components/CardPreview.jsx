@@ -17,7 +17,7 @@ const CardPreview = ({ company, number, ownerName, expiryDate, theme, handleModa
 
   return (
     <div className="card-box">
-      <div className="empty-card" onClick={handleModal} style={{ backgroundColor: theme }}>
+      <div className={`empty-card bg-${theme}`} onClick={handleModal}>
         <div className="card-top">
           <span className="card-text">{company}</span>
         </div>
