@@ -25,7 +25,14 @@ const validatePassword = ({ password }) => {
   }
 };
 
+const validateCardName = ({ cardName }) => {
+  if (cardName === "") {
+    throw new Error("카드 종류를 선택해주세요");
+  }
+};
+
 const validateArray = [
+  validateCardName,
   validateCardNum,
   validateExpireDate,
   validateSecureCode,
@@ -56,7 +63,9 @@ const NextButton = ({ state }) => {
 
   return (
     <div className="next--button">
-      <Button onClick={submit}>다음</Button>
+      <Button onClick={submit} style={{ cursor: "pointer" }}>
+        다음
+      </Button>
     </div>
   );
 };

@@ -18,6 +18,10 @@ const useControllInput = ({ maxLength }) => {
     target.value = target.value.substring(0, maxLength);
   };
 
+  const limitExceptUpperCase = (target) => {
+    target.value = target.value.replace(/[^A-Z\s]*/g, "").replace(".", "");
+  };
+
   const autoFocusForward = (target) => {
     const currentIndex = itemRef.current.indexOf(target);
     itemRef.current[
@@ -30,6 +34,12 @@ const useControllInput = ({ maxLength }) => {
     itemRef.current[Math.max(currentIndex - 1, 0)].focus();
   };
 
-  return { itemRef, controllInput, autoFocusBackward, blockCharacter };
+  return {
+    itemRef,
+    controllInput,
+    autoFocusBackward,
+    blockCharacter,
+    limitExceptUpperCase,
+  };
 };
 export default useControllInput;

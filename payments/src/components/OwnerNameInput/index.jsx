@@ -7,7 +7,7 @@ import "./index.scss";
 const INPUT_LENGTH = 30;
 
 const OwnerNameInput = ({ state, updateForm }) => {
-  const { itemRef, controllInput } = useControllInput({
+  const { itemRef, controllInput, limitExceptUpperCase } = useControllInput({
     maxLength: INPUT_LENGTH,
   });
   return (
@@ -24,9 +24,10 @@ const OwnerNameInput = ({ state, updateForm }) => {
           }}
           type="text"
           value={state}
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          placeholder="카드에 표시된 이름과 동일하게 입력하세요.(영어 대문자만 입력가능합니다.)"
           onChange={({ target }) => {
             controllInput(target);
+            limitExceptUpperCase(target);
             updateForm({
               type: "ownerName",
               payload: { value: target.value },

@@ -57,7 +57,7 @@ const useCard = () => {
     ownerName: "",
     secureCode: "",
     password: ["", ""],
-    cardName: "록1바",
+    cardName: "",
     color: "#d2d2d2",
   };
   const [form, dispatch] = useReducer(reducer, initState);

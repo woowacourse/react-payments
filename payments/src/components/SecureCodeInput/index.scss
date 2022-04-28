@@ -31,13 +31,13 @@
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 150px;
   background-color: black;
   color: #fff;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
-
+  opacity: 0.7;
   position: absolute;
   z-index: 1;
 }
@@ -47,10 +47,11 @@
 }
 
 .tooltip .tooltip-bottom {
-  width: 120px;
+  width: 150px;
   top: 150%;
   left: 50%;
   margin-left: -60px;
+  padding: 10px;
 }
 
 .tooltip .tooltip-bottom::after {
