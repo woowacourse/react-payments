@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { hyphenPrimaryColor } from '../style';
+import ErrorMessage from './common/ErrorMessage';
 import { Input, InputContainer, InputWrapper, Label, Span } from './common';
 
 const MAX_CARD_NUMBER_UNIT = 4;
@@ -18,13 +19,19 @@ const validator = value => {
   }
 };
 
-function CardNumber() {
+const convertToCardNumberString = numbers => {
+  const [cardNoA, cardNoB] = Object.values(numbers);
+  return `${cardNoA} ${cardNoB} **** ****`;
+};
+
+function CardNumber({ cardNumberCallback }) {
   const [cardNumbers, setCardNumbers] = useState({
     cardNoA: '',
     cardNoB: '',
     cardNoC: '',
     cardNoD: '',
   });
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -32,7 +39,7 @@ function CardNumber() {
     try {
       validator(value);
     } catch (err) {
-      console.log(err.message);
+      setErrorMessage(err.message);
       return;
     }
 
@@ -42,20 +49,29 @@ function CardNumber() {
     }));
   };
 
-  useEffect(() => {
-    const isCorrectCardNumber = Object.values(cardNumbers).join('').length === 16;
+  const isCorrectCardNumber = Object.values(cardNumbers).join('').length === 16;
 
+  const handleInputFocus = () => {
     if (!isCorrectCardNumber) {
-      console.log('모든 숫자를 입력해주세요.');
+      setErrorMessage('모든 숫자를 입력해주세요.');
+    }
+  };
+
+  useEffect(() => {
+    if (!isCorrectCardNumber) {
+      cardNumberCallback('');
       return;
     }
-    console.log('실행');
-  }, [cardNumbers]);
 
+    setErrorMessage('');
+    cardNumberCallback(convertToCardNumberString(cardNumbers));
+  }, [cardNumbers, cardNumberCallback, isCorrectCardNumber]);
+
+  // console.log('CardNumber render');
   return (
     <InputContainer>
       <Label>카드 번호</Label>
-      <InputWrapper color={hyphenPrimaryColor}>
+      <InputWrapper color={hyphenPrimaryColor} onFocus={handleInputFocus}>
         <Span>
           <Input type="text" onChange={handleInputChange} maxLength={4} name="cardNoA" value={cardNumbers.cardNoA} />
         </Span>
@@ -84,6 +100,7 @@ function CardNumber() {
           />
         </Span>
       </InputWrapper>
+      <ErrorMessage>{errorMessage}</ErrorMessage>
     </InputContainer>
   );
 }

@@ -6,4 +6,13 @@ export default {
   component: CardNumber,
 };
 
-export const cardNumber = () => <CardNumber />;
+const Template = args => {
+  const cardNumberCallback = () => {};
+  return <CardNumber {...args} cardNumberCallback={cardNumberCallback} />;
+};
+
+export const Primary = Template.bind({});
+
+Primary.args = {
+  cardNumberCallback: () => {},
+};
