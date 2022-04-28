@@ -28,7 +28,7 @@ export default function CardPassword() {
 
   const validate = (value) => value.join('') && validator.checkCardPassword(value);
 
-  const cardColor = cardCompanyIndex === -1 ? false : CARD_COMPANIES[cardCompanyIndex].COLOR;
+  const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
 
   return (
     <Container>

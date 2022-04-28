@@ -37,7 +37,7 @@ export default function CardNumber() {
 
   const validate = (value) => value.join('').length > 0 && validator.checkCardNumber(value);
 
-  const cardColor = cardCompanyIndex === -1 ? false : CARD_COMPANIES[cardCompanyIndex].COLOR;
+  const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
 
   return (
     <Container>

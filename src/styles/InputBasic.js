@@ -11,10 +11,10 @@ export default styled.input`
   outline: 2px solid transparent;
   outline-offset: 2px;
   border: none;
-  color: ${({ color }) => color || '#737373'};
   font-weight: 600;
+  color: ${({ color }) => color};
 
   &::placeholder {
-    color: ${({ color }) => color || '#737373'};
+    color: ${({ color }) => color};
   }
 `;

@@ -39,7 +39,7 @@ export default function CardOwner() {
 
   const nameLengthColor = () => (cardOwner.length > 30 ? '#E24141' : '#525252');
 
-  const cardColor = cardCompanyIndex === -1 ? false : CARD_COMPANIES[cardCompanyIndex].COLOR;
+  const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
 
   return (
     <Container>
