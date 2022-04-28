@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Input, InputContainer, Label, InputWrapper } from './common';
 import InactiveContainer from './common/InactiveContainer';
+import ErrorMessage from './common/ErrorMessage';
 
 const InputPasswordWrapper = styled.div`
   display: flex;
@@ -25,17 +26,18 @@ const validator = value => {
   }
 };
 
-function CardPassword() {
+function CardPassword({ correctCardPwdCallback }) {
   const [pwd, setPwd] = useState({
     pwdNoA: '',
     pwdNoB: '',
   });
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = ({ target: { name, value } }) => {
     try {
       validator(value);
     } catch (err) {
-      console.log(err.message);
+      setErrorMessage(err.message);
       return;
     }
     setPwd(prevPwds => ({
@@ -43,6 +45,14 @@ function CardPassword() {
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    const isCorrectPwd = Object.values(pwd).join('').length === 2;
+
+    if (isCorrectPwd) setErrorMessage('');
+
+    correctCardPwdCallback(isCorrectPwd);
+  }, [pwd, correctCardPwdCallback]);
 
   return (
     <InputContainer>
@@ -57,6 +67,7 @@ function CardPassword() {
         <InactiveContainer />
         <InactiveContainer />
       </InputPasswordWrapper>
+      <ErrorMessage>{errorMessage}</ErrorMessage>
     </InputContainer>
   );
 }
