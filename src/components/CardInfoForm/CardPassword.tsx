@@ -25,14 +25,14 @@ export default function CardPassword({ password, onChange }) {
         type="password"
         value={1}
         maxLength={1}
-        readOnly
+        disabled
       />
       <input
         className="input-basic rest-password-box w-15"
         type="password"
         value={1}
         maxLength={1}
-        readOnly
+        disabled
       />
     </div>
   );
