@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { LIMIT_LENGTH } from '../../../../constants';
+import { limitInputLength, inputEnglishOnly } from '../../../../utils';
+
 function CardOwner({ cardInfo, setCardInfo }) {
   const handleOnInput = (event) => {
-    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
-    event.target.value = event.target.value.replace(/[^A-Za-z.]/g, '').replace(regExp, '');
-
     let { value, name } = event.target;
+    value = inputEnglishOnly(value);
 
-    if (value.length > 30) {
-      value = value.slice(0, 30);
+    if (value.length > LIMIT_LENGTH.CARD_OWNER) {
+      value = limitInputLength(value, LIMIT_LENGTH.CARD_OWNER);
     }
 
     setCardInfo({

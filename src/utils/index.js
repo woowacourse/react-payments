@@ -4,8 +4,14 @@ const inputNumberOnly = (value) => {
     .replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi, '');
 };
 
+const inputEnglishOnly = (value) => {
+  return value
+    .replace(/[^A-Za-z.]/g, '')
+    .replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi, '');
+};
+
 const limitInputLength = (value, length) => {
   return value.slice(0, length);
 };
 
-export { inputNumberOnly, limitInputLength };
+export { inputNumberOnly, inputEnglishOnly, limitInputLength };
