@@ -11,10 +11,14 @@ const StyledInput = styled.input`
   line-height: 21px;
   text-align: ${props => props.textAlign};
   color: ${props => props.color};
+  &:focus {
+    outline-color: ${props => (props.isValid ? '#04c09e' : 'red')};
+  }
 `;
 
 function Input({
   value,
+  defaultValue,
   width,
   type,
   maxLength,
@@ -23,10 +27,13 @@ function Input({
   onChange,
   backgroundColor,
   color,
+  isValid,
+  disabled,
 }) {
   return (
     <StyledInput
       value={value}
+      defaultValue={defaultValue}
       width={width}
       type={type}
       maxLength={maxLength}
@@ -35,6 +42,8 @@ function Input({
       backgroundColor={backgroundColor}
       color={color}
       onChange={onChange}
+      isValid={isValid}
+      disabled={disabled}
     />
   );
 }

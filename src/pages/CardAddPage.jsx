@@ -28,7 +28,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   padding: 25px 28px 16px;
-  gap: 19px;
+  gap: 15px;
 `;
 
 const FormRow = styled.div`
@@ -49,7 +49,7 @@ function CardAddPage() {
   const [ownerName, setOwnerName] = useState('');
   const [securityNumber, setSecurityNumber] = useState('');
   const [password, setPassword] = useState(['', '']);
-  const [permission, setPermission] = useState({
+  const [cardAddCondition, setCardAddCondition] = useState({
     cardNumbers: false,
     expiredDate: false,
     ownerName: false,
@@ -70,15 +70,13 @@ function CardAddPage() {
   }, [expiredDate]);
 
   useEffect(() => {
-    setPermission({
+    setCardAddCondition({
       cardNumbers: validator.validateCardNumbers(cardNumbers.join('-')),
       expiredDate: validator.validateExpiredDate(convertedExpiredDate),
       ownerName: validator.validateOwnerName(ownerName),
       securityNumber: validator.validateSecurityNumber(securityNumber),
       password: validator.validatePassword(password.join('')),
     });
-
-    console.log(Object.values(permission).every(value => value === true));
   }, [cardNumbers, expiredDate, ownerName, securityNumber, password]);
 
   const handleChangeCardNumbersInput = ({ nativeEvent: { data, inputType }, target }) => {
@@ -146,7 +144,7 @@ function CardAddPage() {
     setExpiredDate({ month: month || '', year: year || '' });
   };
 
-  const handleChangeOwnerNameInput = ({ nativeEvent: { data }, target }) => {
+  const handleChangeOwnerNameInput = ({ nativeEvent: { data, inputType }, target }) => {
     const regex = /[a-zA-Z ]/;
 
     if (!regex.test(data)) {
@@ -156,11 +154,23 @@ function CardAddPage() {
     setOwnerName(target.value.toUpperCase());
   };
 
-  const handleChangeSecurityNumber = ({ target }) => {
+  const handleChangeSecurityNumber = ({ nativeEvent: { data, inputType }, target }) => {
+    const inputtedValueRegex = /[0-9]/;
+
+    if (!inputtedValueRegex.test(data) && inputType !== 'deleteContentBackward') {
+      return;
+    }
+
     setSecurityNumber(target.value);
   };
 
-  const handleChangePassword = ({ target }, index) => {
+  const handleChangePassword = ({ nativeEvent: { data, inputType }, target }, index) => {
+    const inputtedValueRegex = /[0-9]/;
+
+    if (!inputtedValueRegex.test(data) && inputType !== 'deleteContentBackward') {
+      return;
+    }
+
     const updatedPassword = password.map((number, aaa) => (aaa === index ? target.value : number));
     setPassword(updatedPassword);
   };
@@ -168,7 +178,7 @@ function CardAddPage() {
   const handleSubmit = event => {
     event.preventDefault();
 
-    if (Object.values(permission).every(value => value === true)) {
+    if (Object.values(cardAddCondition).every(value => value === true)) {
       alert('카드 정보가 저장되었습니다.');
     }
   };
@@ -190,12 +200,14 @@ function CardAddPage() {
           isShowLengthChecker={false}
           handleInputChange={handleChangeCardNumbersInput}
           countInput={1}
+          invalidMessage="0000-0000-0000-0000 형식으로 입력해주세요."
           inputProps={{
             type: 'text',
             width: '318px',
             isCenter: true,
             maxLength: 19,
             placeholder: 'ex. 1111-2222-3333-4444',
+            isValid: cardAddCondition.cardNumbers,
           }}
           inputLabelProps={{
             label: '카드 번호',
@@ -206,12 +218,14 @@ function CardAddPage() {
           handleInputChange={handleChangeExpiredDateInput}
           isShowLengthChecker={false}
           countInput={1}
+          invalidMessage="올바르지 않은 만료일입니다."
           inputProps={{
             type: 'text',
             width: '137px',
             isCenter: true,
             maxLength: 5,
             placeholder: 'MM / YY',
+            isValid: cardAddCondition.expiredDate,
           }}
           inputLabelProps={{
             label: '만료일',
@@ -223,12 +237,14 @@ function CardAddPage() {
           headerWidth="318px"
           isShowLengthChecker={true}
           countInput={1}
+          invalidMessage="소유자 이름은 영어로 입력해주세요."
           inputProps={{
             type: 'text',
             width: '318px',
             placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
             isCenter: false,
             maxLength: 30,
+            isValid: cardAddCondition.ownerName,
           }}
           inputLabelProps={{
             label: '카드 소유자 이름(선택)',
@@ -240,11 +256,13 @@ function CardAddPage() {
             handleInputChange={handleChangeSecurityNumber}
             isShowLengthChecker={false}
             countInput={1}
+            invalidMessage="보안 코드는 세 자리의 숫자로 입력해주세요."
             inputProps={{
               type: 'password',
               width: '84px',
               isCenter: true,
               maxLength: 3,
+              isValid: cardAddCondition.securityNumber,
             }}
             inputLabelProps={{
               label: '보안 코드(CVC/CVV)',
@@ -258,11 +276,13 @@ function CardAddPage() {
             handleInputChange={handleChangePassword}
             isShowLengthChecker={false}
             countInput={2}
+            invalidMessage="비밀 번호는 숫자로 입력해주세요."
             inputProps={{
               type: 'password',
               width: '43px',
               isCenter: true,
               maxLength: 1,
+              isValid: cardAddCondition.password,
             }}
             inputLabelProps={{
               label: '카드 비밀번호',
@@ -270,18 +290,20 @@ function CardAddPage() {
           />
           <Input
             type="password"
-            value="."
+            defaultValue="."
             width="43px"
             isCenter={true}
             maxLength={1}
+            disabled={true}
             backgroundColor="#fff"
           />
           <Input
             type="password"
-            value="."
+            defaultValue="."
             width="43px"
             isCenter={true}
             maxLength={1}
+            disabled={true}
             backgroundColor="#fff"
           />
         </FormRow>
@@ -290,7 +312,7 @@ function CardAddPage() {
             label="다음"
             width={'51px'}
             height={'34px'}
-            hidden={Object.values(permission).some(value => value === false)}
+            hidden={Object.values(cardAddCondition).some(value => value === false)}
           />
         </SubmitButtonContainer>
       </Form>

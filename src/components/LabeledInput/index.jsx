@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import styled from 'styled-components';
 import Input from '../Input';
 import InputLabel from '../InputLabel';
 
 const LabeledInputContainer = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   gap: 7px;
 `;
@@ -28,12 +29,27 @@ const LengthChecker = styled.p`
   color: #525252;
 `;
 
+const LabeledInputFooter = styled.span`
+  position: absolute;
+  word-break: normal;
+  bottom: -14px;
+  width: 300px;
+  overflow: visible;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: -0.085em;
+  color: red;
+`;
+
 function LabeledInput({
   value,
   handleInputChange,
   headerWidth,
   isShowLengthChecker,
   countInput,
+  invalidMessage,
   inputProps,
   inputLabelProps,
 }) {
@@ -41,6 +57,14 @@ function LabeledInput({
 
   const onChange = ({ target }) => {
     setTempValue(target.value);
+  };
+
+  const isShowInvalidMessage = () => {
+    if (countInput >= 2) {
+      return inputProps.isValid || value.join('').length === 0;
+    }
+
+    return inputProps.isValid || value.length === 0;
   };
 
   return (
@@ -76,6 +100,7 @@ function LabeledInput({
           />
         )}
       </LabeledInputBody>
+      <LabeledInputFooter>{isShowInvalidMessage() ? '' : invalidMessage}</LabeledInputFooter>
     </LabeledInputContainer>
   );
 }
