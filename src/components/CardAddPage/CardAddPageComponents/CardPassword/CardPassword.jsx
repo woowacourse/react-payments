@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 
 function CardPassword({ cardInfo, setCardInfo }) {
   const handleOnInput = (event) => {
@@ -37,13 +38,13 @@ function CardPassword({ cardInfo, setCardInfo }) {
         required
       />
       <input
-        className="input-basic w-15 input-password-hidden"
+        className="input-basic w-15 input-password input-background-hidden"
         type="password"
         value={'⋅'}
         disabled
       />
       <input
-        className="input-basic w-15 input-password-hidden"
+        className="input-basic w-15 input-password input-background-hidden"
         type="password"
         value={'⋅'}
         disabled
@@ -53,3 +54,8 @@ function CardPassword({ cardInfo, setCardInfo }) {
 }
 
 export default CardPassword;
+
+CardPassword.propTypes = {
+  cardInfo: PropTypes.object.isRequired,
+  setCardInfo: PropTypes.func.isRequired,
+};

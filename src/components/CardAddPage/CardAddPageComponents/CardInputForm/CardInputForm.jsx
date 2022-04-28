@@ -1,5 +1,5 @@
 import React from 'react';
-import checkCardInfo from '../../../validator';
+import checkCardInfo from '../../../../validator';
 
 function CardInputForm({ cardInfo, children }) {
   const handleOnSubmit = (e) => {

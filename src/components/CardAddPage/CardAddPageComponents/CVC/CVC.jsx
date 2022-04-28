@@ -1,5 +1,5 @@
 import React from 'react';
-import Tooltip from './Tooltip';
+import PropTypes from 'prop-types';
 
 function CVC({ cardInfo, setCardInfo }) {
   const handleOnInput = (event) => {
@@ -19,7 +19,7 @@ function CVC({ cardInfo, setCardInfo }) {
   };
 
   return (
-    <div className="input-container">
+    <div className="input-container input-inline">
       <span className="input-title">보안코드(CVC/CVV)</span>
       <input
         name="cvc"
@@ -29,9 +29,13 @@ function CVC({ cardInfo, setCardInfo }) {
         value={cardInfo.cvc}
         required
       />
-      <Tooltip />
     </div>
   );
 }
 
 export default CVC;
+
+CVC.propTypes = {
+  cardInfo: PropTypes.object.isRequired,
+  setCardInfo: PropTypes.func.isRequired,
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function CardOwner({ cardInfo, setCardInfo }) {
   const handleOnInput = (event) => {
@@ -38,3 +39,8 @@ function CardOwner({ cardInfo, setCardInfo }) {
 }
 
 export default CardOwner;
+
+CardOwner.propTypes = {
+  cardInfo: PropTypes.object.isRequired,
+  setCardInfo: PropTypes.func.isRequired,
+};

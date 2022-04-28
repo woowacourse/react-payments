@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function CardExpirationDate({ cardInfo, setCardInfo }) {
   const handleMonthOnInput = (event) => {
@@ -7,13 +8,10 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
     }
     const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
     event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(regExp, '');
-
     let { value, name } = event.target;
-
     if (value.length > 2) {
       value = value.slice(0, 2);
     }
-
     setCardInfo({
       ...cardInfo,
       [name]: value,
@@ -24,7 +22,6 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
     if (event.target.value === '1') {
       event.target.value = '01';
     }
-
     setCardInfo({
       ...cardInfo,
       month: event.target.value,
@@ -35,11 +32,9 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
     const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
     event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(regExp, '');
     let { value, name } = event.target;
-
     if (value.length > 2) {
       value = value.slice(0, 2);
     }
-
     setCardInfo({
       ...cardInfo,
       [name]: value,
@@ -75,3 +70,8 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
 }
 
 export default CardExpirationDate;
+
+CardExpirationDate.propTypes = {
+  cardInfo: PropTypes.object.isRequired,
+  setCardInfo: PropTypes.func.isRequired,
+};

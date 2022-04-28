@@ -1,0 +1,86 @@
+@import 'button.css';
+@import 'card.css';
+@import 'input.css';
+@import 'pageTitle.css';
+@import 'tooltip.css';
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e5e5;
+}
+
+#root {
+  background-color: #fff;
+  width: 375px;
+  min-width: 375px;
+  height: 700px;
+  position: relative;
+  border-radius: 15px;
+}
+
+.app {
+  height: 100%;
+  padding: 16px 24px;
+}
+
+/* utils */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mt-20 {
+  margin-top: 5rem;
+}
+
+.mt-30 {
+  margin-top: 7.5rem;
+}
+
+.mt-40 {
+  margin-top: 9rem;
+}
+
+.mt-50 {
+  margin-top: 11.5rem;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.w-15 {
+  width: 15%;
+}

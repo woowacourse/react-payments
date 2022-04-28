@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PrevPageButton(props) {
+function PrevPageButton() {
   return <span className="prev-page-button">{'<'}</span>;
 }
 

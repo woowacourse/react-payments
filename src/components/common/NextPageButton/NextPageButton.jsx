@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function NextPageButton({ text }) {
   return (
@@ -11,3 +12,7 @@ function NextPageButton({ text }) {
 }
 
 export default NextPageButton;
+
+NextPageButton.propTypes = {
+  text: PropTypes.string.isRequired,
+};

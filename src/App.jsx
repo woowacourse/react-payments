@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './App.css';
 import CardListPage from './components/CardListPage/CardListPage';
 import CardAddPage from './components/CardAddPage/CardAddPage';
 
