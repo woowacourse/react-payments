@@ -23,6 +23,7 @@
     "import/no-unresolved": "off",
     "no-unused-vars": "warn",
     "react/prop-types": "off",
-    "implicit-arrow-linebreak": "off"
+    "implicit-arrow-linebreak": "off",
+    "no-unused-expressions": "off"
   }
 }
