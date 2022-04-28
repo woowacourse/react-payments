@@ -55,7 +55,7 @@ const CardAppPage = () => {
   const [cardInfo, setCardInfo] = useState(initialCardInfo);
   const [modalVisible, setModalVisible] = useState(false);
   const [isfullFilled, setIsFullFilled] = useState(false);
-  const [isCardFront, setIsCardFront] = useState(false);
+  const [isCardFront, setIsCardFront] = useState(true);
   const { number, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
 
   useEffect(() => {
