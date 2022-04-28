@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Head from '../components/Head';
 import styled from 'styled-components';
 import Card from '../components/Card';
 import LabeledInput from '../components/LabeledInput';
+import validator from '../validation';
 
 const Page = styled.div`
   width: 100%;
@@ -30,24 +31,122 @@ const Form = styled.form`
 function CardAddPage() {
   const [companyName, setCompanyName] = useState('포코카드');
   const [cardNumbers, setCardNumbers] = useState([]);
+  const [expiredDate, setExpiredDate] = useState({ month: '', year: '' });
   const [ownerName, setOwnerName] = useState('');
-  const [expiredDate, setExpiredData] = useState({ month: 0, year: 0 });
+  const [securityNumber, setSecurityNumber] = useState('');
+  const [password, setPassword] = useState(['', '']);
+  const [permission, setPermission] = useState({
+    cardNumbers: false,
+    expiredDate: false,
+    ownerName: false,
+    securityNumber: false,
+    password: false,
+  });
 
-  const convertedCardNumber = useMemo(() => {
-    return cardNumbers
-      .map((cardNumber, index) => (index >= 2 ? '●'.repeat(cardNumber.length) : cardNumber))
-      .join('-');
+  const convertedCardNumbers = useMemo(() => {
+    return cardNumbers.map((cardNumber, index) =>
+      index >= 2 ? '●'.repeat(cardNumber.length) : cardNumber
+    );
   }, [cardNumbers]);
 
-  const handleChangeCardNumbersInput = ({ target }) => {
-    const changedNumber = target.value;
-    convertedCardNumber.find((number, index) => number !== changedNumber[index]);
-    // 11112222-0000-0000
+  const convertedExpiredDate = useMemo(() => {
+    return expiredDate.month || expiredDate.year
+      ? `${expiredDate.month}${expiredDate.month.length === 2 ? '/' : ''}${expiredDate.year}`
+      : '';
+  }, [expiredDate]);
+
+  useEffect(() => {
+    setPermission({
+      cardNumbers: validator.validateCardNumbers(cardNumbers.join('-')),
+      expiredDate: validator.validateExpiredDate(convertedExpiredDate),
+      ownerName: validator.validateOwnerName(ownerName),
+      securityNumber: validator.validateSecurityNumber(securityNumber),
+      password: validator.validatePassword(password.join('')),
+    });
+  }, [cardNumbers, expiredDate, ownerName, securityNumber, password]);
+
+  const handleChangeCardNumbersInput = ({ nativeEvent: { data, inputType }, target }) => {
+    const cardNumberRegex = /[0-9-]/;
+
+    if (!cardNumberRegex.test(data) && inputType !== 'deleteContentBackward') {
+      return;
+    }
+
+    const inputCardNumbers = target.value.split('-');
+    const targetIndex = convertedCardNumbers.findIndex(
+      (numbers, index) => numbers !== inputCardNumbers[index]
+    );
+
+    if (inputCardNumbers.join().length < convertedCardNumbers.join().length) {
+      const newCardNumbers = cardNumbers.filter((_, index) => index !== targetIndex);
+      setCardNumbers(newCardNumbers);
+      return;
+    }
+
+    if (targetIndex === -1) {
+      setCardNumbers(cardNumbers.concat([inputCardNumbers[inputCardNumbers.length - 1]]));
+      return;
+    }
+
+    if (targetIndex < 2) {
+      setCardNumbers(inputCardNumbers);
+      return;
+    }
+
+    const numberIndex = inputCardNumbers[targetIndex]
+      .split('')
+      .findIndex(char => char === '0' || Number(char));
+
+    if (numberIndex == -1) {
+      return;
+    }
+
+    const inputNumber = inputCardNumbers[targetIndex][numberIndex];
+    const newCardNumbers = cardNumbers.map((number, index) => {
+      if (index === targetIndex) {
+        return number.length === numberIndex
+          ? number + inputNumber
+          : number.slice(0, numberIndex) + inputNumber + number.slice(numberIndex);
+      }
+      return number;
+    });
+    setCardNumbers(newCardNumbers);
   };
 
-  const handleChangeOwnerNameInput = ({ target }) => {
-    console.log('hello');
-    setOwnerName(target.value);
+  const handleChangeExpiredDateInput = ({ nativeEvent: { data, inputType }, target }) => {
+    const cardNumberRegex = /[0-9/]/;
+
+    if (!cardNumberRegex.test(data) && inputType !== 'deleteContentBackward') {
+      return;
+    }
+
+    if (inputType === 'deleteContentBackward' && target.value.length === 2) {
+      setExpiredDate({ month: expiredDate.month[0], year: '' });
+      return;
+    }
+
+    const [month, year] = target.value.split('/');
+
+    setExpiredDate({ month: month || '', year: year || '' });
+  };
+
+  const handleChangeOwnerNameInput = ({ nativeEvent: { data }, target }) => {
+    const regex = /[a-zA-Z ]/;
+
+    if (!regex.test(data)) {
+      return;
+    }
+
+    setOwnerName(target.value.toUpperCase());
+  };
+
+  const handleChangeSecurityNumber = ({ target }) => {
+    setSecurityNumber(target.value);
+  };
+
+  const handleChangePassword = ({ target }, index) => {
+    const updatedPassword = password.map((number, aaa) => (aaa === index ? target.value : number));
+    setPassword(updatedPassword);
   };
 
   return (
@@ -56,29 +155,31 @@ function CardAddPage() {
       <CardSection>
         <Card
           companyName={companyName}
-          cardNumbers={cardNumbers}
+          cardNumbers={convertedCardNumbers}
           ownerName={ownerName}
-          expiredDate={expiredDate}
+          expiredDate={convertedExpiredDate}
         />
       </CardSection>
       <Form>
         <LabeledInput
-          value={convertedCardNumber}
+          value={convertedCardNumbers.join('-')}
           isShowLengthChecker={false}
+          handleInputChange={handleChangeCardNumbersInput}
           countInput={1}
           inputProps={{
             type: 'text',
             width: '318px',
             isCenter: true,
             maxLength: 19,
-            placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
+            placeholder: 'ex. 1111-2222-3333-4444',
           }}
           inputLabelProps={{
             label: '카드 번호',
           }}
         />
         <LabeledInput
-          value=""
+          value={convertedExpiredDate}
+          handleInputChange={handleChangeExpiredDateInput}
           isShowLengthChecker={false}
           countInput={1}
           inputProps={{
@@ -110,7 +211,8 @@ function CardAddPage() {
           }}
         />
         <LabeledInput
-          value=""
+          value={securityNumber}
+          handleInputChange={handleChangeSecurityNumber}
           isShowLengthChecker={false}
           countInput={1}
           inputProps={{
@@ -124,11 +226,12 @@ function CardAddPage() {
           }}
         />
         <LabeledInput
-          value=""
+          value={password}
+          handleInputChange={handleChangePassword}
           isShowLengthChecker={false}
-          countInput={4}
+          countInput={2}
           inputProps={{
-            type: 'pass',
+            type: 'password',
             width: '43px',
             isCenter: true,
             maxLength: 1,

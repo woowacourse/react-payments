@@ -57,14 +57,24 @@ function LabeledInput({
         )}
       </LabeledInputHeader>
       <LabeledInputBody>
-        {Array.from({ length: countInput }).map((_, index) => (
+        {countInput >= 2 ? (
+          Array.from({ length: countInput }).map((_, index) => (
+            <Input
+              key={index}
+              value={value[index] || tempValue}
+              onChange={event => {
+                handleInputChange ? handleInputChange(event, index) : onChange(event);
+              }}
+              {...inputProps}
+            />
+          ))
+        ) : (
           <Input
-            key={index}
             value={value || tempValue}
             onChange={handleInputChange || onChange}
             {...inputProps}
           />
-        ))}
+        )}
       </LabeledInputBody>
     </LabeledInputContainer>
   );

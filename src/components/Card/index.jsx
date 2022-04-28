@@ -52,7 +52,7 @@ const CardBottomContainer = styled.div`
 `;
 
 function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
-  const { month, year } = expiredDate;
+  // const { month, year } = expiredDate;
 
   return (
     <CardContainer>
@@ -60,14 +60,12 @@ function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
       <IC />
       <CardNumberContainer>
         {cardNumbers.map((cardNumber, index) => (
-          <span key={cardNumber + index}>
-            {index >= 2 ? '●'.repeat(cardNumber.length) : cardNumber}
-          </span>
+          <span key={cardNumber + index}>{cardNumber}</span>
         ))}
       </CardNumberContainer>
       <CardBottomContainer>
         <span>{ownerName || 'NAME'}</span>
-        <span>{month && year ? `${month}/${year}` : 'MM/YY'}</span>
+        <span>{expiredDate ? expiredDate : 'MM/YY'}</span>
       </CardBottomContainer>
     </CardContainer>
   );
