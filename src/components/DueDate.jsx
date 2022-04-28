@@ -12,18 +12,14 @@ function DueDate({ dimensions, cardDateCallback, setIsCorrectCardDate }) {
   const months = useRef(MONTH);
   const years = useRef(getList(10, now.current.getFullYear()));
 
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
+  const [month, setMonth] = useState('MM');
+  const [year, setYear] = useState('YY');
 
   useEffect(() => {
     const isCorrect = month.length === 2 && year.length === 2;
 
-    if (isCorrect) {
-      cardDateCallback(`${month} / ${year}`);
-    }
+    cardDateCallback(`${month} / ${year}`);
     setIsCorrectCardDate(isCorrect);
-    // console.log('month', month);
-    // console.log('year', year);
   }, [month, year, cardDateCallback, setIsCorrectCardDate]);
 
   return (
