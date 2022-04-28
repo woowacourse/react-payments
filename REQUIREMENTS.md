@@ -1,5 +1,11 @@
 # 페이먼츠 미션 요구사항
 
+## 개요
+
+- 페어 : 마르코, 아놀드
+- [데모페이지](https://sweet-sprite-876774.netlify.app/)
+- [스토리북 배포페이지](https://626aa58effc760004af7707e-xtupdrtkcs.chromatic.com/)
+
 ## States
 
 - 카드번호(숫자 12자리)
