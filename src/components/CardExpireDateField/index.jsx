@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import useErrorMessage from 'hooks/useErrorMessage';
 
 import FieldSet from 'components/@common/FieldSet';
 import TextField from 'components/@common/TextField';
@@ -8,37 +8,30 @@ import { validateExpireDate } from 'validators';
 import { EXPIRE_DATE } from 'constants';
 
 function CardExpireDateField({ expireMonth, expireYear, onChange }) {
-  const [errorMessage, setErrorMessage] = useState(null);
-
-  const onBlurExpireDate = () => {
-    if (!expireMonth || !expireYear) return;
-
-    try {
-      validateExpireDate(expireMonth, expireYear);
-      setErrorMessage(null);
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
-  };
+  const { errorMessage, handleError } = useErrorMessage({
+    state: { expireMonth, expireYear },
+    validate: validateExpireDate,
+    isCondition: !expireMonth || !expireYear,
+  });
 
   return (
     <FieldSet title="만료일" inputWidth={50} errorMessage={errorMessage}>
       <TextField
         name="expireMonth"
         value={expireMonth}
-        maxLength={EXPIRE_DATE.MONTH_LENGTH}
         placeholder="MM"
+        maxLength={EXPIRE_DATE.MONTH_LENGTH}
         onChange={onChange}
-        onBlur={onBlurExpireDate}
+        onBlur={handleError}
       />
       /
       <TextField
         name="expireYear"
         value={expireYear}
-        maxLength={EXPIRE_DATE.YEAR_LENGTH}
         placeholder="YY"
+        maxLength={EXPIRE_DATE.YEAR_LENGTH}
         onChange={onChange}
-        onBlur={onBlurExpireDate}
+        onBlur={handleError}
       />
     </FieldSet>
   );

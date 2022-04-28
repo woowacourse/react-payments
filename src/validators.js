@@ -23,7 +23,7 @@ const validateCardNumber = (cardNumber) => {
   }
 };
 
-const validateExpireDate = (expireMonth, expireYear) => {
+const validateExpireDate = ({ expireMonth, expireYear }) => {
   if (!isNumber(expireMonth) || !isNumber(expireYear)) {
     throw new Error(ERROR_MESSAGE.EXPIRE_DATE.IS_NOT_INTEGER);
   }

@@ -1,12 +1,3 @@
-const ACTION_TYPE = {
-  UPDATE_CARD_NUMBER: Symbol('카드 번호를 업데이트합니다.'),
-  UPDATE_EXPIRE_MONTH: Symbol('만료월을 업데이트합니다.'),
-  UPDATE_EXPIRE_YEAR: Symbol('만료연도를 업데이트합니다.'),
-  UPDATE_USER_NAME: Symbol('카드 소유자의 이름을 업데이트합니다.'),
-  UPDATE_SECURITY_CODE: Symbol('보안코드를 업데이트합니다.'),
-  UPDATE_CARD_PASSWORD: Symbol('카드 비밀번호를 업데이트합니다.'),
-};
-
 const CARD_NUMBER = {
   UNIT_COUNT: 4,
   UNIT_LENGTH: 4,
@@ -60,12 +51,4 @@ const ERROR_MESSAGE = {
   },
 };
 
-export {
-  ACTION_TYPE,
-  CARD_NUMBER,
-  EXPIRE_DATE,
-  USER_NAME,
-  SECURITY_CODE,
-  CARD_PASSWORD,
-  ERROR_MESSAGE,
-};
+export { CARD_NUMBER, EXPIRE_DATE, USER_NAME, SECURITY_CODE, CARD_PASSWORD, ERROR_MESSAGE };
