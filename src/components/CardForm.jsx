@@ -57,9 +57,8 @@ const StyledCardFieldContainer = styled.div`
     background-color: #ecebf1;
   }
 
-  .input-box.password {
+  .transparent {
     background-color: transparent;
-    width: auto;
   }
 
   .input-basic {
@@ -72,10 +71,27 @@ const StyledCardFieldContainer = styled.div`
     border-color: #9ca3af;
     border: none;
     border-radius: 0.25rem;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    color: #525252;
   }
 
-  .input-basic.password {
+  .input-basic::placeholder {
+    letter-spacing: -0.02em;
+  }
+
+  .password {
     background-color: #ecebf1;
+    width: 15%;
+    margin-right: 7px;
+  }
+
+  .disabled {
+    background-color: transparent;
     width: 15%;
     margin-right: 7px;
   }
@@ -93,9 +109,9 @@ const StyledCardFieldContainer = styled.div`
   }
 
   .error {
-    outline: 1px solid #ff9e9e !important;
-    outline-offset: -1px !important;
-    background-color: #ffc6c6 !important;
+    outline: 1px solid #ff9e9e;
+    outline-offset: -1px;
+    background-color: #ffc6c6;
   }
 `;
 
@@ -300,6 +316,7 @@ const CardForm = () => {
                   className={`input-basic ${
                     errors.expiredMonth?.showError && 'error'
                   }`}
+                  placeholder="MM"
                   {...registerInputProps('expiredMonth')}
                 />
                 <p>/</p>
@@ -307,6 +324,7 @@ const CardForm = () => {
                   className={`input-basic ${
                     errors.expiredYear?.showError && 'error'
                   }`}
+                  placeholder="YY"
                   {...registerInputProps('expiredYear')}
                 />
               </div>
@@ -322,6 +340,7 @@ const CardForm = () => {
                   className={`input-basic ${
                     errors.owner?.showError && 'error'
                   }`}
+                  placeholder="카드에 표시된 이름과 동일하게 입력하세요."
                   {...registerInputProps('owner')}
                 />
               </div>
@@ -345,7 +364,7 @@ const CardForm = () => {
             </StyledCardFieldContainer>
             <StyledCardFieldContainer className="input-container">
               <label className="input-title">비밀번호</label>
-              <div className="input-box password">
+              <div className="input-box transparent">
                 <input
                   type="password"
                   className={`input-basic w-15 password ${
@@ -362,7 +381,7 @@ const CardForm = () => {
                 />
                 <input
                   type="password"
-                  className={`input-basic w-15 password ${
+                  className={`input-basic w-15 disabled ${
                     errors.thirdPasswordDigit?.showError && 'error'
                   }`}
                   disabled
@@ -370,7 +389,7 @@ const CardForm = () => {
                 />
                 <input
                   type="password"
-                  className={`input-basic w-15 password ${
+                  className={`input-basic w-15 disabled ${
                     errors.fourthPasswordDigit?.showError && 'error'
                   }`}
                   disabled

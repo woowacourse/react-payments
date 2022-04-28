@@ -7,25 +7,7 @@ const StyledCardPreview = styled.div`
   align-items: center;
   justify-content: center;
   margin: 10px 0;
-
-  .empty-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    width: 208px;
-    height: 130px;
-
-    font-size: 30px;
-    color: #575757;
-
-    background: #e5e5e5;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-
-    user-select: none;
-  }
+  color: #525252;
 
   .small-card {
     display: flex;
@@ -101,36 +83,43 @@ const StyledCardPreview = styled.div`
     display: block;
     margin: 0;
 
-    font-size: 14px;
-    line-height: 16px;
     vertical-align: middle;
-    font-weight: 400;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.1em;
   }
 `;
 
-const CardPreview = ({ brand, cardNumber, expiredDate, owner }) => (
-  <StyledCardPreview className="card-box">
-    <div className="small-card">
-      <div className="card-top">
-        <span className="card-text">{brand ?? null}</span>
-      </div>
-      <div className="card-middle">
-        <div className="small-card__chip" />
-      </div>
-      <div className="card-bottom">
-        <div className="card-bottom__number">
-          <span className="card-text">{cardNumber.join(' ')}</span>
+const CardPreview = ({ brand, cardNumber, expiredDate, owner }) => {
+  const cardNumberText = `${cardNumber[0]} ${cardNumber[1]} ${'•'.repeat(
+    cardNumber[2].length
+  )} ${'•'.repeat(cardNumber[3].length)}`;
+
+  return (
+    <StyledCardPreview className="card-box">
+      <div className="small-card">
+        <div className="card-top">
+          <span className="card-text">{brand ?? null}</span>
         </div>
-        <div className="card-bottom__info">
-          <p className="card-text w-50 ellipsis">{owner}</p>
-          <span className="card-text">
-            {expiredDate.month} {expiredDate.month.length === 2 ? '/' : null}{' '}
-            {expiredDate.year}
-          </span>
+        <div className="card-middle">
+          <div className="small-card__chip" />
+        </div>
+        <div className="card-bottom">
+          <div className="card-bottom__number">
+            <span className="card-text">{cardNumberText}</span>
+          </div>
+          <div className="card-bottom__info">
+            <p className="card-text w-50 ellipsis">{owner}</p>
+            <span className="card-text">
+              {expiredDate.month} {expiredDate.month.length === 2 ? '/' : null}{' '}
+              {expiredDate.year}
+            </span>
+          </div>
         </div>
       </div>
-    </div>
-  </StyledCardPreview>
-);
+    </StyledCardPreview>
+  );
+};
 
 export default CardPreview;
