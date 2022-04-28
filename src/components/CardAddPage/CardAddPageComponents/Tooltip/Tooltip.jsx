@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { CVC_DESCRIPTION } from '../../../../constants';
+
 function Tooltip() {
   return (
     <button type="button" className="tooltip">
-      ?<span className="tooltiptext">카드 뒷면에 있는 3자리 숫자를 입력해주세요.</span>
+      ?<span className="tooltiptext">{CVC_DESCRIPTION}</span>
     </button>
   );
 }

@@ -21,4 +21,6 @@ const LIMIT_LENGTH = {
   CVC: 3,
 };
 
-export { ERROR_MESSAGE, MONTH, LIMIT_LENGTH };
+const CVC_DESCRIPTION = '카드 뒷면에 있는 3자리 숫자를 입력해주세요.';
+
+export { ERROR_MESSAGE, MONTH, LIMIT_LENGTH, CVC_DESCRIPTION };
