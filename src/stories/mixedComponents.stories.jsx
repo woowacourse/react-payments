@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import Button from '../components/Button';
 import Input from '../components/Input';
+import Modal from '../components/Modal';
 
 export default {
   title: 'Example/MixedComponents',
@@ -35,6 +36,7 @@ const CVCTemplate = args => (
   <>
     <Input {...args.inputArgs} />
     <Button {...args.buttonArgs} />
+    <Modal {...args.modalArgs} />
   </>
 );
 
@@ -55,6 +57,7 @@ CVC.args = {
     shape: 'circle',
     size: 'small',
   },
+  modalArgs: { visible: true },
 };
 
 const Bullet = styled.span`
