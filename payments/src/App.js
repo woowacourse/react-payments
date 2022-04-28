@@ -17,6 +17,7 @@ const App = () => {
       <UserListContext.Provider value={{ userList, updateUserList }}>
         <UserContext.Provider value={{ inputStates, updateInputStates }}>
           <Routes>
+            <Route path='*' element={<CardList />} />
             <Route path='/' element={<CardList />} />
             <Route path='/cardAdd' element={<CardAdd />} />
             <Route path='/enterNickname' element={<EnterNickname />} />
