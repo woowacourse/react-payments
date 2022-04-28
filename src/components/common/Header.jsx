@@ -18,7 +18,12 @@ const Title = styled.span`
 function Header({ children: title }) {
   return (
     <HeaderContainer>
-      <IoIosArrowBack size={30} color="#525252" />
+      <IoIosArrowBack
+        size={30}
+        color="#525252"
+        onClick={() => alert('아직 구현되지 않았습니다 :(')}
+        style={{ cursor: 'pointer' }}
+      />
       <Title>{title}</Title>
     </HeaderContainer>
   );

@@ -70,7 +70,10 @@ function App() {
       <CardSecurityCode correctSecurityCodeCallback={correctSecurityCodeCallback} />
       <CardPassword correctCardPwdCallback={correctCardPwdCallback} />
       <Footer>
-        <TextButton hexColor="#525252" isVisible={isAllCompleted}>
+        <TextButton
+          hexColor="#525252"
+          isVisible={isAllCompleted}
+          handleClick={() => alert('카드 등록이 완료 되었습니다 :D')}>
           다음
         </TextButton>
       </Footer>
