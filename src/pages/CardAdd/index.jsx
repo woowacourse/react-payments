@@ -12,6 +12,7 @@ import CardPasswordField from 'components/CardPasswordField';
 
 import { ACTION_TYPE } from 'constants';
 import {
+  validateCardNumber,
   validateCardPassword,
   validateExpireDate,
   validateSecurityCode,
@@ -58,15 +59,15 @@ function CardAdd() {
 
   const onClickConfirmButton = () => {
     try {
+      validateCardNumber(cardNumber);
       validateCardPassword(cardPassword);
       validateExpireDate(expireMonth, expireYear);
       validateSecurityCode(securityCode);
-      // eslint-disable-next-line no-unused-expressions
       userName && validateUserName(userName);
 
       alert(`
         리뷰어님 체크용 ✅
-        카드번호: ${cardNumber}
+        카드번호: ${cardNumber.join('-')}
         만료일: ${expireMonth} / ${expireYear}
         소유자: ${userName}
         보안 코드: ${securityCode}

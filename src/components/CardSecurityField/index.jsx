@@ -27,7 +27,7 @@ function CardSecurityField({ securityCode, onChange }) {
         value={securityCode}
         onBlur={onBlurSecurityCode}
         onChange={onChange}
-        maxLength={SECURITY_CODE.MAX_LENGTH}
+        maxLength={SECURITY_CODE.LENGTH}
       />
       <div className="input-security-code-tip">?</div>
     </FieldSet>
