@@ -11,7 +11,7 @@ const initialCardInfo: CardInfo = {
   password: ["", ""],
 };
 
-export const useCardInfo = () => {
+export const useCardInfoInput = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>(initialCardInfo);
   const resetCardInfo = () => {
     setCardInfo(initialCardInfo);

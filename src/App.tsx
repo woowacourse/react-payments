@@ -3,7 +3,7 @@ import React from "react";
 import Card from "./components/Card";
 import CardInfoForm from "./components/CardInfoForm";
 import Header from "./components/Header";
-import { useCardInfo } from "./hooks/useCardInfo";
+import { useCardInfoInput } from "./hooks/useCardInfoInput";
 import { useCardInfoValidation } from "./hooks/useCardInfoValidation";
 import cardInfoValidator from "./lib/validation";
 
@@ -17,7 +17,7 @@ function App() {
     onBlurUserName,
     onChangeSecurityCode,
     onChangePassword,
-  } = useCardInfo();
+  } = useCardInfoInput();
 
   const cardInfoValidation = useCardInfoValidation(cardInfo, cardInfoValidator);
 
