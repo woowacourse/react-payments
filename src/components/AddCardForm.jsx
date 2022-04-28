@@ -167,6 +167,7 @@ function AddCardForm({ updateCard, addCard }) {
 
 AddCardForm.propTypes = {
   updateCard: PropTypes.func,
+  addCard: PropTypes.func,
 };
 
 export default AddCardForm;
