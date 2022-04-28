@@ -40,6 +40,7 @@ function AddPage() {
     );
   }, [cardNumbers, dueDate, owner, cvc, password, error]);
 
+  const firstCardNumberInputRef = useRef();
   const secondCardNumberInputRef = useRef();
   const thirdCardNumberInputRef = useRef();
   const fourthCardNumberInputRef = useRef();
@@ -49,14 +50,14 @@ function AddPage() {
   const secondPasswordInputRef = useRef();
 
   const cardNumberInputRefs = [
-    null,
+    firstCardNumberInputRef,
     secondCardNumberInputRef,
     thirdCardNumberInputRef,
     fourthCardNumberInputRef,
   ];
 
   const focusNextNumberInput = (index) => {
-    cardNumberInputRefs[index]?.current.focus();
+    cardNumberInputRefs[index+1]?.current.focus();
   }
 
   const handleCardNumber = (index, {target:{value}}) => {
@@ -69,7 +70,7 @@ function AddPage() {
     });
  
     if(value.length >= CARD_NUMBER.UNIT_LENGTH) {
-      focusNextNumberInput(index + 1);
+      focusNextNumberInput(index);
     }
   };
 

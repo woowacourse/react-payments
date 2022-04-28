@@ -10,7 +10,7 @@ export default {
 export const SmallCard = Template.bind({});
 SmallCard.args = {
   size:'small',
-  company: 'poco', 
+  company: 'woowa', 
   cardNumbers: ['1111','2222', 'oooo','oooo' ],
   owner: 'dory',
   dueDate: ['04','26']
@@ -19,8 +19,8 @@ SmallCard.args = {
 export const BigCard = Template.bind({});
 BigCard.args = {
   size:'big',
-  company: 'poco', 
-  cardNumbers: ['1111','2222', 'oooo','1ooo' ],
+  company: 'woowa', 
+  cardNumbers: ['1111','2222', 'oooo','oooo' ],
   owner: 'dory',
   dueDate: ['04','26']
 }
