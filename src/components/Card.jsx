@@ -43,7 +43,7 @@ function Card({ card }) {
           </div>
         </div>
         <div className="card-bottom__info">
-          <span className="card-text">{card.ownerName || 'NAME'}</span>
+          <span className="card-text name-wrap">{card.ownerName || 'NAME'}</span>
           <span className="card-text">{`${card.expireMonth || 'MM'}/${
             card.expireYear || 'YY'
           }`}</span>
@@ -55,16 +55,16 @@ function Card({ card }) {
 
 Card.propTypes = {
   card: PropTypes.shape({
-    firstCardNumber: PropTypes.string,
-    secondCardNumber: PropTypes.string,
-    thirdCardNumber: PropTypes.string,
-    fourthCardNumber: PropTypes.string,
-    expireMonth: PropTypes.string,
-    expireYear: PropTypes.string,
-    ownerName: PropTypes.string,
-    securityCode: PropTypes.string,
-    password: PropTypes.string,
-  }),
+    firstCardNumber: PropTypes.string.isRequired,
+    secondCardNumber: PropTypes.string.isRequired,
+    thirdCardNumber: PropTypes.string.isRequired,
+    fourthCardNumber: PropTypes.string.isRequired,
+    expireMonth: PropTypes.string.isRequired,
+    expireYear: PropTypes.string.isRequired,
+    ownerName: PropTypes.string.isRequired,
+    securityCode: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Card;
