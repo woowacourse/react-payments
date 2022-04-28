@@ -14,8 +14,9 @@ const cardCategory = [
   { name: "록8바", color: "gold" },
 ];
 
-const ColorPicker = ({ visible, setVisible }) => {
+const ColorPicker = ({ visible, setVisible, updateForm }) => {
   const modalCotnets = useRef(null);
+
   return (
     <ModalContainer
       contentsRef={modalCotnets}
@@ -24,7 +25,12 @@ const ColorPicker = ({ visible, setVisible }) => {
     >
       <div ref={modalCotnets} className="palette">
         {cardCategory.map((card) => (
-          <Color name={card.name} color={card.color} />
+          <Color
+            name={card.name}
+            color={card.color}
+            updateForm={updateForm}
+            setVisible={setVisible}
+          />
         ))}
       </div>
     </ModalContainer>

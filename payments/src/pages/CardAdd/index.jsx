@@ -35,7 +35,11 @@ const CardAdd = () => {
         </div>
         <NextButton state={form} />
       </div>
-      <ColorPicker visible={visible} setVisible={setVisible} />
+      <ColorPicker
+        visible={visible}
+        setVisible={setVisible}
+        updateForm={dispatch}
+      />
     </>
   );
 };

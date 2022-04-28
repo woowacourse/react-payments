@@ -1,7 +1,7 @@
 import "./index.scss";
 
 const Card = ({
-  state: { cardNumber, expiredDate, ownerName },
+  state: { cardNumber, expiredDate, ownerName, cardName, color },
   setVisible,
 }) => {
   return (
@@ -10,8 +10,8 @@ const Card = ({
         setVisible(true);
       }}
     >
-      <div className="card__container">
-        <p className="card__name">동키콩 카드</p>
+      <div className="card__container" style={{ backgroundColor: color }}>
+        <p className="card__name">{cardName}</p>
         <div className="rfid"></div>
         <div className="card__numbers">
           <div className="number">{cardNumber[0]}</div>

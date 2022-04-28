@@ -39,6 +39,12 @@ const reducer = (state, action) => {
           ...state.password.slice(action.payload.index + 1),
         ],
       };
+    case "pickColor":
+      return {
+        ...state,
+        color: action.payload.color,
+        cardName: action.payload.cardName,
+      };
     default:
       return state;
   }
@@ -51,88 +57,12 @@ const useCard = () => {
     ownerName: "",
     secureCode: "",
     password: ["", ""],
+    cardName: "록1바",
+    color: "#d2d2d2",
   };
   const [form, dispatch] = useReducer(reducer, initState);
-  //   const [form, setForm] = useState({
-  //     cardNumber: ["", "", "", ""],
-  //     expiredDate: ["", ""],
-  //     ownerName: "",
-  //     secureCode: "",
-  //     password: ["", ""],
-  //   });
 
-  //   const { cardNumber, expiredDate, password } = form;
-
-  //   const update = (name, payload, index) => {
-  //     if (Array.isArray(form[name])) {
-  //       payload = [
-  //         ...form[name].slice(0, index),
-  //         payload,
-  //         ...form[name].slice(index + 1),
-  //       ];
-  //     }
-  //     setForm({
-  //       ...form,
-  //       [name]: payload,
-  //     });
-  //   };
-
-  //   const updateCardNumber = (number, index) => {
-  //     update("cardnumber", number);
-  //     /*setForm({
-  //       ...form,
-  //       cardNumber: [
-  //         ...cardNumber.slice(0, index),
-  //         number,
-  //         ...cardNumber.slice(index + 1),
-  //       ],
-  //     });*/
-  //   };
-
-  //   const updateExpiredDate = (number, index) => {
-  //     setForm({
-  //       ...form,
-  //       expiredDate: [
-  //         ...expiredDate.slice(0, index),
-  //         number,
-  //         ...expiredDate.slice(index + 1),
-  //       ],
-  //     });
-  //   };
-
-  //   const updateOwnerName = (name) => {
-  //     setForm({
-  //       ...form,
-  //       ownerName: name,
-  //     });
-  //   };
-
-  //   const updateSecureCode = (number) => {
-  //     setForm({
-  //       ...form,
-  //       secureCode: number,
-  //     });
-  //   };
-
-  //   const updatePassword = (number, index) => {
-  //     setForm({
-  //       ...form,
-  //       password: [
-  //         ...password.slice(0, index),
-  //         number,
-  //         ...password.slice(index + 1),
-  //       ],
-  //     });
-  //   };
   return [form, dispatch];
-  //   return [
-  //     form,
-  //     updateCardNumber,
-  //     updateExpiredDate,
-  //     updateOwnerName,
-  //     updateSecureCode,
-  //     updatePassword,
-  //   ];
 };
 
 export default useCard;
