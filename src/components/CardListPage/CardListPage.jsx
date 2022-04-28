@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '../common/Card';
+import Card from '../common/Card/Card';
 import PageTitle from '../common/PageTitle/PageTitle';
 
 function CardListPage({ setPage }) {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Card from '../common/Card';
+import Card from '../common/Card/Card';
 import PageTitle from '../common/PageTitle/PageTitle';
 import NextPageButton from '../common/NextPageButton';
 

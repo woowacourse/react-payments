@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Card({ isEmpty, handleCardAdd, cardInfo }) {
   return (
@@ -43,3 +44,9 @@ function Card({ isEmpty, handleCardAdd, cardInfo }) {
 }
 
 export default Card;
+
+Card.propTypes = {
+  isEmpty: PropTypes.bool.isRequired,
+  handleCardAdd: PropTypes.func,
+  cardInfo: PropTypes.object,
+};

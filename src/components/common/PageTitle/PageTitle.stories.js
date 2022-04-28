@@ -7,8 +7,8 @@ export default {
 
 const Template = (args) => <PageTitle {...args} />;
 
-export const cardAdd = Template.bind({});
-cardAdd.args = { title: '카드추가' };
+export const CardAdd = Template.bind({});
+CardAdd.args = { title: '카드추가' };
 
-export const cardList = Template.bind({});
-cardList.args = { title: '보유카드' };
+export const CardList = Template.bind({});
+CardList.args = { title: '보유카드' };
