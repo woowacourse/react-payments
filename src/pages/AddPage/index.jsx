@@ -131,7 +131,7 @@ function AddPage() {
       <CardWrapper>
         <Card
           size="small"
-          company="poco"
+          company="우테코"
           cardNumbers={cardNumbers}
           owner={owner || "NAME"}
           dueMonth={dueDate.month || 'MM'}
