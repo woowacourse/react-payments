@@ -8,6 +8,7 @@ const InputContainer = styled.div`
 
 const InputWrapper = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   width: ${props => props.width || '100%'};
   margin-top: 0.375rem;
@@ -31,9 +32,15 @@ const Input = styled.input`
   min-width: 50px;
   width: 100%;
   text-align: center;
-  outline: 2px solid transparent;
   outline-offset: 2px;
   border: none;
+
+  &::placeholder {
+    color: #a0a0a0;
+  }
+  &:focus {
+    outline: 1px solid #a0a0a0;
+  }
 `;
 
 const DotContainer = styled.div`
