@@ -18,7 +18,7 @@ const validator = value => {
   }
 };
 
-function CardOwner({ ownerNameCallback }) {
+function CardOwner({ ownerNameCallback, correctOwnerNameCallback }) {
   const [ownerName, setOwnerName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -33,8 +33,9 @@ function CardOwner({ ownerNameCallback }) {
   };
 
   useEffect(() => {
-    ownerNameCallback(ownerName);
-  }, [ownerName, ownerNameCallback]);
+    ownerNameCallback(ownerName.trim());
+    correctOwnerNameCallback(ownerName.trim() !== '');
+  }, [ownerName, ownerNameCallback, correctOwnerNameCallback]);
 
   return (
     <InputContainer position="relative">
