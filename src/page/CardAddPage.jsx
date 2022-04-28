@@ -12,15 +12,15 @@ import { ReactComponent as PrevIcon } from '../assets/prev_icon.svg';
 import Tooltip from '../components/common/Tooltip';
 
 const cardNumberInputInfoList = [
-  { id: uuid(), type: 'text', className: 'mr-n15 tracking-wide', name: 'first' },
-  { id: uuid(), type: 'text', className: 'mr-n15 tracking-wide', name: 'second' },
-  { id: uuid(), type: 'password', className: 'mr-n15 tracking-wide', name: 'third' },
-  { id: uuid(), type: 'password', className: 'tracking-wide', name: 'fourth' },
+  { id: uuid(), type: 'text', className: 'mr-n15 tracking-wide', name: 'first', maxLength: 4 },
+  { id: uuid(), type: 'text', className: 'mr-n15 tracking-wide', name: 'second', maxLength: 4 },
+  { id: uuid(), type: 'password', className: 'mr-n15 tracking-wide', name: 'third', maxLength: 4 },
+  { id: uuid(), type: 'password', className: 'tracking-wide', name: 'fourth', maxLength: 4 },
 ];
 
 const expiryDateInputInfoList = [
-  { id: uuid(), type: 'text', placeholder: 'MM', className: 'mr-n15', name: 'month' },
-  { id: uuid(), type: 'text', placeholder: 'YY', name: 'year' },
+  { id: uuid(), type: 'text', placeholder: 'MM', className: 'mr-n15', name: 'month', maxLength: 2 },
+  { id: uuid(), type: 'text', placeholder: 'YY', name: 'year', maxLength: 2 },
 ];
 
 const cardOwnerNameInputInfoList = [
@@ -29,22 +29,24 @@ const cardOwnerNameInputInfoList = [
     type: 'text',
     placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
     className: 'text-left',
+    maxLength: 30,
   },
 ];
 
 const privacyCodeInputInfoList = [
-  { id: uuid(), type: 'password', className: 'w-25 tracking-wide' },
+  { id: uuid(), type: 'password', className: 'w-25 tracking-wide', maxLength: 3 },
 ];
 
 const cardPasswordInputInfoList = [
-  { id: uuid(), type: 'password', className: 'w-5', name: 'first' },
-  { id: uuid(), type: 'password', className: 'w-5', name: 'second' },
+  { id: uuid(), type: 'password', className: 'w-5', name: 'first', maxLength: 1 },
+  { id: uuid(), type: 'password', className: 'w-5', name: 'second', maxLength: 1 },
   {
     id: uuid(),
     type: 'password',
     className: 'w-5 input-disabled',
     isDisabled: true,
     name: 'third',
+    maxLength: 1,
   },
   {
     id: uuid(),
@@ -52,6 +54,7 @@ const cardPasswordInputInfoList = [
     className: 'w-5 input-disabled',
     isDisabled: true,
     name: 'fourth',
+    maxLength: 1,
   },
 ];
 

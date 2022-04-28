@@ -61,19 +61,22 @@ const FormInput = ({
     <div className="input-container">
       <label className="input-title">{inputTitle}</label>
       <div className={`input-box ${className}`}>
-        {inputInfoList.map(({ id, name, type, className = '', placeholder = '', isDisabled }) => (
-          <input
-            key={id}
-            name={name}
-            type={type}
-            className={`input-basic ${className}`}
-            style={{ color: cardInfo.theme }}
-            placeholder={placeholder}
-            value={typeof cardInfo[item] === 'object' ? cardInfo[item][name] : cardInfo[item]}
-            onChange={(e) => onChange(e, item)}
-            disabled={isDisabled}
-          />
-        ))}
+        {inputInfoList.map(
+          ({ id, name, type, className = '', placeholder = '', isDisabled, maxLength }) => (
+            <input
+              key={id}
+              name={name}
+              type={type}
+              className={`input-basic ${className}`}
+              style={{ color: cardInfo.theme }}
+              placeholder={placeholder}
+              value={typeof cardInfo[item] === 'object' ? cardInfo[item][name] : cardInfo[item]}
+              onChange={(e) => onChange(e, item)}
+              disabled={isDisabled}
+              maxLength={maxLength}
+            />
+          ),
+        )}
         {children}
       </div>
     </div>
