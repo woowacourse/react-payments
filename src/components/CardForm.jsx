@@ -261,13 +261,14 @@ const CardForm = () => {
       onSubmit={(values, setSubmitting) => {
         setSubmitting(true);
         addCard(values);
+        alert('제출 성공');
         setSubmitting(false);
       }}
       onSubmitError={(errors, invalidInputRefs) => {
-        const firstInvalidInputRef = invalidInputRefs[0].ref;
-        const { errorMessage } = errors[firstInvalidInputRef.current.name];
+        const firstInvalidInput = invalidInputRefs[0].element;
+        const { errorMessage } = errors[firstInvalidInput.name];
 
-        firstInvalidInputRef.current.focus();
+        firstInvalidInput.focus();
         alert(errorMessage);
       }}
     >
@@ -280,14 +281,14 @@ const CardForm = () => {
               <div className="input-box">
                 <input
                   className={`input-basic ${
-                    errors.firstCardNumber?.showError && 'error'
+                    errors.firstCardNumber?.showError ? 'error' : ''
                   }`}
                   {...registerInputProps('firstCardNumber')}
                 />
                 <p>-</p>
                 <input
                   className={`input-basic ${
-                    errors.secondCardNumber?.showError && 'error'
+                    errors.secondCardNumber?.showError ? 'error' : ''
                   }`}
                   {...registerInputProps('secondCardNumber')}
                 />
@@ -295,7 +296,7 @@ const CardForm = () => {
                 <input
                   type="password"
                   className={`input-basic ${
-                    errors.thirdCardNumber?.showError && 'error'
+                    errors.thirdCardNumber?.showError ? 'error' : ''
                   }`}
                   {...registerInputProps('thirdCardNumber')}
                 />
@@ -303,7 +304,7 @@ const CardForm = () => {
                 <input
                   type="password"
                   className={`input-basic ${
-                    errors.fourthCardNumber?.showError && 'error'
+                    errors.fourthCardNumber?.showError ? 'error' : ''
                   }`}
                   {...registerInputProps('fourthCardNumber')}
                 />
@@ -314,7 +315,7 @@ const CardForm = () => {
               <div className="input-box w-50">
                 <input
                   className={`input-basic ${
-                    errors.expiredMonth?.showError && 'error'
+                    errors.expiredMonth?.showError ? 'error' : ''
                   }`}
                   placeholder="MM"
                   {...registerInputProps('expiredMonth')}
@@ -322,7 +323,7 @@ const CardForm = () => {
                 <p>/</p>
                 <input
                   className={`input-basic ${
-                    errors.expiredYear?.showError && 'error'
+                    errors.expiredYear?.showError ? 'error' : ''
                   }`}
                   placeholder="YY"
                   {...registerInputProps('expiredYear')}
@@ -338,7 +339,7 @@ const CardForm = () => {
               <div className="input-box">
                 <input
                   className={`input-basic ${
-                    errors.owner?.showError && 'error'
+                    errors.owner?.showError ? 'error' : ''
                   }`}
                   placeholder="카드에 표시된 이름과 동일하게 입력하세요."
                   {...registerInputProps('owner')}
@@ -352,7 +353,7 @@ const CardForm = () => {
                   <input
                     type="password"
                     className={`input-basic ${
-                      errors.cvc?.showError && 'error'
+                      errors.cvc?.showError ? 'error' : ''
                     }`}
                     {...registerInputProps('cvc')}
                   />
@@ -368,21 +369,21 @@ const CardForm = () => {
                 <input
                   type="password"
                   className={`input-basic w-15 password ${
-                    errors.firstPasswordDigit?.showError && 'error'
+                    errors.firstPasswordDigit?.showError ? 'error' : ''
                   }`}
                   {...registerInputProps('firstPasswordDigit')}
                 />
                 <input
                   type="password"
                   className={`input-basic w-15 password ${
-                    errors.secondPasswordDigit?.showError && 'error'
+                    errors.secondPasswordDigit?.showError ? 'error' : ''
                   }`}
                   {...registerInputProps('secondPasswordDigit')}
                 />
                 <input
                   type="password"
                   className={`input-basic w-15 disabled ${
-                    errors.thirdPasswordDigit?.showError && 'error'
+                    errors.thirdPasswordDigit?.showError ? 'error' : ''
                   }`}
                   disabled
                   {...registerInputProps('thirdPasswordDigit')}
@@ -390,7 +391,7 @@ const CardForm = () => {
                 <input
                   type="password"
                   className={`input-basic w-15 disabled ${
-                    errors.fourthPasswordDigit?.showError && 'error'
+                    errors.fourthPasswordDigit?.showError ? 'error' : ''
                   }`}
                   disabled
                   {...registerInputProps('fourthPasswordDigit')}

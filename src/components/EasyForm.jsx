@@ -1,18 +1,39 @@
 import React, { useRef, useState } from 'react';
-import { isBackspace, isNumeric } from '../utils/commons';
+import { generateIndex, isBackspace, isNumeric } from '../utils/commons';
 
 const InvalidNumberCharList = ['.', 'e', ' '];
 
 const getNextRef = (refs, name) => {
-  const nextRefId = refs[name].id + 1;
+  const currentInput = refs.current[name];
+  const nextRefId = currentInput.id + 1;
 
-  return Object.values(refs).find((ref) => ref.id === nextRefId)?.ref || null;
+  return (
+    Object.values(refs.current).find((input) => input.id === nextRefId)
+      ?.element || null
+  );
 };
 
 const getPrevRef = (refs, name) => {
-  const nextRefId = refs[name].id - 1;
+  const currentInput = refs.current[name];
+  const prevRefId = currentInput.id - 1;
 
-  return Object.values(refs).find((ref) => ref.id === nextRefId)?.ref || null;
+  return (
+    Object.values(refs.current).find((input) => input.id === prevRefId)
+      ?.element || null
+  );
+};
+
+const useInputRefs = (formSchema) => {
+  const ref = useRef({});
+
+  Object.entries(formSchema).forEach(([fieldName], index) => {
+    ref.current[fieldName] = {
+      id: index,
+      ref: null,
+    };
+  });
+
+  return ref;
 };
 
 const useFormSchema = (formSchema) => {
@@ -20,7 +41,6 @@ const useFormSchema = (formSchema) => {
   const validationSchema = {};
   const initialErrors = {};
   const allowedKeyInput = {};
-  const inputRefs = {};
 
   const bindInitialValues = (fieldName, { initialValue = '' }) => {
     initialValues[fieldName] = initialValue;
@@ -99,20 +119,11 @@ const useFormSchema = (formSchema) => {
     };
   };
 
-  const useInputRefs = (fieldName, index) => {
-    inputRefs[fieldName] = {
-      id: index,
-      ref: useRef(),
-    };
-  };
-
-  Object.entries(formSchema).forEach(([fieldName, schema], index) => {
+  Object.entries(formSchema).forEach(([fieldName, schema]) => {
     bindInitialValues(fieldName, schema);
     bindValidationSchema(fieldName, schema);
     bindAllowedKeyInput(fieldName, schema);
     bindErrors(fieldName, schema);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useInputRefs(fieldName, index);
   });
 
   const [values, setValues] = useState(initialValues);
@@ -127,7 +138,6 @@ const useFormSchema = (formSchema) => {
     isInvalidInput,
     errors,
     setErrors,
-    inputRefs,
   };
 };
 
@@ -139,9 +149,10 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
     isInvalidInput,
     errors,
     setErrors,
-    inputRefs,
   } = useFormSchema(formSchema);
   const [submitting, setSubmitting] = useState(false);
+  const inputRefs = useInputRefs(formSchema);
+  const indexGenerator = generateIndex(0);
 
   const handleChange = (event) => {
     const {
@@ -180,7 +191,7 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
     if (value.length >= formSchema[name].maxLength) {
       const nextRef = getNextRef(inputRefs, name);
 
-      if (nextRef) nextRef.current.focus();
+      if (nextRef) nextRef.focus();
     }
   };
 
@@ -192,7 +203,7 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
     if (isBackspace(event) && values[name] === '') {
       const prevRef = getPrevRef(inputRefs, name);
 
-      if (prevRef) prevRef.current.focus();
+      if (prevRef) prevRef.focus();
     }
   };
 
@@ -205,7 +216,7 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
 
     if (invalidFieldNames.length > 0) {
       const invalidInputRefs = invalidFieldNames
-        .map((name) => inputRefs[name])
+        .map((name) => inputRefs.current[name])
         .sort((a, b) => a.id - b.id);
 
       invalidFieldNames.forEach((name) => {
@@ -226,13 +237,20 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
     onSubmit(values, setSubmitting);
   };
 
-  const registerInputProps = (name) => ({
-    name,
-    ref: inputRefs[name].ref,
-    value: values[name],
-    onChange: handleChange,
-    onKeyDown: handleKeyDown,
-  });
+  const registerInputProps = (name) => {
+    return {
+      name,
+      ref: (element) => {
+        inputRefs.current[name] = {
+          id: indexGenerator.next().value,
+          element,
+        };
+      },
+      value: values[name],
+      onChange: handleChange,
+      onKeyDown: handleKeyDown,
+    };
+  };
 
   return (
     <>
