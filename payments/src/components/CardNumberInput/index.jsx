@@ -10,9 +10,9 @@ const CardNumberInput = ({ state, updateForm }) => {
     isNumber: true,
   });
 
-  function updateNumber(e, index) {
+  const updateNumber = (e, index) => {
     updateForm(e.target.value, index);
-  }
+  };
 
   return (
     <div className="card-number__input__container">
