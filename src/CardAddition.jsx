@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import Card from './components/Card';
 import PageTitle from './components/PageTitle';
 import styled from 'styled-components';
@@ -18,7 +18,15 @@ const CardAdditionContainer = styled.div`
 `;
 
 function CardAddition() {
-  const { cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword } = useContext(CardContext);
+  const {
+    cardNumber,
+    cardExpiration,
+    cardOwner,
+    cardCvc,
+    cardPassword,
+    cardCompanyIndex,
+    dispatch,
+  } = useContext(CardContext);
 
   const validateAllInputs = () => {
     try {
@@ -34,6 +42,10 @@ function CardAddition() {
     }
   };
 
+  const onClickCard = useCallback(() => {
+    dispatch({ type: 'SET_MODAL_FLAG', flag: true });
+  }, []);
+
   const submitCard = () => {
     console.log(cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword);
   };
@@ -41,7 +53,13 @@ function CardAddition() {
   return (
     <CardAdditionContainer>
       <PageTitle hasPrevButton={true} title="카드 추가" />
-      <Card cardNumber={cardNumber} cardExpiration={cardExpiration} cardOwner={cardOwner} />
+      <Card
+        cardCompanyIndex={cardCompanyIndex}
+        cardNumber={cardNumber}
+        cardExpiration={cardExpiration}
+        cardOwner={cardOwner}
+        onClick={onClickCard}
+      />
       <CardNumber />
       <CardExpiration />
       <CardOwner />

@@ -106,6 +106,13 @@ const reducer = (state, action) => {
       };
     }
 
+    case 'SET_COMPANY_INDEX': {
+      return {
+        ...state,
+        cardCompanyIndex: action.index,
+      };
+    }
+
     default:
       return state;
   }
@@ -124,6 +131,8 @@ function App() {
       cardCvcErrorMessage,
       cardPassword,
       cardPasswordErrorMessage,
+      cardCompanyIndex,
+      modalFlag,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -138,6 +147,8 @@ function App() {
     cardCvcErrorMessage,
     cardPassword,
     cardPasswordErrorMessage,
+    cardCompanyIndex,
+    modalFlag,
     dispatch,
   };
 

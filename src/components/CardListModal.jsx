@@ -12,12 +12,18 @@ export default function CardListModal() {
     dispatch({ type: 'SET_MODAL_FLAG', flag: false });
   }, []);
 
+  const onClickCardCompany = (index) =>
+    useCallback(() => {
+      dispatch({ type: 'SET_COMPANY_INDEX', index });
+      dispatch({ type: 'SET_MODAL_FLAG', flag: false });
+    }, []);
+
   return (
     <>
-      <Dimmer show={modalFlag} />
-      <ToastModal onClick={onClickDimmer} show={modalFlag}>
-        {CARD_COMPANIES.map(({ COLOR, NAME }) => (
-          <CardCompany key={NAME} color={COLOR}>
+      <Dimmer show={modalFlag} onClick={onClickDimmer} />
+      <ToastModal show={modalFlag}>
+        {CARD_COMPANIES.map(({ COLOR, NAME }, index) => (
+          <CardCompany key={NAME} color={COLOR} onClick={onClickCardCompany(index)}>
             {NAME}
           </CardCompany>
         ))}

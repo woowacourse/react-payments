@@ -7,8 +7,9 @@ const CardCompanyStyled = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80px;
+  margin: 0 15px;
   height: 105px;
+  cursor: pointer;
 `;
 
 const CardCompanyName = styled.p`
@@ -17,9 +18,9 @@ const CardCompanyName = styled.p`
   letter-spacing: -0.085rem;
 `;
 
-export default function CardCompany({ color, children }) {
+export default function CardCompany({ color, children, onClick }) {
   return (
-    <CardCompanyStyled>
+    <CardCompanyStyled onClick={onClick}>
       <Circle size="37px" color={color} />
       <CardCompanyName>{children}</CardCompanyName>
     </CardCompanyStyled>
