@@ -33,7 +33,9 @@ const CardAdd = () => {
         </form>
       </div>
       <div className="next--button">
-        <button onClick={submit}>다음</button>
+        <button type="button" onClick={submit}>
+          다음
+        </button>
       </div>
     </div>
   );
