@@ -1,3 +1,4 @@
+import { CARD_VALID_PERIOD } from "../contants";
 import { CardInfo, CardNumbers, ExpiredDate, Password } from "../types";
 
 type Validator = (value) => boolean;
@@ -21,9 +22,10 @@ const validateDate = (expiredDate: ExpiredDate) => {
   const month = date.getMonth() + 1;
 
   if (Number(expiredDate.year) < year) return false;
-  if (Number(expiredDate.year) > year + 5) return false;
+  if (Number(expiredDate.year) > year + CARD_VALID_PERIOD) return false;
   if (Number(expiredDate.year) === year && Number(expiredDate.month) < month) return false;
-  if (Number(expiredDate.year) === year + 5 && Number(expiredDate.month) > month) return false;
+  if (Number(expiredDate.year) === year + CARD_VALID_PERIOD && Number(expiredDate.month) > month)
+    return false;
 
   return true;
 };
