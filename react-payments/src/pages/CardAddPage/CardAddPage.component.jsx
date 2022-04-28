@@ -18,8 +18,18 @@ const CardAddPage = () => {
   const [cardNumber, onChange] = useCardNumber();
   const [expireDate, onChangeExpireDate] = useExpireDate();
   const [userName, onChangeUserName] = useUserName();
-  const [securityCode, onChangeSecurityCode] = useSecurityCode();
-  const [cardPassword, onChangeCardPassword] = useCardPassword();
+  const [
+    securityCode,
+    onClickSecurityVirtualKeyboard,
+    onClickSecurityBackspaceButton,
+    onChangeSecurityCode,
+  ] = useSecurityCode();
+  const [
+    cardPassword,
+    onClickCardPasswordBackspaceButton,
+    onClickCardPasswordVirtualKeyboard,
+    onChangeCardPassword,
+  ] = useCardPassword();
   const [cardTypeInfo, onClickCardType] = useCardTypeInfo();
   const [ready, checkReady] = useReady({
     cardNumber,
@@ -99,19 +109,27 @@ const CardAddPage = () => {
         inputClass="security-code-input"
         label="보안 코드(CVC/CVV)"
         formType="security-code"
-        onChange={onChangeSecurityCode}
+        onChangeSecurityCode={onChangeSecurityCode}
+        onClickVirtualKeyboard={onClickSecurityVirtualKeyboard}
+        onClickBackspaceButton={onClickSecurityBackspaceButton}
       />
       <Form
         required={true}
         inputClass="card-password-input"
         label="카드 비밀번호"
         formType="card-password"
-        onChange={onChangeCardPassword}
         value={cardPassword}
+        onChangeCardPassword={onChangeCardPassword}
+        onClickVirtualKeyboard={onClickCardPasswordVirtualKeyboard}
+        onClickBackspaceButton={onClickCardPasswordBackspaceButton}
       />
       {ready && <LinkButton linkLabel="다음" linkClass="next-link" />}
       {canShowModal && (
-        <Modal toggleModal={toggleModal} onClickCardType={onClickCardType} />
+        <Modal
+          toggleModal={toggleModal}
+          onClickCardType={onClickCardType}
+          currentCardType={cardTypeInfo.cardType}
+        />
       )}
     </div>
   );

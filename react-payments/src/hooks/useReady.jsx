@@ -39,7 +39,6 @@ const useReady = ({
   const [ready, setReady] = useState(false);
 
   const checkReady = () => {
-    console.log(ready);
     if (
       isReady({
         cardNumber,

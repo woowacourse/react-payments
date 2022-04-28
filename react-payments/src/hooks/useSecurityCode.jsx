@@ -1,18 +1,34 @@
 import { useState } from "react";
 import { MAX_LENGTH } from "../constants";
-import { isOverMaxLength } from "../util";
 
 const useSecurityCode = () => {
   const [securityCode, setSecurityCode] = useState("");
 
   const onChangeSecurityCode = ({ target }) => {
-    if (isOverMaxLength(target, MAX_LENGTH.SECURITY_CODE)) {
-      return;
-    }
     setSecurityCode(target.value);
   };
 
-  return [securityCode, onChangeSecurityCode];
+  const onClickSecurityVirtualKeyboard = (value) => {
+    if (securityCode.length >= MAX_LENGTH.SECURITY_CODE) {
+      return;
+    }
+    setSecurityCode((prev) => prev + value);
+  };
+
+  const onClickSecurityBackspaceButton = () => {
+    if (securityCode.length === 0) {
+      return;
+    }
+
+    setSecurityCode((prev) => prev.slice(0, -1));
+  };
+
+  return [
+    securityCode,
+    onClickSecurityVirtualKeyboard,
+    onClickSecurityBackspaceButton,
+    onChangeSecurityCode,
+  ];
 };
 
 export default useSecurityCode;

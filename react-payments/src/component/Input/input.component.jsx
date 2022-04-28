@@ -7,6 +7,8 @@ const InputContainer = ({
   inputInfo,
   connector,
   onChange,
+  onFocusIn,
+  onKeyDown,
 }) => {
   return (
     <div className={`input-box ${inputClass}`}>
@@ -22,6 +24,8 @@ const InputContainer = ({
             placeholder={placeholder}
             onChange={onChange}
             value={value}
+            onFocus={onFocusIn}
+            onKeyDown={onKeyDown}
           />
         </Fragment>
       ))}

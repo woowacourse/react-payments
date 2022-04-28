@@ -18,12 +18,14 @@
   display: flex;
   gap: 10px;
   align-items: center;
+  position: relative;
 }
 
 .security-code-container {
   display: flex;
   gap: 20px;
   align-items: center;
+  position: relative;
 }
 
 .user-name-container {

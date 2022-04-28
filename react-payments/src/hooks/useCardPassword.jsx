@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { MAX_LENGTH } from "../constants";
-import { checkNextFocus, checkPrevFocus, isOverMaxLength } from "../util";
 
 const useCardPassword = () => {
   const [cardPassword, setCardPassword] = useState({
@@ -9,32 +8,47 @@ const useCardPassword = () => {
   });
 
   const onChangeCardPassword = ({ target }) => {
-    if (isOverMaxLength(target, MAX_LENGTH.CARD_PASSWORD)) {
-      return;
-    }
-
-    const nextElement = target.parentNode.nextSibling?.children[0];
-    const prevElement = target.parentNode.previousSibling?.children[0];
-
-    checkNextFocus({
-      target,
-      value: cardPassword,
-      maxLength: MAX_LENGTH.CARD_PASSWORD,
-      nextElement,
-    });
-    checkPrevFocus({
-      target,
-      value: cardPassword,
-      prevElement,
-    });
-
     setCardPassword({
-      ...cardPassword,
       [target.name]: target.value,
     });
   };
 
-  return [cardPassword, onChangeCardPassword];
+  const onClickCardPasswordVirtualKeyboard = (value) => {
+    if (cardPassword.length >= MAX_LENGTH.CARD_PASSWORD) {
+      return;
+    }
+
+    if (cardPassword.first === "") {
+      setCardPassword((prev) => {
+        return { ...prev, first: prev.first + value };
+      });
+      return;
+    }
+
+    setCardPassword((prev) => {
+      return { ...prev, second: prev.second + value };
+    });
+  };
+
+  const onClickCardPasswordBackspaceButton = () => {
+    if (cardPassword.second === "") {
+      setCardPassword((prev) => {
+        return { ...prev, first: prev.first.slice(0, -1) };
+      });
+      return;
+    }
+
+    setCardPassword((prev) => {
+      return { ...prev, second: prev.second.slice(0, -1) };
+    });
+  };
+
+  return [
+    cardPassword,
+    onClickCardPasswordBackspaceButton,
+    onClickCardPasswordVirtualKeyboard,
+    onChangeCardPassword,
+  ];
 };
 
 export default useCardPassword;
