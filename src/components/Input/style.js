@@ -6,7 +6,7 @@ const Input = styled.input`
   text-align: center;
   width: 100%;
   padding: 5px;
-  color: ${(props) => props.color || "#04C09E"};
+  color: ${(props) => props.color || props.theme.colors.MINT};
   font-size: 18px;
   font-weight: 500px;
 

@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import {CardWrapper, CardTop, CardMiddle, CardBottom, CardText, CardBottomNumber, CardBottomInfo, CardOwner} from "./style";
 
 function Card({size, company, cardNumbers, owner, dueMonth, dueYear}) {
-  // const {month, year} = dueDate;
 
   return (
     <CardWrapper size={size}>

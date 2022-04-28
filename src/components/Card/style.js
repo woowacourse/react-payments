@@ -11,7 +11,7 @@ const FlexAlignCenter = css`
 
 const CardWrapper = styled.div`
   ${FlexAlignCenter}
-  background-color: #D2D2D2;
+  background-color: ${({ theme }) => theme.colors.GRAY};
   flex-direction: column;
   justify-content: space-between;
   border-radius: 5px;

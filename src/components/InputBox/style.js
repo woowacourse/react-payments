@@ -7,9 +7,13 @@ const InputWrapper = styled.div`
   border-radius: 7px;
 
   background: ${(props) =>
-    props.background || (props.error && "#fcdfef") || "#ecebf1"};
+    props.background ||
+    (props.error && props.theme.colors.LIGHT_PINK) ||
+    props.theme.colors.LIGHT_GRAY};
   border: ${(props) =>
-    props.border || (props.error && "solid 2px #E36DB0") || "none"};
+    props.border ||
+    (props.error && `solid 2px ${props.theme.colors.PINK}`) ||
+    "none"};
   width: ${(props) => props.size || 100}%;
 `;
 

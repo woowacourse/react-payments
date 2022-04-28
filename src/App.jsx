@@ -1,11 +1,12 @@
-import "./App.css";
 import AddPage from "./pages/AddPage";
+import { ThemeProvider } from "styled-components";
+import theme from "./theme";
 
 function App() {
   return (
-  <div className="App">
+  <ThemeProvider theme={theme}>
     <AddPage />
-  </div>
+  </ThemeProvider>
   );
 }
 

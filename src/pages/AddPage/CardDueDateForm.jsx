@@ -1,18 +1,18 @@
-import InputBox from '../../components/InputBox'
-import { Input } from '../../components/Input/style'
-import { FormWrapper } from './style'
-import { useState } from 'react'
+import InputBox from "../../components/InputBox";
+import { Input } from "../../components/Input/style";
+import { FormWrapper } from "./style";
+import { useState } from "react";
 
-function CardDueDateForm({dueDate, handleDueDate, dueYearInputRef}) {
-  const [error, setError] = useState({month: false, year: false})
-  
-  const handleMonthError = (e) => {
-    setError({...error, month: e.target.value>12 || e.target.value<1});
-  }
+function CardDueDateForm({ dueDate, handleDueDate, dueYearInputRef }) {
+  const [error, setError] = useState({ month: false, year: false });
 
-  const handleYearError = (e) => {
-    setError({...error, year: e.target.value<22})
-  }
+  const handleMonthError = ({ target: { value } }) => {
+    setError({ ...error, month: value > 12 || value < 1 });
+  };
+
+  const handleYearError = ({ target: { value } }) => {
+    setError({ ...error, year: value < 22 });
+  };
 
   return (
     <FormWrapper>
@@ -21,7 +21,10 @@ function CardDueDateForm({dueDate, handleDueDate, dueYearInputRef}) {
         <Input
           type="number"
           value={dueDate.month}
-          onChange={(e) => {handleDueDate("month", e); handleMonthError(e)}}
+          onChange={(e) => {
+            handleDueDate("month", e);
+            handleMonthError(e);
+          }}
           placeholder="MM"
         />
         <span>/</span>
@@ -29,12 +32,15 @@ function CardDueDateForm({dueDate, handleDueDate, dueYearInputRef}) {
           type="number"
           ref={dueYearInputRef}
           value={dueDate.year}
-          onChange={(e) => {handleDueDate("year", e); handleYearError(e)}}
+          onChange={(e) => {
+            handleDueDate("year", e);
+            handleYearError(e);
+          }}
           placeholder="YY"
         />
       </InputBox>
     </FormWrapper>
-  )
+  );
 }
 
-export default CardDueDateForm
+export default CardDueDateForm;

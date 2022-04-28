@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const PageWrapper = styled.div`
-  height: 701px;
+  height: 700px;
   width: 375px;
   background-color: white;
   padding: 25px;
@@ -46,7 +46,7 @@ const Dot = styled.div`
   align-items: center;
   justify-content: center;
   width: 10%;
-  color: #04c09e;
+  color: ${({ theme }) => theme.colors.MINT};
   font-size: 18px;
   font-weight: 500;
 `;
@@ -69,7 +69,7 @@ const FormWrapper = styled.div`
     font-size: 12px;
     margin-bottom: 10px;
     display: inline-block;
-    color: #525252;
+    color: ${({ theme }) => theme.colors.DARK_GRAY};
   }
 `;
 

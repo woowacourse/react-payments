@@ -29,7 +29,7 @@ function AddPage() {
         dueDate.month.length >= 2 &&
         dueDate.year.length >= 2 &&
         owner &&
-        cvc.length >=3 &&
+        cvc.length >= 3 &&
         password.firstPassword &&
         password.secondPassword
     );
