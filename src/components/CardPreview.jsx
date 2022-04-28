@@ -25,10 +25,14 @@ const CardPreview = ({ company, number, ownerName, expiryDate, theme, handleModa
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">{first}</span>
-            <span className="card-text">{second}</span>
-            <span className="card-text">{'•'.repeat(third.length)}</span>
-            <span className="card-text">{'•'.repeat(fourth.length)}</span>
+            <span className="card-text card-text__default">{first}</span>
+            <span className="card-text card-text__default">{second}</span>
+            <span className="card-text card-text__default card-text__privacy">
+              {'•'.repeat(third.length)}
+            </span>
+            <span className="card-text card-text__default card-text__privacy">
+              {'•'.repeat(fourth.length)}
+            </span>
           </div>
           <div className="card-bottom__info">
             <span className="card-text">{ownerName || 'NAME'}</span>

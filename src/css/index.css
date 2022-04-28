@@ -9,8 +9,14 @@ body {
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
-  justify-content: center;
-  background-color: white;
+  background-color: #dddddd;
+  margin-top: 30px;
+
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  text-align: center;
 }
 
 input {

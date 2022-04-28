@@ -51,9 +51,9 @@ const defaultProps = {
 const FormInput = ({ className, item, inputTitle, inputInfoList, cardInfo, onChange }) => {
   return (
     <div className="input-container">
-      <label>{inputTitle}</label>
+      <label className="input-title">{inputTitle}</label>
       <div className={`input-box ${className}`}>
-        {inputInfoList.map(({ id, name, type, className = '', placeholder = '' }) => (
+        {inputInfoList.map(({ id, name, type, className = '', placeholder = '', isDisabled }) => (
           <input
             key={id}
             name={name}
@@ -63,6 +63,7 @@ const FormInput = ({ className, item, inputTitle, inputInfoList, cardInfo, onCha
             placeholder={placeholder}
             value={typeof cardInfo[item] === 'object' ? cardInfo[item][name] : cardInfo[item]}
             onChange={(e) => onChange(e, item)}
+            disabled={isDisabled}
           />
         ))}
       </div>

@@ -65,3 +65,15 @@
 .w-15 {
   width: 15%;
 }
+
+.w-5 {
+  width: 5%;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.tracking-wide {
+  letter-spacing: 2px;
+}

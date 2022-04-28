@@ -7,10 +7,10 @@ import Modal from '../components/common/Modal';
 import CardCompany from '../components/CardCompany';
 
 const cardNumberInputInfoList = [
-  { id: uuid(), type: 'text', className: 'mr-n15', name: 'first' },
-  { id: uuid(), type: 'text', className: 'mr-n15', name: 'second' },
-  { id: uuid(), type: 'password', className: 'mr-n15', name: 'third' },
-  { id: uuid(), type: 'password', name: 'fourth' },
+  { id: uuid(), type: 'text', className: 'mr-n15 tracking-wide', name: 'first' },
+  { id: uuid(), type: 'text', className: 'mr-n15 tracking-wide', name: 'second' },
+  { id: uuid(), type: 'password', className: 'mr-n15 tracking-wide', name: 'third' },
+  { id: uuid(), type: 'password', className: 'tracking-wide', name: 'fourth' },
 ];
 
 const expiryDateInputInfoList = [
@@ -19,16 +19,35 @@ const expiryDateInputInfoList = [
 ];
 
 const cardOwnerNameInputInfoList = [
-  { id: uuid(), type: 'text', placeholder: '카드에 표시된 이름과 동일하게 입력하세요.' },
+  {
+    id: uuid(),
+    type: 'text',
+    placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
+    className: 'text-left',
+  },
 ];
 
-const privacyCodeInputInfoList = [{ id: uuid(), type: 'password', className: 'w-25' }];
+const privacyCodeInputInfoList = [
+  { id: uuid(), type: 'password', className: 'w-25 tracking-wide' },
+];
 
 const cardPasswordInputInfoList = [
-  { id: uuid(), type: 'password', className: 'w-15', name: 'first' },
-  { id: uuid(), type: 'password', className: 'w-15', name: 'second' },
-  { id: uuid(), type: 'password', className: 'w-15' },
-  { id: uuid(), type: 'password', className: 'w-15' },
+  { id: uuid(), type: 'password', className: 'w-5', name: 'first' },
+  { id: uuid(), type: 'password', className: 'w-5', name: 'second' },
+  {
+    id: uuid(),
+    type: 'password',
+    className: 'w-5 input-disabled',
+    isDisabled: true,
+    name: 'third',
+  },
+  {
+    id: uuid(),
+    type: 'password',
+    className: 'w-5 input-disabled',
+    isDisabled: true,
+    name: 'fourth',
+  },
 ];
 
 const cardCompanyList = [
@@ -59,6 +78,8 @@ const initialCardInfo = {
   password: {
     first: '',
     second: '',
+    third: '*',
+    fourth: '*',
   },
   theme: '',
 };
