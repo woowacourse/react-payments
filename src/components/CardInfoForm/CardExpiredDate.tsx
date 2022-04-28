@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 
+import { ExpiredDate } from "../../types";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
-import UserGuide from "../common/UserGuide";
 
-export default function ExpiredDate({ expiredDate, onChange, isValid }) {
+interface CardExpiredDateProps {
+  expiredDate: ExpiredDate;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isValid: boolean;
+}
+export default function CardExpiredDate({ expiredDate, onChange, isValid }: CardExpiredDateProps) {
   const [hasValue, setHasValue] = useState(false);
 
   useEffect(() => {

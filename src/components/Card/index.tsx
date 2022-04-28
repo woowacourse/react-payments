@@ -1,6 +1,8 @@
 import React from "react";
 
-export default function Card({ cardInfo }) {
+import { CardInfo } from "../../types";
+
+export default function Card({ cardInfo }: { cardInfo: CardInfo }) {
   const { cardNumbers, expiredDate, userName } = cardInfo;
 
   return (

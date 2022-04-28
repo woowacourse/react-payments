@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function UserGuide({ children }) {
+export default function UserGuide({ children }: { children: React.ReactNode }) {
   const [isContentShown, setIsContentShown] = useState(false);
 
   return (

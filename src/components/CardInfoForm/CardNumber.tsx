@@ -1,9 +1,15 @@
 import React from "react";
 
+import { CardNumbers } from "../../types";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
-export default function CardNumber({ cardNumbers, onChange, isValid }) {
+interface CardNumberProps {
+  cardNumbers: CardNumbers;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isValid: boolean;
+}
+export default function CardNumber({ cardNumbers, onChange, isValid }: CardNumberProps) {
   return (
     <InputContainer inputTitle="카드번호" isValid={isValid}>
       <div className="input-box">

@@ -1,9 +1,16 @@
 import React from "react";
 
+import { Password } from "../../types";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
-export default function CardPassword({ password, onChange, isValid }) {
+interface CardPasswordProps {
+  password: Password;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isValid: boolean;
+}
+
+export default function CardPassword({ password, onChange, isValid }: CardPasswordProps) {
   return (
     <InputContainer inputTitle="카드 비밀번호" isValid={isValid}>
       <Input

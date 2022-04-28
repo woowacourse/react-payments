@@ -5,7 +5,13 @@ import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 import UserGuide from "../common/UserGuide";
 
-export default function SecurityCode({ securityCode, onChange, isValid }) {
+interface CardSecurityProps {
+  securityCode: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isValid: boolean;
+}
+
+export default function CardSecurityCode({ securityCode, onChange, isValid }: CardSecurityProps) {
   return (
     <InputContainer inputTitle="보안 코드(CVC/CVV)" isValid={isValid}>
       <div className="input-box w-25">

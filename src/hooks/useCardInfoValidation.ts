@@ -3,8 +3,16 @@ import { useEffect, useState } from "react";
 import { Validators } from "../lib/validation";
 import { CardInfo } from "../types";
 
+export type CardInfoValidation = {
+  isCardNumbersValid: boolean;
+  isExpiredDateValid: boolean;
+  isUserNameValid: boolean;
+  isSecurityCodeValid: boolean;
+  isPasswordValid: boolean;
+};
+
 export const useCardInfoValidation = (cardInfo: CardInfo, validators: Validators) => {
-  const [cardInfoValidation, setCardInfoValidation] = useState({
+  const [cardInfoValidation, setCardInfoValidation] = useState<CardInfoValidation>({
     isCardNumbersValid: false,
     isExpiredDateValid: false,
     isUserNameValid: false,

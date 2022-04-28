@@ -4,7 +4,18 @@ import { MAX_USER_NAME_LENGTH } from "../../contants";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
-export default function CardUserName({ cardUserName, onChange, onBlur, isValid }) {
+interface CardUserNameProps {
+  cardUserName: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
+  isValid: boolean;
+}
+export default function CardUserName({
+  cardUserName,
+  onChange,
+  onBlur,
+  isValid,
+}: CardUserNameProps) {
   return (
     <InputContainer inputTitle="카드 소유자 이름(선택)" isValid={isValid}>
       <Input
