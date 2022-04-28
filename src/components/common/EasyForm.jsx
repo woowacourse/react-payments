@@ -1,40 +1,8 @@
-import React, { useRef, useState } from 'react';
-import { generateIndex, isBackspace, isNumeric } from '../utils/commons';
+import React, { useState } from 'react';
+import { isBackspace, isNumeric } from '../../utils/commons';
+import useObjectRef from '../../hooks/useObjectRef';
 
 const InvalidNumberCharList = ['.', 'e', ' '];
-
-const getNextRef = (refs, name) => {
-  const currentInput = refs.current[name];
-  const nextRefId = currentInput.id + 1;
-
-  return (
-    Object.values(refs.current).find((input) => input.id === nextRefId)
-      ?.element || null
-  );
-};
-
-const getPrevRef = (refs, name) => {
-  const currentInput = refs.current[name];
-  const prevRefId = currentInput.id - 1;
-
-  return (
-    Object.values(refs.current).find((input) => input.id === prevRefId)
-      ?.element || null
-  );
-};
-
-const useInputRefs = (formSchema) => {
-  const ref = useRef({});
-
-  Object.entries(formSchema).forEach(([fieldName], index) => {
-    ref.current[fieldName] = {
-      id: index,
-      ref: null,
-    };
-  });
-
-  return ref;
-};
 
 const useFormSchema = (formSchema) => {
   const initialValues = {};
@@ -109,11 +77,11 @@ const useFormSchema = (formSchema) => {
     allowedKeyInput[fieldName] = rules;
   };
 
-  const bindErrors = (fieldName, { required }) => {
+  const bindErrors = (fieldName, { alias, required }) => {
     initialErrors[fieldName] = {
       isError: required,
       errorMessage: required
-        ? `[${fieldName}] 입력되지 않은 항목이 있습니다.`
+        ? `입력되지 않은 항목이 있습니다. (${alias})`
         : null,
       showError: false,
     };
@@ -151,8 +119,8 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
     setErrors,
   } = useFormSchema(formSchema);
   const [submitting, setSubmitting] = useState(false);
-  const inputRefs = useInputRefs(formSchema);
-  const indexGenerator = generateIndex(0);
+  const { ref, bindElement, getNextElement, getPrevElement } =
+    useObjectRef(formSchema);
 
   const handleChange = (event) => {
     const {
@@ -163,11 +131,7 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
       throw new Error('올바르지 않은 필드 참조입니다.');
     }
 
-    if (
-      !Object.prototype.hasOwnProperty.call(validationSchema, name) ||
-      isInvalidInput(name, value)
-    )
-      return;
+    if (isInvalidInput(name, value)) return;
 
     const errorMessageList = validationSchema[name]
       .filter(({ assert }) => !assert(value))
@@ -189,9 +153,9 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
     }));
 
     if (value.length >= formSchema[name].maxLength) {
-      const nextRef = getNextRef(inputRefs, name);
+      const nextElement = getNextElement(name);
 
-      if (nextRef) nextRef.focus();
+      if (nextElement) nextElement.focus();
     }
   };
 
@@ -201,9 +165,9 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
     } = event;
 
     if (isBackspace(event) && values[name] === '') {
-      const prevRef = getPrevRef(inputRefs, name);
+      const prevElement = getPrevElement(name);
 
-      if (prevRef) prevRef.focus();
+      if (prevElement) prevElement.focus();
     }
   };
 
@@ -216,7 +180,7 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
 
     if (invalidFieldNames.length > 0) {
       const invalidInputRefs = invalidFieldNames
-        .map((name) => inputRefs.current[name])
+        .map((name) => ref.current[name])
         .sort((a, b) => a.id - b.id);
 
       invalidFieldNames.forEach((name) => {
@@ -240,12 +204,7 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
   const registerInputProps = (name) => {
     return {
       name,
-      ref: (element) => {
-        inputRefs.current[name] = {
-          id: indexGenerator.next().value,
-          element,
-        };
-      },
+      ref: bindElement(name),
       value: values[name],
       onChange: handleChange,
       onKeyDown: handleKeyDown,
@@ -261,7 +220,7 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
         handleKeyDown,
         handleSubmit,
         errors,
-        inputRefs,
+        inputRefs: ref,
         registerInputProps,
       })}
     </>

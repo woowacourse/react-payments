@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import BackwardButton from './components/BackwardButton';
+import BackwardButton from './components/common/BackwardButton';
 import CardForm from './components/CardForm';
 
 const StyledApp = styled.div`

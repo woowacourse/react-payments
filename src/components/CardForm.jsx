@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import EasyForm from './EasyForm';
-import CardPreview from './CardPreview';
-import ToolTip from './ToolTip';
+import EasyForm from './common/EasyForm';
+import CardPreview from './common/CardPreview';
+import ToolTip from './common/ToolTip';
 
 const StyledCardForm = styled.form`
   margin: 0;

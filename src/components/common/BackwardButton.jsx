@@ -22,7 +22,7 @@ const StyledButton = styled.button`
   color: #383838;
 `;
 
-const BackwardButton = ({ children, type, ...rest }) => {
+const BackwardButton = ({ children, ...rest }) => {
   return (
     <StyledButton type="button" {...rest}>
       <svg
