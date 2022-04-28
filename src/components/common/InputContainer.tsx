@@ -7,20 +7,20 @@ interface InputContainerProps {
   children: React.ReactNode;
   inputTitle: string;
   isValid: boolean;
-  isError?: boolean;
+  shouldShowError?: boolean;
 }
 
 export default function InputContainer({
   children,
   inputTitle,
   isValid,
-  isError = false,
+  shouldShowError = false,
 }: InputContainerProps) {
   return (
     <div className="input-container">
       <div className="input-container-top">
         <span className="input-title">{inputTitle}</span>
-        {isValid ? <SuccessMessage /> : isError && <FailMessage />}
+        {isValid ? <SuccessMessage /> : shouldShowError && <FailMessage />}
       </div>
       {children}
     </div>
