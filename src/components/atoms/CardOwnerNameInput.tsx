@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useAppDispatch, useAppState } from "../../hooks/hooks";
 import { ActionType } from "../../types";
 import { createAction } from "../Provider";
+import { isEnglish } from "../../utils";
 
 const style = css({
   backgroundColor: '#ECEBF1',
@@ -20,8 +21,6 @@ const style = css({
 });
 
 const MAX_NAME_LENGTH = 30;
-
-const isEnglish = (str: string) => !/[^A-Za-z]/.test(str);
 
 function CardOwnerNameInput() {
   const { name } = useAppState();

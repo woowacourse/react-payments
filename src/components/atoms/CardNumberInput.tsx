@@ -1,17 +1,9 @@
 import { css } from "@emotion/react";
-import React, { useState } from "react";
+import React from "react";
 import { useAppDispatch, useAppState } from "../../hooks/hooks";
 import { ActionType } from "../../types";
+import { isNum, transformToCardFormat } from "../../utils";
 import { createAction } from "../Provider";
-
-const isNum = (str: string) => !Number.isNaN(Number(str));
-const transformToCardFormat = (str: string) => {
-  const arr = [0, 4, 8, 12].map(startIndex => str.substr(startIndex, 4));
-  arr[2] = '•'.repeat(arr[2].length);
-  arr[3] = '•'.repeat(arr[3].length);
-  // @todo -사이에 space추가하기
-  return arr.filter(str => str.length > 0).join('-');
-}
 
 const style = css({
   backgroundColor: '#ECEBF1',

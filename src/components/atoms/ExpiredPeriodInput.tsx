@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { css } from "@emotion/react";
 import { useAppDispatch, useAppState } from "../../hooks/hooks";
 import { createAction } from "../Provider";
 import { ActionType } from "../../types";
+import { isNum } from "../../utils";
 
 const style = css({
   backgroundColor: '#ECEBF1',
@@ -18,8 +19,6 @@ const style = css({
     boxShadow: 'none',
   }
 });
-
-const isNum = (str: string) => str.replace(/\s/g, '') && !Number.isNaN(Number(str));
 
 function ExpiredPeriodInput() {
   const { expiredPeriod } = useAppState();

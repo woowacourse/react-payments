@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { css } from "@emotion/react";
 import { useAppDispatch, useAppState } from "../../hooks/hooks";
 import { createAction } from "../Provider";
 import { ActionType } from "../../types";
+import { isNum, transformNumToBullet } from "../../utils";
 
 const style = css({
   backgroundColor: '#ECEBF1',
@@ -19,10 +20,6 @@ const style = css({
     boxShadow: 'none',
   }
 });
-
-const isNum = (str: string) => str.replace(/\s/g, '') && !Number.isNaN(Number(str));
-
-const transformNumToBullet = (str: string) => '•'.repeat(str.length);
 
 function CVCInput() {
   const { cvc } = useAppState();
