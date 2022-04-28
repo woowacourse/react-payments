@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
-import { createRef } from 'react';
-import { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { MAX_LENGTH } from '../../constants/card';
 import { CARD_INFO_TYPES } from '../../reducer/types';
 
-import { InputBasic } from '../common/InputBasic';
 import { InputBox } from '../common/InputBox';
-import { InputContainer, InputTitle } from '../common/styled';
+import { InputContainer, InputTitle, InputBasic } from '../common/styled';
 
 const DEFAULT_CARD_NUMBERS_TYPE = [
   { name: 'firstNumber', type: 'text' },
@@ -23,7 +20,7 @@ export const CardNumbersInputForm = ({
   handleCardNumberCheck,
   openModal,
 }) => {
-  const handleNumberChange = (e, name) => {
+  const handleNumberChange = (e, name, index) => {
     if (
       isNaN(e.nativeEvent.data) ||
       e.target.value.length > MAX_LENGTH.EACH_CARD_NUMBER
@@ -35,6 +32,17 @@ export const CardNumbersInputForm = ({
       type: CARD_INFO_TYPES.SET_CARD_NUMBER,
       payload: { key: name, cardNumber: e.target.value },
     });
+
+    moveFocus(e, index);
+  };
+
+  const moveFocus = (e, index) => {
+    if (e.key === 'Backspace') {
+      return;
+    }
+    if (e.target.value.length === MAX_LENGTH.EACH_CARD_NUMBER) {
+      refs[index + 1]?.current.focus();
+    }
   };
 
   useEffect(() => {
@@ -50,7 +58,6 @@ export const CardNumbersInputForm = ({
   }, [cardNumbers]);
 
   const refs = Array.from({ length: 4 }, () => useRef());
-  // console.log(refs);
 
   return (
     <InputContainer>
@@ -61,7 +68,8 @@ export const CardNumbersInputForm = ({
             key={name}
             ref={refs[index]}
             value={cardNumbers?.[name]}
-            onChange={(e) => handleNumberChange(e, name)}
+            // onKeyDown={(e) => handleMoveFocus(e, index)}
+            onChange={(e) => handleNumberChange(e, name, index)}
             type={type}
           />
         )).reduce((prev, cur) => [prev, '-', cur])}
