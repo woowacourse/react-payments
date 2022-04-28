@@ -5,7 +5,7 @@ import { inputNumberOnly, limitInputLength } from '../../../../utils';
 import { LIMIT_LENGTH } from '../../../../constants';
 
 function CVC({ cardInfo, setCardInfo }) {
-  const handleOnInput = (event) => {
+  const handleOnChange = (event) => {
     let { value, name } = event.target;
     value = inputNumberOnly(value);
 
@@ -17,6 +17,12 @@ function CVC({ cardInfo, setCardInfo }) {
       ...cardInfo,
       [name]: value,
     });
+
+    if (event.target.value.length >= LIMIT_LENGTH.CVC) {
+      event.target.classList.add('input-correct');
+      return;
+    }
+    event.target.classList.remove('input-correct');
   };
 
   return (
@@ -26,7 +32,7 @@ function CVC({ cardInfo, setCardInfo }) {
         name="cvc"
         className="input-basic w-25"
         type="password"
-        onInput={handleOnInput}
+        onChange={handleOnChange}
         value={cardInfo.cvc}
         required
       />

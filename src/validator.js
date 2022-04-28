@@ -10,15 +10,15 @@ const checkCardNumber = (number1, number2, number3, number4) => {
   return number1.length < 4 || number2.length < 4 || number3.length < 4 || number4.length < 4;
 };
 
-const checkMonth = (month) => {
-  return Number(month) > 12;
+export const checkMonth = (month) => {
+  return Number(month) > 12 || Number(month) < 1;
 };
 
-const checkYear = (year) => {
+export const checkYear = (year) => {
   return Number(year) < 22;
 };
 
-const checkMonthAndYear = (month, year) => {
+export const checkMonthAndYear = (month, year) => {
   const date = new Date();
   const currentMonth = date.getMonth() + 1;
   const currentYear = Number(date.getFullYear().toString().slice(2, 4));

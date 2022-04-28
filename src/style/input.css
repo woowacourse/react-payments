@@ -19,7 +19,6 @@ input::-webkit-inner-spin-button {
   color: #d3d3d3;
   border-radius: 0.25rem;
   background-color: #ecebf1;
-  /* color: #04c09e; */
 }
 
 .input-wrapper {
@@ -50,11 +49,11 @@ input::-webkit-inner-spin-button {
   border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
-  color: #04c09e;
+  color: #ed4337;
 }
 
-.input-security {
-  -webkit-text-security: disc;
+.input-correct {
+  color: #04c09e;
 }
 
 .input-underline {
@@ -75,6 +74,7 @@ input::-webkit-inner-spin-button {
 }
 
 .input-background-hidden {
+  color: #383838;
   background-color: #ffffff;
 }
 

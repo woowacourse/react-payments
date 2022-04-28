@@ -5,7 +5,7 @@ import { LIMIT_LENGTH } from '../../../../constants';
 import { limitInputLength, inputEnglishOnly } from '../../../../utils';
 
 function CardOwner({ cardInfo, setCardInfo }) {
-  const handleOnInput = (event) => {
+  const handleOnChange = (event) => {
     let { value, name } = event.target;
     value = inputEnglishOnly(value);
 
@@ -17,12 +17,18 @@ function CardOwner({ cardInfo, setCardInfo }) {
       ...cardInfo,
       [name]: value,
     });
+
+    if (value.length >= 1) {
+      event.target.classList.add('input-correct');
+      return;
+    }
+    event.target.classList.remove('input-correct');
   };
 
   return (
     <div className="input-container">
       <div className="input-wrapper">
-        <span className="input-title">카드 소유자 이름(선택)</span>
+        <span className="input-title">카드 소유자 영문 이름(선택)</span>
         <span className="input-length">
           {cardInfo.owner.length <= 30 ? cardInfo.owner.length : 30}/30
         </span>
@@ -31,9 +37,8 @@ function CardOwner({ cardInfo, setCardInfo }) {
         name="owner"
         type="text"
         className="input-basic"
-        onInput={handleOnInput}
+        onChange={handleOnChange}
         value={cardInfo.owner}
-        required
       />
     </div>
   );

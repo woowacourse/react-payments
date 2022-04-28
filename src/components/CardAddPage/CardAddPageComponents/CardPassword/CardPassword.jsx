@@ -5,7 +5,7 @@ import { inputNumberOnly, limitInputLength } from '../../../../utils';
 import { LIMIT_LENGTH } from '../../../../constants';
 
 function CardPassword({ cardInfo, setCardInfo }) {
-  const handleOnInput = (event) => {
+  const handleOnChange = (event) => {
     let { value, name } = event.target;
     value = inputNumberOnly(value);
 
@@ -17,6 +17,12 @@ function CardPassword({ cardInfo, setCardInfo }) {
       ...cardInfo,
       [name]: value,
     });
+
+    if (event.target.value.length >= LIMIT_LENGTH.CARD_PASSWORD) {
+      event.target.classList.add('input-correct');
+      return;
+    }
+    event.target.classList.remove('input-correct');
   };
 
   return (
@@ -26,7 +32,7 @@ function CardPassword({ cardInfo, setCardInfo }) {
         name="password1"
         className="input-basic w-15 input-password"
         type="password"
-        onInput={handleOnInput}
+        onChange={handleOnChange}
         value={cardInfo.password1}
         required
       />
@@ -34,7 +40,7 @@ function CardPassword({ cardInfo, setCardInfo }) {
         name="password2"
         className="input-basic w-15 input-password"
         type="password"
-        onInput={handleOnInput}
+        onChange={handleOnChange}
         value={cardInfo.password2}
         required
       />
