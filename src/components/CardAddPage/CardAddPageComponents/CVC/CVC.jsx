@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { inputNumberOnly, limitInputLength } from '../../../../utils';
+import { LIMIT_LENGTH } from '../../../../constants';
+
 function CVC({ cardInfo, setCardInfo }) {
   const handleOnInput = (event) => {
-    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
-    event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(regExp, '');
-
     let { value, name } = event.target;
+    value = inputNumberOnly(value);
 
-    if (value.length > 3) {
-      value = value.slice(0, 3);
+    if (value.length > LIMIT_LENGTH.CVC) {
+      value = limitInputLength(value, LIMIT_LENGTH.CVC);
     }
 
     setCardInfo({
