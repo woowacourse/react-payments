@@ -12,21 +12,26 @@ import Footer from './components/common/Footer';
 
 function App() {
   const targetRef = useRef();
+
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
   const [cardNumber, setCardNumber] = useState('');
   const [cardOwnerName, setCardOwnerName] = useState('NAME');
   const [cardDate, setCardDate] = useState('');
+
   const [isCorrectCardDate, setIsCorrectCardDate] = useState(false);
   const [isCorrectOwnerName, setIsCorrectOwnerName] = useState(false);
   const [isCorrectSecurityCode, setIsCorrectSecurityCode] = useState(false);
   const [isCorrectCardPwd, setIsCorrectCardPwd] = useState(false);
   const [isAllCompleted, setIsAllCompleted] = useState(false);
+
   const cardNumberCallback = numbers => setCardNumber(numbers);
   const cardDateCallback = date => setCardDate(date);
   const ownerNameCallback = ownerName => setCardOwnerName(ownerName);
   const correctOwnerNameCallback = isCorrect => setIsCorrectOwnerName(isCorrect);
   const correctSecurityCodeCallback = isCorrect => setIsCorrectSecurityCode(isCorrect);
   const correctCardPwdCallback = isCorrect => setIsCorrectCardPwd(isCorrect);
+
   useEffect(() => {
     const isOkCardNumber = cardNumber !== '';
     const allOk = [
@@ -36,8 +41,10 @@ function App() {
       isCorrectSecurityCode,
       isCorrectCardPwd,
     ].every(ok => ok);
+
     setIsAllCompleted(allOk);
   }, [cardNumber, isCorrectCardDate, isCorrectOwnerName, isCorrectSecurityCode, isCorrectCardPwd]);
+
   useLayoutEffect(() => {
     if (targetRef.current) {
       setDimensions({
@@ -46,6 +53,7 @@ function App() {
       });
     }
   }, []);
+
   return (
     <div className="app" ref={targetRef}>
       <Header>{'카드추가'}</Header>

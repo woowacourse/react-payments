@@ -1,5 +1,5 @@
 {
-  "homepage": "https://intae92.github.io/react-payments",
+  "homepage": "https://nan-noo.github.io/react-payments",
   "name": "react-payments",
   "version": "0.1.0",
   "private": true,
@@ -33,6 +33,14 @@
       "react-app/jest"
     ],
     "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      },
       {
         "files": [
           "**/*.stories.*"
