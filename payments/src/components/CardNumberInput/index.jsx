@@ -10,11 +10,6 @@ const CardNumberInput = ({ state, updateForm }) => {
     maxLength: 4,
     isNumber: true,
   });
-
-  const updateNumber = (number, index) => {
-    updateForm(number, index);
-  };
-
   return (
     <div className="card-number__input__container">
       <InputLabel>카드 번호</InputLabel>
@@ -24,7 +19,10 @@ const CardNumberInput = ({ state, updateForm }) => {
             <Input
               onChange={({ target }) => {
                 controllInput(target);
-                updateNumber(target.value, idx);
+                updateForm({
+                  type: "cardNumber",
+                  payload: { value: target.value, index: idx },
+                });
               }}
               value={state[idx]}
               ref={(el) => (itemRef.current[idx] = el)}

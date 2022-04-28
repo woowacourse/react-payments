@@ -26,7 +26,10 @@ const OwnerNameInput = ({ state, updateForm }) => {
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           onChange={({ target }) => {
             controllInput(target);
-            updateForm(target.value);
+            updateForm({
+              type: "ownerName",
+              payload: { value: target.value },
+            });
           }}
         />
       </InputContainer>

@@ -23,7 +23,10 @@ const CardPasswordInput = ({ state, updateForm }) => {
                 value={state[idx]}
                 onChange={({ target }) => {
                   controllInput(target);
-                  updateForm(target.value, idx);
+                  updateForm({
+                    type: "password",
+                    payload: { value: target.value, index: idx },
+                  });
                 }}
               />
             </InputContainer>

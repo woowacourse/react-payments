@@ -11,10 +11,6 @@ const ExpiredDateInput = ({ state, updateForm }) => {
     isNumber: true,
   });
 
-  const update = (number, index) => {
-    updateForm(number, index);
-  };
-
   return (
     <div className="expire__input__container">
       <InputLabel>만료일</InputLabel>
@@ -30,7 +26,10 @@ const ExpiredDateInput = ({ state, updateForm }) => {
               }}
               onChange={({ target }) => {
                 controllInput(target);
-                update(target.value, idx);
+                updateForm({
+                  type: "expiredDate",
+                  payload: { value: target.value, index: idx },
+                });
               }}
             />
             {idx === 0 ? "/" : ""}

@@ -22,13 +22,16 @@ const SecureCodeInput = ({ state, updateForm }) => {
           value={state}
           onChange={({ target }) => {
             controllInput(target);
-            updateForm(target.value);
+            updateForm({
+              type: "secureCode",
+              payload: { value: target.value },
+            });
           }}
         />
       </InputContainer>
       <button className="help--button tooltip">
         ?
-        <span class="tooltiptext tooltip-bottom">
+        <span className="tooltiptext tooltip-bottom">
           카드 뒷면의 세자리 숫자를 확인해주세요!
         </span>
       </button>
