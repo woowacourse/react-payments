@@ -1,5 +1,6 @@
 {
   "name": "react-payments",
+  "description": "리액트 페이먼츠",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

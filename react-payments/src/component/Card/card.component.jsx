@@ -28,7 +28,7 @@ const Card = ({
                   </div>
                 );
               }
-              return <p key={idx}>{cardNumber}</p>;
+              return <div key={idx}>{cardNumber}</div>;
             })}
           </div>
           <div className="card-bottom__info">
