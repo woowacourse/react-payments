@@ -3,8 +3,7 @@ import React from 'react';
 import { MAX_LENGTH } from '../../constants/card';
 import { CARD_INFO_TYPES } from '../../reducer/types';
 
-import { InputBasic } from '../common/InputBasic';
-import { InputContainer, InputTitle } from '../common/styled';
+import { InputContainer, InputTitle, InputBasic } from '../common/styled';
 
 export const CardOwnerInputForm = ({ ownerName, handleOwnerNameInput }) => {
   const handleOwnerNameChange = (e) => {

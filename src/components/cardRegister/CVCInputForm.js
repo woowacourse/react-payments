@@ -3,10 +3,14 @@ import React, { useEffect } from 'react';
 import { MAX_LENGTH } from '../../constants/card';
 import { CARD_INFO_TYPES } from '../../reducer/types';
 
-import { InputBasic } from '../common/InputBasic';
-import { InputBox } from '../common/InputBox';
 import { QuestionMark } from '../common/QuestionMark';
-import { FlexWrapper, InputContainer, InputTitle } from '../common/styled';
+import {
+  FlexWrapper,
+  InputContainer,
+  InputTitle,
+  InputBasic,
+  InputBox,
+} from '../common/styled';
 
 export const CVCInputForm = ({
   CVC,

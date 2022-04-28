@@ -3,8 +3,12 @@ import React, { useEffect, useRef } from 'react';
 import { MAX_LENGTH } from '../../constants/card';
 import { CARD_INFO_TYPES } from '../../reducer/types';
 
-import { InputBox } from '../common/InputBox';
-import { InputContainer, InputTitle, InputBasic } from '../common/styled';
+import {
+  InputContainer,
+  InputTitle,
+  InputBasic,
+  InputBox,
+} from '../common/styled';
 
 const DEFAULT_CARD_NUMBERS_TYPE = [
   { name: 'firstNumber', type: 'text' },

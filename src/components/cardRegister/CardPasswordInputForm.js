@@ -2,9 +2,12 @@ import React, { useEffect } from 'react';
 
 import { CARD_INFO_TYPES } from '../../reducer/types';
 
-import { InputBasic } from '../common/InputBasic';
-import { InputBox } from '../common/InputBox';
-import { InputContainer, InputTitle } from '../common/styled';
+import {
+  InputContainer,
+  InputTitle,
+  InputBasic,
+  InputBox,
+} from '../common/styled';
 import Dot from '../common/Dot';
 
 export const CardPasswordInputForm = ({
