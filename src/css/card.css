@@ -12,6 +12,8 @@
   align-items: center;
   justify-content: center;
 
+  position: relative;
+
   width: 208px;
   height: 130px;
 
@@ -152,4 +154,11 @@
   line-height: 20px;
   vertical-align: middle;
   font-weight: 400;
+}
+
+.card-add-button {
+  font-size: 90px;
+  font-weight: 300;
+  position: absolute;
+  top: 28px;
 }

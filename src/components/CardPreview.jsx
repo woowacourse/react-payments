@@ -44,6 +44,7 @@ const CardPreview = ({ theme, company, number, expiryDate, ownerName, handleModa
             </span>
           </div>
         </div>
+        {!company && <div className="card-add-button">+</div>}
       </div>
     </div>
   );
