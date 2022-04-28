@@ -7,6 +7,8 @@ const CardCompanyStyled = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 80px;
+  height: 105px;
 `;
 
 const CardCompanyName = styled.p`

@@ -14,6 +14,8 @@ const initialState = {
   cardCvcErrorMessage: '',
   cardPassword: ['', ''],
   cardPasswordErrorMessage: '',
+  cardCompanyIndex: -1,
+  modalFlag: false,
 };
 
 const reducer = (state, action) => {
@@ -94,6 +96,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         cardPasswordErrorMessage: action.errorMessage,
+      };
+    }
+
+    case 'SET_MODAL_FLAG': {
+      return {
+        ...state,
+        modalFlag: action.flag,
       };
     }
 

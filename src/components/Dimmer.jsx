@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const DimmerStyled = styled.div`
-  display: ${({ show }) => (show ? 'block' : 'none')}
+  display: ${({ show }) => (show ? 'block' : 'none')};
   width: 100%;
   height: 100%;
   position: fixed;
@@ -12,6 +12,6 @@ const DimmerStyled = styled.div`
   background: rgba(0, 0, 0, 0.5);
 `;
 
-export default function Dimmer({ show }) {
-  return <DimmerStyled show={show}></DimmerStyled>;
+export default function Dimmer({ onClick, show }) {
+  return <DimmerStyled onClick={onClick} show={show}></DimmerStyled>;
 }
