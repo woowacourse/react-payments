@@ -26,7 +26,7 @@ module.exports = {
       },
     ],
     'class-methods-use-this': [0],
-    'no-alert': 'warn',
+    'no-alert': 'off',
     'no-console': 'warn',
     'react/jsx-props-no-spreading': [0],
     'import/no-extraneous-dependencies': [
