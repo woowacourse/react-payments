@@ -51,6 +51,10 @@ const CardBottomContainer = styled.div`
   color: #525252;
 `;
 
+const CardOwnerName = styled.span`
+  word-break: break-all;
+`;
+
 function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
   return (
     <CardContainer>
@@ -62,7 +66,7 @@ function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
         ))}
       </CardNumberContainer>
       <CardBottomContainer>
-        <span>{ownerName || 'NAME'}</span>
+        <CardOwnerName>{ownerName || 'NAME'}</CardOwnerName>
         <span>{expiredDate ? expiredDate : 'MM/YY'}</span>
       </CardBottomContainer>
     </CardContainer>

@@ -3,8 +3,10 @@ import Head from '../components/Head';
 import styled from 'styled-components';
 import Card from '../components/Card';
 import LabeledInput from '../components/LabeledInput';
+import InfoLabel from '../components/InfoLabel';
 import SubmitButton from '../components/SubmitButton';
 import validator from '../validation';
+import Input from '../components/Input';
 
 const Page = styled.div`
   width: 100%;
@@ -27,6 +29,12 @@ const Form = styled.form`
   flex-direction: column;
   padding: 25px 28px 16px;
   gap: 19px;
+`;
+
+const FormRow = styled.div`
+  display: flex;
+  align-items: ${props => props.alignItems};
+  gap: ${props => props.gap};
 `;
 
 const SubmitButtonContainer = styled.div`
@@ -226,36 +234,57 @@ function CardAddPage() {
             label: '카드 소유자 이름(선택)',
           }}
         />
-        <LabeledInput
-          value={securityNumber}
-          handleInputChange={handleChangeSecurityNumber}
-          isShowLengthChecker={false}
-          countInput={1}
-          inputProps={{
-            type: 'password',
-            width: '84px',
-            isCenter: true,
-            maxLength: 3,
-          }}
-          inputLabelProps={{
-            label: '보안 코드(CVC/CVV)',
-          }}
-        />
-        <LabeledInput
-          value={password}
-          handleInputChange={handleChangePassword}
-          isShowLengthChecker={false}
-          countInput={2}
-          inputProps={{
-            type: 'password',
-            width: '43px',
-            isCenter: true,
-            maxLength: 1,
-          }}
-          inputLabelProps={{
-            label: '카드 비밀번호',
-          }}
-        />
+        <FormRow>
+          <LabeledInput
+            value={securityNumber}
+            handleInputChange={handleChangeSecurityNumber}
+            isShowLengthChecker={false}
+            countInput={1}
+            inputProps={{
+              type: 'password',
+              width: '84px',
+              isCenter: true,
+              maxLength: 3,
+            }}
+            inputLabelProps={{
+              label: '보안 코드(CVC/CVV)',
+            }}
+          />
+          <InfoLabel />
+        </FormRow>
+        <FormRow alignItems="flex-end" gap={'4px'}>
+          <LabeledInput
+            value={password}
+            handleInputChange={handleChangePassword}
+            isShowLengthChecker={false}
+            countInput={2}
+            inputProps={{
+              type: 'password',
+              width: '43px',
+              isCenter: true,
+              maxLength: 1,
+            }}
+            inputLabelProps={{
+              label: '카드 비밀번호',
+            }}
+          />
+          <Input
+            type="password"
+            value="."
+            width="43px"
+            isCenter={true}
+            maxLength={1}
+            backgroundColor="#fff"
+          />
+          <Input
+            type="password"
+            value="."
+            width="43px"
+            isCenter={true}
+            maxLength={1}
+            backgroundColor="#fff"
+          />
+        </FormRow>
         <SubmitButtonContainer>
           <SubmitButton
             label="다음"
