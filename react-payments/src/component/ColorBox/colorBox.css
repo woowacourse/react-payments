@@ -1,0 +1,50 @@
+.color-box-container {
+  width: 47px;
+  height: 62px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.color-box {
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+}
+
+.color-box-text {
+  font-size: 12px;
+}
+
+.poco-color {
+  background: #e24141;
+}
+
+.jun-color {
+  background: #547ce4;
+}
+
+.gongwon-color {
+  background: #73bc6d;
+}
+
+.bran-color {
+  background: #de59b9;
+}
+
+.roid-color {
+  background: #04c09e;
+}
+
+.dobby-color {
+  background: #e76e9a;
+}
+
+.collin-color {
+  background: #f37d3b;
+}
+
+.sun-color {
+  background: #fbcd58;
+}
