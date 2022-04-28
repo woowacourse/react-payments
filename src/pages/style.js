@@ -45,6 +45,11 @@ const CVCWrapper = styled.div`
   gap: 15px;
 `;
 
+const Footer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 export {
   PageWrapper,
   HeaderWrapper,
@@ -53,4 +58,5 @@ export {
   OwnerHeader,
   Dot,
   CVCWrapper,
+  Footer,
 };

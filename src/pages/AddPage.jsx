@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import Card from "../components/Card";
 import InputBox from "../components/InputBox";
@@ -12,6 +12,7 @@ import {
   OwnerHeader,
   Dot,
   CVCWrapper,
+  Footer
 } from "./style";
 
 function AddPage() {
@@ -20,10 +21,23 @@ function AddPage() {
   const [owner, setOwner] = useState("");
   const [cvc, setCvc] = useState("");
   const [password, setPassword] = useState({firstPassword: '', secondPassword: ''});
+  const [allRequired, setAllRequired] = useState(false);
 
-  const secondCardNumberInputRef = useRef()
-  const thirdCardNumberInputRef = useRef()
-  const fourthCardNumberInputRef = useRef()
+  useEffect(() => {
+    setAllRequired(
+      cardNumbers.join("").length >= 16 &&
+        dueDate.month.length >= 2 &&
+        dueDate.year.length >= 2 &&
+        owner &&
+        cvc.length >=3 &&
+        password.firstPassword &&
+        password.secondPassword
+    );
+  }, [cardNumbers, dueDate, owner, cvc, password]);
+
+  const secondCardNumberInputRef = useRef();
+  const thirdCardNumberInputRef = useRef();
+  const fourthCardNumberInputRef = useRef();
 
   const dueYearInputRef = useRef();
 
@@ -37,7 +51,7 @@ function AddPage() {
   ];
 
   const focusNextNumberInput = (index) => {
-    cardNumberInputRefs[index]?.current.focus()
+    cardNumberInputRefs[index]?.current.focus();
   }
 
   const handleCardNumber = (index, e) => {
@@ -50,7 +64,7 @@ function AddPage() {
     });
  
     if(e.target.value.length >= 4){
-      focusNextNumberInput(index + 1)
+      focusNextNumberInput(index + 1);
     }
   };
 
@@ -169,6 +183,7 @@ function AddPage() {
         <Dot>•</Dot>
         <Dot>•</Dot>
       </PasswordWrapper>
+      <Footer><Button label='다음' color={allRequired ? '#04C09E': 'gray'}/></Footer>
     </PageWrapper>
   );
 }
