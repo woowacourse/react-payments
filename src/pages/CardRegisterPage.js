@@ -8,6 +8,7 @@ import { CardOwnerInputForm } from '../components/cardRegister/CardOwnerInputFor
 import { CardPasswordInputForm } from '../components/cardRegister/CardPasswordInputForm';
 import { CVCInputForm } from '../components/cardRegister/CVCInputForm';
 import { CardSelectModal } from '../components/cardRegister/CardSelectModal';
+import { Button } from '../components/common/Button';
 
 const CARD_TYPES = [
   { name: '포코', color: 'gold' },
@@ -65,6 +66,12 @@ export const CardRegisterPage = () => {
     };
   };
 
+  const [allCompleted, setAllCompleted] = useState(false);
+
+  useEffect(() => {
+    setAllCompleted(Object.values(checkInputs).every((check) => check));
+  }, [checkInputs]);
+
   return (
     <>
       <Card
@@ -72,10 +79,11 @@ export const CardRegisterPage = () => {
         cardNumbers={cardNumbers}
         expireDate={expireDate}
         ownerName={ownerName}
+        handleModalVisible={() => setModalVisible(true)}
       />
       <CardNumbersInputForm
         cardNumbers={cardNumbers}
-        handleModalVisible={setModalVisible}
+        handleModalVisible={() => setModalVisible(true)}
         handleCardNumbersInput={setCardNumbers}
         handleCardNumberCheck={checkerFactory('cardNumbers')}
       />
@@ -105,6 +113,7 @@ export const CardRegisterPage = () => {
         handleCardType={setCardType}
         handleCardTypeCheck={checkerFactory('cardType')}
       />
+      <Button disabled={allCompleted ? false : true}>다음</Button>
     </>
   );
 };

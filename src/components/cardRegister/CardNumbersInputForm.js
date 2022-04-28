@@ -34,7 +34,7 @@ export const CardNumbersInputForm = ({
     handleCardNumberCheck(isCardNumbersCompleted);
 
     if (isCardNumbersCompleted) {
-      handleModalVisible(true);
+      handleModalVisible();
     }
   }, [cardNumbers]);
 

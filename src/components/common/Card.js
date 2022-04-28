@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Dot from './Dot';
 
 const CardBox = styled.div`
   display: flex;
@@ -18,10 +17,11 @@ const SmallCard = styled.div`
   width: 208px;
   height: 130px;
 
-  background: ${(props) => props.backgroundColor || '#94dacd'};
+  background: ${(props) => props.backgroundColor || '#D2D2D2'};
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+  cursor: pointer;
 `;
 const SmallCard_chip = styled.div`
   width: 40px;
@@ -87,14 +87,20 @@ const CardNumbersText = styled(CardText)`
   letter-spacing: 2px;
 `;
 
-export const Card = ({ cardType, cardNumbers, expireDate, ownerName }) => {
+export const Card = ({
+  cardType,
+  cardNumbers,
+  expireDate,
+  ownerName,
+  handleModalVisible,
+}) => {
   const formattedCardNumbers = Object.values(cardNumbers)
     .map((number, idx) => (idx <= 1 ? number : '•'.repeat(number.length)))
     .join(' ');
 
   return (
     <CardBox>
-      <SmallCard backgroundColor={cardType.color}>
+      <SmallCard backgroundColor={cardType.color} onClick={handleModalVisible}>
         <CardTop>
           <CardText>{cardType.name}카드</CardText>
         </CardTop>
