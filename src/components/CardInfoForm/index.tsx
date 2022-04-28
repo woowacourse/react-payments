@@ -45,15 +45,15 @@ export default function CardInfoForm({
     setIsNextButtonShown(Object.keys(cardInfoValidation).every(key => cardInfoValidation[key]));
   }, [cardInfoValidation]);
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    resetCardInfo();
+    alert("카드 등록이 완료되었습니다.");
+    setIsNextButtonShown(false);
+  };
+
   return (
-    <form
-      onSubmit={e => {
-        e.preventDefault();
-        resetCardInfo();
-        alert("카드 등록이 완료되었습니다.");
-        setIsNextButtonShown(false);
-      }}
-    >
+    <form onSubmit={handleSubmit}>
       <CardNumber
         cardNumbers={cardNumbers}
         onChange={onChangeCardNumber}
