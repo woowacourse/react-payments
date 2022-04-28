@@ -6,7 +6,7 @@ import CARD_COMPANIES from '../constants/index';
 import CardContext from '../CardContext';
 
 export default function CardListModal() {
-  const { modalFlag, dispatch } = useContext(CardContext);
+  const { cardCompanyIndex, modalFlag, dispatch } = useContext(CardContext);
 
   const onClickDimmer = useCallback(() => {
     dispatch({ type: 'SET_MODAL_FLAG', flag: false });
@@ -23,7 +23,12 @@ export default function CardListModal() {
       <Dimmer show={modalFlag} onClick={onClickDimmer} />
       <ToastModal show={modalFlag}>
         {CARD_COMPANIES.map(({ COLOR, NAME }, index) => (
-          <CardCompany key={NAME} color={COLOR} onClick={onClickCardCompany(index)}>
+          <CardCompany
+            key={NAME}
+            color={COLOR}
+            onClick={onClickCardCompany(index)}
+            selected={cardCompanyIndex === index}
+          >
             {NAME}
           </CardCompany>
         ))}

@@ -14,15 +14,16 @@ const CardCompanyStyled = styled.div`
 
 const CardCompanyName = styled.p`
   margin: 10px 0;
+  color: ${({ selected }) => (selected ? '#000000' : '#5e5e5e')};
   font-size: 12px;
   letter-spacing: -0.085rem;
 `;
 
-export default function CardCompany({ color, children, onClick }) {
+export default function CardCompany({ color, children, onClick, selected }) {
   return (
     <CardCompanyStyled onClick={onClick}>
       <Circle size="37px" color={color} />
-      <CardCompanyName>{children}</CardCompanyName>
+      <CardCompanyName selected={selected}>{children}</CardCompanyName>
     </CardCompanyStyled>
   );
 }
