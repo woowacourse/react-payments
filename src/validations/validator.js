@@ -59,6 +59,12 @@ const validator = {
       throw new Error('비밀번호 앞 자리 2개를 입력해주세요.');
     }
   },
+
+  checkCardCompany(cardCompanyIndex) {
+    if (cardCompanyIndex === -1) {
+      throw new Error('카드사를 선택해주세요.');
+    }
+  },
 };
 
 export default validator;

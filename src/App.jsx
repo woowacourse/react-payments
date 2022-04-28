@@ -99,6 +99,13 @@ const reducer = (state, action) => {
       };
     }
 
+    case 'SET_CARD_COMPANY_ERROR_MESSAGE': {
+      return {
+        ...state,
+        cardCompanyErrorMessage: action.errorMessage,
+      };
+    }
+
     case 'SET_MODAL_FLAG': {
       return {
         ...state,
@@ -132,6 +139,7 @@ function App() {
       cardPassword,
       cardPasswordErrorMessage,
       cardCompanyIndex,
+      cardCompanyErrorMessage,
       modalFlag,
     },
     dispatch,
@@ -148,6 +156,7 @@ function App() {
     cardPassword,
     cardPasswordErrorMessage,
     cardCompanyIndex,
+    cardCompanyErrorMessage,
     modalFlag,
     dispatch,
   };

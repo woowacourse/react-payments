@@ -30,6 +30,7 @@ function CardAddition() {
 
   const validateAllInputs = () => {
     try {
+      validator.checkCardCompany(cardCompanyIndex);
       validator.checkCardNumber(cardNumber);
       validator.checkCardExpiration(cardExpiration);
       validator.checkCardOwner(cardOwner);

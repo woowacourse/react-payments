@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import CARD_COMPANIES from '../constants';
+import validator from '../validations/validator';
+import ErrorMessage from './ErrorMessage';
+import CardContext from '../CardContext';
 
 const SmallCard = styled.div`
   display: flex;
@@ -80,32 +83,45 @@ const CardNumber = styled(CardText)`
 `;
 
 export default function Card({ cardCompanyIndex, cardNumber, cardOwner, cardExpiration, onClick }) {
+  const { cardCompanyErrorMessage } = useContext(CardContext);
+
   const cardExpirationContent = () =>
     cardExpiration[0] || cardExpiration[1] ? cardExpiration.join('/') : 'MM/YY';
 
   return (
-    <SmallCard
-      onClick={onClick}
-      color={cardCompanyIndex === -1 ? '#e5e5e5' : CARD_COMPANIES[cardCompanyIndex].COLOR}
-    >
-      <CardTop>
-        <CardText>{cardCompanyIndex === -1 ? '' : CARD_COMPANIES[cardCompanyIndex].NAME}</CardText>
-      </CardTop>
-      <CardMiddle>
-        <SmallCardChip></SmallCardChip>
-      </CardMiddle>
-      <CardBottom>
-        <CardBottomNumber>
-          <CardNumber>{cardNumber[0]}</CardNumber>
-          <CardNumber>{cardNumber[1]}</CardNumber>
-          <CardNumber>{'•'.repeat(cardNumber[2].length)}</CardNumber>
-          <CardNumber>{'•'.repeat(cardNumber[3].length)}</CardNumber>
-        </CardBottomNumber>
-        <CardBottomInfo>
-          <CardTextEllipsis>{cardOwner || 'NAME'}</CardTextEllipsis>
-          <CardText>{cardExpirationContent()}</CardText>
-        </CardBottomInfo>
-      </CardBottom>
-    </SmallCard>
+    <>
+      <SmallCard
+        onClick={onClick}
+        color={cardCompanyIndex === -1 ? '#e5e5e5' : CARD_COMPANIES[cardCompanyIndex].COLOR}
+      >
+        <CardTop>
+          <CardText>
+            {cardCompanyIndex === -1 ? '' : CARD_COMPANIES[cardCompanyIndex].NAME}
+          </CardText>
+        </CardTop>
+        <CardMiddle>
+          <SmallCardChip></SmallCardChip>
+        </CardMiddle>
+        <CardBottom>
+          <CardBottomNumber>
+            <CardNumber>{cardNumber[0]}</CardNumber>
+            <CardNumber>{cardNumber[1]}</CardNumber>
+            <CardNumber>{'•'.repeat(cardNumber[2].length)}</CardNumber>
+            <CardNumber>{'•'.repeat(cardNumber[3].length)}</CardNumber>
+          </CardBottomNumber>
+          <CardBottomInfo>
+            <CardTextEllipsis>{cardOwner || 'NAME'}</CardTextEllipsis>
+            <CardText>{cardExpirationContent()}</CardText>
+          </CardBottomInfo>
+        </CardBottom>
+      </SmallCard>
+      <ErrorMessage
+        value={cardCompanyIndex}
+        validate={validator.checkCardCompany}
+        type="SET_CARD_COMPANY_ERROR_MESSAGE"
+      >
+        {cardCompanyErrorMessage}
+      </ErrorMessage>
+    </>
   );
 }

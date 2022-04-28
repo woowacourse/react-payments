@@ -19,6 +19,10 @@ export default function CardNumber() {
     dispatch({ type: 'SET_CARD_NUMBER', value: e.target.value, index });
   };
 
+  const onFocusInput = () => {
+    cardCompanyIndex === -1 && dispatch({ type: 'SET_MODAL_FLAG', flag: true });
+  };
+
   const validate = (value) => value.join('').length > 0 && validator.checkCardNumber(value);
 
   const cardColor = cardCompanyIndex === -1 ? false : CARD_COMPANIES[cardCompanyIndex].COLOR;
@@ -35,6 +39,7 @@ export default function CardNumber() {
             color={cardColor}
             value={cardNumber[0]}
             onChange={onChangeInput(0)}
+            onFocus={onFocusInput}
           />
           <InputBasic
             width="23%"
@@ -43,6 +48,7 @@ export default function CardNumber() {
             color={cardColor}
             value={cardNumber[1]}
             onChange={onChangeInput(1)}
+            onFocus={onFocusInput}
           />
           <InputBasic
             width="23%"
@@ -51,6 +57,7 @@ export default function CardNumber() {
             color={cardColor}
             value={cardNumber[2]}
             onChange={onChangeInput(2)}
+            onFocus={onFocusInput}
           />
           <InputBasic
             width="23%"
@@ -59,6 +66,7 @@ export default function CardNumber() {
             color={cardColor}
             value={cardNumber[3]}
             onChange={onChangeInput(3)}
+            onFocus={onFocusInput}
           />
         </InputContainer>
       </InputBox>
