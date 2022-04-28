@@ -3,7 +3,7 @@ import CardAppPage from './page/cardAdd';
 
 const App = () => {
   return (
-    <Layout title="My Payments">
+    <Layout>
       <CardAppPage />
     </Layout>
   );
