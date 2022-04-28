@@ -1,30 +1,134 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import styled from 'styled-components';
 import EasyField from './EasyField';
 import EasyForm from './EasyForm';
 import CardPreview from './CardPreview';
+import ToolTip from './ToolTip';
+
+const StyledCardForm = styled.form`
+  margin: 0;
+  .submit-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+
+    position: absolute;
+    width: 51px;
+    height: 34px;
+    right: 25px;
+    bottom: 16px;
+
+    text-align: right;
+
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: #04c09e;
+  }
+`;
+
+const StyledCardFieldContainer = styled.div`
+  margin: 16px 0;
+
+  .input-title {
+    display: inline-block;
+
+    font-size: 12px;
+    line-height: 14px;
+    vertical-align: top;
+
+    margin-bottom: 4px;
+
+    color: #525252;
+  }
+
+  .input-box {
+    display: flex;
+    height: 47px;
+    align-items: center;
+    margin-top: 0.375rem;
+    color: #d3d3d3;
+    border-radius: 0.25rem;
+    background-color: #ecebf1;
+  }
+
+  .input-box.password {
+    background-color: transparent;
+  }
+
+  .input-basic {
+    background-color: #ecebf1;
+    height: 45px;
+    width: 100%;
+    text-align: center;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-color: #9ca3af;
+    border: none;
+    border-radius: 0.25rem;
+  }
+
+  .input-basic.password {
+    background-color: #ecebf1;
+    width: 15%;
+    margin-right: 7px;
+  }
+
+  .input-underline {
+    text-align: center;
+    border: none;
+    background: none;
+    outline: none;
+
+    margin: 16px 0;
+    padding: 4px 0;
+
+    border-bottom: 1px solid #383838;
+  }
+
+  .name-length {
+    display: inline-block;
+    line-height: 14px;
+    float: right;
+  }
+
+  .cvc-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+`;
+
+const initiaCardlValues = {
+  cardNumber: {
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  },
+  expiredDate: {
+    month: '',
+    year: '',
+  },
+  owner: '',
+  cvc: '',
+  password: {
+    firstDigit: '',
+    secondDigit: '',
+    thirdDigit: '*',
+    fourthDigit: '*',
+  },
+};
 
 const CardForm = () => {
   return (
     <EasyForm
-      initialValues={{
-        cardNumber: {
-          first: '',
-          second: '',
-          third: '',
-          fourth: '',
-        },
-        expiredDate: {
-          month: '',
-          year: '',
-        },
-        owner: '',
-        cvc: '',
-        password: {
-          firstDigit: '',
-          secondDigit: '',
-        },
-      }}
+      initialValues={initiaCardlValues}
       onSubmit={(data, setSubmitting) => {
         setSubmitting(true);
         console.log(data);
@@ -38,81 +142,158 @@ const CardForm = () => {
             expiredDate={values.expiredDate}
             owner={values.owner}
           />
-          <form onSubmit={handleSubmit} disabled={submitting}>
-            <label>카드 번호</label>
-            <EasyField
-              name="cardNumber"
-              value={values.cardNumber}
-              onChange={handleChange}
-              className="field"
-            >
-              <input name="first" type="text" maxLength="4" required />
-              <p>-</p>
-              <input name="second" type="text" maxLength="4" required />
-              <p>-</p>
-              <input name="third" type="password" maxLength="4" required />
-              <p>-</p>
-              <input name="fourth" type="password" maxLength="4" required />
-            </EasyField>
-            <label>만료일</label>
-            <EasyField
-              name="expiredDate"
-              value={values.expiredDate}
-              onChange={handleChange}
-              className="field"
-            >
-              <input
-                name="month"
-                type="text"
-                minLength="2"
-                maxLength="2"
-                required
-              />
-              <p>/</p>
-              <input
-                name="year"
-                type="text"
-                minLength="2"
-                maxLength="2"
-                required
-              />
-            </EasyField>
-            <label>소유자</label>
-            <input
-              name="owner"
-              type="text"
-              maxLength="30"
-              value={values.owner}
-              onChange={({ target }) => {
-                handleChange('owner', () => target.value);
-              }}
-              required
-            />
-            <label>CVC</label>
-            <input
-              name="cvc"
-              type="text"
-              minLength="3"
-              maxLength="3"
-              value={values.cvc}
-              onChange={({ target }) => {
-                handleChange('cvc', () => target.value);
-              }}
-              required
-            />
-            <label>비밀번호</label>
-            <EasyField
-              name="password"
-              value={values.password}
-              onChange={handleChange}
-              className="field"
-            >
-              <input name="firstDigit" type="text" maxLength="1" required />
-              <input name="secondDigit" type="text" maxLength="1" required />
-            </EasyField>
-
-            <button type="submit">submit</button>
-          </form>
+          <StyledCardForm onSubmit={handleSubmit} disabled={submitting}>
+            <StyledCardFieldContainer className="input-container">
+              <label className="input-title">카드 번호</label>
+              <EasyField
+                name="cardNumber"
+                value={values.cardNumber}
+                onChange={handleChange}
+                className="input-box"
+              >
+                <input
+                  name="first"
+                  type="text"
+                  maxLength="4"
+                  className="input-basic"
+                  required
+                />
+                <p>-</p>
+                <input
+                  name="second"
+                  type="text"
+                  maxLength="4"
+                  className="input-basic"
+                  required
+                />
+                <p>-</p>
+                <input
+                  name="third"
+                  type="password"
+                  maxLength="4"
+                  className="input-basic"
+                  required
+                />
+                <p>-</p>
+                <input
+                  name="fourth"
+                  type="password"
+                  maxLength="4"
+                  className="input-basic"
+                  required
+                />
+              </EasyField>
+            </StyledCardFieldContainer>
+            <StyledCardFieldContainer className="input-container">
+              <label className="input-title">만료일</label>
+              <EasyField
+                name="expiredDate"
+                value={values.expiredDate}
+                onChange={handleChange}
+                className="input-box w-50"
+              >
+                <input
+                  name="month"
+                  type="text"
+                  minLength="2"
+                  maxLength="2"
+                  className="input-basic"
+                  required
+                />
+                <p>/</p>
+                <input
+                  name="year"
+                  type="te"
+                  minLength="2"
+                  maxLength="2"
+                  className="input-basic"
+                  required
+                />
+              </EasyField>
+            </StyledCardFieldContainer>
+            <StyledCardFieldContainer className="input-container">
+              <label className="input-title">카드 소유자 이름 (선택)</label>
+              <span className="input-title name-length">
+                {' '}
+                {values.owner.length}/30
+              </span>
+              <div className="input-box">
+                <input
+                  name="owner"
+                  type="text"
+                  maxLength="30"
+                  value={values.owner}
+                  onChange={({ target }) => {
+                    handleChange('owner', () => target.value);
+                  }}
+                  className="input-basic"
+                />
+              </div>
+            </StyledCardFieldContainer>
+            <StyledCardFieldContainer className="input-container">
+              <label className="input-title">보안코드 (CVC/CVV)</label>
+              <div className="cvc-block">
+                <div className="input-box w-25">
+                  <input
+                    name="cvc"
+                    type="text"
+                    minLength="3"
+                    maxLength="3"
+                    value={values.cvc}
+                    onChange={({ target }) => {
+                      handleChange('cvc', () => target.value);
+                    }}
+                    className="input-basic"
+                    required
+                  />
+                </div>
+                <ToolTip tip="보안 코드는 보통 카드 뒷면 3자리 수입니다.">
+                  ?
+                </ToolTip>
+              </div>
+            </StyledCardFieldContainer>
+            <StyledCardFieldContainer className="input-container">
+              <label className="input-title">비밀번호</label>
+              <EasyField
+                name="password"
+                value={values.password}
+                onChange={handleChange}
+                className="input-box password"
+              >
+                <input
+                  name="firstDigit"
+                  type="text"
+                  maxLength="1"
+                  className="input-basic w-15 password"
+                  required
+                />
+                <input
+                  name="secondDigit"
+                  type="text"
+                  maxLength="1"
+                  className="input-basic w-15 password"
+                  required
+                />
+                <input
+                  name="thirdDigit"
+                  type="password"
+                  maxLength="1"
+                  className="input-basic w-15 password"
+                  disabled
+                />
+                <input
+                  name="fourthDigit"
+                  type="password"
+                  maxLength="1"
+                  className="input-basic w-15 password"
+                  disabled
+                />
+              </EasyField>
+            </StyledCardFieldContainer>
+            <button className="submit-button" type="submit">
+              다음
+            </button>
+          </StyledCardForm>
         </>
       )}
     </EasyForm>

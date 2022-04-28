@@ -1,14 +1,20 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import './App.css';
+import styled from 'styled-components';
+import BackwardButton from './components/BackwardButton';
 import CardForm from './components/CardForm';
-import ToolTip from './components/ToolTip';
+// import ToolTip from './components/ToolTip';
+
+const StyledApp = styled.div`
+  padding: 16px 24px;
+`;
 
 const App = () => {
   return (
-    <div className="App">
+    <StyledApp>
+      <BackwardButton>카드 추가</BackwardButton>
       <CardForm />
-    </div>
+    </StyledApp>
   );
 };
 

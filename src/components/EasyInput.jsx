@@ -5,7 +5,7 @@ const EasyInput = ({ parentName, name, value, onChange, ...rest }) => {
     <input
       key={name}
       name={name}
-      value={value[name]}
+      value={value}
       onChange={({ target }) => {
         onChange(parentName, (prevState) => {
           const state = { ...prevState };
