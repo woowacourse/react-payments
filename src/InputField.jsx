@@ -24,12 +24,20 @@ const StyledInputWrapper = styled.div`
   padding: 12px;
 `;
 
+const StyledInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
 export default function InputField({ labelText, children, OptionalComponent }) {
   return (
     <StyledInputField>
-      {OptionalComponent}
       <StyledLabel>{labelText}</StyledLabel>
-      <StyledInputWrapper>{children}</StyledInputWrapper>
+      <StyledInputContainer>
+        <StyledInputWrapper>{children}</StyledInputWrapper>
+        {OptionalComponent}
+      </StyledInputContainer>
     </StyledInputField>
   );
 }
