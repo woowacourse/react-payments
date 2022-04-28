@@ -1,26 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Card from "./components/Card";
 import CardInfoForm from "./components/CardInfoForm";
 import Header from "./components/Header";
 import REGEXP from "./contants/regexp";
-
-interface CardInfo {
-  cardNumbers: CardNumbers;
-  expiredDate: ExpiredDate;
-  userName: string;
-  securityCode: string;
-  password: Password;
-}
-
-type CardNumbers = [string, string, string, string];
-
-type Password = [string, string];
-
-interface ExpiredDate {
-  month: string;
-  year: string;
-}
+import { useCardInfoValidation } from "./hooks/useCardInfoValidation";
+import cardInfoValidator from "./lib/validation";
+import { CardInfo, CardNumbers, Password } from "./types";
 
 const initialCardInfo: CardInfo = {
   cardNumbers: ["", "", "", ""],
@@ -32,6 +18,12 @@ const initialCardInfo: CardInfo = {
 
 function App() {
   const [cardInfo, setCardInfo] = useState<CardInfo>(initialCardInfo);
+
+  const cardInfoValidation = useCardInfoValidation(cardInfo, cardInfoValidator);
+
+  const resetCardInfo = () => {
+    setCardInfo(initialCardInfo);
+  };
 
   const onChangeCardNumber = (e: React.ChangeEvent<HTMLInputElement>, index: 0 | 1 | 2 | 3) => {
     const inputValue = e.target.value;
@@ -55,7 +47,7 @@ function App() {
 
     if (inputValue === "" || REGEXP.NUMBER.test(inputValue)) {
       setCardInfo(prevCardInfo => {
-        const newExpiredDate: ExpiredDate = {
+        const newExpiredDate = {
           ...prevCardInfo.expiredDate,
         };
 
@@ -127,6 +119,8 @@ function App() {
         onBlurUserName={onBlurUserName}
         onChangeSecurityCode={onChangeSecurityCode}
         onChangePassword={onChangePassword}
+        resetCardInfo={resetCardInfo}
+        cardInfoValidation={cardInfoValidation}
       />
     </div>
   );

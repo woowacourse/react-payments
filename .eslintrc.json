@@ -51,7 +51,8 @@
       "typescript": {} // 프로젝트 Root의 tsconfig.json을 찾는다.
     },
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [".ts", ".tsx"],
+      "import/parser": ["babel-eslint"]
     }
   },
   "parser": "@typescript-eslint/parser",

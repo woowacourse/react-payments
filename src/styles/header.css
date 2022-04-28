@@ -7,6 +7,7 @@
   border-right: 2px solid #000;
   transform: rotate(225deg) translateY(-3px);
   margin: 0 18px 0 6px;
+  cursor: pointer;
 }
 
 .page-header {
