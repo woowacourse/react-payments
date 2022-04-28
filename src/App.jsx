@@ -27,6 +27,7 @@ function App() {
   const correctOwnerNameCallback = isCorrect => setIsCorrectOwnerName(isCorrect);
   const correctSecurityCodeCallback = isCorrect => setIsCorrectSecurityCode(isCorrect);
   const correctCardPwdCallback = isCorrect => setIsCorrectCardPwd(isCorrect);
+
   useEffect(() => {
     const isOkCardNumber = cardNumber !== '';
     const allOk = [
@@ -38,6 +39,7 @@ function App() {
     ].every(ok => ok);
     setIsAllCompleted(allOk);
   }, [cardNumber, isCorrectCardDate, isCorrectOwnerName, isCorrectSecurityCode, isCorrectCardPwd]);
+
   useLayoutEffect(() => {
     if (targetRef.current) {
       setDimensions({
@@ -46,6 +48,7 @@ function App() {
       });
     }
   }, []);
+
   return (
     <div className="app" ref={targetRef}>
       <Header>{'카드추가'}</Header>

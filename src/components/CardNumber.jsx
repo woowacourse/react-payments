@@ -37,10 +37,12 @@ function CardNumber({ cardNumberCallback }) {
     cardNoC: '',
     cardNoD: '',
   });
+
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = e => {
     const { name, value } = e.target;
+
     cardNoRefs.every((cardNoRef, index) => {
       if (e.target === cardNoRef.current && cardNoRef.current.value.length === 4) {
         if (index === cardNoRefs.length - 1) return false;

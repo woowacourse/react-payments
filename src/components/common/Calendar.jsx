@@ -42,6 +42,7 @@ const Item = styled.li`
 function Calendar({ items, placeholder, setItem, dimensions }) {
   const inputRef = useRef(null);
   const [isShown, setIsShown] = useState(false);
+
   const handleClickBox = () => {
     setIsShown(!isShown);
   };

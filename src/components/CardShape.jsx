@@ -66,7 +66,6 @@ const cardCompanyList = [
   { color: '#E76E9A', name: '도비 카드' },
   { color: '#F37D3B', name: '콜린 카드' },
   { color: '#FBCD58', name: '썬 카드' },
-
   { color: '#66adff', name: '태태 카드' },
   { color: '#cc1b32', name: '콜라 카드' },
   { color: '#69ff66', name: '비녀 카드' },
