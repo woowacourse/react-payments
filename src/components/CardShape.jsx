@@ -32,9 +32,19 @@ const CardChip = styled.div`
 `;
 const CardBottom = styled.div``;
 const CardNumber = styled.div``;
-const CardInfo = styled.div``;
+const CardInfo = styled.div`
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+`;
+const CardParagraph = styled.p`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: ${props => props.width}px;
+`;
 
-function CardShape({ cardCompany, cardNumber, cardOwner, cardDate }) {
+function CardShape({ cardCompany, cardNumber, cardOwnerName, cardDate }) {
   return (
     <CardContainer>
       <CardBox>
@@ -47,8 +57,8 @@ function CardShape({ cardCompany, cardNumber, cardOwner, cardDate }) {
             <Span>{cardNumber}</Span>
           </CardNumber>
           <CardInfo>
-            <Span>{cardOwner}</Span>
-            <Span>{cardDate}</Span>
+            <CardParagraph width="120">{cardOwnerName || 'NAME'}</CardParagraph>
+            <CardParagraph>{cardDate || 'MM / YY'}</CardParagraph>
           </CardInfo>
         </CardBottom>
       </CardBox>
