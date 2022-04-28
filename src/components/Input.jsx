@@ -18,32 +18,32 @@ function Input({
 }) {
   const checkValidation = (event, targetValue) => {
     if (validators.isNaN && Number.isNaN(+targetValue)) {
-      alert(ERROR_MESSAGE.NOT_NUMBER);
       event.target.value = targetValue.substring(0, value.length - 1);
-      return false;
+      throw new Error(ERROR_MESSAGE.NOT_NUMBER);
     }
 
     if (validators.isOverMaxLength && validators.isOverMaxLength(targetValue, length)) {
-      alert(ERROR_MESSAGE.OVER_MAX_LENGTH);
       event.target.value = targetValue.substring(0, length);
-      return false;
+      throw new Error(ERROR_MESSAGE.OVER_MAX_LENGTH);
     }
 
     if (validators.isOutOfRange && validators.isOutOfRange(min, max, +targetValue)) {
-      if (targetValue === '') return true;
-      alert(ERROR_MESSAGE.INVALID_MONTH_RANGE);
+      if (targetValue === '') return;
       event.target.value = targetValue.substring(0, targetValue.length - 1);
-      return false;
+      throw new Error(ERROR_MESSAGE.INVALID_MONTH_RANGE);
     }
-    return true;
   };
 
   const handleChange = (event) => {
     const targetValue = event.target.value;
 
     if (updateNameLength) updateNameLength(targetValue);
-    if (checkValidation(event, targetValue)) {
+
+    try {
+      checkValidation(event, targetValue);
       updateCardForm(name, targetValue);
+    } catch (error) {
+      alert(error.message);
     }
   };
 
@@ -66,7 +66,7 @@ Input.propTypes = {
   type: PropTypes.string,
   size: PropTypes.string,
   placeholder: PropTypes.string,
-  length: PropTypes.number,
+  length: PropTypes.number.isRequired,
   minLength: PropTypes.number,
   min: PropTypes.number,
   max: PropTypes.number,
@@ -78,7 +78,7 @@ Input.propTypes = {
     isOverMaxLength: PropTypes.func.isRequired,
     isNaN: PropTypes.func,
     isOutOfRange: PropTypes.func,
-  }),
+  }).isRequired,
 };
 
 Input.defaultProps = {
