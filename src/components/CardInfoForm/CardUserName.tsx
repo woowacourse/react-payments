@@ -5,21 +5,16 @@ import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
 interface CardUserNameProps {
-  cardUserName: string;
+  userName: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
   isValid: boolean;
 }
-export default function CardUserName({
-  cardUserName,
-  onChange,
-  onBlur,
-  isValid,
-}: CardUserNameProps) {
+export default function CardUserName({ userName, onChange, onBlur, isValid }: CardUserNameProps) {
   return (
     <InputContainer inputTitle="카드 소유자 이름(선택)" isValid={isValid}>
       <Input
-        value={cardUserName}
+        value={userName}
         type="text"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         onChange={onChange}
@@ -30,7 +25,7 @@ export default function CardUserName({
         align="left"
       />
       <span className="card-user-name-length">
-        {cardUserName.length}/{MAX_USER_NAME_LENGTH}
+        {userName.length}/{MAX_USER_NAME_LENGTH}
       </span>
     </InputContainer>
   );

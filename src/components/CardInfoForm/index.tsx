@@ -65,7 +65,7 @@ export default function CardInfoForm({
         isValid={isExpirationDateValid}
       />
       <CardUserName
-        cardUserName={userName}
+        userName={userName}
         onChange={onChangeUserName}
         onBlur={onBlurUserName}
         isValid={isUserNameValid}
