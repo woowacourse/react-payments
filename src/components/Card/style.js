@@ -11,7 +11,7 @@ const FlexAlignCenter = css`
 
 const CardWrapper = styled.div`
   ${FlexAlignCenter}
-  background-color: red;
+  background-color: #D2D2D2;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 5px;
@@ -19,6 +19,7 @@ const CardWrapper = styled.div`
   padding: ${(props) => (props.size === "small" ? "14px" : "20px")};
   width: ${(props) => (props.size === "small" ? "208px" : "290px")};
   height: ${(props) => (props.size === "small" ? "130px" : "180px")};
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 `;
 
 const CardTop = styled.div`
@@ -50,11 +51,19 @@ const CardText = styled.div`
   font-weight: 400;
 `;
 
+const CardOwner = styled.div`
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
 const CardBottomNumber = styled.div`
   ${FullSize}
   ${FlexAlignCenter}
   margin-bottom: 10px;
   justify-content: center;
+  height: 16px;
 `;
 
 const CardBottomInfo = styled.div`
@@ -71,4 +80,5 @@ export {
   CardText,
   CardBottomNumber,
   CardBottomInfo,
+  CardOwner,
 };

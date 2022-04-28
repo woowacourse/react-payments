@@ -11,12 +11,15 @@ function CardDueDateForm({dueDate, handleDueDate, dueYearInputRef}) {
           type="number"
           value={dueDate.month}
           onChange={(e) => handleDueDate("month", e)}
+          placeholder="MM"
         />
+        <span>/</span>
         <Input
           type="number"
           ref={dueYearInputRef}
           value={dueDate.year}
           onChange={(e) => handleDueDate("year", e)}
+          placeholder="YY"
         />
       </InputBox>
       </FormWrapper>

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import {ButtonWrapper} from './style'
 
-function Button({label, color}){
-  return(<ButtonWrapper type="button" color={color}>{label}</ButtonWrapper>)
+function Button({children, color}){
+  return(<ButtonWrapper type="button" color={color}>{children}</ButtonWrapper>)
 }
 
 Button.propTypes = {
@@ -10,7 +10,10 @@ Button.propTypes = {
   /**
    * Button contents
    */
-  label: PropTypes.string.isRequired,
+   children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node
+   ]),
 }
 
 export default Button;

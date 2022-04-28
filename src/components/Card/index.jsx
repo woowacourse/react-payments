@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import {CardWrapper, CardTop, CardMiddle, CardBottom, CardText, CardBottomNumber, CardBottomInfo} from "./style";
+import {CardWrapper, CardTop, CardMiddle, CardBottom, CardText, CardBottomNumber, CardBottomInfo, CardOwner} from "./style";
 
-function Card({size, company, cardNumbers, owner, dueDate}) {
-  const {month, year} = dueDate;
+function Card({size, company, cardNumbers, owner, dueMonth, dueYear}) {
+  // const {month, year} = dueDate;
 
   return (
     <CardWrapper size={size}>
@@ -19,8 +19,8 @@ function Card({size, company, cardNumbers, owner, dueDate}) {
               ).join(" ")}</CardText>
           </CardBottomNumber>
           <CardBottomInfo>
-            <CardText>{owner}</CardText>
-            <CardText>{month}/{year}</CardText>
+            <CardOwner>{owner}</CardOwner>
+            <CardText>{dueMonth}/{dueYear}</CardText>
           </CardBottomInfo>
         </CardBottom>
     </CardWrapper>
@@ -43,7 +43,8 @@ Card.propTypes = {
   /**
    * 만료일
    */
-  dueDate: PropTypes.object
+   dueMonth: PropTypes.string,
+   dueYear: PropTypes.string,
 }
  
 export default Card

@@ -103,7 +103,11 @@ function AddPage() {
   return (
     <PageWrapper>
       <HeaderWrapper>
-        <Button label="<" color="#525252" />
+        <Button>
+          <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.30426 1L1.36476 8.78658L9.15134 15.7261" stroke="#525252" strokeWidth="1.5"/>
+          </svg>
+        </Button>
         <h2>카드 추가</h2>
       </HeaderWrapper>
       <CardWrapper>
@@ -112,7 +116,8 @@ function AddPage() {
           company="poco"
           cardNumbers={cardNumbers}
           owner={owner || "NAME"}
-          dueDate={dueDate}
+          dueMonth={dueDate.month || 'MM'}
+          dueYear={dueDate.year || 'YY'} 
         />
       </CardWrapper>
       <CardNumberForm cardNumbers={cardNumbers} cardNumberInputRefs={cardNumberInputRefs} handleCardNumber={handleCardNumber}/>
@@ -120,8 +125,8 @@ function AddPage() {
       <CardOwnerForm owner={owner} handleOwner={handleOwner} />
       <CardCVCForm cvc={cvc} handleCvc={handleCvc} />
       <CardPasswordForm password={password} handlePassword={handlePassword} secondPasswordInputRef={secondPasswordInputRef} />
-      <FooterWrapper>
-        <Button label='다음' color={allRequired ? '#04C09E': 'gray'}/>
+      <FooterWrapper> 
+        <Button color={allRequired ? '#04C09E': 'gray'}>다음</Button>
       </FooterWrapper>
     </PageWrapper>
   );

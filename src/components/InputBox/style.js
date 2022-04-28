@@ -4,10 +4,7 @@ const InputWrapper = styled.div`
   display: flex;
   align-items: center;
   height: 45px;
-  width: 100%;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  border-radius: 0.25rem;
+  border-radius: 7px;
 
   background: ${(props) => props.background || "#ecebf1"};
   border: ${(props) => props.border || "none"};

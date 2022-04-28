@@ -7,7 +7,7 @@ function CardCVCForm({cvc, handleCvc}) {
     <FormWrapper>
         <label>보안 코드(CVC/CVV)</label>
     <CVCWrapper>
-      <InputBox size="50">
+      <InputBox size="30">
         <Input type="password" value={cvc} onChange={handleCvc} />
       </InputBox>
       <svg

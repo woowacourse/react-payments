@@ -9,6 +9,7 @@ const PageWrapper = styled.div`
 
 const HeaderWrapper = styled.div`
   display: flex;
+  align-items: center;
 
   & h2 {
     font-size: 16px;
@@ -31,12 +32,23 @@ const PasswordWrapper = styled.div`
 const OwnerHeader = styled.div`
   display: flex;
   justify-content: space-between;
+
+  & div {
+    font-size: 12px;
+    margin-bottom: 10px;
+    display: inline-block;
+    color: #525252;
+  }
 `;
 
 const Dot = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 10%;
+  color: #04c09e;
+  font-size: 18px;
+  font-weight: 500;
 `;
 
 const CVCWrapper = styled.div`
@@ -52,6 +64,13 @@ const FooterWrapper = styled.div`
 
 const FormWrapper = styled.div`
   margin-bottom: 15px;
+
+  & label {
+    font-size: 12px;
+    margin-bottom: 10px;
+    display: inline-block;
+    color: #525252;
+  }
 `;
 
 export {
