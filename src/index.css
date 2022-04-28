@@ -21,4 +21,5 @@ code {
   min-width: 375px;
   padding: 16px 24px;
   background-color: #fff;
+  max-width: 400px;
 }
