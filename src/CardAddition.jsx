@@ -49,7 +49,16 @@ function CardAddition() {
   }, []);
 
   const submitCard = () => {
-    alert(cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword);
+    const cardData = {
+      카드사: CARD_COMPANIES[cardCompanyIndex].NAME,
+      카드번호: cardNumber,
+      카드만료일: cardExpiration,
+      카드소유자: cardOwner,
+      보안코드: cardCvc,
+      카드비밀번호: cardPassword,
+    };
+    console.log(cardData);
+    alert('입력된 카드 정보가 콘솔로그로 전송되었습니다. 콘솔로그를 확인해주세요.');
   };
 
   const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
