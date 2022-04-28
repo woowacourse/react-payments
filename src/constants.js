@@ -8,6 +8,7 @@ export const MAX_LENGTH = {
 
 export const MIN_LENGTH = {
   NAME: 2,
+  MONTH: 1,
 };
 
 export const RANGE = {

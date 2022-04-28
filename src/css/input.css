@@ -14,12 +14,9 @@
 .input-title {
   display: flex;
   align-items: center;
-
   font-size: 12px;
   line-height: 14px;
-
   margin-bottom: 4px;
-
   color: #525252;
 }
 
@@ -40,10 +37,8 @@
   border: none;
   background: none;
   outline: none;
-
   margin: 16px 0;
   padding: 4px 0;
-
   border-bottom: 1px solid #383838;
 }
 

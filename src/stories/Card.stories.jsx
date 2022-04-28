@@ -13,17 +13,31 @@ const Template = (args) => <Card {...args} />;
 export const Deactivated = Template.bind({});
 
 Deactivated.args = {
-  isEmptyCard: true,
-  cardNumber: '',
-  ownerName: 'NAME',
-  expireDate: 'MM/YY',
+  card: {
+    firstCardNumber: '',
+    secondCardNumber: '',
+    thirdCardNumber: '',
+    fourthCardNumber: '',
+    expireMonth: 'MM',
+    expireYear: 'YY',
+    ownerName: 'NAME',
+    securityCode: '',
+    password: '',
+  },
 };
 
 export const Activated = Template.bind({});
 
 Activated.args = {
-  isEmptyCard: false,
-  cardNumber: '1324 1234 oooo oooo',
-  ownerName: 'AHN',
-  expireDate: '04/23',
+  card: {
+    firstCardNumber: '1234',
+    secondCardNumber: '5678',
+    thirdCardNumber: '1111',
+    fourthCardNumber: '2222',
+    expireMonth: '01',
+    expireYear: '23',
+    ownerName: 'ahn',
+    securityCode: '123',
+    password: '99',
+  },
 };

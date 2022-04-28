@@ -8,40 +8,50 @@ function Input({
   placeholder,
   length,
   minLength,
-  updateNameLength,
   min,
   max,
+  name,
+  value,
+  updateNameLength,
+  updateCardForm,
   validators,
 }) {
-  const checkValidation = (event, value) => {
-    if (validators.isNaN && Number.isNaN(+value)) {
+  const checkValidation = (event, targetValue) => {
+    if (validators.isNaN && Number.isNaN(+targetValue)) {
       alert(ERROR_MESSAGE.NOT_NUMBER);
-      event.target.value = value.substring(0, value.length - 1);
-      return;
+      event.target.value = targetValue.substring(0, value.length - 1);
+      return false;
     }
 
-    if (validators.isOverMaxLength && validators.isOverMaxLength(value, length)) {
+    if (validators.isOverMaxLength && validators.isOverMaxLength(targetValue, length)) {
       alert(ERROR_MESSAGE.OVER_MAX_LENGTH);
-      event.target.value = value.substring(0, length);
-      return;
+      event.target.value = targetValue.substring(0, length);
+      return false;
     }
 
-    if (validators.isOutOfRange && validators.isOutOfRange(min, max, +value)) {
-      if (value === '') return;
+    if (validators.isOutOfRange && validators.isOutOfRange(min, max, +targetValue)) {
+      if (targetValue === '') return true;
       alert(ERROR_MESSAGE.INVALID_MONTH_RANGE);
-      event.target.value = value.substring(0, value.length - 1);
+      event.target.value = targetValue.substring(0, targetValue.length - 1);
+      return false;
     }
+    return true;
   };
 
   const handleChange = (event) => {
-    const { value } = event.target;
-    if (updateNameLength) updateNameLength(value);
-    checkValidation(event, value);
+    const targetValue = event.target.value;
+
+    if (updateNameLength) updateNameLength(targetValue);
+    if (checkValidation(event, targetValue)) {
+      updateCardForm(name, targetValue);
+    }
   };
 
   return (
     <input
       className={`input-basic ${size}`}
+      name={name}
+      value={value}
       type={type}
       placeholder={placeholder}
       maxLength={length}
@@ -58,9 +68,12 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   length: PropTypes.number,
   minLength: PropTypes.number,
-  updateNameLength: PropTypes.func,
   min: PropTypes.number,
   max: PropTypes.number,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  updateNameLength: PropTypes.func,
+  updateCardForm: PropTypes.func.isRequired,
   validators: PropTypes.shape({
     isOverMaxLength: PropTypes.func.isRequired,
     isNaN: PropTypes.func,

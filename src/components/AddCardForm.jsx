@@ -1,36 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Input from './Input';
 import { isOverMaxLength, isOutOfRange } from '../util';
 import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../constants';
 
-function AddCardForm(props) {
+function AddCardForm({ updateCard }) {
+  const [cardForm, setCardForm] = useState({
+    firstCardNumber: '',
+    secondCardNumber: '',
+    thirdCardNumber: '',
+    fourthCardNumber: '',
+    expireMonth: '',
+    expireYear: '',
+    ownerName: '',
+    securityCode: '',
+    firstPassword: '',
+    secondPassword: '',
+  });
   const [nameLength, setNameLength] = useState(0);
 
   const updateNameLength = (name) => {
     setNameLength(name.length);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  const updateCardForm = (name, value) => {
+    setCardForm((prevCardForm) => {
+      return { ...prevCardForm, [name]: value };
+    });
+  };
+
+  useEffect(() => {
+    updateCard(cardForm);
+  }, [cardForm]);
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
           <Input
             length={MAX_LENGTH.CARD_NUMBER}
+            value={cardForm.firstCardNumber}
+            name="firstCardNumber"
+            updateCardForm={updateCardForm}
             validators={{ isOverMaxLength, isNaN: Number.isNaN }}
           />
           <Input
             length={MAX_LENGTH.CARD_NUMBER}
+            value={cardForm.secondCardNumber}
+            name="secondCardNumber"
+            updateCardForm={updateCardForm}
             validators={{ isOverMaxLength, isNaN: Number.isNaN }}
           />
           <Input
             type="password"
             length={MAX_LENGTH.CARD_NUMBER}
+            value={cardForm.thirdCardNumber}
+            name="thirdCardNumber"
+            updateCardForm={updateCardForm}
             validators={{ isOverMaxLength, isNaN: Number.isNaN }}
           />
           <Input
             type="password"
             length={MAX_LENGTH.CARD_NUMBER}
+            value={cardForm.fourthCardNumber}
+            name="fourthCardNumber"
+            updateCardForm={updateCardForm}
             validators={{ isOverMaxLength, isNaN: Number.isNaN }}
           />
         </div>
@@ -41,14 +80,21 @@ function AddCardForm(props) {
           <Input
             placeholder="MM"
             length={MAX_LENGTH.DATE}
+            minLength={MIN_LENGTH.MONTH}
             min={RANGE.MONTH_MIN}
             max={RANGE.MONTH_MAX}
+            value={cardForm.expireMonth}
+            name="expireMonth"
+            updateCardForm={updateCardForm}
             validators={{ isOverMaxLength, isNaN: Number.isNaN, isOutOfRange }}
           />
           /
           <Input
             placeholder="YY"
             length={MAX_LENGTH.DATE}
+            value={cardForm.expireYear}
+            name="expireYear"
+            updateCardForm={updateCardForm}
             validators={{ isOverMaxLength, isNaN: Number.isNaN }}
           />
         </div>
@@ -65,6 +111,9 @@ function AddCardForm(props) {
           length={MAX_LENGTH.NAME}
           minLength={MIN_LENGTH.NAME}
           updateNameLength={updateNameLength}
+          value={cardForm.ownerName}
+          name="ownerName"
+          updateCardForm={updateCardForm}
           validators={{ isOverMaxLength }}
         />
       </div>
@@ -74,6 +123,9 @@ function AddCardForm(props) {
           size="w-25"
           type="password"
           length={MAX_LENGTH.SECURITY_CODE}
+          value={cardForm.securityCode}
+          name="securityCode"
+          updateCardForm={updateCardForm}
           validators={{ isOverMaxLength, isNaN: Number.isNaN }}
         />
         <div className="help-tip">
@@ -86,12 +138,18 @@ function AddCardForm(props) {
           size="w-15 mr-10"
           type="password"
           length={MAX_LENGTH.PASSWORD}
+          value={cardForm.firstPassword}
+          name="firstPassword"
+          updateCardForm={updateCardForm}
           validators={{ isOverMaxLength, isNaN: Number.isNaN }}
         />
         <Input
           size="w-15 mr-10"
           type="password"
           length={MAX_LENGTH.PASSWORD}
+          value={cardForm.secondPassword}
+          name="secondPassword"
+          updateCardForm={updateCardForm}
           validators={{ isOverMaxLength, isNaN: Number.isNaN }}
         />
         <div className="dot" />
@@ -105,5 +163,9 @@ function AddCardForm(props) {
     </form>
   );
 }
+
+AddCardForm.propTypes = {
+  updateCard: PropTypes.func,
+};
 
 export default AddCardForm;

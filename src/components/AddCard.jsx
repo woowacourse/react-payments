@@ -3,12 +3,31 @@ import AddCardForm from './AddCardForm';
 import Card from './Card';
 
 function AddCard() {
-  const [cardNumber, setCardNumber] = useState('');
-  const [expireDate, setExpireDate] = useState('');
-  const [ownerName, setOwnerName] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
-  const [password, setPassword] = useState('');
-  const [isEmptyCard, setIsEmptyCard] = useState(true);
+  const [card, setCard] = useState({
+    firstCardNumber: '',
+    secondCardNumber: '',
+    thirdCardNumber: '',
+    fourthCardNumber: '',
+    expireMonth: '',
+    expireYear: '',
+    ownerName: '',
+    securityCode: '',
+    password: '',
+  });
+
+  const updateCard = (cardForm) => {
+    setCard({
+      firstCardNumber: cardForm.firstCardNumber,
+      secondCardNumber: cardForm.secondCardNumber,
+      thirdCardNumber: cardForm.thirdCardNumber,
+      fourthCardNumber: cardForm.fourthCardNumber,
+      expireMonth: cardForm.expireMonth,
+      expireYear: cardForm.expireYear,
+      ownerName: cardForm.ownerName,
+      securityCode: cardForm.securityCode,
+      password: cardForm.firstCardNumber + cardForm.secondCardNumber,
+    });
+  };
 
   return (
     <>
@@ -16,13 +35,8 @@ function AddCard() {
         <div className="back-button" />
         <h2 className="page-title">카드 추가</h2>
       </div>
-      <Card
-        isEmptyCard={isEmptyCard}
-        cardNumber={cardNumber}
-        expireDate={expireDate}
-        ownerName={ownerName}
-      />
-      <AddCardForm />
+      <Card card={card} />
+      <AddCardForm updateCard={updateCard} />
     </>
   );
 }
