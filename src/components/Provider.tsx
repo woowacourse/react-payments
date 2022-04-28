@@ -6,13 +6,15 @@ export type State = {
   name: string,
   expiredPeriod: string,
   cvc: string,
+  password: Array<string>,
 }
 
 type Action = 
-  | { type: ActionType.INPUT_CARDNUMBER , payload: string }
-  | { type: ActionType.INPUT_NAME, payload: string }
-  | {type: ActionType.INPUT_EXPIRED_PERIOD, payload: string}
-  | {type: ActionType.INPUT_CVC, payload: string};
+  | { type: ActionType.INPUT_CARDNUMBER , payload: any }
+  | { type: ActionType.INPUT_NAME, payload: any }
+  | { type: ActionType.INPUT_EXPIRED_PERIOD, payload: any }
+  | { type: ActionType.INPUT_CVC, payload: any }
+  | { type: ActionType.INPUT_PASSWORD, payload: any };
 
 export type AppDispatch = Dispatch<Action>;
 
@@ -21,13 +23,14 @@ const initalState: State = {
   name: '',
   expiredPeriod: '',
   cvc: '',
-}
+  password: ['', ''],
+};
 
 // context를 전역에 선언한다
 export const AppStateContext = createContext<State>(initalState);
 export const AppDispatchContext = createContext<AppDispatch>(() => null);
 
-export function createAction<T>(type: ActionType, payload: T) {
+export function createAction(type: ActionType, payload: any): Action {
   return {
     type, payload
   }
@@ -54,6 +57,11 @@ function reducer(state: State, action: Action): State {
       return {
         ...state,
         cvc: action.payload
+      }
+    case ActionType.INPUT_PASSWORD:
+      return {
+        ...state,
+        password: [...action.payload]
       }
   }  
 }

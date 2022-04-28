@@ -1,34 +1,20 @@
 import React from "react";
-import { css } from "@emotion/react";
-import { useAppDispatch, useAppState } from "../../hooks/hooks";
-import { createAction } from "../Provider";
-import { ActionType } from "../../types";
-import { isNum } from "../../utils";
+import { useAppDispatch, useAppState } from "../../../hooks/hooks";
+import { createAction } from "../../Provider";
+import { ActionType } from "../../../types";
+import { isNum } from "../../../utils";
+import ExpiredPeriodInput from "./ExpiredPeriodInput";
 
-const style = css({
-  backgroundColor: '#ECEBF1',
-  height: '45px',
-  width: '100%',
-  borderRadius: '7px',
-  maxWidth: '137px',
-  outline: 'none !important',
-  border: 'inherit',
-  fontSize: '18px',
-  textAlign: 'center',
-  '&:focus': {
-    boxShadow: 'none',
-  }
-});
-
-function ExpiredPeriodInput() {
+function ExpiredPeriodInputContainer() {
   const { expiredPeriod } = useAppState();
   const dispatch = useAppDispatch();
 
-  const handleChage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
     // value의 총 길이는 5을 넘으면 안 된다
     if (value.length > 7) return;
+
     // 입력할 때
     if (expiredPeriod.length < value.length) {
       const lastChar = value.slice(-1);
@@ -70,13 +56,10 @@ function ExpiredPeriodInput() {
     }
 
     dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, value));
+    
   }
 
-  return(
-    <>
-      <input css={style} type="text" onChange={handleChage} value={expiredPeriod} placeholder='MM / YY' />
-    </>
-  )
+  return <ExpiredPeriodInput onChange={handleChange} value={expiredPeriod} />
 }
 
-export default ExpiredPeriodInput;
+export default ExpiredPeriodInputContainer;
