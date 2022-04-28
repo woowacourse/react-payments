@@ -15,15 +15,17 @@ import CardOwnerForm from './CardOwnerForm'
 import CardCVCForm from "./CardCVCForm";
 import CardPasswordForm from "./CardPasswordForm";
 
-import { CARD_NUMBER, DUE_DATE, OWNER, CVC, PASSWORD, COLORS } from '../../constant'
+import { CARD_NUMBER, DUE_DATE, OWNER, CVC, PASSWORD, COLORS,MONTH } from '../../constant'
 
 function AddPage() {
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
-  const [dueDate, setDueDate] = useState({ month: "", year: "" });
+  const [dueDate, setDueDate] = useState({ month: "", year: ""});
   const [owner, setOwner] = useState("");
   const [cvc, setCvc] = useState("");
   const [password, setPassword] = useState({firstPassword: '', secondPassword: ''});
   const [allRequired, setAllRequired] = useState(false);
+  const [error, setError] = useState({ month: false, year: false });
+
 
   useEffect(() => {
     setAllRequired(
@@ -35,7 +37,7 @@ function AddPage() {
         password.firstPassword &&
         password.secondPassword
     );
-  }, [cardNumbers, dueDate, owner, cvc, password]);
+  }, [cardNumbers, dueDate, owner, cvc, password, error]);
 
   const secondCardNumberInputRef = useRef();
   const thirdCardNumberInputRef = useRef();
@@ -74,6 +76,12 @@ function AddPage() {
     if (value.length > DUE_DATE.UNIT_LENGTH) return;
 
     setDueDate({ ...dueDate, [key]: value });
+    
+    if(key==='month') setError({ ...error, [key]: value > MONTH.MAX || value < MONTH.MIN });
+    else {
+      const currentYear = new Date().getFullYear().toString().slice(2);
+      setError({ ...error, [key]: value < currentYear });
+    }
 
     if(value.length >= DUE_DATE.UNIT_LENGTH) {
       dueYearInputRef.current.focus();
@@ -102,6 +110,14 @@ function AddPage() {
     }
   }
 
+  const handleSubmit = () => {
+   if(error.month || error.year) {
+      alert('만료일을 확인해주세요');
+      return;
+    }
+    alert(`${owner}님의 카드가 등록되었습니다`)
+  }
+
   return (
     <PageWrapper>
       <HeaderWrapper>
@@ -123,12 +139,12 @@ function AddPage() {
         />
       </CardWrapper>
       <CardNumberForm cardNumbers={cardNumbers} cardNumberInputRefs={cardNumberInputRefs} handleCardNumber={handleCardNumber}/>
-      <CardDueDateForm dueDate={dueDate} dueYearInputRef={dueYearInputRef} handleDueDate={handleDueDate} />
+      <CardDueDateForm dueDate={dueDate} error={error} dueYearInputRef={dueYearInputRef} handleDueDate={handleDueDate}/>
       <CardOwnerForm owner={owner} handleOwner={handleOwner} />
       <CardCVCForm cvc={cvc} handleCvc={handleCvc} />
       <CardPasswordForm password={password} handlePassword={handlePassword} secondPasswordInputRef={secondPasswordInputRef} />
       <FooterWrapper> 
-        <Button color={allRequired ? COLORS.MINT : COLORS.DARK_GRAY}>다음</Button>
+        {allRequired && <Button color={COLORS.MINT} onClick={handleSubmit}>다음</Button> }
       </FooterWrapper>
     </PageWrapper>
   );

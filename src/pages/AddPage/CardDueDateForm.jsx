@@ -1,21 +1,8 @@
 import InputBox from "../../components/InputBox";
 import { Input } from "../../components/Input/style";
 import { FormWrapper } from "./style";
-import { useState } from "react";
-import { MONTH } from '../../constant'
 
-function CardDueDateForm({ dueDate, handleDueDate, dueYearInputRef }) {
-  const [error, setError] = useState({ month: false, year: false });
-
-  const handleMonthError = ({ target: { value } }) => {
-    setError({ ...error, month: value > MONTH.MAX || value < MONTH.MIN });
-  };
-
-  const handleYearError = ({ target: { value } }) => {
-    const currentYear = new Date().getFullYear().toString().slice(2);
-    setError({ ...error, year: value < currentYear });
-  };
-
+function CardDueDateForm({ dueDate, handleDueDate, dueYearInputRef, error }) {
   return (
     <FormWrapper>
       <label>만료일</label>
@@ -23,10 +10,7 @@ function CardDueDateForm({ dueDate, handleDueDate, dueYearInputRef }) {
         <Input
           type="number"
           value={dueDate.month}
-          onChange={(e) => {
-            handleDueDate("month", e);
-            handleMonthError(e);
-          }}
+          onChange={(e) => handleDueDate("month", e)}
           placeholder="MM"
         />
         <span>/</span>
@@ -34,10 +18,7 @@ function CardDueDateForm({ dueDate, handleDueDate, dueYearInputRef }) {
           type="number"
           ref={dueYearInputRef}
           value={dueDate.year}
-          onChange={(e) => {
-            handleDueDate("year", e);
-            handleYearError(e);
-          }}
+          onChange={(e) => handleDueDate("year", e)}
           placeholder="YY"
         />
       </InputBox>

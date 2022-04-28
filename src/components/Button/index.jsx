@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import {ButtonWrapper} from './style'
 
-function Button({children, color}){
-  return(<ButtonWrapper type="button" color={color}>{children}</ButtonWrapper>)
+function Button({children, color, onClick}){
+  return(<ButtonWrapper type="button" color={color} onClick={onClick}>{children}</ButtonWrapper>)
 }
 
 Button.propTypes = {
+  onClick : PropTypes.func,
   color: PropTypes.string,
   /**
    * Button contents
