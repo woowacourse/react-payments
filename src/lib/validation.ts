@@ -21,14 +21,13 @@ const validateDate = (expirationDate: ExpirationDate) => {
   const year = date.getFullYear() % 100;
   const month = date.getMonth() + 1;
 
-  if (Number(expirationDate.year) < year) return false;
-  if (Number(expirationDate.year) > year + CARD_VALID_PERIOD) return false;
-  if (Number(expirationDate.year) === year && Number(expirationDate.month) < month) return false;
-  if (
-    Number(expirationDate.year) === year + CARD_VALID_PERIOD &&
-    Number(expirationDate.month) > month
-  )
-    return false;
+  const expirationYear = Number(expirationDate.year);
+  const expirationMonth = Number(expirationDate.month);
+
+  if (expirationYear < year) return false;
+  if (expirationYear > year + CARD_VALID_PERIOD) return false;
+  if (expirationYear === year && expirationMonth < month) return false;
+  if (expirationYear === year + CARD_VALID_PERIOD && expirationMonth > month) return false;
 
   return true;
 };
