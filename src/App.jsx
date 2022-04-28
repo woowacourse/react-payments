@@ -70,6 +70,14 @@ function App() {
   const [firstPassword, setFirstPassword] = useCardPassword('');
   const [secondPassword, setSecondPassword] = useCardPassword('');
 
+  const requiredList = [
+    cardNumber,
+    validDate,
+    CVC,
+    firstPassword,
+    secondPassword,
+  ];
+
   return (
     <StyledPage>
       <Header>
@@ -147,7 +155,9 @@ function App() {
           <Bullet>•</Bullet>
         </div>
       </InputGroup>
-      <NextButton color="#04C09E" content="다음" fontWeight="bold" />
+      {requiredList.every(value => value !== '') && (
+        <NextButton color="#04C09E" content="다음" fontWeight="bold" />
+      )}
     </StyledPage>
   );
 }
