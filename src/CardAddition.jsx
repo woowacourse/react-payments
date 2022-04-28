@@ -9,6 +9,7 @@ import CardCvc from './components/CardCvc';
 import CardPassword from './components/CardPassword';
 import MoveButton from './components/MoveButton';
 import CardContext from './CardContext';
+import CardListModal from './components/CardListModal';
 import validator from '../src/validations/validator';
 
 const CardAdditionContainer = styled.div`
@@ -49,6 +50,7 @@ function CardAddition() {
       <MoveButton onClick={submitCard} disabled={validateAllInputs()}>
         다음
       </MoveButton>
+      <CardListModal />
     </CardAdditionContainer>
   );
 }
