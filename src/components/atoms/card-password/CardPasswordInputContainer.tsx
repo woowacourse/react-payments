@@ -31,9 +31,7 @@ const CardPasswordInputContainer = forwardRef<HTMLInputElement, Props>(({ positi
     dispatch(createAction(ActionType.INPUT_PASSWORD, password));
   };
 
-  console.log('password : ', password);
   const val = password[position] ? transformNumToBullet(password[position]) : '';
-  console.log('val : ', val);
   return <CardPasswordInput onChange={handleChange} value={val} disabled={disabled} ref={ref} />
 });
 
