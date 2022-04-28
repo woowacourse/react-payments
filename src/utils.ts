@@ -2,6 +2,12 @@ export const removeWhiteSpaces = (str: string) => str.replace(/\s/g, '');
 
 export const removeSlash = (str: string) => str.replace(/\//g, '');
 
+export const removeHyphens = (str: string) => str.replace(/-/g, '');
+
+export const insertAt = (str: string, index: number, char: string) => str.substring(0, index) + char + str.substring(index);
+
+export const removeAt = (str: string, index: number) => str.slice(0,index) + str.slice(index+1);
+
 export const isNum = (str: string) => removeWhiteSpaces(str) && !Number.isNaN(Number(str));
 
 export const transformToCardFormat = (str: string) => {
