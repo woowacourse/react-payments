@@ -97,6 +97,14 @@ const CardAppPage = () => {
     setModalVisible((prevModalVisible) => !prevModalVisible);
   }, []);
 
+  const handleClickNextButton = () => {
+    const { first, second, third, fourth } = number;
+    const { month, year } = expiryDate;
+
+    const message = `🎊카드가 정상적으로 추가되었습니다.🎊\n\n회사 이름 : ${company}\n카드 번호 : ${first}-${second}-${third}-${fourth}\n만료일 : ${month} / ${year}\n카드 소유자 이름 : ${ownerName}\n보안 코드 : ${privacyCode}`;
+    alert(message);
+  };
+
   return (
     <div>
       <Header title="카드 추가">
@@ -160,7 +168,7 @@ const CardAppPage = () => {
         theme={theme}
       />
       {isfullFilled && (
-        <Button theme={theme} className="next-button">
+        <Button theme={theme} className="next-button" onClick={handleClickNextButton}>
           다음
         </Button>
       )}
