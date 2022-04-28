@@ -22,6 +22,12 @@ import {
   cardCompanyList,
 } from './data';
 
+const getCardInfoMessage = (company, number, month, year, ownerName, privacyCode) => {
+  const { first, second, third, fourth } = number;
+
+  return `🎊카드가 정상적으로 추가되었습니다.🎊\n\n회사 이름 : ${company}\n카드 번호 : ${first}-${second}-${third}-${fourth}\n만료일 : ${month} / ${year}\n카드 소유자 이름 : ${ownerName}\n보안 코드 : ${privacyCode}`;
+};
+
 const initialCardInfo = {
   company: '',
   number: {
@@ -103,11 +109,17 @@ const CardAppPage = () => {
   }, []);
 
   const handleClickNextButton = () => {
-    const { first, second, third, fourth } = number;
     const { month, year } = expiryDate;
+    const cardInfoMessage = getCardInfoMessage(
+      company,
+      number,
+      month,
+      year,
+      ownerName,
+      privacyCode,
+    );
 
-    const message = `🎊카드가 정상적으로 추가되었습니다.🎊\n\n회사 이름 : ${company}\n카드 번호 : ${first}-${second}-${third}-${fourth}\n만료일 : ${month} / ${year}\n카드 소유자 이름 : ${ownerName}\n보안 코드 : ${privacyCode}`;
-    alert(message);
+    alert(cardInfoMessage);
   };
 
   return (

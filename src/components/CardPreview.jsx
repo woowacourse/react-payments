@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { CRYPTO_STRING, DEFAULT_CARD_INFO } from '../constants';
+import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from '../constants';
 import Button from './common/Button';
 
 const propTypes = {
@@ -52,9 +52,7 @@ const CardPreview = ({ cardInfo, isCardFront, handleModal, handleCardPosition })
             <div className="card-white-line">{privacyCode}</div>
             <div className="card-back">
               <div className="small-card__chip"></div>
-              <div className="card-back__info">
-                이 카드를 도난 분실하면 일주일 이내로 연락 주시기 바랍니다.
-              </div>
+              <div className="card-back__info">{CARD_BACK_MESSAGE}</div>
             </div>
           </>
         )}

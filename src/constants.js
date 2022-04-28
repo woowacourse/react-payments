@@ -45,3 +45,5 @@ export const DATE_RANGE = {
   MAX_MONTH: 12,
   MIN_YEAR: 22,
 };
+
+export const CARD_BACK_MESSAGE = '이 카드를 도난 분실하면 일주일 이내로 연락 주시기 바랍니다.';
