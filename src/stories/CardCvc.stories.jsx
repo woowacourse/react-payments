@@ -8,4 +8,4 @@ export default {
 
 const Template = (args) => <CardCvc {...args} />;
 
-export const CardExample = Template.bind({});
+export const Example = Template.bind({});

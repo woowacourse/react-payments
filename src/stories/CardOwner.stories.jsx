@@ -8,4 +8,4 @@ export default {
 
 const Template = (args) => <CardOwner {...args} />;
 
-export const CardExample = Template.bind({});
+export const Example = Template.bind({});
