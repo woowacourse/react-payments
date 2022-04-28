@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Input from '../Input';
 import PropTypes from 'prop-types';
 import { isAlphabetOrSpace } from '../../utils/validations';
@@ -7,13 +7,16 @@ import { uid } from 'react-uid';
 import { checkFormCompletion, checkFormValidation, isNumberInRange } from './validation';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
 
+const inputCounts = [0, 4, 6, 7, 8];
 function InputForm({
   cardInput: { cardNumber, expirationDate, ownerName, securityCode, password },
   cardInputDispatch,
 }) {
   const [isComplete, setIsComplete] = useState(false);
 
-  const onChangeCardNumber = (key, e) => {
+  const inputElementsRef = useRef([]);
+
+  const onChangeCardNumber = (key, e, index) => {
     const {
       target: { value: cardNumber, maxLength },
     } = e;
@@ -21,9 +24,13 @@ function InputForm({
     if (isNumberInRange(cardNumber, maxLength)) {
       cardInputDispatch({ type: 'CHANGE_CARD_NUMBER', payload: { cardNumber, key } });
     }
+
+    if (cardNumber.length === maxLength) {
+      inputElementsRef.current[index + 1]?.focus();
+    }
   };
 
-  const onChangeExpirationDate = (key, e) => {
+  const onChangeExpirationDate = (key, e, index) => {
     const {
       target: { value: date, maxLength },
     } = e;
@@ -31,11 +38,15 @@ function InputForm({
     if (isNumberInRange(date, maxLength)) {
       cardInputDispatch({ type: 'CHANGE_EXPIRATION_DATE', payload: { date, key } });
     }
+
+    if (date.length === maxLength) {
+      inputElementsRef.current[index + 1]?.focus();
+    }
   };
 
-  const onChangeOwnerName = e => {
+  const onChangeOwnerName = (e, index) => {
     const {
-      target: { value: ownerName },
+      target: { value: ownerName, maxLength },
     } = e;
 
     if (isAlphabetOrSpace(ownerName)) {
@@ -44,9 +55,13 @@ function InputForm({
         payload: { ownerName: ownerName.toUpperCase() },
       });
     }
+
+    if (ownerName.length === maxLength) {
+      inputElementsRef.current[index + 1]?.focus();
+    }
   };
 
-  const onChangeSecurityCode = e => {
+  const onChangeSecurityCode = (e, index) => {
     const {
       target: { value: securityCode, maxLength },
     } = e;
@@ -57,9 +72,13 @@ function InputForm({
         payload: { securityCode },
       });
     }
+
+    if (securityCode.length === maxLength) {
+      inputElementsRef.current[index + 1]?.focus();
+    }
   };
 
-  const onChangePassword = (key, e) => {
+  const onChangePassword = (key, e, index) => {
     const {
       target: { value: password, maxLength },
     } = e;
@@ -69,6 +88,10 @@ function InputForm({
         type: 'CHANGE_PASSWORD',
         payload: { password, key },
       });
+    }
+
+    if (password.length === maxLength) {
+      inputElementsRef.current[index + 1]?.focus();
     }
   };
 
@@ -101,29 +124,31 @@ function InputForm({
   return (
     <form onSubmit={onClickNextButton}>
       <Input labelTitle="카드번호">
-        {Object.keys(cardNumber).map(stateKey => (
+        {Object.keys(cardNumber).map((stateKey, index) => (
           <input
             key={uid(stateKey)}
             className="input-basic"
             type={stateKey === 'first' || stateKey === 'second' ? 'text' : 'password'}
             value={cardNumber[stateKey]}
-            onChange={e => onChangeCardNumber(stateKey, e)}
+            onChange={e => onChangeCardNumber(stateKey, e, inputCounts[0] + index)}
             maxLength={4}
             required
+            ref={element => (inputElementsRef.current[inputCounts[0] + index] = element)}
           />
         ))}
       </Input>
       <Input labelTitle="만료일" inputSize="w-50">
-        {Object.keys(expirationDate).map(stateKey => (
+        {Object.keys(expirationDate).map((stateKey, index) => (
           <input
             key={uid(stateKey)}
             className="input-basic"
             type="text"
             placeholder={stateKey === 'month' ? 'MM' : 'YY'}
             value={expirationDate[stateKey]}
-            onChange={e => onChangeExpirationDate(stateKey, e)}
+            onChange={e => onChangeExpirationDate(stateKey, e, inputCounts[1] + index)}
             maxLength={2}
             required
+            ref={element => (inputElementsRef.current[inputCounts[1] + index] = element)}
           />
         ))}
       </Input>
@@ -133,8 +158,9 @@ function InputForm({
           className="input-basic"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           value={ownerName}
-          onChange={onChangeOwnerName}
+          onChange={e => onChangeOwnerName(e, inputCounts[2])}
           maxLength={30}
+          ref={element => (inputElementsRef.current[inputCounts[2]] = element)}
         />
       </Input>
       <Input
@@ -146,21 +172,23 @@ function InputForm({
           className="input-basic"
           type="password"
           value={securityCode}
-          onChange={onChangeSecurityCode}
+          onChange={e => onChangeSecurityCode(e, inputCounts[3])}
           maxLength={3}
           required
+          ref={element => (inputElementsRef.current[inputCounts[3]] = element)}
         />
       </Input>
       <Input labelTitle="카드 비밀번호" inputSize="w-50">
-        {Object.keys(password).map(stateKey => (
+        {Object.keys(password).map((stateKey, index) => (
           <input
             key={uid(stateKey)}
             className="input-basic"
             type="text"
             value={password[stateKey]}
-            onChange={e => onChangePassword(stateKey, e)}
+            onChange={e => onChangePassword(stateKey, e, inputCounts[4] + index)}
             maxLength={1}
             required
+            ref={element => (inputElementsRef.current[inputCounts[4] + index] = element)}
           />
         ))}
         <div className="inputted-password">*</div>
@@ -185,5 +213,4 @@ InputForm.propTypes = {
   }),
   cardInputDispatch: PropTypes.func,
 };
-
 export default InputForm;
