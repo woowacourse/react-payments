@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { MAX_LENGTH } from "../constants";
+import { MAX_LENGTH, MAX_MONTH } from "../constants";
 import { checkNextFocus, checkPrevFocus, isOverMaxLength } from "../util";
 
 const isInValidExpireDate = (expireDate) => {
   return (
     Object.values(expireDate).some(
       (date) => date.length !== MAX_LENGTH.EXPIRE_DATE
-    ) || Number(expireDate.first) > 12
+    ) || Number(expireDate.first) > MAX_MONTH
   );
 };
 
