@@ -4,6 +4,9 @@ export const isNumber = (value) => {
 
 export const isEnglish = (value) => {
   const regExpression = /^[\sa-zA-Z]*$/;
-
   return regExpression.test(value);
+};
+
+export const isObject = (value) => {
+  return typeof value === 'object';
 };
