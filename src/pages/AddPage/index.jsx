@@ -54,48 +54,48 @@ function AddPage() {
     cardNumberInputRefs[index]?.current.focus();
   }
 
-  const handleCardNumber = (index, e) => {
-    if (e.target.value.length > 4 || isNaN(e.target.value)) return;
+  const handleCardNumber = (index, {target:{value}}) => {
+    if (value.length > 4 || isNaN(value)) return;
 
     setCardNumbers((prev) => {
       const newState = [...prev];
-      newState[index] = e.target.value;
+      newState[index] = value;
       return newState;
     });
  
-    if(e.target.value.length >= 4){
+    if(value.length >= 4){
       focusNextNumberInput(index + 1);
     }
   };
 
-  const handleDueDate = (key, e) => {
-    if (e.target.value.length > 2) return;
+  const handleDueDate = (key, {target:{value}}) => {
+    if (value.length > 2) return;
 
-    setDueDate({ ...dueDate, [key]: e.target.value });
+    setDueDate({ ...dueDate, [key]: value });
 
-    if(e.target.value.length >= 2) {
+    if(value.length >= 2) {
       dueYearInputRef.current.focus();
     }
   };
 
-  const handleOwner = (e) => {
-    if (e.target.value.length > 30) return;
+  const handleOwner = ({target:{value}}) => {
+    if (value.length > 30) return;
 
-    setOwner(e.target.value);
+    setOwner(value);
   };
 
-  const handleCvc = (e) => {
-    if (e.target.value.length > 3 || isNaN(e.target.value)) return;
+  const handleCvc = ({target:{value}}) => {
+    if (value.length > 3 || isNaN(value)) return;
 
-    setCvc(e.target.value);
+    setCvc(value);
   };
 
-  const handlePassword = (key, e) => {
-    if (e.target.value.length > 1 || isNaN(e.target.value)) return;
+  const handlePassword = (key, {target:{value}}) => {
+    if (value.length > 1 || isNaN(value)) return;
 
-    setPassword({...password, [key]: e.target.value});
+    setPassword({...password, [key]: value});
 
-    if(e.target.value.length >= 1) {
+    if(value.length >= 1) {
       secondPasswordInputRef.current.focus();
     }
   }

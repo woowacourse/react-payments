@@ -5,7 +5,7 @@ import { OwnerHeader, FormWrapper } from './style'
  function CardOwnerForm({owner, handleOwner}) {
   return (
     <FormWrapper>
-        <OwnerHeader>
+      <OwnerHeader>
         <label>카드 소유자 이름 (선택)</label>
         <div>{owner.length}/30</div>
       </OwnerHeader>

@@ -10,6 +10,10 @@ const Input = styled.input`
   font-size: 18px;
   font-weight: 500px;
 
+  :focus {
+    outline: none;
+  }
+
   &[type="number"]::-webkit-outer-spin-button,
   &[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
