@@ -31,23 +31,23 @@ export const useCardInfoValidation = (cardInfo: CardInfo, validators: Validators
 
   useEffect(() => {
     handleChangeValidation("isCardNumbersValid", cardNumbers, validators["cardNumbers"]);
-  }, [cardNumbers]);
+  }, [cardNumbers, validators]);
 
   useEffect(() => {
     handleChangeValidation("isExpiredDateValid", expiredDate, validators["expiredDate"]);
-  }, [expiredDate]);
+  }, [expiredDate, validators]);
 
   useEffect(() => {
     handleChangeValidation("isUserNameValid", userName, validators["userName"]);
-  }, [userName]);
+  }, [userName, validators]);
 
   useEffect(() => {
     handleChangeValidation("isSecurityCodeValid", securityCode, validators["securityCode"]);
-  }, [securityCode]);
+  }, [securityCode, validators]);
 
   useEffect(() => {
     handleChangeValidation("isPasswordValid", password, validators["password"]);
-  }, [password]);
+  }, [password, validators]);
 
   return cardInfoValidation;
 };
