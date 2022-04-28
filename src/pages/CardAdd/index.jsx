@@ -10,7 +10,6 @@ import CardUserNameField from 'components/CardUserNameField';
 import CardSecurityField from 'components/CardSecurityField';
 import CardPasswordField from 'components/CardPasswordField';
 
-import { ACTION_TYPE } from 'constants';
 import {
   validateCardNumber,
   validateCardPassword,
@@ -25,43 +24,29 @@ function CardAdd() {
   const { isComplete } = state;
 
   const onChangeTextField = ({ target }, option = {}) => {
-    const textField = target.name;
+    const textFieldName = target.name;
 
-    const dispatchAction = {
-      cardNumber: () => ({
-        type: ACTION_TYPE.UPDATE_CARD_NUMBER,
-        contents: { index: option.index, value: target.value },
-      }),
-      expireMonth: () => ({
-        type: ACTION_TYPE.UPDATE_EXPIRE_MONTH,
-        contents: target.value,
-      }),
-      expireYear: () => ({
-        type: ACTION_TYPE.UPDATE_EXPIRE_YEAR,
-        contents: target.value,
-      }),
-      userName: () => ({
-        type: ACTION_TYPE.UPDATE_USER_NAME,
-        contents: target.value,
-      }),
-      securityCode: () => ({
-        type: ACTION_TYPE.UPDATE_SECURITY_CODE,
-        contents: target.value,
-      }),
-      cardPassword: () => ({
-        type: ACTION_TYPE.UPDATE_CARD_PASSWORD,
-        contents: target.value,
-      }),
-    };
+    switch (textFieldName) {
+      case 'cardNumber':
+        dispatch({
+          type: textFieldName,
+          contents: { index: option.index, value: target.value },
+        });
+        break;
 
-    dispatch(dispatchAction[textField]());
+      default:
+        dispatch({
+          type: textFieldName,
+          contents: target.value,
+        });
+    }
   };
 
   const onClickConfirmButton = () => {
     try {
       validateCardNumber(cardNumber);
       validateCardPassword(cardPassword);
-      validateExpireDate(expireMonth, expireYear);
+      validateExpireDate({ expireMonth, expireYear });
       validateSecurityCode(securityCode);
       userName && validateUserName(userName);
 

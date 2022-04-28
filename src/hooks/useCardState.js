@@ -1,5 +1,4 @@
 import { useEffect, useReducer, useState } from 'react';
-import { ACTION_TYPE, CARD_NUMBER } from 'constants';
 
 const initialState = {
   cardNumber: ['', '', '', ''],
@@ -15,23 +14,23 @@ const cardNumberFormatter = (cardNumber) => cardNumber.replace(/[^0-9]/g, '');
 function reducer(state, { type, contents }) {
   const newState = { ...state };
   const updateState = {
-    [ACTION_TYPE.UPDATE_CARD_NUMBER]: () => {
+    cardNumber: () => {
       const { index, value } = contents;
       newState.cardNumber[index] = cardNumberFormatter(value);
     },
-    [ACTION_TYPE.UPDATE_EXPIRE_MONTH]: () => {
+    expireMonth: () => {
       newState.expireMonth = contents;
     },
-    [ACTION_TYPE.UPDATE_EXPIRE_YEAR]: () => {
+    expireYear: () => {
       newState.expireYear = contents;
     },
-    [ACTION_TYPE.UPDATE_USER_NAME]: () => {
+    userName: () => {
       newState.userName = contents.toUpperCase();
     },
-    [ACTION_TYPE.UPDATE_SECURITY_CODE]: () => {
+    securityCode: () => {
       newState.securityCode = contents;
     },
-    [ACTION_TYPE.UPDATE_CARD_PASSWORD]: () => {
+    cardPassword: () => {
       newState.cardPassword = contents;
     },
   };
