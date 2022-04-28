@@ -4,8 +4,9 @@ function FieldSet({ title, errorMessage, inputWidth, children }) {
   return (
     <div className="input-container">
       <span className="input-title">{title}</span>
-      <div className={inputWidth ? `input-box w-${inputWidth}` : 'input-box'}>{children}</div>
-
+      <div className="input-box" style={{ width: `${inputWidth}%` }}>
+        {children}
+      </div>
       <p className="input-error-message">{errorMessage}</p>
     </div>
   );
