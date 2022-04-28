@@ -1,4 +1,10 @@
 import styled from 'styled-components';
+import {
+  INPUT_PRIMARY_BG_COLOR,
+  LABEL_PRIMARY_COLOR,
+  PLACEHOLDER_PRIMARY_COLOR,
+  FONT_PRIMARY_COLOR,
+} from '../../../style';
 
 const InputContainer = styled.div`
   position: ${props => props.position || 'static'};
@@ -14,7 +20,7 @@ const InputWrapper = styled.div`
   margin-top: 0.375rem;
   color: ${props => props.color};
   border-radius: 0.25rem;
-  background-color: #ecebf1;
+  background-color: ${INPUT_PRIMARY_BG_COLOR};
 `;
 
 const Label = styled.label`
@@ -23,7 +29,7 @@ const Label = styled.label`
   font-size: 12px;
   line-height: 14px;
   margin-bottom: 4px;
-  color: #525252;
+  color: ${LABEL_PRIMARY_COLOR};
 `;
 
 const Input = styled.input`
@@ -36,13 +42,13 @@ const Input = styled.input`
   border: none;
 
   &::placeholder {
-    color: #a0a0a0;
+    color: ${PLACEHOLDER_PRIMARY_COLOR};
   }
   &:focus {
-    outline: 1px solid #a0a0a0;
+    outline: 1px solid ${PLACEHOLDER_PRIMARY_COLOR};
   }
   &:disabled {
-    color: #000;
+    color: ${FONT_PRIMARY_COLOR};
   }
 `;
 

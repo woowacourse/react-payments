@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PRIMARY_BG_COLOR, DIMMED_PRIMARY_BG_COLOR } from '../../style';
 
 const ModalContainer = styled.div`
   display: ${props => (props.isOpen ? 'flex' : 'none')};
@@ -23,17 +24,16 @@ const ModalOverlay = styled.div`
   left: 0;
   overflow: auto;
   outline: 0;
-  background-color: #00000080;
+  background-color: ${DIMMED_PRIMARY_BG_COLOR};
   z-index: 999;
 `;
 
 const ModalInner = styled.div`
   display: flex;
   justify-content: center;
-
   box-sizing: border-box;
   position: absolute;
-  background-color: #fff;
+  background-color: ${PRIMARY_BG_COLOR};
   border-radius: 8px 8px 0 0;
   width: ${props => props.width}px;
   height: 200px;
@@ -42,7 +42,6 @@ const ModalInner = styled.div`
   padding: 16px;
   z-index: 1000;
   overflow-y: auto;
-
   animation: slide-up 0.2s 0s ease;
 
   @keyframes slide-up {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { hyphenPrimaryColor } from '../style';
+import { HYPHEN_PRIMARY_COLOR } from '../style';
 import ErrorMessage from './common/ErrorMessage';
 import { Input, InputContainer, InputWrapper, Label, Span } from './common/styled';
 
@@ -79,7 +79,7 @@ function CardNumber({ cardNumberCallback }) {
   return (
     <InputContainer>
       <Label>카드 번호</Label>
-      <InputWrapper color={hyphenPrimaryColor} onFocus={handleInputFocus}>
+      <InputWrapper color={HYPHEN_PRIMARY_COLOR} onFocus={handleInputFocus}>
         <Span>
           <Input
             ref={cardNoARef}

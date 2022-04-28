@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { hyphenPrimaryColor } from '../style';
+import { HYPHEN_PRIMARY_COLOR } from '../style';
 import Calendar from './common/Calendar';
 import { InputContainer, InputWrapper, Span, Label } from './common/styled';
 
@@ -25,7 +25,7 @@ function DueDate({ dimensions, cardDateCallback, setIsCorrectCardDate }) {
   return (
     <InputContainer>
       <Label>만료일</Label>
-      <InputWrapper color={hyphenPrimaryColor} width="50%">
+      <InputWrapper color={HYPHEN_PRIMARY_COLOR} width="50%">
         <Calendar items={months.current} setItem={setMonth} placeholder="MM" dimensions={dimensions} />
         <Span>/</Span>
         <Calendar items={years.current} setItem={setYear} placeholder="YY" dimensions={dimensions} />

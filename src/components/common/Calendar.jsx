@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { Input } from './styled';
 import Modal from './Modal';
+import { LABEL_PRIMARY_COLOR, ITEM_HOVER_PRIMARY_BG_COLOR } from '../../style';
 
 const CalendarContainer = styled.div``;
 
@@ -29,12 +30,12 @@ const Item = styled.li`
   margin: 8px 0;
   padding: 8px;
   width: 50%;
-  box-shadow: 0 4px 8px -8px #525252;
+  box-shadow: 0 4px 8px -8px ${LABEL_PRIMARY_COLOR};
   border-radius: 8px;
   cursor: pointer;
 
   &:hover {
-    background-color: #d2d2d2;
+    background-color: ${ITEM_HOVER_PRIMARY_BG_COLOR};
   }
 `;
 

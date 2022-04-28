@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { LABEL_PRIMARY_COLOR } from '../../style';
 import { Span } from './styled';
 
 // TODO: 스타일
@@ -8,11 +9,10 @@ const Paragraph = styled.p`
   position: absolute;
   top: 0;
   right: 0;
-
   font-size: 12px;
   line-height: 14px;
   margin-bottom: 4px;
-  color: #525252;
+  color: ${LABEL_PRIMARY_COLOR};
 `;
 
 function LetterCounter({ currentLength, maxLength }) {
