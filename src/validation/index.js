@@ -4,8 +4,8 @@ export default {
 
     return cardNumbersRegex.test(cardNumbers);
   },
+
   validateExpiredDate: expiredDate => {
-    // 입력 값 형식 맞는지?
     const expiredDateRegex = /[0-9]{2}\/[0-9]{2}/;
 
     if (!expiredDateRegex.test(expiredDate)) {
@@ -15,12 +15,10 @@ export default {
     month = Number(month);
     year = Number(year);
 
-    // 월이 1 ~ 12 사이인지
     if (1 > month || 12 < month) {
       return false;
     }
 
-    // 현재 시간보다 이후인지
     const today = new Date();
     const currentMonth = Number(today.getMonth());
     const currentYear = today.getFullYear() % 100;
@@ -31,6 +29,7 @@ export default {
 
     return true;
   },
+
   validateOwnerName: ownerName => {
     if (ownerName.trim().length === 0) {
       return false;
@@ -39,14 +38,20 @@ export default {
 
     return ownerNameRegex.test(ownerName);
   },
+
   validateSecurityNumber: securityNumber => {
     const securityNumberRegex = /^[0-9]{3}$/;
 
     return securityNumberRegex.test(securityNumber);
   },
+
   validatePassword: password => {
     const securityNumberRegex = /^[0-9]{2}$/;
 
     return securityNumberRegex.test(password);
+  },
+
+  isInvalidInputData: (regex, data, inputType) => {
+    return !regex.test(data) && inputType !== 'deleteContentBackward';
   },
 };

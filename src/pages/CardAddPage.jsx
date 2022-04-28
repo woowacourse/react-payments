@@ -1,46 +1,19 @@
 import { useState, useMemo, useEffect } from 'react';
 import Head from '../components/Head';
-import styled from 'styled-components';
 import Card from '../components/Card';
 import LabeledInput from '../components/LabeledInput';
 import InfoLabel from '../components/InfoLabel';
 import SubmitButton from '../components/SubmitButton';
 import validator from '../validation';
 import Input from '../components/Input';
-
-const Page = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const CardSection = styled.div`
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  width: 100%;
-  height: 158px;
-  padding-top: 25px;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  padding: 25px 28px 16px;
-  gap: 15px;
-`;
-
-const FormRow = styled.div`
-  display: flex;
-  align-items: ${props => props.alignItems};
-  gap: ${props => props.gap};
-`;
-
-const SubmitButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
+import { Page, CardSection, Form, FormRow, SubmitButtonContainer } from '../style/page';
+import {
+  cardNumberInputRegex,
+  expiredDateInputRegex,
+  ownerNameInputRegex,
+  numberRegex,
+} from '../constant/regularExpression';
+import MESSAGE from '../constant/message';
 
 function CardAddPage() {
   const [companyName, setCompanyName] = useState('포코카드');
@@ -77,12 +50,10 @@ function CardAddPage() {
       securityNumber: validator.validateSecurityNumber(securityNumber),
       password: validator.validatePassword(password.join('')),
     });
-  }, [cardNumbers, expiredDate, ownerName, securityNumber, password]);
+  });
 
   const handleChangeCardNumbersInput = ({ nativeEvent: { data, inputType }, target }) => {
-    const cardNumberRegex = /[0-9-]/;
-
-    if (!cardNumberRegex.test(data) && inputType !== 'deleteContentBackward') {
+    if (validator.isInvalidInputData(cardNumberInputRegex, data, inputType)) {
       return;
     }
 
@@ -128,9 +99,7 @@ function CardAddPage() {
   };
 
   const handleChangeExpiredDateInput = ({ nativeEvent: { data, inputType }, target }) => {
-    const cardNumberRegex = /[0-9/]/;
-
-    if (!cardNumberRegex.test(data) && inputType !== 'deleteContentBackward') {
+    if (validator.isInvalidInputData(expiredDateInputRegex, data, inputType)) {
       return;
     }
 
@@ -145,9 +114,7 @@ function CardAddPage() {
   };
 
   const handleChangeOwnerNameInput = ({ nativeEvent: { data, inputType }, target }) => {
-    const regex = /[a-zA-Z ]/;
-
-    if (!regex.test(data)) {
+    if (validator.isInvalidInputData(ownerNameInputRegex, data, inputType)) {
       return;
     }
 
@@ -155,9 +122,7 @@ function CardAddPage() {
   };
 
   const handleChangeSecurityNumber = ({ nativeEvent: { data, inputType }, target }) => {
-    const inputtedValueRegex = /[0-9]/;
-
-    if (!inputtedValueRegex.test(data) && inputType !== 'deleteContentBackward') {
+    if (validator.isInvalidInputData(numberRegex, data, inputType)) {
       return;
     }
 
@@ -165,9 +130,7 @@ function CardAddPage() {
   };
 
   const handleChangePassword = ({ nativeEvent: { data, inputType }, target }, index) => {
-    const inputtedValueRegex = /[0-9]/;
-
-    if (!inputtedValueRegex.test(data) && inputType !== 'deleteContentBackward') {
+    if (validator.isInvalidInputData(numberRegex, data, inputType)) {
       return;
     }
 
@@ -179,7 +142,7 @@ function CardAddPage() {
     event.preventDefault();
 
     if (Object.values(cardAddCondition).every(value => value === true)) {
-      alert('카드 정보가 저장되었습니다.');
+      alert(MESSAGE.SAVE_CARD_INFO);
     }
   };
 
@@ -197,16 +160,13 @@ function CardAddPage() {
       <Form onSubmit={handleSubmit}>
         <LabeledInput
           value={convertedCardNumbers.join('-')}
-          isShowLengthChecker={false}
           handleInputChange={handleChangeCardNumbersInput}
-          countInput={1}
-          invalidMessage="0000-0000-0000-0000 형식으로 입력해주세요."
+          invalidMessage={MESSAGE.INVALID_CARD_NUMBER}
           inputProps={{
             type: 'text',
             width: '318px',
-            isCenter: true,
             maxLength: 19,
-            placeholder: 'ex. 1111-2222-3333-4444',
+            placeholder: 'ex. 0000-0000-0000-0000',
             isValid: cardAddCondition.cardNumbers,
           }}
           inputLabelProps={{
@@ -216,13 +176,10 @@ function CardAddPage() {
         <LabeledInput
           value={convertedExpiredDate}
           handleInputChange={handleChangeExpiredDateInput}
-          isShowLengthChecker={false}
-          countInput={1}
-          invalidMessage="올바르지 않은 만료일입니다."
+          invalidMessage={MESSAGE.INVALID_EXPIRED_DATE}
           inputProps={{
             type: 'text',
             width: '137px',
-            isCenter: true,
             maxLength: 5,
             placeholder: 'MM / YY',
             isValid: cardAddCondition.expiredDate,
@@ -236,8 +193,7 @@ function CardAddPage() {
           handleInputChange={handleChangeOwnerNameInput}
           headerWidth="318px"
           isShowLengthChecker={true}
-          countInput={1}
-          invalidMessage="소유자 이름은 영어로 입력해주세요."
+          invalidMessage={MESSAGE.INVALID_OWNER_NAME}
           inputProps={{
             type: 'text',
             width: '318px',
@@ -254,13 +210,10 @@ function CardAddPage() {
           <LabeledInput
             value={securityNumber}
             handleInputChange={handleChangeSecurityNumber}
-            isShowLengthChecker={false}
-            countInput={1}
-            invalidMessage="보안 코드는 세 자리의 숫자로 입력해주세요."
+            invalidMessage={MESSAGE.INVALID_SECURITY_NUMBER}
             inputProps={{
               type: 'password',
               width: '84px',
-              isCenter: true,
               maxLength: 3,
               isValid: cardAddCondition.securityNumber,
             }}
@@ -274,13 +227,11 @@ function CardAddPage() {
           <LabeledInput
             value={password}
             handleInputChange={handleChangePassword}
-            isShowLengthChecker={false}
             countInput={2}
-            invalidMessage="비밀 번호는 숫자로 입력해주세요."
+            invalidMessage={MESSAGE.INVALID_PASSWORD}
             inputProps={{
               type: 'password',
               width: '43px',
-              isCenter: true,
               maxLength: 1,
               isValid: cardAddCondition.password,
             }}
@@ -288,24 +239,17 @@ function CardAddPage() {
               label: '카드 비밀번호',
             }}
           />
-          <Input
-            type="password"
-            defaultValue="."
-            width="43px"
-            isCenter={true}
-            maxLength={1}
-            disabled={true}
-            backgroundColor="#fff"
-          />
-          <Input
-            type="password"
-            defaultValue="."
-            width="43px"
-            isCenter={true}
-            maxLength={1}
-            disabled={true}
-            backgroundColor="#fff"
-          />
+          {Array.from({ length: 2 }).map((_, index) => (
+            <Input
+              key={index}
+              type="password"
+              defaultValue="."
+              width="43px"
+              maxLength={1}
+              disabled={true}
+              backgroundColor="#fff"
+            />
+          ))}
         </FormRow>
         <SubmitButtonContainer>
           <SubmitButton

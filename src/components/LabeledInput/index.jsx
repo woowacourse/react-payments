@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Input from '../Input';
 import InputLabel from '../InputLabel';
@@ -104,5 +104,10 @@ function LabeledInput({
     </LabeledInputContainer>
   );
 }
+
+LabeledInput.defaultProps = {
+  countInput: 1,
+  isShowLengthChecker: false,
+};
 
 export default LabeledInput;

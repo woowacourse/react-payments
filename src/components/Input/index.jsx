@@ -49,6 +49,7 @@ function Input({
 }
 
 Input.defaultProps = {
+  isCenter: true,
   backgroundColor: '#ecebf1',
   color: '#04C09E',
 };
