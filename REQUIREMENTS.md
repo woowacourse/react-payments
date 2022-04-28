@@ -1,7 +1,7 @@
 ## 필수 요구사항
 
-- [ ] Storybook 상호 작용 테스트
-- [ ] 재사용 가능한 Component 작성
+- [x] Storybook 상호 작용 테스트
+- [x] 재사용 가능한 Component 작성
 
 ## 필수 구현
 
