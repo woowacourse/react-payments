@@ -44,6 +44,7 @@ export default function CardPasswordInput({ password, onChange }) {
             value={password[0]}
             onChange={(e) => onChange(e, 0)}
             width="100%"
+            placeholder="•"
           />
         </StyledInputWrapper>
         <StyledInputWrapper width="45px">
@@ -52,6 +53,7 @@ export default function CardPasswordInput({ password, onChange }) {
             value={password[1]}
             onChange={(e) => onChange(e, 1)}
             width="100%"
+            placeholder="•"
           />
         </StyledInputWrapper>
       </StyledInputContainer>

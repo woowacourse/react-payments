@@ -33,7 +33,7 @@ export const StyledInput = styled.input`
 
   &::placeholder {
     font-size: 14px;
-    color: #737373;
+    color: #acacac;
   }
 `;
 

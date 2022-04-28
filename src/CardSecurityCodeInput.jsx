@@ -60,7 +60,13 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
       OptionalComponent={<HelpIcon description={cvcHelperDescription} />}
       wrapperWidth="85px"
     >
-      <Input type="password" value={securityCode} onChange={onChange} />
+      <Input
+        type="password"
+        value={securityCode}
+        onChange={onChange}
+        placeholder="• • •"
+        width="100%"
+      />
     </InputField>
   );
 }
