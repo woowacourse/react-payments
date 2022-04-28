@@ -2,7 +2,7 @@ import React from 'react';
 import CVC from './CVC';
 
 export default {
-  title: 'CVC',
+  title: 'CardAddPage/CVC',
   component: CVC,
 };
 

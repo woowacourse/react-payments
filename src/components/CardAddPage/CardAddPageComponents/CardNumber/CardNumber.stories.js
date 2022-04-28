@@ -2,7 +2,7 @@ import React from 'react';
 import CardNumber from './CardNumber';
 
 export default {
-  title: 'CardNumber',
+  title: 'CardAddPage/CardNumber',
   component: CardNumber,
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import CardExpirationDate from './CardExpirationDate';
 
 export default {
-  title: 'CardExpirationDate',
+  title: 'CardAddPage/CardExpirationDate',
   component: CardExpirationDate,
 };
 

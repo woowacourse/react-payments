@@ -2,7 +2,7 @@ import React from 'react';
 import NextPageButton from './NextPageButton';
 
 export default {
-  title: 'NextPageButton',
+  title: 'Common/NextPageButton',
   component: NextPageButton,
 };
 

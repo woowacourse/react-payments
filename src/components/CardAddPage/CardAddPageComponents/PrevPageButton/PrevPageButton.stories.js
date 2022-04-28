@@ -2,7 +2,7 @@ import React from 'react';
 import PrevPageButton from './PrevPageButton';
 
 export default {
-  title: 'PrevPageButton',
+  title: 'CardAddPage/PrevPageButton',
   component: PrevPageButton,
 };
 

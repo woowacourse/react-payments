@@ -2,7 +2,7 @@ import React from 'react';
 import CardOwner from './CardOwner';
 
 export default {
-  title: 'CardOwner',
+  title: 'CardAddPage/CardOwner',
   component: CardOwner,
 };
 

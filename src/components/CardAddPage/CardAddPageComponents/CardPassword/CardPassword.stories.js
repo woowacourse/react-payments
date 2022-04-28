@@ -2,7 +2,7 @@ import React from 'react';
 import CardPassword from './CardPassword';
 
 export default {
-  title: 'CardPassword',
+  title: 'CardAddPage/CardPassword',
   component: CardPassword,
 };
 
