@@ -11,6 +11,7 @@ import { CVCHelperModal } from '../components/CardRegister/CVCHelperModal';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 import { Modal } from '../components/common/Modal';
+import { PageTitle } from '../components/common/PageTitle';
 
 const CARD_TYPES = [
   { name: '포코', color: 'gold' },
@@ -98,6 +99,7 @@ export const CardRegisterPage = () => {
 
   return (
     <>
+      <PageTitle>카드 추가</PageTitle>
       <Card
         cardType={cardType}
         cardNumbers={cardNumbers}
