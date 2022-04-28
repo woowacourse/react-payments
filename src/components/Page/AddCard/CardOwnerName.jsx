@@ -17,7 +17,7 @@ const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
       <FieldSet
         id="cardOwnerName"
         description="카드 소유자 이름(선택)"
-        errorMessage="이름은 30자 이하여야 합니다."
+        errorMessage="이름은 30자 이하 영문이여야 합니다."
         isError={isError}
       >
         {
