@@ -19,7 +19,7 @@ const SmallCard = styled.div`
   min-height: 133px;
   padding: 14px 16px;
 
-  background: #94dacd;
+  background: ${(props) => (props.isComplete ? "#00caa5" : "#d2d2d2")};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
@@ -64,11 +64,16 @@ const CardHolderName = styled.p`
 
 const CardExpireDate = styled.p``;
 
-export default function CardPreview({ cardNumber, holderName, expireDate }) {
+export default function CardPreview({
+  cardNumber,
+  holderName,
+  expireDate,
+  canProceed,
+}) {
   return (
     <CardContainer>
-      <SmallCard>
-        <CardName>클린카드</CardName>
+      <SmallCard isComplete={canProceed}>
+        <CardName>Woowa Card</CardName>
         <CardChip />
         <CardNumber>
           {cardNumber[0]}&nbsp;&nbsp;&nbsp;{cardNumber[1]}&nbsp;&nbsp;&nbsp;

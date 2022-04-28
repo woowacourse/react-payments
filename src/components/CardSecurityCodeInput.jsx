@@ -3,7 +3,7 @@ import Input from "./UIComponents/Input/Input.jsx";
 import InputField from "./UIComponents/InputField/InputField.jsx";
 import styled from "styled-components";
 import HelpIconImage from "../assets/images/questionMark.svg";
-import { CREATE_MASKED_CHARACTERS } from "../constants.js";
+import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
 
 const StyledIconContainer = styled.div`
   position: relative;
@@ -60,6 +60,7 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
       labelText="보안 코드(CVC/CVV)"
       OptionalComponent={<HelpIcon description={SECURITY_CODE_DESCRIPTION} />}
       wrapperWidth="85px"
+      isComplete={securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
     >
       <Input
         type="password"
@@ -67,6 +68,9 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
         onChange={onChange}
         placeholder={CREATE_MASKED_CHARACTERS(3)}
         width="100%"
+        isComplete={
+          securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
+        }
       />
     </InputField>
   );

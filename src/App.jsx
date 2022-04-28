@@ -133,6 +133,7 @@ function App() {
         cardNumber={cardNumber}
         holderName={holderName}
         expireDate={expireDate}
+        canProceed={canProceed}
       />
       <CardInfoForm autoComplete="off">
         <CardNumberInput

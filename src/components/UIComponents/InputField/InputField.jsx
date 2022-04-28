@@ -13,7 +13,7 @@ const StyledInputField = styled.div`
 const StyledLabel = styled.label`
   font-size: 12px;
   line-height: 14px;
-  color: #525252;
+  color: ${(props) => (props.isComplete ? "#04c09e" : "#525252")};
   letter-spacing: -0.085em;
 `;
 
@@ -38,10 +38,11 @@ export default function InputField({
   OptionalComponent,
   wrapperWidth,
   horizontalAlign,
+  isComplete,
 }) {
   return (
     <StyledInputField>
-      <StyledLabel>{labelText}</StyledLabel>
+      <StyledLabel isComplete={isComplete}>{labelText}</StyledLabel>
       <StyledInputContainer>
         <StyledInputWrapper width={wrapperWidth} align={horizontalAlign}>
           {children}

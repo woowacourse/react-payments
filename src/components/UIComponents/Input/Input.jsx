@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 export const StyledInput = styled.input`
   // 텍스트 선택 커서 색상 설정
   caret-color: #000000;
-  color: #04c09e;
+  color: ${(props) => (props.isComplete ? "#04c09e" : "#525252")};
   font-size: 18px;
   font-weight: 600;
   line-height: 21px;
