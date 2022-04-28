@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import React from "react";
 import { useAppDispatch, useAppState } from "../../hooks/hooks";
 import { ActionType } from "../../types";
-import { isNum, transformToCardFormat } from "../../utils";
+import { isNum, removeWhiteSpaces, transformToCardFormat } from "../../utils";
 import { createAction } from "../Provider";
 
 const style = css({
@@ -27,7 +27,7 @@ function CardNumberInput() {
   const handleCardNumberInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const lastChar = value.charAt(value.length - 1);
-    const str = value.split('-').join('');
+    const str = removeWhiteSpaces(value).split('-').join('');
     // 20글자 이상 입력한 경우
     if (cardNumber.length >= 20) return;
 
@@ -44,11 +44,7 @@ function CardNumberInput() {
     dispatch(createAction<string>(ActionType.INPUT_CARDNUMBER, cn));
   }
 
-  return(
-    <>
-      <input css={style} onChange={handleCardNumberInput} value={transformToCardFormat(cardNumber)} />
-    </>
-  )
+  return <input css={style} onChange={handleCardNumberInput} value={transformToCardFormat(cardNumber)} />
 }
 
 export default CardNumberInput;
