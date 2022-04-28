@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const Header = ({ title }) => {
   return (
     <Container>
-      <BackButton>
+      <BackButton type="button">
         <Arrow />
       </BackButton>
       <Title>{title}</Title>
