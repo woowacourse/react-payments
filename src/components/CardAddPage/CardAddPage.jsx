@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Card from '../common/Card';
-import PageTitle from '../common/PageTitle';
+import PageTitle from '../common/PageTitle/PageTitle';
 import NextPageButton from '../common/NextPageButton';
 
 import CardInputForm from './CardAddPageComponents/CardInputForm';
