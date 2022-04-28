@@ -36,7 +36,7 @@ const CardPreview = ({ company, number, ownerName, expiryDate, theme, handleModa
             </span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text">
+            <span className="card-text card-text__control">
               {ownerName.toUpperCase() || DEFAULT_CARD_INFO.OWNER_NAME}
             </span>
             <span className="card-text">
