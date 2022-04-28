@@ -8,8 +8,9 @@ export default {
 
 const Template = (args) => <Button {...args} />;
 
-export const Primary = Template.bind({});
+export const Example = Template.bind({});
 
-Primary.args = {
-  content: "다음",
+Example.args = {
+  children: "다음",
+  name: "button",
 };

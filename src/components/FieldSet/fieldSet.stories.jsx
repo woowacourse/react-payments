@@ -9,9 +9,9 @@ export default {
 
 const Template = (args) => <Fieldset {...args} />;
 
-export const Primary = Template.bind({});
+export const Example = Template.bind({});
 
-Primary.args = {
+Example.args = {
   id: "cardNumber",
   description: "카드 번호",
   children: <CardNumberInput />,

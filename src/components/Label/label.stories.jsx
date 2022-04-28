@@ -8,8 +8,9 @@ export default {
 
 const Template = (args) => <Label {...args} />;
 
-export const Primary = Template.bind({});
+export const Example = Template.bind({});
 
-Primary.args = {
+Example.args = {
+  id: "inputLabel",
   description: "호프샐리 페어입니다.",
 };

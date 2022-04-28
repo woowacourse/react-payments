@@ -8,8 +8,8 @@ export default {
 
 const Template = (args) => <Header {...args} />;
 
-export const Primary = Template.bind({});
+export const Example = Template.bind({});
 
-Primary.args = {
+Example.args = {
   title: "호프샐리",
 };

@@ -57,7 +57,10 @@ Card.propTypes = {
   cardName: PropTypes.string,
   name: PropTypes.string,
   expiredDate: PropTypes.string,
-  CardNumber: PropTypes.array,
+  firstCardNumber: PropTypes.string,
+  secondCardNumber: PropTypes.string,
+  thirdCardNumber: PropTypes.string,
+  fourthCardNumber: PropTypes.string,
 };
 
 const Container = styled.div`

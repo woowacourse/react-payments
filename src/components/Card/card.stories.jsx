@@ -8,11 +8,14 @@ export default {
 
 const Template = (args) => <Card {...args} />;
 
-export const Primary = Template.bind({});
+export const Example = Template.bind({});
 
-Primary.args = {
-  name: "호프",
-  expiredDate: "11/23",
-  cardNumber: "1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1",
-  cardName: "호프",
+Example.args = {
+  cardName: "블랙 카드",
+  name: "샐리",
+  expiredDate: "12/25",
+  firstCardNumber: "1234",
+  secondCardNumber: "5678",
+  thirdCardNumber: "1111",
+  fourthCardNumber: "1111",
 };

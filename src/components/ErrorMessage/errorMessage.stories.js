@@ -8,8 +8,8 @@ export default {
 
 const Template = (args) => <ErrorMessage {...args} />;
 
-export const Primary = Template.bind({});
+export const Example = Template.bind({});
 
-Primary.args = {
-  message: "오류 오류 오류 발생",
+Example.args = {
+  message: "오류가 발생했습니다.",
 };

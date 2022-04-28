@@ -8,8 +8,4 @@ export default {
 
 const Template = (args) => <AddCardPage {...args} />;
 
-export const Primary = Template.bind({});
-
-Primary.args = {
-  description: "호프샐리 페어입니다.",
-};
+export const Example = Template.bind({});

@@ -8,4 +8,4 @@ export default {
 
 const Template = (args) => <DotMark {...args} />;
 
-export const Primary = Template.bind({});
+export const Example = Template.bind({});
