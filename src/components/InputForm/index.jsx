@@ -15,7 +15,7 @@ function InputForm({
 }) {
   const [isComplete, setIsComplete] = useState(false);
 
-  const inputElementsRef = useRef([]);
+  const inputElementsRef = useRef({});
 
   useEffect(() => {
     try {

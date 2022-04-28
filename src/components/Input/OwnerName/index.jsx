@@ -31,7 +31,7 @@ function OwnerNameInput({ ownerName, cardInputDispatch, inputElementsRef, stateN
   };
 
   return (
-    <Input labelTitle="카드 소유자 이름(선택)">
+    <Input labelTitle="카드 소유자 이름(선택) (영문만 입력가능)">
       <input
         type="text"
         className="input-basic"

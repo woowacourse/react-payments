@@ -29,7 +29,7 @@ function ExpirationDateInput({ expirationDate, cardInputDispatch, inputElementsR
     }
   };
   return (
-    <Input labelTitle="만료일" inputSize="w-50">
+    <Input labelTitle="만료일 (01~12의 월 / 년도)" inputSize="w-50">
       {Object.keys(expirationDate).map(stateKey => (
         <input
           key={uid(stateKey)}

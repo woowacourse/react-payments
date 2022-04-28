@@ -27,8 +27,6 @@ function CardNumberInput({ cardNumber, cardInputDispatch, inputElementsRef, stat
 
       element?.focus();
     }
-
-    // [inputElementsRef.current, nextInput]
   };
   return (
     <Input labelTitle="카드번호">
