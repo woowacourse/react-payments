@@ -3,12 +3,14 @@ import useCardState from 'hooks/useCardState';
 import Header from 'components/@common/Header';
 import Button from 'components/@common/Button';
 
-import Card from 'components/Card';
-import CardNumberField from 'components/CardNumberField';
-import CardExpireDateField from 'components/CardExpireDateField';
-import CardUserNameField from 'components/CardUserNameField';
-import CardSecurityField from 'components/CardSecurityField';
-import CardPasswordField from 'components/CardPasswordField';
+import {
+  Card,
+  CardNumberField,
+  CardExpireDateField,
+  CardUserNameField,
+  CardSecurityField,
+  CardPasswordField,
+} from 'components';
 
 import {
   validateCardNumber,
