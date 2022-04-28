@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import FormInput from '../components/common/FormInput';
@@ -10,6 +10,7 @@ import Button from '../components/common/Button';
 
 import { ReactComponent as PrevIcon } from '../assets/prev_icon.svg';
 import Tooltip from '../components/common/Tooltip';
+import { isEnglish, isNumber } from '../utils';
 
 const cardNumberInputInfoList = [
   { id: uuid(), type: 'text', className: 'mr-n15 tracking-wide', name: 'first', maxLength: 4 },
@@ -92,14 +93,93 @@ const initialCardInfo = {
   theme: '',
 };
 
+const validator = {
+  number(value) {
+    return isNumber(Number(value));
+  },
+  expiryDate(value, name) {
+    if (name === 'year') {
+      if (!isNumber(Number(value))) {
+        return false;
+      }
+
+      if (value.length === 2) {
+        return Number(value) > 21;
+      }
+
+      return true;
+    }
+
+    if (name === 'month') {
+      if (!isNumber(Number(value))) {
+        return false;
+      }
+
+      if (value.length === 1) {
+        return Number(value) <= 1;
+      }
+
+      if (value.length === 2) {
+        return Number(value) >= 1 && Number(value) <= 12;
+      }
+
+      return true;
+    }
+  },
+  ownerName(value) {
+    return isEnglish(value);
+  },
+  privacyCode(value) {
+    return isNumber(Number(value));
+  },
+  password(value) {
+    return isNumber(Number(value));
+  },
+};
+
+const isFullNumber = (number) => {
+  return Object.values(number).every((number) => number.length === 4);
+};
+
+const isFullCompany = (company) => {
+  return company !== '';
+};
+
+const isFullExpiryDate = (expiryDate) => {
+  return Object.values(expiryDate).every((number) => number.length === 2);
+};
+
+const isFullPrivacyCode = (privacyCode) => {
+  return privacyCode.length === 3;
+};
+
+const isFullPassword = (password) => {
+  return Object.values(password).every((number) => number.length === 1);
+};
+
+const checkFullFilled = (cardInfo) => {
+  const { number, company, expiryDate, privacyCode, password } = cardInfo;
+
+  return (
+    isFullNumber(number) &&
+    isFullCompany(company) &&
+    isFullExpiryDate(expiryDate) &&
+    isFullPrivacyCode(privacyCode) &&
+    isFullPassword(password)
+  );
+};
+
 //component
 const CardAppPage = () => {
   const [cardInfo, setCardInfo] = useState(initialCardInfo);
   const [modalVisible, setModalVisible] = useState(false);
+  const [isfullFilled, setIsFullFilled] = useState(false);
   const { number, ownerName, expiryDate, company, theme } = cardInfo;
 
   const handleChange = ({ target }, item) => {
     const { name, value } = target;
+
+    if (!validator[item](value, name)) return;
 
     setCardInfo((prevCardInfo) => {
       if (typeof prevCardInfo[item] === 'object') {
@@ -118,6 +198,15 @@ const CardAppPage = () => {
       };
     });
   };
+
+  useEffect(() => {
+    if (checkFullFilled(cardInfo)) {
+      setIsFullFilled(true);
+      return;
+    }
+
+    setIsFullFilled(false);
+  }, [cardInfo]);
 
   const handleClickCompany = (company, theme) => {
     setCardInfo((prevCardInfo) => ({
@@ -188,10 +277,12 @@ const CardAppPage = () => {
         cardInfo={cardInfo}
         onChange={handleChange}
       />
-      {/* TODO : 추후, visible에 따른 렌더링 여부 적용 */}
-      <Button theme={theme} className="next-button">
-        다음
-      </Button>
+
+      {isfullFilled && (
+        <Button theme={theme} className="next-button">
+          다음
+        </Button>
+      )}
       {modalVisible && (
         <Modal handleModal={handleModal}>
           <div className="flex-wrap">
