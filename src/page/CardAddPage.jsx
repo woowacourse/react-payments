@@ -13,7 +13,14 @@ import Tooltip from '../components/common/Tooltip';
 import { isEnglish, isNumber } from '../utils';
 
 const cardNumberInputInfoList = [
-  { id: uuid(), type: 'text', className: 'mr-n15 tracking-wide', name: 'first', maxLength: 4 },
+  {
+    id: uuid(),
+    type: 'text',
+    className: 'mr-n15 tracking-wide',
+    name: 'first',
+    maxLength: 4,
+    autoFocus: true,
+  },
   { id: uuid(), type: 'text', className: 'mr-n15 tracking-wide', name: 'second', maxLength: 4 },
   { id: uuid(), type: 'password', className: 'mr-n15 tracking-wide', name: 'third', maxLength: 4 },
   { id: uuid(), type: 'password', className: 'tracking-wide', name: 'fourth', maxLength: 4 },

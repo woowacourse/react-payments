@@ -62,7 +62,16 @@ const FormInput = ({
       <label className="input-title">{inputTitle}</label>
       <div className={`input-box ${className}`}>
         {inputInfoList.map(
-          ({ id, name, type, className = '', placeholder = '', isDisabled, maxLength }) => (
+          ({
+            id,
+            name,
+            type,
+            className = '',
+            placeholder = '',
+            isDisabled,
+            maxLength,
+            autoFocus,
+          }) => (
             <input
               key={id}
               name={name}
@@ -74,6 +83,7 @@ const FormInput = ({
               onChange={(e) => onChange(e, item)}
               disabled={isDisabled}
               maxLength={maxLength}
+              autoFocus={autoFocus}
             />
           ),
         )}
