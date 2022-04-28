@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header title="카드 추가" />
       <Card cardInfo={cardInfo} />
       <CardInfoForm
         cardInfo={cardInfo}
