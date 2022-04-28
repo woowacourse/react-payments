@@ -21,9 +21,9 @@ const CardPasswordInput = ({ state, updateForm }) => {
                   itemRef.current[idx] = el;
                 }}
                 value={state[idx]}
-                onChange={(e) => {
-                  controllInput(e);
-                  updateForm(e.target.value, idx);
+                onChange={({ target }) => {
+                  controllInput(target);
+                  updateForm(target.value, idx);
                 }}
               />
             </InputContainer>

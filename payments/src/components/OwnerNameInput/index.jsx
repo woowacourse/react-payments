@@ -9,11 +9,6 @@ const OwnerNameInput = ({ state, updateForm }) => {
     maxLength: 30,
     isNumber: false,
   });
-
-  const update = (e) => {
-    updateForm(e.target.value);
-  };
-
   return (
     <div className="ownername__input__container">
       <div className="label__container">
@@ -29,9 +24,9 @@ const OwnerNameInput = ({ state, updateForm }) => {
           type="text"
           value={state}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          onChange={(e) => {
-            controllInput(e);
-            update(e);
+          onChange={({ target }) => {
+            controllInput(target);
+            updateForm(target.value);
           }}
         />
       </InputContainer>

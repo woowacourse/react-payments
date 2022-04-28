@@ -11,8 +11,8 @@ const CardNumberInput = ({ state, updateForm }) => {
     isNumber: true,
   });
 
-  const updateNumber = (e, index) => {
-    updateForm(e.target.value, index);
+  const updateNumber = (number, index) => {
+    updateForm(number, index);
   };
 
   return (
@@ -22,9 +22,9 @@ const CardNumberInput = ({ state, updateForm }) => {
         {new Array(4).fill().map((_, idx) => (
           <Fragment key={idx}>
             <Input
-              onChange={(e) => {
-                controllInput(e);
-                updateNumber(e, idx);
+              onChange={({ target }) => {
+                controllInput(target);
+                updateNumber(target.value, idx);
               }}
               value={state[idx]}
               ref={(el) => (itemRef.current[idx] = el)}

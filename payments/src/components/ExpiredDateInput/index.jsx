@@ -28,9 +28,9 @@ const ExpiredDateInput = ({ state, updateForm }) => {
               ref={(el) => {
                 itemRef.current[idx] = el;
               }}
-              onChange={(e) => {
-                controllInput(e);
-                update(e.target.value, idx);
+              onChange={({ target }) => {
+                controllInput(target);
+                update(target.value, idx);
               }}
             />
             {idx === 0 ? "/" : ""}

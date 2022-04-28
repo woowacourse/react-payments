@@ -20,9 +20,9 @@ const SecureCodeInput = ({ state, updateForm }) => {
           type="password"
           maxLength="3"
           value={state}
-          onChange={(e) => {
-            controllInput(e);
-            updateForm(e.target.value);
+          onChange={({ target }) => {
+            controllInput(target);
+            updateForm(target.value);
           }}
         />
       </InputContainer>
