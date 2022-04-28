@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 import styled, { css } from 'styled-components';
 
 import PropTypes from 'prop-types';
@@ -64,6 +64,12 @@ Input.defaultProps = {
 
 Input.propTypes = {
   description: PropTypes.string,
+  margin: PropTypes.shape({
+    t: PropTypes.string,
+    r: PropTypes.string,
+    b: PropTypes.string,
+    l: PropTypes.string,
+  }),
   placeholder: PropTypes.string,
   textAlign: PropTypes.string,
   type: PropTypes.string,

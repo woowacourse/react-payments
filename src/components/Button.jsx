@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 import styled, { css } from 'styled-components';
 
 import PropTypes from 'prop-types';
@@ -81,10 +81,16 @@ Button.propTypes = {
   color: PropTypes.string,
   content: PropTypes.node,
   fontWeight: PropTypes.string,
-  margin: PropTypes.object,
+  margin: PropTypes.shape({
+    t: PropTypes.string,
+    r: PropTypes.string,
+    b: PropTypes.string,
+    l: PropTypes.string,
+  }),
   shape: PropTypes.string,
   size: PropTypes.string,
   onClickFunc: PropTypes.func,
+  type: PropTypes.string,
 };
 
 export default memo(Button);

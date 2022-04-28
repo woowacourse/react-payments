@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 
 import styled from 'styled-components';
 
@@ -16,7 +16,7 @@ import Input from './components/Input';
 
 import { ReactComponent as Arrow } from './assets/arrow.svg';
 
-import { RULE } from './constants';
+import RULE from './constants';
 
 const StyledPage = styled.form`
   background: #fff;

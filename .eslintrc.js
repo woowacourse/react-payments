@@ -17,6 +17,18 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
+    'react/jsx-no-useless-fragment': 'off',
+    'react/jsx-one-expression-per-line': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/prop-types': 'off',
+    'react/require-default-props': 'off',
     'max-depth': ['error', 2],
+    'arrow-parens': ['error', 'as-needed'],
+    'consistent-return': 'off',
+    'comma-dangle': 'off',
+    'default-case': 'off',
+    'linebreak-style': 'off',
+    'object-curly-newline': 'off',
   },
 };

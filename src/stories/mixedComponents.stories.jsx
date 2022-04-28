@@ -15,16 +15,18 @@ export default {
 const CardOwnerNameLength = styled.div`
   color: #525252;
   font-size: 12px;
-  float: right;
-  left: 318px;
+  position: absolute;
+  left: 335px;
 `;
 
-const CardOwnerNameTemplate = args => (
-  <>
-    <CardOwnerNameLength>0/30</CardOwnerNameLength>
-    <Input {...args} />
-  </>
-);
+function CardOwnerNameTemplate(args) {
+  return (
+    <>
+      <CardOwnerNameLength>0/30</CardOwnerNameLength>
+      <Input {...args} />
+    </>
+  );
+}
 
 export const CardOwnerName = CardOwnerNameTemplate.bind({});
 CardOwnerName.args = {
@@ -32,13 +34,15 @@ CardOwnerName.args = {
   placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
 };
 
-const CVCTemplate = args => (
-  <>
-    <Input {...args.inputArgs} />
-    <Button {...args.buttonArgs} />
-    <Modal {...args.modalArgs} />
-  </>
-);
+function CVCTemplate({ inputArgs, buttonArgs, modalArgs }) {
+  return (
+    <>
+      <Input {...inputArgs} />
+      <Button {...buttonArgs} />
+      <Modal {...modalArgs} />
+    </>
+  );
+}
 
 export const CVC = CVCTemplate.bind({});
 CVC.args = {
@@ -65,14 +69,16 @@ const Bullet = styled.span`
   margin-right: 35px;
 `;
 
-const CardPasswordTemplate = args => (
-  <>
-    <Input {...args.labeled} />
-    <Input {...args.noLabeled} />
-    <Bullet>•</Bullet>
-    <Bullet>•</Bullet>
-  </>
-);
+function CardPasswordTemplate({ labeled, noLabeled }) {
+  return (
+    <>
+      <Input {...labeled} />
+      <Input {...noLabeled} />
+      <Bullet>•</Bullet>
+      <Bullet>•</Bullet>
+    </>
+  );
+}
 
 export const CardPassword = CardPasswordTemplate.bind({});
 CardPassword.args = {

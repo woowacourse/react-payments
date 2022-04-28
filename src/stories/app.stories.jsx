@@ -7,6 +7,8 @@ export default {
   component: App,
 };
 
-const Template = () => <App />;
+function Template() {
+  return <App />;
+}
 
 export const Default = Template.bind({});

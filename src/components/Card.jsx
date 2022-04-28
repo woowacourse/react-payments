@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 import styled, { css } from 'styled-components';
 
 import PropTypes from 'prop-types';
@@ -29,7 +29,7 @@ const getCardSize = size => {
         },
       };
     case 'large':
-      return;
+      return {};
   }
 };
 
