@@ -71,8 +71,9 @@ export const CardExpireDateInputForm = ({
   return (
     <InputContainer>
       <InputTitle>만료일</InputTitle>
-      <InputBox width="50%">
+      <InputBox width="50%" justifyContent="center">
         <InputBasic
+          width="25%"
           value={expireDate?.month}
           onChange={handleMonthInput}
           type="text"
@@ -80,6 +81,7 @@ export const CardExpireDateInputForm = ({
         />
         /
         <InputBasic
+          width="25%"
           value={expireDate?.year}
           onChange={handleYearInput}
           type="text"

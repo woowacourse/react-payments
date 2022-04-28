@@ -21,7 +21,7 @@ const ModalDimmedStyle = styled.div`
   z-index: 5;
 `;
 const ModalStyle = styled.div`
-  width: 375px;
+  width: 100%;
   height: 220px;
 
   border-radius: 5px 5px 15px 15px;
