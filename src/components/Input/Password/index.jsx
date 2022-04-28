@@ -4,9 +4,10 @@ import { PASSWORD_TYPE } from '../../types';
 import { isNumberInRange } from '../../InputForm/validation';
 import { uid } from 'react-uid';
 import Input from '..';
+import { findNotCompletedInput } from '../../../utils/util';
 
-function PasswordInput({ password, cardInputDispatch, inputElementsRef, startIndex }) {
-  const onChangePassword = (key, e, index) => {
+function PasswordInput({ password, cardInputDispatch, inputElementsRef, stateName }) {
+  const onChangePassword = (e, key) => {
     const {
       target: { value: password, maxLength },
     } = e;
@@ -19,21 +20,36 @@ function PasswordInput({ password, cardInputDispatch, inputElementsRef, startInd
     }
 
     if (password.length === maxLength) {
-      inputElementsRef.current[index + 1]?.focus();
+      const { current: inputElementsMap } = inputElementsRef;
+
+      const {
+        nextInput: { element },
+      } = findNotCompletedInput(inputElementsMap, `${stateName}${key}`);
+
+      inputElementsMap[`${stateName}${key}`].isComplete = true;
+
+      element?.focus();
     }
   };
   return (
     <Input labelTitle="카드 비밀번호" inputSize="w-50">
-      {Object.keys(password).map((stateKey, index) => (
+      {Object.keys(password).map(stateKey => (
         <input
           key={uid(stateKey)}
           className="input-basic"
           type="text"
           value={password[stateKey]}
-          onChange={e => onChangePassword(stateKey, e, startIndex + index)}
+          onChange={e => onChangePassword(e, stateKey)}
           maxLength={1}
           required
-          ref={element => (inputElementsRef.current[startIndex + index] = element)}
+          ref={element => {
+            const { current } = inputElementsRef;
+
+            current[`${stateName}${stateKey}`] = {
+              element,
+              isComplete: element?.value.length === element?.maxLength,
+            };
+          }}
         />
       ))}
       <div className="inputted-password">*</div>
@@ -45,6 +61,6 @@ PasswordInput.propTypes = {
   password: PASSWORD_TYPE,
   cardInputDispatch: PropTypes.func,
   inputElementsRef: PropTypes.object,
-  startIndex: PropTypes.number,
+  stateName: PropTypes.string,
 };
 export default PasswordInput;

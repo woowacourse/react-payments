@@ -49,31 +49,31 @@ function InputForm({
         cardNumber={cardNumber}
         cardInputDispatch={cardInputDispatch}
         inputElementsRef={inputElementsRef}
-        startIndex={0}
+        stateName="cardNumber"
       ></CardNumberInput>
       <ExpirationDateInput
         expirationDate={expirationDate}
         cardInputDispatch={cardInputDispatch}
         inputElementsRef={inputElementsRef}
-        startIndex={4}
+        stateName="expirationDate"
       ></ExpirationDateInput>
       <OwnerNameInput
         ownerName={ownerName}
         cardInputDispatch={cardInputDispatch}
         inputElementsRef={inputElementsRef}
-        startIndex={6}
+        stateName="ownerName"
       ></OwnerNameInput>
       <SecurityCodeInput
         securityCode={securityCode}
         cardInputDispatch={cardInputDispatch}
         inputElementsRef={inputElementsRef}
-        startIndex={7}
+        stateName="securityCode"
       ></SecurityCodeInput>
       <PasswordInput
         password={password}
         cardInputDispatch={cardInputDispatch}
         inputElementsRef={inputElementsRef}
-        startIndex={8}
+        stateName="password"
       ></PasswordInput>
 
       {isComplete && (

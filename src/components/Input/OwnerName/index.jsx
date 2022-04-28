@@ -2,9 +2,10 @@ import React from 'react';
 import { isAlphabetOrSpace } from '../../../utils/validations';
 import PropTypes from 'prop-types';
 import Input from '..';
+import { findNotCompletedInput } from '../../../utils/util';
 
-function OwnerNameInput({ ownerName, cardInputDispatch, inputElementsRef, startIndex }) {
-  const onChangeOwnerName = (e, index) => {
+function OwnerNameInput({ ownerName, cardInputDispatch, inputElementsRef, stateName }) {
+  const onChangeOwnerName = e => {
     const {
       target: { value: ownerName, maxLength },
     } = e;
@@ -17,7 +18,15 @@ function OwnerNameInput({ ownerName, cardInputDispatch, inputElementsRef, startI
     }
 
     if (ownerName.length === maxLength) {
-      inputElementsRef.current[index + 1]?.focus();
+      const { current: inputElementsMap } = inputElementsRef;
+
+      const {
+        nextInput: { element },
+      } = findNotCompletedInput(inputElementsMap, stateName);
+
+      inputElementsMap[stateName].isComplete = true;
+
+      element?.focus();
     }
   };
 
@@ -28,9 +37,16 @@ function OwnerNameInput({ ownerName, cardInputDispatch, inputElementsRef, startI
         className="input-basic"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         value={ownerName}
-        onChange={e => onChangeOwnerName(e, startIndex)}
+        onChange={onChangeOwnerName}
         maxLength={30}
-        ref={element => (inputElementsRef.current[startIndex] = element)}
+        ref={element => {
+          const { current } = inputElementsRef;
+
+          current[stateName] = {
+            element,
+            isComplete: element?.value.length !== 0,
+          };
+        }}
       />
     </Input>
   );
@@ -39,6 +55,6 @@ OwnerNameInput.propTypes = {
   ownerName: PropTypes.string,
   cardInputDispatch: PropTypes.func,
   inputElementsRef: PropTypes.object,
-  startIndex: PropTypes.number,
+  stateName: PropTypes.string,
 };
 export default OwnerNameInput;

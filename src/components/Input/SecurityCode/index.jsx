@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { isNumberInRange } from '../../InputForm/validation';
 import Input from '..';
+import { findNotCompletedInput } from '../../../utils/util';
 
-function SecurityCodeInput({ securityCode, cardInputDispatch, inputElementsRef, startIndex }) {
-  const onChangeSecurityCode = (e, index) => {
+function SecurityCodeInput({ securityCode, cardInputDispatch, inputElementsRef, stateName }) {
+  const onChangeSecurityCode = e => {
     const {
       target: { value: securityCode, maxLength },
     } = e;
@@ -17,7 +18,15 @@ function SecurityCodeInput({ securityCode, cardInputDispatch, inputElementsRef, 
     }
 
     if (securityCode.length === maxLength) {
-      inputElementsRef.current[index + 1]?.focus();
+      const { current: inputElementsMap } = inputElementsRef;
+
+      const {
+        nextInput: { element },
+      } = findNotCompletedInput(inputElementsMap, stateName);
+
+      inputElementsMap[stateName].isComplete = true;
+
+      element?.focus();
     }
   };
 
@@ -31,10 +40,17 @@ function SecurityCodeInput({ securityCode, cardInputDispatch, inputElementsRef, 
         className="input-basic"
         type="password"
         value={securityCode}
-        onChange={e => onChangeSecurityCode(e, startIndex)}
+        onChange={onChangeSecurityCode}
         maxLength={3}
         required
-        ref={element => (inputElementsRef.current[startIndex] = element)}
+        ref={element => {
+          const { current } = inputElementsRef;
+
+          current[stateName] = {
+            element,
+            isComplete: element?.value.length === element?.maxLength,
+          };
+        }}
       />
     </Input>
   );
@@ -43,6 +59,6 @@ SecurityCodeInput.propTypes = {
   securityCode: PropTypes.string,
   cardInputDispatch: PropTypes.func,
   inputElementsRef: PropTypes.object,
-  startIndex: PropTypes.number,
+  stateName: PropTypes.string,
 };
 export default SecurityCodeInput;

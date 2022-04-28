@@ -4,9 +4,10 @@ import { EXPIRATION_DATE_TYPE } from '../../types';
 import { isNumberInRange } from '../../InputForm/validation';
 import Input from '..';
 import { uid } from 'react-uid';
+import { findNotCompletedInput } from '../../../utils/util';
 
-function ExpirationDateInput({ expirationDate, cardInputDispatch, inputElementsRef, startIndex }) {
-  const onChangeExpirationDate = (key, e, index) => {
+function ExpirationDateInput({ expirationDate, cardInputDispatch, inputElementsRef, stateName }) {
+  const onChangeExpirationDate = (e, key) => {
     const {
       target: { value: date, maxLength },
     } = e;
@@ -16,22 +17,37 @@ function ExpirationDateInput({ expirationDate, cardInputDispatch, inputElementsR
     }
 
     if (date.length === maxLength) {
-      inputElementsRef.current[index + 1]?.focus();
+      const { current: inputElementsMap } = inputElementsRef;
+
+      const {
+        nextInput: { element },
+      } = findNotCompletedInput(inputElementsMap, `${stateName}${key}`);
+
+      inputElementsMap[`${stateName}${key}`].isComplete = true;
+
+      element?.focus();
     }
   };
   return (
     <Input labelTitle="만료일" inputSize="w-50">
-      {Object.keys(expirationDate).map((stateKey, index) => (
+      {Object.keys(expirationDate).map(stateKey => (
         <input
           key={uid(stateKey)}
           className="input-basic"
           type="text"
           placeholder={stateKey === 'month' ? 'MM' : 'YY'}
           value={expirationDate[stateKey]}
-          onChange={e => onChangeExpirationDate(stateKey, e, startIndex + index)}
+          onChange={e => onChangeExpirationDate(e, stateKey)}
           maxLength={2}
           required
-          ref={element => (inputElementsRef.current[startIndex + index] = element)}
+          ref={element => {
+            const { current } = inputElementsRef;
+
+            current[`${stateName}${stateKey}`] = {
+              element,
+              isComplete: element?.value.length === element?.maxLength,
+            };
+          }}
         />
       ))}
     </Input>
@@ -42,6 +58,6 @@ ExpirationDateInput.propTypes = {
   expirationDate: EXPIRATION_DATE_TYPE,
   cardInputDispatch: PropTypes.func,
   inputElementsRef: PropTypes.object,
-  startIndex: PropTypes.number,
+  stateName: PropTypes.string,
 };
 export default ExpirationDateInput;
