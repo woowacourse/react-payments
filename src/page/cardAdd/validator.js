@@ -49,6 +49,7 @@ export const validator = {
   },
 };
 
+// 카드 폼의 각 정보들이 모두 입력되었는지 검사
 const isFullNumber = (number) => {
   return Object.values(number).every((number) => number.length === INPUT_MAX_LENGTH.NUMBER);
 };

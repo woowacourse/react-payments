@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { isObject } from '../../utils';
 
 const propTypes = {
   /**
@@ -61,32 +62,17 @@ const FormInput = ({
     <div className="input-container">
       <label className="input-title">{inputTitle}</label>
       <div className={`input-box ${className}`}>
-        {inputInfoList.map(
-          ({
-            id,
-            name,
-            type,
-            className = '',
-            placeholder = '',
-            isDisabled,
-            maxLength,
-            autoFocus,
-          }) => (
-            <input
-              key={id}
-              name={name}
-              type={type}
-              className={`input-basic ${className}`}
-              style={{ color: cardInfo.theme }}
-              placeholder={placeholder}
-              value={typeof cardInfo[item] === 'object' ? cardInfo[item][name] : cardInfo[item]}
-              onChange={(e) => onChange(e, item)}
-              disabled={isDisabled}
-              maxLength={maxLength}
-              autoFocus={autoFocus}
-            />
-          ),
-        )}
+        {inputInfoList.map(({ id, name, className = '', ...rest }) => (
+          <input
+            key={id}
+            name={name}
+            className={`input-basic ${className}`}
+            style={{ color: cardInfo.theme }}
+            value={isObject(cardInfo[item]) ? cardInfo[item][name] : cardInfo[item]}
+            onChange={(e) => onChange(e, item)}
+            {...rest}
+          />
+        ))}
         {children}
       </div>
     </div>

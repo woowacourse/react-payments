@@ -154,7 +154,6 @@ const CardAppPage = () => {
         cardInfo={cardInfo}
         onChange={handleChange}
       />
-
       {isfullFilled && (
         <Button theme={theme} className="next-button">
           다음
