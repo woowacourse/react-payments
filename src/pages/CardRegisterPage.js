@@ -12,8 +12,8 @@ import { CardSelectModal } from '../components/CardRegister/CardSelectModal';
 import { CVCHelperModal } from '../components/CardRegister/CVCHelperModal';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
-import { Modal } from '../components/common/Modal';
 import { PageTitle } from '../components/common/PageTitle';
+import { ModalSelector } from '../components/common/ModalSelector';
 
 const CARD_TYPES = [
   { name: '포코', color: 'gold' },
@@ -70,24 +70,6 @@ export const CardRegisterPage = () => {
     setAllCompleted(Object.values(checkInputCompleted).every((check) => check));
   }, [checkInputCompleted]);
 
-  const loadModal = () => {
-    switch (openedModalComponent) {
-      case COMPONENTS.CARD_TYPE:
-        return (
-          <CardSelectModal
-            cardTypes={CARD_TYPES}
-            closeModal={() => setOpenedModalComponent('')}
-            handleCardType={setCardType}
-            handleCardTypeCheck={checkerFactory(COMPONENTS.CARD_TYPE)}
-          />
-        );
-      case COMPONENTS.CVC:
-        return <CVCHelperModal />;
-      default:
-        return <div>no data</div>;
-    }
-  };
-
   return (
     <>
       <PageTitle>카드 추가</PageTitle>
@@ -125,12 +107,21 @@ export const CardRegisterPage = () => {
         handlePasswordInput={setPassword}
         handleCardPasswordCheck={checkerFactory(COMPONENTS.PASSWORD)}
       />
-      <Modal
-        visible={openedModalComponent}
-        closeModal={() => setOpenedModalComponent('')}
+      <ModalSelector
+        selected={openedModalComponent}
+        closeModal={() => {
+          setOpenedModalComponent('');
+        }}
       >
-        {openedModalComponent && loadModal()}
-      </Modal>
+        <CardSelectModal
+          name={COMPONENTS.CARD_TYPE}
+          cardTypes={CARD_TYPES}
+          closeModal={() => setOpenedModalComponent('')}
+          handleCardType={setCardType}
+          handleCardTypeCheck={checkerFactory(COMPONENTS.CARD_TYPE)}
+        />
+        <CVCHelperModal name={COMPONENTS.CVC} />
+      </ModalSelector>
 
       <Button disabled={allCompleted ? false : true}>다음</Button>
     </>
