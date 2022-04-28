@@ -20,13 +20,14 @@ const CardAddPage = () => {
   const [userName, onChangeUserName] = useUserName();
   const [securityCode, onChangeSecurityCode] = useSecurityCode();
   const [cardPassword, onChangeCardPassword] = useCardPassword();
-  const [ready, checkReady] = useReady(
+  const [cardTypeInfo, onClickCardType] = useCardTypeInfo();
+  const [ready, checkReady] = useReady({
     cardNumber,
     expireDate,
     securityCode,
-    cardPassword
-  );
-  const [cardTypeInfo, onClickCardType] = useCardTypeInfo();
+    cardPassword,
+    cardType: cardTypeInfo.cardType,
+  });
   const [canShowModal, toggleModal] = useCanShowModal();
 
   checkReady();
