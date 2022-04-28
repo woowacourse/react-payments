@@ -1,0 +1,11 @@
+.submit-button {
+  float: right;
+  text-align: right;
+  background-color: white;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #04c09e;
+  font-weight: 700;
+}
