@@ -2,16 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const Button = ({ children, type = "button", name }) => {
-  return (
-    <Container type={type} name={name}>
-      {children}
-    </Container>
-  );
+const Button = ({ children, ...rest }) => {
+  return <Container {...rest}>{children}</Container>;
 };
 
 Button.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.string,
   type: PropTypes.string,
   name: PropTypes.string,
 };

@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import {
+  CardNumber,
+  ExpiredDate,
+  CardOwnerName,
+  SecureCode,
+  Password,
+} from "./";
+
 import Button from "../../Button";
 import Header from "../../Header";
-import CardNumber from "./CardNumber";
-import ExpiredDate from "./ExpiredDate";
-import CardOwnerName from "./CardOwnerName";
 import {
   checkExpiredMonth,
   checkExpiredYear,
@@ -15,8 +20,6 @@ import {
 } from "../../../validation";
 
 import Card from "../../Card";
-import Password from "./Password";
-import SecureCode from "./SecureCode";
 
 import useInputValue from "../../../hooks/useInputValue";
 
@@ -32,6 +35,7 @@ const AddCardPage = () => {
     useInputValue({ validation: checkNumberOnly });
   const [fourthCardNumber, isFourthCardNumberError, onChangeFourthCardNumber] =
     useInputValue({ validation: checkNumberOnly });
+
   const [expiredMonth, isExpiredMonthError, onChangeExpiredMonth] =
     useInputValue({ validation: checkExpiredMonth });
   const [expiredYear, isExpiredYearError, onChangeExpiredYear] = useInputValue({
@@ -50,7 +54,6 @@ const AddCardPage = () => {
     useInputValue({
       validation: checkPassword,
     });
-
   const [secondPassword, isSecondPasswordError, onChangeSecondPassword] =
     useInputValue({
       validation: checkPassword,
@@ -163,7 +166,7 @@ const Container = styled.form`
 const ButtonContainer = styled.div`
   position: absolute;
   right: 20px;
-  bottom: -20px;
+  bottom: 0;
 `;
 
 export default AddCardPage;

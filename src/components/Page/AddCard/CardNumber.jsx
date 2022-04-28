@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import FieldSet from "../../FieldSet";
 import CardNumberInput from "../../Input/CardNumberInput";
-import PropTypes from "prop-types";
 
 const CardNumber = ({
   firstCardNumber,

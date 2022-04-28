@@ -11,7 +11,7 @@ const ExpiredDateInput = ({
   return (
     <Container>
       <Input
-        size="medium"
+        scale="medium"
         textAlign="right"
         placeholder={"MM"}
         maxLength={2}
@@ -20,7 +20,7 @@ const ExpiredDateInput = ({
       />
       <SlashContainer>/</SlashContainer>
       <Input
-        size="medium"
+        scale="medium"
         textAlign="left"
         placeholder={"YY"}
         maxLength={2}

@@ -24,7 +24,7 @@ const Password = ({
           <Input
             type="password"
             id="firstPassword"
-            size="small"
+            scale="small"
             maxLength={1}
             value={firstPassword}
             onChange={onChangeFirstPassword}
@@ -32,7 +32,7 @@ const Password = ({
           <Input
             type="password"
             id="secondPassword"
-            size="small"
+            scale="small"
             maxLength={1}
             value={secondPassword}
             onChange={onChangeSecondPassword}

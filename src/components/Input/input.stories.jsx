@@ -15,7 +15,7 @@ const ExpiredDateTemplate = (args) => <ExpiredDateInput {...args} />;
 export const Password = Template.bind({});
 
 Password.args = {
-  size: "small",
+  scale: "small",
   type: "password",
   maxLength: 1,
 };
@@ -23,7 +23,7 @@ Password.args = {
 export const UserName = Template.bind({});
 
 UserName.args = {
-  size: "large",
+  scale: "large",
   placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
 };
 

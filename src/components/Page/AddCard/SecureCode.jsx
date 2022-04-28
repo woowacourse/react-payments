@@ -17,7 +17,8 @@ const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
         <SecureCodeInputContainer>
           <Input
             id="secureCode"
-            size="medium"
+            scale="medium"
+            type="password"
             maxLength={3}
             value={secureCode}
             onChange={onChangeSecureCode}

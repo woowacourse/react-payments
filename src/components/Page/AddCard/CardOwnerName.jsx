@@ -23,7 +23,7 @@ const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
         {
           <Input
             id="cardOwnerName"
-            size="large"
+            scale="large"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             maxLength={30}
             value={ownerName}

@@ -2,41 +2,21 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const InputSizeType = {
+const InputScaleType = {
   large: "318",
   medium: "84",
   small: "43",
 };
 
-const Input = ({
-  placeholder = "",
-  type = "text",
-  id,
-  size,
-  maxLength,
-  value,
-  textAlign = "center",
-  onChange,
-}) => {
-  return (
-    <Container
-      placeholder={placeholder}
-      type={type}
-      id={id}
-      size={size}
-      maxLength={maxLength}
-      value={value}
-      textAlign={textAlign}
-      onChange={onChange}
-    />
-  );
+const Input = ({ scale, textAlign = "center", ...rest }) => {
+  return <Container scale={scale} textAlign={textAlign} {...rest} />;
 };
 
 Input.propTypes = {
   placeholder: PropTypes.string,
   type: PropTypes.string,
   id: PropTypes.string,
-  size: PropTypes.string,
+  scale: PropTypes.string,
   maxLength: PropTypes.number,
   value: PropTypes.string,
   textAlign: PropTypes.string,
@@ -44,7 +24,7 @@ Input.propTypes = {
 
 const Container = styled.input`
   text-align: ${(props) => props.textAlign};
-  width: ${(props) => InputSizeType[props.size]}px;
+  width: ${(props) => InputScaleType[props.scale]}px;
   height: 45px;
   background-color: #ecebf1;
   color: #04c09e;
