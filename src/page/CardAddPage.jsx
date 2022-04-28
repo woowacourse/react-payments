@@ -11,6 +11,7 @@ import Button from '../components/common/Button';
 import { ReactComponent as PrevIcon } from '../assets/prev_icon.svg';
 import Tooltip from '../components/common/Tooltip';
 import { isEnglish, isNumber } from '../utils';
+import { COMPANY, INPUT_MAX_LENGTH, THEME, CRYPTO_STRING, DATE_RANGE } from '../constants';
 
 const cardNumberInputInfoList = [
   {
@@ -18,17 +19,48 @@ const cardNumberInputInfoList = [
     type: 'text',
     className: 'mr-n15 tracking-wide',
     name: 'first',
-    maxLength: 4,
+    maxLength: INPUT_MAX_LENGTH.NUMBER,
     autoFocus: true,
   },
-  { id: uuid(), type: 'text', className: 'mr-n15 tracking-wide', name: 'second', maxLength: 4 },
-  { id: uuid(), type: 'password', className: 'mr-n15 tracking-wide', name: 'third', maxLength: 4 },
-  { id: uuid(), type: 'password', className: 'tracking-wide', name: 'fourth', maxLength: 4 },
+  {
+    id: uuid(),
+    type: 'text',
+    className: 'mr-n15 tracking-wide',
+    name: 'second',
+    maxLength: INPUT_MAX_LENGTH.NUMBER,
+  },
+  {
+    id: uuid(),
+    type: 'password',
+    className: 'mr-n15 tracking-wide',
+    name: 'third',
+    maxLength: INPUT_MAX_LENGTH.NUMBER,
+  },
+  {
+    id: uuid(),
+    type: 'password',
+    className: 'tracking-wide',
+    name: 'fourth',
+    maxLength: INPUT_MAX_LENGTH.NUMBER,
+  },
 ];
 
 const expiryDateInputInfoList = [
-  { id: uuid(), type: 'text', placeholder: 'MM', className: 'mr-n15', name: 'month', maxLength: 2 },
-  { id: uuid(), type: 'text', placeholder: 'YY', name: 'year', maxLength: 2 },
+  {
+    id: uuid(),
+    type: 'text',
+    placeholder: 'MM',
+    className: 'mr-n15',
+    name: 'month',
+    maxLength: INPUT_MAX_LENGTH.EXPIRY_DATE,
+  },
+  {
+    id: uuid(),
+    type: 'text',
+    placeholder: 'YY',
+    name: 'year',
+    maxLength: INPUT_MAX_LENGTH.EXPIRY_DATE,
+  },
 ];
 
 const cardOwnerNameInputInfoList = [
@@ -37,24 +69,41 @@ const cardOwnerNameInputInfoList = [
     type: 'text',
     placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
     className: 'text-left',
-    maxLength: 30,
+    maxLength: INPUT_MAX_LENGTH.OWNER_NAME,
   },
 ];
 
 const privacyCodeInputInfoList = [
-  { id: uuid(), type: 'password', className: 'w-25 tracking-wide', maxLength: 3 },
+  {
+    id: uuid(),
+    type: 'password',
+    className: 'w-25 tracking-wide',
+    maxLength: INPUT_MAX_LENGTH.PRIVACY_CODE,
+  },
 ];
 
 const cardPasswordInputInfoList = [
-  { id: uuid(), type: 'password', className: 'w-5', name: 'first', maxLength: 1 },
-  { id: uuid(), type: 'password', className: 'w-5', name: 'second', maxLength: 1 },
+  {
+    id: uuid(),
+    type: 'password',
+    className: 'w-5',
+    name: 'first',
+    maxLength: INPUT_MAX_LENGTH.PASSWORD,
+  },
+  {
+    id: uuid(),
+    type: 'password',
+    className: 'w-5',
+    name: 'second',
+    maxLength: INPUT_MAX_LENGTH.PASSWORD,
+  },
   {
     id: uuid(),
     type: 'password',
     className: 'w-5 input-disabled',
     isDisabled: true,
     name: 'third',
-    maxLength: 1,
+    maxLength: INPUT_MAX_LENGTH.PASSWORD,
   },
   {
     id: uuid(),
@@ -62,19 +111,19 @@ const cardPasswordInputInfoList = [
     className: 'w-5 input-disabled',
     isDisabled: true,
     name: 'fourth',
-    maxLength: 1,
+    maxLength: INPUT_MAX_LENGTH.PASSWORD,
   },
 ];
 
 const cardCompanyList = [
-  { id: uuid(), company: '포코 카드', theme: '#E24141' },
-  { id: uuid(), company: '준 카드', theme: '#547CE4' },
-  { id: uuid(), company: '공원 카드', theme: '#73BC6D' },
-  { id: uuid(), company: '브랜 카드', theme: '#DE59B9' },
-  { id: uuid(), company: '로이드 카드', theme: '#04C09E' },
-  { id: uuid(), company: '도비 카드', theme: '#E76E9A' },
-  { id: uuid(), company: '록바 카드', theme: '#F37D3B' },
-  { id: uuid(), company: '무비 카드', theme: '#FBCD58' },
+  { id: uuid(), company: COMPANY.VALLISTA, theme: THEME.RED },
+  { id: uuid(), company: COMPANY.YULIE, theme: THEME.BLUE },
+  { id: uuid(), company: COMPANY.ASA, theme: THEME.GREEN },
+  { id: uuid(), company: COMPANY.ROY, theme: THEME.HOT_PINK },
+  { id: uuid(), company: COMPANY.AUSTIN, theme: THEME.MINT },
+  { id: uuid(), company: COMPANY.YB, theme: THEME.PINK },
+  { id: uuid(), company: COMPANY.NOS, theme: THEME.ORANGE },
+  { id: uuid(), company: COMPANY.WALTER, theme: THEME.YELLOW },
 ];
 
 const initialCardInfo = {
@@ -94,8 +143,8 @@ const initialCardInfo = {
   password: {
     first: '',
     second: '',
-    third: '*',
-    fourth: '*',
+    third: CRYPTO_STRING,
+    fourth: CRYPTO_STRING,
   },
   theme: '',
 };
@@ -110,8 +159,8 @@ const validator = {
         return false;
       }
 
-      if (value.length === 2) {
-        return Number(value) > 21;
+      if (value.length === INPUT_MAX_LENGTH.EXPIRY_DATE) {
+        return Number(value) >= DATE_RANGE.MIN_YEAR;
       }
 
       return true;
@@ -126,8 +175,8 @@ const validator = {
         return Number(value) <= 1;
       }
 
-      if (value.length === 2) {
-        return Number(value) >= 1 && Number(value) <= 12;
+      if (value.length === INPUT_MAX_LENGTH.EXPIRY_DATE) {
+        return Number(value) >= DATE_RANGE.MIN_MONTH && Number(value) <= DATE_RANGE.MAX_MONTH;
       }
 
       return true;
@@ -145,7 +194,7 @@ const validator = {
 };
 
 const isFullNumber = (number) => {
-  return Object.values(number).every((number) => number.length === 4);
+  return Object.values(number).every((number) => number.length === INPUT_MAX_LENGTH.NUMBER);
 };
 
 const isFullCompany = (company) => {
@@ -153,15 +202,17 @@ const isFullCompany = (company) => {
 };
 
 const isFullExpiryDate = (expiryDate) => {
-  return Object.values(expiryDate).every((number) => number.length === 2);
+  return Object.values(expiryDate).every(
+    (number) => number.length === INPUT_MAX_LENGTH.EXPIRY_DATE,
+  );
 };
 
 const isFullPrivacyCode = (privacyCode) => {
-  return privacyCode.length === 3;
+  return privacyCode.length === INPUT_MAX_LENGTH.PRIVACY_CODE;
 };
 
 const isFullPassword = (password) => {
-  return Object.values(password).every((number) => number.length === 1);
+  return Object.values(password).every((number) => number.length === INPUT_MAX_LENGTH.PASSWORD);
 };
 
 const checkFullFilled = (cardInfo) => {
@@ -266,7 +317,9 @@ const CardAppPage = () => {
         cardInfo={cardInfo}
         onChange={handleChange}
       >
-        <div className="owner-name-length">{ownerName.length} / 30</div>
+        <div className="owner-name-length">
+          {ownerName.length} / {INPUT_MAX_LENGTH.OWNER_NAME}
+        </div>
       </FormInput>
       <FormInput
         item="privacyCode"
