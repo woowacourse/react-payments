@@ -7,7 +7,9 @@ import useValidDate from './hooks/useValidDate';
 import useCardOwnerName from './hooks/useCardOwnerName';
 import useCVC from './hooks/useCVC';
 import useCardPassword from './hooks/useCardPassword';
+import useModal from './hooks/useModal';
 
+import Modal from './components/Modal';
 import Button from './components/Button';
 import Card from './components/Card';
 import Input from './components/Input';
@@ -77,6 +79,7 @@ function App() {
     firstPassword,
     secondPassword,
   ];
+  const [isModalOpen, toggleIsModalOpen] = useModal(false);
 
   return (
     <StyledPage>
@@ -134,7 +137,9 @@ function App() {
             margin={{ l: '11px' }}
             shape="circle"
             size="small"
+            onClickFunc={toggleIsModalOpen}
           />
+          <Modal visible={isModalOpen} />
         </div>
         <div>
           <Input
