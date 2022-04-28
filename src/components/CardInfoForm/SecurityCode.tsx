@@ -11,7 +11,7 @@ export default function SecurityCode({ securityCode, onChange }) {
       <span className="input-title">보안코드(CVC/CVV)</span>
       <Input
         type="password"
-        width="w-25"
+        size="small"
         value={securityCode || ""}
         onChange={onChange}
         maxLength={3}
