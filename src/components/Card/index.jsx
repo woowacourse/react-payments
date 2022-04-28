@@ -2,26 +2,50 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const Card = ({ name, expiredDate, cardName, cardNumber }) => {
+const Card = ({
+  name,
+  expiredMonth,
+  expiredYear,
+  cardName,
+  firstCardNumber,
+  secondCardNumber,
+  thirdCardNumber,
+  fourthCardNumber,
+}) => {
   return (
     <Container>
       <EmptyCard>
         <CardTop>
-          <CardName>{cardName}의 카드</CardName>
+          <CardName>{cardName}</CardName>
         </CardTop>
         <CardMiddle>
           <CardChip />
           <CardNumbers>
-            <span>{cardNumber.slice(0, 4).join("")}</span>
-            <span>{cardNumber.slice(4, 8).join("")}</span>
-            <span>••••</span>
-            <span>••••</span>
+            {firstCardNumber && <span>{firstCardNumber}</span>}
+            {secondCardNumber && <span>{secondCardNumber}</span>}
+            {thirdCardNumber && (
+              <span>
+                {Array.from({ length: thirdCardNumber.length }).map(
+                  (_, index) => "•"
+                )}
+              </span>
+            )}
+            {fourthCardNumber && (
+              <span>
+                {Array.from({ length: fourthCardNumber.length }).map(
+                  (_, index) => "•"
+                )}
+              </span>
+            )}
           </CardNumbers>
         </CardMiddle>
         <CardBottom>
           <CardBottomInfo>
-            <CardText>{name}</CardText>
-            <CardText>{expiredDate}</CardText>
+            <CardOwnerContainer>{name}</CardOwnerContainer>
+            <CardExpiredDateContainer>
+              {expiredMonth}
+              {expiredYear && `/ ${expiredYear}`}
+            </CardExpiredDateContainer>
           </CardBottomInfo>
         </CardBottom>
       </EmptyCard>
@@ -130,9 +154,20 @@ const CardBottomInfo = styled.div`
   justify-content: space-between;
 `;
 
-const CardText = styled.span`
+const CardOwnerContainer = styled.span`
+  width: 160px;
   margin: 0 16px;
+  font-size: 14px;
+  line-height: 16px;
+  vertical-align: middle;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
 
+const CardExpiredDateContainer = styled.span`
+  margin-right: 5px;
+  width: 50px;
   font-size: 14px;
   line-height: 16px;
   vertical-align: middle;

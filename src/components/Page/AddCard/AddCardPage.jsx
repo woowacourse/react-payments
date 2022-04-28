@@ -89,10 +89,14 @@ const AddCardPage = () => {
     <Container>
       <Header title="카드 추가" />
       <Card
-        cardName="호프"
-        name="SALLY"
-        expiredDate="03/23"
-        cardNumber={[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}
+        cardName="카드"
+        name={ownerName}
+        expiredMonth={expiredMonth}
+        expiredYear={expiredYear}
+        firstCardNumber={firstCardNumber}
+        secondCardNumber={secondCardNumber}
+        thirdCardNumber={thirdCardNumber}
+        fourthCardNumber={fourthCardNumber}
       />
       <CardNumber
         firstCardNumber={firstCardNumber}
