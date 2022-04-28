@@ -20,6 +20,13 @@ export const checkFormCompletion = ({ cardNumber, expirationDate, securityCode, 
   return true;
 };
 
+export const checkFormValidation = ({ expirationDate }) => {
+  if (expirationDate.month === '00' || Number(expirationDate.month) > 12) {
+    throw new Error('1~12사이의 월을 입력해주세요');
+  }
+  return true;
+};
+
 export const isNumberInRange = (value, maxLength) => {
   if (hasSpace(value)) {
     return false;
