@@ -1,9 +1,7 @@
 import React from "react";
-import { css } from "@emotion/react";
-import { useAppState } from "../../hooks/hooks";
-import { transformNumToBullet } from "../../utils";
+import styled from "@emotion/styled";
 
-const style = css({
+const CardDiv = styled.div(() => ({
   width: '208px',
   height: '130px',
   padding: '14px',
@@ -46,39 +44,33 @@ const style = css({
     '.expired-period': {
       letterSpacing: '-1px',
     },
-  },
-});
-
-function Card() {
-  const { cardNumber, name, expiredPeriod } = useAppState();
-
-  const transform = (str: string) => {
-    return [4, 8, 12 ,16].map((index) => {
-      const part = str.slice(index-4, index);
-      if (index >= 12) {
-        return transformNumToBullet(part);
-      }
-      return str.slice(index-4, index);
-    }).filter((part: string) => part).join(' ');
   }
+}));
 
-  const ownerStyle = css({
-    fontSize: `${Math.min(14, Math.max(4, 20 - Math.floor(name.length/2)))}px`,
-  });
+const OwnerNameSpan = styled.span<{ name: string }>(({ name }) => ({
+  fontSize: `${Math.min(14, Math.max(4, 20 - Math.floor(name.length/2)))}px`,
+}));
 
+type Props = {
+  cardNumber: string,
+  name: string,
+  expiredPeriod: string,
+}
+
+function Card({ cardNumber, name, expiredPeriod }: Props) {
   return (
     <>
-      <div className="card" css={style}>
+      <CardDiv className="card">
         <div className="type">로이드카드</div>
         <div className="chip-container">
           <div className="chip"></div>
         </div>
-        <div className="number">{transform(cardNumber)}</div>
+        <div className="number">{cardNumber}</div>
         <div className="info">
-          <span className="owner" css={ownerStyle}>{name}</span>
+          <OwnerNameSpan name={name}>{name}</OwnerNameSpan>
           <span className="expired-period">{expiredPeriod}</span>
         </div>
-      </div>
+      </CardDiv>
     </>
   )
 }
