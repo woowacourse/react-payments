@@ -22,7 +22,8 @@ const StyledPage = styled.form`
   display: flex;
   flex-direction: column;
   padding: 30px;
-  width: 375px;
+  width: 400px;
+  height: 757px;
 `;
 
 const Header = styled.div`
@@ -84,7 +85,7 @@ function App() {
         <Title>카드 추가</Title>
       </Header>
       <StyledCard
-        bgColor="#D2D2D2"
+        bgColor="#ADD8E6"
         size="medium"
         name={cardOwnerName}
         number={encryptedCardNumber}

@@ -56,7 +56,7 @@ function Input({
 Input.defaultProps = {
   textAlign: 'center',
   type: 'text',
-  width: '318px',
+  width: '343px',
 };
 
 Input.propTypes = {

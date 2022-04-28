@@ -39,6 +39,7 @@ function Button({
   shape,
   size,
   onClickFunc,
+  type,
 }) {
   const buttonStyle = getButtonSize(size);
   return (
@@ -53,6 +54,7 @@ function Button({
       shape={shape}
       className={className}
       onClick={onClickFunc}
+      type={type}
     >
       {content}
     </StyledButton>
@@ -66,6 +68,7 @@ Button.defaultProps = {
   fontWeight: 'normal',
   shape: 'rectangle',
   size: 'medium',
+  type: 'button',
 };
 
 Button.propTypes = {
