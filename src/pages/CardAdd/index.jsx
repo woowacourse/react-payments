@@ -74,6 +74,7 @@ function CardAdd() {
         userName={userName}
         expireMonth={expireMonth}
         expireYear={expireYear}
+        isComplete={isComplete}
       />
       <CardNumberField cardNumber={cardNumber} onChange={onChangeTextField} />
       <CardExpireDateField

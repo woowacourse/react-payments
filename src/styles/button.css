@@ -15,6 +15,7 @@
   color: #fff;
   background-color: rgb(71, 104, 255);
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .button:hover {

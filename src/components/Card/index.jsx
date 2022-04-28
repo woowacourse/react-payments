@@ -13,10 +13,10 @@ const cardNumberFormatter = (cardNumber) => {
   return newCardNumber.join('-');
 };
 
-function Card({ companyName, cardNumber, userName, expireMonth, expireYear }) {
+function Card({ companyName, cardNumber, userName, expireMonth, expireYear, isComplete }) {
   return (
     <div className="card-box">
-      <div className="small-card">
+      <div className={`small-card${(!isComplete && ' empty') || ''}`}>
         <div className="card-top">
           <span className="card-text">{companyName}</span>
         </div>
@@ -42,6 +42,7 @@ Card.defaultProps = {
   userName: '',
   expireMonth: '',
   expireYear: '',
+  isComplete: false,
 };
 
 Card.propTypes = {
@@ -50,6 +51,7 @@ Card.propTypes = {
   userName: PropTypes.string,
   expireMonth: PropTypes.string,
   expireYear: PropTypes.string,
+  isComplete: PropTypes.bool,
 };
 
 export default Card;
