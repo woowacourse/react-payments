@@ -19,10 +19,12 @@ const MoveButtonStyled = styled.button`
   }
 `;
 
-export default function MoveButton({ disabled, children }) {
+export default function MoveButton({ onClick, disabled, children }) {
   return (
     <MoveWrapperStyled>
-      <MoveButtonStyled disabled={disabled}>{children}</MoveButtonStyled>
+      <MoveButtonStyled onClick={onClick} disabled={disabled}>
+        {children}
+      </MoveButtonStyled>
     </MoveWrapperStyled>
   );
 }

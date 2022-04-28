@@ -9,6 +9,7 @@ import CardCvc from './components/CardCvc';
 import CardPassword from './components/CardPassword';
 import MoveButton from './components/MoveButton';
 import CardContext from './CardContext';
+import validator from '../src/validations/validator';
 
 const CardAdditionContainer = styled.div`
   height: 100%;
@@ -18,7 +19,23 @@ const CardAdditionContainer = styled.div`
 function CardAddition() {
   const { cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword } = useContext(CardContext);
 
-  console.log(cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword);
+  const validateAllInputs = () => {
+    try {
+      validator.checkCardNumber(cardNumber);
+      validator.checkCardExpiration(cardExpiration);
+      validator.checkCardOwner(cardOwner);
+      validator.checkCardCvc(cardCvc);
+      validator.checkCardPassword(cardPassword);
+
+      return false;
+    } catch (error) {
+      return true;
+    }
+  };
+
+  const submitCard = () => {
+    console.log(cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword);
+  };
 
   return (
     <CardAdditionContainer>
@@ -29,7 +46,9 @@ function CardAddition() {
       <CardOwner />
       <CardCvc />
       <CardPassword />
-      <MoveButton disabled={true}>다음</MoveButton>
+      <MoveButton onClick={submitCard} disabled={validateAllInputs()}>
+        다음
+      </MoveButton>
     </CardAdditionContainer>
   );
 }
