@@ -3,7 +3,7 @@ export const isNumber = (value) => {
 };
 
 export const isEnglish = (value) => {
-  const regExpression = /^[a-zA-Z]*$/;
+  const regExpression = /^[\sa-zA-Z]*$/;
 
   return regExpression.test(value);
 };
