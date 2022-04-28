@@ -1,7 +1,7 @@
 {
   "name": "react-payments",
   "version": "0.1.0",
-  "private": true,
+  "homepage": "http://rladpwl0512.github.io/react-payments",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
@@ -76,6 +76,5 @@
     "commitizen": {
       "path": "cz-customizable"
     }
-  },
-  "homepage": "http://jswith.github.io/react-payments"
+  }
 }
