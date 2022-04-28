@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
 
-  margin: 10px 0;
+  margin: 10px 0 30px;
 }
 
 .empty-card {
@@ -26,25 +26,28 @@
 }
 
 .small-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  width: 208px;
-  height: 130px;
-
-  background: #94dacd;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  width: 246px;
+  height: 144px;
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 3px 25px 25px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
 }
 
-.small-card__chip {
+.small-card::before {
+  position: absolute;
+  content: '';
+  display: block;
   width: 40px;
   height: 26px;
-  left: 95px;
-  top: 122px;
-
+  left: 14px;
+  top: 45%;
+  transform: translateY(-50%);
   background: #cbba64;
   border-radius: 4px;
 }
@@ -78,16 +81,8 @@
   height: 100%;
 
   display: flex;
-  align-items: center;
-}
-
-.card-middle {
-  width: 100%;
-  height: 100%;
-  margin-left: 30px;
-
-  display: flex;
-  align-items: center;
+  align-items: top;
+  padding: 15px 0;
 }
 
 .card-bottom {
@@ -97,6 +92,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-weight: bold;
+  letter-spacing: 0.3px;
 }
 
 .card-bottom__number {
@@ -105,7 +102,7 @@
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
 }
 
 .card-bottom__info {
@@ -113,17 +110,30 @@
   height: 100%;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
 .card-text {
   margin: 0 16px;
-
   font-size: 14px;
   line-height: 16px;
   vertical-align: middle;
-  font-weight: 400;
+  color: #fff;
+}
+
+.card-text.user-name {
+  width: 72%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-text.expire-date {
+  width: 28%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: right;
 }
 
 .card-text__big {

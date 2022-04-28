@@ -1,8 +1,9 @@
 .input-container {
-  margin: 16px 0;
+  margin: 25px 0;
 }
 
 .input-box {
+  position: relative;
   display: flex;
   align-items: center;
   margin-top: 0.375rem;
@@ -23,6 +24,14 @@
   color: #525252;
 }
 
+.input-error-message {
+  font-size: 12px;
+  top: 20px;
+  left: 0px;
+  color: rgb(246, 112, 112);
+  z-index: 2;
+}
+
 .input-basic {
   background-color: #ecebf1;
   height: 45px;
@@ -33,6 +42,12 @@
   border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
+  padding: 0px 10px;
+}
+
+.input-basic[type='password'] {
+  font-size: 24px;
+  letter-spacing: 10px;
 }
 
 .input-underline {
@@ -45,4 +60,56 @@
   padding: 4px 0;
 
   border-bottom: 1px solid #383838;
+}
+
+.input-length-text {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  width: 20%;
+  height: 45px;
+
+  color: #666;
+  text-align: right;
+  font-size: 12px;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+.input-security-code-tip {
+  position: absolute;
+  font-family: '돋움';
+  font-weight: bold;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: #000;
+  right: -40px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ddd;
+  color: #bbb;
+  cursor: pointer;
+}
+
+.input-security-code-tip:hover {
+  border-color: #999;
+  color: #999;
+}
+
+.input-security-code-tip:hover::after {
+  position: absolute;
+  display: block;
+  right: -178px;
+  font-size: 12px;
+  font-weight: normal;
+  font-family: 'NanumBarunGothic';
+  content: '카드 뒷면의 숫자 3자리입니다.';
+  white-space: nowrap;
+  color: #fff;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 5px;
 }
