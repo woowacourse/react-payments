@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Input from '../Input';
 import PropTypes from 'prop-types';
-import { isAlphabetOrSpace } from '../../utils/validations';
 import { objectToString } from '../../utils/util';
-import { uid } from 'react-uid';
-import { checkFormCompletion, checkFormValidation, isNumberInRange } from './validation';
+import { checkFormCompletion, checkFormValidation } from './validation';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
+import CardNumberInput from '../Input/CardNumber';
+import ExpirationDateInput from '../Input/ExpirationDate';
+import OwnerNameInput from '../Input/OwnerName';
+import SecurityCodeInput from '../Input/SecurityCode';
+import PasswordInput from '../Input/Password';
 
-const inputCounts = [0, 4, 6, 7, 8];
 function InputForm({
   cardInput: { cardNumber, expirationDate, ownerName, securityCode, password },
   cardInputDispatch,
@@ -15,85 +16,6 @@ function InputForm({
   const [isComplete, setIsComplete] = useState(false);
 
   const inputElementsRef = useRef([]);
-
-  const onChangeCardNumber = (key, e, index) => {
-    const {
-      target: { value: cardNumber, maxLength },
-    } = e;
-
-    if (isNumberInRange(cardNumber, maxLength)) {
-      cardInputDispatch({ type: 'CHANGE_CARD_NUMBER', payload: { cardNumber, key } });
-    }
-
-    if (cardNumber.length === maxLength) {
-      inputElementsRef.current[index + 1]?.focus();
-    }
-  };
-
-  const onChangeExpirationDate = (key, e, index) => {
-    const {
-      target: { value: date, maxLength },
-    } = e;
-
-    if (isNumberInRange(date, maxLength)) {
-      cardInputDispatch({ type: 'CHANGE_EXPIRATION_DATE', payload: { date, key } });
-    }
-
-    if (date.length === maxLength) {
-      inputElementsRef.current[index + 1]?.focus();
-    }
-  };
-
-  const onChangeOwnerName = (e, index) => {
-    const {
-      target: { value: ownerName, maxLength },
-    } = e;
-
-    if (isAlphabetOrSpace(ownerName)) {
-      cardInputDispatch({
-        type: 'CHANGE_OWNER_NAME',
-        payload: { ownerName: ownerName.toUpperCase() },
-      });
-    }
-
-    if (ownerName.length === maxLength) {
-      inputElementsRef.current[index + 1]?.focus();
-    }
-  };
-
-  const onChangeSecurityCode = (e, index) => {
-    const {
-      target: { value: securityCode, maxLength },
-    } = e;
-
-    if (isNumberInRange(securityCode, maxLength)) {
-      cardInputDispatch({
-        type: 'CHANGE_SECURITY_CODE',
-        payload: { securityCode },
-      });
-    }
-
-    if (securityCode.length === maxLength) {
-      inputElementsRef.current[index + 1]?.focus();
-    }
-  };
-
-  const onChangePassword = (key, e, index) => {
-    const {
-      target: { value: password, maxLength },
-    } = e;
-
-    if (isNumberInRange(password, maxLength)) {
-      cardInputDispatch({
-        type: 'CHANGE_PASSWORD',
-        payload: { password, key },
-      });
-    }
-
-    if (password.length === maxLength) {
-      inputElementsRef.current[index + 1]?.focus();
-    }
-  };
 
   const onClickNextButton = e => {
     e.preventDefault();
@@ -123,77 +45,37 @@ function InputForm({
 
   return (
     <form onSubmit={onClickNextButton}>
-      <Input labelTitle="카드번호">
-        {Object.keys(cardNumber).map((stateKey, index) => (
-          <input
-            key={uid(stateKey)}
-            className="input-basic"
-            type={stateKey === 'first' || stateKey === 'second' ? 'text' : 'password'}
-            value={cardNumber[stateKey]}
-            onChange={e => onChangeCardNumber(stateKey, e, inputCounts[0] + index)}
-            maxLength={4}
-            required
-            ref={element => (inputElementsRef.current[inputCounts[0] + index] = element)}
-          />
-        ))}
-      </Input>
-      <Input labelTitle="만료일" inputSize="w-50">
-        {Object.keys(expirationDate).map((stateKey, index) => (
-          <input
-            key={uid(stateKey)}
-            className="input-basic"
-            type="text"
-            placeholder={stateKey === 'month' ? 'MM' : 'YY'}
-            value={expirationDate[stateKey]}
-            onChange={e => onChangeExpirationDate(stateKey, e, inputCounts[1] + index)}
-            maxLength={2}
-            required
-            ref={element => (inputElementsRef.current[inputCounts[1] + index] = element)}
-          />
-        ))}
-      </Input>
-      <Input labelTitle="카드 소유자 이름(선택)">
-        <input
-          type="text"
-          className="input-basic"
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          value={ownerName}
-          onChange={e => onChangeOwnerName(e, inputCounts[2])}
-          maxLength={30}
-          ref={element => (inputElementsRef.current[inputCounts[2]] = element)}
-        />
-      </Input>
-      <Input
-        labelTitle="보안코드(CVC/CVV)"
-        inputSize="w-25"
-        helpText="카드 뒷면 서명란 또는 신용카드 번호 오른쪽 상단에 기재된 3자리 숫자"
-      >
-        <input
-          className="input-basic"
-          type="password"
-          value={securityCode}
-          onChange={e => onChangeSecurityCode(e, inputCounts[3])}
-          maxLength={3}
-          required
-          ref={element => (inputElementsRef.current[inputCounts[3]] = element)}
-        />
-      </Input>
-      <Input labelTitle="카드 비밀번호" inputSize="w-50">
-        {Object.keys(password).map((stateKey, index) => (
-          <input
-            key={uid(stateKey)}
-            className="input-basic"
-            type="text"
-            value={password[stateKey]}
-            onChange={e => onChangePassword(stateKey, e, inputCounts[4] + index)}
-            maxLength={1}
-            required
-            ref={element => (inputElementsRef.current[inputCounts[4] + index] = element)}
-          />
-        ))}
-        <div className="inputted-password">*</div>
-        <div className="inputted-password">*</div>
-      </Input>
+      <CardNumberInput
+        cardNumber={cardNumber}
+        cardInputDispatch={cardInputDispatch}
+        inputElementsRef={inputElementsRef}
+        startIndex={0}
+      ></CardNumberInput>
+      <ExpirationDateInput
+        cardNumber={expirationDate}
+        cardInputDispatch={cardInputDispatch}
+        inputElementsRef={inputElementsRef}
+        startIndex={4}
+      ></ExpirationDateInput>
+      <OwnerNameInput
+        ownerName={ownerName}
+        cardInputDispatch={cardInputDispatch}
+        inputElementsRef={inputElementsRef}
+        startIndex={6}
+      ></OwnerNameInput>
+      <SecurityCodeInput
+        securityCode={securityCode}
+        cardInputDispatch={cardInputDispatch}
+        inputElementsRef={inputElementsRef}
+        startIndex={7}
+      ></SecurityCodeInput>
+      <PasswordInput
+        password={password}
+        cardInputDispatch={cardInputDispatch}
+        inputElementsRef={inputElementsRef}
+        startIndex={8}
+      ></PasswordInput>
+
       {isComplete && (
         <button className="button-box">
           <span className="button-text">다음</span>
