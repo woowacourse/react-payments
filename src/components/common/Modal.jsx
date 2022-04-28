@@ -1,4 +1,3 @@
-import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 const ModalContainer = styled.div`
@@ -43,6 +42,24 @@ const ModalInner = styled.div`
   padding: 16px;
   z-index: 1000;
   overflow-y: auto;
+
+  animation: slide-up 0.2s 0s ease;
+
+  @keyframes slide-up {
+    0% {
+      transform: translateY(50%);
+      top: calc(${props => `${props.height - 50}px`});
+      height: 0;
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0);
+      top: calc(${props => `${props.height - 200}px`});
+      height: 200px;
+      opacity: 1;
+    }
+  }
 `;
 
 function Modal({ isOpen, setIsOpen, dimensions: { width, height }, children }) {
