@@ -59,6 +59,7 @@ const StyledCardFieldContainer = styled.div`
 
   .input-box.password {
     background-color: transparent;
+    width: auto;
   }
 
   .input-basic {
@@ -102,6 +103,10 @@ const StyledCardFieldContainer = styled.div`
     align-items: center;
     gap: 10px;
   }
+
+  .error {
+    outline: 2px solid red;
+  }
 `;
 
 const initiaCardlValues = {
@@ -125,17 +130,86 @@ const initiaCardlValues = {
   },
 };
 
+const validationSchema = {
+  cardNumber: {
+    assert: (cardNumber) => {
+      const isValidLength = Object.values(cardNumber).every(
+        (number) => number.length === 4
+      );
+
+      return isValidLength;
+    },
+    errorMessage: '무슨 짓을 한거야!',
+  },
+  expiredDate: {
+    assert: ({ month, year }) => {
+      const convertedMonth = Number(month);
+      const convertedYear = Number(year);
+      const currentDate = new Date();
+      const currentYear = currentDate.getFullYear() % 100;
+      const currentMonth = currentDate.getMonth() + 1;
+      const isValidLength = month.length === 2 && year.length === 2;
+      const isMonthValid =
+        convertedMonth >= 1 &&
+        convertedMonth <= 12 &&
+        (convertedYear === currentYear ? convertedMonth >= currentMonth : true);
+      const isYearValid = convertedYear >= currentYear;
+
+      return isValidLength && isMonthValid && isYearValid;
+    },
+    errorMessage: '무슨 짓을 한거야!',
+  },
+  owner: {
+    assert: () => true,
+    errorMessage: '무슨 짓을 한거야!',
+  },
+  cvc: {
+    assert: (cvc) => {
+      return /^\d{3}$/.test(cvc);
+    },
+    errorMessage: '무슨 짓을 한거야!',
+  },
+  password: {
+    assert: ({ firstDigit, secondDigit }) => {
+      return !Number.isNaN(Number(firstDigit)) && Number(secondDigit);
+    },
+    errorMessage: '무슨 짓을 한거야!',
+  },
+};
+
+const validate = (errors) => {
+  const errorMessageList = Object.values(errors)
+    .filter(({ isError }) => isError)
+    .map(({ errorMessage }) => errorMessage);
+
+  if (errorMessageList.length > 0) {
+    throw new Error(errorMessageList.join(' '));
+  }
+};
+
+const addCard = (data) => {
+  console.log(data);
+};
+
 const CardForm = () => {
   return (
     <EasyForm
       initialValues={initiaCardlValues}
-      onSubmit={(data, setSubmitting) => {
+      onSubmit={(data, setSubmitting, errors) => {
         setSubmitting(true);
-        console.log(data);
-        setSubmitting(false);
+
+        try {
+          validate(errors);
+          addCard(data);
+        } catch (e) {
+          alert(e.message);
+        } finally {
+          setSubmitting(false);
+        }
       }}
+      validationSchema={validationSchema}
     >
-      {(values, submitting, handleChange, handleSubmit) => (
+      {(values, submitting, handleChange, handleSubmit, errors) => (
         <>
           <CardPreview
             cardNumber={values.cardNumber}
@@ -149,7 +223,7 @@ const CardForm = () => {
                 name="cardNumber"
                 value={values.cardNumber}
                 onChange={handleChange}
-                className="input-box"
+                className={`input-box ${errors.cardNumber?.isError && 'error'}`}
               >
                 <input
                   name="first"
@@ -190,7 +264,9 @@ const CardForm = () => {
                 name="expiredDate"
                 value={values.expiredDate}
                 onChange={handleChange}
-                className="input-box w-50"
+                className={`input-box w-50 ${
+                  errors.expiredDate?.isError && 'error'
+                }`}
               >
                 <input
                   name="month"
@@ -233,7 +309,9 @@ const CardForm = () => {
             <StyledCardFieldContainer className="input-container">
               <label className="input-title">보안코드 (CVC/CVV)</label>
               <div className="cvc-block">
-                <div className="input-box w-25">
+                <div
+                  className={`input-box w-25 ${errors.cvc?.isError && 'error'}`}
+                >
                   <input
                     name="cvc"
                     type="text"
@@ -258,7 +336,9 @@ const CardForm = () => {
                 name="password"
                 value={values.password}
                 onChange={handleChange}
-                className="input-box password"
+                className={`input-box password ${
+                  errors.password?.isError && 'error'
+                }`}
               >
                 <input
                   name="firstDigit"
