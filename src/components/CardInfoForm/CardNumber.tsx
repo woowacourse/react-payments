@@ -12,8 +12,10 @@ export default function CardNumber({ cardNumbers, onChange }) {
             <Input
               type={index < 2 ? "text" : "password"}
               value={cardNumber}
-              onChange={e => onChange(e, index)}
+              onChange={onChange}
               maxLength={4}
+              name="cardNumbers"
+              data-index={index}
             />
             {index !== 3 ? <span className="card-number-delimiter">-</span> : null}
           </React.Fragment>

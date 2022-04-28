@@ -11,18 +11,22 @@ export default function ExpiredDate({ expiredDate, onChange }) {
           type="text"
           placeholder="MM"
           maxLength={2}
-          onChange={e => onChange(e, 0)}
+          onChange={onChange}
           value={expiredDate.month || ""}
           style={{ paddingLeft: "40px" }}
+          name="expiredDate"
+          data-key="month"
         />
         <span className="expired-date-delimiter">/</span>
         <Input
           type="text"
           placeholder="YY"
           maxLength={2}
-          onChange={e => onChange(e, 1)}
+          onChange={onChange}
           value={expiredDate.year || ""}
           style={{ paddingRight: "40px" }}
+          name="expiredDate"
+          data-key="year"
         />
       </div>
     </div>

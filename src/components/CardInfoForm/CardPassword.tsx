@@ -10,15 +10,19 @@ export default function CardPassword({ password, onChange }) {
         type="password"
         size="tiny"
         value={password[0] || ""}
-        onChange={e => onChange(e, 0)}
+        onChange={onChange}
         maxLength={1}
+        name="password"
+        data-index={0}
       />
       <Input
         type="password"
         size="tiny"
         value={password[1] || ""}
-        onChange={e => onChange(e, 1)}
+        onChange={onChange}
         maxLength={1}
+        name="password"
+        data-index={1}
       />
       <input
         className="input-basic rest-password-box w-15"

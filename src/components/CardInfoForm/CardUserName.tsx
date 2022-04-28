@@ -19,6 +19,7 @@ export default function CardUserName({ cardUserName, onChange, onBlur }) {
         onChange={onChange}
         maxLength={MAX_USER_NAME_LENGTH}
         onBlur={onBlur}
+        name="userName"
       />
     </div>
   );

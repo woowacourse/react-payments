@@ -15,6 +15,7 @@ export default function SecurityCode({ securityCode, onChange }) {
         value={securityCode || ""}
         onChange={onChange}
         maxLength={3}
+        name="securityCode"
       />
       <div className="cvc-container">
         <span

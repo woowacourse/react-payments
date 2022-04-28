@@ -25,14 +25,20 @@ function App() {
     setCardInfo(initialCardInfo);
   };
 
-  const onChangeCardNumber = (e: React.ChangeEvent<HTMLInputElement>, index: 0 | 1 | 2 | 3) => {
-    const inputValue = e.target.value;
+  // cardInfo의 종류는 name으로 구분하고 (cardNumbers, expiredDate..)
+  // cardNumbers의 index, expiredDate의 key, 이런 것들을 date-set
 
-    if (inputValue === "" || REGEXP.NUMBER.test(inputValue)) {
+  const onChangeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      value,
+      dataset: { index },
+    } = e.target;
+
+    if (value === "" || REGEXP.NUMBER.test(value)) {
       setCardInfo(prevCardInfo => {
         const newCardNumbers: CardNumbers = [...prevCardInfo.cardNumbers];
 
-        newCardNumbers[index] = inputValue;
+        newCardNumbers[index] = value;
 
         return {
           ...prevCardInfo,
@@ -42,16 +48,19 @@ function App() {
     }
   };
 
-  const onChangeExpiredDate = (e: React.ChangeEvent<HTMLInputElement>, index: 0 | 1) => {
-    const inputValue = e.target.value;
+  const onChangeExpiredDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      value,
+      dataset: { key },
+    } = e.target;
 
-    if (inputValue === "" || REGEXP.NUMBER.test(inputValue)) {
+    if (value === "" || REGEXP.NUMBER.test(value)) {
       setCardInfo(prevCardInfo => {
         const newExpiredDate = {
           ...prevCardInfo.expiredDate,
         };
 
-        newExpiredDate[index === 0 ? "month" : "year"] = inputValue;
+        newExpiredDate[key] = value;
 
         return {
           ...prevCardInfo,
@@ -62,14 +71,14 @@ function App() {
   };
 
   const onChangeUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
+    const value = e.target.value;
 
-    if (cardInfo.userName === "" && inputValue === " ") {
+    if (cardInfo.userName === "" && value === " ") {
       return;
     }
 
-    if (inputValue === "" || REGEXP.ENGLISH.test(inputValue)) {
-      const newUserName = inputValue.replace("  ", " ").toUpperCase();
+    if (value === "" || REGEXP.ENGLISH.test(value)) {
+      const newUserName = value.replace("  ", " ").toUpperCase();
 
       setCardInfo(prevCardInfo => ({ ...prevCardInfo, userName: newUserName }));
     }
@@ -80,24 +89,27 @@ function App() {
   };
 
   const onChangeSecurityCode = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-    const inputValue = e.target.value;
+    const value = e.target.value;
 
-    if (inputValue === "" || REGEXP.NUMBER.test(inputValue)) {
+    if (value === "" || REGEXP.NUMBER.test(value)) {
       setCardInfo(prevCardInfo => ({
         ...prevCardInfo,
-        securityCode: inputValue,
+        securityCode: value,
       }));
     }
   };
 
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>, index: 0 | 1) => {
-    const inputValue = e.target.value;
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const {
+      value,
+      dataset: { index },
+    } = e.target;
 
-    if (inputValue === "" || REGEXP.NUMBER.test(inputValue)) {
+    if (value === "" || REGEXP.NUMBER.test(value)) {
       setCardInfo(prevCardInfo => {
         const newPassword: Password = [...prevCardInfo.password];
 
-        newPassword[index] = inputValue;
+        newPassword[index] = value;
 
         return {
           ...prevCardInfo,
