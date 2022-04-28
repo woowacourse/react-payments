@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import Container from '../styles/Container';
 import InputTitle from '../styles/InputTitle';
@@ -6,8 +6,8 @@ import InputBox from '../styles/InputBox';
 import InputBasic from '../styles/InputBasic';
 import InputContainer from '../styles/InputContainer';
 import CardContext from '../CardContext';
+import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
-import ErrorMessage from '../styles/ErrorMessage';
 
 export default function CardExpiration() {
   const { cardExpiration, cardExpirationErrorMessage, dispatch } = useContext(CardContext);
@@ -16,20 +16,7 @@ export default function CardExpiration() {
     dispatch({ type: 'SET_CARD_EXPIRATION', value: e.target.value, index });
   };
 
-  useEffect(() => {
-    try {
-      validator.checkCardExpiration(cardExpiration);
-      dispatch({
-        type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE',
-        errorMessage: '',
-      });
-    } catch ({ message }) {
-      dispatch({
-        type: 'SET_CARD_EXPIRATION_ERROR_MESSAGE',
-        errorMessage: message,
-      });
-    }
-  }, [cardExpiration]);
+  const validate = (value) => value.join('') && validator.checkCardExpiration(value);
 
   return (
     <Container>
@@ -54,7 +41,13 @@ export default function CardExpiration() {
           />
         </InputContainer>
       </InputBox>
-      <ErrorMessage>{cardExpirationErrorMessage}</ErrorMessage>
+      <ErrorMessage
+        value={cardExpiration}
+        validation={validate}
+        type="SET_CARD_EXPIRATION_ERROR_MESSAGE"
+      >
+        {cardExpirationErrorMessage}
+      </ErrorMessage>
     </Container>
   );
 }

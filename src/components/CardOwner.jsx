@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import Container from '../styles/Container';
@@ -8,7 +8,7 @@ import InputBasic from '../styles/InputBasic';
 import InputContainer from '../styles/InputContainer';
 import CardContext from '../CardContext';
 import validator from '../validations/validator';
-import ErrorMessage from '../styles/ErrorMessage';
+import ErrorMessage from './ErrorMessage';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -35,21 +35,6 @@ export default function CardOwner() {
     dispatch({ type: 'SET_CARD_OWNER', value: e.target.value });
   };
 
-  useEffect(() => {
-    try {
-      validator.checkCardOwner(cardOwner);
-      dispatch({
-        type: 'SET_CARD_OWNER_ERROR_MESSAGE',
-        errorMessage: '',
-      });
-    } catch ({ message }) {
-      dispatch({
-        type: 'SET_CARD_OWNER_ERROR_MESSAGE',
-        errorMessage: message,
-      });
-    }
-  }, [cardOwner]);
-
   const nameLengthColor = () => (cardOwner.length > 30 ? '#E24141' : '#525252');
 
   return (
@@ -65,7 +50,13 @@ export default function CardOwner() {
           <InputBasicLeft type="text" maxLength="30" onChange={onChangeInput} />
         </InputContainer>
       </InputBox>
-      <ErrorMessage>{cardOwnerErrorMessage}</ErrorMessage>
+      <ErrorMessage
+        value={cardOwner}
+        validation={validator.checkCardOwner}
+        type="SET_CARD_OWNER_ERROR_MESSAGE"
+      >
+        {cardOwnerErrorMessage}
+      </ErrorMessage>
     </Container>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import Container from '../styles/Container';
 import InputTitle from '../styles/InputTitle';
@@ -6,8 +6,8 @@ import InputBox from '../styles/InputBox';
 import InputBasic from '../styles/InputBasic';
 import InputContainer from '../styles/InputContainer';
 import CardContext from '../CardContext';
+import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
-import ErrorMessage from '../styles/ErrorMessage';
 
 export default function CardNumber() {
   const { cardNumber, cardNumberErrorMessage, dispatch } = useContext(CardContext);
@@ -16,20 +16,7 @@ export default function CardNumber() {
     dispatch({ type: 'SET_CARD_NUMBER', value: e.target.value, index });
   };
 
-  useEffect(() => {
-    try {
-      validator.checkCardNumber(cardNumber);
-      dispatch({
-        type: 'SET_CARD_NUMBER_ERROR_MESSAGE',
-        errorMessage: '',
-      });
-    } catch ({ message }) {
-      dispatch({
-        type: 'SET_CARD_NUMBER_ERROR_MESSAGE',
-        errorMessage: message,
-      });
-    }
-  }, [cardNumber]);
+  const validate = (value) => value.join('').length > 0 && validator.checkCardNumber(value);
 
   return (
     <Container>
@@ -66,7 +53,9 @@ export default function CardNumber() {
           />
         </InputContainer>
       </InputBox>
-      <ErrorMessage>{cardNumberErrorMessage}</ErrorMessage>
+      <ErrorMessage value={cardNumber} validation={validate} type="SET_CARD_NUMBER_ERROR_MESSAGE">
+        {cardNumberErrorMessage}
+      </ErrorMessage>
     </Container>
   );
 }
