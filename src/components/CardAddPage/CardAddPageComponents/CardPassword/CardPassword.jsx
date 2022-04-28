@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { inputNumberOnly, limitInputLength } from '../../../../utils';
+import { LIMIT_LENGTH } from '../../../../constants';
 
 function CardPassword({ cardInfo, setCardInfo }) {
   const handleOnInput = (event) => {
-    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
-    event.target.value = event.target.value.replace(/[^0-9.]/g, '').replace(regExp, '');
-
     let { value, name } = event.target;
+    value = inputNumberOnly(value);
 
-    if (value.length > 1) {
-      value = value.slice(0, 1);
+    if (value.length > LIMIT_LENGTH.CARD_PASSWORD) {
+      value = limitInputLength(value, LIMIT_LENGTH.CARD_PASSWORD);
     }
 
     setCardInfo({
