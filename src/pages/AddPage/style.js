@@ -45,9 +45,13 @@ const CVCWrapper = styled.div`
   gap: 15px;
 `;
 
-const Footer = styled.div`
+const FooterWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+`;
+
+const FormWrapper = styled.div`
+  margin-bottom: 15px;
 `;
 
 export {
@@ -58,5 +62,6 @@ export {
   OwnerHeader,
   Dot,
   CVCWrapper,
-  Footer,
+  FooterWrapper,
+  FormWrapper,
 };
