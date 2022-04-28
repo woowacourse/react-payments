@@ -52,30 +52,6 @@ const StyledCardPreview = styled.div`
     border-radius: 4px;
   }
 
-  .big-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    width: 290px;
-    height: 180px;
-
-    background: #94dacd;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-  }
-
-  .big-card__chip {
-    width: 55.04px;
-    height: 35.77px;
-
-    background: #cbba64;
-    border-radius: 4px;
-
-    font-size: 24px;
-  }
-
   .card-top {
     width: 100%;
     height: 100%;
@@ -130,49 +106,31 @@ const StyledCardPreview = styled.div`
     vertical-align: middle;
     font-weight: 400;
   }
-
-  .card-text__big {
-    margin: 0 16px;
-
-    font-size: 18px;
-    line-height: 20px;
-    vertical-align: middle;
-    font-weight: 400;
-  }
 `;
 
-const CardPreview = ({ cardNumber, expiredDate, owner }) => {
-  const cardNumberList = [
-    cardNumber.first,
-    cardNumber.second,
-    '•'.repeat(cardNumber.third.length),
-    '•'.repeat(cardNumber.fourth.length),
-  ];
-  const delimeter = ' ';
-
-  return (
-    <StyledCardPreview className="card-box">
-      <div className="small-card">
-        <div className="card-top">
-          <span className="card-text">클린카드</span>
+const CardPreview = ({ brand, cardNumber, expiredDate, owner }) => (
+  <StyledCardPreview className="card-box">
+    <div className="small-card">
+      <div className="card-top">
+        <span className="card-text">{brand ?? null}</span>
+      </div>
+      <div className="card-middle">
+        <div className="small-card__chip" />
+      </div>
+      <div className="card-bottom">
+        <div className="card-bottom__number">
+          <span className="card-text">{cardNumber.join(' ')}</span>
         </div>
-        <div className="card-middle">
-          <div className="small-card__chip" />
-        </div>
-        <div className="card-bottom">
-          <div className="card-bottom__number">
-            <span className="card-text">{cardNumberList.join(delimeter)}</span>
-          </div>
-          <div className="card-bottom__info">
-            <p className="card-text w-50 ellipsis">{owner.toUpperCase()}</p>
-            <span className="card-text">
-              {expiredDate.month} / {expiredDate.year}
-            </span>
-          </div>
+        <div className="card-bottom__info">
+          <p className="card-text w-50 ellipsis">{owner}</p>
+          <span className="card-text">
+            {expiredDate.month} {expiredDate.month.length === 2 ? '/' : null}{' '}
+            {expiredDate.year}
+          </span>
         </div>
       </div>
-    </StyledCardPreview>
-  );
-};
+    </div>
+  </StyledCardPreview>
+);
 
 export default CardPreview;

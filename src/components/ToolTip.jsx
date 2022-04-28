@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 

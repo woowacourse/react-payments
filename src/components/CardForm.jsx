@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import styled from 'styled-components';
-import EasyField from './EasyField';
 import EasyForm from './EasyForm';
 import CardPreview from './CardPreview';
 import ToolTip from './ToolTip';
 
 const StyledCardForm = styled.form`
   margin: 0;
+
   .submit-button {
     background: none;
     border: none;
@@ -80,18 +80,6 @@ const StyledCardFieldContainer = styled.div`
     margin-right: 7px;
   }
 
-  .input-underline {
-    text-align: center;
-    border: none;
-    background: none;
-    outline: none;
-
-    margin: 16px 0;
-    padding: 4px 0;
-
-    border-bottom: 1px solid #383838;
-  }
-
   .name-length {
     display: inline-block;
     line-height: 14px;
@@ -105,187 +93,223 @@ const StyledCardFieldContainer = styled.div`
   }
 
   .error {
-    outline: 2px solid red;
+    outline: 1px solid #ff9e9e !important;
+    outline-offset: -1px !important;
+    background-color: #ffc6c6 !important;
   }
 `;
 
-const initiaCardlValues = {
-  cardNumber: {
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
+const cardFormSchema = {
+  firstCardNumber: {
+    alias: '카드 번호',
+    type: 'number',
+    initialValue: '',
+    minLength: 4,
+    maxLength: 4,
+    required: true,
   },
-  expiredDate: {
-    month: '',
-    year: '',
+  secondCardNumber: {
+    alias: '카드 번호',
+    type: 'number',
+    initialValue: '',
+    minLength: 4,
+    maxLength: 4,
+    required: true,
   },
-  owner: '',
-  cvc: '',
-  password: {
-    firstDigit: '',
-    secondDigit: '',
-    thirdDigit: '*',
-    fourthDigit: '*',
+  thirdCardNumber: {
+    alias: '카드 번호',
+    type: 'number',
+    initialValue: '',
+    minLength: 4,
+    maxLength: 4,
+    required: true,
   },
-};
-
-const validationSchema = {
-  cardNumber: {
-    assert: (cardNumber) => {
-      const isValidLength = Object.values(cardNumber).every(
-        (number) => number.length === 4
-      );
-
-      return isValidLength;
-    },
-    errorMessage: '무슨 짓을 한거야!',
+  fourthCardNumber: {
+    alias: '카드 번호',
+    type: 'number',
+    initialValue: '',
+    minLength: 4,
+    maxLength: 4,
+    required: true,
   },
-  expiredDate: {
-    assert: ({ month, year }) => {
-      const convertedMonth = Number(month);
-      const convertedYear = Number(year);
-      const currentDate = new Date();
-      const currentYear = currentDate.getFullYear() % 100;
-      const currentMonth = currentDate.getMonth() + 1;
-      const isValidLength = month.length === 2 && year.length === 2;
-      const isMonthValid =
-        convertedMonth >= 1 &&
-        convertedMonth <= 12 &&
-        (convertedYear === currentYear ? convertedMonth >= currentMonth : true);
-      const isYearValid = convertedYear >= currentYear;
-
-      return isValidLength && isMonthValid && isYearValid;
-    },
-    errorMessage: '무슨 짓을 한거야!',
+  expiredMonth: {
+    alias: '만료일',
+    type: 'number',
+    initialValue: '',
+    minLength: 2,
+    maxLength: 2,
+    required: true,
+    validation: [
+      {
+        assert: (month) => month >= 1 && month <= 12,
+        errorMessage: '유효하지 않은 월입니다.',
+      },
+    ],
+  },
+  expiredYear: {
+    alias: '만료일',
+    type: 'number',
+    initialValue: '',
+    minLength: 2,
+    maxLength: 2,
+    required: true,
+    validation: [
+      {
+        assert: (year) => year >= new Date().getFullYear() % 100,
+        errorMessage: '유효하지 않은 연도입니다.',
+      },
+    ],
   },
   owner: {
-    assert: () => true,
-    errorMessage: '무슨 짓을 한거야!',
+    alias: '카드 소유자 이름',
+    type: 'text',
+    initialValue: '',
+    maxLength: 30,
   },
   cvc: {
-    assert: (cvc) => {
-      return /^\d{3}$/.test(cvc);
-    },
-    errorMessage: '무슨 짓을 한거야!',
+    alias: '보안코드 (cvc/cvv)',
+    type: 'number',
+    initialValue: '',
+    minLength: 3,
+    maxLength: 4,
+    required: true,
   },
-  password: {
-    assert: ({ firstDigit, secondDigit }) => {
-      return !Number.isNaN(Number(firstDigit)) && Number(secondDigit);
-    },
-    errorMessage: '무슨 짓을 한거야!',
+  firstPasswordDigit: {
+    alias: '비밀번호',
+    type: 'number',
+    initialValue: '',
+    minLength: 1,
+    maxLength: 1,
+    required: true,
+  },
+  secondPasswordDigit: {
+    alias: '비밀번호',
+    type: 'number',
+    initialValue: '',
+    minLength: 1,
+    maxLength: 1,
+    required: true,
+  },
+  thirdPasswordDigit: {
+    alias: '비밀번호',
+    type: 'number',
+    initialValue: '*',
+    minLength: 1,
+    maxLength: 1,
+  },
+  fourthPasswordDigit: {
+    alias: '비밀번호',
+    type: 'number',
+    initialValue: '*',
+    minLength: 1,
+    maxLength: 1,
   },
 };
 
-const validate = (errors) => {
-  const errorMessageList = Object.values(errors)
-    .filter(({ isError }) => isError)
-    .map(({ errorMessage }) => errorMessage);
+const getCardInfo = ({
+  firstCardNumber,
+  secondCardNumber,
+  thirdCardNumber,
+  fourthCardNumber,
+  expiredMonth,
+  expiredYear,
+  owner,
+  cvc,
+  firstPasswordDigit,
+  secondPasswordDigit,
+}) => ({
+  brand: '우아한카드',
+  cardNumber: [
+    firstCardNumber,
+    secondCardNumber,
+    thirdCardNumber,
+    fourthCardNumber,
+  ],
+  expiredDate: {
+    month: expiredMonth,
+    year: expiredYear,
+  },
+  owner: owner.toUpperCase(),
+  cvc,
+  password: `${firstPasswordDigit}${secondPasswordDigit}`,
+});
 
-  if (errorMessageList.length > 0) {
-    throw new Error(errorMessageList.join(' '));
-  }
-};
-
-const addCard = (data) => {
-  console.log(data);
+const addCard = (values) => {
+  console.log(getCardInfo(values));
 };
 
 const CardForm = () => {
   return (
     <EasyForm
-      initialValues={initiaCardlValues}
-      onSubmit={(data, setSubmitting, errors) => {
+      formSchema={cardFormSchema}
+      onSubmit={(values, setSubmitting) => {
         setSubmitting(true);
-
-        try {
-          validate(errors);
-          addCard(data);
-        } catch (e) {
-          alert(e.message);
-        } finally {
-          setSubmitting(false);
-        }
+        addCard(values);
+        setSubmitting(false);
       }}
-      validationSchema={validationSchema}
+      onSubmitError={(errors, invalidInputRefs) => {
+        const firstInvalidInputRef = invalidInputRefs[0].ref;
+        const { errorMessage } = errors[firstInvalidInputRef.current.name];
+
+        firstInvalidInputRef.current.focus();
+        alert(errorMessage);
+      }}
     >
-      {(values, submitting, handleChange, handleSubmit, errors) => (
+      {({ values, submitting, handleSubmit, errors, registerInputProps }) => (
         <>
-          <CardPreview
-            cardNumber={values.cardNumber}
-            expiredDate={values.expiredDate}
-            owner={values.owner}
-          />
+          <CardPreview {...getCardInfo(values)} />
           <StyledCardForm onSubmit={handleSubmit} disabled={submitting}>
             <StyledCardFieldContainer className="input-container">
               <label className="input-title">카드 번호</label>
-              <EasyField
-                name="cardNumber"
-                value={values.cardNumber}
-                onChange={handleChange}
-                className={`input-box ${errors.cardNumber?.isError && 'error'}`}
-              >
+              <div className="input-box">
                 <input
-                  name="first"
-                  type="text"
-                  maxLength="4"
-                  className="input-basic"
-                  required
+                  className={`input-basic ${
+                    errors.firstCardNumber?.showError && 'error'
+                  }`}
+                  {...registerInputProps('firstCardNumber')}
                 />
                 <p>-</p>
                 <input
-                  name="second"
-                  type="text"
-                  maxLength="4"
-                  className="input-basic"
-                  required
+                  className={`input-basic ${
+                    errors.secondCardNumber?.showError && 'error'
+                  }`}
+                  {...registerInputProps('secondCardNumber')}
                 />
                 <p>-</p>
                 <input
-                  name="third"
                   type="password"
-                  maxLength="4"
-                  className="input-basic"
-                  required
+                  className={`input-basic ${
+                    errors.thirdCardNumber?.showError && 'error'
+                  }`}
+                  {...registerInputProps('thirdCardNumber')}
                 />
                 <p>-</p>
                 <input
-                  name="fourth"
                   type="password"
-                  maxLength="4"
-                  className="input-basic"
-                  required
+                  className={`input-basic ${
+                    errors.fourthCardNumber?.showError && 'error'
+                  }`}
+                  {...registerInputProps('fourthCardNumber')}
                 />
-              </EasyField>
+              </div>
             </StyledCardFieldContainer>
             <StyledCardFieldContainer className="input-container">
               <label className="input-title">만료일</label>
-              <EasyField
-                name="expiredDate"
-                value={values.expiredDate}
-                onChange={handleChange}
-                className={`input-box w-50 ${
-                  errors.expiredDate?.isError && 'error'
-                }`}
-              >
+              <div className="input-box w-50">
                 <input
-                  name="month"
-                  type="text"
-                  minLength="2"
-                  maxLength="2"
-                  className="input-basic"
-                  required
+                  className={`input-basic ${
+                    errors.expiredMonth?.showError && 'error'
+                  }`}
+                  {...registerInputProps('expiredMonth')}
                 />
                 <p>/</p>
                 <input
-                  name="year"
-                  type="te"
-                  minLength="2"
-                  maxLength="2"
-                  className="input-basic"
-                  required
+                  className={`input-basic ${
+                    errors.expiredYear?.showError && 'error'
+                  }`}
+                  {...registerInputProps('expiredYear')}
                 />
-              </EasyField>
+              </div>
             </StyledCardFieldContainer>
             <StyledCardFieldContainer className="input-container">
               <label className="input-title">카드 소유자 이름 (선택)</label>
@@ -295,80 +319,64 @@ const CardForm = () => {
               </span>
               <div className="input-box">
                 <input
-                  name="owner"
-                  type="text"
-                  maxLength="30"
-                  value={values.owner}
-                  onChange={({ target }) => {
-                    handleChange('owner', () => target.value);
-                  }}
-                  className="input-basic"
+                  className={`input-basic ${
+                    errors.owner?.showError && 'error'
+                  }`}
+                  {...registerInputProps('owner')}
                 />
               </div>
             </StyledCardFieldContainer>
             <StyledCardFieldContainer className="input-container">
               <label className="input-title">보안코드 (CVC/CVV)</label>
               <div className="cvc-block">
-                <div
-                  className={`input-box w-25 ${errors.cvc?.isError && 'error'}`}
-                >
+                <div className="input-box w-25">
                   <input
-                    name="cvc"
-                    type="text"
-                    minLength="3"
-                    maxLength="3"
-                    value={values.cvc}
-                    onChange={({ target }) => {
-                      handleChange('cvc', () => target.value);
-                    }}
-                    className="input-basic"
-                    required
+                    type="password"
+                    className={`input-basic ${
+                      errors.cvc?.showError && 'error'
+                    }`}
+                    {...registerInputProps('cvc')}
                   />
                 </div>
-                <ToolTip tip="보안 코드는 보통 카드 뒷면 3자리 수입니다.">
+                <ToolTip tip="보안 코드는 보통 카드 뒷면 3-4자리 수입니다.">
                   ?
                 </ToolTip>
               </div>
             </StyledCardFieldContainer>
             <StyledCardFieldContainer className="input-container">
               <label className="input-title">비밀번호</label>
-              <EasyField
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-                className={`input-box password ${
-                  errors.password?.isError && 'error'
-                }`}
-              >
+              <div className="input-box password">
                 <input
-                  name="firstDigit"
-                  type="text"
-                  maxLength="1"
-                  className="input-basic w-15 password"
-                  required
-                />
-                <input
-                  name="secondDigit"
-                  type="text"
-                  maxLength="1"
-                  className="input-basic w-15 password"
-                  required
-                />
-                <input
-                  name="thirdDigit"
                   type="password"
-                  maxLength="1"
-                  className="input-basic w-15 password"
-                  disabled
+                  className={`input-basic w-15 password ${
+                    errors.firstPasswordDigit?.showError && 'error'
+                  }`}
+                  {...registerInputProps('firstPasswordDigit')}
                 />
                 <input
-                  name="fourthDigit"
                   type="password"
-                  maxLength="1"
-                  className="input-basic w-15 password"
-                  disabled
+                  className={`input-basic w-15 password ${
+                    errors.secondPasswordDigit?.showError && 'error'
+                  }`}
+                  {...registerInputProps('secondPasswordDigit')}
                 />
-              </EasyField>
+                <input
+                  type="password"
+                  className={`input-basic w-15 password ${
+                    errors.thirdPasswordDigit?.showError && 'error'
+                  }`}
+                  disabled
+                  {...registerInputProps('thirdPasswordDigit')}
+                />
+                <input
+                  type="password"
+                  className={`input-basic w-15 password ${
+                    errors.fourthPasswordDigit?.showError && 'error'
+                  }`}
+                  disabled
+                  {...registerInputProps('fourthPasswordDigit')}
+                />
+              </div>
             </StyledCardFieldContainer>
             <button className="submit-button" type="submit">
               다음
