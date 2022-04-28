@@ -11,11 +11,11 @@ input {
   font-size: 16px;
 }
 
-.root {
+#root {
   background-color: #fff;
-  width: 375px;
+  width: 380px;
   min-width: 375px;
-  height: 700px;
+  height: 840px;
   position: relative;
   border-radius: 15px;
 }
