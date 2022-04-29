@@ -4,6 +4,11 @@ import { MAX_LENGTH } from "../constants";
 const isInValidCardPassword = (cardPassword) =>
   Object.values(cardPassword).some((password) => password.length !== 1);
 
+const isCompletePasswordInput = (cardPassword) =>
+  Object.values(cardPassword).every(
+    (password) => password >= MAX_LENGTH.CARD_PASSWORD
+  );
+
 const useCardPassword = () => {
   const [cardPassword, setCardPassword] = useState({
     first: "",
@@ -24,7 +29,7 @@ const useCardPassword = () => {
   };
 
   const onClickCardPasswordVirtualKeyboard = (value) => {
-    if (cardPassword.length >= MAX_LENGTH.CARD_PASSWORD) {
+    if (isCompletePasswordInput(cardPassword)) {
       return;
     }
 
