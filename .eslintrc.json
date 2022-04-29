@@ -21,8 +21,6 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "prettier/prettier": "error",
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
     "import/no-anonymous-default-export": 0,
     "no-multiple-empty-lines": ["error", { "max": 1 }],
     "eol-last": ["error", "always"],

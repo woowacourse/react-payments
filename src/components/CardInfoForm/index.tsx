@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import { CardInfoValidation } from "../../hooks/useCardInfoValidation";
 import { CardInfo } from "../../types";
 import CardExpiredDate from "./CardExpiredDate";
 import CardNumber from "./CardNumber";
 import CardPassword from "./CardPassword";
 import CardSecurityCode from "./CardSecurityCode";
 import CardUserName from "./CardUserName";
+import { useCardInfoValidation } from "../../hooks/useCardInfoValidation";
+import cardInfoValidator from "../../lib/validation";
 
 interface CardInfoFormProps {
   cardInfo: CardInfo;
@@ -17,7 +18,6 @@ interface CardInfoFormProps {
   onChangeSecurityCode: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
   resetCardInfo: () => void;
-  cardInfoValidation: CardInfoValidation;
 }
 
 export default function CardInfoForm({
@@ -29,10 +29,11 @@ export default function CardInfoForm({
   onChangeSecurityCode,
   onChangePassword,
   resetCardInfo,
-  cardInfoValidation,
 }: CardInfoFormProps) {
   const { cardNumbers, expiredDate, userName, securityCode, password } = cardInfo;
   const [isNextButtonShown, setIsNextButtonShown] = useState(true);
+
+  const cardInfoValidation = useCardInfoValidation(cardInfo, cardInfoValidator);
   const {
     isCardNumbersValid,
     isExpiredDateValid,

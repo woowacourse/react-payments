@@ -4,8 +4,6 @@ import Card from "./components/Card";
 import CardInfoForm from "./components/CardInfoForm";
 import Header from "./components/Header";
 import { useCardInfo } from "./hooks/useCardInfo";
-import { useCardInfoValidation } from "./hooks/useCardInfoValidation";
-import cardInfoValidator from "./lib/validation";
 
 function App() {
   const {
@@ -18,8 +16,6 @@ function App() {
     onChangeSecurityCode,
     onChangePassword,
   } = useCardInfo();
-
-  const cardInfoValidation = useCardInfoValidation(cardInfo, cardInfoValidator);
 
   return (
     <div className="App">
@@ -34,7 +30,6 @@ function App() {
         onChangeSecurityCode={onChangeSecurityCode}
         onChangePassword={onChangePassword}
         resetCardInfo={resetCardInfo}
-        cardInfoValidation={cardInfoValidation}
       />
     </div>
   );

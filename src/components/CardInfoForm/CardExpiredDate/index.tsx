@@ -4,6 +4,7 @@ import { validateExpiredDateLength } from "../../../lib/validation";
 import { ExpiredDate } from "../../../types";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
+
 interface CardExpiredDateProps {
   expiredDate: ExpiredDate;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
