@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { objectToString } from '../../utils/util';
 import { checkFormCompletion, checkFormValidation } from './validation';
@@ -8,24 +8,18 @@ import ExpirationDateInput from '../Input/ExpirationDate';
 import OwnerNameInput from '../Input/OwnerName';
 import SecurityCodeInput from '../Input/SecurityCode';
 import PasswordInput from '../Input/Password';
+import { useFormComplete } from '../../hooks/useFormComplete';
 
 function InputForm({
   cardInput: { cardNumber, expirationDate, ownerName, securityCode, password },
   cardInputDispatch,
 }) {
-  const [isComplete, setIsComplete] = useState(false);
+  const isComplete = useFormComplete(
+    { cardNumber, expirationDate, ownerName, securityCode, password },
+    checkFormCompletion,
+  );
 
   const inputElementsRef = useRef({});
-
-  useEffect(() => {
-    try {
-      if (checkFormCompletion({ cardNumber, expirationDate, securityCode, password })) {
-        setIsComplete(true);
-      }
-    } catch (e) {
-      setIsComplete(false);
-    }
-  }, [cardNumber, expirationDate, ownerName, securityCode, password]);
 
   const onClickNextButton = e => {
     e.preventDefault();
