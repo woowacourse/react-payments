@@ -26,7 +26,8 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +71,7 @@
     "@storybook/testing-library": "^0.0.11",
     "commitizen": "^4.2.4",
     "cz-customizable": "^6.3.0",
+    "gh-pages": "^3.2.3",
     "husky": "^7.0.0",
     "sass": "^1.51.0",
     "webpack": "^5.72.0"
@@ -78,5 +80,6 @@
     "commitizen": {
       "path": "cz-customizable"
     }
-  }
+  },
+  "homepage": "."
 }
