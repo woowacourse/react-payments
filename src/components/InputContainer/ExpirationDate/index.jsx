@@ -5,6 +5,7 @@ import { isNumberInRange } from '../../InputForm/validation';
 import { uid } from 'react-uid';
 import { findNotCompletedInput } from '../../../utils/util';
 import InputContainer from '..';
+import Input from '../../Input';
 
 function ExpirationDateInput({ expirationDate, cardInputDispatch, inputElementsRef, stateName }) {
   const onChangeExpirationDate = (e, key) => {
@@ -15,39 +16,20 @@ function ExpirationDateInput({ expirationDate, cardInputDispatch, inputElementsR
     if (isNumberInRange(date, maxLength)) {
       cardInputDispatch({ type: 'CHANGE_EXPIRATION_DATE', payload: { date, key } });
     }
-
-    if (date.length === maxLength) {
-      const { current: inputElementsMap } = inputElementsRef;
-
-      const {
-        nextInput: { element },
-      } = findNotCompletedInput(inputElementsMap, `${stateName}${key}`);
-
-      inputElementsMap[`${stateName}${key}`].isComplete = true;
-
-      element?.focus();
-    }
   };
   return (
     <InputContainer labelTitle="만료일 (01~12의 월 / 년도)" inputSize="w-50">
       {Object.keys(expirationDate).map(stateKey => (
-        <input
+        <Input
           key={uid(stateKey)}
-          className="input-basic"
           type="text"
           placeholder={stateKey === 'month' ? 'MM' : 'YY'}
           value={expirationDate[stateKey]}
           onChange={e => onChangeExpirationDate(e, stateKey)}
           maxLength={2}
           required
-          ref={element => {
-            const { current } = inputElementsRef;
-
-            current[`${stateName}${stateKey}`] = {
-              element,
-              isComplete: element?.value.length === element?.maxLength,
-            };
-          }}
+          inputElementsRef={inputElementsRef}
+          inputElementKey={`${stateName}${stateKey}`}
         />
       ))}
     </InputContainer>

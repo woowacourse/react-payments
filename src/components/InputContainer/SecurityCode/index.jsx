@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isNumberInRange } from '../../InputForm/validation';
-import { findNotCompletedInput } from '../../../utils/util';
-import { useEffect } from 'react';
-import { useFindNextInput } from '../../../hooks/useNextInputFoucs';
 import InputContainer from '..';
+import Input from '../../Input';
 
 function SecurityCodeInput({ securityCode, cardInputDispatch, inputElementsRef, stateName }) {
   const onChangeSecurityCode = e => {
@@ -18,18 +16,6 @@ function SecurityCodeInput({ securityCode, cardInputDispatch, inputElementsRef, 
         payload: { securityCode },
       });
     }
-
-    if (securityCode.length === maxLength) {
-      const { current: inputElementsMap } = inputElementsRef;
-
-      const {
-        nextInput: { element },
-      } = findNotCompletedInput(inputElementsMap, stateName);
-
-      inputElementsMap[stateName].isComplete = true;
-
-      element?.focus();
-    }
   };
 
   return (
@@ -38,21 +24,14 @@ function SecurityCodeInput({ securityCode, cardInputDispatch, inputElementsRef, 
       inputSize="w-25"
       helpText="카드 뒷면 서명란 또는 신용카드 번호 오른쪽 상단에 기재된 3자리 숫자"
     >
-      <input
-        className="input-basic"
+      <Input
         type="password"
         value={securityCode}
         onChange={onChangeSecurityCode}
         maxLength={3}
         required
-        ref={element => {
-          const { current } = inputElementsRef;
-
-          current[stateName] = {
-            element,
-            isComplete: element?.value.length === element?.maxLength,
-          };
-        }}
+        inputElementsRef={inputElementsRef}
+        inputElementKey={stateName}
       />
     </InputContainer>
   );
