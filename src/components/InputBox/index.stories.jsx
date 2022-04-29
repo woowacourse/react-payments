@@ -1,5 +1,5 @@
 import InputBox from "./";
-import {Input} from "../Input/style";
+import { Input } from "../Input/style";
 
 const Template = (args) => <InputBox {...args} />;
 

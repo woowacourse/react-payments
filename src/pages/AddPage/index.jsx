@@ -2,12 +2,9 @@ import { useState, useRef, useEffect } from "react";
 
 import Card from "../../components/Card";
 import Button from "../../components/Button";
-import {
-  PageWrapper,
-  HeaderWrapper,
-  CardWrapper,
-  FooterWrapper
-} from "./style";
+import Header from "../../components/Header";
+
+import { PageWrapper, CardWrapper, FooterWrapper } from "./style";
 
 import CardNumberForm from "./CardNumberForm";
 import CardDueDateForm from "./CardDueDateForm";
@@ -23,7 +20,7 @@ function AddPage() {
   const [dueDate, setDueDate] = useState({ month: "", year: ""});
   const [owner, setOwner] = useState("");
   const [cvc, setCvc] = useState("");
-  const [password, setPassword] = useState({firstPassword: '', secondPassword: ''});
+  const [password, setPassword] = useState({firstPassword: "", secondPassword: ""});
   const [allRequired, setAllRequired] = useState(false);
   const [error, setError] = useState({ month: false, year: false });
 
@@ -122,12 +119,10 @@ function AddPage() {
 
   return (
     <PageWrapper>
-      <HeaderWrapper>
-        <Button>
-          <Arrow />
-        </Button>
+      <Header>
+        <Button><Arrow /></Button>
         <h2>카드 추가</h2>
-      </HeaderWrapper>
+      </Header>
       <CardWrapper>
         <Card
           size="small"
