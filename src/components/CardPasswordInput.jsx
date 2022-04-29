@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import styled from "styled-components";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
+import useInputFocus from "./Hooks/useInputFocus.jsx";
 
 const StyledInputField = styled.div`
   display: flex;
@@ -35,21 +36,10 @@ const StyledInputContainer = styled.div`
 `;
 
 export default function CardPasswordInput({ password, onChange }) {
-  const [focusInputIndex, setFocusInputIndex] = useState(0);
-  const inputRef = useRef([]);
-
-  useEffect(() => {
-    if (inputRef.current[focusInputIndex].value.length === 1) {
-      const index = password.findIndex(
-        (passwordDigit) => passwordDigit.length !== 1
-      );
-      inputRef.current[index]?.focus();
-    }
-  }, [password, focusInputIndex]);
-
-  useEffect(() => {
-    inputRef.current[focusInputIndex].focus();
-  }, [focusInputIndex]);
+  const [inputRef, setFocusInputIndex, handleFocusOut] = useInputFocus(
+    CARD_INFO_RULES.PASSWORD_UNIT_LENGTH,
+    password
+  );
 
   return (
     <StyledInputField>
@@ -63,12 +53,12 @@ export default function CardPasswordInput({ password, onChange }) {
       <StyledInputContainer>
         {Array.from({ length: CARD_INFO_RULES.PASSWORD_LENGTH }).map(
           (_, index) => (
-            <StyledInputWrapper width="45px">
+            <StyledInputWrapper width="45px" key={index}>
               <Input
-                key={index}
                 type="password"
                 value={password[index]}
                 onChange={(e) => onChange(e, index)}
+                onKeyDown={handleFocusOut}
                 width="100%"
                 placeholder={CREATE_MASKED_CHARACTERS(1)}
                 onFocus={() => setFocusInputIndex(index)}
