@@ -20,13 +20,11 @@ export default function Card({ cardInfo }: { cardInfo: CardInfo }) {
         </div>
         <div className="card-bottom">
           <div className="card-text card-numbers-text">
-            {cardNumbers.map((cardNumber, index) => {
-              return (
-                <span className="card-number" key={index}>
-                  {index < 2 ? cardNumber : "•".repeat(cardNumber.length)}
-                </span>
-              );
-            })}
+            {cardNumbers.map((cardNumber, index) => (
+              <span className="card-number" key={index}>
+                {index < 2 ? cardNumber : "•".repeat(cardNumber.length)}
+              </span>
+            ))}
           </div>
           <span className="card-text card-user-name">{userName || "NAME"}</span>
         </div>
