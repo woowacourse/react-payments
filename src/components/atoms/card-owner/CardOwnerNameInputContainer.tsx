@@ -56,9 +56,7 @@ function CardOwnerNameInputContainer() {
   }
 
   return (
-    <>
-      <CardOwnerNameInput onChange={handleChage} value={name} />
-    </>
+    <CardOwnerNameInput onChange={handleChage} value={name} />
   )
 };
 

@@ -5,16 +5,14 @@ import { Body, Fieldset, Head } from "../templates/Fieldset";
 function ExpiredPeriodFieldset() {
 
   return (
-    <>
-      <Fieldset>
-        <Head>
-          <label>만료일</label>
-        </Head>
-        <Body>
-          <ExpiredPeriodInputContainer />
-        </Body>
-      </Fieldset>
-    </>
+    <Fieldset>
+      <Head>
+        <label>만료일</label>
+      </Head>
+      <Body>
+        <ExpiredPeriodInputContainer />
+      </Body>
+    </Fieldset>
   )
 }
 

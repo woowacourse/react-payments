@@ -11,9 +11,8 @@ function ExpiredPeriodInputContainer() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-
-
     const lastChar = value.slice(-1);
+
     // 입력할 때
     const pureExpiredPeriod = removeWhiteSpaces(removeSlash(value));
     if (expiredPeriod.length < pureExpiredPeriod.length) {
@@ -48,7 +47,6 @@ function ExpiredPeriodInputContainer() {
     }
 
     // 년도의 첫번째 숫자를 지울때 /도 같이 지워준다
-    // 12 / 
     if (value.length === 5) {
       dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, expiredPeriod.slice(0, 2)));
       return;

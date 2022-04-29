@@ -8,21 +8,19 @@ function CardOwnerNameFieldset() {
   const { name } = useAppState();
 
   return(
-    <>
-      <Fieldset>
-        <Head>
-          <div className="d-flex justify-content-between">
-            <label>카드 소유자 이름(선택)</label>
-            <div id="counter">
-              <span>{name.length}</span>/<span>{MAX_NAME_LENGTH}</span>
-            </div>
+    <Fieldset>
+      <Head>
+        <div className="d-flex justify-content-between">
+          <label>카드 소유자 이름(선택)</label>
+          <div id="counter">
+            <span>{name.length}</span>/<span>{MAX_NAME_LENGTH}</span>
           </div>
-        </Head>
-        <Body>
-          <CardOwnerNameInputContainer />
-        </Body>
-      </Fieldset>
-    </>
+        </div>
+      </Head>
+      <Body>
+        <CardOwnerNameInputContainer />
+      </Body>
+    </Fieldset>
   )
 };
 
