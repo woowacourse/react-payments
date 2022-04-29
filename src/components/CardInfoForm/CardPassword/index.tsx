@@ -1,8 +1,8 @@
 import React from "react";
 
-import { Password } from "../../types";
-import Input from "../common/Input";
-import InputContainer from "../common/InputContainer";
+import { Password } from "../../../types";
+import Input from "../../../common/Input";
+import InputContainer from "../../../common/InputContainer";
 
 interface CardPasswordProps {
   password: Password;

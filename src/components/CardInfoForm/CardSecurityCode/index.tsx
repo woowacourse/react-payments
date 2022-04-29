@@ -1,9 +1,9 @@
 import React from "react";
 
 import CVC from "../../assets/cvcImage.png";
-import Input from "../common/Input";
-import InputContainer from "../common/InputContainer";
-import UserGuide from "../common/UserGuide";
+import Input from "../../../common/Input";
+import InputContainer from "../../../common/InputContainer";
+import UserGuide from "../../../common/UserGuide";
 
 interface CardSecurityProps {
   securityCode: string;
