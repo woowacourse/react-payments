@@ -7,6 +7,7 @@ export type State = {
   expiredPeriod: string,
   cvc: string,
   password: Array<string>,
+  isEditingCVC: boolean,
 }
 
 type Action = 
@@ -14,7 +15,8 @@ type Action =
   | { type: ActionType.INPUT_NAME, payload: any }
   | { type: ActionType.INPUT_EXPIRED_PERIOD, payload: any }
   | { type: ActionType.INPUT_CVC, payload: any }
-  | { type: ActionType.INPUT_PASSWORD, payload: any };
+  | { type: ActionType.INPUT_PASSWORD, payload: any }
+  | { type: ActionType.UPDATE_EDITING_CVC, payload: any };;
 
 export type AppDispatch = Dispatch<Action>;
 
@@ -24,6 +26,7 @@ const initalState: State = {
   expiredPeriod: '',
   cvc: '',
   password: ['', ''],
+  isEditingCVC: false,
 };
 
 // context를 전역에 선언한다
@@ -63,6 +66,11 @@ function reducer(state: State, action: Action): State {
         ...state,
         password: [...action.payload]
       }
+    case ActionType.UPDATE_EDITING_CVC:
+      return {
+        ...state,
+        isEditingCVC: action.payload
+      }
   }  
 }
 
@@ -70,13 +78,11 @@ function AppProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initalState);
 
   return (
-    <>  
-      <AppStateContext.Provider value={state}>
-        <AppDispatchContext.Provider value={dispatch}>
-          { children }
-        </AppDispatchContext.Provider>
-      </AppStateContext.Provider>
-    </>
+    <AppStateContext.Provider value={state}>
+      <AppDispatchContext.Provider value={dispatch}>
+        { children }
+      </AppDispatchContext.Provider>
+    </AppStateContext.Provider>
   );
 }
 
