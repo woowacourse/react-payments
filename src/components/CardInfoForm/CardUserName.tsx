@@ -1,6 +1,6 @@
 import React from "react";
 
-import { MAX_USER_NAME_LENGTH } from "../../contants";
+import { MAX_USER_NAME_LENGTH } from "../../constant";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 

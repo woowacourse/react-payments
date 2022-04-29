@@ -1,4 +1,4 @@
-import { CARD_VALID_PERIOD } from "../contants";
+import { CARD_VALID_PERIOD } from "../constant";
 import { CardInfo, CardNumbers, ExpirationDate, Password } from "../types";
 
 type Validator<T> = (value: T) => boolean;

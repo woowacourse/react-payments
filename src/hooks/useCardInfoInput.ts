@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import REGEXP from "../contants/regexp";
+import REGEXP from "../constant/regexp";
 import { CardInfo, CardNumbers, Password } from "../types";
 
 const initialCardInfo: CardInfo = {
