@@ -32,11 +32,11 @@ function InputForm({
 
     try {
       if (checkFormValidation({ expirationDate })) {
-        alert(`카드 번호는 ${objectToString(cardNumber)} 입니다 \n
-        만료일 ${objectToString(expirationDate, '/')} 입니다 \n
+        alert(`카드 번호는 ${objectToString({ targetObject: cardNumber })} 입니다 \n
+        만료일 ${objectToString({ targetObject: expirationDate, separator: '/' })} 입니다 \n
         카드 소유자 이름 ${ownerName} 입니다 \n
         보안코드 ${securityCode} 입니다 \n
-        비밀번호 ${objectToString(password)} \n`);
+        비밀번호 ${objectToString({ targetObject: password })} \n`);
       }
     } catch ({ message }) {
       alert(message);

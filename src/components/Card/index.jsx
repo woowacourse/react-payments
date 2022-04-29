@@ -15,11 +15,15 @@ function Card({ cardInformation: { cardNumber, expirationDate, ownerName } }) {
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">{objectToString(cardNumber, ' ', 2)}</span>
+            <span className="card-text">
+              {objectToString({ targetObject: cardNumber, separator: ' ', hideStartIndex: 2 })}
+            </span>
           </div>
           <div className="card-bottom__info">
             <span className="card-text owner-name">{ownerName}</span>
-            <span className="card-text">{objectToString(expirationDate, '/')}</span>
+            <span className="card-text">
+              {objectToString({ targetObject: expirationDate, separator: '/' })}
+            </span>
           </div>
         </div>
       </div>
