@@ -1,8 +1,8 @@
 import React from 'react';
 import { isAlphabetOrSpace } from '../../../utils/validations';
 import PropTypes from 'prop-types';
-import Input from '..';
 import { findNotCompletedInput } from '../../../utils/util';
+import InputContainer from '..';
 
 function OwnerNameInput({ ownerName, cardInputDispatch, inputElementsRef, stateName }) {
   const onChangeOwnerName = e => {
@@ -31,7 +31,7 @@ function OwnerNameInput({ ownerName, cardInputDispatch, inputElementsRef, stateN
   };
 
   return (
-    <Input labelTitle="카드 소유자 이름(선택) (영문만 입력가능)">
+    <InputContainer labelTitle="카드 소유자 이름(선택) (영문만 입력가능)">
       <input
         type="text"
         className="input-basic"
@@ -48,7 +48,7 @@ function OwnerNameInput({ ownerName, cardInputDispatch, inputElementsRef, stateN
           };
         }}
       />
-    </Input>
+    </InputContainer>
   );
 }
 OwnerNameInput.propTypes = {

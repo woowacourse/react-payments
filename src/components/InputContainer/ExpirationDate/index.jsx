@@ -1,25 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PASSWORD_TYPE } from '../../types';
+import { EXPIRATION_DATE_TYPE } from '../../types';
 import { isNumberInRange } from '../../InputForm/validation';
 import { uid } from 'react-uid';
-import Input from '..';
 import { findNotCompletedInput } from '../../../utils/util';
+import InputContainer from '..';
 
-function PasswordInput({ password, cardInputDispatch, inputElementsRef, stateName }) {
-  const onChangePassword = (e, key) => {
+function ExpirationDateInput({ expirationDate, cardInputDispatch, inputElementsRef, stateName }) {
+  const onChangeExpirationDate = (e, key) => {
     const {
-      target: { value: password, maxLength },
+      target: { value: date, maxLength },
     } = e;
 
-    if (isNumberInRange(password, maxLength)) {
-      cardInputDispatch({
-        type: 'CHANGE_PASSWORD',
-        payload: { password, key },
-      });
+    if (isNumberInRange(date, maxLength)) {
+      cardInputDispatch({ type: 'CHANGE_EXPIRATION_DATE', payload: { date, key } });
     }
 
-    if (password.length === maxLength) {
+    if (date.length === maxLength) {
       const { current: inputElementsMap } = inputElementsRef;
 
       const {
@@ -32,15 +29,16 @@ function PasswordInput({ password, cardInputDispatch, inputElementsRef, stateNam
     }
   };
   return (
-    <Input labelTitle="카드 비밀번호" inputSize="w-50">
-      {Object.keys(password).map(stateKey => (
+    <InputContainer labelTitle="만료일 (01~12의 월 / 년도)" inputSize="w-50">
+      {Object.keys(expirationDate).map(stateKey => (
         <input
           key={uid(stateKey)}
           className="input-basic"
           type="text"
-          value={password[stateKey]}
-          onChange={e => onChangePassword(e, stateKey)}
-          maxLength={1}
+          placeholder={stateKey === 'month' ? 'MM' : 'YY'}
+          value={expirationDate[stateKey]}
+          onChange={e => onChangeExpirationDate(e, stateKey)}
+          maxLength={2}
           required
           ref={element => {
             const { current } = inputElementsRef;
@@ -52,15 +50,14 @@ function PasswordInput({ password, cardInputDispatch, inputElementsRef, stateNam
           }}
         />
       ))}
-      <div className="inputted-password">*</div>
-      <div className="inputted-password">*</div>
-    </Input>
+    </InputContainer>
   );
 }
-PasswordInput.propTypes = {
-  password: PASSWORD_TYPE,
+
+ExpirationDateInput.propTypes = {
+  expirationDate: EXPIRATION_DATE_TYPE,
   cardInputDispatch: PropTypes.func,
   inputElementsRef: PropTypes.object,
   stateName: PropTypes.string,
 };
-export default PasswordInput;
+export default ExpirationDateInput;

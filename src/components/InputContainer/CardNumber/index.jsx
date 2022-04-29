@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { uid } from 'react-uid';
-import Input from '..';
 import { isNumberInRange } from '../../InputForm/validation';
 import { CARD_NUMBER_TYPE } from '../../types';
 import { findNotCompletedInput } from '../../../utils/util';
+import InputContainer from '..';
 
 function CardNumberInput({ cardNumber, cardInputDispatch, inputElementsRef, stateName }) {
   const onChangeCardNumber = (e, key) => {
@@ -29,7 +29,7 @@ function CardNumberInput({ cardNumber, cardInputDispatch, inputElementsRef, stat
     }
   };
   return (
-    <Input labelTitle="카드번호">
+    <InputContainer labelTitle="카드번호">
       {Object.keys(cardNumber).map(stateKey => (
         <input
           key={uid(stateKey)}
@@ -49,7 +49,7 @@ function CardNumberInput({ cardNumber, cardInputDispatch, inputElementsRef, stat
           }}
         />
       ))}
-    </Input>
+    </InputContainer>
   );
 }
 

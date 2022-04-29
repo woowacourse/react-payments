@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useCardInput } from '../../../hooks/useCardInput';
-import CardNumberInput from './';
+import CardNumberInput from '.';
 
 export default {
   component: CardNumberInput,

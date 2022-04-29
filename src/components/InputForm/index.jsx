@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { objectToString } from '../../utils/util';
 import { checkFormCompletion, checkFormValidation } from './validation';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
-import CardNumberInput from '../Input/CardNumber';
-import ExpirationDateInput from '../Input/ExpirationDate';
-import OwnerNameInput from '../Input/OwnerName';
-import SecurityCodeInput from '../Input/SecurityCode';
-import PasswordInput from '../Input/Password';
 import { useFormComplete } from '../../hooks/useFormComplete';
+import CardNumberInput from '../InputContainer/CardNumber';
+import ExpirationDateInput from '../InputContainer/ExpirationDate';
+import OwnerNameInput from '../InputContainer/OwnerName';
+import SecurityCodeInput from '../InputContainer/SecurityCode';
+import PasswordInput from '../InputContainer/Password';
 
 function InputForm({
   cardInput: { cardNumber, expirationDate, ownerName, securityCode, password },
