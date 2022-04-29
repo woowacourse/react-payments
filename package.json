@@ -2,7 +2,9 @@
   "name": "react-payments",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kwannee.github.io/react-payments",
   "dependencies": {
+    "gh-pages": "^3.2.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-scripts": "5.0.1",
@@ -13,7 +15,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [
