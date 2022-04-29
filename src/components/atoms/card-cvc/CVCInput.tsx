@@ -4,6 +4,8 @@ import { transformNumToBullet } from "../../../utils";
 
 type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
   value: string;
 }
 
@@ -23,8 +25,8 @@ const Input = styled.input(() => ({
   }
 }));
 
-function CVCInput({ onChange, value }: Props) {
-  return <Input id="card-cvc-input" type="text" onChange={onChange} value={transformNumToBullet(value)} placeholder='' />
+function CVCInput({ onChange, value, onFocus, onBlur }: Props) {
+  return <Input id="card-cvc-input" type="text" onChange={onChange} value={transformNumToBullet(value)} placeholder='' onFocus={onFocus} onBlur={onBlur} />
 }
 
 export default CVCInput;

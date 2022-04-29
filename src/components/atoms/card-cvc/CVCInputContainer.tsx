@@ -25,7 +25,15 @@ function CVCInputContainer() {
 
     dispatch(createAction(ActionType.INPUT_CVC, cvc.slice(0, cvc.length - 1)));
   }
-  return <CVCInput onChange={handleChage} value={cvc} />
+
+  const onFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    dispatch(createAction(ActionType.UPDATE_EDITING_CVC, true));
+  };
+
+  const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    dispatch(createAction(ActionType.UPDATE_EDITING_CVC, false));
+  }
+  return <CVCInput onChange={handleChage} value={cvc} onFocus={onFocus} onBlur={onBlur} />
 }
 
 export default CVCInputContainer;
