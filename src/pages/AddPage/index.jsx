@@ -76,10 +76,10 @@ function AddPage() {
       return newState;
     });
     
-    if(index===0 && (value > MONTH.MAX || value < MONTH.MIN)) {
+    if(index===0) {
       setError((prev) => {
         const newState = [...prev];
-        newState[0] = value > MONTH.MAX || value < MONTH.MIN;
+        newState[0] = +value > MONTH.MAX || +value < MONTH.MIN;
         return newState;
       });
     }
@@ -88,7 +88,7 @@ function AddPage() {
       const currentYear = new Date().getFullYear().toString().slice(2);
       setError((prev) => {
         const newState = [...prev];
-        newState[0] = value > currentYear;
+        newState[1] = +value < currentYear;
         return newState;
       });
     }
@@ -135,7 +135,7 @@ function AddPage() {
   }
 
   const handleSubmit = () => {
-   if(error.month || error.year) {
+   if(error[0] || error[1]) {
       alert('만료일을 확인해주세요');
       return;
     }
@@ -175,6 +175,7 @@ function AddPage() {
           {type: 'number', id: 'due-month', value: dueDate[0], placeholder: 'MM'},
           {type: 'number', id: 'due-year', value: dueDate[1], ref: dueYearInputRef, placeholder: 'YY'},
         ]}
+        error={error[0] || error[1]}
         onChange={handleDueDate}
         />
       <Form 

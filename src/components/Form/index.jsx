@@ -6,7 +6,7 @@ import { ReactComponent as QuestionMark } from '../../assets/questionMark.svg';
 import { Label, FormWrapper, HelpTextWrapper, InputHelperWrapper } from "./style";
 
 function Form(props){
-  const { label, inputInfo, size, onChange } = props;
+  const { label, background, border, error, inputInfo, size, onChange } = props;
 
   const [mouseHover, setMouseHover] = useState(false);
 
@@ -21,7 +21,7 @@ function Form(props){
         {props.countHelper && <div>{inputInfo[0].value?.length}/{props.countHelper}</div>}
       </Label>
       <InputHelperWrapper>
-        <InputBox inputInfo={inputInfo} size={size} onChange={onChange}/>
+        <InputBox inputInfo={inputInfo} size={size} background={background} border={border} error={error} onChange={onChange}/>
         {props.questionHelper && <QuestionMark onMouseEnter={handleMouseHover} onMouseLeave={handleMouseHover}/>}
         {mouseHover && <HelpTextWrapper>{props.helpText}</HelpTextWrapper>}
       </InputHelperWrapper>
