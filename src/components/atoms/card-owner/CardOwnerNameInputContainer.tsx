@@ -3,7 +3,7 @@ import CardOwnerNameInput from "./CardOwnerNameInput";
 import { useAppDispatch, useAppState } from "../../../hooks/hooks";
 import { ActionType } from "../../../types";
 import { createAction } from "../../Provider";
-import { isEnglish, removeAt } from "../../../utils";
+import { isEnglish } from "../../../utils";
 import { MAX_NAME_LENGTH } from "../../../constants";
 
 function CardOwnerNameInputContainer() {
