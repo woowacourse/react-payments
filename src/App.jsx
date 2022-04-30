@@ -52,12 +52,16 @@ function App() {
   );
 
   const setExpireDateArray = useArraySetState(setExpireDate);
-  const padZeroOnSingleDigit = (value) =>
-    value.length === 1 && Number(value) !== 0 ? `0${value}` : value;
+  const createDateString = (value) => {
+    const parsedValue = trimStartZeroPad(value);
+    return parsedValue.length === 1 && Number(parsedValue) !== 0
+      ? `0${parsedValue}`
+      : parsedValue;
+  };
   const handleExpireDateUpdate = useValidatedUpdate(
     validations["expireDate"],
     (value, order) => {
-      setExpireDateArray(padZeroOnSingleDigit(trimStartZeroPad(value)), order);
+      setExpireDateArray(createDateString(value), order);
     }
   );
 
