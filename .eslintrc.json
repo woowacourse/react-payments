@@ -25,7 +25,7 @@
   },
   "rules": {
     "no-alert": "off",
-    "max-depth": ["error", 2],
+    "max-depth": ["error", 3],
     "no-unused-expressions": ["error", { "allowShortCircuit": true }],
     "class-methods-use-this": "off",
     "@typescript-eslint/no-explicit-any": "off",
@@ -44,6 +44,13 @@
         "scss": "never"
       }
    ],
-   "react/prop-types": "off"
+   "react/prop-types": "off",
+   "react/require-default-props": "off",
+   "no-underscore-dangle": "off",
+   "jsx-a11y/label-has-associated-control": [
+    2,
+    {
+      "assert": "either" // either check for `htmlFor` or `nesting`
+    }]
   }
 }
