@@ -4,7 +4,7 @@ export default function useInputFocus(length, targetArray) {
   const [focusInputIndex, setFocusInputIndex] = useState(0);
   const inputRef = useRef([]);
 
-  const handleFocusOut = (e) => {
+  const handleFocusBeforeElement = (e) => {
     if (
       e.key === "Backspace" &&
       inputRef.current[focusInputIndex].value.length === 0
@@ -24,5 +24,5 @@ export default function useInputFocus(length, targetArray) {
     inputRef.current[focusInputIndex].focus();
   }, [focusInputIndex]);
 
-  return [inputRef, setFocusInputIndex, handleFocusOut];
+  return [inputRef, setFocusInputIndex, handleFocusBeforeElement];
 }
