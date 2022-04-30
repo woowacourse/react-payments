@@ -5,14 +5,12 @@
     "react-hooks",
     "import",
     "simple-import-sort",
-    "prettier",
-    "jsx-a11y"
+    "prettier"
   ],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:jsx-a11y/recommended",
     "react-app",
     "prettier/prettier",
     "plugin:import/recommended"
