@@ -14,7 +14,7 @@ function InputForm({ cardInput, cardInputDispatch }) {
 
   const inputElementsRef = useRef({});
 
-  const onClickNextButton = e => {
+  const onSubmitInputForm = e => {
     e.preventDefault();
 
     const { cardNumber, expirationDate, ownerName, securityCode, password } = cardInput;
@@ -33,7 +33,7 @@ function InputForm({ cardInput, cardInputDispatch }) {
   };
 
   return (
-    <form onSubmit={onClickNextButton}>
+    <form onSubmit={onSubmitInputForm}>
       {Object.keys(cardInput).map(key => {
         const TypeInputContainer = InputContainer[key];
 
