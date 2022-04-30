@@ -15,10 +15,16 @@ const cardType: CardType[] = [
 ];
 
 export default function CardSelectModal({
+  isOpened,
+  setIsModalOpened,
   onChangeCardType,
 }: {
+  isOpened: boolean;
+  setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
   onChangeCardType: (name: CardName, color: CardColor) => void;
 }) {
+  if (!isOpened) return null;
+
   return (
     <Modal position="bottom">
       <div className="modal flex-center">
@@ -26,7 +32,10 @@ export default function CardSelectModal({
           <div
             className="modal-item-container"
             key={name}
-            onClick={() => onChangeCardType(name, color)}
+            onClick={() => {
+              onChangeCardType(name, color);
+              setIsModalOpened(false);
+            }}
           >
             <div className="modal-item-dot" style={{ backgroundColor: `${color}` }}></div>
             <span className="modal-item-name">{name}</span>
