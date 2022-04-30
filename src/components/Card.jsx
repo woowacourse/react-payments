@@ -9,11 +9,7 @@ function Card({ card }) {
   const [isEmptyCard, setIsEmptyCard] = useState(true);
 
   useEffect(() => {
-    if (isInitialCard(card)) {
-      setIsEmptyCard(false);
-      return;
-    }
-    setIsEmptyCard(true);
+    return isInitialCard(card) ? setIsEmptyCard(false) : setIsEmptyCard(true);
   }, [card]);
 
   return (

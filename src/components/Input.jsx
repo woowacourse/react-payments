@@ -36,7 +36,6 @@ function Input({
 
   const handleChange = (event) => {
     const targetValue = event.target.value;
-
     if (updateNameLength) updateNameLength(targetValue);
 
     try {

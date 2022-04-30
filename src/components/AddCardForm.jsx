@@ -19,6 +19,10 @@ function AddCardForm({ updateCard, addCard }) {
   });
   const [nameLength, setNameLength] = useState(0);
 
+  useEffect(() => {
+    updateCard(cardForm);
+  }, [cardForm]);
+
   const updateNameLength = (name) => {
     setNameLength(name.length);
   };
@@ -33,10 +37,6 @@ function AddCardForm({ updateCard, addCard }) {
       return { ...prevCardForm, [name]: value };
     });
   };
-
-  useEffect(() => {
-    updateCard(cardForm);
-  }, [cardForm]);
 
   return (
     <form onSubmit={handleSubmit}>
