@@ -22,6 +22,7 @@ export default function CardNumber({ cardNumbers, onChange, isValid }: CardNumbe
               maxLength={4}
               name="cardNumbers"
               data-index={index}
+              formSelector="#card-info-form"
             />
             {index !== 3 && <span className="card-number-delimiter">-</span>}
           </React.Fragment>

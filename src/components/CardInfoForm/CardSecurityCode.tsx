@@ -21,6 +21,7 @@ export default function CardSecurityCode({ securityCode, onChange, isValid }: Ca
           onChange={onChange}
           maxLength={3}
           name="securityCode"
+          formSelector="#card-info-form"
         />
         <UserGuide>
           <img width="160px" src={CVC} alt="cvc" />

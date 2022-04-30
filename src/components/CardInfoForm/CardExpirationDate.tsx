@@ -33,6 +33,7 @@ export default function CardExpirationDate({
           style={{ paddingLeft: "40px" }}
           name="expirationDate"
           data-key="month"
+          formSelector="#card-info-form"
         />
         <span className="expiration-date-delimiter">/</span>
         <Input
@@ -44,6 +45,7 @@ export default function CardExpirationDate({
           style={{ paddingRight: "40px" }}
           name="expirationDate"
           data-key="year"
+          formSelector="#card-info-form"
         />
       </div>
     </InputContainer>

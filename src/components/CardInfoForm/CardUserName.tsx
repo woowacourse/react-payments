@@ -23,6 +23,7 @@ export default function CardUserName({ userName, onChange, onBlur, isValid }: Ca
         onBlur={onBlur}
         name="userName"
         align="left"
+        formSelector="#card-info-form"
       />
       <span className="card-user-name-length">
         {userName.length}/{MAX_USER_NAME_LENGTH}

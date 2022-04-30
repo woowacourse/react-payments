@@ -19,27 +19,42 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" 
   align?: "right" | "left" | "center";
   maxLength?: number;
   classes?: string;
+  formSelector?: "#card-info-form";
 }
 
-export default function Input({ size, maxLength, onChange, classes, align, ...props }: InputProps) {
+export default function Input({
+  size,
+  maxLength,
+  onChange,
+  classes,
+  align,
+  formSelector,
+  ...props
+}: InputProps) {
   const arrayInputsRef = useRef<HTMLInputElement[]>(null);
 
   useEffect(() => {
+    if (!formSelector) return;
+
     arrayInputsRef.current = Array.from(
-      document.querySelector("#card-info-form").querySelectorAll("input")
+      document.querySelector(formSelector).querySelectorAll("input")
     );
-  }, []);
+  }, [formSelector]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputLength = e.target.value.length;
 
     if (inputLength > maxLength) return;
+    onChange(e);
 
-    const inputIndex = arrayInputsRef.current.findIndex(element => element === e.target);
+    if (formSelector) moveFocus(e.target, inputLength);
+  };
+
+  const moveFocus = (target, inputLength: number) => {
+    const inputIndex = arrayInputsRef.current.findIndex(element => element === target);
 
     if (inputLength === maxLength) focusOnEmptyInput();
     if (inputLength === 0) focusOnPrevInput(inputIndex);
-    onChange(e);
   };
 
   const focusOnEmptyInput = () => {

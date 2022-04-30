@@ -22,6 +22,7 @@ export default function CardPassword({ password, onChange, isValid }: CardPasswo
         name="password"
         data-index={0}
         classes="password-input"
+        formSelector="#card-info-form"
       />
       <Input
         type="password"
@@ -32,6 +33,7 @@ export default function CardPassword({ password, onChange, isValid }: CardPasswo
         name="password"
         data-index={1}
         classes="password-input"
+        formSelector="#card-info-form"
       />
       <input
         className="input-basic rest-password-box w-15 password-input"
