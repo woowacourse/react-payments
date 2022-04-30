@@ -22,7 +22,7 @@ export default function CardExpirationDate({
   }, [expirationDate]);
 
   return (
-    <InputContainer inputTitle="만료일" isValid={isValid} shouldShowError={hasValue}>
+    <InputContainer title="만료일" isValid={isValid} shouldShowError={hasValue}>
       <div className="input-box w-50 flex-center">
         <Input
           type="text"

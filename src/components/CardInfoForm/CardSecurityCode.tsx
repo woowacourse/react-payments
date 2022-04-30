@@ -13,7 +13,7 @@ interface CardSecurityProps {
 
 export default function CardSecurityCode({ securityCode, onChange, isValid }: CardSecurityProps) {
   return (
-    <InputContainer inputTitle="보안 코드(CVC/CVV)" isValid={isValid}>
+    <InputContainer title="보안 코드(CVC/CVV)" isValid={isValid}>
       <div className="input-box w-25">
         <Input
           type="password"

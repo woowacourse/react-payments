@@ -11,7 +11,7 @@ interface CardNumberProps {
 }
 export default function CardNumber({ cardNumbers, onChange, isValid }: CardNumberProps) {
   return (
-    <InputContainer inputTitle="카드번호" isValid={isValid}>
+    <InputContainer title="카드번호" isValid={isValid}>
       <div className="input-box">
         {cardNumbers.map((cardNumber, index) => (
           <React.Fragment key={index}>

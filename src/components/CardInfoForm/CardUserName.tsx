@@ -12,7 +12,7 @@ interface CardUserNameProps {
 }
 export default function CardUserName({ userName, onChange, onBlur, isValid }: CardUserNameProps) {
   return (
-    <InputContainer inputTitle="카드 소유자 이름(선택)" isValid={isValid}>
+    <InputContainer title="카드 소유자 이름(선택)" isValid={isValid}>
       <Input
         value={userName}
         type="text"

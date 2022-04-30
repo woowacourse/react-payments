@@ -12,7 +12,7 @@ interface CardPasswordProps {
 
 export default function CardPassword({ password, onChange, isValid }: CardPasswordProps) {
   return (
-    <InputContainer inputTitle="카드 비밀번호" isValid={isValid}>
+    <InputContainer title="카드 비밀번호" isValid={isValid}>
       <Input
         type="password"
         size="tiny"

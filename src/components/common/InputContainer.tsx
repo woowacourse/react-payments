@@ -5,21 +5,21 @@ import SuccessMessage from "./SuccessMessage";
 
 interface InputContainerProps {
   children: React.ReactNode;
-  inputTitle: string;
+  title: string;
   isValid: boolean;
   shouldShowError?: boolean;
 }
 
 export default function InputContainer({
   children,
-  inputTitle,
+  title,
   isValid,
   shouldShowError = false,
 }: InputContainerProps) {
   return (
     <div className="input-container">
       <div className="input-container-top">
-        <label className="input-title">{inputTitle}</label>
+        <label className="input-title">{title}</label>
         {isValid ? <SuccessMessage /> : shouldShowError && <FailMessage />}
       </div>
       {children}
