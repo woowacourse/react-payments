@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { validateExpirationDateLength } from "../../lib/validation";
-import { ExpirationDate } from "../../types";
+import type { ExpirationDate } from "../../types";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 

@@ -13,4 +13,5 @@ function useModal(initialState: boolean) {
 
   return { isModalOpened, openModal, closeModal };
 }
+
 export default useModal;

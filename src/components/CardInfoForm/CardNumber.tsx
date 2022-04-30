@@ -1,6 +1,6 @@
 import React from "react";
 
-import { CardNumbers } from "../../types";
+import type { CardNumbers } from "../../types";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 

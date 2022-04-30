@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import REGEXP from "../constant/regexp";
-import { CardInfo, CardNumbers, Password } from "../types";
+import type { CardInfo, CardNumbers, Password } from "../types";
 
 const initialCardInfo: CardInfo = {
   cardType: { name: "검정 카드", color: "black" },
@@ -12,7 +12,7 @@ const initialCardInfo: CardInfo = {
   password: ["", ""],
 };
 
-export const useCardInfoInput = () => {
+const useCardInfoInput = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>(initialCardInfo);
   const resetCardInfo = () => {
     setCardInfo(initialCardInfo);
@@ -131,3 +131,5 @@ export const useCardInfoInput = () => {
     onChangePassword,
   };
 };
+
+export default useCardInfoInput;

@@ -1,18 +1,18 @@
 import { CARD_VALID_PERIOD } from "../constant";
-import { CardInfo, CardNumbers, ExpirationDate, Password } from "../types";
+import type { CardInfo, CardNumbers, ExpirationDate, Password } from "../types";
 
 type Validator<T> = (value: T) => boolean;
 
 type CardInfoWithoutCardType = Omit<CardInfo, "cardType">;
 
-export type Validators = {
+type Validators = {
   [K in keyof CardInfoWithoutCardType]: Validator<CardInfoWithoutCardType[K]>;
 };
 
 const validateCardNumbers = (cardNumbers: CardNumbers) =>
   cardNumbers.every(cardNumber => cardNumber.length === 4);
 
-export const validateExpirationDateLength = (expirationDate: ExpirationDate) =>
+const validateExpirationDateLength = (expirationDate: ExpirationDate) =>
   Object.keys(expirationDate).every(key => expirationDate[key].length === 2);
 
 const validateMonth = (expirationDate: ExpirationDate) =>
@@ -53,4 +53,6 @@ const cardInfoValidator = {
   password: validatePassword,
 };
 
-export default cardInfoValidator;
+export { cardInfoValidator, validateExpirationDateLength };
+
+export type { Validators };

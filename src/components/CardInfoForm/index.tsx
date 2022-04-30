@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { CardInfoValidation } from "../../hooks/useCardInfoValidation";
-import { CardInfo } from "../../types";
+import type { CardInfoValidation } from "../../hooks/useCardInfoValidation";
+import type { CardInfo } from "../../types";
 import CardExpirationDate from "./CardExpirationDate";
 import CardNumber from "./CardNumber";
 import CardPassword from "./CardPassword";
