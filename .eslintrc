@@ -13,6 +13,13 @@
   },
   "plugins": ["react"],
   "rules": {
-    "no-unused-vars": 0
+    "no-unused-vars": 0,
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true,
+        "html": true
+      }
+    ]
   }
 }

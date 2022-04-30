@@ -11,7 +11,7 @@ function Card({ cardInformation: { cardNumber, expirationDate, ownerName } }) {
           <span className="card-text">클린카드</span>
         </div>
         <div className="card-middle">
-          <div className="small-card__chip"></div>
+          <div className="small-card__chip" />
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">

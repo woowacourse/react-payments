@@ -45,7 +45,7 @@ function InputForm({ cardInput, cardInputDispatch }) {
             inputElementsRef={inputElementsRef}
             stateName={key}
             setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
-          ></TypeInputContainer>
+          />
         );
       })}
 

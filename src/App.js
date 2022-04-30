@@ -4,7 +4,7 @@ import AddCard from './components/AddCard';
 function App() {
   return (
     <div className="root">
-      <AddCard></AddCard>
+      <AddCard />
     </div>
   );
 }

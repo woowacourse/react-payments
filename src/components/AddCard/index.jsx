@@ -9,8 +9,8 @@ function AddCard() {
   return (
     <div className="app">
       <h2 className="page-title"> 카드 추가 </h2>
-      <Card cardInformation={cardInput}></Card>
-      <InputForm cardInput={cardInput} cardInputDispatch={cardInputDispatch}></InputForm>
+      <Card cardInformation={cardInput} />
+      <InputForm cardInput={cardInput} cardInputDispatch={cardInputDispatch} />
     </div>
   );
 }
