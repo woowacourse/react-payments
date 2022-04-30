@@ -2,15 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { CardInfoValidation } from "../../hooks/useCardInfoValidation";
 import { CardInfo } from "../../types";
-import AutoFocusForm from "../common/AutoFocusForm";
 import CardExpirationDate from "./CardExpirationDate";
 import CardNumber from "./CardNumber";
 import CardPassword from "./CardPassword";
 import CardSecurityCode from "./CardSecurityCode";
 import CardUserName from "./CardUserName";
-
-const INPUTS_FOCUS_CONDITION = [4, 4, 4, 4, 2, 2, 30, 3, 1, 1];
-
 interface CardInfoFormProps {
   cardInfo: CardInfo;
   onChangeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -56,11 +52,7 @@ export default function CardInfoForm({
   };
 
   return (
-    <AutoFocusForm
-      onSubmit={handleSubmit}
-      values={cardInfo}
-      focusCondition={INPUTS_FOCUS_CONDITION}
-    >
+    <form id="card-info-form" onSubmit={handleSubmit}>
       <CardNumber
         cardNumbers={cardNumbers}
         onChange={onChangeCardNumber}
@@ -84,6 +76,6 @@ export default function CardInfoForm({
       />
       <CardPassword password={password} onChange={onChangePassword} isValid={isPasswordValid} />
       {isNextButtonShown && <button className="submit-button">다음</button>}
-    </AutoFocusForm>
+    </form>
   );
 }
