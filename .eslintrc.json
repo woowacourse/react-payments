@@ -43,14 +43,15 @@
         "tsx": "never",
         "scss": "never"
       }
-   ],
-   "react/prop-types": "off",
-   "react/require-default-props": "off",
-   "no-underscore-dangle": "off",
-   "jsx-a11y/label-has-associated-control": [
-    2,
-    {
-      "assert": "either" // either check for `htmlFor` or `nesting`
-    }]
+    ],
+    "react/prop-types": "off",
+    "react/require-default-props": "off",
+    "no-underscore-dangle": "off",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "assert": "either" // either check for `htmlFor` or `nesting`
+      }
+    ]
   }
 }
