@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  value: string;
 };
 
 const Input = styled.input(() => ({
@@ -21,8 +21,8 @@ const Input = styled.input(() => ({
   },
 }));
 
-const CardNumberInput = forwardRef<HTMLInputElement, Props>(({ onChange, onKeyDown }, ref) => {
-  return <Input pattern="[0-9*]" onChange={onChange} onKeyDown={onKeyDown} ref={ref} />;
+const CardNumberInput = forwardRef<HTMLInputElement, Props>(({ onChange, value }, ref) => {
+  return <Input pattern="[0-9*]" onChange={onChange} value={value} ref={ref} />;
 });
 CardNumberInput.displayName = 'CardNumberInput';
 
