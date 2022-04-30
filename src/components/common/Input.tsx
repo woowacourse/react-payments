@@ -39,7 +39,7 @@ export default function Input({ size, maxLength, onChange, classes, align, ...pr
 
     if (inputLength === maxLength) focusOnNextInput(inputIndex);
     if (inputLength === 0) focusOnPrevInput(inputIndex);
-    onChange?.(e);
+    onChange(e);
   };
 
   const focusOnNextInput = (index: number) => {
