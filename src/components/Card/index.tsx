@@ -12,13 +12,21 @@ export default function Card({ cardInfo, onChangeCardType }: CardProps) {
   const { cardNumbers, expirationDate, userName, cardType } = cardInfo;
   const [isModalOpened, setIsModalOpened] = useState(true);
 
+  const openModal = () => {
+    setIsModalOpened(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpened(false);
+  };
+
   return (
     <>
       <div className="card-box">
         <div
           className="empty-card"
           style={{ backgroundColor: `${cardType.color}` }}
-          onClick={() => setIsModalOpened(true)}
+          onClick={openModal}
         >
           <div className="card-top">
             <span className="card-text">{cardType.name}</span>
@@ -44,7 +52,7 @@ export default function Card({ cardInfo, onChangeCardType }: CardProps) {
       </div>
       <CardSelectModal
         isOpened={isModalOpened}
-        setIsModalOpened={setIsModalOpened}
+        closeModal={closeModal}
         onChangeCardType={onChangeCardType}
       />
     </>

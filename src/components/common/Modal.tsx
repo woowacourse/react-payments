@@ -13,12 +13,21 @@ const positionTag: { [P in Position]: string } = {
 interface ModalProps {
   position: Position;
   children: React.ReactNode;
+  closeModal: () => void;
 }
 
-export default function Modal({ position, children }: ModalProps) {
+export default function Modal({ position, children, closeModal }: ModalProps) {
   return (
     <ModalPortal>
-      <div className="modal-dimmed" style={{ justifyContent: `${positionTag[position]}` }}>
+      <div
+        className="modal-dimmed"
+        style={{ justifyContent: `${positionTag[position]}` }}
+        onClick={e => {
+          if (e.target === e.currentTarget) {
+            closeModal();
+          }
+        }}
+      >
         {children}
       </div>
     </ModalPortal>
