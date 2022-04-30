@@ -32,9 +32,8 @@ export default function CardNumberInput({ cardNumber, onChange }) {
     >
       {Array.from({ length: CARD_INFO_RULES.NUMBER_UNIT_COUNT }).map(
         (_, index) => (
-          <>
+          <React.Fragment key={index}>
             <Input
-              key={index}
               type={index <= 1 ? "number" : "password"}
               value={cardNumber[index]}
               onChange={(e) => onChange(e, index)}
@@ -46,7 +45,7 @@ export default function CardNumberInput({ cardNumber, onChange }) {
               ref={(element) => (inputRef.current[index] = element)}
             />
             {index !== 3 && <p>-</p>}
-          </>
+          </React.Fragment>
         )
       )}
     </InputField>

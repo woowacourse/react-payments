@@ -63,9 +63,8 @@ export default function CardPasswordInput({ password, onChange }) {
       <StyledInputContainer>
         {Array.from({ length: CARD_INFO_RULES.PASSWORD_LENGTH }).map(
           (_, index) => (
-            <StyledInputWrapper width="45px">
+            <StyledInputWrapper width="45px" key={index}>
               <Input
-                key={index}
                 type="password"
                 value={password[index]}
                 onChange={(e) => onChange(e, index)}
