@@ -11,7 +11,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["react", "react-hooks"],
   "rules": {
     "no-unused-vars": 0,
     "react/self-closing-comp": [
@@ -20,6 +20,8 @@
         "component": true,
         "html": true
       }
-    ]
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error"
   }
 }

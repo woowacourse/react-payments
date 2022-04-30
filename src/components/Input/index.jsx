@@ -25,7 +25,7 @@ function Input({
 
       element?.focus();
     }
-  }, [value]);
+  }, [value, inputElementsRef, inputElementKey, maxLength]);
 
   if (type === 'password') {
     const onFocusPassword = () => {

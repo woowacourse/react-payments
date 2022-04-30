@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
 export const useFormComplete = (state, validateFunction) => {
-  const isStateObjectOrArray = typeof state === 'object';
-
-  const deps = isStateObjectOrArray ? Object.values(state) : [state];
-
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
@@ -15,7 +11,7 @@ export const useFormComplete = (state, validateFunction) => {
       setIsComplete(false);
     }
     return;
-  }, [...deps]);
+  }, [state, validateFunction]);
 
   return isComplete;
 };
