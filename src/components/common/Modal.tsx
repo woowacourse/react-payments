@@ -23,9 +23,8 @@ export default function Modal({ position, children, closeModal }: ModalProps) {
         className="modal-dimmed"
         style={{ justifyContent: `${positionTag[position]}` }}
         onClick={e => {
-          if (e.target === e.currentTarget) {
-            closeModal();
-          }
+          if (e.target !== e.currentTarget) return;
+          closeModal();
         }}
       >
         {children}
