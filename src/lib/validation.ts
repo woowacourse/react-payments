@@ -3,8 +3,10 @@ import { CardInfo, CardNumbers, ExpirationDate, Password } from "../types";
 
 type Validator<T> = (value: T) => boolean;
 
+type CardInfoWithoutCardType = Omit<CardInfo, "cardType">;
+
 export type Validators = {
-  [K in keyof CardInfo]: Validator<CardInfo[K]>;
+  [K in keyof CardInfoWithoutCardType]: Validator<CardInfoWithoutCardType[K]>;
 };
 
 const validateCardNumbers = (cardNumbers: CardNumbers) =>

@@ -4,6 +4,7 @@ import REGEXP from "../constant/regexp";
 import { CardInfo, CardNumbers, Password } from "../types";
 
 const initialCardInfo: CardInfo = {
+  cardType: { name: "검정 카드", color: "black" },
   cardNumbers: ["", "", "", ""],
   expirationDate: { month: "", year: "" },
   userName: "",
@@ -15,6 +16,16 @@ export const useCardInfoInput = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>(initialCardInfo);
   const resetCardInfo = () => {
     setCardInfo(initialCardInfo);
+  };
+
+  const onChangeCardType = (name, color) => {
+    setCardInfo(prevCardInfo => ({
+      ...prevCardInfo,
+      cardType: {
+        name,
+        color,
+      },
+    }));
   };
 
   const onChangeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -110,6 +121,7 @@ export const useCardInfoInput = () => {
 
   return {
     cardInfo,
+    onChangeCardType,
     resetCardInfo,
     onChangeCardNumber,
     onChangeExpirationDate,

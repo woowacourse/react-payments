@@ -1,10 +1,27 @@
 interface CardInfo {
+  cardType: CardType;
   cardNumbers: CardNumbers;
   expirationDate: ExpirationDate;
   userName: string;
   securityCode: string;
   password: Password;
 }
+type CardType = {
+  name: CardName;
+  color: CardColor;
+};
+
+type CardName =
+  | "빨강 카드"
+  | "파랑 카드"
+  | "오렌지 카드"
+  | "토마토 카드"
+  | "스카이블루 카드"
+  | "보라 카드"
+  | "검정 카드"
+  | "초록 카드";
+
+type CardColor = "red" | "blue" | "orange" | "tomato" | "skyblue" | "purple" | "black" | "green";
 
 type CardNumbers = [string, string, string, string];
 
@@ -15,4 +32,4 @@ interface ExpirationDate {
   year: string;
 }
 
-export type { CardInfo, CardNumbers, ExpirationDate, Password };
+export type { CardColor, CardInfo, CardName, CardNumbers, CardType, ExpirationDate, Password };

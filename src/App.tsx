@@ -10,6 +10,7 @@ import cardInfoValidator from "./lib/validation";
 function App() {
   const {
     cardInfo,
+    onChangeCardType,
     resetCardInfo,
     onChangeCardNumber,
     onChangeExpirationDate,
@@ -24,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <Header title="카드 추가" />
-      <Card cardInfo={cardInfo} />
+      <Card cardInfo={cardInfo} onChangeCardType={onChangeCardType} />
       <CardInfoForm
         cardInfo={cardInfo}
         onChangeCardNumber={onChangeCardNumber}
