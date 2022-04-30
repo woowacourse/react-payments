@@ -7,57 +7,23 @@
     "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.1.1",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.4.1",
-    "@types/node": "^16.11.29",
     "@types/react": "^18.0.7",
     "@types/react-dom": "^18.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.6.3",
-    "web-vitals": "^2.1.4"
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "typescript": "^4.6.3"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public",
+    "build": "webpack --progress",
+    "clean": "npm cache clean --force && rm -rf node_modules && rm package-lock.json",
+    "start": "webpack serve --open --progress --port 9000",
+    "lint": "node_modules/.bin/eslint --ext=.jsx,.js,.tsx,.ts  .",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
     "deploy": "gh-pages -d build"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
+    "@babel/core": "^7.17.10",
     "@commitlint/cli": "^16.2.3",
     "@storybook/addon-actions": "^6.4.22",
     "@storybook/addon-essentials": "^6.4.22",
@@ -65,16 +31,34 @@
     "@storybook/addon-links": "^6.4.22",
     "@storybook/builder-webpack5": "^6.4.22",
     "@storybook/manager-webpack5": "^6.4.22",
-    "@storybook/node-logger": "^6.4.22",
-    "@storybook/preset-create-react-app": "^4.1.0",
     "@storybook/react": "^6.4.22",
     "@storybook/testing-library": "^0.0.11",
+    "@types/react": "^18.0.5",
+    "@types/react-dom": "^18.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "babel-loader": "^8.2.5",
     "commitizen": "^4.2.4",
+    "css-loader": "^6.7.1",
     "cz-customizable": "^6.3.0",
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-storybook": "^0.5.11",
     "gh-pages": "^3.2.3",
+    "html-webpack-plugin": "^5.5.0",
     "husky": "^7.0.0",
-    "sass": "^1.51.0",
-    "webpack": "^5.72.0"
+    "mini-css-extract-plugin": "^2.6.0",
+    "node-sass": "^7.0.1",
+    "prettier": "^2.6.2",
+    "sass-loader": "^12.6.0",
+    "ts-loader": "^9.2.8",
+    "typescript": "^4.6.3",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
   },
   "config": {
     "commitizen": {

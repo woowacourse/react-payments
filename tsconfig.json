@@ -17,11 +17,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src", "stories"]
 }
