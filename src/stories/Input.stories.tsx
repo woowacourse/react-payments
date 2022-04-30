@@ -1,3 +1,5 @@
+import React from "react";
+
 import Input from "../common/Input";
 
 export default {
