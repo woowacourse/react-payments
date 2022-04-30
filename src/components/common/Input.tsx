@@ -47,7 +47,12 @@ export default function Input({ size, maxLength, onChange, classes, align, ...pr
   };
 
   const focusOnPrevInput = (index: number) => {
-    arrayInputsRef.current[index - 1].focus();
+    const prevInputs = arrayInputsRef.current.slice(0, index);
+
+    prevInputs
+      .reverse()
+      .find(input => input.value.length !== 0)
+      .focus();
   };
 
   return (
