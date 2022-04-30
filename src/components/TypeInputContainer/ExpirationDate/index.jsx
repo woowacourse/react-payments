@@ -23,10 +23,15 @@ function ExpirationDateInput({
     }
   };
   return (
-    <LabelInputContainer labelTitle="만료일 (01~12의 월 / 년도)" inputSize="w-50">
-      {Object.keys(state).map(stateKey => (
+    <LabelInputContainer
+      labelTitle="만료일 (01~12의 월 / 년도)"
+      inputSize="w-50"
+      htmlFor={`${stateName}`}
+    >
+      {Object.keys(state).map((stateKey, idx) => (
         <Input
           key={uid(stateKey)}
+          id={idx === 0 && `${stateName}`}
           type="text"
           placeholder={stateKey === 'month' ? 'MM' : 'YY'}
           value={state[stateKey]}

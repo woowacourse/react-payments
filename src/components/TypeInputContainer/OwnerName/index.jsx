@@ -25,8 +25,12 @@ function OwnerNameInput({
   };
 
   return (
-    <LabelInputContainer labelTitle="카드 소유자 이름(선택) (영문만 입력가능)">
+    <LabelInputContainer
+      labelTitle="카드 소유자 이름(선택) (영문만 입력가능)"
+      htmlFor={`${stateName}`}
+    >
       <Input
+        id={`${stateName}`}
         type="text"
         className="input-basic"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."

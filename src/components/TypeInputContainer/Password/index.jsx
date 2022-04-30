@@ -27,10 +27,11 @@ function PasswordInput({
   };
 
   return (
-    <LabelInputContainer labelTitle="카드 비밀번호" inputSize="w-50">
-      {Object.keys(state).map(stateKey => (
+    <LabelInputContainer labelTitle="카드 비밀번호" inputSize="w-50" htmlFor={`${stateName}`}>
+      {Object.keys(state).map((stateKey, idx) => (
         <Input
           key={uid(stateKey)}
+          id={idx === 0 && `${stateName}`}
           type="password"
           value={state[stateKey]}
           onChange={e => onChangePassword(e, stateKey)}

@@ -29,8 +29,10 @@ function SecurityCodeInput({
       labelTitle="보안코드(CVC/CVV)"
       inputSize="w-25"
       helpText="카드 뒷면 서명란 또는 신용카드 번호 오른쪽 상단에 기재된 3자리 숫자"
+      htmlFor={`${stateName}`}
     >
       <Input
+        id={`${stateName}`}
         type="password"
         value={state}
         onChange={onChangeSecurityCode}
