@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
+import useModal from "../../hooks/useModal";
 import type { CardColor, CardInfo, CardName } from "../../types";
 import CardSelectModal from "./CardSelectModal";
 
@@ -10,15 +11,7 @@ interface CardProps {
 
 export default function Card({ cardInfo, onChangeCardType }: CardProps) {
   const { cardNumbers, expirationDate, userName, cardType } = cardInfo;
-  const [isModalOpened, setIsModalOpened] = useState(true);
-
-  const openModal = () => {
-    setIsModalOpened(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpened(false);
-  };
+  const { isModalOpened, openModal, closeModal } = useModal(true);
 
   return (
     <>

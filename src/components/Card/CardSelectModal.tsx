@@ -14,15 +14,17 @@ const cardType: CardType[] = [
   { name: "초록 카드", color: "green" },
 ];
 
+interface CardSelectModalProps {
+  isOpened: boolean;
+  closeModal: () => void;
+  onChangeCardType: (name: CardName, color: CardColor) => void;
+}
+
 export default function CardSelectModal({
   isOpened,
   closeModal,
   onChangeCardType,
-}: {
-  isOpened: boolean;
-  closeModal: () => void;
-  onChangeCardType: (name: CardName, color: CardColor) => void;
-}) {
+}: CardSelectModalProps) {
   if (!isOpened) return null;
 
   return (
