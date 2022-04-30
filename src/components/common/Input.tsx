@@ -37,12 +37,12 @@ export default function Input({ size, maxLength, onChange, classes, align, ...pr
 
     const inputIndex = arrayInputsRef.current.findIndex(element => element === e.target);
 
-    if (inputLength === maxLength) focusOnNextInput(inputIndex);
+    if (inputLength === maxLength) focusOnEmptyInput();
     if (inputLength === 0) focusOnPrevInput(inputIndex);
     onChange(e);
   };
 
-  const focusOnNextInput = (index: number) => {
+  const focusOnEmptyInput = () => {
     arrayInputsRef.current.find(input => input.value.length === 0)?.focus();
   };
 
