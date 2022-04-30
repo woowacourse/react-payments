@@ -1,9 +1,8 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styled from "@emotion/styled";
 
 type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string;
 };
 
 const Input = styled.input(() => ({
@@ -21,8 +20,8 @@ const Input = styled.input(() => ({
   },
 }));
 
-function CardNumberInput({ onChange, value }: Props) {
-  return <Input onChange={onChange} value={value} />;
-}
+const CardNumberInput = forwardRef<HTMLInputElement, Props>(({ onChange }, ref) => {
+  return <Input onChange={onChange} ref={ref} />;
+});
 
 export default CardNumberInput;

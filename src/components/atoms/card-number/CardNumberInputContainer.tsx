@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import { transform } from "typescript";
 import { useAppDispatch, useAppState } from "../../../hooks/hooks";
 import { ActionType } from "../../../types";
 import {
@@ -15,18 +16,13 @@ import CardNumberInput from "./CardNumberInput";
 function CardNumberInputContainer() {
   const { cardNumber } = useAppState();
   const dispatch = useAppDispatch();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCardNumberInput = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const input = event.target;
     const { value, selectionStart } = input;
-
-    // 싹다 지운 경우, 진짜 싹다 지운다
-    if (value === "") {
-      dispatch(createAction(ActionType.INPUT_CARDNUMBER, ""));
-      return;
-    }
 
     if (selectionStart === null) return;
 
@@ -76,6 +72,7 @@ function CardNumberInputContainer() {
 
       // 입력된 값을 formatting해서 넣는다
       dispatch(createAction(ActionType.INPUT_CARDNUMBER, newNumber));
+      inputRef.current && (inputRef.current.value = transformToCardFormat(newNumber));
       return;
     }
 
@@ -99,12 +96,13 @@ function CardNumberInputContainer() {
     });
 
     dispatch(createAction(ActionType.INPUT_CARDNUMBER, newCardNumber));
+    inputRef.current && (inputRef.current.value = transformToCardFormat(newCardNumber));
   };
 
   return (
     <CardNumberInput
       onChange={handleCardNumberInput}
-      value={transformToCardFormat(cardNumber)}
+      ref={inputRef}
     />
   );
 }
