@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { objectToString } from '../../utils/util';
-import { checkFormCompletion, checkFormValidation } from './validation';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
 import { useFormComplete } from '../../hooks/useFormComplete';
 import InputContainer from '../TypeInputContainer';
 import { uid } from 'react-uid';
+import { objectToString } from '../../utils/util';
+import { checkFormCompletion, checkFormValidation } from '../../utils/validation/form';
 
 function InputForm({ cardInput, cardInputDispatch }) {
   const [isShowVirtualKeyboard, setIsShowVirtualKeyboard] = useState(false);

@@ -1,4 +1,4 @@
-import { hasSpace, isLengthBelow, isLengthOver, isNotNumber } from '../../utils/validations';
+import { hasSpace, isLengthBelow, isLengthOver, isNotNumber } from '.';
 
 export const checkFormCompletion = ({ cardNumber, expirationDate, securityCode, password }) => {
   if (Object.keys(cardNumber).some(key => isLengthBelow(cardNumber[key], 4))) {

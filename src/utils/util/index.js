@@ -6,15 +6,3 @@ export const objectToString = ({ targetObject, separator = ' ', hideStartIndex }
   }
   return Object.values(targetObject).join(separator);
 };
-
-export const findNotCompletedInput = (inputMap, currentInputKey) => {
-  const nextInputKey = Object.keys(inputMap).find(
-    key => key !== currentInputKey && inputMap[key].isComplete === false,
-  );
-
-  return {
-    nextInput: inputMap[nextInputKey] ?? {
-      element: null,
-    },
-  };
-};

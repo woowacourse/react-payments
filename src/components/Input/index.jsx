@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { findNotCompletedInput } from '../../utils/util';
+import { findNotCompletedInput } from '../../utils/util/form';
 
 function Input({
   value,

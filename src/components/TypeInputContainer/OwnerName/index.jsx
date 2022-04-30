@@ -1,8 +1,8 @@
 import React from 'react';
-import { isAlphabetOrSpace } from '../../../utils/validations';
 import PropTypes from 'prop-types';
 import Input from '../../Input';
 import LabelInputContainer from '../../LabelInputContainer';
+import { isAlphabetOrSpace } from '../../../utils/validation';
 
 function OwnerNameInput({
   state,

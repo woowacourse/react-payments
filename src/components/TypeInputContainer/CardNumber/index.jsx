@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { uid } from 'react-uid';
-import { isNumberInRange } from '../../InputForm/validation';
 import { CARD_NUMBER_TYPE } from '../../types';
 import Input from '../../Input';
 import LabelInputContainer from '../../LabelInputContainer';
+import { isNumberInRange } from '../../../utils/validation/form';
 
 function CardNumberInput({
   state,

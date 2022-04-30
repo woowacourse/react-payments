@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { objectToString } from '../../utils/util';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
+import { objectToString } from '../../utils/util';
 
 function Card({ cardInformation: { cardNumber, expirationDate, ownerName } }) {
   return (

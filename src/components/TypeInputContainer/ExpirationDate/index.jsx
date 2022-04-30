@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { EXPIRATION_DATE_TYPE } from '../../types';
-import { isNumberInRange } from '../../InputForm/validation';
 import { uid } from 'react-uid';
 import LabelInputContainer from '../../LabelInputContainer';
 import Input from '../../Input';
+import { isNumberInRange } from '../../../utils/validation/form';
 
 function ExpirationDateInput({
   state,

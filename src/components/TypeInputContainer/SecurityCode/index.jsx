@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isNumberInRange } from '../../InputForm/validation';
 import Input from '../../Input';
 import LabelInputContainer from '../../LabelInputContainer';
+import { isNumberInRange } from '../../../utils/validation/form';
 
 function SecurityCodeInput({
   state,
