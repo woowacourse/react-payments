@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
 import GlobalStyle from "./globalStyles.jsx";
 
@@ -44,7 +44,6 @@ function App() {
   const [holderName, setHolderName] = useState("");
   const [securityCode, setSecurityCode] = useState("");
   const [password, setPassword] = useState(["", ""]);
-  const [canProceed, setCanProceed] = useState(false);
 
   const setCardNumberArray = useArraySetState(setCardNumber);
   const handleCardNumberUpdate = useValidatedUpdate(
@@ -84,7 +83,7 @@ function App() {
     alert(CARD_REGISTER_SUCCESS_MESSAGE);
   };
 
-  const isValidCardInfo = useCallback(() => {
+  const isValidCardInfo = useMemo(() => {
     const {
       NUMBER_UNIT_COUNT,
       NUMBER_UNIT_LENGTH,
@@ -101,14 +100,6 @@ function App() {
     );
   }, [cardNumber, expireDate, securityCode, password]);
 
-  useEffect(() => {
-    if (isValidCardInfo()) {
-      setCanProceed(true);
-    } else {
-      setCanProceed(false);
-    }
-  }, [isValidCardInfo]);
-
   return (
     <div className="App">
       <GlobalStyle />
@@ -117,7 +108,7 @@ function App() {
         cardNumber={cardNumber}
         holderName={holderName}
         expireDate={expireDate}
-        canProceed={canProceed}
+        canProceed={isValidCardInfo}
       />
       <CardInfoForm autoComplete="off">
         <CardNumberInput
@@ -141,7 +132,7 @@ function App() {
           onChange={handlePasswordUpdate}
         />
       </CardInfoForm>
-      {canProceed && <Button text="다음" onClick={handleCardInfoSubmit} />}
+      {isValidCardInfo && <Button text="다음" onClick={handleCardInfoSubmit} />}
     </div>
   );
 }
