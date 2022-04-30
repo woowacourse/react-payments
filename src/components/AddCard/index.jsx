@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCardInput } from '../../hooks/useCardInput';
 import Card from '../Card';
-import InputForm from '../InputForm';
+import CardInputForm from '../InputForm/CardInputForm';
 
 function AddCard() {
   const [cardInput, cardInputDispatch] = useCardInput();
@@ -10,7 +10,7 @@ function AddCard() {
     <div className="app">
       <h1 className="page-title"> 카드 추가 </h1>
       <Card cardInformation={cardInput} />
-      <InputForm cardInput={cardInput} cardInputDispatch={cardInputDispatch} />
+      <CardInputForm cardInput={cardInput} cardInputDispatch={cardInputDispatch} />
     </div>
   );
 }

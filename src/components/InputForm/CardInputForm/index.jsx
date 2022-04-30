@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
-import { useFormComplete } from '../../hooks/useFormComplete';
-import InputContainer from '../TypeInputContainer';
+import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../types';
+import { useFormComplete } from '../../../hooks/useFormComplete';
+import InputContainer from '../../TypeInputContainer';
 import { uid } from 'react-uid';
-import { objectToString } from '../../utils/util';
-import { checkFormCompletion, checkFormValidation } from '../../utils/validation/form';
+import { objectToString } from '../../../utils/util';
+import { checkFormCompletion, checkFormValidation } from '../../../utils/validation/form';
 
-function InputForm({ cardInput, cardInputDispatch }) {
+function CardInputForm({ cardInput, cardInputDispatch }) {
   const [isShowVirtualKeyboard, setIsShowVirtualKeyboard] = useState(false);
 
   const isComplete = useFormComplete(cardInput, checkFormCompletion);
@@ -60,7 +60,7 @@ function InputForm({ cardInput, cardInputDispatch }) {
   );
 }
 
-InputForm.propTypes = {
+CardInputForm.propTypes = {
   cardInput: PropTypes.shape({
     cardNumber: CARD_NUMBER_TYPE,
     expirationDate: EXPIRATION_DATE_TYPE,
@@ -70,4 +70,4 @@ InputForm.propTypes = {
   }),
   cardInputDispatch: PropTypes.func,
 };
-export default InputForm;
+export default CardInputForm;
