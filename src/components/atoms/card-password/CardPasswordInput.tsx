@@ -21,14 +21,15 @@ const Input = styled.input(() => ({
 
 type Props = {
   value?: string;
-  _disabled?: boolean;
+  disabled?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const CardPasswordInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { value, _disabled, onChange } = props;
+  const { value, disabled, onChange } = props;
   return (
-      {_disabled ? (
+    <>
+      {disabled ? (
         <Input disabled placeholder="•" />
       ) : (
         <Input
@@ -41,6 +42,7 @@ const CardPasswordInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
           ref={ref}
         />
       )}
+    </>
   );
 });
 
