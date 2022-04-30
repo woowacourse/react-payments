@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import REGEXP from "../constant/regexp";
-import type { CardInfo, CardNumbers, Password } from "../types";
+import type { CardColor, CardInfo, CardName, CardNumbers, Password } from "../types";
 
 const initialCardInfo: CardInfo = {
   cardType: { name: "검정 카드", color: "black" },
@@ -18,7 +18,7 @@ const useCardInfoInput = () => {
     setCardInfo(initialCardInfo);
   };
 
-  const onChangeCardType = (name, color) => {
+  const onChangeCardType = (name: CardName, color: CardColor) => {
     setCardInfo(prevCardInfo => ({
       ...prevCardInfo,
       cardType: {
