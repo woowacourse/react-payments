@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Input from '../../Input';
 import LabelInputContainer from '../../LabelInputContainer';
 import { isNumberInRange } from '../../../utils/validation/form';
+import PasswordInput from '../../Input/PasswordInput';
 
-function SecurityCodeInput({
+function SecurityCodeInputContainer({
   state,
   cardInputDispatch,
   inputElementsRef,
@@ -31,9 +31,8 @@ function SecurityCodeInput({
       helpText="카드 뒷면 서명란 또는 신용카드 번호 오른쪽 상단에 기재된 3자리 숫자"
       htmlFor={`${stateName}`}
     >
-      <Input
+      <PasswordInput
         id={`${stateName}`}
-        type="password"
         value={state}
         onChange={onChangeSecurityCode}
         maxLength={3}
@@ -46,7 +45,7 @@ function SecurityCodeInput({
   );
 }
 
-SecurityCodeInput.propTypes = {
+SecurityCodeInputContainer.propTypes = {
   state: PropTypes.string,
   cardInputDispatch: PropTypes.func,
   inputElementsRef: PropTypes.object,
@@ -54,4 +53,4 @@ SecurityCodeInput.propTypes = {
   setIsShowVirtualKeyboard: PropTypes.func,
 };
 
-export default SecurityCodeInput;
+export default SecurityCodeInputContainer;

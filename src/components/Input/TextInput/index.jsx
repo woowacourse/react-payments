@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { findNotCompletedInput } from '../../utils/util/form';
+import { findNotCompletedInput } from '../../../utils/util/form';
 
-function Input({
+function TextInput({
   value,
   maxLength,
   inputElementsRef,
@@ -26,38 +26,6 @@ function Input({
       element?.focus();
     }
   }, [value, inputElementsRef, inputElementKey, maxLength]);
-
-  if (type === 'password') {
-    const onFocusPassword = () => {
-      setIsShowVirtualKeyboard(true);
-    };
-    const onBlur = () => {
-      setIsShowVirtualKeyboard(false);
-    };
-
-    return (
-      <input
-        className="input-basic"
-        type={type}
-        value={value}
-        maxLength={maxLength}
-        required={required}
-        onFocus={onFocusPassword}
-        onBlur={onBlur}
-        ref={element => {
-          const { current } = inputElementsRef;
-
-          current[inputElementKey] = {
-            element,
-            isComplete: required
-              ? element?.value.length === element?.maxLength
-              : element?.value.length !== 0,
-          };
-        }}
-        {...props}
-      />
-    );
-  }
 
   const onFocus = () => {
     setIsShowVirtualKeyboard(false);
@@ -85,7 +53,8 @@ function Input({
     />
   );
 }
-Input.propTypes = {
+
+TextInput.propTypes = {
   type: PropTypes.string,
   value: PropTypes.string,
   maxLength: PropTypes.number,
@@ -95,4 +64,4 @@ Input.propTypes = {
   setIsShowVirtualKeyboard: PropTypes.func,
 };
 
-export default Input;
+export default TextInput;

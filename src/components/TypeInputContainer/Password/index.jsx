@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { PASSWORD_TYPE } from '../../types';
 import { uid } from 'react-uid';
 import LabelInputContainer from '../../LabelInputContainer';
-import Input from '../../Input';
 import { isNumberInRange } from '../../../utils/validation/form';
+import PasswordInput from '../../Input/PasswordInput';
 
-function PasswordInput({
+function PasswordInputContainer({
   state,
   cardInputDispatch,
   inputElementsRef,
@@ -29,10 +29,9 @@ function PasswordInput({
   return (
     <LabelInputContainer labelTitle="카드 비밀번호" inputSize="w-50" htmlFor={`${stateName}`}>
       {Object.keys(state).map((stateKey, idx) => (
-        <Input
+        <PasswordInput
           key={uid(stateKey)}
           id={idx === 0 ? `${stateName}` : null}
-          type="password"
           value={state[stateKey]}
           onChange={e => onChangePassword(e, stateKey)}
           maxLength={1}
@@ -48,7 +47,7 @@ function PasswordInput({
   );
 }
 
-PasswordInput.propTypes = {
+PasswordInputContainer.propTypes = {
   state: PASSWORD_TYPE,
   cardInputDispatch: PropTypes.func,
   inputElementsRef: PropTypes.object,
@@ -56,4 +55,4 @@ PasswordInput.propTypes = {
   setIsShowVirtualKeyboard: PropTypes.func,
 };
 
-export default PasswordInput;
+export default PasswordInputContainer;

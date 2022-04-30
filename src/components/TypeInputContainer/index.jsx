@@ -1,13 +1,13 @@
-import CardNumberInput from './CardNumber';
-import ExpirationDateInput from './ExpirationDate';
-import OwnerNameInput from './OwnerName';
-import PasswordInput from './Password';
-import SecurityCodeInput from './SecurityCode';
+import CardNumberInputContainer from './CardNumber';
+import ExpirationDateInputContainer from './ExpirationDate';
+import OwnerNameInputContainer from './OwnerName';
+import PasswordInputContainer from './Password';
+import SecurityCodeInputContainer from './SecurityCode';
 
 export default {
-  cardNumber: CardNumberInput,
-  expirationDate: ExpirationDateInput,
-  ownerName: OwnerNameInput,
-  password: PasswordInput,
-  securityCode: SecurityCodeInput,
+  cardNumber: CardNumberInputContainer,
+  expirationDate: ExpirationDateInputContainer,
+  ownerName: OwnerNameInputContainer,
+  password: PasswordInputContainer,
+  securityCode: SecurityCodeInputContainer,
 };

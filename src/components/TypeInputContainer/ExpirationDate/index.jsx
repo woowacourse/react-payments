@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { EXPIRATION_DATE_TYPE } from '../../types';
 import { uid } from 'react-uid';
 import LabelInputContainer from '../../LabelInputContainer';
-import Input from '../../Input';
+import TextInput from '../../Input/TextInput';
 import { isNumberInRange } from '../../../utils/validation/form';
 
-function ExpirationDateInput({
+function ExpirationDateInputContainer({
   state,
   cardInputDispatch,
   inputElementsRef,
@@ -29,7 +29,7 @@ function ExpirationDateInput({
       htmlFor={`${stateName}`}
     >
       {Object.keys(state).map((stateKey, idx) => (
-        <Input
+        <TextInput
           key={uid(stateKey)}
           id={idx === 0 ? `${stateName}` : null}
           type="text"
@@ -47,7 +47,7 @@ function ExpirationDateInput({
   );
 }
 
-ExpirationDateInput.propTypes = {
+ExpirationDateInputContainer.propTypes = {
   state: EXPIRATION_DATE_TYPE,
   cardInputDispatch: PropTypes.func,
   inputElementsRef: PropTypes.object,
@@ -55,4 +55,4 @@ ExpirationDateInput.propTypes = {
   setIsShowVirtualKeyboard: PropTypes.func,
 };
 
-export default ExpirationDateInput;
+export default ExpirationDateInputContainer;

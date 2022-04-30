@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { uid } from 'react-uid';
 import { CARD_NUMBER_TYPE } from '../../types';
-import Input from '../../Input';
+import TextInput from '../../Input/TextInput';
 import LabelInputContainer from '../../LabelInputContainer';
 import { isNumberInRange } from '../../../utils/validation/form';
+import PasswordInput from '../../Input/PasswordInput';
 
-function CardNumberInput({
+function CardNumberInputContainer({
   state,
   cardInputDispatch,
   inputElementsRef,
@@ -24,25 +25,28 @@ function CardNumberInput({
   };
   return (
     <LabelInputContainer labelTitle="카드번호" htmlFor={`${stateName}`}>
-      {Object.keys(state).map((stateKey, idx) => (
-        <Input
-          key={uid(stateKey)}
-          id={idx === 0 ? `${stateName}` : null}
-          type={stateKey === 'first' || stateKey === 'second' ? 'text' : 'password'}
-          value={state[stateKey]}
-          onChange={e => onChangeCardNumber(e, stateKey)}
-          maxLength={4}
-          required
-          inputElementsRef={inputElementsRef}
-          inputElementKey={`${stateName}${stateKey}`}
-          setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
-        />
-      ))}
+      {Object.keys(state).map((stateKey, idx) => {
+        const Input = stateKey === 'first' || stateKey === 'second' ? TextInput : PasswordInput;
+
+        return (
+          <Input
+            key={uid(stateKey)}
+            id={idx === 0 ? `${stateName}` : null}
+            value={state[stateKey]}
+            onChange={e => onChangeCardNumber(e, stateKey)}
+            maxLength={4}
+            required
+            inputElementsRef={inputElementsRef}
+            inputElementKey={`${stateName}${stateKey}`}
+            setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+          />
+        );
+      })}
     </LabelInputContainer>
   );
 }
 
-CardNumberInput.propTypes = {
+CardNumberInputContainer.propTypes = {
   state: CARD_NUMBER_TYPE,
   cardInputDispatch: PropTypes.func,
   inputElementsRef: PropTypes.object,
@@ -50,4 +54,4 @@ CardNumberInput.propTypes = {
   setIsShowVirtualKeyboard: PropTypes.func,
 };
 
-export default CardNumberInput;
+export default CardNumberInputContainer;
