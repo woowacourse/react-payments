@@ -43,7 +43,7 @@ export default function Input({ size, maxLength, onChange, classes, align, ...pr
   };
 
   const focusOnNextInput = (index: number) => {
-    arrayInputsRef.current[index + 1].focus();
+    arrayInputsRef.current.find(input => input.value.length === 0)?.focus();
   };
 
   const focusOnPrevInput = (index: number) => {
@@ -52,7 +52,7 @@ export default function Input({ size, maxLength, onChange, classes, align, ...pr
     prevInputs
       .reverse()
       .find(input => input.value.length !== 0)
-      .focus();
+      ?.focus();
   };
 
   return (
