@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { findNotCompletedInput } from '../../../utils/util/form';
+import { useNextInputFocus } from '../../../hooks/useNextInputFocus';
 
 function TextInput({
   value,
@@ -13,19 +14,7 @@ function TextInput({
   setIsShowVirtualKeyboard,
   ...props
 }) {
-  useEffect(() => {
-    if (value.length === maxLength) {
-      const { current: inputElementsMap } = inputElementsRef;
-
-      const {
-        nextInput: { element },
-      } = findNotCompletedInput(inputElementsMap, inputElementKey);
-
-      inputElementsMap[inputElementKey].isComplete = true;
-
-      element?.focus();
-    }
-  }, [value, inputElementsRef, inputElementKey, maxLength]);
+  useNextInputFocus(value, maxLength, inputElementsRef, inputElementKey);
 
   const onFocus = () => {
     setIsShowVirtualKeyboard(false);
