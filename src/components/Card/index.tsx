@@ -1,6 +1,7 @@
 import React from "react";
 
 import { CardInfo } from "../../types";
+import CardSelectModal from "./CardSelectModal";
 
 export default function Card({ cardInfo }: { cardInfo: CardInfo }) {
   const { cardNumbers, expirationDate, userName } = cardInfo;
@@ -29,6 +30,7 @@ export default function Card({ cardInfo }: { cardInfo: CardInfo }) {
           <span className="card-text card-user-name">{userName || "NAME"}</span>
         </div>
       </div>
+      <CardSelectModal />
     </div>
   );
 }
