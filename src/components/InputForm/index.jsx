@@ -1,28 +1,23 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { objectToString } from '../../utils/util';
 import { checkFormCompletion, checkFormValidation } from './validation';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
 import { useFormComplete } from '../../hooks/useFormComplete';
-import CardNumberInput from '../InputContainer/CardNumber';
-import ExpirationDateInput from '../InputContainer/ExpirationDate';
-import OwnerNameInput from '../InputContainer/OwnerName';
-import SecurityCodeInput from '../InputContainer/SecurityCode';
-import PasswordInput from '../InputContainer/Password';
+import InputContainer from '../TypeInputContainer';
+import { uid } from 'react-uid';
 
-function InputForm({
-  cardInput: { cardNumber, expirationDate, ownerName, securityCode, password },
-  cardInputDispatch,
-}) {
-  const isComplete = useFormComplete(
-    { cardNumber, expirationDate, ownerName, securityCode, password },
-    checkFormCompletion,
-  );
+function InputForm({ cardInput, cardInputDispatch }) {
+  const [isShowVirtualKeyboard, setIsShowVirtualKeyboard] = useState(false);
+
+  const isComplete = useFormComplete(cardInput, checkFormCompletion);
 
   const inputElementsRef = useRef({});
 
   const onClickNextButton = e => {
     e.preventDefault();
+
+    const { cardNumber, expirationDate, ownerName, securityCode, password } = cardInput;
 
     try {
       if (checkFormValidation({ expirationDate })) {
@@ -39,42 +34,28 @@ function InputForm({
 
   return (
     <form onSubmit={onClickNextButton}>
-      <CardNumberInput
-        cardNumber={cardNumber}
-        cardInputDispatch={cardInputDispatch}
-        inputElementsRef={inputElementsRef}
-        stateName="cardNumber"
-      ></CardNumberInput>
-      <ExpirationDateInput
-        expirationDate={expirationDate}
-        cardInputDispatch={cardInputDispatch}
-        inputElementsRef={inputElementsRef}
-        stateName="expirationDate"
-      ></ExpirationDateInput>
-      <OwnerNameInput
-        ownerName={ownerName}
-        cardInputDispatch={cardInputDispatch}
-        inputElementsRef={inputElementsRef}
-        stateName="ownerName"
-      ></OwnerNameInput>
-      <SecurityCodeInput
-        securityCode={securityCode}
-        cardInputDispatch={cardInputDispatch}
-        inputElementsRef={inputElementsRef}
-        stateName="securityCode"
-      ></SecurityCodeInput>
-      <PasswordInput
-        password={password}
-        cardInputDispatch={cardInputDispatch}
-        inputElementsRef={inputElementsRef}
-        stateName="password"
-      ></PasswordInput>
+      {Object.keys(cardInput).map(key => {
+        const TypeInputContainer = InputContainer[key];
+
+        return (
+          <TypeInputContainer
+            key={uid(key)}
+            state={cardInput[key]}
+            cardInputDispatch={cardInputDispatch}
+            inputElementsRef={inputElementsRef}
+            stateName={key}
+            setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+          ></TypeInputContainer>
+        );
+      })}
 
       {isComplete && (
         <button className="button-box">
           <span className="button-text">다음</span>
         </button>
       )}
+
+      {isShowVirtualKeyboard && <div>virtual keyboard</div>}
     </form>
   );
 }

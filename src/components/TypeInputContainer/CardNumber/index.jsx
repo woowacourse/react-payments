@@ -3,10 +3,16 @@ import PropTypes from 'prop-types';
 import { uid } from 'react-uid';
 import { isNumberInRange } from '../../InputForm/validation';
 import { CARD_NUMBER_TYPE } from '../../types';
-import InputContainer from '..';
 import Input from '../../Input';
+import LabelInputContainer from '../../LabelInputContainer';
 
-function CardNumberInput({ cardNumber, cardInputDispatch, inputElementsRef, stateName }) {
+function CardNumberInput({
+  state,
+  cardInputDispatch,
+  inputElementsRef,
+  stateName,
+  setIsShowVirtualKeyboard,
+}) {
   const onChangeCardNumber = (e, key) => {
     const {
       target: { value: cardNumber, maxLength },
@@ -17,28 +23,30 @@ function CardNumberInput({ cardNumber, cardInputDispatch, inputElementsRef, stat
     }
   };
   return (
-    <InputContainer labelTitle="카드번호">
-      {Object.keys(cardNumber).map(stateKey => (
+    <LabelInputContainer labelTitle="카드번호">
+      {Object.keys(state).map(stateKey => (
         <Input
           key={uid(stateKey)}
           type={stateKey === 'first' || stateKey === 'second' ? 'text' : 'password'}
-          value={cardNumber[stateKey]}
+          value={state[stateKey]}
           onChange={e => onChangeCardNumber(e, stateKey)}
           maxLength={4}
           required
           inputElementsRef={inputElementsRef}
           inputElementKey={`${stateName}${stateKey}`}
+          setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
         />
       ))}
-    </InputContainer>
+    </LabelInputContainer>
   );
 }
 
 CardNumberInput.propTypes = {
-  cardNumber: CARD_NUMBER_TYPE,
+  state: CARD_NUMBER_TYPE,
   cardInputDispatch: PropTypes.func,
   inputElementsRef: PropTypes.object,
   stateName: PropTypes.string,
+  setIsShowVirtualKeyboard: PropTypes.func,
 };
 
 export default CardNumberInput;
