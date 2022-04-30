@@ -1,24 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants";
+import useInputFocus from "../useInputFocus";
 import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
 
 export default function CardNumberInput({ cardNumber, onChange }) {
-  const [focusInputIndex, setFocusInputIndex] = useState(0);
-  const inputRef = useRef([]);
-
-  useEffect(() => {
-    if (inputRef.current[focusInputIndex].value.length === 4) {
-      const index = cardNumber.findIndex(
-        (cardNumberUnit) => cardNumberUnit.length !== 4
-      );
-      inputRef.current[index]?.focus();
-    }
-  }, [cardNumber, focusInputIndex]);
-
-  useEffect(() => {
-    inputRef.current[focusInputIndex].focus();
-  }, [focusInputIndex]);
+  const [inputRef, setFocusInputIndex] = useInputFocus(
+    cardNumber,
+    CARD_INFO_RULES.NUMBER_UNIT_LENGTH
+  );
 
   return (
     <InputField
@@ -39,12 +29,13 @@ export default function CardNumberInput({ cardNumber, onChange }) {
               onChange={(e) => onChange(e, index)}
               placeholder={index <= 1 ? "1 2 3 4" : CREATE_MASKED_CHARACTERS(4)}
               onFocus={() => setFocusInputIndex(index)}
+              onBlur={() => setFocusInputIndex(null)}
               isComplete={
                 cardNumber[index].length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
               }
               ref={(element) => (inputRef.current[index] = element)}
             />
-            {index !== 3 && <p>-</p>}
+            {index !== cardNumber.length - 1 && <p>-</p>}
           </React.Fragment>
         )
       )}

@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import styled from "styled-components";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
+import useInputFocus from "../useInputFocus.jsx";
 
 const StyledInputField = styled.div`
   display: flex;
@@ -35,21 +36,7 @@ const StyledInputContainer = styled.div`
 `;
 
 export default function CardPasswordInput({ password, onChange }) {
-  const [focusInputIndex, setFocusInputIndex] = useState(0);
-  const inputRef = useRef([]);
-
-  useEffect(() => {
-    if (inputRef.current[focusInputIndex].value.length === 1) {
-      const index = password.findIndex(
-        (passwordDigit) => passwordDigit.length !== 1
-      );
-      inputRef.current[index]?.focus();
-    }
-  }, [password, focusInputIndex]);
-
-  useEffect(() => {
-    inputRef.current[focusInputIndex].focus();
-  }, [focusInputIndex]);
+  const [inputRef, setFocusInputIndex] = useInputFocus(password, 1);
 
   return (
     <StyledInputField>
