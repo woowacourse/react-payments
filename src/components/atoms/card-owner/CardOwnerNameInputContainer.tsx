@@ -1,10 +1,10 @@
-import React from "react";
-import CardOwnerNameInput from "./CardOwnerNameInput";
-import { useAppDispatch, useAppState } from "../../../hooks/hooks";
-import { ActionType } from "../../../types";
-import { createAction } from "../../Provider";
-import { isEnglish } from "../../../utils";
-import { MAX_NAME_LENGTH } from "../../../constants";
+import React from 'react';
+import CardOwnerNameInput from './CardOwnerNameInput';
+import { useAppDispatch, useAppState } from '../../../hooks/hooks';
+import { ActionType } from '../../../types';
+import { createAction } from '../../Provider';
+import { isEnglish } from '../../../utils';
+import { MAX_NAME_LENGTH } from '../../../constants';
 
 function CardOwnerNameInputContainer() {
   const { name } = useAppState();
@@ -23,19 +23,19 @@ function CardOwnerNameInputContainer() {
 
       const insertedChar = value[selectionStart - 1];
       // space인데
-      if (insertedChar === " ") {
+      if (insertedChar === ' ') {
         // 처음부터 space는 허용 안되지요
         if (value.length === 1) return;
 
         // 왼쪽에 스페이스바가 있으면 그것도 안되지요
-        if (value[selectionStart - 2] === " ") return;
+        if (value[selectionStart - 2] === ' ') return;
 
         // 오른쪽에 스페이스바가 있으면 그것도 안되지요
-        if (value[selectionStart] === " ") return;
+        if (value[selectionStart] === ' ') return;
       }
 
       // 영어하고 space만 입력 가능하다
-      if (!isEnglish(insertedChar) && insertedChar !== " ") return;
+      if (!isEnglish(insertedChar) && insertedChar !== ' ') return;
 
       // 대문자로 변환을 해준다
       const upperName = value.toUpperCase();

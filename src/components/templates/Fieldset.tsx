@@ -1,17 +1,11 @@
-import React from "react";
-import { css } from "@emotion/react";
+import React from 'react';
+import { css } from '@emotion/react';
 
-export function Fieldset({
-  children,
-  isLast,
-}: {
-  children: Array<React.ReactNode>;
-  isLast?: string;
-}) {
+export function Fieldset({ children, isLast }: { children: Array<React.ReactNode>; isLast?: string }) {
   return (
     <div
       css={css`
-        margin-bottom: ${isLast ? "0px" : "19px"};
+        margin-bottom: ${isLast ? '0px' : '19px'};
       `}
     >
       {children}
@@ -19,17 +13,11 @@ export function Fieldset({
   );
 }
 
-export function Head({
-  children,
-  marginBottom,
-}: {
-  children: React.ReactNode;
-  marginBottom?: string;
-}) {
+export function Head({ children, marginBottom }: { children: React.ReactNode; marginBottom?: string }) {
   return (
     <div
       css={css`
-        margin-bottom: ${marginBottom || "3px"};
+        margin-bottom: ${marginBottom || '3px'};
       `}
     >
       {children}

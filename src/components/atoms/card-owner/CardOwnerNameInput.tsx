@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "@emotion/styled";
+import React from 'react';
+import styled from '@emotion/styled';
 
 type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -7,17 +7,17 @@ type Props = {
 };
 
 const Input = styled.input(() => ({
-  backgroundColor: "#ECEBF1",
-  height: "45px",
-  width: "100%",
-  borderRadius: "7px",
-  maxWidth: "318px",
-  outline: "none !important",
-  border: "inherit",
-  fontSize: "18px",
-  textAlign: "center",
-  "&:focus": {
-    boxShadow: "none",
+  backgroundColor: '#ECEBF1',
+  height: '45px',
+  width: '100%',
+  borderRadius: '7px',
+  maxWidth: '318px',
+  outline: 'none !important',
+  border: 'inherit',
+  fontSize: '18px',
+  textAlign: 'center',
+  '&:focus': {
+    boxShadow: 'none',
   },
 }));
 

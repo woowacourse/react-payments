@@ -1,12 +1,12 @@
-import { css } from "@emotion/react";
-import React from "react";
-import BackButton from "../atoms/BackButton";
-import PageTitle from "../atoms/PageTitle";
+import { css } from '@emotion/react';
+import React from 'react';
+import BackButton from '../atoms/BackButton';
+import PageTitle from '../atoms/PageTitle';
 
 const style = css({
-  display: "flex",
-  alignItems: "center",
-  marginBottom: "25px",
+  display: 'flex',
+  alignItems: 'center',
+  marginBottom: '25px',
 });
 
 function Navigation() {

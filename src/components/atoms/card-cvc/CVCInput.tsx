@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { transformNumToBullet } from "../../../utils";
+import React from 'react';
+import styled from '@emotion/styled';
+import { transformNumToBullet } from '../../../utils';
 
 type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -10,18 +10,18 @@ type Props = {
 };
 
 const Input = styled.input(() => ({
-  backgroundColor: "#ECEBF1",
-  height: "45px",
-  width: "100%",
-  borderRadius: "7px",
-  maxWidth: "84px",
-  outline: "none !important",
-  border: "inherit",
-  fontSize: "21px",
-  textAlign: "center",
-  marginRight: "11px",
-  "&:focus": {
-    boxShadow: "none",
+  backgroundColor: '#ECEBF1',
+  height: '45px',
+  width: '100%',
+  borderRadius: '7px',
+  maxWidth: '84px',
+  outline: 'none !important',
+  border: 'inherit',
+  fontSize: '21px',
+  textAlign: 'center',
+  marginRight: '11px',
+  '&:focus': {
+    boxShadow: 'none',
   },
 }));
 

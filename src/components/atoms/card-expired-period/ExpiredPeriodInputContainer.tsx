@@ -1,14 +1,9 @@
-import React from "react";
-import { useAppDispatch, useAppState } from "../../../hooks/hooks";
-import { createAction } from "../../Provider";
-import { ActionType } from "../../../types";
-import {
-  isNum,
-  removeWhiteSpaces,
-  removeSlash,
-  transformToMMYY,
-} from "../../../utils";
-import ExpiredPeriodInput from "./ExpiredPeriodInput";
+import React from 'react';
+import { useAppDispatch, useAppState } from '../../../hooks/hooks';
+import { createAction } from '../../Provider';
+import { ActionType } from '../../../types';
+import { isNum, removeWhiteSpaces, removeSlash, transformToMMYY } from '../../../utils';
+import ExpiredPeriodInput from './ExpiredPeriodInput';
 
 function ExpiredPeriodInputContainer() {
   const { expiredPeriod } = useAppState();
@@ -29,7 +24,7 @@ function ExpiredPeriodInputContainer() {
 
       // value의 길이가 2이고 value값이 0일 때 => 00누른경우
       if (value.length === 2 && Number(value) === 0) {
-        dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, "0"));
+        dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, '0'));
         return;
       }
 
@@ -46,35 +41,21 @@ function ExpiredPeriodInputContainer() {
         return;
       }
 
-      dispatch(
-        createAction(ActionType.INPUT_EXPIRED_PERIOD, expiredPeriod + lastChar)
-      );
+      dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, expiredPeriod + lastChar));
       return;
     }
 
     // 년도의 첫번째 숫자를 지울때 /도 같이 지워준다
     if (value.length === 5) {
-      dispatch(
-        createAction(ActionType.INPUT_EXPIRED_PERIOD, expiredPeriod.slice(0, 2))
-      );
+      dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, expiredPeriod.slice(0, 2)));
       return;
     }
 
     // 삭제할때
-    dispatch(
-      createAction(
-        ActionType.INPUT_EXPIRED_PERIOD,
-        expiredPeriod.slice(0, expiredPeriod.length - 1)
-      )
-    );
+    dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD, expiredPeriod.slice(0, expiredPeriod.length - 1)));
   };
 
-  return (
-    <ExpiredPeriodInput
-      onChange={handleChange}
-      value={transformToMMYY(expiredPeriod)}
-    />
-  );
+  return <ExpiredPeriodInput onChange={handleChange} value={transformToMMYY(expiredPeriod)} />;
 }
 
 export default ExpiredPeriodInputContainer;

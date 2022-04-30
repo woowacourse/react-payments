@@ -1,27 +1,21 @@
-import React, { useRef } from "react";
-import { transform } from "typescript";
-import { useAppDispatch, useAppState } from "../../../hooks/hooks";
-import { ActionType } from "../../../types";
-import {
-  insertAt,
-  isNum,
-  removeAt,
-  removeHyphens,
-  removeWhiteSpaces,
-  transformToCardFormat,
-} from "../../../utils";
-import { createAction } from "../../Provider";
-import CardNumberInput from "./CardNumberInput";
+import React, { useRef } from 'react';
+import { useAppDispatch, useAppState } from '../../../hooks/hooks';
+import { ActionType } from '../../../types';
+import { insertAt, isNum, removeAt, removeHyphens, removeWhiteSpaces, transformToCardFormat } from '../../../utils';
+import { createAction } from '../../Provider';
+import CardNumberInput from './CardNumberInput';
 
 function CardNumberInputContainer() {
   const { cardNumber } = useAppState();
   const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleCardNumberInput = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const input = event.target;
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) =>
+    !/[0-9]/.test(event.key) && event.preventDefault();
+  const handleCardNumberInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = inputRef.current;
+    if (!input) return;
+
     const { value, selectionStart } = input;
 
     if (selectionStart === null) return;
@@ -62,7 +56,7 @@ function CardNumberInputContainer() {
 
       // 오른쪽에 있는 녀석이 스페이스 바나 -이면 입력 불가능!
       const rightChar = value.charAt(cursor + 1);
-      if (rightChar === " " || rightChar === "-") return;
+      if (rightChar === ' ' || rightChar === '-') return;
 
       queueMicrotask(() => {
         let newCursor = selectionStart;
@@ -72,7 +66,7 @@ function CardNumberInputContainer() {
 
       // 입력된 값을 formatting해서 넣는다
       dispatch(createAction(ActionType.INPUT_CARDNUMBER, newNumber));
-      inputRef.current && (inputRef.current.value = transformToCardFormat(newNumber));
+      input.value = transformToCardFormat(newNumber);
       return;
     }
 
@@ -96,14 +90,14 @@ function CardNumberInputContainer() {
     });
 
     dispatch(createAction(ActionType.INPUT_CARDNUMBER, newCardNumber));
-    inputRef.current && (inputRef.current.value = transformToCardFormat(newCardNumber));
+    input.value = transformToCardFormat(newCardNumber);
   };
 
   return (
-    <CardNumberInput
-      onChange={handleCardNumberInput}
-      ref={inputRef}
-    />
+    <>
+      <CardNumberInput onChange={handleCardNumberInput} onKeyDown={handleKeyDown} ref={inputRef} />
+      <div>{cardNumber}</div>
+    </>
   );
 }
 

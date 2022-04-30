@@ -1,9 +1,9 @@
-import React from "react";
-import CVCInput from "./CVCInput";
-import { useAppDispatch, useAppState } from "../../../hooks/hooks";
-import { createAction } from "../../Provider";
-import { ActionType } from "../../../types";
-import { isNum } from "../../../utils";
+import React from 'react';
+import CVCInput from './CVCInput';
+import { useAppDispatch, useAppState } from '../../../hooks/hooks';
+import { createAction } from '../../Provider';
+import { ActionType } from '../../../types';
+import { isNum } from '../../../utils';
 
 function CVCInputContainer() {
   const { cvc } = useAppState();
@@ -17,7 +17,7 @@ function CVCInputContainer() {
 
     if (cvc.length < value.length) {
       if (!isNum(lastChar)) return;
-      dispatch({ type: ActionType.INPUT_CVC, payload: "hihi" });
+      dispatch({ type: ActionType.INPUT_CVC, payload: 'hihi' });
 
       dispatch(createAction(ActionType.INPUT_CVC, cvc + lastChar));
       return;
@@ -33,14 +33,7 @@ function CVCInputContainer() {
   const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     dispatch(createAction(ActionType.UPDATE_EDITING_CVC, false));
   };
-  return (
-    <CVCInput
-      onChange={handleChage}
-      value={cvc}
-      onFocus={onFocus}
-      onBlur={onBlur}
-    />
-  );
+  return <CVCInput onChange={handleChage} value={cvc} onFocus={onFocus} onBlur={onBlur} />;
 }
 
 export default CVCInputContainer;
