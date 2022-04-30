@@ -15,6 +15,28 @@ import {
   CardExpireDateInput,
 } from "./components";
 import { CARD_REGISTER_SUCCESS_MESSAGE, CARD_INFO_RULES } from "./constants.js";
+import useValidatedUpdate from "./useValidatedUpdate.jsx";
+import useArraySetState from "./useArraySetState.jsx";
+
+const trimStartZeroPad = (value) => {
+  return value.length > 1 && value.startsWith("0") ? value.slice(1) : value;
+};
+
+const validations = {
+  cardNumber: (value) => /^\d{0,4}$/.test(value),
+  expireDate: (value, order) => {
+    const parsedValue = trimStartZeroPad(value);
+
+    if (order === 0) {
+      return /^$|0|(^[1-9]$)|(^1?[0-2]$)/.test(parsedValue);
+    }
+
+    return /^\d{0,2}$/.test(parsedValue);
+  },
+  holderName: (value) => /^[a-z]{0,30}$/i.test(value),
+  securityCode: (value) => /^\d{0,3}$/.test(value),
+  password: (value) => /^\d{0,1}$/.test(value),
+};
 
 function App() {
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
@@ -24,77 +46,39 @@ function App() {
   const [password, setPassword] = useState(["", ""]);
   const [canProceed, setCanProceed] = useState(false);
 
-  const handleCardNumberUpdate = ({ target: { value } }, order) => {
-    if (
-      !Number.isInteger(Number(value)) ||
-      value.length > CARD_INFO_RULES.NUMBER_UNIT_LENGTH
-    )
-      return;
+  const setCardNumberArray = useArraySetState(setCardNumber);
+  const handleCardNumberUpdate = useValidatedUpdate(
+    validations["cardNumber"],
+    setCardNumberArray
+  );
 
-    setCardNumber((prevValue) => {
-      const newValue = [...prevValue];
-      newValue[order] = value;
-
-      return newValue;
-    });
-  };
-
-  const handleExpireDateUpdate = ({ target: { value } }, order) => {
-    const parsedValue =
-      value.startsWith("0") && value.length !== 1 ? value.slice(1) : value;
-
-    if (!/^\d{0,2}$/.test(parsedValue)) return;
-
-    if (
-      order === 0 &&
-      value !== "0" &&
-      value !== "" &&
-      (Number(parsedValue) > 12 || Number(parsedValue) < 1)
-    ) {
-      return;
+  const setExpireDateArray = useArraySetState(setExpireDate);
+  const padZeroOnSingleDigit = (value) =>
+    value.length === 1 && Number(value) !== 0 ? `0${value}` : value;
+  const handleExpireDateUpdate = useValidatedUpdate(
+    validations["expireDate"],
+    (value, order) => {
+      setExpireDateArray(padZeroOnSingleDigit(trimStartZeroPad(value)), order);
     }
+  );
 
-    setExpireDate((prevValue) => {
-      const newValue = [...prevValue];
-      newValue[order] =
-        parsedValue.length === 1 && Number(parsedValue) !== 0
-          ? `0${parsedValue}`
-          : parsedValue;
+  const handleHolderNameUpdate = useValidatedUpdate(
+    validations["holderName"],
+    (value) => {
+      setHolderName(value.toUpperCase());
+    }
+  );
 
-      return newValue;
-    });
-  };
+  const handleSecurityCodeUpdate = useValidatedUpdate(
+    validations["securityCode"],
+    setSecurityCode
+  );
 
-  const handleHolderNameUpdate = ({ target: { value } }) => {
-    if (
-      !/^[a-z]*$/i.test(value) ||
-      value.length > CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH
-    )
-      return;
-
-    setHolderName(value.toUpperCase());
-  };
-
-  const handleSecurityCodeUpdate = ({ target: { value } }) => {
-    if (
-      !Number.isInteger(Number(value)) ||
-      value.length > CARD_INFO_RULES.SECURITY_CODE_LENGTH
-    )
-      return;
-
-    setSecurityCode(value);
-  };
-
-  const handlePasswordUpdate = ({ target: { value } }, order) => {
-    if (!Number.isInteger(Number(value)) || value.length > 1) return;
-
-    setPassword((prevValue) => {
-      const newValue = [...prevValue];
-      newValue[order] = value;
-
-      return newValue;
-    });
-  };
+  const setPasswordArray = useArraySetState(setPassword);
+  const handlePasswordUpdate = useValidatedUpdate(
+    validations["password"],
+    setPasswordArray
+  );
 
   const handleCardInfoSubmit = () => {
     alert(CARD_REGISTER_SUCCESS_MESSAGE);

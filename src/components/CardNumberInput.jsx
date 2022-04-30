@@ -24,7 +24,7 @@ export default function CardNumberInput({ cardNumber, onChange }) {
         (_, index) => (
           <React.Fragment key={index}>
             <Input
-              type={index <= 1 ? "number" : "password"}
+              type={index <= 1 ? "text" : "password"}
               value={cardNumber[index]}
               onChange={(e) => onChange(e, index)}
               placeholder={index <= 1 ? "1 2 3 4" : CREATE_MASKED_CHARACTERS(4)}
