@@ -17,14 +17,14 @@ function CVCInputContainer() {
 
     if (cvc.length < value.length) {
       if (!isNum(lastChar)) return;
-      dispatch({ type: ActionType.INPUT_CVC, payload: 'hihi' });
+      dispatch({ type: ActionType.INPUT_CVC, payload: "hihi" });
 
       dispatch(createAction(ActionType.INPUT_CVC, cvc + lastChar));
       return;
     }
 
     dispatch(createAction(ActionType.INPUT_CVC, cvc.slice(0, cvc.length - 1)));
-  }
+  };
 
   const onFocus = (event: React.FocusEvent<HTMLInputElement>) => {
     dispatch(createAction(ActionType.UPDATE_EDITING_CVC, true));
@@ -32,8 +32,15 @@ function CVCInputContainer() {
 
   const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     dispatch(createAction(ActionType.UPDATE_EDITING_CVC, false));
-  }
-  return <CVCInput onChange={handleChage} value={cvc} onFocus={onFocus} onBlur={onBlur} />
+  };
+  return (
+    <CVCInput
+      onChange={handleChage}
+      value={cvc}
+      onFocus={onFocus}
+      onBlur={onBlur}
+    />
+  );
 }
 
 export default CVCInputContainer;

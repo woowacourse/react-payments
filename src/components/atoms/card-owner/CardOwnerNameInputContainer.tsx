@@ -22,24 +22,24 @@ function CardOwnerNameInputContainer() {
       if (value.length > MAX_NAME_LENGTH) return;
 
       const insertedChar = value[selectionStart - 1];
-      // space인데 
-      if (insertedChar === ' ') {
+      // space인데
+      if (insertedChar === " ") {
         // 처음부터 space는 허용 안되지요
         if (value.length === 1) return;
 
         // 왼쪽에 스페이스바가 있으면 그것도 안되지요
-        if (value[selectionStart - 2] === ' ') return;
+        if (value[selectionStart - 2] === " ") return;
 
         // 오른쪽에 스페이스바가 있으면 그것도 안되지요
-        if (value[selectionStart] === ' ') return;
+        if (value[selectionStart] === " ") return;
       }
 
       // 영어하고 space만 입력 가능하다
-      if (!isEnglish(insertedChar) && insertedChar !== ' ') return;
+      if (!isEnglish(insertedChar) && insertedChar !== " ") return;
 
       // 대문자로 변환을 해준다
       const upperName = value.toUpperCase();
-      
+
       queueMicrotask(() => {
         input.setSelectionRange(selectionStart, selectionStart);
       });
@@ -53,11 +53,9 @@ function CardOwnerNameInputContainer() {
       input.setSelectionRange(selectionStart, selectionStart);
     });
     dispatch(createAction(ActionType.INPUT_NAME, value.toUpperCase()));
-  }
+  };
 
-  return (
-    <CardOwnerNameInput onChange={handleChage} value={name} />
-  )
-};
+  return <CardOwnerNameInput onChange={handleChage} value={name} />;
+}
 
 export default CardOwnerNameInputContainer;

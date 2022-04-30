@@ -1,7 +1,14 @@
 import React from "react";
 import { useAppDispatch, useAppState } from "../../../hooks/hooks";
 import { ActionType } from "../../../types";
-import { insertAt, isNum, removeAt, removeHyphens, removeWhiteSpaces, transformToCardFormat } from "../../../utils";
+import {
+  insertAt,
+  isNum,
+  removeAt,
+  removeHyphens,
+  removeWhiteSpaces,
+  transformToCardFormat,
+} from "../../../utils";
 import { createAction } from "../../Provider";
 import CardNumberInput from "./CardNumberInput";
 
@@ -9,13 +16,15 @@ function CardNumberInputContainer() {
   const { cardNumber } = useAppState();
   const dispatch = useAppDispatch();
 
-  const handleCardNumberInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCardNumberInput = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const input = event.target;
     const { value, selectionStart } = input;
 
     // 싹다 지운 경우, 진짜 싹다 지운다
-    if (value === '') {
-      dispatch(createAction(ActionType.INPUT_CARDNUMBER, ''));
+    if (value === "") {
+      dispatch(createAction(ActionType.INPUT_CARDNUMBER, ""));
       return;
     }
 
@@ -39,7 +48,7 @@ function CardNumberInputContainer() {
 
       const isLastPosition = value.length - 1 === cursor;
       let newNumber = cardNumber + insertedChar; // 마지막에 입력한거라고 우선 가정한다
-      
+
       if (!isLastPosition) {
         if (cursor < 4) {
           newNumber = insertAt(cardNumber, cursor, insertedChar);
@@ -57,7 +66,7 @@ function CardNumberInputContainer() {
 
       // 오른쪽에 있는 녀석이 스페이스 바나 -이면 입력 불가능!
       const rightChar = value.charAt(cursor + 1);
-      if (rightChar === ' ' || rightChar === '-') return;
+      if (rightChar === " " || rightChar === "-") return;
 
       queueMicrotask(() => {
         let newCursor = selectionStart;
@@ -90,10 +99,14 @@ function CardNumberInputContainer() {
     });
 
     dispatch(createAction(ActionType.INPUT_CARDNUMBER, newCardNumber));
-    return;
-  }
+  };
 
-  return <CardNumberInput onChange={handleCardNumberInput} value={transformToCardFormat(cardNumber)} />
+  return (
+    <CardNumberInput
+      onChange={handleCardNumberInput}
+      value={transformToCardFormat(cardNumber)}
+    />
+  );
 }
 
 export default CardNumberInputContainer;

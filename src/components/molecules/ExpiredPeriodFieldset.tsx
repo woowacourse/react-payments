@@ -3,7 +3,6 @@ import ExpiredPeriodInputContainer from "../atoms/card-expired-period/ExpiredPer
 import { Body, Fieldset, Head } from "../templates/Fieldset";
 
 function ExpiredPeriodFieldset() {
-
   return (
     <Fieldset>
       <Head>
@@ -13,7 +12,7 @@ function ExpiredPeriodFieldset() {
         <ExpiredPeriodInputContainer />
       </Body>
     </Fieldset>
-  )
+  );
 }
 
 export default ExpiredPeriodFieldset;

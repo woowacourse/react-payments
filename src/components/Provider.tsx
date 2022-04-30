@@ -2,30 +2,30 @@ import React, { createContext, Dispatch, useReducer } from "react";
 import { ActionType } from "../types";
 
 export type State = {
-  cardNumber: string,
-  name: string,
-  expiredPeriod: string,
-  cvc: string,
-  password: Array<string>,
-  isEditingCVC: boolean,
-}
+  cardNumber: string;
+  name: string;
+  expiredPeriod: string;
+  cvc: string;
+  password: Array<string>;
+  isEditingCVC: boolean;
+};
 
-type Action = 
-  | { type: ActionType.INPUT_CARDNUMBER , payload: any }
-  | { type: ActionType.INPUT_NAME, payload: any }
-  | { type: ActionType.INPUT_EXPIRED_PERIOD, payload: any }
-  | { type: ActionType.INPUT_CVC, payload: any }
-  | { type: ActionType.INPUT_PASSWORD, payload: any }
-  | { type: ActionType.UPDATE_EDITING_CVC, payload: any };;
+type Action =
+  | { type: ActionType.INPUT_CARDNUMBER; payload: any }
+  | { type: ActionType.INPUT_NAME; payload: any }
+  | { type: ActionType.INPUT_EXPIRED_PERIOD; payload: any }
+  | { type: ActionType.INPUT_CVC; payload: any }
+  | { type: ActionType.INPUT_PASSWORD; payload: any }
+  | { type: ActionType.UPDATE_EDITING_CVC; payload: any };
 
 export type AppDispatch = Dispatch<Action>;
 
 const initalState: State = {
-  cardNumber: '',
-  name: '',
-  expiredPeriod: '',
-  cvc: '',
-  password: ['', ''],
+  cardNumber: "",
+  name: "",
+  expiredPeriod: "",
+  cvc: "",
+  password: ["", ""],
   isEditingCVC: false,
 };
 
@@ -35,8 +35,9 @@ export const AppDispatchContext = createContext<AppDispatch>(() => null);
 
 export function createAction(type: ActionType, payload: any): Action {
   return {
-    type, payload
-  }
+    type,
+    payload,
+  };
 }
 
 function reducer(state: State, action: Action): State {
@@ -44,34 +45,34 @@ function reducer(state: State, action: Action): State {
     case ActionType.INPUT_CARDNUMBER:
       return {
         ...state,
-        cardNumber: action.payload
+        cardNumber: action.payload,
       };
     case ActionType.INPUT_NAME:
       return {
         ...state,
-        name: action.payload
-      }
+        name: action.payload,
+      };
     case ActionType.INPUT_EXPIRED_PERIOD:
       return {
         ...state,
-        expiredPeriod: action.payload
-      }
+        expiredPeriod: action.payload,
+      };
     case ActionType.INPUT_CVC:
       return {
         ...state,
-        cvc: action.payload
-      }
+        cvc: action.payload,
+      };
     case ActionType.INPUT_PASSWORD:
       return {
         ...state,
-        password: [...action.payload]
-      }
+        password: [...action.payload],
+      };
     case ActionType.UPDATE_EDITING_CVC:
       return {
         ...state,
-        isEditingCVC: action.payload
-      }
-  }  
+        isEditingCVC: action.payload,
+      };
+  }
 }
 
 function AppProvider({ children }: { children: React.ReactNode }) {
@@ -80,7 +81,7 @@ function AppProvider({ children }: { children: React.ReactNode }) {
   return (
     <AppStateContext.Provider value={state}>
       <AppDispatchContext.Provider value={dispatch}>
-        { children }
+        {children}
       </AppDispatchContext.Provider>
     </AppStateContext.Provider>
   );

@@ -11,20 +11,20 @@ import ConfirmButtonContainer from "./components/atoms/confirm-button/ConfirmBut
 import CardContainer from "./components/atoms/card/CardContainer";
 
 const style = css({
-  width: '375px',
-  margin: '0 auto',
-  padding: '22px 28px 16px 28px',
-  position: 'relative',
+  width: "375px",
+  margin: "0 auto",
+  padding: "22px 28px 16px 28px",
+  position: "relative",
 });
 
 const cardWrapper = css({
-  display: 'flex',
-  justifyContent: 'center',
-})
+  display: "flex",
+  justifyContent: "center",
+});
 
 function App() {
   return (
-    <div id="card-form" css={style}> 
+    <div id="card-form" css={style}>
       <Navigation />
       <AppProvider>
         <div css={cardWrapper}>

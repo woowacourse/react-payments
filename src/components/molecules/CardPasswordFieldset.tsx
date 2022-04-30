@@ -3,7 +3,7 @@ import CardPasswordInputContainerList from "../atoms/card-password/CardPasswordI
 import { Body, Fieldset, Head } from "../templates/Fieldset";
 
 function CardPasswordFieldset() {
-  return(
+  return (
     <Fieldset>
       <Head>
         <label>카드 비밀번호</label>
@@ -12,7 +12,7 @@ function CardPasswordFieldset() {
         <CardPasswordInputContainerList />
       </Body>
     </Fieldset>
-  )
+  );
 }
 
 export default CardPasswordFieldset;
