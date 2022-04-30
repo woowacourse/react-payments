@@ -84,7 +84,7 @@ const useCardInfoInput = () => {
     }
   };
 
-  const onBlurUserName = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+  const onBlurUserName = () => {
     setCardInfo(prevCardInfo => ({ ...prevCardInfo, userName: prevCardInfo.userName.trim() }));
   };
 

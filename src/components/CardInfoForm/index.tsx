@@ -12,7 +12,7 @@ interface CardInfoFormProps {
   onChangeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeExpirationDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangeUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlurUserName: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
+  onBlurUserName: () => void;
   onChangeSecurityCode: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
   resetCardInfo: () => void;

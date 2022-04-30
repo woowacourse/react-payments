@@ -7,7 +7,7 @@ import InputContainer from "../common/InputContainer";
 interface CardUserNameProps {
   userName: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
+  onBlur: () => void;
   isValid: boolean;
 }
 export default function CardUserName({ userName, onChange, onBlur, isValid }: CardUserNameProps) {
