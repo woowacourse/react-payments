@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -21,8 +21,9 @@ const Input = styled.input(() => ({
   },
 }));
 
-function ExpiredPeriodInput({ onChange, value }: Props) {
-  return <Input type="text" onChange={onChange} value={value} placeholder="MM / YY" />;
-}
+const ExpiredPeriodInput = forwardRef<HTMLInputElement, Props>(({ onChange, value }, ref) => {
+  return <Input type="text" onChange={onChange} ref={ref} value={value} placeholder="MM / YY" />;
+});
+ExpiredPeriodInput.displayName = 'ExpiredPeriodInput';
 
 export default ExpiredPeriodInput;
