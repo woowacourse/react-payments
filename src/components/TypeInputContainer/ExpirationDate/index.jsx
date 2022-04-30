@@ -31,7 +31,7 @@ function ExpirationDateInput({
       {Object.keys(state).map((stateKey, idx) => (
         <Input
           key={uid(stateKey)}
-          id={idx === 0 && `${stateName}`}
+          id={idx === 0 ? `${stateName}` : null}
           type="text"
           placeholder={stateKey === 'month' ? 'MM' : 'YY'}
           value={state[stateKey]}

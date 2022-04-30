@@ -27,7 +27,7 @@ function CardNumberInput({
       {Object.keys(state).map((stateKey, idx) => (
         <Input
           key={uid(stateKey)}
-          id={idx === 0 && `${stateName}`}
+          id={idx === 0 ? `${stateName}` : null}
           type={stateKey === 'first' || stateKey === 'second' ? 'text' : 'password'}
           value={state[stateKey]}
           onChange={e => onChangeCardNumber(e, stateKey)}

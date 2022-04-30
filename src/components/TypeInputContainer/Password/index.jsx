@@ -31,7 +31,7 @@ function PasswordInput({
       {Object.keys(state).map((stateKey, idx) => (
         <Input
           key={uid(stateKey)}
-          id={idx === 0 && `${stateName}`}
+          id={idx === 0 ? `${stateName}` : null}
           type="password"
           value={state[stateKey]}
           onChange={e => onChangePassword(e, stateKey)}
