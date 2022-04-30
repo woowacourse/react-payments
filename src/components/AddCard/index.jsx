@@ -8,7 +8,7 @@ function AddCard() {
 
   return (
     <div className="app">
-      <h2 className="page-title"> 카드 추가 </h2>
+      <h1 className="page-title"> 카드 추가 </h1>
       <Card cardInformation={cardInput} />
       <InputForm cardInput={cardInput} cardInputDispatch={cardInputDispatch} />
     </div>
