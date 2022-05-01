@@ -1,5 +1,5 @@
-import React, { createContext, Dispatch, useReducer } from "react";
-import { ActionType } from "../types";
+import React, { createContext, Dispatch, useReducer } from 'react';
+import { ActionType } from '../types';
 
 export type State = {
   cardNumber: string;
@@ -21,11 +21,11 @@ type Action =
 export type AppDispatch = Dispatch<Action>;
 
 const initalState: State = {
-  cardNumber: "",
-  name: "",
-  expiredPeriod: "",
-  cvc: "",
-  password: ["", ""],
+  cardNumber: '',
+  name: '',
+  expiredPeriod: '',
+  cvc: '',
+  password: ['', ''],
   isEditingCVC: false,
 };
 
@@ -72,6 +72,9 @@ function reducer(state: State, action: Action): State {
         ...state,
         isEditingCVC: action.payload,
       };
+    default: {
+      return { ...state };
+    }
   }
 }
 
@@ -80,9 +83,7 @@ function AppProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AppStateContext.Provider value={state}>
-      <AppDispatchContext.Provider value={dispatch}>
-        {children}
-      </AppDispatchContext.Provider>
+      <AppDispatchContext.Provider value={dispatch}>{children}</AppDispatchContext.Provider>
     </AppStateContext.Provider>
   );
 }

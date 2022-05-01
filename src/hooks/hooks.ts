@@ -1,10 +1,5 @@
-import { useContext } from "react";
-import {
-  AppDispatch,
-  AppDispatchContext,
-  AppStateContext,
-  State,
-} from "../components/Provider";
+import { useContext } from 'react';
+import { AppDispatch, AppDispatchContext, AppStateContext, State } from '../components/Provider';
 
 export function useAppState(): State {
   const state = useContext(AppStateContext);
