@@ -61,7 +61,7 @@ const cardFormSchema = {
   },
   owner: {
     alias: '카드 소유자 이름',
-    type: /^((?:[A-Za-z]+ ?){1,3})$/,
+    type: /^((?:[A-Za-z]+ ?){0,3})$/,
     initialValue: '',
     maxLength: 30,
   },
