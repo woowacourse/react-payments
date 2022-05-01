@@ -1,10 +1,11 @@
+import Layout from 'components/Layout';
 import CardAdd from './pages/CardAdd';
 
 function App() {
   return (
-    <div className="App">
+    <Layout>
       <CardAdd />
-    </div>
+    </Layout>
   );
 }
 
