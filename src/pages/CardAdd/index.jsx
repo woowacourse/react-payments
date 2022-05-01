@@ -69,7 +69,7 @@ function CardAdd() {
     <>
       <Header>카드 추가</Header>
       <Card
-        companyName="티거 카드 🐯"
+        companyName="티거 카드"
         cardNumber={cardNumber}
         userName={userName}
         expireMonth={expireMonth}

@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 
+import { Container, CardContainer, ComponyName, UserName, ExpireDate, CardNumber } from './styles';
+
 const cardNumberFormatter = (cardNumber) => {
   const newCardNumber = [...cardNumber].map((unit) => (unit === '' ? '0000' : unit));
   const maskingIndexes = [2, 3];
@@ -15,24 +17,15 @@ const cardNumberFormatter = (cardNumber) => {
 
 function Card({ companyName, cardNumber, userName, expireMonth, expireYear, isComplete }) {
   return (
-    <div className="card-box">
-      <div className={`small-card${isComplete ? '' : ' empty'}`}>
-        <div className="card-top">
-          <span className="card-text">{companyName}</span>
-        </div>
-        <div className="card-bottom">
-          <div className="card-bottom__number">
-            <span className="card-text">{cardNumberFormatter(cardNumber)}</span>
-          </div>
-          <div className="card-bottom__info">
-            <span className="card-text user-name">{userName}</span>
-            <span className="card-text expire-date">
-              {expireMonth && expireYear && `${expireMonth} / ${expireYear}`}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Container>
+      <CardContainer>
+        <ComponyName>{companyName}</ComponyName>
+        <UserName>{userName}</UserName>
+
+        <ExpireDate>{expireMonth && expireYear && `${expireMonth} / ${expireYear}`}</ExpireDate>
+        <CardNumber>{cardNumberFormatter(cardNumber)}</CardNumber>
+      </CardContainer>
+    </Container>
   );
 }
 
