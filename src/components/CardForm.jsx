@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import EasyForm from './common/EasyForm';
+import Form from './common/Form';
 import CardPreview from './common/CardPreview';
 import ToolTip from './common/ToolTip';
 
@@ -255,7 +255,7 @@ const addCard = (values) => {
 
 const CardForm = () => {
   return (
-    <EasyForm
+    <Form
       formSchema={cardFormSchema}
       onSubmit={(values, setSubmitting) => {
         setSubmitting(true);
@@ -403,7 +403,7 @@ const CardForm = () => {
           </StyledCardForm>
         </>
       )}
-    </EasyForm>
+    </Form>
   );
 };
 

@@ -3,7 +3,7 @@ import { isBackspace } from '../../utils/commons';
 import useObjectRef from '../../hooks/useObjectRef';
 import useFormSchema from '../../hooks/useFormSchema';
 
-const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
+const Form = ({ children, formSchema, onSubmit, onSubmitError }) => {
   const {
     values,
     setValues,
@@ -121,4 +121,4 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
   );
 };
 
-export default EasyForm;
+export default Form;
