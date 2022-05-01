@@ -11,6 +11,7 @@ function CardSecurityField({ securityCode, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({
     state: securityCode,
     validate: validateSecurityCode,
+    isValid: !securityCode,
   });
 
   return (

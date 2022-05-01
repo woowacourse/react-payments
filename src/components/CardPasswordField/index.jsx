@@ -11,6 +11,7 @@ function CardPasswordField({ cardPassword, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({
     state: cardPassword,
     validate: validateCardPassword,
+    isValid: !cardPassword,
   });
 
   return (
