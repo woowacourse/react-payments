@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import type { Validators } from "../lib/validation";
+import { cardInfoValidator } from "../lib/validation";
 import type { CardInfo } from "../types/cardInfo";
 
 export type CardInfoValidation = {
@@ -10,7 +10,7 @@ export type CardInfoValidation = {
   isPasswordValid: boolean;
 };
 
-const useCardInfoValidation = (cardInfo: CardInfo, validators: Validators) => {
+const useCardInfoValidation = (cardInfo: CardInfo) => {
   const [cardInfoValidation, setCardInfoValidation] = useState<CardInfoValidation>({
     isCardNumbersValid: false,
     isExpirationDateValid: false,
@@ -32,20 +32,24 @@ const useCardInfoValidation = (cardInfo: CardInfo, validators: Validators) => {
   };
 
   useEffect(() => {
-    handleChangeValidation("isCardNumbersValid", cardNumbers, validators["cardNumbers"]);
-  }, [cardNumbers, validators]);
+    handleChangeValidation("isCardNumbersValid", cardNumbers, cardInfoValidator["cardNumbers"]);
+  }, [cardNumbers]);
 
   useEffect(() => {
-    handleChangeValidation("isExpirationDateValid", expirationDate, validators["expirationDate"]);
-  }, [expirationDate, validators]);
+    handleChangeValidation(
+      "isExpirationDateValid",
+      expirationDate,
+      cardInfoValidator["expirationDate"]
+    );
+  }, [expirationDate]);
 
   useEffect(() => {
-    handleChangeValidation("isSecurityCodeValid", securityCode, validators["securityCode"]);
-  }, [securityCode, validators]);
+    handleChangeValidation("isSecurityCodeValid", securityCode, cardInfoValidator["securityCode"]);
+  }, [securityCode]);
 
   useEffect(() => {
-    handleChangeValidation("isPasswordValid", password, validators["password"]);
-  }, [password, validators]);
+    handleChangeValidation("isPasswordValid", password, cardInfoValidator["password"]);
+  }, [password]);
 
   return cardInfoValidation;
 };

@@ -20,7 +20,7 @@ function App() {
     onChangePassword,
   } = useCardInfoInput();
 
-  const cardInfoValidation = useCardInfoValidation(cardInfo, cardInfoValidator);
+  const cardInfoValidation = useCardInfoValidation(cardInfo);
 
   return (
     <div className="App">
