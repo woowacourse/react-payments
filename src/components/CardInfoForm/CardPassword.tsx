@@ -22,7 +22,7 @@ export default function CardPassword({ password, onChange, isValid }: CardPasswo
         maxLength={1}
         name="password"
         data-index={0}
-        classes="password-input"
+        className="password-input"
         formSelector="#card-info-form"
       />
       <Input
@@ -33,7 +33,7 @@ export default function CardPassword({ password, onChange, isValid }: CardPasswo
         maxLength={1}
         name="password"
         data-index={1}
-        classes="password-input"
+        className="password-input"
         formSelector="#card-info-form"
       />
       <input

@@ -18,7 +18,6 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" 
   size?: "tiny" | "small" | "medium" | "large" | "full";
   align?: "right" | "left" | "center";
   maxLength?: number;
-  classes?: string;
   formSelector?: "#card-info-form";
 }
 
@@ -26,7 +25,7 @@ export default function Input({
   size,
   maxLength,
   onChange,
-  classes,
+  className,
   align,
   formSelector,
   ...props
@@ -72,7 +71,7 @@ export default function Input({
 
   return (
     <input
-      className={`input-basic ${classes} ${sizeTag[size]} ${alignTag[align]}`}
+      className={`input-basic ${className} ${sizeTag[size]} ${alignTag[align]}`}
       onChange={handleChange}
       {...props}
     />
