@@ -17,7 +17,17 @@ const Container = styled.div`
   ${({ isError }) => isError === true && CONTAINER_STYLES.PROPS_ERROR_MESSAGE}
 `;
 
-const InputTitle = styled.span``;
+const InputTitle = styled.span`
+  display: flex;
+  align-items: center;
+
+  font-size: 0.75rem;
+  line-height: 0.875rem;
+
+  margin-bottom: 0.25rem;
+
+  color: ${COLORS.dorado};
+`;
 
 const InputContainer = styled.div`
   position: relative;
