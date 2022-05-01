@@ -19,12 +19,12 @@ function CardPasswordInputContainerList() {
   }, [cardNumber, expiredPeriod, name, cvc, password]);
 
   return (
-    <>
+    <div className="d-flex">
       <CardPasswordInputContainer position={0} ref={inputRef1} />
       <CardPasswordInputContainer position={1} ref={inputRef2} />
       <CardPasswordInputContainer position={2} disabled />
       <CardPasswordInputContainer position={3} disabled />
-    </>
+    </div>
   );
 }
 
