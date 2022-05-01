@@ -14,16 +14,7 @@ module.exports = {
       {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
-        use: [
-          // JS to older JS with polyfills
-          {
-            loader: "babel-loader",
-          },
-          // TS to JS
-          {
-            loader: "ts-loader",
-          },
-        ]
+        use: ["babel-loader"],
       },
       {
         test: /\.(scss)$/,
