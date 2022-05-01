@@ -15,8 +15,12 @@ export default function Card({ cardInfo, onChangeCardType }: CardProps) {
 
   return (
     <>
-      <div className="card-box">
-        <div className="empty-card" style={{ backgroundColor: cardType.color }} onClick={openModal}>
+      <div className="card-box flex-center">
+        <div
+          className="empty-card flex-column-center"
+          style={{ backgroundColor: cardType.color }}
+          onClick={openModal}
+        >
           <div className="card-top">
             <span className="card-text">{cardType.name}</span>
             <span className="card-text">
@@ -27,7 +31,7 @@ export default function Card({ cardInfo, onChangeCardType }: CardProps) {
           <div className="card-middle">
             <div className="small-card__chip"></div>
           </div>
-          <div className="card-bottom">
+          <div className="card-bottom flex-column-horizontal-center">
             <div className="card-text card-numbers-text">
               {cardNumbers.map((cardNumber, index) => (
                 <span className="card-number" key={index}>

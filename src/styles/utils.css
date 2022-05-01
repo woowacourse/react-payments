@@ -4,10 +4,23 @@
   align-items: center;
 }
 
+.flex-center-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .flex-column-center {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.flex-column-horizontal-center {
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 

@@ -37,10 +37,10 @@ export default function CardSelectModal({
 
   return (
     <Modal position="bottom" closeModal={closeModal}>
-      <div className="modal flex-center">
+      <div className="modal flex-center-wrap">
         {cardType.map(({ name, color }) => (
           <div
-            className="modal-item-container"
+            className="modal-item-container flex-column-center"
             key={name + color}
             onClick={handleClickCardType(name, color)}
           >
