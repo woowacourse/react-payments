@@ -9,10 +9,12 @@
       }
     ],
     "@babel/preset-react",
-    "@babel/preset-typescript"
+    "@babel/preset-typescript",
+    "@emotion/babel-preset-css-prop"
   ],
   "plugins": [
     "@babel/proposal-class-properties",
-    "@babel/proposal-object-rest-spread"
+    "@babel/proposal-object-rest-spread",
+    ["@babel/plugin-proposal-pipeline-operator", { "topicToken": "^^", "proposal": "hack" }]
   ]
 }
