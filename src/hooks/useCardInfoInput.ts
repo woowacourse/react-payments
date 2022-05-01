@@ -46,26 +46,6 @@ const useCardInfoInput = () => {
     },
   });
 
-  const handleChangeValidation = <T>(
-    key: keyof CardInfoValidation,
-    value: T,
-    validator: (value: T) => boolean
-  ) => {
-    try {
-      const isValid = validator(value);
-
-      setCardInfoValidation(prev => ({
-        ...prev,
-        [key]: { ...prev[key], isValid, errorMsg: "" },
-      }));
-    } catch (error) {
-      setCardInfoValidation(prev => ({
-        ...prev,
-        [key]: { ...prev[key], isValid: false, errorMsg: error.message },
-      }));
-    }
-  };
-
   const resetCardInfo = () => {
     setCardInfo(initialCardInfo);
   };
@@ -100,10 +80,6 @@ const useCardInfoInput = () => {
     }
   };
 
-  useEffect(() => {
-    handleChangeValidation("cardNumbers", cardInfo.cardNumbers, cardInfoValidator["cardNumbers"]);
-  }, [cardInfo.cardNumbers]);
-
   const onChangeExpirationDate: InputChangeFunction = e => {
     const {
       value,
@@ -125,14 +101,6 @@ const useCardInfoInput = () => {
       });
     }
   };
-
-  useEffect(() => {
-    handleChangeValidation(
-      "expirationDate",
-      cardInfo.expirationDate,
-      cardInfoValidator["expirationDate"]
-    );
-  }, [cardInfo.expirationDate]);
 
   const onChangeUserName: InputChangeFunction = e => {
     const value = e.target.value;
@@ -163,14 +131,6 @@ const useCardInfoInput = () => {
     }
   };
 
-  useEffect(() => {
-    handleChangeValidation(
-      "securityCode",
-      cardInfo.securityCode,
-      cardInfoValidator["securityCode"]
-    );
-  }, [cardInfo.securityCode]);
-
   const onChangePassword: InputChangeFunction = e => {
     const {
       value,
@@ -190,6 +150,47 @@ const useCardInfoInput = () => {
       });
     }
   };
+
+  // Validation
+  const handleChangeValidation = <T>(
+    key: keyof CardInfoValidation,
+    value: T,
+    validator: (value: T) => boolean
+  ) => {
+    try {
+      const isValid = validator(value);
+
+      setCardInfoValidation(prev => ({
+        ...prev,
+        [key]: { ...prev[key], isValid, errorMsg: "" },
+      }));
+    } catch (error) {
+      setCardInfoValidation(prev => ({
+        ...prev,
+        [key]: { ...prev[key], isValid: false, errorMsg: error.message },
+      }));
+    }
+  };
+
+  useEffect(() => {
+    handleChangeValidation("cardNumbers", cardInfo.cardNumbers, cardInfoValidator["cardNumbers"]);
+  }, [cardInfo.cardNumbers]);
+
+  useEffect(() => {
+    handleChangeValidation(
+      "expirationDate",
+      cardInfo.expirationDate,
+      cardInfoValidator["expirationDate"]
+    );
+  }, [cardInfo.expirationDate]);
+
+  useEffect(() => {
+    handleChangeValidation(
+      "securityCode",
+      cardInfo.securityCode,
+      cardInfoValidator["securityCode"]
+    );
+  }, [cardInfo.securityCode]);
 
   useEffect(() => {
     handleChangeValidation("password", cardInfo.password, cardInfoValidator["password"]);
