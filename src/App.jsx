@@ -39,20 +39,19 @@ function App() {
     });
   };
 
+  const isValidExpireDate = (value, order) => {
+    if (order === 0) {
+      return /^$|0|(^[1-9]$)|(^1?[0-2]$)/.test(value);
+    }
+
+    return /^\d{0,2}$/.test(value);
+  };
+
   const handleExpireDateUpdate = ({ target: { value } }, order) => {
     const parsedValue =
       value.startsWith("0") && value.length !== 1 ? value.slice(1) : value;
 
-    if (!/^\d{0,2}$/.test(parsedValue)) return;
-
-    if (
-      order === 0 &&
-      value !== "0" &&
-      value !== "" &&
-      (Number(parsedValue) > 12 || Number(parsedValue) < 1)
-    ) {
-      return;
-    }
+    if (!isValidExpireDate(parsedValue, order)) return;
 
     setExpireDate((prevValue) => {
       const newValue = [...prevValue];
