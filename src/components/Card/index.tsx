@@ -16,11 +16,7 @@ export default function Card({ cardInfo, onChangeCardType }: CardProps) {
   return (
     <>
       <div className="card-box">
-        <div
-          className="empty-card"
-          style={{ backgroundColor: `${cardType.color}` }}
-          onClick={openModal}
-        >
+        <div className="empty-card" style={{ backgroundColor: cardType.color }} onClick={openModal}>
           <div className="card-top">
             <span className="card-text">{cardType.name}</span>
             <span className="card-text">
