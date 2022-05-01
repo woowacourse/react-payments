@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 const StyledInput = styled.input`
@@ -17,26 +18,29 @@ const StyledInput = styled.input`
   }
 `;
 
-function Input({
-  value,
-  name,
-  defaultValue,
-  width,
-  height,
-  type,
-  maxLength,
-  isCenter,
-  placeholder,
-  onChange,
-  backgroundColor,
-  color,
-  isValid,
-  disabled,
-}) {
+const Input = forwardRef(function Input(props, ref) {
+  const {
+    value,
+    name,
+    defaultValue,
+    width,
+    height,
+    type,
+    maxLength,
+    isCenter,
+    placeholder,
+    onChange,
+    backgroundColor,
+    color,
+    isValid,
+    disabled,
+  } = props;
+
   return (
     <StyledInput
       value={value}
       name={name}
+      ref={ref}
       defaultValue={defaultValue}
       width={width}
       height={height}
@@ -51,7 +55,7 @@ function Input({
       disabled={disabled}
     />
   );
-}
+});
 
 Input.defaultProps = {
   isCenter: true,
