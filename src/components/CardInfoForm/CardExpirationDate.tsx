@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 import { validateExpirationDateLength } from "../../lib/validation";
-import type { ExpirationDate } from "../../types";
+import type { InputChangeFunction } from "../../types";
+import type { ExpirationDate } from "../../types/cardInfo";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
 interface CardExpirationDateProps {
   expirationDate: ExpirationDate;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: InputChangeFunction;
   isValid: boolean;
 }
 export default function CardExpirationDate({

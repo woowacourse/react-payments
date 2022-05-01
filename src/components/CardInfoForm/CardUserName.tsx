@@ -1,12 +1,13 @@
 import React from "react";
 
 import { MAX_USER_NAME_LENGTH } from "../../constant";
+import type { InputChangeFunction } from "../../types";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
 interface CardUserNameProps {
   userName: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: InputChangeFunction;
   onBlur: () => void;
   isValid: boolean;
 }

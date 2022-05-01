@@ -1,13 +1,14 @@
 import React from "react";
 
 import CVC from "../../assets/cvcImage.png";
+import type { InputChangeFunction } from "../../types";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 import UserGuide from "../common/UserGuide";
 
 interface CardSecurityProps {
   securityCode: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: InputChangeFunction;
   isValid: boolean;
 }
 

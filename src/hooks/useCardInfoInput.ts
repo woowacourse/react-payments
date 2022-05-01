@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import REGEXP from "../constant/regexp";
-import type { CardColor, CardInfo, CardName, CardNumbers, Password } from "../types";
+import { InputChangeFunction } from "../types";
+import type { CardColor, CardInfo, CardName, CardNumbers, Password } from "../types/cardInfo";
 
 const initialCardInfo: CardInfo = {
   cardType: { name: "검정 카드", color: "black" },
@@ -28,7 +29,7 @@ const useCardInfoInput = () => {
     }));
   };
 
-  const onChangeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeCardNumber: InputChangeFunction = e => {
     const {
       value,
       dataset: { index },
@@ -48,7 +49,7 @@ const useCardInfoInput = () => {
     }
   };
 
-  const onChangeExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeExpirationDate: InputChangeFunction = e => {
     const {
       value,
       dataset: { key },
@@ -70,7 +71,7 @@ const useCardInfoInput = () => {
     }
   };
 
-  const onChangeUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeUserName: InputChangeFunction = e => {
     const value = e.target.value;
 
     if (cardInfo.userName === "" && value === " ") {
@@ -88,7 +89,7 @@ const useCardInfoInput = () => {
     setCardInfo(prevCardInfo => ({ ...prevCardInfo, userName: prevCardInfo.userName.trim() }));
   };
 
-  const onChangeSecurityCode = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+  const onChangeSecurityCode: InputChangeFunction = e => {
     const value = e.target.value;
 
     if (value === "" || REGEXP.NUMBER.test(value)) {
@@ -99,7 +100,7 @@ const useCardInfoInput = () => {
     }
   };
 
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangePassword: InputChangeFunction = e => {
     const {
       value,
       dataset: { index },

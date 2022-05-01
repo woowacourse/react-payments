@@ -1,12 +1,13 @@
 import React from "react";
 
-import type { Password } from "../../types";
+import type { InputChangeFunction } from "../../types";
+import type { Password } from "../../types/cardInfo";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
 interface CardPasswordProps {
   password: Password;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: InputChangeFunction;
   isValid: boolean;
 }
 

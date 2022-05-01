@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import type { CardInfoValidation } from "../../hooks/useCardInfoValidation";
-import type { CardInfo } from "../../types";
+import type { InputChangeFunction } from "../../types";
+import type { CardInfo } from "../../types/cardInfo";
 import CardExpirationDate from "./CardExpirationDate";
 import CardNumber from "./CardNumber";
 import CardPassword from "./CardPassword";
@@ -9,12 +10,12 @@ import CardSecurityCode from "./CardSecurityCode";
 import CardUserName from "./CardUserName";
 interface CardInfoFormProps {
   cardInfo: CardInfo;
-  onChangeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeExpirationDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangeUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeCardNumber: InputChangeFunction;
+  onChangeExpirationDate: InputChangeFunction;
+  onChangeUserName: InputChangeFunction;
   onBlurUserName: () => void;
-  onChangeSecurityCode: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeSecurityCode: InputChangeFunction;
+  onChangePassword: InputChangeFunction;
   resetCardInfo: () => void;
   cardInfoValidation: CardInfoValidation;
 }

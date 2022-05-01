@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import type { Validators } from "../lib/validation";
-import type { CardInfo } from "../types";
+import type { CardInfo } from "../types/cardInfo";
 
 export type CardInfoValidation = {
   isCardNumbersValid: boolean;

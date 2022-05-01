@@ -1,6 +1,6 @@
 import React from "react";
 
-import type { CardColor, CardName, CardType } from "../../types";
+import type { CardColor, CardName, CardType } from "../../types/cardInfo";
 import Modal from "../common/Modal";
 
 const cardType: CardType[] = [

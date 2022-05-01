@@ -1,12 +1,13 @@
 import React from "react";
 
-import type { CardNumbers } from "../../types";
+import type { InputChangeFunction } from "../../types";
+import type { CardNumbers } from "../../types/cardInfo";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
 interface CardNumberProps {
   cardNumbers: CardNumbers;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: InputChangeFunction;
   isValid: boolean;
 }
 export default function CardNumber({ cardNumbers, onChange, isValid }: CardNumberProps) {
