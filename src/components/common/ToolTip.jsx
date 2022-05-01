@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const StyledToolTip = styled.div`
   position: relative;
+
+  &:hover > .tooltip {
+    display: block;
+  }
 
   .icon {
     border: 1px solid #bababa;
@@ -18,13 +22,13 @@ const StyledToolTip = styled.div`
     cursor: pointer;
   }
 
-  .tip {
+  .tooltip {
+    display: none;
     position: absolute;
     width: 300px;
     top: 50%;
     left: 50%;
     left: 32px;
-
     background-color: white;
     border-radius: 4px;
     box-shadow: 0px 0px 5.3px rgba(0, 0, 0, 0.028),
@@ -34,21 +38,10 @@ const StyledToolTip = styled.div`
 `;
 
 const ToolTip = ({ children, tip }) => {
-  const [show, setShow] = useState(false);
   return (
     <StyledToolTip>
-      <div
-        className="icon"
-        onMouseEnter={() => {
-          setShow(true);
-        }}
-        onMouseLeave={() => {
-          setShow(false);
-        }}
-      >
-        {children}
-      </div>
-      {show && <p className="tip">{tip}</p>}
+      <div className="icon">{children}</div>
+      <p className="tooltip">{tip}</p>
     </StyledToolTip>
   );
 };
