@@ -1,18 +1,15 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-import { CardExpireDateInputForm } from "../components/CardRegister/CardExpireDateInputForm";
-import { CardNumbersInputForm } from "../components/CardRegister/CardNumbersInputForm";
-import { CardOwnerInputForm } from "../components/CardRegister/CardOwnerInputForm";
-import { CardPasswordInputForm } from "../components/CardRegister/CardPasswordInputForm";
-import { CVCInputForm } from "../components/CardRegister/CVCInputForm";
-import { CardSelectModal } from "../components/CardRegister/CardSelectModal";
-import { CVCHelperModal } from "../components/CardRegister/CVCHelperModal";
-
-import { Button } from "../components/common/Button";
-import { Card } from "../components/common/Card";
-import { Modal } from "../components/common/Modal";
-import { PageTitle } from "../components/common/PageTitle";
+import { Button, Card, Modal, PageTitle } from "../components/common";
+import {
+  CardExpireDateInputForm,
+  CardNumbersInputForm,
+  CardOwnerInputForm,
+  CardPasswordInputForm,
+  CVCInputForm,
+  CardSelectModal,
+  CVCHelperModal,
+} from "../components/cardRegister";
 
 const CARD_TYPES = [
   { name: "포코", color: "gold" },
