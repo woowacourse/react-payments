@@ -10,17 +10,26 @@ module.exports = {
     path: join(__dirname, '/dist'),
   },
   module: {
-    rules: [{
-      test: /\.(ts|tsx)$/,
-      exclude: /node_modules/,
-      use: {
-        loader: "ts-loader"
+    rules: [
+      {
+        test: /\.(js|jsx|ts|tsx)$/,
+        exclude: /node_modules/,
+        use: [
+          // JS to older JS with polyfills
+          {
+            loader: "babel-loader",
+          },
+          // TS to JS
+          {
+            loader: "ts-loader",
+          },
+        ]
+      },
+      {
+        test: /\.(scss)$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
       }
-    },
-    {
-      test: /\.(scss)$/,
-      use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
-    }]
+    ]
   },
   plugins: [
     new MiniCssExtractPlugin({
