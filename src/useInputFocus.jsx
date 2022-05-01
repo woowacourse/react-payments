@@ -6,6 +6,7 @@ export default function useInputFocus(dataStateArray, dataUnitLength) {
   const inputRef = useRef([]);
 
   useUpdateEffect(() => {
+    console.log(1);
     if (
       focusInputIndex !== null &&
       inputRef.current[focusInputIndex].value.length === dataUnitLength
@@ -15,7 +16,7 @@ export default function useInputFocus(dataStateArray, dataUnitLength) {
       );
       inputRef.current[index]?.focus();
     }
-  });
+  }, dataStateArray);
 
   useEffect(() => {
     if (focusInputIndex !== null) inputRef.current[focusInputIndex].focus();
