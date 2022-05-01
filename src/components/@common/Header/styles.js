@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
 
 const Container = styled.h2`
+  display: flex;
+  align-items: center;
+
   font-weight: 500;
   font-size: 1.25rem;
   line-height: 1.375rem;
