@@ -5,13 +5,13 @@ import { CARD_INFO_TYPES } from '../../reducer/types';
 
 import { InputContainer, InputTitle, InputBasic } from '../common/styled';
 
-export const CardOwnerInputForm = ({ ownerName, handleOwnerNameInput }) => {
+export const CardOwnerInputForm = ({ ownerName, onOwnerNameInput }) => {
   const handleOwnerNameChange = (e) => {
     if (e.target.value.length > MAX_LENGTH.OWNER_NAME) {
       return;
     }
 
-    handleOwnerNameInput({
+    onOwnerNameInput({
       type: CARD_INFO_TYPES.SET_OWNER_NAME,
       payload: { ownerName: e.target.value },
     });

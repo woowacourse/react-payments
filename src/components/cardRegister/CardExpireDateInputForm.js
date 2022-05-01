@@ -11,8 +11,8 @@ import {
 
 export const CardExpireDateInputForm = ({
   expireDate,
-  handleExpireDateInput,
-  handleCardExpireCheck,
+  onExpireDateInput,
+  onCardExpireCheck,
 }) => {
   const handleMonthInput = (e) => {
     if (isNaN(e.nativeEvent.data) || parseInt(e.target.value) > 12) {
@@ -31,7 +31,7 @@ export const CardExpireDateInputForm = ({
       e.target.value = '00';
     }
 
-    handleExpireDateInput({
+    onExpireDateInput({
       type: CARD_INFO_TYPES.SET_EXPIRE_DATE,
       payload: { key: 'month', date: e.target.value },
     });
@@ -42,7 +42,7 @@ export const CardExpireDateInputForm = ({
       return;
     }
 
-    handleExpireDateInput({
+    onCardExpireCheck({
       type: CARD_INFO_TYPES.SET_EXPIRE_DATE,
       payload: { key: 'year', date: e.target.value },
     });

@@ -34,15 +34,15 @@ const ModalItemNameStyle = styled.span`
 export const CardSelectModal = ({
   cardTypes,
   closeModal,
-  handleCardType,
-  handleCardTypeCheck,
+  onCardType,
+  onCardTypeCheck,
 }) => {
   const handleCardTypeSelect = (cardType) => {
-    handleCardType({
+    onCardType({
       type: CARD_INFO_TYPES.SET_CARD_TYPE,
       payload: { cardType },
     });
-    handleCardTypeCheck(true);
+    onCardTypeCheck(true);
     closeModal();
   };
 

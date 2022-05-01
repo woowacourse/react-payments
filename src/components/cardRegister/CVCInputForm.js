@@ -14,8 +14,8 @@ import {
 
 export const CVCInputForm = ({
   CVC,
-  handleCVCInput,
-  handleCardCVCCheck,
+  onCVCInput,
+  onCardCVCCheck,
   openModal,
 }) => {
   const handleCVCChange = (e) => {
@@ -23,7 +23,7 @@ export const CVCInputForm = ({
       return;
     }
 
-    handleCVCInput({
+    onCVCInput({
       type: CARD_INFO_TYPES.SET_CVC,
       payload: { CVC: e.target.value },
     });
@@ -32,7 +32,7 @@ export const CVCInputForm = ({
   useEffect(() => {
     const isCVCCompleted = CVC.length === MAX_LENGTH.CVC;
 
-    handleCardCVCCheck(isCVCCompleted);
+    onCardCVCCheck(isCVCCompleted);
   }, [CVC]);
 
   return (

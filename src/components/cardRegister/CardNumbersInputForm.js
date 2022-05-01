@@ -20,8 +20,8 @@ const DEFAULT_CARD_NUMBERS_TYPE = [
 export const CardNumbersInputForm = ({
   cardType,
   cardNumbers,
-  handleCardNumbersInput,
-  handleCardNumberCheck,
+  onCardNumbersInput,
+  onCardNumberCheck,
   openModal,
 }) => {
   const handleNumberChange = (e, name, index) => {
@@ -32,7 +32,7 @@ export const CardNumbersInputForm = ({
       return;
     }
 
-    handleCardNumbersInput({
+    onCardNumbersInput({
       type: CARD_INFO_TYPES.SET_CARD_NUMBER,
       payload: { key: name, cardNumber: e.target.value },
     });
@@ -54,7 +54,7 @@ export const CardNumbersInputForm = ({
       (number) => number.length === MAX_LENGTH.EACH_CARD_NUMBER
     );
 
-    handleCardNumberCheck(isCardNumbersCompleted);
+    onCardNumberCheck(isCardNumbersCompleted);
 
     if (cardType.name === '' && isCardNumbersCompleted) {
       openModal();

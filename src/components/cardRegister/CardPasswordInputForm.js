@@ -12,15 +12,15 @@ import Dot from '../common/Dot';
 
 export const CardPasswordInputForm = ({
   password,
-  handlePasswordInput,
-  handleCardPasswordCheck,
+  onPasswordInput,
+  onCardPasswordCheck,
 }) => {
   const handlePasswordChange = (e, name) => {
     if (isNaN(e.nativeEvent.data) || e.target.value.length > 1) {
       return;
     }
 
-    handlePasswordInput({
+    onPasswordInput({
       type: CARD_INFO_TYPES.SET_PASSWORD,
       payload: { key: name, password: e.nativeEvent.data },
     });
@@ -31,7 +31,7 @@ export const CardPasswordInputForm = ({
       (number) => number
     );
 
-    handleCardPasswordCheck(isCompletePassword);
+    onCardPasswordCheck(isCompletePassword);
   }, [password]);
 
   return (

@@ -63,29 +63,29 @@ export const CardRegisterPage = () => {
       <CardNumbersInputForm
         cardType={cardInfo.cardType}
         cardNumbers={cardInfo.cardNumbers}
-        handleCardNumbersInput={dispatch}
-        handleCardNumberCheck={checkerFactory(COMPONENTS.NUMBERS)}
+        onCardNumbersInput={dispatch}
+        onCardNumberCheck={checkerFactory(COMPONENTS.NUMBERS)}
         openModal={() => setOpenedModalComponent(COMPONENTS.CARD_TYPE)}
       />
       <CardExpireDateInputForm
         expireDate={cardInfo.expireDate}
-        handleExpireDateInput={dispatch}
-        handleCardExpireCheck={checkerFactory(COMPONENTS.EXPIRE_DATE)}
+        onExpireDateInput={dispatch}
+        onCardExpireCheck={checkerFactory(COMPONENTS.EXPIRE_DATE)}
       />
       <CardOwnerInputForm
         ownerName={cardInfo.ownerName}
-        handleOwnerNameInput={dispatch}
+        onOwnerNameInput={dispatch}
       />
       <CVCInputForm
         CVC={cardInfo.CVC}
-        handleCVCInput={dispatch}
-        handleCardCVCCheck={checkerFactory(COMPONENTS.CVC)}
+        onCVCInput={dispatch}
+        onCardCVCCheck={checkerFactory(COMPONENTS.CVC)}
         openModal={() => setOpenedModalComponent(COMPONENTS.CVC)}
       />
       <CardPasswordInputForm
         password={cardInfo.password}
-        handlePasswordInput={dispatch}
-        handleCardPasswordCheck={checkerFactory(COMPONENTS.PASSWORD)}
+        onPasswordInput={dispatch}
+        onCardPasswordCheck={checkerFactory(COMPONENTS.PASSWORD)}
       />
       <ModalSelector
         selected={openedModalComponent}
@@ -97,8 +97,8 @@ export const CardRegisterPage = () => {
           name={COMPONENTS.CARD_TYPE}
           cardTypes={CARD_TYPES}
           closeModal={() => setOpenedModalComponent('')}
-          handleCardType={dispatch}
-          handleCardTypeCheck={checkerFactory(COMPONENTS.CARD_TYPE)}
+          onCardType={dispatch}
+          onCardTypeCheck={checkerFactory(COMPONENTS.CARD_TYPE)}
         />
         <CVCHelperModal name={COMPONENTS.CVC} />
       </ModalSelector>
