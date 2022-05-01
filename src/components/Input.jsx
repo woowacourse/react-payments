@@ -15,6 +15,7 @@ function Input({
   updateNameLength,
   updateCardForm,
   validators,
+  optional,
 }) {
   const checkValidation = (event, targetValue) => {
     if (validators.isNaN && Number.isNaN(+targetValue)) {
@@ -55,7 +56,7 @@ function Input({
       placeholder={placeholder}
       maxLength={length}
       minLength={minLength || length}
-      required
+      required={optional ?? true}
       onChange={handleChange}
     />
   );

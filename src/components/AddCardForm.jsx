@@ -116,6 +116,7 @@ function AddCardForm({ updateCard, addCard }) {
           name="ownerName"
           updateCardForm={updateCardForm}
           validators={{ isOverMaxLength }}
+          optional={false}
         />
       </div>
       <div className="input-container">
