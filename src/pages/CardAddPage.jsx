@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Head from '../components/Head';
 import Card from '../components/Card';
 import LabeledInput from '../components/LabeledInput';
-import InfoLabel from '../components/InfoLabel';
+import Tooltip from '../components/Tooltip';
 import SubmitButton from '../components/SubmitButton';
 import validator from '../validation';
 import Input from '../components/Input';
@@ -251,7 +251,7 @@ function CardAddPage() {
               label: '보안 코드(CVC/CVV)',
             }}
           />
-          <InfoLabel />
+          <Tooltip message={MESSAGE.TOOLTIP_SECURITY_NUMBER} />
         </FormRow>
         <FormRow alignItems="flex-end" gap={'4px'}>
           <LabeledInput

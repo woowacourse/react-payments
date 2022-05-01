@@ -5,4 +5,5 @@ export default {
   INVALID_OWNER_NAME: '소유자 이름은 영어로 입력해주세요.',
   INVALID_SECURITY_NUMBER: '보안 코드는 세 자리의 숫자로 입력해주세요.',
   INVALID_PASSWORD: '비밀 번호는 숫자로 입력해주세요.',
+  TOOLTIP_SECURITY_NUMBER: 'CVC 번호는 카드 뒷면의 서명란에 인쇄된 숫자 끝 3자리 번호입니다.',
 };
