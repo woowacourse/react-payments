@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 
+import Container from './styles';
+
 function Button({ isDisabled, onClick, children }) {
   return (
-    <button className="button" type="button" onClick={onClick} disabled={isDisabled}>
+    <Container className="button" type="button" onClick={onClick} disabled={isDisabled}>
       {children}
-    </button>
+    </Container>
   );
 }
 

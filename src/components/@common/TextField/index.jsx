@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 
+import Container from './styles';
+
 function TextField({ type, name, value, placeholder, maxLength, onChange, onBlur }) {
   return (
-    <input
+    <Container
       type={type}
-      className="input-basic"
       name={name}
       value={value}
       placeholder={placeholder}

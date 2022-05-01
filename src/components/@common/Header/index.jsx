@@ -1,5 +1,7 @@
+import Container from './styles';
+
 function Header({ children }) {
-  return <h2 className="page-title">{children}</h2>;
+  return <Container>{children}</Container>;
 }
 
 export default Header;

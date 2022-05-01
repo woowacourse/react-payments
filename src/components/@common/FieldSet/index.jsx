@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 
+import { Container, InputTitle, InputContainer, ErrorMessage } from './styles';
+
 function FieldSet({ title, errorMessage, inputWidth, children }) {
   return (
-    <div className="input-container">
-      <span className="input-title">{title}</span>
-      <div className="input-box" style={{ width: `${inputWidth}%` }}>
-        {children}
-      </div>
-      <p className="input-error-message">{errorMessage}</p>
-    </div>
+    <Container isError={!!errorMessage}>
+      <InputTitle>{title}</InputTitle>
+      <InputContainer style={{ width: `${inputWidth}%` }}>{children}</InputContainer>
+      <ErrorMessage>{errorMessage}</ErrorMessage>
+    </Container>
   );
 }
 
