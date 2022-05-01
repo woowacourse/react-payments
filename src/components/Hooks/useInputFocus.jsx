@@ -1,28 +1,30 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import useCheckInitMount from "./useCheckInitMount";
 
 export default function useInputFocus(length, targetArray) {
   const [focusInputIndex, setFocusInputIndex] = useState(0);
   const inputRef = useRef([]);
 
-  const handleFocusBeforeElement = (e) => {
+  const focusBeforeElement = (e) => {
     if (
       e.key === "Backspace" &&
       inputRef.current[focusInputIndex].value.length === 0
     ) {
       inputRef.current[focusInputIndex - 1]?.focus();
+      return;
     }
   };
 
-  useEffect(() => {
+  useCheckInitMount(() => {
     if (inputRef.current[focusInputIndex].value.length === length) {
       const index = targetArray.findIndex((target) => target.length !== length);
       inputRef.current[index]?.focus();
     }
-  }, [length, targetArray, focusInputIndex]);
+  }, [targetArray, focusInputIndex]);
 
-  useEffect(() => {
+  useCheckInitMount(() => {
     inputRef.current[focusInputIndex].focus();
   }, [focusInputIndex]);
 
-  return [inputRef, setFocusInputIndex, handleFocusBeforeElement];
+  return [inputRef, setFocusInputIndex, focusBeforeElement];
 }

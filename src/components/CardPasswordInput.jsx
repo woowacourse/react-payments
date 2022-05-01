@@ -36,8 +36,10 @@ const StyledInputContainer = styled.div`
 `;
 
 export default function CardPasswordInput({ password, onChange }) {
-  const [inputRef, setFocusInputIndex, handleFocusBeforeElement] =
-    useInputFocus(CARD_INFO_RULES.PASSWORD_UNIT_LENGTH, password);
+  const [inputRef, setFocusInputIndex, focusBeforeElement] = useInputFocus(
+    CARD_INFO_RULES.PASSWORD_UNIT_LENGTH,
+    password
+  );
 
   return (
     <StyledInputField>
@@ -56,7 +58,7 @@ export default function CardPasswordInput({ password, onChange }) {
                 type="password"
                 value={password[index]}
                 onChange={(e) => onChange(e, index)}
-                onKeyDown={handleFocusBeforeElement}
+                onKeyDown={focusBeforeElement}
                 width="100%"
                 placeholder={CREATE_MASKED_CHARACTERS(1)}
                 onFocus={() => setFocusInputIndex(index)}

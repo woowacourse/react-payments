@@ -5,8 +5,10 @@ import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
 
 export default function CardNumberInput({ cardNumber, onChange }) {
-  const [inputRef, setFocusInputIndex, handleFocusBeforeElement] =
-    useInputFocus(CARD_INFO_RULES.NUMBER_UNIT_LENGTH, cardNumber);
+  const [inputRef, setFocusInputIndex, focusBeforeElement] = useInputFocus(
+    CARD_INFO_RULES.NUMBER_UNIT_LENGTH,
+    cardNumber
+  );
 
   return (
     <InputField
@@ -22,10 +24,11 @@ export default function CardNumberInput({ cardNumber, onChange }) {
         (_, index) => (
           <React.Fragment key={index}>
             <Input
+              autoFocus={index === 0}
               type={index <= 1 ? "number" : "password"}
               value={cardNumber[index]}
               onChange={(e) => onChange(e, index)}
-              onKeyDown={handleFocusBeforeElement}
+              onKeyDown={focusBeforeElement}
               placeholder={index <= 1 ? "1 2 3 4" : CREATE_MASKED_CHARACTERS(4)}
               onFocus={() => setFocusInputIndex(index)}
               isComplete={
