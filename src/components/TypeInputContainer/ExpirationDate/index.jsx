@@ -32,12 +32,11 @@ function ExpirationDateInputContainer({
         <TextInput
           key={uid(stateKey)}
           id={idx === 0 ? `${stateName}` : null}
-          type="text"
           placeholder={stateKey === 'month' ? 'MM' : 'YY'}
           value={state[stateKey]}
-          onChange={e => onChangeExpirationDate(e, stateKey)}
           maxLength={2}
           required
+          onChange={e => onChangeExpirationDate(e, stateKey)}
           inputElementsRef={inputElementsRef}
           inputElementKey={`${stateName}${stateKey}`}
           setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}

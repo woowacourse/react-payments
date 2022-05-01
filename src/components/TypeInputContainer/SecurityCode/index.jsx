@@ -1,29 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LabelInputContainer from '../../LabelInputContainer';
-import { isNumberInRange } from '../../../utils/validation/form';
 import PasswordInput from '../../Input/PasswordInput';
 
 function SecurityCodeInputContainer({
-  state,
   cardInputDispatch,
   inputElementsRef,
   stateName,
   setIsShowVirtualKeyboard,
 }) {
-  const onChangeSecurityCode = e => {
-    const {
-      target: { value: securityCode, maxLength },
-    } = e;
-
-    if (isNumberInRange(securityCode, maxLength)) {
-      cardInputDispatch({
-        type: 'CHANGE_SECURITY_CODE',
-        payload: { securityCode },
-      });
-    }
-  };
-
   return (
     <LabelInputContainer
       labelTitle="보안코드(CVC/CVV)"
@@ -33,13 +18,14 @@ function SecurityCodeInputContainer({
     >
       <PasswordInput
         id={`${stateName}`}
-        value={state}
-        onChange={onChangeSecurityCode}
         maxLength={3}
         required
         inputElementsRef={inputElementsRef}
         inputElementKey={stateName}
         setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+        setPasswordInputValue={value =>
+          cardInputDispatch({ type: 'CHANGE_SECURITY_CODE', payload: { securityCode: value } })
+        }
       />
     </LabelInputContainer>
   );

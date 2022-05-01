@@ -13,7 +13,7 @@ function OwnerNameInputContainer({
 }) {
   const onChangeOwnerName = e => {
     const {
-      target: { value: ownerName, maxLength },
+      target: { value: ownerName },
     } = e;
 
     if (isAlphabetOrSpace(ownerName)) {
@@ -31,11 +31,10 @@ function OwnerNameInputContainer({
     >
       <TextInput
         id={`${stateName}`}
-        className="input-basic"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         value={state}
-        onChange={onChangeOwnerName}
         maxLength={30}
+        onChange={onChangeOwnerName}
         inputElementsRef={inputElementsRef}
         inputElementKey={stateName}
         setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}

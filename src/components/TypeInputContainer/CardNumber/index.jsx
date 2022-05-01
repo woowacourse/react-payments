@@ -25,23 +25,37 @@ function CardNumberInputContainer({
   };
   return (
     <LabelInputContainer labelTitle="카드번호" htmlFor={`${stateName}`}>
-      {Object.keys(state).map((stateKey, idx) => {
-        const Input = stateKey === 'first' || stateKey === 'second' ? TextInput : PasswordInput;
-
-        return (
-          <Input
+      {Object.keys(state).map((stateKey, idx) =>
+        stateKey === 'first' || stateKey === 'second' ? (
+          <TextInput
             key={uid(stateKey)}
             id={idx === 0 ? `${stateName}` : null}
             value={state[stateKey]}
-            onChange={e => onChangeCardNumber(e, stateKey)}
             maxLength={4}
             required
             inputElementsRef={inputElementsRef}
             inputElementKey={`${stateName}${stateKey}`}
             setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+            onChange={e => onChangeCardNumber(e, stateKey)}
           />
-        );
-      })}
+        ) : (
+          <PasswordInput
+            key={uid(stateKey)}
+            id={idx === 0 ? `${stateName}` : null}
+            maxLength={4}
+            required
+            inputElementsRef={inputElementsRef}
+            inputElementKey={`${stateName}${stateKey}`}
+            setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+            setPasswordInputValue={value =>
+              cardInputDispatch({
+                type: 'CHANGE_CARD_NUMBER',
+                payload: { cardNumber: value, key: stateKey },
+              })
+            }
+          />
+        ),
+      )}
     </LabelInputContainer>
   );
 }
