@@ -41,7 +41,7 @@ export default function CardSelectModal({
         {cardType.map(({ name, color }) => (
           <div
             className="modal-item-container"
-            key={name}
+            key={name + color}
             onClick={handleClickCardType(name, color)}
           >
             <div className="modal-item-dot" style={{ backgroundColor: `${color}` }}></div>
