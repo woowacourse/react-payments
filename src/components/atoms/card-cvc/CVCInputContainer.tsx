@@ -1,7 +1,7 @@
 import React from "react";
 import CVCInput from "./CVCInput";
 import { useAppDispatch, useAppState } from "../../../hooks/hooks";
-import { createAction } from "../../Provider";
+import { createAction } from "../../../context/Provider";
 import { ActionType } from "../../../types";
 import { isNum } from "../../../utils";
 
@@ -17,7 +17,6 @@ function CVCInputContainer() {
 
     if (cvc.length < value.length) {
       if (!isNum(lastChar)) return;
-      dispatch({ type: ActionType.INPUT_CVC, payload: 'hihi' });
 
       dispatch(createAction(ActionType.INPUT_CVC, cvc + lastChar));
       return;

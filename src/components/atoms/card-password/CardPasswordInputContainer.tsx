@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { useAppDispatch, useAppState } from "../../../hooks/hooks";
 import { ActionType } from "../../../types";
 import { isNum, transformNumToBullet } from "../../../utils";
-import { createAction } from "../../Provider";
+import { createAction } from "../../../context/Provider";
 import CardPasswordInput from "./CardPasswordInput";
 
 type Props = { 

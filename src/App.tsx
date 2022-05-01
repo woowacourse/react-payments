@@ -1,7 +1,7 @@
 import React from "react";
 import { css } from "@emotion/react";
 import CardNumberFieldset from "./components/molecules/CardNumberFieldset";
-import AppProvider from "./components/Provider";
+import AppProvider from "./context/Provider";
 import CardOwnerNameFieldset from "./components/molecules/CardOwnerNameFieldset";
 import ExpiredPeriodFieldset from "./components/molecules/ExpiredPeriodFieldset";
 import CVCFieldset from "./components/molecules/CVCFieldset";

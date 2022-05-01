@@ -2,7 +2,7 @@ import React from "react";
 import CardOwnerNameInput from "./CardOwnerNameInput";
 import { useAppDispatch, useAppState } from "../../../hooks/hooks";
 import { ActionType } from "../../../types";
-import { createAction } from "../../Provider";
+import { createAction } from "../../../context/Provider";
 import { isEnglish, removeAt } from "../../../utils";
 import { MAX_NAME_LENGTH } from "../../../constants";
 

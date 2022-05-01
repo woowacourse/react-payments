@@ -2,7 +2,7 @@ import React from "react";
 import { useAppDispatch, useAppState } from "../../../hooks/hooks";
 import { ActionType } from "../../../types";
 import { insertAt, isNum, removeAt, removeHyphens, removeWhiteSpaces, transformToCardFormat } from "../../../utils";
-import { createAction } from "../../Provider";
+import { createAction } from "../../../context/Provider";
 import CardNumberInput from "./CardNumberInput";
 
 function CardNumberInputContainer() {
