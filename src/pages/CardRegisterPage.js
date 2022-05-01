@@ -40,6 +40,9 @@ export const CardRegisterPage = () => {
     cardPassword: false,
     cardType: false,
   });
+
+  const [allCompleted, setAllCompleted] = useState(false);
+
   const checkerFactory = (subject) => {
     const key = subject;
 
@@ -48,7 +51,6 @@ export const CardRegisterPage = () => {
     };
   };
 
-  const [allCompleted, setAllCompleted] = useState(false);
   useEffect(() => {
     setAllCompleted(Object.values(checkInputCompleted).every((check) => check));
   }, [checkInputCompleted]);
@@ -58,7 +60,7 @@ export const CardRegisterPage = () => {
       <PageTitle>카드 추가</PageTitle>
       <Card
         cardInfo={cardInfo}
-        openModal={() => setOpenedModalComponent(COMPONENTS.CARD_TYPE)}
+        onClick={() => setOpenedModalComponent(COMPONENTS.CARD_TYPE)}
       />
       <CardNumbersInputForm
         cardType={cardInfo.cardType}

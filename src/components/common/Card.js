@@ -5,8 +5,13 @@ import styled from 'styled-components';
 import { Shimmer } from './Shimmer';
 
 export const Card = ({
-  cardInfo: { cardType, cardNumbers, expireDate, ownerName },
-  openModal,
+  cardInfo: {
+    cardType,
+    cardNumbers,
+    expireDate: { month = 'MM', year = 'YY' },
+    ownerName = 'NAME',
+  },
+  onClick,
 }) => {
   const formattedCardNumbers = Object.values(cardNumbers)
     .map((number, idx) => (idx <= 1 ? number : '•'.repeat(number.length)))
@@ -14,24 +19,23 @@ export const Card = ({
 
   return (
     <CardBox>
-      <SmallCard backgroundColor={cardType.color} onClick={openModal}>
+      <SmallCard backgroundColor={cardType.color} onClick={onClick}>
         <CardTop>
           <CardText>{cardType.name}카드</CardText>
         </CardTop>
         <CardMiddle>
-          <SmallCard_chip />
+          <SmallCardChip />
         </CardMiddle>
         <CardBottom>
-          <CardBottom__number>
+          <CardBottomNumber>
             <CardNumbersText>{formattedCardNumbers}</CardNumbersText>
-          </CardBottom__number>
-          <CardBottom__info>
+          </CardBottomNumber>
+          <CardBottomInfo>
             <CardText>{ownerName ? ownerName : 'NAME'}</CardText>
             <CardText>
-              {expireDate.month ? expireDate.month : 'MM'}/
-              {expireDate.year ? expireDate.year : 'YY'}
+              {month}/{year}
             </CardText>
-          </CardBottom__info>
+          </CardBottomInfo>
         </CardBottom>
         <Shimmer />
       </SmallCard>
@@ -43,8 +47,6 @@ const CardBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  margin: 10px 0;
 `;
 const SmallCard = styled.div`
   position: relative;
@@ -63,7 +65,7 @@ const SmallCard = styled.div`
   border-radius: 5px;
   cursor: pointer;
 `;
-const SmallCard_chip = styled.div`
+const SmallCardChip = styled.div`
   width: 40px;
   height: 26px;
   left: 95px;
@@ -95,7 +97,7 @@ const CardBottom = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const CardBottom__number = styled.div`
+const CardBottomNumber = styled.div`
   width: 100%;
   height: 100%;
 
@@ -103,7 +105,7 @@ const CardBottom__number = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const CardBottom__info = styled.div`
+const CardBottomInfo = styled.div`
   width: 100%;
   height: 100%;
 

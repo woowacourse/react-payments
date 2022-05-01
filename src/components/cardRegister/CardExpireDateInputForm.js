@@ -42,7 +42,7 @@ export const CardExpireDateInputForm = ({
       return;
     }
 
-    onCardExpireCheck({
+    onExpireDateInput({
       type: CARD_INFO_TYPES.SET_EXPIRE_DATE,
       payload: { key: 'year', date: e.target.value },
     });
@@ -76,7 +76,7 @@ export const CardExpireDateInputForm = ({
       return true;
     };
 
-    handleCardExpireCheck(isCardExpireDateCompleted());
+    onCardExpireCheck(isCardExpireDateCompleted());
   }, [expireDate]);
 
   return (
