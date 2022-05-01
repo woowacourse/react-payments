@@ -1,7 +1,7 @@
 import React from 'react';
 import LabeledInput from '.';
-import '../../index.css';
-import MESSAGE from '../../constant/message';
+import '../../../index.css';
+import MESSAGE from '../../../constant/message';
 
 export default {
   title: 'Payment/LabeledInput',

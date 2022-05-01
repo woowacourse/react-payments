@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from '.';
-import '../../index.css';
+import '../../../index.css';
 
 export default {
   title: 'Payment/Head',

@@ -1,6 +1,12 @@
 import { INPUT_TYPE } from '../constant';
 
 export default {
+  validateCardNumber: cardNumber => {
+    const cardNumberRegex = /[0-9]{4}/;
+
+    return cardNumberRegex.test(cardNumber);
+  },
+
   validateCardNumbers: cardNumbers => {
     const cardNumbersRegex = /[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}/;
 

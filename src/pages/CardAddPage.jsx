@@ -46,15 +46,13 @@ function CardAddPage() {
       : '';
   }, [expiredDate]);
 
-  useEffect(() => {
-    setCardAddCondition({
-      cardNumbers: validator.validateCardNumbers(cardNumbers.join(CARD_NUMBER_SEPARATOR)),
-      expiredDate: validator.validateExpiredDate(convertedExpiredDate),
-      ownerName: validator.validateOwnerName(ownerName),
-      securityNumber: validator.validateSecurityNumber(securityNumber),
-      password: validator.validatePassword(password.join('')),
-    });
-  });
+  // setCardAddCondition({
+  //   cardNumbers: validator.validateCardNumbers(cardNumbers.join(CARD_NUMBER_SEPARATOR)),
+  //   expiredDate: validator.validateExpiredDate(convertedExpiredDate),
+  //   ownerName: validator.validateOwnerName(ownerName),
+  //   securityNumber: validator.validateSecurityNumber(securityNumber),
+  //   password: validator.validatePassword(password.join('')),
+  // });
 
   const handleChangeCardNumbersInput = ({ nativeEvent: { data, inputType }, target }) => {
     if (validator.isInvalidInputData(cardNumberInputRegex, data, inputType)) {
