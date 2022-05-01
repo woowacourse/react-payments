@@ -221,36 +221,8 @@ const cardFormSchema = {
   },
 };
 
-const getCardInfo = ({
-  firstCardNumber,
-  secondCardNumber,
-  thirdCardNumber,
-  fourthCardNumber,
-  expiredMonth,
-  expiredYear,
-  owner,
-  cvc,
-  firstPasswordDigit,
-  secondPasswordDigit,
-}) => ({
-  brand: '우아한카드',
-  cardNumber: [
-    firstCardNumber,
-    secondCardNumber,
-    thirdCardNumber,
-    fourthCardNumber,
-  ],
-  expiredDate: {
-    month: expiredMonth,
-    year: expiredYear,
-  },
-  owner: owner.toUpperCase(),
-  cvc,
-  password: `${firstPasswordDigit}${secondPasswordDigit}`,
-});
-
 const addCard = (values) => {
-  console.log(getCardInfo(values));
+  console.log(values);
 };
 
 const CardForm = () => {
@@ -273,7 +245,7 @@ const CardForm = () => {
     >
       {({ values, isSubmitting, handleSubmit, errors, registerInputProps }) => (
         <>
-          <CardPreview {...getCardInfo(values)} />
+          <CardPreview values={values} />
           <StyledCardForm onSubmit={handleSubmit} disabled={isSubmitting}>
             <StyledCardFieldContainer className="input-container">
               <label className="input-title">카드 번호</label>

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import useCardPreview from '../../hooks/useCardPreview';
 
 const StyledCardPreview = styled.div`
   display: flex;
@@ -90,7 +91,9 @@ const StyledCardPreview = styled.div`
   }
 `;
 
-const CardPreview = ({ brand, cardNumber, expiredDate, owner }) => {
+const CardPreview = ({ values }) => {
+  const { getCardInfo } = useCardPreview();
+  const { brand, cardNumber, expiredDate, owner } = getCardInfo(values);
   const cardNumberText = `${cardNumber[0]} ${cardNumber[1]} ${'•'.repeat(
     cardNumber[2].length
   )} ${'•'.repeat(cardNumber[3].length)}`;
