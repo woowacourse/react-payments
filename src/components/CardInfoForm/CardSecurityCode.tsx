@@ -1,6 +1,6 @@
 import React from "react";
 
-import CVC from "../../assets/cvcImage.png";
+import CVCImage from "../../assets/cvcImage.png";
 import type { InputChangeFunction } from "../../types";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
@@ -25,7 +25,7 @@ export default function CardSecurityCode({ securityCode, onChange, isValid }: Ca
           formSelector="#card-info-form"
         />
         <Tooltip>
-          <img width="160px" src={CVC} alt="cvc" />
+          <img width="160px" src={CVCImage} alt="cvc" />
         </Tooltip>
       </div>
     </InputContainer>
