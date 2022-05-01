@@ -98,13 +98,36 @@ const useFormSchema = (formSchema) => {
   const isInvalidInput = (fieldName, value) =>
     allowedKeyInput[fieldName].some((rule) => !rule(value));
 
+  const setErrorMessages = (name, value) => {
+    const errorMessageList = validationSchema[name]
+      .filter(({ assert }) => !assert(value))
+      .map(({ errorMessage }) => errorMessage);
+
+    const isError = errorMessageList.length > 0;
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: {
+        isError,
+        errorMessage: isError ? errorMessageList : null,
+        showError: isError,
+      },
+    }));
+  };
+
+  const focusNextElement = (name, value, nextElement) => {
+    if (value.length >= formSchema[name].maxLength && nextElement)
+      nextElement.focus();
+  };
+
   return {
     values,
     setValues,
-    validationSchema,
     isInvalidInput,
     errors,
     setErrors,
+    setErrorMessages,
+    focusNextElement,
   };
 };
 

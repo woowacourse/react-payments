@@ -7,11 +7,13 @@ const Form = ({ children, formSchema, onSubmit, onSubmitError }) => {
   const {
     values,
     setValues,
-    validationSchema,
     isInvalidInput,
     errors,
     setErrors,
+    setErrorMessages,
+    focusNextElement,
   } = useFormSchema(formSchema);
+
   const [submitting, setSubmitting] = useState(false);
   const { ref, bindElement, getNextElement, getPrevElement } =
     useObjectRef(formSchema);
@@ -27,30 +29,14 @@ const Form = ({ children, formSchema, onSubmit, onSubmitError }) => {
 
     if (isInvalidInput(name, value)) return;
 
-    const errorMessageList = validationSchema[name]
-      .filter(({ assert }) => !assert(value))
-      .map(({ errorMessage }) => errorMessage);
-    const isError = errorMessageList.length > 0;
-
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: {
-        isError,
-        errorMessage: isError ? errorMessageList : null,
-        showError: isError,
-      },
-    }));
+    setErrorMessages(name, value);
 
     setValues((prevState) => ({
       ...prevState,
       [name]: value,
     }));
 
-    if (value.length >= formSchema[name].maxLength) {
-      const nextElement = getNextElement(name);
-
-      if (nextElement) nextElement.focus();
-    }
+    focusNextElement(name, value, getNextElement(name));
   };
 
   const handleKeyDown = (event) => {
