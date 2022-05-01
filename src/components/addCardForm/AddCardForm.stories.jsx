@@ -1,5 +1,5 @@
 import React from 'react';
-import AddCardForm from '../components/AddCardForm';
+import AddCardForm from './AddCardForm';
 
 export default {
   title: 'AddCardForm',

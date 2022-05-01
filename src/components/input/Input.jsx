@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ERROR_MESSAGE } from '../constants';
+import { ERROR_MESSAGE } from '../../constants';
 
 function Input({
   type,

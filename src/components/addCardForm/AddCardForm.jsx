@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Input from './Input';
-import { isOverMaxLength, isOutOfRange } from '../util';
-import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../constants';
+import Input from '../input/Input';
+import { isOverMaxLength, isOutOfRange } from '../../util';
+import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../../constants';
 
 function AddCardForm({ updateCard, addCard }) {
   const [cardForm, setCardForm] = useState({

@@ -1,7 +1,7 @@
 import React from 'react';
-import Input from '../components/Input.jsx';
-import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../constants.js';
-import { isOverMaxLength, isOutOfRange } from '../util.js';
+import Input from './Input';
+import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../../constants';
+import { isOverMaxLength, isOutOfRange } from '../../util';
 
 export default {
   title: 'Input',

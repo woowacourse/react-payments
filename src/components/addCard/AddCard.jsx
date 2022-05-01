@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import AddCardForm from './AddCardForm';
-import Card from './Card';
+import AddCardForm from '../addCardForm/AddCardForm';
+import Card from '../card/Card';
 
 function AddCard() {
   const [card, setCard] = useState({
