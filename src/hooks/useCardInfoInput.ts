@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import REGEXP from "../constant/regexp";
 import { cardInfoValidator } from "../lib/validation";
@@ -24,10 +24,26 @@ const initialCardInfo: CardInfo = {
 const useCardInfoInput = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>(initialCardInfo);
   const [cardInfoValidation, setCardInfoValidation] = useState<CardInfoValidation>({
-    isCardNumbersValid: false,
-    isExpirationDateValid: false,
-    isSecurityCodeValid: false,
-    isPasswordValid: false,
+    cardNumbers: {
+      isValid: false,
+      successMsg: "카드넘버 입력 성공!",
+      errorMsg: "",
+    },
+    expirationDate: {
+      isValid: false,
+      successMsg: "만료일 입력 성공!",
+      errorMsg: "",
+    },
+    securityCode: {
+      isValid: false,
+      successMsg: "CVC 입력 성공!",
+      errorMsg: "",
+    },
+    password: {
+      isValid: false,
+      successMsg: "비밀번호 입력 성공!",
+      errorMsg: "",
+    },
   });
 
   const handleChangeValidation = <T>(
@@ -35,10 +51,19 @@ const useCardInfoInput = () => {
     value: T,
     validator: (value: T) => boolean
   ) => {
-    setCardInfoValidation(prev => ({
-      ...prev,
-      [key]: validator(value),
-    }));
+    try {
+      const isValid = validator(value);
+
+      setCardInfoValidation(prev => ({
+        ...prev,
+        [key]: { ...prev[key], isValid, errorMsg: "" },
+      }));
+    } catch (error) {
+      setCardInfoValidation(prev => ({
+        ...prev,
+        [key]: { ...prev[key], isValid: false, errorMsg: error.message },
+      }));
+    }
   };
 
   const resetCardInfo = () => {
@@ -76,11 +101,7 @@ const useCardInfoInput = () => {
   };
 
   useEffect(() => {
-    handleChangeValidation(
-      "isCardNumbersValid",
-      cardInfo.cardNumbers,
-      cardInfoValidator["cardNumbers"]
-    );
+    handleChangeValidation("cardNumbers", cardInfo.cardNumbers, cardInfoValidator["cardNumbers"]);
   }, [cardInfo.cardNumbers]);
 
   const onChangeExpirationDate: InputChangeFunction = e => {
@@ -107,7 +128,7 @@ const useCardInfoInput = () => {
 
   useEffect(() => {
     handleChangeValidation(
-      "isExpirationDateValid",
+      "expirationDate",
       cardInfo.expirationDate,
       cardInfoValidator["expirationDate"]
     );
@@ -144,7 +165,7 @@ const useCardInfoInput = () => {
 
   useEffect(() => {
     handleChangeValidation(
-      "isSecurityCodeValid",
+      "securityCode",
       cardInfo.securityCode,
       cardInfoValidator["securityCode"]
     );
@@ -171,7 +192,7 @@ const useCardInfoInput = () => {
   };
 
   useEffect(() => {
-    handleChangeValidation("isPasswordValid", cardInfo.password, cardInfoValidator["password"]);
+    handleChangeValidation("password", cardInfo.password, cardInfoValidator["password"]);
   }, [cardInfo.password]);
 
   return {

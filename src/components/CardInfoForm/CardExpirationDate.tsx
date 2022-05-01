@@ -2,28 +2,22 @@ import React, { useEffect, useState } from "react";
 
 import { validateExpirationDateLength } from "../../lib/validation";
 import type { InputChangeFunction } from "../../types";
-import type { ExpirationDate } from "../../types/cardInfo";
+import type { ExpirationDate, Validation } from "../../types/cardInfo";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
 interface CardExpirationDateProps {
   expirationDate: ExpirationDate;
   onChange: InputChangeFunction;
-  isValid: boolean;
+  validation: Validation;
 }
 export default function CardExpirationDate({
   expirationDate,
   onChange,
-  isValid,
+  validation,
 }: CardExpirationDateProps) {
-  const [hasValue, setHasValue] = useState(false);
-
-  useEffect(() => {
-    setHasValue(validateExpirationDateLength(expirationDate));
-  }, [expirationDate]);
-
   return (
-    <InputContainer title="만료일" isValid={isValid} shouldShowError={hasValue}>
+    <InputContainer title="만료일" validation={validation}>
       <div className="input-box w-50 flex-center">
         <Input
           type="text"

@@ -33,11 +33,14 @@ interface ExpirationDate {
 }
 
 type CardInfoValidation = {
-  isCardNumbersValid: boolean;
-  isExpirationDateValid: boolean;
-  isSecurityCodeValid: boolean;
-  isPasswordValid: boolean;
+  [K in keyof Omit<CardInfo, "cardType" | "userName">]: Validation;
 };
+
+interface Validation {
+  isValid: boolean;
+  successMsg?: string;
+  errorMsg?: string;
+}
 
 export type {
   CardColor,
@@ -48,4 +51,5 @@ export type {
   CardType,
   ExpirationDate,
   Password,
+  Validation,
 };

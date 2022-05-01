@@ -110,11 +110,3 @@
   font-size: 12px;
   font-weight: 700;
 }
-
-.success-message {
-  color: #78e08f;
-}
-
-.fail-message {
-  color: tomato;
-}

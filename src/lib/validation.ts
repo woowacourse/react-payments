@@ -8,10 +8,20 @@ type CardInfoValidationTarget = Omit<CardInfo, "cardType" | "userName">;
 type Validators = {
   [K in keyof CardInfoValidationTarget]: Validator<CardInfoValidationTarget[K]>;
 };
+interface Validate {
+  test: Validator<any>;
+  msg: string;
+}
 
+// 카드번호
 const validateCardNumbers = (cardNumbers: CardNumbers) =>
   cardNumbers.every(cardNumber => cardNumber.length === 4);
 
+const cardNumbersValidators: Validate[] = [
+  { test: validateCardNumbers, msg: "카드번호를 4자씩 입력해주세요." },
+];
+
+// 만료일
 const validateExpirationDateLength = (expirationDate: ExpirationDate) =>
   Object.keys(expirationDate).every(key => expirationDate[key].length === 2);
 
@@ -33,21 +43,37 @@ const validateDate = (expirationDate: ExpirationDate) => {
 
   return true;
 };
+const expirationDateValidators: Validate[] = [
+  { test: validateExpirationDateLength, msg: "월, 년을 채워주세요." },
+  { test: validateMonth, msg: "월은 1 이상, 12 이하로 입력해주세요." },
+  { test: validateDate, msg: "만료일은 현재로부터 5년까지입니다." },
+];
 
-const expirationDateValidators = [validateExpirationDateLength, validateMonth, validateDate];
-
-const validateExpirationDate = (expirationDate: ExpirationDate) =>
-  expirationDateValidators.every(validator => validator(expirationDate));
-
+// CVC
 const validateSecurityCode = (securityCode: string) => securityCode.length === 3;
 
+const securityCodeValidators: Validate[] = [
+  { test: validateSecurityCode, msg: "CVC 번호를 3자 입력해주세요." },
+];
+
+// 비밀번호
 const validatePassword = (password: Password) => password.every(number => number.length === 1);
 
+const passwordValidators: Validate[] = [
+  { test: validatePassword, msg: "비밀번호를 입력해주세요." },
+];
+
+const validate = (validators: Validate[]) => value =>
+  validators.every(({ test, msg }) => {
+    if (test(value)) return true;
+    throw new Error(msg);
+  });
+
 const cardInfoValidator: Validators = {
-  cardNumbers: validateCardNumbers,
-  expirationDate: validateExpirationDate,
-  securityCode: validateSecurityCode,
-  password: validatePassword,
+  cardNumbers: validate(cardNumbersValidators),
+  expirationDate: validate(expirationDateValidators),
+  securityCode: validate(securityCodeValidators),
+  password: validate(passwordValidators),
 };
 
 export { cardInfoValidator, validateExpirationDateLength };

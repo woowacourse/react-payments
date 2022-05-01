@@ -1,19 +1,19 @@
 import React from "react";
 
 import type { InputChangeFunction } from "../../types";
-import type { Password } from "../../types/cardInfo";
+import type { Password, Validation } from "../../types/cardInfo";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
 interface CardPasswordProps {
   password: Password;
   onChange: InputChangeFunction;
-  isValid: boolean;
+  validation: Validation;
 }
 
-export default function CardPassword({ password, onChange, isValid }: CardPasswordProps) {
+export default function CardPassword({ password, onChange, validation }: CardPasswordProps) {
   return (
-    <InputContainer title="카드 비밀번호" isValid={isValid}>
+    <InputContainer title="카드 비밀번호" validation={validation}>
       <Input
         type="password"
         size="tiny"

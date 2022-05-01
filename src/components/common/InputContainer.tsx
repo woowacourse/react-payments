@@ -1,21 +1,19 @@
 import React from "react";
 
-import FailMessage from "./FailMessage";
-import SuccessMessage from "./SuccessMessage";
+import { Validation } from "../../types/cardInfo";
+import Message from "./Message";
 
 interface InputContainerProps {
   children: React.ReactNode;
   title: string;
-  isValid: boolean;
-  shouldShowError?: boolean;
+  validation?: Validation;
   rightContent?: JSX.Element;
 }
 
 export default function InputContainer({
   children,
   title,
-  isValid,
-  shouldShowError = false,
+  validation,
   rightContent,
 }: InputContainerProps) {
   return (
@@ -23,7 +21,12 @@ export default function InputContainer({
       <div className="input-container-top">
         <span>
           <label className="input-title">{title}</label>
-          {isValid ? <SuccessMessage /> : shouldShowError && <FailMessage />}
+          {validation &&
+            (validation.isValid ? (
+              <Message content={validation.successMsg} type="success" />
+            ) : (
+              <Message content={validation.errorMsg} type="fail" />
+            ))}
         </span>
         {rightContent}
       </div>

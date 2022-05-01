@@ -1,18 +1,18 @@
 import React from "react";
 
 import type { InputChangeFunction } from "../../types";
-import type { CardNumbers } from "../../types/cardInfo";
+import type { CardNumbers, Validation } from "../../types/cardInfo";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
 interface CardNumberProps {
   cardNumbers: CardNumbers;
   onChange: InputChangeFunction;
-  isValid: boolean;
+  validation: Validation;
 }
-export default function CardNumber({ cardNumbers, onChange, isValid }: CardNumberProps) {
+export default function CardNumber({ cardNumbers, onChange, validation }: CardNumberProps) {
   return (
-    <InputContainer title="카드번호" isValid={isValid}>
+    <InputContainer title="카드번호" validation={validation}>
       <div className="input-box">
         {cardNumbers.map((cardNumber, index) => (
           <React.Fragment key={index}>

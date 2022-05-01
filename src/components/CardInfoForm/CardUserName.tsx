@@ -15,7 +15,6 @@ export default function CardUserName({ userName, onChange, onBlur }: CardUserNam
   return (
     <InputContainer
       title="카드 소유자 이름(선택)"
-      isValid={false}
       rightContent={<LengthIndicator length={userName.length} maxLength={MAX_USER_NAME_LENGTH} />}
     >
       <Input
