@@ -16,7 +16,7 @@ const formatCardNumber = (cardNumber) => {
 function Card({ companyName, cardNumber, userName, expireMonth, expireYear, isComplete }) {
   return (
     <div className="card-box">
-      <div className={`small-card${(!isComplete && ' empty') || ''}`}>
+      <div className={`small-card${isComplete ? '' : ' empty'}`}>
         <div className="card-top">
           <span className="card-text">{companyName}</span>
         </div>
