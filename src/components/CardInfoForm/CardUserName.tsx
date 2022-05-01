@@ -9,11 +9,10 @@ interface CardUserNameProps {
   userName: string;
   onChange: InputChangeFunction;
   onBlur: () => void;
-  isValid: boolean;
 }
-export default function CardUserName({ userName, onChange, onBlur, isValid }: CardUserNameProps) {
+export default function CardUserName({ userName, onChange, onBlur }: CardUserNameProps) {
   return (
-    <InputContainer title="카드 소유자 이름(선택)" isValid={isValid}>
+    <InputContainer title="카드 소유자 이름(선택)" isValid={false}>
       <Input
         value={userName}
         type="text"

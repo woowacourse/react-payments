@@ -6,7 +6,6 @@ import type { CardInfo } from "../types/cardInfo";
 export type CardInfoValidation = {
   isCardNumbersValid: boolean;
   isExpirationDateValid: boolean;
-  isUserNameValid: boolean;
   isSecurityCodeValid: boolean;
   isPasswordValid: boolean;
 };
@@ -15,12 +14,11 @@ const useCardInfoValidation = (cardInfo: CardInfo, validators: Validators) => {
   const [cardInfoValidation, setCardInfoValidation] = useState<CardInfoValidation>({
     isCardNumbersValid: false,
     isExpirationDateValid: false,
-    isUserNameValid: false,
     isSecurityCodeValid: false,
     isPasswordValid: false,
   });
 
-  const { cardNumbers, expirationDate, userName, securityCode, password } = cardInfo;
+  const { cardNumbers, expirationDate, securityCode, password } = cardInfo;
 
   const handleChangeValidation = <T>(
     key: keyof CardInfoValidation,
@@ -40,10 +38,6 @@ const useCardInfoValidation = (cardInfo: CardInfo, validators: Validators) => {
   useEffect(() => {
     handleChangeValidation("isExpirationDateValid", expirationDate, validators["expirationDate"]);
   }, [expirationDate, validators]);
-
-  useEffect(() => {
-    handleChangeValidation("isUserNameValid", userName, validators["userName"]);
-  }, [userName, validators]);
 
   useEffect(() => {
     handleChangeValidation("isSecurityCodeValid", securityCode, validators["securityCode"]);

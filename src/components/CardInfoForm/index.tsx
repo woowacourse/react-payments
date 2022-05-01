@@ -33,13 +33,8 @@ export default function CardInfoForm({
 }: CardInfoFormProps) {
   const { cardNumbers, expirationDate, userName, securityCode, password } = cardInfo;
   const [isNextButtonShown, setIsNextButtonShown] = useState(true);
-  const {
-    isCardNumbersValid,
-    isExpirationDateValid,
-    isUserNameValid,
-    isSecurityCodeValid,
-    isPasswordValid,
-  } = cardInfoValidation;
+  const { isCardNumbersValid, isExpirationDateValid, isSecurityCodeValid, isPasswordValid } =
+    cardInfoValidation;
 
   useEffect(() => {
     setIsNextButtonShown(Object.keys(cardInfoValidation).every(key => cardInfoValidation[key]));
@@ -64,12 +59,7 @@ export default function CardInfoForm({
         onChange={onChangeExpirationDate}
         isValid={isExpirationDateValid}
       />
-      <CardUserName
-        userName={userName}
-        onChange={onChangeUserName}
-        onBlur={onBlurUserName}
-        isValid={isUserNameValid}
-      />
+      <CardUserName userName={userName} onChange={onChangeUserName} onBlur={onBlurUserName} />
       <CardSecurityCode
         securityCode={securityCode}
         onChange={onChangeSecurityCode}

@@ -3,10 +3,10 @@ import type { CardInfo, CardNumbers, ExpirationDate, Password } from "../types/c
 
 type Validator<T> = (value: T) => boolean;
 
-type CardInfoWithoutCardType = Omit<CardInfo, "cardType">;
+type CardInfoValidationTarget = Omit<CardInfo, "cardType" | "userName">;
 
 type Validators = {
-  [K in keyof CardInfoWithoutCardType]: Validator<CardInfoWithoutCardType[K]>;
+  [K in keyof CardInfoValidationTarget]: Validator<CardInfoValidationTarget[K]>;
 };
 
 const validateCardNumbers = (cardNumbers: CardNumbers) =>
@@ -39,16 +39,13 @@ const expirationDateValidators = [validateExpirationDateLength, validateMonth, v
 const validateExpirationDate = (expirationDate: ExpirationDate) =>
   expirationDateValidators.every(validator => validator(expirationDate));
 
-const validateUserName = (userName: string) => userName.length > 0;
-
 const validateSecurityCode = (securityCode: string) => securityCode.length === 3;
 
 const validatePassword = (password: Password) => password.every(number => number.length === 1);
 
-const cardInfoValidator = {
+const cardInfoValidator: Validators = {
   cardNumbers: validateCardNumbers,
   expirationDate: validateExpirationDate,
-  userName: validateUserName,
   securityCode: validateSecurityCode,
   password: validatePassword,
 };
