@@ -1,5 +1,4 @@
 import Card from '.';
-import 'index.css';
 
 export default {
   title: 'Component/Card',

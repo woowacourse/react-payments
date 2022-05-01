@@ -1,5 +1,4 @@
 import CardSecurityField from '.';
-import 'index.css';
 
 export default {
   title: 'Component/CardSecurityField',
