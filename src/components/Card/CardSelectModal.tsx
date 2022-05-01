@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import type { CardColor, CardName, CardType } from "../../types/cardInfo";
 import Modal from "../common/Modal";
@@ -25,6 +25,14 @@ export default function CardSelectModal({
   closeModal,
   onChangeCardType,
 }: CardSelectModalProps) {
+  const handleClickCardType = useCallback(
+    (name: CardName, color: CardColor) => () => {
+      onChangeCardType(name, color);
+      closeModal();
+    },
+    [closeModal, onChangeCardType]
+  );
+
   if (!isOpened) return null;
 
   return (
@@ -34,10 +42,7 @@ export default function CardSelectModal({
           <div
             className="modal-item-container"
             key={name}
-            onClick={() => {
-              onChangeCardType(name, color);
-              closeModal();
-            }}
+            onClick={handleClickCardType(name, color)}
           >
             <div className="modal-item-dot" style={{ backgroundColor: `${color}` }}></div>
             <span className="modal-item-name">{name}</span>
