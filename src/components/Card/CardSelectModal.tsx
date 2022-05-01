@@ -44,7 +44,7 @@ export default function CardSelectModal({
             key={name + color}
             onClick={handleClickCardType(name, color)}
           >
-            <div className="modal-item-dot" style={{ backgroundColor: `${color}` }}></div>
+            <div className="modal-item-dot" style={{ backgroundColor: color }}></div>
             <span className="modal-item-name">{name}</span>
           </div>
         ))}
