@@ -4,7 +4,7 @@ import CVC from "../../assets/cvcImage.png";
 import type { InputChangeFunction } from "../../types";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
-import UserGuide from "../common/UserGuide";
+import Tooltip from "../common/Tooltip";
 
 interface CardSecurityProps {
   securityCode: string;
@@ -24,9 +24,9 @@ export default function CardSecurityCode({ securityCode, onChange, isValid }: Ca
           name="securityCode"
           formSelector="#card-info-form"
         />
-        <UserGuide>
+        <Tooltip>
           <img width="160px" src={CVC} alt="cvc" />
-        </UserGuide>
+        </Tooltip>
       </div>
     </InputContainer>
   );

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
-export default function UserGuide({ children }: { children: React.ReactNode }) {
+export default function Tooltip({ children }: { children: React.ReactNode }) {
   const [isContentShown, setIsContentShown] = useState(false);
 
   return (
-    <div className="user-guide-container">
+    <div className="tooltip-container">
       <span
-        className="user-guide"
+        className="tooltip"
         onMouseEnter={() => setIsContentShown(true)}
         onMouseLeave={() => setIsContentShown(false)}
       >
         ?
       </span>
-      {isContentShown && <div className="user-guide-content">{children}</div>}
+      {isContentShown && <div className="tooltip-content">{children}</div>}
     </div>
   );
 }

@@ -64,7 +64,7 @@
   border-bottom: 1px solid #383838;
 }
 
-.user-guide-container {
+.tooltip-container {
   position: absolute;
   display: inline-block;
   top: 50%;
@@ -72,7 +72,7 @@
   right: -40px;
 }
 
-.user-guide {
+.tooltip {
   border: 1px solid #bababa;
   color: #bababa;
   border-radius: 50%;
@@ -88,7 +88,7 @@
   cursor: pointer;
 }
 
-.user-guide-content {
+.tooltip-content {
   position: absolute;
   top: -30px;
   left: 80px;
