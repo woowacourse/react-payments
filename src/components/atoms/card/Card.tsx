@@ -140,8 +140,8 @@ function Card({ cardNumber, name, expiredPeriod, cvc, isActive, color, cardName,
           </div>
           <div className="number">{cardNumber}</div>
           <div className="info">
-            <OwnerNameSpan name={name}>{name}</OwnerNameSpan>
-            <span className="expired-period">{expiredPeriod}</span>
+            <OwnerNameSpan name={name}>{name.length > 0 ? name : 'NAME'}</OwnerNameSpan>
+            <span className="expired-period">{expiredPeriod.length > 0 ? expiredPeriod : 'MM / YY'}</span>
           </div>
         </Front>
         <Back className="back">
