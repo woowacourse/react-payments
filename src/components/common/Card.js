@@ -4,6 +4,41 @@ import styled from 'styled-components';
 
 import { Shimmer } from './Shimmer';
 
+export const Card = ({
+  cardInfo: { cardType, cardNumbers, expireDate, ownerName },
+  openModal,
+}) => {
+  const formattedCardNumbers = Object.values(cardNumbers)
+    .map((number, idx) => (idx <= 1 ? number : '•'.repeat(number.length)))
+    .join(' ');
+
+  return (
+    <CardBox>
+      <SmallCard backgroundColor={cardType.color} onClick={openModal}>
+        <CardTop>
+          <CardText>{cardType.name}카드</CardText>
+        </CardTop>
+        <CardMiddle>
+          <SmallCard_chip />
+        </CardMiddle>
+        <CardBottom>
+          <CardBottom__number>
+            <CardNumbersText>{formattedCardNumbers}</CardNumbersText>
+          </CardBottom__number>
+          <CardBottom__info>
+            <CardText>{ownerName ? ownerName : 'NAME'}</CardText>
+            <CardText>
+              {expireDate.month ? expireDate.month : 'MM'}/
+              {expireDate.year ? expireDate.year : 'YY'}
+            </CardText>
+          </CardBottom__info>
+        </CardBottom>
+        <Shimmer />
+      </SmallCard>
+    </CardBox>
+  );
+};
+
 const CardBox = styled.div`
   display: flex;
   align-items: center;
@@ -91,38 +126,3 @@ const CardNumbersText = styled(CardText)`
   font-size: 14px;
   letter-spacing: 2px;
 `;
-
-export const Card = ({
-  cardInfo: { cardType, cardNumbers, expireDate, ownerName },
-  openModal,
-}) => {
-  const formattedCardNumbers = Object.values(cardNumbers)
-    .map((number, idx) => (idx <= 1 ? number : '•'.repeat(number.length)))
-    .join(' ');
-
-  return (
-    <CardBox>
-      <SmallCard backgroundColor={cardType.color} onClick={openModal}>
-        <CardTop>
-          <CardText>{cardType.name}카드</CardText>
-        </CardTop>
-        <CardMiddle>
-          <SmallCard_chip />
-        </CardMiddle>
-        <CardBottom>
-          <CardBottom__number>
-            <CardNumbersText>{formattedCardNumbers}</CardNumbersText>
-          </CardBottom__number>
-          <CardBottom__info>
-            <CardText>{ownerName ? ownerName : 'NAME'}</CardText>
-            <CardText>
-              {expireDate.month ? expireDate.month : 'MM'}/
-              {expireDate.year ? expireDate.year : 'YY'}
-            </CardText>
-          </CardBottom__info>
-        </CardBottom>
-        <Shimmer />
-      </SmallCard>
-    </CardBox>
-  );
-};

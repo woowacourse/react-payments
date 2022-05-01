@@ -3,6 +3,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { keyframes } from 'styled-components';
 
+export const Shimmer = () => {
+  return (
+    <ShimmerWrapperStyle>
+      <ShimmerStyle />
+    </ShimmerWrapperStyle>
+  );
+};
+
 const loading = keyframes`
     0% {transform: translateX(-150%);}
     50% {transform: translateX(-60%);}
@@ -23,11 +31,3 @@ const ShimmerStyle = styled.div`
   transform: skewX(-200deg);
   box-shadow: 0 0 30px 30px rgba(255, 255, 255, 0.05);
 `;
-
-export const Shimmer = () => {
-  return (
-    <ShimmerWrapperStyle>
-      <ShimmerStyle />
-    </ShimmerWrapperStyle>
-  );
-};

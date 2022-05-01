@@ -2,6 +2,15 @@ import React from 'react';
 
 import styled from 'styled-components';
 
+export const PageTitle = ({ children }) => {
+  return (
+    <PageTitleWrapperStyle>
+      <BackwardButton />
+      {children}
+    </PageTitleWrapperStyle>
+  );
+};
+
 const PageTitleWrapperStyle = styled.div`
   width: 100px;
   height: 50px;
@@ -18,12 +27,3 @@ const BackwardButton = styled.span`
   transform: rotate(45deg);
   cursor: pointer;
 `;
-
-export const PageTitle = ({ children }) => {
-  return (
-    <PageTitleWrapperStyle>
-      <BackwardButton />
-      {children}
-    </PageTitleWrapperStyle>
-  );
-};

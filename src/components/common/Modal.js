@@ -2,6 +2,14 @@ import React from 'react';
 
 import styled from 'styled-components';
 
+export const Modal = ({ children, visible, closeModal }) => {
+  return (
+    <ModalDimmedStyle onClick={closeModal} isVisible={visible}>
+      <ModalStyle>{children}</ModalStyle>
+    </ModalDimmedStyle>
+  );
+};
+
 const ModalDimmedStyle = styled.div`
   width: 100%;
   height: 100%;
@@ -35,11 +43,3 @@ const ModalStyle = styled.div`
   z-index: 10;
   flex-direction: column;
 `;
-
-export const Modal = ({ children, visible, closeModal }) => {
-  return (
-    <ModalDimmedStyle onClick={closeModal} isVisible={visible}>
-      <ModalStyle>{children}</ModalStyle>
-    </ModalDimmedStyle>
-  );
-};

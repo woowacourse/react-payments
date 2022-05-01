@@ -1,6 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const Dot = () => {
+  return (
+    <DotContainerStyle>
+      <DotStyle />
+    </DotContainerStyle>
+  );
+};
+
+export default Dot;
+
 const DotContainerStyle = styled.div`
   display: flex;
   justify-content: center;
@@ -14,13 +24,3 @@ const DotStyle = styled.div`
   width: 4px;
   height: 4px;
 `;
-
-const Dot = () => {
-  return (
-    <DotContainerStyle>
-      <DotStyle />
-    </DotContainerStyle>
-  );
-};
-
-export default Dot;

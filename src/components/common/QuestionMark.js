@@ -2,6 +2,14 @@ import React from 'react';
 
 import styled from 'styled-components';
 
+export const QuestionMark = ({ onClick }) => {
+  return (
+    <QuestionMarkContainerStyle onClick={onClick}>
+      <div>?</div>
+    </QuestionMarkContainerStyle>
+  );
+};
+
 const QuestionMarkContainerStyle = styled.div`
   border-radius: 50%;
   border: 1px solid #bababa;
@@ -13,11 +21,3 @@ const QuestionMarkContainerStyle = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-export const QuestionMark = ({ onClick }) => {
-  return (
-    <QuestionMarkContainerStyle onClick={onClick}>
-      <div>?</div>
-    </QuestionMarkContainerStyle>
-  );
-};
