@@ -5,8 +5,13 @@ export default function useInputFocus(dataStateArray, dataUnitLength) {
   const [focusInputIndex, setFocusInputIndex] = useState(null);
   const inputRef = useRef([]);
 
+  const handleFocusPrevious = ({ key }) => {
+    if (key === "Backspace" && dataStateArray[focusInputIndex] === "") {
+      inputRef.current[focusInputIndex - 1].focus();
+    }
+  };
+
   useUpdateEffect(() => {
-    console.log(1);
     if (
       focusInputIndex !== null &&
       inputRef.current[focusInputIndex].value.length === dataUnitLength
@@ -22,5 +27,5 @@ export default function useInputFocus(dataStateArray, dataUnitLength) {
     if (focusInputIndex !== null) inputRef.current[focusInputIndex].focus();
   }, [focusInputIndex]);
 
-  return [inputRef, setFocusInputIndex];
+  return [inputRef, setFocusInputIndex, handleFocusPrevious];
 }

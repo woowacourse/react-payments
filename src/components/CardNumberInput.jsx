@@ -5,7 +5,7 @@ import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
 
 export default function CardNumberInput({ cardNumber, onChange }) {
-  const [inputRef, setFocusInputIndex] = useInputFocus(
+  const [inputRef, setFocusInputIndex, handleFocusPrevious] = useInputFocus(
     cardNumber,
     CARD_INFO_RULES.NUMBER_UNIT_LENGTH
   );
@@ -30,6 +30,7 @@ export default function CardNumberInput({ cardNumber, onChange }) {
               placeholder={index <= 1 ? "1 2 3 4" : CREATE_MASKED_CHARACTERS(4)}
               onFocus={() => setFocusInputIndex(index)}
               onBlur={() => setFocusInputIndex(null)}
+              onKeyDown={handleFocusPrevious}
               isComplete={
                 cardNumber[index].length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
               }
