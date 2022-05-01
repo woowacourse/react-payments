@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-function useErrorMessage({ state, validate, isCondition = false }) {
+function useErrorMessage({ state, validate, isAnyValueEmpty = false }) {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleError = () => {
-    if (isCondition) return;
+    if (isAnyValueEmpty) return;
 
     try {
       validate(state);

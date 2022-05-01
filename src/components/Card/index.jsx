@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const cardNumberFormatter = (cardNumber) => {
+const formatCardNumber = (cardNumber) => {
   const newCardNumber = [...cardNumber].map((unit) => (unit === '' ? '0000' : unit));
   const maskingIndexes = [2, 3];
 
@@ -22,7 +22,7 @@ function Card({ companyName, cardNumber, userName, expireMonth, expireYear, isCo
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">{cardNumberFormatter(cardNumber)}</span>
+            <span className="card-text">{formatCardNumber(cardNumber)}</span>
           </div>
           <div className="card-bottom__info">
             <span className="card-text user-name">{userName}</span>

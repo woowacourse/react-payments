@@ -9,7 +9,7 @@ const initialState = {
   cardPassword: '',
 };
 
-const cardNumberFormatter = (cardNumber) => cardNumber.replace(/[^0-9]/g, '');
+const formatCardNumber = (cardNumber) => cardNumber.replace(/[^0-9]/g, '');
 
 function reducer(state, { type, contents }) {
   const newState = { ...state };
@@ -17,7 +17,7 @@ function reducer(state, { type, contents }) {
   switch (type) {
     case 'cardNumber': {
       const { index, value } = contents;
-      newState.cardNumber[index] = cardNumberFormatter(value);
+      newState.cardNumber[index] = formatCardNumber(value);
       break;
     }
     case 'userName': {
