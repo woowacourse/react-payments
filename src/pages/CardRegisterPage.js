@@ -63,11 +63,9 @@ export const CardRegisterPage = () => {
     cardType: false,
   });
 
-  const checkerFactory = (subject) => {
-    const key = subject;
-
+  const setCheckInputStateOf = (state) => {
     return (isCompleted) => {
-      setCheckInputs((prev) => ({ ...prev, [key]: isCompleted }));
+      setCheckInputs((prev) => ({ ...prev, [state]: isCompleted }));
     };
   };
 
@@ -85,7 +83,7 @@ export const CardRegisterPage = () => {
             cardTypes={CARD_TYPES}
             handleVisible={() => setModalVisible("")}
             handleCardType={setCardType}
-            handleCardTypeCheck={checkerFactory("cardType")}
+            handleCardTypeCheck={setCheckInputStateOf("cardType")}
           />
         );
       case "cardCVC":
@@ -110,12 +108,12 @@ export const CardRegisterPage = () => {
         cardNumbers={cardNumbers}
         handleModalVisible={modalSelector("cardType")}
         handleCardNumbersInput={setCardNumbers}
-        handleCardNumberCheck={checkerFactory("cardNumbers")}
+        handleCardNumberCheck={setCheckInputStateOf("cardNumbers")}
       />
       <CardExpireDateInputForm
         expireDate={expireDate}
         handleExpireDateInput={setExpireDate}
-        handleCardExpireCheck={checkerFactory("cardExpireDate")}
+        handleCardExpireCheck={setCheckInputStateOf("cardExpireDate")}
       />
       <CardOwnerInputForm
         ownerName={ownerName}
@@ -124,13 +122,13 @@ export const CardRegisterPage = () => {
       <CVCInputForm
         CVC={CVC}
         handleCVCInput={setCVC}
-        handleCardCVCCheck={checkerFactory("cardCVC")}
+        handleCardCVCCheck={setCheckInputStateOf("cardCVC")}
         handleModalVisible={modalSelector("cardCVC")}
       />
       <CardPasswordInputForm
         password={password}
         handlePasswordInput={setPassword}
-        handleCardPasswordCheck={checkerFactory("cardPassword")}
+        handleCardPasswordCheck={setCheckInputStateOf("cardPassword")}
       />
       <Modal visible={modalVisible} handleVisible={() => setModalVisible("")}>
         {modalVisible && loadModal()}
