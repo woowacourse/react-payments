@@ -9,3 +9,7 @@
   color: #04c09e;
   font-weight: 700;
 }
+
+.submit-button:disabled {
+  color: lightgray;
+}

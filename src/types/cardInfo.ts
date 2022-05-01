@@ -32,8 +32,10 @@ interface ExpirationDate {
   year: string;
 }
 
+type CardInfoValidationTarget = Omit<CardInfo, "cardType" | "userName">;
+
 type CardInfoValidation = {
-  [K in keyof Omit<CardInfo, "cardType" | "userName">]: Validation;
+  [K in keyof CardInfoValidationTarget]: Validation;
 };
 
 interface Validation {
@@ -46,6 +48,7 @@ export type {
   CardColor,
   CardInfo,
   CardInfoValidation,
+  CardInfoValidationTarget,
   CardName,
   CardNumbers,
   CardType,

@@ -1,9 +1,13 @@
 import { CARD_VALID_PERIOD } from "../constant";
-import type { CardInfo, CardNumbers, ExpirationDate, Password } from "../types/cardInfo";
+import type {
+  CardInfo,
+  CardInfoValidationTarget,
+  CardNumbers,
+  ExpirationDate,
+  Password,
+} from "../types/cardInfo";
 
 type Validator<T> = (value: T) => boolean;
-
-type CardInfoValidationTarget = Omit<CardInfo, "cardType" | "userName">;
 
 type Validators = {
   [K in keyof CardInfoValidationTarget]: Validator<CardInfoValidationTarget[K]>;

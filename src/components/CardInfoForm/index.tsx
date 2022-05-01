@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import type { InputChangeFunction } from "../../types";
-import type { CardInfo, CardInfoValidation } from "../../types/cardInfo";
+import type { CardInfo, CardInfoValidation, CardInfoValidationTarget } from "../../types/cardInfo";
 import CardExpirationDate from "./CardExpirationDate";
 import CardNumber from "./CardNumber";
 import CardPassword from "./CardPassword";
@@ -34,7 +34,11 @@ export default function CardInfoForm({
   const [isNextButtonShown, setIsNextButtonShown] = useState(true);
 
   useEffect(() => {
-    setIsNextButtonShown(Object.keys(cardInfoValidation).every(key => cardInfoValidation[key]));
+    setIsNextButtonShown(
+      Object.keys(cardInfoValidation).every(
+        (key: keyof CardInfoValidationTarget) => cardInfoValidation[key].isValid
+      )
+    );
   }, [cardInfoValidation]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -67,7 +71,9 @@ export default function CardInfoForm({
         onChange={onChangePassword}
         validation={cardInfoValidation.password}
       />
-      {isNextButtonShown && <button className="submit-button">다음</button>}
+      <button className="submit-button" disabled={!isNextButtonShown}>
+        다음
+      </button>
     </form>
   );
 }
