@@ -1,11 +1,11 @@
 import { useState, useMemo, useEffect } from 'react';
-import Head from '../components/Head';
-import Card from '../components/Card';
-import LabeledInput from '../components/LabeledInput';
-import InfoLabel from '../components/InfoLabel';
-import SubmitButton from '../components/SubmitButton';
+import Head from '../components/Modules/Head';
+import Card from '../components/Modules/Card';
+import LabeledInput from '../components/Modules/LabeledInput';
+import InfoLabel from '../components/Atoms/InfoLabel';
+import SubmitButton from '../components/Atoms/SubmitButton';
+import Input from '../components/Atoms/Input';
 import validator from '../validation';
-import Input from '../components/Input';
 import { Page, CardSection, Form, FormRow, SubmitButtonContainer } from '../style/page';
 import {
   cardNumberInputRegex,

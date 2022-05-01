@@ -1,4 +1,4 @@
-import { Button } from '../../style/addForm';
+import { Button } from '../../../style/addForm';
 
 function SubmitButton({ label, width, height, hidden }) {
   return (

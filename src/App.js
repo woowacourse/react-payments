@@ -1,5 +1,5 @@
 import './App.css';
-import CardAddPage from './pages/CardAddPage';
+import CardAddPage from './Pages/CardAddPage';
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import { InputLabelText } from '../../style/addForm';
+import { InputLabelText } from '../../../style/addForm';
 
 function InputLabel({ label }) {
   return <InputLabelText>{label}</InputLabelText>;

@@ -1,4 +1,4 @@
-import { HeadContainer, BackButton, Title } from '../../style/head';
+import { HeadContainer, BackButton, Title } from '../../../style/head';
 
 function Head({ title }) {
   return (

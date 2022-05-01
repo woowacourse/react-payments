@@ -1,4 +1,4 @@
-import { InfoLabelContainer } from '../../style/addForm';
+import { InfoLabelContainer } from '../../../style/addForm';
 
 function InfoLabel() {
   return <InfoLabelContainer>?</InfoLabelContainer>;

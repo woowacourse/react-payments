@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import Input from '../Input';
-import InputLabel from '../InputLabel';
+import Input from '../../Atoms/Input';
+import InputLabel from '../../Atoms/InputLabel';
 import {
   LabeledInputContainer,
   LabeledInputHeader,
   LabeledInputBody,
   LengthChecker,
   LabeledInputFooter,
-} from '../../style/addForm';
+} from '../../../style/addForm';
 
 function LabeledInput({
   value,

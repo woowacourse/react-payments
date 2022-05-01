@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PLACEHOLDER } from '../../../constant';
 
 export const CardContainer = styled.div`
   display: flex;
@@ -54,3 +55,23 @@ export const CardBottomContainer = styled.div`
 export const CardOwnerName = styled.span`
   word-break: break-all;
 `;
+
+function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
+  return (
+    <CardContainer>
+      <CardCompanyName>{companyName}</CardCompanyName>
+      <IC />
+      <CardNumberContainer>
+        {cardNumbers.map((cardNumber, index) => (
+          <span key={cardNumber + index}>{cardNumber}</span>
+        ))}
+      </CardNumberContainer>
+      <CardBottomContainer>
+        <CardOwnerName>{ownerName || PLACEHOLDER.NAME}</CardOwnerName>
+        <span>{expiredDate ? expiredDate : PLACEHOLDER.DATE}</span>
+      </CardBottomContainer>
+    </CardContainer>
+  );
+}
+
+export default Card;

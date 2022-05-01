@@ -1,4 +1,4 @@
-import { StyledInput } from '../../style/addForm';
+import { StyledInput } from '../../../style/addForm';
 
 function Input({
   value,
