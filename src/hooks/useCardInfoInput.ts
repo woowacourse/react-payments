@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import REGEXP from "../constant/regexp";
+import { cardInfoValidator } from "../lib/validation";
 import { InputChangeFunction } from "../types";
-import type { CardColor, CardInfo, CardName, CardNumbers, Password } from "../types/cardInfo";
+import type {
+  CardColor,
+  CardInfo,
+  CardInfoValidation,
+  CardName,
+  CardNumbers,
+  Password,
+} from "../types/cardInfo";
 
 const initialCardInfo: CardInfo = {
   cardType: { name: "검정 카드", color: "black" },
@@ -15,6 +23,24 @@ const initialCardInfo: CardInfo = {
 
 const useCardInfoInput = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>(initialCardInfo);
+  const [cardInfoValidation, setCardInfoValidation] = useState<CardInfoValidation>({
+    isCardNumbersValid: false,
+    isExpirationDateValid: false,
+    isSecurityCodeValid: false,
+    isPasswordValid: false,
+  });
+
+  const handleChangeValidation = <T>(
+    key: keyof CardInfoValidation,
+    value: T,
+    validator: (value: T) => boolean
+  ) => {
+    setCardInfoValidation(prev => ({
+      ...prev,
+      [key]: validator(value),
+    }));
+  };
+
   const resetCardInfo = () => {
     setCardInfo(initialCardInfo);
   };
@@ -49,6 +75,14 @@ const useCardInfoInput = () => {
     }
   };
 
+  useEffect(() => {
+    handleChangeValidation(
+      "isCardNumbersValid",
+      cardInfo.cardNumbers,
+      cardInfoValidator["cardNumbers"]
+    );
+  }, [cardInfo.cardNumbers]);
+
   const onChangeExpirationDate: InputChangeFunction = e => {
     const {
       value,
@@ -70,6 +104,14 @@ const useCardInfoInput = () => {
       });
     }
   };
+
+  useEffect(() => {
+    handleChangeValidation(
+      "isExpirationDateValid",
+      cardInfo.expirationDate,
+      cardInfoValidator["expirationDate"]
+    );
+  }, [cardInfo.expirationDate]);
 
   const onChangeUserName: InputChangeFunction = e => {
     const value = e.target.value;
@@ -100,6 +142,14 @@ const useCardInfoInput = () => {
     }
   };
 
+  useEffect(() => {
+    handleChangeValidation(
+      "isSecurityCodeValid",
+      cardInfo.securityCode,
+      cardInfoValidator["securityCode"]
+    );
+  }, [cardInfo.securityCode]);
+
   const onChangePassword: InputChangeFunction = e => {
     const {
       value,
@@ -120,8 +170,13 @@ const useCardInfoInput = () => {
     }
   };
 
+  useEffect(() => {
+    handleChangeValidation("isPasswordValid", cardInfo.password, cardInfoValidator["password"]);
+  }, [cardInfo.password]);
+
   return {
     cardInfo,
+    cardInfoValidation,
     onChangeCardType,
     resetCardInfo,
     onChangeCardNumber,

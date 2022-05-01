@@ -32,4 +32,20 @@ interface ExpirationDate {
   year: string;
 }
 
-export type { CardColor, CardInfo, CardName, CardNumbers, CardType, ExpirationDate, Password };
+type CardInfoValidation = {
+  isCardNumbersValid: boolean;
+  isExpirationDateValid: boolean;
+  isSecurityCodeValid: boolean;
+  isPasswordValid: boolean;
+};
+
+export type {
+  CardColor,
+  CardInfo,
+  CardInfoValidation,
+  CardName,
+  CardNumbers,
+  CardType,
+  ExpirationDate,
+  Password,
+};

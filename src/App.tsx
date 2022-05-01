@@ -4,12 +4,12 @@ import Card from "./components/Card";
 import CardInfoForm from "./components/CardInfoForm";
 import Header from "./components/Header";
 import useCardInfoInput from "./hooks/useCardInfoInput";
-import useCardInfoValidation from "./hooks/useCardInfoValidation";
 import { cardInfoValidator } from "./lib/validation";
 
 function App() {
   const {
     cardInfo,
+    cardInfoValidation,
     onChangeCardType,
     resetCardInfo,
     onChangeCardNumber,
@@ -19,8 +19,6 @@ function App() {
     onChangeSecurityCode,
     onChangePassword,
   } = useCardInfoInput();
-
-  const cardInfoValidation = useCardInfoValidation(cardInfo);
 
   return (
     <div className="App">
