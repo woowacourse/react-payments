@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const InputWrapper = styled.div`
   display: flex;
@@ -14,8 +14,8 @@ const InputWrapper = styled.div`
   border: ${(props) =>
     props.border ||
     (props.error && `solid 2px ${props.theme.colors.PINK}`) ||
-    "none"};
+    'none'};
   width: ${(props) => props.size || 100}%;
-`;
+`
 
-export { InputWrapper };
+export { InputWrapper }

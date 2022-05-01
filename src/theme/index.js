@@ -1,7 +1,7 @@
-import { COLORS as colors } from "../constant";
+import { COLORS as colors } from '../constant'
 
 const theme = {
   colors,
-};
+}
 
-export default theme;
+export default theme

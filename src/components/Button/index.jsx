@@ -1,20 +1,21 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import { ButtonWrapper } from './style'
 
-function Button({children, color, onClick}){
-  return(<ButtonWrapper type="button" color={color} onClick={onClick}>{children}</ButtonWrapper>)
+function Button({ children, color, onClick }) {
+  return (
+    <ButtonWrapper type="button" color={color} onClick={onClick}>
+      {children}
+    </ButtonWrapper>
+  )
 }
 
 Button.propTypes = {
-  onClick : PropTypes.func,
+  onClick: PropTypes.func,
   color: PropTypes.string,
   /**
    * Button contents
    */
-   children: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node
-   ]),
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 }
 
-export default Button;
+export default Button

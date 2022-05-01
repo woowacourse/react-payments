@@ -1,22 +1,30 @@
-import { Fragment } from 'react';
-import { InputWrapper } from './style';
-import { Input } from '../Input/style';
+import { Fragment } from 'react'
+import { InputWrapper } from './style'
+import { Input } from '../Input/style'
 
-function InputBox({ inputInfo, size, background, border, error, onChange}){
-  return(
-    <InputWrapper  
+function InputBox({ inputInfo, size, background, border, error, onChange }) {
+  return (
+    <InputWrapper
       background={background}
       border={border}
       size={size}
       error={error}
-      >
-    {inputInfo.map(({type, id, placeholder, value, ref}, index) => 
-      <Fragment key={index}>
-        <Input type={type} id={id} placeholder={placeholder} value={value} ref={ref} onChange={(e)=>onChange(e, index)} data-testid={id}/>
-      </Fragment>
-    )}
+    >
+      {inputInfo.map(({ type, id, placeholder, value, ref }, index) => (
+        <Fragment key={index}>
+          <Input
+            type={type}
+            id={id}
+            placeholder={placeholder}
+            value={value}
+            ref={ref}
+            onChange={(e) => onChange(e, index)}
+            data-testid={id}
+          />
+        </Fragment>
+      ))}
     </InputWrapper>
   )
-} 
+}
 
 export default InputBox

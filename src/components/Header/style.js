@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -9,6 +9,6 @@ const HeaderWrapper = styled.div`
     margin-left: 15px;
     font-weight: 500;
   }
-`;
+`
 
-export { HeaderWrapper };
+export { HeaderWrapper }

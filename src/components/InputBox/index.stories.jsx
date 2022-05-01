@@ -1,53 +1,55 @@
-import InputBox from "./";
+import InputBox from './'
 
-const Template = (args) => <InputBox {...args} />;
+const Template = (args) => <InputBox {...args} />
 
 export default {
   title: 'InputBox',
   component: InputBox,
-};
+}
 
-export const CardNumberInputBox = Template.bind({});
-CardNumberInputBox.args = { 
+export const CardNumberInputBox = Template.bind({})
+CardNumberInputBox.args = {
   size: 100,
-  inputInfo: [{
-    type: 'number', 
-    id: 'first-card-number',
-  },
-  {
-    type: 'number', 
-    id: 'second-card-number',
-  },
-  {
-    type: 'number', 
-    id: 'third-card-number',
-  },
-  {
-    type: 'number', 
-    id: 'fourth-card-number',
-  }]
-};
+  inputInfo: [
+    {
+      type: 'number',
+      id: 'first-card-number',
+    },
+    {
+      type: 'number',
+      id: 'second-card-number',
+    },
+    {
+      type: 'number',
+      id: 'third-card-number',
+    },
+    {
+      type: 'number',
+      id: 'fourth-card-number',
+    },
+  ],
+}
 
 // export const CardDueDateInputBox = Template.bind({});
-// CardDueDateInputBox.args = { 
+// CardDueDateInputBox.args = {
 //   size: 50,
 //   children: <><Input type='number' placeholder="MM"/><Input type='number' placeholder="DD" /></>
 // };
 
 // export const CardOwnerInputBox = Template.bind({});
-// CardOwnerInputBox.args = { 
+// CardOwnerInputBox.args = {
 //   size: 100,
 //   children: <Input type='text' placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
 // };
 
 // export const CardCVCInputBox = Template.bind({});
-// CardCVCInputBox.args = { 
+// CardCVCInputBox.args = {
 //   size: 50,
 //   children: <Input type='password' />
 // }
 
 // export const CardPasswordInputBox = Template.bind({});
-// CardPasswordInputBox.args = { 
+// CardPasswordInputBox.args = {
 //   size: 10,
 //   children: <Input type='password' />
 // }

@@ -1,10 +1,10 @@
-import AddPage from "./";
+import AddPage from './'
 
-const Template = (args) => <AddPage {...args} />;
+const Template = (args) => <AddPage {...args} />
 
 export default {
   title: 'AddPage',
   component: AddPage,
-};
+}
 
-export const DefaultAddPage  = Template.bind({});
+export const DefaultAddPage = Template.bind({})

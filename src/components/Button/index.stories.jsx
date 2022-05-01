@@ -1,22 +1,21 @@
-import Button from "./";
-import { ReactComponent as Arrow } from '../../assets/arrow.svg';
-import { COLORS } from "../../constant";
+import Button from './'
+import { ReactComponent as Arrow } from '../../assets/arrow.svg'
+import { COLORS } from '../../constant'
 
-const Template = (args) => <Button {...args} />;
+const Template = (args) => <Button {...args} />
 
 export default {
-  title: "Button",
+  title: 'Button',
   component: Button,
- 
-};
+}
 
-export const Primary = Template.bind({});
+export const Primary = Template.bind({})
 Primary.args = {
-  children: "다음",
+  children: '다음',
   color: COLORS.MINT,
-};
+}
 
-export const BeforeButton = Template.bind({});
+export const BeforeButton = Template.bind({})
 BeforeButton.args = {
-  children: (<Arrow/>)
-};
+  children: <Arrow />,
+}

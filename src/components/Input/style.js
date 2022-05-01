@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Input = styled.input`
   background-color: transparent;
@@ -14,11 +14,11 @@ const Input = styled.input`
     outline: none;
   }
 
-  &[type="number"]::-webkit-outer-spin-button,
-  &[type="number"]::-webkit-inner-spin-button {
+  &[type='number']::-webkit-outer-spin-button,
+  &[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-`;
+`
 
-export { Input };
+export { Input }

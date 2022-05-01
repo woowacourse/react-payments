@@ -1,11 +1,7 @@
 import { HeaderWrapper } from './style'
 
-function Header({children}) {
-  return (
-    <HeaderWrapper>
-      {children}
-    </HeaderWrapper>
-  )
+function Header({ children }) {
+  return <HeaderWrapper>{children}</HeaderWrapper>
 }
 
-export default Header;
+export default Header
