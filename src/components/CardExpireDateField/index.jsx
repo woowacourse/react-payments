@@ -18,6 +18,7 @@ function CardExpireDateField({ expireMonth, expireYear, onChange }) {
     <FieldSet title="만료일" inputWidth={50} errorMessage={errorMessage}>
       <TextField
         name="expireMonth"
+        type="number"
         value={expireMonth}
         placeholder="MM"
         maxLength={EXPIRE_DATE.MONTH_LENGTH}
@@ -27,6 +28,7 @@ function CardExpireDateField({ expireMonth, expireYear, onChange }) {
       /
       <TextField
         name="expireYear"
+        type="number"
         value={expireYear}
         placeholder="YY"
         maxLength={EXPIRE_DATE.YEAR_LENGTH}

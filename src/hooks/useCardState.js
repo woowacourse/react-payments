@@ -9,7 +9,7 @@ const initialState = {
   cardPassword: '',
 };
 
-const cardNumberFormatter = (cardNumber) => cardNumber.replace(/[^0-9]/g, '');
+const cardNumberFormatter = (cardNumber) => cardNumber.replace(/[^0-9]{1,4}$/g, '').slice(0, 4);
 
 function reducer(state, { type, contents }) {
   const newState = { ...state };

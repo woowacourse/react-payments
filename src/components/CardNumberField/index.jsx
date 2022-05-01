@@ -18,7 +18,7 @@ function CardNumberField({ cardNumber, onChange }) {
     <FieldSet title="카드 번호" errorMessage={errorMessage}>
       {Array.from({ length: CARD_NUMBER.UNIT_COUNT }).map((_, index) => (
         <TextField
-          type={index < CARD_NUMBER.MASKING_INDEX ? 'text' : 'password'}
+          type={index < CARD_NUMBER.MASKING_INDEX ? 'number' : 'password'}
           name="cardNumber"
           // index 값이 변경될 일이 없으므로 index로 key 값 지정.
           // eslint-disable-next-line react/no-array-index-key
