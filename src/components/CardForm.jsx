@@ -257,11 +257,11 @@ const CardForm = () => {
   return (
     <Form
       formSchema={cardFormSchema}
-      onSubmit={(values, setSubmitting) => {
-        setSubmitting(true);
+      onSubmit={(values, setIsSubmitting) => {
+        setIsSubmitting(true);
         addCard(values);
         alert('제출 성공');
-        setSubmitting(false);
+        setIsSubmitting(false);
       }}
       onSubmitError={(errors, invalidInputRefs) => {
         const firstInvalidInput = invalidInputRefs[0].element;
@@ -271,10 +271,10 @@ const CardForm = () => {
         alert(errorMessage);
       }}
     >
-      {({ values, submitting, handleSubmit, errors, registerInputProps }) => (
+      {({ values, isSubmitting, handleSubmit, errors, registerInputProps }) => (
         <>
           <CardPreview {...getCardInfo(values)} />
-          <StyledCardForm onSubmit={handleSubmit} disabled={submitting}>
+          <StyledCardForm onSubmit={handleSubmit} disabled={isSubmitting}>
             <StyledCardFieldContainer className="input-container">
               <label className="input-title">카드 번호</label>
               <div className="input-box">

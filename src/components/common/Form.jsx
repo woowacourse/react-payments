@@ -14,7 +14,7 @@ const Form = ({ children, formSchema, onSubmit, onSubmitError }) => {
     focusNextElement,
   } = useFormSchema(formSchema);
 
-  const [submitting, setSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { ref, bindElement, getNextElement, getPrevElement } =
     useObjectRef(formSchema);
 
@@ -78,7 +78,7 @@ const Form = ({ children, formSchema, onSubmit, onSubmitError }) => {
       return;
     }
 
-    onSubmit(values, setSubmitting);
+    onSubmit(values, setIsSubmitting);
   };
 
   const registerInputProps = (name) => {
@@ -95,7 +95,7 @@ const Form = ({ children, formSchema, onSubmit, onSubmitError }) => {
     <>
       {children({
         values,
-        submitting,
+        isSubmitting,
         handleChange,
         handleKeyDown,
         handleSubmit,
