@@ -3,6 +3,9 @@ import Input from "./UIComponents/Input/Input.jsx";
 import styled from "styled-components";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
 import useInputFocus from "../useInputFocus.jsx";
+import useArraySetState from "../useArraySetState.jsx";
+import useValidatedUpdate from "../useValidatedUpdate.jsx";
+import { cardInfoValidations } from "../cardInfoValidations.js";
 
 const StyledInputField = styled.div`
   display: flex;
@@ -17,6 +20,13 @@ const StyledLabel = styled.label`
   line-height: 14px;
   color: ${(props) => (props.isComplete ? "#04c09e" : "#525252")};
   letter-spacing: -0.085em;
+
+  display: flex;
+  gap: 10px;
+
+  .error-message {
+    color: #d82424;
+  }
 `;
 
 const StyledInputWrapper = styled.div`
@@ -26,6 +36,8 @@ const StyledInputWrapper = styled.div`
   border-radius: 7px;
   width: ${(props) => props.width};
   padding: 12px;
+
+  box-shadow: ${(props) => props.hasError && "inset 0 0 0 1px #d82424"};
 `;
 
 const StyledInputContainer = styled.div`
@@ -35,7 +47,13 @@ const StyledInputContainer = styled.div`
   color: #04c09e;
 `;
 
-export default function CardPasswordInput({ password, onChange }) {
+export default function CardPasswordInput({ password, setPassword }) {
+  const setPasswordArray = useArraySetState(setPassword);
+  const [handlePasswordUpdate, errorMessage, resetError] = useValidatedUpdate(
+    cardInfoValidations["password"],
+    setPasswordArray
+  );
+
   const [inputRef, setFocusInputIndex, handleFocusPrevious] = useInputFocus(
     password,
     1
@@ -47,20 +65,27 @@ export default function CardPasswordInput({ password, onChange }) {
         isComplete={
           password.join("").length === CARD_INFO_RULES.PASSWORD_LENGTH
         }
+        errorMessage={errorMessage}
       >
         카드 비밀번호 앞 두 자리
+        <span className="error-message">{errorMessage}</span>
       </StyledLabel>
       <StyledInputContainer>
         {Array.from({ length: CARD_INFO_RULES.PASSWORD_LENGTH }).map(
           (_, index) => (
-            <StyledInputWrapper width="45px" key={index}>
+            <StyledInputWrapper
+              width="45px"
+              key={index}
+              hasError={errorMessage !== ""}
+            >
               <Input
                 type="password"
                 value={password[index]}
-                onChange={(e) => onChange(e, index)}
+                onChange={(e) => handlePasswordUpdate(e, index)}
                 width="100%"
                 placeholder={CREATE_MASKED_CHARACTERS(1)}
                 onFocus={() => setFocusInputIndex(index)}
+                onBlur={() => resetError()}
                 onKeyDown={handleFocusPrevious}
                 isComplete={password[0].length === 1}
                 ref={(element) => (inputRef.current[index] = element)}

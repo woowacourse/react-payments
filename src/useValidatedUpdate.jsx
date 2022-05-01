@@ -1,16 +1,33 @@
-export default function useValidatedUpdate(validation, setter) {
-  return (event, order) => {
-    const {
-      target: { value },
-    } = event;
+import { useState } from "react";
 
-    if (!validation(value, order)) return;
+export default function useValidatedUpdate(validation, setter, errorHandler) {
+  const [errorMessage, setErrorMessage] = useState("");
 
-    if (order !== undefined) {
-      setter(value, order);
-      return;
-    }
+  const resetError = () => setErrorMessage("");
 
-    setter(value);
-  };
+  return [
+    (event, order) => {
+      const {
+        target: { value },
+      } = event;
+
+      const { testFunc, errorMessage } = validation;
+
+      if (!testFunc(value, order)) {
+        setErrorMessage(errorMessage);
+        return;
+      }
+
+      resetError();
+
+      if (order !== undefined) {
+        setter(value, order);
+        return;
+      }
+
+      setter(value);
+    },
+    errorMessage,
+    resetError,
+  ];
 }

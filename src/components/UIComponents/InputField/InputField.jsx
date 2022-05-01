@@ -15,6 +15,13 @@ const StyledLabel = styled.label`
   line-height: 14px;
   color: ${(props) => (props.isComplete ? "#04c09e" : "#525252")};
   letter-spacing: -0.085em;
+
+  display: flex;
+  gap: 10px;
+
+  .error-message {
+    color: #d82424;
+  }
 `;
 
 const StyledInputWrapper = styled.div`
@@ -24,6 +31,8 @@ const StyledInputWrapper = styled.div`
   border-radius: 7px;
   width: ${(props) => props.width};
   padding: 12px;
+
+  box-shadow: ${(props) => props.hasError && "inset 0 0 0 1px #d82424"};
 `;
 
 const StyledInputContainer = styled.div`
@@ -39,12 +48,20 @@ export default function InputField({
   wrapperWidth,
   horizontalAlign,
   isComplete,
+  errorMessage,
 }) {
   return (
     <StyledInputField>
-      <StyledLabel isComplete={isComplete}>{labelText}</StyledLabel>
+      <StyledLabel isComplete={isComplete}>
+        {labelText}
+        <span className="error-message">{errorMessage}</span>
+      </StyledLabel>
       <StyledInputContainer>
-        <StyledInputWrapper width={wrapperWidth} align={horizontalAlign}>
+        <StyledInputWrapper
+          width={wrapperWidth}
+          align={horizontalAlign}
+          hasError={errorMessage !== ""}
+        >
           {children}
         </StyledInputWrapper>
         {OptionalComponent}
