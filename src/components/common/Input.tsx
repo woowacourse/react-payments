@@ -49,7 +49,7 @@ export default function Input({
     if (formSelector) moveFocus(e.target, inputLength);
   };
 
-  const moveFocus = (target, inputLength: number) => {
+  const moveFocus = (target: HTMLInputElement, inputLength: number) => {
     const inputIndex = arrayInputsRef.current.findIndex(element => element === target);
 
     if (inputLength === maxLength) focusOnEmptyInput();
