@@ -10,9 +10,14 @@ interface CardUserNameProps {
   onChange: InputChangeFunction;
   onBlur: () => void;
 }
+
 export default function CardUserName({ userName, onChange, onBlur }: CardUserNameProps) {
   return (
-    <InputContainer title="카드 소유자 이름(선택)" isValid={false}>
+    <InputContainer
+      title="카드 소유자 이름(선택)"
+      isValid={false}
+      rightContent={<LengthIndicator length={userName.length} maxLength={MAX_USER_NAME_LENGTH} />}
+    >
       <Input
         value={userName}
         type="text"
@@ -25,9 +30,14 @@ export default function CardUserName({ userName, onChange, onBlur }: CardUserNam
         align="left"
         formSelector="#card-info-form"
       />
-      <span className="card-user-name-length">
-        {userName.length}/{MAX_USER_NAME_LENGTH}
-      </span>
     </InputContainer>
+  );
+}
+
+function LengthIndicator({ length, maxLength }: { length: number; maxLength: number }) {
+  return (
+    <span className="card-user-name-length">
+      {length}/{maxLength}
+    </span>
   );
 }

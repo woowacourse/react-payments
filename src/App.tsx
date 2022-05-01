@@ -4,7 +4,6 @@ import Card from "./components/Card";
 import CardInfoForm from "./components/CardInfoForm";
 import Header from "./components/Header";
 import useCardInfoInput from "./hooks/useCardInfoInput";
-import { cardInfoValidator } from "./lib/validation";
 
 function App() {
   const {

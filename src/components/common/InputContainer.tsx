@@ -8,6 +8,7 @@ interface InputContainerProps {
   title: string;
   isValid: boolean;
   shouldShowError?: boolean;
+  rightContent?: JSX.Element;
 }
 
 export default function InputContainer({
@@ -15,12 +16,16 @@ export default function InputContainer({
   title,
   isValid,
   shouldShowError = false,
+  rightContent,
 }: InputContainerProps) {
   return (
     <div className="input-container">
       <div className="input-container-top">
-        <label className="input-title">{title}</label>
-        {isValid ? <SuccessMessage /> : shouldShowError && <FailMessage />}
+        <span>
+          <label className="input-title">{title}</label>
+          {isValid ? <SuccessMessage /> : shouldShowError && <FailMessage />}
+        </span>
+        {rightContent}
       </div>
       {children}
     </div>

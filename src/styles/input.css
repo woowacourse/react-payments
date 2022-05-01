@@ -9,9 +9,6 @@
 }
 
 .card-user-name-length {
-  position: absolute;
-  top: 0;
-  right: 0;
   font-size: 12px;
   color: #525252;
 }
@@ -27,6 +24,8 @@
 }
 
 .input-container-top {
+  display: flex;
+  justify-content: space-between;
   font-size: 12px;
   margin-bottom: 4px;
 }
