@@ -62,13 +62,22 @@ const useFormSchema = (formSchema) => {
 
   const bindAllowedKeyInput = (fieldName, { type, maxLength }) => {
     const rules = [];
+    const typeSet = new Set(Array.isArray(type) ? type : [type]);
 
-    if (type === 'number') {
-      rules.push((value) => isNumeric(value));
-      rules.push((value) =>
-        Array.from(value).every((char) => !InvalidNumberCharList.includes(char))
-      );
-    }
+    typeSet.forEach((typeValue) => {
+      if (typeValue === 'number') {
+        rules.push((value) => isNumeric(value));
+        rules.push((value) =>
+          Array.from(value).every(
+            (char) => !InvalidNumberCharList.includes(char)
+          )
+        );
+      }
+
+      if (typeValue instanceof RegExp) {
+        rules.push((value) => typeValue.test(value));
+      }
+    });
 
     if (maxLength) {
       rules.push((value) => value.length <= maxLength);
@@ -167,7 +176,7 @@ const EasyForm = ({ children, formSchema, onSubmit, onSubmitError }) => {
     if (isBackspace(event) && values[name] === '') {
       const prevElement = getPrevElement(name);
 
-      if (prevElement) prevElement.focus();
+      prevElement?.focus();
     }
   };
 

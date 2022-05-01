@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import BackwardButton from './components/common/BackwardButton';
-import CardForm from './components/CardForm';
+import CardForm from './components/CardForm/CardForm';
 
 const StyledApp = styled.div`
   padding: 16px 24px;
