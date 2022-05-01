@@ -104,12 +104,7 @@ function CardNumberInputContainer() {
     dispatch(createAction(ActionType.INPUT_CARDNUMBER, newCardNumber));
   };
 
-  return (
-    <>
-      <CardNumberInput onChange={handleValueChange} value={transformToCardFormat(cardNumber)} ref={inputRef} />
-      <div>{cardNumber}</div>
-    </>
-  );
+  return <CardNumberInput onChange={handleValueChange} value={transformToCardFormat(cardNumber)} ref={inputRef} />;
 }
 
 export default CardNumberInputContainer;
