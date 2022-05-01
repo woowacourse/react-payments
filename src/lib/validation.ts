@@ -1,6 +1,5 @@
 import { CARD_VALID_PERIOD } from "../constant";
 import type {
-  CardInfo,
   CardInfoValidationTarget,
   CardNumbers,
   ExpirationDate,
@@ -48,9 +47,9 @@ const validateDate = (expirationDate: ExpirationDate) => {
   return true;
 };
 const expirationDateValidators: Validate[] = [
-  { test: validateExpirationDateLength, msg: "월, 년을 채워주세요." },
+  { test: validateExpirationDateLength, msg: "월, 년을 입력해주세요." },
   { test: validateMonth, msg: "월은 1 이상, 12 이하로 입력해주세요." },
-  { test: validateDate, msg: "만료일은 현재로부터 5년까지입니다." },
+  { test: validateDate, msg: "만료일은 현재일로부터 5년까지입니다." },
 ];
 
 // CVC
