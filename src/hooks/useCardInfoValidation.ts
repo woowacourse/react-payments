@@ -22,7 +22,11 @@ const useCardInfoValidation = (cardInfo: CardInfo, validators: Validators) => {
 
   const { cardNumbers, expirationDate, userName, securityCode, password } = cardInfo;
 
-  const handleChangeValidation = <T>(key: string, value: T, validator: (value: T) => boolean) => {
+  const handleChangeValidation = <T>(
+    key: keyof CardInfoValidation,
+    value: T,
+    validator: (value: T) => boolean
+  ) => {
     setCardInfoValidation(prev => ({
       ...prev,
       [key]: validator(value),
