@@ -11,7 +11,7 @@ function CardNumberField({ cardNumber, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({
     state: cardNumber,
     validate: validateCardNumber,
-    isCondition: !cardNumber.every((unit) => unit !== ''),
+    isValid: !cardNumber.every((unit) => unit !== ''),
   });
 
   return (

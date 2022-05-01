@@ -11,7 +11,7 @@ function CardExpireDateField({ expireMonth, expireYear, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({
     state: { expireMonth, expireYear },
     validate: validateExpireDate,
-    isCondition: !expireMonth || !expireYear,
+    isValid: !expireMonth || !expireYear,
   });
 
   return (
