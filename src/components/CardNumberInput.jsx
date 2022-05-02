@@ -1,14 +1,13 @@
 import React from "react";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants";
-import useInputFocus from "./Hooks/useInputFocus";
 import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
+import { INPUT_KEY_TABLE } from "../constants";
 
-export default function CardNumberInput({ cardNumber, onChange }) {
-  const [inputRef, setFocusInputIndex, focusBeforeElement] = useInputFocus(
-    CARD_INFO_RULES.NUMBER_UNIT_LENGTH,
-    cardNumber
-  );
+const CardNumberInput = React.forwardRef((props, inputRef) => {
+  const { cardNumber, onChange, onKeyDown } = props;
+  const setInputRef = (name, index) => (element) =>
+    (inputRef.current[name][index] = element);
 
   return (
     <InputField
@@ -20,26 +19,33 @@ export default function CardNumberInput({ cardNumber, onChange }) {
         CARD_INFO_RULES.NUMBER_UNIT_COUNT * CARD_INFO_RULES.NUMBER_UNIT_LENGTH
       }
     >
-      {Array.from({ length: CARD_INFO_RULES.NUMBER_UNIT_COUNT }).map(
-        (_, index) => (
-          <React.Fragment key={index}>
-            <Input
-              autoFocus={index === 0}
-              type={index <= 1 ? "number" : "password"}
-              value={cardNumber[index]}
-              onChange={(e) => onChange(e, index)}
-              onKeyDown={focusBeforeElement}
-              placeholder={index <= 1 ? "1 2 3 4" : CREATE_MASKED_CHARACTERS(4)}
-              onFocus={() => setFocusInputIndex(index)}
-              isComplete={
-                cardNumber[index].length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
-              }
-              ref={(element) => (inputRef.current[index] = element)}
-            />
-            {index !== 3 && <p>-</p>}
-          </React.Fragment>
-        )
-      )}
+      {INPUT_KEY_TABLE.cardNumbers.map((cardNumberKey, index) => (
+        <React.Fragment key={index}>
+          <Input
+            autoFocus={index === 0}
+            type={index <= 1 ? "number" : "password"}
+            name={cardNumberKey}
+            value={cardNumber[index]}
+            onChange={(e) =>
+              onChange(
+                e,
+                "cardNumbers",
+                index,
+                CARD_INFO_RULES.NUMBER_UNIT_LENGTH
+              )
+            }
+            placeholder={index <= 1 ? "1 2 3 4" : CREATE_MASKED_CHARACTERS(4)}
+            onKeyDown={onKeyDown}
+            isComplete={
+              cardNumber[index].length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
+            }
+            ref={setInputRef("cardNumbers", index)}
+          />
+          {index !== 3 && <p>-</p>}
+        </React.Fragment>
+      ))}
     </InputField>
   );
-}
+});
+
+export default CardNumberInput;

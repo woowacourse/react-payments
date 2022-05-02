@@ -1,8 +1,11 @@
 import React from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import styled from "styled-components";
-import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
-import useInputFocus from "./Hooks/useInputFocus.jsx";
+import {
+  CARD_INFO_RULES,
+  CREATE_MASKED_CHARACTERS,
+  INPUT_KEY_TABLE,
+} from "../constants.js";
 
 const StyledInputField = styled.div`
   display: flex;
@@ -35,11 +38,8 @@ const StyledInputContainer = styled.div`
   color: #04c09e;
 `;
 
-export default function CardPasswordInput({ password, onChange }) {
-  const [inputRef, setFocusInputIndex, focusBeforeElement] = useInputFocus(
-    CARD_INFO_RULES.PASSWORD_UNIT_LENGTH,
-    password
-  );
+const CardPasswordInput = React.forwardRef((props, inputRef) => {
+  const { password, onChange, onKeyDown } = props;
 
   return (
     <StyledInputField>
@@ -51,24 +51,33 @@ export default function CardPasswordInput({ password, onChange }) {
         카드 비밀번호 앞 두 자리
       </StyledLabel>
       <StyledInputContainer>
-        {Array.from({ length: CARD_INFO_RULES.PASSWORD_LENGTH }).map(
-          (_, index) => (
-            <StyledInputWrapper width="45px" key={index}>
-              <Input
-                type="password"
-                value={password[index]}
-                onChange={(e) => onChange(e, index)}
-                onKeyDown={focusBeforeElement}
-                width="100%"
-                placeholder={CREATE_MASKED_CHARACTERS(1)}
-                onFocus={() => setFocusInputIndex(index)}
-                isComplete={password[0].length === 1}
-                ref={(element) => (inputRef.current[index] = element)}
-              />
-            </StyledInputWrapper>
-          )
-        )}
+        {INPUT_KEY_TABLE.passwordNumbers.map((passwordKey, index) => (
+          <StyledInputWrapper width="45px" key={index}>
+            <Input
+              type="password"
+              value={password[index]}
+              name={passwordKey}
+              onChange={(e) =>
+                onChange(
+                  e,
+                  "passwordNumbers",
+                  index,
+                  CARD_INFO_RULES.PASSWORD_UNIT_LENGTH
+                )
+              }
+              onKeyDown={onKeyDown}
+              width="100%"
+              placeholder={CREATE_MASKED_CHARACTERS(1)}
+              isComplete={password[0].length === 1}
+              ref={(element) =>
+                (inputRef.current.passwordNumbers[index] = element)
+              }
+            />
+          </StyledInputWrapper>
+        ))}
       </StyledInputContainer>
     </StyledInputField>
   );
-}
+});
+
+export default CardPasswordInput;

@@ -39,11 +39,12 @@ export default function CardHolderNameInput({ holderName, onChange }) {
     >
       <Input
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        type="text"
+        type={"text"}
+        name={"holderName"}
         value={holderName}
-        onChange={onChange}
-        width="100%"
-        textAlign="left"
+        onChange={(e) => onChange(e, "holderName")}
+        width={"100%"}
+        textAlign={"left"}
         isComplete={holderName !== ""}
       />
     </InputField>

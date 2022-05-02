@@ -1,9 +1,12 @@
+import React from "react";
 import styled from "styled-components";
 
-const CardInfoForm = styled.form`
+const StyledCardInfoForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px;
 `;
 
-export default CardInfoForm;
+export default function CardInfoForm({ children }) {
+  return <StyledCardInfoForm>{children}</StyledCardInfoForm>;
+}

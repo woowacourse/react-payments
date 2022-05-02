@@ -64,8 +64,9 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
     >
       <Input
         type="password"
+        name={"securityCode"}
         value={securityCode}
-        onChange={onChange}
+        onChange={(e) => onChange(e, "securityCode")}
         placeholder={CREATE_MASKED_CHARACTERS(3)}
         width="100%"
         isComplete={

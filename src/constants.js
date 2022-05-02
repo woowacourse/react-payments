@@ -15,3 +15,13 @@ export const CARD_INFO_RULES = {
   PASSWORD_LENGTH: 2,
   PASSWORD_UNIT_LENGTH: 1,
 };
+
+export const INPUT_KEY_TABLE = {
+  cardNumbers: [
+    "firstCardNumber",
+    "secondCardNumber",
+    "thirdCardNumber",
+    "fourthCardNumber",
+  ],
+  passwordNumbers: ["firstPassword", "secondPassword"],
+};

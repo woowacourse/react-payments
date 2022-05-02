@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import GlobalStyle from "./globalStyles.jsx";
 
@@ -14,85 +14,60 @@ import {
   CardSecurityCodeInput,
   CardExpireDateInput,
 } from "./components";
-import { CARD_REGISTER_SUCCESS_MESSAGE, CARD_INFO_RULES } from "./constants.js";
+
+import {
+  CARD_REGISTER_SUCCESS_MESSAGE,
+  CARD_INFO_RULES,
+  INPUT_KEY_TABLE,
+} from "./constants.js";
+
+import {
+  isInValidCardNumber,
+  isInValidExpireDate,
+  isInValidHolderName,
+  isInvalidSecurityCode,
+  isInvalidPassword,
+} from "./validator";
+import useInput from "./components/Hooks/useInput.jsx";
 
 function App() {
-  const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
-  const [expireDate, setExpireDate] = useState(["", ""]);
-  const [holderName, setHolderName] = useState("");
-  const [securityCode, setSecurityCode] = useState("");
-  const [password, setPassword] = useState(["", ""]);
+  const inputRef = useRef({
+    cardNumbers: [],
+    passwordNumbers: [],
+  });
+  const [cardNumber, handleCardNumberUpdate] = useInput(
+    ["", "", "", ""],
+    isInValidCardNumber,
+    inputRef
+  );
+  const [password, handlePasswordUpdate] = useInput(
+    ["", ""],
+    isInvalidPassword,
+    inputRef
+  );
+  const [expireDate, handleExpireDateUpdate] = useInput(
+    ["", ""],
+    isInValidExpireDate
+  );
+  const [holderName, handleHolderNameUpdate] = useInput(
+    "",
+    isInValidHolderName
+  );
+  const [securityCode, handleSecurityCodeUpdate] = useInput(
+    "",
+    isInvalidSecurityCode
+  );
   const [canProceed, setCanProceed] = useState(false);
 
-  const handleCardNumberUpdate = ({ target: { value } }, order) => {
-    if (
-      !Number.isInteger(Number(value)) ||
-      value.length > CARD_INFO_RULES.NUMBER_UNIT_LENGTH
-    )
-      return;
+  const focusBeforeElement = (event, inputKeys) => {
+    const { target, key } = event;
+    const targetIndex = INPUT_KEY_TABLE[inputKeys].findIndex(
+      (inputKey) => inputKey === target.name
+    );
 
-    setCardNumber((prevValue) => {
-      const newValue = [...prevValue];
-      newValue[order] = value;
-
-      return newValue;
-    });
-  };
-
-  const isValidExpireDate = (value, order) => {
-    if (order === 0) {
-      return /^$|0|(^[1-9]$)|(^1?[0-2]$)/.test(value);
+    if (key === "Backspace" && target.value.length === 0) {
+      inputRef.current[inputKeys][targetIndex - 1]?.focus();
     }
-
-    return /^\d{0,2}$/.test(value);
-  };
-
-  const handleExpireDateUpdate = ({ target: { value } }, order) => {
-    const parsedValue =
-      value.startsWith("0") && value.length !== 1 ? value.slice(1) : value;
-
-    if (!isValidExpireDate(parsedValue, order)) return;
-
-    setExpireDate((prevValue) => {
-      const newValue = [...prevValue];
-      newValue[order] =
-        parsedValue.length === 1 && Number(parsedValue) !== 0
-          ? `0${parsedValue}`
-          : parsedValue;
-
-      return newValue;
-    });
-  };
-
-  const handleHolderNameUpdate = ({ target: { value } }) => {
-    if (
-      !/^[a-z]*$/i.test(value) ||
-      value.length > CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH
-    )
-      return;
-
-    setHolderName(value.toUpperCase());
-  };
-
-  const handleSecurityCodeUpdate = ({ target: { value } }) => {
-    if (
-      !Number.isInteger(Number(value)) ||
-      value.length > CARD_INFO_RULES.SECURITY_CODE_LENGTH
-    )
-      return;
-
-    setSecurityCode(value);
-  };
-
-  const handlePasswordUpdate = ({ target: { value } }, order) => {
-    if (!Number.isInteger(Number(value)) || value.length > 1) return;
-
-    setPassword((prevValue) => {
-      const newValue = [...prevValue];
-      newValue[order] = value;
-
-      return newValue;
-    });
   };
 
   const handleCardInfoSubmit = () => {
@@ -138,6 +113,8 @@ function App() {
         <CardNumberInput
           cardNumber={cardNumber}
           onChange={handleCardNumberUpdate}
+          onKeyDown={(event) => focusBeforeElement(event, "cardNumbers")}
+          ref={inputRef}
         />
         <CardExpireDateInput
           expireDate={expireDate}
@@ -154,6 +131,8 @@ function App() {
         <CardPasswordInput
           password={password}
           onChange={handlePasswordUpdate}
+          onKeyDown={(event) => focusBeforeElement(event, "passwordNumbers")}
+          ref={inputRef}
         />
       </CardInfoForm>
       {canProceed && <Button text="다음" onClick={handleCardInfoSubmit} />}

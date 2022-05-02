@@ -13,23 +13,20 @@ export default function CardExpireDateInput({ expireDate, onChange }) {
         expireDate.join("").length === CARD_INFO_RULES.EXPIRE_DATE_LENGTH
       }
     >
-      <Input
-        placeholder="MM"
-        type="text"
-        value={expireDate[0]}
-        onChange={(e) => onChange(e, 0)}
-        width="40px"
-        isComplete={expireDate[0].length === 2}
-      />
-      <p>/</p>
-      <Input
-        placeholder="YY"
-        type="text"
-        value={expireDate[1]}
-        onChange={(e) => onChange(e, 1)}
-        width="40px"
-        isComplete={expireDate[1].length === 2}
-      />
+      {["MM", "YY"].map((text, index) => (
+        <React.Fragment key={text}>
+          <Input
+            placeholder={text}
+            name={text}
+            type={"text"}
+            value={expireDate[index]}
+            onChange={(e) => onChange(e, "expireDate", index)}
+            width={"40px"}
+            isComplete={expireDate[index].length === 2}
+          />
+          {index === 0 && <p>/</p>}
+        </React.Fragment>
+      ))}
     </InputField>
   );
 }
