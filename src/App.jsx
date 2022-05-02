@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import GlobalStyle from "./globalStyles.jsx";
 
-import PageHeader from "./PageHeader.jsx";
-import CardInfoForm from "./CardInfoForm.jsx";
+import PageHeader from "./components/PageHeader.jsx";
+import CardInfoForm from "./components/CardInfoForm.jsx";
 import Button from "./components/UIComponents/Button/Button.jsx";
 
 import {
@@ -14,21 +14,19 @@ import {
   CardSecurityCodeInput,
   CardExpireDateInput,
 } from "./components";
-
 import {
   CARD_REGISTER_SUCCESS_MESSAGE,
   CARD_INFO_RULES,
   INPUT_KEY_TABLE,
-} from "./constants.js";
-
+} from "./constants/constants.js";
 import {
   isInValidCardNumber,
   isInValidExpireDate,
   isInValidHolderName,
   isInvalidSecurityCode,
   isInvalidPassword,
-} from "./validator";
-import useInput from "./components/Hooks/useInput.jsx";
+} from "./validators/validator";
+import useInput from "./Hooks/useInput.jsx";
 
 function App() {
   const inputRef = useRef({
@@ -57,7 +55,6 @@ function App() {
     "",
     isInvalidSecurityCode
   );
-  const [canProceed, setCanProceed] = useState(false);
 
   const focusBeforeElement = (event, inputKeys) => {
     const { target, key } = event;
@@ -74,30 +71,41 @@ function App() {
     alert(CARD_REGISTER_SUCCESS_MESSAGE);
   };
 
-  const isValidCardInfo = useCallback(() => {
-    const {
-      NUMBER_UNIT_COUNT,
-      NUMBER_UNIT_LENGTH,
-      EXPIRE_DATE_LENGTH,
-      SECURITY_CODE_LENGTH,
-      PASSWORD_LENGTH,
-    } = CARD_INFO_RULES;
+  const isValidCardNumber = useMemo(
+    () =>
+      cardNumber.join("").length ===
+      CARD_INFO_RULES.NUMBER_UNIT_COUNT * CARD_INFO_RULES.NUMBER_UNIT_LENGTH,
+    [cardNumber]
+  );
 
+  const isValidExpireDate = useMemo(
+    () => expireDate.join("").length === CARD_INFO_RULES.EXPIRE_DATE_LENGTH,
+    [expireDate]
+  );
+
+  const isValidSecurityCode = useMemo(
+    () => securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH,
+    [securityCode]
+  );
+
+  const isValidPassword = useMemo(
+    () => password.join("").length === CARD_INFO_RULES.PASSWORD_LENGTH,
+    [password]
+  );
+
+  const isValidCardInfo = useMemo(() => {
     return (
-      cardNumber.join("").length === NUMBER_UNIT_COUNT * NUMBER_UNIT_LENGTH &&
-      expireDate.join("").length === EXPIRE_DATE_LENGTH &&
-      securityCode.length === SECURITY_CODE_LENGTH &&
-      password.join("").length === PASSWORD_LENGTH
+      isValidCardNumber &&
+      isValidExpireDate &&
+      isValidSecurityCode &&
+      isValidPassword
     );
-  }, [cardNumber, expireDate, securityCode, password]);
-
-  useEffect(() => {
-    if (isValidCardInfo()) {
-      setCanProceed(true);
-    } else {
-      setCanProceed(false);
-    }
-  }, [isValidCardInfo]);
+  }, [
+    isValidCardNumber,
+    isValidExpireDate,
+    isValidSecurityCode,
+    isValidPassword,
+  ]);
 
   return (
     <div className="App">
@@ -107,7 +115,7 @@ function App() {
         cardNumber={cardNumber}
         holderName={holderName}
         expireDate={expireDate}
-        canProceed={canProceed}
+        canProceed={isValidCardInfo}
       />
       <CardInfoForm autoComplete="off">
         <CardNumberInput
@@ -135,7 +143,7 @@ function App() {
           ref={inputRef}
         />
       </CardInfoForm>
-      {canProceed && <Button text="다음" onClick={handleCardInfoSubmit} />}
+      {isValidCardInfo && <Button text="다음" onClick={handleCardInfoSubmit} />}
     </div>
   );
 }
