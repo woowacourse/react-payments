@@ -5,7 +5,7 @@ function PrevPageSign({ setPage }) {
     setPage(PAGES.LIST);
   };
 
-  return <div className="prev-page-button" onClick={handleClick} />;
+  return <div className="prev-page-sign" onClick={handleClick} />;
 }
 
 export default PrevPageSign;

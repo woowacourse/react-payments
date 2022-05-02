@@ -3,15 +3,19 @@
   text-align: right;
 }
 
-.button-text {
+.button-style {
   margin-right: 10px;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   color: #383838;
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
 }
 
-.prev-page-button {
+.prev-page-sign {
   position: absolute;
   cursor: pointer;
   width: 11px;
@@ -21,12 +25,4 @@
   transform: rotate(45deg);
   left: 20px;
   top: 19px;
-}
-
-.next-page-button {
-  cursor: pointer;
-  appearance: none;
-  background-color: transparent;
-  border: 0;
-  padding: 0;
 }

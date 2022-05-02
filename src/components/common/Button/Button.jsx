@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 function Button({ text }) {
   return (
     <div className="button-box">
-      <button type="submit" className="button-text next-page-button">
+      <button type="submit" className="button-style">
         {text}
       </button>
     </div>
