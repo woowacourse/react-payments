@@ -14,7 +14,7 @@ function CardOwner({ cardOwner, setOwner }) {
         ? limitInputLength(cardOwnerEnglishOnly, LIMIT_LENGTH.CARD_OWNER)
         : cardOwnerEnglishOnly;
 
-    const newCardOwner = cardOwnerLengthSliced;
+    const newCardOwner = cardOwnerLengthSliced.toUpperCase();
 
     setOwner(newCardOwner);
   };
