@@ -7,9 +7,9 @@ import useValidDate from './hooks/useValidDate';
 import useCardOwnerName from './hooks/useCardOwnerName';
 import useCVC from './hooks/useCVC';
 import useCardPassword from './hooks/useCardPassword';
-import useModal from './hooks/useModal';
+import useToggle from './hooks/useToggle';
 
-import Modal from './components/Modal';
+import Tooltip from './components/Tooltip';
 import Button from './components/common/Button';
 import Card from './components/common/Card';
 import Input from './components/common/Input';
@@ -72,6 +72,8 @@ function App() {
   const [CVC, setCVC] = useCVC('');
   const [firstPassword, setFirstPassword] = useCardPassword('');
   const [secondPassword, setSecondPassword] = useCardPassword('');
+  const [isToolTipOpen, toggleToolTip] = useToggle(false);
+
   const requiredList = [
     cardNumber,
     validDate,
@@ -79,7 +81,6 @@ function App() {
     firstPassword,
     secondPassword,
   ];
-  const [isModalOpen, toggleIsModalOpen] = useModal(false);
 
   return (
     <StyledPage>
@@ -137,9 +138,9 @@ function App() {
             margin={{ l: '11px' }}
             shape="circle"
             size="small"
-            onClickFunc={toggleIsModalOpen}
+            onClickFunc={toggleToolTip}
           />
-          <Modal visible={isModalOpen} />
+          <Tooltip visible={isToolTipOpen} />
         </div>
         <div>
           <Input
