@@ -4,7 +4,7 @@ import { LIMIT_LENGTH } from '../../constants';
 import { limitInputLength, inputNumberOnly } from '../../utils';
 
 function CardNumber({ cardInfo, setCardInfo }) {
-  const handleOnInput = (event) => {
+  const handleInput = (event) => {
     let { value, name } = event.target;
     value = inputNumberOnly(value);
 
@@ -18,7 +18,7 @@ function CardNumber({ cardInfo, setCardInfo }) {
     });
   };
 
-  const handleOnChange = (event) => {
+  const handleChange = (event) => {
     if (event.target.value.length >= LIMIT_LENGTH.CARD_NUMBER) {
       event.target.classList.add('input-correct');
       return;
@@ -34,8 +34,8 @@ function CardNumber({ cardInfo, setCardInfo }) {
           name="number1"
           className="input-basic"
           type="text"
-          onChange={handleOnChange}
-          onInput={handleOnInput}
+          onChange={handleChange}
+          onInput={handleInput}
           value={cardInfo.number1}
           required
         />
@@ -43,8 +43,8 @@ function CardNumber({ cardInfo, setCardInfo }) {
           name="number2"
           className="input-basic"
           type="text"
-          onChange={handleOnChange}
-          onInput={handleOnInput}
+          onChange={handleChange}
+          onInput={handleInput}
           value={cardInfo.number2}
           required
         />
@@ -52,8 +52,8 @@ function CardNumber({ cardInfo, setCardInfo }) {
           name="number3"
           className="input-basic"
           type="password"
-          onChange={handleOnChange}
-          onInput={handleOnInput}
+          onChange={handleChange}
+          onInput={handleInput}
           value={cardInfo.number3}
           required
         />
@@ -61,8 +61,8 @@ function CardNumber({ cardInfo, setCardInfo }) {
           name="number4"
           className="input-basic"
           type="password"
-          onChange={handleOnChange}
-          onInput={handleOnInput}
+          onChange={handleChange}
+          onInput={handleInput}
           value={cardInfo.number4}
           required
         />

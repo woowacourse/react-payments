@@ -4,7 +4,7 @@ import { inputNumberOnly, limitInputLength } from '../../utils';
 import { LIMIT_LENGTH } from '../../constants';
 
 function CardPassword({ cardInfo, setCardInfo }) {
-  const handleOnChange = (event) => {
+  const handleChange = (event) => {
     let { value, name } = event.target;
     value = inputNumberOnly(value);
 
@@ -31,7 +31,7 @@ function CardPassword({ cardInfo, setCardInfo }) {
         name="password1"
         className="input-basic w-15 input-password"
         type="password"
-        onChange={handleOnChange}
+        onChange={handleChange}
         value={cardInfo.password1}
         required
       />
@@ -39,7 +39,7 @@ function CardPassword({ cardInfo, setCardInfo }) {
         name="password2"
         className="input-basic w-15 input-password"
         type="password"
-        onChange={handleOnChange}
+        onChange={handleChange}
         value={cardInfo.password2}
         required
       />

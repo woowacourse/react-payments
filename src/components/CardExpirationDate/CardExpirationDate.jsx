@@ -4,7 +4,7 @@ import { MONTH, LIMIT_LENGTH, LEADING_ZERO_MONTHS } from '../../constants';
 import { inputNumberOnly, limitInputLength } from '../../utils';
 
 function CardExpirationDate({ cardInfo, setCardInfo }) {
-  const handleMonthOnFocusOut = (event) => {
+  const handleMonthInputBlur = (event) => {
     let { value } = event.target;
 
     if (value === '0' || value === '00') {
@@ -23,7 +23,7 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
     event.target.classList.add('input-correct');
   };
 
-  const handleMonthOnChange = (event) => {
+  const handleMonthInputChange = (event) => {
     let { value, name } = event.target;
     value = inputNumberOnly(value);
 
@@ -56,7 +56,7 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
     event.target.classList.remove('input-correct');
   };
 
-  const handleYearOnChange = (event) => {
+  const handleYearInputChange = (event) => {
     let { value, name } = event.target;
     value = inputNumberOnly(value);
 
@@ -87,8 +87,8 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
           className="input-basic"
           type="text"
           placeholder="MM"
-          onChange={handleMonthOnChange}
-          onBlur={handleMonthOnFocusOut}
+          onChange={handleMonthInputChange}
+          onBlur={handleMonthInputBlur}
           value={cardInfo.month}
           required
         />
@@ -97,7 +97,7 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
           className="input-basic"
           type="text"
           placeholder="YY"
-          onChange={handleYearOnChange}
+          onChange={handleYearInputChange}
           value={cardInfo.year}
           required
         />

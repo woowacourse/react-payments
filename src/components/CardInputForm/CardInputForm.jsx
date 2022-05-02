@@ -1,7 +1,7 @@
 import checkCardInfo from '../../validator';
 
 function CardInputForm({ cardInfo, children }) {
-  const handleOnSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const { number1, number2, number3, number4, month, year, cvc } = cardInfo;
@@ -13,7 +13,7 @@ function CardInputForm({ cardInfo, children }) {
     }
   };
 
-  return <form onSubmit={handleOnSubmit}>{children}</form>;
+  return <form onSubmit={handleSubmit}>{children}</form>;
 }
 
 export default CardInputForm;

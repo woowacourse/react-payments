@@ -4,7 +4,7 @@ import { LIMIT_LENGTH } from '../../constants';
 import { limitInputLength, inputEnglishOnly } from '../../utils';
 
 function CardOwner({ cardInfo, setCardInfo }) {
-  const handleOnChange = (event) => {
+  const handleChange = (event) => {
     let { value, name } = event.target;
     value = inputEnglishOnly(value);
 
@@ -36,7 +36,7 @@ function CardOwner({ cardInfo, setCardInfo }) {
         name="owner"
         type="text"
         className="input-basic"
-        onChange={handleOnChange}
+        onChange={handleChange}
         value={cardInfo.owner}
       />
     </div>

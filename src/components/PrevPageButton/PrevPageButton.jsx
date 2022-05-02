@@ -1,9 +1,9 @@
 function PrevPageButton({ setPage }) {
-  const handlePrevPageButtonClick = () => {
+  const handleClick = () => {
     setPage('listPage');
   };
 
-  return <div className="prev-page-button" onClick={handlePrevPageButtonClick}></div>;
+  return <div className="prev-page-button" onClick={handleClick}></div>;
 }
 
 export default PrevPageButton;
