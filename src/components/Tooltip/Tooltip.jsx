@@ -1,4 +1,4 @@
-import { CVC_DESCRIPTION } from '../../constants';
+import { CVC_DESCRIPTION } from 'constants';
 
 function Tooltip() {
   return (

@@ -1,6 +1,8 @@
+import { PAGES } from 'constants';
+
 function PrevPageButton({ setPage }) {
   const handleClick = () => {
-    setPage('listPage');
+    setPage(PAGES.LIST);
   };
 
   return <div className="prev-page-button" onClick={handleClick} />;

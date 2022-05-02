@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
-import { MONTH, LIMIT_LENGTH, LEADING_ZERO_MONTHS } from '../../constants';
-import { inputNumberOnly, limitInputLength } from '../../utils';
+import { MONTH, LIMIT_LENGTH, LEADING_ZERO_MONTHS } from 'constants';
+import { inputNumberOnly, limitInputLength } from 'utils';
 
 function CardExpirationDate({ cardInfo, setCardInfo }) {
   const handleMonthInputBlur = (event) => {

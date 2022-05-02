@@ -1,4 +1,4 @@
-import checkCardInfo from '../../validator';
+import checkCardInfo from 'validator';
 
 function CardInputForm({ cardInfo, children }) {
   const handleSubmit = (e) => {

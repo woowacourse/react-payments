@@ -1,6 +1,6 @@
-import Card from '../components/common/Card/Card';
-import PageTitle from '../components/common/PageTitle/PageTitle';
-import { PAGES } from '../constants';
+import Card from 'components/common/Card/Card';
+import PageTitle from 'components/common/PageTitle/PageTitle';
+import { PAGES } from 'constants';
 
 function CardListPage({ setPage }) {
   const handleCardAdd = () => {

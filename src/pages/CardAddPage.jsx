@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
-import Card from '../components/common/Card/Card';
-import PageTitle from '../components/common/PageTitle/PageTitle';
-import NextPageButton from '../components/common/NextPageButton/NextPageButton';
+import Card from 'components/common/Card/Card';
+import PageTitle from 'components/common/PageTitle/PageTitle';
+import NextPageButton from 'components/common/NextPageButton/NextPageButton';
 
-import CardInputForm from '../components/CardInputForm/CardInputForm';
-import CardNumber from '../components/CardNumber/CardNumber';
-import CardExpirationDate from '../components/CardExpirationDate/CardExpirationDate';
-import CardOwner from '../components/CardOwner/CardOwner';
-import CVC from '../components/CVC/CVC';
-import Tooltip from '../components/Tooltip/Tooltip';
-import CardPassword from '../components/CardPassword/CardPassword';
-import PrevPageButton from '../components/PrevPageButton/PrevPageButton';
+import CardInputForm from 'components/CardInputForm/CardInputForm';
+import CardNumber from 'components/CardNumber/CardNumber';
+import CardExpirationDate from 'components/CardExpirationDate/CardExpirationDate';
+import CardOwner from 'components/CardOwner/CardOwner';
+import CVC from 'components/CVC/CVC';
+import Tooltip from 'components/Tooltip/Tooltip';
+import CardPassword from 'components/CardPassword/CardPassword';
+import PrevPageButton from 'components/PrevPageButton/PrevPageButton';
 
 function CardAddPage({ setPage }) {
   const [cardInfo, setCardInfo] = useState({

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
-import { LIMIT_LENGTH } from '../../constants';
-import { limitInputLength, inputEnglishOnly } from '../../utils';
+import { LIMIT_LENGTH } from 'constants';
+import { limitInputLength, inputEnglishOnly } from 'utils';
 
 function CardOwner({ cardInfo, setCardInfo }) {
   const handleChange = (event) => {

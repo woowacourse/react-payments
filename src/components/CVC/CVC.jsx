@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
-import { inputNumberOnly, limitInputLength } from '../../utils';
-import { LIMIT_LENGTH } from '../../constants';
+import { inputNumberOnly, limitInputLength } from 'utils';
+import { LIMIT_LENGTH } from 'constants';
 
 function CVC({ cardInfo, setCardInfo }) {
   const handleChange = (event) => {
