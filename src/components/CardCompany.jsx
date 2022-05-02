@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import Circle from './common/Circle';
 
-const CardCompany = ({ company, handleClickCompany, theme }) => {
+const CardCompany = ({ company, handleCompanyClick, theme }) => {
   return (
-    <div className="modal-item-container" onClick={() => handleClickCompany(company, theme)}>
+    <div className="modal-item-container" onClick={() => handleCompanyClick(company, theme)}>
       <Circle theme={theme} />
       <span className="modal-item-name">{company}</span>
     </div>
@@ -12,7 +12,7 @@ const CardCompany = ({ company, handleClickCompany, theme }) => {
 
 CardCompany.propTypes = {
   company: PropTypes.string,
-  handleClickCompany: PropTypes.func,
+  handleCompanyClick: PropTypes.func,
   theme: PropTypes.string,
 };
 

@@ -94,7 +94,7 @@ const CardAppPage = () => {
     setIsCardFront((prevCardFront) => !prevCardFront);
   }, []);
 
-  const handleClickCompany = (company, theme) => {
+  const handleCompanyClick = (company, theme) => {
     setCardInfo((prevCardInfo) => ({
       ...prevCardInfo,
       company,
@@ -195,7 +195,7 @@ const CardAppPage = () => {
                 key={id}
                 company={company}
                 theme={theme}
-                handleClickCompany={handleClickCompany}
+                handleCompanyClick={handleCompanyClick}
               />
             ))}
           </div>
