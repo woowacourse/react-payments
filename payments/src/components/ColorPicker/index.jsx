@@ -14,7 +14,7 @@ const CARD_CATEGORY = [
   { name: "록8바", color: "gold" },
 ];
 
-const ColorPicker = ({ visible, setVisible, updateForm }) => {
+const CardColorPicker = ({ visible, setVisible, updateForm }) => {
   const modalCotnets = useRef(null);
 
   const pickColor = (name, color) => {
@@ -48,4 +48,4 @@ const ColorPicker = ({ visible, setVisible, updateForm }) => {
   );
 };
 
-export default ColorPicker;
+export default CardColorPicker;

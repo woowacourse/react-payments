@@ -8,7 +8,7 @@ import OwnerNameInput from "../../components/OwnerNameInput";
 import SecureCodeInput from "../../components/SecureCodeInput";
 import useCard from "../../hooks/useCard";
 import NextButton from "../../components/NextButton";
-import ColorPicker from "../../components/ColorPicker";
+import CardColorPicker from "../../components/ColorPicker";
 import { useState } from "react";
 
 const CardAdd = () => {
@@ -35,7 +35,7 @@ const CardAdd = () => {
         </div>
         <NextButton state={cardInfo} />
       </div>
-      <ColorPicker
+      <CardColorPicker
         visible={visible}
         setVisible={setVisible}
         updateForm={dispatch}

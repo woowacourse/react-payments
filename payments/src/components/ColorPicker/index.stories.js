@@ -1,10 +1,10 @@
 import { useState } from "react";
-import ColorPicker from ".";
+import CardColorPicker from ".";
 import useCard from "../../hooks/useCard";
 
 export default {
   title: "ColorPicker",
-  component: ColorPicker,
+  component: CardColorPicker,
 };
 // /{ visible, setVisible, updateForm }
 export const ColorPickModal = () => {
@@ -12,6 +12,10 @@ export const ColorPickModal = () => {
   const [form, dispatch] = useCard();
 
   return (
-    <ColorPicker visible={true} setVisible={setVisible} updateForm={dispatch} />
+    <CardColorPicker
+      visible={true}
+      setVisible={setVisible}
+      updateForm={dispatch}
+    />
   );
 };
