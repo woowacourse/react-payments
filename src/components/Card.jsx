@@ -3,7 +3,7 @@ import * as S from '../styles.js';
 import validator from '../validations/validator';
 import ErrorMessage from './ErrorMessage';
 import CardContext from '../CardContext';
-import { SET_COMPANY_ERROR_MESSAGE } from '../reducers/card.actions.js';
+import TYPES from '../reducers/card.actions.js';
 
 export default function Card({
   cardCompanyIndex,
@@ -44,7 +44,7 @@ export default function Card({
       <ErrorMessage
         value={cardCompanyIndex}
         validate={validator.checkCardCompany}
-        type={SET_COMPANY_ERROR_MESSAGE}
+        type={TYPES.SET_COMPANY_ERROR_MESSAGE}
       >
         {cardCompanyErrorMessage}
       </ErrorMessage>

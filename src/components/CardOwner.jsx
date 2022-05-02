@@ -3,13 +3,13 @@ import * as S from '../styles.js';
 import CardContext from '../CardContext';
 import validator from '../validations/validator';
 import ErrorMessage from './ErrorMessage';
-import { SET_OWNER, SET_OWNER_ERROR_MESSAGE } from '../reducers/card.actions.js';
+import TYPES from '../reducers/card.actions.js';
 
 export default function CardOwner({ color }) {
   const { cardOwner, cardOwnerErrorMessage, dispatch } = useContext(CardContext);
 
   const onChangeInput = (e) => {
-    dispatch({ type: SET_OWNER, value: e.target.value });
+    dispatch({ type: TYPES.SET_OWNER, value: e.target.value });
   };
 
   return (
@@ -35,7 +35,7 @@ export default function CardOwner({ color }) {
       <ErrorMessage
         value={cardOwner}
         validate={validator.checkCardOwner}
-        type={SET_OWNER_ERROR_MESSAGE}
+        type={TYPES.SET_OWNER_ERROR_MESSAGE}
       >
         {cardOwnerErrorMessage}
       </ErrorMessage>

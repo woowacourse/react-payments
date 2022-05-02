@@ -3,18 +3,18 @@ import * as S from '../styles.js';
 import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
-import { SET_MODAL_FLAG, SET_NUMBER, SET_NUMBER_ERROR_MESSAGE } from '../reducers/card.actions.js';
+import TYPES from '../reducers/card.actions.js';
 
 export default function CardNumber({ color }) {
   const { cardNumber, cardNumberErrorMessage, cardCompanyIndex, dispatch } =
     useContext(CardContext);
 
   const onChangeInput = (index) => (e) => {
-    dispatch({ type: SET_NUMBER, value: e.target.value, index });
+    dispatch({ type: TYPES.SET_NUMBER, value: e.target.value, index });
   };
 
   const onFocusInput = () => {
-    cardCompanyIndex === -1 && dispatch({ type: SET_MODAL_FLAG, flag: true });
+    cardCompanyIndex === -1 && dispatch({ type: TYPES.SET_MODAL_FLAG, flag: true });
   };
 
   return (
@@ -66,7 +66,7 @@ export default function CardNumber({ color }) {
       <ErrorMessage
         value={cardNumber}
         validate={validator.checkCardNumber}
-        type={SET_NUMBER_ERROR_MESSAGE}
+        type={TYPES.SET_NUMBER_ERROR_MESSAGE}
       >
         {cardNumberErrorMessage}
       </ErrorMessage>

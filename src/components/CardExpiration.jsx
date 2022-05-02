@@ -4,13 +4,13 @@ import * as S from '../styles.js';
 import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
-import { SET_EXPIRATION, SET_EXPIRATION_ERROR_MESSAGE } from '../reducers/card.actions.js';
+import TYPES from '../reducers/card.actions.js';
 
 export default function CardExpiration({ color }) {
   const { cardExpiration, cardExpirationErrorMessage, dispatch } = useContext(CardContext);
 
   const onChangeInput = (index) => (e) => {
-    dispatch({ type: SET_EXPIRATION, value: e.target.value, index });
+    dispatch({ type: TYPES.SET_EXPIRATION, value: e.target.value, index });
   };
 
   return (
@@ -41,7 +41,7 @@ export default function CardExpiration({ color }) {
       <ErrorMessage
         value={cardExpiration}
         validate={validator.checkCardExpiration}
-        type={SET_EXPIRATION_ERROR_MESSAGE}
+        type={TYPES.SET_EXPIRATION_ERROR_MESSAGE}
       >
         {cardExpirationErrorMessage}
       </ErrorMessage>

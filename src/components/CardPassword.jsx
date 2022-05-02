@@ -3,13 +3,13 @@ import * as S from '../styles.js';
 import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
-import { SET_PASSWORD, SET_PASSWORD_ERROR_MESSAGE } from '../reducers/card.actions.js';
+import TYPES from '../reducers/card.actions.js';
 
 export default function CardPassword({ color }) {
   const { cardPassword, cardPasswordErrorMessage, dispatch } = useContext(CardContext);
 
   const onChangeInput = (index) => (e) => {
-    dispatch({ type: SET_PASSWORD, value: e.target.value, index });
+    dispatch({ type: TYPES.SET_PASSWORD, value: e.target.value, index });
   };
 
   return (
@@ -42,7 +42,7 @@ export default function CardPassword({ color }) {
       <ErrorMessage
         value={cardPassword}
         validate={validator.checkCardPassword}
-        type={SET_PASSWORD_ERROR_MESSAGE}
+        type={TYPES.SET_PASSWORD_ERROR_MESSAGE}
       >
         {cardPasswordErrorMessage}
       </ErrorMessage>

@@ -12,7 +12,7 @@ import CardContext from './CardContext';
 import CardListModal from './components/CardListModal';
 import validator from '../src/validations/validator';
 import { CARD_COMPANIES } from './constants';
-import { SET_MODAL_FLAG } from './reducers/card.actions';
+import TYPES from './reducers/card.actions';
 
 const CardAdditionContainer = styled.div`
   height: 100%;
@@ -46,7 +46,7 @@ function CardAddition() {
   };
 
   const onClickCard = useCallback(() => {
-    dispatch({ type: SET_MODAL_FLAG, flag: true });
+    dispatch({ type: TYPES.SET_MODAL_FLAG, flag: true });
   }, []);
 
   const submitCard = () => {
