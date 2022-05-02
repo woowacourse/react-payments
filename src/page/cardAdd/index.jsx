@@ -1,17 +1,17 @@
 import { useState, useEffect, useReducer } from 'react';
 
-import FormInput from '../../components/common/FormInput';
-import CardPreview from '../../components/CardPreview';
-import Modal from '../../components/common/Modal';
-import CardCompany from '../../components/CardCompany';
-import Header from '../../components/common/Header';
-import Button from '../../components/common/Button';
-import Tooltip from '../../components/common/Tooltip';
-import { ReactComponent as PrevIcon } from '../../assets/prev_icon.svg';
+import FormInput from 'components/common/FormInput';
+import CardPreview from 'components/CardPreview';
+import Modal from 'components/common/Modal';
+import CardCompany from 'components/CardCompany';
+import Header from 'components/common/Header';
+import Button from 'components/common/Button';
+import Tooltip from 'components/common/Tooltip';
+import { ReactComponent as PrevIcon } from 'assets/prev_icon.svg';
 
 import { validator, checkFullFilled } from './validator';
-import { isObject } from '../../utils';
-import { CRYPTO_STRING, INPUT_MAX_LENGTH } from '../../constants';
+import { isObject } from 'utils';
+import { CRYPTO_STRING, INPUT_MAX_LENGTH } from 'constants';
 
 import {
   cardNumberInputInfoList,

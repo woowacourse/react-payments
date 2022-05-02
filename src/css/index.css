@@ -1,10 +1,10 @@
-@import './card.css';
-@import './input.css';
-@import './button.css';
-@import './modal.css';
-@import './utils.css';
-@import './tooltip.css';
-@import './palette.css';
+@import 'card.css';
+@import 'input.css';
+@import 'button.css';
+@import 'modal.css';
+@import 'utils.css';
+@import 'tooltip.css';
+@import 'palette.css';
 
 body {
   display: flex;

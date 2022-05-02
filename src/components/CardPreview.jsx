@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { CRYPTO_STRING, DEFAULT_CARD_INFO } from '../constants';
+import { CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants';
 
 const propTypes = {
   company: PropTypes.string,

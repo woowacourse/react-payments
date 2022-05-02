@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { isObject } from '../../utils';
+import { isObject } from 'utils';
 
 const propTypes = {
   /**

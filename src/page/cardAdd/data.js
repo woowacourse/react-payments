@@ -1,4 +1,4 @@
-import { COMPANY, INPUT_MAX_LENGTH, THEME } from '../../constants';
+import { COMPANY, INPUT_MAX_LENGTH, THEME } from 'constants';
 
 export const cardNumberInputInfoList = [
   {
