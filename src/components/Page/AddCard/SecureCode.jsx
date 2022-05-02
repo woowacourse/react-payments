@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import FieldSet from "../../FieldSet";
-import Input from "../../Input";
-import AskMark from "../../AskMark";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import FieldSet from '../../FieldSet';
+import Input from '../../Input';
+import AskMarkTooltip from '../../AskMarkTooltip';
+import PropTypes from 'prop-types';
 
 const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
   return (
@@ -23,7 +23,7 @@ const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
             value={secureCode}
             onChange={onChangeSecureCode}
           />
-          <AskMark />
+          <AskMarkTooltip />
         </SecureCodeInputContainer>
       }
     </FieldSet>

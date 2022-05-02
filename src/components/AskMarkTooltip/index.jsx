@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const AskMark = () => {
+const AskMarkTooltip = () => {
   return (
     <Container>
       <AskMarkContainer type="button">?</AskMarkContainer>
@@ -57,4 +57,4 @@ const InformationContainer = styled.div`
   word-break: keep-all;
 `;
 
-export default AskMark;
+export default AskMarkTooltip;
