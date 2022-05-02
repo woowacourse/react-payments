@@ -250,6 +250,7 @@ export const TipButton = styled.div`
   line-height: 27px;
   color: #969696;
   font-size: 20px;
+  cursor: pointer;
 `;
 
 export const ToastModal = styled.div`

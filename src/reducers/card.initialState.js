@@ -10,7 +10,8 @@ const initialState = {
   cardPassword: ['', ''],
   cardPasswordErrorMessage: '',
   cardCompanyIndex: -1,
-  modalFlag: false,
+  listModalFlag: false,
+  tipModalFlag: false,
 };
 
 export default initialState;

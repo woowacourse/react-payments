@@ -14,7 +14,7 @@ export default function CardNumber({ color }) {
   };
 
   const onFocusInput = () => {
-    cardCompanyIndex === -1 && dispatch({ type: TYPES.SET_MODAL_FLAG, flag: true });
+    cardCompanyIndex === -1 && dispatch({ type: TYPES.SET_LIST_MODAL_FLAG, flag: true });
   };
 
   return (

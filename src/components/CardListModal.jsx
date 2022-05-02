@@ -1,39 +1,31 @@
 import React, { useCallback, useContext } from 'react';
 import CardCompany from './CardCompany';
-import Dimmer from './Dimmer';
 import ToastModal from './ToastModal';
 import { CARD_COMPANIES } from '../constants/index';
 import CardContext from '../CardContext';
 import TYPES from '../reducers/card.actions';
 
 export default function CardListModal() {
-  const { cardCompanyIndex, modalFlag, dispatch } = useContext(CardContext);
+  const { cardCompanyIndex, listModalFlag, dispatch } = useContext(CardContext);
 
-  const onClickDimmer = useCallback(() => {
-    dispatch({ type: TYPES.SET_MODAL_FLAG, flag: false });
-  }, []);
-
-  const onClickCardCompany = (index) =>
+  const onClick = (index) =>
     useCallback(() => {
       dispatch({ type: TYPES.SET_COMPANY_INDEX, index });
-      dispatch({ type: TYPES.SET_MODAL_FLAG, flag: false });
+      dispatch({ type: TYPES.SET_LIST_MODAL_FLAG, flag: false });
     }, []);
 
   return (
-    <>
-      <Dimmer show={modalFlag} onClick={onClickDimmer} />
-      <ToastModal show={modalFlag}>
-        {CARD_COMPANIES.map(({ COLOR, NAME }, index) => (
-          <CardCompany
-            key={NAME}
-            color={COLOR}
-            onClick={onClickCardCompany(index)}
-            selected={cardCompanyIndex === index}
-          >
-            {NAME}
-          </CardCompany>
-        ))}
-      </ToastModal>
-    </>
+    <ToastModal type={TYPES.SET_LIST_MODAL_FLAG} show={listModalFlag}>
+      {CARD_COMPANIES.map(({ COLOR, NAME }, index) => (
+        <CardCompany
+          key={NAME}
+          color={COLOR}
+          onClick={onClick(index)}
+          selected={cardCompanyIndex === index}
+        >
+          {NAME}
+        </CardCompany>
+      ))}
+    </ToastModal>
   );
 }

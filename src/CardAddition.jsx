@@ -13,6 +13,7 @@ import CardListModal from './components/CardListModal';
 import validator from '../src/validations/validator';
 import { CARD_COMPANIES } from './constants';
 import TYPES from './reducers/card.actions';
+import TipModal from './components/TipModal';
 
 const CardAdditionContainer = styled.div`
   height: 100%;
@@ -46,7 +47,7 @@ function CardAddition() {
   };
 
   const onClickCard = useCallback(() => {
-    dispatch({ type: TYPES.SET_MODAL_FLAG, flag: true });
+    dispatch({ type: TYPES.SET_LIST_MODAL_FLAG, flag: true });
   }, []);
 
   const submitCard = () => {
@@ -87,6 +88,7 @@ function CardAddition() {
         다음
       </NextButton>
       <CardListModal />
+      <TipModal />
     </CardAdditionContainer>
   );
 }

@@ -15,7 +15,8 @@ const useInitialAppValue = (reducer, initialState) => {
       cardPasswordErrorMessage,
       cardCompanyIndex,
       cardCompanyErrorMessage,
-      modalFlag,
+      listModalFlag,
+      tipModalFlag,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -33,7 +34,8 @@ const useInitialAppValue = (reducer, initialState) => {
     cardPasswordErrorMessage,
     cardCompanyIndex,
     cardCompanyErrorMessage,
-    modalFlag,
+    listModalFlag,
+    tipModalFlag,
     dispatch,
   };
 

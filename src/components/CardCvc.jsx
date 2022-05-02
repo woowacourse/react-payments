@@ -13,6 +13,11 @@ export default function CardCvc() {
     dispatch({ type: TYPES.SET_CVC, value: e.target.value });
   };
 
+  const onClickTip = () => {
+    console.log('hi');
+    dispatch({ type: TYPES.SET_TIP_MODAL_FLAG, flag: true });
+  };
+
   const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
 
   return (
@@ -28,7 +33,7 @@ export default function CardCvc() {
             onChange={onChangeInput}
           />
         </S.InputContainer>
-        <S.TipButton>?</S.TipButton>
+        <S.TipButton onClick={onClickTip}>?</S.TipButton>
       </S.InputBox>
       <ErrorMessage
         value={cardCvc}
