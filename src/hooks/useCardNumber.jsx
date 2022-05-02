@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-import RULE from '../constants';
+import CARD_RULE from '../constants';
 
 export default function useCardNumber(initialValue) {
   const [cardNumber, setCardNumber] = useState(initialValue);
@@ -8,7 +8,7 @@ export default function useCardNumber(initialValue) {
 
   const handler = useCallback(({ target: { value } }) => {
     const numbers = value.replaceAll('-', '');
-    if (numbers.length > RULE.CARD_NUMBER_MAX_LENGTH) return;
+    if (numbers.length > CARD_RULE.CARD_NUMBER_MAX_LENGTH) return;
 
     setCardNumber(numbers);
 

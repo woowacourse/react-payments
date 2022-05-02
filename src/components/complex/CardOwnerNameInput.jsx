@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Input } from '../common';
-import RULE from '../../constants';
+import CARD_RULE from '../../constants';
 
 const OwnerNameLength = styled.div`
   color: #525252;
@@ -14,7 +14,7 @@ export default function CardOwnerNameInput({ ownerName, setOwnerName }) {
   return (
     <div>
       <OwnerNameLength>
-        {ownerName.length}/{RULE.CARD_OWNER_NAME_MAX_LENGTH}
+        {ownerName.length}/{CARD_RULE.CARD_OWNER_NAME_MAX_LENGTH}
       </OwnerNameLength>
       <Input
         description="카드 소유자 이름 (선택)"
