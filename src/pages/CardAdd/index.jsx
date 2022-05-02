@@ -21,28 +21,9 @@ import {
 } from 'validators';
 
 function CardAdd() {
-  const [state, dispatch] = useCardState();
+  const { state, onChangeTextField } = useCardState();
   const { cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword } = state;
   const { isComplete } = state;
-
-  const onChangeTextField = ({ target }, option = {}) => {
-    const textFieldName = target.name;
-
-    switch (textFieldName) {
-      case 'cardNumber':
-        dispatch({
-          type: textFieldName,
-          contents: { index: option.index, value: target.value },
-        });
-        break;
-
-      default:
-        dispatch({
-          type: textFieldName,
-          contents: target.value,
-        });
-    }
-  };
 
   const onClickConfirmButton = () => {
     try {

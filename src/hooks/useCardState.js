@@ -50,7 +50,26 @@ const useCardState = () => {
     setComplete(isInputComplete(cardState));
   }, [cardState]);
 
-  return [{ ...cardState, isComplete }, dispatch];
+  const onChangeTextField = ({ target }, option = {}) => {
+    const textFieldName = target.name;
+
+    switch (textFieldName) {
+      case 'cardNumber':
+        dispatch({
+          type: textFieldName,
+          contents: { index: option.index, value: target.value },
+        });
+        break;
+
+      default:
+        dispatch({
+          type: textFieldName,
+          contents: target.value,
+        });
+    }
+  };
+
+  return { state: { ...cardState, isComplete }, onChangeTextField };
 };
 
 export default useCardState;
