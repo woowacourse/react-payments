@@ -161,9 +161,9 @@ const CardAppPage = () => {
       {modalVisible && (
         <Modal handleModal={handleModal}>
           <div className="flex-wrap">
-            {cardCompanyList.map(({ id, company, theme }) => (
+            {cardCompanyList.map(({ company, theme }, index) => (
               <CardCompany
-                key={id}
+                key={index}
                 company={company}
                 theme={theme}
                 onClickCompany={handleClickCompany}

@@ -1,9 +1,7 @@
-import { v4 as uuid } from 'uuid';
 import { COMPANY, INPUT_MAX_LENGTH, THEME } from '../../constants';
 
 export const cardNumberInputInfoList = [
   {
-    id: uuid(),
     type: 'text',
     className: 'mr-n15 tracking-wide',
     name: 'first',
@@ -11,21 +9,18 @@ export const cardNumberInputInfoList = [
     autoFocus: true,
   },
   {
-    id: uuid(),
     type: 'text',
     className: 'mr-n15 tracking-wide',
     name: 'second',
     maxLength: INPUT_MAX_LENGTH.NUMBER,
   },
   {
-    id: uuid(),
     type: 'password',
     className: 'mr-n15 tracking-wide',
     name: 'third',
     maxLength: INPUT_MAX_LENGTH.NUMBER,
   },
   {
-    id: uuid(),
     type: 'password',
     className: 'tracking-wide',
     name: 'fourth',
@@ -35,7 +30,6 @@ export const cardNumberInputInfoList = [
 
 export const expiryDateInputInfoList = [
   {
-    id: uuid(),
     type: 'text',
     placeholder: 'MM',
     className: 'mr-n15',
@@ -43,7 +37,6 @@ export const expiryDateInputInfoList = [
     maxLength: INPUT_MAX_LENGTH.EXPIRY_DATE,
   },
   {
-    id: uuid(),
     type: 'text',
     placeholder: 'YY',
     name: 'year',
@@ -53,7 +46,6 @@ export const expiryDateInputInfoList = [
 
 export const cardOwnerNameInputInfoList = [
   {
-    id: uuid(),
     type: 'text',
     placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
     className: 'text-left',
@@ -63,7 +55,6 @@ export const cardOwnerNameInputInfoList = [
 
 export const privacyCodeInputInfoList = [
   {
-    id: uuid(),
     type: 'password',
     className: 'w-25 tracking-wide',
     maxLength: INPUT_MAX_LENGTH.PRIVACY_CODE,
@@ -72,21 +63,18 @@ export const privacyCodeInputInfoList = [
 
 export const cardPasswordInputInfoList = [
   {
-    id: uuid(),
     type: 'password',
     className: 'w-5',
     name: 'first',
     maxLength: INPUT_MAX_LENGTH.PASSWORD,
   },
   {
-    id: uuid(),
     type: 'password',
     className: 'w-5',
     name: 'second',
     maxLength: INPUT_MAX_LENGTH.PASSWORD,
   },
   {
-    id: uuid(),
     type: 'password',
     className: 'w-5 input-disabled',
     disabled: true,
@@ -94,7 +82,6 @@ export const cardPasswordInputInfoList = [
     maxLength: INPUT_MAX_LENGTH.PASSWORD,
   },
   {
-    id: uuid(),
     type: 'password',
     className: 'w-5 input-disabled',
     disabled: true,
@@ -104,12 +91,12 @@ export const cardPasswordInputInfoList = [
 ];
 
 export const cardCompanyList = [
-  { id: uuid(), company: COMPANY.VALLISTA, theme: THEME.RED },
-  { id: uuid(), company: COMPANY.YULIE, theme: THEME.BLUE },
-  { id: uuid(), company: COMPANY.ASA, theme: THEME.GREEN },
-  { id: uuid(), company: COMPANY.ROY, theme: THEME.HOT_PINK },
-  { id: uuid(), company: COMPANY.AUSTIN, theme: THEME.MINT },
-  { id: uuid(), company: COMPANY.YB, theme: THEME.PINK },
-  { id: uuid(), company: COMPANY.NOS, theme: THEME.ORANGE },
-  { id: uuid(), company: COMPANY.WALTER, theme: THEME.YELLOW },
+  { company: COMPANY.VALLISTA, theme: THEME.RED },
+  { company: COMPANY.YULIE, theme: THEME.BLUE },
+  { company: COMPANY.ASA, theme: THEME.GREEN },
+  { company: COMPANY.ROY, theme: THEME.HOT_PINK },
+  { company: COMPANY.AUSTIN, theme: THEME.MINT },
+  { company: COMPANY.YB, theme: THEME.PINK },
+  { company: COMPANY.NOS, theme: THEME.ORANGE },
+  { company: COMPANY.WALTER, theme: THEME.YELLOW },
 ];

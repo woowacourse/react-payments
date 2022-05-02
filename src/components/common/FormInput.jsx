@@ -20,7 +20,6 @@ const propTypes = {
    */
   inputInfoList: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
       name: PropTypes.string,
       type: PropTypes.string.isRequired,
       placeholder: PropTypes.string,
@@ -65,9 +64,9 @@ const FormInput = ({
     <div className="input-container">
       <label className="input-title">{inputTitle}</label>
       <div className={`input-box ${className}`}>
-        {inputInfoList.map(({ id, name, className = '', ...rest }) => (
+        {inputInfoList.map(({ name, className = '', ...rest }, index) => (
           <input
-            key={id}
+            key={index}
             name={name}
             className={`input-basic ${className} font-${theme}`}
             value={isObject(inputValue) ? inputValue[name] : inputValue}
