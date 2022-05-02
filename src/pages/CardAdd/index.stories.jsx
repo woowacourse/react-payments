@@ -1,3 +1,4 @@
+import Layout from 'components/Layout';
 import CardAdd from '.';
 
 export default {
@@ -9,9 +10,9 @@ export default {
 };
 
 const Template = (args) => (
-  <div className="App">
+  <Layout>
     <CardAdd {...args} />
-  </div>
+  </Layout>
 );
 
 export const CardAddPage = Template.bind({});
