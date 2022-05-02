@@ -16,16 +16,29 @@ function AddCard() {
   });
 
   const updateCard = (cardForm) => {
+    const {
+      firstCardNumber,
+      secondCardNumber,
+      thirdCardNumber,
+      fourthCardNumber,
+      expireMonth,
+      expireYear,
+      ownerName,
+      securityCode,
+      firstPassword,
+      secondPassword,
+    } = cardForm;
+
     setCard({
-      firstCardNumber: cardForm.firstCardNumber,
-      secondCardNumber: cardForm.secondCardNumber,
-      thirdCardNumber: cardForm.thirdCardNumber,
-      fourthCardNumber: cardForm.fourthCardNumber,
-      expireMonth: cardForm.expireMonth,
-      expireYear: cardForm.expireYear,
-      ownerName: cardForm.ownerName,
-      securityCode: cardForm.securityCode,
-      password: cardForm.firstCardNumber + cardForm.secondCardNumber,
+      firstCardNumber,
+      secondCardNumber,
+      thirdCardNumber,
+      fourthCardNumber,
+      expireMonth,
+      expireYear,
+      ownerName,
+      securityCode,
+      password: firstPassword + secondPassword,
     });
   };
 
