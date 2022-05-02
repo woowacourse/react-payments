@@ -1,5 +1,3 @@
-/* eslint-disable import/no-named-as-default-member */
-/* eslint-disable import/no-named-as-default */
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../input/Input';

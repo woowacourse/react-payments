@@ -1,6 +1,6 @@
 import Input from './Input';
 import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../../constants';
-import { isOverMaxLength, isOutOfRange } from '../../util';
+import { validNumber, validMaxLength, validRange } from '../../validator';
 
 export default {
   title: 'Input',
@@ -14,7 +14,16 @@ export const CardNumberInput = Template.bind({});
 CardNumberInput.args = {
   length: MAX_LENGTH.CARD_NUMBER,
   updateCardForm: () => {},
-  validators: { isOverMaxLength, isNaN: Number.isNaN },
+  validators: { validMaxLength, validNumber },
+};
+
+export const CardNumberDotInput = Template.bind({});
+
+CardNumberDotInput.args = {
+  length: MAX_LENGTH.CARD_NUMBER,
+  type: 'password',
+  updateCardForm: () => {},
+  validators: { validMaxLength, validNumber },
 };
 
 export const ExpireDateMonthInput = Template.bind({});
@@ -26,7 +35,7 @@ ExpireDateMonthInput.args = {
   min: RANGE.MONTH_MIN,
   max: RANGE.MONTH_MAX,
   updateCardForm: () => {},
-  validators: { isOverMaxLength, isNaN: Number.isNaN, isOutOfRange },
+  validators: { validMaxLength, validNumber, validRange },
 };
 
 export const ExpireDateYearInput = Template.bind({});
@@ -35,7 +44,7 @@ ExpireDateYearInput.args = {
   placeholder: 'YY',
   length: MAX_LENGTH.DATE,
   updateCardForm: () => {},
-  validators: { isOverMaxLength, isNaN: Number.isNaN },
+  validators: { validMaxLength, validNumber },
 };
 
 export const OwnerNameInput = Template.bind({});
@@ -45,7 +54,7 @@ OwnerNameInput.args = {
   length: MAX_LENGTH.NAME,
   minLength: MIN_LENGTH.NAME,
   updateCardForm: () => {},
-  validators: { isOverMaxLength },
+  validators: { validMaxLength },
 };
 
 export const SecurityCodeInput = Template.bind({});
@@ -55,7 +64,7 @@ SecurityCodeInput.args = {
   type: 'password',
   length: MAX_LENGTH.SECURITY_CODE,
   updateCardForm: () => {},
-  validators: { isOverMaxLength, isNaN: Number.isNaN },
+  validators: { validMaxLength, validNumber },
 };
 
 export const PasswordInput = Template.bind({});
@@ -65,5 +74,5 @@ PasswordInput.args = {
   type: 'password',
   length: MAX_LENGTH.PASSWORD,
   updateCardForm: () => {},
-  validators: { isOverMaxLength, isNaN: Number.isNaN },
+  validators: { validMaxLength, validNumber },
 };
