@@ -8,15 +8,15 @@ import PasswordForm from 'components/PasswordForm'
 
 import { PageWrapper, CardWrapper, FooterWrapper } from 'pages/AddPage/style'
 
+import { CARD_NUMBER, DUE_DATE, OWNER, CVC, COLORS, MONTH } from 'constant'
+
 import {
-  CARD_NUMBER,
-  DUE_DATE,
-  OWNER,
-  CVC,
-  PASSWORD,
-  COLORS,
-  MONTH,
-} from 'constant'
+  validateCardNumber,
+  validateDueDate,
+  validateOwner,
+  validateCVC,
+  validatePassword,
+} from 'validation'
 
 function AddPage() {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', ''])
@@ -62,7 +62,7 @@ function AddPage() {
   }
 
   const handleCardNumberChange = ({ target: { value } }, index) => {
-    if (value.length > CARD_NUMBER.UNIT_LENGTH || isNaN(value)) return
+    if (validateCardNumber(value)) return
 
     setCardNumbers((prev) => {
       const newState = [...prev]
@@ -76,7 +76,7 @@ function AddPage() {
   }
 
   const handleDueDateChange = ({ target: { value } }, key) => {
-    if (value.length > DUE_DATE.UNIT_LENGTH) return
+    if (validateDueDate(value)) return
 
     setDueDate((prev) => {
       const newState = { ...prev }
@@ -105,19 +105,19 @@ function AddPage() {
   }
 
   const handleOwnerChange = ({ target: { value } }) => {
-    if (value.length > OWNER.MAX_LENGTH) return
+    if (validateOwner(value)) return
 
     setOwner(value)
   }
 
   const handleCvc = ({ target: { value } }) => {
-    if (value.length > CVC.UNIT_LENGTH || isNaN(value)) return
+    if (validateCVC(value)) return
 
     setCvc(value)
   }
 
   const handlePasswordChange = ({ target: { value } }, key) => {
-    if (value.length > PASSWORD.UNIT_LENGTH || isNaN(value)) return
+    if (validatePassword(value)) return
 
     setPassword((prev) => {
       const newState = { ...prev }
