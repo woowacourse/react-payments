@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ErrorMessage from './common/ErrorMessage';
 import { InputContainer, Span, Label, InputWrapper } from './common/styled';
 import QuestionContainer from './common/QuestionIcon';
@@ -21,27 +21,23 @@ const validator = value => {
   }
 };
 
-function CardSecurityCode({ correctSecurityCodeCallback }) {
-  const [cardCode, setCardCode] = useState('');
+function CardSecurityCode({ cardCode, setCardCode }) {
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleInputChange = ({ target: { value } }) => {
+  const handleInputChange = ({ target: { name, value } }) => {
     try {
       validator(value);
     } catch (err) {
       setErrorMessage(err.message);
       return;
     }
-    setCardCode(value);
+
+    setErrorMessage('');
+    setCardCode(prevCardCode => ({
+      ...prevCardCode,
+      [name]: value,
+    }));
   };
-
-  useEffect(() => {
-    const isCorrectSecurityCode = MAX_CARD_CODE === cardCode.length;
-
-    if (isCorrectSecurityCode) setErrorMessage('');
-
-    correctSecurityCodeCallback(isCorrectSecurityCode);
-  }, [correctSecurityCodeCallback, cardCode]);
 
   return (
     <InputContainer position="relative" width="40%">
@@ -49,7 +45,7 @@ function CardSecurityCode({ correctSecurityCodeCallback }) {
         <Label>보안코드(CVC/CVV)</Label>
         <InputWrapper width="80%">
           <Span>
-            <Input type="password" maxLength="3" onChange={handleInputChange} value={cardCode} />
+            <Input type="password" maxLength="3" onChange={handleInputChange} value={cardCode.cvc} name="cvc" />
           </Span>
         </InputWrapper>
         <QuestionContainer>{CVC_EXPLANATION}</QuestionContainer>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { HYPHEN_PRIMARY_COLOR } from '../style';
 import ErrorMessage from './common/ErrorMessage';
 import Input from './common/Input';
@@ -20,25 +20,16 @@ const validator = value => {
   }
 };
 
-const convertToCardNumberString = numbers => {
-  const [cardNoA, cardNoB, cardNoC, cardNoD] = Object.values(numbers);
-  return `${cardNoA} ${cardNoB} ${'*'.repeat(cardNoC.length)} ${'*'.repeat(cardNoD.length)}`;
-};
-
-function CardNumber({ cardNumberCallback }) {
+function CardNumber({ cardNumbers, setCardNumbers }) {
   const cardNoARef = useRef(null);
   const cardNoBRef = useRef(null);
   const cardNoCRef = useRef(null);
   const cardNoDRef = useRef(null);
   const cardNoRefs = [cardNoARef, cardNoBRef, cardNoCRef, cardNoDRef];
 
-  const [cardNumbers, setCardNumbers] = useState({
-    cardNoA: '',
-    cardNoB: '',
-    cardNoC: '',
-    cardNoD: '',
-  });
   const [errorMessage, setErrorMessage] = useState('');
+
+  const isCorrectCardNumber = useMemo(() => Object.values(cardNumbers).join('').length === 16, [cardNumbers]);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -58,29 +49,27 @@ function CardNumber({ cardNumberCallback }) {
       return;
     }
 
+    setErrorMessage('');
     setCardNumbers(prevCardNumbers => ({
       ...prevCardNumbers,
       [name]: value,
     }));
-  };
 
-  const isCorrectCardNumber = Object.values(cardNumbers).join('').length === 16;
-
-  const handleInputFocus = () => {
     if (!isCorrectCardNumber) {
       setErrorMessage('모든 숫자를 입력해주세요.');
     }
   };
 
   useEffect(() => {
-    setErrorMessage('');
-    cardNumberCallback(convertToCardNumberString(cardNumbers));
-  }, [cardNumbers, cardNumberCallback, isCorrectCardNumber]);
+    if (isCorrectCardNumber) {
+      setErrorMessage('');
+    }
+  }, [isCorrectCardNumber]);
 
   return (
     <InputContainer>
       <Label>카드 번호</Label>
-      <InputWrapper color={HYPHEN_PRIMARY_COLOR} onFocus={handleInputFocus}>
+      <InputWrapper color={HYPHEN_PRIMARY_COLOR}>
         <Span>
           <Input
             ref={cardNoARef}

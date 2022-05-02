@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { InputContainer, Label } from './common/styled';
 import ErrorMessage from './common/ErrorMessage';
 import LetterCounter from './common/LetterCounter';
 import Input from './common/Input';
+import useValidator from '../hooks/useValidator';
 
 const MAX_NAME_LENGTH = 30;
 
@@ -19,36 +20,39 @@ const validator = value => {
   }
 };
 
-function CardOwner({ ownerNameCallback, correctOwnerNameCallback }) {
-  const [ownerName, setOwnerName] = useState('');
+function CardOwner({ owner, setOwner }) {
   const [errorMessage, setErrorMessage] = useState('');
+  // const { errorMessage, validateInputs } = useValidator(validator);
 
-  const handleInputChange = ({ target: { value } }) => {
+  const handleInputChange = ({ target: { name, value } }) => {
+    // validateInputs(value);
+    const upperCaseValue = convertToUpperCase(value);
     try {
-      validator(value);
+      validator(upperCaseValue);
     } catch (err) {
       setErrorMessage(err.message);
       return;
     }
-    setOwnerName(convertToUpperCase(value));
-  };
 
-  useEffect(() => {
-    ownerNameCallback(ownerName.trim());
-    correctOwnerNameCallback(ownerName.trim() !== '');
-  }, [ownerName, ownerNameCallback, correctOwnerNameCallback]);
+    setErrorMessage('');
+    setOwner(prevOwner => ({
+      ...prevOwner,
+      [name]: upperCaseValue,
+    }));
+  };
 
   return (
     <InputContainer position="relative">
       <div>
-        <LetterCounter maxLength={30} currentLength={ownerName.length} />
+        <LetterCounter maxLength={30} currentLength={owner.name.length} />
         <Label>카드 소유자 이름(선택)</Label>
         <Input
           type="text"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           maxLength="30"
           onChange={handleInputChange}
-          value={ownerName}
+          value={owner.name}
+          name="name"
           required
         />
       </div>

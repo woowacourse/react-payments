@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { InputContainer, Label, InputWrapper } from './common/styled';
 import InactiveContainer from './common/InactiveContainer';
@@ -27,12 +27,10 @@ const validator = value => {
   }
 };
 
-function CardPassword({ correctCardPwdCallback }) {
-  const [pwd, setPwd] = useState({
-    pwdNoA: '',
-    pwdNoB: '',
-  });
+function CardPassword({ pwd, setPwd }) {
   const [errorMessage, setErrorMessage] = useState('');
+
+  const isCorrectPwd = useMemo(() => Object.values(pwd).join('').length === 2, [pwd]);
 
   const handleInputChange = ({ target: { name, value } }) => {
     try {
@@ -42,19 +40,20 @@ function CardPassword({ correctCardPwdCallback }) {
       return;
     }
 
+    setErrorMessage('');
     setPwd(prevPwds => ({
       ...prevPwds,
       [name]: value,
     }));
+
+    if (!isCorrectPwd) {
+      setErrorMessage('모두 입력해주세요.');
+    }
   };
 
   useEffect(() => {
-    const isCorrectPwd = Object.values(pwd).join('').length === 2;
-
     if (isCorrectPwd) setErrorMessage('');
-
-    correctCardPwdCallback(isCorrectPwd);
-  }, [pwd, correctCardPwdCallback]);
+  }, [isCorrectPwd]);
 
   return (
     <InputContainer>
