@@ -1,6 +1,6 @@
 import React from 'react';
-import Card from '../common/Card/Card';
-import PageTitle from '../common/PageTitle/PageTitle';
+import Card from '../components/common/Card/Card';
+import PageTitle from '../components/common/PageTitle/PageTitle';
 
 function CardListPage({ setPage }) {
   const handleCardAdd = () => {

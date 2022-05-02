@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { LIMIT_LENGTH } from '../../../../constants';
-import { limitInputLength, inputNumberOnly } from '../../../../utils';
+import { LIMIT_LENGTH } from '../../constants';
+import { limitInputLength, inputNumberOnly } from '../../utils';
 
 function CardNumber({ cardInfo, setCardInfo }) {
   const handleOnInput = (event) => {
