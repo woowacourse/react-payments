@@ -77,7 +77,11 @@ export default function CardInfoForm({
         isValid={isSecurityCodeValid}
       />
       <CardPassword password={password} onChange={onChangePassword} isValid={isPasswordValid} />
-      {isNextButtonShown && <button className="submit-button">다음</button>}
+      {isNextButtonShown && (
+        <button type="submit" className="submit-button">
+          다음
+        </button>
+      )}
     </form>
   );
 }
