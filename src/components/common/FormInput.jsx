@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { isObject } from '../../utils';
 
@@ -53,6 +54,13 @@ const FormInput = ({
   onChange,
   children,
 }) => {
+  const handleChange = useCallback(
+    (e) => {
+      onChange(e, item);
+    },
+    [onChange, item],
+  );
+
   return (
     <div className="input-container">
       <label className="input-title">{inputTitle}</label>
@@ -63,7 +71,7 @@ const FormInput = ({
             name={name}
             className={`input-basic ${className} font-${theme}`}
             value={isObject(inputValue) ? inputValue[name] : inputValue}
-            onChange={(e) => onChange(e, item)}
+            onChange={handleChange}
             {...rest}
           />
         ))}
