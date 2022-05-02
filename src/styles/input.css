@@ -88,7 +88,12 @@
   cursor: pointer;
 }
 
+.user-guide:hover ~ .user-guide-content {
+  display: block;
+}
+
 .user-guide-content {
+  display: none;
   position: absolute;
   top: -30px;
   left: 80px;
