@@ -12,7 +12,7 @@ export const cardInfoValidations = {
       const parsedValue = trimStartZeroPad(value);
 
       if (order === 0) {
-        return /^$|0|(^[1-9]$)|(^1?[0-2]$)/.test(parsedValue);
+        return /^$|(^[0-9]$)|(^1?[0-2]$)/.test(parsedValue);
       }
 
       return /^\d{0,2}$/.test(parsedValue);

@@ -11,8 +11,8 @@ export default function CardExpireDateInput({ expireDate, setExpireDate }) {
   const createDateString = (value) => {
     const parsedValue =
       value.length > 1 && value.startsWith("0") ? value.slice(1) : value;
-    return parsedValue.length === 1 && Number(parsedValue) !== 0
-      ? `0${parsedValue}`
+    return Number(parsedValue) !== 0
+      ? parsedValue.padStart(2, "0")
       : parsedValue;
   };
   const [handleExpireDateUpdate, errorMessage, resetError] = useValidatedUpdate(
@@ -40,7 +40,6 @@ export default function CardExpireDateInput({ expireDate, setExpireDate }) {
         onBlur={() => resetError()}
         width="40px"
         isComplete={expireDate[0].length === 2}
-        maxLength={2}
         required
       />
       <p>/</p>
@@ -52,7 +51,6 @@ export default function CardExpireDateInput({ expireDate, setExpireDate }) {
         onBlur={() => resetError()}
         width="40px"
         isComplete={expireDate[1].length === 2}
-        maxLength={2}
         required
       />
     </InputField>
