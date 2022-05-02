@@ -1,4 +1,4 @@
-import "./index.scss";
+import './index.scss';
 
 const ModalContainer = ({ children, contentsRef, visible, setVisible }) => {
   const closeModal = (e) => {
@@ -10,12 +10,10 @@ const ModalContainer = ({ children, contentsRef, visible, setVisible }) => {
 
   return (
     <>
-      {visible ? (
-        <div className="deemer" onClick={closeModal}>
-          <div className="modal--contents">{children}</div>
+      {visible && (
+        <div className='deemer' onClick={closeModal}>
+          <div className='modal--contents'>{children}</div>
         </div>
-      ) : (
-        <></>
       )}
     </>
   );

@@ -8,14 +8,14 @@ import OwnerNameInput from '../../components/OwnerNameInput';
 import SecureCodeInput from '../../components/SecureCodeInput';
 import useCard from '../../hooks/useCard';
 import NextButton from '../../components/NextButton';
-import ColorPicker from '../../components/ColorPicker';
+import CardColorPicker from '../../components/CardColorPicker';
 import { useState } from 'react';
 
 const CardAdd = () => {
-  const [form, dispatch] = useCard();
+  const [inputStates, dispatch] = useCard();
   const [visible, setVisible] = useState(false);
 
-  const { cardNumber, expiredDate, ownerName, secureCode, password } = form;
+  const { cardNumber, expiredDate, ownerName, secureCode, password } = inputStates;
 
   return (
     <>
@@ -25,7 +25,7 @@ const CardAdd = () => {
           <p>카드 추가</p>
         </header>
         <div className='card-add__contpmainer'>
-          <Card state={form} setVisible={setVisible} />
+          <Card state={inputStates} setVisible={setVisible} />
           <form>
             <CardNumberInput state={cardNumber} updateForm={dispatch} />
             <ExpiredDateInput state={expiredDate} updateForm={dispatch} />
@@ -34,9 +34,9 @@ const CardAdd = () => {
             <CardPasswordInput state={password} updateForm={dispatch} />
           </form>
         </div>
-        <NextButton state={form} />
+        <NextButton state={inputStates} />
       </div>
-      <ColorPicker visible={visible} setVisible={setVisible} updateForm={dispatch} />
+      <CardColorPicker visible={visible} setVisible={setVisible} updateForm={dispatch} />
     </>
   );
 };
