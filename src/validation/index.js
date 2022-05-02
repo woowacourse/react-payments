@@ -60,7 +60,7 @@ export default {
   },
 
   validatePassword: password => {
-    const securityNumberRegex = /^[0-9]{2}$/;
+    const securityNumberRegex = /^[0-9]$/;
 
     return securityNumberRegex.test(password);
   },

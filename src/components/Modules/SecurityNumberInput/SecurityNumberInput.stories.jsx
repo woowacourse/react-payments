@@ -8,4 +8,6 @@ export default {
 
 const Template = args => <SecurityNumberInput {...args} />;
 
-export const Default = {};
+export const Default = Template.bind({});
+
+Default.args = {};
