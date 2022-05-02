@@ -12,15 +12,15 @@ export default function useCardNumber(initialValue) {
 
     setCardNumber(numbers);
 
-    let processedNumbers = numbers;
+    let encryptedNumbers = numbers;
 
     if (numbers.length > 8) {
-      processedNumbers = numbers.slice(0, 8) + '•'.repeat(numbers.length - 8);
+      encryptedNumbers = numbers.slice(0, 8) + '•'.repeat(numbers.length - 8);
     }
 
     // 정규식: 숫자와 • 4개 단위마다 '-'를 넣어준다.
     setEncryptedCardNumber(
-      processedNumbers.match(/[\d•]{1,4}/g)?.join('-') ?? initialValue
+      encryptedNumbers.match(/[\d•]{1,4}/g)?.join('-') ?? initialValue
     );
   }, []);
 
