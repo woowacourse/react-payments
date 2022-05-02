@@ -59,7 +59,7 @@ const Input = forwardRef(function Input(props, ref) {
 
 Input.defaultProps = {
   isCenter: true,
-  height: '45px',
+  height: '25px',
   backgroundColor: '#ecebf1',
   color: '#04C09E',
 };

@@ -83,7 +83,6 @@ function CardNumberInput() {
                 value={numbers[order]}
                 type={index < 2 ? 'number' : 'password'}
                 width="50px"
-                height="25px"
                 maxLength={4}
                 onChange={handleNumberChange}
                 isValid={validations[order]}
