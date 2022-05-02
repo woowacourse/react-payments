@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useModal } from "../hooks/useModal";
 
 import { Button, Card, Modal, PageTitle } from "../components/common";
-import { CARD_TYPES, MODAL_NAME } from "../constants/constants";
+import {
+  CARD_TYPES,
+  CARD_TYPES_DEFAULT,
+  MODAL_NAME,
+} from "../constants/constants";
 import {
   CardExpireDateInputForm,
   CardNumbersInputForm,
@@ -48,6 +52,13 @@ export const CardRegisterPage = () => {
     setAllCompleted(Object.values(checkInputs).every((check) => check));
   }, [checkInputs]);
 
+  useEffect(() => {
+    if (!checkInputs.cardNumbers) {
+      setCheckInputs((prev) => ({ ...prev, [cardType]: false }));
+      setCardType(() => CARD_TYPES_DEFAULT);
+    }
+  }, [checkInputs.cardNumbers]);
+
   const modalSelector = (name) => {
     return () => {
       setModalState(true, name);
@@ -62,7 +73,7 @@ export const CardRegisterPage = () => {
 
   const loadModal = () => {
     switch (modalName) {
-      case "cardType":
+      case MODAL_NAME.CARD_TYPE:
         return (
           <CardSelectModal
             cardTypes={CARD_TYPES}
@@ -71,13 +82,14 @@ export const CardRegisterPage = () => {
             handleCardTypeCheck={setCheckInputStateOf("cardType")}
           />
         );
-      case "cardCVC":
+      case MODAL_NAME.CARD_CVC:
         return <CVCHelperModal />;
       default:
         return <div>no data</div>;
     }
   };
 
+  console.log(checkInputs);
   return (
     <>
       <PageTitle>카드 추가</PageTitle>

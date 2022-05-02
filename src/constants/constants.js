@@ -9,6 +9,8 @@ export const CARD_TYPES = [
   { name: "록바", color: "#FBCD58" },
 ];
 
+export const CARD_TYPES_DEFAULT = { name: "", color: "" };
+
 export const MODAL_NAME = {
   CARD_TYPE: "cardType",
   CARD_CVC: "cardCVC",
