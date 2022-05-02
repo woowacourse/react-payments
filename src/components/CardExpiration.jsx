@@ -16,8 +16,6 @@ export default function CardExpiration({ color }) {
     dispatch({ type: 'SET_CARD_EXPIRATION', value: e.target.value, index });
   };
 
-  const validate = (value) => value.join('') && validator.checkCardExpiration(value);
-
   return (
     <Container>
       <InputTitle>만료일</InputTitle>
@@ -45,7 +43,7 @@ export default function CardExpiration({ color }) {
       </InputBox>
       <ErrorMessage
         value={cardExpiration}
-        validate={validate}
+        validate={validator.checkCardExpiration}
         type="SET_CARD_EXPIRATION_ERROR_MESSAGE"
       >
         {cardExpirationErrorMessage}

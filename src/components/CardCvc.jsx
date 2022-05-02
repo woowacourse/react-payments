@@ -19,8 +19,6 @@ export default function CardCvc() {
     dispatch({ type: 'SET_CARD_CVC', value: e.target.value });
   };
 
-  const validate = (value) => value && validator.checkCardCvc(value);
-
   const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
 
   return (
@@ -38,7 +36,11 @@ export default function CardCvc() {
         </InputContainer>
         <TipButton />
       </InputBox>
-      <ErrorMessage value={cardCvc} validate={validate} type="SET_CARD_CVC_ERROR_MESSAGE">
+      <ErrorMessage
+        value={cardCvc}
+        validate={validator.checkCardCvc}
+        type="SET_CARD_CVC_ERROR_MESSAGE"
+      >
         {cardCvcErrorMessage}
       </ErrorMessage>
     </Container>

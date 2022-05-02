@@ -33,8 +33,6 @@ export default function CardNumber({ color }) {
     cardCompanyIndex === -1 && dispatch({ type: 'SET_MODAL_FLAG', flag: true });
   };
 
-  const validate = (value) => value.join('').length > 0 && validator.checkCardNumber(value);
-
   return (
     <Container>
       <InputTitle>카드 번호</InputTitle>
@@ -81,7 +79,11 @@ export default function CardNumber({ color }) {
           />
         </ExtendedInputContainer>
       </InputBox>
-      <ErrorMessage value={cardNumber} validate={validate} type="SET_CARD_NUMBER_ERROR_MESSAGE">
+      <ErrorMessage
+        value={cardNumber}
+        validate={validator.checkCardNumber}
+        type="SET_CARD_NUMBER_ERROR_MESSAGE"
+      >
         {cardNumberErrorMessage}
       </ErrorMessage>
     </Container>

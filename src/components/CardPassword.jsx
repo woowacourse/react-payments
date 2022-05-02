@@ -23,8 +23,6 @@ export default function CardPassword({ color }) {
     dispatch({ type: 'SET_CARD_PASSWORD', value: e.target.value, index });
   };
 
-  const validate = (value) => value.join('') && validator.checkCardPassword(value);
-
   return (
     <Container>
       <InputTitle>카드 비밀번호</InputTitle>
@@ -52,7 +50,11 @@ export default function CardPassword({ color }) {
           <Circle size="5px" color={color} />
         </Wrapper>
       </ExtendedInputBox>
-      <ErrorMessage value={cardPassword} validate={validate} type="SET_CARD_PASSWORD_ERROR_MESSAGE">
+      <ErrorMessage
+        value={cardPassword}
+        validate={validator.checkCardPassword}
+        type="SET_CARD_PASSWORD_ERROR_MESSAGE"
+      >
         {cardPasswordErrorMessage}
       </ErrorMessage>
     </Container>
