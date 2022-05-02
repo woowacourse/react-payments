@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import FieldSet from '../../FieldSet';
 import Input from '../../Input';
-import AskMark from '../../AskMark';
+import Tooltip from '../../ToolTip';
 
 const SecureCodeInputContainer = styled.div`
   width: fit-content;
@@ -30,7 +30,7 @@ const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
             value={secureCode}
             onChange={onChangeSecureCode}
           />
-          <AskMark />
+          <Tooltip />
         </SecureCodeInputContainer>
       }
     </FieldSet>
