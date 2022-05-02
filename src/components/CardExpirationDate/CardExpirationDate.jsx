@@ -56,7 +56,7 @@ function CardExpirationDate({ cardExpirationDate, setCardExpirationDate }) {
         <input
           name="month"
           className={`input-basic ${
-            cardExpirationDate.month.length >= LIMIT_LENGTH.EXPIRATION_DATE &&
+            cardExpirationDate.month.length === LIMIT_LENGTH.EXPIRATION_DATE &&
             cardExpirationDate.month !== '00' &&
             cardExpirationDate.month !== '0' &&
             cardExpirationDate.month >= MONTH.JANUARY &&
