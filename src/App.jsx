@@ -10,9 +10,9 @@ import useCardPassword from './hooks/useCardPassword';
 import useModal from './hooks/useModal';
 
 import Modal from './components/Modal';
-import Button from './components/Button';
-import Card from './components/Card';
-import Input from './components/Input';
+import Button from './components/common/Button';
+import Card from './components/common/Card';
+import Input from './components/common/Input';
 
 import { ReactComponent as Arrow } from './assets/arrow.svg';
 
