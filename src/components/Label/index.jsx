@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import * as styled from './index.styled';
 
 const Label = ({ id, description }) => {
-  return <Container htmlFor={id}>{description}</Container>;
+  return <styled.Container htmlFor={id}>{description}</styled.Container>;
 };
 
 Label.propTypes = {
@@ -11,8 +11,4 @@ Label.propTypes = {
   description: PropTypes.string,
 };
 
-const Container = styled.label`
-  color: #525252;
-  font-size: 12px;
-`;
 export default Label;

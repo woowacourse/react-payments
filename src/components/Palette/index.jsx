@@ -1,88 +1,61 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import Selector from "./Selector";
+import React from 'react';
+import PropTypes from 'prop-types';
+import ColorPicker from './ColorPicker';
+import * as styled from './index.styled';
 
 const Palette = ({ onClickCardSelector }) => {
   return (
-    <Container>
-      <SelectorContainer>
-        <Selector
+    <styled.Container>
+      <styled.ColorPickerContainer>
+        <ColorPicker
           color="red"
           name="포코 카드"
-          onClick={onClickCardSelector("red")}
+          onClick={onClickCardSelector('red')}
         />
-        <Selector
+        <ColorPicker
           color="blue"
           name="도리 카드"
-          onClick={onClickCardSelector("blue")}
+          onClick={onClickCardSelector('blue')}
         />
-        <Selector
+        <ColorPicker
           color="green"
           name="호프 카드"
-          onClick={onClickCardSelector("green")}
+          onClick={onClickCardSelector('green')}
         />
-        <Selector
+        <ColorPicker
           color="purple"
           name="공원 카드"
-          onClick={onClickCardSelector("purple")}
+          onClick={onClickCardSelector('purple')}
         />
-      </SelectorContainer>
-      <SelectorContainer>
-        <Selector
+      </styled.ColorPickerContainer>
+      <styled.ColorPickerContainer>
+        <ColorPicker
           color="mint"
           name="콜라 카드"
-          onClick={onClickCardSelector("mint")}
+          onClick={onClickCardSelector('mint')}
         />
-        <Selector
+        <ColorPicker
           color="pink"
           name="블링 카드"
-          onClick={onClickCardSelector("pink")}
+          onClick={onClickCardSelector('pink')}
         />
-        <Selector
+        <ColorPicker
           color="orange"
           name="태태 카드"
-          onClick={onClickCardSelector("orange")}
+          onClick={onClickCardSelector('orange')}
         />
-        <Selector
+        <ColorPicker
           color="yellow"
           name="샐리 카드"
-          onClick={onClickCardSelector("yellow")}
+          onClick={onClickCardSelector('yellow')}
         />
-      </SelectorContainer>
-    </Container>
+      </styled.ColorPickerContainer>
+    </styled.Container>
   );
 };
 
 Palette.propTypes = {
   onClickCardSelector: PropTypes.func,
 };
-
-const Container = styled.div`
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-  border: none;
-  padding: 26px 0;
-  gap: 20px;
-  background-color: #fff;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-
-  z-index: 10;
-`;
-
-const SelectorContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  & > div {
-    margin: 0 16px;
-  }
-`;
 
 export default Palette;

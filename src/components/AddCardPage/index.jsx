@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import {
-  CardNumber,
-  ExpiredDate,
-  CardOwnerName,
-  SecureCode,
-  Password,
-} from './';
 
-import Button from '../../Button';
-import Header from '../../Header';
 import {
   checkExpiredMonth,
   checkExpiredYear,
@@ -17,12 +7,22 @@ import {
   checkOwnerName,
   checkSecureCode,
   checkPassword,
-} from '../../../validation';
+} from '../../validation';
 
-import Card from '../../Card';
-import Modal from '../../Modal';
-import Palette from '../../Palette';
-import useInputValue from '../../../hooks/useInputValue';
+import Button from '../Button';
+import Header from '../Header';
+import Card from '../Card';
+import Modal from '../Modal';
+import Palette from '../Palette';
+import useInputValue from '../../hooks/useInputValue';
+
+import CardNumber from './CardNumber';
+import CardOwner from './CardOwner';
+import ExpiredDate from './ExpiredDate';
+import Password from './Password';
+import SecureCode from './SecureCode';
+
+import * as styled from './index.styled';
 
 const AddCardPage = () => {
   const [isValidatedForm, setIsValidatedForm] = useState(false);
@@ -132,7 +132,7 @@ const AddCardPage = () => {
   };
 
   return (
-    <Container onSubmit={onSubmitCardForm}>
+    <styled.Container onSubmit={onSubmitCardForm}>
       <Header title="카드 추가" />
       <Card
         name="블랙 카드😎"
@@ -169,7 +169,7 @@ const AddCardPage = () => {
         onChangeExpiredYear={onChangeExpiredYear}
         isError={isExpiredMonthError || isExpiredYearError}
       />
-      <CardOwnerName
+      <CardOwner
         ownerName={ownerName}
         onChangeOwnerName={onChangeOwnerName}
         isError={isOwnerNameError}
@@ -187,31 +187,19 @@ const AddCardPage = () => {
         isError={isFirstPasswordError || isSecondPasswordError}
       />
       {isValidatedForm && isValidatedValueLength && (
-        <ButtonContainer>
+        <styled.ButtonContainer>
           <Button name="submitButton" type="submit">
             다음
           </Button>
-        </ButtonContainer>
+        </styled.ButtonContainer>
       )}
       {isModalOpened && (
-        <Modal onClickDimmed={closeModal}>
+        <Modal onClickDimmer={closeModal}>
           <Palette onClickCardSelector={onClickCardSelector} />
         </Modal>
       )}
-    </Container>
+    </styled.Container>
   );
 };
-
-const Container = styled.form`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-`;
-
-const ButtonContainer = styled.div`
-  position: absolute;
-  right: 20px;
-  bottom: 0;
-`;
 
 export default AddCardPage;

@@ -1,31 +1,19 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import * as styled from './index.styled';
 
-const Modal = ({ children, onClickDimmed }) => {
+const Modal = ({ children, onClickDimmer }) => {
   return (
-    <Container>
-      <Dimmed onClick={onClickDimmed} />
+    <div>
+      <styled.Dimmer onClick={onClickDimmer} />
       {children}
-    </Container>
+    </div>
   );
 };
 
 Modal.propTypes = {
   children: PropTypes.element,
-  onClickDimmed: PropTypes.func,
+  onClickDimmer: PropTypes.func,
 };
-
-const Dimmed = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #00000080;
-  z-index: 10;
-`;
-
-const Container = styled.div``;
 
 export default Modal;

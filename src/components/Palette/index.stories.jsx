@@ -1,8 +1,8 @@
-import React from "react";
-import Palette from "./index";
+import React from 'react';
+import Palette from '.';
 
 export default {
-  title: "Palette",
+  title: 'Palette',
   component: Palette,
 };
 

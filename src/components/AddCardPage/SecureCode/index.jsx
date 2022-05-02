@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import FieldSet from '../../FieldSet';
 import Input from '../../Input';
 import AskMarkTooltip from '../../AskMarkTooltip';
 import PropTypes from 'prop-types';
+import * as styled from './index.styled';
 
 const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
   return (
@@ -14,7 +14,7 @@ const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
       isError={isError}
     >
       {
-        <SecureCodeInputContainer>
+        <styled.Container>
           <Input
             id="secureCode"
             scale="medium"
@@ -24,7 +24,7 @@ const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
             onChange={onChangeSecureCode}
           />
           <AskMarkTooltip />
-        </SecureCodeInputContainer>
+        </styled.Container>
       }
     </FieldSet>
   );
@@ -35,12 +35,5 @@ SecureCode.propTypes = {
   onChangeSecureCode: PropTypes.func,
   isError: PropTypes.bool,
 };
-
-const SecureCodeInputContainer = styled.div`
-  width: fit-content;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-`;
 
 export default SecureCode;

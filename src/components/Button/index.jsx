@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import * as styled from './index.styled';
 
 const Button = ({ children, ...rest }) => {
-  return <Container {...rest}>{children}</Container>;
+  return <styled.Container {...rest}>{children}</styled.Container>;
 };
 
 Button.propTypes = {
@@ -11,16 +11,5 @@ Button.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string,
 };
-
-const Container = styled.button`
-  width: 44px;
-  height: 44px;
-  color: #04c09e;
-  font-size: 14px;
-  font-weight: 700;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-`;
 
 export default Button;

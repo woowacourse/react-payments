@@ -1,8 +1,8 @@
-import React from "react";
-import AddCardPage from "./AddCardPage";
+import React from 'react';
+import AddCardPage from '.';
 
 export default {
-  title: "AddCardPage",
+  title: 'AddCardPage',
   component: AddCardPage,
 };
 

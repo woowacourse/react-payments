@@ -1,10 +1,10 @@
-import React from "react";
-import Input from "./index";
-import CardNumberInput from "./CardNumberInput";
-import ExpiredDateInput from "./ExpiredDateInput";
+import React from 'react';
+import Input from './index';
+import CardNumberInput from './CardNumberInput';
+import ExpiredDateInput from './ExpiredDateInput';
 
 export default {
-  title: "Input",
+  title: 'Input',
   component: Input,
 };
 
@@ -15,16 +15,16 @@ const ExpiredDateTemplate = (args) => <ExpiredDateInput {...args} />;
 export const Password = Template.bind({});
 
 Password.args = {
-  scale: "small",
-  type: "password",
+  scale: 'small',
+  type: 'password',
   maxLength: 1,
 };
 
 export const UserName = Template.bind({});
 
 UserName.args = {
-  scale: "large",
-  placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
+  scale: 'large',
+  placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
 };
 
 export const CardNumber = CardNumberTemplate.bind({});

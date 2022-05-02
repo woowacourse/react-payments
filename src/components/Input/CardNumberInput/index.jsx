@@ -1,6 +1,6 @@
-import Input from ".";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import Input from '../index';
+import PropTypes from 'prop-types';
+import * as styled from './index.styled';
 
 const CardNumberInput = ({
   onChangeFirstCardNumber,
@@ -13,7 +13,7 @@ const CardNumberInput = ({
   fourthCardNumber,
 }) => {
   return (
-    <Container>
+    <styled.Container>
       <Input
         scale="medium"
         textAlign="right"
@@ -21,14 +21,14 @@ const CardNumberInput = ({
         onChange={onChangeFirstCardNumber}
         maxLength={4}
       />
-      <DashContainer>-</DashContainer>
+      <styled.DashContainer>-</styled.DashContainer>
       <Input
         scale="medium"
         value={secondCardNumber}
         onChange={onChangeSecondCardNumber}
         maxLength={4}
       />
-      <DashContainer>-</DashContainer>
+      <styled.DashContainer>-</styled.DashContainer>
       <Input
         scale="medium"
         type="password"
@@ -36,7 +36,7 @@ const CardNumberInput = ({
         onChange={onChangeThirdCardNumber}
         maxLength={4}
       />
-      <DashContainer>-</DashContainer>
+      <styled.DashContainer>-</styled.DashContainer>
       <Input
         scale="medium"
         textAlign="left"
@@ -45,7 +45,7 @@ const CardNumberInput = ({
         onChange={onChangeFourthCardNumber}
         maxLength={4}
       />
-    </Container>
+    </styled.Container>
   );
 };
 
@@ -59,19 +59,5 @@ CardNumberInput.propTypes = {
   thirdCardNumber: PropTypes.string,
   fourthCardNumber: PropTypes.string,
 };
-
-const Container = styled.div`
-  width: fit-content;
-  height: fit-content;
-  background-color: #ecebf1;
-  border-radius: 7px;
-`;
-
-const DashContainer = styled.span`
-  width: 10px;
-  height: 45px;
-  margin: 0 10px;
-  color: #111;
-`;
 
 export default CardNumberInput;

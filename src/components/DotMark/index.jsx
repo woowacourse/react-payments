@@ -1,13 +1,8 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import * as styled from './index.styled';
 
 const DotMark = () => {
-  return <Container>•</Container>;
+  return <styled.Container>•</styled.Container>;
 };
 
-const Container = styled.div`
-  color: #04c09e;
-  font-size: 20px;
-  padding: 10px;
-`;
 export default DotMark;

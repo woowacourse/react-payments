@@ -1,18 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import * as styled from './index.styled';
 
 const ErrorMessage = ({ message }) => {
-  return <Container>{message}</Container>;
+  return <styled.Container>{message}</styled.Container>;
 };
 
 ErrorMessage.propTypes = {
   message: PropTypes.string,
 };
 
-const Container = styled.div`
-  font-size: 14px;
-  color: red;
-  background-color: transparent;
-`;
 export default ErrorMessage;

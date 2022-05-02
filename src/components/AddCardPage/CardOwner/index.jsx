@@ -1,8 +1,8 @@
-import React from "react";
-import FieldSet from "../../FieldSet";
-import styled from "styled-components";
-import Input from "../../Input";
-import PropTypes from "prop-types";
+import React from 'react';
+import FieldSet from '../../FieldSet';
+import Input from '../../Input';
+import PropTypes from 'prop-types';
+import * as styled from './index.styled';
 
 const showOwnerNameLength = (ownerName) => {
   return ownerName.length < 10
@@ -10,10 +10,12 @@ const showOwnerNameLength = (ownerName) => {
     : `${ownerName.length}/30`;
 };
 
-const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
+const CardOwner = ({ ownerName, onChangeOwnerName, isError }) => {
   return (
-    <Container>
-      <MaxNumberIndicator>{showOwnerNameLength(ownerName)}</MaxNumberIndicator>
+    <styled.Container>
+      <styled.MaxNumberIndicator>
+        {showOwnerNameLength(ownerName)}
+      </styled.MaxNumberIndicator>
       <FieldSet
         id="cardOwnerName"
         description="카드 소유자 이름(선택)"
@@ -31,28 +33,14 @@ const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
           />
         }
       </FieldSet>
-    </Container>
+    </styled.Container>
   );
 };
 
-CardOwnerName.propTypes = {
+CardOwner.propTypes = {
   ownerName: PropTypes.string,
   onChangeOwnerName: PropTypes.func,
   isError: PropTypes.bool,
 };
 
-const Container = styled.div`
-  padding-top: 30px;
-  position: relative;
-  width: fit-content;
-  height: fit-content;
-`;
-
-const MaxNumberIndicator = styled.span`
-  font-size: 12px;
-  position: absolute;
-  top: 35px;
-  right: 20px;
-`;
-
-export default CardOwnerName;
+export default CardOwner;
