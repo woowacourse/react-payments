@@ -1,3 +1,5 @@
+import CardUserNameField from '.';
+
 export default {
   title: 'Component/CardUserNameField',
   component: CardUserNameField,
