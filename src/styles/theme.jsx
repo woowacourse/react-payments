@@ -17,11 +17,13 @@ const COLORS = {
 
   laser: '#CBBA64',
 
+  black: '#000',
   'black-05': 'rgba(0, 0, 0, 0.05)',
   'black-15': 'rgba(0, 0, 0, 0.15)',
   'black-25': 'rgba(0, 0, 0, 0.25)',
-  silverChalice: '#999',
   dorado: '#525252',
+  silverChalice: '#999',
+  silver: '#BBB',
   alto: '#DDD',
   athensGray: '#ECEBF1',
   white: '#fff',
