@@ -63,7 +63,9 @@ function PasswordInput() {
             width="43px"
             height="45px"
             type="password"
+            isValid={true}
             disable={true}
+            readonly={true}
           />
         ))}
       </InputContainer>

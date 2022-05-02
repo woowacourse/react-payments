@@ -34,6 +34,7 @@ const Input = forwardRef(function Input(props, ref) {
     color,
     isValid,
     disabled,
+    readonly,
   } = props;
 
   return (
@@ -53,6 +54,7 @@ const Input = forwardRef(function Input(props, ref) {
       onChange={onChange}
       isValid={isValid}
       disabled={disabled}
+      readOnly={readonly}
     />
   );
 });
