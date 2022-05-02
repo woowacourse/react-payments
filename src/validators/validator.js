@@ -1,4 +1,4 @@
-import { CARD_INFO_RULES } from "./constants";
+import { CARD_INFO_RULES } from "../constants/constants";
 
 export const isInValidCardNumber = (value) => {
   return (

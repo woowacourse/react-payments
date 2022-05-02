@@ -1,7 +1,7 @@
 import React from "react";
-import { CARD_INFO_RULES } from "../constants.js";
-import Input from "./UIComponents/Input/Input.jsx";
-import InputField from "./UIComponents/InputField/InputField.jsx";
+import { CARD_INFO_RULES } from "../constants/constants";
+import Input from "./UIComponents/Input/Input";
+import InputField from "./UIComponents/InputField/InputField";
 
 export default function CardExpireDateInput({ expireDate, onChange }) {
   return (

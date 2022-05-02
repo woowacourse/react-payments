@@ -1,8 +1,11 @@
 import React from "react";
-import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants";
+import {
+  CARD_INFO_RULES,
+  CREATE_MASKED_CHARACTERS,
+} from "../constants/constants";
 import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
-import { INPUT_KEY_TABLE } from "../constants";
+import { INPUT_KEY_TABLE } from "../constants/constants";
 
 const CardNumberInput = React.forwardRef((props, inputRef) => {
   const { cardNumber, onChange, onKeyDown } = props;

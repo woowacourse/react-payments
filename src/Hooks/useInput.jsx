@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { INPUT_KEY_TABLE } from "../../constants";
+import { INPUT_KEY_TABLE } from "../constants/constants";
 
 export default function useInput(initialValue, validator, inputRef) {
   const [value, setValue] = useState(initialValue);

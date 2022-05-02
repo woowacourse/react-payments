@@ -1,11 +1,11 @@
 import React from "react";
-import Input from "./UIComponents/Input/Input.jsx";
+import Input from "./UIComponents/Input/Input";
 import styled from "styled-components";
 import {
   CARD_INFO_RULES,
   CREATE_MASKED_CHARACTERS,
   INPUT_KEY_TABLE,
-} from "../constants.js";
+} from "../constants/constants";
 
 const StyledInputField = styled.div`
   display: flex;
