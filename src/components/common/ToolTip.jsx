@@ -40,7 +40,9 @@ const StyledToolTip = styled.div`
 const ToolTip = ({ children, tip }) => {
   return (
     <StyledToolTip>
-      <div className="icon">{children}</div>
+      <div className="icon" data-testid="icon">
+        {children}
+      </div>
       <p className="tooltip">{tip}</p>
     </StyledToolTip>
   );
