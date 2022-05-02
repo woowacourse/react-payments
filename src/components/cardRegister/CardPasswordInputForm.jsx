@@ -11,14 +11,6 @@ export const CardPasswordInputForm = ({
   handlePasswordInput,
   handleCardPasswordCheck,
 }) => {
-  const handlePasswordChange = (e, name) => {
-    if (isNaN(e.nativeEvent.data)) {
-      return;
-    }
-
-    handlePasswordInput((prev) => ({ ...prev, [name]: e.nativeEvent.data }));
-  };
-
   const passwordInputRefs = useRef([]);
 
   useEffect(() => {
@@ -32,6 +24,14 @@ export const CardPasswordInputForm = ({
 
     handleCardPasswordCheck(isCompletePassword);
   }, [password]);
+
+  const handlePasswordChange = (e, name) => {
+    if (isNaN(e.nativeEvent.data)) {
+      return;
+    }
+
+    handlePasswordInput((prev) => ({ ...prev, [name]: e.nativeEvent.data }));
+  };
 
   return (
     <InputContainer>

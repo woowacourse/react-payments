@@ -11,6 +11,12 @@ export const CVCInputForm = ({
   handleCardCVCCheck,
   handleModalVisible,
 }) => {
+  useEffect(() => {
+    const isCVCCompleted = CVC.length === 3;
+
+    handleCardCVCCheck(isCVCCompleted);
+  }, [CVC]);
+
   const handleCVCChange = (e) => {
     if (isNaN(e.nativeEvent.data)) {
       return;
@@ -18,12 +24,6 @@ export const CVCInputForm = ({
 
     handleCVCInput(e.target.value);
   };
-
-  useEffect(() => {
-    const isCVCCompleted = CVC.length === 3;
-
-    handleCardCVCCheck(isCVCCompleted);
-  }, [CVC]);
 
   return (
     <InputContainer>

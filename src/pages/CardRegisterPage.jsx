@@ -24,40 +24,28 @@ const CARD_TYPES = [
 ];
 
 export const CardRegisterPage = () => {
+  const [modalVisibleState, setModalState, modalName] = useModal();
+  const [ownerName, setOwnerName] = useState("");
+  const [CVC, setCVC] = useState("");
+  const [allCompleted, setAllCompleted] = useState(false);
+  const [expireDate, setExpireDate] = useState({
+    month: "",
+    year: "",
+  });
+  const [password, setPassword] = useState({
+    firstNumber: "",
+    secondNumber: "",
+  });
+  const [cardType, setCardType] = useState({
+    name: "",
+    backgroundColor: "",
+  });
   const [cardNumbers, setCardNumbers] = useState({
     firstNumber: "",
     secondNumber: "",
     thirdNumber: "",
     fourthNumber: "",
   });
-
-  const [expireDate, setExpireDate] = useState({
-    month: "",
-    year: "",
-  });
-
-  const [ownerName, setOwnerName] = useState("");
-
-  const [CVC, setCVC] = useState("");
-
-  const [password, setPassword] = useState({
-    firstNumber: "",
-    secondNumber: "",
-  });
-
-  const [cardType, setCardType] = useState({
-    name: "",
-    backgroundColor: "",
-  });
-
-  const [modalVisibleState, setModalState, modalName] = useModal();
-
-  const modalSelector = (name) => {
-    return () => {
-      setModalState(true, name);
-    };
-  };
-
   const [checkInputs, setCheckInputs] = useState({
     cardNumbers: false,
     cardExpireDate: false,
@@ -66,17 +54,21 @@ export const CardRegisterPage = () => {
     cardType: false,
   });
 
+  useEffect(() => {
+    setAllCompleted(Object.values(checkInputs).every((check) => check));
+  }, [checkInputs]);
+
+  const modalSelector = (name) => {
+    return () => {
+      setModalState(true, name);
+    };
+  };
+
   const setCheckInputStateOf = (state) => {
     return (isCompleted) => {
       setCheckInputs((prev) => ({ ...prev, [state]: isCompleted }));
     };
   };
-
-  const [allCompleted, setAllCompleted] = useState(false);
-
-  useEffect(() => {
-    setAllCompleted(Object.values(checkInputs).every((check) => check));
-  }, [checkInputs]);
 
   const loadModal = () => {
     switch (modalName) {

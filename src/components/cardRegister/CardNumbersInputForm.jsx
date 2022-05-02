@@ -18,14 +18,6 @@ export const CardNumbersInputForm = ({
   handleCardNumberCheck,
   handleModalVisible,
 }) => {
-  const handleNumberChange = (e, name) => {
-    if (isNaN(e.nativeEvent.data) || e.target.value.length > 4) {
-      return;
-    }
-
-    handleCardNumbersInput((prev) => ({ ...prev, [name]: e.target.value }));
-  };
-
   const numberInputRefs = useRef([]);
 
   useEffect(() => {
@@ -45,6 +37,14 @@ export const CardNumbersInputForm = ({
       handleModalVisible();
     }
   }, [cardNumbers]);
+
+  const handleNumberChange = (e, name) => {
+    if (isNaN(e.nativeEvent.data) || e.target.value.length > 4) {
+      return;
+    }
+
+    handleCardNumbersInput((prev) => ({ ...prev, [name]: e.target.value }));
+  };
 
   return (
     <InputContainer>
