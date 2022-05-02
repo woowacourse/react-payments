@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CVC_DESCRIPTION } from '../../constants';
 
 function Tooltip() {

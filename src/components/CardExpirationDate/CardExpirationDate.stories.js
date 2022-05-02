@@ -1,4 +1,3 @@
-import React from 'react';
 import CardExpirationDate from './CardExpirationDate';
 
 export default {

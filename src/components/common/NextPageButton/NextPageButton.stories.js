@@ -1,4 +1,3 @@
-import React from 'react';
 import NextPageButton from './NextPageButton';
 
 export default {

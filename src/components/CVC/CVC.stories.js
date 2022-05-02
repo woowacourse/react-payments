@@ -1,4 +1,3 @@
-import React from 'react';
 import CVC from './CVC';
 
 export default {

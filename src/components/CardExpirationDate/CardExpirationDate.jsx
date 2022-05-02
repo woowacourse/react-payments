@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 import { MONTH, LIMIT_LENGTH, LEADING_ZERO_MONTHS } from '../../constants';

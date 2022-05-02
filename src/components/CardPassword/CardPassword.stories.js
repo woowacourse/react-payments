@@ -1,4 +1,3 @@
-import React from 'react';
 import CardPassword from './CardPassword';
 
 export default {

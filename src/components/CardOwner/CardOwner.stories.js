@@ -1,4 +1,3 @@
-import React from 'react';
 import CardOwner from './CardOwner';
 
 export default {

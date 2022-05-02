@@ -1,5 +1,3 @@
-import React from 'react';
-
 function PrevPageButton({ setPage }) {
   const handlePrevPageButtonClick = () => {
     setPage('listPage');

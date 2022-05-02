@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Card from '../components/common/Card/Card';
 import PageTitle from '../components/common/PageTitle/PageTitle';
