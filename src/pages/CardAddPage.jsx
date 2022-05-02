@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import Head from '../components/Head';
 import Card from '../components/Card';
 import LabeledInput from '../components/LabeledInput';
@@ -24,13 +24,6 @@ function CardAddPage() {
   const [ownerName, setOwnerName] = useState('');
   const [securityNumber, setSecurityNumber] = useState('');
   const [password, setPassword] = useState(['', '']);
-  const [cardAddCondition, setCardAddCondition] = useState({
-    cardNumbers: false,
-    expiredDate: false,
-    ownerName: false,
-    securityNumber: false,
-    password: false,
-  });
 
   const convertedCardNumbers = useMemo(() => {
     return cardNumbers.map((cardNumber, index) =>
@@ -46,15 +39,13 @@ function CardAddPage() {
       : '';
   }, [expiredDate]);
 
-  useEffect(() => {
-    setCardAddCondition({
-      cardNumbers: validator.validateCardNumbers(cardNumbers.join(CARD_NUMBER_SEPARATOR)),
-      expiredDate: validator.validateExpiredDate(convertedExpiredDate),
-      ownerName: validator.validateOwnerName(ownerName),
-      securityNumber: validator.validateSecurityNumber(securityNumber),
-      password: validator.validatePassword(password.join('')),
-    });
-  });
+  const cardAddValidation = {
+    isValidCardNumbers: validator.validateCardNumbers(cardNumbers.join(CARD_NUMBER_SEPARATOR)),
+    isValidExpiredDate: validator.validateExpiredDate(convertedExpiredDate),
+    isValidOwnerName: validator.validateOwnerName(ownerName),
+    isValidSecurityNumber: validator.validateSecurityNumber(securityNumber),
+    isValidPassword: validator.validatePassword(password.join('')),
+  };
 
   const handleChangeCardNumbersInput = ({ nativeEvent: { data, inputType }, target }) => {
     if (validator.isInvalidInputData(cardNumberInputRegex, data, inputType)) {
@@ -171,7 +162,7 @@ function CardAddPage() {
   const handleSubmit = event => {
     event.preventDefault();
 
-    if (Object.values(cardAddCondition).every(value => value === true)) {
+    if (Object.values(cardAddValidation).every(value => value === true)) {
       alert(MESSAGE.SAVE_CARD_INFO);
     }
   };
@@ -197,7 +188,7 @@ function CardAddPage() {
             width: '318px',
             maxLength: 19,
             placeholder: 'ex. 0000-0000-0000-0000',
-            isValid: cardAddCondition.cardNumbers,
+            isValid: cardAddValidation.isValidCardNumbers,
           }}
           inputLabelProps={{
             label: '카드 번호',
@@ -212,7 +203,7 @@ function CardAddPage() {
             width: '137px',
             maxLength: 5,
             placeholder: 'MM / YY',
-            isValid: cardAddCondition.expiredDate,
+            isValid: cardAddValidation.isValidExpiredDate,
           }}
           inputLabelProps={{
             label: '만료일',
@@ -230,7 +221,7 @@ function CardAddPage() {
             placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
             isCenter: false,
             maxLength: 30,
-            isValid: cardAddCondition.ownerName,
+            isValid: cardAddValidation.isValidOwnerName,
           }}
           inputLabelProps={{
             label: '카드 소유자 이름(선택)',
@@ -245,7 +236,7 @@ function CardAddPage() {
               type: 'password',
               width: '84px',
               maxLength: 3,
-              isValid: cardAddCondition.securityNumber,
+              isValid: cardAddValidation.isValidSecurityNumber,
             }}
             inputLabelProps={{
               label: '보안 코드(CVC/CVV)',
@@ -263,7 +254,7 @@ function CardAddPage() {
               type: 'password',
               width: '43px',
               maxLength: 1,
-              isValid: cardAddCondition.password,
+              isValid: cardAddValidation.isValidSecurityNumber,
             }}
             inputLabelProps={{
               label: '카드 비밀번호',
@@ -286,7 +277,7 @@ function CardAddPage() {
             label="다음"
             width={'51px'}
             height={'34px'}
-            hidden={Object.values(cardAddCondition).some(value => value === false)}
+            hidden={Object.values(cardAddValidation).some(value => value === false)}
           />
         </SubmitButtonContainer>
       </Form>
