@@ -1,6 +1,6 @@
 import React from 'react';
+import Input from '../components/common/Input';
 import InputField from '../components/common/InputField';
-import Input from '../Input/Input';
 
 export default {
   title: 'InputField',
