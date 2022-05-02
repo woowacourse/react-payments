@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
+import Circle from './common/Circle';
 
 const CardCompany = ({ company, onClickCompany, theme }) => {
   return (
     <div className="modal-item-container" onClick={() => onClickCompany(company, theme)}>
-      <div className={`modal-item-dot bg-${theme}`}></div>
+      <Circle theme={theme} />
       <span className="modal-item-name">{company}</span>
     </div>
   );
