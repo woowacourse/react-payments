@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useModal } from "../hooks/useModal";
 
 import { Button, Card, Modal, PageTitle } from "../components/common";
 import {
@@ -49,10 +50,12 @@ export const CardRegisterPage = () => {
     backgroundColor: "",
   });
 
-  const [modalVisible, setModalVisible] = useState("");
+  const [modalVisibleState, setModalState, modalName] = useModal();
 
-  const modalSelector = (subject) => {
-    return () => setModalVisible(subject);
+  const modalSelector = (name) => {
+    return () => {
+      setModalState(true, name);
+    };
   };
 
   const [checkInputs, setCheckInputs] = useState({
@@ -76,12 +79,12 @@ export const CardRegisterPage = () => {
   }, [checkInputs]);
 
   const loadModal = () => {
-    switch (modalVisible) {
+    switch (modalName) {
       case "cardType":
         return (
           <CardSelectModal
             cardTypes={CARD_TYPES}
-            handleVisible={() => setModalVisible("")}
+            handleVisible={() => setModalState(false)}
             handleCardType={setCardType}
             handleCardTypeCheck={setCheckInputStateOf("cardType")}
           />
@@ -130,8 +133,11 @@ export const CardRegisterPage = () => {
         handlePasswordInput={setPassword}
         handleCardPasswordCheck={setCheckInputStateOf("cardPassword")}
       />
-      <Modal visible={modalVisible} handleVisible={() => setModalVisible("")}>
-        {modalVisible && loadModal()}
+      <Modal
+        visible={modalVisibleState}
+        handleVisible={() => setModalState(false)}
+      >
+        {modalVisibleState && loadModal()}
       </Modal>
 
       <Button disabled={!allCompleted}>다음</Button>
