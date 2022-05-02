@@ -15,7 +15,7 @@ export const cardInfoValidations = {
         return /^$|(^[0-9]$)|(^1?[0-2]$)/.test(parsedValue);
       }
 
-      return /^\d{0,2}$/.test(parsedValue);
+      return /^$|^0$|^2$|(^2?[2-6]$)/.test(parsedValue);
     },
     errorMessage: "유효한 날짜를 입력해주세요.",
   },
