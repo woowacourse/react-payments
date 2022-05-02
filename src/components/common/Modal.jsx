@@ -27,16 +27,13 @@ const StyledModal = styled.div`
   }
 `;
 
-function Modal({ visible }) {
-  return (
-    <>
-      {visible && <StyledModal>카드 뒷면에 적힌 유효성 검사 코드</StyledModal>}
-    </>
-  );
+function Modal({ visible, description }) {
+  return <>{visible && <StyledModal>{description}</StyledModal>}</>;
 }
 
 Modal.propTypes = {
   visible: PropTypes.bool,
+  description: PropTypes.string,
 };
 
 export default memo(Modal);

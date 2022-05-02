@@ -26,7 +26,10 @@ export default function CardCVCInput({
         size="small"
         onClickFunc={toggleModal}
       />
-      <Modal visible={isModalOpen} />
+      <Modal
+        visible={isModalOpen}
+        description="카드 뒷면에 적힌 유효성 검사 코드"
+      />
     </div>
   );
 }
