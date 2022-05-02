@@ -19,7 +19,10 @@ const useControllInput = ({ maxLength }) => {
   };
 
   const limitExceptUpperCase = (target) => {
-    target.value = target.value.replace(/[^A-Z\s]*/g, '').replace('.', '');
+    target.value = target.value
+      .replace(/[^A-Za-z\s]*/g, '')
+      .replace('.', '')
+      .toUpperCase();
   };
 
   const autoFocusForward = (target) => {
