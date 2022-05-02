@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import CardListPage from './components/CardListPage/CardListPage';
-import CardAddPage from './components/CardAddPage/CardAddPage';
+import CardListPage from './pages/CardListPage';
+import CardAddPage from './pages/CardAddPage';
 
 function App() {
   const [page, setPage] = useState('listPage');
