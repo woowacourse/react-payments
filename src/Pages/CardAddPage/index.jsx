@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Head from '../components/Modules/Head';
-import Card from '../components/Modules/Card';
-import CardAddForm from '../components/Templates/CardAddForm';
+import Head from '../../components/Modules/Head';
+import Card from '../../components/Modules/Card';
+import CardAddForm from '../../components/Templates/CardAddForm';
 
 const Page = styled.div`
   width: 100%;

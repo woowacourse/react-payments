@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const InfoLabelContainer = styled.div`
+  display: inline-block;
   width: 27px;
   height: 27px;
-  margin: 28px 0 0 11px;
   padding-top: 3px;
   border-radius: 13.5px;
   border: 1px solid #bababa;

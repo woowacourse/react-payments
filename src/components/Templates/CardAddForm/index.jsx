@@ -12,6 +12,11 @@ const FormContainer = styled.form`
   gap: 19px;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 function CardAddForm() {
   return (
     <FormContainer>
@@ -20,7 +25,11 @@ function CardAddForm() {
       <CardOwnerInput />
       <SecurityNumberInput />
       <PasswordInput />
-      <SubmitButton>다음</SubmitButton>
+      <ButtonContainer>
+        <SubmitButton width="51px" height="34px" hidden={false}>
+          다음
+        </SubmitButton>
+      </ButtonContainer>
     </FormContainer>
   );
 }

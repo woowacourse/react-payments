@@ -2,6 +2,7 @@ import { useState } from 'react';
 import InputLabel from '../../Atoms/InputLabel';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
+import InfoLabel from '../../Atoms/InfoLabel';
 
 function SecurityNumberInput() {
   const [number, setNumber] = useState('');
@@ -29,6 +30,7 @@ function SecurityNumberInput() {
         onChange={onNumberChange}
         isValid={validation}
       />
+      <InfoLabel />
     </div>
   );
 }

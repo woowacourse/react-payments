@@ -41,13 +41,12 @@ function CardNumberInput() {
 
   const focusPrevOrder = (currentOrder, newNumber, inputType) => {
     if (
-      currentOrder !== 'first' &&
+      currentOrder !== orders[0] &&
       newNumber.length === 0 &&
       inputType === 'deleteContentBackward'
     ) {
-      refs[
-        orders[orders.findIndex(order => order === currentOrder) - 1]
-      ].current.focus();
+      const currentIndex = orders.findIndex(order => order === currentOrder);
+      refs[orders[currentIndex - 1]].current.focus();
     }
   };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import CardAddPage from './CardAddPage';
+import CardAddPage from '.';
 
 export default {
   title: 'Payment/CardAddPage',
