@@ -1,17 +1,8 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
-
 import * as S from '../styles.js';
-import Wrapper from './Wrapper';
-import Circle from './Circle';
 import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
-
-const ExtendedInputBox = styled(S.InputBox)`
-  width: 220px;
-  justify-content: space-between;
-`;
 
 export default function CardPassword({ color }) {
   const { cardPassword, cardPasswordErrorMessage, dispatch } = useContext(CardContext);
@@ -23,7 +14,7 @@ export default function CardPassword({ color }) {
   return (
     <S.Container>
       <S.InputTitle>카드 비밀번호</S.InputTitle>
-      <ExtendedInputBox>
+      <S.ExtendedInputBox>
         <S.InputBasic
           type="password"
           width="43px"
@@ -40,13 +31,13 @@ export default function CardPassword({ color }) {
           value={cardPassword[1]}
           onChange={onChangeInput(1)}
         />
-        <Wrapper>
-          <Circle size="5px" color={color} />
-        </Wrapper>
-        <Wrapper>
-          <Circle size="5px" color={color} />
-        </Wrapper>
-      </ExtendedInputBox>
+        <S.PasswordBox>
+          <S.Circle size="5px" color={color} />
+        </S.PasswordBox>
+        <S.PasswordBox>
+          <S.Circle size="5px" color={color} />
+        </S.PasswordBox>
+      </S.ExtendedInputBox>
       <ErrorMessage
         value={cardPassword}
         validate={validator.checkCardPassword}

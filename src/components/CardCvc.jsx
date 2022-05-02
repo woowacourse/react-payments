@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-
 import * as S from '../styles.js';
-import TipButton from './TipButton';
 import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
@@ -30,7 +28,7 @@ export default function CardCvc() {
             onChange={onChangeInput}
           />
         </S.InputContainer>
-        <TipButton>?</TipButton>
+        <S.TipButton>?</S.TipButton>
       </S.InputBox>
       <ErrorMessage
         value={cardCvc}

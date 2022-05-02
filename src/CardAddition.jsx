@@ -7,7 +7,7 @@ import CardExpiration from './components/CardExpiration';
 import CardOwner from './components/CardOwner';
 import CardCvc from './components/CardCvc';
 import CardPassword from './components/CardPassword';
-import MoveButton from './components/MoveButton';
+import NextButton from './components/NextButton';
 import CardContext from './CardContext';
 import CardListModal from './components/CardListModal';
 import validator from '../src/validations/validator';
@@ -82,9 +82,9 @@ function CardAddition() {
       <CardOwner color={cardColor} />
       <CardCvc color={cardColor} />
       <CardPassword color={cardColor} />
-      <MoveButton onClick={submitCard} disabled={!isAllInputValidated()} color={cardColor}>
+      <NextButton onClick={submitCard} disabled={!isAllInputValidated()} color={cardColor}>
         다음
-      </MoveButton>
+      </NextButton>
       <CardListModal />
     </CardAdditionContainer>
   );

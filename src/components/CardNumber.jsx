@@ -1,21 +1,8 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
-
 import * as S from '../styles.js';
 import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
-
-const ExtendedInputContainer = styled(S.InputContainer)`
-  justify-content: space-between;
-`;
-
-const Hyphen = styled.p`
-  margin: 0;
-  font-size: 18px;
-  line-height: 47px;
-  color: ${({ color }) => color || '#737373'};
-`;
 
 export default function CardNumber({ color }) {
   const { cardNumber, cardNumberErrorMessage, cardCompanyIndex, dispatch } =
@@ -33,7 +20,7 @@ export default function CardNumber({ color }) {
     <S.Container>
       <S.InputTitle>카드 번호</S.InputTitle>
       <S.InputBox>
-        <ExtendedInputContainer>
+        <S.ExtendedInputContainer>
           <S.InputBasic
             width="20%"
             type="text"
@@ -43,7 +30,7 @@ export default function CardNumber({ color }) {
             onChange={onChangeInput(0)}
             onFocus={onFocusInput}
           />
-          <Hyphen color={color}>-</Hyphen>
+          <S.Hyphen color={color}>-</S.Hyphen>
           <S.InputBasic
             width="20%"
             type="text"
@@ -53,7 +40,7 @@ export default function CardNumber({ color }) {
             onChange={onChangeInput(1)}
             onFocus={onFocusInput}
           />
-          <Hyphen color={color}>-</Hyphen>
+          <S.Hyphen color={color}>-</S.Hyphen>
           <S.InputBasic
             width="20%"
             type="password"
@@ -63,7 +50,7 @@ export default function CardNumber({ color }) {
             onChange={onChangeInput(2)}
             onFocus={onFocusInput}
           />
-          <Hyphen color={color}>-</Hyphen>
+          <S.Hyphen color={color}>-</S.Hyphen>
           <S.InputBasic
             width="20%"
             type="password"
@@ -73,7 +60,7 @@ export default function CardNumber({ color }) {
             onChange={onChangeInput(3)}
             onFocus={onFocusInput}
           />
-        </ExtendedInputContainer>
+        </S.ExtendedInputContainer>
       </S.InputBox>
       <ErrorMessage
         value={cardNumber}

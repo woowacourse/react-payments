@@ -1,12 +1,12 @@
 import React from 'react';
-import MoveButton from '../components/MoveButton';
+import NextButton from '../components/NextButton';
 
 export default {
-  title: 'CardAddition/MoveButton',
-  component: MoveButton,
+  title: 'CardAddition/NextButton',
+  component: NextButton,
 };
 
-const Template = (args) => <MoveButton {...args} />;
+const Template = (args) => <NextButton {...args} />;
 
 export const Disabled = Template.bind({});
 Disabled.args = {
