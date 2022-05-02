@@ -1,12 +1,14 @@
 const isAllInputEmpty = (values) => values.every((value) => value === '');
 
+const isInt = (value) => (value ? /^-?[0-9]+$/.test(value) : true);
+
 const validator = {
   checkCardNumber(cardNumber) {
     if (isAllInputEmpty(cardNumber)) {
       return;
     }
 
-    if (cardNumber.some((number) => !Number.isInteger(Number(number)))) {
+    if (cardNumber.some((value) => !isInt(String(value)))) {
       throw new Error('카드번호에 숫자만 입력해주세요.');
     }
 
@@ -20,7 +22,7 @@ const validator = {
       return;
     }
 
-    if (cardExpiration.some((number) => !Number.isInteger(Number(number)))) {
+    if (cardExpiration.some((number) => !isInt(String(number)))) {
       throw new Error('카드 만료일에 숫자만 입력해주세요.');
     }
 
@@ -55,7 +57,7 @@ const validator = {
       return;
     }
 
-    if (!Number.isInteger(Number(cardCvc))) {
+    if (!isInt(String(cardCvc))) {
       throw new Error('보안코드에 숫자만 입력해주세요.');
     }
 
@@ -69,7 +71,7 @@ const validator = {
       return;
     }
 
-    if (cardPassword.some((number) => !Number.isInteger(Number(number)))) {
+    if (cardPassword.some((number) => !isInt(String(number)))) {
       throw new Error('비밀번호에 숫자만 입력해주세요.');
     }
 
