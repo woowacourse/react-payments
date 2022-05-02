@@ -8,7 +8,6 @@ import PasswordForm from 'components/PasswordForm'
 
 import { PageWrapper, CardWrapper, FooterWrapper } from 'pages/AddPage/style'
 
-import { ReactComponent as Arrow } from 'assets/arrow.svg'
 import {
   CARD_NUMBER,
   DUE_DATE,
@@ -38,7 +37,7 @@ function AddPage() {
         password[0] &&
         password[1]
     )
-  }, [cardNumbers, dueDate, owner, cvc, password, error])
+  }, [cardNumbers, dueDate, owner, cvc, password])
 
   const firstCardNumberInputRef = useRef()
   const secondCardNumberInputRef = useRef()
@@ -149,12 +148,7 @@ function AddPage() {
 
   return (
     <PageWrapper>
-      <Header>
-        <Button>
-          <Arrow />
-        </Button>
-        <h2>카드 추가</h2>
-      </Header>
+      <Header backButton={true} headerText={'카드 추가'} />
       <CardWrapper>
         <Card
           size="small"

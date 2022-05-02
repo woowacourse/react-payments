@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 const HeaderWrapper = styled.div`
   display: flex;
-  align-items: center;
 
   & h2 {
     font-size: 16px;

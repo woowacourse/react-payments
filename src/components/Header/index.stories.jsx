@@ -1,6 +1,4 @@
 import Header from 'components/Header'
-import Button from 'components/Button'
-import { ReactComponent as Arrow } from 'assets/arrow.svg'
 
 const Template = (args) => <Header {...args} />
 
@@ -11,12 +9,6 @@ export default {
 
 export const AddCardHeader = Template.bind({})
 AddCardHeader.args = {
-  children: (
-    <>
-      <Button>
-        <Arrow />
-      </Button>
-      <h2>카드 추가</h2>
-    </>
-  ),
+  backButton: true,
+  headerText: '카드 추가',
 }
