@@ -7,7 +7,7 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
   const handleMonthInputBlur = (event) => {
     let { value } = event.target;
 
-    if (value === MONTH.JANUARY) {
+    if (value === String(MONTH.JANUARY)) {
       value = MONTH.LEADING_ZERO + MONTH.JANUARY;
     }
 
@@ -33,12 +33,6 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
       ...cardInfo,
       [name]: value,
     });
-
-    if (value === '00') return;
-
-    if (value >= MONTH.FEBRUARY && value <= MONTH.SEPTEMBER) {
-      event.target.value = MONTH.LEADING_ZERO + Number(value);
-    }
   };
 
   const handleYearInputChange = (event) => {
@@ -53,8 +47,6 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
       ...cardInfo,
       [name]: value,
     });
-
-    if (value === '00') return;
   };
 
   return (
@@ -64,9 +56,11 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
         <input
           name="month"
           className={`input-basic ${
-            (cardInfo.month.length >= LIMIT_LENGTH.EXPIRATION_DATE && !cardInfo.month === '00') ||
-            !cardInfo.month === '0' ||
-            (cardInfo.month >= MONTH.FEBRUARY && cardInfo.month <= MONTH.SEPTEMBER)
+            cardInfo.month.length >= LIMIT_LENGTH.EXPIRATION_DATE &&
+            cardInfo.month !== '00' &&
+            cardInfo.month !== '0' &&
+            cardInfo.month >= MONTH.JANUARY &&
+            cardInfo.month <= MONTH.DECEMBER
               ? 'input-correct'
               : null
           }`}

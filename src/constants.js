@@ -7,7 +7,8 @@ const ERROR_MESSAGE = {
 };
 
 const MONTH = {
-  JANUARY: '1',
+  JANUARY: 1,
+  DECEMBER: 12,
   FEBRUARY: 2,
   SEPTEMBER: 9,
   LEADING_ZERO: '0',
