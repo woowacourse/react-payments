@@ -11,13 +11,11 @@ export default function CardOwner({ color }) {
     dispatch({ type: 'SET_CARD_OWNER', value: e.target.value });
   };
 
-  const nameLengthColor = () => (cardOwner.length > 30 ? '#E24141' : '#525252');
-
   return (
     <S.Container>
       <S.TitleWrapper>
         <S.InputTitle marginBottom="0px">카드소유자 이름(선택)</S.InputTitle>
-        <S.NameLength color={nameLengthColor()}>
+        <S.NameLength isLengthValidated={cardOwner.length > 30}>
           <span>{cardOwner.length}</span>/<span>30</span>
         </S.NameLength>
       </S.TitleWrapper>

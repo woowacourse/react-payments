@@ -31,7 +31,7 @@ export const InputBox = styled.div`
 
 export const InputContainer = styled.div`
   display: flex;
-  width: ${(props) => props.width || '100%'};
+  width: ${({ width }) => width || '100%'};
   background-color: #ecebf1;
   border-radius: 0.25rem;
 `;
@@ -42,7 +42,7 @@ export const InputTitle = styled.span`
   font-size: 12px;
   line-height: 14px;
   letter-spacing: -0.085em;
-  margin-bottom: ${(props) => props.marginBottom || '4px'}
+  margin-bottom: ${({ marginBottom }) => marginBottom || '4px'}
   color: #525252;
 `;
 
@@ -160,7 +160,7 @@ export const NameLength = styled.p`
   margin: 0;
   letter-spacing: -0.05em;
   font-size: 12px;
-  color: ${(props) => props.color};
+  color: ${({ isLengthValidated }) => (isLengthValidated ? '#E24141' : '#525252')};
 `;
 
 export const InputBasicLeft = styled(InputBasic)`
