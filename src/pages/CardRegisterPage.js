@@ -16,6 +16,7 @@ import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 import { PageTitle } from '../components/common/PageTitle';
 import { ModalSelector } from '../components/common/ModalSelector';
+import { useModalSelector } from '../hooks/useModalSelector';
 
 const CARD_TYPES = [
   { name: '포코', color: 'gold' },
@@ -31,7 +32,7 @@ const CARD_TYPES = [
 export const CardRegisterPage = () => {
   const [cardInfo, dispatch] = useReducer(cardInfoReducer, initialCardInfo);
 
-  const [openedModalComponent, setOpenedModalComponent] = useState('');
+  const [openedModalComponent, openModal, closeModal] = useModalSelector();
 
   const [checkInputCompleted, setCheckInputCompleted] = useState({
     cardNumbers: false,
@@ -60,14 +61,14 @@ export const CardRegisterPage = () => {
       <PageTitle>카드 추가</PageTitle>
       <Card
         cardInfo={cardInfo}
-        onClick={() => setOpenedModalComponent(COMPONENTS.CARD_TYPE)}
+        onClick={() => openModal(COMPONENTS.CARD_TYPE)}
       />
       <CardNumbersInputForm
         cardType={cardInfo.cardType}
         cardNumbers={cardInfo.cardNumbers}
         onCardNumbersInput={dispatch}
         onCardNumberCheck={checkerFactory(COMPONENTS.NUMBERS)}
-        openModal={() => setOpenedModalComponent(COMPONENTS.CARD_TYPE)}
+        openModal={() => openModal(COMPONENTS.CARD_TYPE)}
       />
       <CardExpireDateInputForm
         expireDate={cardInfo.expireDate}
@@ -82,23 +83,18 @@ export const CardRegisterPage = () => {
         CVC={cardInfo.CVC}
         onCVCInput={dispatch}
         onCardCVCCheck={checkerFactory(COMPONENTS.CVC)}
-        openModal={() => setOpenedModalComponent(COMPONENTS.CVC)}
+        openModal={() => openModal(COMPONENTS.CVC)}
       />
       <CardPasswordInputForm
         password={cardInfo.password}
         onPasswordInput={dispatch}
         onCardPasswordCheck={checkerFactory(COMPONENTS.PASSWORD)}
       />
-      <ModalSelector
-        selected={openedModalComponent}
-        closeModal={() => {
-          setOpenedModalComponent('');
-        }}
-      >
+      <ModalSelector selected={openedModalComponent} closeModal={closeModal}>
         <CardSelectModal
           name={COMPONENTS.CARD_TYPE}
           cardTypes={CARD_TYPES}
-          closeModal={() => setOpenedModalComponent('')}
+          closeModal={closeModal}
           onCardType={dispatch}
           onCardTypeCheck={checkerFactory(COMPONENTS.CARD_TYPE)}
         />
