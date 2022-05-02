@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useCallback, useMemo } from 'react';
 import { isObject } from '../../utils';
 
 const FormInput = ({
@@ -11,6 +12,8 @@ const FormInput = ({
   handleChange,
   children,
 }) => {
+  const handleInputChange = useCallback((e) => handleChange(e, item), [handleChange, item]);
+
   return (
     <div className="input-container">
       <label className="input-title">{inputTitle}</label>
@@ -21,7 +24,7 @@ const FormInput = ({
             name={name}
             className={`input-basic ${className} font-${theme}`}
             value={isObject(inputValue) ? inputValue[name] : inputValue}
-            onChange={(e) => handleChange(e, item)}
+            onChange={handleInputChange}
             {...rest}
           />
         ))}
