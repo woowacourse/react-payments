@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 
 import FormInput from '../../components/common/FormInput';
 import CardPreview from '../../components/CardPreview';
@@ -47,7 +47,7 @@ const initialCardInfo = {
 
 const CardAppPage = () => {
   const [cardInfo, setCardInfo] = useState(initialCardInfo);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, handleModal] = useReducer((visible) => !visible, false);
   const [isfullFilled, setIsFullFilled] = useState(false);
   const { number, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
 
@@ -92,10 +92,6 @@ const CardAppPage = () => {
 
     handleModal();
   };
-
-  const handleModal = useCallback(() => {
-    setModalVisible((prevModalVisible) => !prevModalVisible);
-  }, []);
 
   return (
     <div>
