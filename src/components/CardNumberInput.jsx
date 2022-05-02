@@ -2,17 +2,11 @@ import React from "react";
 import { cardInfoValidations } from "../cardInfoValidations";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants";
 import useArraySetState from "../useArraySetState";
-import useInputFocus from "../useInputFocus";
 import useValidatedUpdate from "../useValidatedUpdate";
 import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
 
 export default function CardNumberInput({ cardNumber, setCardNumber }) {
-  const [inputRef, setFocusInputIndex, handleFocusPrevious] = useInputFocus(
-    cardNumber,
-    CARD_INFO_RULES.NUMBER_UNIT_LENGTH
-  );
-
   const setCardNumberArray = useArraySetState(setCardNumber);
   const [handleCardNumberUpdate, errorMessage, resetError] = useValidatedUpdate(
     cardInfoValidations["cardNumber"],
@@ -38,18 +32,13 @@ export default function CardNumberInput({ cardNumber, setCardNumber }) {
               value={cardNumber[index]}
               onChange={(e) => handleCardNumberUpdate(e, index)}
               placeholder={index <= 1 ? "1 2 3 4" : CREATE_MASKED_CHARACTERS(4)}
-              onFocus={() => setFocusInputIndex(index)}
-              onBlur={() => {
-                setFocusInputIndex(null);
-                resetError();
-              }}
-              onKeyDown={handleFocusPrevious}
+              onBlur={() => resetError()}
               isComplete={
                 cardNumber[index].length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
               }
               maxLength={4}
+              name={"card-number"}
               required
-              ref={(element) => (inputRef.current[index] = element)}
             />
             {index !== cardNumber.length - 1 && <p>-</p>}
           </React.Fragment>

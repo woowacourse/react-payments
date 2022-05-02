@@ -79,7 +79,7 @@ function App() {
         expireDate={expireDate}
         canProceed={isValidCardInfo}
       />
-      <CardInfoForm autoComplete="off">
+      <CardInfoForm setCardNumber={setCardNumber}>
         <CardNumberInput
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}

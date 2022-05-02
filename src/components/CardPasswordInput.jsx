@@ -2,7 +2,6 @@ import React from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import styled from "styled-components";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
-import useInputFocus from "../useInputFocus.jsx";
 import useArraySetState from "../useArraySetState.jsx";
 import useValidatedUpdate from "../useValidatedUpdate.jsx";
 import { cardInfoValidations } from "../cardInfoValidations.js";
@@ -54,11 +53,6 @@ export default function CardPasswordInput({ password, setPassword }) {
     setPasswordArray
   );
 
-  const [inputRef, setFocusInputIndex, handleFocusPrevious] = useInputFocus(
-    password,
-    1
-  );
-
   return (
     <StyledInputField>
       <StyledLabel
@@ -84,13 +78,10 @@ export default function CardPasswordInput({ password, setPassword }) {
                 onChange={(e) => handlePasswordUpdate(e, index)}
                 width="100%"
                 placeholder={CREATE_MASKED_CHARACTERS(1)}
-                onFocus={() => setFocusInputIndex(index)}
                 onBlur={() => resetError()}
-                onKeyDown={handleFocusPrevious}
                 isComplete={password[0].length === 1}
                 maxLength={1}
                 required
-                ref={(element) => (inputRef.current[index] = element)}
               />
             </StyledInputWrapper>
           )
