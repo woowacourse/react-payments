@@ -99,7 +99,7 @@ export default function AddCardPage() {
 
   return (
     <>
-      <Header title="카드 추가" />
+      <Header titleText="카드 추가" />
       <CardPreview cardNumber={cardNumber} holderName={holderName} expireDate={expireDate} canProceed={canProceed} />
       <CardInfoForm autoComplete="off">
         <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumberUpdate} />

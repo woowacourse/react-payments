@@ -12,10 +12,10 @@ const StyledPageTitle = styled.h1`
   color: #383838;
 `;
 
-export default function Header({ title }) {
+export default function Header({ titleText }) {
   return (
     <StyledHeaderContainer>
-      <StyledPageTitle>{title}</StyledPageTitle>
+      <StyledPageTitle>{titleText}</StyledPageTitle>
     </StyledHeaderContainer>
   );
 }
