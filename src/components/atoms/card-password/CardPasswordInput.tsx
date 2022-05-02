@@ -27,21 +27,22 @@ type Props = {
 
 const CardPasswordInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const { value, disabled, onChange } = props;
+
+  if (disabled) {
+    return <Input disabled placeholder="•" />;
+  }
+
   return (
     <>
-      {disabled ? (
-        <Input disabled placeholder="•" />
-      ) : (
-        <Input
-          id="card-password-input"
-          autoComplete="off"
-          type="text"
-          onChange={onChange}
-          value={value}
-          placeholder=""
-          ref={ref}
-        />
-      )}
+      <Input
+        id="card-password-input"
+        autoComplete="off"
+        type="text"
+        onChange={onChange}
+        value={value}
+        placeholder=""
+        ref={ref}
+      />
     </>
   );
 });
