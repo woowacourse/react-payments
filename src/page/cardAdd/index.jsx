@@ -39,8 +39,6 @@ const initialCardInfo = {
   password: {
     first: '',
     second: '',
-    third: CRYPTO_STRING,
-    fourth: CRYPTO_STRING,
   },
   theme: '',
 };
@@ -151,7 +149,7 @@ const CardAppPage = () => {
         item="password"
         inputTitle="카드 비밀번호"
         inputInfoList={cardPasswordInputInfoList}
-        inputValue={password}
+        inputValue={{ ...password, third: CRYPTO_STRING, fourth: CRYPTO_STRING }}
         onChange={handleChange}
         theme={theme}
       />
