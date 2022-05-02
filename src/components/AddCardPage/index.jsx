@@ -129,6 +129,7 @@ const AddCardPage = () => {
 
   const onClickCardSelector = (type) => () => {
     setCardType(type);
+    closeModal();
   };
 
   return (
