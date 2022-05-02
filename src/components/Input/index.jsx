@@ -1,30 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
+import HelpContent from '../HelpContent';
 function Input({ labelTitle, inputSize = '', helpText, children }) {
-  const [isMouseOver, setIsMouseOver] = useState(false);
-
-  const onMouseOver = () => {
-    setIsMouseOver(true);
-  };
-
-  const onMouseLeave = () => {
-    setIsMouseOver(false);
-  };
-
   return (
     <div className="input-container">
       <span className="input-title">{labelTitle}</span>
       <div className={`input-box ${inputSize}`}>
         {children}
-
-        {helpText && (
-          <div className="help-content" onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
-            ?
-          </div>
-        )}
-
-        {isMouseOver && <div className="help-content-text">{helpText}</div>}
+        <HelpContent helpText={helpText} />
       </div>
     </div>
   );

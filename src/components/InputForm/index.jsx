@@ -14,7 +14,6 @@ function InputForm({
   cardInputDispatch,
 }) {
   const [isComplete, setIsComplete] = useState(false);
-
   const inputElementsRef = useRef([]);
 
   const onChangeCardNumber = (key, e, index) => {

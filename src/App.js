@@ -1,40 +1,41 @@
 import React, { useReducer } from 'react';
 import Card from './components/Card';
 import InputForm from './components/InputForm';
+import { DISPATCH_TYPE } from './constants';
+
 const cardInputReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case 'CHANGE_CARD_NUMBER': {
+    case DISPATCH_TYPE.CHANGE_CARD_NUMBER: {
       const { key, cardNumber } = payload;
       return {
         ...state,
         cardNumber: { ...state.cardNumber, [`${key}`]: cardNumber },
       };
     }
-    case 'CHANGE_EXPIRATION_DATE': {
+    case DISPATCH_TYPE.CHANGE_EXPIRATION_DATE: {
       const { key, date } = payload;
       return {
         ...state,
         expirationDate: { ...state.expirationDate, [`${key}`]: date },
       };
     }
-
-    case 'CHANGE_OWNER_NAME': {
+    case DISPATCH_TYPE.CHANGE_OWNER_NAME: {
       const { ownerName } = payload;
       return {
         ...state,
         ownerName,
       };
     }
-    case 'CHANGE_SECURITY_CODE': {
+    case DISPATCH_TYPE.CHANGE_SECURITY_CODE: {
       const { securityCode } = payload;
       return {
         ...state,
         securityCode: securityCode,
       };
     }
-    case 'CHANGE_PASSWORD': {
+    case DISPATCH_TYPE.CHANGE_PASSWORD: {
       const { key, password } = payload;
       return {
         ...state,
