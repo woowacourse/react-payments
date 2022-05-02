@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import {
   CardNumber,
   ExpiredDate,
   CardOwnerName,
   SecureCode,
   Password,
-} from "./";
+} from './';
 
-import Button from "../../Button";
-import Header from "../../Header";
+import Button from '../../Button';
+import Header from '../../Header';
 import {
   checkExpiredMonth,
   checkExpiredYear,
@@ -17,12 +17,12 @@ import {
   checkOwnerName,
   checkSecureCode,
   checkPassword,
-} from "../../../validation";
+} from '../../../validation';
 
-import Card from "../../Card";
-import Modal from "../../Modal";
-import Palette from "../../Palette";
-import useInputValue from "../../../hooks/useInputValue";
+import Card from '../../Card';
+import Modal from '../../Modal';
+import Palette from '../../Palette';
+import useInputValue from '../../../hooks/useInputValue';
 
 const AddCardPage = () => {
   const [isValidatedForm, setIsValidatedForm] = useState(false);
@@ -60,7 +60,7 @@ const AddCardPage = () => {
       validation: checkPassword,
     });
 
-  const [cardType, setCardType] = useState("red");
+  const [cardType, setCardType] = useState('red');
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -75,7 +75,7 @@ const AddCardPage = () => {
         !isOwnerNameError &&
         !isSecureCodeError &&
         !isFirstPasswordError &&
-        !isSecondPasswordError
+        !isSecondPasswordError,
     );
   }, [
     isFirstCardNumberError,
@@ -87,7 +87,7 @@ const AddCardPage = () => {
     isOwnerNameError,
     isSecureCodeError,
     isFirstPasswordError,
-    isSecondPasswordError
+    isSecondPasswordError,
   ]);
 
   useEffect(() => {
@@ -100,23 +100,23 @@ const AddCardPage = () => {
         secondPassword.length > 0 &&
         secureCode.length > 0 &&
         expiredMonth.length > 0 &&
-        expiredYear.length > 0
+        expiredYear.length > 0,
     );
-  },
-    [firstCardNumber,
-      secondCardNumber,
-      thirdCardNumber,
-      fourthCardNumber,
-      firstPassword,
-      secondPassword,
-      secureCode,
-      expiredMonth,
-      expiredYear
-    ]);
+  }, [
+    firstCardNumber,
+    secondCardNumber,
+    thirdCardNumber,
+    fourthCardNumber,
+    firstPassword,
+    secondPassword,
+    secureCode,
+    expiredMonth,
+    expiredYear,
+  ]);
 
   const onSubmitCardForm = (e) => {
     e.preventDefault();
-    alert("카드 등록이 완료되었습니다!❤️🧡💛💚💙💜");
+    alert('카드 등록이 완료되었습니다!❤️🧡💛💚💙💜');
   };
 
   const openModal = () => {
@@ -135,8 +135,8 @@ const AddCardPage = () => {
     <Container onSubmit={onSubmitCardForm}>
       <Header title="카드 추가" />
       <Card
-        cardName="블랙 카드😎"
-        name={ownerName}
+        name="블랙 카드😎"
+        ownerName={ownerName}
         expiredMonth={expiredMonth}
         expiredYear={expiredYear}
         firstCardNumber={firstCardNumber}

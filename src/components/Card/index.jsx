@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { ColorType } from '../../constant';
+import { COLOR_TYPE, COLOR_NAMES } from '../../constant';
 
 const Card = ({
   name,
+  ownerName,
   color = 'red',
   expiredMonth,
   expiredYear,
-  cardName,
   firstCardNumber,
   secondCardNumber,
   thirdCardNumber,
@@ -19,7 +19,7 @@ const Card = ({
     <Container onClick={onClick}>
       <EmptyCard color={color}>
         <CardTop>
-          <CardName>{cardName}</CardName>
+          <CardName>{name}</CardName>
         </CardTop>
         <CardMiddle>
           <CardChip />
@@ -40,7 +40,7 @@ const Card = ({
         </CardMiddle>
         <CardBottom>
           <CardBottomInfo>
-            <CardOwnerContainer>{name}</CardOwnerContainer>
+            <CardOwnerContainer>{ownerName}</CardOwnerContainer>
             <CardExpiredDateContainer>
               {expiredMonth}
               {expiredYear && `/ ${expiredYear}`}
@@ -53,9 +53,9 @@ const Card = ({
 };
 
 Card.propTypes = {
-  color: PropTypes.string,
-  cardName: PropTypes.string,
+  color: PropTypes.oneOf(COLOR_NAMES),
   name: PropTypes.string,
+  ownerName: PropTypes.string,
   expiredMonth: PropTypes.string,
   expiredYear: PropTypes.string,
   firstCardNumber: PropTypes.string,
@@ -86,7 +86,7 @@ const EmptyCard = styled.div`
   font-size: 30px;
   color: #575757;
 
-  background: ${(props) => ColorType[props.color]};
+  background: ${({ color }) => COLOR_TYPE[color]};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
