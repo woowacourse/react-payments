@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import InputBox from 'components/InputBox'
 import { FormWrapper, Label } from 'components/Form/style'
 import { PasswordWrapper, Dot } from 'components/PasswordForm/style'
@@ -22,4 +23,16 @@ function PasswordForm({ label, inputInfo, size, onChange }) {
   )
 }
 
+PasswordForm.propTypes = {
+  /**
+   * form label 문구
+   */
+  label: PropTypes.string,
+  inputInfo: PropTypes.array,
+  /**
+   * input 넓이
+   */
+  size: PropTypes.number,
+  onChange: PropTypes.func,
+}
 export default PasswordForm

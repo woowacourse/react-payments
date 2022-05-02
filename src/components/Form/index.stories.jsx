@@ -64,7 +64,6 @@ export const CardCvcForm = Template.bind({})
 CardCvcForm.args = {
   label: '보안 코드(CVC/CVV)',
   size: 30,
-  questionHelper: true,
   inputInfo: [
     {
       type: 'password',

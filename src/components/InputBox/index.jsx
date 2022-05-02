@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { Fragment } from 'react'
 import { InputWrapper } from 'components/InputBox/style'
 import { Input } from 'components/Input/style'
@@ -25,6 +26,18 @@ function InputBox({ inputInfo, size, background, border, error, onChange }) {
       ))}
     </InputWrapper>
   )
+}
+
+InputBox.propTypes = {
+  inputInfo: PropTypes.array,
+  /**
+   * input 넓이
+   */
+  size: PropTypes.number,
+  background: PropTypes.string,
+  border: PropTypes.string,
+  error: PropTypes.bool,
+  onChange: PropTypes.func,
 }
 
 export default InputBox
