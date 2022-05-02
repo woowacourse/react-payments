@@ -14,7 +14,8 @@ export const checkExpiredYear = (year) => {
 
 export const checkOwnerName = (name) => {
   return (
-    name.length === 0 || (name.length < 30 && REG_EXP.CHARACTER_ONLY.test(name))
+    name.length === 0 ||
+    (name.length <= 30 && REG_EXP.CHARACTER_ONLY.test(name))
   );
 };
 
