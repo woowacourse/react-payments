@@ -1,7 +1,27 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import { ColorType } from "../../constant";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { ColorType } from '../../constant';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+`;
+
+const OptionContainer = styled.div`
+  background-color: ${props => ColorType[props.color]};
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+`;
+
+const DescriptionContainer = styled.span`
+  margin-top: 10px;
+  font-size: 12px;
+`;
 
 const Selector = ({ color, name, onClick }) => {
   return (
@@ -17,25 +37,5 @@ Selector.propTypes = {
   name: PropTypes.string,
   onClick: PropTypes.func,
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: none;
-  cursor: pointer;
-`;
-
-const OptionContainer = styled.div`
-  background-color: ${(props) => ColorType[props.color]};
-  width: 37px;
-  height: 37px;
-  border-radius: 50%;
-`;
-
-const DescriptionContainer = styled.span`
-  margin-top: 10px;
-  font-size: 12px;
-`;
 
 export default Selector;

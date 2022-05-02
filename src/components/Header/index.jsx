@@ -1,21 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-
-const Header = ({ title }) => {
-  return (
-    <Container>
-      <BackButton type="button">
-        <Arrow />
-      </BackButton>
-      <Title>{title}</Title>
-    </Container>
-  );
-};
-
-Header.propTypes = {
-  title: PropTypes.string,
-};
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Container = styled.header`
   display: flex;
@@ -51,5 +36,20 @@ const Arrow = styled.div`
   height: 12px;
   transform: rotate(45deg);
 `;
+
+const Header = ({ title }) => {
+  return (
+    <Container>
+      <BackButton type="button">
+        <Arrow />
+      </BackButton>
+      <Title>{title}</Title>
+    </Container>
+  );
+};
+
+Header.propTypes = {
+  title: PropTypes.string,
+};
 
 export default Header;

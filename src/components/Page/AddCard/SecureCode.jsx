@@ -1,9 +1,16 @@
-import React from "react";
-import styled from "styled-components";
-import FieldSet from "../../FieldSet";
-import Input from "../../Input";
-import AskMark from "../../AskMark";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import FieldSet from '../../FieldSet';
+import Input from '../../Input';
+import AskMark from '../../AskMark';
+
+const SecureCodeInputContainer = styled.div`
+  width: fit-content;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
 
 const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
   return (
@@ -35,12 +42,5 @@ SecureCode.propTypes = {
   onChangeSecureCode: PropTypes.func,
   isError: PropTypes.bool,
 };
-
-const SecureCodeInputContainer = styled.div`
-  width: fit-content;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-`;
 
 export default SecureCode;

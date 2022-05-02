@@ -1,6 +1,20 @@
-import Input from ".";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import Input from './index';
+
+const Container = styled.div`
+  width: fit-content;
+  height: fit-content;
+  background-color: #ecebf1;
+  border-radius: 7px;
+`;
+
+const DashContainer = styled.span`
+  width: 10px;
+  height: 45px;
+  margin: 0 10px;
+  color: #111;
+`;
 
 const CardNumberInput = ({
   onChangeFirstCardNumber,
@@ -59,19 +73,5 @@ CardNumberInput.propTypes = {
   thirdCardNumber: PropTypes.string,
   fourthCardNumber: PropTypes.string,
 };
-
-const Container = styled.div`
-  width: fit-content;
-  height: fit-content;
-  background-color: #ecebf1;
-  border-radius: 7px;
-`;
-
-const DashContainer = styled.span`
-  width: 10px;
-  height: 45px;
-  margin: 0 10px;
-  color: #111;
-`;
 
 export default CardNumberInput;

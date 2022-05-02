@@ -1,70 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import { ColorType } from "../../constant";
-
-const Card = ({
-  name,
-  color = "red",
-  expiredMonth,
-  expiredYear,
-  cardName,
-  firstCardNumber,
-  secondCardNumber,
-  thirdCardNumber,
-  fourthCardNumber,
-  onClick,
-}) => {
-  return (
-    <Container onClick={onClick}>
-      <EmptyCard color={color}>
-        <CardTop>
-          <CardName>{cardName}</CardName>
-        </CardTop>
-        <CardMiddle>
-          <CardChip />
-          <CardNumbers>
-            {firstCardNumber && <span>{firstCardNumber}</span>}
-            {secondCardNumber && <span>{secondCardNumber}</span>}
-            {thirdCardNumber && (
-              <span>
-                {Array.from({ length: thirdCardNumber.length }).map(
-                  (_, index) => "•"
-                )}
-              </span>
-            )}
-            {fourthCardNumber && (
-              <span>
-                {Array.from({ length: fourthCardNumber.length }).map(
-                  (_, index) => "•"
-                )}
-              </span>
-            )}
-          </CardNumbers>
-        </CardMiddle>
-        <CardBottom>
-          <CardBottomInfo>
-            <CardOwnerContainer>{name}</CardOwnerContainer>
-            <CardExpiredDateContainer>
-              {expiredMonth}
-              {expiredYear && `/ ${expiredYear}`}
-            </CardExpiredDateContainer>
-          </CardBottomInfo>
-        </CardBottom>
-      </EmptyCard>
-    </Container>
-  );
-};
-
-Card.propTypes = {
-  cardName: PropTypes.string,
-  name: PropTypes.string,
-  expiredDate: PropTypes.string,
-  firstCardNumber: PropTypes.string,
-  secondCardNumber: PropTypes.string,
-  thirdCardNumber: PropTypes.string,
-  fourthCardNumber: PropTypes.string,
-};
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { ColorType } from '../../constant';
 
 const Container = styled.div`
   position: relative;
@@ -87,7 +24,7 @@ const EmptyCard = styled.div`
   font-size: 30px;
   color: #575757;
 
-  background: ${(props) => ColorType[props.color]};
+  background: ${props => ColorType[props.color]};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
@@ -179,5 +116,60 @@ const CardExpiredDateContainer = styled.span`
   vertical-align: middle;
   font-weight: 400;
 `;
+
+const Card = ({
+  name,
+  color = 'red',
+  expiredMonth,
+  expiredYear,
+  cardName,
+  firstCardNumber,
+  secondCardNumber,
+  thirdCardNumber,
+  fourthCardNumber,
+  onClick,
+}) => {
+  return (
+    <Container onClick={onClick}>
+      <EmptyCard color={color}>
+        <CardTop>
+          <CardName>{cardName}</CardName>
+        </CardTop>
+        <CardMiddle>
+          <CardChip />
+          <CardNumbers>
+            {firstCardNumber && <span>{firstCardNumber}</span>}
+            {secondCardNumber && <span>{secondCardNumber}</span>}
+            {thirdCardNumber && (
+              <span>{Array.from({ length: thirdCardNumber.length }).map((_, index) => '•')}</span>
+            )}
+            {fourthCardNumber && (
+              <span>{Array.from({ length: fourthCardNumber.length }).map((_, index) => '•')}</span>
+            )}
+          </CardNumbers>
+        </CardMiddle>
+        <CardBottom>
+          <CardBottomInfo>
+            <CardOwnerContainer>{name}</CardOwnerContainer>
+            <CardExpiredDateContainer>
+              {expiredMonth}
+              {expiredYear && `/ ${expiredYear}`}
+            </CardExpiredDateContainer>
+          </CardBottomInfo>
+        </CardBottom>
+      </EmptyCard>
+    </Container>
+  );
+};
+
+Card.propTypes = {
+  cardName: PropTypes.string,
+  name: PropTypes.string,
+  expiredDate: PropTypes.string,
+  firstCardNumber: PropTypes.string,
+  secondCardNumber: PropTypes.string,
+  thirdCardNumber: PropTypes.string,
+  fourthCardNumber: PropTypes.string,
+};
 
 export default Card;

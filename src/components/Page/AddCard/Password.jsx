@@ -1,9 +1,15 @@
-import React from "react";
-import styled from "styled-components";
-import FieldSet from "../../FieldSet";
-import Input from "../../Input";
-import DotMark from "../../DotMark";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import FieldSet from '../../FieldSet';
+import Input from '../../Input';
+import DotMark from '../../DotMark';
+
+const PasswordInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
 
 const Password = ({
   firstPassword,
@@ -52,11 +58,5 @@ Password.propType = {
   onChangeSecondPassword: PropTypes.func,
   isError: PropTypes.bool,
 };
-
-const PasswordInputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`;
 
 export default Password;

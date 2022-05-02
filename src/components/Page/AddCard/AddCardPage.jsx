@@ -1,15 +1,9 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import {
-  CardNumber,
-  ExpiredDate,
-  CardOwnerName,
-  SecureCode,
-  Password,
-} from "./";
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { CardNumber, ExpiredDate, CardOwnerName, SecureCode, Password } from './index';
 
-import Button from "../../Button";
-import Header from "../../Header";
+import Button from '../../Button';
+import Header from '../../Header';
 import {
   checkExpiredMonth,
   checkExpiredYear,
@@ -17,28 +11,45 @@ import {
   checkOwnerName,
   checkSecureCode,
   checkPassword,
-} from "../../../validation";
+} from '../../../validation';
 
-import Card from "../../Card";
-import Modal from "../../Modal";
-import Palette from "../../Palette";
-import useInputValue from "../../../hooks/useInputValue";
+import Card from '../../Card';
+import Modal from '../../Modal';
+import Palette from '../../Palette';
+import useInputValue from '../../../hooks/useInputValue';
+
+const Container = styled.form`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
+
+const ButtonContainer = styled.div`
+  position: absolute;
+  right: 20px;
+  bottom: 0;
+`;
 
 const AddCardPage = () => {
   const [isValidatedForm, setIsValidatedForm] = useState(false);
   const [isValidatedValueLength, setIsValidatedValueLength] = useState(false);
 
-  const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] =
-    useInputValue({ validation: checkNumberOnly });
-  const [secondCardNumber, isSecondCardNumberError, onChangeSecondCardNumber] =
-    useInputValue({ validation: checkNumberOnly });
-  const [thirdCardNumber, isThirdCardNumberError, onChangeThirdCardNumber] =
-    useInputValue({ validation: checkNumberOnly });
-  const [fourthCardNumber, isFourthCardNumberError, onChangeFourthCardNumber] =
-    useInputValue({ validation: checkNumberOnly });
+  const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] = useInputValue({
+    validation: checkNumberOnly,
+  });
+  const [secondCardNumber, isSecondCardNumberError, onChangeSecondCardNumber] = useInputValue({
+    validation: checkNumberOnly,
+  });
+  const [thirdCardNumber, isThirdCardNumberError, onChangeThirdCardNumber] = useInputValue({
+    validation: checkNumberOnly,
+  });
+  const [fourthCardNumber, isFourthCardNumberError, onChangeFourthCardNumber] = useInputValue({
+    validation: checkNumberOnly,
+  });
 
-  const [expiredMonth, isExpiredMonthError, onChangeExpiredMonth] =
-    useInputValue({ validation: checkExpiredMonth });
+  const [expiredMonth, isExpiredMonthError, onChangeExpiredMonth] = useInputValue({
+    validation: checkExpiredMonth,
+  });
   const [expiredYear, isExpiredYearError, onChangeExpiredYear] = useInputValue({
     validation: checkExpiredYear,
   });
@@ -51,16 +62,14 @@ const AddCardPage = () => {
     validation: checkSecureCode,
   });
 
-  const [firstPassword, isFirstPasswordError, onChangeFirstPassword] =
-    useInputValue({
-      validation: checkPassword,
-    });
-  const [secondPassword, isSecondPasswordError, onChangeSecondPassword] =
-    useInputValue({
-      validation: checkPassword,
-    });
+  const [firstPassword, isFirstPasswordError, onChangeFirstPassword] = useInputValue({
+    validation: checkPassword,
+  });
+  const [secondPassword, isSecondPasswordError, onChangeSecondPassword] = useInputValue({
+    validation: checkPassword,
+  });
 
-  const [cardType, setCardType] = useState("red");
+  const [cardType, setCardType] = useState('red');
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -75,7 +84,7 @@ const AddCardPage = () => {
         !isOwnerNameError &&
         !isSecureCodeError &&
         !isFirstPasswordError &&
-        !isSecondPasswordError
+        !isSecondPasswordError,
     );
   });
 
@@ -89,13 +98,13 @@ const AddCardPage = () => {
         secondPassword.length > 0 &&
         secureCode.length > 0 &&
         expiredMonth.length > 0 &&
-        expiredYear.length > 0
+        expiredYear.length > 0,
     );
   });
 
-  const onSubmitCardForm = (e) => {
+  const onSubmitCardForm = e => {
     e.preventDefault();
-    alert("카드 등록이 완료되었습니다!❤️🧡💛💚💙💜");
+    alert('카드 등록이 완료되었습니다!❤️🧡💛💚💙💜');
   };
 
   const openModal = () => {
@@ -106,7 +115,7 @@ const AddCardPage = () => {
     setIsModalOpened(false);
   };
 
-  const onClickCardSelector = (type) => () => {
+  const onClickCardSelector = type => () => {
     setCardType(type);
   };
 
@@ -180,17 +189,5 @@ const AddCardPage = () => {
     </Container>
   );
 };
-
-const Container = styled.form`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-`;
-
-const ButtonContainer = styled.div`
-  position: absolute;
-  right: 20px;
-  bottom: 0;
-`;
 
 export default AddCardPage;

@@ -1,17 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const AskMark = () => {
-  return (
-    <Container>
-      <AskMarkContainer>?</AskMarkContainer>
-      <InformationContainer>
-        카드 뒷면 서명란에 인쇄되어 있는 19자리 중 마지막 3자리 숫자 입니다
-      </InformationContainer>
-    </Container>
-  );
-};
-
 const Container = styled.div`
   display: flex;
   width: fit-content;
@@ -56,5 +45,16 @@ const InformationContainer = styled.div`
   padding: 5px;
   word-break: keep-all;
 `;
+
+const AskMark = () => {
+  return (
+    <Container>
+      <AskMarkContainer>?</AskMarkContainer>
+      <InformationContainer>
+        카드 뒷면 서명란에 인쇄되어 있는 19자리 중 마지막 3자리 숫자 입니다
+      </InformationContainer>
+    </Container>
+  );
+};
 
 export default AskMark;
