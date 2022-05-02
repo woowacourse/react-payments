@@ -1,14 +1,14 @@
 import React from 'react';
 import CVCInputContainer from '../atoms/card-cvc/CVCInputContainer';
-import { Body, Fieldset, Head } from '../templates/Fieldset';
+import { FieldHead, FieldSet, FieldBody } from '../templates/Fieldset';
 
 function CVCFieldset() {
   return (
-    <Fieldset>
-      <Head>
+    <FieldSet>
+      <FieldHead>
         <label htmlFor="card-cvc-input">보안 코드(CVC/CVV)</label>
-      </Head>
-      <Body>
+      </FieldHead>
+      <FieldBody>
         <div className="d-flex align-items-center">
           <CVCInputContainer />
           <div className="helptip">
@@ -18,8 +18,8 @@ function CVCFieldset() {
             </div>
           </div>
         </div>
-      </Body>
-    </Fieldset>
+      </FieldBody>
+    </FieldSet>
   );
 }
 

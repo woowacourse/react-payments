@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 
-export function Fieldset({
+export function FieldSet({
   children,
   isLast,
 }: {
@@ -19,7 +19,7 @@ export function Fieldset({
   );
 }
 
-export function Head({
+export function FieldHead({
   children,
   marginBottom,
 }: {
@@ -37,6 +37,6 @@ export function Head({
   );
 }
 
-export function Body({ children }: { children: React.ReactNode }) {
+export function FieldBody({ children }: { children: React.ReactNode }) {
   return <div className="content">{children}</div>;
 }

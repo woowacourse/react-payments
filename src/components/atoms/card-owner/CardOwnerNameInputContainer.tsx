@@ -39,7 +39,6 @@ function CardOwnerNameInputContainer() {
 
       // 대문자로 변환을 해준다
       const upperName = value.toUpperCase();
-
       queueMicrotask(() => {
         input.setSelectionRange(selectionStart, selectionStart);
       });

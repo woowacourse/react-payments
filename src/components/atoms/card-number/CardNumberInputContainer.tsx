@@ -32,6 +32,7 @@ function CardNumberInputContainer() {
 
     // 입력하는 경우
     if (cardNumber.length < pureValue.length) {
+      console.log(selectionStart);
       const cursor = selectionStart - 1;
       const insertedChar = value[cursor];
 
@@ -78,6 +79,7 @@ function CardNumberInputContainer() {
     }
 
     // 지울때
+    console.log(input.setSelectionRange(selectionStart, selectionStart), input, selectionStart);
     const cursor = selectionStart;
     let newCardNumber = cardNumber;
     if (cursor < 4) {

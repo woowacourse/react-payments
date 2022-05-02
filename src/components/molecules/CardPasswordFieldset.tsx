@@ -1,17 +1,17 @@
 import React from 'react';
 import CardPasswordInputContainerList from '../atoms/card-password/CardPasswordInputContainerList';
-import { Body, Fieldset, Head } from '../templates/Fieldset';
+import { FieldHead, FieldSet, FieldBody } from '../templates/Fieldset';
 
 function CardPasswordFieldset() {
   return (
-    <Fieldset>
-      <Head>
+    <FieldSet>
+      <FieldHead>
         <label>카드 비밀번호</label>
-      </Head>
-      <Body>
+      </FieldHead>
+      <FieldBody>
         <CardPasswordInputContainerList />
-      </Body>
-    </Fieldset>
+      </FieldBody>
+    </FieldSet>
   );
 }
 

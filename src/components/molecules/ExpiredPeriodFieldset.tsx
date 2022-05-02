@@ -1,18 +1,18 @@
 import React from 'react';
 import ExpiredPeriodInputContainer from '../atoms/card-expired-period/ExpiredPeriodInputContainer';
-import { Body, Fieldset, Head } from '../templates/Fieldset';
+import { FieldHead, FieldSet, FieldBody } from '../templates/Fieldset';
 
 function ExpiredPeriodFieldset() {
   return (
     <>
-      <Fieldset>
-        <Head>
+      <FieldSet>
+        <FieldHead>
           <label>만료일</label>
-        </Head>
-        <Body>
+        </FieldHead>
+        <FieldBody>
           <ExpiredPeriodInputContainer />
-        </Body>
-      </Fieldset>
+        </FieldBody>
+      </FieldSet>
     </>
   );
 }
