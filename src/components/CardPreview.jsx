@@ -2,13 +2,6 @@ import PropTypes from 'prop-types';
 import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from '../constants';
 import Button from './common/Button';
 
-const propTypes = {
-  cardInfo: PropTypes.object.isRequired,
-  isCardFront: PropTypes.bool,
-  handleModal: PropTypes.func,
-  handleCardPosition: PropTypes.func,
-};
-
 const CardPreview = ({ cardInfo, isCardFront, handleModal, handleCardPosition }) => {
   const { number, ownerName, expiryDate, company, theme, privacyCode } = cardInfo;
   const { first, second, third, fourth } = number;
@@ -65,6 +58,11 @@ const CardPreview = ({ cardInfo, isCardFront, handleModal, handleCardPosition })
   );
 };
 
-CardPreview.propTypes = propTypes;
+CardPreview.propTypes = {
+  cardInfo: PropTypes.object.isRequired,
+  isCardFront: PropTypes.bool,
+  handleModal: PropTypes.func,
+  handleCardPosition: PropTypes.func,
+};
 
 export default CardPreview;

@@ -1,7 +1,43 @@
 import PropTypes from 'prop-types';
 import { isObject } from '../../utils';
 
-const propTypes = {
+const FormInput = ({
+  className,
+  item,
+  inputTitle,
+  inputInfoList,
+  inputValue,
+  theme,
+  onChange,
+  children,
+}) => {
+  return (
+    <div className="input-container">
+      <label className="input-title">{inputTitle}</label>
+      <div className={`input-box ${className}`}>
+        {inputInfoList.map(({ id, name, className = '', ...rest }) => (
+          <input
+            key={id}
+            name={name}
+            className={`input-basic ${className} font-${theme}`}
+            value={isObject(inputValue) ? inputValue[name] : inputValue}
+            onChange={(e) => onChange(e, item)}
+            {...rest}
+          />
+        ))}
+        {children}
+      </div>
+    </div>
+  );
+};
+
+FormInput.defaultProps = {
+  className: '',
+  cardInfo: {},
+  onChange: undefined,
+};
+
+FormInput.propTypes = {
   /**
    * className of FormInput
    */
@@ -35,45 +71,5 @@ const propTypes = {
    */
   onChange: PropTypes.func,
 };
-
-const defaultProps = {
-  className: '',
-  cardInfo: {},
-  onChange: undefined,
-};
-
-// component
-const FormInput = ({
-  className,
-  item,
-  inputTitle,
-  inputInfoList,
-  inputValue,
-  theme,
-  onChange,
-  children,
-}) => {
-  return (
-    <div className="input-container">
-      <label className="input-title">{inputTitle}</label>
-      <div className={`input-box ${className}`}>
-        {inputInfoList.map(({ id, name, className = '', ...rest }) => (
-          <input
-            key={id}
-            name={name}
-            className={`input-basic ${className} font-${theme}`}
-            value={isObject(inputValue) ? inputValue[name] : inputValue}
-            onChange={(e) => onChange(e, item)}
-            {...rest}
-          />
-        ))}
-        {children}
-      </div>
-    </div>
-  );
-};
-
-FormInput.defaultProps = defaultProps;
-FormInput.propTypes = propTypes;
 
 export default FormInput;
