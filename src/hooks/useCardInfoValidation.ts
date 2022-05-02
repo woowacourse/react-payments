@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { Validators } from "../lib/validation";
+import { ExpiredDate } from "../stories/Input.stories";
 import { CardInfo } from "../types";
 
 export type CardInfoValidation = {
@@ -31,23 +32,23 @@ export const useCardInfoValidation = (cardInfo: CardInfo, validators: Validators
 
   useEffect(() => {
     handleChangeValidation("isCardNumbersValid", cardNumbers, validators["cardNumbers"]);
-  }, [cardNumbers, validators]);
+  }, [cardNumbers]);
 
   useEffect(() => {
     handleChangeValidation("isExpiredDateValid", expiredDate, validators["expiredDate"]);
-  }, [expiredDate, validators]);
+  }, [ExpiredDate]);
 
   useEffect(() => {
     handleChangeValidation("isUserNameValid", userName, validators["userName"]);
-  }, [userName, validators]);
+  }, [userName]);
 
   useEffect(() => {
     handleChangeValidation("isSecurityCodeValid", securityCode, validators["securityCode"]);
-  }, [securityCode, validators]);
+  }, [securityCode]);
 
   useEffect(() => {
     handleChangeValidation("isPasswordValid", password, validators["password"]);
-  }, [password, validators]);
+  }, [password]);
 
   return cardInfoValidation;
 };
