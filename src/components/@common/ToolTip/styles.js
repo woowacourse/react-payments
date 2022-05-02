@@ -91,9 +91,8 @@ const Container = styled.div`
     ${({ align }) => ALIGN_TRANSFORM[align] || ALIGN_TRANSFORM.top};
   }
 
-  &:hover,
-  &:focus {
-    > .tool-tip-text {
+  &:hover {
+    .tool-tip-text {
       display: block;
     }
   }

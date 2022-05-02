@@ -63,7 +63,6 @@ const ComponyName = styled.div`
   top: 2%;
   right: 0%;
   font-size: 0.9em;
-  font-weight: bold;
   letter-spacing: 0.425rem;
   opacity: 0.8;
 
