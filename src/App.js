@@ -49,10 +49,10 @@ const cardInputReducer = (state, action) => {
 
 const defaultCardInputState = {
   cardNumber: {
-    first: '',
-    second: '',
-    third: '',
-    forth: '',
+    firstColumn: '',
+    secondColumn: '',
+    thirdColumn: '',
+    forthColumn: '',
   },
   expirationDate: {
     month: '',
@@ -61,8 +61,8 @@ const defaultCardInputState = {
   ownerName: '',
   securityCode: '',
   password: {
-    first: '',
-    second: '',
+    firstNumber: '',
+    secondNumber: '',
   },
 };
 
