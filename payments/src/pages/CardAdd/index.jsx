@@ -12,9 +12,9 @@ import ColorPicker from "../../components/ColorPicker";
 import { useState } from "react";
 
 const CardAdd = () => {
-  const [form, dispatch] = useCard();
+  const [cardInfo, dispatch] = useCard();
   const [visible, setVisible] = useState(false);
-  const { cardNumber, expiredDate, ownerName, secureCode, password } = form;
+  const { cardNumber, expiredDate, ownerName, secureCode, password } = cardInfo;
 
   return (
     <>
@@ -24,7 +24,7 @@ const CardAdd = () => {
           <p>카드 추가</p>
         </header>
         <div className="card-add__container">
-          <Card state={form} setVisible={setVisible} />
+          <Card state={cardInfo} setVisible={setVisible} />
           <form>
             <CardNumberInput state={cardNumber} updateForm={dispatch} />
             <ExpiredDateInput state={expiredDate} updateForm={dispatch} />
@@ -33,7 +33,7 @@ const CardAdd = () => {
             <CardPasswordInput state={password} updateForm={dispatch} />
           </form>
         </div>
-        <NextButton state={form} />
+        <NextButton state={cardInfo} />
       </div>
       <ColorPicker
         visible={visible}
