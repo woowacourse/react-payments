@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState, useRef } from 'react';
+import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
-import InputLabel from '../../Atoms/InputLabel';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
 
@@ -37,9 +37,7 @@ function ExpiredDateInput() {
   };
 
   return (
-    <div>
-      <InputLabel>만료일</InputLabel>
-      <br />
+    <LabeledInput text="만료일">
       <InputWrapper>
         <InputContainer>
           {Object.keys(ExpiredDate).map((unit, index) => (
@@ -61,7 +59,7 @@ function ExpiredDateInput() {
           ))}
         </InputContainer>
       </InputWrapper>
-    </div>
+    </LabeledInput>
   );
 }
 

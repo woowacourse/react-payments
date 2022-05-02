@@ -1,8 +1,19 @@
+import styled from 'styled-components';
 import { useState } from 'react';
-import InputLabel from '../../Atoms/InputLabel';
+import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
 import InfoLabel from '../../Atoms/InfoLabel';
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const InfoLabelContainer = styled.div`
+  display: inline-block;
+  padding-top: 15px;
+`;
 
 function SecurityNumberInput() {
   const [number, setNumber] = useState('');
@@ -18,20 +29,22 @@ function SecurityNumberInput() {
   };
 
   return (
-    <div>
-      <InputLabel>보안 코드(CVC/CVV)</InputLabel>
-      <br />
-      <Input
-        value={number}
-        width="84px"
-        height="45px"
-        type="password"
-        maxLength={3}
-        onChange={onNumberChange}
-        isValid={validation}
-      />
-      <InfoLabel />
-    </div>
+    <Container>
+      <LabeledInput text="보안 코드(CVC/CVV)">
+        <Input
+          value={number}
+          width="84px"
+          height="45px"
+          type="password"
+          maxLength={3}
+          onChange={onNumberChange}
+          isValid={validation}
+        />
+      </LabeledInput>
+      <InfoLabelContainer>
+        <InfoLabel />
+      </InfoLabelContainer>
+    </Container>
   );
 }
 

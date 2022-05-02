@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
-import InputLabel from '../../Atoms/InputLabel';
 
 const InputContainer = styled.div`
   display: flex;
@@ -67,9 +67,7 @@ function CardNumberInput() {
   });
 
   return (
-    <div>
-      <InputLabel>카드 번호</InputLabel>
-      <br />
+    <LabeledInput text="카드 번호">
       <InputWrapper>
         <InputContainer>
           {Object.keys(numbers).map((order, index) => (
@@ -90,7 +88,7 @@ function CardNumberInput() {
           ))}
         </InputContainer>
       </InputWrapper>
-    </div>
+    </LabeledInput>
   );
 }
 

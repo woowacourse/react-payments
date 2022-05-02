@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState, useRef } from 'react';
+import LabeledInput from '../../Atoms/LabeledInput';
 import InputLabel from '../../Atoms/InputLabel';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
@@ -39,9 +40,7 @@ function PasswordInput() {
   const focusNext = order => {};
 
   return (
-    <div>
-      <InputLabel>카드 비밀번호</InputLabel>
-      <br />
+    <LabeledInput text="카드 비밀번호">
       <InputContainer>
         {Object.keys(password).map(order => (
           <Input
@@ -68,7 +67,7 @@ function PasswordInput() {
           />
         ))}
       </InputContainer>
-    </div>
+    </LabeledInput>
   );
 }
 

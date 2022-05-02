@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import InputLabel from '../../Atoms/InputLabel';
+import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
 
@@ -18,9 +18,7 @@ function CardOwnerInput() {
   };
 
   return (
-    <div>
-      <InputLabel>카드 소유자 이름(선택)</InputLabel>
-      <br />
+    <LabeledInput text="카드 소유자 이름(선택)">
       <Input
         value={name}
         width="318px"
@@ -31,7 +29,7 @@ function CardOwnerInput() {
         isCenter={false}
         isValid={validation}
       />
-    </div>
+    </LabeledInput>
   );
 }
 
