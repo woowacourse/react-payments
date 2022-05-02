@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import Header from '../components/Header/Header';
 import Card from 'components/common/Card/Card';
 import PageTitle from 'components/common/PageTitle/PageTitle';
 import NextPageButton from 'components/common/NextPageButton/NextPageButton';
@@ -29,8 +30,10 @@ function CardAddPage({ setPage, page }) {
 
   return (
     <div className="app">
-      <PrevPageButton setPage={setPage} page={page} />
-      <PageTitle title="카드추가" />
+      <Header>
+        <PrevPageButton setPage={setPage} page={page} />
+        <PageTitle title="카드추가" />
+      </Header>
       <Card isEmpty={false} cardInfo={cardInfo} />
       <CardInputForm cardInfo={cardInfo}>
         <CardNumber cardInfo={cardInfo} setCardInfo={setCardInfo} />
