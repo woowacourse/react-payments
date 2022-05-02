@@ -59,7 +59,28 @@ const CardPreview = ({ cardInfo, isCardFront, handleModal, handleCardPosition })
 };
 
 CardPreview.propTypes = {
-  cardInfo: PropTypes.object.isRequired,
+  cardInfo: PropTypes.shape({
+    company: PropTypes.string,
+    number: PropTypes.shape({
+      first: PropTypes.string,
+      second: PropTypes.string,
+      third: PropTypes.string,
+      fourth: PropTypes.string,
+    }),
+    expiryDate: PropTypes.shape({
+      month: PropTypes.string,
+      year: PropTypes.string,
+    }),
+    ownerName: PropTypes.string,
+    privacyCode: PropTypes.string,
+    password: PropTypes.shape({
+      first: PropTypes.string,
+      second: PropTypes.string,
+      third: PropTypes.string,
+      fourth: PropTypes.string,
+    }),
+    theme: PropTypes.string,
+  }),
   isCardFront: PropTypes.bool,
   handleModal: PropTypes.func,
   handleCardPosition: PropTypes.func,

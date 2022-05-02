@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ReactComponent as TooltipIcon } from '../../assets/tooltip_icon.svg';
 import { TOOLTIP_TYPES } from '../../constants';
+import PropTypes from 'prop-types';
 
 const Tooltip = ({ type }) => {
   const [isHover, setIsHover] = useState(false);
@@ -22,6 +23,10 @@ const Tooltip = ({ type }) => {
       )}
     </div>
   );
+};
+
+Tooltip.propTypes = {
+  type: PropTypes.string,
 };
 
 export default Tooltip;
