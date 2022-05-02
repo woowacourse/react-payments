@@ -6,6 +6,8 @@ import TextField from 'components/@common/TextField';
 
 import { validateSecurityCode } from 'validators';
 import { SECURITY_CODE } from 'constants';
+import ToolTip from 'components/@common/ToolTip';
+import SecurityCodeTip from './styles';
 
 function CardSecurityField({ securityCode, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({
@@ -15,7 +17,7 @@ function CardSecurityField({ securityCode, onChange }) {
   });
 
   return (
-    <FieldSet title="보안 코드(CVC/CVV)" inputWidth={25} errorMessage={errorMessage}>
+    <FieldSet title="보안 코드(CVC/CVV)" inputWidth={35} errorMessage={errorMessage}>
       <TextField
         type="password"
         name="securityCode"
@@ -24,7 +26,10 @@ function CardSecurityField({ securityCode, onChange }) {
         onChange={onChange}
         onBlur={handleError}
       />
-      <div className="input-security-code-tip">?</div>
+
+      <ToolTip align="right" text="카드 뒷면의 숫자 3자리입니다.">
+        <SecurityCodeTip />
+      </ToolTip>
     </FieldSet>
   );
 }
