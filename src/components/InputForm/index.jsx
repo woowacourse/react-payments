@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Input from '../Input';
 import PropTypes from 'prop-types';
 import { isAlphabetOrSpace } from '../../utils/validations';
-import { objectToString } from '../../utils/util';
+import { inputValueToCardFormat } from '../../utils/util';
 import { uid } from 'react-uid';
 import { checkFormCompletion, checkFormValidation, isNumberInRange } from './validation';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
@@ -112,11 +112,11 @@ function InputForm({
 
     try {
       if (checkFormValidation({ cardNumber, expirationDate, securityCode, password })) {
-        alert(`카드 번호는 ${objectToString(cardNumber)} 입니다 \n
-        만료일 ${objectToString(expirationDate, '/')} 입니다 \n
+        alert(`카드 번호는 ${inputValueToCardFormat(cardNumber)} 입니다 \n
+        만료일 ${inputValueToCardFormat(expirationDate, '/')} 입니다 \n
         카드 소유자 이름 ${ownerName} 입니다 \n
         보안코드 ${securityCode} 입니다 \n
-        비밀번호 ${objectToString(password)} \n`);
+        비밀번호 ${inputValueToCardFormat(password)} \n`);
       }
     } catch ({ message }) {
       alert(message);
