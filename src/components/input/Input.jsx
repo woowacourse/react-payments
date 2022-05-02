@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { ERROR_MESSAGE } from '../../constants';
 
 function Input({
   type,
@@ -15,18 +14,16 @@ function Input({
   validators,
   optional,
 }) {
+  const { validNumber, validMaxLength, validRange } = validators;
+
   const checkValidation = (inputValue) => {
-    if (validators.isNotNumber && validators.isNotNumber(+inputValue)) {
-      throw new Error(ERROR_MESSAGE.NOT_NUMBER);
-    }
+    if (validNumber) validNumber(+inputValue);
 
-    if (validators.isOverMaxLength && validators.isOverMaxLength(inputValue, length)) {
-      throw new Error(ERROR_MESSAGE.OVER_MAX_LENGTH);
-    }
+    if (validMaxLength) validMaxLength(inputValue, length);
 
-    if (validators.isOutOfRange && validators.isOutOfRange(min, max, +inputValue)) {
+    if (validRange) {
       if (inputValue === '') return;
-      throw new Error(ERROR_MESSAGE.INVALID_MONTH_RANGE);
+      validRange(min, max, +inputValue);
     }
   };
 
@@ -67,9 +64,9 @@ Input.propTypes = {
   value: PropTypes.string.isRequired,
   updateCardForm: PropTypes.func.isRequired,
   validators: PropTypes.shape({
-    isOverMaxLength: PropTypes.func.isRequired,
-    isNaN: PropTypes.func,
-    isOutOfRange: PropTypes.func,
+    validMaxLength: PropTypes.func.isRequired,
+    validNumber: PropTypes.func,
+    validRange: PropTypes.func,
   }).isRequired,
 };
 

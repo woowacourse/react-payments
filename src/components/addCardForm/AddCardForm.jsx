@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../input/Input';
-import { isOverMaxLength, isOutOfRange, isNotNumber } from '../../validator';
+import { validNumber, validMaxLength, validRange } from '../../validator';
 import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../../constants';
 
 function AddCardForm({ updateCard, addCard }) {
@@ -45,14 +45,14 @@ function AddCardForm({ updateCard, addCard }) {
             value={cardForm.firstCardNumber}
             name="firstCardNumber"
             updateCardForm={updateCardForm}
-            validators={{ isOverMaxLength, isNotNumber }}
+            validators={{ validMaxLength, validNumber }}
           />
           <Input
             length={MAX_LENGTH.CARD_NUMBER}
             value={cardForm.secondCardNumber}
             name="secondCardNumber"
             updateCardForm={updateCardForm}
-            validators={{ isOverMaxLength, isNotNumber }}
+            validators={{ validMaxLength, validNumber }}
           />
           <Input
             type="password"
@@ -60,7 +60,7 @@ function AddCardForm({ updateCard, addCard }) {
             value={cardForm.thirdCardNumber}
             name="thirdCardNumber"
             updateCardForm={updateCardForm}
-            validators={{ isOverMaxLength, isNotNumber }}
+            validators={{ validMaxLength, validNumber }}
           />
           <Input
             type="password"
@@ -68,7 +68,7 @@ function AddCardForm({ updateCard, addCard }) {
             value={cardForm.fourthCardNumber}
             name="fourthCardNumber"
             updateCardForm={updateCardForm}
-            validators={{ isOverMaxLength, isNotNumber }}
+            validators={{ validMaxLength, validNumber }}
           />
         </div>
       </div>
@@ -84,7 +84,7 @@ function AddCardForm({ updateCard, addCard }) {
             value={cardForm.expireMonth}
             name="expireMonth"
             updateCardForm={updateCardForm}
-            validators={{ isOverMaxLength, isNotNumber, isOutOfRange }}
+            validators={{ validMaxLength, validNumber, validRange }}
           />
           /
           <Input
@@ -93,7 +93,7 @@ function AddCardForm({ updateCard, addCard }) {
             value={cardForm.expireYear}
             name="expireYear"
             updateCardForm={updateCardForm}
-            validators={{ isOverMaxLength, isNotNumber }}
+            validators={{ validMaxLength, validNumber }}
           />
         </div>
       </div>
@@ -111,7 +111,7 @@ function AddCardForm({ updateCard, addCard }) {
           value={cardForm.ownerName}
           name="ownerName"
           updateCardForm={updateCardForm}
-          validators={{ isOverMaxLength }}
+          validators={{ validMaxLength }}
           optional={false}
         />
       </div>
@@ -124,7 +124,7 @@ function AddCardForm({ updateCard, addCard }) {
           value={cardForm.securityCode}
           name="securityCode"
           updateCardForm={updateCardForm}
-          validators={{ isOverMaxLength, isNotNumber }}
+          validators={{ validMaxLength, validNumber }}
         />
         <div className="help-tip">
           <p>카드 뒷면 끝 세 자리를 입력해주세요.</p>
@@ -139,7 +139,7 @@ function AddCardForm({ updateCard, addCard }) {
           value={cardForm.firstPassword}
           name="firstPassword"
           updateCardForm={updateCardForm}
-          validators={{ isOverMaxLength, isNotNumber }}
+          validators={{ validMaxLength, validNumber }}
         />
         <Input
           size="w-15 mr-10"
@@ -148,7 +148,7 @@ function AddCardForm({ updateCard, addCard }) {
           value={cardForm.secondPassword}
           name="secondPassword"
           updateCardForm={updateCardForm}
-          validators={{ isOverMaxLength, isNaN: Number.isNaN }}
+          validators={{ validMaxLength, validNumber }}
         />
         <div className="dot" />
         <div className="dot" />
