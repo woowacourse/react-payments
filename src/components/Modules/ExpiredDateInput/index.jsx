@@ -4,6 +4,7 @@ import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
+import { numberRegex } from '../../../constant/regularExpression';
 
 const InputContainer = styled.div`
   display: flex;
@@ -19,11 +20,12 @@ function ExpiredDateInput() {
   const [validations, setValidation] = useState({ month: false, year: false });
   const refs = { month: useRef(), year: useRef() };
 
-  const onDateChange = ({ target }) => {
-    updateDate(target.name, target.value);
-    updateValidation(target.name, target.value);
+  const onDateChange = ({ target, nativeEvent: { data } }) => {
+    if (numberRegex.test(data) || !data) {
+      updateDate(target.name, target.value);
+      updateValidation(target.name, target.value);
+    }
   };
-  1;
 
   const updateDate = (unit, date) => {
     setExpiredDate(prevDate => ({ ...prevDate, [unit]: date }));

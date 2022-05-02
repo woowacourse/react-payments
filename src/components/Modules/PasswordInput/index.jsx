@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { useState, useRef } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
-import InputLabel from '../../Atoms/InputLabel';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
+import { numberRegex } from '../../../constant/regularExpression';
 
 const InputContainer = styled.div`
   display: flex;
@@ -21,9 +21,11 @@ function PasswordInput() {
   });
   const refs = { first: useRef(), second: useRef() };
 
-  const onPasswordChange = ({ target }) => {
-    updatePassword(target.name, target.value);
-    updateValidations(target.name, target.value);
+  const onPasswordChange = ({ target, nativeEvent: { data } }) => {
+    if (numberRegex.test(data) || !data) {
+      updatePassword(target.name, target.value);
+      updateValidations(target.name, target.value);
+    }
   };
 
   const updatePassword = (order, number) => {

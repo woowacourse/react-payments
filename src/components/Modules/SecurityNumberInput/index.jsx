@@ -4,6 +4,7 @@ import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
 import InfoLabel from '../../Atoms/InfoLabel';
+import { numberRegex } from '../../../constant/regularExpression';
 
 const Container = styled.div`
   display: flex;
@@ -19,9 +20,11 @@ function SecurityNumberInput() {
   const [number, setNumber] = useState('');
   const [validation, setValidation] = useState(false);
 
-  const onNumberChange = ({ target }) => {
-    setNumber(target.value);
-    updateValidation(target.value);
+  const onNumberChange = ({ target, nativeEvent: { data } }) => {
+    if (numberRegex.test(data) || !data) {
+      setNumber(target.value);
+      updateValidation(target.value);
+    }
   };
 
   const updateValidation = number => {

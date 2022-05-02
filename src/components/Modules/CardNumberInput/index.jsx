@@ -4,6 +4,7 @@ import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
+import { numberRegex } from '../../../constant/regularExpression';
 
 const InputContainer = styled.div`
   display: flex;
@@ -24,11 +25,16 @@ function CardNumberInput() {
   const refs = Object.fromEntries(orders.map(order => [order, useRef()]));
   const currentOrderRef = useRef();
 
-  const handleNumberChange = ({ target, nativeEvent }) => {
-    updateNumbers(target.name, target.value);
-    updateValidations(target.name, validator.validateCardNumber(target.value));
-    focusPrevOrder(target.name, target.value, nativeEvent.inputType);
-    currentOrderRef.current = target.name;
+  const handleNumberChange = ({ target, nativeEvent: { data, inputType } }) => {
+    if (numberRegex.test(data) || !data) {
+      updateNumbers(target.name, target.value);
+      updateValidations(
+        target.name,
+        validator.validateCardNumber(target.value)
+      );
+      focusPrevOrder(target.name, target.value, inputType);
+      currentOrderRef.current = target.name;
+    }
   };
 
   const updateNumbers = (order, newNumber) => {
