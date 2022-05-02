@@ -7,6 +7,12 @@ export default {
     return cardNumberRegex.test(cardNumber);
   },
 
+  validateDate: date => {
+    const dateRegex = /[0-9]{2,2}/;
+
+    return dateRegex.test(date);
+  },
+
   validateCardNumbers: cardNumbers => {
     const cardNumbersRegex = /[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}/;
 
