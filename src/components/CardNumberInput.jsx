@@ -16,7 +16,7 @@ export default function CardNumberInput({ cardNumber, setCardNumber }) {
   return (
     <InputField
       labelText="카드 번호"
-      wrapperWidth="100%"
+      wrapperWidth="full"
       horizontalAlign="space-around"
       isComplete={
         cardNumber.join("").length ===

@@ -2,6 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
+const width = {
+  sm: "40px",
+  default: "70px",
+  full: "100%",
+};
+
 export const StyledInput = styled.input`
   // 텍스트 선택 커서 색상 설정
   caret-color: #000000;
@@ -12,7 +18,7 @@ export const StyledInput = styled.input`
   text-align: ${(props) => props.textAlign};
 
   background-color: transparent;
-  width: ${(props) => props.width};
+  width: ${(props) => width[props.width]};
 
   outline: none;
   border: none;
@@ -45,12 +51,12 @@ Input.propTypes = {
   name: PropTypes.string,
   type: PropTypes.oneOf(["text", "number", "password"]),
   placeholder: PropTypes.string,
-  width: PropTypes.string,
+  width: PropTypes.oneOf(["sm", "default", "full"]),
 };
 
 Input.defaultProps = {
   name: "default name",
   type: "text",
-  width: "70px",
+  width: "default",
   textAlign: "center",
 };

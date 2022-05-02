@@ -2,6 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
+const width = {
+  xs: "85px",
+  sm: "135px",
+  full: "100%",
+};
+
 const StyledInputField = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,7 +35,7 @@ const StyledInputWrapper = styled.div`
   justify-content: ${(props) => props.align};
   background: #ecebf1;
   border-radius: 7px;
-  width: ${(props) => props.width};
+  width: ${(props) => width[props.width]};
   padding: 12px;
 
   box-shadow: ${(props) => props.hasError && "inset 0 0 0 1px #d82424"};
@@ -76,6 +82,6 @@ InputField.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
-  wrapperWidth: PropTypes.string,
+  wrapperWidth: PropTypes.oneOf(["xs", "sm", "full"]),
   horizontalAlign: PropTypes.oneOf(["flex-start", "center", "space-around"]),
 };

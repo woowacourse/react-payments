@@ -25,7 +25,7 @@ export default function CardExpireDateInput({ expireDate, setExpireDate }) {
   return (
     <InputField
       labelText="만료일 (MM/YY)"
-      wrapperWidth="135px"
+      wrapperWidth="sm"
       horizontalAlign="center"
       isComplete={
         expireDate.join("").length === CARD_INFO_RULES.EXPIRE_DATE_LENGTH
@@ -38,7 +38,7 @@ export default function CardExpireDateInput({ expireDate, setExpireDate }) {
         value={expireDate[0]}
         onChange={(e) => handleExpireDateUpdate(e, 0)}
         onBlur={resetError}
-        width="40px"
+        width="sm"
         isComplete={expireDate[0].length === 2}
         required
       />
@@ -49,7 +49,7 @@ export default function CardExpireDateInput({ expireDate, setExpireDate }) {
         value={expireDate[1]}
         onChange={(e) => handleExpireDateUpdate(e, 1)}
         onBlur={resetError}
-        width="40px"
+        width="sm"
         isComplete={expireDate[1].length === 2}
         required
       />

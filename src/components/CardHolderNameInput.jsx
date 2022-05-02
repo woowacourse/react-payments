@@ -42,7 +42,7 @@ export default function CardHolderNameInput({ holderName, setHolderName }) {
           isComplete={holderName !== ""}
         />
       }
-      wrapperWidth="100%"
+      wrapperWidth="full"
       horizontalAlign="flex-start"
       isComplete={holderName !== ""}
       errorMessage={errorMessage}
@@ -53,7 +53,7 @@ export default function CardHolderNameInput({ holderName, setHolderName }) {
         value={holderName}
         onChange={handleHolderNameUpdate}
         onBlur={resetError}
-        width="100%"
+        width="full"
         textAlign="left"
         isComplete={holderName !== ""}
         maxLength={30}
