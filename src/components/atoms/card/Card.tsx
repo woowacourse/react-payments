@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "@emotion/styled";
+import React from 'react';
+import styled from '@emotion/styled';
 
 const CardDiv = styled.div(({ color }: { color?: string }) => ({
   width: '208px',
@@ -44,21 +44,21 @@ const CardDiv = styled.div(({ color }: { color?: string }) => ({
     '.expired-period': {
       letterSpacing: '-1px',
     },
-  }
+  },
 }));
 
 const OwnerNameSpan = styled.span<{ name: string }>(({ name }) => ({
-  fontSize: `${Math.min(14, Math.max(4, 20 - Math.floor(name.length/2)))}px`,
+  fontSize: `${Math.min(14, Math.max(4, 20 - Math.floor(name.length / 2)))}px`,
 }));
 
 type Props = {
-  cardNumber: string,
-  name: string,
-  expiredPeriod: string,
-  isActive: boolean,
-  color?: string,
-  cardName?: string,
-}
+  cardNumber: string;
+  name: string;
+  expiredPeriod: string;
+  isActive: boolean;
+  color?: string;
+  cardName?: string;
+};
 
 function Card({ cardNumber, name, expiredPeriod, isActive, color, cardName }: Props) {
   const cn = isActive ? (cardName ? cardName : '로이드카드') : '';
@@ -75,7 +75,7 @@ function Card({ cardNumber, name, expiredPeriod, isActive, color, cardName }: Pr
         <span className="expired-period">{expiredPeriod}</span>
       </div>
     </CardDiv>
-  )
+  );
 }
 
 export default Card;

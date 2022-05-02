@@ -1,9 +1,9 @@
-import React from "react";
-import CVCInput from "./CVCInput";
-import { useAppDispatch, useAppState } from "../../../hooks/hooks";
-import { createAction } from "../../../context/Provider";
-import { ActionType } from "../../../types";
-import { isNum } from "../../../utils";
+import React from 'react';
+import CVCInput from './CVCInput';
+import { useAppDispatch, useAppState } from '../../../hooks/hooks';
+import { createAction } from '../../../context/Provider';
+import { ActionType } from '../../../types';
+import { isNum } from '../../../utils';
 
 function CVCInputContainer() {
   const { cvc } = useAppState();
@@ -23,8 +23,8 @@ function CVCInputContainer() {
     }
 
     dispatch(createAction(ActionType.INPUT_CVC, cvc.slice(0, cvc.length - 1)));
-  }
-  return <CVCInput onChange={handleChage} value={cvc} />
+  };
+  return <CVCInput onChange={handleChage} value={cvc} />;
 }
 
 export default CVCInputContainer;

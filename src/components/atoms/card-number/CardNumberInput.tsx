@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "@emotion/styled";
+import React from 'react';
+import styled from '@emotion/styled';
 
 type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
-}
+};
 
 const Input = styled.input(() => ({
   backgroundColor: '#ECEBF1',
@@ -18,11 +18,11 @@ const Input = styled.input(() => ({
   textAlign: 'center',
   '&:focus': {
     boxShadow: 'none',
-  }
+  },
 }));
 
 function CardNumberInput({ onChange, value }: Props) {
-  return <Input onChange={onChange} value={value} />
+  return <Input onChange={onChange} value={value} />;
 }
 
 export default CardNumberInput;

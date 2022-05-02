@@ -7,6 +7,8 @@ export default {
   component: ExpiredPeriodInputContainer,
 } as ComponentMeta<typeof ExpiredPeriodInputContainer>;
 
-const Template: ComponentStory<typeof ExpiredPeriodInputContainer> = (args) => <ExpiredPeriodInputContainer />;
+const Template: ComponentStory<typeof ExpiredPeriodInputContainer> = (args) => (
+  <ExpiredPeriodInputContainer />
+);
 
 export const Primary = Template.bind({});

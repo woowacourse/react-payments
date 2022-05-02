@@ -1,10 +1,10 @@
-import React from "react";
-import CardOwnerNameInput from "./CardOwnerNameInput";
-import { useAppDispatch, useAppState } from "../../../hooks/hooks";
-import { ActionType } from "../../../types";
-import { createAction } from "../../../context/Provider";
-import { isEnglish, removeAt } from "../../../utils";
-import { MAX_NAME_LENGTH } from "../../../constants";
+import React from 'react';
+import CardOwnerNameInput from './CardOwnerNameInput';
+import { useAppDispatch, useAppState } from '../../../hooks/hooks';
+import { ActionType } from '../../../types';
+import { createAction } from '../../../context/Provider';
+import { isEnglish } from '../../../utils';
+import { MAX_NAME_LENGTH } from '../../../constants';
 
 function CardOwnerNameInputContainer() {
   const { name } = useAppState();
@@ -22,7 +22,7 @@ function CardOwnerNameInputContainer() {
       if (value.length > MAX_NAME_LENGTH) return;
 
       const insertedChar = value[selectionStart - 1];
-      // space인데 
+      // space인데
       if (insertedChar === ' ') {
         // 처음부터 space는 허용 안되지요
         if (value.length === 1) return;
@@ -39,7 +39,7 @@ function CardOwnerNameInputContainer() {
 
       // 대문자로 변환을 해준다
       const upperName = value.toUpperCase();
-      
+
       queueMicrotask(() => {
         input.setSelectionRange(selectionStart, selectionStart);
       });
@@ -53,13 +53,13 @@ function CardOwnerNameInputContainer() {
       input.setSelectionRange(selectionStart, selectionStart);
     });
     dispatch(createAction(ActionType.INPUT_NAME, value.toUpperCase()));
-  }
+  };
 
   return (
     <>
       <CardOwnerNameInput onChange={handleChage} value={name} />
     </>
-  )
-};
+  );
+}
 
 export default CardOwnerNameInputContainer;

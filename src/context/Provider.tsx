@@ -1,20 +1,20 @@
-import React, { createContext, Dispatch, useReducer } from "react";
-import { ActionType } from "../types";
+import React, { createContext, Dispatch, useReducer } from 'react';
+import { ActionType } from '../types';
 
 export type State = {
-  cardNumber: string,
-  name: string,
-  expiredPeriod: string,
-  cvc: string,
-  password: Array<string>,
-}
+  cardNumber: string;
+  name: string;
+  expiredPeriod: string;
+  cvc: string;
+  password: Array<string>;
+};
 
-type Action = 
-  | { type: ActionType.INPUT_CARDNUMBER , payload: any }
-  | { type: ActionType.INPUT_NAME, payload: any }
-  | { type: ActionType.INPUT_EXPIRED_PERIOD, payload: any }
-  | { type: ActionType.INPUT_CVC, payload: any }
-  | { type: ActionType.INPUT_PASSWORD, payload: any };
+type Action =
+  | { type: ActionType.INPUT_CARDNUMBER; payload: any }
+  | { type: ActionType.INPUT_NAME; payload: any }
+  | { type: ActionType.INPUT_EXPIRED_PERIOD; payload: any }
+  | { type: ActionType.INPUT_CVC; payload: any }
+  | { type: ActionType.INPUT_PASSWORD; payload: any };
 
 export type AppDispatch = Dispatch<Action>;
 
@@ -32,8 +32,9 @@ export const AppDispatchContext = createContext<AppDispatch>(() => null);
 
 export function createAction(type: ActionType, payload: any): Action {
   return {
-    type, payload
-  }
+    type,
+    payload,
+  };
 }
 
 function reducer(state: State, action: Action): State {
@@ -41,40 +42,38 @@ function reducer(state: State, action: Action): State {
     case ActionType.INPUT_CARDNUMBER:
       return {
         ...state,
-        cardNumber: action.payload
+        cardNumber: action.payload,
       };
     case ActionType.INPUT_NAME:
       return {
         ...state,
-        name: action.payload
-      }
+        name: action.payload,
+      };
     case ActionType.INPUT_EXPIRED_PERIOD:
       return {
         ...state,
-        expiredPeriod: action.payload
-      }
+        expiredPeriod: action.payload,
+      };
     case ActionType.INPUT_CVC:
       return {
         ...state,
-        cvc: action.payload
-      }
+        cvc: action.payload,
+      };
     case ActionType.INPUT_PASSWORD:
       return {
         ...state,
-        password: [...action.payload]
-      }
-  }  
+        password: [...action.payload],
+      };
+  }
 }
 
 function AppProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initalState);
 
   return (
-    <>  
+    <>
       <AppStateContext.Provider value={state}>
-        <AppDispatchContext.Provider value={dispatch}>
-          { children }
-        </AppDispatchContext.Provider>
+        <AppDispatchContext.Provider value={dispatch}>{children}</AppDispatchContext.Provider>
       </AppStateContext.Provider>
     </>
   );

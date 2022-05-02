@@ -1,9 +1,16 @@
-import React from "react";
-import { useAppDispatch, useAppState } from "../../../hooks/hooks";
-import { ActionType } from "../../../types";
-import { insertAt, isNum, removeAt, removeHyphens, removeWhiteSpaces, transformToCardFormat } from "../../../utils";
-import { createAction } from "../../../context/Provider";
-import CardNumberInput from "./CardNumberInput";
+import React from 'react';
+import { useAppDispatch, useAppState } from '../../../hooks/hooks';
+import { ActionType } from '../../../types';
+import {
+  insertAt,
+  isNum,
+  removeAt,
+  removeHyphens,
+  removeWhiteSpaces,
+  transformToCardFormat,
+} from '../../../utils';
+import { createAction } from '../../../context/Provider';
+import CardNumberInput from './CardNumberInput';
 
 function CardNumberInputContainer() {
   const { cardNumber } = useAppState();
@@ -39,7 +46,7 @@ function CardNumberInputContainer() {
 
       const isLastPosition = value.length - 1 === cursor;
       let newNumber = cardNumber + insertedChar; // 마지막에 입력한거라고 우선 가정한다
-      
+
       if (!isLastPosition) {
         if (cursor < 4) {
           newNumber = insertAt(cardNumber, cursor, insertedChar);
@@ -91,9 +98,11 @@ function CardNumberInputContainer() {
 
     dispatch(createAction(ActionType.INPUT_CARDNUMBER, newCardNumber));
     return;
-  }
+  };
 
-  return <CardNumberInput onChange={handleCardNumberInput} value={transformToCardFormat(cardNumber)} />
+  return (
+    <CardNumberInput onChange={handleCardNumberInput} value={transformToCardFormat(cardNumber)} />
+  );
 }
 
 export default CardNumberInputContainer;

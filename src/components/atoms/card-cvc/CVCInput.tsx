@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "@emotion/styled";
-import { transformNumToBullet } from "../../../utils";
+import React from 'react';
+import styled from '@emotion/styled';
+import { transformNumToBullet } from '../../../utils';
 
 type Props = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
-}
+};
 
 const Input = styled.input(() => ({
   backgroundColor: '#ECEBF1',
@@ -20,11 +20,19 @@ const Input = styled.input(() => ({
   marginRight: '11px',
   '&:focus': {
     boxShadow: 'none',
-  }
+  },
 }));
 
 function CVCInput({ onChange, value }: Props) {
-  return <Input id="card-cvc-input" type="text" onChange={onChange} value={transformNumToBullet(value)} placeholder='' />
+  return (
+    <Input
+      id="card-cvc-input"
+      type="text"
+      onChange={onChange}
+      value={transformNumToBullet(value)}
+      placeholder=""
+    />
+  );
 }
 
 export default CVCInput;

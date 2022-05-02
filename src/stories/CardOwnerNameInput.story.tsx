@@ -7,6 +7,8 @@ export default {
   component: CardOwnerNameInputContainer,
 } as ComponentMeta<typeof CardOwnerNameInputContainer>;
 
-const Template: ComponentStory<typeof CardOwnerNameInputContainer> = (args) => <CardOwnerNameInputContainer />;
+const Template: ComponentStory<typeof CardOwnerNameInputContainer> = (args) => (
+  <CardOwnerNameInputContainer />
+);
 
 export const Primary = Template.bind({});
