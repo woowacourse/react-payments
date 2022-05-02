@@ -16,6 +16,14 @@ import {
 } from "./components";
 import { CARD_REGISTER_SUCCESS_MESSAGE, CARD_INFO_RULES } from "./constants.js";
 
+const {
+  NUMBER_UNIT_COUNT,
+  NUMBER_UNIT_LENGTH,
+  EXPIRE_DATE_LENGTH,
+  SECURITY_CODE_LENGTH,
+  PASSWORD_LENGTH,
+} = CARD_INFO_RULES;
+
 function App() {
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
   const [expireDate, setExpireDate] = useState(["", ""]);
@@ -27,22 +35,39 @@ function App() {
     alert(CARD_REGISTER_SUCCESS_MESSAGE);
   };
 
-  const isValidCardInfo = useMemo(() => {
-    const {
-      NUMBER_UNIT_COUNT,
-      NUMBER_UNIT_LENGTH,
-      EXPIRE_DATE_LENGTH,
-      SECURITY_CODE_LENGTH,
-      PASSWORD_LENGTH,
-    } = CARD_INFO_RULES;
+  const isCompleteCardNumber = useMemo(
+    () => cardNumber.join("").length === NUMBER_UNIT_COUNT * NUMBER_UNIT_LENGTH,
+    [cardNumber]
+  );
 
+  const isCompleteExpireDate = useMemo(
+    () => expireDate.join("").length === EXPIRE_DATE_LENGTH,
+    [expireDate]
+  );
+
+  const isCompleteSecurityCode = useMemo(
+    () => securityCode.length === SECURITY_CODE_LENGTH,
+    [securityCode]
+  );
+
+  const isCompletePassword = useMemo(
+    () => password.join("").length === PASSWORD_LENGTH,
+    [password]
+  );
+
+  const isValidCardInfo = useMemo(() => {
     return (
-      cardNumber.join("").length === NUMBER_UNIT_COUNT * NUMBER_UNIT_LENGTH &&
-      expireDate.join("").length === EXPIRE_DATE_LENGTH &&
-      securityCode.length === SECURITY_CODE_LENGTH &&
-      password.join("").length === PASSWORD_LENGTH
+      isCompleteCardNumber &&
+      isCompleteExpireDate &&
+      isCompleteSecurityCode &&
+      isCompletePassword
     );
-  }, [cardNumber, expireDate, securityCode, password]);
+  }, [
+    isCompleteCardNumber,
+    isCompleteExpireDate,
+    isCompleteSecurityCode,
+    isCompletePassword,
+  ]);
 
   return (
     <div className="App">
