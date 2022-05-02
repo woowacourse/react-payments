@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
-export default function useValidatedUpdate(validation, setter, errorHandler) {
+export default function useValidatedUpdate(validation, setter) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const resetError = () => setErrorMessage("");
-
-  return [
+  const eventHandler = useCallback(
     (event, order) => {
       const {
         target: { value },
@@ -22,7 +21,7 @@ export default function useValidatedUpdate(validation, setter, errorHandler) {
 
       setter(value, order);
     },
-    errorMessage,
-    resetError,
-  ];
+    [validation, setter]
+  );
+  return [eventHandler, errorMessage, resetError];
 }
