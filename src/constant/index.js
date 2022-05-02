@@ -4,12 +4,12 @@ export const REG_EXP = {
 };
 
 export const ColorType = {
-  red: "#E24141",
-  blue: "#547CE4",
-  green: "#73BC6D",
-  purple: "#DE59B9",
-  mint: "#04C09E",
-  pink: "#E76E9A",
-  orange: " #F37D3B",
-  yellow: "#FBCD58",
+  red: '#E24141',
+  blue: '#547CE4',
+  green: '#73BC6D',
+  purple: '#DE59B9',
+  mint: '#04C09E',
+  pink: '#E76E9A',
+  orange: ' #F37D3B',
+  yellow: '#FBCD58',
 };
