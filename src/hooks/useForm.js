@@ -99,12 +99,15 @@ const useForm = ({ formSchema, onSubmit, onSubmitError }) => {
     };
   };
 
+  const getInputClassName = (fieldName) =>
+    `input-basic ${errors[fieldName]?.showError ? 'error' : ''}`;
+
   return {
     values,
     isSubmitting,
     handleSubmit,
-    errors,
     registerInputProps,
+    getInputClassName,
   };
 };
 

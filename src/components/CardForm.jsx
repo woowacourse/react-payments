@@ -117,8 +117,13 @@ const StyledCardFieldContainer = styled.div`
 
 const CardForm = () => {
   const { cardFormSchema, onSubmit, onSubmitError } = useCardForm();
-  const { values, isSubmitting, handleSubmit, errors, registerInputProps } =
-    useForm({ formSchema: cardFormSchema, onSubmit, onSubmitError });
+  const {
+    values,
+    isSubmitting,
+    handleSubmit,
+    registerInputProps,
+    getInputClassName,
+  } = useForm({ formSchema: cardFormSchema, onSubmit, onSubmitError });
 
   return (
     <>
@@ -128,32 +133,24 @@ const CardForm = () => {
           <label className="input-title">카드 번호</label>
           <div className="input-box">
             <input
-              className={`input-basic ${
-                errors.firstCardNumber?.showError ? 'error' : ''
-              }`}
+              className={getInputClassName('firstCardNumber')}
               {...registerInputProps('firstCardNumber')}
             />
             <p>-</p>
             <input
-              className={`input-basic ${
-                errors.secondCardNumber?.showError ? 'error' : ''
-              }`}
+              className={getInputClassName('secondCardNumber')}
               {...registerInputProps('secondCardNumber')}
             />
             <p>-</p>
             <input
               type="password"
-              className={`input-basic ${
-                errors.thirdCardNumber?.showError ? 'error' : ''
-              }`}
+              className={getInputClassName('thirdCardNumber')}
               {...registerInputProps('thirdCardNumber')}
             />
             <p>-</p>
             <input
               type="password"
-              className={`input-basic ${
-                errors.fourthCardNumber?.showError ? 'error' : ''
-              }`}
+              className={getInputClassName('fourthCardNumber')}
               {...registerInputProps('fourthCardNumber')}
             />
           </div>
@@ -162,17 +159,13 @@ const CardForm = () => {
           <label className="input-title">만료일</label>
           <div className="input-box w-50">
             <input
-              className={`input-basic ${
-                errors.expiredMonth?.showError ? 'error' : ''
-              }`}
+              className={getInputClassName('expiredMonth')}
               placeholder="MM"
               {...registerInputProps('expiredMonth')}
             />
             <p>/</p>
             <input
-              className={`input-basic ${
-                errors.expiredYear?.showError ? 'error' : ''
-              }`}
+              className={getInputClassName('expiredYear')}
               placeholder="YY"
               {...registerInputProps('expiredYear')}
             />
@@ -186,9 +179,7 @@ const CardForm = () => {
           </span>
           <div className="input-box">
             <input
-              className={`input-basic ${
-                errors.owner?.showError ? 'error' : ''
-              }`}
+              className={getInputClassName('owner')}
               placeholder="카드에 표시된 이름과 동일하게 입력하세요."
               {...registerInputProps('owner')}
             />
@@ -200,9 +191,7 @@ const CardForm = () => {
             <div className="input-box w-25">
               <input
                 type="password"
-                className={`input-basic ${
-                  errors.cvc?.showError ? 'error' : ''
-                }`}
+                className={getInputClassName('cvc')}
                 {...registerInputProps('cvc')}
               />
             </div>
@@ -216,31 +205,23 @@ const CardForm = () => {
           <div className="input-box transparent">
             <input
               type="password"
-              className={`input-basic w-15 password ${
-                errors.firstPasswordDigit?.showError ? 'error' : ''
-              }`}
+              className={getInputClassName('firstPasswordDigit')}
               {...registerInputProps('firstPasswordDigit')}
             />
             <input
               type="password"
-              className={`input-basic w-15 password ${
-                errors.secondPasswordDigit?.showError ? 'error' : ''
-              }`}
+              className={getInputClassName('secondPasswordDigit')}
               {...registerInputProps('secondPasswordDigit')}
             />
             <input
               type="password"
-              className={`input-basic w-15 disabled ${
-                errors.thirdPasswordDigit?.showError ? 'error' : ''
-              }`}
+              className={getInputClassName('thirdPasswordDigit')}
               disabled
               {...registerInputProps('thirdPasswordDigit')}
             />
             <input
               type="password"
-              className={`input-basic w-15 disabled ${
-                errors.fourthPasswordDigit?.showError ? 'error' : ''
-              }`}
+              className={getInputClassName('fourthPasswordDigit')}
               disabled
               {...registerInputProps('fourthPasswordDigit')}
             />
