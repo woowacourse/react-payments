@@ -1,16 +1,15 @@
 import styled from 'styled-components';
-import CardNumberInput from '../components/Modules/CardNumberInput';
-import ExpiredDateInput from '../components/Modules/ExpiredDateInput';
-import CardOwnerInput from '../components/Modules/CardOwnerInput';
-import SecurityNumberInput from '../components/Modules/SecurityNumberInput';
-import PasswordInput from '../components/Modules/PasswordInput';
+import CardNumberInput from '../../Modules/CardNumberInput';
+import ExpiredDateInput from '../../Modules/ExpiredDateInput';
+import CardOwnerInput from '../../Modules/CardOwnerInput';
+import SecurityNumberInput from '../../Modules/SecurityNumberInput';
+import PasswordInput from '../../Modules/PasswordInput';
+import SubmitButton from '../../Atoms/SubmitButton';
 
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  background-color: pink;
-  width: 100%;
-  height: 100%;
+  gap: 19px;
 `;
 
 function CardAddForm() {
@@ -21,6 +20,7 @@ function CardAddForm() {
       <CardOwnerInput />
       <SecurityNumberInput />
       <PasswordInput />
+      <SubmitButton>다음</SubmitButton>
     </FormContainer>
   );
 }

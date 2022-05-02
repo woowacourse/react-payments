@@ -39,7 +39,7 @@ function PasswordInput() {
   const focusNext = order => {};
 
   return (
-    <>
+    <div>
       <InputLabel>카드 비밀번호</InputLabel>
       <br />
       <InputContainer>
@@ -68,7 +68,7 @@ function PasswordInput() {
           />
         ))}
       </InputContainer>
-    </>
+    </div>
   );
 }
 

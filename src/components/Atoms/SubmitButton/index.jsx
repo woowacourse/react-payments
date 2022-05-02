@@ -1,9 +1,21 @@
-import { Button } from '../../../style/addForm';
+import styled from 'styled-components';
 
-function SubmitButton({ label, width, height, hidden }) {
+const Button = styled.button`
+  display: ${props => (props.hidden ? 'none' : 'block')};
+  width: ${props => props.width};
+  height: ${props => props.height};
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: right;
+  color: #04c09e;
+  background-color: white;
+`;
+
+function SubmitButton({ width, height, hidden, children }) {
   return (
     <Button type="submit" width={width} height={height} hidden={hidden}>
-      {label}
+      {children}
     </Button>
   );
 }

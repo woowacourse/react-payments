@@ -37,7 +37,7 @@ function ExpiredDateInput() {
   };
 
   return (
-    <>
+    <div>
       <InputLabel>만료일</InputLabel>
       <br />
       <InputWrapper>
@@ -61,7 +61,7 @@ function ExpiredDateInput() {
           ))}
         </InputContainer>
       </InputWrapper>
-    </>
+    </div>
   );
 }
 

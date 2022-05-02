@@ -17,7 +17,7 @@ function SecurityNumberInput() {
   };
 
   return (
-    <>
+    <div>
       <InputLabel>보안 코드(CVC/CVV)</InputLabel>
       <br />
       <Input
@@ -29,7 +29,7 @@ function SecurityNumberInput() {
         onChange={onNumberChange}
         isValid={validation}
       />
-    </>
+    </div>
   );
 }
 

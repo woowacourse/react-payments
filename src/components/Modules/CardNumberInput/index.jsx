@@ -68,7 +68,7 @@ function CardNumberInput() {
   });
 
   return (
-    <>
+    <div>
       <InputLabel>카드 번호</InputLabel>
       <br />
       <InputWrapper>
@@ -91,7 +91,7 @@ function CardNumberInput() {
           ))}
         </InputContainer>
       </InputWrapper>
-    </>
+    </div>
   );
 }
 
