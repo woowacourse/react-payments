@@ -20,21 +20,24 @@ import {
 
 function AddPage() {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', ''])
-  const [dueDate, setDueDate] = useState(['', ''])
+  const [dueDate, setDueDate] = useState({ month: '', year: '' })
   const [owner, setOwner] = useState('')
   const [cvc, setCvc] = useState('')
-  const [password, setPassword] = useState(['', ''])
+  const [password, setPassword] = useState({
+    firstPassword: '',
+    secondPassword: '',
+  })
   const [isFormFulfilled, setIsFormFulfilled] = useState(false)
   const [error, setError] = useState([false, false])
 
   useEffect(() => {
     setIsFormFulfilled(
       cardNumbers.join('').length === CARD_NUMBER.UNIT_LENGTH * 4 &&
-        dueDate[0].length === DUE_DATE.UNIT_LENGTH &&
-        dueDate[1].length === DUE_DATE.UNIT_LENGTH &&
+        dueDate.month.length === DUE_DATE.UNIT_LENGTH &&
+        dueDate.year.length === DUE_DATE.UNIT_LENGTH &&
         cvc.length === CVC.UNIT_LENGTH &&
-        password[0] &&
-        password[1]
+        password.firstPassword &&
+        password.secondPassword
     )
   }, [cardNumbers, dueDate, owner, cvc, password])
 
@@ -72,16 +75,16 @@ function AddPage() {
     }
   }
 
-  const handleDueDateChange = ({ target: { value } }, index) => {
+  const handleDueDateChange = ({ target: { value } }, key) => {
     if (value.length > DUE_DATE.UNIT_LENGTH) return
 
     setDueDate((prev) => {
-      const newState = [...prev]
-      newState[index] = value
+      const newState = { ...prev }
+      newState[key] = value
       return newState
     })
 
-    if (index === 0) {
+    if (key === 'month') {
       setError((prev) => {
         const newState = [...prev]
         newState[0] = +value > MONTH.MAX || +value < MONTH.MIN
@@ -113,28 +116,18 @@ function AddPage() {
     setCvc(value)
   }
 
-  const handlePasswordFirstChange = ({ target: { value } }) => {
+  const handlePasswordChange = ({ target: { value } }, key) => {
     if (value.length > PASSWORD.UNIT_LENGTH || isNaN(value)) return
 
     setPassword((prev) => {
-      const newState = [...prev]
-      newState[0] = value
+      const newState = { ...prev }
+      newState[key] = value
       return newState
     })
 
     if (value.length >= 1) {
       secondPasswordInputRef.current.focus()
     }
-  }
-
-  const handlePasswordSecondChange = ({ target: { value } }) => {
-    if (value.length > PASSWORD.UNIT_LENGTH || isNaN(value)) return
-
-    setPassword((prev) => {
-      const newState = [...prev]
-      newState[1] = value
-      return newState
-    })
   }
 
   const handleSubmitChange = () => {
@@ -147,15 +140,15 @@ function AddPage() {
 
   return (
     <PageWrapper>
-      <Header backButton={true} headerText={'카드 추가'} />
+      <Header backButton headerText={'카드 추가'} />
       <CardWrapper>
         <Card
           size="small"
           company="우테코"
           cardNumbers={cardNumbers}
           owner={owner || 'NAME'}
-          dueMonth={dueDate[0] || 'MM'}
-          dueYear={dueDate[1] || 'YY'}
+          dueMonth={dueDate.month || 'MM'}
+          dueYear={dueDate.year || 'YY'}
         />
       </CardWrapper>
       <Form
@@ -195,15 +188,17 @@ function AddPage() {
           {
             type: 'number',
             id: 'due-month',
-            value: dueDate[0],
+            value: dueDate.month,
             placeholder: 'MM',
+            key: 'month',
           },
           {
             type: 'number',
             id: 'due-year',
-            value: dueDate[1],
+            value: dueDate.year,
             ref: dueYearInputRef,
             placeholder: 'YY',
+            key: 'year',
           },
         ]}
         error={error[0] || error[1]}
@@ -225,7 +220,7 @@ function AddPage() {
       <Form
         label="보안 코드(CVC/CVV)"
         size={30}
-        questionHelper={true}
+        questionHelper
         inputInfo={[{ type: 'password', id: 'cvc', value: cvc }]}
         onChange={handleCvc}
         helpText="카드 뒷면의 7자리 숫자 중 마지막 3자리"
@@ -234,16 +229,21 @@ function AddPage() {
         label="카드 비밀번호"
         size={12}
         inputInfo={[
-          { type: 'password', id: 'first-password', value: password[0] },
+          {
+            type: 'password',
+            id: 'first-password',
+            value: password.secondPassword,
+            key: 'firstPassword',
+          },
           {
             type: 'password',
             id: 'second-password',
-            value: password[1],
+            value: password.secondPassword,
+            key: 'secondPassword',
             ref: secondPasswordInputRef,
           },
         ]}
-        onChangeFirst={handlePasswordFirstChange}
-        onChangeSecond={handlePasswordSecondChange}
+        onChange={handlePasswordChange}
       />
       <FooterWrapper>
         {isFormFulfilled && (
