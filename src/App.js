@@ -64,6 +64,7 @@ const defaultCardInputState = {
     second: '',
   },
 };
+
 function App() {
   const [cardInput, cardInputDispatch] = useReducer(cardInputReducer, defaultCardInputState);
 
