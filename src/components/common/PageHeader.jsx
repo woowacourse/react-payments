@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const StyledPageHeaderContainer = styled.header`
   padding: 8px 0 22px;

@@ -1,7 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes, { string } from "prop-types";
-import { CREATE_MASKED_CHARACTERS } from "../constants";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
+import { CREATE_MASKED_CHARACTERS } from '../constants';
 
 const CardContainer = styled.div`
   display: flex;
@@ -19,7 +20,7 @@ const SmallCard = styled.div`
   min-height: 133px;
   padding: 14px 16px;
 
-  background: ${(props) => (props.isComplete ? "#00caa5" : "#d2d2d2")};
+  background: ${props => (props.isComplete ? '#00caa5' : '#d2d2d2')};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
@@ -64,12 +65,7 @@ const CardHolderName = styled.p`
 
 const CardExpireDate = styled.p``;
 
-export default function CardPreview({
-  cardNumber,
-  holderName,
-  expireDate,
-  canProceed,
-}) {
+export default function CardPreview({ cardNumber, holderName, expireDate, canProceed }) {
   return (
     <CardContainer>
       <SmallCard isComplete={canProceed}>
@@ -83,7 +79,7 @@ export default function CardPreview({
         <CardBottomSection>
           <CardHolderName>{holderName}</CardHolderName>
           <CardExpireDate>
-            {expireDate[0]} {expireDate[0].length !== 0 && "/"} {expireDate[1]}
+            {expireDate[0]} {expireDate[0].length !== 0 && '/'} {expireDate[1]}
           </CardExpireDate>
         </CardBottomSection>
       </SmallCard>
@@ -92,7 +88,7 @@ export default function CardPreview({
 }
 
 CardPreview.propTypes = {
-  cardNumber: PropTypes.arrayOf(string),
+  cardNumber: PropTypes.arrayOf(PropTypes.string),
   holderName: PropTypes.string,
-  expireDate: PropTypes.arrayOf(string),
+  expireDate: PropTypes.arrayOf(PropTypes.string),
 };

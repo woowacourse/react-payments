@@ -1,10 +1,8 @@
-export const MASKED_CHARACTER = "•";
+export const MASKED_CHARACTER = '•';
 
-export const CREATE_MASKED_CHARACTERS = (repeatCount) =>
-  `${MASKED_CHARACTER} `.repeat(repeatCount).trim();
+export const CREATE_MASKED_CHARACTERS = repeatCount => `${MASKED_CHARACTER} `.repeat(repeatCount).trim();
 
-export const CARD_REGISTER_SUCCESS_MESSAGE =
-  "카드가 정상적으로 등록되었습니다!";
+export const CARD_REGISTER_SUCCESS_MESSAGE = '카드가 정상적으로 등록되었습니다!';
 
 export const CARD_INFO_RULES = {
   NUMBER_UNIT_LENGTH: 4,

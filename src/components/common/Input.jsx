@@ -1,18 +1,18 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 export const StyledInput = styled.input`
   // 텍스트 선택 커서 색상 설정
   caret-color: #000000;
-  color: ${(props) => (props.isComplete ? "#04c09e" : "#525252")};
+  color: ${props => (props.isComplete ? '#04c09e' : '#525252')};
   font-size: 18px;
   font-weight: 600;
   line-height: 21px;
-  text-align: ${(props) => props.textAlign};
+  text-align: ${props => props.textAlign};
 
   background-color: transparent;
-  width: ${(props) => props.width};
+  width: ${props => props.width};
 
   outline: none;
   border: none;
@@ -26,7 +26,7 @@ export const StyledInput = styled.input`
   }
 
   /* Firefox */
-  &[type="number"] {
+  &[type='number'] {
     -moz-appearance: textfield;
   }
   /* ************************** */
@@ -45,14 +45,14 @@ export default Input;
 
 Input.propTypes = {
   name: PropTypes.string,
-  type: PropTypes.oneOf(["text", "number", "password"]),
+  type: PropTypes.oneOf(['text', 'number', 'password']),
   placeholder: PropTypes.string,
   width: PropTypes.string,
 };
 
 Input.defaultProps = {
-  name: "default name",
-  type: "text",
-  width: "70px",
-  textAlign: "center",
+  name: 'default name',
+  type: 'text',
+  width: '70px',
+  textAlign: 'center',
 };

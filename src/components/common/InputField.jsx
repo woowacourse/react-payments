@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledInputField = styled.div`
   display: flex;
@@ -13,16 +13,16 @@ const StyledInputField = styled.div`
 const StyledLabel = styled.label`
   font-size: 12px;
   line-height: 14px;
-  color: ${(props) => (props.isComplete ? "#04c09e" : "#525252")};
+  color: ${props => (props.isComplete ? '#04c09e' : '#525252')};
   letter-spacing: -0.085em;
 `;
 
 const StyledInputWrapper = styled.div`
   display: flex;
-  justify-content: ${(props) => props.align};
+  justify-content: ${props => props.align};
   background: #ecebf1;
   border-radius: 7px;
-  width: ${(props) => props.width};
+  width: ${props => props.width};
   padding: 12px;
 `;
 
@@ -55,10 +55,7 @@ export default function InputField({
 
 InputField.propTypes = {
   labelText: PropTypes.string,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   wrapperWidth: PropTypes.string,
-  horizontalAlign: PropTypes.oneOf(["flex-start", "center", "space-around"]),
+  horizontalAlign: PropTypes.oneOf(['flex-start', 'center', 'space-around']),
 };

@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import Input from "./common/Input.jsx";
-import styled from "styled-components";
-import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants";
+import React, { useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
+
+import Input from './common/Input.jsx';
+
+import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from '../constants';
 
 const StyledInputField = styled.div`
   display: flex;
@@ -14,7 +16,7 @@ const StyledInputField = styled.div`
 const StyledLabel = styled.label`
   font-size: 12px;
   line-height: 14px;
-  color: ${(props) => (props.isComplete ? "#04c09e" : "#525252")};
+  color: ${props => (props.isComplete ? '#04c09e' : '#525252')};
   letter-spacing: -0.085em;
 `;
 
@@ -23,7 +25,7 @@ const StyledInputWrapper = styled.div`
   justify-content: space-around;
   background: #ecebf1;
   border-radius: 7px;
-  width: ${(props) => props.width};
+  width: ${props => props.width};
   padding: 12px;
 `;
 
@@ -40,9 +42,7 @@ export default function CardPasswordInput({ password, onChange }) {
 
   useEffect(() => {
     if (inputRef.current[focusInputIndex].value.length === 1) {
-      const index = password.findIndex(
-        (passwordDigit) => passwordDigit.length !== 1
-      );
+      const index = password.findIndex(passwordDigit => passwordDigit.length !== 1);
       inputRef.current[index]?.focus();
     }
   }, [password, focusInputIndex]);
@@ -53,31 +53,25 @@ export default function CardPasswordInput({ password, onChange }) {
 
   return (
     <StyledInputField>
-      <StyledLabel
-        isComplete={
-          password.join("").length === CARD_INFO_RULES.PASSWORD_LENGTH
-        }
-      >
+      <StyledLabel isComplete={password.join('').length === CARD_INFO_RULES.PASSWORD_LENGTH}>
         카드 비밀번호 앞 두 자리
       </StyledLabel>
       <StyledInputContainer>
-        {Array.from({ length: CARD_INFO_RULES.PASSWORD_LENGTH }).map(
-          (_, index) => (
-            <StyledInputWrapper width="45px">
-              <Input
-                key={index}
-                type="password"
-                value={password[index]}
-                onChange={(e) => onChange(e, index)}
-                width="100%"
-                placeholder={CREATE_MASKED_CHARACTERS(1)}
-                onFocus={() => setFocusInputIndex(index)}
-                isComplete={password[0].length === 1}
-                ref={(element) => (inputRef.current[index] = element)}
-              />
-            </StyledInputWrapper>
-          )
-        )}
+        {Array.from({ length: CARD_INFO_RULES.PASSWORD_LENGTH }).map((_, index) => (
+          <StyledInputWrapper width="45px">
+            <Input
+              key={index}
+              type="password"
+              value={password[index]}
+              onChange={e => onChange(e, index)}
+              width="100%"
+              placeholder={CREATE_MASKED_CHARACTERS(1)}
+              onFocus={() => setFocusInputIndex(index)}
+              isComplete={password[0].length === 1}
+              ref={element => (inputRef.current[index] = element)}
+            />
+          </StyledInputWrapper>
+        ))}
       </StyledInputContainer>
     </StyledInputField>
   );

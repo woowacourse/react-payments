@@ -1,14 +1,14 @@
-import React from "react";
-import Button from "../components/common/Button";
+import React from 'react';
+import Button from '../components/common/Button';
 
 export default {
-  title: "Button",
+  title: 'Button',
   component: Button,
 };
 
-const Template = (args) => <Button {...args} />;
+const Template = args => <Button {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  text: "sample",
+  text: 'sample',
 };
