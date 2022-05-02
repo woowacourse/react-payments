@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const InputWrapper = styled.input`
-  text-align: ${props => props.textAlign};
+  text-align: center;
   width: ${props => InputScaleType[props.scale]}px;
   height: 45px;
   background-color: #ecebf1;
@@ -19,12 +19,12 @@ const InputWrapper = styled.input`
 
 const InputScaleType = {
   large: '318',
-  medium: '84',
+  medium: '70',
   small: '43',
 };
 
-const Input = ({ scale, textAlign = 'center', ...rest }) => {
-  return <InputWrapper scale={scale} textAlign={textAlign} {...rest} />;
+const Input = ({ scale, ...rest }) => {
+  return <InputWrapper scale={scale} {...rest} />;
 };
 
 Input.propTypes = {
