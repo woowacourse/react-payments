@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef } from 'react';
 
 const useControllInput = ({ maxLength }) => {
   const itemRef = useRef([]);
@@ -11,7 +11,7 @@ const useControllInput = ({ maxLength }) => {
   };
 
   const blockCharacter = (target) => {
-    target.value = target.value.replace(/[^\d]/g, "").replace(".", "");
+    target.value = target.value.replace(/[^\d]/g, '').replace('.', '');
   };
 
   const limitInputLength = (target) => {
@@ -19,14 +19,12 @@ const useControllInput = ({ maxLength }) => {
   };
 
   const limitExceptUpperCase = (target) => {
-    target.value = target.value.replace(/[^A-Z\s]*/g, "").replace(".", "");
+    target.value = target.value.replace(/[^A-Z\s]*/g, '').replace('.', '');
   };
 
   const autoFocusForward = (target) => {
     const currentIndex = itemRef.current.indexOf(target);
-    itemRef.current[
-      Math.min(currentIndex + 1, itemRef.current.length - 1)
-    ].focus();
+    itemRef.current[Math.min(currentIndex + 1, itemRef.current.length - 1)].focus();
   };
 
   const autoFocusBackward = (target) => {

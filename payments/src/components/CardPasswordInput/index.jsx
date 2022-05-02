@@ -1,27 +1,27 @@
-import useControllInput from "../../hooks/useControllInput";
-import { Input } from "../elements/Input";
-import InputContainer from "../elements/InputContainer";
-import InputLabel from "../elements/label";
-import "./index.scss";
+import useControllInput from '../../hooks/useControllInput';
+import { Input } from '../elements/Input';
+import InputContainer from '../elements/InputContainer';
+import InputLabel from '../elements/label';
+import './index.scss';
 
 const INPUT_LENGTH = 1;
 const NUM_OF_INPUT = 2;
 const BACKSPACE_KEY_CODE = 8;
 
 const CardPasswordInput = ({ state, updateForm }) => {
-  const { itemRef, controllInput, autoFocusBackward, blockCharacter } =
-    useControllInput({
-      maxLength: INPUT_LENGTH,
-    });
+  const { itemRef, controllInput, autoFocusBackward, blockCharacter } = useControllInput({
+    maxLength: INPUT_LENGTH,
+  });
+
   return (
-    <div className="password__input__container">
+    <div className='password__input__container'>
       <InputLabel>카드비밀번호</InputLabel>
-      <div className="password__inputs">
+      <div className='password__inputs'>
         {new Array(NUM_OF_INPUT).fill().map((_, idx) => (
-          <div className="password__input" key={idx}>
+          <div className='password__input' key={idx}>
             <InputContainer>
               <Input
-                type="text"
+                type='text'
                 ref={(el) => {
                   itemRef.current[idx] = el;
                 }}
@@ -30,15 +30,12 @@ const CardPasswordInput = ({ state, updateForm }) => {
                   blockCharacter(target);
                   controllInput(target);
                   updateForm({
-                    type: "password",
+                    type: 'password',
                     payload: { value: target.value, index: idx },
                   });
                 }}
                 onKeyDown={(e) => {
-                  if (
-                    e.keyCode === BACKSPACE_KEY_CODE &&
-                    e.target.value === ""
-                  ) {
+                  if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === '') {
                     autoFocusBackward(e.target);
                   }
                 }}
@@ -46,11 +43,11 @@ const CardPasswordInput = ({ state, updateForm }) => {
             </InputContainer>
           </div>
         ))}
-        <div className="password__input">
-          <div className="dot"></div>
+        <div className='password__input'>
+          <div className='dot'></div>
         </div>
-        <div className="password__input">
-          <div className="dot"></div>
+        <div className='password__input'>
+          <div className='dot'></div>
         </div>
       </div>
     </div>

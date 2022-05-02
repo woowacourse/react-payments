@@ -1,15 +1,15 @@
-import "./index.scss";
+import './index.scss';
 
-import Card from "../../components/Card";
-import CardNumberInput from "../../components/CardNumberInput";
-import CardPasswordInput from "../../components/CardPasswordInput";
-import ExpiredDateInput from "../../components/ExpiredDateInput";
-import OwnerNameInput from "../../components/OwnerNameInput";
-import SecureCodeInput from "../../components/SecureCodeInput";
-import useCard from "../../hooks/useCard";
-import NextButton from "../../components/NextButton";
-import ColorPicker from "../../components/ColorPicker";
-import { useState } from "react";
+import Card from '../../components/Card';
+import CardNumberInput from '../../components/CardNumberInput';
+import CardPasswordInput from '../../components/CardPasswordInput';
+import ExpiredDateInput from '../../components/ExpiredDateInput';
+import OwnerNameInput from '../../components/OwnerNameInput';
+import SecureCodeInput from '../../components/SecureCodeInput';
+import useCard from '../../hooks/useCard';
+import NextButton from '../../components/NextButton';
+import ColorPicker from '../../components/ColorPicker';
+import { useState } from 'react';
 
 const CardAdd = () => {
   const [form, dispatch] = useCard();
@@ -18,12 +18,12 @@ const CardAdd = () => {
 
   return (
     <>
-      <div className="card-add">
+      <div className='card-add'>
         <header>
-          <button>{"<"}</button>
+          <button>{'<'}</button>
           <p>카드 추가</p>
         </header>
-        <div className="card-add__container">
+        <div className='card-add__contpmainer'>
           <Card state={form} setVisible={setVisible} />
           <form>
             <CardNumberInput state={cardNumber} updateForm={dispatch} />
@@ -35,11 +35,7 @@ const CardAdd = () => {
         </div>
         <NextButton state={form} />
       </div>
-      <ColorPicker
-        visible={visible}
-        setVisible={setVisible}
-        updateForm={dispatch}
-      />
+      <ColorPicker visible={visible} setVisible={setVisible} updateForm={dispatch} />
     </>
   );
 };
