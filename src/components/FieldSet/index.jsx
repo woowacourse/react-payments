@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Label from '../Label/index';
 import ErrorMessage from '../ErrorMessage/index';
 
-const Container = styled.fieldset`
+const FieldSetContainer = styled.fieldset`
   border: none;
 
   > * {
@@ -20,11 +20,11 @@ const Container = styled.fieldset`
 
 const FieldSet = ({ id, description, children, errorMessage, isError }) => {
   return (
-    <Container>
+    <FieldSetContainer>
       <Label id={id} description={description} />
       {children}
       {isError && <ErrorMessage message={errorMessage} />}
-    </Container>
+    </FieldSetContainer>
   );
 };
 

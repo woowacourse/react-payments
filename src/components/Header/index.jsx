@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const Container = styled.header`
+const HeaderWrapper = styled.header`
   display: flex;
   padding: 10px;
 `;
@@ -39,12 +39,12 @@ const Arrow = styled.div`
 
 const Header = ({ title }) => {
   return (
-    <Container>
+    <HeaderWrapper>
       <BackButton type="button">
         <Arrow />
       </BackButton>
       <Title>{title}</Title>
-    </Container>
+    </HeaderWrapper>
   );
 };
 

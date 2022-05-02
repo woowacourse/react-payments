@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Input from '../../Input';
 import FieldSet from '../../FieldSet';
 
-const Container = styled.div`
+const CardOwnerContainer = styled.div`
   padding-top: 30px;
   position: relative;
   width: fit-content;
@@ -25,7 +25,7 @@ const showOwnerNameLength = ownerName => {
 
 const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
   return (
-    <Container>
+    <CardOwnerContainer>
       <MaxNumberIndicator>{showOwnerNameLength(ownerName)}</MaxNumberIndicator>
       <FieldSet
         id="cardOwnerName"
@@ -33,18 +33,16 @@ const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
         errorMessage="이름은 30자 이하 영문이여야 합니다."
         isError={isError}
       >
-        {
-          <Input
-            id="cardOwnerName"
-            scale="large"
-            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-            maxLength={30}
-            value={ownerName}
-            onChange={onChangeOwnerName}
-          />
-        }
+        <Input
+          id="cardOwnerName"
+          scale="large"
+          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          maxLength={30}
+          value={ownerName}
+          onChange={onChangeOwnerName}
+        />
       </FieldSet>
-    </Container>
+    </CardOwnerContainer>
   );
 };
 

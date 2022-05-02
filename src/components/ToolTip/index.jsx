@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
+const ToolTipWrapper = styled.div`
   display: flex;
   position: relative;
   width: fit-content;
@@ -19,7 +19,7 @@ const Container = styled.div`
   }
 `;
 
-const ToolTipContainer = styled.button`
+const QuestionMark = styled.button`
   width: 27px;
   height: 27px;
   border: 1px solid #bababa;
@@ -38,7 +38,7 @@ const ToolTipContainer = styled.button`
   }
 `;
 
-const InformationContainer = styled.div`
+const InformationDiv = styled.div`
   display: none;
   position: absolute;
   left: 40px;
@@ -51,12 +51,12 @@ const InformationContainer = styled.div`
 
 const ToolTip = () => {
   return (
-    <Container>
-      <ToolTipContainer>?</ToolTipContainer>
-      <InformationContainer>
+    <ToolTipWrapper>
+      <QuestionMark>?</QuestionMark>
+      <InformationDiv>
         카드 뒷면 서명란에 인쇄되어 있는 19자리 중 마지막 3자리 숫자 입니다
-      </InformationContainer>
-    </Container>
+      </InformationDiv>
+    </ToolTipWrapper>
   );
 };
 

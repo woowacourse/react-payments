@@ -20,19 +20,17 @@ const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
       errorMessage="유효한 보안코드를 입력해주세요"
       isError={isError}
     >
-      {
-        <SecureCodeInputContainer>
-          <Input
-            id="secureCode"
-            scale="medium"
-            type="password"
-            maxLength={3}
-            value={secureCode}
-            onChange={onChangeSecureCode}
-          />
-          <Tooltip />
-        </SecureCodeInputContainer>
-      }
+      <SecureCodeInputContainer>
+        <Input
+          id="secureCode"
+          scale="medium"
+          type="password"
+          maxLength={3}
+          value={secureCode}
+          onChange={onChangeSecureCode}
+        />
+        <Tooltip />
+      </SecureCodeInputContainer>
     </FieldSet>
   );
 };

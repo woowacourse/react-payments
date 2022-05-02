@@ -25,28 +25,26 @@ const Password = ({
       errorMessage="올바른 비밀번호를 입력해주세요."
       isError={isError}
     >
-      {
-        <PasswordInputContainer>
-          <Input
-            type="password"
-            id="firstPassword"
-            scale="small"
-            maxLength={1}
-            value={firstPassword}
-            onChange={onChangeFirstPassword}
-          />
-          <Input
-            type="password"
-            id="secondPassword"
-            scale="small"
-            maxLength={1}
-            value={secondPassword}
-            onChange={onChangeSecondPassword}
-          />
-          <DotMark />
-          <DotMark />
-        </PasswordInputContainer>
-      }
+      <PasswordInputContainer>
+        <Input
+          type="password"
+          id="firstPassword"
+          scale="small"
+          maxLength={1}
+          value={firstPassword}
+          onChange={onChangeFirstPassword}
+        />
+        <Input
+          type="password"
+          id="secondPassword"
+          scale="small"
+          maxLength={1}
+          value={secondPassword}
+          onChange={onChangeSecondPassword}
+        />
+        <DotMark />
+        <DotMark />
+      </PasswordInputContainer>
     </FieldSet>
   );
 };

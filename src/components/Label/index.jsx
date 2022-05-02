@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const Container = styled.label`
+const LabelWrapper = styled.label`
   color: #525252;
   font-size: 12px;
 `;
 
 const Label = ({ id, description }) => {
-  return <Container htmlFor={id}>{description}</Container>;
+  return <LabelWrapper htmlFor={id}>{description}</LabelWrapper>;
 };
 
 Label.propTypes = {

@@ -2,14 +2,14 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Input from './index';
 
-const Container = styled.div`
+const CardNumberWrapper = styled.div`
   width: fit-content;
   height: fit-content;
   background-color: #ecebf1;
   border-radius: 7px;
 `;
 
-const DashContainer = styled.span`
+const Dash = styled.span`
   width: 10px;
   height: 45px;
   margin: 0 10px;
@@ -27,7 +27,7 @@ const CardNumberInput = ({
   fourthCardNumber,
 }) => {
   return (
-    <Container>
+    <CardNumberWrapper>
       <Input
         scale="medium"
         textAlign="right"
@@ -35,14 +35,14 @@ const CardNumberInput = ({
         onChange={onChangeFirstCardNumber}
         maxLength={4}
       />
-      <DashContainer>-</DashContainer>
+      <Dash>-</Dash>
       <Input
         scale="medium"
         value={secondCardNumber}
         onChange={onChangeSecondCardNumber}
         maxLength={4}
       />
-      <DashContainer>-</DashContainer>
+      <Dash>-</Dash>
       <Input
         scale="medium"
         type="password"
@@ -50,7 +50,7 @@ const CardNumberInput = ({
         onChange={onChangeThirdCardNumber}
         maxLength={4}
       />
-      <DashContainer>-</DashContainer>
+      <Dash>-</Dash>
       <Input
         scale="medium"
         textAlign="left"
@@ -59,7 +59,7 @@ const CardNumberInput = ({
         onChange={onChangeFourthCardNumber}
         maxLength={4}
       />
-    </Container>
+    </CardNumberWrapper>
   );
 };
 

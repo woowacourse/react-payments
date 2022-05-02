@@ -2,14 +2,14 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Input from './index';
 
-const Container = styled.div`
+const ExpiredDateWrapper = styled.div`
   width: fit-content;
   height: fit-content;
   background-color: #ecebf1;
   border-radius: 7px;
 `;
 
-const SlashContainer = styled.span`
+const Slash = styled.span`
   width: 19px;
   height: 27px;
   text-align: center;
@@ -23,7 +23,7 @@ const ExpiredDateInput = ({
   onChangeExpiredYear,
 }) => {
   return (
-    <Container>
+    <ExpiredDateWrapper>
       <Input
         scale="medium"
         textAlign="right"
@@ -32,7 +32,7 @@ const ExpiredDateInput = ({
         value={expiredMonth}
         onChange={onChangeExpiredMonth}
       />
-      <SlashContainer>/</SlashContainer>
+      <Slash>/</Slash>
       <Input
         scale="medium"
         textAlign="left"
@@ -41,7 +41,7 @@ const ExpiredDateInput = ({
         value={expiredYear}
         onChange={onChangeExpiredYear}
       />
-    </Container>
+    </ExpiredDateWrapper>
   );
 };
 

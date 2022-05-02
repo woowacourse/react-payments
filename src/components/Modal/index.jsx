@@ -12,14 +12,14 @@ const Dimmed = styled.div`
   z-index: 10;
 `;
 
-const Container = styled.div``;
+const ModalContainer = styled.div``;
 
 const Modal = ({ children, onClickDimmed }) => {
   return (
-    <Container>
+    <ModalContainer>
       <Dimmed onClick={onClickDimmed} />
       {children}
-    </Container>
+    </ModalContainer>
   );
 };
 

@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import FieldSet from "../../FieldSet";
-import CardNumberInput from "../../Input/CardNumberInput";
+import FieldSet from '../../FieldSet';
+import CardNumberInput from '../../Input/CardNumberInput';
 
 const CardNumber = ({
   firstCardNumber,
@@ -22,18 +22,16 @@ const CardNumber = ({
       errorMessage="유효한 카드 번호를 입력하세요."
       isError={isError}
     >
-      {
-        <CardNumberInput
-          firstCardNumber={firstCardNumber}
-          secondCardNumber={secondCardNumber}
-          thirdCardNumber={thirdCardNumber}
-          fourthCardNumber={fourthCardNumber}
-          onChangeFirstCardNumber={onChangeFirstCardNumber}
-          onChangeSecondCardNumber={onChangeSecondCardNumber}
-          onChangeThirdCardNumber={onChangeThirdCardNumber}
-          onChangeFourthCardNumber={onChangeFourthCardNumber}
-        />
-      }
+      <CardNumberInput
+        firstCardNumber={firstCardNumber}
+        secondCardNumber={secondCardNumber}
+        thirdCardNumber={thirdCardNumber}
+        fourthCardNumber={fourthCardNumber}
+        onChangeFirstCardNumber={onChangeFirstCardNumber}
+        onChangeSecondCardNumber={onChangeSecondCardNumber}
+        onChangeThirdCardNumber={onChangeThirdCardNumber}
+        onChangeFourthCardNumber={onChangeFourthCardNumber}
+      />
     </FieldSet>
   );
 };

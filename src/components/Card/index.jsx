@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { ColorType } from '../../constant';
 
-const Container = styled.div`
+const CardContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -130,7 +130,7 @@ const Card = ({
   onClick,
 }) => {
   return (
-    <Container onClick={onClick}>
+    <CardContainer onClick={onClick}>
       <EmptyCard color={color}>
         <CardTop>
           <CardName>{cardName}</CardName>
@@ -158,7 +158,7 @@ const Card = ({
           </CardBottomInfo>
         </CardBottom>
       </EmptyCard>
-    </Container>
+    </CardContainer>
   );
 };
 

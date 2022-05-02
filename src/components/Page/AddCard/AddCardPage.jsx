@@ -24,7 +24,7 @@ const Container = styled.form`
   position: relative;
 `;
 
-const ButtonContainer = styled.div`
+const NextButtonWrapper = styled.div`
   position: absolute;
   right: 20px;
   bottom: 0;
@@ -175,11 +175,11 @@ const AddCardPage = () => {
         isError={isFirstPasswordError || isSecondPasswordError}
       />
       {isValidatedForm && isValidatedValueLength && (
-        <ButtonContainer>
+        <NextButtonWrapper>
           <NextButton name="submitButton" type="submit">
             다음
           </NextButton>
-        </ButtonContainer>
+        </NextButtonWrapper>
       )}
       {isModalOpened && (
         <Modal onClickDimmed={closeModal}>

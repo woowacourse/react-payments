@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const Container = styled.input`
+const InputWrapper = styled.input`
   text-align: ${props => props.textAlign};
   width: ${props => InputScaleType[props.scale]}px;
   height: 45px;
@@ -24,7 +24,7 @@ const InputScaleType = {
 };
 
 const Input = ({ scale, textAlign = 'center', ...rest }) => {
-  return <Container scale={scale} textAlign={textAlign} {...rest} />;
+  return <InputWrapper scale={scale} textAlign={textAlign} {...rest} />;
 };
 
 Input.propTypes = {
