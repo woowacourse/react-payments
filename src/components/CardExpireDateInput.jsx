@@ -37,7 +37,7 @@ export default function CardExpireDateInput({ expireDate, setExpireDate }) {
         type="text"
         value={expireDate[0]}
         onChange={(e) => handleExpireDateUpdate(e, 0)}
-        onBlur={() => resetError()}
+        onBlur={resetError}
         width="40px"
         isComplete={expireDate[0].length === 2}
         required
@@ -48,7 +48,7 @@ export default function CardExpireDateInput({ expireDate, setExpireDate }) {
         type="text"
         value={expireDate[1]}
         onChange={(e) => handleExpireDateUpdate(e, 1)}
-        onBlur={() => resetError()}
+        onBlur={resetError}
         width="40px"
         isComplete={expireDate[1].length === 2}
         required

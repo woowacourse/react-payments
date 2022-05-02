@@ -32,7 +32,7 @@ export default function CardNumberInput({ cardNumber, setCardNumber }) {
               value={cardNumber[index]}
               onChange={(e) => handleCardNumberUpdate(e, index)}
               placeholder={index <= 1 ? "1 2 3 4" : CREATE_MASKED_CHARACTERS(4)}
-              onBlur={() => resetError()}
+              onBlur={resetError}
               isComplete={
                 cardNumber[index].length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
               }

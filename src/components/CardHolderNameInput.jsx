@@ -52,7 +52,7 @@ export default function CardHolderNameInput({ holderName, setHolderName }) {
         type="text"
         value={holderName}
         onChange={handleHolderNameUpdate}
-        onBlur={() => resetError()}
+        onBlur={resetError}
         width="100%"
         textAlign="left"
         isComplete={holderName !== ""}

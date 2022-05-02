@@ -78,7 +78,7 @@ export default function CardPasswordInput({ password, setPassword }) {
                 onChange={(e) => handlePasswordUpdate(e, index)}
                 width="100%"
                 placeholder={CREATE_MASKED_CHARACTERS(1)}
-                onBlur={() => resetError()}
+                onBlur={resetError}
                 isComplete={password[0].length === 1}
                 maxLength={1}
                 required

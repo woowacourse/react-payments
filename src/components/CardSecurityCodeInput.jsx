@@ -75,7 +75,7 @@ export default function CardSecurityCodeInput({
         type="password"
         value={securityCode}
         onChange={handleSecurityCodeUpdate}
-        onBlur={() => resetError()}
+        onBlur={resetError}
         placeholder={CREATE_MASKED_CHARACTERS(3)}
         width="100%"
         isComplete={
