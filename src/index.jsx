@@ -17,7 +17,7 @@ body {
 
 input {
   font-size: 16px;
-    color: #04c09e;
+  color: #04c09e;
   font-weight: 600;
 }
 `;

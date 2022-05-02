@@ -18,5 +18,5 @@ export const Activated = Template.bind({});
 Activated.args = {
   disabled: false,
   children: '다음',
-  color: '#04C09E',
+  color: '#737373',
 };
