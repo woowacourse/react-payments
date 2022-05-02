@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useModal } from "../hooks/useModal";
 
 import { Button, Card, Modal, PageTitle } from "../components/common";
+import { CARD_TYPES, MODAL_NAME } from "../constants/constants";
 import {
   CardExpireDateInputForm,
   CardNumbersInputForm,
@@ -11,17 +12,6 @@ import {
   CardSelectModal,
   CVCHelperModal,
 } from "../components/cardRegister";
-
-const CARD_TYPES = [
-  { name: "포코", color: "gold" },
-  { name: "준", color: "#04c09e" },
-  { name: "공원", color: "green" },
-  { name: "후이", color: "#9198e5" },
-  { name: "유세지", color: "#AB46D2" },
-  { name: "마르코", color: "#E76E9A" },
-  { name: "아놀드", color: "#FF5F00" },
-  { name: "록바", color: "#FBCD58" },
-];
 
 export const CardRegisterPage = () => {
   const [modalVisibleState, setModalState, modalName] = useModal();
@@ -96,12 +86,12 @@ export const CardRegisterPage = () => {
         cardNumbers={cardNumbers}
         expireDate={expireDate}
         ownerName={ownerName}
-        handleModalVisible={modalSelector("cardType")}
+        handleModalVisible={modalSelector(MODAL_NAME.CARD_TYPE)}
       />
       <CardNumbersInputForm
         cardType={cardType}
         cardNumbers={cardNumbers}
-        handleModalVisible={modalSelector("cardType")}
+        handleModalVisible={modalSelector(MODAL_NAME.CARD_TYPE)}
         handleCardNumbersInput={setCardNumbers}
         handleCardNumberCheck={setCheckInputStateOf("cardNumbers")}
       />
@@ -118,7 +108,7 @@ export const CardRegisterPage = () => {
         CVC={CVC}
         handleCVCInput={setCVC}
         handleCardCVCCheck={setCheckInputStateOf("cardCVC")}
-        handleModalVisible={modalSelector("cardCVC")}
+        handleModalVisible={modalSelector(MODAL_NAME.CARD_CVC)}
       />
       <CardPasswordInputForm
         password={password}
