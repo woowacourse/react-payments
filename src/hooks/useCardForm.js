@@ -106,15 +106,12 @@ const useCardForm = () => {
     },
   };
 
-  const addCard = (values) => {
+  const addCard = async (values) => {
     console.log(values);
   };
 
-  const onSubmit = (values, setIsSubmitting) => {
-    setIsSubmitting(true);
-    addCard(values);
-    alert('제출 성공');
-    setIsSubmitting(false);
+  const onSubmit = async (values) => {
+    await addCard(values);
   };
 
   const onSubmitError = (errors, invalidInputRefs) => {

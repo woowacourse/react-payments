@@ -54,8 +54,12 @@ const useForm = ({ formSchema, onSubmit, onSubmitError }) => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
 
     const invalidFieldNames = Object.keys(errors).filter(
       (name) => errors[name].isError
@@ -77,11 +81,12 @@ const useForm = ({ formSchema, onSubmit, onSubmitError }) => {
       });
 
       onSubmitError(errors, invalidInputRefs);
-
       return;
     }
 
-    onSubmit(values, setIsSubmitting);
+    setIsSubmitting(true);
+    await onSubmit(values);
+    setIsSubmitting(false);
   };
 
   const registerInputProps = (name) => {
