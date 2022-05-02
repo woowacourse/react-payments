@@ -24,11 +24,11 @@ function AddPage() {
   const [owner, setOwner] = useState('')
   const [cvc, setCvc] = useState('')
   const [password, setPassword] = useState(['', ''])
-  const [allRequired, setAllRequired] = useState(false)
+  const [isFormFulfilled, setIsFormFulfilled] = useState(false)
   const [error, setError] = useState([false, false])
 
   useEffect(() => {
-    setAllRequired(
+    setIsFormFulfilled(
       cardNumbers.join('').length >= CARD_NUMBER.UNIT_LENGTH * 4 &&
         dueDate[0].length >= DUE_DATE.UNIT_LENGTH &&
         dueDate[1].length >= DUE_DATE.UNIT_LENGTH &&
@@ -59,7 +59,7 @@ function AddPage() {
     cardNumberInputRefs[index + 1]?.current.focus()
   }
 
-  const handleCardNumber = ({ target: { value } }, index) => {
+  const handleCardNumberChange = ({ target: { value } }, index) => {
     if (value.length > CARD_NUMBER.UNIT_LENGTH || isNaN(value)) return
 
     setCardNumbers((prev) => {
@@ -73,7 +73,7 @@ function AddPage() {
     }
   }
 
-  const handleDueDate = ({ target: { value } }, index) => {
+  const handleDueDateChange = ({ target: { value } }, index) => {
     if (value.length > DUE_DATE.UNIT_LENGTH) return
 
     setDueDate((prev) => {
@@ -102,7 +102,7 @@ function AddPage() {
     }
   }
 
-  const handleOwner = ({ target: { value } }) => {
+  const handleOwnerChange = ({ target: { value } }) => {
     if (value.length > OWNER.MAX_LENGTH) return
 
     setOwner(value)
@@ -114,7 +114,7 @@ function AddPage() {
     setCvc(value)
   }
 
-  const handlePasswordFirst = ({ target: { value } }) => {
+  const handlePasswordFirstChange = ({ target: { value } }) => {
     if (value.length > PASSWORD.UNIT_LENGTH || isNaN(value)) return
 
     setPassword((prev) => {
@@ -128,7 +128,7 @@ function AddPage() {
     }
   }
 
-  const handlePasswordSecond = ({ target: { value } }) => {
+  const handlePasswordSecondChange = ({ target: { value } }) => {
     if (value.length > PASSWORD.UNIT_LENGTH || isNaN(value)) return
 
     setPassword((prev) => {
@@ -138,7 +138,7 @@ function AddPage() {
     })
   }
 
-  const handleSubmit = () => {
+  const handleSubmitChange = () => {
     if (error[0] || error[1]) {
       alert('만료일을 확인해주세요')
       return
@@ -187,7 +187,7 @@ function AddPage() {
             ref: cardNumberInputRefs[3],
           },
         ]}
-        onChange={handleCardNumber}
+        onChange={handleCardNumberChange}
       />
       <Form
         label="만료일"
@@ -208,7 +208,7 @@ function AddPage() {
           },
         ]}
         error={error[0] || error[1]}
-        onChange={handleDueDate}
+        onChange={handleDueDateChange}
       />
       <Form
         label="카드 소유자 이름 (선택)"
@@ -221,7 +221,7 @@ function AddPage() {
             placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
           },
         ]}
-        onChange={handleOwner}
+        onChange={handleOwnerChange}
       />
       <Form
         label="보안 코드(CVC/CVV)"
@@ -243,12 +243,12 @@ function AddPage() {
             ref: secondPasswordInputRef,
           },
         ]}
-        onChangeFirst={handlePasswordFirst}
-        onChangeSecond={handlePasswordSecond}
+        onChangeFirst={handlePasswordFirstChange}
+        onChangeSecond={handlePasswordSecondChange}
       />
       <FooterWrapper>
-        {allRequired && (
-          <Button color={COLORS.MINT} onClick={handleSubmit}>
+        {isFormFulfilled && (
+          <Button color={COLORS.MINT} onClick={handleSubmitChange}>
             다음
           </Button>
         )}
