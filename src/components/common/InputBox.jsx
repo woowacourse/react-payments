@@ -1,17 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
-
-const InputBoxStyle = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 0.375rem;
-  color: ${(props) => props.color || '#d3d3d3'};
-  border-radius: 0.25rem;
-  background-color: ${(props) => props.backgroundColor || '#ecebf1'};
-  width: ${(props) => props.width || 'unset'};
-  justify-content: ${(props) => props.justifyContent || 'unset'};
-  padding: ${(props) => props.padding || '0'};
-`;
+import React from "react";
+import styled from "styled-components";
 
 export const InputBox = ({
   children,
@@ -33,3 +21,15 @@ export const InputBox = ({
     </InputBoxStyle>
   );
 };
+
+const InputBoxStyle = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 0.375rem;
+  color: ${(props) => props.color || "#d3d3d3"};
+  border-radius: 0.25rem;
+  background-color: ${(props) => props.backgroundColor || "#ecebf1"};
+  width: ${(props) => props.width || "unset"};
+  justify-content: ${(props) => props.justifyContent || "unset"};
+  padding: ${(props) => props.padding || "0"};
+`;

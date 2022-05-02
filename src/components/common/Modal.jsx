@@ -1,12 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import styled from 'styled-components';
+import styled from "styled-components";
+
+export const Modal = ({ children, visible, handleVisible }) => {
+  return (
+    <ModalDimmedStyle onClick={handleVisible} isVisible={visible}>
+      <ModalStyle>{children}</ModalStyle>
+    </ModalDimmedStyle>
+  );
+};
 
 const ModalDimmedStyle = styled.div`
   width: 100%;
   height: 100%;
 
-  display: ${(props) => (props.isVisible ? 'flex' : 'none')};
+  display: ${(props) => (props.isVisible ? "flex" : "none")};
   flex-direction: column;
   justify-content: flex-end;
 
@@ -20,6 +28,7 @@ const ModalDimmedStyle = styled.div`
 
   z-index: 5;
 `;
+
 const ModalStyle = styled.div`
   width: 100%;
   height: 220px;
@@ -35,11 +44,3 @@ const ModalStyle = styled.div`
   z-index: 10;
   flex-direction: column;
 `;
-
-export const Modal = ({ children, visible, handleVisible }) => {
-  return (
-    <ModalDimmedStyle onClick={handleVisible} isVisible={visible}>
-      <ModalStyle>{children}</ModalStyle>
-    </ModalDimmedStyle>
-  );
-};
