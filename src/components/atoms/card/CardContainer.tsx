@@ -1,4 +1,5 @@
 import React from 'react';
+import { INPUT } from '../../../constants';
 import { useAppState } from '../../../hooks/hooks';
 import { transformNumToBullet, transformToMMYY } from '../../../utils';
 import Card from './Card';
@@ -20,15 +21,13 @@ function CardContainer() {
   };
 
   const isActive = !!(
-    cardNumber.length === 16 &&
-    expiredPeriod.length === 4 &&
-    name.length > 0 &&
-    cvc.length === 3 &&
-    password[0] &&
-    password[1]
+    cardNumber.length === INPUT.MAX_CARD_NUMBER_LENGTH &&
+    expiredPeriod.length === INPUT.MAX_EXPIRED_PERIOD_LENGTH &&
+    name.length > INPUT.MIN_NAME_LENGTH &&
+    cvc.length === INPUT.MAX_CVC_LENGTH &&
+    password[INPUT.FIRST_PASSWORD] &&
+    password[INPUT.SECOND_PASSWORD]
   );
-
-  console.log('isActive : ', isActive);
 
   return (
     <Card
