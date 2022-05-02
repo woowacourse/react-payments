@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Selector from './Selector';
+import { cardInfoList } from '../../constant';
 
 const Container = styled.div`
   position: absolute;
@@ -34,16 +35,28 @@ const Palette = ({ onClickCardSelector }) => {
   return (
     <Container>
       <SelectorContainer>
-        <Selector color="red" name="포코 카드" onClick={onClickCardSelector('red')} />
-        <Selector color="blue" name="도리 카드" onClick={onClickCardSelector('blue')} />
-        <Selector color="green" name="호프 카드" onClick={onClickCardSelector('green')} />
-        <Selector color="purple" name="공원 카드" onClick={onClickCardSelector('purple')} />
+        {cardInfoList
+          .filter((_, index) => index < 4)
+          .map(card => (
+            <Selector
+              key={card.id}
+              color={card.color}
+              name={card.name}
+              onClick={onClickCardSelector(card.color)}
+            />
+          ))}
       </SelectorContainer>
       <SelectorContainer>
-        <Selector color="mint" name="콜라 카드" onClick={onClickCardSelector('mint')} />
-        <Selector color="pink" name="블링 카드" onClick={onClickCardSelector('pink')} />
-        <Selector color="orange" name="태태 카드" onClick={onClickCardSelector('orange')} />
-        <Selector color="yellow" name="샐리 카드" onClick={onClickCardSelector('yellow')} />
+        {cardInfoList
+          .filter((_, index) => index >= 4)
+          .map(card => (
+            <Selector
+              key={card.id}
+              color={card.color}
+              name={card.name}
+              onClick={onClickCardSelector(card.color)}
+            />
+          ))}
       </SelectorContainer>
     </Container>
   );
