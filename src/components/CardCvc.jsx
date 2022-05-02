@@ -14,7 +14,6 @@ export default function CardCvc() {
   };
 
   const onClickTip = () => {
-    console.log('hi');
     dispatch({ type: TYPES.SET_TIP_MODAL_FLAG, flag: true });
   };
 

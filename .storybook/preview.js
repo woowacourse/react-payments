@@ -1,7 +1,7 @@
-import { useReducer } from 'react';
 import CardContext from '../src/CardContext';
 import useInitialAppValue from '../src/hooks/useInitialAppValue';
-import { initialState } from '../src/reducers/card.initialState';
+import initialState from '../src/reducers/card.initialState';
+import reducer from '../src/reducers/card.reducer';
 
 initialState.dispatch = () => null;
 
