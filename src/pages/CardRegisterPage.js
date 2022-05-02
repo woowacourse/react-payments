@@ -134,7 +134,7 @@ export const CardRegisterPage = () => {
         {modalVisible && loadModal()}
       </Modal>
 
-      <Button disabled={allCompleted ? false : true}>다음</Button>
+      <Button disabled={!allCompleted}>다음</Button>
     </>
   );
 };

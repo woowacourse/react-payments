@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const CardBox = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ const SmallCard = styled.div`
   width: 208px;
   height: 130px;
 
-  background: ${(props) => props.backgroundColor || '#D2D2D2'};
+  background: ${(props) => props.backgroundColor || "#D2D2D2"};
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -94,9 +94,12 @@ export const Card = ({
   ownerName,
   handleModalVisible,
 }) => {
+  const cardOwnerName = ownerName || "NAME";
+  const cardExpireMonth = expireDate.month || "MM";
+  const cardExpireYear = expireDate.year || "YY";
   const formattedCardNumbers = Object.values(cardNumbers)
-    .map((number, idx) => (idx <= 1 ? number : '•'.repeat(number.length)))
-    .join(' ');
+    .map((number, idx) => (idx <= 1 ? number : "•".repeat(number.length)))
+    .join(" ");
 
   return (
     <CardBox>
@@ -112,10 +115,9 @@ export const Card = ({
             <CardNumbersText>{formattedCardNumbers}</CardNumbersText>
           </CardBottom__number>
           <CardBottom__info>
-            <CardText>{ownerName ? ownerName : 'NAME'}</CardText>
+            <CardText>{cardOwnerName}</CardText>
             <CardText>
-              {expireDate.month ? expireDate.month : 'MM'}/
-              {expireDate.year ? expireDate.year : 'YY'}
+              {cardExpireMonth}/{cardExpireYear}
             </CardText>
           </CardBottom__info>
         </CardBottom>
