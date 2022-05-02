@@ -15,29 +15,26 @@ function Input({
   validators,
   optional,
 }) {
-  const checkValidation = (event, targetValue) => {
-    if (validators.isNaN && Number.isNaN(+targetValue)) {
-      event.target.value = targetValue.substring(0, value.length - 1);
+  const checkValidation = (inputValue) => {
+    if (validators.isNotNumber && validators.isNotNumber(+inputValue)) {
       throw new Error(ERROR_MESSAGE.NOT_NUMBER);
     }
 
-    if (validators.isOverMaxLength && validators.isOverMaxLength(targetValue, length)) {
-      event.target.value = targetValue.substring(0, length);
+    if (validators.isOverMaxLength && validators.isOverMaxLength(inputValue, length)) {
       throw new Error(ERROR_MESSAGE.OVER_MAX_LENGTH);
     }
 
-    if (validators.isOutOfRange && validators.isOutOfRange(min, max, +targetValue)) {
-      if (targetValue === '') return;
-      event.target.value = targetValue.substring(0, targetValue.length - 1);
+    if (validators.isOutOfRange && validators.isOutOfRange(min, max, +inputValue)) {
+      if (inputValue === '') return;
       throw new Error(ERROR_MESSAGE.INVALID_MONTH_RANGE);
     }
   };
 
   const handleChange = (event) => {
-    const targetValue = event.target.value;
+    const inputValue = event.target.value;
     try {
-      checkValidation(event, targetValue);
-      updateCardForm(name, targetValue);
+      checkValidation(inputValue);
+      updateCardForm(name, inputValue);
     } catch (error) {
       alert(error.message);
     }
