@@ -55,6 +55,8 @@ const GridContainer = styled.div`
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(4, 1fr);
+  height: 100%;
+  overflow-y: auto;
 `;
 
 const cardCompanyList = [
