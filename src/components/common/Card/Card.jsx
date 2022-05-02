@@ -11,9 +11,9 @@ function Card({ isEmpty, handleCardAdd, cardInfo }) {
           '+'
         ) : (
           <>
-            <div className="card-top"></div>
+            <div className="card-top" />
             <div className="card-middle">
-              <div className="small-card__chip"></div>
+              <div className="small-card__chip" />
             </div>
 
             <div className="card-bottom">
