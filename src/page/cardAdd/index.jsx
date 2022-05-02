@@ -3,7 +3,6 @@ import { useState, useCallback, useEffect } from 'react';
 import FormInput from '../../components/common/FormInput';
 import CardPreview from '../../components/CardPreview';
 import Modal from '../../components/common/Modal';
-import CardCompany from '../../components/CardCompany';
 import Header from '../../components/common/Header';
 import Button from '../../components/common/Button';
 import Tooltip from '../../components/common/Tooltip';
@@ -21,6 +20,7 @@ import {
   cardPasswordInputInfoList,
   cardCompanyList,
 } from './data';
+import Circle from '../../components/common/Circle';
 
 const getCardInfoMessage = (company, cardNumber, month, year, ownerName, privacyCode) => {
   const { first, second, third, fourth } = cardNumber;
@@ -191,12 +191,14 @@ const CardAppPage = () => {
         <Modal handleModal={handleModal}>
           <div className="flex-wrap">
             {cardCompanyList.map(({ id, company, theme }) => (
-              <CardCompany
+              <div
                 key={id}
-                company={company}
-                theme={theme}
-                handleCompanyClick={handleCompanyClick}
-              />
+                className="modal-item-container"
+                onClick={() => handleCompanyClick(company, theme)}
+              >
+                <Circle theme={theme} />
+                <span className="modal-item-name">{company}</span>
+              </div>
             ))}
           </div>
         </Modal>
