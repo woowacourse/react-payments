@@ -23,7 +23,7 @@ export default function CardNumber({ cardNumbers, onChange, isValid }: CardNumbe
               name="cardNumbers"
               data-index={index}
             />
-            {index !== 3 ? <span className="card-number-delimiter">-</span> : null}
+            <span className="card-number-delimiter" />
           </React.Fragment>
         ))}
       </div>
