@@ -6,6 +6,7 @@ import HelpIconImage from "../assets/images/questionMark.svg";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
 import useValidatedUpdate from "../useValidatedUpdate.jsx";
 import { cardInfoValidations } from "../cardInfoValidations.js";
+import { Hash } from "../passwordHash.js";
 
 const StyledIconContainer = styled.div`
   position: relative;
@@ -60,8 +61,18 @@ export default function CardSecurityCodeInput({
   securityCode,
   setSecurityCode,
 }) {
+  const setHashSecurityCode = (value) => {
+    setSecurityCode(
+      value.length !== 0
+        ? `${value.slice(0, -1)}${Hash.encode(value[value.length - 1])}`
+        : ""
+    );
+  };
   const [handleSecurityCodeUpdate, errorMessage, resetError] =
-    useValidatedUpdate(cardInfoValidations["securityCode"], setSecurityCode);
+    useValidatedUpdate(
+      cardInfoValidations["securityCode"],
+      setHashSecurityCode
+    );
 
   return (
     <InputField

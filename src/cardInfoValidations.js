@@ -1,3 +1,5 @@
+import { Hash } from "./passwordHash";
+
 const trimStartZeroPad = (value) => {
   return value.length > 1 && value.startsWith("0") ? value.slice(1) : value;
 };
@@ -24,7 +26,14 @@ export const cardInfoValidations = {
     errorMessage: "30자 이내의 영문만 입력해주세요.",
   },
   securityCode: {
-    testFunc: (value) => /^\d{0,3}$/.test(value),
+    testFunc: (value) => {
+      const decodedValue = [...value].reduce(
+        (string, digit) => `${string}${Hash.decode(digit)}`,
+        ""
+      );
+
+      return /^\d{0,3}$/.test(decodedValue);
+    },
     errorMessage: "3자 길이의 숫자만 입력해주세요.",
   },
   password: {
