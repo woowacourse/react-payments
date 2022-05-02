@@ -22,8 +22,8 @@ import {
 
 function CardAdd() {
   const { state, onChangeTextField } = useCardState();
-  const { cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword } = state;
-  const { isComplete } = state;
+  const { cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword, isComplete } =
+    state;
 
   const onClickConfirmButton = () => {
     try {
