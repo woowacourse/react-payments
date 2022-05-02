@@ -7,6 +7,8 @@ import TextField from 'components/@common/TextField';
 import { validateCardPassword } from 'validators';
 import { CARD_PASSWORD } from 'constants';
 
+import PasswordMasking from './styles';
+
 function CardPasswordField({ cardPassword, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({
     state: cardPassword,
@@ -25,8 +27,8 @@ function CardPasswordField({ cardPassword, onChange }) {
         onChange={onChange}
         onBlur={handleError}
       />
-      <div className="input-security-masking" />
-      <div className="input-security-masking" />
+      <PasswordMasking />
+      <PasswordMasking />
     </FieldSet>
   );
 }
