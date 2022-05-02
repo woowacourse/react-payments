@@ -1,14 +1,14 @@
-import PrevPageButton from './PrevPageButton';
+import PrevPageSign from './PrevPageSign';
 import { useState } from 'react';
 
 export default {
-  title: 'CardAddPage/PrevPageButton',
-  component: PrevPageButton,
+  title: 'CardAddPage/PrevPageSign',
+  component: PrevPageSign,
 };
 
 const Template = (args) => {
   const [page, setPage] = useState(args.page);
-  return <PrevPageButton setPage={setPage} page={page} />;
+  return <PrevPageSign setPage={setPage} />;
 };
 
 export const Default = Template.bind({});

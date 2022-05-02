@@ -1,6 +1,6 @@
 import { PAGES } from 'constants';
 
-function PrevPageButton({ setPage, page }) {
+function PrevPageSign({ setPage }) {
   const handleClick = () => {
     setPage(PAGES.LIST);
   };
@@ -8,4 +8,4 @@ function PrevPageButton({ setPage, page }) {
   return <div className="prev-page-button" onClick={handleClick} />;
 }
 
-export default PrevPageButton;
+export default PrevPageSign;

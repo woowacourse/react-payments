@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Header from '../components/Header/Header';
 import Card from 'components/common/Card/Card';
 import PageTitle from 'components/common/PageTitle/PageTitle';
-import NextPageButton from 'components/common/NextPageButton/NextPageButton';
+import Button from 'components/common/Button/Button';
 
 import CardInputForm from 'components/CardInputForm/CardInputForm';
 import CardNumber from 'components/CardNumber/CardNumber';
@@ -12,7 +12,7 @@ import CardOwner from 'components/CardOwner/CardOwner';
 import CVC from 'components/CVC/CVC';
 import Tooltip from 'components/Tooltip/Tooltip';
 import CardPassword from 'components/CardPassword/CardPassword';
-import PrevPageButton from 'components/PrevPageButton/PrevPageButton';
+import PrevPageSign from 'components/PrevPageSign/PrevPageSign';
 
 function CardAddPage({ setPage, page }) {
   const [cardInfo, setCardInfo] = useState({
@@ -31,7 +31,7 @@ function CardAddPage({ setPage, page }) {
   return (
     <div className="app">
       <Header>
-        <PrevPageButton setPage={setPage} page={page} />
+        <PrevPageSign setPage={setPage} />
         <PageTitle title="카드추가" />
       </Header>
       <Card isEmpty={false} cardInfo={cardInfo} />
@@ -42,7 +42,7 @@ function CardAddPage({ setPage, page }) {
         <CVC cardInfo={cardInfo} setCardInfo={setCardInfo} />
         <Tooltip />
         <CardPassword cardInfo={cardInfo} setCardInfo={setCardInfo} />
-        <NextPageButton text="다음" />
+        <Button text="다음" />
       </CardInputForm>
     </div>
   );

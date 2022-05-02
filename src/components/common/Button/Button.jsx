@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-function NextPageButton({ text }) {
+function Button({ text }) {
   return (
     <div className="button-box">
       <button type="submit" className="button-text next-page-button">
@@ -10,8 +10,8 @@ function NextPageButton({ text }) {
   );
 }
 
-export default NextPageButton;
+export default Button;
 
-NextPageButton.propTypes = {
+Button.propTypes = {
   text: PropTypes.string.isRequired,
 };
