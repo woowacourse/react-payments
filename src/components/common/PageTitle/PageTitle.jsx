@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 function PageTitle({ title }) {
-  return <h2 className="page-title">{title}</h2>;
+  return <h1 className="page-title">{title}</h1>;
 }
 
 export default PageTitle;
