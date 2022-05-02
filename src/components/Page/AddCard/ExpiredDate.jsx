@@ -1,7 +1,7 @@
-import React from "react";
-import FieldSet from "../../FieldSet";
-import ExpiredDateInput from "../../Input/ExpiredDateInput";
-import PropTypes from "prop-types";
+import React from 'react';
+import FieldSet from '../../FieldSet';
+import ExpiredDateInput from '../../Input/ExpiredDateInput';
+import PropTypes from 'prop-types';
 
 const ExpiredDate = ({
   expiredMonth,
@@ -30,6 +30,7 @@ const ExpiredDate = ({
 };
 
 ExpiredDate.propTypes = {
+  expiredMonth: PropTypes.string,
   expiredYear: PropTypes.string,
   onChangeExpiredMonth: PropTypes.func,
   onChangeExpiredYear: PropTypes.func,

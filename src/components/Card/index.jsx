@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import { ColorType } from "../../constant";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { ColorType } from '../../constant';
 
 const Card = ({
   name,
-  color = "red",
+  color = 'red',
   expiredMonth,
   expiredYear,
   cardName,
@@ -28,16 +28,12 @@ const Card = ({
             {secondCardNumber && <span>{secondCardNumber}</span>}
             {thirdCardNumber && (
               <span>
-                {Array.from({ length: thirdCardNumber.length }).map(
-                  (_, index) => "•"
-                )}
+                {Array.from({ length: thirdCardNumber.length }).map(() => '•')}
               </span>
             )}
             {fourthCardNumber && (
               <span>
-                {Array.from({ length: fourthCardNumber.length }).map(
-                  (_, index) => "•"
-                )}
+                {Array.from({ length: fourthCardNumber.length }).map(() => '•')}
               </span>
             )}
           </CardNumbers>
@@ -57,13 +53,16 @@ const Card = ({
 };
 
 Card.propTypes = {
+  color: PropTypes.string,
   cardName: PropTypes.string,
   name: PropTypes.string,
-  expiredDate: PropTypes.string,
+  expiredMonth: PropTypes.string,
+  expiredYear: PropTypes.string,
   firstCardNumber: PropTypes.string,
   secondCardNumber: PropTypes.string,
   thirdCardNumber: PropTypes.string,
   fourthCardNumber: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 const Container = styled.div`

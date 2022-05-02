@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import FieldSet from "../../FieldSet";
-import Input from "../../Input";
-import DotMark from "../../DotMark";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import FieldSet from '../../FieldSet';
+import Input from '../../Input';
+import DotMark from '../../DotMark';
+import PropTypes from 'prop-types';
 
 const Password = ({
   firstPassword,
@@ -45,7 +45,7 @@ const Password = ({
   );
 };
 
-Password.propType = {
+Password.propTypes = {
   firstPassword: PropTypes.string,
   secondPassword: PropTypes.string,
   onChangeFirstPassword: PropTypes.func,

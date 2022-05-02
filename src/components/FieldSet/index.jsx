@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import Label from "../Label/index";
-import ErrorMessage from "../ErrorMessage/index";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import Label from '../Label/index';
+import ErrorMessage from '../ErrorMessage/index';
 
 const FieldSet = ({ id, description, children, errorMessage, isError }) => {
   return (
@@ -19,6 +19,7 @@ FieldSet.propTypes = {
   description: PropTypes.string,
   errorMessage: PropTypes.string,
   children: PropTypes.element,
+  isError: PropTypes.bool,
 };
 
 const Container = styled.fieldset`
