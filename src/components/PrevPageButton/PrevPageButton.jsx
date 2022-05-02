@@ -1,6 +1,6 @@
 import { PAGES } from 'constants';
 
-function PrevPageButton({ setPage }) {
+function PrevPageButton({ setPage, page }) {
   const handleClick = () => {
     setPage(PAGES.LIST);
   };

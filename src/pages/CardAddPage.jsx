@@ -13,7 +13,7 @@ import Tooltip from 'components/Tooltip/Tooltip';
 import CardPassword from 'components/CardPassword/CardPassword';
 import PrevPageButton from 'components/PrevPageButton/PrevPageButton';
 
-function CardAddPage({ setPage }) {
+function CardAddPage({ setPage, page }) {
   const [cardInfo, setCardInfo] = useState({
     number1: '',
     number2: '',
@@ -29,7 +29,7 @@ function CardAddPage({ setPage }) {
 
   return (
     <div className="app">
-      <PrevPageButton setPage={setPage} />
+      <PrevPageButton setPage={setPage} page={page} />
       <PageTitle title="카드추가" />
       <Card isEmpty={false} cardInfo={cardInfo} />
       <CardInputForm cardInfo={cardInfo}>

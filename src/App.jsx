@@ -9,7 +9,7 @@ function App() {
   return page === PAGES.LIST ? (
     <CardListPage setPage={setPage} />
   ) : (
-    <CardAddPage setPage={setPage} />
+    <CardAddPage setPage={setPage} page={page} />
   );
 }
 
