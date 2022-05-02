@@ -17,6 +17,14 @@ const CARD_CATEGORY = [
 const ColorPicker = ({ visible, setVisible, updateForm }) => {
   const modalCotnets = useRef(null);
 
+  const pickColor = (name, color) => {
+    setVisible(false);
+    updateForm({
+      type: "pickColor",
+      payload: { cardName: name, color },
+    });
+  };
+
   return (
     <ModalContainer
       contentsRef={modalCotnets}
@@ -29,7 +37,9 @@ const ColorPicker = ({ visible, setVisible, updateForm }) => {
             key={card.color}
             name={card.name}
             color={card.color}
-            updateForm={updateForm}
+            onClick={() => {
+              pickColor(card.name, card.color);
+            }}
             setVisible={setVisible}
           />
         ))}
