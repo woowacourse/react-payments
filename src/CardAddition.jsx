@@ -29,7 +29,7 @@ function CardAddition() {
     dispatch,
   } = useContext(CardContext);
 
-  const validateAllInputs = () => {
+  const isAllInputValidated = () => {
     try {
       validator.checkCardCompany(cardCompanyIndex);
       validator.checkCardNumber(cardNumber);
@@ -38,9 +38,9 @@ function CardAddition() {
       validator.checkCardCvc(cardCvc);
       validator.checkCardPassword(cardPassword);
 
-      return false;
-    } catch (error) {
       return true;
+    } catch (error) {
+      return false;
     }
   };
 
@@ -82,7 +82,7 @@ function CardAddition() {
       <CardOwner color={cardColor} />
       <CardCvc color={cardColor} />
       <CardPassword color={cardColor} />
-      <MoveButton onClick={submitCard} disabled={validateAllInputs()} color={cardColor}>
+      <MoveButton onClick={submitCard} disabled={!isAllInputValidated()} color={cardColor}>
         다음
       </MoveButton>
       <CardListModal />
