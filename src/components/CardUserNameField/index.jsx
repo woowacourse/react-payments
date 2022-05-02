@@ -3,6 +3,7 @@ import useErrorMessage from 'hooks/useErrorMessage';
 
 import FieldSet from 'components/@common/FieldSet';
 import TextField from 'components/@common/TextField';
+import InputLengthText from 'components/@common/InputLengthText';
 
 import { validateUserName } from 'validators';
 import { USER_NAME } from 'constants';
@@ -23,7 +24,8 @@ function CardUserNameField({ userName, onChange }) {
         onChange={onChange}
         onBlur={handleError}
       />
-      <div className="input-length-text">{`${userName.length} / ${USER_NAME.MAX_LENGTH}`}</div>
+
+      <InputLengthText maxLength={USER_NAME.MAX_LENGTH}>{userName.length}</InputLengthText>
     </FieldSet>
   );
 }
