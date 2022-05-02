@@ -3,8 +3,7 @@ import * as S from '../styles.js';
 import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
-
-import CARD_COMPANIES from '../constants';
+import { CARD_COMPANIES } from '../constants';
 
 export default function CardCvc() {
   const { cardCvc, cardCvcErrorMessage, cardCompanyIndex, dispatch } = useContext(CardContext);

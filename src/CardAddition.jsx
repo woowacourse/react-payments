@@ -11,7 +11,7 @@ import NextButton from './components/NextButton';
 import CardContext from './CardContext';
 import CardListModal from './components/CardListModal';
 import validator from '../src/validations/validator';
-import CARD_COMPANIES from './constants';
+import { CARD_COMPANIES } from './constants';
 
 const CardAdditionContainer = styled.div`
   height: 100%;

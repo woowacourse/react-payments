@@ -3,13 +3,14 @@ import * as S from '../styles.js';
 import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
+import { ACTION_TYPE } from '../constants/index.js';
 
 export default function CardNumber({ color }) {
   const { cardNumber, cardNumberErrorMessage, cardCompanyIndex, dispatch } =
     useContext(CardContext);
 
   const onChangeInput = (index) => (e) => {
-    dispatch({ type: 'SET_CARD_NUMBER', value: e.target.value, index });
+    dispatch({ type: ACTION_TYPE.SET_CARD_NUMBER, value: e.target.value, index });
   };
 
   const onFocusInput = () => {

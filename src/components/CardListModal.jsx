@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from 'react';
 import CardCompany from './CardCompany';
 import Dimmer from './Dimmer';
 import ToastModal from './ToastModal';
-import CARD_COMPANIES from '../constants/index';
+import { CARD_COMPANIES } from '../constants/index';
 import CardContext from '../CardContext';
 
 export default function CardListModal() {

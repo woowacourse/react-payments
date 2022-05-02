@@ -1,3 +1,5 @@
+import { ACTION_TYPE } from '../constants';
+
 export const initialState = {
   cardNumber: ['', '', '', ''],
   cardNumberErrorMessage: '',
@@ -15,7 +17,7 @@ export const initialState = {
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case 'SET_CARD_NUMBER': {
+    case ACTION_TYPE.SET_CARD_NUMBER: {
       const cardNumber = [...state.cardNumber];
       const { value, index } = action;
 
