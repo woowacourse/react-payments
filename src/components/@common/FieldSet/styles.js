@@ -1,12 +1,13 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-import { COLORS } from 'styles/theme';
+import { COLORS, BRAND_COLORS } from 'styles/theme';
 
 const CONTAINER_STYLES = {
   PROPS_ERROR_MESSAGE: css`
     input {
       border: 1px solid ${COLORS.cornflowerLilac};
+      background-color: ${COLORS.fairPink};
     }
   `,
 };
@@ -41,7 +42,7 @@ const InputContainer = styled.div`
 
 const ErrorMessage = styled.div`
   font-size: 0.75rem;
-  color: ${COLORS.bittersweet};
+  color: ${BRAND_COLORS.danger};
 `;
 
 export { Container, InputTitle, InputContainer, ErrorMessage };

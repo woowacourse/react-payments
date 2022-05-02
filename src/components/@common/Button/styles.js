@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 
-import { BRAND_COLOR, COLORS, LAYOUT } from 'styles/theme';
+import { BRAND_COLORS, COLORS, LAYOUT } from 'styles/theme';
 
 const Container = styled.button`
   border: none;
   border-radius: ${LAYOUT.BORDER_RADIUS};
   padding: 0.714rem 1.429rem;
-  background-color: ${BRAND_COLOR.accent};
-  color: ${BRAND_COLOR.accentFont};
+  background-color: ${BRAND_COLORS.accent};
+  color: ${BRAND_COLORS.accentFont};
 
   &:hover {
     filter: brightness(1.2);
