@@ -25,7 +25,7 @@ function LabeledInput({
     setTempValue(target.value);
   };
 
-  const isShowInvalidMessage = () => {
+  const isValidInput = () => {
     if (isMultipleInput(countInput)) {
       return inputProps.isValid || value.join('').length === 0;
     }
@@ -72,7 +72,7 @@ function LabeledInput({
           />
         )}
       </LabeledInputBody>
-      <LabeledInputFooter>{isShowInvalidMessage() ? '' : invalidMessage}</LabeledInputFooter>
+      <LabeledInputFooter>{isValidInput() ? '' : invalidMessage}</LabeledInputFooter>
     </LabeledInputContainer>
   );
 }
