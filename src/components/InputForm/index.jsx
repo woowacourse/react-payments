@@ -6,6 +6,7 @@ import { objectToString } from '../../utils/util';
 import { uid } from 'react-uid';
 import { checkFormCompletion, checkFormValidation, isNumberInRange } from './validation';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
+import { DISPATCH_TYPE } from '../../constants';
 
 const inputCounts = [0, 4, 6, 7, 8];
 function InputForm({
@@ -22,7 +23,7 @@ function InputForm({
     } = e;
 
     if (isNumberInRange(cardNumber, maxLength)) {
-      cardInputDispatch({ type: 'CHANGE_CARD_NUMBER', payload: { cardNumber, key } });
+      cardInputDispatch({ type: DISPATCH_TYPE.CHANGE_CARD_NUMBER, payload: { cardNumber, key } });
     }
 
     if (cardNumber.length === maxLength) {
@@ -36,7 +37,7 @@ function InputForm({
     } = e;
 
     if (isNumberInRange(date, maxLength)) {
-      cardInputDispatch({ type: 'CHANGE_EXPIRATION_DATE', payload: { date, key } });
+      cardInputDispatch({ type: DISPATCH_TYPE.CHANGE_EXPIRATION_DATE, payload: { date, key } });
     }
 
     if (date.length === maxLength) {
@@ -51,7 +52,7 @@ function InputForm({
 
     if (isAlphabetOrSpace(ownerName)) {
       cardInputDispatch({
-        type: 'CHANGE_OWNER_NAME',
+        type: DISPATCH_TYPE.CHANGE_OWNER_NAME,
         payload: { ownerName: ownerName.toUpperCase() },
       });
     }
@@ -68,7 +69,7 @@ function InputForm({
 
     if (isNumberInRange(securityCode, maxLength)) {
       cardInputDispatch({
-        type: 'CHANGE_SECURITY_CODE',
+        type: DISPATCH_TYPE.CHANGE_SECURITY_CODE,
         payload: { securityCode },
       });
     }
@@ -85,7 +86,7 @@ function InputForm({
 
     if (isNumberInRange(password, maxLength)) {
       cardInputDispatch({
-        type: 'CHANGE_PASSWORD',
+        type: DISPATCH_TYPE.CHANGE_PASSWORD,
         payload: { password, key },
       });
     }
