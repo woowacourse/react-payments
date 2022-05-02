@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { CardNumber, ExpiredDate, CardOwnerName, SecureCode, Password } from './index';
 
-import Button from '../../Button';
+import NextButton from '../../Button';
 import Header from '../../Header';
 import {
   checkExpiredMonth,
@@ -176,9 +176,9 @@ const AddCardPage = () => {
       />
       {isValidatedForm && isValidatedValueLength && (
         <ButtonContainer>
-          <Button name="submitButton" type="submit">
+          <NextButton name="submitButton" type="submit">
             다음
-          </Button>
+          </NextButton>
         </ButtonContainer>
       )}
       {isModalOpened && (

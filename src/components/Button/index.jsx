@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Container = styled.button`
   width: 44px;
@@ -13,13 +13,14 @@ const Container = styled.button`
   cursor: pointer;
 `;
 
-const Button = ({ children, ...rest }) => {
+const NextButton = ({ children, ...rest }) => {
   return <Container {...rest}>{children}</Container>;
 };
-Button.propTypes = {
+
+NextButton.propTypes = {
   children: PropTypes.string,
   type: PropTypes.string,
   name: PropTypes.string,
 };
 
-export default Button;
+export default NextButton;
