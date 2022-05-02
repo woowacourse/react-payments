@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-import { isBackspace } from '../../utils/commons';
-import useObjectRef from '../../hooks/useObjectRef';
-import useFormSchema from '../../hooks/useFormSchema';
+import { useState } from 'react';
+import { isBackspace } from '../utils/commons';
+import useObjectRef from './useObjectRef';
+import useFormSchema from './useFormSchema';
 
-const Form = ({ children, formSchema, onSubmit, onSubmitError }) => {
+// formSchema를 useFormSchema를 이용하여 사용 가능한 형태로 분해
+// onChange, onKeyDown으로 에러 체크 및 포커싱 지원
+// 외부에서 정의한 onSubmit, onSubmitError 사용하여 handleSubmit 생성
+const useForm = ({ formSchema, onSubmit, onSubmitError }) => {
   const {
     values,
     setValues,
@@ -91,20 +94,13 @@ const Form = ({ children, formSchema, onSubmit, onSubmitError }) => {
     };
   };
 
-  return (
-    <>
-      {children({
-        values,
-        isSubmitting,
-        handleChange,
-        handleKeyDown,
-        handleSubmit,
-        errors,
-        inputRefs: ref,
-        registerInputProps,
-      })}
-    </>
-  );
+  return {
+    values,
+    isSubmitting,
+    handleSubmit,
+    errors,
+    registerInputProps,
+  };
 };
 
-export default Form;
+export default useForm;
