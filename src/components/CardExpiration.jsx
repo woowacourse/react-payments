@@ -1,10 +1,6 @@
 import React, { useContext } from 'react';
 
-import Container from '../styles/Container';
-import InputTitle from '../styles/InputTitle';
-import InputBox from '../styles/InputBox';
-import InputBasic from '../styles/InputBasic';
-import InputContainer from '../styles/InputContainer';
+import * as S from '../styles.js';
 import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
@@ -17,11 +13,11 @@ export default function CardExpiration({ color }) {
   };
 
   return (
-    <Container>
-      <InputTitle>만료일</InputTitle>
-      <InputBox>
-        <InputContainer width="40%">
-          <InputBasic
+    <S.Container>
+      <S.InputTitle>만료일</S.InputTitle>
+      <S.InputBox>
+        <S.InputContainer width="40%">
+          <S.InputBasic
             type="text"
             placeholder="MM"
             width="48%"
@@ -30,7 +26,7 @@ export default function CardExpiration({ color }) {
             value={cardExpiration[0]}
             onChange={onChangeInput(0)}
           />
-          <InputBasic
+          <S.InputBasic
             type="text"
             placeholder="YY"
             width="48%"
@@ -39,8 +35,8 @@ export default function CardExpiration({ color }) {
             value={cardExpiration[1]}
             onChange={onChangeInput(1)}
           />
-        </InputContainer>
-      </InputBox>
+        </S.InputContainer>
+      </S.InputBox>
       <ErrorMessage
         value={cardExpiration}
         validate={validator.checkCardExpiration}
@@ -48,6 +44,6 @@ export default function CardExpiration({ color }) {
       >
         {cardExpirationErrorMessage}
       </ErrorMessage>
-    </Container>
+    </S.Container>
   );
 }

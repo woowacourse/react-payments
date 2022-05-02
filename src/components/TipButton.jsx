@@ -15,6 +15,6 @@ const TibButtonStyled = styled.div`
   font-size: 20px;
 `;
 
-export default function TipButton() {
-  return <TibButtonStyled>?</TibButtonStyled>;
+export default function TipButton({ children }) {
+  return <TibButtonStyled>{children}</TibButtonStyled>;
 }

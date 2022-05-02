@@ -1,11 +1,7 @@
 import React, { useContext } from 'react';
 
-import Container from '../styles/Container';
-import InputTitle from '../styles/InputTitle';
-import InputBox from '../styles/InputBox';
-import InputBasic from '../styles/InputBasic';
+import * as S from '../styles.js';
 import TipButton from './TipButton';
-import InputContainer from '../styles/InputContainer';
 import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
@@ -22,20 +18,20 @@ export default function CardCvc() {
   const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
 
   return (
-    <Container>
-      <InputTitle>보안코드(CVC/CVV)</InputTitle>
-      <InputBox>
-        <InputContainer width="23%">
-          <InputBasic
+    <S.Container>
+      <S.InputTitle>보안코드(CVC/CVV)</S.InputTitle>
+      <S.InputBox>
+        <S.InputContainer width="23%">
+          <S.InputBasic
             type="password"
             maxLength="3"
             value={cardCvc}
             color={cardColor}
             onChange={onChangeInput}
           />
-        </InputContainer>
-        <TipButton />
-      </InputBox>
+        </S.InputContainer>
+        <TipButton>?</TipButton>
+      </S.InputBox>
       <ErrorMessage
         value={cardCvc}
         validate={validator.checkCardCvc}
@@ -43,6 +39,6 @@ export default function CardCvc() {
       >
         {cardCvcErrorMessage}
       </ErrorMessage>
-    </Container>
+    </S.Container>
   );
 }

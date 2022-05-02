@@ -1,16 +1,12 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import Container from '../styles/Container';
-import InputTitle from '../styles/InputTitle';
-import InputBox from '../styles/InputBox';
-import InputBasic from '../styles/InputBasic';
-import InputContainer from '../styles/InputContainer';
+import * as S from '../styles.js';
 import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
 
-const ExtendedInputContainer = styled(InputContainer)`
+const ExtendedInputContainer = styled(S.InputContainer)`
   justify-content: space-between;
 `;
 
@@ -34,11 +30,11 @@ export default function CardNumber({ color }) {
   };
 
   return (
-    <Container>
-      <InputTitle>카드 번호</InputTitle>
-      <InputBox>
+    <S.Container>
+      <S.InputTitle>카드 번호</S.InputTitle>
+      <S.InputBox>
         <ExtendedInputContainer>
-          <InputBasic
+          <S.InputBasic
             width="20%"
             type="text"
             maxLength="4"
@@ -48,7 +44,7 @@ export default function CardNumber({ color }) {
             onFocus={onFocusInput}
           />
           <Hyphen color={color}>-</Hyphen>
-          <InputBasic
+          <S.InputBasic
             width="20%"
             type="text"
             maxLength="4"
@@ -58,7 +54,7 @@ export default function CardNumber({ color }) {
             onFocus={onFocusInput}
           />
           <Hyphen color={color}>-</Hyphen>
-          <InputBasic
+          <S.InputBasic
             width="20%"
             type="password"
             maxLength="4"
@@ -68,7 +64,7 @@ export default function CardNumber({ color }) {
             onFocus={onFocusInput}
           />
           <Hyphen color={color}>-</Hyphen>
-          <InputBasic
+          <S.InputBasic
             width="20%"
             type="password"
             maxLength="4"
@@ -78,7 +74,7 @@ export default function CardNumber({ color }) {
             onFocus={onFocusInput}
           />
         </ExtendedInputContainer>
-      </InputBox>
+      </S.InputBox>
       <ErrorMessage
         value={cardNumber}
         validate={validator.checkCardNumber}
@@ -86,6 +82,6 @@ export default function CardNumber({ color }) {
       >
         {cardNumberErrorMessage}
       </ErrorMessage>
-    </Container>
+    </S.Container>
   );
 }

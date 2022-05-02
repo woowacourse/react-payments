@@ -1,17 +1,14 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import Container from '../styles/Container';
-import InputTitle from '../styles/InputTitle';
-import InputBox from '../styles/InputBox';
-import InputBasic from '../styles/InputBasic';
+import * as S from '../styles.js';
 import Wrapper from './Wrapper';
 import Circle from './Circle';
 import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
 
-const ExtendedInputBox = styled(InputBox)`
+const ExtendedInputBox = styled(S.InputBox)`
   width: 220px;
   justify-content: space-between;
 `;
@@ -24,10 +21,10 @@ export default function CardPassword({ color }) {
   };
 
   return (
-    <Container>
-      <InputTitle>카드 비밀번호</InputTitle>
+    <S.Container>
+      <S.InputTitle>카드 비밀번호</S.InputTitle>
       <ExtendedInputBox>
-        <InputBasic
+        <S.InputBasic
           type="password"
           width="43px"
           maxLength="1"
@@ -35,7 +32,7 @@ export default function CardPassword({ color }) {
           value={cardPassword[0]}
           onChange={onChangeInput(0)}
         />
-        <InputBasic
+        <S.InputBasic
           type="password"
           width="43px"
           maxLength="1"
@@ -57,6 +54,6 @@ export default function CardPassword({ color }) {
       >
         {cardPasswordErrorMessage}
       </ErrorMessage>
-    </Container>
+    </S.Container>
   );
 }

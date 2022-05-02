@@ -1,11 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 
-import Container from '../styles/Container';
-import InputTitle from '../styles/InputTitle';
-import InputBox from '../styles/InputBox';
-import InputBasic from '../styles/InputBasic';
-import InputContainer from '../styles/InputContainer';
+import * as S from '../styles.js';
 import CardContext from '../CardContext';
 import validator from '../validations/validator';
 import ErrorMessage from './ErrorMessage';
@@ -23,7 +19,7 @@ const NameLength = styled.p`
   color: ${(props) => props.color};
 `;
 
-const InputBasicLeft = styled(InputBasic)`
+const InputBasicLeft = styled(S.InputBasic)`
   text-align: left;
   padding-left: 30px;
 `;
@@ -38,15 +34,15 @@ export default function CardOwner({ color }) {
   const nameLengthColor = () => (cardOwner.length > 30 ? '#E24141' : '#525252');
 
   return (
-    <Container>
+    <S.Container>
       <TitleWrapper>
-        <InputTitle marginBottom="0px">카드소유자 이름(선택)</InputTitle>
+        <S.InputTitle marginBottom="0px">카드소유자 이름(선택)</S.InputTitle>
         <NameLength color={nameLengthColor()}>
           <span>{cardOwner.length}</span>/<span>30</span>
         </NameLength>
       </TitleWrapper>
-      <InputBox>
-        <InputContainer>
+      <S.InputBox>
+        <S.InputContainer>
           <InputBasicLeft
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             type="text"
@@ -55,8 +51,8 @@ export default function CardOwner({ color }) {
             value={cardOwner}
             onChange={onChangeInput}
           />
-        </InputContainer>
-      </InputBox>
+        </S.InputContainer>
+      </S.InputBox>
       <ErrorMessage
         value={cardOwner}
         validate={validator.checkCardOwner}
@@ -64,6 +60,6 @@ export default function CardOwner({ color }) {
       >
         {cardOwnerErrorMessage}
       </ErrorMessage>
-    </Container>
+    </S.Container>
   );
 }
