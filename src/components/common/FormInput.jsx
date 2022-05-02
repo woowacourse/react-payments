@@ -8,7 +8,7 @@ const FormInput = ({
   inputInfoList,
   inputValue,
   theme,
-  onChange,
+  handleChange,
   children,
 }) => {
   return (
@@ -21,7 +21,7 @@ const FormInput = ({
             name={name}
             className={`input-basic ${className} font-${theme}`}
             value={isObject(inputValue) ? inputValue[name] : inputValue}
-            onChange={(e) => onChange(e, item)}
+            onChange={(e) => handleChange(e, item)}
             {...rest}
           />
         ))}
@@ -34,7 +34,7 @@ const FormInput = ({
 FormInput.defaultProps = {
   className: '',
   cardInfo: {},
-  onChange: undefined,
+  handleChange: undefined,
 };
 
 FormInput.propTypes = {
@@ -69,7 +69,7 @@ FormInput.propTypes = {
   /**
    * handle change event of input tag
    */
-  onChange: PropTypes.func,
+  handleChange: PropTypes.func,
 };
 
 export default FormInput;

@@ -140,7 +140,7 @@ const CardAppPage = () => {
         inputTitle="카드 번호"
         inputInfoList={cardNumberInputInfoList}
         inputValue={number}
-        onChange={handleChange}
+        handleChange={handleChange}
         theme={theme}
       />
       <FormInput
@@ -149,7 +149,7 @@ const CardAppPage = () => {
         inputTitle="만료일"
         inputInfoList={expiryDateInputInfoList}
         inputValue={expiryDate}
-        onChange={handleChange}
+        handleChange={handleChange}
         theme={theme}
       />
       <FormInput
@@ -157,7 +157,7 @@ const CardAppPage = () => {
         inputTitle="카드 소유자 이름(선택)"
         inputInfoList={cardOwnerNameInputInfoList}
         inputValue={ownerName}
-        onChange={handleChange}
+        handleChange={handleChange}
         theme={theme}
       >
         <div className="owner-name-length">
@@ -168,7 +168,7 @@ const CardAppPage = () => {
         item="privacyCode"
         inputTitle="보안코드(CVC/CVV)"
         inputInfoList={privacyCodeInputInfoList}
-        onChange={handleChange}
+        handleChange={handleChange}
         inputValue={privacyCode}
         theme={theme}
       >
@@ -179,11 +179,11 @@ const CardAppPage = () => {
         inputTitle="카드 비밀번호"
         inputInfoList={cardPasswordInputInfoList}
         inputValue={password}
-        onChange={handleChange}
+        handleChange={handleChange}
         theme={theme}
       />
       {isfullFilled && (
-        <Button theme={theme} className="next-button" onClick={handleClickNextButton}>
+        <Button theme={theme} className="next-button" handleClick={handleClickNextButton}>
           다음
         </Button>
       )}
@@ -195,7 +195,7 @@ const CardAppPage = () => {
                 key={id}
                 company={company}
                 theme={theme}
-                onClickCompany={handleClickCompany}
+                handleClickCompany={handleClickCompany}
               />
             ))}
           </div>

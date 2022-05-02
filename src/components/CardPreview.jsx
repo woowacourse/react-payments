@@ -51,7 +51,7 @@ const CardPreview = ({ cardInfo, isCardFront, handleModal, handleCardPosition })
         )}
         {!company && <div className="card-add-button">+</div>}
       </div>
-      <Button className="change-button" onClick={handleCardPosition}>
+      <Button className="change-button" handleClick={handleCardPosition}>
         {isCardFront ? 'Back' : 'Front'}
       </Button>
     </div>

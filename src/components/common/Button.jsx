@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
-const Button = ({ className, theme, children, onClick }) => {
+const Button = ({ className, theme, children, handleClick }) => {
   return (
-    <button className={`button-box ${className} font-${theme}`} onClick={onClick}>
+    <button className={`button-box ${className} font-${theme}`} onClick={handleClick}>
       {children}
     </button>
   );
@@ -12,7 +12,7 @@ Button.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  onClick: PropTypes.func,
+  handleClick: PropTypes.func,
 };
 
 export default Button;
