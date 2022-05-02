@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import { InputBox } from '../components/common/InputBox';
-import { InputBasic } from '../components/common/InputBasic';
+import { InputBox } from "../components/common/InputBox";
+import { InputBasic } from "../components/common/InputBasic";
 
 export default {
-  title: 'Example/InputBox',
+  title: "Example/InputBox",
   component: InputBox,
 };
 

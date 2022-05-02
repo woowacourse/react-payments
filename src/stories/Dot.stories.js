@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import Dot from '../components/common/Dot';
+import Dot from "../components/common/Dot";
 
 export default {
-  title: 'Example/Dot',
+  title: "Example/Dot",
   component: Dot,
 };
 

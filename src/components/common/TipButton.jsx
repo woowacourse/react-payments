@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const TipButton = ({ onClick, contents, color }) => {
   return (
-    <TipButtonContainerStyle onClick={onClick}>
+    <TipButtonContainerStyle onClick={onClick} color={color}>
       <div>{contents}</div>
     </TipButtonContainerStyle>
   );
@@ -12,7 +12,7 @@ export const TipButton = ({ onClick, contents, color }) => {
 
 const TipButtonContainerStyle = styled.div`
   border-radius: 50%;
-  border: 1px solid #bababa;
+  border: 1px solid ${(props) => props.color || "#bababa"};
   color: ${(props) => props.color || "#bababa"};
   width: 25px;
   height: 25px;
