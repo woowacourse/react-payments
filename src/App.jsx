@@ -2,17 +2,16 @@ import React, { memo } from 'react';
 
 import styled from 'styled-components';
 
-import useCardNumber from './hooks/useCardNumber';
-import useValidDate from './hooks/useValidDate';
-import useCardOwnerName from './hooks/useCardOwnerName';
-import useCVC from './hooks/useCVC';
-import useCardPassword from './hooks/useCardPassword';
-import useModal from './hooks/useModal';
+import {
+  useCardNumber,
+  useValidDate,
+  useCardOwnerName,
+  useCVC,
+  useCardPassword,
+  useModal,
+} from './hooks';
 
-import Modal from './components/Modal';
-import Button from './components/Button';
-import Card from './components/Card';
-import Input from './components/Input';
+import { Modal, Button, Card, Input } from './components';
 
 import { ReactComponent as Arrow } from './assets/arrow.svg';
 
