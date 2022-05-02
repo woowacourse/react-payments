@@ -1,6 +1,6 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 
-const reducer = (state, action) => {
+const updateCard = (state, action) => {
   switch (action.type) {
     case "cardNumber":
       return {
@@ -60,9 +60,8 @@ const useCard = () => {
     cardName: "",
     color: "#d2d2d2",
   };
-  const [form, dispatch] = useReducer(reducer, initState);
 
-  return [form, dispatch];
+  return useReducer(updateCard, initState);
 };
 
 export default useCard;
