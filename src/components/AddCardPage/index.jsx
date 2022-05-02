@@ -29,35 +29,35 @@ const AddCardPage = () => {
   const [isValidatedValueLength, setIsValidatedValueLength] = useState(false);
 
   const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] =
-    useInputValue({ validation: checkNumberOnly });
+    useInputValue({ isValidateInput: checkNumberOnly });
   const [secondCardNumber, isSecondCardNumberError, onChangeSecondCardNumber] =
-    useInputValue({ validation: checkNumberOnly });
+    useInputValue({ isValidateInput: checkNumberOnly });
   const [thirdCardNumber, isThirdCardNumberError, onChangeThirdCardNumber] =
-    useInputValue({ validation: checkNumberOnly });
+    useInputValue({ isValidateInput: checkNumberOnly });
   const [fourthCardNumber, isFourthCardNumberError, onChangeFourthCardNumber] =
-    useInputValue({ validation: checkNumberOnly });
+    useInputValue({ isValidateInput: checkNumberOnly });
 
   const [expiredMonth, isExpiredMonthError, onChangeExpiredMonth] =
-    useInputValue({ validation: checkExpiredMonth });
+    useInputValue({ isValidateInput: checkExpiredMonth });
   const [expiredYear, isExpiredYearError, onChangeExpiredYear] = useInputValue({
-    validation: checkExpiredYear,
+    isValidateInput: checkExpiredYear,
   });
 
   const [ownerName, isOwnerNameError, onChangeOwnerName] = useInputValue({
-    validation: checkOwnerName,
+    isValidateInput: checkOwnerName,
   });
 
   const [secureCode, isSecureCodeError, onChangeSecureCode] = useInputValue({
-    validation: checkSecureCode,
+    isValidateInput: checkSecureCode,
   });
 
   const [firstPassword, isFirstPasswordError, onChangeFirstPassword] =
     useInputValue({
-      validation: checkPassword,
+      isValidateInput: checkPassword,
     });
   const [secondPassword, isSecondPasswordError, onChangeSecondPassword] =
     useInputValue({
-      validation: checkPassword,
+      isValidateInput: checkPassword,
     });
 
   const [cardType, setCardType] = useState('red');

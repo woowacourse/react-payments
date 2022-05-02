@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-const useInputValue = ({ validation }) => {
+const useInputValue = ({ isValidateInput }) => {
   const [value, setValue] = useState('');
   const [isError, setError] = useState(false);
 
   const onChangeValue = ({ target }) => {
     setValue(target.value);
-    if (validation && !validation(target.value)) {
+    if (isValidateInput && !isValidateInput(target.value)) {
       setError(true);
       return;
     }
