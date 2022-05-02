@@ -5,11 +5,10 @@
     "node": true
   },
   "extends": ["airbnb", "plugin:prettier/recommended"],
-  // "parser": "babel-eslint",
   "rules": {
     "no-unused-vars": "warn",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/react-in-jsx-scope": "warn",
+    "react/react-in-jsx-scope": "off",
     "react/prop-types": "warn",
     "react/require-default-props": "warn",
     "no-param-reassign": "warn",

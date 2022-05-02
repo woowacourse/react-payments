@@ -1,4 +1,3 @@
-import React from 'react';
 import Card from './Card';
 import '../../css/index.css';
 import '../../css/App.css';

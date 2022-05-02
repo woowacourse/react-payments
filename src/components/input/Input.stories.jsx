@@ -1,4 +1,3 @@
-import React from 'react';
 import Input from './Input';
 import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../../constants';
 import { isOverMaxLength, isOutOfRange } from '../../util';

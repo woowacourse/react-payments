@@ -1,4 +1,3 @@
-import React from 'react';
 import AddCardForm from './AddCardForm';
 
 export default {
