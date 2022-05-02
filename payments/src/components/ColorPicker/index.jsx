@@ -3,7 +3,7 @@ import Color from "../Color";
 import ModalContainer from "../ModalContainer";
 import "./index.scss";
 
-const cardCategory = [
+const CARD_CATEGORY = [
   { name: "록1바", color: "red" },
   { name: "록2바", color: "orange" },
   { name: "록3바", color: "yellow" },
@@ -24,7 +24,7 @@ const ColorPicker = ({ visible, setVisible, updateForm }) => {
       setVisible={setVisible}
     >
       <div ref={modalCotnets} className="palette">
-        {cardCategory.map((card) => (
+        {CARD_CATEGORY.map((card) => (
           <Color
             key={card.color}
             name={card.name}
