@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
-import { ColorType } from "../../constant";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { COLOR_TYPE } from '../../constant';
 
 const Selector = ({ color, name, onClick }) => {
   return (
@@ -27,7 +27,7 @@ const Container = styled.div`
 `;
 
 const OptionContainer = styled.div`
-  background-color: ${(props) => ColorType[props.color]};
+  background-color: ${({ color }) => COLOR_TYPE[color]};
   width: 37px;
   height: 37px;
   border-radius: 50%;

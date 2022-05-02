@@ -3,7 +3,7 @@ export const REG_EXP = {
   CHARACTER_ONLY: /^[a-z,A-Z]/,
 };
 
-export const ColorType = {
+export const COLOR_TYPE = {
   red: '#E24141',
   blue: '#547CE4',
   green: '#73BC6D',
@@ -13,3 +13,13 @@ export const ColorType = {
   orange: ' #F37D3B',
   yellow: '#FBCD58',
 };
+
+export const COLOR_NAMES = [
+  'red',
+  'blue',
+  'green',
+  'purple',
+  'pink',
+  'orange',
+  'yellow',
+];
