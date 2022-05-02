@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import PageHeader from './components/common/PageHeader.jsx';
+import Header from './components/common/Header.jsx';
 import Button from './components/common/Button.jsx';
 import {
   CardPreview,
@@ -99,7 +99,7 @@ function App() {
 
   return (
     <div className="App">
-      <PageHeader />
+      <Header title="카드 추가" />
       <CardPreview cardNumber={cardNumber} holderName={holderName} expireDate={expireDate} canProceed={canProceed} />
       <CardInfoForm autoComplete="off">
         <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumberUpdate} />

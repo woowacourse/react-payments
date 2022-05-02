@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledPageHeaderContainer = styled.header`
+const StyledHeaderContainer = styled.header`
   padding: 8px 0 22px;
 `;
 
@@ -12,10 +12,10 @@ const StyledPageTitle = styled.h1`
   color: #383838;
 `;
 
-export default function PageHeader() {
+export default function Header({ title }) {
   return (
-    <StyledPageHeaderContainer>
-      <StyledPageTitle>카드 추가</StyledPageTitle>
-    </StyledPageHeaderContainer>
+    <StyledHeaderContainer>
+      <StyledPageTitle>{title}</StyledPageTitle>
+    </StyledHeaderContainer>
   );
 }
