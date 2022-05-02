@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 
-import CardNumber from './components/CardNumber';
-import DueDate from './components/DueDate';
-import CardOwner from './components/CardOwner';
-import CardSecurityCode from './components/CardSecurityCode';
-import CardPassword from './components/CardPassword';
-import CardShape from './components/CardShape';
-import Header from './components/common/Header';
-import TextButton from './components/common/TextButton';
-import Footer from './components/common/Footer';
+import {
+  CardNumber,
+  CardOwner,
+  CardPassword,
+  CardSecurityCode,
+  CardShape,
+  Footer,
+  Header,
+  TextButton,
+  DueDate,
+} from './components';
 
 function App() {
   const targetRef = useRef();
