@@ -17,7 +17,7 @@ const cardNumberFormatter = (cardNumber) => {
 
 function Card({ companyName, cardNumber, userName, expireMonth, expireYear, isComplete }) {
   return (
-    <Container>
+    <Container isComplete={isComplete}>
       <CardContainer>
         <ComponyName>{companyName}</ComponyName>
         <UserName>{userName}</UserName>

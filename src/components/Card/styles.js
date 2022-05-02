@@ -19,6 +19,13 @@ const Container = styled.div`
   justify-content: center;
 
   margin: 1.875rem 0 2.5rem;
+  transition: filter 0.3s ease;
+
+  ${({ isComplete }) =>
+    !isComplete &&
+    css`
+      filter: grayscale(1);
+    `};
 
   ${({ cardSize }) => CARD_SIZE[cardSize] ?? CARD_SIZE.MEDIUM}
 `;
