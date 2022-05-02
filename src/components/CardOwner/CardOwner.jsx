@@ -5,16 +5,18 @@ import { limitInputLength, inputEnglishOnly } from 'utils';
 
 function CardOwner({ cardInfo, setCardInfo }) {
   const handleChange = (event) => {
-    let { value, name } = event.target;
-    value = inputEnglishOnly(value);
+    const { value, name } = event.target;
 
-    if (value.length > LIMIT_LENGTH.CARD_OWNER) {
-      value = limitInputLength(value, LIMIT_LENGTH.CARD_OWNER);
-    }
+    const cardOwnerEnglishOnly = inputEnglishOnly(value);
+
+    const cardOwnerLengthSliced =
+      cardOwnerEnglishOnly.length > LIMIT_LENGTH.CARD_OWNER
+        ? limitInputLength(cardOwnerEnglishOnly, LIMIT_LENGTH.CARD_OWNER)
+        : cardOwnerEnglishOnly;
 
     setCardInfo({
       ...cardInfo,
-      [name]: value,
+      [name]: cardOwnerLengthSliced,
     });
   };
 

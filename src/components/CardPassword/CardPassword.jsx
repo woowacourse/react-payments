@@ -5,16 +5,18 @@ import { LIMIT_LENGTH } from 'constants';
 
 function CardPassword({ cardInfo, setCardInfo }) {
   const handleChange = (event) => {
-    let { value, name } = event.target;
-    value = inputNumberOnly(value);
+    const { value, name } = event.target;
 
-    if (value.length > LIMIT_LENGTH.CARD_PASSWORD) {
-      value = limitInputLength(value, LIMIT_LENGTH.CARD_PASSWORD);
-    }
+    const passwordInputNumberOnly = inputNumberOnly(value);
+
+    const passwordInputLengthSliced =
+      passwordInputNumberOnly.length > LIMIT_LENGTH.CARD_PASSWORD
+        ? limitInputLength(passwordInputNumberOnly, LIMIT_LENGTH.CARD_PASSWORD)
+        : passwordInputNumberOnly;
 
     setCardInfo({
       ...cardInfo,
-      [name]: value,
+      [name]: passwordInputLengthSliced,
     });
   };
 

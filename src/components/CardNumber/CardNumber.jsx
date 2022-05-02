@@ -5,16 +5,18 @@ import { limitInputLength, inputNumberOnly } from 'utils';
 
 function CardNumber({ cardInfo, setCardInfo }) {
   const handleChange = (event) => {
-    let { value, name } = event.target;
-    value = inputNumberOnly(value);
+    const { value, name } = event.target;
 
-    if (value.length > LIMIT_LENGTH.CARD_NUMBER) {
-      value = limitInputLength(value, LIMIT_LENGTH.CARD_NUMBER);
-    }
+    const cardNumberInput = inputNumberOnly(value);
+
+    const cardNumberInputLengthSliced =
+      cardNumberInput.length > LIMIT_LENGTH.CARD_NUMBER
+        ? limitInputLength(cardNumberInput, LIMIT_LENGTH.CARD_NUMBER)
+        : cardNumberInput;
 
     setCardInfo({
       ...cardInfo,
-      [name]: value,
+      [name]: cardNumberInputLengthSliced,
     });
   };
 

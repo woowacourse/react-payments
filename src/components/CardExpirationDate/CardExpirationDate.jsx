@@ -5,47 +5,50 @@ import { inputNumberOnly, limitInputLength } from 'utils';
 
 function CardExpirationDate({ cardInfo, setCardInfo }) {
   const handleMonthInputBlur = (event) => {
-    let { value } = event.target;
+    const { value } = event.target;
 
-    if (value === String(MONTH.JANUARY)) {
-      value = value.padStart(2, '0');
-    }
+    const monthInput = value === String(MONTH.JANUARY) ? value.padStart(2, '0') : value;
 
     setCardInfo({
       ...cardInfo,
-      month: value,
+      month: monthInput,
     });
   };
 
   const handleMonthInputChange = (event) => {
-    let { value, name } = event.target;
-    value = inputNumberOnly(value);
+    const { value, name } = event.target;
 
-    if (value.length > LIMIT_LENGTH.EXPIRATION_DATE) {
-      value = limitInputLength(value, LIMIT_LENGTH.EXPIRATION_DATE);
-    }
+    const monthInputNumberOnly = inputNumberOnly(value);
 
-    if (value >= MONTH.FEBRUARY && value <= MONTH.SEPTEMBER) {
-      value = value.padStart(2, '0');
-    }
+    const monthInputLengthSliced =
+      monthInputNumberOnly.length > LIMIT_LENGTH.EXPIRATION_DATE
+        ? limitInputLength(monthInputNumberOnly, LIMIT_LENGTH.EXPIRATION_DATE)
+        : monthInputNumberOnly;
+
+    const monthInputPadded =
+      monthInputLengthSliced >= MONTH.FEBRUARY && monthInputLengthSliced <= MONTH.SEPTEMBER
+        ? monthInputLengthSliced.padStart(2, '0')
+        : monthInputLengthSliced;
 
     setCardInfo({
       ...cardInfo,
-      [name]: value,
+      [name]: monthInputPadded,
     });
   };
 
   const handleYearInputChange = (event) => {
-    let { value, name } = event.target;
-    value = inputNumberOnly(value);
+    const { value, name } = event.target;
 
-    if (value.length > LIMIT_LENGTH.EXPIRATION_DATE) {
-      value = limitInputLength(value, LIMIT_LENGTH.EXPIRATION_DATE);
-    }
+    const yearInputNumberOnly = inputNumberOnly(value);
+
+    const yearInputLengthSliced =
+      yearInputNumberOnly.length > LIMIT_LENGTH.EXPIRATION_DATE
+        ? limitInputLength(yearInputNumberOnly, LIMIT_LENGTH.EXPIRATION_DATE)
+        : yearInputNumberOnly;
 
     setCardInfo({
       ...cardInfo,
-      [name]: value,
+      [name]: yearInputLengthSliced,
     });
   };
 

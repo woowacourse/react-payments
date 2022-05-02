@@ -5,16 +5,18 @@ import { LIMIT_LENGTH } from 'constants';
 
 function CVC({ cardInfo, setCardInfo }) {
   const handleChange = (event) => {
-    let { value, name } = event.target;
-    value = inputNumberOnly(value);
+    const { value, name } = event.target;
 
-    if (value.length > LIMIT_LENGTH.CVC) {
-      value = limitInputLength(value, LIMIT_LENGTH.CVC);
-    }
+    const cvcInputNumberOnly = inputNumberOnly(value);
+
+    const cvcInputLengthSliced =
+      cvcInputNumberOnly.length > LIMIT_LENGTH.CVC
+        ? limitInputLength(cvcInputNumberOnly, LIMIT_LENGTH.CVC)
+        : cvcInputNumberOnly;
 
     setCardInfo({
       ...cardInfo,
-      [name]: value,
+      [name]: cvcInputLengthSliced,
     });
   };
 
