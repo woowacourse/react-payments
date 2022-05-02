@@ -1,8 +1,8 @@
-import { useReducer, useState } from "react";
+import { useReducer } from 'react';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "cardNumber":
+    case 'cardNumber':
       return {
         ...state,
         cardNumber: [
@@ -11,7 +11,7 @@ const reducer = (state, action) => {
           ...state.cardNumber.slice(action.payload.index + 1),
         ],
       };
-    case "expiredDate":
+    case 'expiredDate':
       return {
         ...state,
         expiredDate: [
@@ -20,17 +20,17 @@ const reducer = (state, action) => {
           ...state.expiredDate.slice(action.payload.index + 1),
         ],
       };
-    case "ownerName":
+    case 'ownerName':
       return {
         ...state,
         ownerName: action.payload.value,
       };
-    case "secureCode":
+    case 'secureCode':
       return {
         ...state,
         secureCode: action.payload.value,
       };
-    case "password":
+    case 'password':
       return {
         ...state,
         password: [
@@ -39,7 +39,7 @@ const reducer = (state, action) => {
           ...state.password.slice(action.payload.index + 1),
         ],
       };
-    case "pickColor":
+    case 'pickColor':
       return {
         ...state,
         color: action.payload.color,
@@ -52,13 +52,13 @@ const reducer = (state, action) => {
 
 const useCard = () => {
   const initState = {
-    cardNumber: ["", "", "", ""],
-    expiredDate: ["", ""],
-    ownerName: "",
-    secureCode: "",
-    password: ["", ""],
-    cardName: "",
-    color: "#d2d2d2",
+    cardNumber: ['', '', '', ''],
+    expiredDate: ['', ''],
+    ownerName: '',
+    secureCode: '',
+    password: ['', ''],
+    cardName: '',
+    color: '#d2d2d2',
   };
   const [form, dispatch] = useReducer(reducer, initState);
 

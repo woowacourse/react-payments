@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import './index.scss';
 
 export const Input = forwardRef((props, ref) => {
-  const { type, maxLength, value, placeholder, onChange, onKeyDown, className, ...otherProps } = props;
+  const { type, value, placeholder, onChange, onKeyDown, className, ...otherProps } = props;
   return (
     <input
       ref={ref}
@@ -11,7 +11,7 @@ export const Input = forwardRef((props, ref) => {
       value={value}
       placeholder={placeholder}
       onKeyDown={onKeyDown}
-      className='input__contents'
+      className={className || 'input__contents'}
     />
   );
 });

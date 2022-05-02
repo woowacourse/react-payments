@@ -14,6 +14,7 @@ import { useState } from 'react';
 const CardAdd = () => {
   const [form, dispatch] = useCard();
   const [visible, setVisible] = useState(false);
+
   const { cardNumber, expiredDate, ownerName, secureCode, password } = form;
 
   return (

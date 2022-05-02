@@ -3,7 +3,7 @@ import InputContainer from '../elements/InputContainer';
 import { Input } from '../elements/Input';
 import useControllInput from '../../hooks/useControllInput';
 import InputLabel from '../elements/label';
-import { Fragment, useCallback, useMemo } from 'react';
+import { Fragment, useCallback } from 'react';
 
 const INPUT_LENGTH = 4;
 const NUM_OF_INPUT = 4;
