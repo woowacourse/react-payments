@@ -1,8 +1,9 @@
-const Header = ({ title, children }) => {
+const Header = ({ title, left, right }) => {
   return (
     <div className="header-container">
-      {children}
+      {left}
       <h2 className="page-title">{title}</h2>
+      {right}
     </div>
   );
 };

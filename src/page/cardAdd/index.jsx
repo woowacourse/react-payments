@@ -93,11 +93,14 @@ const CardAppPage = () => {
 
   return (
     <div>
-      <Header title="카드 추가">
-        <Button>
-          <PrevIcon />
-        </Button>
-      </Header>
+      <Header
+        title="카드 추가"
+        left={
+          <Button>
+            <PrevIcon />
+          </Button>
+        }
+      />
       <CardPreview
         number={number}
         ownerName={ownerName}
