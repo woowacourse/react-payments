@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import { InputBasic } from '../common/InputBasic';
-import { InputBox } from '../common/InputBox';
-import { QuestionMark } from '../common/QuestionMark';
-import { FlexWrapper, InputContainer, InputTitle } from '../common/styled';
+import { InputBasic } from "../common/InputBasic";
+import { InputBox } from "../common/InputBox";
+import { TipButton } from "../common/TipButton";
+import { FlexWrapper, InputContainer, InputTitle } from "../common/styled";
 
 export const CVCInputForm = ({
   CVC,
@@ -28,11 +28,11 @@ export const CVCInputForm = ({
   return (
     <InputContainer>
       <InputTitle>보안카드(CVC/CVV)</InputTitle>
-      <FlexWrapper alignItems={'baseline'} gap={'10px'}>
+      <FlexWrapper alignItems={"baseline"} gap={"10px"}>
         <InputBox width="25%">
           <InputBasic type="password" value={CVC} onChange={handleCVCChange} />
         </InputBox>
-        <QuestionMark onClick={handleModalVisible} />
+        <TipButton onClick={handleModalVisible} contents="?" />
       </FlexWrapper>
     </InputContainer>
   );

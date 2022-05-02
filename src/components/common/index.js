@@ -5,5 +5,5 @@ export * from "./InputBasic";
 export * from "./InputBox";
 export * from "./Modal";
 export * from "./PageTitle";
-export * from "./QuestionMark";
+export * from "./TipButton";
 export * from "./styled";
