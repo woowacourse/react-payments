@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import { Input } from './styled';
 import Modal from './Modal';
 import { LABEL_PRIMARY_COLOR, ITEM_HOVER_PRIMARY_BG_COLOR } from '../../style';
+import Input from './Input';
 
 const CalendarContainer = styled.div``;
 

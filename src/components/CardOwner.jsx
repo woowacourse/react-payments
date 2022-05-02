@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Input, InputContainer, Label } from './common/styled';
+import { InputContainer, Label } from './common/styled';
 import ErrorMessage from './common/ErrorMessage';
 import LetterCounter from './common/LetterCounter';
+import Input from './common/Input';
 
 const MAX_NAME_LENGTH = 30;
 

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Input, InputContainer, Label, InputWrapper } from './common/styled';
+import { InputContainer, Label, InputWrapper } from './common/styled';
 import InactiveContainer from './common/InactiveContainer';
 import ErrorMessage from './common/ErrorMessage';
+import Input from './common/Input';
 
 const InputPasswordWrapper = styled.div`
   display: flex;
@@ -40,6 +41,7 @@ function CardPassword({ correctCardPwdCallback }) {
       setErrorMessage(err.message);
       return;
     }
+
     setPwd(prevPwds => ({
       ...prevPwds,
       [name]: value,

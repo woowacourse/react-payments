@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { HYPHEN_PRIMARY_COLOR } from '../style';
 import ErrorMessage from './common/ErrorMessage';
-import { Input, InputContainer, InputWrapper, Label, Span } from './common/styled';
+import Input from './common/Input';
+import { InputContainer, InputWrapper, Label, Span } from './common/styled';
 
 const MAX_CARD_NUMBER_UNIT = 4;
 
@@ -65,7 +66,7 @@ function CardNumber({ cardNumberCallback }) {
 
   const isCorrectCardNumber = Object.values(cardNumbers).join('').length === 16;
 
-  const handleInputFocus = target => {
+  const handleInputFocus = () => {
     if (!isCorrectCardNumber) {
       setErrorMessage('모든 숫자를 입력해주세요.');
     }
