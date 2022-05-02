@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
@@ -14,17 +14,25 @@ const InputContainer = styled.div`
 `;
 
 function PasswordInput() {
-  const [password, setPassword] = useState({ first: '', second: '' });
-  const [validations, setValidations] = useState({
-    first: false,
-    second: false,
-  });
-  const refs = { first: useRef(), second: useRef() };
+  const orders = ['first', 'second'];
+  const [password, setPassword] = useState(
+    Object.fromEntries(orders.map(order => [order, '']))
+  );
+  const [validations, setValidations] = useState(
+    Object.fromEntries(orders.map(order => [order, false]))
+  );
+  const refs = Object.fromEntries(orders.map(order => [order, useRef()]));
+  const currentOrderRef = useRef();
 
-  const onPasswordChange = ({ target, nativeEvent: { data } }) => {
+  const onPasswordChange = ({ target, nativeEvent: { data, inputType } }) => {
     if (numberRegex.test(data) || !data) {
-      updatePassword(target.name, target.value);
-      updateValidations(target.name, target.value);
+      const order = target.name;
+      const newNumber = target.value;
+
+      updatePassword(order, newNumber);
+      updateValidations(order, newNumber);
+      focusPrevOrder(order, newNumber, inputType);
+      currentOrderRef.current = order;
     }
   };
 
@@ -39,7 +47,32 @@ function PasswordInput() {
     }));
   };
 
-  const focusNext = order => {};
+  const focusPrevOrder = (currentOrder, newNumber, inputType) => {
+    if (
+      currentOrder !== orders[0] &&
+      newNumber.length === 0 &&
+      inputType === 'deleteContentBackward'
+    ) {
+      const currentIndex = orders.findIndex(order => order === currentOrder);
+      refs[orders[currentIndex - 1]].current.focus();
+    }
+  };
+
+  const focusInvalidInput = order => {
+    if (order && validator.validatePassword(refs[order].current.value)) {
+      if (Object.values(validations).every(isValid => isValid)) {
+        return;
+      }
+      const invalidOrder = Object.keys(validations).find(
+        order => !validations[order]
+      );
+      refs[invalidOrder].current.focus();
+    }
+  };
+
+  useEffect(() => {
+    focusInvalidInput(currentOrderRef.current);
+  });
 
   return (
     <LabeledInput text="카드 비밀번호">

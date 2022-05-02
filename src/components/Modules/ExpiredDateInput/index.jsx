@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
@@ -16,14 +16,25 @@ const InputContainer = styled.div`
 
 function ExpiredDateInput() {
   const datePlaceholder = { month: 'MM', year: 'YY' };
-  const [ExpiredDate, setExpiredDate] = useState({ month: '', year: '' });
-  const [validations, setValidation] = useState({ month: false, year: false });
-  const refs = { month: useRef(), year: useRef() };
+  const units = ['month', 'year'];
+  const [ExpiredDate, setExpiredDate] = useState(
+    Object.fromEntries(units.map(unit => [unit, '']))
+  );
+  const [validations, setValidation] = useState(
+    Object.fromEntries(units.map(unit => [unit, false]))
+  );
+  const refs = Object.fromEntries(units.map(unit => [unit, useRef()]));
+  const currentUnitRef = useRef();
 
-  const onDateChange = ({ target, nativeEvent: { data } }) => {
+  const onDateChange = ({ target, nativeEvent: { data, inputType } }) => {
     if (numberRegex.test(data) || !data) {
-      updateDate(target.name, target.value);
-      updateValidation(target.name, target.value);
+      const unit = target.name;
+      const newDate = target.value;
+
+      updateDate(unit, newDate);
+      updateValidation(unit, newDate);
+      focusPrevOrder(unit, newDate, inputType);
+      currentUnitRef.current = unit;
     }
   };
 
@@ -37,6 +48,33 @@ function ExpiredDateInput() {
       [unit]: validator.validateDate(date),
     }));
   };
+
+  const focusPrevOrder = (currentUnit, newDate, inputType) => {
+    if (
+      currentUnit !== units[0] &&
+      newDate.length === 0 &&
+      inputType === 'deleteContentBackward'
+    ) {
+      const currentIndex = units.findIndex(unit => unit === currentUnit);
+      refs[units[currentIndex - 1]].current.focus();
+    }
+  };
+
+  const focusInvalidInput = unit => {
+    if (unit && validator.validateExpiredDate(refs[unit].current.value)) {
+      if (Object.values(validations).every(isValid => isValid)) {
+        return;
+      }
+      const invalidUnit = Object.keys(validations).find(
+        unit => !validations[unit]
+      );
+      refs[invalidUnit].current.focus();
+    }
+  };
+
+  useEffect(() => {
+    focusInvalidInput(currentUnitRef.current);
+  });
 
   return (
     <LabeledInput text="만료일">

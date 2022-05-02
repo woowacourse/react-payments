@@ -27,13 +27,13 @@ function CardNumberInput() {
 
   const handleNumberChange = ({ target, nativeEvent: { data, inputType } }) => {
     if (numberRegex.test(data) || !data) {
-      updateNumbers(target.name, target.value);
-      updateValidations(
-        target.name,
-        validator.validateCardNumber(target.value)
-      );
-      focusPrevOrder(target.name, target.value, inputType);
-      currentOrderRef.current = target.name;
+      const order = target.name;
+      const newNumber = target.value;
+
+      updateNumbers(order, newNumber);
+      updateValidations(order, validator.validateCardNumber(newNumber));
+      focusPrevOrder(order, newNumber, inputType);
+      currentOrderRef.current = order;
     }
   };
 
