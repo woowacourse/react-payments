@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Input from "./UIComponents/Input/Input.jsx";
-import InputField from "./UIComponents/InputField/InputField.jsx";
+import Input from "./common/Input.jsx";
+import InputField from "./common/InputField.jsx";
 import styled from "styled-components";
 import HelpIconImage from "../assets/images/questionMark.svg";
-import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
+import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants";
 
 const StyledIconContainer = styled.div`
   position: relative;

@@ -1,20 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 
-import GlobalStyle from "./globalStyles.jsx";
-
-import PageHeader from "./PageHeader.jsx";
-import CardInfoForm from "./CardInfoForm.jsx";
-import Button from "./components/UIComponents/Button/Button.jsx";
+import PageHeader from "./components/common/PageHeader.jsx";
+import Button from "./components/common/Button.jsx";
 
 import {
   CardPreview,
+  CardInfoForm,
   CardHolderNameInput,
   CardNumberInput,
   CardPasswordInput,
   CardSecurityCodeInput,
   CardExpireDateInput,
 } from "./components";
-import { CARD_REGISTER_SUCCESS_MESSAGE, CARD_INFO_RULES } from "./constants.js";
+import { CARD_REGISTER_SUCCESS_MESSAGE, CARD_INFO_RULES } from "./constants";
 
 function App() {
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
@@ -127,7 +125,6 @@ function App() {
 
   return (
     <div className="App">
-      <GlobalStyle />
       <PageHeader />
       <CardPreview
         cardNumber={cardNumber}

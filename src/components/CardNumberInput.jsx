@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants";
-import Input from "./UIComponents/Input/Input";
-import InputField from "./UIComponents/InputField/InputField";
+import Input from "./common/Input";
+import InputField from "./common/InputField";
 
 export default function CardNumberInput({ cardNumber, onChange }) {
   const [focusInputIndex, setFocusInputIndex] = useState(0);

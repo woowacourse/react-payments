@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import Input from "./UIComponents/Input/Input.jsx";
+import Input from "./common/Input.jsx";
 import styled from "styled-components";
-import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
+import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants";
 
 const StyledInputField = styled.div`
   display: flex;

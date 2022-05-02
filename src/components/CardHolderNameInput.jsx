@@ -1,8 +1,8 @@
 import React from "react";
-import Input from "./UIComponents/Input/Input.jsx";
-import InputField from "./UIComponents/InputField/InputField.jsx";
+import Input from "./common/Input.jsx";
+import InputField from "./common/InputField.jsx";
 import styled from "styled-components";
-import { CARD_INFO_RULES } from "../constants.js";
+import { CARD_INFO_RULES } from "../constants";
 
 const StyledInputCounter = styled.p`
   position: absolute;

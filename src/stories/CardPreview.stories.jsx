@@ -1,5 +1,5 @@
 import React from "react";
-import CardPreview from "./CardPreview";
+import CardPreview from "../components/CardPreview";
 
 export default {
   title: "CardPreview",
