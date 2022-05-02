@@ -1,15 +1,11 @@
 import PropTypes from 'prop-types';
 
-import { MONTH, LIMIT_LENGTH, LEADING_ZERO_MONTHS } from 'constants';
+import { MONTH, LIMIT_LENGTH } from 'constants';
 import { inputNumberOnly, limitInputLength } from 'utils';
 
 function CardExpirationDate({ cardInfo, setCardInfo }) {
   const handleMonthInputBlur = (event) => {
     let { value } = event.target;
-
-    if (value === '0' || value === '00') {
-      return;
-    }
 
     if (value === MONTH.JANUARY) {
       value = MONTH.LEADING_ZERO + MONTH.JANUARY;
@@ -19,8 +15,6 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
       ...cardInfo,
       month: value,
     });
-
-    event.target.classList.add('input-correct');
   };
 
   const handleMonthInputChange = (event) => {
@@ -33,7 +27,6 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
 
     if (value >= MONTH.FEBRUARY && value <= MONTH.SEPTEMBER) {
       value = MONTH.LEADING_ZERO + Number(value);
-      event.target.classList.add('input-correct');
     }
 
     setCardInfo({
@@ -46,14 +39,6 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
     if (value >= MONTH.FEBRUARY && value <= MONTH.SEPTEMBER) {
       event.target.value = MONTH.LEADING_ZERO + Number(value);
     }
-
-    if (LEADING_ZERO_MONTHS.includes(value)) event.target.classList.add('input-correct');
-
-    if (value.length >= LIMIT_LENGTH.EXPIRATION_DATE) {
-      event.target.classList.add('input-correct');
-      return;
-    }
-    event.target.classList.remove('input-correct');
   };
 
   const handleYearInputChange = (event) => {
@@ -70,12 +55,6 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
     });
 
     if (value === '00') return;
-
-    if (value.length >= LIMIT_LENGTH.EXPIRATION_DATE) {
-      event.target.classList.add('input-correct');
-      return;
-    }
-    event.target.classList.remove('input-correct');
   };
 
   return (
@@ -84,7 +63,13 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
       <div className="input-box w-50">
         <input
           name="month"
-          className="input-basic"
+          className={`input-basic ${
+            (cardInfo.month.length >= LIMIT_LENGTH.EXPIRATION_DATE && !cardInfo.month === '00') ||
+            !cardInfo.month === '0' ||
+            (cardInfo.month >= MONTH.FEBRUARY && cardInfo.month <= MONTH.SEPTEMBER)
+              ? 'input-correct'
+              : null
+          }`}
           type="text"
           placeholder="MM"
           onChange={handleMonthInputChange}
@@ -94,7 +79,9 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
         />
         <input
           name="year"
-          className="input-basic"
+          className={`input-basic ${
+            cardInfo.year.length >= LIMIT_LENGTH.EXPIRATION_DATE ? 'input-correct' : null
+          }`}
           type="text"
           placeholder="YY"
           onChange={handleYearInputChange}

@@ -16,12 +16,6 @@ function CVC({ cardInfo, setCardInfo }) {
       ...cardInfo,
       [name]: value,
     });
-
-    if (event.target.value.length >= LIMIT_LENGTH.CVC) {
-      event.target.classList.add('input-correct');
-      return;
-    }
-    event.target.classList.remove('input-correct');
   };
 
   return (
@@ -29,7 +23,9 @@ function CVC({ cardInfo, setCardInfo }) {
       <span className="input-title">보안코드(CVC/CVV)</span>
       <input
         name="cvc"
-        className="input-basic w-25"
+        className={`input-basic w-25 ${
+          cardInfo.cvc.length >= LIMIT_LENGTH.CVC ? 'input-correct' : null
+        } `}
         type="password"
         onChange={handleChange}
         value={cardInfo.cvc}

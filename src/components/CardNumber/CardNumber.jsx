@@ -4,7 +4,7 @@ import { LIMIT_LENGTH } from 'constants';
 import { limitInputLength, inputNumberOnly } from 'utils';
 
 function CardNumber({ cardInfo, setCardInfo }) {
-  const handleInput = (event) => {
+  const handleChange = (event) => {
     let { value, name } = event.target;
     value = inputNumberOnly(value);
 
@@ -18,51 +18,47 @@ function CardNumber({ cardInfo, setCardInfo }) {
     });
   };
 
-  const handleChange = (event) => {
-    if (event.target.value.length >= LIMIT_LENGTH.CARD_NUMBER) {
-      event.target.classList.add('input-correct');
-      return;
-    }
-    event.target.classList.remove('input-correct');
-  };
-
   return (
     <div className="input-container">
       <span className="input-title">카드 번호</span>
       <div className="input-box">
         <input
           name="number1"
-          className="input-basic"
+          className={`input-basic ${
+            cardInfo.number1.length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+          }`}
           type="text"
           onChange={handleChange}
-          onInput={handleInput}
           value={cardInfo.number1}
           required
         />
         <input
           name="number2"
-          className="input-basic"
+          className={`input-basic ${
+            cardInfo.number2.length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+          }`}
           type="text"
           onChange={handleChange}
-          onInput={handleInput}
           value={cardInfo.number2}
           required
         />
         <input
           name="number3"
-          className="input-basic"
+          className={`input-basic ${
+            cardInfo.number3.length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+          }`}
           type="password"
           onChange={handleChange}
-          onInput={handleInput}
           value={cardInfo.number3}
           required
         />
         <input
           name="number4"
-          className="input-basic"
+          className={`input-basic ${
+            cardInfo.number4.length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+          }`}
           type="password"
           onChange={handleChange}
-          onInput={handleInput}
           value={cardInfo.number4}
           required
         />

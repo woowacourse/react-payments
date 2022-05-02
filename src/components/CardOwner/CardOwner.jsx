@@ -16,12 +16,6 @@ function CardOwner({ cardInfo, setCardInfo }) {
       ...cardInfo,
       [name]: value,
     });
-
-    if (value.length >= 1) {
-      event.target.classList.add('input-correct');
-      return;
-    }
-    event.target.classList.remove('input-correct');
   };
 
   return (
@@ -35,7 +29,7 @@ function CardOwner({ cardInfo, setCardInfo }) {
       <input
         name="owner"
         type="text"
-        className="input-basic"
+        className={`input-basic ${cardInfo.owner.length >= 1 ? 'input-correct' : null}`}
         onChange={handleChange}
         value={cardInfo.owner}
       />
