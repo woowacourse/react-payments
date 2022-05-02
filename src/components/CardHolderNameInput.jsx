@@ -34,7 +34,11 @@ export default function CardHolderNameInput({ holderName, setHolderName }) {
 
   return (
     <InputField
-      labelText="카드 소유자 이름 (선택)"
+      labelText={"카드 소유자 이름 (선택)"}
+      wrapperWidth={"full"}
+      horizontalAlign={"flex-start"}
+      errorMessage={errorMessage}
+      isComplete={holderName !== ""}
       OptionalComponent={
         <InputCounter
           currLength={holderName.length}
@@ -42,21 +46,17 @@ export default function CardHolderNameInput({ holderName, setHolderName }) {
           isComplete={holderName !== ""}
         />
       }
-      wrapperWidth="full"
-      horizontalAlign="flex-start"
-      isComplete={holderName !== ""}
-      errorMessage={errorMessage}
     >
       <Input
-        placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        type="text"
+        type={"text"}
         value={holderName}
+        placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
+        maxLength={30}
+        width={"full"}
+        textAlign={"left"}
+        isComplete={holderName !== ""}
         onChange={handleHolderNameUpdate}
         onBlur={resetError}
-        width="full"
-        textAlign="left"
-        isComplete={holderName !== ""}
-        maxLength={30}
       />
     </InputField>
   );

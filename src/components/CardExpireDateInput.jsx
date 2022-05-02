@@ -24,34 +24,34 @@ export default function CardExpireDateInput({ expireDate, setExpireDate }) {
 
   return (
     <InputField
-      labelText="만료일 (MM/YY)"
-      wrapperWidth="sm"
-      horizontalAlign="center"
+      labelText={"만료일 (MM/YY)"}
+      wrapperWidth={"sm"}
+      horizontalAlign={"center"}
+      errorMessage={errorMessage}
       isComplete={
         expireDate.join("").length === CARD_INFO_RULES.EXPIRE_DATE_LENGTH
       }
-      errorMessage={errorMessage}
     >
       <Input
-        placeholder="MM"
-        type="text"
+        type={"text"}
         value={expireDate[0]}
+        placeholder={"MM"}
+        required
+        width={"sm"}
+        isComplete={expireDate[0].length === 2}
         onChange={(e) => handleExpireDateUpdate(e, 0)}
         onBlur={resetError}
-        width="sm"
-        isComplete={expireDate[0].length === 2}
-        required
       />
       <p>/</p>
       <Input
-        placeholder="YY"
-        type="text"
+        type={"text"}
         value={expireDate[1]}
+        placeholder={"YY"}
+        required
+        width={"sm"}
+        isComplete={expireDate[1].length === 2}
         onChange={(e) => handleExpireDateUpdate(e, 1)}
         onBlur={resetError}
-        width="sm"
-        isComplete={expireDate[1].length === 2}
-        required
       />
     </InputField>
   );

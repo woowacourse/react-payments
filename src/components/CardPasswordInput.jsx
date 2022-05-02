@@ -56,10 +56,10 @@ export default function CardPasswordInput({ password, setPassword }) {
   return (
     <StyledInputField>
       <StyledLabel
+        errorMessage={errorMessage}
         isComplete={
           password.join("").length === CARD_INFO_RULES.PASSWORD_LENGTH
         }
-        errorMessage={errorMessage}
       >
         카드 비밀번호 앞 두 자리
         <span className="error-message">{errorMessage}</span>
@@ -68,20 +68,20 @@ export default function CardPasswordInput({ password, setPassword }) {
         {Array.from({ length: CARD_INFO_RULES.PASSWORD_LENGTH }).map(
           (_, index) => (
             <StyledInputWrapper
-              width="45px"
               key={index}
+              width={"45px"}
               hasError={errorMessage !== ""}
             >
               <Input
-                type="password"
+                type={"password"}
                 value={password[index]}
-                onChange={(e) => handlePasswordUpdate(e, index)}
-                width="full"
                 placeholder={CREATE_MASKED_CHARACTERS(1)}
-                onBlur={resetError}
-                isComplete={password[0].length === 1}
                 maxLength={1}
                 required
+                width={"full"}
+                isComplete={password[0].length === 1}
+                onChange={(e) => handlePasswordUpdate(e, index)}
+                onBlur={resetError}
               />
             </StyledInputWrapper>
           )

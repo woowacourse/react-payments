@@ -65,24 +65,24 @@ export default function CardSecurityCodeInput({
 
   return (
     <InputField
-      labelText="보안 코드(CVC/CVV)"
-      OptionalComponent={<HelpIcon description={SECURITY_CODE_DESCRIPTION} />}
-      wrapperWidth="xs"
-      isComplete={securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
+      labelText={"보안 코드(CVC/CVV)"}
+      wrapperWidth={"xs"}
       errorMessage={errorMessage}
+      isComplete={securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
+      OptionalComponent={<HelpIcon description={SECURITY_CODE_DESCRIPTION} />}
     >
       <Input
-        type="password"
+        type={"password"}
         value={securityCode}
-        onChange={handleSecurityCodeUpdate}
-        onBlur={resetError}
         placeholder={CREATE_MASKED_CHARACTERS(3)}
-        width="full"
+        maxLength={3}
+        required
+        width={"full"}
         isComplete={
           securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
         }
-        required
-        maxLength={3}
+        onChange={handleSecurityCodeUpdate}
+        onBlur={resetError}
       />
     </InputField>
   );

@@ -15,14 +15,14 @@ export default function CardNumberInput({ cardNumber, setCardNumber }) {
 
   return (
     <InputField
-      labelText="카드 번호"
-      wrapperWidth="full"
-      horizontalAlign="space-around"
+      labelText={"카드 번호"}
+      wrapperWidth={"full"}
+      horizontalAlign={"space-around"}
+      errorMessage={errorMessage}
       isComplete={
         cardNumber.join("").length ===
         CARD_INFO_RULES.NUMBER_UNIT_COUNT * CARD_INFO_RULES.NUMBER_UNIT_LENGTH
       }
-      errorMessage={errorMessage}
     >
       {Array.from({ length: CARD_INFO_RULES.NUMBER_UNIT_COUNT }).map(
         (_, index) => (
@@ -30,15 +30,14 @@ export default function CardNumberInput({ cardNumber, setCardNumber }) {
             <Input
               type={index <= 1 ? "text" : "password"}
               value={cardNumber[index]}
-              onChange={(e) => handleCardNumberUpdate(e, index)}
               placeholder={index <= 1 ? "1 2 3 4" : CREATE_MASKED_CHARACTERS(4)}
-              onBlur={resetError}
+              maxLength={4}
+              required
               isComplete={
                 cardNumber[index].length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
               }
-              maxLength={4}
-              name={"card-number"}
-              required
+              onChange={(e) => handleCardNumberUpdate(e, index)}
+              onBlur={resetError}
             />
             {index !== cardNumber.length - 1 && <p>-</p>}
           </React.Fragment>
