@@ -28,19 +28,19 @@ const validateExpireDate = ({ expireMonth, expireYear }) => {
     throw new Error(ERROR_MESSAGE.EXPIRE_DATE.IS_NOT_INTEGER);
   }
 
-  if (expireMonth < EXPIRE_DATE.MIN_MONTH || expireMonth > EXPIRE_DATE.MAX_MONTH) {
+  if (expireMonth < EXPIRE_DATE.MONTH.MIN || expireMonth > EXPIRE_DATE.MONTH.MAX) {
     throw new Error(ERROR_MESSAGE.EXPIRE_DATE.IS_NOT_VALIDATE_MONTH);
   }
 
-  if (expireMonth.length !== EXPIRE_DATE.MONTH_LENGTH) {
+  if (expireMonth.length !== EXPIRE_DATE.MONTH.LENGTH) {
     throw new Error(ERROR_MESSAGE.EXPIRE_DATE.IS_NOT_MONTH_LENGTH);
   }
 
-  if (expireYear.length !== EXPIRE_DATE.YEAR_LENGTH) {
+  if (expireYear.length !== EXPIRE_DATE.YEAR.LENGTH) {
     throw new Error(ERROR_MESSAGE.EXPIRE_DATE.IS_NOT_YEAR_LENGTH);
   }
 
-  if (isExpiredDate(Number(expireYear) + EXPIRE_DATE.YEAR_UNIT, expireMonth)) {
+  if (isExpiredDate(Number(expireYear) + EXPIRE_DATE.YEAR.UNIT, expireMonth)) {
     throw new Error(ERROR_MESSAGE.EXPIRE_DATE.IS_EXPIRED);
   }
 };

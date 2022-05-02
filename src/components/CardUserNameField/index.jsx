@@ -4,8 +4,8 @@ import useErrorMessage from 'hooks/useErrorMessage';
 import FieldSet from 'components/@common/FieldSet';
 import TextField from 'components/@common/TextField';
 
-import { validateUserName } from 'validators';
 import { USER_NAME } from 'constants';
+import { validateUserName } from 'validators';
 
 function CardUserNameField({ userName, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({
@@ -16,7 +16,7 @@ function CardUserNameField({ userName, onChange }) {
   return (
     <FieldSet title="카드 소유자 이름 (선택)" errorMessage={errorMessage}>
       <TextField
-        name="userName"
+        name={USER_NAME.TEXT_FIELD_NAME}
         value={userName}
         placeholder="소유자명은 영문만 입력 가능"
         maxLength={USER_NAME.MAX_LENGTH}

@@ -1,26 +1,36 @@
 const CARD_NUMBER = {
+  TEXT_FIELD_NAME: 'cardNumber',
   UNIT_COUNT: 4,
   UNIT_LENGTH: 4,
   MASKING_INDEX: 2,
 };
 
 const EXPIRE_DATE = {
-  MIN_MONTH: 1,
-  MAX_MONTH: 12,
-  MONTH_LENGTH: 2,
-  YEAR_LENGTH: 2,
-  YEAR_UNIT: 2000,
+  MONTH: {
+    TEXT_FIELD_NAME: 'expireMonth',
+    MIN: 1,
+    MAX: 12,
+    LENGTH: 2,
+  },
+  YEAR: {
+    TEXT_FIELD_NAME: 'expireYear',
+    LENGTH: 2,
+    UNIT: 2000,
+  },
 };
 
 const USER_NAME = {
+  TEXT_FIELD_NAME: 'userName',
   MAX_LENGTH: 30,
 };
 
 const SECURITY_CODE = {
+  TEXT_FIELD_NAME: 'securityCode',
   LENGTH: 3,
 };
 
 const CARD_PASSWORD = {
+  TEXT_FIELD_NAME: 'cardPassword',
   LENGTH: 2,
 };
 
@@ -34,8 +44,8 @@ const ERROR_MESSAGE = {
   EXPIRE_DATE: {
     IS_NOT_INTEGER: '만료일은 숫자로만 입력할 수 있습니다.',
     IS_NOT_VALIDATE_MONTH: '만료월을 정확히 입력해주세요.',
-    IS_NOT_MONTH_LENGTH: `만료월을 ${EXPIRE_DATE.MONTH_LENGTH}자리로 입력해주세요.`,
-    IS_NOT_YEAR_LENGTH: `만료연도를 ${EXPIRE_DATE.YEAR_LENGTH}자리로 입력해주세요.`,
+    IS_NOT_MONTH_LENGTH: `만료월을 ${EXPIRE_DATE.MONTH.LENGTH}자리로 입력해주세요.`,
+    IS_NOT_YEAR_LENGTH: `만료연도를 ${EXPIRE_DATE.YEAR.LENGTH}자리로 입력해주세요.`,
     IS_EXPIRED: '이미 만료된 카드입니다.',
   },
   USER_NAME: {

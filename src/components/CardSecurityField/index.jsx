@@ -4,8 +4,8 @@ import useErrorMessage from 'hooks/useErrorMessage';
 import FieldSet from 'components/@common/FieldSet';
 import TextField from 'components/@common/TextField';
 
-import { validateSecurityCode } from 'validators';
 import { SECURITY_CODE } from 'constants';
+import { validateSecurityCode } from 'validators';
 
 function CardSecurityField({ securityCode, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({
@@ -17,7 +17,7 @@ function CardSecurityField({ securityCode, onChange }) {
     <FieldSet title="보안 코드(CVC/CVV)" inputWidth={25} errorMessage={errorMessage}>
       <TextField
         type="password"
-        name="securityCode"
+        name={SECURITY_CODE.TEXT_FIELD_NAME}
         value={securityCode}
         maxLength={SECURITY_CODE.LENGTH}
         onChange={onChange}

@@ -1,5 +1,7 @@
 import { useEffect, useReducer, useState } from 'react';
 
+import { CARD_NUMBER, USER_NAME } from 'constants';
+
 const initialState = {
   cardNumber: ['', '', '', ''],
   expireMonth: '',
@@ -15,12 +17,12 @@ function reducer(state, { type, contents }) {
   const newState = { ...state };
 
   switch (type) {
-    case 'cardNumber': {
+    case CARD_NUMBER.TEXT_FIELD_NAME: {
       const { index, value } = contents;
       newState.cardNumber[index] = formatCardNumber(value);
       break;
     }
-    case 'userName': {
+    case USER_NAME.TEXT_FIELD_NAME: {
       newState.userName = contents.toUpperCase();
       break;
     }

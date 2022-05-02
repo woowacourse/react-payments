@@ -20,6 +20,8 @@ import {
   validateUserName,
 } from 'validators';
 
+import { CARD_NUMBER } from 'constants';
+
 function CardAdd() {
   const [state, dispatch] = useCardState();
   const { cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword } = state;
@@ -29,7 +31,7 @@ function CardAdd() {
     const textFieldName = target.name;
 
     switch (textFieldName) {
-      case 'cardNumber':
+      case CARD_NUMBER.TEXT_FIELD_NAME:
         dispatch({
           type: textFieldName,
           contents: { index: option.index, value: target.value },
