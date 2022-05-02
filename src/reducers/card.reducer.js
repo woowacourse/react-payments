@@ -1,23 +1,22 @@
-import { ACTION_TYPE } from '../constants';
+import {
+  SET_COMPANY_INDEX,
+  SET_CVC,
+  SET_CVC_ERROR_MESSAGE,
+  SET_EXPIRATION_ERROR_MESSAGE,
+  SET_MODAL_FLAG,
+  SET_OWNER,
+  SET_OWNER_ERROR_MESSAGE,
+  SET_PASSWORD,
+  SET_PASSWORD_ERROR_MESSAGE,
+  SET_COMPANY_ERROR_MESSAGE,
+  SET_EXPIRATION,
+  SET_NUMBER_ERROR_MESSAGE,
+  SET_NUMBER,
+} from './card.actions';
 
-export const initialState = {
-  cardNumber: ['', '', '', ''],
-  cardNumberErrorMessage: '',
-  cardExpiration: ['', ''],
-  cardExpirationErrorMessage: '',
-  cardOwner: '',
-  cardOwnerErrorMessage: '',
-  cardCvc: '',
-  cardCvcErrorMessage: '',
-  cardPassword: ['', ''],
-  cardPasswordErrorMessage: '',
-  cardCompanyIndex: -1,
-  modalFlag: false,
-};
-
-export const reducer = (state, action) => {
+const reducer = (state, action) => {
   switch (action.type) {
-    case ACTION_TYPE.SET_CARD_NUMBER: {
+    case SET_NUMBER: {
       const cardNumber = [...state.cardNumber];
       const { value, index } = action;
 
@@ -29,14 +28,14 @@ export const reducer = (state, action) => {
       };
     }
 
-    case 'SET_CARD_NUMBER_ERROR_MESSAGE': {
+    case SET_NUMBER_ERROR_MESSAGE: {
       return {
         ...state,
         cardNumberErrorMessage: action.errorMessage,
       };
     }
 
-    case 'SET_CARD_EXPIRATION': {
+    case SET_EXPIRATION: {
       const cardExpiration = [...state.cardExpiration];
       const { value, index } = action;
 
@@ -48,36 +47,36 @@ export const reducer = (state, action) => {
       };
     }
 
-    case 'SET_CARD_EXPIRATION_ERROR_MESSAGE': {
+    case SET_EXPIRATION_ERROR_MESSAGE: {
       return {
         ...state,
         cardExpirationErrorMessage: action.errorMessage,
       };
     }
 
-    case 'SET_CARD_OWNER': {
+    case SET_OWNER: {
       return { ...state, cardOwner: action.value };
     }
 
-    case 'SET_CARD_OWNER_ERROR_MESSAGE': {
+    case SET_OWNER_ERROR_MESSAGE: {
       return {
         ...state,
         cardOwnerErrorMessage: action.errorMessage,
       };
     }
 
-    case 'SET_CARD_CVC': {
+    case SET_CVC: {
       return { ...state, cardCvc: action.value };
     }
 
-    case 'SET_CARD_CVC_ERROR_MESSAGE': {
+    case SET_CVC_ERROR_MESSAGE: {
       return {
         ...state,
         cardCvcErrorMessage: action.errorMessage,
       };
     }
 
-    case 'SET_CARD_PASSWORD': {
+    case SET_PASSWORD: {
       const cardPassword = [...state.cardPassword];
       const { value, index } = action;
 
@@ -89,28 +88,28 @@ export const reducer = (state, action) => {
       };
     }
 
-    case 'SET_CARD_PASSWORD_ERROR_MESSAGE': {
+    case SET_PASSWORD_ERROR_MESSAGE: {
       return {
         ...state,
         cardPasswordErrorMessage: action.errorMessage,
       };
     }
 
-    case 'SET_CARD_COMPANY_ERROR_MESSAGE': {
+    case SET_COMPANY_ERROR_MESSAGE: {
       return {
         ...state,
         cardCompanyErrorMessage: action.errorMessage,
       };
     }
 
-    case 'SET_MODAL_FLAG': {
+    case SET_MODAL_FLAG: {
       return {
         ...state,
         modalFlag: action.flag,
       };
     }
 
-    case 'SET_COMPANY_INDEX': {
+    case SET_COMPANY_INDEX: {
       return {
         ...state,
         cardCompanyIndex: action.index,
@@ -121,3 +120,5 @@ export const reducer = (state, action) => {
       return state;
   }
 };
+
+export default reducer;

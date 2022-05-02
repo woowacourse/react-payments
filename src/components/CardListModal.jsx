@@ -4,18 +4,19 @@ import Dimmer from './Dimmer';
 import ToastModal from './ToastModal';
 import { CARD_COMPANIES } from '../constants/index';
 import CardContext from '../CardContext';
+import { SET_COMPANY_INDEX, SET_MODAL_FLAG } from '../reducers/card.actions';
 
 export default function CardListModal() {
   const { cardCompanyIndex, modalFlag, dispatch } = useContext(CardContext);
 
   const onClickDimmer = useCallback(() => {
-    dispatch({ type: 'SET_MODAL_FLAG', flag: false });
+    dispatch({ type: SET_MODAL_FLAG, flag: false });
   }, []);
 
   const onClickCardCompany = (index) =>
     useCallback(() => {
-      dispatch({ type: 'SET_COMPANY_INDEX', index });
-      dispatch({ type: 'SET_MODAL_FLAG', flag: false });
+      dispatch({ type: SET_COMPANY_INDEX, index });
+      dispatch({ type: SET_MODAL_FLAG, flag: false });
     }, []);
 
   return (

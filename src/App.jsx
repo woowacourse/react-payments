@@ -2,7 +2,8 @@ import React from 'react';
 import CardAddition from './CardAddition';
 import CardContext from './CardContext';
 import useInitialAppValue from './hooks/useInitialAppValue';
-import { initialState, reducer } from './reducers';
+import initialState from './reducers/card.initialState';
+import reducer from './reducers/card.reducer';
 
 function App() {
   return (
