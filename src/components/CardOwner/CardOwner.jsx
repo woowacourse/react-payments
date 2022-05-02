@@ -16,7 +16,7 @@ function CardOwner({ cardInfo, setCardInfo }) {
 
     setCardInfo({
       ...cardInfo,
-      [name]: cardOwnerLengthSliced,
+      [name]: cardOwnerLengthSliced.toUpperCase(),
     });
   };
 
