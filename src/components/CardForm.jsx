@@ -205,23 +205,27 @@ const CardForm = () => {
           <div className="input-box transparent">
             <input
               type="password"
-              className={getInputClassName('firstPasswordDigit')}
+              className={`${getInputClassName(
+                'firstPasswordDigit'
+              )} w-15 password`}
               {...registerInputProps('firstPasswordDigit')}
             />
             <input
               type="password"
-              className={getInputClassName('secondPasswordDigit')}
+              className={`${getInputClassName(
+                'secondPasswordDigit'
+              )} w-15 password`}
               {...registerInputProps('secondPasswordDigit')}
             />
             <input
               type="password"
-              className={getInputClassName('thirdPasswordDigit')}
+              className="input-basic w-15 disabled"
               disabled
               {...registerInputProps('thirdPasswordDigit')}
             />
             <input
               type="password"
-              className={getInputClassName('fourthPasswordDigit')}
+              className="input-basic w-15 disabled"
               disabled
               {...registerInputProps('fourthPasswordDigit')}
             />
