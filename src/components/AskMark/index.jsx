@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const AskMark = () => {
   return (
     <Container>
-      <AskMarkContainer>?</AskMarkContainer>
+      <AskMarkContainer type="button">?</AskMarkContainer>
       <InformationContainer>
         카드 뒷면 서명란에 인쇄되어 있는 19자리 중 마지막 3자리 숫자 입니다
       </InformationContainer>
