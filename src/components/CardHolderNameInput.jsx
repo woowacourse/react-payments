@@ -1,7 +1,10 @@
 import React from "react";
+
+import styled from "styled-components";
+
 import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
-import styled from "styled-components";
+
 import { CARD_INFO_RULES } from "../constants/constants";
 
 const StyledInputCounter = styled.p`

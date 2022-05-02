@@ -1,7 +1,9 @@
 import React from "react";
-import { CARD_INFO_RULES } from "../constants/constants";
+
 import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
+
+import { CARD_INFO_RULES } from "../constants/constants";
 
 export default function CardExpireDateInput({ expireDate, onChange }) {
   return (
@@ -17,6 +19,7 @@ export default function CardExpireDateInput({ expireDate, onChange }) {
         <React.Fragment key={text}>
           <Input
             placeholder={text}
+            maxLength={2}
             name={text}
             type={"text"}
             value={expireDate[index]}

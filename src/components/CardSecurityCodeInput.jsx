@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
 import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
-import styled from "styled-components";
+
 import HelpIconImage from "../assets/images/questionMark.svg";
+
 import {
   CARD_INFO_RULES,
   CREATE_MASKED_CHARACTERS,
@@ -68,6 +71,7 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
       <Input
         type="password"
         name={"securityCode"}
+        maxLength={3}
         value={securityCode}
         onChange={(e) => onChange(e, "securityCode")}
         placeholder={CREATE_MASKED_CHARACTERS(3)}

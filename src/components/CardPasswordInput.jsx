@@ -1,6 +1,8 @@
 import React from "react";
-import Input from "./UIComponents/Input/Input";
+
 import styled from "styled-components";
+
+import Input from "./UIComponents/Input/Input";
 import {
   CARD_INFO_RULES,
   CREATE_MASKED_CHARACTERS,
@@ -56,6 +58,7 @@ const CardPasswordInput = React.forwardRef((props, inputRef) => {
             <Input
               type="password"
               value={password[index]}
+              maxLength={1}
               name={passwordKey}
               onChange={(e) =>
                 onChange(

@@ -1,11 +1,13 @@
 import React from "react";
+
+import Input from "./UIComponents/Input/Input";
+import InputField from "./UIComponents/InputField/InputField";
+
 import {
+  INPUT_KEY_TABLE,
   CARD_INFO_RULES,
   CREATE_MASKED_CHARACTERS,
 } from "../constants/constants";
-import Input from "./UIComponents/Input/Input";
-import InputField from "./UIComponents/InputField/InputField";
-import { INPUT_KEY_TABLE } from "../constants/constants";
 
 const CardNumberInput = React.forwardRef((props, inputRef) => {
   const { cardNumber, onChange, onKeyDown } = props;
@@ -27,6 +29,7 @@ const CardNumberInput = React.forwardRef((props, inputRef) => {
           <Input
             autoFocus={index === 0}
             type={index <= 1 ? "number" : "password"}
+            maxLength={4}
             name={cardNumberKey}
             value={cardNumber[index]}
             onChange={(e) =>
