@@ -97,8 +97,10 @@ function App() {
           setSecurityCode={setSecurityCode}
         />
         <CardPasswordInput password={password} setPassword={setPassword} />
+        {isValidCardInfo && (
+          <Button text="다음" onClick={handleCardInfoSubmit} />
+        )}
       </Form>
-      {isValidCardInfo && <Button text="다음" onClick={handleCardInfoSubmit} />}
     </div>
   );
 }

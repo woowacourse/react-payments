@@ -5,6 +5,10 @@ const StyledCardInfoForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  button {
+    align-self: flex-end;
+  }
 `;
 
 export default function Form({ children }) {
