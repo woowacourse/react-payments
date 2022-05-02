@@ -1,6 +1,6 @@
-import InputBox from '../InputBox'
-import { FormWrapper, Label } from '../Form/style'
-import { PasswordWrapper, Dot } from './style'
+import InputBox from 'components/InputBox'
+import { FormWrapper, Label } from 'components/Form/style'
+import { PasswordWrapper, Dot } from 'components/PasswordForm/style'
 
 function PasswordForm(props) {
   const { label, inputInfo, size, onChangeFirst, onChangeSecond } = props

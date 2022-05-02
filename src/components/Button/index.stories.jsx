@@ -1,6 +1,6 @@
 import Button from './'
-import { ReactComponent as Arrow } from '../../assets/arrow.svg'
-import { COLORS } from '../../constant'
+import { ReactComponent as Arrow } from 'assets/arrow.svg'
+import { COLORS } from 'constant'
 
 const Template = (args) => <Button {...args} />
 

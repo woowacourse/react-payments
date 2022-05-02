@@ -1,4 +1,4 @@
-import InputBox from './'
+import InputBox from 'components/InputBox'
 
 const Template = (args) => <InputBox {...args} />
 

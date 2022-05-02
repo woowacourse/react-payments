@@ -1,4 +1,4 @@
-import AddPage from './'
+import AddPage from 'pages/AddPage'
 
 const Template = (args) => <AddPage {...args} />
 

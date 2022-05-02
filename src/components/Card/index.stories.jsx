@@ -1,4 +1,4 @@
-import Card from './'
+import Card from 'components/Card/index'
 
 const Template = (args) => <Card {...args} />
 

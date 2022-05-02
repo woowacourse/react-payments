@@ -1,14 +1,14 @@
 import { useState } from 'react'
 
-import InputBox from '../InputBox'
-import { ReactComponent as QuestionMark } from '../../assets/questionMark.svg'
+import InputBox from 'components/InputBox'
+import { ReactComponent as QuestionMark } from 'assets/questionMark.svg'
 
 import {
   Label,
   FormWrapper,
   HelpTextWrapper,
   InputHelperWrapper,
-} from './style'
+} from 'components/Form/style'
 
 function Form(props) {
   const { label, background, border, error, inputInfo, size, onChange } = props

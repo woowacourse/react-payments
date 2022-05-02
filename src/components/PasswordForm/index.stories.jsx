@@ -1,4 +1,4 @@
-import PasswordForm from '.'
+import PasswordForm from 'components/PasswordForm'
 
 const Template = (args) => <PasswordForm {...args} />
 

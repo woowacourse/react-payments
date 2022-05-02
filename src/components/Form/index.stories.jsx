@@ -1,5 +1,5 @@
-import { OWNER } from '../../constant'
-import Form from './'
+import { OWNER } from 'constant'
+import Form from 'components/Form'
 
 const Template = (args) => <Form {...args} />
 

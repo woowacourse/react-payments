@@ -1,14 +1,14 @@
 import { useState, useRef, useEffect } from 'react'
 
-import Card from '../../components/Card'
-import Button from '../../components/Button'
-import Header from '../../components/Header'
-import Form from '../../components/Form'
-import PasswordForm from '../../components/PasswordForm'
+import Card from 'components/Card'
+import Button from 'components/Button'
+import Header from 'components/Header'
+import Form from 'components/Form'
+import PasswordForm from 'components/PasswordForm'
 
-import { PageWrapper, CardWrapper, FooterWrapper } from './style'
+import { PageWrapper, CardWrapper, FooterWrapper } from 'pages/AddPage/style'
 
-import { ReactComponent as Arrow } from '../../assets/arrow.svg'
+import { ReactComponent as Arrow } from 'assets/arrow.svg'
 import {
   CARD_NUMBER,
   DUE_DATE,
@@ -17,7 +17,7 @@ import {
   PASSWORD,
   COLORS,
   MONTH,
-} from '../../constant'
+} from 'constant'
 
 function AddPage() {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', ''])
@@ -161,8 +161,8 @@ function AddPage() {
           company="우테코"
           cardNumbers={cardNumbers}
           owner={owner || 'NAME'}
-          dueMonth={dueDate.month || 'MM'}
-          dueYear={dueDate.year || 'YY'}
+          dueMonth={dueDate[0] || 'MM'}
+          dueYear={dueDate[1] || 'YY'}
         />
       </CardWrapper>
       <Form

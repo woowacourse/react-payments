@@ -1,6 +1,6 @@
-import Header from './'
-import Button from '../Button'
-import { ReactComponent as Arrow } from '../../assets/arrow.svg'
+import Header from 'components/Header'
+import Button from 'components/Button'
+import { ReactComponent as Arrow } from 'assets/arrow.svg'
 
 const Template = (args) => <Header {...args} />
 

@@ -1,6 +1,6 @@
-import AddPage from './pages/AddPage'
+import AddPage from 'pages/AddPage'
 import { ThemeProvider } from 'styled-components'
-import theme from './theme'
+import theme from 'theme'
 
 function App() {
   return (
