@@ -18,52 +18,53 @@ import { ReactComponent as Arrow } from './assets/arrow.svg';
 
 import { RULE } from './constants';
 
-const StyledPage = styled.form`
-  background: #fff;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-  width: 400px;
-  height: 757px;
-`;
+const Styled = {
+  Page: styled.form`
+    background: #fff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    width: 400px;
+    height: 757px;
+  `,
+  Header: styled.div`
+    align-items: center;
+    display: flex;
+    margin-bottom: 25px;
+  `,
 
-const Header = styled.div`
-  align-items: center;
-  display: flex;
-  margin-bottom: 25px;
-`;
+  Title: styled.span`
+    font-size: 16px;
+    margin-left: 18px;
+  `,
 
-const Title = styled.span`
-  font-size: 16px;
-  margin-left: 18px;
-`;
+  Card: styled(Card)`
+    align-self: center;
+    margin-bottom: 25px;
+  `,
 
-const StyledCard = styled(Card)`
-  align-self: center;
-  margin-bottom: 25px;
-`;
+  InputGroup: styled.div`
+    display: flex;
+    flex-direction: column;
+    row-gap: 19px;
+  `,
 
-const InputGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 19px;
-`;
+  CardOwnerNameLength: styled.div`
+    color: #525252;
+    font-size: 12px;
+    float: right;
+  `,
 
-const CardOwnerNameLength = styled.div`
-  color: #525252;
-  font-size: 12px;
-  float: right;
-`;
+  Bullet: styled.span`
+    color: #04c09e;
+    margin-right: 35px;
+  `,
 
-const Bullet = styled.span`
-  color: #04c09e;
-  margin-right: 35px;
-`;
-
-const NextButton = styled(Button)`
-  align-self: end;
-`;
+  NextButton: styled(Button)`
+    align-self: end;
+  `,
+};
 
 function App() {
   const [cardNumber, setCardNumber, encryptedCardNumber] = useCardNumber('');
@@ -83,19 +84,19 @@ function App() {
   ];
 
   return (
-    <StyledPage>
-      <Header>
+    <Styled.Page>
+      <Styled.Header>
         <Button size="small" content={<Arrow />} />
-        <Title>카드 추가</Title>
-      </Header>
-      <StyledCard
+        <Styled.Title>카드 추가</Styled.Title>
+      </Styled.Header>
+      <Styled.Card
         bgColor="#ADD8E6"
         size="medium"
         name={cardOwnerName}
         number={encryptedCardNumber}
         validDate={validDate}
       />
-      <InputGroup>
+      <Styled.InputGroup>
         <div>
           <Input
             description="카드 번호"
@@ -113,9 +114,9 @@ function App() {
           />
         </div>
         <div>
-          <CardOwnerNameLength>
+          <Styled.CardOwnerNameLength>
             {cardOwnerName.length}/{RULE.CARD_OWNER_NAME_MAX_LENGTH}
-          </CardOwnerNameLength>
+          </Styled.CardOwnerNameLength>
           <Input
             description="카드 소유자 이름 (선택)"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
@@ -158,14 +159,14 @@ function App() {
             value={secondPassword}
             onChangeFunc={setSecondPassword}
           />
-          <Bullet>•</Bullet>
-          <Bullet>•</Bullet>
+          <Styled.Bullet>•</Styled.Bullet>
+          <Styled.Bullet>•</Styled.Bullet>
         </div>
-      </InputGroup>
+      </Styled.InputGroup>
       {requiredList.every(value => value !== '') && (
-        <NextButton color="#04C09E" content="다음" fontWeight="bold" />
+        <Styled.NextButton color="#04C09E" content="다음" fontWeight="bold" />
       )}
-    </StyledPage>
+    </Styled.Page>
   );
 }
 

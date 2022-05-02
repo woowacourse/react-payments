@@ -14,22 +14,32 @@ const getButtonSize = size => {
   }
 };
 
-const StyledButton = styled.button`
-  cursor: pointer;
+const Styled = {
+  Button: styled.button`
+    cursor: pointer;
 
-  ${({ bgColor, border, shape, color, buttonStyle, fontWeight, margin }) => css`
-    background: ${bgColor};
-    border: ${border};
-    border-radius: ${shape === 'circle' && '50%'};
-    color: ${color};
-    font-size: ${buttonStyle.fontSize};
-    font-weight: ${fontWeight};
-    height: ${buttonStyle.height};
-    margin: ${margin?.t || '0'} ${margin?.r || '0'} ${margin?.b || '0'}
-      ${margin?.l || '0'};
-    width: ${shape === 'circle' && buttonStyle.height};
-  `}
-`;
+    ${({
+      bgColor,
+      border,
+      shape,
+      color,
+      buttonStyle,
+      fontWeight,
+      margin,
+    }) => css`
+      background: ${bgColor};
+      border: ${border};
+      border-radius: ${shape === 'circle' && '50%'};
+      color: ${color};
+      font-size: ${buttonStyle.fontSize};
+      font-weight: ${fontWeight};
+      height: ${buttonStyle.height};
+      margin: ${margin?.t || '0'} ${margin?.r || '0'} ${margin?.b || '0'}
+        ${margin?.l || '0'};
+      width: ${shape === 'circle' && buttonStyle.height};
+    `}
+  `,
+};
 
 function Button({
   bgColor,
@@ -46,7 +56,7 @@ function Button({
 }) {
   const buttonStyle = getButtonSize(size);
   return (
-    <StyledButton
+    <Styled.Button
       bgColor={bgColor}
       border={border}
       buttonStyle={buttonStyle}
@@ -60,7 +70,7 @@ function Button({
       onClick={onClickFunc}
     >
       {content}
-    </StyledButton>
+    </Styled.Button>
   );
 }
 

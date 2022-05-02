@@ -33,89 +33,102 @@ const getCardSize = size => {
   }
 };
 
-const StyledCard = styled.div`
-  box-shadow: 3px 3px 5px #00000040;
-  border-radius: 5px;
-  padding: 19px;
+const Styled = {
+  Card: styled.div`
+    box-shadow: 3px 3px 5px #00000040;
+    border-radius: 5px;
+    padding: 19px;
 
-  ${({ bgColor, cardStyle }) => css`
-    background: ${bgColor};
-    height: ${cardStyle.card.height};
-    width: ${cardStyle.card.width};
-  `};
-`;
-const Title = styled.div`
-  color: #383838;
+    ${({ bgColor, cardStyle }) => css`
+      background: ${bgColor};
+      height: ${cardStyle.card.height};
+      width: ${cardStyle.card.width};
+    `};
+  `,
 
-  ${({ cardStyle }) => css`
-    font-size: ${cardStyle.title.size};
-    height: ${cardStyle.title.size};
-    margin-bottom: ${cardStyle.title.marginBottom};
-  `}
-`;
-const Magnet = styled.div`
-  background: #cbba64;
-  border-radius: 4px;
+  Title: styled.div`
+    color: #383838;
 
-  ${({ cardStyle }) => css`
-    height: ${cardStyle.magnet.height};
-    margin-bottom: ${cardStyle.magnet.marginBottom};
-    width: ${cardStyle.magnet.width};
-  `}
-`;
-const NumberSet = styled.div`
-  color: #525252;
-  font-weight: bold;
-  text-align: center;
+    ${({ cardStyle }) => css`
+      font-size: ${cardStyle.title.size};
+      height: ${cardStyle.title.size};
+      margin-bottom: ${cardStyle.title.marginBottom};
+    `}
+  `,
 
-  ${({ cardStyle }) => css`
-    font-size: ${cardStyle.detail.size};
-    height: ${cardStyle.detail.height};
-    margin-bottom: ${cardStyle.numberSet.marginBottom};
-  `}
-`;
-const OwnerName = styled.span`
-  color: #525252;
-  display: inline-block;
-  font-weight: bold;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  width: 130px;
-  word-break: break-all;
+  Magnet: styled.div`
+    background: #cbba64;
+    border-radius: 4px;
 
-  ::-webkit-scrollbar {
-    display: none;
-  }
+    ${({ cardStyle }) => css`
+      height: ${cardStyle.magnet.height};
+      margin-bottom: ${cardStyle.magnet.marginBottom};
+      width: ${cardStyle.magnet.width};
+    `}
+  `,
 
-  ${({ cardStyle }) => css`
-    font-size: ${cardStyle.detail.size};
-    height: ${cardStyle.detail.height};
-  `}
-`;
-const ValidDate = styled.span`
-  color: #525252;
-  float: right;
-  font-weight: bold;
+  NumberSet: styled.div`
+    color: #525252;
+    font-weight: bold;
+    text-align: center;
 
-  ${({ cardStyle }) => css`
-    font-size: ${cardStyle.detail.size};
-    height: ${cardStyle.detail.height};
-  `}
-`;
+    ${({ cardStyle }) => css`
+      font-size: ${cardStyle.detail.size};
+      height: ${cardStyle.detail.height};
+      margin-bottom: ${cardStyle.numberSet.marginBottom};
+    `}
+  `,
+
+  OwnerName: styled.span`
+    color: #525252;
+    display: inline-block;
+    font-weight: bold;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 130px;
+    word-break: break-all;
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    ${({ cardStyle }) => css`
+      font-size: ${cardStyle.detail.size};
+      height: ${cardStyle.detail.height};
+    `}
+  `,
+
+  ValidDate: styled.span`
+    color: #525252;
+    float: right;
+    font-weight: bold;
+
+    ${({ cardStyle }) => css`
+      font-size: ${cardStyle.detail.size};
+      height: ${cardStyle.detail.height};
+    `}
+  `,
+};
 
 function Card({ bgColor, className, name, number, size, title, validDate }) {
   const cardStyle = getCardSize(size);
 
   return (
-    <StyledCard className={className} bgColor={bgColor} cardStyle={cardStyle}>
-      <Title cardStyle={cardStyle}>{title}</Title>
-      <Magnet cardStyle={cardStyle} />
+    <Styled.Card className={className} bgColor={bgColor} cardStyle={cardStyle}>
+      <Styled.Title cardStyle={cardStyle}>{title}</Styled.Title>
+      <Styled.Magnet cardStyle={cardStyle} />
       <div>
-        <NumberSet cardStyle={cardStyle}>{number || ''}</NumberSet>
-        <OwnerName cardStyle={cardStyle}>{name || 'NAME'}</OwnerName>
-        <ValidDate cardStyle={cardStyle}>{validDate || 'MM/YY'}</ValidDate>
+        <Styled.NumberSet cardStyle={cardStyle}>
+          {number || ''}
+        </Styled.NumberSet>
+        <Styled.ValidDate cardStyle={cardStyle}>
+          {validDate || 'MM/YY'}
+        </Styled.ValidDate>
+        <Styled.OwnerName cardStyle={cardStyle}>
+          {name || 'NAME'}
+        </Styled.OwnerName>
       </div>
-    </StyledCard>
+    </Styled.Card>
   );
 }
 
