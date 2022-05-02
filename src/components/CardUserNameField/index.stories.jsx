@@ -1,15 +1,12 @@
-import Card from '.';
-import 'index.css';
-
 export default {
-  title: 'Component/UserName',
-  component: UserName,
+  title: 'Component/CardUserNameField',
+  component: CardUserNameField,
   parameters: {
     layout: 'centered',
   },
 };
 
-const Template = (args) => <UserName {...args} />;
+const Template = (args) => <CardUserNameField {...args} />;
 
 export const Compy = Template.bind({});
 Compy.args = {

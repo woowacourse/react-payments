@@ -1,5 +1,4 @@
 import CardExpireDateField from '.';
-import 'index.css';
 
 export default {
   title: 'Component/CardExpireDateField',

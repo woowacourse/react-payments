@@ -1,5 +1,4 @@
 import CardPasswordField from '.';
-import 'index.css';
 
 export default {
   title: 'Component/CardPasswordField',
