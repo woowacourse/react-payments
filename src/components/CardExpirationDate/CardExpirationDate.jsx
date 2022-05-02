@@ -8,7 +8,7 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
     let { value } = event.target;
 
     if (value === String(MONTH.JANUARY)) {
-      value = MONTH.LEADING_ZERO + MONTH.JANUARY;
+      value = value.padStart(2, '0');
     }
 
     setCardInfo({
@@ -26,7 +26,7 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
     }
 
     if (value >= MONTH.FEBRUARY && value <= MONTH.SEPTEMBER) {
-      value = MONTH.LEADING_ZERO + Number(value);
+      value = value.padStart(2, '0');
     }
 
     setCardInfo({
