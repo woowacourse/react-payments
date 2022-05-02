@@ -14,23 +14,17 @@ const alignTag = {
   center: "text-center",
 };
 
-interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "maxLength"> {
+interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   size?: "tiny" | "small" | "medium" | "large" | "full";
   align?: "right" | "left" | "center";
-  maxLength?: number;
   classes?: string;
 }
 
-export default function Input({ size, maxLength, onChange, classes, align, ...props }: InputProps) {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > maxLength) return;
-    onChange?.(e);
-  };
-
+export default function Input({ size, onChange, classes, align, ...props }: InputProps) {
   return (
     <input
       className={`input-basic ${classes} ${sizeTag[size]} ${alignTag[align]}`}
-      onChange={handleChange}
+      onChange={onChange}
       {...props}
     />
   );
