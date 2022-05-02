@@ -7,7 +7,7 @@ export const cardNumberInputInfoList = [
     type: 'text',
     className: 'mr-n15 tracking-wide',
     name: 'first',
-    maxLength: INPUT_MAX_LENGTH.NUMBER,
+    maxLength: INPUT_MAX_LENGTH.CARD_NUMBER,
     autoFocus: true,
   },
   {
@@ -15,21 +15,21 @@ export const cardNumberInputInfoList = [
     type: 'text',
     className: 'mr-n15 tracking-wide',
     name: 'second',
-    maxLength: INPUT_MAX_LENGTH.NUMBER,
+    maxLength: INPUT_MAX_LENGTH.CARD_NUMBER,
   },
   {
     id: uuid(),
     type: 'password',
     className: 'mr-n15 tracking-wide',
     name: 'third',
-    maxLength: INPUT_MAX_LENGTH.NUMBER,
+    maxLength: INPUT_MAX_LENGTH.CARD_NUMBER,
   },
   {
     id: uuid(),
     type: 'password',
     className: 'tracking-wide',
     name: 'fourth',
-    maxLength: INPUT_MAX_LENGTH.NUMBER,
+    maxLength: INPUT_MAX_LENGTH.CARD_NUMBER,
   },
 ];
 

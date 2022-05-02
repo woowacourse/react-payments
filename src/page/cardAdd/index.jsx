@@ -22,15 +22,15 @@ import {
   cardCompanyList,
 } from './data';
 
-const getCardInfoMessage = (company, number, month, year, ownerName, privacyCode) => {
-  const { first, second, third, fourth } = number;
+const getCardInfoMessage = (company, cardNumber, month, year, ownerName, privacyCode) => {
+  const { first, second, third, fourth } = cardNumber;
 
   return `🎊카드가 정상적으로 추가되었습니다.🎊\n\n회사 이름 : ${company}\n카드 번호 : ${first}-${second}-${third}-${fourth}\n만료일 : ${month} / ${year}\n카드 소유자 이름 : ${ownerName}\n보안 코드 : ${privacyCode}`;
 };
 
 const initialCardInfo = {
   company: '',
-  number: {
+  cardNumber: {
     first: '',
     second: '',
     third: '',
@@ -56,7 +56,7 @@ const CardAppPage = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isfullFilled, setIsFullFilled] = useState(false);
   const [isCardFront, setIsCardFront] = useState(true);
-  const { number, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
+  const { cardNumber, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
 
   useEffect(() => {
     if (checkFullFilled(cardInfo)) {
@@ -112,7 +112,7 @@ const CardAppPage = () => {
     const { month, year } = expiryDate;
     const cardInfoMessage = getCardInfoMessage(
       company,
-      number,
+      cardNumber,
       month,
       year,
       ownerName,
@@ -136,10 +136,10 @@ const CardAppPage = () => {
         handleCardPosition={handleCardPosition}
       />
       <FormInput
-        item="number"
+        item="cardNumber"
         inputTitle="카드 번호"
         inputInfoList={cardNumberInputInfoList}
-        inputValue={number}
+        inputValue={cardNumber}
         handleChange={handleChange}
         theme={theme}
       />

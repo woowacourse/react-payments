@@ -26,7 +26,7 @@ const validateMonth = (value) => {
 };
 
 export const validator = {
-  number(value) {
+  cardNumber(value) {
     return isNumber(Number(value));
   },
   expiryDate(value, name) {
@@ -49,7 +49,7 @@ export const validator = {
 
 // 카드 폼의 각 정보들이 모두 입력되었는지 검사
 const isFullNumber = (number) =>
-  Object.values(number).every((value) => value.length === INPUT_MAX_LENGTH.NUMBER);
+  Object.values(number).every((value) => value.length === INPUT_MAX_LENGTH.CARD_NUMBER);
 
 const isFullCompany = (company) => company !== '';
 
@@ -62,10 +62,10 @@ const isFullPassword = (password) =>
   Object.values(password).every((value) => value.length === INPUT_MAX_LENGTH.PASSWORD);
 
 export const checkFullFilled = (cardInfo) => {
-  const { number, company, expiryDate, privacyCode, password } = cardInfo;
+  const { cardNumber, company, expiryDate, privacyCode, password } = cardInfo;
 
   return (
-    isFullNumber(number) &&
+    isFullNumber(cardNumber) &&
     isFullCompany(company) &&
     isFullExpiryDate(expiryDate) &&
     isFullPrivacyCode(privacyCode) &&

@@ -19,7 +19,7 @@ export const CardPreviewTemplate = Template.bind({});
 CardPreviewTemplate.args = {
   cardInfo: {
     company: '무비카드',
-    number: {
+    cardNumber: {
       first: '1234',
       second: '5678',
       third: '1234',

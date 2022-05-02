@@ -3,8 +3,8 @@ import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from '../constant
 import Button from './common/Button';
 
 const CardPreview = ({ cardInfo, isCardFront, handleModal, handleCardPosition }) => {
-  const { number, ownerName, expiryDate, company, theme, privacyCode } = cardInfo;
-  const { first, second, third, fourth } = number;
+  const { cardNumber, ownerName, expiryDate, company, theme, privacyCode } = cardInfo;
+  const { first, second, third, fourth } = cardNumber;
   const upperCaseOwnerName = ownerName.toUpperCase() || DEFAULT_CARD_INFO.OWNER_NAME;
   const month = expiryDate.month || DEFAULT_CARD_INFO.EXPIRY_MONTH;
   const year = expiryDate.year || DEFAULT_CARD_INFO.EXPIRY_YEAR;
@@ -61,7 +61,7 @@ const CardPreview = ({ cardInfo, isCardFront, handleModal, handleCardPosition })
 CardPreview.propTypes = {
   cardInfo: PropTypes.shape({
     company: PropTypes.string,
-    number: PropTypes.shape({
+    cardNumber: PropTypes.shape({
       first: PropTypes.string,
       second: PropTypes.string,
       third: PropTypes.string,

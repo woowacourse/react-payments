@@ -33,7 +33,7 @@ export const COMPANY = {
 };
 
 export const INPUT_MAX_LENGTH = {
-  NUMBER: 4,
+  CARD_NUMBER: 4,
   EXPIRY_DATE: 2,
   OWNER_NAME: 30,
   PRIVACY_CODE: 3,
