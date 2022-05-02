@@ -47,6 +47,7 @@ export const CardPasswordInputForm = ({
           inputRef={(elem) => (passwordInputRefs.current[0] = elem)}
           type="password"
           width="20%"
+          maxLength="1"
         />
         <InputBasic
           value={password?.secondNumber}
@@ -54,6 +55,7 @@ export const CardPasswordInputForm = ({
           inputRef={(elem) => (passwordInputRefs.current[1] = elem)}
           type="password"
           width="20%"
+          maxLength="1"
         />
         <Dot />
         <Dot />

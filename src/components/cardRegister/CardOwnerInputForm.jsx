@@ -1,14 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import { InputBasic } from '../common/InputBasic';
-import { InputContainer, InputTitle } from '../common/styled';
+import { InputBasic } from "../common/InputBasic";
+import { InputContainer, InputTitle } from "../common/styled";
 
 export const CardOwnerInputForm = ({ ownerName, handleOwnerNameInput }) => {
   const handleOwnerNameChange = (e) => {
-    if (e.target.value.length > 30) {
-      return;
-    }
-
     handleOwnerNameInput(e.target.value);
   };
 
@@ -22,6 +18,7 @@ export const CardOwnerInputForm = ({ ownerName, handleOwnerNameInput }) => {
         value={ownerName}
         onChange={handleOwnerNameChange}
         type="text"
+        maxLength="30"
       />
     </InputContainer>
   );

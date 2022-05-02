@@ -12,7 +12,7 @@ export const CVCInputForm = ({
   handleModalVisible,
 }) => {
   const handleCVCChange = (e) => {
-    if (isNaN(e.nativeEvent.data) || e.target.value.length > 3) {
+    if (isNaN(e.nativeEvent.data)) {
       return;
     }
 
@@ -30,7 +30,12 @@ export const CVCInputForm = ({
       <InputTitle>보안카드(CVC/CVV)</InputTitle>
       <FlexWrapper alignItems={"baseline"} gap={"10px"}>
         <InputBox width="25%">
-          <InputBasic type="password" value={CVC} onChange={handleCVCChange} />
+          <InputBasic
+            type="password"
+            value={CVC}
+            maxLength="3"
+            onChange={handleCVCChange}
+          />
         </InputBox>
         <TipButton onClick={handleModalVisible} contents="?" />
       </FlexWrapper>

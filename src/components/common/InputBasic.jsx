@@ -22,6 +22,7 @@ export const InputBasic = ({
   onChange,
   width,
   inputRef,
+  maxLength,
 }) => {
   return (
     <InputBasicStyle
@@ -30,6 +31,7 @@ export const InputBasic = ({
       ref={inputRef}
       placeholder={placeholder}
       value={value}
+      maxLength={maxLength}
       onChange={onChange}
     />
   );
