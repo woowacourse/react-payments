@@ -1,4 +1,5 @@
 import CardSecurityField from '.';
+import useCardState from 'hooks/useCardState';
 
 export default {
   title: 'Component/CardSecurityField',
@@ -8,9 +9,14 @@ export default {
   },
 };
 
-const Template = (args) => <CardSecurityField {...args} />;
+const Template = () => {
+  const { state, onChangeTextField } = useCardState();
+  const { securityCode } = state;
+
+  return <CardSecurityField securityCode={securityCode} onChange={onChangeTextField} />;
+};
 
 export const DefaultCardSecurityField = Template.bind({});
-DefaultCardSecurityField.args = {
-  securityCode: '123',
+DefaultCardSecurityField.parameters = {
+  controls: { hideNoControlsWarning: true },
 };

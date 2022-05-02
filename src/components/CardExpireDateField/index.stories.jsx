@@ -1,4 +1,5 @@
 import CardExpireDateField from '.';
+import useCardState from 'hooks/useCardState';
 
 export default {
   title: 'Component/CardExpireDateField',
@@ -8,10 +9,19 @@ export default {
   },
 };
 
-const Template = (args) => <CardExpireDateField {...args} />;
+const Template = () => {
+  const { state, onChangeTextField } = useCardState();
+  const { expireMonth, expireYear } = state;
+  return (
+    <CardExpireDateField
+      onChange={onChangeTextField}
+      expireMonth={expireMonth}
+      expireYear={expireYear}
+    />
+  );
+};
 
 export const DefaultCardExpireDateField = Template.bind({});
-DefaultCardExpireDateField.args = {
-  expireMonth: '04',
-  expireYear: '22',
+DefaultCardExpireDateField.parameters = {
+  controls: { hideNoControlsWarning: true },
 };

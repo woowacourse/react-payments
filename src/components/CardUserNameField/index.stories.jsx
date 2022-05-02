@@ -1,4 +1,5 @@
 import CardUserNameField from '.';
+import useCardState from 'hooks/useCardState';
 
 export default {
   title: 'Component/CardUserNameField',
@@ -8,9 +9,14 @@ export default {
   },
 };
 
-const Template = (args) => <CardUserNameField {...args} />;
+const Template = () => {
+  const { state, onChangeTextField } = useCardState();
+  const { userName } = state;
 
-export const Compy = Template.bind({});
-Compy.args = {
-  userName: '류콤피',
+  return <CardUserNameField userName={userName} onChange={onChangeTextField} />;
+};
+
+export const DefaultCardUserNameFiled = Template.bind({});
+DefaultCardUserNameFiled.parameters = {
+  controls: { hideNoControlsWarning: true },
 };

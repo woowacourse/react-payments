@@ -1,4 +1,5 @@
 import CardNumberField from '.';
+import useCardState from 'hooks/useCardState';
 
 export default {
   title: 'Component/CardNumberField',
@@ -8,9 +9,14 @@ export default {
   },
 };
 
-const Template = (args) => <CardNumberField {...args} />;
+const Template = () => {
+  const { state, onChangeTextField } = useCardState();
+  const { cardNumber } = state;
+
+  return <CardNumberField cardNumber={cardNumber} onChange={onChangeTextField} />;
+};
 
 export const DefaultCardNumberField = Template.bind({});
-DefaultCardNumberField.args = {
-  cardNumber: ['1234', '1234', '1234', '1234'],
+DefaultCardNumberField.parameters = {
+  controls: { hideNoControlsWarning: true },
 };

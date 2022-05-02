@@ -1,4 +1,5 @@
 import CardPasswordField from '.';
+import useCardState from 'hooks/useCardState';
 
 export default {
   title: 'Component/CardPasswordField',
@@ -8,9 +9,14 @@ export default {
   },
 };
 
-const Template = (args) => <CardPasswordField {...args} />;
+const Template = () => {
+  const { state, onChangeTextField } = useCardState();
+  const { cardPassword } = state;
+
+  return <CardPasswordField cardPassword={cardPassword} onChange={onChangeTextField} />;
+};
 
 export const DefaultCardPasswordField = Template.bind({});
-DefaultCardPasswordField.args = {
-  cardPassword: '11',
+DefaultCardPasswordField.parameters = {
+  controls: { hideNoControlsWarning: true },
 };
