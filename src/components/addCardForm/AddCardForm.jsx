@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../input/Input';
@@ -17,15 +19,10 @@ function AddCardForm({ updateCard, addCard }) {
     firstPassword: '',
     secondPassword: '',
   });
-  const [nameLength, setNameLength] = useState(0);
 
   useEffect(() => {
     updateCard(cardForm);
   }, [cardForm]);
-
-  const updateNameLength = (name) => {
-    setNameLength(name.length);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -104,14 +101,13 @@ function AddCardForm({ updateCard, addCard }) {
         <div className="owner-name-wrapper">
           <span className="input-title">카드 소유자 이름(선택)</span>
           <span className="input-title">
-            {nameLength}/{MAX_LENGTH.NAME}
+            {cardForm.ownerName.length}/{MAX_LENGTH.NAME}
           </span>
         </div>
         <Input
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           length={MAX_LENGTH.NAME}
           minLength={MIN_LENGTH.NAME}
-          updateNameLength={updateNameLength}
           value={cardForm.ownerName}
           name="ownerName"
           updateCardForm={updateCardForm}

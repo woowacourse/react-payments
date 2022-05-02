@@ -11,7 +11,6 @@ function Input({
   max,
   name,
   value,
-  updateNameLength,
   updateCardForm,
   validators,
   optional,
@@ -36,8 +35,6 @@ function Input({
 
   const handleChange = (event) => {
     const targetValue = event.target.value;
-    if (updateNameLength) updateNameLength(targetValue);
-
     try {
       checkValidation(event, targetValue);
       updateCardForm(name, targetValue);
@@ -71,7 +68,6 @@ Input.propTypes = {
   max: PropTypes.number,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  updateNameLength: PropTypes.func,
   updateCardForm: PropTypes.func.isRequired,
   validators: PropTypes.shape({
     isOverMaxLength: PropTypes.func.isRequired,
