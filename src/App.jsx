@@ -3,7 +3,6 @@ import { useMemo, useState } from "react";
 import GlobalStyle from "./globalStyles.jsx";
 
 import PageHeader from "./PageHeader.jsx";
-import CardInfoForm from "./CardInfoForm.jsx";
 import Button from "./components/UIComponents/Button/Button.jsx";
 
 import {
@@ -13,6 +12,7 @@ import {
   CardPasswordInput,
   CardSecurityCodeInput,
   CardExpireDateInput,
+  Form,
 } from "./components";
 import { CARD_REGISTER_SUCCESS_MESSAGE, CARD_INFO_RULES } from "./constants.js";
 
@@ -79,7 +79,7 @@ function App() {
         expireDate={expireDate}
         canProceed={isValidCardInfo}
       />
-      <CardInfoForm setCardNumber={setCardNumber}>
+      <Form setCardNumber={setCardNumber}>
         <CardNumberInput
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}
@@ -97,7 +97,7 @@ function App() {
           setSecurityCode={setSecurityCode}
         />
         <CardPasswordInput password={password} setPassword={setPassword} />
-      </CardInfoForm>
+      </Form>
       {isValidCardInfo && <Button text="다음" onClick={handleCardInfoSubmit} />}
     </div>
   );

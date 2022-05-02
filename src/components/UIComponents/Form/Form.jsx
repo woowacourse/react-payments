@@ -7,7 +7,7 @@ const StyledCardInfoForm = styled.form`
   gap: 20px;
 `;
 
-export default function CardInfoForm({ children }) {
+export default function Form({ children }) {
   const handleFocus = (form, currElement, direction) => {
     const formInputArray = [...form];
     const currentIndex = formInputArray.indexOf(currElement);
