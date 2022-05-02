@@ -10,7 +10,7 @@ function CardListPage({ setPage }) {
   return (
     <div className="app">
       <PageTitle title="보유카드" />
-      <Card isEmpty={true} handleCardAdd={handleCardAdd} />
+      <Card isEmpty handleCardAdd={handleCardAdd} />
     </div>
   );
 }
