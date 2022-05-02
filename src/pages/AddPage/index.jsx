@@ -28,7 +28,7 @@ function AddPage() {
     secondPassword: '',
   })
   const [isFormFulfilled, setIsFormFulfilled] = useState(false)
-  const [error, setError] = useState([false, false])
+  const [error, setError] = useState({ dueMonth: false, dueYear: false })
 
   useEffect(() => {
     setIsFormFulfilled(
@@ -86,15 +86,15 @@ function AddPage() {
 
     if (key === 'month') {
       setError((prev) => {
-        const newState = [...prev]
-        newState[0] = +value > MONTH.MAX || +value < MONTH.MIN
+        const newState = { ...prev }
+        newState.dueMonth = +value > MONTH.MAX || +value < MONTH.MIN
         return newState
       })
     } else {
       const currentYear = new Date().getFullYear().toString().slice(2)
       setError((prev) => {
-        const newState = [...prev]
-        newState[1] = +value < currentYear
+        const newState = { ...prev }
+        newState.dueYear = +value < currentYear
         return newState
       })
     }
@@ -131,7 +131,7 @@ function AddPage() {
   }
 
   const handleSubmitChange = () => {
-    if (error[0] || error[1]) {
+    if (error.dueMonth || error.dueYear) {
       alert('만료일을 확인해주세요')
       return
     }
@@ -201,7 +201,7 @@ function AddPage() {
             key: 'year',
           },
         ]}
-        error={error[0] || error[1]}
+        error={error.dueMonth || error.dueYear}
         onChange={handleDueDateChange}
       />
       <Form
