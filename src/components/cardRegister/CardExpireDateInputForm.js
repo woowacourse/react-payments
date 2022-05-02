@@ -9,26 +9,27 @@ import {
   InputBox,
 } from '../common/styled';
 
+const isInputValueFilledWithZero = (e) =>
+  parseInt(e.nativeEvent.data) === 0 &&
+  e.target.value.length === 2 &&
+  parseInt(e.target.value) < 1;
+
 export const CardExpireDateInputForm = ({
   expireDate,
   onExpireDateInput,
   onCardExpireCheck,
 }) => {
   const handleMonthInput = (e) => {
-    if (isNaN(e.nativeEvent.data) || parseInt(e.target.value) > 12) {
+    if (e.target.value.length > 2) {
       return;
     }
 
-    if (e.target.value.length === 3) {
-      e.target.value = parseInt(e.target.value);
+    if (isInputValueFilledWithZero(e)) {
+      return;
     }
 
-    if (e.target.value.length === 1) {
-      e.target.value = '0' + e.target.value;
-    }
-
-    if (e.target.value === '0' || e.target.value === '00') {
-      e.target.value = '00';
+    if (isNaN(e.nativeEvent.data) || parseInt(e.target.value) > 12) {
+      return;
     }
 
     onExpireDateInput({

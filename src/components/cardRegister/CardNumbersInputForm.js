@@ -72,7 +72,6 @@ export const CardNumbersInputForm = ({
             key={name}
             ref={refs[index]}
             value={cardNumbers?.[name]}
-            // onKeyDown={(e) => handleMoveFocus(e, index)}
             onChange={(e) => handleNumberChange(e, name, index)}
             type={type}
           />
