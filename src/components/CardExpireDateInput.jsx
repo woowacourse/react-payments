@@ -40,6 +40,8 @@ export default function CardExpireDateInput({ expireDate, setExpireDate }) {
         onBlur={() => resetError()}
         width="40px"
         isComplete={expireDate[0].length === 2}
+        maxLength={2}
+        required
       />
       <p>/</p>
       <Input
@@ -50,6 +52,8 @@ export default function CardExpireDateInput({ expireDate, setExpireDate }) {
         onBlur={() => resetError()}
         width="40px"
         isComplete={expireDate[1].length === 2}
+        maxLength={2}
+        required
       />
     </InputField>
   );

@@ -20,12 +20,7 @@ export default function useValidatedUpdate(validation, setter, errorHandler) {
 
       resetError();
 
-      if (order !== undefined) {
-        setter(value, order);
-        return;
-      }
-
-      setter(value);
+      setter(value, order);
     },
     errorMessage,
     resetError,

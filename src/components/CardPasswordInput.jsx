@@ -88,6 +88,8 @@ export default function CardPasswordInput({ password, setPassword }) {
                 onBlur={() => resetError()}
                 onKeyDown={handleFocusPrevious}
                 isComplete={password[0].length === 1}
+                maxLength={1}
+                required
                 ref={(element) => (inputRef.current[index] = element)}
               />
             </StyledInputWrapper>

@@ -81,6 +81,8 @@ export default function CardSecurityCodeInput({
         isComplete={
           securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
         }
+        required
+        maxLength={3}
       />
     </InputField>
   );

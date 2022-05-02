@@ -47,6 +47,8 @@ export default function CardNumberInput({ cardNumber, setCardNumber }) {
               isComplete={
                 cardNumber[index].length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
               }
+              maxLength={4}
+              required
               ref={(element) => (inputRef.current[index] = element)}
             />
             {index !== cardNumber.length - 1 && <p>-</p>}

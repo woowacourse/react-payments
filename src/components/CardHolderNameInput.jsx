@@ -56,6 +56,7 @@ export default function CardHolderNameInput({ holderName, setHolderName }) {
         width="100%"
         textAlign="left"
         isComplete={holderName !== ""}
+        maxLength={30}
       />
     </InputField>
   );
