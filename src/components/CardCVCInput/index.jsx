@@ -1,10 +1,12 @@
-import InputBox from "../../components/InputBox";
-import { Input } from "../../components/Input/style";
-import { FormWrapper, CVCWrapper } from "./style";
+import PropTypes from "prop-types";
+import InputBox from "../../components/common/InputBox";
+import { Input } from "../../components/common/Input/style";
+import { CardInputWrapper } from "../../pages/CardAddPage/style";
+import { CVCWrapper } from "./style";
 
-function CardCVCForm({ cvc, handleCvc }) {
+function CardCVCInput({ cvc, handleCvc }) {
   return (
-    <FormWrapper>
+    <CardInputWrapper>
       <label>보안 코드(CVC/CVV)</label>
       <CVCWrapper>
         <InputBox size="30">
@@ -24,8 +26,13 @@ function CardCVCForm({ cvc, handleCvc }) {
           />
         </svg>
       </CVCWrapper>
-    </FormWrapper>
+    </CardInputWrapper>
   );
 }
 
-export default CardCVCForm;
+CardCVCInput.propTypes = {
+  cvc: PropTypes.string,
+  handleCvc: PropTypes.func,
+};
+
+export default CardCVCInput;

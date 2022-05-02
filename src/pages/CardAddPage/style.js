@@ -24,45 +24,12 @@ const CardWrapper = styled.div`
   margin: 25px 0;
 `;
 
-const PasswordWrapper = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const OwnerHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  & div {
-    font-size: 12px;
-    margin-bottom: 10px;
-    display: inline-block;
-    color: ${({ theme }) => theme.colors.DARK_GRAY};
-  }
-`;
-
-const Dot = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 10%;
-  color: ${({ theme }) => theme.colors.MINT};
-  font-size: 18px;
-  font-weight: 500;
-`;
-
-const CVCWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 15px;
-`;
-
 const FooterWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
 
-const FormWrapper = styled.div`
+const CardInputWrapper = styled.div`
   margin-bottom: 15px;
 
   & label {
@@ -77,10 +44,6 @@ export {
   PageWrapper,
   HeaderWrapper,
   CardWrapper,
-  PasswordWrapper,
-  OwnerHeader,
-  Dot,
-  CVCWrapper,
   FooterWrapper,
-  FormWrapper,
+  CardInputWrapper,
 };

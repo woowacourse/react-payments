@@ -1,14 +1,14 @@
-import Button from "./";
+import Button from ".";
 
 const Template = (args) => <Button {...args} />;
 
 export default {
-  title: "Button",
+  title: "component/common/Button",
   component: Button,
 };
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const TextButton = Template.bind({});
+TextButton.args = {
   children: "다음",
   color: "#04C09E",
 };

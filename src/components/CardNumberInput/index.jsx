@@ -1,15 +1,16 @@
 import React from "react";
-import InputBox from "../../components/InputBox";
-import { Input } from "../../components/Input/style";
-import { FormWrapper } from "./style";
+import PropTypes from "prop-types";
+import InputBox from "../../components/common/InputBox";
+import { Input } from "../../components/common/Input/style";
+import { CardInputWrapper } from "../../pages/CardAddPage/style";
 
-function CardNumberForm({
+function CardNumberInput({
   cardNumbers,
   handleCardNumber,
   cardNumberInputRefs,
 }) {
   return (
-    <FormWrapper>
+    <CardInputWrapper>
       <label>카드번호</label>
       <InputBox>
         {Array.from({ length: 4 }, (_, index) => (
@@ -24,8 +25,14 @@ function CardNumberForm({
           </React.Fragment>
         ))}
       </InputBox>
-    </FormWrapper>
+    </CardInputWrapper>
   );
 }
 
-export default CardNumberForm;
+CardNumberInput.propTypes = {
+  handleCardNumber: PropTypes.func,
+  cardNumbers: PropTypes.array,
+  cardNumberInputRefs: PropTypes.array,
+};
+
+export default CardNumberInput;

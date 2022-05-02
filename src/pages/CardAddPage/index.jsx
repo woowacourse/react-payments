@@ -1,12 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import Card from "../../components/Card";
-import Button from "../../components/Button";
-
-import CardNumberForm from "./CardNumberForm";
-import CardDueDateForm from "./CardDueDateForm";
-import CardOwnerForm from "./CardOwnerForm";
-import CardCVCForm from "./CardCVCForm";
-import CardPasswordForm from "./CardPasswordForm";
+import Card from "../../components/common/Card";
+import Button from "../../components/common/Button";
 
 import {
   PageWrapper,
@@ -20,9 +14,13 @@ import {
   OWNER,
   CVC,
   PASSWORD,
-  COLORS,
   MONTH,
 } from "../../constant";
+import CardNumberInput from "../../components/CardNumberInput";
+import CardDueDateInput from "../../components/CardDueDateInput";
+import CardOwnerInput from "../../components/CardOwnerInput";
+import CardCVCInput from "../../components/CardCVCInput";
+import CardPasswordInput from "../../components/CardPasswordInput";
 
 function CardAddPage() {
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
@@ -41,12 +39,11 @@ function CardAddPage() {
       cardNumbers.join("").length >= CARD_NUMBER.UNIT_LENGTH * 4 &&
         dueDate.month.length >= DUE_DATE.UNIT_LENGTH &&
         dueDate.year.length >= DUE_DATE.UNIT_LENGTH &&
-        owner &&
         cvc.length >= CVC.UNIT_LENGTH &&
         password.firstPassword &&
         password.secondPassword
     );
-  }, [cardNumbers, dueDate, owner, cvc, password, error]);
+  }, [cardNumbers, dueDate, cvc, password]);
 
   const secondCardNumberInputRef = useRef();
   const thirdCardNumberInputRef = useRef();
@@ -158,30 +155,26 @@ function CardAddPage() {
           dueYear={dueDate.year || "YY"}
         />
       </CardWrapper>
-      <CardNumberForm
+      <CardNumberInput
         cardNumbers={cardNumbers}
         handleCardNumber={handleCardNumber}
         cardNumberInputRefs={cardNumberInputRefs}
       />
-      <CardDueDateForm
+      <CardDueDateInput
         dueDate={dueDate}
         handleDueDate={handleDueDate}
         dueYearInputRef={dueYearInputRef}
         error={error}
       />
-      <CardOwnerForm owner={owner} handleOwner={handleOwner} />
-      <CardCVCForm cvc={cvc} handleCvc={handleCvc} />
-      <CardPasswordForm
+      <CardOwnerInput owner={owner} handleOwner={handleOwner} />
+      <CardCVCInput cvc={cvc} handleCvc={handleCvc} />
+      <CardPasswordInput
         password={password}
         handlePassword={handlePassword}
         secondPasswordInputRef={secondPasswordInputRef}
       />
       <FooterWrapper>
-        {allRequired && (
-          <Button color={COLORS.MINT} onClick={handleSubmit}>
-            다음
-          </Button>
-        )}
+        {allRequired && <Button onClick={handleSubmit}>다음</Button>}
       </FooterWrapper>
     </PageWrapper>
   );

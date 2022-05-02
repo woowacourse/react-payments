@@ -1,9 +1,9 @@
-import Card from "./";
+import Card from ".";
 
 const Template = (args) => <Card {...args} />;
 
 export default {
-  title: "Card",
+  title: "component/common/Card",
   component: Card,
 };
 
@@ -13,7 +13,8 @@ SmallCard.args = {
   company: "poco",
   cardNumbers: ["1111", "2222", "oooo", "oooo"],
   owner: "dory",
-  dueDate: ["04", "26"],
+  dueMonth: "04",
+  dueYear: "26",
 };
 
 export const BigCard = Template.bind({});
@@ -22,5 +23,6 @@ BigCard.args = {
   company: "poco",
   cardNumbers: ["1111", "2222", "oooo", "1ooo"],
   owner: "dory",
-  dueDate: ["04", "26"],
+  dueMonth: "04",
+  dueYear: "26",
 };
