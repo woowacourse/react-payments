@@ -1,5 +1,4 @@
 import CardAdd from '.';
-import 'index.css';
 
 export default {
   title: 'Page/CardAdd',
