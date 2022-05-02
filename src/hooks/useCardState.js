@@ -46,10 +46,6 @@ const useCardState = () => {
   const [cardState, dispatch] = useReducer(reducer, initialState);
   const [isComplete, setComplete] = useState(false);
 
-  useEffect(() => {
-    setComplete(isInputComplete(cardState));
-  }, [cardState]);
-
   const onChangeTextField = ({ target }, option = {}) => {
     const textFieldName = target.name;
 
@@ -68,6 +64,10 @@ const useCardState = () => {
         });
     }
   };
+
+  useEffect(() => {
+    setComplete(isInputComplete(cardState));
+  }, [cardState]);
 
   return { state: { ...cardState, isComplete }, onChangeTextField };
 };
