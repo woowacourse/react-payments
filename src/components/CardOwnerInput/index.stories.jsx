@@ -10,5 +10,5 @@ export default {
 export const Primary = Template.bind({});
 Primary.args = {
   owner: "KOY",
-  handleOwner: () => {},
+  handleChangeOwner: () => {},
 };

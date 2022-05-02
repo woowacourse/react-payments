@@ -6,7 +6,7 @@ import { CardInputWrapper } from "../../pages/CardAddPage/style";
 
 function CardPasswordInput({
   password,
-  handlePassword,
+  handleChangePassword,
   secondPasswordInputRef,
 }) {
   return (
@@ -17,7 +17,7 @@ function CardPasswordInput({
           <Input
             type="password"
             value={password.firstPassword}
-            onChange={(e) => handlePassword("firstPassword", e)}
+            onChange={(e) => handleChangePassword("firstPassword", e)}
           />
         </InputBox>
         <InputBox size="12">
@@ -25,7 +25,7 @@ function CardPasswordInput({
             type="password"
             ref={secondPasswordInputRef}
             value={password.secondPassword}
-            onChange={(e) => handlePassword("secondPassword", e)}
+            onChange={(e) => handleChangePassword("secondPassword", e)}
           />
         </InputBox>
         <Dot>•</Dot>
@@ -45,7 +45,7 @@ CardPasswordInput.propTypes = {
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
-  handlePassword: PropTypes.func,
+  handleChangePassword: PropTypes.func,
 };
 
 export default CardPasswordInput;

@@ -10,5 +10,5 @@ export default {
 export const Primary = Template.bind({});
 Primary.args = {
   password: { firstPassword: "1", secondPassword: "2" },
-  handlePassword: () => {},
+  handleChangePassword: () => {},
 };

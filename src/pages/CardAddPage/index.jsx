@@ -64,7 +64,7 @@ function CardAddPage() {
     cardNumberInputRefs[index]?.current.focus();
   };
 
-  const handleCardNumber = (index, { target: { value } }) => {
+  const handleChangeCardNumber = (index, { target: { value } }) => {
     if (value.length > CARD_NUMBER.UNIT_LENGTH || isNaN(value)) return;
 
     setCardNumbers((prev) => {
@@ -78,7 +78,7 @@ function CardAddPage() {
     }
   };
 
-  const handleDueDate = (key, { target: { value } }) => {
+  const handleChangeDueDate = (key, { target: { value } }) => {
     if (value.length > DUE_DATE.UNIT_LENGTH) return;
 
     setDueDate({ ...dueDate, [key]: value });
@@ -95,19 +95,19 @@ function CardAddPage() {
     }
   };
 
-  const handleOwner = ({ target: { value } }) => {
+  const handleChangeOwner = ({ target: { value } }) => {
     if (value.length > OWNER.MAX_LENGTH) return;
 
     setOwner(value);
   };
 
-  const handleCvc = ({ target: { value } }) => {
+  const handleChangeCvc = ({ target: { value } }) => {
     if (value.length > CVC.UNIT_LENGTH || isNaN(value)) return;
 
     setCvc(value);
   };
 
-  const handlePassword = (key, { target: { value } }) => {
+  const handleChangePassword = (key, { target: { value } }) => {
     if (value.length > PASSWORD.UNIT_LENGTH || isNaN(value)) return;
 
     setPassword({ ...password, [key]: value });
@@ -157,20 +157,20 @@ function CardAddPage() {
       </CardWrapper>
       <CardNumberInput
         cardNumbers={cardNumbers}
-        handleCardNumber={handleCardNumber}
+        handleChangeCardNumber={handleChangeCardNumber}
         cardNumberInputRefs={cardNumberInputRefs}
       />
       <CardDueDateInput
         dueDate={dueDate}
-        handleDueDate={handleDueDate}
+        handleChangeDueDate={handleChangeDueDate}
         dueYearInputRef={dueYearInputRef}
         error={error}
       />
-      <CardOwnerInput owner={owner} handleOwner={handleOwner} />
-      <CardCVCInput cvc={cvc} handleCvc={handleCvc} />
+      <CardOwnerInput owner={owner} handleChangeOwner={handleChangeOwner} />
+      <CardCVCInput cvc={cvc} handleChangeCvc={handleChangeCvc} />
       <CardPasswordInput
         password={password}
-        handlePassword={handlePassword}
+        handleChangePassword={handleChangePassword}
         secondPasswordInputRef={secondPasswordInputRef}
       />
       <FooterWrapper>

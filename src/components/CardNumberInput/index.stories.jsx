@@ -11,5 +11,5 @@ export const Primary = Template.bind({});
 Primary.args = {
   cardNumbers: ["1111", "2222", "3333", "4444"],
   cardNumberInputRefs: [],
-  handleCardNumber: () => {},
+  handleChangeCardNumber: () => {},
 };

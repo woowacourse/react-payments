@@ -6,7 +6,7 @@ import { CardInputWrapper } from "../../pages/CardAddPage/style";
 
 function CardNumberInput({
   cardNumbers,
-  handleCardNumber,
+  handleChangeCardNumber,
   cardNumberInputRefs,
 }) {
   return (
@@ -19,7 +19,7 @@ function CardNumberInput({
               ref={cardNumberInputRefs[index]}
               type={index < 2 ? "number" : "password"}
               value={cardNumbers[index]}
-              onChange={(e) => handleCardNumber(index, e)}
+              onChange={(e) => handleChangeCardNumber(index, e)}
             />
             {index < 3 && <span>-</span>}
           </React.Fragment>
@@ -30,7 +30,7 @@ function CardNumberInput({
 }
 
 CardNumberInput.propTypes = {
-  handleCardNumber: PropTypes.func,
+  handleChangeCardNumber: PropTypes.func,
   cardNumbers: PropTypes.array,
   cardNumberInputRefs: PropTypes.array,
 };

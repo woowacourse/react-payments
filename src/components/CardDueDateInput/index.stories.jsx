@@ -10,6 +10,6 @@ export default {
 export const Primary = Template.bind({});
 Primary.args = {
   dueDate: { month: "11", year: "23" },
-  handleDueDate: () => {},
+  handleChangeDueDate: () => {},
   error: { month: false, year: false },
 };

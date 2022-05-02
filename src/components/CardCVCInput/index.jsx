@@ -4,13 +4,13 @@ import { Input } from "../../components/common/Input/style";
 import { CardInputWrapper } from "../../pages/CardAddPage/style";
 import { CVCWrapper } from "./style";
 
-function CardCVCInput({ cvc, handleCvc }) {
+function CardCVCInput({ cvc, handleChangeCvc }) {
   return (
     <CardInputWrapper>
       <label>보안 코드(CVC/CVV)</label>
       <CVCWrapper>
         <InputBox size="30">
-          <Input type="password" value={cvc} onChange={handleCvc} />
+          <Input type="password" value={cvc} onChange={handleChangeCvc} />
         </InputBox>
         <svg
           width="27"
@@ -32,7 +32,7 @@ function CardCVCInput({ cvc, handleCvc }) {
 
 CardCVCInput.propTypes = {
   cvc: PropTypes.string,
-  handleCvc: PropTypes.func,
+  handleChangeCvc: PropTypes.func,
 };
 
 export default CardCVCInput;

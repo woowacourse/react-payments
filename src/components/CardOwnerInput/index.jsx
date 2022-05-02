@@ -5,7 +5,7 @@ import { OwnerHeader } from "./style";
 import { CardInputWrapper } from "../../pages/CardAddPage/style";
 import { OWNER } from "../../constant";
 
-function CardOwnerInput({ owner, handleOwner }) {
+function CardOwnerInput({ owner, handleChangeOwner }) {
   return (
     <CardInputWrapper>
       <OwnerHeader>
@@ -19,7 +19,7 @@ function CardOwnerInput({ owner, handleOwner }) {
           type="text"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           value={owner}
-          onChange={handleOwner}
+          onChange={handleChangeOwner}
         />
       </InputBox>
     </CardInputWrapper>
@@ -28,7 +28,7 @@ function CardOwnerInput({ owner, handleOwner }) {
 
 CardOwnerInput.propTypes = {
   owner: PropTypes.string,
-  handleOwner: PropTypes.func,
+  handleChangeOwner: PropTypes.func,
 };
 
 export default CardOwnerInput;
