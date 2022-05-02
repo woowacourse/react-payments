@@ -1,14 +1,11 @@
 import { useState, useCallback } from 'react';
 
-import CARD_RULE from '../constants';
-
 export default function useCardNumber(initialValue) {
   const [cardNumber, setCardNumber] = useState(initialValue);
   const [encryptedCardNumber, setEncryptedCardNumber] = useState(initialValue);
 
   const handler = useCallback(({ target: { value } }) => {
     const numbers = value.replaceAll('-', '');
-    if (numbers.length > CARD_RULE.CARD_NUMBER_MAX_LENGTH) return;
 
     setCardNumber(numbers);
 

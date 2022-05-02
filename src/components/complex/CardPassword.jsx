@@ -22,6 +22,7 @@ export default function CardPasswordInput({
         type="password"
         width="43px"
         value={firstPassword}
+        maxLength={1}
         onChangeFunc={setFirstPassword}
       />
       <Input
@@ -29,6 +30,7 @@ export default function CardPasswordInput({
         type="password"
         width="43px"
         value={secondPassword}
+        maxLength={1}
         onChangeFunc={setSecondPassword}
       />
       <Bullet>•</Bullet>

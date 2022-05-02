@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Input, Button, Modal } from '../common';
+import CARD_RULE from '../../constants';
 
 export default function CardCVCInput({
   CVC,
@@ -15,6 +16,7 @@ export default function CardCVCInput({
         type="password"
         width="84px"
         value={CVC}
+        maxLength={CARD_RULE.CVC_LENGTH}
         onChangeFunc={setCVC}
       />
       <Button

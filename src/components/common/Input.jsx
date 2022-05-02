@@ -33,11 +33,12 @@ const StyledLabel = styled.label`
 function Input({
   description,
   margin,
-  placeholder,
   textAlign,
+  width,
   type,
   value,
-  width,
+  maxLength,
+  placeholder,
   onChangeFunc,
 }) {
   return (
@@ -45,11 +46,12 @@ function Input({
       {description && <StyledLabel>{description}</StyledLabel>}
       <StyledInput
         margin={margin}
-        placeholder={placeholder}
         textAlign={textAlign}
+        width={width}
         type={type}
         value={value}
-        width={width}
+        maxLength={maxLength}
+        placeholder={placeholder}
         onChange={onChangeFunc}
       />
     </>
@@ -70,11 +72,12 @@ Input.propTypes = {
     b: PropTypes.string,
     l: PropTypes.string,
   }),
-  placeholder: PropTypes.string,
   textAlign: PropTypes.string,
+  width: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.string,
-  width: PropTypes.string,
+  maxLength: PropTypes.number,
+  placeholder: PropTypes.string,
   onChangeFunc: PropTypes.func,
 };
 
