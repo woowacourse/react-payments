@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { LIMIT_LENGTH } from 'constants';
 import { limitInputLength, inputNumberOnly } from 'utils';
 
-function CardNumber({ cardInfo, setCardInfo }) {
+function CardNumber({ cardNumbers, setCardNumbers }) {
   const handleChange = (event) => {
     const { value, name } = event.target;
 
@@ -14,10 +14,26 @@ function CardNumber({ cardInfo, setCardInfo }) {
         ? limitInputLength(cardNumberInput, LIMIT_LENGTH.CARD_NUMBER)
         : cardNumberInput;
 
-    setCardInfo({
-      ...cardInfo,
-      [name]: cardNumberInputLengthSliced,
-    });
+    const newCardNumbers = [...cardNumbers];
+
+    switch (name) {
+      case 'number1':
+        newCardNumbers[0] = cardNumberInputLengthSliced;
+        break;
+      case 'number2':
+        newCardNumbers[1] = cardNumberInputLengthSliced;
+        break;
+      case 'number3':
+        newCardNumbers[2] = cardNumberInputLengthSliced;
+        break;
+      case 'number4':
+        newCardNumbers[3] = cardNumberInputLengthSliced;
+        break;
+      default:
+        break;
+    }
+
+    setCardNumbers(newCardNumbers);
   };
 
   return (
@@ -27,41 +43,41 @@ function CardNumber({ cardInfo, setCardInfo }) {
         <input
           name="number1"
           className={`input-basic ${
-            cardInfo.number1.length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+            cardNumbers[0].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
           }`}
           type="text"
           onChange={handleChange}
-          value={cardInfo.number1}
+          value={cardNumbers[0]}
           required
         />
         <input
           name="number2"
           className={`input-basic ${
-            cardInfo.number2.length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+            cardNumbers[1].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
           }`}
           type="text"
           onChange={handleChange}
-          value={cardInfo.number2}
+          value={cardNumbers[1]}
           required
         />
         <input
           name="number3"
           className={`input-basic ${
-            cardInfo.number3.length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+            cardNumbers[2].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
           }`}
           type="password"
           onChange={handleChange}
-          value={cardInfo.number3}
+          value={cardNumbers[2]}
           required
         />
         <input
           name="number4"
           className={`input-basic ${
-            cardInfo.number4.length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+            cardNumbers[3].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
           }`}
           type="password"
           onChange={handleChange}
-          value={cardInfo.number4}
+          value={cardNumbers[3]}
           required
         />
       </div>
@@ -72,6 +88,6 @@ function CardNumber({ cardInfo, setCardInfo }) {
 export default CardNumber;
 
 CardNumber.propTypes = {
-  cardInfo: PropTypes.object.isRequired,
-  setCardInfo: PropTypes.func.isRequired,
+  cardNumbers: PropTypes.array.isRequired,
+  setCardNumbers: PropTypes.func.isRequired,
 };

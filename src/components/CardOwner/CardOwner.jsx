@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { LIMIT_LENGTH } from 'constants';
 import { limitInputLength, inputEnglishOnly } from 'utils';
 
-function CardOwner({ cardInfo, setCardInfo }) {
+function CardOwner({ cardOwner, setOwner }) {
   const handleChange = (event) => {
-    const { value, name } = event.target;
+    const { value } = event.target;
 
     const cardOwnerEnglishOnly = inputEnglishOnly(value);
 
@@ -14,26 +14,22 @@ function CardOwner({ cardInfo, setCardInfo }) {
         ? limitInputLength(cardOwnerEnglishOnly, LIMIT_LENGTH.CARD_OWNER)
         : cardOwnerEnglishOnly;
 
-    setCardInfo({
-      ...cardInfo,
-      [name]: cardOwnerLengthSliced.toUpperCase(),
-    });
+    const newCardOwner = cardOwnerLengthSliced;
+
+    setOwner(newCardOwner);
   };
 
   return (
     <div className="input-container">
       <div className="input-wrapper">
         <span className="input-title">카드 소유자 영문 이름(선택)</span>
-        <span className="input-length">
-          {cardInfo.owner.length <= 30 ? cardInfo.owner.length : 30}/30
-        </span>
+        <span className="input-length">{cardOwner.length <= 30 ? cardOwner.length : 30}/30</span>
       </div>
       <input
-        name="owner"
         type="text"
-        className={`input-basic ${cardInfo.owner.length >= 1 ? 'input-correct' : null}`}
+        className={`input-basic ${cardOwner.length >= 1 ? 'input-correct' : null}`}
         onChange={handleChange}
-        value={cardInfo.owner}
+        value={cardOwner}
       />
     </div>
   );
@@ -42,6 +38,6 @@ function CardOwner({ cardInfo, setCardInfo }) {
 export default CardOwner;
 
 CardOwner.propTypes = {
-  cardInfo: PropTypes.object.isRequired,
-  setCardInfo: PropTypes.func.isRequired,
+  cardOwner: PropTypes.string.isRequired,
+  setOwner: PropTypes.func.isRequired,
 };

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { inputNumberOnly, limitInputLength } from 'utils';
 import { LIMIT_LENGTH } from 'constants';
 
-function CVC({ cardInfo, setCardInfo }) {
+function CVC({ cvc, setCVC }) {
   const handleChange = (event) => {
-    const { value, name } = event.target;
+    const { value } = event.target;
 
     const cvcInputNumberOnly = inputNumberOnly(value);
 
@@ -14,10 +14,7 @@ function CVC({ cardInfo, setCardInfo }) {
         ? limitInputLength(cvcInputNumberOnly, LIMIT_LENGTH.CVC)
         : cvcInputNumberOnly;
 
-    setCardInfo({
-      ...cardInfo,
-      [name]: cvcInputLengthSliced,
-    });
+    setCVC(cvcInputLengthSliced);
   };
 
   return (
@@ -25,12 +22,10 @@ function CVC({ cardInfo, setCardInfo }) {
       <span className="input-title">보안코드(CVC/CVV)</span>
       <input
         name="cvc"
-        className={`input-basic w-25 ${
-          cardInfo.cvc.length >= LIMIT_LENGTH.CVC ? 'input-correct' : null
-        } `}
+        className={`input-basic w-25 ${cvc.length >= LIMIT_LENGTH.CVC ? 'input-correct' : null} `}
         type="password"
         onChange={handleChange}
-        value={cardInfo.cvc}
+        value={cvc}
         required
       />
     </div>
@@ -40,6 +35,6 @@ function CVC({ cardInfo, setCardInfo }) {
 export default CVC;
 
 CVC.propTypes = {
-  cardInfo: PropTypes.object.isRequired,
-  setCardInfo: PropTypes.func.isRequired,
+  cvc: PropTypes.string.isRequired,
+  setCVC: PropTypes.func.isRequired,
 };

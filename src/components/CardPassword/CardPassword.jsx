@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { inputNumberOnly, limitInputLength } from 'utils';
 import { LIMIT_LENGTH } from 'constants';
 
-function CardPassword({ cardInfo, setCardInfo }) {
+function CardPassword({ cardPasswords, setCardPasswords }) {
   const handleChange = (event) => {
     const { value, name } = event.target;
 
@@ -14,10 +14,20 @@ function CardPassword({ cardInfo, setCardInfo }) {
         ? limitInputLength(passwordInputNumberOnly, LIMIT_LENGTH.CARD_PASSWORD)
         : passwordInputNumberOnly;
 
-    setCardInfo({
-      ...cardInfo,
-      [name]: passwordInputLengthSliced,
-    });
+    const newCardPasswords = [...cardPasswords];
+
+    switch (name) {
+      case 'password1':
+        newCardPasswords[0] = passwordInputLengthSliced;
+        break;
+      case 'password2':
+        newCardPasswords[1] = passwordInputLengthSliced;
+        break;
+      default:
+        break;
+    }
+
+    setCardPasswords(newCardPasswords);
   };
 
   return (
@@ -26,21 +36,21 @@ function CardPassword({ cardInfo, setCardInfo }) {
       <input
         name="password1"
         className={`input-basic w-15 input-password  ${
-          cardInfo.password1.length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : null
+          cardPasswords[0].length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : null
         }`}
         type="password"
         onChange={handleChange}
-        value={cardInfo.password1}
+        value={cardPasswords[0]}
         required
       />
       <input
         name="password2"
         className={`input-basic w-15 input-password ${
-          cardInfo.password2.length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : null
+          cardPasswords[1].length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : null
         }`}
         type="password"
         onChange={handleChange}
-        value={cardInfo.password2}
+        value={cardPasswords[1]}
         required
       />
       <input
@@ -62,6 +72,6 @@ function CardPassword({ cardInfo, setCardInfo }) {
 export default CardPassword;
 
 CardPassword.propTypes = {
-  cardInfo: PropTypes.object.isRequired,
-  setCardInfo: PropTypes.func.isRequired,
+  cardPasswords: PropTypes.array.isRequired,
+  setCardPasswords: PropTypes.func.isRequired,
 };
