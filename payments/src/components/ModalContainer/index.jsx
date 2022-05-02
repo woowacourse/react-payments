@@ -10,12 +10,10 @@ const ModalContainer = ({ children, contentsRef, visible, setVisible }) => {
 
   return (
     <>
-      {visible ? (
+      {visible && (
         <div className="deemer" onClick={closeModal}>
           <div className="modal--contents">{children}</div>
         </div>
-      ) : (
-        <></>
       )}
     </>
   );
