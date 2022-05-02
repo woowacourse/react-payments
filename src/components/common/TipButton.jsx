@@ -5,7 +5,7 @@ import styled from "styled-components";
 const TipButtonContainerStyle = styled.div`
   border-radius: 50%;
   border: 1px solid #bababa;
-  color: ${props.color || "#bababa"};
+  color: ${(props) => props.color || "#bababa"};
   width: 25px;
   height: 25px;
   cursor: pointer;
