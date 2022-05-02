@@ -7,6 +7,7 @@ import {
   CardOwnerName,
 } from '../../style/card';
 import { PLACEHOLDER } from '../../constant';
+import { CARD_NUMBER_MARK } from '../../constant/mark';
 
 function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
   return (
@@ -15,7 +16,9 @@ function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
       <IC />
       <CardNumberContainer>
         {cardNumbers.map((cardNumber, index) => (
-          <span key={cardNumber + index}>{cardNumber}</span>
+          <span key={cardNumber + index}>
+            {index >= 2 ? CARD_NUMBER_MARK.repeat(cardNumber.length) : cardNumber}
+          </span>
         ))}
       </CardNumberContainer>
       <CardBottomContainer>

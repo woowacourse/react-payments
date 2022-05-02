@@ -182,7 +182,7 @@ function CardAddPage() {
       <CardSection>
         <Card
           companyName={companyName}
-          cardNumbers={convertedCardNumbers}
+          cardNumbers={cardNumbers}
           ownerName={ownerName}
           expiredDate={convertedExpiredDate}
         />
