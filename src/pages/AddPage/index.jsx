@@ -29,11 +29,10 @@ function AddPage() {
 
   useEffect(() => {
     setIsFormFulfilled(
-      cardNumbers.join('').length >= CARD_NUMBER.UNIT_LENGTH * 4 &&
-        dueDate[0].length >= DUE_DATE.UNIT_LENGTH &&
-        dueDate[1].length >= DUE_DATE.UNIT_LENGTH &&
-        owner &&
-        cvc.length >= CVC.UNIT_LENGTH &&
+      cardNumbers.join('').length === CARD_NUMBER.UNIT_LENGTH * 4 &&
+        dueDate[0].length === DUE_DATE.UNIT_LENGTH &&
+        dueDate[1].length === DUE_DATE.UNIT_LENGTH &&
+        cvc.length === CVC.UNIT_LENGTH &&
         password[0] &&
         password[1]
     )
