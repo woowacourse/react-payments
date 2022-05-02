@@ -21,8 +21,13 @@ const LIMIT_LENGTH = {
   CVC: 3,
 };
 
+const PAGES = {
+  LIST: 'listPage',
+  ADD: 'addPage',
+};
+
 const CVC_DESCRIPTION = '카드 뒷면에 있는 3자리 숫자를 입력해주세요.';
 
 const LEADING_ZERO_MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09'];
 
-export { ERROR_MESSAGE, MONTH, LIMIT_LENGTH, CVC_DESCRIPTION, LEADING_ZERO_MONTHS };
+export { ERROR_MESSAGE, MONTH, LIMIT_LENGTH, CVC_DESCRIPTION, LEADING_ZERO_MONTHS, PAGES };
