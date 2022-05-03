@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Input, InputContainer, Label, InputWrapper } from './common/styled';
+import { Input, InputContainer, Label, InputWrapper, Span } from './common/styled';
 import InactiveContainer from './common/InactiveContainer';
 import ErrorMessage from './common/ErrorMessage';
 
@@ -59,10 +59,14 @@ function CardPassword({ dispatch }) {
       <Label>카드 비밀번호</Label>
       <InputPasswordWrapper>
         <InputWrapper>
-          <Input type={'password'} maxLength={1} name={'pwdNoA'} onChange={handleInputChange} value={pwd.pwdNoA} />
+          <Span>
+            <Input type={'password'} maxLength={1} name={'pwdNoA'} onChange={handleInputChange} value={pwd.pwdNoA} />
+          </Span>
         </InputWrapper>
         <InputWrapper>
-          <Input type={'password'} maxLength={1} name={'pwdNoB'} onChange={handleInputChange} value={pwd.pwdNoB} />
+          <Span>
+            <Input type={'password'} maxLength={1} name={'pwdNoB'} onChange={handleInputChange} value={pwd.pwdNoB} />
+          </Span>
         </InputWrapper>
         <InactiveContainer />
         <InactiveContainer />

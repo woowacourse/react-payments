@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, InputContainer, Label } from './common/styled';
+import { Input, InputContainer, InputWrapper, Label, Span } from './common/styled';
 import ErrorMessage from './common/ErrorMessage';
 import LetterCounter from './common/LetterCounter';
 
@@ -45,14 +45,18 @@ function CardOwner({ dispatch }) {
       <div>
         <LetterCounter maxLength={30} currentLength={ownerName.length} />
         <Label>카드 소유자 이름(선택)</Label>
-        <Input
-          type={'text'}
-          placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
-          maxLength={'30'}
-          onChange={handleInputChange}
-          value={ownerName}
-          required
-        />
+        <InputWrapper>
+          <Span width={'100%'}>
+            <Input
+              type={'text'}
+              placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
+              maxLength={'30'}
+              onChange={handleInputChange}
+              value={ownerName}
+              required
+            />
+          </Span>
+        </InputWrapper>
       </div>
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </InputContainer>

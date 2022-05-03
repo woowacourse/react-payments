@@ -64,6 +64,7 @@ const DotContainer = styled.div`
 
 const Span = styled.span`
   padding: ${props => props.padding || '8px'};
+  width: ${props => props.width};
 `;
 
 export { InputContainer, InputWrapper, Label, Input, DotContainer, Span };

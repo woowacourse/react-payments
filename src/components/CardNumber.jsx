@@ -59,14 +59,13 @@ function CardNumber({ dispatch }) {
       return;
     }
 
+    setErrorMessage('');
     setCardNumbers(prevCardNumbers => ({
       ...prevCardNumbers,
       [name]: value,
     }));
-    setErrorMessage('');
   };
 
-  // finish typing
   const isFinishTypingCardNumber = Object.values(cardNumbers).join('').length === 16;
 
   const handleInputFocus = target => {
