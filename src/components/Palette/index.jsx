@@ -42,7 +42,7 @@ const Palette = ({ onClickCardSelector }) => {
               key={card.id}
               color={card.color}
               name={card.name}
-              onClick={onClickCardSelector(card.color)}
+              onClick={onClickCardSelector({ name: card.name, color: card.color })}
             />
           ))}
       </SelectorContainer>
@@ -54,7 +54,7 @@ const Palette = ({ onClickCardSelector }) => {
               key={card.id}
               color={card.color}
               name={card.name}
-              onClick={onClickCardSelector(card.color)}
+              onClick={onClickCardSelector({ color: card.color, name: card.name })}
             />
           ))}
       </SelectorContainer>

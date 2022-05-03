@@ -69,7 +69,7 @@ const AddCardPage = () => {
     validation: checkPassword,
   });
 
-  const [cardType, setCardType] = useState('red');
+  const [cardInfo, setCardInfo] = useState({ color: 'red', name: '포코 카드' });
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -115,20 +115,19 @@ const AddCardPage = () => {
     setIsModalOpened(false);
   };
 
-  const onClickCardSelector = type => () => {
-    setCardType(type);
+  const onClickCardSelector = card => () => {
+    setCardInfo(card);
   };
 
   return (
     <Container onSubmit={onSubmitCardForm}>
       <Header title="카드 추가" />
       <Card
-        cardName="블랙 카드😎"
         name={ownerName}
         expiredMonth={expiredMonth}
         expiredYear={expiredYear}
         cardNumbers={[firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber]}
-        color={cardType}
+        cardInfo={cardInfo}
         onClick={openModal}
       />
       <CardNumber
