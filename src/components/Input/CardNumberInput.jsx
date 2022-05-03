@@ -55,7 +55,7 @@ const CardNumberInput = ({
       return;
     }
     cardRefList[currentElementIndex].current.focus();
-  }, [currentElementIndex, cardRefList]);
+  }, [currentElementIndex]);
 
   return (
     <CardNumberWrapper>
