@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FONT_PRIMARY_COLOR, PLACEHOLDER_PRIMARY_COLOR } from '../../style';
+import { PLACEHOLDER_PRIMARY_COLOR } from '../../style';
 
 const InputBox = styled.input`
   background-color: #ecebf1;
@@ -16,9 +16,6 @@ const InputBox = styled.input`
   }
   &:focus {
     outline: 1px solid ${PLACEHOLDER_PRIMARY_COLOR};
-  }
-  &:disabled {
-    color: ${FONT_PRIMARY_COLOR};
   }
 `;
 

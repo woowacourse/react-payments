@@ -56,7 +56,7 @@ function Calendar({ items, placeholder, setItem, dimensions }) {
   return (
     <CalendarContainer>
       <SelectBox onClick={handleClickBox}>
-        <Input ref={inputRef} disabled placeholder={placeholder} type="text" />
+        <Input ref={inputRef} placeholder={placeholder} type="text" readOnly />
       </SelectBox>
       <Modal isOpen={isShown} setIsOpen={setIsShown} dimensions={dimensions}>
         <SelectLayer isShown={isShown}>
