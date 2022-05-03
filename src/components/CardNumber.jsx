@@ -66,17 +66,18 @@ function CardNumber({ dispatch }) {
     setErrorMessage('');
   };
 
-  const isCorrectCardNumber = Object.values(cardNumbers).join('').length === 16;
+  // finish typing
+  const isFinishTypingCardNumber = Object.values(cardNumbers).join('').length === 16;
 
   const handleInputFocus = target => {
-    if (!isCorrectCardNumber) {
+    if (!isFinishTypingCardNumber) {
       setErrorMessage('모든 숫자를 입력해주세요.');
     }
   };
 
   useEffect(() => {
-    dispatch({ type: 'CARD_NUMBER', cardNumber: convertToCardNumberString(cardNumbers), isCorrectCardNumber });
-  }, [cardNumbers, dispatch, isCorrectCardNumber]);
+    dispatch({ type: 'CARD_NUMBER', cardNumber: convertToCardNumberString(cardNumbers), isFinishTypingCardNumber });
+  }, [cardNumbers, dispatch, isFinishTypingCardNumber]);
 
   return (
     <InputContainer>

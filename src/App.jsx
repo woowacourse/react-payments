@@ -17,7 +17,7 @@ const initialState = {
   cardNumber: '',
   dueDate: 'MM / YY',
   isAllCompleted: {
-    isCorrectCardNumber: false,
+    isFinishTypingCardNumber: false,
     isCorrectPwd: false,
     isCorrectOwnerName: false,
     isCorrectCardDate: false,
@@ -44,7 +44,7 @@ function reducer(state, action) {
         cardNumber: action.cardNumber,
         isAllCompleted: {
           ...state.isAllCompleted,
-          isCorrectCardNumber: action.isCorrectCardNumber,
+          isFinishTypingCardNumber: action.isFinishTypingCardNumber,
         },
       };
     case 'DUE_DATE':
