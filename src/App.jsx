@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import CardAddPage from './pages/CardAddPage';
+import CardAddPage from './pages/CardAddPage/';
 
 const GlobalStyle = createGlobalStyle`
   * {

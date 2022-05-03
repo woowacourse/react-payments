@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import Head from '../components/Head';
-import Card from '../components/Card';
-import LabeledInput from '../components/LabeledInput';
-import Tooltip from '../components/Tooltip';
-import SubmitButton from '../components/SubmitButton';
-import Input from '../components/Input';
-import { Page, CardSection, Form, FormRow, SubmitButtonContainer } from '../style/page';
-import MESSAGE from '../constant/message';
-import useCardNumbers from '../hooks/useCardNumbers';
-import useExpiredDate from '../hooks/useExpiredDate';
-import useOwnerName from '../hooks/useOwnerName';
-import useSecurityNumber from '../hooks/useSecurityNumber';
-import usePassword from '../hooks/usePassword';
-import useCardAdd from '../hooks/useCardAdd';
+import Head from '../../components/Head';
+import Card from '../../components/Card';
+import LabeledInput from '../../components/LabeledInput';
+import Tooltip from '../../components/Tooltip';
+import SubmitButton from '../../components/SubmitButton';
+import Input from '../../components/Input';
+import { Page, CardSection, Form, FormRow, SubmitButtonContainer } from './style';
+import MESSAGE from '../../constant/message';
+import useCardNumbers from '../../hooks/useCardNumbers';
+import useExpiredDate from '../../hooks/useExpiredDate';
+import useOwnerName from '../../hooks/useOwnerName';
+import useSecurityNumber from '../../hooks/useSecurityNumber';
+import usePassword from '../../hooks/usePassword';
+import useCardAdd from '../../hooks/useCardAdd';
 
 function CardAddPage() {
   const [companyName, setCompanyName] = useState('포코카드');
