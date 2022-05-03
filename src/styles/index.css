@@ -46,4 +46,5 @@ input[type="number"]::-webkit-inner-spin-button {
   position: relative;
   border-radius: 15px;
   padding: 16px 24px;
+  overflow-y: auto;
 }
