@@ -28,7 +28,6 @@ function CardOwnerNameInputContainer() {
     dispatch(createAction(ActionType.INPUT_NAME, newVal));
     return;
   };
-
   const handleDelete = (input: HTMLInputElement) => {
     const { value, selectionStart } = input;
     if (!selectionStart) return;
@@ -38,7 +37,6 @@ function CardOwnerNameInputContainer() {
     });
     dispatch(createAction(ActionType.INPUT_NAME, value.toUpperCase()));
   };
-
   const handleChage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target;
     const { value, selectionStart } = input;
