@@ -58,17 +58,32 @@ const CardAdd = () => {
             </span>
           )}
           <form>
-            <CardNumberInput state={cardNumber} updateForm={dispatch} />
-            <ExpiredDateInput state={expiredDate} updateForm={dispatch} />
-            <OwnerNameInput state={ownerName} updateForm={dispatch} />
-            <SecureCodeInput state={secureCode} updateForm={dispatch} />
-            <CardPasswordInput state={password} updateForm={dispatch} />
+            <CardNumberInput
+              cardNumberValue={cardNumber}
+              onChangeCardNumber={dispatch}
+            />
+            <ExpiredDateInput
+              expiredDateValue={expiredDate}
+              onChangeExpiredDate={dispatch}
+            />
+            <OwnerNameInput
+              ownerNameValue={ownerName}
+              onChangeOwner={dispatch}
+            />
+            <SecureCodeInput
+              secureCodeValue={secureCode}
+              onChangeSecureCode={dispatch}
+            />
+            <CardPasswordInput
+              passwordValue={password}
+              onChangePassword={dispatch}
+            />
           </form>
         </div>
         <NextButton onClick={submitCard}>다음</NextButton>
       </div>
       {visible && (
-        <CardColorPicker closeModal={closeModal} updateForm={dispatch} />
+        <CardColorPicker closeModal={closeModal} onChangeCardName={dispatch} />
       )}
     </>
   );

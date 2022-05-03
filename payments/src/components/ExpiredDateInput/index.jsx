@@ -10,13 +10,13 @@ const INPUT_LENGTH = 2;
 const NUM_OF_INPUT = 2;
 const BACKSPACE_KEY_CODE = 8;
 
-const ExpiredDateInput = ({ state, updateForm }) => {
+const ExpiredDateInput = ({ expiredDateValue, onChangeExpiredDate }) => {
   const { itemRef, controllInput, autoFocusBackward } = useControllInput({
     maxLength: INPUT_LENGTH,
   });
 
   const updateExpiredDate = (target, idx) => {
-    updateForm({
+    onChangeExpiredDate({
       type: "expiredDate",
       payload: {
         value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),
@@ -35,7 +35,7 @@ const ExpiredDateInput = ({ state, updateForm }) => {
             <Input
               placeholder={idx === 0 ? "MM" : "YY"}
               type="text"
-              value={state[idx]}
+              value={expiredDateValue[idx]}
               ref={(el) => {
                 itemRef.current[idx] = el;
               }}

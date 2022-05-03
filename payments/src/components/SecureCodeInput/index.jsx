@@ -6,9 +6,9 @@ import { blockCharacter, limitInputLength } from "../../util/input";
 
 const INPUT_LENGTH = 3;
 
-const SecureCodeInput = ({ state, updateForm }) => {
+const SecureCodeInput = ({ secureCodeValue, onChangeSecureCode }) => {
   const updateSecureCode = ({ target }) => {
-    updateForm({
+    onChangeSecureCode({
       type: "secureCode",
       payload: {
         value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),
@@ -23,7 +23,7 @@ const SecureCodeInput = ({ state, updateForm }) => {
         <Input
           type="password"
           maxLength="3"
-          value={state}
+          value={secureCodeValue}
           onChange={updateSecureCode}
         />
       </InputContainer>

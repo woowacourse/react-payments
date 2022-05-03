@@ -14,10 +14,10 @@ const CARD_CATEGORY = [
   { name: "록8바", color: "gold" },
 ];
 
-const CardColorPicker = ({ closeModal, updateForm }) => {
+const CardColorPicker = ({ closeModal, onChangeCardName }) => {
   const pickColor = (name, color) => {
     closeModal();
-    updateForm({
+    onChangeCardName({
       type: "pickColor",
       payload: { cardName: name, color },
     });

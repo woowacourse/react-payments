@@ -6,9 +6,9 @@ import "./index.scss";
 
 const INPUT_LENGTH = 30;
 
-const OwnerNameInput = ({ state, updateForm }) => {
+const OwnerNameInput = ({ ownerNameValue, onChangeOwner }) => {
   const updateCardOwner = (target) => {
-    updateForm({
+    onChangeOwner({
       type: "ownerName",
       payload: {
         value: limitInputLength(
@@ -23,13 +23,13 @@ const OwnerNameInput = ({ state, updateForm }) => {
     <div className="ownername__input__container">
       <div className="label__container">
         <InputLabel>카드 소유자 이름(선택)</InputLabel>
-        <InputLabel>{`${state.length}/30`}</InputLabel>
+        <InputLabel>{`${ownerNameValue.length}/30`}</InputLabel>
         <></>
       </div>
       <InputContainer>
         <Input
           type="text"
-          value={state}
+          value={ownerNameValue}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요.(영어 대문자만 입력가능합니다.)"
           onChange={({ target }) => {
             updateCardOwner(target);
