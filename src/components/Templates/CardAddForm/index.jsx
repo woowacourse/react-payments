@@ -38,8 +38,16 @@ function CardAddForm() {
     isPasswordValid,
   ].every(valid => valid);
 
+  const onAddFormSubmit = event => {
+    event.preventDefault();
+
+    isValidForm
+      ? alert(`카드 정보가 성공적으로 제출되었습니다!`)
+      : alert('카드 정보를 모두 입력해주세요.');
+  };
+
   return (
-    <FormContainer>
+    <FormContainer onSubmit={onAddFormSubmit}>
       <CardNumberInput />
       <ExpiredDateInput />
       <CardOwnerInput />
