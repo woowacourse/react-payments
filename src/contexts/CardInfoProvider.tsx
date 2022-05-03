@@ -22,6 +22,7 @@ interface Context {
   resetCardInfo: () => void;
   cardInfoValidation: CardInfoValidation;
   onChangeCardType: (name: CardName, color: CardColor) => void;
+  onChangeCardName: InputChangeFunction;
 }
 
 export const CardInfoContext = createContext<Context>(null);
@@ -42,6 +43,7 @@ const initialCardInfo: CardInfo = {
   userName: "시지프",
   securityCode: "123",
   password: ["1", "1"],
+  cardName: "하하하",
 };
 
 const CardInfoProvider = ({ children }) => {
@@ -174,6 +176,15 @@ const CardInfoProvider = ({ children }) => {
     }
   };
 
+  const onChangeCardName: InputChangeFunction = e => {
+    const value = e.target.value;
+
+    setCardInfo(prevCardInfo => ({
+      ...prevCardInfo,
+      cardName: value,
+    }));
+  };
+
   // Validation
   const handleChangeValidation = <T,>(
     key: keyof CardInfoValidation,
@@ -233,6 +244,7 @@ const CardInfoProvider = ({ children }) => {
         onBlurUserName,
         onChangeSecurityCode,
         onChangePassword,
+        onChangeCardName,
       }}
     >
       {children}
