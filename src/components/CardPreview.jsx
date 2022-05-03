@@ -47,6 +47,7 @@ const CardChip = styled.div`
 const CardNumber = styled.p`
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   height: 10px;
   margin-bottom: 12px;
 `;
@@ -72,9 +73,10 @@ export default function CardPreview({ cardNumber, holderName, expireDate, canPro
         <CardName>Woowa Card</CardName>
         <CardChip />
         <CardNumber>
-          {cardNumber[0]}&nbsp;&nbsp;&nbsp;{cardNumber[1]}&nbsp;&nbsp;&nbsp;
-          {CREATE_MASKED_CHARACTERS(cardNumber[2].length)}&nbsp;&nbsp;&nbsp;
-          {CREATE_MASKED_CHARACTERS(cardNumber[3].length)}
+          <span>{cardNumber[0]}</span>
+          <span>{cardNumber[1]}</span>
+          <span>{CREATE_MASKED_CHARACTERS(cardNumber[2].length)}</span>
+          <span>{CREATE_MASKED_CHARACTERS(cardNumber[3].length)}</span>
         </CardNumber>
         <CardBottomSection>
           <CardHolderName>{holderName}</CardHolderName>
