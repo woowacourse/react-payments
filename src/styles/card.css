@@ -21,6 +21,14 @@
   cursor: pointer;
 }
 
+.empty-card {
+  background-color: #e5e5e5;
+  margin: auto;
+  font-size: 30px;
+  font-weight: 400;
+  color: #575757;
+}
+
 .small-card__chip {
   width: 40px;
   height: 26px;
