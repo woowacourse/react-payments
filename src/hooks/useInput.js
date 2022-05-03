@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-const useInput = ({ initialValue, isValid }) => {
+const useInput = ({ initialValue, validator }) => {
   const [value, setValue] = useState(initialValue);
 
   const handler = ({ target }) => {
-    if (isValid && !isValid(target.value)) return;
+    if (validator && !validator(target.value)) return;
 
     setValue(target.value);
   };

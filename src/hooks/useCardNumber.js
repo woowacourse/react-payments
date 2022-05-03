@@ -1,5 +1,8 @@
 import { useRef, useState } from "react";
-import { CARD_NUMBER } from "../constant";
+import {
+  isFilledCardNumberLength,
+  isOverCardNumberLength,
+} from "../validation";
 
 const useCardNumber = () => {
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
@@ -16,9 +19,9 @@ const useCardNumber = () => {
   ];
 
   const handleChangeCardNumber = (index, { target: { value } }) => {
-    if (value.length > CARD_NUMBER.UNIT_LENGTH || isNaN(value)) return;
+    if (isOverCardNumberLength(value) || isNaN(value)) return;
 
-    if (value.length === CARD_NUMBER.UNIT_LENGTH) {
+    if (isFilledCardNumberLength(value)) {
       cardNumberInputRefs[index + 1]?.current.focus();
     }
 

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { PASSWORD } from "../constant";
+import { isFilledPasswordLength, isOverPasswordLength } from "../validation";
 
 const useCardPassword = () => {
   const [password, setPassword] = useState({
@@ -9,9 +9,9 @@ const useCardPassword = () => {
   const secondPasswordInputRef = useRef();
 
   const handleChangePassword = ({ target: { value, name } }) => {
-    if (value.length > PASSWORD.UNIT_LENGTH || isNaN(value)) return;
+    if (isOverPasswordLength(value) || isNaN(value)) return;
 
-    if (value.length === PASSWORD.UNIT_LENGTH) {
+    if (isFilledPasswordLength(value)) {
       secondPasswordInputRef.current.focus();
     }
 

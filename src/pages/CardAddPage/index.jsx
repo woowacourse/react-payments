@@ -13,12 +13,10 @@ import CardCVCInput from "../../components/CardCVCInput";
 import CardPasswordInput from "../../components/CardPasswordInput";
 import Header from "../../components/common/Header";
 
-import { CARD_NUMBER, DUE_DATE, OWNER, CVC } from "../../constant";
+import { CARD_NUMBER, DUE_DATE, CVC } from "../../constant";
 import { ReactComponent as ArrowImage } from "../../assets/arrow.svg";
 import { PageWrapper, CardWrapper, FooterWrapper } from "./style";
-
-const isValidOwnerLength = (value) => value.length <= OWNER.MAX_LENGTH;
-const isValidCvc = (value) => value.length <= CVC.UNIT_LENGTH && !isNaN(value);
+import { isValidCvc, isValidOwnerLength } from "../../validation";
 
 function CardAddPage() {
   const { cardNumbers, handleChangeCardNumber, cardNumberInputRefs } =
@@ -27,11 +25,11 @@ function CardAddPage() {
     useCardDueDate();
   const [owner, handleChangeOwner] = useInput({
     initialValue: "",
-    isValid: isValidOwnerLength,
+    validator: isValidOwnerLength,
   });
   const [cvc, handleChangeCvc] = useInput({
     initialValue: "",
-    isValid: isValidCvc,
+    validator: isValidCvc,
   });
   const { password, handleChangePassword, secondPasswordInputRef } =
     useCardPassword();
