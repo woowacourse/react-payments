@@ -1,0 +1,22 @@
+{
+  "cards": [
+    {
+      "cardType": { "name": "검정 카드", "color": "black" },
+      "cardNumbers": ["1111", "2222", "3333", "4444"],
+      "expirationDate": { "month": "11", "year": "22" },
+      "userName": "시지프",
+      "securityCode": "123",
+      "password": ["1", "1"],
+      "cardName": "1번째 카드"
+    },
+    {
+      "cardType": { "name": "파랑 카드", "color": "blue" },
+      "cardNumbers": ["1111", "2222", "3333", "4444"],
+      "expirationDate": { "month": "11", "year": "22" },
+      "userName": "김의진",
+      "securityCode": "123",
+      "password": ["1", "1"],
+      "cardName": "2번째 카드"
+    }
+  ]
+}
