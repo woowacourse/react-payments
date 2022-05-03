@@ -1,16 +1,18 @@
 import Card from "components/Card";
 import CardInfoForm from "components/CardInfoForm";
 import Header from "components/Header";
-import { CardInfoProvider } from "contexts/CardInfoProvider";
-import React from "react";
+import { CardInfoContext } from "contexts/CardInfoProvider";
+import React, { useContext } from "react";
 
 function Add() {
+  const { cardInfo } = useContext(CardInfoContext);
+
   return (
-    <CardInfoProvider>
+    <>
       <Header title="카드 추가" />
-      <Card />
+      <Card cardInfo={cardInfo} shouldShowTypeSelection={true} />
       <CardInfoForm />
-    </CardInfoProvider>
+    </>
   );
 }
 
