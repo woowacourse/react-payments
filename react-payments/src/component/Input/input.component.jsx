@@ -15,7 +15,7 @@ const InputContainer = ({
     <div className={`input-box ${inputClass}`}>
       {inputInfo.map(({ type, placeholder, name, value }, idx) => (
         <Fragment key={idx}>
-          {idx && connector && <p className="connector">{connector}</p>}
+          {!!idx && connector && <p className="connector">{connector}</p>}
 
           <input
             name={name}
