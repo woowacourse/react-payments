@@ -5,21 +5,20 @@ const useControllInput = ({ maxLength }) => {
 
   const controllInput = (target) => {
     if (target.value.length >= maxLength) {
-      limitInputLength(target);
       autoFocusForward(target);
     }
   };
 
-  const blockCharacter = (target) => {
-    target.value = target.value.replace(/[^\d]/g, "").replace(".", "");
+  const blockCharacter = (value) => {
+    return value.replace(/[^\d]/g, "").replace(".", "");
   };
 
-  const limitInputLength = (target) => {
-    target.value = target.value.substring(0, maxLength);
+  const limitInputLength = (value) => {
+    return value.substring(0, maxLength);
   };
 
-  const limitExceptUpperCase = (target) => {
-    target.value = target.value.replace(/[^A-Z\s]*/g, "").replace(".", "");
+  const limitExceptUpperCase = (value) => {
+    return value.replace(/[^A-Z\s]*/g, "").replace(".", "");
   };
 
   const autoFocusForward = (target) => {
@@ -40,6 +39,7 @@ const useControllInput = ({ maxLength }) => {
     autoFocusBackward,
     blockCharacter,
     limitExceptUpperCase,
+    limitInputLength,
   };
 };
 export default useControllInput;

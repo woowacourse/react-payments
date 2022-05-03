@@ -10,10 +10,15 @@ const NUM_OF_INPUT = 2;
 const BACKSPACE_KEY_CODE = 8;
 
 const ExpiredDateInput = ({ state, updateForm }) => {
-  const { itemRef, controllInput, autoFocusBackward, blockCharacter } =
-    useControllInput({
-      maxLength: INPUT_LENGTH,
-    });
+  const {
+    itemRef,
+    controllInput,
+    autoFocusBackward,
+    blockCharacter,
+    limitInputLength,
+  } = useControllInput({
+    maxLength: INPUT_LENGTH,
+  });
 
   return (
     <div className="expire__input__container">
@@ -29,12 +34,14 @@ const ExpiredDateInput = ({ state, updateForm }) => {
                 itemRef.current[idx] = el;
               }}
               onChange={({ target }) => {
-                controllInput(target);
-                blockCharacter(target);
                 updateForm({
                   type: "expiredDate",
-                  payload: { value: target.value, index: idx },
+                  payload: {
+                    value: limitInputLength(blockCharacter(target.value)),
+                    index: idx,
+                  },
                 });
+                controllInput(target);
               }}
               onKeyDown={(e) => {
                 if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {

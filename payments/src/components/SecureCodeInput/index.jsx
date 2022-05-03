@@ -7,7 +7,7 @@ import useControllInput from "../../hooks/useControllInput";
 const INPUT_LENGTH = 3;
 
 const SecureCodeInput = ({ state, updateForm }) => {
-  const { itemRef, controllInput, blockCharacter } = useControllInput({
+  const { itemRef, blockCharacter, limitInputLength } = useControllInput({
     maxLength: INPUT_LENGTH,
   });
   return (
@@ -22,11 +22,11 @@ const SecureCodeInput = ({ state, updateForm }) => {
           maxLength="3"
           value={state}
           onChange={({ target }) => {
-            blockCharacter(target);
-            controllInput(target);
             updateForm({
               type: "secureCode",
-              payload: { value: target.value },
+              payload: {
+                value: limitInputLength(blockCharacter(target.value)),
+              },
             });
           }}
         />

@@ -7,8 +7,7 @@ export default {
 };
 
 export const CardNumber = () => {
-  const [form, dispatch] = useCard();
-  const { cardNumber } = form;
+  const { cardInfo, dispatch } = useCard();
 
-  return <CardNumberInput state={cardNumber} updateForm={dispatch} />;
+  return <CardNumberInput state={cardInfo} updateForm={dispatch} />;
 };
