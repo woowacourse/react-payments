@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 const Modal = ({ handleModal, children }) => {
@@ -20,4 +21,4 @@ Modal.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };
 
-export default Modal;
+export default memo(Modal);

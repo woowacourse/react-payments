@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, memo } from 'react';
 import PropTypes from 'prop-types';
 import { isObject } from 'utils';
 
@@ -86,4 +86,4 @@ FormInput.defaultProps = {
   theme: '',
 };
 
-export default FormInput;
+export default memo(FormInput);

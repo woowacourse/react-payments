@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants';
 
@@ -74,4 +75,4 @@ CardPreview.propTypes = {
   handleModal: PropTypes.func.isRequired,
 };
 
-export default CardPreview;
+export default memo(CardPreview);

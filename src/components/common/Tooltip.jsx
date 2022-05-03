@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import { ReactComponent as TooltipIcon } from 'assets/tooltip_icon.svg';
 import { TOOLTIP_TYPES } from 'constants';
@@ -32,4 +32,4 @@ Tooltip.propTypes = {
   type: PropTypes.string.isRequired,
 };
 
-export default Tooltip;
+export default memo(Tooltip);

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 const CardCompany = ({ company, onClickCompany, theme }) => {
@@ -24,4 +25,4 @@ CardCompany.propTypes = {
   theme: PropTypes.string.isRequired,
 };
 
-export default CardCompany;
+export default memo(CardCompany);

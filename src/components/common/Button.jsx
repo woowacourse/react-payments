@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 const Button = ({ className, theme, children }) => {
@@ -24,4 +25,4 @@ Button.defaultProps = {
   theme: '',
 };
 
-export default Button;
+export default memo(Button);

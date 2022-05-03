@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer, useCallback } from 'react';
 
 import FormInput from 'components/common/FormInput';
 import CardPreview from 'components/CardPreview';
@@ -45,7 +45,10 @@ const initialCardInfo = {
 
 const CardAppPage = () => {
   const [cardInfo, setCardInfo] = useState(initialCardInfo);
-  const [modalVisible, handleModal] = useReducer((visible) => !visible, false);
+  const [modalVisible, handleModal] = useReducer(
+    useCallback((visible) => !visible, []),
+    false,
+  );
   const [isfullFilled, setIsFullFilled] = useState(false);
   const { number, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
 
@@ -58,7 +61,7 @@ const CardAppPage = () => {
     setIsFullFilled(false);
   }, [cardInfo]);
 
-  const handleChange = ({ target }, item) => {
+  const handleChange = useCallback(({ target }, item) => {
     const { name, value } = target;
 
     if (!validator[item](value, name)) return;
@@ -79,9 +82,9 @@ const CardAppPage = () => {
         [item]: value,
       };
     });
-  };
+  }, []);
 
-  const handleClickCompany = (company, theme) => {
+  const handleClickCompany = useCallback((company, theme) => {
     setCardInfo((prevCardInfo) => ({
       ...prevCardInfo,
       company,
@@ -89,7 +92,7 @@ const CardAppPage = () => {
     }));
 
     handleModal();
-  };
+  }, []);
 
   return (
     <>
