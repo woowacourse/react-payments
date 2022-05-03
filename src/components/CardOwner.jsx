@@ -46,9 +46,9 @@ function CardOwner({ dispatch }) {
         <LetterCounter maxLength={30} currentLength={ownerName.length} />
         <Label>카드 소유자 이름(선택)</Label>
         <Input
-          type="text"
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          maxLength="30"
+          type={'text'}
+          placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
+          maxLength={'30'}
           onChange={handleInputChange}
           value={ownerName}
           required

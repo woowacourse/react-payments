@@ -85,48 +85,48 @@ function CardNumber({ dispatch }) {
         <Span>
           <Input
             ref={cardNoARef}
-            type="text"
+            type={'text'}
             onChange={handleInputChange}
             maxLength={4}
-            name="cardNoA"
+            name={'cardNoA'}
             value={cardNumbers.cardNoA}
-            placeholder="1234"
+            placeholder={'1234'}
           />
         </Span>
         <Span>-</Span>
         <Span>
           <Input
             ref={cardNoBRef}
-            type="text"
+            type={'text'}
             onChange={handleInputChange}
             maxLength={4}
-            name="cardNoB"
+            name={'cardNoB'}
             value={cardNumbers.cardNoB}
-            placeholder="1234"
+            placeholder={'1234'}
           />
         </Span>
         <Span>-</Span>
         <Span>
           <Input
             ref={cardNoCRef}
-            type="password"
+            type={'password'}
             onChange={handleInputChange}
             maxLength={4}
-            name="cardNoC"
+            name={'cardNoC'}
             value={cardNumbers.cardNoC}
-            placeholder="****"
+            placeholder={'****'}
           />
         </Span>
         <Span>-</Span>
         <Span>
           <Input
             ref={cardNoDRef}
-            type="password"
+            type={'password'}
             onChange={handleInputChange}
             maxLength={4}
-            name="cardNoD"
+            name={'cardNoD'}
             value={cardNumbers.cardNoD}
-            placeholder="****"
+            placeholder={'****'}
           />
         </Span>
       </InputWrapper>

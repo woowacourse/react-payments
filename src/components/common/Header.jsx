@@ -20,7 +20,7 @@ function Header({ children: title }) {
     <HeaderContainer>
       <IoIosArrowBack
         size={30}
-        color="#525252"
+        color={'#525252'}
         onClick={() => alert('아직 구현되지 않았습니다 :(')}
         style={{ cursor: 'pointer' }}
       />

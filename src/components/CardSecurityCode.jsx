@@ -44,12 +44,12 @@ function CardSecurityCode({ dispatch }) {
   };
 
   return (
-    <InputContainer position="relative" width="40%">
+    <InputContainer position={'relative'} width={'40%'}>
       <div>
         <Label>보안코드(CVC/CVV)</Label>
-        <InputWrapper width="80%">
+        <InputWrapper width={'80%'}>
           <Span>
-            <Input type="password" maxLength="3" onChange={handleInputChange} value={cardCode} />
+            <Input type={'password'} maxLength={'3'} onChange={handleInputChange} value={cardCode} />
           </Span>
         </InputWrapper>
         <QuestionContainer>{CVC_EXPLANATION}</QuestionContainer>

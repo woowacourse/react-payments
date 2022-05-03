@@ -27,9 +27,9 @@ function DueDate({ dispatch, dimensions }) {
     <InputContainer>
       <Label>만료일</Label>
       <InputWrapper color={HYPHEN_PRIMARY_COLOR} width="50%">
-        <Calendar items={months.current} setItem={setMonth} placeholder="MM" dimensions={dimensions} />
+        <Calendar items={months.current} setItem={setMonth} placeholder={'MM'} dimensions={dimensions} />
         <Span>/</Span>
-        <Calendar items={years.current} setItem={setYear} placeholder="YY" dimensions={dimensions} />
+        <Calendar items={years.current} setItem={setYear} placeholder={'YY'} dimensions={dimensions} />
       </InputWrapper>
     </InputContainer>
   );

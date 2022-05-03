@@ -102,7 +102,7 @@ function CardShape({ cardNumber, cardOwnerName, cardDate, dimensions }) {
             <Span>{cardNumber}</Span>
           </CardNumber>
           <CardInfo>
-            <CardParagraph width="120">{cardOwnerName || 'NAME'}</CardParagraph>
+            <CardParagraph width={'120'}>{cardOwnerName || 'NAME'}</CardParagraph>
             <CardParagraph>{cardDate || 'MM / YY'}</CardParagraph>
           </CardInfo>
         </CardBottom>

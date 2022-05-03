@@ -113,7 +113,7 @@ function App() {
       <CardPassword dispatch={dispatch} />
       <Footer>
         <TextButton
-          hexColor="#525252"
+          hexColor={'#525252'}
           isVisible={isAllCompleted}
           handleClick={() => alert('카드 등록이 완료 되었습니다 :D')}>
           다음

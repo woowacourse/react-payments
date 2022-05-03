@@ -17,9 +17,9 @@ const Paragraph = styled.p`
 function LetterCounter({ currentLength, maxLength }) {
   return (
     <Paragraph>
-      <Span padding="0">{currentLength || 0}</Span>
-      <Span padding="0">/</Span>
-      <Span padding="0">{maxLength || 0}</Span>
+      <Span padding={'0'}>{currentLength || 0}</Span>
+      <Span padding={'0'}>/</Span>
+      <Span padding={'0'}>{maxLength || 0}</Span>
     </Paragraph>
   );
 }

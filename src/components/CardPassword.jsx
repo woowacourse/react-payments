@@ -59,10 +59,10 @@ function CardPassword({ dispatch }) {
       <Label>카드 비밀번호</Label>
       <InputPasswordWrapper>
         <InputWrapper>
-          <Input type="password" maxLength={1} name="pwdNoA" onChange={handleInputChange} value={pwd.pwdNoA} />
+          <Input type={'password'} maxLength={1} name={'pwdNoA'} onChange={handleInputChange} value={pwd.pwdNoA} />
         </InputWrapper>
         <InputWrapper>
-          <Input type="password" maxLength={1} name="pwdNoB" onChange={handleInputChange} value={pwd.pwdNoB} />
+          <Input type={'password'} maxLength={1} name={'pwdNoB'} onChange={handleInputChange} value={pwd.pwdNoB} />
         </InputWrapper>
         <InactiveContainer />
         <InactiveContainer />
