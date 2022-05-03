@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppState } from '../../../hooks/hooks';
 import { ActionType } from '../../../types';
 import { insertAt, isNum, removeAt, removeHyphens, removeWhiteSpaces, transformToCardFormat } from '../../../utils';
@@ -9,6 +9,10 @@ function CardNumberInputContainer() {
   const { cardNumber } = useAppState();
   const dispatch = useAppDispatch();
   const inputRef = useRef<HTMLInputElement>(null);
+  // 페이지가 로드 되었을때 기본으로 CardNumber에 focus을 준다
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = inputRef.current;
