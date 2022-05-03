@@ -28,7 +28,6 @@ const CardBox = styled.div`
     background-color: ${props => `${props.hexColor}cc`};
   }
 `;
-
 const CardHeader = styled.div``;
 const CardChip = styled.div`
   width: 45px;
@@ -50,7 +49,6 @@ const CardParagraph = styled.p`
   white-space: nowrap;
   width: ${props => props.width}px;
 `;
-
 const GridContainer = styled.div`
   display: grid;
   gap: 10px;
@@ -62,7 +60,7 @@ const cardCompanyList = [
   { color: '#547CE4', name: '준 카드' },
   { color: '#73BC6D', name: '공원 카드' },
   { color: '#DE59B9', name: '브랜 카드' },
-  { color: '#04C09E4F', name: '로이드 카드' },
+  { color: '#04C09E', name: '로이드 카드' },
   { color: '#E76E9A', name: '도비 카드' },
   { color: '#F37D3B', name: '콜린 카드' },
   { color: '#FBCD58', name: '썬 카드' },
@@ -75,25 +73,26 @@ const cardCompanyList = [
   { color: '#192dff', name: '블링 카드' },
 ];
 
-function CardShape({ cardNumber, cardOwnerName, cardDate, dimensions }) {
+function CardShape({ cardNumber, cardOwnerName, cardDate: { month, year }, dimensions, setCardCompany, cardCompany }) {
   const [isShown, setIsShown] = useState(false);
-  const [hexColor, setHexColor] = useState('');
-  const [cardCompanyName, setCardCompanyName] = useState('');
 
   const handleClickBox = () => {
     setIsShown(!isShown);
   };
-  const handleClickCompany = ({ color, name }) => {
-    setHexColor(color);
-    setCardCompanyName(name);
+
+  const handleClickCompany = ({ color: hexColor, name }) => {
+    setCardCompany({
+      hexColor,
+      name,
+    });
     setIsShown(!isShown);
   };
 
   return (
     <CardContainer>
-      <CardBox onClick={handleClickBox} hexColor={hexColor}>
+      <CardBox onClick={handleClickBox} hexColor={cardCompany.hexColor}>
         <CardHeader>
-          <Span>{cardCompanyName}</Span>
+          <Span>{cardCompany.name}</Span>
         </CardHeader>
         <CardChip />
         <CardBottom>
@@ -102,7 +101,7 @@ function CardShape({ cardNumber, cardOwnerName, cardDate, dimensions }) {
           </CardNumber>
           <CardInfo>
             <CardParagraph width="120">{cardOwnerName || 'NAME'}</CardParagraph>
-            <CardParagraph>{cardDate || 'MM / YY'}</CardParagraph>
+            <CardParagraph>{`${month || 'MM'} / ${year || 'YY'}`}</CardParagraph>
           </CardInfo>
         </CardBottom>
       </CardBox>
@@ -110,7 +109,7 @@ function CardShape({ cardNumber, cardOwnerName, cardDate, dimensions }) {
         <GridContainer>
           {cardCompanyList.map(({ color, name }, index) => (
             <CardCompany
-              color={color}
+              hexColor={color}
               name={name}
               key={index}
               handleClick={() => handleClickCompany({ color, name })}
