@@ -8,14 +8,7 @@ import Button from 'components/common/Button';
 import Tooltip from 'components/common/Tooltip';
 import { ReactComponent as PrevIcon } from 'assets/prev_icon.svg';
 
-import {
-  validator,
-  isFullNumber,
-  isFullExpiryDate,
-  isFullPassword,
-  isFullPrivacyCode,
-  isFullCompany,
-} from './validator';
+import { validator } from './validator';
 import { isObject } from '../../utils';
 import { CRYPTO_STRING, INPUT_MAX_LENGTH } from '../../constants';
 
@@ -29,6 +22,9 @@ import {
 } from './data';
 import Circle from '../../components/common/Circle';
 import Message from '../../components/common/Message';
+import useModal from 'hooks/useModal';
+import useIsFilled from 'hooks/useIsFilled';
+import useToggle from 'hooks/useToggle';
 
 const getCardInfoMessage = (company, cardNumber, month, year, ownerName, privacyCode) => {
   const { first, second, third, fourth } = cardNumber;
@@ -61,48 +57,16 @@ const initialCardInfo = {
 
 const CardAppPage = () => {
   const [cardInfo, setCardInfo] = useState(initialCardInfo);
-  const [modalVisible, setModalVisible] = useState(false);
-
-  const [isCompanyFilled, setIsCompanyFilled] = useState(false);
-  const [isCardNumberFilled, setIsCardNumberFilled] = useState(false);
-  const [isExpiryDateFilled, setIsExpiryDateFilled] = useState(false);
-  const [isPrivacyCodeFilled, setIsPrivacyCodeFilled] = useState(false);
-  const [isPasswordFilled, setIsPasswordFilled] = useState(false);
-
-  const [isCardFront, setIsCardFront] = useState(true);
   const { cardNumber, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
 
-  useEffect(() => {
-    if (isFullCompany(company)) {
-      setIsCompanyFilled(true);
-    } else {
-      setIsCompanyFilled(false);
-    }
+  const [isCompanyFilled] = useIsFilled('company', company, false);
+  const [isCardNumberFilled] = useIsFilled('cardNumber', cardNumber, false);
+  const [isExpiryDateFilled] = useIsFilled('expiryDate', expiryDate, false);
+  const [isPrivacyCodeFilled] = useIsFilled('privacyCode', privacyCode, false);
+  const [isPasswordFilled] = useIsFilled('password', password, false);
 
-    if (isFullNumber(cardNumber)) {
-      setIsCardNumberFilled(true);
-    } else {
-      setIsCardNumberFilled(false);
-    }
-
-    if (isFullExpiryDate(expiryDate)) {
-      setIsExpiryDateFilled(true);
-    } else {
-      setIsExpiryDateFilled(false);
-    }
-
-    if (isFullPrivacyCode(privacyCode)) {
-      setIsPrivacyCodeFilled(true);
-    } else {
-      setIsPrivacyCodeFilled(false);
-    }
-
-    if (isFullPassword(password)) {
-      setIsPasswordFilled(true);
-    } else {
-      setIsPasswordFilled(false);
-    }
-  }, [company, cardNumber, expiryDate, privacyCode, password]);
+  const [modalVisible, handleModal] = useModal(false);
+  const [isCardFront, handleCardPosition] = useToggle(false);
 
   const handleChange = ({ target }, item) => {
     const { name, value } = target;
@@ -127,10 +91,6 @@ const CardAppPage = () => {
     });
   };
 
-  const handleCardPosition = useCallback(() => {
-    setIsCardFront((prevCardFront) => !prevCardFront);
-  }, []);
-
   const handleCompanyClick = (company, theme) => {
     setCardInfo((prevCardInfo) => ({
       ...prevCardInfo,
@@ -140,10 +100,6 @@ const CardAppPage = () => {
 
     handleModal();
   };
-
-  const handleModal = useCallback(() => {
-    setModalVisible((prevModalVisible) => !prevModalVisible);
-  }, []);
 
   const handleClickNextButton = () => {
     const { month, year } = expiryDate;
