@@ -14,10 +14,6 @@ const InputPasswordWrapper = styled.div`
 function CardPassword({ errorMessage, setErrorMessage, pwd, updatePwd, isCorrectPwd }) {
   const handleInputChange = ({ target }) => {
     updatePwd(target);
-
-    if (!isCorrectPwd) {
-      setErrorMessage('모두 입력해주세요.');
-    }
   };
 
   useEffect(() => {

@@ -22,9 +22,6 @@ function CardNumber({ errorMessage, setErrorMessage, cardNumbers, updateCardNumb
     });
 
     updateCardNumbers(target);
-    if (!isCorrectCardNumber) {
-      setErrorMessage('모든 숫자를 입력해주세요.');
-    }
   };
 
   useEffect(() => {
