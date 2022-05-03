@@ -11,8 +11,9 @@ function NameInput({ value, name, updateNameLength, updateCardForm }) {
       length={MAX_LENGTH.NAME}
       minLength={MIN_LENGTH.NAME}
       updateNameLength={updateNameLength}
-      value={value}
       name={name}
+      value={value}
+      required={false}
       updateCardForm={updateCardForm}
       validators={{ checkMaxLength }}
     />

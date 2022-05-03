@@ -11,6 +11,7 @@ function Input({
   max,
   name,
   value,
+  required,
   updateNameLength,
   updateCardForm,
   validators,
@@ -48,7 +49,7 @@ function Input({
       placeholder={placeholder}
       maxLength={length}
       minLength={minLength || length}
-      required
+      required={required}
       onChange={handleChange}
     />
   );
@@ -64,6 +65,7 @@ Input.propTypes = {
   max: PropTypes.number,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  required: PropTypes.bool,
   updateNameLength: PropTypes.func,
   updateCardForm: PropTypes.func.isRequired,
   validators: PropTypes.shape({
@@ -76,6 +78,7 @@ Input.propTypes = {
 Input.defaultProps = {
   type: 'text',
   size: '',
+  required: true,
 };
 
 export default Input;
