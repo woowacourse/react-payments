@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useLayoutEffect, useMemo } from 'react';
+import React, { useState, useRef, useLayoutEffect, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { LABEL_PRIMARY_COLOR } from './style';
@@ -66,10 +66,20 @@ function App() {
     pwdNoA: '',
     pwdNoB: '',
   });
-  const [isRequiredCompleted, setIsRequiredCompleted] = useState(false);
 
   const isCorrectCardNumber = useMemo(() => Object.values(cardNumbers).join('').length === 16, [cardNumbers]);
   const isCorrectPwd = useMemo(() => Object.values(pwd).join('').length === 2, [pwd]);
+  const isRequiredCompleted = useMemo(
+    () =>
+      cardCompany.name &&
+      cardCompany.hexColor &&
+      isCorrectCardNumber &&
+      cardDate.month &&
+      cardDate.year &&
+      cardCode.cvc.length === 3 &&
+      isCorrectPwd,
+    [cardCompany, cardDate, cardCode, isCorrectCardNumber, isCorrectPwd],
+  );
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -77,22 +87,6 @@ function App() {
     if (!isRequiredCompleted) return;
     alert('카드 등록이 완료 되었습니다 :D');
   };
-
-  useEffect(() => {
-    if (
-      cardCompany.name &&
-      cardCompany.hexColor &&
-      isCorrectCardNumber &&
-      cardDate.month &&
-      cardDate.year &&
-      cardCode.cvc.length === 3 &&
-      isCorrectPwd
-    ) {
-      setIsRequiredCompleted(true);
-      return;
-    }
-    setIsRequiredCompleted(false);
-  }, [isCorrectCardNumber, cardCompany, cardDate, cardCode, isCorrectPwd]);
 
   useLayoutEffect(() => {
     if (targetRef.current) {
