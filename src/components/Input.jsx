@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ERROR_MESSAGE } from '../constants';
 
 function Input({
   type,
@@ -16,21 +15,14 @@ function Input({
   updateCardForm,
   validators,
 }) {
-  const checkValidation = (event, targetValue) => {
-    if (validators.isNaN && Number.isNaN(+targetValue)) {
-      event.target.value = targetValue.substring(0, value.length - 1);
-      throw new Error(ERROR_MESSAGE.NOT_NUMBER);
-    }
+  const checkValidation = (targetValue) => {
+    if (validators.checkIsNaN) validators.checkIsNaN(+targetValue);
 
-    if (validators.isOverMaxLength && validators.isOverMaxLength(targetValue, length)) {
-      event.target.value = targetValue.substring(0, length);
-      throw new Error(ERROR_MESSAGE.OVER_MAX_LENGTH);
-    }
+    if (validators.checkMaxLength) validators.checkMaxLength(targetValue, length);
 
-    if (validators.isOutOfRange && validators.isOutOfRange(min, max, +targetValue)) {
+    if (validators.checkRange) {
       if (targetValue === '') return;
-      event.target.value = targetValue.substring(0, targetValue.length - 1);
-      throw new Error(ERROR_MESSAGE.INVALID_MONTH_RANGE);
+      validators.checkRange(min, max, +targetValue);
     }
   };
 
@@ -40,7 +32,7 @@ function Input({
     if (updateNameLength) updateNameLength(targetValue);
 
     try {
-      checkValidation(event, targetValue);
+      checkValidation(targetValue);
       updateCardForm(name, targetValue);
     } catch (error) {
       alert(error.message);
@@ -75,9 +67,9 @@ Input.propTypes = {
   updateNameLength: PropTypes.func,
   updateCardForm: PropTypes.func.isRequired,
   validators: PropTypes.shape({
-    isOverMaxLength: PropTypes.func.isRequired,
-    isNaN: PropTypes.func,
-    isOutOfRange: PropTypes.func,
+    checkMaxLength: PropTypes.func.isRequired,
+    checkIsNaN: PropTypes.func,
+    checkRange: PropTypes.func,
   }).isRequired,
 };
 
