@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import EasyForm from '../common/EasyForm';
+import useEasyForm from '../../hooks/useEasyForm';
 import CardPreview from '../common/CardPreview';
 import ToolTip from '../common/ToolTip';
 import cardFormSchema from './cardFormSchema';
@@ -148,156 +148,153 @@ const addCard = (values) => {
 };
 
 const CardForm = () => {
-  return (
-    <EasyForm
-      formSchema={cardFormSchema}
-      onSubmit={(values, setSubmitting) => {
-        setSubmitting(true);
-        addCard(values);
+  const { values, submitting, handleSubmit, errors, registerInputProps } =
+    useEasyForm({
+      formSchema: cardFormSchema,
+      onSubmit: (cardInfo) => {
+        addCard(cardInfo);
         alert('제출 성공');
-        setSubmitting(false);
-      }}
-      onSubmitError={(errors, invalidInputRefs) => {
+      },
+      onSubmitError: (errorInfos, invalidInputRefs) => {
         const firstInvalidInput = invalidInputRefs[0].element;
-        const { errorMessage } = errors[firstInvalidInput.name];
+        const { errorMessage } = errorInfos[firstInvalidInput.name];
 
         firstInvalidInput.focus();
         alert(errorMessage);
-      }}
-    >
-      {({ values, submitting, handleSubmit, errors, registerInputProps }) => (
-        <>
-          <CardPreview {...getCardInfo(values)} />
-          <StyledCardForm onSubmit={handleSubmit} disabled={submitting}>
-            <StyledCardFieldContainer className="input-container">
-              <label className="input-title">카드 번호</label>
-              <div className="input-box">
-                <input
-                  className={`input-basic ${
-                    errors.firstCardNumber?.showError ? 'error' : ''
-                  }`}
-                  {...registerInputProps('firstCardNumber')}
-                />
-                <p>-</p>
-                <input
-                  className={`input-basic ${
-                    errors.secondCardNumber?.showError ? 'error' : ''
-                  }`}
-                  {...registerInputProps('secondCardNumber')}
-                />
-                <p>-</p>
-                <input
-                  type="password"
-                  className={`input-basic ${
-                    errors.thirdCardNumber?.showError ? 'error' : ''
-                  }`}
-                  {...registerInputProps('thirdCardNumber')}
-                />
-                <p>-</p>
-                <input
-                  type="password"
-                  className={`input-basic ${
-                    errors.fourthCardNumber?.showError ? 'error' : ''
-                  }`}
-                  {...registerInputProps('fourthCardNumber')}
-                />
-              </div>
-            </StyledCardFieldContainer>
-            <StyledCardFieldContainer className="input-container">
-              <label className="input-title">만료일</label>
-              <div className="input-box w-50">
-                <input
-                  className={`input-basic ${
-                    errors.expiredMonth?.showError ? 'error' : ''
-                  }`}
-                  placeholder="MM"
-                  {...registerInputProps('expiredMonth')}
-                />
-                <p>/</p>
-                <input
-                  className={`input-basic ${
-                    errors.expiredYear?.showError ? 'error' : ''
-                  }`}
-                  placeholder="YY"
-                  {...registerInputProps('expiredYear')}
-                />
-              </div>
-            </StyledCardFieldContainer>
-            <StyledCardFieldContainer className="input-container">
-              <label className="input-title">카드 소유자 이름 (선택)</label>
-              <span className="input-title name-length">
-                {' '}
-                {values.owner.length}/30
-              </span>
-              <div className="input-box">
-                <input
-                  className={`input-basic ${
-                    errors.owner?.showError ? 'error' : ''
-                  }`}
-                  placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-                  {...registerInputProps('owner')}
-                />
-              </div>
-            </StyledCardFieldContainer>
-            <StyledCardFieldContainer className="input-container">
-              <label className="input-title">보안코드 (CVC/CVV)</label>
-              <div className="cvc-block">
-                <div className="input-box w-25">
-                  <input
-                    type="password"
-                    className={`input-basic ${
-                      errors.cvc?.showError ? 'error' : ''
-                    }`}
-                    {...registerInputProps('cvc')}
-                  />
-                </div>
-                <ToolTip tip="보안 코드는 보통 카드 뒷면 3-4자리 수입니다.">
-                  ?
-                </ToolTip>
-              </div>
-            </StyledCardFieldContainer>
-            <StyledCardFieldContainer className="input-container">
-              <label className="input-title">비밀번호</label>
-              <div className="input-box transparent">
-                <input
-                  type="password"
-                  className={`input-basic w-15 password ${
-                    errors.firstPasswordDigit?.showError ? 'error' : ''
-                  }`}
-                  {...registerInputProps('firstPasswordDigit')}
-                />
-                <input
-                  type="password"
-                  className={`input-basic w-15 password ${
-                    errors.secondPasswordDigit?.showError ? 'error' : ''
-                  }`}
-                  {...registerInputProps('secondPasswordDigit')}
-                />
-                <input
-                  type="password"
-                  className={`input-basic w-15 disabled ${
-                    errors.thirdPasswordDigit?.showError ? 'error' : ''
-                  }`}
-                  disabled
-                  {...registerInputProps('thirdPasswordDigit')}
-                />
-                <input
-                  type="password"
-                  className={`input-basic w-15 disabled ${
-                    errors.fourthPasswordDigit?.showError ? 'error' : ''
-                  }`}
-                  disabled
-                  {...registerInputProps('fourthPasswordDigit')}
-                />
-              </div>
-            </StyledCardFieldContainer>
-            <button className="submit-button" type="submit">
-              다음
-            </button>
-          </StyledCardForm>
-        </>
-      )}
-    </EasyForm>
+      },
+    });
+
+  return (
+    <>
+      <CardPreview {...getCardInfo(values)} />
+      <StyledCardForm onSubmit={handleSubmit} disabled={submitting}>
+        <StyledCardFieldContainer className="Input-container">
+          <label className="input-title">카드 번호</label>
+          <div className="input-box">
+            <input
+              className={`input-basic ${
+                errors.firstCardNumber?.showError ? 'error' : ''
+              }`}
+              {...registerInputProps('firstCardNumber')}
+            />
+            <p>-</p>
+            <input
+              className={`input-basic ${
+                errors.secondCardNumber?.showError ? 'error' : ''
+              }`}
+              {...registerInputProps('secondCardNumber')}
+            />
+            <p>-</p>
+            <input
+              type="password"
+              className={`input-basic ${
+                errors.thirdCardNumber?.showError ? 'error' : ''
+              }`}
+              {...registerInputProps('thirdCardNumber')}
+            />
+            <p>-</p>
+            <input
+              type="password"
+              className={`input-basic ${
+                errors.fourthCardNumber?.showError ? 'error' : ''
+              }`}
+              {...registerInputProps('fourthCardNumber')}
+            />
+          </div>
+        </StyledCardFieldContainer>
+        <StyledCardFieldContainer className="input-container">
+          <label className="input-title">만료일</label>
+          <div className="input-box w-50">
+            <input
+              className={`input-basic ${
+                errors.expiredMonth?.showError ? 'error' : ''
+              }`}
+              placeholder="MM"
+              {...registerInputProps('expiredMonth')}
+            />
+            <p>/</p>
+            <input
+              className={`input-basic ${
+                errors.expiredYear?.showError ? 'error' : ''
+              }`}
+              placeholder="YY"
+              {...registerInputProps('expiredYear')}
+            />
+          </div>
+        </StyledCardFieldContainer>
+        <StyledCardFieldContainer className="input-container">
+          <label className="input-title">카드 소유자 이름 (선택)</label>
+          <span className="input-title name-length">
+            {' '}
+            {values.owner.length}/30
+          </span>
+          <div className="input-box">
+            <input
+              className={`input-basic ${
+                errors.owner?.showError ? 'error' : ''
+              }`}
+              placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+              {...registerInputProps('owner')}
+            />
+          </div>
+        </StyledCardFieldContainer>
+        <StyledCardFieldContainer className="input-container">
+          <label className="input-title">보안코드 (CVC/CVV)</label>
+          <div className="cvc-block">
+            <div className="input-box w-25">
+              <input
+                type="password"
+                className={`input-basic ${
+                  errors.cvc?.showError ? 'error' : ''
+                }`}
+                {...registerInputProps('cvc')}
+              />
+            </div>
+            <ToolTip tip="보안 코드는 보통 카드 뒷면 3-4자리 수입니다.">
+              ?
+            </ToolTip>
+          </div>
+        </StyledCardFieldContainer>
+        <StyledCardFieldContainer className="input-container">
+          <label className="input-title">비밀번호</label>
+          <div className="input-box transparent">
+            <input
+              type="password"
+              className={`input-basic w-15 password ${
+                errors.firstPasswordDigit?.showError ? 'error' : ''
+              }`}
+              {...registerInputProps('firstPasswordDigit')}
+            />
+            <input
+              type="password"
+              className={`input-basic w-15 password ${
+                errors.secondPasswordDigit?.showError ? 'error' : ''
+              }`}
+              {...registerInputProps('secondPasswordDigit')}
+            />
+            <input
+              type="password"
+              className={`input-basic w-15 disabled ${
+                errors.thirdPasswordDigit?.showError ? 'error' : ''
+              }`}
+              disabled
+              {...registerInputProps('thirdPasswordDigit')}
+            />
+            <input
+              type="password"
+              className={`input-basic w-15 disabled ${
+                errors.fourthPasswordDigit?.showError ? 'error' : ''
+              }`}
+              disabled
+              {...registerInputProps('fourthPasswordDigit')}
+            />
+          </div>
+        </StyledCardFieldContainer>
+        <button className="submit-button" type="submit">
+          다음
+        </button>
+      </StyledCardForm>
+    </>
   );
 };
 
