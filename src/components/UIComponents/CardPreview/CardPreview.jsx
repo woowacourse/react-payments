@@ -43,11 +43,12 @@ const CardChip = styled.div`
   margin-bottom: 15px;
 `;
 
-const CardNumber = styled.p`
+const CardNumber = styled.div`
   display: flex;
   align-items: center;
   height: 10px;
   margin-bottom: 12px;
+  gap: 10px;
 `;
 
 const CardBottomSection = styled.div`
@@ -62,8 +63,6 @@ const CardHolderName = styled.p`
   word-wrap: break-word;
 `;
 
-const CardExpireDate = styled.p``;
-
 export default function CardPreview({
   cardNumber,
   holderName,
@@ -76,15 +75,16 @@ export default function CardPreview({
         <CardName>Woowa Card</CardName>
         <CardChip />
         <CardNumber>
-          {cardNumber[0]}&nbsp;&nbsp;&nbsp;{cardNumber[1]}&nbsp;&nbsp;&nbsp;
-          {CREATE_MASKED_CHARACTERS(cardNumber[2].length)}&nbsp;&nbsp;&nbsp;
-          {CREATE_MASKED_CHARACTERS(cardNumber[3].length)}
+          <p>{cardNumber[0]}</p>
+          <p>{cardNumber[1]}</p>
+          <p>{CREATE_MASKED_CHARACTERS(cardNumber[2].length)}</p>
+          <p>{CREATE_MASKED_CHARACTERS(cardNumber[3].length)}</p>
         </CardNumber>
         <CardBottomSection>
           <CardHolderName>{holderName}</CardHolderName>
-          <CardExpireDate>
+          <p>
             {expireDate[0]} {expireDate[0].length !== 0 && "/"} {expireDate[1]}
-          </CardExpireDate>
+          </p>
         </CardBottomSection>
       </SmallCard>
     </CardContainer>
@@ -95,4 +95,5 @@ CardPreview.propTypes = {
   cardNumber: PropTypes.arrayOf(string),
   holderName: PropTypes.string,
   expireDate: PropTypes.arrayOf(string),
+  canProceed: PropTypes.bool,
 };
