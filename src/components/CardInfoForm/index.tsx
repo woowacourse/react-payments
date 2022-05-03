@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { CardInfo } from "../../types";
 import CardExpiredDate from "./CardExpiredDate";
@@ -6,8 +6,6 @@ import CardNumber from "./CardNumber";
 import CardPassword from "./CardPassword";
 import CardSecurityCode from "./CardSecurityCode";
 import CardUserName from "./CardUserName";
-import { useCardInfoValidation } from "../../hooks/useCardInfoValidation";
-import cardInfoValidator from "../../lib/validation";
 
 interface CardInfoFormProps {
   cardInfo: CardInfo;
@@ -33,50 +31,20 @@ export default function CardInfoForm({
   const { cardNumbers, expiredDate, userName, securityCode, password } = cardInfo;
   const [isNextButtonShown, setIsNextButtonShown] = useState(true);
 
-  const cardInfoValidation = useCardInfoValidation(cardInfo, cardInfoValidator);
-  const {
-    isCardNumbersValid,
-    isExpiredDateValid,
-    isUserNameValid,
-    isSecurityCodeValid,
-    isPasswordValid,
-  } = cardInfoValidation;
-
-  useEffect(() => {
-    setIsNextButtonShown(Object.keys(cardInfoValidation).every(key => cardInfoValidation[key]));
-  }, [cardInfoValidation]);
-
   return (
     <form
       onSubmit={e => {
+        console.log(e);
         e.preventDefault();
         resetCardInfo();
         alert("카드 등록이 완료되었습니다.");
-        setIsNextButtonShown(false);
       }}
     >
-      <CardNumber
-        cardNumbers={cardNumbers}
-        onChange={onChangeCardNumber}
-        isValid={isCardNumbersValid}
-      />
-      <CardExpiredDate
-        expiredDate={expiredDate}
-        onChange={onChangeExpiredDate}
-        isValid={isExpiredDateValid}
-      />
-      <CardUserName
-        cardUserName={userName}
-        onChange={onChangeUserName}
-        onBlur={onBlurUserName}
-        isValid={isUserNameValid}
-      />
-      <CardSecurityCode
-        securityCode={securityCode}
-        onChange={onChangeSecurityCode}
-        isValid={isSecurityCodeValid}
-      />
-      <CardPassword password={password} onChange={onChangePassword} isValid={isPasswordValid} />
+      <CardNumber cardNumbers={cardNumbers} onChange={onChangeCardNumber} />
+      <CardExpiredDate expiredDate={expiredDate} onChange={onChangeExpiredDate} />
+      <CardUserName cardUserName={userName} onChange={onChangeUserName} onBlur={onBlurUserName} />
+      <CardSecurityCode securityCode={securityCode} onChange={onChangeSecurityCode} />
+      <CardPassword password={password} onChange={onChangePassword} />
       {isNextButtonShown && (
         <button type="submit" className="submit-button">
           다음

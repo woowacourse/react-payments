@@ -1,26 +1,21 @@
 import React from "react";
 
-import FailMessage from "./FailMessage";
-import SuccessMessage from "./SuccessMessage";
+import ValidationMessage from "./ValidationMessage";
+
+import { InputValidation } from "../hooks/useInputValidation";
 
 interface InputContainerProps {
   children: React.ReactNode;
   inputTitle: string;
-  isValid: boolean;
-  isError?: boolean;
+  validation: InputValidation;
 }
 
-export default function InputContainer({
-  children,
-  inputTitle,
-  isValid,
-  isError = false,
-}: InputContainerProps) {
+export default function InputContainer({ children, inputTitle, validation }: InputContainerProps) {
   return (
     <div className="input-container">
       <div className="input-container-top">
         <span className="input-title">{inputTitle}</span>
-        {isValid ? <SuccessMessage /> : isError && <FailMessage />}
+        <ValidationMessage validation={validation} />
       </div>
       {children}
     </div>

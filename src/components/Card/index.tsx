@@ -23,7 +23,7 @@ export default function Card({ cardInfo }: { cardInfo: CardInfo }) {
             {cardNumbers.map((cardNumber, index) => {
               return (
                 <span className="card-number" key={index}>
-                  {index < 2 ? cardNumber : "•".repeat(cardNumber.length)}
+                  {cardNumber}
                 </span>
               );
             })}
