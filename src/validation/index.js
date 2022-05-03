@@ -14,7 +14,7 @@ export default {
   },
 
   validateOwnerName: name => {
-    const ownerNameRex = /^[A-Z]{1,30}$/;
+    const ownerNameRex = /^[A-Z ]{1,30}$/;
 
     return ownerNameRex.test(name);
   },
