@@ -12,9 +12,6 @@ function Button({ children, color, onClick }) {
 Button.propTypes = {
   onClick: PropTypes.func,
   color: PropTypes.string,
-  /**
-   * Button contents
-   */
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 

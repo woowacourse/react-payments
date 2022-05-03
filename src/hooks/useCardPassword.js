@@ -8,14 +8,14 @@ const useCardPassword = () => {
   });
   const secondPasswordInputRef = useRef();
 
-  const handleChangePassword = (key, { target: { value } }) => {
+  const handleChangePassword = ({ target: { value, name } }) => {
     if (value.length > PASSWORD.UNIT_LENGTH || isNaN(value)) return;
 
     if (value.length === PASSWORD.UNIT_LENGTH) {
       secondPasswordInputRef.current.focus();
     }
 
-    setPassword({ ...password, [key]: value });
+    setPassword({ ...password, [name]: value });
   };
 
   return { password, handleChangePassword, secondPasswordInputRef };

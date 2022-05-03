@@ -16,16 +16,18 @@ function CardPasswordInput({
         <InputBox size="12">
           <Input
             type="password"
+            name="firstPassword"
             value={password.firstPassword}
-            onChange={(e) => handleChangePassword("firstPassword", e)}
+            onChange={handleChangePassword}
           />
         </InputBox>
         <InputBox size="12">
           <Input
             type="password"
+            name="secondPassword"
             ref={secondPasswordInputRef}
             value={password.secondPassword}
-            onChange={(e) => handleChangePassword("secondPassword", e)}
+            onChange={handleChangePassword}
           />
         </InputBox>
         <Dot>•</Dot>

@@ -23,7 +23,8 @@ const isValidCvc = (value) => value.length <= CVC.UNIT_LENGTH && !isNaN(value);
 function CardAddPage() {
   const { cardNumbers, handleChangeCardNumber, cardNumberInputRefs } =
     useCardNumber();
-  const { dueDate, handleChangeDueDate, yearInputRef } = useCardDueDate();
+  const { dueDate, handleChangeDueDate, yearInputRef, error } =
+    useCardDueDate();
   const [owner, handleChangeOwner] = useInput({
     initialValue: "",
     isValid: isValidOwnerLength,
@@ -80,6 +81,7 @@ function CardAddPage() {
         dueDate={dueDate}
         handleChangeDueDate={handleChangeDueDate}
         yearInputRef={yearInputRef}
+        error={error}
       />
       <CardOwnerInput owner={owner} handleChangeOwner={handleChangeOwner} />
       <CardCVCInput cvc={cvc} handleChangeCvc={handleChangeCvc} />
