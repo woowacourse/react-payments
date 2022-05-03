@@ -12,4 +12,5 @@ export const CardForm = Template.bind({});
 
 CardForm.args = {
   updateCard: () => {},
+  addCard: () => {},
 };
