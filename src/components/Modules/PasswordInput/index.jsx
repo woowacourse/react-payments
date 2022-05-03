@@ -13,7 +13,7 @@ const InputContainer = styled.div`
 `;
 
 function PasswordInput() {
-  const { password, validations, refs, onPasswordChange } =
+  const { password, validations, inputRefs, onPasswordChange } =
     useContext(PasswordContext);
 
   return (
@@ -23,7 +23,7 @@ function PasswordInput() {
           <Input
             key={order}
             name={order}
-            ref={refs[order]}
+            ref={inputRefs[order]}
             value={password[order]}
             width="43px"
             height="45px"

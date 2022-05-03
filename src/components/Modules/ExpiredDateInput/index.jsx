@@ -14,7 +14,7 @@ const InputContainer = styled.div`
 `;
 
 function ExpiredDateInput() {
-  const { datePlaceholder, expiredDate, validations, refs, onDateChange } =
+  const { datePlaceholder, expiredDate, validations, inputRefs, onDateChange } =
     useContext(ExpiredDateContext);
 
   return (
@@ -27,7 +27,7 @@ function ExpiredDateInput() {
               <Input
                 key={unit}
                 name={unit}
-                ref={refs[unit]}
+                ref={inputRefs[unit]}
                 value={expiredDate[unit]}
                 width="40px"
                 type="number"

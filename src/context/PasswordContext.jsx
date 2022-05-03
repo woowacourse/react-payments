@@ -1,4 +1,4 @@
-import { createContext, useRef } from 'react';
+import { createContext } from 'react';
 import validator from '../../src/validation';
 import { numberRegex } from '../constant/regularExpression';
 import useFocus from '../hooks/useFocus';
@@ -13,19 +13,19 @@ function PasswordContextProvider({ children }) {
     setStateObject: setPassword,
     validations,
     setValidations,
-    refs,
+    inputRefs,
+    currentInputRef,
   } = useSomeInput(orders);
-
-  const currentOrderRef = useRef();
-  const isValid = Object.values(validations).every(valid => valid);
 
   const { focusPrevOrder } = useFocus({
     validate: validator.validatePassword,
     orders,
     validations,
-    refs,
-    currentOrderRef,
+    inputRefs,
+    currentInputRef,
   });
+
+  const isValid = Object.values(validations).every(valid => valid);
 
   const onPasswordChange = ({ target, nativeEvent: { data, inputType } }) => {
     if (numberRegex.test(data) || !data) {
@@ -35,7 +35,7 @@ function PasswordContextProvider({ children }) {
       updatePassword(order, newNumber);
       updateValidations(order, newNumber);
       focusPrevOrder(order, newNumber, inputType);
-      currentOrderRef.current = order;
+      currentInputRef.current = order;
     }
   };
 
@@ -53,12 +53,10 @@ function PasswordContextProvider({ children }) {
   return (
     <PasswordContext.Provider
       value={{
-        orders,
         password,
         validations,
         isValid,
-        refs,
-        currentOrderRef,
+        inputRefs,
         onPasswordChange,
       }}
     >

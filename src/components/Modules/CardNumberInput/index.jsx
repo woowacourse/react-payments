@@ -14,7 +14,7 @@ const InputContainer = styled.div`
 `;
 
 function CardNumberInput() {
-  const { numbers, validations, refs, handleNumberChange } =
+  const { numbers, validations, inputRefs, handleNumberChange } =
     useContext(CardNumberContext);
 
   return (
@@ -27,7 +27,7 @@ function CardNumberInput() {
               <Input
                 key={order}
                 name={order}
-                ref={refs[order]}
+                ref={inputRefs[order]}
                 value={numbers[order]}
                 type={index < 2 ? 'number' : 'password'}
                 width="50px"

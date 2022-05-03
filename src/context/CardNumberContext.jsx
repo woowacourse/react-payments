@@ -1,4 +1,4 @@
-import { createContext, useRef } from 'react';
+import { createContext } from 'react';
 import validator from '../../src/validation';
 import { numberRegex } from '../constant/regularExpression';
 import useFocus from '../hooks/useFocus';
@@ -13,10 +13,18 @@ function CardNumberContextProvider({ children }) {
     setStateObject: setNumbers,
     validations,
     setValidations,
-    refs,
+    inputRefs,
+    currentInputRef,
   } = useSomeInput(orders);
 
-  const currentOrderRef = useRef();
+  const { focusPrevOrder } = useFocus({
+    validate: validator.validateCardNumber,
+    orders,
+    validations,
+    inputRefs,
+    currentInputRef,
+  });
+
   const isValid = Object.values(validations).every(valid => valid);
 
   const cardNumberString = Object.values(numbers).some(number => number)
@@ -27,14 +35,6 @@ function CardNumberContextProvider({ children }) {
         .join(' ')
     : '';
 
-  const { focusPrevOrder } = useFocus({
-    validate: validator.validateCardNumber,
-    orders,
-    validations,
-    refs,
-    currentOrderRef,
-  });
-
   const handleNumberChange = ({ target, nativeEvent: { data, inputType } }) => {
     if ((numberRegex.test(data) || !data) && target.value.length <= 4) {
       const order = target.name;
@@ -43,7 +43,7 @@ function CardNumberContextProvider({ children }) {
       updateNumbers(order, newNumber);
       updateValidations(order, validator.validateCardNumber(newNumber));
       focusPrevOrder(order, newNumber, inputType);
-      currentOrderRef.current = order;
+      currentInputRef.current = order;
     }
   };
 
@@ -58,13 +58,11 @@ function CardNumberContextProvider({ children }) {
   return (
     <CardNumberContext.Provider
       value={{
-        orders,
         numbers,
         cardNumberString,
         validations,
         isValid,
-        refs,
-        currentOrderRef,
+        inputRefs,
         handleNumberChange,
       }}
     >

@@ -7,9 +7,17 @@ function useSomeInput(entries) {
   const [validations, setValidations] = useState(
     Object.fromEntries(entries.map(key => [key, false]))
   );
-  const refs = Object.fromEntries(entries.map(key => [key, useRef()]));
+  const inputRefs = Object.fromEntries(entries.map(key => [key, useRef()]));
+  const currentInputRef = useRef();
 
-  return { stateObject, validations, refs, setStateObject, setValidations };
+  return {
+    stateObject,
+    validations,
+    inputRefs,
+    currentInputRef,
+    setStateObject,
+    setValidations,
+  };
 }
 
 export default useSomeInput;

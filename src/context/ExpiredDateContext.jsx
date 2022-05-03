@@ -1,4 +1,4 @@
-import { createContext, useRef } from 'react';
+import { createContext } from 'react';
 import { PLACEHOLDER } from '../constant';
 import validator from '../../src/validation';
 import useFocus from '../hooks/useFocus';
@@ -15,23 +15,23 @@ function ExpiredDateContextProvider({ children }) {
     setStateObject: setExpiredDate,
     validations,
     setValidations,
-    refs,
+    inputRefs,
+    currentInputRef,
   } = useSomeInput(units);
-
-  const currentUnitRef = useRef();
-  const isValid = Object.values(validations).every(valid => valid);
-
-  const expiredDateString = Object.values(expiredDate).some(date => date)
-    ? `${expiredDate.month}/${expiredDate.year}`
-    : PLACEHOLDER.DATE;
 
   const { focusPrevOrder } = useFocus({
     validate: validator.validateExpiredDate,
     orders: units,
     validations,
-    refs,
-    currentOrderRef: currentUnitRef,
+    inputRefs,
+    currentInputRef: currentInputRef,
   });
+
+  const isValid = Object.values(validations).every(valid => valid);
+
+  const expiredDateString = Object.values(expiredDate).some(date => date)
+    ? `${expiredDate.month}/${expiredDate.year}`
+    : PLACEHOLDER.DATE;
 
   const onDateChange = ({ target, nativeEvent: { data, inputType } }) => {
     if ((numberRegex.test(data) || !data) && target.value.length <= 2) {
@@ -41,7 +41,7 @@ function ExpiredDateContextProvider({ children }) {
       updateDate(unit, newDate);
       updateValidation(unit, newDate);
       focusPrevOrder(unit, newDate, inputType);
-      currentUnitRef.current = unit;
+      currentInputRef.current = unit;
     }
   };
 
@@ -64,8 +64,7 @@ function ExpiredDateContextProvider({ children }) {
         expiredDateString,
         validations,
         isValid,
-        refs,
-        currentUnitRef,
+        inputRefs,
         onDateChange,
       }}
     >
