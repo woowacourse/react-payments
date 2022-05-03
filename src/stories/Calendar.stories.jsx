@@ -5,19 +5,19 @@ export default {
   title: 'Calendar',
   component: Calendar,
   argTypes: {
-    items: { control: 'array' },
+    itemList: { control: 'array' },
     dimensions: { control: 'object' },
   },
 };
 
 const Template = args => {
   const [item, setItem] = useState();
-  return <Calendar {...args} setItem={setItem} />;
+  return <Calendar {...args} setItem={setItem} item={item} />;
 };
 export const Primary = Template.bind({});
 
 Primary.args = {
-  items: [1, 2, 3, 4],
+  itemList: [1, 2, 3, 4],
   dimensions: {
     width: 754,
     height: 200,

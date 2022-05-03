@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal from './Modal';
 import { LABEL_PRIMARY_COLOR, ITEM_HOVER_PRIMARY_BG_COLOR } from '../../style';
@@ -19,7 +19,7 @@ const SelectListWrapper = styled.div``;
 const List = styled.ul`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-itemlist: center;
   justify-content: center;
   list-style: none;
   padding-left: 0;
@@ -39,32 +39,29 @@ const Item = styled.li`
   }
 `;
 
-function Calendar({ items, placeholder, setItem, dimensions }) {
-  const inputRef = useRef(null);
+function Calendar({ itemList, placeholder, setItem, dimensions, item }) {
   const [isShown, setIsShown] = useState(false);
   const handleClickBox = () => {
     setIsShown(!isShown);
   };
 
-  const handleClickDate = m => {
+  const handleClickDate = selectedItem => {
     handleClickBox();
-    inputRef.current.value = m;
-
-    setItem(m);
+    setItem(selectedItem);
   };
 
   return (
     <CalendarContainer>
       <SelectBox onClick={handleClickBox}>
-        <Input ref={inputRef} placeholder={placeholder} type="text" readOnly />
+        <Input placeholder={placeholder} type="text" readOnly value={item} />
       </SelectBox>
       <Modal isOpen={isShown} setIsOpen={setIsShown} dimensions={dimensions}>
         <SelectLayer isShown={isShown}>
           <SelectListWrapper>
             <List>
-              {items.map(m => (
-                <Item key={m} onClick={() => handleClickDate(m)}>
-                  {m}
+              {itemList.map(tem => (
+                <Item key={tem} onClick={() => handleClickDate(tem)}>
+                  {tem}
                 </Item>
               ))}
             </List>

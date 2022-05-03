@@ -6,9 +6,6 @@ import { validateOwner } from '../validator';
 export default {
   title: 'CardOwner',
   component: CardOwner,
-  argTypes: {
-    ownerName: { control: 'text' },
-  },
 };
 
 const Template = () => {
