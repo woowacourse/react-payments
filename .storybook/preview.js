@@ -3,8 +3,6 @@ import CardContext from '../src/CardContext';
 import useInitialAppValue from '../src/hooks/useInitialAppValue';
 import { initialState, reducer } from '../src/reducers';
 
-initialState.dispatch = () => null;
-
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
