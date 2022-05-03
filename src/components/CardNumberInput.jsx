@@ -16,9 +16,10 @@ const CardNumberInput = React.forwardRef((props, inputRef) => {
 
   return (
     <InputField
-      labelText="카드 번호"
-      wrapperWidth="100%"
-      horizontalAlign="space-around"
+      labelText={"카드 번호"}
+      wrapperWidth={"100%"}
+      horizontalAlign={"space-around"}
+      errorMessage={"카드 번호는 0~9까지 숫자로 입력해주세요."}
       isComplete={
         cardNumber.join("").length ===
         CARD_INFO_RULES.NUMBER_UNIT_COUNT * CARD_INFO_RULES.NUMBER_UNIT_LENGTH

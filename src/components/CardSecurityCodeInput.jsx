@@ -63,19 +63,20 @@ const SECURITY_CODE_DESCRIPTION =
 export default function CardSecurityCodeInput({ securityCode, onChange }) {
   return (
     <InputField
-      labelText="보안 코드(CVC/CVV)"
+      labelText={"보안 코드(CVC/CVV)"}
       OptionalComponent={<HelpIcon description={SECURITY_CODE_DESCRIPTION} />}
-      wrapperWidth="85px"
+      wrapperWidth={"85px"}
       isComplete={securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
+      errorMessage={"카드 뒷 면에 있는 3자리 숫자를 적어주세요."}
     >
       <Input
-        type="password"
+        type={"password"}
         name={"securityCode"}
         maxLength={3}
         value={securityCode}
         onChange={(e) => onChange(e, "securityCode")}
         placeholder={CREATE_MASKED_CHARACTERS(3)}
-        width="100%"
+        width={"100%"}
         isComplete={
           securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
         }

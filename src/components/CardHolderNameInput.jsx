@@ -28,7 +28,7 @@ function InputCounter({ currLength = "0", maxLength, isComplete }) {
 export default function CardHolderNameInput({ holderName, onChange }) {
   return (
     <InputField
-      labelText="카드 소유자 이름 (선택)"
+      labelText={"카드 소유자 이름 (선택)"}
       OptionalComponent={
         <InputCounter
           currLength={holderName.length}
@@ -36,8 +36,9 @@ export default function CardHolderNameInput({ holderName, onChange }) {
           isComplete={holderName !== ""}
         />
       }
-      wrapperWidth="100%"
-      horizontalAlign="flex-start"
+      wrapperWidth={"100%"}
+      horizontalAlign={"flex-start"}
+      errorMessage={"카드 소유자 이름은 영문 대문자만 입력해주세요."}
       isComplete={holderName !== ""}
     >
       <Input
