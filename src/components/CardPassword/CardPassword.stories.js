@@ -7,14 +7,9 @@ export default {
 };
 
 const Template = (args) => {
-  const [cardInfo, setCardInfo] = useState(args.cardInfo);
-  return <CardPassword cardInfo={cardInfo} setCardInfo={setCardInfo} />;
+  const [cardPasswords, setCardPasswords] = useState(args.cardPasswords);
+  return <CardPassword cardPasswords={cardPasswords} setCardPasswords={setCardPasswords} />;
 };
 
-export const CardPasswordInput = Template.bind({});
-CardPasswordInput.args = {
-  cardInfo: {
-    password1: '',
-    password2: '',
-  },
-};
+export const CardPasswordsInput = Template.bind({});
+CardPasswordsInput.args = { cardPasswords: ['', ''] };

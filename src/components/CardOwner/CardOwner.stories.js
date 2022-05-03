@@ -7,13 +7,11 @@ export default {
 };
 
 const Template = (args) => {
-  const [cardInfo, setCardInfo] = useState(args.cardInfo);
-  return <CardOwner cardInfo={cardInfo} setCardInfo={setCardInfo} />;
+  const [cardOwner, setOwner] = useState(args.cardOwner);
+  return <CardOwner cardOwner={cardOwner} setOwner={setOwner} />;
 };
 
 export const CardOwnerInput = Template.bind({});
 CardOwnerInput.args = {
-  cardInfo: {
-    owner: '',
-  },
+  cardOwner: '',
 };

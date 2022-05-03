@@ -7,13 +7,18 @@ export default {
 };
 
 const Template = (args) => {
-  const [cardInfo, setCardInfo] = useState(args.cardInfo);
-  return <CardExpirationDate cardInfo={cardInfo} setCardInfo={setCardInfo} />;
+  const [cardExpirationDate, setCardExpirationDate] = useState(args.cardExpirationDate);
+  return (
+    <CardExpirationDate
+      cardExpirationDate={cardExpirationDate}
+      setCardExpirationDate={setCardExpirationDate}
+    />
+  );
 };
 
 export const CardExpirationDateInput = Template.bind({});
 CardExpirationDateInput.args = {
-  cardInfo: {
+  cardExpirationDate: {
     month: '',
     year: '',
   },
