@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ErrorMessage from './common/ErrorMessage';
 import { Input, InputContainer, Span, Label, InputWrapper } from './common/styled';
 import QuestionContainer from './common/QuestionIcon';
