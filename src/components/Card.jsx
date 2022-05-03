@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
+import { TYPES, CardStateContext } from '../context/CardContext.jsx';
 import * as S from '../styles.js';
 import validator from '../validations/validator';
 import ErrorMessage from './ErrorMessage';
-import CardContext from '../CardContext';
-import TYPES from '../reducers/card.actions.js';
 
 export default function Card({
   cardCompanyIndex,
@@ -14,7 +13,7 @@ export default function Card({
   onClick,
   color,
 }) {
-  const { cardCompanyErrorMessage } = useContext(CardContext);
+  const { cardCompanyErrorMessage } = useContext(CardStateContext);
 
   const cardExpirationContent = () =>
     cardExpiration[0] || cardExpiration[1] ? cardExpiration.join('/') : 'MM/YY';

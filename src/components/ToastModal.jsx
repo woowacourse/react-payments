@@ -1,10 +1,10 @@
 import React, { useCallback, useContext } from 'react';
 import * as S from '../styles.js';
 import Dimmer from './Dimmer';
-import CardContext from '../CardContext';
+import { CardDispatchContext } from '../context/CardContext';
 
 export default function ToastModal({ type, show, children }) {
-  const { dispatch } = useContext(CardContext);
+  const dispatch = useContext(CardDispatchContext);
 
   const onClickDimmer = useCallback(() => {
     dispatch({ type: type, flag: false });

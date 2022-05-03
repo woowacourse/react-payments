@@ -1,4 +1,40 @@
-import TYPES from './card.actions';
+import React, { createContext, useReducer } from 'react';
+
+export const TYPES = {
+  SET_NUMBER: 'SET_NUMBER',
+  SET_NUMBER_ERROR_MESSAGE: 'SET_NUMBER_ERROR_MESSAGE',
+  SET_EXPIRATION: 'SET_EXPIRATION',
+  SET_EXPIRATION_ERROR_MESSAGE: 'SET_EXPIRATION_ERROR_MESSAGE',
+  SET_OWNER: 'SET_OWNER',
+  SET_OWNER_ERROR_MESSAGE: 'SET_OWNER_ERROR_MESSAGE',
+  SET_CVC: 'SET_CVC',
+  SET_CVC_ERROR_MESSAGE: 'SET_CVC_ERROR_MESSAGE',
+  SET_PASSWORD: 'SET_PASSWORD',
+  SET_PASSWORD_ERROR_MESSAGE: 'SET_PASSWORD_ERROR_MESSAGE',
+  SET_COMPANY_ERROR_MESSAGE: 'SET_COMPANY_ERROR_MESSAGE',
+  SET_LIST_MODAL_FLAG: 'SET_LIST_MODAL_FLAG',
+  SET_TIP_MODAL_FLAG: 'SET_TIP_MODAL_FLAG',
+  SET_COMPANY_INDEX: 'SET_COMPANY_INDEX',
+};
+
+export const initialState = {
+  cardNumber: ['', '', '', ''],
+  cardNumberErrorMessage: '',
+  cardExpiration: ['', ''],
+  cardExpirationErrorMessage: '',
+  cardOwner: '',
+  cardOwnerErrorMessage: '',
+  cardCvc: '',
+  cardCvcErrorMessage: '',
+  cardPassword: ['', ''],
+  cardPasswordErrorMessage: '',
+  cardCompanyIndex: -1,
+  listModalFlag: false,
+  tipModalFlag: false,
+};
+
+export const CardStateContext = createContext();
+export const CardDispatchContext = createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -110,8 +146,18 @@ const reducer = (state, action) => {
     }
 
     default:
-      return state;
+      throw new Error('Unhandled action type.');
   }
 };
 
-export default reducer;
+const CardProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <CardStateContext.Provider value={state}>
+      <CardDispatchContext.Provider value={dispatch}>{children}</CardDispatchContext.Provider>
+    </CardStateContext.Provider>
+  );
+};
+
+export default CardProvider;

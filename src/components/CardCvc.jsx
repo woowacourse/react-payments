@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import * as S from '../styles.js';
-import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
 import { CARD_COMPANIES } from '../constants';
-import TYPES from '../reducers/card.actions.js';
+import { TYPES, CardStateContext, CardDispatchContext } from '../context/CardContext';
 
 export default function CardCvc() {
-  const { cardCvc, cardCvcErrorMessage, cardCompanyIndex, dispatch } = useContext(CardContext);
+  const { cardCvc, cardCvcErrorMessage, cardCompanyIndex } = useContext(CardStateContext);
+  const dispatch = useContext(CardDispatchContext);
 
   const onChangeInput = (e) => {
     dispatch({ type: TYPES.SET_CVC, value: e.target.value });

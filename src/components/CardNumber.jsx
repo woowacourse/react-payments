@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import * as S from '../styles.js';
-import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
-import TYPES from '../reducers/card.actions.js';
+import { TYPES, CardStateContext, CardDispatchContext } from '../context/CardContext';
 
 export default function CardNumber({ color }) {
-  const { cardNumber, cardNumberErrorMessage, cardCompanyIndex, dispatch } =
-    useContext(CardContext);
+  const { cardNumber, cardNumberErrorMessage, cardCompanyIndex } = useContext(CardStateContext);
+
+  const dispatch = useContext(CardDispatchContext);
 
   const onChangeInput = (index) => (e) => {
     dispatch({ type: TYPES.SET_NUMBER, value: e.target.value, index });

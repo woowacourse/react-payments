@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import * as S from '../styles.js';
-import CardContext from '../CardContext';
 import validator from '../validations/validator';
 import ErrorMessage from './ErrorMessage';
-import TYPES from '../reducers/card.actions.js';
+import { TYPES, CardStateContext, CardDispatchContext } from '../context/CardContext';
 
 export default function CardOwner({ color }) {
-  const { cardOwner, cardOwnerErrorMessage, dispatch } = useContext(CardContext);
+  const { cardOwner, cardOwnerErrorMessage } = useContext(CardStateContext);
+  const dispatch = useContext(CardDispatchContext);
 
   const onChangeInput = (e) => {
     dispatch({ type: TYPES.SET_OWNER, value: e.target.value });

@@ -2,11 +2,11 @@ import React, { useCallback, useContext } from 'react';
 import CardCompany from './CardCompany';
 import ToastModal from './ToastModal';
 import { CARD_COMPANIES } from '../constants/index';
-import CardContext from '../CardContext';
-import TYPES from '../reducers/card.actions';
+import { TYPES, CardStateContext, CardDispatchContext } from '../context/CardContext';
 
 export default function CardListModal() {
-  const { cardCompanyIndex, listModalFlag, dispatch } = useContext(CardContext);
+  const { cardCompanyIndex, listModalFlag } = useContext(CardStateContext);
+  const dispatch = useContext(CardDispatchContext);
 
   const onClick = (index) =>
     useCallback(() => {

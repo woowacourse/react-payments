@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
-
 import * as S from '../styles.js';
-import CardContext from '../CardContext';
 import ErrorMessage from './ErrorMessage';
 import validator from '../validations/validator';
-import TYPES from '../reducers/card.actions.js';
+import { TYPES, CardStateContext, CardDispatchContext } from '../context/CardContext';
 
 export default function CardExpiration({ color }) {
-  const { cardExpiration, cardExpirationErrorMessage, dispatch } = useContext(CardContext);
+  const { cardExpiration, cardExpirationErrorMessage } = useContext(CardStateContext);
+  const dispatch = useContext(CardDispatchContext);
 
   const onChangeInput = (index) => (e) => {
     dispatch({ type: TYPES.SET_EXPIRATION, value: e.target.value, index });

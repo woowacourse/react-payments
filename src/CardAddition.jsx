@@ -8,12 +8,11 @@ import CardOwner from './components/CardOwner';
 import CardCvc from './components/CardCvc';
 import CardPassword from './components/CardPassword';
 import NextButton from './components/NextButton';
-import CardContext from './CardContext';
 import CardListModal from './components/CardListModal';
 import validator from '../src/validations/validator';
 import { CARD_COMPANIES } from './constants';
-import TYPES from './reducers/card.actions';
 import TipModal from './components/TipModal';
+import { TYPES, CardStateContext, CardDispatchContext } from './context/CardContext';
 
 const CardAdditionContainer = styled.div`
   height: 100%;
@@ -21,15 +20,9 @@ const CardAdditionContainer = styled.div`
 `;
 
 function CardAddition() {
-  const {
-    cardNumber,
-    cardExpiration,
-    cardOwner,
-    cardCvc,
-    cardPassword,
-    cardCompanyIndex,
-    dispatch,
-  } = useContext(CardContext);
+  const { cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword, cardCompanyIndex } =
+    useContext(CardStateContext);
+  const dispatch = useContext(CardDispatchContext);
 
   const isAllInputValidated = () => {
     try {
@@ -39,7 +32,6 @@ function CardAddition() {
       validator.checkCardOwner(cardOwner);
       validator.checkCardCvc(cardCvc);
       validator.checkCardPassword(cardPassword);
-
       return true;
     } catch (error) {
       return false;

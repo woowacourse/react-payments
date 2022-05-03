@@ -1,9 +1,4 @@
-import CardContext from '../src/CardContext';
-import useInitialAppValue from '../src/hooks/useInitialAppValue';
-import initialState from '../src/reducers/card.initialState';
-import reducer from '../src/reducers/card.reducer';
-
-initialState.dispatch = () => null;
+import CardProvider from '../src/context/CardContext';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -17,10 +12,6 @@ export const parameters = {
 
 export const decorators = [
   (Story) => {
-    return (
-      <CardContext.Provider value={useInitialAppValue(reducer, initialState)}>
-        {Story()}
-      </CardContext.Provider>
-    );
+    return <CardProvider>{Story()}</CardProvider>;
   },
 ];
