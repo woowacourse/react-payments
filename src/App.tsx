@@ -9,12 +9,14 @@ import CardPasswordFieldset from './components/molecules/CardPasswordFieldset';
 import Navigation from './components/molecules/Navigation';
 import ConfirmButtonContainer from './components/atoms/confirm-button/ConfirmButtonContainer';
 import CardContainer from './components/atoms/card/CardContainer';
+import CardForm from './components/molecules/CardForm';
 
 const style = css({
   width: '375px',
   margin: '0 auto',
   padding: '22px 28px 16px 28px',
   position: 'relative',
+  backgroundColor: '#ffffff',
 });
 
 const cardWrapper = css({
@@ -30,14 +32,14 @@ function App() {
         <div css={cardWrapper}>
           <CardContainer />
         </div>
-        <form>
+        <CardForm>
           <CardNumberFieldset />
           <ExpiredPeriodFieldset />
           <CardOwnerNameFieldset />
           <CVCFieldset />
           <CardPasswordFieldset />
           <ConfirmButtonContainer>다음</ConfirmButtonContainer>
-        </form>
+        </CardForm>
       </AppProvider>
     </div>
   );

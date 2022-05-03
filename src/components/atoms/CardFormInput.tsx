@@ -10,7 +10,7 @@ type Props = {
 };
 
 const CardFormInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { onChange, value, type, placeholder, style } = props;
+  const { onChange, value, type, placeholder, disabled, style } = props;
 
   return (
     <>
@@ -20,6 +20,7 @@ const CardFormInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
         value={value}
         placeholder={placeholder}
         css={style}
+        {...(disabled ? { disabled: true } : '')}
         ref={ref}
       />
     </>
