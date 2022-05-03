@@ -12,7 +12,6 @@ const ExpiredDateInput = ({
     <styled.Container>
       <Input
         scale="medium"
-        textAlign="right"
         placeholder={'MM'}
         maxLength={2}
         value={expiredMonth}
@@ -21,7 +20,6 @@ const ExpiredDateInput = ({
       <styled.SlashContainer>/</styled.SlashContainer>
       <Input
         scale="medium"
-        textAlign="left"
         placeholder={'YY'}
         maxLength={2}
         value={expiredYear}
