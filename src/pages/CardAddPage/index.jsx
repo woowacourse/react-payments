@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Head from '../../components/Head';
 import Card from '../../components/Card';
 import CardNumbersInput from '../../components/CardNumbersInput';
+import ExpiredDateInput from '../../components/ExpiredDateInput';
 import LabeledInput from '../../components/LabeledInput';
 import Tooltip from '../../components/Tooltip';
 import SubmitButton from '../../components/SubmitButton';
@@ -19,7 +20,7 @@ function CardAddPage() {
   const [companyName, setCompanyName] = useState('포코카드');
 
   const { cardNumbers, isValidCardNumbers, handleChangeCardNumbersInput } = useCardNumbers();
-  const { convertedExpiredDate, isValidExpiredDate, handleChangeExpiredDateInput } =
+  const { expiredDate, convertedExpiredDate, isValidExpiredDate, handleChangeExpiredDateInput } =
     useExpiredDate();
   const { ownerName, isValidOwnerName, handleChangeOwnerNameInput } = useOwnerName();
   const { securityNumber, isValidSecurityNumber, handleChangeSecurityNumber } = useSecurityNumber();
@@ -62,20 +63,12 @@ function CardAddPage() {
           isValid={isValidCardNumbers}
           invalidMessage={MESSAGE.INVALID_CARD_NUMBER}
         />
-        <LabeledInput
-          value={convertedExpiredDate}
+        <ExpiredDateInput
+          expiredDate={expiredDate}
           handleInputChange={handleChangeExpiredDateInput}
+          isValid={isValidExpiredDate}
           invalidMessage={MESSAGE.INVALID_EXPIRED_DATE}
-          inputProps={{
-            type: 'text',
-            width: '137px',
-            maxLength: 5,
-            placeholder: 'MM / YY',
-            isValid: isValidExpiredDate,
-          }}
-          inputLabelProps={{
-            label: '만료일',
-          }}
+          width="137px"
         />
         <LabeledInput
           value={ownerName}

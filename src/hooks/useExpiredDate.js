@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
 import validator from '../validation';
 import { expiredDateInputRegex } from '../constant/regularExpression';
-import { INPUT_TYPE } from '../constant';
 import { DATE_SEPARATOR } from '../constant/mark';
 
 const useExpiredDate = () => {
@@ -25,18 +24,12 @@ const useExpiredDate = () => {
       return;
     }
 
-    if (isRemoveSlash(inputType, target.value)) {
-      setExpiredDate({ month: expiredDate.month[0], year: '' });
+    if (target.name === 'month') {
+      setExpiredDate(prevState => ({ ...prevState, month: target.value }));
       return;
     }
 
-    const [month, year] = target.value.split(DATE_SEPARATOR);
-
-    setExpiredDate({ month: month || '', year: year || '' });
-  };
-
-  const isRemoveSlash = (inputType, inputValue) => {
-    return inputType === INPUT_TYPE.BACKWARD && inputValue.length === 2;
+    setExpiredDate(prevState => ({ ...prevState, year: target.value }));
   };
 
   return {
