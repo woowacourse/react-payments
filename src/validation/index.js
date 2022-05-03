@@ -1,11 +1,4 @@
-import {
-  CARD_NUMBER,
-  CVC,
-  DUE_DATE,
-  MONTH,
-  OWNER,
-  PASSWORD,
-} from "../constant";
+import { CARD_NUMBER, CVC, DUE_DATE, MONTH, OWNER, PASSWORD } from "constant";
 
 const isValidOwnerLength = (value) => value.length <= OWNER.MAX_LENGTH;
 

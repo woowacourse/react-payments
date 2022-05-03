@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { isFilledPasswordLength, isOverPasswordLength } from "../validation";
+import { isFilledPasswordLength, isOverPasswordLength } from "validation";
 
 const useCardPassword = () => {
   const [password, setPassword] = useState({

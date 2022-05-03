@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
-import InputBox from "../../components/common/InputBox";
-import { Input } from "../../components/common/Input/style";
-import Button from "../common/Button";
+import InputBox from "components/common/InputBox";
+import { Input } from "components/common/Input/style";
+import Button from "components/common/Button";
+import { ReactComponent as QuestionImage } from "assets/question.svg";
+import { CardInputWrapper } from "pages/CardAddPage/style";
 import { CVCWrapper } from "./style";
-import { CardInputWrapper } from "../../pages/CardAddPage/style";
-import { ReactComponent as QuestionImage } from "../../assets/question.svg";
 
 function CardCVCInput({ cvc, handleChangeCvc }) {
   return (

@@ -1,6 +1,6 @@
 import { ThemeProvider, createGlobalStyle } from "styled-components";
-import CardAddPage from "./pages/CardAddPage";
-import theme from "./theme";
+import CardAddPage from "pages/CardAddPage";
+import theme from "theme";
 
 const GlobalStyle = createGlobalStyle`
   body {

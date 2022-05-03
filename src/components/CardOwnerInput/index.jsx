@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import InputBox from "../../components/common/InputBox";
-import { Input } from "../../components/common/Input/style";
+import InputBox from "components/common/InputBox";
+import { Input } from "components/common/Input/style";
+import { CardInputWrapper } from "pages/CardAddPage/style";
 import { OwnerHeader } from "./style";
-import { CardInputWrapper } from "../../pages/CardAddPage/style";
-import { OWNER } from "../../constant";
+import { OWNER } from "constant";
 
 function CardOwnerInput({ owner, handleChangeOwner }) {
   return (

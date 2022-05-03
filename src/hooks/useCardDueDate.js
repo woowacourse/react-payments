@@ -4,7 +4,7 @@ import {
   isExpiredYear,
   isFilledDueDateLength,
   isOverDueDateLength,
-} from "../validation";
+} from "validation";
 
 const useCardDueDate = () => {
   const [dueDate, setDueDate] = useState({ month: "", year: "" });

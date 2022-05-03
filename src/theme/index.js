@@ -1,4 +1,4 @@
-import { COLORS as colors } from "../constant";
+import { COLORS as colors } from "constant";
 
 const theme = {
   colors,
