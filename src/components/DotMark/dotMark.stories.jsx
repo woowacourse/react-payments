@@ -1,11 +1,11 @@
-import React from "react";
-import DotMark from "./index";
+import React from 'react';
+import DotMark from './index';
 
 export default {
-  title: "DotMark",
+  title: 'DotMark',
   component: DotMark,
 };
 
-const Template = (args) => <DotMark {...args} />;
+const Template = args => <DotMark {...args} />;
 
 export const Example = Template.bind({});

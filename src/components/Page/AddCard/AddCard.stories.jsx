@@ -1,11 +1,11 @@
-import React from "react";
-import AddCardPage from "./AddCardPage";
+import React from 'react';
+import AddCardPage from './AddCardPage';
 
 export default {
-  title: "AddCardPage",
+  title: 'AddCardPage',
   component: AddCardPage,
 };
 
-const Template = (args) => <AddCardPage {...args} />;
+const Template = args => <AddCardPage {...args} />;
 
 export const Example = Template.bind({});

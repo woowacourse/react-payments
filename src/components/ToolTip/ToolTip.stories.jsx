@@ -1,11 +1,11 @@
-import React from "react";
-import AskMark from "./index";
+import React from 'react';
+import AskMark from './index';
 
 export default {
-  title: "AskMark",
+  title: 'AskMark',
   component: AskMark,
 };
 
-const Template = (args) => <AskMark {...args} />;
+const Template = args => <AskMark {...args} />;
 
 export const Example = Template.bind({});
