@@ -5,10 +5,9 @@ import CardNumbersInput from '../../components/CardNumbersInput';
 import ExpiredDateInput from '../../components/ExpiredDateInput';
 import OwnerNameInput from '../../components/OwnerNameInput';
 import SecurityNumberInput from '../../components/SecurityNumberInput';
-import LabeledInput from '../../components/LabeledInput';
+import PasswordInput from '../../components/PasswordInput';
 import SubmitButton from '../../components/SubmitButton';
-import Input from '../../components/Input';
-import { Page, CardSection, Form, FormRow, SubmitButtonContainer } from './style';
+import { Page, CardSection, Form, SubmitButtonContainer } from './style';
 import MESSAGE from '../../constant/message';
 import useCardNumbers from '../../hooks/useCardNumbers';
 import useExpiredDate from '../../hooks/useExpiredDate';
@@ -83,34 +82,12 @@ function CardAddPage() {
           isValid={isValidSecurityNumber}
           invalidMessage={MESSAGE.INVALID_SECURITY_NUMBER}
         />
-        <FormRow alignItems="flex-end" gap={'4px'}>
-          <LabeledInput
-            value={password}
-            handleInputChange={handleChangePassword}
-            countInput={2}
-            invalidMessage={MESSAGE.INVALID_PASSWORD}
-            inputProps={{
-              type: 'password',
-              width: '43px',
-              maxLength: 1,
-              isValid: isValidPassword,
-            }}
-            inputLabelProps={{
-              label: '카드 비밀번호',
-            }}
-          />
-          {Array.from({ length: 2 }).map((_, index) => (
-            <Input
-              key={index}
-              type="password"
-              defaultValue="."
-              width="43px"
-              maxLength={1}
-              disabled={true}
-              backgroundColor="#fff"
-            />
-          ))}
-        </FormRow>
+        <PasswordInput
+          password={password}
+          handleInputChange={handleChangePassword}
+          isValid={isValidPassword}
+          invalidMessage={MESSAGE.INVALID_PASSWORD}
+        />
         <SubmitButtonContainer>
           <SubmitButton label="다음" width={'51px'} height={'34px'} hidden={!isAllValidInput()} />
         </SubmitButtonContainer>

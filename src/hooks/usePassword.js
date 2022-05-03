@@ -7,13 +7,15 @@ const usePassword = () => {
 
   const isValidPassword = useMemo(() => validator.validatePassword(password.join('')), [password]);
 
-  const handleChangePassword = ({ nativeEvent: { data, inputType }, target }, childIndex) => {
+  const handleChangePassword = ({ nativeEvent: { data, inputType }, target }) => {
     if (validator.isInvalidInputData(numberRegex, data, inputType)) {
       return;
     }
 
+    const inputIndex = Number(target.name);
+
     const updatedPassword = password.map((number, index) =>
-      index === childIndex ? target.value : number
+      index === inputIndex ? target.value : number
     );
     setPassword(updatedPassword);
   };
