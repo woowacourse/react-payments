@@ -1,6 +1,6 @@
-import Portal from "../../Portal";
-import Color from "../Color";
-import Modal from "../Modal";
+import Portal from "../../../Portal";
+import Color from "../../common/Color";
+import Modal from "../../common/Modal";
 import "./index.scss";
 
 const CARD_CATEGORY = [

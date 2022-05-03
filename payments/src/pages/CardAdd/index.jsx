@@ -1,14 +1,14 @@
 import "./index.scss";
 
-import Card from "../../components/Card";
-import CardNumberInput from "../../components/CardNumberInput";
-import CardPasswordInput from "../../components/CardPasswordInput";
-import ExpiredDateInput from "../../components/ExpiredDateInput";
-import OwnerNameInput from "../../components/OwnerNameInput";
-import SecureCodeInput from "../../components/SecureCodeInput";
+import Card from "../../components/common/Card";
+import CardNumberInput from "../../components/organisms/CardNumberInput";
+import CardPasswordInput from "../../components/organisms/CardPasswordInput";
+import ExpiredDateInput from "../../components/organisms/ExpiredDateInput";
+import OwnerNameInput from "../../components/organisms/OwnerNameInput";
+import SecureCodeInput from "../../components/organisms/SecureCodeInput";
 import useCard from "../../hooks/useCard";
-import NextButton from "../../components/NextButton";
-import CardColorPicker from "../../components/CardColorPicker";
+import NextButton from "../../components/common/NextButton";
+import CardColorPicker from "../../components/organisms/CardColorPicker";
 import { useState } from "react";
 
 const CardAdd = () => {

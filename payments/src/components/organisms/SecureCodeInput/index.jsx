@@ -1,8 +1,8 @@
-import InputContainer from "../elements/InputContainer";
-import { Input } from "../elements/Input";
+import InputContainer from "../../common/InputContainer";
+import { Input } from "../../common/Input";
 import "./index.scss";
-import InputLabel from "../elements/label";
-import { blockCharacter, limitInputLength } from "../../util/input";
+import InputLabel from "../../common/label";
+import { blockCharacter, limitInputLength } from "../../../util/input";
 
 const INPUT_LENGTH = 3;
 

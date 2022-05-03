@@ -1,7 +1,7 @@
-import { limitExceptUpperCase, limitInputLength } from "../../util/input";
-import { Input } from "../elements/Input";
-import InputContainer from "../elements/InputContainer";
-import InputLabel from "../elements/label";
+import { limitExceptUpperCase, limitInputLength } from "../../../util/input";
+import { Input } from "../../common/Input";
+import InputContainer from "../../common/InputContainer";
+import InputLabel from "../../common/label";
 import "./index.scss";
 
 const INPUT_LENGTH = 30;
