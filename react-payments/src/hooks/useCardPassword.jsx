@@ -28,27 +28,19 @@ const useCardPassword = () => {
       return;
     }
 
-    if (cardPassword.first === "") {
-      setCardPassword((prev) => {
-        return { ...prev, first: prev.first + value };
-      });
-      return;
-    }
-
     setCardPassword((prev) => {
+      if (prev.first === "") {
+        return { ...prev, first: prev.first + value };
+      }
       return { ...prev, second: prev.second + value };
     });
   };
 
   const onClickCardPasswordBackspaceButton = () => {
-    if (cardPassword.second === "") {
-      setCardPassword((prev) => {
-        return { ...prev, first: prev.first.slice(0, -1) };
-      });
-      return;
-    }
-
     setCardPassword((prev) => {
+      if (prev.second === "") {
+        return { ...prev, first: prev.first.slice(0, -1) };
+      }
       return { ...prev, second: prev.second.slice(0, -1) };
     });
   };
