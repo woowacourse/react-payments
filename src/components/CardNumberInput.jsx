@@ -29,19 +29,18 @@ export default function CardNumberInput({ cardNumber, onChange }) {
         cardNumber.join('').length === CARD_INFO_RULES.NUMBER_UNIT_COUNT * CARD_INFO_RULES.NUMBER_UNIT_LENGTH
       }>
       {Array.from({ length: CARD_INFO_RULES.NUMBER_UNIT_COUNT }).map((_, index) => (
-        <>
-          <Input
-            key={index}
-            type={index <= 1 ? 'number' : 'password'}
-            value={cardNumber[index]}
-            onChange={e => onChange(e, index)}
-            placeholder={index <= 1 ? '1 2 3 4' : CREATE_MASKED_CHARACTERS(4)}
-            onFocus={() => setFocusInputIndex(index)}
-            isComplete={cardNumber[index].length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH}
-            ref={element => (inputRef.current[index] = element)}
-          />
-          {index !== 3 && <p>-</p>}
-        </>
+        <Input
+          key={index}
+          type={index <= 1 ? 'number' : 'password'}
+          value={cardNumber[index]}
+          ref={element => (inputRef.current[index] = element)}
+          placeholder={index <= 1 ? '1 2 3 4' : CREATE_MASKED_CHARACTERS(4)}
+          onChange={e => onChange(e, index)}
+          onFocus={() => setFocusInputIndex(index)}
+          isComplete={cardNumber[index].length === 4}
+          showPostFix={index < CARD_INFO_RULES.NUMBER_UNIT_COUNT - 1 && cardNumber[index].length === 4}
+          postfix={'-'}
+        />
       ))}
     </InputField>
   );

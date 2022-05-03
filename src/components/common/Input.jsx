@@ -38,7 +38,13 @@ export const StyledInput = styled.input`
 `;
 
 const Input = React.forwardRef((props, ref) => {
-  return <StyledInput {...props} ref={ref} />;
+  const { showPostFix, postfix } = props;
+  return (
+    <>
+      <StyledInput {...props} ref={ref} />
+      {showPostFix && <p>{postfix}</p>}
+    </>
+  );
 });
 
 export default Input;
@@ -55,4 +61,7 @@ Input.defaultProps = {
   type: 'text',
   width: '70px',
   textAlign: 'center',
+
+  showPostFix: false,
+  postfix: '',
 };

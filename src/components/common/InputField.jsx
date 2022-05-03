@@ -47,8 +47,8 @@ export default function InputField({
       <StyledLabel isComplete={isComplete}>{labelText}</StyledLabel>
       <StyledInputContainer>
         {separateEachInput ? (
-          React.Children.toArray(children).map(child => (
-            <StyledInputWrapper width={wrapperWidth} align={horizontalAlign}>
+          React.Children.toArray(children).map((child, index) => (
+            <StyledInputWrapper key={index} width={wrapperWidth} align={horizontalAlign}>
               {child}
             </StyledInputWrapper>
           ))
