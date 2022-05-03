@@ -80,7 +80,7 @@ const AddCardPage = () => {
       isInputAvailableValue: checkNumberOnly,
     });
 
-  const [cardType, setCardType] = useState('red');
+  const [cardType, setCardType] = useState({ color: 'red', name: '' });
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -147,8 +147,8 @@ const AddCardPage = () => {
     setIsModalOpened(false);
   };
 
-  const onClickCardSelector = (type) => () => {
-    setCardType(type);
+  const onClickCardSelector = (color, name) => () => {
+    setCardType({ color, name });
     closeModal();
   };
 
@@ -156,7 +156,7 @@ const AddCardPage = () => {
     <styled.Container onSubmit={onSubmitCardForm}>
       <Header title="카드 추가" />
       <Card
-        name="블랙 카드😎"
+        name={cardType.name}
         ownerName={isOwnerNameError ? '' : ownerName}
         expiredMonth={isExpiredMonthError ? '' : expiredMonth}
         expiredYear={isExpiredYearError ? '' : expiredYear}
@@ -164,7 +164,7 @@ const AddCardPage = () => {
         secondCardNumber={isSecondCardNumberError ? '' : secondCardNumber}
         thirdCardNumber={isThirdCardNumberError ? '' : thirdCardNumber}
         fourthCardNumber={isFourthCardNumberError ? '' : fourthCardNumber}
-        color={cardType}
+        color={cardType.color}
         onClick={openModal}
       />
       <CardNumber
