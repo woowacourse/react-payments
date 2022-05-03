@@ -1,5 +1,4 @@
-import React from 'react';
-import Header from './index';
+import Header from '.';
 
 export default {
   title: 'Header',

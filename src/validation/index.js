@@ -1,4 +1,5 @@
-import { REG_EXP } from '../constant/index';
+import { REG_EXP } from '../constant';
+
 export const checkNumberOnly = (number) => {
   return REG_EXP.NUMBER_ONLY.test(number);
 };

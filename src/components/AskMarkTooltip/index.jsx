@@ -1,4 +1,3 @@
-import React from 'react';
 import * as styled from './index.styled';
 
 const AskMarkTooltip = () => {

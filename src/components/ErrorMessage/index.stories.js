@@ -1,5 +1,4 @@
-import React from 'react';
-import ErrorMessage from './index';
+import ErrorMessage from '.';
 
 export default {
   title: 'ErrorMessage',

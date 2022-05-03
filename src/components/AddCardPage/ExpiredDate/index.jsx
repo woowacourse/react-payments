@@ -1,4 +1,3 @@
-import React from 'react';
 import FieldSet from '../../FieldSet';
 import ExpiredDateInput from '../../Input/ExpiredDateInput';
 import PropTypes from 'prop-types';

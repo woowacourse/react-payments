@@ -1,4 +1,3 @@
-import React from 'react';
 import Input from '.';
 import { INPUT_SCALE_NAMES } from '../../constant';
 

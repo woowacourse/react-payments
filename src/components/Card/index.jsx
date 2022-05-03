@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { COLOR_NAMES } from '../../constant';
 import * as styled from './index.styled';

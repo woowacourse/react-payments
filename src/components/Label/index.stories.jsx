@@ -1,5 +1,4 @@
-import React from 'react';
-import Label from './index';
+import Label from '.';
 
 export default {
   title: 'Label',

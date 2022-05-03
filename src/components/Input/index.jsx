@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import * as styled from './index.styled';
 import { INPUT_SCALE_NAMES } from '../../constant';

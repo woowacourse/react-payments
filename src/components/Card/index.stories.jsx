@@ -1,4 +1,3 @@
-import React from 'react';
 import Card from '.';
 import { COLOR_NAMES } from '../../constant';
 

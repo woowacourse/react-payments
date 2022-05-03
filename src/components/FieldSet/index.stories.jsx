@@ -1,5 +1,4 @@
-import React from 'react';
-import Fieldset from './index';
+import Fieldset from '.';
 import CardNumberInput from '../Input/CardNumberInput';
 import ExpiredDateInput from '../Input/ExpiredDateInput';
 

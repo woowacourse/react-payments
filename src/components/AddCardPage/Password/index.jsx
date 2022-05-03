@@ -1,4 +1,3 @@
-import React from 'react';
 import FieldSet from '../../FieldSet';
 import Input from '../../Input';
 import DotMark from '../../DotMark';

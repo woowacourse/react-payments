@@ -1,4 +1,3 @@
-import React from 'react';
 import ExpiredDateInput from '.';
 
 export default {
