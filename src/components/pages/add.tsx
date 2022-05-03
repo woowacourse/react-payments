@@ -8,7 +8,7 @@ function Add() {
   return (
     <CardInfoProvider>
       <Header title="카드 추가" />
-      <Card />
+      <Card cardInfo={cardInfo} shouldShowTypeSelection={true} pointer={true} />
       <CardInfoForm />
     </CardInfoProvider>
   );
