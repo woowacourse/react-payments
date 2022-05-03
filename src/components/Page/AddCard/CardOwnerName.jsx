@@ -20,7 +20,8 @@ const MaxNumberIndicator = styled.span`
 `;
 
 const showOwnerNameLength = ownerName => {
-  return ownerName.length < 10 ? `0${ownerName.length}/30` : `${ownerName.length}/30`;
+  const ownerNameLength = String(ownerName.length);
+  return `${ownerNameLength.padStart(2, '0')}/30`;
 };
 
 const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
