@@ -2,25 +2,9 @@ import { useContext } from 'react';
 import { CardOwnerContext } from '../../../context/CardOwnerContext';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
-import validator from '../../../validation';
-import { englishRegex } from '../../../constant/regularExpression';
 
 function CardOwnerInput() {
-  const { name, validation, setName, setValidation } =
-    useContext(CardOwnerContext);
-
-  const onNameChange = ({ target, nativeEvent: { data } }) => {
-    if (englishRegex.test(data) || !data) {
-      const name = target.value.toUpperCase();
-
-      setName(name);
-      updateValidation(name);
-    }
-  };
-
-  const updateValidation = name => {
-    setValidation(validator.validateOwnerName(name));
-  };
+  const { name, validation, onNameChange } = useContext(CardOwnerContext);
 
   return (
     <LabeledInput text="카드 소유자 이름(선택)">

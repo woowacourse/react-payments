@@ -17,47 +17,8 @@ const InputContainer = styled.div`
 `;
 
 function ExpiredDateInput() {
-  const {
-    datePlaceholder,
-    units,
-    expiredDate,
-    validations,
-    refs,
-    currentUnitRef,
-    setExpiredDate,
-    setValidation,
-  } = useContext(ExpiredDateContext);
-
-  const { focusPrevOrder } = useFocus({
-    validate: validator.validateExpiredDate,
-    orders: units,
-    validations,
-    refs,
-    currentOrderRef: currentUnitRef,
-  });
-
-  const onDateChange = ({ target, nativeEvent: { data, inputType } }) => {
-    if ((numberRegex.test(data) || !data) && target.value.length <= 2) {
-      const unit = target.name;
-      const newDate = target.value;
-
-      updateDate(unit, newDate);
-      updateValidation(unit, newDate);
-      focusPrevOrder(unit, newDate, inputType);
-      currentUnitRef.current = unit;
-    }
-  };
-
-  const updateDate = (unit, date) => {
-    setExpiredDate(prevDate => ({ ...prevDate, [unit]: date }));
-  };
-
-  const updateValidation = (unit, date) => {
-    setValidation(prevValidations => ({
-      ...prevValidations,
-      [unit]: validator.validateDate(date),
-    }));
-  };
+  const { datePlaceholder, expiredDate, validations, refs, onDateChange } =
+    useContext(ExpiredDateContext);
 
   return (
     <LabeledInput text="만료일">

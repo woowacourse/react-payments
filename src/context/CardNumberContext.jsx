@@ -1,4 +1,7 @@
 import { createContext, useState, useRef } from 'react';
+import validator from '../../src/validation';
+import { numberRegex } from '../constant/regularExpression';
+import useFocus from '../hooks/useFocus';
 
 const CardNumberContext = createContext();
 
@@ -23,6 +26,34 @@ function CardNumberContextProvider({ children }) {
         .join(' ')
     : '';
 
+  const { focusPrevOrder } = useFocus({
+    validate: validator.validateCardNumber,
+    orders,
+    validations,
+    refs,
+    currentOrderRef,
+  });
+
+  const handleNumberChange = ({ target, nativeEvent: { data, inputType } }) => {
+    if ((numberRegex.test(data) || !data) && target.value.length <= 4) {
+      const order = target.name;
+      const newNumber = target.value;
+
+      updateNumbers(order, newNumber);
+      updateValidations(order, validator.validateCardNumber(newNumber));
+      focusPrevOrder(order, newNumber, inputType);
+      currentOrderRef.current = order;
+    }
+  };
+
+  const updateNumbers = (order, newNumber) => {
+    setNumbers(prevNumbers => ({ ...prevNumbers, [order]: newNumber }));
+  };
+
+  const updateValidations = (order, isValid) => {
+    setValidations(prevValidation => ({ ...prevValidation, [order]: isValid }));
+  };
+
   return (
     <CardNumberContext.Provider
       value={{
@@ -33,8 +64,7 @@ function CardNumberContextProvider({ children }) {
         isValid,
         refs,
         currentOrderRef,
-        setNumbers,
-        setValidations,
+        handleNumberChange,
       }}
     >
       {children}
