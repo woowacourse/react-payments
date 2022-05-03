@@ -4,11 +4,11 @@ import { cardInfoReducer } from '../reducer/cardInfo';
 
 import { COMPONENTS, initialCardInfo, CARD_TYPES } from '../constants/card';
 
-import { CardExpireDateInputForm } from '../components/CardRegister/CardExpireDateInputForm';
-import { CardNumbersInputForm } from '../components/CardRegister/CardNumbersInputForm';
-import { CardOwnerInputForm } from '../components/CardRegister/CardOwnerInputForm';
-import { CardPasswordInputForm } from '../components/CardRegister/CardPasswordInputForm';
-import { CVCInputForm } from '../components/CardRegister/CVCInputForm';
+import { CardExpireDateInput } from '../components/CardRegister/CardExpireDateInput';
+import { CardNumbersInput } from '../components/CardRegister/CardNumbersInput';
+import { CardOwnerInput } from '../components/CardRegister/CardOwnerInput';
+import { CardPasswordInput } from '../components/CardRegister/CardPasswordInput';
+import { CVCInput } from '../components/CardRegister/CVCInput';
 import { CardSelectModal } from '../components/CardRegister/CardSelectModal';
 import { CVCHelperModal } from '../components/CardRegister/CVCHelperModal';
 import { Button } from '../components/common/Button';
@@ -49,29 +49,29 @@ export const CardRegisterPage = () => {
         cardInfo={cardInfo}
         onClick={() => openModal(COMPONENTS.CARD_TYPE)}
       />
-      <CardNumbersInputForm
+      <CardNumbersInput
         cardType={cardInfo.cardType}
         cardNumbers={cardInfo.cardNumbers}
         onCardNumbersInput={dispatch}
         onCardNumberCheck={checkerFactory(COMPONENTS.NUMBERS)}
         openModal={() => openModal(COMPONENTS.CARD_TYPE)}
       />
-      <CardExpireDateInputForm
+      <CardExpireDateInput
         expireDate={cardInfo.expireDate}
         onExpireDateInput={dispatch}
         onCardExpireCheck={checkerFactory(COMPONENTS.EXPIRE_DATE)}
       />
-      <CardOwnerInputForm
+      <CardOwnerInput
         ownerName={cardInfo.ownerName}
         onOwnerNameInput={dispatch}
       />
-      <CVCInputForm
+      <CVCInput
         CVC={cardInfo.CVC}
         onCVCInput={dispatch}
         onCardCVCCheck={checkerFactory(COMPONENTS.CVC)}
         openModal={() => openModal(COMPONENTS.CVC)}
       />
-      <CardPasswordInputForm
+      <CardPasswordInput
         password={cardInfo.password}
         onPasswordInput={dispatch}
         onCardPasswordCheck={checkerFactory(COMPONENTS.PASSWORD)}

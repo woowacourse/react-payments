@@ -15,7 +15,7 @@ const isInputValueFilledWithZero = (e) =>
   e.target.value.length === 2 &&
   parseInt(e.target.value) < 1;
 
-export const CardExpireDateInputForm = ({
+export const CardExpireDateInput = ({
   expireDate,
   onExpireDateInput,
   onCardExpireCheck,

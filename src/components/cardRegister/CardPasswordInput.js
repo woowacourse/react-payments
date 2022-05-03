@@ -11,7 +11,7 @@ import {
 import Dot from '../common/Dot';
 import { AutoFocusInputContainer } from '../common/AutoFocusInputContainer';
 
-export const CardPasswordInputForm = ({
+export const CardPasswordInput = ({
   password,
   onPasswordInput,
   onCardPasswordCheck,

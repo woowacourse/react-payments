@@ -12,12 +12,7 @@ import {
   InputBox,
 } from '../common/styled';
 
-export const CVCInputForm = ({
-  CVC,
-  onCVCInput,
-  onCardCVCCheck,
-  openModal,
-}) => {
+export const CVCInput = ({ CVC, onCVCInput, onCardCVCCheck, openModal }) => {
   const handleCVCChange = (e) => {
     if (isNaN(e.nativeEvent.data) || e.target.value.length > MAX_LENGTH.CVC) {
       return;

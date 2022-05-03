@@ -18,7 +18,7 @@ const DEFAULT_CARD_NUMBERS_TYPE = [
   { name: 'fourthNumber', type: 'password' },
 ];
 
-export const CardNumbersInputForm = ({
+export const CardNumbersInput = ({
   cardType,
   cardNumbers,
   onCardNumbersInput,

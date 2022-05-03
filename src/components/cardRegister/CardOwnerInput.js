@@ -5,7 +5,7 @@ import { CARD_INFO_TYPES } from '../../reducer/types';
 
 import { InputContainer, InputTitle, InputBasic } from '../common/styled';
 
-export const CardOwnerInputForm = ({ ownerName, onOwnerNameInput }) => {
+export const CardOwnerInput = ({ ownerName, onOwnerNameInput }) => {
   const handleOwnerNameChange = (e) => {
     if (e.target.value.length > MAX_LENGTH.OWNER_NAME) {
       return;
