@@ -8,8 +8,8 @@ export const Card = ({
   cardInfo: {
     cardType,
     cardNumbers,
-    expireDate: { month = 'MM', year = 'YY' },
-    ownerName = 'NAME',
+    expireDate: { month, year },
+    ownerName,
   },
   onClick,
 }) => {
@@ -31,9 +31,9 @@ export const Card = ({
             <CardNumbersText>{formattedCardNumbers}</CardNumbersText>
           </CardBottomNumber>
           <CardBottomInfo>
-            <CardText>{ownerName ? ownerName : 'NAME'}</CardText>
+            <CardText>{ownerName || 'NAME'}</CardText>
             <CardText>
-              {month}/{year}
+              {month || 'MM'}/{year || 'YY'}
             </CardText>
           </CardBottomInfo>
         </CardBottom>
