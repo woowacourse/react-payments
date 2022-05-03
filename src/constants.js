@@ -49,3 +49,11 @@ export const DATE_RANGE = {
 };
 
 export const CARD_BACK_MESSAGE = '이 카드를 도난 분실하면 일주일 이내로 연락 주시기 바랍니다.';
+
+export const GUIDE_MESSAGE = {
+  company: { [PASS]: '카드사가 입력되었습니다.', [FAIL]: '카드사를 입력해주세요.' },
+  cardNumber: { [PASS]: '카드 번호가 입력되었습니다.', [FAIL]: '카드 번호를 입력해주세요.' },
+  expiryDate: { [PASS]: '만료일이 입력되었습니다.', [FAIL]: '만료일을 입력해주세요.' },
+  privacyCode: { [PASS]: '보안코드가 입력되었습니다.', [FAIL]: '보안코드를 입력해주세요.' },
+  password: { [PASS]: '카드 비밀번호가 입력되었습니다.', [FAIL]: '카드 비밀번호를 입력해주세요.' },
+};
