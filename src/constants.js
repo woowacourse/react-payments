@@ -3,6 +3,8 @@ export const TOOLTIP_TYPES = {
 };
 
 export const CRYPTO_STRING = '•';
+export const PASS = 'pass';
+export const FAIL = 'fail';
 
 export const DEFAULT_CARD_INFO = {
   OWNER_NAME: 'NAME',

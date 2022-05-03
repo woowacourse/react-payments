@@ -48,17 +48,18 @@ export const validator = {
 };
 
 // 카드 폼의 각 정보들이 모두 입력되었는지 검사
-const isFullNumber = (number) =>
+export const isFullNumber = (number) =>
   Object.values(number).every((value) => value.length === INPUT_MAX_LENGTH.CARD_NUMBER);
 
-const isFullCompany = (company) => company !== '';
+export const isFullCompany = (company) => company !== '';
 
-const isFullExpiryDate = (expiryDate) =>
+export const isFullExpiryDate = (expiryDate) =>
   Object.values(expiryDate).every((value) => value.length === INPUT_MAX_LENGTH.EXPIRY_DATE);
 
-const isFullPrivacyCode = (privacyCode) => privacyCode.length === INPUT_MAX_LENGTH.PRIVACY_CODE;
+export const isFullPrivacyCode = (privacyCode) =>
+  privacyCode.length === INPUT_MAX_LENGTH.PRIVACY_CODE;
 
-const isFullPassword = (password) =>
+export const isFullPassword = (password) =>
   Object.values(password).every((value) => value.length === INPUT_MAX_LENGTH.PASSWORD);
 
 export const checkFullFilled = (cardInfo) => {

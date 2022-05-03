@@ -8,7 +8,14 @@ import Button from '../../components/common/Button';
 import Tooltip from '../../components/common/Tooltip';
 import { ReactComponent as PrevIcon } from '../../assets/prev_icon.svg';
 
-import { validator, checkFullFilled } from './validator';
+import {
+  validator,
+  isFullNumber,
+  isFullExpiryDate,
+  isFullPassword,
+  isFullPrivacyCode,
+  isFullCompany,
+} from './validator';
 import { isObject } from '../../utils';
 import { CRYPTO_STRING, INPUT_MAX_LENGTH } from '../../constants';
 
@@ -21,6 +28,7 @@ import {
   cardCompanyList,
 } from './data';
 import Circle from '../../components/common/Circle';
+import Message from '../../components/common/Message';
 
 const getCardInfoMessage = (company, cardNumber, month, year, ownerName, privacyCode) => {
   const { first, second, third, fourth } = cardNumber;
@@ -54,18 +62,47 @@ const initialCardInfo = {
 const CardAppPage = () => {
   const [cardInfo, setCardInfo] = useState(initialCardInfo);
   const [modalVisible, setModalVisible] = useState(false);
-  const [isfullFilled, setIsFullFilled] = useState(false);
+
+  const [isCompanyFilled, setIsCompanyFilled] = useState(false);
+  const [isCardNumberFilled, setIsCardNumberFilled] = useState(false);
+  const [isExpiryDateFilled, setIsExpiryDateFilled] = useState(false);
+  const [isPrivacyCodeFilled, setIsPrivacyCodeFilled] = useState(false);
+  const [isPasswordFilled, setIsPasswordFilled] = useState(false);
+
   const [isCardFront, setIsCardFront] = useState(true);
   const { cardNumber, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
 
   useEffect(() => {
-    if (checkFullFilled(cardInfo)) {
-      setIsFullFilled(true);
-      return;
+    if (isFullCompany(company)) {
+      setIsCompanyFilled(true);
+    } else {
+      setIsCompanyFilled(false);
     }
 
-    setIsFullFilled(false);
-  }, [cardInfo]);
+    if (isFullNumber(cardNumber)) {
+      setIsCardNumberFilled(true);
+    } else {
+      setIsCardNumberFilled(false);
+    }
+
+    if (isFullExpiryDate(expiryDate)) {
+      setIsExpiryDateFilled(true);
+    } else {
+      setIsExpiryDateFilled(false);
+    }
+
+    if (isFullPrivacyCode(privacyCode)) {
+      setIsPrivacyCodeFilled(true);
+    } else {
+      setIsPrivacyCodeFilled(false);
+    }
+
+    if (isFullPassword(password)) {
+      setIsPasswordFilled(true);
+    } else {
+      setIsPasswordFilled(false);
+    }
+  }, [company, cardNumber, expiryDate, privacyCode, password]);
 
   const handleChange = ({ target }, item) => {
     const { name, value } = target;
@@ -135,6 +172,8 @@ const CardAppPage = () => {
         handleModal={handleModal}
         handleCardPosition={handleCardPosition}
       />
+      <Message name="company" isFilled={isCompanyFilled} align="text-center" />
+
       <FormInput
         item="cardNumber"
         inputTitle="카드 번호"
@@ -143,6 +182,8 @@ const CardAppPage = () => {
         handleChange={handleChange}
         theme={theme}
       />
+      <Message name="cardNumber" isFilled={isCardNumberFilled} />
+
       <FormInput
         className="w-50"
         item="expiryDate"
@@ -152,6 +193,8 @@ const CardAppPage = () => {
         handleChange={handleChange}
         theme={theme}
       />
+      <Message name="expiryDate" isFilled={isExpiryDateFilled} />
+
       <FormInput
         item="ownerName"
         inputTitle="카드 소유자 이름(선택)"
@@ -164,6 +207,7 @@ const CardAppPage = () => {
           {ownerName.length} / {INPUT_MAX_LENGTH.OWNER_NAME}
         </div>
       </FormInput>
+
       <FormInput
         item="privacyCode"
         inputTitle="보안코드(CVC/CVV)"
@@ -174,6 +218,8 @@ const CardAppPage = () => {
       >
         <Tooltip type="PRIVACY_CODE" />
       </FormInput>
+      <Message name="privacyCode" isFilled={isPrivacyCodeFilled} />
+
       <FormInput
         item="password"
         inputTitle="카드 비밀번호"
@@ -182,11 +228,18 @@ const CardAppPage = () => {
         handleChange={handleChange}
         theme={theme}
       />
-      {isfullFilled && (
-        <Button theme={theme} className="next-button" handleClick={handleClickNextButton}>
-          다음
-        </Button>
-      )}
+      <Message name="password" isFilled={isPasswordFilled} />
+
+      {isCompanyFilled &&
+        isCardNumberFilled &&
+        isExpiryDateFilled &&
+        isPrivacyCodeFilled &&
+        isPasswordFilled && (
+          <Button theme={theme} className="next-button" handleClick={handleClickNextButton}>
+            다음
+          </Button>
+        )}
+
       {modalVisible && (
         <Modal handleModal={handleModal}>
           <div className="flex-wrap">
