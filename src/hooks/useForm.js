@@ -11,7 +11,7 @@ const useForm = ({ formSchema, onSubmit, onSubmitError }) => {
     setValues,
     isInvalidInput,
     errors,
-    setErrors,
+    setErrorTrue,
     setErrorMessages,
     focusNextElement,
     focusPrevElement,
@@ -67,13 +67,7 @@ const useForm = ({ formSchema, onSubmit, onSubmitError }) => {
         .sort((a, b) => a.id - b.id);
 
       invalidFieldNames.forEach((name) => {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          [name]: {
-            ...prevErrors[name],
-            showError: true,
-          },
-        }));
+        setErrorTrue(name);
       });
 
       onSubmitError(errors, invalidInputRefs);

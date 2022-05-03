@@ -115,6 +115,16 @@ const useFormSchema = (formSchema) => {
     }));
   };
 
+  const setErrorTrue = (name) => {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: {
+        ...prevErrors[name],
+        showError: true,
+      },
+    }));
+  };
+
   const focusNextElement = (name, value, nextElement) => {
     if (value.length >= formSchema[name].maxLength && nextElement)
       nextElement.focus();
@@ -131,8 +141,8 @@ const useFormSchema = (formSchema) => {
     setValues,
     isInvalidInput,
     errors,
-    setErrors,
     setErrorMessages,
+    setErrorTrue,
     focusNextElement,
     focusPrevElement,
   };
