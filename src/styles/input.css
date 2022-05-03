@@ -87,11 +87,16 @@
   cursor: pointer;
 }
 
+.tooltip:hover + .tooltip-content {
+  display: block;
+}
+
 .tooltip-content {
   position: absolute;
   top: -30px;
   left: 80px;
   width: 160px;
+  display: none;
 }
 
 .rest-password-box {
