@@ -7,9 +7,11 @@ import CardSelectModal from "./CardSelectModal";
 export default function Card({
   cardInfo,
   shouldShowTypeSelection = false,
+  size = "small",
 }: {
   cardInfo: CardInfo;
   shouldShowTypeSelection?: boolean;
+  size?: "big" | "small";
 }) {
   const { cardNumbers, expirationDate, userName, cardType } = cardInfo;
   const { isModalOpened, openModal, closeModal } = useModal(true);
@@ -18,7 +20,7 @@ export default function Card({
     <>
       <div className="card-box flex-center">
         <div
-          className="empty-card flex-column-center"
+          className={`${size}-card flex-column-center`}
           style={{ backgroundColor: cardType.color }}
           onClick={openModal}
         >
@@ -30,7 +32,7 @@ export default function Card({
             </span>
           </div>
           <div className="card-middle">
-            <div className="small-card__chip"></div>
+            <div className={`${size}-card__chip`}></div>
           </div>
           <div className="card-bottom flex-column-horizontal-center">
             <div className="card-text card-numbers-text">
