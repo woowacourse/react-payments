@@ -18,7 +18,7 @@ const Card = ({
     <styled.Container onClick={onClick}>
       <styled.EmptyCard color={color}>
         <styled.CardTop>
-          <styled.CardName>{name}</styled.CardName>
+          <styled.CardName>{name ? name : '카드이름'}</styled.CardName>
         </styled.CardTop>
         <styled.CardMiddle>
           <styled.CardChip />
@@ -35,10 +35,12 @@ const Card = ({
         </styled.CardMiddle>
         <styled.CardBottom>
           <styled.CardBottomInfo>
-            <styled.CardOwnerContainer>{ownerName}</styled.CardOwnerContainer>
+            <styled.CardOwnerContainer>
+              {ownerName ? ownerName : 'NAME'}
+            </styled.CardOwnerContainer>
             <styled.CardExpiredDateContainer>
-              {expiredMonth}
-              {expiredYear && `/ ${expiredYear}`}
+              {expiredMonth ? expiredMonth : 'MM'}
+              {` / ${expiredYear ? expiredYear : 'YY'}`}
             </styled.CardExpiredDateContainer>
           </styled.CardBottomInfo>
         </styled.CardBottom>

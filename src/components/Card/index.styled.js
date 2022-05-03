@@ -107,7 +107,7 @@ export const CardOwnerContainer = styled.span`
 
 export const CardExpiredDateContainer = styled.span`
   margin-right: 5px;
-  width: 50px;
+  width: 80px;
   font-size: 14px;
   line-height: 16px;
   vertical-align: middle;
