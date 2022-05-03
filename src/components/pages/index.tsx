@@ -21,7 +21,7 @@ export default function Home() {
           <span className="card-nickname">{cardInfo.cardName}</span>
         </div>
       ))}
-      <div className="small-card empty-card" onClick={() => navigate(PATH.ADD)}>
+      <div className="small-card empty-card mb-30" onClick={() => navigate(PATH.ADD)}>
         +
       </div>
     </>
