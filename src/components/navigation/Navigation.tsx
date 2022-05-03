@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import React from 'react';
-import BackButton from '../atoms/BackButton';
-import PageTitle from '../atoms/PageTitle';
+import BackButton from './BackButton';
+import PageTitle from './PageTitle';
 
 function Navigation() {
   return (

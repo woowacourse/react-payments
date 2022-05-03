@@ -1,6 +1,6 @@
 import React from 'react';
-import CVCInputContainer from '../atoms/card-cvc/CVCInputContainer';
-import { Body, Fieldset, Head } from '../templates/Fieldset';
+import CVCInputContainer from './CVCInputContainer';
+import { Body, Fieldset, Head } from '../Fieldset';
 
 function CVCFieldset() {
   return (

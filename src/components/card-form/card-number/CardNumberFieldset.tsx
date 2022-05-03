@@ -1,6 +1,6 @@
 import React from 'react';
-import CardNumberInputContainer from '../atoms/card-number/CardNumberInputContainer';
-import { Body, Fieldset, Head } from '../templates/Fieldset';
+import CardNumberInputContainer from '../card-number/CardNumberInputContainer';
+import { Body, Fieldset, Head } from '../Fieldset';
 
 function CardNumberFieldset() {
   return (

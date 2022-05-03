@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import CardNumberInputContainer from "../components/atoms/card-number/CardNumberInputContainer";
+import CardNumberInputContainer from "../components/card-form/card-number/CardNumberInputContainer";
 
 export default {
   title: "Example/CardNumberInputContainer",

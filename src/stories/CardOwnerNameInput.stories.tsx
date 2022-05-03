@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import CardOwnerNameInputContainer from "../components/atoms/card-owner/CardOwnerNameInputContainer";
+import CardOwnerNameInputContainer from "../components/card-form/card-owner/CardOwnerNameInputContainer";
 
 export default {
   title: "Example/CardOwnerNameInputContainer",

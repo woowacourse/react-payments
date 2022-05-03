@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAppState } from '../../../hooks/hooks';
-import { transformCardNumber, transformToMMYY } from '../../../utils';
+import { useAppState } from '../../hooks/hooks';
+import { transformCardNumber, transformToMMYY } from '../../utils';
 import Card from './Card';
 
 function CardContainer() {

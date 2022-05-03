@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import ExpiredPeriodInputContainer from "../components/atoms/card-expired-period/ExpiredPeriodInputContainer";
+import ExpiredPeriodInputContainer from "../components/card-form/card-expired-period/ExpiredPeriodInputContainer";
 
 export default {
   title: "Example/ExpiredPeriodInputContainer",

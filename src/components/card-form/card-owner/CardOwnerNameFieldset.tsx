@@ -1,8 +1,8 @@
 import React from 'react';
-import { MAX_NAME_LENGTH } from '../../constants';
-import { useAppState } from '../../hooks/hooks';
-import CardOwnerNameInputContainer from '../atoms/card-owner/CardOwnerNameInputContainer';
-import { Body, Fieldset, Head } from '../templates/Fieldset';
+import { MAX_NAME_LENGTH } from '../../../constants';
+import { useAppState } from '../../../hooks/hooks';
+import CardOwnerNameInputContainer from '../card-owner/CardOwnerNameInputContainer';
+import { Body, Fieldset, Head } from '../Fieldset';
 
 function CardOwnerNameFieldset() {
   const { name } = useAppState();

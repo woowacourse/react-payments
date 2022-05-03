@@ -1,6 +1,6 @@
 import React from 'react';
-import CardPasswordInputContainerList from '../atoms/card-password/CardPasswordInputContainerList';
-import { Body, Fieldset, Head } from '../templates/Fieldset';
+import CardPasswordInputContainerList from '../card-password/CardPasswordInputContainerList';
+import { Body, Fieldset, Head } from '../Fieldset';
 
 function CardPasswordFieldset() {
   return (
