@@ -103,10 +103,6 @@ function CardNumberInputContainer() {
       return;
     }
 
-    // 1234 - 1234 에서 스페이스바 혹은 -를 제거하는 경우에는 그냥 커서만 왼쪽으로 옮긴다
-    // -를 기준으로 좌우에 스페이스바를 넣어준다
-    input.value = transformCardNumber(pureValue, ' - ');
-
     // 입력하는 경우
     if (cardNumber.length < pureValue.length) {
       return handleInsert(input);
