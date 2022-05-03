@@ -4,6 +4,7 @@ import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
 import { ExpiredDateContext } from '../../../context/ExpiredDateContext';
+import { DATE_INPUT_PLACEHOLDER } from '../../../constant';
 
 const InputContainer = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const InputContainer = styled.div`
 `;
 
 function ExpiredDateInput() {
-  const { datePlaceholder, expiredDate, validations, inputRefs, onDateChange } =
+  const { expiredDate, validations, inputRefs, onDateChange } =
     useContext(ExpiredDateContext);
 
   return (
@@ -32,7 +33,7 @@ function ExpiredDateInput() {
                 width="40px"
                 type="number"
                 maxLength={2}
-                placeholder={datePlaceholder[unit]}
+                placeholder={DATE_INPUT_PLACEHOLDER[unit]}
                 onChange={onDateChange}
                 isValid={validations[unit]}
               />

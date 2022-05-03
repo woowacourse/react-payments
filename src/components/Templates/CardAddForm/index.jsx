@@ -11,6 +11,7 @@ import { ExpiredDateContext } from '../../../context/ExpiredDateContext';
 import { CardOwnerContext } from '../../../context/CardOwnerContext';
 import { SecurityNumberContext } from '../../../context/SecurityNumberContext';
 import { PasswordContext } from '../../../context/PasswordContext';
+import { MESSAGE } from '../../../constant/message';
 
 const FormContainer = styled.form`
   display: flex;
@@ -41,9 +42,7 @@ function CardAddForm() {
   const onAddFormSubmit = event => {
     event.preventDefault();
 
-    isValidForm
-      ? alert(`카드 정보가 성공적으로 제출되었습니다!`)
-      : alert('카드 정보를 모두 입력해주세요.');
+    isValidForm ? alert(MESSAGE.SAVE_INFO) : alert(MESSAGE.DENY_SAVE);
   };
 
   return (

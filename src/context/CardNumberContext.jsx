@@ -3,11 +3,12 @@ import validator from '../../src/validation';
 import { numberRegex } from '../constant/regularExpression';
 import useFocus from '../hooks/useFocus';
 import useSomeInput from '../hooks/useSomeInput';
+import { CARD_NUMBER_MARK } from '../constant/mark';
+import { CARD_NUMBER_INPUT_NAMES } from '../constant/inputNames';
 
 const CardNumberContext = createContext();
 
 function CardNumberContextProvider({ children }) {
-  const orders = ['first', 'second', 'third', 'four'];
   const {
     stateObject: numbers,
     setStateObject: setNumbers,
@@ -15,11 +16,11 @@ function CardNumberContextProvider({ children }) {
     setValidations,
     inputRefs,
     currentInputRef,
-  } = useSomeInput(orders);
+  } = useSomeInput(CARD_NUMBER_INPUT_NAMES);
 
   const { focusPrevInput } = useFocus({
     validate: validator.validateCardNumber,
-    inputNames: orders,
+    inputNames: CARD_NUMBER_INPUT_NAMES,
     validations,
     inputRefs,
     currentInputRef,
@@ -30,7 +31,7 @@ function CardNumberContextProvider({ children }) {
   const cardNumberString = Object.values(numbers).some(number => number)
     ? Object.values(numbers)
         .map((cardNumber, index) =>
-          index < 2 ? cardNumber : '●'.repeat(cardNumber.length)
+          index < 2 ? cardNumber : CARD_NUMBER_MARK.repeat(cardNumber.length)
         )
         .join(' ')
     : '';

@@ -3,11 +3,11 @@ import validator from '../../src/validation';
 import { numberRegex } from '../constant/regularExpression';
 import useFocus from '../hooks/useFocus';
 import useSomeInput from '../hooks/useSomeInput';
+import { PASSWORD_INPUT_NAMES } from '../constant/inputNames';
 
 const PasswordContext = createContext();
 
 function PasswordContextProvider({ children }) {
-  const orders = ['first', 'second'];
   const {
     stateObject: password,
     setStateObject: setPassword,
@@ -15,11 +15,11 @@ function PasswordContextProvider({ children }) {
     setValidations,
     inputRefs,
     currentInputRef,
-  } = useSomeInput(orders);
+  } = useSomeInput(PASSWORD_INPUT_NAMES);
 
   const { focusPrevInput } = useFocus({
     validate: validator.validatePassword,
-    inputNames: orders,
+    inputNames: PASSWORD_INPUT_NAMES,
     validations,
     inputRefs,
     currentInputRef,

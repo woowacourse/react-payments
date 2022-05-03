@@ -1,3 +1,5 @@
+import { INPUT_TYPE } from '../constant';
+
 function useFocus({
   validate,
   inputNames,
@@ -9,7 +11,7 @@ function useFocus({
     if (
       currentInput !== inputNames[0] &&
       newNumber.length === 0 &&
-      inputType === 'deleteContentBackward'
+      inputType === INPUT_TYPE.BACKWARD
     ) {
       const currentIndex = inputNames.findIndex(name => name === currentInput);
       inputRefs[inputNames[currentIndex - 1]].current.focus();

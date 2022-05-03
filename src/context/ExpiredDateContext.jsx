@@ -4,12 +4,11 @@ import validator from '../../src/validation';
 import useFocus from '../hooks/useFocus';
 import { numberRegex } from '../constant/regularExpression';
 import useSomeInput from '../hooks/useSomeInput';
+import { EXPIRED_DATE_INPUT_NAMES } from '../constant/inputNames';
 
 const ExpiredDateContext = createContext();
 
 function ExpiredDateContextProvider({ children }) {
-  const datePlaceholder = { month: 'MM', year: 'YY' };
-  const units = ['month', 'year'];
   const {
     stateObject: expiredDate,
     setStateObject: setExpiredDate,
@@ -17,11 +16,11 @@ function ExpiredDateContextProvider({ children }) {
     setValidations,
     inputRefs,
     currentInputRef,
-  } = useSomeInput(units);
+  } = useSomeInput(EXPIRED_DATE_INPUT_NAMES);
 
   const { focusPrevInput } = useFocus({
     validate: validator.validateExpiredDate,
-    inputNames: units,
+    inputNames: EXPIRED_DATE_INPUT_NAMES,
     validations,
     inputRefs,
     currentInputRef: currentInputRef,
@@ -59,7 +58,6 @@ function ExpiredDateContextProvider({ children }) {
   return (
     <ExpiredDateContext.Provider
       value={{
-        datePlaceholder,
         expiredDate,
         expiredDateString,
         validations,
