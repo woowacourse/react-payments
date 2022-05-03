@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 import { MAX_LENGTH } from '../../constants/card';
 import { CARD_INFO_TYPES } from '../../reducer/types';
-import { AutoFocusInputContainer } from '../common/AutoFocustInputContainer';
+import { AutoFocusInputContainer } from '../common/AutoFocusInputContainer';
 
 import {
   InputContainer,

@@ -9,7 +9,7 @@ import {
   InputBox,
 } from '../common/styled';
 import Dot from '../common/Dot';
-import { AutoFocusInputContainer } from '../common/AutoFocustInputContainer';
+import { AutoFocusInputContainer } from '../common/AutoFocusInputContainer';
 
 export const CardPasswordInputForm = ({
   password,

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { CARD_INFO_TYPES } from '../../reducer/types';
-import { AutoFocusInputContainer } from '../common/AutoFocustInputContainer';
+import { AutoFocusInputContainer } from '../common/AutoFocusInputContainer';
 
 import {
   InputContainer,
