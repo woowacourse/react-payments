@@ -23,9 +23,9 @@ const InputScaleType = {
   small: '43',
 };
 
-const Input = ({ scale, ...rest }) => {
-  return <InputWrapper scale={scale} {...rest} />;
-};
+const Input = React.forwardRef(({ scale, ...rest }, ref) => {
+  return <InputWrapper ref={ref} scale={scale} {...rest} />;
+});
 
 Input.propTypes = {
   placeholder: PropTypes.string,

@@ -5,9 +5,11 @@ const useInputValue = ({ validation }) => {
   const [isError, setError] = useState(false);
 
   const onChangeValue = ({ target }) => {
-    setValue(target.value);
-    if (validation && !validation(target.value)) {
+    const targetValue = target.value;
+    setValue(targetValue);
+    if (validation && !validation(targetValue) && targetValue !== '') {
       setError(true);
+
       return;
     }
     setError(false);

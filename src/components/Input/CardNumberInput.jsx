@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Input from './index';
@@ -26,36 +27,82 @@ const CardNumberInput = ({
   thirdCardNumber,
   fourthCardNumber,
 }) => {
+  const [currentElementIndex, setCurrentElementIndex] = useState(0);
+
+  const firstCardNumberRef = useRef(null);
+  const secondCardNumberRef = useRef(null);
+  const thirdCardNumberRef = useRef(null);
+  const fourthCardNumberRef = useRef(null);
+
+  const cardRefList = [
+    firstCardNumberRef,
+    secondCardNumberRef,
+    thirdCardNumberRef,
+    fourthCardNumberRef,
+  ];
+
+  const onChangeCardNumber = e => {
+    if (e.target.value.length === 4) {
+      const nextFocusIndex = cardRefList.findIndex(
+        cardElement => cardElement.current.value.length < 4,
+      );
+      setCurrentElementIndex(nextFocusIndex);
+    }
+  };
+
+  useEffect(() => {
+    if (currentElementIndex === -1) {
+      return;
+    }
+    cardRefList[currentElementIndex].current.focus();
+  }, [currentElementIndex, cardRefList]);
+
   return (
     <CardNumberWrapper>
       <Input
         scale="medium"
         value={firstCardNumber}
-        onChange={onChangeFirstCardNumber}
+        onChange={e => {
+          onChangeFirstCardNumber(e);
+          onChangeCardNumber(e);
+        }}
         maxLength={4}
+        ref={firstCardNumberRef}
       />
       <Dash>-</Dash>
       <Input
         scale="medium"
         value={secondCardNumber}
-        onChange={onChangeSecondCardNumber}
+        onChange={e => {
+          onChangeSecondCardNumber(e);
+          onChangeCardNumber(e);
+        }}
         maxLength={4}
+        ref={secondCardNumberRef}
       />
       <Dash>-</Dash>
       <Input
         scale="medium"
         type="password"
         value={thirdCardNumber}
-        onChange={onChangeThirdCardNumber}
+        onChange={e => {
+          onChangeThirdCardNumber(e);
+          onChangeCardNumber(e);
+        }}
         maxLength={4}
+        ref={thirdCardNumberRef}
       />
       <Dash>-</Dash>
       <Input
         scale="medium"
         type="password"
         value={fourthCardNumber}
-        onChange={onChangeFourthCardNumber}
+        onChange={e => {
+          onChangeFourthCardNumber(e);
+          onChangeCardNumber(e);
+        }}
         maxLength={4}
+        ref={fourthCardNumberRef}
       />
     </CardNumberWrapper>
   );
