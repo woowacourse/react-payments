@@ -10,6 +10,28 @@ import useSecurityNumber from '../../hooks/useSecurityNumber';
 export default {
   title: 'Payment/LabeledInput',
   component: LabeledInput,
+  argTypes: {
+    countInput: {
+      table: {
+        disable: true,
+      },
+    },
+    isShowLengthChecker: {
+      table: {
+        disable: true,
+      },
+    },
+    value: {
+      table: {
+        disable: true,
+      },
+    },
+    handleInputChange: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const CardNumbers = args => {
