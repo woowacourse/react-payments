@@ -20,5 +20,5 @@ export default function useCardNumber(initialValue) {
     setEncryptedCardNumber(splitCardNumbers(processedNumbers) ?? initialValue);
   }, []);
 
-  return [cardNumber, handler, encryptedCardNumber];
+  return { cardNumber, handler, encryptedCardNumber };
 }

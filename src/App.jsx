@@ -46,7 +46,11 @@ const NextButton = styled(Button)`
 `;
 
 function App() {
-  const [cardNumber, setCardNumber, encryptedCardNumber] = useCardNumber('');
+  const {
+    cardNumber,
+    handler: setCardNumber,
+    encryptedCardNumber,
+  } = useCardNumber('');
   const [cardOwnerName, setCardOwnerName] = useCardOwnerName('');
   const [validDate, setValidDate] = useValidDate('');
   const [CVC, setCVC] = useCVC('');
