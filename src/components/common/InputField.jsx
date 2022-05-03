@@ -34,19 +34,29 @@ const StyledInputContainer = styled.div`
 
 export default function InputField({
   labelText,
-  children,
   OptionalComponent,
   wrapperWidth,
   horizontalAlign,
   isComplete,
+  separateEachInput,
+
+  children,
 }) {
   return (
     <StyledInputField>
       <StyledLabel isComplete={isComplete}>{labelText}</StyledLabel>
       <StyledInputContainer>
-        <StyledInputWrapper width={wrapperWidth} align={horizontalAlign}>
-          {children}
-        </StyledInputWrapper>
+        {separateEachInput ? (
+          React.Children.toArray(children).map(child => (
+            <StyledInputWrapper width={wrapperWidth} align={horizontalAlign}>
+              {child}
+            </StyledInputWrapper>
+          ))
+        ) : (
+          <StyledInputWrapper width={wrapperWidth} align={horizontalAlign}>
+            {children}
+          </StyledInputWrapper>
+        )}
         {OptionalComponent}
       </StyledInputContainer>
     </StyledInputField>
@@ -58,4 +68,9 @@ InputField.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   wrapperWidth: PropTypes.string,
   horizontalAlign: PropTypes.oneOf(['flex-start', 'center', 'space-around']),
+  separateEachInput: PropTypes.bool,
+};
+
+InputField.defaultProps = {
+  separateEachInput: false,
 };
