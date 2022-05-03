@@ -8,7 +8,7 @@ import {
   CardBottomNumber,
   CardBottomInfo,
   CardOwner,
-} from 'components/Card/style'
+} from 'components/common/Card/style'
 
 function Card({ size, company, cardNumbers, owner, dueMonth, dueYear }) {
   return (

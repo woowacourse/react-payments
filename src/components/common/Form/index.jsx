@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 
-import InputBox from 'components/InputBox'
+import InputBox from 'components/common/InputBox'
 import { ReactComponent as QuestionMark } from 'assets/questionMark.svg'
 
 import {
@@ -9,7 +9,7 @@ import {
   FormWrapper,
   HelpTextWrapper,
   InputHelperWrapper,
-} from 'components/Form/style'
+} from 'components/common/Form/style'
 
 function Form({
   label,

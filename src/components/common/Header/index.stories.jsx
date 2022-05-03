@@ -1,4 +1,4 @@
-import Header from 'components/Header'
+import Header from 'components/common/Header'
 
 const Template = (args) => <Header {...args} />
 

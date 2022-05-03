@@ -1,5 +1,5 @@
-import { HeaderWrapper } from './style'
-import Button from 'components/Button'
+import { HeaderWrapper } from 'components/common/Header/style'
+import Button from 'components/common/Button'
 import { ReactComponent as Arrow } from 'assets/arrow.svg'
 
 function Header({ backButton, headerText }) {

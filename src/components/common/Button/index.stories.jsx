@@ -1,4 +1,4 @@
-import Button from './'
+import Button from 'components/common/Button'
 import { ReactComponent as Arrow } from 'assets/arrow.svg'
 import { COLORS } from 'constant'
 

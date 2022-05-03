@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { ButtonWrapper } from 'components/Button/style'
+import { ButtonWrapper } from 'components/common/Button/style'
 function Button({ children, color, onClick }) {
   return (
     <ButtonWrapper type="button" color={color} onClick={onClick}>

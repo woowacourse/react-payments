@@ -1,6 +1,11 @@
+import { useState } from 'react'
 import PasswordForm from 'components/PasswordForm'
 
-const Template = (args) => <PasswordForm {...args} />
+const Template = () => {
+  const [value, setValue] = useState({ firstPassword: '', secondPassword: '' })
+
+  return <PasswordForm password={value} setPassword={setValue} />
+}
 
 export default {
   title: 'PasswordForm',
@@ -8,11 +13,3 @@ export default {
 }
 
 export const TwoPasswordForm = Template.bind({})
-TwoPasswordForm.args = {
-  label: '카드 비밀번호',
-  size: 12,
-  inputInfo: [
-    { type: 'password', id: 'first-password' },
-    { type: 'password', id: 'second-password' },
-  ],
-}

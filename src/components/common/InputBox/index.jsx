@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Fragment } from 'react'
-import { InputWrapper } from 'components/InputBox/style'
-import { Input } from 'components/Input/style'
+import { InputWrapper } from 'components/common/InputBox/style'
+import { Input } from 'components/common/Input/style'
 
 function InputBox({ inputInfo, size, background, border, error, onChange }) {
   return (

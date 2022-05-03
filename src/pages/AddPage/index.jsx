@@ -1,22 +1,18 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
-import Card from 'components/Card'
-import Button from 'components/Button'
-import Header from 'components/Header'
-import Form from 'components/Form'
-import PasswordForm from 'components/PasswordForm'
+import Card from 'components/common/Card'
+import Button from 'components/common/Button'
+import Header from 'components/common/Header'
 
 import { PageWrapper, CardWrapper, FooterWrapper } from 'pages/AddPage/style'
 
-import { CARD_NUMBER, DUE_DATE, OWNER, CVC, COLORS, MONTH } from 'constant'
+import { CARD_NUMBER, DUE_DATE, CVC, COLORS } from 'constant'
 
-import {
-  validateCardNumber,
-  validateDueDate,
-  validateOwner,
-  validateCVC,
-  validatePassword,
-} from 'validation'
+import CardNumberForm from 'components/CardNumberForm'
+import DueDateForm from 'components/DueDateForm'
+import OwnerForm from 'components/OwnerForm'
+import CVCForm from 'components/CVCForm'
+import PasswordForm from 'components/PasswordForm'
 
 function AddPage() {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', ''])
@@ -41,95 +37,6 @@ function AddPage() {
     )
   }, [cardNumbers, dueDate, owner, cvc, password])
 
-  const firstCardNumberInputRef = useRef()
-  const secondCardNumberInputRef = useRef()
-  const thirdCardNumberInputRef = useRef()
-  const fourthCardNumberInputRef = useRef()
-
-  const dueYearInputRef = useRef()
-
-  const secondPasswordInputRef = useRef()
-
-  const cardNumberInputRefs = [
-    firstCardNumberInputRef,
-    secondCardNumberInputRef,
-    thirdCardNumberInputRef,
-    fourthCardNumberInputRef,
-  ]
-
-  const focusNextNumberInput = (index) => {
-    cardNumberInputRefs[index + 1]?.current.focus()
-  }
-
-  const handleCardNumberChange = ({ target: { value } }, index) => {
-    if (validateCardNumber(value)) return
-
-    setCardNumbers((prev) => {
-      const newState = [...prev]
-      newState[index] = value
-      return newState
-    })
-
-    if (value.length >= CARD_NUMBER.UNIT_LENGTH) {
-      focusNextNumberInput(index)
-    }
-  }
-
-  const handleDueDateChange = ({ target: { value } }, key) => {
-    if (validateDueDate(value)) return
-
-    setDueDate((prev) => {
-      const newState = { ...prev }
-      newState[key] = value
-      return newState
-    })
-
-    if (key === 'month') {
-      setError((prev) => {
-        const newState = { ...prev }
-        newState.dueMonth = +value > MONTH.MAX || +value < MONTH.MIN
-        return newState
-      })
-    } else {
-      const currentYear = new Date().getFullYear().toString().slice(2)
-      setError((prev) => {
-        const newState = { ...prev }
-        newState.dueYear = +value < currentYear
-        return newState
-      })
-    }
-
-    if (value.length >= DUE_DATE.UNIT_LENGTH) {
-      dueYearInputRef.current.focus()
-    }
-  }
-
-  const handleOwnerChange = ({ target: { value } }) => {
-    if (validateOwner(value)) return
-
-    setOwner(value)
-  }
-
-  const handleCvc = ({ target: { value } }) => {
-    if (validateCVC(value)) return
-
-    setCvc(value)
-  }
-
-  const handlePasswordChange = ({ target: { value } }, key) => {
-    if (validatePassword(value)) return
-
-    setPassword((prev) => {
-      const newState = { ...prev }
-      newState[key] = value
-      return newState
-    })
-
-    if (value.length >= 1) {
-      secondPasswordInputRef.current.focus()
-    }
-  }
-
   const handleSubmitChange = () => {
     if (error.dueMonth || error.dueYear) {
       alert('만료일을 확인해주세요')
@@ -151,99 +58,19 @@ function AddPage() {
           dueYear={dueDate.year || 'YY'}
         />
       </CardWrapper>
-      <Form
-        label="카드 번호"
-        inputInfo={[
-          {
-            type: 'number',
-            id: 'first-card-number',
-            value: cardNumbers[0],
-            ref: cardNumberInputRefs[0],
-          },
-          {
-            type: 'number',
-            id: 'second-card-number',
-            value: cardNumbers[1],
-            ref: cardNumberInputRefs[1],
-          },
-          {
-            type: 'password',
-            id: 'third-card-number',
-            value: cardNumbers[2],
-            ref: cardNumberInputRefs[2],
-          },
-          {
-            type: 'password',
-            id: 'fourth-card-number',
-            value: cardNumbers[3],
-            ref: cardNumberInputRefs[3],
-          },
-        ]}
-        onChange={handleCardNumberChange}
+      <CardNumberForm
+        cardNumbers={cardNumbers}
+        setCardNumbers={setCardNumbers}
       />
-      <Form
-        label="만료일"
-        size={50}
-        inputInfo={[
-          {
-            type: 'number',
-            id: 'due-month',
-            value: dueDate.month,
-            placeholder: 'MM',
-            key: 'month',
-          },
-          {
-            type: 'number',
-            id: 'due-year',
-            value: dueDate.year,
-            ref: dueYearInputRef,
-            placeholder: 'YY',
-            key: 'year',
-          },
-        ]}
-        error={error.dueMonth || error.dueYear}
-        onChange={handleDueDateChange}
+      <DueDateForm
+        dueDate={dueDate}
+        setDueDate={setDueDate}
+        error={error}
+        setError={setError}
       />
-      <Form
-        label="카드 소유자 이름 (선택)"
-        countHelper={OWNER.MAX_LENGTH}
-        inputInfo={[
-          {
-            type: 'string',
-            id: 'owner',
-            value: owner,
-            placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
-          },
-        ]}
-        onChange={handleOwnerChange}
-      />
-      <Form
-        label="보안 코드(CVC/CVV)"
-        size={30}
-        inputInfo={[{ type: 'password', id: 'cvc', value: cvc }]}
-        onChange={handleCvc}
-        helpText="카드 뒷면의 7자리 숫자 중 마지막 3자리"
-      />
-      <PasswordForm
-        label="카드 비밀번호"
-        size={12}
-        inputInfo={[
-          {
-            type: 'password',
-            id: 'first-password',
-            value: password.secondPassword,
-            key: 'firstPassword',
-          },
-          {
-            type: 'password',
-            id: 'second-password',
-            value: password.secondPassword,
-            key: 'secondPassword',
-            ref: secondPasswordInputRef,
-          },
-        ]}
-        onChange={handlePasswordChange}
-      />
+      <OwnerForm owner={owner} setOwner={setOwner} />
+      <CVCForm cvc={cvc} setCvc={setCvc} />
+      <PasswordForm password={password} setPassword={setPassword} />
       <FooterWrapper>
         {isFormFulfilled && (
           <Button color={COLORS.MINT} onClick={handleSubmitChange}>
