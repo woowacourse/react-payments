@@ -1,6 +1,7 @@
+import { useCallback } from 'react';
 import useInputAutoFocus from 'hooks/useInputAutoFocus';
 import PropTypes from 'prop-types';
-import { useCallback } from 'react';
+
 import { isObject } from 'utils';
 
 const FormInput = ({
@@ -23,7 +24,7 @@ const FormInput = ({
       handleChange(e, item);
       autoFocusForward(e);
     },
-    [handleChange, item],
+    [item, handleChange, autoFocusForward],
   );
 
   return (

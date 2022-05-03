@@ -1,4 +1,4 @@
-import { COMPANY, CARD_NUMBER, EXPIRY_DATE, PRIVACY_CODE, PASSWORD } from 'constants';
+import { useEffect, useState } from 'react';
 import {
   isFullNumber,
   isFullExpiryDate,
@@ -6,7 +6,7 @@ import {
   isFullPrivacyCode,
   isFullCompany,
 } from 'page/cardAdd/validator';
-import { useEffect, useState } from 'react';
+import { COMPANY, CARD_NUMBER, EXPIRY_DATE, PRIVACY_CODE, PASSWORD } from 'constants';
 
 const isFilledValidator = {
   [COMPANY]: { func: isFullCompany },

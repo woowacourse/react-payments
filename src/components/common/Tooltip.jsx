@@ -1,8 +1,7 @@
-import { useState } from 'react';
-import { ReactComponent as TooltipIcon } from 'assets/tooltip_icon.svg';
-import { TOOLTIP_TYPES } from 'constants';
 import PropTypes from 'prop-types';
 import useHover from 'hooks/useHover';
+import { ReactComponent as TooltipIcon } from 'assets/tooltip_icon.svg';
+import { TOOLTIP_TYPES } from 'constants';
 
 const Tooltip = ({ type }) => {
   const [isHover, handleMouseEnter, handleMouseLeave] = useHover(false);

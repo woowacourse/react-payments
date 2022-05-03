@@ -6,10 +6,15 @@ import Modal from 'components/common/Modal';
 import Header from 'components/common/Header';
 import Button from 'components/common/Button';
 import Tooltip from 'components/common/Tooltip';
+import Circle from '../../components/common/Circle';
+import Message from '../../components/common/Message';
+import useModal from 'hooks/useModal';
+import useIsFilled from 'hooks/useIsFilled';
+import useToggle from 'hooks/useToggle';
 import { ReactComponent as PrevIcon } from 'assets/prev_icon.svg';
 
 import { validator } from './validator';
-import { isObject } from '../../utils';
+import { isObject } from 'utils';
 import {
   CARD_NUMBER,
   COMPANY,
@@ -18,8 +23,7 @@ import {
   INPUT_MAX_LENGTH,
   PASSWORD,
   PRIVACY_CODE,
-} from '../../constants';
-
+} from 'constants';
 import {
   cardNumberInputInfoList,
   expiryDateInputInfoList,
@@ -27,12 +31,7 @@ import {
   privacyCodeInputInfoList,
   cardPasswordInputInfoList,
   cardCompanyList,
-} from './data';
-import Circle from '../../components/common/Circle';
-import Message from '../../components/common/Message';
-import useModal from 'hooks/useModal';
-import useIsFilled from 'hooks/useIsFilled';
-import useToggle from 'hooks/useToggle';
+} from 'page/cardAdd/data';
 
 const getCardInfoMessage = (company, cardNumber, month, year, ownerName, privacyCode) => {
   const { first, second, third, fourth } = cardNumber;
@@ -73,7 +72,13 @@ const CardAppPage = () => {
   const [isPrivacyCodeFilled] = useIsFilled(PRIVACY_CODE, privacyCode, false);
   const [isPasswordFilled] = useIsFilled(PASSWORD, password, false);
   const [modalVisible, handleModal] = useModal(false);
-  const [isCardFront, handleCardPosition] = useToggle(false);
+  const [isCardFront, handleCardPosition] = useToggle(true);
+  const isFullFilled =
+    isCompanyFilled &&
+    isCardNumberFilled &&
+    isExpiryDateFilled &&
+    isPrivacyCodeFilled &&
+    isPasswordFilled;
 
   const handleChange = ({ target }, item) => {
     const { name, value } = target;
@@ -197,17 +202,13 @@ const CardAppPage = () => {
         maxLength={INPUT_MAX_LENGTH.PASSWORD}
       />
       <Message name="password" isFilled={isPasswordFilled} />
-
-      {isCompanyFilled &&
-        isCardNumberFilled &&
-        isExpiryDateFilled &&
-        isPrivacyCodeFilled &&
-        isPasswordFilled && (
-          <Button theme={theme} className="next-button" handleClick={handleClickNextButton}>
-            다음
-          </Button>
-        )}
-
+      {/* next button */}
+      {isFullFilled && (
+        <Button theme={theme} className="next-button" handleClick={handleClickNextButton}>
+          다음
+        </Button>
+      )}
+      {/* modal */}
       {modalVisible && (
         <Modal handleModal={handleModal}>
           <div className="flex-wrap">
