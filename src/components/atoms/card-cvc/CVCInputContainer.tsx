@@ -17,8 +17,6 @@ function CVCInputContainer() {
 
     if (cvc.length < value.length) {
       if (!isNum(lastChar)) return;
-      dispatch({ type: ActionType.INPUT_CVC, payload: 'hihi' });
-
       dispatch(createAction(ActionType.INPUT_CVC, cvc + lastChar));
       return;
     }
