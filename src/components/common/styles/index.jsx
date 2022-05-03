@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+
 import {
   INPUT_PRIMARY_BG_COLOR,
   LABEL_PRIMARY_COLOR,
   PLACEHOLDER_PRIMARY_COLOR,
   FONT_PRIMARY_COLOR,
-} from '../../../style';
+} from '../../../theme';
 
 const InputContainer = styled.div`
   position: ${props => props.position || 'static'};

@@ -10,8 +10,12 @@ const ErrorMessageCotainer = styled.span`
   min-height: 25px;
 `;
 
+const S = {
+  ErrorMessageCotainer,
+};
+
 function ErrorMessage({ children }) {
-  return <ErrorMessageCotainer>{children}</ErrorMessageCotainer>;
+  return <S.ErrorMessageCotainer>{children}</S.ErrorMessageCotainer>;
 }
 
 export default ErrorMessage;

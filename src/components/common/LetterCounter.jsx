@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LABEL_PRIMARY_COLOR } from '../../style';
-import { Span } from './styled';
+import { LABEL_PRIMARY_COLOR } from '../../theme';
+import * as CommonStyle from './styles';
 
 const Paragraph = styled.p`
   margin: 0;
@@ -14,13 +14,18 @@ const Paragraph = styled.p`
   color: ${LABEL_PRIMARY_COLOR};
 `;
 
+const S = {
+  ...CommonStyle,
+  Paragraph,
+};
+
 function LetterCounter({ currentLength, maxLength }) {
   return (
-    <Paragraph>
-      <Span padding={'0'}>{currentLength || 0}</Span>
-      <Span padding={'0'}>/</Span>
-      <Span padding={'0'}>{maxLength || 0}</Span>
-    </Paragraph>
+    <S.Paragraph>
+      <S.Span padding={'0'}>{currentLength || 0}</S.Span>
+      <S.Span padding={'0'}>/</S.Span>
+      <S.Span padding={'0'}>{maxLength || 0}</S.Span>
+    </S.Paragraph>
   );
 }
 

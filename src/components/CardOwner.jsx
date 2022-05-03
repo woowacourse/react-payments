@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Input, InputContainer, InputWrapper, Label, Span } from './common/styled';
 import ErrorMessage from './common/ErrorMessage';
 import LetterCounter from './common/LetterCounter';
+
+import * as S from './common/styles';
 
 const MAX_NAME_LENGTH = 30;
 
@@ -41,13 +42,13 @@ function CardOwner({ dispatch }) {
   };
 
   return (
-    <InputContainer position="relative">
+    <S.InputContainer position="relative">
       <div>
         <LetterCounter maxLength={30} currentLength={ownerName.length} />
-        <Label>카드 소유자 이름(선택)</Label>
-        <InputWrapper>
-          <Span width={'100%'}>
-            <Input
+        <S.Label>카드 소유자 이름(선택)</S.Label>
+        <S.InputWrapper>
+          <S.Span width={'100%'}>
+            <S.Input
               type={'text'}
               placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
               maxLength={'30'}
@@ -55,11 +56,11 @@ function CardOwner({ dispatch }) {
               value={ownerName}
               required
             />
-          </Span>
-        </InputWrapper>
+          </S.Span>
+        </S.InputWrapper>
       </div>
       <ErrorMessage>{errorMessage}</ErrorMessage>
-    </InputContainer>
+    </S.InputContainer>
   );
 }
 

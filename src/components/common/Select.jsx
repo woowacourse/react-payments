@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import { Input } from './styled';
 import Modal from './Modal';
-import { LABEL_PRIMARY_COLOR, ITEM_HOVER_PRIMARY_BG_COLOR } from '../../style';
+import { LABEL_PRIMARY_COLOR, ITEM_HOVER_PRIMARY_BG_COLOR } from '../../theme';
+
+import * as CommonStyle from './styles';
 
 const SelectContainer = styled.div``;
 
@@ -39,6 +40,16 @@ const Item = styled.li`
   }
 `;
 
+const S = {
+  ...CommonStyle,
+  SelectContainer,
+  SelectBox,
+  SelectLayer,
+  SelectListWrapper,
+  List,
+  Item,
+};
+
 function Select({ items, placeholder, setItem, dimensions }) {
   const inputRef = useRef(null);
   const [isShown, setIsShown] = useState(false);
@@ -55,24 +66,24 @@ function Select({ items, placeholder, setItem, dimensions }) {
   };
 
   return (
-    <SelectContainer>
-      <SelectBox onClick={handleClickBox}>
-        <Input ref={inputRef} disabled placeholder={placeholder} type={'text'} />
-      </SelectBox>
+    <S.SelectContainer>
+      <S.SelectBox onClick={handleClickBox}>
+        <S.Input ref={inputRef} disabled placeholder={placeholder} type={'text'} />
+      </S.SelectBox>
       <Modal isOpen={isShown} setIsOpen={setIsShown} dimensions={dimensions}>
-        <SelectLayer isShown={isShown}>
-          <SelectListWrapper>
-            <List>
+        <S.SelectLayer isShown={isShown}>
+          <S.SelectListWrapper>
+            <S.List>
               {items.map(item => (
                 <Item key={item} onClick={() => handleClickItem(item)}>
                   {item}
                 </Item>
               ))}
-            </List>
-          </SelectListWrapper>
-        </SelectLayer>
+            </S.List>
+          </S.SelectListWrapper>
+        </S.SelectLayer>
       </Modal>
-    </SelectContainer>
+    </S.SelectContainer>
   );
 }
 

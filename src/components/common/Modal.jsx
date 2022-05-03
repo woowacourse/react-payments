@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { PRIMARY_BG_COLOR, DIMMED_PRIMARY_BG_COLOR } from '../../style';
+import { PRIMARY_BG_COLOR, DIMMED_PRIMARY_BG_COLOR } from '../../theme';
 
 const ModalContainer = styled.div`
   display: ${props => (props.isOpen ? 'flex' : 'none')};
@@ -61,21 +61,27 @@ const ModalInner = styled.div`
   }
 `;
 
+const S = {
+  ModalContainer,
+  ModalOverlay,
+  ModalInner,
+};
+
 function Modal({ isOpen, setIsOpen, dimensions: { width, height }, children }) {
   return (
-    <ModalContainer isOpen={isOpen}>
-      <ModalOverlay
+    <S.ModalContainer isOpen={isOpen}>
+      <S.ModalOverlay
         onClick={e => {
           if (e.target === e.currentTarget) setIsOpen(false);
         }}
         isOpen={isOpen}
         width={width}
         height={height}>
-        <ModalInner width={width} height={height}>
+        <S.ModalInner width={width} height={height}>
           {children}
-        </ModalInner>
-      </ModalOverlay>
-    </ModalContainer>
+        </S.ModalInner>
+      </S.ModalOverlay>
+    </S.ModalContainer>
   );
 }
 

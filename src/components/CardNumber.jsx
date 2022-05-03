@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { HYPHEN_PRIMARY_COLOR } from '../style';
+import { HYPHEN_PRIMARY_COLOR } from '../theme';
 import ErrorMessage from './common/ErrorMessage';
-import { Input, InputContainer, InputWrapper, Label, Span } from './common/styled';
+import * as S from './common/styles';
 
 const MAX_CARD_NUMBER_UNIT = 4;
 
@@ -79,11 +79,11 @@ function CardNumber({ dispatch }) {
   }, [cardNumbers, dispatch, isFinishTypingCardNumber]);
 
   return (
-    <InputContainer>
-      <Label>카드 번호</Label>
-      <InputWrapper color={HYPHEN_PRIMARY_COLOR} onFocus={handleInputFocus}>
-        <Span>
-          <Input
+    <S.InputContainer>
+      <S.Label>카드 번호</S.Label>
+      <S.InputWrapper color={HYPHEN_PRIMARY_COLOR} onFocus={handleInputFocus}>
+        <S.Span>
+          <S.Input
             ref={cardNoARef}
             type={'text'}
             onChange={handleInputChange}
@@ -92,10 +92,10 @@ function CardNumber({ dispatch }) {
             value={cardNumbers.cardNoA}
             placeholder={'1234'}
           />
-        </Span>
-        <Span>-</Span>
-        <Span>
-          <Input
+        </S.Span>
+        <S.Span>-</S.Span>
+        <S.Span>
+          <S.Input
             ref={cardNoBRef}
             type={'text'}
             onChange={handleInputChange}
@@ -104,10 +104,10 @@ function CardNumber({ dispatch }) {
             value={cardNumbers.cardNoB}
             placeholder={'1234'}
           />
-        </Span>
-        <Span>-</Span>
-        <Span>
-          <Input
+        </S.Span>
+        <S.Span>-</S.Span>
+        <S.Span>
+          <S.Input
             ref={cardNoCRef}
             type={'password'}
             onChange={handleInputChange}
@@ -116,10 +116,10 @@ function CardNumber({ dispatch }) {
             value={cardNumbers.cardNoC}
             placeholder={'****'}
           />
-        </Span>
-        <Span>-</Span>
-        <Span>
-          <Input
+        </S.Span>
+        <S.Span>-</S.Span>
+        <S.Span>
+          <S.Input
             ref={cardNoDRef}
             type={'password'}
             onChange={handleInputChange}
@@ -128,10 +128,10 @@ function CardNumber({ dispatch }) {
             value={cardNumbers.cardNoD}
             placeholder={'****'}
           />
-        </Span>
-      </InputWrapper>
+        </S.Span>
+      </S.InputWrapper>
       <ErrorMessage>{errorMessage}</ErrorMessage>
-    </InputContainer>
+    </S.InputContainer>
   );
 }
 

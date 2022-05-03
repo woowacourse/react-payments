@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LABEL_PRIMARY_COLOR } from '../../style';
+import { LABEL_PRIMARY_COLOR } from '../../theme';
 
 const CompanyContainer = styled.div`
   display: flex;
@@ -25,12 +25,18 @@ const CompanyName = styled.p`
   color: ${LABEL_PRIMARY_COLOR};
 `;
 
+const S = {
+  CompanyContainer,
+  CompanyColorCircle,
+  CompanyName,
+};
+
 function CardCompany({ color, name, handleClick }) {
   return (
-    <CompanyContainer onClick={handleClick}>
-      <CompanyColorCircle hexColor={color}></CompanyColorCircle>
-      <CompanyName>{name}</CompanyName>
-    </CompanyContainer>
+    <S.CompanyContainer onClick={handleClick}>
+      <S.CompanyColorCircle hexColor={color}></S.CompanyColorCircle>
+      <S.CompanyName>{name}</S.CompanyName>
+    </S.CompanyContainer>
   );
 }
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import { BsDot } from 'react-icons/bs';
-import { DOT_PRIMARY_COLOR } from '../../style';
-import { DotContainer } from './styled';
+import { DOT_PRIMARY_COLOR } from '../../theme';
+import * as S from './styles';
 
 function InactiveContainer() {
   return (
-    <DotContainer>
+    <S.DotContainer>
       <BsDot size={40} color={DOT_PRIMARY_COLOR} />
-    </DotContainer>
+    </S.DotContainer>
   );
 }
 

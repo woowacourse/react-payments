@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Input, InputContainer, Label, InputWrapper, Span } from './common/styled';
-import InactiveContainer from './common/InactiveContainer';
 import ErrorMessage from './common/ErrorMessage';
+import InactiveContainer from './common/InactiveContainer';
 
-const InputPasswordWrapper = styled.div`
-  display: flex;
-  gap: 1em;
-  width: 50%;
-`;
+import * as CommonStyles from './common/styles';
+import * as CardPasswordStyle from './common/styles/CardPassword.style';
+
+const S = { ...CommonStyles, ...CardPasswordStyle };
 
 const MAX_PASSWORD_UNIT = 1;
 
@@ -55,24 +52,24 @@ function CardPassword({ dispatch }) {
   }, [pwd, dispatch]);
 
   return (
-    <InputContainer>
-      <Label>카드 비밀번호</Label>
-      <InputPasswordWrapper>
-        <InputWrapper>
-          <Span>
-            <Input type={'password'} maxLength={1} name={'pwdNoA'} onChange={handleInputChange} value={pwd.pwdNoA} />
-          </Span>
-        </InputWrapper>
-        <InputWrapper>
-          <Span>
-            <Input type={'password'} maxLength={1} name={'pwdNoB'} onChange={handleInputChange} value={pwd.pwdNoB} />
-          </Span>
-        </InputWrapper>
+    <S.InputContainer>
+      <S.Label>카드 비밀번호</S.Label>
+      <S.InputPasswordWrapper>
+        <S.InputWrapper>
+          <S.Span>
+            <S.Input type={'password'} maxLength={1} name={'pwdNoA'} onChange={handleInputChange} value={pwd.pwdNoA} />
+          </S.Span>
+        </S.InputWrapper>
+        <S.InputWrapper>
+          <S.Span>
+            <S.Input type={'password'} maxLength={1} name={'pwdNoB'} onChange={handleInputChange} value={pwd.pwdNoB} />
+          </S.Span>
+        </S.InputWrapper>
         <InactiveContainer />
         <InactiveContainer />
-      </InputPasswordWrapper>
+      </S.InputPasswordWrapper>
       <ErrorMessage>{errorMessage}</ErrorMessage>
-    </InputContainer>
+    </S.InputContainer>
   );
 }
 

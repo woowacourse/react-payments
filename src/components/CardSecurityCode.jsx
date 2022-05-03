@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ErrorMessage from './common/ErrorMessage';
-import { Input, InputContainer, Span, Label, InputWrapper } from './common/styled';
 import QuestionContainer from './common/QuestionIcon';
+
+import * as S from './common/styles';
 
 const MAX_CARD_CODE = 3;
 const CVC_EXPLANATION = `CVC번호는 카드뒷면의 7자리 숫자 중 뒷 3자리입니다.`;
@@ -44,18 +45,18 @@ function CardSecurityCode({ dispatch }) {
   };
 
   return (
-    <InputContainer position={'relative'} width={'40%'}>
+    <S.InputContainer position={'relative'} width={'40%'}>
       <div>
-        <Label>보안코드(CVC/CVV)</Label>
-        <InputWrapper width={'80%'}>
-          <Span>
-            <Input type={'password'} maxLength={'3'} onChange={handleInputChange} value={cardCode} />
-          </Span>
-        </InputWrapper>
+        <S.Label>보안코드(CVC/CVV)</S.Label>
+        <S.InputWrapper width={'80%'}>
+          <S.Span>
+            <S.Input type={'password'} maxLength={'3'} onChange={handleInputChange} value={cardCode} />
+          </S.Span>
+        </S.InputWrapper>
         <QuestionContainer>{CVC_EXPLANATION}</QuestionContainer>
       </div>
       <ErrorMessage>{errorMessage}</ErrorMessage>
-    </InputContainer>
+    </S.InputContainer>
   );
 }
 

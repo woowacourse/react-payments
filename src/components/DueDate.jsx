@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { HYPHEN_PRIMARY_COLOR } from '../style';
+import { HYPHEN_PRIMARY_COLOR } from '../theme';
 import Select from './common/Select';
-import { InputContainer, InputWrapper, Span, Label } from './common/styled';
+
+import * as S from './common/styles';
 
 const MONTH = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 const MAX_YEAR_CARD_EXPIRATION = 5;
@@ -25,18 +26,18 @@ function DueDate({ dispatch, dimensions }) {
   }, [month, year, dispatch]);
 
   return (
-    <InputContainer>
-      <Label>만료일</Label>
-      <InputWrapper color={HYPHEN_PRIMARY_COLOR} width={'50%'}>
-        <Span>
+    <S.InputContainer>
+      <S.Label>만료일</S.Label>
+      <S.InputWrapper color={HYPHEN_PRIMARY_COLOR} width={'50%'}>
+        <S.Span>
           <Select items={months.current} setItem={setMonth} placeholder={'MM'} dimensions={dimensions} />
-        </Span>
-        <Span>/</Span>
-        <Span>
+        </S.Span>
+        <S.Span>/</S.Span>
+        <S.Span>
           <Select items={years.current} setItem={setYear} placeholder={'YY'} dimensions={dimensions} />
-        </Span>
-      </InputWrapper>
-    </InputContainer>
+        </S.Span>
+      </S.InputWrapper>
+    </S.InputContainer>
   );
 }
 

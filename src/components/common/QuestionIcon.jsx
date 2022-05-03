@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BsQuestionCircle } from 'react-icons/bs';
 import styled from 'styled-components';
-import { BUBBLE_PRIMARY_BG_COLOR, BUBBLE_PRIMARY_COLOR, LABEL_PRIMARY_COLOR } from '../../style';
+import { BUBBLE_PRIMARY_BG_COLOR, BUBBLE_PRIMARY_COLOR, LABEL_PRIMARY_COLOR } from '../../theme';
 
 const QuestionContainer = styled.div`
   position: absolute;
@@ -26,6 +26,11 @@ const TextArea = styled.p`
   }
 `;
 
+const S = {
+  QuestionContainer,
+  TextArea,
+};
+
 function QuestionIcon({ children: textContent }) {
   const [isShown, setIsShown] = useState();
 
@@ -34,10 +39,10 @@ function QuestionIcon({ children: textContent }) {
   };
 
   return (
-    <QuestionContainer onClick={handleClickBox}>
-      <TextArea isShown={isShown}>{textContent}</TextArea>
+    <S.QuestionContainer onClick={handleClickBox}>
+      <S.TextArea isShown={isShown}>{textContent}</S.TextArea>
       <BsQuestionCircle size={30} color={LABEL_PRIMARY_COLOR} />
-    </QuestionContainer>
+    </S.QuestionContainer>
   );
 }
 

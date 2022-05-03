@@ -18,11 +18,15 @@ const Button = styled.button`
   }
 `;
 
+const S = {
+  Button,
+};
+
 function TextButton({ children: text, hexColor, isVisible, handleClick }) {
   return (
-    <Button color={hexColor} isVisible={isVisible} onClick={handleClick}>
+    <S.Button color={hexColor} isVisible={isVisible} onClick={handleClick}>
       {text}
-    </Button>
+    </S.Button>
   );
 }
 
