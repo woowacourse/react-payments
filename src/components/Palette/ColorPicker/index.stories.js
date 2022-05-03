@@ -1,8 +1,14 @@
 import ColorPicker from '.';
+import { COLOR_NAMES } from '../../../constant';
 
 export default {
   title: 'ColorPicker',
   component: ColorPicker,
+  argTypes: {
+    color: {
+      options: COLOR_NAMES,
+    },
+  },
 };
 
 const Template = (args) => <ColorPicker {...args} />;

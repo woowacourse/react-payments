@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { COLOR_NAMES } from '../../../constant';
 import * as styled from './index.styled';
 
 const ColorPicker = ({ color, name, onClick }) => {
@@ -11,7 +12,7 @@ const ColorPicker = ({ color, name, onClick }) => {
 };
 
 ColorPicker.propTypes = {
-  color: PropTypes.string,
+  color: PropTypes.oneOf(COLOR_NAMES),
   name: PropTypes.string,
   onClick: PropTypes.func,
 };

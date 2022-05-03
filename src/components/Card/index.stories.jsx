@@ -64,6 +64,7 @@ const Template = (args) => <Card {...args} />;
 export const Example = Template.bind({});
 
 Example.args = {
+  color: 'yellow',
   name: '블랙 카드',
   ownerName: 'Sally',
   expiredMonth: '12',
