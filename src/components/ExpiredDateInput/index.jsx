@@ -35,10 +35,10 @@ const InvalidMessage = styled.span`
 function ExpiredDateInput({ expiredDate, handleInputChange, isValid, invalidMessage, width }) {
   const { month, year } = expiredDate;
 
-  const isValidCardNumber = cardNumber => {
-    const cardNumberRegex = /^[0-9]{2}$/;
+  const isValidDate = date => {
+    const dateRegex = /^[0-9]{2}$/;
 
-    return cardNumberRegex.test(cardNumber);
+    return dateRegex.test(date);
   };
 
   const isAllEmptyValue = () => {
@@ -59,7 +59,7 @@ function ExpiredDateInput({ expiredDate, handleInputChange, isValid, invalidMess
           maxLength="2"
           placeholder="MM"
           name="month"
-          isValid={isValidCardNumber(month)}
+          isValid={isValidDate(month)}
         />
         /
         <Input
@@ -72,7 +72,7 @@ function ExpiredDateInput({ expiredDate, handleInputChange, isValid, invalidMess
           maxLength="2"
           placeholder="YY"
           name="year"
-          isValid={isValidCardNumber(year)}
+          isValid={isValidDate(year)}
         />
       </InputWrapper>
       <InvalidMessage>{isValid || isAllEmptyValue() ? '' : invalidMessage}</InvalidMessage>
