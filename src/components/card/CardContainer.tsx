@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppState } from '../../hooks/hooks';
-import { transformCardNumber, transformToMMYY } from '../../utils';
+import { transformCardNumber, transformNumToBullet, transformToMMYY } from '../../utils';
 import Card from './Card';
 
 function CardContainer() {
@@ -21,7 +21,7 @@ function CardContainer() {
       cardNumber={transformCardNumber(cardNumber)}
       name={name}
       expiredPeriod={transformToMMYY(expiredPeriod)}
-      cvc={cvc}
+      cvc={transformNumToBullet(cvc)}
       fliped={isEditingCVC}
     />
   );
