@@ -4,6 +4,13 @@ import Card from './index';
 export default {
   title: 'Card',
   component: Card,
+  argTypes: {
+    onClick: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 const Template = (args) => <Card {...args} />;

@@ -1,5 +1,5 @@
 import React from 'react';
-import ColorPicker from './ColorPicker';
+import ColorPicker from '.';
 
 export default {
   title: 'ColorPicker',

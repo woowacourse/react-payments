@@ -6,6 +6,24 @@ import ExpiredDateInput from './ExpiredDateInput';
 export default {
   title: 'Input',
   component: Input,
+
+  argTypes: {
+    id: {
+      table: {
+        disable: true,
+      },
+    },
+    type: {
+      table: {
+        disable: true,
+      },
+    },
+    maxLength: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 const Template = (args) => <Input {...args} />;

@@ -12,5 +12,4 @@ export const Example = Template.bind({});
 
 Example.args = {
   children: '다음',
-  name: 'button',
 };

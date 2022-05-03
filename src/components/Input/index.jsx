@@ -1,15 +1,15 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const InputScaleType = {
-  large: "318",
-  medium: "84",
-  small: "43",
+  large: '318',
+  medium: '84',
+  small: '43',
 };
 
-const Input = ({ scale, textAlign = "center", ...rest }) => {
-  return <Container scale={scale} textAlign={textAlign} {...rest} />;
+const Input = ({ scale, ...rest }) => {
+  return <Container scale={scale} {...rest} />;
 };
 
 Input.propTypes = {
@@ -19,12 +19,11 @@ Input.propTypes = {
   scale: PropTypes.string,
   maxLength: PropTypes.number,
   value: PropTypes.string,
-  textAlign: PropTypes.string,
 };
 
 const Container = styled.input`
-  text-align: ${(props) => props.textAlign};
-  width: ${(props) => InputScaleType[props.scale]}px;
+  text-align: center;
+  width: ${({ scale }) => InputScaleType[scale]}px;
   height: 45px;
   background-color: #ecebf1;
   color: #04c09e;
