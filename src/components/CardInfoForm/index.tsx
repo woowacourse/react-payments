@@ -17,6 +17,7 @@ interface CardInfoFormProps {
   onChangePassword: InputChangeFunction;
   resetCardInfo: () => void;
   cardInfoValidation: CardInfoValidation;
+  addCard: () => void;
 }
 
 export default function CardInfoForm({
@@ -29,6 +30,7 @@ export default function CardInfoForm({
   onChangePassword,
   resetCardInfo,
   cardInfoValidation,
+  addCard,
 }: CardInfoFormProps) {
   const { cardNumbers, expirationDate, userName, securityCode, password } = cardInfo;
   const [isNextButtonShown, setIsNextButtonShown] = useState(true);
@@ -48,8 +50,13 @@ export default function CardInfoForm({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    addCard();
+    if (window.confirm("카드를 등록하시겠습니까?")) {
+      alert("카드 등록이 완료되었습니다.");
+    }
+
     resetCardInfo();
-    alert("카드 등록이 완료되었습니다.");
     setIsNextButtonShown(false);
   };
 

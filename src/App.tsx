@@ -2,9 +2,11 @@ import Card from "components/Card";
 import CardInfoForm from "components/CardInfoForm";
 import Header from "components/Header";
 import useCardInfoInput from "hooks/useCardInfoInput";
-import React from "react";
+import React, { useState } from "react";
+import { CardInfo } from "types/cardInfo";
 
 function App() {
+  const [cards, setCards] = useState<CardInfo[]>([]);
   const {
     cardInfo,
     cardInfoValidation,
@@ -17,6 +19,10 @@ function App() {
     onChangeSecurityCode,
     onChangePassword,
   } = useCardInfoInput();
+
+  const addCard = () => {
+    setCards(prevCards => [...prevCards, cardInfo]);
+  };
 
   return (
     <div className="App">
@@ -32,6 +38,7 @@ function App() {
         onChangePassword={onChangePassword}
         resetCardInfo={resetCardInfo}
         cardInfoValidation={cardInfoValidation}
+        addCard={addCard}
       />
     </div>
   );
