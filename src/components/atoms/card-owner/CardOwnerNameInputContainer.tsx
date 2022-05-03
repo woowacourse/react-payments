@@ -42,8 +42,6 @@ function CardOwnerNameInputContainer() {
     const { value, selectionStart } = input;
     if (selectionStart === null) return;
 
-    console.log('입력모드이니 ? ', name.length < value.length);
-
     if (name.length < value.length) {
       return handleInsert(input);
     }
