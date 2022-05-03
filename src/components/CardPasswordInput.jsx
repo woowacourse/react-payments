@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import styled from "styled-components";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
 import useArraySetState from "../useArraySetState.jsx";
 import useValidatedUpdate from "../useValidatedUpdate.jsx";
 import { cardInfoValidations } from "../cardInfoValidations.js";
+import { Hash } from "../passwordHash.js";
 
 const StyledInputField = styled.div`
   display: flex;
@@ -48,9 +49,15 @@ const StyledInputContainer = styled.div`
 
 export default function CardPasswordInput({ password, setPassword }) {
   const setPasswordArray = useArraySetState(setPassword);
+  const setHashedPasswordArray = useCallback(
+    (value, order) => {
+      setPasswordArray(Hash.encode(value), order);
+    },
+    [setPasswordArray]
+  );
   const [handlePasswordUpdate, errorMessage, resetError] = useValidatedUpdate(
     cardInfoValidations["password"],
-    setPasswordArray
+    setHashedPasswordArray
   );
 
   return (
