@@ -1,0 +1,28 @@
+.button-box {
+  width: 100%;
+  text-align: right;
+}
+
+.button-style {
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #383838;
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.prev-page-sign {
+  position: absolute;
+  cursor: pointer;
+  width: 11px;
+  height: 11px;
+  border-bottom: 1.5px solid #525252;
+  border-left: 1.5px solid #525252;
+  transform: rotate(45deg);
+  left: 20px;
+  top: 19px;
+}
