@@ -20,7 +20,6 @@ function InputBox({ inputInfo, size, background, border, error, onChange }) {
             value={value}
             ref={ref}
             onChange={(e) => onChange(e, key ? key : index)}
-            data-testid={id}
           />
         </Fragment>
       ))}

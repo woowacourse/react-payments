@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import PropTypes from 'prop-types'
 
 import Form from 'components/common/Form'
 import { isInvalidDueDate } from 'validation'
@@ -61,6 +62,11 @@ function DueDateForm({ dueDate, setDueDate, error, setError }) {
       onChange={handleDueDateChange}
     />
   )
+}
+
+DueDateForm.propTypes = {
+  dueDate: PropTypes.object,
+  setDueDate: PropTypes.func,
 }
 
 export default DueDateForm

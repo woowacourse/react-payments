@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import Form from 'components/common/Form'
+import PropTypes from 'prop-types'
 
 import { isInvalidCardNumber } from 'validation'
 import { CARD_NUMBER } from 'constant'
@@ -67,6 +68,11 @@ function CardNumberForm({ cardNumbers, setCardNumbers }) {
       onChange={handleCardNumberChange}
     />
   )
+}
+
+CardNumberForm.propTypes = {
+  cardNumbers: PropTypes.array,
+  setCardNumbers: PropTypes.func,
 }
 
 export default CardNumberForm

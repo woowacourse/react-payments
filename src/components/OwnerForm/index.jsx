@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 import Form from 'components/common/Form'
 import { OWNER } from 'constant'
 import { isInvalidOwner } from 'validation'
@@ -24,6 +26,11 @@ function OwnerForm({ owner, setOwner }) {
       onChange={handleOwnerChange}
     />
   )
+}
+
+OwnerForm.propTypes = {
+  owner: PropTypes.string,
+  setOwner: PropTypes.func,
 }
 
 export default OwnerForm

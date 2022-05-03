@@ -62,16 +62,9 @@ function PasswordForm({ password, setPassword }) {
   )
 }
 
-// PasswordForm.propTypes = {
-//   /**
-//    * form label 문구
-//    */
-//   label: PropTypes.string,
-//   inputInfo: PropTypes.array,
-//   /**
-//    * input 넓이
-//    */
-//   size: PropTypes.number,
-//   onChange: PropTypes.func,
-// }
+PasswordForm.propTypes = {
+  password: PropTypes.string,
+  setPassword: PropTypes.func,
+}
+
 export default PasswordForm

@@ -1,5 +1,6 @@
 import Form from 'components/common/Form'
 import { isInvalidCVC } from 'validation'
+import PropTypes from 'prop-types'
 
 function CVCForm({ cvc, setCvc }) {
   const handleCvc = ({ target: { value } }) => {
@@ -17,6 +18,11 @@ function CVCForm({ cvc, setCvc }) {
       helpText="카드 뒷면의 7자리 숫자 중 마지막 3자리"
     />
   )
+}
+
+CVCForm.propTypes = {
+  cvc: PropTypes.string,
+  setCvc: PropTypes.func,
 }
 
 export default CVCForm
