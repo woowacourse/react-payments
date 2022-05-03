@@ -1,105 +1,130 @@
 import React from 'react';
 import LabeledInput from '.';
-import '../../index.css';
 import MESSAGE from '../../constant/message';
+import useCardNumbers from '../../hooks/useCardNumbers';
+import useExpiredDate from '../../hooks/useExpiredDate';
+import useOwnerName from '../../hooks/useOwnerName';
+import usePassword from '../../hooks/usePassword';
+import useSecurityNumber from '../../hooks/useSecurityNumber';
 
 export default {
   title: 'Payment/LabeledInput',
   component: LabeledInput,
 };
 
-const Template = args => <LabeledInput {...args} />;
+export const CardNumbers = args => {
+  const { convertedCardNumbers, isValidCardNumbers, handleChangeCardNumbersInput } =
+    useCardNumbers();
 
-export const CardNumbers = Template.bind({});
-export const ExpiredDate = Template.bind({});
-export const OwnerName = Template.bind({});
-export const SecurityNumber = Template.bind({});
-export const Password = Template.bind({});
-
-CardNumbers.args = {
-  value: '',
-  isShowLengthChecker: false,
-  invalidMessage: MESSAGE.INVALID_CARD_NUMBER,
-  countInput: 1,
-  inputProps: {
-    type: 'text',
-    width: '318px',
-    maxLength: 19,
-    placeholder: 'ex. 0000-0000-0000-0000',
-    isValid: false,
-  },
-  inputLabelProps: {
-    label: '카드 번호',
-  },
+  return (
+    <LabeledInput
+      value={convertedCardNumbers.join('-')}
+      handleInputChange={handleChangeCardNumbersInput}
+      invalidMessage={MESSAGE.INVALID_CARD_NUMBER}
+      inputProps={{
+        type: 'text',
+        width: '318px',
+        maxLength: 19,
+        placeholder: 'ex. 0000-0000-0000-0000',
+        isValid: isValidCardNumbers,
+      }}
+      inputLabelProps={{
+        label: '카드 번호',
+      }}
+      {...args}
+    />
+  );
 };
 
-ExpiredDate.args = {
-  value: '',
-  isShowLengthChecker: false,
-  invalidMessage: MESSAGE.INVALID_EXPIRED_DATE,
-  countInput: 1,
-  inputProps: {
-    type: 'text',
-    width: '137px',
-    isCenter: true,
-    maxLength: 5,
-    placeholder: 'MM / YY',
-    isValid: false,
-  },
-  inputLabelProps: {
-    label: '만료일',
-  },
+export const ExpiredDate = args => {
+  const { convertedExpiredDate, isValidExpiredDate, handleChangeExpiredDateInput } =
+    useExpiredDate();
+
+  return (
+    <LabeledInput
+      value={convertedExpiredDate}
+      handleInputChange={handleChangeExpiredDateInput}
+      invalidMessage={MESSAGE.INVALID_EXPIRED_DATE}
+      inputProps={{
+        type: 'text',
+        width: '137px',
+        isCenter: true,
+        maxLength: 5,
+        placeholder: 'MM / YY',
+        isValid: isValidExpiredDate,
+      }}
+      inputLabelProps={{
+        label: '만료일',
+      }}
+      {...args}
+    />
+  );
 };
 
-OwnerName.args = {
-  value: '',
-  headerWidth: '318px',
-  isShowLengthChecker: true,
-  invalidMessage: MESSAGE.INVALID_OWNER_NAME,
-  countInput: 1,
-  inputProps: {
-    type: 'text',
-    width: '318px',
-    placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
-    isCenter: false,
-    maxLength: 30,
-    isValid: false,
-  },
-  inputLabelProps: {
-    label: '카드 소유자 이름(선택)',
-  },
+export const OwnerName = args => {
+  const { ownerName, isValidOwnerName, handleChangeOwnerNameInput } = useOwnerName();
+  return (
+    <LabeledInput
+      value={ownerName}
+      handleInputChange={handleChangeOwnerNameInput}
+      invalidMessage={MESSAGE.INVALID_OWNER_NAME}
+      headerWidth="318px"
+      isShowLengthChecker={true}
+      inputProps={{
+        type: 'text',
+        width: '318px',
+        placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
+        isCenter: false,
+        maxLength: 30,
+        isValid: isValidOwnerName,
+      }}
+      inputLabelProps={{
+        label: '카드 소유자 이름(선택)',
+      }}
+      {...args}
+    />
+  );
 };
 
-SecurityNumber.args = {
-  value: '',
-  isShowLengthChecker: false,
-  invalidMessage: MESSAGE.INVALID_SECURITY_NUMBER,
-  countInput: 1,
-  inputProps: {
-    type: 'password',
-    width: '84px',
-    isCenter: true,
-    maxLength: 3,
-    isValid: false,
-  },
-  inputLabelProps: {
-    label: '보안 코드(CVC/CVV)',
-  },
+export const SecurityNumber = args => {
+  const { securityNumber, isValidSecurityNumber, handleChangeSecurityNumber } = useSecurityNumber();
+  return (
+    <LabeledInput
+      value={securityNumber}
+      handleInputChange={handleChangeSecurityNumber}
+      invalidMessage={MESSAGE.INVALID_SECURITY_NUMBER}
+      inputProps={{
+        type: 'password',
+        width: '84px',
+        maxLength: 3,
+        isValid: isValidSecurityNumber,
+      }}
+      inputLabelProps={{
+        label: '보안 코드(CVC/CVV)',
+      }}
+      {...args}
+    />
+  );
 };
 
-Password.args = {
-  value: [],
-  isShowLengthChecker: false,
-  invalidMessage: MESSAGE.INVALID_PASSWORD,
-  countInput: 2,
-  inputProps: {
-    type: 'password',
-    width: '43px',
-    isCenter: true,
-    maxLength: 1,
-    isValid: false,
-  },
-  inputLabelProps: {
-    label: '카드 비밀번호',
-  },
+export const Password = args => {
+  const { password, isValidPassword, handleChangePassword } = usePassword();
+  return (
+    <LabeledInput
+      value={password}
+      handleInputChange={handleChangePassword}
+      invalidMessage={MESSAGE.INVALID_PASSWORD}
+      countInput={2}
+      inputProps={{
+        type: 'password',
+        width: '43px',
+        maxLength: 1,
+        isValid: isValidPassword,
+      }}
+      inputLabelProps={{
+        label: '카드 비밀번호',
+      }}
+      {...args}
+    />
+  );
 };

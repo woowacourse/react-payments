@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types';
 import Input from '../Input';
 import InputLabel from '../InputLabel';
 import {
@@ -19,20 +19,12 @@ function LabeledInput({
   inputProps,
   inputLabelProps,
 }) {
-  const [tempValue, setTempValue] = useState('');
-
-  const onChange = ({ target }) => {
-    setTempValue(target.value);
-  };
-
   const isValidInput = () => {
     if (isMultipleInput(countInput)) {
       return inputProps.isValid || value.join('').length === 0;
     }
 
-    return value
-      ? inputProps.isValid || value.length === 0
-      : inputProps.isValid || tempValue.length === 0;
+    return inputProps.isValid || value.length === 0;
   };
 
   const isMultipleInput = countInput => {
@@ -45,8 +37,7 @@ function LabeledInput({
         <InputLabel {...inputLabelProps} />
         {isShowLengthChecker ? (
           <LengthChecker>
-            <span>{value ? value.length : tempValue.length}</span> /{' '}
-            <span>{inputProps.maxLength}</span>
+            <span>{value.length}</span> / <span>{inputProps.maxLength}</span>
           </LengthChecker>
         ) : (
           ''
@@ -57,25 +48,26 @@ function LabeledInput({
           Array.from({ length: countInput }).map((_, index) => (
             <Input
               key={index}
-              value={value[index] || tempValue}
+              value={value[index]}
               onChange={event => {
-                handleInputChange ? handleInputChange(event, index) : onChange(event);
+                handleInputChange(event, index);
               }}
               {...inputProps}
             />
           ))
         ) : (
-          <Input
-            value={value || tempValue}
-            onChange={handleInputChange || onChange}
-            {...inputProps}
-          />
+          <Input value={value} onChange={handleInputChange} {...inputProps} />
         )}
       </LabeledInputBody>
       <LabeledInputFooter>{isValidInput() ? '' : invalidMessage}</LabeledInputFooter>
     </LabeledInputContainer>
   );
 }
+
+LabeledInput.propTypes = {
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+};
 
 LabeledInput.defaultProps = {
   countInput: 1,
