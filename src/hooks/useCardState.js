@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useReducer } from 'react';
 
 const initialState = {
   cardNumber: ['', '', '', ''],
