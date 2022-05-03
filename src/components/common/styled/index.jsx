@@ -11,8 +11,10 @@ const InputWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  height: fit-content;
   width: ${props => props.width || '100%'};
   margin-top: 0.375rem;
+  padding: 8px;
   color: ${props => props.color};
   border-radius: 0.25rem;
   background-color: ${INPUT_PRIMARY_BG_COLOR};
@@ -38,7 +40,7 @@ const DotContainer = styled.div`
 `;
 
 const Span = styled.span`
-  padding: ${props => props.padding || '8px'};
+  padding: ${props => props.padding || '0'};
 `;
 
 export { InputContainer, InputWrapper, Label, DotContainer, Span };

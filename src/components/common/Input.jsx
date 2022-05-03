@@ -9,6 +9,7 @@ const InputBox = styled.input`
   width: 100%;
   text-align: center;
   outline-offset: 2px;
+  border-radius: 0.25rem;
   border: none;
 
   &::placeholder {

@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import Modal from './Modal';
 import { LABEL_PRIMARY_COLOR, ITEM_HOVER_PRIMARY_BG_COLOR } from '../../style';
 import Input from './Input';
+import { Span } from './styled';
 
 const CalendarContainer = styled.div``;
-
-const SelectBox = styled.div``;
 
 const SelectLayer = styled.div`
   display: ${props => (props.isShown ? 'block' : 'none')};
@@ -52,9 +51,9 @@ function Calendar({ itemList, placeholder, setItem, dimensions, item }) {
 
   return (
     <CalendarContainer>
-      <SelectBox onClick={handleClickBox}>
+      <Span onClick={handleClickBox}>
         <Input placeholder={placeholder} type="text" readOnly value={item} />
-      </SelectBox>
+      </Span>
       <Modal isOpen={isShown} setIsOpen={setIsShown} dimensions={dimensions}>
         <SelectLayer isShown={isShown}>
           <SelectListWrapper>
