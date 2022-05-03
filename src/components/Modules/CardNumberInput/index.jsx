@@ -1,10 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
 import { numberRegex } from '../../../constant/regularExpression';
+import { CardNumberContext } from '../../../context/CardNumberContext';
 
 const InputContainer = styled.div`
   display: flex;
@@ -15,15 +16,15 @@ const InputContainer = styled.div`
 `;
 
 function CardNumberInput() {
-  const orders = ['first', 'second', 'third', 'four'];
-  const [numbers, setNumbers] = useState(
-    Object.fromEntries(orders.map(order => [order, '']))
-  );
-  const [validations, setValidations] = useState(
-    Object.fromEntries(orders.map(order => [order, false]))
-  );
-  const refs = Object.fromEntries(orders.map(order => [order, useRef()]));
-  const currentOrderRef = useRef();
+  const {
+    orders,
+    numbers,
+    validations,
+    refs,
+    currentOrderRef,
+    setNumbers,
+    setValidations,
+  } = useContext(CardNumberContext);
 
   const handleNumberChange = ({ target, nativeEvent: { data, inputType } }) => {
     if (numberRegex.test(data) || !data) {

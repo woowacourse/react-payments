@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
 import { numberRegex } from '../../../constant/regularExpression';
+import { ExpiredDateContext } from '../../../context/ExpiredDateContext';
 
 const InputContainer = styled.div`
   display: flex;
@@ -15,16 +16,16 @@ const InputContainer = styled.div`
 `;
 
 function ExpiredDateInput() {
-  const datePlaceholder = { month: 'MM', year: 'YY' };
-  const units = ['month', 'year'];
-  const [ExpiredDate, setExpiredDate] = useState(
-    Object.fromEntries(units.map(unit => [unit, '']))
-  );
-  const [validations, setValidation] = useState(
-    Object.fromEntries(units.map(unit => [unit, false]))
-  );
-  const refs = Object.fromEntries(units.map(unit => [unit, useRef()]));
-  const currentUnitRef = useRef();
+  const {
+    datePlaceholder,
+    units,
+    ExpiredDate,
+    validations,
+    refs,
+    currentUnitRef,
+    setExpiredDate,
+    setValidation,
+  } = useContext(ExpiredDateContext);
 
   const onDateChange = ({ target, nativeEvent: { data, inputType } }) => {
     if (numberRegex.test(data) || !data) {

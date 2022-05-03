@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { CardOwnerContext } from '../../../context/CardOwnerContext';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
 import { englishRegex } from '../../../constant/regularExpression';
 
 function CardOwnerInput() {
-  const [name, setName] = useState('');
-  const [validation, setValidation] = useState(false);
+  const { name, validation, setName, setValidation } =
+    useContext(CardOwnerContext);
 
   const onNameChange = ({ target, nativeEvent: { data } }) => {
     if (englishRegex.test(data) || !data) {
       const name = target.value.toUpperCase();
+
       setName(name);
       updateValidation(name);
     }

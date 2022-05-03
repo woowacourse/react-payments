@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useContext } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
 import InfoLabel from '../../Atoms/InfoLabel';
 import { numberRegex } from '../../../constant/regularExpression';
+import { SecurityNumberContext } from '../../../context/SecurityNumberContext';
 
 const Container = styled.div`
   display: flex;
@@ -17,8 +18,9 @@ const InfoLabelContainer = styled.div`
 `;
 
 function SecurityNumberInput() {
-  const [number, setNumber] = useState('');
-  const [validation, setValidation] = useState(false);
+  const { number, validation, setNumber, setValidation } = useContext(
+    SecurityNumberContext
+  );
 
   const onNumberChange = ({ target, nativeEvent: { data } }) => {
     if (numberRegex.test(data) || !data) {

@@ -1,9 +1,10 @@
 import styled from 'styled-components';
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
 import { numberRegex } from '../../../constant/regularExpression';
+import { PasswordContext } from '../../../context/PasswordContext';
 
 const InputContainer = styled.div`
   display: flex;
@@ -14,15 +15,15 @@ const InputContainer = styled.div`
 `;
 
 function PasswordInput() {
-  const orders = ['first', 'second'];
-  const [password, setPassword] = useState(
-    Object.fromEntries(orders.map(order => [order, '']))
-  );
-  const [validations, setValidations] = useState(
-    Object.fromEntries(orders.map(order => [order, false]))
-  );
-  const refs = Object.fromEntries(orders.map(order => [order, useRef()]));
-  const currentOrderRef = useRef();
+  const {
+    orders,
+    password,
+    validations,
+    refs,
+    currentOrderRef,
+    setPassword,
+    setValidations,
+  } = useContext(PasswordContext);
 
   const onPasswordChange = ({ target, nativeEvent: { data, inputType } }) => {
     if (numberRegex.test(data) || !data) {

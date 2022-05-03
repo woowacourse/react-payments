@@ -13,10 +13,22 @@ export default {
     return dateRegex.test(date);
   },
 
+  validateOwnerName: name => {
+    const ownerNameRex = /^[A-Z]{1,30}$/;
+
+    return ownerNameRex.test(name);
+  },
+
   validateExpiredDate: date => {
     const expiredDateRegex = /[0-9]{2}/;
 
     return expiredDateRegex.test(date);
+  },
+
+  validateSecurityNumber: securityNumber => {
+    const securityNumberRegex = /^[0-9]{3,3}$/;
+
+    return securityNumberRegex.test(securityNumber);
   },
 
   validatePassword: password => {
