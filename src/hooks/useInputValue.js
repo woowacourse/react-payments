@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const useInputValue = ({ validation }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [isError, setError] = useState(false);
 
   const onChangeValue = ({ target }) => {

@@ -127,18 +127,12 @@ const AddCardPage = () => {
         name={ownerName}
         expiredMonth={expiredMonth}
         expiredYear={expiredYear}
-        firstCardNumber={firstCardNumber}
-        secondCardNumber={secondCardNumber}
-        thirdCardNumber={thirdCardNumber}
-        fourthCardNumber={fourthCardNumber}
+        cardNumbers={[firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber]}
         color={cardType}
         onClick={openModal}
       />
       <CardNumber
-        firstCardNumber={firstCardNumber}
-        secondCardNumber={secondCardNumber}
-        thirdCardNumber={thirdCardNumber}
-        fourthCardNumber={fourthCardNumber}
+        cardNumbers={[firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber]}
         onChangeFirstCardNumber={onChangeFirstCardNumber}
         onChangeSecondCardNumber={onChangeSecondCardNumber}
         onChangeThirdCardNumber={onChangeThirdCardNumber}

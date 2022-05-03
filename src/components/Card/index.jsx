@@ -123,10 +123,7 @@ const Card = ({
   expiredMonth,
   expiredYear,
   cardName,
-  firstCardNumber,
-  secondCardNumber,
-  thirdCardNumber,
-  fourthCardNumber,
+  cardNumbers,
   onClick,
 }) => {
   return (
@@ -138,13 +135,13 @@ const Card = ({
         <CardMiddle>
           <CardChip />
           <CardNumbers>
-            {firstCardNumber && <span>{firstCardNumber}</span>}
-            {secondCardNumber && <span>{secondCardNumber}</span>}
-            {thirdCardNumber && (
-              <span>{Array.from({ length: thirdCardNumber.length }).map((_, index) => '•')}</span>
+            {cardNumbers[0] && <span>{cardNumbers[0]}</span>}
+            {cardNumbers[1] && <span>{cardNumbers[1]}</span>}
+            {cardNumbers[2] && (
+              <span>{Array.from({ length: cardNumbers[2].length }).map((_, index) => '•')}</span>
             )}
-            {fourthCardNumber && (
-              <span>{Array.from({ length: fourthCardNumber.length }).map((_, index) => '•')}</span>
+            {cardNumbers[3] && (
+              <span>{Array.from({ length: cardNumbers[3].length }).map((_, index) => '•')}</span>
             )}
           </CardNumbers>
         </CardMiddle>
