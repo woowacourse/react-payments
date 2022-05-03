@@ -45,7 +45,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
           className={`input-basic ${
             cardNumbers[0].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
           }`}
-          type="text"
+          type="number"
           onChange={handleChange}
           value={cardNumbers[0]}
           required
@@ -55,7 +55,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
           className={`input-basic ${
             cardNumbers[1].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
           }`}
-          type="text"
+          type="number"
           onChange={handleChange}
           value={cardNumbers[1]}
           required
