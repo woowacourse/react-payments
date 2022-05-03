@@ -52,7 +52,7 @@ const InformationDiv = styled.div`
 const ToolTip = () => {
   return (
     <ToolTipWrapper>
-      <QuestionMark>?</QuestionMark>
+      <QuestionMark type="button">?</QuestionMark>
       <InformationDiv>
         카드 뒷면 서명란에 인쇄되어 있는 19자리 중 마지막 3자리 숫자 입니다
       </InformationDiv>
