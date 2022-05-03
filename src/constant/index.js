@@ -24,6 +24,11 @@ const MONTH = {
   MAX: 12,
 };
 
+const NAME = {
+  MONTH: "month",
+  YEAR: "year",
+};
+
 const COLORS = {
   MINT: "#04C09E",
   GRAY: "#D2D2D2",
@@ -33,4 +38,4 @@ const COLORS = {
   LIGHT_PINK: "#fcdfef",
 };
 
-export { CARD_NUMBER, DUE_DATE, OWNER, CVC, PASSWORD, MONTH, COLORS };
+export { CARD_NUMBER, DUE_DATE, OWNER, CVC, PASSWORD, MONTH, COLORS, NAME };

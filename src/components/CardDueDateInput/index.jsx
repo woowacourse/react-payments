@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import InputBox from "components/common/InputBox";
 import { Input } from "components/common/Input/style";
 import { CardInputWrapper } from "pages/CardAddPage/style";
+import { NAME } from "constant";
 
 function CardDueDateInput({
   dueDate,
@@ -15,7 +16,7 @@ function CardDueDateInput({
       <InputBox size="50" error={error.month || error.year}>
         <Input
           type="number"
-          name="month"
+          name={NAME.MONTH}
           value={dueDate.month}
           onChange={handleChangeDueDate}
           placeholder="MM"
@@ -23,7 +24,7 @@ function CardDueDateInput({
         <span>/</span>
         <Input
           type="number"
-          name="year"
+          name={NAME.YEAR}
           ref={yearInputRef}
           value={dueDate.year}
           onChange={handleChangeDueDate}

@@ -5,6 +5,7 @@ import {
   isFilledDueDateLength,
   isOverDueDateLength,
 } from "validation";
+import { NAME } from "constant";
 
 const useCardDueDate = () => {
   const [dueDate, setDueDate] = useState({ month: "", year: "" });
@@ -19,10 +20,10 @@ const useCardDueDate = () => {
       yearInputRef.current.focus();
     }
 
-    if (name === "month") {
+    if (name === NAME.MONTH) {
       setError({ ...error, [name]: isExpiredMonth(value) });
     }
-    if (name === "year") {
+    if (name === NAME.YEAR) {
       setError({ ...error, [name]: isExpiredYear(value) });
     }
 

@@ -11,5 +11,5 @@ export const Primary = Template.bind({});
 Primary.args = {
   dueDate: { month: "11", year: "23" },
   handleChangeDueDate: () => {},
-  // error: { month: false, year: false },
+  error: { month: false, year: false },
 };
