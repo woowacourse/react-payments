@@ -1,11 +1,11 @@
-import { ERROR_MESSAGE } from './constants';
+import { ERROR_MESSAGE, STRING } from './constants';
 
 export const isOverMaxLength = (value, max) => value.length > max;
 
 export const isOutOfRange = (min, max, value) => value < min || value > max;
 
 export const checkIsNaN = (value) => {
-  if (Number.isNaN(+value)) {
+  if (Number.isNaN(+value) || value.includes(STRING.BLANK) || value.includes(STRING.DOT)) {
     throw new Error(ERROR_MESSAGE.NOT_NUMBER);
   }
 };

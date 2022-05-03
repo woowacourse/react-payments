@@ -18,6 +18,11 @@ export const RANGE = {
 
 export const ERROR_MESSAGE = {
   OVER_MAX_LENGTH: '입력값의 최대 길이를 초과했습니다.',
-  NOT_NUMBER: '숫자만 입력할 수 있습니다.',
+  NOT_NUMBER: '정수만 입력할 수 있습니다.',
   INVALID_MONTH_RANGE: '1 ~ 12 까지의 숫자만 입력할 수 있습니다.',
+};
+
+export const STRING = {
+  BLANK: ' ',
+  DOT: '.',
 };

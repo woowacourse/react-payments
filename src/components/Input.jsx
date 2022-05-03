@@ -16,7 +16,7 @@ function Input({
   validators,
 }) {
   const checkValidation = (targetValue) => {
-    if (validators.checkIsNaN) validators.checkIsNaN(+targetValue);
+    if (validators.checkIsNaN) validators.checkIsNaN(targetValue);
 
     if (validators.checkMaxLength) validators.checkMaxLength(targetValue, length);
 
