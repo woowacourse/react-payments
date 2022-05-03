@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Modal = ({ handleModal, children }) => {
   return (
     <>
@@ -5,6 +7,17 @@ const Modal = ({ handleModal, children }) => {
       <div className="modal">{children}</div>
     </>
   );
+};
+
+Modal.propTypes = {
+  /**
+   * fuction to control modal
+   */
+  handleModal: PropTypes.func,
+  /**
+   * content of modal
+   */
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };
 
 export default Modal;

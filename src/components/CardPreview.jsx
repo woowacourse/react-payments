@@ -1,16 +1,6 @@
 import PropTypes from 'prop-types';
 import { CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants';
 
-const propTypes = {
-  company: PropTypes.string,
-  number: PropTypes.object,
-  ownerName: PropTypes.string,
-  expiryDate: PropTypes.shape({
-    month: PropTypes.string,
-    year: PropTypes.string,
-  }),
-};
-
 const CardPreview = ({ theme, company, number, expiryDate, ownerName, handleModal }) => {
   const { first, second, third, fourth } = number;
   const upperCaseOwnerName = ownerName.toUpperCase() || DEFAULT_CARD_INFO.OWNER_NAME;
@@ -49,6 +39,39 @@ const CardPreview = ({ theme, company, number, expiryDate, ownerName, handleModa
   );
 };
 
-CardPreview.propTypes = propTypes;
+CardPreview.propTypes = {
+  /**
+   * theme of CardPreview
+   */
+  theme: PropTypes.string,
+  /**
+   * name of the selected card company
+   */
+  company: PropTypes.string,
+  /**
+   * card number entered by the user
+   */
+  number: PropTypes.shape({
+    first: PropTypes.string,
+    second: PropTypes.string,
+    third: PropTypes.string,
+    fourth: PropTypes.string,
+  }),
+  /**
+   * card expiry date entered by the user
+   */
+  expiryDate: PropTypes.shape({
+    month: PropTypes.string,
+    year: PropTypes.string,
+  }),
+  /**
+   * card owner name entered by the user
+   */
+  ownerName: PropTypes.string,
+  /**
+   * control modal when user click CardPriview
+   */
+  handleModal: PropTypes.func.isRequired,
+};
 
 export default CardPreview;

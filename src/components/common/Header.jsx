@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Header = ({ title, left, right }) => {
   return (
     <div className="header-container">
@@ -6,6 +8,21 @@ const Header = ({ title, left, right }) => {
       {right}
     </div>
   );
+};
+
+Header.propTypes = {
+  /**
+   * header title
+   */
+  title: PropTypes.string,
+  /**
+   * left side of header
+   */
+  left: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  /**
+   * right side of header
+   */
+  right: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };
 
 export default Header;

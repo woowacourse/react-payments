@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { ReactComponent as TooltipIcon } from 'assets/tooltip_icon.svg';
 import { TOOLTIP_TYPES } from 'constants';
 
@@ -22,6 +23,13 @@ const Tooltip = ({ type }) => {
       )}
     </div>
   );
+};
+
+Tooltip.propTypes = {
+  /**
+   * content type of tooltip
+   */
+  type: PropTypes.string.isRequired,
 };
 
 export default Tooltip;
