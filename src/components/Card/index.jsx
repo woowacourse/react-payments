@@ -26,14 +26,10 @@ const Card = ({
             {firstCardNumber && <span>{firstCardNumber}</span>}
             {secondCardNumber && <span>{secondCardNumber}</span>}
             {thirdCardNumber && (
-              <span>
-                {Array.from({ length: thirdCardNumber.length }).map(() => '•')}
-              </span>
+              <span>{'•'.repeat(thirdCardNumber.length)}</span>
             )}
             {fourthCardNumber && (
-              <span>
-                {Array.from({ length: fourthCardNumber.length }).map(() => '•')}
-              </span>
+              <span>{'•'.repeat(fourthCardNumber.length)}</span>
             )}
           </styled.CardNumbers>
         </styled.CardMiddle>
