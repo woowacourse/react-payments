@@ -27,7 +27,6 @@ function App() {
     hexColor: '',
     name: '',
   });
-
   const {
     errorMessage: cardNoErrorMessage,
     setErrorMessage: setCardNoErrorMessage,
