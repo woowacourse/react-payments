@@ -2,22 +2,16 @@ import InputContainer from "../elements/InputContainer";
 import { Input } from "../elements/Input";
 import "./index.scss";
 import InputLabel from "../elements/label";
-import useControllInput from "../../hooks/useControllInput";
+import { blockCharacter, limitInputLength } from "../../util/input";
 
 const INPUT_LENGTH = 3;
 
 const SecureCodeInput = ({ state, updateForm }) => {
-  const { itemRef, blockCharacter, limitInputLength } = useControllInput({
-    maxLength: INPUT_LENGTH,
-  });
   return (
     <div className="secure__input__container">
       <InputLabel>보안코드(CVC/CVV)</InputLabel>
       <InputContainer>
         <Input
-          ref={(el) => {
-            itemRef.current[0] = el;
-          }}
           type="password"
           maxLength="3"
           value={state}
@@ -25,7 +19,10 @@ const SecureCodeInput = ({ state, updateForm }) => {
             updateForm({
               type: "secureCode",
               payload: {
-                value: limitInputLength(blockCharacter(target.value)),
+                value: limitInputLength(
+                  blockCharacter(target.value),
+                  INPUT_LENGTH
+                ),
               },
             });
           }}

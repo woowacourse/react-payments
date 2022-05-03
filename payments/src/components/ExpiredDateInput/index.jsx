@@ -4,19 +4,14 @@ import { Input } from "../elements/Input";
 import "./index.scss";
 import InputLabel from "../elements/label";
 import { Fragment } from "react";
+import { blockCharacter, limitInputLength } from "../../util/input";
 
 const INPUT_LENGTH = 2;
 const NUM_OF_INPUT = 2;
 const BACKSPACE_KEY_CODE = 8;
 
 const ExpiredDateInput = ({ state, updateForm }) => {
-  const {
-    itemRef,
-    controllInput,
-    autoFocusBackward,
-    blockCharacter,
-    limitInputLength,
-  } = useControllInput({
+  const { itemRef, controllInput, autoFocusBackward } = useControllInput({
     maxLength: INPUT_LENGTH,
   });
 
@@ -37,7 +32,10 @@ const ExpiredDateInput = ({ state, updateForm }) => {
                 updateForm({
                   type: "expiredDate",
                   payload: {
-                    value: limitInputLength(blockCharacter(target.value)),
+                    value: limitInputLength(
+                      blockCharacter(target.value),
+                      INPUT_LENGTH
+                    ),
                     index: idx,
                   },
                 });

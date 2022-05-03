@@ -1,4 +1,5 @@
 import useControllInput from "../../hooks/useControllInput";
+import { blockCharacter, limitInputLength } from "../../util/input";
 import { Input } from "../elements/Input";
 import InputContainer from "../elements/InputContainer";
 import InputLabel from "../elements/label";
@@ -9,13 +10,7 @@ const NUM_OF_INPUT = 2;
 const BACKSPACE_KEY_CODE = 8;
 
 const CardPasswordInput = ({ state, updateForm }) => {
-  const {
-    itemRef,
-    controllInput,
-    autoFocusBackward,
-    blockCharacter,
-    limitInputLength,
-  } = useControllInput({
+  const { itemRef, controllInput, autoFocusBackward } = useControllInput({
     maxLength: INPUT_LENGTH,
   });
   return (
@@ -35,7 +30,10 @@ const CardPasswordInput = ({ state, updateForm }) => {
                   updateForm({
                     type: "password",
                     payload: {
-                      value: limitInputLength(blockCharacter(target.value)),
+                      value: limitInputLength(
+                        blockCharacter(target.value),
+                        INPUT_LENGTH
+                      ),
                       index: idx,
                     },
                   });

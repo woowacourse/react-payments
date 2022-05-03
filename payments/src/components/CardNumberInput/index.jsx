@@ -4,19 +4,14 @@ import { Input } from "../elements/Input";
 import useControllInput from "../../hooks/useControllInput";
 import InputLabel from "../elements/label";
 import { Fragment } from "react";
+import { blockCharacter, limitInputLength } from "../../util/input";
 
 const INPUT_LENGTH = 4;
 const NUM_OF_INPUT = 4;
 const BACKSPACE_KEY_CODE = 8;
 
 const CardNumberInput = ({ state, updateForm }) => {
-  const {
-    itemRef,
-    controllInput,
-    autoFocusBackward,
-    blockCharacter,
-    limitInputLength,
-  } = useControllInput({
+  const { itemRef, controllInput, autoFocusBackward } = useControllInput({
     maxLength: INPUT_LENGTH,
   });
   return (
@@ -30,7 +25,10 @@ const CardNumberInput = ({ state, updateForm }) => {
                 updateForm({
                   type: "cardNumber",
                   payload: {
-                    value: limitInputLength(blockCharacter(target.value)),
+                    value: limitInputLength(
+                      blockCharacter(target.value),
+                      INPUT_LENGTH
+                    ),
                     index: idx,
                   },
                 });
