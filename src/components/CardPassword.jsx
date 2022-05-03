@@ -26,7 +26,7 @@ const validator = value => {
   }
 };
 
-function CardPassword({ correctCardPwdCallback }) {
+function CardPassword({ dispatch }) {
   const [pwd, setPwd] = useState({
     pwdNoA: '',
     pwdNoB: '',
@@ -51,8 +51,8 @@ function CardPassword({ correctCardPwdCallback }) {
 
     if (isCorrectPwd) setErrorMessage('');
 
-    correctCardPwdCallback(isCorrectPwd);
-  }, [pwd, correctCardPwdCallback]);
+    dispatch({ type: 'CARD_PASSWORD', isCorrectPwd });
+  }, [pwd, dispatch]);
 
   return (
     <InputContainer>

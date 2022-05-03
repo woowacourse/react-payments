@@ -24,7 +24,7 @@ const convertToCardNumberString = numbers => {
   return `${cardNoA} ${cardNoB} ${'*'.repeat(cardNoC.length)} ${'*'.repeat(cardNoD.length)}`;
 };
 
-function CardNumber({ cardNumberCallback }) {
+function CardNumber({ dispatch }) {
   const cardNoARef = useRef(null);
   const cardNoBRef = useRef(null);
   const cardNoCRef = useRef(null);
@@ -63,6 +63,7 @@ function CardNumber({ cardNumberCallback }) {
       ...prevCardNumbers,
       [name]: value,
     }));
+    setErrorMessage('');
   };
 
   const isCorrectCardNumber = Object.values(cardNumbers).join('').length === 16;
@@ -74,9 +75,8 @@ function CardNumber({ cardNumberCallback }) {
   };
 
   useEffect(() => {
-    setErrorMessage('');
-    cardNumberCallback(convertToCardNumberString(cardNumbers));
-  }, [cardNumbers, cardNumberCallback, isCorrectCardNumber]);
+    dispatch({ type: 'CARD_NUMBER', cardNumber: convertToCardNumberString(cardNumbers), isCorrectCardNumber });
+  }, [cardNumbers, dispatch, isCorrectCardNumber]);
 
   return (
     <InputContainer>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, { useRef, useLayoutEffect, useReducer } from 'react';
 
 import {
   CardNumber,
@@ -12,41 +12,87 @@ import {
   DueDate,
 } from './components';
 
-function App() {
-  const targetRef = useRef();
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [cardNumber, setCardNumber] = useState('');
-  const [cardOwnerName, setCardOwnerName] = useState('NAME');
-  const [cardDate, setCardDate] = useState('');
-  const [isCorrectCardDate, setIsCorrectCardDate] = useState(false);
-  const [isCorrectOwnerName, setIsCorrectOwnerName] = useState(false);
-  const [isCorrectSecurityCode, setIsCorrectSecurityCode] = useState(false);
-  const [isCorrectCardPwd, setIsCorrectCardPwd] = useState(false);
-  const [isAllCompleted, setIsAllCompleted] = useState(false);
-  const cardNumberCallback = numbers => setCardNumber(numbers);
-  const cardDateCallback = date => setCardDate(date);
-  const ownerNameCallback = ownerName => setCardOwnerName(ownerName);
-  const correctOwnerNameCallback = isCorrect => setIsCorrectOwnerName(isCorrect);
-  const correctSecurityCodeCallback = isCorrect => setIsCorrectSecurityCode(isCorrect);
-  const correctCardPwdCallback = isCorrect => setIsCorrectCardPwd(isCorrect);
+const initialState = {
+  dimensions: { width: 0, height: 0 },
+  cardOwnerName: 'NAME',
+  cardNumber: '',
+  dueDate: 'MM / YY',
+  isAllCompleted: {
+    isCorrectCardNumber: false,
+    isCorrectPwd: false,
+    isCorrectOwnerName: false,
+    isCorrectCardDate: false,
+    isCorrectSecurityCode: false,
+  },
+};
 
-  useEffect(() => {
-    const isOkCardNumber = cardNumber !== '';
-    const allOk = [
-      isOkCardNumber,
-      isCorrectCardDate,
-      isCorrectOwnerName,
-      isCorrectSecurityCode,
-      isCorrectCardPwd,
-    ].every(ok => ok);
-    setIsAllCompleted(allOk);
-  }, [cardNumber, isCorrectCardDate, isCorrectOwnerName, isCorrectSecurityCode, isCorrectCardPwd]);
+function reducer(state, action) {
+  switch (action.type) {
+    case 'DIMENSIONS':
+      return { ...state, dimensions: action.dimensions };
+    case 'CARD_OWNER_NAME':
+      return {
+        ...state,
+        cardOwnerName: action.cardOwnerName,
+        isAllCompleted: {
+          ...state.isAllCompleted,
+          isCorrectOwnerName: action.isCorrectOwnerName,
+        },
+      };
+    case 'CARD_NUMBER':
+      return {
+        ...state,
+        cardNumber: action.cardNumber,
+        isAllCompleted: {
+          ...state.isAllCompleted,
+          isCorrectCardNumber: action.isCorrectCardNumber,
+        },
+      };
+    case 'DUE_DATE':
+      return {
+        ...state,
+        dueDate: action.dueDate,
+        isAllCompleted: {
+          ...state.isAllCompleted,
+          isCorrectCardDate: action.isCorrectCardDate,
+        },
+      };
+    case 'CARD_SECURITY_CODE':
+      return {
+        ...state,
+        cardSecurityCode: action.cardSecurityCode,
+        isAllCompleted: {
+          ...state.isAllCompleted,
+          isCorrectSecurityCode: action.isCorrectSecurityCode,
+        },
+      };
+    case 'CARD_PASSWORD':
+      return {
+        ...state,
+        isAllCompleted: {
+          ...state.isAllCompleted,
+          isCorrectPwd: action.isCorrectPwd,
+        },
+      };
+    default:
+      throw new Error();
+  }
+}
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const targetRef = useRef();
+
+  const isAllCompleted = Object.values(state.isAllCompleted).every(ok => ok);
 
   useLayoutEffect(() => {
     if (targetRef.current) {
-      setDimensions({
-        width: targetRef.current.offsetWidth,
-        height: targetRef.current.offsetHeight,
+      dispatch({
+        type: 'DIMENSIONS',
+        dimensions: {
+          width: targetRef.current.offsetWidth,
+          height: targetRef.current.offsetHeight,
+        },
       });
     }
   }, []);
@@ -54,16 +100,17 @@ function App() {
   return (
     <div className="app" ref={targetRef}>
       <Header>{'카드추가'}</Header>
-      <CardShape dimensions={dimensions} cardNumber={cardNumber} cardOwnerName={cardOwnerName} cardDate={cardDate} />
-      <CardNumber cardNumberCallback={cardNumberCallback} />
-      <DueDate
-        dimensions={dimensions}
-        cardDateCallback={cardDateCallback}
-        setIsCorrectCardDate={setIsCorrectCardDate}
+      <CardShape
+        dimensions={state.dimensions}
+        cardNumber={state.cardNumber}
+        cardOwnerName={state.cardOwnerName}
+        cardDate={state.dueDate}
       />
-      <CardOwner ownerNameCallback={ownerNameCallback} correctOwnerNameCallback={correctOwnerNameCallback} />
-      <CardSecurityCode correctSecurityCodeCallback={correctSecurityCodeCallback} />
-      <CardPassword correctCardPwdCallback={correctCardPwdCallback} />
+      <CardNumber dispatch={dispatch} />
+      <DueDate dispatch={dispatch} dimensions={state.dimensions} />
+      <CardOwner dispatch={dispatch} />
+      <CardSecurityCode dispatch={dispatch} />
+      <CardPassword dispatch={dispatch} />
       <Footer>
         <TextButton
           hexColor="#525252"

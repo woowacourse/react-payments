@@ -20,7 +20,7 @@ const validator = value => {
   }
 };
 
-function CardSecurityCode({ correctSecurityCodeCallback }) {
+function CardSecurityCode({ dispatch }) {
   const [cardCode, setCardCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -31,16 +31,17 @@ function CardSecurityCode({ correctSecurityCodeCallback }) {
       setErrorMessage(err.message);
       return;
     }
-    setCardCode(value);
-  };
 
-  useEffect(() => {
-    const isCorrectSecurityCode = MAX_CARD_CODE === cardCode.length;
-
+    const isCorrectSecurityCode = MAX_CARD_CODE === value.length;
     if (isCorrectSecurityCode) setErrorMessage('');
 
-    correctSecurityCodeCallback(isCorrectSecurityCode);
-  }, [correctSecurityCodeCallback, cardCode]);
+    setCardCode(value);
+    dispatch({
+      type: 'CARD_SECURITY_CODE',
+      cardSecurityCode: value,
+      isCorrectSecurityCode,
+    });
+  };
 
   return (
     <InputContainer position="relative" width="40%">

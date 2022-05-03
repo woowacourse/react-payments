@@ -18,7 +18,7 @@ const validator = value => {
   }
 };
 
-function CardOwner({ ownerNameCallback, correctOwnerNameCallback }) {
+function CardOwner({ dispatch }) {
   const [ownerName, setOwnerName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -29,13 +29,16 @@ function CardOwner({ ownerNameCallback, correctOwnerNameCallback }) {
       setErrorMessage(err.message);
       return;
     }
-    setOwnerName(convertToUpperCase(value));
-  };
 
-  useEffect(() => {
-    ownerNameCallback(ownerName.trim());
-    correctOwnerNameCallback(ownerName.trim() !== '');
-  }, [ownerName, ownerNameCallback, correctOwnerNameCallback]);
+    const newOwnerName = convertToUpperCase(value);
+    setOwnerName(newOwnerName);
+
+    dispatch({
+      type: 'CARD_OWNER_NAME',
+      cardOwnerName: newOwnerName.trim(),
+      isCorrectOwnerName: newOwnerName.trim() !== '',
+    });
+  };
 
   return (
     <InputContainer position="relative">

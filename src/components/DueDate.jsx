@@ -7,7 +7,7 @@ const getList = (length, n) => Array.from({ length }, (_, i) => `${i + n}`.slice
 
 const MONTH = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
-function DueDate({ dimensions, cardDateCallback, setIsCorrectCardDate }) {
+function DueDate({ dispatch, dimensions }) {
   const now = useRef(new Date());
   const months = useRef(MONTH);
   const years = useRef(getList(10, now.current.getFullYear()));
@@ -16,11 +16,12 @@ function DueDate({ dimensions, cardDateCallback, setIsCorrectCardDate }) {
   const [year, setYear] = useState('YY');
 
   useEffect(() => {
-    const isCorrect = !!(Number(month) && Number(year));
-
-    cardDateCallback(`${month} / ${year}`);
-    setIsCorrectCardDate(isCorrect);
-  }, [month, year, cardDateCallback, setIsCorrectCardDate]);
+    dispatch({
+      type: 'DUE_DATE',
+      dueDate: `${month} / ${year}`,
+      isCorrectCardDate: !!(Number(month) && Number(year)),
+    });
+  }, [month, year, dispatch]);
 
   return (
     <InputContainer>
