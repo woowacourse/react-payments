@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import * as styled from './index.styled';
 
 const AskMarkTooltip = () => {
@@ -11,4 +12,4 @@ const AskMarkTooltip = () => {
   );
 };
 
-export default AskMarkTooltip;
+export default memo(AskMarkTooltip);

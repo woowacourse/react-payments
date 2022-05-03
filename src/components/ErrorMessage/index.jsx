@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import * as styled from './index.styled';
 
@@ -9,4 +10,4 @@ ErrorMessage.propTypes = {
   message: PropTypes.string,
 };
 
-export default ErrorMessage;
+export default memo(ErrorMessage);

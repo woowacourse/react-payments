@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import * as styled from './index.styled';
 
@@ -10,4 +11,4 @@ Label.propTypes = {
   description: PropTypes.string,
 };
 
-export default Label;
+export default memo(Label);

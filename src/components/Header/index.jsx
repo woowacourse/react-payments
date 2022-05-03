@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import * as styled from './index.styled';
 
@@ -16,4 +17,4 @@ Header.propTypes = {
   title: PropTypes.string,
 };
 
-export default Header;
+export default memo(Header);
