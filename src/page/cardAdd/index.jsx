@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState } from 'react';
 
 import FormInput from 'components/common/FormInput';
 import CardPreview from 'components/CardPreview';
@@ -72,7 +72,6 @@ const CardAppPage = () => {
   const [isExpiryDateFilled] = useIsFilled(EXPIRY_DATE, expiryDate, false);
   const [isPrivacyCodeFilled] = useIsFilled(PRIVACY_CODE, privacyCode, false);
   const [isPasswordFilled] = useIsFilled(PASSWORD, password, false);
-
   const [modalVisible, handleModal] = useModal(false);
   const [isCardFront, handleCardPosition] = useToggle(false);
 
