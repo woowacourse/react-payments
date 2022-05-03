@@ -37,17 +37,15 @@ export const StyledInput = styled.input`
   }
 `;
 
-const Input = React.forwardRef((props, ref) => {
+export default function Input(props) {
   const { showPostFix, postfix } = props;
   return (
     <>
-      <StyledInput {...props} ref={ref} />
+      <StyledInput {...props} />
       {showPostFix && <p>{postfix}</p>}
     </>
   );
-});
-
-export default Input;
+}
 
 Input.propTypes = {
   name: PropTypes.string,

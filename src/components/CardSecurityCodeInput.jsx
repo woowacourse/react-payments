@@ -19,9 +19,10 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
       isComplete={securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH}>
       <Input
         type="password"
-        value={securityCode}
-        onChange={onChange}
         placeholder={CREATE_MASKED_CHARACTERS(3)}
+        value={securityCode}
+        maxLength="3"
+        onChange={onChange}
         width="100%"
         isComplete={securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
       />

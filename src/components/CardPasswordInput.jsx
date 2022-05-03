@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
 import InputField from './common/InputField.jsx';
 import Input from './common/Input.jsx';
@@ -6,20 +6,6 @@ import Input from './common/Input.jsx';
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from '../constants';
 
 export default function CardPasswordInput({ password, onChange }) {
-  const [focusInputIndex, setFocusInputIndex] = useState(0);
-  const inputRef = useRef([]);
-
-  useEffect(() => {
-    if (inputRef.current[focusInputIndex].value.length === 1) {
-      const index = password.findIndex(passwordDigit => passwordDigit.length !== 1);
-      inputRef.current[index]?.focus();
-    }
-  }, [password, focusInputIndex]);
-
-  useEffect(() => {
-    inputRef.current[focusInputIndex].focus();
-  }, [focusInputIndex]);
-
   return (
     <InputField
       labelText="카드 비밀번호 앞 두 자리"
@@ -31,12 +17,11 @@ export default function CardPasswordInput({ password, onChange }) {
           key={index}
           type="password"
           value={password[index]}
+          maxLength="1"
           onChange={e => onChange(e, index)}
           width="100%"
           placeholder={CREATE_MASKED_CHARACTERS(1)}
-          onFocus={() => setFocusInputIndex(index)}
-          isComplete={password[0].length === 1}
-          ref={element => (inputRef.current[index] = element)}
+          isComplete={password[index].length === 1}
         />
       ))}
     </InputField>
