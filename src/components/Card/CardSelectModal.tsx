@@ -37,7 +37,7 @@ export default function CardSelectModal({
 
   return (
     <Modal position="bottom" closeModal={closeModal}>
-      <div className="modal flex-center-wrap">
+      <div className="modal-content flex-center-wrap">
         {cardType.map(({ name, color }) => (
           <div
             className="modal-item-container flex-column-center"

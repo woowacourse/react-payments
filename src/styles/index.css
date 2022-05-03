@@ -9,10 +9,18 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   gap: 0.5rem;
   background-color: #e5e5e5;
   font-family: "Roboto";
+  width: 375px;
+  height: 700px;
+  position: relative;
+  margin: auto;
 }
 
 button,
@@ -31,10 +39,9 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 #root {
+  width: 100%;
+  height: 100%;
   background-color: #fff;
-  width: 375px;
-  min-width: 375px;
-  height: 700px;
   position: relative;
   border-radius: 15px;
 }
