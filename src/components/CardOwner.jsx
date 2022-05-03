@@ -3,7 +3,6 @@ import { InputContainer, Label } from './common/styled';
 import ErrorMessage from './common/ErrorMessage';
 import LetterCounter from './common/LetterCounter';
 import Input from './common/Input';
-import useValidator from '../hooks/useValidator';
 
 const MAX_NAME_LENGTH = 30;
 
@@ -22,10 +21,8 @@ const validator = value => {
 
 function CardOwner({ owner, setOwner }) {
   const [errorMessage, setErrorMessage] = useState('');
-  // const { errorMessage, validateInputs } = useValidator(validator);
 
   const handleInputChange = ({ target: { name, value } }) => {
-    // validateInputs(value);
     const upperCaseValue = convertToUpperCase(value);
     try {
       validator(upperCaseValue);
@@ -53,7 +50,6 @@ function CardOwner({ owner, setOwner }) {
           onChange={handleInputChange}
           value={owner.name}
           name="name"
-          required
         />
       </div>
       <ErrorMessage>{errorMessage}</ErrorMessage>

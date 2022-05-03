@@ -45,7 +45,14 @@ function CardSecurityCode({ cardCode, setCardCode }) {
         <Label>보안코드(CVC/CVV)</Label>
         <InputWrapper width="80%">
           <Span>
-            <Input type="password" maxLength="3" onChange={handleInputChange} value={cardCode.cvc} name="cvc" />
+            <Input
+              type="password"
+              maxLength="3"
+              onChange={handleInputChange}
+              value={cardCode.cvc}
+              name="cvc"
+              required
+            />
           </Span>
         </InputWrapper>
         <QuestionContainer>{CVC_EXPLANATION}</QuestionContainer>

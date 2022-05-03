@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { HYPHEN_PRIMARY_COLOR } from '../style';
 import ErrorMessage from './common/ErrorMessage';
 import Input from './common/Input';
@@ -20,7 +20,7 @@ const validator = value => {
   }
 };
 
-function CardNumber({ cardNumbers, setCardNumbers }) {
+function CardNumber({ cardNumbers, setCardNumbers, isCorrectCardNumber }) {
   const cardNoARef = useRef(null);
   const cardNoBRef = useRef(null);
   const cardNoCRef = useRef(null);
@@ -28,8 +28,6 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
   const cardNoRefs = [cardNoARef, cardNoBRef, cardNoCRef, cardNoDRef];
 
   const [errorMessage, setErrorMessage] = useState('');
-
-  const isCorrectCardNumber = useMemo(() => Object.values(cardNumbers).join('').length === 16, [cardNumbers]);
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -79,6 +77,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
             name="cardNoA"
             value={cardNumbers.cardNoA}
             placeholder="1234"
+            required
           />
         </Span>
         <Span>-</Span>
@@ -91,6 +90,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
             name="cardNoB"
             value={cardNumbers.cardNoB}
             placeholder="1234"
+            required
           />
         </Span>
         <Span>-</Span>
@@ -103,6 +103,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
             name="cardNoC"
             value={cardNumbers.cardNoC}
             placeholder="****"
+            required
           />
         </Span>
         <Span>-</Span>
@@ -115,6 +116,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
             name="cardNoD"
             value={cardNumbers.cardNoD}
             placeholder="****"
+            required
           />
         </Span>
       </InputWrapper>
