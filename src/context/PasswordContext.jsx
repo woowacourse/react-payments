@@ -1,21 +1,22 @@
-import { createContext, useState, useRef } from 'react';
+import { createContext, useRef } from 'react';
 import validator from '../../src/validation';
 import { numberRegex } from '../constant/regularExpression';
 import useFocus from '../hooks/useFocus';
+import useSomeInput from '../hooks/useSomeInput';
 
 const PasswordContext = createContext();
 
 function PasswordContextProvider({ children }) {
   const orders = ['first', 'second'];
-  const [password, setPassword] = useState(
-    Object.fromEntries(orders.map(order => [order, '']))
-  );
-  const [validations, setValidations] = useState(
-    Object.fromEntries(orders.map(order => [order, false]))
-  );
-  const refs = Object.fromEntries(orders.map(order => [order, useRef()]));
-  const currentOrderRef = useRef();
+  const {
+    stateObject: password,
+    setStateObject: setPassword,
+    validations,
+    setValidations,
+    refs,
+  } = useSomeInput(orders);
 
+  const currentOrderRef = useRef();
   const isValid = Object.values(validations).every(valid => valid);
 
   const { focusPrevOrder } = useFocus({

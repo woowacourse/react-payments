@@ -3,10 +3,7 @@ import { useContext } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
-import validator from '../../../validation';
-import { numberRegex } from '../../../constant/regularExpression';
 import { ExpiredDateContext } from '../../../context/ExpiredDateContext';
-import useFocus from '../../../hooks/useFocus';
 
 const InputContainer = styled.div`
   display: flex;

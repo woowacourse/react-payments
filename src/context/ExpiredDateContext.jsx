@@ -1,23 +1,24 @@
-import { createContext, useState, useRef } from 'react';
+import { createContext, useRef } from 'react';
 import { PLACEHOLDER } from '../constant';
 import validator from '../../src/validation';
 import useFocus from '../hooks/useFocus';
 import { numberRegex } from '../constant/regularExpression';
+import useSomeInput from '../hooks/useSomeInput';
 
 const ExpiredDateContext = createContext();
 
 function ExpiredDateContextProvider({ children }) {
   const datePlaceholder = { month: 'MM', year: 'YY' };
   const units = ['month', 'year'];
-  const [expiredDate, setExpiredDate] = useState(
-    Object.fromEntries(units.map(unit => [unit, '']))
-  );
-  const [validations, setValidation] = useState(
-    Object.fromEntries(units.map(unit => [unit, false]))
-  );
-  const refs = Object.fromEntries(units.map(unit => [unit, useRef()]));
-  const currentUnitRef = useRef();
+  const {
+    stateObject: expiredDate,
+    setStateObject: setExpiredDate,
+    validations,
+    setValidations,
+    refs,
+  } = useSomeInput(units);
 
+  const currentUnitRef = useRef();
   const isValid = Object.values(validations).every(valid => valid);
 
   const expiredDateString = Object.values(expiredDate).some(date => date)
@@ -49,7 +50,7 @@ function ExpiredDateContextProvider({ children }) {
   };
 
   const updateValidation = (unit, date) => {
-    setValidation(prevValidations => ({
+    setValidations(prevValidations => ({
       ...prevValidations,
       [unit]: validator.validateDate(date),
     }));

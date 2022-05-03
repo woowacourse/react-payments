@@ -1,21 +1,22 @@
-import { createContext, useState, useRef } from 'react';
+import { createContext, useRef } from 'react';
 import validator from '../../src/validation';
 import { numberRegex } from '../constant/regularExpression';
 import useFocus from '../hooks/useFocus';
+import useSomeInput from '../hooks/useSomeInput';
 
 const CardNumberContext = createContext();
 
 function CardNumberContextProvider({ children }) {
   const orders = ['first', 'second', 'third', 'four'];
-  const [numbers, setNumbers] = useState(
-    Object.fromEntries(orders.map(order => [order, '']))
-  );
-  const [validations, setValidations] = useState(
-    Object.fromEntries(orders.map(order => [order, false]))
-  );
-  const refs = Object.fromEntries(orders.map(order => [order, useRef()]));
-  const currentOrderRef = useRef();
+  const {
+    stateObject: numbers,
+    setStateObject: setNumbers,
+    validations,
+    setValidations,
+    refs,
+  } = useSomeInput(orders);
 
+  const currentOrderRef = useRef();
   const isValid = Object.values(validations).every(valid => valid);
 
   const cardNumberString = Object.values(numbers).some(number => number)
