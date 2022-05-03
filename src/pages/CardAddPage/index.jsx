@@ -15,6 +15,7 @@ import useOwnerName from '../../hooks/useOwnerName';
 import useSecurityNumber from '../../hooks/useSecurityNumber';
 import usePassword from '../../hooks/usePassword';
 import useCardAdd from '../../hooks/useCardAdd';
+import OwnerNameInput from '../../components/OwnerNameInput';
 
 function CardAddPage() {
   const [companyName, setCompanyName] = useState('포코카드');
@@ -70,23 +71,11 @@ function CardAddPage() {
           invalidMessage={MESSAGE.INVALID_EXPIRED_DATE}
           width="137px"
         />
-        <LabeledInput
-          value={ownerName}
+        <OwnerNameInput
+          ownerName={ownerName}
           handleInputChange={handleChangeOwnerNameInput}
-          headerWidth="318px"
-          isShowLengthChecker={true}
+          isValid={isValidOwnerName}
           invalidMessage={MESSAGE.INVALID_OWNER_NAME}
-          inputProps={{
-            type: 'text',
-            width: '318px',
-            placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
-            isCenter: false,
-            maxLength: 30,
-            isValid: isValidOwnerName,
-          }}
-          inputLabelProps={{
-            label: '카드 소유자 이름(선택)',
-          }}
         />
         <FormRow>
           <LabeledInput
