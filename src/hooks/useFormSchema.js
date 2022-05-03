@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { isNumeric } from '../utils/commons';
+import { isBackspace, isNumeric } from '../utils/commons';
 
 const InvalidNumberCharList = ['.', 'e', ' '];
 
@@ -120,6 +120,12 @@ const useFormSchema = (formSchema) => {
       nextElement.focus();
   };
 
+  const focusPrevElement = (keyCode, name, prevElement) => {
+    if (isBackspace(keyCode) && values[name] === '' && prevElement) {
+      prevElement.focus();
+    }
+  };
+
   return {
     values,
     setValues,
@@ -128,6 +134,7 @@ const useFormSchema = (formSchema) => {
     setErrors,
     setErrorMessages,
     focusNextElement,
+    focusPrevElement,
   };
 };
 

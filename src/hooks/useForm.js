@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { isBackspace } from '../utils/commons';
 import useObjectRef from './useObjectRef';
 import useFormSchema from './useFormSchema';
 
@@ -15,6 +14,7 @@ const useForm = ({ formSchema, onSubmit, onSubmitError }) => {
     setErrors,
     setErrorMessages,
     focusNextElement,
+    focusPrevElement,
   } = useFormSchema(formSchema);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,13 +45,9 @@ const useForm = ({ formSchema, onSubmit, onSubmitError }) => {
   const handleKeyDown = (event) => {
     const {
       target: { name },
+      keyCode,
     } = event;
-
-    if (isBackspace(event) && values[name] === '') {
-      const prevElement = getPrevElement(name);
-
-      if (prevElement) prevElement.focus();
-    }
+    focusPrevElement(keyCode, name, getPrevElement(name));
   };
 
   const handleSubmit = async (event) => {
