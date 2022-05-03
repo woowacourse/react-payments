@@ -10,3 +10,12 @@ export const parameters = {
     },
   },
 };
+
+export const decorators = [
+  (Story) => (
+    <>
+      {Story()}
+      <div id="modal"></div>
+    </>
+  ),
+];

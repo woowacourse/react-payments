@@ -8,7 +8,7 @@ import OwnerNameInput from "../../components/OwnerNameInput";
 import SecureCodeInput from "../../components/SecureCodeInput";
 import useCard from "../../hooks/useCard";
 import NextButton from "../../components/NextButton";
-import CardColorPicker from "../../components/ColorPicker";
+import CardColorPicker from "../../components/CardColorPicker";
 import { useState } from "react";
 
 const CardAdd = () => {
@@ -32,6 +32,9 @@ const CardAdd = () => {
       alert(e.message);
     }
   };
+  const closeModal = () => {
+    setVisible(false);
+  };
 
   return (
     <>
@@ -52,11 +55,9 @@ const CardAdd = () => {
         </div>
         <NextButton onClick={submitCard}>다음</NextButton>
       </div>
-      <CardColorPicker
-        visible={visible}
-        setVisible={setVisible}
-        updateForm={dispatch}
-      />
+      {visible && (
+        <CardColorPicker closeModal={closeModal} updateForm={dispatch} />
+      )}
     </>
   );
 };
