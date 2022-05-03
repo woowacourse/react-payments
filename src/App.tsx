@@ -12,7 +12,7 @@ import CardContainer from './components/atoms/card/CardContainer';
 
 function App() {
   return (
-    <div id="card-form" css={style}>
+    <form id="card-form" css={style}>
       <Navigation />
       <AppProvider>
         <div css={cardWrapper}>
@@ -25,7 +25,7 @@ function App() {
         <CardPasswordFieldset />
         <ConfirmButtonContainer>다음</ConfirmButtonContainer>
       </AppProvider>
-    </div>
+    </form>
   );
 }
 

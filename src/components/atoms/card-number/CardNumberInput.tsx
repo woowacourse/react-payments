@@ -7,7 +7,7 @@ type Props = {
 };
 
 const CardNumberInput = forwardRef<HTMLInputElement, Props>(({ onChange, value }, ref) => {
-  return <Input pattern="[0-9*]" onChange={onChange} value={value} ref={ref} />;
+  return <Input onChange={onChange} value={value} ref={ref} />;
 });
 CardNumberInput.displayName = 'CardNumberInput';
 

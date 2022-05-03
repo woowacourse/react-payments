@@ -6,7 +6,7 @@ import IconBackArrow from '../../images/back-arrow.svg';
 function BackButton() {
   return (
     <div>
-      <Button>
+      <Button type="button">
         <img
           src={IconBackArrow}
           alt=""
