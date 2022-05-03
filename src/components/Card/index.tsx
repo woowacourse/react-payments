@@ -9,18 +9,23 @@ export default function Card({
   shouldShowTypeSelection = false,
   size = "small",
   marginBottom,
+  pointer = false,
 }: {
   cardInfo: CardInfo;
   shouldShowTypeSelection?: boolean;
   size?: "big" | "small";
   marginBottom?: string;
+  pointer?: boolean;
 }) {
   const { cardNumbers, expirationDate, userName, cardType } = cardInfo;
   const { isModalOpened, openModal, closeModal } = useModal(true);
 
   return (
     <>
-      <div className="card-box flex-center" style={{ marginBottom }}>
+      <div
+        className="card-box flex-center"
+        style={{ marginBottom, cursor: pointer ? "pointer" : "auto" }}
+      >
         <div
           className={`${size}-card flex-column-center`}
           style={{ backgroundColor: cardType.color }}

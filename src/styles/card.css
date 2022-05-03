@@ -1,5 +1,6 @@
 .card-box {
   margin: 10px 0 25px;
+  cursor: pointer;
 }
 
 .small-card {
@@ -17,8 +18,6 @@
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-
-  cursor: pointer;
 }
 
 .empty-card {
@@ -27,6 +26,7 @@
   font-size: 30px;
   font-weight: 400;
   color: #575757;
+  cursor: pointer;
 }
 
 .small-card__chip {
