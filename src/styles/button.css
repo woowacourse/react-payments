@@ -1,0 +1,29 @@
+.button-container {
+  padding: 10px;
+}
+
+.button-container.right {
+  text-align: right;
+}
+
+.button {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 15px;
+  color: #fff;
+  background-color: rgb(71, 104, 255);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  filter: brightness(1.2);
+}
+
+.button:disabled {
+  cursor: default;
+  background-color: #ddd;
+  filter: brightness(1);
+}
