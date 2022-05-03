@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
 import { numberRegex } from '../../../constant/regularExpression';
 import { PasswordContext } from '../../../context/PasswordContext';
+import useFocus from '../../../hooks/useFocus';
 
 const InputContainer = styled.div`
   display: flex;
@@ -24,6 +25,14 @@ function PasswordInput() {
     setPassword,
     setValidations,
   } = useContext(PasswordContext);
+
+  const { focusPrevOrder } = useFocus({
+    validate: validator.validatePassword,
+    orders,
+    validations,
+    refs,
+    currentOrderRef,
+  });
 
   const onPasswordChange = ({ target, nativeEvent: { data, inputType } }) => {
     if (numberRegex.test(data) || !data) {
@@ -47,33 +56,6 @@ function PasswordInput() {
       [order]: validator.validatePassword(number),
     }));
   };
-
-  const focusPrevOrder = (currentOrder, newNumber, inputType) => {
-    if (
-      currentOrder !== orders[0] &&
-      newNumber.length === 0 &&
-      inputType === 'deleteContentBackward'
-    ) {
-      const currentIndex = orders.findIndex(order => order === currentOrder);
-      refs[orders[currentIndex - 1]].current.focus();
-    }
-  };
-
-  const focusInvalidInput = order => {
-    if (order && validator.validatePassword(refs[order].current.value)) {
-      if (Object.values(validations).every(isValid => isValid)) {
-        return;
-      }
-      const invalidOrder = Object.keys(validations).find(
-        order => !validations[order]
-      );
-      refs[invalidOrder].current.focus();
-    }
-  };
-
-  useEffect(() => {
-    focusInvalidInput(currentOrderRef.current);
-  });
 
   return (
     <LabeledInput text="카드 비밀번호">

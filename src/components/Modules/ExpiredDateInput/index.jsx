@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
 import validator from '../../../validation';
 import { numberRegex } from '../../../constant/regularExpression';
 import { ExpiredDateContext } from '../../../context/ExpiredDateContext';
+import useFocus from '../../../hooks/useFocus';
 
 const InputContainer = styled.div`
   display: flex;
@@ -26,6 +27,14 @@ function ExpiredDateInput() {
     setExpiredDate,
     setValidation,
   } = useContext(ExpiredDateContext);
+
+  const { focusPrevOrder } = useFocus({
+    validate: validator.validateExpiredDate,
+    orders: units,
+    validations,
+    refs,
+    currentOrderRef: currentUnitRef,
+  });
 
   const onDateChange = ({ target, nativeEvent: { data, inputType } }) => {
     if ((numberRegex.test(data) || !data) && target.value.length <= 2) {
@@ -49,33 +58,6 @@ function ExpiredDateInput() {
       [unit]: validator.validateDate(date),
     }));
   };
-
-  const focusPrevOrder = (currentUnit, newDate, inputType) => {
-    if (
-      currentUnit !== units[0] &&
-      newDate.length === 0 &&
-      inputType === 'deleteContentBackward'
-    ) {
-      const currentIndex = units.findIndex(unit => unit === currentUnit);
-      refs[units[currentIndex - 1]].current.focus();
-    }
-  };
-
-  const focusInvalidInput = unit => {
-    if (unit && validator.validateExpiredDate(refs[unit].current.value)) {
-      if (Object.values(validations).every(isValid => isValid)) {
-        return;
-      }
-      const invalidUnit = Object.keys(validations).find(
-        unit => !validations[unit]
-      );
-      refs[invalidUnit].current.focus();
-    }
-  };
-
-  useEffect(() => {
-    focusInvalidInput(currentUnitRef.current);
-  });
 
   return (
     <LabeledInput text="만료일">

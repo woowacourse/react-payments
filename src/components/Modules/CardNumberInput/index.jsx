@@ -1,4 +1,4 @@
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
@@ -6,6 +6,7 @@ import Input from '../../Atoms/Input';
 import validator from '../../../validation';
 import { numberRegex } from '../../../constant/regularExpression';
 import { CardNumberContext } from '../../../context/CardNumberContext';
+import useFocus from '../../../hooks/useFocus';
 
 const InputContainer = styled.div`
   display: flex;
@@ -26,6 +27,14 @@ function CardNumberInput() {
     setValidations,
   } = useContext(CardNumberContext);
 
+  const { focusPrevOrder } = useFocus({
+    validate: validator.validateCardNumber,
+    orders,
+    validations,
+    refs,
+    currentOrderRef,
+  });
+
   const handleNumberChange = ({ target, nativeEvent: { data, inputType } }) => {
     if ((numberRegex.test(data) || !data) && target.value.length <= 4) {
       const order = target.name;
@@ -45,33 +54,6 @@ function CardNumberInput() {
   const updateValidations = (order, isValid) => {
     setValidations(prevValidation => ({ ...prevValidation, [order]: isValid }));
   };
-
-  const focusPrevOrder = (currentOrder, newNumber, inputType) => {
-    if (
-      currentOrder !== orders[0] &&
-      newNumber.length === 0 &&
-      inputType === 'deleteContentBackward'
-    ) {
-      const currentIndex = orders.findIndex(order => order === currentOrder);
-      refs[orders[currentIndex - 1]].current.focus();
-    }
-  };
-
-  const focusInvalidInput = order => {
-    if (order && validator.validateCardNumber(refs[order].current.value)) {
-      if (Object.values(validations).every(isValid => isValid)) {
-        return;
-      }
-      const invalidOrder = Object.keys(validations).find(
-        order => !validations[order]
-      );
-      refs[invalidOrder].current.focus();
-    }
-  };
-
-  useEffect(() => {
-    focusInvalidInput(currentOrderRef.current);
-  });
 
   return (
     <LabeledInput text="카드 번호">
