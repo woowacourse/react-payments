@@ -14,6 +14,8 @@ function ExpiredDateContextProvider({ children }) {
   const refs = Object.fromEntries(units.map(unit => [unit, useRef()]));
   const currentUnitRef = useRef();
 
+  const isValid = Object.values(validations).every(valid => valid);
+
   return (
     <ExpiredDateContext.Provider
       value={{
@@ -21,6 +23,7 @@ function ExpiredDateContextProvider({ children }) {
         units,
         expiredDate,
         validations,
+        isValid,
         refs,
         currentUnitRef,
         setExpiredDate,

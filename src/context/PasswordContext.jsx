@@ -13,12 +13,15 @@ function PasswordContextProvider({ children }) {
   const refs = Object.fromEntries(orders.map(order => [order, useRef()]));
   const currentOrderRef = useRef();
 
+  const isValid = Object.values(validations).every(valid => valid);
+
   return (
     <PasswordContext.Provider
       value={{
         orders,
         password,
         validations,
+        isValid,
         refs,
         currentOrderRef,
         setPassword,

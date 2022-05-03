@@ -8,7 +8,13 @@ function SecurityNumberContextProvider({ children }) {
 
   return (
     <SecurityNumberContext.Provider
-      value={{ number, validation, setNumber, setValidation }}
+      value={{
+        number,
+        validation,
+        isValid: validation,
+        setNumber,
+        setValidation,
+      }}
     >
       {children}
     </SecurityNumberContext.Provider>

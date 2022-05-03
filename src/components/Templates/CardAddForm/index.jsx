@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import CardNumberInput from '../../Modules/CardNumberInput';
 import ExpiredDateInput from '../../Modules/ExpiredDateInput';
@@ -5,6 +6,11 @@ import CardOwnerInput from '../../Modules/CardOwnerInput';
 import SecurityNumberInput from '../../Modules/SecurityNumberInput';
 import PasswordInput from '../../Modules/PasswordInput';
 import SubmitButton from '../../Atoms/SubmitButton';
+import { CardNumberContext } from '../../../context/CardNumberContext';
+import { ExpiredDateContext } from '../../../context/ExpiredDateContext';
+import { CardOwnerContext } from '../../../context/CardOwnerContext';
+import { SecurityNumberContext } from '../../../context/SecurityNumberContext';
+import { PasswordContext } from '../../../context/PasswordContext';
 
 const FormContainer = styled.form`
   display: flex;
@@ -18,6 +24,20 @@ const ButtonContainer = styled.div`
 `;
 
 function CardAddForm() {
+  const { isValid: isCardNumberValid } = useContext(CardNumberContext);
+  const { isValid: isExpiredDateValid } = useContext(ExpiredDateContext);
+  const { isValid: isOwnerNameValid } = useContext(CardOwnerContext);
+  const { isValid: isSecurityNumberValid } = useContext(SecurityNumberContext);
+  const { isValid: isPasswordValid } = useContext(PasswordContext);
+
+  const isValidForm = [
+    isCardNumberValid,
+    isExpiredDateValid,
+    isOwnerNameValid,
+    isSecurityNumberValid,
+    isPasswordValid,
+  ].every(valid => valid);
+
   return (
     <FormContainer>
       <CardNumberInput />
@@ -26,7 +46,7 @@ function CardAddForm() {
       <SecurityNumberInput />
       <PasswordInput />
       <ButtonContainer>
-        <SubmitButton width="51px" height="34px" hidden={false}>
+        <SubmitButton width="51px" height="34px" hidden={!isValidForm}>
           다음
         </SubmitButton>
       </ButtonContainer>

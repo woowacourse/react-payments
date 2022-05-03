@@ -8,7 +8,7 @@ function CardOwnerContextProvider({ children }) {
 
   return (
     <CardOwnerContext.Provider
-      value={{ name, validation, setName, setValidation }}
+      value={{ name, validation, isValid: validation, setName, setValidation }}
     >
       {children}
     </CardOwnerContext.Provider>

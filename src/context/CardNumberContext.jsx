@@ -13,12 +13,15 @@ function CardNumberContextProvider({ children }) {
   const refs = Object.fromEntries(orders.map(order => [order, useRef()]));
   const currentOrderRef = useRef();
 
+  const isValid = Object.values(validations).every(valid => valid);
+
   return (
     <CardNumberContext.Provider
       value={{
         orders,
         numbers,
         validations,
+        isValid,
         refs,
         currentOrderRef,
         setNumbers,

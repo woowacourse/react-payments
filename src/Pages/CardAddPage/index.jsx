@@ -37,12 +37,7 @@ function CardAddPage() {
               <Page>
                 <Head>카드 추가</Head>
                 <CardContainer>
-                  <Card
-                    companyName="신한카드"
-                    cardNumbers={[1111]}
-                    ownerName="kam"
-                    expiredDate="11/11"
-                  />
+                  <Card />
                 </CardContainer>
                 <AddFormContainer>
                   <CardAddForm />
