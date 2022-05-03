@@ -16,19 +16,16 @@
   .name {
     color: #525252;
   }
+  background-color: transparent;
   &:hover {
-    .name {
-      animation-name: colorChange;
-      animation-duration: 1s;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-    }
-    @keyframes colorChange {
-      0% {
-        color: white;
-      }
-      50% {
-        color: black;
+    animation-name: scaleUp;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+
+    @keyframes scaleUp {
+      100% {
+        transform: scale(1.1);
       }
     }
   }
