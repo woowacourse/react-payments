@@ -1,38 +1,17 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import type { InputChangeFunction } from "types";
-import type { CardInfo, CardInfoValidation, CardInfoValidationTarget } from "types/cardInfo";
+import { CardInfoContext } from "contexts/CardInfoProvider";
+import { CardsContext } from "contexts/CardsProvider";
+import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
+import type { CardInfoValidationTarget } from "types/cardInfo";
 
 import CardExpirationDate from "./CardExpirationDate";
 import CardNumber from "./CardNumber";
 import CardPassword from "./CardPassword";
 import CardSecurityCode from "./CardSecurityCode";
 import CardUserName from "./CardUserName";
-interface CardInfoFormProps {
-  cardInfo: CardInfo;
-  onChangeCardNumber: InputChangeFunction;
-  onChangeExpirationDate: InputChangeFunction;
-  onChangeUserName: InputChangeFunction;
-  onBlurUserName: () => void;
-  onChangeSecurityCode: InputChangeFunction;
-  onChangePassword: InputChangeFunction;
-  resetCardInfo: () => void;
-  cardInfoValidation: CardInfoValidation;
-  addCard: () => void;
-}
 
-export default function CardInfoForm({
-  cardInfo,
-  onChangeCardNumber,
-  onChangeExpirationDate,
-  onChangeUserName,
-  onBlurUserName,
-  onChangeSecurityCode,
-  onChangePassword,
-  resetCardInfo,
-  cardInfoValidation,
-  addCard,
-}: CardInfoFormProps) {
-  const { cardNumbers, expirationDate, userName, securityCode, password } = cardInfo;
+export default function CardInfoForm() {
+  const { cardInfo, cardInfoValidation, resetCardInfo } = useContext(CardInfoContext);
+  const { addCard } = useContext(CardsContext);
   const [isNextButtonShown, setIsNextButtonShown] = useState(true);
   const inputsRef = useRef<HTMLInputElement[]>(null);
   const formRef = useCallback((node: HTMLFormElement) => {
@@ -51,7 +30,7 @@ export default function CardInfoForm({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    addCard();
+    addCard(cardInfo);
     if (window.confirm("카드를 등록하시겠습니까?")) {
       alert("카드 등록이 완료되었습니다.");
     }
@@ -62,36 +41,11 @@ export default function CardInfoForm({
 
   return (
     <form ref={formRef} id="card-info-form" onSubmit={handleSubmit}>
-      <CardNumber
-        cardNumbers={cardNumbers}
-        onChange={onChangeCardNumber}
-        validation={cardInfoValidation.cardNumbers}
-        inputs={inputsRef.current}
-      />
-      <CardExpirationDate
-        expirationDate={expirationDate}
-        onChange={onChangeExpirationDate}
-        validation={cardInfoValidation.expirationDate}
-        inputs={inputsRef.current}
-      />
-      <CardUserName
-        userName={userName}
-        onChange={onChangeUserName}
-        onBlur={onBlurUserName}
-        inputs={inputsRef.current}
-      />
-      <CardSecurityCode
-        securityCode={securityCode}
-        onChange={onChangeSecurityCode}
-        validation={cardInfoValidation.securityCode}
-        inputs={inputsRef.current}
-      />
-      <CardPassword
-        password={password}
-        onChange={onChangePassword}
-        validation={cardInfoValidation.password}
-        inputs={inputsRef.current}
-      />
+      <CardNumber inputs={inputsRef.current} />
+      <CardExpirationDate inputs={inputsRef.current} />
+      <CardUserName inputs={inputsRef.current} />
+      <CardSecurityCode inputs={inputsRef.current} />
+      <CardPassword inputs={inputsRef.current} />
       <button className="submit-button" disabled={!isNextButtonShown}>
         다음
       </button>

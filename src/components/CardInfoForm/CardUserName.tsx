@@ -1,18 +1,17 @@
-import React from "react";
-import type { InputChangeFunction } from "types";
+import { CardInfoContext } from "contexts/CardInfoProvider";
+import React, { useContext } from "react";
 
 import { MAX_USER_NAME_LENGTH } from "../../constant";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
-interface CardUserNameProps {
-  userName: string;
-  onChange: InputChangeFunction;
-  onBlur: () => void;
-  inputs: HTMLInputElement[];
-}
+export default function CardUserName({ inputs }: { inputs: HTMLInputElement[] }) {
+  const {
+    cardInfo: { userName },
+    onBlurUserName: onBlur,
+    onChangeUserName: onChange,
+  } = useContext(CardInfoContext);
 
-export default function CardUserName({ userName, onChange, onBlur, inputs }: CardUserNameProps) {
   return (
     <InputContainer
       title="카드 소유자 이름(선택)"
