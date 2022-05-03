@@ -17,6 +17,7 @@ import { Card } from '../components/common/Card';
 import { PageTitle } from '../components/common/PageTitle';
 import { ModalSelector } from '../components/common/ModalSelector';
 import { useModalSelector } from '../hooks/useModalSelector';
+import { MarginTB10 } from '../components/common/styled';
 
 const CARD_TYPES = [
   { name: '포코', color: 'gold' },
@@ -59,10 +60,12 @@ export const CardRegisterPage = () => {
   return (
     <>
       <PageTitle>카드 추가</PageTitle>
-      <Card
-        cardInfo={cardInfo}
-        onClick={() => openModal(COMPONENTS.CARD_TYPE)}
-      />
+      <MarginTB10>
+        <Card
+          cardInfo={cardInfo}
+          onClick={() => openModal(COMPONENTS.CARD_TYPE)}
+        />
+      </MarginTB10>
       <CardNumbersInputForm
         cardType={cardInfo.cardType}
         cardNumbers={cardInfo.cardNumbers}

@@ -49,3 +49,7 @@ export const InputBox = styled.div`
   justify-content: ${(props) => props.justifyContent || 'unset'};
   padding: ${(props) => props.padding || '0'};
 `;
+
+export const MarginTB10 = styled.div`
+  margin: 10px 0;
+`;
