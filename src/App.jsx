@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import {
@@ -13,6 +13,7 @@ import CardInputs from './components/CardInputs';
 import { Button, Card } from './components/common';
 
 import { ReactComponent as Arrow } from './assets/arrow.svg';
+import isValidCardInputs from './utils/validator';
 
 const StyledPage = styled.form`
   background: #fff;
@@ -51,14 +52,23 @@ function App() {
   const [CVC, setCVC] = useCVC('');
   const [firstPassword, setFirstPassword] = useCardPassword('');
   const [secondPassword, setSecondPassword] = useCardPassword('');
-  const requiredList = [
-    cardNumber,
-    validDate,
-    CVC,
-    firstPassword,
-    secondPassword,
-  ];
   const [isModalOpen, toggleIsModalOpen] = useModal(false);
+  const [isPossible, setIsPossible] = useState(false);
+
+  useEffect(() => {
+    try {
+      isValidCardInputs(
+        cardNumber,
+        validDate,
+        CVC,
+        firstPassword,
+        secondPassword
+      );
+      setIsPossible(true);
+    } catch (e) {
+      setIsPossible(false);
+    }
+  }, [cardNumber, validDate, CVC, firstPassword, secondPassword]);
 
   return (
     <StyledPage>
@@ -89,7 +99,7 @@ function App() {
         secondPassword={secondPassword}
         setSecondPassword={setSecondPassword}
       />
-      {requiredList.every(value => value !== '') && (
+      {isPossible && (
         <NextButton color="#04C09E" content="다음" fontWeight="bold" />
       )}
     </StyledPage>
