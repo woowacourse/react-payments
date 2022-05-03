@@ -1,5 +1,3 @@
-export const cardNumberInputRegex = /[0-9-]/;
-
 export const expiredDateInputRegex = /[0-9/]/;
 
 export const ownerNameInputRegex = /[a-zA-Z ]/;

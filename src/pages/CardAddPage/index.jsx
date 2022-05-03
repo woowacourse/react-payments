@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Head from '../../components/Head';
 import Card from '../../components/Card';
+import CardNumbersInput from '../../components/CardNumbersInput';
 import LabeledInput from '../../components/LabeledInput';
 import Tooltip from '../../components/Tooltip';
 import SubmitButton from '../../components/SubmitButton';
@@ -17,8 +18,7 @@ import useCardAdd from '../../hooks/useCardAdd';
 function CardAddPage() {
   const [companyName, setCompanyName] = useState('포코카드');
 
-  const { cardNumbers, convertedCardNumbers, isValidCardNumbers, handleChangeCardNumbersInput } =
-    useCardNumbers();
+  const { cardNumbers, isValidCardNumbers, handleChangeCardNumbersInput } = useCardNumbers();
   const { convertedExpiredDate, isValidExpiredDate, handleChangeExpiredDateInput } =
     useExpiredDate();
   const { ownerName, isValidOwnerName, handleChangeOwnerNameInput } = useOwnerName();
@@ -56,20 +56,11 @@ function CardAddPage() {
         />
       </CardSection>
       <Form onSubmit={handleSubmit}>
-        <LabeledInput
-          value={convertedCardNumbers.join('-')}
+        <CardNumbersInput
+          cardNumbers={cardNumbers}
           handleInputChange={handleChangeCardNumbersInput}
+          isValid={isValidCardNumbers}
           invalidMessage={MESSAGE.INVALID_CARD_NUMBER}
-          inputProps={{
-            type: 'text',
-            width: '318px',
-            maxLength: 19,
-            placeholder: 'ex. 0000-0000-0000-0000',
-            isValid: isValidCardNumbers,
-          }}
-          inputLabelProps={{
-            label: '카드 번호',
-          }}
         />
         <LabeledInput
           value={convertedExpiredDate}
