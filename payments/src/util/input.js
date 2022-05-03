@@ -7,7 +7,10 @@ const limitInputLength = (value, maxLength) => {
 };
 
 const limitExceptUpperCase = (value) => {
-  return value.replace(/[^A-Z\s]*/g, "").replace(".", "");
+  return value
+    .replace(/[^A-Za-z\s]*/g, "")
+    .replace(".", "")
+    .toUpperCase();
 };
 
 export { blockCharacter, limitExceptUpperCase, limitInputLength };
