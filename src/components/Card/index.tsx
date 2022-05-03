@@ -1,17 +1,13 @@
+import { CardInfoContext } from "contexts/CardInfoProvider";
 import useModal from "hooks/useModal";
-import React from "react";
-import { CardInfo } from "types/cardInfo";
+import React, { useContext } from "react";
 
 import CardSelectModal from "./CardSelectModal";
 
-export default function Card({
-  cardInfo,
-  shouldShowTypeSelection = false,
-}: {
-  cardInfo: CardInfo;
-  shouldShowTypeSelection?: boolean;
-}) {
-  const { cardNumbers, expirationDate, userName, cardType } = cardInfo;
+export default function Card() {
+  const {
+    cardInfo: { cardNumbers, expirationDate, userName, cardType },
+  } = useContext(CardInfoContext);
   const { isModalOpened, openModal, closeModal } = useModal(true);
 
   return (
@@ -44,9 +40,7 @@ export default function Card({
           </div>
         </div>
       </div>
-      {shouldShowTypeSelection && (
-        <CardSelectModal isOpened={isModalOpened} closeModal={closeModal} />
-      )}
+      <CardSelectModal isOpened={isModalOpened} closeModal={closeModal} />
     </>
   );
 }
