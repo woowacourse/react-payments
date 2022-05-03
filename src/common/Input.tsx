@@ -24,7 +24,11 @@ export default function Input({ size, onChange, classes, align, ...props }: Inpu
   return (
     <input
       className={`input-basic ${classes} ${sizeTag[size]} ${alignTag[align]}`}
-      onChange={onChange}
+      onChange={e => {
+        if (e.target.checkValidity()) {
+          onChange(e);
+        }
+      }}
       {...props}
     />
   );
