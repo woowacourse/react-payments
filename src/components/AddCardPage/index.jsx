@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import {
+  checkCardNumber,
   checkExpiredMonth,
   checkExpiredYear,
   checkNumberOnly,
@@ -29,18 +30,34 @@ const AddCardPage = () => {
   const [isValidatedValueLength, setIsValidatedValueLength] = useState(false);
 
   const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] =
-    useInputValue({ isValidateInput: checkNumberOnly });
+    useInputValue({
+      isValidateInput: checkCardNumber,
+      isInputAvailableValue: checkNumberOnly,
+    });
   const [secondCardNumber, isSecondCardNumberError, onChangeSecondCardNumber] =
-    useInputValue({ isValidateInput: checkNumberOnly });
+    useInputValue({
+      isValidateInput: checkCardNumber,
+      isInputAvailableValue: checkNumberOnly,
+    });
   const [thirdCardNumber, isThirdCardNumberError, onChangeThirdCardNumber] =
-    useInputValue({ isValidateInput: checkNumberOnly });
+    useInputValue({
+      isValidateInput: checkCardNumber,
+      isInputAvailableValue: checkNumberOnly,
+    });
   const [fourthCardNumber, isFourthCardNumberError, onChangeFourthCardNumber] =
-    useInputValue({ isValidateInput: checkNumberOnly });
+    useInputValue({
+      isValidateInput: checkCardNumber,
+      isInputAvailableValue: checkNumberOnly,
+    });
 
   const [expiredMonth, isExpiredMonthError, onChangeExpiredMonth] =
-    useInputValue({ isValidateInput: checkExpiredMonth });
+    useInputValue({
+      isValidateInput: checkExpiredMonth,
+      isInputAvailableValue: checkNumberOnly,
+    });
   const [expiredYear, isExpiredYearError, onChangeExpiredYear] = useInputValue({
     isValidateInput: checkExpiredYear,
+    isInputAvailableValue: checkNumberOnly,
   });
 
   const [ownerName, isOwnerNameError, onChangeOwnerName] = useInputValue({
@@ -49,15 +66,18 @@ const AddCardPage = () => {
 
   const [secureCode, isSecureCodeError, onChangeSecureCode] = useInputValue({
     isValidateInput: checkSecureCode,
+    isInputAvailableValue: checkNumberOnly,
   });
 
   const [firstPassword, isFirstPasswordError, onChangeFirstPassword] =
     useInputValue({
       isValidateInput: checkPassword,
+      isInputAvailableValue: checkNumberOnly,
     });
   const [secondPassword, isSecondPasswordError, onChangeSecondPassword] =
     useInputValue({
       isValidateInput: checkPassword,
+      isInputAvailableValue: checkNumberOnly,
     });
 
   const [cardType, setCardType] = useState('red');

@@ -3,8 +3,13 @@ export const checkNumberOnly = (number) => {
   return REG_EXP.NUMBER_ONLY.test(number);
 };
 
+export const checkCardNumber = (cardNumber) => {
+  return cardNumber.length === 4;
+};
+
 export const checkExpiredMonth = (month) => {
-  return checkNumberOnly(month) && month >= 1 && month <= 12;
+  month = Number(month);
+  return month >= 1 && month <= 12;
 };
 
 export const checkExpiredYear = (year) => {
@@ -20,9 +25,9 @@ export const checkOwnerName = (name) => {
 };
 
 export const checkSecureCode = (secureCode) => {
-  return checkNumberOnly(secureCode) && secureCode.length === 3;
+  return secureCode.length === 3;
 };
 
 export const checkPassword = (password) => {
-  return checkNumberOnly(password) && password.length === 1;
+  return password.length === 1;
 };
