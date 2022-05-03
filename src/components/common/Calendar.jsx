@@ -19,7 +19,7 @@ const SelectListWrapper = styled.div``;
 const List = styled.ul`
   display: flex;
   flex-direction: column;
-  align-itemlist: center;
+  align-items: center;
   justify-content: center;
   list-style: none;
   padding-left: 0;
