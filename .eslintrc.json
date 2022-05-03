@@ -52,6 +52,7 @@
       {
         "assert": "either" // either check for `htmlFor` or `nesting`
       }
-    ]
+    ],
+    "no-use-before-define": ["error", { "variable": false }]
   }
 }
