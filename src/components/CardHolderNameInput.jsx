@@ -51,6 +51,7 @@ export default function CardHolderNameInput({ holderName, setHolderName }) {
         type={"text"}
         value={holderName}
         placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
+        name={"holder-name"}
         maxLength={30}
         width={"full"}
         textAlign={"left"}

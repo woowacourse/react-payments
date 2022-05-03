@@ -86,6 +86,7 @@ export default function CardSecurityCodeInput({
         type={"password"}
         value={securityCode}
         placeholder={CREATE_MASKED_CHARACTERS(3)}
+        name={"security-code"}
         maxLength={3}
         required
         width={"full"}

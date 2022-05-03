@@ -83,6 +83,7 @@ export default function CardPasswordInput({ password, setPassword }) {
                 type={"password"}
                 value={password[index]}
                 placeholder={CREATE_MASKED_CHARACTERS(1)}
+                name={"password"}
                 maxLength={1}
                 required
                 width={"full"}

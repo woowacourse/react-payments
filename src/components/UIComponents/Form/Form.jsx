@@ -16,7 +16,11 @@ export default function Form({ children }) {
     const formInputArray = [...form];
     const currentIndex = formInputArray.indexOf(currElement);
 
-    formInputArray[currentIndex + direction]?.focus();
+    const focusTarget = formInputArray[currentIndex + direction];
+
+    if (focusTarget && focusTarget.name === currElement.name) {
+      focusTarget.focus();
+    }
   };
 
   const handlePrevFocus = (e) => {
