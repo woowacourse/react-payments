@@ -1,4 +1,5 @@
 import React from 'react';
+import { INPUT } from '../../../constants';
 import { useAppState } from '../../../hooks/hooks';
 import ConfirmButton from './ConfirmButton';
 
@@ -12,8 +13,8 @@ function ConfirmButtonContainer({ children }: Props) {
     secondInputCardNumber,
     thirdInputCardNumber,
     fourthInputCardNumber,
-    expiredPeriod,
-    name,
+    expiredPeriodMonth,
+    expiredPeriodYear,
     cvc,
     firstPassword,
     secondPassword,
@@ -21,23 +22,26 @@ function ConfirmButtonContainer({ children }: Props) {
 
   let _disabled = true;
   if (
-    firstInputCardNumber.length === 4 &&
-    secondInputCardNumber.length === 4 &&
-    thirdInputCardNumber.length === 4 &&
-    fourthInputCardNumber.length === 4 &&
-    expiredPeriod.length === 4 &&
-    cvc.length === 3 &&
-    firstPassword.length === 1 &&
-    secondPassword.length === 1
+    firstInputCardNumber.length === INPUT.MAX_CARD_NUMBER_PART_LENGTH &&
+    secondInputCardNumber.length === INPUT.MAX_CARD_NUMBER_PART_LENGTH &&
+    thirdInputCardNumber.length === INPUT.MAX_CARD_NUMBER_PART_LENGTH &&
+    fourthInputCardNumber.length === INPUT.MAX_CARD_NUMBER_PART_LENGTH &&
+    expiredPeriodMonth.length === INPUT.MAX_EXPIRED_PERIOD_MONTH_LENGTH &&
+    expiredPeriodYear.length === INPUT.MAX_EXPIRED_PERIOD_YEAR_LENGTH &&
+    cvc.length === INPUT.MAX_CVC_LENGTH &&
+    firstPassword.length === INPUT.MAX_FIRST_PASSWORD_LENGTH &&
+    secondPassword.length === INPUT.MAX_SECOND_PASSWORD_LENGTH
   ) {
     _disabled = false;
   }
 
+  const handleSubmitCard = (event: React.MouseEvent) => {
+    event.preventDefault();
+    console.log('카드 등록완료!');
+  };
+
   return (
-    <ConfirmButton
-      onClick={() => alert('다음으로 넘어갑니다')}
-      {...(_disabled ? { disabled: true } : {})}
-    >
+    <ConfirmButton type="submit" onClick={handleSubmitCard} disabled={_disabled}>
       {children}
     </ConfirmButton>
   );

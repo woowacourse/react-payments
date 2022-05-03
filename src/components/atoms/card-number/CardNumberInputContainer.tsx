@@ -100,6 +100,7 @@ function CardNumberInputContainer() {
       <CardFormInput
         onChange={handleFirstInputCardNumber}
         value={firstInputCardNumber}
+        placeholder="0000"
         style={style}
         ref={firstNumberInputRef}
       />
@@ -107,6 +108,7 @@ function CardNumberInputContainer() {
       <CardFormInput
         onChange={handleSecondInputCardNumber}
         value={secondInputCardNumber}
+        placeholder="0000"
         style={style}
         ref={secondNumberInputRef}
       />
@@ -115,6 +117,7 @@ function CardNumberInputContainer() {
         onChange={handleThirdInputCardNumber}
         value={thirdInputCardNumber}
         type="password"
+        placeholder="0000"
         style={style}
         ref={thirdNumberInputRef}
       />
@@ -123,6 +126,7 @@ function CardNumberInputContainer() {
         type="password"
         onChange={handleFourthInputCardNumber}
         value={fourthInputCardNumber}
+        placeholder="0000"
         style={style}
         ref={fourthnumberInputRef}
       />

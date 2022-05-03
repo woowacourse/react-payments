@@ -7,22 +7,14 @@ export type State = {
   thirdInputCardNumber: string;
   fourthInputCardNumber: string;
   name: string;
-  expiredPeriod: string;
+  expiredPeriodMonth: string;
+  expiredPeriodYear: string;
   cvc: string;
   firstPassword: string;
   secondPassword: string;
 };
 
-type Action =
-  | { type: ActionType.FIRST_INPUT_CARD_NUMBER; payload: any }
-  | { type: ActionType.SECOND_INPUT_CARD_NUMBER; payload: any }
-  | { type: ActionType.THIRD_INPUT_CARD_NUMBER; payload: any }
-  | { type: ActionType.FOURTH_INPUT_CARD_NUMBER; payload: any }
-  | { type: ActionType.INPUT_NAME; payload: any }
-  | { type: ActionType.INPUT_EXPIRED_PERIOD; payload: any }
-  | { type: ActionType.INPUT_CVC; payload: any }
-  | { type: ActionType.FIRST_INPUT_PASSWORD; payload: any }
-  | { type: ActionType.SECOND_INPUT_PASSWORD; payload: any };
+type Action = { type: ActionType; payload: string };
 
 export type AppDispatch = Dispatch<Action>;
 
@@ -32,24 +24,24 @@ const initalState: State = {
   thirdInputCardNumber: '',
   fourthInputCardNumber: '',
   name: '',
-  expiredPeriod: '',
+  expiredPeriodMonth: '',
+  expiredPeriodYear: '',
   cvc: '',
   firstPassword: '',
   secondPassword: '',
 };
 
-// context를 전역에 선언한다
 export const AppStateContext = createContext<State>(initalState);
 export const AppDispatchContext = createContext<AppDispatch>(() => null);
 
-export function createAction(type: ActionType, payload: any): Action {
+export function createAction(type: ActionType, payload: string): Action {
   return {
     type,
     payload,
   };
 }
 
-function reducer(state: State, action: Action): State {
+function reducer(state: State, action: Action): any {
   switch (action.type) {
     case ActionType.FIRST_INPUT_CARD_NUMBER:
       return {
@@ -76,10 +68,15 @@ function reducer(state: State, action: Action): State {
         ...state,
         name: action.payload,
       };
-    case ActionType.INPUT_EXPIRED_PERIOD:
+    case ActionType.INPUT_EXPIRED_PERIOD_MONTH:
       return {
         ...state,
-        expiredPeriod: action.payload,
+        expiredPeriodMonth: action.payload,
+      };
+    case ActionType.INPUT_EXPIRED_PERIOD_YEAR:
+      return {
+        ...state,
+        expiredPeriodYear: action.payload,
       };
     case ActionType.INPUT_CVC:
       return {

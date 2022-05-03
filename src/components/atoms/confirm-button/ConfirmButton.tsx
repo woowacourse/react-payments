@@ -1,5 +1,5 @@
-import { css } from '@emotion/react';
 import React from 'react';
+import { css } from '@emotion/react';
 
 const style = css({
   position: 'absolute',
@@ -13,14 +13,15 @@ const style = css({
 });
 
 type Props = {
-  children: React.ReactNode;
+  type: 'button' | 'submit' | 'reset' | undefined;
+  onClick: (event: React.MouseEvent) => void;
   disabled?: boolean;
-  onClick: () => void;
+  children: React.ReactNode;
 };
 
-function ConfirmButton({ children, onClick, disabled }: Props) {
+function ConfirmButton({ type, onClick, disabled, children }: Props) {
   return (
-    <button css={style} onClick={onClick} {...(disabled ? { disabled: true } : {})}>
+    <button type={type} css={style} onClick={onClick} {...(disabled ? { disabled: true } : '')}>
       {children}
     </button>
   );

@@ -1,12 +1,5 @@
 import { useContext } from 'react';
-import {
-  AppDispatch,
-  AppDispatchContext,
-  AppStateContext,
-  createAction,
-  State,
-} from '../context/Provider';
-import { ActionType } from '../types';
+import { AppDispatch, AppDispatchContext, AppStateContext, State } from '../context/Provider';
 
 export function useAppState(): State {
   const state = useContext(AppStateContext);

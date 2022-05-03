@@ -65,7 +65,8 @@ type Props = {
   thirdInputCardNumber: string;
   fourthInputCardNumber: string;
   name: string;
-  expiredPeriod: string;
+  expiredPeriodMonth: string;
+  expiredPeriodYear: string;
   isActive: boolean;
   color?: string;
   cardName?: string;
@@ -77,7 +78,8 @@ function Card({
   thirdInputCardNumber,
   fourthInputCardNumber,
   name,
-  expiredPeriod,
+  expiredPeriodMonth,
+  expiredPeriodYear,
   isActive,
   color,
   cardName,
@@ -98,7 +100,11 @@ function Card({
       </div>
       <div className="info">
         <OwnerNameSpan name={name}>{name}</OwnerNameSpan>
-        <span className="expired-period">{expiredPeriod}</span>
+        <span className="expired-period">
+          {expiredPeriodYear
+            ? `${expiredPeriodMonth} / ${expiredPeriodYear}`
+            : `${expiredPeriodMonth}`}
+        </span>
       </div>
     </CardDiv>
   );

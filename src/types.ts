@@ -5,15 +5,9 @@ export enum ActionType {
   FOURTH_INPUT_CARD_NUMBER = 'FOURTH_INPUT_CARD_NUMBER',
   INPUT_NAME = 'INPUT_NAME',
   INPUT_EXPIRED_PERIOD = 'INPUT_EXPIRED_PERIOD',
+  INPUT_EXPIRED_PERIOD_MONTH = 'INPUT_EXPIRED_PERIOD_MONTH',
+  INPUT_EXPIRED_PERIOD_YEAR = 'INPUT_EXPIRED_PERIOD_YEAR',
   INPUT_CVC = 'INPUT_CVC',
   FIRST_INPUT_PASSWORD = 'FIRST_INPUT_PASSWORD',
   SECOND_INPUT_PASSWORD = 'SECOND_INPUT_PASSWORD',
 }
-
-export const CardNumberRefType = {
-  numberFirstPartRef: HTMLInputElement,
-  numberSecondPartRef: HTMLInputElement,
-  numberThirdPartRef: HTMLInputElement,
-  numberFourthPartRef: HTMLInputElement,
-  expiredPeriodRef: HTMLInputElement,
-};

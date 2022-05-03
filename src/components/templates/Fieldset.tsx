@@ -19,24 +19,10 @@ export function FieldSet({
   );
 }
 
-export function FieldHead({
-  children,
-  marginBottom,
-}: {
-  children: React.ReactNode;
-  marginBottom?: string;
-}) {
-  return (
-    <div
-      css={css`
-        margin-bottom: ${marginBottom ? marginBottom : '3px'};
-      `}
-    >
-      {children}
-    </div>
-  );
+export function FieldHead({ children, style }: { children: React.ReactNode; style?: any }) {
+  return <div css={style}>{children}</div>;
 }
 
-export function FieldBody({ children }: { children: React.ReactNode }) {
-  return <div className="content">{children}</div>;
+export function FieldBody({ children, stlye }: { children: React.ReactNode; stlye?: any }) {
+  return <div css={stlye}>{children}</div>;
 }
