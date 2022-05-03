@@ -1,6 +1,5 @@
 import React from 'react';
 import InputLabel from '.';
-import '../../index.css';
 
 export default {
   title: 'Payment/InputLabel',

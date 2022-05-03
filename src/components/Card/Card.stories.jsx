@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '.';
-import '../../index.css';
 
 export default {
   title: 'Payment/Card',
