@@ -1,7 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import Header from '../components/common/Header';
-import Button from './../components/common/Button';
 import {
   CardExpireDateInput,
   CardHolderNameInput,
@@ -11,6 +9,9 @@ import {
   CardPreview,
   CardSecurityCodeInput,
 } from '../components';
+
+import { Header, Title } from '../components/common/styled';
+import Button from './../components/common/Button';
 
 import { CARD_INFO_RULES, CARD_REGISTER_SUCCESS_MESSAGE } from '../constants';
 
@@ -99,7 +100,9 @@ export default function AddCardPage() {
 
   return (
     <>
-      <Header titleText="카드 추가" />
+      <Header>
+        <Title>카드 추가</Title>
+      </Header>
       <CardPreview cardNumber={cardNumber} holderName={holderName} expireDate={expireDate} canProceed={canProceed} />
       <CardInfoForm autoComplete="off">
         <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumberUpdate} />
