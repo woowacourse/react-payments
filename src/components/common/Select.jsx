@@ -4,7 +4,7 @@ import { Input } from './styled';
 import Modal from './Modal';
 import { LABEL_PRIMARY_COLOR, ITEM_HOVER_PRIMARY_BG_COLOR } from '../../style';
 
-const CalendarContainer = styled.div``;
+const SelectContainer = styled.div``;
 
 const SelectBox = styled.div``;
 
@@ -39,7 +39,7 @@ const Item = styled.li`
   }
 `;
 
-function Calendar({ items, placeholder, setItem, dimensions }) {
+function Select({ items, placeholder, setItem, dimensions }) {
   const inputRef = useRef(null);
   const [isShown, setIsShown] = useState(false);
 
@@ -55,7 +55,7 @@ function Calendar({ items, placeholder, setItem, dimensions }) {
   };
 
   return (
-    <CalendarContainer>
+    <SelectContainer>
       <SelectBox onClick={handleClickBox}>
         <Input ref={inputRef} disabled placeholder={placeholder} type={'text'} />
       </SelectBox>
@@ -72,8 +72,8 @@ function Calendar({ items, placeholder, setItem, dimensions }) {
           </SelectListWrapper>
         </SelectLayer>
       </Modal>
-    </CalendarContainer>
+    </SelectContainer>
   );
 }
 
-export default Calendar;
+export default Select;

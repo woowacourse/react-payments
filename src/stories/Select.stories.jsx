@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Calendar from '../components/common/Calendar';
+import Select from '../components/common/Select';
 
 export default {
-  title: 'Calendar',
-  component: Calendar,
+  title: 'Select',
+  component: Select,
   argTypes: {
     items: { control: 'array' },
     dimensions: { control: 'object' },
@@ -12,7 +12,7 @@ export default {
 
 const Template = args => {
   const [item, setItem] = useState();
-  return <Calendar {...args} setItem={setItem} />;
+  return <Select {...args} setItem={setItem} />;
 };
 export const Primary = Template.bind({});
 
