@@ -5,6 +5,7 @@ import useFocus from '../hooks/useFocus';
 import { numberRegex } from '../constant/regularExpression';
 import useSomeInput from '../hooks/useSomeInput';
 import { EXPIRED_DATE_INPUT_NAMES } from '../constant/inputNames';
+import { COUNT } from '../constant';
 
 const ExpiredDateContext = createContext();
 
@@ -33,7 +34,10 @@ function ExpiredDateContextProvider({ children }) {
     : PLACEHOLDER.DATE;
 
   const onDateChange = ({ target, nativeEvent: { data, inputType } }) => {
-    if ((numberRegex.test(data) || !data) && target.value.length <= 2) {
+    if (
+      (numberRegex.test(data) || !data) &&
+      target.value.length <= COUNT.DATE_MAX_COUNT
+    ) {
       const unit = target.name;
       const newDate = target.value;
 

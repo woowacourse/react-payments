@@ -5,6 +5,7 @@ import useFocus from '../hooks/useFocus';
 import useSomeInput from '../hooks/useSomeInput';
 import { CARD_NUMBER_MARK } from '../constant/mark';
 import { CARD_NUMBER_INPUT_NAMES } from '../constant/inputNames';
+import { COUNT } from '../constant';
 
 const CardNumberContext = createContext();
 
@@ -31,13 +32,18 @@ function CardNumberContextProvider({ children }) {
   const cardNumberString = Object.values(numbers).some(number => number)
     ? Object.values(numbers)
         .map((cardNumber, index) =>
-          index < 2 ? cardNumber : CARD_NUMBER_MARK.repeat(cardNumber.length)
+          index < COUNT.CARD_NUMBER_HIDE_COUNT
+            ? cardNumber
+            : CARD_NUMBER_MARK.repeat(cardNumber.length)
         )
         .join(' ')
     : '';
 
   const handleNumberChange = ({ target, nativeEvent: { data, inputType } }) => {
-    if ((numberRegex.test(data) || !data) && target.value.length <= 4) {
+    if (
+      (numberRegex.test(data) || !data) &&
+      target.value.length <= COUNT.CARD_NUMBER_MAX_COUNT
+    ) {
       const order = target.name;
       const newNumber = target.value;
 

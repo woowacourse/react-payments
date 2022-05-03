@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import { PasswordContext } from '../../../context/PasswordContext';
+import { COUNT } from '../../../constant';
 
 const InputContainer = styled.div`
   display: flex;
@@ -33,18 +34,20 @@ function PasswordInput() {
             isValid={validations[order]}
           />
         ))}
-        {Array.from({ length: 2 }).map((_, index) => (
-          <Input
-            key={index}
-            value="."
-            width="43px"
-            height="45px"
-            type="password"
-            isValid={true}
-            disable={true}
-            readonly={true}
-          />
-        ))}
+        {Array.from({ length: COUNT.PASSWORD_DISABLE_COUNT }).map(
+          (_, index) => (
+            <Input
+              key={index}
+              value="."
+              width="43px"
+              height="45px"
+              type="password"
+              isValid={true}
+              disable={true}
+              readonly={true}
+            />
+          )
+        )}
       </InputContainer>
     </LabeledInput>
   );
