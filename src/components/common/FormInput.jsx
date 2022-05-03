@@ -66,7 +66,7 @@ FormInput.propTypes = {
   /**
    * card information for input value
    */
-  inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
    * theme of FormInput according to card company
    */
@@ -84,7 +84,6 @@ FormInput.propTypes = {
 FormInput.defaultProps = {
   className: '',
   theme: '',
-  onChange: undefined,
 };
 
 export default FormInput;

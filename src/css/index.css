@@ -57,12 +57,3 @@ input {
 
   color: #383838;
 }
-
-.owner-name-length {
-  position: absolute;
-  top: -20px;
-  right: 0;
-
-  font-size: 12px;
-  color: #525252;
-}

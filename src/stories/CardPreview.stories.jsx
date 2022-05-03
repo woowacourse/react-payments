@@ -2,13 +2,31 @@ import React from 'react';
 
 import CardPreview from 'components/CardPreview';
 
+import { THEME } from 'constants';
+
 import 'css/card.css';
+import 'css/palette.css';
 
 export default {
   title: 'Components/CardPreview',
   component: CardPreview,
   argTypes: {
     expiryDate: { control: { type: 'object' } },
+    theme: {
+      control: 'inline-radio',
+      options: [
+        'defalut',
+        THEME.RED,
+        THEME.BLUE,
+        THEME.GREEN,
+        THEME.HOT_PINK,
+        THEME.MINT,
+        THEME.PINK,
+        THEME.ORANGE,
+        THEME.YELLOW,
+      ],
+    },
+    handleModal: { action: 'open-modal' },
   },
 };
 
@@ -23,6 +41,6 @@ CardPreviewTemplate.args = {
     third: '1234',
     fourth: '5678',
   },
-  ownerName: '록바',
   expiryDate: { month: '10', year: '23' },
+  ownerName: '록바',
 };
