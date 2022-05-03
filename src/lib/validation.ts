@@ -15,17 +15,18 @@ export const validateExpiredDateLength = (expiredDate: ExpiredDate) =>
 const validateMonth = (expiredDate: ExpiredDate) =>
   Number(expiredDate.month) >= 1 && Number(expiredDate.month) <= 12;
 
-const validateDate = (expiredDate: ExpiredDate) => {
+const validateDate = ({ year, month }: ExpiredDate) => {
   const date = new Date();
-  const year = date.getFullYear() % 100;
-  const month = date.getMonth() + 1;
+  const currentYear = date.getFullYear() % 100;
+  const currentMonth = date.getMonth() + 1;
+  const targetYear = Number(year);
+  const targetMonth = Number(month);
 
-  if (Number(expiredDate.year) < year) return false;
-  if (Number(expiredDate.year) > year + 5) return false;
-  if (Number(expiredDate.year) === year && Number(expiredDate.month) < month) return false;
-  if (Number(expiredDate.year) === year + 5 && Number(expiredDate.month) > month) return false;
+  const isValidYear = targetYear > currentYear && targetYear < currentYear + 5;
+  const isUnderMinMonth = targetYear === currentYear && targetMonth < currentMonth;
+  const isOverMaxMonth = targetYear === currentYear + 5 && targetMonth > currentMonth;
 
-  return true;
+  return isValidYear && !isUnderMinMonth && isOverMaxMonth;
 };
 
 const expiredDateValidators = [validateExpiredDateLength, validateMonth, validateDate];
