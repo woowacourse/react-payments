@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useMemo } from 'react';
 
 import {
   CardExpireDateInput,
@@ -21,7 +21,6 @@ export default function AddCardPage() {
   const [holderName, setHolderName] = useState('');
   const [securityCode, setSecurityCode] = useState('');
   const [password, setPassword] = useState(['', '']);
-  const [canProceed, setCanProceed] = useState(false);
 
   const handleCardNumberUpdate = ({ target: { value } }, order) => {
     if (!Number.isInteger(Number(value)) || value.length > CARD_INFO_RULES.NUMBER_UNIT_LENGTH) return;
@@ -78,32 +77,34 @@ export default function AddCardPage() {
     alert(CARD_REGISTER_SUCCESS_MESSAGE);
   };
 
-  const isValidCardInfo = useCallback(() => {
-    const { NUMBER_UNIT_COUNT, NUMBER_UNIT_LENGTH, EXPIRE_DATE_LENGTH, SECURITY_CODE_LENGTH, PASSWORD_LENGTH } =
-      CARD_INFO_RULES;
+  const isValidCardNumber = useMemo(() => {
+    const { NUMBER_UNIT_COUNT, NUMBER_UNIT_LENGTH } = CARD_INFO_RULES;
+    return cardNumber.join('').length === NUMBER_UNIT_COUNT * NUMBER_UNIT_LENGTH;
+  }, [cardNumber]);
 
-    return (
-      cardNumber.join('').length === NUMBER_UNIT_COUNT * NUMBER_UNIT_LENGTH &&
-      expireDate.join('').length === EXPIRE_DATE_LENGTH &&
-      securityCode.length === SECURITY_CODE_LENGTH &&
-      password.join('').length === PASSWORD_LENGTH
-    );
-  }, [cardNumber, expireDate, securityCode, password]);
+  const isValidExpireDate = useMemo(() => {
+    return expireDate.join('').length === CARD_INFO_RULES.EXPIRE_DATE_LENGTH;
+  }, [expireDate]);
 
-  useEffect(() => {
-    if (isValidCardInfo()) {
-      setCanProceed(true);
-    } else {
-      setCanProceed(false);
-    }
-  }, [isValidCardInfo]);
+  const isValidSecurityCode = useMemo(() => {
+    return securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH;
+  }, [securityCode]);
+
+  const isValidPassword = useMemo(() => {
+    return password.join('').length === CARD_INFO_RULES.PASSWORD_LENGTH;
+  }, [password]);
 
   return (
     <>
       <Header>
         <Title>카드 추가</Title>
       </Header>
-      <CardPreview cardNumber={cardNumber} holderName={holderName} expireDate={expireDate} canProceed={canProceed} />
+      <CardPreview
+        cardNumber={cardNumber}
+        holderName={holderName}
+        expireDate={expireDate}
+        isComplete={isValidCardNumber && isValidExpireDate && isValidSecurityCode && isValidPassword}
+      />
       <CardInfoForm autoComplete="off">
         <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumberUpdate} />
         <CardExpireDateInput expireDate={expireDate} onChange={handleExpireDateUpdate} />
@@ -111,7 +112,9 @@ export default function AddCardPage() {
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCodeUpdate} />
         <CardPasswordInput password={password} onChange={handlePasswordUpdate} />
       </CardInfoForm>
-      {canProceed && <Button text="다음" onClick={handleCardInfoSubmit} />}
+      {isValidCardNumber && isValidExpireDate && isValidSecurityCode && isValidPassword && (
+        <Button text="다음" onClick={handleCardInfoSubmit} />
+      )}
     </>
   );
 }

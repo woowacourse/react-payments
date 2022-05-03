@@ -66,10 +66,10 @@ const CardHolderName = styled.p`
 
 const CardExpireDate = styled.p``;
 
-export default function CardPreview({ cardNumber, holderName, expireDate, canProceed }) {
+export default function CardPreview({ cardNumber, holderName, expireDate, isComplete }) {
   return (
     <CardContainer>
-      <SmallCard isComplete={canProceed}>
+      <SmallCard isComplete={isComplete}>
         <CardName>Woowa Card</CardName>
         <CardChip />
         <CardNumber>
