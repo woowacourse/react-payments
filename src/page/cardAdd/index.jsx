@@ -10,7 +10,15 @@ import { ReactComponent as PrevIcon } from 'assets/prev_icon.svg';
 
 import { validator } from './validator';
 import { isObject } from '../../utils';
-import { CRYPTO_STRING, INPUT_MAX_LENGTH } from '../../constants';
+import {
+  CARD_NUMBER,
+  COMPANY,
+  CRYPTO_STRING,
+  EXPIRY_DATE,
+  INPUT_MAX_LENGTH,
+  PASSWORD,
+  PRIVACY_CODE,
+} from '../../constants';
 
 import {
   cardNumberInputInfoList,
@@ -59,11 +67,11 @@ const CardAppPage = () => {
   const [cardInfo, setCardInfo] = useState(initialCardInfo);
   const { cardNumber, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
 
-  const [isCompanyFilled] = useIsFilled('company', company, false);
-  const [isCardNumberFilled] = useIsFilled('cardNumber', cardNumber, false);
-  const [isExpiryDateFilled] = useIsFilled('expiryDate', expiryDate, false);
-  const [isPrivacyCodeFilled] = useIsFilled('privacyCode', privacyCode, false);
-  const [isPasswordFilled] = useIsFilled('password', password, false);
+  const [isCompanyFilled] = useIsFilled(COMPANY, company, false);
+  const [isCardNumberFilled] = useIsFilled(CARD_NUMBER, cardNumber, false);
+  const [isExpiryDateFilled] = useIsFilled(EXPIRY_DATE, expiryDate, false);
+  const [isPrivacyCodeFilled] = useIsFilled(PRIVACY_CODE, privacyCode, false);
+  const [isPasswordFilled] = useIsFilled(PASSWORD, password, false);
 
   const [modalVisible, handleModal] = useModal(false);
   const [isCardFront, handleCardPosition] = useToggle(false);

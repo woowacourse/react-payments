@@ -6,6 +6,12 @@ export const CRYPTO_STRING = '•';
 export const PASS = 'pass';
 export const FAIL = 'fail';
 
+export const COMPANY = 'company';
+export const CARD_NUMBER = 'cardNumber';
+export const EXPIRY_DATE = 'expiryDate';
+export const PRIVACY_CODE = 'privacyCode';
+export const PASSWORD = 'password';
+
 export const DEFAULT_CARD_INFO = {
   OWNER_NAME: 'NAME',
   EXPIRY_MONTH: 'MM',
@@ -23,7 +29,7 @@ export const THEME = {
   YELLOW: 'yellow',
 };
 
-export const COMPANY = {
+export const COMPANY_LIST = {
   VALLISTA: '발리스타 카드',
   YULIE: '율리 카드',
   ASA: '아사 카드',

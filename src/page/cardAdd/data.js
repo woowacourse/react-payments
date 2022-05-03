@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { COMPANY, INPUT_MAX_LENGTH, THEME } from 'constants';
+import { COMPANY_LIST, INPUT_MAX_LENGTH, THEME } from 'constants';
 
 export const cardNumberInputInfoList = [
   {
@@ -104,12 +104,12 @@ export const cardPasswordInputInfoList = [
 ];
 
 export const cardCompanyList = [
-  { id: uuid(), company: COMPANY.VALLISTA, theme: THEME.RED },
-  { id: uuid(), company: COMPANY.YULIE, theme: THEME.BLUE },
-  { id: uuid(), company: COMPANY.ASA, theme: THEME.GREEN },
-  { id: uuid(), company: COMPANY.ROY, theme: THEME.HOT_PINK },
-  { id: uuid(), company: COMPANY.AUSTIN, theme: THEME.MINT },
-  { id: uuid(), company: COMPANY.YB, theme: THEME.PINK },
-  { id: uuid(), company: COMPANY.NOS, theme: THEME.ORANGE },
-  { id: uuid(), company: COMPANY.WALTER, theme: THEME.YELLOW },
+  { id: uuid(), company: COMPANY_LIST.VALLISTA, theme: THEME.RED },
+  { id: uuid(), company: COMPANY_LIST.YULIE, theme: THEME.BLUE },
+  { id: uuid(), company: COMPANY_LIST.ASA, theme: THEME.GREEN },
+  { id: uuid(), company: COMPANY_LIST.ROY, theme: THEME.HOT_PINK },
+  { id: uuid(), company: COMPANY_LIST.AUSTIN, theme: THEME.MINT },
+  { id: uuid(), company: COMPANY_LIST.YB, theme: THEME.PINK },
+  { id: uuid(), company: COMPANY_LIST.NOS, theme: THEME.ORANGE },
+  { id: uuid(), company: COMPANY_LIST.WALTER, theme: THEME.YELLOW },
 ];
