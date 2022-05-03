@@ -43,7 +43,7 @@ function PasswordInput({ password, handleInputChange, isValid, invalidMessage, w
 
   return (
     <Container width={width}>
-      <InputLabel label="보안 코드(CVC/CVV)" />
+      <InputLabel label="카드 비밀번호" />
       <InputBody>
         {password.map((word, index) => (
           <Input
