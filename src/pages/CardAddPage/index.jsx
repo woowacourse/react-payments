@@ -3,8 +3,9 @@ import Head from '../../components/Head';
 import Card from '../../components/Card';
 import CardNumbersInput from '../../components/CardNumbersInput';
 import ExpiredDateInput from '../../components/ExpiredDateInput';
+import OwnerNameInput from '../../components/OwnerNameInput';
+import SecurityNumberInput from '../../components/SecurityNumberInput';
 import LabeledInput from '../../components/LabeledInput';
-import Tooltip from '../../components/Tooltip';
 import SubmitButton from '../../components/SubmitButton';
 import Input from '../../components/Input';
 import { Page, CardSection, Form, FormRow, SubmitButtonContainer } from './style';
@@ -15,7 +16,6 @@ import useOwnerName from '../../hooks/useOwnerName';
 import useSecurityNumber from '../../hooks/useSecurityNumber';
 import usePassword from '../../hooks/usePassword';
 import useCardAdd from '../../hooks/useCardAdd';
-import OwnerNameInput from '../../components/OwnerNameInput';
 
 function CardAddPage() {
   const [companyName, setCompanyName] = useState('포코카드');
@@ -77,23 +77,12 @@ function CardAddPage() {
           isValid={isValidOwnerName}
           invalidMessage={MESSAGE.INVALID_OWNER_NAME}
         />
-        <FormRow>
-          <LabeledInput
-            value={securityNumber}
-            handleInputChange={handleChangeSecurityNumber}
-            invalidMessage={MESSAGE.INVALID_SECURITY_NUMBER}
-            inputProps={{
-              type: 'password',
-              width: '84px',
-              maxLength: 3,
-              isValid: isValidSecurityNumber,
-            }}
-            inputLabelProps={{
-              label: '보안 코드(CVC/CVV)',
-            }}
-          />
-          <Tooltip message={MESSAGE.TOOLTIP_SECURITY_NUMBER} />
-        </FormRow>
+        <SecurityNumberInput
+          securityNumber={securityNumber}
+          handleInputChange={handleChangeSecurityNumber}
+          isValid={isValidSecurityNumber}
+          invalidMessage={MESSAGE.INVALID_SECURITY_NUMBER}
+        />
         <FormRow alignItems="flex-end" gap={'4px'}>
           <LabeledInput
             value={password}

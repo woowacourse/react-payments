@@ -4,7 +4,7 @@ const TooltipContainer = styled.div`
   position: relative;
   width: 27px;
   height: 27px;
-  margin: 28px 0 0 11px;
+  margin: ${props => props.margin};
   padding-top: 3px;
   border-radius: 13.5px;
   border: 1px solid #bababa;
@@ -53,9 +53,9 @@ const ToolTipMessage = styled.span`
   }
 `;
 
-function Tooltip({ message }) {
+function Tooltip({ message, margin }) {
   return (
-    <TooltipContainer>
+    <TooltipContainer margin={margin}>
       <span>?</span>
       <ToolTipMessage>{message}</ToolTipMessage>
     </TooltipContainer>
