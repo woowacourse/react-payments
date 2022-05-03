@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import InputBox from "../../components/common/InputBox";
 import { Input } from "../../components/common/Input/style";
 import { CardInputWrapper } from "../../pages/CardAddPage/style";
+import { CARD_NUMBER } from "../../constant";
 
 function CardNumberInput({
   cardNumbers,
@@ -13,7 +14,7 @@ function CardNumberInput({
     <CardInputWrapper>
       <label>카드번호</label>
       <InputBox>
-        {Array.from({ length: 4 }, (_, index) => (
+        {Array.from({ length: CARD_NUMBER.INPUT_COUNT }, (_, index) => (
           <React.Fragment key={index}>
             <Input
               ref={cardNumberInputRefs[index]}

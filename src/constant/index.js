@@ -1,5 +1,6 @@
 const CARD_NUMBER = {
   UNIT_LENGTH: 4,
+  INPUT_COUNT: 4,
 };
 
 const DUE_DATE = {
