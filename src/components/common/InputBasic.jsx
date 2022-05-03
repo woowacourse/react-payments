@@ -6,6 +6,7 @@ export const InputBasic = ({
   placeholder,
   value,
   onChange,
+  id,
   width,
   inputRef,
   maxLength,
@@ -17,6 +18,7 @@ export const InputBasic = ({
       ref={inputRef}
       placeholder={placeholder}
       value={value}
+      id={id}
       maxLength={maxLength}
       onChange={onChange}
     />

@@ -10,13 +10,14 @@ export const CardOwnerInputForm = ({ ownerName, handleOwnerNameInput }) => {
 
   return (
     <InputContainer>
-      <InputTitle>
+      <InputTitle htmlFor="input_owner_name">
         <span>카드 소유자 이름(선택)</span>
         <span>{ownerName.length}/30</span>
       </InputTitle>
       <InputBasic
         value={ownerName}
         onChange={handleOwnerNameChange}
+        id="input_owner_name"
         type="text"
         maxLength="30"
       />

@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const InputContainer = styled.div`
   margin: 16px 0;
 `;
 
-export const InputTitle = styled.span`
+export const InputTitle = styled.label`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,7 +19,7 @@ export const InputTitle = styled.span`
 
 export const FlexWrapper = styled.div`
   display: flex;
-  justify-content: ${(props) => props.justifyContent || 'unset'};
-  align-items: ${(props) => props.alignItems || 'unset'};
-  gap: ${(props) => props.gap || 'unset'};
+  justify-content: ${(props) => props.justifyContent || "unset"};
+  align-items: ${(props) => props.alignItems || "unset"};
+  gap: ${(props) => props.gap || "unset"};
 `;

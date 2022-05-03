@@ -89,7 +89,6 @@ export const CardRegisterPage = () => {
     }
   };
 
-  console.log(checkInputs);
   return (
     <>
       <PageTitle>카드 추가</PageTitle>
@@ -100,41 +99,42 @@ export const CardRegisterPage = () => {
         ownerName={ownerName}
         handleModalVisible={modalSelector(MODAL_NAME.CARD_TYPE)}
       />
-      <CardNumbersInputForm
-        cardType={cardType}
-        cardNumbers={cardNumbers}
-        handleModalVisible={modalSelector(MODAL_NAME.CARD_TYPE)}
-        handleCardNumbersInput={setCardNumbers}
-        handleCardNumberCheck={setCheckInputStateOf("cardNumbers")}
-      />
-      <CardExpireDateInputForm
-        expireDate={expireDate}
-        handleExpireDateInput={setExpireDate}
-        handleCardExpireCheck={setCheckInputStateOf("cardExpireDate")}
-      />
-      <CardOwnerInputForm
-        ownerName={ownerName}
-        handleOwnerNameInput={setOwnerName}
-      />
-      <CVCInputForm
-        CVC={CVC}
-        handleCVCInput={setCVC}
-        handleCardCVCCheck={setCheckInputStateOf("cardCVC")}
-        handleModalVisible={modalSelector(MODAL_NAME.CARD_CVC)}
-      />
-      <CardPasswordInputForm
-        password={password}
-        handlePasswordInput={setPassword}
-        handleCardPasswordCheck={setCheckInputStateOf("cardPassword")}
-      />
+      <form>
+        <CardNumbersInputForm
+          cardType={cardType}
+          cardNumbers={cardNumbers}
+          handleModalVisible={modalSelector(MODAL_NAME.CARD_TYPE)}
+          handleCardNumbersInput={setCardNumbers}
+          handleCardNumberCheck={setCheckInputStateOf("cardNumbers")}
+        />
+        <CardExpireDateInputForm
+          expireDate={expireDate}
+          handleExpireDateInput={setExpireDate}
+          handleCardExpireCheck={setCheckInputStateOf("cardExpireDate")}
+        />
+        <CardOwnerInputForm
+          ownerName={ownerName}
+          handleOwnerNameInput={setOwnerName}
+        />
+        <CVCInputForm
+          CVC={CVC}
+          handleCVCInput={setCVC}
+          handleCardCVCCheck={setCheckInputStateOf("cardCVC")}
+          handleModalVisible={modalSelector(MODAL_NAME.CARD_CVC)}
+        />
+        <CardPasswordInputForm
+          password={password}
+          handlePasswordInput={setPassword}
+          handleCardPasswordCheck={setCheckInputStateOf("cardPassword")}
+        />
+        <Button disabled={!allCompleted}>다음</Button>
+      </form>
       <Modal
         visible={modalVisibleState}
         handleVisible={() => setModalState(false)}
       >
         {modalVisibleState && loadModal()}
       </Modal>
-
-      <Button disabled={!allCompleted}>다음</Button>
     </>
   );
 };
