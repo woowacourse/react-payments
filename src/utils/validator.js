@@ -10,7 +10,6 @@ const isValidCardInputs = (
   if (
     isEmptyValue([cardNumber, validDate, CVC, firstPassword, secondPassword])
   ) {
-    console.log('empty');
     throw new Error();
   }
 
