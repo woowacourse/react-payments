@@ -1,23 +1,10 @@
 import React from 'react';
 import { useAppState } from '../../../hooks/hooks';
-import { transformNumToBullet, transformToMMYY } from '../../../utils';
+import { transformCardNumber, transformToMMYY } from '../../../utils';
 import Card from './Card';
 
 function CardContainer() {
   const { cardNumber, name, expiredPeriod, cvc, password, isEditingCVC } = useAppState();
-
-  const transform = (str: string) => {
-    return [4, 8, 12, 16]
-      .map(index => {
-        const part = str.slice(index - 4, index);
-        if (index >= 12) {
-          return transformNumToBullet(part);
-        }
-        return str.slice(index - 4, index);
-      })
-      .filter((part: string) => part)
-      .join(' ');
-  };
 
   const isActive = !!(
     cardNumber.length === 16 &&
@@ -31,7 +18,7 @@ function CardContainer() {
   return (
     <Card
       isActive={isActive}
-      cardNumber={transform(cardNumber)}
+      cardNumber={transformCardNumber(cardNumber)}
       name={name}
       expiredPeriod={transformToMMYY(expiredPeriod)}
       cvc={cvc}

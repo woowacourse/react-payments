@@ -11,12 +11,11 @@ export const removeAt = (str: string, index: number) => str.slice(0, index) + st
 
 export const isNum = (str: string) => /^[0-9]+$/.test(str);
 
-export const transformToCardFormat = (str: string) => {
+export const transformCardNumber = (str: string, seperator: string = ' ') => {
   const arr = [0, 4, 8, 12].map(startIndex => str.substr(startIndex, 4));
   arr[2] = '•'.repeat(arr[2].length);
   arr[3] = '•'.repeat(arr[3].length);
-  // @todo -사이에 space추가하기
-  return arr.filter(str => str.length > 0).join(' - ');
+  return arr.filter(str => str.length > 0).join(seperator);
 };
 
 export const isEnglish = (str: string) => !/[^A-Za-z]/.test(str);
