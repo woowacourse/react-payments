@@ -83,7 +83,9 @@ const StyledInputFieldContainer = styled.div`
 
 const InputFieldContainer = ({ children, ...rest }) => {
   return (
-    <StyledInputFieldContainer {...rest}>{children}</StyledInputFieldContainer>
+    <StyledInputFieldContainer className="input-container" {...rest}>
+      {children}
+    </StyledInputFieldContainer>
   );
 };
 

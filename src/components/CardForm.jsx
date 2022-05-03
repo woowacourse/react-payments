@@ -24,11 +24,9 @@ const StyledCardForm = styled.form`
     bottom: 16px;
 
     text-align: right;
-
     font-weight: 700;
     font-size: 14px;
     line-height: 16px;
-
     color: #04c09e;
   }
 `;
@@ -47,7 +45,7 @@ const CardForm = () => {
     <>
       <CardPreview values={values} />
       <StyledCardForm onSubmit={handleSubmit} disabled={isSubmitting}>
-        <InputFieldContainer className="input-container">
+        <InputFieldContainer>
           <label className="input-title">카드 번호</label>
           <div className="input-box">
             <input
@@ -73,7 +71,7 @@ const CardForm = () => {
             />
           </div>
         </InputFieldContainer>
-        <InputFieldContainer className="input-container">
+        <InputFieldContainer>
           <label className="input-title">만료일</label>
           <div className="input-box w-50">
             <input
@@ -89,7 +87,7 @@ const CardForm = () => {
             />
           </div>
         </InputFieldContainer>
-        <InputFieldContainer className="input-container">
+        <InputFieldContainer>
           <label className="input-title">카드 소유자 이름 (선택)</label>
           <span className="input-title name-length">
             {' '}
@@ -103,7 +101,7 @@ const CardForm = () => {
             />
           </div>
         </InputFieldContainer>
-        <InputFieldContainer className="input-container">
+        <InputFieldContainer>
           <label className="input-title">보안코드 (CVC/CVV)</label>
           <div className="cvc-block">
             <div className="input-box w-25">
@@ -118,7 +116,7 @@ const CardForm = () => {
             </ToolTip>
           </div>
         </InputFieldContainer>
-        <InputFieldContainer className="input-container">
+        <InputFieldContainer>
           <label className="input-title">비밀번호</label>
           <div className="input-box transparent">
             <input
