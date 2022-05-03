@@ -17,9 +17,9 @@ function PasswordContextProvider({ children }) {
     currentInputRef,
   } = useSomeInput(orders);
 
-  const { focusPrevOrder } = useFocus({
+  const { focusPrevInput } = useFocus({
     validate: validator.validatePassword,
-    orders,
+    inputNames: orders,
     validations,
     inputRefs,
     currentInputRef,
@@ -34,7 +34,7 @@ function PasswordContextProvider({ children }) {
 
       updatePassword(order, newNumber);
       updateValidations(order, newNumber);
-      focusPrevOrder(order, newNumber, inputType);
+      focusPrevInput(order, newNumber, inputType);
       currentInputRef.current = order;
     }
   };

@@ -1,36 +1,36 @@
 function useFocus({
   validate,
-  orders,
+  inputNames,
   validations,
   inputRefs,
   currentInputRef,
 }) {
-  const focusPrevOrder = (currentOrder, newNumber, inputType) => {
+  const focusPrevInput = (currentInput, newNumber, inputType) => {
     if (
-      currentOrder !== orders[0] &&
+      currentInput !== inputNames[0] &&
       newNumber.length === 0 &&
       inputType === 'deleteContentBackward'
     ) {
-      const currentIndex = orders.findIndex(order => order === currentOrder);
-      inputRefs[orders[currentIndex - 1]].current.focus();
+      const currentIndex = inputNames.findIndex(name => name === currentInput);
+      inputRefs[inputNames[currentIndex - 1]].current.focus();
     }
   };
 
-  const focusInvalidInput = order => {
-    if (order && validate(inputRefs[order].current.value)) {
+  const focusInvalidInput = name => {
+    if (name && validate(inputRefs[name].current.value)) {
       if (Object.values(validations).every(isValid => isValid)) {
         return;
       }
-      const invalidOrder = Object.keys(validations).find(
-        order => !validations[order]
+      const invalidInputName = Object.keys(validations).find(
+        name => !validations[name]
       );
-      inputRefs[invalidOrder].current.focus();
+      inputRefs[invalidInputName].current.focus();
     }
   };
 
   focusInvalidInput(currentInputRef.current);
 
-  return { focusPrevOrder };
+  return { focusPrevInput };
 }
 
 export default useFocus;

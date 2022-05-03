@@ -17,9 +17,9 @@ function CardNumberContextProvider({ children }) {
     currentInputRef,
   } = useSomeInput(orders);
 
-  const { focusPrevOrder } = useFocus({
+  const { focusPrevInput } = useFocus({
     validate: validator.validateCardNumber,
-    orders,
+    inputNames: orders,
     validations,
     inputRefs,
     currentInputRef,
@@ -42,7 +42,7 @@ function CardNumberContextProvider({ children }) {
 
       updateNumbers(order, newNumber);
       updateValidations(order, validator.validateCardNumber(newNumber));
-      focusPrevOrder(order, newNumber, inputType);
+      focusPrevInput(order, newNumber, inputType);
       currentInputRef.current = order;
     }
   };

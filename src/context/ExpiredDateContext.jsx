@@ -19,9 +19,9 @@ function ExpiredDateContextProvider({ children }) {
     currentInputRef,
   } = useSomeInput(units);
 
-  const { focusPrevOrder } = useFocus({
+  const { focusPrevInput } = useFocus({
     validate: validator.validateExpiredDate,
-    orders: units,
+    inputNames: units,
     validations,
     inputRefs,
     currentInputRef: currentInputRef,
@@ -40,7 +40,7 @@ function ExpiredDateContextProvider({ children }) {
 
       updateDate(unit, newDate);
       updateValidation(unit, newDate);
-      focusPrevOrder(unit, newDate, inputType);
+      focusPrevInput(unit, newDate, inputType);
       currentInputRef.current = unit;
     }
   };
