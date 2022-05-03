@@ -1,10 +1,25 @@
 import React from 'react';
-import CardOwnerNameInput from './CardOwnerNameInput';
 import { useAppDispatch, useAppState } from '../../../hooks/hooks';
 import { ActionType } from '../../../types';
 import { createAction } from '../../../context/Provider';
 import { isEnglish } from '../../../utils';
 import { MAX_NAME_LENGTH } from '../../../constants';
+import CardFormInput from '../CardFormInput';
+import { css } from '@emotion/react';
+
+const style = css({
+  height: '45px',
+  width: '100%',
+  borderRadius: '7px',
+  maxWidth: '318px',
+  outline: 'none !important',
+  border: 'inherit',
+  fontSize: '18px',
+  textAlign: 'center',
+  '&:focus': {
+    boxShadow: 'none',
+  },
+});
 
 function CardOwnerNameInputContainer() {
   const { name } = useAppState();
@@ -56,7 +71,13 @@ function CardOwnerNameInputContainer() {
 
   return (
     <>
-      <CardOwnerNameInput onChange={handleChage} value={name} />
+      <CardFormInput
+        type="text"
+        onChange={handleChage}
+        value={name}
+        placeholder="카드에 표시될 이름을 작성해주세요."
+        style={style}
+      />
     </>
   );
 }

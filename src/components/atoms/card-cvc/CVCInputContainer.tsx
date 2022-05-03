@@ -1,9 +1,25 @@
 import React from 'react';
-import CVCInput from './CVCInput';
 import { useAppDispatch, useAppState } from '../../../hooks/hooks';
 import { createAction } from '../../../context/Provider';
 import { ActionType } from '../../../types';
-import { isNum } from '../../../utils';
+import { isNum, removeWhiteSpaces } from '../../../utils';
+import CardFormInput from '../CardFormInput';
+import { css } from '@emotion/react';
+
+const style = css({
+  height: '45px',
+  width: '100%',
+  borderRadius: '7px',
+  maxWidth: '84px',
+  outline: 'none !important',
+  border: 'inherit',
+  fontSize: '21px',
+  textAlign: 'center',
+  marginRight: '11px',
+  '&:focus': {
+    boxShadow: 'none',
+  },
+});
 
 function CVCInputContainer() {
   const { cvc } = useAppState();
@@ -11,20 +27,28 @@ function CVCInputContainer() {
 
   const handleChage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const lastChar = value.slice(-1);
 
-    if (value.length > 3) return;
-
-    if (cvc.length < value.length) {
-      if (!isNum(lastChar)) return;
-
-      dispatch(createAction(ActionType.INPUT_CVC, cvc + lastChar));
+    if (cvc.length === 1 && value.length < cvc.length) {
+      dispatch(createAction(ActionType.INPUT_CVC, ''));
       return;
     }
 
-    dispatch(createAction(ActionType.INPUT_CVC, cvc.slice(0, cvc.length - 1)));
+    if (value.length > 3 || !isNum(value)) return;
+
+    dispatch(createAction(ActionType.INPUT_CVC, removeWhiteSpaces(value)));
   };
-  return <CVCInput onChange={handleChage} value={cvc} />;
+
+  return (
+    <>
+      <CardFormInput
+        type="password"
+        onChange={handleChage}
+        value={cvc}
+        placeholder="000"
+        style={style}
+      />
+    </>
+  );
 }
 
 export default CVCInputContainer;

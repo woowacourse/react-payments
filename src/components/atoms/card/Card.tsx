@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { transformNumToBullet } from '../../../utils';
 
 const CardDiv = styled.div(({ color }: { color?: string }) => ({
   width: '208px',
@@ -13,6 +14,7 @@ const CardDiv = styled.div(({ color }: { color?: string }) => ({
 
   // type
   '& .type': {
+    height: '12px',
     fontSize: '10px',
     marginBottom: '14px',
   },
@@ -29,6 +31,12 @@ const CardDiv = styled.div(({ color }: { color?: string }) => ({
 
   // number
   '& .number': {
+    display: 'flex',
+  },
+
+  // number
+  '& .number-child': {
+    width: '50px',
     fontSize: '14px',
     fontWeight: '600',
     marginBottom: '8px',
@@ -52,7 +60,10 @@ const OwnerNameSpan = styled.span<{ name: string }>(({ name }) => ({
 }));
 
 type Props = {
-  cardNumber: string;
+  firstInputCardNumber: string;
+  secondInputCardNumber: string;
+  thirdInputCardNumber: string;
+  fourthInputCardNumber: string;
   name: string;
   expiredPeriod: string;
   isActive: boolean;
@@ -60,7 +71,17 @@ type Props = {
   cardName?: string;
 };
 
-function Card({ cardNumber, name, expiredPeriod, isActive, color, cardName }: Props) {
+function Card({
+  firstInputCardNumber,
+  secondInputCardNumber,
+  thirdInputCardNumber,
+  fourthInputCardNumber,
+  name,
+  expiredPeriod,
+  isActive,
+  color,
+  cardName,
+}: Props) {
   const cn = isActive ? (cardName ? cardName : '로이드카드') : '';
   const _color = isActive ? (color ? color : '#94DACD') : undefined;
   return (
@@ -69,7 +90,12 @@ function Card({ cardNumber, name, expiredPeriod, isActive, color, cardName }: Pr
       <div className="chip-container">
         <div className="chip"></div>
       </div>
-      <div className="number">{cardNumber}</div>
+      <div className="number">
+        <div className="number-child">{firstInputCardNumber}</div>
+        <div className="number-child">{secondInputCardNumber}</div>
+        <div className="number-child">{transformNumToBullet(thirdInputCardNumber)}</div>
+        <div className="number-child">{transformNumToBullet(fourthInputCardNumber)}</div>
+      </div>
       <div className="info">
         <OwnerNameSpan name={name}>{name}</OwnerNameSpan>
         <span className="expired-period">{expiredPeriod}</span>

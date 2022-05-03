@@ -2,28 +2,40 @@ import React, { createContext, Dispatch, useReducer } from 'react';
 import { ActionType } from '../types';
 
 export type State = {
-  cardNumber: string;
+  firstInputCardNumber: string;
+  secondInputCardNumber: string;
+  thirdInputCardNumber: string;
+  fourthInputCardNumber: string;
   name: string;
   expiredPeriod: string;
   cvc: string;
-  password: Array<string>;
+  firstPassword: string;
+  secondPassword: string;
 };
 
 type Action =
-  | { type: ActionType.INPUT_CARDNUMBER; payload: any }
+  | { type: ActionType.FIRST_INPUT_CARD_NUMBER; payload: any }
+  | { type: ActionType.SECOND_INPUT_CARD_NUMBER; payload: any }
+  | { type: ActionType.THIRD_INPUT_CARD_NUMBER; payload: any }
+  | { type: ActionType.FOURTH_INPUT_CARD_NUMBER; payload: any }
   | { type: ActionType.INPUT_NAME; payload: any }
   | { type: ActionType.INPUT_EXPIRED_PERIOD; payload: any }
   | { type: ActionType.INPUT_CVC; payload: any }
-  | { type: ActionType.INPUT_PASSWORD; payload: any };
+  | { type: ActionType.FIRST_INPUT_PASSWORD; payload: any }
+  | { type: ActionType.SECOND_INPUT_PASSWORD; payload: any };
 
 export type AppDispatch = Dispatch<Action>;
 
 const initalState: State = {
-  cardNumber: '',
+  firstInputCardNumber: '',
+  secondInputCardNumber: '',
+  thirdInputCardNumber: '',
+  fourthInputCardNumber: '',
   name: '',
   expiredPeriod: '',
   cvc: '',
-  password: ['', ''],
+  firstPassword: '',
+  secondPassword: '',
 };
 
 // context를 전역에 선언한다
@@ -39,10 +51,25 @@ export function createAction(type: ActionType, payload: any): Action {
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
-    case ActionType.INPUT_CARDNUMBER:
+    case ActionType.FIRST_INPUT_CARD_NUMBER:
       return {
         ...state,
-        cardNumber: action.payload,
+        firstInputCardNumber: action.payload,
+      };
+    case ActionType.SECOND_INPUT_CARD_NUMBER:
+      return {
+        ...state,
+        secondInputCardNumber: action.payload,
+      };
+    case ActionType.THIRD_INPUT_CARD_NUMBER:
+      return {
+        ...state,
+        thirdInputCardNumber: action.payload,
+      };
+    case ActionType.FOURTH_INPUT_CARD_NUMBER:
+      return {
+        ...state,
+        fourthInputCardNumber: action.payload,
       };
     case ActionType.INPUT_NAME:
       return {
@@ -59,10 +86,15 @@ function reducer(state: State, action: Action): State {
         ...state,
         cvc: action.payload,
       };
-    case ActionType.INPUT_PASSWORD:
+    case ActionType.FIRST_INPUT_PASSWORD:
       return {
         ...state,
-        password: [...action.payload],
+        firstPassword: action.payload,
+      };
+    case ActionType.SECOND_INPUT_PASSWORD:
+      return {
+        ...state,
+        secondPassword: action.payload,
       };
   }
 }

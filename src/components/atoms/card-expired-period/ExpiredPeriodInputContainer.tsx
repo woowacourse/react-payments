@@ -3,7 +3,22 @@ import { useAppDispatch, useAppState } from '../../../hooks/hooks';
 import { createAction } from '../../../context/Provider';
 import { ActionType } from '../../../types';
 import { isNum, removeWhiteSpaces, removeSlash, transformToMMYY } from '../../../utils';
-import ExpiredPeriodInput from './ExpiredPeriodInput';
+import CardFormInput from '../CardFormInput';
+import { css } from '@emotion/react';
+
+const style = css({
+  height: '45px',
+  width: '100%',
+  borderRadius: '7px',
+  maxWidth: '137px',
+  outline: 'none !important',
+  border: 'inherit',
+  fontSize: '18px',
+  textAlign: 'center',
+  '&:focus': {
+    boxShadow: 'none',
+  },
+});
 
 function ExpiredPeriodInputContainer() {
   const { expiredPeriod } = useAppState();
@@ -61,7 +76,17 @@ function ExpiredPeriodInputContainer() {
     );
   };
 
-  return <ExpiredPeriodInput onChange={handleChange} value={transformToMMYY(expiredPeriod)} />;
+  return (
+    <>
+      <CardFormInput
+        type="text"
+        onChange={handleChange}
+        value={transformToMMYY(expiredPeriod)}
+        placeholder="MM / YY"
+        style={style}
+      />
+    </>
+  );
 }
 
 export default ExpiredPeriodInputContainer;

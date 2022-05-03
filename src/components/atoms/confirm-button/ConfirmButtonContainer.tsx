@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import React from 'react';
 import { useAppState } from '../../../hooks/hooks';
 import ConfirmButton from './ConfirmButton';
@@ -8,16 +7,28 @@ type Props = {
 };
 
 function ConfirmButtonContainer({ children }: Props) {
-  const { cardNumber, expiredPeriod, name, cvc, password } = useAppState();
-  const isPasswordFilled = password.every((pw) => pw);
+  const {
+    firstInputCardNumber,
+    secondInputCardNumber,
+    thirdInputCardNumber,
+    fourthInputCardNumber,
+    expiredPeriod,
+    name,
+    cvc,
+    firstPassword,
+    secondPassword,
+  } = useAppState();
 
   let _disabled = true;
   if (
-    cardNumber.length === 16 &&
+    firstInputCardNumber.length === 4 &&
+    secondInputCardNumber.length === 4 &&
+    thirdInputCardNumber.length === 4 &&
+    fourthInputCardNumber.length === 4 &&
     expiredPeriod.length === 4 &&
-    name.length > 0 &&
     cvc.length === 3 &&
-    isPasswordFilled
+    firstPassword.length === 1 &&
+    secondPassword.length === 1
   ) {
     _disabled = false;
   }

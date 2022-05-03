@@ -1,5 +1,5 @@
 import React from 'react';
-import CardPasswordInputContainerList from '../atoms/card-password/CardPasswordInputContainerList';
+import CardPasswordInputContainer from '../atoms/card-password/CardPasswordInputContainer';
 import { FieldHead, FieldSet, FieldBody } from '../templates/Fieldset';
 
 function CardPasswordFieldset() {
@@ -9,7 +9,7 @@ function CardPasswordFieldset() {
         <label>카드 비밀번호</label>
       </FieldHead>
       <FieldBody>
-        <CardPasswordInputContainerList />
+        <CardPasswordInputContainer />
       </FieldBody>
     </FieldSet>
   );

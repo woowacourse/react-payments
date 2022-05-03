@@ -30,12 +30,14 @@ function App() {
         <div css={cardWrapper}>
           <CardContainer />
         </div>
-        <CardNumberFieldset />
-        <ExpiredPeriodFieldset />
-        <CardOwnerNameFieldset />
-        <CVCFieldset />
-        <CardPasswordFieldset />
-        <ConfirmButtonContainer>다음</ConfirmButtonContainer>
+        <form>
+          <CardNumberFieldset />
+          <ExpiredPeriodFieldset />
+          <CardOwnerNameFieldset />
+          <CVCFieldset />
+          <CardPasswordFieldset />
+          <ConfirmButtonContainer>다음</ConfirmButtonContainer>
+        </form>
       </AppProvider>
     </div>
   );
