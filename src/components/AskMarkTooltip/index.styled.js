@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
+  position: relative;
   width: fit-content;
   gap: 10px;
   text-align: center;
@@ -40,6 +40,10 @@ export const TooltipText = styled.p`
   display: none;
   width: 180px;
   height: fit-content;
+
+  position: absolute;
+  top: -15px;
+  left: 25px;
   font-size: 12px;
   padding: 5px;
   word-break: keep-all;
