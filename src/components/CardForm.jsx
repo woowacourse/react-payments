@@ -4,6 +4,7 @@ import CardPreview from './common/CardPreview';
 import ToolTip from './common/ToolTip';
 import useForm from '../hooks/useForm';
 import useCardForm from '../hooks/useCardForm';
+import InputFieldContainer from './common/InputFieldContainer';
 
 const StyledCardForm = styled.form`
   margin: 0;
@@ -32,89 +33,6 @@ const StyledCardForm = styled.form`
   }
 `;
 
-const StyledCardFieldContainer = styled.div`
-  margin: 16px 0;
-
-  .input-title {
-    display: inline-block;
-
-    font-size: 12px;
-    line-height: 14px;
-    vertical-align: top;
-
-    margin-bottom: 4px;
-
-    color: #525252;
-  }
-
-  .input-box {
-    display: flex;
-    height: 47px;
-    align-items: center;
-    margin-top: 0.375rem;
-    color: #d3d3d3;
-    border-radius: 0.25rem;
-    background-color: #ecebf1;
-  }
-
-  .transparent {
-    background-color: transparent;
-  }
-
-  .input-basic {
-    background-color: #ecebf1;
-    height: 45px;
-    width: 100%;
-    text-align: center;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    border-color: #9ca3af;
-    border: none;
-    border-radius: 0.25rem;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 21px;
-    color: #525252;
-  }
-
-  .input-basic::placeholder {
-    letter-spacing: -0.02em;
-  }
-
-  .password {
-    background-color: #ecebf1;
-    width: 15%;
-    margin-right: 7px;
-  }
-
-  .disabled {
-    background-color: transparent;
-    width: 15%;
-    margin-right: 7px;
-  }
-
-  .name-length {
-    display: inline-block;
-    line-height: 14px;
-    float: right;
-  }
-
-  .cvc-block {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .error {
-    outline: 1px solid #ff9e9e;
-    outline-offset: -1px;
-    background-color: #ffc6c6;
-  }
-`;
-
 const CardForm = () => {
   const { cardFormSchema, onSubmit, onSubmitError } = useCardForm();
   const {
@@ -129,7 +47,7 @@ const CardForm = () => {
     <>
       <CardPreview values={values} />
       <StyledCardForm onSubmit={handleSubmit} disabled={isSubmitting}>
-        <StyledCardFieldContainer className="input-container">
+        <InputFieldContainer className="input-container">
           <label className="input-title">카드 번호</label>
           <div className="input-box">
             <input
@@ -154,8 +72,8 @@ const CardForm = () => {
               {...registerInputProps('fourthCardNumber')}
             />
           </div>
-        </StyledCardFieldContainer>
-        <StyledCardFieldContainer className="input-container">
+        </InputFieldContainer>
+        <InputFieldContainer className="input-container">
           <label className="input-title">만료일</label>
           <div className="input-box w-50">
             <input
@@ -170,8 +88,8 @@ const CardForm = () => {
               {...registerInputProps('expiredYear')}
             />
           </div>
-        </StyledCardFieldContainer>
-        <StyledCardFieldContainer className="input-container">
+        </InputFieldContainer>
+        <InputFieldContainer className="input-container">
           <label className="input-title">카드 소유자 이름 (선택)</label>
           <span className="input-title name-length">
             {' '}
@@ -184,8 +102,8 @@ const CardForm = () => {
               {...registerInputProps('owner')}
             />
           </div>
-        </StyledCardFieldContainer>
-        <StyledCardFieldContainer className="input-container">
+        </InputFieldContainer>
+        <InputFieldContainer className="input-container">
           <label className="input-title">보안코드 (CVC/CVV)</label>
           <div className="cvc-block">
             <div className="input-box w-25">
@@ -199,8 +117,8 @@ const CardForm = () => {
               ?
             </ToolTip>
           </div>
-        </StyledCardFieldContainer>
-        <StyledCardFieldContainer className="input-container">
+        </InputFieldContainer>
+        <InputFieldContainer className="input-container">
           <label className="input-title">비밀번호</label>
           <div className="input-box transparent">
             <input
@@ -230,7 +148,7 @@ const CardForm = () => {
               {...registerInputProps('fourthPasswordDigit')}
             />
           </div>
-        </StyledCardFieldContainer>
+        </InputFieldContainer>
         <button className="submit-button" type="submit">
           다음
         </button>
