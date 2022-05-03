@@ -32,21 +32,48 @@ const StyledInputContainer = styled.div`
   gap: 10px;
 `;
 
+const StyledErrorMessage = styled.span`
+  margin-left: 4px;
+  font-size: 11px;
+  color: #f38181;
+`;
+
 export default function InputField({
   labelText,
   children,
-  OptionalComponent,
   wrapperWidth,
   horizontalAlign,
   isComplete,
+  errorMessage,
+  OptionalComponent,
+  splitCount,
 }) {
+  const InputChildren = splitCount ? (
+    children.map((inputComponent, index) => (
+      <StyledInputWrapper
+        key={index}
+        width={`calc(${wrapperWidth} / ${splitCount})`}
+        align={horizontalAlign}
+      >
+        {inputComponent}
+      </StyledInputWrapper>
+    ))
+  ) : (
+    <StyledInputWrapper width={wrapperWidth} align={horizontalAlign}>
+      {children}
+    </StyledInputWrapper>
+  );
+
   return (
     <StyledInputField>
-      <StyledLabel isComplete={isComplete}>{labelText}</StyledLabel>
+      <StyledLabel isComplete={isComplete}>
+        {labelText}
+        {!isComplete && (
+          <StyledErrorMessage>{`(${errorMessage})`}</StyledErrorMessage>
+        )}
+      </StyledLabel>
       <StyledInputContainer>
-        <StyledInputWrapper width={wrapperWidth} align={horizontalAlign}>
-          {children}
-        </StyledInputWrapper>
+        {InputChildren}
         {OptionalComponent}
       </StyledInputContainer>
     </StyledInputField>
