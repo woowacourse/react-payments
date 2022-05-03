@@ -2,15 +2,11 @@ import "./index.scss";
 
 const Card = ({
   state: { cardNumber, expiredDate, ownerName, cardName, color },
-  setVisible,
+  onClick,
 }) => {
   return (
-    <div
-      onClick={() => {
-        setVisible(true);
-      }}
-    >
-      <div className="card__container" style={{ backgroundColor: color }}>
+    <div onClick={onClick}>
+      <div className={`card__container ${color}`}>
         <p className="card__name">{cardName}</p>
         <div className="rfid"></div>
         <div className="card__numbers">

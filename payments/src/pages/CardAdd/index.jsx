@@ -36,6 +36,10 @@ const CardAdd = () => {
     setVisible(false);
   };
 
+  const openModal = () => {
+    setVisible(true);
+  };
+
   return (
     <>
       <div className="card-add">
@@ -44,7 +48,7 @@ const CardAdd = () => {
           <p>카드 추가</p>
         </header>
         <div className="card-add__container">
-          <Card state={cardInfo} setVisible={setVisible} />
+          <Card state={cardInfo} onClick={openModal} />
           <form>
             <CardNumberInput state={cardNumber} updateForm={dispatch} />
             <ExpiredDateInput state={expiredDate} updateForm={dispatch} />

@@ -5,7 +5,7 @@
     "rf . . ."
     "cn cn cn cn"
     "ft ft ft ft";
-  background-color: #94dacd;
+  background-color: lightgray;
   padding: 10px;
   width: 210px;
   height: 130px;
@@ -51,4 +51,36 @@
     word-break: break-all;
     margin-right: 30px;
   }
+}
+
+.card__container.red {
+  background-color: red;
+}
+
+.card__container.orange {
+  background-color: orange;
+}
+
+.card__container.yellow {
+  background-color: yellow;
+}
+
+.card__container.green {
+  background-color: green;
+}
+
+.card__container.blue {
+  background-color: blue;
+}
+
+.card__container.pink {
+  background-color: pink;
+}
+
+.card__container.purple {
+  background-color: purple;
+}
+
+.card__container.gold {
+  background-color: gold;
 }
