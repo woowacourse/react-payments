@@ -1,44 +1,35 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
-import { LIMIT_LENGTH } from '../../constants';
-import { limitInputLength, inputEnglishOnly } from '../../utils';
+import { LIMIT_LENGTH } from 'constants';
+import { limitInputLength, inputEnglishOnly } from 'utils';
 
-function CardOwner({ cardInfo, setCardInfo }) {
-  const handleOnChange = (event) => {
-    let { value, name } = event.target;
-    value = inputEnglishOnly(value);
+function CardOwner({ cardOwner, setOwner }) {
+  const handleChange = (event) => {
+    const { value } = event.target;
 
-    if (value.length > LIMIT_LENGTH.CARD_OWNER) {
-      value = limitInputLength(value, LIMIT_LENGTH.CARD_OWNER);
-    }
+    const cardOwnerEnglishOnly = inputEnglishOnly(value);
 
-    setCardInfo({
-      ...cardInfo,
-      [name]: value,
-    });
+    const cardOwnerLengthSliced =
+      cardOwnerEnglishOnly.length > LIMIT_LENGTH.CARD_OWNER
+        ? limitInputLength(cardOwnerEnglishOnly, LIMIT_LENGTH.CARD_OWNER)
+        : cardOwnerEnglishOnly;
 
-    if (value.length >= 1) {
-      event.target.classList.add('input-correct');
-      return;
-    }
-    event.target.classList.remove('input-correct');
+    const newCardOwner = cardOwnerLengthSliced.toUpperCase();
+
+    setOwner(newCardOwner);
   };
 
   return (
     <div className="input-container">
       <div className="input-wrapper">
         <span className="input-title">카드 소유자 영문 이름(선택)</span>
-        <span className="input-length">
-          {cardInfo.owner.length <= 30 ? cardInfo.owner.length : 30}/30
-        </span>
+        <span className="input-length">{cardOwner.length <= 30 ? cardOwner.length : 30}/30</span>
       </div>
       <input
-        name="owner"
         type="text"
-        className="input-basic"
-        onChange={handleOnChange}
-        value={cardInfo.owner}
+        className={`input-basic ${cardOwner.length >= 1 ? 'input-correct' : null}`}
+        onChange={handleChange}
+        value={cardOwner}
       />
     </div>
   );
@@ -47,6 +38,6 @@ function CardOwner({ cardInfo, setCardInfo }) {
 export default CardOwner;
 
 CardOwner.propTypes = {
-  cardInfo: PropTypes.object.isRequired,
-  setCardInfo: PropTypes.func.isRequired,
+  cardOwner: PropTypes.string.isRequired,
+  setOwner: PropTypes.func.isRequired,
 };

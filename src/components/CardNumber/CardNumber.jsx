@@ -1,30 +1,39 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
-import { LIMIT_LENGTH } from '../../constants';
-import { limitInputLength, inputNumberOnly } from '../../utils';
+import { LIMIT_LENGTH } from 'constants';
+import { limitInputLength, inputNumberOnly } from 'utils';
 
-function CardNumber({ cardInfo, setCardInfo }) {
-  const handleOnInput = (event) => {
-    let { value, name } = event.target;
-    value = inputNumberOnly(value);
+function CardNumber({ cardNumbers, setCardNumbers }) {
+  const handleChange = (event) => {
+    const { value, name } = event.target;
 
-    if (value.length > LIMIT_LENGTH.CARD_NUMBER) {
-      value = limitInputLength(value, LIMIT_LENGTH.CARD_NUMBER);
+    const cardNumberInput = inputNumberOnly(value);
+
+    const cardNumberInputLengthSliced =
+      cardNumberInput.length > LIMIT_LENGTH.CARD_NUMBER
+        ? limitInputLength(cardNumberInput, LIMIT_LENGTH.CARD_NUMBER)
+        : cardNumberInput;
+
+    const newCardNumbers = [...cardNumbers];
+
+    switch (name) {
+      case 'number1':
+        newCardNumbers[0] = cardNumberInputLengthSliced;
+        break;
+      case 'number2':
+        newCardNumbers[1] = cardNumberInputLengthSliced;
+        break;
+      case 'number3':
+        newCardNumbers[2] = cardNumberInputLengthSliced;
+        break;
+      case 'number4':
+        newCardNumbers[3] = cardNumberInputLengthSliced;
+        break;
+      default:
+        break;
     }
 
-    setCardInfo({
-      ...cardInfo,
-      [name]: value,
-    });
-  };
-
-  const handleOnChange = (event) => {
-    if (event.target.value.length >= LIMIT_LENGTH.CARD_NUMBER) {
-      event.target.classList.add('input-correct');
-      return;
-    }
-    event.target.classList.remove('input-correct');
+    setCardNumbers(newCardNumbers);
   };
 
   return (
@@ -33,38 +42,42 @@ function CardNumber({ cardInfo, setCardInfo }) {
       <div className="input-box">
         <input
           name="number1"
-          className="input-basic"
-          type="text"
-          onChange={handleOnChange}
-          onInput={handleOnInput}
-          value={cardInfo.number1}
+          className={`input-basic ${
+            cardNumbers[0].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+          }`}
+          type="number"
+          onChange={handleChange}
+          value={cardNumbers[0]}
           required
         />
         <input
           name="number2"
-          className="input-basic"
-          type="text"
-          onChange={handleOnChange}
-          onInput={handleOnInput}
-          value={cardInfo.number2}
+          className={`input-basic ${
+            cardNumbers[1].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+          }`}
+          type="number"
+          onChange={handleChange}
+          value={cardNumbers[1]}
           required
         />
         <input
           name="number3"
-          className="input-basic"
+          className={`input-basic ${
+            cardNumbers[2].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+          }`}
           type="password"
-          onChange={handleOnChange}
-          onInput={handleOnInput}
-          value={cardInfo.number3}
+          onChange={handleChange}
+          value={cardNumbers[2]}
           required
         />
         <input
           name="number4"
-          className="input-basic"
+          className={`input-basic ${
+            cardNumbers[3].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+          }`}
           type="password"
-          onChange={handleOnChange}
-          onInput={handleOnInput}
-          value={cardInfo.number4}
+          onChange={handleChange}
+          value={cardNumbers[3]}
           required
         />
       </div>
@@ -75,6 +88,6 @@ function CardNumber({ cardInfo, setCardInfo }) {
 export default CardNumber;
 
 CardNumber.propTypes = {
-  cardInfo: PropTypes.object.isRequired,
-  setCardInfo: PropTypes.func.isRequired,
+  cardNumbers: PropTypes.array.isRequired,
+  setCardNumbers: PropTypes.func.isRequired,
 };

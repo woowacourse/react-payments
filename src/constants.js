@@ -7,7 +7,8 @@ const ERROR_MESSAGE = {
 };
 
 const MONTH = {
-  JANUARY: '1',
+  JANUARY: 1,
+  DECEMBER: 12,
   FEBRUARY: 2,
   SEPTEMBER: 9,
   LEADING_ZERO: '0',
@@ -28,6 +29,4 @@ const PAGES = {
 
 const CVC_DESCRIPTION = '카드 뒷면에 있는 3자리 숫자를 입력해주세요.';
 
-const LEADING_ZERO_MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09'];
-
-export { ERROR_MESSAGE, MONTH, LIMIT_LENGTH, CVC_DESCRIPTION, LEADING_ZERO_MONTHS, PAGES };
+export { ERROR_MESSAGE, MONTH, LIMIT_LENGTH, CVC_DESCRIPTION, PAGES };

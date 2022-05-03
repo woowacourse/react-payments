@@ -1,82 +1,52 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
-import { MONTH, LIMIT_LENGTH, LEADING_ZERO_MONTHS } from '../../constants';
-import { inputNumberOnly, limitInputLength } from '../../utils';
+import { MONTH, LIMIT_LENGTH } from 'constants';
+import { inputNumberOnly, limitInputLength } from 'utils';
 
-function CardExpirationDate({ cardInfo, setCardInfo }) {
-  const handleMonthOnFocusOut = (event) => {
-    let { value } = event.target;
+function CardExpirationDate({ cardExpirationDate, setCardExpirationDate }) {
+  const handleMonthInputBlur = (event) => {
+    const { value } = event.target;
 
-    if (value === '0' || value === '00') {
-      return;
-    }
+    const monthInput = value === String(MONTH.JANUARY) ? value.padStart(2, '0') : value;
 
-    if (value === MONTH.JANUARY) {
-      value = MONTH.LEADING_ZERO + MONTH.JANUARY;
-    }
+    const newCardExpirationDate = { ...cardExpirationDate, month: monthInput };
 
-    setCardInfo({
-      ...cardInfo,
-      month: value,
-    });
-
-    event.target.classList.add('input-correct');
+    setCardExpirationDate(newCardExpirationDate);
   };
 
-  const handleMonthOnChange = (event) => {
-    let { value, name } = event.target;
-    value = inputNumberOnly(value);
+  const handleMonthInputChange = (event) => {
+    const { value } = event.target;
 
-    if (value.length > LIMIT_LENGTH.EXPIRATION_DATE) {
-      value = limitInputLength(value, LIMIT_LENGTH.EXPIRATION_DATE);
-    }
+    const monthInputNumberOnly = inputNumberOnly(value);
 
-    if (value >= MONTH.FEBRUARY && value <= MONTH.SEPTEMBER) {
-      value = MONTH.LEADING_ZERO + Number(value);
-      event.target.classList.add('input-correct');
-    }
+    const monthInputLengthSliced =
+      monthInputNumberOnly.length > LIMIT_LENGTH.EXPIRATION_DATE
+        ? limitInputLength(monthInputNumberOnly, LIMIT_LENGTH.EXPIRATION_DATE)
+        : monthInputNumberOnly;
 
-    setCardInfo({
-      ...cardInfo,
-      [name]: value,
-    });
+    const monthInputPadded =
+      monthInputLengthSliced >= MONTH.FEBRUARY && monthInputLengthSliced <= MONTH.SEPTEMBER
+        ? monthInputLengthSliced.padStart(2, '0')
+        : monthInputLengthSliced;
 
-    if (value === '00') return;
+    const newCardExpirationDate = { ...cardExpirationDate, month: monthInputPadded };
 
-    if (value >= MONTH.FEBRUARY && value <= MONTH.SEPTEMBER) {
-      event.target.value = MONTH.LEADING_ZERO + Number(value);
-    }
-
-    if (LEADING_ZERO_MONTHS.includes(value)) event.target.classList.add('input-correct');
-
-    if (value.length >= LIMIT_LENGTH.EXPIRATION_DATE) {
-      event.target.classList.add('input-correct');
-      return;
-    }
-    event.target.classList.remove('input-correct');
+    setCardExpirationDate(newCardExpirationDate);
   };
 
-  const handleYearOnChange = (event) => {
-    let { value, name } = event.target;
-    value = inputNumberOnly(value);
+  const handleYearInputChange = (event) => {
+    const { value } = event.target;
 
-    if (value.length > LIMIT_LENGTH.EXPIRATION_DATE) {
-      value = limitInputLength(value, LIMIT_LENGTH.EXPIRATION_DATE);
-    }
+    const yearInputNumberOnly = inputNumberOnly(value);
 
-    setCardInfo({
-      ...cardInfo,
-      [name]: value,
-    });
+    const yearInputLengthSliced =
+      yearInputNumberOnly.length > LIMIT_LENGTH.EXPIRATION_DATE
+        ? limitInputLength(yearInputNumberOnly, LIMIT_LENGTH.EXPIRATION_DATE)
+        : yearInputNumberOnly;
 
-    if (value === '00') return;
+    const newCardExpirationDate = { ...cardExpirationDate, year: yearInputLengthSliced };
 
-    if (value.length >= LIMIT_LENGTH.EXPIRATION_DATE) {
-      event.target.classList.add('input-correct');
-      return;
-    }
-    event.target.classList.remove('input-correct');
+    setCardExpirationDate(newCardExpirationDate);
   };
 
   return (
@@ -85,21 +55,31 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
       <div className="input-box w-50">
         <input
           name="month"
-          className="input-basic"
-          type="text"
+          className={`input-basic ${
+            cardExpirationDate.month.length === LIMIT_LENGTH.EXPIRATION_DATE &&
+            cardExpirationDate.month !== '00' &&
+            cardExpirationDate.month !== '0' &&
+            cardExpirationDate.month >= MONTH.JANUARY &&
+            cardExpirationDate.month <= MONTH.DECEMBER
+              ? 'input-correct'
+              : null
+          }`}
+          type="number"
           placeholder="MM"
-          onChange={handleMonthOnChange}
-          onBlur={handleMonthOnFocusOut}
-          value={cardInfo.month}
+          onChange={handleMonthInputChange}
+          onBlur={handleMonthInputBlur}
+          value={cardExpirationDate.month}
           required
         />
         <input
           name="year"
-          className="input-basic"
-          type="text"
+          className={`input-basic ${
+            cardExpirationDate.year.length >= LIMIT_LENGTH.EXPIRATION_DATE ? 'input-correct' : null
+          }`}
+          type="number"
           placeholder="YY"
-          onChange={handleYearOnChange}
-          value={cardInfo.year}
+          onChange={handleYearInputChange}
+          value={cardExpirationDate.year}
           required
         />
       </div>
@@ -110,6 +90,6 @@ function CardExpirationDate({ cardInfo, setCardInfo }) {
 export default CardExpirationDate;
 
 CardExpirationDate.propTypes = {
-  cardInfo: PropTypes.object.isRequired,
-  setCardInfo: PropTypes.func.isRequired,
+  cardExpirationDate: PropTypes.object.isRequired,
+  setCardExpirationDate: PropTypes.func.isRequired,
 };

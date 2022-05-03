@@ -1,28 +1,33 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
-import { inputNumberOnly, limitInputLength } from '../../utils';
-import { LIMIT_LENGTH } from '../../constants';
+import { inputNumberOnly, limitInputLength } from 'utils';
+import { LIMIT_LENGTH } from 'constants';
 
-function CardPassword({ cardInfo, setCardInfo }) {
-  const handleOnChange = (event) => {
-    let { value, name } = event.target;
-    value = inputNumberOnly(value);
+function CardPassword({ cardPasswords, setCardPasswords }) {
+  const handleChange = (event) => {
+    const { value, name } = event.target;
 
-    if (value.length > LIMIT_LENGTH.CARD_PASSWORD) {
-      value = limitInputLength(value, LIMIT_LENGTH.CARD_PASSWORD);
+    const passwordInputNumberOnly = inputNumberOnly(value);
+
+    const passwordInputLengthSliced =
+      passwordInputNumberOnly.length > LIMIT_LENGTH.CARD_PASSWORD
+        ? limitInputLength(passwordInputNumberOnly, LIMIT_LENGTH.CARD_PASSWORD)
+        : passwordInputNumberOnly;
+
+    const newCardPasswords = [...cardPasswords];
+
+    switch (name) {
+      case 'password1':
+        newCardPasswords[0] = passwordInputLengthSliced;
+        break;
+      case 'password2':
+        newCardPasswords[1] = passwordInputLengthSliced;
+        break;
+      default:
+        break;
     }
 
-    setCardInfo({
-      ...cardInfo,
-      [name]: value,
-    });
-
-    if (event.target.value.length >= LIMIT_LENGTH.CARD_PASSWORD) {
-      event.target.classList.add('input-correct');
-      return;
-    }
-    event.target.classList.remove('input-correct');
+    setCardPasswords(newCardPasswords);
   };
 
   return (
@@ -30,28 +35,32 @@ function CardPassword({ cardInfo, setCardInfo }) {
       <span className="input-title">카드 비밀번호</span>
       <input
         name="password1"
-        className="input-basic w-15 input-password"
+        className={`input-basic w-15 input-password  ${
+          cardPasswords[0].length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : null
+        }`}
         type="password"
-        onChange={handleOnChange}
-        value={cardInfo.password1}
+        onChange={handleChange}
+        value={cardPasswords[0]}
         required
       />
       <input
         name="password2"
-        className="input-basic w-15 input-password"
+        className={`input-basic w-15 input-password ${
+          cardPasswords[1].length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : null
+        }`}
         type="password"
-        onChange={handleOnChange}
-        value={cardInfo.password2}
+        onChange={handleChange}
+        value={cardPasswords[1]}
         required
       />
       <input
-        className="input-basic w-15 input-password input-background-hidden"
+        className={`input-basic w-15 input-password input-background-hidden`}
         type="password"
         value={'⋅'}
         disabled
       />
       <input
-        className="input-basic w-15 input-password input-background-hidden"
+        className={`input-basic w-15 input-password input-background-hidden`}
         type="password"
         value={'⋅'}
         disabled
@@ -63,6 +72,6 @@ function CardPassword({ cardInfo, setCardInfo }) {
 export default CardPassword;
 
 CardPassword.propTypes = {
-  cardInfo: PropTypes.object.isRequired,
-  setCardInfo: PropTypes.func.isRequired,
+  cardPasswords: PropTypes.array.isRequired,
+  setCardPasswords: PropTypes.func.isRequired,
 };

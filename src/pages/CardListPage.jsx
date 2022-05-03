@@ -1,7 +1,8 @@
-import React from 'react';
-import Card from '../components/common/Card/Card';
-import PageTitle from '../components/common/PageTitle/PageTitle';
-import { PAGES } from '../constants';
+import Header from '../components/Header/Header';
+import Card from 'components/common/Card/Card';
+import PageTitle from 'components/common/PageTitle/PageTitle';
+
+import { PAGES } from 'constants';
 
 function CardListPage({ setPage }) {
   const handleCardAdd = () => {
@@ -10,8 +11,10 @@ function CardListPage({ setPage }) {
 
   return (
     <div className="app">
-      <PageTitle title="보유카드" />
-      <Card isEmpty={true} handleCardAdd={handleCardAdd} />
+      <Header>
+        <PageTitle title="보유카드" />
+      </Header>
+      <Card isEmpty handleCardAdd={handleCardAdd} />
     </div>
   );
 }

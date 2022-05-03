@@ -1,3 +1,18 @@
 {
-  "extends": ["react-app", "plugin:prettier/recommended"]
+  "extends": ["react-app", "plugin:prettier/recommended", "plugin:storybook/recommended"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+    "react/jsx-no-useless-fragment": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/require-default-props": "off"
+  }
 }
