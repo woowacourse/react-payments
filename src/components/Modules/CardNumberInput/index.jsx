@@ -27,7 +27,7 @@ function CardNumberInput() {
   } = useContext(CardNumberContext);
 
   const handleNumberChange = ({ target, nativeEvent: { data, inputType } }) => {
-    if (numberRegex.test(data) || !data) {
+    if ((numberRegex.test(data) || !data) && target.value.length <= 4) {
       const order = target.name;
       const newNumber = target.value;
 

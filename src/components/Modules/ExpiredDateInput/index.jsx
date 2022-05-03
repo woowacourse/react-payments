@@ -28,7 +28,7 @@ function ExpiredDateInput() {
   } = useContext(ExpiredDateContext);
 
   const onDateChange = ({ target, nativeEvent: { data, inputType } }) => {
-    if (numberRegex.test(data) || !data) {
+    if ((numberRegex.test(data) || !data) && target.value.length <= 2) {
       const unit = target.name;
       const newDate = target.value;
 

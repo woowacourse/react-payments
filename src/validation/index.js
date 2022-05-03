@@ -2,13 +2,13 @@ import { INPUT_TYPE } from '../constant';
 
 export default {
   validateCardNumber: cardNumber => {
-    const cardNumberRegex = /[0-9]{4}/;
+    const cardNumberRegex = /^[0-9]{4,4}$/;
 
     return cardNumberRegex.test(cardNumber);
   },
 
   validateDate: date => {
-    const dateRegex = /[0-9]{2,2}/;
+    const dateRegex = /^[0-9]{2,2}$/;
 
     return dateRegex.test(date);
   },
@@ -20,7 +20,7 @@ export default {
   },
 
   validateExpiredDate: date => {
-    const expiredDateRegex = /[0-9]{2}/;
+    const expiredDateRegex = /^[0-9]{2,2}$/;
 
     return expiredDateRegex.test(date);
   },
