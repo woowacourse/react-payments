@@ -21,7 +21,8 @@ Deactivated.args = {
     expireYear: 'YY',
     ownerName: 'NAME',
     securityCode: '',
-    password: '',
+    firstPassword: '',
+    secondPassword: '',
   },
 };
 
@@ -37,6 +38,7 @@ Activated.args = {
     expireYear: '23',
     ownerName: 'ahn',
     securityCode: '123',
-    password: '99',
+    firstPassword: '1',
+    secondPassword: '2',
   },
 };

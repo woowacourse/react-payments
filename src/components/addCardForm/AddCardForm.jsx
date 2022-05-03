@@ -1,36 +1,12 @@
-import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Input from '../input/Input';
 import { validNumber, validMaxLength, validRange } from '../../validator';
 import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../../constants';
 
-function AddCardForm({ updateCard, addCard }) {
-  const [cardForm, setCardForm] = useState({
-    firstCardNumber: '',
-    secondCardNumber: '',
-    thirdCardNumber: '',
-    fourthCardNumber: '',
-    expireMonth: '',
-    expireYear: '',
-    ownerName: '',
-    securityCode: '',
-    firstPassword: '',
-    secondPassword: '',
-  });
-
-  useEffect(() => {
-    updateCard(cardForm);
-  }, [cardForm]);
-
+function AddCard({ card, updateCard, addCard }) {
   const handleSubmit = (event) => {
     event.preventDefault();
-    addCard(cardForm);
-  };
-
-  const updateCardForm = (name, value) => {
-    setCardForm((prevCardForm) => {
-      return { ...prevCardForm, [name]: value };
-    });
+    addCard();
   };
 
   return (
@@ -40,32 +16,32 @@ function AddCardForm({ updateCard, addCard }) {
         <div className="input-box">
           <Input
             length={MAX_LENGTH.CARD_NUMBER}
-            value={cardForm.firstCardNumber}
+            value={card.firstCardNumber}
             name="firstCardNumber"
-            updateCardForm={updateCardForm}
+            updateCard={updateCard}
             validators={{ validMaxLength, validNumber }}
           />
           <Input
             length={MAX_LENGTH.CARD_NUMBER}
-            value={cardForm.secondCardNumber}
+            value={card.secondCardNumber}
             name="secondCardNumber"
-            updateCardForm={updateCardForm}
+            updateCard={updateCard}
             validators={{ validMaxLength, validNumber }}
           />
           <Input
             type="password"
             length={MAX_LENGTH.CARD_NUMBER}
-            value={cardForm.thirdCardNumber}
+            value={card.thirdCardNumber}
             name="thirdCardNumber"
-            updateCardForm={updateCardForm}
+            updateCard={updateCard}
             validators={{ validMaxLength, validNumber }}
           />
           <Input
             type="password"
             length={MAX_LENGTH.CARD_NUMBER}
-            value={cardForm.fourthCardNumber}
+            value={card.fourthCardNumber}
             name="fourthCardNumber"
-            updateCardForm={updateCardForm}
+            updateCard={updateCard}
             validators={{ validMaxLength, validNumber }}
           />
         </div>
@@ -79,18 +55,18 @@ function AddCardForm({ updateCard, addCard }) {
             minLength={MIN_LENGTH.MONTH}
             min={RANGE.MONTH_MIN}
             max={RANGE.MONTH_MAX}
-            value={cardForm.expireMonth}
+            value={card.expireMonth}
             name="expireMonth"
-            updateCardForm={updateCardForm}
+            updateCard={updateCard}
             validators={{ validMaxLength, validNumber, validRange }}
           />
           /
           <Input
             placeholder="YY"
             length={MAX_LENGTH.DATE}
-            value={cardForm.expireYear}
+            value={card.expireYear}
             name="expireYear"
-            updateCardForm={updateCardForm}
+            updateCard={updateCard}
             validators={{ validMaxLength, validNumber }}
           />
         </div>
@@ -99,16 +75,16 @@ function AddCardForm({ updateCard, addCard }) {
         <div className="owner-name-wrapper">
           <span className="input-title">카드 소유자 이름(선택)</span>
           <span className="input-title">
-            {cardForm.ownerName.length}/{MAX_LENGTH.NAME}
+            {card.ownerName.length}/{MAX_LENGTH.NAME}
           </span>
         </div>
         <Input
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           length={MAX_LENGTH.NAME}
           minLength={MIN_LENGTH.NAME}
-          value={cardForm.ownerName}
+          value={card.ownerName}
           name="ownerName"
-          updateCardForm={updateCardForm}
+          updateCard={updateCard}
           validators={{ validMaxLength }}
           optional={false}
         />
@@ -119,9 +95,9 @@ function AddCardForm({ updateCard, addCard }) {
           size="w-25"
           type="password"
           length={MAX_LENGTH.SECURITY_CODE}
-          value={cardForm.securityCode}
+          value={card.securityCode}
           name="securityCode"
-          updateCardForm={updateCardForm}
+          updateCard={updateCard}
           validators={{ validMaxLength, validNumber }}
         />
         <div className="help-tip">
@@ -134,18 +110,18 @@ function AddCardForm({ updateCard, addCard }) {
           size="w-15 mr-10"
           type="password"
           length={MAX_LENGTH.PASSWORD}
-          value={cardForm.firstPassword}
+          value={card.firstPassword}
           name="firstPassword"
-          updateCardForm={updateCardForm}
+          updateCard={updateCard}
           validators={{ validMaxLength, validNumber }}
         />
         <Input
           size="w-15 mr-10"
           type="password"
           length={MAX_LENGTH.PASSWORD}
-          value={cardForm.secondPassword}
+          value={card.secondPassword}
           name="secondPassword"
-          updateCardForm={updateCardForm}
+          updateCard={updateCard}
           validators={{ validMaxLength, validNumber }}
         />
         <div className="dot" />
@@ -160,9 +136,21 @@ function AddCardForm({ updateCard, addCard }) {
   );
 }
 
-AddCardForm.propTypes = {
+AddCard.propTypes = {
+  card: PropTypes.shape({
+    firstCardNumber: PropTypes.string.isRequired,
+    secondCardNumber: PropTypes.string.isRequired,
+    thirdCardNumber: PropTypes.string.isRequired,
+    fourthCardNumber: PropTypes.string.isRequired,
+    expireMonth: PropTypes.string.isRequired,
+    expireYear: PropTypes.string.isRequired,
+    ownerName: PropTypes.string.isRequired,
+    securityCode: PropTypes.string.isRequired,
+    firstPassword: PropTypes.string,
+    secondPassword: PropTypes.string,
+  }).isRequired,
   updateCard: PropTypes.func,
   addCard: PropTypes.func,
 };
 
-export default AddCardForm;
+export default AddCard;

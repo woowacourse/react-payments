@@ -12,38 +12,18 @@ function AddCard() {
     expireYear: '',
     ownerName: '',
     securityCode: '',
-    password: '',
+    firstPassword: '',
+    secondPassword: '',
   });
 
-  const updateCard = (cardForm) => {
-    const {
-      firstCardNumber,
-      secondCardNumber,
-      thirdCardNumber,
-      fourthCardNumber,
-      expireMonth,
-      expireYear,
-      ownerName,
-      securityCode,
-      firstPassword,
-      secondPassword,
-    } = cardForm;
-
-    setCard({
-      firstCardNumber,
-      secondCardNumber,
-      thirdCardNumber,
-      fourthCardNumber,
-      expireMonth,
-      expireYear,
-      ownerName,
-      securityCode,
-      password: firstPassword + secondPassword,
+  const updateCard = (name, value) => {
+    setCard((prevCard) => {
+      return { ...prevCard, [name]: value };
     });
   };
 
-  const alertAddedCard = (submittedCard) => {
-    alert(`카드를 추가하였습니다. ${submittedCard.ownerName}의 카드`);
+  const alertAddedCard = () => {
+    alert(`카드를 추가하였습니다. ${card.ownerName}의 카드`);
   };
 
   return (
@@ -53,7 +33,7 @@ function AddCard() {
         <h2 className="page-title">카드 추가</h2>
       </div>
       <Card card={card} />
-      <AddCardForm updateCard={updateCard} addCard={alertAddedCard} />
+      <AddCardForm card={card} updateCard={updateCard} addCard={alertAddedCard} />
     </>
   );
 }

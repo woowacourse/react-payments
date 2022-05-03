@@ -10,7 +10,7 @@ function Input({
   max,
   name,
   value,
-  updateCardForm,
+  updateCard,
   validators,
   optional,
 }) {
@@ -31,7 +31,7 @@ function Input({
     const inputValue = event.target.value;
     try {
       checkValidation(inputValue);
-      updateCardForm(name, inputValue);
+      updateCard(name, inputValue);
     } catch (error) {
       alert(error.message);
     }
@@ -62,7 +62,7 @@ Input.propTypes = {
   max: PropTypes.number,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  updateCardForm: PropTypes.func.isRequired,
+  updateCard: PropTypes.func.isRequired,
   validators: PropTypes.shape({
     validMaxLength: PropTypes.func.isRequired,
     validNumber: PropTypes.func,
