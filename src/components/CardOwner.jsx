@@ -1,41 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { InputContainer, Label } from './common/styled';
 import ErrorMessage from './common/ErrorMessage';
 import LetterCounter from './common/LetterCounter';
 import Input from './common/Input';
 
-const MAX_NAME_LENGTH = 30;
-
 const convertToUpperCase = word => word.toUpperCase();
-const notAlphabet = word => /[^a-zA-Z\s]/.test(word);
 
-const validator = value => {
-  if (notAlphabet(value)) {
-    throw new Error('영어만 입력해 주세요.');
-  }
-
-  if (value.length > MAX_NAME_LENGTH) {
-    throw new Error(`최대 ${MAX_NAME_LENGTH}글자까지 입력할 수 있습니다.`);
-  }
-};
-
-function CardOwner({ owner, setOwner }) {
-  const [errorMessage, setErrorMessage] = useState('');
-
+function CardOwner({ errorMessage, owner, updateOwner }) {
   const handleInputChange = ({ target: { name, value } }) => {
-    const upperCaseValue = convertToUpperCase(value);
-    try {
-      validator(upperCaseValue);
-    } catch (err) {
-      setErrorMessage(err.message);
-      return;
-    }
-
-    setErrorMessage('');
-    setOwner(prevOwner => ({
-      ...prevOwner,
-      [name]: upperCaseValue,
-    }));
+    updateOwner({ name, value: convertToUpperCase(value) });
   };
 
   return (

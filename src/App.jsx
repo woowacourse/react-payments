@@ -1,49 +1,98 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect, useMemo } from 'react';
+import styled from 'styled-components';
 
-import CardNumber from './components/CardNumber';
-import DueDate from './components/DueDate';
-import CardOwner from './components/CardOwner';
-import CardSecurityCode from './components/CardSecurityCode';
-import CardPassword from './components/CardPassword';
-import CardShape from './components/CardShape';
+import { LABEL_PRIMARY_COLOR } from './style';
+
 import Header from './components/common/Header';
 import TextButton from './components/common/TextButton';
 import Footer from './components/common/Footer';
+
+import { CardShape, CardNumber, DueDate, CardOwner, CardSecurityCode, CardPassword } from './components';
+import useInputHandler from './hooks/useInputHandler';
+import { validateCardCode, validateCardNumbers, validateOwner, validatePassword } from './validator';
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const convertToCardNumberString = ({ cardNoA, cardNoB, cardNoC, cardNoD }) =>
+  `${cardNoA} ${cardNoB} ${'*'.repeat(cardNoC.length)} ${'*'.repeat(cardNoD.length)}`;
 
 function App() {
   const targetRef = useRef();
 
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const [cardCompany, setCardCompany] = useState({
+    hexColor: '',
+    name: '',
+  });
 
-  const [cardNumber, setCardNumber] = useState('');
-  const [cardOwnerName, setCardOwnerName] = useState('NAME');
-  const [cardDate, setCardDate] = useState('');
+  const {
+    errorMessage: cardNoErrorMessage,
+    setErrorMessage: setCardNoErrorMessage,
+    inputValue: cardNumbers,
+    updateInputState: updateCardNumbers,
+  } = useInputHandler(validateCardNumbers, {
+    cardNoA: '',
+    cardNoB: '',
+    cardNoC: '',
+    cardNoD: '',
+  });
+  const [cardDate, setCardDate] = useState({
+    month: '',
+    year: '',
+  });
+  const {
+    errorMessage: ownerErrorMessage,
+    inputValue: owner,
+    updateInputState: updateOwner,
+  } = useInputHandler(validateOwner, {
+    name: '',
+  });
+  const {
+    errorMessage: cardCodeErrorMessage,
+    inputValue: cardCode,
+    updateInputState: updateCardCode,
+  } = useInputHandler(validateCardCode, {
+    cvc: '',
+  });
+  const {
+    errorMessage: pwdErrorMessage,
+    setErrorMessage: setPwdErrorMessage,
+    inputValue: pwd,
+    updateInputState: updatePwd,
+  } = useInputHandler(validatePassword, {
+    pwdNoA: '',
+    pwdNoB: '',
+  });
+  const [isRequiredCompleted, setIsRequiredCompleted] = useState(false);
 
-  const [isCorrectCardDate, setIsCorrectCardDate] = useState(false);
-  const [isCorrectOwnerName, setIsCorrectOwnerName] = useState(false);
-  const [isCorrectSecurityCode, setIsCorrectSecurityCode] = useState(false);
-  const [isCorrectCardPwd, setIsCorrectCardPwd] = useState(false);
-  const [isAllCompleted, setIsAllCompleted] = useState(false);
+  const isCorrectCardNumber = useMemo(() => Object.values(cardNumbers).join('').length === 16, [cardNumbers]);
+  const isCorrectPwd = useMemo(() => Object.values(pwd).join('').length === 2, [pwd]);
 
-  const cardNumberCallback = numbers => setCardNumber(numbers);
-  const cardDateCallback = date => setCardDate(date);
-  const ownerNameCallback = ownerName => setCardOwnerName(ownerName);
-  const correctOwnerNameCallback = isCorrect => setIsCorrectOwnerName(isCorrect);
-  const correctSecurityCodeCallback = isCorrect => setIsCorrectSecurityCode(isCorrect);
-  const correctCardPwdCallback = isCorrect => setIsCorrectCardPwd(isCorrect);
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    if (!isRequiredCompleted) return;
+    alert('카드 등록이 완료 되었습니다 :D');
+  };
 
   useEffect(() => {
-    const isOkCardNumber = cardNumber !== '';
-    const allOk = [
-      isOkCardNumber,
-      isCorrectCardDate,
-      isCorrectOwnerName,
-      isCorrectSecurityCode,
-      isCorrectCardPwd,
-    ].every(ok => ok);
-
-    setIsAllCompleted(allOk);
-  }, [cardNumber, isCorrectCardDate, isCorrectOwnerName, isCorrectSecurityCode, isCorrectCardPwd]);
+    if (
+      cardCompany.name &&
+      cardCompany.hexColor &&
+      isCorrectCardNumber &&
+      cardDate.month &&
+      cardDate.year &&
+      cardCode.cvc.length === 3 &&
+      isCorrectPwd
+    ) {
+      setIsRequiredCompleted(true);
+      return;
+    }
+    setIsRequiredCompleted(false);
+  }, [isCorrectCardNumber, cardCompany, cardDate, cardCode, isCorrectPwd]);
 
   useLayoutEffect(() => {
     if (targetRef.current) {
@@ -55,27 +104,41 @@ function App() {
   }, []);
 
   return (
-    <div className="app" ref={targetRef}>
+    <main className="app" ref={targetRef}>
       <Header>{'카드추가'}</Header>
-      <CardShape dimensions={dimensions} cardNumber={cardNumber} cardOwnerName={cardOwnerName} cardDate={cardDate} />
-      <CardNumber cardNumberCallback={cardNumberCallback} />
-      <DueDate
-        dimensions={dimensions}
-        cardDateCallback={cardDateCallback}
-        setIsCorrectCardDate={setIsCorrectCardDate}
-      />
-      <CardOwner ownerNameCallback={ownerNameCallback} correctOwnerNameCallback={correctOwnerNameCallback} />
-      <CardSecurityCode correctSecurityCodeCallback={correctSecurityCodeCallback} />
-      <CardPassword correctCardPwdCallback={correctCardPwdCallback} />
-      <Footer>
-        <TextButton
-          hexColor="#525252"
-          isVisible={isAllCompleted}
-          handleClick={() => alert('카드 등록이 완료 되었습니다 :D')}>
-          다음
-        </TextButton>
-      </Footer>
-    </div>
+      <Form onSubmit={handleSubmit}>
+        <CardShape
+          dimensions={dimensions}
+          cardCompany={cardCompany}
+          setCardCompany={setCardCompany}
+          cardNumber={convertToCardNumberString(cardNumbers)}
+          cardOwnerName={owner.name}
+          cardDate={cardDate}
+        />
+        <CardNumber
+          errorMessage={cardNoErrorMessage}
+          setErrorMessage={setCardNoErrorMessage}
+          cardNumbers={cardNumbers}
+          updateCardNumbers={updateCardNumbers}
+          isCorrectCardNumber={isCorrectCardNumber}
+        />
+        <DueDate dimensions={dimensions} cardDate={cardDate} setCardDate={setCardDate} />
+        <CardOwner errorMessage={ownerErrorMessage} owner={owner} updateOwner={updateOwner} />
+        <CardSecurityCode errorMessage={cardCodeErrorMessage} cardCode={cardCode} updateCardCode={updateCardCode} />
+        <CardPassword
+          errorMessage={pwdErrorMessage}
+          setErrorMessage={setPwdErrorMessage}
+          pwd={pwd}
+          updatePwd={updatePwd}
+          isCorrectPwd={isCorrectPwd}
+        />
+        <Footer>
+          <TextButton hexColor={LABEL_PRIMARY_COLOR} isVisible={isRequiredCompleted}>
+            다음
+          </TextButton>
+        </Footer>
+      </Form>
+    </main>
   );
 }
 

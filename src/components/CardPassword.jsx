@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { InputContainer, Label, InputWrapper } from './common/styled';
 import InactiveContainer from './common/InactiveContainer';
@@ -11,40 +11,9 @@ const InputPasswordWrapper = styled.div`
   width: 50%;
 `;
 
-const MAX_PASSWORD_UNIT = 1;
-
-const validator = value => {
-  if (value.includes(' ') || Number.isNaN(Number(value))) {
-    throw new Error('숫자만 입력해주세요.');
-  }
-
-  if (value.includes('.')) {
-    throw new Error('소수점은 입력하실 수 없습니다.');
-  }
-
-  if (value.length > MAX_PASSWORD_UNIT) {
-    throw new Error(`한 칸당 최대 ${MAX_PASSWORD_UNIT}개의 숫자를 입력해야 합니다.`);
-  }
-};
-
-function CardPassword({ pwd, setPwd }) {
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const isCorrectPwd = useMemo(() => Object.values(pwd).join('').length === 2, [pwd]);
-
-  const handleInputChange = ({ target: { name, value } }) => {
-    try {
-      validator(value);
-    } catch (err) {
-      setErrorMessage(err.message);
-      return;
-    }
-
-    setErrorMessage('');
-    setPwd(prevPwds => ({
-      ...prevPwds,
-      [name]: value,
-    }));
+function CardPassword({ errorMessage, setErrorMessage, pwd, updatePwd, isCorrectPwd }) {
+  const handleInputChange = ({ target }) => {
+    updatePwd(target);
 
     if (!isCorrectPwd) {
       setErrorMessage('모두 입력해주세요.');
@@ -53,7 +22,7 @@ function CardPassword({ pwd, setPwd }) {
 
   useEffect(() => {
     if (isCorrectPwd) setErrorMessage('');
-  }, [isCorrectPwd]);
+  }, [isCorrectPwd, setErrorMessage]);
 
   return (
     <InputContainer>
