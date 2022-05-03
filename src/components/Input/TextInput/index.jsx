@@ -29,7 +29,11 @@ function TextInput({
   }, [value, inputElementsRef, inputElementKey, maxLength]);
 
   const onFocus = () => {
-    setIsShowVirtualKeyboard(false);
+    setIsShowVirtualKeyboard(prev => ({
+      ...prev,
+      isShow: false,
+      elementKey: null,
+    }));
   };
 
   return (

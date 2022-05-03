@@ -4,6 +4,7 @@ import { PASSWORD_TYPE } from '../../types';
 import { uid } from 'react-uid';
 import LabelInputContainer from '../../LabelInputContainer';
 import PasswordInput from '../../Input/PasswordInput';
+import { INPUT_ELEMENT_KEY_SEPARATOR } from '../../../utils/constants';
 
 function PasswordInputContainer({
   state,
@@ -21,7 +22,7 @@ function PasswordInputContainer({
           maxLength={1}
           required
           inputElementsRef={inputElementsRef}
-          inputElementKey={`${stateName}${stateKey}`}
+          inputElementKey={`${stateName}${INPUT_ELEMENT_KEY_SEPARATOR}${stateKey}`}
           setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
           setPasswordInputValue={value =>
             cardInputDispatch({

@@ -5,6 +5,7 @@ import { uid } from 'react-uid';
 import LabelInputContainer from '../../LabelInputContainer';
 import TextInput from '../../Input/TextInput';
 import { isNumberInRange } from '../../../utils/validation/form';
+import { INPUT_ELEMENT_KEY_SEPARATOR } from '../../../utils/constants';
 
 function ExpirationDateInputContainer({
   state,
@@ -38,7 +39,7 @@ function ExpirationDateInputContainer({
           required
           onChange={e => onChangeExpirationDate(e, stateKey)}
           inputElementsRef={inputElementsRef}
-          inputElementKey={`${stateName}${stateKey}`}
+          inputElementKey={`${stateName}${INPUT_ELEMENT_KEY_SEPARATOR}${stateKey}`}
           setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
         />
       ))}

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useMouseHover } from '../../hooks/useMouseHover';
+import Position from '../commons/Position';
 
 function LabelInputContainer({ labelTitle, inputSize = '', helpText, htmlFor, children }) {
   const [isMouseOver, onMouseOver, onMouseLeave] = useMouseHover();
@@ -19,7 +20,11 @@ function LabelInputContainer({ labelTitle, inputSize = '', helpText, htmlFor, ch
           </div>
         )}
 
-        {isMouseOver && <div className="help-content-text">{helpText}</div>}
+        {isMouseOver && (
+          <Position position="absolute" right="0" bottom="10px">
+            <div className="help-content-text">{helpText}</div>
+          </Position>
+        )}
       </div>
     </div>
   );

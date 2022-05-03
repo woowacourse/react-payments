@@ -4,6 +4,7 @@
 @import './modal.css';
 @import './utils.css';
 @import './animaition.css';
+@import './virtualKeyboard.css';
 body {
   display: flex;
   flex-direction: column;

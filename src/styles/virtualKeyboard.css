@@ -1,0 +1,21 @@
+.virtual-keyboard-wrapper {
+  width: 300px;
+  height: 193px;
+
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.virtual-keyboard-item {
+  border: 1px solid #fff;
+  background-color: #94dacd;
+  color: white;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}

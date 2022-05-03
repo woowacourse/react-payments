@@ -6,6 +6,7 @@ import TextInput from '../../Input/TextInput';
 import LabelInputContainer from '../../LabelInputContainer';
 import { isNumberInRange } from '../../../utils/validation/form';
 import PasswordInput from '../../Input/PasswordInput';
+import { INPUT_ELEMENT_KEY_SEPARATOR } from '../../../utils/constants';
 
 function CardNumberInputContainer({
   state,
@@ -34,7 +35,7 @@ function CardNumberInputContainer({
             maxLength={4}
             required
             inputElementsRef={inputElementsRef}
-            inputElementKey={`${stateName}${stateKey}`}
+            inputElementKey={`${stateName}${INPUT_ELEMENT_KEY_SEPARATOR}${stateKey}`}
             setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
             onChange={e => onChangeCardNumber(e, stateKey)}
           />
@@ -45,7 +46,7 @@ function CardNumberInputContainer({
             maxLength={4}
             required
             inputElementsRef={inputElementsRef}
-            inputElementKey={`${stateName}${stateKey}`}
+            inputElementKey={`${stateName}${INPUT_ELEMENT_KEY_SEPARATOR}${stateKey}`}
             setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
             setPasswordInputValue={value =>
               cardInputDispatch({

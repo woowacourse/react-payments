@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import { INPUT_ELEMENT_KEY_SEPARATOR } from '../utils/constants';
 
 const cardInputReducer = (state, action) => {
   const { type, payload } = action;
@@ -40,6 +41,18 @@ const cardInputReducer = (state, action) => {
         password: { ...state.password, [`${key}`]: password },
       };
     }
+
+    case 'CHANGE_PASSWORD_INPUT': {
+      const { elementKey, value } = payload;
+      const [stateName, stateKey] = elementKey.split(INPUT_ELEMENT_KEY_SEPARATOR);
+
+      if (stateKey) {
+        return { ...state, [`${stateName}`]: { ...state[stateName], [`${stateKey}`]: value } };
+      }
+
+      return { ...state, [`${stateName}`]: value };
+    }
+
     default:
       throw new Error();
   }

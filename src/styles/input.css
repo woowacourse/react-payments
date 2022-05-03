@@ -1,4 +1,5 @@
 .input-container {
+  position: relative;
   margin: 16px 0;
 }
 
@@ -62,9 +63,6 @@
 }
 
 .help-content-text {
-  position: absolute;
-  right: 30px;
-
   color: #04c09e;
   font-size: 12px;
   text-align: center;
@@ -76,4 +74,9 @@
 input.error {
   border: 1px solid red;
   outline: 1px solid red;
+}
+
+.scroll-form {
+  height: 300px;
+  overflow-y: scroll;
 }

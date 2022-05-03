@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isNumberInRange } from '../../../utils/validation/form';
-import { findNotCompletedInput } from '../../../utils/util/form';
 function PasswordInput({
   id,
   maxLength,
@@ -9,41 +7,18 @@ function PasswordInput({
   inputElementsRef,
   inputElementKey,
   setIsShowVirtualKeyboard,
-  setPasswordInputValue,
 }) {
-  const onChange = e => {
-    const {
-      target: { value, maxLength },
-    } = e;
-
-    if (!isNumberInRange(value, maxLength)) {
-      e.target.value = value.slice(0, -1);
-      return;
-    }
-
-    if (value.length === maxLength) {
-      const { current: inputElementsMap } = inputElementsRef;
-
-      const {
-        nextInput: { element },
-      } = findNotCompletedInput(inputElementsMap, inputElementKey);
-
-      inputElementsMap[inputElementKey].isComplete = true;
-
-      element?.focus();
-    }
-
-    if (value.length === maxLength) {
-      setPasswordInputValue(value);
-    }
-  };
-
   const onFocus = () => {
-    setIsShowVirtualKeyboard(true);
+    setIsShowVirtualKeyboard(prev => ({
+      ...prev,
+      isShow: true,
+      elementKey: inputElementKey,
+    }));
   };
 
-  const onBlur = () => {
-    setIsShowVirtualKeyboard(false);
+  const onKeyDown = e => {
+    e.preventDefault();
+    return false;
   };
 
   return (
@@ -63,9 +38,8 @@ function PasswordInput({
             : element?.value.length !== 0,
         };
       }}
-      onChange={onChange}
       onFocus={onFocus}
-      onBlur={onBlur}
+      onKeyDown={onKeyDown}
     />
   );
 }

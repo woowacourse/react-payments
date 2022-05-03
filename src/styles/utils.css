@@ -54,3 +54,15 @@
 .w-15 {
   width: 15%;
 }
+
+.position-absolute {
+  position: absolute;
+}
+
+.position-relative {
+  position: absolute;
+}
+
+.position-fixed {
+  position: absolute;
+}
