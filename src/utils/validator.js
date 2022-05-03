@@ -1,6 +1,4 @@
-const isEmptyValue = requiredList => {
-  requiredList.every(value => value !== '');
-};
+const isEmptyValue = requiredList => requiredList.some(value => value === '');
 
 const isValidCardInputs = (
   cardNumber,
@@ -12,6 +10,7 @@ const isValidCardInputs = (
   if (
     isEmptyValue([cardNumber, validDate, CVC, firstPassword, secondPassword])
   ) {
+    console.log('empty');
     throw new Error();
   }
 
