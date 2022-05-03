@@ -1,9 +1,8 @@
-import React from 'react';
-import { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 
 import { cardInfoReducer } from '../reducer/cardInfo';
 
-import { COMPONENTS, initialCardInfo } from '../constants/card';
+import { COMPONENTS, initialCardInfo, CARD_TYPES } from '../constants/card';
 
 import { CardExpireDateInputForm } from '../components/CardRegister/CardExpireDateInputForm';
 import { CardNumbersInputForm } from '../components/CardRegister/CardNumbersInputForm';
@@ -13,11 +12,10 @@ import { CVCInputForm } from '../components/CardRegister/CVCInputForm';
 import { CardSelectModal } from '../components/CardRegister/CardSelectModal';
 import { CVCHelperModal } from '../components/CardRegister/CVCHelperModal';
 import { Button } from '../components/common/Button';
-import { Card } from '../components/common/Card';
 import { PageTitle } from '../components/common/PageTitle';
 import { ModalSelector } from '../components/common/ModalSelector';
 import { useModalSelector } from '../hooks/useModalSelector';
-import { MarginTB10 } from '../components/common/styled';
+import { CardPreview } from '../components/CardRegister/CardPreview';
 
 export const CardRegisterPage = () => {
   const [cardInfo, dispatch] = useReducer(cardInfoReducer, initialCardInfo);
@@ -35,10 +33,8 @@ export const CardRegisterPage = () => {
   const [allCompleted, setAllCompleted] = useState(false);
 
   const checkerFactory = (subject) => {
-    const key = subject;
-
     return (isCompleted) => {
-      setCheckInputCompleted((prev) => ({ ...prev, [key]: isCompleted }));
+      setCheckInputCompleted((prev) => ({ ...prev, [subject]: isCompleted }));
     };
   };
 
@@ -49,12 +45,10 @@ export const CardRegisterPage = () => {
   return (
     <>
       <PageTitle>카드 추가</PageTitle>
-      <MarginTB10>
-        <Card
-          cardInfo={cardInfo}
-          onClick={() => openModal(COMPONENTS.CARD_TYPE)}
-        />
-      </MarginTB10>
+      <CardPreview
+        cardInfo={cardInfo}
+        onClick={() => openModal(COMPONENTS.CARD_TYPE)}
+      />
       <CardNumbersInputForm
         cardType={cardInfo.cardType}
         cardNumbers={cardInfo.cardNumbers}

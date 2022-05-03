@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 
 import { MAX_LENGTH } from '../../constants/card';
 import { CARD_INFO_TYPES } from '../../reducer/types';
@@ -25,7 +25,7 @@ export const CardNumbersInputForm = ({
   onCardNumberCheck,
   openModal,
 }) => {
-  const handleNumberChange = (e, name, index) => {
+  const handleNumberChange = (e, name) => {
     if (
       isNaN(e.nativeEvent.data) ||
       e.target.value.length > MAX_LENGTH.EACH_CARD_NUMBER
@@ -51,19 +51,16 @@ export const CardNumbersInputForm = ({
     }
   }, [cardNumbers]);
 
-  const refs = Array.from({ length: 4 }, () => useRef());
-
   return (
     <InputContainer>
       <InputTitle>카드 번호</InputTitle>
       <InputBox color="#04c09e" padding="0 50px">
         <AutoFocusInputContainer maxValueLength={MAX_LENGTH.EACH_CARD_NUMBER}>
-          {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }, index) => (
+          {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }) => (
             <InputBasic
               key={name}
-              ref={refs[index]}
               value={cardNumbers?.[name]}
-              onChange={(e) => handleNumberChange(e, name, index)}
+              onChange={(e) => handleNumberChange(e, name)}
               type={type}
             />
           )).reduce((prev, cur) => [prev, '-', cur])}
