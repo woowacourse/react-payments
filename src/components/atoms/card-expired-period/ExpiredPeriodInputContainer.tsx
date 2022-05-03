@@ -12,7 +12,7 @@ function ExpiredPeriodInputContainer() {
 
   const handleInsert = (input: HTMLInputElement) => {
     const { value, selectionStart } = input;
-    if (!selectionStart) return;
+    if (selectionStart === null) return;
 
     const cursor = selectionStart - 1;
     const insertedChar = value[cursor];
@@ -105,7 +105,7 @@ function ExpiredPeriodInputContainer() {
   };
   const handleDelete = (input: HTMLInputElement, pureValue: string) => {
     const { value, selectionStart } = input;
-    if (!selectionStart) return;
+    if (selectionStart === null) return;
 
     // 싹다 지우는 경우
     if (pureValue === '') {

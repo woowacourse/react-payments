@@ -16,7 +16,7 @@ function CardNumberInputContainer() {
 
   const handleInsert = (input: HTMLInputElement) => {
     const { value, selectionStart } = input;
-    if (!selectionStart) return;
+    if (selectionStart === null) return;
 
     const cursor = selectionStart - 1;
     const insertedChar = value[cursor];
@@ -70,7 +70,7 @@ function CardNumberInputContainer() {
   };
   const handleDelete = (input: HTMLInputElement) => {
     const { selectionStart } = input;
-    if (!selectionStart) return;
+    if (selectionStart === null) return;
 
     const cursor = selectionStart;
     let newCardNumber = cardNumber;

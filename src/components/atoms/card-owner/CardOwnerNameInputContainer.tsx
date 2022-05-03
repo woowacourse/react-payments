@@ -12,7 +12,7 @@ function CardOwnerNameInputContainer() {
 
   const handleInsert = (input: HTMLInputElement) => {
     const { value, selectionStart } = input;
-    if (!selectionStart) return;
+    if (selectionStart === null) return;
     const insertedChar = value[selectionStart - 1];
 
     // value의 총 길이는 30을 넘으면 안 된다
@@ -30,7 +30,7 @@ function CardOwnerNameInputContainer() {
   };
   const handleDelete = (input: HTMLInputElement) => {
     const { value, selectionStart } = input;
-    if (!selectionStart) return;
+    if (selectionStart === null) return;
 
     queueMicrotask(() => {
       input.setSelectionRange(selectionStart, selectionStart);
@@ -41,6 +41,8 @@ function CardOwnerNameInputContainer() {
     const input = event.target;
     const { value, selectionStart } = input;
     if (selectionStart === null) return;
+
+    console.log('입력모드이니 ? ', name.length < value.length);
 
     if (name.length < value.length) {
       return handleInsert(input);
