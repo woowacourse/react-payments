@@ -19,22 +19,16 @@
   &:hover {
     .name {
       animation-name: colorChange;
-      animation-duration: 0.5s;
+      animation-duration: 1s;
       animation-iteration-count: infinite;
       animation-timing-function: linear;
     }
     @keyframes colorChange {
       0% {
-        color: red;
-      }
-      25% {
-        color: yellow;
+        color: white;
       }
       50% {
-        color: blue;
-      }
-      100% {
-        color: green;
+        color: black;
       }
     }
   }
