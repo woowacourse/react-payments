@@ -1,9 +1,5 @@
 import styled, { css } from "styled-components";
 
-const FullSize = css`
-  width: 100%;
-`;
-
 const FlexAlignCenter = css`
   display: flex;
   align-items: center;
@@ -23,13 +19,13 @@ const CardWrapper = styled.div`
 `;
 
 const CardTop = styled.div`
-  ${FullSize}
   ${FlexAlignCenter}
+  width: 100%;
 `;
 
 const CardMiddle = styled.div`
-  ${FullSize}
   ${FlexAlignCenter}
+  width: 100%;
 
   & div {
     background: #cbba64;
@@ -40,9 +36,9 @@ const CardMiddle = styled.div`
 `;
 
 const CardBottom = styled.div`
-  ${FullSize}
   ${FlexAlignCenter}
   flex-direction: column;
+  width: 100%;
 `;
 
 const CardText = styled.div`
@@ -59,16 +55,16 @@ const CardOwner = styled.div`
 `;
 
 const CardBottomNumber = styled.div`
-  ${FullSize}
   ${FlexAlignCenter}
+  width: 100%;
   margin-bottom: 10px;
   justify-content: center;
   height: 16px;
 `;
 
 const CardBottomInfo = styled.div`
-  ${FullSize}
   ${FlexAlignCenter}
+  width: 100%;
   justify-content: space-between;
 `;
 

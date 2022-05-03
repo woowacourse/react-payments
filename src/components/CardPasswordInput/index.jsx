@@ -40,7 +40,6 @@ CardPasswordInput.propTypes = {
     firstPassword: PropTypes.string,
     secondPassword: PropTypes.string,
   }),
-  handleDueDate: PropTypes.func,
   secondPasswordInputRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),

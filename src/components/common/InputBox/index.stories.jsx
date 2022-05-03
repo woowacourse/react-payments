@@ -7,13 +7,13 @@ export default {
   component: InputBox,
 };
 
-export const PrimaryBox = Template.bind({});
-PrimaryBox.args = {
+export const FullSizeBox = Template.bind({});
+FullSizeBox.args = {
   size: 100,
 };
 
-export const HalfBox = Template.bind({});
-HalfBox.args = {
+export const HalfSizeBox = Template.bind({});
+HalfSizeBox.args = {
   size: 50,
 };
 

@@ -3,16 +3,11 @@ import InputBox from "../../components/common/InputBox";
 import { Input } from "../../components/common/Input/style";
 import { CardInputWrapper } from "../../pages/CardAddPage/style";
 
-function CardDueDateInput({
-  dueDate,
-  handleChangeDueDate,
-  dueYearInputRef,
-  error,
-}) {
+function CardDueDateInput({ dueDate, handleChangeDueDate, yearInputRef }) {
   return (
     <CardInputWrapper>
       <label>만료일</label>
-      <InputBox size="50" error={error.month || error.year}>
+      <InputBox size="50">
         <Input
           type="number"
           value={dueDate.month}
@@ -22,7 +17,7 @@ function CardDueDateInput({
         <span>/</span>
         <Input
           type="number"
-          ref={dueYearInputRef}
+          ref={yearInputRef}
           value={dueDate.year}
           onChange={(e) => handleChangeDueDate("year", e)}
           placeholder="YY"
@@ -38,14 +33,10 @@ CardDueDateInput.propTypes = {
     year: PropTypes.string,
   }),
   handleChangeDueDate: PropTypes.func,
-  dueYearInputRef: PropTypes.oneOfType([
+  yearInputRef: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
   ]),
-  error: PropTypes.shape({
-    month: PropTypes.bool,
-    year: PropTypes.bool,
-  }),
 };
 
 export default CardDueDateInput;
