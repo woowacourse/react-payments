@@ -109,7 +109,9 @@ const CardOwnerContainer = styled.span`
 `;
 
 const CardExpiredDateContainer = styled.span`
-  margin-right: 5px;
+  position: absolute;
+  top: 14px;
+  right: 100px;
   width: 50px;
   font-size: 14px;
   line-height: 16px;
