@@ -7,16 +7,6 @@ const PageWrapper = styled.div`
   padding: 25px;
 `;
 
-const HeaderWrapper = styled.div`
-  display: flex;
-  align-items: center;
-
-  & h2 {
-    font-size: 16px;
-    margin-left: 15px;
-  }
-`;
-
 const CardWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -40,10 +30,4 @@ const CardInputWrapper = styled.div`
   }
 `;
 
-export {
-  PageWrapper,
-  HeaderWrapper,
-  CardWrapper,
-  FooterWrapper,
-  CardInputWrapper,
-};
+export { PageWrapper, CardWrapper, FooterWrapper, CardInputWrapper };
