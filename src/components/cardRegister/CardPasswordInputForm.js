@@ -9,6 +9,7 @@ import {
   InputBox,
 } from '../common/styled';
 import Dot from '../common/Dot';
+import { AutoFocusInputContainer } from '../common/AutoFocustInputContainer';
 
 export const CardPasswordInputForm = ({
   password,
@@ -42,20 +43,22 @@ export const CardPasswordInputForm = ({
         backgroundColor="transparent"
         justifyContent="space-between"
       >
-        <InputBasic
-          value={password.firstNumber || ''}
-          onChange={(e) => handlePasswordChange(e, 'firstNumber')}
-          type="password"
-          width="20%"
-        />
-        <InputBasic
-          value={password.secondNumber || ''}
-          onChange={(e) => handlePasswordChange(e, 'secondNumber')}
-          type="password"
-          width="20%"
-        />
-        <Dot />
-        <Dot />
+        <AutoFocusInputContainer maxValueLength={1}>
+          <InputBasic
+            value={password.firstNumber || ''}
+            onChange={(e) => handlePasswordChange(e, 'firstNumber')}
+            type="password"
+            width="20%"
+          />
+          <InputBasic
+            value={password.secondNumber || ''}
+            onChange={(e) => handlePasswordChange(e, 'secondNumber')}
+            type="password"
+            width="20%"
+          />
+          <Dot />
+          <Dot />
+        </AutoFocusInputContainer>
       </InputBox>
     </InputContainer>
   );

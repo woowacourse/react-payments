@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 import { MAX_LENGTH } from '../../constants/card';
 import { CARD_INFO_TYPES } from '../../reducer/types';
+import { AutoFocusInputContainer } from '../common/AutoFocustInputContainer';
 
 import {
   InputContainer,
@@ -36,17 +37,6 @@ export const CardNumbersInputForm = ({
       type: CARD_INFO_TYPES.SET_CARD_NUMBER,
       payload: { key: name, cardNumber: e.target.value },
     });
-
-    moveFocus(e, index);
-  };
-
-  const moveFocus = (e, index) => {
-    if (e.key === 'Backspace') {
-      return;
-    }
-    if (e.target.value.length === MAX_LENGTH.EACH_CARD_NUMBER) {
-      refs[index + 1]?.current.focus();
-    }
   };
 
   useEffect(() => {
@@ -67,15 +57,17 @@ export const CardNumbersInputForm = ({
     <InputContainer>
       <InputTitle>카드 번호</InputTitle>
       <InputBox color="#04c09e" padding="0 50px">
-        {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }, index) => (
-          <InputBasic
-            key={name}
-            ref={refs[index]}
-            value={cardNumbers?.[name]}
-            onChange={(e) => handleNumberChange(e, name, index)}
-            type={type}
-          />
-        )).reduce((prev, cur) => [prev, '-', cur])}
+        <AutoFocusInputContainer maxValueLength={MAX_LENGTH.EACH_CARD_NUMBER}>
+          {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }, index) => (
+            <InputBasic
+              key={name}
+              ref={refs[index]}
+              value={cardNumbers?.[name]}
+              onChange={(e) => handleNumberChange(e, name, index)}
+              type={type}
+            />
+          )).reduce((prev, cur) => [prev, '-', cur])}
+        </AutoFocusInputContainer>
       </InputBox>
     </InputContainer>
   );

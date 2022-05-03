@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { CARD_INFO_TYPES } from '../../reducer/types';
+import { AutoFocusInputContainer } from '../common/AutoFocustInputContainer';
 
 import {
   InputContainer,
@@ -84,21 +85,23 @@ export const CardExpireDateInputForm = ({
     <InputContainer>
       <InputTitle>만료일</InputTitle>
       <InputBox width="50%" justifyContent="center">
-        <InputBasic
-          width="25%"
-          value={expireDate?.month}
-          onChange={handleMonthInput}
-          type="text"
-          placeholder="MM"
-        />
-        /
-        <InputBasic
-          width="25%"
-          value={expireDate?.year}
-          onChange={handleYearInput}
-          type="text"
-          placeholder="YY"
-        />
+        <AutoFocusInputContainer maxValueLength={2}>
+          <InputBasic
+            width="25%"
+            value={expireDate?.month}
+            onChange={handleMonthInput}
+            type="text"
+            placeholder="MM"
+          />
+          /
+          <InputBasic
+            width="25%"
+            value={expireDate?.year}
+            onChange={handleYearInput}
+            type="text"
+            placeholder="YY"
+          />
+        </AutoFocusInputContainer>
       </InputBox>
     </InputContainer>
   );
