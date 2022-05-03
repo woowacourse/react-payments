@@ -1,59 +1,71 @@
+import { useReducer } from "react";
 import Card from "../../component/Card/card.component";
+import CardTypeSelector from "../../component/CardTypeSelector/CardTypeSelector";
 import Form from "../../component/Form/form.component";
 import Header from "../../component/Header/Header.component";
 import LinkButton from "../../component/LinkButton/linkButton.component";
 import Modal from "../../component/Modal/modal.component";
-import useCanShowModal from "../../hooks/useCanShowModal";
+import PageTitle from "../../component/PageTitle/pageTitle.component";
 import useCardNumber from "../../hooks/useCardNumber";
 import useCardPassword from "../../hooks/useCardPassword";
 import useCardTypeInfo from "../../hooks/useCardTypeInfo";
 import useExpireDate from "../../hooks/useExpireDate";
-import useReady from "../../hooks/useReady";
+import useAllFormReady from "../../hooks/useReady";
 import useSecurityCode from "../../hooks/useSecurityCode";
 import useUserName from "../../hooks/useUserName";
 
 import "./CardAddPage.css";
 
 const CardAddPage = () => {
-  const [cardNumber, onChange, cardNumberReady] = useCardNumber();
-  const [expireDate, onChangeExpireDate, expireDateReady] = useExpireDate();
-  const [userName, onChangeUserName] = useUserName();
-  const [
+  const {
+    cardNumber,
+    onChangeCardNumber,
+    onKeyDownCardNumber,
+    cardNumberReady,
+  } = useCardNumber();
+  const { expireDate, onChangeExpireDate, expireDateReady } = useExpireDate();
+  const { userName, onChangeUserName } = useUserName();
+  const {
     securityCode,
     onClickSecurityVirtualKeyboard,
     onClickSecurityBackspaceButton,
     onChangeSecurityCode,
     securityCodeReady,
-  ] = useSecurityCode();
-  const [
+  } = useSecurityCode();
+  const {
     cardPassword,
     onClickCardPasswordBackspaceButton,
     onClickCardPasswordVirtualKeyboard,
     onChangeCardPassword,
     cardPasswordReady,
-  ] = useCardPassword();
-  const [cardTypeInfo, onClickCardType] = useCardTypeInfo();
-  const [ready, checkReady] = useReady({
+  } = useCardPassword();
+  const { cardTypeInfo, onClickCardType } = useCardTypeInfo();
+  const { allFormReady } = useAllFormReady({
     cardNumberReady,
     expireDateReady,
     securityCodeReady,
     cardPasswordReady,
     cardType: cardTypeInfo.cardType,
   });
-  const [canShowModal, toggleModal] = useCanShowModal();
-
-  checkReady();
+  const [isShowModal, toggleShowModal] = useReducer(
+    (isShowModal) => !isShowModal,
+    false
+  );
 
   return (
     <div className="card-add-page">
-      <Header title="카드 추가" linkLabel="<" linkClass="back-link" />
+      <Header>
+        <LinkButton linkClass="back-link">{"<"}</LinkButton>
+        <PageTitle>카드 추가</PageTitle>
+      </Header>
+
       <Card
         cardNumbers={cardNumber}
         name={userName}
-        month={expireDate[0]}
-        year={expireDate[1]}
+        month={expireDate.month}
+        year={expireDate.year}
         cardTypeInfo={cardTypeInfo}
-        toggleModal={toggleModal}
+        toggleModal={toggleShowModal}
       />
       <Form
         required={true}
@@ -67,7 +79,8 @@ const CardAddPage = () => {
         inputClass="default-input"
         label="카드 번호"
         formType="card-number"
-        onChange={onChange}
+        onChange={onChangeCardNumber}
+        onKeyDown={onKeyDownCardNumber}
         ready={cardNumberReady}
       />
       <Form
@@ -76,13 +89,13 @@ const CardAddPage = () => {
           {
             type: "number",
             placeholder: "MM",
-            name: "first",
+            name: "month",
             value: expireDate[0],
           },
           {
             type: "number",
             placeholder: "YY",
-            name: "second",
+            name: "year",
             value: expireDate[1],
           },
         ]}
@@ -129,13 +142,14 @@ const CardAddPage = () => {
         onClickBackspaceButton={onClickCardPasswordBackspaceButton}
         ready={cardPasswordReady}
       />
-      {ready && <LinkButton linkLabel="다음" linkClass="next-link" />}
-      {canShowModal && (
-        <Modal
-          toggleModal={toggleModal}
-          onClickCardType={onClickCardType}
-          currentCardType={cardTypeInfo.cardType}
-        />
+      {allFormReady && <LinkButton linkClass="next-link">다음</LinkButton>}
+      {isShowModal && (
+        <Modal toggleModal={toggleShowModal}>
+          <CardTypeSelector
+            onClickCardType={onClickCardType}
+            currentCardType={cardTypeInfo.cardType}
+          />
+        </Modal>
       )}
     </div>
   );

@@ -4,9 +4,9 @@
 }
 
 .error-message {
-  color: tomato;
+  color: var(--error-message-color);
 }
 
 .success-message {
-  color: #7dcd00;
+  color: var(--success-message-color);
 }

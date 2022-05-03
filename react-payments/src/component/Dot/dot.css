@@ -1,9 +1,3 @@
-.dot-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .password-form {
   width: 43px;
   height: 45px;
@@ -14,13 +8,8 @@
   height: 9px;
 }
 
-.card-number > div {
-  background: #616161;
-}
-
-.dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #04c09e;
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

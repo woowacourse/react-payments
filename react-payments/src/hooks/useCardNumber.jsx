@@ -1,11 +1,7 @@
-import { useState } from "react";
-import { checkNextFocus, checkPrevFocus, isOverMaxLength } from "../util";
+import { useEffect, useState } from "react";
+import { focusNextElement, focusPrevElement } from "../util/focus";
+import { isOverMaxLength, isInValidCardNumber } from "../util/validator";
 import { MAX_LENGTH } from "../constants";
-
-const isInValidCardNumber = (cardNumber) =>
-  Object.values(cardNumber).some(
-    (number) => number.length !== MAX_LENGTH.CARD_NUMBER
-  );
 
 const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState({
@@ -16,11 +12,11 @@ const useCardNumber = () => {
   });
   const [cardNumberReady, setCardNumberReady] = useState(false);
 
-  const checkReady = () => {
+  useEffect(() => {
     if (isInValidCardNumber(cardNumber) === cardNumberReady) {
       setCardNumberReady((prevReady) => !prevReady);
     }
-  };
+  }, [cardNumber, cardNumberReady]);
 
   const onChangeCardNumber = ({ target }) => {
     if (isOverMaxLength(target, MAX_LENGTH.CARD_NUMBER)) {
@@ -28,18 +24,12 @@ const useCardNumber = () => {
     }
 
     const nextElement = target.nextSibling?.nextSibling;
-    const prevElement = target.previousSibling?.previousSibling;
 
-    checkNextFocus({
+    focusNextElement({
       target,
       value: cardNumber,
       maxLength: MAX_LENGTH.CARD_NUMBER,
       nextElement,
-    });
-    checkPrevFocus({
-      target,
-      value: cardNumber,
-      prevElement,
     });
 
     setCardNumber({
@@ -48,10 +38,24 @@ const useCardNumber = () => {
     });
   };
 
-  const { first, second, third, fourth } = cardNumber;
-  checkReady();
+  const onKeyDownCardNumber = ({ target, key }) => {
+    const prevElement = target.previousSibling?.previousSibling;
 
-  return [[first, second, third, fourth], onChangeCardNumber, cardNumberReady];
+    focusPrevElement({
+      target,
+      key,
+      value: cardNumber,
+      prevElement,
+    });
+  };
+
+  const { first, second, third, fourth } = cardNumber;
+  return {
+    cardNumber: [first, second, third, fourth],
+    onChangeCardNumber,
+    onKeyDownCardNumber,
+    cardNumberReady,
+  };
 };
 
 export default useCardNumber;

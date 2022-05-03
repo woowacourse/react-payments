@@ -17,20 +17,14 @@ const labelEnum = {
 };
 
 const inputEnum = {
-  "card-password": (
-    props,
-    clicked,
-    onFocusIn,
-    onKeyDown,
-    onClickCloseButton
-  ) => (
+  "card-password": (props, clicked, openKeyboard, onKeyDown, closeKeyboard) => (
     <div className="password-container">
       <InputContainer
         {...props}
         inputInfo={[
           { type: "password", name: "first", value: props.value["first"] },
         ]}
-        onFocusIn={onFocusIn}
+        onFocusIn={openKeyboard}
         onChange={props.onChangeCardPassword}
         onKeyDown={onKeyDown}
       />
@@ -39,7 +33,7 @@ const inputEnum = {
         inputInfo={[
           { type: "password", name: "second", value: props.value["second"] },
         ]}
-        onFocusIn={onFocusIn}
+        onFocusIn={openKeyboard}
         onChange={props.onChangeCardPassword}
         onKeyDown={onKeyDown}
       />
@@ -48,7 +42,7 @@ const inputEnum = {
       {clicked && (
         <VirtualKeyboard
           onClickVirtualKeyboard={props.onClickVirtualKeyboard}
-          onClickCloseButton={onClickCloseButton}
+          onClickCloseButton={closeKeyboard}
           onClickBackspaceButton={props.onClickBackspaceButton}
         />
       )}
@@ -82,8 +76,9 @@ const inputEnum = {
 
 const Form = (props) => {
   const { formType } = props;
-  const [keyboardOn, onFocusIn, onClickCloseButton, onKeyDown] =
-    useKeyboardOn();
+  const { keyboardOn, openKeyboard, closeKeyboard, onKeyDown } = useKeyboardOn(
+    props.ready
+  );
 
   return (
     <div className="input-container">
@@ -96,9 +91,9 @@ const Form = (props) => {
         inputEnum[formType](
           props,
           keyboardOn,
-          onFocusIn,
+          openKeyboard,
           onKeyDown,
-          onClickCloseButton
+          closeKeyboard
         )
       ) : (
         <InputContainer {...props} />

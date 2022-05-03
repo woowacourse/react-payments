@@ -1,7 +1,7 @@
 import "./linkButton.css";
 
-const LinkButton = ({ linkLabel, linkClass }) => {
-  return <div className={linkClass}>{linkLabel}</div>;
+const LinkButton = ({ children, linkClass }) => {
+  return <div className={linkClass}>{children}</div>;
 };
 
 export default LinkButton;

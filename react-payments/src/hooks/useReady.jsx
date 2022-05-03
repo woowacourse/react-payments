@@ -1,6 +1,5 @@
-import { useState } from "react";
-
-const isInValidCardType = (cardType) => !cardType;
+import { useEffect, useState } from "react";
+import { isInValidCardType } from "../util/validator";
 
 const isReady = ({
   cardNumberReady,
@@ -18,16 +17,16 @@ const isReady = ({
   );
 };
 
-const useReady = ({
+const useAllFormReady = ({
   cardNumberReady,
   expireDateReady,
   securityCodeReady,
   cardPasswordReady,
   cardType,
 }) => {
-  const [ready, setReady] = useState(false);
+  const [allFormReady, setAllFormReady] = useState(false);
 
-  const checkReady = () => {
+  useEffect(() => {
     if (
       isReady({
         cardNumberReady,
@@ -35,13 +34,20 @@ const useReady = ({
         securityCodeReady,
         cardPasswordReady,
         cardType,
-      }) !== ready
+      }) !== allFormReady
     ) {
-      setReady((prevReady) => !prevReady);
+      setAllFormReady((prevReady) => !prevReady);
     }
-  };
+  }, [
+    cardNumberReady,
+    expireDateReady,
+    securityCodeReady,
+    cardPasswordReady,
+    cardType,
+    allFormReady,
+  ]);
 
-  return [ready, checkReady];
+  return { allFormReady };
 };
 
-export default useReady;
+export default useAllFormReady;

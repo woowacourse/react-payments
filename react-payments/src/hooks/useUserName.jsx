@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MAX_LENGTH } from "../constants";
-import { isOverMaxLength } from "../util";
+import { isOverMaxLength } from "../util/validator";
 
 const useUserName = () => {
   const [userName, setUserName] = useState("");
@@ -12,7 +12,7 @@ const useUserName = () => {
     setUserName(target.value);
   };
 
-  return [userName, onChangeUserName];
+  return { userName, onChangeUserName };
 };
 
 export default useUserName;

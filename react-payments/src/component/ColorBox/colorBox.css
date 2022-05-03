@@ -23,33 +23,33 @@
 }
 
 .poco-color {
-  background: #e24141;
+  background: var(--poco-card-color);
 }
 
 .jun-color {
-  background: #547ce4;
+  background: var(--jun-card-color);
 }
 
 .gongwon-color {
-  background: #73bc6d;
+  background: var(--gongwon-card-color);
 }
 
 .bran-color {
-  background: #de59b9;
+  background: var(--bran-card-color);
 }
 
 .roid-color {
-  background: #04c09e;
+  background: var(--roid-card-color);
 }
 
 .dobby-color {
-  background: #e76e9a;
+  background: var(--dobby-card-color);
 }
 
 .collin-color {
-  background: #f37d3b;
+  background: var(--collin-card-color);
 }
 
 .sun-color {
-  background: #fbcd58;
+  background: var(--sun-card-color);
 }

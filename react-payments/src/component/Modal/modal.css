@@ -1,15 +1,9 @@
 .modal {
   width: 375px;
   height: 220px;
-
   border-radius: 5px 5px 0px 0px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
-
-  background: #fff;
+  background: var(--page-default-color);
   z-index: 10;
 }
 
@@ -32,12 +26,6 @@
 
 .flex-center {
   display: flex;
-  align-items: center;
   justify-content: center;
-}
-
-.colorbox-grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 25px;
+  align-items: center;
 }

@@ -1,23 +1,16 @@
 .card-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
   margin: 10px 0;
   cursor: pointer;
 }
 
 .card {
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 
   width: 208px;
   height: 130px;
 
   font-size: 30px;
-  color: #575757;
+  color: var(--card-text-color);
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -38,7 +31,7 @@
   width: 208px;
   height: 130px;
 
-  background: #94dacd;
+  background: var(--default-card-color);
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
@@ -49,7 +42,7 @@
   left: 95px;
   top: 122px;
 
-  background: #cbba64;
+  background: var(--card-chip-color);
   border-radius: 4px;
 }
 
@@ -62,7 +55,7 @@
   width: 290px;
   height: 180px;
 
-  background: #94dacd;
+  background: var(--default-card-color);
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
@@ -71,7 +64,7 @@
   width: 55.04px;
   height: 35.77px;
 
-  background: #cbba64;
+  background: var(--card-chip-color);
   border-radius: 4px;
 
   font-size: 24px;
@@ -153,5 +146,11 @@
 
 .card-dot-container {
   display: flex;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }

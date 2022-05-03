@@ -1,18 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MAX_LENGTH } from "../constants";
-
-const isInValidSecurityCode = (securityCode) =>
-  securityCode.length !== MAX_LENGTH.SECURITY_CODE;
+import { isInValidSecurityCode } from "../util/validator";
 
 const useSecurityCode = () => {
   const [securityCode, setSecurityCode] = useState("");
   const [securityCodeReady, setSecurityCodeReady] = useState(false);
 
-  const checkReady = () => {
+  useEffect(() => {
     if (isInValidSecurityCode(securityCode) === securityCodeReady) {
       setSecurityCodeReady((prev) => !prev);
     }
-  };
+  }, [securityCode, securityCodeReady]);
 
   const onChangeSecurityCode = ({ target }) => {
     setSecurityCode(target.value);
@@ -33,15 +31,13 @@ const useSecurityCode = () => {
     setSecurityCode((prev) => prev.slice(0, -1));
   };
 
-  checkReady();
-
-  return [
+  return {
     securityCode,
     onClickSecurityVirtualKeyboard,
     onClickSecurityBackspaceButton,
     onChangeSecurityCode,
     securityCodeReady,
-  ];
+  };
 };
 
 export default useSecurityCode;

@@ -1,27 +1,20 @@
-import { useState } from "react";
-import { MAX_LENGTH, MAX_MONTH } from "../constants";
-import { checkNextFocus, checkPrevFocus, isOverMaxLength } from "../util";
-
-const isInValidExpireDate = (expireDate) => {
-  return (
-    Object.values(expireDate).some(
-      (date) => date.length !== MAX_LENGTH.EXPIRE_DATE
-    ) || Number(expireDate.first) > MAX_MONTH
-  );
-};
+import { useEffect, useState } from "react";
+import { MAX_LENGTH } from "../constants";
+import { focusNextElement, focusPrevElement } from "../util/focus";
+import { isOverMaxLength, isInValidExpireDate } from "../util/validator";
 
 const useExpireDate = () => {
   const [expireDate, setExpireDate] = useState({
-    first: "",
-    second: "",
+    month: "",
+    year: "",
   });
   const [expireDateReady, setExpireDateReady] = useState(false);
 
-  const checkReady = () => {
+  useEffect(() => {
     if (isInValidExpireDate(expireDate) === expireDateReady) {
       setExpireDateReady((prev) => !prev);
     }
-  };
+  }, [expireDate, expireDateReady]);
 
   const onChangeExpireDate = ({ target }) => {
     if (isOverMaxLength(target, MAX_LENGTH.EXPIRE_DATE)) {
@@ -31,13 +24,13 @@ const useExpireDate = () => {
     const nextElement = target.nextSibling?.nextSibling;
     const prevElement = target.previousSibling?.previousSibling;
 
-    checkNextFocus({
+    focusNextElement({
       target,
       value: expireDate,
       maxLength: MAX_LENGTH.EXPIRE_DATE,
       nextElement,
     });
-    checkPrevFocus({
+    focusPrevElement({
       target,
       value: expireDate,
       prevElement,
@@ -49,10 +42,9 @@ const useExpireDate = () => {
     });
   };
 
-  const { first, second } = expireDate;
-  checkReady();
+  const { month, year } = expireDate;
 
-  return [[first, second], onChangeExpireDate, expireDateReady];
+  return { expireDate: { month, year }, onChangeExpireDate, expireDateReady };
 };
 
 export default useExpireDate;

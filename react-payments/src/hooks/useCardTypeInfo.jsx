@@ -8,7 +8,7 @@ const useCardTypeInfo = () => {
     setCardTypeInfo(cardInfos[idx]);
   };
 
-  return [cardTypeInfo, onClickCardType];
+  return { cardTypeInfo, onClickCardType };
 };
 
 export default useCardTypeInfo;

@@ -6,8 +6,7 @@
   line-height: 14px;
 
   margin-bottom: 4px;
-
-  color: #525252;
+  color: var(--header-color);
 }
 
 .input-container {

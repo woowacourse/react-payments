@@ -7,12 +7,12 @@
   transform: translate(10%, 40%);
   grid-template-columns: 1fr 1fr 1fr 1fr;
   border-radius: 6px;
-  border: 4px solid #80deea;
+  border: 4px solid var(--keyboard-color);
   z-index: 3;
 }
 
 .keyboard {
-  background: #00bcd4;
+  background: var(--keyboard-color);
   border-radius: 4px;
   width: 30px;
   height: 30px;
@@ -25,5 +25,5 @@
 }
 
 .keyboard:hover {
-  background: #80deea;
+  background: var(--keyboard-hover-color);
 }
