@@ -1,9 +1,7 @@
-import React from 'react';
+import CardPreview from 'components/CardPreview';
 
-import CardPreview from '../components/CardPreview';
-
-import '../css/card.css';
-import '../css/button.css';
+import 'css/card.css';
+import 'css/button.css';
 
 export default {
   title: 'Components/CardPreview',

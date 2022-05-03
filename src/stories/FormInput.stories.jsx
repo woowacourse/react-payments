@@ -1,10 +1,9 @@
-import React from 'react';
 import { v4 as uuid } from 'uuid';
 
-import FormInput from '../components/common/FormInput';
+import FormInput from 'components/common/FormInput';
 
-import '../css/input.css';
-import '../css/utils.css';
+import 'css/input.css';
+import 'css/utils.css';
 
 export default {
   title: 'Components/common/FormInput',

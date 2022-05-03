@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { PASS, FAIL } from '../../constants';
+import { PASS, FAIL } from 'constants';
 
 const MessageList = {
   company: { [PASS]: '카드사가 입력되었습니다.', [FAIL]: '카드사를 입력해주세요.' },

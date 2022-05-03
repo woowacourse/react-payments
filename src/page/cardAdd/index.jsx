@@ -1,12 +1,12 @@
 import { useState, useCallback, useEffect } from 'react';
 
-import FormInput from '../../components/common/FormInput';
-import CardPreview from '../../components/CardPreview';
-import Modal from '../../components/common/Modal';
-import Header from '../../components/common/Header';
-import Button from '../../components/common/Button';
-import Tooltip from '../../components/common/Tooltip';
-import { ReactComponent as PrevIcon } from '../../assets/prev_icon.svg';
+import FormInput from 'components/common/FormInput';
+import CardPreview from 'components/CardPreview';
+import Modal from 'components/common/Modal';
+import Header from 'components/common/Header';
+import Button from 'components/common/Button';
+import Tooltip from 'components/common/Tooltip';
+import { ReactComponent as PrevIcon } from 'assets/prev_icon.svg';
 
 import {
   validator,

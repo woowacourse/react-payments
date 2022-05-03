@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from '../constants';
-import Button from './common/Button';
+import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants';
+import Button from 'components/common/Button';
 
 const CardPreview = ({ cardInfo, isCardFront, handleModal, handleCardPosition }) => {
   const { cardNumber, ownerName, expiryDate, company, theme, privacyCode } = cardInfo;

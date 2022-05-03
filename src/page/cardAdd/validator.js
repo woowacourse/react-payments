@@ -1,5 +1,5 @@
-import { isEnglish, isNumber } from '../../utils';
-import { INPUT_MAX_LENGTH, DATE_RANGE } from '../../constants';
+import { isEnglish, isNumber } from 'utils';
+import { INPUT_MAX_LENGTH, DATE_RANGE } from 'constants';
 
 const validateYear = (value) => {
   if (value.length === 1) {

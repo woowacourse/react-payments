@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { useCallback, useMemo } from 'react';
-import { isObject } from '../../utils';
+import { useCallback } from 'react';
+import { isObject } from 'utils';
 
 const FormInput = ({
   className,

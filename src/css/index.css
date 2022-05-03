@@ -1,10 +1,10 @@
-@import './card.css';
-@import './input.css';
-@import './button.css';
-@import './modal.css';
-@import './utils.css';
-@import './tooltip.css';
-@import './palette.css';
+@import 'css/card.css';
+@import 'css/input.css';
+@import 'css/button.css';
+@import 'css/modal.css';
+@import 'css/utils.css';
+@import 'css/tooltip.css';
+@import 'css/palette.css';
 
 body {
   display: flex;
@@ -71,8 +71,4 @@ input {
   color: red;
   font-size: 12px;
   font-weight: 600;
-}
-
-.text-center {
-  text-align: center;
 }
