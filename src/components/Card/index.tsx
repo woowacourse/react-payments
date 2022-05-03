@@ -8,17 +8,19 @@ export default function Card({
   cardInfo,
   shouldShowTypeSelection = false,
   size = "small",
+  marginBottom,
 }: {
   cardInfo: CardInfo;
   shouldShowTypeSelection?: boolean;
   size?: "big" | "small";
+  marginBottom?: string;
 }) {
   const { cardNumbers, expirationDate, userName, cardType } = cardInfo;
   const { isModalOpened, openModal, closeModal } = useModal(true);
 
   return (
     <>
-      <div className="card-box flex-center">
+      <div className="card-box flex-center" style={{ marginBottom }}>
         <div
           className={`${size}-card flex-column-center`}
           style={{ backgroundColor: cardType.color }}
