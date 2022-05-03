@@ -14,6 +14,7 @@
 .next-button {
   position: absolute;
   right: 0;
+  bottom: 15px;
 
   margin-right: 20px;
 }

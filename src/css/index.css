@@ -22,7 +22,7 @@ input {
 
 .root {
   width: 375px;
-  height: 700px;
+  min-height: 700px;
 
   position: relative;
 
@@ -59,4 +59,20 @@ input {
 
   font-size: 12px;
   color: #525252;
+}
+
+.fullFilled {
+  color: green;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.unFullFilled {
+  color: red;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.text-center {
+  text-align: center;
 }
