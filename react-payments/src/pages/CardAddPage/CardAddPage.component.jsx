@@ -90,13 +90,13 @@ const CardAddPage = () => {
             type: "number",
             placeholder: "MM",
             name: "month",
-            value: expireDate[0],
+            value: expireDate.month,
           },
           {
             type: "number",
             placeholder: "YY",
             name: "year",
-            value: expireDate[1],
+            value: expireDate.year,
           },
         ]}
         connector="/"

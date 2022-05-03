@@ -1,7 +1,7 @@
 .modal {
   width: 375px;
   height: 220px;
-  border-radius: 5px 5px 0px 0px;
+  border-radius: 5px 5px 0 0;
   flex-wrap: wrap;
   background: var(--page-default-color);
   z-index: 10;

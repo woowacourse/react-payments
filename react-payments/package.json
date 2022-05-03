@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public",
+    "build:storybook": "build-storybook -s public",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "chromatic": "npx chromatic --project-token=f5e114bf0896"

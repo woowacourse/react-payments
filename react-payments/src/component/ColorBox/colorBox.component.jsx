@@ -11,12 +11,12 @@ const ColorBox = ({
   return (
     <div className="color-box-container">
       <div
-        className={`${colorType} color-box `}
+        className={`${colorType} color-box`}
         onClick={() => onClickCardType(idx)}
       />
       <div
         className={`color-box-text ${
-          currentCardType === cardInfos[idx].cardType ? "selected" : ""
+          currentCardType === cardInfos[idx].cardType && "selected"
         }`}
       >
         {cardType}

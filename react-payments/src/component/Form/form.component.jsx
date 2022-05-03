@@ -7,7 +7,7 @@ import useKeyboardOn from "../../hooks/useKeyboardOn";
 import MessageBlock from "../MessageBlock/messageBlock.component";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants";
 
-const labelEnum = {
+const labelSelector = {
   "card-user": (props) => (
     <div className="user-name-container">
       <label className="input-title">{props.label}</label>
@@ -16,7 +16,7 @@ const labelEnum = {
   ),
 };
 
-const inputEnum = {
+const inputSelector = {
   "card-password": (props, clicked, openKeyboard, onKeyDown, closeKeyboard) => (
     <div className="password-container">
       <InputContainer
@@ -82,13 +82,13 @@ const Form = (props) => {
 
   return (
     <div className="input-container">
-      {labelEnum[formType] ? (
-        labelEnum[formType](props)
+      {labelSelector[formType] ? (
+        labelSelector[formType](props)
       ) : (
         <label className="input-title">{props.label}</label>
       )}
-      {inputEnum[formType] ? (
-        inputEnum[formType](
+      {inputSelector[formType] ? (
+        inputSelector[formType](
           props,
           keyboardOn,
           openKeyboard,
