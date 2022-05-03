@@ -47,25 +47,25 @@ function Calendar({ items, placeholder, setItem, dimensions }) {
     setIsShown(!isShown);
   };
 
-  const handleClickDate = m => {
+  const handleClickItem = item => {
     handleClickBox();
-    inputRef.current.value = m;
+    inputRef.current.value = item;
 
-    setItem(m);
+    setItem(item);
   };
 
   return (
     <CalendarContainer>
       <SelectBox onClick={handleClickBox}>
-        <Input ref={inputRef} disabled placeholder={placeholder} type="text" />
+        <Input ref={inputRef} disabled placeholder={placeholder} type={'text'} />
       </SelectBox>
       <Modal isOpen={isShown} setIsOpen={setIsShown} dimensions={dimensions}>
         <SelectLayer isShown={isShown}>
           <SelectListWrapper>
             <List>
-              {items.map(m => (
-                <Item key={m} onClick={() => handleClickDate(m)}>
-                  {m}
+              {items.map(item => (
+                <Item key={item} onClick={() => handleClickItem(item)}>
+                  {item}
                 </Item>
               ))}
             </List>
