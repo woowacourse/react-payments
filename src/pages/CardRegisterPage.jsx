@@ -54,7 +54,7 @@ export const CardRegisterPage = () => {
 
   useEffect(() => {
     if (!checkInputs.cardNumbers) {
-      setCheckInputs((prev) => ({ ...prev, [cardType]: false }));
+      setCheckInputs((prev) => ({ ...prev, cardType: false }));
       setCardType(() => CARD_TYPES_DEFAULT);
     }
   }, [checkInputs.cardNumbers]);
