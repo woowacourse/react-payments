@@ -1,3 +1,4 @@
+import useInputAutoFocus from 'hooks/useInputAutoFocus';
 import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 import { isObject } from 'utils';
@@ -9,22 +10,35 @@ const FormInput = ({
   inputInfoList,
   inputValue,
   theme,
+  maxLength,
   handleChange,
   children,
 }) => {
-  const handleInputChange = useCallback((e) => handleChange(e, item), [handleChange, item]);
+  const { inputRefList, autoFocusForward } = useInputAutoFocus({
+    maxLength,
+  });
+
+  const handleInputChange = useCallback(
+    (e) => {
+      handleChange(e, item);
+      autoFocusForward(e);
+    },
+    [handleChange, item],
+  );
 
   return (
     <div className="input-container">
       <label className="input-title">{inputTitle}</label>
       <div className={`input-box ${className}`}>
-        {inputInfoList.map(({ id, name, className = '', ...rest }) => (
+        {inputInfoList.map(({ id, name, className = '', ...rest }, index) => (
           <input
             key={id}
             name={name}
             className={`input-basic ${className} font-${theme}`}
             value={isObject(inputValue) ? inputValue[name] : inputValue}
             onChange={handleInputChange}
+            maxLength={maxLength}
+            ref={(el) => (inputRefList.current[index] = el)}
             {...rest}
           />
         ))}

@@ -144,6 +144,7 @@ const CardAppPage = () => {
         inputValue={cardNumber}
         handleChange={handleChange}
         theme={theme}
+        maxLength={INPUT_MAX_LENGTH.CARD_NUMBER}
       />
       <Message name="cardNumber" isFilled={isCardNumberFilled} />
 
@@ -155,6 +156,7 @@ const CardAppPage = () => {
         inputValue={expiryDate}
         handleChange={handleChange}
         theme={theme}
+        maxLength={INPUT_MAX_LENGTH.EXPIRY_DATE}
       />
       <Message name="expiryDate" isFilled={isExpiryDateFilled} />
 
@@ -165,6 +167,7 @@ const CardAppPage = () => {
         inputValue={ownerName}
         handleChange={handleChange}
         theme={theme}
+        maxLength={INPUT_MAX_LENGTH.OWNER_NAME}
       >
         <div className="owner-name-length">
           {ownerName.length} / {INPUT_MAX_LENGTH.OWNER_NAME}
@@ -178,6 +181,7 @@ const CardAppPage = () => {
         handleChange={handleChange}
         inputValue={privacyCode}
         theme={theme}
+        maxLength={INPUT_MAX_LENGTH.PRIVACY_CODE}
       >
         <Tooltip type="PRIVACY_CODE" />
       </FormInput>
@@ -190,6 +194,7 @@ const CardAppPage = () => {
         inputValue={password}
         handleChange={handleChange}
         theme={theme}
+        maxLength={INPUT_MAX_LENGTH.PASSWORD}
       />
       <Message name="password" isFilled={isPasswordFilled} />
 

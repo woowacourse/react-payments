@@ -7,7 +7,6 @@ export const cardNumberInputInfoList = [
     type: 'text',
     className: 'mr-n15 tracking-wide',
     name: 'first',
-    maxLength: INPUT_MAX_LENGTH.CARD_NUMBER,
     autoFocus: true,
   },
   {
@@ -15,21 +14,18 @@ export const cardNumberInputInfoList = [
     type: 'text',
     className: 'mr-n15 tracking-wide',
     name: 'second',
-    maxLength: INPUT_MAX_LENGTH.CARD_NUMBER,
   },
   {
     id: uuid(),
     type: 'password',
     className: 'mr-n15 tracking-wide',
     name: 'third',
-    maxLength: INPUT_MAX_LENGTH.CARD_NUMBER,
   },
   {
     id: uuid(),
     type: 'password',
     className: 'tracking-wide',
     name: 'fourth',
-    maxLength: INPUT_MAX_LENGTH.CARD_NUMBER,
   },
 ];
 
@@ -40,14 +36,12 @@ export const expiryDateInputInfoList = [
     placeholder: 'MM',
     className: 'mr-n15',
     name: 'month',
-    maxLength: INPUT_MAX_LENGTH.EXPIRY_DATE,
   },
   {
     id: uuid(),
     type: 'text',
     placeholder: 'YY',
     name: 'year',
-    maxLength: INPUT_MAX_LENGTH.EXPIRY_DATE,
   },
 ];
 
@@ -57,7 +51,6 @@ export const cardOwnerNameInputInfoList = [
     type: 'text',
     placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
     className: 'text-left',
-    maxLength: INPUT_MAX_LENGTH.OWNER_NAME,
   },
 ];
 
@@ -66,7 +59,6 @@ export const privacyCodeInputInfoList = [
     id: uuid(),
     type: 'password',
     className: 'w-25 tracking-wide',
-    maxLength: INPUT_MAX_LENGTH.PRIVACY_CODE,
   },
 ];
 
@@ -76,14 +68,12 @@ export const cardPasswordInputInfoList = [
     type: 'password',
     className: 'w-5',
     name: 'first',
-    maxLength: INPUT_MAX_LENGTH.PASSWORD,
   },
   {
     id: uuid(),
     type: 'password',
     className: 'w-5',
     name: 'second',
-    maxLength: INPUT_MAX_LENGTH.PASSWORD,
   },
   {
     id: uuid(),
@@ -91,7 +81,6 @@ export const cardPasswordInputInfoList = [
     className: 'w-5 input-disabled',
     disabled: true,
     name: 'third',
-    maxLength: INPUT_MAX_LENGTH.PASSWORD,
   },
   {
     id: uuid(),
@@ -99,7 +88,6 @@ export const cardPasswordInputInfoList = [
     className: 'w-5 input-disabled',
     disabled: true,
     name: 'fourth',
-    maxLength: INPUT_MAX_LENGTH.PASSWORD,
   },
 ];
 
