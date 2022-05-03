@@ -14,7 +14,8 @@ import { useState } from "react";
 const CardAdd = () => {
   const { cardInfo, dispatch, validateCardInfo } = useCard();
   const [visible, setVisible] = useState(false);
-  const { cardNumber, expiredDate, ownerName, secureCode, password } = cardInfo;
+  const { cardName, cardNumber, expiredDate, ownerName, secureCode, password } =
+    cardInfo;
 
   const submitCard = () => {
     try {
@@ -49,6 +50,13 @@ const CardAdd = () => {
         </header>
         <div className="card-add__container">
           <Card cardInfo={cardInfo} onClick={openModal} />
+          {cardName ? (
+            <></>
+          ) : (
+            <span className="select-card-message">
+              카드를 눌러 카드를 선택해주세요
+            </span>
+          )}
           <form>
             <CardNumberInput state={cardNumber} updateForm={dispatch} />
             <ExpiredDateInput state={expiredDate} updateForm={dispatch} />
