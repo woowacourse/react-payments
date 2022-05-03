@@ -16,7 +16,6 @@ const InputContainer = ({
       {inputInfo.map(({ type, placeholder, name, value }, idx) => (
         <Fragment key={idx}>
           {idx && connector ? <p className="connector">{connector}</p> : null}
-
           <input
             name={name}
             className="input-basic"
