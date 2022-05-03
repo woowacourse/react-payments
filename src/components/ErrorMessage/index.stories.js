@@ -4,6 +4,11 @@ import ErrorMessage from './index';
 export default {
   title: 'ErrorMessage',
   component: ErrorMessage,
+  argTypes: {
+    message: {
+      description: '보여줄 에러 메시지',
+    },
+  },
 };
 
 const Template = (args) => <ErrorMessage {...args} />;

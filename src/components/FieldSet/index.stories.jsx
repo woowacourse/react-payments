@@ -17,6 +17,15 @@ export default {
         disable: true,
       },
     },
+    description: {
+      description: '필드셋 label 에 들어갈 내용',
+    },
+    errorMessage: {
+      description: '유효성 검증 실패 시 보여줄 에러메시지',
+    },
+    isError: {
+      description: '에러 여부',
+    },
   },
 };
 

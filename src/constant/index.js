@@ -22,4 +22,13 @@ export const COLOR_NAMES = [
   'pink',
   'orange',
   'yellow',
+  'mint',
 ];
+
+export const INPUT_SCALE_TYPE = {
+  large: '318',
+  medium: '84',
+  small: '43',
+};
+
+export const INPUT_SCALE_NAMES = ['large', 'medium', 'small'];
