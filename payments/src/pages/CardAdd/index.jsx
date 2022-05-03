@@ -12,9 +12,26 @@ import CardColorPicker from "../../components/ColorPicker";
 import { useState } from "react";
 
 const CardAdd = () => {
-  const [cardInfo, dispatch] = useCard();
+  const { cardInfo, dispatch, validateCardInfo } = useCard();
   const [visible, setVisible] = useState(false);
   const { cardNumber, expiredDate, ownerName, secureCode, password } = cardInfo;
+
+  const submitCard = () => {
+    try {
+      validateCardInfo();
+      if (
+        window.confirm(`입력하신 카드정보가
+      카드번호:${cardNumber.join("-")}
+      카드 만료일:${expiredDate.join("/")}
+      카드 소유자 이름:${ownerName === "" ? "임꺽정" : ownerName} 이
+      맞습니까`)
+      ) {
+        alert("카드가 등록되었습니다");
+      }
+    } catch (e) {
+      alert(e.message);
+    }
+  };
 
   return (
     <>
@@ -33,7 +50,7 @@ const CardAdd = () => {
             <CardPasswordInput state={password} updateForm={dispatch} />
           </form>
         </div>
-        <NextButton state={cardInfo} />
+        <NextButton onClick={submitCard}>다음</NextButton>
       </div>
       <CardColorPicker
         visible={visible}
