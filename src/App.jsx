@@ -1,13 +1,13 @@
 import { useMemo, useRef } from "react";
 
-import GlobalStyle from "./globalStyles.jsx";
+import GlobalStyle from "./globalStyles";
 
-import PageHeader from "./components/PageHeader.jsx";
-import CardInfoForm from "./components/CardInfoForm.jsx";
-import Button from "./components/UIComponents/Button/Button.jsx";
+import PageHeader from "./components/PageHeader";
+import CardInfoForm from "./components/CardInfoForm";
+import Button from "./components/UIComponents/Button/Button";
+import CardPreview from "./components/UIComponents/CardPreview/CardPreview";
 
 import {
-  CardPreview,
   CardHolderNameInput,
   CardNumberInput,
   CardPasswordInput,

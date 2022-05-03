@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes, { string } from "prop-types";
-import { CREATE_MASKED_CHARACTERS } from "../constants/constants";
+import { CREATE_MASKED_CHARACTERS } from "../../../constants/constants";
 
 const CardContainer = styled.div`
   display: flex;

@@ -1,7 +1,7 @@
 export const MASKED_CHARACTER = "•";
 
 export const CREATE_MASKED_CHARACTERS = (repeatCount) =>
-  `${MASKED_CHARACTER} `.repeat(repeatCount).trim();
+  `${MASKED_CHARACTER}`.repeat(repeatCount);
 
 export const CARD_REGISTER_SUCCESS_MESSAGE =
   "카드가 정상적으로 등록되었습니다!";
