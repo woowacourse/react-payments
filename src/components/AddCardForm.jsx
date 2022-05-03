@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Input from './Input';
-import { checkMaxLength, checkIsNaN, checkRange } from '../util';
-import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../constants';
+import { MAX_LENGTH } from '../constants';
+import CardNumberInput from './CardNumberInput';
+import PasswordInput from './PasswordInput';
+import NameInput from './NameInput';
+import SecurityCodeInput from './SecurityCodeInput';
+import MonthInput from './MonthInput';
+import YearInput from './YearInput';
 
 function AddCardForm({ updateCard, addCard }) {
   const [cardForm, setCardForm] = useState({
@@ -43,60 +47,43 @@ function AddCardForm({ updateCard, addCard }) {
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
-          <Input
-            length={MAX_LENGTH.CARD_NUMBER}
+          <CardNumberInput
             value={cardForm.firstCardNumber}
             name="firstCardNumber"
             updateCardForm={updateCardForm}
-            validators={{ checkMaxLength, checkIsNaN }}
           />
-          <Input
-            length={MAX_LENGTH.CARD_NUMBER}
+          <CardNumberInput
             value={cardForm.secondCardNumber}
             name="secondCardNumber"
             updateCardForm={updateCardForm}
-            validators={{ checkMaxLength, checkIsNaN }}
           />
-          <Input
+          <CardNumberInput
             type="password"
-            length={MAX_LENGTH.CARD_NUMBER}
             value={cardForm.thirdCardNumber}
             name="thirdCardNumber"
             updateCardForm={updateCardForm}
-            validators={{ checkMaxLength, checkIsNaN }}
           />
-          <Input
+          <CardNumberInput
             type="password"
-            length={MAX_LENGTH.CARD_NUMBER}
             value={cardForm.fourthCardNumber}
             name="fourthCardNumber"
             updateCardForm={updateCardForm}
-            validators={{ checkMaxLength, checkIsNaN }}
           />
         </div>
       </div>
       <div className="input-container">
         <span className="input-title">만료일</span>
         <div className="input-box w-50">
-          <Input
-            placeholder="MM"
-            length={MAX_LENGTH.DATE}
-            minLength={MIN_LENGTH.MONTH}
-            min={RANGE.MONTH_MIN}
-            max={RANGE.MONTH_MAX}
+          <MonthInput
             value={cardForm.expireMonth}
             name="expireMonth"
             updateCardForm={updateCardForm}
-            validators={{ checkMaxLength, checkIsNaN, checkRange }}
           />
           /
-          <Input
-            placeholder="YY"
-            length={MAX_LENGTH.DATE}
+          <YearInput
             value={cardForm.expireYear}
             name="expireYear"
             updateCardForm={updateCardForm}
-            validators={{ checkMaxLength, checkIsNaN }}
           />
         </div>
       </div>
@@ -107,27 +94,19 @@ function AddCardForm({ updateCard, addCard }) {
             {nameLength}/{MAX_LENGTH.NAME}
           </span>
         </div>
-        <Input
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          length={MAX_LENGTH.NAME}
-          minLength={MIN_LENGTH.NAME}
-          updateNameLength={updateNameLength}
+        <NameInput
           value={cardForm.ownerName}
           name="ownerName"
+          updateNameLength={updateNameLength}
           updateCardForm={updateCardForm}
-          validators={{ checkMaxLength }}
         />
       </div>
       <div className="input-container">
         <span className="input-title">보안코드(CVC/CVV)</span>
-        <Input
-          size="w-25"
-          type="password"
-          length={MAX_LENGTH.SECURITY_CODE}
+        <SecurityCodeInput
           value={cardForm.securityCode}
           name="securityCode"
           updateCardForm={updateCardForm}
-          validators={{ checkMaxLength, checkIsNaN }}
         />
         <div className="help-tip">
           <p>카드 뒷면 끝 세 자리를 입력해주세요.</p>
@@ -135,23 +114,15 @@ function AddCardForm({ updateCard, addCard }) {
       </div>
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
-        <Input
-          size="w-15 mr-10"
-          type="password"
-          length={MAX_LENGTH.PASSWORD}
+        <PasswordInput
           value={cardForm.firstPassword}
           name="firstPassword"
           updateCardForm={updateCardForm}
-          validators={{ checkMaxLength, checkIsNaN }}
         />
-        <Input
-          size="w-15 mr-10"
-          type="password"
-          length={MAX_LENGTH.PASSWORD}
+        <PasswordInput
           value={cardForm.secondPassword}
           name="secondPassword"
           updateCardForm={updateCardForm}
-          validators={{ checkMaxLength, checkIsNaN }}
         />
         <div className="dot" />
         <div className="dot" />
@@ -166,8 +137,8 @@ function AddCardForm({ updateCard, addCard }) {
 }
 
 AddCardForm.propTypes = {
-  updateCard: PropTypes.func,
-  addCard: PropTypes.func,
+  updateCard: PropTypes.func.isRequired,
+  addCard: PropTypes.func.isRequired,
 };
 
 export default AddCardForm;
