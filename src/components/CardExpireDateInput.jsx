@@ -20,7 +20,6 @@ export default function CardExpireDateInput({ expireDate, onChange }) {
         <React.Fragment key={text}>
           <Input
             placeholder={text}
-            maxLength={2}
             name={text}
             type={"text"}
             value={expireDate[index]}
