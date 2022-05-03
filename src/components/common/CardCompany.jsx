@@ -25,10 +25,10 @@ const CompanyName = styled.p`
   color: ${LABEL_PRIMARY_COLOR};
 `;
 
-function CardCompany({ color, name, handleClick }) {
+function CardCompany({ hexColor, name, handleClick }) {
   return (
     <CompanyContainer onClick={handleClick}>
-      <CompanyColorCircle hexColor={color}></CompanyColorCircle>
+      <CompanyColorCircle hexColor={hexColor}></CompanyColorCircle>
       <CompanyName>{name}</CompanyName>
     </CompanyContainer>
   );

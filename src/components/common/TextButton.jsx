@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Button = styled.button`
   visibility: ${props => (props.isVisible ? 'viisble' : 'hidden')};
-  color: ${props => props.color};
+  color: ${props => props.hexColor};
   font-size: 1rem;
   padding: 8px;
 
@@ -14,16 +14,12 @@ const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    color: ${props => `${props.color}90`};
+    color: ${props => `${props.hexColor}90`};
   }
 `;
 
-function TextButton({ children: text, hexColor, isVisible, handleClick }) {
-  return (
-    <Button color={hexColor} isVisible={isVisible} onClick={handleClick}>
-      {text}
-    </Button>
-  );
+function TextButton({ children: text, ...rest }) {
+  return <Button {...rest}>{text}</Button>;
 }
 
 export default TextButton;
