@@ -29,18 +29,8 @@ const Label = styled.label`
   color: ${LABEL_PRIMARY_COLOR};
 `;
 
-const DotContainer = styled.div`
-  height: 45px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  outline: none;
-  border: none;
-`;
-
 const Span = styled.span`
   padding: ${props => props.padding || '0'};
 `;
 
-export { InputContainer, InputWrapper, Label, DotContainer, Span };
+export { InputContainer, InputWrapper, Label, Span };
