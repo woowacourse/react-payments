@@ -15,6 +15,17 @@ const ExpiredDateInput = ({ state, updateForm }) => {
     maxLength: INPUT_LENGTH,
   });
 
+  const updateExpiredDate = (target, idx) => {
+    updateForm({
+      type: "expiredDate",
+      payload: {
+        value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),
+        index: idx,
+      },
+    });
+    controllInput(target);
+  };
+
   return (
     <div className="expire__input__container">
       <InputLabel>만료일</InputLabel>
@@ -29,17 +40,7 @@ const ExpiredDateInput = ({ state, updateForm }) => {
                 itemRef.current[idx] = el;
               }}
               onChange={({ target }) => {
-                updateForm({
-                  type: "expiredDate",
-                  payload: {
-                    value: limitInputLength(
-                      blockCharacter(target.value),
-                      INPUT_LENGTH
-                    ),
-                    index: idx,
-                  },
-                });
-                controllInput(target);
+                updateExpiredDate(target, idx);
               }}
               onKeyDown={(e) => {
                 if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {

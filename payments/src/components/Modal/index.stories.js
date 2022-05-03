@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Modal from ".";
-import Portal from "../../Portal";
 
 export default {
   title: "Modal",

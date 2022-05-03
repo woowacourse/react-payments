@@ -48,7 +48,7 @@ const CardAdd = () => {
           <p>카드 추가</p>
         </header>
         <div className="card-add__container">
-          <Card state={cardInfo} onClick={openModal} />
+          <Card cardInfo={cardInfo} onClick={openModal} />
           <form>
             <CardNumberInput state={cardNumber} updateForm={dispatch} />
             <ExpiredDateInput state={expiredDate} updateForm={dispatch} />

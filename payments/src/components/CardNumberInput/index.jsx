@@ -14,6 +14,18 @@ const CardNumberInput = ({ state, updateForm }) => {
   const { itemRef, controllInput, autoFocusBackward } = useControllInput({
     maxLength: INPUT_LENGTH,
   });
+
+  const updateCardNumber = (target, idx) => {
+    updateForm({
+      type: "cardNumber",
+      payload: {
+        value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),
+        index: idx,
+      },
+    });
+    controllInput(target);
+  };
+
   return (
     <div className="card-number__input__container">
       <InputLabel>카드 번호</InputLabel>
@@ -22,17 +34,7 @@ const CardNumberInput = ({ state, updateForm }) => {
           <Fragment key={idx}>
             <Input
               onChange={({ target }) => {
-                updateForm({
-                  type: "cardNumber",
-                  payload: {
-                    value: limitInputLength(
-                      blockCharacter(target.value),
-                      INPUT_LENGTH
-                    ),
-                    index: idx,
-                  },
-                });
-                controllInput(target);
+                updateCardNumber(target, idx);
               }}
               onKeyDown={(e) => {
                 if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {

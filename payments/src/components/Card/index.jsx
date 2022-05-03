@@ -1,7 +1,7 @@
 import "./index.scss";
 
 const Card = ({
-  state: { cardNumber, expiredDate, ownerName, cardName, color },
+  cardInfo: { cardNumber, expiredDate, ownerName, cardName, color },
   onClick,
 }) => {
   return (

@@ -13,6 +13,18 @@ const CardPasswordInput = ({ state, updateForm }) => {
   const { itemRef, controllInput, autoFocusBackward } = useControllInput({
     maxLength: INPUT_LENGTH,
   });
+
+  const updateCardPassword = (target, idx) => {
+    updateForm({
+      type: "password",
+      payload: {
+        value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),
+        index: idx,
+      },
+    });
+    controllInput(target);
+  };
+
   return (
     <div className="password__input__container">
       <InputLabel>카드비밀번호</InputLabel>
@@ -27,17 +39,7 @@ const CardPasswordInput = ({ state, updateForm }) => {
                 }}
                 value={state[idx]}
                 onChange={({ target }) => {
-                  updateForm({
-                    type: "password",
-                    payload: {
-                      value: limitInputLength(
-                        blockCharacter(target.value),
-                        INPUT_LENGTH
-                      ),
-                      index: idx,
-                    },
-                  });
-                  controllInput(target);
+                  updateCardPassword(target, idx);
                 }}
                 onKeyDown={(e) => {
                   if (

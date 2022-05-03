@@ -7,6 +7,18 @@ import "./index.scss";
 const INPUT_LENGTH = 30;
 
 const OwnerNameInput = ({ state, updateForm }) => {
+  const updateCardOwner = (target) => {
+    updateForm({
+      type: "ownerName",
+      payload: {
+        value: limitInputLength(
+          limitExceptUpperCase(target.value),
+          INPUT_LENGTH
+        ),
+      },
+    });
+  };
+
   return (
     <div className="ownername__input__container">
       <div className="label__container">
@@ -20,15 +32,7 @@ const OwnerNameInput = ({ state, updateForm }) => {
           value={state}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요.(영어 대문자만 입력가능합니다.)"
           onChange={({ target }) => {
-            updateForm({
-              type: "ownerName",
-              payload: {
-                value: limitInputLength(
-                  limitExceptUpperCase(target.value),
-                  INPUT_LENGTH
-                ),
-              },
-            });
+            updateCardOwner(target);
           }}
         />
       </InputContainer>
