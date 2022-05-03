@@ -13,7 +13,6 @@ function CardSecurityField({ securityCode, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({
     state: securityCode,
     validate: validateSecurityCode,
-    isValid: !securityCode,
   });
 
   return (
@@ -24,7 +23,7 @@ function CardSecurityField({ securityCode, onChange }) {
         value={securityCode}
         maxLength={SECURITY_CODE.LENGTH}
         onChange={onChange}
-        onBlur={handleError}
+        onBlur={() => handleError(!securityCode)}
       />
 
       <ToolTip align="right" text="카드 뒷면의 숫자 3자리입니다.">

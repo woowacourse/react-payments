@@ -11,7 +11,6 @@ function CardNumberField({ cardNumber, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({
     state: cardNumber,
     validate: validateCardNumber,
-    isValid: !cardNumber.every((unit) => unit !== ''),
   });
 
   return (
@@ -26,7 +25,7 @@ function CardNumberField({ cardNumber, onChange }) {
           value={cardNumber[index]}
           maxLength={CARD_NUMBER.UNIT_LENGTH}
           onChange={(event) => onChange(event, { index })}
-          onBlur={handleError}
+          onBlur={() => handleError(!cardNumber.every((unit) => unit !== ''))}
         />
       ))}
     </FieldSet>

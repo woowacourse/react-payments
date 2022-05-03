@@ -13,7 +13,6 @@ function CardPasswordField({ cardPassword, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({
     state: cardPassword,
     validate: validateCardPassword,
-    isValid: !cardPassword,
   });
 
   return (
@@ -25,7 +24,7 @@ function CardPasswordField({ cardPassword, onChange }) {
         placeholder="앞 2자리"
         maxLength={CARD_PASSWORD.LENGTH}
         onChange={onChange}
-        onBlur={handleError}
+        onBlur={() => handleError(!cardPassword)}
       />
       <PasswordMasking />
       <PasswordMasking />

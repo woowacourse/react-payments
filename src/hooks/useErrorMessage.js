@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-function useErrorMessage({ state, validate, isValid = false }) {
+function useErrorMessage({ state, validate }) {
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const handleError = () => {
-    if (isValid) return;
+  const handleError = (isSkipValidation) => {
+    if (isSkipValidation) return;
 
     try {
       validate(state);
