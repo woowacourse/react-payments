@@ -137,13 +137,13 @@ const AddCardPage = () => {
       <Header title="카드 추가" />
       <Card
         name="블랙 카드😎"
-        ownerName={ownerName}
-        expiredMonth={expiredMonth}
-        expiredYear={expiredYear}
-        firstCardNumber={firstCardNumber}
-        secondCardNumber={secondCardNumber}
-        thirdCardNumber={thirdCardNumber}
-        fourthCardNumber={fourthCardNumber}
+        ownerName={isOwnerNameError ? '' : ownerName}
+        expiredMonth={isExpiredMonthError ? '' : expiredMonth}
+        expiredYear={isExpiredYearError ? '' : expiredYear}
+        firstCardNumber={isFirstCardNumberError ? '' : firstCardNumber}
+        secondCardNumber={isSecondCardNumberError ? '' : secondCardNumber}
+        thirdCardNumber={isThirdCardNumberError ? '' : thirdCardNumber}
+        fourthCardNumber={isFourthCardNumberError ? '' : fourthCardNumber}
         color={cardType}
         onClick={openModal}
       />
