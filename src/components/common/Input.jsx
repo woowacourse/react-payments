@@ -22,8 +22,8 @@ const InputBox = styled.input`
   }
 `;
 
-const Input = React.forwardRef(({ onChange, type, ...rest }, ref) => (
-  <InputBox ref={ref} onChange={onChange} type={type} {...rest} />
+const Input = React.forwardRef(({ onChange, type, name, ...rest }, ref) => (
+  <InputBox ref={ref} onChange={onChange} type={type} name={name} {...rest} />
 ));
 
 export default Input;
