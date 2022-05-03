@@ -92,7 +92,7 @@ const CardAppPage = () => {
   };
 
   return (
-    <div>
+    <>
       <Header
         title="카드 추가"
         left={
@@ -175,7 +175,7 @@ const CardAppPage = () => {
           </div>
         </Modal>
       )}
-    </div>
+    </>
   );
 };
 
