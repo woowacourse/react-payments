@@ -3,7 +3,7 @@ import Input from '../input/Input';
 import { validNumber, validMaxLength, validRange } from '../../validator';
 import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../../constants';
 
-function AddCard({ card, updateCard, addCard }) {
+function AddCardForm({ card, updateCard, addCard }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     addCard();
@@ -136,7 +136,7 @@ function AddCard({ card, updateCard, addCard }) {
   );
 }
 
-AddCard.propTypes = {
+AddCardForm.propTypes = {
   card: PropTypes.shape({
     firstCardNumber: PropTypes.string.isRequired,
     secondCardNumber: PropTypes.string.isRequired,
@@ -153,4 +153,4 @@ AddCard.propTypes = {
   addCard: PropTypes.func,
 };
 
-export default AddCard;
+export default AddCardForm;
