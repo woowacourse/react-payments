@@ -14,11 +14,6 @@ const CardWrapper = styled.div`
   margin: 25px 0;
 `;
 
-const FooterWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
 const CardInputWrapper = styled.div`
   margin-bottom: 15px;
 
@@ -28,6 +23,11 @@ const CardInputWrapper = styled.div`
     display: inline-block;
     color: ${({ theme }) => theme.colors.DARK_GRAY};
   }
+`;
+
+const FooterWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 export { PageWrapper, CardWrapper, FooterWrapper, CardInputWrapper };
