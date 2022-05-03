@@ -46,7 +46,6 @@ export const AutoFocusInputContainer = ({ children, maxValueLength }) => {
 
     return child;
   });
-  console.log(refedInputChildren);
 
   return <>{refedInputChildren}</>;
 };
