@@ -89,8 +89,10 @@ const useForm = ({ formSchema, onSubmit, onSubmitError }) => {
     };
   };
 
-  const getInputClassName = (fieldName) =>
-    `input-basic ${errors[fieldName]?.showError ? 'error' : ''}`;
+  const getInputClassName = (fieldName, additionalClassName = '') =>
+    `input-basic ${
+      errors[fieldName]?.showError ? 'error' : ''
+    } ${additionalClassName}`;
 
   return {
     values,
