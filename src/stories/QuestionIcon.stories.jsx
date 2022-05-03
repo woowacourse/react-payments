@@ -6,7 +6,7 @@ export default {
   title: 'QuestionIcon',
   component: QuestionIcon,
   argTypes: {
-    textContent: { control: 'text' },
+    children: { control: 'text' },
   },
 };
 
@@ -15,5 +15,5 @@ const Template = args => <QuestionIcon {...args} />;
 export const Primary = Template.bind({});
 
 Primary.args = {
-  textContent: '',
+  children: 'hi~~',
 };

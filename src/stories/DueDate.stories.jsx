@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DueDate from '../components/DueDate';
 
 export default {
@@ -10,9 +10,11 @@ export default {
 };
 
 const Template = args => {
-  const cardDateCallback = () => {};
-  const setIsCorrectCardDate = () => {};
-  return <DueDate {...args} cardDateCallback={cardDateCallback} setIsCorrectCardDate={setIsCorrectCardDate} />;
+  const [cardDate, setCardDate] = useState({
+    month: '',
+    year: '',
+  });
+  return <DueDate {...args} cardDate={cardDate} setCardDate={setCardDate} />;
 };
 
 export const Primary = Template.bind({});
