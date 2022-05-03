@@ -14,6 +14,7 @@ const mockData: CardInfo[] = [
     userName: "시지프",
     securityCode: "123",
     password: ["1", "1"],
+    cardName: "하하하",
   },
   {
     cardType: { name: "파랑 카드", color: "blue" },
@@ -22,6 +23,7 @@ const mockData: CardInfo[] = [
     userName: "시지프",
     securityCode: "123",
     password: ["1", "1"],
+    cardName: "하하하",
   },
 ];
 

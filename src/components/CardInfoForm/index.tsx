@@ -38,8 +38,7 @@ export default function CardInfoForm() {
       alert("카드 등록이 완료되었습니다.");
     }
 
-    navigate(PATH.COMPLETE, { state: { cardInfo } });
-    resetCardInfo();
+    navigate(PATH.COMPLETE);
     setIsNextButtonShown(false);
   };
 

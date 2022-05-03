@@ -5,6 +5,7 @@ interface CardInfo {
   userName: string;
   securityCode: string;
   password: Password;
+  cardName: string;
 }
 type CardType = {
   name: CardName;
@@ -32,7 +33,7 @@ interface ExpirationDate {
   year: string;
 }
 
-type CardInfoValidationTarget = Omit<CardInfo, "cardType" | "userName">;
+type CardInfoValidationTarget = Omit<CardInfo, "cardType" | "userName" | "cardName">;
 
 type CardInfoValidation = {
   [K in keyof CardInfoValidationTarget]: Validation;
