@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
 import React from 'react';
 
-const style = css({
-  width: '22px',
-  height: '22px',
-  marginRight: '18px',
-});
-
 function BackButton() {
   return (
     <div>
@@ -18,5 +12,11 @@ function BackButton() {
     </div>
   );
 }
+
+const style = css({
+  width: '22px',
+  height: '22px',
+  marginRight: '18px',
+});
 
 export default BackButton;

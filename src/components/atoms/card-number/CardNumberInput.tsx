@@ -6,6 +6,11 @@ type Props = {
   value: string;
 };
 
+const CardNumberInput = forwardRef<HTMLInputElement, Props>(({ onChange, value }, ref) => {
+  return <Input pattern="[0-9*]" onChange={onChange} value={value} ref={ref} />;
+});
+CardNumberInput.displayName = 'CardNumberInput';
+
 const Input = styled.input(() => ({
   backgroundColor: '#ECEBF1',
   height: '47px',
@@ -20,10 +25,5 @@ const Input = styled.input(() => ({
     boxShadow: 'none',
   },
 }));
-
-const CardNumberInput = forwardRef<HTMLInputElement, Props>(({ onChange, value }, ref) => {
-  return <Input pattern="[0-9*]" onChange={onChange} value={value} ref={ref} />;
-});
-CardNumberInput.displayName = 'CardNumberInput';
 
 export default CardNumberInput;

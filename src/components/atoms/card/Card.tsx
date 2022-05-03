@@ -1,6 +1,56 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
+type Props = {
+  cardNumber: string;
+  name: string;
+  expiredPeriod: string;
+  cvc: string;
+  isActive: boolean;
+  color?: string;
+  cardName?: string;
+  fliped?: boolean;
+};
+
+function Card({ cardNumber, name, expiredPeriod, cvc, isActive, color, cardName, fliped }: Props) {
+  const cn = isActive ? cardName || '로이드카드' : '';
+  const _color = isActive ? color || '#94DACD' : undefined;
+  return (
+    <FlipContainer>
+      <FlipableCard fliped={fliped}>
+        <Front className="front" color={_color}>
+          <div className="type">{cn}</div>
+          <div className="chip-container">
+            <div className="chip" />
+          </div>
+          <div className="number">{cardNumber}</div>
+          <div className="info">
+            <OwnerNameSpan name={name}>{name.length > 0 ? name : 'NAME'}</OwnerNameSpan>
+            <span className="expired-period">{expiredPeriod.length > 0 ? expiredPeriod : 'MM / YY'}</span>
+          </div>
+        </Front>
+        <Back className="back">
+          <div className="strip" />
+          <div className="cvc">
+            <label>CVC</label>
+            <div className="content">{cvc}</div>
+          </div>
+          <div className="info">
+            <div className="tel">
+              <b>카드상담 </b>
+              <span>1544-1125</span>
+            </div>
+            <div className="tel">
+              <b>한도조회 </b>
+              <span>1544-4729</span>
+            </div>
+          </div>
+        </Back>
+      </FlipableCard>
+    </FlipContainer>
+  );
+}
+
 // inspired
 // - https://codepen.io/airman5573/pen/RwQboRZ
 // - https://codepen.io/darkwing/pen/DrNEzy
@@ -115,55 +165,5 @@ const Back = styled.div(() => ({
 const OwnerNameSpan = styled.span<{ name: string }>(({ name }) => ({
   fontSize: `${Math.min(14, Math.max(4, 20 - Math.floor(name.length / 2)))}px`,
 }));
-
-type Props = {
-  cardNumber: string;
-  name: string;
-  expiredPeriod: string;
-  cvc: string;
-  isActive: boolean;
-  color?: string;
-  cardName?: string;
-  fliped?: boolean;
-};
-
-function Card({ cardNumber, name, expiredPeriod, cvc, isActive, color, cardName, fliped }: Props) {
-  const cn = isActive ? cardName || '로이드카드' : '';
-  const _color = isActive ? color || '#94DACD' : undefined;
-  return (
-    <FlipContainer>
-      <FlipableCard fliped={fliped}>
-        <Front className="front" color={_color}>
-          <div className="type">{cn}</div>
-          <div className="chip-container">
-            <div className="chip" />
-          </div>
-          <div className="number">{cardNumber}</div>
-          <div className="info">
-            <OwnerNameSpan name={name}>{name.length > 0 ? name : 'NAME'}</OwnerNameSpan>
-            <span className="expired-period">{expiredPeriod.length > 0 ? expiredPeriod : 'MM / YY'}</span>
-          </div>
-        </Front>
-        <Back className="back">
-          <div className="strip" />
-          <div className="cvc">
-            <label>CVC</label>
-            <div className="content">{cvc}</div>
-          </div>
-          <div className="info">
-            <div className="tel">
-              <b>카드상담 </b>
-              <span>1544-1125</span>
-            </div>
-            <div className="tel">
-              <b>한도조회 </b>
-              <span>1544-4729</span>
-            </div>
-          </div>
-        </Back>
-      </FlipableCard>
-    </FlipContainer>
-  );
-}
 
 export default Card;

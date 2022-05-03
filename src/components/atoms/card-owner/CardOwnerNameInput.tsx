@@ -6,6 +6,18 @@ type Props = {
   value: string;
 };
 
+function CardOwnerNameInput({ onChange, value }: Props) {
+  return (
+    <Input
+      id="card-owner-name-input"
+      type="text"
+      onChange={onChange}
+      value={value}
+      placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+    />
+  );
+}
+
 const Input = styled.input(() => ({
   backgroundColor: '#ECEBF1',
   height: '45px',
@@ -20,17 +32,5 @@ const Input = styled.input(() => ({
     boxShadow: 'none',
   },
 }));
-
-function CardOwnerNameInput({ onChange, value }: Props) {
-  return (
-    <Input
-      id="card-owner-name-input"
-      type="text"
-      onChange={onChange}
-      value={value}
-      placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-    />
-  );
-}
 
 export default CardOwnerNameInput;

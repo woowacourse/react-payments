@@ -1,24 +1,6 @@
 import React, { forwardRef } from 'react';
 import styled from '@emotion/styled';
 
-const Input = styled.input(() => ({
-  backgroundColor: '#ECEBF1',
-  height: '45px',
-  width: '43px',
-  borderRadius: '7px',
-  outline: 'none !important',
-  border: 'inherit',
-  fontSize: '21px',
-  textAlign: 'center',
-  marginRight: '7px',
-  '&:focus': {
-    boxShadow: 'none',
-  },
-  '&:disabled': {
-    backgroundColor: 'white',
-  },
-}));
-
 type Props = {
   value?: string;
   disabled?: boolean;
@@ -46,5 +28,23 @@ const CardPasswordInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
   );
 });
 CardPasswordInput.displayName = 'CardPasswordInput';
+
+const Input = styled.input(() => ({
+  backgroundColor: '#ECEBF1',
+  height: '45px',
+  width: '43px',
+  borderRadius: '7px',
+  outline: 'none !important',
+  border: 'inherit',
+  fontSize: '21px',
+  textAlign: 'center',
+  marginRight: '7px',
+  '&:focus': {
+    boxShadow: 'none',
+  },
+  '&:disabled': {
+    backgroundColor: 'white',
+  },
+}));
 
 export default CardPasswordInput;

@@ -3,12 +3,6 @@ import React from 'react';
 import BackButton from '../atoms/BackButton';
 import PageTitle from '../atoms/PageTitle';
 
-const style = css({
-  display: 'flex',
-  alignItems: 'center',
-  marginBottom: '25px',
-});
-
 function Navigation() {
   return (
     <div css={style}>
@@ -17,5 +11,11 @@ function Navigation() {
     </div>
   );
 }
+
+const style = css({
+  display: 'flex',
+  alignItems: 'center',
+  marginBottom: '25px',
+});
 
 export default Navigation;
