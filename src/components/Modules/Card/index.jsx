@@ -1,5 +1,9 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { PLACEHOLDER } from '../../../constant';
+import { CardNumberContext } from '../../../context/CardNumberContext';
+import { ExpiredDateContext } from '../../../context/ExpiredDateContext';
+import { CardOwnerContext } from '../../../context/CardOwnerContext';
 
 export const CardContainer = styled.div`
   display: flex;
@@ -56,19 +60,36 @@ export const CardOwnerName = styled.span`
   word-break: break-all;
 `;
 
-function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
+function Card() {
+  const companyName = '신한카드';
+  const { numbers: cardNumbers } = useContext(CardNumberContext);
+  const { expiredDate } = useContext(ExpiredDateContext);
+  const { name: ownerName } = useContext(CardOwnerContext);
+
+  const numbersString = Object.values(cardNumbers).some(number => number)
+    ? Object.values(cardNumbers).map((cardNumber, index) =>
+        index < 2 ? (
+          <span key={cardNumber + index}>{cardNumber}</span>
+        ) : (
+          <span key={cardNumber + index}>{'●'.repeat(cardNumber.length)}</span>
+        )
+      )
+    : '';
+
+  const expiredDateString = Object.values(expiredDate).some(date => date)
+    ? `${expiredDate.month}/${expiredDate.year}`
+    : PLACEHOLDER.DATE;
+
+  const ownerNameString = ownerName || PLACEHOLDER.NAME;
+
   return (
     <CardContainer>
       <CardCompanyName>{companyName}</CardCompanyName>
       <IC />
-      <CardNumberContainer>
-        {cardNumbers.map((cardNumber, index) => (
-          <span key={cardNumber + index}>{cardNumber}</span>
-        ))}
-      </CardNumberContainer>
+      <CardNumberContainer>{numbersString}</CardNumberContainer>
       <CardBottomContainer>
-        <CardOwnerName>{ownerName || PLACEHOLDER.NAME}</CardOwnerName>
-        <span>{expiredDate ? expiredDate : PLACEHOLDER.DATE}</span>
+        <CardOwnerName>{ownerNameString}</CardOwnerName>
+        <span>{expiredDateString}</span>
       </CardBottomContainer>
     </CardContainer>
   );

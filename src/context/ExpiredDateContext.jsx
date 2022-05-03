@@ -5,7 +5,7 @@ const ExpiredDateContext = createContext();
 function ExpiredDateContextProvider({ children }) {
   const datePlaceholder = { month: 'MM', year: 'YY' };
   const units = ['month', 'year'];
-  const [ExpiredDate, setExpiredDate] = useState(
+  const [expiredDate, setExpiredDate] = useState(
     Object.fromEntries(units.map(unit => [unit, '']))
   );
   const [validations, setValidation] = useState(
@@ -19,7 +19,7 @@ function ExpiredDateContextProvider({ children }) {
       value={{
         datePlaceholder,
         units,
-        ExpiredDate,
+        expiredDate,
         validations,
         refs,
         currentUnitRef,

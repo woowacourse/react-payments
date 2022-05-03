@@ -19,7 +19,7 @@ function ExpiredDateInput() {
   const {
     datePlaceholder,
     units,
-    ExpiredDate,
+    expiredDate,
     validations,
     refs,
     currentUnitRef,
@@ -81,14 +81,14 @@ function ExpiredDateInput() {
     <LabeledInput text="만료일">
       <InputWrapper>
         <InputContainer>
-          {Object.keys(ExpiredDate).map((unit, index) => (
+          {Object.keys(expiredDate).map((unit, index) => (
             <>
               {index !== 0 && '/'}
               <Input
                 key={unit}
                 name={unit}
                 ref={refs[unit]}
-                value={ExpiredDate[unit]}
+                value={expiredDate[unit]}
                 width="40px"
                 type="number"
                 maxLength={2}
