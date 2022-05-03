@@ -15,7 +15,7 @@ const Title = styled.span`
   font-size: 1.5rem;
 `;
 
-function Header({ children: title }) {
+function Header({ title }) {
   return (
     <HeaderContainer>
       <IoIosArrowBack

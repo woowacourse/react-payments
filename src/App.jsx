@@ -8,7 +8,6 @@ import {
   CardShape,
   Footer,
   Header,
-  TextButton,
   DueDate,
 } from './components';
 
@@ -99,7 +98,7 @@ function App() {
 
   return (
     <div className="app" ref={targetRef}>
-      <Header>{'카드추가'}</Header>
+      <Header title={'카드추가'} />
       <CardShape
         dimensions={state.dimensions}
         cardNumber={state.cardNumber}
@@ -111,14 +110,7 @@ function App() {
       <CardOwner dispatch={dispatch} />
       <CardSecurityCode dispatch={dispatch} />
       <CardPassword dispatch={dispatch} />
-      <Footer>
-        <TextButton
-          hexColor={'#525252'}
-          isVisible={isAllCompleted}
-          handleClick={() => alert('카드 등록이 완료 되었습니다 :D')}>
-          다음
-        </TextButton>
-      </Footer>
+      <Footer isAllCompleted={isAllCompleted} />
     </div>
   );
 }
