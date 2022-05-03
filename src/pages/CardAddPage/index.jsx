@@ -11,14 +11,11 @@ import CardDueDateInput from "../../components/CardDueDateInput";
 import CardOwnerInput from "../../components/CardOwnerInput";
 import CardCVCInput from "../../components/CardCVCInput";
 import CardPasswordInput from "../../components/CardPasswordInput";
+import Header from "../../components/common/Header";
 
 import { CARD_NUMBER, DUE_DATE, OWNER, CVC } from "../../constant";
-import {
-  PageWrapper,
-  HeaderWrapper,
-  CardWrapper,
-  FooterWrapper,
-} from "./style";
+import { ReactComponent as ArrowImage } from "../../assets/arrow.svg";
+import { PageWrapper, CardWrapper, FooterWrapper } from "./style";
 
 const isValidOwnerLength = (value) => value.length <= OWNER.MAX_LENGTH;
 const isValidCvc = (value) => value.length <= CVC.UNIT_LENGTH && !isNaN(value);
@@ -56,24 +53,14 @@ function CardAddPage() {
 
   return (
     <PageWrapper>
-      <HeaderWrapper>
-        <Button>
-          <svg
-            width="10"
-            height="17"
-            viewBox="0 0 10 17"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8.30426 1L1.36476 8.78658L9.15134 15.7261"
-              stroke="#525252"
-              strokeWidth="1.5"
-            />
-          </svg>
-        </Button>
-        <h2>카드 추가</h2>
-      </HeaderWrapper>
+      <Header
+        leftChild={
+          <Button>
+            <ArrowImage />
+          </Button>
+        }
+        headText="카드 추가"
+      />
       <CardWrapper>
         <Card
           size="small"
