@@ -40,8 +40,8 @@ type CardInfoValidation = {
 
 interface Validation {
   isValid: boolean;
-  successMsg?: string;
-  errorMsg?: string;
+  successMsg: string;
+  errorMsg: string | null;
 }
 
 export type {

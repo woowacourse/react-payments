@@ -25,7 +25,7 @@ export default function InputContainer({
             (validation.isValid ? (
               <Message content={validation.successMsg} type="success" />
             ) : (
-              <Message content={validation.errorMsg} type="fail" />
+              validation.errorMsg && <Message content={validation.errorMsg} type="fail" />
             ))}
         </span>
         {rightContent}

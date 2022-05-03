@@ -27,22 +27,22 @@ const useCardInfoInput = () => {
     cardNumbers: {
       isValid: false,
       successMsg: "카드넘버 입력 성공!",
-      errorMsg: "",
+      errorMsg: null,
     },
     expirationDate: {
       isValid: false,
       successMsg: "만료일 입력 성공!",
-      errorMsg: "",
+      errorMsg: null,
     },
     securityCode: {
       isValid: false,
       successMsg: "CVC 입력 성공!",
-      errorMsg: "",
+      errorMsg: null,
     },
     password: {
       isValid: false,
       successMsg: "비밀번호 입력 성공!",
-      errorMsg: "",
+      errorMsg: null,
     },
   });
 
@@ -162,7 +162,7 @@ const useCardInfoInput = () => {
 
       setCardInfoValidation(prev => ({
         ...prev,
-        [key]: { ...prev[key], isValid, errorMsg: "" },
+        [key]: { ...prev[key], isValid, errorMsg: null },
       }));
     } catch (error) {
       setCardInfoValidation(prev => ({
