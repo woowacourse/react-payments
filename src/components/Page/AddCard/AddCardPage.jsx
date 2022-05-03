@@ -7,10 +7,10 @@ import Header from '../../Header';
 import {
   checkExpiredMonth,
   checkExpiredYear,
-  checkNumberOnly,
   checkOwnerName,
   checkSecureCode,
   checkPassword,
+  checkCardNumber,
 } from '../../../validation';
 
 import Card from '../../Card';
@@ -35,16 +35,16 @@ const AddCardPage = () => {
   const [isValidatedValueLength, setIsValidatedValueLength] = useState(false);
 
   const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] = useInputValue({
-    validation: checkNumberOnly,
+    validation: checkCardNumber,
   });
   const [secondCardNumber, isSecondCardNumberError, onChangeSecondCardNumber] = useInputValue({
-    validation: checkNumberOnly,
+    validation: checkCardNumber,
   });
   const [thirdCardNumber, isThirdCardNumberError, onChangeThirdCardNumber] = useInputValue({
-    validation: checkNumberOnly,
+    validation: checkCardNumber,
   });
   const [fourthCardNumber, isFourthCardNumberError, onChangeFourthCardNumber] = useInputValue({
-    validation: checkNumberOnly,
+    validation: checkCardNumber,
   });
 
   const [expiredMonth, isExpiredMonthError, onChangeExpiredMonth] = useInputValue({
