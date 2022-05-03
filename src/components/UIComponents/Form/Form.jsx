@@ -12,40 +12,39 @@ const StyledCardInfoForm = styled.form`
 `;
 
 export default function Form({ children }) {
-  const handleFocus = (form, currElement, direction) => {
-    const formInputArray = [...form];
-    const currentIndex = formInputArray.indexOf(currElement);
+  const focusFormInput = (formInputList, currInput, direction) => {
+    const formInputArray = [...formInputList];
+    const currentIndex = formInputArray.indexOf(currInput);
 
     const focusTarget = formInputArray[currentIndex + direction];
 
-    if (focusTarget && focusTarget.name === currElement.name) {
-      focusTarget.focus();
-    }
+    if (focusTarget && focusTarget.name !== currInput.name) return;
+
+    focusTarget.focus();
   };
 
   const handlePrevFocus = (e) => {
     const { key, target } = e;
-    const { form, value } = target;
+    const { form: formInputList, value } = target;
 
-    if (key !== "Backspace") return;
-    if (value !== "") return;
+    if (key !== "Backspace" || value !== "") return;
 
-    handleFocus(form, target, -1);
+    focusFormInput(formInputList, target, -1);
   };
 
-  const handleFormChange = (e) => {
+  const handleNextFocus = (e) => {
     const { target } = e;
-    const { form, maxLength, value } = target;
+    const { form: formInputList, maxLength, value } = target;
 
-    if (value.length === maxLength) {
-      handleFocus(form, target, 1);
-    }
+    if (value.length !== maxLength) return;
+
+    focusFormInput(formInputList, target, 1);
   };
 
   return (
     <StyledCardInfoForm
       autoComplete="off"
-      onChange={handleFormChange}
+      onChange={handleNextFocus}
       onKeyDown={handlePrevFocus}
     >
       {children}
