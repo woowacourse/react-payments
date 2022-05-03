@@ -4,17 +4,15 @@ import Input from '../../Input';
 import PropTypes from 'prop-types';
 import * as styled from './index.styled';
 
-const showOwnerNameLength = (ownerName) => {
-  return ownerName.length < 10
-    ? `0${ownerName.length}/30`
-    : `${ownerName.length}/30`;
+const showOwnerNameLength = (length) => {
+  return `${length}`.padStart(2, '0');
 };
 
 const CardOwner = ({ ownerName, onChangeOwnerName, isError }) => {
   return (
     <styled.Container>
       <styled.MaxNumberIndicator>
-        {showOwnerNameLength(ownerName)}
+        {showOwnerNameLength(ownerName.length)}/30
       </styled.MaxNumberIndicator>
       <FieldSet
         id="cardOwnerName"
