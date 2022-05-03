@@ -1,9 +1,12 @@
 import Card from "components/Card";
 import Header from "components/Header";
+import { PATH } from "constant/path";
 import { CardsContext } from "contexts/CardsProvider";
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
   const { cards } = useContext(CardsContext);
 
   return (
@@ -18,7 +21,9 @@ export default function Home() {
           <span className="card-nickname">{cardInfo.cardName}</span>
         </div>
       ))}
-      <div className="small-card empty-card">+</div>
+      <div className="small-card empty-card" onClick={() => navigate(PATH.ADD)}>
+        +
+      </div>
     </>
   );
 }
