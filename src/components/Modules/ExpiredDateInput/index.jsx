@@ -23,10 +23,9 @@ function ExpiredDateInput() {
       <InputWrapper>
         <InputContainer>
           {Object.keys(expiredDate).map((unit, index) => (
-            <>
+            <div key={unit}>
               {index !== 0 && '/'}
               <Input
-                key={unit}
                 name={unit}
                 ref={inputRefs[unit]}
                 value={expiredDate[unit]}
@@ -37,7 +36,7 @@ function ExpiredDateInput() {
                 onChange={onDateChange}
                 isValid={validations[unit]}
               />
-            </>
+            </div>
           ))}
         </InputContainer>
       </InputWrapper>

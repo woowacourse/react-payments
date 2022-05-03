@@ -22,10 +22,9 @@ function CardNumberInput() {
       <InputWrapper>
         <InputContainer>
           {Object.keys(numbers).map((order, index) => (
-            <>
+            <div key={order}>
               {index !== 0 && '-'}
               <Input
-                key={order}
                 name={order}
                 ref={inputRefs[order]}
                 value={numbers[order]}
@@ -35,7 +34,7 @@ function CardNumberInput() {
                 onChange={handleNumberChange}
                 isValid={validations[order]}
               />
-            </>
+            </div>
           ))}
         </InputContainer>
       </InputWrapper>
