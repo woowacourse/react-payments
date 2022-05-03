@@ -3,7 +3,7 @@ import { useState } from 'react';
 function useErrorMessage({ state, validate }) {
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const handleError = (isSkipValidation) => {
+  const handleError = (isSkipValidation = false) => {
     if (isSkipValidation) return;
 
     try {
