@@ -3,6 +3,13 @@ import Palette from '.';
 export default {
   title: 'Palette',
   component: Palette,
+  argTypes: {
+    onClickCardSelector: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 const Template = (args) => <Palette {...args} />;

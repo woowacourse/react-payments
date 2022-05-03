@@ -7,12 +7,7 @@ const Input = ({ scale, ...rest }) => {
 };
 
 Input.propTypes = {
-  placeholder: PropTypes.string,
-  type: PropTypes.string,
-  id: PropTypes.string,
   scale: PropTypes.oneOf(INPUT_SCALE_NAMES),
-  maxLength: PropTypes.number,
-  value: PropTypes.string,
 };
 
 export default Input;

@@ -9,20 +9,8 @@ export default {
       description: '컴포넌트 사이즈',
       options: INPUT_SCALE_NAMES,
     },
-    id: {
-      table: {
-        disable: true,
-      },
-    },
-    type: {
-      table: {
-        disable: true,
-      },
-    },
-    maxLength: {
-      table: {
-        disable: true,
-      },
+    value: {
+      type: 'string',
     },
   },
 };
