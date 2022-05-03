@@ -23,9 +23,9 @@ export default function InputContainer({
           <label className="input-title">{title}</label>
           {validation &&
             (validation.isValid ? (
-              <Message content={validation.successMsg} type="success" />
+              <Message type="success">{validation.successMsg}</Message>
             ) : (
-              validation.errorMsg && <Message content={validation.errorMsg} type="fail" />
+              validation.errorMsg && <Message type="fail">{validation.errorMsg}</Message>
             ))}
         </span>
         {rightContent}
