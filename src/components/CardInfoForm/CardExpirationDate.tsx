@@ -9,11 +9,13 @@ interface CardExpirationDateProps {
   expirationDate: ExpirationDate;
   onChange: InputChangeFunction;
   validation: Validation;
+  inputs: HTMLInputElement[];
 }
 export default function CardExpirationDate({
   expirationDate,
   onChange,
   validation,
+  inputs,
 }: CardExpirationDateProps) {
   return (
     <InputContainer title="만료일" validation={validation}>
@@ -27,7 +29,7 @@ export default function CardExpirationDate({
           style={{ paddingLeft: "40px" }}
           name="expirationDate"
           data-key="month"
-          formSelector="#card-info-form"
+          inputs={inputs}
         />
         <span className="expiration-date-delimiter">/</span>
         <Input
@@ -39,7 +41,7 @@ export default function CardExpirationDate({
           style={{ paddingRight: "40px" }}
           name="expirationDate"
           data-key="year"
-          formSelector="#card-info-form"
+          inputs={inputs}
         />
       </div>
     </InputContainer>

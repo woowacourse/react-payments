@@ -9,9 +9,15 @@ interface CardPasswordProps {
   password: Password;
   onChange: InputChangeFunction;
   validation: Validation;
+  inputs: HTMLInputElement[];
 }
 
-export default function CardPassword({ password, onChange, validation }: CardPasswordProps) {
+export default function CardPassword({
+  password,
+  onChange,
+  validation,
+  inputs,
+}: CardPasswordProps) {
   return (
     <InputContainer title="카드 비밀번호" validation={validation}>
       <Input
@@ -23,7 +29,7 @@ export default function CardPassword({ password, onChange, validation }: CardPas
         name="password"
         data-index={0}
         className="password-input"
-        formSelector="#card-info-form"
+        inputs={inputs}
       />
       <Input
         type="password"
@@ -34,7 +40,7 @@ export default function CardPassword({ password, onChange, validation }: CardPas
         name="password"
         data-index={1}
         className="password-input"
-        formSelector="#card-info-form"
+        inputs={inputs}
       />
       <input
         className="input-basic rest-password-box w-15 password-input"

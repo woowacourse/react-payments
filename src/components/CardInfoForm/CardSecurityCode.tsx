@@ -11,12 +11,14 @@ interface CardSecurityProps {
   securityCode: string;
   onChange: InputChangeFunction;
   validation: Validation;
+  inputs: HTMLInputElement[];
 }
 
 export default function CardSecurityCode({
   securityCode,
   onChange,
   validation,
+  inputs,
 }: CardSecurityProps) {
   return (
     <InputContainer title="보안 코드(CVC/CVV)" validation={validation}>
@@ -27,7 +29,7 @@ export default function CardSecurityCode({
           onChange={onChange}
           maxLength={3}
           name="securityCode"
-          formSelector="#card-info-form"
+          inputs={inputs}
         />
         <Tooltip>
           <img width="160px" src={CVCImage} alt="cvc" />

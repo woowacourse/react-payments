@@ -9,9 +9,10 @@ interface CardUserNameProps {
   userName: string;
   onChange: InputChangeFunction;
   onBlur: () => void;
+  inputs: HTMLInputElement[];
 }
 
-export default function CardUserName({ userName, onChange, onBlur }: CardUserNameProps) {
+export default function CardUserName({ userName, onChange, onBlur, inputs }: CardUserNameProps) {
   return (
     <InputContainer
       title="카드 소유자 이름(선택)"
@@ -27,7 +28,7 @@ export default function CardUserName({ userName, onChange, onBlur }: CardUserNam
         onBlur={onBlur}
         name="userName"
         align="left"
-        formSelector="#card-info-form"
+        inputs={inputs}
       />
     </InputContainer>
   );

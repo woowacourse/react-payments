@@ -9,8 +9,9 @@ interface CardNumberProps {
   cardNumbers: CardNumbers;
   onChange: InputChangeFunction;
   validation: Validation;
+  inputs: HTMLInputElement[];
 }
-export default function CardNumber({ cardNumbers, onChange, validation }: CardNumberProps) {
+export default function CardNumber({ cardNumbers, onChange, validation, inputs }: CardNumberProps) {
   return (
     <InputContainer title="카드번호" validation={validation}>
       <div className="input-box">
@@ -23,7 +24,7 @@ export default function CardNumber({ cardNumbers, onChange, validation }: CardNu
               maxLength={4}
               name="cardNumbers"
               data-index={index}
-              formSelector="#card-info-form"
+              inputs={inputs}
             />
             {index !== 3 && <span className="card-number-delimiter">-</span>}
           </React.Fragment>

@@ -18,7 +18,7 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" 
   size?: "tiny" | "small" | "medium" | "large" | "full";
   align?: "right" | "left" | "center";
   maxLength?: number;
-  formSelector?: "#card-info-form";
+  inputs?: HTMLInputElement[];
 }
 
 export default function Input({
@@ -27,41 +27,31 @@ export default function Input({
   onChange,
   className,
   align,
-  formSelector,
+  inputs,
   ...props
 }: InputProps) {
-  const arrayInputsRef = useRef<HTMLInputElement[]>(null);
-
-  useEffect(() => {
-    if (!formSelector) return;
-
-    arrayInputsRef.current = Array.from(
-      document.querySelector(formSelector).querySelectorAll("input")
-    );
-  }, [formSelector]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputLength = e.target.value.length;
 
     if (inputLength > maxLength) return;
     onChange(e);
 
-    if (formSelector) moveFocus(e.target, inputLength);
+    if (inputs) moveFocus(e.target, inputLength);
   };
 
   const moveFocus = (target: HTMLInputElement, inputLength: number) => {
-    const inputIndex = arrayInputsRef.current.findIndex(element => element === target);
+    const inputIndex = inputs.findIndex(element => element === target);
 
     if (inputLength === maxLength) focusOnEmptyInput();
     if (inputLength === 0) focusOnPrevInput(inputIndex);
   };
 
   const focusOnEmptyInput = () => {
-    arrayInputsRef.current.find(input => input.value.length === 0)?.focus();
+    inputs.find(input => input.value.length === 0)?.focus();
   };
 
   const focusOnPrevInput = (index: number) => {
-    const prevInputs = arrayInputsRef.current.slice(0, index);
+    const prevInputs = inputs.slice(0, index);
 
     prevInputs
       .reverse()

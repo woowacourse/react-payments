@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import type { InputChangeFunction } from "types";
 import type { CardInfo, CardInfoValidation, CardInfoValidationTarget } from "types/cardInfo";
 
@@ -32,6 +32,11 @@ export default function CardInfoForm({
 }: CardInfoFormProps) {
   const { cardNumbers, expirationDate, userName, securityCode, password } = cardInfo;
   const [isNextButtonShown, setIsNextButtonShown] = useState(true);
+  const inputsRef = useRef<HTMLInputElement[]>(null);
+  const formRef = useCallback((node: HTMLFormElement) => {
+    if (!node) return;
+    inputsRef.current = Array.from(node.querySelectorAll("input"));
+  }, []);
 
   useEffect(() => {
     setIsNextButtonShown(
@@ -49,27 +54,36 @@ export default function CardInfoForm({
   };
 
   return (
-    <form id="card-info-form" onSubmit={handleSubmit}>
+    <form ref={formRef} id="card-info-form" onSubmit={handleSubmit}>
       <CardNumber
         cardNumbers={cardNumbers}
         onChange={onChangeCardNumber}
         validation={cardInfoValidation.cardNumbers}
+        inputs={inputsRef.current}
       />
       <CardExpirationDate
         expirationDate={expirationDate}
         onChange={onChangeExpirationDate}
         validation={cardInfoValidation.expirationDate}
+        inputs={inputsRef.current}
       />
-      <CardUserName userName={userName} onChange={onChangeUserName} onBlur={onBlurUserName} />
+      <CardUserName
+        userName={userName}
+        onChange={onChangeUserName}
+        onBlur={onBlurUserName}
+        inputs={inputsRef.current}
+      />
       <CardSecurityCode
         securityCode={securityCode}
         onChange={onChangeSecurityCode}
         validation={cardInfoValidation.securityCode}
+        inputs={inputsRef.current}
       />
       <CardPassword
         password={password}
         onChange={onChangePassword}
         validation={cardInfoValidation.password}
+        inputs={inputsRef.current}
       />
       <button className="submit-button" disabled={!isNextButtonShown}>
         다음
