@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import CardPreview from './common/CardPreview';
-import ToolTip from './common/ToolTip';
-import useForm from '../hooks/useForm';
-import useCardForm from '../hooks/useCardForm';
-import InputFieldContainer from './common/InputFieldContainer';
+import CardPreview from './CardPreview';
+import ToolTip from './ToolTip';
+import useCardForm from '../../hooks/useCardForm';
+import InputFieldContainer from './InputFieldContainer';
 
 const StyledCardForm = styled.form`
   margin: 0;
@@ -31,15 +30,14 @@ const StyledCardForm = styled.form`
   }
 `;
 
-const CardForm = () => {
-  const { cardFormSchema, onSubmit, onSubmitError } = useCardForm();
+const CardForm = ({ cardFormSchema, onSubmit, onSubmitError }) => {
   const {
     values,
     isSubmitting,
     handleSubmit,
     registerInputProps,
     getInputClassName,
-  } = useForm({ formSchema: cardFormSchema, onSubmit, onSubmitError });
+  } = useCardForm({ cardFormSchema, onSubmit, onSubmitError });
 
   return (
     <>
