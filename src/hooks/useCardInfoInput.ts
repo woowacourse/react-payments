@@ -1,8 +1,8 @@
+import REGEXP from "constant/regexp";
+import { cardInfoValidator } from "lib/validation";
 import { useEffect, useState } from "react";
+import { InputChangeFunction } from "types";
 
-import REGEXP from "../constant/regexp";
-import { cardInfoValidator } from "../lib/validation";
-import { InputChangeFunction } from "../types";
 import type {
   CardColor,
   CardInfo,

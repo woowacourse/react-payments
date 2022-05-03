@@ -1,4 +1,5 @@
-import { CARD_VALID_PERIOD } from "../constant";
+import { CARD_VALID_PERIOD } from "constant";
+
 import type {
   CardInfoValidationTarget,
   CardNumbers,

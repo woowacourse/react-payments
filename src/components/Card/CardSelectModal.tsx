@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
+import type { CardColor, CardName, CardType } from "types/cardInfo";
 
-import type { CardColor, CardName, CardType } from "../../types/cardInfo";
 import Modal from "../common/Modal";
 
 const cardType: CardType[] = [

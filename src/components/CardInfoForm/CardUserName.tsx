@@ -1,7 +1,7 @@
 import React from "react";
+import type { InputChangeFunction } from "types";
 
 import { MAX_USER_NAME_LENGTH } from "../../constant";
-import type { InputChangeFunction } from "../../types";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 

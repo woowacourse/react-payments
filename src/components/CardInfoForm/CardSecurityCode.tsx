@@ -1,8 +1,8 @@
 import React from "react";
+import type { InputChangeFunction } from "types";
+import { Validation } from "types/cardInfo";
 
 import CVCImage from "../../assets/cvcImage.png";
-import type { InputChangeFunction } from "../../types";
-import { Validation } from "../../types/cardInfo";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 import Tooltip from "../common/Tooltip";

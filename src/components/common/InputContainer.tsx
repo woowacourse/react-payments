@@ -1,6 +1,6 @@
 import React from "react";
+import { Validation } from "types/cardInfo";
 
-import { Validation } from "../../types/cardInfo";
 import Message from "./Message";
 
 interface InputContainerProps {

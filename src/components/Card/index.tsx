@@ -1,7 +1,7 @@
+import useModal from "hooks/useModal";
 import React from "react";
+import type { CardColor, CardInfo, CardName } from "types/cardInfo";
 
-import useModal from "../../hooks/useModal";
-import type { CardColor, CardInfo, CardName } from "../../types/cardInfo";
 import CardSelectModal from "./CardSelectModal";
 
 interface CardProps {

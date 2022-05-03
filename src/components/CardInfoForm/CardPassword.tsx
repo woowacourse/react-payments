@@ -1,7 +1,7 @@
 import React from "react";
+import type { InputChangeFunction } from "types";
+import type { Password, Validation } from "types/cardInfo";
 
-import type { InputChangeFunction } from "../../types";
-import type { Password, Validation } from "../../types/cardInfo";
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 

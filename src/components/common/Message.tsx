@@ -1,6 +1,5 @@
 import React from "react";
-
-import { colors } from "../../styles/theme";
+import { colors } from "styles/theme";
 
 interface MessageProps {
   content: string;

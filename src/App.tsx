@@ -1,9 +1,8 @@
+import Card from "components/Card";
+import CardInfoForm from "components/CardInfoForm";
+import Header from "components/Header";
+import useCardInfoInput from "hooks/useCardInfoInput";
 import React from "react";
-
-import Card from "./components/Card";
-import CardInfoForm from "./components/CardInfoForm";
-import Header from "./components/Header";
-import useCardInfoInput from "./hooks/useCardInfoInput";
 
 function App() {
   const {
