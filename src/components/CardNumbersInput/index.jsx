@@ -40,6 +40,10 @@ function CardNumbersInput({ cardNumbers, handleInputChange, isValid, invalidMess
     return cardNumberRegex.test(cardNumber);
   };
 
+  const isAllEmptyValue = () => {
+    return cardNumbers.every(cardNumber => !cardNumber);
+  };
+
   return (
     <Container width={width}>
       <InputLabel label={'카드 번호'} />
@@ -63,7 +67,7 @@ function CardNumbersInput({ cardNumbers, handleInputChange, isValid, invalidMess
           );
         })}
       </InputWrapper>
-      <InvalidMessage>{isValid ? '' : invalidMessage}</InvalidMessage>
+      <InvalidMessage>{isValid || isAllEmptyValue() ? '' : invalidMessage}</InvalidMessage>
     </Container>
   );
 }
