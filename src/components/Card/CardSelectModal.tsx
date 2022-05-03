@@ -1,4 +1,5 @@
-import React, { useCallback } from "react";
+import { CardInfoContext } from "contexts/CardInfoProvider";
+import React, { useCallback, useContext } from "react";
 import type { CardColor, CardName, CardType } from "types/cardInfo";
 
 import Modal from "../common/Modal";
@@ -17,14 +18,10 @@ const cardType: CardType[] = [
 interface CardSelectModalProps {
   isOpened: boolean;
   closeModal: () => void;
-  onChangeCardType: (name: CardName, color: CardColor) => void;
 }
 
-export default function CardSelectModal({
-  isOpened,
-  closeModal,
-  onChangeCardType,
-}: CardSelectModalProps) {
+export default function CardSelectModal({ isOpened, closeModal }: CardSelectModalProps) {
+  const { onChangeCardType } = useContext(CardInfoContext);
   const handleClickCardType = useCallback(
     (name: CardName, color: CardColor) => () => {
       onChangeCardType(name, color);

@@ -1,22 +1,16 @@
-import React from "react";
-import type { InputChangeFunction } from "types";
-import type { ExpirationDate, Validation } from "types/cardInfo";
+import { CardInfoContext } from "contexts/CardInfoProvider";
+import React, { useContext } from "react";
 
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
-interface CardExpirationDateProps {
-  expirationDate: ExpirationDate;
-  onChange: InputChangeFunction;
-  validation: Validation;
-  inputs: HTMLInputElement[];
-}
-export default function CardExpirationDate({
-  expirationDate,
-  onChange,
-  validation,
-  inputs,
-}: CardExpirationDateProps) {
+export default function CardExpirationDate({ inputs }: { inputs: HTMLInputElement[] }) {
+  const {
+    cardInfo: { expirationDate },
+    cardInfoValidation: { expirationDate: validation },
+    onChangeExpirationDate: onChange,
+  } = useContext(CardInfoContext);
+
   return (
     <InputContainer title="만료일" validation={validation}>
       <div className="input-box w-50 flex-center">

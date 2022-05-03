@@ -1,23 +1,16 @@
-import React from "react";
-import type { InputChangeFunction } from "types";
-import type { Password, Validation } from "types/cardInfo";
+import { CardInfoContext } from "contexts/CardInfoProvider";
+import React, { useContext } from "react";
 
 import Input from "../common/Input";
 import InputContainer from "../common/InputContainer";
 
-interface CardPasswordProps {
-  password: Password;
-  onChange: InputChangeFunction;
-  validation: Validation;
-  inputs: HTMLInputElement[];
-}
+export default function CardPassword({ inputs }: { inputs: HTMLInputElement[] }) {
+  const {
+    cardInfo: { password },
+    cardInfoValidation: { password: validation },
+    onChangePassword: onChange,
+  } = useContext(CardInfoContext);
 
-export default function CardPassword({
-  password,
-  onChange,
-  validation,
-  inputs,
-}: CardPasswordProps) {
   return (
     <InputContainer title="카드 비밀번호" validation={validation}>
       <Input
