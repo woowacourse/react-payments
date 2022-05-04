@@ -6,6 +6,7 @@ import { CardInfoContext } from "contexts/CardInfoProvider";
 import { CardsContext } from "contexts/CardsProvider";
 import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { clearLine } from "readline";
 import { CardInfo } from "types/cardInfo";
 
 const isCardInfo = (value: any): value is CardInfo => {
@@ -18,7 +19,7 @@ export default function Complete() {
   const location = useLocation();
   const navigate = useNavigate();
   const { cardInfo, pullCardInfo, resetCardInfo, onChangeCardName } = useContext(CardInfoContext);
-  const { cards, setCards } = useContext(CardsContext);
+  const { addCard, editCard } = useContext(CardsContext);
 
   useEffect(() => {
     if (location.state) {
@@ -32,24 +33,10 @@ export default function Complete() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const { id, cardName } = cardInfo;
-
-    if (id) {
-      await API.editCard(id, { cardName });
-      setCards(cards =>
-        cards.map(card => {
-          if (card.id === id) {
-            return { ...card, cardName };
-          }
-
-          return card;
-        })
-      );
+    if (cardInfo.id) {
+      await editCard(cardInfo.id);
     } else {
-      const cardInfoWIthId = { ...cardInfo, id: cards.length + 1 };
-
-      await API.addCard(cardInfoWIthId);
-      setCards(cards => [...cards, cardInfoWIthId]);
+      await addCard(cardInfo);
     }
 
     resetCardInfo();
