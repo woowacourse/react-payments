@@ -1,6 +1,6 @@
 import React from 'react';
-import CardAddition from './CardAddition';
-import CardProvider from './context/CardContext';
+import CardAddition from 'CardAddition';
+import CardProvider from 'context/CardContext';
 
 function App() {
   return (

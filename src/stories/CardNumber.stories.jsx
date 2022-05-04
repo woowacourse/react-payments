@@ -1,5 +1,5 @@
 import React from 'react';
-import CardNumber from '../components/CardNumber';
+import CardNumber from 'components/CardNumber';
 
 export default {
   title: 'CardAddition/CardNumber',

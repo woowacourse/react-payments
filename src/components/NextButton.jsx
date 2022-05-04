@@ -1,5 +1,5 @@
 import React from 'react';
-import * as S from '../styles.js';
+import * as S from 'styles.js';
 
 export default function NextButton({ onClick, disabled, children, color }) {
   return (

@@ -1,18 +1,19 @@
 import React, { useContext, useCallback } from 'react';
-import Card from './components/Card';
-import PageTitle from './components/PageTitle';
 import styled from 'styled-components';
-import CardNumber from './components/CardNumber';
-import CardExpiration from './components/CardExpiration';
-import CardOwner from './components/CardOwner';
-import CardCvc from './components/CardCvc';
-import CardPassword from './components/CardPassword';
-import NextButton from './components/NextButton';
-import CardListModal from './components/CardListModal';
-import validator from '../src/validations/validator';
-import { CARD_COMPANIES } from './constants';
-import TipModal from './components/TipModal';
-import { TYPES, CardStateContext, CardDispatchContext } from './context/CardContext';
+import { TYPES, CardStateContext, CardDispatchContext } from 'context/CardContext';
+import validator from 'validations/validator';
+import { CARD_COMPANIES } from 'constants/index';
+
+import Card from 'components/Card';
+import PageTitle from 'components/PageTitle';
+import CardNumber from 'components/CardNumber';
+import CardExpiration from 'components/CardExpiration';
+import CardOwner from 'components/CardOwner';
+import CardCvc from 'components/CardCvc';
+import CardPassword from 'components/CardPassword';
+import NextButton from 'components/NextButton';
+import CardListModal from 'components/CardListModal';
+import TipModal from 'components/TipModal';
 
 const CardAdditionContainer = styled.div`
   height: 100%;

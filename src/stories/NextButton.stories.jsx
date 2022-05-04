@@ -1,5 +1,5 @@
 import React from 'react';
-import NextButton from '../components/NextButton';
+import NextButton from 'components/NextButton';
 
 export default {
   title: 'CardAddition/NextButton',

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { TYPES, CardStateContext } from '../context/CardContext.jsx';
-import * as S from '../styles.js';
-import validator from '../validations/validator';
-import ErrorMessage from './ErrorMessage';
+import { TYPES, CardStateContext } from 'context/CardContext.jsx';
+import * as S from 'styles.js';
+import validator from 'validations/validator';
+import ErrorMessage from 'components/ErrorMessage';
 
 export default function Card({
   cardCompanyIndex,
