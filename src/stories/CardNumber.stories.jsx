@@ -7,12 +7,12 @@ export default {
 };
 
 const Template = args => {
-  const cardNumberCallback = () => {};
-  return <CardNumber {...args} cardNumberCallback={cardNumberCallback} />;
+  const dispatch = () => {};
+  return <CardNumber {...args} dispatch={dispatch} />;
 };
 
 export const Primary = Template.bind({});
 
 Primary.args = {
-  cardNumberCallback: () => {},
+  dispatch: () => {},
 };

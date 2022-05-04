@@ -7,8 +7,8 @@ export default {
 };
 
 const Template = args => {
-  const correctSecurityCodeCallback = () => {};
-  return <CardSecurityCode {...args} correctSecurityCodeCallback={correctSecurityCodeCallback} />;
+  const dispatch = () => {};
+  return <CardSecurityCode {...args} dispatch={dispatch} />;
 };
 
 export const Primary = Template.bind({});

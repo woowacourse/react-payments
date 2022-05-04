@@ -1,5 +1,5 @@
 import React from 'react';
-import CardPassword from './components/CardPassword';
+import CardPassword from '../components/CardPassword';
 
 export default {
   title: 'CardPassword',
@@ -7,8 +7,8 @@ export default {
 };
 
 const Template = args => {
-  const correctCardPwdCallback = () => {};
-  return <CardPassword {...args} correctCardPwdCallback={correctCardPwdCallback} />;
+  const dispatch = () => {};
+  return <CardPassword {...args} dispatch={dispatch} />;
 };
 
 export const Primary = Template.bind({});
