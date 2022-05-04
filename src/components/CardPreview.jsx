@@ -26,7 +26,8 @@ const SmallCard = styled.div`
 `;
 
 const CardName = styled.p`
-  margin-bottom: 20px;
+  height: 10px;
+  margin: 0 0 20px 0;
   font-size: 10px;
 `;
 
@@ -34,7 +35,7 @@ const CardChip = styled.div`
   position: relative;
   width: 40px;
   height: 26px;
-  margin-bottom: 15px;
+  margin: 0 0 15px 0;
 
   background: #cbba64;
   border-radius: 4px;
@@ -45,7 +46,7 @@ const CardNumber = styled.p`
   align-items: center;
   justify-content: space-evenly;
   height: 10px;
-  margin-bottom: 12px;
+  margin: 0 0 12px 0;
 `;
 
 const CardBottomSection = styled.div`
@@ -66,7 +67,7 @@ export default function CardPreview({ cardNumber, holderName, expireDate, isComp
   return (
     <CardContainer>
       <SmallCard isComplete={isComplete}>
-        <CardName>우아한카드</CardName>
+        <CardName>{isComplete && '우아한카드'}</CardName>
         <CardChip />
         <CardNumber>
           <span>{cardNumber[0]}</span>
