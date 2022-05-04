@@ -6,6 +6,7 @@ const Container = styled.div`
   width: fit-content;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 `;
 
 const CompanyColor = styled.div`
@@ -13,6 +14,10 @@ const CompanyColor = styled.div`
   height: 37px;
   border-radius: 18.5px;
   background-color: ${props => props.color};
+
+  ${Container}:hover & {
+    opacity: 0.6;
+  }
 `;
 
 const CompanyName = styled.span`
