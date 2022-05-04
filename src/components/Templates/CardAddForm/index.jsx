@@ -25,18 +25,18 @@ const ButtonContainer = styled.div`
 `;
 
 function CardAddForm() {
-  const { isValid: isCardNumberValid } = useContext(CardNumberContext);
-  const { isValid: isExpiredDateValid } = useContext(ExpiredDateContext);
-  const { isValid: isOwnerNameValid } = useContext(CardOwnerContext);
-  const { isValid: isSecurityNumberValid } = useContext(SecurityNumberContext);
-  const { isValid: isPasswordValid } = useContext(PasswordContext);
+  const cardNumberProps = useContext(CardNumberContext);
+  const expiredDateProps = useContext(ExpiredDateContext);
+  const cardOwnerProps = useContext(CardOwnerContext);
+  const securityNumberProps = useContext(SecurityNumberContext);
+  const passwordProps = useContext(PasswordContext);
 
   const isValidForm = [
-    isCardNumberValid,
-    isExpiredDateValid,
-    isOwnerNameValid,
-    isSecurityNumberValid,
-    isPasswordValid,
+    cardNumberProps.isValid,
+    expiredDateProps.isValid,
+    cardOwnerProps.isValid,
+    securityNumberProps.isValid,
+    passwordProps.isValid,
   ].every(valid => valid);
 
   const onAddFormSubmit = event => {
@@ -47,11 +47,11 @@ function CardAddForm() {
 
   return (
     <FormContainer onSubmit={onAddFormSubmit}>
-      <CardNumberInput />
-      <ExpiredDateInput />
-      <CardOwnerInput />
-      <SecurityNumberInput />
-      <PasswordInput />
+      <CardNumberInput {...cardNumberProps} />
+      <ExpiredDateInput {...expiredDateProps} />
+      <CardOwnerInput {...cardOwnerProps} />
+      <SecurityNumberInput {...securityNumberProps} />
+      <PasswordInput {...passwordProps} />
       <ButtonContainer>
         <SubmitButton width="51px" height="34px" hidden={!isValidForm}>
           다음

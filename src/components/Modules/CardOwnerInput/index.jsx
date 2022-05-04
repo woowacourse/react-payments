@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { useContext } from 'react';
-import { CardOwnerContext } from '../../../context/CardOwnerContext';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import { COUNT } from '../../../constant';
@@ -15,9 +13,7 @@ const CountChecker = styled.span`
   color: #525252;
 `;
 
-function CardOwnerInput() {
-  const { name, validation, onNameChange } = useContext(CardOwnerContext);
-
+function CardOwnerInput({ name, validation, onNameChange }) {
   return (
     <>
       <LabeledInput text="카드 소유자 이름(선택)">

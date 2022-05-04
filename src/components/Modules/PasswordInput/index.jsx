@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import { useContext } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
-import { PasswordContext } from '../../../context/PasswordContext';
 import { COUNT } from '../../../constant';
 
 const InputContainer = styled.div`
@@ -13,10 +11,7 @@ const InputContainer = styled.div`
   gap: 7px;
 `;
 
-function PasswordInput() {
-  const { password, validations, inputRefs, onPasswordChange } =
-    useContext(PasswordContext);
-
+function PasswordInput({ password, validations, inputRefs, onPasswordChange }) {
   return (
     <LabeledInput text="카드 비밀번호">
       <InputContainer>

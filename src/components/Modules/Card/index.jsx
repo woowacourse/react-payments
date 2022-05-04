@@ -60,15 +60,15 @@ export const CardOwnerName = styled.span`
   word-break: break-all;
 `;
 
-function Card() {
-  const companyName = '신한카드';
-  const { cardNumberString } = useContext(CardNumberContext);
-  const { expiredDateString } = useContext(ExpiredDateContext);
-  const { ownerNameString } = useContext(CardOwnerContext);
-
+function Card({
+  companyNameString,
+  cardNumberString,
+  expiredDateString,
+  ownerNameString,
+}) {
   return (
     <CardContainer>
-      <CardCompanyName>{companyName}</CardCompanyName>
+      <CardCompanyName>{companyNameString}</CardCompanyName>
       <IC />
       <CardNumberContainer>{cardNumberString}</CardNumberContainer>
       <CardBottomContainer>

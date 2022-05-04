@@ -1,10 +1,11 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import Head from '../../components/Modules/Head';
 import Card from '../../components/Modules/Card';
 import CardAddForm from '../../components/Templates/CardAddForm';
-import { CardNumberContextProvider } from '../../context/CardNumberContext';
-import { CardOwnerContextProvider } from '../../context/CardOwnerContext';
-import { ExpiredDateContextProvider } from '../../context/ExpiredDateContext';
+import { CardNumberContext } from '../../context/CardNumberContext';
+import { ExpiredDateContext } from '../../context/ExpiredDateContext';
+import { CardOwnerContext } from '../../context/CardOwnerContext';
 import { PasswordContextProvider } from '../../context/PasswordContext';
 import { SecurityNumberContextProvider } from '../../context/SecurityNumberContext';
 
@@ -28,13 +29,23 @@ const AddFormContainer = styled.div`
 `;
 
 function CardAddPage() {
+  const companyNameString = '신한카드';
+  const { cardNumberString } = useContext(CardNumberContext);
+  const { expiredDateString } = useContext(ExpiredDateContext);
+  const { ownerNameString } = useContext(CardOwnerContext);
+
   return (
     <SecurityNumberContextProvider>
       <PasswordContextProvider>
         <Page>
           <Head>카드 추가</Head>
           <CardContainer>
-            <Card />
+            <Card
+              companyNameString={companyNameString}
+              cardNumberString={cardNumberString}
+              expiredDateString={expiredDateString}
+              ownerNameString={ownerNameString}
+            />
           </CardContainer>
           <AddFormContainer>
             <CardAddForm />

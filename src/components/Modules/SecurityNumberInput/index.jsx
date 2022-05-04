@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import { useContext } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import InfoLabel from '../../Atoms/InfoLabel';
-import { SecurityNumberContext } from '../../../context/SecurityNumberContext';
 
 const Container = styled.div`
   display: flex;
@@ -15,11 +13,7 @@ const InfoLabelContainer = styled.div`
   padding-top: 15px;
 `;
 
-function SecurityNumberInput() {
-  const { number, validation, onNumberChange } = useContext(
-    SecurityNumberContext
-  );
-
+function SecurityNumberInput({ number, validation, onNumberChange }) {
   return (
     <Container>
       <LabeledInput text="보안 코드(CVC/CVV)">

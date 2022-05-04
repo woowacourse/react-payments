@@ -1,9 +1,7 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
-import { CardNumberContext } from '../../../context/CardNumberContext';
 
 const InputContainer = styled.div`
   display: flex;
@@ -13,10 +11,12 @@ const InputContainer = styled.div`
   gap: 5px;
 `;
 
-function CardNumberInput() {
-  const { numbers, validations, inputRefs, handleNumberChange } =
-    useContext(CardNumberContext);
-
+function CardNumberInput({
+  numbers,
+  validations,
+  inputRefs,
+  handleNumberChange,
+}) {
   return (
     <LabeledInput text="카드 번호">
       <InputWrapper>

@@ -14,10 +14,12 @@ const InputContainer = styled.div`
   gap: 5px;
 `;
 
-function ExpiredDateInput() {
-  const { expiredDate, validations, inputRefs, onDateChange } =
-    useContext(ExpiredDateContext);
-
+function ExpiredDateInput({
+  expiredDate,
+  validations,
+  inputRefs,
+  onDateChange,
+}) {
   return (
     <LabeledInput text="만료일">
       <InputWrapper>
