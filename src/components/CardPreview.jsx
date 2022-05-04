@@ -2,7 +2,13 @@ import PropTypes from 'prop-types';
 import Button from 'components/common/Button';
 import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants';
 
-const CardPreview = ({ cardInfo, isCardFront, handleModal, handleCardPosition, isVisible }) => {
+const CardPreview = ({
+  cardInfo,
+  isCardFront,
+  handleModal,
+  handleCardPosition,
+  isVisibleButton,
+}) => {
   const { cardNumber, ownerName, expiryDate, company, theme, privacyCode } = cardInfo;
   const { first, second, third, fourth } = cardNumber;
   const upperCaseOwnerName = ownerName.toUpperCase() || DEFAULT_CARD_INFO.OWNER_NAME;
@@ -50,7 +56,10 @@ const CardPreview = ({ cardInfo, isCardFront, handleModal, handleCardPosition, i
           </>
         )}
         {!company && <div className="card-add-button">+</div>}
-        <Button className={'change-button ' + `${isVisible}`} handleClick={handleCardPosition}>
+        <Button
+          className={'change-button ' + `${isVisibleButton}`}
+          handleClick={handleCardPosition}
+        >
           {isCardFront ? 'Back' : 'Front'}
         </Button>
       </div>
@@ -88,7 +97,7 @@ CardPreview.propTypes = {
   isCardFront: PropTypes.bool,
   handleModal: PropTypes.func,
   handleCardPosition: PropTypes.func,
-  isVisible: PropTypes.string,
+  isVisibleButton: PropTypes.string,
 };
 
 export default CardPreview;

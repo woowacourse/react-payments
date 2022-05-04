@@ -32,7 +32,7 @@ const CardListPage = () => {
       <Header title="보유 카드 목록" />
       <div className="card-list mt-10">
         <div className="flex-column-center">
-          <CardPreview cardInfo={mockCardInfo} isVisible="hide" theme="red" />
+          <CardPreview cardInfo={mockCardInfo} isVisibleButton="hide" theme="red" />
           <span className="text-center">법인카드</span>
         </div>
 
