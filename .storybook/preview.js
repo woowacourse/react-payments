@@ -1,4 +1,7 @@
 import "../src/styles/index.css";
+import { CardInfoProvider } from "contexts/CardInfoProvider";
+import { CardsProvider } from "contexts/CardsProvider";
+import { MemoryRouter } from "react-router-dom";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -9,3 +12,15 @@ export const parameters = {
     },
   },
 };
+
+export const decorators = [
+  Story => (
+    <MemoryRouter>
+      <CardsProvider>
+        <CardInfoProvider>
+          <Story />
+        </CardInfoProvider>
+      </CardsProvider>
+    </MemoryRouter>
+  ),
+];

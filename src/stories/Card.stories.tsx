@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { CardInfoProvider } from "contexts/CardInfoProvider";
 import React from "react";
 
 import Card from "../components/add/Card";
@@ -29,7 +30,7 @@ const Template = args => <Card {...args} />;
 
 export const onCardAdd: ComponentStory<typeof Card> = Template.bind({});
 onCardAdd.args = {
-  shouldShowTypeSelection: true,
+  shouldShowTypeSelection: false, // @TODO: modal test
   size: "small",
   pointer: true,
 };

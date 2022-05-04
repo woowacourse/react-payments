@@ -10,7 +10,3 @@ export default {
 const Template = args => <CardNumber {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {
-  cardNumbers: ["", "", "", ""],
-  onChange: () => {},
-};
