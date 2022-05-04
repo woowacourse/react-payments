@@ -52,6 +52,10 @@ input {
   color: #383838;
 }
 
+.content-title {
+  font-weight: 400;
+}
+
 .owner-name-length {
   position: absolute;
   top: -20px;

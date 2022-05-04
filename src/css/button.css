@@ -11,7 +11,7 @@
   margin-right: 10px;
 }
 
-.next-button {
+.right-bottom-edge {
   position: absolute;
   right: 0;
   bottom: 15px;
@@ -21,8 +21,8 @@
 
 .change-button {
   position: absolute;
-  top: 195px;
-  right: 10px;
+  right: -65px;
+  bottom: 0;
 
   width: 55px;
   padding: 8px 0;
