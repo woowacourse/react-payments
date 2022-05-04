@@ -1,6 +1,6 @@
-import { CardInfoContext } from "contexts/CardInfoProvider";
 import useModal from "hooks/useModal";
-import React, { useContext } from "react";
+import React from "react";
+import { CardInfo } from "types/cardInfo";
 
 import CardSelectModal from "./CardSelectModal";
 
@@ -53,7 +53,9 @@ export default function Card({
           </div>
         </div>
       </div>
-      <CardSelectModal isOpened={isModalOpened} closeModal={closeModal} />
+      {shouldShowTypeSelection && (
+        <CardSelectModal isOpened={isModalOpened} closeModal={closeModal} />
+      )}
     </>
   );
 }

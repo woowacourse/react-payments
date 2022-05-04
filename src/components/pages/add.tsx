@@ -5,12 +5,14 @@ import { CardInfoContext } from "contexts/CardInfoProvider";
 import React, { useContext } from "react";
 
 function Add() {
+  const { cardInfo } = useContext(CardInfoContext);
+
   return (
-    <CardInfoProvider>
+    <>
       <Header title="카드 추가" />
       <Card cardInfo={cardInfo} shouldShowTypeSelection={true} pointer={true} />
       <CardInfoForm />
-    </CardInfoProvider>
+    </>
   );
 }
 
