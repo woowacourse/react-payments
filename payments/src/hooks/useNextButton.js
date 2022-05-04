@@ -1,6 +1,6 @@
 import { ERROR_MESSAGE } from '../const';
 
-const useCardInputValidation = (state) => {
+const useNextButton = (inputStates, setVisible) => {
   const validateCardNum = ({ cardNumber }) => {
     cardNumber.forEach((input) => {
       if (input.length !== 4) {
@@ -61,7 +61,53 @@ const useCardInputValidation = (state) => {
     }
   };
 
-  return { doValidation };
+  const nextButtonClick = (e) => {
+    try {
+      doValidation(inputStates);
+    } catch (error) {
+      alert(error.message);
+      switch (error.message) {
+        case ERROR_MESSAGE.SHORT_CARD_NUMBER:
+          inputStates.cardNumber.some((input, idx) => {
+            if (input.length !== 4) {
+              e.currentTarget.parentNode[idx].focus();
+              return true;
+            }
+          });
+          return;
+        case ERROR_MESSAGE.NOT_A_MONTH:
+          e.currentTarget.parentNode[4].focus();
+          return;
+        case ERROR_MESSAGE.NO_EXPIRE_MONTH:
+          e.currentTarget.parentNode[4].focus();
+          return;
+        case ERROR_MESSAGE.OUT_OF_RANGE_YEAR:
+          e.currentTarget.parentNode[5].focus();
+          return;
+        case ERROR_MESSAGE.NO_EXPIRE_YEAR:
+          e.currentTarget.parentNode[5].focus();
+          return;
+        case ERROR_MESSAGE.NO_SECURE_CODE:
+          e.currentTarget.parentNode[7].focus();
+          return;
+        case ERROR_MESSAGE.NO_PASSWORD:
+          inputStates.password.some((input, idx) => {
+            if (input === '') {
+              e.currentTarget.parentNode[9 + idx].focus();
+              return true;
+            }
+          });
+          return;
+        case ERROR_MESSAGE.NO_CARD_TYPE:
+          setVisible(true);
+          return;
+        default:
+          return;
+      }
+    }
+  };
+
+  return { nextButtonClick };
 };
 
-export default useCardInputValidation;
+export default useNextButton;

@@ -10,62 +10,14 @@ import useCard from '../../hooks/useCard';
 import NextButton from '../../components/NextButton';
 import CardColorPicker from '../../components/CardColorPicker';
 import { useState } from 'react';
-import useCardInputValidation from '../../hooks/useValidation';
-import { ERROR_MESSAGE } from '../../const';
+import useNextButton from '../../hooks/useNextButton';
 
 const CardAdd = () => {
   const [inputStates, updateInputStates] = useCard();
   const [visible, setVisible] = useState(false);
-  const { doValidation } = useCardInputValidation();
+  const { nextButtonClick } = useNextButton(inputStates, setVisible);
 
   const { cardNumber, expiredDate, ownerName, secureCode, password } = inputStates;
-
-  const nextButtonClick = (e) => {
-    try {
-      doValidation(inputStates);
-    } catch (error) {
-      alert(error.message);
-      switch (error.message) {
-        case ERROR_MESSAGE.SHORT_CARD_NUMBER:
-          inputStates.cardNumber.some((input, idx) => {
-            if (input.length !== 4) {
-              e.currentTarget.parentNode[idx].focus();
-              return true;
-            }
-          });
-          return;
-        case ERROR_MESSAGE.NOT_A_MONTH:
-          e.currentTarget.parentNode[4].focus();
-          return;
-        case ERROR_MESSAGE.NO_EXPIRE_MONTH:
-          e.currentTarget.parentNode[4].focus();
-          return;
-        case ERROR_MESSAGE.OUT_OF_RANGE_YEAR:
-          e.currentTarget.parentNode[5].focus();
-          return;
-        case ERROR_MESSAGE.NO_EXPIRE_YEAR:
-          e.currentTarget.parentNode[5].focus();
-          return;
-        case ERROR_MESSAGE.NO_SECURE_CODE:
-          e.currentTarget.parentNode[7].focus();
-          return;
-        case ERROR_MESSAGE.NO_PASSWORD:
-          console.log(inputStates.password);
-          inputStates.password.some((input, idx) => {
-            if (input === '') {
-              e.currentTarget.parentNode[9 + idx].focus();
-              return true;
-            }
-          });
-          return;
-        case ERROR_MESSAGE.NO_CARD_TYPE:
-          setVisible(true);
-          return;
-        default:
-          return;
-      }
-    }
-  };
 
   return (
     <>
