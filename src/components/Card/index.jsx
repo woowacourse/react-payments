@@ -8,7 +8,7 @@ const CardContainer = styled.div`
   width: 213px;
   height: 133px;
   padding: 14px 14px 0;
-  background-color: #d2d2d2;
+  background-color: ${props => props.color};
   border-radius: 5px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 `;
@@ -57,10 +57,12 @@ const CardOwnerName = styled.span`
   word-break: break-all;
 `;
 
-function Card({ companyName, cardNumbers, ownerName, expiredDate }) {
+function Card({ cardCompany, cardNumbers, ownerName, expiredDate, handleClickCard }) {
+  const { name, color } = cardCompany;
+
   return (
-    <CardContainer>
-      <CardCompanyName>{companyName}</CardCompanyName>
+    <CardContainer color={color} onClick={handleClickCard}>
+      <CardCompanyName>{name}</CardCompanyName>
       <IC />
       <CardNumberContainer>
         {cardNumbers.map((cardNumber, index) => (

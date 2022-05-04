@@ -9,7 +9,7 @@ export default {
 const Template = args => {
   return (
     <div style={{ width: '375px' }}>
-      <CardCompanySelector {...args} />
+      <CardCompanySelector handleClickCardCompany={() => {}} {...args} />
     </div>
   );
 };

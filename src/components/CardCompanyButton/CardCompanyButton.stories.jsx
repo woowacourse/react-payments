@@ -6,10 +6,10 @@ export default {
   component: CardCompanyButton,
 };
 
-const Template = args => <CardCompanyButton {...args} />;
+const Template = args => <CardCompanyButton handleClickCardCompany={() => {}} {...args} />;
 
-export const PocoCard = Template.bind({});
-PocoCard.args = {
+export const Default = Template.bind({});
+Default.args = {
   color: '#E24141',
   name: '포코카드',
 };

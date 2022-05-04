@@ -28,9 +28,13 @@ const CompanyName = styled.span`
   color: #525252;
 `;
 
-function CardCompanyButton({ color, name }) {
+function CardCompanyButton({ color, name, handleClickCardCompany }) {
   return (
-    <Container>
+    <Container
+      onClick={() => {
+        handleClickCardCompany(name, color);
+      }}
+    >
       <CompanyColor color={color} />
       <CompanyName>{name}</CompanyName>
     </Container>

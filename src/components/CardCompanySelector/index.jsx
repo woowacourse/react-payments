@@ -24,11 +24,17 @@ const cardCompanyList = [
   { name: '썬카드', color: '#FBCD58' },
 ];
 
-function CardCompanySelector() {
+function CardCompanySelector({ handleClickCardCompany }) {
   return (
     <Container>
       {cardCompanyList.map((cardCompany, index) => (
-        <CardCompanyButton key={cardCompany.name + index} {...cardCompany} />
+        <CardCompanyButton
+          key={cardCompany.name + index}
+          name={cardCompany.name}
+          color={cardCompany.color}
+          handleClickCardCompany={handleClickCardCompany}
+          {...cardCompany}
+        />
       ))}
     </Container>
   );

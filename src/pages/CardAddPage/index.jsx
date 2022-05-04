@@ -7,6 +7,8 @@ import OwnerNameInput from '../../components/OwnerNameInput';
 import SecurityNumberInput from '../../components/SecurityNumberInput';
 import PasswordInput from '../../components/PasswordInput';
 import SubmitButton from '../../components/SubmitButton';
+import ModalPortal from '../../components/ModalPortal';
+import CardCompanySelector from '../../components/CardCompanySelector';
 import { Page, CardSection, Form, SubmitButtonContainer } from './style';
 import MESSAGE from '../../constant/message';
 import useCardNumbers from '../../hooks/useCardNumbers';
@@ -16,9 +18,8 @@ import useSecurityNumber from '../../hooks/useSecurityNumber';
 import usePassword from '../../hooks/usePassword';
 import useCardAdd from '../../hooks/useCardAdd';
 
-function CardAddPage() {
-  const [companyName, setCompanyName] = useState('포코카드');
-
+function CardAddPage({ isOpenModal, openModal }) {
+  const [cardCompany, setCardCompany] = useState({ name: '포코카드', color: '#E24141' });
   const { cardNumbers, isValidCardNumbers, handleChangeCardNumbersInput } = useCardNumbers();
   const { expiredDate, convertedExpiredDate, isValidExpiredDate, handleChangeExpiredDateInput } =
     useExpiredDate();
@@ -37,6 +38,14 @@ function CardAddPage() {
     );
   };
 
+  const handleClickCard = () => {
+    openModal();
+  };
+
+  const handleClickCardCompany = (name, color) => {
+    setCardCompany({ name, color });
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
 
@@ -50,10 +59,11 @@ function CardAddPage() {
       <Head title="카드 추가" />
       <CardSection>
         <Card
-          companyName={companyName}
+          cardCompany={cardCompany}
           cardNumbers={cardNumbers}
           ownerName={ownerName}
           expiredDate={convertedExpiredDate}
+          handleClickCard={handleClickCard}
         />
       </CardSection>
       <Form onSubmit={handleSubmit}>
@@ -92,6 +102,9 @@ function CardAddPage() {
           <SubmitButton label="다음" width={'51px'} height={'34px'} hidden={!isAllValidInput()} />
         </SubmitButtonContainer>
       </Form>
+      <ModalPortal isOpenModal={isOpenModal}>
+        <CardCompanySelector handleClickCardCompany={handleClickCardCompany} />
+      </ModalPortal>
     </Page>
   );
 }
