@@ -33,7 +33,7 @@ const InputBasicStyle = styled.input`
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;
-  font-size: 18px;
+  font-size: 16px;
   border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;

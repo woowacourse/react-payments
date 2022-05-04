@@ -113,6 +113,7 @@ const CardBottomInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 10px;
 `;
 
 const CardText = styled.span`

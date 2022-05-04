@@ -49,7 +49,7 @@ export const CardNumbersInputForm = ({
   return (
     <InputContainer>
       <InputTitle>카드 번호</InputTitle>
-      <InputBox color="#04c09e" padding="0 50px">
+      <InputBox color="#04c09e" padding="0 5%">
         {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }, i) => (
           <InputBasic
             key={name}
