@@ -1,0 +1,29 @@
+.App {
+  height: 100%;
+  padding: 16px 24px;
+}
+
+.page-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+  display: inline;
+  align-items: center;
+  color: #383838;
+  margin-left: 17px;
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  background-color: #04c09e;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 25px;
+}
