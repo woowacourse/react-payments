@@ -22,6 +22,7 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/prop-types': 'off',
+    'react/react-in-jsx-scope': 'off',
     'react/require-default-props': 'off',
     'max-depth': ['error', 2],
     'arrow-parens': ['error', 'as-needed'],
@@ -30,5 +31,6 @@ module.exports = {
     'default-case': 'off',
     'linebreak-style': 'off',
     'object-curly-newline': 'off',
+    'operator-linebreak': ['error', 'after'],
   },
 };

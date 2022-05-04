@@ -1,6 +1,4 @@
-import React from 'react';
-
-import Input from '../components/Input';
+import { Input } from '../components/common';
 
 export default {
   title: 'Example/Input',

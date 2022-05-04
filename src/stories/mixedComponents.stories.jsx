@@ -1,14 +1,9 @@
-import React from 'react';
-
 import styled from 'styled-components';
-
-import Button from '../components/Button';
-import Input from '../components/Input';
-import Modal from '../components/Modal';
+import { Button, Input, Modal } from '../components/common';
 
 export default {
   title: 'Example/MixedComponents',
-  component: [Input, Button],
+  component: [Input, Button, Modal],
   argTypes: {},
 };
 

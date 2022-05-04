@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Input, Button, Modal } from '../common';
 import CARD_RULE from '../../constants';
 

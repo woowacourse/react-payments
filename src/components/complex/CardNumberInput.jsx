@@ -1,4 +1,3 @@
-import React from 'react';
 import CARD_RULE from '../../constants';
 import { Input } from '../common';
 
