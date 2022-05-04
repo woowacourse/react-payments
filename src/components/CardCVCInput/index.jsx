@@ -4,7 +4,7 @@ import { Input } from "components/common/Input/style";
 import Button from "components/common/Button";
 import { ReactComponent as QuestionImage } from "assets/question.svg";
 import { CardInputWrapper } from "pages/CardAddPage/style";
-import { CVCWrapper } from "./style";
+import { CVCWrapper, QuestionWrapper, ToolTipWrapper } from "./style";
 
 function CardCVCInput({ cvc, handleChangeCvc }) {
   return (
@@ -14,9 +14,12 @@ function CardCVCInput({ cvc, handleChangeCvc }) {
         <InputBox size="30">
           <Input type="password" value={cvc} onChange={handleChangeCvc} />
         </InputBox>
-        <Button>
-          <QuestionImage />
-        </Button>
+        <QuestionWrapper>
+          <Button>
+            <QuestionImage />
+          </Button>
+        </QuestionWrapper>
+        <ToolTipWrapper>카드 뒷면의 3자리 보안코드</ToolTipWrapper>
       </CVCWrapper>
     </CardInputWrapper>
   );

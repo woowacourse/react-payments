@@ -14,9 +14,9 @@ import CardPasswordInput from "components/CardPasswordInput";
 import Header from "components/common/Header";
 
 import { CARD_NUMBER, DUE_DATE, CVC } from "constant";
+import { isValidCvc, isValidOwnerLength } from "validation";
 import { ReactComponent as ArrowImage } from "assets/arrow.svg";
 import { PageWrapper, CardWrapper, FooterWrapper } from "./style";
-import { isValidCvc, isValidOwnerLength } from "validation";
 
 function CardAddPage() {
   const { cardNumbers, handleChangeCardNumber, cardNumberInputRefs } =
