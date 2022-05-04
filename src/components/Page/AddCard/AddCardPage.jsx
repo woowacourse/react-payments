@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardNumber, ExpiredDate, CardOwnerName, SecureCode, Password } from './index';
 
@@ -150,6 +151,7 @@ const AddCardPage = () => {
         cardNumbers={[firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber]}
         cardInfo={cardInfo}
         onClick={openModal}
+        size="small"
       />
       <CardNumber
         cardNumbers={[firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber]}
@@ -190,9 +192,11 @@ const AddCardPage = () => {
       />
       {isValidatedForm && isValidatedValueLength && (
         <NextButtonWrapper>
-          <NextButton name="submitButton" type="submit">
-            다음
-          </NextButton>
+          <Link to="/react-payments/result">
+            <NextButton name="submitButton" type="submit">
+              다음
+            </NextButton>
+          </Link>
         </NextButtonWrapper>
       )}
       {isModalOpened && (

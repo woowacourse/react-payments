@@ -1,9 +1,10 @@
-import AddCardPage from './components/Page/AddCard/AddCardPage';
+import React from 'react';
+import CardApp from './components';
 
 const App = () => {
   return (
     <main>
-      <AddCardPage />
+      <CardApp />
     </main>
   );
 };

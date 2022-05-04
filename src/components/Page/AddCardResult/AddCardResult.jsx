@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import NextButton from '../../Button';
 import Card from '../../Card';
@@ -51,9 +52,11 @@ const AddCardResultPage = () => {
         <CardNickNameInput />
       </CardNickNameInputWrapper>
       <NextButtonWrapper>
-        <NextButton name="confirmButton" type="button">
-          확인
-        </NextButton>
+        <Link to="/react-payments/list">
+          <NextButton name="confirmButton" type="button">
+            확인
+          </NextButton>
+        </Link>
       </NextButtonWrapper>
     </Container>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Card from '../../Card';
 import PlusCard from '../../Card/PlusCard';
@@ -70,7 +71,9 @@ const CardListPage = () => {
         </CardItemWrapper>
       </CardListContainer>
       <PlusCardWrapper>
-        <PlusCard />
+        <Link to="/react-payments/">
+          <PlusCard />
+        </Link>
       </PlusCardWrapper>
     </Container>
   );
