@@ -46,6 +46,12 @@ interface Validation {
   errorMsg: string | null;
 }
 
+const isCardInfo = (value: any): value is CardInfo => {
+  if ("cardType" in value) return true;
+
+  return false;
+};
+
 export type {
   CardColor,
   CardInfo,
@@ -58,3 +64,5 @@ export type {
   Password,
   Validation,
 };
+
+export { isCardInfo };

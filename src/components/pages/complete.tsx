@@ -1,47 +1,12 @@
-import API from "apis";
 import Card from "components/add/Card";
 import Input from "components/common/Input";
-import { PATH } from "constant/path";
 import { CardInfoContext } from "contexts/CardInfoProvider";
-import { CardsContext } from "contexts/CardsProvider";
-import React, { useContext, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { clearLine } from "readline";
-import { CardInfo } from "types/cardInfo";
-
-const isCardInfo = (value: any): value is CardInfo => {
-  if ("cardType" in value) return true;
-
-  return false;
-};
+import useCardInfoForm from "hooks/useCardInfoForm";
+import React, { useContext } from "react";
 
 export default function Complete() {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { cardInfo, pullCardInfo, resetCardInfo, onChangeCardName } = useContext(CardInfoContext);
-  const { addCard, editCard } = useContext(CardsContext);
-
-  useEffect(() => {
-    if (location.state) {
-      if (!isCardInfo(location.state)) return;
-      const clickedCardInfo = location.state;
-
-      pullCardInfo(clickedCardInfo);
-    }
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (cardInfo.id) {
-      await editCard(cardInfo.id);
-    } else {
-      await addCard(cardInfo);
-    }
-
-    resetCardInfo();
-    navigate(PATH.HOME);
-  };
+  const { cardInfo, onChangeCardName } = useContext(CardInfoContext);
+  const { handleSubmit } = useCardInfoForm();
 
   return (
     <div className="flex-column-center">
