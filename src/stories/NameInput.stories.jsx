@@ -8,8 +8,9 @@ export default {
 
 const Template = (args) => <NameInput {...args} />;
 
-export const DisplayedCardNumberInput = Template.bind({});
+export const OwnerNameInput = Template.bind({});
 
-DisplayedCardNumberInput.args = {
+OwnerNameInput.args = {
   value: '1234',
+  updateCard: () => {},
 };

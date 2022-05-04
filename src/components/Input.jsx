@@ -12,8 +12,7 @@ function Input({
   name,
   value,
   required,
-  updateNameLength,
-  updateCardForm,
+  updateCard,
   validators,
 }) {
   const checkValidation = (targetValue) => {
@@ -30,11 +29,9 @@ function Input({
   const handleChange = (event) => {
     const targetValue = event.target.value;
 
-    if (updateNameLength) updateNameLength(targetValue);
-
     try {
       checkValidation(targetValue);
-      updateCardForm(name, targetValue);
+      updateCard(name, targetValue);
     } catch (error) {
       alert(error.message);
     }
@@ -66,8 +63,7 @@ Input.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   required: PropTypes.bool,
-  updateNameLength: PropTypes.func,
-  updateCardForm: PropTypes.func.isRequired,
+  updateCard: PropTypes.func.isRequired,
   validators: PropTypes.shape({
     checkMaxLength: PropTypes.func.isRequired,
     checkIsNaN: PropTypes.func,

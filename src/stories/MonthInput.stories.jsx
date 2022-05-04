@@ -12,4 +12,5 @@ export const ExpiredMonthInput = Template.bind({});
 
 ExpiredMonthInput.args = {
   value: '6',
+  updateCard: () => {},
 };

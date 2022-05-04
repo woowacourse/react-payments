@@ -11,6 +11,18 @@ const Template = (args) => <AddCardForm {...args} />;
 export const CardForm = Template.bind({});
 
 CardForm.args = {
+  card: {
+    firstCardNumber: '',
+    secondCardNumber: '',
+    thirdCardNumber: '',
+    fourthCardNumber: '',
+    expireMonth: '',
+    expireYear: '',
+    ownerName: '',
+    securityCode: '',
+    firstPassword: '',
+    secondPassword: '',
+  },
   updateCard: () => {},
   addCard: () => {},
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { MAX_LENGTH } from '../constants';
 import CardNumberInput from './CardNumberInput';
@@ -8,39 +8,11 @@ import SecurityCodeInput from './SecurityCodeInput';
 import MonthInput from './MonthInput';
 import YearInput from './YearInput';
 
-function AddCardForm({ updateCard, addCard }) {
-  const [cardForm, setCardForm] = useState({
-    firstCardNumber: '',
-    secondCardNumber: '',
-    thirdCardNumber: '',
-    fourthCardNumber: '',
-    expireMonth: '',
-    expireYear: '',
-    ownerName: '',
-    securityCode: '',
-    firstPassword: '',
-    secondPassword: '',
-  });
-  const [nameLength, setNameLength] = useState(0);
-
-  const updateNameLength = (name) => {
-    setNameLength(name.length);
-  };
-
+function AddCardForm({ card, updateCard, addCard }) {
   const handleSubmit = (event) => {
     event.preventDefault();
-    addCard(cardForm);
+    addCard();
   };
-
-  const updateCardForm = (name, value) => {
-    setCardForm((prevCardForm) => {
-      return { ...prevCardForm, [name]: value };
-    });
-  };
-
-  useEffect(() => {
-    updateCard(cardForm);
-  }, [cardForm]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -48,82 +20,57 @@ function AddCardForm({ updateCard, addCard }) {
         <span className="input-title">카드 번호</span>
         <div className="input-box">
           <CardNumberInput
-            value={cardForm.firstCardNumber}
+            value={card.firstCardNumber}
             name="firstCardNumber"
-            updateCardForm={updateCardForm}
+            updateCard={updateCard}
           />
           <CardNumberInput
-            value={cardForm.secondCardNumber}
+            value={card.secondCardNumber}
             name="secondCardNumber"
-            updateCardForm={updateCardForm}
+            updateCard={updateCard}
           />
           <CardNumberInput
             type="password"
-            value={cardForm.thirdCardNumber}
+            value={card.thirdCardNumber}
             name="thirdCardNumber"
-            updateCardForm={updateCardForm}
+            updateCard={updateCard}
           />
           <CardNumberInput
             type="password"
-            value={cardForm.fourthCardNumber}
+            value={card.fourthCardNumber}
             name="fourthCardNumber"
-            updateCardForm={updateCardForm}
+            updateCard={updateCard}
           />
         </div>
       </div>
       <div className="input-container">
         <span className="input-title">만료일</span>
         <div className="input-box w-50">
-          <MonthInput
-            value={cardForm.expireMonth}
-            name="expireMonth"
-            updateCardForm={updateCardForm}
-          />
+          <MonthInput value={card.expireMonth} name="expireMonth" updateCard={updateCard} />
           /
-          <YearInput
-            value={cardForm.expireYear}
-            name="expireYear"
-            updateCardForm={updateCardForm}
-          />
+          <YearInput value={card.expireYear} name="expireYear" updateCard={updateCard} />
         </div>
       </div>
       <div className="input-container">
         <div className="owner-name-wrapper">
           <span className="input-title">카드 소유자 이름(선택)</span>
           <span className="input-title">
-            {nameLength}/{MAX_LENGTH.NAME}
+            {card.ownerName.length}/{MAX_LENGTH.NAME}
           </span>
         </div>
-        <NameInput
-          value={cardForm.ownerName}
-          name="ownerName"
-          updateNameLength={updateNameLength}
-          updateCardForm={updateCardForm}
-        />
+        <NameInput value={card.ownerName} name="ownerName" updateCard={updateCard} />
       </div>
       <div className="input-container">
         <span className="input-title">보안코드(CVC/CVV)</span>
-        <SecurityCodeInput
-          value={cardForm.securityCode}
-          name="securityCode"
-          updateCardForm={updateCardForm}
-        />
+        <SecurityCodeInput value={card.securityCode} name="securityCode" updateCard={updateCard} />
         <div className="help-tip">
           <p>카드 뒷면 끝 세 자리를 입력해주세요.</p>
         </div>
       </div>
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
-        <PasswordInput
-          value={cardForm.firstPassword}
-          name="firstPassword"
-          updateCardForm={updateCardForm}
-        />
-        <PasswordInput
-          value={cardForm.secondPassword}
-          name="secondPassword"
-          updateCardForm={updateCardForm}
-        />
+        <PasswordInput value={card.firstPassword} name="firstPassword" updateCard={updateCard} />
+        <PasswordInput value={card.secondPassword} name="secondPassword" updateCard={updateCard} />
         <div className="dot" />
         <div className="dot" />
       </div>
@@ -137,6 +84,18 @@ function AddCardForm({ updateCard, addCard }) {
 }
 
 AddCardForm.propTypes = {
+  card: PropTypes.shape({
+    firstCardNumber: PropTypes.string.isRequired,
+    secondCardNumber: PropTypes.string.isRequired,
+    thirdCardNumber: PropTypes.string.isRequired,
+    fourthCardNumber: PropTypes.string.isRequired,
+    expireMonth: PropTypes.string.isRequired,
+    expireYear: PropTypes.string.isRequired,
+    ownerName: PropTypes.string.isRequired,
+    securityCode: PropTypes.string.isRequired,
+    firstPassword: PropTypes.string.isRequired,
+    secondPassword: PropTypes.string.isRequired,
+  }).isRequired,
   updateCard: PropTypes.func.isRequired,
   addCard: PropTypes.func.isRequired,
 };

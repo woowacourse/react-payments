@@ -8,8 +8,9 @@ export default {
 
 const Template = (args) => <PasswordInput {...args} />;
 
-export const SinglePasswordInput = Template.bind({});
+export const CardPasswordInput = Template.bind({});
 
-SinglePasswordInput.args = {
+CardPasswordInput.args = {
   value: '1',
+  updateCard: () => {},
 };

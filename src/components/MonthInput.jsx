@@ -4,7 +4,7 @@ import { checkMaxLength, checkIsNaN, checkRange } from '../util';
 import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../constants';
 import Input from './Input';
 
-function MonthInput({ value, name, updateCardForm }) {
+function MonthInput({ value, name, updateCard }) {
   return (
     <Input
       placeholder="MM"
@@ -14,7 +14,7 @@ function MonthInput({ value, name, updateCardForm }) {
       max={RANGE.MONTH_MAX}
       value={value}
       name={name}
-      updateCardForm={updateCardForm}
+      updateCard={updateCard}
       validators={{ checkMaxLength, checkIsNaN, checkRange }}
     />
   );
@@ -23,7 +23,7 @@ function MonthInput({ value, name, updateCardForm }) {
 MonthInput.propTypes = {
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  updateCardForm: PropTypes.func.isRequired,
+  updateCard: PropTypes.func.isRequired,
 };
 
 export default MonthInput;

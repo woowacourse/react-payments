@@ -1,7 +1,5 @@
 import React from 'react';
 import Card from '../components/Card.jsx';
-import '../css/index.css';
-import '../css/App.css';
 
 export default {
   title: 'Card',
@@ -22,7 +20,8 @@ Deactivated.args = {
     expireYear: '',
     ownerName: '',
     securityCode: '',
-    password: '',
+    firstPassword: '',
+    secondPassword: '',
   },
 };
 
@@ -38,6 +37,7 @@ Activated.args = {
     expireYear: '23',
     ownerName: 'ahn',
     securityCode: '123',
-    password: '99',
+    firstPassword: '9',
+    secondPassword: '9',
   },
 };

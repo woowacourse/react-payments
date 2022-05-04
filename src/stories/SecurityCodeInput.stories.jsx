@@ -8,8 +8,9 @@ export default {
 
 const Template = (args) => <SecurityCodeInput {...args} />;
 
-export const SampleSecurityCodeInput = Template.bind({});
+export const CardSecurityCodeInput = Template.bind({});
 
-SampleSecurityCodeInput.args = {
+CardSecurityCodeInput.args = {
   value: '123',
+  updateCard: () => {},
 };

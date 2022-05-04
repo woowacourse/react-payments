@@ -4,17 +4,16 @@ import { checkMaxLength } from '../util';
 import { MAX_LENGTH, MIN_LENGTH } from '../constants';
 import Input from './Input';
 
-function NameInput({ value, name, updateNameLength, updateCardForm }) {
+function NameInput({ value, name, updateCard }) {
   return (
     <Input
       placeholder="카드에 표시된 이름과 동일하게 입력하세요."
       length={MAX_LENGTH.NAME}
       minLength={MIN_LENGTH.NAME}
-      updateNameLength={updateNameLength}
       name={name}
       value={value}
       required={false}
-      updateCardForm={updateCardForm}
+      updateCard={updateCard}
       validators={{ checkMaxLength }}
     />
   );
@@ -23,8 +22,7 @@ function NameInput({ value, name, updateNameLength, updateCardForm }) {
 NameInput.propTypes = {
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  updateNameLength: PropTypes.func.isRequired,
-  updateCardForm: PropTypes.func.isRequired,
+  updateCard: PropTypes.func.isRequired,
 };
 
 export default NameInput;

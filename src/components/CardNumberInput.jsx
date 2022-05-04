@@ -4,14 +4,14 @@ import { checkMaxLength, checkIsNaN } from '../util';
 import { MAX_LENGTH } from '../constants';
 import Input from './Input';
 
-function CardNumberInput({ type, value, name, updateCardForm }) {
+function CardNumberInput({ type, value, name, updateCard }) {
   return (
     <Input
       type={type}
       length={MAX_LENGTH.CARD_NUMBER}
       value={value}
       name={name}
-      updateCardForm={updateCardForm}
+      updateCard={updateCard}
       validators={{ checkMaxLength, checkIsNaN }}
     />
   );
@@ -21,7 +21,7 @@ CardNumberInput.propTypes = {
   type: PropTypes.string,
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  updateCardForm: PropTypes.func.isRequired,
+  updateCard: PropTypes.func.isRequired,
 };
 
 CardNumberInput.defaultProps = {

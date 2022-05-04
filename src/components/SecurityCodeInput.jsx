@@ -4,7 +4,7 @@ import { checkMaxLength, checkIsNaN } from '../util';
 import { MAX_LENGTH } from '../constants';
 import Input from './Input';
 
-function SecurityCodeInput({ value, name, updateCardForm }) {
+function SecurityCodeInput({ value, name, updateCard }) {
   return (
     <Input
       size="w-25"
@@ -12,7 +12,7 @@ function SecurityCodeInput({ value, name, updateCardForm }) {
       length={MAX_LENGTH.SECURITY_CODE}
       value={value}
       name={name}
-      updateCardForm={updateCardForm}
+      updateCard={updateCard}
       validators={{ checkMaxLength, checkIsNaN }}
     />
   );
@@ -21,7 +21,7 @@ function SecurityCodeInput({ value, name, updateCardForm }) {
 SecurityCodeInput.propTypes = {
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  updateCardForm: PropTypes.func.isRequired,
+  updateCard: PropTypes.func.isRequired,
 };
 
 export default SecurityCodeInput;

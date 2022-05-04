@@ -1,3 +1,4 @@
+import { string } from 'prop-types';
 import React from 'react';
 import CardNumberInput from '../components/CardNumberInput';
 
@@ -12,6 +13,7 @@ export const DisplayedCardNumberInput = Template.bind({});
 
 DisplayedCardNumberInput.args = {
   value: '1234',
+  updateCard: () => {},
 };
 
 export const HiddenCardNumberInput = Template.bind({});
@@ -19,4 +21,5 @@ export const HiddenCardNumberInput = Template.bind({});
 HiddenCardNumberInput.args = {
   type: 'password',
   value: '1234',
+  updateCard: () => {},
 };

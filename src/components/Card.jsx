@@ -63,7 +63,8 @@ Card.propTypes = {
     expireYear: PropTypes.string.isRequired,
     ownerName: PropTypes.string.isRequired,
     securityCode: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
+    firstPassword: PropTypes.string.isRequired,
+    secondPassword: PropTypes.string.isRequired,
   }).isRequired,
 };
 
