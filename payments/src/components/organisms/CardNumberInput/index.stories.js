@@ -9,5 +9,7 @@ export default {
 export const CardNumber = () => {
   const { cardInfo, dispatch } = useCard();
 
-  return <CardNumberInput state={cardInfo} updateForm={dispatch} />;
+  return (
+    <CardNumberInput cardNumberValue={cardInfo} onChangeCardNumber={dispatch} />
+  );
 };

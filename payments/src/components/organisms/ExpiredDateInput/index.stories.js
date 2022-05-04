@@ -7,9 +7,14 @@ export default {
 };
 
 export const ExpiredDate = () => {
-  const [form, dispatch] = useCard();
+  const { cardInfo, dispatch } = useCard();
 
-  const { expiredDate } = form;
+  const { expiredDate } = cardInfo;
 
-  return <ExpiredDateInput state={expiredDate} updateForm={dispatch} />;
+  return (
+    <ExpiredDateInput
+      expiredDateValue={expiredDate}
+      onChangeExpiredDate={dispatch}
+    />
+  );
 };
