@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import useInput from '../hooks/useInput';
 import { HYPHEN_PRIMARY_COLOR } from '../theme';
 import ErrorMessage from './common/ErrorMessage';
@@ -16,18 +16,29 @@ function CardNumber({ dispatch }) {
   const cardNoBRef = useRef(null);
   const cardNoCRef = useRef(null);
   const cardNoDRef = useRef(null);
-  const cardNoRefs = [cardNoARef, cardNoBRef, cardNoCRef, cardNoDRef];
 
-  const handleFocus = e => {
+  const handleFocus = useCallback(({ e, max, min = 0 }) => {
+    const cardNoRefs = [cardNoARef, cardNoBRef, cardNoCRef, cardNoDRef];
+
+    const go = index => {
+      if (index !== cardNoRefs.length - 1) cardNoRefs[index + 1].current.focus();
+      return false;
+    };
+    const back = index => {
+      if (index !== min) cardNoRefs[index - 1].current.focus();
+      return false;
+    };
+
     cardNoRefs.every((cardNoRef, index) => {
-      if (e.target === cardNoRef.current && cardNoRef.current.value.length === 4) {
-        if (index === cardNoRefs.length - 1) return false;
-        cardNoRefs[index + 1].current.focus();
-        return false;
-      }
+      if (e.target !== cardNoRef.current) return true;
+
+      if (e.target.value.length === max) go(index);
+
+      if (e.target.value.length === min) back(index);
+
       return true;
     });
-  };
+  }, []);
 
   const [value, onChangeInputValue, isValid, errorMessage] = useInput({
     type: 'number',

@@ -40,7 +40,6 @@ function useInput(options) {
   } = options || {};
   const [value, setValue] = useState(initialValue || '');
   const [errorMessage, setErrorMessage] = useState('');
-  //   const errorMessage = useRef('');
   const isValid = useRef(false);
 
   const handleNumber = useCallback(
@@ -100,10 +99,10 @@ function useInput(options) {
       }
 
       if (typeof focusCallback === 'function') {
-        focusCallback(e);
+        focusCallback({ e, max: maxLength });
       }
     },
-    [type, handleNumber, handleString, focusCallback],
+    [type, handleNumber, handleString, focusCallback, maxLength],
   );
 
   return [value, onChangeInput, isValid.current, errorMessage];
