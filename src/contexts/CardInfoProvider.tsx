@@ -28,23 +28,14 @@ interface Context {
 
 export const CardInfoContext = createContext<Context>(null);
 
-// const initialCardInfo: CardInfo = {
-//   cardType: { name: "검정 카드", color: "black" },
-//   cardNumbers: ["", "", "", ""],
-//   expirationDate: { month: "", year: "" },
-//   userName: "",
-//   securityCode: "",
-//   password: ["", ""],
-// };
-
 const initialCardInfo: CardInfo = {
   cardType: { name: "검정 카드", color: "black" },
-  cardNumbers: ["1111", "2222", "3333", "4444"],
-  expirationDate: { month: "11", year: "22" },
-  userName: "시지프",
-  securityCode: "123",
-  password: ["1", "1"],
-  cardName: "하하하",
+  cardNumbers: ["", "", "", ""],
+  expirationDate: { month: "", year: "" },
+  userName: "",
+  securityCode: "",
+  password: ["", ""],
+  cardName: "",
 };
 
 const CardInfoProvider = ({ children }) => {
