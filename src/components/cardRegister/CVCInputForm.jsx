@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
 
-import { InputBasic } from "../common/InputBasic";
-import { InputBox } from "../common/InputBox";
-import { TipButton } from "../common/TipButton";
-import { FlexWrapper, InputContainer, InputTitle } from "../common/styled";
+import { InputBasic } from "components/common/InputBasic";
+import { InputBox } from "components/common/InputBox";
+import { TipButton } from "components/common/TipButton";
+import {
+  FlexWrapper,
+  InputContainer,
+  InputTitle,
+} from "components/common/styled";
 
 export const CVCInputForm = ({
   CVC,

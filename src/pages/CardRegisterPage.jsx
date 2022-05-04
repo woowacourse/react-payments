@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useModal } from "../hooks/useModal";
+import { useModal } from "hooks/useModal";
 
-import { Button, Card, Modal, PageTitle } from "../components/common";
+import { Button, Card, Modal, PageTitle } from "components/common";
 import {
   CARD_TYPES,
   CARD_TYPES_DEFAULT,
   MODAL_NAME,
-} from "../constants/constants";
+} from "constants/constants";
 import {
   CardExpireDateInputForm,
   CardNumbersInputForm,
@@ -15,7 +15,7 @@ import {
   CVCInputForm,
   CardSelectModal,
   CVCHelperModal,
-} from "../components/cardRegister";
+} from "components/cardRegister";
 
 export const CardRegisterPage = () => {
   const [modalVisibleState, setModalState, modalName] = useModal();

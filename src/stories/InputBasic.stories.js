@@ -1,5 +1,5 @@
 import React from "react";
-import { InputBasic } from "../components/common/InputBasic";
+import { InputBasic } from "components/common/InputBasic";
 
 export default {
   title: "Example/InputBasic",

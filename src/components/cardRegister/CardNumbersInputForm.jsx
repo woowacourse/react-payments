@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 
-import { InputBasic } from "../common/InputBasic";
-import { InputBox } from "../common/InputBox";
-import { InputContainer, InputTitle } from "../common/styled";
+import { InputBasic } from "components/common/InputBasic";
+import { InputBox } from "components/common/InputBox";
+import { InputContainer, InputTitle } from "components/common/styled";
 
 const DEFAULT_CARD_NUMBERS_TYPE = [
   { name: "firstNumber", type: "text" },

@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import { InputBasic } from '../common/InputBasic';
-import { InputBox } from '../common/InputBox';
-import { InputContainer, InputTitle } from '../common/styled';
+import { InputBasic } from "components/common/InputBasic";
+import { InputBox } from "components/common/InputBox";
+import { InputContainer, InputTitle } from "components/common/styled";
 
 export const CardExpireDateInputForm = ({
   expireDate,
@@ -19,11 +19,11 @@ export const CardExpireDateInputForm = ({
     }
 
     if (e.target.value.length === 1) {
-      e.target.value = '0' + e.target.value;
+      e.target.value = "0" + e.target.value;
     }
 
-    if (e.target.value === '0' || e.target.value === '00') {
-      e.target.value = '00';
+    if (e.target.value === "0" || e.target.value === "00") {
+      e.target.value = "00";
     }
 
     handleExpireDateInput((prev) => ({ ...prev, month: e.target.value }));
@@ -38,7 +38,7 @@ export const CardExpireDateInputForm = ({
   };
 
   useEffect(() => {
-    if (expireDate.year === '' || expireDate.month === '') {
+    if (expireDate.year === "" || expireDate.month === "") {
       return;
     }
 

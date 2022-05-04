@@ -1,10 +1,10 @@
 import React from "react";
 import { useEffect, useRef } from "react";
 
-import { InputBasic } from "../common/InputBasic";
-import { InputBox } from "../common/InputBox";
-import { InputContainer, InputTitle } from "../common/styled";
-import Dot from "../common/Dot";
+import { InputBasic } from "components/common/InputBasic";
+import { InputBox } from "components/common/InputBox";
+import { InputContainer, InputTitle } from "components/common/styled";
+import Dot from "components/common/Dot";
 
 export const CardPasswordInputForm = ({
   password,

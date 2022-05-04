@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Modal } from "../components/common/Modal";
-import { CardSelectModal } from "../components/cardRegister/CardSelectModal";
-import { CVCHelperModal } from "../components/cardRegister/CVCHelperModal";
-import { CARD_TYPES } from "../constants/constants";
+import { Modal } from "components/common/Modal";
+import { CardSelectModal } from "components/cardRegister/CardSelectModal";
+import { CVCHelperModal } from "components/cardRegister/CVCHelperModal";
+import { CARD_TYPES } from "constants/constants";
 
 export default {
   title: "Example/Modal",

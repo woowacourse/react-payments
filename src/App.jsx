@@ -1,5 +1,6 @@
-import './App.css';
-import { CardRegisterPage } from './pages/CardRegisterPage';
+import React from "react";
+import "./App.css";
+import { CardRegisterPage } from "pages/CardRegisterPage";
 
 function App() {
   return (

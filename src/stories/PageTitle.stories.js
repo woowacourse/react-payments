@@ -1,6 +1,6 @@
 import React from "react";
 
-import { PageTitle } from "../components/common/PageTitle";
+import { PageTitle } from "components/common/PageTitle";
 
 export default {
   title: "Example/PageTitle",
