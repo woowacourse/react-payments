@@ -1,0 +1,74 @@
+@import 'css/card.css';
+@import 'css/input.css';
+@import 'css/button.css';
+@import 'css/modal.css';
+@import 'css/utils.css';
+@import 'css/tooltip.css';
+@import 'css/palette.css';
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #dddddd;
+  margin: 30px 0;
+
+  font-family: 'Roboto', sans-serif;
+}
+
+input {
+  font-size: 16px;
+}
+
+.root {
+  width: 375px;
+  min-height: 700px;
+
+  position: relative;
+
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+.app {
+  height: 100%;
+  padding: 16px 24px;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #383838;
+}
+
+.owner-name-length {
+  position: absolute;
+  top: -20px;
+  right: 0;
+
+  font-size: 12px;
+  color: #525252;
+}
+
+.fullFilled {
+  color: green;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.unFullFilled {
+  color: red;
+  font-size: 12px;
+  font-weight: 600;
+}
