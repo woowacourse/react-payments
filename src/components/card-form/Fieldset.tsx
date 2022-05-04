@@ -13,7 +13,7 @@ export function Fieldset({ children, isLast }: { children: Array<React.ReactNode
   );
 }
 
-export function Head({ children, marginBottom }: { children: React.ReactNode; marginBottom?: string }) {
+export function FieldsetHead({ children, marginBottom }: { children: React.ReactNode; marginBottom?: string }) {
   return (
     <div
       css={css`
@@ -25,6 +25,6 @@ export function Head({ children, marginBottom }: { children: React.ReactNode; ma
   );
 }
 
-export function Body({ children }: { children: React.ReactNode }) {
+export function FieldsetContent({ children }: { children: React.ReactNode }) {
   return <div className="content">{children}</div>;
 }

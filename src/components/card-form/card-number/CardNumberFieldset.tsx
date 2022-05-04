@@ -1,16 +1,16 @@
 import React from 'react';
 import CardNumberInputContainer from '../card-number/CardNumberInputContainer';
-import { Body, Fieldset, Head } from '../Fieldset';
+import { FieldsetContent, Fieldset, FieldsetHead } from '../Fieldset';
 
 function CardNumberFieldset() {
   return (
     <Fieldset>
-      <Head marginBottom="8px">
+      <FieldsetHead marginBottom="8px">
         <label>카드 번호</label>
-      </Head>
-      <Body>
+      </FieldsetHead>
+      <FieldsetContent>
         <CardNumberInputContainer />
-      </Body>
+      </FieldsetContent>
     </Fieldset>
   );
 }

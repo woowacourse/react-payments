@@ -1,16 +1,16 @@
 import React from 'react';
 import ExpiredPeriodInputContainer from '../card-expired-period/ExpiredPeriodInputContainer';
-import { Body, Fieldset, Head } from '../Fieldset';
+import { FieldsetContent, Fieldset, FieldsetHead } from '../Fieldset';
 
 function ExpiredPeriodFieldset() {
   return (
     <Fieldset>
-      <Head>
+      <FieldsetHead>
         <label>만료일</label>
-      </Head>
-      <Body>
+      </FieldsetHead>
+      <FieldsetContent>
         <ExpiredPeriodInputContainer />
-      </Body>
+      </FieldsetContent>
     </Fieldset>
   );
 }
