@@ -1,6 +1,7 @@
 import React from 'react';
 
-import CardForm from '../components/CardForm';
+import CardForm from '../components/common/CardForm';
+import initialCardSchema from '../schema/cardSchema';
 
 export default {
   title: 'CardForm',
@@ -10,3 +11,6 @@ export default {
 const Template = (args) => <CardForm {...args} />;
 
 export const DefaultCardForm = Template.bind({});
+DefaultCardForm.args = {
+  cardFormSchema: initialCardSchema,
+};
