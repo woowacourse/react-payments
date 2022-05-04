@@ -13,7 +13,8 @@ export const CardNumberInput = Template.bind({});
 
 CardNumberInput.args = {
   length: MAX_LENGTH.CARD_NUMBER,
-  updateCardForm: () => {},
+  value: '',
+  updateCard: () => {},
   validators: { validMaxLength, validNumber },
 };
 
@@ -22,7 +23,8 @@ export const CardNumberDotInput = Template.bind({});
 CardNumberDotInput.args = {
   length: MAX_LENGTH.CARD_NUMBER,
   type: 'password',
-  updateCardForm: () => {},
+  value: '',
+  updateCard: () => {},
   validators: { validMaxLength, validNumber },
 };
 
@@ -31,10 +33,11 @@ export const ExpireDateMonthInput = Template.bind({});
 ExpireDateMonthInput.args = {
   placeholder: 'MM',
   length: MAX_LENGTH.DATE,
+  value: '',
   minLength: MIN_LENGTH.MONTH,
   min: RANGE.MONTH_MIN,
   max: RANGE.MONTH_MAX,
-  updateCardForm: () => {},
+  updateCard: () => {},
   validators: { validMaxLength, validNumber, validRange },
 };
 
@@ -42,8 +45,9 @@ export const ExpireDateYearInput = Template.bind({});
 
 ExpireDateYearInput.args = {
   placeholder: 'YY',
+  value: '',
   length: MAX_LENGTH.DATE,
-  updateCardForm: () => {},
+  updateCard: () => {},
   validators: { validMaxLength, validNumber },
 };
 
@@ -52,8 +56,9 @@ export const OwnerNameInput = Template.bind({});
 OwnerNameInput.args = {
   placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
   length: MAX_LENGTH.NAME,
+  value: '',
   minLength: MIN_LENGTH.NAME,
-  updateCardForm: () => {},
+  updateCard: () => {},
   validators: { validMaxLength },
 };
 
@@ -63,7 +68,8 @@ SecurityCodeInput.args = {
   size: 'w-25',
   type: 'password',
   length: MAX_LENGTH.SECURITY_CODE,
-  updateCardForm: () => {},
+  value: '',
+  updateCard: () => {},
   validators: { validMaxLength, validNumber },
 };
 
@@ -73,6 +79,7 @@ PasswordInput.args = {
   size: 'w-15',
   type: 'password',
   length: MAX_LENGTH.PASSWORD,
-  updateCardForm: () => {},
+  value: '',
+  updateCard: () => {},
   validators: { validMaxLength, validNumber },
 };
