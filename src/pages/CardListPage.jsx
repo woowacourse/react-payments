@@ -44,18 +44,16 @@ const PlusCard = styled.div`
 function CardListPage() {
   const navigate = useNavigate();
 
+  const onClickPlusButton = () => {
+    navigate('/add');
+  };
+
   return (
     <StyledPage>
       <Title>보유카드</Title>
       <Content>
         <Cards />
-        <PlusCard
-          onClick={() => {
-            navigate('/add');
-          }}
-        >
-          +
-        </PlusCard>
+        <PlusCard onClick={onClickPlusButton}>+</PlusCard>
       </Content>
     </StyledPage>
   );
