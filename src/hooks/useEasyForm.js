@@ -1,121 +1,176 @@
-import { useState } from 'react';
-import { isBackspace } from '../utils/commons';
-import useObjectRef from './useObjectRef';
-import useFormSchema from './useFormSchema';
+import { hasProperty, isBackspace } from '../utils/commons';
+import useFieldRef from './useFieldRef';
+import useFieldStates from './useFieldStates';
+import useFormState from './useFormState';
 
-const useEasyForm = ({ formSchema, onSubmit, onSubmitError }) => {
+const useEasyForm = ({
+  initialValues = {},
+  mode = 'onSubmit',
+  shouldUseNativeHint = true,
+}) => {
+  const { formState, updateFormState } = useFormState();
+  const { fieldStates, setFieldState, getFieldProperties } =
+    useFieldStates(initialValues);
   const {
-    values,
-    setValues,
-    validationSchema,
-    isInvalidInput,
-    errors,
-    setErrors,
-  } = useFormSchema(formSchema);
-  const [submitting, setSubmitting] = useState(false);
-  const { ref, bindElement, getNextElement, getPrevElement } =
-    useObjectRef(formSchema);
+    fields,
+    checkValidity,
+    bindElement,
+    getNextElementByName,
+    getPrevElementByName,
+  } = useFieldRef({ shouldUseNativeHint });
 
-  const handleChange = (event) => {
+  const bindValidation =
+    ({ validation }) =>
+    (field) => {
+      if (!validation) return;
+
+      const current = field;
+      let validationMessage = '';
+
+      current.customValidate = () => {
+        const failedValidation = validation.find(({ assert, message }) => {
+          const isValid = assert(current.element.value);
+
+          if (!isValid) {
+            validationMessage = message;
+          }
+
+          return isValid;
+        });
+
+        current.element.setCustomValidity(validationMessage);
+
+        return {
+          isValid: !!failedValidation,
+          validationMessage,
+        };
+      };
+    };
+
+  const validate = (name, value) => {
+    const { isValid, validationMessage } = checkValidity(name, value);
+
+    setFieldState(name, {
+      isValid,
+      validationMessage,
+      showError: !isValid,
+    });
+
+    return isValid;
+  };
+
+  const onChange = (event) => {
     const {
       target: { name, value },
     } = event;
 
-    if (!Object.prototype.hasOwnProperty.call(values, name)) {
+    if (!hasProperty(fields.current, name)) {
       throw new Error('올바르지 않은 필드 참조입니다.');
     }
 
-    if (isInvalidInput(name, value)) return;
+    // if (!isAllowedInput(name, value)) {
+    //   return;
+    // }
 
-    const errorMessageList = validationSchema[name]
-      .filter(({ assert }) => !assert(value))
-      .map(({ errorMessage }) => errorMessage);
-    const isError = errorMessageList.length > 0;
+    if (mode === 'onChange') {
+      validate(name, value);
+    }
 
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: {
-        isError,
-        errorMessage: isError ? errorMessageList[0] : null,
-        showError: isError,
-      },
-    }));
+    setFieldState(name, {
+      value,
+    });
 
-    setValues((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-
-    if (value.length >= formSchema[name].maxLength) {
-      const nextElement = getNextElement(name);
-
-      if (nextElement) nextElement.focus();
+    if (value.length >= fields.current[name]?.element.maxLength) {
+      getNextElementByName(name)?.focus();
     }
   };
 
-  const handleKeyDown = (event) => {
+  const onKeyDown = (event) => {
     const {
       target: { name },
     } = event;
 
-    if (isBackspace(event) && values[name] === '') {
-      const prevElement = getPrevElement(name);
-
-      prevElement?.focus();
+    if (isBackspace(event) && fieldStates[name].value === '') {
+      getPrevElementByName(name)?.focus();
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit =
+    (onSubmit, onError = () => {}) =>
+    async (event) => {
+      event.preventDefault();
+      event.persist();
 
-    const invalidFieldNames = Object.keys(errors).filter(
-      (name) => errors[name].isError
-    );
+      let hasNoErrorThrowed = true;
+      let isValid = true;
 
-    if (invalidFieldNames.length > 0) {
-      const invalidInputRefs = invalidFieldNames
-        .map((name) => ref.current[name])
-        .sort((a, b) => a.id - b.id);
+      if (!shouldUseNativeHint) {
+        const results = Object.entries(fields.current).map(([name, current]) =>
+          validate(name, current.element.value)
+        );
 
-      invalidFieldNames.forEach((name) => {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          [name]: {
-            ...prevErrors[name],
-            showError: true,
-          },
-        }));
+        isValid = results.every((result) => result);
+      }
+
+      updateFormState({
+        isSubmitting: true,
       });
 
-      onSubmitError(errors, invalidInputRefs);
+      try {
+        if (!isValid) {
+          await onError({
+            event,
+            fields: fields.current,
+          });
 
-      return;
-    }
+          return;
+        }
 
-    setSubmitting(true);
-    onSubmit(values);
-    setSubmitting(false);
+        const values = getFieldProperties('value');
+
+        await onSubmit({
+          event,
+          values,
+        });
+      } catch (error) {
+        hasNoErrorThrowed = false;
+
+        throw error;
+      } finally {
+        updateFormState({
+          isSubmitted: true,
+          isSubmitting: false,
+          isSubmitSuccessful: isValid && hasNoErrorThrowed,
+        });
+      }
+    };
+
+  const bindForm = (onSubmit, onError) => {
+    return {
+      onSubmit: handleSubmit(onSubmit, onError),
+      disabled: formState.isSubmitting,
+      noValidate: !shouldUseNativeHint,
+    };
   };
 
-  const registerInputProps = (name) => {
+  const register = (name, options) => {
+    const { initialValue, validation, inputFilter, ...rest } = options;
+
     return {
+      ...rest,
       name,
-      ref: bindElement(name),
-      value: values[name],
-      onChange: handleChange,
-      onKeyDown: handleKeyDown,
+      ref: bindElement(name, bindValidation(options)),
+      onChange,
+      onKeyDown,
     };
   };
 
   return {
-    values,
-    submitting,
-    handleChange,
-    handleKeyDown,
-    handleSubmit,
-    errors,
-    inputRefs: ref,
-    registerInputProps,
+    bindForm,
+    register,
+    formState,
+    fieldStates,
+    getFieldProperties,
   };
 };
 

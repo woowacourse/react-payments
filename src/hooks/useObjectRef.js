@@ -2,37 +2,39 @@ import { useRef } from 'react';
 import { generateIndex } from '../utils/commons';
 
 const useObjectRef = () => {
-  const ref = useRef({});
+  const fields = useRef({});
   const indexGenerator = generateIndex(0);
 
-  const bindElement = (name) => (element) => {
-    ref.current[name] = {
+  const bindElement = (name, callback) => (element) => {
+    fields.current[name] = {
       id: indexGenerator.next().value,
       element,
     };
+
+    callback(fields.current[name]);
   };
 
-  const getNextElement = (name) => {
-    const currentElement = ref.current[name];
+  const getNextElementByName = (name) => {
+    const currentElement = fields.current[name];
     const nextRefId = currentElement.id + 1;
 
     return (
-      Object.values(ref.current).find((input) => input.id === nextRefId)
+      Object.values(fields.current).find((input) => input.id === nextRefId)
         ?.element || null
     );
   };
 
-  const getPrevElement = (name) => {
-    const currentInput = ref.current[name];
+  const getPrevElementByName = (name) => {
+    const currentInput = fields.current[name];
     const prevRefId = currentInput.id - 1;
 
     return (
-      Object.values(ref.current).find((input) => input.id === prevRefId)
+      Object.values(fields.current).find((input) => input.id === prevRefId)
         ?.element || null
     );
   };
 
-  return { ref, bindElement, getNextElement, getPrevElement };
+  return { fields, bindElement, getNextElementByName, getPrevElementByName };
 };
 
 export default useObjectRef;
