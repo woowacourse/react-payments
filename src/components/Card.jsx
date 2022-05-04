@@ -1,20 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-const isInitialCard = (card) => {
-  return Object.values(card).some((value) => value !== '');
-};
-
 function Card({ card }) {
-  const [isEmptyCard, setIsEmptyCard] = useState(true);
-
-  useEffect(() => {
-    if (isInitialCard(card)) {
-      setIsEmptyCard(false);
-      return;
-    }
-    setIsEmptyCard(true);
-  }, [card]);
+  const isEmptyCard = Object.values(card).every((value) => value === '');
 
   return (
     <div className="card-box">
