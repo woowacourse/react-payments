@@ -9,9 +9,10 @@ export default function PageRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={PATH.HOME} element={<Home />} />
         <Route path={PATH.ADD} element={<Add />} />
         <Route path={PATH.COMPLETE} element={<Complete />} />
+        <Route path={PATH.HOME} element={<Home />} />
+        <Route path={PATH.HOME2} element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
