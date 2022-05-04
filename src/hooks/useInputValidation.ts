@@ -12,13 +12,13 @@ const useInputValidation = (initialBoolean: boolean) => {
     try {
       checkTarget(target);
 
-      setValidation(createValidation(true, "Success!"));
+      setValidation(formatInputValidation(true, "Success!"));
     } catch (e) {
-      setValidation(createValidation(false, e.message));
+      setValidation(formatInputValidation(false, e.message));
     }
   };
 
-  const createValidation = (isValid: boolean, message: string): InputValidation => {
+  const formatInputValidation = (isValid: boolean, message: string): InputValidation => {
     return { isValid, message };
   };
 
