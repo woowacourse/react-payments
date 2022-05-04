@@ -186,7 +186,6 @@ const CardForm = () => {
                 minLength: 4,
                 maxLength: 4,
                 pattern: '[0-9]{4}',
-                inputFilter: '[0-9]{0,4}',
                 required: true,
               })}
             />
