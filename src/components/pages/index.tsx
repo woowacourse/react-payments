@@ -9,12 +9,18 @@ export default function Home() {
   const navigate = useNavigate();
   const { cards } = useContext(CardsContext);
 
+  const handleClickCard = (id: number) => {
+    const cardInfo = cards.find(card => card.id === id);
+
+    navigate(PATH.COMPLETE, { state: cardInfo });
+  };
+
   return (
     <>
       <Header title="보유 카드" hasBackArrow={false} />
       {cards.map(cardInfo => (
         <div className="mb-30 flex-column-center" key={cardInfo.id}>
-          <Card cardInfo={cardInfo} marginBottom="10px" />
+          <Card cardInfo={cardInfo} marginBottom="10px" onClick={handleClickCard} />
           <span className="card-nickname">{cardInfo.cardName}</span>
         </div>
       ))}

@@ -12,7 +12,7 @@ import CardUserName from "./CardUserName";
 
 export default function CardInfoForm() {
   const navigate = useNavigate();
-  const { cardInfoValidation } = useContext(CardInfoContext);
+  const { cardInfo, cardInfoValidation } = useContext(CardInfoContext);
   const [isNextButtonActive, setIsNextButtonActive] = useState(true);
   const inputsRef = useRef<HTMLInputElement[]>(null);
   const formRef = useCallback((node: HTMLFormElement) => {

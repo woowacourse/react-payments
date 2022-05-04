@@ -10,7 +10,7 @@ function Add() {
   return (
     <>
       <Header title="카드 추가" />
-      <Card cardInfo={cardInfo} shouldShowTypeSelection={true} pointer={true} />
+      <Card cardInfo={cardInfo} shouldShowTypeSelection={true} />
       <CardInfoForm />
     </>
   );

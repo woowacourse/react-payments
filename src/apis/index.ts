@@ -35,9 +35,24 @@ async function addCard(cardInfo: CardInfo) {
   }
 }
 
+async function editCard(id: number, partialCardInfo: Partial<CardInfo>) {
+  try {
+    await fetch(`${BASE_URL}/cards/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(partialCardInfo),
+    });
+  } catch (error) {
+    console.log("error", error);
+  }
+}
+
 const API = {
   getCards,
   addCard,
+  editCard,
 };
 
 export default API;

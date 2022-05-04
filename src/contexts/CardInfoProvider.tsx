@@ -23,6 +23,7 @@ interface Context {
   cardInfoValidation: CardInfoValidation;
   onChangeCardType: (name: CardName, color: CardColor) => void;
   onChangeCardName: InputChangeFunction;
+  pullCardInfo: (cardInfo: CardInfo) => void;
 }
 
 export const CardInfoContext = createContext<Context>(null);
@@ -70,6 +71,10 @@ const CardInfoProvider = ({ children }) => {
       errorMsg: null,
     },
   });
+
+  const pullCardInfo = (cardInfo: CardInfo) => {
+    setCardInfo(cardInfo);
+  };
 
   const resetCardInfo = () => {
     setCardInfo(initialCardInfo);
@@ -245,6 +250,7 @@ const CardInfoProvider = ({ children }) => {
         onChangeSecurityCode,
         onChangePassword,
         onChangeCardName,
+        pullCardInfo,
       }}
     >
       {children}

@@ -9,13 +9,15 @@ export default function Card({
   shouldShowTypeSelection = false,
   size = "small",
   marginBottom,
-  pointer = false,
+  pointer = true,
+  onClick,
 }: {
   cardInfo: CardInfo;
   shouldShowTypeSelection?: boolean;
   size?: "big" | "small";
   marginBottom?: string;
   pointer?: boolean;
+  onClick?: (id: number) => void;
 }) {
   const { cardNumbers, expirationDate, userName, cardType } = cardInfo;
   const { isModalOpened, openModal, closeModal } = useModal(true);
@@ -25,6 +27,7 @@ export default function Card({
       <div
         className="card-box flex-center"
         style={{ marginBottom, cursor: pointer ? "pointer" : "auto" }}
+        onClick={onClick && (() => onClick(cardInfo.id))}
       >
         <div
           className={`${size}-card flex-column-center`}
