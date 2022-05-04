@@ -22,6 +22,10 @@ const cardCompanyList = [
   { color: '#000', name: '동키콩 카드' },
   { color: '#ff5100', name: '꼬재 카드' },
   { color: '#192dff', name: '블링 카드' },
+  { color: '#f5d742', name: '샐리 카드' },
+  { color: '#1c24ff', name: '호프 카드' },
+  { color: '#b914ff', name: '소피아 카드' },
+  { color: '#1ca0ff', name: '하리 카드' },
 ];
 
 function CardShape({ cardNumber, cardOwnerName, cardDate, dimensions }) {
