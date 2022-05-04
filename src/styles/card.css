@@ -1,0 +1,146 @@
+.card-box {
+  margin: 10px 0 25px;
+}
+
+.empty-card {
+  width: 208px;
+  height: 130px;
+
+  font-size: 30px;
+  color: white;
+
+  background: #e5e5e5;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+
+  user-select: none;
+  cursor: pointer;
+}
+
+/* .small-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 208px;
+  height: 130px;
+
+  background: #94dacd;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+} */
+
+.small-card__chip {
+  width: 40px;
+  height: 26px;
+  left: 95px;
+  top: 122px;
+
+  background: #cbba64;
+  border-radius: 4px;
+}
+
+/* .big-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 290px;
+  height: 180px;
+
+  background: #94dacd;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+} */
+
+/* .big-card__chip {
+  width: 55.04px;
+  height: 35.77px;
+
+  background: #cbba64;
+  border-radius: 4px;
+
+  font-size: 24px;
+} */
+
+.card-top {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-middle {
+  width: 100%;
+  height: 100%;
+  margin-left: 30px;
+
+  display: flex;
+  align-items: center;
+}
+
+.card-bottom {
+  width: 100%;
+  height: 100%;
+}
+
+.card-text {
+  margin: 0 16px;
+
+  font-size: 10px;
+  line-height: 16px;
+  vertical-align: middle;
+  font-weight: 400;
+}
+
+.card-numbers-text {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  text-align: center;
+  padding: 0 10px;
+  font-size: 12px;
+  height: 16px;
+}
+
+.card-text__big {
+  margin: 0 16px;
+
+  font-size: 18px;
+  line-height: 20px;
+  vertical-align: middle;
+  font-weight: 400;
+}
+
+.card-number {
+  width: 100%;
+  display: inline-block;
+}
+
+.card-number:nth-of-type(1),
+.card-number:nth-of-type(2) {
+  letter-spacing: 2px;
+}
+.card-number:nth-of-type(3),
+.card-number:nth-of-type(4) {
+  letter-spacing: -2px;
+}
+
+.card-expiration-date {
+  display: inline-block;
+  width: 16px;
+  text-align: center;
+}
+
+.card-user-name {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  padding-left: 16px;
+  margin-top: 5px;
+  overflow-wrap: break-word;
+}
