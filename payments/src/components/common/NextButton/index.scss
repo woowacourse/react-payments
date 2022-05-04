@@ -1,0 +1,11 @@
+.next--button {
+  display: flex;
+  justify-content: end;
+  button {
+    border: none;
+    background-color: inherit;
+    color: #04c09e;
+    margin-left: auto;
+    cursor: pointer;
+  }
+}

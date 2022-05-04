@@ -1,0 +1,32 @@
+.color {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+
+  .circle {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+  }
+  .name {
+    color: #525252;
+  }
+  background-color: transparent;
+  &:hover {
+    animation-name: scaleUp;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+
+    @keyframes scaleUp {
+      100% {
+        transform: scale(1.1);
+      }
+    }
+  }
+}

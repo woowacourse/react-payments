@@ -1,0 +1,19 @@
+.palette {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: space-around;
+  background-color: rgb(248, 248, 244);
+  padding: 40px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  animation: risingUp 0.2s linear;
+
+  @keyframes risingUp {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}

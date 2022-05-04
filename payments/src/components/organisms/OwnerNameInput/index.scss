@@ -1,0 +1,13 @@
+.ownername__input__container {
+  .input__container--inputs {
+    .input__contents,
+    ::placeholder {
+      text-align: left;
+    }
+  }
+
+  .label__container {
+    display: flex;
+    justify-content: space-between;
+  }
+}
