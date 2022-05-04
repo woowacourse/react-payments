@@ -1,7 +1,7 @@
 .help-tip {
-  position: absolute;
-  left: 125px;
-  top: 500px;
+  position: relative;
+  bottom: 38px;
+  left: 100px;
   text-align: center;
   background-color: #fff;
   border-radius: 50%;
