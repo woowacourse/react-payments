@@ -1,5 +1,5 @@
 import ExpiredDateInput from ".";
-import useCard from "../../hooks/useCard";
+import useCard from "../../../hooks/useCard";
 
 export default {
   title: "ExpiredDateInput",

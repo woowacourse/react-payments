@@ -5,7 +5,7 @@ const Modal = ({ children, closeModal }) => {
   return (
     <div className="modal--container">
       <div className="deem" onClick={closeModal}></div>
-      {children}
+      <div className="modal-contents">{children}</div>
     </div>
   );
 };

@@ -10,29 +10,37 @@ import useCard from "../../hooks/useCard";
 import NextButton from "../../components/common/NextButton";
 import CardColorPicker from "../../components/organisms/CardColorPicker";
 import { useState } from "react";
+import useModal from "../../hooks/useModal";
+import ConfirmAdd from "../../components/organisms/ConfirmAdd";
 
 const CardAdd = () => {
   const { cardInfo, dispatch, validateCardInfo } = useCard();
+  const [setConfirmVisible, ConfirmModal] = useModal(
+    <ConfirmAdd
+      cardInfo={cardInfo}
+      closeModal={() => {
+        setConfirmVisible(false);
+      }}
+      submit={() => {
+        alert("카드가 등록되었습니다");
+        setConfirmVisible(false);
+      }}
+    />
+  );
   const [visible, setVisible] = useState(false);
+
   const { cardName, cardNumber, expiredDate, ownerName, secureCode, password } =
     cardInfo;
 
   const submitCard = () => {
     try {
       validateCardInfo();
-      if (
-        window.confirm(`입력하신 카드정보가
-      카드번호:${cardNumber.join("-")}
-      카드 만료일:${expiredDate.join("/")}
-      카드 소유자 이름:${ownerName === "" ? "임꺽정" : ownerName} 이
-      맞습니까`)
-      ) {
-        alert("카드가 등록되었습니다");
-      }
+      setConfirmVisible(true);
     } catch (e) {
       alert(e.message);
     }
   };
+
   const closeModal = () => {
     setVisible(false);
   };
@@ -85,6 +93,7 @@ const CardAdd = () => {
       {visible && (
         <CardColorPicker closeModal={closeModal} onChangeCardName={dispatch} />
       )}
+      <ConfirmModal />
     </>
   );
 };

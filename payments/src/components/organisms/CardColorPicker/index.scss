@@ -6,4 +6,14 @@
   padding: 40px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  animation: risingUp 0.2s linear;
+
+  @keyframes risingUp {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
 }

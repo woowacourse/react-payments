@@ -1,5 +1,5 @@
 import CardNumberInput from ".";
-import useCard from "../../hooks/useCard";
+import useCard from "../../../hooks/useCard";
 
 export default {
   title: "CardNumberInput",
