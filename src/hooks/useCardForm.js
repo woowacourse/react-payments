@@ -5,7 +5,7 @@ import useFormSchema from './useFormSchema';
 // formSchema를 useFormSchema를 이용하여 사용 가능한 형태로 분해
 // onChange, onKeyDown으로 에러 체크 및 포커싱 지원
 // 외부에서 정의한 onSubmit, onSubmitError 사용하여 handleSubmit 생성
-const useCardForm = ({ cardFormSchema, onSubmit, onSubmitError }) => {
+const useCardForm = ({ cardFormSchema }) => {
   const {
     values,
     setValues,
@@ -50,6 +50,19 @@ const useCardForm = ({ cardFormSchema, onSubmit, onSubmitError }) => {
     focusPrevElement(keyCode, name, getPrevElement(name));
   };
 
+  const onSubmitAction = async (cardInfo) => {
+    alert('카드를 추가했습니다.');
+    console.log(cardInfo);
+  };
+
+  const focusErrorInput = (invalidInputRefs) => {
+    const firstInvalidInput = invalidInputRefs[0].element;
+    const { errorMessage } = errors[firstInvalidInput.name];
+
+    firstInvalidInput.focus();
+    alert(errorMessage);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -70,12 +83,12 @@ const useCardForm = ({ cardFormSchema, onSubmit, onSubmitError }) => {
         setErrorTrue(name);
       });
 
-      onSubmitError(errors, invalidInputRefs);
+      focusErrorInput(invalidInputRefs);
       return;
     }
 
     setIsSubmitting(true);
-    await onSubmit(values);
+    await onSubmitAction(values);
     setIsSubmitting(false);
   };
 
