@@ -10,9 +10,17 @@ import {
   CardOwner,
 } from "./style";
 
-function Card({ size, company, cardNumbers, owner, dueMonth, dueYear }) {
+function Card({
+  size,
+  company,
+  cardNumbers,
+  owner,
+  dueMonth,
+  dueYear,
+  onClick,
+}) {
   return (
-    <CardWrapper size={size}>
+    <CardWrapper size={size} onClick={onClick}>
       <CardTop>
         <CardText>{company}카드</CardText>
       </CardTop>

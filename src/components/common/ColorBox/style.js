@@ -6,8 +6,12 @@ const ColorBoxWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 80px;
-  margin: 15px;
+  margin: 15px 0;
   cursor: pointer;
+
+  & div {
+    font-size: 12px;
+  }
 `;
 
 const ColorCircle = styled.div`

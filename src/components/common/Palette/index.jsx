@@ -1,5 +1,5 @@
 import { CARD_LIST } from "constant";
-import ColorBox from "components/ColorBox";
+import ColorBox from "../ColorBox";
 import { PaletteWrapper } from "./style";
 
 function Palette() {

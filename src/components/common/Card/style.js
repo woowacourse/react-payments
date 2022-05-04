@@ -16,6 +16,7 @@ const CardWrapper = styled.div`
   width: ${(props) => (props.size === "small" ? "208px" : "290px")};
   height: ${(props) => (props.size === "small" ? "130px" : "180px")};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 `;
 
 const CardTop = styled.div`

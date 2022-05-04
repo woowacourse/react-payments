@@ -17,6 +17,8 @@ import { CARD_NUMBER, DUE_DATE, CVC } from "constant";
 import { isValidCvc, isValidOwnerLength } from "validation";
 import { ReactComponent as ArrowImage } from "assets/arrow.svg";
 import { PageWrapper, CardWrapper, FooterWrapper } from "./style";
+import Modal from "../../components/common/Modal";
+import Palette from "../../components/common/Palette";
 
 function CardAddPage() {
   const { cardNumbers, handleChangeCardNumber, cardNumberInputRefs } =
@@ -34,6 +36,7 @@ function CardAddPage() {
   const { password, handleChangePassword, secondPasswordInputRef } =
     useCardPassword();
   const [allRequired, setAllRequired] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     setAllRequired(
@@ -45,6 +48,14 @@ function CardAddPage() {
         password.secondPassword
     );
   }, [cardNumbers, dueDate, cvc, password]);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
 
   const handleSubmit = () => {
     alert("카드가 등록되었습니다");
@@ -68,6 +79,7 @@ function CardAddPage() {
           owner={owner || "NAME"}
           dueMonth={dueDate.month || "MM"}
           dueYear={dueDate.year || "YY"}
+          onClick={openModal}
         />
       </CardWrapper>
       <CardNumberInput
@@ -91,6 +103,11 @@ function CardAddPage() {
       <FooterWrapper>
         {allRequired && <Button onClick={handleSubmit}>다음</Button>}
       </FooterWrapper>
+      {modalVisible && (
+        <Modal closeModal={closeModal}>
+          <Palette />
+        </Modal>
+      )}
     </PageWrapper>
   );
 }

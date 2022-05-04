@@ -5,6 +5,7 @@ const PageWrapper = styled.div`
   width: 375px;
   background-color: white;
   padding: 25px;
+  position: relative;
 `;
 
 const CardWrapper = styled.div`
