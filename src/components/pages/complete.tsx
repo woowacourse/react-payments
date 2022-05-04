@@ -2,10 +2,12 @@ import Card from "components/add/Card";
 import Input from "components/common/Input";
 import { CardInfoContext } from "contexts/CardInfoProvider";
 import useCardInfoForm from "hooks/useCardInfoForm";
+import useGetCardInfo from "hooks/useGetCardInfo";
 import React, { useContext } from "react";
 
 export default function Complete() {
-  const { cardInfo, onChangeCardName } = useContext(CardInfoContext);
+  const { onChangeCardName } = useContext(CardInfoContext);
+  const { cardInfo } = useGetCardInfo();
   const { handleSubmit } = useCardInfoForm();
 
   return (
