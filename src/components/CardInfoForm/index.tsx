@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { CardInfo } from "../../types";
 import CardExpiredDate from "./CardExpiredDate";
@@ -29,15 +29,27 @@ export default function CardInfoForm({
   resetCardInfo,
 }: CardInfoFormProps) {
   const { cardNumbers, expiredDate, userName, securityCode, password } = cardInfo;
-  const [isNextButtonShown, setIsNextButtonShown] = useState(true);
+
+  const focusNextInput = e => {
+    const targetInputElement = e.target as HTMLInputElement;
+    const targetFormElement = e.currentTarget as HTMLFormElement;
+
+    const findElementIndex = Array.from(e.currentTarget.elements).findIndex(
+      element => element === targetInputElement
+    );
+
+    const currentElement = targetFormElement[findElementIndex] as HTMLInputElement;
+    const nextElement = targetFormElement[findElementIndex + 1] as HTMLInputElement;
+
+    if (currentElement.value.length === currentElement.maxLength) nextElement.focus();
+  };
 
   return (
     <form
+      onChange={focusNextInput}
       onSubmit={e => {
-        console.log(e);
         e.preventDefault();
         resetCardInfo();
-        alert("카드 등록이 완료되었습니다.");
       }}
     >
       <CardNumber cardNumbers={cardNumbers} onChange={onChangeCardNumber} />
@@ -45,11 +57,9 @@ export default function CardInfoForm({
       <CardUserName cardUserName={userName} onChange={onChangeUserName} onBlur={onBlurUserName} />
       <CardSecurityCode securityCode={securityCode} onChange={onChangeSecurityCode} />
       <CardPassword password={password} onChange={onChangePassword} />
-      {isNextButtonShown && (
-        <button type="submit" className="submit-button">
-          다음
-        </button>
-      )}
+      <button type="submit" className="submit-button">
+        다음
+      </button>
     </form>
   );
 }
