@@ -8,8 +8,12 @@ import { objectToString } from '../../../utils/util';
 import { checkFormCompletion, checkFormValidation } from '../../../utils/validation/form';
 import VirtualKeyboard from '../../VirtualKeyboard';
 import Position from '../../commons/Position';
+import Modal from '../../commons/Modal';
+import SelectCard from '../../SelectCard';
 
 function CardInputForm({ cardInput, cardInputDispatch }) {
+  const [isShowModal, setIsShowModal] = useState(false);
+
   const [{ isShow, elementKey }, setIsShowVirtualKeyboard] = useState({
     isShow: false,
     elementKey: null,
@@ -37,11 +41,17 @@ function CardInputForm({ cardInput, cardInputDispatch }) {
     }
   };
 
+  const onClickCardSelectButton = () => {
+    setIsShowModal(true);
+  };
+
   return (
     <form className="card-input-form scroll-form" onSubmit={onSubmitInputForm}>
       {Object.keys(cardInput).map(key => {
         const TypeInputContainer = InputContainer[key];
-
+        if (key === 'cardType') {
+          return;
+        }
         return (
           <TypeInputContainer
             key={uid(key)}
@@ -54,23 +64,35 @@ function CardInputForm({ cardInput, cardInputDispatch }) {
         );
       })}
 
-      {isComplete && (
-        <Position position="absolute" right="20px">
-          <button className="button-box">
-            <span className="button-text">다음</span>
-          </button>
-        </Position>
-      )}
+      <Position position="absolute" right="20px">
+        <button className="button-box" disabled={isComplete === false}>
+          <span className="button-text">다음</span>
+        </button>
+      </Position>
 
-      {isShow && (
-        <Position position="absolute" bottom="0" left="0">
+      <Position position="absolute" bottom="0" left="0">
+        {isShow ? (
           <VirtualKeyboard
             inputElementsRef={inputElementsRef}
             elementKey={elementKey}
             cardInputDispatch={cardInputDispatch}
             setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
           />
-        </Position>
+        ) : (
+          <div className="flex-center" style={{ width: '240px', height: '160px', padding: '20px' }}>
+            <button type="button" className="button-normal" onClick={onClickCardSelectButton}>
+              카드사 선택하기
+            </button>
+          </div>
+        )}
+      </Position>
+
+      {isShowModal && (
+        <Modal setIsShowModal={setIsShowModal}>
+          <div className="modal">
+            <SelectCard setIsShowModal={setIsShowModal} cardInputDispatch={cardInputDispatch} />
+          </div>
+        </Modal>
       )}
     </form>
   );
@@ -86,4 +108,5 @@ CardInputForm.propTypes = {
   }),
   cardInputDispatch: PropTypes.func,
 };
+
 export default CardInputForm;

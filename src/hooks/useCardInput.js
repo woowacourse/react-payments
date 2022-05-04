@@ -53,6 +53,11 @@ const cardInputReducer = (state, action) => {
       return { ...state, [`${stateName}`]: value };
     }
 
+    case 'CHANGE_CARD_COMPANY': {
+      const { cardType } = payload;
+      return { ...state, cardType };
+    }
+
     default:
       throw new Error();
   }
@@ -75,6 +80,7 @@ const defaultCardInputState = {
     first: '',
     second: '',
   },
+  cardType: null,
 };
 
 export const useCardInput = () => {

@@ -1,6 +1,12 @@
 import { hasSpace, isLengthBelow, isLengthOver, isNotNumber } from '.';
 
-export const checkFormCompletion = ({ cardNumber, expirationDate, securityCode, password }) => {
+export const checkFormCompletion = ({
+  cardNumber,
+  expirationDate,
+  securityCode,
+  password,
+  cardType,
+}) => {
   if (Object.keys(cardNumber).some(key => isLengthBelow(cardNumber[key], 4))) {
     throw new Error('카드 번호를 완벽히 입력해주세요');
   }
@@ -15,6 +21,10 @@ export const checkFormCompletion = ({ cardNumber, expirationDate, securityCode, 
 
   if (Object.keys(password).some(key => isLengthBelow(password[key], 1))) {
     throw new Error('비밀번호를 완벽히 입력해주세요');
+  }
+
+  if (cardType === null) {
+    throw new Error('카드사를 선택해주세요');
   }
 
   return true;
