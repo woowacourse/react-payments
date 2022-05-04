@@ -32,11 +32,9 @@ export default function CardInfoForm() {
     e.preventDefault();
 
     if (window.confirm("카드를 등록하시겠습니까?")) {
-      alert("카드 등록이 완료되었습니다.");
+      navigate(PATH.COMPLETE);
+      setIsNextButtonActive(false);
     }
-
-    navigate(PATH.COMPLETE);
-    setIsNextButtonActive(false);
   };
 
   return (
