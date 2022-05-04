@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 
 const convertToUpperCase = word => word.toUpperCase();
 const notAlphabet = word => /[^a-zA-Z\s]/.test(word);
@@ -36,10 +36,12 @@ function useInput(options) {
     minLength = 0,
     autoFix = true,
     type = 'string',
-    focusCallback,
+    tryFocus = false,
+    inputs = [],
   } = options || {};
   const [value, setValue] = useState(initialValue || '');
   const [errorMessage, setErrorMessage] = useState('');
+  const currentTarget = useRef(null);
   const isValid = useRef(false);
 
   const handleNumber = useCallback(
@@ -90,6 +92,7 @@ function useInput(options) {
     e => {
       const targetValue = e.target.value || '';
       const targetName = e.target.name || '';
+      currentTarget.current = e;
 
       if (type === 'number') {
         handleNumber(targetValue, targetName);
@@ -97,13 +100,35 @@ function useInput(options) {
       if (type === 'string') {
         handleString(targetValue);
       }
-
-      if (typeof focusCallback === 'function') {
-        focusCallback({ e, max: maxLength });
-      }
     },
-    [type, handleNumber, handleString, focusCallback, maxLength],
+    [type, handleNumber, handleString],
   );
+
+  const handleFocus = useCallback(({ target, max, min = 0, cokeList = [] }) => {
+    const go = index => {
+      if (index !== cokeList.length - 1) cokeList[index + 1].current.focus();
+      return false;
+    };
+    const back = index => {
+      if (index !== min) cokeList[index - 1].current.focus();
+      return false;
+    };
+
+    cokeList.every((cardNoRef, index) => {
+      if (target !== cardNoRef.current) return true;
+
+      if (target.value.length === max) go(index);
+      if (target.value.length === min) back(index);
+
+      return true;
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!tryFocus || !currentTarget.current) return;
+
+    handleFocus({ target: currentTarget.current.target, max: maxLength, cokeList: inputs });
+  }, [value, tryFocus, inputs, handleFocus, maxLength]);
 
   return [value, onChangeInput, isValid.current, errorMessage];
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import useInput from '../hooks/useInput';
 import { HYPHEN_PRIMARY_COLOR } from '../theme';
 import ErrorMessage from './common/ErrorMessage';
@@ -16,58 +16,38 @@ function CardNumber({ dispatch }) {
   const cardNoBRef = useRef(null);
   const cardNoCRef = useRef(null);
   const cardNoDRef = useRef(null);
-
-  const handleFocus = useCallback(({ e, max, min = 0 }) => {
-    const cardNoRefs = [cardNoARef, cardNoBRef, cardNoCRef, cardNoDRef];
-
-    const go = index => {
-      if (index !== cardNoRefs.length - 1) cardNoRefs[index + 1].current.focus();
-      return false;
-    };
-    const back = index => {
-      if (index !== min) cardNoRefs[index - 1].current.focus();
-      return false;
-    };
-
-    cardNoRefs.every((cardNoRef, index) => {
-      if (e.target !== cardNoRef.current) return true;
-
-      if (e.target.value.length === max) go(index);
-
-      if (e.target.value.length === min) back(index);
-
-      return true;
-    });
-  }, []);
+  const cardNoRefs = useMemo(
+    () => [cardNoARef, cardNoBRef, cardNoCRef, cardNoDRef],
+    [cardNoARef, cardNoBRef, cardNoCRef, cardNoDRef],
+  );
 
   const [value, onChangeInputValue, isValid, errorMessage] = useInput({
     type: 'number',
     maxLength: MAX_CARD_NUMBER_UNIT,
     initialValue: { cardNoA: '', cardNoB: '', cardNoC: '', cardNoD: '' },
-    focusCallback: handleFocus,
+    tryFocus: true,
+    inputs: cardNoRefs,
   });
 
   const [errorMessageFocus, setErrorMessageFocus] = useState('');
 
   const isFinishTypingCardNumber = Object.values(value).join('').length === 16;
 
-  const handleInputFocus = target => {
-    if (!isFinishTypingCardNumber) {
-      setErrorMessageFocus('모든 숫자를 입력해주세요.');
-    }
+  const handleInputFocus = e => {
+    if (!isFinishTypingCardNumber) setErrorMessageFocus('모든 숫자를 입력해주세요.');
   };
 
   useEffect(() => {
     if (!isValid) return;
+    if (isFinishTypingCardNumber) setErrorMessageFocus('');
 
-    setErrorMessageFocus('');
     dispatch({ type: 'CARD_NUMBER', cardNumber: convertToCardNumberString(value), isFinishTypingCardNumber });
   }, [value, isValid, dispatch, isFinishTypingCardNumber]);
 
   return (
     <S.InputContainer>
       <S.Label>카드 번호</S.Label>
-      <S.InputWrapper color={HYPHEN_PRIMARY_COLOR} onFocus={handleInputFocus}>
+      <S.InputWrapperForm color={HYPHEN_PRIMARY_COLOR} onFocus={handleInputFocus}>
         <S.Span>
           <S.Input
             ref={cardNoARef}
@@ -115,7 +95,7 @@ function CardNumber({ dispatch }) {
             placeholder={'****'}
           />
         </S.Span>
-      </S.InputWrapper>
+      </S.InputWrapperForm>
       <ErrorMessage>{errorMessage || errorMessageFocus}</ErrorMessage>
     </S.InputContainer>
   );
