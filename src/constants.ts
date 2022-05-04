@@ -9,3 +9,30 @@ export const INPUT = {
   MAX_FIRST_PASSWORD_LENGTH: 1,
   MAX_SECOND_PASSWORD_LENGTH: 1,
 };
+
+export const cardTypes = [
+  {
+    name: '삘깅카드',
+    color: '#EB1100',
+  },
+  {
+    name: '노랑카드',
+    color: '#F59001',
+  },
+  {
+    name: '주황카드',
+    color: '#F5ED00',
+  },
+  {
+    name: '초록카드',
+    color: '#12DB00',
+  },
+  {
+    name: '파랑카드',
+    color: '#0107EB',
+  },
+  {
+    name: '보라카드',
+    color: '#A000EB',
+  },
+];
