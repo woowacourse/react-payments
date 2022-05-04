@@ -28,7 +28,7 @@ function CardOwner({ dispatch }) {
       <div>
         <LetterCounter maxLength={30} currentLength={value.length} />
         <S.Label>카드 소유자 이름(선택)</S.Label>
-        <S.InputWrapper>
+        <S.InputWrapperForm>
           <S.Span width={'100%'}>
             <S.Input
               type={'text'}
@@ -39,7 +39,7 @@ function CardOwner({ dispatch }) {
               required
             />
           </S.Span>
-        </S.InputWrapper>
+        </S.InputWrapperForm>
       </div>
       <ErrorMessage>{errorMessage}</ErrorMessage>
     </S.InputContainer>

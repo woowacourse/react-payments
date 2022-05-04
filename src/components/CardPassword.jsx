@@ -29,7 +29,7 @@ function CardPassword({ dispatch }) {
     <S.InputContainer>
       <S.Label>카드 비밀번호</S.Label>
       <S.InputPasswordWrapper>
-        <S.InputWrapper>
+        <S.InputWrapperForm>
           <S.Span>
             <S.Input
               type={'password'}
@@ -39,8 +39,8 @@ function CardPassword({ dispatch }) {
               value={value.pwdNoA}
             />
           </S.Span>
-        </S.InputWrapper>
-        <S.InputWrapper>
+        </S.InputWrapperForm>
+        <S.InputWrapperForm>
           <S.Span>
             <S.Input
               type={'password'}
@@ -50,7 +50,7 @@ function CardPassword({ dispatch }) {
               value={value.pwdNoB}
             />
           </S.Span>
-        </S.InputWrapper>
+        </S.InputWrapperForm>
         <InactiveContainer />
         <InactiveContainer />
       </S.InputPasswordWrapper>

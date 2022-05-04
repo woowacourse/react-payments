@@ -30,11 +30,11 @@ function CardSecurityCode({ dispatch }) {
     <S.InputContainer position={'relative'} width={'40%'}>
       <div>
         <S.Label>보안코드(CVC/CVV)</S.Label>
-        <S.InputWrapper width={'80%'}>
+        <S.InputWrapperForm width={'80%'}>
           <S.Span>
             <S.Input type={'password'} maxLength={'3'} onChange={onChangeInputValue} value={value} />
           </S.Span>
-        </S.InputWrapper>
+        </S.InputWrapperForm>
         <QuestionContainer>{CVC_EXPLANATION}</QuestionContainer>
       </div>
       <ErrorMessage>{errorMessage}</ErrorMessage>

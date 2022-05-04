@@ -28,7 +28,7 @@ function DueDate({ dispatch, dimensions }) {
   return (
     <S.InputContainer>
       <S.Label>만료일</S.Label>
-      <S.InputWrapper color={HYPHEN_PRIMARY_COLOR} width={'50%'}>
+      <S.InputWrapperForm color={HYPHEN_PRIMARY_COLOR} width={'50%'}>
         <S.Span>
           <Select items={months.current} setItem={setMonth} placeholder={'MM'} dimensions={dimensions} />
         </S.Span>
@@ -36,7 +36,7 @@ function DueDate({ dispatch, dimensions }) {
         <S.Span>
           <Select items={years.current} setItem={setYear} placeholder={'YY'} dimensions={dimensions} />
         </S.Span>
-      </S.InputWrapper>
+      </S.InputWrapperForm>
     </S.InputContainer>
   );
 }

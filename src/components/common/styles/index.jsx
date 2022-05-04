@@ -13,7 +13,7 @@ const InputContainer = styled.div`
   margin: 16px 0;
 `;
 
-const InputWrapper = styled.div`
+const InputWrapperForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,4 +68,4 @@ const Span = styled.span`
   width: ${props => props.width};
 `;
 
-export { InputContainer, InputWrapper, Label, Input, DotContainer, Span };
+export { InputContainer, InputWrapperForm, Label, Input, DotContainer, Span };
