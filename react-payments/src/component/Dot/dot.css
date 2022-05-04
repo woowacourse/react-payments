@@ -1,0 +1,15 @@
+.password-form {
+  width: 43px;
+  height: 45px;
+}
+
+.card-number {
+  width: 9px;
+  height: 9px;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

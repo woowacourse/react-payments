@@ -1,0 +1,39 @@
+.input-title {
+  display: flex;
+  align-items: center;
+
+  font-size: 14px;
+  line-height: 14px;
+
+  margin-bottom: 4px;
+  color: var(--header-color);
+}
+
+.input-container {
+  margin: 16px 0;
+}
+
+.password-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+}
+
+.security-code-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  position: relative;
+}
+
+.user-name-container {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+}
+
+.max-user-name-count {
+  font-size: 14px;
+  color: #525252;
+}
