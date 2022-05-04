@@ -1,8 +1,8 @@
 import { CardInfoContext } from "contexts/CardInfoProvider";
 import React, { useContext } from "react";
 
-import Input from "../common/Input";
-import InputContainer from "../common/InputContainer";
+import Input from "../../common/Input";
+import InputContainer from "../../common/InputContainer";
 
 export default function CardNumber({ inputs }: { inputs: HTMLInputElement[] }) {
   const {

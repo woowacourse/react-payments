@@ -1,5 +1,5 @@
-import Card from "components/Card";
-import Header from "components/Header";
+import Card from "components/add/Card";
+import Header from "components/common";
 import { PATH } from "constant/path";
 import { CardsContext } from "contexts/CardsProvider";
 import React, { useContext } from "react";

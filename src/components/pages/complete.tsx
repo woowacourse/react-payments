@@ -1,5 +1,5 @@
 import API from "apis";
-import Card from "components/Card";
+import Card from "components/add/Card";
 import Input from "components/common/Input";
 import { PATH } from "constant/path";
 import { CardInfoContext } from "contexts/CardInfoProvider";

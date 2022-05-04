@@ -2,7 +2,7 @@ import { CardInfoContext } from "contexts/CardInfoProvider";
 import React, { useCallback, useContext } from "react";
 import type { CardColor, CardName, CardType } from "types/cardInfo";
 
-import Modal from "../common/Modal";
+import Modal from "../../common/Modal";
 
 const cardType: CardType[] = [
   { name: "빨강 카드", color: "red" },

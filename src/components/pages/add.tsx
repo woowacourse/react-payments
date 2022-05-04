@@ -1,6 +1,6 @@
-import Card from "components/Card";
-import CardInfoForm from "components/CardInfoForm";
-import Header from "components/Header";
+import Card from "components/add/Card";
+import CardInfoForm from "components/add/CardInfoForm";
+import Header from "components/common";
 import { CardInfoContext } from "contexts/CardInfoProvider";
 import React, { useContext } from "react";
 
