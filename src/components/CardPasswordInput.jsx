@@ -49,10 +49,13 @@ const StyledInputContainer = styled.div`
   color: #04c09e;
 `;
 
-export default function CardPasswordInput() {
+export default function CardPasswordInput({
+  passwordLength,
+  setPasswordLength,
+}) {
   const [isInvalid, setInvalid] = useState(false);
-  const [inputLength, setInputLength] = useState([0, 0]);
-  const setInputLengthArray = useArraySetState(setInputLength);
+  // const [inputLength, setInputLength] = useState([0, 0]);
+  const setInputLengthArray = useArraySetState(setPasswordLength);
 
   const handleInputChange = (e, order) => {
     setInvalid(false);
@@ -68,7 +71,7 @@ export default function CardPasswordInput() {
         state={
           isInvalid
             ? "error"
-            : inputLength[0] + inputLength[1] ===
+            : passwordLength[0] + passwordLength[1] ===
               CARD_INFO_RULES.PASSWORD_LENGTH
             ? "complete"
             : "default"
@@ -87,7 +90,7 @@ export default function CardPasswordInput() {
                 maxLength={1}
                 required
                 width={"full"}
-                isComplete={inputLength[index] === 1}
+                isComplete={passwordLength[index] === 1}
                 onChange={(e) => handleInputChange(e, index)}
                 onInvalid={triggerInvalid}
                 pattern={"^[0-9]+$"}

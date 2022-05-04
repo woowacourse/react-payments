@@ -28,8 +28,8 @@ function App() {
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
   const [expireDate, setExpireDate] = useState(["", ""]);
   const [holderName, setHolderName] = useState("");
-  const [securityCode, setSecurityCode] = useState("");
-  const [password, setPassword] = useState(["", ""]);
+  const [securityCodeLength, setSecurityCodeLength] = useState(0);
+  const [passwordLength, setPasswordLength] = useState([0, 0]);
 
   const handleCardInfoSubmit = () => {
     alert(CARD_REGISTER_SUCCESS_MESSAGE);
@@ -46,13 +46,13 @@ function App() {
   );
 
   const isCompleteSecurityCode = useMemo(
-    () => securityCode.length === SECURITY_CODE_LENGTH,
-    [securityCode]
+    () => securityCodeLength === SECURITY_CODE_LENGTH,
+    [securityCodeLength]
   );
 
   const isCompletePassword = useMemo(
-    () => password.join("").length === PASSWORD_LENGTH,
-    [password]
+    () => passwordLength[0] + passwordLength[1] === PASSWORD_LENGTH,
+    [passwordLength]
   );
 
   const isValidCardInfo = useMemo(() => {
@@ -93,10 +93,13 @@ function App() {
           setHolderName={setHolderName}
         />
         <CardSecurityCodeInput
-          securityCode={securityCode}
-          setSecurityCode={setSecurityCode}
+          securityCodeLength={securityCodeLength}
+          setSecurityCodeLength={setSecurityCodeLength}
         />
-        <CardPasswordInput password={password} setPassword={setPassword} />
+        <CardPasswordInput
+          passwordLength={passwordLength}
+          setPasswordLength={setPasswordLength}
+        />
         {isValidCardInfo && (
           <Button text="다음" onClick={handleCardInfoSubmit} />
         )}

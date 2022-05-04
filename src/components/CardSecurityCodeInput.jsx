@@ -54,13 +54,15 @@ function HelpIcon({ description }) {
 const SECURITY_CODE_DESCRIPTION =
   "CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.";
 
-export default function CardSecurityCodeInput() {
+export default function CardSecurityCodeInput({
+  securityCodeLength,
+  setSecurityCodeLength,
+}) {
   const [isInvalid, setInvalid] = useState(false);
-  const [inputLength, setInputLength] = useState(0);
 
   const handleInputChange = (e) => {
     setInvalid(false);
-    setInputLength(e.target.value.length);
+    setSecurityCodeLength(e.target.value.length);
   };
 
   return (
@@ -68,7 +70,7 @@ export default function CardSecurityCodeInput() {
       labelText={"보안 코드(CVC/CVV)"}
       wrapperWidth={"xs"}
       isInvalid={isInvalid}
-      isComplete={inputLength === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
+      isComplete={securityCodeLength === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
       OptionalComponent={<HelpIcon description={SECURITY_CODE_DESCRIPTION} />}
     >
       <Input
@@ -78,7 +80,7 @@ export default function CardSecurityCodeInput() {
         maxLength={3}
         required
         width={"full"}
-        isComplete={inputLength === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
+        isComplete={securityCodeLength === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
         pattern={"^[0-9]+$"}
         onInvalid={() => setInvalid(true)}
         onChange={handleInputChange}
