@@ -1,4 +1,5 @@
-import { useState, useEffect, useReducer, useCallback } from 'react';
+import { useReducer, useCallback } from 'react';
+import useCardInfo from 'hooks/useCardInfo';
 
 import FormInput from 'components/common/FormInput';
 import CardPreview from 'components/CardPreview';
@@ -9,10 +10,8 @@ import Button from 'components/common/Button';
 import Tooltip from 'components/common/Tooltip';
 import { ReactComponent as PrevIcon } from 'assets/prev_icon.svg';
 
-import { validator, checkFullFilled } from './validator';
-import { isObject } from 'utils';
+import { validator } from './validator';
 import { CRYPTO_STRING, INPUT_MAX_LENGTH } from 'constants';
-
 import {
   cardNumberInputInfoList,
   expiryDateInputInfoList,
@@ -44,55 +43,33 @@ const initialCardInfo = {
 };
 
 const CardAppPage = () => {
-  const [cardInfo, setCardInfo] = useState(initialCardInfo);
+  const [cardInfo, isFullFilled, handleCardInfo] = useCardInfo(initialCardInfo);
   const [modalVisible, handleModal] = useReducer(
     useCallback((visible) => !visible, []),
     false,
   );
-  const [isfullFilled, setIsFullFilled] = useState(false);
   const { number, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
 
-  useEffect(() => {
-    if (checkFullFilled(cardInfo)) {
-      setIsFullFilled(true);
-      return;
-    }
+  const handleInputChange = useCallback(
+    ({ target }, item) => {
+      const { name, value } = target;
 
-    setIsFullFilled(false);
-  }, [cardInfo]);
+      if (!validator[item](value, name)) return;
 
-  const handleChange = useCallback(({ target }, item) => {
-    const { name, value } = target;
+      handleCardInfo(item, name, value);
+    },
+    [handleCardInfo],
+  );
 
-    if (!validator[item](value, name)) return;
+  const handleClickCompany = useCallback(
+    (company, theme) => {
+      handleCardInfo('company', 'company', company);
+      handleCardInfo('theme', 'theme', theme);
 
-    setCardInfo((prevCardInfo) => {
-      if (isObject(prevCardInfo[item])) {
-        return {
-          ...prevCardInfo,
-          [item]: {
-            ...prevCardInfo[item],
-            [name]: value,
-          },
-        };
-      }
-
-      return {
-        ...prevCardInfo,
-        [item]: value,
-      };
-    });
-  }, []);
-
-  const handleClickCompany = useCallback((company, theme) => {
-    setCardInfo((prevCardInfo) => ({
-      ...prevCardInfo,
-      company,
-      theme,
-    }));
-
-    handleModal();
-  }, []);
+      handleModal();
+    },
+    [handleCardInfo],
+  );
 
   return (
     <>
@@ -117,7 +94,7 @@ const CardAppPage = () => {
         inputTitle="카드 번호"
         inputInfoList={cardNumberInputInfoList}
         inputValue={number}
-        onChange={handleChange}
+        onChange={handleInputChange}
         theme={theme}
       />
       <FormInput
@@ -126,7 +103,7 @@ const CardAppPage = () => {
         inputTitle="만료일"
         inputInfoList={expiryDateInputInfoList}
         inputValue={expiryDate}
-        onChange={handleChange}
+        onChange={handleInputChange}
         theme={theme}
       />
       <FormInput
@@ -134,7 +111,7 @@ const CardAppPage = () => {
         inputTitle="카드 소유자 이름(선택)"
         inputInfoList={cardOwnerNameInputInfoList}
         inputValue={ownerName}
-        onChange={handleChange}
+        onChange={handleInputChange}
         theme={theme}
       >
         <div className="owner-name-length">
@@ -145,7 +122,7 @@ const CardAppPage = () => {
         item="privacyCode"
         inputTitle="보안코드(CVC/CVV)"
         inputInfoList={privacyCodeInputInfoList}
-        onChange={handleChange}
+        onChange={handleInputChange}
         inputValue={privacyCode}
         theme={theme}
       >
@@ -156,10 +133,10 @@ const CardAppPage = () => {
         inputTitle="카드 비밀번호"
         inputInfoList={cardPasswordInputInfoList}
         inputValue={{ ...password, third: CRYPTO_STRING, fourth: CRYPTO_STRING }}
-        onChange={handleChange}
+        onChange={handleInputChange}
         theme={theme}
       />
-      {isfullFilled && (
+      {isFullFilled && (
         <Button theme={theme} className="next-button">
           다음
         </Button>
