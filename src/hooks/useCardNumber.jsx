@@ -6,19 +6,43 @@ export default function useCardNumber(initialValue) {
   const [cardNumber, setCardNumber] = useState(initialValue);
   const [encryptedCardNumber, setEncryptedCardNumber] = useState(initialValue);
 
-  const handler = useCallback(({ target: { value } }) => {
-    const numbers = value.replaceAll('-', '');
+  const handler = useCallback(
+    ({ target: { selectionStart }, nativeEvent: { data: key } }) => {
+      setCardNumber(prevState => {
+        let state = key && /[0-9]/.test(key) ? prevState + key : prevState;
 
-    setCardNumber(numbers);
+        if (!key) {
+          let removeIdx = 0;
 
-    let processedNumbers = numbers;
+          if (selectionStart < 4) {
+            removeIdx = selectionStart;
+          } else if (selectionStart < 9) {
+            removeIdx = selectionStart - 1;
+          } else if (selectionStart < 14) {
+            removeIdx = selectionStart - 2;
+          } else if (selectionStart < 19) {
+            removeIdx = selectionStart - 3;
+          }
 
-    if (numbers.length > 8) {
-      processedNumbers = numbers.slice(0, 8) + '•'.repeat(numbers.length - 8);
-    }
+          state =
+            prevState.slice(0, removeIdx) +
+            prevState.slice(removeIdx + 1, prevState.length);
+        }
 
-    setEncryptedCardNumber(splitCardNumbers(processedNumbers) ?? initialValue);
-  }, []);
+        const processedNumbers =
+          state.length > 8
+            ? state.slice(0, 8) + '•'.repeat(state.length - 8)
+            : state;
+
+        setEncryptedCardNumber(
+          splitCardNumbers(processedNumbers) ?? initialValue
+        );
+
+        return state;
+      });
+    },
+    []
+  );
 
   return { cardNumber, handler, encryptedCardNumber };
 }
