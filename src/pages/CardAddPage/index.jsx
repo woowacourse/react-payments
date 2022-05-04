@@ -3,6 +3,7 @@ import useInput from "hooks/useInput";
 import useCardNumber from "hooks/useCardNumber";
 import useCardPassword from "hooks/useCardPassword";
 import useCardDueDate from "hooks/useCardDueDate";
+import useModal from "hooks/useModal";
 
 import Card from "components/common/Card";
 import Button from "components/common/Button";
@@ -12,13 +13,13 @@ import CardOwnerInput from "components/CardOwnerInput";
 import CardCVCInput from "components/CardCVCInput";
 import CardPasswordInput from "components/CardPasswordInput";
 import Header from "components/common/Header";
+import Modal from "components/common/Modal";
+import Palette from "components/common/Palette";
 
 import { CARD_NUMBER, DUE_DATE, CVC } from "constant";
 import { isValidCvc, isValidOwnerLength } from "validation";
 import { ReactComponent as ArrowImage } from "assets/arrow.svg";
 import { PageWrapper, CardWrapper, FooterWrapper } from "./style";
-import Modal from "../../components/common/Modal";
-import Palette from "../../components/common/Palette";
 
 function CardAddPage() {
   const { cardNumbers, handleChangeCardNumber, cardNumberInputRefs } =
@@ -36,7 +37,7 @@ function CardAddPage() {
   const { password, handleChangePassword, secondPasswordInputRef } =
     useCardPassword();
   const [allRequired, setAllRequired] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const { modalVisible, openModal, closeModal } = useModal();
 
   useEffect(() => {
     setAllRequired(
@@ -48,14 +49,6 @@ function CardAddPage() {
         password.secondPassword
     );
   }, [cardNumbers, dueDate, cvc, password]);
-
-  const openModal = () => {
-    setModalVisible(true);
-  };
-
-  const closeModal = () => {
-    setModalVisible(false);
-  };
 
   const handleSubmit = () => {
     alert("카드가 등록되었습니다");
