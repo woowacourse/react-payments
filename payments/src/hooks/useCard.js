@@ -36,7 +36,7 @@ const reducer = (state, action) => {
         ],
       };
     case 'ownerName':
-      refinedPayloadValue = limitExceptUpperCase(blockCharacter(action.payload.value));
+      refinedPayloadValue = limitExceptUpperCase(action.payload.value);
       return {
         ...state,
         ownerName: refinedPayloadValue,
@@ -78,9 +78,9 @@ const useCard = () => {
     cardName: '',
     color: '#d2d2d2',
   };
-  const [form, dispatch] = useReducer(reducer, initState);
+  const [inputStates, dispatch] = useReducer(reducer, initState);
 
-  return [form, dispatch];
+  return [inputStates, dispatch];
 };
 
 export default useCard;
