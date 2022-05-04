@@ -13,7 +13,7 @@ import CardUserName from "./CardUserName";
 export default function CardInfoForm() {
   const navigate = useNavigate();
   const { cardInfoValidation } = useContext(CardInfoContext);
-  const [isNextButtonShown, setIsNextButtonShown] = useState(true);
+  const [isNextButtonActive, setIsNextButtonActive] = useState(true);
   const inputsRef = useRef<HTMLInputElement[]>(null);
   const formRef = useCallback((node: HTMLFormElement) => {
     if (!node) return;
@@ -21,7 +21,7 @@ export default function CardInfoForm() {
   }, []);
 
   useEffect(() => {
-    setIsNextButtonShown(
+    setIsNextButtonActive(
       Object.keys(cardInfoValidation).every(
         (key: keyof CardInfoValidationTarget) => cardInfoValidation[key].isValid
       )
@@ -36,7 +36,7 @@ export default function CardInfoForm() {
     }
 
     navigate(PATH.COMPLETE);
-    setIsNextButtonShown(false);
+    setIsNextButtonActive(false);
   };
 
   return (
@@ -46,7 +46,7 @@ export default function CardInfoForm() {
       <CardUserName inputs={inputsRef.current} />
       <CardSecurityCode inputs={inputsRef.current} />
       <CardPassword inputs={inputsRef.current} />
-      <button className="submit-button" disabled={!isNextButtonShown}>
+      <button className="submit-button" disabled={!isNextButtonActive}>
         다음
       </button>
     </form>
