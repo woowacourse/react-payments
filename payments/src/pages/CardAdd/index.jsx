@@ -9,7 +9,6 @@ import SecureCodeInput from "../../components/organisms/SecureCodeInput";
 import useCard from "../../hooks/useCard";
 import NextButton from "../../components/common/NextButton";
 import CardColorPicker from "../../components/organisms/CardColorPicker";
-import { useState } from "react";
 import useModal from "../../hooks/useModal";
 import ConfirmAdd from "../../components/organisms/ConfirmAdd";
 
@@ -27,7 +26,14 @@ const CardAdd = () => {
       }}
     />
   );
-  const [visible, setVisible] = useState(false);
+  const [setColorPickerVisible, ColorPickerModal] = useModal(
+    <CardColorPicker
+      closeModal={() => {
+        setColorPickerVisible(false);
+      }}
+      onChangeCardName={dispatch}
+    />
+  );
 
   const { cardName, cardNumber, expiredDate, ownerName, secureCode, password } =
     cardInfo;
@@ -41,12 +47,8 @@ const CardAdd = () => {
     }
   };
 
-  const closeModal = () => {
-    setVisible(false);
-  };
-
-  const openModal = () => {
-    setVisible(true);
+  const openColorPickerModal = () => {
+    setColorPickerVisible(true);
   };
 
   return (
@@ -57,7 +59,7 @@ const CardAdd = () => {
           <p>카드 추가</p>
         </header>
         <div className="card-add__container">
-          <Card cardInfo={cardInfo} onClick={openModal} />
+          <Card cardInfo={cardInfo} onClick={openColorPickerModal} />
           {cardName ? (
             <></>
           ) : (
@@ -90,9 +92,7 @@ const CardAdd = () => {
         </div>
         <NextButton onClick={submitCard}>다음</NextButton>
       </div>
-      {visible && (
-        <CardColorPicker closeModal={closeModal} onChangeCardName={dispatch} />
-      )}
+      <ColorPickerModal />
       <ConfirmModal />
     </>
   );
