@@ -8,6 +8,10 @@ const Button = ({ className, theme, children, handleClick }) => {
   );
 };
 
+Button.defaultProps = {
+  theme: 'default',
+};
+
 Button.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.string,
