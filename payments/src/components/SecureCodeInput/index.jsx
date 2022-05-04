@@ -7,7 +7,7 @@ import useControllInput from '../../hooks/useControllInput';
 const INPUT_LENGTH = 3;
 
 const SecureCodeInput = ({ state, updateForm }) => {
-  const { itemRef, autoFocusForward, blockCharacter } = useControllInput();
+  const { itemRef, autoFocusForward } = useControllInput();
   return (
     <div className='secure__input__container'>
       <InputLabel>보안코드(CVC/CVV)</InputLabel>
@@ -20,7 +20,6 @@ const SecureCodeInput = ({ state, updateForm }) => {
           value={state}
           onChange={({ target }) => {
             autoFocusForward(target);
-            blockCharacter(target);
             updateForm({
               type: 'secureCode',
               payload: { value: target.value },

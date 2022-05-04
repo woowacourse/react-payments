@@ -9,7 +9,7 @@ const NUM_OF_INPUT = 2;
 const BACKSPACE_KEY_CODE = 8;
 
 const CardPasswordInput = ({ state, updateForm }) => {
-  const { itemRef, autoFocusForward, autoFocusBackward, blockCharacter } = useControllInput();
+  const { itemRef, autoFocusForward, autoFocusBackward } = useControllInput();
 
   return (
     <div className='password__input__container'>
@@ -26,7 +26,6 @@ const CardPasswordInput = ({ state, updateForm }) => {
                 value={state[idx]}
                 onChange={({ target }) => {
                   autoFocusForward(target);
-                  blockCharacter(target);
                   updateForm({
                     type: 'password',
                     payload: { value: target.value, index: idx },

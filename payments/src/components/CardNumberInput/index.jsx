@@ -10,7 +10,7 @@ const NUM_OF_INPUT = 4;
 const BACKSPACE_KEY_CODE = 8;
 
 const CardNumberInput = ({ state, updateForm }) => {
-  const { itemRef, autoFocusForward, autoFocusBackward, blockCharacter } = useControllInput();
+  const { itemRef, autoFocusForward, autoFocusBackward } = useControllInput();
 
   const onKeyDown = useCallback((e) => {
     if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === '') {
@@ -27,7 +27,6 @@ const CardNumberInput = ({ state, updateForm }) => {
             <Input
               onChange={({ target }) => {
                 autoFocusForward(target);
-                blockCharacter(target);
                 updateForm({
                   type: 'cardNumber',
                   payload: { value: target.value, index: idx },
