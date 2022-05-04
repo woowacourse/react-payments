@@ -1,4 +1,4 @@
-import { useCallback, memo } from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { isObject } from 'utils';
 
@@ -12,12 +12,7 @@ const FormInput = ({
   onChange,
   children,
 }) => {
-  const handleChange = useCallback(
-    (e) => {
-      onChange(e, item);
-    },
-    [onChange, item],
-  );
+  const handleChange = (e) => onChange(e, item);
 
   return (
     <div className="input-container">
