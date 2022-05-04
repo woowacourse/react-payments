@@ -195,3 +195,9 @@
 .card-back__info {
   font-size: 10px;
 }
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
