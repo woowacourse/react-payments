@@ -1,7 +1,10 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 import Card from '../../components/Modules/Card';
 import CardNickNameForm from '../../components/Templates/CardNickNameForm';
-import { NickNameContextProvider } from '../../context/NickNameContext';
+import { CardNumberContext } from '../../context/CardNumberContext';
+import { ExpiredDateContext } from '../../context/ExpiredDateContext';
+import { CardOwnerContext } from '../../context/CardOwnerContext';
 
 const Page = styled.div`
   display: flex;
@@ -27,16 +30,24 @@ const CardSection = styled.div`
 `;
 
 function CardCompletePage() {
+  const companyNameString = '신한카드';
+  const { cardNumberString } = useContext(CardNumberContext);
+  const { expiredDateString } = useContext(ExpiredDateContext);
+  const { ownerNameString } = useContext(CardOwnerContext);
+
   return (
-    <NickNameContextProvider>
-      <Page>
-        <Title>카드등록이 완료되었습니다.</Title>
-        <CardSection>
-          <Card />
-        </CardSection>
-        <CardNickNameForm />
-      </Page>
-    </NickNameContextProvider>
+    <Page>
+      <Title>카드등록이 완료되었습니다.</Title>
+      <CardSection>
+        <Card
+          companyNameString={companyNameString}
+          cardNumberString={cardNumberString}
+          expiredDateString={expiredDateString}
+          ownerNameString={ownerNameString}
+        />
+      </CardSection>
+      <CardNickNameForm />
+    </Page>
   );
 }
 

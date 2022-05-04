@@ -22,7 +22,6 @@ const SubmitButtonWrapper = styled.div`
 
 function CardNickNameForm() {
   const nickNameProps = useContext(NickNameContext);
-
   const navigator = useNavigate();
 
   const onNickNameSubmit = event => {
@@ -37,7 +36,7 @@ function CardNickNameForm() {
     <Form onSubmit={onNickNameSubmit}>
       <NickNameInput {...nickNameProps} />
       <SubmitButtonWrapper>
-        <SubmitButton hidden={false}>확인</SubmitButton>
+        <SubmitButton hidden={!nickNameProps.validation}>확인</SubmitButton>
       </SubmitButtonWrapper>
     </Form>
   );
