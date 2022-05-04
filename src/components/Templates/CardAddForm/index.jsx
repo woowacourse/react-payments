@@ -12,6 +12,7 @@ import { CardOwnerContext } from '../../../context/CardOwnerContext';
 import { SecurityNumberContext } from '../../../context/SecurityNumberContext';
 import { PasswordContext } from '../../../context/PasswordContext';
 import { MESSAGE } from '../../../constant/message';
+import { useNavigate } from 'react-router';
 
 const FormContainer = styled.form`
   display: flex;
@@ -24,7 +25,7 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
 `;
 
-function CardAddForm() {
+function CardAddForm({ link }) {
   const cardNumberProps = useContext(CardNumberContext);
   const expiredDateProps = useContext(ExpiredDateContext);
   const cardOwnerProps = useContext(CardOwnerContext);
@@ -39,10 +40,12 @@ function CardAddForm() {
     passwordProps.isValid,
   ].every(valid => valid);
 
+  const navigator = useNavigate();
+
   const onAddFormSubmit = event => {
     event.preventDefault();
 
-    isValidForm ? alert(MESSAGE.SAVE_INFO) : alert(MESSAGE.DENY_SAVE);
+    isValidForm ? navigator(link) : alert(MESSAGE.DENY_SAVE);
   };
 
   return (

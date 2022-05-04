@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import SubmitButton from '../../Atoms/SubmitButton';
 import NickNameInput from '../../Modules/NickNameInput';
+import { useNavigate } from 'react-router';
 
 const Form = styled.form`
   display: flex;
@@ -17,9 +18,17 @@ const SubmitButtonWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-function CardNickNameForm() {
+function CardNickNameForm({ link }) {
+  const navigator = useNavigate();
+
+  const onNickNameSubmit = event => {
+    event.preventDefault();
+
+    navigator(link);
+  };
+
   return (
-    <Form>
+    <Form onSubmit={onNickNameSubmit}>
       <NickNameInput />
       <SubmitButtonWrapper>
         <SubmitButton hidden={false}>확인</SubmitButton>

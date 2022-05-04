@@ -32,7 +32,7 @@ function CardCompletePage() {
       <CardSection>
         <Card />
       </CardSection>
-      <CardNickNameForm />
+      <CardNickNameForm link="/react-payments/cardList" />
     </Page>
   );
 }

@@ -32,7 +32,7 @@ function CardAddPage() {
                 <Head>카드 추가</Head>
                 <CardSection />
                 <CardAddFormContainer>
-                  <CardAddForm />
+                  <CardAddForm link="/react-payments/cardComplete" />
                 </CardAddFormContainer>
               </Page>
             </PasswordContextProvider>
