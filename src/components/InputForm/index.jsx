@@ -11,6 +11,7 @@ import { DISPATCH_TYPE } from '../../constants';
 function InputForm({
   cardInput: { cardNumber, expirationDate, ownerName, securityCode, password },
   cardInputDispatch,
+  handleChangePage,
 }) {
   const [isComplete, setIsComplete] = useState(false);
   const inputElementsRef = useRef([]);
@@ -207,7 +208,7 @@ function InputForm({
         <div className="inputted-password">*</div>
       </Input>
       {isComplete && (
-        <button className="button-box">
+        <button className="button-box" onClick={() => handleChangePage('completeAddCardPage')}>
           <span className="button-text">다음</span>
         </button>
       )}
@@ -223,6 +224,7 @@ InputForm.propTypes = {
     securityCode: PropTypes.string,
     password: PASSWORD_TYPE,
   }),
+  handleChangePage: PropTypes.func,
   cardInputDispatch: PropTypes.func,
 };
 export default InputForm;

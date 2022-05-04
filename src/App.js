@@ -1,4 +1,5 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
+import Button from './components/Button';
 import Card from './components/Card';
 import InputForm from './components/InputForm';
 import { DISPATCH_TYPE } from './constants';
@@ -68,13 +69,50 @@ const defaultCardInputState = {
 
 function App() {
   const [cardInput, cardInputDispatch] = useReducer(cardInputReducer, defaultCardInputState);
+  const [page, setPage] = useState('addCardPage');
+  const [isHide, setHide] = useState({
+    addCard: 'app',
+    completeAddCard: 'app hide',
+    cardList: 'app hide',
+  });
+  const handleChangePage = pageName => {
+    setPage(pageName);
+    console.log(pageName);
+  };
+
+  useEffect(() => {
+    if (page === 'addCardPage') {
+      setHide({ addCard: 'app', completeAddCard: 'app hide', cardList: 'app hide' });
+    }
+    if (page === 'completeAddCardPage') {
+      setHide({ addCard: 'app hide', completeAddCard: 'app', cardList: 'app hide' });
+    }
+    if (page === 'cardListPage') {
+      setHide({ addCard: 'app hide', completeAddCard: 'app hide', cardList: 'app' });
+    }
+  }, [page]);
 
   return (
     <div className="root">
-      <div className="app">
-        <h2 className="page-title"> 카드 추가 </h2>
+      <div className={isHide.addCard}>
+        <header>
+          <Button />
+          <h2 className="page-title">카드 추가</h2>
+        </header>
         <Card cardInformation={cardInput}></Card>
-        <InputForm cardInput={cardInput} cardInputDispatch={cardInputDispatch}></InputForm>
+        <InputForm
+          cardInput={cardInput}
+          cardInputDispatch={cardInputDispatch}
+          handleChangePage={handleChangePage}
+        ></InputForm>
+      </div>
+
+      <div className={isHide.completeAddCard}>
+        <h2 className="page-title"> 카드 등록이 완료되었습니다. </h2>
+      </div>
+
+      <div className={isHide.cardList}>
+        <h2 className="page-title"> 보유 카드 </h2>
       </div>
     </div>
   );
