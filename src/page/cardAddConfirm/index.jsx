@@ -8,6 +8,7 @@ import useIsFilled from 'hooks/useIsFilled';
 import { CARD_ALIAS } from 'constants';
 import Message from 'components/common/Message';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const mockCardInfo = {
   company: '클린카드',
@@ -45,9 +46,11 @@ const CardAddConfirmPage = () => {
   return (
     <div>
       <Header title="카드 추가완료">
-        <Button>
-          <PrevIcon />
-        </Button>
+        <Link to="/add">
+          <Button>
+            <PrevIcon />
+          </Button>
+        </Link>
       </Header>
       <div className="flex-center">
         <h2 className="content-title mt-20 mb-10">카드등록이 완료되었습니다.</h2>
@@ -62,9 +65,13 @@ const CardAddConfirmPage = () => {
       </div>
       <Message name="cardAlias" isFilled={isCardAliasFilled} align="text-center" />
       {isCardAliasFilled && (
-        <Button theme={theme} className="mt-50 right-bottom-edge">
-          <span className="button-text">확인</span>
-        </Button>
+        <div className="flex-right right-bottom-edge">
+          <Link to="/">
+            <Button theme={theme} className="">
+              확인
+            </Button>
+          </Link>
+        </div>
       )}
     </div>
   );

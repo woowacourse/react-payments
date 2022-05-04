@@ -2,6 +2,7 @@ import CardPreview from 'components/CardPreview';
 import Header from 'components/common/Header';
 import { CRYPTO_STRING } from 'constants';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const mockCardInfo = {
   company: '클린카드',
@@ -39,9 +40,9 @@ const CardListPage = () => {
         {/* 카드 추가하는 페이지*/}
         <div className="card-item">
           <div className="card-box">
-            <div className="empty-card">
+            <Link to="/add" className="empty-card">
               <div className="card-add-button">+</div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

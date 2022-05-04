@@ -32,12 +32,7 @@ import {
   cardPasswordInputInfoList,
   cardCompanyList,
 } from 'page/cardAdd/data';
-
-const getCardInfoMessage = (company, cardNumber, month, year, ownerName, privacyCode) => {
-  const { first, second, third, fourth } = cardNumber;
-
-  return `🎊카드가 정상적으로 추가되었습니다.🎊\n\n회사 이름 : ${company}\n카드 번호 : ${first}-${second}-${third}-${fourth}\n만료일 : ${month} / ${year}\n카드 소유자 이름 : ${ownerName}\n보안 코드 : ${privacyCode}`;
-};
+import { Link } from 'react-router-dom';
 
 const initialCardInfo = {
   company: '',
@@ -73,6 +68,7 @@ const CardAppPage = () => {
   const [isPasswordFilled] = useIsFilled(PASSWORD, password, false);
   const [modalVisible, handleModal] = useModal(false);
   const [isCardFront, handleCardPosition] = useToggle(true);
+
   const isFullFilled =
     isCompanyFilled &&
     isCardNumberFilled &&
@@ -113,26 +109,14 @@ const CardAppPage = () => {
     handleModal();
   };
 
-  const handleClickNextButton = () => {
-    const { month, year } = expiryDate;
-    const cardInfoMessage = getCardInfoMessage(
-      company,
-      cardNumber,
-      month,
-      year,
-      ownerName,
-      privacyCode,
-    );
-
-    alert(cardInfoMessage);
-  };
-
   return (
     <div>
       <Header title="카드 추가">
-        <Button>
-          <PrevIcon />
-        </Button>
+        <Link to="/">
+          <Button>
+            <PrevIcon />
+          </Button>
+        </Link>
       </Header>
       <CardPreview
         cardInfo={cardInfo}
@@ -204,9 +188,11 @@ const CardAppPage = () => {
       <Message name="password" isFilled={isPasswordFilled} />
       {/* next button */}
       {isFullFilled && (
-        <Button theme={theme} className="right-bottom-edge" handleClick={handleClickNextButton}>
-          다음
-        </Button>
+        <div className="flex-right right-bottom-edge">
+          <Link to="/confirm">
+            <Button theme={theme}>다음</Button>
+          </Link>
+        </div>
       )}
       {/* modal */}
       {modalVisible && (
