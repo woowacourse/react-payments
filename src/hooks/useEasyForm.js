@@ -68,10 +68,6 @@ const useEasyForm = ({
       throw new Error('올바르지 않은 필드 참조입니다.');
     }
 
-    // if (!isAllowedInput(name, value)) {
-    //   return;
-    // }
-
     if (mode === 'onChange') {
       validate(name, value);
     }
