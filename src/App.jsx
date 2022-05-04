@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import CardAddPage from './pages/CardAddPage/';
+import useModal from './hooks/useModal';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -50,7 +50,7 @@ const ModalContainer = styled.div`
 `;
 
 function App() {
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const { isOpenModal, openModal, closeModal } = useModal();
 
   const handleClickModalContainer = ({ target }) => {
     if (target.id !== 'modal-container') {
@@ -58,14 +58,6 @@ function App() {
     }
 
     closeModal();
-  };
-
-  const openModal = () => {
-    setIsOpenModal(true);
-  };
-
-  const closeModal = () => {
-    setIsOpenModal(false);
   };
 
   return (
