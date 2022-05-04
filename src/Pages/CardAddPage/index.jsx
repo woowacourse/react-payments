@@ -29,25 +29,19 @@ const AddFormContainer = styled.div`
 
 function CardAddPage() {
   return (
-    <CardNumberContextProvider>
-      <ExpiredDateContextProvider>
-        <CardOwnerContextProvider>
-          <SecurityNumberContextProvider>
-            <PasswordContextProvider>
-              <Page>
-                <Head>카드 추가</Head>
-                <CardContainer>
-                  <Card />
-                </CardContainer>
-                <AddFormContainer>
-                  <CardAddForm />
-                </AddFormContainer>
-              </Page>
-            </PasswordContextProvider>
-          </SecurityNumberContextProvider>
-        </CardOwnerContextProvider>
-      </ExpiredDateContextProvider>
-    </CardNumberContextProvider>
+    <SecurityNumberContextProvider>
+      <PasswordContextProvider>
+        <Page>
+          <Head>카드 추가</Head>
+          <CardContainer>
+            <Card />
+          </CardContainer>
+          <AddFormContainer>
+            <CardAddForm />
+          </AddFormContainer>
+        </Page>
+      </PasswordContextProvider>
+    </SecurityNumberContextProvider>
   );
 }
 
