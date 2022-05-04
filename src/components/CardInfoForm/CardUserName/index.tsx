@@ -10,14 +10,22 @@ interface CardUserNameProps {
   cardUserName: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
+  validateFormValidation: any;
 }
-export default function CardUserName({ cardUserName, onChange, onBlur }: CardUserNameProps) {
-  const { inputValidation, validateInput } = useInputValidation(false);
+export default function CardUserName({
+  cardUserName,
+  onChange,
+  onBlur,
+  validateFormValidation,
+}: CardUserNameProps) {
+  const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
 
   const handleChangeCardUserName = e => {
     const targetCardUserName = e.target.value;
 
     validateInput(targetCardUserName, checkCardUserName);
+    validateFormValidation("userName", isValidInput(targetCardUserName, checkCardUserName));
+
     onChange(e);
   };
 

@@ -9,10 +9,15 @@ import { checkCardPassword } from "../../../validations/cardInfoForm";
 interface CardPasswordProps {
   password: Password;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  validateFormValidation: any;
 }
 
-export default function CardPassword({ password, onChange }: CardPasswordProps) {
-  const { inputValidation, validateInput } = useInputValidation(false);
+export default function CardPassword({
+  password,
+  onChange,
+  validateFormValidation,
+}: CardPasswordProps) {
+  const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
 
   const handleChangeCardPassword = e => {
     const { value } = e.target;
@@ -22,6 +27,8 @@ export default function CardPassword({ password, onChange }: CardPasswordProps) 
     targetCardPassword[index] = value;
 
     validateInput(targetCardPassword, checkCardPassword);
+    validateFormValidation("password", isValidInput(targetCardPassword, checkCardPassword));
+
     onChange(e);
   };
 

@@ -1,4 +1,4 @@
-import { CardInfo, CardNumbers, ExpiredDate, Password } from "../types";
+import { CardNumbers, ExpiredDate, Password } from "../types";
 
 export const checkExpiredDate = (expiredDate: ExpiredDate) => {
   const date = new Date();

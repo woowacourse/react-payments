@@ -12,9 +12,19 @@ const useInputValidation = (initialBoolean: boolean) => {
     try {
       checkTarget(target);
 
-      setValidation(formatInputValidation(true, "Success!"));
+      setValidation(() => formatInputValidation(true, "Success!"));
     } catch (e) {
-      setValidation(formatInputValidation(false, e.message));
+      setValidation(() => formatInputValidation(false, e.message));
+    }
+  };
+
+  const isValidInput = (target, checkTarget: (target) => void) => {
+    try {
+      checkTarget(target);
+
+      return true;
+    } catch (e) {
+      return false;
     }
   };
 
@@ -22,7 +32,7 @@ const useInputValidation = (initialBoolean: boolean) => {
     return { isValid, message };
   };
 
-  return { inputValidation, validateInput };
+  return { inputValidation, validateInput, isValidInput };
 };
 
 export default useInputValidation;

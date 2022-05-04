@@ -9,10 +9,15 @@ import { checkCardNumbers } from "../../../validations/cardInfoForm";
 interface CardNumberProps {
   cardNumbers: CardNumbers;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  validateFormValidation: any;
 }
 
-export default function CardNumber({ cardNumbers, onChange }: CardNumberProps) {
-  const { inputValidation, validateInput } = useInputValidation(false);
+export default function CardNumber({
+  cardNumbers,
+  onChange,
+  validateFormValidation,
+}: CardNumberProps) {
+  const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
 
   const handleChangeCardNumbers = e => {
     const { value } = e.target;
@@ -22,6 +27,8 @@ export default function CardNumber({ cardNumbers, onChange }: CardNumberProps) {
     targetCardNumbers[index] = value;
 
     validateInput(targetCardNumbers, checkCardNumbers);
+    validateFormValidation("cardNumbers", isValidInput(targetCardNumbers, checkCardNumbers));
+
     onChange(e);
   };
 

@@ -10,15 +10,22 @@ import { checkSecurityCode } from "../../../validations/cardInfoForm";
 interface CardSecurityProps {
   securityCode: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  validateFormValidation: any;
 }
 
-export default function CardSecurityCode({ securityCode, onChange }: CardSecurityProps) {
-  const { inputValidation, validateInput } = useInputValidation(false);
+export default function CardSecurityCode({
+  securityCode,
+  onChange,
+  validateFormValidation,
+}: CardSecurityProps) {
+  const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
 
   const handleChangesSecurityCode = e => {
     const targetSecurityCode = e.target.value;
 
     validateInput(targetSecurityCode, checkSecurityCode);
+    validateFormValidation("securityCode", isValidInput(targetSecurityCode, checkSecurityCode));
+
     onChange(e);
   };
 

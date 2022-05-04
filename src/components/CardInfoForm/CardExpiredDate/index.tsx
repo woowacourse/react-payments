@@ -9,24 +9,26 @@ import { checkExpiredDate } from "../../../validations/cardInfoForm";
 interface CardExpiredDateProps {
   expiredDate: ExpiredDate;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  validateFormValidation: any;
 }
 
-export default function CardExpiredDate({ expiredDate, onChange }: CardExpiredDateProps) {
-  const { inputValidation, validateInput } = useInputValidation(false);
+export default function CardExpiredDate({
+  expiredDate,
+  onChange,
+  validateFormValidation,
+}: CardExpiredDateProps) {
+  const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
 
-  const handleChangeExpiredMonth = e => {
-    const month = e.target.value;
-    const targetExpiredDate = { ...expiredDate, month };
+  const handleChangeExpired = e => {
+    const { value } = e.target;
+    const { key } = e.target.dataset;
+    const targetExpiredDate = { ...expiredDate };
+
+    targetExpiredDate[key] = value;
 
     validateInput(targetExpiredDate, checkExpiredDate);
-    onChange(e);
-  };
+    validateFormValidation("expiredDate", isValidInput(targetExpiredDate, checkExpiredDate));
 
-  const handleChangeExpiredYear = e => {
-    const year = e.target.value;
-    const targetExpiredDate = { ...expiredDate, year };
-
-    validateInput(targetExpiredDate, checkExpiredDate);
     onChange(e);
   };
 
@@ -37,7 +39,7 @@ export default function CardExpiredDate({ expiredDate, onChange }: CardExpiredDa
           type="text"
           placeholder="MM"
           maxLength={2}
-          onChange={handleChangeExpiredMonth}
+          onChange={handleChangeExpired}
           value={expiredDate.month || ""}
           style={{ paddingLeft: "40px" }}
           name="expiredDate"
@@ -49,7 +51,7 @@ export default function CardExpiredDate({ expiredDate, onChange }: CardExpiredDa
           type="text"
           placeholder="YY"
           maxLength={2}
-          onChange={handleChangeExpiredYear}
+          onChange={handleChangeExpired}
           value={expiredDate.year || ""}
           style={{ paddingRight: "40px" }}
           name="expiredDate"

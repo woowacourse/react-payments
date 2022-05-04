@@ -14,7 +14,14 @@ export const useCardInfo = () => {
   const [cardInfo, setCardInfo] = useState<CardInfo>(initialCardInfo);
 
   const resetCardInfo = () => {
-    setCardInfo(initialCardInfo);
+    setCardInfo(prev => ({
+      ...prev,
+      cardNumbers: ["", "", "", ""],
+      expiredDate: { month: "", year: "" },
+      userName: "",
+      securityCode: "",
+      password: ["", ""],
+    }));
   };
 
   const onChangeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
