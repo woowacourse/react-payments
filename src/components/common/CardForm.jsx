@@ -30,14 +30,14 @@ const StyledCardForm = styled.form`
   }
 `;
 
-const CardForm = ({ cardFormSchema, onSubmit, onSubmitError }) => {
+const CardForm = ({ cardFormSchema }) => {
   const {
     values,
     isSubmitting,
     handleSubmit,
     registerInputProps,
     getInputClassName,
-  } = useCardForm({ cardFormSchema, onSubmit, onSubmitError });
+  } = useCardForm({ cardFormSchema });
 
   return (
     <>
