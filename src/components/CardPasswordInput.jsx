@@ -1,11 +1,8 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import styled from "styled-components";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
 import useArraySetState from "../useArraySetState.jsx";
-import useValidatedUpdate from "../useValidatedUpdate.jsx";
-import { cardInfoValidations } from "../cardInfoValidations.js";
-import { Hash } from "../passwordHash.js";
 
 const StyledInputField = styled.div`
   display: flex;
@@ -18,7 +15,12 @@ const StyledInputField = styled.div`
 const StyledLabel = styled.label`
   font-size: 12px;
   line-height: 14px;
-  color: ${(props) => (props.isComplete ? "#04c09e" : "#525252")};
+  color: ${(props) =>
+    props.state === "error"
+      ? "#d82424"
+      : props.state === "complete"
+      ? "#04c09e"
+      : "#525252"};
   letter-spacing: -0.085em;
 
   display: flex;
@@ -47,49 +49,48 @@ const StyledInputContainer = styled.div`
   color: #04c09e;
 `;
 
-export default function CardPasswordInput({ password, setPassword }) {
-  const setPasswordArray = useArraySetState(setPassword);
-  const setHashedPasswordArray = useCallback(
-    (value, order) => {
-      setPasswordArray(Hash.encode(value), order);
-    },
-    [setPasswordArray]
-  );
-  const [handlePasswordUpdate, errorMessage, resetError] = useValidatedUpdate(
-    cardInfoValidations["password"],
-    setHashedPasswordArray
-  );
+export default function CardPasswordInput() {
+  const [isInvalid, setInvalid] = useState(false);
+  const [inputLength, setInputLength] = useState([0, 0]);
+  const setInputLengthArray = useArraySetState(setInputLength);
+
+  const handleInputChange = (e, order) => {
+    setInvalid(false);
+    setInputLengthArray(e.target.value.length, order);
+  };
+
+  const triggerInvalid = useCallback(() => setInvalid(true), []);
 
   return (
     <StyledInputField>
       <StyledLabel
-        errorMessage={errorMessage}
-        isComplete={
-          password.join("").length === CARD_INFO_RULES.PASSWORD_LENGTH
+        isInvalid={isInvalid}
+        state={
+          isInvalid
+            ? "error"
+            : inputLength[0] + inputLength[1] ===
+              CARD_INFO_RULES.PASSWORD_LENGTH
+            ? "complete"
+            : "default"
         }
       >
         카드 비밀번호 앞 두 자리
-        <span className="error-message">{errorMessage}</span>
       </StyledLabel>
       <StyledInputContainer>
         {Array.from({ length: CARD_INFO_RULES.PASSWORD_LENGTH }).map(
           (_, index) => (
-            <StyledInputWrapper
-              key={index}
-              width={"45px"}
-              hasError={errorMessage !== ""}
-            >
+            <StyledInputWrapper key={index} width={"45px"} hasError={isInvalid}>
               <Input
                 type={"password"}
-                value={password[index]}
                 placeholder={CREATE_MASKED_CHARACTERS(1)}
                 name={"password"}
                 maxLength={1}
                 required
                 width={"full"}
-                isComplete={password[0].length === 1}
-                onChange={(e) => handlePasswordUpdate(e, index)}
-                onBlur={resetError}
+                isComplete={inputLength[index] === 1}
+                onChange={(e) => handleInputChange(e, index)}
+                onInvalid={triggerInvalid}
+                pattern={"^[0-9]+$"}
               />
             </StyledInputWrapper>
           )

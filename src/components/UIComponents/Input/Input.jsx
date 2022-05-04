@@ -41,6 +41,10 @@ export const StyledInput = styled.input`
     font-size: 14px;
     color: #acacac;
   }
+
+  &:invalid {
+    color: #d82424;
+  }
 `;
 
 export default function Input(props) {

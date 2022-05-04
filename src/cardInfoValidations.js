@@ -1,15 +1,13 @@
-import { Hash } from "./passwordHash";
-
 const trimStartZeroPad = (value) => {
   return value.length > 1 && value.startsWith("0") ? value.slice(1) : value;
 };
 
 export const cardInfoValidations = {
-  cardNumber: {
+  "card-number": {
     testFunc: (value) => /^\d{0,4}$/.test(value),
     errorMessage: "16자 길이의 숫자만 입력해주세요.",
   },
-  expireDate: {
+  "expire-date": {
     testFunc: (value, order) => {
       const parsedValue = trimStartZeroPad(value);
 
@@ -21,18 +19,13 @@ export const cardInfoValidations = {
     },
     errorMessage: "유효한 날짜를 입력해주세요.",
   },
-  holderName: {
+  "holder-name": {
     testFunc: (value) => /^[a-z]{0,30}$/i.test(value),
     errorMessage: "30자 이내의 영문만 입력해주세요.",
   },
-  securityCode: {
+  "security-code": {
     testFunc: (value) => {
-      const decodedValue = [...value].reduce(
-        (string, digit) => `${string}${Hash.decode(digit)}`,
-        ""
-      );
-
-      return /^\d{0,3}$/.test(decodedValue);
+      return /^\d{0,3}$/.test(value);
     },
     errorMessage: "3자 길이의 숫자만 입력해주세요.",
   },

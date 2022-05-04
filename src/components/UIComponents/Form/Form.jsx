@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { cardInfoValidations } from "../../../cardInfoValidations.js";
 
 const StyledCardInfoForm = styled.form`
   display: flex;
@@ -41,10 +42,26 @@ export default function Form({ children }) {
     focusFormInput(formInputList, target, 1);
   };
 
+  const handleFormValidation = ({ target }) => {
+    if (target.validity.patternMismatch) {
+      const message = cardInfoValidations[target.name].errorMessage;
+      target.setCustomValidity(message);
+    } else {
+      target.setCustomValidity("");
+    }
+
+    target.reportValidity();
+  };
+
+  const handleFormChange = (e) => {
+    handleNextFocus(e);
+    handleFormValidation(e);
+  };
+
   return (
     <StyledCardInfoForm
       autoComplete="off"
-      onChange={handleNextFocus}
+      onChange={handleFormChange}
       onKeyDown={handlePrevFocus}
     >
       {children}

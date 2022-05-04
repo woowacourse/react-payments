@@ -4,9 +4,6 @@ import InputField from "./UIComponents/InputField/InputField.jsx";
 import styled from "styled-components";
 import HelpIconImage from "../assets/images/questionMark.svg";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
-import useValidatedUpdate from "../useValidatedUpdate.jsx";
-import { cardInfoValidations } from "../cardInfoValidations.js";
-import { Hash } from "../passwordHash.js";
 
 const StyledIconContainer = styled.div`
   position: relative;
@@ -57,44 +54,34 @@ function HelpIcon({ description }) {
 const SECURITY_CODE_DESCRIPTION =
   "CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.";
 
-export default function CardSecurityCodeInput({
-  securityCode,
-  setSecurityCode,
-}) {
-  const setHashSecurityCode = (value) => {
-    setSecurityCode(
-      value.length !== 0
-        ? `${value.slice(0, -1)}${Hash.encode(value[value.length - 1])}`
-        : ""
-    );
+export default function CardSecurityCodeInput() {
+  const [isInvalid, setInvalid] = useState(false);
+  const [inputLength, setInputLength] = useState(0);
+
+  const handleInputChange = (e) => {
+    setInvalid(false);
+    setInputLength(e.target.value.length);
   };
-  const [handleSecurityCodeUpdate, errorMessage, resetError] =
-    useValidatedUpdate(
-      cardInfoValidations["securityCode"],
-      setHashSecurityCode
-    );
 
   return (
     <InputField
       labelText={"보안 코드(CVC/CVV)"}
       wrapperWidth={"xs"}
-      errorMessage={errorMessage}
-      isComplete={securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
+      isInvalid={isInvalid}
+      isComplete={inputLength === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
       OptionalComponent={<HelpIcon description={SECURITY_CODE_DESCRIPTION} />}
     >
       <Input
         type={"password"}
-        value={securityCode}
         placeholder={CREATE_MASKED_CHARACTERS(3)}
         name={"security-code"}
         maxLength={3}
         required
         width={"full"}
-        isComplete={
-          securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
-        }
-        onChange={handleSecurityCodeUpdate}
-        onBlur={resetError}
+        isComplete={inputLength === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
+        pattern={"^[0-9]+$"}
+        onInvalid={() => setInvalid(true)}
+        onChange={handleInputChange}
       />
     </InputField>
   );

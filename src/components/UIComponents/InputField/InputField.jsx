@@ -19,7 +19,12 @@ const StyledInputField = styled.div`
 const StyledLabel = styled.label`
   font-size: 12px;
   line-height: 14px;
-  color: ${(props) => (props.isComplete ? "#04c09e" : "#525252")};
+  color: ${(props) =>
+    props.state === "error"
+      ? "#d82424"
+      : props.state === "complete"
+      ? "#04c09e"
+      : "#525252"};
   letter-spacing: -0.085em;
 
   display: flex;
@@ -38,7 +43,7 @@ const StyledInputWrapper = styled.div`
   width: ${(props) => width[props.width]};
   padding: 12px;
 
-  box-shadow: ${(props) => props.hasError && "inset 0 0 0 1px #d82424"};
+  box-shadow: ${(props) => props.isInvalid && "inset 0 0 0 1px #d82424"};
 `;
 
 const StyledInputContainer = styled.div`
@@ -55,10 +60,13 @@ export default function InputField({
   horizontalAlign,
   isComplete,
   errorMessage,
+  isInvalid,
 }) {
   return (
     <StyledInputField>
-      <StyledLabel isComplete={isComplete}>
+      <StyledLabel
+        state={isInvalid ? "error" : isComplete ? "complete" : "default"}
+      >
         {labelText}
         <span className="error-message">{errorMessage}</span>
       </StyledLabel>
@@ -66,7 +74,7 @@ export default function InputField({
         <StyledInputWrapper
           width={wrapperWidth}
           align={horizontalAlign}
-          hasError={errorMessage !== ""}
+          isInvalid={isInvalid}
         >
           {children}
         </StyledInputWrapper>
