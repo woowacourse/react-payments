@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types'
 
-import Form from 'components/common/Form'
+import Field from 'components/common/Field'
 import { OWNER } from 'constant'
 import { isInvalidOwner } from 'validation'
 
-function OwnerForm({ owner, setOwner }) {
+function OwnerField({ owner, setOwner }) {
   const handleOwnerChange = ({ target: { value } }) => {
     if (isInvalidOwner(value)) return
 
-    setOwner(value)
+    setOwner(value.toUpperCase())
   }
 
   return (
-    <Form
+    <Field
       label="카드 소유자 이름 (선택)"
       countHelper={OWNER.MAX_LENGTH}
       inputInfo={[
@@ -28,9 +28,9 @@ function OwnerForm({ owner, setOwner }) {
   )
 }
 
-OwnerForm.propTypes = {
+OwnerField.propTypes = {
   owner: PropTypes.string,
   setOwner: PropTypes.func,
 }
 
-export default OwnerForm
+export default OwnerField

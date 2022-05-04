@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import OwnerForm from 'components/OwnerForm'
+import OwnerField from 'components/OwnerField'
 
 const Template = () => {
   const [value, setValue] = useState('')
 
-  return <OwnerForm owner={value} setOwner={setValue} />
+  return <OwnerField owner={value} setOwner={setValue} />
 }
 
 export default {
-  title: 'OwnerForm',
-  component: OwnerForm,
+  title: 'OwnerField',
+  component: OwnerField,
 }
 
 export const DueDate = Template.bind({})

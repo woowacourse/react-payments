@@ -8,7 +8,8 @@ const isInvalidCardNumber = (value) =>
 const isInvalidDueDate = (value) =>
   value.length > DUE_DATE.UNIT_LENGTH || isNumber(value)
 
-const isInvalidOwner = (value) => value.length > OWNER.MAX_LENGTH
+const isInvalidOwner = (value) =>
+  value.length > OWNER.MAX_LENGTH || /[^a-zA-Zㄱ-ㅎ|ㅏ-ㅣ|가-힣\s]/.test(value)
 
 const isInvalidCVC = (value) =>
   value.length > CVC.UNIT_LENGTH || isNumber(value)

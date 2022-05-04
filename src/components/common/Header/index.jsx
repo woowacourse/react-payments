@@ -2,7 +2,7 @@ import { HeaderWrapper } from 'components/common/Header/style'
 import Button from 'components/common/Button'
 import { ReactComponent as Arrow } from 'assets/arrow.svg'
 
-function Header({ backButton, headerText }) {
+function Header({ backButton, children }) {
   return (
     <HeaderWrapper>
       {backButton && (
@@ -10,7 +10,7 @@ function Header({ backButton, headerText }) {
           <Arrow />
         </Button>
       )}
-      <h2>{headerText}</h2>
+      <h2>{children}</h2>
     </HeaderWrapper>
   )
 }

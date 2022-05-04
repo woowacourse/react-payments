@@ -4,15 +4,20 @@ import Card from 'components/common/Card'
 import Button from 'components/common/Button'
 import Header from 'components/common/Header'
 
-import { PageWrapper, CardWrapper, FooterWrapper } from 'pages/AddPage/style'
+import {
+  PageWrapper,
+  CardWrapper,
+  FooterWrapper,
+  FormWrapper,
+} from 'pages/AddPage/style'
 
 import { CARD_NUMBER, DUE_DATE, CVC, COLORS } from 'constant'
 
-import CardNumberForm from 'components/CardNumberForm'
-import DueDateForm from 'components/DueDateForm'
-import OwnerForm from 'components/OwnerForm'
-import CVCForm from 'components/CVCForm'
-import PasswordForm from 'components/PasswordForm'
+import CardNumberField from 'components/CardNumberField'
+import DueDateField from 'components/DueDateField'
+import OwnerField from 'components/OwnerField'
+import CVCField from 'components/CVCField'
+import PasswordField from 'components/PasswordField'
 
 function AddPage() {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', ''])
@@ -23,11 +28,11 @@ function AddPage() {
     firstPassword: '',
     secondPassword: '',
   })
-  const [isFormFulfilled, setIsFormFulfilled] = useState(false)
+  const [isFieldFulfilled, setIsFieldFulfilled] = useState(false)
   const [error, setError] = useState({ dueMonth: false, dueYear: false })
 
   useEffect(() => {
-    setIsFormFulfilled(
+    setIsFieldFulfilled(
       cardNumbers.join('').length === CARD_NUMBER.UNIT_LENGTH * 4 &&
         dueDate.month.length === DUE_DATE.UNIT_LENGTH &&
         dueDate.year.length === DUE_DATE.UNIT_LENGTH &&
@@ -37,7 +42,8 @@ function AddPage() {
     )
   }, [cardNumbers, dueDate, owner, cvc, password])
 
-  const handleSubmitChange = () => {
+  const handleSubmitChange = (e) => {
+    e.preventDefault()
     if (error.dueMonth || error.dueYear) {
       alert('만료일을 확인해주세요')
       return
@@ -47,7 +53,7 @@ function AddPage() {
 
   return (
     <PageWrapper>
-      <Header backButton headerText={'카드 추가'} />
+      <Header backButton>카드 추가</Header>
       <CardWrapper>
         <Card
           size="small"
@@ -58,26 +64,28 @@ function AddPage() {
           dueYear={dueDate.year || 'YY'}
         />
       </CardWrapper>
-      <CardNumberForm
-        cardNumbers={cardNumbers}
-        setCardNumbers={setCardNumbers}
-      />
-      <DueDateForm
-        dueDate={dueDate}
-        setDueDate={setDueDate}
-        error={error}
-        setError={setError}
-      />
-      <OwnerForm owner={owner} setOwner={setOwner} />
-      <CVCForm cvc={cvc} setCvc={setCvc} />
-      <PasswordForm password={password} setPassword={setPassword} />
-      <FooterWrapper>
-        {isFormFulfilled && (
-          <Button color={COLORS.MINT} onClick={handleSubmitChange}>
-            다음
-          </Button>
-        )}
-      </FooterWrapper>
+      <FormWrapper onSubmit={handleSubmitChange}>
+        <CardNumberField
+          cardNumbers={cardNumbers}
+          setCardNumbers={setCardNumbers}
+        />
+        <DueDateField
+          dueDate={dueDate}
+          setDueDate={setDueDate}
+          error={error}
+          setError={setError}
+        />
+        <OwnerField owner={owner} setOwner={setOwner} />
+        <CVCField cvc={cvc} setCvc={setCvc} />
+        <PasswordField password={password} setPassword={setPassword} />
+        <FooterWrapper>
+          {isFieldFulfilled && (
+            <Button type={'submit'} color={COLORS.MINT}>
+              다음
+            </Button>
+          )}
+        </FooterWrapper>
+      </FormWrapper>
     </PageWrapper>
   )
 }

@@ -6,12 +6,12 @@ import { ReactComponent as QuestionMark } from 'assets/questionMark.svg'
 
 import {
   Label,
-  FormWrapper,
+  FieldWrapper,
   HelpTextWrapper,
   InputHelperWrapper,
-} from 'components/common/Form/style'
+} from 'components/common/Field/style'
 
-function Form({
+function Field({
   label,
   background,
   border,
@@ -29,7 +29,7 @@ function Form({
   }
 
   return (
-    <FormWrapper>
+    <FieldWrapper>
       <Label>
         <label>{label}</label>
         {countHelper && (
@@ -55,13 +55,13 @@ function Form({
         )}
         {mouseHover && <HelpTextWrapper>{helpText}</HelpTextWrapper>}
       </InputHelperWrapper>
-    </FormWrapper>
+    </FieldWrapper>
   )
 }
 
-Form.propTypes = {
+Field.propTypes = {
   /**
-   * form label 문구
+   * Field label 문구
    */
   label: PropTypes.string,
   /**
@@ -92,4 +92,4 @@ Form.propTypes = {
   helpText: PropTypes.string,
 }
 
-export default Form
+export default Field

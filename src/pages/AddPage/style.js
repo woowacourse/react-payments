@@ -19,4 +19,9 @@ const FooterWrapper = styled.div`
   justify-content: flex-end;
 `
 
-export { PageWrapper, CardWrapper, FooterWrapper }
+const FormWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+`
+
+export { PageWrapper, CardWrapper, FooterWrapper, FormWrapper }

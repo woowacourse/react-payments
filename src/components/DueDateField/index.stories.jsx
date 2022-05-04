@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import DueDateForm from 'components/DueDateForm'
+import DueDateField from 'components/DueDateField'
 
 const Template = () => {
   const [value, setValue] = useState({ month: '', year: '' })
   const [error, setError] = useState({ dueMonth: false, dueYear: false })
 
   return (
-    <DueDateForm
+    <DueDateField
       dueDate={value}
       setDueDate={setValue}
       error={error}
@@ -16,8 +16,8 @@ const Template = () => {
 }
 
 export default {
-  title: 'DueDateForm',
-  component: DueDateForm,
+  title: 'DueDateField',
+  component: DueDateField,
 }
 
 export const DueDate = Template.bind({})

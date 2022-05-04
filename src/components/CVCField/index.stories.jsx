@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import CVCForm from 'components/CVCForm'
+import CVCField from 'components/CVCField'
 
 const Template = () => {
   const [value, setValue] = useState('')
 
-  return <CVCForm cvc={value} setCvc={setValue} />
+  return <CVCField cvc={value} setCvc={setValue} />
 }
 
 export default {
-  title: 'CVCForm',
-  component: CVCForm,
+  title: 'CVCField',
+  component: CVCField,
 }
 
 export const CVC = Template.bind({})

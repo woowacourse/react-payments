@@ -1,11 +1,11 @@
 import { useRef } from 'react'
 import PropTypes from 'prop-types'
 
-import Form from 'components/common/Form'
+import Field from 'components/common/Field'
 import { isInvalidDueDate } from 'validation'
 import { MONTH, DUE_DATE } from 'constant'
 
-function DueDateForm({ dueDate, setDueDate, error, setError }) {
+function DueDateField({ dueDate, setDueDate, error, setError }) {
   const dueYearInputRef = useRef()
 
   const handleDueDateChange = ({ target: { value } }, key) => {
@@ -38,7 +38,7 @@ function DueDateForm({ dueDate, setDueDate, error, setError }) {
   }
 
   return (
-    <Form
+    <Field
       label="만료일"
       size={50}
       inputInfo={[
@@ -64,9 +64,9 @@ function DueDateForm({ dueDate, setDueDate, error, setError }) {
   )
 }
 
-DueDateForm.propTypes = {
+DueDateField.propTypes = {
   dueDate: PropTypes.object,
   setDueDate: PropTypes.func,
 }
 
-export default DueDateForm
+export default DueDateField

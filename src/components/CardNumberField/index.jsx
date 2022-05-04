@@ -1,11 +1,11 @@
 import { useRef } from 'react'
-import Form from 'components/common/Form'
+import Field from 'components/common/Field'
 import PropTypes from 'prop-types'
 
 import { isInvalidCardNumber } from 'validation'
 import { CARD_NUMBER } from 'constant'
 
-function CardNumberForm({ cardNumbers, setCardNumbers }) {
+function CardNumberField({ cardNumbers, setCardNumbers }) {
   const firstCardNumberInputRef = useRef()
   const secondCardNumberInputRef = useRef()
   const thirdCardNumberInputRef = useRef()
@@ -37,7 +37,7 @@ function CardNumberForm({ cardNumbers, setCardNumbers }) {
   }
 
   return (
-    <Form
+    <Field
       label="카드 번호"
       inputInfo={[
         {
@@ -70,9 +70,9 @@ function CardNumberForm({ cardNumbers, setCardNumbers }) {
   )
 }
 
-CardNumberForm.propTypes = {
+CardNumberField.propTypes = {
   cardNumbers: PropTypes.array,
   setCardNumbers: PropTypes.func,
 }
 
-export default CardNumberForm
+export default CardNumberField

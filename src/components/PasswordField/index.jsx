@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import InputBox from 'components/common/InputBox'
 import { isInvalidPassword } from 'validation'
 
-import { FormWrapper, Label } from 'components/common/Form/style'
-import { PasswordWrapper, Dot } from 'components/PasswordForm/style'
+import { FieldWrapper, Label } from 'components/common/Field/style'
+import { PasswordWrapper, Dot } from 'components/PasswordField/style'
 
-function PasswordForm({ password, setPassword }) {
+function PasswordField({ password, setPassword }) {
   const secondPasswordInputRef = useRef()
 
   const handlePasswordChange = ({ target: { value } }, key) => {
@@ -25,7 +25,7 @@ function PasswordForm({ password, setPassword }) {
   }
 
   return (
-    <FormWrapper>
+    <FieldWrapper>
       <Label>
         <label>카드 비밀번호</label>
       </Label>
@@ -58,13 +58,13 @@ function PasswordForm({ password, setPassword }) {
         <Dot>•</Dot>
         <Dot>•</Dot>
       </PasswordWrapper>
-    </FormWrapper>
+    </FieldWrapper>
   )
 }
 
-PasswordForm.propTypes = {
-  password: PropTypes.string,
+PasswordField.propTypes = {
+  password: PropTypes.object,
   setPassword: PropTypes.func,
 }
 
-export default PasswordForm
+export default PasswordField

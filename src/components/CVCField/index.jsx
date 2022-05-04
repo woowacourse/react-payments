@@ -1,8 +1,8 @@
-import Form from 'components/common/Form'
+import Field from 'components/common/Field'
 import { isInvalidCVC } from 'validation'
 import PropTypes from 'prop-types'
 
-function CVCForm({ cvc, setCvc }) {
+function CVCField({ cvc, setCvc }) {
   const handleCvc = ({ target: { value } }) => {
     if (isInvalidCVC(value)) return
 
@@ -10,7 +10,7 @@ function CVCForm({ cvc, setCvc }) {
   }
 
   return (
-    <Form
+    <Field
       label="보안 코드(CVC/CVV)"
       size={30}
       inputInfo={[{ type: 'password', id: 'cvc', value: cvc }]}
@@ -20,9 +20,9 @@ function CVCForm({ cvc, setCvc }) {
   )
 }
 
-CVCForm.propTypes = {
+CVCField.propTypes = {
   cvc: PropTypes.string,
   setCvc: PropTypes.func,
 }
 
-export default CVCForm
+export default CVCField

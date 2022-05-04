@@ -16,7 +16,7 @@ const HelpTextWrapper = styled.div`
   font-size: 12px;
 `
 
-const FormWrapper = styled.div`
+const FieldWrapper = styled.div`
   margin-bottom: 15px;
 
   & label {
@@ -33,4 +33,4 @@ const InputHelperWrapper = styled.div`
   gap: 15px;
 `
 
-export { Label, HelpTextWrapper, FormWrapper, InputHelperWrapper }
+export { Label, HelpTextWrapper, FieldWrapper, InputHelperWrapper }
