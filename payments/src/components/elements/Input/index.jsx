@@ -12,6 +12,8 @@ export const Input = forwardRef((props, ref) => {
       placeholder={placeholder}
       onKeyDown={onKeyDown}
       className={className || 'input__contents'}
+      name={props.name}
+      maxLength={otherProps.maxLength}
     />
   );
 });

@@ -2,7 +2,7 @@ import { ERROR_MESSAGE } from '../const';
 
 const useCardInputValidation = (state) => {
   const validateCardNum = ({ cardNumber }) => {
-    cardNumber.forEach((input, idx) => {
+    cardNumber.forEach((input) => {
       if (input.length !== 4) {
         throw new Error(ERROR_MESSAGE.SHORT_CARD_NUMBER);
       }

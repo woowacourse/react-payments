@@ -10,9 +10,7 @@ const NUM_OF_INPUT = 4;
 const BACKSPACE_KEY_CODE = 8;
 
 const CardNumberInput = ({ state, updateForm }) => {
-  const { itemRef, controllInput, autoFocusBackward, blockCharacter } = useControllInput({
-    maxLength: INPUT_LENGTH,
-  });
+  const { itemRef, autoFocusForward, autoFocusBackward, blockCharacter } = useControllInput();
 
   const onKeyDown = useCallback((e) => {
     if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === '') {
@@ -28,8 +26,8 @@ const CardNumberInput = ({ state, updateForm }) => {
           <Fragment key={idx}>
             <Input
               onChange={({ target }) => {
+                autoFocusForward(target);
                 blockCharacter(target);
-                controllInput(target);
                 updateForm({
                   type: 'cardNumber',
                   payload: { value: target.value, index: idx },
@@ -39,6 +37,7 @@ const CardNumberInput = ({ state, updateForm }) => {
               value={state[idx]}
               ref={(el) => (itemRef.current[idx] = el)}
               type={idx > 1 ? 'password' : 'text'}
+              maxLength={INPUT_LENGTH}
             />
             {idx === NUM_OF_INPUT - 1 ? '' : '-'}
           </Fragment>

@@ -1,21 +1,16 @@
 import { useRef } from 'react';
 
-const useControllInput = ({ maxLength }) => {
+const useControllInput = () => {
   const itemRef = useRef([]);
 
   const controllInput = (target) => {
-    if (target.value.length >= maxLength) {
-      limitInputLength(target);
+    if (target.value.length >= target.maxLength) {
       autoFocusForward(target);
     }
   };
 
   const blockCharacter = (target) => {
     target.value = target.value.replace(/[^\d]/g, '').replace('.', '');
-  };
-
-  const limitInputLength = (target) => {
-    target.value = target.value.substring(0, maxLength);
   };
 
   const limitExceptUpperCase = (target) => {
@@ -26,8 +21,10 @@ const useControllInput = ({ maxLength }) => {
   };
 
   const autoFocusForward = (target) => {
-    const currentIndex = itemRef.current.indexOf(target);
-    itemRef.current[Math.min(currentIndex + 1, itemRef.current.length - 1)].focus();
+    if (target.value.length >= target.maxLength) {
+      const currentIndex = itemRef.current.indexOf(target);
+      itemRef.current[Math.min(currentIndex + 1, itemRef.current.length - 1)].focus();
+    }
   };
 
   const autoFocusBackward = (target) => {
@@ -38,6 +35,7 @@ const useControllInput = ({ maxLength }) => {
   return {
     itemRef,
     controllInput,
+    autoFocusForward,
     autoFocusBackward,
     blockCharacter,
     limitExceptUpperCase,
