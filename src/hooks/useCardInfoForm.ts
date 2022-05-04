@@ -13,7 +13,7 @@ function useCardInfoForm() {
     e.preventDefault();
 
     if (cardInfo.id) {
-      await editCard(cardInfo.id);
+      await editCard(cardInfo.id, { cardName: cardInfo.cardName });
     } else {
       await addCard(cardInfo);
     }
