@@ -1,10 +1,10 @@
 import React from 'react';
-import { useAppDispatch, useAppState } from '../../../hooks/hooks';
-import { createAction } from '../../../context/Provider';
-import { ActionType } from '../../../types';
-import { isNum, removeWhiteSpaces } from '../../../utils';
-import CardFormInput from '../CardFormInput';
 import { css } from '@emotion/react';
+import { useAppDispatch, useAppState } from 'hooks/hooks';
+import { createAction } from 'context/Provider';
+import { ActionType } from 'types';
+import { isNum, removeWhiteSpaces } from 'utils';
+import CardFormInput from 'components/card/CardFormInput';
 
 const style = css({
   height: '45px',

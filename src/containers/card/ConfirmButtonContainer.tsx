@@ -1,15 +1,18 @@
 import React from 'react';
-import { INPUT } from '../../../constants';
-import { useAppState } from '../../../hooks/hooks';
-import Card from './Card';
+import ConfirmButton from 'components/card/ConfirmButton';
+import { INPUT } from '../../constants';
+import { useAppState } from 'hooks/hooks';
 
-function CardContainer() {
+type Props = {
+  children: React.ReactNode;
+};
+
+function ConfirmButtonContainer({ children }: Props) {
   const {
     firstInputCardNumber,
     secondInputCardNumber,
     thirdInputCardNumber,
     fourthInputCardNumber,
-    name,
     expiredPeriodMonth,
     expiredPeriodYear,
     cvc,
@@ -17,7 +20,8 @@ function CardContainer() {
     secondPassword,
   } = useAppState();
 
-  const isActive = !!(
+  let _disabled = true;
+  if (
     firstInputCardNumber.length === INPUT.MAX_CARD_NUMBER_PART_LENGTH &&
     secondInputCardNumber.length === INPUT.MAX_CARD_NUMBER_PART_LENGTH &&
     thirdInputCardNumber.length === INPUT.MAX_CARD_NUMBER_PART_LENGTH &&
@@ -27,22 +31,20 @@ function CardContainer() {
     cvc.length === INPUT.MAX_CVC_LENGTH &&
     firstPassword.length === INPUT.MAX_FIRST_PASSWORD_LENGTH &&
     secondPassword.length === INPUT.MAX_SECOND_PASSWORD_LENGTH
-  );
+  ) {
+    _disabled = false;
+  }
+
+  const handleSubmitCard = (event: React.MouseEvent) => {
+    event.preventDefault();
+    console.log('카드 등록완료!');
+  };
 
   return (
-    <>
-      <Card
-        isActive={isActive}
-        firstInputCardNumber={firstInputCardNumber}
-        secondInputCardNumber={secondInputCardNumber}
-        thirdInputCardNumber={thirdInputCardNumber}
-        fourthInputCardNumber={fourthInputCardNumber}
-        name={name}
-        expiredPeriodMonth={expiredPeriodMonth}
-        expiredPeriodYear={expiredPeriodYear}
-      />
-    </>
+    <ConfirmButton type="submit" onClick={handleSubmitCard} disabled={_disabled}>
+      {children}
+    </ConfirmButton>
   );
 }
 
-export default CardContainer;
+export default ConfirmButtonContainer;

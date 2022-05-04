@@ -1,8 +1,8 @@
 import React from 'react';
-import { FieldHead, FieldSet, FieldBody } from '../templates/Fieldset';
-import CardNumberInputContainer from '../atoms/card-number/CardNumberInputContainer';
-import CardFormLabel from '../atoms/CardFormLabel';
 import { css } from '@emotion/react';
+import { FieldBody, FieldHead, FieldSet } from './Fieldset';
+import CardFormLabel from 'components/card/CardFormLabel';
+import CardNumberInputContainer from 'containers/card/CardNumberInputContainer';
 
 const headStyle = css({
   marginBottom: '8px',

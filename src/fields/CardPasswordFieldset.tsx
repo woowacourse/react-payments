@@ -1,7 +1,7 @@
 import React from 'react';
-import CardPasswordInputContainer from '../atoms/card-password/CardPasswordInputContainer';
-import CardFormLabel from '../atoms/CardFormLabel';
-import { FieldHead, FieldSet, FieldBody } from '../templates/Fieldset';
+import CardFormLabel from 'components/card/CardFormLabel';
+import CardPasswordInputContainer from 'containers/card/CardPasswordInputContainer';
+import { FieldBody, FieldHead, FieldSet } from './Fieldset';
 
 function CardPasswordFieldset() {
   return (

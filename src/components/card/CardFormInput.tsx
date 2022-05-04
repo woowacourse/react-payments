@@ -1,6 +1,7 @@
 import React, { forwardRef } from 'react';
 
 type Props = {
+  className?: string;
   type?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
@@ -10,17 +11,18 @@ type Props = {
 };
 
 const CardFormInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { onChange, value, type, placeholder, disabled, style } = props;
+  const { className, type, onChange, value, placeholder, disabled, style } = props;
 
   return (
     <>
       <input
+        className={className}
         type={type}
         onChange={onChange}
         value={value}
         placeholder={placeholder}
-        css={style}
         {...(disabled ? { disabled: true } : '')}
+        css={style}
         ref={ref}
       />
     </>

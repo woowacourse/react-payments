@@ -1,8 +1,8 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import CVCInputContainer from '../atoms/card-cvc/CVCInputContainer';
-import CardFormLabel from '../atoms/CardFormLabel';
-import { FieldHead, FieldSet, FieldBody } from '../templates/Fieldset';
+import { FieldBody, FieldHead, FieldSet } from './Fieldset';
+import CardFormLabel from 'components/card/CardFormLabel';
+import CVCInputContainer from 'containers/card/CVCInputContainer';
 
 const bodyStyle = css({
   display: 'flex',

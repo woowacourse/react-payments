@@ -1,7 +1,7 @@
-import { css } from '@emotion/react';
 import React from 'react';
-import BackButton from '../atoms/BackButton';
-import PageTitle from '../atoms/PageTitle';
+import { css } from '@emotion/react';
+import BackButton from 'components/navigater/BackButton';
+import PageTitle from 'components/navigater/PageTitle';
 
 const style = css({
   display: 'flex',

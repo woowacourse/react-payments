@@ -1,10 +1,10 @@
-import { css } from '@emotion/react';
 import React from 'react';
-import { MAX_NAME_LENGTH } from '../../constants';
-import { useAppState } from '../../hooks/hooks';
-import CardOwnerNameInputContainer from '../atoms/card-owner/CardOwnerNameInputContainer';
-import CardFormLabel from '../atoms/CardFormLabel';
-import { FieldHead, FieldSet, FieldBody } from '../templates/Fieldset';
+import { css } from '@emotion/react';
+import { useAppState } from 'hooks/hooks';
+import { FieldBody, FieldHead, FieldSet } from './Fieldset';
+import CardFormLabel from 'components/card/CardFormLabel';
+import { MAX_NAME_LENGTH } from '../constants';
+import CardOwnerNameInputContainer from 'containers/card/CardOwnerNameInputContainer';
 
 const headStyle = css({
   display: 'flex',

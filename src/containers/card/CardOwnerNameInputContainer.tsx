@@ -1,11 +1,11 @@
 import React from 'react';
-import { useAppDispatch, useAppState } from '../../../hooks/hooks';
-import { ActionType } from '../../../types';
-import { createAction } from '../../../context/Provider';
-import { isEnglish } from '../../../utils';
-import { MAX_NAME_LENGTH } from '../../../constants';
-import CardFormInput from '../CardFormInput';
 import { css } from '@emotion/react';
+import { useAppDispatch, useAppState } from 'hooks/hooks';
+import { MAX_NAME_LENGTH } from '../../constants';
+import { isEnglish } from 'utils';
+import { createAction } from 'context/Provider';
+import { ActionType } from 'types';
+import CardFormInput from 'components/card/CardFormInput';
 
 const style = css({
   height: '45px',

@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
-import { useAppDispatch, useAppState } from '../../../hooks/hooks';
-import { ActionType } from '../../../types';
-import { isNum, removeWhiteSpaces } from '../../../utils';
-import { createAction } from '../../../context/Provider';
-import CardFormInput from '../CardFormInput';
 import { css } from '@emotion/react';
+import { useAppDispatch, useAppState } from 'hooks/hooks';
+import { createAction } from 'context/Provider';
+import { ActionType } from 'types';
+import { isNum, removeWhiteSpaces } from 'utils';
+import CardFormInput from 'components/card/CardFormInput';
 
 const style = css({
   height: '47px',
@@ -98,6 +98,7 @@ function CardNumberInputContainer() {
   return (
     <>
       <CardFormInput
+        className="first-input-card-number"
         onChange={handleFirstInputCardNumber}
         value={firstInputCardNumber}
         placeholder="0000"

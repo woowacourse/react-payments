@@ -1,8 +1,8 @@
-import { css } from '@emotion/react';
 import React from 'react';
-import ExpiredPeriodInputContainer from '../atoms/card-expired-period/ExpiredPeriodInputContainer';
-import CardFormLabel from '../atoms/CardFormLabel';
-import { FieldHead, FieldSet, FieldBody } from '../templates/Fieldset';
+import { css } from '@emotion/react';
+import { FieldBody, FieldHead, FieldSet } from './Fieldset';
+import CardFormLabel from 'components/card/CardFormLabel';
+import ExpiredPeriodInputContainer from 'containers/card/ExpiredPeriodInputContainer';
 
 const headStyle = css({
   marginBottom: '3px',
