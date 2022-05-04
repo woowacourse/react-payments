@@ -1,6 +1,5 @@
 import { PATH } from "constant/path";
 import { CardInfoContext } from "contexts/CardInfoProvider";
-import { CardsContext } from "contexts/CardsProvider";
 import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { CardInfoValidationTarget } from "types/cardInfo";
@@ -13,8 +12,7 @@ import CardUserName from "./CardUserName";
 
 export default function CardInfoForm() {
   const navigate = useNavigate();
-  const { cardInfo, cardInfoValidation, resetCardInfo } = useContext(CardInfoContext);
-  const { addCard } = useContext(CardsContext);
+  const { cardInfoValidation } = useContext(CardInfoContext);
   const [isNextButtonShown, setIsNextButtonShown] = useState(true);
   const inputsRef = useRef<HTMLInputElement[]>(null);
   const formRef = useCallback((node: HTMLFormElement) => {
@@ -33,7 +31,6 @@ export default function CardInfoForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    addCard(cardInfo);
     if (window.confirm("카드를 등록하시겠습니까?")) {
       alert("카드 등록이 완료되었습니다.");
     }

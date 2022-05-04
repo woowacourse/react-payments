@@ -21,8 +21,23 @@ async function getCards(): Promise<CardInfo[]> {
   }
 }
 
+async function addCard(cardInfo: CardInfo) {
+  try {
+    await fetch(`${BASE_URL}/cards`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cardInfo),
+    });
+  } catch (error) {
+    console.log("error", error);
+  }
+}
+
 const API = {
   getCards,
+  addCard,
 };
 
 export default API;

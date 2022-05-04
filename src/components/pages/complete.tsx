@@ -1,17 +1,25 @@
+import API from "apis";
 import Card from "components/Card";
 import Input from "components/common/Input";
 import { PATH } from "constant/path";
 import { CardInfoContext } from "contexts/CardInfoProvider";
+import { CardsContext } from "contexts/CardsProvider";
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Complete() {
   const navigate = useNavigate();
   const { cardInfo, resetCardInfo, onChangeCardName } = useContext(CardInfoContext);
-  // 리셋 시키기
+  const { cards, setCards } = useContext(CardsContext);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const cardInfoWIthId = { ...cardInfo, id: cards.length + 1 };
+
+    await API.addCard(cardInfoWIthId);
+    setCards(cards => [...cards, cardInfoWIthId]);
+
     resetCardInfo();
     navigate(PATH.HOME);
   };
