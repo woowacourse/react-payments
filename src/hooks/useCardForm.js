@@ -115,7 +115,7 @@ const useCardForm = ({ cardFormSchema }) => {
   const getInputClassName = (fieldName, additionalClassName = '') =>
     `input-basic ${
       errors[fieldName]?.showError ? 'error' : ''
-    } ${additionalClassName}`;
+    } ${additionalClassName}`.trim();
 
   return {
     values,
