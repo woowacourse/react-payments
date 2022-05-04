@@ -1,12 +1,12 @@
-import CardAppPage from 'page/cardAdd';
+import { useRoutes } from 'react-router-dom';
 import Layout from 'components/common/Layout';
 
+import routes from 'routes';
+
 const App = () => {
-  return (
-    <Layout>
-      <CardAppPage />
-    </Layout>
-  );
+  const element = useRoutes(routes);
+
+  return <Layout>{element}</Layout>;
 };
 
 export default App;
