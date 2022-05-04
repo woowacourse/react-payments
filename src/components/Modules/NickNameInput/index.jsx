@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import Input from '../../Atoms/Input';
 
@@ -9,14 +8,7 @@ const InputWrapper = styled.div`
   line-height: 21px;
 `;
 
-function NickNameInput() {
-  const [nickName, setNickname] = useState('');
-  const [validation, setValidation] = useState(false);
-
-  const onNickNameChange = ({ target }) => {
-    console.log(target.value);
-  };
-
+function NickNameInput({ nickName, validation, onNickNameChange }) {
   return (
     <InputWrapper>
       <Input

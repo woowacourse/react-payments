@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Card from '../../components/Modules/Card';
 import CardNickNameForm from '../../components/Templates/CardNickNameForm';
+import { NickNameContextProvider } from '../../context/NickNameContext';
 
 const Page = styled.div`
   display: flex;
@@ -27,13 +28,15 @@ const CardSection = styled.div`
 
 function CardCompletePage() {
   return (
-    <Page>
-      <Title>카드등록이 완료되었습니다.</Title>
-      <CardSection>
-        <Card />
-      </CardSection>
-      <CardNickNameForm link="/react-payments/cardList" />
-    </Page>
+    <NickNameContextProvider>
+      <Page>
+        <Title>카드등록이 완료되었습니다.</Title>
+        <CardSection>
+          <Card />
+        </CardSection>
+        <CardNickNameForm />
+      </Page>
+    </NickNameContextProvider>
   );
 }
 
