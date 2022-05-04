@@ -24,7 +24,6 @@
       display: inline-block;
       margin: 0 10px;
       transform: scale(2) translateY(-5%);
-      //   transform: translateY(-10%);
     }
   }
   .button--container {
@@ -50,6 +49,18 @@
     }
     &:hover {
       opacity: 0.7;
+    }
+  }
+  animation: risingUp 0.2s linear;
+
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  @keyframes risingUp {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
     }
   }
 }

@@ -19,6 +19,9 @@
       margin: 0;
     }
   }
+  .card__container:hover {
+    transform: scale(1.2);
+  }
 
   .card-add__container {
     display: flex;
