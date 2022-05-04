@@ -1,9 +1,4 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
-
-import { CardNumberContext } from '../../../context/CardNumberContext';
-import { ExpiredDateContext } from '../../../context/ExpiredDateContext';
-import { CardOwnerContext } from '../../../context/CardOwnerContext';
 
 export const CardContainer = styled.div`
   display: flex;
