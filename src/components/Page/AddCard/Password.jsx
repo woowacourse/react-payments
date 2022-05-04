@@ -49,12 +49,12 @@ const Password = ({
   );
 };
 
-Password.propType = {
-  firstPassword: PropTypes.string,
-  secondPassword: PropTypes.string,
-  onChangeFirstPassword: PropTypes.func,
-  onChangeSecondPassword: PropTypes.func,
-  isError: PropTypes.bool,
+Password.propTypes = {
+  firstPassword: PropTypes.string.isRequired,
+  secondPassword: PropTypes.string.isRequired,
+  onChangeFirstPassword: PropTypes.func.isRequired,
+  onChangeSecondPassword: PropTypes.func.isRequired,
+  isError: PropTypes.bool.isRequired,
 };
 
 export default Password;

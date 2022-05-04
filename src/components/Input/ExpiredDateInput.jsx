@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Input from './index';
@@ -46,10 +47,10 @@ const ExpiredDateInput = ({
 };
 
 ExpiredDateInput.propTypes = {
-  expiredMonth: PropTypes.string,
-  expiredYear: PropTypes.string,
-  onChangeExpiredMonth: PropTypes.func,
-  onChangeExpiredYear: PropTypes.func,
+  expiredMonth: PropTypes.string.isRequired,
+  expiredYear: PropTypes.string.isRequired,
+  onChangeExpiredMonth: PropTypes.func.isRequired,
+  onChangeExpiredYear: PropTypes.func.isRequired,
 };
 
 export default ExpiredDateInput;

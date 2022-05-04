@@ -12,7 +12,7 @@ const SelectorWrapper = styled.div`
 `;
 
 const OptionWrapper = styled.div`
-  background-color: ${props => ColorType[props.color]};
+  background-color: ${(props) => ColorType[props.color]};
   width: 37px;
   height: 37px;
   border-radius: 50%;
@@ -33,9 +33,9 @@ const Selector = ({ color, name, onClick }) => {
 };
 
 Selector.propTypes = {
-  color: PropTypes.string,
-  name: PropTypes.string,
-  onClick: PropTypes.func,
+  color: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Selector;

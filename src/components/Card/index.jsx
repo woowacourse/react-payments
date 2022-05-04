@@ -24,7 +24,7 @@ const EmptyCard = styled.div`
   font-size: 30px;
   color: #575757;
 
-  background: ${props => ColorType[props.color]};
+  background: ${(props) => ColorType[props.color]};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
@@ -154,13 +154,12 @@ const Card = ({ name, cardInfo, expiredMonth, expiredYear, cardNumbers, onClick 
 };
 
 Card.propTypes = {
-  cardName: PropTypes.string,
-  name: PropTypes.string,
-  expiredDate: PropTypes.string,
-  firstCardNumber: PropTypes.string,
-  secondCardNumber: PropTypes.string,
-  thirdCardNumber: PropTypes.string,
-  fourthCardNumber: PropTypes.string,
+  cardInfo: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  expiredMonth: PropTypes.string.isRequired,
+  expiredYear: PropTypes.string.isRequired,
+  cardNumbers: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Card;

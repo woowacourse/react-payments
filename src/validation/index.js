@@ -1,30 +1,30 @@
 import { REG_EXP } from '../constant/index';
 
-export const checkNumberOnly = number => {
+export const checkNumberOnly = (number) => {
   return REG_EXP.NUMBER_ONLY.test(number);
 };
 
-export const checkCardNumber = cardNumber => {
+export const checkCardNumber = (cardNumber) => {
   return checkNumberOnly(cardNumber) && cardNumber.length === 4;
 };
 
-export const checkExpiredMonth = month => {
+export const checkExpiredMonth = (month) => {
   return checkNumberOnly(month) && Number(month) >= 1 && Number(month) <= 12;
 };
 
-export const checkExpiredYear = year => {
+export const checkExpiredYear = (year) => {
   const nowYear = String(new Date().getFullYear()).slice(2, 4);
   return checkNumberOnly(year) && year > nowYear;
 };
 
-export const checkOwnerName = name => {
+export const checkOwnerName = (name) => {
   return name.length === 0 || (name.length < 30 && REG_EXP.CHARACTER_ONLY.test(name));
 };
 
-export const checkSecureCode = secureCode => {
+export const checkSecureCode = (secureCode) => {
   return checkNumberOnly(secureCode) && secureCode.length === 3;
 };
 
-export const checkPassword = password => {
+export const checkPassword = (password) => {
   return checkNumberOnly(password) && password.length === 1;
 };

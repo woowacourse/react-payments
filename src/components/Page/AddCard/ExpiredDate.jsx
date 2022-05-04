@@ -28,10 +28,11 @@ const ExpiredDate = ({
 };
 
 ExpiredDate.propTypes = {
-  expiredYear: PropTypes.string,
-  onChangeExpiredMonth: PropTypes.func,
-  onChangeExpiredYear: PropTypes.func,
-  isError: PropTypes.bool,
+  expiredMonth: PropTypes.string.isRequired,
+  expiredYear: PropTypes.string.isRequired,
+  onChangeExpiredMonth: PropTypes.func.isRequired,
+  onChangeExpiredYear: PropTypes.func.isRequired,
+  isError: PropTypes.bool.isRequired,
 };
 
 export default ExpiredDate;

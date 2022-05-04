@@ -37,7 +37,7 @@ const Palette = ({ onClickCardSelector }) => {
       <SelectorContainer>
         {cardInfoList
           .filter((_, index) => index < 4)
-          .map(card => (
+          .map((card) => (
             <Selector
               key={card.id}
               color={card.color}
@@ -49,7 +49,7 @@ const Palette = ({ onClickCardSelector }) => {
       <SelectorContainer>
         {cardInfoList
           .filter((_, index) => index >= 4)
-          .map(card => (
+          .map((card) => (
             <Selector
               key={card.id}
               color={card.color}
@@ -63,7 +63,7 @@ const Palette = ({ onClickCardSelector }) => {
 };
 
 Palette.propTypes = {
-  onClickCardSelector: PropTypes.func,
+  onClickCardSelector: PropTypes.func.isRequired,
 };
 
 export default Palette;

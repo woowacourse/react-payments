@@ -24,8 +24,8 @@ const Modal = ({ children, onClickDimmed }) => {
 };
 
 Modal.propTypes = {
-  children: PropTypes.element,
-  onClickDimmed: PropTypes.func,
+  children: PropTypes.element.isRequired,
+  onClickDimmed: PropTypes.func.isRequired,
 };
 
 export default Modal;

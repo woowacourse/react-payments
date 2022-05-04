@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Input from './index';
@@ -41,10 +41,10 @@ const CardNumberInput = ({
     fourthCardNumberRef,
   ];
 
-  const onChangeCardNumber = e => {
+  const onChangeCardNumber = (e) => {
     if (e.target.value.length === 4) {
       const nextFocusIndex = cardRefList.findIndex(
-        cardElement => cardElement.current.value.length < 4,
+        (cardElement) => cardElement.current.value.length < 4,
       );
       setCurrentElementIndex(nextFocusIndex);
     }
@@ -62,7 +62,7 @@ const CardNumberInput = ({
       <Input
         scale="medium"
         value={firstCardNumber}
-        onChange={e => {
+        onChange={(e) => {
           onChangeFirstCardNumber(e);
           onChangeCardNumber(e);
         }}
@@ -73,7 +73,7 @@ const CardNumberInput = ({
       <Input
         scale="medium"
         value={secondCardNumber}
-        onChange={e => {
+        onChange={(e) => {
           onChangeSecondCardNumber(e);
           onChangeCardNumber(e);
         }}
@@ -85,7 +85,7 @@ const CardNumberInput = ({
         scale="medium"
         type="password"
         value={thirdCardNumber}
-        onChange={e => {
+        onChange={(e) => {
           onChangeThirdCardNumber(e);
           onChangeCardNumber(e);
         }}
@@ -97,7 +97,7 @@ const CardNumberInput = ({
         scale="medium"
         type="password"
         value={fourthCardNumber}
-        onChange={e => {
+        onChange={(e) => {
           onChangeFourthCardNumber(e);
           onChangeCardNumber(e);
         }}
@@ -109,14 +109,14 @@ const CardNumberInput = ({
 };
 
 CardNumberInput.propTypes = {
-  onChangeFirstCardNumber: PropTypes.func,
-  onChangeSecondCardNumber: PropTypes.func,
-  onChangeThirdCardNumber: PropTypes.func,
-  onChangeFourthCardNumber: PropTypes.func,
-  firstCardNumber: PropTypes.string,
-  secondCardNumber: PropTypes.string,
-  thirdCardNumber: PropTypes.string,
-  fourthCardNumber: PropTypes.string,
+  onChangeFirstCardNumber: PropTypes.func.isRequired,
+  onChangeSecondCardNumber: PropTypes.func.isRequired,
+  onChangeThirdCardNumber: PropTypes.func.isRequired,
+  onChangeFourthCardNumber: PropTypes.func.isRequired,
+  firstCardNumber: PropTypes.string.isRequired,
+  secondCardNumber: PropTypes.string.isRequired,
+  thirdCardNumber: PropTypes.string.isRequired,
+  fourthCardNumber: PropTypes.string.isRequired,
 };
 
 export default CardNumberInput;

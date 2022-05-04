@@ -123,7 +123,7 @@ const AddCardPage = () => {
     expiredYear,
   ]);
 
-  const onSubmitCardForm = e => {
+  const onSubmitCardForm = (e) => {
     e.preventDefault();
     alert('카드 등록이 완료되었습니다!❤️🧡💛💚💙💜');
   };
@@ -136,7 +136,7 @@ const AddCardPage = () => {
     setIsModalOpened(false);
   };
 
-  const onClickCardSelector = card => () => {
+  const onClickCardSelector = (card) => () => {
     setCardInfo(card);
   };
 

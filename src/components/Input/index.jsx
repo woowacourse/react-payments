@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const InputWrapper = styled.input`
   text-align: center;
-  width: ${props => InputScaleType[props.scale]}px;
+  width: ${(props) => InputScaleType[props.scale]}px;
   height: 45px;
   background-color: #ecebf1;
   color: #04c09e;
@@ -28,13 +28,13 @@ const Input = React.forwardRef(({ scale, ...rest }, ref) => {
 });
 
 Input.propTypes = {
-  placeholder: PropTypes.string,
-  type: PropTypes.string,
-  id: PropTypes.string,
-  scale: PropTypes.string,
-  maxLength: PropTypes.number,
-  value: PropTypes.string,
-  textAlign: PropTypes.string,
+  placeholder: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  scale: PropTypes.string.isRequired,
+  maxLength: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
+  textAlign: PropTypes.string.isRequired,
 };
 
 export default Input;

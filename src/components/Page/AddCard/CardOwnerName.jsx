@@ -19,7 +19,7 @@ const MaxNumberIndicator = styled.span`
   right: 20px;
 `;
 
-const showOwnerNameLength = ownerName => {
+const showOwnerNameLength = (ownerName) => {
   const ownerNameLength = String(ownerName.length);
   return `${ownerNameLength.padStart(2, '0')}/30`;
 };
@@ -48,9 +48,9 @@ const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
 };
 
 CardOwnerName.propTypes = {
-  ownerName: PropTypes.string,
-  onChangeOwnerName: PropTypes.func,
-  isError: PropTypes.bool,
+  ownerName: PropTypes.string.isRequired,
+  onChangeOwnerName: PropTypes.func.isRequired,
+  isError: PropTypes.bool.isRequired,
 };
 
 export default CardOwnerName;
