@@ -13,10 +13,7 @@ export default function Home() {
     <>
       <Header title="보유 카드" hasBackArrow={false} />
       {cards.map(cardInfo => (
-        <div
-          className="mb-30 flex-column-center"
-          key={cardInfo.cardType.name + cardInfo.cardType.color}
-        >
+        <div className="mb-30 flex-column-center" key={cardInfo.id}>
           <Card cardInfo={cardInfo} marginBottom="10px" />
           <span className="card-nickname">{cardInfo.cardName}</span>
         </div>

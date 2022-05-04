@@ -4,10 +4,10 @@ import { CardInfo } from "types/cardInfo";
 
 interface Context {
   cards: CardInfo[];
-  addCard: (cardInfo: CardInfo) => void;
+  setCards: React.Dispatch<React.SetStateAction<CardInfo[]>>;
 }
 
-export const CardsContext = createContext<Context>({ cards: [], addCard: () => {} });
+export const CardsContext = createContext<Context>({ cards: [], setCards: () => {} });
 
 const CardsProvider = ({ children }) => {
   const [cards, setCards] = useState<CardInfo[]>([]);
@@ -20,11 +20,7 @@ const CardsProvider = ({ children }) => {
     })();
   }, []);
 
-  const addCard = (cardInfo: CardInfo) => {
-    setCards(prevCards => [...prevCards, cardInfo]);
-  };
-
-  return <CardsContext.Provider value={{ cards, addCard }}>{children}</CardsContext.Provider>;
+  return <CardsContext.Provider value={{ cards, setCards }}>{children}</CardsContext.Provider>;
 };
 
 export { CardsProvider };
