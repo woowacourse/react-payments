@@ -21,11 +21,7 @@ const StyledButton = styled.button`
 `;
 
 export default function Button({ text, onClick }) {
-  return (
-    <StyledButton type="button" onClick={onClick}>
-      {text}
-    </StyledButton>
-  );
+  return <StyledButton type="submit">{text}</StyledButton>;
 }
 
 Button.propTypes = {

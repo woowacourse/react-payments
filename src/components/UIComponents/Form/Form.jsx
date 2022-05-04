@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { cardInfoValidations } from "../../../cardInfoValidations.js";
+import {
+  CARD_REGISTER_FAIL_MESSAGE,
+  CARD_REGISTER_SUCCESS_MESSAGE,
+} from "../../../constants.js";
+import useLocalStorage from "../../../useLocalStorage.jsx";
 
 const StyledCardInfoForm = styled.form`
   display: flex;
@@ -12,7 +17,9 @@ const StyledCardInfoForm = styled.form`
   }
 `;
 
-export default function Form({ children }) {
+export default function Form({ children, dataKey }) {
+  const [formDataArray, saveFormData] = useLocalStorage(dataKey);
+
   const focusFormInput = (formInputList, currInput, direction) => {
     const formInputArray = [...formInputList];
     const currentIndex = formInputArray.indexOf(currInput);
@@ -58,11 +65,28 @@ export default function Form({ children }) {
     handleFormValidation(e);
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const rawFormData = [...new FormData(e.target).entries()];
+    const formData = rawFormData.reduce((object, [key, value]) => {
+      object[key] = object[key] ? object[key] + value : value;
+      return object;
+    }, {});
+
+    try {
+      saveFormData([...formDataArray, formData]);
+      alert(CARD_REGISTER_SUCCESS_MESSAGE);
+    } catch {
+      alert(CARD_REGISTER_FAIL_MESSAGE);
+    }
+  };
+
   return (
     <StyledCardInfoForm
       autoComplete="off"
       onChange={handleFormChange}
       onKeyDown={handlePrevFocus}
+      onSubmit={handleFormSubmit}
     >
       {children}
     </StyledCardInfoForm>

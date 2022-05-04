@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import GlobalStyle from "./globalStyles.jsx";
 
@@ -31,43 +31,28 @@ function App() {
   const [securityCodeLength, setSecurityCodeLength] = useState(0);
   const [passwordLength, setPasswordLength] = useState([0, 0]);
 
-  const handleCardInfoSubmit = () => {
+  const handleCardInfoSubmit = (e) => {
+    e.preventDefault();
+    console.dir(e.target.form.elements.namedItem("expire-date"));
     alert(CARD_REGISTER_SUCCESS_MESSAGE);
   };
 
-  const isCompleteCardNumber = useMemo(
-    () => cardNumber.join("").length === NUMBER_UNIT_COUNT * NUMBER_UNIT_LENGTH,
-    [cardNumber]
-  );
+  const isCompleteCardNumber =
+    cardNumber.join("").length === NUMBER_UNIT_COUNT * NUMBER_UNIT_LENGTH;
 
-  const isCompleteExpireDate = useMemo(
-    () => expireDate.join("").length === EXPIRE_DATE_LENGTH,
-    [expireDate]
-  );
+  const isCompleteExpireDate =
+    expireDate.join("").length === EXPIRE_DATE_LENGTH;
 
-  const isCompleteSecurityCode = useMemo(
-    () => securityCodeLength === SECURITY_CODE_LENGTH,
-    [securityCodeLength]
-  );
+  const isCompleteSecurityCode = securityCodeLength === SECURITY_CODE_LENGTH;
 
-  const isCompletePassword = useMemo(
-    () => passwordLength[0] + passwordLength[1] === PASSWORD_LENGTH,
-    [passwordLength]
-  );
+  const isCompletePassword =
+    passwordLength[0] + passwordLength[1] === PASSWORD_LENGTH;
 
-  const isValidCardInfo = useMemo(() => {
-    return (
-      isCompleteCardNumber &&
-      isCompleteExpireDate &&
-      isCompleteSecurityCode &&
-      isCompletePassword
-    );
-  }, [
-    isCompleteCardNumber,
-    isCompleteExpireDate,
-    isCompleteSecurityCode,
-    isCompletePassword,
-  ]);
+  const isValidCardInfo =
+    isCompleteCardNumber &&
+    isCompleteExpireDate &&
+    isCompleteSecurityCode &&
+    isCompletePassword;
 
   return (
     <div className="App">
@@ -79,7 +64,7 @@ function App() {
         expireDate={expireDate}
         canProceed={isValidCardInfo}
       />
-      <Form setCardNumber={setCardNumber}>
+      <Form dataKey={"card-info"}>
         <CardNumberInput
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}

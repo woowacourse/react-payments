@@ -5,6 +5,8 @@ export const CREATE_MASKED_CHARACTERS = (repeatCount) =>
 
 export const CARD_REGISTER_SUCCESS_MESSAGE =
   "카드가 정상적으로 등록되었습니다!";
+export const CARD_REGISTER_FAIL_MESSAGE =
+  "카드 정보 저장에 실패했습니다. 잠시 후 다시 시도해주세요!";
 
 export const CARD_INFO_RULES = {
   NUMBER_UNIT_LENGTH: 4,
