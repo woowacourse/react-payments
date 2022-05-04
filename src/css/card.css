@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
 
+  position: relative;
   margin: 10px 0;
 }
 
@@ -12,25 +13,21 @@
   align-items: center;
   justify-content: center;
 
-  position: relative;
-
   width: 208px;
   height: 130px;
 
-  font-size: 30px;
-  color: #575757;
+  position: relative;
 
   background: #e5e5e5;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-
+  font-size: 30px;
+  color: #575757;
   user-select: none;
 
   padding: 4px 8px 14px;
 
   cursor: pointer;
-
-  margin-bottom: 4px;
 }
 
 .small-card {

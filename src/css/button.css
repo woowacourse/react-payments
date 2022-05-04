@@ -1,31 +1,24 @@
 .button-box {
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border: none;
   background: none;
   font-weight: bold;
 
-  padding: 5px 10px;
   cursor: pointer;
-}
-
-.button-text {
-  margin-right: 10px;
-}
-
-.right-bottom-edge {
-  position: absolute;
-  right: 0;
-  bottom: 15px;
-
-  margin-right: 20px;
 }
 
 .change-button {
   position: absolute;
-  right: -65px;
+  right: -15px;
   bottom: 0;
 
   width: 55px;
-  padding: 8px 0;
+  height: 36px;
   background-color: #a3a1a1;
   border-radius: 15px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);

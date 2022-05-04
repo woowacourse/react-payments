@@ -20,6 +20,10 @@ input {
   font-size: 16px;
 }
 
+a {
+  text-decoration: none;
+}
+
 .root {
   width: 375px;
   min-height: 700px;
@@ -31,7 +35,6 @@ input {
 }
 
 .app {
-  height: 100%;
   padding: 16px 24px;
 }
 
@@ -75,4 +78,10 @@ input {
   color: red;
   font-size: 12px;
   font-weight: 600;
+}
+
+.right-bottom-edge {
+  position: absolute;
+  right: 24px;
+  bottom: 16px;
 }

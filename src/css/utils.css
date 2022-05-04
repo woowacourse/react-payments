@@ -4,6 +4,12 @@
   align-items: center;
 }
 
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .flex-column-center {
   display: flex;
   flex-direction: column;
