@@ -10,9 +10,9 @@ export default {
 };
 
 const Template = args => {
-  const cardDateCallback = () => {};
-  const setIsCorrectCardDate = () => {};
-  return <DueDate {...args} cardDateCallback={cardDateCallback} setIsCorrectCardDate={setIsCorrectCardDate} />;
+  const dispatch = () => {};
+
+  return <DueDate {...args} dispatch={dispatch} />;
 };
 
 export const Primary = Template.bind({});
