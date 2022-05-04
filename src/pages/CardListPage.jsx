@@ -8,14 +8,23 @@ const StyledPage = styled.div`
   box-sizing: border-box;
   padding: 30px;
   width: 400px;
-  min-height: 757px;
+  height: 757px;
 `;
 
 const Title = styled.h2`
   color: #383838;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: normal;
   margin: 0 0 65px 10px;
+`;
+
+const Content = styled.div`
+  height: 83%;
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const PlusCard = styled.div`
@@ -27,7 +36,6 @@ const PlusCard = styled.div`
   height: 133px;
   line-height: 133px;
   margin: auto;
-  margin-bottom: 85px;
   padding: 19px;
   text-align: center;
   width: 213px;
@@ -39,14 +47,16 @@ function CardListPage() {
   return (
     <StyledPage>
       <Title>보유카드</Title>
-      <Cards />
-      <PlusCard
-        onClick={() => {
-          navigate('/add');
-        }}
-      >
-        +
-      </PlusCard>
+      <Content>
+        <Cards />
+        <PlusCard
+          onClick={() => {
+            navigate('/add');
+          }}
+        >
+          +
+        </PlusCard>
+      </Content>
     </StyledPage>
   );
 }

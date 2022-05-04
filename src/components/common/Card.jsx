@@ -9,6 +9,7 @@ const getCardSize = size => {
       return {
         card: {
           height: '133px',
+          padding: '19px',
           width: '213px',
         },
         title: {
@@ -29,38 +30,60 @@ const getCardSize = size => {
         },
       };
     case 'large':
-      return {};
+      return {
+        card: {
+          height: '183px',
+          padding: '26px',
+          width: '293px',
+        },
+        title: {
+          marginBottom: '40px',
+          size: '14px',
+        },
+        magnet: {
+          height: '36px',
+          marginBottom: '22px',
+          width: '55px',
+        },
+        numberSet: {
+          marginBottom: '20px',
+        },
+        detail: {
+          size: '22px',
+          height: '27px',
+        },
+      };
   }
 };
 
 const StyledCard = styled.div`
   box-shadow: 3px 3px 5px #00000040;
   border-radius: 5px;
-  padding: 19px;
 
-  ${({ bgColor, cardStyle }) => css`
+  ${({ bgColor, cardStyle: { height, padding, width } }) => css`
     background: ${bgColor};
-    height: ${cardStyle.card.height};
-    width: ${cardStyle.card.width};
+    height: ${height};
+    padding: ${padding};
+    width: ${width};
   `};
 `;
 const Title = styled.div`
   color: #383838;
 
-  ${({ cardStyle }) => css`
-    font-size: ${cardStyle.title.size};
-    height: ${cardStyle.title.size};
-    margin-bottom: ${cardStyle.title.marginBottom};
+  ${({ cardStyle: { marginBottom, size } }) => css`
+    font-size: ${size};
+    height: ${size};
+    margin-bottom: ${marginBottom};
   `}
 `;
 const Magnet = styled.div`
   background: #cbba64;
   border-radius: 4px;
 
-  ${({ cardStyle }) => css`
-    height: ${cardStyle.magnet.height};
-    margin-bottom: ${cardStyle.magnet.marginBottom};
-    width: ${cardStyle.magnet.width};
+  ${({ cardStyle: { height, marginBottom, width } }) => css`
+    height: ${height};
+    margin-bottom: ${marginBottom};
+    width: ${width};
   `}
 `;
 const NumberSet = styled.div`
@@ -68,10 +91,15 @@ const NumberSet = styled.div`
   font-weight: bold;
   text-align: center;
 
-  ${({ cardStyle }) => css`
-    font-size: ${cardStyle.detail.size};
-    height: ${cardStyle.detail.height};
-    margin-bottom: ${cardStyle.numberSet.marginBottom};
+  ${({
+    cardStyle: {
+      numberSet: { marginBottom },
+      detail: { size, height },
+    },
+  }) => css`
+    font-size: ${size};
+    height: ${height};
+    margin-bottom: ${marginBottom};
   `}
 `;
 const OwnerName = styled.span`
@@ -87,9 +115,9 @@ const OwnerName = styled.span`
     display: none;
   }
 
-  ${({ cardStyle }) => css`
-    font-size: ${cardStyle.detail.size};
-    height: ${cardStyle.detail.height};
+  ${({ cardStyle: { size, height } }) => css`
+    font-size: ${size};
+    height: ${height};
   `}
 `;
 const ValidDate = styled.span`
@@ -97,23 +125,29 @@ const ValidDate = styled.span`
   float: right;
   font-weight: bold;
 
-  ${({ cardStyle }) => css`
-    font-size: ${cardStyle.detail.size};
-    height: ${cardStyle.detail.height};
+  ${({ cardStyle: { size, height } }) => css`
+    font-size: ${size};
+    height: ${height};
   `}
 `;
 
 function Card({ bgColor, className, name, number, size, title, validDate }) {
-  const cardStyle = getCardSize(size);
+  const {
+    card,
+    title: titleStyle,
+    magnet,
+    numberSet,
+    detail,
+  } = getCardSize(size);
 
   return (
-    <StyledCard className={className} bgColor={bgColor} cardStyle={cardStyle}>
-      <Title cardStyle={cardStyle}>{title}</Title>
-      <Magnet cardStyle={cardStyle} />
+    <StyledCard className={className} bgColor={bgColor} cardStyle={card}>
+      <Title cardStyle={titleStyle}>{title}</Title>
+      <Magnet cardStyle={magnet} />
       <div>
-        <NumberSet cardStyle={cardStyle}>{number || ''}</NumberSet>
-        <OwnerName cardStyle={cardStyle}>{name || 'NAME'}</OwnerName>
-        <ValidDate cardStyle={cardStyle}>{validDate || 'MM/YY'}</ValidDate>
+        <NumberSet cardStyle={{ numberSet, detail }}>{number || ''}</NumberSet>
+        <OwnerName cardStyle={detail}>{name || 'NAME'}</OwnerName>
+        <ValidDate cardStyle={detail}>{validDate || 'MM/YY'}</ValidDate>
       </div>
     </StyledCard>
   );
