@@ -12,6 +12,7 @@ import {
 
 import { Header, Title } from '../components/common/styled';
 import Button from './../components/common/Button';
+import GoBackButton from '../components/GoBackButton';
 
 import { CARD_INFO_RULES, CARD_REGISTER_SUCCESS_MESSAGE } from '../constants';
 
@@ -97,6 +98,7 @@ export default function AddCardPage() {
   return (
     <>
       <Header>
+        <GoBackButton />
         <Title>카드 추가</Title>
       </Header>
       <CardPreview
