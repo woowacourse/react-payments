@@ -1,6 +1,6 @@
 import React from "react";
 
-import CardNumber from "../components/CardInfoForm/CardNumber";
+import CardNumber from "../components/add/CardInfoForm/CardNumber";
 
 export default {
   component: CardNumber,

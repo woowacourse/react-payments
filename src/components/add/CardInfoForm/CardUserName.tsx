@@ -1,9 +1,9 @@
 import { CardInfoContext } from "contexts/CardInfoProvider";
 import React, { useContext } from "react";
 
-import { MAX_USER_NAME_LENGTH } from "../../constant";
-import Input from "../common/Input";
-import InputContainer from "../common/InputContainer";
+import { MAX_USER_NAME_LENGTH } from "../../../constant";
+import Input from "../../common/Input";
+import InputContainer from "../../common/InputContainer";
 
 export default function CardUserName({ inputs }: { inputs: HTMLInputElement[] }) {
   const {

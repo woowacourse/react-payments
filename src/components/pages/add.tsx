@@ -1,8 +1,8 @@
-import Card from "components/Card";
-import CardInfoForm from "components/CardInfoForm";
-import Header from "components/Header";
-import { CardInfoProvider } from "contexts/CardInfoProvider";
-import React from "react";
+import Card from "components/add/Card";
+import CardInfoForm from "components/add/CardInfoForm";
+import Header from "components/common";
+import { CardInfoContext } from "contexts/CardInfoProvider";
+import React, { useContext } from "react";
 
 function Add() {
   return (
