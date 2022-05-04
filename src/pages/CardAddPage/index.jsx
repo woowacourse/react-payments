@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Head from '../../components/Head';
 import Card from '../../components/Card';
 import CardNumbersInput from '../../components/CardNumbersInput';
@@ -11,6 +10,7 @@ import ModalPortal from '../../components/ModalPortal';
 import CardCompanySelector from '../../components/CardCompanySelector';
 import { Page, CardSection, Form, SubmitButtonContainer } from './style';
 import MESSAGE from '../../constant/message';
+import useCardCompany from '../../hooks/useCardCompany';
 import useCardNumbers from '../../hooks/useCardNumbers';
 import useExpiredDate from '../../hooks/useExpiredDate';
 import useOwnerName from '../../hooks/useOwnerName';
@@ -19,7 +19,7 @@ import usePassword from '../../hooks/usePassword';
 import useCardAdd from '../../hooks/useCardAdd';
 
 function CardAddPage({ isOpenModal, openModal }) {
-  const [cardCompany, setCardCompany] = useState({ name: '포코카드', color: '#E24141' });
+  const { cardCompany, handleClickCardCompany } = useCardCompany();
   const { cardNumbers, isValidCardNumbers, handleChangeCardNumbersInput } = useCardNumbers();
   const { expiredDate, convertedExpiredDate, isValidExpiredDate, handleChangeExpiredDateInput } =
     useExpiredDate();
@@ -40,10 +40,6 @@ function CardAddPage({ isOpenModal, openModal }) {
 
   const handleClickCard = () => {
     openModal();
-  };
-
-  const handleClickCardCompany = (name, color) => {
-    setCardCompany({ name, color });
   };
 
   const handleSubmit = event => {
