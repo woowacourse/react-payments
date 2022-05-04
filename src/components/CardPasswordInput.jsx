@@ -11,6 +11,7 @@ export default function CardPasswordInput({ password, onChange }) {
       labelText="카드 비밀번호 앞 두 자리"
       wrapperWidth="15%"
       horizontalAlign="flex-start"
+      isComplete={password.join('').length === CARD_INFO_RULES.PASSWORD_LENGTH}
       separateEachInput={true}>
       {Array.from({ length: CARD_INFO_RULES.PASSWORD_LENGTH }).map((_, index) => (
         <Input
