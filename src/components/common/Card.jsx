@@ -32,9 +32,9 @@ const getCardSize = size => {
     case 'large':
       return {
         card: {
-          height: '183px',
+          height: '163px',
           padding: '26px',
-          width: '293px',
+          width: '273px',
         },
         title: {
           marginBottom: '40px',
@@ -42,15 +42,15 @@ const getCardSize = size => {
         },
         magnet: {
           height: '36px',
-          marginBottom: '22px',
+          marginBottom: '20px',
           width: '55px',
         },
         numberSet: {
-          marginBottom: '20px',
+          marginBottom: '12px',
         },
         detail: {
-          size: '22px',
-          height: '27px',
+          size: '21px',
+          height: '26px',
         },
       };
   }

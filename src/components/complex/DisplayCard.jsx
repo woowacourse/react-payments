@@ -7,6 +7,7 @@ const CardName = styled.div`
   color: #575757;
   font-weight: bold;
   font-size: 16px;
+  height: 16px;
   margin-top: 15px;
 `;
 

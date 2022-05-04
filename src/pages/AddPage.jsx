@@ -81,6 +81,10 @@ function AddPage() {
     navigate(-1);
   };
 
+  const onClickNextButton = () => {
+    navigate('/complete');
+  };
+
   return (
     <StyledPage>
       <Header>
@@ -115,7 +119,12 @@ function AddPage() {
         setSecondPassword={setSecondPassword}
       />
       {isPossible && (
-        <NextButton color="#04C09E" content="다음" fontWeight="bold" />
+        <NextButton
+          color="#04C09E"
+          content="다음"
+          fontWeight="bold"
+          onClickFunc={onClickNextButton}
+        />
       )}
     </StyledPage>
   );
