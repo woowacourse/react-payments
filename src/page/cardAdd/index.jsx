@@ -56,15 +56,15 @@ const CardAppPage = () => {
 
       if (!validator[item](value, name)) return;
 
-      handleCardInfo(item, name, value);
+      handleCardInfo({ item, name, value });
     },
     [handleCardInfo],
   );
 
   const handleClickCompany = useCallback(
     (company, theme) => {
-      handleCardInfo('company', 'company', company);
-      handleCardInfo('theme', 'theme', theme);
+      handleCardInfo({ item: 'company', value: company });
+      handleCardInfo({ item: 'theme', value: theme });
 
       handleModal();
     },

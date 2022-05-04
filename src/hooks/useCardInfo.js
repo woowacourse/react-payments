@@ -15,7 +15,7 @@ const useCardInfo = (initialCardInfo) => {
     setIsFullFilled(false);
   }, [cardInfo]);
 
-  const handleCardInfo = useCallback((item, name, value) => {
+  const handleCardInfo = useCallback(({ item, name, value }) => {
     setCardInfo((prevCardInfo) => {
       if (isObject(prevCardInfo[item])) {
         return {
