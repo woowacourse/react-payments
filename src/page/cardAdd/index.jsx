@@ -204,7 +204,7 @@ const CardAppPage = () => {
       <Message name="password" isFilled={isPasswordFilled} />
       {/* next button */}
       {isFullFilled && (
-        <Button theme={theme} className="next-button" handleClick={handleClickNextButton}>
+        <Button theme={theme} className="right-bottom-edge" handleClick={handleClickNextButton}>
           다음
         </Button>
       )}

@@ -5,8 +5,9 @@ import {
   isFullPassword,
   isFullPrivacyCode,
   isFullCompany,
+  isFullCardAlias,
 } from 'page/cardAdd/validator';
-import { COMPANY, CARD_NUMBER, EXPIRY_DATE, PRIVACY_CODE, PASSWORD } from 'constants';
+import { COMPANY, CARD_NUMBER, EXPIRY_DATE, PRIVACY_CODE, PASSWORD, CARD_ALIAS } from 'constants';
 
 const isFilledValidator = {
   [COMPANY]: { func: isFullCompany },
@@ -14,6 +15,7 @@ const isFilledValidator = {
   [EXPIRY_DATE]: { func: isFullExpiryDate },
   [PRIVACY_CODE]: { func: isFullPrivacyCode },
   [PASSWORD]: { func: isFullPassword },
+  [CARD_ALIAS]: { func: isFullCardAlias },
 };
 
 const useIsFilled = (type, targetValue, initialState) => {

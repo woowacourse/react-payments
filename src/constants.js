@@ -11,6 +11,7 @@ export const CARD_NUMBER = 'cardNumber';
 export const EXPIRY_DATE = 'expiryDate';
 export const PRIVACY_CODE = 'privacyCode';
 export const PASSWORD = 'password';
+export const CARD_ALIAS = 'cardAlias';
 
 export const DEFAULT_CARD_INFO = {
   OWNER_NAME: 'NAME',
@@ -62,4 +63,5 @@ export const GUIDE_MESSAGE = {
   expiryDate: { [PASS]: '만료일이 입력되었습니다.', [FAIL]: '만료일을 입력해주세요.' },
   privacyCode: { [PASS]: '보안코드가 입력되었습니다.', [FAIL]: '보안코드를 입력해주세요.' },
   password: { [PASS]: '카드 비밀번호가 입력되었습니다.', [FAIL]: '카드 비밀번호를 입력해주세요.' },
+  cardAlias: { [PASS]: '카드의 별칭이 입력되었습니다.', [FAIL]: '카드의 별칭을 입력해주세요.' },
 };

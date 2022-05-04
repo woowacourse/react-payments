@@ -62,6 +62,8 @@ export const isFullPrivacyCode = (privacyCode) =>
 export const isFullPassword = (password) =>
   Object.values(password).every((value) => value.length === INPUT_MAX_LENGTH.PASSWORD);
 
+export const isFullCardAlias = (cardAlias) => cardAlias !== '';
+
 export const checkFullFilled = (cardInfo) => {
   const { cardNumber, company, expiryDate, privacyCode, password } = cardInfo;
 
