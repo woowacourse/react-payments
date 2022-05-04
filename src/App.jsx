@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useReducer } from 'react';
+import React, { useRef, useLayoutEffect, useReducer, useCallback } from 'react';
 
 import {
   CardNumber,
@@ -80,6 +80,7 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const useDispatch = useCallback(props => dispatch(props), [dispatch]);
   const targetRef = useRef();
 
   const isAllCompleted = Object.values(state.isAllCompleted).every(ok => ok);
@@ -105,11 +106,11 @@ function App() {
         cardOwnerName={state.cardOwnerName}
         cardDate={state.dueDate}
       />
-      <CardNumber dispatch={dispatch} />
-      <DueDate dispatch={dispatch} dimensions={state.dimensions} />
-      <CardOwner dispatch={dispatch} />
-      <CardSecurityCode dispatch={dispatch} />
-      <CardPassword dispatch={dispatch} />
+      <CardNumber dispatch={useDispatch} />
+      <DueDate dispatch={useDispatch} dimensions={state.dimensions} />
+      <CardOwner dispatch={useDispatch} />
+      <CardSecurityCode dispatch={useDispatch} />
+      <CardPassword dispatch={useDispatch} />
       <Footer isAllCompleted={isAllCompleted} />
     </div>
   );

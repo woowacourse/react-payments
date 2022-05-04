@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import useInput from '../hooks/useInput';
 import ErrorMessage from './common/ErrorMessage';
 import InactiveContainer from './common/InactiveContainer';
 
@@ -9,47 +10,20 @@ const S = { ...CommonStyles, ...CardPasswordStyle };
 
 const MAX_PASSWORD_UNIT = 1;
 
-const validator = value => {
-  if (value.includes(' ') || Number.isNaN(Number(value))) {
-    throw new Error('숫자만 입력해주세요.');
-  }
-
-  if (value.includes('.')) {
-    throw new Error('소수점은 입력하실 수 없습니다.');
-  }
-
-  if (value.length > MAX_PASSWORD_UNIT) {
-    throw new Error(`한 칸당 최대 ${MAX_PASSWORD_UNIT}개의 숫자를 입력해야 합니다.`);
-  }
-};
-
 function CardPassword({ dispatch }) {
-  const [pwd, setPwd] = useState({
-    pwdNoA: '',
-    pwdNoB: '',
+  const [value, onChangeInputValue, isValid, errorMessage] = useInput({
+    type: 'number',
+    maxLength: MAX_PASSWORD_UNIT,
+    initialValue: { pwdNoA: '', pwdNoB: '' },
   });
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleInputChange = ({ target: { name, value } }) => {
-    try {
-      validator(value);
-    } catch (err) {
-      setErrorMessage(err.message);
-      return;
-    }
-    setPwd(prevPwds => ({
-      ...prevPwds,
-      [name]: value,
-    }));
-  };
 
   useEffect(() => {
-    const isCorrectPwd = Object.values(pwd).join('').length === 2;
+    if (!isValid) return;
 
-    if (isCorrectPwd) setErrorMessage('');
+    const isCorrectPwd = Object.values(value).join('').length === 2;
 
     dispatch({ type: 'CARD_PASSWORD', isCorrectPwd });
-  }, [pwd, dispatch]);
+  }, [value, isValid, dispatch]);
 
   return (
     <S.InputContainer>
@@ -57,12 +31,24 @@ function CardPassword({ dispatch }) {
       <S.InputPasswordWrapper>
         <S.InputWrapper>
           <S.Span>
-            <S.Input type={'password'} maxLength={1} name={'pwdNoA'} onChange={handleInputChange} value={pwd.pwdNoA} />
+            <S.Input
+              type={'password'}
+              maxLength={1}
+              name={'pwdNoA'}
+              onChange={onChangeInputValue}
+              value={value.pwdNoA}
+            />
           </S.Span>
         </S.InputWrapper>
         <S.InputWrapper>
           <S.Span>
-            <S.Input type={'password'} maxLength={1} name={'pwdNoB'} onChange={handleInputChange} value={pwd.pwdNoB} />
+            <S.Input
+              type={'password'}
+              maxLength={1}
+              name={'pwdNoB'}
+              onChange={onChangeInputValue}
+              value={value.pwdNoB}
+            />
           </S.Span>
         </S.InputWrapper>
         <InactiveContainer />
@@ -73,4 +59,4 @@ function CardPassword({ dispatch }) {
   );
 }
 
-export default CardPassword;
+export default React.memo(CardPassword);
