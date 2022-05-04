@@ -41,7 +41,7 @@ export default function CardUserName({
         onBlur={onBlur}
         name="userName"
         align="left"
-        pattern="[a-zA-Z]{1,30}"
+        pattern="[ a-zA-Z]{1,30}"
       />
       <span className="card-user-name-length">
         {cardUserName.length}/{MAX_USER_NAME_LENGTH}
