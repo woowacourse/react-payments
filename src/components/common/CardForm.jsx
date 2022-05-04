@@ -4,30 +4,10 @@ import CardPreview from './CardPreview';
 import ToolTip from './ToolTip';
 import useCardForm from '../../hooks/useCardForm';
 import InputFieldContainer from './InputFieldContainer';
+import Button from './Button';
 
 const StyledCardForm = styled.form`
   margin: 0;
-
-  .submit-button {
-    background: none;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-
-    position: absolute;
-    width: 51px;
-    height: 34px;
-    right: 25px;
-    bottom: 16px;
-
-    text-align: right;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 16px;
-    color: #04c09e;
-  }
 `;
 
 const CardForm = ({ cardFormSchema }) => {
@@ -147,9 +127,9 @@ const CardForm = ({ cardFormSchema }) => {
             />
           </div>
         </InputFieldContainer>
-        <button className="submit-button" type="submit">
+        <Button className="submit-button" type="submit">
           다음
-        </button>
+        </Button>
       </StyledCardForm>
     </>
   );
