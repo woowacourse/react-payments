@@ -1,25 +1,35 @@
 import { useState } from 'react';
 import useObjectRef from './useObjectRef';
 import useFormSchema from './useFormSchema';
+import { isBackspace } from '../utils/commons';
 
 // formSchema를 useFormSchema를 이용하여 사용 가능한 형태로 분해
 // onChange, onKeyDown으로 에러 체크 및 포커싱 지원
 // 외부에서 정의한 onSubmit, onSubmitError 사용하여 handleSubmit 생성
 const useCardForm = ({ cardFormSchema }) => {
   const {
-    values,
-    setValues,
+    initialField,
     isInvalidInput,
     errors,
     setErrorTrue,
     setErrorMessages,
-    focusNextElement,
-    focusPrevElement,
   } = useFormSchema(cardFormSchema);
 
+  const [values, setValues] = useState(initialField);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { ref, bindElement, getNextElement, getPrevElement } =
     useObjectRef(cardFormSchema);
+
+  const focusNextElement = (name, value, nextElement) => {
+    if (value.length >= cardFormSchema[name].maxLength && nextElement)
+      nextElement.focus();
+  };
+
+  const focusPrevElement = (keyCode, name, prevElement) => {
+    if (isBackspace(keyCode) && values[name] === '' && prevElement) {
+      prevElement.focus();
+    }
+  };
 
   const handleChange = (event) => {
     const {
