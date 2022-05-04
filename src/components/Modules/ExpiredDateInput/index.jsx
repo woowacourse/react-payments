@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import { useContext } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
-import { ExpiredDateContext } from '../../../context/ExpiredDateContext';
 import { DATE_INPUT_PLACEHOLDER } from '../../../constant';
 
 const InputContainer = styled.div`

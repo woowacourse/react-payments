@@ -53,9 +53,7 @@ function CardAddForm() {
       <SecurityNumberInput {...securityNumberProps} />
       <PasswordInput {...passwordProps} />
       <ButtonContainer>
-        <SubmitButton width="51px" height="34px" hidden={!isValidForm}>
-          다음
-        </SubmitButton>
+        <SubmitButton hidden={!isValidForm}>다음</SubmitButton>
       </ButtonContainer>
     </FormContainer>
   );

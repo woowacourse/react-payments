@@ -25,4 +25,10 @@ function SubmitButton({ width, height, hidden, children }) {
   );
 }
 
+SubmitButton.defaultProps = {
+  width: '51px',
+  height: '34px',
+  hidden: false,
+};
+
 export default SubmitButton;
