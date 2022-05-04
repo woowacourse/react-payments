@@ -4,6 +4,15 @@ import { CardInfo } from "types/cardInfo";
 
 import CardSelectModal from "./CardSelectModal";
 
+interface CardProps {
+  cardInfo: CardInfo;
+  shouldShowTypeSelection?: boolean;
+  size?: "big" | "small";
+  marginBottom?: string;
+  pointer?: boolean;
+  onClick?: (id: number) => void;
+}
+
 export default function Card({
   cardInfo,
   shouldShowTypeSelection = false,
@@ -11,14 +20,7 @@ export default function Card({
   marginBottom,
   pointer = true,
   onClick,
-}: {
-  cardInfo: CardInfo;
-  shouldShowTypeSelection?: boolean;
-  size?: "big" | "small";
-  marginBottom?: string;
-  pointer?: boolean;
-  onClick?: (id: number) => void;
-}) {
+}: CardProps) {
   const { cardNumbers, expirationDate, userName, cardType } = cardInfo;
   const { isModalOpened, openModal, closeModal } = useModal(true);
 
