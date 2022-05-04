@@ -27,9 +27,10 @@ const CardAdd = () => {
       alert(error.message);
       switch (error.message) {
         case ERROR_MESSAGE.SHORT_CARD_NUMBER:
-          inputStates.cardNumber.forEach((input, idx) => {
+          inputStates.cardNumber.some((input, idx) => {
             if (input.length !== 4) {
               e.currentTarget.parentNode[idx].focus();
+              return true;
             }
           });
           return;
