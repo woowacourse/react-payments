@@ -13,8 +13,13 @@ const StyledInputField = styled.div`
 const StyledLabel = styled.label`
   font-size: 12px;
   line-height: 14px;
-  color: ${props => (props.isComplete ? '#04c09e' : '#525252')};
+  color: #525252;
   letter-spacing: -0.085em;
+  ${props =>
+    props.isComplete &&
+    `
+    color: #04c09e;
+  `}
 `;
 
 const StyledInputWrapper = styled.div`
@@ -65,12 +70,13 @@ export default function InputField({
 
 InputField.propTypes = {
   labelText: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   wrapperWidth: PropTypes.string,
   horizontalAlign: PropTypes.oneOf(['flex-start', 'center', 'space-around']),
   separateEachInput: PropTypes.bool,
+  isComplete: PropTypes.bool,
 };
 
 InputField.defaultProps = {
   separateEachInput: false,
+  isComplete: false,
 };
