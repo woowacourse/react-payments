@@ -1,41 +1,41 @@
 export const cardInfos = [
   {
-    colorType: "poco-color",
-    cardType: "포코 카드",
+    cardName: "포코 카드",
+    cardType: "pocoCard",
   },
   {
-    colorType: "jun-color",
-    cardType: "준 카드",
+    cardName: "준 카드",
+    cardType: "junCard",
   },
   {
-    colorType: "gongwon-color",
-    cardType: "공원 카드",
+    cardName: "공원 카드",
+    cardType: "gongwonCard",
   },
   {
-    colorType: "bran-color",
-    cardType: "브랜 카드",
+    cardName: "브랜 카드",
+    cardType: "branCard",
   },
   {
-    colorType: "roid-color",
-    cardType: "로이드 카드",
+    cardName: "로이드 카드",
+    cardType: "roidCard",
   },
   {
-    colorType: "dobby-color",
-    cardType: "도비 카드",
+    cardName: "도비 카드",
+    cardType: "dobbyCard",
   },
   {
-    colorType: "collin-color",
-    cardType: "콜린 카드",
+    cardName: "콜린 카드",
+    cardType: "collinCard",
   },
   {
-    colorType: "sun-color",
-    cardType: "썬 카드",
+    cardName: "썬 카드",
+    cardType: "sunCard",
   },
 ];
 
 export const defaultCardInfo = {
-  cardType: "",
-  colorType: "empty-color",
+  cardName: "",
+  cardType: "defaultCard",
 };
 
 export const MAX_LENGTH = {

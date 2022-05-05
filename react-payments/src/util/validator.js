@@ -27,3 +27,19 @@ export const isInValidCardType = (cardType) => !cardType;
 
 export const isInValidSecurityCode = (securityCode) =>
   securityCode.length !== MAX_LENGTH.SECURITY_CODE;
+
+export const isAllInputReady = ({
+  cardNumberReady,
+  expireDateReady,
+  securityCodeReady,
+  cardPasswordReady,
+  cardTypeReady,
+}) => {
+  return !(
+    cardNumberReady &&
+    expireDateReady &&
+    securityCodeReady &&
+    cardPasswordReady &&
+    cardTypeReady
+  );
+};
