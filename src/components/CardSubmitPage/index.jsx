@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { CardInfoContext } from '../../context';
+import { CardDispatchContext, CardInfoContext } from '../../context';
 import { LABEL_PRIMARY_COLOR, PLACEHOLDER_PRIMARY_COLOR } from '../../style';
 
 import Card from '../common/Card';
@@ -43,6 +43,10 @@ const Container = styled.div`
 
 function CardSubmitPage() {
   const { cardCompany, cardNumbers, owner, cardDate } = useContext(CardInfoContext);
+  const cardListDispatch = useContext(CardDispatchContext);
+
+  const nextId = useRef(1);
+
   const [nickname, setNickname] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -60,6 +64,20 @@ function CardSubmitPage() {
       return;
     }
 
+    // TODO: 페이지 넘어가기, 카드 아이템 리스트 전역으로 추가
+    cardListDispatch({
+      type: 'ADD_CARD_ITEM',
+      card: {
+        id: nextId.current,
+        cardCompany,
+        cardNumbers,
+        owner,
+        cardDate,
+        nickname,
+      },
+    });
+
+    nextId.current += 1;
     alert('완료 :D');
   };
   return (
