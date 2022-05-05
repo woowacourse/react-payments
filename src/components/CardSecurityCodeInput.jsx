@@ -69,9 +69,8 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
       }
     >
       <Input
-        dataTargetGroup={securityCode.className}
-        className={securityCode.className}
         name={securityCode.name}
+        className={securityCode.name}
         value={securityCode.value}
         type={securityCode.type}
         placeholder={securityCode.placeholder}

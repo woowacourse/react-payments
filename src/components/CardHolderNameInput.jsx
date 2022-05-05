@@ -40,9 +40,8 @@ export default function CardHolderNameInput({ holderName, onChange }) {
       }
     >
       <Input
-        dataTargetGroup={holderName.className}
-        className={holderName.className}
         name={holderName.name}
+        className={holderName.name}
         value={holderName.value}
         type={holderName.type}
         placeholder={holderName.placeholder}

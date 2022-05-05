@@ -3,28 +3,28 @@ import { useState } from "react";
 export default function useInput(initialValue, validator) {
   const [value, setValue] = useState(initialValue);
 
-  const handleDate = (value, name) => {
-    if (validator(value, name)) return;
+  const handleDate = (value, keyType) => {
+    if (validator(value, keyType)) return;
 
     setValue((prevValue) => {
       return {
         ...prevValue,
-        [name]: {
-          ...prevValue[name],
+        [keyType]: {
+          ...prevValue[keyType],
           value,
         },
       };
     });
   };
 
-  const handleNumbers = (value, name) => {
+  const handleNumbers = (value, keyType) => {
     if (validator(value)) return;
 
     setValue((prevValue) => {
       return {
         ...prevValue,
-        [name]: {
-          ...prevValue[name],
+        [keyType]: {
+          ...prevValue[keyType],
           value,
         },
       };
@@ -47,17 +47,17 @@ export default function useInput(initialValue, validator) {
       target: { value, name },
     } = event;
 
-    if (keyType === "expireDateInfo") {
-      handleDate(value, name);
+    if (name === "expireDate") {
+      handleDate(value, keyType);
       return;
     }
 
-    if (keyType === "cardNumberInfo" || keyType === "passwordInfo") {
-      handleNumbers(value, name);
+    if (name === "cardNumber" || name === "password") {
+      handleNumbers(value, keyType);
       return;
     }
 
-    if (keyType === "holderNameInfo") {
+    if (name === "holderName") {
       handleNameToUpperCase(value);
       return;
     }

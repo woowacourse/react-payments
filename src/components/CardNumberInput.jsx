@@ -26,11 +26,10 @@ export default function CardNumberInput(props) {
       }
     >
       {cardNumberList.map((cardNumber) => (
-        <Fragment key={cardNumber.index}>
+        <Fragment key={cardNumber.keyType}>
           <Input
-            dataTargetGroup={cardNumber.className}
-            className={cardNumber.className}
             name={cardNumber.name}
+            className={cardNumber.name}
             value={cardNumber.value}
             type={cardNumber.type}
             placeholder={cardNumber.placeholder}

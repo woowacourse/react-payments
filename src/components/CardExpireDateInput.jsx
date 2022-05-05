@@ -21,11 +21,10 @@ export default function CardExpireDateInput({ expireDate, onChange }) {
       isComplete={expireDateLength === CARD_INFO_RULES.EXPIRE_DATE_LENGTH}
     >
       {expireDateList.map((expireDate) => (
-        <Fragment key={expireDate.name}>
+        <Fragment key={expireDate.keyType}>
           <Input
-            dataTargetGroup={expireDate.className}
-            className={expireDate.className}
             name={expireDate.name}
+            className={expireDate.name}
             value={expireDate.value}
             type={expireDate.type}
             placeholder={expireDate.placeholder}

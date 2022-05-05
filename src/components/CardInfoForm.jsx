@@ -12,7 +12,7 @@ export default function CardInfoForm({ children }) {
     if (target.value.length !== target.maxLength) return;
 
     const targetInputList = [...target.form].filter((input) =>
-      input.classList.contains(`${target.dataset.targetGroup}`)
+      input.classList.contains(`${target.name}`)
     );
 
     const nextIndex = targetInputList.indexOf(target) + 1;
@@ -24,7 +24,7 @@ export default function CardInfoForm({ children }) {
     if (target.value.length !== 0 || event.key !== "Backspace") return;
 
     const targetInputList = [...target.form].filter((input) =>
-      input.classList.contains(`${target.dataset.targetGroup}`)
+      input.classList.contains(`${target.name}`)
     );
 
     const prevIndex = targetInputList.indexOf(target) - 1;

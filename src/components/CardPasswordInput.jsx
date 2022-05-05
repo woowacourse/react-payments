@@ -21,10 +21,9 @@ export default function CardPasswordInput(props) {
     >
       {passwordList.map((password) => (
         <Input
-          key={password.index}
-          dataTargetGroup={password.className}
-          className={password.className}
+          key={password.keyType}
           name={password.name}
+          className={password.name}
           value={password.value}
           type={password.type}
           placeholder={password.placeholder}
