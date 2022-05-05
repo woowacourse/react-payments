@@ -21,7 +21,6 @@ const CardAdd = () => {
         closeConfirmModal();
       }}
       submit={() => {
-        alert("카드가 등록되었습니다");
         closeConfirmModal();
       }}
     />

@@ -1,4 +1,5 @@
 import "./index.scss";
+import { Link } from "react-router-dom";
 
 const ConfirmAdd = ({ closeModal, cardInfo, submit }) => {
   return (
@@ -18,9 +19,11 @@ const ConfirmAdd = ({ closeModal, cardInfo, submit }) => {
         <button className="confirm--button pink" onClick={closeModal}>
           취소
         </button>
-        <button className="confirm--button blue" onClick={submit}>
-          확인
-        </button>
+        <Link to="/nickname">
+          <button className="confirm--button blue" onClick={submit}>
+            확인
+          </button>
+        </Link>
       </div>
     </div>
   );

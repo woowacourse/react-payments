@@ -46,6 +46,7 @@
     }
     &.blue {
       background-color: #759cff;
+      width: 100%;
     }
     &:hover {
       opacity: 0.7;
@@ -59,6 +60,9 @@
     100% {
       transform: translateY(0);
     }
+  }
+  a {
+    width: 30%;
   }
 
   border-top-left-radius: 10px;
