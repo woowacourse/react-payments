@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import CardListItem from '../common/CardListItem';
+import CardListItem from './CardListItem';
 
 import Header from '../common/Header';
+import AddCardItem from './AddCardItem';
 
 const CardList = styled.section`
   display: flex;
@@ -27,6 +28,7 @@ function CardListPage({ cardList }) {
               nickname={nickname}
             />
           ))}
+        <AddCardItem />
       </CardList>
     </>
   );
