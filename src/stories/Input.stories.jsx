@@ -1,48 +1,76 @@
-import { Input } from '../components/common';
+import { Input, UnderlinedInput } from '../components';
+
+import CARD_RULE from '../constants';
 
 export default {
   title: 'Example/Input',
   component: Input,
 };
 
-function Template(args) {
+function BasicTemplate(args) {
   return <Input {...args} />;
 }
 
-export const CardNumber = Template.bind({});
+const CardNumber = BasicTemplate.bind({});
 CardNumber.args = {
   description: '카드 번호',
+  maxLength: CARD_RULE.NUMBER_MAX_LENGTH,
 };
 
-export const ValidDate = Template.bind({});
+const ValidDate = BasicTemplate.bind({});
 ValidDate.args = {
   description: '만료일',
   placeholder: 'MM / YY',
   width: '137px',
+  maxLength: CARD_RULE.VALID_DATE_MAX_LENGTH,
 };
 
-export const CardOwnerName = Template.bind({});
+const CardOwnerName = BasicTemplate.bind({});
 CardOwnerName.args = {
   description: '카드 소유자 이름 (선택)',
   placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
+  maxLength: CARD_RULE.OWNER_NAME_MAX_LENGTH,
 };
 
-export const CVC = Template.bind({});
+const CVC = BasicTemplate.bind({});
 CVC.args = {
   description: '보안 코드(CVC/CVV)',
   type: 'password',
   width: '84px',
+  maxLength: CARD_RULE.CVC_LENGTH,
 };
 
-export const CardPasswordLabeled = Template.bind({});
+const CardPasswordLabeled = BasicTemplate.bind({});
 CardPasswordLabeled.args = {
   description: '카드 비밀번호',
   type: 'password',
   width: '43px',
+  maxLength: 1,
 };
 
-export const CardPasswordNoLabeled = Template.bind({});
+const CardPasswordNoLabeled = BasicTemplate.bind({});
 CardPasswordNoLabeled.args = {
   type: 'password',
   width: '43px',
+  maxLength: 1,
+};
+
+function UnderlinedTemplate(args) {
+  return <UnderlinedInput {...args} />;
+}
+
+const Underlined = UnderlinedTemplate.bind({});
+Underlined.args = {
+  padding: { b: '5px' },
+  width: '250px',
+};
+
+export {
+  CardNumber,
+  ValidDate,
+  CardOwnerName,
+  CVC,
+  CardPasswordLabeled,
+  CardPasswordNoLabeled,
+  Underlined,
 };

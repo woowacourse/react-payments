@@ -1,4 +1,4 @@
-import { Card } from '../components/common';
+import { Card } from '../components';
 
 export default {
   title: 'Example/Card',
@@ -9,8 +9,23 @@ function Template(args) {
   return <Card {...args} />;
 }
 
-export const Default = Template.bind({});
+const Default = Template.bind({});
 Default.args = {
   bgColor: '#D2D2D2',
-  size: 'medium',
 };
+
+const Large = Template.bind({});
+Large.args = {
+  bgColor: '#D2D2D2',
+  size: 'large',
+};
+
+const Entered = Template.bind({});
+Entered.args = {
+  bgColor: '#ADD8E6',
+  name: 'HALEE',
+  number: '1111 2222 •••• ••••',
+  validDate: '05/22',
+};
+
+export { Default, Large, Entered };

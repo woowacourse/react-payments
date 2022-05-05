@@ -1,4 +1,4 @@
-import { Button } from '../components/common';
+import { Button } from '../components';
 
 export default {
   title: 'Example/Button',
@@ -20,7 +20,7 @@ function Template(args) {
   return <Button {...args} />;
 }
 
-export const Arrow = Template.bind({});
+const Arrow = Template.bind({});
 Arrow.args = {
   size: 'small',
   content: (
@@ -40,14 +40,21 @@ Arrow.args = {
   ),
 };
 
-export const Text = Template.bind({});
-Text.args = {
+const 다음 = Template.bind({});
+다음.args = {
   color: '#04C09E',
   content: '다음',
   fontWeight: 'bold',
 };
 
-export const Question = Template.bind({});
+const 확인 = Template.bind({});
+확인.args = {
+  color: '#04C09E',
+  content: '확인',
+  fontWeight: 'bold',
+};
+
+const Question = Template.bind({});
 Question.args = {
   border: '1px solid #BABABA',
   color: '#969696',
@@ -55,3 +62,5 @@ Question.args = {
   shape: 'circle',
   size: 'small',
 };
+
+export { Arrow, 다음, 확인, Question };
