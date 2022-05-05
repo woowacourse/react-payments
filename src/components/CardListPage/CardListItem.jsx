@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Card from './Card';
+import Card from '../common/Card';
 
 const ItemContainer = styled.li`
   display: flex;
