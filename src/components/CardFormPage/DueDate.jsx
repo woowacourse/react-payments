@@ -1,7 +1,7 @@
 import React from 'react';
-import { HYPHEN_PRIMARY_COLOR } from '../style';
-import Calendar from './common/Calendar';
-import { InputContainer, InputWrapper, Span, Label } from './common/styled';
+import { HYPHEN_PRIMARY_COLOR } from '../../style';
+import Calendar from '../common/Calendar';
+import { InputContainer, InputWrapper, Span, Label } from '../common/styled';
 
 const getList = (length, n) => Array.from({ length }, (_, i) => `${i + n}`.slice(2));
 const years = getList(10, new Date().getFullYear());

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { HYPHEN_PRIMARY_COLOR } from '../style';
-import ErrorMessage from './common/ErrorMessage';
-import Input from './common/Input';
-import { InputContainer, InputWrapper, Label, Span } from './common/styled';
+import { HYPHEN_PRIMARY_COLOR } from '../../style';
+import Input from '../common/Input';
+import ErrorMessage from '../common/ErrorMessage';
+import { InputContainer, InputWrapper, Label, Span } from '../common/styled';
 
 function CardNumber({ errorMessage, setErrorMessage, cardNumbers, updateCardNumbers, isCorrectCardNumber }) {
   const cardNoARef = useRef(null);

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Card from './common/Card';
-import CardCompany from './common/CardCompany';
-import Modal from './common/Modal';
+import Card from '../common/Card';
+import CardCompany from '../common/CardCompany';
+import Modal from '../common/Modal';
 
 const CardContainer = styled.div`
   display: flex;

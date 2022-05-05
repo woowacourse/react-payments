@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { InputContainer, Label, InputWrapper } from './common/styled';
-import InactiveContainer from './common/InactiveContainer';
-import ErrorMessage from './common/ErrorMessage';
-import Input from './common/Input';
+import { InputContainer, Label, InputWrapper } from '../common/styled';
+import InactiveContainer from '../common/InactiveContainer';
+import ErrorMessage from '../common/ErrorMessage';
+import Input from '../common/Input';
 
 const InputPasswordWrapper = styled.div`
   display: flex;
