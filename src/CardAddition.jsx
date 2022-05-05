@@ -1,5 +1,5 @@
 import React, { useContext, useCallback } from 'react';
-import styled from 'styled-components';
+import * as S from 'styles.js';
 import { TYPES, CardStateContext, CardDispatchContext } from 'context/CardContext';
 import validator from 'validations/validator';
 import { CARD_COMPANIES } from 'constants/index';
@@ -14,11 +14,6 @@ import CardPassword from 'components/CardPassword';
 import NextButton from 'components/NextButton';
 import CardListModal from 'components/CardListModal';
 import TipModal from 'components/TipModal';
-
-const CardAdditionContainer = styled.div`
-  height: 100%;
-  padding: 16px 24px;
-`;
 
 function CardAddition() {
   const { cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword, cardCompanyIndex } =
@@ -61,7 +56,7 @@ function CardAddition() {
   const cardName = cardCompanyIndex === -1 ? '' : CARD_COMPANIES[cardCompanyIndex].NAME;
 
   return (
-    <CardAdditionContainer>
+    <S.CardAdditionContainer>
       <PageTitle hasPrevButton={true} title="카드 추가" />
       <Card
         cardCompanyIndex={cardCompanyIndex}
@@ -82,7 +77,7 @@ function CardAddition() {
       </NextButton>
       <CardListModal />
       <TipModal />
-    </CardAdditionContainer>
+    </S.CardAdditionContainer>
   );
 }
 

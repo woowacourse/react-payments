@@ -1,7 +1,29 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+
 import { lighten } from 'polished';
 
-export const Container = styled.div``;
+export const GlobalStyle = createGlobalStyle`
+  body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+  }
+
+  input {
+    font-size: 16px;
+    color: #04c09e;
+    font-weight: 600;
+  }
+`;
+
+export const CardAdditionContainer = styled.div`
+  height: 100%;
+  max-width: 400px;
+  padding: 16px 24px;
+`;
 
 export const InputBasic = styled.input`
   background-color: #ecebf1;

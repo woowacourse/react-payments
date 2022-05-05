@@ -14,7 +14,7 @@ export default function CardExpiration({ color }) {
   };
 
   return (
-    <S.Container>
+    <>
       <S.InputTitle>만료일</S.InputTitle>
       <S.InputBox>
         <S.InputContainer width="40%">
@@ -47,6 +47,6 @@ export default function CardExpiration({ color }) {
       >
         {cardExpirationErrorMessage}
       </ErrorMessage>
-    </S.Container>
+    </>
   );
 }

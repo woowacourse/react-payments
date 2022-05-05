@@ -20,7 +20,7 @@ export default function CardCvc() {
   const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
 
   return (
-    <S.Container>
+    <>
       <S.InputTitle>보안코드(CVC/CVV)</S.InputTitle>
       <S.InputBox>
         <S.InputContainer width="23%">
@@ -41,6 +41,6 @@ export default function CardCvc() {
       >
         {cardCvcErrorMessage}
       </ErrorMessage>
-    </S.Container>
+    </>
   );
 }

@@ -19,7 +19,7 @@ export default function CardNumber({ color }) {
   };
 
   return (
-    <S.Container>
+    <>
       <S.InputTitle>카드 번호</S.InputTitle>
       <S.InputBox>
         <S.ExtendedInputContainer>
@@ -73,6 +73,6 @@ export default function CardNumber({ color }) {
       >
         {cardNumberErrorMessage}
       </ErrorMessage>
-    </S.Container>
+    </>
   );
 }

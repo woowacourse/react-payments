@@ -14,7 +14,7 @@ export default function CardPassword({ color }) {
   };
 
   return (
-    <S.Container>
+    <>
       <S.InputTitle>카드 비밀번호</S.InputTitle>
       <S.ExtendedInputBox>
         <AutoFocusInputBox maxValueLength={1}>
@@ -49,6 +49,6 @@ export default function CardPassword({ color }) {
       >
         {cardPasswordErrorMessage}
       </ErrorMessage>
-    </S.Container>
+    </>
   );
 }

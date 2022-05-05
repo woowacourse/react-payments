@@ -13,7 +13,7 @@ export default function CardOwner({ color }) {
   };
 
   return (
-    <S.Container>
+    <>
       <S.TitleWrapper>
         <S.InputTitle marginBottom="0px">카드소유자 이름(선택)</S.InputTitle>
         <S.NameLength isLengthValidated={cardOwner.length > 30}>
@@ -39,6 +39,6 @@ export default function CardOwner({ color }) {
       >
         {cardOwnerErrorMessage}
       </ErrorMessage>
-    </S.Container>
+    </>
   );
 }
