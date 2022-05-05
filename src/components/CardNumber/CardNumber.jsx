@@ -43,7 +43,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
         <input
           name="number1"
           className={`input-basic ${
-            cardNumbers[0].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+            cardNumbers[0].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : ''
           }`}
           type="number"
           onChange={handleChange}
@@ -53,7 +53,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
         <input
           name="number2"
           className={`input-basic ${
-            cardNumbers[1].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+            cardNumbers[1].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : ''
           }`}
           type="number"
           onChange={handleChange}
@@ -63,7 +63,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
         <input
           name="number3"
           className={`input-basic ${
-            cardNumbers[2].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+            cardNumbers[2].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : ''
           }`}
           type="password"
           onChange={handleChange}
@@ -73,7 +73,7 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
         <input
           name="number4"
           className={`input-basic ${
-            cardNumbers[3].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
+            cardNumbers[3].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : ''
           }`}
           type="password"
           onChange={handleChange}

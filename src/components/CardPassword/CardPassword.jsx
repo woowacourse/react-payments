@@ -36,7 +36,7 @@ function CardPassword({ cardPasswords, setCardPasswords }) {
       <input
         name="password1"
         className={`input-basic w-15 input-password  ${
-          cardPasswords[0].length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : null
+          cardPasswords[0].length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : ''
         }`}
         type="password"
         onChange={handleChange}
@@ -46,7 +46,7 @@ function CardPassword({ cardPasswords, setCardPasswords }) {
       <input
         name="password2"
         className={`input-basic w-15 input-password ${
-          cardPasswords[1].length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : null
+          cardPasswords[1].length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : ''
         }`}
         type="password"
         onChange={handleChange}

@@ -22,7 +22,7 @@ function CVC({ cvc, setCVC }) {
       <span className="input-title">보안코드(CVC/CVV)</span>
       <input
         name="cvc"
-        className={`input-basic w-25 ${cvc.length >= LIMIT_LENGTH.CVC ? 'input-correct' : null} `}
+        className={`input-basic w-25 ${cvc.length >= LIMIT_LENGTH.CVC ? 'input-correct' : ''} `}
         type="password"
         onChange={handleChange}
         value={cvc}

@@ -62,7 +62,7 @@ function CardExpirationDate({ cardExpirationDate, setCardExpirationDate }) {
             cardExpirationDate.month >= MONTH.JANUARY &&
             cardExpirationDate.month <= MONTH.DECEMBER
               ? 'input-correct'
-              : null
+              : ''
           }`}
           type="number"
           placeholder="MM"
@@ -74,7 +74,7 @@ function CardExpirationDate({ cardExpirationDate, setCardExpirationDate }) {
         <input
           name="year"
           className={`input-basic ${
-            cardExpirationDate.year.length >= LIMIT_LENGTH.EXPIRATION_DATE ? 'input-correct' : null
+            cardExpirationDate.year.length >= LIMIT_LENGTH.EXPIRATION_DATE ? 'input-correct' : ''
           }`}
           type="number"
           placeholder="YY"

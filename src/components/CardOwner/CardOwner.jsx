@@ -27,7 +27,7 @@ function CardOwner({ cardOwner, setOwner }) {
       </div>
       <input
         type="text"
-        className={`input-basic ${cardOwner.length >= 1 ? 'input-correct' : null}`}
+        className={`input-basic ${cardOwner.length >= 1 ? 'input-correct' : ''}`}
         onChange={handleChange}
         value={cardOwner}
       />
