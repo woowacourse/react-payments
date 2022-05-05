@@ -55,7 +55,7 @@ const CardPreview = ({
             </div>
           </>
         )}
-        {!company && <div className="card-add-button">+</div>}
+        {!company && <Button className="card-add-button">+</Button>}
       </div>
       <Button className={'change-button ' + `${isVisibleButton}`} handleClick={handleCardPosition}>
         {isCardFront ? 'Back' : 'Front'}

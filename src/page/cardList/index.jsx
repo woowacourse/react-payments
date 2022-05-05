@@ -1,4 +1,5 @@
 import CardPreview from 'components/CardPreview';
+import Button from 'components/common/Button';
 import Header from 'components/common/Header';
 import { getCardListAPI } from 'lib/api';
 import React, { useEffect, useState } from 'react';
@@ -18,6 +19,7 @@ const CardListPage = () => {
         {cardList.map((card) => (
           <div key={card.id} className="flex-column-center">
             <CardPreview cardInfo={card} isVisibleButton="hide" theme="red" />
+
             <span className="text-center">{card.alias}</span>
           </div>
         ))}
@@ -26,7 +28,7 @@ const CardListPage = () => {
         <div className="card-item">
           <div className="card-box">
             <Link to="/add" className="empty-card">
-              <div className="card-add-button">+</div>
+              <Button className="card-add-button">+</Button>
             </Link>
           </div>
         </div>

@@ -156,10 +156,10 @@
 }
 
 .card-add-button {
+  position: absolute;
+  top: 60px;
   font-size: 90px;
   font-weight: 500;
-  position: absolute;
-  top: 28px;
 }
 
 .card-black-line {
@@ -197,4 +197,7 @@
   display: flex;
   flex-direction: column;
   gap: 25px;
+}
+
+.card-delete-button {
 }
