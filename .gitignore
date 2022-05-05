@@ -12,3 +12,6 @@ npm-debug.log*
 
 # git
 .gitmessage.txt
+
+# database
+db.json
