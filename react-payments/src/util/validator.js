@@ -43,3 +43,6 @@ export const isAllInputReady = ({
     cardTypeReady
   );
 };
+
+export const isInValidCardName = (cardName) =>
+  cardName.length === 0 || cardName.length > MAX_LENGTH.CARD_NAME;
