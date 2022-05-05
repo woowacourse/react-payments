@@ -11,7 +11,7 @@ const Container = styled.input`
   outline: 2px solid transparent;
   outline-offset: 2px;
   border: 1px solid ${COLORS.athensGray};
-  border-radius: ${LAYOUT.BORDER_RADIUS};
+  border-radius: ${LAYOUT.BORDER_RADIUS}px;
   padding: 0rem 0.625rem;
 
   background-color: ${COLORS.athensGray};

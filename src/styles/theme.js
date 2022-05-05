@@ -1,5 +1,5 @@
 const LAYOUT = {
-  BORDER_RADIUS: '5px',
+  BORDER_RADIUS: 5,
 };
 
 const COLORS = {
@@ -21,6 +21,7 @@ const COLORS = {
   'black-05': 'rgba(0, 0, 0, 0.05)',
   'black-15': 'rgba(0, 0, 0, 0.15)',
   'black-25': 'rgba(0, 0, 0, 0.25)',
+  'black-55': 'rgba(0, 0, 0, 0.55)',
   dorado: '#525252',
   silverChalice: '#999',
   silver: '#BBB',

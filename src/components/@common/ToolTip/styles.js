@@ -75,7 +75,7 @@ const Container = styled.div`
   > .tool-tip-text {
     position: absolute;
     display: none;
-    border-radius: ${LAYOUT.BORDER_RADIUS};
+    border-radius: ${LAYOUT.BORDER_RADIUS}px;
     text-align: center;
     background-color: #000;
     color: #fff;

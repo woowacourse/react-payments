@@ -24,7 +24,7 @@ const CardContainer = styled.div`
   width: 16.75rem;
   height: 10.6rem;
   color: ${COLORS.white};
-  border-radius: ${LAYOUT.BORDER_RADIUS};
+  border-radius: ${LAYOUT.BORDER_RADIUS}px;
   background-image: ${GRADATION['cornflowerBlue-affair-135deg']};
   box-shadow: 3px 1.563rem 1.563rem ${COLORS['black-25']};
   overflow: hidden;
