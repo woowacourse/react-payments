@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useMemo } from 'react';
+import { IoIosArrowBack } from 'react-icons/io';
 
 import Header from '../common/Header';
 import Footer from '../common/Footer';
@@ -11,40 +12,23 @@ import CardSecurityCode from './CardSecurityCode';
 import CardShape from './CardShape';
 import DueDate from './DueDate';
 import useInputHandler from '../../hooks/useInputHandler';
-import { validateCardCode, validateCardNumbers, validateOwner, validatePassword } from '../../validator';
+import { validateCardCode, validatePassword } from '../../validator';
 import { LABEL_PRIMARY_COLOR } from '../../style';
 import { Form } from '../common/styled';
+import { CardInfoContext } from '../../context';
 
-const convertToCardNumberString = ({ cardNoA, cardNoB, cardNoC, cardNoD }) =>
-  `${cardNoA} ${cardNoB} ${'*'.repeat(cardNoC.length)} ${'*'.repeat(cardNoD.length)}`;
+function CardFormPage({
+  dimensions,
+  cardNoErrorMessage,
+  ownerErrorMessage,
+  setCardCompany,
+  setCardNoErrorMessage,
+  updateCardNumbers,
+  setCardDate,
+  updateOwner,
+}) {
+  const { cardCompany, cardNumbers, cardDate, owner } = useContext(CardInfoContext);
 
-function CardFormPage({ dimensions }) {
-  const [cardCompany, setCardCompany] = useState({
-    hexColor: '',
-    name: '',
-  });
-  const {
-    errorMessage: cardNoErrorMessage,
-    setErrorMessage: setCardNoErrorMessage,
-    inputValue: cardNumbers,
-    updateInputState: updateCardNumbers,
-  } = useInputHandler(validateCardNumbers, {
-    cardNoA: '',
-    cardNoB: '',
-    cardNoC: '',
-    cardNoD: '',
-  });
-  const [cardDate, setCardDate] = useState({
-    month: '',
-    year: '',
-  });
-  const {
-    errorMessage: ownerErrorMessage,
-    inputValue: owner,
-    updateInputState: updateOwner,
-  } = useInputHandler(validateOwner, {
-    name: '',
-  });
   const {
     errorMessage: cardCodeErrorMessage,
     inputValue: cardCode,
@@ -85,14 +69,24 @@ function CardFormPage({ dimensions }) {
 
   return (
     <>
-      <Header>{'카드추가'}</Header>
+      <Header
+        leadingButton={
+          <IoIosArrowBack
+            size={30}
+            color="#525252"
+            onClick={() => alert('아직 구현되지 않았습니다 :(')}
+            style={{ cursor: 'pointer' }}
+          />
+        }>
+        카드추가
+      </Header>
       <Form onSubmit={handleSubmit}>
         <CardShape
           dimensions={dimensions}
           cardCompany={cardCompany}
           setCardCompany={setCardCompany}
-          cardNumber={convertToCardNumberString(cardNumbers)}
-          cardOwnerName={owner.name}
+          cardNumbers={cardNumbers}
+          cardOwner={owner}
           cardDate={cardDate}
         />
         <CardNumber
