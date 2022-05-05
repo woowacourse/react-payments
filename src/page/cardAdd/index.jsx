@@ -1,5 +1,4 @@
-import { useEffect, useReducer } from 'react';
-
+import { useReducer, useState } from 'react';
 import FormInput from 'components/common/FormInput';
 import CardPreview from 'components/CardPreview';
 import Modal from 'components/common/Modal';
@@ -33,8 +32,10 @@ import {
 } from 'page/cardAdd/data';
 import { Link } from 'react-router-dom';
 import reducer from './reducer';
+import { registerCardAPI } from 'lib/api';
 
 const initialCardInfo = {
+  alias: '',
   theme: '',
   company: '',
   cardNumber: {
@@ -58,8 +59,11 @@ const initialCardInfo = {
 };
 
 const CardAppPage = () => {
+  const [stage, setStage] = useState(1);
+
   const [cardInfo, dispatch] = useReducer(reducer, initialCardInfo);
-  const { cardNumber, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
+  const { alias, cardNumber, ownerName, expiryDate, company, theme, password, privacyCode } =
+    cardInfo;
 
   const [isCompanyFilled] = useIsFilled(COMPANY, company, false);
   const [isCardNumberFilled] = useIsFilled(CARD_NUMBER, cardNumber, false);
@@ -89,111 +93,154 @@ const CardAppPage = () => {
   const handleCompanyClick = (company, theme) => {
     dispatch({ type: 'company', value: company });
     dispatch({ type: 'theme', value: theme });
-
     handleModal();
+  };
+
+  const handleAliasChange = ({ target }) => {
+    const value = target.value || '이름 없음';
+
+    dispatch({ type: 'alias', value });
   };
 
   return (
     <div>
-      <Header title="카드 추가">
-        <Link to="/">
-          <Button>
-            <PrevIcon />
-          </Button>
-        </Link>
-      </Header>
-      <CardPreview
-        cardInfo={cardInfo}
-        isCardFront={isCardFront}
-        handleModal={handleModal}
-        handleCardPosition={handleCardPosition}
-      />
-      <Message name="company" isFilled={isCompanyFilled} align="text-center" />
+      {stage === 1 && (
+        <>
+          <Header title="카드 정보 입력">
+            <Link to="/">
+              <Button>
+                <PrevIcon />
+              </Button>
+            </Link>
+          </Header>
+          <CardPreview
+            cardInfo={cardInfo}
+            isCardFront={isCardFront}
+            handleModal={handleModal}
+            handleCardPosition={handleCardPosition}
+          />
+          <Message name="company" isFilled={isCompanyFilled} align="text-center" />
 
-      <FormInput
-        type="cardNumber"
-        inputTitle="카드 번호"
-        inputInfoList={cardNumberInputInfoList}
-        inputValue={cardNumber}
-        handleChange={handleChange}
-        theme={theme}
-        maxLength={INPUT_MAX_LENGTH.CARD_NUMBER}
-      />
-      <Message name="cardNumber" isFilled={isCardNumberFilled} />
+          <FormInput
+            type="cardNumber"
+            inputTitle="카드 번호"
+            inputInfoList={cardNumberInputInfoList}
+            inputValue={cardNumber}
+            handleChange={handleChange}
+            theme={theme}
+            maxLength={INPUT_MAX_LENGTH.CARD_NUMBER}
+          />
+          <Message name="cardNumber" isFilled={isCardNumberFilled} />
 
-      <FormInput
-        className="w-50"
-        type="expiryDate"
-        inputTitle="만료일"
-        inputInfoList={expiryDateInputInfoList}
-        inputValue={expiryDate}
-        handleChange={handleChange}
-        theme={theme}
-        maxLength={INPUT_MAX_LENGTH.EXPIRY_DATE}
-      />
-      <Message name="expiryDate" isFilled={isExpiryDateFilled} />
+          <FormInput
+            className="w-50"
+            type="expiryDate"
+            inputTitle="만료일"
+            inputInfoList={expiryDateInputInfoList}
+            inputValue={expiryDate}
+            handleChange={handleChange}
+            theme={theme}
+            maxLength={INPUT_MAX_LENGTH.EXPIRY_DATE}
+          />
+          <Message name="expiryDate" isFilled={isExpiryDateFilled} />
 
-      <FormInput
-        type="ownerName"
-        inputTitle="카드 소유자 이름(선택)"
-        inputInfoList={cardOwnerNameInputInfoList}
-        inputValue={ownerName}
-        handleChange={handleChange}
-        theme={theme}
-        maxLength={INPUT_MAX_LENGTH.OWNER_NAME}
-      >
-        <div className="owner-name-length">
-          {ownerName.length} / {INPUT_MAX_LENGTH.OWNER_NAME}
-        </div>
-      </FormInput>
+          <FormInput
+            type="ownerName"
+            inputTitle="카드 소유자 이름(선택)"
+            inputInfoList={cardOwnerNameInputInfoList}
+            inputValue={ownerName}
+            handleChange={handleChange}
+            theme={theme}
+            maxLength={INPUT_MAX_LENGTH.OWNER_NAME}
+          >
+            <div className="owner-name-length">
+              {ownerName.length} / {INPUT_MAX_LENGTH.OWNER_NAME}
+            </div>
+          </FormInput>
 
-      <FormInput
-        type="privacyCode"
-        inputTitle="보안코드(CVC/CVV)"
-        inputInfoList={privacyCodeInputInfoList}
-        handleChange={handleChange}
-        inputValue={privacyCode}
-        theme={theme}
-        maxLength={INPUT_MAX_LENGTH.PRIVACY_CODE}
-      >
-        <Tooltip type="PRIVACY_CODE" />
-      </FormInput>
-      <Message name="privacyCode" isFilled={isPrivacyCodeFilled} />
+          <FormInput
+            type="privacyCode"
+            inputTitle="보안코드(CVC/CVV)"
+            inputInfoList={privacyCodeInputInfoList}
+            handleChange={handleChange}
+            inputValue={privacyCode}
+            theme={theme}
+            maxLength={INPUT_MAX_LENGTH.PRIVACY_CODE}
+          >
+            <Tooltip type="PRIVACY_CODE" />
+          </FormInput>
+          <Message name="privacyCode" isFilled={isPrivacyCodeFilled} />
 
-      <FormInput
-        type="password"
-        inputTitle="카드 비밀번호"
-        inputInfoList={cardPasswordInputInfoList}
-        inputValue={password}
-        handleChange={handleChange}
-        theme={theme}
-        maxLength={INPUT_MAX_LENGTH.PASSWORD}
-      />
-      <Message name="password" isFilled={isPasswordFilled} />
-      {/* next button */}
-      {isFullFilled && (
-        <div className="flex-right right-bottom-edge">
-          <Link to="/confirm">
-            <Button theme={theme}>다음</Button>
-          </Link>
-        </div>
-      )}
-      {/* modal */}
-      {modalVisible && (
-        <Modal handleModal={handleModal}>
-          <div className="flex-wrap">
-            {cardCompanyList.map(({ id, company, theme }) => (
-              <div
-                key={id}
-                className="modal-item-container"
-                onClick={() => handleCompanyClick(company, theme)}
-              >
-                <Circle theme={theme} />
-                <span className="modal-item-name">{company}</span>
+          <FormInput
+            type="password"
+            inputTitle="카드 비밀번호"
+            inputInfoList={cardPasswordInputInfoList}
+            inputValue={password}
+            handleChange={handleChange}
+            theme={theme}
+            maxLength={INPUT_MAX_LENGTH.PASSWORD}
+          />
+          <Message name="password" isFilled={isPasswordFilled} />
+          {/* next button */}
+          {isFullFilled && (
+            <div className="flex-right right-bottom-edge">
+              <Button theme={theme} handleClick={() => setStage(2)}>
+                다음
+              </Button>
+            </div>
+          )}
+          {/* modal */}
+          {modalVisible && (
+            <Modal handleModal={handleModal}>
+              <div className="flex-wrap">
+                {cardCompanyList.map(({ id, company, theme }) => (
+                  <div
+                    key={id}
+                    className="modal-item-container"
+                    onClick={() => handleCompanyClick(company, theme)}
+                  >
+                    <Circle theme={theme} />
+                    <span className="modal-item-name">{company}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </Modal>
+          )}
+        </>
+      )}
+      {stage === 2 && (
+        <>
+          <Header title="카드 별칭 입력">
+            <Button handleClick={() => setStage(1)}>
+              <PrevIcon />
+            </Button>
+          </Header>
+          <div className="flex-center">
+            <h2 className="content-title mt-20 mb-10">카드등록이 완료되었습니다.</h2>
           </div>
-        </Modal>
+          <CardPreview
+            cardInfo={cardInfo}
+            isCardFront={isCardFront}
+            handleCardPosition={handleCardPosition}
+          />
+          <div className="input-container flex-center w-100">
+            <input
+              className="input-underline w-75"
+              type="text"
+              onChange={handleAliasChange}
+              placeholder="카드의 별칭을 입력해주세요."
+              value={alias}
+              autoFocus
+            />
+          </div>
+          <div className="flex-right right-bottom-edge">
+            <Link to="/">
+              <Button theme={theme} className="" handleClick={() => registerCardAPI(cardInfo)}>
+                확인
+              </Button>
+            </Link>
+          </div>
+        </>
       )}
     </div>
   );
