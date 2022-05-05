@@ -4,10 +4,10 @@ const isOverMaxLength = (value, max) => value.length > max;
 
 const isOutOfRange = (min, max, value) => value < min || value > max;
 
-const isNotNumber = (value) => Number.isNaN(value) || !Number.isInteger(value);
+const isNotInteger = (value) => Number.isNaN(value) || !Number.isInteger(value);
 
 export const validNumber = (value) => {
-  if (isNotNumber(value)) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
+  if (isNotInteger(value)) throw new Error(ERROR_MESSAGE.NOT_NUMBER);
 };
 
 export const validMaxLength = (value, max) => {
