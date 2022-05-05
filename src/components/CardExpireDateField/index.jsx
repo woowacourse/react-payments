@@ -14,7 +14,12 @@ function CardExpireDateField({ expireMonth, expireYear, onChange }) {
   });
 
   return (
-    <FieldSet title="만료일" inputWidth={50} errorMessage={errorMessage}>
+    <FieldSet
+      title="만료일"
+      inputWidth={50}
+      autoFocusSetting={{ enabled: true, length: EXPIRE_DATE.MONTH_LENGTH }}
+      errorMessage={errorMessage}
+    >
       <TextField
         name="expireMonth"
         type="number"
