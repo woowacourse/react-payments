@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import useCardState from '../../../hooks/useCardState'
 
 import Input from '../../../components/Input';
 
-const CardCvcInput = ({ value, onChange }) => {
+const CardCvcInput = ({ value, onChange }, ref) => {
   const cardCompanyColor = useCardState((state) => state.cardCompanyColor);
 
   return (
@@ -14,8 +14,9 @@ const CardCvcInput = ({ value, onChange }) => {
       color={cardCompanyColor}
       value={value}
       onChange={onChange}
+      ref={ref}
     />
   );
 };
 
-export default CardCvcInput;
+export default forwardRef(CardCvcInput);

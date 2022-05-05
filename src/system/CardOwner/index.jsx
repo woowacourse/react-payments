@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import useCardState from '../../hooks/useCardState';
 import useCardDispatch from '../../hooks/useCardDispatch';
@@ -14,7 +14,7 @@ import CardOwnerInput from './CardOwnerInput';
 
 import TYPING_CARD_OWNER from './action';
 
-const CardOwner = () => {
+const CardOwner = (props, ref) => {
   const cardOwner = useCardState((state) => state.cardOwner);
   const dispatch = useCardDispatch();
 
@@ -35,11 +35,12 @@ const CardOwner = () => {
           <CardOwnerInput
             value={cardOwner}
             onChange={onChangeInput}
+            ref={ref[6]}
           />
         </Flex>
       </FlexAlignCenter>
     </div>
   );
-}
+};
 
-export default CardOwner;
+export default forwardRef(CardOwner);

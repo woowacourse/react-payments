@@ -5,13 +5,17 @@ import { isEmpty } from '../utils';
 const isAllNumber = (numbers) =>
   numbers.every((number) => Number.isInteger(Number(number)));
 
+const isFullEachCardNumber = (number) => number.length === CARD_FORM_RULE.CARD_NUMBER_EACH_FULL_LENGTH;
+
 const isFullCardNumbers = (cardNumber) =>
-  cardNumber.reduce((acc, number) => acc + number.length, 0) === CARD_FORM_RULE.CARD_NUMBER_FULL_LENGTH;
+  cardNumber.every(isFullEachCardNumber);
+
+const isFullEachCardExpiration = (number) => number.length === CARD_FORM_RULE.CARD_EXPRATION_EACH_FULL_LENGTH;
 
 const isFullCardExpiration = (cardExpiration) =>
-  cardExpiration.every((number) => number.length === CARD_FORM_RULE.CARD_EXPRATION_EACH_FULL_LENGTH);
+  cardExpiration.every(isFullEachCardExpiration);
 
-const withinRangeCardExpiration = ([month]) =>
+const withinRangeCardExpiration = (month) =>
   Number(month) >= CARD_FORM_RULE.CARD_EXPRATION_MIN_MONTH && Number(month) <= CARD_FORM_RULE.CARD_EXPRATION_MAX_MONTH;
 
 const isRemainCardExpiration = ([month, year]) => {
@@ -26,7 +30,9 @@ const withinRangeCardOwnerLength = (cardOwner) => cardOwner.length <= CARD_FORM_
 
 const isFullCardCvc = (cardCvc) => cardCvc.length === CARD_FORM_RULE.CARD_CVC_FULL_LENGTH;
 
-const isFullCardPassword = (cardPassword) => cardPassword.every((number) => !isEmpty(number));
+const isFullEachCardPassword = (number) => !isEmpty(number);
+
+const isFullCardPassword = (cardPassword) => cardPassword.every(isFullEachCardPassword);
 
 const isSelectedCardCompany = (cardCompanyName) => !isEmpty(cardCompanyName);
 
@@ -40,6 +46,9 @@ export const checkCardNumber = (cardNumber) => {
   }
 };
 
+export const isValidEachCardNumber = (number) =>
+  Number.isInteger(Number(number)) && isFullEachCardNumber(number);
+
 export const checkCardExpiration = (cardExpiration) => {
   if (!isAllNumber(cardExpiration)) {
     throw new Error(ERROR_MESSAGE.CARD_EXPIRATION_ONLY_NUMBER);
@@ -49,7 +58,7 @@ export const checkCardExpiration = (cardExpiration) => {
     throw new Error(ERROR_MESSAGE.ENTER_ALL_CARD_EXPIRATION);
   }
 
-  if (!withinRangeCardExpiration(cardExpiration)) {
+  if (!withinRangeCardExpiration(cardExpiration[0])) {
     throw new Error(ERROR_MESSAGE.WITHIN_RANGE_CARD_EXPIRATION);
   }
 
@@ -57,6 +66,12 @@ export const checkCardExpiration = (cardExpiration) => {
     throw new Error(ERROR_MESSAGE.EXPIRATION_DATE_EXCEEDED);
   }
 };
+
+export const isValidCardExpirationMonth = (month) =>
+  Number.isInteger(Number(month)) && isFullEachCardExpiration(month) && withinRangeCardExpiration(month);
+
+export const isValidCardExpiration = (cardExpiration) =>
+  Number.isInteger(Number(cardExpiration[1])) && isFullEachCardExpiration(cardExpiration[1]) && isValidCardExpirationMonth(cardExpiration[0]) && isRemainCardExpiration(cardExpiration);
 
 export const checkCardOwner = (cardOwner) => {
   if (!withinRangeCardOwnerLength(cardOwner)) {
@@ -74,6 +89,9 @@ export const checkCardCvc = (cardCvc) => {
   }
 };
 
+export const isValidCardCvc = (cardCvc) =>
+  Number.isInteger(Number(cardCvc)) && isFullCardCvc(cardCvc);
+
 export const checkCardPassword = (cardPassword) => {
   if (!isAllNumber(cardPassword)) {
     throw new Error(ERROR_MESSAGE.CARD_PASSWORD_ONLY_NUMBER);
@@ -83,6 +101,9 @@ export const checkCardPassword = (cardPassword) => {
     throw new Error(ERROR_MESSAGE.ENTER_ALL_CARD_PASSWORD);
   }
 };
+
+export const isValidEachCardPassword = (number) =>
+  Number.isInteger(Number(number)) && isFullEachCardPassword(number);
 
 export const checkCardCompany = (cardCompanyIndex) => {
   if (!isSelectedCardCompany(cardCompanyIndex)) {

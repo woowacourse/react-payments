@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import useCardState from '../../hooks/useCardState';
 import useCardDispatch from '../../hooks/useCardDispatch';
@@ -15,13 +15,19 @@ import TYPING_CARD_NUMBER from './action';
 
 import InputContainerStyled from './style';
 
-const CardNumber = () => {
+import { isValidEachCardNumber } from '../../lib/validation';
+import focusEmptyInput from '../../lib';
+
+const CardNumber = (props, ref) => {
   const cardNumber = useCardState((state) => state.cardNumber);
   const cardCompanyName = useCardState((state) => state.cardCompanyName);
   const dispatch = useCardDispatch();
 
   const onChangeInput = (index) => (e) => {
-    dispatch({ type: TYPING_CARD_NUMBER, value: e.target.value, index });
+    const value = e.target.value;
+
+    dispatch({ type: TYPING_CARD_NUMBER, value, index });
+    isValidEachCardNumber(value) && focusEmptyInput(ref, index);
   };
 
   const onFocusInput = () => {
@@ -40,6 +46,7 @@ const CardNumber = () => {
             value={cardNumber[0]}
             onChange={onChangeInput(0)}
             onFocus={onFocusInput}
+            ref={ref[0]}
           />
           <Hyphen />
           <CardNumberInput
@@ -47,6 +54,7 @@ const CardNumber = () => {
             value={cardNumber[1]}
             onChange={onChangeInput(1)}
             onFocus={onFocusInput}
+            ref={ref[1]}
           />
           <Hyphen />
           <CardNumberInput
@@ -54,6 +62,7 @@ const CardNumber = () => {
             value={cardNumber[2]}
             onChange={onChangeInput(2)}
             onFocus={onFocusInput}
+            ref={ref[2]}
           />
           <Hyphen />
           <CardNumberInput
@@ -61,11 +70,12 @@ const CardNumber = () => {
             value={cardNumber[3]}
             onChange={onChangeInput(3)}
             onFocus={onFocusInput}
+            ref={ref[3]}
           />
         </InputContainerStyled>
       </FlexAlignCenter>
     </div>
   );
-}
+};
 
-export default CardNumber;
+export default forwardRef(CardNumber);

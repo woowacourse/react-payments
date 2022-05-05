@@ -3,7 +3,7 @@ import React, { createContext, useReducer } from 'react';
 import { CARD_COMPANY_COLORS } from '../constants';
 
 import TYPING_CARD_NUMBER from '../system/CardNumber/action';
-import TYPING_CARD_EXPIRATION from '../system/CardExpiration/action';
+import { TYPING_CARD_EXPIRATION_MONTH, TYPING_CARD_EXPIRATION_YEAR } from '../system/CardExpiration/action';
 import TYPING_CARD_OWNER from '../system/CardOwner/action';
 import TYPING_CARD_CVC from '../system/CardCvc/actions';
 import TYPING_CARD_PASSWORD from '../system/CardPassword/action';
@@ -34,15 +34,17 @@ const reducer = (state, action) => {
       };
     }
 
-    case TYPING_CARD_EXPIRATION: {
-      const cardExpiration = [...state.cardExpiration];
-      const { value, index } = action;
-
-      cardExpiration[index] = value;
-
+    case TYPING_CARD_EXPIRATION_MONTH: {
       return {
         ...state,
-        cardExpiration,
+        cardExpiration: [action.value, state.cardExpiration[1]],
+      };
+    }
+
+    case TYPING_CARD_EXPIRATION_YEAR: {
+      return {
+        ...state,
+        cardExpiration: [state.cardExpiration[0], action.value],
       };
     }
 

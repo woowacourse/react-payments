@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import useCardState from '../../hooks/useCardState';
 import useCardDispatch from '../../hooks/useCardDispatch';
@@ -13,12 +13,18 @@ import CardCvcInput from './CardCvcInput';
 
 import TYPING_CARD_CVC from './actions';
 
-const CardCvc = () => {
+import { isValidCardCvc } from '../../lib/validation';
+import focusEmptyInput from '../../lib';
+
+const CardCvc = (props, ref) => {
   const cardCvc = useCardState((state) => state.cardCvc);
   const dispatch = useCardDispatch();
 
   const onChangeInput = (e) => {
-    dispatch({ type: TYPING_CARD_CVC, value: e.target.value });
+    const value = e.target.value;
+
+    dispatch({ type: TYPING_CARD_CVC, value });
+    isValidCardCvc(value) && focusEmptyInput(ref, 7);
   };
 
   return (
@@ -31,6 +37,7 @@ const CardCvc = () => {
           <CardCvcInput
             value={cardCvc}
             onChange={onChangeInput}
+            ref={ref[7]}
           />
         </Flex>
         <TipButton />
@@ -39,4 +46,4 @@ const CardCvc = () => {
   );
 };
 
-export default CardCvc;
+export default forwardRef(CardCvc);

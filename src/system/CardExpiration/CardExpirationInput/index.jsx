@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import useCardState from '../../../hooks/useCardState';
 
 import Input from '../../../components/Input';
 
-const CardExpirationInput = ({ placeholder, value, onChange }) => {
+const CardExpirationInput = ({ placeholder, value, onChange }, ref) => {
   const cardCompanyColor = useCardState((state) => state.cardCompanyColor);
 
   return (
@@ -16,8 +16,9 @@ const CardExpirationInput = ({ placeholder, value, onChange }) => {
       color={cardCompanyColor}
       value={value}
       onChange={onChange}
+      ref={ref}
     />
   );
 };
 
-export default CardExpirationInput;
+export default forwardRef(CardExpirationInput);

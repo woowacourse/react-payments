@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import useCardState from '../../../hooks/useCardState';
 
 import CardOwnerInputStyled from './style';
 
-const CardOwnerInput = ({ value, onChange }) => {
+const CardOwnerInput = ({ value, onChange }, ref) => {
   const cardCompanyColor = useCardState((state) => state.cardCompanyColor);
 
   return (
@@ -15,8 +15,9 @@ const CardOwnerInput = ({ value, onChange }) => {
       color={cardCompanyColor}
       value={value}
       onChange={onChange}
+      ref={ref}
     />
   );
 };
 
-export default CardOwnerInput;
+export default forwardRef(CardOwnerInput);

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 
 import useCardState from '../../../hooks/useCardState';
 
@@ -52,6 +52,8 @@ const CardAddForm = () => {
   const cardCompanyName = useCardState((state) => state.cardCompanyName);
   const cardCompanyColor = useCardState((state) => state.cardCompanyColor);
 
+  const inputs = Array(10).fill().map(useRef);
+
   const checkAllInput = () => {
     try {
       validator.checkCardCompany(cardCompanyName);
@@ -69,35 +71,35 @@ const CardAddForm = () => {
 
   return (
     <form>
-      <CardNumber />
+      <CardNumber ref={inputs} />
       <ErrorMessage
         setChildren={setCardNumberError}
         validation={cardNumberValidation}
       >
         {cardNumberError}
       </ErrorMessage>
-      <CardExpiration />
+      <CardExpiration ref={inputs} />
       <ErrorMessage
         setChildren={setCardExpirationError}
         validation={cardExpirationValidation}
       >
         {cardExpirationError}
       </ErrorMessage>
-      <CardOwner />
+      <CardOwner ref={inputs} />
       <ErrorMessage
         setChildren={setCardOwnerError}
         validation={cardOwnerValidation}
       >
         {cardOwnerError}
       </ErrorMessage>
-      <CardCvc />
+      <CardCvc ref={inputs} />
       <ErrorMessage
         setChildren={setCardCvcError}
         validation={cardCvcValidation}
       >
         {cardCvcError}
       </ErrorMessage>
-      <CardPassword />
+      <CardPassword ref={inputs} />
       <ErrorMessage
         setChildren={setCardPasswordError}
         validation={cardPasswordValidation}
