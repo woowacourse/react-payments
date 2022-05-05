@@ -5,6 +5,7 @@ import { uid } from 'react-uid';
 import LabelInputContainer from '../../LabelInputContainer';
 import PasswordInput from '../../Input/PasswordInput';
 import { INPUT_ELEMENT_KEY_SEPARATOR } from '../../../utils/constants';
+import { isNumberInRange } from '../../../utils/validation/form';
 
 function PasswordInputContainer({
   state,
@@ -19,17 +20,12 @@ function PasswordInputContainer({
         <PasswordInput
           key={uid(stateKey)}
           id={idx === 0 ? `${stateName}` : null}
+          value={state[stateKey]}
           maxLength={1}
           required
           inputElementsRef={inputElementsRef}
           inputElementKey={`${stateName}${INPUT_ELEMENT_KEY_SEPARATOR}${stateKey}`}
           setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
-          setPasswordInputValue={value =>
-            cardInputDispatch({
-              type: 'CHANGE_PASSWORD',
-              payload: { password: value, key: stateKey },
-            })
-          }
         />
       ))}
       <div className="inputted-password">*</div>

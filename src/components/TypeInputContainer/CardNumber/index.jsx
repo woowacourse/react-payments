@@ -24,6 +24,7 @@ function CardNumberInputContainer({
       cardInputDispatch({ type: 'CHANGE_CARD_NUMBER', payload: { cardNumber, key } });
     }
   };
+
   return (
     <LabelInputContainer labelTitle="카드번호" htmlFor={`${stateName}`}>
       {Object.keys(state).map((stateKey, idx) =>
@@ -43,17 +44,12 @@ function CardNumberInputContainer({
           <PasswordInput
             key={uid(stateKey)}
             id={idx === 0 ? `${stateName}` : null}
+            value={state[stateKey]}
             maxLength={4}
             required
             inputElementsRef={inputElementsRef}
             inputElementKey={`${stateName}${INPUT_ELEMENT_KEY_SEPARATOR}${stateKey}`}
             setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
-            setPasswordInputValue={value =>
-              cardInputDispatch({
-                type: 'CHANGE_CARD_NUMBER',
-                payload: { cardNumber: value, key: stateKey },
-              })
-            }
           />
         ),
       )}

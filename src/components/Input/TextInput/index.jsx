@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useAutoFocus } from '../../../hooks/useAutoFocus';
 import { findNotCompletedInput } from '../../../utils/util/form';
+import { useCallback } from 'react';
 
 function TextInput({
   id,
@@ -14,19 +15,42 @@ function TextInput({
   inputElementKey,
   setIsShowVirtualKeyboard,
 }) {
-  useEffect(() => {
-    if (value.length === maxLength) {
-      const { current: inputElementsMap } = inputElementsRef;
+  const nextInputFocus = useCallback((currentInput, nextInput) => {
+    currentInput.isComplete = true;
 
-      const {
-        nextInput: { element },
-      } = findNotCompletedInput(inputElementsMap, inputElementKey);
+    const { element: currentElement } = currentInput;
+    const { element: nextElement } = nextInput;
 
-      inputElementsMap[inputElementKey].isComplete = true;
+    nextElement?.focus();
+    currentElement?.blur();
+  }, []);
 
-      element?.focus();
-    }
-  }, [value, inputElementsRef, inputElementKey, maxLength]);
+  useAutoFocus({
+    value,
+    maxLength,
+    inputElementsRef,
+    inputElementKey,
+    sideEffect: nextInputFocus,
+  });
+
+  // useEffect(() => {
+  //   if (value.length === maxLength) {
+  //     const { current: inputElementsMap } = inputElementsRef;
+  //     const { element: currentElement } = inputElementsMap[inputElementKey];
+
+  //     const {
+  //       nextInput: { element: nextElement },
+  //     } = findNotCompletedInput(inputElementsMap, inputElementKey);
+
+  //     inputElementsMap[inputElementKey].isComplete = true;
+
+  //     nextElement?.focus();
+
+  //     if (!nextElement) {
+  //       currentElement?.blur();
+  //     }
+  //   }
+  // }, [value, inputElementsRef, inputElementKey, maxLength, setIsShowVirtualKeyboard]);
 
   const onFocus = () => {
     setIsShowVirtualKeyboard(prev => ({
@@ -45,8 +69,6 @@ function TextInput({
       maxLength={maxLength}
       required={required}
       placeholder={placeholder}
-      onChange={onChange}
-      onFocus={onFocus}
       ref={element => {
         const { current } = inputElementsRef;
 
@@ -57,6 +79,8 @@ function TextInput({
             : element?.value.length !== 0,
         };
       }}
+      onChange={onChange}
+      onFocus={onFocus}
     />
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { uid } from 'react-uid';
+import { isNumberInRange } from '../../utils/validation/form';
 import { findNotCompletedInput } from '../../utils/util/form';
 const shuffle = array => {
   const target = [...array];
@@ -21,37 +22,34 @@ function VirtualKeyboard({
     } = e;
 
     const { current: inputElementsMap } = inputElementsRef;
-    const { element: inputElement } = inputElementsMap[elementKey];
-    const { maxLength } = inputElement;
+    const { element: currentElement } = inputElementsMap[elementKey];
+    const { value, maxLength } = currentElement;
 
-    inputElement.focus();
+    currentElement.focus();
 
-    if (inputElement.value.length < maxLength && typeof Number(textContent) === 'number') {
-      inputElement.value = `${inputElement.value}${textContent}`;
-
-      if (inputElement.value.length === maxLength) {
-        cardInputDispatch({
-          type: 'CHANGE_PASSWORD_INPUT',
-          payload: { elementKey, value: inputElement.value },
-        });
-      }
+    if (isNumberInRange(`${value}${textContent}`, maxLength)) {
+      cardInputDispatch({
+        type: 'CHANGE_PASSWORD_INPUT',
+        payload: { elementKey, value: `${value}${textContent}` },
+      });
     }
 
-    if (inputElement.value.length === maxLength) {
+    if (value.length === maxLength) {
       const {
         nextInput: { element: nextElement },
       } = findNotCompletedInput(inputElementsMap, elementKey);
 
       inputElementsMap[elementKey].isComplete = true;
+
       nextElement?.focus();
 
       if (!nextElement) {
-        inputElement.blur();
         setIsShowVirtualKeyboard(prev => ({
           ...prev,
           isShow: false,
           elementKey: null,
         }));
+        currentElement?.blur();
       }
     }
   };
@@ -59,8 +57,12 @@ function VirtualKeyboard({
   const onClickBackSpace = () => {
     const { current: inputElementsMap } = inputElementsRef;
     const { element: inputElement } = inputElementsMap[elementKey];
+    const { value } = inputElement;
 
-    inputElement.value = inputElement.value.slice(0, -1);
+    cardInputDispatch({
+      type: 'CHANGE_PASSWORD_INPUT',
+      payload: { elementKey, value: value.slice(0, -1) },
+    });
   };
 
   const onClickCloseButton = () => {

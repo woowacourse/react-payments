@@ -46,7 +46,7 @@ function CardInputForm({ cardInput, cardInputDispatch }) {
   };
 
   return (
-    <form className="card-input-form scroll-form" onSubmit={onSubmitInputForm}>
+    <form className="card-input-form scroll-form" onSubmit={onSubmitInputForm} autoComplete="off">
       {Object.keys(cardInput).map(key => {
         const TypeInputContainer = InputContainer[key];
         if (key === 'cardType') {

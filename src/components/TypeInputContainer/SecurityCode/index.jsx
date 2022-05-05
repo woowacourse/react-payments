@@ -4,7 +4,7 @@ import LabelInputContainer from '../../LabelInputContainer';
 import PasswordInput from '../../Input/PasswordInput';
 
 function SecurityCodeInputContainer({
-  cardInputDispatch,
+  state,
   inputElementsRef,
   stateName,
   setIsShowVirtualKeyboard,
@@ -18,14 +18,12 @@ function SecurityCodeInputContainer({
     >
       <PasswordInput
         id={`${stateName}`}
+        value={state}
         maxLength={3}
         required
         inputElementsRef={inputElementsRef}
         inputElementKey={stateName}
         setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
-        setPasswordInputValue={value =>
-          cardInputDispatch({ type: 'CHANGE_SECURITY_CODE', payload: { securityCode: value } })
-        }
       />
     </LabelInputContainer>
   );
