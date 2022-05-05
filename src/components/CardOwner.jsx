@@ -21,14 +21,16 @@ export default function CardOwner({ color }) {
         </S.NameLength>
       </S.TitleWrapper>
       <S.InputBox>
-        <S.InputBasicLeft
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          type="text"
-          maxLength="30"
-          color={color}
-          value={cardOwner}
-          onChange={onChangeInput}
-        />
+        <S.InputContainer>
+          <S.InputBasicLeft
+            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+            type="text"
+            maxLength="30"
+            color={color}
+            value={cardOwner}
+            onChange={onChangeInput}
+          />
+        </S.InputContainer>
       </S.InputBox>
       <ErrorMessage
         value={cardOwner}

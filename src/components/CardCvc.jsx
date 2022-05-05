@@ -22,14 +22,16 @@ export default function CardCvc() {
   return (
     <S.Container>
       <S.InputTitle>보안코드(CVC/CVV)</S.InputTitle>
-      <S.InputBox width="23%">
-        <S.InputBasic
-          type="password"
-          maxLength="3"
-          value={cardCvc}
-          color={cardColor}
-          onChange={onChangeInput}
-        />
+      <S.InputBox>
+        <S.InputContainer width="23%">
+          <S.InputBasic
+            type="password"
+            maxLength="3"
+            value={cardCvc}
+            color={cardColor}
+            onChange={onChangeInput}
+          />
+        </S.InputContainer>
         <S.TipButton onClick={onClickTip}>?</S.TipButton>
       </S.InputBox>
       <ErrorMessage
