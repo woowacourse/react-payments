@@ -1,15 +1,15 @@
 import React from 'react';
-import CardAddition from './CardAddition';
-import CardContext from './CardContext';
-import useInitialAppValue from './hooks/useInitialAppValue';
-import { initialState, reducer } from './reducers';
 
-function App() {
+import CardAddition from './pages/CardAddition';
+import { CardProvider } from './context/CardProvider';
+
+
+const App = () => {
   return (
-    <div className="App">
-      <CardContext.Provider value={useInitialAppValue(reducer, initialState)}>
+    <div className='App'>
+      <CardProvider>
         <CardAddition />
-      </CardContext.Provider>
+      </CardProvider>
     </div>
   );
 }

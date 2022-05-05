@@ -1,0 +1,3 @@
+const TYPING_CARD_OWNER = 'TYPING_CARD_OWNER';
+
+export default TYPING_CARD_OWNER;

@@ -1,0 +1,3 @@
+const TYPING_CARD_NUMBER = 'TYPING_CARD_NUMBER';
+
+export default TYPING_CARD_NUMBER;

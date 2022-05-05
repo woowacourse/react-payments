@@ -1,0 +1,3 @@
+const TYPING_CARD_CVC = 'TYPING_CARD_CVC';
+
+export default TYPING_CARD_CVC;
