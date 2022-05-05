@@ -252,19 +252,25 @@ export const NextButton = styled.button`
 `;
 
 export const PageTitleBox = styled.div`
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 22px;
   display: flex;
-  align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `;
 
 export const PageTitle = styled.span`
   margin-left: 17px;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
   letter-spacing: -0.085em;
+  color: #555;
+`;
+
+export const PrevButton = styled.span`
+  font-size: 50px;
+  color: #555;
+  cursor: pointer;
+  line-height: 10px;
+  &:hover {
+  }
 `;
 
 export const TipButton = styled.div`
@@ -321,11 +327,7 @@ export const Modal = styled.div`
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  max-width: 360px;
+  max-width: 440px;
   z-index: 100;
 `;
 
@@ -340,9 +342,15 @@ export const UnderlineInput = styled.input`
   width: 310px;
   font-size: 24px;
   margin: 30px;
+  font-weight: normal;
 
   &:focus {
     border-bottom: 2px solid #555;
     outline: none;
   }
+`;
+
+export const TitleText = styled.p`
+  font-size: 24px;
+  color: #555;
 `;

@@ -20,6 +20,8 @@ import ErrorMessage from 'components/ErrorMessage';
 import ClickCardBox from 'components/ClickCardBox';
 
 function CardAddition() {
+  const navigate = useNavigate();
+
   const {
     cardNumber,
     cardExpiration,
@@ -65,8 +67,6 @@ function CardAddition() {
     setIsSubmitted(true);
   };
 
-  const navigate = useNavigate();
-
   const onConfirmCard = (event, nickname) => {
     event.preventDefault();
     const newCardData = {
@@ -84,9 +84,19 @@ function CardAddition() {
 
   const cardName = cardCompanyIndex === -1 ? '' : CARD_COMPANIES[cardCompanyIndex].NAME;
 
+  const onClickPrev = () => {
+    navigate('/card-list');
+  };
+
+  const onCloseModal = () => {
+    setIsSubmitted(false);
+  };
+
   return (
     <S.Container>
-      <PageTitle hasPrevButton={true} title="카드 추가" />
+      <PageTitle hasPrevButton={true} onClickPrev={onClickPrev}>
+        카드 추가
+      </PageTitle>
       <ClickCardBox>
         <Card
           cardNumber={cardNumber}
@@ -114,7 +124,13 @@ function CardAddition() {
       </NextButton>
       <CardListModal />
       <TipModal />
-      {isSubmitted && <CardConfirmModal cardData={cardData} onConfirmCard={onConfirmCard} />}
+      {isSubmitted && (
+        <CardConfirmModal
+          cardData={cardData}
+          onConfirmCard={onConfirmCard}
+          onCloseModal={onCloseModal}
+        />
+      )}
     </S.Container>
   );
 }

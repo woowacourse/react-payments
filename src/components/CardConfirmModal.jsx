@@ -6,8 +6,9 @@ import NextButton from './NextButton';
 import * as S from 'styles.js';
 import { useState } from 'react';
 import FormBasic from './FormBasic';
+import PageTitle from './PageTitle';
 
-export default function CardConfirmModal({ cardData, onConfirmCard }) {
+export default function CardConfirmModal({ cardData, onConfirmCard, onCloseModal }) {
   const [nickname, setNickname] = useState('');
 
   const onChangeInput = (e) => {
@@ -19,6 +20,11 @@ export default function CardConfirmModal({ cardData, onConfirmCard }) {
       {ReactDOM.createPortal(<S.Backdrop />, document.getElementById('backdrop-root'))}
       {ReactDOM.createPortal(
         <S.Modal>
+          <PageTitle hasPrevButton={true} onClickPrev={onCloseModal}>
+            카드 추가
+          </PageTitle>
+
+          <S.TitleText>카드 정보를 최종 확인해주세요.</S.TitleText>
           <Card
             cardName={cardData.cardName}
             cardColor={cardData.cardColor}
@@ -34,7 +40,7 @@ export default function CardConfirmModal({ cardData, onConfirmCard }) {
               type="text"
             />
             <NextButton disabled={false} color={cardData.cardColor}>
-              확인
+              등록
             </NextButton>
           </FormBasic>
         </S.Modal>,
