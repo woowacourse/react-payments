@@ -45,4 +45,4 @@ export const isAllInputReady = ({
 };
 
 export const isInvalidCardName = (cardName) =>
-  cardName.length === 0 || cardName.length > 15;
+  cardName.length === 0 || cardName.length > MAX_LENGTH.CARD_NAME;
