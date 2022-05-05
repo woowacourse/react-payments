@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Card from './common/Card';
 import CardCompany from './common/CardCompany';
 import Modal from './common/Modal';
-import { Span } from './common/styled';
 
 const CardContainer = styled.div`
   display: flex;
@@ -10,45 +10,7 @@ const CardContainer = styled.div`
   justify-content: center;
   width: 100%;
 `;
-const CardBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  width: 208px;
-  height: 130px;
-  padding: 16px;
-  background-color: ${props => props.hexColor};
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  margin: 10px 0;
-  cursor: pointer;
 
-  &:hover {
-    background-color: ${props => `${props.hexColor}cc`};
-  }
-`;
-const CardHeader = styled.div``;
-const CardChip = styled.div`
-  width: 45px;
-  height: 25px;
-  margin: 8px;
-  border-radius: 10%;
-  background-color: #cbba64;
-`;
-const CardBottom = styled.div``;
-const CardNumber = styled.div``;
-const CardInfo = styled.div`
-  width: 200px;
-  display: flex;
-  justify-content: space-between;
-`;
-const CardParagraph = styled.p`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: ${props => props.width}px;
-`;
 const GridContainer = styled.div`
   display: grid;
   gap: 10px;
@@ -73,7 +35,7 @@ const cardCompanyList = [
   { color: '#192dff', name: '블링 카드' },
 ];
 
-function CardShape({ cardNumber, cardOwnerName, cardDate: { month, year }, dimensions, setCardCompany, cardCompany }) {
+function CardShape({ cardNumber, cardOwnerName, cardDate, dimensions, setCardCompany, cardCompany }) {
   const [isShown, setIsShown] = useState(false);
 
   const handleClickBox = () => {
@@ -90,21 +52,13 @@ function CardShape({ cardNumber, cardOwnerName, cardDate: { month, year }, dimen
 
   return (
     <CardContainer>
-      <CardBox onClick={handleClickBox} hexColor={cardCompany.hexColor}>
-        <CardHeader>
-          <Span>{cardCompany.name}</Span>
-        </CardHeader>
-        <CardChip />
-        <CardBottom>
-          <CardNumber>
-            <Span>{cardNumber}</Span>
-          </CardNumber>
-          <CardInfo>
-            <CardParagraph width="120">{cardOwnerName || 'NAME'}</CardParagraph>
-            <CardParagraph>{`${month || 'MM'} / ${year || 'YY'}`}</CardParagraph>
-          </CardInfo>
-        </CardBottom>
-      </CardBox>
+      <Card
+        handleClickBox={handleClickBox}
+        cardCompany={cardCompany}
+        cardNumber={cardNumber}
+        cardOwnerName={cardOwnerName}
+        cardDate={cardDate}
+      />
       <Modal isOpen={isShown} setIsOpen={setIsShown} dimensions={dimensions}>
         <GridContainer>
           {cardCompanyList.map(({ color, name }, index) => (
