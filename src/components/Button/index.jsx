@@ -13,9 +13,9 @@ const NextButtonWrapper = styled.button`
   cursor: pointer;
 `;
 
-const NextButton = ({ children, name, type }) => {
+const NextButton = ({ children, name, onClick }) => {
   return (
-    <NextButtonWrapper name={name} type={type}>
+    <NextButtonWrapper name={name} type="button" onClick={onClick}>
       {children}
     </NextButtonWrapper>
   );
@@ -23,7 +23,6 @@ const NextButton = ({ children, name, type }) => {
 
 NextButton.propTypes = {
   children: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 };
 

@@ -4,13 +4,25 @@ import AddCardResultPage from './Page/AddCardResult/AddCardResult';
 import AddCardPage from './Page/AddCard/AddCardPage';
 import CardListPage from './Page/CardList/CardListPage';
 
+import { CardListContext, CardIndexContext } from '../contexts';
+
 const CardApp = () => {
+  const [cardList, setCardList] = useState([]);
+  const [cardIndex, setCardIndex] = useState(1);
+
+  useEffect(() => {
+    console.log(cardList);
+  }, [cardList]);
   return (
-    <Routes>
-      <Route path="/react-payments/" element={<AddCardPage />} />
-      <Route path="/react-payments/result" element={<AddCardResultPage />} />
-      <Route path="/react-payments/list" element={<CardListPage />} />
-    </Routes>
+    <CardListContext.Provider value={{ cardList, setCardList }}>
+      <CardIndexContext.Provider value={{ cardIndex, setCardIndex }}>
+        <Routes>
+          <Route path="/react-payments/" element={<AddCardPage />} />
+          <Route path="/react-payments/result" element={<AddCardResultPage />} />
+          <Route path="/react-payments/list" element={<CardListPage />} />
+        </Routes>
+      </CardIndexContext.Provider>
+    </CardListContext.Provider>
   );
 };
 

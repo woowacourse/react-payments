@@ -53,9 +53,7 @@ const AddCardResultPage = () => {
       </CardNickNameInputWrapper>
       <NextButtonWrapper>
         <Link to="/react-payments/list">
-          <NextButton name="confirmButton" type="button">
-            확인
-          </NextButton>
+          <NextButton name="confirmButton">확인</NextButton>
         </Link>
       </NextButtonWrapper>
     </Container>
