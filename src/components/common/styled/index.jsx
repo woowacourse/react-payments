@@ -11,6 +11,7 @@ const Form = styled.form`
 `;
 
 const InputContainer = styled.div`
+  position: ${props => props.position || 'static'};
   width: ${props => props.width || '100%'};
   margin: 16px 0;
 `;
