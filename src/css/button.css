@@ -1,0 +1,31 @@
+.button-box {
+  width: 100%;
+  text-align: right;
+}
+
+.button-text {
+  background-color: #fff;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.button-text:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.back-button {
+  width: 10.43px;
+  height: 10.43px;
+
+  border-bottom: 1.5px solid #525252;
+  border-left: 1.5px solid #525252;
+  box-sizing: border-box;
+  transform: rotate(41.71deg);
+}
+
+.back-button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
