@@ -85,7 +85,11 @@ const CardAddPage = () => {
       <SecurityCodeContainer />
       <CardPasswordContainer />
 
-      {allFormReady && <LinkButton type="submit">다음</LinkButton>}
+      {allFormReady && (
+        <LinkButton type="submit" path={"/register"}>
+          다음
+        </LinkButton>
+      )}
       {isShowModal && (
         <Modal toggleModal={toggleShowModal}>
           <CardTypeSelector />

@@ -4,9 +4,7 @@ const useReady = (state, validator) => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (validator(state) === ready) {
-      setReady((prev) => !prev);
-    }
+    setReady(!validator(state));
   }, [state, ready, validator]);
 
   return [ready];
