@@ -1,7 +1,3 @@
-import { createContext } from 'react';
-
-const CardContext = createContext(null);
-
 const initialState = {
   card: {},
   cards: [],
@@ -24,4 +20,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export { CardContext, initialState, reducer };
+export { initialState, reducer };

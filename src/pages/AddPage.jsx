@@ -1,4 +1,4 @@
-import { memo, useContext, useEffect, useState } from 'react';
+import { memo, useContext, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -14,7 +14,7 @@ import CardInputs from '../components/CardInputs';
 import { Button, Card } from '../components/common';
 import { ReactComponent as Arrow } from '../assets/arrow.svg';
 
-import { CardContext } from '../reducers';
+import { CardContext, CardInfoContext } from '../contexts';
 import isValidCardInputs from '../utils/validator';
 
 const StyledPage = styled.form`
@@ -64,6 +64,34 @@ function AddPage() {
   const navigate = useNavigate();
   const dispatch = useContext(CardContext);
 
+  const forwardValue = useMemo(
+    () => ({
+      cardNumber: encryptedCardNumber,
+      setCardNumber,
+      validDate,
+      setValidDate,
+      cardOwnerName,
+      setCardOwnerName,
+      CVC,
+      setCVC,
+      isModalOpen,
+      toggleModal: toggleIsModalOpen,
+      firstPassword,
+      setFirstPassword,
+      secondPassword,
+      setSecondPassword,
+    }),
+    [
+      cardNumber,
+      validDate,
+      cardOwnerName,
+      CVC,
+      isModalOpen,
+      firstPassword,
+      secondPassword,
+    ]
+  );
+
   useEffect(() => {
     try {
       isValidCardInputs(
@@ -100,47 +128,34 @@ function AddPage() {
   };
 
   return (
-    <StyledPage>
-      <Header>
-        <Button
-          size="small"
-          content={<Arrow />}
-          onClickFunc={onClickArrowButton}
+    <CardInfoContext.Provider value={forwardValue}>
+      <StyledPage>
+        <Header>
+          <Button
+            size="small"
+            content={<Arrow />}
+            onClickFunc={onClickArrowButton}
+          />
+          <Title>카드 추가</Title>
+        </Header>
+        <StyledCard
+          bgColor="#ADD8E6"
+          size="medium"
+          name={cardOwnerName}
+          number={encryptedCardNumber.split('-').join(' ')}
+          validDate={validDate}
         />
-        <Title>카드 추가</Title>
-      </Header>
-      <StyledCard
-        bgColor="#ADD8E6"
-        size="medium"
-        name={cardOwnerName}
-        number={encryptedCardNumber.split('-').join(' ')}
-        validDate={validDate}
-      />
-      <CardInputs
-        cardNumber={encryptedCardNumber}
-        setCardNumber={setCardNumber}
-        validDate={validDate}
-        setValidDate={setValidDate}
-        cardOwnerName={cardOwnerName}
-        setCardOwnerName={setCardOwnerName}
-        CVC={CVC}
-        setCVC={setCVC}
-        isModalOpen={isModalOpen}
-        toggleModal={toggleIsModalOpen}
-        firstPassword={firstPassword}
-        setFirstPassword={setFirstPassword}
-        secondPassword={secondPassword}
-        setSecondPassword={setSecondPassword}
-      />
-      {isPossible && (
-        <NextButton
-          color="#04C09E"
-          content="다음"
-          fontWeight="bold"
-          onClickFunc={onClickNextButton}
-        />
-      )}
-    </StyledPage>
+        <CardInputs />
+        {isPossible && (
+          <NextButton
+            color="#04C09E"
+            content="다음"
+            fontWeight="bold"
+            onClickFunc={onClickNextButton}
+          />
+        )}
+      </StyledPage>
+    </CardInfoContext.Provider>
   );
 }
 

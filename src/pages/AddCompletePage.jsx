@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import useInput from '../hooks/useInput';
 
 import { Button, Card } from '../components/common';
-import { CardContext } from '../reducers';
+import { CardContext } from '../contexts';
 import { splitCardNumbers } from '../utils/regExp';
 
 const StyledPage = styled.div`

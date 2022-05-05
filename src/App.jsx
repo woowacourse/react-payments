@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { AddCompletePage, AddPage, CardListPage } from './pages';
 
-import { CardContext, initialState, reducer } from './reducers';
+import { CardContext } from './contexts';
+import { initialState, reducer } from './reducers';
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);

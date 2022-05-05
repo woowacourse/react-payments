@@ -1,15 +1,25 @@
-import CARD_RULE from '../../constants';
+import { memo } from 'react';
+
 import { Input } from '../common';
 
-export default function CardNumberInput({ number, setNumber }) {
+import CARD_RULE from '../../constants';
+import { CardInfoContext } from '../../contexts';
+
+function CardNumberInput() {
   return (
-    <div>
-      <Input
-        description="카드 번호"
-        value={number}
-        maxLength={CARD_RULE.NUMBER_MAX_LENGTH + 3}
-        onChangeFunc={setNumber}
-      />
-    </div>
+    <CardInfoContext.Consumer>
+      {({ cardNumber, setCardNumber }) => (
+        <div>
+          <Input
+            description="카드 번호"
+            value={cardNumber}
+            maxLength={CARD_RULE.NUMBER_MAX_LENGTH + 3}
+            onChangeFunc={setCardNumber}
+          />
+        </div>
+      )}
+    </CardInfoContext.Consumer>
   );
 }
+
+export default memo(CardNumberInput);
