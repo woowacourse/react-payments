@@ -1,8 +1,16 @@
 import styled from 'styled-components';
 import { INPUT_PRIMARY_BG_COLOR, LABEL_PRIMARY_COLOR } from '../../../style';
 
+const Form = styled.form`
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const InputContainer = styled.div`
-  position: ${props => props.position || 'static'};
   width: ${props => props.width || '100%'};
   margin: 16px 0;
 `;
@@ -33,4 +41,4 @@ const Span = styled.span`
   padding: ${props => props.padding || '0'};
 `;
 
-export { InputContainer, InputWrapper, Label, Span };
+export { Form, InputContainer, InputWrapper, Label, Span };

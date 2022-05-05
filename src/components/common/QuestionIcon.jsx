@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import { BUBBLE_PRIMARY_BG_COLOR, BUBBLE_PRIMARY_COLOR, LABEL_PRIMARY_COLOR } from '../../style';
 
 const QuestionContainer = styled.div`
-  position: absolute;
-  top: 45%;
-  right: -8px;
+  position: relative;
 `;
 
 const TextArea = styled.p`
