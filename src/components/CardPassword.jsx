@@ -3,6 +3,7 @@ import * as S from 'styles.js';
 import ErrorMessage from 'components/ErrorMessage';
 import validator from 'validations/validator';
 import { TYPES, CardStateContext, CardDispatchContext } from 'context/CardContext';
+import { AutoFocusInputBox } from './AutoFocusInputBox';
 
 export default function CardPassword({ color }) {
   const { cardPassword, cardPasswordErrorMessage } = useContext(CardStateContext);
@@ -16,28 +17,30 @@ export default function CardPassword({ color }) {
     <S.Container>
       <S.InputTitle>카드 비밀번호</S.InputTitle>
       <S.ExtendedInputBox>
-        <S.InputBasic
-          type="password"
-          width="43px"
-          maxLength="1"
-          color={color}
-          value={cardPassword[0]}
-          onChange={onChangeInput(0)}
-        />
-        <S.InputBasic
-          type="password"
-          width="43px"
-          maxLength="1"
-          color={color}
-          value={cardPassword[1]}
-          onChange={onChangeInput(1)}
-        />
-        <S.PasswordBox>
-          <S.Circle size="5px" color={color} />
-        </S.PasswordBox>
-        <S.PasswordBox>
-          <S.Circle size="5px" color={color} />
-        </S.PasswordBox>
+        <AutoFocusInputBox maxValueLength={1}>
+          <S.InputBasic
+            type="password"
+            width="43px"
+            maxLength="1"
+            color={color}
+            value={cardPassword[0]}
+            onChange={onChangeInput(0)}
+          />
+          <S.InputBasic
+            type="password"
+            width="43px"
+            maxLength="1"
+            color={color}
+            value={cardPassword[1]}
+            onChange={onChangeInput(1)}
+          />
+          <S.PasswordBox>
+            <S.Circle size="5px" color={color} />
+          </S.PasswordBox>
+          <S.PasswordBox>
+            <S.Circle size="5px" color={color} />
+          </S.PasswordBox>
+        </AutoFocusInputBox>
       </S.ExtendedInputBox>
       <ErrorMessage
         value={cardPassword}
