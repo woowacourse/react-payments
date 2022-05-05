@@ -13,8 +13,8 @@ const CardNickNameInputWrapper = styled.input`
   appearance: none;
 `;
 
-const CardNickNameInput = () => {
-  return <CardNickNameInputWrapper />;
+const CardNickNameInput = ({ onChange }) => {
+  return <CardNickNameInputWrapper onChange={onChange} />;
 };
 
 export default CardNickNameInput;

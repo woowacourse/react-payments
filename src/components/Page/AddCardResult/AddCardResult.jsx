@@ -41,12 +41,18 @@ const AddCardResultPage = () => {
   const { cardList, setCardList } = useContext(CardListContext);
   const { cardIndex, setCardIndex } = useContext(CardIndexContext);
 
-  const [nickName, isNickNameError, onChangeNickName] = useInputValue({
+  const [cardNickName, isCardNickNameError, onChangeCardNickName] = useInputValue({
     validation: checkCardNickName,
   });
 
-  const { nickname, ownerName, cardType, cardNumber, expiredDate, secureCode, password } =
-    cardList[cardIndex - 1];
+  const { nickName, ownerName, cardType, cardNumber, expiredDate } = cardList[cardIndex - 1];
+
+  const submitCardNickName = (e) => {
+    const updatedCardList = cardList.map((item) =>
+      item.id === cardIndex - 1 ? { ...item, nickName: cardNickName } : item,
+    );
+    setCardList(updatedCardList);
+  };
 
   return (
     <Container>
@@ -62,12 +68,14 @@ const AddCardResultPage = () => {
         />
       </CardWrapper>
       <CardNickNameInputWrapper>
-        <CardNickNameInput onChange={onChangeNickName} />
+        <CardNickNameInput onChange={onChangeCardNickName} />
       </CardNickNameInputWrapper>
       <NextButtonWrapper>
-        {!isNickNameError && (
+        {!isCardNickNameError && (
           <Link to="/react-payments/list">
-            <NextButton name="confirmButton">확인</NextButton>
+            <NextButton name="confirmButton" onClick={submitCardNickName}>
+              확인
+            </NextButton>
           </Link>
         )}
       </NextButtonWrapper>

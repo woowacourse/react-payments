@@ -150,7 +150,7 @@ const AddCardPage = () => {
   const createCardObject = () => {
     return {
       id: cardIndex,
-      nickname: '',
+      nickName: '',
       ownerName: ownerName,
       cardType: cardInfo,
       cardNumber: [firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber],
