@@ -8,6 +8,11 @@ const useModal = (element) => {
   const closeModal = () => {
     setVisible(false);
   };
+
+  const openModal = () => {
+    setVisible(true);
+  };
+
   const ModalElement = () => {
     return (
       visible && (
@@ -18,7 +23,7 @@ const useModal = (element) => {
     );
   };
 
-  return [setVisible, ModalElement];
+  return [openModal, closeModal, ModalElement];
 };
 
 export default useModal;

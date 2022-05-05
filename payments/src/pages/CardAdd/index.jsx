@@ -14,26 +14,27 @@ import ConfirmAdd from "../../components/organisms/ConfirmAdd";
 
 const CardAdd = () => {
   const { cardInfo, dispatch, validateCardInfo } = useCard();
-  const [setConfirmVisible, ConfirmModal] = useModal(
+  const [openConfirmModal, closeConfirmModal, ConfirmModal] = useModal(
     <ConfirmAdd
       cardInfo={cardInfo}
       closeModal={() => {
-        setConfirmVisible(false);
+        closeConfirmModal();
       }}
       submit={() => {
         alert("카드가 등록되었습니다");
-        setConfirmVisible(false);
+        closeConfirmModal();
       }}
     />
   );
-  const [setColorPickerVisible, ColorPickerModal] = useModal(
-    <CardColorPicker
-      closeModal={() => {
-        setColorPickerVisible(false);
-      }}
-      onChangeCardName={dispatch}
-    />
-  );
+  const [openColorPickerVisible, closeColorPickerVisible, ColorPickerModal] =
+    useModal(
+      <CardColorPicker
+        closeModal={() => {
+          closeColorPickerVisible();
+        }}
+        onChangeCardName={dispatch}
+      />
+    );
 
   const { cardName, cardNumber, expiredDate, ownerName, secureCode, password } =
     cardInfo;
@@ -41,14 +42,10 @@ const CardAdd = () => {
   const submitCard = () => {
     try {
       validateCardInfo();
-      setConfirmVisible(true);
+      openConfirmModal();
     } catch (e) {
       alert(e.message);
     }
-  };
-
-  const openColorPickerModal = () => {
-    setColorPickerVisible(true);
   };
 
   return (
@@ -59,7 +56,7 @@ const CardAdd = () => {
           <p>카드 추가</p>
         </header>
         <div className="card-add__container">
-          <Card cardInfo={cardInfo} onClick={openColorPickerModal} />
+          <Card cardInfo={cardInfo} onClick={openColorPickerVisible} />
           {Boolean(cardName) || (
             <span className="select-card-message">
               카드를 눌러 카드를 선택해주세요
