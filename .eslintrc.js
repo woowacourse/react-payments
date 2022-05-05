@@ -29,8 +29,10 @@ module.exports = {
     'consistent-return': 'off',
     'comma-dangle': 'off',
     'default-case': 'off',
+    'default-param-last': 'off',
+    'implicit-arrow-linebreak': 'off',
     'linebreak-style': 'off',
     'object-curly-newline': 'off',
-    'operator-linebreak': ['error', 'after'],
+    'operator-linebreak': 'off',
   },
 };

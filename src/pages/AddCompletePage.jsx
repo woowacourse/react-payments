@@ -1,8 +1,12 @@
-import { memo } from 'react';
+import { memo, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import useInput from '../hooks/useInput';
+
 import { Button, Card } from '../components/common';
+import { CardContext } from '../reducers';
+import { splitCardNumbers } from '../utils/regExp';
 
 const StyledPage = styled.div`
   align-items: center;
@@ -39,10 +43,18 @@ const CheckButton = styled(Button)`
   margin: auto 0 0 auto;
 `;
 
-function AddCompletePage() {
+function AddCompletePage({ card }) {
+  const [cardName, setCardName] = useInput('');
+
   const navigate = useNavigate();
+  const dispatch = useContext(CardContext);
 
   const onClickCheckButton = () => {
+    dispatch({
+      type: 'ADD_CARD',
+      cardName,
+    });
+
     navigate('/');
   };
 
@@ -50,13 +62,13 @@ function AddCompletePage() {
     <StyledPage>
       <CompleteMessage>카드등록이 완료되었습니다.</CompleteMessage>
       <Card
-        bgColor="#ADD8E6"
+        bgColor={card.cardColor}
         size="large"
-        name="HALEE"
-        number="1111 2222 •••• ••••"
-        validDate="05/22"
+        name={card.cardOwnerName}
+        number={splitCardNumbers(card.cardNumber, ' ')}
+        validDate={card.validDate}
       />
-      <Input />
+      <Input value={cardName} onChange={setCardName} />
       <CheckButton
         color="#04C09E"
         content="확인"

@@ -1,17 +1,27 @@
+import { memo, useReducer } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import CardListPage from './pages/CardListPage';
-import AddPage from './pages/AddPage';
-import AddCompletePage from './pages/AddCompletePage';
+import { AddCompletePage, AddPage, CardListPage } from './pages';
 
-export default function App() {
+import { CardContext, initialState, reducer } from './reducers';
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<CardListPage />} />
-        <Route path="/add" element={<AddPage />} />
-        <Route path="/complete" element={<AddCompletePage />} />
-      </Routes>
-    </Router>
+    <CardContext.Provider value={dispatch}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<CardListPage cards={state.cards} />} />
+          <Route path="/add" element={<AddPage />} />
+          <Route
+            path="/complete"
+            element={<AddCompletePage card={state.card} />}
+          />
+        </Routes>
+      </Router>
+    </CardContext.Provider>
   );
 }
+
+export default memo(App);

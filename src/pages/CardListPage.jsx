@@ -41,7 +41,7 @@ const PlusCard = styled.div`
   width: 213px;
 `;
 
-function CardListPage() {
+function CardListPage({ cards }) {
   const navigate = useNavigate();
 
   const onClickPlusButton = () => {
@@ -52,7 +52,7 @@ function CardListPage() {
     <StyledPage>
       <Title>보유카드</Title>
       <Content>
-        <Cards />
+        <Cards cards={cards} />
         <PlusCard onClick={onClickPlusButton}>+</PlusCard>
       </Content>
     </StyledPage>

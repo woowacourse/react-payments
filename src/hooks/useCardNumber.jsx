@@ -35,7 +35,7 @@ export default function useCardNumber(initialValue) {
             : state;
 
         setEncryptedCardNumber(
-          splitCardNumbers(processedNumbers) ?? initialValue
+          splitCardNumbers(processedNumbers, '-') ?? initialValue
         );
 
         return state;

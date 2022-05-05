@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -12,8 +12,9 @@ import {
 } from '../hooks';
 import CardInputs from '../components/CardInputs';
 import { Button, Card } from '../components/common';
-
 import { ReactComponent as Arrow } from '../assets/arrow.svg';
+
+import { CardContext } from '../reducers';
 import isValidCardInputs from '../utils/validator';
 
 const StyledPage = styled.form`
@@ -61,6 +62,7 @@ function AddPage() {
   const [isPossible, setIsPossible] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useContext(CardContext);
 
   useEffect(() => {
     try {
@@ -82,6 +84,18 @@ function AddPage() {
   };
 
   const onClickNextButton = () => {
+    dispatch({
+      type: 'SAVE_CARD',
+      card: {
+        cardColor: '#ADD8E6',
+        cardNumber,
+        cardOwnerName,
+        validDate,
+        CVC,
+        password: firstPassword + secondPassword,
+      },
+    });
+
     navigate('/complete');
   };
 

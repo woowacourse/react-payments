@@ -2,6 +2,7 @@ import { memo } from 'react';
 import styled from 'styled-components';
 
 import { DisplayCard } from './complex';
+import { splitCardNumbers } from '../utils/regExp';
 
 const Card = styled(DisplayCard)`
   align-items: center;
@@ -11,23 +12,24 @@ const Card = styled(DisplayCard)`
   margin-bottom: 30px;
 `;
 
-function Cards() {
+function Cards({ cards }) {
   return (
     <>
-      <Card
-        bgColor="#ADD8E6"
-        cardName="법카"
-        number="1111 2222 •••• ••••"
-        ownerName="HALEE"
-        validDate="05/22"
-      />
-      <Card
-        bgColor="#ADD8E6"
-        cardName="개카"
-        number="1111 2222 •••• ••••"
-        ownerName="HALEE"
-        validDate="05/22"
-      />
+      {cards.map(card => {
+        const { cardColor, cardName, cardOwnerName, cardNumber, validDate } =
+          card;
+        return (
+          <Card
+            bgColor={cardColor}
+            size="large"
+            cardName={cardName}
+            ownerName={cardOwnerName}
+            number={splitCardNumbers(cardNumber, ' ')}
+            validDate={validDate}
+            key={cardNumber}
+          />
+        );
+      })}
     </>
   );
 }
