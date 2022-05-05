@@ -1,6 +1,5 @@
 import { memo, useContext, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 
 import {
   useCardNumber,
@@ -10,44 +9,31 @@ import {
   useModal,
   useValidDate,
 } from '../../hooks';
+
 import CardInputs from './CardInputs';
-import { Button, Card } from '../../components';
+import { Button } from '../../components';
+import {
+  CardCompany,
+  CardCompanyModal,
+  CardCompanyName,
+  Dimmer,
+  Header,
+  NextButton,
+  StyledCard,
+  StyledPage,
+  Title,
+} from './styled';
 import { ReactComponent as Arrow } from '../../assets/arrow.svg';
 
 import { CardContext, CardInfoContext } from '../../contexts';
 import isValidCardInputs from '../../utils/validator';
-
-const StyledPage = styled.form`
-  background: #fff;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-  width: 400px;
-  height: 757px;
-`;
-
-const Header = styled.div`
-  align-items: center;
-  display: flex;
-  margin-bottom: 25px;
-`;
-
-const Title = styled.span`
-  font-size: 16px;
-  margin-left: 18px;
-`;
-
-const StyledCard = styled(Card)`
-  align-self: center;
-  margin-bottom: 25px;
-`;
-
-const NextButton = styled(Button)`
-  align-self: end;
-`;
+import { CARD_COMPANY } from '../../constants';
 
 function AddPage() {
+  const [cardCompany, setCardCompany] = useState({
+    name: '',
+    color: '#D2D2D2',
+  });
   const {
     cardNumber,
     handler: setCardNumber,
@@ -58,7 +44,9 @@ function AddPage() {
   const [CVC, setCVC] = useCVC('');
   const [firstPassword, setFirstPassword] = useCardPassword('');
   const [secondPassword, setSecondPassword] = useCardPassword('');
-  const [isModalOpen, toggleIsModalOpen] = useModal(false);
+  const [isCVCModalOpen, toggleIsCVCModalOpen] = useModal(false);
+  const [isCardCompanyModalOpen, toggleIsCardCompanyModalOpen] =
+    useModal(false);
   const [isPossible, setIsPossible] = useState(false);
 
   const navigate = useNavigate();
@@ -74,8 +62,8 @@ function AddPage() {
       setCardOwnerName,
       CVC,
       setCVC,
-      isModalOpen,
-      toggleModal: toggleIsModalOpen,
+      isModalOpen: isCVCModalOpen,
+      toggleModal: toggleIsCVCModalOpen,
       firstPassword,
       setFirstPassword,
       secondPassword,
@@ -86,7 +74,7 @@ function AddPage() {
       validDate,
       cardOwnerName,
       CVC,
-      isModalOpen,
+      isCVCModalOpen,
       firstPassword,
       secondPassword,
     ]
@@ -111,11 +99,27 @@ function AddPage() {
     navigate(-1);
   };
 
+  const toggleCardTitleModal = () => {
+    toggleIsCardCompanyModalOpen(!isCardCompanyModalOpen);
+  };
+
+  const preventBubbling = e => {
+    e.stopPropagation();
+  };
+
+  const onClickCardCompany = ({ currentTarget }) => {
+    const { name, color } = currentTarget.dataset;
+
+    setCardCompany({ name, color });
+    toggleIsCardCompanyModalOpen(false);
+  };
+
   const onClickNextButton = () => {
     dispatch({
       type: 'SAVE_CARD',
       card: {
-        cardColor: '#ADD8E6',
+        cardCompany: cardCompany.name,
+        cardColor: cardCompany.color,
         cardNumber,
         cardOwnerName,
         validDate,
@@ -139,11 +143,13 @@ function AddPage() {
           <Title>카드 추가</Title>
         </Header>
         <StyledCard
-          bgColor="#ADD8E6"
+          bgColor={cardCompany.color}
+          company={cardCompany.name}
           size="medium"
           name={cardOwnerName}
           number={encryptedCardNumber.split('-').join(' ')}
           validDate={validDate}
+          onClickFunc={toggleCardTitleModal}
         />
         <CardInputs />
         {isPossible && (
@@ -153,6 +159,23 @@ function AddPage() {
             fontWeight="bold"
             onClickFunc={onClickNextButton}
           />
+        )}
+        {isCardCompanyModalOpen && (
+          <Dimmer onClick={toggleCardTitleModal}>
+            <CardCompanyModal onClick={preventBubbling}>
+              {CARD_COMPANY.map(({ name, color }) => (
+                <CardCompany
+                  data-name={name}
+                  data-color={color}
+                  onClick={onClickCardCompany}
+                  key={name}
+                >
+                  <Button bgColor={color} shape="circle" />
+                  <CardCompanyName>{name}</CardCompanyName>
+                </CardCompany>
+              ))}
+            </CardCompanyModal>
+          </Dimmer>
         )}
       </StyledPage>
     </CardInfoContext.Provider>

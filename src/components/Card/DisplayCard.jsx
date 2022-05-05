@@ -15,6 +15,7 @@ function DisplayCard({
   bgColor,
   cardName,
   className,
+  company,
   number,
   ownerName,
   validDate,
@@ -23,6 +24,7 @@ function DisplayCard({
     <div className={className}>
       <Card
         bgColor={bgColor}
+        company={company}
         size="medium"
         name={ownerName}
         number={number}

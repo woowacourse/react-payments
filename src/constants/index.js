@@ -5,4 +5,15 @@ const CARD_RULE = {
   VALID_DATE_MAX_LENGTH: 4,
 };
 
-export default CARD_RULE;
+const CARD_COMPANY = [
+  { name: '짱구 카드', color: '#E24141' },
+  { name: '철수 카드', color: '#547CE4' },
+  { name: '훈이 카드', color: '#73BC6D' },
+  { name: '유리 카드', color: '#DE59B9' },
+  { name: '맹구 카드', color: '#FBCD58' },
+  { name: '수지 카드', color: '#E76E9A' },
+  { name: '짱아 카드', color: '#8a604e' },
+  { name: '흰둥 카드', color: '#FFFFFF' },
+];
+
+export { CARD_RULE, CARD_COMPANY };

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { Button, Input, Modal } from '../components';
 
-import CARD_RULE from '../constants';
+import { CARD_RULE } from '../constants';
 
 export default {
   title: 'Example/MixedComponents',

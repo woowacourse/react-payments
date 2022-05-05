@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-
 import {
   CardNumberInput,
   CardValidDateInput,
@@ -7,12 +5,7 @@ import {
   CardCVCInput,
   CardPasswordInput,
 } from '../../components/complex';
-
-const InputGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 19px;
-`;
+import { InputGroup } from './styled';
 
 export default function CardInputs() {
   return (

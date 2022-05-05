@@ -1,6 +1,6 @@
 import { Input, Button, Modal } from '..';
 
-import CARD_RULE from '../../constants';
+import { CARD_RULE } from '../../constants';
 import { CardInfoContext } from '../../contexts';
 
 export default function CardCVCInput() {

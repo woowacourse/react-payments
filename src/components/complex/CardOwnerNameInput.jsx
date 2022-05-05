@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { Input } from '..';
 
-import CARD_RULE from '../../constants';
+import { CARD_RULE } from '../../constants';
 import { CardInfoContext } from '../../contexts';
 
 const OwnerNameLength = styled.div`

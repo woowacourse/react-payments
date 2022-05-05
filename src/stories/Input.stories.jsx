@@ -1,6 +1,6 @@
 import { Input, UnderlinedInput } from '../components';
 
-import CARD_RULE from '../constants';
+import { CARD_RULE } from '../constants';
 
 export default {
   title: 'Example/Input',

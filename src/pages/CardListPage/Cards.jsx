@@ -16,12 +16,20 @@ function Cards({ cards }) {
   return (
     <>
       {cards.map(card => {
-        const { cardColor, cardName, cardOwnerName, cardNumber, validDate } =
-          card;
+        const {
+          cardColor,
+          cardCompany,
+          cardName,
+          cardOwnerName,
+          cardNumber,
+          validDate,
+        } = card;
+
         return (
           <Card
             bgColor={cardColor}
-            size="large"
+            company={cardCompany}
+            size="medium"
             cardName={cardName}
             ownerName={cardOwnerName}
             number={splitCardNumbers(cardNumber, ' ')}

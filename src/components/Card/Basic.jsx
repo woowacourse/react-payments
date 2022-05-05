@@ -14,7 +14,7 @@ const getCardSize = size => {
         },
         title: {
           marginBottom: '33px',
-          size: '10px',
+          size: '13px',
         },
         magnet: {
           height: '26px',
@@ -37,8 +37,8 @@ const getCardSize = size => {
           width: '273px',
         },
         title: {
-          marginBottom: '40px',
-          size: '14px',
+          marginBottom: '35px',
+          size: '17px',
         },
         magnet: {
           height: '36px',
@@ -136,18 +136,26 @@ const ValidDate = styled.span`
   `}
 `;
 
-function Card({ bgColor, className, name, number, size, title, validDate }) {
-  const {
-    card,
-    title: titleStyle,
-    magnet,
-    numberSet,
-    detail,
-  } = getCardSize(size);
+function Card({
+  bgColor,
+  className,
+  company,
+  name,
+  number,
+  size,
+  validDate,
+  onClickFunc,
+}) {
+  const { card, title, magnet, numberSet, detail } = getCardSize(size);
 
   return (
-    <StyledCard className={className} bgColor={bgColor} cardStyle={card}>
-      <Title cardStyle={titleStyle}>{title}</Title>
+    <StyledCard
+      className={className}
+      bgColor={bgColor}
+      cardStyle={card}
+      onClick={onClickFunc}
+    >
+      <Title cardStyle={title}>{company}</Title>
       <Magnet cardStyle={magnet} />
       <div>
         <NumberSet cardStyle={{ numberSet, detail }}>{number || ''}</NumberSet>
@@ -165,11 +173,12 @@ Card.defaultProps = {
 Card.propTypes = {
   bgColor: PropTypes.string,
   className: PropTypes.string,
+  company: PropTypes.string,
   name: PropTypes.string,
   number: PropTypes.string,
   size: PropTypes.string,
-  title: PropTypes.string,
   validDate: PropTypes.string,
+  onClickFunc: PropTypes.func,
 };
 
 export default memo(Card);

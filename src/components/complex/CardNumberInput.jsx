@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { Input } from '..';
 
-import CARD_RULE from '../../constants';
+import { CARD_RULE } from '../../constants';
 import { CardInfoContext } from '../../contexts';
 
 function CardNumberInput() {

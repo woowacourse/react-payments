@@ -37,6 +37,7 @@ function Success({ card }) {
       <Message>카드등록이 완료되었습니다.</Message>
       <Card
         bgColor={card.cardColor}
+        company={card.cardCompany}
         size="large"
         name={card.cardOwnerName}
         number={splitCardNumbers(card.cardNumber, ' ')}
