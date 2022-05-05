@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "styled-components";
 
 import PageHeader from "../PageHeader.jsx";
 import Button from "../components/UIComponents/Button/Button.jsx";
@@ -22,7 +23,6 @@ import {
 import useLocalStorage from "../useLocalStorage.jsx";
 import Input from "../components/UIComponents/Input/Input.jsx";
 import InputField from "../components/UIComponents/InputField/InputField.jsx";
-import styled from "styled-components";
 
 const {
   NUMBER_UNIT_COUNT,
@@ -77,6 +77,8 @@ export default function CardAddPage({ setPage }) {
     }
   };
 
+  const moveToListPage = () => setPage("CardList");
+
   const handleAddNickname = ({ nickname }) => {
     const currentCardInfo = formDataArray[currentCardIndex];
     currentCardInfo.nickname = nickname;
@@ -86,7 +88,7 @@ export default function CardAddPage({ setPage }) {
     try {
       saveFormData(newFormData);
       alert(NICKNAME_REGISTER_SUCCESS_MESSAGE);
-      setPage("CardList");
+      moveToListPage();
     } catch {
       alert(NICKNAME_REGISTER_FAIL_MESSAGE);
     }
@@ -94,7 +96,11 @@ export default function CardAddPage({ setPage }) {
 
   return (
     <>
-      <PageHeader isSubmitted={isSubmitted} />
+      <PageHeader
+        isSubmitted={isSubmitted}
+        page={"CardAdd"}
+        moveToListPage={moveToListPage}
+      />
       {isSubmitted && (
         <SuccessMessage>카드 등록이 완료되었습니다.</SuccessMessage>
       )}
@@ -140,6 +146,7 @@ export default function CardAddPage({ setPage }) {
               width={"full"}
               name={"nickname"}
               placeholder={"카드의 별칭을 추가할 수 있습니다"}
+              required
             />
           </InputField>
           <Button>완료</Button>

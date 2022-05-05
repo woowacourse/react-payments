@@ -3,14 +3,6 @@ import styled from "styled-components";
 import PropTypes, { string } from "prop-types";
 import { CREATE_MASKED_CHARACTERS } from "../constants";
 
-const CardContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-bottom: 25px;
-`;
-
 const cardSizeBeforeSubmit = {
   width: "213px",
   height: "133px",
@@ -29,6 +21,22 @@ const cardSizeAfterSubmit = {
   justifyContent: "space-around",
 };
 
+const cardColors = {
+  default: "#d2d2d2",
+  complete: "#00caa5",
+  0: "#383838",
+  1: "#066163",
+  2: "#CDBE78",
+  3: "#F2F2F2",
+  4: "#FFEF82",
+};
+
+const CardContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const cardSize = (isSubmitted) =>
   isSubmitted ? cardSizeAfterSubmit : cardSizeBeforeSubmit;
 
@@ -41,9 +49,12 @@ const SmallCard = styled.div`
   height: ${({ isSubmitted }) => cardSize(isSubmitted).height};
   padding: ${({ isSubmitted }) => cardSize(isSubmitted).padding};
 
-  background: ${(props) => (props.isComplete ? "#00caa5" : "#d2d2d2")};
+  background-color: ${({ colorType }) => cardColors[colorType]};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+
+  color: ${({ colorType }) =>
+    (colorType === 0 || colorType === 1) && "#ffffff"};
 
   font-size: ${({ isSubmitted }) => cardSize(isSubmitted).fontSize};
   line-height: ${({ isSubmitted }) => cardSize(isSubmitted).lineHeight};
@@ -92,10 +103,15 @@ export default function CardPreview({
   expireDate,
   isValidCardInfo,
   isSubmitted,
+  color,
 }) {
   return (
     <CardContainer>
-      <SmallCard isComplete={isValidCardInfo} isSubmitted={isSubmitted}>
+      <SmallCard
+        isComplete={isValidCardInfo}
+        isSubmitted={isSubmitted}
+        colorType={color || (isValidCardInfo ? "complete" : "default")}
+      >
         <CardName>Woowa Card</CardName>
         <CardChip />
         <CardNumber>
@@ -120,4 +136,9 @@ CardPreview.propTypes = {
   expireDate: PropTypes.arrayOf(string),
   isValidCardInfo: PropTypes.bool,
   isSubmitted: PropTypes.bool,
+  color: PropTypes.oneOf([0, 1, 2, 3, 4, "default", "complete"]),
+};
+
+CardPreview.defaultProp = {
+  color: "default",
 };
