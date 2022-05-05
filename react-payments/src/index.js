@@ -6,6 +6,7 @@ import FormDataProvider from "./provider/FormDataProvider";
 import theme from "./styles/theme";
 import "./index.css";
 import App from "./App";
+import CardDataProvider from "./provider/CardDataProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,7 +14,9 @@ root.render(
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <FormDataProvider>
-          <App />
+          <CardDataProvider>
+            <App />
+          </CardDataProvider>
         </FormDataProvider>
       </ThemeProvider>
     </BrowserRouter>

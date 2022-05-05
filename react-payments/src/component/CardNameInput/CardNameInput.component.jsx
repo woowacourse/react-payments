@@ -9,6 +9,7 @@ const CardNameInput = styled.input`
   font-size: 18px;
   &:focus {
     outline: none;
+    border-bottom: 1.5px solid ${({ theme }) => theme.colors.defaultCard};
   }
 `;
 
