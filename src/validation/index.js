@@ -28,3 +28,7 @@ export const checkSecureCode = (secureCode) => {
 export const checkPassword = (password) => {
   return checkNumberOnly(password) && password.length === 1;
 };
+
+export const checkCardNickName = (nickName) => {
+  return 0 < nickName.length && nickName.length <= 10;
+};

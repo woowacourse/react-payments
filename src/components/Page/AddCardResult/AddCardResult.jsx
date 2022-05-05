@@ -5,6 +5,8 @@ import { CardIndexContext, CardListContext } from '../../../contexts';
 import NextButton from '../../Button';
 import Card from '../../Card';
 import CardNickNameInput from '../../Input/CardNickNameInput';
+import useInputValue from '../../../hooks/useInputValue';
+import { checkCardNickName } from '../../../validation';
 
 const Container = styled.div`
   display: flex;
@@ -39,6 +41,10 @@ const AddCardResultPage = () => {
   const { cardList, setCardList } = useContext(CardListContext);
   const { cardIndex, setCardIndex } = useContext(CardIndexContext);
 
+  const [nickName, isNickNameError, onChangeNickName] = useInputValue({
+    validation: checkCardNickName,
+  });
+
   const { nickname, ownerName, cardType, cardNumber, expiredDate, secureCode, password } =
     cardList[cardIndex - 1];
 
@@ -56,12 +62,14 @@ const AddCardResultPage = () => {
         />
       </CardWrapper>
       <CardNickNameInputWrapper>
-        <CardNickNameInput />
+        <CardNickNameInput onChange={onChangeNickName} />
       </CardNickNameInputWrapper>
       <NextButtonWrapper>
-        <Link to="/react-payments/list">
-          <NextButton name="confirmButton">확인</NextButton>
-        </Link>
+        {!isNickNameError && (
+          <Link to="/react-payments/list">
+            <NextButton name="confirmButton">확인</NextButton>
+          </Link>
+        )}
       </NextButtonWrapper>
     </Container>
   );
