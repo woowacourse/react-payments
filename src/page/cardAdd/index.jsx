@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useReducer } from 'react';
 
 import FormInput from 'components/common/FormInput';
 import CardPreview from 'components/CardPreview';
@@ -14,7 +14,6 @@ import useToggle from 'hooks/useToggle';
 import { ReactComponent as PrevIcon } from 'assets/prev_icon.svg';
 
 import { validator } from './validator';
-import { isObject } from 'utils';
 import {
   CARD_NUMBER,
   COMPANY,
@@ -33,8 +32,10 @@ import {
   cardCompanyList,
 } from 'page/cardAdd/data';
 import { Link } from 'react-router-dom';
+import reducer from './reducer';
 
 const initialCardInfo = {
+  theme: '',
   company: '',
   cardNumber: {
     first: '',
@@ -54,11 +55,10 @@ const initialCardInfo = {
     third: CRYPTO_STRING,
     fourth: CRYPTO_STRING,
   },
-  theme: '',
 };
 
 const CardAppPage = () => {
-  const [cardInfo, setCardInfo] = useState(initialCardInfo);
+  const [cardInfo, dispatch] = useReducer(reducer, initialCardInfo);
   const { cardNumber, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
 
   const [isCompanyFilled] = useIsFilled(COMPANY, company, false);
@@ -76,35 +76,19 @@ const CardAppPage = () => {
     isPrivacyCodeFilled &&
     isPasswordFilled;
 
-  const handleChange = ({ target }, item) => {
+  const handleChange = ({ target }, type) => {
     const { name, value } = target;
 
-    if (!validator[item](value, name)) return;
+    if (!validator[type](value, name)) {
+      return;
+    }
 
-    setCardInfo((prevCardInfo) => {
-      if (isObject(prevCardInfo[item])) {
-        return {
-          ...prevCardInfo,
-          [item]: {
-            ...prevCardInfo[item],
-            [name]: value,
-          },
-        };
-      }
-
-      return {
-        ...prevCardInfo,
-        [item]: value,
-      };
-    });
+    dispatch({ type, name, value });
   };
 
   const handleCompanyClick = (company, theme) => {
-    setCardInfo((prevCardInfo) => ({
-      ...prevCardInfo,
-      company,
-      theme,
-    }));
+    dispatch({ type: 'company', value: company });
+    dispatch({ type: 'theme', value: theme });
 
     handleModal();
   };
@@ -127,7 +111,7 @@ const CardAppPage = () => {
       <Message name="company" isFilled={isCompanyFilled} align="text-center" />
 
       <FormInput
-        item="cardNumber"
+        type="cardNumber"
         inputTitle="카드 번호"
         inputInfoList={cardNumberInputInfoList}
         inputValue={cardNumber}
@@ -139,7 +123,7 @@ const CardAppPage = () => {
 
       <FormInput
         className="w-50"
-        item="expiryDate"
+        type="expiryDate"
         inputTitle="만료일"
         inputInfoList={expiryDateInputInfoList}
         inputValue={expiryDate}
@@ -150,7 +134,7 @@ const CardAppPage = () => {
       <Message name="expiryDate" isFilled={isExpiryDateFilled} />
 
       <FormInput
-        item="ownerName"
+        type="ownerName"
         inputTitle="카드 소유자 이름(선택)"
         inputInfoList={cardOwnerNameInputInfoList}
         inputValue={ownerName}
@@ -164,7 +148,7 @@ const CardAppPage = () => {
       </FormInput>
 
       <FormInput
-        item="privacyCode"
+        type="privacyCode"
         inputTitle="보안코드(CVC/CVV)"
         inputInfoList={privacyCodeInputInfoList}
         handleChange={handleChange}
@@ -177,7 +161,7 @@ const CardAppPage = () => {
       <Message name="privacyCode" isFilled={isPrivacyCodeFilled} />
 
       <FormInput
-        item="password"
+        type="password"
         inputTitle="카드 비밀번호"
         inputInfoList={cardPasswordInputInfoList}
         inputValue={password}
