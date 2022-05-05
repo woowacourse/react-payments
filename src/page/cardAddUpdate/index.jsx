@@ -32,7 +32,7 @@ import {
 } from 'page/cardAddUpdate/data';
 import { Link, useParams } from 'react-router-dom';
 import reducer from 'page/cardAddUpdate/reducer';
-import { getCardAPI, registerCardAPI, updateCard } from 'lib/api';
+import { getCardAPI, registerCardAPI, updateCardAPI } from 'lib/api';
 
 const initialCardInfo = {
   alias: '',
@@ -250,7 +250,7 @@ const CardAddUpdatePage = () => {
                 theme={theme}
                 className=""
                 handleClick={() => {
-                  page === 'add' ? registerCardAPI(cardInfo) : updateCard(cardId, cardInfo);
+                  page === 'add' ? registerCardAPI(cardInfo) : updateCardAPI(cardId, cardInfo);
                 }}
               >
                 {page === 'add' ? '확인' : '수정 완료'}
