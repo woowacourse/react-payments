@@ -5,6 +5,8 @@ function useInputHandler(validator, initialValue) {
   const [errorMessage, setErrorMessage] = useState('');
 
   const updateInputState = ({ name, value }) => {
+    setErrorMessage('');
+
     try {
       validator(value);
     } catch (err) {
@@ -12,7 +14,6 @@ function useInputHandler(validator, initialValue) {
       return;
     }
 
-    setErrorMessage('');
     setInputValue(prevValues => ({
       ...prevValues,
       [name]: value,
