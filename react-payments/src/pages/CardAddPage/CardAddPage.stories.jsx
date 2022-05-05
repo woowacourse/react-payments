@@ -25,20 +25,19 @@ CompleteCardAddPage.play = ({ canvasElement }) => {
   userEvent.type(canvas.getByTestId("expire-date-0"), "12");
   userEvent.type(canvas.getByTestId("expire-date-1"), "22");
 
-  userEvent.type(canvas.getByTestId("card-user-0"), "스밍");
+  userEvent.type(canvas.getByTestId("card-user"), "스밍");
 
-  userEvent.click(canvas.getByTestId("security-code-0"));
+  userEvent.click(canvas.getByTestId("security-code"));
   userEvent.click(canvas.getByTestId("1"));
   userEvent.click(canvas.getByTestId("2"));
   userEvent.click(canvas.getByTestId("3"));
   userEvent.click(canvas.getByTestId("X"));
 
-  userEvent.click(canvas.getAllByTestId("card-password-0")[0]);
+  userEvent.click(canvas.getAllByTestId("card-password")[0]);
   userEvent.click(canvas.getByTestId("1"));
   userEvent.click(canvas.getByTestId("2"));
   userEvent.click(canvas.getByTestId("X"));
 
   userEvent.click(canvas.getByTestId("card"));
-  const colorBoxes = document.querySelector(".color-box");
-  userEvent.click(colorBoxes);
+  userEvent.click(canvas.getAllByTestId("color-box")[0]);
 };
