@@ -10,8 +10,8 @@ import {
   useModal,
   useValidDate,
 } from '../../hooks';
-import CardInputs from '../../components/CardInputs';
-import { Button, Card } from '../../components/common';
+import CardInputs from './CardInputs';
+import { Button, Card } from '../../components';
 import { ReactComponent as Arrow } from '../../assets/arrow.svg';
 
 import { CardContext, CardInfoContext } from '../../contexts';

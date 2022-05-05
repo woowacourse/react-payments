@@ -1,4 +1,4 @@
-import { Input, Button, Modal } from '../common';
+import { Input, Button, Modal } from '..';
 
 import CARD_RULE from '../../constants';
 import { CardInfoContext } from '../../contexts';

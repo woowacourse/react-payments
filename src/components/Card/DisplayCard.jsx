@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import styled from 'styled-components';
 
-import { Card } from '../common';
+import Card from './Basic';
 
 const CardName = styled.div`
   color: #575757;

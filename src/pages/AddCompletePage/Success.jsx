@@ -4,28 +4,13 @@ import styled from 'styled-components';
 
 import useInput from '../../hooks/useInput';
 
-import { Button, Card } from '../../components/common';
+import { Button, Card, UnderlinedInput } from '../../components';
 import { CardContext } from '../../contexts';
 import { splitCardNumbers } from '../../utils/regExp';
 
 const Message = styled.div`
   font-size: 24px;
   margin: 100px 0 77px;
-`;
-
-const Input = styled.input`
-  background: none;
-  border: none;
-  border-bottom: 1px solid black;
-  font-size: 18px;
-  margin-top: 33px;
-  padding-bottom: 5px;
-  text-align: center;
-  width: 250px;
-
-  :focus {
-    outline: none;
-  }
 `;
 
 const CheckButton = styled(Button)`
@@ -57,7 +42,13 @@ function Success({ card }) {
         number={splitCardNumbers(card.cardNumber, ' ')}
         validDate={card.validDate}
       />
-      <Input value={cardName} onChange={setCardName} />
+      <UnderlinedInput
+        margin={{ t: '33px' }}
+        padding={{ b: '5px' }}
+        width="250px"
+        value={cardName}
+        onChangeFunc={setCardName}
+      />
       <CheckButton
         color="#04C09E"
         content="확인"

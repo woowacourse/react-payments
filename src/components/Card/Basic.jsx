@@ -67,6 +67,7 @@ const StyledCard = styled.div`
     width: ${width};
   `};
 `;
+
 const Title = styled.div`
   color: #383838;
 
@@ -76,6 +77,7 @@ const Title = styled.div`
     margin-bottom: ${marginBottom};
   `}
 `;
+
 const Magnet = styled.div`
   background: #cbba64;
   border-radius: 4px;
@@ -86,6 +88,7 @@ const Magnet = styled.div`
     width: ${width};
   `}
 `;
+
 const NumberSet = styled.div`
   color: #525252;
   font-weight: bold;
@@ -102,6 +105,7 @@ const NumberSet = styled.div`
     margin-bottom: ${marginBottom};
   `}
 `;
+
 const OwnerName = styled.span`
   color: #525252;
   display: inline-block;
@@ -120,6 +124,7 @@ const OwnerName = styled.span`
     height: ${height};
   `}
 `;
+
 const ValidDate = styled.span`
   color: #525252;
   float: right;

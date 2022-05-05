@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import styled from 'styled-components';
 
-import { DisplayCard } from './complex';
-import { splitCardNumbers } from '../utils/regExp';
+import { DisplayCard } from '../../components/Card';
+import { splitCardNumbers } from '../../utils/regExp';
 
 const Card = styled(DisplayCard)`
   align-items: center;

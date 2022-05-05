@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Input } from '../common';
+import { Input } from '..';
 
 import CARD_RULE from '../../constants';
 import { CardInfoContext } from '../../contexts';

@@ -6,7 +6,7 @@ import {
   CardOwnerNameInput,
   CardCVCInput,
   CardPasswordInput,
-} from './complex';
+} from '../../components/complex';
 
 const InputGroup = styled.div`
   display: flex;

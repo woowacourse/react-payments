@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Button } from '../../components/common';
+import { Button } from '../../components';
 
 const Message = styled.div`
   font-size: 24px;
