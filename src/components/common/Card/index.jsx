@@ -12,6 +12,7 @@ import {
 
 function Card({
   size,
+  color,
   company,
   cardNumbers,
   owner,
@@ -20,9 +21,9 @@ function Card({
   onClick,
 }) {
   return (
-    <CardWrapper size={size} onClick={onClick}>
+    <CardWrapper size={size} color={color} onClick={onClick}>
       <CardTop>
-        <CardText>{company}카드</CardText>
+        <CardText>{company}</CardText>
       </CardTop>
       <CardMiddle size={size}>
         <div></div>
@@ -56,7 +57,7 @@ Card.propTypes = {
   /**
    * 카드사
    */
-  company: PropTypes.string.isRequired,
+  company: PropTypes.string,
   /**
    * 카드번호 배열
    */
@@ -70,6 +71,7 @@ Card.propTypes = {
    */
   dueMonth: PropTypes.string,
   dueYear: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default Card;

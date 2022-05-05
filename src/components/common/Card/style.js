@@ -7,7 +7,7 @@ const FlexAlignCenter = css`
 
 const CardWrapper = styled.div`
   ${FlexAlignCenter}
-  background-color: ${({ theme }) => theme.colors.GRAY};
+  background-color: ${(props) => props.color || props.theme.colors.GRAY};
   flex-direction: column;
   justify-content: space-between;
   border-radius: 5px;

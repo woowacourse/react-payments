@@ -38,6 +38,7 @@ function CardAddPage() {
     useCardPassword();
   const [allRequired, setAllRequired] = useState(false);
   const { modalVisible, openModal, closeModal } = useModal();
+  const [company, setCompany] = useState({ color: "", name: "" });
 
   useEffect(() => {
     setAllRequired(
@@ -50,8 +51,13 @@ function CardAddPage() {
     );
   }, [cardNumbers, dueDate, cvc, password]);
 
+  const handleSelectCompany = (color, name) => {
+    setCompany({ color, name });
+    closeModal();
+  };
+
   const handleSubmit = () => {
-    alert("카드가 등록되었습니다");
+    alert("카드가 등록되었습니다.");
   };
 
   return (
@@ -67,7 +73,8 @@ function CardAddPage() {
       <CardWrapper>
         <Card
           size="small"
-          company="우테코"
+          color={company.color}
+          company={company.name}
           cardNumbers={cardNumbers}
           owner={owner || "NAME"}
           dueMonth={dueDate.month || "MM"}
@@ -98,7 +105,7 @@ function CardAddPage() {
       </FooterWrapper>
       {modalVisible && (
         <Modal closeModal={closeModal}>
-          <Palette />
+          <Palette handleSelectCompany={handleSelectCompany} />
         </Modal>
       )}
     </PageWrapper>

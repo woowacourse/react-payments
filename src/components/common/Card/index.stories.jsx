@@ -15,6 +15,7 @@ SmallCard.args = {
   owner: "dory",
   dueMonth: "04",
   dueYear: "26",
+  onClick: () => {},
 };
 
 export const BigCard = Template.bind({});
@@ -25,4 +26,5 @@ BigCard.args = {
   owner: "dory",
   dueMonth: "04",
   dueYear: "26",
+  onClick: () => {},
 };

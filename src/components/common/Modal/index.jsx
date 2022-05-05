@@ -12,6 +12,7 @@ function Modal({ children, closeModal }) {
 
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
+  closeModal: PropTypes.func,
 };
 
 export default Modal;

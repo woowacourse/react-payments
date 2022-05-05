@@ -42,11 +42,11 @@ const CARD_LIST = [
   { color: "red", name: "레드 카드" },
   { color: "blue", name: "블루 카드" },
   { color: "green", name: "그린 카드" },
-  { color: "purple", name: "퍼플 카드" },
-  { color: "orange", name: "오렌지 카드" },
+  { color: "yellow", name: "옐로 카드" },
   { color: "pink", name: "핑크 카드" },
+  { color: "orange", name: "오렌지 카드" },
+  { color: "purple", name: "퍼플 카드" },
   { color: "brown", name: "브라운 카드" },
-  { color: "black", name: "블랙 카드" },
 ];
 
 export {

@@ -11,4 +11,5 @@ export default {
 export const PaletteModal = Template.bind({});
 PaletteModal.args = {
   children: <Palette />,
+  closeModal: () => {},
 };
