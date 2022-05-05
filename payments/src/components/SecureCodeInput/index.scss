@@ -1,0 +1,62 @@
+.secure__input__container {
+  display: grid;
+  width: 50%;
+  max-width: 150px;
+  grid-template-areas:
+    "il il il"
+    "ic ic hb";
+  .input__label {
+    grid-area: il;
+  }
+  .input__container--inputs {
+    grid-area: ic;
+  }
+  .help--button {
+    margin: auto 25px;
+    background-color: inherit;
+    grid-area: hb;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid #bababa;
+    color: #969696;
+    cursor: pointer;
+  }
+}
+
+.tooltip {
+  position: relative;
+  display: block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 150px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  opacity: 0.7;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltip-bottom {
+  width: 150px;
+  top: 150%;
+  left: 50%;
+  margin-left: -60px;
+  padding: 10px;
+}
+
+.tooltip .tooltip-bottom::after {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-color: transparent transparent black transparent;
+}

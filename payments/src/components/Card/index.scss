@@ -1,0 +1,54 @@
+.card__container {
+  display: grid;
+  grid-template-areas:
+    "na . . ."
+    "rf . . ."
+    "cn cn cn cn"
+    "ft ft ft ft";
+  background-color: #94dacd;
+  padding: 10px;
+  width: 210px;
+  height: 130px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.card__name {
+  grid-area: na;
+  margin: 5px 5px 15px 5px;
+  font-size: 12px;
+  word-break: break-all;
+}
+
+.rfid {
+  grid-area: rf;
+  background-color: #cbba64;
+  width: 40px;
+  height: 30px;
+  margin: 5px 5px 10px 5px;
+  border-radius: 4px;
+}
+
+.card__numbers {
+  grid-area: cn;
+  display: flex;
+  justify-content: space-around;
+  .number {
+    letter-spacing: 1px;
+  }
+  .dots {
+    letter-spacing: -3px;
+  }
+}
+
+.footer {
+  grid-area: ft;
+  display: flex;
+  justify-content: space-between;
+  padding: 7px;
+  font-size: 13px;
+  .owner__name {
+    word-break: break-all;
+    margin-right: 30px;
+  }
+}

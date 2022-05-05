@@ -1,0 +1,41 @@
+.color {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+
+  .circle {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+  }
+  .name {
+    color: #525252;
+  }
+  &:hover {
+    .name {
+      animation-name: colorChange;
+      animation-duration: 0.5s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+    @keyframes colorChange {
+      0% {
+        color: red;
+      }
+      25% {
+        color: yellow;
+      }
+      50% {
+        color: blue;
+      }
+      100% {
+        color: green;
+      }
+    }
+  }
+}
