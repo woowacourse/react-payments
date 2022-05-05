@@ -8,7 +8,7 @@ import { Container, InputTitle, InputContainer, ErrorMessage } from './styles';
 function FieldSet({ title, errorMessage, inputWidth, autoFocusLength, children }) {
   const inputContainer = useRef();
 
-  const onChangeTextField = ({ target }) => {
+  const handleTextFieldAutoFocus = ({ target }) => {
     const { value, tagName } = target;
     const textFieldLength = value.length;
 
@@ -30,9 +30,13 @@ function FieldSet({ title, errorMessage, inputWidth, autoFocusLength, children }
   };
 
   return (
-    <Container onChange={onChangeTextField} isError={!!errorMessage}>
+    <Container isError={!!errorMessage}>
       <InputTitle>{title}</InputTitle>
-      <InputContainer ref={inputContainer} style={{ width: `${inputWidth}%` }}>
+      <InputContainer
+        ref={inputContainer}
+        onChange={handleTextFieldAutoFocus}
+        style={{ width: `${inputWidth}%` }}
+      >
         {children}
       </InputContainer>
       <ErrorMessage>{errorMessage}</ErrorMessage>
