@@ -5,6 +5,27 @@
 <p align="middle">React 모바일 페이먼츠 애플리케이션</p>
 </p>
 
+## 데모 페이지
+
+[페이먼츠](https://nan-noo.github.io/react-payments/)
+
+## 기능 목록
+
+[요구사항](https://github.com/nan-noo/react-payments/blob/step1/REQUIREMENTS.md)
+
+## 스토리북 실행 방법
+
+```bash
+
+# 1. package.json에서 @storybook/... 관련 모듈을 지운다.
+# 2. cra 및 다른 모듈 설치
+npm install
+# 3. 스토리북 설치
+npx sb init
+# 4. 스토리북 실행
+npm run storybook
+```
+
 ## 🚀 Getting Started
 
 > `Component-Driven Development` 에 따라 UI를 구성하고 재사용 가능한 `Component`를 작성합니다.
