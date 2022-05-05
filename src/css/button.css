@@ -12,7 +12,7 @@
   cursor: pointer;
 }
 
-.change-button {
+.card-change-button {
   position: absolute;
   right: -15px;
   bottom: 0;
@@ -24,10 +24,6 @@
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   font-size: 12px;
   color: #e3dede;
-}
-
-.hide {
-  display: none;
 }
 
 .card-add-button {
@@ -46,4 +42,8 @@
   padding: 0;
   font-size: 20px;
   font-weight: 500;
+}
+
+.hide {
+  display: none;
 }

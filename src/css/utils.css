@@ -40,6 +40,12 @@
   letter-spacing: 2px;
 }
 
+.right-bottom-edge {
+  position: absolute;
+  right: 24px;
+  bottom: 16px;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
