@@ -4,6 +4,7 @@ import { BRAND_COLORS, COLORS, LAYOUT } from 'styles/theme';
 
 const Container = styled.button`
   cursor: pointer;
+  font-size: 1rem;
   border: none;
   border-radius: ${LAYOUT.BORDER_RADIUS};
   padding: 0.714rem 1.429rem;

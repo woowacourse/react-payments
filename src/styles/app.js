@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import responsive from './utils/responsive';
 
 const appStyles = css`
   @font-face {
@@ -35,7 +36,11 @@ const appStyles = css`
   }
 
   :root {
-    font-size: 16px;
+    font-size: 3.4vw;
+
+    ${responsive.notMobile(css`
+      font-size: 16px;
+    `)}
   }
 
   * {
@@ -49,17 +54,18 @@ const appStyles = css`
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
-    background-color: #e5e5e5;
-    margin: 50px 20px;
+    margin: 0px;
+
+    ${responsive.notMobile(css`
+      background-color: #e5e5e5;
+      margin: 3.125rem 1.25rem;
+    `)}
   }
 
   .root {
     background-color: #fff;
-    width: 375px;
-    min-width: 375px;
-    height: 700px;
+    min-width: 330px;
     position: relative;
-    border-radius: 15px;
   }
 
   .button-container.right {

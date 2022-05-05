@@ -3,15 +3,6 @@ import { css } from '@emotion/react';
 
 import { COLORS, GRADATION, LAYOUT } from 'styles/theme';
 
-const CARD_SIZE = {
-  MEDIUM: css`
-    font-size: 16px;
-  `,
-  LARGE: css`
-    font-size: 24px;
-  `,
-};
-
 const Container = styled.div`
   display: flex;
   font-size: 16px;
@@ -26,18 +17,16 @@ const Container = styled.div`
     css`
       filter: grayscale(1);
     `};
-
-  ${({ cardSize }) => CARD_SIZE[cardSize] ?? CARD_SIZE.MEDIUM}
 `;
 
 const CardContainer = styled.div`
   position: relative;
-  width: 16.75em;
-  height: 10.6em;
+  width: 16.75rem;
+  height: 10.6rem;
   color: ${COLORS.white};
   border-radius: ${LAYOUT.BORDER_RADIUS};
   background-image: ${GRADATION['cornflowerBlue-affair-135deg']};
-  box-shadow: 3px 25px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 3px 1.563rem 1.563rem ${COLORS['black-25']};
   overflow: hidden;
 
   &::before {
@@ -50,7 +39,7 @@ const CardContainer = styled.div`
     bottom: 43%;
     transform: translateY(-50%);
     background-color: ${COLORS.laser};
-    border-radius: 0.25em;
+    border-radius: 0.25rem;
   }
 
   &::after {
@@ -60,8 +49,8 @@ const CardContainer = styled.div`
     top: 5.5%;
     right: 12%;
 
-    font-size: 4em;
-    text-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    font-size: 4rem;
+    text-shadow: 0 0.625rem 1.563rem rgba(0, 0, 0, 0.25);
   }
 `;
 
@@ -69,8 +58,8 @@ const ComponyName = styled.div`
   position: absolute;
   top: 2%;
   right: 0%;
-  font-size: 0.9em;
-  letter-spacing: 0.425em;
+  font-size: 0.9rem;
+  letter-spacing: 0.425rem;
   opacity: 0.8;
 
   transform: rotate(90deg) translateX(100%) translateY(100%);
@@ -83,7 +72,7 @@ const UserName = styled.div`
   left: 5%;
 
   font-weight: bold;
-  font-size: 0.8em;
+  font-size: 0.8rem;
 `;
 
 const ExpireDate = styled.div`
@@ -91,7 +80,7 @@ const ExpireDate = styled.div`
   bottom: 22%;
   left: 5%;
 
-  font-size: 0.9em;
+  font-size: 0.9rem;
   font-style: italic;
   opacity: 0.8;
 `;
@@ -101,7 +90,7 @@ const CardNumber = styled.div`
   bottom: 7%;
   left: 5%;
 
-  font-size: 1em;
+  font-size: 1rem;
   font-style: italic;
 `;
 
