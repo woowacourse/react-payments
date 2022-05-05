@@ -51,3 +51,10 @@ GongwonCard.args = {
   ...COMPLETE_CARD_INFO,
   cardTypeInfo: cardInfos[2],
 };
+
+export const BigPocoCard = Template.bind({});
+BigPocoCard.args = {
+  ...COMPLETE_CARD_INFO,
+  cardTypeInfo: cardInfos[0],
+  size: "big",
+};
