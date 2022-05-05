@@ -2,24 +2,13 @@ import { memo, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import useInput from '../hooks/useInput';
+import useInput from '../../hooks/useInput';
 
-import { Button, Card } from '../components/common';
-import { CardContext } from '../contexts';
-import { splitCardNumbers } from '../utils/regExp';
+import { Button, Card } from '../../components/common';
+import { CardContext } from '../../contexts';
+import { splitCardNumbers } from '../../utils/regExp';
 
-const StyledPage = styled.div`
-  align-items: center;
-  background: #fff;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-  width: 400px;
-  height: 757px;
-`;
-
-const CompleteMessage = styled.div`
+const Message = styled.div`
   font-size: 24px;
   margin: 100px 0 77px;
 `;
@@ -43,7 +32,7 @@ const CheckButton = styled(Button)`
   margin: auto 0 0 auto;
 `;
 
-function AddCompletePage({ card }) {
+function Success({ card }) {
   const [cardName, setCardName] = useInput('');
 
   const navigate = useNavigate();
@@ -59,8 +48,8 @@ function AddCompletePage({ card }) {
   };
 
   return (
-    <StyledPage>
-      <CompleteMessage>카드등록이 완료되었습니다.</CompleteMessage>
+    <>
+      <Message>카드등록이 완료되었습니다.</Message>
       <Card
         bgColor={card.cardColor}
         size="large"
@@ -75,8 +64,8 @@ function AddCompletePage({ card }) {
         fontWeight="bold"
         onClickFunc={onClickCheckButton}
       />
-    </StyledPage>
+    </>
   );
 }
 
-export default memo(AddCompletePage);
+export default memo(Success);

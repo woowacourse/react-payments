@@ -51,7 +51,6 @@ function Button({
       border={border}
       buttonStyle={buttonStyle}
       color={color}
-      content={content}
       fontWeight={fontWeight}
       margin={margin}
       shape={shape}
