@@ -19,7 +19,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export const CardAdditionContainer = styled.div`
+export const Container = styled.div`
   height: 100%;
   max-width: 400px;
   padding: 16px 24px;
@@ -68,25 +68,24 @@ export const InputTitle = styled.span`
   color: #525252;
 `;
 
-export const SmallCard = styled.div`
+export const Card = styled.div`
+  ${({ isSmall, color }) => `
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
 
-  width: 208px;
-  height: 130px;
-  padding: 10px;
-  font-size: 30px;
+  width: ${isSmall ? '208px' : '330px'};
+  height: ${isSmall ? '130px' : '206px'};
+  padding: ${isSmall ? '10px' : '16px'};
+  font-size: ${isSmall ? '14px' : '22px'};
   color: #fff;
-  margin-bottom: 16px;
+  margin-bottom: ${isSmall ? '16px' : '22px'};
 
-  background: ${({ color }) => color};
+  background: ${color};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-
-  user-select: none;
+  `}
 `;
 
 export const CardTop = styled.div`
@@ -106,28 +105,37 @@ export const CardBottom = styled(CardTop)`
 `;
 
 export const CardText = styled.span`
-  margin: 0 10px;
-  font-size: 14px;
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
   display: inline-block;
+  margin-top: 0;
+  margin-bottom: 0;
+  ${({ isSmall }) => `
+    margin-left: ${isSmall ? '10px' : '14px'};
+    margin-right: ${isSmall ? '10px' : '14px'};
+  `}
 `;
 
 export const SmallCardChip = styled.div`
-  width: 40px;
-  height: 26px;
-  left: 95px;
-  top: 122px;
+  ${({ isSmall }) => `
+  width: ${isSmall ? '40px' : '60px'}; 
+  height: ${isSmall ? '26px' : '40px'}; 
 
   background: #cbba64;
   border-radius: 4px;
+  `}
 `;
 
-export const CardBottomNumber = styled.div``;
+export const CardBottomNumber = styled.div`
+  ${({ isSmall }) => `
+    margin-bottom: ${isSmall ? '10px' : '14px'};
+  `}
+`;
 
 export const CardBottomInfo = styled.div`
   width: 100%;
+
   display: flex;
   justify-content: space-between;
 `;
@@ -140,9 +148,7 @@ export const CardTextEllipsis = styled(CardText)`
   white-space: nowrap;
 `;
 
-export const CardNumber = styled(CardText)`
-  width: 30px;
-`;
+export const CardNumber = styled(CardText)``;
 
 export const CardCompanyStyled = styled.div`
   display: flex;
@@ -225,6 +231,7 @@ export const NextButtonBox = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 8px;
+  margin-left: auto;
 `;
 
 export const NextButton = styled.button`
@@ -235,7 +242,7 @@ export const NextButton = styled.button`
   font-weight: 700;
   font-size: 14px;
   border-radius: 8px;
-  width: 100%;
+  width: 50px;
   height: 35px;
   &:disabled {
     color: #fff;
@@ -297,4 +304,45 @@ export const PasswordBox = styled.div`
   justify-content: center;
   width: 43px;
   height: 45px;
+`;
+
+export const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: #fff;
+`;
+
+export const Modal = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 360px;
+  z-index: 100;
+`;
+
+export const UnderlineInput = styled.input`
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 5px;
+  color: #555;
+  box-sizing: border-box;
+  text-align: center;
+  width: 310px;
+  font-size: 24px;
+  margin: 30px;
+
+  &:focus {
+    border-bottom: 2px solid #555;
+    outline: none;
+  }
 `;

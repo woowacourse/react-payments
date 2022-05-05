@@ -50,18 +50,26 @@ function CardAddition() {
   };
 
   const onSubmitCard = () => {
-    setIsSubmitted(true);
-
-    const cardData = {
-      cardCompany: CARD_COMPANIES[cardCompanyIndex].NAME,
+    const newCardData = {
+      cardName: CARD_COMPANIES[cardCompanyIndex].NAME,
+      cardColor: CARD_COMPANIES[cardCompanyIndex].COLOR,
       cardNumber,
       cardExpiration,
       cardOwner,
       cardCvc,
       cardPassword,
     };
-    setCardData(cardData);
-    dispatch({ type: TYPES.SUBMIT_CARD, cardData });
+    setCardData(newCardData);
+    setIsSubmitted(true);
+  };
+
+  const onConfirmCard = (cardNickname) => {
+    const newCardData = {
+      ...cardData,
+      cardNickname: cardNickname,
+    };
+    dispatch({ type: TYPES.SUBMIT_CARD, newCardData });
+    setIsSubmitted(false);
   };
 
   const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
@@ -69,16 +77,16 @@ function CardAddition() {
   const cardName = cardCompanyIndex === -1 ? '' : CARD_COMPANIES[cardCompanyIndex].NAME;
 
   return (
-    <S.CardAdditionContainer>
+    <S.Container>
       <PageTitle hasPrevButton={true} title="카드 추가" />
       <ClickCardBox>
         <Card
-          cardCompanyIndex={cardCompanyIndex}
           cardNumber={cardNumber}
           cardExpiration={cardExpiration}
           cardOwner={cardOwner}
           cardName={cardName}
-          color={cardColor}
+          cardColor={cardColor}
+          isSmall={true}
         />
       </ClickCardBox>
       <ErrorMessage
@@ -98,8 +106,8 @@ function CardAddition() {
       </NextButton>
       <CardListModal />
       <TipModal />
-      {isSubmitted && <CardConfirmModal cardData={cardData} />}
-    </S.CardAdditionContainer>
+      {isSubmitted && <CardConfirmModal cardData={cardData} onConfirm={onConfirmCard} />}
+    </S.Container>
   );
 }
 

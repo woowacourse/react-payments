@@ -1,19 +1,31 @@
 import React from 'react';
-import Card from './Card';
+import ReactDOM from 'react-dom';
 
-export default function CardConfirmModal({ onConfirm, cardData }) {
+import Card from './Card';
+import NextButton from './NextButton';
+import * as S from 'styles.js';
+
+export default function CardConfirmModal({ cardData, onConfirm }) {
   return (
-    <div>
-      <button onClick={onConfirm}>확인</button>
-      <Card
-        cardCompanyIndex={cardData.cardCompanyIndex}
-        cardNumber={cardData.cardNumber}
-        cardOwner={cardData.cardOwner}
-        cardExpiration={cardData.cardExpiration}
-        cardName={cardData.cardName}
-        color={cardData.color}
-      ></Card>
-      {JSON.stringify(cardData)}
-    </div>
+    <>
+      {ReactDOM.createPortal(<S.Backdrop />, document.getElementById('backdrop-root'))}
+      {ReactDOM.createPortal(
+        <S.Modal>
+          <Card
+            cardName={cardData.cardName}
+            cardColor={cardData.cardColor}
+            cardNumber={cardData.cardNumber}
+            cardExpiration={cardData.cardExpiration}
+            cardOwner={cardData.cardOwner}
+            isSmall={false}
+          />
+          <S.UnderlineInput placeholder="카드 별칭을 입력해주세요." type="text" />
+          <NextButton onClick={onConfirm} disabled={false} color={cardData.cardColor}>
+            확인
+          </NextButton>
+        </S.Modal>,
+        document.getElementById('overlay-root'),
+      )}
+    </>
   );
 }

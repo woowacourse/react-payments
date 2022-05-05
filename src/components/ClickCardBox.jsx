@@ -9,5 +9,9 @@ export default function ClickCardBox({ children }) {
     dispatch({ type: TYPES.SET_LIST_MODAL_FLAG, flag: true });
   }, []);
 
-  return <div onClick={onClickCard}>{children}</div>;
+  return (
+    <div style={{ cursor: 'pointer', maxWidth: '208px' }} onClick={onClickCard}>
+      {children}
+    </div>
+  );
 }
