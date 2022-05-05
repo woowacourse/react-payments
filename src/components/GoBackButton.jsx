@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
 import GoBackIcon from '../assets/images/goBackIcon.svg';
 
 const StyledIconContainer = styled.div`
@@ -16,10 +18,12 @@ const StyledIconContainer = styled.div`
 `;
 
 export default function GoBackButton() {
+  const navigate = useNavigate();
+
   return (
     <StyledIconContainer
       onClick={() => {
-        alert('🔨 공사 중');
+        navigate(-1, { replace: true });
       }}>
       <img src={GoBackIcon} alt="Go Back" />
     </StyledIconContainer>
