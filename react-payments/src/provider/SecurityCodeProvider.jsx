@@ -5,8 +5,10 @@ import { isInValidSecurityCode } from "../util/validator";
 
 export const SecurityCodeContext = createContext();
 
+const initialSecurityCode = "";
+
 const SecurityCodeProvider = ({ children }) => {
-  const [securityCode, setSecurityCode] = useState("");
+  const [securityCode, setSecurityCode] = useState(initialSecurityCode);
   const [securityCodeReady] = useReady(securityCode, isInValidSecurityCode);
 
   const onChangeSecurityCode = ({ target }) => {
@@ -28,6 +30,10 @@ const SecurityCodeProvider = ({ children }) => {
     setSecurityCode((prev) => prev.slice(0, -1));
   };
 
+  const resetSecurityCode = () => {
+    setSecurityCode(initialSecurityCode);
+  };
+
   return (
     <SecurityCodeContext.Provider
       value={{
@@ -36,6 +42,7 @@ const SecurityCodeProvider = ({ children }) => {
           onChangeSecurityCode,
           onClickSecurityVirtualKeyboard,
           onClickSecurityBackspaceButton,
+          resetSecurityCode,
         },
       }}
     >

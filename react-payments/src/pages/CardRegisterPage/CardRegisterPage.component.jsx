@@ -10,8 +10,10 @@ import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants";
 import useReady from "../../hooks/useReady";
 import { CardDataContext } from "../../provider/CardDataProvider";
 import { CardNumberContext } from "../../provider/CardNumberProvider";
+import { CardPasswordContext } from "../../provider/CardPasswordProvider";
 import { CardTypeContext } from "../../provider/CardTypeProvider";
 import { ExpireDateContext } from "../../provider/ExpireDateProvider";
+import { SecurityCodeContext } from "../../provider/SecurityCodeProvider";
 import { UserNameContext } from "../../provider/UserNameProvider";
 import { isInValidCardName } from "../../util/validator";
 
@@ -28,16 +30,26 @@ const CardRegisterPage = () => {
   const [cardNameReady] = useReady(cardName, isInValidCardName);
   const {
     state: { cardTypeInfo },
+    action: { resetCardTypeInfo },
   } = useContext(CardTypeContext);
   const {
     state: { cardNumber },
+    action: { resetCardNumber },
   } = useContext(CardNumberContext);
   const {
     state: { expireDate },
+    action: { resetExpireDate },
   } = useContext(ExpireDateContext);
   const {
     state: { userName },
+    action: { resetUserName },
   } = useContext(UserNameContext);
+  const {
+    action: { resetSecurityCode },
+  } = useContext(SecurityCodeContext);
+  const {
+    action: { resetCardPassword },
+  } = useContext(CardPasswordContext);
   const { dispatch } = useContext(CardDataContext);
 
   const onChangeCardName = (e) => {
@@ -47,8 +59,22 @@ const CardRegisterPage = () => {
   const handleSubmitCardData = () => {
     dispatch({
       type: "CREATE",
-      payload: { cardNumber, userName, expireDate, cardTypeInfo, cardName },
+      payload: {
+        cardNumber,
+        userName,
+        month: expireDate.month,
+        year: expireDate.year,
+        cardTypeInfo,
+        cardName,
+      },
     });
+
+    resetCardTypeInfo();
+    resetCardNumber();
+    resetExpireDate();
+    resetUserName();
+    resetSecurityCode();
+    resetCardPassword();
   };
 
   return (
@@ -57,8 +83,8 @@ const CardRegisterPage = () => {
         <PageTitle>카드등록이 완료되었습니다.</PageTitle>
         <Card
           size="big"
-          cardNumbers={cardNumber}
-          name={userName}
+          cardNumber={cardNumber}
+          userName={userName}
           month={expireDate.month}
           year={expireDate.year}
           cardTypeInfo={cardTypeInfo}

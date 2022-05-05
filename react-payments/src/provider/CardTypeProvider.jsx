@@ -13,11 +13,15 @@ const CardTypeProvider = ({ children }) => {
     setCardTypeInfo({ cardType, cardName });
   };
 
+  const resetCardTypeInfo = () => {
+    setCardTypeInfo(defaultCardInfo);
+  };
+
   return (
     <CardTypeContext.Provider
       value={{
         state: { cardTypeInfo, cardTypeReady },
-        action: { onClickCardType },
+        action: { onClickCardType, resetCardTypeInfo },
       }}
     >
       {children}

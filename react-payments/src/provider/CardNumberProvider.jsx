@@ -6,13 +6,15 @@ import useReady from "../hooks/useReady";
 
 export const CardNumberContext = createContext();
 
+const initialCardNumber = {
+  first: "",
+  second: "",
+  third: "",
+  fourth: "",
+};
+
 const CardNumberProvider = ({ children }) => {
-  const [cardNumber, setCardNumber] = useState({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-  });
+  const [cardNumber, setCardNumber] = useState(initialCardNumber);
 
   const [cardNumberReady] = useReady(cardNumber, isInValidCardNumber);
 
@@ -47,11 +49,15 @@ const CardNumberProvider = ({ children }) => {
     });
   };
 
+  const resetCardNumber = () => {
+    setCardNumber({ ...initialCardNumber });
+  };
+
   return (
     <CardNumberContext.Provider
       value={{
         state: { cardNumber, cardNumberReady },
-        action: { onChangeCardNumber, onKeyDownCardNumber },
+        action: { onChangeCardNumber, onKeyDownCardNumber, resetCardNumber },
       }}
     >
       {children}
