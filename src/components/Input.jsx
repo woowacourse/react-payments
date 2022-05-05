@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function Input({
@@ -7,35 +7,31 @@ function Input({
   placeholder,
   length,
   minLength,
-  min,
-  max,
   name,
   value,
   required,
   updateCard,
   validators,
 }) {
-  const checkValidation = (targetValue) => {
-    if (validators.checkIsNaN) validators.checkIsNaN(targetValue);
-
-    if (validators.checkMaxLength) validators.checkMaxLength(targetValue, length);
-
-    if (validators.checkRange) {
-      if (targetValue === '') return;
-      validators.checkRange(min, max, +targetValue);
-    }
+  const handleChange = (event) => {
+    updateCard(name, event.target.value);
   };
 
-  const handleChange = (event) => {
-    const targetValue = event.target.value;
+  const checkValidation = () => {
+    validators.forEach((validator) => {
+      validator.validate();
+    });
+  };
 
+  useEffect(() => {
+    if (value === '') return;
     try {
-      checkValidation(targetValue);
-      updateCard(name, targetValue);
+      checkValidation();
     } catch (error) {
+      updateCard(name, value.substr(0, value.length - 1));
       alert(error.message);
     }
-  };
+  }, [value]);
 
   return (
     <input
@@ -58,22 +54,18 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   length: PropTypes.number.isRequired,
   minLength: PropTypes.number,
-  min: PropTypes.number,
-  max: PropTypes.number,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   required: PropTypes.bool,
   updateCard: PropTypes.func.isRequired,
-  validators: PropTypes.shape({
-    checkMaxLength: PropTypes.func.isRequired,
-    checkIsNaN: PropTypes.func,
-    checkRange: PropTypes.func,
-  }).isRequired,
+  validators: PropTypes.arrayOf(PropTypes.shape({ validate: PropTypes.func })).isRequired,
 };
 
 Input.defaultProps = {
   type: 'text',
   size: '',
+  placeholder: '',
+  minLength: 0,
   required: true,
 };
 

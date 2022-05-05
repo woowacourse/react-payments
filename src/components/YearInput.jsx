@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { checkMaxLength, checkIsNaN } from '../util';
+import { validator, checkMaxLength, checkIsNaN } from '../validator';
 import { MAX_LENGTH } from '../constants';
 import Input from './Input';
 
@@ -12,7 +12,7 @@ function YearInput({ value, name, updateCard }) {
       value={value}
       name={name}
       updateCard={updateCard}
-      validators={{ checkMaxLength, checkIsNaN }}
+      validators={[validator(checkMaxLength, value, MAX_LENGTH.DATE), validator(checkIsNaN, value)]}
     />
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { checkMaxLength } from '../util';
+import { validator, checkMaxLength } from '../validator';
 import { MAX_LENGTH, MIN_LENGTH } from '../constants';
 import Input from './Input';
 
@@ -14,7 +14,7 @@ function NameInput({ value, name, updateCard }) {
       value={value}
       required={false}
       updateCard={updateCard}
-      validators={{ checkMaxLength }}
+      validators={[validator(checkMaxLength, value, MAX_LENGTH.NAME)]}
     />
   );
 }

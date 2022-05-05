@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { checkMaxLength, checkIsNaN, checkRange } from '../util';
+import { validator, checkMaxLength, checkIsNaN, checkRange } from '../validator';
 import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../constants';
 import Input from './Input';
 
@@ -10,12 +10,14 @@ function MonthInput({ value, name, updateCard }) {
       placeholder="MM"
       length={MAX_LENGTH.DATE}
       minLength={MIN_LENGTH.MONTH}
-      min={RANGE.MONTH_MIN}
-      max={RANGE.MONTH_MAX}
       value={value}
       name={name}
       updateCard={updateCard}
-      validators={{ checkMaxLength, checkIsNaN, checkRange }}
+      validators={[
+        validator(checkMaxLength, value, MAX_LENGTH.DATE),
+        validator(checkIsNaN, value),
+        validator(checkRange, RANGE.MONTH_MIN, RANGE.MONTH_MAX, value),
+      ]}
     />
   );
 }
