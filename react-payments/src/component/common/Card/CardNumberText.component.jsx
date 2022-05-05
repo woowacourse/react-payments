@@ -27,10 +27,10 @@ const CardDotContainer = styled.div`
   align-items: center;
 `;
 
-const CardNumberText = ({ cardNumbers, size }) => {
+const CardNumberText = ({ cardNumber, size }) => {
   return (
     <CardNumberTextBox size={size}>
-      {Object.values(cardNumbers).map((cardNumber, idx) => {
+      {Object.values(cardNumber).map((cardNumber, idx) => {
         if (idx >= MIDDLE_CARD_NUMBER_LENGTH) {
           return (
             <CardDotContainer key={idx}>

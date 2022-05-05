@@ -111,10 +111,10 @@ const CardText = styled.span`
 `;
 
 const Card = ({
-  name,
+  userName,
   month,
   year,
-  cardNumbers,
+  cardNumber,
   cardTypeInfo,
   toggleModal,
   size,
@@ -127,9 +127,9 @@ const Card = ({
           <CardChip size={size} />
         </CardMiddle>
         <CardBottom>
-          <CardNumberText cardNumbers={cardNumbers} size={size} />
+          <CardNumberText cardNumber={cardNumber} size={size} />
           <CardBottomInfo>
-            <CardText size={size}>{name}</CardText>
+            <CardText size={size}>{userName}</CardText>
             <CardText size={size}>
               {month} / {year}
             </CardText>
