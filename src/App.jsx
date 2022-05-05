@@ -1,41 +1,12 @@
+import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+
+import { CardInfoListContext } from './context';
 import CardListPage from './pages/CardListPage';
 import AddCardPage from './pages/AddCardPage';
 import AddCardResultPage from './pages/AddCardResultPage';
-import { useState } from 'react';
-import { CardInfoListContext } from './context';
 
 const dummyCardInfoList = [
-  {
-    cardNumber: ['1234', '5678', '9012', '3456'],
-    holderName: 'SUN',
-    expireDate: ['12', '23'],
-    isComplete: true,
-  },
-  {
-    cardNumber: ['1234', '5678', '9012', '3456'],
-    holderName: 'SUN',
-    expireDate: ['12', '23'],
-    isComplete: true,
-  },
-  {
-    cardNumber: ['1234', '5678', '9012', '3456'],
-    holderName: 'SUN',
-    expireDate: ['12', '23'],
-    isComplete: true,
-  },
-  {
-    cardNumber: ['1234', '5678', '9012', '3456'],
-    holderName: 'SUN',
-    expireDate: ['12', '23'],
-    isComplete: true,
-  },
-  {
-    cardNumber: ['1234', '5678', '9012', '3456'],
-    holderName: 'SUN',
-    expireDate: ['12', '23'],
-    isComplete: true,
-  },
   {
     cardNumber: ['1234', '5678', '9012', '3456'],
     holderName: 'SUN',
@@ -50,10 +21,10 @@ function App() {
   const addNewCard = newCardInfo => {
     let index;
     setCardInfoList(prevCardInfoList => {
-      const newCardInfoList = prevCardInfoList;
+      const newCardInfoList = prevCardInfoList.slice();
       newCardInfoList.push(newCardInfo);
       index = newCardInfoList.length - 1;
-      return newCardInfo;
+      return newCardInfoList;
     });
     return index;
   };
@@ -62,6 +33,10 @@ function App() {
     const cardInfo = cardInfoList[index];
     cardInfo.nickName = nickName;
   };
+
+  useEffect(() => {
+    console.log(cardInfoList);
+  });
 
   return (
     <div className="App">
