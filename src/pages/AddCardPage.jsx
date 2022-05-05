@@ -1,5 +1,7 @@
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { CardInfoListContext } from '../context';
 import {
   CardExpireDateInput,
   CardHolderNameInput,
@@ -9,12 +11,11 @@ import {
   CardPreview,
   CardSecurityCodeInput,
 } from '../components';
-
 import { Header, Title } from '../components/common/styled';
 import Button from './../components/common/Button';
 import GoBackButton from '../components/GoBackButton';
 
-import { CARD_INFO_RULES, CARD_REGISTER_SUCCESS_MESSAGE } from '../constants';
+import { CARD_INFO_RULES } from '../constants';
 
 export default function AddCardPage() {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
@@ -74,8 +75,43 @@ export default function AddCardPage() {
     });
   };
 
-  const handleCardInfoSubmit = () => {
-    alert(CARD_REGISTER_SUCCESS_MESSAGE);
+  const CardInfoSubmitButton = () => {
+    const navigate = useNavigate();
+    const cardInfoConfirmMessage = `
+      카드번호: ${cardNumber.join(' - ')}
+      만료일: ${expireDate.join('/')}
+      소유자: ${holderName}
+      
+      위 정보로 카드를 등록하시겠습니까?
+    `;
+    return (
+      <CardInfoListContext.Consumer>
+        {({ addNewCard }) => (
+          <Button
+            type="submit"
+            onClick={e => {
+              e.preventDefault();
+              // eslint-disable-next-line no-restricted-globals
+              if (confirm(cardInfoConfirmMessage)) {
+                const cardIndex = addNewCard({
+                  cardNumber,
+                  expireDate,
+                  holderName,
+                });
+                navigate('../react-payments/addCardResult', {
+                  replace: true,
+                  state: {
+                    fromAddCardForm: true,
+                    cardIndex,
+                  },
+                });
+              }
+            }}>
+            다음
+          </Button>
+        )}
+      </CardInfoListContext.Consumer>
+    );
   };
 
   const isValidCardNumber = useMemo(() => {
@@ -113,10 +149,8 @@ export default function AddCardPage() {
         <CardHolderNameInput holderName={holderName} onChange={handleHolderNameUpdate} />
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCodeUpdate} />
         <CardPasswordInput password={password} onChange={handlePasswordUpdate} />
+        {isValidCardNumber && isValidExpireDate && isValidSecurityCode && isValidPassword && <CardInfoSubmitButton />}
       </CardInfoForm>
-      {isValidCardNumber && isValidExpireDate && isValidSecurityCode && isValidPassword && (
-        <Button text="다음" onClick={handleCardInfoSubmit} />
-      )}
     </>
   );
 }
