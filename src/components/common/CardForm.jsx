@@ -17,7 +17,7 @@ const CardForm = ({ cardFormSchema }) => {
     handleSubmit,
     registerInputProps,
     getInputClassName,
-  } = useCardForm({ cardFormSchema });
+  } = useCardForm({ cardFormSchema }, '/complete-add-card');
 
   return (
     <>

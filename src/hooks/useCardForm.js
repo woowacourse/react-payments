@@ -1,12 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useObjectRef from './useObjectRef';
 import useFormSchema from './useFormSchema';
 import { isBackspace } from '../utils/commons';
 
-// formSchema를 useFormSchema를 이용하여 사용 가능한 형태로 분해
-// onChange, onKeyDown으로 에러 체크 및 포커싱 지원
-// 외부에서 정의한 onSubmit, onSubmitError 사용하여 handleSubmit 생성
-const useCardForm = ({ cardFormSchema }) => {
+const useCardForm = ({ cardFormSchema }, path = undefined) => {
+  const navigate = useNavigate();
   const {
     initialField,
     isInvalidInput,
@@ -60,9 +59,18 @@ const useCardForm = ({ cardFormSchema }) => {
     focusPrevElement(keyCode, name, getPrevElement(name));
   };
 
+  const navigateOnSubmit = () => {
+    if (!path) {
+      return;
+    }
+    navigate(path);
+  };
+
   const onSubmitAction = async (cardInfo) => {
     alert('카드를 추가했습니다.');
     console.log(cardInfo);
+
+    navigateOnSubmit();
   };
 
   const focusErrorInput = (invalidInputRefs) => {
