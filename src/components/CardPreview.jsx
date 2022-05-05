@@ -11,22 +11,46 @@ const CardContainer = styled.div`
   margin-bottom: 25px;
 `;
 
+const cardSizeBeforeSubmit = {
+  width: "213px",
+  height: "133px",
+  padding: "14px 16px",
+  fontSize: "10px",
+  lineHeight: "12px",
+  justifyContent: "flex-start",
+};
+
+const cardSizeAfterSubmit = {
+  width: "295px",
+  height: "180px",
+  padding: "20px 25px",
+  fontSize: "16px",
+  lineHeight: "20px",
+  justifyContent: "space-around",
+};
+
+const cardSize = (isSubmitted) =>
+  isSubmitted ? cardSizeAfterSubmit : cardSizeBeforeSubmit;
+
 const SmallCard = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: ${({ isSubmitted }) => cardSize(isSubmitted).justifyContent};
 
-  width: 213px;
-  min-height: 133px;
-  padding: 14px 16px;
+  width: ${({ isSubmitted }) => cardSize(isSubmitted).width};
+  height: ${({ isSubmitted }) => cardSize(isSubmitted).height};
+  padding: ${({ isSubmitted }) => cardSize(isSubmitted).padding};
 
   background: ${(props) => (props.isComplete ? "#00caa5" : "#d2d2d2")};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
-  font-size: 10px;
-  line-height: 12px;
+  font-size: ${({ isSubmitted }) => cardSize(isSubmitted).fontSize};
+  line-height: ${({ isSubmitted }) => cardSize(isSubmitted).lineHeight};
   vertical-align: middle;
   font-weight: 400;
+
+  transition: all 0.5s;
 `;
 
 const CardName = styled.p`
@@ -68,11 +92,12 @@ export default function CardPreview({
   cardNumber,
   holderName,
   expireDate,
-  canProceed,
+  isValidCardInfo,
+  isSubmitted,
 }) {
   return (
     <CardContainer>
-      <SmallCard isComplete={canProceed}>
+      <SmallCard isComplete={isValidCardInfo} isSubmitted={isSubmitted}>
         <CardName>Woowa Card</CardName>
         <CardChip />
         <CardNumber>
@@ -95,4 +120,6 @@ CardPreview.propTypes = {
   cardNumber: PropTypes.arrayOf(string),
   holderName: PropTypes.string,
   expireDate: PropTypes.arrayOf(string),
+  isValidCardInfo: PropTypes.bool,
+  isSubmitted: PropTypes.bool,
 };

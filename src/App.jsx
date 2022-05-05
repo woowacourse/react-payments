@@ -62,7 +62,7 @@ function App() {
         cardNumber={cardNumber}
         holderName={holderName}
         expireDate={expireDate}
-        canProceed={isValidCardInfo}
+        isValidCardInfo={isValidCardInfo}
       />
       <Form dataKey={"card-info"}>
         <CardNumberInput
