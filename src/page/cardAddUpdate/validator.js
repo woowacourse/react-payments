@@ -37,6 +37,10 @@ export const validator = {
     return name === 'year' ? validateYear(value) : validateMonth(value);
   },
   ownerName(value) {
+    if (value.length > 20) {
+      alert('😈이름이 너무 길어요! 개명을 추천드려요.😈');
+    }
+
     return isEnglish(value);
   },
   privacyCode(value) {

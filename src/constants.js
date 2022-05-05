@@ -35,14 +35,14 @@ export const THEME = {
 };
 
 export const COMPANY_LIST = {
-  VALLISTA: '발리스타 카드',
-  YULIE: '율리 카드',
-  ASA: '아사 카드',
-  ROY: '로이 카드',
-  AUSTIN: '오스틴 카드',
-  YB: 'YB 카드',
-  NOS: '노스 카드',
-  WALTER: '월터 카드',
+  VALLISTA1: '발1스타 카드',
+  VALLISTA2: '발2스타 카드',
+  VALLISTA3: '발3스타 카드',
+  VALLISTA4: '발4스타 카드',
+  VALLISTA5: '발5스타 카드',
+  VALLISTA6: '발6스타 카드',
+  VALLISTA7: '발7스타 카드',
+  VALLISTA8: '발8스타 카드',
 };
 
 export const INPUT_MAX_LENGTH = {
