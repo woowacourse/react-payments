@@ -33,7 +33,7 @@
     "server": "json-server --watch db.json --port 8000",
     "test": "react-scripts test",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public",
+    "build:storybook": "build-storybook -s public",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },

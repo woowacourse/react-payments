@@ -6,9 +6,9 @@ import CardAddUpdatePage from 'page/cardAddUpdate';
 import NotFoundPage from 'page/noutFound';
 
 const routes = [
-  { path: '/', element: <CardListPage /> },
-  { path: '/add', element: <CardAddUpdatePage /> },
-  { path: '/modify/:cardId', element: <CardAddUpdatePage /> },
+  { path: '/react-payments', element: <CardListPage /> },
+  { path: '/react-payments/add', element: <CardAddUpdatePage /> },
+  { path: '/react-payments/modify/:cardId', element: <CardAddUpdatePage /> },
   { path: '*', element: <NotFoundPage /> },
 ];
 
