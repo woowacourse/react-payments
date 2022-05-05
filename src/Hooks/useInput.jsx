@@ -3,50 +3,41 @@ import { useState } from "react";
 export default function useInput(initialValue, validator) {
   const [value, setValue] = useState(initialValue);
 
-  const handleDate = (value, keyType, name) => {
+  const handleDate = (value, name) => {
     if (validator(value, name)) return;
 
     setValue((prevValue) => {
       return {
         ...prevValue,
-        [keyType]: {
-          ...prevValue[keyType],
-          [name]: {
-            ...prevValue[keyType][name],
-            value,
-          },
+        [name]: {
+          ...prevValue[name],
+          value,
         },
       };
     });
   };
 
-  const handleNumbers = (value, keyType, name) => {
+  const handleNumbers = (value, name) => {
     if (validator(value)) return;
 
     setValue((prevValue) => {
       return {
         ...prevValue,
-        [keyType]: {
-          ...prevValue[keyType],
-          [name]: {
-            ...prevValue[keyType][name],
-            value,
-          },
+        [name]: {
+          ...prevValue[name],
+          value,
         },
       };
     });
   };
 
-  const handleNameToUpperCase = (value, keyType) => {
+  const handleNameToUpperCase = (value) => {
     if (validator(value)) return;
 
     setValue((prevValue) => {
       return {
         ...prevValue,
-        [keyType]: {
-          ...prevValue[keyType],
-          value: value.toUpperCase(),
-        },
+        value: value.toUpperCase(),
       };
     });
   };
@@ -57,17 +48,17 @@ export default function useInput(initialValue, validator) {
     } = event;
 
     if (keyType === "expireDateInfo") {
-      handleDate(value, keyType, name);
+      handleDate(value, name);
       return;
     }
 
     if (keyType === "cardNumberInfo" || keyType === "passwordInfo") {
-      handleNumbers(value, keyType, name);
+      handleNumbers(value, name);
       return;
     }
 
     if (keyType === "holderNameInfo") {
-      handleNameToUpperCase(value, keyType, name);
+      handleNameToUpperCase(value);
       return;
     }
 
@@ -75,10 +66,7 @@ export default function useInput(initialValue, validator) {
     setValue((prevValue) => {
       return {
         ...prevValue,
-        [keyType]: {
-          ...prevValue[keyType],
-          value,
-        },
+        value,
       };
     });
   };

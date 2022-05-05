@@ -6,8 +6,7 @@ import InputField from "./UIComponents/InputField/InputField";
 import { CARD_INFO_RULES } from "../constants/constants";
 
 export default function CardExpireDateInput({ expireDate, onChange }) {
-  const { expireDateLabelInfo, expireDateInfo } = expireDate;
-  const expireDateList = Object.values(expireDateInfo);
+  const expireDateList = Object.values(expireDate);
   const expireDateLength = expireDateList.reduce(
     (sum, prev) => prev.value.length + sum,
     0
@@ -15,10 +14,10 @@ export default function CardExpireDateInput({ expireDate, onChange }) {
 
   return (
     <InputField
-      labelText={expireDateLabelInfo.labelText}
-      wrapperWidth={expireDateLabelInfo.wrapperWidth}
-      horizontalAlign={expireDateLabelInfo.horizontalAlign}
-      errorMessage={expireDateLabelInfo.errorMessage}
+      labelText={"만료일 (MM/YY)"}
+      wrapperWidth={"135px"}
+      horizontalAlign={"center"}
+      errorMessage={"만료일은 0~9까지 숫자로 입력해주세요."}
       isComplete={expireDateLength === CARD_INFO_RULES.EXPIRE_DATE_LENGTH}
     >
       {expireDateList.map((expireDate) => (
@@ -32,7 +31,7 @@ export default function CardExpireDateInput({ expireDate, onChange }) {
             placeholder={expireDate.placeholder}
             width={expireDate.width}
             maxLength={expireDate.maxLength}
-            required={expireDate.required}
+            required
             onChange={(e) => onChange(e, expireDate.keyType)}
             isComplete={expireDate.value.length === 2}
           />

@@ -74,9 +74,9 @@ export default function CardPreview({
     secondCardNumber,
     thirdCardNumber,
     fourthCardNumber,
-  } = cardNumber.cardNumberInfo;
+  } = cardNumber;
 
-  const { month, year } = expireDate.expireDateInfo;
+  const { month, year } = expireDate;
 
   return (
     <CardContainer>
@@ -90,7 +90,7 @@ export default function CardPreview({
           <p>{CREATE_MASKED_CHARACTERS(fourthCardNumber.value.length)}</p>
         </CardNumber>
         <CardBottomSection>
-          <CardHolderName>{holderName.holderNameInfo.value}</CardHolderName>
+          <CardHolderName>{holderName.value}</CardHolderName>
           <p>
             {month.value} {month.value.length !== 0 && "/"} {year.value}
           </p>

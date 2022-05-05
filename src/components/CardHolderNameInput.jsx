@@ -24,36 +24,33 @@ function InputCounter({ currLength = "0", maxLength, isComplete }) {
 }
 
 export default function CardHolderNameInput({ holderName, onChange }) {
-  const { holderNameLabelInfo, holderNameInfo } = holderName;
-
   return (
     <InputField
-      labelText={holderNameLabelInfo.labelText}
-      wrapperWidth={holderNameLabelInfo.wrapperWidth}
-      horizontalAlign={holderNameLabelInfo.horizontalAlign}
-      errorMessage={holderNameLabelInfo.errorMessage}
-      isComplete={holderNameInfo.value !== ""}
+      labelText={"카드 소유자 이름 (선택)"}
+      wrapperWidth={"100%"}
+      horizontalAlign={"flex-start"}
+      errorMessage={"카드 소유자 이름은 영문 대문자만 입력해주세요."}
+      isComplete={holderName.value !== ""}
       OptionalComponent={
         <InputCounter
-          currLength={holderNameInfo.value.length}
+          currLength={holderName.value.length}
           maxLength={CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH}
-          isComplete={holderNameInfo.value !== ""}
+          isComplete={holderName.value !== ""}
         />
       }
     >
       <Input
-        dataTargetGroup={holderNameInfo.className}
-        className={holderNameInfo.className}
-        name={holderNameInfo.name}
-        value={holderNameInfo.value}
-        type={holderNameInfo.type}
-        placeholder={holderNameInfo.placeholder}
-        width={holderNameInfo.width}
-        textAlign={holderNameInfo.textAlign}
-        maxLength={holderNameInfo.maxLength}
-        required={holderNameInfo.required}
-        onChange={(e) => onChange(e, holderNameInfo.keyType)}
-        isComplete={holderNameInfo.value !== ""}
+        dataTargetGroup={holderName.className}
+        className={holderName.className}
+        name={holderName.name}
+        value={holderName.value}
+        type={holderName.type}
+        placeholder={holderName.placeholder}
+        width={holderName.width}
+        textAlign={holderName.textAlign}
+        maxLength={holderName.maxLength}
+        onChange={(e) => onChange(e, holderName.keyType)}
+        isComplete={holderName.value !== ""}
       />
     </InputField>
   );

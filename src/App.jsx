@@ -61,10 +61,10 @@ function App() {
         holderName={holderName}
         expireDate={expireDate}
         canProceed={isValidCardInfo(
-          cardNumber.cardNumberInfo,
-          expireDate.expireDateInfo,
-          securityCode.securityCodeInfo,
-          password.passwordInfo
+          cardNumber,
+          expireDate,
+          securityCode,
+          password
         )}
       />
       <CardInfoForm>
@@ -88,12 +88,9 @@ function App() {
           password={password}
           onChange={handlePasswordUpdate}
         />
-        {isValidCardInfo(
-          cardNumber.cardNumberInfo,
-          expireDate.expireDateInfo,
-          securityCode.securityCodeInfo,
-          password.passwordInfo
-        ) && <Button text="다음" type="submit" />}
+        {isValidCardInfo(cardNumber, expireDate, securityCode, password) && (
+          <Button text="다음" type="submit" />
+        )}
       </CardInfoForm>
     </div>
   );

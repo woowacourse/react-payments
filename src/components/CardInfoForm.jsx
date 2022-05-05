@@ -33,7 +33,11 @@ export default function CardInfoForm({ children }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log([...event.target]);
+    const formData = new FormData(event.target);
+
+    const cardDataList = [...formData.entries()];
+
+    console.log(cardDataList);
   };
 
   return (
