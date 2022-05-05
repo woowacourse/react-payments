@@ -1,4 +1,14 @@
-import 'styles/index.css';
+import { Global } from '@emotion/react';
+import appStyles from 'styles/app';
+
+export const decorators = [
+  (Story) => (
+    <>
+      <Global styles={appStyles} />
+      <Story />
+    </>
+  ),
+];
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
