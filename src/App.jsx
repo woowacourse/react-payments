@@ -9,7 +9,7 @@ const routes = [
   { path: '/react-payments', element: <CardListPage /> },
   { path: '/react-payments/add', element: <CardAddUpdatePage /> },
   { path: '/react-payments/modify/:cardId', element: <CardAddUpdatePage /> },
-  { path: '*', element: <NotFoundPage /> },
+  { path: '/*', element: <NotFoundPage /> },
 ];
 
 const App = () => {
