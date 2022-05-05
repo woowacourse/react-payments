@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { CardIndexContext, CardListContext } from '../../../contexts';
 import NextButton from '../../Button';
 import Card from '../../Card';
 import CardNickNameInput from '../../Input/CardNickNameInput';
@@ -35,16 +36,22 @@ const NextButtonWrapper = styled.div`
 `;
 
 const AddCardResultPage = () => {
+  const { cardList, setCardList } = useContext(CardListContext);
+  const { cardIndex, setCardIndex } = useContext(CardIndexContext);
+
+  const { nickname, ownerName, cardType, cardNumber, expiredDate, secureCode, password } =
+    cardList[cardIndex - 1];
+
   return (
     <Container>
       <TitleWrapper>카드 등록이 완료되었습니다.</TitleWrapper>
       <CardWrapper>
         <Card
-          name={'샐리'}
-          expiredMonth={'12'}
-          expiredYear={'23'}
-          cardNumbers={['1111', '2222', '3333', '4444']}
-          cardInfo={{ color: 'red', name: '포코 카드' }}
+          name={ownerName}
+          expiredMonth={expiredDate.expiredMonth}
+          expiredYear={expiredDate.expiredYear}
+          cardNumbers={cardNumber}
+          cardInfo={cardType}
           size={'large'}
         />
       </CardWrapper>

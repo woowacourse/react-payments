@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardNumber, ExpiredDate, CardOwnerName, SecureCode, Password } from './index';
@@ -19,6 +19,8 @@ import Modal from '../../Modal';
 import Palette from '../../Palette';
 import useInputValue from '../../../hooks/useInputValue';
 
+import { CardIndexContext, CardListContext } from '../../../contexts';
+
 const Container = styled.form`
   display: flex;
   flex-direction: column;
@@ -32,6 +34,9 @@ const NextButtonWrapper = styled.div`
 `;
 
 const AddCardPage = () => {
+  const { cardList, setCardList } = useContext(CardListContext);
+  const { cardIndex, setCardIndex } = useContext(CardIndexContext);
+
   const [isValidatedForm, setIsValidatedForm] = useState(false);
   const [isValidatedValueLength, setIsValidatedValueLength] = useState(false);
 
@@ -125,8 +130,9 @@ const AddCardPage = () => {
   ]);
 
   const onSubmitCardForm = (e) => {
-    e.preventDefault();
-    alert('카드 등록이 완료되었습니다!❤️🧡💛💚💙💜');
+    const newCardObj = createCardObject();
+    setCardList((prevCard) => [...prevCard, newCardObj]);
+    setCardIndex(cardIndex + 1);
   };
 
   const openModal = () => {
@@ -141,8 +147,21 @@ const AddCardPage = () => {
     setCardInfo(card);
   };
 
+  const createCardObject = () => {
+    return {
+      id: cardIndex,
+      nickname: '',
+      ownerName: ownerName,
+      cardType: cardInfo,
+      cardNumber: [firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber],
+      expiredDate: { expiredMonth: expiredMonth, expiredYear: expiredYear },
+      secureCode: secureCode,
+      password: [firstPassword, secondPassword],
+    };
+  };
+
   return (
-    <Container onSubmit={onSubmitCardForm}>
+    <Container>
       <Header title="카드 추가" />
       <Card
         name={ownerName}
@@ -193,7 +212,7 @@ const AddCardPage = () => {
       {isValidatedForm && isValidatedValueLength && (
         <NextButtonWrapper>
           <Link to="/react-payments/result">
-            <NextButton name="submitButton" type="submit">
+            <NextButton name="submitButton" onClick={onSubmitCardForm}>
               다음
             </NextButton>
           </Link>

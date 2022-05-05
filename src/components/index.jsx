@@ -8,7 +8,7 @@ import { CardListContext, CardIndexContext } from '../contexts';
 
 const CardApp = () => {
   const [cardList, setCardList] = useState([]);
-  const [cardIndex, setCardIndex] = useState(1);
+  const [cardIndex, setCardIndex] = useState(0);
 
   useEffect(() => {
     console.log(cardList);
