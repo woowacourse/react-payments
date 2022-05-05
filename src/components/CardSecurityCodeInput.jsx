@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 import Input from "./UIComponents/Input/Input";
@@ -6,10 +6,7 @@ import InputField from "./UIComponents/InputField/InputField";
 
 import HelpIconImage from "../assets/images/questionMark.svg";
 
-import {
-  CARD_INFO_RULES,
-  CREATE_MASKED_CHARACTERS,
-} from "../constants/constants";
+import { CARD_INFO_RULES } from "../constants/constants";
 
 const StyledIconContainer = styled.div`
   position: relative;
@@ -41,6 +38,9 @@ const StyledDescription = styled.p`
   box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.4);
 `;
 
+const SECURITY_CODE_DESCRIPTION =
+  "CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.";
+
 function HelpIcon({ description }) {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
@@ -57,28 +57,32 @@ function HelpIcon({ description }) {
   );
 }
 
-const SECURITY_CODE_DESCRIPTION =
-  "CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.";
-
 export default function CardSecurityCodeInput({ securityCode, onChange }) {
+  const { securityCodeLabelInfo, securityCodeInfo } = securityCode;
+
   return (
     <InputField
-      labelText={"보안 코드(CVC/CVV)"}
+      labelText={securityCodeLabelInfo.labelText}
+      wrapperWidth={securityCodeLabelInfo.wrapperWidth}
+      errorMessage={securityCodeLabelInfo.errorMessage}
       OptionalComponent={<HelpIcon description={SECURITY_CODE_DESCRIPTION} />}
-      wrapperWidth={"85px"}
-      isComplete={securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
-      errorMessage={"카드 뒷 면에 있는 3자리 숫자를 적어주세요."}
+      isComplete={
+        securityCodeInfo.value.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
+      }
     >
       <Input
-        type={"password"}
-        name={"securityCode"}
-        maxLength={3}
-        value={securityCode}
-        onChange={(e) => onChange(e, "securityCode")}
-        placeholder={CREATE_MASKED_CHARACTERS(3)}
-        width={"100%"}
+        dataTargetGroup={securityCodeInfo.className}
+        className={securityCodeInfo.className}
+        name={securityCodeInfo.name}
+        value={securityCodeInfo.value}
+        type={securityCodeInfo.type}
+        placeholder={securityCodeInfo.placeholder}
+        width={securityCodeInfo.width}
+        maxLength={securityCodeInfo.maxLength}
+        required={securityCodeInfo.required}
+        onChange={(e) => onChange(e, securityCodeInfo.keyType)}
         isComplete={
-          securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
+          securityCodeInfo.value.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
         }
       />
     </InputField>

@@ -1,48 +1,41 @@
-import React from "react";
-
 import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
-import {
-  CARD_INFO_RULES,
-  CREATE_MASKED_CHARACTERS,
-  INPUT_KEY_TABLE,
-} from "../constants/constants";
 
-const CardPasswordInput = React.forwardRef((props, inputRef) => {
-  const { password, onChange, onKeyDown } = props;
+import { CARD_INFO_RULES } from "../constants/constants";
+
+export default function CardPasswordInput(props) {
+  const { password, onChange } = props;
+  const { passwordLabelInfo, passwordInfo } = password;
+  const passwordList = Object.values(passwordInfo);
+  const passwordLength = passwordList.reduce(
+    (sum, prev) => prev.value.length + sum,
+    0
+  );
 
   return (
     <InputField
-      labelText={"카드 비밀번호 앞 두 자리"}
-      errorMessage={"비밀번호는 0~9까지 숫자로 입력해주세요."}
-      wrapperWidth={"90px"}
-      splitCount={2}
-      isComplete={password.join("").length === CARD_INFO_RULES.PASSWORD_LENGTH}
+      labelText={passwordLabelInfo.labelText}
+      wrapperWidth={passwordLabelInfo.wrapperWidth}
+      splitCount={passwordLabelInfo.splitCount}
+      errorMessage={passwordLabelInfo.errorMessage}
+      isComplete={passwordLength === CARD_INFO_RULES.PASSWORD_LENGTH}
     >
-      {INPUT_KEY_TABLE.passwordNumbers.map((passwordKey, index) => (
+      {passwordList.map((password) => (
         <Input
-          key={index}
-          type={"password"}
-          value={password[index]}
-          maxLength={1}
-          name={passwordKey}
-          onChange={(e) =>
-            onChange(
-              e,
-              "passwordNumbers",
-              index,
-              CARD_INFO_RULES.PASSWORD_UNIT_LENGTH
-            )
-          }
-          onKeyDown={onKeyDown}
-          width={"100%"}
-          placeholder={CREATE_MASKED_CHARACTERS(1)}
-          isComplete={password[0].length === 1}
-          ref={(element) => (inputRef.current.passwordNumbers[index] = element)}
+          key={password.index}
+          dataTargetGroup={password.className}
+          className={password.className}
+          name={password.name}
+          value={password.value}
+          type={password.type}
+          placeholder={password.placeholder}
+          width={password.width}
+          maxLength={password.maxLength}
+          required={password.required}
+          isComplete={password.length === 1}
+          onChange={(e) => onChange(e, password.keyType)}
         />
       ))}
     </InputField>
   );
-});
-
-export default CardPasswordInput;
+}

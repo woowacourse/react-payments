@@ -1,11 +1,11 @@
-import { useMemo, useRef } from "react";
-
 import GlobalStyle from "./globalStyles";
 
 import PageHeader from "./components/PageHeader";
 import CardInfoForm from "./components/CardInfoForm";
-import Button from "./components/UIComponents/Button/Button";
 import CardPreview from "./components/UIComponents/CardPreview/CardPreview";
+import Button from "./components/UIComponents/Button/Button";
+
+import useInput from "./Hooks/useInput.jsx";
 
 import {
   CardHolderNameInput,
@@ -15,97 +15,42 @@ import {
   CardExpireDateInput,
 } from "./components";
 import {
-  CARD_REGISTER_SUCCESS_MESSAGE,
-  CARD_INFO_RULES,
-  INPUT_KEY_TABLE,
-} from "./constants/constants.js";
+  initialCardNumber,
+  initialPassword,
+  initialExpireDate,
+  initialHolderName,
+  initialSecurityCode,
+} from "./data/initialData";
 import {
   isInValidCardNumber,
   isInValidExpireDate,
   isInValidHolderName,
   isInvalidSecurityCode,
   isInvalidPassword,
+  isValidCardInfo,
 } from "./validators/validator";
-import useInput from "./Hooks/useInput.jsx";
 
 function App() {
-  const inputRef = useRef({
-    cardNumbers: [],
-    passwordNumbers: [],
-  });
   const [cardNumber, handleCardNumberUpdate] = useInput(
-    ["", "", "", ""],
-    isInValidCardNumber,
-    inputRef
-  );
-  const [password, handlePasswordUpdate] = useInput(
-    ["", ""],
-    isInvalidPassword,
-    inputRef
+    initialCardNumber,
+    isInValidCardNumber
   );
   const [expireDate, handleExpireDateUpdate] = useInput(
-    ["", ""],
+    initialExpireDate,
     isInValidExpireDate
   );
   const [holderName, handleHolderNameUpdate] = useInput(
-    "",
+    initialHolderName,
     isInValidHolderName
   );
   const [securityCode, handleSecurityCodeUpdate] = useInput(
-    "",
+    initialSecurityCode,
     isInvalidSecurityCode
   );
-
-  const focusBeforeElement = (event, inputKeys) => {
-    const { target, key } = event;
-    const targetIndex = INPUT_KEY_TABLE[inputKeys].findIndex(
-      (inputKey) => inputKey === target.name
-    );
-
-    if (key === "Backspace" && target.value.length === 0) {
-      inputRef.current[inputKeys][targetIndex - 1]?.focus();
-    }
-  };
-
-  const handleCardInfoSubmit = () => {
-    alert(CARD_REGISTER_SUCCESS_MESSAGE);
-  };
-
-  const isValidCardNumber = useMemo(
-    () =>
-      cardNumber.join("").length ===
-      CARD_INFO_RULES.NUMBER_UNIT_COUNT * CARD_INFO_RULES.NUMBER_UNIT_LENGTH,
-    [cardNumber]
+  const [password, handlePasswordUpdate] = useInput(
+    initialPassword,
+    isInvalidPassword
   );
-
-  const isValidExpireDate = useMemo(
-    () => expireDate.join("").length === CARD_INFO_RULES.EXPIRE_DATE_LENGTH,
-    [expireDate]
-  );
-
-  const isValidSecurityCode = useMemo(
-    () => securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH,
-    [securityCode]
-  );
-
-  const isValidPassword = useMemo(
-    () => password.join("").length === CARD_INFO_RULES.PASSWORD_LENGTH,
-    [password]
-  );
-
-  const isValidCardInfo = useMemo(() => {
-    return (
-      isValidCardNumber &&
-      isValidExpireDate &&
-      isValidSecurityCode &&
-      isValidPassword
-    );
-  }, [
-    isValidCardNumber,
-    isValidExpireDate,
-    isValidSecurityCode,
-    isValidPassword,
-  ]);
 
   return (
     <div className="App">
@@ -115,14 +60,17 @@ function App() {
         cardNumber={cardNumber}
         holderName={holderName}
         expireDate={expireDate}
-        canProceed={isValidCardInfo}
+        canProceed={isValidCardInfo(
+          cardNumber.cardNumberInfo,
+          expireDate.expireDateInfo,
+          securityCode.securityCodeInfo,
+          password.passwordInfo
+        )}
       />
-      <CardInfoForm autoComplete="off">
+      <CardInfoForm>
         <CardNumberInput
           cardNumber={cardNumber}
           onChange={handleCardNumberUpdate}
-          onKeyDown={(event) => focusBeforeElement(event, "cardNumbers")}
-          ref={inputRef}
         />
         <CardExpireDateInput
           expireDate={expireDate}
@@ -139,11 +87,14 @@ function App() {
         <CardPasswordInput
           password={password}
           onChange={handlePasswordUpdate}
-          onKeyDown={(event) => focusBeforeElement(event, "passwordNumbers")}
-          ref={inputRef}
         />
+        {isValidCardInfo(
+          cardNumber.cardNumberInfo,
+          expireDate.expireDateInfo,
+          securityCode.securityCodeInfo,
+          password.passwordInfo
+        ) && <Button text="다음" type="submit" />}
       </CardInfoForm>
-      {isValidCardInfo && <Button text="다음" onClick={handleCardInfoSubmit} />}
     </div>
   );
 }

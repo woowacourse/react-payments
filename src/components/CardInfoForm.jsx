@@ -8,5 +8,42 @@ const StyledCardInfoForm = styled.form`
 `;
 
 export default function CardInfoForm({ children }) {
-  return <StyledCardInfoForm>{children}</StyledCardInfoForm>;
+  const focusNextInput = ({ target }) => {
+    if (target.value.length !== target.maxLength) return;
+
+    const targetInputList = [...target.form].filter((input) =>
+      input.classList.contains(`${target.dataset.targetGroup}`)
+    );
+
+    const nextIndex = targetInputList.indexOf(target) + 1;
+    targetInputList[nextIndex]?.focus();
+  };
+
+  const focusPrevInput = (event) => {
+    const { target } = event;
+    if (target.value.length !== 0 || event.key !== "Backspace") return;
+
+    const targetInputList = [...target.form].filter((input) =>
+      input.classList.contains(`${target.dataset.targetGroup}`)
+    );
+
+    const prevIndex = targetInputList.indexOf(target) - 1;
+    targetInputList[prevIndex]?.focus();
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log([...event.target]);
+  };
+
+  return (
+    <StyledCardInfoForm
+      autoComplete="off"
+      onChange={focusNextInput}
+      onKeyDown={focusPrevInput}
+      onSubmit={handleSubmit}
+    >
+      {children}
+    </StyledCardInfoForm>
+  );
 }

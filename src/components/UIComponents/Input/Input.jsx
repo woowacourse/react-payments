@@ -37,11 +37,11 @@ export const StyledInput = styled.input`
   }
 `;
 
-const Input = React.forwardRef((props, ref) => {
-  return <StyledInput {...props} ref={ref} />;
-});
+export default function Input(props) {
+  const { dataTargetGroup } = props;
 
-export default Input;
+  return <StyledInput data-target-group={dataTargetGroup} {...props} />;
+}
 
 Input.propTypes = {
   name: PropTypes.string,

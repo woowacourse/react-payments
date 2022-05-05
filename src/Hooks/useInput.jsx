@@ -1,71 +1,86 @@
 import { useState } from "react";
-import { INPUT_KEY_TABLE } from "../constants/constants";
 
-export default function useInput(initialValue, validator, inputRef) {
+export default function useInput(initialValue, validator) {
   const [value, setValue] = useState(initialValue);
 
-  const handleDate = (value, order) => {
-    const parsedValue =
-      value.startsWith("0") && value.length !== 1 ? value.slice(1) : value;
-
-    if (validator(parsedValue, order)) return;
+  const handleDate = (value, keyType, name) => {
+    if (validator(value, name)) return;
 
     setValue((prevValue) => {
-      const newValue = [...prevValue];
-      newValue[order] =
-        parsedValue.length === 1 && Number(parsedValue) !== 0
-          ? `0${parsedValue}`
-          : parsedValue;
-
-      return newValue;
+      return {
+        ...prevValue,
+        [keyType]: {
+          ...prevValue[keyType],
+          [name]: {
+            ...prevValue[keyType][name],
+            value,
+          },
+        },
+      };
     });
   };
 
-  const handleNumbers = (value, order, type, name, typeMaxLength) => {
-    const targetIndex = INPUT_KEY_TABLE[type].findIndex(
-      (targetNumber) => targetNumber === name
-    );
-
+  const handleNumbers = (value, keyType, name) => {
     if (validator(value)) return;
 
     setValue((prevValue) => {
-      const newValue = [...prevValue];
-      newValue[order] = value;
-      return newValue;
+      return {
+        ...prevValue,
+        [keyType]: {
+          ...prevValue[keyType],
+          [name]: {
+            ...prevValue[keyType][name],
+            value,
+          },
+        },
+      };
     });
-
-    if (value.length === typeMaxLength) {
-      inputRef.current[type][targetIndex + 1]?.focus();
-    }
   };
 
-  const handleUpperCaseName = (value) => {
+  const handleNameToUpperCase = (value, keyType) => {
     if (validator(value)) return;
 
-    setValue(value.toUpperCase());
+    setValue((prevValue) => {
+      return {
+        ...prevValue,
+        [keyType]: {
+          ...prevValue[keyType],
+          value: value.toUpperCase(),
+        },
+      };
+    });
   };
 
-  const onChange = (event, type, order, typeMaxLength) => {
-    const { target } = event;
-    const { value, name } = target;
+  const onChange = (event, keyType) => {
+    const {
+      target: { value, name },
+    } = event;
 
-    if (type === "expireDate") {
-      handleDate(value, order);
+    if (keyType === "expireDateInfo") {
+      handleDate(value, keyType, name);
       return;
     }
 
-    if (type === "cardNumbers" || type === "passwordNumbers") {
-      handleNumbers(value, order, type, name, typeMaxLength);
+    if (keyType === "cardNumberInfo" || keyType === "passwordInfo") {
+      handleNumbers(value, keyType, name);
       return;
     }
 
-    if (type === "holderName") {
-      handleUpperCaseName(value);
+    if (keyType === "holderNameInfo") {
+      handleNameToUpperCase(value, keyType, name);
       return;
     }
 
     if (validator(value)) return;
-    setValue(value);
+    setValue((prevValue) => {
+      return {
+        ...prevValue,
+        [keyType]: {
+          ...prevValue[keyType],
+          value,
+        },
+      };
+    });
   };
 
   return [value, onChange];

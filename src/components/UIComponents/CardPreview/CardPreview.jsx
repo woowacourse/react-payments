@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes, { string } from "prop-types";
+import PropTypes from "prop-types";
 import { CREATE_MASKED_CHARACTERS } from "../../../constants/constants";
 
 const CardContainer = styled.div`
@@ -69,21 +69,30 @@ export default function CardPreview({
   expireDate,
   canProceed,
 }) {
+  const {
+    firstCardNumber,
+    secondCardNumber,
+    thirdCardNumber,
+    fourthCardNumber,
+  } = cardNumber.cardNumberInfo;
+
+  const { month, year } = expireDate.expireDateInfo;
+
   return (
     <CardContainer>
       <SmallCard isComplete={canProceed}>
         <CardName>Woowa Card</CardName>
         <CardChip />
         <CardNumber>
-          <p>{cardNumber[0]}</p>
-          <p>{cardNumber[1]}</p>
-          <p>{CREATE_MASKED_CHARACTERS(cardNumber[2].length)}</p>
-          <p>{CREATE_MASKED_CHARACTERS(cardNumber[3].length)}</p>
+          <p>{firstCardNumber.value}</p>
+          <p>{secondCardNumber.value}</p>
+          <p>{CREATE_MASKED_CHARACTERS(thirdCardNumber.value.length)}</p>
+          <p>{CREATE_MASKED_CHARACTERS(fourthCardNumber.value.length)}</p>
         </CardNumber>
         <CardBottomSection>
-          <CardHolderName>{holderName}</CardHolderName>
+          <CardHolderName>{holderName.holderNameInfo.value}</CardHolderName>
           <p>
-            {expireDate[0]} {expireDate[0].length !== 0 && "/"} {expireDate[1]}
+            {month.value} {month.value.length !== 0 && "/"} {year.value}
           </p>
         </CardBottomSection>
       </SmallCard>
@@ -92,8 +101,8 @@ export default function CardPreview({
 }
 
 CardPreview.propTypes = {
-  cardNumber: PropTypes.arrayOf(string),
-  holderName: PropTypes.string,
-  expireDate: PropTypes.arrayOf(string),
+  cardNumber: PropTypes.object,
+  holderName: PropTypes.object,
+  expireDate: PropTypes.object,
   canProceed: PropTypes.bool,
 };

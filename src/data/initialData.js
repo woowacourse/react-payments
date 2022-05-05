@@ -1,0 +1,166 @@
+export const initialCardNumber = {
+  cardLabelInfo: {
+    labelText: "카드번호",
+    wrapperWidth: "100%",
+    horizontalAlign: "space-around",
+    errorMessage: "카드 번호는 0~9까지 숫자로 입력해주세요.",
+  },
+  cardNumberInfo: {
+    firstCardNumber: {
+      name: "firstCardNumber",
+      className: "cardNumber",
+      value: "",
+      type: "number",
+      keyType: "cardNumberInfo",
+      placeholder: "1 2 3 4",
+      maxLength: 4,
+      required: true,
+      index: 0,
+    },
+    secondCardNumber: {
+      name: "secondCardNumber",
+      className: "cardNumber",
+      value: "",
+      type: "number",
+      keyType: "cardNumberInfo",
+      placeholder: "5 6 7 8",
+      maxLength: 4,
+      required: true,
+      index: 1,
+    },
+    thirdCardNumber: {
+      name: "thirdCardNumber",
+      className: "cardNumber",
+      value: "",
+      type: "password",
+      keyType: "cardNumberInfo",
+      placeholder: "• • • •",
+      maxLength: 4,
+      required: true,
+      index: 2,
+    },
+    fourthCardNumber: {
+      name: "fourthCardNumber",
+      className: "cardNumber",
+      value: "",
+      type: "password",
+      keyType: "cardNumberInfo",
+      placeholder: "• • • •",
+      maxLength: 4,
+      required: true,
+      index: 3,
+    },
+  },
+};
+
+export const initialExpireDate = {
+  expireDateLabelInfo: {
+    labelText: "만료일 (MM/YY)",
+    wrapperWidth: "135px",
+    horizontalAlign: "center",
+    errorMessage: "만료일은 0~9까지 숫자로 입력해주세요.",
+  },
+  expireDateInfo: {
+    month: {
+      name: "month",
+      className: "expireDate",
+      value: "",
+      type: "text",
+      keyType: "expireDateInfo",
+      placeholder: "MM",
+      width: "40px",
+      maxLength: 2,
+      required: true,
+      index: 0,
+    },
+    year: {
+      name: "year",
+      className: "expireDate",
+      value: "",
+      type: "text",
+      keyType: "expireDateInfo",
+      placeholder: "YY",
+      width: "40px",
+      maxLength: 2,
+      required: true,
+      index: 1,
+    },
+  },
+};
+
+export const initialHolderName = {
+  holderNameLabelInfo: {
+    labelText: "카드 소유자 이름 (선택)",
+    wrapperWidth: "100%",
+    horizontalAlign: "flex-start",
+    errorMessage: "카드 소유자 이름은 영문 대문자만 입력해주세요.",
+  },
+  holderNameInfo: {
+    name: "holderName",
+    className: "holderName",
+    value: "",
+    type: "text",
+    keyType: "holderNameInfo",
+    placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
+    width: "100%",
+    textAlign: "left",
+    maxLength: 30,
+    required: false,
+    index: 0,
+  },
+};
+
+export const initialSecurityCode = {
+  securityCodeLabelInfo: {
+    labelText: "보안 코드(CVC/CVV)",
+    wrapperWidth: "85px",
+    errorMessage: "카드 뒷 면에 있는 3자리 숫자를 적어주세요.",
+  },
+  securityCodeInfo: {
+    name: "securityCode",
+    className: "securityCode",
+    value: "",
+    type: "password",
+    keyType: "securityCodeInfo",
+    placeholder: "• • •",
+    width: "100%",
+    maxLength: 3,
+    required: true,
+    index: 0,
+  },
+};
+
+export const initialPassword = {
+  passwordLabelInfo: {
+    labelText: "카드 비밀번호 앞 두 자리",
+    wrapperWidth: "90px",
+    splitCount: 2,
+    errorMessage: "비밀번호는 0~9까지 숫자로 입력해주세요.",
+  },
+  passwordInfo: {
+    firstPassword: {
+      name: "firstPassword",
+      className: "password",
+      value: "",
+      type: "password",
+      keyType: "passwordInfo",
+      placeholder: "•",
+      width: "100%",
+      maxLength: 1,
+      required: true,
+      index: 0,
+    },
+    secondPassword: {
+      name: "secondPassword",
+      className: "password",
+      value: "",
+      type: "password",
+      keyType: "passwordInfo",
+      placeholder: "•",
+      width: "100%",
+      maxLength: 1,
+      required: true,
+      index: 1,
+    },
+  },
+};

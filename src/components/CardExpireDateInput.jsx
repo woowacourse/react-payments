@@ -1,4 +1,4 @@
-import React from "react";
+import { Fragment } from "react";
 
 import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
@@ -6,29 +6,38 @@ import InputField from "./UIComponents/InputField/InputField";
 import { CARD_INFO_RULES } from "../constants/constants";
 
 export default function CardExpireDateInput({ expireDate, onChange }) {
+  const { expireDateLabelInfo, expireDateInfo } = expireDate;
+  const expireDateList = Object.values(expireDateInfo);
+  const expireDateLength = expireDateList.reduce(
+    (sum, prev) => prev.value.length + sum,
+    0
+  );
+
   return (
     <InputField
-      labelText={"만료일 (MM/YY)"}
-      wrapperWidth={"135px"}
-      horizontalAlign={"center"}
-      errorMessage={"만료일은 0~9까지 숫자로 입력해주세요."}
-      isComplete={
-        expireDate.join("").length === CARD_INFO_RULES.EXPIRE_DATE_LENGTH
-      }
+      labelText={expireDateLabelInfo.labelText}
+      wrapperWidth={expireDateLabelInfo.wrapperWidth}
+      horizontalAlign={expireDateLabelInfo.horizontalAlign}
+      errorMessage={expireDateLabelInfo.errorMessage}
+      isComplete={expireDateLength === CARD_INFO_RULES.EXPIRE_DATE_LENGTH}
     >
-      {["MM", "YY"].map((text, index) => (
-        <React.Fragment key={text}>
+      {expireDateList.map((expireDate) => (
+        <Fragment key={expireDate.name}>
           <Input
-            placeholder={text}
-            name={text}
-            type={"text"}
-            value={expireDate[index]}
-            onChange={(e) => onChange(e, "expireDate", index)}
-            width={"40px"}
-            isComplete={expireDate[index].length === 2}
+            dataTargetGroup={expireDate.className}
+            className={expireDate.className}
+            name={expireDate.name}
+            value={expireDate.value}
+            type={expireDate.type}
+            placeholder={expireDate.placeholder}
+            width={expireDate.width}
+            maxLength={expireDate.maxLength}
+            required={expireDate.required}
+            onChange={(e) => onChange(e, expireDate.keyType)}
+            isComplete={expireDate.value.length === 2}
           />
-          {index === 0 && <p>/</p>}
-        </React.Fragment>
+          {expireDate.name === "month" && <p>/</p>}
+        </Fragment>
       ))}
     </InputField>
   );
