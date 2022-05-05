@@ -6,6 +6,7 @@ export const InputBasic = ({
   placeholder,
   value,
   onChange,
+  onBlur,
   id,
   pattern,
   width,
@@ -23,6 +24,7 @@ export const InputBasic = ({
       pattern={pattern}
       maxLength={maxLength}
       onChange={onChange}
+      onBlur={onBlur}
     />
   );
 };
