@@ -1,3 +1,9 @@
+const PATH = {
+  CARD_LIST: '/',
+  CARD_ADD: '/card-add',
+  CARD_ADD_COMPLETE: '/card-add-complete',
+};
+
 const CARD_NUMBER = {
   TEXT_FIELD_NAME: 'cardNumber',
   UNIT_COUNT: 4,
@@ -61,4 +67,4 @@ const ERROR_MESSAGE = {
   },
 };
 
-export { CARD_NUMBER, EXPIRE_DATE, USER_NAME, SECURITY_CODE, CARD_PASSWORD, ERROR_MESSAGE };
+export { PATH, CARD_NUMBER, EXPIRE_DATE, USER_NAME, SECURITY_CODE, CARD_PASSWORD, ERROR_MESSAGE };
