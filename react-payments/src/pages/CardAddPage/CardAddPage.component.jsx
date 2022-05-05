@@ -1,5 +1,4 @@
 import { useContext, useReducer } from "react";
-import styled from "styled-components";
 import Card from "../../component/common/Card/card.component";
 import CardTypeSelector from "../../component/CardTypeSelector/CardTypeSelector";
 import Header from "../../component/common/Header/Header.component";
@@ -19,15 +18,7 @@ import CardPasswordContainer from "../../component/CardPasswordContainer/CardPas
 import useReady from "../../hooks/useReady";
 import { isAllInputReady } from "../../util/validator";
 import { CardTypeContext } from "../../provider/CardTypeProvider";
-
-const CardAddPageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 350px;
-  gap: 5px;
-  border: 1px solid ${({ theme }) => theme.colors.pageDefault};
-  padding: 20px 15px;
-`;
+import PageContainer from "../../component/common/PageContainer/PageContainer.component";
 
 const CardAddPage = () => {
   const {
@@ -65,14 +56,14 @@ const CardAddPage = () => {
   );
 
   return (
-    <CardAddPageContainer>
+    <PageContainer>
       <Header>
         <LinkButton>{"<"}</LinkButton>
         <PageTitle type="header">카드 추가</PageTitle>
       </Header>
 
       <Card
-        cardNumbers={cardNumber}
+        cardNumber={cardNumber}
         name={userName}
         month={expireDate.month}
         year={expireDate.year}
@@ -95,7 +86,7 @@ const CardAddPage = () => {
           <CardTypeSelector />
         </Modal>
       )}
-    </CardAddPageContainer>
+    </PageContainer>
   );
 };
 

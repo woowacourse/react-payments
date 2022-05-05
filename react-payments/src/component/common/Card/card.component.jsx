@@ -115,7 +115,7 @@ const Card = ({
   name,
   month,
   year,
-  cardNumbers,
+  cardNumber,
   cardTypeInfo,
   toggleModal,
   size,
@@ -128,7 +128,7 @@ const Card = ({
           <CardChip size={size} />
         </CardMiddle>
         <CardBottom>
-          <CardNumberText cardNumbers={cardNumbers} size={size} />
+          <CardNumberText cardNumbers={cardNumber} size={size} />
           <CardBottomInfo>
             <CardText>{name}</CardText>
             <CardText size={size}>

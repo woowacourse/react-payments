@@ -12,6 +12,7 @@ const PageTitle = styled.h1`
           font-size: 24px;
           line-height: 25px;
           font-weight: 400;
+          margin-bottom: 50px;
         `}
   display: flex;
   align-items: center;

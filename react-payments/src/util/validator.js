@@ -23,7 +23,7 @@ export const isInValidCardNumber = (cardNumber) =>
     (number) => number.length !== MAX_LENGTH.CARD_NUMBER
   );
 
-export const isInValidCardType = (cardType) => !cardType;
+export const isInValidCardType = (cardType) => cardType === "defaultCard";
 
 export const isInValidSecurityCode = (securityCode) =>
   securityCode.length !== MAX_LENGTH.SECURITY_CODE;
