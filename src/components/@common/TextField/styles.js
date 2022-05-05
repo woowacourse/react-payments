@@ -26,10 +26,6 @@ const Container = styled.input`
       margin: 0;
     }
   }
-
-  &::placeholder {
-    font-size: 1rem;
-  }
 `;
 
 export default Container;

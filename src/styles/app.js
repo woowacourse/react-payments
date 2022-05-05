@@ -68,6 +68,13 @@ const appStyles = css`
     position: relative;
   }
 
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
   .button-container.right {
     text-align: right;
   }
