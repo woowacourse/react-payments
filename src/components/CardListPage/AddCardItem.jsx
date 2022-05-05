@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { HiOutlinePlus } from 'react-icons/hi';
 import { ADD_CARD_ITEM_BG_COLOR } from '../../style';
+import { PathContext } from '../../context';
 
 const CardBox = styled.div`
   display: flex;
@@ -21,9 +22,10 @@ const CardBox = styled.div`
 `;
 
 function AddCardItem() {
+  const setPath = useContext(PathContext);
+
   const handleClick = () => {
-    // TODO: 카드 추가 폼으로 이동
-    alert('^^');
+    setPath('add-card');
   };
 
   return (

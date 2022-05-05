@@ -15,7 +15,7 @@ import useInputHandler from '../../hooks/useInputHandler';
 import { validateCardCode, validatePassword } from '../../validator';
 import { LABEL_PRIMARY_COLOR } from '../../style';
 import { Form } from '../common/styled';
-import { CardInfoContext } from '../../context';
+import { CardInfoContext, PathContext } from '../../context';
 
 function CardFormPage({
   dimensions,
@@ -27,6 +27,7 @@ function CardFormPage({
   setCardDate,
   updateOwner,
 }) {
+  const setPath = useContext(PathContext);
   const { cardCompany, cardNumbers, cardDate, owner } = useContext(CardInfoContext);
 
   const {
@@ -60,23 +61,22 @@ function CardFormPage({
     [cardCompany, cardDate, cardCode, isCorrectCardNumber, isCorrectPwd],
   );
 
+  const handleClickBackArrow = () => {
+    setPath('list-card');
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
 
     if (!isRequiredCompleted) return;
-    alert('카드 등록이 완료 되었습니다 :D');
+    setPath('submit-card');
   };
 
   return (
     <>
       <Header
         leadingButton={
-          <IoIosArrowBack
-            size={30}
-            color="#525252"
-            onClick={() => alert('아직 구현되지 않았습니다 :(')}
-            style={{ cursor: 'pointer' }}
-          />
+          <IoIosArrowBack size={30} color="#525252" onClick={handleClickBackArrow} style={{ cursor: 'pointer' }} />
         }>
         카드추가
       </Header>
