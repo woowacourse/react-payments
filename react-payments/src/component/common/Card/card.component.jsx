@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import CardNumberText from "./CardNumberText.component";
 
 const CardTop = styled.div`
@@ -20,14 +20,23 @@ const CardMiddle = styled.div`
   align-items: center;
 `;
 
-const SmallCardChip = styled.div`
-  width: 40px;
-  height: 26px;
+const CardChip = styled.div`
   left: 95px;
   top: 122px;
 
   background: ${({ theme }) => theme.colors.cardChip};
   border-radius: 4px;
+
+  ${({ size }) =>
+    size === "big"
+      ? css`
+          width: 55.04px;
+          height: 35.77px;
+        `
+      : css`
+          width: 40px;
+          height: 26px;
+        `}
 `;
 
 const CardBox = styled.div`
@@ -35,9 +44,6 @@ const CardBox = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  width: 208px;
-  height: 130px;
 
   font-size: 30px;
   color: ${({ theme }) => theme.colors.cardText};
@@ -49,6 +55,17 @@ const CardBox = styled.div`
 
   background: ${({ theme, cardType }) =>
     theme.colors[cardType] || theme.colors.defaultCard};
+
+  ${({ size }) =>
+    size === "big"
+      ? css`
+          width: 290px;
+          height: 180px;
+        `
+      : css`
+          width: 208px;
+          height: 130px;
+        `}
 `;
 
 const CardContainer = styled.div`
@@ -80,8 +97,16 @@ const CardBottomInfo = styled.div`
 const CardText = styled.span`
   margin: 0 16px;
 
-  font-size: 12px;
-  line-height: 16px;
+  ${({ size }) =>
+    size === "big"
+      ? css`
+          font-size: 18px;
+          line-height: 20px;
+        `
+      : css`
+          font-size: 12px;
+          line-height: 16px;
+        `}
   vertical-align: middle;
   font-weight: 400;
 `;
@@ -93,19 +118,20 @@ const Card = ({
   cardNumbers,
   cardTypeInfo,
   toggleModal,
+  size,
 }) => {
   return (
     <CardContainer onClick={toggleModal} data-testid="card">
-      <CardBox cardType={cardTypeInfo.cardType}>
+      <CardBox cardType={cardTypeInfo.cardType} size={size}>
         <CardTop>{cardTypeInfo.cardName}</CardTop>
         <CardMiddle>
-          <SmallCardChip />
+          <CardChip size={size} />
         </CardMiddle>
         <CardBottom>
-          <CardNumberText cardNumbers={cardNumbers} />
+          <CardNumberText cardNumbers={cardNumbers} size={size} />
           <CardBottomInfo>
             <CardText>{name}</CardText>
-            <CardText>
+            <CardText size={size}>
               {month} / {year}
             </CardText>
           </CardBottomInfo>

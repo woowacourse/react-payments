@@ -1,15 +1,25 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { MIDDLE_CARD_NUMBER_LENGTH } from "../../../constants/index";
 import Dot from "../Dot/dot.component";
 
 const CardNumberTextBox = styled.div`
   display: flex;
-  gap: 10px;
-  font-size: 14px;
   vertical-align: middle;
   font-weight: 500;
   margin-bottom: 5px;
-  letter-spacing: 3px;
+
+  ${({ size }) =>
+    size === "big"
+      ? css`
+          font-size: 18px;
+          gap: 16px;
+          letter-spacing: 5px;
+        `
+      : css`
+          font-size: 14px;
+          gap: 10px;
+          letter-spacing: 3px;
+        `}
 `;
 
 const CardDotContainer = styled.div`
@@ -17,9 +27,9 @@ const CardDotContainer = styled.div`
   align-items: center;
 `;
 
-const CardNumberText = ({ cardNumbers }) => {
+const CardNumberText = ({ cardNumbers, size }) => {
   return (
-    <CardNumberTextBox>
+    <CardNumberTextBox size={size}>
       {Object.values(cardNumbers).map((cardNumber, idx) => {
         if (idx >= MIDDLE_CARD_NUMBER_LENGTH) {
           return (
