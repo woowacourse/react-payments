@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useAutoFocus } from '../../../hooks/useAutoFocus';
-import { findNotCompletedInput } from '../../../utils/util/form';
+import { useAutoFocus } from '../../../../hooks/useAutoFocus';
 import { useCallback } from 'react';
 
 function TextInput({
@@ -32,25 +31,6 @@ function TextInput({
     inputElementKey,
     sideEffect: nextInputFocus,
   });
-
-  // useEffect(() => {
-  //   if (value.length === maxLength) {
-  //     const { current: inputElementsMap } = inputElementsRef;
-  //     const { element: currentElement } = inputElementsMap[inputElementKey];
-
-  //     const {
-  //       nextInput: { element: nextElement },
-  //     } = findNotCompletedInput(inputElementsMap, inputElementKey);
-
-  //     inputElementsMap[inputElementKey].isComplete = true;
-
-  //     nextElement?.focus();
-
-  //     if (!nextElement) {
-  //       currentElement?.blur();
-  //     }
-  //   }
-  // }, [value, inputElementsRef, inputElementKey, maxLength, setIsShowVirtualKeyboard]);
 
   const onFocus = () => {
     setIsShowVirtualKeyboard(prev => ({

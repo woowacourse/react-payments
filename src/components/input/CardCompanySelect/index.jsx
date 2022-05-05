@@ -1,9 +1,9 @@
 import React from 'react';
 import { uid } from 'react-uid';
 import PropTypes from 'prop-types';
-import { CARD_TYPE } from '../../utils/constants';
+import { CARD_TYPE } from '../../../utils/constants';
 
-function SelectCard({ setIsShowModal, cardInputDispatch }) {
+function CardCompanySelect({ setIsShowModal, cardInputDispatch }) {
   const onClickOption = cardType => {
     setIsShowModal(false);
 
@@ -25,9 +25,9 @@ function SelectCard({ setIsShowModal, cardInputDispatch }) {
   );
 }
 
-SelectCard.propTypes = {
+CardCompanySelect.propTypes = {
   setIsShowModal: PropTypes.func,
   cardInputDispatch: PropTypes.func,
 };
 
-export default SelectCard;
+export default CardCompanySelect;

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useMouseHover } from '../../hooks/useMouseHover';
-import Position from '../commons/Position';
+import Position from '../../../commons/Position';
+import { useMouseHover } from '../../../../hooks/useMouseHover';
 
 function LabelInputContainer({ labelTitle, inputSize = '', helpText, htmlFor, children }) {
   const [isMouseOver, onMouseOver, onMouseLeave] = useMouseHover();

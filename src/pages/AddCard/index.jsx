@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCardInput } from '../../hooks/useCardInput';
-import Card from '../Card';
-import CardInputForm from '../InputForm/CardInputForm';
+import Card from '../../components/card/Card';
+import CardInputForm from '../../components/input/InputForm/CardInputForm';
 
 function AddCard() {
   const [cardInput, cardInputDispatch] = useCardInput();

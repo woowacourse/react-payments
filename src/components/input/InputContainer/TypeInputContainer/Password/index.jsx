@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PASSWORD_TYPE } from '../../types';
+import { PASSWORD_TYPE } from '../../../../types';
 import { uid } from 'react-uid';
 import LabelInputContainer from '../../LabelInputContainer';
-import PasswordInput from '../../Input/PasswordInput';
-import { INPUT_ELEMENT_KEY_SEPARATOR } from '../../../utils/constants';
-import { isNumberInRange } from '../../../utils/validation/form';
+import PasswordInput from '../../../Input/PasswordInput';
+import { INPUT_ELEMENT_KEY_SEPARATOR } from '../../../../../utils/constants';
 
 function PasswordInputContainer({
   state,

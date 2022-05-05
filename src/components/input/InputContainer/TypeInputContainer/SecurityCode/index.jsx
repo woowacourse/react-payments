@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LabelInputContainer from '../../LabelInputContainer';
-import PasswordInput from '../../Input/PasswordInput';
+import PasswordInput from '../../../Input/PasswordInput';
 
 function SecurityCodeInputContainer({
   state,

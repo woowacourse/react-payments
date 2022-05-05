@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { findNotCompletedInput } from '../../../utils/util/form';
-import { useAutoFocus } from '../../../hooks/useAutoFocus';
+import { useAutoFocus } from '../../../../hooks/useAutoFocus';
 import { useCallback } from 'react';
 function PasswordInput({
   id,
@@ -12,6 +11,7 @@ function PasswordInput({
   inputElementKey,
   setIsShowVirtualKeyboard,
 }) {
+  // 렌더링 마다 생성됨,. 너무 자주 생성됨.. -> useEffect의 deps에 들어가면 렌더링 마다 콜백을 수행한다.
   const nextInputFocus = useCallback(
     (currentInput, nextInput) => {
       currentInput.isComplete = true;
@@ -33,6 +33,7 @@ function PasswordInput({
     [setIsShowVirtualKeyboard],
   );
 
+  // sideEffect -> 결정권을 사용처에서.. 주입할 수 있도록
   useAutoFocus({
     value,
     maxLength,
@@ -40,29 +41,6 @@ function PasswordInput({
     inputElementsRef,
     sideEffect: nextInputFocus,
   });
-  // useEffect(() => {
-  //   if (value.length === maxLength) {
-  //     const { current: inputElementsMap } = inputElementsRef;
-  //     const { element: currentElement } = inputElementsMap[inputElementKey];
-
-  //     const {
-  //       nextInput: { element: nextElement },
-  //     } = findNotCompletedInput(inputElementsMap, inputElementKey);
-
-  //     inputElementsMap[inputElementKey].isComplete = true;
-
-  //     nextElement?.focus();
-
-  //     if (!nextElement) {
-  //       setIsShowVirtualKeyboard(prev => ({
-  //         ...prev,
-  //         isShow: false,
-  //         elementKey: null,
-  //       }));
-  //       currentElement?.blur();
-  //     }
-  //   }
-  // }, [value, inputElementsRef, inputElementKey, maxLength, setIsShowVirtualKeyboard]);
 
   const onFocus = () => {
     setIsShowVirtualKeyboard(prev => ({
@@ -101,7 +79,7 @@ function PasswordInput({
       }}
       onFocus={onFocus}
       onKeyDown={onKeyDown}
-      onChange={() => console.log('hi')}
+      onChange={() => false}
     />
   );
 }

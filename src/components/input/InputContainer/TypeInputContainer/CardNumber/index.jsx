@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { uid } from 'react-uid';
-import { CARD_NUMBER_TYPE } from '../../types';
-import TextInput from '../../Input/TextInput';
+import { CARD_NUMBER_TYPE } from '../../../../types';
+import TextInput from '../../../Input/TextInput';
 import LabelInputContainer from '../../LabelInputContainer';
-import { isNumberInRange } from '../../../utils/validation/form';
-import PasswordInput from '../../Input/PasswordInput';
-import { INPUT_ELEMENT_KEY_SEPARATOR } from '../../../utils/constants';
+import { isNumberInRange } from '../../../../../utils/validation/form';
+import PasswordInput from '../../../Input/PasswordInput';
+import { INPUT_ELEMENT_KEY_SEPARATOR } from '../../../../../utils/constants';
 
 function CardNumberInputContainer({
   state,

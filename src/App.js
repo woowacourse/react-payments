@@ -1,5 +1,5 @@
 import React from 'react';
-import AddCard from './components/AddCard';
+import AddCard from './pages/AddCard';
 
 function App() {
   return (

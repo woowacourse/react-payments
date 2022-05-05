@@ -1,15 +1,15 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../types';
-import { useFormComplete } from '../../../hooks/useFormComplete';
-import InputContainer from '../../TypeInputContainer';
+import { useFormComplete } from '../../../../hooks/useFormComplete';
+import { checkFormCompletion, checkFormValidation } from '../../../../utils/validation/form';
+import { objectToString } from '../../../../utils/util';
+import InputContainer from '../../InputContainer/TypeInputContainer';
 import { uid } from 'react-uid';
-import { objectToString } from '../../../utils/util';
-import { checkFormCompletion, checkFormValidation } from '../../../utils/validation/form';
+import Position from '../../../commons/Position';
+import Modal from '../../../commons/Modal';
+import CardCompanySelect from '../../CardCompanySelect';
+import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../../types';
 import VirtualKeyboard from '../../VirtualKeyboard';
-import Position from '../../commons/Position';
-import Modal from '../../commons/Modal';
-import SelectCard from '../../SelectCard';
 
 function CardInputForm({ cardInput, cardInputDispatch }) {
   const [isShowModal, setIsShowModal] = useState(false);
@@ -90,7 +90,10 @@ function CardInputForm({ cardInput, cardInputDispatch }) {
       {isShowModal && (
         <Modal setIsShowModal={setIsShowModal}>
           <div className="modal">
-            <SelectCard setIsShowModal={setIsShowModal} cardInputDispatch={cardInputDispatch} />
+            <CardCompanySelect
+              setIsShowModal={setIsShowModal}
+              cardInputDispatch={cardInputDispatch}
+            />
           </div>
         </Modal>
       )}

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { uid } from 'react-uid';
-import { isNumberInRange } from '../../utils/validation/form';
-import { findNotCompletedInput } from '../../utils/util/form';
+import { isNumberInRange } from '../../../utils/validation/form';
+import { findNotCompletedInput } from '../../../utils/util/form';
 const shuffle = array => {
   const target = [...array];
   return target.sort(() => Math.random() - 0.5);
@@ -34,6 +34,7 @@ function VirtualKeyboard({
       });
     }
 
+    // 숫자를 눌렀을 때 이미 완성되어 있다면 다음 엘리먼트가 포커싱
     if (value.length === maxLength) {
       const {
         nextInput: { element: nextElement },
