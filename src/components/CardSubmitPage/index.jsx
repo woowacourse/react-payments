@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import { CardInfoContext } from '../../context';
 import { LABEL_PRIMARY_COLOR, PLACEHOLDER_PRIMARY_COLOR } from '../../style';
-import Card from '../common/Card';
 
+import Card from '../common/Card';
+import ErrorMessage from '../common/ErrorMessage';
 import Footer from '../common/Footer';
 import TextButton from '../common/TextButton';
 
@@ -35,9 +36,32 @@ const LinedInput = styled.input`
   }
 `;
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 function CardSubmitPage() {
   const { cardCompany, cardNumbers, owner, cardDate } = useContext(CardInfoContext);
+  const [nickname, setNickname] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
+  const handleInputChange = ({ target: { value } }) => {
+    setNickname(value);
+    setErrorMessage('');
+
+    if (!value.trim()) {
+      setErrorMessage('필수로 입력해주세요.');
+    }
+  };
+
+  const handleClick = () => {
+    if (!nickname.trim()) {
+      return;
+    }
+
+    alert('완료 :D');
+  };
   return (
     <>
       <SubmitContainer>
@@ -50,10 +74,22 @@ function CardSubmitPage() {
           cardOwner={owner}
           cardDate={cardDate}
         />
-        <LinedInput type="text" minLength={1} maxLength={30} placeholder="카드 별칭" required />
+        <Container>
+          <LinedInput
+            type="text"
+            minLength={1}
+            maxLength={30}
+            placeholder="카드 별칭"
+            required
+            name="nickname"
+            value={nickname}
+            onChange={handleInputChange}
+          />
+          <ErrorMessage>{errorMessage}</ErrorMessage>
+        </Container>
       </SubmitContainer>
       <Footer>
-        <TextButton type="button" hexColor={LABEL_PRIMARY_COLOR} isVisible onClick={() => alert('완료:D')}>
+        <TextButton type="button" hexColor={LABEL_PRIMARY_COLOR} onClick={handleClick} isVisible>
           확인
         </TextButton>
       </Footer>
