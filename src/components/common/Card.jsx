@@ -13,7 +13,7 @@ const CardBox = styled.div`
   background-color: ${props => props.hexColor};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-  margin: 10px 0;
+  margin: 10px 0 0;
   cursor: pointer;
 
   &:hover {
@@ -51,12 +51,15 @@ const CardParagraph = styled.p`
   width: ${props => props.width}px;
 `;
 
+const convertToCardNumberString = ({ cardNoA, cardNoB, cardNoC, cardNoD }) =>
+  `${cardNoA} ${cardNoB} ${'*'.repeat(cardNoC.length)} ${'*'.repeat(cardNoD.length)}`;
+
 function Card({
   large,
   handleClickBox,
   cardCompany: { hexColor, name },
-  cardNumber,
-  cardOwnerName,
+  cardNumbers,
+  cardOwner,
   cardDate: { month, year },
 }) {
   return (
@@ -67,10 +70,10 @@ function Card({
       <CardChip />
       <CardBottom>
         <CardNumber>
-          <Span>{cardNumber}</Span>
+          <Span>{convertToCardNumberString(cardNumbers)}</Span>
         </CardNumber>
         <CardInfo>
-          <CardParagraph width="120">{cardOwnerName || 'NAME'}</CardParagraph>
+          <CardParagraph width="120">{cardOwner.name || 'NAME'}</CardParagraph>
           <CardParagraph>{`${month || 'MM'} / ${year || 'YY'}`}</CardParagraph>
         </CardInfo>
       </CardBottom>

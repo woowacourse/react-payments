@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+
+import { CardInfoContext } from '../../context';
 import { LABEL_PRIMARY_COLOR, PLACEHOLDER_PRIMARY_COLOR } from '../../style';
 import Card from '../common/Card';
+
 import Footer from '../common/Footer';
-import { Form } from '../common/styled';
 import TextButton from '../common/TextButton';
+
+const SubmitContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  gap: 16px;
+`;
 
 const Title = styled.h2`
   font-size: 1.5rem;
@@ -25,24 +36,28 @@ const LinedInput = styled.input`
 `;
 
 function CardSubmitPage() {
+  const { cardCompany, cardNumbers, owner, cardDate } = useContext(CardInfoContext);
+
   return (
-    <Form>
-      <Title>카드 등록이 완료되었습니다.</Title>
-      <Card
-        large
-        handleClickBox={() => {}}
-        cardCompany={{ hexColor: '#f0f', name: '태태 카드' }}
-        cardNumber={'1234-1234-****-****'}
-        cardOwnerName={'TAETAE'}
-        cardDate={{ month: '01', yaer: '27' }}
-      />
-      <LinedInput type="text" minLength={1} placeholder="카드 별칭" required />
+    <>
+      <SubmitContainer>
+        <Title>카드 등록이 완료되었습니다.</Title>
+        <Card
+          large
+          handleClickBox={() => {}}
+          cardCompany={cardCompany}
+          cardNumbers={cardNumbers}
+          cardOwner={owner}
+          cardDate={cardDate}
+        />
+        <LinedInput type="text" minLength={1} maxLength={30} placeholder="카드 별칭" required />
+      </SubmitContainer>
       <Footer>
-        <TextButton hexColor={LABEL_PRIMARY_COLOR} isVisible>
+        <TextButton type="button" hexColor={LABEL_PRIMARY_COLOR} isVisible onClick={() => alert('완료:D')}>
           확인
         </TextButton>
       </Footer>
-    </Form>
+    </>
   );
 }
 

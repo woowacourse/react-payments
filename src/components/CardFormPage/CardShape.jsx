@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Card from '../common/Card';
+
 import CardCompany from '../common/CardCompany';
 import Modal from '../common/Modal';
 
@@ -35,7 +36,7 @@ const cardCompanyList = [
   { color: '#192dff', name: '블링 카드' },
 ];
 
-function CardShape({ cardNumber, cardOwnerName, cardDate, dimensions, setCardCompany, cardCompany }) {
+function CardShape({ cardNumbers, cardOwner, cardDate, dimensions, setCardCompany, cardCompany }) {
   const [isShown, setIsShown] = useState(false);
 
   const handleClickBox = () => {
@@ -55,8 +56,8 @@ function CardShape({ cardNumber, cardOwnerName, cardDate, dimensions, setCardCom
       <Card
         handleClickBox={handleClickBox}
         cardCompany={cardCompany}
-        cardNumber={cardNumber}
-        cardOwnerName={cardOwnerName}
+        cardNumbers={cardNumbers}
+        cardOwner={cardOwner}
         cardDate={cardDate}
       />
       <Modal isOpen={isShown} setIsOpen={setIsShown} dimensions={dimensions}>
