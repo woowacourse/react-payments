@@ -19,7 +19,7 @@ export default function Form({ children, onSubmit }) {
 
     const focusTarget = formInputArray[currentIndex + direction];
 
-    if (!focusTarget || focusTarget.name !== currInput.name) return;
+    if (!focusTarget || focusTarget.parentNode !== currInput.parentNode) return;
 
     focusTarget.focus();
   };
