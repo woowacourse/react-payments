@@ -68,7 +68,7 @@ const CardAddPage = () => {
     <CardAddPageContainer>
       <Header>
         <LinkButton>{"<"}</LinkButton>
-        <PageTitle>카드 추가</PageTitle>
+        <PageTitle type="header">카드 추가</PageTitle>
       </Header>
 
       <Card
