@@ -47,6 +47,7 @@ const ModalContainer = styled.div`
   height: 100%;
   border-radius: 15px;
   background-color: rgba(0, 0, 0, 0.4);
+  overflow: hidden;
 `;
 
 function App() {
