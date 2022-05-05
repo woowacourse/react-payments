@@ -42,6 +42,7 @@ const CardName = styled.p`
     margin: 0 0 20px 0;
     font-size: 10px;
     line-height: 10px;
+    height: 10px;
     `}
 
   ${props =>
@@ -50,6 +51,7 @@ const CardName = styled.p`
     margin: 0 0 32px 0;
     font-size: 14px;
     line-height: 14px;
+    height: 14px;
     `}
 `;
 
