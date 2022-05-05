@@ -27,6 +27,7 @@ const colors = {
   cardChip: "#cbba64",
   defaultCard: "#94dacd",
   cardText: "#575757",
+  cardNameInputBorder: "#737373",
 };
 
 const theme = { colors };
