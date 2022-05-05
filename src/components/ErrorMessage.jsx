@@ -18,7 +18,6 @@ export default function ErrorMessage({ value, children, validate, type }) {
         type: type,
         errorMessage: message,
       });
-      console.log('hi');
     }
   }, [value]);
 

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as S from 'styles.js';
 import { CardDispatchContext, CardStateContext, TYPES } from 'context/CardContext';
 import validator from 'validations/validator';
@@ -27,6 +28,7 @@ function CardAddition() {
     cardPassword,
     cardCompanyIndex,
     cardCompanyErrorMessage,
+    cards,
   } = useContext(CardStateContext);
 
   const dispatch = useContext(CardDispatchContext);
@@ -63,13 +65,19 @@ function CardAddition() {
     setIsSubmitted(true);
   };
 
-  const onConfirmCard = (cardNickname) => {
+  const navigate = useNavigate();
+
+  const onConfirmCard = (event, nickname) => {
+    event.preventDefault();
     const newCardData = {
       ...cardData,
-      cardNickname: cardNickname,
+      cardNickname: nickname,
     };
     dispatch({ type: TYPES.SUBMIT_CARD, newCardData });
-    setIsSubmitted(false);
+    console.log('@@', newCardData);
+    console.log(cards);
+
+    navigate('/card-list');
   };
 
   const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
@@ -106,7 +114,7 @@ function CardAddition() {
       </NextButton>
       <CardListModal />
       <TipModal />
-      {isSubmitted && <CardConfirmModal cardData={cardData} onConfirm={onConfirmCard} />}
+      {isSubmitted && <CardConfirmModal cardData={cardData} onConfirmCard={onConfirmCard} />}
     </S.Container>
   );
 }

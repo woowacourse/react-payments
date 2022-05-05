@@ -32,6 +32,7 @@ export const initialState = {
   cardCompanyIndex: -1,
   listModalFlag: false,
   tipModalFlag: false,
+  cardNickName: '',
   cards: [],
 };
 
@@ -150,7 +151,7 @@ const reducer = (state, action) => {
     case TYPES.SUBMIT_CARD: {
       return {
         ...state,
-        cards: [...state.cards, action.cardData],
+        cards: [...state.cards, action.newCardData],
       };
     }
 

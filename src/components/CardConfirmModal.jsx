@@ -4,8 +4,16 @@ import ReactDOM from 'react-dom';
 import Card from './Card';
 import NextButton from './NextButton';
 import * as S from 'styles.js';
+import { useState } from 'react';
+import FormBasic from './FormBasic';
 
-export default function CardConfirmModal({ cardData, onConfirm }) {
+export default function CardConfirmModal({ cardData, onConfirmCard }) {
+  const [nickname, setNickname] = useState('');
+
+  const onChangeInput = (e) => {
+    setNickname(e.target.value);
+  };
+
   return (
     <>
       {ReactDOM.createPortal(<S.Backdrop />, document.getElementById('backdrop-root'))}
@@ -19,10 +27,16 @@ export default function CardConfirmModal({ cardData, onConfirm }) {
             cardOwner={cardData.cardOwner}
             isSmall={false}
           />
-          <S.UnderlineInput placeholder="카드 별칭을 입력해주세요." type="text" />
-          <NextButton onClick={onConfirm} disabled={false} color={cardData.cardColor}>
-            확인
-          </NextButton>
+          <FormBasic onSubmitForm={onConfirmCard} payload={nickname}>
+            <S.UnderlineInput
+              onChange={onChangeInput}
+              placeholder="카드 별칭을 입력해주세요."
+              type="text"
+            />
+            <NextButton disabled={false} color={cardData.cardColor}>
+              확인
+            </NextButton>
+          </FormBasic>
         </S.Modal>,
         document.getElementById('overlay-root'),
       )}
