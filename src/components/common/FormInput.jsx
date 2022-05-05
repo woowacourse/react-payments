@@ -6,7 +6,7 @@ import { isObject } from 'utils';
 
 const FormInput = ({
   className,
-  item,
+  type,
   inputTitle,
   inputInfoList,
   inputValue,
@@ -21,10 +21,10 @@ const FormInput = ({
 
   const handleInputChange = useCallback(
     (e) => {
-      handleChange(e, item);
+      handleChange(e, type);
       autoFocusForward(e);
     },
-    [item, handleChange, autoFocusForward],
+    [type, handleChange, autoFocusForward],
   );
 
   return (
@@ -63,7 +63,7 @@ FormInput.propTypes = {
   /**
    * category of FormInput
    */
-  item: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   /**
    * name of FormInput
    */
