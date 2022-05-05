@@ -32,9 +32,8 @@ const HelpModal = styled.div`
   left: 20px;
   top: 25px;
   background-color: ${({ theme }) => theme.colors.helpModal};
-  box-shadow: 0px 5px 5px -3px rgba(56, 56, 56, 0.2),
-    0px 8px 10px 1px rgba(70, 70, 70, 0.14),
-    0px 3px 14px 2px rgba(71, 71, 71, 0.12);
+  box-shadow: 0 5px 5px -3px rgba(56, 56, 56, 0.2),
+    0 8px 10px 1px rgba(70, 70, 70, 0.14), 0 3px 14px 2px rgba(71, 71, 71, 0.12);
   border-radius: 5px;
   color: ${({ theme }) => theme.colors.helpModalText};
 `;

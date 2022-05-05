@@ -23,7 +23,7 @@ const ModalBox = styled.div`
   align-items: center;
   width: 375px;
   height: 220px;
-  border-radius: 5px 5px 0px 0px;
+  border-radius: 5px 5px 0 0;
   flex-wrap: wrap;
   background: ${({ theme }) => theme.colors.pageDefault};
   z-index: 10;
