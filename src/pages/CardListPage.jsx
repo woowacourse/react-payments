@@ -71,7 +71,7 @@ function CardList() {
           value.cardInfoList.map((cardInfo, index) => (
             <CardListItem key={index}>
               <CardItem size={'small'} {...cardInfo} />
-              <CardNickName>테스트</CardNickName>
+              <CardNickName>{cardInfo.nickName || `나의 카드 ${index + 1}`}</CardNickName>
             </CardListItem>
           ))
         }
