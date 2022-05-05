@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { CardContext } from "../../../context/CardProvider";
 import useControllInput from "../../../hooks/useControllInput";
 import { blockCharacter, limitInputLength } from "../../../util/input";
 import { Input } from "../../common/Input";
@@ -9,13 +11,18 @@ const INPUT_LENGTH = 1;
 const NUM_OF_INPUT = 2;
 const BACKSPACE_KEY_CODE = 8;
 
-const CardPasswordInput = ({ passwordValue, onChangePassword }) => {
+const CardPasswordInput = () => {
   const { itemRef, controllInput, autoFocusBackward } = useControllInput({
     maxLength: INPUT_LENGTH,
   });
 
+  const {
+    cardInfo: { password },
+    dispatch,
+  } = useContext(CardContext);
+
   const updateCardPassword = (target, idx) => {
-    onChangePassword({
+    dispatch({
       type: "password",
       payload: {
         value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),
@@ -43,7 +50,7 @@ const CardPasswordInput = ({ passwordValue, onChangePassword }) => {
                 ref={(el) => {
                   itemRef.current[idx] = el;
                 }}
-                value={passwordValue[idx]}
+                value={password[idx]}
                 onChange={({ target }) => {
                   updateCardPassword(target, idx);
                 }}

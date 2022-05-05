@@ -6,17 +6,18 @@ import CardPasswordInput from "../../components/organisms/CardPasswordInput";
 import ExpiredDateInput from "../../components/organisms/ExpiredDateInput";
 import OwnerNameInput from "../../components/organisms/OwnerNameInput";
 import SecureCodeInput from "../../components/organisms/SecureCodeInput";
-import useCard from "../../hooks/useCard";
 import NextButton from "../../components/common/NextButton";
 import CardColorPicker from "../../components/organisms/CardColorPicker";
 import useModal from "../../hooks/useModal";
 import ConfirmAdd from "../../components/organisms/ConfirmAdd";
+import { useContext } from "react";
+import { CardContext } from "../../context/CardProvider";
 
 const CardAdd = () => {
-  const { cardInfo, dispatch, validateCardInfo } = useCard();
+  const { cardInfo, validateCardInfo } = useContext(CardContext);
+
   const [openConfirmModal, closeConfirmModal, ConfirmModal] = useModal(
     <ConfirmAdd
-      cardInfo={cardInfo}
       closeModal={() => {
         closeConfirmModal();
       }}
@@ -31,12 +32,10 @@ const CardAdd = () => {
         closeModal={() => {
           closeColorPickerVisible();
         }}
-        onChangeCardName={dispatch}
       />
     );
 
-  const { cardName, cardNumber, expiredDate, ownerName, secureCode, password } =
-    cardInfo;
+  const { cardName } = cardInfo;
 
   const submitCard = () => {
     try {
@@ -62,26 +61,11 @@ const CardAdd = () => {
             </span>
           )}
           <form>
-            <CardNumberInput
-              cardNumberValue={cardNumber}
-              onChangeCardNumber={dispatch}
-            />
-            <ExpiredDateInput
-              expiredDateValue={expiredDate}
-              onChangeExpiredDate={dispatch}
-            />
-            <OwnerNameInput
-              ownerNameValue={ownerName}
-              onChangeOwner={dispatch}
-            />
-            <SecureCodeInput
-              secureCodeValue={secureCode}
-              onChangeSecureCode={dispatch}
-            />
-            <CardPasswordInput
-              passwordValue={password}
-              onChangePassword={dispatch}
-            />
+            <CardNumberInput />
+            <ExpiredDateInput />
+            <OwnerNameInput />
+            <SecureCodeInput />
+            <CardPasswordInput />
           </form>
         </div>
         <NextButton onClick={submitCard}>다음</NextButton>

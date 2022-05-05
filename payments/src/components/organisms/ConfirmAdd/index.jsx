@@ -1,7 +1,11 @@
 import "./index.scss";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CardContext } from "../../../context/CardProvider";
 
-const ConfirmAdd = ({ closeModal, cardInfo, submit }) => {
+const ConfirmAdd = ({ closeModal, submit }) => {
+  const { cardInfo } = useContext(CardContext);
+
   return (
     <div className="confirm-add">
       <span className="title">입력하신 정보가 맞습니까?</span>

@@ -1,4 +1,6 @@
 import "../src/App.css";
+import { CardContext } from "../src/context/CardProvider";
+import useCard from "../src/hooks/useCard";
 import "../src/index.css";
 
 export const parameters = {
@@ -12,10 +14,12 @@ export const parameters = {
 };
 
 export const decorators = [
-  (Story) => (
-    <>
-      {Story()}
-      <div id="modal"></div>
-    </>
-  ),
+  (Story) => {
+    return (
+      <CardContext.Provide rvalue={useCard()}>
+        {Story()}
+        <div id="modal"></div>
+      </CardContext.Provide>
+    );
+  },
 ];

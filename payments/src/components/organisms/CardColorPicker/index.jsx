@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { CardContext } from "../../../context/CardProvider";
 import Color from "../../common/Color";
 import "./index.scss";
 
@@ -12,10 +14,11 @@ const CARD_CATEGORY = [
   { name: "록8바", color: "gold" },
 ];
 
-const CardColorPicker = ({ closeModal, onChangeCardName }) => {
+const CardColorPicker = ({ closeModal }) => {
+  const { dispatch } = useContext(CardContext);
   const pickColor = (name, color) => {
     closeModal();
-    onChangeCardName({
+    dispatch({
       type: "pickColor",
       payload: { cardName: name, color },
     });
