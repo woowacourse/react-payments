@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "react-app", "prettier"],
+  "extends": ["react-app", "prettier"],
   "settings": {
     "import/resolver": {
       "node": {
@@ -23,6 +23,7 @@
     "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
     "react/jsx-curly-brace-presence": "off",
     "react/jsx-props-no-spreading": ["error", { "custom": "ignore" }],
-    "react/jsx-filename-extension": "off"
+    "react/jsx-filename-extension": "off",
+    "react/prop-types": "off"
   }
 }

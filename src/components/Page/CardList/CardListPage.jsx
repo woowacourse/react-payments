@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { CardListContext } from '../../../contexts';
 import Card from '../../Card';
 import PlusCard from '../../Card/PlusCard';
 import Label from '../../Label';
@@ -43,32 +44,25 @@ const PlusCardWrapper = styled.div`
 `;
 
 const CardListPage = () => {
+  const { cardList } = useContext(CardListContext);
+
   return (
     <Container>
       <Title>보유 카드</Title>
       <CardListContainer>
-        <CardItemWrapper>
-          <Card
-            name={'샐리'}
-            expiredMonth={'12'}
-            expiredYear={'23'}
-            cardNumbers={['1111', '2222', '3333', '4444']}
-            cardInfo={{ color: 'red', name: '포코 카드' }}
-            size={'small'}
-          />
-          <Label description="카드 닉네임" />
-        </CardItemWrapper>
-        <CardItemWrapper>
-          <Card
-            name={'샐리'}
-            expiredMonth={'12'}
-            expiredYear={'23'}
-            cardNumbers={['1111', '2222', '3333', '4444']}
-            cardInfo={{ color: 'red', name: '포코 카드' }}
-            size={'small'}
-          />
-          <Label description="카드 닉네임" />
-        </CardItemWrapper>
+        {cardList.map((card) => (
+          <CardItemWrapper key={card.id}>
+            <Card
+              name={card.ownerName}
+              expiredMonth={card.expiredDate.expiredMonth}
+              expiredYear={card.expiredDate.expiredYear}
+              cardNumbers={card.cardNumber}
+              cardInfo={card.cardType}
+              size={'small'}
+            />
+            <Label description={card.nickName} />
+          </CardItemWrapper>
+        ))}
       </CardListContainer>
       <PlusCardWrapper>
         <Link to="/react-payments/">

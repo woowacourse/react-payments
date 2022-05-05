@@ -155,12 +155,12 @@ const EmptyCard = ({ name, cardInfo, expiredMonth, expiredYear, cardNumbers, siz
 };
 
 EmptyCard.propTypes = {
-  cardInfo: PropTypes.object.isRequired,
-  name: PropTypes.string.isRequired,
-  expiredMonth: PropTypes.string.isRequired,
-  expiredYear: PropTypes.string.isRequired,
-  cardNumbers: PropTypes.array.isRequired,
-  size: PropTypes.string.isRequired,
+  cardInfo: PropTypes.object,
+  name: PropTypes.string,
+  expiredMonth: PropTypes.string,
+  expiredYear: PropTypes.string,
+  cardNumbers: PropTypes.array,
+  size: PropTypes.string,
 };
 
 export default EmptyCard;
