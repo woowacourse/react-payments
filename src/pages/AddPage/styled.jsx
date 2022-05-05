@@ -41,6 +41,7 @@ const Dimmer = styled.div`
 `;
 
 const CardCompanyModal = styled.div`
+  animation: show 0.2s;
   background: #fdfdfd;
   border-radius: 5px 5px 0 0;
   bottom: 0;
@@ -49,6 +50,15 @@ const CardCompanyModal = styled.div`
   height: 227px;
   position: absolute;
   width: 400px;
+
+  @keyframes show {
+    from {
+      bottom: -100px;
+    }
+    to {
+      bottom: 0;
+    }
+  }
 `;
 
 const CardCompany = styled.div`

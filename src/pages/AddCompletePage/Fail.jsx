@@ -10,9 +10,7 @@ const Message = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  animation-duration: 3s;
-  animation-name: rainbowLink;
-  animation-iteration-count: infinite;
+  animation: rainbowLink 3s infinite;
   font-size: 18px;
   text-decoration-line: none;
 
