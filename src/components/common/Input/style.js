@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Input = styled.input`
+const InputWrapper = styled.input`
   background-color: transparent;
   border: none;
   text-align: center;
@@ -21,4 +21,22 @@ const Input = styled.input`
   }
 `
 
-export { Input }
+const GrayInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  height: 45px;
+  border-radius: 7px;
+  box-sizing: border-box;
+
+  background: ${(props) =>
+    props.background ||
+    (props.error && props.theme.colors.LIGHT_PINK) ||
+    props.theme.colors.LIGHT_GRAY};
+  border: ${(props) =>
+    props.border ||
+    (props.error && `solid 2px ${props.theme.colors.PINK}`) ||
+    'none'};
+  width: ${(props) => props.size || 100}%;
+`
+
+export { InputWrapper, GrayInputWrapper }

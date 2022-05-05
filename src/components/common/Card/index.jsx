@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types'
+import { useContext } from 'react'
+
 import {
   CardWrapper,
   CardTop,
@@ -9,30 +11,37 @@ import {
   CardBottomInfo,
   CardOwner,
 } from 'components/common/Card/style'
+import CardInfoContext from 'store/cardInfo-context'
 
-function Card({ size, company, cardNumbers, owner, dueMonth, dueYear }) {
+function Card({ size }) {
+  const {
+    cardInfo: { company, cardNumber, owner, dueDate },
+  } = useContext(CardInfoContext)
+
   return (
     <CardWrapper size={size}>
       <CardTop>
         <CardText>{company}카드</CardText>
       </CardTop>
-      <CardMiddle size={size}>
-        <div></div>
-      </CardMiddle>
+      <CardMiddle size={size}></CardMiddle>
       <CardBottom>
         <CardBottomNumber>
           <CardText>
-            {cardNumbers
-              .map((number, index) =>
-                index > 1 ? '•'.repeat(number.length) : number
-              )
+            {Object.entries(cardNumber)
+              .map(([key, value]) => {
+                if (key === 'first' || key === 'second') {
+                  return value
+                } else {
+                  return '•'.repeat(value.length)
+                }
+              })
               .join(' ')}
           </CardText>
         </CardBottomNumber>
         <CardBottomInfo>
           <CardOwner>{owner}</CardOwner>
           <CardText>
-            {dueMonth}/{dueYear}
+            {dueDate.month}/{dueDate.year}
           </CardText>
         </CardBottomInfo>
       </CardBottom>

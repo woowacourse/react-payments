@@ -1,70 +1,42 @@
-import { useRef } from 'react'
-import PropTypes from 'prop-types'
+import { useContext } from 'react'
 
-import InputBox from 'components/common/InputBox'
-import { isInvalidPassword } from 'validation'
+import CardInfoContext from 'store/cardInfo-context'
 
-import { FieldWrapper, Label } from 'components/common/Field/style'
-import { PasswordWrapper, Dot } from 'components/PasswordField/style'
+import Field from 'components/common/Field'
+import Input from 'components/common/Input'
+import { GrayInputWrapper } from 'components/common/Input/style'
+import { Dot } from 'components/PasswordField/style'
 
-function PasswordField({ password, setPassword }) {
-  const secondPasswordInputRef = useRef()
-
-  const handlePasswordChange = ({ target: { value } }, key) => {
-    if (isInvalidPassword(value)) return
-
-    setPassword((prev) => {
-      const newState = { ...prev }
-      newState[key] = value
-      return newState
-    })
-
-    if (value.length >= 1) {
-      secondPasswordInputRef.current.focus()
-    }
-  }
+function PasswordField() {
+  const {
+    cardInfo: { password },
+    handlePasswordChange,
+  } = useContext(CardInfoContext)
 
   return (
-    <FieldWrapper>
-      <Label>
-        <label>카드 비밀번호</label>
-      </Label>
-      <PasswordWrapper>
-        <InputBox
-          inputInfo={[
-            {
-              type: 'password',
-              id: 'first-password',
-              value: password.firstPassword,
-              key: 'firstPassword',
-            },
-          ]}
-          size={12}
+    <Field label={'카드 비밀번호'}>
+      <GrayInputWrapper size={12}>
+        <Input
+          type="password"
+          dataset="first"
+          value={password.first}
+          maxLength={1}
           onChange={handlePasswordChange}
         />
-        <InputBox
-          inputInfo={[
-            {
-              type: 'password',
-              id: 'second-password',
-              value: password.secondPassword,
-              key: 'secondPassword',
-              ref: secondPasswordInputRef,
-            },
-          ]}
-          size={12}
+      </GrayInputWrapper>
+      <GrayInputWrapper size={12}>
+        <Input
+          type="password"
+          dataset="second"
+          value={password.second}
+          maxLength={1}
           onChange={handlePasswordChange}
         />
-        <Dot>•</Dot>
-        <Dot>•</Dot>
-      </PasswordWrapper>
-    </FieldWrapper>
+      </GrayInputWrapper>
+      <Dot>•</Dot>
+      <Dot>•</Dot>
+    </Field>
   )
-}
-
-PasswordField.propTypes = {
-  password: PropTypes.object,
-  setPassword: PropTypes.func,
 }
 
 export default PasswordField

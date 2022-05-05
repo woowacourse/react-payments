@@ -1,36 +1,24 @@
-import PropTypes from 'prop-types'
+import { useContext } from 'react'
 
-import Field from 'components/common/Field'
+import CardInfoContext from 'store/cardInfo-context'
 import { OWNER } from 'constant'
-import { isInvalidOwner } from 'validation'
+import Field from 'components/common/Field'
+import Input from 'components/common/Input'
+import { GrayInputWrapper } from 'components/common/Input/style'
 
-function OwnerField({ owner, setOwner }) {
-  const handleOwnerChange = ({ target: { value } }) => {
-    if (isInvalidOwner(value)) return
-
-    setOwner(value.toUpperCase())
-  }
+function OwnerField() {
+  const {
+    cardInfo: { owner },
+    handleOwnerChange,
+  } = useContext(CardInfoContext)
 
   return (
-    <Field
-      label="카드 소유자 이름 (선택)"
-      countHelper={OWNER.MAX_LENGTH}
-      inputInfo={[
-        {
-          type: 'string',
-          id: 'owner',
-          value: owner,
-          placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
-        },
-      ]}
-      onChange={handleOwnerChange}
-    />
+    <Field label="카드 소유자 이름 (선택)" countHelper={OWNER.MAX_LENGTH}>
+      <GrayInputWrapper>
+        <Input value={owner} onChange={handleOwnerChange} />
+      </GrayInputWrapper>
+    </Field>
   )
-}
-
-OwnerField.propTypes = {
-  owner: PropTypes.string,
-  setOwner: PropTypes.func,
 }
 
 export default OwnerField
