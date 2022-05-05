@@ -10,6 +10,7 @@ const CardNameInput = styled.input`
 
   &:focus {
     outline: none;
+    border-bottom-color: ${({ theme }) => theme.colors.defaultCard};
   }
 `;
 
