@@ -1,5 +1,12 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { CardDataContext } from "../../provider/CardDataProvider";
+
 const HomePage = () => {
-  return <div>홈페이지</div>;
+  const { state } = useContext(CardDataContext);
+  console.log(state);
+
+  return <Link to="/add">추가</Link>;
 };
 
 export default HomePage;

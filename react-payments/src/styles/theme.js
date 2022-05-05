@@ -5,6 +5,7 @@ const colors = {
   keyboardHover: "#80deea",
   keyboard: "#00bcd4",
   errorMessage: "tomato",
+  successInput: "#1DA1F2",
   successMessage: "#7dcd00",
   header: "#525252",
   defaultText: "#04c09e",

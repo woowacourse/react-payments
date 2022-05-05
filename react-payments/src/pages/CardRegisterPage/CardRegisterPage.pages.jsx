@@ -5,11 +5,13 @@ import Card from "../../component/common/Card/card.component";
 import LinkButton from "../../component/common/LinkButton/linkButton.component";
 import PageContainer from "../../component/common/PageContainer/PageContainer.component";
 import PageTitle from "../../component/common/PageTitle/pageTitle.component";
+import useReady from "../../hooks/useReady";
 import { CardDataContext } from "../../provider/CardDataProvider";
 import { CardNumberContext } from "../../provider/CardNumberProvider";
 import { CardTypeContext } from "../../provider/CardTypeProvider";
 import { ExpireDateContext } from "../../provider/ExpireDateProvider";
 import { UserNameContext } from "../../provider/UserNameProvider";
+import { isInvalidCardName } from "../../util/validator";
 
 const CardRegisterGroup = styled.div`
   display: flex;
@@ -33,6 +35,8 @@ const CardRegisterPage = () => {
     state: { cardTypeInfo },
   } = useContext(CardTypeContext);
   const [cardName, setCardName] = useState("");
+  const [cardNameReady] = useReady(cardName, isInvalidCardName);
+
   const { dispatch } = useContext(CardDataContext);
 
   const handleSubmitCardData = () => {
@@ -64,11 +68,17 @@ const CardRegisterPage = () => {
           year={expireDate.year}
           name={userName}
         />
-        <CardNameInput value={cardName} onChange={onChangeCardName} />
+        <CardNameInput
+          value={cardName}
+          onChange={onChangeCardName}
+          ready={cardNameReady}
+        />
       </CardRegisterGroup>
-      <LinkButton type="submit" onClick={handleSubmitCardData}>
-        확인
-      </LinkButton>
+      {cardNameReady && (
+        <LinkButton type="submit" onClick={handleSubmitCardData}>
+          확인
+        </LinkButton>
+      )}
     </PageContainer>
   );
 };

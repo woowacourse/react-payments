@@ -4,12 +4,13 @@ const CardNameInput = styled.input`
   width: 244px;
   height: 28px;
   border: transparent;
-  border-bottom: 1.5px solid ${({ theme }) => theme.colors.cardNameInputBorder};
   text-align: center;
   font-size: 18px;
+  border-bottom: 1.5px solid
+    ${({ theme, ready }) =>
+      ready ? theme.colors.successInput : theme.colors.errorMessage};
   &:focus {
     outline: none;
-    border-bottom: 1.5px solid ${({ theme }) => theme.colors.defaultCard};
   }
 `;
 

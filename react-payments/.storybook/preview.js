@@ -2,6 +2,7 @@ import theme from "../src/styles/theme";
 import { ThemeProvider } from "styled-components";
 import FormDataProvider from "../src/provider/FormDataProvider";
 import { BrowserRouter } from "react-router-dom";
+import CardDataProvider from "../src/provider/CardDataProvider";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -18,7 +19,9 @@ export const decorators = [
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <FormDataProvider>
-          <Story />
+          <CardDataProvider>
+            <Story />
+          </CardDataProvider>
         </FormDataProvider>
       </ThemeProvider>
     </BrowserRouter>
