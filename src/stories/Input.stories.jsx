@@ -14,12 +14,12 @@ DefaultInput.args = {};
 
 export const UnderLinedInput = Template.bind({});
 UnderLinedInput.args = {
-  placeHolder: '밑줄이 있는 input도 가능해요.',
+  placeHolder: 'underlined input',
   underLine: true,
 };
 
 export const SizeControlledInput = Template.bind({});
-UnderLinedInput.args = {
+SizeControlledInput.args = {
   width: 300,
   height: 100,
 };
