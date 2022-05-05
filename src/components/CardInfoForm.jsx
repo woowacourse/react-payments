@@ -37,7 +37,16 @@ export default function CardInfoForm({ children }) {
 
     const cardDataList = [...formData.entries()];
 
-    console.log(cardDataList);
+    const completeCardInfo = cardDataList.reduce((resultCardInfo, cardData) => {
+      const [cardInfoKey, cardInfoValue] = cardData;
+      resultCardInfo[cardInfoKey] = resultCardInfo[cardInfoKey]
+        ? (resultCardInfo[cardInfoKey] += cardInfoValue)
+        : (resultCardInfo[cardInfoKey] = cardInfoValue);
+
+      return resultCardInfo;
+    }, {});
+
+    console.log(completeCardInfo);
   };
 
   return (

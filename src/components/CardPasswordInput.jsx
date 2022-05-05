@@ -7,7 +7,7 @@ export default function CardPasswordInput(props) {
   const { password, onChange } = props;
   const passwordList = Object.values(password);
   const passwordLength = passwordList.reduce(
-    (sum, prev) => prev.value.length + sum,
+    (sum, currentInput) => currentInput.value.length + sum,
     0
   );
 
@@ -24,13 +24,12 @@ export default function CardPasswordInput(props) {
           key={password.keyType}
           name={password.name}
           className={password.name}
-          value={password.value}
           type={password.type}
           placeholder={password.placeholder}
           width={password.width}
           maxLength={password.maxLength}
           required
-          isComplete={password.length === 1}
+          isComplete={password.value.length === 1}
           onChange={(e) => onChange(e, password.keyType)}
         />
       ))}

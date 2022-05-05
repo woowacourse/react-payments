@@ -71,7 +71,6 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
       <Input
         name={securityCode.name}
         className={securityCode.name}
-        value={securityCode.value}
         type={securityCode.type}
         placeholder={securityCode.placeholder}
         width={securityCode.width}

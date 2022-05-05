@@ -34,7 +34,7 @@ export default function CardExpireDateInput({ expireDate, onChange }) {
             onChange={(e) => onChange(e, expireDate.keyType)}
             isComplete={expireDate.value.length === 2}
           />
-          {expireDate.name === "month" && <p>/</p>}
+          {expireDate.keyType === "month" && <p>/</p>}
         </Fragment>
       ))}
     </InputField>
