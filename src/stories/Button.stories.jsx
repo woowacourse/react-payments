@@ -6,9 +6,7 @@ export default {
   component: Button,
 };
 
-const Template = args => <Button {...args} />;
+const Template = args => <Button>sample</Button>;
 
 export const Default = Template.bind({});
-Default.args = {
-  text: 'sample',
-};
+Default.args = {};
