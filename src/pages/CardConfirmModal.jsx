@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Card from './Card';
-import NextButton from './NextButton';
+import Card from '../components/Card';
+import NextButton from '../components/NextButton';
 import * as S from 'styles.js';
 import { useState } from 'react';
-import FormBasic from './FormBasic';
-import PageTitle from './PageTitle';
+import FormBasic from '../components/FormBasic';
+import PageTitle from '../components/PageTitle';
 
 export default function CardConfirmModal({ cardData, onConfirmCard, onCloseModal }) {
   const [nickname, setNickname] = useState('');

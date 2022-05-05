@@ -16,6 +16,7 @@ export const TYPES = {
   SET_TIP_MODAL_FLAG: 'SET_TIP_MODAL_FLAG',
   SET_COMPANY_INDEX: 'SET_COMPANY_INDEX',
   SUBMIT_CARD: 'SUBMIT_CARD',
+  SET_CARD_ORDER: 'SET_CARD_ORDER',
 };
 
 export const initialState = {
@@ -158,6 +159,13 @@ const reducer = (state, action) => {
         cardCvc: '',
         cardPassword: ['', ''],
         cardCompanyIndex: -1,
+      };
+    }
+
+    case TYPES.SET_CARD_ORDER: {
+      return {
+        ...state,
+        cards: action.cards,
       };
     }
 

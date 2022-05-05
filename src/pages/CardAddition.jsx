@@ -17,7 +17,7 @@ import CardPassword from 'components/CardPassword';
 import NextButton from 'components/NextButton';
 import CardListModal from 'components/CardListModal';
 import TipModal from 'components/TipModal';
-import CardConfirmModal from 'components/CardConfirmModal';
+import CardConfirmModal from 'pages/CardConfirmModal';
 import ErrorMessage from 'components/ErrorMessage';
 import ClickCardBox from 'components/ClickCardBox';
 

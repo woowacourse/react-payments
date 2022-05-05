@@ -1,13 +1,18 @@
 import React from 'react';
+import { Draggable } from 'react-beautiful-dnd';
 
-import Card from './Card';
 import * as S from 'styles.js';
+import Card from './Card';
 
-export default function EnrolledCards({ cards }) {
+function DraggableCard({ card, index }) {
   return (
-    <>
-      {cards.map((card) => (
-        <S.EnrolledCardWrapper key={card.id}>
+    <Draggable key={card.id} draggableId={card.id} index={index}>
+      {(provided) => (
+        <S.EnrolledCardWrapper
+          ref={provided.innerRef}
+          {...provided.dragHandleProps}
+          {...provided.draggableProps}
+        >
           <Card
             cardNumber={card.cardNumber}
             cardExpiration={card.cardExpiration}
@@ -18,7 +23,9 @@ export default function EnrolledCards({ cards }) {
           />
           <S.CardNickname>{card.cardNickname}</S.CardNickname>
         </S.EnrolledCardWrapper>
-      ))}
-    </>
+      )}
+    </Draggable>
   );
 }
+
+export default React.memo(DraggableCard);
