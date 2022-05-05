@@ -19,7 +19,7 @@ import {
 import { Form } from "components/common/Form";
 
 export const CardRegisterPage = () => {
-  const [modalVisibleState, setModalState, modalName] = useModal();
+  const { modalVisibleState, setModalState, modalName } = useModal();
   const [ownerName, setOwnerName] = useState("");
   const [CVC, setCVC] = useState("");
   const [allCompleted, setAllCompleted] = useState(false);
