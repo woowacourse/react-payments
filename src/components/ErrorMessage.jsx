@@ -8,6 +8,7 @@ export default function ErrorMessage({ value, children, validate, type }) {
   useEffect(() => {
     try {
       validate(value);
+
       dispatch({
         type: type,
         errorMessage: '',
@@ -17,6 +18,7 @@ export default function ErrorMessage({ value, children, validate, type }) {
         type: type,
         errorMessage: message,
       });
+      console.log('hi');
     }
   }, [value]);
 

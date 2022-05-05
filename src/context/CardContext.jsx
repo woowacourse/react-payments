@@ -15,6 +15,7 @@ export const TYPES = {
   SET_LIST_MODAL_FLAG: 'SET_LIST_MODAL_FLAG',
   SET_TIP_MODAL_FLAG: 'SET_TIP_MODAL_FLAG',
   SET_COMPANY_INDEX: 'SET_COMPANY_INDEX',
+  SUBMIT_CARD: 'SUBMIT_CARD',
 };
 
 export const initialState = {
@@ -31,6 +32,7 @@ export const initialState = {
   cardCompanyIndex: -1,
   listModalFlag: false,
   tipModalFlag: false,
+  cards: [],
 };
 
 export const CardStateContext = createContext();
@@ -142,6 +144,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         cardCompanyIndex: action.index,
+      };
+    }
+
+    case TYPES.SUBMIT_CARD: {
+      return {
+        ...state,
+        cards: [...state.cards, action.cardData],
       };
     }
 
