@@ -2,21 +2,20 @@ import { Header, Title } from '../components/common/styled';
 import styled from 'styled-components';
 import CardItem from '../components/CardItem';
 import { Link } from 'react-router-dom';
+import { CardInfoListContext } from '../context';
 
 const CardListSection = styled.section`
   width: 100%;
-  padding: 30px 0;
-
   height: 600px;
+  padding: 30px 0;
   overflow-y: scroll;
 `;
-const CardList = styled.ul`
+const StyledCardList = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
 
   width: 100%;
-
   list-style-type: none;
 `;
 
@@ -64,44 +63,23 @@ function AddCardButton() {
   );
 }
 
-const CardInfoList = [
-  {
-    cardNumber: ['1234', '5678', '9012', '3456'],
-    holderName: 'SUN',
-    expireDate: ['12', '23'],
-    isComplete: true,
-  },
-  {
-    cardNumber: ['1234', '5678', '9012', '3456'],
-    holderName: 'SUN',
-    expireDate: ['12', '23'],
-    isComplete: true,
-  },
-  {
-    cardNumber: ['1234', '5678', '9012', '3456'],
-    holderName: 'SUN',
-    expireDate: ['12', '23'],
-    isComplete: true,
-  },
-  {
-    cardNumber: ['1234', '5678', '9012', '3456'],
-    holderName: 'SUN',
-    expireDate: ['12', '23'],
-    isComplete: true,
-  },
-  {
-    cardNumber: ['1234', '5678', '9012', '3456'],
-    holderName: 'SUN',
-    expireDate: ['12', '23'],
-    isComplete: true,
-  },
-  {
-    cardNumber: ['1234', '5678', '9012', '3456'],
-    holderName: 'SUN',
-    expireDate: ['12', '23'],
-    isComplete: true,
-  },
-];
+function CardList() {
+  return (
+    <StyledCardList>
+      <CardInfoListContext.Consumer>
+        {value =>
+          value.cardInfoList.map((cardInfo, index) => (
+            <CardListItem key={index}>
+              <CardItem size={'small'} {...cardInfo} />
+              <CardNickName>테스트</CardNickName>
+            </CardListItem>
+          ))
+        }
+      </CardInfoListContext.Consumer>
+      <AddCardButton />
+    </StyledCardList>
+  );
+}
 
 export default function CardListPage() {
   return (
@@ -110,15 +88,7 @@ export default function CardListPage() {
         <Title>보유카드</Title>
       </Header>
       <CardListSection>
-        <CardList>
-          {CardInfoList.map((cardInfo, index) => (
-            <CardListItem key={index}>
-              <CardItem size={'small'} {...cardInfo} />
-              <CardNickName>테스트</CardNickName>
-            </CardListItem>
-          ))}
-          <AddCardButton />
-        </CardList>
+        <CardList />
       </CardListSection>
     </>
   );
