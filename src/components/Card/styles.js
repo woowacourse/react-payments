@@ -57,10 +57,10 @@ const CardContainer = styled.div`
     content: '🐯';
 
     position: absolute;
-    top: 0%;
-    right: 15%;
+    top: 5.5%;
+    right: 12%;
 
-    font-size: 5em;
+    font-size: 4em;
     text-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   }
 `;
@@ -70,7 +70,7 @@ const ComponyName = styled.div`
   top: 2%;
   right: 0%;
   font-size: 0.9em;
-  letter-spacing: 0.425rem;
+  letter-spacing: 0.425em;
   opacity: 0.8;
 
   transform: rotate(90deg) translateX(100%) translateY(100%);
@@ -83,7 +83,7 @@ const UserName = styled.div`
   left: 5%;
 
   font-weight: bold;
-  font-size: 1em;
+  font-size: 0.8em;
 `;
 
 const ExpireDate = styled.div`
