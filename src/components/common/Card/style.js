@@ -11,8 +11,9 @@ const CardWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-radius: 5px;
-  font-size: ${(props) => (props.size === "small" ? "16px" : "18px")};
+  margin: 10px 0;
   padding: ${(props) => (props.size === "small" ? "14px" : "20px")};
+  font-size: ${(props) => (props.size === "small" ? "16px" : "18px")};
   width: ${(props) => (props.size === "small" ? "208px" : "290px")};
   height: ${(props) => (props.size === "small" ? "130px" : "180px")};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);

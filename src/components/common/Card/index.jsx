@@ -21,31 +21,33 @@ function Card({
   onClick,
 }) {
   return (
-    <CardWrapper size={size} color={color} onClick={onClick}>
-      <CardTop>
-        <CardText>{company}</CardText>
-      </CardTop>
-      <CardMiddle size={size}>
-        <div></div>
-      </CardMiddle>
-      <CardBottom>
-        <CardBottomNumber>
-          <CardText>
-            {cardNumbers
-              .map((number, index) =>
-                index > 1 ? "•".repeat(number.length) : number
-              )
-              .join(" ")}
-          </CardText>
-        </CardBottomNumber>
-        <CardBottomInfo>
-          <CardOwner>{owner}</CardOwner>
-          <CardText>
-            {dueMonth}/{dueYear}
-          </CardText>
-        </CardBottomInfo>
-      </CardBottom>
-    </CardWrapper>
+    <>
+      <CardWrapper size={size} color={color} onClick={onClick}>
+        <CardTop>
+          <CardText>{company}</CardText>
+        </CardTop>
+        <CardMiddle size={size}>
+          <div />
+        </CardMiddle>
+        <CardBottom>
+          <CardBottomNumber>
+            <CardText>
+              {cardNumbers
+                .map((number, index) =>
+                  index > 1 ? "•".repeat(number.length) : number
+                )
+                .join(" ")}
+            </CardText>
+          </CardBottomNumber>
+          <CardBottomInfo>
+            <CardOwner>{owner}</CardOwner>
+            <CardText>
+              {dueMonth}/{dueYear}
+            </CardText>
+          </CardBottomInfo>
+        </CardBottom>
+      </CardWrapper>
+    </>
   );
 }
 

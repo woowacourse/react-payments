@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import InputBox from "components/common/InputBox";
 import { Input } from "components/common/Input/style";
-import { CardInputWrapper } from "pages/CardAddPage/style";
+import { CardInputWrapper } from "pages/style";
 import { CARD_NUMBER } from "constant";
 
 function CardNumberInput({

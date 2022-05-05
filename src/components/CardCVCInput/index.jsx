@@ -3,7 +3,7 @@ import InputBox from "components/common/InputBox";
 import { Input } from "components/common/Input/style";
 import Button from "components/common/Button";
 import { ReactComponent as QuestionImage } from "assets/question.svg";
-import { CardInputWrapper } from "pages/CardAddPage/style";
+import { CardInputWrapper } from "pages/style";
 import { CVCWrapper, QuestionWrapper, ToolTipWrapper } from "./style";
 
 function CardCVCInput({ cvc, handleChangeCvc }) {

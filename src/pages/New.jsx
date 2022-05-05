@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useInput from "hooks/useInput";
 import useCardNumber from "hooks/useCardNumber";
 import useCardPassword from "hooks/useCardPassword";
@@ -21,7 +22,9 @@ import { isValidCvc, isValidOwnerLength } from "validation";
 import { ReactComponent as ArrowImage } from "assets/arrow.svg";
 import { PageWrapper, CardWrapper, FooterWrapper } from "./style";
 
-function CardAddPage() {
+function New() {
+  const navigate = useNavigate();
+
   const { cardNumbers, handleChangeCardNumber, cardNumberInputRefs } =
     useCardNumber();
   const { dueDate, handleChangeDueDate, yearInputRef, error } =
@@ -37,8 +40,8 @@ function CardAddPage() {
   const { password, handleChangePassword, secondPasswordInputRef } =
     useCardPassword();
   const [allRequired, setAllRequired] = useState(false);
-  const { modalVisible, openModal, closeModal } = useModal();
   const [company, setCompany] = useState({ color: "", name: "" });
+  const { modalVisible, openModal, closeModal } = useModal();
 
   useEffect(() => {
     setAllRequired(
@@ -64,7 +67,7 @@ function CardAddPage() {
     <PageWrapper>
       <Header
         leftChild={
-          <Button>
+          <Button onClick={() => navigate("/")}>
             <ArrowImage />
           </Button>
         }
@@ -112,4 +115,4 @@ function CardAddPage() {
   );
 }
 
-export default CardAddPage;
+export default New;
