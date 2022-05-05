@@ -3,7 +3,7 @@ import { MAX_LENGTH } from "../constants";
 import useReady from "../hooks/useReady";
 import { isInValidSecurityCode } from "../util/validator";
 
-export const SecurityCodeContext = createContext("");
+export const SecurityCodeContext = createContext();
 
 const SecurityCodeProvider = ({ children }) => {
   const [securityCode, setSecurityCode] = useState("");

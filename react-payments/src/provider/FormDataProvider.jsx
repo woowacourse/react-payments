@@ -5,7 +5,7 @@ import ExpireDateProvider from "./ExpireDateProvider";
 import SecurityCodeProvider from "./SecurityCodeProvider";
 import UserNameProvider from "./UserNameProvider";
 
-const FormDateProvider = ({ children }) => {
+const FormDataProvider = ({ children }) => {
   return (
     <CardTypeProvider>
       <CardNumberProvider>
@@ -21,4 +21,4 @@ const FormDateProvider = ({ children }) => {
   );
 };
 
-export default FormDateProvider;
+export default FormDataProvider;

@@ -5,10 +5,7 @@ import {
   isInValidCardPassword,
 } from "../util/validator";
 
-export const CardPasswordContext = createContext({
-  first: "",
-  second: "",
-});
+export const CardPasswordContext = createContext();
 
 const CardPasswordProvider = ({ children }) => {
   const [cardPassword, setCardPassword] = useState({

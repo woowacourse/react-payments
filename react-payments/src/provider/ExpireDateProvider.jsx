@@ -4,10 +4,7 @@ import { focusNextElement, focusPrevElement } from "../util/focus";
 import { MAX_LENGTH } from "../constants";
 import useReady from "../hooks/useReady";
 
-export const ExpireDateContext = createContext({
-  month: "",
-  year: "",
-});
+export const ExpireDateContext = createContext();
 
 const ExpireDateProvider = ({ children }) => {
   const [expireDate, setExpireDate] = useState({

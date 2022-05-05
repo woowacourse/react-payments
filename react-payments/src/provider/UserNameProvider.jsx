@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import { isOverMaxLength } from "../util/validator";
 import { MAX_LENGTH } from "../constants";
 
-export const UserNameContext = createContext("");
+export const UserNameContext = createContext();
 
 const UserNameProvider = ({ children }) => {
   const [userName, setUserName] = useState("");

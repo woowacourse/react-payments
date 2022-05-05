@@ -4,12 +4,7 @@ import { MAX_LENGTH } from "../constants";
 import { focusNextElement, focusPrevElement } from "../util/focus";
 import useReady from "../hooks/useReady";
 
-export const CardNumberContext = createContext({
-  first: "",
-  second: "",
-  third: "",
-  fourth: "",
-});
+export const CardNumberContext = createContext();
 
 const CardNumberProvider = ({ children }) => {
   const [cardNumber, setCardNumber] = useState({

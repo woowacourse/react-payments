@@ -3,7 +3,7 @@ import { defaultCardInfo } from "../constants";
 import useReady from "../hooks/useReady";
 import { isInValidCardType } from "../util/validator";
 
-export const CardTypeContext = createContext(defaultCardInfo);
+export const CardTypeContext = createContext();
 
 const CardTypeProvider = ({ children }) => {
   const [cardTypeInfo, setCardTypeInfo] = useState(defaultCardInfo);
