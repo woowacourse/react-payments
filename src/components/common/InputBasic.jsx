@@ -7,6 +7,7 @@ export const InputBasic = ({
   value,
   onChange,
   id,
+  pattern,
   width,
   inputRef,
   maxLength,
@@ -19,6 +20,7 @@ export const InputBasic = ({
       placeholder={placeholder}
       value={value}
       id={id}
+      pattern={pattern}
       maxLength={maxLength}
       onChange={onChange}
     />
@@ -37,4 +39,9 @@ const InputBasicStyle = styled.input`
   border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
+  font-weight: bold;
+
+  &:invalid {
+    color: #ff6d6d;
+  }
 `;

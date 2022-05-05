@@ -15,3 +15,10 @@ export const MODAL_NAME = {
   CARD_TYPE: "cardType",
   CARD_CVC: "cardCVC",
 };
+
+export const RULE_INPUT = {
+  CARD_NUMBER_RULE: "[0-9]{4}",
+  EXPIRE_DATE_RULE: "[0-9]{2}",
+  CVC_RULE: "[0-9]{3}",
+  PASSWORD_RULE: "[0-9]{1}",
+};

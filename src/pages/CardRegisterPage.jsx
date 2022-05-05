@@ -16,6 +16,7 @@ import {
   CardSelectModal,
   CVCHelperModal,
 } from "components/cardRegister";
+import { Form } from "components/common/Form";
 
 export const CardRegisterPage = () => {
   const [modalVisibleState, setModalState, modalName] = useModal();
@@ -32,7 +33,7 @@ export const CardRegisterPage = () => {
   });
   const [cardType, setCardType] = useState({
     name: "",
-    backgroundColor: "",
+    color: "",
   });
   const [cardNumbers, setCardNumbers] = useState({
     firstNumber: "",
@@ -99,7 +100,7 @@ export const CardRegisterPage = () => {
         ownerName={ownerName}
         handleModalVisible={modalSelector(MODAL_NAME.CARD_TYPE)}
       />
-      <form>
+      <Form>
         <CardNumbersInputForm
           cardType={cardType}
           cardNumbers={cardNumbers}
@@ -127,8 +128,10 @@ export const CardRegisterPage = () => {
           handlePasswordInput={setPassword}
           handleCardPasswordCheck={setCheckInputStateOf("cardPassword")}
         />
-        <Button disabled={!allCompleted}>다음</Button>
-      </form>
+        <Button type="submit" disabled={!allCompleted}>
+          다음
+        </Button>
+      </Form>
       <Modal
         visible={modalVisibleState}
         handleVisible={() => setModalState(false)}

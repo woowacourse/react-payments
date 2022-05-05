@@ -8,6 +8,7 @@ export const InputUnderline = ({
   onChange,
   id,
   width,
+  pattern,
   inputRef,
   maxLength,
 }) => {
@@ -19,6 +20,7 @@ export const InputUnderline = ({
       placeholder={placeholder}
       value={value}
       id={id}
+      pattern={pattern}
       maxLength={maxLength}
       onChange={onChange}
     />

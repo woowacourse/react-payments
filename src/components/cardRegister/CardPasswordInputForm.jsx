@@ -5,6 +5,7 @@ import { InputBasic } from "components/common/InputBasic";
 import { InputBox } from "components/common/InputBox";
 import { InputContainer, InputTitle } from "components/common/styled";
 import Dot from "components/common/Dot";
+import { RULE_INPUT } from "constants/constants";
 
 export const CardPasswordInputForm = ({
   password,
@@ -47,6 +48,7 @@ export const CardPasswordInputForm = ({
           inputRef={(elem) => (passwordInputRefs.current[0] = elem)}
           type="password"
           width="20%"
+          pattern={RULE_INPUT.PASSWORD_RULE}
           maxLength="1"
         />
         <InputBasic
@@ -55,6 +57,7 @@ export const CardPasswordInputForm = ({
           inputRef={(elem) => (passwordInputRefs.current[1] = elem)}
           type="password"
           width="20%"
+          pattern={RULE_INPUT.PASSWORD_RULE}
           maxLength="1"
         />
         <Dot />

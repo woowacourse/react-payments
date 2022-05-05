@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { InputBasic } from "components/common/InputBasic";
 import { InputBox } from "components/common/InputBox";
 import { InputContainer, InputTitle } from "components/common/styled";
+import { RULE_INPUT } from "constants/constants";
 
 const DEFAULT_CARD_NUMBERS_TYPE = [
   { name: "firstNumber", type: "text" },
@@ -39,9 +40,9 @@ export const CardNumbersInputForm = ({
   }, [cardNumbers]);
 
   const handleNumberChange = (e, name) => {
-    if (isNaN(e.nativeEvent.data) || e.target.value.length > 4) {
-      return;
-    }
+    // if (isNaN(e.nativeEvent.data) || e.target.value.length > 4) {
+    //   return;
+    // }
 
     handleCardNumbersInput((prev) => ({ ...prev, [name]: e.target.value }));
   };
@@ -56,6 +57,8 @@ export const CardNumbersInputForm = ({
             inputRef={(elem) => (numberInputRefs.current[i] = elem)}
             value={cardNumbers?.[name]}
             onChange={(e) => handleNumberChange(e, name)}
+            pattern={RULE_INPUT.CARD_NUMBER_RULE}
+            maxLength="4"
             type={type}
           />
         )).reduce((prev, cur) => [prev, "-", cur])}

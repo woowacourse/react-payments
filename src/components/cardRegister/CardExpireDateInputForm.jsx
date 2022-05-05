@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { InputBasic } from "components/common/InputBasic";
 import { InputBox } from "components/common/InputBox";
 import { InputContainer, InputTitle } from "components/common/styled";
+import { RULE_INPUT } from "constants/constants";
 
 export const CardExpireDateInputForm = ({
   expireDate,
@@ -77,6 +78,7 @@ export const CardExpireDateInputForm = ({
           value={expireDate?.month}
           onChange={handleMonthInput}
           type="text"
+          pattern={RULE_INPUT.EXPIRE_DATE_RULE}
           placeholder="MM"
         />
         /
@@ -85,6 +87,7 @@ export const CardExpireDateInputForm = ({
           value={expireDate?.year}
           onChange={handleYearInput}
           type="text"
+          pattern={RULE_INPUT.EXPIRE_DATE_RULE}
           placeholder="YY"
         />
       </InputBox>
