@@ -70,14 +70,14 @@ export default function UpdateCardNickNamePage() {
                   e.preventDefault();
                   const nickNameInputValue = e.target.elements['nickname-input'].value;
                   if (nickNameInputValue === '' && confirm('닉네임을 지정하지 않고 카드를 등록하시겠습니까?')) {
-                    navigate('../react-payments/', {
+                    navigate('/', {
                       replace: true,
                     });
                     return;
                   }
                   if (confirm(`[${nickNameInputValue}](으)로 카드를 등록하시겠습니까?`)) {
                     updateNickNameByIndex(cardIndex, nickNameInputValue);
-                    navigate('../react-payments/', {
+                    navigate('/', {
                       replace: true,
                     });
                   }

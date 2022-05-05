@@ -57,7 +57,7 @@ const StyledAddCardButton = styled.button`
 
 function AddCardButton() {
   return (
-    <Link to="/react-payments/addCard">
+    <Link to="/addCard">
       <StyledAddCardButton>+</StyledAddCardButton>
     </Link>
   );
@@ -69,7 +69,7 @@ function CardList() {
       <CardInfoListContext.Consumer>
         {value =>
           value.cardInfoList.map((cardInfo, index) => (
-            <Link to={`/react-payments/updateCardNickName/${index}`}>
+            <Link to={`/updateCardNickName/${index}`}>
               <CardListItem key={index}>
                 <CardItem size={'small'} isComplete={true} {...cardInfo} />
                 <CardNickName>{cardInfo.nickName || `나의 카드 ${index + 1}`}</CardNickName>

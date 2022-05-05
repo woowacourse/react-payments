@@ -42,9 +42,9 @@ function App() {
     <div className="App">
       <CardInfoListContext.Provider value={{ cardInfoList, addNewCard, updateNickNameByIndex }}>
         <Routes>
-          <Route path="/react-payments/" element={<CardListPage />} />
-          <Route path="/react-payments/addCard" element={<AddCardPage />} />
-          <Route path="/react-payments/updateCardNickName/:id" element={<UpdateCardNickNamePage />} />
+          <Route path="/" element={<CardListPage />} />
+          <Route path="/addCard" element={<AddCardPage />} />
+          <Route path="/updateCardNickName/:id" element={<UpdateCardNickNamePage />} />
         </Routes>
       </CardInfoListContext.Provider>
     </div>
