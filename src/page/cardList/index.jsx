@@ -30,7 +30,7 @@ const CardListPage = () => {
       <Header title="보유 카드 목록 💳" />
       <div className="card-list mt-10">
         {cardList.map((card) => (
-          <Link key={card.id} to={`/modify/${card.id}`}>
+          <Link key={card.id} to={`/react-payments/modify/${card.id}`}>
             <div className="flex-column-center card-item-wrapper">
               <CardPreview cardInfo={card} isVisibleButton="hide" theme="red" />
               <span className="text-center">{card.alias}</span>
@@ -47,7 +47,7 @@ const CardListPage = () => {
         {/* 카드 추가하는 템플릿*/}
         <div className="card-item">
           <div className="card-box">
-            <Link to="/add" className="empty-card">
+            <Link to="/react-payments/add" className="empty-card">
               <Button className="card-add-button">+</Button>
             </Link>
           </div>

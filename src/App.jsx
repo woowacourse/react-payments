@@ -3,7 +3,7 @@ import { useRoutes } from 'react-router-dom';
 import Layout from 'components/common/Layout';
 import CardListPage from 'page/cardList';
 import CardAddUpdatePage from 'page/cardAddUpdate';
-import NotFoundPage from 'page/noutFound';
+import NotFoundPage from 'page/notFound';
 
 const routes = [
   { path: '/react-payments', element: <CardListPage /> },

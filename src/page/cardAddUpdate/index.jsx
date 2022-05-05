@@ -105,7 +105,7 @@ const CardAddUpdatePage = () => {
       CARD_API.getCard(cardId)
         .then((response) => dispatch({ type: 'load', value: response }))
         .catch((e) => {
-          navigate('/notFound');
+          navigate('/react-payments/notFound');
         });
     }
   }, []);
@@ -115,7 +115,7 @@ const CardAddUpdatePage = () => {
       {step === STEP1 && (
         <>
           <Header title={path === PATH.ADD ? '카드 정보 입력 ✏️' : '카드 정보 수정 ✂️'}>
-            <Link to="/">
+            <Link to="/react-payments">
               <Button>
                 <PrevIcon />
               </Button>
@@ -246,7 +246,7 @@ const CardAddUpdatePage = () => {
             />
           </div>
           <div className="flex-right right-bottom-edge">
-            <Link to="/">
+            <Link to="/react-payments">
               <Button
                 theme={theme}
                 className=""

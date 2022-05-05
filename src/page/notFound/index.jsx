@@ -13,7 +13,7 @@ const NotFoundPage = () => {
         <br /> 현재 사용할 수 없습니다. <br />
         홈페이지로 이동하시어 서비스를 다시 이용해주세요.
       </p>
-      <Link to="/">
+      <Link to="/react-payments">
         <img src={HOME_BUTTON} className="homeButton-image" />
       </Link>
     </div>
