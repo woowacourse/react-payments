@@ -138,6 +138,25 @@
   text-align: center;
 }
 
+.card-number::after {
+  content: "-";
+  float: right;
+}
+
+.card-number:last-child::after {
+  content: "";
+}
+
+.card-number-delimiter::after {
+  color: #525252;
+  content: "-";
+  float: right;
+}
+
+.card-number-delimiter:last-child:after {
+  content: "";
+}
+
 .card-user-name {
   display: inline-block;
   width: 100%;

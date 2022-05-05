@@ -25,7 +25,7 @@ export default function CardNumber({ inputs }: { inputs: HTMLInputElement[] }) {
               data-index={index}
               inputs={inputs}
             />
-            {index !== 3 && <span className="card-number-delimiter">-</span>}
+            <span className="card-number-delimiter" />
           </React.Fragment>
         ))}
       </div>
