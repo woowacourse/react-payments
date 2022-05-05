@@ -1,20 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useObjectRef from './useObjectRef';
 import useFormSchema from './useFormSchema';
 import { isBackspace } from '../utils/commons';
+import CardContext from '../contexts/CardContext';
 
 const useCardForm = ({ cardFormSchema }, path = undefined) => {
   const navigate = useNavigate();
-  const {
-    initialField,
-    isInvalidInput,
-    errors,
-    setErrorTrue,
-    setErrorMessages,
-  } = useFormSchema(cardFormSchema);
+  const { values, setValues } = useContext(CardContext);
+  const { isInvalidInput, errors, setErrorTrue, setErrorMessages } =
+    useFormSchema(cardFormSchema);
 
-  const [values, setValues] = useState(initialField);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { ref, bindElement, getNextElement, getPrevElement } =
     useObjectRef(cardFormSchema);
@@ -126,7 +122,6 @@ const useCardForm = ({ cardFormSchema }, path = undefined) => {
     } ${additionalClassName}`.trim();
 
   return {
-    values,
     isSubmitting,
     handleSubmit,
     registerInputProps,

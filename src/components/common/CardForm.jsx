@@ -1,23 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import CardPreview from './CardPreview';
 import ToolTip from './ToolTip';
 import useCardForm from '../../hooks/useCardForm';
 import InputFieldContainer from './InputFieldContainer';
 import Button from './Button';
+import CardContext from '../../contexts/CardContext';
 
 const StyledCardForm = styled.form`
   margin: 0;
 `;
 
 const CardForm = ({ cardFormSchema }) => {
-  const {
-    values,
-    isSubmitting,
-    handleSubmit,
-    registerInputProps,
-    getInputClassName,
-  } = useCardForm({ cardFormSchema }, '/complete-add-card');
+  const { values } = useContext(CardContext);
+  const { isSubmitting, handleSubmit, registerInputProps, getInputClassName } =
+    useCardForm({ cardFormSchema }, '/complete-add-card');
 
   return (
     <>
