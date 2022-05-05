@@ -38,18 +38,14 @@ const StyledErrorMessage = styled.span`
   color: #f38181;
 `;
 
-export default function InputField({
-  labelText,
-  children,
+function InputWrapper({
+  inputChildren,
   wrapperWidth,
   horizontalAlign,
-  isComplete,
-  errorMessage,
-  OptionalComponent,
   splitCount,
 }) {
-  const InputChildren = splitCount ? (
-    children.map((inputComponent, index) => (
+  return splitCount ? (
+    inputChildren.map((inputComponent, index) => (
       <StyledInputWrapper
         key={index}
         width={`calc(${wrapperWidth} / ${splitCount})`}
@@ -60,10 +56,21 @@ export default function InputField({
     ))
   ) : (
     <StyledInputWrapper width={wrapperWidth} align={horizontalAlign}>
-      {children}
+      {inputChildren}
     </StyledInputWrapper>
   );
+}
 
+export default function InputField({
+  labelText,
+  children,
+  wrapperWidth,
+  horizontalAlign,
+  isComplete,
+  errorMessage,
+  OptionalComponent,
+  splitCount,
+}) {
   return (
     <StyledInputField>
       <StyledLabel isComplete={isComplete}>
@@ -73,7 +80,12 @@ export default function InputField({
         )}
       </StyledLabel>
       <StyledInputContainer>
-        {InputChildren}
+        <InputWrapper
+          inputChildren={children}
+          wrapperWidth={wrapperWidth}
+          horizontalAlign={horizontalAlign}
+          splitCount={splitCount}
+        />
         {OptionalComponent}
       </StyledInputContainer>
     </StyledInputField>
