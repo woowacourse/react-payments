@@ -19,7 +19,7 @@ const CardContainer = styled.div`
     `
     width: 215px;
     min-height: 135px;
-    padding: 10px 14px;
+    padding: 14px;
     font-size: 14px;
     line-height: 14px;
     `}

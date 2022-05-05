@@ -15,7 +15,7 @@ body {
 
 .App {
   width: 375px;
-  min-height: 700px;
+  height: 700px;
   margin: 50px auto;
   padding: 20px 28px;
   position: relative;
