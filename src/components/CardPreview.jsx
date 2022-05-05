@@ -49,8 +49,6 @@ const SmallCard = styled.div`
   line-height: ${({ isSubmitted }) => cardSize(isSubmitted).lineHeight};
   vertical-align: middle;
   font-weight: 400;
-
-  transition: all 0.5s;
 `;
 
 const CardName = styled.p`

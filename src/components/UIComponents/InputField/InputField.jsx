@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 const width = {
   xs: "85px",
   sm: "135px",
+  "almost-full": "80%",
   full: "100%",
 };
 
@@ -38,10 +39,13 @@ const StyledLabel = styled.label`
 const StyledInputWrapper = styled.div`
   display: flex;
   justify-content: ${(props) => props.align};
-  background: #ecebf1;
-  border-radius: 7px;
+  background: ${(props) => props.shape === "box" && "#ecebf1"};
+  border-bottom: ${(props) =>
+    props.shape === "underline" && "1px solid #000000"};
+  border-radius: ${(props) => props.shape === "box" && "7px"};
   width: ${(props) => width[props.width]};
   padding: 12px;
+  margin: ${(props) => props.width === "almost-full" && "auto"};
 
   box-shadow: ${(props) => props.isInvalid && "inset 0 0 0 1px #d82424"};
 `;
@@ -61,6 +65,7 @@ export default function InputField({
   isComplete,
   errorMessage,
   isInvalid,
+  shape,
 }) {
   return (
     <StyledInputField>
@@ -75,6 +80,7 @@ export default function InputField({
           width={wrapperWidth}
           align={horizontalAlign}
           isInvalid={isInvalid}
+          shape={shape}
         >
           {children}
         </StyledInputWrapper>
@@ -90,6 +96,11 @@ InputField.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
-  wrapperWidth: PropTypes.oneOf(["xs", "sm", "full"]),
+  shape: PropTypes.oneOf(["box", "underline"]),
+  wrapperWidth: PropTypes.oneOf(["xs", "sm", "almost-full", "full"]),
   horizontalAlign: PropTypes.oneOf(["flex-start", "center", "space-around"]),
+};
+
+InputField.defaultProps = {
+  shape: "box",
 };

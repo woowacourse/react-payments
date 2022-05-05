@@ -1,11 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { cardInfoValidations } from "../../../cardInfoValidations.js";
-import {
-  CARD_REGISTER_FAIL_MESSAGE,
-  CARD_REGISTER_SUCCESS_MESSAGE,
-} from "../../../constants.js";
-import useLocalStorage from "../../../useLocalStorage.jsx";
 
 const StyledCardInfoForm = styled.form`
   display: flex;
@@ -17,9 +12,7 @@ const StyledCardInfoForm = styled.form`
   }
 `;
 
-export default function Form({ children, dataKey }) {
-  const [formDataArray, saveFormData] = useLocalStorage(dataKey);
-
+export default function Form({ children, onSubmit }) {
   const focusFormInput = (formInputList, currInput, direction) => {
     const formInputArray = [...formInputList];
     const currentIndex = formInputArray.indexOf(currInput);
@@ -73,12 +66,7 @@ export default function Form({ children, dataKey }) {
       return object;
     }, {});
 
-    try {
-      saveFormData([...formDataArray, formData]);
-      alert(CARD_REGISTER_SUCCESS_MESSAGE);
-    } catch {
-      alert(CARD_REGISTER_FAIL_MESSAGE);
-    }
+    onSubmit(formData);
   };
 
   return (

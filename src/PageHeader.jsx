@@ -12,10 +12,10 @@ const StyledPageTitle = styled.h1`
   color: #383838;
 `;
 
-export default function PageHeader() {
+export default function PageHeader({ isSubmitted }) {
   return (
     <StyledPageHeaderContainer>
-      <StyledPageTitle>카드 추가</StyledPageTitle>
+      {!isSubmitted && <StyledPageTitle>카드 추가</StyledPageTitle>}
     </StyledPageHeaderContainer>
   );
 }
