@@ -100,6 +100,16 @@ const CardAddUpdatePage = () => {
     handleModal();
   };
 
+  const handleConfirmButtonClick = async () => {
+    if (path === PATH.ADD) {
+      await CARD_API.addCard(cardInfo);
+    } else {
+      await CARD_API.updateCard(cardId, cardInfo);
+    }
+
+    navigate('/react-payments');
+  };
+
   useEffect(() => {
     if (path === PATH.MODIFY) {
       CARD_API.getCard(cardId)
@@ -246,19 +256,9 @@ const CardAddUpdatePage = () => {
             />
           </div>
           <div className="flex-right right-bottom-edge">
-            <Link to="/react-payments">
-              <Button
-                theme={theme}
-                className=""
-                handleClick={() => {
-                  path === PATH.ADD
-                    ? CARD_API.addCard(cardInfo)
-                    : CARD_API.updateCard(cardId, cardInfo);
-                }}
-              >
-                {path === PATH.ADD ? '확인' : '수정 완료'}
-              </Button>
-            </Link>
+            <Button theme={theme} className="" handleClick={handleConfirmButtonClick}>
+              {path === PATH.ADD ? '확인' : '수정 완료'}
+            </Button>
           </div>
         </>
       )}
