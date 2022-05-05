@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import BackwardButton from './components/common/BackwardButton';
-import CardForm from './components/common/CardForm';
-import initialCardSchema from './schema/cardSchema';
+import AddCardPage from './components/pages/AddCardPage';
 
 const StyledApp = styled.div`
   padding: 16px 24px;
@@ -11,8 +9,7 @@ const StyledApp = styled.div`
 const App = () => {
   return (
     <StyledApp>
-      <BackwardButton>카드 추가</BackwardButton>
-      <CardForm cardFormSchema={initialCardSchema} />
+      <AddCardPage />
     </StyledApp>
   );
 };
