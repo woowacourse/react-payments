@@ -124,17 +124,6 @@ const useFormSchema = (formSchema) => {
     }));
   };
 
-  // const focusNextElement = (name, value, nextElement) => {
-  //   if (value.length >= formSchema[name].maxLength && nextElement)
-  //     nextElement.focus();
-  // };
-
-  // const focusPrevElement = (keyCode, name, prevElement) => {
-  //   if (isBackspace(keyCode) && values[name] === '' && prevElement) {
-  //     prevElement.focus();
-  //   }
-  // };
-
   return {
     initialField,
     isInvalidInput,
