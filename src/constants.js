@@ -1,19 +1,15 @@
-export const MAX_LENGTH = {
-  CARD_NUMBER: 4,
-  DATE: 2,
-  NAME: 30,
-  SECURITY_CODE: 3,
-  PASSWORD: 1,
-};
-
-export const MIN_LENGTH = {
-  NAME: 2,
-  MONTH: 1,
-};
-
-export const RANGE = {
-  MONTH_MIN: 1,
-  MONTH_MAX: 12,
+export const CARD = {
+  NUMBER_LENGTH: 4,
+  DATE: {
+    LENGTH: 2,
+    RANGE: {
+      MIN: 1,
+      MAX: 12,
+    },
+  },
+  NAME_LENGTH: 30,
+  SECURITY_CODE_LENGTH: 3,
+  PASSWORD_LENGTH: 1,
 };
 
 export const ERROR_MESSAGE = {

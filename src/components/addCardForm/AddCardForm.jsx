@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Input from '../input/Input';
 import { validNumber, validMaxLength, validRange } from '../../validator';
-import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../../constants';
+import { CARD } from '../../constants';
 
 function AddCardForm({ card, updateCard, addCard }) {
   const handleSubmit = (event) => {
@@ -15,14 +15,14 @@ function AddCardForm({ card, updateCard, addCard }) {
         <span className="input-title">카드 번호</span>
         <div className="input-box">
           <Input
-            length={MAX_LENGTH.CARD_NUMBER}
+            length={CARD.NUMBER_LENGTH}
             value={card.firstCardNumber}
             name="firstCardNumber"
             updateCard={updateCard}
             validators={{ validMaxLength, validNumber }}
           />
           <Input
-            length={MAX_LENGTH.CARD_NUMBER}
+            length={CARD.NUMBER_LENGTH}
             value={card.secondCardNumber}
             name="secondCardNumber"
             updateCard={updateCard}
@@ -30,7 +30,7 @@ function AddCardForm({ card, updateCard, addCard }) {
           />
           <Input
             type="password"
-            length={MAX_LENGTH.CARD_NUMBER}
+            length={CARD.NUMBER_LENGTH}
             value={card.thirdCardNumber}
             name="thirdCardNumber"
             updateCard={updateCard}
@@ -38,7 +38,7 @@ function AddCardForm({ card, updateCard, addCard }) {
           />
           <Input
             type="password"
-            length={MAX_LENGTH.CARD_NUMBER}
+            length={CARD.NUMBER_LENGTH}
             value={card.fourthCardNumber}
             name="fourthCardNumber"
             updateCard={updateCard}
@@ -51,10 +51,9 @@ function AddCardForm({ card, updateCard, addCard }) {
         <div className="input-box w-50">
           <Input
             placeholder="MM"
-            length={MAX_LENGTH.DATE}
-            minLength={MIN_LENGTH.MONTH}
-            min={RANGE.MONTH_MIN}
-            max={RANGE.MONTH_MAX}
+            length={CARD.DATE.LENGTH}
+            min={CARD.DATE.RANGE.MIN}
+            max={CARD.DATE.RANGE.MAX}
             value={card.expireMonth}
             name="expireMonth"
             updateCard={updateCard}
@@ -63,7 +62,7 @@ function AddCardForm({ card, updateCard, addCard }) {
           /
           <Input
             placeholder="YY"
-            length={MAX_LENGTH.DATE}
+            length={CARD.DATE.LENGTH}
             value={card.expireYear}
             name="expireYear"
             updateCard={updateCard}
@@ -75,18 +74,17 @@ function AddCardForm({ card, updateCard, addCard }) {
         <div className="owner-name-wrapper">
           <span className="input-title">카드 소유자 이름(선택)</span>
           <span className="input-title">
-            {card.ownerName.length}/{MAX_LENGTH.NAME}
+            {card.ownerName.length}/{CARD.NAME_LENGTH}
           </span>
         </div>
         <Input
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          length={MAX_LENGTH.NAME}
-          minLength={MIN_LENGTH.NAME}
+          length={CARD.NAME_LENGTH}
           value={card.ownerName}
           name="ownerName"
           updateCard={updateCard}
           validators={{ validMaxLength }}
-          optional={false}
+          optional
         />
       </div>
       <div className="input-container">
@@ -94,7 +92,7 @@ function AddCardForm({ card, updateCard, addCard }) {
         <Input
           size="w-25"
           type="password"
-          length={MAX_LENGTH.SECURITY_CODE}
+          length={CARD.SECURITY_CODE_LENGTH}
           value={card.securityCode}
           name="securityCode"
           updateCard={updateCard}
@@ -109,7 +107,7 @@ function AddCardForm({ card, updateCard, addCard }) {
         <Input
           size="w-15 mr-10"
           type="password"
-          length={MAX_LENGTH.PASSWORD}
+          length={CARD.PASSWORD_LENGTH}
           value={card.firstPassword}
           name="firstPassword"
           updateCard={updateCard}
@@ -118,7 +116,7 @@ function AddCardForm({ card, updateCard, addCard }) {
         <Input
           size="w-15 mr-10"
           type="password"
-          length={MAX_LENGTH.PASSWORD}
+          length={CARD.PASSWORD_LENGTH}
           value={card.secondPassword}
           name="secondPassword"
           updateCard={updateCard}
