@@ -47,20 +47,20 @@ const useCardState = () => {
   const isComplete = isInputComplete(cardState);
 
   const onChangeTextField = ({ target }, option = {}) => {
-    const textFieldName = target.name;
+    const { name: textFieldName, value: textFieldValue } = target;
 
     switch (textFieldName) {
       case 'cardNumber':
         dispatch({
           type: textFieldName,
-          contents: { index: option.index, value: target.value },
+          contents: { index: option.index, value: textFieldValue },
         });
         break;
 
       default:
         dispatch({
           type: textFieldName,
-          contents: target.value,
+          contents: textFieldValue,
         });
     }
   };
