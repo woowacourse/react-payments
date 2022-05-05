@@ -8,9 +8,13 @@ const CARD_API = {
         headers: { 'Content-type': 'application/json' },
       });
 
+      if (!response.ok) {
+        throw Error('카드 불러오기 과정에서 오류가 발생했습니다.');
+      }
+
       return response.json();
     } catch (e) {
-      throw Error('카드 불러오기 과정에서 오류가 발생했습니다.');
+      throw e;
     }
   },
   async getCardList() {

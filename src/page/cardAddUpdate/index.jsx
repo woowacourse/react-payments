@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 
 import FormInput from 'components/common/FormInput';
 import Modal from 'components/common/Modal';
@@ -38,6 +38,7 @@ import {
   PASSWORD,
   PRIVACY_CODE,
 } from 'constants';
+import NotFoundPage from 'page/noutFound';
 
 const initialCardInfo = {
   alias: '',
@@ -64,6 +65,7 @@ const initialCardInfo = {
 };
 
 const CardAddUpdatePage = () => {
+  const navigate = useNavigate();
   const { cardId } = useParams();
   const path = cardId ? PATH.MODIFY : PATH.ADD;
 
@@ -91,7 +93,11 @@ const CardAddUpdatePage = () => {
 
   useEffect(() => {
     if (path === PATH.MODIFY) {
-      CARD_API.getCard(cardId).then((response) => dispatch({ type: 'load', value: response }));
+      CARD_API.getCard(cardId)
+        .then((response) => dispatch({ type: 'load', value: response }))
+        .catch((e) => {
+          navigate('/notFound');
+        });
     }
   }, []);
 
