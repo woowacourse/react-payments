@@ -1,7 +1,8 @@
 import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Cards from '../components/Cards';
+
+import Cards from '../../components/Cards';
 
 const StyledPage = styled.div`
   background: #fff;

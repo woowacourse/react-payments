@@ -9,13 +9,13 @@ import {
   useCVC,
   useModal,
   useValidDate,
-} from '../hooks';
-import CardInputs from '../components/CardInputs';
-import { Button, Card } from '../components/common';
-import { ReactComponent as Arrow } from '../assets/arrow.svg';
+} from '../../hooks';
+import CardInputs from '../../components/CardInputs';
+import { Button, Card } from '../../components/common';
+import { ReactComponent as Arrow } from '../../assets/arrow.svg';
 
-import { CardContext, CardInfoContext } from '../contexts';
-import isValidCardInputs from '../utils/validator';
+import { CardContext, CardInfoContext } from '../../contexts';
+import isValidCardInputs from '../../utils/validator';
 
 const StyledPage = styled.form`
   background: #fff;
