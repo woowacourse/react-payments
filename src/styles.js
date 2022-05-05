@@ -6,10 +6,12 @@ export const GlobalStyle = createGlobalStyle`
   body {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    background-color: #F5F5F5;
+    color: #555;  
   }
 
   input {
@@ -21,8 +23,28 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Container = styled.div`
   height: 100%;
-  max-width: 400px;
+  width: 400px;
   padding: 16px 24px;
+  margin: 30px 0;
+  background-color: #fff;
+  border-radius: 5px;
+`;
+
+export const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background: #f5f5f5;
+`;
+
+export const Modal = styled(Container)`
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
 `;
 
 export const InputBasic = styled.input`
@@ -79,8 +101,8 @@ export const Card = styled.div`
   height: ${isSmall ? '130px' : '206px'};
   padding: ${isSmall ? '10px' : '16px'};
   font-size: ${isSmall ? '14px' : '22px'};
+  margin-bottom: 5px;
   color: #fff;
-  margin-bottom: ${isSmall ? '16px' : '22px'};
 
   background: ${color};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
@@ -162,7 +184,7 @@ export const CardCompanyStyled = styled.div`
 
 export const CardCompanyName = styled.p`
   margin: 10px 0;
-  color: ${({ selected }) => (selected ? '#000000' : '#5e5e5e')};
+  color: ${({ selected }) => (selected ? '#000' : '#5e5e5e')};
   font-size: 12px;
   letter-spacing: -0.085rem;
 `;
@@ -257,18 +279,17 @@ export const PageTitleBox = styled.div`
 `;
 
 export const PageTitle = styled.span`
-  margin-left: 17px;
   font-weight: 500;
   font-size: 18px;
   letter-spacing: -0.085em;
-  color: #555;
 `;
 
 export const PrevButton = styled.span`
   font-size: 50px;
-  color: #555;
+
   cursor: pointer;
   line-height: 10px;
+  margin-right: 17px;
   &:hover {
   }
 `;
@@ -312,31 +333,13 @@ export const PasswordBox = styled.div`
   height: 45px;
 `;
 
-export const Backdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: 10;
-  background: #fff;
-`;
-
-export const Modal = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  max-width: 440px;
-  z-index: 100;
-`;
-
 export const UnderlineInput = styled.input`
   background-color: transparent;
   border: none;
   border-bottom: 2px solid #ccc;
   padding: 5px;
-  color: #555;
+  color: #525252;
+
   box-sizing: border-box;
   text-align: center;
   width: 310px;
@@ -352,5 +355,31 @@ export const UnderlineInput = styled.input`
 
 export const TitleText = styled.p`
   font-size: 24px;
-  color: #555;
+`;
+
+export const CardAlignBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const EnrolledCardWrapper = styled.div`
+  text-align: center;
+  margin-bottom: 25px;
+`;
+
+export const CardNickname = styled.span`
+  font-size: 19px;
+`;
+
+export const Sign = styled.span`
+  font-size: 40px;
+  font-weight: 800;
+  color: #525252;
+`;
+
+export const PointerBox = styled.span`
+  cursor: pointer;
+  maxwidth: 208px;
 `;

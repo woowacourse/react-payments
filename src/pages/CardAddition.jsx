@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { v4 as uuidv4 } from 'uuid';
 import * as S from 'styles.js';
 import { CardDispatchContext, CardStateContext, TYPES } from 'context/CardContext';
 import validator from 'validations/validator';
@@ -30,12 +32,11 @@ function CardAddition() {
     cardPassword,
     cardCompanyIndex,
     cardCompanyErrorMessage,
-    cards,
   } = useContext(CardStateContext);
 
   const dispatch = useContext(CardDispatchContext);
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [IsClickedNextButton, setIsClickedNextButton] = useState(false);
   const [cardData, setCardData] = useState();
 
   const isAllInputValidated = () => {
@@ -53,7 +54,7 @@ function CardAddition() {
     }
   };
 
-  const onSubmitCard = () => {
+  const onClickNextButton = () => {
     const newCardData = {
       cardName: CARD_COMPANIES[cardCompanyIndex].NAME,
       cardColor: CARD_COMPANIES[cardCompanyIndex].COLOR,
@@ -64,7 +65,7 @@ function CardAddition() {
       cardPassword,
     };
     setCardData(newCardData);
-    setIsSubmitted(true);
+    setIsClickedNextButton(true);
   };
 
   const onConfirmCard = (event, nickname) => {
@@ -72,10 +73,9 @@ function CardAddition() {
     const newCardData = {
       ...cardData,
       cardNickname: nickname,
+      id: uuidv4(),
     };
     dispatch({ type: TYPES.SUBMIT_CARD, newCardData });
-    console.log('@@', newCardData);
-    console.log(cards);
 
     navigate('/card-list');
   };
@@ -89,7 +89,7 @@ function CardAddition() {
   };
 
   const onCloseModal = () => {
-    setIsSubmitted(false);
+    setIsClickedNextButton(false);
   };
 
   return (
@@ -119,17 +119,19 @@ function CardAddition() {
       <CardOwner color={cardColor} />
       <CardCvc color={cardColor} />
       <CardPassword color={cardColor} />
-      <NextButton onClick={onSubmitCard} disabled={!isAllInputValidated()} color={cardColor}>
+      <NextButton onClick={onClickNextButton} disabled={!isAllInputValidated()} color={cardColor}>
         다음
       </NextButton>
       <CardListModal />
       <TipModal />
-      {isSubmitted && (
-        <CardConfirmModal
-          cardData={cardData}
-          onConfirmCard={onConfirmCard}
-          onCloseModal={onCloseModal}
-        />
+      {IsClickedNextButton && (
+        <S.Container>
+          <CardConfirmModal
+            cardData={cardData}
+            onConfirmCard={onConfirmCard}
+            onCloseModal={onCloseModal}
+          />
+        </S.Container>
       )}
     </S.Container>
   );

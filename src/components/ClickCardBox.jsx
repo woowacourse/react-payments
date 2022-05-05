@@ -1,5 +1,6 @@
 import React, { useContext, useCallback } from 'react';
 
+import * as S from 'styles.js';
 import { TYPES, CardDispatchContext } from 'context/CardContext.jsx';
 
 export default function ClickCardBox({ children }) {
@@ -9,9 +10,5 @@ export default function ClickCardBox({ children }) {
     dispatch({ type: TYPES.SET_LIST_MODAL_FLAG, flag: true });
   }, []);
 
-  return (
-    <div style={{ cursor: 'pointer', maxWidth: '208px' }} onClick={onClickCard}>
-      {children}
-    </div>
-  );
+  return <S.PointerBox onClick={onClickCard}>{children}</S.PointerBox>;
 }

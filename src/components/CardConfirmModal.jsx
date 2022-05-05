@@ -23,26 +23,27 @@ export default function CardConfirmModal({ cardData, onConfirmCard, onCloseModal
           <PageTitle hasPrevButton={true} onClickPrev={onCloseModal}>
             카드 추가
           </PageTitle>
-
-          <S.TitleText>카드 정보를 최종 확인해주세요.</S.TitleText>
-          <Card
-            cardName={cardData.cardName}
-            cardColor={cardData.cardColor}
-            cardNumber={cardData.cardNumber}
-            cardExpiration={cardData.cardExpiration}
-            cardOwner={cardData.cardOwner}
-            isSmall={false}
-          />
-          <FormBasic onSubmitForm={onConfirmCard} payload={nickname}>
-            <S.UnderlineInput
-              onChange={onChangeInput}
-              placeholder="카드 별칭을 입력해주세요."
-              type="text"
+          <S.CardAlignBox>
+            <S.TitleText>카드 정보를 최종 확인해주세요.</S.TitleText>
+            <Card
+              cardName={cardData.cardName}
+              cardColor={cardData.cardColor}
+              cardNumber={cardData.cardNumber}
+              cardExpiration={cardData.cardExpiration}
+              cardOwner={cardData.cardOwner}
+              isSmall={false}
             />
-            <NextButton disabled={false} color={cardData.cardColor}>
-              등록
-            </NextButton>
-          </FormBasic>
+            <FormBasic onSubmitForm={onConfirmCard} payload={nickname}>
+              <S.UnderlineInput
+                onChange={onChangeInput}
+                placeholder="카드 별칭을 입력해주세요."
+                type="text"
+              />
+              <NextButton disabled={false} color={cardData.cardColor}>
+                등록
+              </NextButton>
+            </FormBasic>
+          </S.CardAlignBox>
         </S.Modal>,
         document.getElementById('overlay-root'),
       )}

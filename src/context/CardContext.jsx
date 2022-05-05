@@ -30,9 +30,9 @@ export const initialState = {
   cardPassword: ['', ''],
   cardPasswordErrorMessage: '',
   cardCompanyIndex: -1,
+  cardNickName: '',
   listModalFlag: false,
   tipModalFlag: false,
-  cardNickName: '',
   cards: [],
 };
 
@@ -152,6 +152,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         cards: [...state.cards, action.newCardData],
+        cardNumber: ['', '', '', ''],
+        cardExpiration: ['', ''],
+        cardOwner: '',
+        cardCvc: '',
+        cardPassword: ['', ''],
+        cardCompanyIndex: -1,
       };
     }
 
