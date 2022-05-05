@@ -60,9 +60,7 @@ const CardAdd = () => {
         </header>
         <div className="card-add__container">
           <Card cardInfo={cardInfo} onClick={openColorPickerModal} />
-          {cardName ? (
-            <></>
-          ) : (
+          {Boolean(cardName) || (
             <span className="select-card-message">
               카드를 눌러 카드를 선택해주세요
             </span>
