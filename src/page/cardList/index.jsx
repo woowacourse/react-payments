@@ -24,8 +24,6 @@ const CardListPage = () => {
     CARD_API.getCardList().then((response) => setCardList(response));
   }, []);
 
-  // 전반적인 리팩토링
-
   return (
     <div>
       <Header title="보유 카드 목록" />
