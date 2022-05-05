@@ -48,9 +48,9 @@ export const updateCardAPI = (id, cardInfo) => {
   }
 };
 
-export const deleteCardAPI = (id) => {
+export const deleteCardAPI = async (id) => {
   try {
-    fetch(`http://localhost:8000/cardList/${id}`, {
+    await fetch(`http://localhost:8000/cardList/${id}`, {
       method: 'DELETE',
       headers: { 'Content-type': 'application/json' },
     });

@@ -60,7 +60,7 @@ const initialCardInfo = {
 
 const CardAddUpdatePage = () => {
   const { cardId } = useParams();
-  const page = cardId ? 'modify' : 'add';
+  const path = cardId ? 'modify' : 'add';
 
   const [stage, setStage] = useState(1);
 
@@ -84,7 +84,7 @@ const CardAddUpdatePage = () => {
     isPasswordFilled;
 
   useEffect(() => {
-    if (page === 'modify') {
+    if (path === 'modify') {
       getCardAPI(cardId).then((response) => dispatch({ type: 'load', value: response }));
     }
   }, []);
@@ -115,7 +115,7 @@ const CardAddUpdatePage = () => {
     <div>
       {stage === 1 && (
         <>
-          <Header title={page === 'add' ? '카드 정보 입력' : '카드 정보 수정'}>
+          <Header title={path === 'add' ? '카드 정보 입력' : '카드 정보 수정'}>
             <Link to="/">
               <Button>
                 <PrevIcon />
@@ -219,14 +219,14 @@ const CardAddUpdatePage = () => {
       )}
       {stage === 2 && (
         <>
-          <Header title={page === 'add' ? '카드 별칭 입력' : '카드 별칭 수정'}>
+          <Header title={path === 'add' ? '카드 별칭 입력' : '카드 별칭 수정'}>
             <Button handleClick={() => setStage(1)}>
               <PrevIcon />
             </Button>
           </Header>
           <div className="flex-center">
             <h2 className="content-title mt-20 mb-10">
-              {page === 'add' ? '카드등록이 완료되었습니다.' : '카드수정이 완료되었습니다.'}
+              {path === 'add' ? '카드등록이 완료되었습니다.' : '카드수정이 완료되었습니다.'}
             </h2>
           </div>
           <CardPreview
@@ -250,10 +250,10 @@ const CardAddUpdatePage = () => {
                 theme={theme}
                 className=""
                 handleClick={() => {
-                  page === 'add' ? registerCardAPI(cardInfo) : updateCardAPI(cardId, cardInfo);
+                  path === 'add' ? registerCardAPI(cardInfo) : updateCardAPI(cardId, cardInfo);
                 }}
               >
-                {page === 'add' ? '확인' : '수정 완료'}
+                {path === 'add' ? '확인' : '수정 완료'}
               </Button>
             </Link>
           </div>
