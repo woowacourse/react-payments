@@ -1,6 +1,6 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext } from 'react';
 import * as S from 'styles.js';
-import { TYPES, CardStateContext, CardDispatchContext } from 'context/CardContext';
+import { CardStateContext } from 'context/CardContext';
 import validator from 'validations/validator';
 import { CARD_COMPANIES } from 'constants/index';
 
@@ -18,7 +18,6 @@ import TipModal from 'components/TipModal';
 function CardAddition() {
   const { cardNumber, cardExpiration, cardOwner, cardCvc, cardPassword, cardCompanyIndex } =
     useContext(CardStateContext);
-  const dispatch = useContext(CardDispatchContext);
 
   const isAllInputValidated = () => {
     try {
@@ -28,15 +27,12 @@ function CardAddition() {
       validator.checkCardOwner(cardOwner);
       validator.checkCardCvc(cardCvc);
       validator.checkCardPassword(cardPassword);
+
       return true;
     } catch (error) {
       return false;
     }
   };
-
-  const onClickCard = useCallback(() => {
-    dispatch({ type: TYPES.SET_LIST_MODAL_FLAG, flag: true });
-  }, []);
 
   const submitCard = () => {
     const cardData = {
@@ -65,7 +61,6 @@ function CardAddition() {
         cardOwner={cardOwner}
         cardName={cardName}
         color={cardColor}
-        onClick={onClickCard}
       />
       <CardNumber color={cardColor} />
       <CardExpiration color={cardColor} />

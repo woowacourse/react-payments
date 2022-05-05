@@ -5,7 +5,7 @@ const isInt = (value) => (value ? /^-?[0-9]+$/.test(value) : true);
 const validator = {
   checkCardNumber(cardNumber) {
     if (isAllInputEmpty(cardNumber)) {
-      return;
+      throw new Error('');
     }
 
     if (cardNumber.some((value) => !isInt(String(value)))) {
@@ -19,7 +19,7 @@ const validator = {
 
   checkCardExpiration(cardExpiration) {
     if (isAllInputEmpty(cardExpiration)) {
-      return;
+      throw new Error('');
     }
 
     if (cardExpiration.some((number) => !isInt(String(number)))) {
@@ -54,7 +54,7 @@ const validator = {
 
   checkCardCvc(cardCvc) {
     if (!cardCvc) {
-      return;
+      throw new Error('');
     }
 
     if (!isInt(String(cardCvc))) {
@@ -68,7 +68,7 @@ const validator = {
 
   checkCardPassword(cardPassword) {
     if (isAllInputEmpty(cardPassword)) {
-      return;
+      throw new Error('');
     }
 
     if (cardPassword.some((number) => !isInt(String(number)))) {

@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import { TYPES, CardStateContext } from 'context/CardContext.jsx';
+import { TYPES, CardStateContext, CardDispatchContext } from 'context/CardContext.jsx';
 import * as S from 'styles.js';
 import validator from 'validations/validator';
 import ErrorMessage from 'components/ErrorMessage';
+import { useCallback } from 'react';
 
 export default function Card({
   cardCompanyIndex,
@@ -10,17 +11,22 @@ export default function Card({
   cardOwner,
   cardExpiration,
   cardName,
-  onClick,
+
   color,
 }) {
   const { cardCompanyErrorMessage } = useContext(CardStateContext);
+  const dispatch = useContext(CardDispatchContext);
 
   const cardExpirationContent = () =>
     cardExpiration[0] || cardExpiration[1] ? cardExpiration.join('/') : 'MM/YY';
 
+  const onClickCard = useCallback(() => {
+    dispatch({ type: TYPES.SET_LIST_MODAL_FLAG, flag: true });
+  }, []);
+
   return (
     <>
-      <S.SmallCard onClick={onClick} color={color}>
+      <S.SmallCard onClick={onClickCard} color={color}>
         <S.CardTop>
           <S.CardText>{cardName}</S.CardText>
         </S.CardTop>
