@@ -24,7 +24,6 @@ const OwnerNameInput = ({ ownerNameValue, onChangeOwner }) => {
       <div className="label__container">
         <InputLabel>카드 소유자 이름(선택)</InputLabel>
         <InputLabel>{`${ownerNameValue.length}/30`}</InputLabel>
-        <></>
       </div>
       <InputContainer>
         <Input

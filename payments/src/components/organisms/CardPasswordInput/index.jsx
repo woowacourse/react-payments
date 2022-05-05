@@ -25,6 +25,12 @@ const CardPasswordInput = ({ passwordValue, onChangePassword }) => {
     controllInput(target);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {
+      autoFocusBackward(e.target);
+    }
+  };
+
   return (
     <div className="password__input__container">
       <InputLabel>카드비밀번호</InputLabel>
@@ -33,7 +39,7 @@ const CardPasswordInput = ({ passwordValue, onChangePassword }) => {
           <div className="password__input" key={idx}>
             <InputContainer>
               <Input
-                type="text"
+                type="password"
                 ref={(el) => {
                   itemRef.current[idx] = el;
                 }}
@@ -41,23 +47,16 @@ const CardPasswordInput = ({ passwordValue, onChangePassword }) => {
                 onChange={({ target }) => {
                   updateCardPassword(target, idx);
                 }}
-                onKeyDown={(e) => {
-                  if (
-                    e.keyCode === BACKSPACE_KEY_CODE &&
-                    e.target.value === ""
-                  ) {
-                    autoFocusBackward(e.target);
-                  }
-                }}
+                onKeyDown={handleKeyDown}
               />
             </InputContainer>
           </div>
         ))}
         <div className="password__input">
-          <div className="dot"></div>
+          <div className="dot" />
         </div>
         <div className="password__input">
-          <div className="dot"></div>
+          <div className="dot" />
         </div>
       </div>
     </div>

@@ -26,6 +26,12 @@ const ExpiredDateInput = ({ expiredDateValue, onChangeExpiredDate }) => {
     controllInput(target);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {
+      autoFocusBackward(e.target);
+    }
+  };
+
   return (
     <div className="expire__input__container">
       <InputLabel>만료일</InputLabel>
@@ -42,11 +48,7 @@ const ExpiredDateInput = ({ expiredDateValue, onChangeExpiredDate }) => {
               onChange={({ target }) => {
                 updateExpiredDate(target, idx);
               }}
-              onKeyDown={(e) => {
-                if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {
-                  autoFocusBackward(e.target);
-                }
-              }}
+              onKeyDown={handleKeyDown}
             />
             {idx === 0 ? "/" : ""}
           </Fragment>

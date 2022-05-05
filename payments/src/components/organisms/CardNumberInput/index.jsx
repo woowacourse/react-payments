@@ -26,6 +26,12 @@ const CardNumberInput = ({ cardNumberValue, onChangeCardNumber }) => {
     controllInput(target);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {
+      autoFocusBackward(e.target);
+    }
+  };
+
   return (
     <div className="card-number__input__container">
       <InputLabel>카드 번호</InputLabel>
@@ -36,11 +42,7 @@ const CardNumberInput = ({ cardNumberValue, onChangeCardNumber }) => {
               onChange={({ target }) => {
                 updateCardNumber(target, idx);
               }}
-              onKeyDown={(e) => {
-                if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {
-                  autoFocusBackward(e.target);
-                }
-              }}
+              onKeyDown={handleKeyDown}
               value={cardNumberValue[idx]}
               ref={(el) => (itemRef.current[idx] = el)}
               type={idx > 1 ? "password" : "text"}
