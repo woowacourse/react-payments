@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-const LinkButton = styled.div`
+const StyledLink = styled(Link)`
   cursor: pointer;
+  text-decoration: none;
   ${({ type }) =>
     type === "submit"
       ? css`
@@ -16,5 +18,13 @@ const LinkButton = styled.div`
           color: ${({ theme }) => theme.colors.header};
         `}
 `;
+
+const LinkButton = ({ children, path, onClick, type }) => {
+  return (
+    <StyledLink to={path || "/"} onClick={onClick} type={type}>
+      {children}
+    </StyledLink>
+  );
+};
 
 export default LinkButton;
