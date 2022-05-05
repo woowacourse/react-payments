@@ -1,12 +1,12 @@
 import React from 'react';
-import MoveButton from '../components/MoveButton';
+import Button from '../components/Button';
 
 export default {
-  title: 'CardAddition/MoveButton',
-  component: MoveButton,
+  title: 'CardAddition/Button',
+  component: Button,
 };
 
-const Template = (args) => <MoveButton {...args} />;
+const Template = (args) => <Button {...args} />;
 
 export const Disabled = Template.bind({});
 Disabled.args = {
@@ -16,7 +16,7 @@ Disabled.args = {
 
 export const Activated = Template.bind({});
 Activated.args = {
+  color: '#04C09E',
   disabled: false,
   children: '다음',
-  color: '#04C09E',
 };

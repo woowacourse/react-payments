@@ -1,5 +1,5 @@
 import React from 'react';
-import CardNumber from '../components/CardNumber';
+import CardNumber from '../system/CardNumber';
 
 export default {
   title: 'CardAddition/CardNumber',
@@ -9,6 +9,3 @@ export default {
 const Template = (args) => <CardNumber {...args} />;
 
 export const Example = Template.bind({});
-Example.args = {
-  color: '#04C09E',
-};

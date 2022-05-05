@@ -1,5 +1,5 @@
 import React from 'react';
-import CardCvc from '../components/CardCvc';
+import CardCvc from '../system/CardCvc';
 
 export default {
   title: 'CardAddition/CardCvc',
@@ -9,6 +9,3 @@ export default {
 const Template = (args) => <CardCvc {...args} />;
 
 export const Example = Template.bind({});
-Example.args = {
-  color: '#04C09E',
-};

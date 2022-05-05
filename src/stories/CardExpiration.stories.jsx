@@ -1,5 +1,5 @@
 import React from 'react';
-import CardExpiration from '../components/CardExpiration';
+import CardExpiration from '../system/CardExpiration';
 
 export default {
   title: 'CardAddition/CardExpiration',
@@ -9,6 +9,3 @@ export default {
 const Template = (args) => <CardExpiration {...args} />;
 
 export const Example = Template.bind({});
-Example.args = {
-  color: '#04C09E',
-};

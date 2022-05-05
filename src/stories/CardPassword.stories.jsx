@@ -1,5 +1,5 @@
 import React from 'react';
-import CardPassword from '../components/CardPassword';
+import CardPassword from '../system/CardPassword';
 
 export default {
   title: 'CardAddition/CardPassword',
@@ -9,6 +9,3 @@ export default {
 const Template = (args) => <CardPassword {...args} />;
 
 export const Example = Template.bind({});
-Example.args = {
-  color: '#04C09E',
-};

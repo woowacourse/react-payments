@@ -1,5 +1,5 @@
 import React from 'react';
-import CardOwner from '../components/CardOwner';
+import CardOwner from '../system/CardOwner';
 
 export default {
   title: 'CardAddition/CardOwner',
@@ -9,6 +9,3 @@ export default {
 const Template = (args) => <CardOwner {...args} />;
 
 export const Example = Template.bind({});
-Example.args = {
-  color: '#04C09E',
-};
