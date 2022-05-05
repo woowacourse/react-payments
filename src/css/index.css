@@ -86,3 +86,7 @@ a {
   right: 24px;
   bottom: 16px;
 }
+
+.card-item-wrapper {
+  position: relative;
+}
