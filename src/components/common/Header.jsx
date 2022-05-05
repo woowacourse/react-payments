@@ -15,15 +15,10 @@ const Title = styled.span`
   font-size: 1.5rem;
 `;
 
-function Header({ children: title }) {
+function Header({ children: title, leadingButton }) {
   return (
     <HeaderContainer>
-      <IoIosArrowBack
-        size={30}
-        color="#525252"
-        onClick={() => alert('아직 구현되지 않았습니다 :(')}
-        style={{ cursor: 'pointer' }}
-      />
+      {leadingButton && leadingButton}
       <Title>{title}</Title>
     </HeaderContainer>
   );
