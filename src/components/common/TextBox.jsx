@@ -1,10 +1,15 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledTextBox = styled.p`
-  font-size: ${(props) => props.fontSize || '3px'};
+  font-size: ${(props) => props.fontSize || '24px'};
   color: ${(props) => props.color || 'black'};
-  text-align: 'center';
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: center;
 `;
 
 const TextBox = ({ children, fontSize, color }) => {
