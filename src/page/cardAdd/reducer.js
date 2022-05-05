@@ -2,6 +2,12 @@ const reducer = (state, action) => {
   const { type, name, value } = action;
 
   switch (type) {
+    case ACTION_TYPES.ALIAS:
+      return {
+        ...state,
+        [ACTION_TYPES.ALIAS]: value,
+      };
+
     case ACTION_TYPES.THEME:
       return {
         ...state,
@@ -59,6 +65,7 @@ const reducer = (state, action) => {
 };
 
 const ACTION_TYPES = {
+  ALIAS: 'alias',
   THEME: 'theme',
   COMPANY: 'company',
   CARD_NUMBER: 'cardNumber',
