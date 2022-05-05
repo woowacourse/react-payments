@@ -27,13 +27,10 @@ export const InputBox = styled.div`
   align-items: center;
   margin-top: 0.375rem;
   color: #d3d3d3;
-`;
-
-export const InputContainer = styled.div`
-  display: flex;
   width: ${({ width }) => width || '100%'};
   background-color: #ecebf1;
   border-radius: 0.25rem;
+  justify-content: ${({ isSpaceBetween }) => (isSpaceBetween ? 'space-between' : 'unset')};
 `;
 
 export const InputTitle = styled.span`
@@ -137,10 +134,6 @@ export const CardCompanyName = styled.p`
   color: ${({ selected }) => (selected ? '#000000' : '#5e5e5e')};
   font-size: 12px;
   letter-spacing: -0.085rem;
-`;
-
-export const ExtendedInputContainer = styled(InputContainer)`
-  justify-content: space-between;
 `;
 
 export const Hyphen = styled.p`

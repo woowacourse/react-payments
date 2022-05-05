@@ -21,50 +21,48 @@ export default function CardNumber({ color }) {
   return (
     <S.Container>
       <S.InputTitle>카드 번호</S.InputTitle>
-      <S.InputBox>
-        <S.ExtendedInputContainer>
-          <AutoFocusInputBox maxValueLength={4}>
-            <S.InputBasic
-              width="20%"
-              type="text"
-              maxLength="4"
-              color={color}
-              value={cardNumber[0]}
-              onChange={onChangeInput(0)}
-              onFocus={onFocusInput}
-            />
-            <S.Hyphen color={color}>-</S.Hyphen>
-            <S.InputBasic
-              width="20%"
-              type="text"
-              maxLength="4"
-              color={color}
-              value={cardNumber[1]}
-              onChange={onChangeInput(1)}
-              onFocus={onFocusInput}
-            />
-            <S.Hyphen color={color}>-</S.Hyphen>
-            <S.InputBasic
-              width="20%"
-              type="password"
-              maxLength="4"
-              color={color}
-              value={cardNumber[2]}
-              onChange={onChangeInput(2)}
-              onFocus={onFocusInput}
-            />
-            <S.Hyphen color={color}>-</S.Hyphen>
-            <S.InputBasic
-              width="20%"
-              type="password"
-              maxLength="4"
-              color={color}
-              value={cardNumber[3]}
-              onChange={onChangeInput(3)}
-              onFocus={onFocusInput}
-            />
-          </AutoFocusInputBox>
-        </S.ExtendedInputContainer>
+      <S.InputBox isSpaceBetween="true">
+        <AutoFocusInputBox maxValueLength={4}>
+          <S.InputBasic
+            width="20%"
+            type="text"
+            maxLength="4"
+            color={color}
+            value={cardNumber[0]}
+            onChange={onChangeInput(0)}
+            onFocus={onFocusInput}
+          />
+          <S.Hyphen color={color}>-</S.Hyphen>
+          <S.InputBasic
+            width="20%"
+            type="text"
+            maxLength="4"
+            color={color}
+            value={cardNumber[1]}
+            onChange={onChangeInput(1)}
+            onFocus={onFocusInput}
+          />
+          <S.Hyphen color={color}>-</S.Hyphen>
+          <S.InputBasic
+            width="20%"
+            type="password"
+            maxLength="4"
+            color={color}
+            value={cardNumber[2]}
+            onChange={onChangeInput(2)}
+            onFocus={onFocusInput}
+          />
+          <S.Hyphen color={color}>-</S.Hyphen>
+          <S.InputBasic
+            width="20%"
+            type="password"
+            maxLength="4"
+            color={color}
+            value={cardNumber[3]}
+            onChange={onChangeInput(3)}
+            onFocus={onFocusInput}
+          />
+        </AutoFocusInputBox>
       </S.InputBox>
       <ErrorMessage
         value={cardNumber}
