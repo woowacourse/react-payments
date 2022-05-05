@@ -57,6 +57,7 @@ export const ERROR_MESSAGE = {
   "expire-date": `월은 ${MAX_MONTH}이하로 빈칸없이 입력해주세요`,
   "security-code": `${MAX_LENGTH.SECURITY_CODE}개의 숫자를 입력해주세요`,
   "card-password": `비밀번호 앞 2자리를 입력해주세요`,
+  "card-name": "1 ~ 15자 이하의 이름을 입력해주세요",
 };
 
 export const SUCCESS_MESSAGE = "성공적으로 입력됐습니다";
