@@ -12,16 +12,20 @@ const CardListPage = () => {
     getCardListAPI().then((response) => setCardList(response));
   }, []);
 
+  //삭제 페이지 만들기
+  // 리듀서로 관리하기
+
   return (
     <div>
       <Header title="보유 카드 목록" />
       <div className="card-list mt-10">
         {cardList.map((card) => (
-          <div key={card.id} className="flex-column-center">
-            <CardPreview cardInfo={card} isVisibleButton="hide" theme="red" />
-
-            <span className="text-center">{card.alias}</span>
-          </div>
+          <Link key={card.id} to={`/modify/${card.id}`}>
+            <div className="flex-column-center">
+              <CardPreview cardInfo={card} isVisibleButton="hide" theme="red" />
+              <span className="text-center">{card.alias}</span>
+            </div>
+          </Link>
         ))}
 
         {/* 카드 추가하는 페이지*/}

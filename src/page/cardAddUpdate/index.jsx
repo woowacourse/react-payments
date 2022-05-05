@@ -1,18 +1,18 @@
-import { useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import FormInput from 'components/common/FormInput';
 import CardPreview from 'components/CardPreview';
 import Modal from 'components/common/Modal';
 import Header from 'components/common/Header';
 import Button from 'components/common/Button';
 import Tooltip from 'components/common/Tooltip';
-import Circle from '../../components/common/Circle';
-import Message from '../../components/common/Message';
+import Circle from 'components/common/Circle';
+import Message from 'components/common/Message';
 import useModal from 'hooks/useModal';
 import useIsFilled from 'hooks/useIsFilled';
 import useToggle from 'hooks/useToggle';
 import { ReactComponent as PrevIcon } from 'assets/prev_icon.svg';
 
-import { validator } from './validator';
+import { validator } from 'page/cardAddUpdate/validator';
 import {
   CARD_NUMBER,
   COMPANY,
@@ -29,10 +29,10 @@ import {
   privacyCodeInputInfoList,
   cardPasswordInputInfoList,
   cardCompanyList,
-} from 'page/cardAdd/data';
-import { Link } from 'react-router-dom';
-import reducer from './reducer';
-import { registerCardAPI } from 'lib/api';
+} from 'page/cardAddUpdate/data';
+import { Link, useParams } from 'react-router-dom';
+import reducer from 'page/cardAddUpdate/reducer';
+import { getCardAPI, registerCardAPI, updateCard } from 'lib/api';
 
 const initialCardInfo = {
   alias: '',
@@ -58,7 +58,10 @@ const initialCardInfo = {
   },
 };
 
-const CardAppPage = () => {
+const CardAddUpdatePage = () => {
+  const { cardId } = useParams();
+  const page = cardId ? 'modify' : 'add';
+
   const [stage, setStage] = useState(1);
 
   const [cardInfo, dispatch] = useReducer(reducer, initialCardInfo);
@@ -80,6 +83,12 @@ const CardAppPage = () => {
     isPrivacyCodeFilled &&
     isPasswordFilled;
 
+  useEffect(() => {
+    if (page === 'modify') {
+      getCardAPI(cardId).then((response) => dispatch({ type: 'load', value: response }));
+    }
+  }, []);
+
   const handleChange = ({ target }, type) => {
     const { name, value } = target;
 
@@ -97,7 +106,7 @@ const CardAppPage = () => {
   };
 
   const handleAliasChange = ({ target }) => {
-    const value = target.value || '이름 없음';
+    const value = target.value;
 
     dispatch({ type: 'alias', value });
   };
@@ -106,7 +115,7 @@ const CardAppPage = () => {
     <div>
       {stage === 1 && (
         <>
-          <Header title="카드 정보 입력">
+          <Header title={page === 'add' ? '카드 정보 입력' : '카드 정보 수정'}>
             <Link to="/">
               <Button>
                 <PrevIcon />
@@ -210,13 +219,15 @@ const CardAppPage = () => {
       )}
       {stage === 2 && (
         <>
-          <Header title="카드 별칭 입력">
+          <Header title={page === 'add' ? '카드 별칭 입력' : '카드 별칭 수정'}>
             <Button handleClick={() => setStage(1)}>
               <PrevIcon />
             </Button>
           </Header>
           <div className="flex-center">
-            <h2 className="content-title mt-20 mb-10">카드등록이 완료되었습니다.</h2>
+            <h2 className="content-title mt-20 mb-10">
+              {page === 'add' ? '카드등록이 완료되었습니다.' : '카드수정이 완료되었습니다.'}
+            </h2>
           </div>
           <CardPreview
             cardInfo={cardInfo}
@@ -235,8 +246,14 @@ const CardAppPage = () => {
           </div>
           <div className="flex-right right-bottom-edge">
             <Link to="/">
-              <Button theme={theme} className="" handleClick={() => registerCardAPI(cardInfo)}>
-                확인
+              <Button
+                theme={theme}
+                className=""
+                handleClick={() => {
+                  page === 'add' ? registerCardAPI(cardInfo) : updateCard(cardId, cardInfo);
+                }}
+              >
+                {page === 'add' ? '확인' : '수정 완료'}
               </Button>
             </Link>
           </div>
@@ -246,4 +263,4 @@ const CardAppPage = () => {
   );
 };
 
-export default CardAppPage;
+export default CardAddUpdatePage;

@@ -1,9 +1,10 @@
-import CardAddPage from 'page/cardAdd';
+import CardAddUpdatePage from 'page/cardAddUpdate';
 import CardListPage from 'page/cardList';
 
 const routes = [
-  { path: '/add', element: <CardAddPage /> },
   { path: '/', element: <CardListPage /> },
+  { path: '/modify/:cardId', element: <CardAddUpdatePage /> },
+  { path: '/add', element: <CardAddUpdatePage /> },
 ];
 
 export default routes;

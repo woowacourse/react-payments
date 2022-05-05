@@ -6,7 +6,7 @@ import {
   isFullPrivacyCode,
   isFullCompany,
   isFullCardAlias,
-} from 'page/cardAdd/validator';
+} from 'page/cardAddUpdate/validator';
 import { COMPANY, CARD_NUMBER, EXPIRY_DATE, PRIVACY_CODE, PASSWORD, CARD_ALIAS } from 'constants';
 
 const isFilledValidator = {
