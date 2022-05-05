@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import Modal from "./modal.component";
-import CardTypeSelector from "../CardTypeSelector/CardTypeSelector";
+import CardTypeSelector from "../../CardTypeSelector/CardTypeSelector";
 export default {
   title: "Modal",
   component: Modal,

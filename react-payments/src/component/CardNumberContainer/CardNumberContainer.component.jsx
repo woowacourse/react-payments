@@ -24,6 +24,7 @@ const CardNumberContainer = () => {
           value={cardNumber["first"]}
           onChange={onChangeCardNumber}
           onKeyDown={onKeyDownCardNumber}
+          data-testid="card-number-0"
         />
         <ConnectorBox>-</ConnectorBox>
         <Input
@@ -32,6 +33,7 @@ const CardNumberContainer = () => {
           value={cardNumber["second"]}
           onChange={onChangeCardNumber}
           onKeyDown={onKeyDownCardNumber}
+          data-testid="card-number-1"
         />
         <ConnectorBox>-</ConnectorBox>
         <Input
@@ -40,6 +42,7 @@ const CardNumberContainer = () => {
           value={cardNumber["third"]}
           onChange={onChangeCardNumber}
           onKeyDown={onKeyDownCardNumber}
+          data-testid="card-number-2"
         />
         <ConnectorBox>-</ConnectorBox>
         <Input
@@ -48,6 +51,7 @@ const CardNumberContainer = () => {
           value={cardNumber["fourth"]}
           onChange={onChangeCardNumber}
           onKeyDown={onKeyDownCardNumber}
+          data-testid="card-number-3"
         />
       </InputBox>
 

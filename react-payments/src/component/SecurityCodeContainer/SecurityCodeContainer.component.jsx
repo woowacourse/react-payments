@@ -41,6 +41,7 @@ const SecurityCodeContainer = () => {
             onChange={onChangeSecurityCode}
             onFocus={openKeyboard}
             onKeyDown={onKeyDown}
+            data-testid="security-code"
           />
         </InputBox>
         <HelpBox />

@@ -1,5 +1,5 @@
 import Card from "./card.component";
-import { cardInfos, defaultCardInfo } from "../../constants/index";
+import { cardInfos, defaultCardInfo } from "../../../constants/index";
 
 const COMPLETE_CARD_INFO = {
   cardNumbers: ["1111", "2345", "3456", "4567"],

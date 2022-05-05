@@ -22,7 +22,10 @@ const ColorBoxText = styled.div`
 
 const ColorBox = ({ cardType, cardName, onClickCardType, currentCardType }) => {
   return (
-    <ColorBoxContainer onClick={() => onClickCardType({ cardType, cardName })}>
+    <ColorBoxContainer
+      data-testid="color-box"
+      onClick={() => onClickCardType({ cardType, cardName })}
+    >
       <Dot size="huge" cardType={cardType} />
       <ColorBoxText currentCardType={currentCardType} cardType={cardType}>
         {cardName}

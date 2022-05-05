@@ -41,6 +41,7 @@ const CardPasswordContainer = () => {
             onChange={onChangeCardPassword}
             onKeyDown={onKeyDown}
             onFocus={openKeyboard}
+            data-testid="card-password"
           />
         </InputBox>
 
@@ -51,6 +52,7 @@ const CardPasswordContainer = () => {
             onChange={onChangeCardPassword}
             onKeyDown={onKeyDown}
             onFocus={openKeyboard}
+            data-testid="card-password"
           />
         </InputBox>
 

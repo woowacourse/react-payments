@@ -1,4 +1,4 @@
-import UserNameContainer from "./UserNameInput.component";
+import UserNameContainer from "./UserNameContainer.component";
 
 export default {
   title: "UserNameContainer",

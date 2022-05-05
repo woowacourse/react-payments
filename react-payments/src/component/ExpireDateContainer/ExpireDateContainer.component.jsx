@@ -24,6 +24,7 @@ const ExpireDateContainer = () => {
           value={expireDate.month}
           onChange={onChangeExpireDate}
           onKeyDown={onKeyDownExpireDate}
+          data-testid="expire-date-0"
         />
         <ConnectorBox>/</ConnectorBox>
         <Input
@@ -33,6 +34,7 @@ const ExpireDateContainer = () => {
           value={expireDate.year}
           onChange={onChangeExpireDate}
           onKeyDown={onKeyDownExpireDate}
+          data-testid="expire-date-1"
         />
       </InputBox>
 
