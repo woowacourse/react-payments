@@ -1,12 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Span } from './styled';
 
 const CardBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-between;
   width: 208px;
   height: 130px;
   padding: 16px;
@@ -19,6 +19,13 @@ const CardBox = styled.div`
   &:hover {
     background-color: ${props => `${props.hexColor}cc`};
   }
+
+  ${props =>
+    props.large &&
+    css`
+      width: 290px;
+      height: 180px;
+    `}
 `;
 const CardHeader = styled.div``;
 const CardChip = styled.div`
@@ -28,10 +35,12 @@ const CardChip = styled.div`
   border-radius: 10%;
   background-color: #cbba64;
 `;
-const CardBottom = styled.div``;
+const CardBottom = styled.div`
+  width: 100%;
+`;
 const CardNumber = styled.div``;
 const CardInfo = styled.div`
-  width: 200px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `;
@@ -43,6 +52,7 @@ const CardParagraph = styled.p`
 `;
 
 function Card({
+  large,
   handleClickBox,
   cardCompany: { hexColor, name },
   cardNumber,
@@ -50,7 +60,7 @@ function Card({
   cardDate: { month, year },
 }) {
   return (
-    <CardBox onClick={handleClickBox} hexColor={hexColor}>
+    <CardBox onClick={handleClickBox} hexColor={hexColor} large={large}>
       <CardHeader>
         <Span>{name}</Span>
       </CardHeader>
