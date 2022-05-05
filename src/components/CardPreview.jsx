@@ -11,6 +11,7 @@ const CardPreview = ({
 }) => {
   const { cardNumber, ownerName, expiryDate, company, theme, privacyCode } = cardInfo;
   const { first, second, third, fourth } = cardNumber;
+
   const upperCaseOwnerName = ownerName.toUpperCase() || DEFAULT_CARD_INFO.OWNER_NAME;
   const month = expiryDate.month || DEFAULT_CARD_INFO.EXPIRY_MONTH;
   const year = expiryDate.year || DEFAULT_CARD_INFO.EXPIRY_YEAR;
@@ -57,7 +58,10 @@ const CardPreview = ({
         )}
         {!company && <Button className="card-add-button">+</Button>}
       </div>
-      <Button className={'change-button ' + `${isVisibleButton}`} handleClick={handleCardPosition}>
+      <Button
+        className={'card-change-button ' + `${isVisibleButton}`}
+        handleClick={handleCardPosition}
+      >
         {isCardFront ? 'Back' : 'Front'}
       </Button>
     </div>

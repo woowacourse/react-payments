@@ -1,7 +1,6 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import NOT_FOUND from 'assets/not_found.png';
 import HOME_BUTTON from 'assets/home_button.png';
-import { Link } from 'react-router-dom';
 
 const NotFoundPage = () => {
   return (

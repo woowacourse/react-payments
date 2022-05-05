@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from 'react';
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import FormInput from 'components/common/FormInput';
 import Modal from 'components/common/Modal';
@@ -10,7 +10,6 @@ import Circle from 'components/common/Circle';
 import Message from 'components/common/Message';
 import CardPreview from 'components/CardPreview';
 
-import useModal from 'hooks/useModal';
 import useIsFilled from 'hooks/useIsFilled';
 import useToggle from 'hooks/useToggle';
 import { ReactComponent as PrevIcon } from 'assets/prev_icon.svg';
@@ -38,7 +37,6 @@ import {
   PASSWORD,
   PRIVACY_CODE,
 } from 'constants';
-import NotFoundPage from 'page/noutFound';
 
 const initialCardInfo = {
   alias: '',
@@ -69,14 +67,14 @@ const CardAddUpdatePage = () => {
   const { cardId } = useParams();
   const path = cardId ? PATH.MODIFY : PATH.ADD;
 
-  // 카드 추가 단계 - step: number
+  // 카드 추가 단계(step) - STEP1 || STEP2
   const [step, setStep] = useState(STEP1);
 
   const [cardInfo, dispatch] = useReducer(reducer, initialCardInfo);
   const { alias, cardNumber, ownerName, expiryDate, company, theme, password, privacyCode } =
     cardInfo;
 
-  const [modalVisible, handleModal] = useModal(false);
+  const [modalVisible, handleModal] = useToggle(false);
   const [isCardFront, handleCardPosition] = useToggle(true);
 
   const [isCompanyFilled] = useIsFilled(COMPANY, company, false);
@@ -91,17 +89,7 @@ const CardAddUpdatePage = () => {
     isPrivacyCodeFilled &&
     isPasswordFilled;
 
-  useEffect(() => {
-    if (path === PATH.MODIFY) {
-      CARD_API.getCard(cardId)
-        .then((response) => dispatch({ type: 'load', value: response }))
-        .catch((e) => {
-          navigate('/notFound');
-        });
-    }
-  }, []);
-
-  const handleChange = ({ target: { name, value } }, type) => {
+  const handleInputChange = ({ target: { name, value } }, type) => {
     if (!validator[type](value, name)) return;
     dispatch({ type, name, value });
   };
@@ -112,15 +100,21 @@ const CardAddUpdatePage = () => {
     handleModal();
   };
 
-  const handleAliasChange = ({ target: { value } }) => {
-    dispatch({ type: 'alias', value });
-  };
+  useEffect(() => {
+    if (path === PATH.MODIFY) {
+      CARD_API.getCard(cardId)
+        .then((response) => dispatch({ type: 'load', value: response }))
+        .catch((e) => {
+          navigate('/notFound');
+        });
+    }
+  }, []);
 
   return (
     <div>
       {step === STEP1 && (
         <>
-          <Header title={path === PATH.ADD ? '카드 정보 입력' : '카드 정보 수정'}>
+          <Header title={path === PATH.ADD ? '카드 정보 입력 ✏️' : '카드 정보 수정 ✂️'}>
             <Link to="/">
               <Button>
                 <PrevIcon />
@@ -140,7 +134,7 @@ const CardAddUpdatePage = () => {
             inputTitle="카드 번호"
             inputInfoList={cardNumberInputInfoList}
             inputValue={cardNumber}
-            handleChange={handleChange}
+            handleChange={handleInputChange}
             theme={theme}
             maxLength={INPUT_MAX_LENGTH.CARD_NUMBER}
           />
@@ -152,7 +146,7 @@ const CardAddUpdatePage = () => {
             inputTitle="만료일"
             inputInfoList={expiryDateInputInfoList}
             inputValue={expiryDate}
-            handleChange={handleChange}
+            handleChange={handleInputChange}
             theme={theme}
             maxLength={INPUT_MAX_LENGTH.EXPIRY_DATE}
           />
@@ -163,7 +157,7 @@ const CardAddUpdatePage = () => {
             inputTitle="카드 소유자 이름(선택)"
             inputInfoList={cardOwnerNameInputInfoList}
             inputValue={ownerName}
-            handleChange={handleChange}
+            handleChange={handleInputChange}
             theme={theme}
             maxLength={INPUT_MAX_LENGTH.OWNER_NAME}
           >
@@ -176,7 +170,7 @@ const CardAddUpdatePage = () => {
             type="privacyCode"
             inputTitle="보안코드(CVC/CVV)"
             inputInfoList={privacyCodeInputInfoList}
-            handleChange={handleChange}
+            handleChange={handleInputChange}
             inputValue={privacyCode}
             theme={theme}
             maxLength={INPUT_MAX_LENGTH.PRIVACY_CODE}
@@ -190,7 +184,7 @@ const CardAddUpdatePage = () => {
             inputTitle="카드 비밀번호"
             inputInfoList={cardPasswordInputInfoList}
             inputValue={password}
-            handleChange={handleChange}
+            handleChange={handleInputChange}
             theme={theme}
             maxLength={INPUT_MAX_LENGTH.PASSWORD}
           />
@@ -226,8 +220,8 @@ const CardAddUpdatePage = () => {
       )}
       {step === STEP2 && (
         <>
-          <Header title={path === PATH.ADD ? '카드 별칭 입력' : '카드 별칭 수정'}>
-            <Button handleClick={() => setStep(1)}>
+          <Header title={path === PATH.ADD ? '카드 별칭 입력 ✏️' : '카드 별칭 수정 ✂️'}>
+            <Button handleClick={() => setStep(STEP1)}>
               <PrevIcon />
             </Button>
           </Header>
@@ -245,7 +239,7 @@ const CardAddUpdatePage = () => {
             <input
               className="input-underline w-75"
               type="text"
-              onChange={handleAliasChange}
+              onChange={(e) => handleInputChange(e, 'alias')}
               placeholder="카드의 별칭을 입력해주세요."
               value={alias}
               autoFocus

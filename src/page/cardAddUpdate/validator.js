@@ -45,6 +45,9 @@ export const validator = {
   password(value) {
     return isNumber(Number(value));
   },
+  alias() {
+    return true;
+  },
 };
 
 // 카드 폼의 각 정보들이 모두 입력되었는지 검사

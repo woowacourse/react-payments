@@ -1,6 +1,19 @@
 const API_BASE_URL = 'http://localhost:8000';
 
 const CARD_API = {
+  // create
+  async addCard(cardInfo) {
+    try {
+      await fetch(`${API_BASE_URL}/cardList`, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(cardInfo),
+      });
+    } catch (e) {
+      throw Error('카드 등록 과정에서 오류가 발생했습니다.');
+    }
+  },
+  // read
   async getCard(cardId) {
     try {
       const response = await fetch(`${API_BASE_URL}/cardList/${cardId}`, {
@@ -29,17 +42,7 @@ const CARD_API = {
       throw Error('카드 목록 불러오기 과정에서 오류가 발생했습니다.');
     }
   },
-  async addCard(cardInfo) {
-    try {
-      await fetch(`${API_BASE_URL}/cardList`, {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(cardInfo),
-      });
-    } catch (e) {
-      throw Error('카드 등록 과정에서 오류가 발생했습니다.');
-    }
-  },
+  // update
   async updateCard(id, cardInfo) {
     try {
       await fetch(`${API_BASE_URL}/cardList/${id}`, {
@@ -51,6 +54,7 @@ const CARD_API = {
       throw Error('카드 수정 과정에서 오류가 발생했습니다.');
     }
   },
+  // delete
   async deleteCard(id) {
     try {
       await fetch(`${API_BASE_URL}/cardList/${id}`, {

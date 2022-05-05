@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-
 import useInputAutoFocus from 'hooks/useInputAutoFocus';
 import { isObject } from 'utils';
 

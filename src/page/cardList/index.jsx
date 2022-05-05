@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import CardPreview from 'components/CardPreview';
@@ -7,6 +7,7 @@ import Header from 'components/common/Header';
 import { ReactComponent as DeleteIcon } from 'assets/delete_icon.svg';
 
 import CARD_API from 'api';
+import { CONFIRM_MESSAGE } from 'constants';
 
 const CardListPage = () => {
   const [cardList, setCardList] = useState([]);
@@ -14,9 +15,9 @@ const CardListPage = () => {
   const handleDeleteCard = async (e, cardId) => {
     e.preventDefault();
 
-    if (window.confirm('정말 삭제하시겠습니까?')) {
+    if (window.confirm(CONFIRM_MESSAGE)) {
       await CARD_API.deleteCard(cardId);
-      CARD_API.getCardList().then((response) => setCardList(response));
+      await CARD_API.getCardList().then((response) => setCardList(response));
     }
   };
 
@@ -26,7 +27,7 @@ const CardListPage = () => {
 
   return (
     <div>
-      <Header title="보유 카드 목록" />
+      <Header title="보유 카드 목록 💳" />
       <div className="card-list mt-10">
         {cardList.map((card) => (
           <Link key={card.id} to={`/modify/${card.id}`}>
@@ -43,8 +44,7 @@ const CardListPage = () => {
             </div>
           </Link>
         ))}
-
-        {/* 카드 추가하는 페이지*/}
+        {/* 카드 추가하는 템플릿*/}
         <div className="card-item">
           <div className="card-box">
             <Link to="/add" className="empty-card">
