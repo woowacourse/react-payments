@@ -4,6 +4,7 @@ const reducer = (state, action) => {
   switch (type) {
     case ACTION_TYPES.LOAD:
       return value;
+
     case ACTION_TYPES.ALIAS:
       return {
         ...state,
@@ -67,6 +68,7 @@ const reducer = (state, action) => {
 };
 
 const ACTION_TYPES = {
+  LOAD: 'load',
   ALIAS: 'alias',
   THEME: 'theme',
   COMPANY: 'company',
@@ -75,7 +77,6 @@ const ACTION_TYPES = {
   OWNER_NAME: 'ownerName',
   PRIVACY_CODE: 'privacyCode',
   PASSWORD: 'password',
-  LOAD: 'load',
 };
 
 export default reducer;

@@ -1,10 +1,14 @@
-export const TOOLTIP_TYPES = {
-  PRIVACY_CODE: `보안 코드는 온라인으로 카드를 사용할 경우 신용카드 보안을 위한 추가 수단을 제공합니다.`,
+export const PATH = {
+  MODIFY: 'modify',
+  ADD: 'add',
 };
 
 export const CRYPTO_STRING = '•';
+
 export const PASS = 'pass';
 export const FAIL = 'fail';
+export const STEP1 = 'step1';
+export const STEP2 = 'step2';
 
 export const COMPANY = 'company';
 export const CARD_NUMBER = 'cardNumber';
@@ -56,6 +60,10 @@ export const DATE_RANGE = {
 };
 
 export const CARD_BACK_MESSAGE = '이 카드를 도난 분실하면 일주일 이내로 연락 주시기 바랍니다.';
+
+export const TOOLTIP_TYPES = {
+  PRIVACY_CODE: `보안 코드는 온라인으로 카드를 사용할 경우 신용카드 보안을 위한 추가 수단을 제공합니다.`,
+};
 
 export const GUIDE_MESSAGE = {
   company: { [PASS]: '카드사가 입력되었습니다.', [FAIL]: '카드사를 입력해주세요.' },

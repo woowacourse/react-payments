@@ -1,28 +1,30 @@
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import CardPreview from 'components/CardPreview';
 import Button from 'components/common/Button';
 import Header from 'components/common/Header';
-import { deleteCardAPI, getCardListAPI } from 'lib/api';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { ReactComponent as DeleteIcon } from 'assets/delete_icon.svg';
+
+import CARD_API from 'api';
 
 const CardListPage = () => {
   const [cardList, setCardList] = useState([]);
 
-  const handleDeleteCard = (e, cardId) => {
+  const handleDeleteCard = async (e, cardId) => {
     e.preventDefault();
 
     if (window.confirm('정말 삭제하시겠습니까?')) {
-      deleteCardAPI(cardId);
-      getCardListAPI().then((response) => setCardList(response));
+      await CARD_API.deleteCard(cardId);
+      CARD_API.getCardList().then((response) => setCardList(response));
     }
   };
 
   useEffect(() => {
-    getCardListAPI().then((response) => setCardList(response));
+    CARD_API.getCardList().then((response) => setCardList(response));
   }, []);
 
-  // 리듀서로 관리하기
+  // 전반적인 리팩토링
 
   return (
     <div>

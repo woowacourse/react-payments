@@ -1,27 +1,23 @@
 import { useEffect, useReducer, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
 import FormInput from 'components/common/FormInput';
-import CardPreview from 'components/CardPreview';
 import Modal from 'components/common/Modal';
 import Header from 'components/common/Header';
 import Button from 'components/common/Button';
 import Tooltip from 'components/common/Tooltip';
 import Circle from 'components/common/Circle';
 import Message from 'components/common/Message';
+import CardPreview from 'components/CardPreview';
+
 import useModal from 'hooks/useModal';
 import useIsFilled from 'hooks/useIsFilled';
 import useToggle from 'hooks/useToggle';
 import { ReactComponent as PrevIcon } from 'assets/prev_icon.svg';
 
+import reducer from 'page/cardAddUpdate/reducer';
+import CARD_API from 'api';
 import { validator } from 'page/cardAddUpdate/validator';
-import {
-  CARD_NUMBER,
-  COMPANY,
-  CRYPTO_STRING,
-  EXPIRY_DATE,
-  INPUT_MAX_LENGTH,
-  PASSWORD,
-  PRIVACY_CODE,
-} from 'constants';
 import {
   cardNumberInputInfoList,
   expiryDateInputInfoList,
@@ -30,9 +26,18 @@ import {
   cardPasswordInputInfoList,
   cardCompanyList,
 } from 'page/cardAddUpdate/data';
-import { Link, useParams } from 'react-router-dom';
-import reducer from 'page/cardAddUpdate/reducer';
-import { getCardAPI, registerCardAPI, updateCardAPI } from 'lib/api';
+import {
+  PATH,
+  STEP1,
+  STEP2,
+  CARD_NUMBER,
+  COMPANY,
+  CRYPTO_STRING,
+  EXPIRY_DATE,
+  INPUT_MAX_LENGTH,
+  PASSWORD,
+  PRIVACY_CODE,
+} from 'constants';
 
 const initialCardInfo = {
   alias: '',
@@ -60,22 +65,23 @@ const initialCardInfo = {
 
 const CardAddUpdatePage = () => {
   const { cardId } = useParams();
-  const path = cardId ? 'modify' : 'add';
+  const path = cardId ? PATH.MODIFY : PATH.ADD;
 
-  const [stage, setStage] = useState(1);
+  // 카드 추가 단계 - step: number
+  const [step, setStep] = useState(STEP1);
 
   const [cardInfo, dispatch] = useReducer(reducer, initialCardInfo);
   const { alias, cardNumber, ownerName, expiryDate, company, theme, password, privacyCode } =
     cardInfo;
+
+  const [modalVisible, handleModal] = useModal(false);
+  const [isCardFront, handleCardPosition] = useToggle(true);
 
   const [isCompanyFilled] = useIsFilled(COMPANY, company, false);
   const [isCardNumberFilled] = useIsFilled(CARD_NUMBER, cardNumber, false);
   const [isExpiryDateFilled] = useIsFilled(EXPIRY_DATE, expiryDate, false);
   const [isPrivacyCodeFilled] = useIsFilled(PRIVACY_CODE, privacyCode, false);
   const [isPasswordFilled] = useIsFilled(PASSWORD, password, false);
-  const [modalVisible, handleModal] = useModal(false);
-  const [isCardFront, handleCardPosition] = useToggle(true);
-
   const isFullFilled =
     isCompanyFilled &&
     isCardNumberFilled &&
@@ -84,18 +90,13 @@ const CardAddUpdatePage = () => {
     isPasswordFilled;
 
   useEffect(() => {
-    if (path === 'modify') {
-      getCardAPI(cardId).then((response) => dispatch({ type: 'load', value: response }));
+    if (path === PATH.MODIFY) {
+      CARD_API.getCard(cardId).then((response) => dispatch({ type: 'load', value: response }));
     }
   }, []);
 
-  const handleChange = ({ target }, type) => {
-    const { name, value } = target;
-
-    if (!validator[type](value, name)) {
-      return;
-    }
-
+  const handleChange = ({ target: { name, value } }, type) => {
+    if (!validator[type](value, name)) return;
     dispatch({ type, name, value });
   };
 
@@ -105,17 +106,15 @@ const CardAddUpdatePage = () => {
     handleModal();
   };
 
-  const handleAliasChange = ({ target }) => {
-    const value = target.value;
-
+  const handleAliasChange = ({ target: { value } }) => {
     dispatch({ type: 'alias', value });
   };
 
   return (
     <div>
-      {stage === 1 && (
+      {step === STEP1 && (
         <>
-          <Header title={path === 'add' ? '카드 정보 입력' : '카드 정보 수정'}>
+          <Header title={path === PATH.ADD ? '카드 정보 입력' : '카드 정보 수정'}>
             <Link to="/">
               <Button>
                 <PrevIcon />
@@ -190,14 +189,16 @@ const CardAddUpdatePage = () => {
             maxLength={INPUT_MAX_LENGTH.PASSWORD}
           />
           <Message name="password" isFilled={isPasswordFilled} />
-          {/* next button */}
+
+          {/* go step2 button */}
           {isFullFilled && (
             <div className="flex-right right-bottom-edge">
-              <Button theme={theme} handleClick={() => setStage(2)}>
+              <Button theme={theme} handleClick={() => setStep(STEP2)}>
                 다음
               </Button>
             </div>
           )}
+
           {/* modal */}
           {modalVisible && (
             <Modal handleModal={handleModal}>
@@ -217,16 +218,16 @@ const CardAddUpdatePage = () => {
           )}
         </>
       )}
-      {stage === 2 && (
+      {step === STEP2 && (
         <>
-          <Header title={path === 'add' ? '카드 별칭 입력' : '카드 별칭 수정'}>
-            <Button handleClick={() => setStage(1)}>
+          <Header title={path === PATH.ADD ? '카드 별칭 입력' : '카드 별칭 수정'}>
+            <Button handleClick={() => setStep(1)}>
               <PrevIcon />
             </Button>
           </Header>
           <div className="flex-center">
             <h2 className="content-title mt-20 mb-10">
-              {path === 'add' ? '카드등록이 완료되었습니다.' : '카드수정이 완료되었습니다.'}
+              {path === PATH.ADD ? '카드등록이 완료되었습니다.' : '카드수정이 완료되었습니다.'}
             </h2>
           </div>
           <CardPreview
@@ -250,10 +251,12 @@ const CardAddUpdatePage = () => {
                 theme={theme}
                 className=""
                 handleClick={() => {
-                  path === 'add' ? registerCardAPI(cardInfo) : updateCardAPI(cardId, cardInfo);
+                  path === PATH.ADD
+                    ? CARD_API.addCard(cardInfo)
+                    : CARD_API.updateCard(cardId, cardInfo);
                 }}
               >
-                {path === 'add' ? '확인' : '수정 완료'}
+                {path === PATH.ADD ? '확인' : '수정 완료'}
               </Button>
             </Link>
           </div>
