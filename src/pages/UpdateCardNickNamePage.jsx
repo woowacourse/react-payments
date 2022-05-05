@@ -1,12 +1,12 @@
 /* eslint-disable no-restricted-globals */
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CardInfoListContext } from './../context';
+import { CardInfoListContext } from '../context';
 import { Header, Title } from '../components/common/styled';
 import GoBackButton from '../components/GoBackButton';
 import CardItem from '../components/CardItem';
-import Button from './../components/common/Button';
+import Button from '../components/common/Button';
 
 const Main = styled.main`
   display: flex;
@@ -46,7 +46,8 @@ const CardNickNameInput = styled.input`
   }
 `;
 
-export default function AddCardResultPage() {
+export default function UpdateCardNickNamePage() {
+  const { id: cardIndex } = useParams();
   const { state: locationState } = useLocation();
   const navigate = useNavigate();
 
@@ -63,7 +64,7 @@ export default function AddCardResultPage() {
         <CardInfoListContext.Consumer>
           {({ cardInfoList, updateNickNameByIndex }) => (
             <>
-              <CardItem size={'large'} isComplete={true} {...cardInfoList[locationState.cardIndex]} />
+              <CardItem size={'large'} isComplete={true} {...cardInfoList[cardIndex]} />
               <CardNickNameForm
                 onSubmit={e => {
                   e.preventDefault();
@@ -75,7 +76,7 @@ export default function AddCardResultPage() {
                     return;
                   }
                   if (confirm(`[${nickNameInputValue}](으)로 카드를 등록하시겠습니까?`)) {
-                    updateNickNameByIndex(locationState.cardIndex, nickNameInputValue);
+                    updateNickNameByIndex(cardIndex, nickNameInputValue);
                     navigate('../react-payments/', {
                       replace: true,
                     });

@@ -98,7 +98,7 @@ export default function AddCardPage() {
                   expireDate,
                   holderName,
                 });
-                navigate('../react-payments/addCardResult', {
+                navigate(`../react-payments/updateCardNickName/${cardIndex}`, {
                   replace: true,
                   state: {
                     fromAddCardForm: true,

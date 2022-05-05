@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { CardInfoListContext } from './context';
 import CardListPage from './pages/CardListPage';
 import AddCardPage from './pages/AddCardPage';
-import AddCardResultPage from './pages/AddCardResultPage';
+import UpdateCardNickNamePage from './pages/UpdateCardNickNamePage';
 
 const dummyCardInfoList = [
   {
@@ -44,7 +44,7 @@ function App() {
         <Routes>
           <Route path="/react-payments/" element={<CardListPage />} />
           <Route path="/react-payments/addCard" element={<AddCardPage />} />
-          <Route path="/react-payments/addCardResult" element={<AddCardResultPage />} />
+          <Route path="/react-payments/updateCardNickName/:id" element={<UpdateCardNickNamePage />} />
         </Routes>
       </CardInfoListContext.Provider>
     </div>

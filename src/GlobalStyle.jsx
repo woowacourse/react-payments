@@ -13,6 +13,15 @@ body {
   background-color: #e5e5e5;
 }
 
+a {
+  &:link { color: inherit; text-decoration: none;}
+  &:visited { color: inherit; text-decoration: none;}
+  &:hover { color: inherit; text-decoration: none;}
+}
+
+
+
+
 .App {
   width: 375px;
   height: 700px;

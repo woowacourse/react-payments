@@ -69,10 +69,12 @@ function CardList() {
       <CardInfoListContext.Consumer>
         {value =>
           value.cardInfoList.map((cardInfo, index) => (
-            <CardListItem key={index}>
-              <CardItem size={'small'} isComplete={true} {...cardInfo} />
-              <CardNickName>{cardInfo.nickName || `나의 카드 ${index + 1}`}</CardNickName>
-            </CardListItem>
+            <Link to={`/react-payments/updateCardNickName/${index}`}>
+              <CardListItem key={index}>
+                <CardItem size={'small'} isComplete={true} {...cardInfo} />
+                <CardNickName>{cardInfo.nickName || `나의 카드 ${index + 1}`}</CardNickName>
+              </CardListItem>
+            </Link>
           ))
         }
       </CardInfoListContext.Consumer>
