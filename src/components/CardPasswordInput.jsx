@@ -55,12 +55,6 @@ const StyledInputContainer = styled.div`
 
 export default function CardPasswordInput() {
   const [isInvalid, setInvalid] = useState(false);
-  // const setInputLengthArray = useArraySetState(setPasswordLength);
-
-  // const handleInputChange = (e, order) => {
-  //   setInvalid(false);
-  //   setInputLengthArray(e.target.value.length, order);
-  // };
 
   const { state, setState } = useContext(CardInfoContext);
 
