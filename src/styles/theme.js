@@ -28,6 +28,7 @@ const COLORS = {
   silver: '#BBB',
   alto: '#DDD',
   athensGray: '#ECEBF1',
+  concrete: '#F3F3F3',
   white: '#fff',
 };
 
@@ -49,7 +50,7 @@ const BRAND_COLORS = {
   warning: COLORS.gamboge,
   danger: COLORS.sunsetOrange,
   success: COLORS.chelseaCucumber,
-  Info: COLORS.dodgerSky,
+  info: COLORS.dodgerSky,
 };
 
 export { LAYOUT, COLORS, GRADATION, BRAND_COLORS };

@@ -89,7 +89,7 @@ function CardAdd() {
       <CardPasswordField cardPassword={cardPassword} onChange={onChangeCardState} />
 
       <div className="button-container right">
-        <Button isDisabled={!isComplete} onClick={onClickConfirmButton}>
+        <Button type="primary" isDisabled={!isComplete} onClick={onClickConfirmButton}>
           다음
         </Button>
       </div>
