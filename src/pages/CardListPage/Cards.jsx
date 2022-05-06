@@ -2,6 +2,8 @@ import { memo } from 'react';
 import styled from 'styled-components';
 
 import { DisplayCard } from '../../components/Card';
+
+import encryptCardNumber from '../../utils';
 import { splitCardNumbers } from '../../utils/regExp';
 
 const Card = styled(DisplayCard)`
@@ -32,7 +34,7 @@ function Cards({ cards }) {
             size="medium"
             cardName={cardName}
             ownerName={cardOwnerName}
-            number={splitCardNumbers(cardNumber, ' ')}
+            number={splitCardNumbers(encryptCardNumber(cardNumber), ' ') ?? ''}
             validDate={validDate}
             key={cardNumber}
           />

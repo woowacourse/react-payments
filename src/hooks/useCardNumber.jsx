@@ -1,10 +1,7 @@
 import { useState, useCallback } from 'react';
 
-import { splitCardNumbers } from '../utils/regExp';
-
 export default function useCardNumber(initialValue) {
   const [cardNumber, setCardNumber] = useState(initialValue);
-  const [encryptedCardNumber, setEncryptedCardNumber] = useState(initialValue);
 
   const handler = useCallback(
     ({ target: { selectionStart }, nativeEvent: { data: key } }) => {
@@ -29,20 +26,11 @@ export default function useCardNumber(initialValue) {
             prevState.slice(removeIdx + 1, prevState.length);
         }
 
-        const processedNumbers =
-          state.length > 8
-            ? state.slice(0, 8) + '•'.repeat(state.length - 8)
-            : state;
-
-        setEncryptedCardNumber(
-          splitCardNumbers(processedNumbers, '-') ?? initialValue
-        );
-
         return state;
       });
     },
     []
   );
 
-  return { cardNumber, handler, encryptedCardNumber };
+  return [cardNumber, handler];
 }

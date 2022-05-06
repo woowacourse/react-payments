@@ -5,7 +5,9 @@ import styled from 'styled-components';
 import useInput from '../../hooks/useInput';
 
 import { Button, Card, UnderlinedInput } from '../../components';
+
 import { CardContext } from '../../contexts';
+import encryptCardNumber from '../../utils';
 import { splitCardNumbers } from '../../utils/regExp';
 
 const Message = styled.div`
@@ -17,7 +19,9 @@ const CheckButton = styled(Button)`
   margin: auto 0 0 auto;
 `;
 
-function Success({ card }) {
+function Success({
+  card: { cardNumber, validDate, cardOwnerName, cardColor, cardCompany },
+}) {
   const [cardName, setCardName] = useInput('');
 
   const navigate = useNavigate();
@@ -36,12 +40,12 @@ function Success({ card }) {
     <>
       <Message>카드등록이 완료되었습니다.</Message>
       <Card
-        bgColor={card.cardColor}
-        company={card.cardCompany}
+        bgColor={cardColor}
+        company={cardCompany}
         size="large"
-        name={card.cardOwnerName}
-        number={splitCardNumbers(card.cardNumber, ' ')}
-        validDate={card.validDate}
+        name={cardOwnerName}
+        number={splitCardNumbers(encryptCardNumber(cardNumber), ' ') ?? ''}
+        validDate={validDate}
       />
       <UnderlinedInput
         margin={{ t: '33px' }}
@@ -52,10 +56,11 @@ function Success({ card }) {
       />
       <CheckButton
         color="#04C09E"
-        content="확인"
         fontWeight="bold"
         onClickFunc={onClickCheckButton}
-      />
+      >
+        확인
+      </CheckButton>
     </>
   );
 }

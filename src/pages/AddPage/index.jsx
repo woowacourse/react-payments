@@ -26,19 +26,17 @@ import {
 import { ReactComponent as Arrow } from '../../assets/arrow.svg';
 
 import { CardContext, CardInfoContext } from '../../contexts';
-import isValidCardInputs from '../../utils/validator';
 import { CARD_COMPANY } from '../../constants';
+import encryptCardNumber from '../../utils';
+import { splitCardNumbers } from '../../utils/regExp';
+import isValidCardInputs from '../../utils/validator';
 
 function AddPage() {
   const [cardCompany, setCardCompany] = useState({
     name: '',
     color: '#D2D2D2',
   });
-  const {
-    cardNumber,
-    handler: setCardNumber,
-    encryptedCardNumber,
-  } = useCardNumber('');
+  const [cardNumber, setCardNumber] = useCardNumber('');
   const [cardOwnerName, setCardOwnerName] = useCardOwnerName('');
   const [validDate, setValidDate] = useValidDate('');
   const [CVC, setCVC] = useCVC('');
@@ -54,7 +52,7 @@ function AddPage() {
 
   const forwardValue = useMemo(
     () => ({
-      cardNumber: encryptedCardNumber,
+      cardNumber,
       setCardNumber,
       validDate,
       setValidDate,
@@ -145,7 +143,7 @@ function AddPage() {
           company={cardCompany.name}
           size="medium"
           name={cardOwnerName}
-          number={encryptedCardNumber.split('-').join(' ')}
+          number={splitCardNumbers(encryptCardNumber(cardNumber), ' ') ?? ''}
           validDate={validDate}
           onClickFunc={toggleCardTitleModal}
         />
@@ -153,10 +151,11 @@ function AddPage() {
         {isPossible && (
           <NextButton
             color="#04C09E"
-            content="다음"
             fontWeight="bold"
             onClickFunc={onClickNextButton}
-          />
+          >
+            다음
+          </NextButton>
         )}
         {isCardCompanyModalOpen && (
           <Dimmer onClick={toggleCardTitleModal}>

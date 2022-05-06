@@ -2,8 +2,10 @@ import { memo } from 'react';
 
 import { Input } from '..';
 
-import { CARD_RULE } from '../../constants';
 import { CardInfoContext } from '../../contexts';
+import { CARD_RULE } from '../../constants';
+import encryptCardNumber from '../../utils';
+import { splitCardNumbers } from '../../utils/regExp';
 
 function CardNumberInput() {
   return (
@@ -12,7 +14,7 @@ function CardNumberInput() {
         <div>
           <Input
             description="카드 번호"
-            value={cardNumber}
+            value={splitCardNumbers(encryptCardNumber(cardNumber), '-') ?? ''}
             maxLength={CARD_RULE.NUMBER_MAX_LENGTH + 3}
             onChangeFunc={setCardNumber}
           />

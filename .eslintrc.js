@@ -32,6 +32,7 @@ module.exports = {
     'default-param-last': 'off',
     'implicit-arrow-linebreak': 'off',
     'linebreak-style': 'off',
+    'no-confusing-arrow': 'off',
     'object-curly-newline': 'off',
     'operator-linebreak': 'off',
   },
