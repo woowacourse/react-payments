@@ -36,10 +36,11 @@ CardOwnerName.args = {
 };
 
 function CVCTemplate({ inputArgs, buttonArgs, modalArgs }) {
+  const { children } = buttonArgs;
   return (
     <>
       <Input {...inputArgs} />
-      <Button {...buttonArgs} />
+      <Button {...buttonArgs}>{children}</Button>
       <Modal {...modalArgs} />
     </>
   );
@@ -56,7 +57,7 @@ CVC.args = {
   buttonArgs: {
     border: '1px solid #BABABA',
     color: '#969696',
-    content: '?',
+    children: '?',
     margin: {
       l: '11px',
     },

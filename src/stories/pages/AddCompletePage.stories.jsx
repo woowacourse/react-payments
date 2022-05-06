@@ -45,7 +45,9 @@ function AddCompleteSuccessTemplate({ card }) {
         padding={{ b: '5px' }}
         width="250px"
       />
-      <CheckButton color="#04C09E" content="확인" fontWeight="bold" />
+      <CheckButton color="#04C09E" fontWeight="bold">
+        확인
+      </CheckButton>
     </StyledPage>
   );
 }
@@ -99,10 +101,9 @@ function AddCompleteFailTemplate() {
   return (
     <StyledPage>
       <Message>등록된 카드 정보가 없습니다.</Message>
-      <Button
-        content={<StyledLink>카드 정보 입력 페이지로 이동</StyledLink>}
-        margin={{ t: '20px' }}
-      />
+      <Button margin={{ t: '20px' }}>
+        <StyledLink>카드 정보 입력 페이지로 이동</StyledLink>
+      </Button>
     </StyledPage>
   );
 }

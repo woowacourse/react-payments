@@ -19,12 +19,13 @@ export default function CardCVCInput() {
           <Button
             border="1px solid #BABABA"
             color="#969696"
-            content="?"
             margin={{ l: '11px' }}
             shape="circle"
             size="small"
             onClickFunc={toggleModal}
-          />
+          >
+            ?
+          </Button>
           <Modal
             visible={isModalOpen}
             description="카드 뒷면에 적힌 유효성 검사 코드"

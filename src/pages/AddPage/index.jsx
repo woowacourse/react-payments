@@ -135,11 +135,9 @@ function AddPage() {
     <CardInfoContext.Provider value={forwardValue}>
       <StyledPage>
         <Header>
-          <Button
-            size="small"
-            content={<Arrow />}
-            onClickFunc={onClickArrowButton}
-          />
+          <Button size="small" onClickFunc={onClickArrowButton}>
+            <Arrow />
+          </Button>
           <Title>카드 추가</Title>
         </Header>
         <StyledCard

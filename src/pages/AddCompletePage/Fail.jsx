@@ -46,12 +46,9 @@ function Fail() {
   return (
     <>
       <Message>등록된 카드 정보가 없습니다.</Message>
-      <Button
-        content={
-          <StyledLink to="/add">카드 정보 입력 페이지로 이동</StyledLink>
-        }
-        margin={{ t: '20px' }}
-      />
+      <Button margin={{ t: '20px' }}>
+        <StyledLink to="/add">카드 정보 입력 페이지로 이동</StyledLink>
+      </Button>
     </>
   );
 }

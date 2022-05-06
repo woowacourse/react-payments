@@ -46,7 +46,9 @@ function AddTemplate({ forwardValue }) {
     <CardInfoContext.Provider value={forwardValue}>
       <StyledPage>
         <Header>
-          <Button size="small" content={<Arrow />} />
+          <Button size="small">
+            <Arrow />
+          </Button>
           <Title>카드 추가</Title>
         </Header>
         <StyledCard
@@ -57,7 +59,9 @@ function AddTemplate({ forwardValue }) {
           validDate={forwardValue.validDate}
         />
         <CardInputs />
-        <NextButton color="#04C09E" content="다음" fontWeight="bold" />
+        <NextButton color="#04C09E" fontWeight="bold">
+          다음
+        </NextButton>
       </StyledPage>
     </CardInfoContext.Provider>
   );

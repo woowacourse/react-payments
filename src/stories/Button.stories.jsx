@@ -17,13 +17,15 @@ export default {
 };
 
 function Template(args) {
-  return <Button {...args} />;
+  const { children } = args;
+
+  return <Button {...args}>{children}</Button>;
 }
 
 const Arrow = Template.bind({});
 Arrow.args = {
   size: 'small',
-  content: (
+  children: (
     <svg
       width="10"
       height="17"
@@ -43,14 +45,14 @@ Arrow.args = {
 const 다음 = Template.bind({});
 다음.args = {
   color: '#04C09E',
-  content: '다음',
+  children: '다음',
   fontWeight: 'bold',
 };
 
 const 확인 = Template.bind({});
 확인.args = {
   color: '#04C09E',
-  content: '확인',
+  children: '확인',
   fontWeight: 'bold',
 };
 
@@ -58,7 +60,7 @@ const Question = Template.bind({});
 Question.args = {
   border: '1px solid #BABABA',
   color: '#969696',
-  content: '?',
+  children: '?',
   shape: 'circle',
   size: 'small',
 };

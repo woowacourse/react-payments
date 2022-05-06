@@ -34,9 +34,9 @@ const StyledButton = styled.button`
 function Button({
   bgColor,
   border,
+  children,
   className,
   color,
-  content,
   fontWeight,
   margin,
   shape,
@@ -58,7 +58,7 @@ function Button({
       className={className}
       onClick={onClickFunc}
     >
-      {content}
+      {children}
     </StyledButton>
   );
 }
@@ -76,9 +76,9 @@ Button.defaultProps = {
 Button.propTypes = {
   bgColor: PropTypes.string,
   border: PropTypes.string,
+  children: PropTypes.node,
   className: PropTypes.string,
   color: PropTypes.string,
-  content: PropTypes.node,
   fontWeight: PropTypes.string,
   margin: PropTypes.shape({
     t: PropTypes.string,
