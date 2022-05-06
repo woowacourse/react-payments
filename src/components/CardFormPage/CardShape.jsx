@@ -36,7 +36,7 @@ const cardCompanyList = [
   { color: '#192dff', name: '블링 카드' },
 ];
 
-function CardShape({ cardNumbers, cardOwner, cardDate, dimensions, setCardCompany, cardCompany }) {
+function CardShape({ dimensions, cardCompany, setCardCompany, cardNumbers, cardOwner, cardDate }) {
   const [isShown, setIsShown] = useState(false);
 
   const handleClickBox = () => {

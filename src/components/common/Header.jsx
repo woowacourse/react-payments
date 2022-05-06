@@ -1,5 +1,4 @@
 import React from 'react';
-import { IoIosArrowBack } from 'react-icons/io';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
