@@ -37,7 +37,8 @@ const CardAdd = () => {
 
   const { cardName } = cardInfo;
 
-  const submitCard = () => {
+  const submitCard = (e) => {
+    e.preventDefault();
     try {
       validateCardInfo();
       openConfirmModal();
@@ -54,21 +55,23 @@ const CardAdd = () => {
           <p>카드 추가</p>
         </header>
         <div className="card-add__container">
-          <Card cardInfo={cardInfo} onClick={openColorPickerVisible} />
+          <div className="card-add__container-card">
+            <Card cardInfo={cardInfo} onClick={openColorPickerVisible} />
+          </div>
           {Boolean(cardName) || (
             <span className="select-card-message">
               카드를 눌러 카드를 선택해주세요
             </span>
           )}
-          <form>
+          <form onSubmit={submitCard}>
             <CardNumberInput />
             <ExpiredDateInput />
             <OwnerNameInput />
             <SecureCodeInput />
             <CardPasswordInput />
+            <NextButton>다음</NextButton>
           </form>
         </div>
-        <NextButton onClick={submitCard}>다음</NextButton>
       </div>
       <ColorPickerModal />
       <ConfirmModal />
