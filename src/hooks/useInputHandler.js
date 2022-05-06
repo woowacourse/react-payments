@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CardInfoDispatchContext } from '../context';
 
-function useInputHandler(validator, initialValue) {
-  const [inputValue, setInputValue] = useState(initialValue);
+function useInputHandler(validator, { type, key, prevData }) {
+  const cardInfoDispatch = useContext(CardInfoDispatchContext);
   const [errorMessage, setErrorMessage] = useState('');
 
   const updateInputState = ({ name, value }) => {
@@ -14,13 +15,16 @@ function useInputHandler(validator, initialValue) {
       return;
     }
 
-    setInputValue(prevValues => ({
-      ...prevValues,
-      [name]: value,
-    }));
+    cardInfoDispatch({
+      type,
+      [key]: {
+        ...prevData,
+        [name]: value,
+      },
+    });
   };
 
-  return { errorMessage, setErrorMessage, inputValue, updateInputState };
+  return { errorMessage, setErrorMessage, updateInputState };
 }
 
 export default useInputHandler;

@@ -77,10 +77,10 @@ function CardSubmitPage() {
         nickname,
       },
     });
-
     nextId.current += 1;
 
     cardInfoDispatch({ type: 'RESET_CARD_INFO' });
+    setNickname('');
     setPath('list-card');
   };
   return (

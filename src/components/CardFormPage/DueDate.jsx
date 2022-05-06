@@ -20,10 +20,6 @@ function DueDate({ dimensions, cardDate }) {
       },
     });
   };
-  // setCardDate(prevDate => ({
-  //   ...prevDate,
-  //   [key]: value,
-  // }));
 
   return (
     <InputContainer>
