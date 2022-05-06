@@ -46,7 +46,7 @@ function Button({
   border,
   className,
   color,
-  content,
+  children,
   fontWeight,
   margin,
   shape,
@@ -61,7 +61,6 @@ function Button({
       border={border}
       buttonStyle={buttonStyle}
       color={color}
-      content={content}
       fontWeight={fontWeight}
       margin={margin}
       shape={shape}
@@ -69,7 +68,7 @@ function Button({
       className={className}
       onClick={onClickFunc}
     >
-      {content}
+      {children}
     </Styled.Button>
   );
 }

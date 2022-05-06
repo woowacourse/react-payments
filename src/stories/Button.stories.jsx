@@ -23,7 +23,7 @@ const Template = args => <Button {...args} />;
 export const Arrow = Template.bind({});
 Arrow.args = {
   size: 'small',
-  content: (
+  children: (
     <svg
       width="10"
       height="17"
@@ -43,7 +43,7 @@ Arrow.args = {
 export const Text = Template.bind({});
 Text.args = {
   color: '#04C09E',
-  content: '다음',
+  children: '다음',
   fontWeight: 'bold',
 };
 
@@ -51,7 +51,7 @@ export const Question = Template.bind({});
 Question.args = {
   border: '1px solid #BABABA',
   color: '#969696',
-  content: '?',
+  children: '?',
   shape: 'circle',
   size: 'small',
 };

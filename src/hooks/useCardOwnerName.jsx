@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-import { RULE } from '../constants';
+import { RULE } from 'constants';
 
 export default function useCardOwnerName(initialValue) {
   const [cardOwnerName, setCardOwnerName] = useState(initialValue);

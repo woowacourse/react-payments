@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
-import Modal from '../components/Modal';
+import CVCTooltip from '../components/CVCTooltip';
 
 export default {
   title: 'Example/MixedComponents',
@@ -36,7 +36,7 @@ const CVCTemplate = args => (
   <>
     <Input {...args.inputArgs} />
     <Button {...args.buttonArgs} />
-    <Modal {...args.modalArgs} />
+    <CVCTooltip {...args.modalArgs} />
   </>
 );
 
@@ -50,7 +50,7 @@ CVC.args = {
   buttonArgs: {
     border: '1px solid #BABABA',
     color: '#969696',
-    content: '?',
+    children: '?',
     margin: {
       l: '11px',
     },
