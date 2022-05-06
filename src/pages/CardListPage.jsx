@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CardContext } from "contexts/CardContext";
+import styled from "styled-components";
 
 import { FlexWrapper } from "components/common/styled";
 import { Card, Button, PageTitle } from "components/common";
@@ -32,6 +33,7 @@ export const CardListPage = () => {
                   expireDate={cards.list[i].expireDate}
                   ownerName={cards.list[i].ownerName}
                 />
+                <CardNickname>{cards.list[i].cardNickname}</CardNickname>
               </Button>
             ))}
             <Button
@@ -46,3 +48,9 @@ export const CardListPage = () => {
     </>
   );
 };
+
+const CardNickname = styled.div`
+  color: #575757;
+  font-weight: bold;
+  margin-bottom: 15px;
+`;
