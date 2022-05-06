@@ -13,10 +13,10 @@ import CardShape from './CardShape';
 import DueDate from './DueDate';
 import { LABEL_PRIMARY_COLOR } from '../../style';
 import { Form } from '../common/styled';
-import { CardInfoContext, PathContext } from '../../context';
+import { CardInfoContext, SetPathContext } from '../../context';
 
 function CardFormPage({ targetRef }) {
-  const setPath = useContext(PathContext);
+  const setPath = useContext(SetPathContext);
   const { cardCompany, cardNumbers, cardDate, owner, cardCode, pwd } = useContext(CardInfoContext);
 
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });

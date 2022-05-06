@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { HiOutlinePlus } from 'react-icons/hi';
 import { ADD_CARD_ITEM_BG_COLOR } from '../../style';
-import { PathContext } from '../../context';
+import { SetPathContext } from '../../context';
 
 const CardBox = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ const CardBox = styled.div`
 `;
 
 function AddCardItem() {
-  const setPath = useContext(PathContext);
+  const setPath = useContext(SetPathContext);
 
   const handleClick = () => {
     setPath('add-card');

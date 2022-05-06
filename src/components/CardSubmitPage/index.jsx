@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 
-import { CardListDispatchContext, CardInfoContext, PathContext, CardInfoDispatchContext } from '../../context';
+import { CardListDispatchContext, CardInfoContext, SetPathContext, CardInfoDispatchContext } from '../../context';
 import { LABEL_PRIMARY_COLOR, PLACEHOLDER_PRIMARY_COLOR } from '../../style';
 
 import Card from '../common/Card';
@@ -42,7 +42,7 @@ const Container = styled.div`
 `;
 
 function CardSubmitPage({ nextId }) {
-  const setPath = useContext(PathContext);
+  const setPath = useContext(SetPathContext);
   const { cardCompany, cardNumbers, owner, cardDate } = useContext(CardInfoContext);
   const cardInfoDispatch = useContext(CardInfoDispatchContext);
   const cardListDispatch = useContext(CardListDispatchContext);
