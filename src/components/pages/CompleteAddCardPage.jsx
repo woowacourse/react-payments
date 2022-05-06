@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import CardContext from '../../contexts/CardContext';
 import CardPreview from '../common/CardPreview';
 import TextBox from '../common/TextBox';
@@ -34,7 +35,9 @@ const CompleteAddCardPage = () => {
       <TextBox fontSize={23}>카드등록이 완료되었습니다.</TextBox>
       <CardPreview values={values} />
       <Input underLine placeHolder="카드 별칭을 지정해주세요." />
-      <Button>확인</Button>
+      <Link to="/">
+        <Button>확인</Button>
+      </Link>
     </StyledCompleteAddCardPage>
   );
 };
