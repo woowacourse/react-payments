@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 
 import Header from '../common/Header';
@@ -18,7 +18,7 @@ import { Form } from '../common/styled';
 import { CardInfoContext, PathContext } from '../../context';
 
 function CardFormPage({
-  dimensions,
+  targetRef,
   cardNoErrorMessage,
   ownerErrorMessage,
   setCardCompany,
@@ -29,6 +29,8 @@ function CardFormPage({
 }) {
   const setPath = useContext(PathContext);
   const { cardCompany, cardNumbers, cardDate, owner } = useContext(CardInfoContext);
+
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   const {
     errorMessage: cardCodeErrorMessage,
@@ -71,6 +73,25 @@ function CardFormPage({
     if (!isRequiredCompleted) return;
     setPath('submit-card');
   };
+
+  useLayoutEffect(() => {
+    if (targetRef.current) {
+      setDimensions({
+        width: targetRef.current.offsetWidth,
+        height: targetRef.current.offsetHeight,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    setCardCompany({ name: '', hexColor: '#ffffff' });
+    updateCardNumbers({ name: 'cardNoA', value: '' });
+    updateCardNumbers({ name: 'cardNoB', value: '' });
+    updateCardNumbers({ name: 'cardNoC', value: '' });
+    updateCardNumbers({ name: 'cardNoD', value: '' });
+    setCardDate({ month: '', year: '' });
+    updateOwner({ name: 'name', value: '' });
+  }, []);
 
   return (
     <>
