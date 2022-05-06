@@ -1,16 +1,33 @@
+import { useEffect } from 'react';
+import useInputValue from '../../hooks/useInputValue';
 import FieldSet from '../FieldSet';
 import Input from '../Input';
 import AskMarkTooltip from '../AskMarkTooltip';
-import PropTypes from 'prop-types';
+import { checkSecureCode, checkNumberOnly } from '../../validation';
+import { useCardFormContext } from '../../context/card-form-context';
 import * as styled from './index.styled';
 
-const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
+const SecureCode = () => {
+  const { dispatch } = useCardFormContext();
+  const [secureCode, isSecureCodeError, onChangeSecureCode] = useInputValue({
+    isValidateInput: checkSecureCode,
+    isInputAvailableValue: checkNumberOnly,
+  });
+
+  useEffect(() => {
+    if (secureCode.length > 0 && !isSecureCodeError) {
+      dispatch({ type: 'complete-input-secure-code', data: { secureCode } });
+      return;
+    }
+    dispatch({ type: 'incomplete-input-secure-code' });
+  }, [secureCode, isSecureCodeError, dispatch]);
+
   return (
     <FieldSet
       id="secureCode"
       description="보안코드(CVC/CVV)"
       errorMessage="유효한 보안코드를 입력해주세요"
-      isError={isError}
+      isError={isSecureCodeError}
     >
       {
         <styled.Container>
@@ -27,12 +44,6 @@ const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
       }
     </FieldSet>
   );
-};
-
-SecureCode.propTypes = {
-  secureCode: PropTypes.string,
-  onChangeSecureCode: PropTypes.func,
-  isError: PropTypes.bool,
 };
 
 export default SecureCode;

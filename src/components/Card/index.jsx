@@ -1,24 +1,28 @@
 import PropTypes from 'prop-types';
 import { COLOR_NAMES } from '../../constant';
 import * as styled from './index.styled';
+import { useCardFormContext } from '../../context/card-form-context';
 
-const Card = ({
-  name,
-  ownerName,
-  color = 'red',
-  expiredMonth,
-  expiredYear,
-  firstCardNumber,
-  secondCardNumber,
-  thirdCardNumber,
-  fourthCardNumber,
-  onClick,
-}) => {
+const Card = ({ onClick }) => {
+  const {
+    state: {
+      firstCardNumber,
+      secondCardNumber,
+      thirdCardNumber,
+      fourthCardNumber,
+      expiredMonth,
+      expiredYear,
+      cardType,
+      ownerName,
+    },
+  } = useCardFormContext();
   return (
     <styled.Container onClick={onClick}>
-      <styled.EmptyCard color={color}>
+      <styled.EmptyCard color={cardType.color}>
         <styled.CardTop>
-          <styled.CardName>{name ? name : '카드이름'}</styled.CardName>
+          <styled.CardName>
+            {cardType.name ? cardType.name : '카드이름'}
+          </styled.CardName>
         </styled.CardTop>
         <styled.CardMiddle>
           <styled.CardChip />

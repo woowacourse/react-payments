@@ -1,22 +1,48 @@
+import { useEffect } from 'react';
+import useInputValue from '../../hooks/useInputValue';
 import FieldSet from '../FieldSet';
 import Input from '../Input';
 import DotMark from '../DotMark';
-import PropTypes from 'prop-types';
+import { checkPassword, checkNumberOnly } from '../../validation';
 import * as styled from './index.styled';
+import { useCardFormContext } from '../../context/card-form-context';
 
-const Password = ({
-  firstPassword,
-  secondPassword,
-  onChangeFirstPassword,
-  onChangeSecondPassword,
-  isError,
-}) => {
+const Password = () => {
+  const { dispatch } = useCardFormContext();
+  const [firstPassword, isFirstPasswordError, onChangeFirstPassword] =
+    useInputValue({
+      isValidateInput: checkPassword,
+      isInputAvailableValue: checkNumberOnly,
+    });
+  const [secondPassword, isSecondPasswordError, onChangeSecondPassword] =
+    useInputValue({
+      isValidateInput: checkPassword,
+      isInputAvailableValue: checkNumberOnly,
+    });
+
+  useEffect(() => {
+    if (
+      firstPassword.length > 0 &&
+      secondPassword.length > 0 &&
+      !isFirstPasswordError &&
+      !isSecondPasswordError
+    ) {
+      dispatch({ type: '' });
+    }
+  }, [
+    firstPassword,
+    secondPassword,
+    isFirstPasswordError,
+    isSecondPasswordError,
+    dispatch,
+  ]);
+
   return (
     <FieldSet
       id="password"
       description="카드 비밀번호"
       errorMessage="올바른 비밀번호를 입력해주세요."
-      isError={isError}
+      isError={isFirstPasswordError && isSecondPasswordError}
     >
       {
         <styled.Container>
@@ -42,14 +68,6 @@ const Password = ({
       }
     </FieldSet>
   );
-};
-
-Password.propTypes = {
-  firstPassword: PropTypes.string,
-  secondPassword: PropTypes.string,
-  onChangeFirstPassword: PropTypes.func,
-  onChangeSecondPassword: PropTypes.func,
-  isError: PropTypes.bool,
 };
 
 export default Password;

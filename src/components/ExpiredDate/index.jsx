@@ -1,20 +1,53 @@
+import { useEffect } from 'react';
+import useInputValue from '../../hooks/useInputValue';
 import FieldSet from '../FieldSet';
 import ExpiredDateInput from '../Input/ExpiredDateInput';
-import PropTypes from 'prop-types';
+import {
+  checkExpiredMonth,
+  checkExpiredYear,
+  checkNumberOnly,
+} from '../../validation';
+import { useCardFormContext } from '../../context/card-form-context';
 
-const ExpiredDate = ({
-  expiredMonth,
-  expiredYear,
-  onChangeExpiredMonth,
-  onChangeExpiredYear,
-  isError,
-}) => {
+const ExpiredDate = () => {
+  const { dispatch } = useCardFormContext();
+  const [expiredMonth, isExpiredMonthError, onChangeExpiredMonth] =
+    useInputValue({
+      isValidateInput: checkExpiredMonth,
+      isInputAvailableValue: checkNumberOnly,
+    });
+  const [expiredYear, isExpiredYearError, onChangeExpiredYear] = useInputValue({
+    isValidateInput: checkExpiredYear,
+    isInputAvailableValue: checkNumberOnly,
+  });
+
+  useEffect(() => {
+    if (
+      expiredMonth.length > 0 &&
+      expiredYear.length > 0 &&
+      !isExpiredMonthError &&
+      !isExpiredYearError
+    ) {
+      dispatch({
+        type: 'complete-input-expired-date',
+        data: { expiredMonth, expiredYear },
+      });
+    }
+    dispatch({ type: 'incomplete-input-expired-date' });
+  }, [
+    expiredMonth,
+    expiredYear,
+    isExpiredMonthError,
+    isExpiredYearError,
+    dispatch,
+  ]);
+
   return (
     <FieldSet
       id="expiredNumber"
       description="만료일"
       errorMessage="유효한 만료 숫자를 입력하세요"
-      isError={isError}
+      isError={isExpiredMonthError && isExpiredYearError}
     >
       {
         <ExpiredDateInput
@@ -26,14 +59,6 @@ const ExpiredDate = ({
       }
     </FieldSet>
   );
-};
-
-ExpiredDate.propTypes = {
-  expiredMonth: PropTypes.string,
-  expiredYear: PropTypes.string,
-  onChangeExpiredMonth: PropTypes.func,
-  onChangeExpiredYear: PropTypes.func,
-  isError: PropTypes.bool,
 };
 
 export default ExpiredDate;

@@ -1,13 +1,29 @@
+import { useEffect } from 'react';
+import useInputValue from '../../hooks/useInputValue';
 import FieldSet from '../FieldSet';
 import Input from '../Input';
-import PropTypes from 'prop-types';
+import { checkOwnerName } from '../../validation';
+import { useCardFormContext } from '../../context/card-form-context';
 import * as styled from './index.styled';
 
 const showOwnerNameLength = (length) => {
   return `${length}`.padStart(2, '0');
 };
 
-const CardOwner = ({ ownerName, onChangeOwnerName, isError }) => {
+const CardOwner = () => {
+  const { dispatch } = useCardFormContext();
+  const [ownerName, isOwnerNameError, onChangeOwnerName] = useInputValue({
+    isValidateInput: checkOwnerName,
+  });
+
+  useEffect(() => {
+    if (isOwnerNameError) {
+      dispatch({ type: 'incomplete-input-owner-name' });
+      return;
+    }
+    dispatch({ type: 'complete-input-owner-name', data: { ownerName } });
+  }, [isOwnerNameError, ownerName, dispatch]);
+
   return (
     <styled.Container>
       <styled.MaxNumberIndicator>
@@ -17,7 +33,7 @@ const CardOwner = ({ ownerName, onChangeOwnerName, isError }) => {
         id="cardOwnerName"
         description="카드 소유자 이름(선택)"
         errorMessage="이름은 30자 이하의 영문이어야 합니다."
-        isError={isError}
+        isError={isOwnerNameError}
       >
         {
           <Input
@@ -32,12 +48,6 @@ const CardOwner = ({ ownerName, onChangeOwnerName, isError }) => {
       </FieldSet>
     </styled.Container>
   );
-};
-
-CardOwner.propTypes = {
-  ownerName: PropTypes.string,
-  onChangeOwnerName: PropTypes.func,
-  isError: PropTypes.bool,
 };
 
 export default CardOwner;

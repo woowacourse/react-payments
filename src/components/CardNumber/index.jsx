@@ -1,18 +1,79 @@
-import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import useInputValue from '../../hooks/useInputValue';
 import FieldSet from '../FieldSet';
 import CardNumberInput from '../Input/CardNumberInput';
+import { checkCardNumber, checkNumberOnly } from '../../validation';
+import { useCardFormContext } from '../../context/card-form-context';
 
-const CardNumber = ({
-  firstCardNumber,
-  secondCardNumber,
-  thirdCardNumber,
-  fourthCardNumber,
-  onChangeFirstCardNumber,
-  onChangeSecondCardNumber,
-  onChangeThirdCardNumber,
-  onChangeFourthCardNumber,
-  isError,
-}) => {
+const CardNumber = () => {
+  const { dispatch } = useCardFormContext();
+  const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] =
+    useInputValue({
+      isValidateInput: checkCardNumber,
+      isInputAvailableValue: checkNumberOnly,
+    });
+  const [secondCardNumber, isSecondCardNumberError, onChangeSecondCardNumber] =
+    useInputValue({
+      isValidateInput: checkCardNumber,
+      isInputAvailableValue: checkNumberOnly,
+    });
+  const [thirdCardNumber, isThirdCardNumberError, onChangeThirdCardNumber] =
+    useInputValue({
+      isValidateInput: checkCardNumber,
+      isInputAvailableValue: checkNumberOnly,
+    });
+  const [fourthCardNumber, isFourthCardNumberError, onChangeFourthCardNumber] =
+    useInputValue({
+      isValidateInput: checkCardNumber,
+      isInputAvailableValue: checkNumberOnly,
+    });
+
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    setIsError(
+      isFirstCardNumberError ||
+        isSecondCardNumberError ||
+        isThirdCardNumberError ||
+        isFourthCardNumberError,
+    );
+  }, [
+    isFirstCardNumberError,
+    isSecondCardNumberError,
+    isThirdCardNumberError,
+    isFourthCardNumberError,
+  ]);
+  useEffect(() => {
+    const isInputCompleted =
+      firstCardNumber.length > 0 &&
+      secondCardNumber.length > 0 &&
+      thirdCardNumber.length > 0 &&
+      fourthCardNumber.length > 0 &&
+      !isError;
+
+    if (!isInputCompleted) {
+      dispatch({ type: 'incomplete-input-card-numbers' });
+      return;
+    }
+
+    dispatch({
+      type: 'complete-input-card-numbers',
+      data: {
+        firstCardNumber,
+        secondCardNumber,
+        thirdCardNumber,
+        fourthCardNumber,
+      },
+    });
+  }, [
+    firstCardNumber,
+    secondCardNumber,
+    thirdCardNumber,
+    fourthCardNumber,
+    isError,
+    dispatch,
+  ]);
+
   return (
     <FieldSet
       id="cardNumber"
@@ -36,15 +97,4 @@ const CardNumber = ({
   );
 };
 
-CardNumber.propTypes = {
-  firstCardNumber: PropTypes.string,
-  secondCardNumber: PropTypes.string,
-  thirdCardNumber: PropTypes.string,
-  fourthCardNumber: PropTypes.string,
-  onChangeFirstCardNumber: PropTypes.func,
-  onChangeSecondCardNumber: PropTypes.func,
-  onChangeThirdCardNumber: PropTypes.func,
-  onChangeFourthCardNumber: PropTypes.func,
-  isError: PropTypes.bool,
-};
 export default CardNumber;

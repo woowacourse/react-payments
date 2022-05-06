@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import ColorPicker from './ColorPicker';
 import * as styled from './index.styled';
+import { useCardFormContext } from '../../context/card-form-context';
 
 const cardList1 = [
   { color: 'red', name: '포코 카드' },
@@ -16,7 +18,15 @@ const cardList2 = [
   { color: 'yellow', name: '샐리 카드' },
 ];
 
-const Palette = ({ onClickCardSelector }) => {
+const Palette = () => {
+  const { dispatch } = useCardFormContext();
+  const onClickCardSelector = (color, name) => () => {
+    dispatch({
+      type: 'complete-select-cardType',
+      data: { cardType: { color, name } },
+    });
+  };
+
   return (
     <styled.Container>
       <styled.ColorPickerContainer>
