@@ -63,7 +63,7 @@ const EditCardPage = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        cardName: newName,
+        cardName: newName.toUpperCase(),
       }),
     });
 
