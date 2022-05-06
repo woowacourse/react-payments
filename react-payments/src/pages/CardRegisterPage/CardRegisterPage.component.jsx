@@ -15,7 +15,7 @@ import { CardTypeContext } from "../../provider/CardTypeProvider";
 import { ExpireDateContext } from "../../provider/ExpireDateProvider";
 import { SecurityCodeContext } from "../../provider/SecurityCodeProvider";
 import { UserNameContext } from "../../provider/UserNameProvider";
-import { isInValidCardName } from "../../util/validator";
+import { isDuplicatedCardName, isInValidCardName } from "../../util/validator";
 
 const CardRegisterGroup = styled.div`
   display: flex;
@@ -26,8 +26,7 @@ const CardRegisterGroup = styled.div`
 `;
 
 const CardRegisterPage = () => {
-  const [cardName, setCardName] = useState("");
-  const [cardNameReady] = useReady(cardName, isInValidCardName);
+  const { cardData } = useContext(CardDataContext);
   const {
     state: { cardTypeInfo },
     action: { resetCardTypeInfo },
@@ -51,6 +50,14 @@ const CardRegisterPage = () => {
     action: { resetCardPassword },
   } = useContext(CardPasswordContext);
   const { dispatch } = useContext(CardDataContext);
+
+  const [cardName, setCardName] = useState("");
+  const [cardNameLengthReady] = useReady(cardName, isInValidCardName);
+  const [uniqueCardNameReady] = useReady(
+    cardName,
+    isDuplicatedCardName,
+    cardData
+  );
 
   const onChangeCardName = (e) => {
     setCardName(e.target.value);
@@ -92,15 +99,23 @@ const CardRegisterPage = () => {
         <CardNameInput
           value={cardName}
           onChange={onChangeCardName}
-          ready={cardNameReady}
+          ready={cardNameLengthReady && uniqueCardNameReady}
         />
-        {cardNameReady ? (
+        {!cardNameLengthReady && (
+          <MessageBox type="error">
+            {ERROR_MESSAGE["card-name-length"]}
+          </MessageBox>
+        )}
+        {!uniqueCardNameReady && (
+          <MessageBox type="error">
+            {ERROR_MESSAGE["unique-card-name"]}
+          </MessageBox>
+        )}
+        {cardNameLengthReady && uniqueCardNameReady && (
           <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
-        ) : (
-          <MessageBox type="error">{ERROR_MESSAGE["card-name"]}</MessageBox>
         )}
       </CardRegisterGroup>
-      {cardNameReady && (
+      {cardNameLengthReady && uniqueCardNameReady && (
         <LinkButton type="submit" onClick={handleSubmitCardData}>
           확인
         </LinkButton>
