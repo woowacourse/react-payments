@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { HYPHEN_PRIMARY_COLOR } from '../../style';
 import Input from '../common/Input';
 import ErrorMessage from '../common/ErrorMessage';
 import { InputContainer, InputWrapper, Label, Span } from '../common/styled';
+import { CardInfoDispatchContext } from '../../context';
 
-function CardNumber({ errorMessage, setErrorMessage, cardNumbers, updateCardNumbers, isCorrectCardNumber }) {
+function CardNumber({ cardNumbers, isCorrectCardNumber }) {
+  const cardInfoDispatch = useContext(CardInfoDispatchContext);
+
   const cardNoARef = useRef(null);
   const cardNoBRef = useRef(null);
   const cardNoCRef = useRef(null);
@@ -21,14 +24,21 @@ function CardNumber({ errorMessage, setErrorMessage, cardNumbers, updateCardNumb
       return true;
     });
 
-    updateCardNumbers(target);
+    cardInfoDispatch({
+      type: 'UPDATE_NUMBERS',
+      cardNumbers: {
+        ...cardNumbers,
+        [target.name]: target.value,
+      },
+    });
+    // updateCardNumbers(target);
   };
 
-  useEffect(() => {
-    if (isCorrectCardNumber) {
-      setErrorMessage('');
-    }
-  }, [setErrorMessage, isCorrectCardNumber]);
+  // useEffect(() => {
+  //   if (isCorrectCardNumber) {
+  //     // setErrorMessage('');
+  //   }
+  // }, [setErrorMessage, isCorrectCardNumber]);
 
   return (
     <InputContainer>
@@ -86,7 +96,7 @@ function CardNumber({ errorMessage, setErrorMessage, cardNumbers, updateCardNumb
           />
         </Span>
       </InputWrapper>
-      <ErrorMessage>{errorMessage}</ErrorMessage>
+      {/* <ErrorMessage>{errorMessage}</ErrorMessage> */}
     </InputContainer>
   );
 }

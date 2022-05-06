@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useContext, useLayoutEffect, useMemo, useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 
 import Header from '../common/Header';
@@ -11,43 +11,15 @@ import CardPassword from './CardPassword';
 import CardSecurityCode from './CardSecurityCode';
 import CardShape from './CardShape';
 import DueDate from './DueDate';
-import useInputHandler from '../../hooks/useInputHandler';
-import { validateCardCode, validatePassword } from '../../validator';
 import { LABEL_PRIMARY_COLOR } from '../../style';
 import { Form } from '../common/styled';
 import { CardInfoContext, PathContext } from '../../context';
 
-function CardFormPage({
-  targetRef,
-  cardNoErrorMessage,
-  ownerErrorMessage,
-  setCardCompany,
-  setCardNoErrorMessage,
-  updateCardNumbers,
-  setCardDate,
-  updateOwner,
-}) {
+function CardFormPage({ targetRef }) {
   const setPath = useContext(PathContext);
-  const { cardCompany, cardNumbers, cardDate, owner } = useContext(CardInfoContext);
+  const { cardCompany, cardNumbers, cardDate, owner, cardCode, pwd } = useContext(CardInfoContext);
 
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-
-  const {
-    errorMessage: cardCodeErrorMessage,
-    inputValue: cardCode,
-    updateInputState: updateCardCode,
-  } = useInputHandler(validateCardCode, {
-    cvc: '',
-  });
-  const {
-    errorMessage: pwdErrorMessage,
-    setErrorMessage: setPwdErrorMessage,
-    inputValue: pwd,
-    updateInputState: updatePwd,
-  } = useInputHandler(validatePassword, {
-    pwdNoA: '',
-    pwdNoB: '',
-  });
 
   const isCorrectCardNumber = useMemo(() => Object.values(cardNumbers).join('').length === 16, [cardNumbers]);
   const isCorrectPwd = useMemo(() => Object.values(pwd).join('').length === 2, [pwd]);
@@ -83,16 +55,6 @@ function CardFormPage({
     }
   }, []);
 
-  useEffect(() => {
-    setCardCompany({ name: '', hexColor: '#ffffff' });
-    updateCardNumbers({ name: 'cardNoA', value: '' });
-    updateCardNumbers({ name: 'cardNoB', value: '' });
-    updateCardNumbers({ name: 'cardNoC', value: '' });
-    updateCardNumbers({ name: 'cardNoD', value: '' });
-    setCardDate({ month: '', year: '' });
-    updateOwner({ name: 'name', value: '' });
-  }, []);
-
   return (
     <>
       <Header
@@ -105,28 +67,15 @@ function CardFormPage({
         <CardShape
           dimensions={dimensions}
           cardCompany={cardCompany}
-          setCardCompany={setCardCompany}
           cardNumbers={cardNumbers}
           cardOwner={owner}
           cardDate={cardDate}
         />
-        <CardNumber
-          errorMessage={cardNoErrorMessage}
-          setErrorMessage={setCardNoErrorMessage}
-          cardNumbers={cardNumbers}
-          updateCardNumbers={updateCardNumbers}
-          isCorrectCardNumber={isCorrectCardNumber}
-        />
-        <DueDate dimensions={dimensions} cardDate={cardDate} setCardDate={setCardDate} />
-        <CardOwner errorMessage={ownerErrorMessage} owner={owner} updateOwner={updateOwner} />
-        <CardSecurityCode errorMessage={cardCodeErrorMessage} cardCode={cardCode} updateCardCode={updateCardCode} />
-        <CardPassword
-          errorMessage={pwdErrorMessage}
-          setErrorMessage={setPwdErrorMessage}
-          pwd={pwd}
-          updatePwd={updatePwd}
-          isCorrectPwd={isCorrectPwd}
-        />
+        <CardNumber cardNumbers={cardNumbers} isCorrectCardNumber={isCorrectCardNumber} />
+        <DueDate dimensions={dimensions} cardDate={cardDate} />
+        <CardOwner owner={owner} />
+        <CardSecurityCode cardCode={cardCode} />
+        <CardPassword pwd={pwd} isCorrectPwd={isCorrectPwd} />
         <Footer>
           <TextButton hexColor={LABEL_PRIMARY_COLOR} isVisible={isRequiredCompleted}>
             다음

@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { InputContainer, InputWrapper, Label } from '../common/styled';
 import ErrorMessage from '../common/ErrorMessage';
 import LetterCounter from '../common/LetterCounter';
 import Input from '../common/Input';
+import { CardInfoDispatchContext } from '../../context';
 
 const convertToUpperCase = word => word.toUpperCase();
 
-function CardOwner({ errorMessage, owner, updateOwner }) {
+function CardOwner({ owner }) {
+  const cardInfoDispatch = useContext(CardInfoDispatchContext);
+
   const handleInputChange = ({ target: { name, value } }) => {
-    updateOwner({ name, value: convertToUpperCase(value) });
+    cardInfoDispatch({
+      type: 'UPDATE_OWNER',
+      owner: {
+        ...owner,
+        [name]: convertToUpperCase(value),
+      },
+    });
   };
 
   return (
@@ -27,7 +36,7 @@ function CardOwner({ errorMessage, owner, updateOwner }) {
           />
         </InputWrapper>
       </div>
-      <ErrorMessage>{errorMessage}</ErrorMessage>
+      {/* <ErrorMessage>{errorMessage}</ErrorMessage> */}
     </InputContainer>
   );
 }

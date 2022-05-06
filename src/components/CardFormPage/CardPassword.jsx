@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { InputContainer, Label, InputWrapper } from '../common/styled';
 import InactiveContainer from '../common/InactiveContainer';
 import ErrorMessage from '../common/ErrorMessage';
 import Input from '../common/Input';
+import { CardInfoDispatchContext } from '../../context';
 
 const InputPasswordWrapper = styled.div`
   display: flex;
@@ -11,14 +12,23 @@ const InputPasswordWrapper = styled.div`
   width: 50%;
 `;
 
-function CardPassword({ errorMessage, setErrorMessage, pwd, updatePwd, isCorrectPwd }) {
-  const handleInputChange = ({ target }) => {
-    updatePwd(target);
+function CardPassword({ pwd, isCorrectPwd }) {
+  const cardInfoDispatch = useContext(CardInfoDispatchContext);
+
+  const handleInputChange = ({ target: { name, value } }) => {
+    cardInfoDispatch({
+      type: 'UPDATE_PWD',
+      pwd: {
+        ...pwd,
+        [name]: value,
+      },
+    });
+    // updatePwd(target);
   };
 
-  useEffect(() => {
-    if (isCorrectPwd) setErrorMessage('');
-  }, [isCorrectPwd, setErrorMessage]);
+  // useEffect(() => {
+  //   if (isCorrectPwd) setErrorMessage('');
+  // }, [isCorrectPwd, setErrorMessage]);
 
   return (
     <InputContainer>
@@ -33,7 +43,7 @@ function CardPassword({ errorMessage, setErrorMessage, pwd, updatePwd, isCorrect
         <InactiveContainer />
         <InactiveContainer />
       </InputPasswordWrapper>
-      <ErrorMessage>{errorMessage}</ErrorMessage>
+      {/* <ErrorMessage>{errorMessage}</ErrorMessage> */}
     </InputContainer>
   );
 }

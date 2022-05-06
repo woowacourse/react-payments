@@ -3,9 +3,73 @@ import React, { useState, useRef, useReducer } from 'react';
 import CardFormPage from './components/CardFormPage';
 import CardListPage from './components/CardListPage';
 import CardSubmitPage from './components/CardSubmitPage';
-import { CardDispatchContext, CardInfoContext, PathContext } from './context';
-import useInputHandler from './hooks/useInputHandler';
-import { validateCardNumbers, validateOwner } from './validator';
+import { CardInfoContext, CardInfoDispatchContext, CardListDispatchContext, PathContext } from './context';
+
+const initialCardInfoState = {
+  cardCompany: {
+    name: '',
+    hexColor: '#ffffff',
+  },
+  cardNumbers: {
+    cardNoA: '',
+    cardNoB: '',
+    cardNoC: '',
+    cardNoD: '',
+  },
+  cardDate: {
+    month: '',
+    year: '',
+  },
+  owner: {
+    name: '',
+  },
+  cardCode: {
+    cvc: '',
+  },
+  pwd: {
+    pwdNoA: '',
+    pwdNoB: '',
+  },
+};
+
+const cardInfoReducer = (state, action) => {
+  switch (action.type) {
+    case 'UPDATE_COMPANY':
+      return {
+        ...state,
+        cardCompany: action.cardCompany,
+      };
+    case 'UPDATE_NUMBERS':
+      return {
+        ...state,
+        cardNumbers: action.cardNumbers,
+      };
+    case 'UPDATE_DATE':
+      return {
+        ...state,
+        cardDate: action.cardDate,
+      };
+    case 'UPDATE_OWNER':
+      return {
+        ...state,
+        owner: action.owner,
+      };
+    case 'UPDATE_CARD_CODE':
+      return {
+        ...state,
+        cardCode: action.cardCode,
+      };
+    case 'UPDATE_PWD':
+      return {
+        ...state,
+        pwd: action.pwd,
+      };
+    case 'RESET_CARD_INFO':
+      return { ...initialCardInfoState };
+    default:
+      return state;
+  }
+};
 
 const initialCardListState = [];
 
@@ -24,51 +88,14 @@ function App() {
   const [path, setPath] = useState('list-card');
 
   const [cardList, cardListDispatch] = useReducer(cardListReducer, initialCardListState);
-
-  const [cardCompany, setCardCompany] = useState({
-    hexColor: '',
-    name: '',
-  });
-  const {
-    errorMessage: cardNoErrorMessage,
-    setErrorMessage: setCardNoErrorMessage,
-    inputValue: cardNumbers,
-    updateInputState: updateCardNumbers,
-  } = useInputHandler(validateCardNumbers, {
-    cardNoA: '',
-    cardNoB: '',
-    cardNoC: '',
-    cardNoD: '',
-  });
-  const [cardDate, setCardDate] = useState({
-    month: '',
-    year: '',
-  });
-  const {
-    errorMessage: ownerErrorMessage,
-    inputValue: owner,
-    updateInputState: updateOwner,
-  } = useInputHandler(validateOwner, {
-    name: '',
-  });
+  const [cardInfo, cardInfoDispatch] = useReducer(cardInfoReducer, initialCardInfoState);
 
   const checkRoutes = route => {
     switch (route) {
       case 'add-card':
-        return (
-          <CardFormPage
-            targetRef={targetRef}
-            cardNoErrorMessage={cardNoErrorMessage}
-            ownerErrorMessage={ownerErrorMessage}
-            setCardCompany={setCardCompany}
-            setCardNoErrorMessage={setCardNoErrorMessage}
-            updateCardNumbers={updateCardNumbers}
-            setCardDate={setCardDate}
-            updateOwner={updateOwner}
-          />
-        );
+        return <CardFormPage targetRef={targetRef} />;
       case 'submit-card':
-        return <CardSubmitPage updateCardNumbers={updateCardNumbers} />;
+        return <CardSubmitPage />;
       case 'list-card':
         return <CardListPage cardList={cardList} />;
       default:
@@ -79,17 +106,15 @@ function App() {
   return (
     <main className="app" ref={targetRef}>
       <PathContext.Provider value={setPath}>
-        <CardDispatchContext.Provider value={cardListDispatch}>
-          <CardInfoContext.Provider
-            value={{
-              cardCompany,
-              cardNumbers,
-              cardDate,
-              owner,
-            }}>
-            {checkRoutes(path)}
-          </CardInfoContext.Provider>
-        </CardDispatchContext.Provider>
+        <CardInfoDispatchContext.Provider value={cardInfoDispatch}>
+          <CardListDispatchContext.Provider value={cardListDispatch}>
+            <CardInfoContext.Provider value={cardInfo}>
+              {/* {checkRoutes(path)} */}
+              <CardFormPage targetRef={targetRef} />
+              <CardSubmitPage />
+            </CardInfoContext.Provider>
+          </CardListDispatchContext.Provider>
+        </CardInfoDispatchContext.Provider>
       </PathContext.Provider>
     </main>
   );

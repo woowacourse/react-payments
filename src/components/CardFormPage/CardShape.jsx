@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import { CardInfoDispatchContext } from '../../context';
 import Card from '../common/Card';
 
 import CardCompany from '../common/CardCompany';
@@ -36,7 +37,8 @@ const cardCompanyList = [
   { color: '#192dff', name: '블링 카드' },
 ];
 
-function CardShape({ dimensions, cardCompany, setCardCompany, cardNumbers, cardOwner, cardDate }) {
+function CardShape({ dimensions, cardCompany, cardNumbers, cardOwner, cardDate }) {
+  const cardInfoDispatch = useContext(CardInfoDispatchContext);
   const [isShown, setIsShown] = useState(false);
 
   const handleClickBox = () => {
@@ -44,10 +46,11 @@ function CardShape({ dimensions, cardCompany, setCardCompany, cardNumbers, cardO
   };
 
   const handleClickCompany = ({ color: hexColor, name }) => {
-    setCardCompany({
-      hexColor,
-      name,
+    cardInfoDispatch({
+      type: 'UPDATE_COMPANY',
+      cardCompany: { hexColor, name },
     });
+
     setIsShown(!isShown);
   };
 
