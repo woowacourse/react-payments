@@ -20,10 +20,10 @@ code {
 .app {
   min-width: 375px;
   min-height: 700px;
-  padding: 16px 24px;
+  padding: 16px;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
 }

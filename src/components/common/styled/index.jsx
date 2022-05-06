@@ -2,12 +2,10 @@ import styled from 'styled-components';
 import { INPUT_PRIMARY_BG_COLOR, LABEL_PRIMARY_COLOR } from '../../../style';
 
 const Form = styled.form`
-  height: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 const InputContainer = styled.div`

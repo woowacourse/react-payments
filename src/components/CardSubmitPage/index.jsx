@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import { CardListDispatchContext, CardInfoContext, PathContext, CardInfoDispatchContext } from '../../context';
@@ -51,16 +51,25 @@ function CardSubmitPage({ nextId }) {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = ({ target: { value } }) => {
-    setNickname(value);
+    const trimmedValue = value.trim();
+    setNickname(trimmedValue);
     setErrorMessage('');
 
-    if (!value.trim()) {
+    if (!trimmedValue) {
       setErrorMessage('필수로 입력해주세요.');
     }
   };
 
   const handleClick = () => {
-    if (!nickname.trim()) {
+    if (
+      !nickname &&
+      !owner.name &&
+      !cardDate.month &&
+      !cardDate.year &&
+      !cardCompany.hexColor &&
+      !cardCompany.name &&
+      Object.values(cardNumbers).join('').length !== 16
+    ) {
       return;
     }
 

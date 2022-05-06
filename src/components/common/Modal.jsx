@@ -36,8 +36,8 @@ const ModalInner = styled.div`
   background-color: ${PRIMARY_BG_COLOR};
   border-radius: 8px 8px 0 0;
   width: ${props => props.width}px;
-  height: 200px;
-  top: calc(${props => `${props.height - 200}px`});
+  height: 300px;
+  top: calc(${props => `${props.height - 300}px`});
   margin: 0 auto;
   padding: 16px;
   z-index: 1000;
@@ -54,8 +54,8 @@ const ModalInner = styled.div`
 
     100% {
       transform: translateY(0);
-      top: calc(${props => `${props.height - 200}px`});
-      height: 200px;
+      top: calc(${props => `${props.height - 300}px`});
+      height: 300px;
       opacity: 1;
     }
   }
