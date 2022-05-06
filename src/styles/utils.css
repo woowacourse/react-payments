@@ -68,3 +68,7 @@
 .position-fixed {
   position: absolute;
 }
+
+.clickable-box {
+  cursor: pointer;
+}
