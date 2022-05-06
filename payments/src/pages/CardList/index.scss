@@ -1,0 +1,43 @@
+.card-list__header {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  margin: 30px auto 30px 40px;
+  text-align: left;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.card-add__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d2d2d2;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  width: 230px;
+  height: 150px;
+  font-weight: 500;
+  font-size: 30px;
+  text-decoration: none;
+  color: black;
+  transition: all ease 0.7s 0s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.card {
+  transition: all ease 0.7s 0s;
+  &:hover {
+    transform: scale(1.1);
+  }
+}

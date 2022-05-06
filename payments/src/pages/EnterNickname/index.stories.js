@@ -15,4 +15,4 @@ const state = {
   color: 'red',
 };
 
-export const enterNickname = () => <EnterNickname state={state} />;
+export const enterNickname = () => <EnterNickname />;

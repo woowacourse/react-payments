@@ -1,5 +1,22 @@
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+#root {
+  display: flex;
+  padding-top: 50px;
+  justify-content: center;
+  background-color: rgb(243, 243, 243);
+  width: 100vw;
+  height: 100vh;
+}
+
+.app {
+  display: inline-block;
+  background-color: rgb(255, 255, 255);
+  width: 500px;
+  min-height: 700px;
+  margin-bottom: 30px;
+  border: 2px solid rgba(0, 0, 0, 0.103);
 }
