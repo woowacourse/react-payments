@@ -62,3 +62,7 @@ export const ERROR_MESSAGE = {
 };
 
 export const SUCCESS_MESSAGE = "성공적으로 입력됐습니다.";
+
+export const REDUCER_TYPE = {
+  CREATE: "CREATE",
+};
