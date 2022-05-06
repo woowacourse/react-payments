@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const StyledTextBox = styled.p`
   font-size: ${(props) => props.fontSize || '24px'};
   color: ${(props) => props.color || 'black'};
+  margin: 0px;
 
   font-family: 'Roboto';
   font-style: normal;
