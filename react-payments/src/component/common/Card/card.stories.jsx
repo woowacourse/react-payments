@@ -3,14 +3,14 @@ import { cardInfos, defaultCardInfo } from "../../../constants/index";
 
 const COMPLETE_CARD_INFO = {
   cardNumber: ["1111", "2345", "3456", "4567"],
-  name: "SMING",
+  userName: "SMING",
   month: "09",
   year: "99",
 };
 
 const INCOMPLETE_CARD_INFO = {
   cardNumber: ["1111", "2345", "345", ""],
-  name: "UYEON",
+  userName: "UYEON",
   month: "05",
   year: "00",
 };
