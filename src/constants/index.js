@@ -1,5 +1,5 @@
 const CARD_COMPANY = {
-  1: { name: '포코 카드', color: 'purple', icon: '😈' },
+  1: { name: '포코 카드', color: 'purple', icon: '👾' },
   2: { name: '준 카드', color: 'yellow', icon: '😆' },
   3: { name: '공원 카드', color: 'sky', icon: '🌳' },
   4: { name: '월터 카드', color: 'white', icon: '👻' },

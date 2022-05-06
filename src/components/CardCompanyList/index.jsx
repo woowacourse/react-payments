@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { CARD_COMPANY } from 'constants';
 
+import Button from 'components/@common/Button';
+
 import Container from './styles';
 
 function CardCompanyList({ onChange, handleModalClose }) {
@@ -26,12 +28,21 @@ function CardCompanyList({ onChange, handleModalClose }) {
           <div className="name">{name}</div>
         </button>
       ))}
+
+      <Button className="company-modal-close" size="large" onClick={handleModalClose}>
+        선택 취소
+      </Button>
     </Container>
   );
 }
 
-CardCompanyList.defaultProps = {};
+CardCompanyList.defaultProps = {
+  handleModalClose: () => {},
+};
 
-CardCompanyList.propTypes = {};
+CardCompanyList.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  handleModalClose: PropTypes.func,
+};
 
 export default CardCompanyList;

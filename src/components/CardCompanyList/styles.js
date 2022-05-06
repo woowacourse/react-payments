@@ -65,6 +65,10 @@ const Container = styled.div`
       }
     }
   }
+
+  & > .company-modal-close {
+    grid-column: 1/5;
+  }
 `;
 
 export default Container;

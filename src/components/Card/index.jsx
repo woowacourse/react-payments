@@ -20,8 +20,8 @@ function Card({ companyId, cardNumber, userName, expireMonth, expireYear, isComp
   const { name = '', color = 'gray', icon = '' } = CARD_COMPANY[companyId] || {};
 
   return (
-    <Container color={color} isComplete={isComplete} onClick={onClick}>
-      <div className="card">
+    <Container color={color} isComplete={isComplete}>
+      <div className="card" onClick={onClick}>
         <div className="company-name">{name}</div>
         <div className="icon">{icon}</div>
         <div className="user-name">{userName}</div>
