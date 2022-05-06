@@ -43,9 +43,14 @@ const Template = (args) => <CardListPage {...args} />;
 
 export const Default = Template.bind({});
 
-window.localStorage.setItem(
-  "card-info",
-  JSON.stringify([firstSampleCardInfo, secondSampleCardInfo])
-);
-
 export const WithCard = Template.bind({});
+
+WithCard.decorators = [
+  (Story) => {
+    window.localStorage.setItem(
+      "card-info",
+      JSON.stringify([firstSampleCardInfo, secondSampleCardInfo])
+    );
+    return <Story />;
+  },
+];

@@ -28,4 +28,8 @@ export const decorators = [
       <Story />
     </>
   ),
+  (Story) => {
+    window.localStorage.setItem("card-info", "[]");
+    return <Story />;
+  },
 ];
