@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { PLACEHOLDER } from '../../constant';
-import { CARD_NUMBER_MARK } from '../../constant/mark';
+import { CARD_NUMBER_MARK, DATE_SEPARATOR } from '../../constant/mark';
 
 const CardContainer = styled.div`
   display: flex;
@@ -61,6 +61,14 @@ const CardOwnerName = styled.span`
 function Card({ cardCompany, cardNumbers, ownerName, expiredDate, handleClickCard }) {
   const { name, color } = cardCompany;
 
+  const displayExpiredDate = () => {
+    return expiredDate.month || expiredDate.year
+      ? `${expiredDate.month}${expiredDate.month.length === 2 ? DATE_SEPARATOR : ''}${
+          expiredDate.year
+        }`
+      : PLACEHOLDER.DATE;
+  };
+
   return (
     <CardContainer color={color} onClick={handleClickCard} canClick={handleClickCard !== undefined}>
       <CardCompanyName>{name}</CardCompanyName>
@@ -74,7 +82,7 @@ function Card({ cardCompany, cardNumbers, ownerName, expiredDate, handleClickCar
       </CardNumberContainer>
       <CardBottomContainer>
         <CardOwnerName>{ownerName || PLACEHOLDER.NAME}</CardOwnerName>
-        <span>{expiredDate ? expiredDate : PLACEHOLDER.DATE}</span>
+        <span>{displayExpiredDate()}</span>
       </CardBottomContainer>
     </CardContainer>
   );

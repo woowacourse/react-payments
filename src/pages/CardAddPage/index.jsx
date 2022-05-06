@@ -25,8 +25,7 @@ function CardAddPage({ isOpenModal, openModal }) {
 
   const { cardCompany, handleClickCardCompany } = useCardCompany();
   const { cardNumbers, isValidCardNumbers, handleChangeCardNumbersInput } = useCardNumbers();
-  const { expiredDate, convertedExpiredDate, isValidExpiredDate, handleChangeExpiredDateInput } =
-    useExpiredDate();
+  const { expiredDate, isValidExpiredDate, handleChangeExpiredDateInput } = useExpiredDate();
   const { ownerName, isValidOwnerName, handleChangeOwnerNameInput } = useOwnerName();
   const { securityNumber, isValidSecurityNumber, handleChangeSecurityNumber } = useSecurityNumber();
   const { password, isValidPassword, handleChangePassword } = usePassword();
@@ -75,7 +74,7 @@ function CardAddPage({ isOpenModal, openModal }) {
         <Card
           cardCompany={cardCompany}
           cardNumbers={cardNumbers}
-          expiredDate={convertedExpiredDate}
+          expiredDate={expiredDate}
           ownerName={ownerName}
           handleClickCard={handleClickCard}
         />
