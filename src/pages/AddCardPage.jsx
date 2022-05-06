@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 import { CardInfoListContext } from '../context';
@@ -16,6 +17,12 @@ import Button from './../components/common/Button';
 import GoBackButton from '../components/GoBackButton';
 
 import { CARD_INFO_RULES } from '../constants';
+
+const ButtonWrapper = styled.div`
+  position: absolute;
+  right: 20px;
+  bottom: 25px;
+`;
 
 export default function AddCardPage() {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
@@ -87,28 +94,30 @@ export default function AddCardPage() {
     return (
       <CardInfoListContext.Consumer>
         {({ addNewCard }) => (
-          <Button
-            type="submit"
-            onClick={e => {
-              e.preventDefault();
-              // eslint-disable-next-line no-restricted-globals
-              if (confirm(cardInfoConfirmMessage)) {
-                const cardIndex = addNewCard({
-                  cardNumber,
-                  expireDate,
-                  holderName,
-                });
-                navigate(`/updateCardNickName/${cardIndex}`, {
-                  replace: true,
-                  state: {
-                    fromAddCardForm: true,
-                    cardIndex,
-                  },
-                });
-              }
-            }}>
-            다음
-          </Button>
+          <ButtonWrapper>
+            <Button
+              type="submit"
+              onClick={e => {
+                e.preventDefault();
+                // eslint-disable-next-line no-restricted-globals
+                if (confirm(cardInfoConfirmMessage)) {
+                  const cardIndex = addNewCard({
+                    cardNumber,
+                    expireDate,
+                    holderName,
+                  });
+                  navigate(`/updateCardNickName/${cardIndex}`, {
+                    replace: true,
+                    state: {
+                      fromAddCardForm: true,
+                      cardIndex,
+                    },
+                  });
+                }
+              }}>
+              다음
+            </Button>
+          </ButtonWrapper>
         )}
       </CardInfoListContext.Consumer>
     );

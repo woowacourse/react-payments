@@ -42,6 +42,12 @@ const CardNickNameInput = styled.input`
   }
 `;
 
+const ButtonWrapper = styled.div`
+  position: absolute;
+  right: 20px;
+  bottom: 25px;
+`;
+
 export default function UpdateCardNickNamePage() {
   const { id: cardIndex } = useParams();
   const { state: locationState } = useLocation();
@@ -81,7 +87,9 @@ export default function UpdateCardNickNamePage() {
                   }
                 }}>
                 <CardNickNameInput placeholder={'카드 닉네임'} name="nickname-input" />
-                <Button type="submit">확인</Button>
+                <ButtonWrapper>
+                  <Button type="submit">확인</Button>
+                </ButtonWrapper>
               </CardNickNameForm>
             </>
           )}

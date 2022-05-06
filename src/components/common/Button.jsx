@@ -14,10 +14,6 @@ const StyledButton = styled.button`
   line-height: 16px;
   font-weight: bold;
 
-  position: absolute;
-  right: 20px;
-  bottom: 25px;
-
   &:hover {
     cursor: pointer;
     opacity: 0.7;
