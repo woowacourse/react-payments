@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
-import CardShape from '../components/CardFormPage/CardShape';
-import { CardInfoContext } from '../context';
+import React, { useContext } from 'react';
+import CardShape from '../../components/CardFormPage/CardShape';
+import { CardInfoContext } from '../../context';
 
 export default {
   title: 'CardShape',
@@ -20,8 +20,5 @@ const Template = args => {
 export const Primary = Template.bind({});
 
 Primary.args = {
-  dimensions: {
-    width: '375px',
-    height: '700px',
-  },
+  dimensions: { width: 754, height: 200 },
 };

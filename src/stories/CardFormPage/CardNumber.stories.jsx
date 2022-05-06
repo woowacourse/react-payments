@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from 'react';
-import CardNumber from '../components/CardFormPage/CardNumber';
-import { CardInfoContext } from '../context';
+import CardNumber from '../../components/CardFormPage/CardNumber';
+import { CardInfoContext } from '../../context';
 
 export default {
   title: 'CardNumber',

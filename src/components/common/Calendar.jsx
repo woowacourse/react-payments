@@ -51,7 +51,7 @@ function Calendar({ itemList, placeholder, setItem, dimensions, item }) {
 
   return (
     <CalendarContainer>
-      <Span onClick={handleClickBox}>
+      <Span onClick={handleClickBox} data-testid="date">
         <Input placeholder={placeholder} type="text" readOnly value={item} />
       </Span>
       <Modal isOpen={isShown} setIsOpen={setIsShown} dimensions={dimensions}>
@@ -59,7 +59,7 @@ function Calendar({ itemList, placeholder, setItem, dimensions, item }) {
           <SelectListWrapper>
             <List>
               {itemList.map(tem => (
-                <Item key={tem} onClick={() => handleClickDate(tem)}>
+                <Item key={tem} onClick={() => handleClickDate(tem)} data-testid="item">
                   {tem}
                 </Item>
               ))}

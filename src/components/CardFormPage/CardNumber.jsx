@@ -52,6 +52,7 @@ function CardNumber({ cardNumbers, isCorrectCardNumber }) {
             value={cardNumbers.cardNoA}
             placeholder="1234"
             required
+            data-testid="cardNoA"
           />
         </Span>
         <Span>-</Span>
@@ -65,6 +66,7 @@ function CardNumber({ cardNumbers, isCorrectCardNumber }) {
             value={cardNumbers.cardNoB}
             placeholder="1234"
             required
+            data-testid="cardNoB"
           />
         </Span>
         <Span>-</Span>
@@ -78,6 +80,7 @@ function CardNumber({ cardNumbers, isCorrectCardNumber }) {
             value={cardNumbers.cardNoC}
             placeholder="****"
             required
+            data-testid="cardNoC"
           />
         </Span>
         <Span>-</Span>
@@ -91,6 +94,7 @@ function CardNumber({ cardNumbers, isCorrectCardNumber }) {
             value={cardNumbers.cardNoD}
             placeholder="****"
             required
+            data-testid="cardNoD"
           />
         </Span>
       </InputWrapper>

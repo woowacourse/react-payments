@@ -63,7 +63,7 @@ function Card({
   cardDate: { month, year },
 }) {
   return (
-    <CardBox onClick={handleClickBox} hexColor={hexColor} large={large}>
+    <CardBox onClick={handleClickBox} hexColor={hexColor} large={large} data-testid="card">
       <CardHeader>
         <Span>{name}</Span>
       </CardHeader>

@@ -113,6 +113,7 @@ function CardSubmitPage({ nextId }) {
             name="nickname"
             value={nickname}
             onChange={handleInputChange}
+            data-testid="nickname"
           />
           <ErrorMessage>{errorMessage}</ErrorMessage>
         </Container>

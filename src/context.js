@@ -1,10 +1,10 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import { cardInfoReducer, cardListReducer, initialCardInfoState, initialCardListState } from './reducer';
 
 const CardInfoContext = React.createContext(null);
 const CardInfoDispatchContext = React.createContext(null);
-const CardInfoProvider = ({ children }) => {
-  const [cardInfo, cardInfoDispatch] = useReducer(cardInfoReducer, initialCardInfoState);
+const CardInfoProvider = ({ children, initialState }) => {
+  const [cardInfo, cardInfoDispatch] = useReducer(cardInfoReducer, initialState ?? initialCardInfoState);
 
   return (
     <CardInfoContext.Provider value={cardInfo}>
@@ -15,8 +15,8 @@ const CardInfoProvider = ({ children }) => {
 
 const CardListContext = React.createContext(null);
 const CardListDispatchContext = React.createContext(null);
-const CardListProvider = ({ children }) => {
-  const [cardList, cardListDispatch] = useReducer(cardListReducer, initialCardListState);
+const CardListProvider = ({ children, initialState }) => {
+  const [cardList, cardListDispatch] = useReducer(cardListReducer, initialState ?? initialCardListState);
 
   return (
     <CardListContext.Provider value={cardList}>
@@ -25,8 +25,17 @@ const CardListProvider = ({ children }) => {
   );
 };
 
+const PathContext = React.createContext(null);
 const SetPathContext = React.createContext(null);
+const PathProvider = ({ children }) => {
+  const [path, setPath] = useState('list-card');
 
+  return (
+    <PathContext.Provider value={path}>
+      <SetPathContext.Provider value={setPath}>{children}</SetPathContext.Provider>
+    </PathContext.Provider>
+  );
+};
 export {
   CardInfoContext,
   CardInfoDispatchContext,
@@ -34,5 +43,7 @@ export {
   CardListContext,
   CardListDispatchContext,
   CardListProvider,
+  PathContext,
   SetPathContext,
+  PathProvider,
 };

@@ -34,6 +34,7 @@ function CardOwner({ owner }) {
             value={owner.name}
             name="name"
             width="100%"
+            data-testid="name"
           />
         </InputWrapper>
       </div>

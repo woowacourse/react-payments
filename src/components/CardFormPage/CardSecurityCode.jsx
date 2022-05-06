@@ -41,6 +41,7 @@ function CardSecurityCode({ cardCode }) {
                 value={cardCode.cvc}
                 name="cvc"
                 required
+                data-testid="cvc"
               />
             </Span>
           </InputWrapper>

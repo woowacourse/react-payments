@@ -35,10 +35,25 @@ function CardPassword({ pwd, isCorrectPwd }) {
       <Label>카드 비밀번호</Label>
       <InputPasswordWrapper>
         <InputWrapper>
-          <Input type="password" maxLength={1} name="pwdNoA" onChange={handleInputChange} value={pwd.pwdNoA} />
+          <Input
+            type="password"
+            maxLength={1}
+            name="pwdNoA"
+            onChange={handleInputChange}
+            value={pwd.pwdNoA}
+            data-testid="pwdNoA"
+          />
         </InputWrapper>
         <InputWrapper>
-          <Input type="password" maxLength={1} name="pwdNoB" onChange={handleInputChange} value={pwd.pwdNoB} required />
+          <Input
+            type="password"
+            maxLength={1}
+            name="pwdNoB"
+            onChange={handleInputChange}
+            value={pwd.pwdNoB}
+            required
+            data-testid="pwdNoB"
+          />
         </InputWrapper>
         <InactiveContainer />
         <InactiveContainer />

@@ -1,14 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 
 import CardFormPage from './components/CardFormPage';
 import CardListPage from './components/CardListPage';
 import CardSubmitPage from './components/CardSubmitPage';
-import { CardInfoProvider, CardListProvider, SetPathContext } from './context';
+import { CardInfoProvider, CardListProvider, PathContext } from './context';
 
 function App() {
+  const path = useContext(PathContext);
   const targetRef = useRef();
   const nextId = useRef(1);
-  const [path, setPath] = useState('list-card');
 
   const checkRoutes = route => {
     switch (route) {
@@ -25,11 +25,9 @@ function App() {
 
   return (
     <main className="app" ref={targetRef}>
-      <SetPathContext.Provider value={setPath}>
-        <CardInfoProvider>
-          <CardListProvider>{checkRoutes(path)}</CardListProvider>
-        </CardInfoProvider>
-      </SetPathContext.Provider>
+      <CardInfoProvider>
+        <CardListProvider>{checkRoutes(path)}</CardListProvider>
+      </CardInfoProvider>
     </main>
   );
 }

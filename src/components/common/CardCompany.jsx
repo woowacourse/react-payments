@@ -27,7 +27,7 @@ const CompanyName = styled.p`
 
 function CardCompany({ hexColor, name, handleClick }) {
   return (
-    <CompanyContainer onClick={handleClick}>
+    <CompanyContainer onClick={handleClick} data-testid="card-company">
       <CompanyColorCircle hexColor={hexColor}></CompanyColorCircle>
       <CompanyName>{name}</CompanyName>
     </CompanyContainer>

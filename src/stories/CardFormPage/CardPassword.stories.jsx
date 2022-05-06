@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from 'react';
-import CardPassword from '../components/CardFormPage/CardPassword';
-import { CardInfoContext } from '../context';
+import CardPassword from '../../components/CardFormPage/CardPassword';
+import { CardInfoContext } from '../../context';
 
 export default {
   title: 'CardPassword',
