@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledTextBox = styled.text`
+const StyledTextBox = styled.p`
   font-size: ${(props) => props.fontSize || '24px'};
   color: ${(props) => props.color || 'black'};
 
