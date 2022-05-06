@@ -1,6 +1,8 @@
 import { memo } from 'react';
 import styled from 'styled-components';
 
+import PropTypes from 'prop-types';
+
 import Card from './Basic';
 
 const CardName = styled.div`
@@ -34,5 +36,15 @@ function DisplayCard({
     </div>
   );
 }
+
+DisplayCard.propTypes = {
+  bgColor: PropTypes.string,
+  cardName: PropTypes.string,
+  className: PropTypes.string,
+  company: PropTypes.string,
+  number: PropTypes.string,
+  ownerName: PropTypes.string,
+  validDate: PropTypes.string,
+};
 
 export default memo(DisplayCard);
