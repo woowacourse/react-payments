@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-import Input from "./UIComponents/Input/Input";
-import InputField from "./UIComponents/InputField/InputField";
+import Input from "../UIComponents/Input/Input";
+import InputField from "../UIComponents/InputField/InputField";
 
-import { CARD_INFO_RULES } from "../constants/constants";
+import { CARD_INFO_RULES } from "../../constants/constants";
 
 const StyledInputCounter = styled.p`
   position: absolute;
