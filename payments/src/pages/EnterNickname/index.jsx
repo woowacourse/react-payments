@@ -17,15 +17,21 @@ const EnterNickname = () => {
 
   return (
     <div className='enter-nickname__page'>
-      <p>카드 등록이 완료 됐습니다.</p>
-      <p className='enter-nickname__comment'>카드 별칭을 등록해 주세요.</p>
-      <Card state={inputStates}></Card>
-      <Input className='enter-nickname__input' placeholder='카드이름입력란'></Input>
-      <div className='enter__button'>
-        <Button onClick={onClick} className='confirm__button'>
-          <Link to='/'>확인</Link>
-        </Button>
-      </div>
+      <header>
+        <p>카드 등록이 완료 됐습니다.</p>
+        <p className='enter-nickname__comment'>카드 별칭을 등록해 주세요.</p>
+      </header>
+      <form>
+        <Card state={inputStates}></Card>
+        <Input className='enter-nickname__input' placeholder='카드이름입력란'></Input>
+        <div className='enter__button'>
+          <Link to='/'>
+            <Button onClick={onClick} className='confirm__button'>
+              확인
+            </Button>
+          </Link>
+        </div>
+      </form>
     </div>
   );
 };

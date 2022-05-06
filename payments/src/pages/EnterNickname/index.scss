@@ -2,14 +2,50 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
-}
+  height: 94vh;
+  max-width: 500px;
+  padding: 2rem;
+  gap: 40px;
 
-.enter-nickname__comment {
-  font-size: 13px;
+  header {
+    margin-top: 30px;
+  }
+
+  .enter-nickname__comment {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    cursor: default;
+    margin-top: 10px;
+    font-size: 10px;
+  }
+
+  .enter__button {
+    display: flex;
+    justify-content: end;
+    position: relative;
+    top: 380px;
+    width: 89%;
+    .confirm__button {
+      background-color: inherit;
+      color: #04c09e;
+      border: none;
+      cursor: pointer;
+    }
+  }
+
+  form {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .enter-nickname__input {
+  width: 150px;
+  margin-top: 50px;
   text-align: center;
   border-style: none none solid none;
   &:focus {
@@ -18,14 +54,4 @@
     transform: scale(1.2);
     transition-duration: 0.5s;
   }
-}
-
-.confirm__button {
-  background-color: inherit;
-  color: #04c09e;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
 }
