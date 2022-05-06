@@ -26,6 +26,14 @@ const StyledCompleteAddCardPage = styled.div`
   .input-box {
     margin: 0 43px;
   }
+
+  .button {
+    position: absolute;
+    width: 51px;
+    height: 34px;
+    right: 25px;
+    bottom: 16px;
+  }
 `;
 
 const CompleteAddCardPage = () => {

@@ -9,12 +9,6 @@ const StyledButton = styled.button`
   cursor: pointer;
   outline: inherit;
 
-  position: absolute;
-  width: 51px;
-  height: 34px;
-  right: 25px;
-  bottom: 16px;
-
   text-align: right;
   font-weight: 700;
   font-size: 14px;
@@ -25,7 +19,7 @@ const StyledButton = styled.button`
   &:active,
   &:hover,
   &:focus {
-    opacity: 0.3;
+    opacity: 0.8;
   }
 
   &:disabled {
@@ -34,9 +28,15 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ children, color, backgroundColor }) => {
+const Button = ({ children, color, backgroundColor, ...rest }) => {
   return (
-    <StyledButton color={color} backgroundColor={backgroundColor}>
+    <StyledButton
+      className="button"
+      type="button"
+      color={color}
+      backgroundColor={backgroundColor}
+      {...rest}
+    >
       {children}
     </StyledButton>
   );

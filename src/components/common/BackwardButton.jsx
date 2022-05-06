@@ -25,7 +25,7 @@ const StyledButton = styled.button`
 
 const BackwardButton = ({ children, ...rest }) => {
   return (
-    <StyledButton type="button" {...rest}>
+    <StyledButton type="button" className="backward-button" {...rest}>
       <BackwardArrow />
       <p>{children}</p>
     </StyledButton>
