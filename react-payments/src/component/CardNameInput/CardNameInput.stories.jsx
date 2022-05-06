@@ -5,6 +5,10 @@ export default {
   component: CardNameInput,
 };
 
-export const DefaultCardNameInput = (args) => <CardNameInput {...args} />;
+export const FailedCardNameInput = (args) => <CardNameInput {...args} />;
 
-CardNameInput.args = {};
+FailedCardNameInput.args = {};
+
+export const SuccessCardNameInput = (args) => <CardNameInput {...args} />;
+
+SuccessCardNameInput.args = { ready: true };
