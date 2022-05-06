@@ -40,14 +40,14 @@ export default function CardHolderNameInput({ holderName, onChange }) {
       }
     >
       <Input
-        name={holderName.name}
-        className={holderName.name}
+        name={"holderName"}
+        className={"holderName"}
         value={holderName.value}
-        type={holderName.type}
-        placeholder={holderName.placeholder}
-        width={holderName.width}
-        textAlign={holderName.textAlign}
-        maxLength={holderName.maxLength}
+        type={"text"}
+        placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
+        width={"100%"}
+        textAlign={"left"}
+        maxLength={30}
         onChange={(e) => onChange(e, holderName.keyType)}
         isComplete={holderName.value !== ""}
       />

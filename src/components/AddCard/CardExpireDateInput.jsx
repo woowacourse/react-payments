@@ -23,13 +23,13 @@ export default function CardExpireDateInput({ expireDate, onChange }) {
       {expireDateList.map((expireDate) => (
         <Fragment key={expireDate.keyType}>
           <Input
-            name={expireDate.name}
-            className={expireDate.name}
+            name={"expireDate"}
+            className={"expireDate"}
             value={expireDate.value}
-            type={expireDate.type}
-            placeholder={expireDate.placeholder}
-            width={expireDate.width}
-            maxLength={expireDate.maxLength}
+            type={"text"}
+            placeholder={expireDate.keyType === "month" ? "MM" : "YY"}
+            width={"40px"}
+            maxLength={2}
             required
             onChange={(e) => onChange(e, expireDate.keyType)}
             isComplete={expireDate.value.length === 2}

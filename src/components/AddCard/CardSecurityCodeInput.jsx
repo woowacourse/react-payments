@@ -69,12 +69,12 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
       }
     >
       <Input
-        name={securityCode.name}
-        className={securityCode.name}
-        type={securityCode.type}
-        placeholder={securityCode.placeholder}
-        width={securityCode.width}
-        maxLength={securityCode.maxLength}
+        name={"securityCode"}
+        className={"securityCode"}
+        type={"password"}
+        placeholder={"• • •"}
+        width={"100%"}
+        maxLength={3}
         required
         onChange={(e) => onChange(e, securityCode.keyType)}
         isComplete={

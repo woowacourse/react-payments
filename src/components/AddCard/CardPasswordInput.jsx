@@ -22,12 +22,12 @@ export default function CardPasswordInput(props) {
       {passwordList.map((password) => (
         <Input
           key={password.keyType}
-          name={password.name}
-          className={password.name}
-          type={password.type}
-          placeholder={password.placeholder}
-          width={password.width}
-          maxLength={password.maxLength}
+          name={"password"}
+          className={"password"}
+          type={"password"}
+          placeholder={"•"}
+          width={"100%"}
+          maxLength={1}
           required
           isComplete={password.value.length === 1}
           onChange={(e) => onChange(e, password.keyType)}

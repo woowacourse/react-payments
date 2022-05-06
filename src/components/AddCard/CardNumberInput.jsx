@@ -25,23 +25,23 @@ export default function CardNumberInput(props) {
         CARD_INFO_RULES.NUMBER_UNIT_COUNT * CARD_INFO_RULES.NUMBER_UNIT_LENGTH
       }
     >
-      {cardNumberList.map((cardNumber) => (
+      {cardNumberList.map((cardNumber, index) => (
         <Fragment key={cardNumber.keyType}>
           <Input
-            name={cardNumber.name}
-            className={cardNumber.name}
+            name={"cardNumber"}
+            className={"cardNumber"}
             value={cardNumber.value}
-            type={cardNumber.type}
-            placeholder={cardNumber.placeholder}
-            maxLength={cardNumber.maxLength}
-            autoFocus={cardNumber.index === 0}
+            type={index < 2 ? "number" : "password"}
+            placeholder={index < 2 ? "1 2 3 4" : "• • • •"}
+            maxLength={4}
+            autoFocus={cardNumber.keyType === "firstCardNumber"}
             required
             onChange={(e) => onChange(e, cardNumber.keyType)}
             isComplete={
               cardNumber.value.length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
             }
           />
-          {cardNumber.index !== 3 && <p>-</p>}
+          {cardNumber.keyType !== "fourthCardNumber" && <p>-</p>}
         </Fragment>
       ))}
     </InputField>
