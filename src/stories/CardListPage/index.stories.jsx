@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { within, userEvent } from '@storybook/testing-library';
+import React from 'react';
 import CardListPage from '../../components/CardListPage';
 
 export default {
