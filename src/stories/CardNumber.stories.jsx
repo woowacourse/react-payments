@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react';
-import CardNumber from '../components/CardNumber';
-import useInputHandler from '../hooks/useInputHandler';
-import { validateCardNumbers } from '../validator';
+import React, { useContext, useMemo } from 'react';
+import CardNumber from '../components/CardFormPage/CardNumber';
+import { CardInfoContext } from '../context';
 
 export default {
   title: 'CardNumber',
@@ -9,29 +8,10 @@ export default {
 };
 
 const Template = () => {
-  const {
-    errorMessage: cardNoErrorMessage,
-    setErrorMessage: setCardNoErrorMessage,
-    inputValue: cardNumbers,
-    updateInputState: updateCardNumbers,
-  } = useInputHandler(validateCardNumbers, {
-    cardNoA: '',
-    cardNoB: '',
-    cardNoC: '',
-    cardNoD: '',
-  });
-
+  const { cardNumbers } = useContext(CardInfoContext);
   const isCorrectCardNumber = useMemo(() => Object.values(cardNumbers).join('').length === 16, [cardNumbers]);
 
-  return (
-    <CardNumber
-      errorMessage={cardNoErrorMessage}
-      setErrorMessage={setCardNoErrorMessage}
-      cardNumbers={cardNumbers}
-      updateCardNumbers={updateCardNumbers}
-      isCorrectCardNumber={isCorrectCardNumber}
-    />
-  );
+  return <CardNumber cardNumbers={cardNumbers} isCorrectCardNumber={isCorrectCardNumber} />;
 };
 
 export const Primary = Template.bind({});

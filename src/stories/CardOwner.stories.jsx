@@ -1,7 +1,6 @@
-import React from 'react';
-import CardOwner from '../components/CardOwner';
-import useInputHandler from '../hooks/useInputHandler';
-import { validateOwner } from '../validator';
+import React, { useContext } from 'react';
+import CardOwner from '../components/CardFormPage/CardOwner';
+import { CardInfoContext } from '../context';
 
 export default {
   title: 'CardOwner',
@@ -9,14 +8,8 @@ export default {
 };
 
 const Template = () => {
-  const {
-    errorMessage: ownerErrorMessage,
-    inputValue: owner,
-    updateInputState: updateOwner,
-  } = useInputHandler(validateOwner, {
-    name: '',
-  });
-  return <CardOwner errorMessage={ownerErrorMessage} owner={owner} updateOwner={updateOwner} />;
+  const { owner } = useContext(CardInfoContext);
+  return <CardOwner owner={owner} />;
 };
 
 export const Primary = Template.bind({});

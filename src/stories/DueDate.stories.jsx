@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import DueDate from '../components/DueDate';
+import React, { useContext, useState } from 'react';
+import DueDate from '../components/CardFormPage/DueDate';
+import { CardInfoContext } from '../context';
 
 export default {
   title: 'DueDate',
@@ -10,11 +11,8 @@ export default {
 };
 
 const Template = args => {
-  const [cardDate, setCardDate] = useState({
-    month: '',
-    year: '',
-  });
-  return <DueDate {...args} cardDate={cardDate} setCardDate={setCardDate} />;
+  const { cardDate } = useContext(CardInfoContext);
+  return <DueDate {...args} cardDate={cardDate} />;
 };
 
 export const Primary = Template.bind({});

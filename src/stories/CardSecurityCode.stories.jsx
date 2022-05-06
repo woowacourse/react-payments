@@ -1,7 +1,6 @@
-import React from 'react';
-import CardSecurityCode from '../components/CardSecurityCode';
-import useInputHandler from '../hooks/useInputHandler';
-import { validateCardCode } from '../validator';
+import React, { useContext } from 'react';
+import CardSecurityCode from '../components/CardFormPage/CardSecurityCode';
+import { CardInfoContext } from '../context';
 
 export default {
   title: 'CardSecurityCode',
@@ -9,15 +8,8 @@ export default {
 };
 
 const Template = () => {
-  const {
-    errorMessage: cardCodeErrorMessage,
-    inputValue: cardCode,
-    updateInputState: updateCardCode,
-  } = useInputHandler(validateCardCode, {
-    cvc: '',
-  });
-
-  return <CardSecurityCode errorMessage={cardCodeErrorMessage} cardCode={cardCode} updateCardCode={updateCardCode} />;
+  const { cardCode } = useContext(CardInfoContext);
+  return <CardSecurityCode cardCode={cardCode} />;
 };
 
 export const Primary = Template.bind({});

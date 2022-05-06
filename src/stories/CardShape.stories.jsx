@@ -1,35 +1,27 @@
-import React, { useState } from 'react';
-import CardShape from '../components/CardShape';
+import React, { useContext, useState } from 'react';
+import CardShape from '../components/CardFormPage/CardShape';
+import { CardInfoContext } from '../context';
 
 export default {
   title: 'CardShape',
   component: CardShape,
   argTypes: {
-    cardCompany: { control: 'object' },
-    cardNumber: { control: 'text' },
-    cardOwnerName: { control: 'text' },
-    cardDate: { control: 'object' },
-    dimensions: { control: 'object' },
+    dimensions: { controls: 'object' },
   },
 };
 
 const Template = args => {
-  const [cardCompany, setCardCompany] = useState({
-    hexColor: '',
-    name: '',
-  });
-
-  return <CardShape {...args} setCardCompany={setCardCompany} cardCompany={cardCompany} />;
+  const { cardCompany, cardNumbers, owner, cardDate } = useContext(CardInfoContext);
+  return (
+    <CardShape {...args} cardCompany={cardCompany} cardNumbers={cardNumbers} cardOwner={owner} cardDate={cardDate} />
+  );
 };
 
 export const Primary = Template.bind({});
 
 Primary.args = {
-  cardNumber: '0000-0000-****-****',
-  cardOwnerName: 'COKE TAETAE',
-  cardDate: { month: '01', year: '23' },
   dimensions: {
-    width: 754,
-    height: 200,
+    width: '375px',
+    height: '700px',
   },
 };
