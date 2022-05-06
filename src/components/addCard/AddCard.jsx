@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import AddCardForm from '../addCardForm/AddCardForm';
+import { Link } from 'react-router-dom';
+import AddCardForm from './cardForm/AddCardForm';
 import Card from '../card/Card';
 
 function AddCard() {
@@ -29,7 +30,9 @@ function AddCard() {
   return (
     <>
       <div className="header-wrapper">
-        <div className="back-button" />
+        <Link to="/react-payments">
+          <div className="back-button" />
+        </Link>
         <h2 className="page-title">카드 추가</h2>
       </div>
       <Card card={card} />
