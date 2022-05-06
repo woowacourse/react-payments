@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Head from '../../components/Head';
 import Card from '../../components/Card';
 import CardNumbersInput from '../../components/CardNumbersInput';
@@ -10,15 +11,18 @@ import ModalPortal from '../../components/ModalPortal';
 import CardCompanySelector from '../../components/CardCompanySelector';
 import { Page, CardSection, Form, SubmitButtonContainer } from './style';
 import MESSAGE from '../../constant/message';
+import { useCardListContext } from 'context/cardList';
 import useCardCompany from '../../hooks/useCardCompany';
 import useCardNumbers from '../../hooks/useCardNumbers';
 import useExpiredDate from '../../hooks/useExpiredDate';
 import useOwnerName from '../../hooks/useOwnerName';
 import useSecurityNumber from '../../hooks/useSecurityNumber';
 import usePassword from '../../hooks/usePassword';
-import useCardAdd from '../../hooks/useCardAdd';
 
 function CardAddPage({ isOpenModal, openModal }) {
+  const navigate = useNavigate();
+  const { addCard } = useCardListContext();
+
   const { cardCompany, handleClickCardCompany } = useCardCompany();
   const { cardNumbers, isValidCardNumbers, handleChangeCardNumbersInput } = useCardNumbers();
   const { expiredDate, convertedExpiredDate, isValidExpiredDate, handleChangeExpiredDateInput } =
@@ -26,7 +30,6 @@ function CardAddPage({ isOpenModal, openModal }) {
   const { ownerName, isValidOwnerName, handleChangeOwnerNameInput } = useOwnerName();
   const { securityNumber, isValidSecurityNumber, handleChangeSecurityNumber } = useSecurityNumber();
   const { password, isValidPassword, handleChangePassword } = usePassword();
-  const { addCard } = useCardAdd();
 
   const isAllValidInput = () => {
     return (
@@ -45,8 +48,23 @@ function CardAddPage({ isOpenModal, openModal }) {
   const handleSubmit = event => {
     event.preventDefault();
 
+    const cardInfo = {
+      alias: '',
+      cardCompany,
+      cardNumbers,
+      expiredDate,
+      ownerName,
+      securityNumber,
+      password,
+    };
+
     if (isAllValidInput()) {
-      addCard();
+      const cardId = addCard(cardInfo);
+      navigate('/cardAddCompletion', {
+        state: {
+          cardId,
+        },
+      });
     }
   };
 
@@ -57,8 +75,8 @@ function CardAddPage({ isOpenModal, openModal }) {
         <Card
           cardCompany={cardCompany}
           cardNumbers={cardNumbers}
-          ownerName={ownerName}
           expiredDate={convertedExpiredDate}
+          ownerName={ownerName}
           handleClickCard={handleClickCard}
         />
       </CardSection>

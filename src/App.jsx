@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import CardAddPage from './pages/CardAddPage/';
 import CardAddCompletionPage from 'pages/CardAddCompletionPage';
 import { GlobalStyle, ModalContainer } from './style';
+import { CardListProvider } from './context/cardList';
 import useModal from './hooks/useModal';
 
 function App() {
@@ -19,19 +20,21 @@ function App() {
     <>
       <GlobalStyle />
       <div className="App">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <CardAddPage
-                isOpenModal={isOpenModal}
-                openModal={openModal}
-                closeModal={closeModal}
-              />
-            }
-          />
-          <Route path="cardAddCompletion" element={<CardAddCompletionPage />} />
-        </Routes>
+        <CardListProvider>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <CardAddPage
+                  isOpenModal={isOpenModal}
+                  openModal={openModal}
+                  closeModal={closeModal}
+                />
+              }
+            />
+            <Route path="cardAddCompletion" element={<CardAddCompletionPage />} />
+          </Routes>
+        </CardListProvider>
         <ModalContainer
           id="modal-container"
           visibility={isOpenModal ? 'visible' : 'hidden'}
