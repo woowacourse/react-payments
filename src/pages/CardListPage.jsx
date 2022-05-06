@@ -4,6 +4,7 @@ import { CardContext } from "contexts/CardContext";
 
 import { FlexWrapper } from "components/common/styled";
 import { Card, Button, PageTitle } from "components/common";
+import { NewCard } from "components/common/NewCard";
 
 export const CardListPage = () => {
   const navigate = useNavigate();
@@ -29,6 +30,9 @@ export const CardListPage = () => {
                 />
               </Button>
             ))}
+            <Button textAlign="center">
+              <NewCard></NewCard>
+            </Button>
           </FlexWrapper>
         </>
       )}
