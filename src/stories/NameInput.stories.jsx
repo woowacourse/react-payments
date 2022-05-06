@@ -12,5 +12,4 @@ export const OwnerNameInput = Template.bind({});
 
 OwnerNameInput.args = {
   value: '1234',
-  updateCard: () => {},
 };

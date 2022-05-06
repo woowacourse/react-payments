@@ -12,5 +12,4 @@ export const CardPasswordInput = Template.bind({});
 
 CardPasswordInput.args = {
   value: '1',
-  updateCard: () => {},
 };

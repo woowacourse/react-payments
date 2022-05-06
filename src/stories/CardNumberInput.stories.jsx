@@ -13,7 +13,6 @@ export const DisplayedCardNumberInput = Template.bind({});
 
 DisplayedCardNumberInput.args = {
   value: '1234',
-  updateCard: () => {},
 };
 
 export const HiddenCardNumberInput = Template.bind({});
@@ -21,5 +20,4 @@ export const HiddenCardNumberInput = Template.bind({});
 HiddenCardNumberInput.args = {
   type: 'password',
   value: '1234',
-  updateCard: () => {},
 };

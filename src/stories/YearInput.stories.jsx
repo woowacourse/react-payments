@@ -12,5 +12,4 @@ export const ExpiredYearInput = Template.bind({});
 
 ExpiredYearInput.args = {
   value: '24',
-  updateCard: () => {},
 };

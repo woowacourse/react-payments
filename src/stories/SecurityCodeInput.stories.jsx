@@ -12,5 +12,4 @@ export const CardSecurityCodeInput = Template.bind({});
 
 CardSecurityCodeInput.args = {
   value: '123',
-  updateCard: () => {},
 };
