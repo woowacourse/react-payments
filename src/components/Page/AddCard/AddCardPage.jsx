@@ -37,9 +37,6 @@ const AddCardPage = () => {
   const { cardList, setCardList } = useContext(CardListContext);
   const { cardIndex, setCardIndex } = useContext(CardIndexContext);
 
-  const [isValidatedForm, setIsValidatedForm] = useState(false);
-  const [isValidatedValueLength, setIsValidatedValueLength] = useState(false);
-
   const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] = useInputValue({
     validation: checkCardNumber,
   });
@@ -79,55 +76,28 @@ const AddCardPage = () => {
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
-  useEffect(() => {
-    setIsValidatedForm(
-      !isFirstCardNumberError &&
-        !isSecondCardNumberError &&
-        !isThirdCardNumberError &&
-        !isFourthCardNumberError &&
-        !isExpiredMonthError &&
-        !isExpiredYearError &&
-        !isOwnerNameError &&
-        !isSecureCodeError &&
-        !isFirstPasswordError &&
-        !isSecondPasswordError,
-    );
-  }, [
-    isFirstCardNumberError,
-    isSecondCardNumberError,
-    isThirdCardNumberError,
-    isFourthCardNumberError,
-    isExpiredMonthError,
-    isExpiredYearError,
-    isOwnerNameError,
-    isSecureCodeError,
-    isFirstPasswordError,
-    isSecondPasswordError,
-  ]);
+  const isValidatedForm =
+    !isFirstCardNumberError &&
+    !isSecondCardNumberError &&
+    !isThirdCardNumberError &&
+    !isFourthCardNumberError &&
+    !isExpiredMonthError &&
+    !isExpiredYearError &&
+    !isOwnerNameError &&
+    !isSecureCodeError &&
+    !isFirstPasswordError &&
+    !isSecondPasswordError;
 
-  useEffect(() => {
-    setIsValidatedValueLength(
-      firstCardNumber.length > 0 &&
-        secondCardNumber.length > 0 &&
-        thirdCardNumber.length > 0 &&
-        fourthCardNumber.length > 0 &&
-        firstPassword.length > 0 &&
-        secondPassword.length > 0 &&
-        secureCode.length > 0 &&
-        expiredMonth.length > 0 &&
-        expiredYear.length > 0,
-    );
-  }, [
-    firstCardNumber,
-    secondCardNumber,
-    thirdCardNumber,
-    fourthCardNumber,
-    firstPassword,
-    secondPassword,
-    secureCode,
-    expiredMonth,
-    expiredYear,
-  ]);
+  const isValidatedValueLength =
+    firstCardNumber.length > 0 &&
+    secondCardNumber.length > 0 &&
+    thirdCardNumber.length > 0 &&
+    fourthCardNumber.length > 0 &&
+    firstPassword.length > 0 &&
+    secondPassword.length > 0 &&
+    secureCode.length > 0 &&
+    expiredMonth.length > 0 &&
+    expiredYear.length > 0;
 
   const onSubmitCardForm = (e) => {
     const newCardObj = createCardObject();
