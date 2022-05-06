@@ -33,6 +33,7 @@ function CardOwner({ owner }) {
             onChange={handleInputChange}
             value={owner.name}
             name="name"
+            width="100%"
           />
         </InputWrapper>
       </div>

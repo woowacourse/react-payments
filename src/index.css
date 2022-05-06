@@ -18,7 +18,7 @@ code {
 }
 
 .app {
-  min-width: 375px;
+  width: 375px;
   min-height: 700px;
   padding: 16px;
   background-color: #fff;

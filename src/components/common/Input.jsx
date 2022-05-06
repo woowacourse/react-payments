@@ -5,7 +5,7 @@ import { INPUT_PRIMARY_BG_COLOR, PLACEHOLDER_PRIMARY_COLOR } from '../../style';
 const InputBox = styled.input`
   background-color: ${INPUT_PRIMARY_BG_COLOR};
   height: 45px;
-  width: 50px;
+  width: ${props => props.width || `50px`};
   text-align: center;
   outline-offset: 2px;
   border-radius: 0.25rem;
