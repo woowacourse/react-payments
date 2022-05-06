@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import * as S from 'styles.js';
-import ErrorMessage from 'components/ErrorMessage';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 import validator from 'lib/validations/validator';
 import { CARD_COMPANIES } from 'lib/constants/cardDomain';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
+import Label from 'components/Label/Label';
 
 export default function CardCvc() {
   const { cardCvc, cardCvcErrorMessage, cardCompanyIndex } = useContext(CardStateContext);
@@ -20,9 +21,11 @@ export default function CardCvc() {
 
   const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
 
+  const name = '보안코드(CVC/CVV)';
+
   return (
     <>
-      <S.InputTitle>보안코드(CVC/CVV)</S.InputTitle>
+      <Label htmlFor={name}>{name}</Label>
       <S.InputBox>
         <S.InputContainer width="23%">
           <S.InputBasic
@@ -31,6 +34,7 @@ export default function CardCvc() {
             value={cardCvc}
             color={cardColor}
             onChange={onChangeInput}
+            id={name}
           />
         </S.InputContainer>
         <S.TipButton onClick={onClickTip}>?</S.TipButton>

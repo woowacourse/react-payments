@@ -1,5 +1,5 @@
 import React from 'react';
-import CardExpiration from 'components/CardExpiration';
+import CardExpiration from 'containers/CardExpirationInput/CardExpiration';
 
 export default {
   title: 'CardAddition/CardExpiration',

@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import * as S from 'styles.js';
-import ErrorMessage from 'components/ErrorMessage';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 import validator from 'lib/validations/validator';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import AutoFocusInputBox from 'common/AutoFocusInputBox';
+import Label from 'components/Label/Label';
 
 export default function CardExpiration({ color }) {
   const { cardExpiration, cardExpirationErrorMessage } = useContext(CardStateContext);
@@ -13,10 +14,11 @@ export default function CardExpiration({ color }) {
   const onChangeInput = (index) => (e) => {
     dispatch({ type: TYPES.SET_EXPIRATION, value: e.target.value, index });
   };
+  const name = '만료일';
 
   return (
     <>
-      <S.InputTitle>만료일</S.InputTitle>
+      <Label htmlFor={name}>{name}</Label>
       <S.InputBox>
         <S.InputContainer width="40%">
           <AutoFocusInputBox maxValueLength={2}>
@@ -28,6 +30,7 @@ export default function CardExpiration({ color }) {
               color={color}
               value={cardExpiration[0]}
               onChange={onChangeInput(0)}
+              id={name}
             />
             <S.InputBasic
               type="text"

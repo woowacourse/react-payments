@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import * as S from 'styles.js';
-import ErrorMessage from 'components/ErrorMessage';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 import validator from 'lib/validations/validator';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import AutoFocusInputBox from 'common/AutoFocusInputBox';
+import Label from 'components/Label/Label';
 
 export default function CardNumber({ color }) {
   const { cardNumber, cardNumberErrorMessage, cardCompanyIndex } = useContext(CardStateContext);
@@ -19,9 +20,11 @@ export default function CardNumber({ color }) {
     cardCompanyIndex === -1 && dispatch({ type: TYPES.SET_LIST_MODAL_FLAG, flag: true });
   };
 
+  const name = '카드 번호';
+
   return (
     <>
-      <S.InputTitle>카드 번호</S.InputTitle>
+      <Label htmlFor={name}>{name}</Label>
       <S.InputBox>
         <S.ExtendedInputContainer>
           <AutoFocusInputBox maxValueLength={4}>
@@ -33,6 +36,7 @@ export default function CardNumber({ color }) {
               value={cardNumber[0]}
               onChange={onChangeInput(0)}
               onFocus={onFocusInput}
+              id={name}
             />
             <S.Hyphen color={color}>-</S.Hyphen>
             <S.InputBasic

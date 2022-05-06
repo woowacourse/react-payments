@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import * as S from 'styles.js';
-import ErrorMessage from 'components/ErrorMessage';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 import validator from 'lib/validations/validator';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import AutoFocusInputBox from 'common/AutoFocusInputBox';
+import Label from 'components/Label/Label';
 
 export default function CardPassword({ color }) {
   const { cardPassword, cardPasswordErrorMessage } = useContext(CardStateContext);
@@ -14,9 +15,11 @@ export default function CardPassword({ color }) {
     dispatch({ type: TYPES.SET_PASSWORD, value: e.target.value, index });
   };
 
+  const name = '카드 비밀번호';
+
   return (
     <>
-      <S.InputTitle>카드 비밀번호</S.InputTitle>
+      <Label htmlFor={name}>{name}</Label>
       <S.ExtendedInputBox>
         <AutoFocusInputBox maxValueLength={1}>
           <S.InputBasic
@@ -26,6 +29,7 @@ export default function CardPassword({ color }) {
             color={color}
             value={cardPassword[0]}
             onChange={onChangeInput(0)}
+            id={name}
           />
           <S.InputBasic
             type="password"

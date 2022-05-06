@@ -1,5 +1,5 @@
 import React from 'react';
-import CardCvc from 'components/CardCvc';
+import CardCvc from 'containers/CardCvcInput/CardCvc';
 
 export default {
   title: 'CardAddition/CardCvc',

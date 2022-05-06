@@ -1,5 +1,5 @@
 import React from 'react';
-import CardPassword from 'components/CardPassword';
+import CardPassword from 'containers/CardPasswordInput/CardPassword';
 
 export default {
   title: 'CardAddition/CardPassword',

@@ -1,5 +1,5 @@
 import { useCallback, useContext } from 'react';
-import CardCompany from 'components/CardCompany';
+import CardCompany from 'components/CardCompany/CardCompany';
 import ToastModal from 'components/ToastModal';
 import { CARD_COMPANIES } from 'lib/constants/cardDomain';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';

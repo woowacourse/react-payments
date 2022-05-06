@@ -1,5 +1,5 @@
 import React from 'react';
-import CardOwner from 'components/CardOwner';
+import CardOwner from 'containers/CardOwnerInput.jsx/CardOwner';
 
 export default {
   title: 'CardAddition/CardOwner',

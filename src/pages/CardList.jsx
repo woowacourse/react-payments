@@ -2,12 +2,12 @@ import React from 'react';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from 'styles.js';
-import PageTitle from 'components/PageTitle';
-import AnotherCard from 'components/AnotherCard';
+import PageTitle from 'components/PageTitle/PageTitle';
+import AnotherCard from 'components/AnotherCard/AnotherCard';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import { DraggableCard, DroppableArea } from 'common/DragDrop';
-import Card from 'components/Card';
+import Card from 'components/Card/Card';
 import styled from 'styled-components';
 
 function CardList() {

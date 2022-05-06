@@ -80,7 +80,7 @@ export const InputContainer = styled.div`
   border-radius: 0.25rem;
 `;
 
-export const InputTitle = styled.span`
+export const InputTitle = styled.label`
   display: flex;
   align-items: center;
   font-size: 12px;
@@ -282,16 +282,6 @@ export const PageTitle = styled.span`
   font-weight: 500;
   font-size: 18px;
   letter-spacing: -0.085em;
-`;
-
-export const PrevButton = styled.span`
-  font-size: 50px;
-
-  cursor: pointer;
-  line-height: 10px;
-  margin-right: 17px;
-  &:hover {
-  }
 `;
 
 export const TipButton = styled.div`

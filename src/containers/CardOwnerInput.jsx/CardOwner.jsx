@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 import * as S from 'styles.js';
 import validator from 'lib/validations/validator';
-import ErrorMessage from 'components/ErrorMessage';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
+import Label from 'components/Label/Label';
 
 export default function CardOwner({ color }) {
   const { cardOwner, cardOwnerErrorMessage } = useContext(CardStateContext);
@@ -12,11 +13,14 @@ export default function CardOwner({ color }) {
   const onChangeInput = (e) => {
     dispatch({ type: TYPES.SET_OWNER, value: e.target.value });
   };
+  const name = '카드소유자 이름(선택)';
 
   return (
     <>
       <S.TitleWrapper>
-        <S.InputTitle marginBottom="0px">카드소유자 이름(선택)</S.InputTitle>
+        <Label htmlFor={name} marginBottom="0px">
+          {name}
+        </Label>
         <S.NameLength isLengthValidated={cardOwner.length > 30}>
           <span>{cardOwner.length}</span>/<span>30</span>
         </S.NameLength>
@@ -30,6 +34,7 @@ export default function CardOwner({ color }) {
             color={color}
             value={cardOwner}
             onChange={onChangeInput}
+            id={name}
           />
         </S.InputContainer>
       </S.InputBox>
