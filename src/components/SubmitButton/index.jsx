@@ -10,6 +10,7 @@ const Button = styled.button`
   text-align: right;
   color: #04c09e;
   background-color: white;
+  cursor: pointer;
 `;
 
 function SubmitButton({ label, width, height, hidden }) {

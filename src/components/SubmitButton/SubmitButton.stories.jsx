@@ -1,8 +1,5 @@
 import React from 'react';
 import SubmitButton from '.';
-import MESSAGE from '../../constant/message';
-
-MESSAGE.TOOLTIP_SECURITY_NUMBER;
 
 export default {
   title: 'Payment/SubmitButton',

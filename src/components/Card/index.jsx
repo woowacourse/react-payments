@@ -11,6 +11,7 @@ const CardContainer = styled.div`
   background-color: ${props => props.color};
   border-radius: 5px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  cursor: ${props => (props.canClick ? 'pointer' : 'auto')};
 `;
 
 const CardCompanyName = styled.span`
@@ -61,7 +62,7 @@ function Card({ cardCompany, cardNumbers, ownerName, expiredDate, handleClickCar
   const { name, color } = cardCompany;
 
   return (
-    <CardContainer color={color} onClick={handleClickCard}>
+    <CardContainer color={color} onClick={handleClickCard} canClick={handleClickCard !== undefined}>
       <CardCompanyName>{name}</CardCompanyName>
       <IC />
       <CardNumberContainer>
