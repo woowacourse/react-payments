@@ -36,7 +36,13 @@ const StyledStoredCardList = styled.div`
 
   .card-box {
     margin: 0 0 5px;
+    text-decoration: none;
   }
+
+  .card-box:hover {
+    opacity: 0.6;
+  }
+
   .text-box {
     margin: 0 0 26px;
     font-weight: 700;
@@ -59,9 +65,11 @@ const StoredCardListPage = () => {
     <>
       <BackwardButton>보유카드</BackwardButton>
       <StyledStoredCardList>
-        {Object.values(storedList).map(({ cardName, values }) => (
+        {Object.values(storedList).map(({ cardName, values, id }) => (
           <>
-            <CardPreview key={cardName} values={values} />
+            <Link to="/edit-card" state={{ cardName, values, id }}>
+              <CardPreview key={cardName} values={values} />
+            </Link>
             <TextBox fontSize="14px">{cardName}</TextBox>
           </>
         ))}
