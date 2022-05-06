@@ -17,7 +17,7 @@ export default function CardInfoForm({ handleFormSubmit, isValidCardInfo }) {
       <CardHolderNameInput />
       <CardSecurityCodeInput />
       <CardPasswordInput />
-      {isValidCardInfo && <Button>다음</Button>}
+      {isValidCardInfo && <Button data-testid={"next-button"}>다음</Button>}
     </Form>
   );
 }

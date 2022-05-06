@@ -20,8 +20,12 @@ const StyledButton = styled.button`
   }
 `;
 
-export default function Button({ children: buttonText }) {
-  return <StyledButton type="submit">{buttonText}</StyledButton>;
+export default function Button({ children: buttonText, ...props }) {
+  return (
+    <StyledButton type="submit" {...props}>
+      {buttonText}
+    </StyledButton>
+  );
 }
 
 Button.propTypes = {

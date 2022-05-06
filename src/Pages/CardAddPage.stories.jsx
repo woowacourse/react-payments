@@ -37,8 +37,7 @@ export default {
   ],
 };
 
-const inputCardInfo = (cardInfo, canvasElement) => {
-  const canvas = within(canvasElement);
+const inputCardInfo = (cardInfo, canvas) => {
   const cardNumberInputs = canvas.getAllByTestId("card-number");
   const expireDateInputs = canvas.getAllByTestId("expire-date");
   const holderNameInput = canvas.getByTestId("holder-name");
@@ -85,11 +84,21 @@ export const Default = Template.bind({});
 export const Complete = Template.bind({});
 
 Complete.play = ({ canvasElement }) => {
-  inputCardInfo(sampleCardInfo, canvasElement);
+  const canvas = within(canvasElement);
+  inputCardInfo(sampleCardInfo, canvas);
 };
 
 export const Error = Template.bind({});
 
 Error.play = ({ canvasElement }) => {
-  inputCardInfo(invalidCardInfo, canvasElement);
+  const canvas = within(canvasElement);
+  inputCardInfo(invalidCardInfo, canvas);
+};
+
+export const Submitted = Template.bind({});
+
+Submitted.play = ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  inputCardInfo(sampleCardInfo, canvas);
+  userEvent.click(canvas.getByTestId("next-button"));
 };
