@@ -15,10 +15,12 @@
 
 .modal-dimmed {
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  min-width: 375px;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: flex-end;
 
   position: absolute;
@@ -26,8 +28,6 @@
   left: 0;
 
   background: rgba(0, 0, 0, 0.5);
-
-  border-radius: 15px;
 
   z-index: 5;
 }
@@ -45,6 +45,7 @@
   width: 2.8rem;
   height: 2.8rem;
   background-color: #94dacd;
+  cursor: pointer;
 }
 
 .modal-item-name {

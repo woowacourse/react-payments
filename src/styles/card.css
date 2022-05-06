@@ -23,6 +23,7 @@
   border-radius: 5px;
 
   user-select: none;
+  cursor: pointer;
 }
 
 .small-card {
