@@ -14,6 +14,8 @@ const CardListWrapper = styled.div`
 
 const CardNickname = styled.div`
   margin-top: 5px;
+  font-weight: 700;
+  color: #575757;
 `
 const PossessedCard = styled.div`
   display: flex;

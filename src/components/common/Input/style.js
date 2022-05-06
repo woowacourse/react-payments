@@ -42,7 +42,8 @@ const GrayInputWrapper = styled.div`
 const BottomBorderInputWrapper = styled.div`
   border-bottom: 1.5px solid black;
   width: 60%;
-  margin: 25px;
+  margin-top: 25px;
+  margin-bottom: 185px;
 `
 
 export { InputWrapper, GrayInputWrapper, BottomBorderInputWrapper }

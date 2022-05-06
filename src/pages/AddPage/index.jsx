@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import Card from 'components/common/Card'
 import Button from 'components/common/Button'
@@ -30,8 +30,15 @@ function AddPage() {
     useContext(CardInfoContext)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  const navigate = useNavigate()
+
   const openModal = () => {
     setIsModalOpen(true)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    navigate('/complete')
   }
 
   return (
@@ -40,7 +47,7 @@ function AddPage() {
       <CardWrapper onClick={openModal}>
         <Card size="small" cardInfo={cardInfo} />
       </CardWrapper>
-      <FormWrapper>
+      <FormWrapper onSubmit={handleSubmit}>
         <CardNumberField />
         <DueDateField />
         <OwnerField />

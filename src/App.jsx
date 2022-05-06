@@ -15,10 +15,12 @@ function App() {
       <CardInfoProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/react-payments" element={<CardListPage />} />
-            <Route path="/" element={<CardListPage />} />
-            <Route path="add" element={<AddPage />} />
-            <Route path="complete" element={<CardAddCompletePage />} />
+            <Route path="react-payments" element={<CardListPage />} />
+            <Route path="react-payments/add" element={<AddPage />} />
+            <Route
+              path="react-payments/complete"
+              element={<CardAddCompletePage />}
+            />
             <Route
               path="*"
               element={
