@@ -12,6 +12,7 @@ const cardInputReducer = (state, action) => {
         cardNumber: { ...state.cardNumber, [`${key}`]: cardNumber },
       };
     }
+
     case 'CHANGE_EXPIRATION_DATE': {
       const { key, date } = payload;
       return {
@@ -27,6 +28,7 @@ const cardInputReducer = (state, action) => {
         ownerName,
       };
     }
+
     case 'CHANGE_SECURITY_CODE': {
       const { securityCode } = payload;
       return {
@@ -34,6 +36,7 @@ const cardInputReducer = (state, action) => {
         securityCode: securityCode,
       };
     }
+
     case 'CHANGE_PASSWORD': {
       const { key, password } = payload;
       return {
