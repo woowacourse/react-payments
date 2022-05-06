@@ -10,11 +10,23 @@ export default function useCardNumber(initialValue) {
       const { selectionStart } = target;
 
       await setCardNumber(prevState => {
+        let idx = 0;
+
+        if (selectionStart < 6) {
+          idx = selectionStart - 1;
+        } else if (selectionStart < 11) {
+          idx = selectionStart - 2;
+        } else if (selectionStart < 16) {
+          idx = selectionStart - 3;
+        } else if (selectionStart < 20) {
+          idx = selectionStart - 4;
+        }
+
         let state =
           key && isNumber(key)
-            ? prevState.slice(0, selectionStart - 1) +
+            ? prevState.slice(0, idx) +
               key +
-              prevState.slice(selectionStart - 1, prevState.length)
+              prevState.slice(idx, prevState.length)
             : prevState;
 
         if (!key) {
