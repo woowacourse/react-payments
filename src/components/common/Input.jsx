@@ -17,6 +17,7 @@ const Input = ({
   placeHolder = '입력해주세요.',
   width,
   height,
+  ...rest
 }) => {
   return (
     <StyledInput
@@ -25,7 +26,9 @@ const Input = ({
       placeholder={placeHolder}
       width={`${width}px`}
       height={`${height}px`}
-    ></StyledInput>
+      {...rest}
+      className="input-box"
+    />
   );
 };
 

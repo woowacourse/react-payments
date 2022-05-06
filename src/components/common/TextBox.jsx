@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledTextBox = styled.p`
+const StyledTextBox = styled.text`
+  /* font-size: 24px; */
   font-size: ${(props) => props.fontSize || '24px'};
   color: ${(props) => props.color || 'black'};
 
@@ -14,7 +15,11 @@ const StyledTextBox = styled.p`
 
 const TextBox = ({ children, fontSize, color }) => {
   return (
-    <StyledTextBox fontSize={`${fontSize}px`} color={color}>
+    <StyledTextBox
+      fontSize={`${fontSize}px`}
+      color={color}
+      className="text-box"
+    >
       {children}
     </StyledTextBox>
   );
