@@ -59,6 +59,7 @@ const getCardSize = size => {
 const StyledCard = styled.div`
   box-shadow: 3px 3px 5px #00000040;
   border-radius: 5px;
+  cursor: pointer;
 
   ${({ bgColor, cardStyle: { height, padding, width } }) => css`
     background: ${bgColor};
