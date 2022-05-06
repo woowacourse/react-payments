@@ -62,7 +62,7 @@ const StoredCardListPage = () => {
 
   return (
     <>
-      <BackwardButton>보유카드</BackwardButton>
+      <BackwardButton showBackWard={false}>보유 카드</BackwardButton>
       <StyledStoredCardList>
         {Object.values(storedList).map(({ cardName, values, id }) => (
           <>
