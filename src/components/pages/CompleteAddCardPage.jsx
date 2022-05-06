@@ -40,7 +40,7 @@ const CompleteAddCardPage = () => {
   const { values } = useContext(CardContext);
   return (
     <StyledCompleteAddCardPage>
-      <TextBox fontSize={23}>카드등록이 완료되었습니다.</TextBox>
+      <TextBox fontSize="23px">카드등록이 완료되었습니다.</TextBox>
       <CardPreview values={values} />
       <Input underLine placeHolder="카드 별칭을 지정해주세요." />
       <Link to="/">

@@ -12,12 +12,13 @@ const StyledTextBox = styled.p`
   text-align: center;
 `;
 
-const TextBox = ({ children, fontSize, color }) => {
+const TextBox = ({ children, fontSize, color, ...rest }) => {
   return (
     <StyledTextBox
-      fontSize={`${fontSize}px`}
+      fontSize={fontSize}
       color={color}
       className="text-box"
+      {...rest}
     >
       {children}
     </StyledTextBox>
