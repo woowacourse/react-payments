@@ -63,7 +63,6 @@ const useCardForm = ({ cardFormSchema }, path = undefined) => {
   };
 
   const onSubmitAction = async (cardInfo) => {
-    alert('카드를 추가했습니다.');
     console.log(cardInfo);
 
     navigateOnSubmit();
