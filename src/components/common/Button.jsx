@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-export const Button = ({ children, handleClick, disabled, type }) => {
+export const Button = ({ children, onClick, disabled, type, textAlign }) => {
   return (
-    <ButtonBox>
-      <ButtonText onClick={handleClick} type={type} disabled={disabled}>
+    <ButtonBox textAlign={textAlign}>
+      <ButtonText onClick={onClick} type={type} disabled={disabled}>
         {children}
       </ButtonText>
     </ButtonBox>
@@ -13,13 +13,17 @@ export const Button = ({ children, handleClick, disabled, type }) => {
 
 const ButtonBox = styled.div`
   width: 100%;
-  text-align: right;
+  text-align: ${(props) => (props.textAlign ? props.textAlign : "right")};
 `;
 
 const ButtonText = styled.button`
-  color: ${(props) => (props.disabled ? "#ECEBF1" : "#04c09e")};
+  color: #04c09e;
   background-color: transparent;
   border: none;
   font-weight: bold;
   cursor: pointer;
+
+  &:disabled {
+    color: "#ECEBF1";
+  }
 `;

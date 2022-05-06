@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-export const PageTitle = ({ children }) => {
+export const PageTitle = ({ children, onClick }) => {
   return (
     <PageTitleWrapperStyle>
-      <BackwardButton />
+      <BackwardButton onClick={onClick} />
       {children}
     </PageTitleWrapperStyle>
   );
