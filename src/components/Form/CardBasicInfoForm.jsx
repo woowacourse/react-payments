@@ -1,17 +1,21 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import LabeledInput from '../Common/Input/LabeledInput';
 import PropTypes from 'prop-types';
 import { isAlphabetOrSpace } from '../../utils/validations';
 import { uid } from 'react-uid';
-import { checkFormCompletion, checkFormValidation, isNumberInRange } from './validation';
+import {
+  checkFormCompletion,
+  checkFormValidation,
+  checkUniqueCard,
+  isNumberInRange,
+} from './validation';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../types';
 import { DISPATCH_TYPE } from '../../constants';
+import { CardContext } from '../../context';
 
-function InputForm({
-  cardInput: { cardNumber, expirationDate, ownerName, securityCode, password },
-  cardInputDispatch,
-  handleChangePage,
-}) {
+function InputForm({ cardInput, cardInputDispatch, handleChangePage }) {
+  const { cardNumber, expirationDate, ownerName, securityCode, password } = cardInput;
+  const { cardList } = useContext(CardContext);
   const [isComplete, setIsComplete] = useState(false);
   const inputElementsRef = useRef([]);
 
@@ -111,7 +115,10 @@ function InputForm({
     e.preventDefault();
 
     try {
-      if (checkFormValidation({ cardNumber, expirationDate, securityCode, password })) {
+      if (
+        checkFormValidation({ cardNumber, expirationDate, securityCode, password }) &&
+        checkUniqueCard(cardNumber, cardList)
+      ) {
         handleChangePage('completeAddCardPage');
       }
     } catch ({ message }) {

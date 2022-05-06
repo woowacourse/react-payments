@@ -27,6 +27,19 @@ export const checkFormValidation = ({ expirationDate }) => {
   return true;
 };
 
+export const checkUniqueCard = (cardInfo, cardList) => {
+  const isOverlap = Object.keys(cardList).some(key => {
+    return Object.keys(cardInfo).every(
+      numKey => cardInfo[numKey] === cardList[key].cardNumber[numKey],
+    );
+  });
+
+  if (isOverlap) {
+    throw new Error('이미 같은 번호의 카드가 존재합니다.');
+  }
+  return true;
+};
+
 export const isNumberInRange = (value, maxLength) => {
   if (hasSpace(value)) {
     return false;
