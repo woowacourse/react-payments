@@ -2,7 +2,7 @@ import { useContext, useReducer } from "react";
 import Card from "../../component/common/Card/card.component";
 import CardTypeSelector from "../../component/CardTypeSelector/CardTypeSelector";
 import Header from "../../component/common/Header/Header.component";
-import LinkButton from "../../component/common/LinkButton/linkButton.component";
+import LinkButton from "../../component/common/LinkButton/LinkButton.component";
 import Modal from "../../component/common/Modal/modal.component";
 import PageTitle from "../../component/common/PageTitle/pageTitle.component";
 import { CardNumberContext } from "../../provider/CardNumberProvider";
