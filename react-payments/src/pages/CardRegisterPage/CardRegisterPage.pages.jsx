@@ -10,8 +10,10 @@ import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants";
 import useReady from "../../hooks/useReady";
 import { CardDataContext } from "../../provider/CardDataProvider";
 import { CardNumberContext } from "../../provider/CardNumberProvider";
+import { CardPasswordContext } from "../../provider/CardPasswordProvider";
 import { CardTypeContext } from "../../provider/CardTypeProvider";
 import { ExpireDateContext } from "../../provider/ExpireDateProvider";
+import { SecurityCodeContext } from "../../provider/SecurityCodeProvider";
 import { UserNameContext } from "../../provider/UserNameProvider";
 import { isInvalidCardName } from "../../util/validator";
 
@@ -26,27 +28,46 @@ const CardRegisterGroup = styled.div`
 const CardRegisterPage = () => {
   const {
     state: { cardNumber },
+    action: { resetCardNumber },
   } = useContext(CardNumberContext);
   const {
     state: { expireDate },
+    action: { resetExpireDate },
   } = useContext(ExpireDateContext);
   const {
     state: { userName },
+    action: { resetUserName },
   } = useContext(UserNameContext);
   const {
     state: { cardTypeInfo },
+    action: { resetCardTypeInfo },
   } = useContext(CardTypeContext);
+  const {
+    action: { resetSecurityCode },
+  } = useContext(SecurityCodeContext);
+  const {
+    action: { resetCardPassword },
+  } = useContext(CardPasswordContext);
+
   const [cardName, setCardName] = useState("");
   const [cardNameReady] = useReady(cardName, isInvalidCardName);
 
   const { dispatch } = useContext(CardDataContext);
 
   const handleSubmitCardData = () => {
+    resetCardNumber();
+    resetCardPassword();
+    resetCardTypeInfo();
+    resetExpireDate();
+    resetUserName();
+    resetSecurityCode();
+
     dispatch({
       type: "CREATE",
       payload: {
         cardNumber,
-        expireDate,
+        month: expireDate.month,
+        year: expireDate.year,
         userName,
         cardTypeInfo,
         cardName,
@@ -68,7 +89,7 @@ const CardRegisterPage = () => {
           cardTypeInfo={cardTypeInfo}
           month={expireDate.month}
           year={expireDate.year}
-          name={userName}
+          userName={userName}
         />
         <CardNameInput
           value={cardName}

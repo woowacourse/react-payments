@@ -6,11 +6,13 @@ import useReady from "../hooks/useReady";
 
 export const ExpireDateContext = createContext();
 
+const initialState = {
+  month: "",
+  year: "",
+};
+
 const ExpireDateProvider = ({ children }) => {
-  const [expireDate, setExpireDate] = useState({
-    month: "",
-    year: "",
-  });
+  const [expireDate, setExpireDate] = useState(initialState);
   const [expireDateReady] = useReady(expireDate, isInValidExpireDate);
 
   const onChangeExpireDate = ({ target }) => {
@@ -44,11 +46,15 @@ const ExpireDateProvider = ({ children }) => {
     });
   };
 
+  const resetExpireDate = () => {
+    setExpireDate({ ...initialState });
+  };
+
   return (
     <ExpireDateContext.Provider
       value={{
         state: { expireDate, expireDateReady },
-        action: { onChangeExpireDate, onKeyDownExpireDate },
+        action: { onChangeExpireDate, onKeyDownExpireDate, resetExpireDate },
       }}
     >
       {children}

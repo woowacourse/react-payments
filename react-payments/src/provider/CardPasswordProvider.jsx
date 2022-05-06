@@ -7,11 +7,13 @@ import {
 
 export const CardPasswordContext = createContext();
 
+const initialState = {
+  first: "",
+  second: "",
+};
+
 const CardPasswordProvider = ({ children }) => {
-  const [cardPassword, setCardPassword] = useState({
-    first: "",
-    second: "",
-  });
+  const [cardPassword, setCardPassword] = useState(initialState);
   const [cardPasswordReady] = useReady(cardPassword, isInValidCardPassword);
 
   const onChangeCardPassword = ({ target }) => {
@@ -42,6 +44,10 @@ const CardPasswordProvider = ({ children }) => {
     });
   };
 
+  const resetCardPassword = () => {
+    setCardPassword({ ...initialState });
+  };
+
   return (
     <CardPasswordContext.Provider
       value={{
@@ -50,6 +56,7 @@ const CardPasswordProvider = ({ children }) => {
           onChangeCardPassword,
           onClickCardPasswordBackspaceButton,
           onClickCardPasswordVirtualKeyboard,
+          resetCardPassword,
         },
       }}
     >
