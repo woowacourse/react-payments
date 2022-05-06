@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import PropTypes, { string } from "prop-types";
 import { CREATE_MASKED_CHARACTERS } from "../constants";
+import CardInfoContext from "../Pages/CardInfoContext";
 
 const cardSizeBeforeSubmit = {
   width: "213px",
@@ -62,11 +63,11 @@ const SmallCard = styled.div`
   font-weight: 400;
 `;
 
-const CardName = styled.p`
+const CardName = React.memo(styled.p`
   margin-bottom: 20px;
-`;
+`);
 
-const CardChip = styled.div`
+const CardChip = React.memo(styled.div`
   width: 40px;
   height: 26px;
 
@@ -74,14 +75,14 @@ const CardChip = styled.div`
   border-radius: 4px;
 
   margin-bottom: 15px;
-`;
+`);
 
-const CardNumber = styled.p`
+const CardNumber = React.memo(styled.p`
   display: flex;
   align-items: center;
   height: 10px;
   margin-bottom: 12px;
-`;
+`);
 
 const CardBottomSection = styled.div`
   display: flex;
@@ -103,7 +104,10 @@ export default function CardPreview({
   isSubmitted,
   color,
 }) {
-  const { cardNumber, holderName, expireDate } = cardInfo;
+  const { state } = useContext(CardInfoContext);
+  const { cardNumber, holderName, expireDate } =
+    Object.keys(state).length === 0 ? cardInfo : state;
+
   return (
     <CardContainer>
       <SmallCard

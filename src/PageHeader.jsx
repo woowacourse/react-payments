@@ -15,7 +15,7 @@ const StyledPageHeaderContainer = styled.header`
   color: #383838;
 `;
 
-const PreviousButton = styled.button`
+const PreviousButton = React.memo(styled.button`
   border: none;
   background-color: transparent;
 
@@ -28,13 +28,13 @@ const PreviousButton = styled.button`
     color: #00caa5;
     font-weight: 700;
   }
-`;
+`);
 
-const StyledPageTitle = styled.h1`
+const StyledPageTitle = React.memo(styled.h1`
   font-size: 16px;
   line-height: 19px;
   letter-spacing: -0.085em;
-`;
+`);
 
 export default function PageHeader({ isSubmitted, page, moveToListPage }) {
   return (
