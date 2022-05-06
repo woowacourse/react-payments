@@ -22,7 +22,6 @@ const CardDiv = styled.div(({ cardColor }: { cardColor: string }) => ({
   width: '208px',
   height: '130px',
   padding: '14px',
-  margin: 'auto',
   marginBottom: '20px',
   background: cardColor,
   boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.25)',

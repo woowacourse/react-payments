@@ -8,7 +8,7 @@ export const transformNumToBullet = (str: string) => '•'.repeat(str.length);
 
 export const transformToColor = (str: string) => {
   switch (str) {
-    case '삘깅카드':
+    case '빨강카드':
       return '#EB1100';
     case '노랑카드':
       return '#F59001';

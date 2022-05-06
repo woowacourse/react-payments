@@ -12,7 +12,7 @@ export const INPUT = {
 
 export const cardTypes = [
   {
-    name: '삘깅카드',
+    name: '빨강카드',
     color: '#EB1100',
   },
   {

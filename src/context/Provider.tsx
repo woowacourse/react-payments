@@ -21,7 +21,7 @@ export type State = {
 type Action = { type: ActionType; payload: string | boolean };
 
 export type AppDispatch = Dispatch<Action>;
-
+// 변수명 통일감 있게
 const initalState: State = {
   firstInputCardNumber: '',
   secondInputCardNumber: '',

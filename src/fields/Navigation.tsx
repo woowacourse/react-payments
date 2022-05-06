@@ -1,20 +1,31 @@
 import React from 'react';
-import { css } from '@emotion/react';
 import BackButton from 'components/navigater/BackButton';
 import PageTitle from 'components/navigater/PageTitle';
+import { useLocation } from 'react-router-dom';
+import styled from '@emotion/styled';
 
-const style = css({
+const Wrapper = styled.nav(() => ({
+  width: '100%',
+  height: '50px',
   display: 'flex',
-  alignItems: 'center',
-  marginBottom: '25px',
-});
+}));
 
 function Navigation() {
+  const { pathname } = useLocation();
+
+  if (pathname === '/') {
+    return (
+      <Wrapper>
+        <PageTitle>보유카드</PageTitle>
+      </Wrapper>
+    );
+  }
+
   return (
-    <div css={style}>
+    <Wrapper>
       <BackButton />
       <PageTitle>카드추가</PageTitle>
-    </div>
+    </Wrapper>
   );
 }
 

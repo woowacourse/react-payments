@@ -1,11 +1,9 @@
 import React from 'react';
-import { css } from '@emotion/react';
 import { useAppState } from 'hooks/hooks';
 import TypeButtonModal from 'containers/modal/TypeButtonModalContainer';
 import Navigation from 'fields/Navigation';
 import CardContainer from 'containers/card/CardContainer';
 import CardFormContainer from 'containers/card/CardFormContainer';
-import { INPUT } from '../constants';
 import styled from '@emotion/styled';
 import CardCompleteContainer from './CardCompleteContainer';
 
