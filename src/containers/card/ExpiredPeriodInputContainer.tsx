@@ -7,8 +7,8 @@ import { isNum, removeWhiteSpaces } from 'utils';
 import CardFormInput from 'components/card/CardFormInput';
 
 const style = css({
-  height: '45px',
   width: '100%',
+  height: '45px',
   borderRadius: '7px',
   maxWidth: '68px',
   outline: 'none !important',
