@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Header from '../components/Header/Header';
 import Card from 'components/common/Card/Card';
 import PageTitle from 'components/common/PageTitle/PageTitle';
@@ -14,20 +12,7 @@ import Tooltip from 'components/Tooltip/Tooltip';
 import CardPassword from 'components/CardPassword/CardPassword';
 import PrevPageSign from 'components/PrevPageSign/PrevPageSign';
 
-function CardAddPage({ setPage }) {
-  const [cardInfo, setCardInfo] = useState({
-    number1: '',
-    number2: '',
-    number3: '',
-    number4: '',
-    month: '',
-    year: '',
-    owner: '',
-    cvc: '',
-    password1: '',
-    password2: '',
-  });
-
+function CardAddPage({ setPage, dispatch, cardInfo }) {
   return (
     <div className="app">
       <Header>
@@ -38,40 +23,24 @@ function CardAddPage({ setPage }) {
       <CardInputForm cardInfo={cardInfo}>
         <CardNumber
           cardNumbers={[cardInfo.number1, cardInfo.number2, cardInfo.number3, cardInfo.number4]}
-          setCardNumbers={(cardNumbers) =>
-            setCardInfo((prev) => ({
-              ...prev,
-              number1: cardNumbers[0],
-              number2: cardNumbers[1],
-              number3: cardNumbers[2],
-              number4: cardNumbers[3],
-            }))
-          }
+          setCardNumbers={(cardNumbers) => dispatch({ type: 'SET_CARD_NUMBERS', cardNumbers })}
         />
         <CardExpirationDate
           cardExpirationDate={{ month: cardInfo.month, year: cardInfo.year }}
           setCardExpirationDate={(cardExpirationDate) =>
-            setCardInfo((prev) => ({
-              ...prev,
-              month: cardExpirationDate.month,
-              year: cardExpirationDate.year,
-            }))
+            dispatch({ type: 'SET_CRAD_EXPIRATION_DATE', cardExpirationDate })
           }
         />
         <CardOwner
           cardOwner={cardInfo.owner}
-          setOwner={(cardOwner) => setCardInfo((prev) => ({ ...prev, owner: cardOwner }))}
+          setOwner={(cardOwner) => dispatch({ type: 'SET_OWNER', cardOwner })}
         />
-        <CVC cvc={cardInfo.cvc} setCVC={(cvc) => setCardInfo((prev) => ({ ...prev, cvc: cvc }))} />
+        <CVC cvc={cardInfo.cvc} setCVC={(cvc) => dispatch({ type: 'SET_CVC', cvc })} />
         <Tooltip />
         <CardPassword
           cardPasswords={[cardInfo.password1, cardInfo.password2]}
           setCardPasswords={(cardPasswords) =>
-            setCardInfo((prev) => ({
-              ...prev,
-              password1: cardPasswords[0],
-              password2: cardPasswords[1],
-            }))
+            dispatch({ type: 'SET_CARD_PASSWORDS', cardPasswords })
           }
         />
         <Button text="다음" />
