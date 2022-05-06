@@ -1,3 +1,4 @@
+import useModal from 'hooks/useModal';
 import useCardState from 'hooks/useCardState';
 
 import Header from 'components/@common/Header';
@@ -10,6 +11,7 @@ import {
   CardUserNameField,
   CardSecurityField,
   CardPasswordField,
+  CardCompanyList,
 } from 'components';
 
 import {
@@ -19,11 +21,14 @@ import {
   validateSecurityCode,
   validateUserName,
 } from 'validators';
+import ToolTip from 'components/@common/ToolTip';
 
 function CardAdd() {
   const { state, onChangeTextField } = useCardState();
   const { cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword, isComplete } =
     state;
+
+  const { Modal: CompanyModal, handleModalOpen: handleCompanyModalOpen } = useModal();
 
   const onClickConfirmButton = () => {
     try {
@@ -47,16 +52,19 @@ function CardAdd() {
   };
 
   return (
-    <>
+    <form>
       <Header>카드 추가</Header>
-      <Card
-        companyName="티거 카드"
-        cardNumber={cardNumber}
-        userName={userName}
-        expireMonth={expireMonth}
-        expireYear={expireYear}
-        isComplete={isComplete}
-      />
+      <ToolTip text="카드를 클릭하여 카드사를 선택할 수 있습니다." align="bottom">
+        <Card
+          companyName="티거 카드"
+          cardNumber={cardNumber}
+          userName={userName}
+          expireMonth={expireMonth}
+          expireYear={expireYear}
+          isComplete={isComplete}
+          onClick={handleCompanyModalOpen}
+        />
+      </ToolTip>
       <CardNumberField cardNumber={cardNumber} onChange={onChangeTextField} />
       <CardExpireDateField
         expireMonth={expireMonth}
@@ -72,7 +80,11 @@ function CardAdd() {
           다음
         </Button>
       </div>
-    </>
+
+      <CompanyModal>
+        <CardCompanyList />
+      </CompanyModal>
+    </form>
   );
 }
 

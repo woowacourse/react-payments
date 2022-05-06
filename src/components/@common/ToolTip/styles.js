@@ -79,7 +79,7 @@ const Container = styled.div`
     text-align: center;
     background-color: #000;
     color: #fff;
-    min-width: 7.5rem;
+    white-space: nowrap;
     padding: 0.425rem;
     font-size: 0.75rem;
 

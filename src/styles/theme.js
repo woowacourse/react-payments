@@ -11,7 +11,7 @@ const COLORS = {
   sunsetOrange: '#F55454',
 
   dodgerSky: '#47A9FF',
-  dodgerBlue: '#4768ff',
+  dodgerBlue: '#1C71FF',
 
   chelseaCucumber: '#72AE58',
 
@@ -32,6 +32,13 @@ const COLORS = {
 
 const GRADATION = {
   'cornflowerBlue-affair-135deg': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  'creamCan-vividTangerine-120deg': 'linear-gradient(120deg, #f6d365 0%, #fda085 100%)',
+  'pictonBlue-danube-left': 'linear-gradient(to left, #48c6ef 0%, #6f86d6 100%)',
+  'mystic-bottom': 'linear-gradient(to bottom, #D5DEE7 0%, #E8EBF2 50%, #E2E7ED 100%)',
+  'gossamer-keppel-top': 'linear-gradient(to top, #0ba360 0%, #3cba92 100%)',
+  'persimmon-carrotOrange-60deg': 'linear-gradient(-60deg, #ff5858 0%, #f09819 100%)',
+  'dodgerBlue-aquamarineBlue-top':
+    'linear-gradient(-225deg, #22E1FF 0%, #1D8FE1 48%, #625EB1 100%)',
 };
 
 const BRAND_COLORS = {

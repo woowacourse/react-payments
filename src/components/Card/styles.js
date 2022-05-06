@@ -20,6 +20,8 @@ const Container = styled.div`
 `;
 
 const CardContainer = styled.div`
+  cursor: pointer;
+
   position: relative;
   width: 16.75rem;
   height: 10.6rem;

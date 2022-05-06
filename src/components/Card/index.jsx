@@ -15,9 +15,9 @@ const cardNumberFormatter = (cardNumber) => {
   return newCardNumber.join('-');
 };
 
-function Card({ companyName, cardNumber, userName, expireMonth, expireYear, isComplete }) {
+function Card({ companyName, cardNumber, userName, expireMonth, expireYear, isComplete, onClick }) {
   return (
-    <Container isComplete={isComplete}>
+    <Container isComplete={isComplete} onClick={onClick}>
       <CardContainer>
         <ComponyName>{companyName}</ComponyName>
         <UserName>{userName}</UserName>
