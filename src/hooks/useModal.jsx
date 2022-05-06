@@ -1,11 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
 export default function useModal(initialValue) {
   const [isModalOpen, setIsModalOpen] = useState(initialValue);
 
-  const handler = useCallback(() => {
+  const handler = () => {
     setIsModalOpen(!isModalOpen);
-  }, [isModalOpen]);
+  };
 
   return [isModalOpen, handler];
 }
