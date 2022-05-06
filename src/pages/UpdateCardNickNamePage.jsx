@@ -1,4 +1,5 @@
 /* eslint-disable no-restricted-globals */
+import { useEffect, useContext } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -51,7 +52,34 @@ const ButtonWrapper = styled.div`
 export default function UpdateCardNickNamePage() {
   const { id: cardIndex } = useParams();
   const { state: locationState } = useLocation();
+  const { cardInfoList, updateNickNameByIndex } = useContext(CardInfoListContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!cardInfoList[cardIndex]) {
+      navigate('/error', {
+        replace: true,
+      });
+      return;
+    }
+  }, [cardInfoList, cardIndex, navigate]);
+
+  const handleCardNickNameSubmit = e => {
+    e.preventDefault();
+    const nickNameInputValue = e.target.elements['nickname-input'].value;
+    if (nickNameInputValue === '' && confirm('닉네임을 지정하지 않고 카드를 등록하시겠습니까?')) {
+      navigate('/', {
+        replace: true,
+      });
+      return;
+    }
+    if (confirm(`[${nickNameInputValue}](으)로 카드를 등록하시겠습니까?`)) {
+      updateNickNameByIndex(cardIndex, nickNameInputValue);
+      navigate('/', {
+        replace: true,
+      });
+    }
+  };
 
   return (
     <>
@@ -65,35 +93,17 @@ export default function UpdateCardNickNamePage() {
             {locationState?.fromAddCardForm ? '카드등록이 완료되었습니다.' : '카드 닉네임을 수정하세요.'}
           </GuideMessage>
         </GuideMessageWrapper>
-        <CardInfoListContext.Consumer>
-          {({ cardInfoList, updateNickNameByIndex }) => (
-            <>
-              <CardItem size={'large'} isComplete={true} {...cardInfoList[cardIndex]} />
-              <CardNickNameForm
-                onSubmit={e => {
-                  e.preventDefault();
-                  const nickNameInputValue = e.target.elements['nickname-input'].value;
-                  if (nickNameInputValue === '' && confirm('닉네임을 지정하지 않고 카드를 등록하시겠습니까?')) {
-                    navigate('/', {
-                      replace: true,
-                    });
-                    return;
-                  }
-                  if (confirm(`[${nickNameInputValue}](으)로 카드를 등록하시겠습니까?`)) {
-                    updateNickNameByIndex(cardIndex, nickNameInputValue);
-                    navigate('/', {
-                      replace: true,
-                    });
-                  }
-                }}>
-                <CardNickNameInput placeholder={'카드 닉네임'} name="nickname-input" />
-                <ButtonWrapper>
-                  <Button type="submit">확인</Button>
-                </ButtonWrapper>
-              </CardNickNameForm>
-            </>
-          )}
-        </CardInfoListContext.Consumer>
+        {cardInfoList[cardIndex] && (
+          <>
+            <CardItem size={'large'} isComplete={true} {...cardInfoList[cardIndex]} />
+            <CardNickNameForm onSubmit={handleCardNickNameSubmit}>
+              <CardNickNameInput name="nickname-input" placeholder={'카드 닉네임'} />
+              <ButtonWrapper>
+                <Button type="submit">확인</Button>
+              </ButtonWrapper>
+            </CardNickNameForm>
+          </>
+        )}
       </Main>
     </>
   );

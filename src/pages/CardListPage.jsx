@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -69,50 +70,44 @@ const GuideMessageWrapper = styled.div`
   text-align: center;
 `;
 
-function AddCardButton() {
-  return (
-    <Link to="/addCard">
-      <StyledAddCardButton>+</StyledAddCardButton>
-    </Link>
-  );
-}
-
-function CardList() {
-  return (
-    <StyledCardList>
-      <CardInfoListContext.Consumer>
-        {value =>
-          value.cardInfoList.map((cardInfo, index) => (
-            <Link to={`/updateCardNickName/${index}`}>
-              <CardListItem key={index}>
-                <CardItem size={'small'} isComplete={true} {...cardInfo} />
-                <CardNickName>{cardInfo.nickName || `나의 카드 ${index + 1}`}</CardNickName>
-              </CardListItem>
-            </Link>
-          ))
-        }
-      </CardInfoListContext.Consumer>
-      <AddCardButton />
-    </StyledCardList>
-  );
-}
-
 export default function CardListPage() {
+  const { cardInfoList } = useContext(CardInfoListContext);
+
+  function AddCardButton() {
+    return (
+      <Link to="/addCard">
+        <StyledAddCardButton>+</StyledAddCardButton>
+      </Link>
+    );
+  }
+
+  function CardList() {
+    return (
+      <StyledCardList>
+        {cardInfoList.map((cardInfo, index) => (
+          <Link to={`/updateCardNickName/${index}`}>
+            <CardListItem key={index}>
+              <CardItem size={'small'} isComplete={true} {...cardInfo} />
+              <CardNickName>{cardInfo.nickName || `나의 카드 ${index + 1}`}</CardNickName>
+            </CardListItem>
+          </Link>
+        ))}
+        <AddCardButton />
+      </StyledCardList>
+    );
+  }
+
   return (
     <>
       <Header>
         <Title>보유카드</Title>
       </Header>
       <Main>
-        <CardInfoListContext.Consumer>
-          {value =>
-            value.cardInfoList.length === 0 && (
-              <GuideMessageWrapper>
-                <GuideMessage>등록된 카드가 없습니다.</GuideMessage>
-              </GuideMessageWrapper>
-            )
-          }
-        </CardInfoListContext.Consumer>
+        {cardInfoList.length === 0 && (
+          <GuideMessageWrapper>
+            <GuideMessage>등록된 카드가 없습니다.</GuideMessage>
+          </GuideMessageWrapper>
+        )}
         <CardListSection>
           <CardList />
         </CardListSection>

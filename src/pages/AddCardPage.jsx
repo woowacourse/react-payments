@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useContext } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,6 +30,9 @@ export default function AddCardPage() {
   const [holderName, setHolderName] = useState('');
   const [securityCode, setSecurityCode] = useState('');
   const [password, setPassword] = useState(['', '']);
+
+  const { addNewCard } = useContext(CardInfoListContext);
+  const navigate = useNavigate();
 
   const handleCardNumberUpdate = ({ target: { value } }, order) => {
     if (!Number.isInteger(Number(value)) || value.length > CARD_INFO_RULES.NUMBER_UNIT_LENGTH) return;
@@ -82,44 +85,40 @@ export default function AddCardPage() {
     });
   };
 
+  const cardInfoConfirmMessage = `
+  카드번호: ${cardNumber.join(' - ')}
+  만료일: ${expireDate.join('/')}
+  소유자: ${holderName}
+  
+  위 정보로 카드를 등록하시겠습니까?
+`;
+
+  const handleCardInfoSubmit = e => {
+    e.preventDefault();
+    // eslint-disable-next-line no-restricted-globals
+    if (confirm(cardInfoConfirmMessage)) {
+      const cardIndex = addNewCard({
+        cardNumber,
+        expireDate,
+        holderName,
+      });
+      navigate(`/updateCardNickName/${cardIndex}`, {
+        replace: true,
+        state: {
+          fromAddCardForm: true,
+          cardIndex,
+        },
+      });
+    }
+  };
+
   const CardInfoSubmitButton = () => {
-    const navigate = useNavigate();
-    const cardInfoConfirmMessage = `
-      카드번호: ${cardNumber.join(' - ')}
-      만료일: ${expireDate.join('/')}
-      소유자: ${holderName}
-      
-      위 정보로 카드를 등록하시겠습니까?
-    `;
     return (
-      <CardInfoListContext.Consumer>
-        {({ addNewCard }) => (
-          <ButtonWrapper>
-            <Button
-              type="submit"
-              onClick={e => {
-                e.preventDefault();
-                // eslint-disable-next-line no-restricted-globals
-                if (confirm(cardInfoConfirmMessage)) {
-                  const cardIndex = addNewCard({
-                    cardNumber,
-                    expireDate,
-                    holderName,
-                  });
-                  navigate(`/updateCardNickName/${cardIndex}`, {
-                    replace: true,
-                    state: {
-                      fromAddCardForm: true,
-                      cardIndex,
-                    },
-                  });
-                }
-              }}>
-              다음
-            </Button>
-          </ButtonWrapper>
-        )}
-      </CardInfoListContext.Consumer>
+      <ButtonWrapper>
+        <Button type="submit" onClick={handleCardInfoSubmit}>
+          다음
+        </Button>
+      </ButtonWrapper>
     );
   };
 
