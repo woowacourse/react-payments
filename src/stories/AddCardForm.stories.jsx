@@ -1,5 +1,6 @@
 import React from 'react';
 import AddCardForm from '../components/AddCardForm';
+import { getCard } from '../util';
 
 export default {
   title: 'AddCardForm',
@@ -11,18 +12,7 @@ const Template = (args) => <AddCardForm {...args} />;
 export const CardForm = Template.bind({});
 
 CardForm.args = {
-  card: {
-    firstCardNumber: '',
-    secondCardNumber: '',
-    thirdCardNumber: '',
-    fourthCardNumber: '',
-    expireMonth: '',
-    expireYear: '',
-    ownerName: '',
-    securityCode: '',
-    firstPassword: '',
-    secondPassword: '',
-  },
+  card: getCard(),
   updateCard: () => {},
   addCard: () => {},
 };

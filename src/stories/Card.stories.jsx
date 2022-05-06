@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../components/Card.jsx';
+import { getCard } from '../util.js';
 
 export default {
   title: 'Card',
@@ -11,24 +12,13 @@ const Template = (args) => <Card {...args} />;
 export const Deactivated = Template.bind({});
 
 Deactivated.args = {
-  card: {
-    firstCardNumber: '',
-    secondCardNumber: '',
-    thirdCardNumber: '',
-    fourthCardNumber: '',
-    expireMonth: '',
-    expireYear: '',
-    ownerName: '',
-    securityCode: '',
-    firstPassword: '',
-    secondPassword: '',
-  },
+  card: getCard(),
 };
 
 export const Activated = Template.bind({});
 
 Activated.args = {
-  card: {
+  card: getCard({
     firstCardNumber: '1234',
     secondCardNumber: '5678',
     thirdCardNumber: '1111',
@@ -39,5 +29,5 @@ Activated.args = {
     securityCode: '123',
     firstPassword: '9',
     secondPassword: '9',
-  },
+  }),
 };

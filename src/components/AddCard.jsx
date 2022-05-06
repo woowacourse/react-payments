@@ -1,20 +1,10 @@
 import React, { useState } from 'react';
 import AddCardForm from './AddCardForm';
 import Card from './Card';
+import { getCard } from '../util';
 
 function AddCard() {
-  const [card, setCard] = useState({
-    firstCardNumber: '',
-    secondCardNumber: '',
-    thirdCardNumber: '',
-    fourthCardNumber: '',
-    expireMonth: '',
-    expireYear: '',
-    ownerName: '',
-    securityCode: '',
-    firstPassword: '',
-    secondPassword: '',
-  });
+  const [card, setCard] = useState(getCard());
 
   const updateCard = (name, value) => {
     setCard((prevCard) => {
