@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types'
-
 import {
   CardWrapper,
   CardTop,
@@ -13,6 +11,9 @@ import {
 
 function Card({ size, cardInfo }) {
   const { company, cardNumber, owner, dueDate } = cardInfo
+  const month = dueDate.month || 'MM'
+  const year = dueDate.year || 'YY'
+  const ownerName = owner || 'NAME'
 
   return (
     <CardWrapper size={size}>
@@ -35,34 +36,14 @@ function Card({ size, cardInfo }) {
           </CardText>
         </CardBottomNumber>
         <CardBottomInfo>
-          <CardOwner>{owner}</CardOwner>
+          <CardOwner>{ownerName}</CardOwner>
           <CardText>
-            {dueDate.month}/{dueDate.year}
+            {month}/{year}
           </CardText>
         </CardBottomInfo>
       </CardBottom>
     </CardWrapper>
   )
-}
-
-Card.propTypes = {
-  /**
-   * 카드사
-   */
-  company: PropTypes.string.isRequired,
-  /**
-   * 카드번호 배열
-   */
-  cardNumbers: PropTypes.array,
-  /**
-   * 소유자
-   */
-  owner: PropTypes.string,
-  /**
-   * 만료일
-   */
-  dueMonth: PropTypes.string,
-  dueYear: PropTypes.string,
 }
 
 export default Card

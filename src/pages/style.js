@@ -24,6 +24,12 @@ const CardWrapper = styled.div`
 const FooterWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+
+  & a {
+    text-decoration: none;
+    outline: none;
+    color: ${(props) => props.theme.colors.MINT};
+  }
 `
 
 const FormWrapper = styled.form`

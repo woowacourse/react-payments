@@ -5,6 +5,7 @@ const CardListWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   max-height: 400px;
+  width: 250px;
   overflow: scroll;
   margin-top: 65px;
   margin-bottom: 20px;

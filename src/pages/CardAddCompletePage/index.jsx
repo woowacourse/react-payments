@@ -12,7 +12,7 @@ import { FooterWrapper, CenterItem, PageWrapper } from 'pages/style'
 import { BottomBorderInputWrapper } from 'components/common/Input/style'
 
 function CardAddCompletePage() {
-  const { cardInfo, handleCardNickNameChange, clearContext } =
+  const { cardInfo, isFieldFulfilled, handleCardNickNameChange, clearContext } =
     useContext(CardInfoContext)
 
   const saveCardInfo = () => {
@@ -29,7 +29,7 @@ function CardAddCompletePage() {
     // state 비우기
     clearContext()
   }
-  return (
+  return isFieldFulfilled ? (
     <PageWrapper>
       <CompleteText>카드등록이 완료되었습니다.</CompleteText>
       <CenterItem>
@@ -39,13 +39,15 @@ function CardAddCompletePage() {
         </BottomBorderInputWrapper>
       </CenterItem>
       <FooterWrapper>
-        {
+        {cardInfo.cardNickName && (
           <Button onClick={saveCardInfo}>
             <Link to="/">확인</Link>
           </Button>
-        }
+        )}
       </FooterWrapper>
     </PageWrapper>
+  ) : (
+    <div>접근금지</div>
   )
 }
 

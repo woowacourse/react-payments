@@ -4,7 +4,8 @@ import Button from 'components/common/Button'
 import Card from 'components/common/Card'
 import Header from 'components/common/Header'
 
-import { CardWrapper } from 'components/common/Card/style'
+import { ReactComponent as AddCardBtn } from 'assets/addCard.svg'
+
 import { CenterItem, PageWrapper } from 'pages/style'
 import {
   CardListWrapper,
@@ -29,21 +30,13 @@ function CardListPage() {
               <CardNickname>{value.cardNickName}</CardNickname>
             </PossessedCard>
           ))}
-          {/* <PossessedCard>
-            <Card size="small" />
-            
-          </PossessedCard>
-          <PossessedCard>
-            <Card size="small" />
-            <CardNickname>엄카</CardNickname>
-          </PossessedCard> */}
         </CardListWrapper>
         <Button
           onClick={() => {
             navigate('add')
           }}
         >
-          <CardWrapper size="small">+</CardWrapper>
+          <AddCardBtn />
         </Button>
       </CenterItem>
     </PageWrapper>
