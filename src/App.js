@@ -12,7 +12,15 @@ function App() {
       <Style.App>
         <BrowserRouter>
           <Routes>
-            <Route path="/react-payments" element={<CardRegisterPage />} />
+            <Route path="/react-payments/" element={<div>카드 목록</div>} />
+            <Route
+              path="/react-payments/register"
+              element={<CardRegisterPage />}
+            />
+            <Route
+              path="/react-payments/modify/:cardId"
+              element={<div>카드 수정</div>}
+            />
           </Routes>
         </BrowserRouter>
       </Style.App>
