@@ -31,6 +31,8 @@ const colors = {
   cardNameInputBorder: "#737373",
   cardAddLink: "#E5E5E5",
   scroll: "#1DA1F2",
+  confirmButton: "#AAB8C2",
+  confirmButtonHover: "#657786",
 };
 
 const theme = { colors };
