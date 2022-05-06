@@ -1,9 +1,16 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { CardInfoContext } from 'App';
 
 import { inputNumberOnly, limitInputLength } from 'utils';
 import { LIMIT_LENGTH } from 'constants';
 
-function CardPassword({ cardPasswords, setCardPasswords }) {
+function CardPassword() {
+  const { state, dispatch } = useContext(CardInfoContext);
+
+  const cardPasswords = [state.password1, state.password2];
+  const setCardPasswords = (cardPasswords) =>
+    dispatch({ type: 'SET_CARD_PASSWORDS', cardPasswords });
+
   const handleChange = (event) => {
     const { value, name } = event.target;
 
@@ -70,8 +77,3 @@ function CardPassword({ cardPasswords, setCardPasswords }) {
 }
 
 export default CardPassword;
-
-CardPassword.propTypes = {
-  cardPasswords: PropTypes.array.isRequired,
-  setCardPasswords: PropTypes.func.isRequired,
-};

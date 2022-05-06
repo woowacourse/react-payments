@@ -1,9 +1,16 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { CardInfoContext } from 'App';
 
 import { MONTH, LIMIT_LENGTH } from 'constants';
 import { inputNumberOnly, limitInputLength } from 'utils';
 
-function CardExpirationDate({ cardExpirationDate, setCardExpirationDate }) {
+function CardExpirationDate() {
+  const { state, dispatch } = useContext(CardInfoContext);
+
+  const cardExpirationDate = { month: state.month, year: state.year };
+  const setCardExpirationDate = (cardExpirationDate) =>
+    dispatch({ type: 'SET_CRAD_EXPIRATION_DATE', cardExpirationDate });
+
   const handleMonthInputBlur = (event) => {
     const { value } = event.target;
 
@@ -88,8 +95,3 @@ function CardExpirationDate({ cardExpirationDate, setCardExpirationDate }) {
 }
 
 export default CardExpirationDate;
-
-CardExpirationDate.propTypes = {
-  cardExpirationDate: PropTypes.object.isRequired,
-  setCardExpirationDate: PropTypes.func.isRequired,
-};

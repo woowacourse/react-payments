@@ -1,9 +1,17 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { CardInfoContext } from 'App';
 
 import { LIMIT_LENGTH } from 'constants';
 import { limitInputLength, inputNumberOnly } from 'utils';
 
-function CardNumber({ cardNumbers, setCardNumbers }) {
+function CardNumber() {
+  const { state, dispatch } = useContext(CardInfoContext);
+
+  const { number1, number2, number3, number4 } = state;
+
+  const cardNumbers = [number1, number2, number3, number4];
+  const setCardNumbers = (cardNumbers) => dispatch({ type: 'SET_CARD_NUMBERS', cardNumbers });
+
   const handleChange = (event) => {
     const { value, name } = event.target;
 
@@ -86,8 +94,3 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
 }
 
 export default CardNumber;
-
-CardNumber.propTypes = {
-  cardNumbers: PropTypes.array.isRequired,
-  setCardNumbers: PropTypes.func.isRequired,
-};
