@@ -114,7 +114,9 @@ export const CardRegisterPage = () => {
 
   return (
     <>
-      <PageTitle onClick={() => navigate("/cardList")}>카드 추가</PageTitle>
+      <PageTitle onClick={() => navigate("/cardList")} visible={true}>
+        카드 추가
+      </PageTitle>
       <Card
         cardType={cardType}
         cardNumbers={cardNumbers}
