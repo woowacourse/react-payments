@@ -24,6 +24,8 @@ const Container = styled.div`
     padding: 0.513rem;
     transition: background-color 0.2s ease;
     border-radius: 0.5rem;
+    background: unset;
+    border: none;
 
     .icon {
       display: flex;
@@ -36,6 +38,7 @@ const Container = styled.div`
       background-color: #000;
       margin: 0 auto 0.725rem;
       border: 2px solid #fff;
+      text-shadow: 0 0 10px ${COLORS['black-25']};
 
       ${BACKGROUND_COLORS.map(
         ({ name, background }) => css`

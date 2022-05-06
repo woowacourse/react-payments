@@ -3,16 +3,28 @@ import { CARD_COMPANY } from 'constants';
 
 import Container from './styles';
 
-function CardCompanyList() {
+function CardCompanyList({ onChange, handleModalClose }) {
+  const onClickCompanyButton = (event) => {
+    handleModalClose();
+    onChange(event);
+  };
+
   return (
     <Container>
       {Object.entries(CARD_COMPANY).map(([id, { name, color, icon }]) => (
-        <div className="card-company-item" key={id}>
+        <button
+          type="button"
+          className="card-company-item"
+          name="companyId"
+          key={id}
+          onClick={onClickCompanyButton}
+          value={id}
+        >
           <div className="icon" data-color={color}>
             {icon}
           </div>
           <div className="name">{name}</div>
-        </div>
+        </button>
       ))}
     </Container>
   );

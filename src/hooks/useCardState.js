@@ -1,6 +1,7 @@
 import { useReducer } from 'react';
 
 const initialState = {
+  companyId: '0',
   cardNumber: ['', '', '', ''],
   expireMonth: '',
   expireYear: '',
@@ -46,8 +47,8 @@ const useCardState = () => {
   const [cardState, dispatch] = useReducer(reducer, initialState);
   const isComplete = isInputComplete(cardState);
 
-  const onChangeTextField = ({ target }, option = {}) => {
-    const { name: textFieldName, value: textFieldValue } = target;
+  const onChangeCardState = ({ currentTarget }, option = {}) => {
+    const { name: textFieldName, value: textFieldValue } = currentTarget;
 
     switch (textFieldName) {
       case 'cardNumber':
@@ -65,7 +66,7 @@ const useCardState = () => {
     }
   };
 
-  return { state: { ...cardState, isComplete }, onChangeTextField };
+  return { state: { ...cardState, isComplete }, onChangeCardState };
 };
 
 export default useCardState;
