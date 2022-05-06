@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 
 const AutoFocusInputBox = ({ children, maxValueLength }) => {
-  console.log(children);
   const flattenChildren = React.Children.toArray(children);
   const inputChildren = flattenChildren.filter((child) => child.type?.target === 'input');
 

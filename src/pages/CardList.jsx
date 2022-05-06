@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { TYPES } from 'store/card/types';
+import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import PageTitle from 'components/PageTitle';
 import AnotherCard from 'components/AnotherCard';
-import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
-import { TYPES } from 'store/card/types';
 import Card from 'components/Card';
-import styled from 'styled-components';
-import CardAlignBox from 'components/CardBox/CardAlignBox';
+import FlexColumnBox from 'components/FlexColumnBox';
 import Container from 'components/Container';
 import PointerBox from 'components/PointerBox/PointerBox';
 import DroppableArea from 'common/DragDrop/DroppableArea';
@@ -23,7 +23,7 @@ function CardList() {
   return (
     <Container>
       <PageTitle hasPrevButton={false}>보유 카드</PageTitle>
-      <CardAlignBox>
+      <FlexColumnBox>
         <DroppableArea cards={cards} dispatch={dispatch} type={TYPES.SET_CARD_ORDER}>
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -47,7 +47,7 @@ function CardList() {
         <PointerBox onClick={onClickPrev}>
           <AnotherCard />
         </PointerBox>
-      </CardAlignBox>
+      </FlexColumnBox>
     </Container>
   );
 }

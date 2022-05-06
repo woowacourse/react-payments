@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-export default function CardAlignBox({ children }) {
-  return <Styled.CardAlignBox>{children}</Styled.CardAlignBox>;
+export default function FlexColumnBox({ children }) {
+  return <Styled.FlexColumnBox>{children}</Styled.FlexColumnBox>;
 }
 
 const Styled = {
-  CardAlignBox: styled.div`
+  FlexColumnBox: styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;

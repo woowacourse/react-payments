@@ -4,7 +4,7 @@ import PageTitle from 'components/PageTitle';
 import Card from 'components/Card';
 import Form from 'components/Form';
 import NextButton from 'components/NextButton';
-import CardAlignBox from 'components/CardBox/CardAlignBox';
+import FlexColumnBox from 'components/FlexColumnBox';
 import styled from 'styled-components';
 import Modal from 'components/Modal';
 import Backdrop from 'components/Backdrop';
@@ -24,7 +24,7 @@ export default function CardConfirmModal({ cardData, onConfirmCard, onCloseModal
           <PageTitle hasPrevButton={true} onClickPrev={onCloseModal}>
             카드 추가
           </PageTitle>
-          <CardAlignBox>
+          <FlexColumnBox>
             <Styled.TitleText>카드 정보를 최종 확인해주세요.</Styled.TitleText>
             <Card
               cardName={cardData.cardName}
@@ -44,7 +44,7 @@ export default function CardConfirmModal({ cardData, onConfirmCard, onCloseModal
                 등록
               </NextButton>
             </Form>
-          </CardAlignBox>
+          </FlexColumnBox>
         </Modal>,
         document.getElementById('overlay-root'),
       )}

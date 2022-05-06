@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import CardAlignBox from 'components/CardBox/CardAlignBox';
+import FlexColumnBox from 'components/FlexColumnBox';
 import CardBox from 'components/CardBox';
 
 export default function AnotherCard() {
   return (
-    <CardAlignBox>
+    <FlexColumnBox>
       <CardBox isSmall={true} color={'#e5e5e5'}>
         <Styled.Sign>{'+'}</Styled.Sign>
       </CardBox>
-    </CardAlignBox>
+    </FlexColumnBox>
   );
 }
 
