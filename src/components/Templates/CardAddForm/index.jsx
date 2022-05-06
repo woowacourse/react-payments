@@ -6,6 +6,7 @@ import SecurityNumberInput from '../../Modules/SecurityNumberInput';
 import PasswordInput from '../../Modules/PasswordInput';
 import SubmitButton from '../../Atoms/SubmitButton';
 import useCardAddForm from '../../../hooks/useCardAddForm';
+import { useNavigate } from 'react-router-dom';
 
 const FormContainer = styled.form`
   display: flex;
@@ -19,7 +20,8 @@ const ButtonContainer = styled.div`
 `;
 
 function CardAddForm({ link }) {
-  const { isValidForm, onAddFormSubmit } = useCardAddForm(link);
+  const navigator = useNavigate();
+  const { isValidForm, onAddFormSubmit } = useCardAddForm(navigator, link);
 
   return (
     <FormContainer onSubmit={onAddFormSubmit}>
