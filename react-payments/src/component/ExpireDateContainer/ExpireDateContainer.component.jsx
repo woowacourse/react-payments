@@ -41,7 +41,7 @@ const ExpireDateContainer = () => {
       {expireDateReady ? (
         <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
       ) : (
-        <MessageBox type="error">{ERROR_MESSAGE["expire-date"]} </MessageBox>
+        <MessageBox type="error">{ERROR_MESSAGE.EXPIRE_DATE} </MessageBox>
       )}
     </>
   );

@@ -102,13 +102,11 @@ const CardRegisterPage = () => {
           ready={cardNameLengthReady && uniqueCardNameReady}
         />
         {!cardNameLengthReady && (
-          <MessageBox type="error">
-            {ERROR_MESSAGE["card-name-length"]}
-          </MessageBox>
+          <MessageBox type="error">{ERROR_MESSAGE.CARD_NAME_LENGTH}</MessageBox>
         )}
         {!uniqueCardNameReady && (
           <MessageBox type="error">
-            {ERROR_MESSAGE["unique-card-name"]}
+            {ERROR_MESSAGE.DUPLICATE_CARD_NAME}
           </MessageBox>
         )}
         {cardNameLengthReady && uniqueCardNameReady && (

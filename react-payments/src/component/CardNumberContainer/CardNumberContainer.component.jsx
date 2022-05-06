@@ -58,7 +58,7 @@ const CardNumberContainer = () => {
       {cardNumberReady ? (
         <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
       ) : (
-        <MessageBox type="error">{ERROR_MESSAGE["card-number"]} </MessageBox>
+        <MessageBox type="error">{ERROR_MESSAGE.CARD_NUMBER} </MessageBox>
       )}
     </>
   );

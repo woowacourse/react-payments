@@ -70,7 +70,7 @@ const CardPasswordContainer = () => {
       {cardPasswordReady ? (
         <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
       ) : (
-        <MessageBox type="error">{ERROR_MESSAGE["card-password"]} </MessageBox>
+        <MessageBox type="error">{ERROR_MESSAGE.CARD_PASSWORD} </MessageBox>
       )}
     </>
   );

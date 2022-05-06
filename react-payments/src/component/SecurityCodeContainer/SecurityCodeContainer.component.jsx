@@ -57,7 +57,7 @@ const SecurityCodeContainer = () => {
       {securityCodeReady ? (
         <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
       ) : (
-        <MessageBox type="error">{ERROR_MESSAGE["security-code"]} </MessageBox>
+        <MessageBox type="error">{ERROR_MESSAGE.SECURITY_CODE} </MessageBox>
       )}
     </>
   );
