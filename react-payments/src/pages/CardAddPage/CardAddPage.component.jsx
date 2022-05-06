@@ -1,4 +1,4 @@
-import { useContext, useReducer } from "react";
+import { useContext, useEffect, useReducer } from "react";
 import Card from "../../component/common/Card/card.component";
 import CardTypeSelector from "../../component/CardTypeSelector/CardTypeSelector";
 import Header from "../../component/common/Header/Header.component";
@@ -19,26 +19,36 @@ import useReady from "../../hooks/useReady";
 import { isAllInputReady } from "../../util/validator";
 import { CardTypeContext } from "../../provider/CardTypeProvider";
 import PageContainer from "../../component/common/PageContainer/PageContainer.component";
+import { useParams } from "react-router-dom";
+import { CardDataContext } from "../../provider/CardDataProvider";
+import { REDUCER_TYPE } from "../../constants";
 
 const CardAddPage = () => {
   const {
     state: { cardTypeInfo, cardTypeReady },
+    action: { setCardTypeInfo, resetCardTypeInfo },
   } = useContext(CardTypeContext);
   const {
     state: { cardNumber, cardNumberReady },
+    action: { setCardNumber, resetCardNumber },
   } = useContext(CardNumberContext);
   const {
     state: { expireDate, expireDateReady },
+    action: { setExpireDate, resetExpireDate },
   } = useContext(ExpireDateContext);
   const {
     state: { userName },
+    action: { setUserName, resetUserName },
   } = useContext(UserNameContext);
   const {
-    state: { securityCodeReady },
+    state: { securityCode, securityCodeReady },
+    action: { setSecurityCode, resetSecurityCode },
   } = useContext(SecurityCodeContext);
   const {
-    state: { cardPasswordReady },
+    state: { cardPassword, cardPasswordReady },
+    action: { setCardPassword, resetCardPassword },
   } = useContext(CardPasswordContext);
+  const { cardData, dispatch } = useContext(CardDataContext);
   const [allFormReady] = useReady(
     {
       cardNumberReady,
@@ -49,11 +59,56 @@ const CardAddPage = () => {
     },
     isAllInputReady
   );
-
   const [isShowModal, toggleShowModal] = useReducer(
     (isShowModal) => !isShowModal,
     false
   );
+  const { idx } = useParams();
+  console.log(idx);
+  useEffect(() => {
+    if (typeof idx === "undefined" || !cardData[idx]) {
+      return;
+    }
+
+    setCardNumber(cardData[idx].cardNumber);
+    setExpireDate({ month: cardData[idx].month, year: cardData[idx].year });
+    setUserName(cardData[idx].userName);
+    setSecurityCode(cardData[idx].securityCode);
+    setCardPassword(cardData[idx].cardPassword);
+    setCardTypeInfo(cardData[idx].cardTypeInfo);
+  }, [
+    idx,
+    cardData,
+    setCardNumber,
+    setCardPassword,
+    setExpireDate,
+    setUserName,
+    setCardTypeInfo,
+    setSecurityCode,
+  ]);
+
+  const handleEditCard = () => {
+    dispatch({
+      type: REDUCER_TYPE.EDIT,
+      payload: {
+        id: idx,
+        month: expireDate.month,
+        year: expireDate.year,
+        userName,
+        cardTypeInfo,
+        cardNumber,
+        securityCode,
+        cardPassword,
+      },
+    });
+
+    resetCardNumber();
+    resetExpireDate();
+    resetUserName();
+    resetSecurityCode();
+    resetCardPassword();
+    resetCardTypeInfo();
+  };
 
   return (
     <PageContainer>
@@ -68,7 +123,7 @@ const CardAddPage = () => {
         month={expireDate.month}
         year={expireDate.year}
         cardTypeInfo={cardTypeInfo}
-        toggleModal={toggleShowModal}
+        onClick={toggleShowModal}
       />
       <CardNumberContainer />
       <ExpireDateContainer />
@@ -76,11 +131,16 @@ const CardAddPage = () => {
       <SecurityCodeContainer />
       <CardPasswordContainer />
 
-      {allFormReady && (
-        <LinkButton type="submit" path="/register">
-          다음
-        </LinkButton>
-      )}
+      {allFormReady &&
+        (typeof idx !== "undefined" ? (
+          <LinkButton type="submit" onClick={handleEditCard} path="/">
+            수정
+          </LinkButton>
+        ) : (
+          <LinkButton type="submit" path="/register">
+            다음
+          </LinkButton>
+        ))}
       {isShowModal && (
         <Modal toggleModal={toggleShowModal}>
           <CardTypeSelector />

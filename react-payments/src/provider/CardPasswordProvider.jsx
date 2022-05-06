@@ -57,6 +57,7 @@ const CardPasswordProvider = ({ children }) => {
           onClickCardPasswordBackspaceButton,
           onClickCardPasswordVirtualKeyboard,
           resetCardPassword,
+          setCardPassword,
         },
       }}
     >

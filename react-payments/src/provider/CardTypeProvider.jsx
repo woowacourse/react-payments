@@ -21,7 +21,7 @@ const CardTypeProvider = ({ children }) => {
     <CardTypeContext.Provider
       value={{
         state: { cardTypeInfo, cardTypeReady },
-        action: { onClickCardType, resetCardTypeInfo },
+        action: { onClickCardType, resetCardTypeInfo, setCardTypeInfo },
       }}
     >
       {children}

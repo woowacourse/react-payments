@@ -117,11 +117,11 @@ const Card = ({
   year,
   cardNumber,
   cardTypeInfo,
-  toggleModal,
+  onClick,
   size,
 }) => {
   return (
-    <CardContainer onClick={toggleModal} data-testid="card">
+    <CardContainer onClick={onClick} data-testid="card">
       <CardBox cardType={cardTypeInfo.cardType} size={size}>
         <CardTop>{cardTypeInfo.cardName}</CardTop>
         <CardMiddle>

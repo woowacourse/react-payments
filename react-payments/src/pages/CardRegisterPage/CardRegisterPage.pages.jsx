@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import CardNameInput from "../../component/CardNameInput/CardNameInput.component";
 import Card from "../../component/common/Card/card.component";
@@ -44,9 +44,11 @@ const CardRegisterPage = () => {
     action: { resetCardTypeInfo },
   } = useContext(CardTypeContext);
   const {
+    state: { securityCode },
     action: { resetSecurityCode },
   } = useContext(SecurityCodeContext);
   const {
+    state: { cardPassword },
     action: { resetCardPassword },
   } = useContext(CardPasswordContext);
 
@@ -58,6 +60,7 @@ const CardRegisterPage = () => {
     cardData
   );
   const { dispatch } = useContext(CardDataContext);
+  const id = useRef(0);
 
   const handleSubmitCardData = () => {
     resetCardNumber();
@@ -70,14 +73,19 @@ const CardRegisterPage = () => {
     dispatch({
       type: REDUCER_TYPE.CREATE,
       payload: {
-        cardNumber,
+        id: id.current,
         month: expireDate.month,
         year: expireDate.year,
         userName,
         cardTypeInfo,
         cardName,
+        cardNumber,
+        securityCode,
+        cardPassword,
       },
     });
+
+    id.current += 1;
   };
 
   const onChangeCardName = (e) => {

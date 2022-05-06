@@ -9,6 +9,12 @@ const reducer = (state, action) => {
   switch (action.type) {
     case REDUCER_TYPE.CREATE:
       return [...state, action.payload];
+    case REDUCER_TYPE.EDIT: {
+      const cards = [...state];
+      const card = cards[action.payload.id];
+      cards.splice(action.payload.id, 1, { ...card, ...action.payload });
+      return [...cards];
+    }
     default:
       return state;
   }

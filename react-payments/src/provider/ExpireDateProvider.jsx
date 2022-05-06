@@ -54,7 +54,12 @@ const ExpireDateProvider = ({ children }) => {
     <ExpireDateContext.Provider
       value={{
         state: { expireDate, expireDateReady },
-        action: { onChangeExpireDate, onKeyDownExpireDate, resetExpireDate },
+        action: {
+          onChangeExpireDate,
+          onKeyDownExpireDate,
+          resetExpireDate,
+          setExpireDate,
+        },
       }}
     >
       {children}

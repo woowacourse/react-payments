@@ -57,7 +57,12 @@ const CardNumberProvider = ({ children }) => {
     <CardNumberContext.Provider
       value={{
         state: { cardNumber, cardNumberReady },
-        action: { onChangeCardNumber, onKeyDownCardNumber, resetCardNumber },
+        action: {
+          onChangeCardNumber,
+          onKeyDownCardNumber,
+          resetCardNumber,
+          setCardNumber,
+        },
       }}
     >
       {children}

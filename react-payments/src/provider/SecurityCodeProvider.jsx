@@ -43,6 +43,7 @@ const SecurityCodeProvider = ({ children }) => {
           onClickSecurityVirtualKeyboard,
           onClickSecurityBackspaceButton,
           resetSecurityCode,
+          setSecurityCode,
         },
       }}
     >

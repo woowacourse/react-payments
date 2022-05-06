@@ -24,7 +24,7 @@ const UserNameProvider = ({ children }) => {
     <UserNameContext.Provider
       value={{
         state: { userName },
-        action: { onChangeUserName, resetUserName },
+        action: { onChangeUserName, resetUserName, setUserName },
       }}
     >
       {children}
