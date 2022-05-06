@@ -1,30 +1,18 @@
 import PropTypes from 'prop-types';
 import reactDom from 'react-dom';
-import { useState, useEffect } from 'react';
+import { MODAL_STATE } from 'constants';
 
 import { Container, ModalContent } from './styles';
 
-function Modal({ isVisible, handleClose, children }) {
-  const [modalClassName, setClassName] = useState('hidden');
+function Modal({ className, handleClose, handleHidden, children }) {
+  const onAnimationEnd = () => {
+    if (className === MODAL_STATE.VISIBLE) return;
 
-  useEffect(() => {
-    if (modalClassName === 'hidden' && isVisible === false) return;
-
-    setClassName(isVisible ? 'visible' : 'disappear');
-  }, [isVisible]);
-
-  const onDisappeared = () => {
-    if (modalClassName === 'visible') return;
-    setClassName('hidden');
+    handleHidden();
   };
 
   const render = (
-    <Container
-      className={modalClassName}
-      isVisible={isVisible}
-      onClick={handleClose}
-      onAnimationEnd={onDisappeared}
-    >
+    <Container className={className} onClick={handleClose} onAnimationEnd={onAnimationEnd}>
       <ModalContent>{children}</ModalContent>
     </Container>
   );
@@ -33,9 +21,16 @@ function Modal({ isVisible, handleClose, children }) {
   return reactDom.createPortal(render, modalContainer);
 }
 
+Modal.defaultProps = {
+  className: MODAL_STATE.HIDDEN,
+  handleClose: () => {},
+  handleHidden: () => {},
+};
+
 Modal.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  handleClose: PropTypes.func,
+  handleHidden: PropTypes.func,
 };
 
 export default Modal;

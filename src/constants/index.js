@@ -24,6 +24,12 @@ const CARD_PASSWORD = {
   LENGTH: 2,
 };
 
+const MODAL_STATE = {
+  HIDDEN: 'hidden',
+  VISIBLE: 'visible',
+  DISAPPEAR: 'disappear',
+};
+
 const ERROR_MESSAGE = {
   IS_NOT_VALID_CARD: '카드 정보가 올바르지 않습니다.\n입력한 내용을 확인해주세요.',
   CARD_NUMBER: {
@@ -51,4 +57,12 @@ const ERROR_MESSAGE = {
   },
 };
 
-export { CARD_NUMBER, EXPIRE_DATE, USER_NAME, SECURITY_CODE, CARD_PASSWORD, ERROR_MESSAGE };
+export {
+  CARD_NUMBER,
+  EXPIRE_DATE,
+  USER_NAME,
+  SECURITY_CODE,
+  CARD_PASSWORD,
+  MODAL_STATE,
+  ERROR_MESSAGE,
+};
