@@ -34,12 +34,16 @@ const StyledLabel = styled.label`
 const StyledInputWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  background: #ecebf1;
-  border-radius: 7px;
-  width: ${(props) => props.width};
-  padding: 12px;
+  gap: 10px;
 
-  box-shadow: ${(props) => props.hasError && "inset 0 0 0 1px #d82424"};
+  input {
+    background: #ecebf1;
+    border-radius: 7px;
+    width: ${(props) => props.width};
+    padding: 12px;
+
+    box-shadow: ${(props) => props.hasError && "inset 0 0 0 1px #d82424"};
+  }
 `;
 
 const StyledInputContainer = styled.div`
@@ -54,7 +58,6 @@ export default function CardPasswordInput({
   setPasswordLength,
 }) {
   const [isInvalid, setInvalid] = useState(false);
-  // const [inputLength, setInputLength] = useState([0, 0]);
   const setInputLengthArray = useArraySetState(setPasswordLength);
 
   const handleInputChange = (e, order) => {
@@ -80,10 +83,11 @@ export default function CardPasswordInput({
         카드 비밀번호 앞 두 자리
       </StyledLabel>
       <StyledInputContainer>
-        {Array.from({ length: CARD_INFO_RULES.PASSWORD_LENGTH }).map(
-          (_, index) => (
-            <StyledInputWrapper key={index} width={"45px"} hasError={isInvalid}>
+        <StyledInputWrapper width={"45px"} hasError={isInvalid}>
+          {Array.from({ length: CARD_INFO_RULES.PASSWORD_LENGTH }).map(
+            (_, index) => (
               <Input
+                key={index}
                 type={"password"}
                 placeholder={CREATE_MASKED_CHARACTERS(1)}
                 name={"password"}
@@ -95,9 +99,9 @@ export default function CardPasswordInput({
                 onInvalid={triggerInvalid}
                 pattern={"^[0-9]+$"}
               />
-            </StyledInputWrapper>
-          )
-        )}
+            )
+          )}
+        </StyledInputWrapper>
       </StyledInputContainer>
     </StyledInputField>
   );
