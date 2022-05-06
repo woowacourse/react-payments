@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import CardAddition from 'pages/CardAddition';
+import AddCard from 'pages/AddCard';
 import CardList from 'pages/CardList';
 import CardContext from 'store/card/CardContext';
 
@@ -8,7 +8,7 @@ function App() {
     <CardContext>
       <Router>
         <Routes>
-          <Route path="/add-card" element={<CardAddition />} />
+          <Route path="/add-card" element={<AddCard />} />
           <Route path="/card-list" element={<CardList />} />
         </Routes>
       </Router>

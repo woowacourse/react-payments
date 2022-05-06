@@ -1,11 +1,13 @@
 import { useContext } from 'react';
-import * as S from 'styles.js';
-import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import validator from 'lib/validations/validator';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import AutoFocusInputBox from 'common/AutoFocusInputBox';
-import Label from 'components/Label/Label';
+import Label from 'components/Label';
+import InputContainer from 'components/Container/InputContainer';
+import InputBox from 'components/Container/InputBox';
+import { InputBasic } from 'components/Input';
 
 export default function CardExpiration({ color }) {
   const { cardExpiration, cardExpirationErrorMessage } = useContext(CardStateContext);
@@ -19,10 +21,10 @@ export default function CardExpiration({ color }) {
   return (
     <>
       <Label htmlFor={name}>{name}</Label>
-      <S.InputBox>
-        <S.InputContainer width="40%">
+      <InputBox>
+        <InputContainer width="40%">
           <AutoFocusInputBox maxValueLength={2}>
-            <S.InputBasic
+            <InputBasic
               type="text"
               placeholder="MM"
               width="48%"
@@ -32,7 +34,7 @@ export default function CardExpiration({ color }) {
               onChange={onChangeInput(0)}
               id={name}
             />
-            <S.InputBasic
+            <InputBasic
               type="text"
               placeholder="YY"
               width="48%"
@@ -42,8 +44,8 @@ export default function CardExpiration({ color }) {
               onChange={onChangeInput(1)}
             />
           </AutoFocusInputBox>
-        </S.InputContainer>
-      </S.InputBox>
+        </InputContainer>
+      </InputBox>
       <ErrorMessage
         value={cardExpiration}
         validate={validator.checkCardExpiration}

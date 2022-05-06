@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react';
-import CardCompany from 'components/CardCompany/CardCompany';
-import ToastModal from 'components/ToastModal';
+import CardCompany from 'components/CardCompany';
+import ToastModal from 'components/ToastModal/ToastModal';
 import { CARD_COMPANIES } from 'lib/constants/cardDomain';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';

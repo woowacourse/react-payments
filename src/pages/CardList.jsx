@@ -1,14 +1,17 @@
 import React from 'react';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as S from 'styles.js';
-import PageTitle from 'components/PageTitle/PageTitle';
-import AnotherCard from 'components/AnotherCard/AnotherCard';
+import PageTitle from 'components/PageTitle';
+import AnotherCard from 'components/AnotherCard';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
-import { DraggableCard, DroppableArea } from 'common/DragDrop';
-import Card from 'components/Card/Card';
+import Card from 'components/Card';
 import styled from 'styled-components';
+import CardAlignBox from 'components/CardAlignBox';
+import Container from 'components/Container';
+import PointerBox from 'components/PointerBox/PointerBox';
+import DroppableArea from 'common/DragDrop/DroppableArea';
+import DraggableCard from 'common/DragDrop/DraggableCard';
 
 function CardList() {
   const navigate = useNavigate();
@@ -19,9 +22,9 @@ function CardList() {
     navigate('/add-card');
   };
   return (
-    <S.Container>
+    <Container>
       <PageTitle hasPrevButton={false}>보유 카드</PageTitle>
-      <S.CardAlignBox>
+      <CardAlignBox>
         <DroppableArea cards={cards} dispatch={dispatch} type={TYPES.SET_CARD_ORDER}>
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -42,22 +45,17 @@ function CardList() {
             </div>
           )}
         </DroppableArea>
-        <S.PointerBox>
-          <AnotherCard onClick={onClickPrev} />
-        </S.PointerBox>
-      </S.CardAlignBox>
-    </S.Container>
+        <PointerBox onClick={onClickPrev}>
+          <AnotherCard />
+        </PointerBox>
+      </CardAlignBox>
+    </Container>
   );
 }
 
 export default CardList;
 
 const Styled = {
-  EnrolledCardWrapper: styled.div`
-    text-align: center;
-    margin-bottom: 25px;
-  `,
-
   CardNickname: styled.span`
     font-size: 19px;
   `,

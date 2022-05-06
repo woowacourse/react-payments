@@ -1,11 +1,14 @@
 import { useContext } from 'react';
-import * as S from 'styles.js';
-import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import validator from 'lib/validations/validator';
 import { CARD_COMPANIES } from 'lib/constants/cardDomain';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
-import Label from 'components/Label/Label';
+import Label from 'components/Label';
+import InputContainer from 'components/Container/InputContainer';
+import InputBox from 'components/Container/InputBox';
+import Tooltip from 'components/Tooltip';
+import { InputBasic } from 'components/Input';
 
 export default function CardCvc() {
   const { cardCvc, cardCvcErrorMessage, cardCompanyIndex } = useContext(CardStateContext);
@@ -26,9 +29,9 @@ export default function CardCvc() {
   return (
     <>
       <Label htmlFor={name}>{name}</Label>
-      <S.InputBox>
-        <S.InputContainer width="23%">
-          <S.InputBasic
+      <InputBox>
+        <InputContainer width="23%">
+          <InputBasic
             type="password"
             maxLength="3"
             value={cardCvc}
@@ -36,9 +39,9 @@ export default function CardCvc() {
             onChange={onChangeInput}
             id={name}
           />
-        </S.InputContainer>
-        <S.TipButton onClick={onClickTip}>?</S.TipButton>
-      </S.InputBox>
+        </InputContainer>
+        <Tooltip onClick={onClickTip}>?</Tooltip>
+      </InputBox>
       <ErrorMessage
         value={cardCvc}
         validate={validator.checkCardCvc}

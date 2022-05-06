@@ -1,11 +1,13 @@
 import { useContext } from 'react';
-import * as S from 'styles.js';
-import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import validator from 'lib/validations/validator';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import AutoFocusInputBox from 'common/AutoFocusInputBox';
-import Label from 'components/Label/Label';
+import Label from 'components/Label';
+import Circle from 'components/Circle';
+import styled from 'styled-components';
+import { InputBasic } from 'components/Input';
 
 export default function CardPassword({ color }) {
   const { cardPassword, cardPasswordErrorMessage } = useContext(CardStateContext);
@@ -20,9 +22,9 @@ export default function CardPassword({ color }) {
   return (
     <>
       <Label htmlFor={name}>{name}</Label>
-      <S.ExtendedInputBox>
+      <Styled.ExtendedInputBox>
         <AutoFocusInputBox maxValueLength={1}>
-          <S.InputBasic
+          <InputBasic
             type="password"
             width="43px"
             maxLength="1"
@@ -31,7 +33,7 @@ export default function CardPassword({ color }) {
             onChange={onChangeInput(0)}
             id={name}
           />
-          <S.InputBasic
+          <InputBasic
             type="password"
             width="43px"
             maxLength="1"
@@ -39,14 +41,14 @@ export default function CardPassword({ color }) {
             value={cardPassword[1]}
             onChange={onChangeInput(1)}
           />
-          <S.PasswordBox>
-            <S.Circle size="5px" color={color} />
-          </S.PasswordBox>
-          <S.PasswordBox>
-            <S.Circle size="5px" color={color} />
-          </S.PasswordBox>
         </AutoFocusInputBox>
-      </S.ExtendedInputBox>
+        <Styled.PasswordBox>
+          <Circle size="5px" color={color} />
+        </Styled.PasswordBox>
+        <Styled.PasswordBox>
+          <Circle size="5px" color={color} />
+        </Styled.PasswordBox>
+      </Styled.ExtendedInputBox>
       <ErrorMessage
         value={cardPassword}
         validate={validator.checkCardPassword}
@@ -57,3 +59,22 @@ export default function CardPassword({ color }) {
     </>
   );
 }
+
+const Styled = {
+  ExtendedInputBox: styled.div`
+    display: flex;
+    align-items: center;
+    margin-top: 0.375rem;
+    color: #d3d3d3;
+    width: 220px;
+    justify-content: space-between;
+  `,
+
+  PasswordBox: styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    height: 45px;
+  `,
+};

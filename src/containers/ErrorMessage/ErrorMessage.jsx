@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import * as S from 'styles.js';
+import styled from 'styled-components';
 import { CardDispatchContext } from 'store/card/CardContext';
 
 export default function ErrorMessage({ value, children, validate, type }) {
@@ -21,5 +21,15 @@ export default function ErrorMessage({ value, children, validate, type }) {
     }
   }, [value]);
 
-  return <S.ErrorMessageParagraph>{children}</S.ErrorMessageParagraph>;
+  return <Styled.ErrorMessageParagraph>{children}</Styled.ErrorMessageParagraph>;
 }
+
+const Styled = {
+  ErrorMessageParagraph: styled.p`
+    height: 18px;
+    margin: 4px 0;
+    text-align: left;
+    font-size: 14px;
+    color: #e24141;
+  `,
+};

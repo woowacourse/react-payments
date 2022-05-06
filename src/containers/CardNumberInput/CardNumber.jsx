@@ -1,11 +1,13 @@
 import { useContext } from 'react';
-import * as S from 'styles.js';
-import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import validator from 'lib/validations/validator';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import AutoFocusInputBox from 'common/AutoFocusInputBox';
-import Label from 'components/Label/Label';
+import Label from 'components/Label';
+import styled from 'styled-components';
+import InputBox from 'components/Container/InputBox';
+import { InputBasic } from 'components/Input';
 
 export default function CardNumber({ color }) {
   const { cardNumber, cardNumberErrorMessage, cardCompanyIndex } = useContext(CardStateContext);
@@ -25,10 +27,10 @@ export default function CardNumber({ color }) {
   return (
     <>
       <Label htmlFor={name}>{name}</Label>
-      <S.InputBox>
-        <S.ExtendedInputContainer>
+      <InputBox>
+        <Styled.ExtendedInputContainer>
           <AutoFocusInputBox maxValueLength={4}>
-            <S.InputBasic
+            <InputBasic
               width="20%"
               type="text"
               maxLength="4"
@@ -38,8 +40,8 @@ export default function CardNumber({ color }) {
               onFocus={onFocusInput}
               id={name}
             />
-            <S.Hyphen color={color}>-</S.Hyphen>
-            <S.InputBasic
+            <Styled.Hyphen color={color}>-</Styled.Hyphen>
+            <InputBasic
               width="20%"
               type="text"
               maxLength="4"
@@ -48,8 +50,8 @@ export default function CardNumber({ color }) {
               onChange={onChangeInput(1)}
               onFocus={onFocusInput}
             />
-            <S.Hyphen color={color}>-</S.Hyphen>
-            <S.InputBasic
+            <Styled.Hyphen color={color}>-</Styled.Hyphen>
+            <InputBasic
               width="20%"
               type="password"
               maxLength="4"
@@ -58,8 +60,8 @@ export default function CardNumber({ color }) {
               onChange={onChangeInput(2)}
               onFocus={onFocusInput}
             />
-            <S.Hyphen color={color}>-</S.Hyphen>
-            <S.InputBasic
+            <Styled.Hyphen color={color}>-</Styled.Hyphen>
+            <InputBasic
               width="20%"
               type="password"
               maxLength="4"
@@ -69,8 +71,8 @@ export default function CardNumber({ color }) {
               onFocus={onFocusInput}
             />
           </AutoFocusInputBox>
-        </S.ExtendedInputContainer>
-      </S.InputBox>
+        </Styled.ExtendedInputContainer>
+      </InputBox>
       <ErrorMessage
         value={cardNumber}
         validate={validator.checkCardNumber}
@@ -81,3 +83,20 @@ export default function CardNumber({ color }) {
     </>
   );
 }
+
+const Styled = {
+  Hyphen: styled.p`
+    margin: 0;
+    font-size: 18px;
+    line-height: 47px;
+    color: ${({ color }) => color || '#737373'};
+  `,
+
+  ExtendedInputContainer: styled.div`
+    display: flex;
+    width: ${({ width }) => width || '100%'};
+    background-color: #ecebf1;
+    border-radius: 0.25rem;
+    justify-content: space-between;
+  `,
+};

@@ -1,10 +1,14 @@
 import { useContext } from 'react';
-import * as S from 'styles.js';
+
 import validator from 'lib/validations/validator';
-import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
-import Label from 'components/Label/Label';
+import Label from 'components/Label';
+import InputContainer from 'components/Container/InputContainer';
+import InputBox from 'components/Container/InputBox';
+import styled from 'styled-components';
+import { InputBasicLeft } from 'components/Input';
 
 export default function CardOwner({ color }) {
   const { cardOwner, cardOwnerErrorMessage } = useContext(CardStateContext);
@@ -17,17 +21,17 @@ export default function CardOwner({ color }) {
 
   return (
     <>
-      <S.TitleWrapper>
+      <Styled.TitleWrapper>
         <Label htmlFor={name} marginBottom="0px">
           {name}
         </Label>
-        <S.NameLength isLengthValidated={cardOwner.length > 30}>
+        <Styled.NameLength isLengthValidated={cardOwner.length > 30}>
           <span>{cardOwner.length}</span>/<span>30</span>
-        </S.NameLength>
-      </S.TitleWrapper>
-      <S.InputBox>
-        <S.InputContainer>
-          <S.InputBasicLeft
+        </Styled.NameLength>
+      </Styled.TitleWrapper>
+      <InputBox>
+        <InputContainer>
+          <InputBasicLeft
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             type="text"
             maxLength="30"
@@ -36,8 +40,8 @@ export default function CardOwner({ color }) {
             onChange={onChangeInput}
             id={name}
           />
-        </S.InputContainer>
-      </S.InputBox>
+        </InputContainer>
+      </InputBox>
       <ErrorMessage
         value={cardOwner}
         validate={validator.checkCardOwner}
@@ -48,3 +52,17 @@ export default function CardOwner({ color }) {
     </>
   );
 }
+
+const Styled = {
+  TitleWrapper: styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  `,
+  NameLength: styled.p`
+    margin: 0;
+    letter-spacing: -0.05em;
+    font-size: 12px;
+    color: ${({ isLengthValidated }) => (isLengthValidated ? '#E24141' : '#525252')};
+  `,
+};

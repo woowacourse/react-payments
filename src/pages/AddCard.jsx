@@ -1,30 +1,26 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { v4 as uuidv4 } from 'uuid';
-import * as S from 'styles.js';
 import validator from 'lib/validations/validator';
 import { CARD_COMPANIES } from 'lib/constants/cardDomain';
-
-import Card from 'components/Card/Card';
-import PageTitle from 'components/PageTitle/PageTitle';
+import Card from 'components/Card';
+import PageTitle from 'components/PageTitle';
 import CardNumber from 'containers/CardNumberInput/CardNumber';
 import CardExpiration from 'containers/CardExpirationInput/CardExpiration';
-import CardOwner from 'containers/CardOwnerInput.jsx/CardOwner';
+import CardOwner from 'containers/CardOwnerInput/CardOwner';
 import CardCvc from 'containers/CardCvcInput/CardCvc';
 import CardPassword from 'containers/CardPasswordInput/CardPassword';
-import NextButton from 'components/NextButton/NextButton';
+import NextButton from 'components/NextButton';
 import CardListModal from 'components/CardListModal';
 import TipModal from 'components/TipModal';
-import CardConfirmModal from 'pages/CardConfirmModal';
-import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import ClickCardBox from 'common/ClickCardBox';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
+import Container from 'components/Container';
+import CardConfirmModal from 'components/CardConfirmModal';
 
-function CardAddition() {
-  const navigate = useNavigate();
-
+function AddCard() {
   const {
     cardNumber,
     cardExpiration,
@@ -40,6 +36,14 @@ function CardAddition() {
   const [IsClickedNextButton, setIsClickedNextButton] = useState(false);
   const [cardData, setCardData] = useState();
 
+  const navigate = useNavigate();
+  const onClickPrev = () => {
+    navigate('/card-list');
+  };
+
+  const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
+  const cardName = cardCompanyIndex === -1 ? '' : CARD_COMPANIES[cardCompanyIndex].NAME;
+
   const isAllInputValidated = () => {
     try {
       validator.checkCardCompany(cardCompanyIndex);
@@ -48,7 +52,6 @@ function CardAddition() {
       validator.checkCardOwner(cardOwner);
       validator.checkCardCvc(cardCvc);
       validator.checkCardPassword(cardPassword);
-
       return true;
     } catch (error) {
       return false;
@@ -81,20 +84,12 @@ function CardAddition() {
     navigate('/card-list');
   };
 
-  const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
-
-  const cardName = cardCompanyIndex === -1 ? '' : CARD_COMPANIES[cardCompanyIndex].NAME;
-
-  const onClickPrev = () => {
-    navigate('/card-list');
-  };
-
   const onCloseModal = () => {
     setIsClickedNextButton(false);
   };
 
   return (
-    <S.Container>
+    <Container>
       <PageTitle hasPrevButton={true} onClickPrev={onClickPrev}>
         카드 추가
       </PageTitle>
@@ -126,16 +121,16 @@ function CardAddition() {
       <CardListModal />
       <TipModal />
       {IsClickedNextButton && (
-        <S.Container>
+        <Container>
           <CardConfirmModal
             cardData={cardData}
             onConfirmCard={onConfirmCard}
             onCloseModal={onCloseModal}
           />
-        </S.Container>
+        </Container>
       )}
-    </S.Container>
+    </Container>
   );
 }
 
-export default CardAddition;
+export default AddCard;

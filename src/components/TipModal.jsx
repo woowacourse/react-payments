@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import ToastModal from 'components/ToastModal';
+import ToastModal from 'components/ToastModal/ToastModal';
 import cvcImage from 'assets/jpg/cvc.jpg';
 import { CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
