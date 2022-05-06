@@ -9,6 +9,8 @@ import {
   CardOwner,
 } from 'components/common/Card/style'
 
+import { CARD_COMPANY } from 'constant'
+
 function Card({ size, cardInfo }) {
   const { company, cardNumber, owner, dueDate } = cardInfo
   const month = dueDate.month || 'MM'
@@ -16,7 +18,7 @@ function Card({ size, cardInfo }) {
   const ownerName = owner || 'NAME'
 
   return (
-    <CardWrapper size={size}>
+    <CardWrapper size={size} color={CARD_COMPANY[company]}>
       <CardTop>
         <CardText>{company}카드</CardText>
       </CardTop>

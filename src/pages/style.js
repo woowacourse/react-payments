@@ -37,4 +37,21 @@ const FormWrapper = styled.form`
   flex-direction: column;
 `
 
-export { PageWrapper, CenterItem, CardWrapper, FooterWrapper, FormWrapper }
+const GridContainer = styled.div`
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  padding: 18px;
+`
+
+export {
+  PageWrapper,
+  CenterItem,
+  CardWrapper,
+  FooterWrapper,
+  FormWrapper,
+  GridContainer,
+}

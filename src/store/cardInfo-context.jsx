@@ -21,10 +21,18 @@ const initialCardInfo = {
   cardNickName: '',
 }
 
+const initialError = {
+  cardNumber: false,
+  dueDate: false,
+  cvc: false,
+  password: false,
+  cardNickName: false,
+}
+
 export function CardInfoProvider({ children }) {
   const [cardInfo, setCardInfo] = useState(initialCardInfo)
-
   const [isFieldFulfilled, setIsFieldFulfilled] = useState(false)
+  const [isError, setIsError] = useState(initialError)
 
   useEffect(() => {
     setIsFieldFulfilled(
@@ -39,6 +47,12 @@ export function CardInfoProvider({ children }) {
         cardInfo.password.second
     )
   }, [cardInfo])
+
+  const handleCardCompany = (company) => {
+    setCardInfo((prev) => {
+      return { ...prev, company: company }
+    })
+  }
 
   const handleCardNumberChange = (e) => {
     const {
@@ -60,6 +74,17 @@ export function CardInfoProvider({ children }) {
     } = e.target
 
     if (isInvalidDueDate(value)) return
+
+    if (key === 'month') {
+      setIsError((prev) => {
+        return { ...prev, dueDate: value < 1 || value > 12 }
+      })
+    } else {
+      const currentYear = new Date().getFullYear().toString().slice(2)
+      setIsError((prev) => {
+        return { ...prev, dueDate: value < currentYear }
+      })
+    }
 
     setCardInfo((prev) => {
       return { ...prev, dueDate: { ...prev.dueDate, [key]: value } }
@@ -116,6 +141,8 @@ export function CardInfoProvider({ children }) {
       value={{
         cardInfo,
         isFieldFulfilled,
+        isError,
+        handleCardCompany,
         handleCardNumberChange,
         handleDueDateChange,
         handleOwnerChange,

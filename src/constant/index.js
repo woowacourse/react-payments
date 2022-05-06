@@ -32,4 +32,24 @@ const COLORS = {
   LIGHT_PINK: '#fcdfef',
 }
 
-export { CARD_NUMBER, DUE_DATE, OWNER, CVC, PASSWORD, MONTH, COLORS }
+const CARD_COMPANY = {
+  포코: '#E24141',
+  준: '#547CE4',
+  공원: '#73BC6D',
+  브랜: '#DE59B9',
+  로이드: '#04C09E',
+  도비: '#E76E9A',
+  콜린: '#F37D3B',
+  썬: '#FBCD58',
+}
+
+export {
+  CARD_NUMBER,
+  DUE_DATE,
+  OWNER,
+  CVC,
+  PASSWORD,
+  MONTH,
+  COLORS,
+  CARD_COMPANY,
+}
