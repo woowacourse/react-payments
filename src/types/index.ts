@@ -1,4 +1,5 @@
 interface CardInfo {
+  cardType: string;
   cardNumbers: CardNumbers;
   expiredDate: ExpiredDate;
   userName: string;

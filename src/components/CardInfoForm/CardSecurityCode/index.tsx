@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import useInputValidation from "../../../hooks/useInputValidation";
 import CVC from "../../../assets/cvcImage.png";
@@ -6,27 +6,24 @@ import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
 import UserGuide from "../../../common/UserGuide";
 import { checkSecurityCode } from "../../../validations/cardInfoForm";
+import { Context } from "../../../contexts/store";
 
 interface CardSecurityProps {
-  securityCode: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   validateFormValidation: any;
 }
 
-export default function CardSecurityCode({
-  securityCode,
-  onChange,
-  validateFormValidation,
-}: CardSecurityProps) {
+export default function CardSecurityCode({ validateFormValidation }: CardSecurityProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
+  const [state, dispatch] = useContext(Context);
+  const { securityCode } = state;
 
   const handleChangesSecurityCode = e => {
-    const targetSecurityCode = e.target.value;
+    const targetSecurityCode: string = e.target.value;
 
     validateInput(targetSecurityCode, checkSecurityCode);
     validateFormValidation("securityCode", isValidInput(targetSecurityCode, checkSecurityCode));
 
-    onChange(e);
+    dispatch({ type: "UPDATE_SECURITY_CODE", payload: { securityCode: targetSecurityCode } });
   };
 
   return (

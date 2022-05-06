@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
-import { CardInfo } from "../../types";
 import Modal from "../Modal";
+import { Context } from "../../contexts/store";
 
-export default function Card({ cardInfo }: { cardInfo: CardInfo }) {
-  const { cardNumbers, expiredDate, userName } = cardInfo;
+export default function Card() {
   const [isModalShow, setIsModalShow] = useState(false);
+  const [state, dispatch] = useContext(Context);
+  const { cardNumbers, expiredDate, userName } = state;
 
   const showModal = () => {
     setIsModalShow(true);
@@ -15,10 +16,26 @@ export default function Card({ cardInfo }: { cardInfo: CardInfo }) {
     setIsModalShow(false);
   };
 
+  const changeCardType = () => {
+    dispatch({ type: "CHANGE_CARD_TYPE" });
+  };
+
+  const cardType = {
+    empty: "empty-card",
+    poco: "poco-card",
+    jun: "jun-card",
+    park: "park-card",
+    bran: "bran-card",
+    loyd: "loyd-card",
+    dobi: "dobi-card",
+    colin: "colin-card",
+    sun: "sun-card",
+  };
+
   return (
     <>
       <div className="card-box">
-        <div className="empty-card" onClick={showModal} aria-hidden="true">
+        <div className={cardType.empty} onClick={showModal} aria-hidden="true">
           <div className="card-top">
             <span className="card-text"></span>
             <span className="card-text">
@@ -43,7 +60,7 @@ export default function Card({ cardInfo }: { cardInfo: CardInfo }) {
           </div>
         </div>
       </div>
-      {isModalShow && <Modal onClose={hideModal} />}
+      {isModalShow && <Modal onClose={hideModal} changeCardType={changeCardType} />}
     </>
   );
 }

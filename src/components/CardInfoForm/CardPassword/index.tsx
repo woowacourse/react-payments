@@ -1,35 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import useInputValidation from "../../../hooks/useInputValidation";
 import { Password } from "../../../types";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
 import { checkCardPassword } from "../../../validations/cardInfoForm";
+import { Context } from "../../../contexts/store";
 
 interface CardPasswordProps {
-  password: Password;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   validateFormValidation: any;
 }
 
-export default function CardPassword({
-  password,
-  onChange,
-  validateFormValidation,
-}: CardPasswordProps) {
+export default function CardPassword({ validateFormValidation }: CardPasswordProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
+  const [state, dispatch] = useContext(Context);
+  const { password } = state;
 
   const handleChangeCardPassword = e => {
     const { value } = e.target;
     const { index } = e.target.dataset;
-    const targetCardPassword = password;
+    const targetCardPassword: Password = [...password];
 
     targetCardPassword[index] = value;
 
     validateInput(targetCardPassword, checkCardPassword);
     validateFormValidation("password", isValidInput(targetCardPassword, checkCardPassword));
 
-    onChange(e);
+    dispatch({ type: "UPDATE_PASSWORD", payload: { password: value, index } });
   };
 
   return (

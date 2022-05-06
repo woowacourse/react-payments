@@ -1,35 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import useInputValidation from "../../../hooks/useInputValidation";
 import { CardNumbers } from "../../../types";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
 import { checkCardNumbers } from "../../../validations/cardInfoForm";
+import { Context } from "../../../contexts/store";
 
 interface CardNumberProps {
-  cardNumbers: CardNumbers;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   validateFormValidation: any;
 }
 
-export default function CardNumber({
-  cardNumbers,
-  onChange,
-  validateFormValidation,
-}: CardNumberProps) {
+export default function CardNumber({ validateFormValidation }: CardNumberProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
+  const [state, dispatch] = useContext(Context);
+  const { cardNumbers } = state;
 
   const handleChangeCardNumbers = e => {
     const { value } = e.target;
     const { index } = e.target.dataset;
-    const targetCardNumbers = cardNumbers;
+    const targetCardNumbers: CardNumbers = [...cardNumbers];
 
     targetCardNumbers[index] = value;
 
     validateInput(targetCardNumbers, checkCardNumbers);
     validateFormValidation("cardNumbers", isValidInput(targetCardNumbers, checkCardNumbers));
 
-    onChange(e);
+    dispatch({ type: "UPDATE_CARD_NUMBER", payload: { cardNumbers: value, index } });
   };
 
   return (

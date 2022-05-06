@@ -1,35 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import useInputValidation from "../../../hooks/useInputValidation";
 import { ExpiredDate } from "../../../types";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
 import { checkExpiredDate } from "../../../validations/cardInfoForm";
+import { Context } from "../../../contexts/store";
 
 interface CardExpiredDateProps {
-  expiredDate: ExpiredDate;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   validateFormValidation: any;
 }
 
-export default function CardExpiredDate({
-  expiredDate,
-  onChange,
-  validateFormValidation,
-}: CardExpiredDateProps) {
+export default function CardExpiredDate({ validateFormValidation }: CardExpiredDateProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
+  const [state, dispatch] = useContext(Context);
+  const { expiredDate } = state;
 
   const handleChangeExpired = e => {
     const { value } = e.target;
     const { key } = e.target.dataset;
-    const targetExpiredDate = { ...expiredDate };
+    const targetExpiredDate: ExpiredDate = { ...expiredDate };
 
     targetExpiredDate[key] = value;
 
     validateInput(targetExpiredDate, checkExpiredDate);
     validateFormValidation("expiredDate", isValidInput(targetExpiredDate, checkExpiredDate));
 
-    onChange(e);
+    dispatch({ type: "UPDATE_EXPIRED_DATE", payload: { expiredDate: value, key } });
   };
 
   return (
