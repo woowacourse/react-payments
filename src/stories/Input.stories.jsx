@@ -1,6 +1,6 @@
 import { Input, UnderlinedInput } from '../components';
 
-import { CARD_RULE } from '../constants';
+import { CARD_RULE, NOW } from '../constants';
 
 export default {
   title: 'Example/Input',
@@ -20,8 +20,9 @@ CardNumber.args = {
 const ValidDate = BasicTemplate.bind({});
 ValidDate.args = {
   description: '만료일',
-  placeholder: 'MM / YY',
   width: '137px',
+  type: 'month',
+  min: `${NOW.YEAR}-${NOW.MONTH}`,
   maxLength: CARD_RULE.VALID_DATE_MAX_LENGTH,
 };
 
