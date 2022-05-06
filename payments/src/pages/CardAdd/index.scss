@@ -40,4 +40,13 @@
     position: absolute;
     top: 20px;
   }
+  .card-add__container-card {
+    width: 230px;
+    height: 200px;
+    margin-bottom: 20px;
+    .card__container {
+      width: 230px;
+      height: 150px;
+    }
+  }
 }
