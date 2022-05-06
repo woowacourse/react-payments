@@ -5,22 +5,6 @@ import responsive from 'styles/utils/responsive';
 import animate from 'styles/utils/animate';
 import { COLORS } from 'styles/theme';
 
-const ModalContent = styled.div`
-  width: 100%;
-  border-radius: 1rem;
-  min-height: 12.5rem;
-  background-color: #fff;
-
-  padding: 1.25rem;
-  margin: 2rem 1.25rem;
-
-  box-shadow: 0px 0.625rem 1.875rem 1.25rem ${COLORS['black-05']};
-
-  ${responsive.notMobile(css`
-    width: 50%;
-  `)}
-`;
-
 const Container = styled.div`
   position: fixed;
   display: flex;
@@ -36,8 +20,25 @@ const Container = styled.div`
   z-index: 255;
 
   ${responsive.notMobile(css`
-    align-items: center;
+    align-items: start;
+    padding-top: 10rem;
   `)}
+
+  > .modal-content {
+    width: 100%;
+    border-radius: 1rem;
+    min-height: 12.5rem;
+    background-color: #fff;
+
+    padding: 1.25rem;
+    margin: 2rem 1.25rem;
+
+    box-shadow: 0px 0.625rem 1.875rem 1.25rem ${COLORS['black-05']};
+
+    ${responsive.notMobile(css`
+      width: 620px;
+    `)}
+  }
 
   &:not(.disappear) {
     ${animate(
@@ -53,7 +54,7 @@ const Container = styled.div`
       `,
     )}
 
-    ${ModalContent} {
+    .modal-content {
       ${animate(
         '0.3s ease',
         css`
@@ -85,7 +86,7 @@ const Container = styled.div`
       `,
     )}
 
-    ${ModalContent} {
+    .modal-content {
       ${animate(
         '0.3s ease',
         css`
@@ -108,4 +109,4 @@ const Container = styled.div`
   }
 `;
 
-export { Container, ModalContent };
+export default Container;
