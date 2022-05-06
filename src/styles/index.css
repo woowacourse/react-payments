@@ -1,0 +1,49 @@
+@import "./card.css";
+@import "./input.css";
+@import "./button.css";
+@import "./modal.css";
+@import "./utils.css";
+@import "./header.css";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e5e5;
+  font-family: "Roboto";
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+input {
+  font-size: 16px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#root {
+  background-color: #fff;
+  width: 375px;
+  min-width: 375px;
+  height: 700px;
+  position: relative;
+  border-radius: 15px;
+}
+
+.App {
+  height: 100%;
+  padding: 16px 24px;
+}
