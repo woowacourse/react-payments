@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 
-import validator from 'lib/validations/validator';
+import validator from 'lib/validations';
 import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import Label from 'components/Label';
-import InputContainer from 'components/Container/InputContainer';
-import InputBox from 'components/Container/InputBox';
+import InputContainer from 'components/InputContainer';
+import InputBox from 'components/InputBox';
 import styled from 'styled-components';
 import { InputBasicLeft } from 'components/Input';
 

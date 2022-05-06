@@ -4,7 +4,7 @@ import PageTitle from 'components/PageTitle';
 import Card from 'components/Card';
 import Form from 'components/Form';
 import NextButton from 'components/NextButton';
-import CardAlignBox from 'components/CardAlignBox';
+import CardAlignBox from 'components/CardBox/CardAlignBox';
 import styled from 'styled-components';
 import Modal from 'components/Modal';
 import Backdrop from 'components/Backdrop';

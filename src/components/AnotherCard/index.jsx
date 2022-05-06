@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import CardAlignBox from 'components/CardAlignBox';
+import CardAlignBox from 'components/CardBox/CardAlignBox';
 import CardBox from 'components/CardBox';
 
 export default function AnotherCard() {

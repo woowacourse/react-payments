@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
-import validator from 'lib/validations/validator';
+import validator from 'lib/validations';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import AutoFocusInputBox from 'common/AutoFocusInputBox';
 import Label from 'components/Label';
-import InputContainer from 'components/Container/InputContainer';
-import InputBox from 'components/Container/InputBox';
+import InputContainer from 'components/InputContainer';
+import InputBox from 'components/InputBox';
 import { InputBasic } from 'components/Input';
 
 export default function CardExpiration({ color }) {

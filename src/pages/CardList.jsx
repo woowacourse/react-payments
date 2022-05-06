@@ -7,7 +7,7 @@ import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import Card from 'components/Card';
 import styled from 'styled-components';
-import CardAlignBox from 'components/CardAlignBox';
+import CardAlignBox from 'components/CardBox/CardAlignBox';
 import Container from 'components/Container';
 import PointerBox from 'components/PointerBox/PointerBox';
 import DroppableArea from 'common/DragDrop/DroppableArea';

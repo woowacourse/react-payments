@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import validator from 'lib/validations/validator';
-import { CARD_COMPANIES } from 'lib/constants/cardDomain';
+import validator from 'lib/validations';
+import { CARD_COMPANIES } from 'lib/constants';
 import Card from 'components/Card';
 import PageTitle from 'components/PageTitle';
 import CardNumber from 'containers/CardNumberInput/CardNumber';
@@ -11,14 +11,14 @@ import CardOwner from 'containers/CardOwnerInput/CardOwner';
 import CardCvc from 'containers/CardCvcInput/CardCvc';
 import CardPassword from 'containers/CardPasswordInput/CardPassword';
 import NextButton from 'components/NextButton';
-import CardListModal from 'components/CardListModal';
-import TipModal from 'components/TipModal';
+import CardListModal from 'containers/CardListModal';
+import TipModal from 'containers/TipModal';
 import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import ClickCardBox from 'common/ClickCardBox';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import Container from 'components/Container';
-import CardConfirmModal from 'components/CardConfirmModal';
+import CardConfirmModal from 'containers/CardConfirmModal';
 
 function AddCard() {
   const {
