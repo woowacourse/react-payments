@@ -1,11 +1,9 @@
-import { createContext, useState } from 'react';
+import { useState } from 'react';
 import { PLACEHOLDER } from '../constant';
-import validator from '../../src/validation';
 import { englishRegex } from '../constant/regularExpression';
+import validator from '../validation';
 
-const CardOwnerContext = createContext();
-
-function CardOwnerContextProvider({ children }) {
+function useCardOwnerInput() {
   const [name, setName] = useState('');
   const [validation, setValidation] = useState(false);
   const ownerNameString = name || PLACEHOLDER.NAME;
@@ -23,19 +21,13 @@ function CardOwnerContextProvider({ children }) {
     setValidation(validator.validateOwnerName(name));
   };
 
-  return (
-    <CardOwnerContext.Provider
-      value={{
-        name,
-        ownerNameString,
-        validation,
-        isValid: validation,
-        onNameChange,
-      }}
-    >
-      {children}
-    </CardOwnerContext.Provider>
-  );
+  return {
+    name,
+    ownerNameString,
+    validation,
+    isValid: validation,
+    onNameChange,
+  };
 }
 
-export { CardOwnerContext, CardOwnerContextProvider };
+export default useCardOwnerInput;

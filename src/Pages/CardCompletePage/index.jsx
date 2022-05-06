@@ -2,9 +2,6 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import Card from '../../components/Modules/Card';
 import CardNickNameForm from '../../components/Templates/CardNickNameForm';
-import { CardNumberContext } from '../../context/CardNumberContext';
-import { ExpiredDateContext } from '../../context/ExpiredDateContext';
-import { CardOwnerContext } from '../../context/CardOwnerContext';
 
 const Page = styled.div`
   display: flex;
@@ -31,9 +28,9 @@ const CardSection = styled.div`
 
 function CardCompletePage() {
   const companyNameString = '신한카드';
-  const { cardNumberString } = useContext(CardNumberContext);
-  const { expiredDateString } = useContext(ExpiredDateContext);
-  const { ownerNameString } = useContext(CardOwnerContext);
+  const cardNumberString = '';
+  const expiredDateString = '';
+  const ownerNameString = '';
 
   return (
     <Page>

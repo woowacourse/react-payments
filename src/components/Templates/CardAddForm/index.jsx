@@ -6,11 +6,6 @@ import CardOwnerInput from '../../Modules/CardOwnerInput';
 import SecurityNumberInput from '../../Modules/SecurityNumberInput';
 import PasswordInput from '../../Modules/PasswordInput';
 import SubmitButton from '../../Atoms/SubmitButton';
-import { CardNumberContext } from '../../../context/CardNumberContext';
-import { ExpiredDateContext } from '../../../context/ExpiredDateContext';
-import { CardOwnerContext } from '../../../context/CardOwnerContext';
-import { SecurityNumberContext } from '../../../context/SecurityNumberContext';
-import { PasswordContext } from '../../../context/PasswordContext';
 import { MESSAGE } from '../../../constant/message';
 import { useNavigate } from 'react-router';
 
@@ -25,21 +20,9 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
 `;
 
+const isValidForm = false;
+
 function CardAddForm({ link }) {
-  const cardNumberProps = useContext(CardNumberContext);
-  const expiredDateProps = useContext(ExpiredDateContext);
-  const cardOwnerProps = useContext(CardOwnerContext);
-  const securityNumberProps = useContext(SecurityNumberContext);
-  const passwordProps = useContext(PasswordContext);
-
-  const isValidForm = [
-    cardNumberProps.isValid,
-    expiredDateProps.isValid,
-    cardOwnerProps.isValid,
-    securityNumberProps.isValid,
-    passwordProps.isValid,
-  ].every(valid => valid);
-
   const navigator = useNavigate();
 
   const onAddFormSubmit = event => {
@@ -50,11 +33,11 @@ function CardAddForm({ link }) {
 
   return (
     <FormContainer onSubmit={onAddFormSubmit}>
-      <CardNumberInput {...cardNumberProps} />
-      <ExpiredDateInput {...expiredDateProps} />
-      <CardOwnerInput {...cardOwnerProps} />
-      <SecurityNumberInput {...securityNumberProps} />
-      <PasswordInput {...passwordProps} />
+      <CardNumberInput />
+      <ExpiredDateInput />
+      <CardOwnerInput />
+      <SecurityNumberInput />
+      <PasswordInput />
       <ButtonContainer>
         <SubmitButton hidden={!isValidForm}>다음</SubmitButton>
       </ButtonContainer>

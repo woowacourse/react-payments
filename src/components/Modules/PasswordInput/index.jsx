@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
+import usePasswordInput from '../../../hooks/usePasswordInput';
 import { COUNT } from '../../../constant';
+import { PASSWORD_INPUT_NAMES } from '../../../constant/inputNames';
 
 const InputContainer = styled.div`
   display: flex;
@@ -11,7 +13,10 @@ const InputContainer = styled.div`
   gap: 7px;
 `;
 
-function PasswordInput({ password, validations, inputRefs, onPasswordChange }) {
+function PasswordInput() {
+  const { password, validations, inputRefs, onPasswordChange } =
+    usePasswordInput(PASSWORD_INPUT_NAMES);
+
   return (
     <LabeledInput text="카드 비밀번호">
       <InputContainer>

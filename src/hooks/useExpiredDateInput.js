@@ -1,15 +1,10 @@
-import { createContext } from 'react';
-import { PLACEHOLDER } from '../constant';
-import validator from '../../src/validation';
-import useFocus from '../hooks/useFocus';
+import { COUNT, PLACEHOLDER } from '../constant';
 import { numberRegex } from '../constant/regularExpression';
-import useSomeInput from '../hooks/useSomeInput';
-import { EXPIRED_DATE_INPUT_NAMES } from '../constant/inputNames';
-import { COUNT } from '../constant';
+import validator from '../validation';
+import useFocus from './useFocus';
+import useSomeInput from './useSomeInput';
 
-const ExpiredDateContext = createContext();
-
-function ExpiredDateContextProvider({ children }) {
+function useExpiredDateInput(inputNames) {
   const {
     stateObject: expiredDate,
     setStateObject: setExpiredDate,
@@ -17,11 +12,11 @@ function ExpiredDateContextProvider({ children }) {
     setValidations,
     inputRefs,
     currentInputRef,
-  } = useSomeInput(EXPIRED_DATE_INPUT_NAMES);
+  } = useSomeInput(inputNames);
 
   const { focusPrevInput } = useFocus({
     validate: validator.validateExpiredDate,
-    inputNames: EXPIRED_DATE_INPUT_NAMES,
+    inputNames: inputNames,
     validations,
     inputRefs,
     currentInputRef: currentInputRef,
@@ -59,20 +54,14 @@ function ExpiredDateContextProvider({ children }) {
     }));
   };
 
-  return (
-    <ExpiredDateContext.Provider
-      value={{
-        expiredDate,
-        expiredDateString,
-        validations,
-        isValid,
-        inputRefs,
-        onDateChange,
-      }}
-    >
-      {children}
-    </ExpiredDateContext.Provider>
-  );
+  return {
+    expiredDate,
+    expiredDateString,
+    validations,
+    isValid,
+    inputRefs,
+    onDateChange,
+  };
 }
 
-export { ExpiredDateContext, ExpiredDateContextProvider };
+export default useExpiredDateInput;

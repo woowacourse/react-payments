@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
+import useExpiredDateInput from '../../../hooks/useExpiredDateInput';
 import { DATE_INPUT_PLACEHOLDER } from '../../../constant';
+import { EXPIRED_DATE_INPUT_NAMES } from '../../../constant/inputNames';
 
 const InputContainer = styled.div`
   display: flex;
@@ -12,12 +14,10 @@ const InputContainer = styled.div`
   gap: 5px;
 `;
 
-function ExpiredDateInput({
-  expiredDate,
-  validations,
-  inputRefs,
-  onDateChange,
-}) {
+function ExpiredDateInput() {
+  const { expiredDate, validations, inputRefs, onDateChange } =
+    useExpiredDateInput(EXPIRED_DATE_INPUT_NAMES);
+
   return (
     <LabeledInput text="만료일">
       <InputWrapper>

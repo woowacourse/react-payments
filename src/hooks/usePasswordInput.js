@@ -1,13 +1,9 @@
-import { createContext } from 'react';
-import validator from '../../src/validation';
 import { numberRegex } from '../constant/regularExpression';
-import useFocus from '../hooks/useFocus';
-import useSomeInput from '../hooks/useSomeInput';
-import { PASSWORD_INPUT_NAMES } from '../constant/inputNames';
+import validator from '../validation';
+import useFocus from './useFocus';
+import useSomeInput from './useSomeInput';
 
-const PasswordContext = createContext();
-
-function PasswordContextProvider({ children }) {
+function usePasswordInput(inputNames) {
   const {
     stateObject: password,
     setStateObject: setPassword,
@@ -15,11 +11,11 @@ function PasswordContextProvider({ children }) {
     setValidations,
     inputRefs,
     currentInputRef,
-  } = useSomeInput(PASSWORD_INPUT_NAMES);
+  } = useSomeInput(inputNames);
 
   const { focusPrevInput } = useFocus({
     validate: validator.validatePassword,
-    inputNames: PASSWORD_INPUT_NAMES,
+    inputNames: inputNames,
     validations,
     inputRefs,
     currentInputRef,
@@ -50,19 +46,13 @@ function PasswordContextProvider({ children }) {
     }));
   };
 
-  return (
-    <PasswordContext.Provider
-      value={{
-        password,
-        validations,
-        isValid,
-        inputRefs,
-        onPasswordChange,
-      }}
-    >
-      {children}
-    </PasswordContext.Provider>
-  );
+  return {
+    password,
+    validations,
+    isValid,
+    inputRefs,
+    onPasswordChange,
+  };
 }
 
-export { PasswordContext, PasswordContextProvider };
+export default usePasswordInput;

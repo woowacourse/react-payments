@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import InfoLabel from '../../Atoms/InfoLabel';
+import useSecurityNumberInput from '../../../hooks/useSecurityNumberInput';
 
 const Container = styled.div`
   display: flex;
@@ -13,7 +14,9 @@ const InfoLabelContainer = styled.div`
   padding-top: 15px;
 `;
 
-function SecurityNumberInput({ number, validation, onNumberChange }) {
+function SecurityNumberInput() {
+  const { number, validation, onNumberChange } = useSecurityNumberInput();
+
   return (
     <Container>
       <LabeledInput text="보안 코드(CVC/CVV)">

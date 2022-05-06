@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
+import useCardNumberInput from '../../../hooks/useCardNumberInput';
+import { CARD_NUMBER_INPUT_NAMES } from '../../../constant/inputNames';
 
 const InputContainer = styled.div`
   display: flex;
@@ -11,12 +13,10 @@ const InputContainer = styled.div`
   gap: 5px;
 `;
 
-function CardNumberInput({
-  numbers,
-  validations,
-  inputRefs,
-  handleNumberChange,
-}) {
+function CardNumberInput() {
+  const { numbers, validations, inputRefs, handleNumberChange } =
+    useCardNumberInput(CARD_NUMBER_INPUT_NAMES);
+
   return (
     <LabeledInput text="카드 번호">
       <InputWrapper>

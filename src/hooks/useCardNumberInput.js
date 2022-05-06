@@ -1,15 +1,11 @@
-import { createContext } from 'react';
-import validator from '../../src/validation';
-import { numberRegex } from '../constant/regularExpression';
-import useFocus from '../hooks/useFocus';
-import useSomeInput from '../hooks/useSomeInput';
-import { CARD_NUMBER_MARK } from '../constant/mark';
-import { CARD_NUMBER_INPUT_NAMES } from '../constant/inputNames';
+import validator from '../validation';
+import useFocus from './useFocus';
+import useSomeInput from './useSomeInput';
 import { COUNT } from '../constant';
+import { CARD_NUMBER_MARK } from '../constant/mark';
+import { numberRegex } from '../constant/regularExpression';
 
-const CardNumberContext = createContext();
-
-function CardNumberContextProvider({ children }) {
+function useCardNumberInput(inputNames) {
   const {
     stateObject: numbers,
     setStateObject: setNumbers,
@@ -17,11 +13,11 @@ function CardNumberContextProvider({ children }) {
     setValidations,
     inputRefs,
     currentInputRef,
-  } = useSomeInput(CARD_NUMBER_INPUT_NAMES);
+  } = useSomeInput(inputNames);
 
   const { focusPrevInput } = useFocus({
     validate: validator.validateCardNumber,
-    inputNames: CARD_NUMBER_INPUT_NAMES,
+    inputNames: inputNames,
     validations,
     inputRefs,
     currentInputRef,
@@ -62,20 +58,14 @@ function CardNumberContextProvider({ children }) {
     setValidations(prevValidation => ({ ...prevValidation, [order]: isValid }));
   };
 
-  return (
-    <CardNumberContext.Provider
-      value={{
-        numbers,
-        cardNumberString,
-        validations,
-        isValid,
-        inputRefs,
-        handleNumberChange,
-      }}
-    >
-      {children}
-    </CardNumberContext.Provider>
-  );
+  return {
+    numbers,
+    cardNumberString,
+    validations,
+    isValid,
+    inputRefs,
+    handleNumberChange,
+  };
 }
 
-export { CardNumberContext, CardNumberContextProvider };
+export default useCardNumberInput;
