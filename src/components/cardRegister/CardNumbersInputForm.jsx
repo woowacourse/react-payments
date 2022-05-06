@@ -40,10 +40,6 @@ export const CardNumbersInputForm = ({
   }, [cardNumbers]);
 
   const handleNumberChange = (e, name) => {
-    // if (isNaN(e.nativeEvent.data) || e.target.value.length > 4) {
-    //   return;
-    // }
-
     handleCardNumbersInput((prev) => ({ ...prev, [name]: e.target.value }));
   };
 
@@ -54,6 +50,7 @@ export const CardNumbersInputForm = ({
         {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }, i) => (
           <InputBasic
             key={name}
+            id={`input_card_number-${i}`}
             inputRef={(elem) => (numberInputRefs.current[i] = elem)}
             value={cardNumbers?.[name]}
             onChange={(e) => handleNumberChange(e, name)}

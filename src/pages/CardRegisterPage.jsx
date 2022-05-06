@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useModal } from "hooks/useModal";
+import { CardContext } from "contexts/CardContext";
+import { useNavigate } from "react-router-dom";
 
 import { Button, Card, Modal, PageTitle } from "components/common";
 import {
@@ -20,6 +22,7 @@ import { Form } from "components/common/Form";
 
 export const CardRegisterPage = () => {
   const { modalVisibleState, setModalState, modalName } = useModal();
+  const cards = useContext(CardContext);
   const [ownerName, setOwnerName] = useState("");
   const [allCompleted, setAllCompleted] = useState(false);
   const [expireDate, setExpireDate] = useState({
@@ -55,6 +58,8 @@ export const CardRegisterPage = () => {
     }
   }, [checkInputs.cardNumbers]);
 
+  const navigate = useNavigate();
+
   const modalSelector = (name) => {
     return () => {
       setModalState(true, name);
@@ -85,6 +90,27 @@ export const CardRegisterPage = () => {
     }
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const cardId = cards.id;
+    const formData = e.target;
+    const wrappingCardData = {
+      id: cardId,
+      cardNumbers: cardNumbers,
+      cardType: cardType,
+      expireDate: expireDate,
+      ownerName: ownerName,
+      cardCVC: formData.elements["input_CVC"].value,
+      cardPassword:
+        formData.elements["input_password-0"].value +
+        formData.elements["input_password-1"].value,
+    };
+
+    cards.id++;
+    cards.list.push(wrappingCardData);
+    navigate(`/cardname/${cardId}`);
+  };
+
   return (
     <>
       <PageTitle>카드 추가</PageTitle>
@@ -95,7 +121,7 @@ export const CardRegisterPage = () => {
         ownerName={ownerName}
         handleModalVisible={modalSelector(MODAL_NAME.CARD_TYPE)}
       />
-      <Form>
+      <Form onSubmit={handleFormSubmit}>
         <CardNumbersInputForm
           cardType={cardType}
           cardNumbers={cardNumbers}

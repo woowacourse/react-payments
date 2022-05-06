@@ -37,6 +37,7 @@ export const CardPasswordInputForm = ({ handleCardPasswordCheck }) => {
         {Array.from({ length: 2 }).map((_, i) => (
           <InputBasic
             key={i}
+            id={`input_password-${i}`}
             onChange={(e) => handlePasswordChange(e)}
             inputRef={(elem) => (passwordInputRefs.current[i] = elem)}
             type="password"

@@ -61,6 +61,7 @@ export const CardExpireDateInputForm = ({
       <InputBox width="50%" justifyContent="center">
         <InputBasic
           width="25%"
+          id="input_expire_month"
           value={expireDate?.month}
           onChange={handleMonthInput}
           onBlur={handleMonthBlur}
@@ -72,6 +73,7 @@ export const CardExpireDateInputForm = ({
         /
         <InputBasic
           width="25%"
+          id="input_expire_year"
           value={expireDate?.year}
           onChange={handleYearInput}
           onBlur={handleYearBlur}
