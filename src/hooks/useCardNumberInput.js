@@ -1,11 +1,16 @@
 import validator from '../validation';
+import { useContext, useEffect } from 'react';
 import useFocus from './useFocus';
 import useSomeInput from './useSomeInput';
 import { COUNT } from '../constant';
 import { CARD_NUMBER_MARK } from '../constant/mark';
 import { numberRegex } from '../constant/regularExpression';
+import { CardContext } from '../context/CardContext';
+import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
 
 function useCardNumberInput(inputNames) {
+  const { inputtedInfoDispatch } = useContext(CardContext);
+
   const {
     stateObject: numbers,
     setStateObject: setNumbers,
@@ -57,6 +62,14 @@ function useCardNumberInput(inputNames) {
   const updateValidations = (order, isValid) => {
     setValidations(prevValidation => ({ ...prevValidation, [order]: isValid }));
   };
+
+  useEffect(() => {
+    inputtedInfoDispatch({
+      type: INPUT_ACTION.CARD_NUMBER,
+      value: cardNumberString,
+      valid: isValid,
+    });
+  }, [cardNumberString, isValid]);
 
   return {
     numbers,

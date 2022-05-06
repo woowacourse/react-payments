@@ -1,9 +1,14 @@
+import { useContext, useEffect } from 'react';
 import { numberRegex } from '../constant/regularExpression';
 import validator from '../validation';
 import useFocus from './useFocus';
 import useSomeInput from './useSomeInput';
+import { CardContext } from '../context/CardContext';
+import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
 
 function usePasswordInput(inputNames) {
+  const { inputtedInfoDispatch } = useContext(CardContext);
+
   const {
     stateObject: password,
     setStateObject: setPassword,
@@ -45,6 +50,14 @@ function usePasswordInput(inputNames) {
       [order]: validator.validatePassword(number),
     }));
   };
+
+  useEffect(() => {
+    inputtedInfoDispatch({
+      type: INPUT_ACTION.PASSWORD,
+      value: password,
+      valid: isValid,
+    });
+  }, [password, isValid]);
 
   return {
     password,

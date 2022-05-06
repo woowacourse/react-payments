@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
 import Card from '../../components/Modules/Card';
 import CardNickNameForm from '../../components/Templates/CardNickNameForm';

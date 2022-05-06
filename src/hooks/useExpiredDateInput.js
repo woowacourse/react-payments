@@ -1,10 +1,15 @@
+import { useContext, useEffect } from 'react';
 import { COUNT, PLACEHOLDER } from '../constant';
 import { numberRegex } from '../constant/regularExpression';
+import { CardContext } from '../context/CardContext';
+import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
 import validator from '../validation';
 import useFocus from './useFocus';
 import useSomeInput from './useSomeInput';
 
 function useExpiredDateInput(inputNames) {
+  const { inputtedInfoDispatch } = useContext(CardContext);
+
   const {
     stateObject: expiredDate,
     setStateObject: setExpiredDate,
@@ -53,6 +58,14 @@ function useExpiredDateInput(inputNames) {
       [unit]: validator.validateDate(date),
     }));
   };
+
+  useEffect(() => {
+    inputtedInfoDispatch({
+      type: INPUT_ACTION.EXPIRED_DATE,
+      value: expiredDateString,
+      valid: isValid,
+    });
+  }, [expiredDateString, isValid]);
 
   return {
     expiredDate,

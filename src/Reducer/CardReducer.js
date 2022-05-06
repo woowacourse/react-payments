@@ -1,11 +1,9 @@
-import { useReducer } from 'react';
-
-const initialCardData = { cards: [] };
-
 const CARD_ACTION = {
   ADD: 'CARD_ADD',
   NAME_EDIT: 'CARD_NAME_EDIT',
 };
+
+const initialCardData = { cards: [] };
 
 function CardReducer(state, action) {
   switch (action.type) {
@@ -18,6 +16,4 @@ function CardReducer(state, action) {
   }
 }
 
-const [cardData, cardDispatch] = useReducer(initialCardData, CardReducer);
-
-export { cardData, cardDispatch };
+export { CardReducer, initialCardData, CARD_ACTION };

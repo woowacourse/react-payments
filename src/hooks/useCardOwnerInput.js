@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { PLACEHOLDER } from '../constant';
 import { englishRegex } from '../constant/regularExpression';
+import { CardContext } from '../context/CardContext';
+import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
 import validator from '../validation';
 
 function useCardOwnerInput() {
+  const { inputtedInfoDispatch } = useContext(CardContext);
   const [name, setName] = useState('');
   const [validation, setValidation] = useState(false);
   const ownerNameString = name || PLACEHOLDER.NAME;
@@ -20,6 +23,14 @@ function useCardOwnerInput() {
   const updateValidation = name => {
     setValidation(validator.validateOwnerName(name));
   };
+
+  useEffect(() => {
+    inputtedInfoDispatch({
+      type: INPUT_ACTION.OWNER_NAME,
+      value: ownerNameString,
+      valid: validation,
+    });
+  }, [ownerNameString, validation]);
 
   return {
     name,
