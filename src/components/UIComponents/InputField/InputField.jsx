@@ -63,7 +63,6 @@ export default function InputField({
   wrapperWidth,
   horizontalAlign,
   isComplete,
-  errorMessage,
   isInvalid,
   shape,
 }) {
@@ -73,7 +72,6 @@ export default function InputField({
         state={isInvalid ? "error" : isComplete ? "complete" : "default"}
       >
         {labelText}
-        <span className="error-message">{errorMessage}</span>
       </StyledLabel>
       <StyledInputContainer>
         <StyledInputWrapper
