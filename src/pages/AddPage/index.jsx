@@ -10,7 +10,7 @@ import {
   CardWrapper,
   FooterWrapper,
   FormWrapper,
-} from 'pages/AddPage/style'
+} from 'pages/style'
 
 import { COLORS } from 'constant'
 
@@ -40,7 +40,7 @@ function AddPage() {
         <FooterWrapper>
           {isFieldFulfilled && (
             <Button type={'submit'} color={COLORS.MINT}>
-              <Link to={'complete'}>다음</Link>
+              <Link to={'/complete'}>다음</Link>
             </Button>
           )}
         </FooterWrapper>

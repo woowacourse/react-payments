@@ -7,10 +7,17 @@ const PageWrapper = styled.div`
   padding: 25px;
 `
 
-const CardWrapper = styled.div`
+const CenterItem = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+`
+
+const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 25px 0;
 `
 
@@ -24,4 +31,4 @@ const FormWrapper = styled.form`
   flex-direction: column;
 `
 
-export { PageWrapper, CardWrapper, FooterWrapper, FormWrapper }
+export { PageWrapper, CenterItem, CardWrapper, FooterWrapper, FormWrapper }

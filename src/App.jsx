@@ -15,6 +15,7 @@ function App() {
       <CardInfoProvider>
         <BrowserRouter>
           <Routes>
+            <Route path="/react-payments" element={<CardListPage />} />
             <Route path="/" element={<CardListPage />} />
             <Route path="add" element={<AddPage />} />
             <Route path="complete" element={<CardAddCompletePage />} />
