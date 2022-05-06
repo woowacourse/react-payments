@@ -17,6 +17,10 @@ input {
   font-size: 16px;
 }
 
+a {
+  text-decoration: none;
+}
+
 #root {
   background-color: #fff;
   width: 375px;
