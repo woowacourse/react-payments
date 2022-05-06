@@ -1,5 +1,4 @@
 import { createContext } from 'react';
 
-const CardContext = createContext(null);
-
-export default CardContext;
+export const CardContext = createContext(null);
+export const PageContext = createContext(null);

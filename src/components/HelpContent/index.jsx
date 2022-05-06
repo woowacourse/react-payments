@@ -5,20 +5,19 @@ function HelpContent({ helpText }) {
   if (!helpText) {
     return;
   }
-
   const [isMouseOver, setIsMouseOver] = useState(false);
 
-  const onMouseOver = () => {
-    setIsMouseOver(true);
-  };
-
-  const onMouseLeave = () => {
-    setIsMouseOver(false);
+  const handleTouch = () => {
+    if (isMouseOver) {
+      setIsMouseOver(false);
+    } else {
+      setIsMouseOver(true);
+    }
   };
 
   return (
     <>
-      <div className="help-content" onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
+      <div className="help-content" onClick={handleTouch}>
         ?
       </div>
       {isMouseOver && <div className="help-content-text">{helpText}</div>}

@@ -4,16 +4,13 @@ import { inputValueToCardFormat } from '../../utils/util';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
 
 function Card({ cardInformation, cardBoxSize }) {
-  console.log(cardInformation);
   const { cardNumber, expirationDate, ownerName } = cardInformation;
 
-  console.log(cardNumber, expirationDate, ownerName);
-  console.log(cardBoxSize);
   return (
     <div className="card-box">
       <div className={`${cardBoxSize}-card`}>
         <div className="card-top">
-          <span className={`card-text__${cardBoxSize}`}>클린카드</span>
+          <span className={`card-text__${cardBoxSize}`}>해리카드</span>
         </div>
         <div className="card-middle">
           <div className={`${cardBoxSize}-card__chip`}></div>

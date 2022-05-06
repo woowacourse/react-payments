@@ -3,7 +3,7 @@ import React from 'react';
 import LineInput from '../Input/LineInput';
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
-import CardContext from '../../context';
+import { CardContext } from '../../context';
 import { isNotKoreanOrSpace, isOverlappedValue } from '../../utils/validations';
 import { DISPATCH_TYPE } from '../../constants';
 

@@ -20,5 +20,5 @@ DefaultCard.args = {
     month: '11',
     year: '24',
   },
-  ownerName: 'JANG JUN HYEOK',
+  ownerName: 'UM JI HYEOK',
 };
