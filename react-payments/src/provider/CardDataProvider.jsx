@@ -14,10 +14,10 @@ const reducer = (state, action) => {
 };
 
 const CardDataProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [cardData, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <CardDataContext.Provider value={{ state, dispatch }}>
+    <CardDataContext.Provider value={{ cardData, dispatch }}>
       {children}
     </CardDataContext.Provider>
   );

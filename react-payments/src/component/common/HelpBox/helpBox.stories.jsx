@@ -10,8 +10,8 @@ export const DefaultHelpBox = (args) => <HelpBox {...args} />;
 
 export const HoverHelpBox = DefaultHelpBox.bind({});
 
-HoverHelpBox.play = async ({ canvasElement }) => {
+HoverHelpBox.play = ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
-  await userEvent.hover(canvas.getByRole("button", { hidden: true }));
+  userEvent.hover(canvas.getByRole("button", { hidden: true }));
 };

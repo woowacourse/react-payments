@@ -2,14 +2,14 @@ import Card from "./card.component";
 import { cardInfos, defaultCardInfo } from "../../../constants/index";
 
 const COMPLETE_CARD_INFO = {
-  cardNumbers: ["1111", "2345", "3456", "4567"],
+  cardNumber: ["1111", "2345", "3456", "4567"],
   name: "SMING",
   month: "09",
   year: "99",
 };
 
 const INCOMPLETE_CARD_INFO = {
-  cardNumbers: ["1111", "2345", "345", ""],
+  cardNumber: ["1111", "2345", "345", ""],
   name: "UYEON",
   month: "05",
   year: "00",

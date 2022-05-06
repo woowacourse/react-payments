@@ -112,7 +112,7 @@ const CardText = styled.span`
 `;
 
 const Card = ({
-  name,
+  userName,
   month,
   year,
   cardNumber,
@@ -130,7 +130,7 @@ const Card = ({
         <CardBottom>
           <CardNumberText cardNumbers={cardNumber} size={size} />
           <CardBottomInfo>
-            <CardText>{name}</CardText>
+            <CardText>{userName}</CardText>
             <CardText size={size}>
               {month} / {year}
             </CardText>

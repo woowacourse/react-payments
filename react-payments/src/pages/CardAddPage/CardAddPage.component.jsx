@@ -64,7 +64,7 @@ const CardAddPage = () => {
 
       <Card
         cardNumber={cardNumber}
-        name={userName}
+        userName={userName}
         month={expireDate.month}
         year={expireDate.year}
         cardTypeInfo={cardTypeInfo}
