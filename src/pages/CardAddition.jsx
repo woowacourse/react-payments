@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { v4 as uuidv4 } from 'uuid';
 import * as S from 'styles.js';
-import validator from 'validations/validator';
-import { CARD_COMPANIES } from 'constants/cardDomain';
+import validator from 'lib/validations/validator';
+import { CARD_COMPANIES } from 'lib/constants/cardDomain';
 
 import Card from 'components/Card';
 import PageTitle from 'components/PageTitle';

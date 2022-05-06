@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import * as S from 'styles.js';
 import ErrorMessage from 'components/ErrorMessage';
-import validator from 'validations/validator';
+import validator from 'lib/validations/validator';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import { AutoFocusInputBox } from './AutoFocusInputBox';
