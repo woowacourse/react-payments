@@ -96,6 +96,7 @@ export const CardRegisterPage = () => {
     const formData = e.target;
     const wrappingCardData = {
       id: cardId,
+      cardNickname: cardType.name,
       cardNumbers: cardNumbers,
       cardType: cardType,
       expireDate: expireDate,
@@ -113,7 +114,7 @@ export const CardRegisterPage = () => {
 
   return (
     <>
-      <PageTitle>카드 추가</PageTitle>
+      <PageTitle onClick={() => navigate("/cardList")}>카드 추가</PageTitle>
       <Card
         cardType={cardType}
         cardNumbers={cardNumbers}

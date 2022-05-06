@@ -1,37 +1,54 @@
 import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { CardContext } from "contexts/CardContext";
 
 import { FlexWrapper, InputContainer } from "components/common/styled";
 import { Card, Button } from "components/common";
 import { InputUnderline } from "components/common/InputUnderline";
+import { Form } from "components/common/Form";
 
 export const CardModifyPage = () => {
   const cards = useContext(CardContext);
+  const navigate = useNavigate();
   const { id } = useParams();
-  console.log("cards : ", cards);
+
+  const setCardNickname = (e) => {
+    e.preventDefault();
+    // console.log(e.target["input-nickname"].value);
+    cards.list[id].cardNickname =
+      e.target["input-nickname"].value || cards.list[id].cardNickname;
+
+    navigate("/cardList");
+  };
 
   return (
     <>
       {cards.list && (
         <>
-          <FlexWrapper
-            height="calc(100vh - 45px)"
-            flexDirection="column"
-            justifyContent="center"
-          >
-            <h3>카드등록이 완료되었습니다.</h3>
-            <InputContainer>
-              <Card
-                cardType={cards.list[0].cardType}
-                cardNumbers={cards.list[0].cardNumbers}
-                expireDate={cards.list[0].expireDate}
-                ownerName={cards.list[0].ownerName}
-              />
-              <InputUnderline placeholder="카드 별칭을 입력해주세요." />
-            </InputContainer>
-          </FlexWrapper>
-          <Button disabled={false}>확인</Button>
+          <Form onSubmit={(e) => setCardNickname(e)}>
+            <FlexWrapper
+              height="calc(100vh - 45px)"
+              flexDirection="column"
+              justifyContent="center"
+            >
+              <h3>카드등록이 완료되었습니다.</h3>
+              <InputContainer>
+                <Card
+                  cardType={cards.list[id].cardType}
+                  cardNumbers={cards.list[id].cardNumbers}
+                  expireDate={cards.list[id].expireDate}
+                  ownerName={cards.list[id].ownerName}
+                />
+                <InputUnderline
+                  id="input-nickname"
+                  placeholder="카드 별칭을 입력해주세요."
+                />
+              </InputContainer>
+            </FlexWrapper>
+            <Button type="submit" disabled={false}>
+              확인
+            </Button>
+          </Form>
         </>
       )}
     </>
