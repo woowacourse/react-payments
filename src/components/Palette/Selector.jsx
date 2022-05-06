@@ -33,9 +33,9 @@ const Selector = ({ color, name, onClick }) => {
 };
 
 Selector.propTypes = {
-  color: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  color: PropTypes.string,
+  name: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default Selector;

@@ -48,9 +48,9 @@ const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
 };
 
 CardOwnerName.propTypes = {
-  ownerName: PropTypes.string.isRequired,
-  onChangeOwnerName: PropTypes.func.isRequired,
-  isError: PropTypes.bool.isRequired,
+  ownerName: PropTypes.string,
+  onChangeOwnerName: PropTypes.func,
+  isError: PropTypes.bool,
 };
 
 export default CardOwnerName;

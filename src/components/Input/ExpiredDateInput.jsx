@@ -47,10 +47,10 @@ const ExpiredDateInput = ({
 };
 
 ExpiredDateInput.propTypes = {
-  expiredMonth: PropTypes.string.isRequired,
-  expiredYear: PropTypes.string.isRequired,
-  onChangeExpiredMonth: PropTypes.func.isRequired,
-  onChangeExpiredYear: PropTypes.func.isRequired,
+  expiredMonth: PropTypes.string,
+  expiredYear: PropTypes.string,
+  onChangeExpiredMonth: PropTypes.func,
+  onChangeExpiredYear: PropTypes.func,
 };
 
 export default ExpiredDateInput;

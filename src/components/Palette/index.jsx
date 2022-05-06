@@ -63,7 +63,7 @@ const Palette = ({ onClickCardSelector }) => {
 };
 
 Palette.propTypes = {
-  onClickCardSelector: PropTypes.func.isRequired,
+  onClickCardSelector: PropTypes.func,
 };
 
 export default Palette;

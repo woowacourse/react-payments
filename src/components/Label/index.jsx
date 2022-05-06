@@ -12,8 +12,8 @@ const Label = ({ id, description }) => {
 };
 
 Label.propTypes = {
-  id: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  description: PropTypes.string,
 };
 
 export default Label;

@@ -28,13 +28,13 @@ const Input = React.forwardRef(({ scale, ...rest }, ref) => {
 });
 
 Input.propTypes = {
-  placeholder: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  scale: PropTypes.string.isRequired,
-  maxLength: PropTypes.number.isRequired,
-  value: PropTypes.string.isRequired,
-  textAlign: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  id: PropTypes.string,
+  scale: PropTypes.string,
+  maxLength: PropTypes.number,
+  value: PropTypes.string,
+  textAlign: PropTypes.string,
 };
 
 export default Input;

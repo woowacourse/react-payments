@@ -109,14 +109,14 @@ const CardNumberInput = ({
 };
 
 CardNumberInput.propTypes = {
-  onChangeFirstCardNumber: PropTypes.func.isRequired,
-  onChangeSecondCardNumber: PropTypes.func.isRequired,
-  onChangeThirdCardNumber: PropTypes.func.isRequired,
-  onChangeFourthCardNumber: PropTypes.func.isRequired,
-  firstCardNumber: PropTypes.string.isRequired,
-  secondCardNumber: PropTypes.string.isRequired,
-  thirdCardNumber: PropTypes.string.isRequired,
-  fourthCardNumber: PropTypes.string.isRequired,
+  onChangeFirstCardNumber: PropTypes.func,
+  onChangeSecondCardNumber: PropTypes.func,
+  onChangeThirdCardNumber: PropTypes.func,
+  onChangeFourthCardNumber: PropTypes.func,
+  firstCardNumber: PropTypes.string,
+  secondCardNumber: PropTypes.string,
+  thirdCardNumber: PropTypes.string,
+  fourthCardNumber: PropTypes.string,
 };
 
 export default CardNumberInput;

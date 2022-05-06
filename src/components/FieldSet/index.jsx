@@ -29,11 +29,11 @@ const FieldSet = ({ id, description, children, errorMessage, isError }) => {
 };
 
 FieldSet.propTypes = {
-  id: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  errorMessage: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
-  isError: PropTypes.bool.isRequired,
+  id: PropTypes.string,
+  description: PropTypes.string,
+  errorMessage: PropTypes.string,
+  children: PropTypes.element,
+  isError: PropTypes.bool,
 };
 
 export default FieldSet;

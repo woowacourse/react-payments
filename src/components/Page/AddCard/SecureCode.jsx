@@ -36,9 +36,9 @@ const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
 };
 
 SecureCode.propTypes = {
-  secureCode: PropTypes.string.isRequired,
-  onChangeSecureCode: PropTypes.func.isRequired,
-  isError: PropTypes.bool.isRequired,
+  secureCode: PropTypes.string,
+  onChangeSecureCode: PropTypes.func,
+  isError: PropTypes.bool,
 };
 
 export default SecureCode;
