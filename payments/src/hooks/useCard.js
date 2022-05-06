@@ -84,6 +84,11 @@ const updateCard = (state, action) => {
         color: action.payload.color,
         cardName: action.payload.cardName,
       };
+    case "nickname":
+      return {
+        ...state,
+        nickname: action.payload.value,
+      };
     default:
       return state;
   }
@@ -98,6 +103,7 @@ const useCard = () => {
     password: ["", ""],
     cardName: "",
     color: "#d2d2d2",
+    nickname: "",
   };
 
   const [cardInfo, dispatch] = useReducer(updateCard, initState);
