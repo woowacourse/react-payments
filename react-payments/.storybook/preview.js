@@ -3,6 +3,10 @@ import { ThemeProvider } from "styled-components";
 import FormDataProvider from "../src/provider/FormDataProvider";
 import { BrowserRouter } from "react-router-dom";
 import CardDataProvider from "../src/provider/CardDataProvider";
+import { addDecorator } from "@storybook/react";
+import { withContexts } from "@storybook/addon-contexts/react";
+
+addDecorator(withContexts([]));
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

@@ -29,6 +29,8 @@ const colors = {
   defaultCard: "#94dacd",
   cardText: "#575757",
   cardNameInputBorder: "#737373",
+  cardAddLink: "#E5E5E5",
+  scroll: "#1DA1F2",
 };
 
 const theme = { colors };
