@@ -4,7 +4,7 @@ import ErrorMessage from 'components/ErrorMessage';
 import validator from 'lib/validations/validator';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
-import { AutoFocusInputBox } from './AutoFocusInputBox';
+import AutoFocusInputBox from 'common/AutoFocusInputBox';
 
 export default function CardExpiration({ color }) {
   const { cardExpiration, cardExpirationErrorMessage } = useContext(CardStateContext);

@@ -364,15 +364,6 @@ export const CardAlignBox = styled.div`
   align-items: center;
 `;
 
-export const EnrolledCardWrapper = styled.div`
-  text-align: center;
-  margin-bottom: 25px;
-`;
-
-export const CardNickname = styled.span`
-  font-size: 19px;
-`;
-
 export const Sign = styled.span`
   font-size: 40px;
   font-weight: 800;
