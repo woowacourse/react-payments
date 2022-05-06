@@ -1,13 +1,17 @@
 import { useState, useCallback } from 'react';
 
+import { isNumber } from '../utils/regExp';
+
 export default function useCardNumber(initialValue) {
   const [cardNumber, setCardNumber] = useState(initialValue);
 
   const handler = useCallback(
-    ({ target: { selectionStart }, nativeEvent: { data: key } }) => {
-      setCardNumber(prevState => {
+    async ({ target, nativeEvent: { data: key } }) => {
+      const { selectionStart } = target;
+
+      await setCardNumber(prevState => {
         let state =
-          key && /[0-9]/.test(key)
+          key && isNumber(key)
             ? prevState.slice(0, selectionStart - 1) +
               key +
               prevState.slice(selectionStart - 1, prevState.length)
@@ -33,6 +37,8 @@ export default function useCardNumber(initialValue) {
 
         return state;
       });
+
+      await target.setSelectionRange(selectionStart, selectionStart);
     },
     []
   );
