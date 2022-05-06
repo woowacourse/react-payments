@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { useContext } from 'react'
 
 import {
   CardWrapper,
@@ -11,12 +10,9 @@ import {
   CardBottomInfo,
   CardOwner,
 } from 'components/common/Card/style'
-import CardInfoContext from 'store/cardInfo-context'
 
-function Card({ size }) {
-  const {
-    cardInfo: { company, cardNumber, owner, dueDate },
-  } = useContext(CardInfoContext)
+function Card({ size, cardInfo }) {
+  const { company, cardNumber, owner, dueDate } = cardInfo
 
   return (
     <CardWrapper size={size}>

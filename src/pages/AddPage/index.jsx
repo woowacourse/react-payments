@@ -23,13 +23,13 @@ import PasswordField from 'components/PasswordField'
 import CardInfoContext from 'store/cardInfo-context'
 
 function AddPage() {
-  const { isFieldFulfilled } = useContext(CardInfoContext)
+  const { cardInfo, isFieldFulfilled } = useContext(CardInfoContext)
 
   return (
     <PageWrapper>
       <Header backButton>카드 추가</Header>
       <CardWrapper>
-        <Card size="small" />
+        <Card size="small" cardInfo={cardInfo} />
       </CardWrapper>
       <FormWrapper>
         <CardNumberField />

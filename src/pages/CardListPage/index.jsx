@@ -14,20 +14,29 @@ import {
 
 function CardListPage() {
   let navigate = useNavigate()
+  const cardList = localStorage.getItem('cardList')
+    ? Object.entries(JSON.parse(localStorage.getItem('cardList')))
+    : []
 
   return (
     <PageWrapper>
       <Header>보유카드</Header>
       <CenterItem>
         <CardListWrapper>
-          <PossessedCard>
+          {cardList.map(([key, value]) => (
+            <PossessedCard key={key}>
+              <Card size="small" cardInfo={value} />
+              <CardNickname>{value.cardNickName}</CardNickname>
+            </PossessedCard>
+          ))}
+          {/* <PossessedCard>
             <Card size="small" />
-            <CardNickname>엄카</CardNickname>
+            
           </PossessedCard>
           <PossessedCard>
             <Card size="small" />
             <CardNickname>엄카</CardNickname>
-          </PossessedCard>
+          </PossessedCard> */}
         </CardListWrapper>
         <Button
           onClick={() => {

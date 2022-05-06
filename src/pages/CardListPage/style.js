@@ -4,9 +4,10 @@ const CardListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 400px;
+  max-height: 400px;
   overflow: scroll;
   margin-top: 65px;
+  margin-bottom: 20px;
   gap: 25px;
 `
 

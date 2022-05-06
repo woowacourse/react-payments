@@ -11,16 +11,18 @@ import { CARD_NUMBER, DUE_DATE, CVC } from 'constant'
 
 const CardInfoContext = React.createContext()
 
+const initialCardInfo = {
+  company: '',
+  cardNumber: { first: '', second: '', third: '', fourth: '' },
+  dueDate: { month: '', year: '' },
+  owner: '',
+  cvc: '',
+  password: { first: '', second: '' },
+  cardNickName: '',
+}
+
 export function CardInfoProvider({ children }) {
-  const [cardInfo, setCardInfo] = useState({
-    company: '',
-    cardNumber: { first: '', second: '', third: '', fourth: '' },
-    dueDate: { month: '', year: '' },
-    owner: '',
-    cvc: '',
-    password: { first: '', second: '' },
-    cardNickName: '',
-  })
+  const [cardInfo, setCardInfo] = useState(initialCardInfo)
 
   const [isFieldFulfilled, setIsFieldFulfilled] = useState(false)
 
@@ -98,11 +100,15 @@ export function CardInfoProvider({ children }) {
   }
 
   const handleCardNickNameChange = (e) => {
-    const value = e.target
+    const { value } = e.target
 
     setCardInfo((prev) => {
       return { ...prev, cardNickName: value }
     })
+  }
+
+  const clearContext = () => {
+    setCardInfo(initialCardInfo)
   }
 
   return (
@@ -116,6 +122,7 @@ export function CardInfoProvider({ children }) {
         handleCvcChange,
         handlePasswordChange,
         handleCardNickNameChange,
+        clearContext,
       }}
     >
       {children}
