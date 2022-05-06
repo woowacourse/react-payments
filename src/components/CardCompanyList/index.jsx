@@ -6,7 +6,7 @@ import Container from './styles';
 function CardCompanyList() {
   return (
     <Container>
-      {CARD_COMPANY.map(({ id, name, color, icon }) => (
+      {Object.entries(CARD_COMPANY).map(([id, { name, color, icon }]) => (
         <div className="card-company-item" key={id}>
           <div className="icon" data-color={color}>
             {icon}

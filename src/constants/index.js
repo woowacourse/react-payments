@@ -1,13 +1,13 @@
-const CARD_COMPANY = [
-  { id: 1, name: '포코 카드', color: 'purple', icon: '😈' },
-  { id: 2, name: '준 카드', color: 'yellow', icon: '😆' },
-  { id: 3, name: '공원 카드', color: 'sky', icon: '🌳' },
-  { id: 4, name: '월터 카드', color: 'white', icon: '👻' },
-  { id: 5, name: '콤피 카드', color: 'green', icon: '🦖' },
-  { id: 6, name: '티거 카드', color: 'orange', icon: '🐯' },
-  { id: 7, name: '민초 카드', color: 'blue', icon: '🌱' },
-  { id: 8, name: '위니 카드', color: 'yellow', icon: '🧸' },
-];
+const CARD_COMPANY = {
+  1: { name: '포코 카드', color: 'purple', icon: '😈' },
+  2: { name: '준 카드', color: 'yellow', icon: '😆' },
+  3: { name: '공원 카드', color: 'sky', icon: '🌳' },
+  4: { name: '월터 카드', color: 'white', icon: '👻' },
+  5: { name: '콤피 카드', color: 'green', icon: '🦖' },
+  6: { name: '티거 카드', color: 'orange', icon: '🐯' },
+  7: { name: '민초 카드', color: 'blue', icon: '🌱' },
+  8: { name: '위니 카드', color: 'yellow', icon: '🧸' },
+};
 
 const CARD_NUMBER = {
   UNIT_COUNT: 4,
