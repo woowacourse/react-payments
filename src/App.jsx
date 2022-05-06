@@ -16,7 +16,10 @@ const StyledApp = styled.div`
 const App = () => {
   const { initialField } = useFormSchema(initialCardSchema);
   const [values, setValues] = useState(initialField);
-  const cardValues = useMemo(() => ({ values, setValues }), [values]);
+  const cardValues = useMemo(
+    () => ({ values, setValues, initialField }),
+    [values]
+  );
 
   return (
     <CardContext.Provider value={cardValues}>

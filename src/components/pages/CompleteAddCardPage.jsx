@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import CardContext from '../../contexts/CardContext';
@@ -37,14 +37,49 @@ const StyledCompleteAddCardPage = styled.div`
 `;
 
 const CompleteAddCardPage = () => {
-  const { values } = useContext(CardContext);
+  const [cardName, setCardName] = useState('');
+  const { values, setValues, initialField } = useContext(CardContext);
+
+  const storeCard = async () => {
+    const cardInfo = {
+      cardName: cardName || values.owner,
+      values,
+    };
+
+    const response = await fetch('http://localhost:4000/cards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(cardInfo),
+    });
+
+    if (!response.ok) {
+      alert('저장 실패에 실패했습니다. 관리자에게 문의하세요.');
+      return;
+    }
+    setValues(initialField);
+  };
+
   return (
     <StyledCompleteAddCardPage>
       <TextBox fontSize="23px">카드등록이 완료되었습니다.</TextBox>
       <CardPreview values={values} />
-      <Input underLine placeHolder="카드 별칭을 지정해주세요." />
+      <Input
+        underLine
+        placeHolder="카드 별칭을 지정해주세요."
+        onChange={(e) => {
+          setCardName(e.target.value.trim());
+        }}
+      />
       <Link to="/">
-        <Button>확인</Button>
+        <Button
+          onClick={async () => {
+            await storeCard();
+          }}
+        >
+          확인
+        </Button>
       </Link>
     </StyledCompleteAddCardPage>
   );
