@@ -6,7 +6,7 @@ function CardForm({
   onChange,
 }: {
   children: React.ReactNode;
-  onSubmit: any;
+  onSubmit?: any;
   onChange: any;
 }) {
   return (

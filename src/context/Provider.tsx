@@ -14,6 +14,8 @@ export type State = {
   secondPassword: string;
   cardType: string;
   chageCardType: boolean;
+  completeCard: boolean;
+  cardAlias: string;
 };
 
 type Action = { type: ActionType; payload: string | boolean };
@@ -33,6 +35,8 @@ const initalState: State = {
   secondPassword: '',
   cardType: '',
   chageCardType: false,
+  completeCard: false,
+  cardAlias: '',
 };
 
 export const AppStateContext = createContext<State>(initalState);
@@ -107,12 +111,22 @@ function reducer(state: State, action: Action): any {
         ...state,
         chageCardType: action.payload,
       };
+    case ActionType.COMPLETE_CARD:
+      return {
+        ...state,
+        completeCard: action.payload,
+      };
+    case ActionType.INPUT_CARD_ALIAS:
+      return {
+        ...state,
+        cardAlias: action.payload,
+      };
   }
 }
 
 function AppProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initalState);
-  console.log(state);
+
   return (
     <>
       <AppStateContext.Provider value={state}>

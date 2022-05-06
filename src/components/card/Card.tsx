@@ -15,7 +15,7 @@ type Props = {
   expiredPeriodMonth: string;
   expiredPeriodYear: string;
   cardType: string;
-  handleCardClick: () => void;
+  handleCardClick?: () => void;
 };
 
 const CardDiv = styled.div(({ cardColor }: { cardColor: string }) => ({

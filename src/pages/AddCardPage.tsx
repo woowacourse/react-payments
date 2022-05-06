@@ -2,22 +2,40 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { useAppState } from 'hooks/hooks';
 import TypeButtonModal from 'containers/modal/TypeButtonModalContainer';
+import Navigation from 'fields/Navigation';
+import CardContainer from 'containers/card/CardContainer';
+import CardFormContainer from 'containers/card/CardFormContainer';
+import { INPUT } from '../constants';
+import styled from '@emotion/styled';
+import CardCompleteContainer from './CardCompleteContainer';
 
-const style = css({
+const Wrapper = styled.div(() => ({
   width: '375px',
+  height: '675px',
   margin: '0 auto',
   padding: '22px 28px 16px 28px',
   position: 'relative',
   backgroundColor: '#ffffff',
-});
+}));
 
-function AddCardPage({ children }: { children: React.ReactNode }) {
-  const { chageCardType } = useAppState();
+function AddCardPage() {
+  const { completeCard, chageCardType } = useAppState();
 
   return (
-    <div css={style}>
-      {chageCardType ? <TypeButtonModal /> : <></>} {children}
-    </div>
+    <Wrapper>
+      {chageCardType ? <TypeButtonModal /> : <></>}
+      <Navigation />
+      {completeCard ? (
+        <>
+          <CardCompleteContainer />
+        </>
+      ) : (
+        <>
+          <CardContainer />
+          <CardFormContainer />
+        </>
+      )}
+    </Wrapper>
   );
 }
 
