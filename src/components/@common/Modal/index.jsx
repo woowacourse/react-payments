@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import reactDom from 'react-dom';
 import { MODAL_STATE } from 'constants';
 
-import { Container, ModalContent } from './styles';
+import Container from './styles';
 
 function Modal({ className, handleClose, handleHidden, children }) {
   const onAnimationEnd = () => {
@@ -13,7 +13,9 @@ function Modal({ className, handleClose, handleHidden, children }) {
 
   const render = (
     <Container className={className} onClick={handleClose} onAnimationEnd={onAnimationEnd}>
-      <ModalContent>{children}</ModalContent>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
     </Container>
   );
 
