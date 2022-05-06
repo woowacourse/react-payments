@@ -1,7 +1,7 @@
 import React from 'react';
 import { uid } from 'react-uid';
 
-import Input from './';
+import Input from '.';
 
 export default {
   component: Input,

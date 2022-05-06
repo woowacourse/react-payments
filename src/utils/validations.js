@@ -5,6 +5,10 @@ export const isNotNumber = inputValue => {
   return isNaN(Number(inputValue));
 };
 
+export const isNotKoreanOrSpace = inputValue => {
+  return inputValue.match(/^[ㄱ-ㅎ|가-힣\s]+$/) !== null || inputValue === '';
+};
+
 export const isLengthOver = (inputValue, length) => {
   return inputValue.length > length;
 };
@@ -20,4 +24,11 @@ export const isAlphabetOrSpace = inputValue => {
 
 export const isLengthBelow = (inputValue, length) => {
   return inputValue.length < length;
+};
+
+export const isOverlappedValue = (inputValue, wholeValue) => {
+  console.log('inputValue: ', inputValue);
+  console.log('wholeValue: ', wholeValue);
+  console.log(inputValue in wholeValue);
+  return inputValue in wholeValue;
 };

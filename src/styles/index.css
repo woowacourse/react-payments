@@ -45,6 +45,13 @@ input {
   color: #383838;
 }
 
+.complete-page-title {
+  font-weight: 400;
+  font-size: 25px;
+  margin: 130px 0 80px 0;
+  justify-content: center;
+}
+
 header {
   display: flex;
   align-items: center;

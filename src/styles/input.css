@@ -2,6 +2,19 @@
   margin: 16px 0;
 }
 
+.line-input-box {
+  display: flex;
+  justify-content: center;
+}
+
+.line-input {
+  border: 1.5px solid #737373;
+  border-style: none none solid none;
+  outline: none;
+  text-align: center;
+  margin-top: 10px;
+}
+
 .input-box {
   display: flex;
   align-items: center;
