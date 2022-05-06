@@ -63,7 +63,7 @@ const AddCardResultPage = () => {
           expiredMonth={expiredDate.expiredMonth}
           expiredYear={expiredDate.expiredYear}
           cardNumbers={cardNumber}
-          cardInfo={cardType}
+          cardType={cardType}
           size={'large'}
         />
       </CardWrapper>

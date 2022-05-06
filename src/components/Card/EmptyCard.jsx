@@ -122,11 +122,11 @@ const CardExpiredDateContainer = styled.span`
   font-weight: 400;
 `;
 
-const EmptyCard = ({ name, cardInfo, expiredMonth, expiredYear, cardNumbers, size }) => {
+const EmptyCard = ({ name, cardType, expiredMonth, expiredYear, cardNumbers, size }) => {
   return (
-    <EmptyCardWrapper color={cardInfo.color} size={size}>
+    <EmptyCardWrapper color={cardType.color} size={size}>
       <CardTop>
-        <CardName>{cardInfo.name}</CardName>
+        <CardName>{cardType.name}</CardName>
       </CardTop>
       <CardMiddle>
         <CardChip />

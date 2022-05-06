@@ -57,7 +57,7 @@ const CardListPage = () => {
               expiredMonth={card.expiredDate.expiredMonth}
               expiredYear={card.expiredDate.expiredYear}
               cardNumbers={card.cardNumber}
-              cardInfo={card.cardType}
+              cardType={card.cardType}
               size={'small'}
             />
             <Label description={card.nickName} />

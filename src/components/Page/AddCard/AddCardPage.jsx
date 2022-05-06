@@ -75,7 +75,7 @@ const AddCardPage = () => {
     validation: checkPassword,
   });
 
-  const [cardInfo, setCardInfo] = useState({ color: 'red', name: '포코 카드' });
+  const [cardType, setCardType] = useState({ color: 'red', name: '포코 카드' });
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
@@ -144,7 +144,7 @@ const AddCardPage = () => {
   };
 
   const onClickCardSelector = (card) => () => {
-    setCardInfo(card);
+    setCardType(card);
   };
 
   const createCardObject = () => {
@@ -152,7 +152,7 @@ const AddCardPage = () => {
       id: cardIndex,
       nickName: '',
       ownerName: ownerName,
-      cardType: cardInfo,
+      cardType: cardType,
       cardNumber: [firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber],
       expiredDate: { expiredMonth: expiredMonth, expiredYear: expiredYear },
       secureCode: secureCode,
@@ -168,7 +168,7 @@ const AddCardPage = () => {
         expiredMonth={expiredMonth}
         expiredYear={expiredYear}
         cardNumbers={[firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber]}
-        cardInfo={cardInfo}
+        cardType={cardType}
         onClick={openModal}
         size="small"
       />

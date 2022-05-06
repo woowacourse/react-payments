@@ -13,12 +13,12 @@ const CardContainer = styled.div`
   margin: 10px 0;
 `;
 
-const Card = ({ name, cardInfo, expiredMonth, expiredYear, cardNumbers, onClick, size }) => {
+const Card = ({ name, cardType, expiredMonth, expiredYear, cardNumbers, onClick, size }) => {
   return (
     <CardContainer onClick={onClick}>
       <EmptyCard
         name={name}
-        cardInfo={cardInfo}
+        cardType={cardType}
         expiredMoth={expiredMonth}
         expiredYear={expiredYear}
         cardNumbers={cardNumbers}
