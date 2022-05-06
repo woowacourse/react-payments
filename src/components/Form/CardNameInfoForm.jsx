@@ -7,6 +7,7 @@ import { CardContext } from '../../context';
 import { isBlankValue, isNotKoreanOrSpace, isOverlappedValue } from '../../utils/validations';
 import { DISPATCH_TYPE } from '../../constants';
 import { DEFAULT_CARD_INFO } from '../../constants';
+import SubmitButton from '../Common/Button/SubmitButton';
 
 function LineInputForm({ handleChangePage }) {
   const { cardList, cardInput, setCardList, cardInputDispatch } = useContext(CardContext);
@@ -58,9 +59,7 @@ function LineInputForm({ handleChangePage }) {
           required
         />
       </LineInput>
-      <button className="button-box" onClick={handleSubmit}>
-        <span className="button-text">완료</span>
-      </button>
+      <SubmitButton>완료</SubmitButton>
     </form>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState, useRef } from 'react';
 import LabeledInput from '../Common/Input/LabeledInput';
+import SubmitButton from '../Common/Button/SubmitButton';
 import PropTypes from 'prop-types';
 import { isAlphabetOrSpace } from '../../utils/validations';
 import { uid } from 'react-uid';
@@ -209,11 +210,7 @@ function InputForm({ cardInput, cardInputDispatch, handleChangePage }) {
         <div className="inputted-password">*</div>
         <div className="inputted-password">*</div>
       </LabeledInput>
-      {isComplete && (
-        <button className="button-box">
-          <span className="button-text">다음</span>
-        </button>
-      )}
+      {isComplete && <SubmitButton>다음</SubmitButton>}
     </form>
   );
 }

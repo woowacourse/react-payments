@@ -52,7 +52,7 @@
   - [x] `input`관련 컴포넌트를 UI별로 분리하고, 렌더링만 해주도록 하여 범용성을 높었다.
   - [x] `form`관련 컴포넌트들은 재사용을 포기하고, 각각 하나의 폼에 대응하는 역할만 하도록 수정했다.
 - [ ] 리팩토링 완료된 컴포넌트들에 `styled-components`를 사용해본다.
-  - [ ] `button`관련 컴포넌트들을 `styled-components`로 만들어본다.
+  - [x] `button`관련 컴포넌트들을 `styled-components`로 만들어본다.
   - [ ] `input`관련 컴포넌트들을 `styled-components`로 만들어본다.
 
 ### Custom Hooks
@@ -61,9 +61,9 @@
 
 ### Context API
 
-- [ ] props Drilling을 막기 위해 `Context API`를 사용한다.
-- [ ] 페이지에 대한 정보를 context로 관리한다.
-- [ ] 카드에 대한 정보를 context로 관리한다.
+- [x] props Drilling을 막기 위해 `Context API`를 사용한다.
+  - [x] 페이지에 대한 정보를 context로 관리한다.
+  - [x] 카드에 대한 정보를 context로 관리한다.
 
 ### Storybook 상호작용 테스트
 
