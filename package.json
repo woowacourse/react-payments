@@ -14,8 +14,19 @@
     "@types/node": "^16.11.29",
     "@types/react": "^18.0.7",
     "@types/react-dom": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.21.0",
+    "@typescript-eslint/parser": "^5.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.4.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.6.3",
     "web-vitals": "^2.1.4"
@@ -24,6 +35,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
@@ -70,6 +82,7 @@
     "@storybook/testing-library": "^0.0.11",
     "commitizen": "^4.2.4",
     "cz-customizable": "^6.3.0",
+    "gh-pages": "^3.2.3",
     "husky": "^7.0.0",
     "sass": "^1.51.0",
     "webpack": "^5.72.0"
@@ -78,5 +91,6 @@
     "commitizen": {
       "path": "cz-customizable"
     }
-  }
+  },
+  "homepage": "."
 }
