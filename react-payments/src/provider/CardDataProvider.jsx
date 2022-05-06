@@ -1,4 +1,5 @@
 import { createContext, useReducer } from "react";
+import { REDUCER_TYPE } from "../constants";
 
 export const CardDataContext = createContext();
 
@@ -6,7 +7,7 @@ const initialState = [];
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "CREATE":
+    case REDUCER_TYPE.CREATE:
       return [...state, action.payload];
     default:
       return state;
