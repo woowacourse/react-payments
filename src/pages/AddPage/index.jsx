@@ -7,7 +7,7 @@ import {
   useCardPassword,
   useCVC,
   useModal,
-  useValidDate,
+  useInput,
 } from '../../hooks';
 
 import CardInputs from './CardInputs';
@@ -26,8 +26,8 @@ import {
 import { ReactComponent as Arrow } from '../../assets/arrow.svg';
 
 import { CardContext, CardInfoContext } from '../../contexts';
-import { CARD_COMPANY } from '../../constants';
-import encryptCardNumber from '../../utils';
+import { CARD_COMPANY, NOW } from '../../constants';
+import { encryptCardNumber, makeValidDate, preventBubbling } from '../../utils';
 import { splitCardNumbers } from '../../utils/regExp';
 import isValidCardInputs from '../../utils/validator';
 
@@ -38,7 +38,7 @@ function AddPage() {
   });
   const [cardNumber, setCardNumber] = useCardNumber('');
   const [cardOwnerName, setCardOwnerName] = useCardOwnerName('');
-  const [validDate, setValidDate] = useValidDate('');
+  const [validDate, setValidDate] = useInput(`${NOW.YEAR}-${NOW.MONTH}`);
   const [CVC, setCVC] = useCVC('');
   const [firstPassword, setFirstPassword] = useCardPassword('');
   const [secondPassword, setSecondPassword] = useCardPassword('');
@@ -101,10 +101,6 @@ function AddPage() {
     toggleIsCardCompanyModalOpen(!isCardCompanyModalOpen);
   };
 
-  const preventBubbling = e => {
-    e.stopPropagation();
-  };
-
   const onClickCardCompany = ({ currentTarget }) => {
     const { name, color } = currentTarget.dataset;
 
@@ -144,7 +140,7 @@ function AddPage() {
           size="medium"
           name={cardOwnerName}
           number={splitCardNumbers(encryptCardNumber(cardNumber), ' ') ?? ''}
-          validDate={validDate}
+          validDate={makeValidDate(validDate)}
           onClickFunc={toggleCardTitleModal}
         />
         <CardInputs />

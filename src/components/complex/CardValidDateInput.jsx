@@ -1,7 +1,8 @@
 import { Input } from '..';
 
-import { CARD_RULE } from '../../constants';
 import { CardInfoContext } from '../../contexts';
+import { NOW } from '../../constants';
+import { preventEvent } from '../../utils';
 
 export default function CardValidDateInput() {
   return (
@@ -10,11 +11,12 @@ export default function CardValidDateInput() {
         <div>
           <Input
             description="만료일"
-            placeholder="MM / YY"
             width="137px"
+            type="month"
             value={validDate}
-            maxLength={CARD_RULE.VALID_DATE_MAX_LENGTH + 1}
+            min={`${NOW.YEAR}-${NOW.MONTH}`}
             onChangeFunc={setValidDate}
+            onKeyDownFunc={preventEvent}
           />
         </div>
       )}

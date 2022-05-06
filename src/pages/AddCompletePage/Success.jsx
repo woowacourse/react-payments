@@ -2,12 +2,12 @@ import { memo, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import useInput from '../../hooks/useInput';
+import { useInput } from '../../hooks';
 
 import { Button, Card, UnderlinedInput } from '../../components';
 
 import { CardContext } from '../../contexts';
-import encryptCardNumber from '../../utils';
+import { encryptCardNumber, makeValidDate } from '../../utils';
 import { splitCardNumbers } from '../../utils/regExp';
 
 const Message = styled.div`
@@ -45,7 +45,7 @@ function Success({
         size="large"
         name={cardOwnerName}
         number={splitCardNumbers(encryptCardNumber(cardNumber), ' ') ?? ''}
-        validDate={validDate}
+        validDate={makeValidDate(validDate)}
       />
       <UnderlinedInput
         margin={{ t: '33px' }}

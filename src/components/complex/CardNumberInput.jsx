@@ -1,13 +1,11 @@
-import { memo } from 'react';
-
 import { Input } from '..';
 
 import { CardInfoContext } from '../../contexts';
 import { CARD_RULE } from '../../constants';
-import encryptCardNumber from '../../utils';
+import { encryptCardNumber } from '../../utils';
 import { splitCardNumbers } from '../../utils/regExp';
 
-function CardNumberInput() {
+export default function CardNumberInput() {
   return (
     <CardInfoContext.Consumer>
       {({ cardNumber, setCardNumber }) => (
@@ -23,5 +21,3 @@ function CardNumberInput() {
     </CardInfoContext.Consumer>
   );
 }
-
-export default memo(CardNumberInput);

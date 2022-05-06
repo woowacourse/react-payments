@@ -16,4 +16,11 @@ const CARD_COMPANY = [
   { name: '흰둥 카드', color: '#FFFFFF' },
 ];
 
-export { CARD_RULE, CARD_COMPANY };
+const date = new Date();
+
+const NOW = {
+  YEAR: date.getFullYear(),
+  MONTH: String(date.getMonth() + 1).padStart(2, '0'),
+};
+
+export { CARD_RULE, CARD_COMPANY, NOW };

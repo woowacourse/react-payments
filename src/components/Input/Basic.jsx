@@ -38,14 +38,17 @@ function Input({
   type,
   value,
   maxLength,
+  min,
   placeholder,
   onChangeFunc,
+  onKeyDownFunc,
 }) {
   return (
     <>
       {description && <StyledLabel>{description}</StyledLabel>}
       <StyledInput
         margin={margin}
+        min={min}
         textAlign={textAlign}
         width={width}
         type={type}
@@ -53,6 +56,7 @@ function Input({
         maxLength={maxLength}
         placeholder={placeholder}
         onChange={onChangeFunc}
+        onKeyDown={onKeyDownFunc}
       />
     </>
   );
@@ -77,8 +81,10 @@ Input.propTypes = {
   type: PropTypes.string,
   value: PropTypes.string,
   maxLength: PropTypes.number,
+  min: PropTypes.string,
   placeholder: PropTypes.string,
   onChangeFunc: PropTypes.func,
+  onKeyDownFunc: PropTypes.func,
 };
 
 export default memo(Input);

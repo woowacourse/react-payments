@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { DisplayCard } from '../../components/Card';
 
-import encryptCardNumber from '../../utils';
+import { encryptCardNumber, makeValidDate } from '../../utils';
 import { splitCardNumbers } from '../../utils/regExp';
 
 const Card = styled(DisplayCard)`
@@ -35,7 +35,7 @@ function Cards({ cards }) {
             cardName={cardName}
             ownerName={cardOwnerName}
             number={splitCardNumbers(encryptCardNumber(cardNumber), ' ') ?? ''}
-            validDate={validDate}
+            validDate={makeValidDate(validDate)}
             key={cardNumber}
           />
         );
