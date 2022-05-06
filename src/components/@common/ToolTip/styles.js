@@ -74,7 +74,7 @@ const Container = styled.div`
 
   > .tool-tip-text {
     position: absolute;
-    display: none;
+    visibility: hidden;
     border-radius: ${LAYOUT.BORDER_RADIUS}px;
     text-align: center;
     background-color: #000;
@@ -82,6 +82,9 @@ const Container = styled.div`
     white-space: nowrap;
     padding: 0.425rem;
     font-size: 0.75rem;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
 
     &::after {
       content: '';
@@ -93,7 +96,8 @@ const Container = styled.div`
 
   &:hover {
     .tool-tip-text {
-      display: block;
+      visibility: visible;
+      opacity: 1;
     }
   }
 `;
