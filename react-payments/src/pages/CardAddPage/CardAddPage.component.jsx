@@ -19,7 +19,7 @@ import useReady from "../../hooks/useReady";
 import { isAllInputReady } from "../../util/validator";
 import { CardTypeContext } from "../../provider/CardTypeProvider";
 import PageContainer from "../../component/common/PageContainer/PageContainer.component";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CardDataContext } from "../../provider/CardDataProvider";
 import { REDUCER_TYPE } from "../../constants";
 
@@ -64,7 +64,14 @@ const CardAddPage = () => {
     false
   );
   const { idx } = useParams();
-  console.log(idx);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (typeof idx !== "undefined" && cardData.length === 0) {
+      navigate("/");
+    }
+  }, [cardData.length, idx, navigate]);
+
   useEffect(() => {
     if (typeof idx === "undefined" || !cardData[idx]) {
       return;

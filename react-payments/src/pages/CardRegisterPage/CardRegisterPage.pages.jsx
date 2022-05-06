@@ -1,4 +1,5 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CardNameInput from "../../component/CardNameInput/CardNameInput.component";
 import Card from "../../component/common/Card/card.component";
@@ -26,7 +27,7 @@ const CardRegisterGroup = styled.div`
 `;
 
 const CardRegisterPage = () => {
-  const { cardData } = useContext(CardDataContext);
+  const { cardData, dispatch } = useContext(CardDataContext);
   const {
     state: { cardNumber },
     action: { resetCardNumber },
@@ -59,8 +60,14 @@ const CardRegisterPage = () => {
     isDuplicatedCardName,
     cardData
   );
-  const { dispatch } = useContext(CardDataContext);
   const id = useRef(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (securityCode === "") {
+      navigate("/");
+    }
+  }, [navigate, securityCode]);
 
   const handleSubmitCardData = () => {
     resetCardNumber();
