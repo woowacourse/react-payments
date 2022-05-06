@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect, useReducer } from 'react';
+import React, { useState, useRef, useReducer } from 'react';
 
 import CardFormPage from './components/CardFormPage';
 import CardListPage from './components/CardListPage';
@@ -21,7 +21,6 @@ const cardListReducer = (state, action) => {
 function App() {
   const targetRef = useRef();
 
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [path, setPath] = useState('list-card');
 
   const [cardList, cardListDispatch] = useReducer(cardListReducer, initialCardListState);
@@ -58,7 +57,7 @@ function App() {
       case 'add-card':
         return (
           <CardFormPage
-            dimensions={dimensions}
+            targetRef={targetRef}
             cardNoErrorMessage={cardNoErrorMessage}
             ownerErrorMessage={ownerErrorMessage}
             setCardCompany={setCardCompany}
@@ -69,22 +68,13 @@ function App() {
           />
         );
       case 'submit-card':
-        return <CardSubmitPage />;
+        return <CardSubmitPage updateCardNumbers={updateCardNumbers} />;
       case 'list-card':
         return <CardListPage cardList={cardList} />;
       default:
         return `${route}는 존재하지 않는 경로입니다.`;
     }
   };
-
-  useLayoutEffect(() => {
-    if (targetRef.current) {
-      setDimensions({
-        width: targetRef.current.offsetWidth,
-        height: targetRef.current.offsetHeight,
-      });
-    }
-  }, []);
 
   return (
     <main className="app" ref={targetRef}>
@@ -98,18 +88,6 @@ function App() {
               owner,
             }}>
             {checkRoutes(path)}
-            {/* <CardFormPage
-              dimensions={dimensions}
-              cardNoErrorMessage={cardNoErrorMessage}
-              ownerErrorMessage={ownerErrorMessage}
-              setCardCompany={setCardCompany}
-              setCardNoErrorMessage={setCardNoErrorMessage}
-              updateCardNumbers={updateCardNumbers}
-              setCardDate={setCardDate}
-              updateOwner={updateOwner}
-            />
-            <CardSubmitPage />
-            <CardListPage cardList={cardList} /> */}
           </CardInfoContext.Provider>
         </CardDispatchContext.Provider>
       </PathContext.Provider>
