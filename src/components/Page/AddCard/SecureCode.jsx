@@ -28,6 +28,7 @@ const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
           maxLength={3}
           value={secureCode}
           onChange={onChangeSecureCode}
+          data-testid="secure-code"
         />
         <Tooltip />
       </SecureCodeInputContainer>

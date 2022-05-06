@@ -68,6 +68,7 @@ const CardNumberInput = ({
         }}
         maxLength={4}
         ref={firstCardNumberRef}
+        data-testid="first-card-number"
       />
       <Dash>-</Dash>
       <Input
@@ -79,6 +80,7 @@ const CardNumberInput = ({
         }}
         maxLength={4}
         ref={secondCardNumberRef}
+        data-testid="second-card-number"
       />
       <Dash>-</Dash>
       <Input
@@ -91,6 +93,7 @@ const CardNumberInput = ({
         }}
         maxLength={4}
         ref={thirdCardNumberRef}
+        data-testid="third-card-number"
       />
       <Dash>-</Dash>
       <Input
@@ -103,6 +106,7 @@ const CardNumberInput = ({
         }}
         maxLength={4}
         ref={fourthCardNumberRef}
+        data-testid="fourth-card-number"
       />
     </CardNumberWrapper>
   );

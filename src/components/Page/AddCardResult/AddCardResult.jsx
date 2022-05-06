@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { CardIndexContext, CardListContext } from '../../../contexts';
+import { CardIndexContext, CardListContext } from '../../../contexts/index';
 import NextButton from '../../Button';
 import Card from '../../Card';
 import CardNickNameInput from '../../Input/CardNickNameInput';

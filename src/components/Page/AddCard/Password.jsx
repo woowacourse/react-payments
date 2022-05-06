@@ -33,6 +33,7 @@ const Password = ({
           maxLength={1}
           value={firstPassword}
           onChange={onChangeFirstPassword}
+          data-testid="first-password"
         />
         <Input
           type="password"
@@ -41,6 +42,7 @@ const Password = ({
           maxLength={1}
           value={secondPassword}
           onChange={onChangeSecondPassword}
+          data-testid="second-password"
         />
         <DotMark />
         <DotMark />

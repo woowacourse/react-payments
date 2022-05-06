@@ -32,6 +32,7 @@ const ExpiredDateInput = ({
         maxLength={2}
         value={expiredMonth}
         onChange={onChangeExpiredMonth}
+        data-testid="expired-month"
       />
       <Slash>/</Slash>
       <Input
@@ -41,6 +42,7 @@ const ExpiredDateInput = ({
         maxLength={2}
         value={expiredYear}
         onChange={onChangeExpiredYear}
+        data-testid="expired-year"
       />
     </ExpiredDateWrapper>
   );

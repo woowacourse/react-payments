@@ -14,7 +14,7 @@ const CardNickNameInputWrapper = styled.input`
 `;
 
 const CardNickNameInput = ({ onChange }) => {
-  return <CardNickNameInputWrapper onChange={onChange} />;
+  return <CardNickNameInputWrapper onChange={onChange} data-testid="card-nickname" />;
 };
 
 export default CardNickNameInput;
