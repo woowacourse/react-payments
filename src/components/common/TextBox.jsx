@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledTextBox = styled.text`
-  /* font-size: 24px; */
   font-size: ${(props) => props.fontSize || '24px'};
   color: ${(props) => props.color || 'black'};
 
