@@ -8,18 +8,6 @@ import AddCard from 'pages/AddCard';
 import AddCardComplete from 'pages/AddCardComplete';
 import Header from 'components/Header';
 
-const Styled = {
-  Root: styled.div`
-    background: #fff;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
-    width: 400px;
-    height: 757px;
-  `,
-};
-
 function App() {
   return (
     <>
@@ -34,5 +22,17 @@ function App() {
     </>
   );
 }
+
+const Styled = {
+  Root: styled.div`
+    background: #fff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    width: 400px;
+    height: 757px;
+  `,
+};
 
 export default memo(App);

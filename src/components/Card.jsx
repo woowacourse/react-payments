@@ -33,6 +33,56 @@ const getCardSize = size => {
   }
 };
 
+function Card({
+  bgColor,
+  className,
+  name,
+  number,
+  onClickFunc,
+  size,
+  title,
+  validDate,
+}) {
+  const cardStyle = getCardSize(size);
+
+  return (
+    <Styled.Card
+      className={className}
+      bgColor={bgColor}
+      cardStyle={cardStyle}
+      onClick={onClickFunc}
+    >
+      <Styled.Title cardStyle={cardStyle}>{title}</Styled.Title>
+      <Styled.Magnet cardStyle={cardStyle} />
+      <div>
+        <Styled.NumberSet cardStyle={cardStyle}>
+          {number || ''}
+        </Styled.NumberSet>
+        <Styled.ValidDate cardStyle={cardStyle}>
+          {validDate || 'MM/YY'}
+        </Styled.ValidDate>
+        <Styled.OwnerName cardStyle={cardStyle}>
+          {name || 'NAME'}
+        </Styled.OwnerName>
+      </div>
+    </Styled.Card>
+  );
+}
+
+Card.defaultProps = {
+  size: 'medium',
+};
+
+Card.propTypes = {
+  bgColor: PropTypes.string,
+  className: PropTypes.string,
+  name: PropTypes.string,
+  number: PropTypes.string,
+  size: PropTypes.string,
+  title: PropTypes.string,
+  validDate: PropTypes.string,
+};
+
 const Styled = {
   Card: styled.div`
     box-shadow: 3px 3px 5px #00000040;
@@ -109,56 +159,6 @@ const Styled = {
       height: ${cardStyle.detail.height};
     `}
   `,
-};
-
-function Card({
-  bgColor,
-  className,
-  name,
-  number,
-  onClickFunc,
-  size,
-  title,
-  validDate,
-}) {
-  const cardStyle = getCardSize(size);
-
-  return (
-    <Styled.Card
-      className={className}
-      bgColor={bgColor}
-      cardStyle={cardStyle}
-      onClick={onClickFunc}
-    >
-      <Styled.Title cardStyle={cardStyle}>{title}</Styled.Title>
-      <Styled.Magnet cardStyle={cardStyle} />
-      <div>
-        <Styled.NumberSet cardStyle={cardStyle}>
-          {number || ''}
-        </Styled.NumberSet>
-        <Styled.ValidDate cardStyle={cardStyle}>
-          {validDate || 'MM/YY'}
-        </Styled.ValidDate>
-        <Styled.OwnerName cardStyle={cardStyle}>
-          {name || 'NAME'}
-        </Styled.OwnerName>
-      </div>
-    </Styled.Card>
-  );
-}
-
-Card.defaultProps = {
-  size: 'medium',
-};
-
-Card.propTypes = {
-  bgColor: PropTypes.string,
-  className: PropTypes.string,
-  name: PropTypes.string,
-  number: PropTypes.string,
-  size: PropTypes.string,
-  title: PropTypes.string,
-  validDate: PropTypes.string,
 };
 
 export default memo(Card);

@@ -14,33 +14,6 @@ const getButtonSize = size => {
   }
 };
 
-const Styled = {
-  Button: styled.button`
-    cursor: pointer;
-
-    ${({
-      bgColor,
-      border,
-      shape,
-      color,
-      buttonStyle,
-      fontWeight,
-      margin,
-    }) => css`
-      background: ${bgColor};
-      border: ${border};
-      border-radius: ${shape === 'circle' && '50%'};
-      color: ${color};
-      font-size: ${buttonStyle.fontSize};
-      font-weight: ${fontWeight};
-      height: ${buttonStyle.height};
-      margin: ${margin?.t || '0'} ${margin?.r || '0'} ${margin?.b || '0'}
-        ${margin?.l || '0'};
-      width: ${shape === 'circle' && buttonStyle.height};
-    `}
-  `,
-};
-
 function Button({
   bgColor,
   border,
@@ -94,6 +67,33 @@ Button.propTypes = {
   shape: PropTypes.string,
   size: PropTypes.string,
   onClickFunc: PropTypes.func,
+};
+
+const Styled = {
+  Button: styled.button`
+    cursor: pointer;
+
+    ${({
+      bgColor,
+      border,
+      shape,
+      color,
+      buttonStyle,
+      fontWeight,
+      margin,
+    }) => css`
+      background: ${bgColor};
+      border: ${border};
+      border-radius: ${shape === 'circle' && '50%'};
+      color: ${color};
+      font-size: ${buttonStyle.fontSize};
+      font-weight: ${fontWeight};
+      height: ${buttonStyle.height};
+      margin: ${margin?.t || '0'} ${margin?.r || '0'} ${margin?.b || '0'}
+        ${margin?.l || '0'};
+      width: ${shape === 'circle' && buttonStyle.height};
+    `}
+  `,
 };
 
 export default memo(Button);

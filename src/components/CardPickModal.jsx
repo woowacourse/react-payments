@@ -38,6 +38,27 @@ const cardPresets = [
   },
 ];
 
+function CardPickModal({ setCardKind, toggleCardPickModal }) {
+  return (
+    <>
+      <Styled.Modal>
+        <Styled.CloseButton onClickFunc={toggleCardPickModal}>
+          X
+        </Styled.CloseButton>
+        {cardPresets.map(({ color, title }) => (
+          <CardColorButton
+            key={`${color}-${title}`}
+            buttonBgColor={color}
+            cardTitle={title}
+            onClickFunc={setCardKind}
+          />
+        ))}
+      </Styled.Modal>
+      <Styled.Dimmed onClick={toggleCardPickModal} />
+    </>
+  );
+}
+
 const Styled = {
   CloseButton: styled(Button)`
     cursor: pointer;
@@ -69,26 +90,5 @@ const Styled = {
     width: 400px;
   `,
 };
-
-function CardPickModal({ setCardKind, toggleCardPickModal }) {
-  return (
-    <>
-      <Styled.Modal>
-        <Styled.CloseButton onClickFunc={toggleCardPickModal}>
-          X
-        </Styled.CloseButton>
-        {cardPresets.map(({ color, title }) => (
-          <CardColorButton
-            key={`${color}-${title}`}
-            buttonBgColor={color}
-            cardTitle={title}
-            onClickFunc={setCardKind}
-          />
-        ))}
-      </Styled.Modal>
-      <Styled.Dimmed onClick={toggleCardPickModal} />
-    </>
-  );
-}
 
 export default CardPickModal;

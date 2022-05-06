@@ -4,6 +4,17 @@ import Button from './common/Button';
 
 import { ReactComponent as Arrow } from 'assets/arrow.svg';
 
+function Header({ title }) {
+  return (
+    <Styled.Root>
+      <Button size="small">
+        <Arrow />
+      </Button>
+      <Styled.Title>{title}</Styled.Title>
+    </Styled.Root>
+  );
+}
+
 const Styled = {
   Root: styled.div`
     align-items: center;
@@ -16,16 +27,5 @@ const Styled = {
     margin-left: 18px;
   `,
 };
-
-function Header({ title }) {
-  return (
-    <Styled.Root>
-      <Button size="small">
-        <Arrow />
-      </Button>
-      <Styled.Title>{title}</Styled.Title>
-    </Styled.Root>
-  );
-}
 
 export default Header;

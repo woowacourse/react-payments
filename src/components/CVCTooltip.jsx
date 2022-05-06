@@ -4,6 +4,20 @@ import styled from 'styled-components';
 
 import PropTypes from 'prop-types';
 
+function Tooltip({ visible }) {
+  return (
+    <>
+      {visible && (
+        <Styled.Tooltip>카드 뒷면에 적힌 유효성 검사 코드</Styled.Tooltip>
+      )}
+    </>
+  );
+}
+
+Tooltip.propTypes = {
+  visible: PropTypes.bool,
+};
+
 const Styled = {
   Tooltip: styled.div`
     animation: fadein 0.3s;
@@ -27,20 +41,6 @@ const Styled = {
       }
     }
   `,
-};
-
-function Tooltip({ visible }) {
-  return (
-    <>
-      {visible && (
-        <Styled.Tooltip>카드 뒷면에 적힌 유효성 검사 코드</Styled.Tooltip>
-      )}
-    </>
-  );
-}
-
-Tooltip.propTypes = {
-  visible: PropTypes.bool,
 };
 
 export default memo(Tooltip);

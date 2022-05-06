@@ -33,41 +33,6 @@ function cardKindReducer(state, action) {
   }
 }
 
-const Styled = {
-  Card: styled(Card)`
-    align-self: center;
-    margin-bottom: 25px;
-  `,
-
-  InputGroup: styled.div`
-    display: flex;
-    flex-direction: column;
-    row-gap: 19px;
-  `,
-
-  CardOwnerNameLength: styled.div`
-    color: #525252;
-    font-size: 12px;
-    float: right;
-  `,
-
-  Bullet: styled.span`
-    color: #04c09e;
-    margin-right: 35px;
-  `,
-
-  NextButton: styled(Button)`
-    align-self: end;
-  `,
-
-  CloseButton: styled(Button)`
-    cursor: pointer;
-    position: absolute;
-    right: 15px;
-    top: 10px;
-  `,
-};
-
 function AddCard() {
   const [cardNumber, setCardNumber, encryptedCardNumber] = useCardNumber('');
   const [cardOwnerName, setCardOwnerName] = useCardOwnerName('');
@@ -192,5 +157,40 @@ function AddCard() {
     </>
   );
 }
+
+const Styled = {
+  Card: styled(Card)`
+    align-self: center;
+    margin-bottom: 25px;
+  `,
+
+  InputGroup: styled.div`
+    display: flex;
+    flex-direction: column;
+    row-gap: 19px;
+  `,
+
+  CardOwnerNameLength: styled.div`
+    color: #525252;
+    font-size: 12px;
+    float: right;
+  `,
+
+  Bullet: styled.span`
+    color: #04c09e;
+    margin-right: 35px;
+  `,
+
+  NextButton: styled(Button)`
+    align-self: end;
+  `,
+
+  CloseButton: styled(Button)`
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+  `,
+};
 
 export default AddCard;
