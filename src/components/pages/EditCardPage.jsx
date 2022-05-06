@@ -90,7 +90,7 @@ const EditCardPage = () => {
   return (
     <StyledCompleteEditCardPage>
       <Link to="/">
-        <BackwardButton>카드 수정</BackwardButton>
+        <BackwardButton showBackWard>카드 수정</BackwardButton>
       </Link>
       <TextBox fontSize="23px">카드 이름을 수정하세요.</TextBox>
       <CardPreview values={values} />

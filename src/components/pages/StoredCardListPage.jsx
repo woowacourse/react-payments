@@ -36,7 +36,6 @@ const StyledStoredCardList = styled.div`
 
   .card-box {
     margin: 0 0 5px;
-    text-decoration: none;
   }
 
   .card-box:hover {
