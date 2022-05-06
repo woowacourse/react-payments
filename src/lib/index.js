@@ -7,7 +7,7 @@ const sliceFront = (inputs, index) => inputs.slice(0, index).reverse();
 const sliceBack = (inputs, index) => inputs.slice(index + 1)
 
 const focusEmptyInput = (inputs, index) => {
-  const input = findEmptyInput(sliceBack(inputs, index)) || findEmptyInput(sliceFront(inputs, index));
+  const input = findEmptyInput(sliceFront(inputs, index)) || findEmptyInput(sliceBack(inputs, index));
 
   input && input.current.focus();
 };
