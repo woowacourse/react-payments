@@ -57,6 +57,11 @@ function ExpiredPeriodInputContainer() {
   const handleYearChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
+    if (Number(value) === 0) {
+      dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD_YEAR, ''));
+      return;
+    }
+
     if (value.length > 2 || !isNum(value)) return;
 
     dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD_YEAR, removeWhiteSpaces(value)));
