@@ -12,6 +12,7 @@ const COLORS = {
 
   dodgerSky: '#47A9FF',
   dodgerBlue: '#1C71FF',
+  cloudBurst: '#223350',
 
   chelseaCucumber: '#72AE58',
 
