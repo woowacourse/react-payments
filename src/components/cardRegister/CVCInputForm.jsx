@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { InputBasic } from "components/common/InputBasic";
 import { InputBox } from "components/common/InputBox";
@@ -10,24 +10,13 @@ import {
 } from "components/common/styled";
 import { RULE_INPUT } from "constants/constants";
 
-export const CVCInputForm = ({
-  CVC,
-  handleCVCInput,
-  handleCardCVCCheck,
-  handleModalVisible,
-}) => {
-  useEffect(() => {
-    const isCVCCompleted = CVC.length === 3;
-
-    handleCardCVCCheck(isCVCCompleted);
-  }, [CVC]);
-
+export const CVCInputForm = ({ handleCardCVCCheck, handleModalVisible }) => {
   const handleCVCChange = (e) => {
     if (isNaN(e.nativeEvent.data)) {
       return;
     }
 
-    handleCVCInput(e.target.value);
+    handleCardCVCCheck(e.target.value.length === 3);
   };
 
   return (
@@ -37,7 +26,6 @@ export const CVCInputForm = ({
         <InputBox width="25%">
           <InputBasic
             type="password"
-            value={CVC}
             id="input_CVC"
             maxLength="3"
             pattern={RULE_INPUT.CVC_RULE}

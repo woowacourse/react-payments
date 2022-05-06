@@ -21,15 +21,10 @@ import { Form } from "components/common/Form";
 export const CardRegisterPage = () => {
   const { modalVisibleState, setModalState, modalName } = useModal();
   const [ownerName, setOwnerName] = useState("");
-  const [CVC, setCVC] = useState("");
   const [allCompleted, setAllCompleted] = useState(false);
   const [expireDate, setExpireDate] = useState({
     month: "",
     year: "",
-  });
-  const [password, setPassword] = useState({
-    firstNumber: "",
-    secondNumber: "",
   });
   const [cardType, setCardType] = useState({
     name: "",
@@ -118,14 +113,10 @@ export const CardRegisterPage = () => {
           handleOwnerNameInput={setOwnerName}
         />
         <CVCInputForm
-          CVC={CVC}
-          handleCVCInput={setCVC}
           handleCardCVCCheck={setCheckInputStateOf("cardCVC")}
           handleModalVisible={modalSelector(MODAL_NAME.CARD_CVC)}
         />
         <CardPasswordInputForm
-          password={password}
-          handlePasswordInput={setPassword}
           handleCardPasswordCheck={setCheckInputStateOf("cardPassword")}
         />
         <Button type="submit" disabled={!allCompleted}>
