@@ -4,7 +4,7 @@ import Input from './Input';
 import { MAX_LENGTH } from '../constants';
 import { validator, checkMaxLength, checkIsNaN } from '../validator';
 
-function PasswordInput({ value, name, updateCard }) {
+function PasswordInput({ value, name }) {
   return (
     <Input
       size="w-15 mr-10"
@@ -12,7 +12,6 @@ function PasswordInput({ value, name, updateCard }) {
       length={MAX_LENGTH.PASSWORD}
       value={value}
       name={name}
-      updateCard={updateCard}
       validators={[
         validator(checkMaxLength, value, MAX_LENGTH.PASSWORD),
         validator(checkIsNaN, value),
@@ -24,7 +23,6 @@ function PasswordInput({ value, name, updateCard }) {
 PasswordInput.propTypes = {
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  updateCard: PropTypes.func.isRequired,
 };
 
 export default PasswordInput;

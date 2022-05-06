@@ -1,7 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import AddCardContext from '../AddCardContext';
 
-function Card({ card }) {
+function Card() {
+  const { card } = useContext(AddCardContext);
+
   const isEmptyCard = Object.values(card).every((value) => value === '');
 
   return (
@@ -40,20 +42,5 @@ function Card({ card }) {
     </div>
   );
 }
-
-Card.propTypes = {
-  card: PropTypes.shape({
-    firstCardNumber: PropTypes.string.isRequired,
-    secondCardNumber: PropTypes.string.isRequired,
-    thirdCardNumber: PropTypes.string.isRequired,
-    fourthCardNumber: PropTypes.string.isRequired,
-    expireMonth: PropTypes.string.isRequired,
-    expireYear: PropTypes.string.isRequired,
-    ownerName: PropTypes.string.isRequired,
-    securityCode: PropTypes.string.isRequired,
-    firstPassword: PropTypes.string.isRequired,
-    secondPassword: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default Card;

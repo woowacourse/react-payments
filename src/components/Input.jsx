@@ -1,18 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import AddCardContext from '../AddCardContext';
 
-function Input({
-  type,
-  size,
-  placeholder,
-  length,
-  minLength,
-  name,
-  value,
-  required,
-  updateCard,
-  validators,
-}) {
+function Input({ type, size, placeholder, length, minLength, name, value, required, validators }) {
+  const { updateCard } = useContext(AddCardContext);
+
   const handleChange = (event) => {
     updateCard(name, event.target.value);
   };
@@ -57,7 +49,6 @@ Input.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   required: PropTypes.bool,
-  updateCard: PropTypes.func.isRequired,
   validators: PropTypes.arrayOf(PropTypes.shape({ validate: PropTypes.func })).isRequired,
 };
 
