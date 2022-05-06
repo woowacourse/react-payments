@@ -4,7 +4,7 @@ import LineInput from '../Common/Input/LineInput';
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { CardContext } from '../../context';
-import { isNotKoreanOrSpace, isOverlappedValue } from '../../utils/validations';
+import { isBlankValue, isNotKoreanOrSpace, isOverlappedValue } from '../../utils/validations';
 import { DISPATCH_TYPE } from '../../constants';
 import { DEFAULT_CARD_INFO } from '../../constants';
 
@@ -18,7 +18,7 @@ function LineInputForm({ handleChangePage }) {
       return;
     }
 
-    if (cardInput.cardDesignation.replace(/\s/g, '') === '') {
+    if (isBlankValue(cardInput.cardDesignation)) {
       alert('카드 이름이 공백입니다.');
       return;
     }

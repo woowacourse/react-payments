@@ -8,7 +8,7 @@ function CardListPage() {
   const { setPage, tempRouter } = useContext(PageContext);
 
   return (
-    <div className={tempRouter.cardList}>
+    <main className={tempRouter.cardList}>
       <h2 className="page-title">보유 카드</h2>
       <CardList>
         <button className="card-button-box" onClick={() => setPage(PAGE.ADD_CARD)}>
@@ -17,7 +17,7 @@ function CardListPage() {
           </div>
         </button>
       </CardList>
-    </div>
+    </main>
   );
 }
 

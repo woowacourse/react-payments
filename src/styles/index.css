@@ -52,7 +52,7 @@ input {
   justify-content: center;
 }
 
-header {
+nav {
   display: flex;
   align-items: center;
 }

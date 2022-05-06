@@ -1,11 +1,9 @@
 import React, { useReducer, useEffect, useState } from 'react';
-import Button from './components/Common/Button';
-import Card from './components/Card/Card';
-import CardBasicInfoForm from './components/Form/CardBasicInfoForm';
 import { DISPATCH_TYPE, DEFAULT_CARD_INFO, DEFAULT_ROUTE_INFO, PAGE } from './constants';
 import { CardContext, PageContext } from './context';
 import CardListPage from './components/Page/CardListPage';
 import CompleteAddCardPage from './components/Page/CompleteAddCardPage';
+import AddCardPage from './components/Page/AddCardPage';
 
 const cardInputReducer = (state, action) => {
   const { type, payload } = action;
@@ -81,10 +79,6 @@ function App() {
     tempRouter: tempRouter,
   };
 
-  const handleChangePage = pageName => {
-    setPage(pageName);
-  };
-
   useEffect(() => {
     if (page === PAGE.ADD_CARD) {
       setTempRouter({ addCard: 'app', completeAddCard: 'app hide', cardList: 'app hide' });
@@ -101,19 +95,7 @@ function App() {
     <div className="root">
       <PageContext.Provider value={pageState}>
         <CardContext.Provider value={cardState}>
-          <div className={tempRouter.addCard}>
-            <header>
-              <Button onClick={() => handleChangePage('cardListPage')} />
-              <h2 className="page-title">카드 추가</h2>
-            </header>
-            <Card cardInformation={cardInput} cardBoxSize={'small'}></Card>
-            <CardBasicInfoForm
-              cardInput={cardInput}
-              cardInputDispatch={cardInputDispatch}
-              handleChangePage={handleChangePage}
-            ></CardBasicInfoForm>
-          </div>
-
+          <AddCardPage />
           <CompleteAddCardPage />
           <CardListPage />
         </CardContext.Provider>

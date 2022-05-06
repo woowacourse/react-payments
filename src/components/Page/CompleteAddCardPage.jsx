@@ -9,11 +9,11 @@ function CompleteAddCardPage() {
   const { cardInput } = useContext(CardContext);
 
   return (
-    <div className={tempRouter.completeAddCard}>
+    <main className={tempRouter.completeAddCard}>
       <h2 className="page-title complete-page-title"> 카드 등록이 완료되었습니다. </h2>
       <Card cardInformation={cardInput} cardBoxSize={'big'}></Card>
       <CardNameInfoForm handleChangePage={setPage}></CardNameInfoForm>
-    </div>
+    </main>
   );
 }
 

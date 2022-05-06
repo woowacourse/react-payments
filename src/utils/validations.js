@@ -29,3 +29,7 @@ export const isLengthBelow = (inputValue, length) => {
 export const isOverlappedValue = (inputValue, wholeValue) => {
   return inputValue in wholeValue;
 };
+
+export const isBlankValue = inputValue => {
+  return inputValue.replace(/\s/g, '') === '';
+};

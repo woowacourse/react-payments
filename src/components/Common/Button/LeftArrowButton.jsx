@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Button = styled.button`
+const LeftArrowButton = styled.button`
   width: 10.43px;
   height: 10.43px;
   padding: 5px;
@@ -12,9 +11,7 @@ const Button = styled.button`
   box-sizing: border-box;
   transform: rotate(45deg);
   margin: 0 20px 5px 0;
+  cursor: pointer;
 `;
 
-Button.propTypes = {
-  value: PropTypes.string,
-};
-export default Button;
+export default LeftArrowButton;
