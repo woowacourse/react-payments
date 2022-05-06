@@ -7,6 +7,7 @@ import CardPassword from "./CardPassword";
 import CardSecurityCode from "./CardSecurityCode";
 import CardUserName from "./CardUserName";
 import useFormValidation from "../../hooks/useFormValidation";
+import { useNavigate } from "react-router-dom";
 
 interface CardInfoFormProps {
   cardInfo: CardInfo;
@@ -19,18 +20,21 @@ interface CardInfoFormProps {
   resetCardInfo: () => void;
 }
 
-const focusNextInput = e => {
-  const targetInputElement = e.target as HTMLInputElement;
-  const targetFormElement = e.currentTarget as HTMLFormElement;
+const focusNextInput = (e: React.FormEvent<HTMLFormElement>) => {
+  const targetInputElement = e.target;
+  const targetFormElement = e.currentTarget;
 
-  const findElementIndex = Array.from(e.currentTarget.elements).findIndex(
+  const findElementIndex = Array.from(targetFormElement.elements).findIndex(
     element => element === targetInputElement
   );
 
   const currentElement = targetFormElement[findElementIndex] as HTMLInputElement;
-  const nextElement = targetFormElement[findElementIndex + 1] as HTMLInputElement;
 
-  if (currentElement.value.length === currentElement.maxLength) nextElement.focus();
+  if (currentElement.value.length === currentElement.maxLength) {
+    const nextElement = targetFormElement[findElementIndex + 1] as HTMLInputElement;
+
+    nextElement.focus();
+  }
 };
 
 export default function CardInfoForm({
@@ -52,6 +56,7 @@ export default function CardInfoForm({
     securityCode: false,
     password: false,
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsNextButtonShown(() => Object.values(formValidation).every(validation => validation));
@@ -63,6 +68,8 @@ export default function CardInfoForm({
       onSubmit={e => {
         e.preventDefault();
         alert("카드 등록이 완료되었습니다.");
+        setIsNextButtonShown(true);
+        navigate("/samplePage");
       }}
     >
       <CardNumber
