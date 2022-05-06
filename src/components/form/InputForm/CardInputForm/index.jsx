@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFormComplete } from '../../../../hooks/useFormComplete';
 import { checkFormCompletion, checkFormValidation } from '../../../../utils/validation/form';
-import { objectToString } from '../../../../utils/util';
 import InputContainer from '../../InputContainer/TypeInputContainer';
 import { uid } from 'react-uid';
 import Position from '../../../commons/Position';
@@ -10,8 +9,11 @@ import Modal from '../../../commons/Modal';
 import CardCompanySelect from '../../CardCompanySelect';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../../types';
 import VirtualKeyboard from '../../VirtualKeyboard';
+import { useNavigate } from 'react-router-dom';
+import { generateNonDuplicatedId } from '../../../../utils/util';
 
-function CardInputForm({ cardInput, cardInputDispatch }) {
+function CardInputForm({ cardInput, cardInputDispatch, cardListDispatch }) {
+  const navigate = useNavigate();
   const [isShowModal, setIsShowModal] = useState(false);
 
   const [{ isShow, elementKey }, setIsShowVirtualKeyboard] = useState({
@@ -26,15 +28,19 @@ function CardInputForm({ cardInput, cardInputDispatch }) {
   const onSubmitInputForm = e => {
     e.preventDefault();
 
-    const { cardNumber, expirationDate, ownerName, securityCode, password } = cardInput;
+    const { cardNumber, expirationDate, ownerName, securityCode, password, cardType } = cardInput;
 
     try {
       if (checkFormValidation({ expirationDate })) {
-        alert(`카드 번호는 ${objectToString({ targetObject: cardNumber })} 입니다 \n
-        만료일 ${objectToString({ targetObject: expirationDate, separator: '/' })} 입니다 \n
-        카드 소유자 이름 ${ownerName} 입니다 \n
-        보안코드 ${securityCode} 입니다 \n
-        비밀번호 ${objectToString({ targetObject: password })} \n`);
+        const randomId = generateNonDuplicatedId(cardType);
+        cardListDispatch({
+          type: 'ADD_CARD',
+          payload: {
+            id: randomId,
+            cardInput: { cardNumber, expirationDate, ownerName, securityCode, password, cardType },
+          },
+        });
+        navigate('./success', { replace: true, state: { cardId: randomId } });
       }
     } catch ({ message }) {
       alert(message);
@@ -108,8 +114,10 @@ CardInputForm.propTypes = {
     ownerName: PropTypes.string,
     securityCode: PropTypes.string,
     password: PASSWORD_TYPE,
+    cardType: PropTypes.string,
   }),
   cardInputDispatch: PropTypes.func,
+  cardListDispatch: PropTypes.func,
 };
 
 export default CardInputForm;
