@@ -10,18 +10,18 @@ import {
   checkPassword,
 } from '../../validation';
 
-import Button from '../Button';
-import Header from '../Header';
-import Card from '../Card';
-import Modal from '../Modal';
-import Palette from '../Palette';
+import Button from '../../components/Button';
+import Header from '../../components/Header';
+import Card from '../../components/Card';
+import Modal from '../../components/Modal';
+import Palette from '../../components/Palette';
 import useInputValue from '../../hooks/useInputValue';
 
-import CardNumber from './CardNumber';
-import CardOwner from './CardOwner';
-import ExpiredDate from './ExpiredDate';
-import Password from './Password';
-import SecureCode from './SecureCode';
+import CardNumber from '../../components/CardNumber';
+import CardOwner from '../../components/CardOwner';
+import ExpiredDate from '../../components/ExpiredDate';
+import Password from '../../components/Password';
+import SecureCode from '../../components/SecureCode';
 
 import * as styled from './index.styled';
 

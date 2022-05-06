@@ -1,5 +1,5 @@
-import FieldSet from '../../FieldSet';
-import Input from '../../Input';
+import FieldSet from '../FieldSet';
+import Input from '../Input';
 import PropTypes from 'prop-types';
 import * as styled from './index.styled';
 

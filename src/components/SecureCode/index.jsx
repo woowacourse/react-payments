@@ -1,6 +1,6 @@
-import FieldSet from '../../FieldSet';
-import Input from '../../Input';
-import AskMarkTooltip from '../../AskMarkTooltip';
+import FieldSet from '../FieldSet';
+import Input from '../Input';
+import AskMarkTooltip from '../AskMarkTooltip';
 import PropTypes from 'prop-types';
 import * as styled from './index.styled';
 

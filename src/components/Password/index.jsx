@@ -1,6 +1,6 @@
-import FieldSet from '../../FieldSet';
-import Input from '../../Input';
-import DotMark from '../../DotMark';
+import FieldSet from '../FieldSet';
+import Input from '../Input';
+import DotMark from '../DotMark';
 import PropTypes from 'prop-types';
 import * as styled from './index.styled';
 

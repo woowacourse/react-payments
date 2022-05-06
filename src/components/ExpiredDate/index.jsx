@@ -1,5 +1,5 @@
-import FieldSet from '../../FieldSet';
-import ExpiredDateInput from '../../Input/ExpiredDateInput';
+import FieldSet from '../FieldSet';
+import ExpiredDateInput from '../Input/ExpiredDateInput';
 import PropTypes from 'prop-types';
 
 const ExpiredDate = ({
