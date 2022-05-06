@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import * as S from 'styles.js';
 import ErrorMessage from 'components/ErrorMessage';
 import validator from 'validations/validator';
-import { CARD_COMPANIES } from 'constants/index';
-import { TYPES, CardStateContext, CardDispatchContext } from 'context/CardContext';
+import { CARD_COMPANIES } from 'constants/cardDomain';
+import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
+import { TYPES } from 'store/card/types';
 
 export default function CardCvc() {
   const { cardCvc, cardCvcErrorMessage, cardCompanyIndex } = useContext(CardStateContext);

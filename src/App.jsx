@@ -1,19 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import CardProvider from 'context/CardContext';
 import CardAddition from 'pages/CardAddition';
 import CardList from 'pages/CardList';
+import CardContext from 'store/card/CardContext';
 
 function App() {
   return (
-    <CardProvider>
+    <CardContext>
       <Router>
         <Routes>
           <Route path="/add-card" element={<CardAddition />} />
           <Route path="/card-list" element={<CardList />} />
         </Routes>
       </Router>
-    </CardProvider>
+    </CardContext>
   );
 }
 

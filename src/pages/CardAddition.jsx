@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { v4 as uuidv4 } from 'uuid';
 import * as S from 'styles.js';
-import { CardDispatchContext, CardStateContext, TYPES } from 'context/CardContext';
 import validator from 'validations/validator';
-import { CARD_COMPANIES } from 'constants/index';
+import { CARD_COMPANIES } from 'constants/cardDomain';
 
 import Card from 'components/Card';
 import PageTitle from 'components/PageTitle';
@@ -20,6 +19,8 @@ import TipModal from 'components/TipModal';
 import CardConfirmModal from 'pages/CardConfirmModal';
 import ErrorMessage from 'components/ErrorMessage';
 import ClickCardBox from 'components/ClickCardBox';
+import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
+import { TYPES } from 'store/card/types';
 
 function CardAddition() {
   const navigate = useNavigate();

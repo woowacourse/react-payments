@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import * as S from 'styles.js';
-import { CardDispatchContext, CardStateContext, TYPES } from 'context/CardContext';
 import PageTitle from 'components/PageTitle';
 import AnotherCard from 'components/AnotherCard';
 import DraggableCard from 'components/DraggableCard';
+import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
+import { TYPES } from 'store/card/types';
 
 function CardList() {
   const navigate = useNavigate();

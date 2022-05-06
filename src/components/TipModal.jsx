@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import ToastModal from 'components/ToastModal';
-import cvcImage from 'img/cvc.jpg';
-import { TYPES, CardStateContext } from 'context/CardContext';
+import cvcImage from 'assets/jpg/cvc.jpg';
+import { CardStateContext } from 'store/card/CardContext';
+import { TYPES } from 'store/card/types';
 
 export default function TipModal() {
   const { tipModalFlag } = useContext(CardStateContext);

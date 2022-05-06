@@ -1,7 +1,8 @@
 import React, { useContext, useCallback } from 'react';
 
 import * as S from 'styles.js';
-import { TYPES, CardDispatchContext } from 'context/CardContext.jsx';
+import { CardDispatchContext } from 'store/card/CardContext';
+import { TYPES } from 'store/card/types';
 
 export default function ClickCardBox({ children }) {
   const dispatch = useContext(CardDispatchContext);
