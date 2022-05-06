@@ -6,14 +6,16 @@ import CardPasswordInput from '../../components/CardPasswordInput';
 import ExpiredDateInput from '../../components/ExpiredDateInput';
 import OwnerNameInput from '../../components/OwnerNameInput';
 import SecureCodeInput from '../../components/SecureCodeInput';
-import useCard from '../../hooks/useCard';
+//import useCard from '../../hooks/useCard';
 import NextButton from '../../components/NextButton';
 import CardColorPicker from '../../components/CardColorPicker';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import useNextButton from '../../hooks/useNextButton';
+import { UserContext } from '../../context/userContext';
 
 const CardAdd = () => {
-  const [inputStates, updateInputStates] = useCard();
+  //const [inputStates, updateInputStates] = useCard();
+  const { inputStates, updateInputStates } = useContext(UserContext);
   const [visible, setVisible] = useState(false);
   const { nextButtonClick } = useNextButton(inputStates, setVisible);
 

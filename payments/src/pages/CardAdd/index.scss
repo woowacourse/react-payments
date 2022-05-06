@@ -38,6 +38,9 @@
   .next--button {
     display: flex;
     justify-content: end;
+
+    right: 20px;
+    bottom: 20px;
     button {
       border: none;
       background-color: inherit;

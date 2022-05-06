@@ -1,0 +1,31 @@
+.enter-nickname__page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.enter-nickname__comment {
+  font-size: 13px;
+}
+
+.enter-nickname__input {
+  text-align: center;
+  border-style: none none solid none;
+  &:focus {
+    outline: none;
+    border-color: rgb(79, 231, 236);
+    transform: scale(1.2);
+    transition-duration: 0.5s;
+  }
+}
+
+.confirm__button {
+  background-color: inherit;
+  color: #04c09e;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
