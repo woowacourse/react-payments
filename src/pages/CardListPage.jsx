@@ -6,9 +6,17 @@ import { CardInfoListContext } from '../context';
 import CardItem from '../components/CardItem';
 import { GuideMessage, Header, Title } from '../components/common/styled';
 
+const Main = styled.main`
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
 const CardListSection = styled.section`
   width: 100%;
-  height: 600px;
+  max-height: 100%;
   padding: 30px 0;
   overflow-y: scroll;
 `;
@@ -58,7 +66,6 @@ const StyledAddCardButton = styled.button`
 `;
 
 const GuideMessageWrapper = styled.div`
-  margin: 80px auto;
   text-align: center;
 `;
 
@@ -96,7 +103,7 @@ export default function CardListPage() {
       <Header>
         <Title>보유카드</Title>
       </Header>
-      <CardListSection>
+      <Main>
         <CardInfoListContext.Consumer>
           {value =>
             value.cardInfoList.length === 0 && (
@@ -106,8 +113,10 @@ export default function CardListPage() {
             )
           }
         </CardInfoListContext.Consumer>
-        <CardList />
-      </CardListSection>
+        <CardListSection>
+          <CardList />
+        </CardListSection>
+      </Main>
     </>
   );
 }
