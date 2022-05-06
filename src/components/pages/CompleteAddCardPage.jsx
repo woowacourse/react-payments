@@ -42,7 +42,7 @@ const CompleteAddCardPage = () => {
 
   const storeCard = async () => {
     const cardInfo = {
-      cardName: cardName || values.owner,
+      cardName: cardName || values.owner || '기본 카드',
       values,
     };
 
