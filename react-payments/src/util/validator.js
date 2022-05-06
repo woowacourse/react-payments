@@ -46,3 +46,6 @@ export const isAllInputReady = ({
 
 export const isInvalidCardName = (cardName) =>
   cardName.length === 0 || cardName.length > MAX_LENGTH.CARD_NAME;
+
+export const isDuplicatedCardName = (newCardName, cardData) =>
+  cardData.some(({ cardName }) => cardName === newCardName);

@@ -6,7 +6,7 @@ import LinkButton from "../../component/common/LinkButton/linkButton.component";
 import MessageBox from "../../component/common/MessageBox/messageBox.component";
 import PageContainer from "../../component/common/PageContainer/PageContainer.component";
 import PageTitle from "../../component/common/PageTitle/pageTitle.component";
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants";
+import { ERROR_MESSAGE, REDUCER_TYPE, SUCCESS_MESSAGE } from "../../constants";
 import useReady from "../../hooks/useReady";
 import { CardDataContext } from "../../provider/CardDataProvider";
 import { CardNumberContext } from "../../provider/CardNumberProvider";
@@ -15,7 +15,7 @@ import { CardTypeContext } from "../../provider/CardTypeProvider";
 import { ExpireDateContext } from "../../provider/ExpireDateProvider";
 import { SecurityCodeContext } from "../../provider/SecurityCodeProvider";
 import { UserNameContext } from "../../provider/UserNameProvider";
-import { isInvalidCardName } from "../../util/validator";
+import { isDuplicatedCardName, isInvalidCardName } from "../../util/validator";
 
 const CardRegisterGroup = styled.div`
   display: flex;
@@ -26,6 +26,7 @@ const CardRegisterGroup = styled.div`
 `;
 
 const CardRegisterPage = () => {
+  const { cardData } = useContext(CardDataContext);
   const {
     state: { cardNumber },
     action: { resetCardNumber },
@@ -50,8 +51,12 @@ const CardRegisterPage = () => {
   } = useContext(CardPasswordContext);
 
   const [cardName, setCardName] = useState("");
-  const [cardNameReady] = useReady(cardName, isInvalidCardName);
-
+  const [cardNameLengthReady] = useReady(cardName, isInvalidCardName);
+  const [uniqueCardNameReady] = useReady(
+    cardName,
+    isDuplicatedCardName,
+    cardData
+  );
   const { dispatch } = useContext(CardDataContext);
 
   const handleSubmitCardData = () => {
@@ -63,7 +68,7 @@ const CardRegisterPage = () => {
     resetSecurityCode();
 
     dispatch({
-      type: "CREATE",
+      type: REDUCER_TYPE.CREATE,
       payload: {
         cardNumber,
         month: expireDate.month,
@@ -94,15 +99,23 @@ const CardRegisterPage = () => {
         <CardNameInput
           value={cardName}
           onChange={onChangeCardName}
-          ready={cardNameReady}
+          ready={cardNameLengthReady && uniqueCardNameReady}
         />
-        {cardNameReady ? (
+        {!cardNameLengthReady && (
+          <MessageBox type="error">
+            {ERROR_MESSAGE["card-name-length"]}
+          </MessageBox>
+        )}
+        {!uniqueCardNameReady && (
+          <MessageBox type="error">
+            {ERROR_MESSAGE["unique-card-name"]}
+          </MessageBox>
+        )}
+        {cardNameLengthReady && uniqueCardNameReady && (
           <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
-        ) : (
-          <MessageBox type="error">{ERROR_MESSAGE["card-name"]}</MessageBox>
         )}
       </CardRegisterGroup>
-      {cardNameReady && (
+      {cardNameLengthReady && uniqueCardNameReady && (
         <LinkButton type="submit" onClick={handleSubmitCardData}>
           확인
         </LinkButton>
