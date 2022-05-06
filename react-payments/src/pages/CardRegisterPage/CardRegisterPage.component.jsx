@@ -2,11 +2,11 @@ import { useContext, useState } from "react";
 import styled from "styled-components";
 import CardNameInput from "../../component/CardNameInput/CardNameInput.component";
 import Card from "../../component/common/Card/card.component";
-import LinkButton from "../../component/common/LinkButton/linkButton.component";
+import LinkButton from "../../component/common/LinkButton/LinkButton.component";
 import MessageBox from "../../component/common/MessageBox/messageBox.component";
 import PageContainer from "../../component/common/PageContainer/PageContainer.component";
 import PageTitle from "../../component/common/PageTitle/pageTitle.component";
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants";
+import { ERROR_MESSAGE, REDUCER_TYPE, SUCCESS_MESSAGE } from "../../constants";
 import useReady from "../../hooks/useReady";
 import { CardDataContext } from "../../provider/CardDataProvider";
 import { CardNumberContext } from "../../provider/CardNumberProvider";
@@ -58,7 +58,7 @@ const CardRegisterPage = () => {
 
   const handleSubmitCardData = () => {
     dispatch({
-      type: "CREATE",
+      type: REDUCER_TYPE.CREATE,
       payload: {
         cardNumber,
         userName,
