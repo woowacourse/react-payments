@@ -41,13 +41,11 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-function CardSubmitPage() {
+function CardSubmitPage({ nextId }) {
   const setPath = useContext(PathContext);
   const { cardCompany, cardNumbers, owner, cardDate } = useContext(CardInfoContext);
   const cardInfoDispatch = useContext(CardInfoDispatchContext);
   const cardListDispatch = useContext(CardListDispatchContext);
-
-  const nextId = useRef(1);
 
   const [nickname, setNickname] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -77,6 +75,7 @@ function CardSubmitPage() {
         nickname,
       },
     });
+
     nextId.current += 1;
 
     cardInfoDispatch({ type: 'RESET_CARD_INFO' });

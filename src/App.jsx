@@ -84,6 +84,7 @@ const cardListReducer = (state, action) => {
 
 function App() {
   const targetRef = useRef();
+  const nextId = useRef(1);
 
   const [path, setPath] = useState('list-card');
 
@@ -95,7 +96,7 @@ function App() {
       case 'add-card':
         return <CardFormPage targetRef={targetRef} />;
       case 'submit-card':
-        return <CardSubmitPage />;
+        return <CardSubmitPage nextId={nextId} />;
       case 'list-card':
         return <CardListPage cardList={cardList} />;
       default:
@@ -108,11 +109,7 @@ function App() {
       <PathContext.Provider value={setPath}>
         <CardInfoDispatchContext.Provider value={cardInfoDispatch}>
           <CardListDispatchContext.Provider value={cardListDispatch}>
-            <CardInfoContext.Provider value={cardInfo}>
-              {/* {checkRoutes(path)} */}
-              <CardFormPage targetRef={targetRef} />
-              <CardSubmitPage />
-            </CardInfoContext.Provider>
+            <CardInfoContext.Provider value={cardInfo}>{checkRoutes(path)}</CardInfoContext.Provider>
           </CardListDispatchContext.Provider>
         </CardInfoDispatchContext.Provider>
       </PathContext.Provider>
