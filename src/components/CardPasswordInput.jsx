@@ -101,6 +101,7 @@ export default function CardPasswordInput() {
                 onChange={(e) => handleInputChange(e, index)}
                 onInvalid={triggerInvalid}
                 pattern={"^[0-9]+$"}
+                data-testid={"password"}
               />
             )
           )}

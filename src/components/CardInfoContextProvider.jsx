@@ -16,6 +16,7 @@ export default function CardInfoContextProvider({ children }) {
     () => ({ state: cardInfo, setState: setCardInfo }),
     [cardInfo, setCardInfo]
   );
+
   return (
     <CardInfoContext.Provider value={contextValue}>
       {children}

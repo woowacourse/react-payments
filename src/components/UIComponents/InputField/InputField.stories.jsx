@@ -3,7 +3,7 @@ import Input from "../Input/Input";
 import InputField from "./InputField";
 
 export default {
-  title: "InputField",
+  title: "UI Components/InputField",
   component: InputField,
 };
 

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import PropTypes, { string } from "prop-types";
-import { CREATE_MASKED_CHARACTERS } from "../constants";
-import CardInfoContext from "../Pages/CardInfoContext";
+import { CREATE_MASKED_CHARACTERS } from "../../../constants";
+import CardInfoContext from "../../../Pages/CardInfoContext";
 
 const cardSizeBeforeSubmit = {
   width: "213px",
@@ -134,9 +134,13 @@ export default function CardPreview({
 }
 
 CardPreview.propTypes = {
-  cardNumber: PropTypes.arrayOf(string),
-  holderName: PropTypes.string,
-  expireDate: PropTypes.arrayOf(string),
+  cardInfo: PropTypes.shape({
+    cardInfo: PropTypes.shape({
+      cardNumber: PropTypes.arrayOf(string),
+      holderName: PropTypes.string,
+      expireDate: PropTypes.arrayOf(string),
+    }),
+  }),
   isValidCardInfo: PropTypes.bool,
   isSubmitted: PropTypes.bool,
   color: PropTypes.oneOf([0, 1, 2, 3, 4, "default", "complete"]),

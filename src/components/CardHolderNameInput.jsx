@@ -72,6 +72,7 @@ export default function CardHolderNameInput() {
         onChange={handleInputChange}
         pattern={"^[a-zA-Z]+$"}
         onInvalid={triggerInvalid}
+        data-testid={"holder-name"}
       />
     </InputField>
   );

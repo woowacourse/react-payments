@@ -87,6 +87,7 @@ export default function CardSecurityCodeInput() {
         pattern={"^[0-9]+$"}
         onInvalid={() => setInvalid(true)}
         onChange={handleInputChange}
+        data-testid={"security-code"}
       />
     </InputField>
   );

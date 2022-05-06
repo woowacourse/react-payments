@@ -42,6 +42,7 @@ export default function CardExpireDateInput() {
         onChange={(e) => handleInputChange(e, 0)}
         onInvalid={triggerInvalid}
         pattern={"^$|(^0?[1-9]$)|(^1?[0-2]$)"}
+        data-testid={"expire-date"}
       />
       <p>/</p>
       <Input
@@ -56,6 +57,7 @@ export default function CardExpireDateInput() {
         onChange={(e) => handleInputChange(e, 1)}
         onInvalid={triggerInvalid}
         pattern={"^$|(^2?[2-6]$)"}
+        data-testid={"expire-date"}
       />
     </InputField>
   );

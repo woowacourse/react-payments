@@ -47,6 +47,7 @@ export default function CardNumberInput() {
               onChange={(e) => handleInputChange(e, index)}
               onInvalid={triggerInvalid}
               pattern={"^[0-9]+$"}
+              data-testid={"card-number"}
             />
             {index !== cardNumber.length - 1 && <p>-</p>}
           </React.Fragment>
