@@ -6,7 +6,12 @@ export default function useCardNumber(initialValue) {
   const handler = useCallback(
     ({ target: { selectionStart }, nativeEvent: { data: key } }) => {
       setCardNumber(prevState => {
-        let state = key && /[0-9]/.test(key) ? prevState + key : prevState;
+        let state =
+          key && /[0-9]/.test(key)
+            ? prevState.slice(0, selectionStart - 1) +
+              key +
+              prevState.slice(selectionStart - 1, prevState.length)
+            : prevState;
 
         if (!key) {
           let removeIdx = 0;
