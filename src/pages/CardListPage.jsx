@@ -21,7 +21,11 @@ export const CardListPage = () => {
             justifyContent="flex-start"
           >
             {cards.list.map((_, i) => (
-              <Button key={cards.list[i].id} textAlign="center">
+              <Button
+                onClick={() => navigate(`/cardName/${cards.list[i].id}`)}
+                textAlign="center"
+                key={cards.list[i].id}
+              >
                 <Card
                   cardType={cards.list[i].cardType}
                   cardNumbers={cards.list[i].cardNumbers}
@@ -30,7 +34,10 @@ export const CardListPage = () => {
                 />
               </Button>
             ))}
-            <Button textAlign="center">
+            <Button
+              onClick={() => navigate("/RegisterCard")}
+              textAlign="center"
+            >
               <NewCard></NewCard>
             </Button>
           </FlexWrapper>

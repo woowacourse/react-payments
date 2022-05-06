@@ -109,7 +109,7 @@ export const CardRegisterPage = () => {
 
     cards.id++;
     cards.list.push(wrappingCardData);
-    navigate(`/cardname/${cardId}`);
+    navigate(`/cardName/${cardId}`);
   };
 
   return (

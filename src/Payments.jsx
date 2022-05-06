@@ -12,9 +12,10 @@ function Payments() {
     <CardContext.Provider value={cards}>
       <div className="App">
         <Routes>
-          <Route path="/" element={<CardRegisterPage />} />
+          <Route path="/registerCard" element={<CardRegisterPage />} />
           <Route path="/cardName/:id" element={<CardModifyPage />} />
           <Route path="/cardList" element={<CardListPage />} />
+          <Route path="*" element={<CardListPage />} />
         </Routes>
       </div>
     </CardContext.Provider>
