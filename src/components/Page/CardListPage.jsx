@@ -1,5 +1,5 @@
 import React from 'react';
-import CardList from '../CardList';
+import CardList from '../CardList/CardList';
 import { PageContext } from '../../context/index';
 import { useContext } from 'react';
 import { PAGE } from '../../constants';

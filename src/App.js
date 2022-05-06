@@ -1,11 +1,11 @@
 import React, { useReducer, useEffect, useState } from 'react';
-import Button from './components/Button';
-import Card from './components/Card';
-import InputForm from './components/InputForm';
+import Button from './components/Common/Button';
+import Card from './components/Card/Card';
+import CardBasicInfoForm from './components/Form/CardBasicInfoForm';
 import { DISPATCH_TYPE, DEFAULT_CARD_INFO, DEFAULT_ROUTE_INFO, PAGE } from './constants';
-import LineInputForm from './components/InputForm/LineInputForm';
 import { CardContext, PageContext } from './context';
 import CardListPage from './components/Page/CardListPage';
+import CompleteAddCardPage from './components/Page/CompleteAddCardPage';
 
 const cardInputReducer = (state, action) => {
   const { type, payload } = action;
@@ -107,19 +107,14 @@ function App() {
               <h2 className="page-title">카드 추가</h2>
             </header>
             <Card cardInformation={cardInput} cardBoxSize={'small'}></Card>
-            <InputForm
+            <CardBasicInfoForm
               cardInput={cardInput}
               cardInputDispatch={cardInputDispatch}
               handleChangePage={handleChangePage}
-            ></InputForm>
+            ></CardBasicInfoForm>
           </div>
 
-          <div className={tempRouter.completeAddCard}>
-            <h2 className="page-title complete-page-title"> 카드 등록이 완료되었습니다. </h2>
-            <Card cardInformation={cardInput} cardBoxSize={'big'}></Card>
-            <LineInputForm handleChangePage={handleChangePage}></LineInputForm>
-          </div>
-
+          <CompleteAddCardPage />
           <CardListPage />
         </CardContext.Provider>
       </PageContext.Provider>

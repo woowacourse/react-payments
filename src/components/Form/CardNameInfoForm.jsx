@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import LineInput from '../Input/LineInput';
+import LineInput from '../Common/Input/LineInput';
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { CardContext } from '../../context';
 import { isNotKoreanOrSpace, isOverlappedValue } from '../../utils/validations';
 import { DISPATCH_TYPE } from '../../constants';
+import { DEFAULT_CARD_INFO } from '../../constants';
 
 function LineInputForm({ handleChangePage }) {
   const { cardList, cardInput, setCardList, cardInputDispatch } = useContext(CardContext);
@@ -17,7 +18,16 @@ function LineInputForm({ handleChangePage }) {
       return;
     }
 
+    if (cardInput.cardDesignation.replace(/\s/g, '') === '') {
+      alert('카드 이름이 공백입니다.');
+      return;
+    }
+
     setCardList({ ...cardList, [cardInput.cardDesignation]: { ...cardInput } });
+    cardInputDispatch({
+      type: DISPATCH_TYPE.RESET,
+      payload: { ...DEFAULT_CARD_INFO },
+    });
     handleChangePage('cardListPage');
   };
 

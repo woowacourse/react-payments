@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { inputValueToCardFormat } from '../../utils/util';
-import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
+import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../types';
 
 function Card({ cardInformation, cardBoxSize }) {
   const { cardNumber, expirationDate, ownerName } = cardInformation;

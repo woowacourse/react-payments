@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import HelpContent from '../HelpContent';
+import HelpContent from '../HelpContent/HelpContent';
 
-function Input({ labelTitle, inputSize = '', helpText, children }) {
+function LabeledInput({ labelTitle, inputSize = '', helpText, children }) {
   return (
     <div className="input-container">
       <span className="input-title">{labelTitle}</span>
@@ -14,11 +14,11 @@ function Input({ labelTitle, inputSize = '', helpText, children }) {
   );
 }
 
-Input.propTypes = {
+LabeledInput.propTypes = {
   labelTitle: PropTypes.string,
   inputSize: PropTypes.string,
   helpText: PropTypes.string,
   children: PropTypes.node,
 };
 
-export default Input;
+export default LabeledInput;

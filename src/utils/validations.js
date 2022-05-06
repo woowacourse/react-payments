@@ -27,8 +27,5 @@ export const isLengthBelow = (inputValue, length) => {
 };
 
 export const isOverlappedValue = (inputValue, wholeValue) => {
-  console.log('inputValue: ', inputValue);
-  console.log('wholeValue: ', wholeValue);
-  console.log(inputValue in wholeValue);
   return inputValue in wholeValue;
 };

@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Input from '../Input';
+import LabeledInput from '../Common/Input/LabeledInput';
 import PropTypes from 'prop-types';
 import { isAlphabetOrSpace } from '../../utils/validations';
 import { uid } from 'react-uid';
 import { checkFormCompletion, checkFormValidation, isNumberInRange } from './validation';
-import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
+import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../types';
 import { DISPATCH_TYPE } from '../../constants';
 
 function InputForm({
@@ -131,7 +131,7 @@ function InputForm({
 
   return (
     <form onSubmit={onClickNextButton}>
-      <Input labelTitle="카드번호">
+      <LabeledInput labelTitle="카드번호">
         {Object.keys(cardNumber).map(stateKey => (
           <input
             key={uid(stateKey)}
@@ -144,8 +144,8 @@ function InputForm({
             ref={nodePushRef.bind(this, stateKey)}
           />
         ))}
-      </Input>
-      <Input labelTitle="만료일" inputSize="w-50">
+      </LabeledInput>
+      <LabeledInput labelTitle="만료일" inputSize="w-50">
         {Object.keys(expirationDate).map(stateKey => (
           <input
             key={uid(stateKey)}
@@ -159,8 +159,8 @@ function InputForm({
             ref={nodePushRef.bind(this, stateKey)}
           />
         ))}
-      </Input>
-      <Input labelTitle="카드 소유자 이름(선택)">
+      </LabeledInput>
+      <LabeledInput labelTitle="카드 소유자 이름(선택)">
         <input
           type="text"
           className="input-basic"
@@ -170,8 +170,8 @@ function InputForm({
           maxLength={30}
           ref={nodePushRef.bind(this, 'ownerName')}
         />
-      </Input>
-      <Input
+      </LabeledInput>
+      <LabeledInput
         labelTitle="보안코드(CVC/CVV)"
         inputSize="w-25"
         helpText="카드 뒷면 서명란 또는 신용카드 번호 오른쪽 상단에 기재된 3자리 숫자"
@@ -185,8 +185,8 @@ function InputForm({
           required
           ref={nodePushRef.bind(this, 'securityCode')}
         />
-      </Input>
-      <Input labelTitle="카드 비밀번호" inputSize="w-50">
+      </LabeledInput>
+      <LabeledInput labelTitle="카드 비밀번호" inputSize="w-50">
         {Object.keys(password).map(stateKey => (
           <input
             key={uid(stateKey)}
@@ -201,7 +201,7 @@ function InputForm({
         ))}
         <div className="inputted-password">*</div>
         <div className="inputted-password">*</div>
-      </Input>
+      </LabeledInput>
       {isComplete && (
         <button className="button-box">
           <span className="button-text">다음</span>
