@@ -10,7 +10,7 @@ const StyledPageHeaderContainer = styled.header`
   display: flex;
   gap: 10px;
 
-  padding: 8px 0 22px;
+  padding: 8px 0;
 
   color: #383838;
 `;

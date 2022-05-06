@@ -34,6 +34,12 @@ const initialCardInfoState = {
   passwordLength: [0, 0],
 };
 
+const CardAddPageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+`;
+
 const SuccessMessage = styled.h1`
   font-size: 18px;
   text-align: center;
@@ -99,7 +105,7 @@ export default function CardAddPage({ setPage }) {
     <CardInfoContext.Provider
       value={{ state: cardInfo, setState: setCardInfo }}
     >
-      <>
+      <CardAddPageContainer>
         <PageHeader
           isSubmitted={isSubmitted}
           page={"CardAdd"}
@@ -121,7 +127,7 @@ export default function CardAddPage({ setPage }) {
         ) : (
           <CardNicknameForm handleAddNickname={handleAddNickname} />
         )}
-      </>
+      </CardAddPageContainer>
     </CardInfoContext.Provider>
   );
 }
