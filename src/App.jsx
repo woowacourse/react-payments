@@ -1,4 +1,6 @@
+import { Routes, Route } from 'react-router-dom';
 import CardAddPage from './pages/CardAddPage/';
+import CardAddCompletionPage from 'pages/CardAddCompletionPage';
 import { GlobalStyle, ModalContainer } from './style';
 import useModal from './hooks/useModal';
 
@@ -17,7 +19,19 @@ function App() {
     <>
       <GlobalStyle />
       <div className="App">
-        <CardAddPage isOpenModal={isOpenModal} openModal={openModal} closeModal={closeModal} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <CardAddPage
+                isOpenModal={isOpenModal}
+                openModal={openModal}
+                closeModal={closeModal}
+              />
+            }
+          />
+          <Route path="cardAddCompletion" element={<CardAddCompletionPage />} />
+        </Routes>
         <ModalContainer
           id="modal-container"
           visibility={isOpenModal ? 'visible' : 'hidden'}
