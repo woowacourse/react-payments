@@ -12,6 +12,11 @@ const GlobalStyle = createGlobalStyle`
     margin: 0px;
   }
 
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
   #modal {
     position: absolute;
   }

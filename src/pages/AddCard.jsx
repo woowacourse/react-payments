@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -177,7 +178,7 @@ function AddCard() {
 
       {requiredList.every(value => value !== '') && (
         <Styled.NextButton color="#04C09E" fontWeight="bold">
-          다음
+          <Link to="/card-add-complete">다음</Link>
         </Styled.NextButton>
       )}
       {isCardPickModal && (
