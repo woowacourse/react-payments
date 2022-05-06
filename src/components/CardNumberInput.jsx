@@ -1,17 +1,21 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants";
-import useArraySetState from "../useArraySetState";
+import CardInfoContext from "../Pages/CardInfoContext";
 import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
 
-export default function CardNumberInput({ cardNumber, setCardNumber }) {
+export default function CardNumberInput() {
   const [isInvalid, setInvalid] = useState(false);
+  const { state, setState } = useContext(CardInfoContext);
 
-  const setCardNumberArray = useArraySetState(setCardNumber);
+  const { cardNumber } = state;
 
   const handleInputChange = (e, order) => {
     setInvalid(false);
-    setCardNumberArray(e.target.value, order);
+
+    const newCardNumber = [...cardNumber];
+    newCardNumber[order] = e.target.value;
+    setState({ ...state, cardNumber: newCardNumber });
   };
 
   const triggerInvalid = useCallback(() => setInvalid(true), []);

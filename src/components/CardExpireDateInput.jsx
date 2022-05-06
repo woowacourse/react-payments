@@ -1,17 +1,21 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { CARD_INFO_RULES } from "../constants.js";
-import useArraySetState from "../useArraySetState.jsx";
+import CardInfoContext from "../Pages/CardInfoContext.jsx";
 import Input from "./UIComponents/Input/Input.jsx";
 import InputField from "./UIComponents/InputField/InputField.jsx";
 
-export default function CardExpireDateInput({ expireDate, setExpireDate }) {
+export default function CardExpireDateInput() {
   const [isInvalid, setInvalid] = useState(false);
+  const { state, setState } = useContext(CardInfoContext);
 
-  const setExpireDateArray = useArraySetState(setExpireDate);
+  const { expireDate } = state;
 
   const handleInputChange = (e, order) => {
     setInvalid(false);
-    setExpireDateArray(e.target.value, order);
+
+    const newExpireDate = [...expireDate];
+    newExpireDate[order] = e.target.value;
+    setState({ ...state, expireDate: newExpireDate });
   };
 
   const triggerInvalid = useCallback(() => setInvalid(true), []);

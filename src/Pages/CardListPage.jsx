@@ -58,20 +58,25 @@ export default function CardListPage({ setPage }) {
         {formDataArray.map((card) => {
           const cardNumberArray = card["card-number"].match(/.{1,4}/g);
           const expireDateArray = card["expire-date"].match(/.{1,2}/g);
+
+          const cardInfo = {
+            cardNumber: cardNumberArray,
+            expireDate: expireDateArray,
+            holderName: card["holder-name"],
+          };
+
           const colorIndex = Number(card["card-number"]) % 5;
+
           return (
             <CardItem key={card.nickname}>
-              <CardPreview
-                cardNumber={cardNumberArray}
-                holderName={card["holder-name"]}
-                expireDate={expireDateArray}
-                color={colorIndex}
-              />
+              <CardPreview cardInfo={cardInfo} color={colorIndex} />
               <CardNickname>{card.nickname}</CardNickname>
             </CardItem>
           );
         })}
-        <CardShapeButton onClick={() => setPage("CardAdd")}>+</CardShapeButton>
+        <CardShapeButton role={"button"} onClick={() => setPage("CardAdd")}>
+          +
+        </CardShapeButton>
       </CardList>
     </>
   );

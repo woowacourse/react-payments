@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import InputField from "./UIComponents/InputField/InputField.jsx";
 import styled from "styled-components";
 import HelpIconImage from "../assets/images/questionMark.svg";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
+import CardInfoContext from "../Pages/CardInfoContext.jsx";
 
 const StyledIconContainer = styled.div`
   position: relative;
@@ -54,15 +55,17 @@ function HelpIcon({ description }) {
 const SECURITY_CODE_DESCRIPTION =
   "CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.";
 
-export default function CardSecurityCodeInput({
-  securityCodeLength,
-  setSecurityCodeLength,
-}) {
+export default function CardSecurityCodeInput() {
   const [isInvalid, setInvalid] = useState(false);
+
+  const { state, setState } = useContext(CardInfoContext);
+
+  const { securityCodeLength } = state;
 
   const handleInputChange = (e) => {
     setInvalid(false);
-    setSecurityCodeLength(e.target.value.length);
+
+    setState({ ...state, securityCodeLength: e.target.value.length });
   };
 
   return (

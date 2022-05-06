@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import InputField from "./UIComponents/InputField/InputField.jsx";
 import styled from "styled-components";
 import { CARD_INFO_RULES } from "../constants.js";
+import CardInfoContext from "../Pages/CardInfoContext.jsx";
 
 const StyledInputCounter = styled.p`
   position: absolute;
@@ -27,12 +28,17 @@ function InputCounter({ currLength = "0", maxLength, state }) {
   );
 }
 
-export default function CardHolderNameInput({ holderName, setHolderName }) {
+export default function CardHolderNameInput() {
   const [isInvalid, setInvalid] = useState(false);
+
+  const { state, setState } = useContext(CardInfoContext);
+
+  const { holderName } = state;
 
   const handleInputChange = (e) => {
     setInvalid(false);
-    setHolderName(e.target.value.toUpperCase());
+
+    setState({ ...state, holderName: e.target.value.toUpperCase() });
   };
 
   const triggerInvalid = useCallback(() => setInvalid(true), []);
@@ -53,7 +59,6 @@ export default function CardHolderNameInput({ holderName, setHolderName }) {
         />
       }
       isInvalid={isInvalid}
-      valueSetter={setHolderName}
     >
       <Input
         type={"text"}

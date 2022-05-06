@@ -1,18 +1,15 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import PageHeader from "../PageHeader.jsx";
-import Button from "../components/UIComponents/Button/Button.jsx";
+import useLocalStorage from "../useLocalStorage.jsx";
+import CardInfoContext from "./CardInfoContext.jsx";
 
-import {
-  CardPreview,
-  CardHolderNameInput,
-  CardNumberInput,
-  CardPasswordInput,
-  CardSecurityCodeInput,
-  CardExpireDateInput,
-  Form,
-} from "../components";
+import PageHeader from "../PageHeader.jsx";
+
+import { CardPreview } from "../components";
+import CardInfoForm from "../containers/CardInfoForm.jsx";
+import CardNicknameForm from "../containers/CardNicknameForm.jsx";
+
 import {
   CARD_REGISTER_SUCCESS_MESSAGE,
   CARD_INFO_RULES,
@@ -20,9 +17,6 @@ import {
   NICKNAME_REGISTER_SUCCESS_MESSAGE,
   NICKNAME_REGISTER_FAIL_MESSAGE,
 } from "../constants.js";
-import useLocalStorage from "../useLocalStorage.jsx";
-import Input from "../components/UIComponents/Input/Input.jsx";
-import InputField from "../components/UIComponents/InputField/InputField.jsx";
 
 const {
   NUMBER_UNIT_COUNT,
@@ -32,6 +26,14 @@ const {
   PASSWORD_LENGTH,
 } = CARD_INFO_RULES;
 
+const initialCardInfoState = {
+  cardNumber: ["", "", "", ""],
+  expireDate: ["", ""],
+  holderName: "",
+  securityCodeLength: 0,
+  passwordLength: [0, 0],
+};
+
 const SuccessMessage = styled.h1`
   font-size: 18px;
   text-align: center;
@@ -39,26 +41,25 @@ const SuccessMessage = styled.h1`
 `;
 
 export default function CardAddPage({ setPage }) {
-  const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
-  const [expireDate, setExpireDate] = useState(["", ""]);
-  const [holderName, setHolderName] = useState("");
-  const [securityCodeLength, setSecurityCodeLength] = useState(0);
-  const [passwordLength, setPasswordLength] = useState([0, 0]);
+  const [cardInfo, setCardInfo] = useState(initialCardInfoState);
+
   const [isSubmitted, setSubmitted] = useState(false);
   const [currentCardIndex, setCurrentCardIndex] = useState(null);
 
   const [formDataArray, saveFormData] = useLocalStorage("card-info");
 
   const isCompleteCardNumber =
-    cardNumber.join("").length === NUMBER_UNIT_COUNT * NUMBER_UNIT_LENGTH;
+    cardInfo.cardNumber.join("").length ===
+    NUMBER_UNIT_COUNT * NUMBER_UNIT_LENGTH;
 
   const isCompleteExpireDate =
-    expireDate.join("").length === EXPIRE_DATE_LENGTH;
+    cardInfo.expireDate.join("").length === EXPIRE_DATE_LENGTH;
 
-  const isCompleteSecurityCode = securityCodeLength === SECURITY_CODE_LENGTH;
+  const isCompleteSecurityCode =
+    cardInfo.securityCodeLength === SECURITY_CODE_LENGTH;
 
   const isCompletePassword =
-    passwordLength[0] + passwordLength[1] === PASSWORD_LENGTH;
+    cardInfo.passwordLength[0] + cardInfo.passwordLength[1] === PASSWORD_LENGTH;
 
   const isValidCardInfo =
     isCompleteCardNumber &&
@@ -95,63 +96,32 @@ export default function CardAddPage({ setPage }) {
   };
 
   return (
-    <>
-      <PageHeader
-        isSubmitted={isSubmitted}
-        page={"CardAdd"}
-        moveToListPage={moveToListPage}
-      />
-      {isSubmitted && (
-        <SuccessMessage>카드 등록이 완료되었습니다.</SuccessMessage>
-      )}
-      <CardPreview
-        cardNumber={cardNumber}
-        holderName={holderName}
-        expireDate={expireDate}
-        isValidCardInfo={isValidCardInfo}
-        isSubmitted={isSubmitted}
-      />
-      {!isSubmitted ? (
-        <Form onSubmit={handleFormSubmit}>
-          <CardNumberInput
-            cardNumber={cardNumber}
-            setCardNumber={setCardNumber}
+    <CardInfoContext.Provider
+      value={{ state: cardInfo, setState: setCardInfo }}
+    >
+      <>
+        <PageHeader
+          isSubmitted={isSubmitted}
+          page={"CardAdd"}
+          moveToListPage={moveToListPage}
+        />
+        {isSubmitted && (
+          <SuccessMessage>카드 등록이 완료되었습니다.</SuccessMessage>
+        )}
+        <CardPreview
+          cardInfo={cardInfo}
+          isValidCardInfo={isValidCardInfo}
+          isSubmitted={isSubmitted}
+        />
+        {!isSubmitted ? (
+          <CardInfoForm
+            handleFormSubmit={handleFormSubmit}
+            isValidCardInfo={isValidCardInfo}
           />
-          <CardExpireDateInput
-            expireDate={expireDate}
-            setExpireDate={setExpireDate}
-          />
-          <CardHolderNameInput
-            holderName={holderName}
-            setHolderName={setHolderName}
-          />
-          <CardSecurityCodeInput
-            securityCodeLength={securityCodeLength}
-            setSecurityCodeLength={setSecurityCodeLength}
-          />
-          <CardPasswordInput
-            passwordLength={passwordLength}
-            setPasswordLength={setPasswordLength}
-          />
-          {isValidCardInfo && <Button>다음</Button>}
-        </Form>
-      ) : (
-        <Form onSubmit={handleAddNickname}>
-          <InputField
-            shape={"underline"}
-            wrapperWidth={"almost-full"}
-            horizontalAlign={"center"}
-          >
-            <Input
-              width={"full"}
-              name={"nickname"}
-              placeholder={"카드의 별칭을 추가할 수 있습니다"}
-              required
-            />
-          </InputField>
-          <Button>완료</Button>
-        </Form>
-      )}
-    </>
+        ) : (
+          <CardNicknameForm handleAddNickname={handleAddNickname} />
+        )}
+      </>
+    </CardInfoContext.Provider>
   );
 }

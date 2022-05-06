@@ -98,13 +98,12 @@ const CardHolderName = styled.p`
 const CardExpireDate = styled.p``;
 
 export default function CardPreview({
-  cardNumber,
-  holderName,
-  expireDate,
+  cardInfo,
   isValidCardInfo,
   isSubmitted,
   color,
 }) {
+  const { cardNumber, holderName, expireDate } = cardInfo;
   return (
     <CardContainer>
       <SmallCard

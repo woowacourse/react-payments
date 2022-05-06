@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import styled from "styled-components";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
-import useArraySetState from "../useArraySetState.jsx";
+import CardInfoContext from "../Pages/CardInfoContext.jsx";
 
 const StyledInputField = styled.div`
   display: flex;
@@ -53,16 +53,25 @@ const StyledInputContainer = styled.div`
   color: #04c09e;
 `;
 
-export default function CardPasswordInput({
-  passwordLength,
-  setPasswordLength,
-}) {
+export default function CardPasswordInput() {
   const [isInvalid, setInvalid] = useState(false);
-  const setInputLengthArray = useArraySetState(setPasswordLength);
+  // const setInputLengthArray = useArraySetState(setPasswordLength);
+
+  // const handleInputChange = (e, order) => {
+  //   setInvalid(false);
+  //   setInputLengthArray(e.target.value.length, order);
+  // };
+
+  const { state, setState } = useContext(CardInfoContext);
+
+  const { passwordLength } = state;
 
   const handleInputChange = (e, order) => {
     setInvalid(false);
-    setInputLengthArray(e.target.value.length, order);
+
+    const newPasswordLength = [...passwordLength];
+    newPasswordLength[order] = e.target.value.length;
+    setState({ ...state, passwordLength: newPasswordLength });
   };
 
   const triggerInvalid = useCallback(() => setInvalid(true), []);
