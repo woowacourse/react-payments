@@ -13,4 +13,5 @@ Default.args = {
   placeholder: 'placeholder',
   name: 'default-input',
   type: 'text',
+  width: '100px',
 };
