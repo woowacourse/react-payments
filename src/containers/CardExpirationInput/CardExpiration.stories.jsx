@@ -1,4 +1,3 @@
-import React from 'react';
 import CardExpiration from 'containers/CardExpirationInput/CardExpiration';
 
 export default {

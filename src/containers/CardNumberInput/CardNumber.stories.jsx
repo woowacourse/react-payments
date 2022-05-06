@@ -1,4 +1,3 @@
-import React from 'react';
 import CardNumber from 'containers/CardNumberInput/CardNumber';
 
 export default {

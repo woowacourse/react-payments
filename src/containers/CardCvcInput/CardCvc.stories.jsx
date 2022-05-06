@@ -1,4 +1,3 @@
-import React from 'react';
 import CardCvc from 'containers/CardCvcInput/CardCvc';
 
 export default {
