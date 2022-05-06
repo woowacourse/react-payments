@@ -2,9 +2,10 @@ import React, { useReducer, useEffect, useState } from 'react';
 import Button from './components/Button';
 import Card from './components/Card';
 import InputForm from './components/InputForm';
-import { DISPATCH_TYPE } from './constants';
+import { DISPATCH_TYPE, DEFAULT_CARD_INFO } from './constants';
 import LineInputForm from './components/InputForm/LineInputForm';
 import CardContext from './context';
+import CardList from './components/CardList';
 
 const cardInputReducer = (state, action) => {
   const { type, payload } = action;
@@ -52,34 +53,18 @@ const cardInputReducer = (state, action) => {
         cardDesignation: cardDesignation,
       };
     }
+    case DISPATCH_TYPE.RESET: {
+      return { ...payload };
+    }
+
     default:
       throw new Error();
   }
 };
 
-const defaultCardInputState = {
-  cardNumber: {
-    firstColumn: '',
-    secondColumn: '',
-    thirdColumn: '',
-    forthColumn: '',
-  },
-  expirationDate: {
-    month: '',
-    year: '',
-  },
-  ownerName: '',
-  securityCode: '',
-  password: {
-    firstNumber: '',
-    secondNumber: '',
-  },
-  cardDesignation: '',
-};
-
 function App() {
   const [cardList, setCardList] = useState({});
-  const [cardInput, cardInputDispatch] = useReducer(cardInputReducer, defaultCardInputState);
+  const [cardInput, cardInputDispatch] = useReducer(cardInputReducer, DEFAULT_CARD_INFO);
   const [page, setPage] = useState('addCardPage');
   const [isHide, setHide] = useState({
     addCard: 'app',
@@ -115,7 +100,7 @@ function App() {
       <CardContext.Provider value={cardState}>
         <div className={isHide.addCard}>
           <header>
-            <Button />
+            <Button onClick={() => handleChangePage('cardListPage')} />
             <h2 className="page-title">카드 추가</h2>
           </header>
           <Card cardInformation={cardInput} cardBoxSize={'small'}></Card>
@@ -134,6 +119,7 @@ function App() {
 
         <div className={isHide.cardList}>
           <h2 className="page-title"> 보유 카드 </h2>
+          <CardList handleChangePage={handleChangePage} />
         </div>
       </CardContext.Provider>
     </div>

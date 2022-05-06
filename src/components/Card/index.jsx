@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { inputValueToCardFormat } from '../../utils/util';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../types';
 
-function Card({ cardInformation: { cardNumber, expirationDate, ownerName }, cardBoxSize }) {
+function Card({ cardInformation, cardBoxSize }) {
+  console.log(cardInformation);
+  const { cardNumber, expirationDate, ownerName } = cardInformation;
+
+  console.log(cardNumber, expirationDate, ownerName);
+  console.log(cardBoxSize);
   return (
     <div className="card-box">
       <div className={`${cardBoxSize}-card`}>

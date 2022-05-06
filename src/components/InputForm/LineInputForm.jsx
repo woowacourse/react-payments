@@ -12,6 +12,11 @@ function LineInputForm({ handleChangePage }) {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (isOverlappedValue(cardInput.cardDesignation, cardList)) {
+      alert('동일한 명칭의 카드가 존재합니다.');
+      return;
+    }
+
     setCardList({ ...cardList, [cardInput.cardDesignation]: { ...cardInput } });
     handleChangePage('cardListPage');
   };
@@ -22,10 +27,6 @@ function LineInputForm({ handleChangePage }) {
     } = e;
 
     if (cardDesignation.length === maxLength) {
-      return;
-    }
-
-    if (isOverlappedValue(cardDesignation, cardList)) {
       return;
     }
 

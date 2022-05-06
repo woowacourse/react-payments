@@ -5,4 +5,25 @@ export const DISPATCH_TYPE = {
   CHANGE_SECURITY_CODE: 'CHANGE_SECURITY_CODE',
   CHANGE_PASSWORD: 'CHANGE_PASSWORD',
   CHANGE_CARD_DESIGNATION: 'CHANGE_CARD_DESIGNATION',
+  RESET: 'RESET',
+};
+
+export const DEFAULT_CARD_INFO = {
+  cardNumber: {
+    firstColumn: '',
+    secondColumn: '',
+    thirdColumn: '',
+    forthColumn: '',
+  },
+  expirationDate: {
+    month: '',
+    year: '',
+  },
+  ownerName: '',
+  securityCode: '',
+  password: {
+    firstNumber: '',
+    secondNumber: '',
+  },
+  cardDesignation: '',
 };
