@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { CardInfoListContext } from '../context';
-import { Header, Title } from '../components/common/styled';
+import { Header, Title, GuideMessage } from '../components/common/styled';
 import GoBackButton from '../components/GoBackButton';
 import CardItem from '../components/CardItem';
 import Button from '../components/common/Button';
@@ -14,12 +14,8 @@ const Main = styled.main`
   align-items: center;
 `;
 
-const GuideMessage = styled.p`
-  margin: 130px auto 80px;
-
-  font-size: 22px;
-  line-height: 24px;
-  color: #383838;
+const GuideMessageWrapper = styled.div`
+  margin: 80px auto;
 `;
 
 const CardNickNameForm = styled.form`
@@ -58,9 +54,11 @@ export default function UpdateCardNickNamePage() {
         <Title>카드 닉네임 설정</Title>
       </Header>
       <Main>
-        <GuideMessage>
-          {locationState?.fromAddCardForm ? '카드등록이 완료되었습니다.' : '카드 닉네임을 수정하세요.'}
-        </GuideMessage>
+        <GuideMessageWrapper>
+          <GuideMessage>
+            {locationState?.fromAddCardForm ? '카드등록이 완료되었습니다.' : '카드 닉네임을 수정하세요.'}
+          </GuideMessage>
+        </GuideMessageWrapper>
         <CardInfoListContext.Consumer>
           {({ cardInfoList, updateNickNameByIndex }) => (
             <>

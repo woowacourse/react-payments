@@ -1,8 +1,10 @@
-import { Header, Title } from '../components/common/styled';
-import styled from 'styled-components';
-import CardItem from '../components/CardItem';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
 import { CardInfoListContext } from '../context';
+
+import CardItem from '../components/CardItem';
+import { GuideMessage, Header, Title } from '../components/common/styled';
 
 const CardListSection = styled.section`
   width: 100%;
@@ -55,6 +57,11 @@ const StyledAddCardButton = styled.button`
   color: #575757;
 `;
 
+const GuideMessageWrapper = styled.div`
+  margin: 80px auto;
+  text-align: center;
+`;
+
 function AddCardButton() {
   return (
     <Link to="/addCard">
@@ -90,6 +97,15 @@ export default function CardListPage() {
         <Title>보유카드</Title>
       </Header>
       <CardListSection>
+        <CardInfoListContext.Consumer>
+          {value =>
+            value.cardInfoList.length === 0 && (
+              <GuideMessageWrapper>
+                <GuideMessage>등록된 카드가 없습니다.</GuideMessage>
+              </GuideMessageWrapper>
+            )
+          }
+        </CardInfoListContext.Consumer>
         <CardList />
       </CardListSection>
     </>

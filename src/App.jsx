@@ -6,17 +6,8 @@ import CardListPage from './pages/CardListPage';
 import AddCardPage from './pages/AddCardPage';
 import UpdateCardNickNamePage from './pages/UpdateCardNickNamePage';
 
-const dummyCardInfoList = [
-  {
-    cardNumber: ['1234', '5678', '9012', '3456'],
-    holderName: 'SUN',
-    expireDate: ['12', '23'],
-    isComplete: true,
-  },
-];
-
 function App() {
-  const [cardInfoList, setCardInfoList] = useState(dummyCardInfoList);
+  const [cardInfoList, setCardInfoList] = useState([]);
 
   const addNewCard = newCardInfo => {
     let index;

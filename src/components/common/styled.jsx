@@ -12,4 +12,11 @@ const Title = styled.h1`
   color: #383838;
 `;
 
-export { Header, Title };
+const GuideMessage = styled.p`
+  margin: 0;
+  font-size: 22px;
+  line-height: 24px;
+  color: #383838;
+`;
+
+export { Header, Title, GuideMessage };
