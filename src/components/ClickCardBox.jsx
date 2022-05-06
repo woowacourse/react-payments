@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react';
+import { useContext, useCallback } from 'react';
 
 import * as S from 'styles.js';
 import { CardDispatchContext } from 'store/card/CardContext';

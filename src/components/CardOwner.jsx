@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import * as S from 'styles.js';
 import validator from 'lib/validations/validator';
 import ErrorMessage from 'components/ErrorMessage';

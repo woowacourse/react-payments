@@ -1,4 +1,3 @@
-import React from 'react';
 import * as S from 'styles.js';
 
 export default function PageTitle({ children, onClickPrev, hasPrevButton }) {

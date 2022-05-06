@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import * as S from 'styles.js';
 import { CardDispatchContext } from 'store/card/CardContext';
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import CardCompany from 'components/CardCompany';
 import ToastModal from 'components/ToastModal';
 import { CARD_COMPANIES } from 'lib/constants/cardDomain';

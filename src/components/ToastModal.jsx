@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import * as S from 'styles.js';
 import Dimmer from 'components/Dimmer';
 import { CardDispatchContext } from 'store/card/CardContext';
