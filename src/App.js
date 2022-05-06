@@ -1,9 +1,9 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import { DISPATCH_TYPE, DEFAULT_CARD_INFO, DEFAULT_ROUTE_INFO, PAGE } from './constants';
 import { CardContext, PageContext } from './context';
-import CardListPage from './components/Page/CardListPage';
-import CompleteAddCardPage from './components/Page/CompleteAddCardPage';
-import AddCardPage from './components/Page/AddCardPage';
+import CardListPage from './components/Pages/CardListPage';
+import CompleteAddCardPage from './components/Pages/CompleteAddCardPage';
+import AddCardPage from './components/Pages/AddCardPage';
 
 const cardInputReducer = (state, action) => {
   const { type, payload } = action;
