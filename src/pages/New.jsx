@@ -21,7 +21,7 @@ import { CARD_NUMBER, DUE_DATE, CVC } from "constant";
 import { isValidCvc, isValidOwnerLength } from "validation";
 import { ReactComponent as ArrowImage } from "assets/arrow.svg";
 import { PageWrapper, CardWrapper, FooterWrapper } from "./style";
-import { CardDispatchContext } from "../App";
+import { CardDispatchContext } from "context/CardListProvider";
 
 function New() {
   const navigate = useNavigate();
@@ -64,7 +64,6 @@ function New() {
 
   const handleSubmit = () => {
     alert("카드가 등록되었습니다.");
-    console.log({ cardNumbers, dueDate, owner, cvc, password, company });
     onCreate(cardNumbers, dueDate, owner, cvc, password, company);
   };
 

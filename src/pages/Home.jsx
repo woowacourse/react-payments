@@ -7,12 +7,12 @@ import {
   CardAddWrapper,
   CardScrollWrapper,
 } from "./style";
-import { CardStateContext } from "../App";
 import { useContext } from "react";
+import { CardListContext } from "context/CardListProvider";
 
 function Home() {
   const navigate = useNavigate();
-  const cardList = useContext(CardStateContext);
+  const cardList = useContext(CardListContext);
 
   return (
     <PageWrapper>
