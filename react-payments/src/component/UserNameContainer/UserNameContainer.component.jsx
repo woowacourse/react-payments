@@ -1,6 +1,6 @@
 import Label from "../common/Label/Label.component";
 import InputBox from "../common/InputBox/InputBox.component";
-import Input from "../common/Input/input.component";
+import Input from "../common/Input/Input.component";
 import { useContext } from "react";
 import { UserNameContext } from "../../provider/UserNameProvider";
 

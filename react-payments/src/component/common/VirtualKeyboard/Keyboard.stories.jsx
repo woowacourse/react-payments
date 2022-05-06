@@ -1,5 +1,5 @@
 import { action } from "@storybook/addon-actions";
-import VirtualKeyboard from "./keyboard.component";
+import VirtualKeyboard from "./Keyboard.component";
 
 export default {
   title: "VirtualKeyboard",

@@ -1,13 +1,13 @@
 import Label from "../common/Label/Label.component";
 import InputBox from "../common/InputBox/InputBox.component";
-import Input from "../common/Input/input.component";
-import MessageBox from "../common/MessageBox/messageBox.component";
+import Input from "../common/Input/Input.component";
+import MessageBox from "../common/MessageBox/MessageBox.component";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants";
 import { useContext } from "react";
 import { SecurityCodeContext } from "../../provider/SecurityCodeProvider";
-import HelpBox from "../common/HelpBox/helpBox.component";
+import HelpBox from "../common/HelpBox/HelpBox.component";
 import useKeyboardOn from "../../hooks/useKeyboardOn";
-import VirtualKeyboard from "../common/VirtualKeyboard/keyboard.component";
+import VirtualKeyboard from "../common/VirtualKeyboard/Keyboard.component";
 import styled from "styled-components";
 
 const SecurityCodeInputGroup = styled.div`

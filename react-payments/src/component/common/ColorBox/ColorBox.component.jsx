@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import Dot from "../Dot/dot.component";
+import Dot from "../Dot/Dot.component";
 
 const ColorBoxContainer = styled.div`
   height: 62px;

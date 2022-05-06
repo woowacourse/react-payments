@@ -1,4 +1,4 @@
-import Dot from "./dot.component";
+import Dot from "./Dot.component";
 
 export default {
   title: "Dot",

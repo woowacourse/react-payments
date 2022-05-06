@@ -1,5 +1,5 @@
 import CardTypeSelector from "../CardTypeSelector/CardTypeSelector";
-import Modal from "../common/Modal/modal.component";
+import Modal from "../common/Modal/Modal.component";
 
 const ColorBoxModal = (props) => {
   return (

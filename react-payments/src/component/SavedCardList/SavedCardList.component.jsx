@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { CardDataContext } from "../../provider/CardDataProvider";
-import Card from "../common/Card/card.component";
+import Card from "../common/Card/Card.component";
 
 const CardNameText = styled.p`
   font-weight: 700;

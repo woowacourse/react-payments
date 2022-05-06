@@ -1,4 +1,4 @@
-import Input from "../Input/input.component";
+import Input from "../Input/Input.component";
 import ConnectorBox from "../ConnectorBox/ConnectorBox.component";
 import InputBox from "./InputBox.component";
 

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { MIDDLE_CARD_NUMBER_LENGTH } from "../../../constants/index";
-import Dot from "../Dot/dot.component";
+import Dot from "../Dot/Dot.component";
 
 const CardNumberTextBox = styled.div`
   display: flex;

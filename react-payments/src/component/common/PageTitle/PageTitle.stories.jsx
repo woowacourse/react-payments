@@ -1,4 +1,4 @@
-import PageTitle from "./pageTitle.component";
+import PageTitle from "./PageTitle.component";
 
 export default {
   title: "PageTitle",

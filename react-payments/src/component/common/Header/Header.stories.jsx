@@ -1,5 +1,5 @@
 import LinkButton from "../LinkButton/LinkButton.component";
-import PageTitle from "../PageTitle/pageTitle.component";
+import PageTitle from "../PageTitle/PageTitle.component";
 import Header from "./Header.component";
 
 export default {

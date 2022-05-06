@@ -1,7 +1,7 @@
-import Input from "../common/Input/input.component";
+import Input from "../common/Input/Input.component";
 import InputBox from "../common/InputBox/InputBox.component";
 import ConnectorBox from "../common/ConnectorBox/ConnectorBox.component";
-import MessageBox from "../common/MessageBox/messageBox.component";
+import MessageBox from "../common/MessageBox/MessageBox.component";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants";
 import Label from "../common/Label/Label.component";
 import { useContext } from "react";

@@ -1,4 +1,4 @@
-import HelpBox from "./helpBox.component";
+import HelpBox from "./HelpBox.component";
 import { userEvent, within } from "@storybook/testing-library";
 
 export default {

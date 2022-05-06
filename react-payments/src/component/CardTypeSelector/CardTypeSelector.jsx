@@ -1,5 +1,5 @@
 import { cardInfos } from "../../constants";
-import ColorBox from "../common/ColorBox/colorBox.component";
+import ColorBox from "../common/ColorBox/ColorBox.component";
 import styled from "styled-components";
 import { useContext } from "react";
 import { CardTypeContext } from "../../provider/CardTypeProvider";

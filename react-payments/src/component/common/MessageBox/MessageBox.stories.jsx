@@ -1,4 +1,4 @@
-import MessageBox from "./messageBox.component";
+import MessageBox from "./MessageBox.component";
 
 export default {
   title: "MessageBox",
