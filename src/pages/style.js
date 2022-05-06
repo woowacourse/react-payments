@@ -32,7 +32,7 @@ const CardListWrapper = styled.div`
   align-items: center;
 `;
 
-const Test = styled.div`
+const CardScrollWrapper = styled.div`
   margin-top: 40px;
   height: 600px;
   overflow: scroll;
@@ -64,5 +64,5 @@ export {
   CardAddWrapper,
   FooterWrapper,
   CardInputWrapper,
-  Test,
+  CardScrollWrapper,
 };
