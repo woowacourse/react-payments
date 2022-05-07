@@ -16,7 +16,7 @@ function useGetCardInfo() {
     }
   }, []);
 
-  return { cardInfo };
+  return cardInfo;
 }
 
 export default useGetCardInfo;

@@ -1,10 +1,9 @@
 import Card from "components/add/Card";
 import Input from "components/common/Input";
-import { PATH } from "constant/path";
 import { CardInfoContext } from "contexts/CardInfoProvider";
+import useCardInfoForm from "hooks/useCardForm";
 import useGetCardInfo from "hooks/useGetCardInfo";
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { CardInfo } from "types/cardInfo";
 
 interface CompleteProps {
@@ -13,31 +12,9 @@ interface CompleteProps {
 }
 
 export default function Complete({ addCard, editCard }: CompleteProps) {
-  const navigate = useNavigate();
-  const { resetCardInfo, onChangeCardName } = useContext(CardInfoContext);
-  const { cardInfo } = useGetCardInfo();
-
-  const requestPattern = {
-    add: {
-      requestFunction: addCard as any,
-      requestBody: [cardInfo],
-    },
-    edit: {
-      requestFunction: editCard as any,
-      requestBody: [cardInfo.id, { cardName: cardInfo.cardName }],
-    },
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const { requestFunction, requestBody } = requestPattern[cardInfo.id ? "edit" : "add"];
-
-    await requestFunction(...requestBody);
-
-    resetCardInfo();
-    navigate(PATH.HOME);
-  };
+  const { onChangeCardName } = useContext(CardInfoContext);
+  const cardInfo = useGetCardInfo();
+  const handleSubmit = useCardInfoForm(cardInfo, addCard, editCard);
 
   return (
     <div className="flex-column-center">
