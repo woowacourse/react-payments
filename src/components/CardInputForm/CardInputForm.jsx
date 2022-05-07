@@ -66,8 +66,8 @@ function CardInputForm({ children }) {
     ]);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
     try {
       checkCardInfo({ number1, number2, number3, number4, month, year, cvc });

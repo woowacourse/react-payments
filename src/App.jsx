@@ -16,6 +16,7 @@ const initialState = {
   cvc: '',
   password1: '',
   password2: '',
+  nickname: '',
 };
 
 const reducer = (state, action) => {
@@ -49,6 +50,11 @@ const reducer = (state, action) => {
         ...state,
         password1: action.cardPasswords[0],
         password2: action.cardPasswords[1],
+      };
+    case 'SET_CARD_NICKNAME':
+      return {
+        ...state,
+        nickname: action.nickname,
       };
     default:
       return state;
