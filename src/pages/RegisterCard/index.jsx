@@ -26,7 +26,7 @@ const RegisterCard = () => {
       body: JSON.stringify({ ...state, alias }),
       headers: { 'Content-Type': 'application/json' },
     }).then(() => {
-      navigate('/');
+      navigate(PATH.HOME);
     });
   };
 
