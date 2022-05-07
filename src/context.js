@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const CardInfoListContext = React.createContext({
+export const CardListContext = React.createContext({
   cardList: [],
   addNewCard: () => {},
   updateNickNameByIndex: () => {},

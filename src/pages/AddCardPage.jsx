@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import useInput from '../hooks/useInput';
 import useInputArray from '../hooks/useInputArray';
 
-import { CardInfoListContext } from '../context';
+import { CardListContext } from '../context';
 import {
   CardExpireDateInput,
   CardHolderNameInput,
@@ -59,7 +59,7 @@ export default function AddCardPage() {
     ADD_CARD_FORM_CONDITION.PASSWORD_LENGTH
   );
 
-  const { addNewCard } = useContext(CardInfoListContext);
+  const { addNewCard } = useContext(CardListContext);
   const navigate = useNavigate();
 
   const handleCardInfoSubmit = e => {

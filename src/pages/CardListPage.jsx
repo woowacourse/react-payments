@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CardInfoListContext } from '../context';
+import { CardListContext } from '../context';
 
 import CardItem from '../components/CardItem';
 import { GuideMessage, Header, Title } from '../components/common/styled';
@@ -71,7 +71,7 @@ const GuideMessageWrapper = styled.div`
 `;
 
 export default function CardListPage() {
-  const { cardList } = useContext(CardInfoListContext);
+  const { cardList } = useContext(CardListContext);
 
   function AddCardButton() {
     return (

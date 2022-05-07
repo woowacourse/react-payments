@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { Route, Routes } from 'react-router-dom';
 
-import { CardInfoListContext } from './context';
+import { CardListContext } from './context';
 import Storage from './Storage';
 
 import CardListPage from './pages/CardListPage';
@@ -52,7 +52,7 @@ function App() {
 
   return (
     <AppContainer>
-      <CardInfoListContext.Provider value={{ cardList, addNewCard, updateNickNameByIndex }}>
+      <CardListContext.Provider value={{ cardList, addNewCard, updateNickNameByIndex }}>
         <Routes>
           <Route path="/" element={<CardListPage />} />
           <Route path="/addCard" element={<AddCardPage />} />
@@ -60,7 +60,7 @@ function App() {
           <Route path="/error" element={<WrongAccessPage />} />
           <Route path="*" element={<WrongAccessPage />} />
         </Routes>
-      </CardInfoListContext.Provider>
+      </CardListContext.Provider>
     </AppContainer>
   );
 }

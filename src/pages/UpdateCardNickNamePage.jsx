@@ -3,7 +3,7 @@ import { useEffect, useContext } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CardInfoListContext } from '../context';
+import { CardListContext } from '../context';
 import { Header, Title, GuideMessage } from '../components/common/styled';
 import GoBackButton from '../components/GoBackButton';
 import CardItem from '../components/CardItem';
@@ -46,7 +46,7 @@ const ButtonWrapper = styled.div`
 export default function UpdateCardNickNamePage() {
   const { id: cardIndex } = useParams();
   const { state: locationState } = useLocation();
-  const { cardList, updateNickNameByIndex } = useContext(CardInfoListContext);
+  const { cardList, updateNickNameByIndex } = useContext(CardListContext);
   const navigate = useNavigate();
 
   useEffect(() => {
