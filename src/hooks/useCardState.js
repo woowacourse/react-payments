@@ -20,7 +20,10 @@ function reducer(state, { type, contents }) {
     case 'cardNumber':
       {
         const { index, value } = contents;
-        newState.cardNumber[index] = cardNumberFormatter(value);
+        const newCardNumber = [...newState.cardNumber];
+
+        newCardNumber[index] = cardNumberFormatter(value);
+        newState.cardNumber = newCardNumber;
       }
       break;
 
