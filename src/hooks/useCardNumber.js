@@ -29,7 +29,12 @@ const useCardNumber = () => {
     });
   };
 
-  return { cardNumbers, handleChangeCardNumber, cardNumberInputRefs };
+  return {
+    cardNumbers,
+    setCardNumbers,
+    handleChangeCardNumber,
+    cardNumberInputRefs,
+  };
 };
 
 export default useCardNumber;

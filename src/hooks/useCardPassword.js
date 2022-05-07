@@ -18,7 +18,12 @@ const useCardPassword = () => {
     setPassword({ ...password, [name]: value });
   };
 
-  return { password, handleChangePassword, secondPasswordInputRef };
+  return {
+    password,
+    setPassword,
+    handleChangePassword,
+    secondPasswordInputRef,
+  };
 };
 
 export default useCardPassword;

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CardListContext, CardDispatchContext } from "context/CardListProvider";
 import Card from "components/common/Card";
@@ -19,7 +19,7 @@ function Finish() {
   const { id } = useParams();
   const cardList = useContext(CardListContext);
   const { onEditNickname } = useContext(CardDispatchContext);
-  const [nickname, handleChangeNickname] = useInput({
+  const [nickname, setNickname, handleChangeNickname] = useInput({
     initialValue: "",
     validator: isValidNickname,
   });

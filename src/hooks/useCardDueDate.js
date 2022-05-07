@@ -30,7 +30,7 @@ const useCardDueDate = () => {
     setDueDate({ ...dueDate, [name]: value });
   };
 
-  return { dueDate, handleChangeDueDate, yearInputRef, error };
+  return { dueDate, setDueDate, handleChangeDueDate, yearInputRef, error };
 };
 
 export default useCardDueDate;

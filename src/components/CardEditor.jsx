@@ -25,26 +25,45 @@ import { CardDispatchContext } from "context/CardListProvider";
 
 function CardEditor({ isEdit, originData }) {
   const navigate = useNavigate();
-  const { cardNumbers, handleChangeCardNumber, cardNumberInputRefs } =
-    useCardNumber();
-  const { dueDate, handleChangeDueDate, yearInputRef, error } =
+  const {
+    cardNumbers,
+    setCardNumbers,
+    handleChangeCardNumber,
+    cardNumberInputRefs,
+  } = useCardNumber();
+  const { dueDate, setDueDate, handleChangeDueDate, yearInputRef, error } =
     useCardDueDate();
-  const [owner, handleChangeOwner] = useInput({
+  const [owner, setOwner, handleChangeOwner] = useInput({
     initialValue: "",
     validator: isValidOwnerLength,
   });
-  const [cvc, handleChangeCvc] = useInput({
+  const [cvc, setCvc, handleChangeCvc] = useInput({
     initialValue: "",
     validator: isValidCvc,
   });
-  const { password, handleChangePassword, secondPasswordInputRef } =
-    useCardPassword();
+  const {
+    password,
+    setPassword,
+    handleChangePassword,
+    secondPasswordInputRef,
+  } = useCardPassword();
   const [allRequired, setAllRequired] = useState(false);
   const [company, setCompany] = useState({ color: "", name: "" });
   const { modalVisible, openModal, closeModal } = useModal();
 
   const { onCreate, onEditCard } = useContext(CardDispatchContext);
   const cardId = useRef(Date.now());
+
+  useEffect(() => {
+    if (isEdit) {
+      setCardNumbers(originData.cardNumbers);
+      setDueDate(originData.dueDate);
+      setCompany(originData.company);
+      setPassword(originData.password);
+      setOwner(originData.owner);
+      setCvc(originData.cvc);
+    }
+  }, [isEdit, originData]);
 
   useEffect(() => {
     setAllRequired(

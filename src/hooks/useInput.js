@@ -9,7 +9,7 @@ const useInput = ({ initialValue, validator }) => {
     setValue(target.value);
   };
 
-  return [value, handler];
+  return [value, setValue, handler];
 };
 
 export default useInput;
