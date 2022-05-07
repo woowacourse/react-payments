@@ -1,21 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { CardInfoListContext } from './context';
+import Storage from './Storage';
+
 import CardListPage from './pages/CardListPage';
 import AddCardPage from './pages/AddCardPage';
 import UpdateCardNickNamePage from './pages/UpdateCardNickNamePage';
 import WrongAccessPage from './pages/WrongAccessPage';
 
 function App() {
-  const [cardInfoList, setCardInfoList] = useState([]);
+  const [cardInfoList, setCardInfoList] = useState(Storage.cardInfoList);
 
   const addNewCard = newCardInfo => {
     let index;
+
     setCardInfoList(prevCardInfoList => {
       const newCardInfoList = prevCardInfoList.slice();
       newCardInfoList.push(newCardInfo);
       index = newCardInfoList.length - 1;
+
+      Storage.saveCardList(newCardInfoList);
       return newCardInfoList;
     });
     return index;
@@ -24,9 +29,12 @@ function App() {
   const updateNickNameByIndex = (index, nickName) => {
     const updatedCardInfo = { ...cardInfoList[index] };
     updatedCardInfo.nickName = nickName;
+
     setCardInfoList(prevCardInfoList => {
       const newCardInfoList = prevCardInfoList.slice();
       newCardInfoList.splice(index, 1, updatedCardInfo);
+
+      Storage.saveCardList(newCardInfoList);
       return newCardInfoList;
     });
   };
