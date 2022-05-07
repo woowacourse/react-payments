@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import validator from 'lib/validations';
 import { CARD_COMPANIES } from 'lib/constants';
 import Card from 'components/Card';
@@ -15,7 +14,7 @@ import CardListModal from 'containers/CardListModal';
 import TipModal from 'containers/TipModal';
 import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import ClickCardBox from 'common/ClickCardBox';
-import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
+import { CardStateContext, CardDispatchContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import Container from 'components/Container';
 import CardConfirmModal from 'containers/CardConfirmModal';
@@ -31,9 +30,7 @@ function AddCard() {
     cardCompanyErrorMessage,
   } = useContext(CardStateContext);
 
-  const dispatch = useContext(CardDispatchContext);
-
-  const [IsClickedNextButton, setIsClickedNextButton] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [cardData, setCardData] = useState();
 
   const navigate = useNavigate();
@@ -58,6 +55,12 @@ function AddCard() {
     }
   };
 
+  const dispatch = useContext(CardDispatchContext);
+
+  const onClickCard = useCallback(() => {
+    dispatch({ type: TYPES.SET_LIST_MODAL_FLAG, flag: true });
+  }, []);
+
   const onClickNextButton = () => {
     const newCardData = {
       cardName: CARD_COMPANIES[cardCompanyIndex].NAME,
@@ -69,23 +72,11 @@ function AddCard() {
       cardPassword,
     };
     setCardData(newCardData);
-    setIsClickedNextButton(true);
-  };
-
-  const onConfirmCard = (event, nickname) => {
-    event.preventDefault();
-    const newCardData = {
-      ...cardData,
-      cardNickname: nickname,
-      id: uuidv4(),
-    };
-    dispatch({ type: TYPES.SUBMIT_CARD, newCardData });
-
-    navigate('/card-list');
+    setIsModalOpen(true);
   };
 
   const onCloseModal = () => {
-    setIsClickedNextButton(false);
+    setIsModalOpen(false);
   };
 
   return (
@@ -93,7 +84,7 @@ function AddCard() {
       <PageTitle hasPrevButton={true} onClickPrev={onClickPrev}>
         카드 추가
       </PageTitle>
-      <ClickCardBox>
+      <ClickCardBox onClick={onClickCard}>
         <Card
           cardNumber={cardNumber}
           cardExpiration={cardExpiration}
@@ -120,13 +111,9 @@ function AddCard() {
       </NextButton>
       <CardListModal />
       <TipModal />
-      {IsClickedNextButton && (
+      {isModalOpen && (
         <Container>
-          <CardConfirmModal
-            cardData={cardData}
-            onConfirmCard={onConfirmCard}
-            onCloseModal={onCloseModal}
-          />
+          <CardConfirmModal cardData={cardData} onCloseModal={onCloseModal} />
         </Container>
       )}
     </Container>

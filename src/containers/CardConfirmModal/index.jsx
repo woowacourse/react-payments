@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import PageTitle from 'components/PageTitle';
 import Card from 'components/Card';
 import Form from 'components/Form';
@@ -8,12 +8,31 @@ import FlexColumnBox from 'components/FlexColumnBox';
 import styled from 'styled-components';
 import Modal from 'components/Modal';
 import Backdrop from 'components/Backdrop';
+import { TYPES } from 'store/card/types';
+import { CardDispatchContext } from 'store/card/CardContext';
+import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
-export default function CardConfirmModal({ cardData, onConfirmCard, onCloseModal }) {
+export default function CardConfirmModal({ cardData, onCloseModal }) {
   const [nickname, setNickname] = useState('');
+  const dispatch = useContext(CardDispatchContext);
+  const navigate = useNavigate();
 
-  const onChangeInput = (e) => {
+  const onChangeNicknameInput = (e) => {
     setNickname(e.target.value);
+  };
+
+  const onSubmitForm = (event) => {
+    event.preventDefault();
+    const newCardData = {
+      ...cardData,
+      cardNickname: nickname,
+      id: uuidv4(),
+    };
+    dispatch({ type: TYPES.SUBMIT_CARD, newCardData });
+
+    onCloseModal();
+    navigate('/card-list');
   };
 
   return (
@@ -22,10 +41,10 @@ export default function CardConfirmModal({ cardData, onConfirmCard, onCloseModal
       {ReactDOM.createPortal(
         <Modal>
           <PageTitle hasPrevButton={true} onClickPrev={onCloseModal}>
-            카드 추가
+            카드 별칭
           </PageTitle>
           <FlexColumnBox>
-            <Styled.TitleText>카드 정보를 최종 확인해주세요.</Styled.TitleText>
+            <Styled.TitleText>카드 별칭을 입력해주세요.</Styled.TitleText>
             <Card
               cardName={cardData.cardName}
               cardColor={cardData.cardColor}
@@ -34,10 +53,10 @@ export default function CardConfirmModal({ cardData, onConfirmCard, onCloseModal
               cardOwner={cardData.cardOwner}
               isSmall={false}
             />
-            <Form onSubmitForm={onConfirmCard} payload={nickname}>
+            <Form onSubmitForm={onSubmitForm} payload={nickname}>
               <Styled.UnderlineInput
-                onChange={onChangeInput}
-                placeholder="카드 별칭을 입력해주세요."
+                onChange={onChangeNicknameInput}
+                placeholder="카드 별칭"
                 type="text"
               />
               <NextButton disabled={false} color={cardData.cardColor}>
