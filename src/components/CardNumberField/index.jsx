@@ -9,6 +9,8 @@ import useAutoFocus from 'hooks/useAutoFocus'
 import Input from 'components/common/Input'
 import { GrayInputWrapper } from 'components/common/Input/style'
 
+import { CARD_NUMBER } from 'constant'
+
 function CardNumberField() {
   const {
     cardInfo: { cardNumber },
@@ -18,7 +20,9 @@ function CardNumberField() {
     handleCardNumberChange,
   } = useContext(CardInfoContext)
 
-  const { refList, moveToNextInput } = useAutoFocus({ maxLength: 4 })
+  const { refList, moveToNextInput } = useAutoFocus({
+    maxLength: CARD_NUMBER.UNIT_LENGTH,
+  })
 
   const handleInputChange = (e) => {
     handleCardNumberChange(e)
@@ -34,7 +38,7 @@ function CardNumberField() {
               type={key === 'first' || key === 'second' ? 'text' : 'password'}
               value={value}
               dataset={key}
-              maxLength={4}
+              maxLength={CARD_NUMBER.UNIT_LENGTH}
               onChange={handleInputChange}
               ref={(node) => {
                 refList.current[index] = node

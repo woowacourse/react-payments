@@ -43,6 +43,12 @@ const CARD_COMPANY = {
   썬: '#FBCD58',
 }
 
+const ERROR_MESSAGE = {
+  EXISTING_CARD_NUMBER: '이미 존재하는 카드번호입니다',
+  INVALID_MONTH: `${MONTH.MIN}~${MONTH.MAX}사이의 숫자를 입력해주세요`,
+  INVALID_YEAR: '현재 년도 이상의 값을 입력해주세요',
+}
+
 export {
   CARD_NUMBER,
   DUE_DATE,
@@ -52,4 +58,5 @@ export {
   MONTH,
   COLORS,
   CARD_COMPANY,
+  ERROR_MESSAGE,
 }

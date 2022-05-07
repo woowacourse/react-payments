@@ -7,6 +7,8 @@ import Field from 'components/common/Field'
 import Input from 'components/common/Input'
 import { GrayInputWrapper } from 'components/common/Input/style'
 
+import { CVC } from 'constant'
+
 function CVCField() {
   const {
     cardInfo: { cvc },
@@ -22,7 +24,7 @@ function CVCField() {
         <Input
           type="password"
           value={cvc}
-          maxLength={3}
+          maxLength={CVC.UNIT_LENGTH}
           onChange={handleCvcChange}
         />
       </GrayInputWrapper>

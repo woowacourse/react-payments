@@ -21,7 +21,7 @@ function CardListPage() {
 
   return (
     <PageWrapper>
-      <Header>보유카드</Header>
+      <Header>보유카드({cardList.length}개)</Header>
       <CenterItem>
         <CardListWrapper>
           {cardList.map(([key, value]) => (

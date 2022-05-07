@@ -9,13 +9,17 @@ import useAutoFocus from 'hooks/useAutoFocus'
 import { GrayInputWrapper } from 'components/common/Input/style'
 import { Dot } from 'components/PasswordField/style'
 
+import { PASSWORD } from 'constant'
+
 function PasswordField() {
   const {
     cardInfo: { password },
     handlePasswordChange,
   } = useContext(CardInfoContext)
 
-  const { refList, moveToNextInput } = useAutoFocus({ maxLength: 1 })
+  const { refList, moveToNextInput } = useAutoFocus({
+    maxLength: PASSWORD.UNIT_LENGTH,
+  })
 
   const handleInputChange = (e) => {
     handlePasswordChange(e)
@@ -29,7 +33,7 @@ function PasswordField() {
           type="password"
           dataset="first"
           value={password.first}
-          maxLength={1}
+          maxLength={PASSWORD.UNIT_LENGTH}
           onChange={handleInputChange}
           ref={(node) => {
             refList.current[0] = node
@@ -41,7 +45,7 @@ function PasswordField() {
           type="password"
           dataset="second"
           value={password.second}
-          maxLength={1}
+          maxLength={PASSWORD.UNIT_LENGTH}
           onChange={handleInputChange}
           ref={(node) => {
             refList.current[1] = node

@@ -7,7 +7,7 @@ import {
   isInvalidPassword,
 } from 'validation'
 
-import { CARD_NUMBER, DUE_DATE, CVC } from 'constant'
+import { CARD_NUMBER, DUE_DATE, CVC, MONTH, ERROR_MESSAGE } from 'constant'
 
 const CardInfoContext = React.createContext()
 
@@ -34,12 +34,12 @@ export function CardInfoProvider({ children }) {
   useEffect(() => {
     setIsFieldFulfilled(
       cardInfo.company &&
-        cardInfo.cardNumber.first.length === CARD_NUMBER.UNIT_LENGTH &&
-        cardInfo.cardNumber.second.length === CARD_NUMBER.UNIT_LENGTH &&
-        cardInfo.cardNumber.third.length === CARD_NUMBER.UNIT_LENGTH &&
-        cardInfo.cardNumber.fourth.length === CARD_NUMBER.UNIT_LENGTH &&
-        cardInfo.dueDate.month.length === DUE_DATE.UNIT_LENGTH &&
-        cardInfo.dueDate.year.length === DUE_DATE.UNIT_LENGTH &&
+        Object.values(cardInfo.cardNumber).every(
+          (number) => number.length === CARD_NUMBER.UNIT_LENGTH
+        ) &&
+        Object.values(cardInfo.dueDate).every(
+          (number) => number.length === DUE_DATE.UNIT_LENGTH
+        ) &&
         cardInfo.cvc.length === CVC.UNIT_LENGTH &&
         cardInfo.password.first &&
         cardInfo.password.second
@@ -75,7 +75,7 @@ export function CardInfoProvider({ children }) {
             error: Object.keys(cardList).includes(
               first + second + third + value
             ),
-            errorMessage: '이미 존재하는 카드번호입니다',
+            errorMessage: ERROR_MESSAGE.EXISTING_CARD_NUMBER,
           },
         }
       })
@@ -95,8 +95,8 @@ export function CardInfoProvider({ children }) {
         return {
           ...prev,
           dueDate: {
-            error: value < 1 || value > 12,
-            errorMessage: '1~12사이의 숫자를 입력해주세요',
+            error: value < MONTH.MIN || value > MONTH.MAX,
+            errorMessage: ERROR_MESSAGE.INVALID_MONTH,
           },
         }
       })
@@ -107,7 +107,7 @@ export function CardInfoProvider({ children }) {
           ...prev,
           dueDate: {
             error: value < currentYear,
-            errorMessage: '현재 년도 이상의 값을 입력해주세요',
+            errorMessage: ERROR_MESSAGE.INVALID_YEAR,
           },
         }
       })

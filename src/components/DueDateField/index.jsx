@@ -8,6 +8,8 @@ import CardInfoContext from 'store/cardInfo-context'
 
 import Input from 'components/common/Input'
 import { GrayInputWrapper } from 'components/common/Input/style'
+
+import { DUE_DATE } from 'constant'
 function DueDateField() {
   const {
     cardInfo: { dueDate },
@@ -17,7 +19,9 @@ function DueDateField() {
     handleDueDateChange,
   } = useContext(CardInfoContext)
 
-  const { refList, moveToNextInput } = useAutoFocus({ maxLength: 2 })
+  const { refList, moveToNextInput } = useAutoFocus({
+    maxLength: DUE_DATE.UNIT_LENGTH,
+  })
 
   const handleInputChange = (e) => {
     handleDueDateChange(e)
@@ -30,7 +34,7 @@ function DueDateField() {
         <Input
           value={dueDate.month}
           dataset="month"
-          maxLength={2}
+          maxLength={DUE_DATE.UNIT_LENGTH}
           onChange={handleInputChange}
           ref={(node) => {
             refList.current[0] = node
@@ -39,7 +43,7 @@ function DueDateField() {
         <Input
           value={dueDate.year}
           dataset="year"
-          maxLength={2}
+          maxLength={DUE_DATE.UNIT_LENGTH}
           onChange={handleDueDateChange}
           ref={(node) => {
             refList.current[1] = node
