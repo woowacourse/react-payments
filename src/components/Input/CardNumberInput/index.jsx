@@ -19,6 +19,7 @@ const CardNumberInput = ({
         value={firstCardNumber}
         onChange={onChangeFirstCardNumber}
         maxLength={4}
+        data-testid="card-number-input-1"
       />
       <Styled.DashContainer>-</Styled.DashContainer>
       <Input
@@ -26,6 +27,7 @@ const CardNumberInput = ({
         value={secondCardNumber}
         onChange={onChangeSecondCardNumber}
         maxLength={4}
+        data-testid="card-number-input-2"
       />
       <Styled.DashContainer>-</Styled.DashContainer>
       <Input
@@ -34,6 +36,7 @@ const CardNumberInput = ({
         value={thirdCardNumber}
         onChange={onChangeThirdCardNumber}
         maxLength={4}
+        data-testid="card-number-input-3"
       />
       <Styled.DashContainer>-</Styled.DashContainer>
       <Input
@@ -42,6 +45,7 @@ const CardNumberInput = ({
         value={fourthCardNumber}
         onChange={onChangeFourthCardNumber}
         maxLength={4}
+        data-testid="card-number-input-4"
       />
     </Styled.Container>
   );

@@ -16,6 +16,7 @@ const ExpiredDateInput = ({
         maxLength={2}
         value={expiredMonth}
         onChange={onChangeExpiredMonth}
+        data-testid="expired-month-input"
       />
       <Styled.SlashContainer>/</Styled.SlashContainer>
       <Input
@@ -24,6 +25,7 @@ const ExpiredDateInput = ({
         maxLength={2}
         value={expiredYear}
         onChange={onChangeExpiredYear}
+        data-testid="expired-year-input"
       />
     </Styled.Container>
   );

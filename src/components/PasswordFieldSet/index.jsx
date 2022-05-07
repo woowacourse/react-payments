@@ -62,6 +62,7 @@ const PasswordFieldSet = () => {
             maxLength={1}
             value={firstPassword}
             onChange={onChangeFirstPassword}
+            data-testid="password-input-1"
           />
           <Input
             type="password"
@@ -70,6 +71,7 @@ const PasswordFieldSet = () => {
             maxLength={1}
             value={secondPassword}
             onChange={onChangeSecondPassword}
+            data-testid="password-input-2"
           />
           <Styled.DotContainer>•</Styled.DotContainer>
           <Styled.DotContainer>•</Styled.DotContainer>

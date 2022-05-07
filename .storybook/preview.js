@@ -1,6 +1,7 @@
 import { addDecorator } from '@storybook/react';
 import { GlobalStyle } from '../src/App';
 import { CardFormProvider } from '../src/context/card-form-context';
+import { MemoryRouter } from 'react-router-dom';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -15,6 +16,8 @@ export const parameters = {
 addDecorator((story) => (
   <>
     <GlobalStyle />
-    <CardFormProvider>{story()}</CardFormProvider>
+    <MemoryRouter>
+      <CardFormProvider>{story()}</CardFormProvider>
+    </MemoryRouter>
   </>
 ));

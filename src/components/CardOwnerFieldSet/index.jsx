@@ -48,6 +48,7 @@ const CardOwnerFieldSet = () => {
             maxLength={30}
             value={ownerName}
             onChange={onChangeOwnerName}
+            data-testid="card-owner-input"
           />
         }
       </FieldSet>

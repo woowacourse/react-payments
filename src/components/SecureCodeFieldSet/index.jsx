@@ -40,6 +40,7 @@ const SecureCodeFieldSet = () => {
             maxLength={3}
             value={secureCode}
             onChange={onChangeSecureCode}
+            data-testid="secure-code-input"
           />
           <AskMarkTooltip />
         </Styled.Container>
