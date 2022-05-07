@@ -1,4 +1,4 @@
-import LinkButton from "./linkButton.component";
+import LinkButton from "component/common/LinkButton/LinkButton.component";
 
 export default {
   title: "Common/LinkButton",

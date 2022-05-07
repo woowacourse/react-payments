@@ -1,4 +1,4 @@
-import CardPreview from "./CardPreview.component";
+import CardPreview from "component/CardPreview/CardPreview.component";
 
 export default {
   title: "CardPreview",

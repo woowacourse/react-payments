@@ -1,4 +1,4 @@
-import ExpireDateContainer from "./ExpireDateContainer.component";
+import ExpireDateContainer from "component/ExpireDateContainer/ExpireDateContainer.component";
 
 export default {
   title: "ExpireDateContainer",

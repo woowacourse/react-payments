@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 const KeyBoard = styled.div`
   background: ${({ theme }) => theme.colors.keyboard};
   border-radius: 4px;

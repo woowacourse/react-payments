@@ -1,4 +1,4 @@
-import CardPasswordContainer from "./CardPasswordContainer.component";
+import CardPasswordContainer from "component/CardPasswordContainer/CardPasswordContainer.component";
 
 export default {
   title: "CardPasswordContainer",

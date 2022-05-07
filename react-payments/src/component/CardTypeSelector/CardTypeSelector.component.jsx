@@ -1,8 +1,10 @@
-import { cardInfos } from "../../constants";
-import ColorBox from "../common/ColorBox/colorBox.component";
 import styled from "styled-components";
 import { useContext } from "react";
-import { CardTypeContext } from "../../provider/CardTypeProvider";
+
+import ColorBox from "component/common/ColorBox/ColorBox.component";
+
+import { cardInfos } from "constants";
+import { CardTypeContext } from "provider/CardTypeProvider";
 
 const ColorTypeSelectorContainer = styled.div`
   display: grid;

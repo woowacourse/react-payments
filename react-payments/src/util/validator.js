@@ -1,4 +1,4 @@
-import { MAX_LENGTH, MAX_MONTH } from "../constants";
+import { MAX_LENGTH, MAX_MONTH } from "constants";
 
 export const isOverMaxLength = (target, maxLength) =>
   target.value.length > maxLength;

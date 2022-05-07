@@ -1,4 +1,4 @@
-import CardNumberContainer from "./CardNumberContainer.component";
+import CardNumberContainer from "component/CardNumberContainer/CardNumberContainer.component";
 
 export default {
   title: "CardNumberContainer",

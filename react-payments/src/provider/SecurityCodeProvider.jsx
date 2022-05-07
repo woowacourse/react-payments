@@ -1,7 +1,8 @@
 import { createContext, useState } from "react";
-import { MAX_LENGTH } from "../constants";
-import useReady from "../hooks/useReady";
-import { isInValidSecurityCode } from "../util/validator";
+
+import { MAX_LENGTH } from "constants";
+import useReady from "hooks/useReady";
+import { isInValidSecurityCode } from "util/validator";
 
 export const SecurityCodeContext = createContext();
 

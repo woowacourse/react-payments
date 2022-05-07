@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { HELP_MESSAGE } from "../../../constants/index";
+
+import { HELP_MESSAGE } from "constants/index";
 
 const HelpBoxContainer = styled.div`
   position: relative;

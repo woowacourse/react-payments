@@ -1,7 +1,8 @@
-import SavedCardList from "./SavedCardList";
-import { withReactContext } from "storybook-react-context";
-import { CardDataContext } from "../../provider/CardDataProvider";
 import { action } from "@storybook/addon-actions";
+import { withReactContext } from "storybook-react-context";
+
+import SavedCardList from "component/SavedCardList/SavedCardList.component";
+import { CardDataContext } from "provider/CardDataProvider";
 
 export default {
   title: "SavedCardList",

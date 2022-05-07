@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router";
 import "./App.css";
-import CardAddPage from "./pages/CardAddPage/CardAddPage.component";
-import CardRegisterPage from "./pages/CardRegisterPage/CardRegisterPage.pages";
-import HomePage from "./pages/HomePage/HomePage.pages";
+import CardAddPage from "pages/CardAddPage/CardAddPage.pages";
+import CardRegisterPage from "pages/CardRegisterPage/CardRegisterPage.pages";
+import HomePage from "pages/HomePage/HomePage.pages";
 
 function App() {
   return (

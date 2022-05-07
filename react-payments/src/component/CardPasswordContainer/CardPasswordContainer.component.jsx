@@ -1,14 +1,16 @@
-import Label from "../common/Label/Label.component";
-import InputBox from "../common/InputBox/InputBox.component";
-import Input from "../common/Input/input.component";
-import MessageBox from "../common/MessageBox/messageBox.component";
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants";
-import Dot from "../common/Dot/dot.component";
-import styled from "styled-components";
 import { useContext } from "react";
-import { CardPasswordContext } from "../../provider/CardPasswordProvider";
-import useKeyboardOn from "../../hooks/useKeyboardOn";
-import VirtualKeyboard from "../common/VirtualKeyboard/keyboard.component";
+import styled from "styled-components";
+
+import Label from "component/common/Label/Label.component";
+import InputBox from "component/common/InputBox/InputBox.component";
+import Input from "component/common/Input/Input.component";
+import MessageBox from "component/common/MessageBox/MessageBox.component";
+import Dot from "component/common/Dot/Dot.component";
+import VirtualKeyboard from "component/common/VirtualKeyboard/VirtualKeyboard.component";
+
+import useKeyboardOn from "hooks/useKeyboardOn";
+import { CardPasswordContext } from "provider/CardPasswordProvider";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants";
 
 const PasswordInputGroup = styled.div`
   display: flex;

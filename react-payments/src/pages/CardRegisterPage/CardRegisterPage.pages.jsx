@@ -1,23 +1,26 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import CardNameInput from "../../component/CardNameInput/CardNameInput.component";
-import Card from "../../component/common/Card/card.component";
-import LinkButton from "../../component/common/LinkButton/linkButton.component";
-import MessageBox from "../../component/common/MessageBox/messageBox.component";
-import PageContainer from "../../component/common/PageContainer/PageContainer.component";
-import PageTitle from "../../component/common/PageTitle/pageTitle.component";
-import { ALERT_MEESAGE, ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants";
-import useReady from "../../hooks/useReady";
-import { CardDataContext } from "../../provider/CardDataProvider";
-import { CardNumberContext } from "../../provider/CardNumberProvider";
-import { CardPasswordContext } from "../../provider/CardPasswordProvider";
-import { CardTypeContext } from "../../provider/CardTypeProvider";
-import { ExpireDateContext } from "../../provider/ExpireDateProvider";
-import { SecurityCodeContext } from "../../provider/SecurityCodeProvider";
-import { UserNameContext } from "../../provider/UserNameProvider";
-import { isDuplicatedCardName, isInvalidCardName } from "../../util/validator";
-import { registerCard } from "../../api/cardApi";
+
+import CardNameInput from "component/CardNameInput/CardNameInput.component";
+import Card from "component/common/Card/Card.component";
+import LinkButton from "component/common/LinkButton/LinkButton.component";
+import MessageBox from "component/common/MessageBox/MessageBox.component";
+import PageContainer from "component/common/PageContainer/PageContainer.component";
+import PageTitle from "component/common/PageTitle/PageTitle.component";
+
+import { CardDataContext } from "provider/CardDataProvider";
+import { CardNumberContext } from "provider/CardNumberProvider";
+import { CardPasswordContext } from "provider/CardPasswordProvider";
+import { CardTypeContext } from "provider/CardTypeProvider";
+import { ExpireDateContext } from "provider/ExpireDateProvider";
+import { SecurityCodeContext } from "provider/SecurityCodeProvider";
+import { UserNameContext } from "provider/UserNameProvider";
+
+import { isDuplicatedCardName, isInvalidCardName } from "util/validator";
+import { registerCard } from "api/cardApi";
+import { ALERT_MEESAGE, ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants";
+import useReady from "hooks/useReady";
 
 const CardRegisterGroup = styled.div`
   display: flex;

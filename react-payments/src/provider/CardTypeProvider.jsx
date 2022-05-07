@@ -1,7 +1,8 @@
 import { createContext, useState } from "react";
-import { defaultCardInfo } from "../constants";
-import useReady from "../hooks/useReady";
-import { isInValidCardType } from "../util/validator";
+
+import { defaultCardInfo } from "constants";
+import useReady from "hooks/useReady";
+import { isInValidCardType } from "util/validator";
 
 export const CardTypeContext = createContext();
 

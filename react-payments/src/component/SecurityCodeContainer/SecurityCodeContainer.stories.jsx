@@ -1,4 +1,4 @@
-import SecurityCodeContainer from "./SecurityCodeContainer.component";
+import SecurityCodeContainer from "component/SecurityCodeContainer/SecurityCodeContainer.component";
 
 export default {
   title: "SecurityCodeContainer",

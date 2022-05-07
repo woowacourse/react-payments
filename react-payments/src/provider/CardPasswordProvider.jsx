@@ -1,9 +1,7 @@
 import { createContext, useState } from "react";
-import useReady from "../hooks/useReady";
-import {
-  isCompletePasswordInput,
-  isInValidCardPassword,
-} from "../util/validator";
+
+import useReady from "hooks/useReady";
+import { isCompletePasswordInput, isInValidCardPassword } from "util/validator";
 
 export const CardPasswordContext = createContext();
 

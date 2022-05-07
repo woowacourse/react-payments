@@ -1,4 +1,4 @@
-import CardControlButtonBox from "./CardControlButtonBox.component";
+import CardControlButtonBox from "component/CardControlButtonBox/CardControlButtonBox.component";
 
 export default {
   title: "CardControlButtonBox",

@@ -1,7 +1,8 @@
-import HomePage from "./HomePage.pages";
-import { CardDataContext } from "../../provider/CardDataProvider";
 import { withReactContext } from "storybook-react-context";
 import { action } from "@storybook/addon-actions";
+
+import HomePage from "pages/HomePage/HomePage.pages";
+import { CardDataContext } from "provider/CardDataProvider";
 
 export default {
   title: "Pages/HomePage",

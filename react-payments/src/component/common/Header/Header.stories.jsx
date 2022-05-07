@@ -1,6 +1,6 @@
-import LinkButton from "../LinkButton/linkButton.component";
-import PageTitle from "../PageTitle/pageTitle.component";
-import Header from "./Header.component";
+import LinkButton from "component/common/LinkButton/LinkButton.component";
+import PageTitle from "component/common/PageTitle/PageTitle.component";
+import Header from "component/common/Header/Header.component";
 
 export default {
   title: "Common/Header",

@@ -1,8 +1,9 @@
 import { createContext, useState } from "react";
-import { isInValidCardNumber, isOverMaxLength } from "../util/validator";
-import { MAX_LENGTH } from "../constants";
-import { focusNextElement, focusPrevElement } from "../util/focus";
-import useReady from "../hooks/useReady";
+
+import { isInValidCardNumber, isOverMaxLength } from "util/validator";
+import { focusNextElement, focusPrevElement } from "util/focus";
+import useReady from "hooks/useReady";
+import { MAX_LENGTH } from "constants";
 
 export const CardNumberContext = createContext();
 

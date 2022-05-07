@@ -1,21 +1,23 @@
-import { useNavigate } from "react-router-dom";
-import Card from "../common/Card/card.component";
-import styled from "styled-components";
 import { useContext, useReducer, useState } from "react";
-import CardNameInput from "../CardNameInput/CardNameInput.component";
-import useReady from "../../hooks/useReady";
-import { isDuplicatedCardName, isInvalidCardName } from "../../util/validator";
-import { CardDataContext } from "../../provider/CardDataProvider";
-import MessageBox from "../common/MessageBox/messageBox.component";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+import Card from "component/common/Card/Card.component";
+import CardNameInput from "component/CardNameInput/CardNameInput.component";
+import MessageBox from "component/common/MessageBox/MessageBox.component";
+import Modal from "component/common/Modal/Modal.component";
+import CardControlButtonBox from "component/CardControlButtonBox/CardControlButtonBox.component";
+
+import useReady from "hooks/useReady";
+import { isDuplicatedCardName, isInvalidCardName } from "util/validator";
+import { CardDataContext } from "provider/CardDataProvider";
 import {
   ALERT_MEESAGE,
   ERROR_MESSAGE,
   REDUCER_TYPE,
   SUCCESS_MESSAGE,
-} from "../../constants";
-import Modal from "../common/Modal/modal.component";
-import CardControlButtonBox from "../CardControlButtonBox/CardControlButtonBox.component";
-import { deleteCard, editCard } from "../../api/cardApi";
+} from "constants";
+import { deleteCard, editCard } from "api/cardApi";
 
 const CardNameText = styled.div`
   font-weight: 700;

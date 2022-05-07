@@ -1,28 +1,30 @@
 import { useContext, useEffect, useReducer } from "react";
-import Card from "../../component/common/Card/card.component";
-import CardTypeSelector from "../../component/CardTypeSelector/CardTypeSelector";
-import Header from "../../component/common/Header/Header.component";
-import LinkButton from "../../component/common/LinkButton/linkButton.component";
-import Modal from "../../component/common/Modal/modal.component";
-import PageTitle from "../../component/common/PageTitle/pageTitle.component";
-import { CardNumberContext } from "../../provider/CardNumberProvider";
-import { ExpireDateContext } from "../../provider/ExpireDateProvider";
-import { UserNameContext } from "../../provider/UserNameProvider";
-import { SecurityCodeContext } from "../../provider/SecurityCodeProvider";
-import { CardPasswordContext } from "../../provider/CardPasswordProvider";
-import CardNumberContainer from "../../component/CardNumberContainer/CardNumberContainer.component";
-import ExpireDateContainer from "../../component/ExpireDateContainer/ExpireDateContainer.component";
-import UserNameContainer from "../../component/UserNameContainer/UserNameContainer.component";
-import SecurityCodeContainer from "../../component/SecurityCodeContainer/SecurityCodeContainer.component";
-import CardPasswordContainer from "../../component/CardPasswordContainer/CardPasswordContainer.component";
-import useReady from "../../hooks/useReady";
-import { isAllInputReady } from "../../util/validator";
-import { CardTypeContext } from "../../provider/CardTypeProvider";
-import PageContainer from "../../component/common/PageContainer/PageContainer.component";
 import { useNavigate, useParams } from "react-router-dom";
-import { CardDataContext } from "../../provider/CardDataProvider";
-import { ALERT_MEESAGE, REDUCER_TYPE } from "../../constants";
-import { editCard } from "../../api/cardApi";
+
+import Card from "component/common/Card/Card.component";
+import CardTypeSelector from "component/CardTypeSelector/CardTypeSelector.component";
+import Header from "component/common/Header/Header.component";
+import LinkButton from "component/common/LinkButton/LinkButton.component";
+import Modal from "component/common/Modal/Modal.component";
+import PageTitle from "component/common/PageTitle/PageTitle.component";
+import CardNumberContainer from "component/CardNumberContainer/CardNumberContainer.component";
+import ExpireDateContainer from "component/ExpireDateContainer/ExpireDateContainer.component";
+import UserNameContainer from "component/UserNameContainer/UserNameContainer.component";
+import SecurityCodeContainer from "component/SecurityCodeContainer/SecurityCodeContainer.component";
+import CardPasswordContainer from "component/CardPasswordContainer/CardPasswordContainer.component";
+import PageContainer from "component/common/PageContainer/PageContainer.component";
+
+import useReady from "hooks/useReady";
+import { isAllInputReady } from "util/validator";
+import { ALERT_MEESAGE, REDUCER_TYPE } from "constants";
+import { editCard } from "api/cardApi";
+import { CardTypeContext } from "provider/CardTypeProvider";
+import { CardDataContext } from "provider/CardDataProvider";
+import { CardNumberContext } from "provider/CardNumberProvider";
+import { ExpireDateContext } from "provider/ExpireDateProvider";
+import { UserNameContext } from "provider/UserNameProvider";
+import { SecurityCodeContext } from "provider/SecurityCodeProvider";
+import { CardPasswordContext } from "provider/CardPasswordProvider";
 
 const CardAddPage = () => {
   const {

@@ -1,5 +1,5 @@
-import CardTypeSelector from "./CardTypeSelector";
 import { action } from "@storybook/addon-actions";
+import CardTypeSelector from "component/CardTypeSelector/CardTypeSelector.component";
 
 export default {
   title: "CardTypeSelector",

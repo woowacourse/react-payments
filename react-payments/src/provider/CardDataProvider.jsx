@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { REDUCER_TYPE } from "../constants";
+import { REDUCER_TYPE } from "constants";
 
 export const CardDataContext = createContext();
 

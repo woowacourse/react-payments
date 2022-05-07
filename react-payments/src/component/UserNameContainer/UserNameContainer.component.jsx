@@ -1,8 +1,10 @@
-import Label from "../common/Label/Label.component";
-import InputBox from "../common/InputBox/InputBox.component";
-import Input from "../common/Input/input.component";
 import { useContext } from "react";
-import { UserNameContext } from "../../provider/UserNameProvider";
+
+import Label from "component/common/Label/Label.component";
+import InputBox from "component/common/InputBox/InputBox.component";
+import Input from "component/common/Input/Input.component";
+
+import { UserNameContext } from "provider/UserNameProvider";
 
 const UserNameContainer = () => {
   const {

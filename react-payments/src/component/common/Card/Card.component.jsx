@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
-import CardNumberText from "./CardNumberText.component";
+
+import CardNumberText from "component/common/Card/CardNumberText.component";
 
 const CardTop = styled.div`
   width: 100%;

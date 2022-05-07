@@ -1,6 +1,6 @@
-import Input from "../Input/input.component";
-import ConnectorBox from "../ConnectorBox/ConnectorBox.component";
-import InputBox from "./InputBox.component";
+import Input from "component/common/Input/Input.component";
+import ConnectorBox from "component/common/ConnectorBox/ConnectorBox.component";
+import InputBox from "component/common/InputBox/InputBox.component";
 
 export default {
   title: "Common/InputBox",

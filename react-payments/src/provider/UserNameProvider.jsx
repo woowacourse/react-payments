@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
-import { isOverMaxLength } from "../util/validator";
-import { MAX_LENGTH } from "../constants";
+import { isOverMaxLength } from "util/validator";
+import { MAX_LENGTH } from "constants";
 
 export const UserNameContext = createContext();
 

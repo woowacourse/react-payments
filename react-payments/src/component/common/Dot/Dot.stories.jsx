@@ -1,4 +1,4 @@
-import Dot from "./dot.component";
+import Dot from "component/common/Dot/Dot.component";
 
 export default {
   title: "Common/Dot",

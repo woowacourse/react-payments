@@ -1,11 +1,13 @@
-import Label from "../common/Label/Label.component";
-import InputBox from "../common/InputBox/InputBox.component";
-import Input from "../common/Input/input.component";
-import ConnectorBox from "../common/ConnectorBox/ConnectorBox.component";
-import MessageBox from "../common/MessageBox/messageBox.component";
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants";
 import { useContext } from "react";
-import { CardNumberContext } from "../../provider/CardNumberProvider";
+
+import Label from "component/common/Label/Label.component";
+import InputBox from "component/common/InputBox/InputBox.component";
+import Input from "component/common/Input/Input.component";
+import ConnectorBox from "component/common/ConnectorBox/ConnectorBox.component";
+import MessageBox from "component/common/MessageBox/MessageBox.component";
+
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants";
+import { CardNumberContext } from "provider/CardNumberProvider";
 
 const CardNumberContainer = () => {
   const {

@@ -1,12 +1,14 @@
-import CardRegisterPage from "./CardRegisterPage.pages";
-import { withReactContext } from "storybook-react-context";
-import { CardNumberContext } from "../../provider/CardNumberProvider";
-import { CardPasswordContext } from "../../provider/CardPasswordProvider";
-import { ExpireDateContext } from "../../provider/ExpireDateProvider";
-import { SecurityCodeContext } from "../../provider/SecurityCodeProvider";
-import { UserNameContext } from "../../provider/UserNameProvider";
-import { CardTypeContext } from "../../provider/CardTypeProvider";
 import { action } from "@storybook/addon-actions";
+import { withReactContext } from "storybook-react-context";
+
+import CardRegisterPage from "pages/CardRegisterPage/CardRegisterPage.pages";
+
+import { CardNumberContext } from "provider/CardNumberProvider";
+import { CardPasswordContext } from "provider/CardPasswordProvider";
+import { ExpireDateContext } from "provider/ExpireDateProvider";
+import { SecurityCodeContext } from "provider/SecurityCodeProvider";
+import { UserNameContext } from "provider/UserNameProvider";
+import { CardTypeContext } from "provider/CardTypeProvider";
 
 export default {
   title: "Pages/CardRegisterPage",

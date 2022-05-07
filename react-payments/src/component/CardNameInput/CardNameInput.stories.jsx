@@ -1,4 +1,4 @@
-import CardNameInput from "./CardNameInput.component";
+import CardNameInput from "component/CardNameInput/CardNameInput.component";
 
 export default {
   title: "CardNameInput",

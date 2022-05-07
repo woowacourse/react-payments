@@ -1,5 +1,6 @@
-import CardAddPage from "./CardAddPage.component";
 import { userEvent, within } from "@storybook/testing-library";
+
+import CardAddPage from "pages/CardAddPage/CardAddPage.pages";
 
 export default {
   title: "Pages/CardAddPage",

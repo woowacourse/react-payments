@@ -1,5 +1,6 @@
-import ColorBox from "./colorBox.component";
 import { action } from "@storybook/addon-actions";
+
+import ColorBox from "component/common/ColorBox/ColorBox.component";
 
 export default {
   title: "Common/ColorBox",
