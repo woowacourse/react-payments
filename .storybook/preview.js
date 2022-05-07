@@ -1,12 +1,17 @@
 import { Global } from '@emotion/react';
+import { PageContextProvider } from 'contexts/PageContext';
+import { CardDataContextProvider } from 'contexts/CardDataContext';
+
 import appStyles from 'styles/app';
 
 export const decorators = [
   (Story) => (
-    <>
-      <Global styles={appStyles} />
-      <Story />
-    </>
+    <PageContextProvider>
+      <CardDataContextProvider>
+        <Global styles={appStyles} />
+        <Story />
+      </CardDataContextProvider>
+    </PageContextProvider>
   ),
 ];
 
