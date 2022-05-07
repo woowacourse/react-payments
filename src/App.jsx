@@ -54,7 +54,7 @@ const reducer = (state, action) => {
     case 'SET_CARD_NICKNAME':
       return {
         ...state,
-        nickname: action.nickname,
+        nickname: action.newNickname,
       };
     default:
       return state;

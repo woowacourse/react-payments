@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { CardInfoContext } from 'App';
 import { ERROR_MESSAGE } from 'constants';
+import { validator } from 'utils';
 
 function CardInputForm({ children }) {
   const navigate = useNavigate();
@@ -10,12 +11,6 @@ function CardInputForm({ children }) {
   const { state } = useContext(CardInfoContext);
 
   const { number1, number2, number3, number4, month, year, cvc } = state;
-
-  const validator = (conditions) => {
-    conditions.forEach(({ checker, errorMsg }) => {
-      if (checker()) throw new Error(errorMsg);
-    });
-  };
 
   const checkCardNumber = (number1, number2, number3, number4) => {
     return number1.length < 4 || number2.length < 4 || number3.length < 4 || number4.length < 4;

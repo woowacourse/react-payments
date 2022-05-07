@@ -4,6 +4,9 @@ const ERROR_MESSAGE = {
   YEAR: '만료년도가 잘못 입력되었습니다. 만료년도는 현재년도 이후로 입력해주세요.',
   MONTH_AND_YEAR: '만료일이 잘못 입력되었습니다. 만료일은 현재 날짜 이후로 입력해주세요.',
   CVC: '보안코드가 잘못 입력되었습니다. 보안코드는 3자리로 입력해주세요.',
+  NICKNAME_NOT_STRING:
+    '카드 별명이 잘못 입력되었습니다. 카드 별명은 한글 혹은 영어로 입력해주세요.',
+  NICKNAME_IS_BLANK: '카드 별명이 잘못 입력되었습니다. 카드 별명을 최소 한자 이상 입력해주세요.',
 };
 
 const MONTH = {
@@ -20,6 +23,7 @@ const LIMIT_LENGTH = {
   CARD_OWNER: 30,
   CARD_PASSWORD: 1,
   CVC: 3,
+  NICKNAME: 10,
 };
 
 const CVC_DESCRIPTION = '카드 뒷면에 있는 3자리 숫자를 입력해주세요.';
