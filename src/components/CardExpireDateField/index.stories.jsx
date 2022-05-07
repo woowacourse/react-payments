@@ -10,11 +10,11 @@ export default {
 };
 
 const Template = () => {
-  const { state, onChangeTextField } = useCardState();
+  const { state, onChangeCardState } = useCardState();
   const { expireMonth, expireYear } = state;
   return (
     <CardExpireDateField
-      onChange={onChangeTextField}
+      onChange={onChangeCardState}
       expireMonth={expireMonth}
       expireYear={expireYear}
     />
