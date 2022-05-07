@@ -3,8 +3,9 @@ import { Routes, Route } from "react-router-dom";
 
 import { CardInfoProvider } from "./contexts/CardInfoContext";
 
-import AddCard from "./components/AddCard";
-import PossessCard from "./components/PossessCard";
+import AddCard from "./components/AddCard/AddCard";
+import PossessCard from "./components/PossessCard/PossessCard";
+
 import { ROUTES } from "./constants/constants";
 
 function App() {

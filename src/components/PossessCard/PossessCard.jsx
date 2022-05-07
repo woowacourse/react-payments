@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import addIcon from "../assets/images/addIcon.svg";
-import { ROUTES } from "../constants/constants";
+import addIcon from "../../assets/images/addIcon.svg";
+import { ROUTES } from "../../constants/constants";
 
-import PageHeader from "./PageHeader";
+import PageHeader from "../PageHeader";
 import PossessCardItems from "./PossessCardItems";
-import Button from "./UIComponents/Button/Button";
+import Button from "../UIComponents/Button/Button";
 
 const StyledPossessCardContainer = styled.div`
   display: flex;

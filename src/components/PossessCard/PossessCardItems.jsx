@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import CardPreview from "./UIComponents/CardPreview/CardPreview";
+import CardPreview from "../UIComponents/CardPreview/CardPreview";
 
 const transformToCardPreviewTemplate = (cardInfo) => {
   return cardInfo.map((info) => {
