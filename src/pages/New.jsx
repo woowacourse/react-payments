@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useInput from "hooks/useInput";
 import useCardNumber from "hooks/useCardNumber";
@@ -25,7 +25,6 @@ import { CardDispatchContext } from "context/CardListProvider";
 
 function New() {
   const navigate = useNavigate();
-
   const { cardNumbers, handleChangeCardNumber, cardNumberInputRefs } =
     useCardNumber();
   const { dueDate, handleChangeDueDate, yearInputRef, error } =
@@ -45,6 +44,7 @@ function New() {
   const { modalVisible, openModal, closeModal } = useModal();
 
   const { onCreate } = useContext(CardDispatchContext);
+  const cardId = useRef(Date.now());
 
   useEffect(() => {
     setAllRequired(
@@ -64,7 +64,21 @@ function New() {
 
   const handleSubmit = () => {
     alert("카드가 등록되었습니다.");
-    onCreate(cardNumbers, dueDate, owner, cvc, password, company);
+
+    onCreate(
+      cardId.current,
+      cardNumbers,
+      dueDate,
+      owner,
+      cvc,
+      password,
+      company
+    );
+
+    navigate(`/finish/${cardId.current}`, { replace: true });
+    cardId.current += 1;
+    console.log(cardId);
+    console.log(cardId.current);
   };
 
   return (

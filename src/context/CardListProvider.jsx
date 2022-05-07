@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from "react";
+import React, { useReducer } from "react";
 
 const cardListReducer = (state, action) => {
   let newState = [];
@@ -20,13 +20,20 @@ export const CardDispatchContext = React.createContext();
 
 function CardListProvider({ children }) {
   const [cardListData, dispatch] = useReducer(cardListReducer, []);
-  const dataId = useRef(0);
 
-  const onCreate = (cardNumbers, dueDate, owner, cvc, password, company) => {
+  const onCreate = (
+    cardId,
+    cardNumbers,
+    dueDate,
+    owner,
+    cvc,
+    password,
+    company
+  ) => {
     dispatch({
       type: "CREATE",
       data: {
-        id: dataId.current,
+        cardId,
         cardNumbers,
         dueDate,
         owner,
@@ -35,8 +42,6 @@ function CardListProvider({ children }) {
         company,
       },
     });
-
-    dataId.current += 1;
   };
 
   return (

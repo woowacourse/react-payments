@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Input } from "components/common/Input/style";
 
 const PageWrapper = styled.div`
   height: 700px;
@@ -53,8 +54,31 @@ const CardAddWrapper = styled.div`
 `;
 
 const FooterWrapper = styled.div`
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+`;
+
+const FinishTitleWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+
+  h1 {
+    font-size: 25px;
+    font-weight: 400;
+  }
+`;
+
+const FinishPageWrapper = styled(PageWrapper)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const NicknameInput = styled(Input)`
+  border-bottom: 1px solid black;
+  width: 250px;
 `;
 
 export {
@@ -65,4 +89,7 @@ export {
   FooterWrapper,
   CardInputWrapper,
   CardScrollWrapper,
+  FinishTitleWrapper,
+  FinishPageWrapper,
+  NicknameInput,
 };
