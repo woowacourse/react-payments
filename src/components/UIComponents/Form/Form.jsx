@@ -17,7 +17,7 @@ export default function Form({
   children,
   onSubmit,
   isComplete,
-  setFormValidity,
+  setFormValidity = () => {},
 }) {
   const formRef = useRef(null);
   const isInitMount = useRef(true);
