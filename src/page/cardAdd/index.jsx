@@ -1,6 +1,7 @@
-import { useReducer, useCallback } from 'react';
+import { useReducer, useCallback, useContext } from 'react';
 import useCardInfo from 'hooks/useCardInfo';
 import { Link } from 'react-router-dom';
+import { CardDispatch } from 'App';
 
 import FormInput from 'components/common/FormInput';
 import CardPreview from 'components/CardPreview';
@@ -42,6 +43,7 @@ const initialCardInfo = {
 };
 
 const CardAppPage = () => {
+  const { dispatch } = useContext(CardDispatch);
   const [cardInfo, isFullFilled, handleCardInfo] = useCardInfo(initialCardInfo);
   const [modalVisible, handleModal] = useReducer(
     useCallback((visible) => !visible, []),
@@ -128,7 +130,10 @@ const CardAppPage = () => {
         theme={theme}
       />
       {isFullFilled && (
-        <Link to="/react-payments/confirm">
+        <Link
+          to="/react-payments/confirm"
+          onClick={() => dispatch({ type: 'CREATE_CARD', card: cardInfo })}
+        >
           <Button theme={theme} className="next-button">
             다음
           </Button>
