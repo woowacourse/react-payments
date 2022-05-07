@@ -22,6 +22,7 @@ import PageContainer from "../../component/common/PageContainer/PageContainer.co
 import { useNavigate, useParams } from "react-router-dom";
 import { CardDataContext } from "../../provider/CardDataProvider";
 import { ALERT_MEESAGE, REDUCER_TYPE } from "../../constants";
+import { editCard } from "../../api/cardApi";
 
 const CardAddPage = () => {
   const {
@@ -63,28 +64,31 @@ const CardAddPage = () => {
     (isShowModal) => !isShowModal,
     false
   );
-  const { idx } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (typeof idx !== "undefined" && cardData.length === 0) {
+    if (typeof id !== "undefined" && cardData.length === 0) {
       navigate("/");
     }
-  }, [cardData.length, idx, navigate]);
+  }, [cardData.length, id, navigate]);
 
   useEffect(() => {
-    if (typeof idx === "undefined" || !cardData[idx]) {
+    if (typeof id === "undefined" || !cardData[id]) {
       return;
     }
 
-    setCardNumber(cardData[idx].cardNumber);
-    setExpireDate({ month: cardData[idx].month, year: cardData[idx].year });
-    setUserName(cardData[idx].userName);
-    setSecurityCode(cardData[idx].securityCode);
-    setCardPassword(cardData[idx].cardPassword);
-    setCardTypeInfo(cardData[idx].cardTypeInfo);
+    setCardNumber(cardData[id].cardNumber);
+    setExpireDate({
+      month: cardData[id].month,
+      year: cardData[id].year,
+    });
+    setUserName(cardData[id].userName);
+    setSecurityCode(cardData[id].securityCode);
+    setCardPassword(cardData[id].cardPassword);
+    setCardTypeInfo(cardData[id].cardTypeInfo);
   }, [
-    idx,
+    id,
     cardData,
     setCardNumber,
     setCardPassword,
@@ -98,7 +102,7 @@ const CardAddPage = () => {
     dispatch({
       type: REDUCER_TYPE.EDIT,
       payload: {
-        id: idx,
+        id: id,
         month: expireDate.month,
         year: expireDate.year,
         userName,
@@ -107,6 +111,16 @@ const CardAddPage = () => {
         securityCode,
         cardPassword,
       },
+    });
+
+    editCard(id, {
+      month: expireDate.month,
+      year: expireDate.year,
+      userName,
+      cardTypeInfo,
+      cardNumber,
+      securityCode,
+      cardPassword,
     });
 
     resetCardNumber();
@@ -141,7 +155,7 @@ const CardAddPage = () => {
       <CardPasswordContainer />
 
       {allFormReady &&
-        (typeof idx !== "undefined" ? (
+        (typeof id !== "undefined" ? (
           <LinkButton type="submit" onClick={handleEditCard} path="/">
             수정
           </LinkButton>

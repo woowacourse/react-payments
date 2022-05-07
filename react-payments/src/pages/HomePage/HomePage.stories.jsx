@@ -1,6 +1,7 @@
 import HomePage from "./HomePage.pages";
 import { CardDataContext } from "../../provider/CardDataProvider";
 import { withReactContext } from "storybook-react-context";
+import { action } from "@storybook/addon-actions";
 
 export default {
   title: "HomePage",
@@ -17,8 +18,8 @@ ExistCardHomePage.decorators = [
   withReactContext({
     Context: CardDataContext,
     initialState: {
-      cardData: [
-        {
+      cardData: {
+        1: {
           cardNumber: {
             first: "1234",
             second: "2345",
@@ -34,7 +35,7 @@ ExistCardHomePage.decorators = [
           },
           cardName: "스밍카드",
         },
-        {
+        2: {
           cardNumber: {
             first: "1234",
             second: "2345",
@@ -50,7 +51,8 @@ ExistCardHomePage.decorators = [
           },
           cardName: "우연 카드",
         },
-      ],
+      },
+      dispatch: action("dispatch"),
     },
   }),
 ];

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CardNameInput from "../../component/CardNameInput/CardNameInput.component";
@@ -7,12 +7,7 @@ import LinkButton from "../../component/common/LinkButton/linkButton.component";
 import MessageBox from "../../component/common/MessageBox/messageBox.component";
 import PageContainer from "../../component/common/PageContainer/PageContainer.component";
 import PageTitle from "../../component/common/PageTitle/pageTitle.component";
-import {
-  ALERT_MEESAGE,
-  ERROR_MESSAGE,
-  REDUCER_TYPE,
-  SUCCESS_MESSAGE,
-} from "../../constants";
+import { ALERT_MEESAGE, ERROR_MESSAGE, SUCCESS_MESSAGE } from "../../constants";
 import useReady from "../../hooks/useReady";
 import { CardDataContext } from "../../provider/CardDataProvider";
 import { CardNumberContext } from "../../provider/CardNumberProvider";
@@ -22,6 +17,7 @@ import { ExpireDateContext } from "../../provider/ExpireDateProvider";
 import { SecurityCodeContext } from "../../provider/SecurityCodeProvider";
 import { UserNameContext } from "../../provider/UserNameProvider";
 import { isDuplicatedCardName, isInvalidCardName } from "../../util/validator";
+import { registerCard } from "../../api/cardApi";
 
 const CardRegisterGroup = styled.div`
   display: flex;
@@ -32,7 +28,7 @@ const CardRegisterGroup = styled.div`
 `;
 
 const CardRegisterPage = () => {
-  const { cardData, dispatch } = useContext(CardDataContext);
+  const { cardData } = useContext(CardDataContext);
   const {
     state: { cardNumber },
     action: { resetCardNumber },
@@ -65,7 +61,6 @@ const CardRegisterPage = () => {
     isDuplicatedCardName,
     cardData
   );
-  const id = useRef(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,7 +69,7 @@ const CardRegisterPage = () => {
     }
   }, [navigate, securityCode]);
 
-  const handleSubmitCardData = () => {
+  const handleSubmitCardData = async () => {
     resetCardNumber();
     resetCardPassword();
     resetCardTypeInfo();
@@ -82,22 +77,17 @@ const CardRegisterPage = () => {
     resetUserName();
     resetSecurityCode();
 
-    dispatch({
-      type: REDUCER_TYPE.CREATE,
-      payload: {
-        id: id.current,
-        month: expireDate.month,
-        year: expireDate.year,
-        userName,
-        cardTypeInfo,
-        cardName,
-        cardNumber,
-        securityCode,
-        cardPassword,
-      },
+    registerCard({
+      month: expireDate.month,
+      year: expireDate.year,
+      userName,
+      cardTypeInfo,
+      cardName,
+      cardNumber,
+      securityCode,
+      cardPassword,
     });
 
-    id.current += 1;
     window.alert(ALERT_MEESAGE.REGISTER);
   };
 

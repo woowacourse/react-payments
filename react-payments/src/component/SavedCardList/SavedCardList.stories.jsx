@@ -1,6 +1,7 @@
 import SavedCardList from "./SavedCardList";
 import { withReactContext } from "storybook-react-context";
 import { CardDataContext } from "../../provider/CardDataProvider";
+import { action } from "@storybook/addon-actions";
 
 export default {
   title: "SavedCardList",
@@ -9,8 +10,8 @@ export default {
     withReactContext({
       Context: CardDataContext,
       initialState: {
-        cardData: [
-          {
+        cardData: {
+          1: {
             cardName: "우연 카드",
             cardNumber: {
               first: "1112",
@@ -26,7 +27,7 @@ export default {
             year: "12",
             userName: "우연",
           },
-          {
+          2: {
             cardName: "스밍 카드",
             cardNumber: {
               first: "1112",
@@ -42,7 +43,8 @@ export default {
             year: "12",
             userName: "스밍",
           },
-        ],
+        },
+        dispatch: action("dispatch"),
       },
     }),
   ],

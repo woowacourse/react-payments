@@ -15,6 +15,7 @@ import {
 } from "../../constants";
 import Modal from "../common/Modal/modal.component";
 import CardControlButtonBox from "../CardControlButtonBox/CardControlButtonBox.component";
+import { deleteCard, editCard } from "../../api/cardApi";
 
 const CardNameText = styled.div`
   font-weight: 700;
@@ -77,13 +78,14 @@ const CardPreview = ({ cardDatum, idx }) => {
     isDuplicatedCardName,
     cardData
   );
+  const { cardName, id } = cardDatum;
 
   const [editOn, setEditOn] = useState(false);
   const [isShowModal, toggleModal] = useReducer((prev) => !prev, false);
   const navigate = useNavigate();
 
-  const handleEditCard = (idx) => {
-    navigate(`add/${idx}`);
+  const handleEditCard = () => {
+    navigate(`add/${id}`);
   };
 
   const handleEditFormOn = () => {
@@ -94,10 +96,12 @@ const CardPreview = ({ cardDatum, idx }) => {
     dispatch({
       type: REDUCER_TYPE.EDIT,
       payload: {
-        id: idx,
+        id,
         cardName: newCardName,
       },
     });
+
+    editCard(id, { cardName: newCardName });
     closeEditForm();
     window.alert(ALERT_MEESAGE.EDIT);
   };
@@ -105,10 +109,10 @@ const CardPreview = ({ cardDatum, idx }) => {
   const handleDeleteCard = () => {
     dispatch({
       type: REDUCER_TYPE.DELETE,
-      payload: {
-        id: idx,
-      },
+      payload: { id },
     });
+
+    deleteCard(id);
     window.alert(ALERT_MEESAGE.DELETE);
   };
 
@@ -157,7 +161,7 @@ const CardPreview = ({ cardDatum, idx }) => {
           </EditFormContainer>
         ) : (
           <>
-            <p>{cardDatum.cardName}</p>
+            <p>{cardName}</p>
             <CardNameEditButton onClick={handleEditFormOn}>
               ✏️
             </CardNameEditButton>

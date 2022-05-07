@@ -63,9 +63,9 @@ export const ERROR_MESSAGE = {
 };
 
 export const REDUCER_TYPE = {
-  CREATE: "CREATE",
   EDIT: "EDIT",
   DELETE: "DELETE",
+  INIT: "INIT",
 };
 
 export const ALERT_MEESAGE = {
@@ -73,4 +73,7 @@ export const ALERT_MEESAGE = {
   DELETE: "삭제가 완료되었습니다",
   REGISTER: "등록이 완료되었습니다",
 };
+
 export const SUCCESS_MESSAGE = "성공적으로 입력됐습니다";
+
+export const API_URL = "https://jungmin-react-payment.herokuapp.com";
