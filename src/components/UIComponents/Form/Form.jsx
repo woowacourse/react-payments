@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-import { cardInfoValidations } from "utils/cardInfoValidations.js";
+import { cardInfoValidationError } from "utils/cardInfoValidationError.js";
 
 const StyledCardInfoForm = styled.form`
   display: flex;
@@ -63,7 +63,7 @@ export default function Form({
 
   const handleFormValidation = ({ target }) => {
     if (target.validity.patternMismatch) {
-      const message = cardInfoValidations[target.name].errorMessage;
+      const message = cardInfoValidationError[target.name];
       target.setCustomValidity(message);
     } else {
       target.setCustomValidity("");
