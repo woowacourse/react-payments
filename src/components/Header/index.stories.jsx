@@ -4,8 +4,11 @@ export default {
   title: 'Header',
   component: Header,
   argTypes: {
-    title: {
+    children: {
       description: '헤더 제목',
+      control: {
+        type: 'text',
+      },
     },
   },
 };
@@ -15,5 +18,5 @@ const Template = (args) => <Header {...args} />;
 export const Example = Template.bind({});
 
 Example.args = {
-  title: '호프샐리',
+  children: '헤더',
 };

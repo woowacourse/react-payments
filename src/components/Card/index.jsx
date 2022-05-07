@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { COLOR_NAMES, CARD_COLOR_BY_NAME } from '../../constant';
+import { CARD_TYPE_NAMES, CARD_COLOR_BY_NAME } from '../../constant';
 import * as Styled from './index.styled';
 
 const Card = ({
@@ -49,7 +49,6 @@ const Card = ({
 };
 
 Card.propTypes = {
-  color: PropTypes.oneOf(COLOR_NAMES),
   name: PropTypes.string,
   ownerName: PropTypes.string,
   expiredMonth: PropTypes.string,
@@ -58,7 +57,7 @@ Card.propTypes = {
   secondCardNumber: PropTypes.string,
   thirdCardNumber: PropTypes.string,
   fourthCardNumber: PropTypes.string,
-  cardType: PropTypes.string,
+  cardType: PropTypes.oneOf(CARD_TYPE_NAMES),
   onClick: PropTypes.func,
 };
 

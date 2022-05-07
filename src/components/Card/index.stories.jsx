@@ -1,10 +1,14 @@
 import Card from '.';
-import { COLOR_NAMES } from '../../constant';
+import { CARD_TYPE_NAMES } from '../../constant';
 
 export default {
   title: 'Card',
   component: Card,
   argTypes: {
+    cardType: {
+      description: '카드사',
+      options: CARD_TYPE_NAMES,
+    },
     name: {
       description: '카드 이름',
     },
@@ -47,10 +51,6 @@ export default {
         type: 'number',
       },
     },
-    color: {
-      description: '카드 색상',
-      options: COLOR_NAMES,
-    },
     onClick: {
       table: {
         disable: true,
@@ -64,8 +64,7 @@ const Template = (args) => <Card {...args} />;
 export const Example = Template.bind({});
 
 Example.args = {
-  color: 'yellow',
-  name: '블랙 카드',
+  cardType: '현대카드',
   ownerName: 'Sally',
   expiredMonth: '12',
   expiredYear: '23',

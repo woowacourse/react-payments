@@ -50,6 +50,17 @@ export const COLOR_NAMES = [
   'mint',
 ];
 
+export const CARD_TYPE_NAMES = [
+  '롯데카드',
+  '삼성카드',
+  'NH농협카드',
+  '신한카드',
+  '현대카드',
+  '하나카드',
+  'BC카드',
+  'KB국민카드',
+];
+
 export const INPUT_SCALE_TYPE = {
   large: '318',
   medium: '84',
