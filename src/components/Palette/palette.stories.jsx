@@ -6,11 +6,11 @@ export default {
   component: Palette,
 };
 
-const Template = args => <Palette {...args} />;
+const Template = (args) => <Palette {...args} />;
 
 export const Example = Template.bind({});
 
-const onClickCardSelector = type => () => {
+const onClickCardSelector = (type) => () => {
   console.log(type);
 };
 
