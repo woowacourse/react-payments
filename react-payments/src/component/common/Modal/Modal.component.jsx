@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { css } from "styled-components";
+import { RowFlexWrapper } from "styles/wrapper";
 
 const DimmedModal = styled.div`
   width: 100%;
@@ -18,10 +19,7 @@ const DimmedModal = styled.div`
   z-index: 5;
 `;
 
-const ModalBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const ModalBox = styled(RowFlexWrapper)`
   width: 380px;
   ${({ type }) =>
     type === "edit"

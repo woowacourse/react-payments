@@ -18,14 +18,12 @@ import {
   SUCCESS_MESSAGE,
 } from "constants";
 import { deleteCard, editCard } from "api/cardApi";
+import { RowFlexWrapper } from "styles/wrapper";
+import { ColumnFlexWrapper } from "../../styles/wrapper";
 
-const CardNameText = styled.div`
+const CardNameText = styled(RowFlexWrapper)`
   font-weight: 700;
   font-size: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
   color: ${({ theme }) => theme.colors.cardText};
   text-align: center;
   opacity: 90%;
@@ -55,20 +53,8 @@ const ConfirmButton = styled.button`
   }
 `;
 
-const EditFormBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const EditFormBox = styled(RowFlexWrapper)`
   margin-top: 5px;
-  gap: 10px;
-`;
-
-const EditFormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
 `;
 
 const CardPreview = ({ cardDatum, idx }) => {
@@ -129,10 +115,10 @@ const CardPreview = ({ cardDatum, idx }) => {
   return (
     <>
       <Card onClick={toggleModal} {...cardDatum} />
-      <CardNameText>
+      <CardNameText gap="8">
         {editOn ? (
-          <EditFormContainer>
-            <EditFormBox>
+          <ColumnFlexWrapper gap="5">
+            <EditFormBox gap="10">
               <CardNameInput
                 size="small"
                 value={newCardName}
@@ -160,7 +146,7 @@ const CardPreview = ({ cardDatum, idx }) => {
             {newCardNameLengthReady && uniqueNewCardNameReady && (
               <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
             )}
-          </EditFormContainer>
+          </ColumnFlexWrapper>
         ) : (
           <>
             <p>{cardName}</p>

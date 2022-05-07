@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { RowFlexWrapper } from "styles/wrapper";
 
 const StyledDot = styled.div`
   border-radius: 50%;
@@ -16,10 +17,7 @@ const StyledDot = styled.div`
     theme.colors[cardType] || theme.colors.cardText}
 `;
 
-const StyledDotBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const StyledDotBox = styled(RowFlexWrapper)`
   ${({ formType, size }) =>
     size === "small" &&
     (formType === "card-password"

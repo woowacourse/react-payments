@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
 
 import CardNumberText from "component/common/Card/CardNumberText.component";
+import { ColumnFlexWrapper } from "styles/wrapper";
+import { RowFlexWrapper } from "styles/wrapper";
 
 const CardTop = styled.div`
   width: 100%;
@@ -40,12 +42,7 @@ const CardChip = styled.div`
         `}
 `;
 
-const CardBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
+const CardBox = styled(ColumnFlexWrapper)`
   font-size: 30px;
   color: ${({ theme }) => theme.colors.cardText};
 
@@ -69,10 +66,7 @@ const CardBox = styled.div`
         `}
 `;
 
-const CardContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const CardContainer = styled(RowFlexWrapper)`
   margin: 10px 0;
   cursor: pointer;
 `;

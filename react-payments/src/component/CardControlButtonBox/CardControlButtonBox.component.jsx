@@ -1,23 +1,17 @@
-import styled from "styled-components";
 import ModalButton from "component/common/ModalButton/ModalButton.component";
 
-const CardControlButtonWrapper = styled.div`
-  display: flex;
-  gap: 25px;
-  align-items: center;
-  justify-content: center;
-`;
+import { RowFlexWrapper } from "styles/wrapper";
 
 const CardControlButtonBox = ({ handleEditCard, handleDeleteCard }) => {
   return (
-    <CardControlButtonWrapper>
+    <RowFlexWrapper gap="25">
       <ModalButton type="edit" onClick={handleEditCard}>
         수정하기
       </ModalButton>
       <ModalButton type="delete" onClick={handleDeleteCard}>
         삭제하기
       </ModalButton>
-    </CardControlButtonWrapper>
+    </RowFlexWrapper>
   );
 };
 

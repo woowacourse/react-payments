@@ -2,15 +2,13 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import { HELP_MESSAGE } from "constants/index";
+import { RowFlexWrapper } from "styles/wrapper";
 
 const HelpBoxContainer = styled.div`
   position: relative;
 `;
 
-const HelpIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const HelpIcon = styled(RowFlexWrapper)`
   width: 27px;
   height: 27px;
   border-radius: 50%;
