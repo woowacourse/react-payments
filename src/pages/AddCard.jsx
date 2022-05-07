@@ -66,9 +66,11 @@ function AddCard() {
   return (
     <Styled.Root>
       <Header title="카드 추가">
-        <Button size="small">
-          <Arrow />
-        </Button>
+        <Link to="/card-list">
+          <Button size="small">
+            <Arrow />
+          </Button>
+        </Link>
       </Header>
       <Styled.Card
         bgColor={cardKind.color}
