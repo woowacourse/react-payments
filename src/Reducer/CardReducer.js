@@ -1,6 +1,7 @@
 const CARD_ACTION = {
   ADD: 'CARD_ADD',
   NAME_EDIT: 'CARD_NAME_EDIT',
+  DELETE: 'DELETE',
 };
 
 const initialCardData = [];
@@ -16,6 +17,10 @@ function CardReducer(state, action) {
           return card;
         }
         return card;
+      });
+    case CARD_ACTION.DELETE:
+      return state.filter(card => {
+        return card.cardNumber.value !== action.value;
       });
   }
 }
