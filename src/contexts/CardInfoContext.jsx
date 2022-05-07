@@ -15,7 +15,22 @@ import {
   isInvalidSecurityCode,
 } from "../validators/validator";
 
-const CardInfoContext = createContext();
+const CardInfoContext = createContext({
+  state: {
+    cardNumber: {},
+    expireDate: {},
+    holderName: {},
+    securityCode: {},
+    password: {},
+  },
+  actions: {
+    handleCardNumberUpdate: () => {},
+    handleExpireDateUpdate: () => {},
+    handleHolderNameUpdate: () => {},
+    handleSecurityCodeUpdate: () => {},
+    handlePasswordUpdate: () => {},
+  },
+});
 
 const CardInfoProvider = ({ children }) => {
   const [cardNumber, handleCardNumberUpdate] = useInput(

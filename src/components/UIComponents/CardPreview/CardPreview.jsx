@@ -68,20 +68,11 @@ const CardHolderName = styled.p`
 
 export default function CardPreview({
   canProceed,
-  width,
-  height,
-  fontSize,
-  cardContainerMarginBottom,
-  cardChipWidth,
-  cardChipHeight,
-  cardNameMargin,
-  cardChipMarginBottom,
-  cardNumberMarginBottom,
+  cardCss,
+  cardNumber,
+  holderName,
+  expireDate,
 }) {
-  const {
-    state: { cardNumber, holderName, expireDate },
-  } = useContext(CardInfoContext);
-
   const {
     firstCardNumber,
     secondCardNumber,
@@ -90,6 +81,18 @@ export default function CardPreview({
   } = cardNumber;
 
   const { month, year } = expireDate;
+
+  const {
+    width,
+    height,
+    fontSize,
+    cardContainerMarginBottom,
+    cardChipWidth,
+    cardChipHeight,
+    cardNameMargin,
+    cardChipMarginBottom,
+    cardNumberMarginBottom,
+  } = cardCss;
 
   return (
     <CardContainer cardContainerMarginBottom={cardContainerMarginBottom}>
@@ -124,25 +127,5 @@ export default function CardPreview({
 
 CardPreview.propTypes = {
   canProceed: PropTypes.bool,
-  width: PropTypes.string,
-  height: PropTypes.string,
-  fontSize: PropTypes.string,
-  cardContainerMarginBottom: PropTypes.string,
-  cardChipWidth: PropTypes.string,
-  cardChipHeight: PropTypes.string,
-  cardNameMargin: PropTypes.string,
-  cardChipMarginBottom: PropTypes.string,
-  cardNumberMarginBottom: PropTypes.string,
-};
-
-CardPreview.defaultProps = {
-  width: "213px",
-  height: "133px",
-  fontSize: "10px",
-  cardContainerMarginBottom: "25px",
-  cardChipWidth: "40px",
-  cardChipHeight: "26px",
-  cardNameMargin: "0 0 20px 0",
-  cardChipMarginBottom: "15px",
-  cardNumberMarginBottom: "12px",
+  cardCss: PropTypes.object,
 };

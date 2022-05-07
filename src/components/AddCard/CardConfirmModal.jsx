@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { CardInfoContext } from "../../contexts/CardInfoContext";
 
 import PageHeader from "../PageHeader";
 import Button from "../UIComponents/Button/Button";
@@ -18,7 +20,23 @@ const StyledCardConfirmModal = styled.section`
   align-items: center;
 `;
 
+const bigCardCss = {
+  width: "293px",
+  height: "183px",
+  fontSize: "14px",
+  cardContainerMarginBottom: "25px",
+  cardChipWidth: "55px",
+  cardChipHeight: "35px",
+  cardNameMargin: "8px 0 30px",
+  cardChipMarginBottom: "20px",
+  cardNumberMarginBottom: "20px",
+};
+
 export default function CardConfirmModal() {
+  const {
+    state: { cardNumber, holderName, expireDate },
+  } = useContext(CardInfoContext);
+
   return (
     <>
       <StyledCardConfirmModal>
@@ -31,15 +49,11 @@ export default function CardConfirmModal() {
           카드등록이 완료되었습니다.
         </PageHeader>
         <CardPreview
+          cardNumber={cardNumber}
+          holderName={holderName}
+          expireDate={expireDate}
           canProceed={true}
-          width={"293px"}
-          height={"183px"}
-          fontSize={"14px"}
-          cardChipWidth={"55px"}
-          cardChipHeight={"35px"}
-          cardNameMargin={"8px 0 30px"}
-          cardChipMarginBottom={"20px"}
-          cardNumberMarginBottom={"20px"}
+          cardCss={bigCardCss}
         />
         <Input
           name={"cardAlias"}
