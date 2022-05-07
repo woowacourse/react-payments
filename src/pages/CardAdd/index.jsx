@@ -1,9 +1,11 @@
+import { postCard } from 'apis';
+
 import { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useCardState from 'hooks/useCardState';
 import CardContext from 'contexts';
 
-import { Header, Button } from 'components/@common';
+import { Button, Header } from 'components/@common';
 
 import {
   Card,
@@ -24,12 +26,16 @@ import {
 
 import { CARD_NUMBER, PATH } from 'constants';
 
-function CardAdd() {
+function CardAdd({ setCard }) {
   const [state, dispatch] = useCardState();
-  const { cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword } = state;
-  const { isComplete } = state;
+  const { isComplete, cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword } =
+    state;
 
   const navigate = useNavigate();
+
+  const onClickPreviousButton = () => {
+    navigate(PATH.CARD_LIST);
+  };
 
   const onChangeTextField = useCallback(
     ({ target }, option = {}) => {
@@ -53,13 +59,16 @@ function CardAdd() {
     [dispatch],
   );
 
-  const onClickConfirmButton = () => {
+  const onClickNextButton = async () => {
     try {
       validateCardNumber(cardNumber);
       validateCardPassword(cardPassword);
       validateExpireDate({ expireMonth, expireYear });
       validateSecurityCode(securityCode);
       userName && validateUserName(userName);
+
+      setCard(state);
+      await postCard(state);
 
       navigate(PATH.CARD_ADD_COMPLETE);
     } catch (error) {
@@ -69,11 +78,21 @@ function CardAdd() {
 
   return (
     <>
-      <Header>카드 추가</Header>
+      <div className="header">
+        <Button className="previous-button" onClick={onClickPreviousButton}>
+          &lt;
+        </Button>
+        <Header>카드 추가</Header>
+      </div>
+      <Card
+        cardNumber={cardNumber}
+        userName={userName}
+        expireMonth={expireMonth}
+        expireYear={expireYear}
+      />
       <CardContext.Provider
         value={useMemo(() => ({ ...state, onChangeTextField }), [state, onChangeTextField])}
       >
-        <Card />
         <CardNumberField />
         <CardExpireDateField />
         <CardUserNameField />
@@ -81,7 +100,7 @@ function CardAdd() {
         <CardPasswordField />
       </CardContext.Provider>
       <div className="button-container right">
-        <Button isDisabled={!isComplete} onClick={onClickConfirmButton}>
+        <Button isDisabled={!isComplete} onClick={onClickNextButton}>
           다음
         </Button>
       </div>
