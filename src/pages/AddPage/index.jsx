@@ -11,23 +11,14 @@ import {
 } from '../../hooks';
 
 import CardInputs from './CardInputs';
+import CompanyModal from './CompanyModal';
 import { Button } from '../../components';
-import {
-  CardCompany,
-  CardCompanyModal,
-  CardCompanyName,
-  Dimmer,
-  Header,
-  NextButton,
-  StyledCard,
-  StyledPage,
-  Title,
-} from './styled';
+import { Header, NextButton, StyledCard, StyledPage, Title } from './styled';
 import { ReactComponent as Arrow } from '../../assets/arrow.svg';
 
 import { CardContext, CardInfoContext } from '../../contexts';
-import { CARD_COMPANY, NOW } from '../../constants';
-import { encryptCardNumber, makeValidDate, preventBubbling } from '../../utils';
+import { NOW } from '../../constants';
+import { encryptCardNumber, makeValidDate } from '../../utils';
 import { splitCardNumbers } from '../../utils/regExp';
 import isValidCardInputs from '../../utils/validator';
 
@@ -50,34 +41,6 @@ function AddPage() {
   const navigate = useNavigate();
   const dispatch = useContext(CardContext);
 
-  const forwardValue = useMemo(
-    () => ({
-      cardNumber,
-      setCardNumber,
-      validDate,
-      setValidDate,
-      cardOwnerName,
-      setCardOwnerName,
-      CVC,
-      setCVC,
-      isModalOpen: isCVCModalOpen,
-      toggleModal: toggleIsCVCModalOpen,
-      firstPassword,
-      setFirstPassword,
-      secondPassword,
-      setSecondPassword,
-    }),
-    [
-      cardNumber,
-      validDate,
-      cardOwnerName,
-      CVC,
-      isCVCModalOpen,
-      firstPassword,
-      secondPassword,
-    ]
-  );
-
   useEffect(() => {
     try {
       isValidCardInputs(
@@ -97,7 +60,7 @@ function AddPage() {
     navigate(-1);
   };
 
-  const toggleCardTitleModal = () => {
+  const toggleCardCompanyModal = () => {
     toggleIsCardCompanyModalOpen(!isCardCompanyModalOpen);
   };
 
@@ -125,6 +88,37 @@ function AddPage() {
     navigate('/complete');
   };
 
+  const forwardValue = useMemo(
+    () => ({
+      cardNumber,
+      setCardNumber,
+      validDate,
+      setValidDate,
+      cardOwnerName,
+      setCardOwnerName,
+      CVC,
+      setCVC,
+      isModalOpen: isCVCModalOpen,
+      toggleModal: toggleIsCVCModalOpen,
+      firstPassword,
+      setFirstPassword,
+      secondPassword,
+      setSecondPassword,
+      toggleCardCompanyModal,
+      onClickCardCompany,
+    }),
+    [
+      cardNumber,
+      validDate,
+      cardOwnerName,
+      CVC,
+      isCVCModalOpen,
+      firstPassword,
+      secondPassword,
+      isCardCompanyModalOpen,
+    ]
+  );
+
   return (
     <CardInfoContext.Provider value={forwardValue}>
       <StyledPage>
@@ -141,7 +135,7 @@ function AddPage() {
           name={cardOwnerName}
           number={splitCardNumbers(encryptCardNumber(cardNumber), ' ') ?? ''}
           validDate={makeValidDate(validDate)}
-          onClickFunc={toggleCardTitleModal}
+          onClickFunc={toggleCardCompanyModal}
         />
         <CardInputs />
         {isPossible && (
@@ -153,23 +147,7 @@ function AddPage() {
             다음
           </NextButton>
         )}
-        {isCardCompanyModalOpen && (
-          <Dimmer onClick={toggleCardTitleModal}>
-            <CardCompanyModal onClick={preventBubbling}>
-              {CARD_COMPANY.map(({ name, color }) => (
-                <CardCompany
-                  data-name={name}
-                  data-color={color}
-                  onClick={onClickCardCompany}
-                  key={name}
-                >
-                  <Button bgColor={color} shape="circle" />
-                  <CardCompanyName>{name}</CardCompanyName>
-                </CardCompany>
-              ))}
-            </CardCompanyModal>
-          </Dimmer>
-        )}
+        {isCardCompanyModalOpen && <CompanyModal />}
       </StyledPage>
     </CardInfoContext.Provider>
   );
