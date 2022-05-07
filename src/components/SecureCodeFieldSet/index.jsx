@@ -7,7 +7,7 @@ import { checkSecureCode, checkNumberOnly } from '../../validation';
 import { ACTION, useCardFormContext } from '../../context/card-form-context';
 import * as styled from './index.styled';
 
-const SecureCode = () => {
+const SecureCodeFieldSet = () => {
   const { dispatch, state } = useCardFormContext();
   const [secureCode, isSecureCodeError, onChangeSecureCode] = useInputValue({
     isValidateInput: checkSecureCode,
@@ -48,4 +48,4 @@ const SecureCode = () => {
   );
 };
 
-export default SecureCode;
+export default SecureCodeFieldSet;

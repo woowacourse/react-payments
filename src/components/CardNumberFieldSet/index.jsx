@@ -5,7 +5,7 @@ import CardNumberInput from '../Input/CardNumberInput';
 import { checkCardNumber, checkNumberOnly } from '../../validation';
 import { useCardFormContext, ACTION } from '../../context/card-form-context';
 
-const CardNumber = () => {
+const CardNumberFieldSet = () => {
   const { dispatch, state } = useCardFormContext();
   const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] =
     useInputValue({
@@ -112,4 +112,4 @@ const CardNumber = () => {
   );
 };
 
-export default CardNumber;
+export default CardNumberFieldSet;

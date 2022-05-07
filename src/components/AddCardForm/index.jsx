@@ -5,11 +5,11 @@ import Button from '../Button';
 import Header from '../Header';
 import Card from '../Card';
 
-import CardNumber from '../CardNumber';
-import CardOwner from '../CardOwner';
-import ExpiredDate from '../ExpiredDate';
-import Password from '../Password';
-import SecureCode from '../SecureCode';
+import CardNumberFieldSet from '../CardNumberFieldSet';
+import CardOwnerFieldSet from '../CardOwnerFieldSet';
+import ExpiredDateFieldSet from '../ExpiredDateFieldSet';
+import PasswordFieldSet from '../PasswordFieldSet';
+import SecureCodeFieldSet from '../SecureCodeFieldSet';
 import ErrorMessage from '../ErrorMessage';
 
 import PropTypes from 'prop-types';
@@ -61,11 +61,11 @@ const AddCardForm = ({ openModal }) => {
           )}
         </styled.ErrorMessageContainer>
       </styled.CardContainer>
-      <CardNumber />
-      <ExpiredDate />
-      <CardOwner />
-      <SecureCode />
-      <Password />
+      <CardNumberFieldSet />
+      <ExpiredDateFieldSet />
+      <CardOwnerFieldSet />
+      <SecureCodeFieldSet />
+      <PasswordFieldSet />
       <styled.ButtonContainer>
         {isSubmittAble && (
           <Button

@@ -9,7 +9,7 @@ import {
 } from '../../validation';
 import { ACTION, useCardFormContext } from '../../context/card-form-context';
 
-const ExpiredDate = () => {
+const ExpiredDateFieldSet = () => {
   const { dispatch, state } = useCardFormContext();
   const [expiredMonth, isExpiredMonthError, onChangeExpiredMonth] =
     useInputValue({
@@ -67,4 +67,4 @@ const ExpiredDate = () => {
   );
 };
 
-export default ExpiredDate;
+export default ExpiredDateFieldSet;

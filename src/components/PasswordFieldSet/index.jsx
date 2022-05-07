@@ -6,7 +6,7 @@ import { checkPassword, checkNumberOnly } from '../../validation';
 import * as styled from './index.styled';
 import { ACTION, useCardFormContext } from '../../context/card-form-context';
 
-const Password = () => {
+const PasswordFieldSet = () => {
   const { dispatch, state } = useCardFormContext();
   const [firstPassword, isFirstPasswordError, onChangeFirstPassword] =
     useInputValue({
@@ -79,4 +79,4 @@ const Password = () => {
   );
 };
 
-export default Password;
+export default PasswordFieldSet;
