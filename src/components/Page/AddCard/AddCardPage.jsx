@@ -15,7 +15,6 @@ import {
 } from '../../../validation';
 
 import Card from '../../Card';
-import Modal from '../../Modal';
 import Palette from '../../Palette';
 import useInputValue from '../../../hooks/useInputValue';
 
@@ -23,6 +22,8 @@ import { CardIndexContext, CardListContext } from '../../../contexts';
 
 const Container = styled.form`
   display: flex;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
   position: relative;
 `;
@@ -31,6 +32,23 @@ const NextButtonWrapper = styled.div`
   position: absolute;
   right: 20px;
   bottom: 0;
+`;
+
+const Dimmed = styled.div`
+  display: none;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #00000080;
+  z-index: 10;
+
+  &.is-active {
+    display: block;
+    visibility: visible;
+  }
 `;
 
 const AddCardPage = () => {
@@ -188,11 +206,8 @@ const AddCardPage = () => {
           </Link>
         </NextButtonWrapper>
       )}
-      {isModalOpened && (
-        <Modal onClickDimmed={closeModal}>
-          <Palette onClickCardSelector={onClickCardSelector} />
-        </Modal>
-      )}
+      <Dimmed onClick={closeModal} className={isModalOpened ? 'is-active' : ''} />
+      <Palette onClickCardSelector={onClickCardSelector} isModalOpened={isModalOpened} />
     </Container>
   );
 };
