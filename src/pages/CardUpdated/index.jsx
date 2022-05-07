@@ -12,9 +12,11 @@ function CardUpdated() {
   const { setPageTitle, setPageLocation } = usePageContext();
   useEffect(() => setPageTitle('카드 등록 완료'), []);
 
-  const { cardList, currentEditIndex, handleChangeEditIndex } = useCardDataContext();
+  const { cardList = {}, currentEditIndex, handleChangeEditIndex } = useCardDataContext();
   const { cardName, companyId, cardNumber, expireMonth, expireYear, userName } =
-    CARD_EDITOR_MODE.NEW ? cardList[cardList.length - 1] : cardList[currentEditIndex];
+    CARD_EDITOR_MODE.NEW === currentEditIndex
+      ? cardList[cardList.length - 1] || {}
+      : cardList[currentEditIndex] || {};
 
   const onClickListButton = () => {
     handleChangeEditIndex(CARD_EDITOR_MODE.NEW);
@@ -27,7 +29,9 @@ function CardUpdated() {
         <ResultMessage>
           <div className="emoji">😍</div>
           <h2 className="title">카드 등록 완료</h2>
-          <p className="description">{`${CARD_COMPANY[companyId].name}가 추가되었습니다`}</p>
+          <p className="description">
+            {`${CARD_COMPANY[companyId]?.name || '카드 회사'}가 추가되었습니다`}
+          </p>
         </ResultMessage>
       </div>
 
