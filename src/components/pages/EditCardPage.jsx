@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import API_SERVER from '../../utils/constants';
 import BackwardButton from '../common/BackwardButton';
 import Button from '../common/Button';
 import CardPreview from '../common/CardPreview';
@@ -57,7 +58,7 @@ const EditCardPage = () => {
   } = useLocation();
 
   const editCard = async () => {
-    const response = await fetch(`http://localhost:4000/cards/${id}`, {
+    const response = await fetch(`${API_SERVER}/cards/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -77,7 +78,7 @@ const EditCardPage = () => {
       return;
     }
 
-    const response = await fetch(`http://localhost:4000/cards/${id}`, {
+    const response = await fetch(`${API_SERVER}/cards/${id}`, {
       method: 'DELETE',
     });
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import API_SERVER from '../../utils/constants';
 import BackwardButton from '../common/BackwardButton';
 import Button from '../common/Button';
 import CardPreview from '../common/CardPreview';
@@ -53,8 +54,8 @@ const StoredCardListPage = () => {
   const [storedList, setStoredList] = useState({});
   useEffect(() => {
     async function fetchStoredCardList() {
-      const ww = await fetch(`http://localhost:4000/cards`);
-      const response = await ww.json();
+      const fetchedCards = await fetch(`${API_SERVER}/cards`);
+      const response = await fetchedCards.json();
       return response;
     }
     fetchStoredCardList().then(setStoredList);

@@ -6,6 +6,7 @@ import CardPreview from '../common/CardPreview';
 import TextBox from '../common/TextBox';
 import Input from '../common/Input';
 import Button from '../common/Button';
+import API_SERVER from '../../utils/constants';
 
 const StyledCompleteAddCardPage = styled.div`
   display: flex;
@@ -47,7 +48,7 @@ const CompleteAddCardPage = () => {
       values,
     };
 
-    const response = await fetch('http://localhost:4000/cards', {
+    const response = await fetch(`${API_SERVER}/cards`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
