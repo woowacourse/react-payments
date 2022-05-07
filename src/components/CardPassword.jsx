@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import useDispatch from '../hooks/useDispatch';
 import useInput from '../hooks/useInput';
+
 import ErrorMessage from './common/ErrorMessage';
 import InactiveContainer from './common/InactiveContainer';
 
@@ -10,7 +12,8 @@ const S = { ...CommonStyles, ...CardPasswordStyle };
 
 const MAX_PASSWORD_UNIT = 1;
 
-function CardPassword({ dispatch }) {
+function CardPassword() {
+  const dispatch = useDispatch();
   const [value, onChangeInputValue, isValid, errorMessage] = useInput({
     type: 'number',
     maxLength: MAX_PASSWORD_UNIT,

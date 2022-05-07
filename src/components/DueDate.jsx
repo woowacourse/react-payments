@@ -1,4 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
+import useCardState from '../hooks/useCardState';
+import useDispatch from '../hooks/useDispatch';
+
 import { HYPHEN_PRIMARY_COLOR } from '../theme';
 import Select from './common/Select';
 
@@ -9,7 +12,10 @@ const MAX_YEAR_CARD_EXPIRATION = 5;
 
 const getYears = (length, n) => Array.from({ length }, (_, i) => `${i + n}`.slice(2));
 
-function DueDate({ dispatch, dimensions }) {
+function DueDate() {
+  const { dimensions } = useCardState();
+  const dispatch = useDispatch();
+
   const now = useRef(new Date());
   const months = useRef(MONTH);
   const years = useRef(getYears(MAX_YEAR_CARD_EXPIRATION, now.current.getFullYear()));
@@ -18,6 +24,8 @@ function DueDate({ dispatch, dimensions }) {
   const [year, setYear] = useState('YY');
 
   useEffect(() => {
+    if (month === 'MM' && year === 'YY') return;
+
     dispatch({
       type: 'DUE_DATE',
       dueDate: `${month} / ${year}`,
@@ -41,4 +49,4 @@ function DueDate({ dispatch, dimensions }) {
   );
 }
 
-export default DueDate;
+export default React.memo(DueDate);

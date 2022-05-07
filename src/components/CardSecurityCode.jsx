@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import useDispatch from '../hooks/useDispatch';
 import useInput from '../hooks/useInput';
+
 import ErrorMessage from './common/ErrorMessage';
 import QuestionContainer from './common/QuestionIcon';
 
@@ -8,7 +10,8 @@ import * as S from './common/styles';
 const MAX_CARD_CODE = 3;
 const CVC_EXPLANATION = `CVC번호는 카드뒷면의 7자리 숫자 중 뒷 3자리입니다.`;
 
-function CardSecurityCode({ dispatch }) {
+function CardSecurityCode() {
+  const dispatch = useDispatch();
   const [value, onChangeInputValue, isValid, errorMessage] = useInput({
     type: 'number',
     maxLength: MAX_CARD_CODE,
