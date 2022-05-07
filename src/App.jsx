@@ -5,6 +5,7 @@ import { CardInfoListContext } from './context';
 import CardListPage from './pages/CardListPage';
 import AddCardPage from './pages/AddCardPage';
 import UpdateCardNickNamePage from './pages/UpdateCardNickNamePage';
+import WrongAccessPage from './pages/WrongAccessPage';
 
 function App() {
   const [cardInfoList, setCardInfoList] = useState([]);
@@ -36,6 +37,8 @@ function App() {
           <Route path="/" element={<CardListPage />} />
           <Route path="/addCard" element={<AddCardPage />} />
           <Route path="/updateCardNickName/:id" element={<UpdateCardNickNamePage />} />
+          <Route path="/error" element={<WrongAccessPage />} />
+          <Route path="*" element={<WrongAccessPage />} />
         </Routes>
       </CardInfoListContext.Provider>
     </div>
