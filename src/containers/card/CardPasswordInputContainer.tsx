@@ -6,20 +6,9 @@ import { ActionType } from 'types';
 import CardFormInput from 'components/card/CardFormInput';
 
 const style = css({
-  height: '45px',
   width: '43px',
-  borderRadius: '7px',
-  outline: 'none !important',
-  border: 'inherit',
-  fontSize: '21px',
-  textAlign: 'center',
+  height: '45px',
   marginRight: '7px',
-  '&:focus': {
-    boxShadow: 'none',
-  },
-  '&:disabled': {
-    backgroundColor: 'white',
-  },
 });
 
 function CardPasswordInputContainer() {
@@ -55,7 +44,7 @@ function CardPasswordInputContainer() {
         onChange={handleFirstPasswordInput}
         value={firstPassword}
         placeholder="0"
-        style={style}
+        css={style}
         ref={secondPasswordInputRef}
       />
       <CardFormInput
@@ -63,11 +52,11 @@ function CardPasswordInputContainer() {
         onChange={handleSecondPasswordInput}
         value={secondPassword}
         placeholder="0"
-        style={style}
+        css={style}
         ref={secondPasswordInputRef}
       />
-      <CardFormInput placeholder="•" disabled={true} style={style} />
-      <CardFormInput placeholder="•" disabled={true} style={style} />
+      <CardFormInput placeholder="•" disabled={true} css={style} />
+      <CardFormInput placeholder="•" disabled={true} css={style} />
     </>
   );
 }

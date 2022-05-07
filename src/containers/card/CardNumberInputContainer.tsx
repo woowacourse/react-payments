@@ -8,15 +8,8 @@ import CardFormInput from 'components/card/CardFormInput';
 
 const style = css({
   height: '47px',
-  width: '100%',
   border: 'none',
   maxWidth: '70px',
-  outline: 'none !important',
-  fontSize: '18px',
-  textAlign: 'center',
-  '&:focus': {
-    boxShadow: 'none',
-  },
 });
 
 function CardNumberInputContainer() {
@@ -102,7 +95,7 @@ function CardNumberInputContainer() {
         onChange={handleFirstInputCardNumber}
         value={firstInputCardNumber}
         placeholder="0000"
-        style={style}
+        css={style}
         ref={firstNumberInputRef}
       />
       -
@@ -110,7 +103,7 @@ function CardNumberInputContainer() {
         onChange={handleSecondInputCardNumber}
         value={secondInputCardNumber}
         placeholder="0000"
-        style={style}
+        css={style}
         ref={secondNumberInputRef}
       />
       -
@@ -119,7 +112,7 @@ function CardNumberInputContainer() {
         value={thirdInputCardNumber}
         type="password"
         placeholder="0000"
-        style={style}
+        css={style}
         ref={thirdNumberInputRef}
       />
       -
@@ -128,7 +121,7 @@ function CardNumberInputContainer() {
         onChange={handleFourthInputCardNumber}
         value={fourthInputCardNumber}
         placeholder="0000"
-        style={style}
+        css={style}
         ref={fourthnumberInputRef}
       />
     </>

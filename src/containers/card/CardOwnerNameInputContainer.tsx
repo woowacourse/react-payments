@@ -8,17 +8,8 @@ import { ActionType } from 'types';
 import CardFormInput from 'components/card/CardFormInput';
 
 const style = css({
-  height: '45px',
-  width: '100%',
-  borderRadius: '7px',
   maxWidth: '318px',
-  outline: 'none !important',
-  border: 'inherit',
-  fontSize: '18px',
-  textAlign: 'center',
-  '&:focus': {
-    boxShadow: 'none',
-  },
+  height: '45px',
 });
 
 function CardOwnerNameInputContainer() {
@@ -76,7 +67,7 @@ function CardOwnerNameInputContainer() {
         onChange={handleChage}
         value={name}
         placeholder="카드에 표시될 이름을 작성해주세요."
-        style={style}
+        css={style}
       />
     </>
   );

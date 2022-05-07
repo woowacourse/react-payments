@@ -7,17 +7,8 @@ import { isNum, removeWhiteSpaces } from 'utils';
 import CardFormInput from 'components/card/CardFormInput';
 
 const style = css({
-  width: '100%',
   height: '45px',
-  borderRadius: '7px',
   maxWidth: '68px',
-  outline: 'none !important',
-  border: 'inherit',
-  fontSize: '18px',
-  textAlign: 'center',
-  '&:focus': {
-    boxShadow: 'none',
-  },
 });
 
 function ExpiredPeriodInputContainer() {
@@ -96,7 +87,7 @@ function ExpiredPeriodInputContainer() {
         onChange={handleMonthChange}
         value={expiredPeriodMonth}
         placeholder="MM"
-        style={style}
+        css={style}
       />
       /
       <CardFormInput
@@ -104,7 +95,7 @@ function ExpiredPeriodInputContainer() {
         onChange={handleYearChange}
         value={expiredPeriodYear}
         placeholder="YY"
-        style={style}
+        css={style}
         ref={secondExpiredPeriodInputRef}
       />
     </>

@@ -70,7 +70,7 @@ function CardCompleteContainer() {
         value={cardAlias}
         onChange={handleCardAlias}
         placeholder="카드별칭을 입력해주세요."
-        style={style}
+        css={style}
       />
       <ConfirmButtonContainer />
     </Wrapper>

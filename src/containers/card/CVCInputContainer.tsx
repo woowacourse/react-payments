@@ -7,18 +7,9 @@ import { isNum, removeWhiteSpaces } from 'utils';
 import CardFormInput from 'components/card/CardFormInput';
 
 const style = css({
-  height: '45px',
-  width: '100%',
-  borderRadius: '7px',
   maxWidth: '84px',
-  outline: 'none !important',
-  border: 'inherit',
-  fontSize: '21px',
-  textAlign: 'center',
+  height: '45px',
   marginRight: '11px',
-  '&:focus': {
-    boxShadow: 'none',
-  },
 });
 
 function CVCInputContainer() {
@@ -45,7 +36,7 @@ function CVCInputContainer() {
         onChange={handleChage}
         value={cvc}
         placeholder="000"
-        style={style}
+        css={style}
       />
     </>
   );
