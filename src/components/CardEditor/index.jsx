@@ -90,19 +90,7 @@ function CardEditor({ isEdit, originData }) {
   };
 
   const handleSubmit = () => {
-    if (!isEdit) {
-      onCreate(
-        cardId.current,
-        cardNumbers,
-        dueDate,
-        owner,
-        cvc,
-        password,
-        company
-      );
-      navigate(`/finish/${cardId.current}`, { replace: true });
-      cardId.current += 1;
-    } else {
+    if (isEdit) {
       onEditCard(
         originData.cardId,
         cardNumbers,
@@ -113,7 +101,20 @@ function CardEditor({ isEdit, originData }) {
         company
       );
       navigate(`/finish/${originData.cardId}`, { replace: true });
+      return;
     }
+
+    onCreate(
+      cardId.current,
+      cardNumbers,
+      dueDate,
+      owner,
+      cvc,
+      password,
+      company
+    );
+    navigate(`/finish/${cardId.current}`, { replace: true });
+    cardId.current += 1;
   };
 
   const handleRemoveCard = () => {
