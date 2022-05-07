@@ -12,20 +12,21 @@ const FormInput = ({
   theme,
   onChange,
   children,
+  inputRef,
 }) => {
-  const handleChange = (e) => onChange(e, item);
-
   return (
     <div className={styles.container}>
       <label className={styles.title}>{inputTitle}</label>
       <div className={`${styles.inputContainer} ${className}`}>
-        {inputInfoList.map(({ name, className = '', ...rest }, index) => (
+        {inputInfoList.map(({ id, name, className = '', maxLength, ...rest }, index) => (
           <input
             key={index}
             name={name}
+            ref={(elem) => (inputRef.current[id] = elem)}
             className={`input-basic ${className} font-${theme}`}
+            maxLength={maxLength}
             value={isObject(inputValue) ? inputValue[name] : inputValue}
-            onChange={handleChange}
+            onChange={(e) => onChange(e, item, id, maxLength)}
             {...rest}
           />
         ))}

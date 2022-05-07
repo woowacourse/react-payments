@@ -1,4 +1,4 @@
-import { useReducer, useCallback, useContext } from 'react';
+import { useReducer, useCallback, useContext, useRef } from 'react';
 import useCardInfo from 'hooks/useCardInfo';
 import { Link } from 'react-router-dom';
 import { CardDispatch } from 'App';
@@ -50,17 +50,24 @@ const CardAppPage = () => {
     false,
   );
   const { number, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
+  const inputRef = useRef([]);
 
   const handleInputChange = useCallback(
-    ({ target }, item) => {
+    ({ target }, item, id, maxLength) => {
       const { name, value } = target;
 
       if (!validator[item](value, name)) return;
 
       handleCardInfo({ item, name, value });
+
+      if (value.length >= maxLength) moveFocus(id + 1);
     },
     [handleCardInfo],
   );
+
+  const moveFocus = (index) => {
+    inputRef.current[index]?.focus();
+  };
 
   const handleClickCompany = useCallback(
     (company, theme) => {
@@ -89,6 +96,7 @@ const CardAppPage = () => {
         inputValue={number}
         onChange={handleInputChange}
         theme={theme}
+        inputRef={inputRef}
       />
       <FormInput
         className="w-50"
@@ -98,6 +106,7 @@ const CardAppPage = () => {
         inputValue={expiryDate}
         onChange={handleInputChange}
         theme={theme}
+        inputRef={inputRef}
       />
       <FormInput
         item="ownerName"
@@ -106,6 +115,7 @@ const CardAppPage = () => {
         inputValue={ownerName}
         onChange={handleInputChange}
         theme={theme}
+        inputRef={inputRef}
       >
         <div className="owner-name-length">
           {ownerName.length} / {INPUT_MAX_LENGTH.OWNER_NAME}
@@ -118,6 +128,7 @@ const CardAppPage = () => {
         onChange={handleInputChange}
         inputValue={privacyCode}
         theme={theme}
+        inputRef={inputRef}
       >
         <Tooltip type="PRIVACY_CODE" />
       </FormInput>
@@ -128,6 +139,7 @@ const CardAppPage = () => {
         inputValue={{ ...password, third: CRYPTO_STRING, fourth: CRYPTO_STRING }}
         onChange={handleInputChange}
         theme={theme}
+        inputRef={inputRef}
       />
       {isFullFilled && (
         <Link

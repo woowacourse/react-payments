@@ -2,6 +2,7 @@ import { COMPANY, INPUT_MAX_LENGTH, THEME } from 'constants';
 
 export const cardNumberInputInfoList = [
   {
+    id: 0,
     type: 'text',
     className: 'mr-n15 tracking-wide',
     name: 'first',
@@ -9,18 +10,21 @@ export const cardNumberInputInfoList = [
     autoFocus: true,
   },
   {
+    id: 1,
     type: 'text',
     className: 'mr-n15 tracking-wide',
     name: 'second',
     maxLength: INPUT_MAX_LENGTH.NUMBER,
   },
   {
+    id: 2,
     type: 'password',
     className: 'mr-n15 tracking-wide',
     name: 'third',
     maxLength: INPUT_MAX_LENGTH.NUMBER,
   },
   {
+    id: 3,
     type: 'password',
     className: 'tracking-wide',
     name: 'fourth',
@@ -30,6 +34,7 @@ export const cardNumberInputInfoList = [
 
 export const expiryDateInputInfoList = [
   {
+    id: 4,
     type: 'text',
     placeholder: 'MM',
     className: 'mr-n15',
@@ -37,6 +42,7 @@ export const expiryDateInputInfoList = [
     maxLength: INPUT_MAX_LENGTH.EXPIRY_DATE,
   },
   {
+    id: 5,
     type: 'text',
     placeholder: 'YY',
     name: 'year',
@@ -46,6 +52,7 @@ export const expiryDateInputInfoList = [
 
 export const cardOwnerNameInputInfoList = [
   {
+    id: 6,
     type: 'text',
     placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
     className: 'text-left',
@@ -55,6 +62,7 @@ export const cardOwnerNameInputInfoList = [
 
 export const privacyCodeInputInfoList = [
   {
+    id: 7,
     type: 'password',
     className: 'w-25 tracking-wide',
     maxLength: INPUT_MAX_LENGTH.PRIVACY_CODE,
@@ -63,18 +71,21 @@ export const privacyCodeInputInfoList = [
 
 export const cardPasswordInputInfoList = [
   {
+    id: 8,
     type: 'password',
     className: 'w-5',
     name: 'first',
     maxLength: INPUT_MAX_LENGTH.PASSWORD,
   },
   {
+    id: 9,
     type: 'password',
     className: 'w-5',
     name: 'second',
     maxLength: INPUT_MAX_LENGTH.PASSWORD,
   },
   {
+    id: 10,
     type: 'password',
     className: 'w-5 input-disabled',
     disabled: true,
@@ -82,6 +93,7 @@ export const cardPasswordInputInfoList = [
     maxLength: INPUT_MAX_LENGTH.PASSWORD,
   },
   {
+    id: 11,
     type: 'password',
     className: 'w-5 input-disabled',
     disabled: true,
