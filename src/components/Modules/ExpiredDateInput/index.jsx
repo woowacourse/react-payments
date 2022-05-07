@@ -3,8 +3,9 @@ import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
 import useExpiredDateInput from '../../../hooks/Input/useExpiredDateInput';
-import { DATE_INPUT_PLACEHOLDER } from '../../../constant';
+import { COUNT, DATE_INPUT_PLACEHOLDER, INPUT_TITLE } from '../../../constant';
 import { EXPIRED_DATE_INPUT_NAMES } from '../../../constant/inputNames';
+import { DATE_SEPARATOR } from '../../../constant/mark';
 
 const InputContainer = styled.div`
   display: flex;
@@ -19,19 +20,19 @@ function ExpiredDateInput() {
     useExpiredDateInput(EXPIRED_DATE_INPUT_NAMES);
 
   return (
-    <LabeledInput text="만료일">
+    <LabeledInput text={INPUT_TITLE.EXPIRED_DATE}>
       <InputWrapper>
         <InputContainer>
           {Object.keys(expiredDate).map((unit, index) => (
             <div key={unit}>
-              {index !== 0 && '/'}
+              {index !== 0 && DATE_SEPARATOR}
               <Input
                 name={unit}
                 ref={inputRefs[unit]}
                 value={expiredDate[unit]}
                 width="40px"
                 type="number"
-                maxLength={2}
+                maxLength={COUNT.DATE_MAX_COUNT}
                 placeholder={DATE_INPUT_PLACEHOLDER[unit]}
                 onChange={onDateChange}
                 isValid={validations[unit]}

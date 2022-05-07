@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { CardContext } from 'context/CardContext';
 import { CARD_ACTION } from 'Reducer/CardReducer';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
+import { MESSAGE } from '../../constant/message';
+import { LINK } from '../../constant/Link';
 
 function useCardDeleteButton() {
   const navigator = useNavigate();
@@ -11,7 +13,7 @@ function useCardDeleteButton() {
     useContext(CardContext);
 
   const onDeleteClick = () => {
-    if (confirm('해당 카드를 삭제하시겠습니까?')) {
+    if (confirm(MESSAGE.CARD_DELETE)) {
       inputtedInfoDispatch({
         type: INPUT_ACTION.CLEAR,
       });
@@ -21,7 +23,7 @@ function useCardDeleteButton() {
         value: inputtedInfo.cardNumber.value,
       });
 
-      navigator('/react-payments/cardList');
+      navigator(LINK.CARD_LIST_PAGE);
     }
   };
 

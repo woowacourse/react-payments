@@ -3,6 +3,7 @@ import { CardContext } from 'context/CardContext';
 import { CARD_ACTION } from 'Reducer/CardReducer';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 import { useNavigate } from 'react-router-dom';
+import { MESSAGE } from '../../constant/message';
 
 function useCardNickNameForm(link) {
   const navigator = useNavigate();
@@ -16,7 +17,7 @@ function useCardNickNameForm(link) {
     event.preventDefault();
 
     if (!isValidForm) {
-      alert('카드 이름을 입력해주세요.');
+      alert(MESSAGE.NO_CARD_NAME);
       return;
     }
 

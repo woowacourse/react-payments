@@ -5,6 +5,8 @@ import Card from 'components/Modules/Card';
 import CardNickNameForm from 'components/Templates/CardNickNameForm';
 import { useNavigate } from 'react-router-dom';
 import CardDeleteButton from 'components/Atoms/CardDeleteButton';
+import { LINK } from '../../constant/Link';
+import { MESSAGE } from '../../constant/message';
 
 const Page = styled.div`
   display: flex;
@@ -35,8 +37,8 @@ function CardCompletePage() {
 
   useEffect(() => {
     if (Object.keys(inputtedInfo).length === 0) {
-      alert('유효하지 않은 접근입니다.');
-      navigator('/react-payments/cardList');
+      alert(MESSAGE.INVALID_ACCESS);
+      navigator(LINK.CARD_LIST_PAGE);
       return;
     }
   }, []);
@@ -47,7 +49,7 @@ function CardCompletePage() {
       <CardSection>
         <Card {...inputtedInfo} disable={true} />
       </CardSection>
-      <CardNickNameForm link="/react-payments/cardList" />
+      <CardNickNameForm link={LINK.CARD_LIST_PAGE} />
       <CardDeleteButton>카드삭제</CardDeleteButton>
     </Page>
   );

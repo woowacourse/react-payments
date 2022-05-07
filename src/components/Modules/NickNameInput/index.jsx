@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COUNT, INPUT_PLACEHOLDER } from '../../../constant';
 import useNickNameInput from '../../../hooks/Input/useNickNameInput';
 import Input from '../../Atoms/Input';
 
@@ -19,8 +20,8 @@ function NickNameInput() {
         width="244px"
         height="22px"
         backgroundColor="white"
-        maxLength={20}
-        placeholder="카드 이름을 입력해주세요."
+        maxLength={COUNT.CARD_NAME_MAX_LENGTH}
+        placeholder={INPUT_PLACEHOLDER.CARD_NAME}
         onChange={onNickNameChange}
         isValid={validation}
       />

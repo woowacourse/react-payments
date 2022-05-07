@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { CardContext } from 'context/CardContext';
 import { Fragment } from 'react';
 import AddCard from 'components/Modules/AddCard';
+import { LINK } from '../../constant/Link';
 
 const Page = styled.div`
   display: flex;
@@ -35,7 +36,7 @@ function CardListPage() {
             <span>{cardInfo.nickName.value}</span>
           </Fragment>
         ))}
-        <AddCard link="/react-payments/cardAdd" />
+        <AddCard link={LINK.CARD_ADD_PAGE} />
       </ListContainer>
     </Page>
   );

@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { CardContext } from 'context/CardContext';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
+import { noSpecialCharacters } from '../../constant/regularExpression';
 
 function useNickNameInput() {
   const { inputtedInfoDispatch } = useContext(CardContext);
@@ -9,7 +10,7 @@ function useNickNameInput() {
 
   const onNickNameChange = ({ target }) => {
     setNickname(target.value);
-    setValidation(/[ㄱ-ㅎㅏ-ㅣ가-힣0-9a-zA-Z]/.test(target.value));
+    setValidation(noSpecialCharacters.test(target.value));
   };
 
   useEffect(() => {

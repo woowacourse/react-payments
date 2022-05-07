@@ -3,6 +3,7 @@ import { MESSAGE } from 'constant/message';
 import { CardContext } from 'context/CardContext';
 import { CARD_ACTION } from 'Reducer/CardReducer';
 import { useNavigate } from 'react-router-dom';
+import { NO_CARD_NAME } from '../../constant';
 
 function useCardAddForm(link) {
   const navigator = useNavigate();
@@ -25,13 +26,13 @@ function useCardAddForm(link) {
 
   const saveNewCard = () => {
     if (checkExistCard()) {
-      alert('이미 존재하는 카드입니다.');
+      alert(MESSAGE.ALREADY_EXIST);
       return;
     }
 
     cardDispatch({
       type: CARD_ACTION.ADD,
-      value: { ...inputtedInfo, nickName: { value: '이름 없음' } },
+      value: { ...inputtedInfo, nickName: { value: NO_CARD_NAME } },
     });
 
     navigator(link);

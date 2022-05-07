@@ -5,6 +5,7 @@ import Head from 'components/Modules/Head';
 import Card from 'components/Modules/Card';
 import CardAddForm from 'components/Templates/CardAddForm';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
+import { LINK } from '../../constant/Link';
 
 const Page = styled.div`
   width: 100%;
@@ -38,12 +39,12 @@ function CardAddPage() {
 
   return (
     <Page>
-      <Head link="/react-payments/cardList">카드 추가</Head>
+      <Head link={LINK.CARD_LIST_PAGE}>카드 추가</Head>
       <CardSection>
         <Card {...inputtedInfo} disable={true} />
       </CardSection>
       <CardAddFormContainer>
-        <CardAddForm link="/react-payments/cardComplete" />
+        <CardAddForm link={LINK.CARD_COMPLETE_PAGE} />
       </CardAddFormContainer>
     </Page>
   );

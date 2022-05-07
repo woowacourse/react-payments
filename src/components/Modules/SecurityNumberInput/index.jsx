@@ -3,6 +3,7 @@ import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import InfoLabel from '../../Atoms/InfoLabel';
 import useSecurityNumberInput from '../../../hooks/Input/useSecurityNumberInput';
+import { COUNT, INPUT_TITLE } from '../../../constant';
 
 const Container = styled.div`
   display: flex;
@@ -19,13 +20,13 @@ function SecurityNumberInput() {
 
   return (
     <Container>
-      <LabeledInput text="보안 코드(CVC/CVV)">
+      <LabeledInput text={INPUT_TITLE.SECURITY_NUMBER}>
         <Input
           value={number}
           width="84px"
           height="45px"
           type="password"
-          maxLength={3}
+          maxLength={COUNT.SECURITY_NUMBER_MAX_LENGTH}
           onChange={onNumberChange}
           isValid={validation}
         />

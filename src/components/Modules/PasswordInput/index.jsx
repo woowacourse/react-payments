@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import usePasswordInput from '../../../hooks/Input/usePasswordInput';
-import { COUNT } from '../../../constant';
+import { COUNT, INPUT_TITLE } from '../../../constant';
 import { PASSWORD_INPUT_NAMES } from '../../../constant/inputNames';
 
 const InputContainer = styled.div`
@@ -18,7 +18,7 @@ function PasswordInput() {
     usePasswordInput(PASSWORD_INPUT_NAMES);
 
   return (
-    <LabeledInput text="카드 비밀번호">
+    <LabeledInput text={INPUT_TITLE.PASSWORD}>
       <InputContainer>
         {Object.keys(password).map(order => (
           <Input
@@ -29,7 +29,7 @@ function PasswordInput() {
             width="43px"
             height="45px"
             type="password"
-            maxLength={1}
+            maxLength={COUNT.PASSWORD_MAX_LENGTH}
             onChange={onPasswordChange}
             isValid={validations[order]}
           />

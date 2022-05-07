@@ -4,6 +4,8 @@ import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
 import useCardNumberInput from '../../../hooks/Input/useCardNumberInput';
 import { CARD_NUMBER_INPUT_NAMES } from '../../../constant/inputNames';
+import { COUNT, INPUT_TITLE } from '../../../constant';
+import { CARD_NUMBER_SEPARATOR } from '../../../constant/mark';
 
 const InputContainer = styled.div`
   display: flex;
@@ -18,19 +20,21 @@ function CardNumberInput() {
     useCardNumberInput(CARD_NUMBER_INPUT_NAMES);
 
   return (
-    <LabeledInput text="카드 번호">
+    <LabeledInput text={INPUT_TITLE.CARD_NUMBER}>
       <InputWrapper>
         <InputContainer>
           {Object.keys(numbers).map((order, index) => (
             <div key={order}>
-              {index !== 0 && '-'}
+              {index !== 0 && CARD_NUMBER_SEPARATOR}
               <Input
                 name={order}
                 ref={inputRefs[order]}
                 value={numbers[order]}
-                type={index < 2 ? 'number' : 'password'}
+                type={
+                  index < COUNT.CARD_NUMBER_HIDE_COUNT ? 'number' : 'password'
+                }
                 width="50px"
-                maxLength={4}
+                maxLength={COUNT.CARD_NUMBER_MAX_COUNT}
                 onChange={handleNumberChange}
                 isValid={validations[order]}
               />

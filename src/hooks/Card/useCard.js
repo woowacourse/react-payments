@@ -4,6 +4,7 @@ import { CARD_NUMBER_MARK } from 'constant/mark';
 import { CardContext } from 'context/CardContext';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 import { useNavigate } from 'react-router-dom';
+import { LINK } from '../../constant/Link';
 
 function useCard({ cardNumber, expiredDate, ownerName }) {
   const navigator = useNavigate();
@@ -43,7 +44,7 @@ function useCard({ cardNumber, expiredDate, ownerName }) {
       value: currentCardInfo,
     });
 
-    navigator('/react-payments/cardComplete');
+    navigator(LINK.CARD_COMPLETE_PAGE);
   };
 
   return {
