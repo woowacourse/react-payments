@@ -28,7 +28,7 @@ const FooterWrapper = styled.div`
   & a {
     text-decoration: none;
     outline: none;
-    color: ${(props) => props.theme.colors.MINT};
+    color: ${({ theme }) => theme.colors.MINT};
   }
 `
 
@@ -37,11 +37,11 @@ const FormWrapper = styled.form`
   flex-direction: column;
 `
 
-const GridContainer = styled.div`
+const GridWrapper = styled.div`
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(4, 1fr);
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.WHITE};
   position: fixed;
   bottom: 0;
   padding: 18px;
@@ -53,5 +53,5 @@ export {
   CardWrapper,
   FooterWrapper,
   FormWrapper,
-  GridContainer,
+  GridWrapper,
 }

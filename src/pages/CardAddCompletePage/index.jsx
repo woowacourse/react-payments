@@ -29,6 +29,7 @@ function CardAddCompletePage() {
     // state 비우기
     clearContext()
   }
+
   return isFieldFulfilled ? (
     <PageWrapper>
       <CompleteText>카드등록이 완료되었습니다.</CompleteText>

@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import Card from 'components/common/Card'
 import Button from 'components/common/Button'
@@ -10,10 +10,10 @@ import {
   CardWrapper,
   FooterWrapper,
   FormWrapper,
-  GridContainer,
+  GridWrapper,
 } from 'pages/style'
 
-import { COLORS, CARD_COMPANY } from 'constant'
+import { COLORS, CARD_COMPANY, ALERT_MESSAGE } from 'constant'
 
 import CardNumberField from 'components/CardNumberField'
 import DueDateField from 'components/DueDateField'
@@ -26,8 +26,12 @@ import Modal from 'components/common/Modal'
 import CardCompany from 'components/common/CardCompany'
 
 function AddPage() {
-  const { cardInfo, isFieldFulfilled, handleCardCompany } =
-    useContext(CardInfoContext)
+  const {
+    cardInfo,
+    isError: { cardNumber, dueDate },
+    isFieldFulfilled,
+    handleCardCompany,
+  } = useContext(CardInfoContext)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const navigate = useNavigate()
@@ -38,6 +42,12 @@ function AddPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (cardNumber.error) {
+      return alert(ALERT_MESSAGE.CHECK_CARD_NUMBER)
+    }
+    if (dueDate.error) {
+      return alert(ALERT_MESSAGE.CHECK_DUE_DATE)
+    }
     navigate('/react-payments/complete')
   }
 
@@ -55,14 +65,14 @@ function AddPage() {
         <PasswordField />
         <FooterWrapper>
           {isFieldFulfilled && (
-            <Button type={'submit'} color={COLORS.MINT}>
-              <Link to={'/react-payments/complete'}>다음</Link>
+            <Button type={'submit'} color={COLORS.MINT} onClick={handleSubmit}>
+              다음
             </Button>
           )}
         </FooterWrapper>
       </FormWrapper>
       <Modal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
-        <GridContainer>
+        <GridWrapper>
           {Object.entries(CARD_COMPANY).map(([company, color]) => (
             <CardCompany
               color={color}
@@ -73,7 +83,7 @@ function AddPage() {
               key={company}
             />
           ))}
-        </GridContainer>
+        </GridWrapper>
       </Modal>
     </PageWrapper>
   )

@@ -30,6 +30,7 @@ const COLORS = {
   DARK_GRAY: '#525252',
   PINK: '#E36DB0',
   LIGHT_PINK: '#fcdfef',
+  WHITE: '#FFFFFF',
 }
 
 const CARD_COMPANY = {
@@ -49,6 +50,11 @@ const ERROR_MESSAGE = {
   INVALID_YEAR: '현재 년도 이상의 값을 입력해주세요',
 }
 
+const ALERT_MESSAGE = {
+  CHECK_CARD_NUMBER: '카드번호를 확인해주세요',
+  CHECK_DUE_DATE: '만료일을 확인해주세요',
+}
+
 export {
   CARD_NUMBER,
   DUE_DATE,
@@ -59,4 +65,5 @@ export {
   COLORS,
   CARD_COMPANY,
   ERROR_MESSAGE,
+  ALERT_MESSAGE,
 }
