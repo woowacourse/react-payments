@@ -39,17 +39,17 @@
 
 ### 필수 요구사항
 
-- [ ] Storybook 상호 작용 테스트
-- [ ] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
-- [ ] Context API를 활용해 전역 상태 관리 및 계층 재구성
+- [x] Storybook 상호 작용 테스트
+- [x] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
+- [x] Context API를 활용해 전역 상태 관리 및 계층 재구성
 
 ### 페이지 구현사항
 
-- [ ] 카드 목록, 추가, 확인 페이지 구현
-- [ ] 별칭 수정 가능
+- [x] 카드 목록, 추가, 확인 페이지 구현
+- [x] 별칭 수정 가능
   - 나열된 카드 클릭시 카드 추가 확인 화면 재활용
 
 ### UX 구현사항
 
-- [ ] 카드 추가 유효성 검증 시각화
+- [x] 카드 추가 유효성 검증 시각화
 - [ ] 카드 종류 선택시 현재 선택된 카드 표시
