@@ -4,6 +4,7 @@ import Home from "pages/Home";
 import New from "pages/New";
 import Finish from "pages/Finish";
 import Edit from "pages/Edit";
+import NotFound from "pages/NotFound";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/new" element={<New />} />
           <Route path="/finish/:id" element={<Finish />} />
           <Route path="/edit/:id" element={<Edit />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </CardListProvider>

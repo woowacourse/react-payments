@@ -1,5 +1,12 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Input } from "components/Input/style";
+
+const FlexCenter = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 const PageWrapper = styled.div`
   height: 700px;
@@ -68,22 +75,27 @@ const FinishTitleWrapper = styled.div`
   display: flex;
   justify-content: center;
 
-  h1 {
+  & h1 {
     font-size: 25px;
     font-weight: 400;
   }
 `;
 
 const FinishPageWrapper = styled(PageWrapper)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  ${FlexCenter}
 `;
 
 const NicknameInput = styled(Input)`
   border-bottom: 1px solid black;
   width: 250px;
+`;
+
+const NotFoundPageWrapper = styled(PageWrapper)`
+  ${FlexCenter}
+
+  & div {
+    margin-bottom: 10px;
+  }
 `;
 
 export {
@@ -97,4 +109,5 @@ export {
   FinishTitleWrapper,
   FinishPageWrapper,
   NicknameInput,
+  NotFoundPageWrapper,
 };
