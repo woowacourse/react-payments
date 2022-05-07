@@ -12,8 +12,8 @@ import {
 
 import CardInputs from './CardInputs';
 import CompanyModal from './CompanyModal';
-import { Button } from '../../components';
-import { Header, NextButton, StyledCard, StyledPage, Title } from './styled';
+import { AppContainer, Button } from '../../components';
+import { Header, NextButton, StyledCard, Title } from './styled';
 import { ReactComponent as Arrow } from '../../assets/arrow.svg';
 
 import { CardContext, CardInfoContext } from '../../contexts';
@@ -121,7 +121,7 @@ function AddPage() {
 
   return (
     <CardInfoContext.Provider value={forwardValue}>
-      <StyledPage>
+      <AppContainer>
         <Header>
           <Button size="small" onClickFunc={onClickArrowButton}>
             <Arrow />
@@ -148,7 +148,7 @@ function AddPage() {
           </NextButton>
         )}
         {isCardCompanyModalOpen && <CompanyModal />}
-      </StyledPage>
+      </AppContainer>
     </CardInfoContext.Provider>
   );
 }

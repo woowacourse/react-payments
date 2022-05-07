@@ -2,16 +2,6 @@ import styled from 'styled-components';
 
 import { Button, Card } from '../../components';
 
-const StyledPage = styled.form`
-  background: #fff;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-  width: 400px;
-  height: 757px;
-`;
-
 const Header = styled.div`
   align-items: center;
   display: flex;
@@ -74,7 +64,6 @@ const InputGroup = styled.div`
 `;
 
 export {
-  StyledPage,
   Header,
   Title,
   StyledCard,

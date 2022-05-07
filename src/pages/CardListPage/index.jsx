@@ -3,14 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Cards from './Cards';
-
-const StyledPage = styled.div`
-  background: #fff;
-  box-sizing: border-box;
-  padding: 30px;
-  width: 400px;
-  height: 757px;
-`;
+import { AppContainer } from '../../components';
 
 const Title = styled.h2`
   color: #383838;
@@ -50,13 +43,13 @@ function CardListPage({ cards }) {
   };
 
   return (
-    <StyledPage>
+    <AppContainer>
       <Title>보유카드</Title>
       <Content>
         <Cards cards={cards} />
         <PlusCard onClick={onClickPlusButton}>+</PlusCard>
       </Content>
-    </StyledPage>
+    </AppContainer>
   );
 }
 
