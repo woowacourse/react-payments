@@ -14,8 +14,6 @@ function CardContextProvider({ children }) {
     initialInputtedInfo
   );
 
-  console.log(cardData, inputtedInfo);
-
   return (
     <CardContext.Provider
       value={{ inputtedInfo, inputtedInfoDispatch, cardData, cardDispatch }}
