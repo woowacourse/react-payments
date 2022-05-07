@@ -24,8 +24,7 @@ const ExpiredDate = () => {
   useEffect(() => {
     if (
       expiredMonth.length <= 0 ||
-      expiredYear.length ||
-      0 ||
+      expiredYear.length <= 0 ||
       isExpiredMonthError ||
       isExpiredYearError
     )
@@ -48,7 +47,7 @@ const ExpiredDate = () => {
       id="expiredNumber"
       description="만료일"
       errorMessage="유효한 만료 숫자를 입력하세요"
-      isError={isExpiredMonthError && isExpiredYearError}
+      isError={isExpiredMonthError || isExpiredYearError}
     >
       {
         <ExpiredDateInput
