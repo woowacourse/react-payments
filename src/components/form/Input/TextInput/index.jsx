@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useAutoFocus } from '../../../../hooks/useAutoFocus';
 import { useCallback } from 'react';
 
 function TextInput({
