@@ -10,7 +10,7 @@ function useCardAddForm(link) {
   const { inputtedInfo, cardData, cardDispatch } = useContext(CardContext);
 
   const isValidForm = Object.keys(inputtedInfo)
-    .map(key => (key === 'cardName' ? true : inputtedInfo[key].isValid))
+    .map(key => inputtedInfo[key].isValid)
     .every(isValid => isValid);
 
   const onAddFormSubmit = event => {
