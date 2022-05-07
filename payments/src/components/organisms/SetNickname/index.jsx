@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import Card from "../../components/common/Card";
-import { Input } from "../../components/common/Input";
-import NextButton from "../../components/common/NextButton";
-import { CardContext } from "../../context/CardProvider";
+import Card from "../../common/Card";
+import { Input } from "../../common/Input";
+import NextButton from "../../common/NextButton";
+import { CardContext } from "../../../context/CardProvider";
 import { Link, useNavigate } from "react-router-dom";
 import "./index.scss";
-import { CardListContext } from "../../context/CardListProvider";
+import { CardListContext } from "../../../context/CardListProvider";
 
-const SetNickname = () => {
+const SetNickname = ({ setDone }) => {
   const { cardInfo, dispatch } = useContext(CardContext);
   const { cardList, setCardList } = useContext(CardListContext);
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const SetNickname = () => {
     e.preventDefault();
     setCardList(cardList.concat(cardInfo));
     dispatch({ type: "initialize" });
-    console.log(cardInfo);
+    setDone(false);
     navigate("/");
   };
 

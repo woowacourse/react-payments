@@ -1,5 +1,4 @@
 import "./index.scss";
-import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CardContext } from "../../../context/CardProvider";
 
@@ -23,11 +22,9 @@ const ConfirmAdd = ({ closeModal, submit }) => {
         <button className="confirm--button pink" onClick={closeModal}>
           취소
         </button>
-        <Link to="/nickname">
-          <button className="confirm--button blue" onClick={submit}>
-            확인
-          </button>
-        </Link>
+        <button className="confirm--button blue" onClick={submit}>
+          확인
+        </button>
       </div>
     </div>
   );

@@ -1,20 +1,20 @@
 import "./index.scss";
 
-import Card from "../../components/common/Card";
-import CardNumberInput from "../../components/organisms/CardNumberInput";
-import CardPasswordInput from "../../components/organisms/CardPasswordInput";
-import ExpiredDateInput from "../../components/organisms/ExpiredDateInput";
-import OwnerNameInput from "../../components/organisms/OwnerNameInput";
-import SecureCodeInput from "../../components/organisms/SecureCodeInput";
-import NextButton from "../../components/common/NextButton";
-import CardColorPicker from "../../components/organisms/CardColorPicker";
-import useModal from "../../hooks/useModal";
-import ConfirmAdd from "../../components/organisms/ConfirmAdd";
+import Card from "../../common/Card";
+import CardNumberInput from "../CardNumberInput";
+import CardPasswordInput from "../CardPasswordInput";
+import ExpiredDateInput from "../ExpiredDateInput";
+import OwnerNameInput from "../OwnerNameInput";
+import SecureCodeInput from "../SecureCodeInput";
+import NextButton from "../../common/NextButton";
+import CardColorPicker from "../CardColorPicker";
+import useModal from "../../../hooks/useModal";
+import ConfirmAdd from "../ConfirmAdd";
 import { useContext } from "react";
-import { CardContext } from "../../context/CardProvider";
+import { CardContext } from "../../../context/CardProvider";
 import { Link } from "react-router-dom";
 
-const CardAdd = () => {
+const CardAdd = ({ setDone }) => {
   const { cardInfo, validateCardInfo } = useContext(CardContext);
 
   const [openConfirmModal, closeConfirmModal, ConfirmModal] = useModal(
@@ -23,6 +23,7 @@ const CardAdd = () => {
         closeConfirmModal();
       }}
       submit={() => {
+        setDone(true);
         closeConfirmModal();
       }}
     />
