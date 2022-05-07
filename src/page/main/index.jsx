@@ -21,7 +21,7 @@ const MainPage = () => {
                 ownerName={ownerName}
                 handleModal={() => {}}
               />
-              <p className="alias">{alias}</p>
+              <p className="alias">{alias ?? company}</p>
             </div>
           ))}
         </div>
