@@ -5,7 +5,7 @@ import Navigation from 'fields/Navigation';
 import CardContainer from 'containers/card/CardContainer';
 import CardFormContainer from 'containers/card/CardFormContainer';
 import styled from '@emotion/styled';
-import CardCompleteContainer from './CardCompleteContainer';
+import CardCompleteContainer from '../containers/card/CardCompleteContainer';
 
 const Wrapper = styled.div(() => ({
   width: '375px',

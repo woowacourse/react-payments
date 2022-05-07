@@ -2,21 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ConfirmButton from 'components/card/ConfirmButton';
 import { useAppState } from 'hooks/hooks';
-
-type CardType = {
-  firstInputCardNumber: string;
-  secondInputCardNumber: string;
-  thirdInputCardNumber: string;
-  fourthInputCardNumber: string;
-  name: string;
-  expiredPeriodMonth: string;
-  expiredPeriodYear: string;
-  cvc: string;
-  firstPassword: string;
-  secondPassword: string;
-  cardType: string;
-  cardAlias: string;
-};
+import { removePathnameCardEdit } from 'utils';
 
 function ConfirmButtonContainer() {
   const {
@@ -33,9 +19,22 @@ function ConfirmButtonContainer() {
     cardType,
     cardAlias,
   } = useAppState();
+
   const handleConfirmCard = async () => {
-    const response = await axios('http://localhost:4004/cards', {
-      method: 'post',
+    const cardId = removePathnameCardEdit(window.location.pathname);
+    let pathName = '';
+    let methodType = '';
+
+    if (window.location.pathname.includes('/card/add')) {
+      pathName = 'http://localhost:4004/cards';
+      methodType = 'post';
+    } else if (window.location.pathname.includes('/card/edit/')) {
+      pathName = `http://localhost:4004/cards/${cardId}`;
+      methodType = 'patch';
+    }
+
+    const response = await axios(pathName, {
+      method: methodType,
       headers: {
         'Content-Type': 'application/json',
       },

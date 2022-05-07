@@ -5,7 +5,7 @@ import CardOwnerNameFieldset from 'fields/CardOwnerNameFieldset';
 import CardPasswordFieldset from 'fields/CardPasswordFieldset';
 import CVCFieldset from 'fields/CVCFieldset';
 import ExpiredPeriodFieldset from 'fields/ExpiredPeriodFieldset';
-import NextButtonContainer from './NextButtonContainer';
+import NextButtonContainer from '../button/NextButtonContainer';
 
 function CardFormContainer() {
   const handleChangeForm = (event: any) => {

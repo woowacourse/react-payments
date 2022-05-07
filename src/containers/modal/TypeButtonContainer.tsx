@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import React from 'react';
 import ButtonText from 'components/modal/ButtonText';
-import TypeButton from 'components/modal/TypeButton';
+import TypeButton from 'components/button/TypeButton';
 import { cardTypes } from '../../constants';
 import { createAction } from 'context/Provider';
 import { useAppDispatch } from 'hooks/hooks';

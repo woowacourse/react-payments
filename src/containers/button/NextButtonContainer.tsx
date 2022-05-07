@@ -38,6 +38,7 @@ function NextButtonContainer() {
 
   const handleSubmitCard = (event: React.MouseEvent) => {
     event.preventDefault();
+
     dispatch(createAction(ActionType.COMPLETE_CARD, true));
   };
 
