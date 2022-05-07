@@ -23,21 +23,27 @@ import PageContainer from "../../component/common/PageContainer/PageContainer.co
 const CardAddPage = () => {
   const {
     state: { cardTypeInfo, cardTypeReady },
+    action: { resetCardTypeInfo },
   } = useContext(CardTypeContext);
   const {
     state: { cardNumber, cardNumberReady },
+    action: { resetCardNumber },
   } = useContext(CardNumberContext);
   const {
     state: { expireDate, expireDateReady },
+    action: { resetExpireDate },
   } = useContext(ExpireDateContext);
   const {
     state: { userName },
+    action: { resetUserName },
   } = useContext(UserNameContext);
   const {
     state: { securityCodeReady },
+    action: { resetSecurityCode },
   } = useContext(SecurityCodeContext);
   const {
     state: { cardPasswordReady },
+    action: { resetCardPassword },
   } = useContext(CardPasswordContext);
   const [allFormReady] = useReady(
     {
@@ -55,10 +61,21 @@ const CardAddPage = () => {
     false
   );
 
+  const onClickResetData = () => {
+    resetCardTypeInfo();
+    resetCardNumber();
+    resetExpireDate();
+    resetUserName();
+    resetSecurityCode();
+    resetCardPassword();
+  };
+
   return (
     <PageContainer>
       <Header>
-        <LinkButton>{"<"}</LinkButton>
+        <LinkButton path="/" onClick={onClickResetData}>
+          {"<"}
+        </LinkButton>
         <PageTitle type="header">카드 추가</PageTitle>
       </Header>
 
