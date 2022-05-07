@@ -4,6 +4,7 @@ import Card from '../../components/Modules/Card';
 import { useContext } from 'react';
 import { CardContext } from '../../context/CardContext';
 import { Fragment } from 'react';
+import AddCard from '../../components/Modules/AddCard';
 
 const Page = styled.div`
   display: flex;
@@ -27,11 +28,14 @@ function CardListPage() {
       <Head>보유 카드</Head>
       <ListContainer>
         {cardData.map(cardInfo => (
-          <Fragment key={cardInfo.cardNumber.value}>
+          <Fragment
+            key={cardInfo.cardNumber.value.fist + cardInfo.nickName.value}
+          >
             <Card {...cardInfo} />
-            <p>{cardInfo.nickName.value}</p>
+            <span>{cardInfo.nickName.value}</span>
           </Fragment>
         ))}
+        <AddCard link="/react-payments/cardAdd" />
       </ListContainer>
     </Page>
   );

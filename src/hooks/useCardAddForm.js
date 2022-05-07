@@ -31,6 +31,8 @@ function useCardAddForm(navigator, link) {
       type: CARD_ACTION.ADD,
       value: { ...inputtedInfo, nickName: '이름 없음' },
     });
+
+    navigator(link);
   };
 
   const onAddFormSubmit = event => {
@@ -38,7 +40,6 @@ function useCardAddForm(navigator, link) {
 
     if (isValidForm) {
       saveNewCard();
-      navigator(link);
       return;
     }
 
