@@ -15,7 +15,7 @@ import {
 function Home() {
   const navigate = useNavigate();
   const cardList = useContext(CardListContext);
-
+  console.log(cardList);
   return (
     <PageWrapper>
       <Header headText="보유 카드" />
@@ -24,7 +24,7 @@ function Home() {
           {cardList.map((data) => {
             return (
               <Card
-                key={data.cardId}
+                key={data.id}
                 size={CARD_SIZE.SMALL}
                 color={data.company.color}
                 company={data.company.name}
@@ -33,7 +33,7 @@ function Home() {
                 dueMonth={data.dueDate.month}
                 dueYear={data.dueDate.year}
                 nickname={data.nickname}
-                onClick={() => navigate(`/edit/${data.cardId}`)}
+                onClick={() => navigate(`/edit/${data.id}`)}
               />
             );
           })}

@@ -92,7 +92,7 @@ function CardEditor({ isEdit, originData }) {
   const handleSubmit = () => {
     if (isEdit) {
       onEditCard(
-        originData.cardId,
+        originData.id,
         cardNumbers,
         dueDate,
         owner,
@@ -100,7 +100,7 @@ function CardEditor({ isEdit, originData }) {
         password,
         company
       );
-      navigate(`/finish/${originData.cardId}`, { replace: true });
+      navigate(`/finish/${originData.id}`, { replace: true });
       return;
     }
 
@@ -119,7 +119,7 @@ function CardEditor({ isEdit, originData }) {
 
   const handleRemoveCard = () => {
     if (window.confirm(INFO_MESSAGES.ASK_DELETE)) {
-      onRemove(originData.cardId);
+      onRemove(originData.id);
       navigate("/", { replace: true });
     }
   };
@@ -127,6 +127,7 @@ function CardEditor({ isEdit, originData }) {
   return (
     <>
       <Header
+        headText={isEdit ? "카드 정보 수정" : "카드 추가"}
         leftChild={
           <Button onClick={() => navigate("/")}>
             <ArrowImage />
@@ -135,11 +136,10 @@ function CardEditor({ isEdit, originData }) {
         rightChild={
           isEdit && (
             <Button color={COLORS.PINK} onClick={handleRemoveCard}>
-              삭제
+              삭제하기
             </Button>
           )
         }
-        headText={isEdit ? "카드 정보 수정" : "카드 추가"}
       />
       <CardWrapper>
         <Card
@@ -186,7 +186,7 @@ function CardEditor({ isEdit, originData }) {
 CardEditor.propTypes = {
   isEdit: PropTypes.bool,
   originData: PropTypes.shape({
-    cardId: PropTypes.number,
+    id: PropTypes.number,
     cardNumbers: PropTypes.array,
     dueDate: PropTypes.shape({
       month: PropTypes.string,

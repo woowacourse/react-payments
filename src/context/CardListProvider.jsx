@@ -10,7 +10,7 @@ const cardListReducer = (state, action) => {
     }
     case ACTION.EDIT_NICKNAME: {
       newState = state.map((data) =>
-        data.cardId === action.targetId
+        data.id === action.targetId
           ? { ...data, nickname: action.newNickname }
           : data
       );
@@ -18,12 +18,12 @@ const cardListReducer = (state, action) => {
     }
     case ACTION.EDIT_CARD: {
       newState = state.map((data) =>
-        data.cardId === action.data.cardId ? { ...action.data } : data
+        data.id === action.data.id ? { ...action.data } : data
       );
       break;
     }
     case ACTION.REMOVE: {
-      newState = state.filter((data) => data.cardId !== action.targetId);
+      newState = state.filter((data) => data.id !== action.targetId);
       break;
     }
     default: {
@@ -40,7 +40,7 @@ function CardListProvider({ children }) {
   const [cardListData, dispatch] = useReducer(cardListReducer, []);
 
   const onCreate = (
-    cardId,
+    id,
     cardNumbers,
     dueDate,
     owner,
@@ -51,7 +51,7 @@ function CardListProvider({ children }) {
     dispatch({
       type: ACTION.CREATE,
       data: {
-        cardId,
+        id,
         cardNumbers,
         dueDate,
         owner,
@@ -78,7 +78,7 @@ function CardListProvider({ children }) {
     dispatch({
       type: ACTION.EDIT_CARD,
       data: {
-        cardId: targetId,
+        id: targetId,
         cardNumbers,
         dueDate,
         owner,

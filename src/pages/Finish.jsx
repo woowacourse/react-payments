@@ -25,7 +25,7 @@ function Finish() {
   const cardList = useContext(CardListContext);
   const { onEditNickname } = useContext(CardDispatchContext);
 
-  const myCard = cardList.find((card) => Number(card.cardId) === Number(id));
+  const myCard = cardList.find((card) => Number(card.id) === Number(id));
 
   const handleSubmit = () => {
     onEditNickname(Number(id), nickname);
@@ -39,7 +39,7 @@ function Finish() {
       </FinishTitleWrapper>
       <CardWrapper>
         <Card
-          key={myCard.cardId}
+          key={myCard.id}
           size={CARD_SIZE.BIG}
           color={myCard.company.color}
           company={myCard.company.name}

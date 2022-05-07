@@ -13,9 +13,7 @@ function Edit() {
   const cardList = useContext(CardListContext);
 
   useEffect(() => {
-    const targetCard = cardList.find(
-      (card) => Number(card.cardId) === Number(id)
-    );
+    const targetCard = cardList.find((card) => Number(card.id) === Number(id));
 
     if (!targetCard) {
       alert(ERROR_MESSAGES.NOT_EXIST_CARD);
