@@ -1,4 +1,4 @@
-import CardAddLink from "component/common/CardAddLink/CardAddLink.component";
+import CardAddLink from "./CardAddLink.component";
 
 export default {
   title: "CardAddLink",

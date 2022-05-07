@@ -1,4 +1,4 @@
-import Card from "component/common/Card/card.component";
+import Card from "component/common/Card/Card.component";
 import { cardInfos, defaultCardInfo } from "constants/index";
 
 const COMPLETE_CARD_INFO = {
