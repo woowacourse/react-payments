@@ -6,7 +6,6 @@ import {
   SECURITY_CODE_DESCRIPTION,
 } from "../../AddCard/CardSecurityCodeInput";
 import { InputCounter } from "../../AddCard/CardHolderNameInput";
-// import { screen, userEvent, within } from "@storybook/testing-library";
 
 export default {
   title: "InputField",
@@ -23,7 +22,7 @@ PasswordInput.args = {
   labelText: "카드 비밀번호 앞 두 자리",
   wrapperWidth: "90px",
   splitCount: 2,
-  errorMessage: "비밀번호는 0~9까지 숫자로 입력해주세요.",
+  guideMessage: "비밀번호는 0~9까지 숫자로 입력해주세요.",
   isComplete: false,
   children: [
     <DefaultInput
@@ -52,7 +51,7 @@ CardNumberInput.args = {
   labelText: "카드번호",
   wrapperWidth: "100%",
   horizontalAlign: "space-around",
-  errorMessage: "카드 번호는 0~9까지 숫자로 입력해주세요.",
+  guideMessage: "카드 번호는 0~9까지 숫자로 입력해주세요.",
   children: [
     <DefaultInput
       name={"cardNumber"}
@@ -102,7 +101,7 @@ ExpireDateInput.args = {
   labelText: "만료일 (MM/YY)",
   wrapperWidth: "135px",
   horizontalAlign: "center",
-  errorMessage: "만료일은 0~9까지 숫자로 입력해주세요.",
+  guideMessage: "만료일은 0~9까지 숫자로 입력해주세요.",
   isComplete: false,
   children: [
     <DefaultInput
@@ -134,7 +133,7 @@ HolderNameInput.args = {
   labelText: "카드 소유자 이름 (선택)",
   wrapperWidth: "100%",
   horizontalAlign: "flex-start",
-  errorMessage: "카드 소유자 이름은 영문 대문자만 입력해주세요.",
+  guideMessage: "카드 소유자 이름은 영문 대문자만 입력해주세요.",
   isComplete: false,
   children: (
     <DefaultInput
@@ -157,7 +156,7 @@ export const SecurityCodeInput = InputFieldTemplate.bind({});
 SecurityCodeInput.args = {
   labelText: "보안 코드(CVC/CVV)",
   wrapperWidth: "85px",
-  errorMessage: "카드 뒷 면에 있는 3자리 숫자를 적어주세요.",
+  guideMessage: "카드 뒷 면에 있는 3자리 숫자를 적어주세요.",
   isComplete: false,
   children: (
     <DefaultInput

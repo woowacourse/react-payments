@@ -94,7 +94,7 @@ export default function InputField({
 
 InputField.propTypes = {
   labelText: PropTypes.string,
-  errorMessage: PropTypes.string,
+  guideMessage: PropTypes.string,
   wrapperWidth: PropTypes.string,
   horizontalAlign: PropTypes.oneOf(["flex-start", "center", "space-around"]),
   isComplete: PropTypes.oneOf([true, false]),
