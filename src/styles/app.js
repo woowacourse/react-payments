@@ -90,6 +90,13 @@ const appStyles = css`
   }
 
   .button-container {
+    &.flex {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
     &.right {
       text-align: right;
     }

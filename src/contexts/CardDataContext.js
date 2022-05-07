@@ -1,6 +1,10 @@
-import { createContext, useReducer, useMemo, useContext, useEffect } from 'react';
-import { requestErrorHandler, requestGetCardData, requestInsertCardData } from 'api';
-import { REQUEST_STATUS } from 'constants/';
+import { createContext, useReducer, useMemo, useContext, useEffect, useState } from 'react';
+import {
+  requestDeleteCardData,
+  requestErrorHandler,
+  requestGetCardData,
+  requestInsertCardData,
+} from 'api';
 
 const CardDataContext = createContext();
 
@@ -16,7 +20,11 @@ function reducer(cardList, { type, data }) {
       // 기존 컨텐츠를 업데이트한다.
     },
     DELETE: () => {
-      // 컨텐츠를 제거한다.
+      const newCardList = [...cardList];
+      const { index } = data;
+
+      newCardList.splice(index, 1);
+      return newCardList;
     },
   };
 
@@ -24,6 +32,7 @@ function reducer(cardList, { type, data }) {
 }
 
 function CardDataContextProvider({ children }) {
+  const [cardEditIndex, setEditIndex] = useState(-1);
   const [cardList, dispatch] = useReducer(reducer, []);
   const value = useMemo(() => ({ cardList, dispatch }), [cardList]);
 
@@ -31,8 +40,7 @@ function CardDataContextProvider({ children }) {
     (async () => {
       const response = await requestGetCardData();
 
-      requestErrorHandler(
-        response,
+      requestErrorHandler(response)(
         (successResult) => dispatch({ type: 'PRELOAD', data: successResult }),
         (errorMessage) => alert(`서버에서 카드 목록을 로드에 실패하였습니다..\n${errorMessage}`),
       );
@@ -50,22 +58,29 @@ function useCardDataContext() {
 
   const { cardList, dispatch } = context;
 
-  const insertCardData = async (cardData) => {
+  const handleInsertCardData = async (cardData) => {
     const response = await requestInsertCardData(cardData);
 
-    requestErrorHandler(
-      response,
+    requestErrorHandler(response)(
       (successResult) => dispatch({ type: 'INSERT', data: { cardData: successResult } }),
       (errorMessage) => alert(errorMessage),
     );
   };
 
-  const updateCardData = (index, cardData) =>
+  const handleUpdateCardData = (index, cardData) =>
     dispatch({ type: 'UPDATE', data: { index, cardData } });
 
-  const deleteCardData = (index) => dispatch({ type: 'INSERT', data: { index } });
+  const handleDeleteCardData = async (index) => {
+    const { id } = cardList[index];
+    const response = await requestDeleteCardData(id);
 
-  return { cardList, insertCardData, updateCardData, deleteCardData };
+    requestErrorHandler(response)(
+      () => dispatch({ type: 'DELETE', data: { index } }),
+      (errorMessage) => alert(errorMessage),
+    );
+  };
+
+  return { cardList, handleInsertCardData, handleUpdateCardData, handleDeleteCardData };
 }
 
 export { CardDataContext, CardDataContextProvider, useCardDataContext };
