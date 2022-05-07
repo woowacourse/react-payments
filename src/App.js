@@ -28,17 +28,17 @@ const GlobalStyle = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    display:flex;
+    justify-content:center;
   }
 
   #root {
     display: flex;
-    justify-content: center;
-  }
+    width: 500px;
+    flex-direction:column;
+    justify-content:center;
 
-  main {
-    width: fit-content;
-    height: fit-content;
-    padding: 10px;
   }
 
 

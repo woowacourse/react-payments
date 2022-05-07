@@ -29,7 +29,9 @@ const CardList = () => {
 
   return (
     <>
-      <Header title="보유카드" />
+      <Header>
+        <p>보유 카드</p>
+      </Header>
       <Styled.Container>
         <Styled.AddCardButton onClick={onClickAddCardButton}>
           <p>+</p>

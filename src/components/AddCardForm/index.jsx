@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useCardFormContext } from '../../context/card-form-context';
 import { pareCardFormState } from '../../utils';
 import Button from '../Button';
-import Header from '../Header';
 import Card from '../Card';
 
 import CardNumberFieldSet from '../CardNumberFieldSet';
@@ -42,7 +41,6 @@ const AddCardForm = ({ openModal }) => {
 
   return (
     <Styled.Container>
-      <Header title="카드 추가" hasBackButton={true} />
       <Styled.CardContainer>
         <Card
           onClick={openModal}
