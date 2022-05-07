@@ -9,7 +9,7 @@ import PasswordInput from '../../components/PasswordInput';
 import Button from '../../components/Button';
 import ModalPortal from '../../components/ModalPortal';
 import CardCompanySelector from '../../components/CardCompanySelector';
-import { Page, CardSection, Form, SubmitButtonContainer } from './style';
+import { Page, HeadContainer, BackButton, CardSection, Form, SubmitButtonContainer } from './style';
 import MESSAGE from '../../constant/message';
 import { useCardListContext } from 'context/cardList';
 import useCardCompany from '../../hooks/useCardCompany';
@@ -18,6 +18,7 @@ import useExpiredDate from '../../hooks/useExpiredDate';
 import useOwnerName from '../../hooks/useOwnerName';
 import useSecurityNumber from '../../hooks/useSecurityNumber';
 import usePassword from '../../hooks/usePassword';
+import BackButtonArrow from 'assets/images/backButtonArrow.svg';
 
 function CardAddPage({ isOpenModal, openModal }) {
   const navigate = useNavigate();
@@ -69,7 +70,16 @@ function CardAddPage({ isOpenModal, openModal }) {
 
   return (
     <Page>
-      <Head title="카드 추가" />
+      <Head
+        leftComponent={
+          <HeadContainer>
+            <BackButton type="click">
+              <img src={BackButtonArrow} />
+            </BackButton>
+            <span>카드 추가</span>
+          </HeadContainer>
+        }
+      />
       <CardSection>
         <Card
           cardCompany={cardCompany}
