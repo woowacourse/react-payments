@@ -47,8 +47,8 @@ function CardEditor() {
     isComplete,
   } = state;
 
-  const { insertCardData } = useCardDataContext();
-  const onClickConfirmButton = () => {
+  const { handleInsertCardData } = useCardDataContext();
+  const onClickConfirmButton = async () => {
     try {
       validateCardNumber(cardNumber);
       validateCardPassword(cardPassword);
@@ -63,7 +63,7 @@ function CardEditor() {
     const newCardData = { ...state };
     delete newCardData.isComplete;
 
-    insertCardData(newCardData);
+    await handleInsertCardData(newCardData);
     setPageLocation(PAGE_LIST.CARD_UPDATED);
   };
 
