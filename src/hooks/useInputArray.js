@@ -3,7 +3,7 @@ import { useState, useMemo } from 'react';
 const useInputArray = (initialValue, unitValidator, completeLength = null) => {
   const [state, setState] = useState(initialValue);
 
-  const updateState = (value, index) => {
+  const onChange = (value, index) => {
     if (!unitValidator(value, index)) return;
 
     setState(prevValue => {
@@ -18,7 +18,7 @@ const useInputArray = (initialValue, unitValidator, completeLength = null) => {
     return !completeLength || state.join('').length === completeLength;
   }, [completeLength, state]);
 
-  return [state, updateState, isComplete];
+  return [state, onChange, isComplete];
 };
 
 export default useInputArray;

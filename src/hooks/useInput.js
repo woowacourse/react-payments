@@ -3,7 +3,7 @@ import { useState, useMemo } from 'react';
 const useInput = (initialValue, validator, completeLength = null) => {
   const [state, setState] = useState(initialValue);
 
-  const updateState = value => {
+  const onChange = value => {
     if (!validator(value)) return;
 
     setState(value);
@@ -13,7 +13,7 @@ const useInput = (initialValue, validator, completeLength = null) => {
     return !completeLength || state.length === completeLength;
   }, [completeLength, state]);
 
-  return [state, updateState, isComplete];
+  return [state, onChange, isComplete];
 };
 
 export default useInput;

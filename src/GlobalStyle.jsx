@@ -19,9 +19,6 @@ a {
   &:hover { color: inherit; text-decoration: none;}
 }
 
-
-
-
 .App {
   width: 375px;
   height: 700px;

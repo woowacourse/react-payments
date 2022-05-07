@@ -35,25 +35,25 @@ const ButtonWrapper = styled.div`
 `;
 
 export default function AddCardPage() {
-  const [cardNumber, updateCardNumberUnit, isCompleteCardNumber] = useInputArray(
+  const [cardNumber, onChangeCardNumberUnit, isCompleteCardNumber] = useInputArray(
     ['', '', '', ''],
     isValidCardNumberUnit,
     ADD_CARD_FORM_CONDITION.NUMBER_UNIT_COUNT * ADD_CARD_FORM_CONDITION.NUMBER_UNIT_LENGTH
   );
 
-  const [expireDate, updateExpireDateUnit, isCompleteExpireDate] = useInputArray(
+  const [expireDate, onChangeExpireDateUnit, isCompleteExpireDate] = useInputArray(
     ['', ''],
     isValidCardExpireDateUnit,
     ADD_CARD_FORM_CONDITION.EXPIRE_DATE_LENGTH
   );
 
-  const [holderName, updateHolderName] = useInput('', isValidCardHolderName);
-  const [securityCode, updateSecurityCode, isCompleteSecurityCode] = useInput(
+  const [holderName, onChangeHolderName] = useInput('', isValidCardHolderName);
+  const [securityCode, onChangeSecurityCode, isCompleteSecurityCode] = useInput(
     '',
     isValidCardSecurityCode,
     ADD_CARD_FORM_CONDITION.SECURITY_CODE_LENGTH
   );
-  const [password, updatePasswordUnit, isCompletePassword] = useInputArray(
+  const [password, onChangePasswordUnit, isCompletePassword] = useInputArray(
     ['', ''],
     isValidCardPasswordUnit,
     ADD_CARD_FORM_CONDITION.PASSWORD_LENGTH
@@ -95,11 +95,11 @@ export default function AddCardPage() {
         isComplete={isCompleteCardNumber && isCompleteExpireDate && isCompleteSecurityCode && isCompletePassword}
       />
       <Form onSubmit={handleCardInfoSubmit} autoComplete="off">
-        <CardNumberInput cardNumber={cardNumber} onChange={updateCardNumberUnit} />
-        <CardExpireDateInput expireDate={expireDate} onChange={updateExpireDateUnit} />
-        <CardHolderNameInput holderName={holderName} onChange={updateHolderName} />
-        <CardSecurityCodeInput securityCode={securityCode} onChange={updateSecurityCode} />
-        <CardPasswordInput password={password} onChange={updatePasswordUnit} />
+        <CardNumberInput cardNumber={cardNumber} onChange={onChangeCardNumberUnit} />
+        <CardExpireDateInput expireDate={expireDate} onChange={onChangeExpireDateUnit} />
+        <CardHolderNameInput holderName={holderName} onChange={onChangeHolderName} />
+        <CardSecurityCodeInput securityCode={securityCode} onChange={onChangeSecurityCode} />
+        <CardPasswordInput password={password} onChange={onChangePasswordUnit} />
         {isCompleteCardNumber && isCompleteExpireDate && isCompleteSecurityCode && isCompletePassword && (
           <CardInfoSubmitButton />
         )}
