@@ -5,6 +5,10 @@ const REQUEST_STATUS = {
   FAIL: Symbol('리퀘스트 실패 결과'),
 };
 
+const CARD_EDITOR_MODE = {
+  NEW: -1,
+};
+
 const CARD_COMPANY = {
   1: { name: '포코 카드', color: 'purple', icon: '👾' },
   2: { name: '준 카드', color: 'yellow', icon: '😆' },
@@ -83,6 +87,7 @@ const ERROR_MESSAGE = {
 
 export {
   APP_NAME,
+  CARD_EDITOR_MODE,
   REQUEST_STATUS,
   CARD_COMPANY,
   CARD_NUMBER,

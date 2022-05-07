@@ -5,16 +5,21 @@ import { useCardDataContext } from 'contexts/CardDataContext';
 import Button from 'components/@common/Button';
 import { Card } from 'components';
 
-import { CARD_COMPANY, PAGE_LIST } from 'constants';
+import { CARD_COMPANY, PAGE_LIST, CARD_EDITOR_MODE } from 'constants/';
 import ResultMessage from './styles';
 
 function CardUpdated() {
   const { setPageTitle, setPageLocation } = usePageContext();
   useEffect(() => setPageTitle('카드 등록 완료'), []);
 
-  const { cardList } = useCardDataContext();
+  const { cardList, currentEditIndex, handleChangeEditIndex } = useCardDataContext();
   const { cardName, companyId, cardNumber, expireMonth, expireYear, userName } =
-    cardList[cardList.length - 1] || {};
+    CARD_EDITOR_MODE.NEW ? cardList[cardList.length - 1] : cardList[currentEditIndex];
+
+  const onClickListButton = () => {
+    handleChangeEditIndex(CARD_EDITOR_MODE.NEW);
+    setPageLocation(PAGE_LIST.CARD_LIST);
+  };
 
   return (
     <>
@@ -36,12 +41,7 @@ function CardUpdated() {
         />
         <h3 align="center">{cardName}</h3>
 
-        <Button
-          type="primary"
-          size="large"
-          width="100%"
-          onClick={() => setPageLocation(PAGE_LIST.CARD_LIST)}
-        >
+        <Button type="primary" size="large" width="100%" onClick={onClickListButton}>
           목록으로 이동
         </Button>
       </div>

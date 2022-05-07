@@ -20,7 +20,7 @@ import {
   CardNameField,
 } from 'components';
 
-import { PAGE_LIST } from 'constants';
+import { PAGE_LIST, CARD_EDITOR_MODE } from 'constants/';
 import {
   validateCardNumber,
   validateCardPassword,
@@ -31,10 +31,12 @@ import {
 
 function CardEditor() {
   const { setPageTitle, setPageLocation } = usePageContext();
+  const { cardList, currentEditIndex, handleInsertCardData, handleUpdateCardData } =
+    useCardDataContext();
 
   useEffect(() => setPageTitle('카드 추가'), []);
 
-  const { state, onChangeCardState } = useCardState();
+  const { state, onChangeCardState } = useCardState(cardList[currentEditIndex] || null);
   const {
     cardName,
     companyId,
@@ -47,7 +49,6 @@ function CardEditor() {
     isComplete,
   } = state;
 
-  const { handleInsertCardData } = useCardDataContext();
   const onClickConfirmButton = async () => {
     try {
       validateCardNumber(cardNumber);
@@ -63,7 +64,10 @@ function CardEditor() {
     const newCardData = { ...state };
     delete newCardData.isComplete;
 
-    await handleInsertCardData(newCardData);
+    CARD_EDITOR_MODE.NEW === currentEditIndex
+      ? await handleInsertCardData(newCardData)
+      : await handleUpdateCardData(currentEditIndex, newCardData);
+
     setPageLocation(PAGE_LIST.CARD_UPDATED);
   };
 

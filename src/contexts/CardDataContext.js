@@ -4,6 +4,7 @@ import {
   requestErrorHandler,
   requestGetCardData,
   requestInsertCardData,
+  requestUpdateCardData,
 } from 'api';
 
 const CardDataContext = createContext();
@@ -17,7 +18,11 @@ function reducer(cardList, { type, data }) {
       return cardList.concat({ ...cardData, id: new Date().getTime() });
     },
     UPDATE: () => {
-      // 기존 컨텐츠를 업데이트한다.
+      const newCardList = [...cardList];
+      const { index, cardData } = data;
+
+      newCardList[index] = cardData;
+      return newCardList;
     },
     DELETE: () => {
       const newCardList = [...cardList];
@@ -32,9 +37,12 @@ function reducer(cardList, { type, data }) {
 }
 
 function CardDataContextProvider({ children }) {
-  const [cardEditIndex, setEditIndex] = useState(-1);
+  const [currentEditIndex, setEditIndex] = useState(-1);
   const [cardList, dispatch] = useReducer(reducer, []);
-  const value = useMemo(() => ({ cardList, dispatch }), [cardList]);
+  const value = useMemo(
+    () => ({ cardList, currentEditIndex, dispatch, setEditIndex }),
+    [currentEditIndex, cardList],
+  );
 
   useEffect(() => {
     (async () => {
@@ -56,7 +64,11 @@ function useCardDataContext() {
     throw new Error('CardDataContextProvider가 로드되지 않았습니다.');
   }
 
-  const { cardList, dispatch } = context;
+  const { cardList, dispatch, currentEditIndex, setEditIndex } = context;
+
+  const handleChangeEditIndex = (index) => {
+    setEditIndex(index);
+  };
 
   const handleInsertCardData = async (cardData) => {
     const response = await requestInsertCardData(cardData);
@@ -67,8 +79,16 @@ function useCardDataContext() {
     );
   };
 
-  const handleUpdateCardData = (index, cardData) =>
-    dispatch({ type: 'UPDATE', data: { index, cardData } });
+  const handleUpdateCardData = async (index, cardData) => {
+    console.log(index);
+    const { id } = cardList[index];
+    const response = await requestUpdateCardData(id, cardData);
+
+    requestErrorHandler(response)(
+      (successResult) => dispatch({ type: 'UPDATE', data: { index, cardData: successResult } }),
+      (errorMessage) => alert(errorMessage),
+    );
+  };
 
   const handleDeleteCardData = async (index) => {
     const { id } = cardList[index];
@@ -80,7 +100,14 @@ function useCardDataContext() {
     );
   };
 
-  return { cardList, handleInsertCardData, handleUpdateCardData, handleDeleteCardData };
+  return {
+    cardList,
+    currentEditIndex,
+    handleChangeEditIndex,
+    handleInsertCardData,
+    handleUpdateCardData,
+    handleDeleteCardData,
+  };
 }
 
 export { CardDataContext, CardDataContextProvider, useCardDataContext };
