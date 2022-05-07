@@ -2,8 +2,7 @@
 
 ## 개요
 
-- 페어 : 마르코, 아놀드
-- [데모페이지](https://sweet-sprite-876774.netlify.app/)
+- [데모페이지](https://lucent-griffin-a966fd.netlify.app/add-card/)
 - [스토리북 배포페이지](https://626aa58effc760004af7707e-qoyswlxepr.chromatic.com/)
 
 ## 로컬 구동방법

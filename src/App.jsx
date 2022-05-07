@@ -8,8 +8,8 @@ function App() {
     <CardContext>
       <Router>
         <Routes>
-          <Route path="/add-card" element={<AddCard />} />
-          <Route path="/card-list" element={<CardList />} />
+          <Route path="/add-card/" element={<AddCard />} />
+          <Route path="/card-list/" element={<CardList />} />
         </Routes>
       </Router>
     </CardContext>
