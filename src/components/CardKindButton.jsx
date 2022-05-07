@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import Button from 'components/common/Button';
 
 // TODO: 성능 최적화 영상 찍으면서 비교해보기
-function CardColorButton({ buttonBgColor, cardTitle, onClickFunc }) {
+// TODO: 컴포넌트 네이밍 다시하기
+function CardKindButton({ buttonBgColor, cardTitle, onClickFunc }) {
   const setCardKind = () => {
     onClickFunc({ type: 'SET_CARD_COLOR', color: buttonBgColor });
     onClickFunc({ type: 'SET_CARD_TITLE', title: cardTitle });
@@ -34,4 +35,4 @@ const Styled = {
   `,
 };
 
-export default CardColorButton;
+export default CardKindButton;
