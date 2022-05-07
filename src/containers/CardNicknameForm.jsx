@@ -9,7 +9,7 @@ export default function CardNicknameForm({ handleAddNickname }) {
     <Form onSubmit={handleAddNickname}>
       <InputField
         shape={"underline"}
-        wrapperWidth={"almost-full"}
+        wrapperWidth={"xl"}
         horizontalAlign={"center"}
       >
         <Input

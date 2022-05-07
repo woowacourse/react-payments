@@ -6,7 +6,7 @@ const width = {
   xs: "45px",
   sm: "85px",
   md: "135px",
-  "almost-full": "80%",
+  xl: "80%",
   full: "100%",
 };
 
@@ -43,7 +43,7 @@ const StyledInputWrapper = styled.div`
   border-bottom: ${(props) =>
     props.shape === "underline" && "1px solid #000000"};
 
-  margin: ${(props) => props.width === "almost-full" && "auto"};
+  margin: ${(props) => props.width === "xl" && "auto"};
 
   ${(props) => props.isSplit && "gap: 10px; input {"}
   background: ${(props) => props.shape === "box" && "#ecebf1"};
@@ -102,7 +102,7 @@ InputField.propTypes = {
     PropTypes.node,
   ]),
   shape: PropTypes.oneOf(["box", "underline"]),
-  wrapperWidth: PropTypes.oneOf(["xs", "sm", "almost-full", "full"]),
+  wrapperWidth: PropTypes.oneOf(["xs", "sm", "md", "xl", "full"]),
   horizontalAlign: PropTypes.oneOf(["flex-start", "center", "space-around"]),
 };
 
