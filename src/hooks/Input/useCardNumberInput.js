@@ -1,6 +1,5 @@
 import validator from 'validation';
 import { useContext, useEffect } from 'react';
-import useFocus from 'hooks/Input/useFocus';
 import useSomeInput from 'hooks/Input/useSomeInput';
 import { COUNT } from 'constant';
 import { numberRegex } from 'constant/regularExpression';
@@ -17,15 +16,8 @@ function useCardNumberInput(inputNames) {
     setValidations,
     inputRefs,
     currentInputRef,
-  } = useSomeInput(inputNames);
-
-  const { focusPrevInput } = useFocus({
-    validate: validator.validateCardNumber,
-    inputNames: inputNames,
-    validations,
-    inputRefs,
-    currentInputRef,
-  });
+    focusPrevInput,
+  } = useSomeInput(inputNames, validator.validateCardNumber);
 
   const isValid = Object.values(validations).every(valid => valid);
 

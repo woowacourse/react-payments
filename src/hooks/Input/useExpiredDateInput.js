@@ -4,7 +4,6 @@ import { numberRegex } from 'constant/regularExpression';
 import { CardContext } from 'context/CardContext';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 import validator from 'validation';
-import useFocus from 'hooks/Input/useFocus';
 import useSomeInput from 'hooks/Input/useSomeInput';
 
 function useExpiredDateInput(inputNames) {
@@ -17,15 +16,8 @@ function useExpiredDateInput(inputNames) {
     setValidations,
     inputRefs,
     currentInputRef,
-  } = useSomeInput(inputNames);
-
-  const { focusPrevInput } = useFocus({
-    validate: validator.validateExpiredDate,
-    inputNames: inputNames,
-    validations,
-    inputRefs,
-    currentInputRef: currentInputRef,
-  });
+    focusPrevInput,
+  } = useSomeInput(inputNames, validator.validateExpiredDate);
 
   const isValid = Object.values(validations).every(valid => valid);
 

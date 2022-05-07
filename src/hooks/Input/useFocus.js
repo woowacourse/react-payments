@@ -7,13 +7,24 @@ function useFocus({
   inputRefs,
   currentInputRef,
 }) {
-  const focusPrevInput = (currentInput, newNumber, inputType) => {
+  const focusNextInput = currentInputName => {
+    if (currentInputName !== inputNames[inputNames.length - 1]) {
+      const currentIndex = inputNames.findIndex(
+        name => name === currentInputName
+      );
+      inputRefs[inputNames[currentIndex + 1]].current.focus();
+    }
+  };
+
+  const focusPrevInput = (currentInputName, newNumber, inputType) => {
     if (
-      currentInput !== inputNames[0] &&
+      currentInputName !== inputNames[0] &&
       newNumber.length === 0 &&
       inputType === INPUT_TYPE.BACKWARD
     ) {
-      const currentIndex = inputNames.findIndex(name => name === currentInput);
+      const currentIndex = inputNames.findIndex(
+        name => name === currentInputName
+      );
       inputRefs[inputNames[currentIndex - 1]].current.focus();
     }
   };
@@ -32,7 +43,7 @@ function useFocus({
 
   focusInvalidInput(currentInputRef.current);
 
-  return { focusPrevInput };
+  return { focusNextInput, focusPrevInput };
 }
 
 export default useFocus;
