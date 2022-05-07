@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import * as styled from './index.styled';
 
-const Button = ({ children, ...rest }) => {
+const Link = ({ children, ...rest }) => {
   return <styled.Container {...rest}>{children}</styled.Container>;
 };
 
-Button.propTypes = {
+Link.propTypes = {
   children: PropTypes.string,
 };
 
-export default Button;
+export default Link;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCardFormContext } from '../../context/card-form-context';
-import Button from '../Button';
+import LinkButton from '../LinkButton';
 import Header from '../Header';
 import Card from '../Card';
 
@@ -37,14 +37,8 @@ const AddCardForm = ({ openModal }) => {
     );
   }, [state]);
 
-  const onSubmitCardForm = (e) => {
-    e.preventDefault();
-
-    alert('카드 등록이 완료되었습니다!❤️🧡💛💚💙💜');
-  };
-
   return (
-    <styled.Container onSubmit={onSubmitCardForm}>
+    <styled.Container>
       <Header title="카드 추가" />
       <Card onClick={openModal} />
       <CardNumber />
@@ -53,11 +47,14 @@ const AddCardForm = ({ openModal }) => {
       <SecureCode />
       <Password />
       <styled.ButtonContainer>
-        {isSubmittAble && (
-          <Button name="submitButton" type="submit">
+        <LinkButton name="submitButton" to="/registerCard" state={state}>
+          다음
+        </LinkButton>
+        {/* {isSubmittAble && (
+          <LinkButton name="submitButton" to="/registerCard" state={state}>
             다음
-          </Button>
-        )}
+          </LinkButton>
+        )} */}
       </styled.ButtonContainer>
     </styled.Container>
   );
