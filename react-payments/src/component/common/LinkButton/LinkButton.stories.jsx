@@ -1,7 +1,7 @@
 import LinkButton from "./linkButton.component";
 
 export default {
-  title: "LinkButton",
+  title: "Common/LinkButton",
   component: LinkButton,
 };
 

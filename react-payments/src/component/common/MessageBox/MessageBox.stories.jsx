@@ -1,7 +1,7 @@
 import MessageBox from "./messageBox.component";
 
 export default {
-  title: "MessageBox",
+  title: "Common/MessageBox",
   component: MessageBox,
 };
 

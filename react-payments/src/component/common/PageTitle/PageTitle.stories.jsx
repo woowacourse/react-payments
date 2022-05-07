@@ -1,7 +1,7 @@
 import PageTitle from "./pageTitle.component";
 
 export default {
-  title: "PageTitle",
+  title: "Common/PageTitle",
   component: PageTitle,
 };
 

@@ -1,7 +1,7 @@
 import Dot from "./dot.component";
 
 export default {
-  title: "Dot",
+  title: "Common/Dot",
   component: Dot,
 };
 

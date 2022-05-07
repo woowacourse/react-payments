@@ -9,7 +9,7 @@ import { CardTypeContext } from "../../provider/CardTypeProvider";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  title: "CardRegisterPage",
+  title: "Pages/CardRegisterPage",
   component: CardRegisterPage,
   decorators: [
     withReactContext({

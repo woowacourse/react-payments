@@ -3,7 +3,7 @@ import ConnectorBox from "../ConnectorBox/ConnectorBox.component";
 import InputBox from "./InputBox.component";
 
 export default {
-  title: "InputBox",
+  title: "Common/InputBox",
   component: InputBox,
 };
 

@@ -4,7 +4,7 @@ import { withReactContext } from "storybook-react-context";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  title: "HomePage",
+  title: "Pages/HomePage",
   component: HomePage,
 };
 

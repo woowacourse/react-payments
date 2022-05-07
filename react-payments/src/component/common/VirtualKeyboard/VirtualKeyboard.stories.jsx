@@ -2,7 +2,7 @@ import { action } from "@storybook/addon-actions";
 import VirtualKeyboard from "./keyboard.component";
 
 export default {
-  title: "VirtualKeyboard",
+  title: "Common/VirtualKeyboard",
   component: VirtualKeyboard,
 };
 

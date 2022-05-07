@@ -1,7 +1,7 @@
 import Input from "./input.component";
 
 export default {
-  title: "Input",
+  title: "Common/Input",
   component: Input,
   decorators: [
     (Story) => (

@@ -2,7 +2,7 @@ import ColorBox from "./colorBox.component";
 import { action } from "@storybook/addon-actions";
 
 export default {
-  title: "ColorBox",
+  title: "Common/ColorBox",
   component: ColorBox,
   parameters: {
     actions: {

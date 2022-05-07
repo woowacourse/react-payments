@@ -2,7 +2,7 @@ import HelpBox from "./helpBox.component";
 import { userEvent, within } from "@storybook/testing-library";
 
 export default {
-  title: "HelpBox",
+  title: "Common/HelpBox",
   component: HelpBox,
 };
 

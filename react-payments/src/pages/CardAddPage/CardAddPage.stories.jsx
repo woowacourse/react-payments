@@ -2,7 +2,7 @@ import CardAddPage from "./CardAddPage.component";
 import { userEvent, within } from "@storybook/testing-library";
 
 export default {
-  title: "CardAddPage",
+  title: "Pages/CardAddPage",
   component: CardAddPage,
 };
 

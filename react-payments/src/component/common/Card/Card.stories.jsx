@@ -16,7 +16,7 @@ const INCOMPLETE_CARD_INFO = {
 };
 
 export default {
-  title: "Card",
+  title: "Common/Card",
   component: Card,
 };
 

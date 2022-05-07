@@ -3,7 +3,7 @@ import PageTitle from "../PageTitle/pageTitle.component";
 import Header from "./Header.component";
 
 export default {
-  title: "Header",
+  title: "Common/Header",
   component: Header,
 };
 

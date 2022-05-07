@@ -1,7 +1,7 @@
 import SkeletonCardBox from "./Skeleton.component";
 
 export default {
-  title: "SkeletonCardBox",
+  title: "Common/SkeletonCardBox",
   component: SkeletonCardBox,
 };
 

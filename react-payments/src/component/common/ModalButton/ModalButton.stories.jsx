@@ -1,7 +1,7 @@
 import ModalButton from "./ModalButton.component";
 
 export default {
-  title: "ModalButton",
+  title: "Common/ModalButton",
   component: ModalButton,
 };
 

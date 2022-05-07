@@ -3,7 +3,7 @@ import Modal from "./modal.component";
 import CardTypeSelector from "../../CardTypeSelector/CardTypeSelector";
 import CardControlButtonBox from "../../CardControlButtonBox/CardControlButtonBox.component";
 export default {
-  title: "Modal",
+  title: "Common/Modal",
   component: Modal,
 };
 
