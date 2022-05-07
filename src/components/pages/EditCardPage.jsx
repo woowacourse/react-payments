@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import API_SERVER from '../../utils/constants';
+import {
+  API_SERVER,
+  ERROR_MESSAGE,
+  MESSAGES,
+  PATH,
+} from '../../utils/constants';
 import BackwardButton from '../common/BackwardButton';
 import Button from '../common/Button';
 import CardPreview from '../common/CardPreview';
@@ -69,14 +74,14 @@ const EditCardPage = () => {
     });
 
     if (!response.ok) {
-      alert('카드 수정에 실패했습니다. 관리자에게 문의하세요.');
+      alert(ERROR_MESSAGE.FAILED_EDIT);
       return;
     }
     navigation('/');
   };
 
   const deleteCard = async () => {
-    if (!window.confirm('카드를 삭제하시겠습니까?')) {
+    if (!window.confirm(MESSAGES.CONFIRM_DELETE)) {
       return;
     }
 
@@ -85,7 +90,7 @@ const EditCardPage = () => {
     });
 
     if (!response.ok) {
-      alert('카드 삭제에 실패했습니다. 관리자에게 문의하세요.');
+      alert(ERROR_MESSAGE.FAILED_DELELTE);
       return;
     }
     navigation('/');
@@ -93,7 +98,7 @@ const EditCardPage = () => {
 
   return (
     <StyledCompleteEditCardPage>
-      <Link to="/">
+      <Link to={PATH.HOME}>
         <BackwardButton showBackWard>카드 수정</BackwardButton>
       </Link>
       <TextBox fontSize="23px">카드 이름을 수정하세요.</TextBox>

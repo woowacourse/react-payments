@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import API_SERVER from '../../utils/constants';
+import { API_SERVER, PATH } from '../../utils/constants';
 import BackwardButton from '../common/BackwardButton';
 import Button from '../common/Button';
 import CardPreview from '../common/CardPreview';
@@ -69,14 +69,14 @@ const StoredCardListPage = () => {
       <StyledStoredCardList>
         {Object.values(storedList).map(({ cardName, values, id }) => (
           <>
-            <Link to="/edit-card" state={{ cardName, values, id }}>
+            <Link to={PATH.EDIT_CARD_PAGE} state={{ cardName, values, id }}>
               <CardPreview key={cardName} values={values} />
             </Link>
             <TextBox fontSize="14px">{cardName}</TextBox>
           </>
         ))}
 
-        <Link to="/add-card">
+        <Link to={PATH.ADD_CARD_PAGE}>
           <Button color="#575757" backgroundColor="#E5E5E5">
             +
           </Button>

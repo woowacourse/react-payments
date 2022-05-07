@@ -6,7 +6,12 @@ import CardPreview from '../common/CardPreview';
 import TextBox from '../common/TextBox';
 import Input from '../common/Input';
 import Button from '../common/Button';
-import API_SERVER from '../../utils/constants';
+import {
+  API_SERVER,
+  DEFAULT_CARD_NAME,
+  ERROR_MESSAGE,
+  PATH,
+} from '../../utils/constants';
 
 const StyledCompleteAddCardPage = styled.div`
   display: flex;
@@ -45,7 +50,9 @@ const CompleteAddCardPage = () => {
   const storeCard = async () => {
     const cardInfo = {
       cardName:
-        cardName.toUpperCase() || values.owner.toUpperCase() || '기본 카드',
+        cardName.toUpperCase() ||
+        values.owner.toUpperCase() ||
+        DEFAULT_CARD_NAME,
       values,
     };
 
@@ -58,7 +65,7 @@ const CompleteAddCardPage = () => {
     });
 
     if (!response.ok) {
-      alert('저장 실패에 실패했습니다. 관리자에게 문의하세요.');
+      alert(ERROR_MESSAGE.FAILED_POST);
       return;
     }
     setValues(initialField);
@@ -78,7 +85,7 @@ const CompleteAddCardPage = () => {
       <Button
         onClick={async () => {
           await storeCard();
-          navigation('/');
+          navigation(PATH.HOME);
         }}
       >
         확인

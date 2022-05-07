@@ -8,6 +8,7 @@ import EditCardPage from './components/pages/EditCardPage';
 import CardContext from './contexts/CardContext';
 import initialCardSchema from './schema/cardSchema';
 import useFormSchema from './hooks/useFormSchema';
+import { PATH } from './utils/constants';
 
 const StyledApp = styled.div`
   padding: 16px 24px;
@@ -26,14 +27,18 @@ const App = () => {
       <Router>
         <StyledApp>
           <Routes>
-            <Route exact path="/" element={<StoredCardListPage />} />
-            <Route exact path="/add-card" element={<AddCardPage />} />
+            <Route exact path={PATH.HOME} element={<StoredCardListPage />} />
+            <Route exact path={PATH.ADD_CARD_PAGE} element={<AddCardPage />} />
             <Route
               exact
-              path="/complete-add-card"
+              path={PATH.COMPLETE_ADD_PAGE}
               element={<CompleteAddCardPage />}
             />
-            <Route exact path="/edit-card" element={<EditCardPage />} />
+            <Route
+              exact
+              path={PATH.EDIT_CARD_PAGE}
+              element={<EditCardPage />}
+            />
             <Route path="*" element={<StoredCardListPage />} />
           </Routes>
         </StyledApp>
