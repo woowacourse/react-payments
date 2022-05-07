@@ -1,21 +1,18 @@
 import PropTypes from 'prop-types';
 import { COLOR_NAMES } from '../../constant';
 import * as styled from './index.styled';
-import { useCardFormContext } from '../../context/card-form-context';
 
-const Card = ({ onClick }) => {
-  const {
-    state: {
-      firstCardNumber,
-      secondCardNumber,
-      thirdCardNumber,
-      fourthCardNumber,
-      expiredMonth,
-      expiredYear,
-      cardType,
-      ownerName,
-    },
-  } = useCardFormContext();
+const Card = ({
+  onClick,
+  firstCardNumber,
+  secondCardNumber,
+  thirdCardNumber,
+  fourthCardNumber,
+  expiredMonth,
+  expiredYear,
+  cardType,
+  ownerName,
+}) => {
   return (
     <styled.Container onClick={onClick}>
       <styled.EmptyCard color={cardType.color}>
@@ -63,6 +60,10 @@ Card.propTypes = {
   secondCardNumber: PropTypes.string,
   thirdCardNumber: PropTypes.string,
   fourthCardNumber: PropTypes.string,
+  cardType: PropTypes.shape({
+    color: PropTypes.string,
+    name: PropTypes.string,
+  }),
   onClick: PropTypes.func,
 };
 

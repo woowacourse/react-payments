@@ -26,6 +26,7 @@ const initialState = {
     color: 'red',
     name: '',
   },
+  isCardTypeSelected: false,
 };
 
 const ACTION = {
@@ -129,6 +130,7 @@ const cardFormReducer = (state, action) => {
       return {
         ...state,
         cardType: action.data.cardType,
+        isCardTypeSelected: true,
       };
     }
   }

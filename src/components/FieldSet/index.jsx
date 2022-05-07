@@ -9,7 +9,7 @@ const FieldSet = ({ id, description, children, errorMessage, isError }) => {
       <Label id={id} description={description} />
       {children}
       <styled.ErrorMessageContainer>
-        {isError && <ErrorMessage message={errorMessage} />}
+        {isError && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </styled.ErrorMessageContainer>
     </styled.Container>
   );
