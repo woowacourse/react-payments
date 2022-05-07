@@ -4,11 +4,16 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  cursor: default;
+
   header {
     position: absolute;
     top: 0;
-    left: 10px;
-    cursor: default;
+    left: 1em;
+    p {
+      font-family: "Roboto";
+      font-size: 2rem;
+    }
   }
 
   .home--container-card {
@@ -26,13 +31,18 @@
     font-size: 30px;
     cursor: pointer;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+    box-sizing: content-box;
+    &:hover {
+      color: aquamarine;
+      border: 1px solid aquamarine;
+    }
   }
+
   .labeled {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     gap: 9px;
   }
   a {

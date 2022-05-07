@@ -17,6 +17,10 @@ code {
     monospace;
 }
 
+button {
+  padding: 0;
+}
+
 #root {
   height: 100%;
 }

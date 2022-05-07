@@ -32,7 +32,7 @@ const Home = () => {
   return (
     <div className="home--container">
       <header>
-        <p>보유카드</p>
+        <p>💳보유카드</p>
       </header>
       {cardList.map((card, idx) => (
         <div className="labeled" key={idx}>
