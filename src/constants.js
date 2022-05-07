@@ -38,10 +38,30 @@ export const INPUT_MAX_LENGTH = {
   OWNER_NAME: 30,
   PRIVACY_CODE: 3,
   PASSWORD: 1,
+  ALIAS: 15,
+};
+
+export const INPUT_MIN_LENGTH = {
+  ALIAS: 2,
 };
 
 export const DATE_RANGE = {
   MIN_MONTH: 1,
   MAX_MONTH: 12,
   MIN_YEAR: 22,
+};
+
+export const ACTION = {
+  SET_ALIAS: 'SET_ALIAS',
+  CREATE_CARD: 'CREATE_CARD',
+};
+
+export const ROUTE = {
+  MAIN: '/react-payments/',
+  ADD: '/react-payments/add',
+  CONFIRM: '/react-payments/confirm/:id',
+};
+
+export const ERROR_MESSAGE = {
+  DUPLICATED_NAME: '중복되는 카드 이름이 존재합니다.',
 };

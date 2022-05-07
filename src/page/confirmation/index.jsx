@@ -8,6 +8,8 @@ import Button from 'components/common/Button';
 
 import styles from 'css/module/ConfirmationPage.module.css';
 import validate from './validator';
+import { ACTION, ROUTE } from 'constants';
+import { INPUT_MAX_LENGTH } from 'constants';
 
 const ConfirmationPage = () => {
   const navigate = useNavigate();
@@ -22,8 +24,8 @@ const ConfirmationPage = () => {
     try {
       validate(state.cards, alias);
 
-      dispatch({ type: 'SET_ALIAS', alias, id });
-      navigate('/react-payments/');
+      dispatch({ type: ACTION.SET_ALIAS, alias, id });
+      navigate(ROUTE.MAIN);
     } catch (error) {
       alert(error.message);
     }
@@ -44,7 +46,7 @@ const ConfirmationPage = () => {
         value={alias}
         onChange={(e) => handleAlias(e.target.value)}
         placeholder="카드 이름"
-        maxLength="15"
+        maxLength={INPUT_MAX_LENGTH.ALIAS}
         autoFocus
       />
       {isFullFilled && (

@@ -5,6 +5,7 @@ import { ReactComponent as CardAddIcon } from 'assets/card_add_icon.svg';
 import CardPreview from 'components/CardPreview';
 
 import styles from 'css/module/MainPage.module.css';
+import { ROUTE } from 'constants';
 
 const MainPage = () => {
   const { state } = useContext(CardDispatch);
@@ -26,7 +27,7 @@ const MainPage = () => {
             </div>
           ))}
         </>
-        <Link to="/react-payments/add">
+        <Link to={ROUTE.ADD}>
           <CardAddIcon className={styles.AddIcon} />
         </Link>
       </div>

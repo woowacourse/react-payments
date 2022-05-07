@@ -7,6 +7,7 @@ import MainPage from 'page/main';
 import CardAppPage from 'page/cardAdd';
 import ConfirmationPage from 'page/confirmation';
 import reducer from 'reducer/card';
+import { ROUTE } from 'constants';
 
 const initialState = {
   cards: [],
@@ -23,9 +24,9 @@ const App = () => {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path="/react-payments/" element={<MainPage />}></Route>
-            <Route path="/react-payments/add" element={<CardAppPage />}></Route>
-            <Route path="/react-payments/confirm/:id" element={<ConfirmationPage />}></Route>
+            <Route path={ROUTE.MAIN} element={<MainPage />} />
+            <Route path={ROUTE.ADD} element={<CardAppPage />} />
+            <Route path={ROUTE.CONFIRM} element={<ConfirmationPage />} />
           </Routes>
         </BrowserRouter>
       </CardDispatch.Provider>
