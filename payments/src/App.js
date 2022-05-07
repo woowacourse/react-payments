@@ -9,10 +9,11 @@ import CardAddPage from "./pages/CardAddPage";
 
 const App = () => {
   const [cardList, setCardList] = useState([]);
+  const { cardInfo, dispatch, validateCardInfo } = useCard();
 
   return (
     <CardListContext.Provider value={{ cardList, setCardList }}>
-      <CardContext.Provider value={useCard()}>
+      <CardContext.Provider value={{ cardInfo, dispatch, validateCardInfo }}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
