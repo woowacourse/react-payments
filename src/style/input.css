@@ -81,3 +81,21 @@ input::-webkit-inner-spin-button {
 .input-inline {
   display: inline;
 }
+
+.line-input {
+  display: block;
+  margin: 0 auto 33px;
+  width: 240px;
+  border: none;
+  outline: none;
+  color: #383838;
+  font-size: 18px;
+  font-weight: lighter;
+  border-bottom: 1px solid #737373;
+  padding-bottom: 6px;
+  margin-bottom: 33px;
+}
+
+.line-input::placeholder {
+  text-align: center;
+}

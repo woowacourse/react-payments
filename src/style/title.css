@@ -6,3 +6,10 @@
   display: inline;
   color: #383838;
 }
+
+.notice-message {
+  font-size: 24px;
+  text-align: center;
+  font-weight: lighter;
+  margin: 133px 0 77px;
+}

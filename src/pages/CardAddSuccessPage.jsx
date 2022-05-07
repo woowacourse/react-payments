@@ -6,14 +6,14 @@ import LineInput from 'components/common/LineInput/LineInput';
 
 function CardAddSuccessPage() {
   return (
-    <>
+    <div className="app">
       <CardNameInputForm>
-        <NoticeMessage />
+        <NoticeMessage text="카드등록이 완료되었습니다." />
         <Card />
-        <LineInput />
+        <LineInput inputMessage="카드 별명을 입력해주세요." />
         <Button text="확인" />
       </CardNameInputForm>
-    </>
+    </div>
   );
 }
 

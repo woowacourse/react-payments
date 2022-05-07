@@ -1,7 +1,5 @@
-import React from 'react';
-
-function CardNameInputForm() {
-  return <div></div>;
+function CardNameInputForm({ children }) {
+  return <form>{children}</form>;
 }
 
 export default CardNameInputForm;
