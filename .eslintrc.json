@@ -14,7 +14,6 @@
     "react/react-in-jsx-scope": "off",
     "import/no-extraneous-dependencies": "off",
     "react/jsx-filename-extension": "off",
-    "react/self-closing-comp": "warn",
     "jsx-a11y/control-has-associated-label": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/interactive-supports-focus": "off",
@@ -24,6 +23,7 @@
     "no-unused-vars": "warn",
     "react/prop-types": "off",
     "implicit-arrow-linebreak": "off",
-    "no-unused-expressions": "off"
+    "no-unused-expressions": "off",
+    "operator-linebreak": "off"
   }
 }

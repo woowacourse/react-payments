@@ -1,4 +1,5 @@
 const PATH = {
+  JSON_SERVER_BASE_URL: 'http://localhost:4000',
   CARD_LIST: '/',
   CARD_ADD: '/card-add',
   CARD_ADD_COMPLETE: '/card-add-complete',
