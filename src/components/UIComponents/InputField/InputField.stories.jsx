@@ -21,6 +21,13 @@ Default.args = {
   children: DefaultInputElement("default"),
 };
 
+export const Error = Template.bind({});
+Error.args = {
+  labelText: "error input",
+  children: DefaultInputElement("error"),
+  isInvalid: true,
+};
+
 export const MonthYearInputs = Template.bind({});
 MonthYearInputs.args = {
   labelText: "Month Year Inputs",
