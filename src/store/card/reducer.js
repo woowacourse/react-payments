@@ -127,22 +127,32 @@ const reducer = (state, action) => {
     }
 
     case TYPES.UPDATE_NICKNAME: {
-      state.cards.forEach((cardData) => {
+      const updatedCards = state.cards.map((cardData) => {
         if (cardData.id === action.id) {
           cardData.cardNickname = action.nickname;
           console.log('@@@@@', cardData);
         }
+        return cardData;
       });
 
       return {
         ...state,
-        cards: state.cards,
+        cards: updatedCards,
         cardNumber: ['', '', '', ''],
         cardExpiration: ['', ''],
         cardOwner: '',
         cardCvc: '',
         cardPassword: ['', ''],
         cardCompanyIndex: -1,
+      };
+    }
+
+    case TYPES.DELETE_CARD: {
+      const updatedCards = state.cards.filter((cardData) => cardData.id !== action.id);
+
+      return {
+        ...state,
+        cards: updatedCards,
       };
     }
 

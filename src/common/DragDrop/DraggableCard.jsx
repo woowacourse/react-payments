@@ -21,5 +21,6 @@ const Styled = {
   EnrolledCardWrapper: styled.div`
     text-align: center;
     margin-bottom: 25px;
+    position: relative;
   `,
 };

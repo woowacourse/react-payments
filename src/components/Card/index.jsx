@@ -73,19 +73,19 @@ const Styled = {
     margin-top: 0;
     margin-bottom: 0;
     ${({ isSmall }) => `
-    margin-left: ${isSmall ? '10px' : '14px'};
-    margin-right: ${isSmall ? '10px' : '14px'};
-  `}
+      margin-left: ${isSmall ? '10px' : '14px'};
+      margin-right: ${isSmall ? '10px' : '14px'};
+    `}
   `,
 
   SmallCardChip: styled.div`
     ${({ isSmall }) => `
-  width: ${isSmall ? '40px' : '60px'}; 
-  height: ${isSmall ? '26px' : '40px'}; 
+      width: ${isSmall ? '40px' : '60px'}; 
+      height: ${isSmall ? '26px' : '40px'}; 
 
-  background: #cbba64;
-  border-radius: 4px;
-  `}
+      background: #cbba64;
+      border-radius: 4px;
+    `}
   `,
 
   CardBottomNumber: styled.div`
@@ -96,26 +96,25 @@ const Styled = {
 
   CardBottomInfo: styled.div`
     width: 100%;
-
     display: flex;
     justify-content: space-between;
   `,
 
   CardTextEllipsis: styled.span`
     ${({ isSmall }) => `
-        line-height: 16px;
-    vertical-align: middle;
-    font-weight: 400;
-    display: inline-block;
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: ${isSmall ? '10px' : '14px'};
-    margin-right: ${isSmall ? '10px' : '14px'};
-    text-align: left;
-    width: 220px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  `}
+      line-height: 16px;
+      vertical-align: middle;
+      font-weight: 400;
+      display: inline-block;
+      margin-top: 0;
+      margin-bottom: 0;
+      margin-left: ${isSmall ? '10px' : '14px'};
+      margin-right: ${isSmall ? '10px' : '14px'};
+      text-align: left;
+      width: 220px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    `}
   `,
 };

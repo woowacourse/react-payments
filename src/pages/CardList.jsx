@@ -13,6 +13,7 @@ import DroppableArea from 'common/DragDrop/DroppableArea';
 import DraggableCard from 'common/DragDrop/DraggableCard';
 import CardConfirmModal from 'containers/CardConfirmModal';
 import ClickCardBox from 'common/ClickCardBox';
+import DeleteCircleButton from 'components/DeleteButton';
 
 function CardList() {
   const navigate = useNavigate();
@@ -22,7 +23,6 @@ function CardList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onClickCard = (cardData) => {
-    console.log('onClickCard', cardData);
     setModalCardData(cardData);
     setIsModalOpen(true);
   };
@@ -45,6 +45,12 @@ function CardList() {
     navigate('/card-list');
   };
 
+  const onDeleteCard = (id) => {
+    if (confirm('삭제하시겠습니까?')) {
+      dispatch({ type: TYPES.DELETE_CARD, id });
+    }
+  };
+
   return (
     <Container>
       <PageTitle hasPrevButton={false}>보유 카드</PageTitle>
@@ -53,8 +59,8 @@ function CardList() {
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               {cards.map((cardData, index) => (
-                <ClickCardBox key={cardData.id} onClick={() => onClickCard(cardData)}>
-                  <DraggableCard card={cardData} index={index}>
+                <DraggableCard key={cardData.id} card={cardData} index={index}>
+                  <ClickCardBox onClick={() => onClickCard(cardData)}>
                     <Card
                       cardNumber={cardData.cardNumber}
                       cardExpiration={cardData.cardExpiration}
@@ -63,9 +69,10 @@ function CardList() {
                       cardColor={cardData.cardColor}
                       isSmall={true}
                     />
-                    <Styled.CardNickname>{cardData.cardNickname}</Styled.CardNickname>
-                  </DraggableCard>
-                </ClickCardBox>
+                  </ClickCardBox>
+                  <DeleteCircleButton onDeleteCard={() => onDeleteCard(cardData.id)} />
+                  <Styled.CardNickname>{cardData.cardNickname}</Styled.CardNickname>
+                </DraggableCard>
               ))}
               {provided.placeholder}
             </div>

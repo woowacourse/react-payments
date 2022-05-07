@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
-export default function Circle({ size, color }) {
-  return <Styled.Circle size={size} color={color} />;
+export default function Circle({ children, size, color }) {
+  return (
+    <Styled.Circle size={size} color={color}>
+      {children}
+    </Styled.Circle>
+  );
 }
 
 const Styled = {
