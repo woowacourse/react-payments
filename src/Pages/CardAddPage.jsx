@@ -103,8 +103,8 @@ export default function CardAddPage({ setPage }) {
     }
   };
 
-  const setFormValidity = (form) => {
-    setValidCardInfo(form.reportValidity());
+  const setFormValidity = (formElements) => {
+    setValidCardInfo(formElements.every((element) => element.validity.valid));
   };
 
   const CardPreviewElement = (
@@ -131,6 +131,7 @@ export default function CardAddPage({ setPage }) {
             <CardInfoForm
               handleFormSubmit={handleFormSubmit}
               isCompleteCardInfo={isCompleteCardInfo}
+              isValidCardInfo={isValidCardInfo}
               setFormValidity={setFormValidity}
             />
           </>

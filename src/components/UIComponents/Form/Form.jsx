@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { cardInfoValidations } from "../../../utils/cardInfoValidations.js";
 
@@ -21,13 +21,18 @@ export default function Form({
   const formRef = useRef(null);
   const isInitMount = useRef(true);
 
+  const [formInputArray, setFormInputArray] = useState([]);
+
   useEffect(() => {
     if (isInitMount.current) isInitMount.current = false;
-    else setFormValidity(formRef.current);
+    else setFormValidity(formInputArray);
   }, [isComplete]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const focusFormInput = (formInputList, currInput, direction) => {
-    const formInputArray = [...formInputList];
+  useEffect(() => {
+    setFormInputArray([...formRef.current]);
+  }, []);
+
+  const focusFormInput = (currInput, direction) => {
     const currentIndex = formInputArray.indexOf(currInput);
 
     const focusTarget = formInputArray[currentIndex + direction];
@@ -39,20 +44,20 @@ export default function Form({
 
   const handlePrevFocus = (e) => {
     const { key, target } = e;
-    const { form: formInputList, value } = target;
+    const { value } = target;
 
     if (key !== "Backspace" || value !== "") return;
 
-    focusFormInput(formInputList, target, -1);
+    focusFormInput(target, -1);
   };
 
   const handleNextFocus = (e) => {
     const { target } = e;
-    const { form: formInputList, maxLength, value } = target;
+    const { maxLength, value } = target;
 
     if (value.length !== maxLength) return;
 
-    focusFormInput(formInputList, target, 1);
+    focusFormInput(target, 1);
   };
 
   const handleFormValidation = ({ target }) => {

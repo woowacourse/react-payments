@@ -12,6 +12,7 @@ import Button from "../components/UIComponents/Button/Button";
 export default function CardInfoForm({
   handleFormSubmit,
   isCompleteCardInfo,
+  isValidCardInfo,
   setFormValidity,
 }) {
   return (
@@ -25,7 +26,7 @@ export default function CardInfoForm({
       <CardHolderNameInput />
       <CardSecurityCodeInput />
       <CardPasswordInput />
-      {isCompleteCardInfo && <Button data-testid={"next-button"}>다음</Button>}
+      {isValidCardInfo && <Button data-testid={"next-button"}>다음</Button>}
     </Form>
   );
 }
