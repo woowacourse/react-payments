@@ -6,7 +6,7 @@ const NextButton = ({ onClick }) => {
     try {
       onClick(e);
     } catch (error) {
-      alert(error);
+      alert(error.message);
       e.preventDefault();
     }
   };

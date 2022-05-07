@@ -58,6 +58,8 @@ const useNextButton = (inputStates, setVisible) => {
             맞습니까`)
     ) {
       alert('카드가 등록되었습니다');
+    } else {
+      throw new Error('취소하였습니다');
     }
   };
 

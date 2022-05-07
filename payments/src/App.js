@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Switch } from 'react-router-dom';
 import './App.css';
 import CardAdd from './pages/CardAdd';
 import EnterNickname from './pages/EnterNickname';
