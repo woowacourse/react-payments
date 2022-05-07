@@ -4,9 +4,9 @@ import { CardInfoContext } from 'App';
 import { ERROR_MESSAGE, PAGES } from 'constants';
 
 function CardInputForm({ children }) {
-  const { state, page, setPage, dispatch } = useContext(CardInfoContext);
+  const { state, page, setPage, dispatch, nextId } = useContext(CardInfoContext);
 
-  const { number1, number2, number3, number4, month, year, cvc, name } = state;
+  const { number1, number2, number3, number4, month, year, cvc } = state.inputs;
 
   const validator = (conditions) => {
     conditions.forEach(({ checker, errorMsg }) => {
@@ -68,7 +68,17 @@ function CardInputForm({ children }) {
 
     try {
       if (page === PAGES.NAME) {
+        dispatch({
+          type: 'REGISTER_CARD',
+          card: {
+            id: nextId.current,
+            ...state.inputs,
+          },
+        });
+        nextId.current += 1;
+
         setPage(PAGES.LIST);
+
         return;
       }
 

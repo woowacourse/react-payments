@@ -7,7 +7,8 @@ import { LIMIT_LENGTH } from 'constants';
 function CardPassword() {
   const { state, dispatch } = useContext(CardInfoContext);
 
-  const cardPasswords = [state.password1, state.password2];
+  const cardPasswords = [state.inputs.password1, state.inputs.password2];
+
   const setCardPasswords = (cardPasswords) =>
     dispatch({ type: 'SET_CARD_PASSWORDS', cardPasswords });
 
@@ -43,7 +44,7 @@ function CardPassword() {
       <input
         name="password1"
         className={`input-basic w-15 input-password  ${
-          cardPasswords[0].length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : ''
+          cardPasswords[0]?.length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : ''
         }`}
         type="password"
         onChange={handleChange}
@@ -53,7 +54,7 @@ function CardPassword() {
       <input
         name="password2"
         className={`input-basic w-15 input-password ${
-          cardPasswords[1].length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : ''
+          cardPasswords[1]?.length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : ''
         }`}
         type="password"
         onChange={handleChange}

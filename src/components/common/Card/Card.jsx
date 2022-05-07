@@ -3,10 +3,11 @@ import { CardInfoContext } from 'App';
 
 import { PAGES } from 'constants';
 
-function Card({ isEmpty }) {
+function Card({ isEmpty, cardInfo }) {
   const { state, setPage } = useContext(CardInfoContext);
 
-  const { number1, number2, number3, number4, owner, month, year } = state;
+  const { number1, number2, number3, number4, owner, month, year } = state.inputs;
+
   const handleCardAdd = () => {
     setPage(PAGES.ADD);
   };
@@ -15,7 +16,7 @@ function Card({ isEmpty }) {
     <div className="card-box">
       <div
         className={isEmpty ? 'card-container card-empty' : 'card-container card-not-empty'}
-        onClick={handleCardAdd}
+        onClick={isEmpty ? handleCardAdd : undefined}
       >
         {isEmpty ? (
           '+'
@@ -28,24 +29,27 @@ function Card({ isEmpty }) {
 
             <div className="card-bottom">
               <div className="card-text card-number-flex">
-                <div className="card-number-letter-spacing">{number1}</div>
-                <div className="card-number-letter-spacing">{number2}</div>
+                <div className="card-number-letter-spacing">{number1 || cardInfo?.number1}</div>
+                <div className="card-number-letter-spacing">{number2 || cardInfo?.number2}</div>
                 <div className="hidden-card-number-letter-spacing">
-                  {'ㆍ'.repeat(number3.length)}
+                  {'ㆍ'.repeat(number3?.length) || 'ㆍ'.repeat(cardInfo?.number3?.length)}
                 </div>
                 <div className="hidden-card-number-letter-spacing">
-                  {'ㆍ'.repeat(number4.length)}
+                  {'ㆍ'.repeat(number4?.length) || 'ㆍ'.repeat(cardInfo?.number4?.length)}
                 </div>
               </div>
               <div className="card-bottom-position">
                 <div className="card-bottom__info">
-                  <span className="card-text">{owner === '' ? 'NAME' : owner.slice(0, 10)}</span>
                   <span className="card-text">
-                    {month || 'MM'} / {year || 'YY'}
+                    {owner?.slice(0, 10) || cardInfo?.owner || 'NAME'}
+                  </span>
+                  <span className="card-text">
+                    {month || cardInfo?.month || 'MM'} / {year || cardInfo?.year || 'YY'}
                   </span>
                 </div>
               </div>
             </div>
+            <div className="card-name">{cardInfo?.name}</div>
           </>
         )}
       </div>

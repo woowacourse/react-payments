@@ -6,7 +6,7 @@ import { inputNumberOnly, limitInputLength } from 'utils';
 
 function CVC() {
   const { state, dispatch } = useContext(CardInfoContext);
-  const { cvc } = state;
+  const { cvc } = state.inputs;
 
   const setCVC = (cvc) => dispatch({ type: 'SET_CVC', cvc });
 
@@ -28,7 +28,7 @@ function CVC() {
       <span className="input-title">보안코드(CVC/CVV)</span>
       <input
         name="cvc"
-        className={`input-basic w-25 ${cvc.length >= LIMIT_LENGTH.CVC ? 'input-correct' : ''} `}
+        className={`input-basic w-25 ${cvc?.length >= LIMIT_LENGTH.CVC ? 'input-correct' : ''} `}
         type="password"
         onChange={handleChange}
         value={cvc}

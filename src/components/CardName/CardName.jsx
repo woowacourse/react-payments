@@ -4,7 +4,7 @@ import { CardInfoContext } from 'App';
 function CardName() {
   const { state, dispatch } = useContext(CardInfoContext);
 
-  const { name } = state;
+  const { name } = state.inputs;
   const setCardName = (name) => dispatch({ type: 'SET_CARD_NAME', name });
 
   const handleChange = (event) => {

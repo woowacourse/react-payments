@@ -28,7 +28,13 @@ body {
   position: relative;
 }
 
-/* utils */
+.main-scroll {
+  margin-top: 20px;
+  width: 327px;
+  height: 600px;
+  overflow-y: scroll;
+}
+
 .flex-center {
   display: flex;
   justify-content: center;

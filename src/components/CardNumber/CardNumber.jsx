@@ -6,8 +6,7 @@ import { limitInputLength, inputNumberOnly } from 'utils';
 
 function CardNumber() {
   const { state, dispatch } = useContext(CardInfoContext);
-
-  const { number1, number2, number3, number4 } = state;
+  const { number1, number2, number3, number4 } = state.inputs;
 
   const cardNumbers = [number1, number2, number3, number4];
   const setCardNumbers = (cardNumbers) => dispatch({ type: 'SET_CARD_NUMBERS', cardNumbers });
@@ -51,7 +50,7 @@ function CardNumber() {
         <input
           name="number1"
           className={`input-basic ${
-            cardNumbers[0].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : ''
+            cardNumbers[0]?.length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : ''
           }`}
           type="number"
           onChange={handleChange}
@@ -61,7 +60,7 @@ function CardNumber() {
         <input
           name="number2"
           className={`input-basic ${
-            cardNumbers[1].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : ''
+            cardNumbers[1]?.length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : ''
           }`}
           type="number"
           onChange={handleChange}
@@ -71,7 +70,7 @@ function CardNumber() {
         <input
           name="number3"
           className={`input-basic ${
-            cardNumbers[2].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : ''
+            cardNumbers[2]?.length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : ''
           }`}
           type="password"
           onChange={handleChange}
@@ -81,7 +80,7 @@ function CardNumber() {
         <input
           name="number4"
           className={`input-basic ${
-            cardNumbers[3].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : ''
+            cardNumbers[3]?.length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : ''
           }`}
           type="password"
           onChange={handleChange}

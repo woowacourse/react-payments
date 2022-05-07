@@ -7,7 +7,8 @@ import { limitInputLength, inputEnglishOnly } from 'utils';
 function CardOwner() {
   const { state, dispatch } = useContext(CardInfoContext);
 
-  const { owner } = state;
+  const { owner } = state.inputs;
+
   const setCardOwner = (owner) => dispatch({ type: 'SET_CARD_OWNER', owner });
 
   const handleChange = (event) => {
@@ -28,11 +29,11 @@ function CardOwner() {
     <div className="input-container">
       <div className="input-wrapper">
         <span className="input-title">카드 소유자 영문 이름(선택)</span>
-        <span className="input-length">{owner.length <= 30 ? owner.length : 30}/30</span>
+        <span className="input-length">{owner?.length <= 30 ? owner?.length : 30}/30</span>
       </div>
       <input
         type="text"
-        className={`input-basic ${owner.length >= 1 ? 'input-correct' : ''}`}
+        className={`input-basic ${owner?.length >= 1 ? 'input-correct' : ''}`}
         onChange={handleChange}
         value={owner}
       />

@@ -7,15 +7,15 @@ import { inputNumberOnly, limitInputLength } from 'utils';
 function CardExpirationDate() {
   const { state, dispatch } = useContext(CardInfoContext);
 
-  const cardExpirationDate = { month: state.month, year: state.year };
+  const cardExpirationDate = { month: state.inputs.month, year: state.inputs.year };
+
   const setCardExpirationDate = (cardExpirationDate) =>
-    dispatch({ type: 'SET_CRAD_EXPIRATION_DATE', cardExpirationDate });
+    dispatch({ type: 'SET_CARD_EXPIRATION_DATE', cardExpirationDate });
 
   const handleMonthInputBlur = (event) => {
     const { value } = event.target;
 
     const monthInput = value === String(MONTH.JANUARY) ? value.padStart(2, '0') : value;
-
     const newCardExpirationDate = { ...cardExpirationDate, month: monthInput };
 
     setCardExpirationDate(newCardExpirationDate);
@@ -63,7 +63,7 @@ function CardExpirationDate() {
         <input
           name="month"
           className={`input-basic ${
-            cardExpirationDate.month.length === LIMIT_LENGTH.EXPIRATION_DATE &&
+            cardExpirationDate.month?.length === LIMIT_LENGTH.EXPIRATION_DATE &&
             cardExpirationDate.month !== '00' &&
             cardExpirationDate.month !== '0' &&
             cardExpirationDate.month >= MONTH.JANUARY &&
@@ -81,7 +81,7 @@ function CardExpirationDate() {
         <input
           name="year"
           className={`input-basic ${
-            cardExpirationDate.year.length >= LIMIT_LENGTH.EXPIRATION_DATE ? 'input-correct' : ''
+            cardExpirationDate.year?.length >= LIMIT_LENGTH.EXPIRATION_DATE ? 'input-correct' : ''
           }`}
           type="number"
           placeholder="YY"

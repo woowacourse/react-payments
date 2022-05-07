@@ -5,7 +5,7 @@ import { PAGES } from 'constants';
 function Button({ text }) {
   const { state, page } = useContext(CardInfoContext);
 
-  const { inputValid } = state;
+  const { inputValid } = state.inputs;
 
   return (
     <div className="button-box">
