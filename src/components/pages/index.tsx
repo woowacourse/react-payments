@@ -1,13 +1,12 @@
 import Card from "components/add/Card";
 import Header from "components/common";
 import { PATH } from "constant/path";
-import { CardsContext } from "contexts/CardsProvider";
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { CardInfo } from "types/cardInfo";
 
-export default function Home() {
+export default function Home({ cards }: { cards: CardInfo[] }) {
   const navigate = useNavigate();
-  const { cards } = useContext(CardsContext);
 
   const handleClickCard = (id: number) => {
     const cardInfo = cards.find(card => card.id === id);

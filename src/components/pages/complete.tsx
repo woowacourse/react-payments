@@ -1,14 +1,34 @@
 import Card from "components/add/Card";
 import Input from "components/common/Input";
+import { PATH } from "constant/path";
 import { CardInfoContext } from "contexts/CardInfoProvider";
-import useCardInfoForm from "hooks/useCardInfoForm";
 import useGetCardInfo from "hooks/useGetCardInfo";
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { CardInfo } from "types/cardInfo";
 
-export default function Complete() {
-  const { onChangeCardName } = useContext(CardInfoContext);
+interface CompleteProps {
+  addCard: (cardInfo: CardInfo) => void;
+  editCard: (id: number, partialCardInfo: Partial<CardInfo>) => void;
+}
+
+export default function Complete({ addCard, editCard }: CompleteProps) {
+  const navigate = useNavigate();
+  const { resetCardInfo, onChangeCardName } = useContext(CardInfoContext);
   const { cardInfo } = useGetCardInfo();
-  const { handleSubmit } = useCardInfoForm();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (cardInfo.id) {
+      await editCard(cardInfo.id, { cardName: cardInfo.cardName });
+    } else {
+      await addCard(cardInfo);
+    }
+
+    resetCardInfo();
+    navigate(PATH.HOME);
+  };
 
   return (
     <div className="flex-column-center">
