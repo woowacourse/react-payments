@@ -52,21 +52,27 @@ const CardShapeButton = styled.div`
 export default function CardListPage({ setPage }) {
   const [formDataArray] = useLocalStorage("card-info");
 
+  const parseCardInfo = (card) => {
+    const cardNumberArray = card["card-number"].match(/.{1,4}/g);
+    const expireDateArray = card["expire-date"].match(/.{1,2}/g);
+
+    const cardInfo = {
+      cardNumber: cardNumberArray,
+      expireDate: expireDateArray,
+      holderName: card["holder-name"],
+    };
+
+    const colorIndex = Number(card["card-number"]) % 5;
+
+    return { cardInfo, colorIndex };
+  };
+
   return (
     <>
       <PageHeader page={PAGE_NAME.CARD_LIST} />
       <CardList>
         {formDataArray.map((card) => {
-          const cardNumberArray = card["card-number"].match(/.{1,4}/g);
-          const expireDateArray = card["expire-date"].match(/.{1,2}/g);
-
-          const cardInfo = {
-            cardNumber: cardNumberArray,
-            expireDate: expireDateArray,
-            holderName: card["holder-name"],
-          };
-
-          const colorIndex = Number(card["card-number"]) % 5;
+          const { cardInfo, colorIndex } = parseCardInfo(card);
 
           return (
             <CardItem key={card.nickname}>
