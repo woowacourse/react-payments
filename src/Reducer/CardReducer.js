@@ -12,7 +12,8 @@ function CardReducer(state, action) {
     case CARD_ACTION.NAME_EDIT:
       return state.map(card => {
         if (card.cardNumber.value === action.targetCardNumber) {
-          return (card.nickName = action.value);
+          card.nickName = action.value;
+          return card;
         }
         return card;
       });

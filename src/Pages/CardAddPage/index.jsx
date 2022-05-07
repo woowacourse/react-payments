@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { CardContext } from '../../context/CardContext';
 import styled from 'styled-components';
 import Head from '../../components/Modules/Head';
 import Card from '../../components/Modules/Card';
@@ -23,11 +25,13 @@ const CardAddFormContainer = styled.div`
 `;
 
 function CardAddPage() {
+  const { inputtedInfo } = useContext(CardContext);
+
   return (
     <Page>
       <Head>카드 추가</Head>
       <CardSection>
-        <Card />
+        <Card {...inputtedInfo} />
       </CardSection>
       <CardAddFormContainer>
         <CardAddForm link="/react-payments/cardComplete" />

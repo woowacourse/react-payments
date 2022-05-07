@@ -1,13 +1,7 @@
-import { useContext } from 'react';
-import { CardContext } from '../context/CardContext';
 import { COUNT, PLACEHOLDER } from '../constant';
 import { CARD_NUMBER_MARK } from '../constant/mark';
 
-function useCard() {
-  const {
-    inputtedInfo: { cardNumber, expiredDate, ownerName },
-  } = useContext(CardContext);
-
+function useCard({ cardNumber, expiredDate, ownerName }) {
   const companyNameString = '신한 카드';
 
   const cardNumberString = cardNumber

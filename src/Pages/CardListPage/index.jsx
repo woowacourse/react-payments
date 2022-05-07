@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import Head from '../../components/Modules/Head';
 import Card from '../../components/Modules/Card';
+import { useContext } from 'react';
+import { CardContext } from '../../context/CardContext';
+import { Fragment } from 'react';
 
 const Page = styled.div`
   display: flex;
@@ -17,28 +20,18 @@ const ListContainer = styled.div`
 `;
 
 function CardListPage() {
+  const { cardData } = useContext(CardContext);
+
   return (
     <Page>
       <Head>보유 카드</Head>
       <ListContainer>
-        <Card
-          companyNameString="신한카드"
-          cardNumberString="1111-1111-1111-1111"
-          expiredDateString="12/32"
-          ownerNameString="kam"
-        />
-        <Card
-          companyNameString="우리카드"
-          cardNumberString="2222-1111-1111-1111"
-          expiredDateString="12/32"
-          ownerNameString="woo"
-        />
-        <Card
-          companyNameString="농협카드"
-          cardNumberString="3333-1111-1111-1111"
-          expiredDateString="12/32"
-          ownerNameString="yeong"
-        />
+        {cardData.map(cardInfo => (
+          <Fragment key={cardInfo.cardNumber.value}>
+            <Card {...cardInfo} />
+            <p>{cardInfo.nickName.value}</p>
+          </Fragment>
+        ))}
       </ListContainer>
     </Page>
   );

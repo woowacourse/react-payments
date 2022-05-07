@@ -58,13 +58,13 @@ export const CardOwnerName = styled.span`
   word-break: break-all;
 `;
 
-function Card() {
+function Card({ cardNumber, expiredDate, ownerName }) {
   const {
     companyNameString,
     cardNumberString,
     expiredDateString,
     ownerNameString,
-  } = useCard();
+  } = useCard({ cardNumber, expiredDate, ownerName });
 
   return (
     <CardContainer>

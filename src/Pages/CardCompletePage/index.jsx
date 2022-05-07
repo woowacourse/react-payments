@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { CardContext } from '../../context/CardContext';
 import styled from 'styled-components';
 import Card from '../../components/Modules/Card';
 import CardNickNameForm from '../../components/Templates/CardNickNameForm';
@@ -26,11 +28,13 @@ const CardSection = styled.div`
 `;
 
 function CardCompletePage() {
+  const { inputtedInfo } = useContext(CardContext);
+
   return (
     <Page>
       <Title>카드등록이 완료되었습니다.</Title>
       <CardSection>
-        <Card />
+        <Card {...inputtedInfo} />
       </CardSection>
       <CardNickNameForm link="/react-payments/cardList" />
     </Page>
