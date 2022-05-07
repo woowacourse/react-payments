@@ -36,6 +36,7 @@ const StyledStoredCardList = styled.div`
   }
 
   .card-box {
+    width: 206px;
     margin: 0 0 5px;
   }
 
