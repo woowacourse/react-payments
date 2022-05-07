@@ -34,7 +34,10 @@ function CardEditor() {
   const { cardList, currentEditIndex, handleInsertCardData, handleUpdateCardData } =
     useCardDataContext();
 
-  useEffect(() => setPageTitle('카드 추가'), []);
+  useEffect(
+    () => setPageTitle(CARD_EDITOR_MODE.NEW === currentEditIndex ? '카드 추가' : '카드 편집'),
+    [],
+  );
 
   const { state, onChangeCardState } = useCardState(cardList[currentEditIndex] || null);
   const {
