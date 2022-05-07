@@ -1,3 +1,11 @@
+export const ENDPOINT =
+  'https://moonheekim-payments-server.herokuapp.com/cards';
+
+export const METHODS = {
+  GET: 'GET',
+  POST: 'POST',
+};
+
 export const REG_EXP = {
   NUMBER_ONLY: /^[0-9]+$/,
   CHARACTER_ONLY: /^[a-z,A-Z]+$/,

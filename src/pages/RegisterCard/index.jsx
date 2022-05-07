@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useInputValue from '../../hooks/useInputValue';
+import useAPI from '../../hooks/useAPI';
 import Card from '../../components/Card';
 import Button from '../../components/Button';
 import * as styled from './index.styled';
-import { API_ADD_CARD } from '../../api';
+import { ENDPOINT, METHODS } from '../../constant';
 
 // fetch('https://moonheekim-payments-server.herokuapp.com/cards/', {
 // methods: 'DELETE',
@@ -14,7 +15,10 @@ const RegisterCard = () => {
   const navigate = useNavigate();
   const state = useLocation().state;
 
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, apiRequest, isError } = useAPI({
+    uri: ENDPOINT,
+    method: METHODS.POST,
+  });
 
   const [alias, _, onChangeAlias] = useInputValue();
   useEffect(() => {
@@ -22,16 +26,21 @@ const RegisterCard = () => {
   }, [state, navigate]);
 
   const onSubmitCardInformation = () => {
-    setIsLoading(true);
-    API_ADD_CARD({ ...state, alias }).then(() => {
-      setIsLoading(false);
+    apiRequest({
+      body: JSON.stringify({ ...state, alias }),
+      headers: { 'Content-Type': 'application/json' },
+    }).then(() => {
       navigate('/');
     });
   };
 
   return state ? (
     <styled.Container>
-      <h3>카드 등록이 완료되었습니다.👏🏻</h3>
+      {isError ? (
+        <h3>죄송합니다. 잠시 후에 다시 시도해주세요.</h3>
+      ) : (
+        <h3>카드 등록이 완료되었습니다.👏🏻</h3>
+      )}
       <Card
         firstCardNumber={state.firstCardNumber}
         secondCardNumber={state.secondCardNumber}
@@ -48,7 +57,7 @@ const RegisterCard = () => {
         placeholder="카드 별칭을 입력해주세요"
       />
       <styled.ButtonContainer>
-        <Button onClick={onSubmitCardInformation} disabled={!isLoading}>
+        <Button onClick={onSubmitCardInformation} disabled={isLoading}>
           {isLoading ? '등록중' : '확인'}
         </Button>
       </styled.ButtonContainer>
