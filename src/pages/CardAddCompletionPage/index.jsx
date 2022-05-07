@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Card from 'components/Card';
 import { UnderlineInput } from 'components/Input';
 import Button from 'components/Button';
@@ -9,6 +9,7 @@ import { CARD_SIZE } from 'constant/';
 
 function CardAddCompletionPage() {
   const cardAliasInput = useRef(null);
+  const navigate = useNavigate();
   const { state } = useLocation();
   const { updateCardInfo, getCardInfo } = useCardListContext();
 
@@ -18,6 +19,7 @@ function CardAddCompletionPage() {
     const cardAlias = cardAliasInput.current.value;
 
     updateCardInfo({ ...cardInfo, alias: cardAlias });
+    navigate('/');
   };
 
   return (

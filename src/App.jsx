@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import CardListPage from 'pages/CardListPage';
 import CardAddPage from './pages/CardAddPage/';
 import CardAddCompletionPage from 'pages/CardAddCompletionPage';
 import { GlobalStyle, ModalContainer } from './style';
@@ -22,8 +23,9 @@ function App() {
       <div className="App">
         <CardListProvider>
           <Routes>
+            <Route path="/" element={<CardListPage />} />
             <Route
-              path="/"
+              path="/cardAdd"
               element={
                 <CardAddPage
                   isOpenModal={isOpenModal}
