@@ -16,10 +16,10 @@ export const parameters = {
 export const decorators = [
   (Story) => {
     return (
-      <CardContext.Provide rvalue={useCard()}>
+      <CardContext.Provider value={useCard()}>
         {Story()}
         <div id="modal"></div>
-      </CardContext.Provide>
+      </CardContext.Provider>
     );
   },
 ];
