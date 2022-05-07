@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { GRADATION } from './theme';
 import responsive from './utils/responsive';
 
 const appStyles = css`
@@ -37,6 +38,7 @@ const appStyles = css`
 
   :root {
     font-size: 3.4vw;
+    height: 100%;
 
     ${responsive.notMobile(css`
       font-size: 16px;
@@ -49,23 +51,35 @@ const appStyles = css`
 
   body {
     font-family: 'NanumBarunGothic';
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: center;
-    justify-content: center;
     margin: 0px;
+    height: 100%;
+  }
+
+  #root {
+    width: 100%;
+    height: 100%;
+    position: relative;
 
     ${responsive.notMobile(css`
-      background-color: #e5e5e5;
-      margin: 3.125rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      background-image: ${GRADATION['mystic-bottom']};
     `)}
   }
 
-  .root {
-    background-color: #fff;
-    min-width: 330px;
-    position: relative;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin: 0 0 1.2rem;
+  }
+
+  p {
+    margin: 0 0 0.5rem;
   }
 
   input,
