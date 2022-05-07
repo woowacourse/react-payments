@@ -2,10 +2,10 @@ import React, { useReducer } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useCardList } from '../hooks/useCardList';
 import Landing from '../pages';
-import CardList from '../pages/list';
-import AddCard from '../pages/list/add';
-import EditCard from '../pages/list/edit';
-import CardSuccess from '../pages/list/success';
+import CardList from '../pages/cardlist';
+import AddCard from '../pages/cardlist/add';
+import EditCard from '../pages/cardlist/edit';
+import CardSuccess from '../pages/cardlist/success';
 import NotFound from '../pages/404';
 import { ROUTE } from '../route';
 function App() {
