@@ -6,7 +6,7 @@ import ExpiredDateInput from '../../components/ExpiredDateInput';
 import OwnerNameInput from '../../components/OwnerNameInput';
 import SecurityNumberInput from '../../components/SecurityNumberInput';
 import PasswordInput from '../../components/PasswordInput';
-import SubmitButton from '../../components/SubmitButton';
+import Button from '../../components/Button';
 import ModalPortal from '../../components/ModalPortal';
 import CardCompanySelector from '../../components/CardCompanySelector';
 import { Page, CardSection, Form, SubmitButtonContainer } from './style';
@@ -112,7 +112,9 @@ function CardAddPage({ isOpenModal, openModal }) {
           invalidMessage={MESSAGE.INVALID_PASSWORD}
         />
         <SubmitButtonContainer>
-          <SubmitButton label="다음" width={'51px'} height={'34px'} hidden={!isAllValidInput()} />
+          <Button type="submit" hidden={!isAllValidInput()}>
+            다음
+          </Button>
         </SubmitButtonContainer>
       </Form>
       <ModalPortal isOpenModal={isOpenModal}>
