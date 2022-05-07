@@ -6,7 +6,7 @@ import { CardDispatch } from 'App';
 import CardPreview from 'components/CardPreview';
 import Button from 'components/common/Button';
 
-import styles from 'css/ConfirmationPage.module.css';
+import styles from 'css/module/ConfirmationPage.module.css';
 
 const ConfirmationPage = () => {
   const { state, dispatch } = useContext(CardDispatch);
@@ -28,7 +28,7 @@ const ConfirmationPage = () => {
         theme={theme}
       />
       <input
-        className="input-underline"
+        className={styles.input}
         value={alias}
         onChange={(e) => handleAlias(e.target.value)}
         placeholder="카드 이름"

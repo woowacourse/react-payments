@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import styles from 'css/Modal.module.css';
+import styles from 'css/module/Modal.module.css';
 
 const Modal = ({ handleModal, children }) => {
   return (

@@ -4,13 +4,15 @@ import { CardDispatch } from 'App';
 import { ReactComponent as CardAddIcon } from 'assets/card_add_icon.svg';
 import CardPreview from 'components/CardPreview';
 
+import styles from 'css/module/MainPage.module.css';
+
 const MainPage = () => {
   const { state } = useContext(CardDispatch);
 
   return (
-    <div className="main-container">
-      <div className="card-list">
-        <div className="card-items">
+    <div className={styles.container}>
+      <div className={styles.cardList}>
+        <>
           {state.cards.map(({ id, theme, company, number, expiryDate, ownerName, alias }) => (
             <div key={id}>
               <CardPreview
@@ -21,12 +23,12 @@ const MainPage = () => {
                 ownerName={ownerName}
                 handleModal={() => {}}
               />
-              <p className="alias">{alias ?? company}</p>
+              <p className={styles.alias}>{alias ?? company}</p>
             </div>
           ))}
-        </div>
+        </>
         <Link to="/react-payments/add">
-          <CardAddIcon className="card-add-icon" />
+          <CardAddIcon className={styles.AddIcon} />
         </Link>
       </div>
     </div>

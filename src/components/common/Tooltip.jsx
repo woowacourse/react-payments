@@ -2,7 +2,7 @@ import { useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import { ReactComponent as TooltipIcon } from 'assets/tooltip_icon.svg';
 import { TOOLTIP_TYPES } from 'constants';
-import styles from 'css/Tooltip.module.css';
+import styles from 'css/module/Tooltip.module.css';
 
 const Tooltip = ({ type }) => {
   const [isHover, setIsHover] = useState(false);

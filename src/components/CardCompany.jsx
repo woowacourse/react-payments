@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import styles from 'css/CardCompany.module.css';
+import styles from 'css/module/CardCompany.module.css';
 
 const CardCompany = ({ company, onClickCompany, theme }) => {
   return (
