@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { CardInfoContext } from "../contexts/CardInfoContext";
 
 import {
+  initialCardAlias,
   initialCardNumber,
   initialExpireDate,
   initialHolderName,
@@ -18,6 +19,7 @@ export default function useResetInput() {
       setHolderName,
       setSecurityCode,
       setPassword,
+      setCardAlias,
     },
   } = useContext(CardInfoContext);
 
@@ -27,6 +29,7 @@ export default function useResetInput() {
     setHolderName(initialHolderName);
     setSecurityCode(initialSecurityCode);
     setPassword(initialPassword);
+    setCardAlias(initialCardAlias);
   };
 
   return { state, handleResetInput };

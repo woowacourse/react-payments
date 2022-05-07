@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
+import { CARD_REGISTER_SUCCESS_MESSAGE } from "../../constants/constants";
 import { CardInfoContext } from "../../contexts/CardInfoContext";
 
 import PageHeader from "../PageHeader";
@@ -70,7 +71,12 @@ export default function CardConfirmModal() {
           borderBottom={"1px solid #8b8b8b"}
         />
         {cardAlias.value.length > 0 ? (
-          <Button type="submit">확인</Button>
+          <Button
+            onClick={() => window.alert(CARD_REGISTER_SUCCESS_MESSAGE)}
+            type="submit"
+          >
+            확인
+          </Button>
         ) : (
           <StyledCardAliasDescription>
             카드 별칭을 1 ~ 15자로 입력해주세요.
