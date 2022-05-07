@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 
 import { COLORS, LAYOUT } from 'styles/theme';
 import responsive from 'styles/utils/responsive';
+import animate from 'styles/utils/animate';
 
 const Container = styled.div`
   display: flex;
@@ -25,6 +26,21 @@ const Container = styled.div`
     & > div {
       padding: 1.5rem;
       height: 100%;
+      ${animate(
+        '0.3s ease',
+        css`
+          from {
+            opacity: 0;
+            transform: translateY(10%);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0%);
+          }
+        `,
+      )}
+      animation-fill-mode: forwards;
 
       &.fill {
         display: flex;
