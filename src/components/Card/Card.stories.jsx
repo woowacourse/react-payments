@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '.';
+import { CARD_SIZE } from 'constant/';
 
 export default {
   title: 'Payment/Card',
@@ -9,13 +10,26 @@ export default {
   },
 };
 
-const Template = args => <Card {...args} />;
+const Template = args => {
+  return (
+    <Card
+      cardCompany={{ name: '포코카드', color: '#E24141' }}
+      cardNumbers={['1111', '2222', '3333', '4444']}
+      ownerName="VICTOR"
+      expiredDate="12/22"
+      {...args}
+    />
+  );
+};
 
-export const Small = Template.bind({});
+export const Medium = Template.bind({});
 
-Small.args = {
-  cardCompany: { name: '포코카드', color: '#E24141' },
-  cardNumbers: ['1111', '2222', '3333', '4444'],
-  ownerName: 'SUN',
-  expiredDate: '12/22',
+Medium.args = {
+  size: CARD_SIZE.MEDIUM,
+};
+
+export const Large = Template.bind({});
+
+Large.args = {
+  size: CARD_SIZE.LARGE,
 };
