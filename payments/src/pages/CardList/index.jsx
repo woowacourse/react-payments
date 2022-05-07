@@ -11,12 +11,9 @@ const CardList = () => {
   const { inputStates, updateInputStates } = useContext(UserContext);
 
   const onclick = () => {
-    updateInputStates((prev) => {
-      prev = initState;
-    });
+    updateInputStates((prev) => (prev = initState));
   };
 
-  console.log(userList);
   return (
     <div>
       <p className='card-list__header'>보유카드</p>

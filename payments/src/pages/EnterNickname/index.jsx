@@ -17,9 +17,9 @@ const EnterNickname = () => {
   };
 
   const onClick = () => {
-    updateUserList((prev) => {
-      prev = [...prev, { nickName: nickName || `${inputStates.cardName} 카드`, userInfo: inputStates }];
-    });
+    updateUserList(
+      (prev) => (prev = [...prev, { nickName: nickName || `${inputStates.cardName} 카드`, userInfo: inputStates }]),
+    );
   };
 
   return (
