@@ -10,6 +10,7 @@ import CardCompany from 'components/CardCompany';
 import Button from 'components/common/Button';
 import Tooltip from 'components/common/Tooltip';
 
+import { moveInputFocus } from 'utils';
 import { validator } from './validator';
 import { CRYPTO_STRING, INPUT_MAX_LENGTH } from 'constants';
 import {
@@ -60,14 +61,10 @@ const CardAppPage = () => {
 
       handleCardInfo({ item, name, value });
 
-      if (value.length >= maxLength) moveFocus(id + 1);
+      if (value.length >= maxLength) moveInputFocus(inputRef, id + 1);
     },
     [handleCardInfo],
   );
-
-  const moveFocus = (index) => {
-    inputRef.current[index]?.focus();
-  };
 
   const handleClickCompany = useCallback(
     (company, theme) => {

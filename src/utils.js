@@ -10,3 +10,7 @@ export const isEnglish = (value) => {
 export const isObject = (value) => {
   return typeof value === 'object';
 };
+
+export const moveInputFocus = (ref, index) => {
+  ref.current[index]?.focus();
+};
