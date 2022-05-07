@@ -11,6 +11,8 @@ export const pareCardFormState = (state) => {
   delete parsedState.isInitialPassword;
   delete parsedState.isPasswordError;
   delete parsedState.isCardTypeSelected;
+  delete parsedState.firstPassword;
+  delete parsedState.secondPassword;
 
   return parsedState;
 };

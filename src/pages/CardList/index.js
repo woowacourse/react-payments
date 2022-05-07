@@ -22,6 +22,9 @@ const CardList = () => {
     <>
       <Header title="보유카드" />
       <styled.Container>
+        <styled.AddCardButton onClick={onClickAddCardButton}>
+          <p>+</p>
+        </styled.AddCardButton>
         {cardList.map(
           ({
             id,
@@ -52,9 +55,6 @@ const CardList = () => {
             </div>
           ),
         )}
-        <styled.AddCardButton onClick={onClickAddCardButton}>
-          <p>+</p>
-        </styled.AddCardButton>
       </styled.Container>
     </>
   );

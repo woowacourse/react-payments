@@ -4,15 +4,17 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
+  margin-top: 100px;
 `;
 
 export const CardAlias = styled.h4`
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: center;
 `;
 
 export const AddCardButton = styled.div`
+  margin-bottom: 40px;
   width: 208px;
   height: 130px;
   background-color: #e5e5e5;

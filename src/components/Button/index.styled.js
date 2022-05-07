@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
-export const Container = styled(Link)`
-  width: 100px;
+export const Container = styled.button`
+  width: fit-content;
   height: 44px;
   color: #04c09e;
   font-size: 14px;
@@ -13,5 +12,6 @@ export const Container = styled(Link)`
 
   &:disabled {
     color: grey;
+    cursor: progress;
   }
 `;

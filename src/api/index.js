@@ -14,8 +14,12 @@ const request = async (uri, options) => {
 
 export const API_ADD_CARD = async (cardInformation) => {
   try {
+    console.log(cardInformation);
     await request(ENDPOINT, {
       method: METHODS.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(cardInformation),
     });
   } catch (error) {
