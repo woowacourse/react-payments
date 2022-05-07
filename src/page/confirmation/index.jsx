@@ -24,7 +24,6 @@ const ConfirmationPage = () => {
         ownerName={ownerName}
         expiryDate={expiryDate}
         company={company}
-        handleModal={() => {}}
         theme={theme}
       />
       <input

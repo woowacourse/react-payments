@@ -79,7 +79,7 @@ const CardAppPage = () => {
         ownerName={ownerName}
         expiryDate={expiryDate}
         company={company}
-        handleModal={handleModal}
+        handleClick={handleModal}
         theme={theme}
       />
       <FormInput

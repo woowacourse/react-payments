@@ -21,7 +21,6 @@ const MainPage = () => {
                 number={number}
                 expiryDate={expiryDate}
                 ownerName={ownerName}
-                handleModal={() => {}}
               />
               <p className={styles.alias}>{alias ?? company}</p>
             </div>
