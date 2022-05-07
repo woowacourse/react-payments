@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
-import Card from 'components/common/Card';
-import Button from 'components/common/Button';
+import { Button, Card } from 'components';
 
-import useSubmit from 'hooks/useSubmit';
+import { useSubmit } from 'hooks';
 
 function AddCardComplete() {
   // TODO: hook으로 하는 게 맞을까?

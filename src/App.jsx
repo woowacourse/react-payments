@@ -3,9 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import GlobalStyle from 'GlobalStyle';
 
-import AddCard from 'pages/AddCard';
-import AddCardComplete from 'pages/AddCardComplete';
-import CardList from 'pages/CardList';
+import { AddCard, AddCardComplete, CardList } from 'pages';
 
 function App() {
   return (

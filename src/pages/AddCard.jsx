@@ -3,20 +3,24 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import useCardNumber from 'hooks/useCardNumber';
-import useValidDate from 'hooks/useValidDate';
-import useCardOwnerName from 'hooks/useCardOwnerName';
-import useCVC from 'hooks/useCVC';
-import useCardPassword from 'hooks/useCardPassword';
-import useSubmit from 'hooks/useSubmit';
+import {
+  Button,
+  Card,
+  CVCTooltip,
+  Input,
+  CardPickModal,
+  ModalPortal,
+  Header,
+} from 'components';
 
-import Button from 'components/common/Button';
-import Card from 'components/common/Card';
-import CVCTooltip from 'components/CVCTooltip';
-import Input from 'components/common/Input';
-import CardPickModal from 'components/CardPickModal';
-import ModalPortal from 'components/common/ModalPortal';
-import Header from 'components/common/Header';
+import {
+  useCardNumber,
+  useCardOwnerName,
+  useCardPassword,
+  useCVC,
+  useSubmit,
+  useValidDate,
+} from 'hooks';
 
 import { ReactComponent as Arrow } from 'assets/arrow.svg';
 

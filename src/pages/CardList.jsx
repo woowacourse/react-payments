@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-import Card from 'components/common/Card';
-import Header from 'components/common/Header';
-import EmptyCard from 'components/EmptyCard';
+import { Card, EmptyCard, Header } from 'components';
 
 // TODO: context api로 교체
 const cardList = Array.from({ length: 2 }, () => {

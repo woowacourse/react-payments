@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-import Button from 'components/common/Button';
-import CardKindButton from 'components/CardKindButton';
+import { Button, CardKindButton } from 'components';
 
 const cardPresets = [
   {

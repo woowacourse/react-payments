@@ -14,7 +14,6 @@ export default function useCVC(initialValue) {
   }, []);
 
   const showCVCValidation = ({ target }) => {
-    console.log('?');
     if (target.validity.tooShort) {
       target.setCustomValidity(ERROR_MESSAGE.INVALID_CVC);
       target.reportValidity();

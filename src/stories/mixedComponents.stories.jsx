@@ -1,10 +1,6 @@
-import React from 'react';
-
 import styled from 'styled-components';
 
-import Button from '../components/common/Button';
-import Input from '../components/common/Input';
-import CVCTooltip from '../components/CVCTooltip';
+import { Button, CVCTooltip, Input } from 'components';
 
 export default {
   title: 'Example/MixedComponents',
