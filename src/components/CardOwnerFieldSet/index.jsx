@@ -10,7 +10,7 @@ const showOwnerNameLength = (length) => {
   return `${length}`.padStart(2, '0');
 };
 
-const CardOwner = () => {
+const CardOwnerFieldSet = () => {
   const { dispatch, state } = useCardFormContext();
   const [ownerName, isOwnerNameError, onChangeOwnerName] = useInputValue({
     isValidateInput: checkOwnerName,
@@ -55,4 +55,4 @@ const CardOwner = () => {
   );
 };
 
-export default CardOwner;
+export default CardOwnerFieldSet;
