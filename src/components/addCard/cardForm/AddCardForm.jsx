@@ -3,10 +3,10 @@ import Input from '../../input/Input';
 import { validNumber, validMaxLength, validRange } from '../../../validator';
 import { CARD } from '../../../constants';
 
-function AddCardForm({ card, updateCard, addCard }) {
+function AddCardForm({ card, updateCard, addCardList }) {
   const handleSubmit = (event) => {
     event.preventDefault();
-    addCard();
+    addCardList();
   };
 
   return (
@@ -148,7 +148,7 @@ AddCardForm.propTypes = {
     secondPassword: PropTypes.string,
   }).isRequired,
   updateCard: PropTypes.func,
-  addCard: PropTypes.func,
+  addCardList: PropTypes.func,
 };
 
 export default AddCardForm;
