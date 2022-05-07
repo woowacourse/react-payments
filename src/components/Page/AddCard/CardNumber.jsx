@@ -5,10 +5,7 @@ import FieldSet from '../../FieldSet';
 import CardNumberInput from '../../Input/CardNumberInput';
 
 const CardNumber = ({
-  firstCardNumber,
-  secondCardNumber,
-  thirdCardNumber,
-  fourthCardNumber,
+  cardNumbers,
   onChangeFirstCardNumber,
   onChangeSecondCardNumber,
   onChangeThirdCardNumber,
@@ -23,10 +20,7 @@ const CardNumber = ({
       isError={isError}
     >
       <CardNumberInput
-        firstCardNumber={firstCardNumber}
-        secondCardNumber={secondCardNumber}
-        thirdCardNumber={thirdCardNumber}
-        fourthCardNumber={fourthCardNumber}
+        cardNumbers={cardNumbers}
         onChangeFirstCardNumber={onChangeFirstCardNumber}
         onChangeSecondCardNumber={onChangeSecondCardNumber}
         onChangeThirdCardNumber={onChangeThirdCardNumber}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardNumber, ExpiredDate, CardOwnerName, SecureCode, Password } from './index';
@@ -34,7 +34,7 @@ const NextButtonWrapper = styled.div`
 `;
 
 const AddCardPage = () => {
-  const { cardList, setCardList } = useContext(CardListContext);
+  const { setCardList } = useContext(CardListContext);
   const { cardIndex, setCardIndex } = useContext(CardIndexContext);
 
   const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] = useInputValue({
@@ -99,7 +99,7 @@ const AddCardPage = () => {
     expiredMonth.length > 0 &&
     expiredYear.length > 0;
 
-  const onSubmitCardForm = (e) => {
+  const onSubmitCardForm = () => {
     const newCardObj = createCardObject();
     setCardList((prevCard) => [...prevCard, newCardObj]);
     setCardIndex(cardIndex + 1);
@@ -132,7 +132,7 @@ const AddCardPage = () => {
 
   return (
     <Container>
-      <Header title="카드 추가" />
+      <Header>카드추가</Header>
       <Card
         name={ownerName}
         expiredMonth={expiredMonth}

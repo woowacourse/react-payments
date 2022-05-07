@@ -1,12 +1,15 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 import { CardIndexContext, CardListContext } from '../../../contexts/index';
+import useInputValue from '../../../hooks/useInputValue';
+import { checkCardNickName } from '../../../validation';
+
 import NextButton from '../../Button';
 import Card from '../../Card';
 import CardNickNameInput from '../../Input/CardNickNameInput';
-import useInputValue from '../../../hooks/useInputValue';
-import { checkCardNickName } from '../../../validation';
+
 import ErrorMessage from '../../ErrorMessage';
 
 const Container = styled.div`
@@ -44,15 +47,15 @@ const NextButtonWrapper = styled.div`
 
 const AddCardResultPage = () => {
   const { cardList, setCardList } = useContext(CardListContext);
-  const { cardIndex, setCardIndex } = useContext(CardIndexContext);
+  const { cardIndex } = useContext(CardIndexContext);
 
   const [cardNickName, isCardNickNameError, onChangeCardNickName] = useInputValue({
     validation: checkCardNickName,
   });
 
-  const { nickName, ownerName, cardType, cardNumber, expiredDate } = cardList[cardIndex - 1];
+  const { ownerName, cardType, cardNumber, expiredDate } = cardList[cardIndex - 1];
 
-  const submitCardNickName = (e) => {
+  const submitCardNickName = () => {
     const updatedCardList = cardList.map((item) =>
       item.id === cardIndex - 1 ? { ...item, nickName: cardNickName } : item,
     );

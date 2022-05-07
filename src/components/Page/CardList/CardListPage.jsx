@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 import { CardListContext } from '../../../contexts';
+
 import Card from '../../Card';
 import PlusCard from '../../Card/PlusCard';
 import Label from '../../Label';

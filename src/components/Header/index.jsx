@@ -38,7 +38,7 @@ const Arrow = styled.div`
   transform: rotate(45deg);
 `;
 
-const Header = ({ title }) => {
+const Header = ({ children }) => {
   return (
     <HeaderWrapper>
       <Link to="/react-payments/list">
@@ -46,8 +46,7 @@ const Header = ({ title }) => {
           <Arrow />
         </BackButton>
       </Link>
-
-      <Title>{title}</Title>
+      <Title>{children}</Title>
     </HeaderWrapper>
   );
 };

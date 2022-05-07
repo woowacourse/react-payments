@@ -22,10 +22,7 @@ const CardNumberInput = ({
   onChangeSecondCardNumber,
   onChangeThirdCardNumber,
   onChangeFourthCardNumber,
-  firstCardNumber,
-  secondCardNumber,
-  thirdCardNumber,
-  fourthCardNumber,
+  cardNumbers,
 }) => {
   const [currentElementIndex, setCurrentElementIndex] = useState(0);
 
@@ -61,7 +58,7 @@ const CardNumberInput = ({
     <CardNumberWrapper>
       <Input
         scale="medium"
-        value={firstCardNumber}
+        value={cardNumbers[0]}
         onChange={(e) => {
           onChangeFirstCardNumber(e);
           onChangeCardNumber(e);
@@ -73,7 +70,7 @@ const CardNumberInput = ({
       <Dash>-</Dash>
       <Input
         scale="medium"
-        value={secondCardNumber}
+        value={cardNumbers[1]}
         onChange={(e) => {
           onChangeSecondCardNumber(e);
           onChangeCardNumber(e);
@@ -86,7 +83,7 @@ const CardNumberInput = ({
       <Input
         scale="medium"
         type="password"
-        value={thirdCardNumber}
+        value={cardNumbers[2]}
         onChange={(e) => {
           onChangeThirdCardNumber(e);
           onChangeCardNumber(e);
@@ -99,7 +96,7 @@ const CardNumberInput = ({
       <Input
         scale="medium"
         type="password"
-        value={fourthCardNumber}
+        value={cardNumbers[3]}
         onChange={(e) => {
           onChangeFourthCardNumber(e);
           onChangeCardNumber(e);

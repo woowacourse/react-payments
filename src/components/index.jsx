@@ -10,9 +10,6 @@ const CardApp = () => {
   const [cardList, setCardList] = useState([]);
   const [cardIndex, setCardIndex] = useState(0);
 
-  useEffect(() => {
-    console.log(cardList);
-  }, [cardList]);
   return (
     <CardListContext.Provider value={{ cardList, setCardList }}>
       <CardIndexContext.Provider value={{ cardIndex, setCardIndex }}>
