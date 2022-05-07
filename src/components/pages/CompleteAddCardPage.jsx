@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CardContext from '../../contexts/CardContext';
 import CardPreview from '../common/CardPreview';
 import TextBox from '../common/TextBox';
@@ -40,6 +40,7 @@ const StyledCompleteAddCardPage = styled.div`
 const CompleteAddCardPage = () => {
   const [cardName, setCardName] = useState('');
   const { values, setValues, initialField } = useContext(CardContext);
+  const navigation = useNavigate();
 
   const storeCard = async () => {
     const cardInfo = {
@@ -74,15 +75,14 @@ const CompleteAddCardPage = () => {
           setCardName(e.target.value.trim());
         }}
       />
-      <Link to="/">
-        <Button
-          onClick={async () => {
-            await storeCard();
-          }}
-        >
-          확인
-        </Button>
-      </Link>
+      <Button
+        onClick={async () => {
+          await storeCard();
+          navigation('/');
+        }}
+      >
+        확인
+      </Button>
     </StyledCompleteAddCardPage>
   );
 };

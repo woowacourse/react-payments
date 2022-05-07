@@ -52,6 +52,7 @@ const StyledStoredCardList = styled.div`
 
 const StoredCardListPage = () => {
   const [storedList, setStoredList] = useState({});
+
   useEffect(() => {
     async function fetchStoredCardList() {
       const fetchedCards = await fetch(`${API_SERVER}/cards`);

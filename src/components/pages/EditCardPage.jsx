@@ -70,7 +70,9 @@ const EditCardPage = () => {
 
     if (!response.ok) {
       alert('카드 수정에 실패했습니다. 관리자에게 문의하세요.');
+      return;
     }
+    navigation('/');
   };
 
   const deleteCard = async () => {
@@ -84,6 +86,7 @@ const EditCardPage = () => {
 
     if (!response.ok) {
       alert('카드 삭제에 실패했습니다. 관리자에게 문의하세요.');
+      return;
     }
     navigation('/');
   };
@@ -111,16 +114,14 @@ const EditCardPage = () => {
         삭제
       </Button>
 
-      <Link to="/">
-        <Button
-          className="edit-button"
-          onClick={async () => {
-            await editCard(newName);
-          }}
-        >
-          수정
-        </Button>
-      </Link>
+      <Button
+        className="edit-button"
+        onClick={async () => {
+          await editCard(newName);
+        }}
+      >
+        수정
+      </Button>
     </StyledCompleteEditCardPage>
   );
 };
