@@ -1,7 +1,14 @@
 import React from "react";
 import ModalPortal from "../../Portal";
 
-export default function Modal({ onClose }) {
+export default function Modal({ onClose, changeCardType }) {
+  const handleClick = e => {
+    const { type } = e.target.dataset;
+
+    changeCardType(type);
+    onClose();
+  };
+
   return (
     <ModalPortal>
       <div
@@ -19,7 +26,8 @@ export default function Modal({ onClose }) {
               <div
                 className="modal-item-dot"
                 style={{ backgroundColor: "#E24141" }}
-                onClick={onClose}
+                onClick={handleClick}
+                data-type="poco"
                 aria-hidden="true"
               ></div>
               <span className="modal-item-name">포코 카드</span>
@@ -28,7 +36,8 @@ export default function Modal({ onClose }) {
               <div
                 className="modal-item-dot"
                 style={{ backgroundColor: "#547CE4" }}
-                onClick={onClose}
+                onClick={handleClick}
+                data-type="jun"
                 aria-hidden="true"
               ></div>
               <span className="modal-item-name">준 카드</span>
@@ -37,7 +46,8 @@ export default function Modal({ onClose }) {
               <div
                 className="modal-item-dot"
                 style={{ backgroundColor: "#73BC6D" }}
-                onClick={onClose}
+                onClick={handleClick}
+                data-type="park"
                 aria-hidden="true"
               ></div>
               <span className="modal-item-name">공원 카드</span>
@@ -46,7 +56,8 @@ export default function Modal({ onClose }) {
               <div
                 className="modal-item-dot"
                 style={{ backgroundColor: "#DE59B9" }}
-                onClick={onClose}
+                onClick={handleClick}
+                data-type="bran"
                 aria-hidden="true"
               ></div>
               <span className="modal-item-name">브랜 카드</span>
@@ -60,7 +71,8 @@ export default function Modal({ onClose }) {
                   backgroundColor:
                     "radial-gradient(50% 50% at 50% 50%, rgba(4, 192, 158, 0.31) 0%, rgba(4, 192, 158, 0.457344) 65.1%, #04C09E 100%)",
                 }}
-                onClick={onClose}
+                onClick={handleClick}
+                data-type="loyd"
                 aria-hidden="true"
               ></div>
               <span className="modal-item-name">로이드 카드</span>
@@ -69,7 +81,8 @@ export default function Modal({ onClose }) {
               <div
                 className="modal-item-dot"
                 style={{ backgroundColor: "#E76E9A" }}
-                onClick={onClose}
+                onClick={handleClick}
+                data-type="dobi"
                 aria-hidden="true"
               ></div>
               <span className="modal-item-name">도비 카드</span>
@@ -78,7 +91,8 @@ export default function Modal({ onClose }) {
               <div
                 className="modal-item-dot"
                 style={{ backgroundColor: "#F37D3B" }}
-                onClick={onClose}
+                onClick={handleClick}
+                data-type="colin"
                 aria-hidden="true"
               ></div>
               <span className="modal-item-name">콜린 카드</span>
@@ -87,7 +101,8 @@ export default function Modal({ onClose }) {
               <div
                 className="modal-item-dot"
                 style={{ backgroundColor: "#FBCD58" }}
-                onClick={onClose}
+                onClick={handleClick}
+                data-type="sun"
                 aria-hidden="true"
               ></div>
               <span className="modal-item-name">썬 카드</span>

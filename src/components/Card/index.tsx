@@ -8,6 +8,8 @@ export default function Card() {
   const [state, dispatch] = useContext(Context);
   const { cardNumbers, expiredDate, userName } = state;
 
+  console.log(state);
+
   const showModal = () => {
     setIsModalShow(true);
   };
@@ -16,28 +18,32 @@ export default function Card() {
     setIsModalShow(false);
   };
 
-  const changeCardType = () => {
-    dispatch({ type: "CHANGE_CARD_TYPE" });
+  const changeCardType = cardType => {
+    dispatch({ type: "CHANGE_CARD_TYPE", payload: { cardType } });
   };
 
   const cardType = {
-    empty: "empty-card",
-    poco: "poco-card",
-    jun: "jun-card",
-    park: "park-card",
-    bran: "bran-card",
-    loyd: "loyd-card",
-    dobi: "dobi-card",
-    colin: "colin-card",
-    sun: "sun-card",
+    empty: { color: "empty-card", name: "클릭하여 카드 선택" },
+    poco: { color: "poco-card", name: "포코 카드" },
+    jun: { color: "jun-card", name: "준 카드" },
+    park: { color: "park-card", name: "공원 카드" },
+    bran: { color: "bran-card", name: "브랜 카드" },
+    loyd: { color: "loyd-card", name: "로이드 카드" },
+    dobi: { color: "dobi-card", name: "도비 카드" },
+    colin: { color: "colin-card", name: "콜린 카드" },
+    sun: { color: "sun-card", name: "썬 카드" },
   };
 
   return (
     <>
       <div className="card-box">
-        <div className={cardType.empty} onClick={showModal} aria-hidden="true">
+        <div
+          className={`card-shape ${cardType[state.cardType].color}`}
+          onClick={showModal}
+          aria-hidden="true"
+        >
           <div className="card-top">
-            <span className="card-text"></span>
+            <span className="card-text">{cardType[state.cardType].name}</span>
             <span className="card-text">
               <span className="card-expired-date">{expiredDate.month || "MM"}</span> /{" "}
               <span className="card-expired-date">{expiredDate.year || "YY"}</span>

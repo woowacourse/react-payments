@@ -6,7 +6,7 @@
   margin: 10px 0 25px;
 }
 
-.empty-card {
+.card-shape {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,14 +16,48 @@
   height: 130px;
 
   font-size: 30px;
-  color: #575757;
-
-  background: #e5e5e5;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
   user-select: none;
   cursor: pointer;
+}
+
+.empty-card {
+  color: #575757;
+  background: #e5e5e5;
+}
+.poco-card {
+  color: #e5e5e5;
+  background: #e24141;
+}
+.jun-card {
+  color: #e5e5e5;
+  background: #547ce4;
+}
+.park-card {
+  color: white;
+  background: #73bc6d;
+}
+.bran-card {
+  color: white;
+  background: #de59b9;
+}
+.loyd-card {
+  color: white;
+  background: #04c09e;
+}
+.dobi-card {
+  color: white;
+  background: #e76e9a;
+}
+.colin-card {
+  color: white;
+  background: #f37d3b;
+}
+.sun-card {
+  color: #575757;
+  background: #fbcd58;
 }
 
 .small-card {
@@ -65,8 +99,8 @@
 }
 
 .big-card__chip {
-  width: 55.04px;
-  height: 35.77px;
+  width: 55px;
+  height: 35px;
 
   background: #cbba64;
   border-radius: 4px;
@@ -122,10 +156,10 @@
 .card-text {
   margin: 0 16px;
 
-  font-size: 10px;
+  font-size: 11px;
   line-height: 16px;
   vertical-align: middle;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .card-numbers-text {
