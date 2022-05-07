@@ -1,17 +1,11 @@
-import { useState } from 'react'
+import { CardInfoProvider } from 'store/cardInfo-context'
 import DueDateField from 'components/DueDateField'
 
 const Template = () => {
-  const [value, setValue] = useState({ month: '', year: '' })
-  const [error, setError] = useState({ dueMonth: false, dueYear: false })
-
   return (
-    <DueDateField
-      dueDate={value}
-      setDueDate={setValue}
-      error={error}
-      setError={setError}
-    />
+    <CardInfoProvider>
+      <DueDateField />
+    </CardInfoProvider>
   )
 }
 

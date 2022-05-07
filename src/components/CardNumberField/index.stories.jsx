@@ -1,10 +1,13 @@
-import { useState } from 'react'
 import CardNumberField from 'components/CardNumberField'
 
-const Template = () => {
-  const [value, setValue] = useState(['', '', '', ''])
+import { CardInfoProvider } from 'store/cardInfo-context'
 
-  return <CardNumberField cardNumbers={value} setCardNumbers={setValue} />
+const Template = () => {
+  return (
+    <CardInfoProvider>
+      <CardNumberField />
+    </CardInfoProvider>
+  )
 }
 
 export default {

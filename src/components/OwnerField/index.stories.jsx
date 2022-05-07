@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { CardInfoProvider } from 'store/cardInfo-context'
 import OwnerField from 'components/OwnerField'
 
 const Template = () => {
-  const [value, setValue] = useState('')
-
-  return <OwnerField owner={value} setOwner={setValue} />
+  return (
+    <CardInfoProvider>
+      <OwnerField />
+    </CardInfoProvider>
+  )
 }
 
 export default {

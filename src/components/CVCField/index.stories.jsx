@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { CardInfoProvider } from 'store/cardInfo-context'
 import CVCField from 'components/CVCField'
 
 const Template = () => {
-  const [value, setValue] = useState('')
-
-  return <CVCField cvc={value} setCvc={setValue} />
+  return (
+    <CardInfoProvider>
+      <CVCField />
+    </CardInfoProvider>
+  )
 }
 
 export default {
