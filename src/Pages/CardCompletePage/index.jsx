@@ -26,23 +26,13 @@ const CardSection = styled.div`
 `;
 
 function CardCompletePage() {
-  const companyNameString = '신한카드';
-  const cardNumberString = '';
-  const expiredDateString = '';
-  const ownerNameString = '';
-
   return (
     <Page>
       <Title>카드등록이 완료되었습니다.</Title>
       <CardSection>
-        <Card
-          companyNameString={companyNameString}
-          cardNumberString={cardNumberString}
-          expiredDateString={expiredDateString}
-          ownerNameString={ownerNameString}
-        />
+        <Card />
       </CardSection>
-      <CardNickNameForm />
+      <CardNickNameForm link="/react-payments/cardList" />
     </Page>
   );
 }

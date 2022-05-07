@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import useNickNameInput from '../../../hooks/useNickNameInput';
 import Input from '../../Atoms/Input';
 
 const InputWrapper = styled.div`
@@ -8,7 +9,9 @@ const InputWrapper = styled.div`
   line-height: 21px;
 `;
 
-function NickNameInput({ nickName, validation, onNickNameChange }) {
+function NickNameInput() {
+  const { nickName, validation, onNickNameChange } = useNickNameInput();
+
   return (
     <InputWrapper>
       <Input

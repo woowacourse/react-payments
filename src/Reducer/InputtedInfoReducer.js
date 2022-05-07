@@ -4,6 +4,7 @@ const INPUT_ACTION = {
   OWNER_NAME: 'OWNER_NAME',
   SECURITY_NUMBER: 'SECURITY_NUMBER',
   PASSWORD: 'PASSWORD',
+  NICK_NAME: 'NICK_NAME',
 };
 
 const initialInputtedInfo = {};
@@ -46,6 +47,14 @@ function inputtedInfoReducer(state, action) {
       return {
         ...state,
         password: {
+          value: action.value,
+          isValid: action.valid,
+        },
+      };
+    case INPUT_ACTION.NICK_NAME:
+      return {
+        ...state,
+        nickName: {
           value: action.value,
           isValid: action.valid,
         },

@@ -1,9 +1,8 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
 import SubmitButton from '../../Atoms/SubmitButton';
 import NickNameInput from '../../Modules/NickNameInput';
-import { NickNameContext } from '../../../context/NickNameContext';
-import { useNavigate } from 'react-router';
+import useCardNickNameForm from '../../../hooks/useCardNickNameForm';
+import { useNavigate } from 'react-router-dom';
 
 const Form = styled.form`
   display: flex;
@@ -20,23 +19,18 @@ const SubmitButtonWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-function CardNickNameForm() {
-  const nickNameProps = useContext(NickNameContext);
+function CardNickNameForm({ link }) {
   const navigator = useNavigate();
-
-  const onNickNameSubmit = event => {
-    event.preventDefault();
-
-    nickNameProps.validation
-      ? navigator('/react-payments/cardList')
-      : alert('카드 이름을 입력해주세요.');
-  };
+  const { isValidForm, onNickNameSubmit } = useCardNickNameForm(
+    navigator,
+    link
+  );
 
   return (
     <Form onSubmit={onNickNameSubmit}>
-      <NickNameInput {...nickNameProps} />
+      <NickNameInput />
       <SubmitButtonWrapper>
-        <SubmitButton hidden={!nickNameProps.validation}>확인</SubmitButton>
+        <SubmitButton hidden={!isValidForm}>확인</SubmitButton>
       </SubmitButtonWrapper>
     </Form>
   );
