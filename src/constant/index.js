@@ -29,6 +29,10 @@ const NAME = {
   YEAR: "year",
 };
 
+const NICKNAME = {
+  MAX_LENGTH: 30,
+};
+
 const COLORS = {
   MINT: "#04C09E",
   GRAY: "#D2D2D2",
@@ -53,6 +57,7 @@ export {
   CARD_NUMBER,
   DUE_DATE,
   OWNER,
+  NICKNAME,
   CVC,
   PASSWORD,
   MONTH,

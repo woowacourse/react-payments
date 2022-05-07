@@ -1,8 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CardListContext, CardDispatchContext } from "context/CardListProvider";
 import Card from "components/common/Card";
 import Button from "components/common/Button";
+import useInput from "hooks/useInput";
+import { isValidNickname } from "validation";
 import {
   CardWrapper,
   FooterWrapper,
@@ -16,19 +18,17 @@ function Finish() {
   const { id } = useParams();
   const cardList = useContext(CardListContext);
   const { onEditNickname } = useContext(CardDispatchContext);
+  const [nickname, handleChangeNickname] = useInput({
+    initialValue: "",
+    validator: isValidNickname,
+  });
 
-  const [nickname, setNickname] = useState("");
-
-  const handleChangeNickname = (e) => {
-    setNickname(e.target.value);
-  };
+  const myCard = cardList.find((card) => Number(card.cardId) === Number(id));
 
   const handleSubmit = () => {
     onEditNickname(Number(id), nickname);
     navigate("/", { replace: true });
   };
-
-  const myCard = cardList.find((card) => Number(card.cardId) === Number(id));
 
   return (
     <FinishPageWrapper>
