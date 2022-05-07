@@ -60,29 +60,6 @@ const StyledCardFieldContainer = styled.div`
     background-color: transparent;
   }
 
-  .input-basic {
-    background-color: #ecebf1;
-    height: 45px;
-    width: 100%;
-    text-align: center;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    border-color: #9ca3af;
-    border: none;
-    border-radius: 0.25rem;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 21px;
-    color: #525252;
-  }
-
-  .input-basic::placeholder {
-    letter-spacing: -0.02em;
-  }
-
   .password {
     background-color: #ecebf1;
     width: 15%;
@@ -106,20 +83,39 @@ const StyledCardFieldContainer = styled.div`
     align-items: center;
     gap: 10px;
   }
+`;
 
-  .error {
+const StyledInput = styled.input`
+  background-color: #ecebf1;
+  height: 45px;
+  width: 100%;
+  text-align: center;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: #9ca3af;
+  border: none;
+  border-radius: 0.25rem;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #525252;
+
+  &::placeholder {
+    letter-spacing: -0.02em;
+  }
+
+  &.error {
     outline: 1px solid #ff9e9e;
     outline-offset: -1px;
     background-color: #ffc6c6;
   }
 `;
 
-const addCard = (values) => {
-  console.log(values);
-};
-
 const CardForm = () => {
-  const { bindForm, register, fieldStates } = useEasyForm({
+  const { registerForm, registerInput, watchingValues, errors } = useEasyForm({
     initialValues: {
       firstCardNumber: '',
       secondCardNumber: '',
@@ -128,32 +124,31 @@ const CardForm = () => {
       expiredMonth: '',
       expiredYear: '',
       owner: '',
-      cvc: '',
-      firstPasswordDigit: '',
-      secondPasswordDigit: '',
-      thirdPasswordDigit: '*',
-      fourthPasswordDigit: '*',
     },
-    mode: 'onChange',
-    shouldUseNativeHint: false,
+    validationMode: 'onChange',
+    shouldUseReportValidity: false,
   });
 
-  const onSubmit = ({ values }) => {
-    addCard(values);
+  const addCard = (values) => {
+    console.log(values);
+  };
+
+  const onSubmit = (event) => {
+    const formData = new FormData(event.target);
+    formData.append('brand', '우아한카드');
+    formData.set('owner', formData.get('owner').trim().toUpperCase());
+
+    addCard(formData);
     alert('제출 성공');
   };
 
-  const onError = ({ fields }) => {
-    const invalidFieldNames = Object.keys(fields).filter(
-      (name) => !fields[name].element.validity.valid
+  const onError = ({ target: { elements } }) => {
+    const firstInvalidInput = Array.from(elements).find(
+      ({ validationMessage }) => validationMessage !== ''
     );
-    const invalidField = invalidFieldNames
-      .map((name) => fields[name])
-      .sort((a, b) => a.id - b.id);
-    const firstInvalidField = invalidField[0].element;
 
-    firstInvalidField.focus();
-    alert(`${firstInvalidField.validationMessage} [${firstInvalidField.name}]`);
+    alert(`${firstInvalidInput.validationMessage} [${firstInvalidInput.name}]`);
+    firstInvalidInput.focus();
   };
 
   return (
@@ -161,73 +156,74 @@ const CardForm = () => {
       <CardPreview
         brand="우아한카드"
         cardNumber={[
-          fieldStates.firstCardNumber.value,
-          fieldStates.secondCardNumber.value,
-          fieldStates.thirdCardNumber.value,
-          fieldStates.fourthCardNumber.value,
+          watchingValues.firstCardNumber,
+          watchingValues.secondCardNumber,
+          watchingValues.thirdCardNumber,
+          watchingValues.fourthCardNumber,
         ]}
-        owner={fieldStates.owner.value}
+        owner={watchingValues.owner}
         expiredDate={{
-          month: fieldStates.expiredMonth.value,
-          year: fieldStates.expiredYear.value,
+          month: watchingValues.expiredMonth,
+          year: watchingValues.expiredYear,
         }}
       />
-      <StyledCardForm {...bindForm(onSubmit, onError)}>
+      <StyledCardForm {...registerForm({ onSubmit, onError })}>
         <StyledCardFieldContainer className="Input-container">
           <label className="input-title">카드 번호</label>
           <div className="input-box">
-            <input
+            <StyledInput
               type="text"
               className={`input-basic ${
-                fieldStates.firstCardNumber?.showError ? 'error' : ''
+                errors?.firstCardNumber ? 'error' : ''
               }`}
-              {...register('firstCardNumber', {
-                alias: '카드 번호',
+              {...registerInput('firstCardNumber', {
                 minLength: 4,
                 maxLength: 4,
                 pattern: '[0-9]{4}',
                 required: true,
+                watch: true,
               })}
             />
             <p>-</p>
-            <input
+            <StyledInput
               type="text"
               className={`input-basic ${
-                fieldStates.secondCardNumber?.showError ? 'error' : ''
+                errors?.secondCardNumber ? 'error' : ''
               }`}
-              {...register('secondCardNumber', {
-                alias: '카드 번호',
+              {...registerInput('secondCardNumber', {
                 minLength: 4,
                 maxLength: 4,
                 pattern: '[0-9]{4}',
                 required: true,
+                watch: true,
               })}
             />
             <p>-</p>
-            <input
+            <StyledInput
               type="password"
               className={`input-basic ${
-                fieldStates.thirdCardNumber?.showError ? 'error' : ''
+                errors?.thirdCardNumber ? 'error' : ''
               }`}
-              {...register('thirdCardNumber', {
+              {...registerInput('thirdCardNumber', {
                 minLength: 4,
                 maxLength: 4,
                 pattern: '[0-9]{4}',
                 required: true,
+                watch: true,
               })}
             />
             <p>-</p>
-            <input
+            <StyledInput
               type="password"
               className={`input-basic ${
-                fieldStates.fourthCardNumber?.showError ? 'error' : ''
+                errors?.fourthCardNumber ? 'error' : ''
               }`}
-              {...register('fourthCardNumber', {
-                alias: '카드 번호',
+              {...registerInput('fourthCardNumber', {
                 minLength: 4,
                 maxLength: 4,
                 pattern: '[0-9]{4}',
                 required: true,
+                watch: true,
               })}
             />
           </div>
@@ -235,45 +231,35 @@ const CardForm = () => {
         <StyledCardFieldContainer className="input-container">
           <label className="input-title">만료일</label>
           <div className="input-box w-50">
-            <input
+            <StyledInput
               type="text"
-              className={`input-basic ${
-                fieldStates.expiredMonth?.showError ? 'error' : ''
-              }`}
+              className={`input-basic ${errors?.expiredMonth ? 'error' : ''}`}
               placeholder="MM"
-              {...register('expiredMonth', {
-                alias: '만료일',
+              {...registerInput('expiredMonth', {
                 minLength: 2,
                 maxLength: 2,
-                pattern: '[0-1][0-9]',
+                pattern: '^(0?[1-9]|1[012])$',
                 required: true,
-                validation: [
-                  {
-                    assert: (month) => month >= 1 && month <= 12,
-                    message: '유효하지 않은 월입니다.',
-                  },
-                ],
+                watch: true,
               })}
             />
             <p>/</p>
-            <input
+            <StyledInput
               type="text"
-              className={`input-basic ${
-                fieldStates.expiredYear?.showError ? 'error' : ''
-              }`}
+              className={`input-basic ${errors?.expiredYear ? 'error' : ''}`}
               placeholder="YY"
-              {...register('expiredYear', {
-                alias: '만료일',
+              {...registerInput('expiredYear', {
                 minLength: 2,
                 maxLength: 2,
                 pattern: '[0-9][0-9]',
-                required: true,
                 validation: [
                   {
                     assert: (year) => year >= new Date().getFullYear() % 100,
                     message: '유효하지 않은 연도입니다.',
                   },
                 ],
+                required: true,
+                watch: true,
               })}
             />
           </div>
@@ -282,19 +268,17 @@ const CardForm = () => {
           <label className="input-title">카드 소유자 이름 (선택)</label>
           <span className="input-title name-length">
             {' '}
-            {fieldStates?.owner?.value.length}/30
+            {watchingValues.owner?.length}/30
           </span>
           <div className="input-box">
-            <input
+            <StyledInput
               type="text"
-              className={`input-basic ${
-                fieldStates.owner?.showError ? 'error' : ''
-              }`}
+              className={`input-basic ${errors?.owner ? 'error' : ''}`}
               placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-              {...register('owner', {
-                alias: '카드 소유자 이름',
+              {...registerInput('owner', {
                 pattern: '(?:[A-Za-z]+ ?){0,3}',
                 maxLength: 30,
+                watch: true,
               })}
             />
           </div>
@@ -303,13 +287,10 @@ const CardForm = () => {
           <label className="input-title">보안코드 (CVC/CVV)</label>
           <div className="cvc-block">
             <div className="input-box w-25">
-              <input
-                type="text"
-                className={`input-basic ${
-                  fieldStates.cvc?.showError ? 'error' : ''
-                }`}
-                {...register('cvc', {
-                  alias: '보안코드 (cvc/cvv)',
+              <StyledInput
+                type="password"
+                className={`input-basic ${errors?.cvc ? 'error' : ''}`}
+                {...registerInput('cvc', {
                   minLength: 3,
                   maxLength: 4,
                   pattern: '[0-9]{3,4}',
@@ -325,54 +306,50 @@ const CardForm = () => {
         <StyledCardFieldContainer className="input-container">
           <label className="input-title">비밀번호</label>
           <div className="input-box transparent">
-            <input
+            <StyledInput
               type="password"
               className={`input-basic w-15 password ${
-                fieldStates.firstPasswordDigit?.showError ? 'error' : ''
+                errors?.firstPasswordDigit ? 'error' : ''
               }`}
-              {...register('firstPasswordDigit', {
-                alias: '비밀번호',
+              {...registerInput('firstPasswordDigit', {
                 minLength: 1,
                 maxLength: 1,
                 pattern: '[0-9]',
                 required: true,
               })}
             />
-            <input
+            <StyledInput
               type="password"
               className={`input-basic w-15 password ${
-                fieldStates.secondPasswordDigit?.showError ? 'error' : ''
+                errors?.secondPasswordDigit ? 'error' : ''
               }`}
-              {...register('secondPasswordDigit', {
-                alias: '비밀번호',
+              {...registerInput('secondPasswordDigit', {
                 minLength: 1,
                 maxLength: 1,
                 pattern: '[0-9]',
                 required: true,
               })}
             />
-            <input
+            <StyledInput
               type="password"
-              className={`input-basic w-15 disabled ${
-                fieldStates.thirdPasswordDigit?.showError ? 'error' : ''
-              }`}
+              className="input-basic w-15 disabled"
+              value="*"
               disabled
-              {...register('thirdPasswordDigit', {
-                alias: '비밀번호',
+              {...registerInput('thirdPasswordDigit', {
                 minLength: 1,
                 maxLength: 1,
+                pattern: '[0-9]',
               })}
             />
-            <input
+            <StyledInput
               type="password"
-              className={`input-basic w-15 disabled ${
-                fieldStates.fourthPasswordDigit?.showError ? 'error' : ''
-              }`}
+              className="input-basic w-15 disabled"
+              value="*"
               disabled
-              {...register('fourthPasswordDigit', {
-                alias: '비밀번호',
+              {...registerInput('fourthPasswordDigit', {
                 minLength: 1,
                 maxLength: 1,
+                pattern: '[0-9]',
               })}
             />
           </div>
