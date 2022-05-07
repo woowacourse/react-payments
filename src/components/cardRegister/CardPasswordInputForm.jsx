@@ -1,13 +1,14 @@
-import React from "react";
-import { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import { InputBasic } from "components/common/InputBasic";
 import { InputBox } from "components/common/InputBox";
-import { InputContainer, InputTitle } from "components/common/styled";
+import { InputTitle } from "components/common/InputTitle";
+import { InputContainer } from "components/common/styled";
 import Dot from "components/common/Dot";
 import { RULE_INPUT } from "constants/constants";
 
 export const CardPasswordInputForm = ({ handleCardPasswordCheck }) => {
+  const [validate, setValidate] = useState(false);
   const passwordInputRefs = useRef([]);
 
   const handlePasswordChange = (e) => {
@@ -23,12 +24,13 @@ export const CardPasswordInputForm = ({ handleCardPasswordCheck }) => {
       return false;
     });
 
+    setValidate(isCompletePassword);
     handleCardPasswordCheck(isCompletePassword);
   };
 
   return (
     <InputContainer>
-      <InputTitle>카드 비밀번호</InputTitle>
+      <InputTitle isValid={validate}>카드 비밀번호</InputTitle>
       <InputBox
         width="50%"
         backgroundColor="transparent"

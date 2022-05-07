@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { InputBasic } from "components/common/InputBasic";
 import { InputBox } from "components/common/InputBox";
-import { InputContainer, InputTitle } from "components/common/styled";
+import { InputTitle } from "components/common/InputTitle";
+import { InputContainer } from "components/common/styled";
 import { RULE_INPUT } from "constants/constants";
 
 const DEFAULT_CARD_NUMBERS_TYPE = [
@@ -19,6 +20,7 @@ export const CardNumbersInputForm = ({
   handleCardNumberCheck,
   handleModalVisible,
 }) => {
+  const [validate, setValidate] = useState(false);
   const numberInputRefs = useRef([]);
 
   useEffect(() => {
@@ -32,6 +34,7 @@ export const CardNumbersInputForm = ({
       }
     );
 
+    setValidate(isCardNumbersCompleted);
     handleCardNumberCheck(isCardNumbersCompleted);
 
     if (cardType.name === "" && isCardNumbersCompleted) {
@@ -45,7 +48,7 @@ export const CardNumbersInputForm = ({
 
   return (
     <InputContainer>
-      <InputTitle>카드 번호</InputTitle>
+      <InputTitle isValid={validate}>카드 번호</InputTitle>
       <InputBox color="#04c09e" padding="0 5%">
         {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }, i) => (
           <InputBasic

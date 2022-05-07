@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { InputBasic } from "components/common/InputBasic";
 import { InputBox } from "components/common/InputBox";
-import { InputContainer, InputTitle } from "components/common/styled";
+import { InputTitle } from "components/common/InputTitle";
+import { InputContainer } from "components/common/styled";
 import { currentDate } from "utils/currentDate";
 import { RULE_INPUT } from "constants/constants";
 
@@ -11,12 +12,16 @@ export const CardExpireDateInputForm = ({
   handleExpireDateInput,
   handleCardExpireCheck,
 }) => {
+  const [validate, setValidate] = useState(false);
+
   useEffect(() => {
     if (expireDate.year === "" || expireDate.month === "") {
       return;
     }
 
-    handleCardExpireCheck(isCardExpireDateValidate(expireDate));
+    const isValidate = isCardExpireDateValidate(expireDate);
+    setValidate(isValidate);
+    handleCardExpireCheck(isValidate);
   }, [expireDate]);
 
   const handleMonthInput = (e) => {
@@ -57,7 +62,7 @@ export const CardExpireDateInputForm = ({
 
   return (
     <InputContainer>
-      <InputTitle>만료일</InputTitle>
+      <InputTitle isValid={validate}>만료일</InputTitle>
       <InputBox width="50%" justifyContent="center">
         <InputBasic
           width="25%"
