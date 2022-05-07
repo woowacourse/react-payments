@@ -53,7 +53,6 @@ function ExpiredDateInput({ expiredDate, handleInputChange, isValid, invalidMess
           style={{
             width: '50%',
             backgroundColor: 'none',
-            borderRadius: '0px',
           }}
           value={month}
           onChange={handleInputChange}
@@ -68,7 +67,6 @@ function ExpiredDateInput({ expiredDate, handleInputChange, isValid, invalidMess
           style={{
             width: '50%',
             backgroundColor: 'none',
-            borderRadius: '0px',
           }}
           value={year}
           onChange={handleInputChange}

@@ -55,7 +55,6 @@ function CardNumbersInput({ cardNumbers, handleInputChange, isValid, invalidMess
                 style={{
                   width: '25%',
                   backgroundColor: 'none',
-                  borderRadius: '0px',
                 }}
                 value={cardNumber}
                 onChange={handleInputChange}
