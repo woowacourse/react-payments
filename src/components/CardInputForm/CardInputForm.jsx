@@ -1,9 +1,12 @@
 import { useContext } from 'react';
-import { CardInfoContext } from 'App';
+import { useNavigate } from 'react-router-dom';
 
+import { CardInfoContext } from 'App';
 import { ERROR_MESSAGE } from 'constants';
 
 function CardInputForm({ children }) {
+  const navigate = useNavigate();
+
   const { state } = useContext(CardInfoContext);
 
   const { number1, number2, number3, number4, month, year, cvc } = state;
@@ -68,7 +71,7 @@ function CardInputForm({ children }) {
 
     try {
       checkCardInfo({ number1, number2, number3, number4, month, year, cvc });
-      // 페이지 추가 setPage
+      navigate('/card-add-success');
     } catch (error) {
       alert(error.message);
     }
