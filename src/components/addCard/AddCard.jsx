@@ -1,12 +1,18 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useReducer } from 'react';
 import { Link } from 'react-router-dom';
+import uuid from 'react-uuid';
+import { CardsContext } from '../../store/cards';
+import { CARD_COMPANY_LIST } from '../../constants';
 import AddCardForm from './cardForm/AddCardForm';
 import Card from '../card/Card';
-import { CardsContext } from '../../store/cards';
+import CardCompany from './CardCompany';
 
 function AddCard() {
-  const { cards, setCards } = useContext(CardsContext);
+  const { setCards } = useContext(CardsContext);
+  const [modalVisible, handleModal] = useReducer((visible) => !visible, true);
   const [card, setCard] = useState({
+    company: '',
+    theme: '',
     firstCardNumber: '',
     secondCardNumber: '',
     thirdCardNumber: '',
@@ -29,6 +35,15 @@ function AddCard() {
     setCards((prevCards) => [...prevCards, card]);
   };
 
+  const handleCompany = (company, theme) => {
+    setCard((prevCardInfo) => ({
+      ...prevCardInfo,
+      company,
+      theme,
+    }));
+    handleModal();
+  };
+
   return (
     <>
       <div className="header-wrapper">
@@ -39,6 +54,22 @@ function AddCard() {
       </div>
       <Card card={card} />
       <AddCardForm card={card} updateCard={updateCard} addCardList={addCardList} />
+      {modalVisible && (
+        <div className="modal-dimmed">
+          <div className="modal">
+            <div className="flex-wrap">
+              {CARD_COMPANY_LIST.map(({ company, theme }) => (
+                <CardCompany
+                  key={uuid()}
+                  company={company}
+                  theme={theme}
+                  handleCompany={handleCompany}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
