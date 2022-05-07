@@ -4,7 +4,7 @@ import PropTypes, { string } from "prop-types";
 import { CREATE_MASKED_CHARACTERS } from "../../../utils/constants";
 import CardInfoContext from "../../../context/CardInfoContext";
 
-const cardSizeBeforeSubmit = {
+const CARD_SIZE_BEFORE_SUBMIT = {
   width: "213px",
   height: "133px",
   padding: "14px 16px",
@@ -13,7 +13,7 @@ const cardSizeBeforeSubmit = {
   justifyContent: "flex-start",
 };
 
-const cardSizeAfterSubmit = {
+const CARD_SIZE_AFTER_SUBMIT = {
   width: "295px",
   height: "180px",
   padding: "20px 25px",
@@ -22,7 +22,7 @@ const cardSizeAfterSubmit = {
   justifyContent: "space-around",
 };
 
-const cardColors = {
+const CARD_COLORS = {
   default: "#d2d2d2",
   complete: "#00caa5",
   0: "#383838",
@@ -39,29 +39,28 @@ const CardContainer = styled.div`
 `;
 
 const cardSize = (isSubmitted) =>
-  isSubmitted ? cardSizeAfterSubmit : cardSizeBeforeSubmit;
+  isSubmitted ? CARD_SIZE_AFTER_SUBMIT : CARD_SIZE_BEFORE_SUBMIT;
 
-const SmallCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: ${({ isSubmitted }) => cardSize(isSubmitted).justifyContent};
+const SmallCard = styled.div(({ isSubmitted, colorType }) => ({
+  display: "flex",
+  "flex-direction": "column",
+  "justify-content": cardSize(isSubmitted).justifyContent,
 
-  width: ${({ isSubmitted }) => cardSize(isSubmitted).width};
-  height: ${({ isSubmitted }) => cardSize(isSubmitted).height};
-  padding: ${({ isSubmitted }) => cardSize(isSubmitted).padding};
+  width: cardSize(isSubmitted).width,
+  height: cardSize(isSubmitted).height,
+  padding: cardSize(isSubmitted).padding,
 
-  background-color: ${({ colorType }) => cardColors[colorType]};
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
+  "background-color": CARD_COLORS[colorType],
+  "box-shadow": "3px 3px 5px rgba(0, 0, 0, 0.25)",
+  "border-radius": "5px",
 
-  color: ${({ colorType }) =>
-    (colorType === 0 || colorType === 1) && "#ffffff"};
+  color: (colorType === 0 || colorType === 1) && "#ffffff",
 
-  font-size: ${({ isSubmitted }) => cardSize(isSubmitted).fontSize};
-  line-height: ${({ isSubmitted }) => cardSize(isSubmitted).lineHeight};
-  vertical-align: middle;
-  font-weight: 400;
-`;
+  "font-size": cardSize(isSubmitted).fontSize,
+  "line-height": cardSize(isSubmitted).lineHeight,
+  "vertical-align": "middle",
+  "font-weight": "400",
+}));
 
 const CardName = React.memo(styled.p`
   margin-bottom: 20px;
@@ -77,12 +76,15 @@ const CardChip = React.memo(styled.div`
   margin-bottom: 15px;
 `);
 
-const CardNumber = React.memo(styled.p`
+const CardNumber = styled.div`
   display: flex;
   align-items: center;
+  gap: 10px;
   height: 10px;
   margin-bottom: 12px;
-`);
+`;
+
+const CardNumberUnit = styled.p``;
 
 const CardBottomSection = styled.div`
   display: flex;
@@ -105,8 +107,7 @@ export default function CardPreview({
   color,
 }) {
   const { state } = useContext(CardInfoContext);
-  const { cardNumber, holderName, expireDate } =
-    Object.keys(state).length === 0 ? cardInfo : state;
+  const { cardNumber, holderName, expireDate } = { ...cardInfo, ...state };
 
   return (
     <CardContainer>
@@ -118,9 +119,14 @@ export default function CardPreview({
         <CardName>Woowa Card</CardName>
         <CardChip />
         <CardNumber>
-          {cardNumber[0]}&nbsp;&nbsp;&nbsp;{cardNumber[1]}&nbsp;&nbsp;&nbsp;
-          {CREATE_MASKED_CHARACTERS(cardNumber[2].length)}&nbsp;&nbsp;&nbsp;
-          {CREATE_MASKED_CHARACTERS(cardNumber[3].length)}
+          <CardNumberUnit>{cardNumber[0]}</CardNumberUnit>
+          <CardNumberUnit>{cardNumber[1]}</CardNumberUnit>
+          <CardNumberUnit>
+            {CREATE_MASKED_CHARACTERS(cardNumber[2].length)}
+          </CardNumberUnit>
+          <CardNumberUnit>
+            {CREATE_MASKED_CHARACTERS(cardNumber[3].length)}
+          </CardNumberUnit>
         </CardNumber>
         <CardBottomSection>
           <CardHolderName>{holderName}</CardHolderName>
