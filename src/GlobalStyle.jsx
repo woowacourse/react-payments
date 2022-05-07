@@ -19,15 +19,6 @@ a {
   &:hover { color: inherit; text-decoration: none;}
 }
 
-.App {
-  width: 375px;
-  height: 700px;
-  margin: 50px auto;
-  padding: 20px 28px;
-  position: relative;
-  background-color: #fff;
-  border-radius: 4px;
-}
 `;
 
 export default GlobalStyle;

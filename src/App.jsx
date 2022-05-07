@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 import { Route, Routes } from 'react-router-dom';
 
 import { CardInfoListContext } from './context';
@@ -8,6 +9,16 @@ import CardListPage from './pages/CardListPage';
 import AddCardPage from './pages/AddCardPage';
 import UpdateCardNickNamePage from './pages/UpdateCardNickNamePage';
 import WrongAccessPage from './pages/WrongAccessPage';
+
+const AppContainer = styled.div`
+  width: 375px;
+  height: 700px;
+  margin: 50px auto;
+  padding: 20px 28px;
+  position: relative;
+  background-color: #fff;
+  border-radius: 4px;
+`;
 
 function App() {
   const [cardList, setCardInfoList] = useState(Storage.cardList);
@@ -40,7 +51,7 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <AppContainer>
       <CardInfoListContext.Provider value={{ cardList, addNewCard, updateNickNameByIndex }}>
         <Routes>
           <Route path="/" element={<CardListPage />} />
@@ -50,7 +61,7 @@ function App() {
           <Route path="*" element={<WrongAccessPage />} />
         </Routes>
       </CardInfoListContext.Provider>
-    </div>
+    </AppContainer>
   );
 }
 
