@@ -4,14 +4,14 @@ import ModalContainer from '../ModalContainer';
 import './index.scss';
 
 const cardCategory = [
-  { name: '록1바', color: 'red' },
-  { name: '록2바', color: 'orange' },
-  { name: '록3바', color: 'yellow' },
-  { name: '록4바', color: 'green' },
-  { name: '록5바', color: 'blue' },
-  { name: '록6바', color: 'pink' },
-  { name: '록7바', color: 'purple' },
-  { name: '록8바', color: 'gold' },
+  { name: '율1', color: '#d47474' },
+  { name: '율2', color: '#e0b060' },
+  { name: '율3', color: '#edea95' },
+  { name: '율4', color: '#7fd179' },
+  { name: '율5', color: '#81bcde' },
+  { name: '율6', color: '#5853ed' },
+  { name: '율7', color: '#b55fd9' },
+  { name: '율8', color: '#eb638b' },
 ];
 
 const CardColorPicker = ({ visible, setVisible, updateForm }) => {
