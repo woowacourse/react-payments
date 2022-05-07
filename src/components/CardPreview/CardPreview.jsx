@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { censorString } from '../../utils/commons';
 
 const CardPreview = ({
   brand,
@@ -10,51 +11,34 @@ const CardPreview = ({
   owner,
   expiredMonth,
   expiredYear,
-}) => {
-  const cardNumber = [
-    firstCardNumber,
-    secondCardNumber,
-    thirdCardNumber,
-    fourthCardNumber,
-  ];
-  const expiredDate = {
-    month: expiredMonth,
-    year: expiredYear,
-  };
-
-  return (
-    <StyledCardPreview className="card-box">
-      <div className="small-card">
-        <div className="card-top">
-          <span className="card-text">{brand ?? null}</span>
+}) => (
+  <StyledCardPreview className="card-box">
+    <div className="small-card">
+      <div className="card-top">
+        <span className="card-text">{brand ?? null}</span>
+      </div>
+      <div className="card-middle">
+        <div className="small-card__chip" />
+      </div>
+      <div className="card-bottom">
+        <div className="card-bottom__number">
+          <span className="card-text">{`${firstCardNumber} ${secondCardNumber} ${censorString(
+            thirdCardNumber
+          )} ${censorString(fourthCardNumber)}`}</span>
         </div>
-        <div className="card-middle">
-          <div className="small-card__chip" />
-        </div>
-        <div className="card-bottom">
-          <div className="card-bottom__number">
-            {cardNumber && (
-              <span className="card-text">{`${cardNumber[0]} ${
-                cardNumber[1]
-              } ${'•'.repeat(cardNumber[2].length)} ${'•'.repeat(
-                cardNumber[3].length
-              )}`}</span>
-            )}
-          </div>
-          <div className="card-bottom__info">
-            <p className="card-text w-50 ellipsis">{owner.toUpperCase()}</p>
-            {expiredDate && (
-              <span className="card-text">
-                {expiredDate.month}{' '}
-                {expiredDate.month.length === 2 ? '/' : null} {expiredDate.year}
-              </span>
-            )}
-          </div>
+        <div className="card-bottom__info">
+          <p className="card-text w-50 ellipsis">{owner.toUpperCase()}</p>
+          {(expiredMonth || expiredYear) && (
+            <span className="card-text">
+              {expiredMonth} {expiredMonth && expiredYear ? '/' : null}{' '}
+              {expiredYear}
+            </span>
+          )}
         </div>
       </div>
-    </StyledCardPreview>
-  );
-};
+    </div>
+  </StyledCardPreview>
+);
 
 const StyledCardPreview = styled.div`
   display: flex;
@@ -137,7 +121,7 @@ const StyledCardPreview = styled.div`
     display: block;
     margin: 0;
 
-    vertical-align: middle;
+    /* vertical-align: middle; */
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;

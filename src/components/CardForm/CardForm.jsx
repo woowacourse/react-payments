@@ -10,7 +10,10 @@ import InputBox from '../InputBox/InputBox';
 import Input from '../Input/Input';
 import ToolTip from '../ToolTip/ToolTip';
 import SubmitButton from '../SubmitButton/SubmitButton';
-import convertFormDataToObject from '../../utils/commons';
+import {
+  convertFormDataToObject,
+  removeCrucialCardInfo,
+} from '../../utils/commons';
 
 const CardForm = () => {
   const navigate = useNavigate();
@@ -38,7 +41,7 @@ const CardForm = () => {
     const cardInfo = convertFormDataToObject(formData);
 
     addCard(cardInfo);
-    navigate('/confirm', { state: cardInfo });
+    navigate('/confirm', { state: removeCrucialCardInfo(cardInfo) });
   };
 
   const onError = ({ target: { elements } }) => {
