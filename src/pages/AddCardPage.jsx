@@ -17,6 +17,13 @@ import Form from '../components/common/Form';
 import GoBackButton from '../components/GoBackButton';
 
 import { CARD_INFO_RULES } from '../constants';
+import {
+  isValidCardExpireDateUnit,
+  isValidCardHolderName,
+  isValidCardNumberUnit,
+  isValidCardPasswordUnit,
+  isValidCardSecurityCode,
+} from './validators';
 
 const ButtonWrapper = styled.div`
   position: absolute;
@@ -35,7 +42,7 @@ export default function AddCardPage() {
   const navigate = useNavigate();
 
   const handleCardNumberUpdate = ({ target: { value } }, order) => {
-    if (!Number.isInteger(Number(value)) || value.length > CARD_INFO_RULES.NUMBER_UNIT_LENGTH) return;
+    if (!isValidCardNumberUnit(value)) return;
 
     setCardNumber(prevValue => {
       const newValue = [...prevValue];
@@ -48,11 +55,7 @@ export default function AddCardPage() {
   const handleExpireDateUpdate = ({ target: { value } }, order) => {
     const parsedValue = value.startsWith('0') && value.length !== 1 ? value.slice(1) : value;
 
-    if (!/^\d{0,2}$/.test(parsedValue)) return;
-
-    if (order === 0 && value !== '0' && value !== '' && (Number(parsedValue) > 12 || Number(parsedValue) < 1)) {
-      return;
-    }
+    if (!isValidCardExpireDateUnit(value, order)) return;
 
     setExpireDate(prevValue => {
       const newValue = [...prevValue];
@@ -63,19 +66,19 @@ export default function AddCardPage() {
   };
 
   const handleHolderNameUpdate = ({ target: { value } }) => {
-    if (!/^[a-z]*$/i.test(value) || value.length > CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH) return;
+    if (!isValidCardHolderName(value)) return;
 
     setHolderName(value.toUpperCase());
   };
 
   const handleSecurityCodeUpdate = ({ target: { value } }) => {
-    if (!Number.isInteger(Number(value)) || value.length > CARD_INFO_RULES.SECURITY_CODE_LENGTH) return;
+    if (!isValidCardSecurityCode(value)) return;
 
     setSecurityCode(value);
   };
 
   const handlePasswordUpdate = ({ target: { value } }, order) => {
-    if (!Number.isInteger(Number(value)) || value.length > 1) return;
+    if (!isValidCardPasswordUnit(value));
 
     setPassword(prevValue => {
       const newValue = [...prevValue];
@@ -120,20 +123,20 @@ export default function AddCardPage() {
     );
   };
 
-  const isValidCardNumber = useMemo(() => {
+  const isCompleteCardNumber = useMemo(() => {
     const { NUMBER_UNIT_COUNT, NUMBER_UNIT_LENGTH } = CARD_INFO_RULES;
     return cardNumber.join('').length === NUMBER_UNIT_COUNT * NUMBER_UNIT_LENGTH;
   }, [cardNumber]);
 
-  const isValidExpireDate = useMemo(() => {
+  const isCompleteExpireDate = useMemo(() => {
     return expireDate.join('').length === CARD_INFO_RULES.EXPIRE_DATE_LENGTH;
   }, [expireDate]);
 
-  const isValidSecurityCode = useMemo(() => {
+  const isCompleteSecurityCode = useMemo(() => {
     return securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH;
   }, [securityCode]);
 
-  const isValidPassword = useMemo(() => {
+  const isCompletePassword = useMemo(() => {
     return password.join('').length === CARD_INFO_RULES.PASSWORD_LENGTH;
   }, [password]);
 
@@ -147,7 +150,7 @@ export default function AddCardPage() {
         cardNumber={cardNumber}
         holderName={holderName}
         expireDate={expireDate}
-        isComplete={isValidCardNumber && isValidExpireDate && isValidSecurityCode && isValidPassword}
+        isComplete={isCompleteCardNumber && isCompleteExpireDate && isCompleteSecurityCode && isCompletePassword}
       />
       <Form onSubmit={handleCardInfoSubmit} autoComplete="off">
         <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumberUpdate} />
@@ -155,7 +158,9 @@ export default function AddCardPage() {
         <CardHolderNameInput holderName={holderName} onChange={handleHolderNameUpdate} />
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCodeUpdate} />
         <CardPasswordInput password={password} onChange={handlePasswordUpdate} />
-        {isValidCardNumber && isValidExpireDate && isValidSecurityCode && isValidPassword && <CardInfoSubmitButton />}
+        {isCompleteCardNumber && isCompleteExpireDate && isCompleteSecurityCode && isCompletePassword && (
+          <CardInfoSubmitButton />
+        )}
       </Form>
     </>
   );
