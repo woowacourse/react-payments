@@ -1,65 +1,32 @@
-import styled from 'styled-components';
+import {
+  CardContainer,
+  CardCompanyName,
+  IC,
+  CardNumberContainer,
+  CardBottomContainer,
+  CardOwnerName,
+  sizeTable,
+} from './style';
 import { PLACEHOLDER } from '../../constant';
 import { CARD_NUMBER_MARK, DATE_SEPARATOR } from '../../constant/mark';
+import { CARD_SIZE } from 'constant/';
 
-const CardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 213px;
-  height: 133px;
-  padding: 14px 14px 0;
-  background-color: ${props => props.color};
-  border-radius: 5px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  cursor: ${props => (props.canClick ? 'pointer' : 'auto')};
-`;
-
-const CardCompanyName = styled.span`
-  font-weight: 500;
-  font-size: 10px;
-  line-height: 12px;
-  color: #383838;
-`;
-
-const IC = styled.div`
-  width: 40px;
-  height: 26px;
-  margin-top: 16px;
-  background: #cbba64;
-  border-radius: 4px;
-`;
-
-const CardNumberContainer = styled.p`
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  height: 10px;
-  margin-top: 15px;
-  font-weight: 700;
-  font-size: 13px;
-  line-height: 14px;
-  letter-spacing: 0.1em;
-  color: #525252;
-`;
-
-const CardBottomContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 0 4px;
-  margin-top: 12px;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 14px;
-  letter-spacing: 0.1em;
-  color: #525252;
-`;
-
-const CardOwnerName = styled.span`
-  word-break: break-all;
-`;
-
-function Card({ cardCompany, cardNumbers, ownerName, expiredDate, handleClickCard }) {
+function Card({
+  cardCompany,
+  cardNumbers,
+  ownerName,
+  expiredDate,
+  handleClickCard,
+  size = CARD_SIZE.MEDIUM,
+}) {
   const { name, color } = cardCompany;
+  const {
+    cardContainerSize,
+    cardCompanyNameSize,
+    ICSize,
+    cardNumberContainerSize,
+    cardBottomContainerSize,
+  } = sizeTable[size];
 
   const displayExpiredDate = () => {
     return expiredDate.month || expiredDate.year
@@ -70,17 +37,22 @@ function Card({ cardCompany, cardNumbers, ownerName, expiredDate, handleClickCar
   };
 
   return (
-    <CardContainer color={color} onClick={handleClickCard} canClick={handleClickCard !== undefined}>
-      <CardCompanyName>{name}</CardCompanyName>
-      <IC />
-      <CardNumberContainer>
+    <CardContainer
+      color={color}
+      onClick={handleClickCard}
+      canClick={handleClickCard !== undefined}
+      {...cardContainerSize}
+    >
+      <CardCompanyName {...cardCompanyNameSize}>{name}</CardCompanyName>
+      <IC {...ICSize} />
+      <CardNumberContainer {...cardNumberContainerSize}>
         {cardNumbers.map((cardNumber, index) => (
           <span key={cardNumber + index}>
             {index >= 2 ? CARD_NUMBER_MARK.repeat(cardNumber.length) : cardNumber}
           </span>
         ))}
       </CardNumberContainer>
-      <CardBottomContainer>
+      <CardBottomContainer {...cardBottomContainerSize}>
         <CardOwnerName>{ownerName || PLACEHOLDER.NAME}</CardOwnerName>
         <span>{displayExpiredDate()}</span>
       </CardBottomContainer>

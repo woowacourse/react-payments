@@ -6,3 +6,8 @@ export const PLACEHOLDER = {
   NAME: 'NAME',
   DATE: 'MM/YY',
 };
+
+export const CARD_SIZE = {
+  MEDIUM: 'medium',
+  LARGE: 'large',
+};
