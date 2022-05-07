@@ -108,4 +108,4 @@ function useCardDataContext() {
   };
 }
 
-export { CardDataContext, CardDataContextProvider, useCardDataContext };
+export { CardDataContextProvider, useCardDataContext };

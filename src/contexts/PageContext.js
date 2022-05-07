@@ -34,4 +34,4 @@ function usePageContext() {
   return { pageTitle, pageLocation, setPageTitle, setPageLocation };
 }
 
-export { PageContext, PageContextProvider, usePageContext };
+export { PageContextProvider, usePageContext };
