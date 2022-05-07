@@ -8,6 +8,7 @@ import { ActionType, CardType } from 'types';
 import { useAppDispatch, useAppState } from 'hooks/hooks';
 import { createAction } from 'context/Provider';
 import EditButtonContainer from 'containers/button/EditButtonContainer';
+import { v4 as uuidv4 } from 'uuid';
 
 const CardAlias = styled.p(() => ({
   fontWeight: '800',
@@ -41,8 +42,8 @@ function CardListContainer() {
   return (
     <Wrapper>
       {cardList.length > 0 ? (
-        cardList.map((card: CardType, index: number) => (
-          <div key={index}>
+        cardList.map((card: CardType) => (
+          <div key={uuidv4()}>
             <EditButtonContainer id={card.id} />
             <DeleteButtonContainer id={card.id} />
             <Card

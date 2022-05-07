@@ -57,6 +57,8 @@ function ExpiredPeriodInputContainer() {
   const handleYearChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
+    console.log(new Date().getFullYear());
+
     if (Number(value) === 0) {
       dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD_YEAR, ''));
       return;
