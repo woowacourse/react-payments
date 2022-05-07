@@ -22,3 +22,11 @@ export const CardSection = styled.section`
   align-self: center;
   margin-top: 77px;
 `;
+
+export const Form = styled.form`
+  display: flex;
+  width: 100%;
+  margin-top: 13px;
+  flex-direction: column;
+  gap: 172px;
+`;
