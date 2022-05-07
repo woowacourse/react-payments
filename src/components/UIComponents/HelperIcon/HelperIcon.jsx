@@ -19,8 +19,7 @@ const StyledDescription = styled.p`
   top: 5px;
   right: -205px;
 
-  max-width: 200px;
-  width: max-content;
+  width: 200px;
 
   border: 1px solid #d2d2d2;
   border-radius: 5px;
@@ -41,6 +40,7 @@ const HelperIcon = React.memo(({ description }) => {
       <StyledIcon
         src={HelpIconImage}
         onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
+        role={"button"}
       />
       <StyledDescription isOpen={isDescriptionOpen}>
         {description}
