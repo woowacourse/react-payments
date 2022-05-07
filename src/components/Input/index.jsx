@@ -19,7 +19,7 @@ const InputWrapper = styled.input`
 
 const InputScaleType = {
   large: '318',
-  medium: '70',
+  medium: '58',
   small: '43',
 };
 

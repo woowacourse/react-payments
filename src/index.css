@@ -11,12 +11,6 @@ body {
   justify-content: center;
 }
 
-main {
-  width: fit-content;
-  height: fit-content;
-  padding: 10px;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
