@@ -3,6 +3,7 @@ import { useReducer } from 'react';
 import { CARD_NUMBER, USER_NAME } from 'constants';
 
 const initialState = {
+  companyName: '티거 카드 🐯',
   cardNumber: ['', '', '', ''],
   expireMonth: '',
   expireYear: '',

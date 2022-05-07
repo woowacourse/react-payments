@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import useErrorMessage from 'hooks/useErrorMessage';
+import CardContext from 'contexts';
 
 import FieldSet from 'components/@common/FieldSet';
 import TextField from 'components/@common/TextField';
@@ -7,7 +8,8 @@ import TextField from 'components/@common/TextField';
 import { CARD_NUMBER } from 'constants';
 import { validateCardNumber } from 'validators';
 
-function CardNumberField({ cardNumber, onChange }) {
+function CardNumberField() {
+  const { cardNumber, onChangeTextField } = useContext(CardContext);
   const { errorMessage, handleError } = useErrorMessage({
     state: cardNumber,
     validate: validateCardNumber,
@@ -25,21 +27,12 @@ function CardNumberField({ cardNumber, onChange }) {
           key={index}
           value={cardNumber[index]}
           maxLength={CARD_NUMBER.UNIT_LENGTH}
-          onChange={(event) => onChange(event, { index })}
+          onChange={(event) => onChangeTextField(event, { index })}
           onBlur={handleError}
         />
       ))}
     </FieldSet>
   );
 }
-
-CardNumberField.defaultProps = {
-  cardNumber: ['', '', '', ''],
-};
-
-CardNumberField.propTypes = {
-  cardNumber: PropTypes.arrayOf(PropTypes.string),
-  onChange: PropTypes.func.isRequired,
-};
 
 export default CardNumberField;

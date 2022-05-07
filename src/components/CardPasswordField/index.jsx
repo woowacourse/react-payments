@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import useErrorMessage from 'hooks/useErrorMessage';
+import CardContext from 'contexts';
 
 import FieldSet from 'components/@common/FieldSet';
 import TextField from 'components/@common/TextField';
@@ -7,7 +8,8 @@ import TextField from 'components/@common/TextField';
 import { CARD_PASSWORD } from 'constants';
 import { validateCardPassword } from 'validators';
 
-function CardPasswordField({ cardPassword, onChange }) {
+function CardPasswordField() {
+  const { cardPassword, onChangeTextField } = useContext(CardContext);
   const { errorMessage, handleError } = useErrorMessage({
     state: cardPassword,
     validate: validateCardPassword,
@@ -21,7 +23,7 @@ function CardPasswordField({ cardPassword, onChange }) {
         value={cardPassword}
         placeholder="앞 2자리"
         maxLength={CARD_PASSWORD.LENGTH}
-        onChange={onChange}
+        onChange={onChangeTextField}
         onBlur={handleError}
       />
       <div className="input-security-masking" />
@@ -29,14 +31,5 @@ function CardPasswordField({ cardPassword, onChange }) {
     </FieldSet>
   );
 }
-
-CardPasswordField.defaultProps = {
-  cardPassword: '',
-};
-
-CardPasswordField.propTypes = {
-  cardPassword: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-};
 
 export default CardPasswordField;

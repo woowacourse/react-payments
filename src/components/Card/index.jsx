@@ -1,4 +1,5 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import CardContext from 'contexts';
 
 const formatCardNumber = (cardNumber) => {
   const newCardNumber = [...cardNumber].map((unit) => (unit === '' ? '0000' : unit));
@@ -13,7 +14,11 @@ const formatCardNumber = (cardNumber) => {
   return newCardNumber.join('-');
 };
 
-function Card({ companyName, cardNumber, userName, expireMonth, expireYear, isComplete }) {
+function Card() {
+  // eslint-disable-next-line operator-linebreak
+  const { isComplete, companyName, cardNumber, userName, expireMonth, expireYear } =
+    useContext(CardContext);
+
   return (
     <div className="card-box">
       <div className={`small-card${isComplete ? '' : ' empty'}`}>
@@ -35,23 +40,5 @@ function Card({ companyName, cardNumber, userName, expireMonth, expireYear, isCo
     </div>
   );
 }
-
-Card.defaultProps = {
-  companyName: '',
-  cardNumber: ['', '', '', ''],
-  userName: '',
-  expireMonth: '',
-  expireYear: '',
-  isComplete: false,
-};
-
-Card.propTypes = {
-  companyName: PropTypes.string,
-  cardNumber: PropTypes.arrayOf(PropTypes.string),
-  userName: PropTypes.string,
-  expireMonth: PropTypes.string,
-  expireYear: PropTypes.string,
-  isComplete: PropTypes.bool,
-};
 
 export default Card;

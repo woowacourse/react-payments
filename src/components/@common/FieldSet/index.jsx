@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-function FieldSet({ title, errorMessage, inputWidth, children }) {
+function FieldSet({ title, inputWidth, errorMessage, children }) {
   return (
     <div className="input-container">
       <span className="input-title">{title}</span>
