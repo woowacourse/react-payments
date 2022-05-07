@@ -14,14 +14,11 @@ function CardReducer(state, action) {
       return state.map(card => {
         if (card.cardNumber.value === action.targetCardNumber) {
           card.nickName = action.value;
-          return card;
         }
         return card;
       });
     case CARD_ACTION.DELETE:
-      return state.filter(card => {
-        return card.cardNumber.value !== action.value;
-      });
+      return state.filter(card => card.cardNumber.value !== action.value);
   }
 }
 

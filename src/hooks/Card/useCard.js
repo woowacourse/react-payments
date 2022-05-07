@@ -12,27 +12,43 @@ function useCard({ cardNumber, expiredDate, ownerName }) {
 
   const companyNameString = '신한 카드';
 
-  const cardNumberString = cardNumber
-    ? Object.values(cardNumber.value).some(number => number)
-      ? Object.values(cardNumber.value)
-          .map((cardNumber, index) =>
-            index < COUNT.CARD_NUMBER_HIDE_COUNT
-              ? cardNumber
-              : CARD_NUMBER_MARK.repeat(cardNumber.length)
-          )
-          .join(' ')
-      : ''
-    : '';
+  const isValidCardNumber =
+    cardNumber && Object.values(cardNumber.value).some(number => number);
 
-  const expiredDateString = expiredDate
-    ? Object.values(expiredDate.value).some(date => date)
-      ? `${expiredDate.value.month}/${expiredDate.value.year}`
-      : PLACEHOLDER.DATE
-    : PLACEHOLDER.DATE;
+  const cardNumberString = () => {
+    if (!isValidCardNumber) {
+      return '';
+    }
 
-  const ownerNameString = ownerName
-    ? ownerName.value || PLACEHOLDER.NAME
-    : PLACEHOLDER.NAME;
+    return Object.values(cardNumber.value)
+      .map((cardNumber, index) =>
+        index < COUNT.CARD_NUMBER_HIDE_COUNT
+          ? cardNumber
+          : CARD_NUMBER_MARK.repeat(cardNumber.length)
+      )
+      .join(' ');
+  };
+
+  const isValidExpiredDate =
+    expiredDate && Object.values(expiredDate.value).some(date => date);
+
+  const expiredDateString = () => {
+    if (!isValidExpiredDate) {
+      return PLACEHOLDER.DATE;
+    }
+
+    return `${expiredDate.value.month}/${expiredDate.value.year}`;
+  };
+
+  const isValidOwnerName = ownerName && ownerName.value;
+
+  const ownerNameString = () => {
+    if (!isValidOwnerName) {
+      return PLACEHOLDER.NAME;
+    }
+
+    return ownerName.value;
+  };
 
   const onCardClick = () => {
     const currentCardInfo = cardData.find(
@@ -49,9 +65,9 @@ function useCard({ cardNumber, expiredDate, ownerName }) {
 
   return {
     companyNameString,
-    cardNumberString,
-    expiredDateString,
-    ownerNameString,
+    cardNumberString: cardNumberString(),
+    expiredDateString: expiredDateString(),
+    ownerNameString: ownerNameString(),
     onCardClick,
   };
 }
