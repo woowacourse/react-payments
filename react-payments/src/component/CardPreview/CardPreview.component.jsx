@@ -7,7 +7,12 @@ import useReady from "../../hooks/useReady";
 import { isDuplicatedCardName, isInvalidCardName } from "../../util/validator";
 import { CardDataContext } from "../../provider/CardDataProvider";
 import MessageBox from "../common/MessageBox/messageBox.component";
-import { ERROR_MESSAGE, REDUCER_TYPE, SUCCESS_MESSAGE } from "../../constants";
+import {
+  ALERT_MEESAGE,
+  ERROR_MESSAGE,
+  REDUCER_TYPE,
+  SUCCESS_MESSAGE,
+} from "../../constants";
 import Modal from "../common/Modal/modal.component";
 import CardControlButtonBox from "../CardControlButtonBox/CardControlButtonBox.component";
 
@@ -94,6 +99,7 @@ const CardPreview = ({ cardDatum, idx }) => {
       },
     });
     closeEditForm();
+    window.alert(ALERT_MEESAGE.EDIT);
   };
 
   const handleDeleteCard = () => {
@@ -103,6 +109,7 @@ const CardPreview = ({ cardDatum, idx }) => {
         id: idx,
       },
     });
+    window.alert(ALERT_MEESAGE.DELETE);
   };
 
   const closeEditForm = () => {

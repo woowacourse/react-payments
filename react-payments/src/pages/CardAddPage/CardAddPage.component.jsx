@@ -21,7 +21,7 @@ import { CardTypeContext } from "../../provider/CardTypeProvider";
 import PageContainer from "../../component/common/PageContainer/PageContainer.component";
 import { useNavigate, useParams } from "react-router-dom";
 import { CardDataContext } from "../../provider/CardDataProvider";
-import { REDUCER_TYPE } from "../../constants";
+import { ALERT_MEESAGE, REDUCER_TYPE } from "../../constants";
 
 const CardAddPage = () => {
   const {
@@ -115,6 +115,8 @@ const CardAddPage = () => {
     resetSecurityCode();
     resetCardPassword();
     resetCardTypeInfo();
+
+    window.alert(ALERT_MEESAGE.EDIT);
   };
 
   return (

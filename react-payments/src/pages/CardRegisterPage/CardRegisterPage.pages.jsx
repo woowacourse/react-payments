@@ -7,7 +7,12 @@ import LinkButton from "../../component/common/LinkButton/linkButton.component";
 import MessageBox from "../../component/common/MessageBox/messageBox.component";
 import PageContainer from "../../component/common/PageContainer/PageContainer.component";
 import PageTitle from "../../component/common/PageTitle/pageTitle.component";
-import { ERROR_MESSAGE, REDUCER_TYPE, SUCCESS_MESSAGE } from "../../constants";
+import {
+  ALERT_MEESAGE,
+  ERROR_MESSAGE,
+  REDUCER_TYPE,
+  SUCCESS_MESSAGE,
+} from "../../constants";
 import useReady from "../../hooks/useReady";
 import { CardDataContext } from "../../provider/CardDataProvider";
 import { CardNumberContext } from "../../provider/CardNumberProvider";
@@ -93,6 +98,7 @@ const CardRegisterPage = () => {
     });
 
     id.current += 1;
+    window.alert(ALERT_MEESAGE.REGISTER);
   };
 
   const onChangeCardName = (e) => {
