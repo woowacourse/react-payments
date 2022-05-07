@@ -3,6 +3,17 @@ export const REG_EXP = {
   CHARACTER_ONLY: /^[a-z,A-Z]+$/,
 };
 
+export const CARD_COLOR_BY_NAME = {
+  롯데카드: 'red',
+  삼성카드: 'blue',
+  NH농협카드: 'green',
+  신한카드: 'purple',
+  현대카드: 'mint',
+  하나카드: 'pink',
+  BC카드: 'orange',
+  KB국민카드: 'yellow',
+};
+
 export const COLOR_TYPE = {
   red: '#E24141',
   blue: '#547CE4',

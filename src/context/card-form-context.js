@@ -22,10 +22,7 @@ const initialState = {
   secondPassword: '',
   isInitialPassword: true,
   isPasswordError: false,
-  cardType: {
-    color: '',
-    name: '',
-  },
+  cardType: '',
   isCardTypeSelected: false,
 };
 

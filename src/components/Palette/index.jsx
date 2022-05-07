@@ -1,28 +1,18 @@
 import PropTypes from 'prop-types';
 import ColorPicker from './ColorPicker';
 import * as styled from './index.styled';
+import { CARD_COLOR_BY_NAME } from '../../constant';
 import { useCardFormContext, ACTION } from '../../context/card-form-context';
 
-const cardList1 = [
-  { color: 'red', name: '롯데카드' },
-  { color: 'blue', name: '삼성카드' },
-  { color: 'green', name: 'NH농협카드' },
-  { color: 'purple', name: '신한카드' },
-];
-
-const cardList2 = [
-  { color: 'mint', name: '현대카드' },
-  { color: 'pink', name: '하나카드' },
-  { color: 'orange', name: 'BC카드' },
-  { color: 'yellow', name: 'KB국민카드' },
-];
+const CARD_LIST1 = ['롯데카드', '삼성카드', 'NH농협카드', '신한카드'];
+const CARD_LIST2 = ['현대카드', '하나카드', 'BC카드', 'KB국민카드'];
 
 const Palette = ({ closeModal }) => {
   const { dispatch } = useCardFormContext();
-  const onClickCardSelector = (color, name) => () => {
+  const onClickCardSelector = (name) => () => {
     dispatch({
       type: ACTION.CARD_TYPE,
-      data: { cardType: { color, name } },
+      data: { cardType: name },
     });
     closeModal();
   };
@@ -30,22 +20,22 @@ const Palette = ({ closeModal }) => {
   return (
     <styled.Container>
       <styled.ColorPickerContainer>
-        {cardList1.map(({ color, name }) => (
+        {CARD_LIST1.map((name) => (
           <ColorPicker
-            color={color}
+            color={CARD_COLOR_BY_NAME[name]}
             name={name}
             key={name}
-            onClick={onClickCardSelector(color, name)}
+            onClick={onClickCardSelector(name)}
           />
         ))}
       </styled.ColorPickerContainer>
       <styled.ColorPickerContainer>
-        {cardList2.map(({ color, name }) => (
+        {CARD_LIST2.map((name) => (
           <ColorPicker
-            color={color}
+            color={CARD_COLOR_BY_NAME[name]}
             name={name}
             key={name}
-            onClick={onClickCardSelector(color, name)}
+            onClick={onClickCardSelector(name)}
           />
         ))}
       </styled.ColorPickerContainer>

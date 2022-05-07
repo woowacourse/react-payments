@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { COLOR_NAMES } from '../../constant';
+import { COLOR_NAMES, CARD_COLOR_BY_NAME } from '../../constant';
 import * as styled from './index.styled';
 
 const Card = ({
@@ -15,11 +15,9 @@ const Card = ({
 }) => {
   return (
     <styled.Container onClick={onClick}>
-      <styled.EmptyCard color={cardType.color}>
+      <styled.EmptyCard color={CARD_COLOR_BY_NAME[cardType]}>
         <styled.CardTop>
-          <styled.CardName>
-            {cardType.name ? cardType.name : '카드이름'}
-          </styled.CardName>
+          <styled.CardName>{cardType ? cardType : '카드이름'}</styled.CardName>
         </styled.CardTop>
         <styled.CardMiddle>
           <styled.CardChip />
@@ -37,7 +35,7 @@ const Card = ({
         <styled.CardBottom>
           <styled.CardBottomInfo>
             <styled.CardOwnerContainer>
-              {ownerName ? ownerName : 'NAME'}
+              {ownerName ? ownerName.toUpperCase() : 'NAME'}
             </styled.CardOwnerContainer>
             <styled.CardExpiredDateContainer>
               {expiredMonth ? expiredMonth : 'MM'}
@@ -60,10 +58,7 @@ Card.propTypes = {
   secondCardNumber: PropTypes.string,
   thirdCardNumber: PropTypes.string,
   fourthCardNumber: PropTypes.string,
-  cardType: PropTypes.shape({
-    color: PropTypes.string,
-    name: PropTypes.string,
-  }),
+  cardType: PropTypes.string,
   onClick: PropTypes.func,
 };
 
