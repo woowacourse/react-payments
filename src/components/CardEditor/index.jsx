@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useInput from "hooks/useInput";
@@ -180,5 +181,28 @@ function CardEditor({ isEdit, originData }) {
     </>
   );
 }
+
+CardEditor.propTypes = {
+  isEdit: PropTypes.bool,
+  originData: PropTypes.shape({
+    cardId: PropTypes.number,
+    cardNumbers: PropTypes.array,
+    dueDate: PropTypes.shape({
+      month: PropTypes.string,
+      year: PropTypes.string,
+    }),
+    owner: PropTypes.string,
+    cvc: PropTypes.string,
+    password: PropTypes.shape({
+      firstPassword: PropTypes.string,
+      secondPassword: PropTypes.string,
+    }),
+    company: PropTypes.shape({
+      color: PropTypes.string,
+      name: PropTypes.string,
+    }),
+    nickname: PropTypes.string,
+  }),
+};
 
 export default CardEditor;
