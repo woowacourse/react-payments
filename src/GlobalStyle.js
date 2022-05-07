@@ -24,11 +24,9 @@ const GlobalStyle = createGlobalStyle`
   #root {
     background: #fff;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
     padding: 30px;
     width: 400px;
-    height: 757px;
+    min-height: 757px;
   }
   
   `;
