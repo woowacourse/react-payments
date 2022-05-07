@@ -1,6 +1,7 @@
 import { useReducer } from 'react';
 
 const initialState = {
+  cardName: '',
   companyId: '0',
   cardNumber: ['', '', '', ''],
   expireMonth: '',
@@ -39,6 +40,7 @@ const isInputComplete = (state) => {
   const necessaryInputState = { ...state };
 
   delete necessaryInputState.userName;
+  delete necessaryInputState.cardName;
 
   return Object.entries(necessaryInputState).every(([_, value]) => value !== '');
 };
