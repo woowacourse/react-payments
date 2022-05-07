@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
-import { Link } from 'react-router-dom';
-
 import Card from 'components/common/Card';
 import Button from 'components/common/Button';
 
+import useSubmit from 'hooks/useSubmit';
+
 function AddCardComplete() {
+  // TODO: hook으로 하는 게 맞을까?
+  const handleSubmitNewCardNickname = useSubmit('/card-list');
+
   return (
     <Styled.Root>
       <Styled.Title>카드 등록이 완료되었습니다.</Styled.Title>
@@ -17,12 +20,7 @@ function AddCardComplete() {
         // title={cardKind.title}
         // validDate={validDate}
       />
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          console.log(e);
-        }}
-      >
+      <form onSubmit={handleSubmitNewCardNickname}>
         <Styled.CardNicknameInput />
         <Styled.ConfirmButton color="#04C09E" fontWeight="bold" type="submit">
           확인

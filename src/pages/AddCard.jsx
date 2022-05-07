@@ -8,9 +8,10 @@ import useValidDate from 'hooks/useValidDate';
 import useCardOwnerName from 'hooks/useCardOwnerName';
 import useCVC from 'hooks/useCVC';
 import useCardPassword from 'hooks/useCardPassword';
+import useSubmit from 'hooks/useSubmit';
 
 import Button from 'components/common/Button';
-import Card from 'components/Card';
+import Card from 'components/common/Card';
 import CVCTooltip from 'components/CVCTooltip';
 import Input from 'components/common/Input';
 import CardPickModal from 'components/CardPickModal';
@@ -52,6 +53,7 @@ function AddCard() {
     color: '#ADD8E6',
     title: '공원 카드',
   });
+  const handleSubmitNewCard = useSubmit('/add-card-complete');
 
   const requiredList = [
     cardNumber,
@@ -62,7 +64,7 @@ function AddCard() {
   ];
 
   return (
-    <>
+    <Styled.Root>
       <Header title="카드 추가">
         <Button size="small">
           <Arrow />
@@ -78,7 +80,7 @@ function AddCard() {
         validDate={validDate}
       />
 
-      <Styled.CardAddForm>
+      <Styled.CardAddForm onSubmit={handleSubmitNewCard}>
         <div>
           <Input
             description="카드 번호"
@@ -145,13 +147,12 @@ function AddCard() {
           <Styled.Bullet>•</Styled.Bullet>
           <Styled.Bullet>•</Styled.Bullet>
         </div>
+        {requiredList.every(value => value !== '') && (
+          <Styled.NextButton color="#04C09E" fontWeight="bold" type="submit">
+            다음
+          </Styled.NextButton>
+        )}
       </Styled.CardAddForm>
-
-      {requiredList.every(value => value !== '') && (
-        <Styled.NextButton color="#04C09E" fontWeight="bold">
-          <Link to="/card-add-complete">다음</Link>
-        </Styled.NextButton>
-      )}
       {isCardPickModal && (
         <ModalPortal>
           <CardPickModal
@@ -160,13 +161,19 @@ function AddCard() {
           />
         </ModalPortal>
       )}
-    </>
+    </Styled.Root>
   );
 }
 
 const Styled = {
+  Root: styled.div`
+    display: flex;
+    flex-direction: column;
+  `,
+
   Card: styled(Card)`
     align-self: center;
+    cursor: pointer;
     margin-bottom: 25px;
   `,
 
