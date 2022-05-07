@@ -3,15 +3,17 @@ import React from 'react';
 import Input from './common/Input.jsx';
 import InputField from './common/InputField.jsx';
 
-import { ADD_CARD_FORM_CONDITION } from '../constants';
+import { ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_ERROR_MESSAGE } from '../constants';
 
-export default function CardExpireDateInput({ expireDate, onChange }) {
+export default function CardExpireDateInput({ expireDate, onChange, isInvalid }) {
   return (
     <InputField
       labelText="만료일 (MM/YY)"
       wrapperWidth="135px"
       horizontalAlign="center"
-      isComplete={expireDate.join('').length === ADD_CARD_FORM_CONDITION.EXPIRE_DATE_LENGTH}>
+      isComplete={expireDate.join('').length === ADD_CARD_FORM_CONDITION.EXPIRE_DATE_LENGTH}
+      isError={isInvalid}
+      errorMessage={ADD_CARD_FORM_ERROR_MESSAGE.EXPIRE_DATE}>
       <Input
         placeholder="MM"
         type="text"

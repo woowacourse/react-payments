@@ -19,4 +19,17 @@ const ADD_CARD_FORM_SUBMIT_CONFIRM_MESSAGE = (cardNumber, expireDate, holderName
   위 정보로 카드를 등록하시겠습니까?
 `;
 
-export { CREATE_MASKED_CHARACTERS, ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_SUBMIT_CONFIRM_MESSAGE };
+const ADD_CARD_FORM_ERROR_MESSAGE = {
+  CARD_NUMBER: '16자리 숫자를 입력하세요.',
+  EXPIRE_DATE: '월/년도 두 자리씩 (MM/YY) 형식을 지켜주세요.',
+  HOLDER_NAME: '30자 이내, 영어로 입력하세요.',
+  SECURITY_CODE: '세 자리 숫자를 입력하세요.',
+  PASSWORD: '두 자리 숫자를 입력하세요.',
+};
+
+export {
+  CREATE_MASKED_CHARACTERS,
+  ADD_CARD_FORM_CONDITION,
+  ADD_CARD_FORM_SUBMIT_CONFIRM_MESSAGE,
+  ADD_CARD_FORM_ERROR_MESSAGE,
+};

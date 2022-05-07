@@ -35,25 +35,25 @@ const ButtonWrapper = styled.div`
 `;
 
 export default function AddCardPage() {
-  const [cardNumber, onChangeCardNumberUnit, isCompleteCardNumber] = useInputArray(
+  const [cardNumber, onChangeCardNumberUnit, isCompleteCardNumber, isInvalidCardNumberInput] = useInputArray(
     ['', '', '', ''],
     isValidCardNumberUnit,
     ADD_CARD_FORM_CONDITION.NUMBER_UNIT_COUNT * ADD_CARD_FORM_CONDITION.NUMBER_UNIT_LENGTH
   );
 
-  const [expireDate, onChangeExpireDateUnit, isCompleteExpireDate] = useInputArray(
+  const [expireDate, onChangeExpireDateUnit, isCompleteExpireDate, isInvalidExpireDateInput] = useInputArray(
     ['', ''],
     isValidCardExpireDateUnit,
     ADD_CARD_FORM_CONDITION.EXPIRE_DATE_LENGTH
   );
 
-  const [holderName, onChangeHolderName] = useInput('', isValidCardHolderName);
-  const [securityCode, onChangeSecurityCode, isCompleteSecurityCode] = useInput(
+  const [holderName, onChangeHolderName, _, isInvalidCardHolderNameInput] = useInput('', isValidCardHolderName);
+  const [securityCode, onChangeSecurityCode, isCompleteSecurityCode, isInvalidSecurityCodeInput] = useInput(
     '',
     isValidCardSecurityCode,
     ADD_CARD_FORM_CONDITION.SECURITY_CODE_LENGTH
   );
-  const [password, onChangePasswordUnit, isCompletePassword] = useInputArray(
+  const [password, onChangePasswordUnit, isCompletePassword, isInvalidPasswordInputInput] = useInputArray(
     ['', ''],
     isValidCardPasswordUnit,
     ADD_CARD_FORM_CONDITION.PASSWORD_LENGTH
@@ -95,11 +95,31 @@ export default function AddCardPage() {
         isComplete={isCompleteCardNumber && isCompleteExpireDate && isCompleteSecurityCode && isCompletePassword}
       />
       <Form onSubmit={handleCardInfoSubmit} autoComplete="off">
-        <CardNumberInput cardNumber={cardNumber} onChange={onChangeCardNumberUnit} />
-        <CardExpireDateInput expireDate={expireDate} onChange={onChangeExpireDateUnit} />
-        <CardHolderNameInput holderName={holderName} onChange={onChangeHolderName} />
-        <CardSecurityCodeInput securityCode={securityCode} onChange={onChangeSecurityCode} />
-        <CardPasswordInput password={password} onChange={onChangePasswordUnit} />
+        <CardNumberInput
+          cardNumber={cardNumber}
+          onChange={onChangeCardNumberUnit}
+          isInvalid={isInvalidCardNumberInput}
+        />
+        <CardExpireDateInput
+          expireDate={expireDate}
+          onChange={onChangeExpireDateUnit}
+          isInvalid={isInvalidExpireDateInput}
+        />
+        <CardHolderNameInput
+          holderName={holderName}
+          onChange={onChangeHolderName}
+          isInvalid={isInvalidCardHolderNameInput}
+        />
+        <CardSecurityCodeInput
+          securityCode={securityCode}
+          onChange={onChangeSecurityCode}
+          isInvalid={isInvalidSecurityCodeInput}
+        />
+        <CardPasswordInput
+          password={password}
+          onChange={onChangePasswordUnit}
+          isInvalid={isInvalidPasswordInputInput}
+        />
         {isCompleteCardNumber && isCompleteExpireDate && isCompleteSecurityCode && isCompletePassword && (
           <CardInfoSubmitButton />
         )}
