@@ -1,13 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import BackwardButton from './components/BackwardButton/BackwardButton';
-import CardForm from './components/CardForm/CardForm';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import LandingPage from './pages/LandingPage/LandingPage';
+import CardRegistrationPage from './pages/CardRegistrationPage.jsx/CardRegistrationPage';
+import CardAliasNamingPage from './pages/CardAliasNamingPage/CardAliasNamingPage';
 
 const App = () => {
   return (
     <StyledApp>
-      <BackwardButton>카드 추가</BackwardButton>
-      <CardForm />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/register" element={<CardRegistrationPage />} />
+        <Route path="/confirm" element={<CardAliasNamingPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </StyledApp>
   );
 };

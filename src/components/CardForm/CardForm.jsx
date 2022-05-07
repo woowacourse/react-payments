@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useEasyForm from '../../hooks/useEasyForm';
+import useStore from '../../hooks/useStore';
 import CardPreview from '../CardPreview/CardPreview';
 import Field from '../Field/Field';
 import Label from '../Label/Label';
@@ -8,8 +10,10 @@ import InputBox from '../InputBox/InputBox';
 import Input from '../Input/Input';
 import ToolTip from '../ToolTip/ToolTip';
 import SubmitButton from '../SubmitButton/SubmitButton';
+import convertFormDataToObject from '../../utils/commons';
 
 const CardForm = () => {
+  const navigate = useNavigate();
   const { registerForm, registerInput, watchingValues, errors } = useEasyForm({
     initialValues: {
       firstCardNumber: '',
@@ -23,18 +27,18 @@ const CardForm = () => {
     validationMode: 'onChange',
     shouldUseReportValidity: false,
   });
-
-  const addCard = (values) => {
-    console.log(values);
-  };
+  const { addCard } = useStore();
 
   const onSubmit = (event) => {
     const formData = new FormData(event.target);
+
     formData.append('brand', '우아한카드');
     formData.set('owner', formData.get('owner').trim().toUpperCase());
 
-    addCard(formData);
-    alert('제출 성공');
+    const cardInfo = convertFormDataToObject(formData);
+
+    addCard(cardInfo);
+    navigate('/confirm', { state: cardInfo });
   };
 
   const onError = ({ target: { elements } }) => {
@@ -48,20 +52,7 @@ const CardForm = () => {
 
   return (
     <>
-      <CardPreview
-        brand="우아한카드"
-        cardNumber={[
-          watchingValues.firstCardNumber,
-          watchingValues.secondCardNumber,
-          watchingValues.thirdCardNumber,
-          watchingValues.fourthCardNumber,
-        ]}
-        owner={watchingValues.owner}
-        expiredDate={{
-          month: watchingValues.expiredMonth,
-          year: watchingValues.expiredYear,
-        }}
-      />
+      <CardPreview {...{ ...watchingValues, brand: '우아한카드' }} />
       <StyledCardForm {...registerForm({ onSubmit, onError })}>
         <Field>
           <Label>카드 번호</Label>

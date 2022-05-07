@@ -1,38 +1,60 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CardPreview = ({ brand, cardNumber, expiredDate, owner }) => (
-  <StyledCardPreview className="card-box">
-    <div className="small-card">
-      <div className="card-top">
-        <span className="card-text">{brand ?? null}</span>
-      </div>
-      <div className="card-middle">
-        <div className="small-card__chip" />
-      </div>
-      <div className="card-bottom">
-        <div className="card-bottom__number">
-          {cardNumber && (
-            <span className="card-text">{`${cardNumber[0]} ${
-              cardNumber[1]
-            } ${'•'.repeat(cardNumber[2].length)} ${'•'.repeat(
-              cardNumber[3].length
-            )}`}</span>
-          )}
+const CardPreview = ({
+  brand,
+  firstCardNumber,
+  secondCardNumber,
+  thirdCardNumber,
+  fourthCardNumber,
+  owner,
+  expiredMonth,
+  expiredYear,
+}) => {
+  const cardNumber = [
+    firstCardNumber,
+    secondCardNumber,
+    thirdCardNumber,
+    fourthCardNumber,
+  ];
+  const expiredDate = {
+    month: expiredMonth,
+    year: expiredYear,
+  };
+
+  return (
+    <StyledCardPreview className="card-box">
+      <div className="small-card">
+        <div className="card-top">
+          <span className="card-text">{brand ?? null}</span>
         </div>
-        <div className="card-bottom__info">
-          <p className="card-text w-50 ellipsis">{owner.toUpperCase()}</p>
-          {expiredDate && (
-            <span className="card-text">
-              {expiredDate.month} {expiredDate.month.length === 2 ? '/' : null}{' '}
-              {expiredDate.year}
-            </span>
-          )}
+        <div className="card-middle">
+          <div className="small-card__chip" />
+        </div>
+        <div className="card-bottom">
+          <div className="card-bottom__number">
+            {cardNumber && (
+              <span className="card-text">{`${cardNumber[0]} ${
+                cardNumber[1]
+              } ${'•'.repeat(cardNumber[2].length)} ${'•'.repeat(
+                cardNumber[3].length
+              )}`}</span>
+            )}
+          </div>
+          <div className="card-bottom__info">
+            <p className="card-text w-50 ellipsis">{owner.toUpperCase()}</p>
+            {expiredDate && (
+              <span className="card-text">
+                {expiredDate.month}{' '}
+                {expiredDate.month.length === 2 ? '/' : null} {expiredDate.year}
+              </span>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  </StyledCardPreview>
-);
+    </StyledCardPreview>
+  );
+};
 
 const StyledCardPreview = styled.div`
   display: flex;

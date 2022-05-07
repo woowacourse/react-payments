@@ -1,9 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const BackwardButton = ({ children, ...rest }) => {
+  const navigate = useNavigate();
+
   return (
-    <StyledButton type="button" {...rest}>
+    <StyledButton
+      {...rest}
+      type="button"
+      onClick={() => {
+        navigate(-1);
+      }}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
