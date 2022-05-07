@@ -15,7 +15,7 @@ import {
 function Home() {
   const navigate = useNavigate();
   const cardList = useContext(CardListContext);
-  console.log(cardList);
+
   return (
     <PageWrapper>
       <Header headText="보유 카드" />
