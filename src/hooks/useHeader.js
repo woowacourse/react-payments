@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import Button from 'components/common/Button';
 import { ReactComponent as PrevIcon } from 'assets/prev_icon.svg';
 
@@ -21,9 +21,11 @@ const reducer = (_, action) => {
         ...initialState,
         title: '카드 추가',
         left: (
-          <Button>
-            <PrevIcon />
-          </Button>
+          <Link to="/react-payments/">
+            <Button>
+              <PrevIcon />
+            </Button>
+          </Link>
         ),
       };
     default:
