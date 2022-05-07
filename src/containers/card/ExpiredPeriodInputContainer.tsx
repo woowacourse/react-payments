@@ -36,14 +36,25 @@ function ExpiredPeriodInputContainer() {
 
     if (value.length > 2 || !isNum(value)) return;
 
+    if (
+      expiredPeriodYear === new Date().getFullYear().toString().substring(2, 4) &&
+      Number(value) < new Date().getMonth() + 1
+    ) {
+      return;
+    }
+
     if (value.length <= expiredPeriodMonth.length) {
       dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD_MONTH, value));
       return;
     }
 
-    if (value.length === 1 && Number(value.slice(-1)) > 3) {
+    if (value.length === 1 && Number(value.slice(-1)) > 1) {
       dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD_MONTH, `0${value}`));
       secondExpiredPeriodInputRef.current?.focus();
+      return;
+    }
+
+    if (Number(value) > 12) {
       return;
     }
 
@@ -57,10 +68,19 @@ function ExpiredPeriodInputContainer() {
   const handleYearChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
-    console.log(new Date().getFullYear());
+    if (
+      value === new Date().getFullYear().toString().substring(2, 4) &&
+      Number(expiredPeriodMonth) < new Date().getMonth() + 1
+    ) {
+      dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD_MONTH, ''));
+    }
 
     if (Number(value) === 0) {
       dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD_YEAR, ''));
+      return;
+    }
+
+    if (value.length === 2 && value < new Date().getFullYear().toString().substring(2, 4)) {
       return;
     }
 
