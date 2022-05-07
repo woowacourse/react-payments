@@ -1,3 +1,5 @@
+const APP_NAME = '콤피 페이';
+
 const CARD_COMPANY = {
   1: { name: '포코 카드', color: 'purple', icon: '👾' },
   2: { name: '준 카드', color: 'yellow', icon: '😆' },
@@ -75,6 +77,7 @@ const ERROR_MESSAGE = {
 };
 
 export {
+  APP_NAME,
   CARD_COMPANY,
   CARD_NUMBER,
   EXPIRE_DATE,
