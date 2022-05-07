@@ -33,6 +33,11 @@ const NICKNAME = {
   MAX_LENGTH: 30,
 };
 
+const ACTION = {
+  CREATE: "CREATE",
+  EDIT_NICKNAME: "EDIT_NICKNAME",
+};
+
 const COLORS = {
   MINT: "#04C09E",
   GRAY: "#D2D2D2",
@@ -61,6 +66,7 @@ export {
   CVC,
   PASSWORD,
   MONTH,
+  ACTION,
   COLORS,
   NAME,
   CARD_LIST,

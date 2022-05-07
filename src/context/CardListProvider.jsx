@@ -1,13 +1,14 @@
 import React, { useReducer } from "react";
+import { ACTION } from "constant";
 
 const cardListReducer = (state, action) => {
   let newState = [];
   switch (action.type) {
-    case "CREATE": {
+    case ACTION.CREATE: {
       newState = [...state, action.data];
       break;
     }
-    case "EDIT_NICKNAME": {
+    case ACTION.EDIT_NICKNAME: {
       newState = state.map((data) =>
         data.cardId === action.targetId
           ? { ...data, nickname: action.newNickname }
@@ -38,7 +39,7 @@ function CardListProvider({ children }) {
     company
   ) => {
     dispatch({
-      type: "CREATE",
+      type: ACTION.CREATE,
       data: {
         cardId,
         cardNumbers,
@@ -52,7 +53,7 @@ function CardListProvider({ children }) {
   };
 
   const onEditNickname = (targetId, newNickname) => {
-    dispatch({ type: "EDIT_NICKNAME", targetId, newNickname });
+    dispatch({ type: ACTION.EDIT_NICKNAME, targetId, newNickname });
   };
 
   return (
