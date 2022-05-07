@@ -1,12 +1,12 @@
 import { createContext, useState, useMemo, useContext } from 'react';
 
-import { PAGE_LIST } from 'constants';
+import { DEFAULT_PAGE } from 'constants';
 
 const PageContext = createContext();
 
 function PageContextProvider({ children }) {
   const [pageTitle, setTitle] = useState('');
-  const [pageLocation, setLocation] = useState(PAGE_LIST.CARD_LIST);
+  const [pageLocation, setLocation] = useState(DEFAULT_PAGE);
 
   // 이전 페이지 만들고 이전 페이지 상태가 존재할 시 새로 뜨는 페이지에 애니메이션 주기
 

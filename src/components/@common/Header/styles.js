@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 
-import { COLORS, LAYOUT } from 'styles/theme';
+import { BRAND_COLORS, COLORS, LAYOUT } from 'styles/theme';
 import responsive from 'styles/utils/responsive';
 
 const Container = styled.header`
@@ -15,13 +15,8 @@ const Container = styled.header`
 
   display: flex;
   align-items: center;
-
-  font-weight: bold;
-  font-size: 1.35rem;
-  line-height: 1.375rem;
-  color: ${COLORS.dorado};
-  padding: 1.5rem;
   z-index: 100;
+  padding: 1.5rem;
 
   ${responsive.notMobile(
     css`
@@ -29,12 +24,26 @@ const Container = styled.header`
     `,
   )}
 
-  &::before {
+  & > .previous-button {
     content: '<';
+    cursor: pointer;
+
     font-size: 0.875rem;
-    margin-right: 0.938rem;
+    padding: 0.5rem;
+    margin-right: 1rem;
     transform: scaleX(1.7);
     color: ${COLORS.silverChalice};
+
+    &:hover {
+      color: ${BRAND_COLORS.primary};
+    }
+  }
+
+  & > .title {
+    font-weight: bold;
+    font-size: 1.35rem;
+    line-height: 1.375rem;
+    color: ${COLORS.dorado};
   }
 `;
 

@@ -58,6 +58,8 @@ const PAGE_LIST = {
   CARD_LIST: Symbol('등록된 카드 목록 페이지'),
 };
 
+const DEFAULT_PAGE = PAGE_LIST.CARD_LIST;
+
 const ERROR_MESSAGE = {
   IS_NOT_VALID_CARD: '카드 정보가 올바르지 않습니다.\n입력한 내용을 확인해주세요.',
   CARD_NUMBER: {
@@ -97,5 +99,6 @@ export {
   CARD_PASSWORD,
   MODAL_STATE,
   PAGE_LIST,
+  DEFAULT_PAGE,
   ERROR_MESSAGE,
 };
