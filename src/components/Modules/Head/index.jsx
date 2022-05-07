@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const HeadContainer = styled.div`
   display: flex;
@@ -18,10 +19,12 @@ const Title = styled.span`
   color: #383838;
 `;
 
-function Head({ children }) {
+function Head({ link, children }) {
+  const navigator = useNavigate();
+
   return (
     <HeadContainer>
-      <BackButton>＜</BackButton>
+      {link && <BackButton onClick={() => navigator(link)}>＜</BackButton>}
       <Title>{children}</Title>
     </HeadContainer>
   );

@@ -29,7 +29,7 @@ function CardAddPage() {
 
   return (
     <Page>
-      <Head>카드 추가</Head>
+      <Head link="/react-payments/cardList">카드 추가</Head>
       <CardSection>
         <Card {...inputtedInfo} />
       </CardSection>
