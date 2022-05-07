@@ -89,8 +89,10 @@ const appStyles = css`
     font: inherit;
   }
 
-  .button-container.right {
-    text-align: right;
+  .button-container {
+    &.right {
+      text-align: right;
+    }
   }
 `;
 

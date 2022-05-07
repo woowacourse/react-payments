@@ -48,7 +48,6 @@ function CardEditor() {
   } = state;
 
   const { insertCardData } = useCardDataContext();
-
   const onClickConfirmButton = () => {
     try {
       validateCardNumber(cardNumber);
@@ -73,8 +72,7 @@ function CardEditor() {
     handleModalOpen: handleCompanyModalOpen,
     handleModalClose: handleCompanyModalClose,
   } = useModal();
-
-  const { Modal: CardNameModal, handleModalOpen: handleCardNameModalOpen } = useModal();
+  const { Modal: CardNameInputModal, handleModalOpen: handleCardNameInputModalOpen } = useModal();
 
   return (
     <>
@@ -103,7 +101,12 @@ function CardEditor() {
         <CardPasswordField cardPassword={cardPassword} onChange={onChangeCardState} />
 
         <div className="button-container right">
-          <Button type="primary" isDisabled={!isComplete} onClick={handleCardNameModalOpen}>
+          <Button
+            type="primary"
+            size="large"
+            isDisabled={!isComplete}
+            onClick={handleCardNameInputModalOpen}
+          >
             다음
           </Button>
         </div>
@@ -115,7 +118,7 @@ function CardEditor() {
           />
         </CompanyModal>
 
-        <CardNameModal>
+        <CardNameInputModal>
           <h2>카드 이름을 입력해주세요 😁</h2>
           <CardNameField cardName={cardName} onChange={onChangeCardState} />
 
@@ -128,7 +131,7 @@ function CardEditor() {
           >
             다음
           </Button>
-        </CardNameModal>
+        </CardNameInputModal>
       </div>
     </>
   );
