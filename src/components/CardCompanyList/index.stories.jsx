@@ -12,7 +12,7 @@ const Template = () => {
   return <CardCompanyList />;
 };
 
-export const DefaultCardExpireDateField = Template.bind({});
-DefaultCardExpireDateField.parameters = {
+export const Default = Template.bind({});
+Default.parameters = {
   controls: { hideNoControlsWarning: true },
 };
