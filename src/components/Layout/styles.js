@@ -15,7 +15,7 @@ const Container = styled.div`
   border-radius: ${LAYOUT.BORDER_RADIUS * 2}px;
 
   .layout-content {
-    padding: 1.5rem;
+    padding: 0.5rem;
     height: 100%;
 
     display: flex;
@@ -23,6 +23,7 @@ const Container = styled.div`
     justify-content: space-between;
 
     & > div {
+      padding: 1.5rem;
       height: 100%;
 
       &.fill {
