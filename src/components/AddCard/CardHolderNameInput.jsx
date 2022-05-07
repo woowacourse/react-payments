@@ -17,7 +17,7 @@ const StyledInputCounter = styled.p`
   letter-spacing: -0.085em;
 `;
 
-function InputCounter({ currLength = "0", maxLength, isComplete }) {
+export function InputCounter({ currLength = "0", maxLength, isComplete }) {
   return (
     <StyledInputCounter isComplete={isComplete}>
       {currLength}/{maxLength}

@@ -39,10 +39,10 @@ const StyledDescription = styled.p`
   box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.4);
 `;
 
-const SECURITY_CODE_DESCRIPTION =
+export const SECURITY_CODE_DESCRIPTION =
   "CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.";
 
-function HelpIcon({ description }) {
+export function HelpIcon({ description }) {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
   return (
