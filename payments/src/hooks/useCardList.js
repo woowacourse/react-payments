@@ -4,6 +4,11 @@ const controllCardList = (state, action) => {
   switch (action.type) {
     case "addCardList":
       return [...state, action.payload];
+    case "removeCard":
+      return [
+        ...state.slice(0, action.payload.targetIndex),
+        ...state.slice(action.payload.targetIndex + 1),
+      ];
     default:
       return state;
   }
