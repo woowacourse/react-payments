@@ -29,5 +29,5 @@ export default function useResetInput() {
     setPassword(initialPassword);
   };
 
-  return [state, handleResetInput];
+  return { state, handleResetInput };
 }

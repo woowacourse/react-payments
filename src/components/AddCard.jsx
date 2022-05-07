@@ -34,7 +34,7 @@ const smallCardCss = {
 
 export default function AddCard() {
   const [isNextButtonClicked, setNextButtonClicked] = useState(false);
-  const [state, handleResetInput] = useResetInput();
+  const { state, handleResetInput } = useResetInput();
   const { cardNumber, holderName, expireDate, securityCode, password } = state;
 
   return (
