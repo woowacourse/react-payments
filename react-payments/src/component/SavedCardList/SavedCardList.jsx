@@ -4,6 +4,7 @@ import useFetch from "../../hooks/useFetch";
 import { CardDataContext } from "../../provider/CardDataProvider";
 import CardPreview from "../CardPreview/CardPreview.component";
 import { API_URL } from "../../constants";
+import SkeletonCardBox from "../common/SkeletonCard/Skeleton.component";
 
 const SavedCardList = () => {
   const { data, loading } = useFetch(`${API_URL}/api/cards`);
@@ -28,7 +29,10 @@ const SavedCardList = () => {
   return (
     <>
       {loading ? (
-        <div>로딩중...</div>
+        <>
+          <SkeletonCardBox />
+          <SkeletonCardBox />
+        </>
       ) : (
         Object.entries(cardData).map(([id, cardDatum]) => (
           <div key={id}>
