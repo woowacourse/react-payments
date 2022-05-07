@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { useCallback, useEffect, useReducer } from 'react';
 import { isJSONArray } from '../utils/util';
 
 const defaultCardList = isJSONArray(localStorage.getItem('cardList'))
@@ -52,5 +52,12 @@ export const useCardList = () => {
     localStorage.setItem('cardList', JSON.stringify(cardList));
   }, [cardList]);
 
-  return [cardList, cardListDispatch];
+  const getCardById = useCallback(
+    cardId => {
+      return cardList.find(({ id }) => id === cardId);
+    },
+    [cardList],
+  );
+
+  return [cardList, cardListDispatch, getCardById];
 };

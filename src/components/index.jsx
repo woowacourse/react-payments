@@ -10,7 +10,7 @@ import NotFound from '../pages/404';
 import { ROUTE } from '../route';
 import RequiredRouteState from './commons/RequiredRouteState';
 function App() {
-  const [cardList, cardListDispatch] = useCardList();
+  const [cardList, cardListDispatch, getCard] = useCardList();
 
   return (
     <div className="root">
@@ -25,7 +25,7 @@ function App() {
             path={ROUTE.cardSuccess.route}
             element={
               <RequiredRouteState>
-                <CardSuccess cardList={cardList} cardListDispatch={cardListDispatch} />
+                <CardSuccess cardListDispatch={cardListDispatch} getCard={getCard} />
               </RequiredRouteState>
             }
           />
@@ -33,7 +33,7 @@ function App() {
             path={ROUTE.editCard.route}
             element={
               <RequiredRouteState>
-                <EditCard cardList={cardList} cardListDispatch={cardListDispatch} />
+                <EditCard cardListDispatch={cardListDispatch} getCard={getCard} />
               </RequiredRouteState>
             }
           />
