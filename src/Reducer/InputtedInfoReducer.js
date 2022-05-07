@@ -5,6 +5,7 @@ const INPUT_ACTION = {
   SECURITY_NUMBER: 'SECURITY_NUMBER',
   PASSWORD: 'PASSWORD',
   NICK_NAME: 'NICK_NAME',
+  CLEAR: 'CLEAR',
 };
 
 const initialInputtedInfo = {};
@@ -59,6 +60,8 @@ function inputtedInfoReducer(state, action) {
           isValid: action.valid,
         },
       };
+    case INPUT_ACTION.CLEAR:
+      return {};
   }
 }
 

@@ -3,7 +3,6 @@ import { useContext, useEffect } from 'react';
 import useFocus from './useFocus';
 import useSomeInput from './useSomeInput';
 import { COUNT } from '../constant';
-import { CARD_NUMBER_MARK } from '../constant/mark';
 import { numberRegex } from '../constant/regularExpression';
 import { CardContext } from '../context/CardContext';
 import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
@@ -29,16 +28,6 @@ function useCardNumberInput(inputNames) {
   });
 
   const isValid = Object.values(validations).every(valid => valid);
-
-  const cardNumberString = Object.values(numbers).some(number => number)
-    ? Object.values(numbers)
-        .map((cardNumber, index) =>
-          index < COUNT.CARD_NUMBER_HIDE_COUNT
-            ? cardNumber
-            : CARD_NUMBER_MARK.repeat(cardNumber.length)
-        )
-        .join(' ')
-    : '';
 
   const handleNumberChange = ({ target, nativeEvent: { data, inputType } }) => {
     if (
@@ -66,14 +55,13 @@ function useCardNumberInput(inputNames) {
   useEffect(() => {
     inputtedInfoDispatch({
       type: INPUT_ACTION.CARD_NUMBER,
-      value: cardNumberString,
+      value: numbers,
       valid: isValid,
     });
-  }, [cardNumberString, isValid]);
+  }, [numbers, isValid]);
 
   return {
     numbers,
-    cardNumberString,
     validations,
     isValid,
     inputRefs,

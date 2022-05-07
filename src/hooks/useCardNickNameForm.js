@@ -2,9 +2,11 @@ import { useContext } from 'react';
 import { CardContext } from '../context/CardContext';
 
 function useCardNickNameForm(navigator, link) {
-  const { inputtedInfo } = useContext(CardContext);
-  console.log(inputtedInfo.nickName);
-  const isValidForm = inputtedInfo.nickName.isValid;
+  const {
+    inputtedInfo: { nickName },
+  } = useContext(CardContext);
+
+  const isValidForm = nickName ? nickName.isValid : false;
 
   const onNickNameSubmit = event => {
     event.preventDefault();

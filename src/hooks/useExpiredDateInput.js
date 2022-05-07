@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { COUNT, PLACEHOLDER } from '../constant';
+import { COUNT } from '../constant';
 import { numberRegex } from '../constant/regularExpression';
 import { CardContext } from '../context/CardContext';
 import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
@@ -28,10 +28,6 @@ function useExpiredDateInput(inputNames) {
   });
 
   const isValid = Object.values(validations).every(valid => valid);
-
-  const expiredDateString = Object.values(expiredDate).some(date => date)
-    ? `${expiredDate.month}/${expiredDate.year}`
-    : PLACEHOLDER.DATE;
 
   const onDateChange = ({ target, nativeEvent: { data, inputType } }) => {
     if (
@@ -62,14 +58,13 @@ function useExpiredDateInput(inputNames) {
   useEffect(() => {
     inputtedInfoDispatch({
       type: INPUT_ACTION.EXPIRED_DATE,
-      value: expiredDateString,
+      value: expiredDate,
       valid: isValid,
     });
-  }, [expiredDateString, isValid]);
+  }, [expiredDate, isValid]);
 
   return {
     expiredDate,
-    expiredDateString,
     validations,
     isValid,
     inputRefs,

@@ -1,4 +1,7 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
+import { CardContext } from '../../../context/CardContext';
+import useCard from '../../../hooks/useCard';
 
 export const CardContainer = styled.div`
   display: flex;
@@ -55,12 +58,14 @@ export const CardOwnerName = styled.span`
   word-break: break-all;
 `;
 
-function Card({
-  companyNameString,
-  cardNumberString,
-  expiredDateString,
-  ownerNameString,
-}) {
+function Card() {
+  const {
+    companyNameString,
+    cardNumberString,
+    expiredDateString,
+    ownerNameString,
+  } = useCard();
+
   return (
     <CardContainer>
       <CardCompanyName>{companyNameString}</CardCompanyName>
