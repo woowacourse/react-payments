@@ -17,14 +17,23 @@ export default function Complete({ addCard, editCard }: CompleteProps) {
   const { resetCardInfo, onChangeCardName } = useContext(CardInfoContext);
   const { cardInfo } = useGetCardInfo();
 
+  const requestPattern = {
+    add: {
+      requestFunction: addCard as any,
+      requestBody: [cardInfo],
+    },
+    edit: {
+      requestFunction: editCard as any,
+      requestBody: [cardInfo.id, { cardName: cardInfo.cardName }],
+    },
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (cardInfo.id) {
-      await editCard(cardInfo.id, { cardName: cardInfo.cardName });
-    } else {
-      await addCard(cardInfo);
-    }
+    const { requestFunction, requestBody } = requestPattern[cardInfo.id ? "edit" : "add"];
+
+    await requestFunction(...requestBody);
 
     resetCardInfo();
     navigate(PATH.HOME);
