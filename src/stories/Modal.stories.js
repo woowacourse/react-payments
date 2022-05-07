@@ -12,6 +12,12 @@ export default {
 
 const Template = (args) => <Modal {...args} />;
 
+export const EmptyModalTemplate = Template.bind({});
+EmptyModalTemplate.args = {
+  children: <></>,
+  visible: true,
+};
+
 export const CardSelectModalTemplate = Template.bind({});
 CardSelectModalTemplate.args = {
   children: <CardSelectModal cardTypes={CARD_TYPES} />,

@@ -7,7 +7,7 @@ export default {
   component: Button,
   decorators: [
     (Story) => (
-      <div style={{ width: "150px", border: "1px solid black" }}>
+      <div style={{ width: "150px", border: "1px dotted black" }}>
         <Story />
       </div>
     ),
@@ -20,4 +20,10 @@ export const DisabledButtonTemplate = Template.bind({});
 DisabledButtonTemplate.args = {
   children: "다음",
   disabled: true,
+};
+
+export const enabledButtonTemplate = Template.bind({});
+enabledButtonTemplate.args = {
+  children: "확인",
+  disabled: false,
 };
