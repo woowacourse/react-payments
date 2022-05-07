@@ -1,8 +1,9 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
+import styles from 'css/Button.module.css';
 
 const Button = ({ className, theme, children }) => {
-  return <button className={`button-box ${className} font-${theme}`}>{children}</button>;
+  return <button className={`${styles.container} ${className} font-${theme}`}>{children}</button>;
 };
 
 Button.propTypes = {

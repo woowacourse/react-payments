@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
+import styles from 'css/Header.module.css';
 
 const Header = ({ title, left, right }) => {
   return (
-    <div className="header-container">
+    <div className={styles.container}>
       {left}
-      <h2 className="page-title">{title}</h2>
+      <h2 className={styles.title}>{title}</h2>
       {right}
     </div>
   );

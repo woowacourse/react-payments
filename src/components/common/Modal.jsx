@@ -1,11 +1,12 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
+import styles from 'css/Modal.module.css';
 
 const Modal = ({ handleModal, children }) => {
   return (
     <>
-      <div className="modal-dimmed" onClick={handleModal}></div>
-      <div className="modal">{children}</div>
+      <div className={styles.dimmer} onClick={handleModal}></div>
+      <div className={styles.modal}>{children}</div>
     </>
   );
 };

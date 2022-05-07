@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { isObject } from 'utils';
+import styles from 'css/FormInput.module.css';
 
 const FormInput = ({
   className,
@@ -15,9 +16,9 @@ const FormInput = ({
   const handleChange = (e) => onChange(e, item);
 
   return (
-    <div className="input-container">
-      <label className="input-title">{inputTitle}</label>
-      <div className={`input-box ${className}`}>
+    <div className={styles.container}>
+      <label className={styles.title}>{inputTitle}</label>
+      <div className={`${styles.inputContainer} ${className}`}>
         {inputInfoList.map(({ name, className = '', ...rest }, index) => (
           <input
             key={index}
