@@ -46,17 +46,17 @@ const ButtonWrapper = styled.div`
 export default function UpdateCardNickNamePage() {
   const { id: cardIndex } = useParams();
   const { state: locationState } = useLocation();
-  const { cardInfoList, updateNickNameByIndex } = useContext(CardInfoListContext);
+  const { cardList, updateNickNameByIndex } = useContext(CardInfoListContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!cardInfoList[cardIndex]) {
+    if (!cardList[cardIndex]) {
       navigate('/error', {
         replace: true,
       });
       return;
     }
-  }, [cardInfoList, cardIndex, navigate]);
+  }, [cardList, cardIndex, navigate]);
 
   const handleCardNickNameSubmit = e => {
     e.preventDefault();
@@ -87,9 +87,9 @@ export default function UpdateCardNickNamePage() {
             {locationState?.fromAddCardForm ? '카드등록이 완료되었습니다.' : '카드 닉네임을 수정하세요.'}
           </GuideMessage>
         </GuideMessageWrapper>
-        {cardInfoList[cardIndex] && (
+        {cardList[cardIndex] && (
           <>
-            <CardItem size={'large'} isComplete={true} {...cardInfoList[cardIndex]} />
+            <CardItem size={'large'} isComplete={true} {...cardList[cardIndex]} />
             <Form onSubmit={handleCardNickNameSubmit}>
               <CardNickNameInput name="nickname-input" placeholder={'카드 닉네임'} />
               <ButtonWrapper>

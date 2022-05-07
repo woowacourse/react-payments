@@ -71,7 +71,7 @@ const GuideMessageWrapper = styled.div`
 `;
 
 export default function CardListPage() {
-  const { cardInfoList } = useContext(CardInfoListContext);
+  const { cardList } = useContext(CardInfoListContext);
 
   function AddCardButton() {
     return (
@@ -84,7 +84,7 @@ export default function CardListPage() {
   function CardList() {
     return (
       <StyledCardList>
-        {cardInfoList.map((cardInfo, index) => (
+        {cardList.map((cardInfo, index) => (
           <Link to={`/updateCardNickName/${index}`}>
             <CardListItem key={index}>
               <CardItem size={'small'} isComplete={true} {...cardInfo} />
@@ -103,7 +103,7 @@ export default function CardListPage() {
         <Title>보유카드</Title>
       </Header>
       <Main>
-        {cardInfoList.length === 0 && (
+        {cardList.length === 0 && (
           <GuideMessageWrapper>
             <GuideMessage>등록된 카드가 없습니다.</GuideMessage>
           </GuideMessageWrapper>

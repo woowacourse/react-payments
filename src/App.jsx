@@ -10,7 +10,7 @@ import UpdateCardNickNamePage from './pages/UpdateCardNickNamePage';
 import WrongAccessPage from './pages/WrongAccessPage';
 
 function App() {
-  const [cardInfoList, setCardInfoList] = useState(Storage.cardInfoList);
+  const [cardList, setCardInfoList] = useState(Storage.cardList);
 
   const addNewCard = newCardInfo => {
     let index;
@@ -27,7 +27,7 @@ function App() {
   };
 
   const updateNickNameByIndex = (index, nickName) => {
-    const updatedCardInfo = { ...cardInfoList[index] };
+    const updatedCardInfo = { ...cardList[index] };
     updatedCardInfo.nickName = nickName;
 
     setCardInfoList(prevCardInfoList => {
@@ -41,7 +41,7 @@ function App() {
 
   return (
     <div className="App">
-      <CardInfoListContext.Provider value={{ cardInfoList, addNewCard, updateNickNameByIndex }}>
+      <CardInfoListContext.Provider value={{ cardList, addNewCard, updateNickNameByIndex }}>
         <Routes>
           <Route path="/" element={<CardListPage />} />
           <Route path="/addCard" element={<AddCardPage />} />

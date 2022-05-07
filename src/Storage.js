@@ -7,14 +7,14 @@ const EMPTY_VALUE = {
 };
 
 class Storage {
-  #cardInfoList;
+  #cardList;
 
   constructor() {
-    this.#cardInfoList = this.getInitialValue(STORAGE_KEY.CARD_LIST, EMPTY_VALUE.CARD_LIST);
+    this.#cardList = this.getInitialValue(STORAGE_KEY.CARD_LIST, EMPTY_VALUE.CARD_LIST);
   }
 
-  get cardInfoList() {
-    return this.#cardInfoList;
+  get cardList() {
+    return this.#cardList;
   }
 
   getInitialValue(key, emptyValue) {
