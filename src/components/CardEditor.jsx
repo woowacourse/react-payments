@@ -47,9 +47,9 @@ function CardEditor({ isEdit, originData }) {
     handleChangePassword,
     secondPasswordInputRef,
   } = useCardPassword();
-  const [allRequired, setAllRequired] = useState(false);
   const [company, setCompany] = useState({ color: "", name: "" });
   const { modalVisible, openModal, closeModal } = useModal();
+  const [allRequired, setAllRequired] = useState(false);
 
   const { onCreate, onEditCard } = useContext(CardDispatchContext);
   const cardId = useRef(Date.now());

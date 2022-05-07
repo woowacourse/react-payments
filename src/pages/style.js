@@ -52,6 +52,10 @@ const CardAddWrapper = styled.div`
   border-radius: 5px;
   font-size: 40px;
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const FooterWrapper = styled.div`
