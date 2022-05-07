@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Input } from '..';
+import { Input, InputContainer } from '..';
 
 import { CardInfoContext } from '../../contexts';
 
@@ -18,7 +18,7 @@ export default function CardPasswordInput() {
         secondPassword,
         setSecondPassword,
       }) => (
-        <div>
+        <InputContainer>
           <Input
             description="카드 비밀번호"
             margin={{ r: '7px' }}
@@ -38,7 +38,7 @@ export default function CardPasswordInput() {
           />
           <Bullet>•</Bullet>
           <Bullet>•</Bullet>
-        </div>
+        </InputContainer>
       )}
     </CardInfoContext.Consumer>
   );

@@ -1,4 +1,4 @@
-import { Input, Button, Modal } from '..';
+import { Input, Button, Modal, InputContainer } from '..';
 
 import { CARD_RULE } from '../../constants';
 import { CardInfoContext } from '../../contexts';
@@ -7,7 +7,7 @@ export default function CardCVCInput() {
   return (
     <CardInfoContext.Consumer>
       {({ CVC, setCVC, isModalOpen, toggleModal }) => (
-        <div>
+        <InputContainer>
           <Input
             description="보안 코드(CVC/CVV)"
             type="password"
@@ -30,7 +30,7 @@ export default function CardCVCInput() {
             visible={isModalOpen}
             description="카드 뒷면에 적힌 유효성 검사 코드"
           />
-        </div>
+        </InputContainer>
       )}
     </CardInfoContext.Consumer>
   );

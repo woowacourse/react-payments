@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Input } from '..';
+import { Input, InputContainer } from '..';
 
 import { CARD_RULE } from '../../constants';
 import { CardInfoContext } from '../../contexts';
@@ -15,7 +15,7 @@ export default function CardOwnerNameInput() {
   return (
     <CardInfoContext.Consumer>
       {({ cardOwnerName, setCardOwnerName }) => (
-        <div>
+        <InputContainer>
           <OwnerNameLength>
             {cardOwnerName.length}/{CARD_RULE.OWNER_NAME_MAX_LENGTH}
           </OwnerNameLength>
@@ -26,7 +26,7 @@ export default function CardOwnerNameInput() {
             maxLength={CARD_RULE.OWNER_NAME_MAX_LENGTH}
             onChangeFunc={setCardOwnerName}
           />
-        </div>
+        </InputContainer>
       )}
     </CardInfoContext.Consumer>
   );

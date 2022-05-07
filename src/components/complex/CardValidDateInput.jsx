@@ -1,4 +1,4 @@
-import { Input } from '..';
+import { Input, InputContainer } from '..';
 
 import { CardInfoContext } from '../../contexts';
 import { NOW } from '../../constants';
@@ -8,7 +8,7 @@ export default function CardValidDateInput() {
   return (
     <CardInfoContext.Consumer>
       {({ validDate, setValidDate }) => (
-        <div>
+        <InputContainer>
           <Input
             description="만료일"
             width="137px"
@@ -18,7 +18,7 @@ export default function CardValidDateInput() {
             onChangeFunc={setValidDate}
             onKeyDownFunc={preventEvent}
           />
-        </div>
+        </InputContainer>
       )}
     </CardInfoContext.Consumer>
   );
