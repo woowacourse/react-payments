@@ -12,7 +12,12 @@ function CardCVCInput({ cvc, handleChangeCvc }) {
       <label>보안 코드(CVC/CVV)</label>
       <CVCWrapper>
         <InputBox size="30">
-          <Input type="password" value={cvc} onChange={handleChangeCvc} />
+          <Input
+            type="password"
+            value={cvc}
+            onChange={handleChangeCvc}
+            data-testid="secure-code"
+          />
         </InputBox>
         <QuestionWrapper>
           <Button>

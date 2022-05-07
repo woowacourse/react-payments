@@ -21,6 +21,7 @@ function CardNumberInput({
               type={index < 2 ? "number" : "password"}
               value={cardNumbers[index]}
               onChange={(e) => handleChangeCardNumber(index, e)}
+              data-testid={`card-number-${index}`}
             />
             {index < 3 && <span>-</span>}
           </React.Fragment>

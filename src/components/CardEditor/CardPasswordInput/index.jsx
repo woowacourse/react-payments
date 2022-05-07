@@ -19,6 +19,7 @@ function CardPasswordInput({
             name="firstPassword"
             value={password.firstPassword}
             onChange={handleChangePassword}
+            data-testid="first-password"
           />
         </InputBox>
         <InputBox size="12">
@@ -28,6 +29,7 @@ function CardPasswordInput({
             ref={secondPasswordInputRef}
             value={password.secondPassword}
             onChange={handleChangePassword}
+            data-testid="second-password"
           />
         </InputBox>
         <Dot>•</Dot>

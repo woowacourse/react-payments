@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CardListContext } from "context/CardListProvider";
 import CardEditor from "components/CardEditor";
 import { ERROR_MESSAGES } from "constant";
-import { PageWrapper } from "./style";
+import { PageWrapper } from "../style";
 
 function Edit() {
   const navigate = useNavigate();

@@ -20,6 +20,7 @@ function CardDueDateInput({
           value={dueDate.month}
           onChange={handleChangeDueDate}
           placeholder="MM"
+          data-testid="due-month"
         />
         <span>/</span>
         <Input
@@ -29,6 +30,7 @@ function CardDueDateInput({
           value={dueDate.year}
           onChange={handleChangeDueDate}
           placeholder="YY"
+          data-testid="due-year"
         />
       </InputBox>
     </CardInputWrapper>

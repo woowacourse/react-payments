@@ -13,7 +13,7 @@ import {
   FinishPageWrapper,
   FinishTitleWrapper,
   NicknameInput,
-} from "./style";
+} from "../style";
 
 function Finish() {
   const navigate = useNavigate();

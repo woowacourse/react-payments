@@ -10,7 +10,7 @@ import {
   CardListWrapper,
   CardAddWrapper,
   CardScrollWrapper,
-} from "./style";
+} from "../style";
 
 function Home() {
   const navigate = useNavigate();

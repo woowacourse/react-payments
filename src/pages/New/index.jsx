@@ -1,4 +1,4 @@
-import { PageWrapper } from "./style";
+import { PageWrapper } from "../style";
 import CardEditor from "components/CardEditor";
 
 function New() {
