@@ -110,7 +110,7 @@ const CardPreview = ({ brand, cardNumber, expiredDate, owner }) => (
           )}
         </div>
         <div className="card-bottom__info">
-          <p className="card-text w-50 ellipsis">{owner}</p>
+          <p className="card-text w-50 ellipsis">{owner.toUpperCase()}</p>
           {expiredDate && (
             <span className="card-text">
               {expiredDate.month} {expiredDate.month.length === 2 ? '/' : null}{' '}
