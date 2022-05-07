@@ -2,8 +2,8 @@ import React, { useCallback, useContext, useState } from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import InputField from "./UIComponents/InputField/InputField.jsx";
 import styled from "styled-components";
-import { CARD_INFO_RULES } from "../constants.js";
-import CardInfoContext from "../Pages/CardInfoContext.jsx";
+import { CARD_INFO_RULES } from "../utils/constants.js";
+import CardInfoContext from "../context/CardInfoContext.jsx";
 
 const StyledInputCounter = styled.p`
   position: absolute;

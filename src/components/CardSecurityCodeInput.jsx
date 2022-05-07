@@ -3,8 +3,11 @@ import Input from "./UIComponents/Input/Input.jsx";
 import InputField from "./UIComponents/InputField/InputField.jsx";
 import styled from "styled-components";
 import HelpIconImage from "../assets/images/questionMark.svg";
-import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
-import CardInfoContext from "../Pages/CardInfoContext.jsx";
+import {
+  CARD_INFO_RULES,
+  CREATE_MASKED_CHARACTERS,
+} from "../utils/constants.js";
+import CardInfoContext from "../context/CardInfoContext.jsx";
 
 const StyledIconContainer = styled.div`
   position: relative;

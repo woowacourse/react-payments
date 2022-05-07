@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { CardPreview } from "../components";
-import PageHeader from "../PageHeader";
+import PageHeader from "./PageHeader";
 import useLocalStorage from "../useLocalStorage";
 
 const CardList = styled.div`

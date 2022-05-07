@@ -1,8 +1,11 @@
 import React, { useCallback, useContext, useState } from "react";
 import Input from "./UIComponents/Input/Input.jsx";
 import styled from "styled-components";
-import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants.js";
-import CardInfoContext from "../Pages/CardInfoContext.jsx";
+import {
+  CARD_INFO_RULES,
+  CREATE_MASKED_CHARACTERS,
+} from "../utils/constants.js";
+import CardInfoContext from "../context/CardInfoContext.jsx";
 
 const StyledInputField = styled.div`
   display: flex;

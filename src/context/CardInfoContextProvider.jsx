@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import CardInfoContext from "../Pages/CardInfoContext";
+import CardInfoContext from "./CardInfoContext";
 
 const initialCardInfoState = {
   cardNumber: ["", "", "", ""],

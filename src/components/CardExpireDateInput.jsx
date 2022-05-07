@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useState } from "react";
-import { CARD_INFO_RULES } from "../constants.js";
-import CardInfoContext from "../Pages/CardInfoContext.jsx";
+import { CARD_INFO_RULES } from "../utils/constants.js";
+import CardInfoContext from "../context/CardInfoContext.jsx";
 import Input from "./UIComponents/Input/Input.jsx";
 import InputField from "./UIComponents/InputField/InputField.jsx";
 

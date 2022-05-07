@@ -2,9 +2,9 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import useLocalStorage from "../useLocalStorage.jsx";
-import CardInfoContext from "./CardInfoContext.jsx";
+import CardInfoContext from "../context/CardInfoContext.jsx";
 
-import PageHeader from "../PageHeader.jsx";
+import PageHeader from "./PageHeader.jsx";
 
 import { CardPreview } from "../components";
 import CardInfoForm from "../containers/CardInfoForm.jsx";
@@ -16,7 +16,7 @@ import {
   CARD_REGISTER_FAIL_MESSAGE,
   NICKNAME_REGISTER_SUCCESS_MESSAGE,
   NICKNAME_REGISTER_FAIL_MESSAGE,
-} from "../constants.js";
+} from "../utils/constants.js";
 
 const {
   NUMBER_UNIT_COUNT,

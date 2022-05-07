@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { cardInfoValidations } from "../../../cardInfoValidations.js";
+import { cardInfoValidations } from "../../../utils/cardInfoValidations.js";
 
 const StyledCardInfoForm = styled.form`
   display: flex;

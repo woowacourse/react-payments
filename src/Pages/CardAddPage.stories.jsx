@@ -1,7 +1,7 @@
 import React from "react";
 
 import { within, userEvent } from "@storybook/testing-library";
-import CardInfoContext from "../Pages/CardInfoContext";
+import CardInfoContext from "../context/CardInfoContext";
 import { withReactContext } from "storybook-react-context";
 import CardAddPage from "./CardAddPage";
 

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import PropTypes, { string } from "prop-types";
-import { CREATE_MASKED_CHARACTERS } from "../../../constants";
-import CardInfoContext from "../../../Pages/CardInfoContext";
+import { CREATE_MASKED_CHARACTERS } from "../../../utils/constants";
+import CardInfoContext from "../../../context/CardInfoContext";
 
 const cardSizeBeforeSubmit = {
   width: "213px",

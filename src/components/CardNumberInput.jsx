@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useState } from "react";
-import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants";
-import CardInfoContext from "../Pages/CardInfoContext";
+import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../utils/constants";
+import CardInfoContext from "../context/CardInfoContext";
 import Input from "./UIComponents/Input/Input";
 import InputField from "./UIComponents/InputField/InputField";
 
