@@ -1,8 +1,9 @@
 import { useState, useCallback } from 'react';
 
-import { RULE } from 'constants';
+import { ERROR_MESSAGE } from 'constants';
 
 // TODO: refactor
+// TODO: encrypted -> masked
 export default function useCardNumber(initialValue) {
   const [cardNumber, setCardNumber] = useState(initialValue);
   const [encryptedCardNumber, setEncryptedCardNumber] = useState(initialValue);
@@ -50,13 +51,10 @@ export default function useCardNumber(initialValue) {
     return encryptedNumbers.match(/[\d•]{1,4}/g)?.join('-') ?? initialValue;
   };
 
-  const handler = useCallback(
+  const handleCardNumber = useCallback(
     e => {
-      const { value, selectionStart } = e.target;
-      const trimmedValue = value.replaceAll('-', '');
-
-      if (trimmedValue.length > RULE.CARD_NUMBER_MAX_LENGTH) return;
-
+      // TODO: data 네이밍 바꾸기
+      const { selectionStart } = e.target;
       const { data } = e.nativeEvent;
 
       const numbers = getNumbers(data, selectionStart);
@@ -64,9 +62,23 @@ export default function useCardNumber(initialValue) {
 
       const encryptedNumbers = getEncrytedNumbers(numbers);
       setEncryptedCardNumber(encryptedNumbers);
+
+      e.target.setCustomValidity('');
     },
     [cardNumber]
   );
 
-  return [cardNumber, handler, encryptedCardNumber];
+  const showCardNumberValidation = ({ target }) => {
+    if (target.validity.patternMismatch) {
+      target.setCustomValidity(ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH);
+      target.reportValidity();
+    }
+  };
+
+  return {
+    cardNumber,
+    encryptedCardNumber,
+    handleCardNumber,
+    showCardNumberValidation,
+  };
 }

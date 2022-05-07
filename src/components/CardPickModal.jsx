@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import Button from 'components/common/Button';
-import CardColorButton from 'components/CardColorButton';
+import CardKindButton from 'components/CardKindButton';
 
 const cardPresets = [
   {
@@ -46,7 +46,7 @@ function CardPickModal({ setCardKind, toggleCardPickModal }) {
           X
         </Styled.CloseButton>
         {cardPresets.map(({ color, title }) => (
-          <CardColorButton
+          <CardKindButton
             key={`${color}-${title}`}
             buttonBgColor={color}
             cardTitle={title}

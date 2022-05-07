@@ -12,7 +12,7 @@ function Input({
   type,
   value,
   width,
-  onChangeFunc,
+  ...props
 }) {
   return (
     <>
@@ -24,7 +24,7 @@ function Input({
         type={type}
         value={value}
         width={width}
-        onChange={onChangeFunc}
+        {...props}
       />
     </>
   );

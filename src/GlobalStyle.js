@@ -1,13 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  body {
-    background: #e5e5e5;
-    display: flex;
-    font-family: 'Roboto', 'Malgun Gothic';
-    justify-content: center;
-  }
-
   * {
     margin: 0px;
   }
@@ -15,6 +8,17 @@ const GlobalStyle = createGlobalStyle`
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  body {
+    background: #e5e5e5;
+    display: flex;
+    font-family: 'Roboto', 'Malgun Gothic';
+    justify-content: center;
+  }
+
+  input:invalid {
+    border-color: red;
   }
 
   #modal {

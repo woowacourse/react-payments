@@ -20,7 +20,7 @@ import Header from 'components/common/Header';
 
 import { ReactComponent as Arrow } from 'assets/arrow.svg';
 
-import { RULE } from 'constants';
+import { ERROR_MESSAGE, RULE } from 'constants';
 
 function cardKindReducer(state, action) {
   switch (action.type) {
@@ -38,10 +38,17 @@ function cardKindReducer(state, action) {
 }
 
 function AddCard() {
-  const [cardNumber, setCardNumber, encryptedCardNumber] = useCardNumber('');
-  const [cardOwnerName, setCardOwnerName] = useCardOwnerName('');
-  const [validDate, setValidDate] = useValidDate('');
-  const [CVC, setCVC] = useCVC('');
+  const {
+    cardNumber,
+    encryptedCardNumber,
+    handleCardNumber,
+    showCardNumberValidation,
+  } = useCardNumber('');
+  const { cardOwnerName, handleCardOwnerName, showCardOwnerNameValidation } =
+    useCardOwnerName('');
+  const { validDate, handleValidDate, showValidDateValidation } =
+    useValidDate('');
+  const { CVC, handleCVC, showCVCValidation } = useCVC('');
   const [firstPassword, setFirstPassword] = useCardPassword('');
   const [secondPassword, setSecondPassword] = useCardPassword('');
   const [isToolTipOpen, toggleToolTip] = useReducer(visible => !visible, false);
@@ -85,18 +92,27 @@ function AddCard() {
       <Styled.CardAddForm onSubmit={handleSubmitNewCard}>
         <div>
           <Input
+            autoFocus
             description="카드 번호"
+            maxLength="19"
+            pattern=".{17,19}"
+            title={ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH}
             value={encryptedCardNumber}
-            onChangeFunc={setCardNumber}
+            onBlur={showCardNumberValidation}
+            onChange={handleCardNumber}
+            required
           />
         </div>
         <div>
           <Input
             description="만료일"
+            pattern="(0[1-9]|1[0-2])\/\d{2}"
             placeholder="MM / YY"
-            width="137px"
             value={validDate}
-            onChangeFunc={setValidDate}
+            width="137px"
+            onBlur={showValidDateValidation}
+            onChange={handleValidDate}
+            required
           />
         </div>
         <div>
@@ -105,18 +121,26 @@ function AddCard() {
           </Styled.CardOwnerNameLength>
           <Input
             description="카드 소유자 이름 (선택)"
+            maxLength="30"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             value={cardOwnerName}
-            onChangeFunc={setCardOwnerName}
+            pattern="[a-zA-Z]+"
+            title={ERROR_MESSAGE.INVALID_CARD_OWNER_NAME}
+            onBlur={showCardOwnerNameValidation}
+            onChange={handleCardOwnerName}
           />
         </div>
         <div>
           <Input
             description="보안 코드(CVC/CVV)"
+            minLength="2"
+            title={ERROR_MESSAGE.INAVALID_CVC}
             type="password"
             width="84px"
             value={CVC}
-            onChangeFunc={setCVC}
+            onBlur={showCVCValidation}
+            onChange={handleCVC}
+            required
           />
           <Button
             border="1px solid #BABABA"
@@ -124,7 +148,7 @@ function AddCard() {
             margin={{ l: '11px' }}
             shape="circle"
             size="small"
-            onClickFunc={toggleToolTip}
+            onClick={toggleToolTip}
           >
             ?
           </Button>
@@ -137,14 +161,16 @@ function AddCard() {
             type="password"
             width="43px"
             value={firstPassword}
-            onChangeFunc={setFirstPassword}
+            onChange={setFirstPassword}
+            required
           />
           <Input
             margin={{ r: '26px' }}
             type="password"
             width="43px"
             value={secondPassword}
-            onChangeFunc={setSecondPassword}
+            onChange={setSecondPassword}
+            required
           />
           <Styled.Bullet>•</Styled.Bullet>
           <Styled.Bullet>•</Styled.Bullet>
