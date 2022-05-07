@@ -15,6 +15,9 @@ import CVCTooltip from 'components/CVCTooltip';
 import Input from 'components/common/Input';
 import CardPickModal from 'components/CardPickModal';
 import ModalPortal from 'components/common/ModalPortal';
+import Header from 'components/common/Header';
+
+import { ReactComponent as Arrow } from 'assets/arrow.svg';
 
 import { RULE } from 'constants';
 
@@ -60,6 +63,11 @@ function AddCard() {
 
   return (
     <>
+      <Header title="카드 추가">
+        <Button size="small">
+          <Arrow />
+        </Button>
+      </Header>
       <Styled.Card
         bgColor={cardKind.color}
         size="medium"
@@ -70,76 +78,74 @@ function AddCard() {
         validDate={validDate}
       />
 
-      <form>
-        <Styled.InputGroup>
-          <div>
-            <Input
-              description="카드 번호"
-              value={encryptedCardNumber}
-              onChangeFunc={setCardNumber}
-            />
-          </div>
-          <div>
-            <Input
-              description="만료일"
-              placeholder="MM / YY"
-              width="137px"
-              value={validDate}
-              onChangeFunc={setValidDate}
-            />
-          </div>
-          <div>
-            <Styled.CardOwnerNameLength>
-              {cardOwnerName.length}/{RULE.CARD_OWNER_NAME_MAX_LENGTH}
-            </Styled.CardOwnerNameLength>
-            <Input
-              description="카드 소유자 이름 (선택)"
-              placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-              value={cardOwnerName}
-              onChangeFunc={setCardOwnerName}
-            />
-          </div>
-          <div>
-            <Input
-              description="보안 코드(CVC/CVV)"
-              type="password"
-              width="84px"
-              value={CVC}
-              onChangeFunc={setCVC}
-            />
-            <Button
-              border="1px solid #BABABA"
-              color="#969696"
-              margin={{ l: '11px' }}
-              shape="circle"
-              size="small"
-              onClickFunc={toggleToolTip}
-            >
-              ?
-            </Button>
-            <CVCTooltip visible={isToolTipOpen} />
-          </div>
-          <div>
-            <Input
-              description="카드 비밀번호"
-              margin={{ r: '7px' }}
-              type="password"
-              width="43px"
-              value={firstPassword}
-              onChangeFunc={setFirstPassword}
-            />
-            <Input
-              margin={{ r: '26px' }}
-              type="password"
-              width="43px"
-              value={secondPassword}
-              onChangeFunc={setSecondPassword}
-            />
-            <Styled.Bullet>•</Styled.Bullet>
-            <Styled.Bullet>•</Styled.Bullet>
-          </div>
-        </Styled.InputGroup>
-      </form>
+      <Styled.CardAddForm>
+        <div>
+          <Input
+            description="카드 번호"
+            value={encryptedCardNumber}
+            onChangeFunc={setCardNumber}
+          />
+        </div>
+        <div>
+          <Input
+            description="만료일"
+            placeholder="MM / YY"
+            width="137px"
+            value={validDate}
+            onChangeFunc={setValidDate}
+          />
+        </div>
+        <div>
+          <Styled.CardOwnerNameLength>
+            {cardOwnerName.length}/{RULE.CARD_OWNER_NAME_MAX_LENGTH}
+          </Styled.CardOwnerNameLength>
+          <Input
+            description="카드 소유자 이름 (선택)"
+            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+            value={cardOwnerName}
+            onChangeFunc={setCardOwnerName}
+          />
+        </div>
+        <div>
+          <Input
+            description="보안 코드(CVC/CVV)"
+            type="password"
+            width="84px"
+            value={CVC}
+            onChangeFunc={setCVC}
+          />
+          <Button
+            border="1px solid #BABABA"
+            color="#969696"
+            margin={{ l: '11px' }}
+            shape="circle"
+            size="small"
+            onClickFunc={toggleToolTip}
+          >
+            ?
+          </Button>
+          <CVCTooltip visible={isToolTipOpen} />
+        </div>
+        <div>
+          <Input
+            description="카드 비밀번호"
+            margin={{ r: '7px' }}
+            type="password"
+            width="43px"
+            value={firstPassword}
+            onChangeFunc={setFirstPassword}
+          />
+          <Input
+            margin={{ r: '26px' }}
+            type="password"
+            width="43px"
+            value={secondPassword}
+            onChangeFunc={setSecondPassword}
+          />
+          <Styled.Bullet>•</Styled.Bullet>
+          <Styled.Bullet>•</Styled.Bullet>
+        </div>
+      </Styled.CardAddForm>
 
       {requiredList.every(value => value !== '') && (
         <Styled.NextButton color="#04C09E" fontWeight="bold">
@@ -164,7 +170,7 @@ const Styled = {
     margin-bottom: 25px;
   `,
 
-  InputGroup: styled.div`
+  CardAddForm: styled.form`
     display: flex;
     flex-direction: column;
     row-gap: 19px;

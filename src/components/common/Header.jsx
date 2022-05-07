@@ -1,15 +1,11 @@
 import styled from 'styled-components';
 
-import Button from './common/Button';
+function Header({ children, title }) {
+  const path = location.pathname;
 
-import { ReactComponent as Arrow } from 'assets/arrow.svg';
-
-function Header({ title }) {
   return (
     <Styled.Root>
-      <Button size="small">
-        <Arrow />
-      </Button>
+      {children}
       <Styled.Title>{title}</Styled.Title>
     </Styled.Root>
   );

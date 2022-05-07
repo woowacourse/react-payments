@@ -21,10 +21,16 @@ const GlobalStyle = createGlobalStyle`
     position: absolute;
   }
 
-  
-  ::placeholder {
-    font-family: 'Roboto', 'Malgun Gothic';
+  #root {
+    background: #fff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    width: 400px;
+    height: 757px;
   }
+  
   `;
 
 export default GlobalStyle;
