@@ -3,6 +3,7 @@ import { useState, useContext, createContext } from 'react';
 const CardListContext = createContext({
   cardList: [],
   addCard: () => {},
+  updateCardInfo: () => {},
   getCardInfo: () => {},
 });
 
@@ -19,12 +20,20 @@ const CardListProvider = ({ children }) => {
     return cardId;
   };
 
+  const updateCardInfo = updatedCardInfo => {
+    const updatedCardList = cardList.map(cardInfo =>
+      cardInfo.id === updatedCardInfo.id ? updatedCardInfo : cardInfo
+    );
+
+    setCardList(updatedCardList);
+  };
+
   const getCardInfo = cardId => {
     return cardList.find(cardInfo => cardInfo.id === cardId);
   };
 
   return (
-    <CardListContext.Provider value={{ cardList, addCard, getCardInfo }}>
+    <CardListContext.Provider value={{ cardList, addCard, updateCardInfo, getCardInfo }}>
       {children}
     </CardListContext.Provider>
   );
