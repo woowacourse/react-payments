@@ -16,7 +16,7 @@ function CardNumberField({ cardNumber, onChange }) {
   return (
     <FieldSet
       title="카드 번호"
-      autoFocusLength={CARD_NUMBER.UNIT_LENGTH}
+      nextFocusLength={CARD_NUMBER.UNIT_LENGTH}
       errorMessage={errorMessage}
     >
       {Array.from({ length: CARD_NUMBER.UNIT_COUNT }).map((_, index) => (

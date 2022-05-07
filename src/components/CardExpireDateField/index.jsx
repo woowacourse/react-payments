@@ -17,7 +17,7 @@ function CardExpireDateField({ expireMonth, expireYear, onChange }) {
     <FieldSet
       title="만료일"
       inputWidth={50}
-      autoFocusLength={EXPIRE_DATE.MONTH_LENGTH}
+      nextFocusLength={EXPIRE_DATE.MONTH_LENGTH}
       errorMessage={errorMessage}
     >
       <TextField
