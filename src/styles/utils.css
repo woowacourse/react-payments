@@ -92,3 +92,8 @@
   background-color: #94dacd;
   opacity: 0.9;
 }
+
+.scroll-wrapper {
+  overflow-x: scroll;
+  height: 80%;
+}
