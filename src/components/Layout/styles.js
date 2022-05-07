@@ -23,13 +23,30 @@ const Container = styled.div`
     justify-content: space-between;
 
     & > div {
-      padding: 1rem;
       height: 100%;
 
       &.fill {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+      }
+
+      &.top {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+      }
+
+      &.center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      &.bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
       }
     }
 
@@ -47,8 +64,9 @@ const Container = styled.div`
   }
 
   ${responsive.notMobile(css`
-    width: 720px;
+    width: 740px;
     height: unset;
+    min-height: 25rem;
     box-shadow: 0px 0.625rem 1.875rem 1.25rem ${COLORS['black-05']};
 
     .layout-content {
