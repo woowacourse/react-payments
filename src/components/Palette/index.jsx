@@ -17,13 +17,14 @@ const cardList2 = [
   { color: 'yellow', name: '샐리 카드' },
 ];
 
-const Palette = () => {
+const Palette = ({ closeModal }) => {
   const { dispatch } = useCardFormContext();
   const onClickCardSelector = (color, name) => () => {
     dispatch({
       type: ACTION.CARD_TYPE,
       data: { cardType: { color, name } },
     });
+    closeModal();
   };
 
   return (
@@ -53,7 +54,7 @@ const Palette = () => {
 };
 
 Palette.propTypes = {
-  onClickCardSelector: PropTypes.func,
+  closeModal: PropTypes.func,
 };
 
 export default Palette;
