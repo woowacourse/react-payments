@@ -39,18 +39,14 @@ const CARD_COLORS = {
 
 const Container = styled.div`
   display: flex;
-  font-size: 16px;
   align-items: center;
   justify-content: center;
 
-  margin: 1.875rem 0 2.5rem;
-  transition: filter 0.3s ease;
-
-  ${({ color }) => css`
-    & > .card {
-      ${CARD_COLORS[color]}
-    }
-  `}
+  ${({ isMargin }) =>
+    isMargin &&
+    css`
+      margin: 0.5rem 0;
+    `};
 
   & > .card {
     cursor: pointer;
@@ -62,6 +58,10 @@ const Container = styled.div`
     box-shadow: 3px 1.563rem 1.563rem ${COLORS['black-25']};
     overflow: hidden;
     transition: filter 0.3s ease, opacity 0.2s ease;
+
+    ${({ color }) => css`
+      ${CARD_COLORS[color]}
+    `}
 
     &:hover {
       opacity: 0.8;
