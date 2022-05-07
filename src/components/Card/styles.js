@@ -76,7 +76,7 @@ const Container = styled.div`
           left: 30%;
           right: 0.5rem;
 
-          font-size: 1.6rem;
+          font-size: 1.2rem;
           letter-spacing: 1px;
           word-break: keep-all;
           line-height: 145%;
