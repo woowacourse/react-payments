@@ -1,11 +1,13 @@
 .card__container {
+  width: 250px;
+}
+.card-front__container {
   display: grid;
   grid-template-areas:
-    "na . . ."
-    "rf . . ."
-    "cn cn cn cn"
-    "ft ft ft ft";
-  background-color: #94dacd;
+    'na . . .'
+    'rf . . .'
+    'cn cn cn cn'
+    'ft ft ft ft';
   padding: 10px;
   width: 210px;
   height: 130px;
@@ -13,6 +15,7 @@
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
+
 .card__name {
   grid-area: na;
   margin: 5px 5px 15px 5px;
@@ -50,5 +53,57 @@
   .owner__name {
     word-break: break-all;
     margin-right: 30px;
+  }
+}
+
+.card-back__container {
+  display: grid;
+  grid-template-areas:
+    '. . . .'
+    'mg mg mg mg'
+    'at at . .'
+    'rb sl sl sl';
+  width: 230px;
+  height: 148px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.magnetic {
+  grid-area: mg;
+  background-color: black;
+  height: 25px;
+  width: 100%;
+}
+
+.authorization {
+  grid-area: at;
+  font-size: 10px;
+  font-family: roboto;
+  margin: 0px 0px 0px 10px;
+}
+
+.rfid-back {
+  grid-area: rb;
+  background-color: #cbba64;
+  width: 40px;
+  height: 25px;
+  margin: 0px 0px 10px 5px;
+  border-radius: 12px;
+}
+
+.signature-line {
+  grid-area: sl;
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgba(255, 255, 255, 0.95);
+  margin: 0px 5px 10px 0px;
+  padding: 2px;
+  height: 23px;
+  width: 120px;
+
+  .secure-code {
+    font-size: 13px;
   }
 }
