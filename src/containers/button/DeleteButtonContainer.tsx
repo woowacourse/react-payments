@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useAppDispatch, useAppState } from 'hooks/hooks';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';
-import Button from 'components/button/button';
+import Button from 'components/button/Button';
 
 function DeleteButtonContainer({ id }: { id: string }) {
   const { cardList } = useAppState();
