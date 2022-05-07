@@ -48,8 +48,8 @@ const isInputComplete = (state) => {
   return Object.entries(necessaryInputState).every(([_, value]) => value !== '');
 };
 
-const useCardState = () => {
-  const [cardState, dispatch] = useReducer(reducer, initialState);
+const useCardState = (cardData) => {
+  const [cardState, dispatch] = useReducer(reducer, cardData || initialState);
   const isComplete = isInputComplete(cardState);
 
   const onChangeCardState = ({ currentTarget }, option = {}) => {
