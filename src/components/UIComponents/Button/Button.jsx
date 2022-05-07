@@ -2,7 +2,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const StyledButton = styled.button`
-  width: 50px;
+  width: ${(props) => (props.isSvg ? "30px" : "50px")};
   height: 30px;
 
   border: none;
@@ -25,7 +25,7 @@ const StyledButton = styled.button`
 `;
 
 const StyledImg = styled.img`
-  width: 30px;
+  width: 25px;
 `;
 
 export default function Button({ type, onClick, position, children, isSvg }) {

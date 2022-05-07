@@ -1,5 +1,8 @@
-import { useContext, useState } from "react";
-import { CardInfoContext } from "../contexts/CardInfoContext";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import arrowBackIcon from "../assets/images/arrowBackIcon.svg";
+
+import useResetInput from "../Hooks/useResetInput";
 
 import CardPreview from "./UIComponents/CardPreview/CardPreview";
 import Button from "./UIComponents/Button/Button";
@@ -30,15 +33,25 @@ const smallCardCss = {
 };
 
 export default function AddCard() {
-  const {
-    state: { cardNumber, holderName, expireDate, securityCode, password },
-  } = useContext(CardInfoContext);
-
   const [isNextButtonClicked, setNextButtonClicked] = useState(false);
+  const [state, handleResetInput] = useResetInput();
+  const { cardNumber, holderName, expireDate, securityCode, password } = state;
 
   return (
     <>
-      <PageHeader>카드 추가</PageHeader>
+      <PageHeader>
+        <Link to="/possess-card">
+          <Button
+            onClick={handleResetInput}
+            type="button"
+            position={"static"}
+            isSvg={true}
+          >
+            {arrowBackIcon}
+          </Button>
+        </Link>
+        카드 추가
+      </PageHeader>
       <CardPreview
         cardNumber={cardNumber}
         holderName={holderName}

@@ -1,4 +1,7 @@
 import { createContext } from "react";
+
+import useInput from "../Hooks/useInput";
+
 import {
   initialCardNumber,
   initialExpireDate,
@@ -6,7 +9,6 @@ import {
   initialPassword,
   initialSecurityCode,
 } from "../data/initialData";
-import useInput from "../Hooks/useInput";
 import {
   isInValidCardNumber,
   isInValidExpireDate,
@@ -23,6 +25,13 @@ const CardInfoContext = createContext({
     securityCode: {},
     password: {},
   },
+  setState: {
+    setCardNumber: () => {},
+    setExpireDate: () => {},
+    setHolderName: () => {},
+    setSecurityCode: () => {},
+    setPassword: () => {},
+  },
   actions: {
     handleCardNumberUpdate: () => {},
     handleExpireDateUpdate: () => {},
@@ -33,29 +42,36 @@ const CardInfoContext = createContext({
 });
 
 const CardInfoProvider = ({ children }) => {
-  const [cardNumber, handleCardNumberUpdate] = useInput(
+  const [cardNumber, handleCardNumberUpdate, setCardNumber] = useInput(
     initialCardNumber,
     isInValidCardNumber
   );
-  const [expireDate, handleExpireDateUpdate] = useInput(
+  const [expireDate, handleExpireDateUpdate, setExpireDate] = useInput(
     initialExpireDate,
     isInValidExpireDate
   );
-  const [holderName, handleHolderNameUpdate] = useInput(
+  const [holderName, handleHolderNameUpdate, setHolderName] = useInput(
     initialHolderName,
     isInValidHolderName
   );
-  const [securityCode, handleSecurityCodeUpdate] = useInput(
+  const [securityCode, handleSecurityCodeUpdate, setSecurityCode] = useInput(
     initialSecurityCode,
     isInvalidSecurityCode
   );
-  const [password, handlePasswordUpdate] = useInput(
+  const [password, handlePasswordUpdate, setPassword] = useInput(
     initialPassword,
     isInvalidPassword
   );
 
   const value = {
     state: { cardNumber, expireDate, holderName, securityCode, password },
+    setState: {
+      setCardNumber,
+      setExpireDate,
+      setHolderName,
+      setSecurityCode,
+      setPassword,
+    },
     actions: {
       handleCardNumberUpdate,
       handleExpireDateUpdate,

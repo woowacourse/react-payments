@@ -7,6 +7,9 @@ const StyledPageHeaderContainer = styled.header`
 `;
 
 const StyledPageTitle = styled.h1`
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: ${(props) => props.fontSize};
   line-height: ${(props) => props.lineHeight};
   letter-spacing: -0.085em;

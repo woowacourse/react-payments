@@ -98,5 +98,5 @@ export default function useInput(initialValue, validator) {
     }
   };
 
-  return [value, onChange];
+  return [value, onChange, setValue];
 }
