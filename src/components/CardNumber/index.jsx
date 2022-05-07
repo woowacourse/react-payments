@@ -3,7 +3,7 @@ import useInputValue from '../../hooks/useInputValue';
 import FieldSet from '../FieldSet';
 import CardNumberInput from '../Input/CardNumberInput';
 import { checkCardNumber, checkNumberOnly } from '../../validation';
-import { useCardFormContext } from '../../context/card-form-context';
+import { useCardFormContext, ACTION } from '../../context/card-form-context';
 
 const CardNumber = () => {
   const { dispatch } = useCardFormContext();
@@ -52,12 +52,11 @@ const CardNumber = () => {
       !isError;
 
     if (!isInputCompleted) {
-      dispatch({ type: 'incomplete-input-card-numbers' });
       return;
     }
 
     dispatch({
-      type: 'complete-input-card-numbers',
+      type: ACTION.CARD_NUMBERS,
       data: {
         firstCardNumber,
         secondCardNumber,

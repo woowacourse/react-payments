@@ -6,28 +6,32 @@ const initialState = {
   secondCardNumber: '',
   thirdCardNumber: '',
   fourthCardNumber: '',
-  isCardNumberInputCompleted: false,
   ownerName: '',
-  isOwnerNameInputCompleted: true,
   secureCode: '',
-  isSecureCodeInputCompleted: false,
   expiredMonth: '',
   expiredYear: '',
-  isExpiredDateInputCompleted: false,
   firstPassword: '',
   secondPassword: '',
-  isPasswordInputCompleted: false,
   cardType: {
     color: 'red',
     name: '',
   },
 };
 
+const ACTION = {
+  CARD_NUMBERS: 'CARD_NUMBERS',
+  OWNER_NAME: 'OWNER_NAME',
+  SECURE_CODE: 'SECURE_CODE',
+  EXPIRED_DATE: 'EXPIRED_DATE',
+  PASSWORD: 'PASSWORD',
+  CARD_TYPE: 'CARD_TYPE',
+};
+
 const CardFormContext = createContext(initialState);
 
 const cardFormReducer = (state, action) => {
   switch (action.type) {
-    case 'complete-input-card-numbers': {
+    case ACTION.CARD_NUMBERS: {
       const {
         firstCardNumber,
         secondCardNumber,
@@ -40,71 +44,38 @@ const cardFormReducer = (state, action) => {
         secondCardNumber,
         thirdCardNumber,
         fourthCardNumber,
-        isCardNumberInputCompleted: true,
       };
     }
-    case 'incomplete-input-card-numbers': {
-      return { ...state, isCardNumberInputCompleted: false };
-    }
-    case 'complete-input-owner-name': {
+    case ACTION.OWNER_NAME: {
       return {
         ...state,
         ownerName: action.data.ownerName,
-        isOwnerNameInputCompleted: true,
       };
     }
-    case 'incomplete-input-owner-name': {
-      return { ...state, isOwnerNameInputCompleted: false };
-    }
-    case 'complete-input-secure-code': {
+    case ACTION.SECURE_CODE: {
       return {
         ...state,
         secureCode: action.data.secureCode,
-        isSecureCodeInputCompleted: true,
       };
     }
-    case 'incomplete-input-secure-code': {
-      return {
-        ...state,
-        isSecureCodeInputCompleted: false,
-      };
-    }
-
-    case 'complete-input-expired-date': {
+    case ACTION.EXPIRED_DATE: {
       const { expiredMonth, expiredYear } = action.data;
       return {
         ...state,
         expiredMonth,
         expiredYear,
-        isExpiredDateInputCompleted: true,
       };
     }
 
-    case 'incomplete-input-expired-date': {
-      return {
-        ...state,
-        isExpiredDateInputCompleted: false,
-      };
-    }
-
-    case 'complete-input-password': {
+    case ACTION.PASSWORD: {
       const { firstPassword, secondPassword } = action.data;
       return {
         ...state,
         firstPassword,
         secondPassword,
-        isPasswordInputCompleted: true,
       };
     }
-
-    case 'incomplete-input-password': {
-      return {
-        ...state,
-        isPasswordInputCompleted: false,
-      };
-    }
-
-    case 'complete-select-cardType': {
+    case ACTION.CARD_TYPE: {
       return {
         ...state,
         cardType: action.data.cardType,
@@ -134,4 +105,4 @@ CardFormProvider.propTypes = {
   children: PropTypes.element,
 };
 
-export { CardFormProvider, useCardFormContext };
+export { CardFormProvider, useCardFormContext, ACTION };

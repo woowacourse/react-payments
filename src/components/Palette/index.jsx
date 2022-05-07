@@ -1,8 +1,7 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import ColorPicker from './ColorPicker';
 import * as styled from './index.styled';
-import { useCardFormContext } from '../../context/card-form-context';
+import { useCardFormContext, ACTION } from '../../context/card-form-context';
 
 const cardList1 = [
   { color: 'red', name: '포코 카드' },
@@ -22,7 +21,7 @@ const Palette = () => {
   const { dispatch } = useCardFormContext();
   const onClickCardSelector = (color, name) => () => {
     dispatch({
-      type: 'complete-select-cardType',
+      type: ACTION.CARD_TYPE,
       data: { cardType: { color, name } },
     });
   };

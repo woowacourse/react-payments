@@ -5,7 +5,7 @@ import Input from '../Input';
 import DotMark from '../DotMark';
 import { checkPassword, checkNumberOnly } from '../../validation';
 import * as styled from './index.styled';
-import { useCardFormContext } from '../../context/card-form-context';
+import { ACTION, useCardFormContext } from '../../context/card-form-context';
 
 const Password = () => {
   const { dispatch } = useCardFormContext();
@@ -22,13 +22,17 @@ const Password = () => {
 
   useEffect(() => {
     if (
-      firstPassword.length > 0 &&
-      secondPassword.length > 0 &&
-      !isFirstPasswordError &&
-      !isSecondPasswordError
-    ) {
-      dispatch({ type: '' });
-    }
+      firstPassword.length <= 0 ||
+      secondPassword.length <= 0 ||
+      isFirstPasswordError ||
+      isSecondPasswordError
+    )
+      return;
+
+    dispatch({
+      type: ACTION.PASSWORD,
+      data: { firstPassword, secondPassword },
+    });
   }, [
     firstPassword,
     secondPassword,

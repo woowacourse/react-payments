@@ -4,7 +4,7 @@ import FieldSet from '../FieldSet';
 import Input from '../Input';
 import AskMarkTooltip from '../AskMarkTooltip';
 import { checkSecureCode, checkNumberOnly } from '../../validation';
-import { useCardFormContext } from '../../context/card-form-context';
+import { ACTION, useCardFormContext } from '../../context/card-form-context';
 import * as styled from './index.styled';
 
 const SecureCode = () => {
@@ -15,11 +15,8 @@ const SecureCode = () => {
   });
 
   useEffect(() => {
-    if (secureCode.length > 0 && !isSecureCodeError) {
-      dispatch({ type: 'complete-input-secure-code', data: { secureCode } });
-      return;
-    }
-    dispatch({ type: 'incomplete-input-secure-code' });
+    if (secureCode.length <= 0 || isSecureCodeError) return;
+    dispatch({ type: ACTION.SECURE_CODE, data: { secureCode } });
   }, [secureCode, isSecureCodeError, dispatch]);
 
   return (

@@ -3,7 +3,7 @@ import useInputValue from '../../hooks/useInputValue';
 import FieldSet from '../FieldSet';
 import Input from '../Input';
 import { checkOwnerName } from '../../validation';
-import { useCardFormContext } from '../../context/card-form-context';
+import { ACTION, useCardFormContext } from '../../context/card-form-context';
 import * as styled from './index.styled';
 
 const showOwnerNameLength = (length) => {
@@ -17,11 +17,8 @@ const CardOwner = () => {
   });
 
   useEffect(() => {
-    if (isOwnerNameError) {
-      dispatch({ type: 'incomplete-input-owner-name' });
-      return;
-    }
-    dispatch({ type: 'complete-input-owner-name', data: { ownerName } });
+    if (isOwnerNameError) return;
+    dispatch({ type: ACTION.OWNER_NAME, data: { ownerName } });
   }, [isOwnerNameError, ownerName, dispatch]);
 
   return (
