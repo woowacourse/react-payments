@@ -4,7 +4,7 @@ import AddCardForm from '../../components/AddCardForm';
 import Modal from '../../components/Modal';
 import Palette from '../../components/Palette';
 
-const AddCardPage = () => {
+const AddCard = () => {
   const [isModalOpened, setModalStatus] = useState(false);
 
   const openModal = () => {
@@ -26,4 +26,4 @@ const AddCardPage = () => {
   );
 };
 
-export default AddCardPage;
+export default AddCard;
