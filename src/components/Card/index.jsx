@@ -13,7 +13,7 @@ const formatCardNumber = (cardNumber) => {
   return newCardNumber.join('-');
 };
 
-function Card({ size, companyName, cardNumber, userName, expireMonth, expireYear }) {
+function Card({ size, companyName, cardNumber, userName, expireMonth, expireYear, cardNickname }) {
   const cardTextStyle = size === 'small' ? 'card-text' : 'card-text__big';
 
   return (
@@ -34,6 +34,7 @@ function Card({ size, companyName, cardNumber, userName, expireMonth, expireYear
           </div>
         </div>
       </div>
+      <span className="card-nickname">{cardNickname}</span>
     </div>
   );
 }
@@ -45,6 +46,7 @@ Card.defaultProps = {
   userName: '',
   expireMonth: '',
   expireYear: '',
+  cardNickname: '',
 };
 
 Card.propTypes = {
@@ -54,6 +56,7 @@ Card.propTypes = {
   userName: PropTypes.string,
   expireMonth: PropTypes.string,
   expireYear: PropTypes.string,
+  cardNickname: PropTypes.string,
 };
 
 export default Card;
