@@ -5,6 +5,7 @@ const HeaderWrapper = styled.div`
   align-items: center;
 
   & h1 {
+    flex: 1;
     font-size: 16px;
     margin-left: 15px;
   }

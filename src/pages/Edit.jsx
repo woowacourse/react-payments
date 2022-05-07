@@ -10,7 +10,6 @@ function Edit() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [originData, setOriginDate] = useState();
-
   const cardList = useContext(CardListContext);
 
   useEffect(() => {
@@ -26,8 +25,6 @@ function Edit() {
 
     setOriginDate(targetCard);
   }, [id, cardList]);
-
-  console.log(originData);
 
   return (
     <PageWrapper>

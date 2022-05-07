@@ -17,7 +17,7 @@ import CardOwnerInput from "./CardOwnerInput";
 import CardCVCInput from "./CardCVCInput";
 import CardPasswordInput from "./CardPasswordInput";
 
-import { CARD_NUMBER, CARD_SIZE, DUE_DATE, CVC } from "constant";
+import { COLORS, CARD_NUMBER, CARD_SIZE, DUE_DATE, CVC } from "constant";
 import { isValidCvc, isValidOwnerLength } from "validation";
 import { ReactComponent as ArrowImage } from "assets/arrow.svg";
 import { CardWrapper, FooterWrapper } from "pages/style";
@@ -51,7 +51,7 @@ function CardEditor({ isEdit, originData }) {
   const { modalVisible, openModal, closeModal } = useModal();
   const [allRequired, setAllRequired] = useState(false);
 
-  const { onCreate, onEditCard } = useContext(CardDispatchContext);
+  const { onCreate, onEditCard, onRemove } = useContext(CardDispatchContext);
   const cardId = useRef(Date.now());
 
   useEffect(() => {
@@ -108,6 +108,13 @@ function CardEditor({ isEdit, originData }) {
     }
   };
 
+  const handleRemoveCard = () => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      onRemove(originData.cardId);
+      navigate("/", { replace: true });
+    }
+  };
+
   return (
     <>
       <Header
@@ -115,6 +122,13 @@ function CardEditor({ isEdit, originData }) {
           <Button onClick={() => navigate("/")}>
             <ArrowImage />
           </Button>
+        }
+        rightChild={
+          isEdit && (
+            <Button color={COLORS.PINK} onClick={handleRemoveCard}>
+              삭제
+            </Button>
+          )
         }
         headText={isEdit ? "카드 정보 수정" : "카드 추가"}
       />

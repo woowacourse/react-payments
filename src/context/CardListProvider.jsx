@@ -22,6 +22,10 @@ const cardListReducer = (state, action) => {
       );
       break;
     }
+    case ACTION.REMOVE: {
+      newState = state.filter((data) => data.cardId !== action.targetId);
+      break;
+    }
     default: {
       return newState;
     }
@@ -85,10 +89,14 @@ function CardListProvider({ children }) {
     });
   };
 
+  const onRemove = (targetId) => {
+    dispatch({ type: ACTION.REMOVE, targetId });
+  };
+
   return (
     <CardListContext.Provider value={cardListData}>
       <CardDispatchContext.Provider
-        value={{ onCreate, onEditNickname, onEditCard }}
+        value={{ onCreate, onEditNickname, onEditCard, onRemove }}
       >
         {children}
       </CardDispatchContext.Provider>

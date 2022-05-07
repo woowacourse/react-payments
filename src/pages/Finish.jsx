@@ -18,12 +18,12 @@ import {
 function Finish() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const cardList = useContext(CardListContext);
-  const { onEditNickname } = useContext(CardDispatchContext);
   const [nickname, , handleChangeNickname] = useInput({
     initialValue: "",
     validator: isValidNickname,
   });
+  const cardList = useContext(CardListContext);
+  const { onEditNickname } = useContext(CardDispatchContext);
 
   const myCard = cardList.find((card) => Number(card.cardId) === Number(id));
 
