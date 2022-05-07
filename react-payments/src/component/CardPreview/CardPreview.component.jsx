@@ -5,8 +5,7 @@ import styled from "styled-components";
 import Card from "component/common/Card/Card.component";
 import CardNameInput from "component/CardNameInput/CardNameInput.component";
 import MessageBox from "component/common/MessageBox/MessageBox.component";
-import Modal from "component/common/Modal/Modal.component";
-import CardControlButtonBox from "component/CardControlButtonBox/CardControlButtonBox.component";
+import CardControlModal from "component/CardControlModal/CardControlModal";
 
 import useReady from "hooks/useReady";
 import { isDuplicatedCardName, isInvalidCardName } from "util/validator";
@@ -157,12 +156,12 @@ const CardPreview = ({ cardDatum, idx }) => {
         )}
       </CardNameText>
       {isShowModal && (
-        <Modal toggleModal={toggleModal} type="edit">
-          <CardControlButtonBox
-            handleEditCard={() => handleEditCard(idx)}
-            handleDeleteCard={handleDeleteCard}
-          />
-        </Modal>
+        <CardControlModal
+          toggleModal={toggleModal}
+          type="edit"
+          handleEditCard={() => handleEditCard(idx)}
+          handleDeleteCard={handleDeleteCard}
+        />
       )}
     </>
   );

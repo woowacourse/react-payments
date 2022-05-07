@@ -2,10 +2,8 @@ import { useContext, useEffect, useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Card from "component/common/Card/Card.component";
-import CardTypeSelector from "component/CardTypeSelector/CardTypeSelector.component";
 import Header from "component/common/Header/Header.component";
 import LinkButton from "component/common/LinkButton/LinkButton.component";
-import Modal from "component/common/Modal/Modal.component";
 import PageTitle from "component/common/PageTitle/PageTitle.component";
 import CardNumberContainer from "component/CardNumberContainer/CardNumberContainer.component";
 import ExpireDateContainer from "component/ExpireDateContainer/ExpireDateContainer.component";
@@ -13,6 +11,7 @@ import UserNameContainer from "component/UserNameContainer/UserNameContainer.com
 import SecurityCodeContainer from "component/SecurityCodeContainer/SecurityCodeContainer.component";
 import CardPasswordContainer from "component/CardPasswordContainer/CardPasswordContainer.component";
 import PageContainer from "component/common/PageContainer/PageContainer.component";
+import ColorBoxModal from "component/ColorBoxModal/ColorBoxModal.component";
 
 import useReady from "hooks/useReady";
 import { isAllInputReady } from "util/validator";
@@ -174,11 +173,7 @@ const CardAddPage = () => {
             다음
           </LinkButton>
         ))}
-      {isShowModal && (
-        <Modal toggleModal={toggleShowModal}>
-          <CardTypeSelector />
-        </Modal>
-      )}
+      {isShowModal && <ColorBoxModal toggleModal={toggleShowModal} />}
     </PageContainer>
   );
 };

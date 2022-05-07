@@ -4,8 +4,7 @@ import { RowFlexWrapper } from "styles/wrapper";
 
 const DimmedModal = styled.div`
   width: 100%;
-  height: 100%;
-
+  height: 120%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -15,8 +14,6 @@ const DimmedModal = styled.div`
   left: 0;
 
   background: rgba(0, 0, 0, 0.5);
-
-  z-index: 5;
 `;
 
 const ModalBox = styled(RowFlexWrapper)`
@@ -32,7 +29,6 @@ const ModalBox = styled(RowFlexWrapper)`
   border-radius: 5px 5px 0 0;
   flex-wrap: wrap;
   background: ${({ theme }) => theme.colors.pageDefault};
-  z-index: 10;
 `;
 
 const Modal = ({ toggleModal, children, type }) => {

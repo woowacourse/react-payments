@@ -1,11 +1,14 @@
 import CardTypeSelector from "component/CardTypeSelector/CardTypeSelector.component";
-import Modal from "component/common/Modal/modal.component";
+import Modal from "component/common/Modal/Modal.component";
+import ModalPortal from "../common/ModalPortal/ModalPortal.component";
 
-const ColorBoxModal = (props) => {
+const ColorBoxModal = ({ toggleModal }) => {
   return (
-    <Modal>
-      <CardTypeSelector {...props} />
-    </Modal>
+    <ModalPortal>
+      <Modal toggleModal={toggleModal}>
+        <CardTypeSelector />
+      </Modal>
+    </ModalPortal>
   );
 };
 
