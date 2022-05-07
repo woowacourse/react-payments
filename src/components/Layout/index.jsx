@@ -1,11 +1,14 @@
 import Header from 'components/@common/Header';
+import { usePageContext } from 'contexts/PageContext';
 
 import Container from './styles';
 
 function Layout({ children }) {
+  const { pageTitle } = usePageContext();
+
   return (
     <Container>
-      <Header>카드 추가</Header>
+      <Header>{pageTitle}</Header>
       <div className="layout-content">{children}</div>
     </Container>
   );
