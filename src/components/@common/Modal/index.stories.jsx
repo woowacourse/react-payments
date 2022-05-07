@@ -1,5 +1,3 @@
-import App from 'App';
-import Layout from 'components/Layout';
 import Modal from '.';
 
 export default {
@@ -13,6 +11,6 @@ export default {
 const Template = (args) => <Modal {...args}>모달의 컨텐츠가 표기 됩니다</Modal>;
 
 const Default = Template.bind({});
-Default.args = { isVisible: true };
+Default.args = { className: 'visible' };
 
 export { Default };
