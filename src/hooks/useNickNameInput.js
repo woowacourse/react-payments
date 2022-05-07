@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
-import { CardContext } from '../context/CardContext';
-import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
+import { CardContext } from 'context/CardContext';
+import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 
 function useNickNameInput() {
   const { inputtedInfoDispatch } = useContext(CardContext);

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import Head from '../../components/Modules/Head';
-import Card from '../../components/Modules/Card';
+import Head from 'components/Modules/Head';
+import Card from 'components/Modules/Card';
 import { useContext } from 'react';
-import { CardContext } from '../../context/CardContext';
+import { CardContext } from 'context/CardContext';
 import { Fragment } from 'react';
-import AddCard from '../../components/Modules/AddCard';
+import AddCard from 'components/Modules/AddCard';
 
 const Page = styled.div`
   display: flex;

@@ -1,8 +1,8 @@
 import { useState, useContext, useEffect } from 'react';
-import { numberRegex } from '../constant/regularExpression';
-import validator from '../validation';
-import { CardContext } from '../context/CardContext';
-import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
+import { numberRegex } from 'constant/regularExpression';
+import validator from 'validation';
+import { CardContext } from 'context/CardContext';
+import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 
 function useSecurityNumberInput() {
   const { inputtedInfoDispatch } = useContext(CardContext);

@@ -1,4 +1,4 @@
-import { INPUT_TYPE } from '../constant';
+import { INPUT_TYPE } from 'constant';
 
 const validator = {
   validateCardNumber: cardNumber => {

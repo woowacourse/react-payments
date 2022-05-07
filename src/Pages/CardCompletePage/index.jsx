@@ -1,10 +1,10 @@
 import { useContext, useEffect } from 'react';
-import { CardContext } from '../../context/CardContext';
+import { CardContext } from 'context/CardContext';
 import styled from 'styled-components';
-import Card from '../../components/Modules/Card';
-import CardNickNameForm from '../../components/Templates/CardNickNameForm';
+import Card from 'components/Modules/Card';
+import CardNickNameForm from 'components/Templates/CardNickNameForm';
 import { useNavigate } from 'react-router-dom';
-import CardDeleteButton from '../../components/Atoms/CardDeleteButton';
+import CardDeleteButton from 'components/Atoms/CardDeleteButton';
 
 const Page = styled.div`
   display: flex;

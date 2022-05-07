@@ -1,8 +1,8 @@
 import { useState, useContext, useEffect } from 'react';
-import { englishRegex } from '../constant/regularExpression';
-import { CardContext } from '../context/CardContext';
-import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
-import validator from '../validation';
+import { englishRegex } from 'constant/regularExpression';
+import { CardContext } from 'context/CardContext';
+import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
+import validator from 'validation';
 
 function useCardOwnerInput() {
   const { inputtedInfoDispatch } = useContext(CardContext);

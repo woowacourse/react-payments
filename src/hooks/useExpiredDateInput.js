@@ -1,11 +1,11 @@
 import { useContext, useEffect } from 'react';
-import { COUNT } from '../constant';
-import { numberRegex } from '../constant/regularExpression';
-import { CardContext } from '../context/CardContext';
-import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
-import validator from '../validation';
-import useFocus from './useFocus';
-import useSomeInput from './useSomeInput';
+import { COUNT } from 'constant';
+import { numberRegex } from 'constant/regularExpression';
+import { CardContext } from 'context/CardContext';
+import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
+import validator from 'validation';
+import useFocus from 'hooks/useFocus';
+import useSomeInput from 'hooks/useSomeInput';
 
 function useExpiredDateInput(inputNames) {
   const { inputtedInfoDispatch } = useContext(CardContext);

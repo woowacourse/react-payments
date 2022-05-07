@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { COUNT, PLACEHOLDER } from '../constant';
-import { CARD_NUMBER_MARK } from '../constant/mark';
-import { CardContext } from '../context/CardContext';
-import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
+import { COUNT, PLACEHOLDER } from 'constant';
+import { CARD_NUMBER_MARK } from 'constant/mark';
+import { CardContext } from 'context/CardContext';
+import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 import { useNavigate } from 'react-router-dom';
 
 function useCard({ cardNumber, expiredDate, ownerName }) {

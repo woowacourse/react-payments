@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import useCardDeleteButton from '../../../hooks/useCardDeleteButton';
+import useCardDeleteButton from 'hooks/useCardDeleteButton';
 
 const Button = styled.button`
   background-color: transparent;

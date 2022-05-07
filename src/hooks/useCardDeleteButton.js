@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CardContext } from '../context/CardContext';
-import { CARD_ACTION } from '../Reducer/CardReducer';
-import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
+import { CardContext } from 'context/CardContext';
+import { CARD_ACTION } from 'Reducer/CardReducer';
+import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 
 function useCardDeleteButton() {
   const navigator = useNavigate();

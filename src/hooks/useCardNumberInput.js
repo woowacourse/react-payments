@@ -1,11 +1,11 @@
-import validator from '../validation';
+import validator from 'validation';
 import { useContext, useEffect } from 'react';
-import useFocus from './useFocus';
-import useSomeInput from './useSomeInput';
-import { COUNT } from '../constant';
-import { numberRegex } from '../constant/regularExpression';
-import { CardContext } from '../context/CardContext';
-import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
+import useFocus from 'hooks/useFocus';
+import useSomeInput from 'hooks/useSomeInput';
+import { COUNT } from 'constant';
+import { numberRegex } from 'constant/regularExpression';
+import { CardContext } from 'context/CardContext';
+import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 
 function useCardNumberInput(inputNames) {
   const { inputtedInfoDispatch } = useContext(CardContext);

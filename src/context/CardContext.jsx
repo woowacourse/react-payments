@@ -1,9 +1,9 @@
 import { createContext, useReducer } from 'react';
-import { CardReducer, initialCardData } from '../Reducer/CardReducer';
+import { CardReducer, initialCardData } from 'Reducer/CardReducer';
 import {
   inputtedInfoReducer,
   initialInputtedInfo,
-} from '../Reducer/InputtedInfoReducer';
+} from 'Reducer/InputtedInfoReducer';
 
 const CardContext = createContext();
 
