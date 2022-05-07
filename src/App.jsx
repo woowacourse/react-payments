@@ -6,26 +6,10 @@ import Header from 'components/common/Header';
 import MainPage from 'page/main';
 import CardAppPage from 'page/cardAdd';
 import ConfirmationPage from 'page/confirmation';
+import reducer from 'reducer/card';
 
 const initialState = {
   cards: [],
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'CREATE_CARD':
-      return {
-        cards: state.cards.concat(action.card),
-      };
-    case 'SET_ALIAS':
-      return {
-        cards: state.cards.map((card) =>
-          card.id === action.id ? { ...card, alias: action.alias } : card,
-        ),
-      };
-    default:
-      return state;
-  }
 };
 
 export const CardDispatch = createContext(null);
