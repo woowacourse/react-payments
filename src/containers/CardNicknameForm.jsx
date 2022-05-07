@@ -1,8 +1,9 @@
 import React from "react";
-import { Form } from "../components";
-import Button from "../components/UIComponents/Button/Button";
-import Input from "../components/UIComponents/Input/Input";
-import InputField from "../components/UIComponents/InputField/InputField";
+
+import { Form } from "components";
+import Button from "components/UIComponents/Button/Button";
+import Input from "components/UIComponents/Input/Input";
+import InputField from "components/UIComponents/InputField/InputField";
 
 export default function CardNicknameForm({ handleAddNickname }) {
   return (

@@ -1,14 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import useLocalStorage from "../useLocalStorage.jsx";
-import CardInfoContext from "../context/CardInfoContext.jsx";
+import useLocalStorage from "useLocalStorage.jsx";
+import CardInfoContext from "context/CardInfoContext.jsx";
 
-import PageHeader from "./PageHeader.jsx";
+import PageHeader from "containers/PageHeader.jsx";
+import CardInfoForm from "containers/CardInfoForm.jsx";
+import CardNicknameForm from "containers/CardNicknameForm.jsx";
 
-import { CardPreview } from "../components";
-import CardInfoForm from "../containers/CardInfoForm.jsx";
-import CardNicknameForm from "../containers/CardNicknameForm.jsx";
+import { CardPreview } from "components";
 
 import {
   CARD_REGISTER_SUCCESS_MESSAGE,

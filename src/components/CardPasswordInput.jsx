@@ -1,11 +1,10 @@
 import React, { useCallback, useContext, useState } from "react";
-import Input from "./UIComponents/Input/Input.jsx";
-import {
-  CARD_INFO_RULES,
-  CREATE_MASKED_CHARACTERS,
-} from "../utils/constants.js";
-import CardInfoContext from "../context/CardInfoContext.jsx";
-import InputField from "./UIComponents/InputField/InputField.jsx";
+import CardInfoContext from "context/CardInfoContext.jsx";
+
+import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "utils/constants.js";
+
+import Input from "components/UIComponents/Input/Input.jsx";
+import InputField from "components/UIComponents/InputField/InputField.jsx";
 
 export default function CardPasswordInput() {
   const [isInvalid, setInvalid] = useState(false);

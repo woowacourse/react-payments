@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import HelpIconImage from "../../../assets/images/questionMark.svg";
+import HelpIconImage from "assets/images/questionMark.svg";
 
 const StyledIconContainer = styled.div`
   position: relative;

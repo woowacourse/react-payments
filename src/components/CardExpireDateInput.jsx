@@ -1,8 +1,10 @@
 import React, { useCallback, useContext, useState } from "react";
-import { CARD_INFO_RULES } from "../utils/constants.js";
-import CardInfoContext from "../context/CardInfoContext.jsx";
-import Input from "./UIComponents/Input/Input.jsx";
-import InputField from "./UIComponents/InputField/InputField.jsx";
+import CardInfoContext from "context/CardInfoContext.jsx";
+
+import { CARD_INFO_RULES } from "utils/constants.js";
+
+import Input from "components/UIComponents/Input/Input.jsx";
+import InputField from "components/UIComponents/InputField/InputField.jsx";
 
 export default function CardExpireDateInput() {
   const [isInvalid, setInvalid] = useState(false);

@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   CardExpireDateInput,
   CardHolderNameInput,
@@ -6,8 +7,9 @@ import {
   CardPasswordInput,
   CardSecurityCodeInput,
   Form,
-} from "../components";
-import Button from "../components/UIComponents/Button/Button";
+} from "components";
+
+import Button from "components/UIComponents/Button/Button";
 
 export default function CardInfoForm({
   handleFormSubmit,

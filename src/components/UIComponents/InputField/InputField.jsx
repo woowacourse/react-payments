@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { textColor } from "../styleConstants";
+
+import { textColor } from "components/UIComponents/styleConstants";
 
 const widthPreset = {
   xs: "45px",

@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import { CardPreview } from "../components";
-import PageHeader from "./PageHeader";
-import useLocalStorage from "../useLocalStorage";
-import { PAGE_NAME } from "../utils/constants";
+import { CardPreview } from "components";
+import PageHeader from "containers/PageHeader";
+import useLocalStorage from "useLocalStorage";
+import { PAGE_NAME } from "utils/constants";
 
 const CardList = styled.div`
   display: flex;
