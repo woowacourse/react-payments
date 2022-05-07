@@ -5,15 +5,15 @@ import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 import { useNavigate } from 'react-router-dom';
 import { MESSAGE } from '../../constant/message';
 
-function useCardNickNameForm(link) {
+function useCardNameForm(link) {
   const navigator = useNavigate();
   const { inputtedInfo, cardDispatch, inputtedInfoDispatch } =
     useContext(CardContext);
 
-  const { cardNumber, nickName } = inputtedInfo;
-  const isValidForm = nickName ? nickName.isValid : false;
+  const { cardNumber, cardName } = inputtedInfo;
+  const isValidForm = cardName ? cardName.isValid : false;
 
-  const onNickNameSubmit = event => {
+  const onCardNameSubmit = event => {
     event.preventDefault();
 
     if (!isValidForm) {
@@ -23,7 +23,7 @@ function useCardNickNameForm(link) {
 
     cardDispatch({
       type: CARD_ACTION.NAME_EDIT,
-      value: nickName,
+      value: cardName,
       targetCardNumber: cardNumber.value,
     });
 
@@ -34,7 +34,7 @@ function useCardNickNameForm(link) {
     navigator(link);
   };
 
-  return { isValidForm, onNickNameSubmit };
+  return { isValidForm, onCardNameSubmit };
 }
 
-export default useCardNickNameForm;
+export default useCardNameForm;

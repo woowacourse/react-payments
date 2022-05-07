@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import SubmitButton from '../../Atoms/SubmitButton';
-import NickNameInput from '../../Modules/NickNameInput';
-import useCardNickNameForm from '../../../hooks/Form/useCardNickNameForm';
+import CardNameInput from '../../Modules/CardNameInput';
+import useCardNameForm from '../../../hooks/Form/useCardNameForm';
 
 const Form = styled.form`
   display: flex;
@@ -18,12 +18,12 @@ const SubmitButtonWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-function CardNickNameForm({ link }) {
-  const { isValidForm, onNickNameSubmit } = useCardNickNameForm(link);
+function CardNameForm({ link }) {
+  const { isValidForm, onCardNameSubmit } = useCardNameForm(link);
 
   return (
-    <Form onSubmit={onNickNameSubmit}>
-      <NickNameInput />
+    <Form onSubmit={onCardNameSubmit}>
+      <CardNameInput />
       <SubmitButtonWrapper>
         <SubmitButton hidden={!isValidForm}>확인</SubmitButton>
       </SubmitButtonWrapper>
@@ -31,4 +31,4 @@ function CardNickNameForm({ link }) {
   );
 }
 
-export default CardNickNameForm;
+export default CardNameForm;

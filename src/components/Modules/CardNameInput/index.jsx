@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { COUNT, INPUT_PLACEHOLDER } from '../../../constant';
-import useNickNameInput from '../../../hooks/Input/useNickNameInput';
+import useCardNameInput from '../../../hooks/Input/useCardNameInput';
 import Input from '../../Atoms/Input';
 
 const InputWrapper = styled.div`
@@ -10,23 +10,23 @@ const InputWrapper = styled.div`
   line-height: 21px;
 `;
 
-function NickNameInput() {
-  const { nickName, validation, onNickNameChange } = useNickNameInput();
+function CardNameInput() {
+  const { cardName, validation, onCardNameChange } = useCardNameInput();
 
   return (
     <InputWrapper>
       <Input
-        value={nickName}
+        value={cardName}
         width="244px"
         height="22px"
         backgroundColor="white"
         maxLength={COUNT.CARD_NAME_MAX_LENGTH}
         placeholder={INPUT_PLACEHOLDER.CARD_NAME}
-        onChange={onNickNameChange}
+        onChange={onCardNameChange}
         isValid={validation}
       />
     </InputWrapper>
   );
 }
 
-export default NickNameInput;
+export default CardNameInput;

@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { CardContext } from 'context/CardContext';
 import styled from 'styled-components';
 import Card from 'components/Modules/Card';
-import CardNickNameForm from 'components/Templates/CardNickNameForm';
+import CardNameForm from 'components/Templates/CardNameForm';
 import { useNavigate } from 'react-router-dom';
 import CardDeleteButton from 'components/Atoms/CardDeleteButton';
 import { LINK } from '../../constant/Link';
@@ -49,7 +49,7 @@ function CardCompletePage() {
       <CardSection>
         <Card {...inputtedInfo} disable={true} />
       </CardSection>
-      <CardNickNameForm link={LINK.CARD_LIST_PAGE} />
+      <CardNameForm link={LINK.CARD_LIST_PAGE} />
       <CardDeleteButton>카드삭제</CardDeleteButton>
     </Page>
   );

@@ -4,7 +4,7 @@ const INPUT_ACTION = {
   OWNER_NAME: 'OWNER_NAME',
   SECURITY_NUMBER: 'SECURITY_NUMBER',
   PASSWORD: 'PASSWORD',
-  NICK_NAME: 'NICK_NAME',
+  CARD_NAME: 'CARD_NAME',
   EQUALIZE: 'EQUALIZE',
   CLEAR: 'CLEAR',
 };
@@ -53,10 +53,10 @@ function inputtedInfoReducer(state, action) {
           isValid: action.valid,
         },
       };
-    case INPUT_ACTION.NICK_NAME:
+    case INPUT_ACTION.CARD_NAME:
       return {
         ...state,
-        nickName: {
+        cardName: {
           value: action.value,
           isValid: action.valid,
         },

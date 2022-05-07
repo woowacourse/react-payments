@@ -30,10 +30,10 @@ function CardListPage() {
       <ListContainer>
         {cardData.map(cardInfo => (
           <Fragment
-            key={cardInfo.cardNumber.value.fist + cardInfo.nickName.value}
+            key={cardInfo.cardNumber.value.fist + cardInfo.cardName.value}
           >
             <Card {...cardInfo} />
-            <span>{cardInfo.nickName.value}</span>
+            <span>{cardInfo.cardName.value}</span>
           </Fragment>
         ))}
         <AddCard link={LINK.CARD_ADD_PAGE} />

@@ -10,7 +10,7 @@ function useCardAddForm(link) {
   const { inputtedInfo, cardData, cardDispatch } = useContext(CardContext);
 
   const isValidForm = Object.keys(inputtedInfo)
-    .map(key => (key === 'nickName' ? true : inputtedInfo[key].isValid))
+    .map(key => (key === 'cardName' ? true : inputtedInfo[key].isValid))
     .every(isValid => isValid);
 
   const onAddFormSubmit = event => {
@@ -32,7 +32,7 @@ function useCardAddForm(link) {
 
     cardDispatch({
       type: CARD_ACTION.ADD,
-      value: { ...inputtedInfo, nickName: { value: NO_CARD_NAME } },
+      value: { ...inputtedInfo, cardName: { value: NO_CARD_NAME } },
     });
 
     navigator(link);

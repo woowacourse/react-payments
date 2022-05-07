@@ -3,29 +3,29 @@ import { CardContext } from 'context/CardContext';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 import { noSpecialCharacters } from '../../constant/regularExpression';
 
-function useNickNameInput() {
+function useCardNameInput() {
   const { inputtedInfoDispatch } = useContext(CardContext);
-  const [nickName, setNickname] = useState('');
+  const [cardName, setCardName] = useState('');
   const [validation, setValidation] = useState(false);
 
-  const onNickNameChange = ({ target }) => {
-    setNickname(target.value);
+  const onCardNameChange = ({ target }) => {
+    setCardName(target.value);
     setValidation(noSpecialCharacters.test(target.value));
   };
 
   useEffect(() => {
     inputtedInfoDispatch({
-      type: INPUT_ACTION.NICK_NAME,
-      value: nickName,
+      type: INPUT_ACTION.CARD_NAME,
+      value: cardName,
       valid: validation,
     });
-  }, [nickName, validation]);
+  }, [cardName, validation]);
 
   return {
-    nickName,
+    cardName,
     validation,
-    onNickNameChange,
+    onCardNameChange,
   };
 }
 
-export default useNickNameInput;
+export default useCardNameInput;
