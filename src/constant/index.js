@@ -43,6 +43,10 @@ const ACTION = {
   EDIT_NICKNAME: "EDIT_NICKNAME",
 };
 
+const ERROR_MESSAGES = {
+  NOT_EXIST_CARD: "존재하지 않는 카드입니다.",
+};
+
 const COLORS = {
   MINT: "#04C09E",
   GRAY: "#D2D2D2",
@@ -73,6 +77,7 @@ export {
   PASSWORD,
   MONTH,
   ACTION,
+  ERROR_MESSAGES,
   COLORS,
   NAME,
   CARD_LIST,
