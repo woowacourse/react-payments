@@ -15,6 +15,8 @@ function Home() {
   const navigate = useNavigate();
   const cardList = useContext(CardListContext);
 
+  console.log("홈 리스트", cardList);
+
   return (
     <PageWrapper>
       <Header headText="보유 카드" />
@@ -32,6 +34,7 @@ function Home() {
                 dueMonth={data.dueDate.month}
                 dueYear={data.dueDate.year}
                 nickname={data.nickname}
+                onClick={() => navigate(`/edit/${data.cardId}`)}
               />
             );
           })}

@@ -18,3 +18,8 @@ CardAddHeader.args = {
   ),
   headText: "카드추가",
 };
+
+export const CardListHeader = Template.bind({});
+CardListHeader.args = {
+  headText: "보유카드",
+};

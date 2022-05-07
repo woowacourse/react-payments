@@ -16,6 +16,12 @@ const cardListReducer = (state, action) => {
       );
       break;
     }
+    case "EDIT_CARD": {
+      newState = state.map((data) =>
+        data.cardId === action.data.cardId ? { ...action.data } : data
+      );
+      break;
+    }
     default: {
       return newState;
     }
@@ -56,9 +62,34 @@ function CardListProvider({ children }) {
     dispatch({ type: ACTION.EDIT_NICKNAME, targetId, newNickname });
   };
 
+  const onEditCard = (
+    targetId,
+    cardNumbers,
+    dueDate,
+    owner,
+    cvc,
+    password,
+    company
+  ) => {
+    dispatch({
+      type: "EDIT_CARD",
+      data: {
+        cardId: targetId,
+        cardNumbers,
+        dueDate,
+        owner,
+        cvc,
+        password,
+        company,
+      },
+    });
+  };
+
   return (
     <CardListContext.Provider value={cardListData}>
-      <CardDispatchContext.Provider value={{ onCreate, onEditNickname }}>
+      <CardDispatchContext.Provider
+        value={{ onCreate, onEditNickname, onEditCard }}
+      >
         {children}
       </CardDispatchContext.Provider>
     </CardListContext.Provider>

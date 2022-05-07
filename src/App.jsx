@@ -3,6 +3,7 @@ import CardListProvider from "context/CardListProvider";
 import Home from "pages/Home";
 import New from "pages/New";
 import Finish from "pages/Finish";
+import Edit from "pages/Edit";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/new" element={<New />} />
           <Route path="/finish/:id" element={<Finish />} />
-          {/* <Route path="/edit/:id" element={<Edit />} />  */}
+          <Route path="/edit/:id" element={<Edit />} />
         </Routes>
       </BrowserRouter>
     </CardListProvider>

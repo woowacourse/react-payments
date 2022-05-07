@@ -54,6 +54,7 @@ function Finish() {
         color="black"
         value={nickname}
         onChange={handleChangeNickname}
+        autoFocus
       />
       <FooterWrapper>
         <Button onClick={handleSubmit}>확인</Button>
