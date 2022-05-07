@@ -26,10 +26,10 @@ function CardExpirationDate() {
 
     const monthInputNumberOnly = inputNumberOnly(value);
 
-    const monthInputLengthSliced =
-      monthInputNumberOnly.length > LIMIT_LENGTH.EXPIRATION_DATE
-        ? limitInputLength(monthInputNumberOnly, LIMIT_LENGTH.EXPIRATION_DATE)
-        : monthInputNumberOnly;
+    const monthInputLengthSliced = limitInputLength(
+      monthInputNumberOnly,
+      LIMIT_LENGTH.EXPIRATION_DATE,
+    );
 
     const monthInputPadded =
       monthInputLengthSliced >= MONTH.FEBRUARY && monthInputLengthSliced <= MONTH.SEPTEMBER
@@ -46,10 +46,10 @@ function CardExpirationDate() {
 
     const yearInputNumberOnly = inputNumberOnly(value);
 
-    const yearInputLengthSliced =
-      yearInputNumberOnly.length > LIMIT_LENGTH.EXPIRATION_DATE
-        ? limitInputLength(yearInputNumberOnly, LIMIT_LENGTH.EXPIRATION_DATE)
-        : yearInputNumberOnly;
+    const yearInputLengthSliced = limitInputLength(
+      yearInputNumberOnly,
+      LIMIT_LENGTH.EXPIRATION_DATE,
+    );
 
     const newCardExpirationDate = { ...cardExpirationDate, year: yearInputLengthSliced };
 
