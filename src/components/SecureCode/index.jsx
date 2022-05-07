@@ -8,11 +8,16 @@ import { ACTION, useCardFormContext } from '../../context/card-form-context';
 import * as styled from './index.styled';
 
 const SecureCode = () => {
-  const { dispatch } = useCardFormContext();
+  const { dispatch, state } = useCardFormContext();
   const [secureCode, isSecureCodeError, onChangeSecureCode] = useInputValue({
     isValidateInput: checkSecureCode,
     isInputAvailableValue: checkNumberOnly,
   });
+
+  useEffect(() => {
+    if (!state.isSecureCodeError && isSecureCodeError)
+      dispatch({ type: ACTION.SECURE_CODE_ERROR });
+  }, [dispatch, state, isSecureCodeError]);
 
   useEffect(() => {
     if (secureCode.length <= 0 || isSecureCodeError) return;

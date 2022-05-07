@@ -6,7 +6,7 @@ import { checkCardNumber, checkNumberOnly } from '../../validation';
 import { useCardFormContext, ACTION } from '../../context/card-form-context';
 
 const CardNumber = () => {
-  const { dispatch } = useCardFormContext();
+  const { dispatch, state } = useCardFormContext();
   const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] =
     useInputValue({
       isValidateInput: checkCardNumber,
@@ -28,22 +28,31 @@ const CardNumber = () => {
       isInputAvailableValue: checkNumberOnly,
     });
 
-  const [isError, setIsError] = useState(false);
-
   useEffect(() => {
-    setIsError(
+    const isError =
       isFirstCardNumberError ||
-        isSecondCardNumberError ||
-        isThirdCardNumberError ||
-        isFourthCardNumberError,
-    );
+      isSecondCardNumberError ||
+      isThirdCardNumberError ||
+      isFourthCardNumberError;
+    if (!state.isCardNumberError && isError) {
+      dispatch({ type: ACTION.CARD_NUMBERS_ERROR });
+    }
   }, [
+    state,
+    dispatch,
     isFirstCardNumberError,
     isSecondCardNumberError,
     isThirdCardNumberError,
     isFourthCardNumberError,
   ]);
+
   useEffect(() => {
+    const isError =
+      isFirstCardNumberError ||
+      isSecondCardNumberError ||
+      isThirdCardNumberError ||
+      isFourthCardNumberError;
+
     const isInputCompleted =
       firstCardNumber.length > 0 &&
       secondCardNumber.length > 0 &&
@@ -54,7 +63,6 @@ const CardNumber = () => {
     if (!isInputCompleted) {
       return;
     }
-
     dispatch({
       type: ACTION.CARD_NUMBERS,
       data: {
@@ -69,8 +77,11 @@ const CardNumber = () => {
     secondCardNumber,
     thirdCardNumber,
     fourthCardNumber,
-    isError,
     dispatch,
+    isFirstCardNumberError,
+    isSecondCardNumberError,
+    isThirdCardNumberError,
+    isFourthCardNumberError,
   ]);
 
   return (
@@ -78,7 +89,12 @@ const CardNumber = () => {
       id="cardNumber"
       description="카드 번호"
       errorMessage="유효한 카드 번호를 입력하세요."
-      isError={isError}
+      isError={
+        isFirstCardNumberError ||
+        isSecondCardNumberError ||
+        isThirdCardNumberError ||
+        isFourthCardNumberError
+      }
     >
       {
         <CardNumberInput

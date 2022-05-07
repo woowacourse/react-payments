@@ -11,14 +11,22 @@ const showOwnerNameLength = (length) => {
 };
 
 const CardOwner = () => {
-  const { dispatch } = useCardFormContext();
+  const { dispatch, state } = useCardFormContext();
   const [ownerName, isOwnerNameError, onChangeOwnerName] = useInputValue({
     isValidateInput: checkOwnerName,
   });
 
   useEffect(() => {
+    if (!state.isOwnerNameError && isOwnerNameError)
+      dispatch({ type: ACTION.OWNER_NAME_ERROR });
+  }, [state, dispatch, isOwnerNameError]);
+
+  useEffect(() => {
     if (isOwnerNameError) return;
-    dispatch({ type: ACTION.OWNER_NAME, data: { ownerName } });
+    dispatch({
+      type: ACTION.OWNER_NAME,
+      data: { ownerName, isOwnerNameError },
+    });
   }, [isOwnerNameError, ownerName, dispatch]);
 
   return (

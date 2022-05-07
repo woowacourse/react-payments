@@ -10,7 +10,7 @@ import {
 import { ACTION, useCardFormContext } from '../../context/card-form-context';
 
 const ExpiredDate = () => {
-  const { dispatch } = useCardFormContext();
+  const { dispatch, state } = useCardFormContext();
   const [expiredMonth, isExpiredMonthError, onChangeExpiredMonth] =
     useInputValue({
       isValidateInput: checkExpiredMonth,
@@ -20,6 +20,12 @@ const ExpiredDate = () => {
     isValidateInput: checkExpiredYear,
     isInputAvailableValue: checkNumberOnly,
   });
+
+  useEffect(() => {
+    const isError = isExpiredMonthError || isExpiredYearError;
+    if (!state.isExpiredDateError && isError)
+      dispatch({ type: ACTION.EXPIRED_DATE_ERROR });
+  }, [state, dispatch, isExpiredMonthError, isExpiredYearError]);
 
   useEffect(() => {
     if (

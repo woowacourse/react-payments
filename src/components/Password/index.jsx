@@ -8,7 +8,7 @@ import * as styled from './index.styled';
 import { ACTION, useCardFormContext } from '../../context/card-form-context';
 
 const Password = () => {
-  const { dispatch } = useCardFormContext();
+  const { dispatch, state } = useCardFormContext();
   const [firstPassword, isFirstPasswordError, onChangeFirstPassword] =
     useInputValue({
       isValidateInput: checkPassword,
@@ -19,6 +19,12 @@ const Password = () => {
       isValidateInput: checkPassword,
       isInputAvailableValue: checkNumberOnly,
     });
+
+  useEffect(() => {
+    const isError = isFirstPasswordError || isSecondPasswordError;
+    if (!state.isPasswordError && isError)
+      dispatch({ type: ACTION.PASSWORD_ERROR });
+  }, [state, dispatch, isFirstPasswordError, isSecondPasswordError]);
 
   useEffect(() => {
     if (

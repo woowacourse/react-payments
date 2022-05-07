@@ -6,12 +6,17 @@ const initialState = {
   secondCardNumber: '',
   thirdCardNumber: '',
   fourthCardNumber: '',
+  isCardNumberError: false,
   ownerName: '',
+  isOwnerNameError: false,
   secureCode: '',
+  isSecureCodeError: false,
   expiredMonth: '',
   expiredYear: '',
+  isExpiredDateError: false,
   firstPassword: '',
   secondPassword: '',
+  isPasswordError: false,
   cardType: {
     color: 'red',
     name: '',
@@ -20,10 +25,15 @@ const initialState = {
 
 const ACTION = {
   CARD_NUMBERS: 'CARD_NUMBERS',
+  CARD_NUMBERS_ERROR: 'CARD_NUMBERS_ERROR',
   OWNER_NAME: 'OWNER_NAME',
+  OWNER_NAME_ERROR: 'OWNER_NAME_ERROR',
   SECURE_CODE: 'SECURE_CODE',
+  SECURE_CODE_ERROR: 'SECURE_CODE_ERROR',
   EXPIRED_DATE: 'EXPIRED_DATE',
+  EXPIRED_DATE_ERROR: 'EXPIRED_DATE_ERROR',
   PASSWORD: 'PASSWORD',
+  PASSWORD_ERROR: 'PASSWORD_ERROR',
   CARD_TYPE: 'CARD_TYPE',
 };
 
@@ -44,18 +54,36 @@ const cardFormReducer = (state, action) => {
         secondCardNumber,
         thirdCardNumber,
         fourthCardNumber,
+        isCardNumberError: false,
       };
+    }
+    case ACTION.CARD_NUMBERS_ERROR: {
+      return { ...state, isCardNumberError: true };
     }
     case ACTION.OWNER_NAME: {
       return {
         ...state,
         ownerName: action.data.ownerName,
+        isOwnerNameError: false,
+      };
+    }
+    case ACTION.OWNER_NAME_ERROR: {
+      return {
+        ...state,
+        isOwnerNameError: true,
       };
     }
     case ACTION.SECURE_CODE: {
       return {
         ...state,
         secureCode: action.data.secureCode,
+        isSecureCodeError: false,
+      };
+    }
+    case ACTION.SECURE_CODE_ERROR: {
+      return {
+        ...state,
+        isSecureCodeError: true,
       };
     }
     case ACTION.EXPIRED_DATE: {
@@ -64,15 +92,28 @@ const cardFormReducer = (state, action) => {
         ...state,
         expiredMonth,
         expiredYear,
+        isExpiredDateError: false,
       };
     }
 
+    case ACTION.EXPIRED_DATE_ERROR: {
+      return {
+        ...state,
+        isExpiredDateError: true,
+      };
+    }
     case ACTION.PASSWORD: {
       const { firstPassword, secondPassword } = action.data;
       return {
         ...state,
         firstPassword,
         secondPassword,
+        isPasswordError: false,
+      };
+    }
+    case ACTION.PASSWORD_ERROR: {
+      return {
+        isPasswordError: true,
       };
     }
     case ACTION.CARD_TYPE: {
