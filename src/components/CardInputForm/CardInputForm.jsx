@@ -4,7 +4,7 @@ import { CardInfoContext } from 'App';
 import { ERROR_MESSAGE, PAGES } from 'constants';
 
 function CardInputForm({ children }) {
-  const { state, setPage, dispatch } = useContext(CardInfoContext);
+  const { state, page, setPage, dispatch } = useContext(CardInfoContext);
 
   const { number1, number2, number3, number4, month, year, cvc, name } = state;
 
@@ -67,13 +67,14 @@ function CardInputForm({ children }) {
     e.preventDefault();
 
     try {
-      if (name !== '') {
+      if (page === PAGES.NAME) {
         setPage(PAGES.LIST);
-        dispatch({ type: 'SET_CARD_INPUT_VALID', boolean: false });
         return;
       }
+
       checkCardInfo({ number1, number2, number3, number4, month, year, cvc });
       dispatch({ type: 'SET_CARD_INPUT_VALID', boolean: true });
+      setPage(PAGES.NAME);
     } catch (error) {
       alert(error.message);
     }

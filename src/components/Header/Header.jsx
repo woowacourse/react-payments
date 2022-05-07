@@ -8,7 +8,7 @@ function Header({ children }) {
   const { inputValid } = state;
 
   return (
-    <header className={` ${inputValid && page !== PAGES.LIST ? 'mt-30 mb-10' : ''}`}>
+    <header className={` ${inputValid && page === PAGES.NAME ? 'mt-30 mb-10' : ''}`}>
       {children}
     </header>
   );

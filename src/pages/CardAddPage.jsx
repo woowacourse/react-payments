@@ -15,15 +15,16 @@ import Tooltip from 'components/Tooltip/Tooltip';
 import CardPassword from 'components/CardPassword/CardPassword';
 import PrevPageSign from 'components/PrevPageSign/PrevPageSign';
 import CardName from 'components/CardName/CardName';
+import { PAGES } from 'constants';
 
 function CardAddPage() {
-  const { state } = useContext(CardInfoContext);
+  const { state, page } = useContext(CardInfoContext);
 
-  const { inputValid } = state;
+  // const { inputValid } = state;
 
   return (
-    <div className={`app ${inputValid ? 'flex-column-center' : ''}`}>
-      {!inputValid ? (
+    <div className={`app ${page === PAGES.NAME ? 'flex-column-center' : ''}`}>
+      {page !== PAGES.NAME ? (
         <>
           <Header>
             <PrevPageSign />
