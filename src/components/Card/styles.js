@@ -115,9 +115,14 @@ const Container = styled.div`
       position: absolute;
       top: 7%;
       left: 5%;
+      right: 35%;
 
       font-weight: bold;
       font-size: 0.9rem;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     > .icon {
