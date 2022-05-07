@@ -1,21 +1,20 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "components/common/Header";
-import Card from "components/common/Card";
+
+import Header from "components/Header";
+import Card from "components/Card";
 import { CardListContext } from "context/CardListProvider";
+import { CARD_SIZE } from "constant";
 import {
   PageWrapper,
   CardListWrapper,
   CardAddWrapper,
   CardScrollWrapper,
 } from "./style";
-import { CARD_SIZE } from "constant";
 
 function Home() {
   const navigate = useNavigate();
   const cardList = useContext(CardListContext);
-
-  console.log("홈 리스트", cardList);
 
   return (
     <PageWrapper>

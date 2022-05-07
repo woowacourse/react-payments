@@ -4,7 +4,7 @@ import Palette from "../Palette";
 const Template = (args) => <Modal {...args} />;
 
 export default {
-  title: "component/common/Modal",
+  title: "component/Modal",
   component: Modal,
 };
 

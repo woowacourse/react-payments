@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { CARD_SIZE } from "../../../constant";
+import { CARD_SIZE } from "constant";
 
 const FlexAlignCenter = css`
   display: flex;

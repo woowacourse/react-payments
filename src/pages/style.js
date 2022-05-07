@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Input } from "components/common/Input/style";
+import { Input } from "components/Input/style";
 
 const PageWrapper = styled.div`
   height: 700px;

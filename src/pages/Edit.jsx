@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
 import { CardListContext } from "context/CardListProvider";
 import CardEditor from "components/CardEditor";
+import { ERROR_MESSAGES } from "constant";
 import { PageWrapper } from "./style";
-import { ERROR_MESSAGES } from "../constant";
 
 function Edit() {
   const navigate = useNavigate();
@@ -25,6 +26,8 @@ function Edit() {
 
     setOriginDate(targetCard);
   }, [id, cardList]);
+
+  console.log(originData);
 
   return (
     <PageWrapper>

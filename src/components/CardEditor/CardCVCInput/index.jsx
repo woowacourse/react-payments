@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import InputBox from "components/common/InputBox";
-import { Input } from "components/common/Input/style";
-import Button from "components/common/Button";
+import InputBox from "components/InputBox";
+import { Input } from "components/Input/style";
+import Button from "components/Button";
 import { ReactComponent as QuestionImage } from "assets/question.svg";
 import { CardInputWrapper } from "pages/style";
 import { CVCWrapper, QuestionWrapper, ToolTipWrapper } from "./style";

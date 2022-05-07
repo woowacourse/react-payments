@@ -1,8 +1,9 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
 import { CardListContext, CardDispatchContext } from "context/CardListProvider";
-import Card from "components/common/Card";
-import Button from "components/common/Button";
+import Card from "components/Card";
+import Button from "components/Button";
 import useInput from "hooks/useInput";
 import { isValidNickname } from "validation";
 import { CARD_SIZE } from "constant";
@@ -19,7 +20,7 @@ function Finish() {
   const { id } = useParams();
   const cardList = useContext(CardListContext);
   const { onEditNickname } = useContext(CardDispatchContext);
-  const [nickname, setNickname, handleChangeNickname] = useInput({
+  const [nickname, , handleChangeNickname] = useInput({
     initialValue: "",
     validator: isValidNickname,
   });
@@ -50,7 +51,6 @@ function Finish() {
       </CardWrapper>
       <NicknameInput
         type="text"
-        name="nickname"
         color="black"
         value={nickname}
         onChange={handleChangeNickname}

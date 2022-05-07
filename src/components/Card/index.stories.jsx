@@ -4,7 +4,7 @@ import { CARD_SIZE } from "constant";
 const Template = (args) => <Card {...args} />;
 
 export default {
-  title: "component/common/Card",
+  title: "component/Card",
   component: Card,
 };
 

@@ -41,6 +41,7 @@ const NICKNAME = {
 const ACTION = {
   CREATE: "CREATE",
   EDIT_NICKNAME: "EDIT_NICKNAME",
+  EDIT_CARD: "EDIT_CARD",
 };
 
 const ERROR_MESSAGES = {

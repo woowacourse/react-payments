@@ -3,7 +3,7 @@ import InputBox from ".";
 const Template = (args) => <InputBox {...args}></InputBox>;
 
 export default {
-  title: "component/common/InputBox",
+  title: "component/InputBox",
   component: InputBox,
 };
 

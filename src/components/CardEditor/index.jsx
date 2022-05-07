@@ -6,16 +6,16 @@ import useCardPassword from "hooks/useCardPassword";
 import useCardDueDate from "hooks/useCardDueDate";
 import useModal from "hooks/useModal";
 
-import Card from "components/common/Card";
-import Button from "components/common/Button";
-import CardNumberInput from "components/CardNumberInput";
-import CardDueDateInput from "components/CardDueDateInput";
-import CardOwnerInput from "components/CardOwnerInput";
-import CardCVCInput from "components/CardCVCInput";
-import CardPasswordInput from "components/CardPasswordInput";
-import Header from "components/common/Header";
-import Modal from "components/common/Modal";
-import Palette from "components/common/Palette";
+import Header from "../Header";
+import Button from "../Button";
+import Card from "../Card";
+import Modal from "../Modal";
+import Palette from "../Palette";
+import CardNumberInput from "./CardNumberInput";
+import CardDueDateInput from "./CardDueDateInput";
+import CardOwnerInput from "./CardOwnerInput";
+import CardCVCInput from "./CardCVCInput";
+import CardPasswordInput from "./CardPasswordInput";
 
 import { CARD_NUMBER, CARD_SIZE, DUE_DATE, CVC } from "constant";
 import { isValidCvc, isValidOwnerLength } from "validation";
@@ -116,7 +116,7 @@ function CardEditor({ isEdit, originData }) {
             <ArrowImage />
           </Button>
         }
-        headText={isEdit ? "카드 수정하기" : "카드 추가"}
+        headText={isEdit ? "카드 정보 수정" : "카드 추가"}
       />
       <CardWrapper>
         <Card

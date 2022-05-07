@@ -1,10 +1,10 @@
 import Button from ".";
-import { ReactComponent as ArrowImage } from "../../../assets/arrow.svg";
+import { ReactComponent as ArrowImage } from "assets/arrow.svg";
 
 const Template = (args) => <Button {...args} />;
 
 export default {
-  title: "component/common/Button",
+  title: "component/Button",
   component: Button,
 };
 

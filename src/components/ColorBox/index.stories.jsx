@@ -3,7 +3,7 @@ import ColorBox from ".";
 const Template = (args) => <ColorBox {...args} />;
 
 export default {
-  title: "component/common/ColorBox",
+  title: "component/ColorBox",
   component: ColorBox,
 };
 

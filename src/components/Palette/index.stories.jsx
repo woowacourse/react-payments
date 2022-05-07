@@ -3,7 +3,7 @@ import Palette from ".";
 const Template = (args) => <Palette {...args} />;
 
 export default {
-  title: "component/common/Palette",
+  title: "component/Palette",
   component: Palette,
 };
 

@@ -1,11 +1,11 @@
 import Header from ".";
-import { ReactComponent as ArrowImage } from "../../../assets/arrow.svg";
+import { ReactComponent as ArrowImage } from "assets/arrow.svg";
 import Button from "../Button";
 
 const Template = (args) => <Header {...args} />;
 
 export default {
-  title: "component/common/Header",
+  title: "component/Header",
   component: Header,
 };
 

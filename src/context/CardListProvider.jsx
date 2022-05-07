@@ -16,7 +16,7 @@ const cardListReducer = (state, action) => {
       );
       break;
     }
-    case "EDIT_CARD": {
+    case ACTION.EDIT_CARD: {
       newState = state.map((data) =>
         data.cardId === action.data.cardId ? { ...action.data } : data
       );
@@ -72,7 +72,7 @@ function CardListProvider({ children }) {
     company
   ) => {
     dispatch({
-      type: "EDIT_CARD",
+      type: ACTION.EDIT_CARD,
       data: {
         cardId: targetId,
         cardNumbers,

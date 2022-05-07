@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import InputBox from "components/common/InputBox";
-import { Input } from "components/common/Input/style";
+import InputBox from "components/InputBox";
+import { Input } from "components/Input/style";
 import { CardInputWrapper } from "pages/style";
 import { PasswordWrapper, Dot } from "./style";
 
