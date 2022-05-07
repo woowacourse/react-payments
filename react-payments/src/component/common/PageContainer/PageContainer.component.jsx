@@ -31,7 +31,7 @@ const PageContainer = styled.div`
     border: 6px solid rgba(0, 0, 0, 0.18);
     border-left: 0;
     border-right: 0;
-    background-color: ${({ theme }) => theme.colors.scroll};
+    background-color: ${({ theme }) => theme.colors.twitterBlue};
   }
 `;
 

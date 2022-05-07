@@ -11,11 +11,11 @@ const ModalButton = styled.button`
   color: ${({ theme }) => theme.colors.cardText};
   border: 1.5px solid
     ${({ theme, type }) =>
-      type === "edit" ? theme.colors.scroll : theme.colors.errorMessage};
+      type === "edit" ? theme.colors.twitterBlue : theme.colors.errorMessage};
   cursor: pointer;
   &:hover {
     background-color: ${({ theme, type }) =>
-      type === "edit" ? theme.colors.scroll : theme.colors.errorMessage};
+      type === "edit" ? theme.colors.twitterBlue : theme.colors.errorMessage};
     color: white;
   }
 `;
