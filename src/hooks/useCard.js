@@ -28,7 +28,7 @@ function useCard() {
       : PLACEHOLDER.DATE
     : '';
 
-  const ownerNameString = ownerName ? ownerName.value : '';
+  const ownerNameString = ownerName ? ownerName.value || PLACEHOLDER.NAME : '';
 
   return {
     companyNameString,

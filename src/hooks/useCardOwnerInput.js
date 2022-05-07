@@ -1,5 +1,4 @@
 import { useState, useContext, useEffect } from 'react';
-import { PLACEHOLDER } from '../constant';
 import { englishRegex } from '../constant/regularExpression';
 import { CardContext } from '../context/CardContext';
 import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
@@ -9,7 +8,6 @@ function useCardOwnerInput() {
   const { inputtedInfoDispatch } = useContext(CardContext);
   const [name, setName] = useState('');
   const [validation, setValidation] = useState(false);
-  const ownerNameString = name || PLACEHOLDER.NAME;
 
   const onNameChange = ({ target, nativeEvent: { data } }) => {
     if (englishRegex.test(data) || !data) {
@@ -27,14 +25,13 @@ function useCardOwnerInput() {
   useEffect(() => {
     inputtedInfoDispatch({
       type: INPUT_ACTION.OWNER_NAME,
-      value: ownerNameString,
+      value: name,
       valid: validation,
     });
-  }, [ownerNameString, validation]);
+  }, [name, validation]);
 
   return {
     name,
-    ownerNameString,
     validation,
     isValid: validation,
     onNameChange,

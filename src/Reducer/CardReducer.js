@@ -3,16 +3,19 @@ const CARD_ACTION = {
   NAME_EDIT: 'CARD_NAME_EDIT',
 };
 
-const initialCardData = { cards: [] };
+const initialCardData = [];
 
 function CardReducer(state, action) {
   switch (action.type) {
     case CARD_ACTION.ADD:
-      return {
-        cards: state.cards.concat(action.newCard),
-      };
+      return state.concat(action.value);
     case CARD_ACTION.NAME_EDIT:
-      return;
+      return state.map(card => {
+        if (card.cardNumber.value === action.targetCardNumber) {
+          return (card.nickName = action.value);
+        }
+        return card;
+      });
   }
 }
 
