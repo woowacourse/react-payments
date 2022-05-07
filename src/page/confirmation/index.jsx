@@ -31,6 +31,8 @@ const ConfirmationPage = () => {
         className="input-underline"
         value={alias}
         onChange={(e) => handleAlias(e.target.value)}
+        placeholder="카드 이름"
+        autoFocus
       />
       {isFullFilled && (
         <Link to="/react-payments/" onClick={() => dispatch({ type: 'SET_ALIAS', alias, id })}>
