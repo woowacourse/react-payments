@@ -14,8 +14,15 @@ export const checkExpiredMonth = (month) => {
 };
 
 export const checkExpiredYear = (year) => {
-  const nowYear = String(new Date().getFullYear()).slice(2, 4);
-  return checkNumberOnly(year) && year > nowYear;
+  const currentYear = String(new Date().getFullYear()).slice(2, 4);
+  return checkNumberOnly(year) && year >= currentYear;
+};
+
+export const checkExpiredDate = (year, month) => {
+  const currentYear = String(new Date().getFullYear()).slice(2, 4);
+  const currentMonth = new Date().getMonth() + 1;
+
+  return year !== currentYear || currentMonth <= Number(month);
 };
 
 export const checkOwnerName = (name) => {

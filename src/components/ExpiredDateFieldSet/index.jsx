@@ -6,6 +6,7 @@ import {
   checkExpiredMonth,
   checkExpiredYear,
   checkNumberOnly,
+  checkExpiredDate,
 } from '../../validation';
 import { ACTION, useCardFormContext } from '../../context/card-form-context';
 
@@ -22,10 +23,20 @@ const ExpiredDateFieldSet = () => {
   });
 
   useEffect(() => {
-    const isError = isExpiredMonthError || isExpiredYearError;
+    const isError =
+      isExpiredMonthError ||
+      isExpiredYearError ||
+      !checkExpiredDate(expiredYear, expiredMonth);
     if (!state.isExpiredDateError && isError)
       dispatch({ type: ACTION.EXPIRED_DATE_ERROR });
-  }, [state, dispatch, isExpiredMonthError, isExpiredYearError]);
+  }, [
+    state,
+    dispatch,
+    isExpiredMonthError,
+    isExpiredYearError,
+    expiredMonth,
+    expiredYear,
+  ]);
 
   useEffect(() => {
     if (
@@ -53,7 +64,11 @@ const ExpiredDateFieldSet = () => {
       id="expiredNumber"
       description="만료일"
       errorMessage="유효한 만료 숫자를 입력하세요"
-      isError={isExpiredMonthError || isExpiredYearError}
+      isError={
+        isExpiredMonthError ||
+        isExpiredYearError ||
+        !checkExpiredDate(expiredYear, expiredMonth)
+      }
     >
       {
         <ExpiredDateInput
