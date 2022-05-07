@@ -21,25 +21,28 @@ export const useAutoFocusForm = () => {
     };
   }, []);
 
-  const nextInputFocus = useCallback((currentKey, notExistNextElementAction) => {
-    const { current: inputElementsMap } = inputElementsRef;
-    const currentInput = inputElementsMap[currentKey];
+  const nextInputFocus = useCallback(
+    ({ inputElementKey, notExistNextElementAction = () => {} }) => {
+      const { current: inputElementsMap } = inputElementsRef;
 
-    const { nextInput } = findNotCompletedInput(inputElementsMap, currentKey);
+      const currentInput = inputElementsMap[inputElementKey];
+      const nextInput = findNotCompletedInput(inputElementsMap, inputElementKey);
 
-    currentInput.isComplete = true;
+      currentInput.isComplete = true;
 
-    const { element: currentElement } = currentInput;
-    const { element: nextElement } = nextInput;
+      const { element: currentElement } = currentInput;
+      const { element: nextElement } = nextInput;
 
-    nextElement?.focus();
-    currentElement?.blur();
+      nextElement?.focus();
+      currentElement?.blur();
 
-    if (notExistNextElementAction && !nextElement) {
-      notExistNextElementAction();
-      return;
-    }
-  }, []);
+      if (!nextElement) {
+        notExistNextElementAction();
+        return;
+      }
+    },
+    [],
+  );
 
   return [setElementByKey, nextInputFocus];
 };

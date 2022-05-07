@@ -10,10 +10,10 @@ import { INPUT_ELEMENT_KEY_SEPARATOR } from '../../../../../utils/constants';
 
 function CardNumberInputContainer({
   state,
-  cardInputDispatch,
-  // inputElementsRef,
   stateName,
-  setIsShowVirtualKeyboard,
+  cardInputDispatch,
+  openVirtualKeyboard,
+  closeVirtualKeyboard,
   setInputElement,
   nextInputFocus,
 }) {
@@ -38,8 +38,8 @@ function CardNumberInputContainer({
             maxLength={4}
             required
             inputElementKey={`${stateName}${INPUT_ELEMENT_KEY_SEPARATOR}${stateKey}`}
-            setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
             onChange={e => onChangeCardNumber(e, stateKey)}
+            closeVirtualKeyboard={closeVirtualKeyboard}
             setInputElement={setInputElement}
             nextInputFocus={nextInputFocus}
           />
@@ -51,7 +51,8 @@ function CardNumberInputContainer({
             maxLength={4}
             required
             inputElementKey={`${stateName}${INPUT_ELEMENT_KEY_SEPARATOR}${stateKey}`}
-            setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+            openVirtualKeyboard={openVirtualKeyboard}
+            closeVirtualKeyboard={closeVirtualKeyboard}
             setInputElement={setInputElement}
             nextInputFocus={nextInputFocus}
           />
@@ -63,10 +64,12 @@ function CardNumberInputContainer({
 
 CardNumberInputContainer.propTypes = {
   state: CARD_NUMBER_TYPE,
-  cardInputDispatch: PropTypes.func,
-  inputElementsRef: PropTypes.object,
   stateName: PropTypes.string,
-  setIsShowVirtualKeyboard: PropTypes.func,
+  cardInputDispatch: PropTypes.func,
+  openVirtualKeyboard: PropTypes.func,
+  closeVirtualKeyboard: PropTypes.func,
+  setInputElement: PropTypes.func,
+  nextInputFocus: PropTypes.func,
 };
 
 export default CardNumberInputContainer;

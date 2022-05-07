@@ -11,7 +11,7 @@ const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function VirtualKeyboard({
   cardInputDispatch,
-  setIsShowVirtualKeyboard,
+  closeVirtualKeyboard,
   elementState,
   elementKey,
   maxLength,
@@ -22,7 +22,7 @@ function VirtualKeyboard({
       target: { textContent },
     } = e;
 
-    if (isNumberInRange(elementState, maxLength)) {
+    if (isNumberInRange(`${elementState}${textContent}`, maxLength)) {
       cardInputDispatch({
         type: 'CHANGE_PASSWORD_INPUT',
         payload: { elementKey, value: `${elementState}${textContent}` },
@@ -30,31 +30,22 @@ function VirtualKeyboard({
     }
 
     if (elementState.length === maxLength) {
-      nextInputFocus(elementKey, () =>
-        setIsShowVirtualKeyboard(prev => ({
-          ...prev,
-          isShow: false,
-          elementKey: null,
-          maxLength: null,
-        })),
-      );
+      nextInputFocus({
+        inputElementKey: elementKey,
+        notExistNextElementAction: closeVirtualKeyboard,
+      });
     }
   };
 
   const onClickBackSpace = () => {
     cardInputDispatch({
       type: 'CHANGE_PASSWORD_INPUT',
-      payload: { elementKey, value: elementState },
+      payload: { elementKey, value: elementState.slice(0, -1) },
     });
   };
 
   const onClickCloseButton = () => {
-    setIsShowVirtualKeyboard(prev => ({
-      ...prev,
-      isShow: false,
-      elementKey: null,
-      maxLength: null,
-    }));
+    closeVirtualKeyboard();
   };
 
   return (
@@ -74,10 +65,12 @@ function VirtualKeyboard({
   );
 }
 VirtualKeyboard.propTypes = {
-  inputElementsRef: PropTypes.object,
-  setIsShowVirtualKeyboard: PropTypes.func,
   cardInputDispatch: PropTypes.func,
+  closeVirtualKeyboard: PropTypes.func,
+  elementState: PropTypes.string,
   elementKey: PropTypes.string,
+  maxLength: PropTypes.number,
+  nextInputFocus: PropTypes.func,
 };
 
 export default VirtualKeyboard;

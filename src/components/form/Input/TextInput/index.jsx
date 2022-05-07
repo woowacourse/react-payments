@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useCallback } from 'react';
 
 function TextInput({
   id,
@@ -10,23 +9,18 @@ function TextInput({
   required,
   onChange,
   inputElementKey,
-  setIsShowVirtualKeyboard,
+  closeVirtualKeyboard,
   setInputElement,
   nextInputFocus,
 }) {
   useEffect(() => {
     if (value.length === maxLength && setInputElement && nextInputFocus) {
-      nextInputFocus(inputElementKey);
+      nextInputFocus({ inputElementKey });
     }
   }, [value, nextInputFocus, maxLength, inputElementKey, setInputElement]);
 
   const onFocus = () => {
-    setIsShowVirtualKeyboard(prev => ({
-      ...prev,
-      isShow: false,
-      elementKey: null,
-      maxLength: null,
-    }));
+    closeVirtualKeyboard();
   };
 
   return (
@@ -38,7 +32,11 @@ function TextInput({
       maxLength={maxLength}
       required={required}
       placeholder={placeholder}
-      ref={element => setInputElement && setInputElement(inputElementKey, element)}
+      ref={element => {
+        if (setInputElement) {
+          setInputElement(inputElementKey, element);
+        }
+      }}
       onChange={onChange}
       onFocus={onFocus}
     />
@@ -51,10 +49,11 @@ TextInput.propTypes = {
   value: PropTypes.string,
   maxLength: PropTypes.number,
   required: PropTypes.bool,
-  onChange: PropTypes.func,
-  inputElementsRef: PropTypes.object,
   inputElementKey: PropTypes.string,
-  setIsShowVirtualKeyboard: PropTypes.func,
+  onChange: PropTypes.func,
+  closeVirtualKeyboard: PropTypes.func,
+  setInputElement: PropTypes.func,
+  nextInputFocus: PropTypes.func,
 };
 
 export default TextInput;

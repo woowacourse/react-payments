@@ -3,9 +3,9 @@ export const findNotCompletedInput = (inputMap, currentInputKey) => {
     key => key !== currentInputKey && inputMap[key].isComplete === false,
   );
 
-  return {
-    nextInput: inputMap[nextInputKey] ?? {
+  return (
+    inputMap[nextInputKey] ?? {
       element: null,
-    },
-  };
+    }
+  );
 };

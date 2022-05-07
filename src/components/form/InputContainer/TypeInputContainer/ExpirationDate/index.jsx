@@ -9,9 +9,9 @@ import { INPUT_ELEMENT_KEY_SEPARATOR } from '../../../../../utils/constants';
 
 function ExpirationDateInputContainer({
   state,
-  cardInputDispatch,
   stateName,
-  setIsShowVirtualKeyboard,
+  cardInputDispatch,
+  closeVirtualKeyboard,
   setInputElement,
   nextInputFocus,
 }) {
@@ -38,9 +38,9 @@ function ExpirationDateInputContainer({
           value={state[stateKey]}
           maxLength={2}
           required
-          onChange={e => onChangeExpirationDate(e, stateKey)}
           inputElementKey={`${stateName}${INPUT_ELEMENT_KEY_SEPARATOR}${stateKey}`}
-          setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+          onChange={e => onChangeExpirationDate(e, stateKey)}
+          closeVirtualKeyboard={closeVirtualKeyboard}
           setInputElement={setInputElement}
           nextInputFocus={nextInputFocus}
         />
@@ -51,10 +51,11 @@ function ExpirationDateInputContainer({
 
 ExpirationDateInputContainer.propTypes = {
   state: EXPIRATION_DATE_TYPE,
-  cardInputDispatch: PropTypes.func,
-  inputElementsRef: PropTypes.object,
   stateName: PropTypes.string,
-  setIsShowVirtualKeyboard: PropTypes.func,
+  cardInputDispatch: PropTypes.func,
+  closeVirtualKeyboard: PropTypes.func,
+  setInputElement: PropTypes.func,
+  nextInputFocus: PropTypes.func,
 };
 
 export default ExpirationDateInputContainer;

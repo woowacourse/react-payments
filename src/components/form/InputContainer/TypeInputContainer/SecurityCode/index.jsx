@@ -5,9 +5,9 @@ import PasswordInput from '../../../Input/PasswordInput';
 
 function SecurityCodeInputContainer({
   state,
-  inputElementsRef,
   stateName,
-  setIsShowVirtualKeyboard,
+  openVirtualKeyboard,
+  closeVirtualKeyboard,
   setInputElement,
   nextInputFocus,
 }) {
@@ -24,7 +24,8 @@ function SecurityCodeInputContainer({
         maxLength={3}
         required
         inputElementKey={stateName}
-        setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+        openVirtualKeyboard={openVirtualKeyboard}
+        closeVirtualKeyboard={closeVirtualKeyboard}
         setInputElement={setInputElement}
         nextInputFocus={nextInputFocus}
       />
@@ -34,10 +35,11 @@ function SecurityCodeInputContainer({
 
 SecurityCodeInputContainer.propTypes = {
   state: PropTypes.string,
-  cardInputDispatch: PropTypes.func,
-  inputElementsRef: PropTypes.object,
   stateName: PropTypes.string,
-  setIsShowVirtualKeyboard: PropTypes.func,
+  openVirtualKeyboard: PropTypes.func,
+  closeVirtualKeyboard: PropTypes.func,
+  setInputElement: PropTypes.func,
+  nextInputFocus: PropTypes.func,
 };
 
 export default SecurityCodeInputContainer;

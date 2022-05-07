@@ -11,19 +11,20 @@ import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../../
 import VirtualKeyboard from '../../VirtualKeyboard';
 import { useModal } from '../../../../hooks/useModal';
 import { useAutoFocusForm } from '../../../../hooks/useAutoFocusForm';
+import { useVirtualKeyboard } from '../../../../hooks/useVirtualKeyboard';
 
 function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction, getInputState }) {
-  const [{ isShow, elementKey, maxLength }, setIsShowVirtualKeyboard] = useState({
-    isShow: false,
-    elementKey: null,
-    maxLength: null,
-  });
+  const [
+    { isShowVirtualKeyboard, inputElementKey, inputElementMaxLength },
+    openVirtualKeyboard,
+    closeVirtualKeyboard,
+  ] = useVirtualKeyboard();
 
   const [isShowModal, openModal, closeModal] = useModal();
 
-  const isComplete = useFormComplete(cardInput, checkFormCompletion);
-
   const [setInputElement, nextInputFocus] = useAutoFocusForm();
+
+  const isComplete = useFormComplete(cardInput, checkFormCompletion);
 
   const onSubmitInputForm = e => {
     e.preventDefault();
@@ -56,9 +57,10 @@ function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction, getInpu
           <TypeInputContainer
             key={uid(key)}
             state={cardInput[key]}
-            cardInputDispatch={cardInputDispatch}
             stateName={key}
-            setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+            cardInputDispatch={cardInputDispatch}
+            openVirtualKeyboard={openVirtualKeyboard}
+            closeVirtualKeyboard={closeVirtualKeyboard}
             setInputElement={setInputElement}
             nextInputFocus={nextInputFocus}
           />
@@ -72,14 +74,14 @@ function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction, getInpu
       </Position>
 
       <Position position="absolute" bottom="0" left="0">
-        {isShow ? (
+        {isShowVirtualKeyboard ? (
           <VirtualKeyboard
             cardInputDispatch={cardInputDispatch}
-            setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+            closeVirtualKeyboard={closeVirtualKeyboard}
             nextInputFocus={nextInputFocus}
-            elementKey={elementKey}
-            elementState={getInputState(elementKey)}
-            maxLength={maxLength}
+            elementKey={inputElementKey}
+            elementState={getInputState(inputElementKey)}
+            maxLength={inputElementMaxLength}
           />
         ) : (
           <div className="flex-center" style={{ width: '240px', height: '160px', padding: '20px' }}>
@@ -112,6 +114,7 @@ CardInputForm.propTypes = {
   }),
   cardInputDispatch: PropTypes.func,
   formSubmitAction: PropTypes.func,
+  getInputState: PropTypes.func,
 };
 
 export default CardInputForm;

@@ -6,9 +6,9 @@ import { isAlphabetOrSpace } from '../../../../../utils/validation';
 
 function OwnerNameInputContainer({
   state,
-  cardInputDispatch,
   stateName,
-  setIsShowVirtualKeyboard,
+  cardInputDispatch,
+  closeVirtualKeyboard,
   setInputElement,
   nextInputFocus,
 }) {
@@ -37,7 +37,7 @@ function OwnerNameInputContainer({
         maxLength={30}
         onChange={onChangeOwnerName}
         inputElementKey={stateName}
-        setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+        closeVirtualKeyboard={closeVirtualKeyboard}
         setInputElement={setInputElement}
         nextInputFocus={nextInputFocus}
       />
@@ -47,10 +47,11 @@ function OwnerNameInputContainer({
 
 OwnerNameInputContainer.propTypes = {
   state: PropTypes.string,
-  cardInputDispatch: PropTypes.func,
-  inputElementsRef: PropTypes.object,
   stateName: PropTypes.string,
-  setIsShowVirtualKeyboard: PropTypes.func,
+  cardInputDispatch: PropTypes.func,
+  closeVirtualKeyboard: PropTypes.func,
+  setInputElement: PropTypes.func,
+  nextInputFocus: PropTypes.func,
 };
 
 export default OwnerNameInputContainer;

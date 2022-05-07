@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 function PasswordInput({
@@ -7,37 +7,28 @@ function PasswordInput({
   maxLength,
   required,
   inputElementKey,
-  setIsShowVirtualKeyboard,
+  openVirtualKeyboard,
+  closeVirtualKeyboard,
   setInputElement,
   nextInputFocus,
 }) {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [value]);
+
   useEffect(() => {
     if (value.length === maxLength && setInputElement && nextInputFocus) {
-      nextInputFocus(inputElementKey, () =>
-        setIsShowVirtualKeyboard(prev => ({
-          ...prev,
-          isShow: false,
-          elementKey: null,
-          maxLength: null,
-        })),
-      );
+      nextInputFocus({
+        inputElementKey,
+        notExistNextElementAction: closeVirtualKeyboard,
+      });
     }
-  }, [
-    value,
-    setInputElement,
-    nextInputFocus,
-    maxLength,
-    inputElementKey,
-    setIsShowVirtualKeyboard,
-  ]);
+  }, [value, setInputElement, nextInputFocus, maxLength, inputElementKey, closeVirtualKeyboard]);
 
   const onFocus = () => {
-    setIsShowVirtualKeyboard(prev => ({
-      ...prev,
-      isShow: true,
-      elementKey: inputElementKey,
-      maxLength,
-    }));
+    openVirtualKeyboard(inputElementKey, maxLength);
   };
 
   const onKeyDown = e => {
@@ -57,7 +48,13 @@ function PasswordInput({
       value={value}
       maxLength={maxLength}
       required={required}
-      ref={element => setInputElement && setInputElement(inputElementKey, element)}
+      ref={element => {
+        if (setInputElement) {
+          setInputElement(inputElementKey, element);
+        }
+
+        inputRef.current = element;
+      }}
       onFocus={onFocus}
       onKeyDown={onKeyDown}
       onChange={() => false}
@@ -70,10 +67,11 @@ PasswordInput.propTypes = {
   value: PropTypes.string,
   maxLength: PropTypes.number,
   required: PropTypes.bool,
-  inputElementsRef: PropTypes.object,
   inputElementKey: PropTypes.string,
-  setIsShowVirtualKeyboard: PropTypes.func,
-  onChange: PropTypes.func,
+  openVirtualKeyboard: PropTypes.func,
+  closeVirtualKeyboard: PropTypes.func,
+  setInputElement: PropTypes.func,
+  nextInputFocus: PropTypes.func,
 };
 
 export default PasswordInput;
