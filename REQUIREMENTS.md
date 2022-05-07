@@ -41,20 +41,12 @@
 - [x] 다음 버튼을 클릭한다.
 - [x] 값이 제대로 채워지지 않은 경우, alert창으로 알려준다.
 
-## 심화 요구사항
-
-- [ ] Storybook 단위 테스트
-- [ ] 유효성 검증 실패에 대한 UI/UX 추가
-- [ ] 가상 키보드
-  - [ ] 마스킹 처리된 값 입력시 사용
-  - [ ] 숫자를 랜덤으로 배열
-
 # Level2
 
 ## 필수 요구사항
 
 - [ ] Storybook 상호 작용 테스트
-- [ ] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
+- [x] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
 - [x] Context API를 활용해 전역 상태 관리 및 계층 재구성
 
 ## 필수 구현
@@ -73,6 +65,16 @@
 - [x] 카드 추가 버튼(+)을 클릭하면, 카드추가 페이지로 이동한다.
 
 ## 심화 요구사항
+
+### level1
+
+- [ ] Storybook 단위 테스트
+- [ ] 유효성 검증 실패에 대한 UI/UX 추가
+- [ ] 가상 키보드
+  - [ ] 마스킹 처리된 값 입력시 사용
+  - [ ] 숫자를 랜덤으로 배열
+
+### level2
 
 - [ ] 카드사 선택 기능
 - [ ] Storybook 스냅샷 테스트

@@ -12,19 +12,19 @@ function CardInputForm({ children }) {
 
   const { number1, number2, number3, number4, month, year, cvc } = state.card;
 
-  const checkCardNumber = (number1, number2, number3, number4) => {
+  const isUnderCardNumberLength = (number1, number2, number3, number4) => {
     return number1.length < 4 || number2.length < 4 || number3.length < 4 || number4.length < 4;
   };
 
-  const checkMonth = (month) => {
+  const isIncorrectMonth = (month) => {
     return Number(month) > 12 || Number(month) < 1;
   };
 
-  const checkYear = (year) => {
+  const isIncorrectYear = (year) => {
     return Number(year) < 22;
   };
 
-  const checkMonthAndYear = (month, year) => {
+  const isIncorrectMonthAndYear = (month, year) => {
     const date = new Date();
     const currentMonth = date.getMonth() + 1;
     const currentYear = Number(date.getFullYear().toString().slice(2, 4));
@@ -32,30 +32,30 @@ function CardInputForm({ children }) {
     return Number(month) < currentMonth && Number(year) === currentYear;
   };
 
-  const checkCVC = (cvc) => {
+  const isUnderCVClength = (cvc) => {
     return cvc.length < 3;
   };
 
   const checkCardInfo = ({ number1, number2, number3, number4, month, year, cvc }) => {
     validator([
       {
-        checker: () => checkCardNumber(number1, number2, number3, number4),
-        errorMsg: ERROR_MESSAGE.CARD_NUMBER,
+        checker: () => isUnderCardNumberLength(number1, number2, number3, number4),
+        errorMsg: ERROR_MESSAGE.CARD_NUMBER_LENGTH,
       },
       {
-        checker: () => checkMonth(month),
+        checker: () => isIncorrectMonth(month),
         errorMsg: ERROR_MESSAGE.MONTH,
       },
       {
-        checker: () => checkYear(year),
+        checker: () => isIncorrectYear(year),
         errorMsg: ERROR_MESSAGE.YEAR,
       },
       {
-        checker: () => checkMonthAndYear(month, year),
+        checker: () => isIncorrectMonthAndYear(month, year),
         errorMsg: ERROR_MESSAGE.MONTH_AND_YEAR,
       },
       {
-        checker: () => checkCVC(cvc),
+        checker: () => isUnderCVClength(cvc),
         errorMsg: ERROR_MESSAGE.CVC,
       },
     ]);
