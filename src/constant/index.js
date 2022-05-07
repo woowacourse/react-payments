@@ -1,3 +1,9 @@
+export const PATH = {
+  HOME: '/',
+  ADD_CARD: '/addCard',
+  REGISTER_CARD: '/registerCard',
+};
+
 export const ENDPOINT =
   'https://moonheekim-payments-server.herokuapp.com/cards';
 

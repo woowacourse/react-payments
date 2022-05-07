@@ -5,11 +5,7 @@ import useAPI from '../../hooks/useAPI';
 import Card from '../../components/Card';
 import Button from '../../components/Button';
 import * as Styled from './index.styled';
-import { ENDPOINT, METHODS } from '../../constant';
-
-// fetch('https://moonheekim-payments-server.herokuapp.com/cards/', {
-// methods: 'DELETE',
-// })
+import { ENDPOINT, METHODS, PATH } from '../../constant';
 
 const RegisterCard = () => {
   const navigate = useNavigate();
@@ -22,7 +18,7 @@ const RegisterCard = () => {
 
   const [alias, _, onChangeAlias] = useInputValue();
   useEffect(() => {
-    if (!state) navigate('/');
+    if (!state) navigate(PATH.HOME);
   }, [state, navigate]);
 
   const onSubmitCardInformation = () => {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useCardFormContext } from '../../context/card-form-context';
 import { pareCardFormState } from '../../utils';
+import { PATH } from '../../constant';
 import Button from '../Button';
 import Card from '../Card';
 
@@ -68,7 +69,7 @@ const AddCardForm = ({ openModal }) => {
         {isSubmittAble && (
           <Button
             type="link"
-            to="/registerCard"
+            to={PATH.REGISTER_CARD}
             state={pareCardFormState(state)}
           >
             다음

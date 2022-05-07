@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import { Loading, AddCard, RegisterCard, CardList, NotFound } from './pages';
+import { PATH } from './constant';
 
 const App = () => {
   return (
@@ -9,9 +10,9 @@ const App = () => {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="/addCard" exact element={<AddCard />} />
-          <Route path="/registerCard" exact element={<RegisterCard />} />
-          <Route path="/" exact element={<CardList />} />
+          <Route path={PATH.ADD_CARD} exact element={<AddCard />} />
+          <Route path={PATH.REGISTER_CARD} exact element={<RegisterCard />} />
+          <Route path={PATH.HOME} exact element={<CardList />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
