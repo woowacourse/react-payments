@@ -49,7 +49,11 @@ const Container = styled.div`
     `};
 
   & > .card {
-    cursor: pointer;
+    ${({ isClick }) =>
+      isClick &&
+      css`
+        cursor: pointer;
+      `};
 
     position: relative;
     width: 16.75rem;
@@ -76,9 +80,9 @@ const Container = styled.div`
           position: absolute;
           display: block;
 
-          top: 0.5rem;
-          left: 30%;
-          right: 0.5rem;
+          top: 1rem;
+          left: 50%;
+          right: 1rem;
 
           font-size: 1.2rem;
           letter-spacing: 1px;

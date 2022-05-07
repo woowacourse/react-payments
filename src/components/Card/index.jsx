@@ -29,7 +29,7 @@ function Card({
   const { name = '', color = 'gray', icon = '' } = CARD_COMPANY[companyId] || {};
 
   return (
-    <Container color={color} companyId={companyId} isMargin={isMargin}>
+    <Container color={color} companyId={companyId} isMargin={isMargin} isClick={!!onClick}>
       <div className="card" onClick={onClick}>
         <div className="card-name">{cardName}</div>
         <div className="company-name">{name}</div>
@@ -53,7 +53,7 @@ Card.defaultProps = {
   expireMonth: '',
   expireYear: '',
   isMargin: true,
-  onClick: () => {},
+  onClick: null,
 };
 
 Card.propTypes = {
