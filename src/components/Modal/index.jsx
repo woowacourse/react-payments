@@ -16,15 +16,6 @@ const StyledModal = styled.div`
   text-align: center;
   vertical-align: middle;
   width: 200px;
-
-  @keyframes fadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
 `;
 
 function Modal({ visible, description }) {

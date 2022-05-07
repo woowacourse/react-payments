@@ -13,33 +13,6 @@ const StyledLink = styled(Link)`
   animation: rainbowLink 3s infinite;
   font-size: 18px;
   text-decoration-line: none;
-
-  @keyframes rainbowLink {
-    0% {
-      color: #ff2a2a;
-    }
-    15% {
-      color: #ff7a2a;
-    }
-    30% {
-      color: #ffc52a;
-    }
-    45% {
-      color: #43ff2a;
-    }
-    60% {
-      color: #2a89ff;
-    }
-    75% {
-      color: #202082;
-    }
-    90% {
-      color: #6b2aff;
-    }
-    100% {
-      color: #e82aff;
-    }
-  }
 `;
 
 function Fail() {

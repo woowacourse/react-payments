@@ -50,15 +50,6 @@ const CardCompanyModal = styled.div`
   height: 227px;
   position: absolute;
   width: 400px;
-
-  @keyframes show {
-    from {
-      bottom: -100px;
-    }
-    to {
-      bottom: 0;
-    }
-  }
 `;
 
 const CardCompany = styled.div`
