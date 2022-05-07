@@ -4,12 +4,10 @@ import { CARD_ACTION } from '../Reducer/CardReducer';
 import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
 
 function useCardNickNameForm(navigator, link) {
-  const {
-    inputtedInfo: { cardNumber, nickName },
-    cardDispatch,
-    inputtedInfoDispatch,
-  } = useContext(CardContext);
+  const { inputtedInfo, cardDispatch, inputtedInfoDispatch } =
+    useContext(CardContext);
 
+  const { cardNumber, nickName } = inputtedInfo;
   const isValidForm = nickName ? nickName.isValid : false;
 
   const onNickNameSubmit = event => {

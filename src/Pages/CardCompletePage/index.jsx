@@ -1,8 +1,9 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { CardContext } from '../../context/CardContext';
 import styled from 'styled-components';
 import Card from '../../components/Modules/Card';
 import CardNickNameForm from '../../components/Templates/CardNickNameForm';
+import { useNavigate } from 'react-router-dom';
 
 const Page = styled.div`
   display: flex;
@@ -29,6 +30,15 @@ const CardSection = styled.div`
 
 function CardCompletePage() {
   const { inputtedInfo } = useContext(CardContext);
+  const navigator = useNavigate();
+
+  useEffect(() => {
+    if (Object.keys(inputtedInfo).length === 0) {
+      alert('유효하지 않은 접근입니다.');
+      navigator('/react-payments/cardList');
+      return;
+    }
+  }, []);
 
   return (
     <Page>
