@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useCardFormContext } from '../../context/card-form-context';
 import Button from '../Button';
 import Header from '../Header';
@@ -14,9 +15,31 @@ import * as styled from './index.styled';
 
 const AddCardForm = ({ openModal }) => {
   const { state } = useCardFormContext();
+
+  const [isSubmittAble, setSubmittAble] = useState(false);
+
+  useEffect(() => {
+    const cardNumberError =
+      state.isCardNumberError || state.isCardNumberNotInput;
+    const ownerNameError = state.isOwnerNameError || state.isOwnerNameNotInput;
+    const secureCodeError =
+      state.isSecureCodeError || state.isSecureCodeNotInput;
+    const expiredDateError =
+      state.isExpiredDateError || state.isExpiredDateNotInput;
+    const passwordError = state.isPasswordError || state.isPasswordNotInput;
+
+    setSubmittAble(
+      !cardNumberError &&
+        !ownerNameError &&
+        !secureCodeError &&
+        !expiredDateError &&
+        !passwordError,
+    );
+  }, [state]);
+
   const onSubmitCardForm = (e) => {
     e.preventDefault();
-    console.log(state);
+
     alert('카드 등록이 완료되었습니다!❤️🧡💛💚💙💜');
   };
 
@@ -30,9 +53,11 @@ const AddCardForm = ({ openModal }) => {
       <SecureCode />
       <Password />
       <styled.ButtonContainer>
-        <Button name="submitButton" type="submit">
-          다음
-        </Button>
+        {isSubmittAble && (
+          <Button name="submitButton" type="submit">
+            다음
+          </Button>
+        )}
       </styled.ButtonContainer>
     </styled.Container>
   );

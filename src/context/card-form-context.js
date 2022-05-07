@@ -6,16 +6,21 @@ const initialState = {
   secondCardNumber: '',
   thirdCardNumber: '',
   fourthCardNumber: '',
+  isCardNumberNotInput: true,
   isCardNumberError: false,
   ownerName: '',
+  isOwnerNameNotInput: true,
   isOwnerNameError: false,
   secureCode: '',
+  isSecureCodeNotInput: true,
   isSecureCodeError: false,
   expiredMonth: '',
   expiredYear: '',
+  isExpiredDateNotInput: true,
   isExpiredDateError: false,
   firstPassword: '',
   secondPassword: '',
+  isPasswordNotInput: true,
   isPasswordError: false,
   cardType: {
     color: 'red',
@@ -54,6 +59,7 @@ const cardFormReducer = (state, action) => {
         secondCardNumber,
         thirdCardNumber,
         fourthCardNumber,
+        isCardNumberNotInput: false,
         isCardNumberError: false,
       };
     }
@@ -64,6 +70,7 @@ const cardFormReducer = (state, action) => {
       return {
         ...state,
         ownerName: action.data.ownerName,
+        isOwnerNameNotInput: false,
         isOwnerNameError: false,
       };
     }
@@ -77,6 +84,7 @@ const cardFormReducer = (state, action) => {
       return {
         ...state,
         secureCode: action.data.secureCode,
+        isSecureCodeNotInput: false,
         isSecureCodeError: false,
       };
     }
@@ -92,6 +100,7 @@ const cardFormReducer = (state, action) => {
         ...state,
         expiredMonth,
         expiredYear,
+        isExpiredDateNotInput: false,
         isExpiredDateError: false,
       };
     }
@@ -108,7 +117,7 @@ const cardFormReducer = (state, action) => {
         ...state,
         firstPassword,
         secondPassword,
-        isPasswordError: false,
+        isPasswordNotInput: false,
       };
     }
     case ACTION.PASSWORD_ERROR: {
