@@ -3,6 +3,7 @@
 @import 'button.css';
 @import 'utils.css';
 @import 'palette.css';
+@import 'main.css';
 
 body {
   display: flex;
@@ -12,6 +13,7 @@ body {
   margin-top: 30px;
 
   font-family: 'Roboto', sans-serif;
+  overflow: hidden;
 }
 
 h1 {

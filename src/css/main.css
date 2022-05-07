@@ -1,0 +1,14 @@
+.main-container {
+  overflow: scroll;
+  height: 80%;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alias {
+  text-align: center;
+}

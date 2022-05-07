@@ -1,21 +1,16 @@
 import PropTypes from 'prop-types';
 
-const Layout = ({ title, children }) => {
+const Layout = ({ children }) => {
   return (
-    <>
-      <h1>{title}</h1>
+    <div className="layout">
       <div className="root">
         <div className="app">{children}</div>
       </div>
-    </>
+    </div>
   );
 };
 
 Layout.propTypes = {
-  /**
-   * title of layout
-   */
-  title: PropTypes.string,
   /**
    * component of layout
    */
