@@ -22,7 +22,7 @@ export const EmptyCard = styled.div`
   font-size: 30px;
   color: #575757;
 
-  background: ${({ color }) => COLOR_TYPE[color]};
+  background: ${({ color }) => COLOR_TYPE[color] || 'white'};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 

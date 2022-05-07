@@ -23,7 +23,7 @@ const initialState = {
   isInitialPassword: true,
   isPasswordError: false,
   cardType: {
-    color: 'red',
+    color: '',
     name: '',
   },
   isCardTypeSelected: false,
