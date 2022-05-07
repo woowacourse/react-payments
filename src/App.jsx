@@ -11,7 +11,7 @@ function App() {
 
   return (
     <CardContext.Provider value={dispatch}>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/" element={<CardListPage cards={state.cards} />} />
           <Route path="/add" element={<AddPage />} />
