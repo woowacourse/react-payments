@@ -2,8 +2,7 @@ import { useContext } from 'react';
 import useErrorMessage from 'hooks/useErrorMessage';
 import CardContext from 'contexts';
 
-import FieldSet from 'components/@common/FieldSet';
-import TextField from 'components/@common/TextField';
+import { FieldSet, TextField } from 'components/@common';
 
 import { CARD_PASSWORD } from 'constants';
 import { validateCardPassword } from 'validators';

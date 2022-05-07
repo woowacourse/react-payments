@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useCardState from 'hooks/useCardState';
 import CardContext from 'contexts';
 
-import Header from 'components/@common/Header';
-import Button from 'components/@common/Button';
+import { Header, Button } from 'components/@common';
 
 import {
   Card,
