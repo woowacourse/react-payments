@@ -12,17 +12,21 @@ const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 function VirtualKeyboard({
   cardInputDispatch,
   closeVirtualKeyboard,
+  nextInputFocus,
+  element,
   elementState,
   elementKey,
-  maxLength,
-  nextInputFocus,
 }) {
   const onClickNumber = e => {
     const {
       target: { textContent },
     } = e;
 
+    const { maxLength } = element;
+
     if (isNumberInRange(`${elementState}${textContent}`, maxLength)) {
+      element?.focus();
+
       cardInputDispatch({
         type: 'CHANGE_PASSWORD_INPUT',
         payload: { elementKey, value: `${elementState}${textContent}` },
@@ -67,10 +71,10 @@ function VirtualKeyboard({
 VirtualKeyboard.propTypes = {
   cardInputDispatch: PropTypes.func,
   closeVirtualKeyboard: PropTypes.func,
+  nextInputFocus: PropTypes.func,
+  element: PropTypes.any,
   elementState: PropTypes.string,
   elementKey: PropTypes.string,
-  maxLength: PropTypes.number,
-  nextInputFocus: PropTypes.func,
 };
 
 export default VirtualKeyboard;

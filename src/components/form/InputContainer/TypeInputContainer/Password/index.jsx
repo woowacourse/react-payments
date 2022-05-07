@@ -9,7 +9,6 @@ import { INPUT_ELEMENT_KEY_SEPARATOR } from '../../../../../utils/constants';
 function PasswordInputContainer({
   state,
   stateName,
-  isShowVirtualKeyboard,
   openVirtualKeyboard,
   closeVirtualKeyboard,
   setInputElement,
@@ -25,7 +24,6 @@ function PasswordInputContainer({
           maxLength={1}
           required
           inputElementKey={`${stateName}${INPUT_ELEMENT_KEY_SEPARATOR}${stateKey}`}
-          isShowVirtualKeyboard={isShowVirtualKeyboard}
           openVirtualKeyboard={openVirtualKeyboard}
           closeVirtualKeyboard={closeVirtualKeyboard}
           setInputElement={setInputElement}
@@ -41,7 +39,6 @@ function PasswordInputContainer({
 PasswordInputContainer.propTypes = {
   state: PASSWORD_TYPE,
   stateName: PropTypes.string,
-  isShowVirtualKeyboard: PropTypes.bool,
   openVirtualKeyboard: PropTypes.func,
   closeVirtualKeyboard: PropTypes.func,
   setInputElement: PropTypes.func,

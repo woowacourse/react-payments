@@ -15,7 +15,8 @@ import { useVirtualKeyboard } from '../../../../hooks/useVirtualKeyboard';
 
 function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction, getInputState }) {
   const [
-    { isShowVirtualKeyboard, inputElementKey, inputElementMaxLength },
+    { element: focusElement, elementKey: focusElementKey },
+    isShowVirtualKeyboard,
     openVirtualKeyboard,
     closeVirtualKeyboard,
   ] = useVirtualKeyboard();
@@ -59,7 +60,6 @@ function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction, getInpu
             state={cardInput[key]}
             stateName={key}
             cardInputDispatch={cardInputDispatch}
-            isShowVirtualKeyboard={isShowVirtualKeyboard}
             openVirtualKeyboard={openVirtualKeyboard}
             closeVirtualKeyboard={closeVirtualKeyboard}
             setInputElement={setInputElement}
@@ -80,9 +80,9 @@ function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction, getInpu
             cardInputDispatch={cardInputDispatch}
             closeVirtualKeyboard={closeVirtualKeyboard}
             nextInputFocus={nextInputFocus}
-            elementKey={inputElementKey}
-            elementState={getInputState(inputElementKey)}
-            maxLength={inputElementMaxLength}
+            element={focusElement}
+            elementKey={focusElementKey}
+            elementState={getInputState(focusElementKey)}
           />
         ) : (
           <div className="flex-center" style={{ width: '240px', height: '160px', padding: '20px' }}>

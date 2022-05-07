@@ -6,7 +6,6 @@ import PasswordInput from '../../../Input/PasswordInput';
 function SecurityCodeInputContainer({
   state,
   stateName,
-  isShowVirtualKeyboard,
   openVirtualKeyboard,
   closeVirtualKeyboard,
   setInputElement,
@@ -25,7 +24,6 @@ function SecurityCodeInputContainer({
         maxLength={3}
         required
         inputElementKey={stateName}
-        isShowVirtualKeyboard={isShowVirtualKeyboard}
         openVirtualKeyboard={openVirtualKeyboard}
         closeVirtualKeyboard={closeVirtualKeyboard}
         setInputElement={setInputElement}
@@ -38,7 +36,6 @@ function SecurityCodeInputContainer({
 SecurityCodeInputContainer.propTypes = {
   state: PropTypes.string,
   stateName: PropTypes.string,
-  isShowVirtualKeyboard: PropTypes.bool,
   openVirtualKeyboard: PropTypes.func,
   closeVirtualKeyboard: PropTypes.func,
   setInputElement: PropTypes.func,

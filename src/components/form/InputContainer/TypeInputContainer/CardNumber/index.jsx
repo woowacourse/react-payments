@@ -12,7 +12,6 @@ function CardNumberInputContainer({
   state,
   stateName,
   cardInputDispatch,
-  isShowVirtualKeyboard,
   openVirtualKeyboard,
   closeVirtualKeyboard,
   setInputElement,
@@ -52,7 +51,6 @@ function CardNumberInputContainer({
             maxLength={4}
             required
             inputElementKey={`${stateName}${INPUT_ELEMENT_KEY_SEPARATOR}${stateKey}`}
-            isShowVirtualKeyboard={isShowVirtualKeyboard}
             openVirtualKeyboard={openVirtualKeyboard}
             closeVirtualKeyboard={closeVirtualKeyboard}
             setInputElement={setInputElement}
@@ -68,7 +66,6 @@ CardNumberInputContainer.propTypes = {
   state: CARD_NUMBER_TYPE,
   stateName: PropTypes.string,
   cardInputDispatch: PropTypes.func,
-  isShowVirtualKeyboard: PropTypes.bool,
   openVirtualKeyboard: PropTypes.func,
   closeVirtualKeyboard: PropTypes.func,
   setInputElement: PropTypes.func,

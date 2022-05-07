@@ -1,30 +1,26 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 export const useVirtualKeyboard = () => {
-  const [virtualKeyboardInfo, setVirtualKeyboardInfo] = useState({
-    isShowVirtualKeyboard: false,
-    inputElementKey: null,
-    inputElementMaxLength: null,
+  const [currentFocusInputInfo, setCurrentFocusInputInfo] = useState({
+    element: null,
+    elementKey: null,
   });
 
+  const [isShowVirtualKeyboard, setIsShowVirtualKeyboard] = useState(false);
+
   const openVirtualKeyboard = useCallback(
-    (inputElementKey, inputElementMaxLength) => {
-      setVirtualKeyboardInfo({
-        isShowVirtualKeyboard: true,
-        inputElementKey,
-        inputElementMaxLength,
-      });
+    (inputElementKey, inputElement) => {
+      setIsShowVirtualKeyboard(true);
+      setCurrentFocusInputInfo({ element: inputElement, elementKey: inputElementKey });
     },
-    [setVirtualKeyboardInfo],
+    [setIsShowVirtualKeyboard, setCurrentFocusInputInfo],
   );
 
   const closeVirtualKeyboard = useCallback(() => {
-    setVirtualKeyboardInfo({
-      isShowVirtualKeyboard: false,
-      inputElementKey: null,
-      inputElementMaxLength: null,
-    });
-  }, [setVirtualKeyboardInfo]);
+    setIsShowVirtualKeyboard(false);
 
-  return [virtualKeyboardInfo, openVirtualKeyboard, closeVirtualKeyboard];
+    setCurrentFocusInputInfo({ element: null, elementKey: null });
+  }, [setIsShowVirtualKeyboard, setCurrentFocusInputInfo]);
+
+  return [currentFocusInputInfo, isShowVirtualKeyboard, openVirtualKeyboard, closeVirtualKeyboard];
 };
