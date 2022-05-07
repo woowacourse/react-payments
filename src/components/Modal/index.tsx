@@ -68,8 +68,7 @@ export default function Modal({ onClose, changeCardType }) {
               <div
                 className="modal-item-dot"
                 style={{
-                  backgroundColor:
-                    "radial-gradient(50% 50% at 50% 50%, rgba(4, 192, 158, 0.31) 0%, rgba(4, 192, 158, 0.457344) 65.1%, #04C09E 100%)",
+                  backgroundColor: "#04c09e",
                 }}
                 onClick={handleClick}
                 data-type="loyd"

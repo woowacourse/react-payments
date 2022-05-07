@@ -25,7 +25,7 @@ const focusNextInput = (e: React.FormEvent<HTMLFormElement>) => {
   }
 };
 
-export default function CardInfoForm() {
+export default function CardInfoForm({ cardTypeValidation, showModal }) {
   const [isNextButtonShown, setIsNextButtonShown] = useState(false);
   const { formValidation, validateFormValidation } = useFormValidation({
     cardNumbers: false,
@@ -36,20 +36,26 @@ export default function CardInfoForm() {
   });
   const navigate = useNavigate();
 
+  const onSubmit = e => {
+    e.preventDefault();
+    alert("카드 등록이 완료되었습니다.");
+    setIsNextButtonShown(true);
+    navigate("/samplePage");
+  };
+
   useEffect(() => {
-    setIsNextButtonShown(() => Object.values(formValidation).every(validation => validation));
-  }, [formValidation]);
+    if (Object.values(formValidation).every(validation => validation)) {
+      if (cardTypeValidation) {
+        setIsNextButtonShown(true);
+
+        return;
+      }
+      showModal();
+    }
+  }, [formValidation, cardTypeValidation]);
 
   return (
-    <form
-      onChange={focusNextInput}
-      onSubmit={e => {
-        e.preventDefault();
-        alert("카드 등록이 완료되었습니다.");
-        setIsNextButtonShown(true);
-        navigate("/samplePage");
-      }}
-    >
+    <form onChange={focusNextInput} onSubmit={onSubmit}>
       <CardNumber validateFormValidation={validateFormValidation} />
       <CardExpiredDate validateFormValidation={validateFormValidation} />
       <CardUserName validateFormValidation={validateFormValidation} />
