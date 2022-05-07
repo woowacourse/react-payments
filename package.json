@@ -68,6 +68,7 @@
     "chromatic": "^6.5.4",
     "gh-pages": "^3.2.3",
     "storybook-addon-styled-component-theme": "^2.0.0",
+    "storybook-react-context": "^0.6.0",
     "webpack": "^5.72.0"
   }
 }
