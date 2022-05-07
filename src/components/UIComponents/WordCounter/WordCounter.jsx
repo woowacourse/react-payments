@@ -1,11 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-const textColor = {
-  error: "#d82424",
-  complete: "#04c09e",
-  default: "#525252",
-};
+import { textColor } from "../styleConstants";
 
 const StyledWordCounter = styled.p`
   position: absolute;

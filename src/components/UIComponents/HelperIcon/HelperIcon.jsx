@@ -14,7 +14,7 @@ const StyledIcon = styled.img`
 `;
 
 const StyledDescription = styled.p`
-  ${(props) => !props.isOpen && `display: none;`}
+  ${({ isOpen }) => !isOpen && `display: none;`}
   position: absolute;
   top: 5px;
   right: -205px;

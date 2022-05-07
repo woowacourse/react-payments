@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { textColor } from "../styleConstants";
 
-const width = {
+const widthPreset = {
   xs: "45px",
   sm: "85px",
   md: "135px",
@@ -21,38 +22,29 @@ const StyledInputField = styled.div`
 const StyledLabel = styled.label`
   font-size: 12px;
   line-height: 14px;
-  color: ${(props) =>
-    props.state === "error"
-      ? "#d82424"
-      : props.state === "complete"
-      ? "#04c09e"
-      : "#525252"};
+  color: ${({ state }) => textColor[state]};
   letter-spacing: -0.085em;
 
   display: flex;
   gap: 10px;
-
-  .error-message {
-    color: #d82424;
-  }
 `;
 
 const StyledInputWrapper = styled.div`
   display: flex;
-  justify-content: ${(props) => props.align};
-  border-bottom: ${(props) =>
-    props.shape === "underline" && "1px solid #000000"};
+  justify-content: ${({ align }) => align};
+  border-bottom: ${({ shape }) => shape === "underline" && "1px solid #000000"};
 
-  margin: ${(props) => props.width === "xl" && "auto"};
+  margin: ${({ width }) => width === "xl" && "auto"};
+  gap: ${({ isSplit }) => isSplit && "10px"};
 
-  ${(props) => props.isSplit && "gap: 10px; input {"}
-  background: ${(props) => props.shape === "box" && "#ecebf1"};
-  border-radius: ${(props) => props.shape === "box" && "7px"};
-  width: ${(props) => width[props.width]};
+  ${({ isSplit }) => isSplit && "input {"}
+  background: ${({ shape }) => shape === "box" && "#ecebf1"};
+  border-radius: ${({ shape }) => shape === "box" && "7px"};
+  width: ${({ width }) => widthPreset[width]};
   padding: 12px;
 
-  box-shadow: ${(props) => props.isInvalid && "inset 0 0 0 1px #d82424"};
-  ${(props) => props.isSplit && "}"}
+  box-shadow: ${({ isInvalid }) => isInvalid && "inset 0 0 0 1px #d82424"};
+  ${({ isSplit }) => isSplit && "}"}
 `;
 
 const StyledInputContainer = styled.div`
