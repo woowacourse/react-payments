@@ -14,14 +14,13 @@ const StyledIcon = styled.img`
 const StyledDescription = styled.p`
   ${props => !props.isOpen && `display: none;`}
   position: absolute;
-  top: 5px;
-  right: -205px;
 
   max-width: 200px;
   width: max-content;
 
   border: 1px solid #d2d2d2;
   border-radius: 5px;
+  margin: 0;
   padding: 10px;
   z-index: 1;
   font-size: 12px;
