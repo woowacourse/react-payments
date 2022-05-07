@@ -70,6 +70,7 @@
     "eslint-plugin-storybook": "^0.5.11",
     "gh-pages": "^3.2.3",
     "prettier": "^2.6.2",
+    "storybook-react-router": "^1.0.8",
     "webpack": "^5.72.0"
   }
 }

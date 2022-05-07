@@ -2,8 +2,10 @@ import { useContext } from 'react';
 import { MESSAGE } from '../constant/message';
 import { CardContext } from '../context/CardContext';
 import { CARD_ACTION } from '../Reducer/CardReducer';
+import { useNavigate } from 'react-router-dom';
 
-function useCardAddForm(navigator, link) {
+function useCardAddForm(link) {
+  const navigator = useNavigate();
   const { inputtedInfo, cardData, cardDispatch } = useContext(CardContext);
 
   const isValidForm = Object.keys(inputtedInfo)

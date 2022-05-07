@@ -1,3 +1,6 @@
+import { CardContextProvider } from '../src/context/CardContext';
+import { MemoryRouter } from 'react-router';
+
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
@@ -7,3 +10,13 @@ export const parameters = {
     },
   },
 };
+
+export const decorators = [
+  Story => (
+    <CardContextProvider>
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    </CardContextProvider>
+  ),
+];

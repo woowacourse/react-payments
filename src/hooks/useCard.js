@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function useCard({ cardNumber, expiredDate, ownerName }) {
   const navigator = useNavigate();
   const { inputtedInfoDispatch, cardData } = useContext(CardContext);
+
   const companyNameString = '신한 카드';
 
   const cardNumberString = cardNumber

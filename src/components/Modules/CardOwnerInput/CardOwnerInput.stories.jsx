@@ -2,7 +2,7 @@ import React from 'react';
 import CardOwnerInput from '.';
 
 export default {
-  title: 'Payment/CardOwnerInput',
+  title: 'Payment/Modules/CardOwnerInput',
   component: CardOwnerInput,
 };
 

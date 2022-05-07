@@ -2,7 +2,7 @@ import React from 'react';
 import CardAddPage from '.';
 
 export default {
-  title: 'Payment/CardAddPage',
+  title: 'Payment/Pages/CardAddPage',
   component: CardAddPage,
 };
 

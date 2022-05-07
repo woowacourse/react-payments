@@ -18,6 +18,7 @@ const CardContainer = styled.div`
 
 function AddCard({ link }) {
   const navigator = useNavigate();
+
   const onAddClick = () => {
     navigator(link);
   };

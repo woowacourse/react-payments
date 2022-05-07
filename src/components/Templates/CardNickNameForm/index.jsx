@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import SubmitButton from '../../Atoms/SubmitButton';
 import NickNameInput from '../../Modules/NickNameInput';
 import useCardNickNameForm from '../../../hooks/useCardNickNameForm';
-import { useNavigate } from 'react-router-dom';
 
 const Form = styled.form`
   display: flex;
@@ -20,11 +19,7 @@ const SubmitButtonWrapper = styled.div`
 `;
 
 function CardNickNameForm({ link }) {
-  const navigator = useNavigate();
-  const { isValidForm, onNickNameSubmit } = useCardNickNameForm(
-    navigator,
-    link
-  );
+  const { isValidForm, onNickNameSubmit } = useCardNickNameForm(link);
 
   return (
     <Form onSubmit={onNickNameSubmit}>

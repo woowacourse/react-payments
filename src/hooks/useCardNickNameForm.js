@@ -2,8 +2,10 @@ import { useContext } from 'react';
 import { CardContext } from '../context/CardContext';
 import { CARD_ACTION } from '../Reducer/CardReducer';
 import { INPUT_ACTION } from '../Reducer/InputtedInfoReducer';
+import { useNavigate } from 'react-router-dom';
 
-function useCardNickNameForm(navigator, link) {
+function useCardNickNameForm(link) {
+  const navigator = useNavigate();
   const { inputtedInfo, cardDispatch, inputtedInfoDispatch } =
     useContext(CardContext);
 
