@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function LineInput({ children }) {
   return (
     <div className="input-container">
-      <div className="line-input-box">{children}</div>
+      <div className="input-box-underline">{children}</div>
     </div>
   );
 }

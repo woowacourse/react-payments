@@ -36,6 +36,7 @@
   - [x] 카드추가 페이지의 `<`버튼을 눌러 카드리스트 페이지로 이동할 수 있다.
   - [x] 카드추가완료 페이지의 `확인`버튼을 눌러 카드리스트 페이지로 이동할 수 있다.
   - [x] 카드리스트 페이지의 `+`버튼을 눌러 카드추가 페이지로 이동할 수 있다.
+- [ ] 매직넘버들을 상수화한다.
 
 ## STEP2 추가 적용 기술
 
@@ -51,14 +52,9 @@
   - [x] `CardList`가 재사용성을 위해 카드 리스트만 렌더링하고, 확장성은 `childern`을 통해 부가했다.
   - [x] `input` 관련 컴포넌트를 UI별로 분리하고, 렌더링만 해주도록 하여 범용성을 높었다.
   - [x] `form` 관련 컴포넌트들은 재사용을 포기하고, 각각 하나의 폼에 대응하는 역할만 하도록 수정했다.
-- [ ] 리팩토링 완료된 컴포넌트들에 `styled-components`를 사용해본다.
+- [x] 리팩토링 완료된 컴포넌트들에 `styled-components`를 사용해본다.
   - [x] `button` 관련 컴포넌트들을 `styled-components`로 만들어본다.
   - [x] `helpContent` 컴포넌트를 `styled-components`로 만들어본다.
-  - [ ] `input` 관련 컴포넌트들을 `styled-components`로 만들어본다.
-    - [ ] `LabeledInput` 컴포넌트를 `styled-components`로 만들어본다.
-    - [ ] `LineInput` 컴포넌트를 `styled-components`로 만들어본다.
-  - [ ] `form` 관련 컴포넌트들을 `styled-components`로 만들어본다.
-  - [ ] `Page` 관련 컴포넌트들을 `styled-components`로 만들어본다.
 
 ### Custom Hooks
 
@@ -75,9 +71,12 @@
 - [ ] 리팩토링이 완료된 컴포넌트를 대상으로 `Storybook`을 작성한다.
   - [x] `button` 관련 컴포넌트의 `Storybook`을 작성한다.
   - [x] `helpContent` 관련 컴포넌트의 `Storybook`을 작성한다.
-  - [ ] `input` 관련 컴포넌트의 `Storybook`을 작성한다.
-    - [ ] `LabeledInput` 관련 컴포넌트의 `Storybook`을 작성한다.
-    - [ ] `LineInput` 관련 컴포넌트의 `Storybook`을 작성한다.
+  - [x] `input` 관련 컴포넌트의 `Storybook`을 작성한다.
+    - [x] `LabeledInput` 관련 컴포넌트의 `Storybook`을 작성한다.
+    - [x] `LineInput` 관련 컴포넌트의 `Storybook`을 작성한다.
   - [ ] `form` 관련 컴포넌트의 `Storybook`을 작성한다.
   - [ ] `Page` 관련 컴포넌트의 `Storybook`을 작성한다.
-- [ ] 어떻게 하는지 알아보고 상호작용 테스트까지 마친다.
+- [ ] 페이지별 상호작용 테스트를 진행한다.
+  - [ ]
+  - [ ]
+  - [ ]

@@ -3,14 +3,15 @@ import React from 'react';
 import LineInput from '../Common/Input/LineInput';
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
-import { CardContext } from '../../context';
+import { CardContext, PageContext } from '../../context';
 import { isBlankValue, isNotKoreanOrSpace, isOverlappedValue } from '../../utils/validations';
 import { DISPATCH_TYPE } from '../../constants';
 import { DEFAULT_CARD_INFO } from '../../constants';
 import SubmitButton from '../Common/Button/SubmitButton';
 
-function LineInputForm({ handleChangePage }) {
+function LineInputForm() {
   const { cardList, cardInput, setCardList, cardInputDispatch } = useContext(CardContext);
+  const { setPage } = useContext(PageContext);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -29,7 +30,7 @@ function LineInputForm({ handleChangePage }) {
       type: DISPATCH_TYPE.RESET,
       payload: { ...DEFAULT_CARD_INFO },
     });
-    handleChangePage('cardListPage');
+    setPage('cardListPage');
   };
 
   const onChangeCardDesignation = e => {
@@ -53,7 +54,7 @@ function LineInputForm({ handleChangePage }) {
     <form onSubmit={handleSubmit}>
       <LineInput>
         <input
-          className="line-input"
+          className="input-underline"
           value={cardInput.cardDesignation}
           onChange={e => onChangeCardDesignation(e, 10)}
           maxLength={15}

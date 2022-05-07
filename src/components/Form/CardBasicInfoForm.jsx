@@ -10,13 +10,13 @@ import {
   checkUniqueCard,
   isNumberInRange,
 } from './validation';
-import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../types';
 import { DISPATCH_TYPE } from '../../constants';
-import { CardContext } from '../../context';
+import { CardContext, PageContext } from '../../context';
 
-function InputForm({ cardInput, cardInputDispatch, handleChangePage }) {
+function InputForm() {
+  const { cardInput, cardInputDispatch, cardList } = useContext(CardContext);
+  const { setPage } = useContext(PageContext);
   const { cardNumber, expirationDate, ownerName, securityCode, password } = cardInput;
-  const { cardList } = useContext(CardContext);
   const [isComplete, setIsComplete] = useState(false);
   const inputElementsRef = useRef([]);
 
@@ -120,7 +120,7 @@ function InputForm({ cardInput, cardInputDispatch, handleChangePage }) {
         checkFormValidation({ cardNumber, expirationDate, securityCode, password }) &&
         checkUniqueCard(cardNumber, cardList)
       ) {
-        handleChangePage('completeAddCardPage');
+        setPage('completeAddCardPage');
       }
     } catch ({ message }) {
       alert(message);
@@ -216,14 +216,6 @@ function InputForm({ cardInput, cardInputDispatch, handleChangePage }) {
 }
 
 InputForm.propTypes = {
-  cardInput: PropTypes.shape({
-    cardNumber: CARD_NUMBER_TYPE,
-    expirationDate: EXPIRATION_DATE_TYPE,
-    ownerName: PropTypes.string,
-    securityCode: PropTypes.string,
-    password: PASSWORD_TYPE,
-  }),
   handleChangePage: PropTypes.func,
-  cardInputDispatch: PropTypes.func,
 };
 export default InputForm;
