@@ -19,7 +19,7 @@ import Button from './../components/common/Button';
 import Form from '../components/common/Form';
 import GoBackButton from '../components/GoBackButton';
 
-import { CARD_INFO_RULES } from '../constants';
+import { ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_SUBMIT_CONFIRM_MESSAGE } from '../constants';
 import {
   isValidCardExpireDateUnit,
   isValidCardHolderName,
@@ -38,53 +38,38 @@ export default function AddCardPage() {
   const [cardNumber, updateCardNumberUnit, isCompleteCardNumber] = useInputArray(
     ['', '', '', ''],
     isValidCardNumberUnit,
-    CARD_INFO_RULES.NUMBER_UNIT_COUNT * CARD_INFO_RULES.NUMBER_UNIT_LENGTH
+    ADD_CARD_FORM_CONDITION.NUMBER_UNIT_COUNT * ADD_CARD_FORM_CONDITION.NUMBER_UNIT_LENGTH
   );
 
   const [expireDate, updateExpireDateUnit, isCompleteExpireDate] = useInputArray(
     ['', ''],
     isValidCardExpireDateUnit,
-    CARD_INFO_RULES.EXPIRE_DATE_LENGTH
+    ADD_CARD_FORM_CONDITION.EXPIRE_DATE_LENGTH
   );
 
   const [holderName, updateHolderName] = useInput('', isValidCardHolderName);
   const [securityCode, updateSecurityCode, isCompleteSecurityCode] = useInput(
     '',
     isValidCardSecurityCode,
-    CARD_INFO_RULES.SECURITY_CODE_LENGTH
+    ADD_CARD_FORM_CONDITION.SECURITY_CODE_LENGTH
   );
   const [password, updatePasswordUnit, isCompletePassword] = useInputArray(
     ['', ''],
     isValidCardPasswordUnit,
-    CARD_INFO_RULES.PASSWORD_LENGTH
+    ADD_CARD_FORM_CONDITION.PASSWORD_LENGTH
   );
 
   const { addNewCard } = useContext(CardInfoListContext);
   const navigate = useNavigate();
 
-  const cardInfoConfirmMessage = `
-  카드번호: ${cardNumber.join(' - ')}
-  만료일: ${expireDate.join('/')}
-  소유자: ${holderName}
-  
-  위 정보로 카드를 등록하시겠습니까?
-`;
-
   const handleCardInfoSubmit = e => {
     e.preventDefault();
     // eslint-disable-next-line no-restricted-globals
-    if (confirm(cardInfoConfirmMessage)) {
-      const cardIndex = addNewCard({
-        cardNumber,
-        expireDate,
-        holderName,
-      });
+    if (confirm(ADD_CARD_FORM_SUBMIT_CONFIRM_MESSAGE(cardNumber, expireDate, holderName))) {
+      const cardIndex = addNewCard({ cardNumber, expireDate, holderName });
       navigate(`/updateCardNickName/${cardIndex}`, {
         replace: true,
-        state: {
-          fromAddCardForm: true,
-          cardIndex,
-        },
+        state: { fromAddCardForm: true, cardIndex },
       });
     }
   };

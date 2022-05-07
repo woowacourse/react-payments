@@ -1,7 +1,7 @@
-import { CARD_INFO_RULES } from '../constants';
+import { ADD_CARD_FORM_CONDITION } from '../constants';
 
 const isValidCardNumberUnit = value => {
-  return Number.isInteger(Number(value)) && value.length <= CARD_INFO_RULES.NUMBER_UNIT_LENGTH;
+  return Number.isInteger(Number(value)) && value.length <= ADD_CARD_FORM_CONDITION.NUMBER_UNIT_LENGTH;
 };
 
 const isValidCardExpireDateUnit = (value, index) => {
@@ -13,11 +13,11 @@ const isValidCardExpireDateUnit = (value, index) => {
 };
 
 const isValidCardHolderName = value => {
-  return /^[a-z]*$/i.test(value) && value.length <= CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH;
+  return /^[a-z]*$/i.test(value) && value.length <= ADD_CARD_FORM_CONDITION.HOLDER_NAME_MAX_LENGTH;
 };
 
 const isValidCardSecurityCode = value => {
-  return Number.isInteger(Number(value)) && value.length <= CARD_INFO_RULES.SECURITY_CODE_LENGTH;
+  return Number.isInteger(Number(value)) && value.length <= ADD_CARD_FORM_CONDITION.SECURITY_CODE_LENGTH;
 };
 
 const isValidCardPasswordUnit = value => {

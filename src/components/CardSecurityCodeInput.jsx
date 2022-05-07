@@ -5,7 +5,7 @@ import Input from './common/Input.jsx';
 import InputField from './common/InputField.jsx';
 import DescriptionIconButton from './common/DescriptionIconButton.jsx';
 
-import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from '../constants';
+import { ADD_CARD_FORM_CONDITION, CREATE_MASKED_CHARACTERS } from '../constants';
 
 import QuestionMarkIcon from '../assets/images/questionMarkIcon.svg';
 
@@ -30,7 +30,7 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
       <InputField
         labelText="보안 코드(CVC/CVV)"
         wrapperWidth="85px"
-        isComplete={securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH}>
+        isComplete={securityCode.length === ADD_CARD_FORM_CONDITION.SECURITY_CODE_LENGTH}>
         <Input
           type="password"
           placeholder={CREATE_MASKED_CHARACTERS(3)}
@@ -38,7 +38,7 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
           maxLength="3"
           onChange={e => onChange(e.target.value)}
           width="100%"
-          isComplete={securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
+          isComplete={securityCode.length === ADD_CARD_FORM_CONDITION.SECURITY_CODE_LENGTH}
         />
       </InputField>
       <IconButtonWrapper>

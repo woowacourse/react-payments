@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import Input from './common/Input';
 import InputField from './common/InputField';
 
-import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from '../constants';
+import { ADD_CARD_FORM_CONDITION, CREATE_MASKED_CHARACTERS } from '../constants';
 
 export default function CardNumberInput({ cardNumber, onChange }) {
   return (
@@ -12,9 +12,10 @@ export default function CardNumberInput({ cardNumber, onChange }) {
       wrapperWidth="100%"
       horizontalAlign="space-around"
       isComplete={
-        cardNumber.join('').length === CARD_INFO_RULES.NUMBER_UNIT_COUNT * CARD_INFO_RULES.NUMBER_UNIT_LENGTH
+        cardNumber.join('').length ===
+        ADD_CARD_FORM_CONDITION.NUMBER_UNIT_COUNT * ADD_CARD_FORM_CONDITION.NUMBER_UNIT_LENGTH
       }>
-      {Array.from({ length: CARD_INFO_RULES.NUMBER_UNIT_COUNT }).map((_, index) => (
+      {Array.from({ length: ADD_CARD_FORM_CONDITION.NUMBER_UNIT_COUNT }).map((_, index) => (
         <Fragment key={index}>
           <Input
             type={index <= 1 ? 'number' : 'password'}
@@ -24,7 +25,7 @@ export default function CardNumberInput({ cardNumber, onChange }) {
             onChange={e => onChange(e.target.value, index)}
             isComplete={cardNumber[index].length === 4}
           />
-          {index < CARD_INFO_RULES.NUMBER_UNIT_COUNT - 1 && cardNumber[index].length === 4 && <p>-</p>}
+          {index < ADD_CARD_FORM_CONDITION.NUMBER_UNIT_COUNT - 1 && cardNumber[index].length === 4 && <p>-</p>}
         </Fragment>
       ))}
     </InputField>

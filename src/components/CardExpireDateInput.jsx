@@ -3,7 +3,7 @@ import React from 'react';
 import Input from './common/Input.jsx';
 import InputField from './common/InputField.jsx';
 
-import { CARD_INFO_RULES } from '../constants';
+import { ADD_CARD_FORM_CONDITION } from '../constants';
 
 export default function CardExpireDateInput({ expireDate, onChange }) {
   return (
@@ -11,7 +11,7 @@ export default function CardExpireDateInput({ expireDate, onChange }) {
       labelText="만료일 (MM/YY)"
       wrapperWidth="135px"
       horizontalAlign="center"
-      isComplete={expireDate.join('').length === CARD_INFO_RULES.EXPIRE_DATE_LENGTH}>
+      isComplete={expireDate.join('').length === ADD_CARD_FORM_CONDITION.EXPIRE_DATE_LENGTH}>
       <Input
         placeholder="MM"
         type="text"

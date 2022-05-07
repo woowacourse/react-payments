@@ -3,7 +3,7 @@ import React from 'react';
 import InputField from './common/InputField.jsx';
 import Input from './common/Input.jsx';
 
-import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from '../constants';
+import { ADD_CARD_FORM_CONDITION, CREATE_MASKED_CHARACTERS } from '../constants';
 
 export default function CardPasswordInput({ password, onChange }) {
   return (
@@ -11,9 +11,9 @@ export default function CardPasswordInput({ password, onChange }) {
       labelText="카드 비밀번호 앞 두 자리"
       wrapperWidth="15%"
       horizontalAlign="flex-start"
-      isComplete={password.join('').length === CARD_INFO_RULES.PASSWORD_LENGTH}
+      isComplete={password.join('').length === ADD_CARD_FORM_CONDITION.PASSWORD_LENGTH}
       separateEachInput={true}>
-      {Array.from({ length: CARD_INFO_RULES.PASSWORD_LENGTH }).map((_, index) => (
+      {Array.from({ length: ADD_CARD_FORM_CONDITION.PASSWORD_LENGTH }).map((_, index) => (
         <Input
           key={index}
           type="password"

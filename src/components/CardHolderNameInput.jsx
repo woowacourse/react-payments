@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Input from './common/Input.jsx';
 import InputField from './common/InputField.jsx';
 
-import { CARD_INFO_RULES } from '../constants';
+import { ADD_CARD_FORM_CONDITION } from '../constants';
 
 const InputFieldWrapper = styled.div`
   position: relative;
@@ -49,7 +49,7 @@ export default function CardHolderNameInput({ holderName, onChange }) {
       </InputField>
       <InputCounter
         currLength={holderName.length}
-        maxLength={CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH}
+        maxLength={ADD_CARD_FORM_CONDITION.HOLDER_NAME_MAX_LENGTH}
         isComplete={holderName !== ''}
       />
     </InputFieldWrapper>
