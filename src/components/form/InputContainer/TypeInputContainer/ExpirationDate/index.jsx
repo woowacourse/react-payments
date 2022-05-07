@@ -10,9 +10,10 @@ import { INPUT_ELEMENT_KEY_SEPARATOR } from '../../../../../utils/constants';
 function ExpirationDateInputContainer({
   state,
   cardInputDispatch,
-  inputElementsRef,
   stateName,
   setIsShowVirtualKeyboard,
+  setInputElement,
+  nextInputFocus,
 }) {
   const onChangeExpirationDate = (e, key) => {
     const {
@@ -38,9 +39,10 @@ function ExpirationDateInputContainer({
           maxLength={2}
           required
           onChange={e => onChangeExpirationDate(e, stateKey)}
-          inputElementsRef={inputElementsRef}
           inputElementKey={`${stateName}${INPUT_ELEMENT_KEY_SEPARATOR}${stateKey}`}
           setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+          setInputElement={setInputElement}
+          nextInputFocus={nextInputFocus}
         />
       ))}
     </LabelInputContainer>

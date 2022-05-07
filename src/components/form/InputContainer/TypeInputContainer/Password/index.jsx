@@ -6,7 +6,13 @@ import LabelInputContainer from '../../LabelInputContainer';
 import PasswordInput from '../../../Input/PasswordInput';
 import { INPUT_ELEMENT_KEY_SEPARATOR } from '../../../../../utils/constants';
 
-function PasswordInputContainer({ state, inputElementsRef, stateName, setIsShowVirtualKeyboard }) {
+function PasswordInputContainer({
+  state,
+  stateName,
+  setIsShowVirtualKeyboard,
+  setInputElement,
+  nextInputFocus,
+}) {
   return (
     <LabelInputContainer labelTitle="카드 비밀번호" inputSize="w-50" htmlFor={`${stateName}`}>
       {Object.keys(state).map((stateKey, idx) => (
@@ -16,9 +22,10 @@ function PasswordInputContainer({ state, inputElementsRef, stateName, setIsShowV
           value={state[stateKey]}
           maxLength={1}
           required
-          inputElementsRef={inputElementsRef}
           inputElementKey={`${stateName}${INPUT_ELEMENT_KEY_SEPARATOR}${stateKey}`}
           setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+          setInputElement={setInputElement}
+          nextInputFocus={nextInputFocus}
         />
       ))}
       <div className="inputted-password">*</div>

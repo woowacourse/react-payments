@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useCallback, useReducer } from 'react';
 import { INPUT_ELEMENT_KEY_SEPARATOR } from '../utils/constants';
 
 const cardInputReducer = (state, action) => {
@@ -71,5 +71,23 @@ const defaultCardInputState = {
 };
 
 export const useCardInput = card => {
-  return useReducer(cardInputReducer, card ? { ...card } : defaultCardInputState);
+  const [cardInput, cardInputDispatch] = useReducer(
+    cardInputReducer,
+    card ? { ...card } : defaultCardInputState,
+  );
+
+  const getInputState = useCallback(
+    key => {
+      const [stateName, stateKey] = key.split(INPUT_ELEMENT_KEY_SEPARATOR);
+
+      if (!stateKey) {
+        return cardInput[stateName];
+      }
+
+      return cardInput[stateName][stateKey];
+    },
+    [cardInput],
+  );
+
+  return [cardInput, cardInputDispatch, getInputState];
 };

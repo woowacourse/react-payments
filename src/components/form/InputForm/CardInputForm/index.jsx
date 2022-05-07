@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useFormComplete } from '../../../../hooks/useFormComplete';
 import { checkFormCompletion, checkFormValidation } from '../../../../utils/validation/form';
@@ -10,18 +10,20 @@ import CardCompanySelect from '../../CardCompanySelect';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../../types';
 import VirtualKeyboard from '../../VirtualKeyboard';
 import { useModal } from '../../../../hooks/useModal';
+import { useAutoFocusForm } from '../../../../hooks/useAutoFocusForm';
 
-function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction }) {
-  const [{ isShow, elementKey }, setIsShowVirtualKeyboard] = useState({
+function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction, getInputState }) {
+  const [{ isShow, elementKey, maxLength }, setIsShowVirtualKeyboard] = useState({
     isShow: false,
     elementKey: null,
+    maxLength: null,
   });
 
   const [isShowModal, openModal, closeModal] = useModal();
 
   const isComplete = useFormComplete(cardInput, checkFormCompletion);
 
-  const inputElementsRef = useRef({});
+  const [setInputElement, nextInputFocus] = useAutoFocusForm();
 
   const onSubmitInputForm = e => {
     e.preventDefault();
@@ -55,9 +57,10 @@ function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction }) {
             key={uid(key)}
             state={cardInput[key]}
             cardInputDispatch={cardInputDispatch}
-            inputElementsRef={inputElementsRef}
             stateName={key}
             setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+            setInputElement={setInputElement}
+            nextInputFocus={nextInputFocus}
           />
         );
       })}
@@ -71,10 +74,12 @@ function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction }) {
       <Position position="absolute" bottom="0" left="0">
         {isShow ? (
           <VirtualKeyboard
-            inputElementsRef={inputElementsRef}
-            elementKey={elementKey}
             cardInputDispatch={cardInputDispatch}
             setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+            nextInputFocus={nextInputFocus}
+            elementKey={elementKey}
+            elementState={getInputState(elementKey)}
+            maxLength={maxLength}
           />
         ) : (
           <div className="flex-center" style={{ width: '240px', height: '160px', padding: '20px' }}>

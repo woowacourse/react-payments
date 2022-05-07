@@ -1,52 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useAutoFocus } from '../../../../hooks/useAutoFocus';
-import { useCallback } from 'react';
+import { useEffect } from 'react';
 function PasswordInput({
   id,
   value,
   maxLength,
   required,
-  inputElementsRef,
   inputElementKey,
   setIsShowVirtualKeyboard,
+  setInputElement,
+  nextInputFocus,
 }) {
-  // 렌더링 마다 생성됨,. 너무 자주 생성됨.. -> useEffect의 deps에 들어가면 렌더링 마다 콜백을 수행한다.
-  const nextInputFocus = useCallback(
-    (currentInput, nextInput) => {
-      currentInput.isComplete = true;
-
-      const { element: currentElement } = currentInput;
-      const { element: nextElement } = nextInput;
-
-      nextElement?.focus();
-
-      if (!nextElement) {
+  useEffect(() => {
+    if (value.length === maxLength && setInputElement && nextInputFocus) {
+      nextInputFocus(inputElementKey, () =>
         setIsShowVirtualKeyboard(prev => ({
           ...prev,
           isShow: false,
           elementKey: null,
-        }));
-        currentElement?.blur();
-      }
-    },
-    [setIsShowVirtualKeyboard],
-  );
-
-  // sideEffect -> 결정권을 사용처에서.. 주입할 수 있도록
-  useAutoFocus({
+          maxLength: null,
+        })),
+      );
+    }
+  }, [
     value,
+    setInputElement,
+    nextInputFocus,
     maxLength,
     inputElementKey,
-    inputElementsRef,
-    sideEffect: nextInputFocus,
-  });
+    setIsShowVirtualKeyboard,
+  ]);
 
   const onFocus = () => {
     setIsShowVirtualKeyboard(prev => ({
       ...prev,
       isShow: true,
       elementKey: inputElementKey,
+      maxLength,
     }));
   };
 
@@ -67,16 +57,7 @@ function PasswordInput({
       value={value}
       maxLength={maxLength}
       required={required}
-      ref={element => {
-        const { current } = inputElementsRef;
-
-        current[inputElementKey] = {
-          element,
-          isComplete: required
-            ? element?.value.length === element?.maxLength
-            : element?.value.length !== 0,
-        };
-      }}
+      ref={element => setInputElement && setInputElement(inputElementKey, element)}
       onFocus={onFocus}
       onKeyDown={onKeyDown}
       onChange={() => false}

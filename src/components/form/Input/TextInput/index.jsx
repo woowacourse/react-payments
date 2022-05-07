@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useAutoFocus } from '../../../../hooks/useAutoFocus';
 import { useCallback } from 'react';
@@ -10,33 +10,23 @@ function TextInput({
   maxLength,
   required,
   onChange,
-  inputElementsRef,
   inputElementKey,
   setIsShowVirtualKeyboard,
+  setInputElement,
+  nextInputFocus,
 }) {
-  const nextInputFocus = useCallback((currentInput, nextInput) => {
-    currentInput.isComplete = true;
-
-    const { element: currentElement } = currentInput;
-    const { element: nextElement } = nextInput;
-
-    nextElement?.focus();
-    currentElement?.blur();
-  }, []);
-
-  useAutoFocus({
-    value,
-    maxLength,
-    inputElementsRef,
-    inputElementKey,
-    sideEffect: nextInputFocus,
-  });
+  useEffect(() => {
+    if (value.length === maxLength && setInputElement && nextInputFocus) {
+      nextInputFocus(inputElementKey);
+    }
+  }, [value, nextInputFocus, maxLength, inputElementKey, setInputElement]);
 
   const onFocus = () => {
     setIsShowVirtualKeyboard(prev => ({
       ...prev,
       isShow: false,
       elementKey: null,
+      maxLength: null,
     }));
   };
 
@@ -49,16 +39,7 @@ function TextInput({
       maxLength={maxLength}
       required={required}
       placeholder={placeholder}
-      ref={element => {
-        const { current } = inputElementsRef;
-
-        current[inputElementKey] = {
-          element,
-          isComplete: required
-            ? element?.value.length === element?.maxLength
-            : element?.value.length !== 0,
-        };
-      }}
+      ref={element => setInputElement && setInputElement(inputElementKey, element)}
       onChange={onChange}
       onFocus={onFocus}
     />

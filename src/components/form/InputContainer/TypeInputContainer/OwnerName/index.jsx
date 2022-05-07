@@ -7,9 +7,10 @@ import { isAlphabetOrSpace } from '../../../../../utils/validation';
 function OwnerNameInputContainer({
   state,
   cardInputDispatch,
-  inputElementsRef,
   stateName,
   setIsShowVirtualKeyboard,
+  setInputElement,
+  nextInputFocus,
 }) {
   const onChangeOwnerName = e => {
     const {
@@ -35,9 +36,10 @@ function OwnerNameInputContainer({
         value={state}
         maxLength={30}
         onChange={onChangeOwnerName}
-        inputElementsRef={inputElementsRef}
         inputElementKey={stateName}
         setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+        setInputElement={setInputElement}
+        nextInputFocus={nextInputFocus}
       />
     </LabelInputContainer>
   );

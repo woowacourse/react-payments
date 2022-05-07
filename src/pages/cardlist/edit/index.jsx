@@ -10,7 +10,9 @@ import { ROUTE } from '../../../route';
 function EditCard({ cardListDispatch, getCard, routeState: { cardId } }) {
   const navigate = useNavigate();
 
-  const [{ id, alias, ...cardInput }, cardInputDispatch] = useCardInput(getCard(cardId));
+  const [{ id, alias, ...cardInput }, cardInputDispatch, getInputState] = useCardInput(
+    getCard(cardId),
+  );
 
   const formSubmitAction = payload => {
     cardListDispatch({ type: 'UPDATE_CARD', payload: { ...payload, id: cardId } });
@@ -24,6 +26,7 @@ function EditCard({ cardListDispatch, getCard, routeState: { cardId } }) {
         cardInput={cardInput}
         cardInputDispatch={cardInputDispatch}
         formSubmitAction={formSubmitAction}
+        getInputState={getInputState}
       />
     </PageTemplate>
   );

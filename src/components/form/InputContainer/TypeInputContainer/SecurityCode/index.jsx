@@ -8,6 +8,8 @@ function SecurityCodeInputContainer({
   inputElementsRef,
   stateName,
   setIsShowVirtualKeyboard,
+  setInputElement,
+  nextInputFocus,
 }) {
   return (
     <LabelInputContainer
@@ -21,9 +23,10 @@ function SecurityCodeInputContainer({
         value={state}
         maxLength={3}
         required
-        inputElementsRef={inputElementsRef}
         inputElementKey={stateName}
         setIsShowVirtualKeyboard={setIsShowVirtualKeyboard}
+        setInputElement={setInputElement}
+        nextInputFocus={nextInputFocus}
       />
     </LabelInputContainer>
   );

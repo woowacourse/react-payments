@@ -10,7 +10,7 @@ import { ROUTE } from '../../../route';
 
 function AddCard({ cardListDispatch }) {
   const navigate = useNavigate();
-  const [cardInput, cardInputDispatch] = useCardInput();
+  const [cardInput, cardInputDispatch, getInputState] = useCardInput();
 
   const formSubmitAction = payload => {
     const randomId = generateNonDuplicatedId(payload.cardType);
@@ -29,6 +29,7 @@ function AddCard({ cardListDispatch }) {
         cardInput={cardInput}
         cardInputDispatch={cardInputDispatch}
         formSubmitAction={formSubmitAction}
+        getInputState={getInputState}
       />
     </PageTemplate>
   );
