@@ -16,4 +16,5 @@ const onClickCardSelector = (type) => () => {
 
 Example.args = {
   onClickCardSelector,
+  isModalOpened: true,
 };
