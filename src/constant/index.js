@@ -3,6 +3,11 @@ const CARD_NUMBER = {
   INPUT_COUNT: 4,
 };
 
+const CARD_SIZE = {
+  SMALL: "small",
+  BIG: "big",
+};
+
 const DUE_DATE = {
   UNIT_LENGTH: 2,
 };
@@ -60,6 +65,7 @@ const CARD_LIST = [
 
 export {
   CARD_NUMBER,
+  CARD_SIZE,
   DUE_DATE,
   OWNER,
   NICKNAME,

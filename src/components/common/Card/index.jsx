@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { CARD_SIZE } from "constant";
 import {
   CardWrapper,
   CardTop,
@@ -48,7 +49,7 @@ function Card({
           </CardBottomInfo>
         </CardBottom>
       </CardWrapper>
-      {nickname && size === "small" && <div>{nickname}</div>}
+      {nickname && size === CARD_SIZE.SMALL && <div>{nickname}</div>}
     </>
   );
 }

@@ -17,7 +17,7 @@ import Header from "components/common/Header";
 import Modal from "components/common/Modal";
 import Palette from "components/common/Palette";
 
-import { CARD_NUMBER, DUE_DATE, CVC } from "constant";
+import { CARD_NUMBER, CARD_SIZE, DUE_DATE, CVC } from "constant";
 import { isValidCvc, isValidOwnerLength } from "validation";
 import { ReactComponent as ArrowImage } from "assets/arrow.svg";
 import { PageWrapper, CardWrapper, FooterWrapper } from "./style";
@@ -63,8 +63,6 @@ function New() {
   };
 
   const handleSubmit = () => {
-    alert("카드가 등록되었습니다.");
-
     onCreate(
       cardId.current,
       cardNumbers,
@@ -91,7 +89,7 @@ function New() {
       />
       <CardWrapper>
         <Card
-          size="small"
+          size={CARD_SIZE.SMALL}
           color={company.color}
           company={company.name}
           cardNumbers={cardNumbers}

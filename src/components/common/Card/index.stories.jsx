@@ -1,4 +1,5 @@
 import Card from ".";
+import { CARD_SIZE } from "constant";
 
 const Template = (args) => <Card {...args} />;
 
@@ -9,7 +10,7 @@ export default {
 
 export const SmallCard = Template.bind({});
 SmallCard.args = {
-  size: "small",
+  size: CARD_SIZE.SMALL,
   company: "poco",
   cardNumbers: ["1111", "2222", "oooo", "oooo"],
   owner: "dory",
@@ -20,7 +21,7 @@ SmallCard.args = {
 
 export const BigCard = Template.bind({});
 BigCard.args = {
-  size: "big",
+  size: CARD_SIZE.BIG,
   company: "poco",
   cardNumbers: ["1111", "2222", "oooo", "1ooo"],
   owner: "dory",

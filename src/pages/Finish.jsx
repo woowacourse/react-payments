@@ -5,6 +5,7 @@ import Card from "components/common/Card";
 import Button from "components/common/Button";
 import useInput from "hooks/useInput";
 import { isValidNickname } from "validation";
+import { CARD_SIZE } from "constant";
 import {
   CardWrapper,
   FooterWrapper,
@@ -38,7 +39,7 @@ function Finish() {
       <CardWrapper>
         <Card
           key={myCard.cardId}
-          size="big"
+          size={CARD_SIZE.BIG}
           color={myCard.company.color}
           company={myCard.company.name}
           cardNumbers={myCard.cardNumbers}

@@ -9,22 +9,22 @@ import {
   CardAddWrapper,
   CardScrollWrapper,
 } from "./style";
+import { CARD_SIZE } from "constant";
 
 function Home() {
   const navigate = useNavigate();
   const cardList = useContext(CardListContext);
-  console.log("홈 cardList", cardList);
+
   return (
     <PageWrapper>
       <Header headText="보유 카드" />
       <CardScrollWrapper>
         <CardListWrapper>
           {cardList.map((data) => {
-            console.log("data", data);
             return (
               <Card
                 key={data.cardId}
-                size="small"
+                size={CARD_SIZE.SMALL}
                 color={data.company.color}
                 company={data.company.name}
                 cardNumbers={data.cardNumbers}
