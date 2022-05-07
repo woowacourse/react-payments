@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useInputValue from '../../hooks/useInputValue';
 import FieldSet from '../FieldSet';
 import CardNumberInput from '../Input/CardNumberInput';
