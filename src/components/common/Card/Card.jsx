@@ -7,7 +7,7 @@ function Card({ isEmpty, cardInfo }) {
     <div className="card-box">
       <div className={isEmpty ? 'card-container card-empty' : 'card-container card-not-empty'}>
         {isEmpty ? (
-          <Link className="link" to="/card-add">
+          <Link className="link card-add-link" to="/card-add">
             +
           </Link>
         ) : (

@@ -176,3 +176,7 @@ ul {
 li:nth-child(1) {
   margin-top: 65px;
 }
+
+.card-add-link {
+  padding: 50px 100px;
+}
