@@ -1,10 +1,10 @@
-// import AddCardForm from '.';
+import AddCardForm from '.';
 
-// export default {
-//   title: 'AddCardForm',
-//   component: AddCardForm,
-// };
+export default {
+  title: 'AddCardForm',
+  component: AddCardForm,
+};
 
-// const Template = (args) => <AddCardForm {...args} />;
+const Template = (args) => <AddCardForm {...args} />;
 
-// export const Example = Template.bind({});
+export const Example = Template.bind({});
