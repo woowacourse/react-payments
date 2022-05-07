@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import styles from 'css/Header.module.css';
+import useHeader from 'hooks/useHeader';
 
-const Header = ({ title, left, right }) => {
+const Header = () => {
+  const { title, left, right } = useHeader();
+
   return (
     <div className={styles.container}>
       {left}

@@ -1,4 +1,4 @@
-import { useState, useReducer, createContext } from 'react';
+import { useReducer, createContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Layout from 'components/common/Layout';
@@ -32,13 +32,12 @@ export const CardDispatch = createContext(null);
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [title] = useState('보유카드');
 
   return (
     <Layout>
       <CardDispatch.Provider value={{ state, dispatch }}>
-        <Header title={title} />
         <BrowserRouter>
+          <Header />
           <Routes>
             <Route path="/react-payments/" element={<MainPage />}></Route>
             <Route path="/react-payments/add" element={<CardAppPage />}></Route>
