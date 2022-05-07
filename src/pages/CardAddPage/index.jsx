@@ -45,6 +45,10 @@ function CardAddPage({ isOpenModal, openModal }) {
     openModal();
   };
 
+  const handleClickBackButton = () => {
+    navigate('/');
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
 
@@ -73,7 +77,7 @@ function CardAddPage({ isOpenModal, openModal }) {
       <Head
         leftComponent={
           <HeadContainer>
-            <BackButton type="click">
+            <BackButton type="click" onClick={handleClickBackButton}>
               <img src={BackButtonArrow} />
             </BackButton>
             <span>카드 추가</span>
