@@ -72,3 +72,23 @@
 .clickable-box {
   cursor: pointer;
 }
+
+.filled-page {
+  width: 100%;
+  height: 80%;
+}
+
+.tab-box {
+  width: 300px;
+  height: 300px;
+  background-color: #94dacd;
+  margin: 10px;
+  border-radius: 4px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  opacity: 0.7;
+}
+
+.tab-box:hover {
+  background-color: #94dacd;
+  opacity: 0.9;
+}
