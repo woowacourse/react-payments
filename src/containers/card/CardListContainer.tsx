@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import AddCard from 'components/card/AddCard';
 import axios from 'axios';
 import Card from 'components/card/Card';
 import styled from '@emotion/styled';
@@ -9,6 +8,7 @@ import { useAppDispatch, useAppState } from 'hooks/hooks';
 import { createAction } from 'context/Provider';
 import EditButtonContainer from 'containers/button/EditButtonContainer';
 import { v4 as uuidv4 } from 'uuid';
+import AddCardContainer from './AddCardContainer';
 
 const CardAlias = styled.p(() => ({
   fontWeight: '800',
@@ -62,7 +62,7 @@ function CardListContainer() {
       ) : (
         <></>
       )}
-      <AddCard />
+      <AddCardContainer />
     </Wrapper>
   );
 }

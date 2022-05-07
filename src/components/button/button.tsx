@@ -8,7 +8,7 @@ const style = css({
 });
 
 type Props = {
-  id: string;
+  id?: string;
   onClick: any;
   buttonType: string;
 };
