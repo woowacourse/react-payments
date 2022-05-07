@@ -41,7 +41,7 @@ export default function CardHolderNameInput({ holderName, onChange }) {
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           type="text"
           value={holderName}
-          onChange={onChange}
+          onChange={e => onChange(e.target.value.toUpperCase())}
           width="100%"
           textAlign="left"
           isComplete={holderName !== ''}

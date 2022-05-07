@@ -21,7 +21,7 @@ export default function CardNumberInput({ cardNumber, onChange }) {
             value={cardNumber[index]}
             maxLength="4"
             placeholder={index <= 1 ? '1 2 3 4' : CREATE_MASKED_CHARACTERS(4)}
-            onChange={e => onChange(e, index)}
+            onChange={e => onChange(e.target.value, index)}
             isComplete={cardNumber[index].length === 4}
           />
           {index < CARD_INFO_RULES.NUMBER_UNIT_COUNT - 1 && cardNumber[index].length === 4 && <p>-</p>}

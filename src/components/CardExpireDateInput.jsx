@@ -16,7 +16,7 @@ export default function CardExpireDateInput({ expireDate, onChange }) {
         placeholder="MM"
         type="text"
         value={expireDate[0]}
-        onChange={e => onChange(e, 0)}
+        onChange={e => onChange(e.target.value, 0)}
         width="40px"
         isComplete={expireDate[0].length === 2}
       />
@@ -25,7 +25,7 @@ export default function CardExpireDateInput({ expireDate, onChange }) {
         placeholder="YY"
         type="text"
         value={expireDate[1]}
-        onChange={e => onChange(e, 1)}
+        onChange={e => onChange(e.target.value, 1)}
         width="40px"
         isComplete={expireDate[1].length === 2}
       />

@@ -36,7 +36,7 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
           placeholder={CREATE_MASKED_CHARACTERS(3)}
           value={securityCode}
           maxLength="3"
-          onChange={onChange}
+          onChange={e => onChange(e.target.value)}
           width="100%"
           isComplete={securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
         />

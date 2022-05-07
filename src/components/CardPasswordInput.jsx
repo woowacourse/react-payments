@@ -19,7 +19,7 @@ export default function CardPasswordInput({ password, onChange }) {
           type="password"
           value={password[index]}
           maxLength="1"
-          onChange={e => onChange(e, index)}
+          onChange={e => onChange(e.target.value, index)}
           width="100%"
           placeholder={CREATE_MASKED_CHARACTERS(1)}
           isComplete={password[index].length === 1}

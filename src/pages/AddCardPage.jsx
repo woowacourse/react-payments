@@ -1,6 +1,9 @@
-import { useState, useMemo, useContext } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+
+import useInput from '../hooks/useInput';
+import useInputArray from '../hooks/useInputArray';
 
 import { CardInfoListContext } from '../context';
 import {
@@ -32,61 +35,32 @@ const ButtonWrapper = styled.div`
 `;
 
 export default function AddCardPage() {
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [expireDate, setExpireDate] = useState(['', '']);
-  const [holderName, setHolderName] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
-  const [password, setPassword] = useState(['', '']);
+  const [cardNumber, updateCardNumberUnit, isCompleteCardNumber] = useInputArray(
+    ['', '', '', ''],
+    isValidCardNumberUnit,
+    CARD_INFO_RULES.NUMBER_UNIT_COUNT * CARD_INFO_RULES.NUMBER_UNIT_LENGTH
+  );
+
+  const [expireDate, updateExpireDateUnit, isCompleteExpireDate] = useInputArray(
+    ['', ''],
+    isValidCardExpireDateUnit,
+    CARD_INFO_RULES.EXPIRE_DATE_LENGTH
+  );
+
+  const [holderName, updateHolderName] = useInput('', isValidCardHolderName);
+  const [securityCode, updateSecurityCode, isCompleteSecurityCode] = useInput(
+    '',
+    isValidCardSecurityCode,
+    CARD_INFO_RULES.SECURITY_CODE_LENGTH
+  );
+  const [password, updatePasswordUnit, isCompletePassword] = useInputArray(
+    ['', ''],
+    isValidCardPasswordUnit,
+    CARD_INFO_RULES.PASSWORD_LENGTH
+  );
 
   const { addNewCard } = useContext(CardInfoListContext);
   const navigate = useNavigate();
-
-  const handleCardNumberUpdate = ({ target: { value } }, order) => {
-    if (!isValidCardNumberUnit(value)) return;
-
-    setCardNumber(prevValue => {
-      const newValue = [...prevValue];
-      newValue[order] = value;
-
-      return newValue;
-    });
-  };
-
-  const handleExpireDateUpdate = ({ target: { value } }, order) => {
-    const parsedValue = value.startsWith('0') && value.length !== 1 ? value.slice(1) : value;
-
-    if (!isValidCardExpireDateUnit(value, order)) return;
-
-    setExpireDate(prevValue => {
-      const newValue = [...prevValue];
-      newValue[order] = parsedValue.length === 1 && Number(parsedValue) !== 0 ? `0${parsedValue}` : parsedValue;
-
-      return newValue;
-    });
-  };
-
-  const handleHolderNameUpdate = ({ target: { value } }) => {
-    if (!isValidCardHolderName(value)) return;
-
-    setHolderName(value.toUpperCase());
-  };
-
-  const handleSecurityCodeUpdate = ({ target: { value } }) => {
-    if (!isValidCardSecurityCode(value)) return;
-
-    setSecurityCode(value);
-  };
-
-  const handlePasswordUpdate = ({ target: { value } }, order) => {
-    if (!isValidCardPasswordUnit(value));
-
-    setPassword(prevValue => {
-      const newValue = [...prevValue];
-      newValue[order] = value;
-
-      return newValue;
-    });
-  };
 
   const cardInfoConfirmMessage = `
   카드번호: ${cardNumber.join(' - ')}
@@ -123,23 +97,6 @@ export default function AddCardPage() {
     );
   };
 
-  const isCompleteCardNumber = useMemo(() => {
-    const { NUMBER_UNIT_COUNT, NUMBER_UNIT_LENGTH } = CARD_INFO_RULES;
-    return cardNumber.join('').length === NUMBER_UNIT_COUNT * NUMBER_UNIT_LENGTH;
-  }, [cardNumber]);
-
-  const isCompleteExpireDate = useMemo(() => {
-    return expireDate.join('').length === CARD_INFO_RULES.EXPIRE_DATE_LENGTH;
-  }, [expireDate]);
-
-  const isCompleteSecurityCode = useMemo(() => {
-    return securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH;
-  }, [securityCode]);
-
-  const isCompletePassword = useMemo(() => {
-    return password.join('').length === CARD_INFO_RULES.PASSWORD_LENGTH;
-  }, [password]);
-
   return (
     <>
       <Header>
@@ -153,11 +110,11 @@ export default function AddCardPage() {
         isComplete={isCompleteCardNumber && isCompleteExpireDate && isCompleteSecurityCode && isCompletePassword}
       />
       <Form onSubmit={handleCardInfoSubmit} autoComplete="off">
-        <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumberUpdate} />
-        <CardExpireDateInput expireDate={expireDate} onChange={handleExpireDateUpdate} />
-        <CardHolderNameInput holderName={holderName} onChange={handleHolderNameUpdate} />
-        <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCodeUpdate} />
-        <CardPasswordInput password={password} onChange={handlePasswordUpdate} />
+        <CardNumberInput cardNumber={cardNumber} onChange={updateCardNumberUnit} />
+        <CardExpireDateInput expireDate={expireDate} onChange={updateExpireDateUnit} />
+        <CardHolderNameInput holderName={holderName} onChange={updateHolderName} />
+        <CardSecurityCodeInput securityCode={securityCode} onChange={updateSecurityCode} />
+        <CardPasswordInput password={password} onChange={updatePasswordUnit} />
         {isCompleteCardNumber && isCompleteExpireDate && isCompleteSecurityCode && isCompletePassword && (
           <CardInfoSubmitButton />
         )}
