@@ -19,14 +19,16 @@ const request = async (url, option) => {
   }
 };
 
-export const requestErrorHandler = ({ status, content }, handleSuccess, handleFail) => {
-  if (status === REQUEST_STATUS.FAIL) {
-    handleFail(content);
-    return;
-  }
+export const requestErrorHandler =
+  ({ status, content }) =>
+  (handleSuccess, handleFail) => {
+    if (status === REQUEST_STATUS.FAIL) {
+      handleFail(content);
+      return;
+    }
 
-  handleSuccess(content);
-};
+    handleSuccess(content);
+  };
 
 export const requestGetCardData = async () => {
   const response = await request('/card', {
