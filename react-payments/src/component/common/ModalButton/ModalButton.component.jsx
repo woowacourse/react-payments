@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const ModalButton = styled.button`
-  width: 100px;
+  width: 120px;
   height: 60px;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.pageDefault};

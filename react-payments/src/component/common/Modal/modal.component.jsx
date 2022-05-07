@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { css } from "styled-components";
 
 const DimmedModal = styled.div`
   width: 100%;
@@ -21,18 +22,25 @@ const ModalBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 375px;
-  height: 220px;
+  width: 380px;
+  ${({ type }) =>
+    type === "edit"
+      ? css`
+          height: 100px;
+        `
+      : css`
+          height: 220px;
+        `}
   border-radius: 5px 5px 0 0;
   flex-wrap: wrap;
   background: ${({ theme }) => theme.colors.pageDefault};
   z-index: 10;
 `;
 
-const Modal = ({ toggleModal, children }) => {
+const Modal = ({ toggleModal, children, type }) => {
   return (
     <DimmedModal onClick={toggleModal}>
-      <ModalBox>{children}</ModalBox>
+      <ModalBox type={type}>{children}</ModalBox>
     </DimmedModal>
   );
 };
