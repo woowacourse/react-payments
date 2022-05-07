@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
   border: none;
   cursor: pointer;
+  width: 80px;
 `;
 
 export const OptionContainer = styled.div`
