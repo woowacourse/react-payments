@@ -2,7 +2,6 @@ import { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { getIndexFromSameTag, setFocusSameTagByIndex } from 'utils';
-
 import { Container, InputTitle, InputContainer, ErrorMessage } from './styles';
 
 function FieldSet({ title, errorMessage, inputWidth, autoFocusLength, children }) {

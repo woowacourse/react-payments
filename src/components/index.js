@@ -5,3 +5,4 @@ export { default as CardNumberField } from 'components/CardNumberField';
 export { default as CardPasswordField } from 'components/CardPasswordField';
 export { default as CardSecurityField } from 'components/CardSecurityField';
 export { default as CardUserNameField } from 'components/CardUserNameField';
+export { default as CardNameField } from 'components/CardNameField';

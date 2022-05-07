@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import reactDom from 'react-dom';
-import { MODAL_STATE } from 'constants';
 
+import { MODAL_STATE } from 'constants';
 import Container from './styles';
 
 function Modal({ className, handleClose, handleHidden, children }) {

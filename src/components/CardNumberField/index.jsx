@@ -4,8 +4,8 @@ import useErrorMessage from 'hooks/useErrorMessage';
 import FieldSet from 'components/@common/FieldSet';
 import TextField from 'components/@common/TextField';
 
-import { validateCardNumber } from 'validators';
 import { CARD_NUMBER } from 'constants';
+import { validateCardNumber } from 'validators';
 
 function CardNumberField({ cardNumber, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { CARD_COMPANY } from 'constants';
 
 import Button from 'components/@common/Button';
 
+import { CARD_COMPANY } from 'constants';
 import Container from './styles';
 
 function CardCompanyList({ onChange, handleModalClose }) {

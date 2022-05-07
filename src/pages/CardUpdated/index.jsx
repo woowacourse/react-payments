@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { usePageContext } from 'contexts/PageContext';
 import { useCardDataContext } from 'contexts/CardDataContext';
-import { CARD_COMPANY, PAGE_LIST } from 'constants';
 
-import { Card } from 'components';
 import Button from 'components/@common/Button';
+import { Card } from 'components';
 
+import { CARD_COMPANY, PAGE_LIST } from 'constants';
 import ResultMessage from './styles';
 
 function CardUpdated() {

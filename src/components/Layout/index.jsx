@@ -1,5 +1,6 @@
-import Header from 'components/@common/Header';
 import { usePageContext } from 'contexts/PageContext';
+
+import Header from 'components/@common/Header';
 
 import Container from './styles';
 

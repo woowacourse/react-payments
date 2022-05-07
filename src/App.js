@@ -1,13 +1,13 @@
+import { useEffect } from 'react';
 import { usePageContext } from 'contexts/PageContext';
 import { CardDataContextProvider } from 'contexts/CardDataContext';
-import { APP_NAME, PAGE_LIST } from 'constants';
-
-import Layout from 'components/Layout';
 
 import CardUpdated from 'pages/CardUpdated';
 import CardEditor from 'pages/CardEditor';
 import CardList from 'pages/CardList';
-import { useEffect } from 'react';
+import Layout from 'components/Layout';
+
+import { APP_NAME, PAGE_LIST } from 'constants';
 
 function App() {
   const { pageTitle, pageLocation } = usePageContext();

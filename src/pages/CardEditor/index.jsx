@@ -8,7 +8,6 @@ import useCardState from 'hooks/useCardState';
 
 import Button from 'components/@common/Button';
 import ToolTip from 'components/@common/ToolTip';
-import CardNameField from 'components/CardNameField';
 
 import {
   Card,
@@ -18,8 +17,10 @@ import {
   CardSecurityField,
   CardPasswordField,
   CardCompanyList,
+  CardNameField,
 } from 'components';
 
+import { PAGE_LIST } from 'constants';
 import {
   validateCardNumber,
   validateCardPassword,
@@ -27,8 +28,6 @@ import {
   validateSecurityCode,
   validateUserName,
 } from 'validators';
-
-import { PAGE_LIST } from 'constants';
 
 function CardEditor() {
   const { setPageTitle, setPageLocation } = usePageContext();

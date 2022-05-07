@@ -4,9 +4,8 @@ import useErrorMessage from 'hooks/useErrorMessage';
 import FieldSet from 'components/@common/FieldSet';
 import TextField from 'components/@common/TextField';
 
-import { validateCardPassword } from 'validators';
 import { CARD_PASSWORD } from 'constants';
-
+import { validateCardPassword } from 'validators';
 import PasswordMasking from './styles';
 
 function CardPasswordField({ cardPassword, onChange }) {

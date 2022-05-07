@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-
 import { usePageContext } from 'contexts/PageContext';
 import { useCardDataContext } from 'contexts/CardDataContext';
-import { PAGE_LIST } from 'constants';
 
 import { Card } from 'components';
+
+import { PAGE_LIST } from 'constants';
 import { CardWallet, ButtonAddCard } from './styles';
 
 function CardList() {
