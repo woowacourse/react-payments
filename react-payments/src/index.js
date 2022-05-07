@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "styled-components";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import FormDataProvider from "./provider/FormDataProvider";
 import theme from "./styles/theme";
 import "./index.css";
@@ -15,9 +15,7 @@ root.render(
       <ThemeProvider theme={theme}>
         <CardDataProvider>
           <FormDataProvider>
-            <Routes>
-              <Route path="/" element={<App />} />
-            </Routes>
+            <App />
           </FormDataProvider>
         </CardDataProvider>
       </ThemeProvider>
