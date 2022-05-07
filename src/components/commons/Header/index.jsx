@@ -18,7 +18,7 @@ function Header() {
     <h1 className="page-title" onClick={onClick}>
       {ROUTE.home.route !== pathname && '<'}
       &nbsp;
-      {PAGE_TITLE[pathname]}
+      {PAGE_TITLE[pathname] ?? '없는 화면'}
     </h1>
   );
 }
