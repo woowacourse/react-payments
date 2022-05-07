@@ -1,0 +1,23 @@
+:root {
+  --purple: #764ba2;
+  --yellow: #cbba64;
+  --pink: rgb(246, 112, 112);
+  --black: #000;
+  --white: #fff;
+
+  --blue-600: rgb(71, 104, 255);
+  --blue-500: #667eea;
+
+  --gray-900: #383838;
+  --gray-800: #525252;
+  --gray-700: #575757;
+  --gray-600: #999;
+  --gray-500: #bbb;
+  --gray-400: #d3d3d3;
+  --gray-300: #ddd;
+  --gray-200: #e5e5e5;
+  --gray-100: #ecebf1;
+
+  --shadow: rgba(0, 0, 0, 0.25);
+  --shadow-light: rgba(0, 0, 0, 0.05);
+}

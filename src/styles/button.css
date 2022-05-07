@@ -18,22 +18,22 @@ button:hover {
 .button {
   padding: 10px 20px;
   border-radius: 5px;
-  background-color: rgb(71, 104, 255);
+  background-color: var(--blue-600);
   font-size: 15px;
   font-weight: bold;
-  color: #fff;
+  color: var(--white);
   transition: background-color 0.2s ease;
 }
 
 .button:disabled {
   cursor: default;
-  background-color: #ddd;
+  background-color: var(--gray-300);
   filter: brightness(1);
 }
 
 .previous-button {
   margin-right: 17px;
-  background-color: #fff;
+  background-color: var(--white);
   font-size: 25px;
-  color: #525252;
+  color: var(--gray-800);
 }
