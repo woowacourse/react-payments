@@ -48,7 +48,9 @@ function AddPage() {
     if (dueDate.error) {
       return alert(ALERT_MESSAGE.CHECK_DUE_DATE)
     }
-    navigate('/react-payments/complete')
+    navigate(
+      `/react-payments/nickname/${Object.values(cardInfo.cardNumber).join('')}`
+    )
   }
 
   return (

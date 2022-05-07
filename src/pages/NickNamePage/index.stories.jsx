@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom'
 import { withReactContext } from 'storybook-react-context'
-import CardAddCompletePage from 'pages/CardAddCompletePage'
+import CardAddCompletePage from 'pages/NickNamePage'
 
 import CardInfoContext from 'store/cardInfo-context'
 

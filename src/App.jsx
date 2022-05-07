@@ -5,7 +5,7 @@ import { CardInfoProvider } from 'store/cardInfo-context'
 
 import AddPage from 'pages/AddPage'
 import CardListPage from 'pages/CardListPage'
-import CardAddCompletePage from 'pages/CardAddCompletePage'
+import NickNamePage from 'pages/NickNamePage'
 
 import theme from 'theme'
 
@@ -18,8 +18,8 @@ function App() {
             <Route path="react-payments" element={<CardListPage />} />
             <Route path="react-payments/add" element={<AddPage />} />
             <Route
-              path="react-payments/complete"
-              element={<CardAddCompletePage />}
+              path="react-payments/nickname/:id"
+              element={<NickNamePage />}
             />
             <Route
               path="*"

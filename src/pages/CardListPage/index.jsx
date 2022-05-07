@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import Button from 'components/common/Button'
 import Card from 'components/common/Card'
@@ -14,7 +14,7 @@ import {
 } from 'pages/CardListPage/style'
 
 function CardListPage() {
-  let navigate = useNavigate()
+  const navigate = useNavigate()
   const cardList = localStorage.getItem('cardList')
     ? Object.entries(JSON.parse(localStorage.getItem('cardList')))
     : []
@@ -26,7 +26,13 @@ function CardListPage() {
         <CardListWrapper>
           {cardList.map(([key, value]) => (
             <PossessedCard key={key}>
-              <Card size="small" cardInfo={value} />
+              <Link
+                to={`/react-payments/nickname/${Object.values(
+                  value.cardNumber
+                ).join('')}`}
+              >
+                <Card size="small" cardInfo={value} />
+              </Link>
               <CardNickname>{value.cardNickName}</CardNickname>
             </PossessedCard>
           ))}

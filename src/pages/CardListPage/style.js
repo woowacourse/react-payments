@@ -21,5 +21,9 @@ const PossessedCard = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  & a {
+    text-decoration: none;
+    outline: none;
+  }
 `
 export { CardListWrapper, CardNickname, PossessedCard }
