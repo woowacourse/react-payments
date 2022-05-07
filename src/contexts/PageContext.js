@@ -5,7 +5,9 @@ const PageContext = createContext();
 
 function PageContextProvider({ children }) {
   const [pageTitle, setTitle] = useState('');
-  const [pageLocation, setLocation] = useState(PAGE_LIST.CARD_EDITOR);
+  const [pageLocation, setLocation] = useState(PAGE_LIST.CARD_LIST);
+
+  // 이전 페이지 만들고 이전 페이지 상태가 존재할 시 새로 뜨는 페이지에 애니메이션 주기
 
   const value = useMemo(
     () => ({
@@ -18,7 +20,7 @@ function PageContextProvider({ children }) {
   return <PageContext.Provider value={value}>{children}</PageContext.Provider>;
 }
 
-function usePageSetting() {
+function usePageContext() {
   const context = useContext(PageContext);
   if (context === undefined) {
     throw new Error('PageContextProvider가 로드되지 않았습니다.');
@@ -33,4 +35,4 @@ function usePageSetting() {
   return { pageTitle, pageLocation, setPageTitle, setPageLocation };
 }
 
-export { PageContext, PageContextProvider, usePageSetting };
+export { PageContext, PageContextProvider, usePageContext };
