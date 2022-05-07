@@ -1,5 +1,6 @@
-import styles from 'css/module/Header.module.css';
+import { memo } from 'react';
 import useHeader from 'hooks/useHeader';
+import styles from 'css/module/Header.module.css';
 
 const Header = () => {
   const { title, left, right } = useHeader();
@@ -13,4 +14,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);
