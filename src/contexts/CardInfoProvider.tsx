@@ -1,6 +1,6 @@
 import REGEXP from "constant/regexp";
 import { cardInfoValidator } from "lib/validation";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
 import { InputChangeFunction } from "types";
 import {
   CardColor,
@@ -10,6 +10,88 @@ import {
   CardNumbers,
   Password,
 } from "types/cardInfo";
+
+type CardInfoAction =
+  | { type: "CHANGE_CARD_TYPE"; payload: { name: CardName; color: CardColor } }
+  | { type: "CHANGE_CARD_NUMBER"; payload: { index: string; cardNumber: string } }
+  | { type: "CHANGE_EXPIRATION_DATE"; payload: { key: string; value: string } }
+  | { type: "CHANGE_USER_NAME"; payload: { userName: string } }
+  | { type: "CHANGE_SECURITY_CODE"; payload: { securityCode: string } }
+  | { type: "CHANGE_PASSWORD"; payload: { index: string; value: string } }
+  | { type: "CHANGE_CARD_NAME"; payload: { cardName: string } }
+  | { type: "PULL_CARD_INFO"; payload: { cardInfo: CardInfo } }
+  | { type: "RESET_CARD_INFO"; payload: null }
+  | { type: "BLUR_USER_NAME"; payload: null };
+
+type CardInfoReducer = (state: CardInfo, action: CardInfoAction) => CardInfo;
+
+const reducer: CardInfoReducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case "RESET_CARD_INFO":
+      return initialCardInfo;
+
+    case "CHANGE_CARD_TYPE": {
+      const { name, color } = payload;
+
+      return { ...state, cardType: { name, color } };
+    }
+
+    case "CHANGE_CARD_NUMBER": {
+      const { index, cardNumber } = payload;
+      const cardNumbers: CardNumbers = [...state.cardNumbers];
+
+      cardNumbers[index] = cardNumber;
+
+      return { ...state, cardNumbers };
+    }
+
+    case "CHANGE_EXPIRATION_DATE": {
+      const { key, value } = payload;
+      const expirationDate = {
+        ...state.expirationDate,
+      };
+
+      expirationDate[key] = value;
+
+      return { ...state, expirationDate };
+    }
+
+    case "CHANGE_USER_NAME": {
+      const userName = payload.userName.replace("  ", " ").toUpperCase();
+
+      return { ...state, userName };
+    }
+
+    case "CHANGE_SECURITY_CODE": {
+      const { securityCode } = payload;
+
+      return { ...state, securityCode };
+    }
+
+    case "CHANGE_PASSWORD": {
+      const { index, value } = payload;
+      const password: Password = [...state.password];
+
+      password[index] = value;
+
+      return { ...state, password };
+    }
+
+    case "CHANGE_CARD_NAME": {
+      const { cardName } = payload;
+
+      return { ...state, cardName };
+    }
+
+    case "PULL_CARD_INFO":
+      return payload.cardInfo;
+
+    case "BLUR_USER_NAME":
+      return { ...state, useName: state.userName.trim() };
+  }
+};
 
 interface Context {
   cardInfo: CardInfo;
@@ -39,7 +121,7 @@ const initialCardInfo: CardInfo = {
 };
 
 const CardInfoProvider = ({ children }) => {
-  const [cardInfo, setCardInfo] = useState<CardInfo>(initialCardInfo);
+  const [cardInfo, cardInfoDispatch] = useReducer<CardInfoReducer>(reducer, initialCardInfo);
   const [cardInfoValidation, setCardInfoValidation] = useState<CardInfoValidation>({
     cardNumbers: {
       isValid: false,
@@ -64,21 +146,15 @@ const CardInfoProvider = ({ children }) => {
   });
 
   const pullCardInfo = (cardInfo: CardInfo) => {
-    setCardInfo(cardInfo);
+    cardInfoDispatch({ type: "PULL_CARD_INFO", payload: { cardInfo } });
   };
 
   const resetCardInfo = () => {
-    setCardInfo(initialCardInfo);
+    cardInfoDispatch({ type: "RESET_CARD_INFO", payload: null });
   };
 
   const onChangeCardType = (name: CardName, color: CardColor) => {
-    setCardInfo(prevCardInfo => ({
-      ...prevCardInfo,
-      cardType: {
-        name,
-        color,
-      },
-    }));
+    cardInfoDispatch({ type: "CHANGE_CARD_TYPE", payload: { name, color } });
   };
 
   const onChangeCardNumber: InputChangeFunction = e => {
@@ -88,16 +164,7 @@ const CardInfoProvider = ({ children }) => {
     } = e.target;
 
     if (value === "" || REGEXP.NUMBER.test(value)) {
-      setCardInfo(prevCardInfo => {
-        const newCardNumbers: CardNumbers = [...prevCardInfo.cardNumbers];
-
-        newCardNumbers[index] = value;
-
-        return {
-          ...prevCardInfo,
-          cardNumbers: newCardNumbers,
-        };
-      });
+      cardInfoDispatch({ type: "CHANGE_CARD_NUMBER", payload: { index, cardNumber: value } });
     }
   };
 
@@ -108,18 +175,7 @@ const CardInfoProvider = ({ children }) => {
     } = e.target;
 
     if (value === "" || REGEXP.NUMBER.test(value)) {
-      setCardInfo(prevCardInfo => {
-        const newExpirationDate = {
-          ...prevCardInfo.expirationDate,
-        };
-
-        newExpirationDate[key] = value;
-
-        return {
-          ...prevCardInfo,
-          expirationDate: newExpirationDate,
-        };
-      });
+      cardInfoDispatch({ type: "CHANGE_EXPIRATION_DATE", payload: { key, value } });
     }
   };
 
@@ -131,24 +187,19 @@ const CardInfoProvider = ({ children }) => {
     }
 
     if (value === "" || REGEXP.ENGLISH.test(value)) {
-      const newUserName = value.replace("  ", " ").toUpperCase();
-
-      setCardInfo(prevCardInfo => ({ ...prevCardInfo, userName: newUserName }));
+      cardInfoDispatch({ type: "CHANGE_USER_NAME", payload: { userName: value } });
     }
   };
 
   const onBlurUserName = () => {
-    setCardInfo(prevCardInfo => ({ ...prevCardInfo, userName: prevCardInfo.userName.trim() }));
+    cardInfoDispatch({ type: "BLUR_USER_NAME", payload: null });
   };
 
   const onChangeSecurityCode: InputChangeFunction = e => {
     const value = e.target.value;
 
     if (value === "" || REGEXP.NUMBER.test(value)) {
-      setCardInfo(prevCardInfo => ({
-        ...prevCardInfo,
-        securityCode: value,
-      }));
+      cardInfoDispatch({ type: "CHANGE_SECURITY_CODE", payload: { securityCode: value } });
     }
   };
 
@@ -159,26 +210,14 @@ const CardInfoProvider = ({ children }) => {
     } = e.target;
 
     if (value === "" || REGEXP.NUMBER.test(value)) {
-      setCardInfo(prevCardInfo => {
-        const newPassword: Password = [...prevCardInfo.password];
-
-        newPassword[index] = value;
-
-        return {
-          ...prevCardInfo,
-          password: newPassword,
-        };
-      });
+      cardInfoDispatch({ type: "CHANGE_PASSWORD", payload: { index, value } });
     }
   };
 
   const onChangeCardName: InputChangeFunction = e => {
     const value = e.target.value;
 
-    setCardInfo(prevCardInfo => ({
-      ...prevCardInfo,
-      cardName: value,
-    }));
+    cardInfoDispatch({ type: "CHANGE_CARD_NAME", payload: { cardName: value } });
   };
 
   // Validation
