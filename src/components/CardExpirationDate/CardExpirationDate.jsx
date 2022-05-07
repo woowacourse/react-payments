@@ -1,15 +1,15 @@
 import { useContext } from 'react';
 import { CardInfoContext } from 'App';
 
-import { MONTH, LIMIT_LENGTH } from 'constants';
+import { MONTH, LIMIT_LENGTH, ACTION } from 'constants';
 import { inputNumberOnly, limitInputLength } from 'utils';
 
 function CardExpirationDate() {
   const { state, dispatch } = useContext(CardInfoContext);
 
-  const cardExpirationDate = { month: state.month, year: state.year };
+  const cardExpirationDate = { month: state.card.month, year: state.card.year };
   const setCardExpirationDate = (cardExpirationDate) =>
-    dispatch({ type: 'SET_CRAD_EXPIRATION_DATE', cardExpirationDate });
+    dispatch({ type: ACTION.SET_CRAD_EXPIRATION_DATE, cardExpirationDate });
 
   const handleMonthInputBlur = (event) => {
     const { value } = event.target;

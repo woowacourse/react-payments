@@ -8,6 +8,7 @@ function CardListPage() {
       <Header>
         <PageTitle title="보유카드" />
       </Header>
+      {/* map을 통해 Card 리스트를 만든다  */}
       <Card isEmpty />
     </div>
   );

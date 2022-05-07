@@ -1,14 +1,15 @@
 import { useContext } from 'react';
 import { CardInfoContext } from 'App';
 
-import { LIMIT_LENGTH } from 'constants';
+import { LIMIT_LENGTH, ACTION } from 'constants';
 import { limitInputLength, inputEnglishOnly } from 'utils';
 
 function CardOwner() {
   const { state, dispatch } = useContext(CardInfoContext);
 
-  const { owner } = state;
-  const setCardOwner = (owner) => dispatch({ type: 'SET_CARD_OWNER', owner });
+  const { owner } = state.card;
+
+  const setCardOwner = (owner) => dispatch({ type: ACTION.SET_CARD_OWNER, owner });
 
   const handleChange = (event) => {
     const { value } = event.target;

@@ -6,7 +6,8 @@ import { CardInfoContext } from 'App';
 function Card({ isEmpty }) {
   const { state } = useContext(CardInfoContext);
 
-  const { number1, number2, number3, number4, owner, month, year } = state;
+  const { number1, number2, number3, number4, owner, month, year } = state.card;
+  console.log(state);
 
   return (
     <div className="card-box">

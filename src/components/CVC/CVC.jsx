@@ -1,14 +1,14 @@
 import { useContext } from 'react';
 import { CardInfoContext } from 'App';
 
-import { LIMIT_LENGTH } from 'constants';
+import { LIMIT_LENGTH, ACTION } from 'constants';
 import { inputNumberOnly, limitInputLength } from 'utils';
 
 function CVC() {
   const { state, dispatch } = useContext(CardInfoContext);
-  const { cvc } = state;
+  const { cvc } = state.card;
 
-  const setCVC = (cvc) => dispatch({ type: 'SET_CVC', cvc });
+  const setCVC = (cvc) => dispatch({ type: ACTION.SET_CVC, cvc });
 
   const handleChange = (event) => {
     const { value } = event.target;

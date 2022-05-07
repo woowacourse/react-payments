@@ -3,16 +3,15 @@ import { useContext } from 'react';
 
 import { CardInfoContext } from 'App';
 import { validator } from 'utils';
-import { ERROR_MESSAGE } from 'constants';
+import { ERROR_MESSAGE, ACTION } from 'constants';
 
 function CardNameInputForm({ children }) {
   const navigate = useNavigate();
 
-  const { state } = useContext(CardInfoContext);
-  const { nickname } = state;
+  const { state, dispatch } = useContext(CardInfoContext);
+  const { nickname } = state.card;
 
   const isNumber = (nickname) => {
-    console.log(nickname);
     return !isNaN(Number(nickname));
   };
 
@@ -37,6 +36,8 @@ function CardNameInputForm({ children }) {
     event.preventDefault();
     try {
       checkCardNameInput(nickname);
+      dispatch({ type: ACTION.ADD_CARD });
+      console.log(state);
       navigate('/react-payments');
     } catch (error) {
       alert(error.message);

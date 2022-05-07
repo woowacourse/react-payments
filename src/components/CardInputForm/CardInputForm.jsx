@@ -10,7 +10,7 @@ function CardInputForm({ children }) {
 
   const { state } = useContext(CardInfoContext);
 
-  const { number1, number2, number3, number4, month, year, cvc } = state;
+  const { number1, number2, number3, number4, month, year, cvc } = state.card;
 
   const checkCardNumber = (number1, number2, number3, number4) => {
     return number1.length < 4 || number2.length < 4 || number3.length < 4 || number4.length < 4;

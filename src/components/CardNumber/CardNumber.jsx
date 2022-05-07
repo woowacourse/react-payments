@@ -1,16 +1,16 @@
 import { useContext } from 'react';
 import { CardInfoContext } from 'App';
 
-import { LIMIT_LENGTH } from 'constants';
+import { LIMIT_LENGTH, ACTION } from 'constants';
 import { limitInputLength, inputNumberOnly } from 'utils';
 
 function CardNumber() {
   const { state, dispatch } = useContext(CardInfoContext);
 
-  const { number1, number2, number3, number4 } = state;
+  const { number1, number2, number3, number4 } = state.card;
 
   const cardNumbers = [number1, number2, number3, number4];
-  const setCardNumbers = (cardNumbers) => dispatch({ type: 'SET_CARD_NUMBERS', cardNumbers });
+  const setCardNumbers = (cardNumbers) => dispatch({ type: ACTION.SET_CARD_NUMBERS, cardNumbers });
 
   const handleChange = (event) => {
     const { value, name } = event.target;

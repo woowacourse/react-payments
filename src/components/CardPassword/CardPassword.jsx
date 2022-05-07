@@ -2,14 +2,14 @@ import { useContext } from 'react';
 import { CardInfoContext } from 'App';
 
 import { inputNumberOnly, limitInputLength } from 'utils';
-import { LIMIT_LENGTH } from 'constants';
+import { LIMIT_LENGTH, ACTION } from 'constants';
 
 function CardPassword() {
   const { state, dispatch } = useContext(CardInfoContext);
 
-  const cardPasswords = [state.password1, state.password2];
+  const cardPasswords = [state.card.password1, state.card.password2];
   const setCardPasswords = (cardPasswords) =>
-    dispatch({ type: 'SET_CARD_PASSWORDS', cardPasswords });
+    dispatch({ type: ACTION.SET_CARD_PASSWORDS, cardPasswords });
 
   const handleChange = (event) => {
     const { value, name } = event.target;

@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 import { CardInfoContext } from 'App';
 
-import { LIMIT_LENGTH } from 'constants';
+import { LIMIT_LENGTH, ACTION } from 'constants';
 import { limitInputLength } from 'utils';
 
 function CardNickname() {
   const { state, dispatch } = useContext(CardInfoContext);
 
-  const { nickname } = state;
+  const { nickname } = state.card;
 
   const handleChange = (event) => {
     const { value } = event.target;
@@ -15,7 +15,7 @@ function CardNickname() {
     const newNickname =
       value.length > LIMIT_LENGTH.NICKNAME ? limitInputLength(value, LIMIT_LENGTH.NICKNAME) : value;
 
-    dispatch({ type: 'SET_CARD_NICKNAME', newNickname });
+    dispatch({ type: ACTION.SET_CARD_NICKNAME, newNickname });
   };
 
   return (
