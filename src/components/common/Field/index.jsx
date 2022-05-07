@@ -9,7 +9,7 @@ import {
   InputHelperWrapper,
 } from 'components/common/Field/style'
 
-function Field({ label, children, helpText }) {
+function Field({ label, errorMessage, children, helpText, countHelper }) {
   const [mouseHover, setMouseHover] = useState(false)
 
   const handleMouseHover = () => {
@@ -20,6 +20,8 @@ function Field({ label, children, helpText }) {
     <FieldWrapper>
       <Label>
         <label>{label}</label>
+        {errorMessage && <div>{errorMessage}</div>}
+        {countHelper && <div>{countHelper}</div>}
       </Label>
       <InputHelperWrapper>
         {children}

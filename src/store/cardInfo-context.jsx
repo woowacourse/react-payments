@@ -22,11 +22,8 @@ const initialCardInfo = {
 }
 
 const initialError = {
-  cardNumber: false,
-  dueDate: false,
-  cvc: false,
-  password: false,
-  cardNickName: false,
+  cardNumber: { error: false, errorMessage: '' },
+  dueDate: { error: false, errorMessage: '' },
 }
 
 export function CardInfoProvider({ children }) {
@@ -36,7 +33,8 @@ export function CardInfoProvider({ children }) {
 
   useEffect(() => {
     setIsFieldFulfilled(
-      cardInfo.cardNumber.first.length === CARD_NUMBER.UNIT_LENGTH &&
+      cardInfo.company &&
+        cardInfo.cardNumber.first.length === CARD_NUMBER.UNIT_LENGTH &&
         cardInfo.cardNumber.second.length === CARD_NUMBER.UNIT_LENGTH &&
         cardInfo.cardNumber.third.length === CARD_NUMBER.UNIT_LENGTH &&
         cardInfo.cardNumber.fourth.length === CARD_NUMBER.UNIT_LENGTH &&
@@ -65,6 +63,23 @@ export function CardInfoProvider({ children }) {
     setCardInfo((prev) => {
       return { ...prev, cardNumber: { ...prev.cardNumber, [key]: value } }
     })
+
+    // 이미 존재하는 카드번호인지 확인
+    if (localStorage.getItem('cardList') && key === 'fourth') {
+      const cardList = JSON.parse(localStorage.getItem('cardList'))
+      const { first, second, third } = cardInfo.cardNumber
+      setIsError((prev) => {
+        return {
+          ...prev,
+          cardNumber: {
+            error: Object.keys(cardList).includes(
+              first + second + third + value
+            ),
+            errorMessage: '이미 존재하는 카드번호입니다',
+          },
+        }
+      })
+    }
   }
 
   const handleDueDateChange = (e) => {
@@ -77,12 +92,24 @@ export function CardInfoProvider({ children }) {
 
     if (key === 'month') {
       setIsError((prev) => {
-        return { ...prev, dueDate: value < 1 || value > 12 }
+        return {
+          ...prev,
+          dueDate: {
+            error: value < 1 || value > 12,
+            errorMessage: '1~12사이의 숫자를 입력해주세요',
+          },
+        }
       })
     } else {
       const currentYear = new Date().getFullYear().toString().slice(2)
       setIsError((prev) => {
-        return { ...prev, dueDate: value < currentYear }
+        return {
+          ...prev,
+          dueDate: {
+            error: value < currentYear,
+            errorMessage: '현재 년도 이상의 값을 입력해주세요',
+          },
+        }
       })
     }
 

@@ -12,6 +12,9 @@ import { GrayInputWrapper } from 'components/common/Input/style'
 function CardNumberField() {
   const {
     cardInfo: { cardNumber },
+    isError: {
+      cardNumber: { error, errorMessage },
+    },
     handleCardNumberChange,
   } = useContext(CardInfoContext)
 
@@ -23,8 +26,8 @@ function CardNumberField() {
   }
 
   return (
-    <Field label="카드 번호">
-      <GrayInputWrapper>
+    <Field label="카드 번호" errorMessage={error && errorMessage}>
+      <GrayInputWrapper error={error && errorMessage}>
         {Object.entries(cardNumber).map(([key, value], index) => (
           <React.Fragment key={`${key}-card-input`}>
             <Input

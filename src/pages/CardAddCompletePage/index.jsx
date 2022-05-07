@@ -41,7 +41,7 @@ function CardAddCompletePage() {
       <FooterWrapper>
         {cardInfo.cardNickName && (
           <Button onClick={saveCardInfo}>
-            <Link to="/">확인</Link>
+            <Link to="/react-payments">확인</Link>
           </Button>
         )}
       </FooterWrapper>

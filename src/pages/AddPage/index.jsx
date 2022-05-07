@@ -38,7 +38,7 @@ function AddPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    navigate('/complete')
+    navigate('/react-payments/complete')
   }
 
   return (
@@ -56,7 +56,7 @@ function AddPage() {
         <FooterWrapper>
           {isFieldFulfilled && (
             <Button type={'submit'} color={COLORS.MINT}>
-              <Link to={'/complete'}>다음</Link>
+              <Link to={'/react-payments/complete'}>다음</Link>
             </Button>
           )}
         </FooterWrapper>

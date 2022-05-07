@@ -11,7 +11,9 @@ import { GrayInputWrapper } from 'components/common/Input/style'
 function DueDateField() {
   const {
     cardInfo: { dueDate },
-    isError: { dueDate: dueDateError },
+    isError: {
+      dueDate: { error, errorMessage },
+    },
     handleDueDateChange,
   } = useContext(CardInfoContext)
 
@@ -23,8 +25,8 @@ function DueDateField() {
   }
 
   return (
-    <Field label="만료일">
-      <GrayInputWrapper size={50} error={dueDateError}>
+    <Field label="만료일" errorMessage={error && errorMessage}>
+      <GrayInputWrapper size={50} error={error && errorMessage}>
         <Input
           value={dueDate.month}
           dataset="month"
