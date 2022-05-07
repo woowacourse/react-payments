@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 
 import { isInValidCardNumber, isOverMaxLength } from "util/validator";
 import { focusNextElement, focusPrevElement } from "util/focus";
@@ -32,16 +32,15 @@ const CardNumberProvider = ({ children }) => {
       maxLength: MAX_LENGTH.CARD_NUMBER,
       nextElement,
     });
-    console.log(cardNumber);
     setCardNumber({
       ...cardNumber,
       [target.name]: target.value,
     });
   };
 
-  const resetCardNumber = () => {
+  const resetCardNumber = useCallback(() => {
     setCardNumber({ ...initialState });
-  };
+  }, []);
 
   const onKeyDownCardNumber = ({ target, key }) => {
     const prevElement = target.previousSibling?.previousSibling;

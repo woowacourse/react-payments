@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 
 import { MAX_LENGTH } from "constants";
 import useReady from "hooks/useReady";
@@ -31,9 +31,9 @@ const SecurityCodeProvider = ({ children }) => {
     setSecurityCode((prev) => prev.slice(0, -1));
   };
 
-  const resetSecurityCode = () => {
+  const resetSecurityCode = useCallback(() => {
     setSecurityCode(initialState);
-  };
+  }, []);
 
   return (
     <SecurityCodeContext.Provider

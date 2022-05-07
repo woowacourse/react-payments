@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer } from "react";
+import { useCallback, useContext, useEffect, useReducer } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Card from "component/common/Card/Card.component";
@@ -68,6 +68,22 @@ const CardAddPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const resetCardStatus = useCallback(() => {
+    resetCardNumber();
+    resetExpireDate();
+    resetUserName();
+    resetSecurityCode();
+    resetCardPassword();
+    resetCardTypeInfo();
+  }, [
+    resetCardNumber,
+    resetCardPassword,
+    resetCardTypeInfo,
+    resetExpireDate,
+    resetSecurityCode,
+    resetUserName,
+  ]);
+
   useEffect(() => {
     if (typeof id !== "undefined" && cardData.length === 0) {
       navigate("/");
@@ -76,9 +92,10 @@ const CardAddPage = () => {
 
   useEffect(() => {
     if (typeof id === "undefined" || !cardData[id]) {
+      resetCardStatus();
       return;
     }
-    console.log(cardData[id]);
+
     setCardNumber(cardData[id].cardNumber);
     setExpireDate({
       month: cardData[id].month,
@@ -97,6 +114,7 @@ const CardAddPage = () => {
     setUserName,
     setCardTypeInfo,
     setSecurityCode,
+    resetCardStatus,
   ]);
 
   const handleEditCard = () => {
@@ -124,12 +142,7 @@ const CardAddPage = () => {
       cardPassword,
     });
 
-    resetCardNumber();
-    resetExpireDate();
-    resetUserName();
-    resetSecurityCode();
-    resetCardPassword();
-    resetCardTypeInfo();
+    resetCardStatus();
 
     window.alert(ALERT_MEESAGE.EDIT);
   };

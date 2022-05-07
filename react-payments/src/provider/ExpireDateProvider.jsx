@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 
 import { isInValidExpireDate, isOverMaxLength } from "util/validator";
 import { focusNextElement, focusPrevElement } from "util/focus";
@@ -47,9 +47,9 @@ const ExpireDateProvider = ({ children }) => {
     });
   };
 
-  const resetExpireDate = () => {
+  const resetExpireDate = useCallback(() => {
     setExpireDate({ ...initialState });
-  };
+  }, []);
 
   return (
     <ExpireDateContext.Provider

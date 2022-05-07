@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 
 import useReady from "hooks/useReady";
 import { isCompletePasswordInput, isInValidCardPassword } from "util/validator";
@@ -42,9 +42,9 @@ const CardPasswordProvider = ({ children }) => {
     });
   };
 
-  const resetCardPassword = () => {
+  const resetCardPassword = useCallback(() => {
     setCardPassword({ ...initialState });
-  };
+  }, []);
 
   return (
     <CardPasswordContext.Provider

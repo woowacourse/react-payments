@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 
 import { defaultCardInfo } from "constants";
 import useReady from "hooks/useReady";
@@ -14,9 +14,9 @@ const CardTypeProvider = ({ children }) => {
     setCardTypeInfo({ cardType, cardName });
   };
 
-  const resetCardTypeInfo = () => {
+  const resetCardTypeInfo = useCallback(() => {
     setCardTypeInfo({ ...defaultCardInfo });
-  };
+  }, []);
 
   return (
     <CardTypeContext.Provider

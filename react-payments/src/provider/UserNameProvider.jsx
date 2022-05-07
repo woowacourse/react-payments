@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import { isOverMaxLength } from "util/validator";
 import { MAX_LENGTH } from "constants";
 
@@ -16,9 +16,9 @@ const UserNameProvider = ({ children }) => {
     setUserName(target.value);
   };
 
-  const resetUserName = () => {
+  const resetUserName = useCallback(() => {
     setUserName(initialState);
-  };
+  }, []);
 
   return (
     <UserNameContext.Provider
