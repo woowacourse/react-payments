@@ -11,6 +11,7 @@ import CardColorPicker from '../../components/CardColorPicker';
 import { useContext, useState } from 'react';
 import useNextButton from '../../hooks/useNextButton';
 import { UserContext } from '../../context/userContext';
+import { Link } from 'react-router-dom';
 
 const CardAdd = () => {
   const { inputStates, updateInputStates } = useContext(UserContext);
@@ -23,11 +24,13 @@ const CardAdd = () => {
     <>
       <div className='card-add'>
         <header>
-          <button>{'<'}</button>
+          <Link to='/'>
+            <button>{'<'}</button>
+          </Link>
           <p>카드 추가</p>
         </header>
         <form className='card-add__form' onChange={onchange}>
-          <Card state={inputStates} setVisible={setVisible} />
+          <Card state={inputStates} setVisible={setVisible} needBack={true} />
           <CardNumberInput state={cardNumber} updateForm={updateInputStates} />
           <ExpiredDateInput state={expiredDate} updateForm={updateInputStates} />
           <OwnerNameInput state={ownerName} updateForm={updateInputStates} />

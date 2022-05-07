@@ -1,19 +1,33 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import './index.scss';
 
-const Card = ({ state: { cardNumber, expiredDate, ownerName, cardName, color, secureCode }, setVisible }) => {
+const Card = ({
+  state: { cardNumber, expiredDate, ownerName, cardName, color, secureCode },
+  setVisible,
+  needBack = false,
+}) => {
   const cardFront = useRef();
   const cardBack = useRef();
 
-  const mouserOver = () => {
-    cardFront.current.style.display = 'none';
-    cardBack.current.style.display = 'grid';
-  };
+  const mouserOver = useMemo(
+    () =>
+      function () {
+        if (needBack) {
+          cardFront.current.style.display = 'none';
+          cardBack.current.style.display = 'grid';
+        }
+      },
+    [],
+  );
 
-  const mouseLeave = () => {
-    cardFront.current.style.display = 'grid';
-    cardBack.current.style.display = 'none';
-  };
+  const mouseLeave = useMemo(
+    () =>
+      function () {
+        cardFront.current.style.display = 'grid';
+        cardBack.current.style.display = 'none';
+      },
+    [],
+  );
 
   return (
     <div className='card__container' onMouseOver={mouserOver} onMouseLeave={mouseLeave}>
