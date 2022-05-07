@@ -3,6 +3,12 @@ export const INPUT_TYPE = {
 };
 
 export const PLACEHOLDER = {
+  CARD_NUMBERS: '0000',
+  MONTH: 'MM',
+  YEAR: 'YY',
+};
+
+export const DEFAULT_TEXT = {
   NAME: 'NAME',
   DATE: 'MM/YY',
 };

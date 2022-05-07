@@ -7,7 +7,7 @@ import {
   CardOwnerName,
   sizeTable,
 } from './style';
-import { PLACEHOLDER } from '../../constant';
+import { DEFAULT_TEXT } from '../../constant';
 import { CARD_NUMBER_MARK, DATE_SEPARATOR } from '../../constant/mark';
 import { CARD_SIZE } from 'constant/';
 
@@ -33,7 +33,7 @@ function Card({
       ? `${expiredDate.month}${expiredDate.month.length === 2 ? DATE_SEPARATOR : ''}${
           expiredDate.year
         }`
-      : PLACEHOLDER.DATE;
+      : DEFAULT_TEXT.DATE;
   };
 
   return (
@@ -53,7 +53,7 @@ function Card({
         ))}
       </CardNumberContainer>
       <CardBottomContainer {...cardBottomContainerSize}>
-        <CardOwnerName>{ownerName || PLACEHOLDER.NAME}</CardOwnerName>
+        <CardOwnerName>{ownerName || DEFAULT_TEXT.NAME}</CardOwnerName>
         <span>{displayExpiredDate()}</span>
       </CardBottomContainer>
     </CardContainer>

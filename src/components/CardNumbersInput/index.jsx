@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { BlockInput } from '../Input';
 import InputLabel from '../InputLabel';
+import { PLACEHOLDER } from 'constant';
 
 const Container = styled.div`
   display: flex;
@@ -62,6 +63,7 @@ function CardNumbersInput({ cardNumbers, handleInputChange, isValid, invalidMess
                 maxLength="4"
                 name={index}
                 isValid={isValidCardNumber(cardNumber)}
+                placeholder={PLACEHOLDER.CARD_NUMBERS}
               />
               {index === cardNumbers.length - 1 ? '' : '-'}
             </Fragment>
