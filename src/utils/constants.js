@@ -21,3 +21,8 @@ export const CARD_INFO_RULES = {
   SECURITY_CODE_LENGTH: 3,
   PASSWORD_LENGTH: 2,
 };
+
+export const PAGE_NAME = {
+  CARD_LIST: "CardList",
+  CARD_ADD: "CardAdd",
+};

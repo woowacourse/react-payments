@@ -3,9 +3,10 @@ import GlobalStyle from "./globalStyles.jsx";
 
 import CardAddPage from "./Pages/CardAddPage.jsx";
 import CardListPage from "./Pages/CardListPage.jsx";
+import { PAGE_NAME } from "./utils/constants.js";
 
 function App() {
-  const [page, setPage] = useState("CardList");
+  const [page, setPage] = useState(PAGE_NAME.CARD_LIST);
 
   const router = {
     CardList: <CardListPage setPage={setPage} />,

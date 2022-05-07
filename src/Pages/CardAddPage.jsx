@@ -16,6 +16,7 @@ import {
   CARD_REGISTER_FAIL_MESSAGE,
   NICKNAME_REGISTER_SUCCESS_MESSAGE,
   NICKNAME_REGISTER_FAIL_MESSAGE,
+  PAGE_NAME,
 } from "../utils/constants.js";
 
 const {
@@ -84,7 +85,7 @@ export default function CardAddPage({ setPage }) {
     }
   };
 
-  const moveToListPage = () => setPage("CardList");
+  const moveToListPage = () => setPage(PAGE_NAME.CARD_LIST);
 
   const handleAddNickname = ({ nickname }) => {
     const currentCardInfo = formDataArray[currentCardIndex];
@@ -108,7 +109,7 @@ export default function CardAddPage({ setPage }) {
       <CardAddPageContainer>
         <PageHeader
           isSubmitted={isSubmitted}
-          page={"CardAdd"}
+          page={PAGE_NAME.CARD_ADD}
           moveToListPage={moveToListPage}
         />
         {isSubmitted && (

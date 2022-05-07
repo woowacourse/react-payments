@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { CardPreview } from "../components";
 import PageHeader from "./PageHeader";
 import useLocalStorage from "../useLocalStorage";
+import { PAGE_NAME } from "../utils/constants";
 
 const CardList = styled.div`
   display: flex;
@@ -53,7 +54,7 @@ export default function CardListPage({ setPage }) {
 
   return (
     <>
-      <PageHeader page={"CardList"} />
+      <PageHeader page={PAGE_NAME.CARD_LIST} />
       <CardList>
         {formDataArray.map((card) => {
           const cardNumberArray = card["card-number"].match(/.{1,4}/g);
@@ -74,7 +75,10 @@ export default function CardListPage({ setPage }) {
             </CardItem>
           );
         })}
-        <CardShapeButton role={"button"} onClick={() => setPage("CardAdd")}>
+        <CardShapeButton
+          role={"button"}
+          onClick={() => setPage(PAGE_NAME.CARD_ADD)}
+        >
           +
         </CardShapeButton>
       </CardList>

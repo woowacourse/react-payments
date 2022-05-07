@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { PAGE_NAME } from "../utils/constants";
 
 const pageTitle = {
   CardList: "보유 카드",
@@ -41,7 +42,7 @@ export default function PageHeader({ isSubmitted, page, moveToListPage }) {
     <StyledPageHeaderContainer>
       {!isSubmitted && (
         <>
-          {page === "CardAdd" && (
+          {page === PAGE_NAME.CARD_ADD && (
             <PreviousButton onClick={moveToListPage}>&lt;</PreviousButton>
           )}
           <StyledPageTitle>{pageTitle[page]}</StyledPageTitle>
