@@ -31,6 +31,7 @@ const COLORS = {
   concrete: '#F3F3F3',
   white: '#fff',
   'white-80': 'rgba(255,255,255,.8)',
+  'white-50': 'rgba(255,255,255,.5)',
 };
 
 const GRADATION = {

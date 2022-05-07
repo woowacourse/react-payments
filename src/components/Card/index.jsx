@@ -20,7 +20,7 @@ function Card({ companyId, cardNumber, userName, expireMonth, expireYear, isMarg
   const { name = '', color = 'gray', icon = '' } = CARD_COMPANY[companyId] || {};
 
   return (
-    <Container color={color} isMargin={isMargin}>
+    <Container color={color} companyId={companyId} isMargin={isMargin}>
       <div className="card" onClick={onClick}>
         <div className="company-name">{name}</div>
         <div className="icon">{icon}</div>

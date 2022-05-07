@@ -63,6 +63,29 @@ const Container = styled.div`
       ${CARD_COLORS[color]}
     `}
 
+    ${({ companyId }) =>
+      !companyId &&
+      css`
+        &::after {
+          content: '이곳을 눌러 카드사를 선택해주세요';
+
+          position: absolute;
+          display: block;
+
+          top: 0.5rem;
+          left: 30%;
+          right: 0.5rem;
+
+          font-size: 1.6rem;
+          letter-spacing: 1px;
+          word-break: keep-all;
+          line-height: 145%;
+          text-align: right;
+
+          color: ${COLORS['white-50']};
+        }
+      `}
+
     &:hover {
       opacity: 0.8;
     }
