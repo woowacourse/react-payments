@@ -23,9 +23,8 @@ const InputTitle = styled.span`
   align-items: center;
 
   font-size: 1rem;
-  line-height: 0.875rem;
 
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.85rem;
 
   color: ${COLORS.dorado};
 `;
