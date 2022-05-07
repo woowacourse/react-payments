@@ -7,6 +7,7 @@ import Card from '../../Card';
 import CardNickNameInput from '../../Input/CardNickNameInput';
 import useInputValue from '../../../hooks/useInputValue';
 import { checkCardNickName } from '../../../validation';
+import ErrorMessage from '../../ErrorMessage';
 
 const Container = styled.div`
   display: flex;
@@ -25,6 +26,10 @@ const TitleWrapper = styled.div`
 
 const CardWrapper = styled.div`
   margin-top: 77px;
+`;
+
+const ErrorMessageWrapper = styled.div`
+  margin-top: 20px;
 `;
 
 const CardNickNameInputWrapper = styled.div`
@@ -69,6 +74,9 @@ const AddCardResultPage = () => {
       </CardWrapper>
       <CardNickNameInputWrapper>
         <CardNickNameInput onChange={onChangeCardNickName} />
+        <ErrorMessageWrapper>
+          {isCardNickNameError && <ErrorMessage message={'카드 닉네임은 20자 이하여야 합니다'} />}
+        </ErrorMessageWrapper>
       </CardNickNameInputWrapper>
       <NextButtonWrapper>
         {!isCardNickNameError && (

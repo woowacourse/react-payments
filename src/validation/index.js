@@ -30,5 +30,5 @@ export const checkPassword = (password) => {
 };
 
 export const checkCardNickName = (nickName) => {
-  return 0 < nickName.length && nickName.length <= 10;
+  return nickName.length <= 20;
 };
