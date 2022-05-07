@@ -9,6 +9,7 @@ const getCardSize = size => {
       return {
         card: {
           height: '133px',
+          padding: '19px',
           width: '213px',
         },
         title: {
@@ -29,35 +30,56 @@ const getCardSize = size => {
         },
       };
     case 'large':
-      return;
+      return {
+        card: {
+          height: '160px',
+          padding: '22px',
+          width: '260px',
+        },
+        title: {
+          marginBottom: '33px',
+          size: '15px',
+        },
+        magnet: {
+          height: '35px',
+          marginBottom: '20px',
+          width: '55px',
+        },
+        numberSet: {
+          marginBottom: '12px',
+        },
+        detail: {
+          size: '19px',
+          height: '23px',
+        },
+      };
   }
 };
 
 function Card({
   bgColor,
-  className,
   name,
   number,
   onClickFunc,
   size,
   title,
   validDate,
+  ...props
 }) {
+  // TODO: 네이밍 refactor
   const cardStyle = getCardSize(size);
 
   return (
     <Styled.Card
-      className={className}
       bgColor={bgColor}
       cardStyle={cardStyle}
       onClick={onClickFunc}
+      {...props}
     >
       <Styled.Title cardStyle={cardStyle}>{title}</Styled.Title>
       <Styled.Magnet cardStyle={cardStyle} />
       <div>
-        <Styled.NumberSet cardStyle={cardStyle}>
-          {number || ''}
-        </Styled.NumberSet>
+        <Styled.NumberSet cardStyle={cardStyle}>{number}</Styled.NumberSet>
         <Styled.ValidDate cardStyle={cardStyle}>
           {validDate || 'MM/YY'}
         </Styled.ValidDate>
@@ -87,12 +109,11 @@ const Styled = {
   Card: styled.div`
     box-shadow: 3px 3px 5px #00000040;
     border-radius: 5px;
-    cursor: pointer;
-    padding: 19px;
 
     ${({ bgColor, cardStyle }) => css`
       background: ${bgColor};
       height: ${cardStyle.card.height};
+      padding: ${cardStyle.card.padding};
       width: ${cardStyle.card.width};
     `};
   `,

@@ -17,7 +17,6 @@ const getButtonSize = size => {
 function Button({
   bgColor,
   border,
-  className,
   color,
   children,
   fontWeight,
@@ -25,7 +24,7 @@ function Button({
   shape,
   size,
   onClickFunc,
-  type,
+  ...props
 }) {
   const buttonStyle = getButtonSize(size);
   return (
@@ -37,9 +36,8 @@ function Button({
       fontWeight={fontWeight}
       margin={margin}
       shape={shape}
-      type={type}
-      className={className}
       onClick={onClickFunc}
+      {...props}
     >
       {children}
     </Styled.Button>
@@ -59,7 +57,6 @@ Button.defaultProps = {
 Button.propTypes = {
   bgColor: PropTypes.string,
   border: PropTypes.string,
-  className: PropTypes.string,
   color: PropTypes.string,
   content: PropTypes.node,
   fontWeight: PropTypes.string,
