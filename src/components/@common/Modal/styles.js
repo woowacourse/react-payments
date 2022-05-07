@@ -20,8 +20,7 @@ const Container = styled.div`
   z-index: 255;
 
   ${responsive.notMobile(css`
-    align-items: start;
-    padding-top: 10rem;
+    align-items: center;
   `)}
 
   > .modal-content {
