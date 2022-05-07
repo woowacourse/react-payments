@@ -17,13 +17,13 @@ export const CardListPage = () => {
         <>
           <PageTitle>보유카드</PageTitle>
           <FlexWrapper
-            height="calc(100vh - 45px)"
+            height="calc(100vh - 50px)"
             flexDirection="column"
             justifyContent="flex-start"
           >
             {cards.list.map((_, i) => (
               <Button
-                onClick={() => navigate(`/cardName/${cards.list[i].id}`)}
+                onClick={() => navigate(`/cardEdit/${cards.list[i].id}`)}
                 textAlign="center"
                 key={cards.list[i].id}
               >

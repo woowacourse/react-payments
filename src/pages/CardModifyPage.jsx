@@ -7,7 +7,7 @@ import { Card, Button } from "components/common";
 import { InputUnderline } from "components/common/InputUnderline";
 import { Form } from "components/common/Form";
 
-export const CardModifyPage = () => {
+export const CardModifyPage = ({ isEditMode = false }) => {
   const cards = useContext(CardContext);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -31,7 +31,11 @@ export const CardModifyPage = () => {
               flexDirection="column"
               justifyContent="center"
             >
-              <h3>카드등록이 완료되었습니다.</h3>
+              <h3>
+                {isEditMode
+                  ? "새 카드별칭을 입력해주세요."
+                  : "카드등록이 완료되었습니다."}
+              </h3>
               <InputContainer>
                 <Card
                   cardType={cards.list[id].cardType}
