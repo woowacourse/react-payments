@@ -22,11 +22,12 @@ const LIMIT_LENGTH = {
   CVC: 3,
 };
 
-const PAGES = {
+const PAGE = {
   LIST: 'listPage',
   ADD: 'addPage',
+  ADD_SUCCESS: 'addSuccessPage',
 };
 
 const CVC_DESCRIPTION = '카드 뒷면에 있는 3자리 숫자를 입력해주세요.';
 
-export { ERROR_MESSAGE, MONTH, LIMIT_LENGTH, CVC_DESCRIPTION, PAGES };
+export { ERROR_MESSAGE, MONTH, LIMIT_LENGTH, CVC_DESCRIPTION, PAGE };

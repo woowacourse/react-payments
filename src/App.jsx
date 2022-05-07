@@ -2,7 +2,7 @@ import { useState, useReducer, createContext } from 'react';
 
 import CardListPage from 'pages/CardListPage';
 import CardAddPage from 'pages/CardAddPage';
-import { PAGES } from 'constants';
+import { PAGE } from 'constants';
 
 const initialState = {
   number1: '',
@@ -57,12 +57,12 @@ const reducer = (state, action) => {
 export const CardInfoContext = createContext(null);
 
 function App() {
-  const [page, setPage] = useState(PAGES.LIST);
+  const [page, setPage] = useState(PAGE.LIST);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <CardInfoContext.Provider value={{ state, setPage, dispatch }}>
-      {page === PAGES.LIST ? <CardListPage /> : <CardAddPage />}
+      {page === PAGE.LIST ? <CardListPage /> : <CardAddPage />}
     </CardInfoContext.Provider>
   );
 }

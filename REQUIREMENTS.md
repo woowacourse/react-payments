@@ -55,7 +55,7 @@
 
 - [ ] Storybook 상호 작용 테스트
 - [ ] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
-- [ ] Context API를 활용해 전역 상태 관리 및 계층 재구성
+- [x] Context API를 활용해 전역 상태 관리 및 계층 재구성
 
 ## 필수 구현
 

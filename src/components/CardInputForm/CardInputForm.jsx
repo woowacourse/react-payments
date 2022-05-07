@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { CardInfoContext } from 'App';
 
-import { ERROR_MESSAGE } from 'constants';
+import { ERROR_MESSAGE, PAGE } from 'constants';
 
 function CardInputForm({ children }) {
-  const { state } = useContext(CardInfoContext);
+  const { state, setPage } = useContext(CardInfoContext);
 
   const { number1, number2, number3, number4, month, year, cvc } = state;
 
@@ -68,6 +68,7 @@ function CardInputForm({ children }) {
 
     try {
       checkCardInfo({ number1, number2, number3, number4, month, year, cvc });
+      setPage(PAGE.ADD_SUCCESS);
     } catch (error) {
       alert(error.message);
     }

@@ -1,14 +1,14 @@
 import { useContext } from 'react';
 import { CardInfoContext } from 'App';
 
-import { PAGES } from 'constants';
+import { PAGE } from 'constants';
 
 function Card({ isEmpty }) {
   const { state, setPage } = useContext(CardInfoContext);
 
   const { number1, number2, number3, number4, owner, month, year } = state;
   const handleCardAdd = () => {
-    setPage(PAGES.ADD);
+    setPage(PAGE.ADD);
   };
 
   return (
