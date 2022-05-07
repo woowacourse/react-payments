@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef } from 'react';
 import { findNotCompletedInput } from '../utils/util/form';
 
 export const useAutoFocusForm = () => {

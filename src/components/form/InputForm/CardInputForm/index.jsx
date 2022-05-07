@@ -59,6 +59,7 @@ function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction, getInpu
             state={cardInput[key]}
             stateName={key}
             cardInputDispatch={cardInputDispatch}
+            isShowVirtualKeyboard={isShowVirtualKeyboard}
             openVirtualKeyboard={openVirtualKeyboard}
             closeVirtualKeyboard={closeVirtualKeyboard}
             setInputElement={setInputElement}

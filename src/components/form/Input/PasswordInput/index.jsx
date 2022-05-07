@@ -7,6 +7,7 @@ function PasswordInput({
   maxLength,
   required,
   inputElementKey,
+  isShowVirtualKeyboard,
   openVirtualKeyboard,
   closeVirtualKeyboard,
   setInputElement,
@@ -15,8 +16,10 @@ function PasswordInput({
   const inputRef = useRef();
 
   useEffect(() => {
-    inputRef.current?.focus();
-  }, [value]);
+    if (isShowVirtualKeyboard) {
+      inputRef.current?.focus();
+    }
+  }, [value, isShowVirtualKeyboard]);
 
   useEffect(() => {
     if (value.length === maxLength && setInputElement && nextInputFocus) {
@@ -68,6 +71,7 @@ PasswordInput.propTypes = {
   maxLength: PropTypes.number,
   required: PropTypes.bool,
   inputElementKey: PropTypes.string,
+  isShowVirtualKeyboard: PropTypes.bool,
   openVirtualKeyboard: PropTypes.func,
   closeVirtualKeyboard: PropTypes.func,
   setInputElement: PropTypes.func,
