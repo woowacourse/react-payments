@@ -40,7 +40,7 @@ export default function CardPasswordInput() {
             key={index}
             type={"password"}
             placeholder={CREATE_MASKED_CHARACTERS(1)}
-            name={"password"}
+            name={`password${index + 1}`}
             maxLength={1}
             required
             width={"full"}
@@ -53,8 +53,5 @@ export default function CardPasswordInput() {
         )
       )}
     </InputField>
-    //     </StyledInputWrapper>
-    //   </StyledInputContainer>
-    // </StyledInputField>
   );
 }

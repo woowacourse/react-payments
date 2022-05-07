@@ -3,20 +3,30 @@ import CardListPage from "./CardListPage";
 import { PageStoriesStyle } from "./PageStoriesStyle";
 
 const firstSampleCardInfo = {
-  "card-number": "1234567812345678",
-  "expire-date": "1225",
+  "card-number1": "1234",
+  "card-number2": "5678",
+  "card-number3": "8765",
+  "card-number4": "4324",
+  "expire-date1": "12",
+  "expire-date2": "25",
   "holder-name": "Bling",
   "security-code": "098",
-  password: "00",
+  password1: "0",
+  password2: "0",
   nickname: "블링카드",
 };
 
 const secondSampleCardInfo = {
-  "card-number": "1234567812345671",
-  "expire-date": "0224",
+  "card-number1": "1234",
+  "card-number2": "5678",
+  "card-number3": "8765",
+  "card-number4": "4321",
+  "expire-date1": "02",
+  "expire-date2": "24",
   "holder-name": "Roy",
   "security-code": "098",
-  password: "00",
+  password1: "0",
+  password2: "0",
   nickname: "로이카드",
 };
 

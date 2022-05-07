@@ -79,11 +79,7 @@ export default function Form({
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const rawFormData = [...new FormData(e.target).entries()];
-    const formData = rawFormData.reduce((object, [key, value]) => {
-      object[key] = object[key] ? object[key] + value : value;
-      return object;
-    }, {});
+    const formData = Object.fromEntries(new FormData(e.target).entries());
 
     onSubmit(formData);
   };

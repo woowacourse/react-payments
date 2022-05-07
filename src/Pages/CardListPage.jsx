@@ -55,8 +55,13 @@ export default function CardListPage({ setPage }) {
   const [formDataArray] = useLocalStorage("card-info");
 
   const parseCardInfo = (card) => {
-    const cardNumberArray = card["card-number"].match(/.{1,4}/g);
-    const expireDateArray = card["expire-date"].match(/.{1,2}/g);
+    const cardNumberArray = [
+      card["card-number1"],
+      card["card-number2"],
+      card["card-number3"],
+      card["card-number4"],
+    ];
+    const expireDateArray = [card["expire-date1"], card["expire-date2"]];
 
     const cardInfo = {
       cardNumber: cardNumberArray,
@@ -64,7 +69,7 @@ export default function CardListPage({ setPage }) {
       holderName: card["holder-name"],
     };
 
-    const colorIndex = Number(card["card-number"]) % 5;
+    const colorIndex = Number(card["card-number4"]) % 5;
 
     return { cardInfo, colorIndex };
   };

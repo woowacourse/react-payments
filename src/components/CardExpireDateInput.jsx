@@ -36,7 +36,7 @@ export default function CardExpireDateInput() {
         type={"text"}
         value={expireDate[0]}
         placeholder={"MM"}
-        name={"expire-date"}
+        name={"expire-date1"}
         maxLength={2}
         required
         width={"sm"}
@@ -51,7 +51,7 @@ export default function CardExpireDateInput() {
         type={"text"}
         value={expireDate[1]}
         placeholder={"YY"}
-        name={"expire-date"}
+        name={"expire-date2"}
         maxLength={2}
         required
         width={"sm"}
