@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
-function TextField({ type, name, value, placeholder, maxLength, onChange, onBlur }) {
+function TextField({ type, className, name, value, placeholder, maxLength, onChange, onBlur }) {
   return (
     <input
       type={type}
-      className="input-basic"
+      className={className}
       name={name}
       value={value}
       placeholder={placeholder}
@@ -17,6 +17,7 @@ function TextField({ type, name, value, placeholder, maxLength, onChange, onBlur
 
 TextField.defaultProps = {
   type: 'text',
+  className: 'input-basic',
   placeholder: '',
   maxLength: 0,
   onBlur: () => {},
@@ -24,6 +25,7 @@ TextField.defaultProps = {
 
 TextField.propTypes = {
   type: PropTypes.string,
+  className: PropTypes.string,
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
