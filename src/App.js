@@ -30,17 +30,14 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    display:flex;
-    justify-content:center;
+
   }
 
   #root {
     display: flex;
-    width: 500px;
-    flex-direction:column;
     justify-content:center;
-
   }
+
 
 
 `;

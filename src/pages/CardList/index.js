@@ -1,5 +1,6 @@
 import { useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Layout } from '../index.styled';
 import useAPI from '../../hooks/useAPI';
 import Header from '../../components/Header';
 import Card from '../../components/Card';
@@ -28,7 +29,7 @@ const CardList = () => {
   };
 
   return (
-    <>
+    <Layout>
       <Header>
         <p>보유 카드</p>
       </Header>
@@ -70,7 +71,7 @@ const CardList = () => {
             ),
           )}
       </Styled.Container>
-    </>
+    </Layout>
   );
 };
 

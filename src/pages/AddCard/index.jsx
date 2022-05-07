@@ -1,5 +1,6 @@
 import { CardFormProvider } from '../../context/card-form-context';
 import { useState } from 'react';
+import { Layout } from '../index.styled';
 import AddCardForm from '../../components/AddCardForm';
 import Modal from '../../components/Modal';
 import Palette from '../../components/Palette';
@@ -18,7 +19,7 @@ const AddCard = () => {
   };
   return (
     <CardFormProvider>
-      <>
+      <Layout>
         <Header>
           <>
             <FallbackButton />
@@ -29,7 +30,7 @@ const AddCard = () => {
         <Modal isModalOpened={isModalOpened} closeModal={closeModal}>
           <Palette closeModal={closeModal} />
         </Modal>
-      </>
+      </Layout>
     </CardFormProvider>
   );
 };
