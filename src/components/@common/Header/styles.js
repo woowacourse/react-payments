@@ -8,6 +8,7 @@ const Container = styled.header`
   position: sticky;
   width: 100%;
   background-color: ${COLORS['white-80']};
+  backdrop-filter: blur(1rem);
   border-bottom: 1px solid ${COLORS.alto};
   border-radius: ${LAYOUT.BORDER_RADIUS * 2}px ${LAYOUT.BORDER_RADIUS * 2}px 0 0;
   top: 0px;
