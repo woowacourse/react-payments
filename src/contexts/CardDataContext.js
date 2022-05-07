@@ -1,12 +1,12 @@
-import { createContext, useReducer, useMemo, useContext } from 'react';
+import { createContext, useReducer, useMemo, useContext, useEffect } from 'react';
+import { requestErrorHandler, requestGetCardData, requestInsertCardData } from 'api';
+import { REQUEST_STATUS } from 'constants/';
 
 const CardDataContext = createContext();
 
 function reducer(cardList, { type, data }) {
   const actionList = {
-    PRELOAD: () => {
-      // 초기 값을 저장한다.
-    },
+    PRELOAD: () => data,
     SELECT: () => {},
     INSERT: () => {
       const { cardData } = data;
@@ -27,6 +27,18 @@ function CardDataContextProvider({ children }) {
   const [cardList, dispatch] = useReducer(reducer, []);
   const value = useMemo(() => ({ cardList, dispatch }), [cardList]);
 
+  useEffect(() => {
+    (async () => {
+      const response = await requestGetCardData();
+
+      requestErrorHandler(
+        response,
+        (successResult) => dispatch({ type: 'PRELOAD', data: successResult }),
+        (errorMessage) => alert(`서버에서 카드 목록을 로드에 실패하였습니다..\n${errorMessage}`),
+      );
+    })();
+  }, []);
+
   return <CardDataContext.Provider value={value}>{children}</CardDataContext.Provider>;
 }
 
@@ -38,9 +50,19 @@ function useCardDataContext() {
 
   const { cardList, dispatch } = context;
 
-  const insertCardData = (cardData) => dispatch({ type: 'INSERT', data: { cardData } });
+  const insertCardData = async (cardData) => {
+    const response = await requestInsertCardData(cardData);
+
+    requestErrorHandler(
+      response,
+      (successResult) => dispatch({ type: 'INSERT', data: { cardData: successResult } }),
+      (errorMessage) => alert(errorMessage),
+    );
+  };
+
   const updateCardData = (index, cardData) =>
     dispatch({ type: 'UPDATE', data: { index, cardData } });
+
   const deleteCardData = (index) => dispatch({ type: 'INSERT', data: { index } });
 
   return { cardList, insertCardData, updateCardData, deleteCardData };
