@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { CardLayout as StyleCardLayout } from './CardLayout';
 
-export const EmptyCard = ({ size, onClickCard }) => {
+export const AddCardButton = ({ size, onClickCard }) => {
   return (
     <StyleCardLayout size={size} onClickCard={onClickCard}>
       <Style.Text>+</Style.Text>

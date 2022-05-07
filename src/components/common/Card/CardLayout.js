@@ -59,5 +59,9 @@ const Style = {
       rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
     border-radius: 5px;
     cursor: pointer;
+
+    &:active {
+      box-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
+    }
   `,
 };

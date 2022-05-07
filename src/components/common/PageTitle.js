@@ -2,10 +2,10 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-export const PageTitle = ({ children }) => {
+export const PageTitle = ({ children, isRoot }) => {
   return (
     <PageTitleWrapperStyle>
-      <BackwardButton />
+      {!isRoot && <BackwardButton />}
       {children}
     </PageTitleWrapperStyle>
   );
