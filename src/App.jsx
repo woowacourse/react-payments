@@ -1,25 +1,16 @@
 import React, { useRef, useLayoutEffect } from 'react';
+import { useRoutes } from 'react-router-dom';
 
-import {
-  CardNumber,
-  CardOwner,
-  CardPassword,
-  CardSecurityCode,
-  CardShape,
-  Footer,
-  Header,
-  DueDate,
-} from './components';
+import { Header } from './components';
 
-import useCardState from './hooks/useCardState';
 import useDispatch from './hooks/useDispatch';
 
+import routes from './Routes';
+
 function App() {
-  const state = useCardState();
   const dispatch = useDispatch();
   const targetRef = useRef();
-
-  const isAllCompleted = Object.values(state.isAllCompleted).every(ok => ok);
+  const content = useRoutes(routes);
 
   useLayoutEffect(() => {
     if (targetRef.current) {
@@ -36,13 +27,7 @@ function App() {
   return (
     <div className="app" ref={targetRef}>
       <Header title={'카드추가'} />
-      <CardShape />
-      <CardNumber />
-      <DueDate />
-      <CardOwner />
-      <CardSecurityCode />
-      <CardPassword />
-      <Footer isAllCompleted={isAllCompleted} />
+      {content}
     </div>
   );
 }
