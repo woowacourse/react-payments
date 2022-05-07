@@ -23,7 +23,7 @@ export default function CardExpireDateInput() {
   return (
     <InputField
       labelText={"만료일 (MM/YY)"}
-      wrapperWidth={"sm"}
+      wrapperWidth={"md"}
       horizontalAlign={"center"}
       isComplete={
         expireDate.join("").length === CARD_INFO_RULES.EXPIRE_DATE_LENGTH

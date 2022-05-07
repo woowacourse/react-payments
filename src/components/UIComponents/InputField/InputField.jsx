@@ -3,8 +3,9 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const width = {
-  xs: "85px",
-  sm: "135px",
+  xs: "45px",
+  sm: "85px",
+  md: "135px",
   "almost-full": "80%",
   full: "100%",
 };
@@ -39,15 +40,19 @@ const StyledLabel = styled.label`
 const StyledInputWrapper = styled.div`
   display: flex;
   justify-content: ${(props) => props.align};
-  background: ${(props) => props.shape === "box" && "#ecebf1"};
   border-bottom: ${(props) =>
     props.shape === "underline" && "1px solid #000000"};
+
+  margin: ${(props) => props.width === "almost-full" && "auto"};
+
+  ${(props) => props.isSplit && "gap: 10px; input {"}
+  background: ${(props) => props.shape === "box" && "#ecebf1"};
   border-radius: ${(props) => props.shape === "box" && "7px"};
   width: ${(props) => width[props.width]};
   padding: 12px;
-  margin: ${(props) => props.width === "almost-full" && "auto"};
 
   box-shadow: ${(props) => props.isInvalid && "inset 0 0 0 1px #d82424"};
+  ${(props) => props.isSplit && "}"}
 `;
 
 const StyledInputContainer = styled.div`
@@ -65,6 +70,7 @@ export default function InputField({
   isComplete,
   isInvalid,
   shape,
+  isSplit,
 }) {
   return (
     <StyledInputField>
@@ -79,6 +85,7 @@ export default function InputField({
           align={horizontalAlign}
           isInvalid={isInvalid}
           shape={shape}
+          isSplit={isSplit}
         >
           {children}
         </StyledInputWrapper>
