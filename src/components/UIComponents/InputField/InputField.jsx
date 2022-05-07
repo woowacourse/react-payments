@@ -32,7 +32,7 @@ const StyledInputContainer = styled.div`
   gap: 10px;
 `;
 
-const StyledErrorMessage = styled.span`
+const StyledGuideMessage = styled.span`
   margin-left: 4px;
   font-size: 11px;
   color: #f38181;
@@ -67,7 +67,7 @@ export default function InputField({
   wrapperWidth,
   horizontalAlign,
   isComplete,
-  errorMessage,
+  guideMessage,
   OptionalComponent,
   splitCount,
 }) {
@@ -76,7 +76,7 @@ export default function InputField({
       <StyledLabel isComplete={isComplete}>
         {labelText}
         {!isComplete && (
-          <StyledErrorMessage>{`(${errorMessage})`}</StyledErrorMessage>
+          <StyledGuideMessage>{`(${guideMessage})`}</StyledGuideMessage>
         )}
       </StyledLabel>
       <StyledInputContainer>

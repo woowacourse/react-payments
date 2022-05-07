@@ -1,6 +1,9 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { CARD_REGISTER_SUCCESS_MESSAGE } from "../../constants/constants";
+import {
+  CARD_REGISTER_SUCCESS_MESSAGE,
+  GUIDE_MESSAGE,
+} from "../../constants/constants";
 import { CardInfoContext } from "../../contexts/CardInfoContext";
 
 import PageHeader from "../PageHeader";
@@ -33,7 +36,7 @@ const bigCardCss = {
   cardNumberMarginBottom: "20px",
 };
 
-const StyledCardAliasDescription = styled.p`
+const StyledCardAliasGuideMessage = styled.p`
   margin-top: 10px;
   color: #f38181;
   font-size: 14px;
@@ -78,9 +81,9 @@ export default function CardConfirmModal() {
             확인
           </Button>
         ) : (
-          <StyledCardAliasDescription>
-            카드 별칭을 1 ~ 15자로 입력해주세요.
-          </StyledCardAliasDescription>
+          <StyledCardAliasGuideMessage>
+            {GUIDE_MESSAGE.VALID_CARD_ALIAS}
+          </StyledCardAliasGuideMessage>
         )}
       </StyledCardConfirmModal>
     </>

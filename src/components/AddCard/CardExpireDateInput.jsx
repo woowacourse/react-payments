@@ -3,7 +3,7 @@ import { Fragment, useContext } from "react";
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 
-import { CARD_INFO_RULES } from "../../constants/constants";
+import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
 import { CardInfoContext } from "../../contexts/CardInfoContext";
 
 export default function CardExpireDateInput() {
@@ -23,7 +23,7 @@ export default function CardExpireDateInput() {
       labelText={"만료일 (MM/YY)"}
       wrapperWidth={"135px"}
       horizontalAlign={"center"}
-      errorMessage={"만료일은 0~9까지 숫자로 입력해주세요."}
+      guideMessage={GUIDE_MESSAGE.VALID_EXPIRE_DATE}
       isComplete={expireDateLength === CARD_INFO_RULES.EXPIRE_DATE_LENGTH}
     >
       {expireDateList.map((expireDate) => (
@@ -35,10 +35,13 @@ export default function CardExpireDateInput() {
             type={"text"}
             placeholder={expireDate.keyType === "month" ? "MM" : "YY"}
             width={"40px"}
-            maxLength={2}
+            maxLength={CARD_INFO_RULES.EXPIRE_DATE_UNIT_LENGTH}
             required
             onChange={(e) => handleExpireDateUpdate(e, expireDate.keyType)}
-            isComplete={expireDate.value.length === 2}
+            isComplete={
+              expireDate.value.length ===
+              CARD_INFO_RULES.EXPIRE_DATE_UNIT_LENGTH
+            }
           />
           {expireDate.keyType === "month" && <p>/</p>}
         </Fragment>

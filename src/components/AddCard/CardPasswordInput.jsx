@@ -4,7 +4,11 @@ import { CardInfoContext } from "../../contexts/CardInfoContext";
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 
-import { CARD_INFO_RULES } from "../../constants/constants";
+import {
+  CARD_INFO_RULES,
+  GUIDE_MESSAGE,
+  MASKED_CHARACTER,
+} from "../../constants/constants";
 
 export default function CardPasswordInput() {
   const {
@@ -23,7 +27,7 @@ export default function CardPasswordInput() {
       labelText={"카드 비밀번호 앞 두 자리"}
       wrapperWidth={"90px"}
       splitCount={2}
-      errorMessage={"비밀번호는 0~9까지 숫자로 입력해주세요."}
+      guideMessage={GUIDE_MESSAGE.VALID_PASSWORD}
       isComplete={passwordLength === CARD_INFO_RULES.PASSWORD_LENGTH}
     >
       {passwordList.map((password) => (
@@ -32,11 +36,13 @@ export default function CardPasswordInput() {
           name={"password"}
           className={"password"}
           type={"password"}
-          placeholder={"•"}
+          placeholder={MASKED_CHARACTER}
           width={"100%"}
-          maxLength={1}
+          maxLength={CARD_INFO_RULES.PASSWORD_UNIT_LENGTH}
           required
-          isComplete={password.value.length === 1}
+          isComplete={
+            password.value.length === CARD_INFO_RULES.PASSWORD_UNIT_LENGTH
+          }
           onChange={(e) => handlePasswordUpdate(e, password.keyType)}
         />
       ))}

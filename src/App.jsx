@@ -5,6 +5,7 @@ import { CardInfoProvider } from "./contexts/CardInfoContext";
 
 import AddCard from "./components/AddCard";
 import PossessCard from "./components/PossessCard";
+import { ROUTES } from "./constants/constants";
 
 function App() {
   return (
@@ -12,9 +13,9 @@ function App() {
       <CardInfoProvider>
         <GlobalStyle />
         <Routes>
-          <Route path="/" element={<PossessCard />} />
-          <Route path="/possess-card" element={<PossessCard />} />
-          <Route path="/add-card" element={<AddCard />} />
+          <Route path={ROUTES.HOME} element={<PossessCard />} />
+          <Route path={ROUTES.POSSESS_CARD} element={<PossessCard />} />
+          <Route path={ROUTES.ADD_CARD} element={<AddCard />} />
         </Routes>
       </CardInfoProvider>
     </div>

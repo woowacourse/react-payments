@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import useResetInput from "../../Hooks/useResetInput";
+import { LOCAL_STORAGE_KEY, ROUTES } from "../../constants/constants";
 
 const StyledCardInfoForm = styled.form`
   display: flex;
@@ -51,11 +52,12 @@ export default function CardInfoForm({ children }) {
       return resultCardInfo;
     }, {});
 
-    const cardInfo = JSON.parse(localStorage.getItem("cardInfo")) ?? [];
+    const cardInfo =
+      JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY.CARD_INFO)) ?? [];
     cardInfo.push(completeCardInfo);
-    localStorage.setItem("cardInfo", JSON.stringify(cardInfo));
+    localStorage.setItem(LOCAL_STORAGE_KEY.CARD_INFO, JSON.stringify(cardInfo));
 
-    navigate("/possess-card", { replace: true });
+    navigate(ROUTES.POSSESS_CARD, { replace: true });
   };
 
   return (

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 
-import { CARD_INFO_RULES } from "../../constants/constants";
+import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
 
 const StyledInputCounter = styled.p`
   position: absolute;
@@ -36,7 +36,7 @@ export default function CardHolderNameInput() {
       labelText={"카드 소유자 이름 (선택)"}
       wrapperWidth={"100%"}
       horizontalAlign={"flex-start"}
-      errorMessage={"카드 소유자 이름은 영문 대문자만 입력해주세요."}
+      guideMessage={GUIDE_MESSAGE.VALID_HOLDER_NAME}
       isComplete={holderName.value !== ""}
       OptionalComponent={
         <InputCounter
@@ -54,7 +54,7 @@ export default function CardHolderNameInput() {
         placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
         width={"100%"}
         textAlign={"left"}
-        maxLength={30}
+        maxLength={CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH}
         onChange={(e) => handleHolderNameUpdate(e, holderName.keyType)}
         isComplete={holderName.value !== ""}
       />

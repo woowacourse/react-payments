@@ -3,13 +3,13 @@ import { createContext } from "react";
 import useInput from "../Hooks/useInput";
 
 import {
-  initialCardAlias,
-  initialCardNumber,
-  initialExpireDate,
-  initialHolderName,
-  initialPassword,
-  initialSecurityCode,
-} from "../data/initialData";
+  INITIAL_CARD_NUMBER,
+  INITIAL_EXPIRE_DATE,
+  INITIAL_HOLDER_NAME,
+  INITIAL_SECURITY_CODE,
+  INITIAL_PASSWORD,
+  INITIAL_CARD_ALIAS,
+} from "../constants/initialState";
 import {
   isInvalidCardAlias,
   isInValidCardNumber,
@@ -26,6 +26,7 @@ const CardInfoContext = createContext({
     holderName: {},
     securityCode: {},
     password: {},
+    cardAlias: {},
   },
   setState: {
     setCardNumber: () => {},
@@ -33,6 +34,7 @@ const CardInfoContext = createContext({
     setHolderName: () => {},
     setSecurityCode: () => {},
     setPassword: () => {},
+    setCardAlias: () => {},
   },
   actions: {
     handleCardNumberUpdate: () => {},
@@ -40,32 +42,33 @@ const CardInfoContext = createContext({
     handleHolderNameUpdate: () => {},
     handleSecurityCodeUpdate: () => {},
     handlePasswordUpdate: () => {},
+    handleCardAliasUpdate: () => {},
   },
 });
 
 const CardInfoProvider = ({ children }) => {
   const [cardNumber, handleCardNumberUpdate, setCardNumber] = useInput(
-    initialCardNumber,
+    INITIAL_CARD_NUMBER,
     isInValidCardNumber
   );
   const [expireDate, handleExpireDateUpdate, setExpireDate] = useInput(
-    initialExpireDate,
+    INITIAL_EXPIRE_DATE,
     isInValidExpireDate
   );
   const [holderName, handleHolderNameUpdate, setHolderName] = useInput(
-    initialHolderName,
+    INITIAL_HOLDER_NAME,
     isInValidHolderName
   );
   const [securityCode, handleSecurityCodeUpdate, setSecurityCode] = useInput(
-    initialSecurityCode,
+    INITIAL_SECURITY_CODE,
     isInvalidSecurityCode
   );
   const [password, handlePasswordUpdate, setPassword] = useInput(
-    initialPassword,
+    INITIAL_PASSWORD,
     isInvalidPassword
   );
   const [cardAlias, handleCardAliasUpdate, setCardAlias] = useInput(
-    initialCardAlias,
+    INITIAL_CARD_ALIAS,
     isInvalidCardAlias
   );
 

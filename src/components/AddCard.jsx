@@ -19,7 +19,7 @@ import {
 } from "./AddCard/";
 
 import { isValidCardInfo } from "../validators/validator";
-import { BACK_BUTTON_CONFIRM_MESSAGE } from "../constants/constants";
+import { BACK_BUTTON_CONFIRM_MESSAGE, ROUTES } from "../constants/constants";
 
 const smallCardCss = {
   width: "213px",
@@ -41,7 +41,7 @@ export default function AddCard() {
 
   const handleBackButton = () => {
     if (window.confirm(BACK_BUTTON_CONFIRM_MESSAGE)) {
-      navigate("/", { replace: true });
+      navigate(ROUTES.HOME, { replace: true });
       handleResetInput();
     }
   };
@@ -51,7 +51,7 @@ export default function AddCard() {
       <PageHeader>
         <Button
           onClick={handleBackButton}
-          type="button"
+          type={"button"}
           position={"static"}
           isSvg={true}
         >
@@ -79,7 +79,7 @@ export default function AddCard() {
         <CardPasswordInput />
         {isValidCardInfo(cardNumber, expireDate, securityCode, password) && (
           <Button
-            type="button"
+            type={"button"}
             onClick={() => setNextButtonClicked((prevValue) => !prevValue)}
           >
             다음

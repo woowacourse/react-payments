@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import addIcon from "../assets/images/addIcon.svg";
+import { ROUTES } from "../constants/constants";
 
 import PageHeader from "./PageHeader";
 import PossessCardItems from "./PossessCardItems";
@@ -36,7 +37,7 @@ export default function PossessCard() {
       <PageHeader>보유 카드</PageHeader>
       <StyledPossessCardContainer>
         <PossessCardItems />
-        <Link to="/add-card">
+        <Link to={ROUTES.ADD_CARD}>
           <StyledButtonWrapper>
             <Button type={"button"} position={"static"} isSvg={true}>
               {addIcon}

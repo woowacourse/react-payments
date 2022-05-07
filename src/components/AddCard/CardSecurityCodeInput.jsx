@@ -7,7 +7,11 @@ import HelpIconImage from "../../assets/images/questionMark.svg";
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 
-import { CARD_INFO_RULES } from "../../constants/constants";
+import {
+  CARD_INFO_RULES,
+  CREATE_MASKED_CHARACTERS,
+  GUIDE_MESSAGE,
+} from "../../constants/constants";
 
 const StyledIconContainer = styled.div`
   position: relative;
@@ -68,7 +72,7 @@ export default function CardSecurityCodeInput() {
     <InputField
       labelText={"보안 코드(CVC/CVV)"}
       wrapperWidth={"85px"}
-      errorMessage={"카드 뒷 면에 있는 3자리 숫자를 적어주세요."}
+      guideMessage={GUIDE_MESSAGE.VALID_SECURITY_CODE}
       OptionalComponent={<HelpIcon description={SECURITY_CODE_DESCRIPTION} />}
       isComplete={
         securityCode.value.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
@@ -78,9 +82,11 @@ export default function CardSecurityCodeInput() {
         name={"securityCode"}
         className={"securityCode"}
         type={"password"}
-        placeholder={"• • •"}
+        placeholder={CREATE_MASKED_CHARACTERS(
+          CARD_INFO_RULES.SECURITY_CODE_LENGTH
+        )}
         width={"100%"}
-        maxLength={3}
+        maxLength={CARD_INFO_RULES.SECURITY_CODE_LENGTH}
         required
         onChange={(e) => handleSecurityCodeUpdate(e, securityCode.keyType)}
         isComplete={

@@ -1,4 +1,4 @@
-export const initialCardNumber = {
+export const INITIAL_CARD_NUMBER = {
   firstCardNumber: {
     value: "",
     keyType: "firstCardNumber",
@@ -17,7 +17,7 @@ export const initialCardNumber = {
   },
 };
 
-export const initialExpireDate = {
+export const INITIAL_EXPIRE_DATE = {
   month: {
     value: "",
     keyType: "month",
@@ -28,17 +28,17 @@ export const initialExpireDate = {
   },
 };
 
-export const initialHolderName = {
+export const INITIAL_HOLDER_NAME = {
   value: "",
   keyType: "holderName",
 };
 
-export const initialSecurityCode = {
+export const INITIAL_SECURITY_CODE = {
   value: "",
   keyType: "securityCode",
 };
 
-export const initialPassword = {
+export const INITIAL_PASSWORD = {
   firstPassword: {
     value: "",
     keyType: "firstPassword",
@@ -49,7 +49,7 @@ export const initialPassword = {
   },
 };
 
-export const initialCardAlias = {
+export const INITIAL_CARD_ALIAS = {
   value: "",
   keyType: "cardAlias",
 };

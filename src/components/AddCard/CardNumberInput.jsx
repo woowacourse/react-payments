@@ -4,7 +4,7 @@ import { CardInfoContext } from "../../contexts/CardInfoContext";
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 
-import { CARD_INFO_RULES } from "../../constants/constants";
+import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
 
 export default function CardNumberInput() {
   const {
@@ -23,7 +23,7 @@ export default function CardNumberInput() {
       labelText={"카드번호"}
       wrapperWidth={"100%"}
       horizontalAlign={"space-around"}
-      errorMessage={"카드 번호는 0~9까지 숫자로 입력해주세요."}
+      guideMessage={GUIDE_MESSAGE.VALID_CARD_NUMBER}
       isComplete={
         cardNumberLength ===
         CARD_INFO_RULES.NUMBER_UNIT_COUNT * CARD_INFO_RULES.NUMBER_UNIT_LENGTH
@@ -35,9 +35,17 @@ export default function CardNumberInput() {
             name={"cardNumber"}
             className={"cardNumber"}
             value={cardNumber.value}
-            type={index < 2 ? "number" : "password"}
-            placeholder={index < 2 ? "1 2 3 4" : "• • • •"}
-            maxLength={4}
+            type={
+              index < CARD_INFO_RULES.NUMBER_UNIT_COUNT / 2
+                ? "number"
+                : "password"
+            }
+            placeholder={
+              index < CARD_INFO_RULES.NUMBER_UNIT_COUNT / 2
+                ? "1 2 3 4"
+                : "• • • •"
+            }
+            maxLength={CARD_INFO_RULES.NUMBER_UNIT_LENGTH}
             autoFocus={cardNumber.keyType === "firstCardNumber"}
             required
             onChange={(e) => handleCardNumberUpdate(e, cardNumber.keyType)}
