@@ -10,37 +10,20 @@ export default function useCardNumber(initialValue) {
       const { selectionStart } = target;
 
       await setCardNumber(prevState => {
-        let idx = 0;
-
-        if (selectionStart < 6) {
-          idx = selectionStart - 1;
-        } else if (selectionStart < 11) {
-          idx = selectionStart - 2;
-        } else if (selectionStart < 16) {
-          idx = selectionStart - 3;
-        } else if (selectionStart < 20) {
-          idx = selectionStart - 4;
-        }
+        const insertIdx =
+          selectionStart -
+          parseInt(selectionStart / 5, 10) -
+          (selectionStart % 5 !== 0 ? 1 : 0);
 
         let state =
           key && isNumber(key)
-            ? prevState.slice(0, idx) +
+            ? prevState.slice(0, insertIdx) +
               key +
-              prevState.slice(idx, prevState.length)
+              prevState.slice(insertIdx, prevState.length)
             : prevState;
 
         if (!key) {
-          let removeIdx = 0;
-
-          if (selectionStart < 4) {
-            removeIdx = selectionStart;
-          } else if (selectionStart < 9) {
-            removeIdx = selectionStart - 1;
-          } else if (selectionStart < 14) {
-            removeIdx = selectionStart - 2;
-          } else if (selectionStart < 19) {
-            removeIdx = selectionStart - 3;
-          }
+          const removeIdx = selectionStart - parseInt(selectionStart / 5, 10);
 
           state =
             prevState.slice(0, removeIdx) +
@@ -50,7 +33,9 @@ export default function useCardNumber(initialValue) {
         return state;
       });
 
-      await target.setSelectionRange(selectionStart, selectionStart);
+      const cursor = selectionStart + (selectionStart % 5 === 0 && key ? 1 : 0);
+
+      await target.setSelectionRange(cursor, cursor);
     },
     []
   );
