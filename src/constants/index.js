@@ -41,6 +41,12 @@ const MODAL_STATE = {
   DISAPPEAR: 'disappear',
 };
 
+const PAGE_LIST = {
+  CARD_EDITOR: Symbol('카드 정보 추가/수정 페이지'),
+  CARD_UPDATED: Symbol('카드 정보 업데이트 완료 페이지'),
+  CARD_LIST: Symbol('등록된 카드 목록 페이지'),
+};
+
 const ERROR_MESSAGE = {
   IS_NOT_VALID_CARD: '카드 정보가 올바르지 않습니다.\n입력한 내용을 확인해주세요.',
   CARD_NUMBER: {
@@ -76,5 +82,6 @@ export {
   SECURITY_CODE,
   CARD_PASSWORD,
   MODAL_STATE,
+  PAGE_LIST,
   ERROR_MESSAGE,
 };
