@@ -56,6 +56,7 @@ function LineInputForm({ handleChangePage }) {
           className="line-input"
           value={cardInput.cardDesignation}
           onChange={e => onChangeCardDesignation(e, 10)}
+          maxLength={15}
           required
         />
       </LineInput>

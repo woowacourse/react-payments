@@ -1,26 +1,33 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import HelpContentText from './HelpContentText';
 
+const StyledHelpContent = styled.div`
+  border: 1px solid #bababa;
+  border-radius: 100%;
+  width: 32px;
+  text-align: center;
+  padding-left: 1px;
+  padding-top: 1px;
+`;
 function HelpContent({ helpText }) {
   if (!helpText) {
     return;
   }
-  const [isMouseOver, setIsMouseOver] = useState(false);
-
+  const [isTouch, setIsTouch] = useState(false);
   const handleTouch = () => {
-    if (isMouseOver) {
-      setIsMouseOver(false);
+    if (isTouch) {
+      setIsTouch(false);
     } else {
-      setIsMouseOver(true);
+      setIsTouch(true);
     }
   };
 
   return (
     <>
-      <div className="help-content" onClick={handleTouch}>
-        ?
-      </div>
-      {isMouseOver && <div className="help-content-text">{helpText}</div>}
+      <StyledHelpContent onClick={handleTouch}>?</StyledHelpContent>
+      {isTouch && <HelpContentText>{helpText}</HelpContentText>}
     </>
   );
 }

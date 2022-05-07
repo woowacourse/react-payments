@@ -1,14 +1,14 @@
 import React from 'react';
 import { uid } from 'react-uid';
 
-import Input from './LabeledInput';
+import LabeledInput from './LabeledInput';
 
 export default {
-  component: Input,
-  title: 'Input',
+  component: LabeledInput,
+  title: 'LabeledInput',
 };
 
-const Template = args => <Input {...args} />;
+const Template = args => <LabeledInput {...args} />;
 
 export const CardNumberInput = Template.bind({});
 
@@ -61,6 +61,7 @@ export const SecurityCodeInput = Template.bind({});
 SecurityCodeInput.args = {
   labelTitle: '보안코드(CVC/CVV)',
   inputSize: 'w-25',
+  helpText: '카드 뒷면 서명란 또는 신용카드 번호 오른쪽 상단에 기재된 3자리 숫자',
   children: <input className="input-basic" type="password" maxLength={3} required />,
 };
 
