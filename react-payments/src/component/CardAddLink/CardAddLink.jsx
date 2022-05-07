@@ -19,6 +19,10 @@ const CardAddLink = styled(Link)`
   text-decoration: none;
   font-size: 50px;
   background: ${({ theme }) => theme.colors.cardAddLink};
+  &:hover {
+    background: ${({ theme }) => theme.colors.twitterBlue};
+    color: white;
+  }
 `;
 
 export default CardAddLink;
