@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import CardListPage from 'pages/CardListPage';
 import CardAddPage from 'pages/CardAddPage';
 import CardAddSuccessPage from 'pages/CardAddSuccessPage';
+import { ACTION } from 'constants';
 
 const initialState = {
   number1: '',
@@ -21,7 +22,7 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'SET_CARD_NUMBERS':
+    case ACTION.SET_CARD_NUMBERS:
       return {
         ...state,
         number1: action.cardNumbers[0],
@@ -29,33 +30,35 @@ const reducer = (state, action) => {
         number3: action.cardNumbers[2],
         number4: action.cardNumbers[3],
       };
-    case 'SET_CRAD_EXPIRATION_DATE':
+    case ACTION.SET_CRAD_EXPIRATION_DATE:
       return {
         ...state,
         month: action.cardExpirationDate.month,
         year: action.cardExpirationDate.year,
       };
-    case 'SET_CARD_OWNER':
+    case ACTION.SET_CARD_OWNER:
       return {
         ...state,
         owner: action.owner,
       };
-    case 'SET_CVC':
+    case ACTION.SET_CVC:
       return {
         ...state,
         cvc: action.cvc,
       };
-    case 'SET_CARD_PASSWORDS':
+    case ACTION.SET_CARD_PASSWORDS:
       return {
         ...state,
         password1: action.cardPasswords[0],
         password2: action.cardPasswords[1],
       };
-    case 'SET_CARD_NICKNAME':
+    case ACTION.SET_CARD_NICKNAME:
       return {
         ...state,
         nickname: action.newNickname,
       };
+    case ACTION.ADD_CARD:
+      return {};
     default:
       return state;
   }
