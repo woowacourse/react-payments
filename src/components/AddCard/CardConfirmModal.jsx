@@ -1,5 +1,5 @@
-import React from "react";
 import styled from "styled-components";
+
 import PageHeader from "../PageHeader";
 import Button from "../UIComponents/Button/Button";
 import CardPreview from "../UIComponents/CardPreview/CardPreview";
@@ -54,7 +54,7 @@ export default function CardConfirmModal({
           width={"244px"}
           borderBottom={"1px solid #eee"}
         />
-        <Button text="확인" type="submit" />
+        <Button type="submit">확인</Button>
       </StyledCardConfirmModal>
     </>
   );

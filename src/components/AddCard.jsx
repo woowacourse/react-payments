@@ -92,10 +92,11 @@ export default function AddCard() {
         />
         {isValidCardInfo(cardNumber, expireDate, securityCode, password) && (
           <Button
-            text="다음"
             type="button"
             onClick={() => setNextButtonClicked((prevValue) => !prevValue)}
-          />
+          >
+            다음
+          </Button>
         )}
         {isNextButtonClicked && (
           <CardConfirmModal

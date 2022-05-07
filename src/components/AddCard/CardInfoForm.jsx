@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const StyledCardInfoForm = styled.form`
   display: flex;
@@ -8,6 +9,8 @@ const StyledCardInfoForm = styled.form`
 `;
 
 export default function CardInfoForm({ children }) {
+  const navigate = useNavigate();
+
   const focusNextInput = ({ target }) => {
     if (target.value.length !== target.maxLength) return;
 
@@ -40,13 +43,17 @@ export default function CardInfoForm({ children }) {
     const completeCardInfo = cardDataList.reduce((resultCardInfo, cardData) => {
       const [cardInfoKey, cardInfoValue] = cardData;
       resultCardInfo[cardInfoKey] = resultCardInfo[cardInfoKey]
-        ? (resultCardInfo[cardInfoKey] += cardInfoValue)
+        ? (resultCardInfo[cardInfoKey] += `,${cardInfoValue}`)
         : (resultCardInfo[cardInfoKey] = cardInfoValue);
 
       return resultCardInfo;
     }, {});
 
-    console.log(completeCardInfo);
+    const cardInfo = JSON.parse(localStorage.getItem("cardInfo")) ?? [];
+    cardInfo.push(completeCardInfo);
+
+    localStorage.setItem("cardInfo", JSON.stringify(cardInfo));
+    navigate("/possess-card", { replace: true });
   };
 
   return (

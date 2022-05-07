@@ -8,7 +8,7 @@ const CardContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  margin-bottom: 25px;
+  margin-bottom: ${(props) => props.cardContainerMarginBottom};
 `;
 
 const Card = styled.div`
@@ -72,6 +72,7 @@ export default function CardPreview({
   width,
   height,
   fontSize,
+  cardContainerMarginBottom,
   cardChipWidth,
   cardChipHeight,
   cardNameMargin,
@@ -88,7 +89,7 @@ export default function CardPreview({
   const { month, year } = expireDate;
 
   return (
-    <CardContainer>
+    <CardContainer cardContainerMarginBottom={cardContainerMarginBottom}>
       <Card
         isComplete={canProceed}
         width={width}
@@ -129,6 +130,7 @@ CardPreview.defaultProps = {
   width: "213px",
   height: "133px",
   fontSize: "10px",
+  cardContainerMarginBottom: "25px",
   cardChipWidth: "40px",
   cardChipHeight: "26px",
   cardNameMargin: "0 0 20px 0",
