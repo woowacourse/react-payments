@@ -9,15 +9,23 @@ import {
 } from "../components";
 import Button from "../components/UIComponents/Button/Button";
 
-export default function CardInfoForm({ handleFormSubmit, isValidCardInfo }) {
+export default function CardInfoForm({
+  handleFormSubmit,
+  isCompleteCardInfo,
+  setFormValidity,
+}) {
   return (
-    <Form onSubmit={handleFormSubmit}>
+    <Form
+      onSubmit={handleFormSubmit}
+      isComplete={isCompleteCardInfo}
+      setFormValidity={setFormValidity}
+    >
       <CardNumberInput />
       <CardExpireDateInput />
       <CardHolderNameInput />
       <CardSecurityCodeInput />
       <CardPasswordInput />
-      {isValidCardInfo && <Button data-testid={"next-button"}>다음</Button>}
+      {isCompleteCardInfo && <Button data-testid={"next-button"}>다음</Button>}
     </Form>
   );
 }

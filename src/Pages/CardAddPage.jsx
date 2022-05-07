@@ -50,6 +50,7 @@ const SuccessMessage = styled.h1`
 export default function CardAddPage({ setPage }) {
   const [cardInfo, setCardInfo] = useState(initialCardInfoState);
 
+  const [isValidCardInfo, setValidCardInfo] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
   const [currentCardIndex, setCurrentCardIndex] = useState(null);
 
@@ -68,7 +69,7 @@ export default function CardAddPage({ setPage }) {
   const isCompletePassword =
     cardInfo.passwordLength[0] + cardInfo.passwordLength[1] === PASSWORD_LENGTH;
 
-  const isValidCardInfo =
+  const isCompleteCardInfo =
     isCompleteCardNumber &&
     isCompleteExpireDate &&
     isCompleteSecurityCode &&
@@ -102,6 +103,10 @@ export default function CardAddPage({ setPage }) {
     }
   };
 
+  const setFormValidity = (form) => {
+    setValidCardInfo(form.reportValidity());
+  };
+
   const CardPreviewElement = (
     <CardPreview
       cardInfo={cardInfo}
@@ -125,7 +130,8 @@ export default function CardAddPage({ setPage }) {
             {CardPreviewElement}
             <CardInfoForm
               handleFormSubmit={handleFormSubmit}
-              isValidCardInfo={isValidCardInfo}
+              isCompleteCardInfo={isCompleteCardInfo}
+              setFormValidity={setFormValidity}
             />
           </>
         ) : (

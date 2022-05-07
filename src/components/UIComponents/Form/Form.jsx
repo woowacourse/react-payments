@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { cardInfoValidations } from "../../../utils/cardInfoValidations.js";
 
@@ -12,7 +12,20 @@ const StyledCardInfoForm = styled.form`
   }
 `;
 
-export default function Form({ children, onSubmit }) {
+export default function Form({
+  children,
+  onSubmit,
+  isComplete,
+  setFormValidity,
+}) {
+  const formRef = useRef(null);
+  const isInitMount = useRef(true);
+
+  useEffect(() => {
+    if (isInitMount.current) isInitMount.current = false;
+    else setFormValidity(formRef.current);
+  }, [isComplete]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const focusFormInput = (formInputList, currInput, direction) => {
     const formInputArray = [...formInputList];
     const currentIndex = formInputArray.indexOf(currInput);
@@ -75,6 +88,7 @@ export default function Form({ children, onSubmit }) {
       onChange={handleFormChange}
       onKeyDown={handlePrevFocus}
       onSubmit={handleFormSubmit}
+      ref={formRef}
     >
       {children}
     </StyledCardInfoForm>
