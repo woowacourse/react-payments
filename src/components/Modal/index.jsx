@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 
 const Modal = ({ children, isModalOpened, closeModal }) => {
   const root = document.getElementById('modal-root');
@@ -8,7 +8,7 @@ const Modal = ({ children, isModalOpened, closeModal }) => {
   return isModalOpened && root
     ? ReactDOM.createPortal(
         <div>
-          <styled.Dimmer onClick={closeModal} />
+          <Styled.Dimmer onClick={closeModal} />
           {children}
         </div>,
         root,

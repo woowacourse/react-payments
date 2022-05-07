@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 
 const Button = ({ type = 'button', children, ...rest }) => {
   return type === 'link' ? (
-    <styled.LinkButton {...rest}>{children}</styled.LinkButton>
+    <Styled.LinkButton {...rest}>{children}</Styled.LinkButton>
   ) : (
-    <styled.GeneralButton {...rest}>{children}</styled.GeneralButton>
+    <Styled.GeneralButton {...rest}>{children}</Styled.GeneralButton>
   );
 };
 

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import ColorPicker from './ColorPicker';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 import { CARD_COLOR_BY_NAME } from '../../constant';
 import { useCardFormContext, ACTION } from '../../context/card-form-context';
 
@@ -18,8 +18,8 @@ const Palette = ({ closeModal }) => {
   };
 
   return (
-    <styled.Container>
-      <styled.ColorPickerContainer>
+    <Styled.Container>
+      <Styled.ColorPickerContainer>
         {CARD_LIST1.map((name) => (
           <ColorPicker
             color={CARD_COLOR_BY_NAME[name]}
@@ -28,8 +28,8 @@ const Palette = ({ closeModal }) => {
             onClick={onClickCardSelector(name)}
           />
         ))}
-      </styled.ColorPickerContainer>
-      <styled.ColorPickerContainer>
+      </Styled.ColorPickerContainer>
+      <Styled.ColorPickerContainer>
         {CARD_LIST2.map((name) => (
           <ColorPicker
             color={CARD_COLOR_BY_NAME[name]}
@@ -38,8 +38,8 @@ const Palette = ({ closeModal }) => {
             onClick={onClickCardSelector(name)}
           />
         ))}
-      </styled.ColorPickerContainer>
-    </styled.Container>
+      </Styled.ColorPickerContainer>
+    </Styled.Container>
   );
 };
 

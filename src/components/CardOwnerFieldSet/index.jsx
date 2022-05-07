@@ -4,7 +4,7 @@ import FieldSet from '../FieldSet';
 import Input from '../Input';
 import { checkOwnerName } from '../../validation';
 import { ACTION, useCardFormContext } from '../../context/card-form-context';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 
 const showOwnerNameLength = (length) => {
   return `${length}`.padStart(2, '0');
@@ -30,10 +30,10 @@ const CardOwnerFieldSet = () => {
   }, [isOwnerNameError, ownerName, dispatch]);
 
   return (
-    <styled.Container>
-      <styled.MaxNumberIndicator>
+    <Styled.Container>
+      <Styled.MaxNumberIndicator>
         {showOwnerNameLength(ownerName.length)}/30
-      </styled.MaxNumberIndicator>
+      </Styled.MaxNumberIndicator>
       <FieldSet
         id="cardOwnerName"
         description="카드 소유자 이름(선택)"
@@ -51,7 +51,7 @@ const CardOwnerFieldSet = () => {
           />
         }
       </FieldSet>
-    </styled.Container>
+    </Styled.Container>
   );
 };
 

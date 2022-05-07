@@ -5,7 +5,7 @@ import Input from '../Input';
 import AskMarkTooltip from '../AskMarkTooltip';
 import { checkSecureCode, checkNumberOnly } from '../../validation';
 import { ACTION, useCardFormContext } from '../../context/card-form-context';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 
 const SecureCodeFieldSet = () => {
   const { dispatch, state } = useCardFormContext();
@@ -32,7 +32,7 @@ const SecureCodeFieldSet = () => {
       isError={isSecureCodeError}
     >
       {
-        <styled.Container>
+        <Styled.Container>
           <Input
             id="secureCode"
             scale="medium"
@@ -42,7 +42,7 @@ const SecureCodeFieldSet = () => {
             onChange={onChangeSecureCode}
           />
           <AskMarkTooltip />
-        </styled.Container>
+        </Styled.Container>
       }
     </FieldSet>
   );

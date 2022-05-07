@@ -1,6 +1,6 @@
 import Input from '../index';
 import PropTypes from 'prop-types';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 
 const CardNumberInput = ({
   onChangeFirstCardNumber,
@@ -13,21 +13,21 @@ const CardNumberInput = ({
   fourthCardNumber,
 }) => {
   return (
-    <styled.Container>
+    <Styled.Container>
       <Input
         scale="medium"
         value={firstCardNumber}
         onChange={onChangeFirstCardNumber}
         maxLength={4}
       />
-      <styled.DashContainer>-</styled.DashContainer>
+      <Styled.DashContainer>-</Styled.DashContainer>
       <Input
         scale="medium"
         value={secondCardNumber}
         onChange={onChangeSecondCardNumber}
         maxLength={4}
       />
-      <styled.DashContainer>-</styled.DashContainer>
+      <Styled.DashContainer>-</Styled.DashContainer>
       <Input
         scale="medium"
         type="password"
@@ -35,7 +35,7 @@ const CardNumberInput = ({
         onChange={onChangeThirdCardNumber}
         maxLength={4}
       />
-      <styled.DashContainer>-</styled.DashContainer>
+      <Styled.DashContainer>-</Styled.DashContainer>
       <Input
         scale="medium"
         type="password"
@@ -43,7 +43,7 @@ const CardNumberInput = ({
         onChange={onChangeFourthCardNumber}
         maxLength={4}
       />
-    </styled.Container>
+    </Styled.Container>
   );
 };
 

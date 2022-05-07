@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 import { useNavigate } from 'react-router-dom';
 
 const Header = ({ title, hasBackButton = false }) => {
@@ -11,14 +11,14 @@ const Header = ({ title, hasBackButton = false }) => {
   };
 
   return (
-    <styled.Container>
+    <Styled.Container>
       {hasBackButton && (
-        <styled.BackButton type="button" onClick={onClickBackButton}>
-          <styled.Arrow />
-        </styled.BackButton>
+        <Styled.BackButton type="button" onClick={onClickBackButton}>
+          <Styled.Arrow />
+        </Styled.BackButton>
       )}
-      <styled.Title>{title}</styled.Title>
-    </styled.Container>
+      <Styled.Title>{title}</Styled.Title>
+    </Styled.Container>
   );
 };
 

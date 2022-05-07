@@ -13,7 +13,7 @@ import SecureCodeFieldSet from '../SecureCodeFieldSet';
 import ErrorMessage from '../ErrorMessage';
 
 import PropTypes from 'prop-types';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 
 const AddCardForm = ({ openModal }) => {
   const { state } = useCardFormContext();
@@ -41,9 +41,9 @@ const AddCardForm = ({ openModal }) => {
   }, [state]);
 
   return (
-    <styled.Container>
+    <Styled.Container>
       <Header title="카드 추가" hasBackButton={true} />
-      <styled.CardContainer>
+      <Styled.CardContainer>
         <Card
           onClick={openModal}
           firstCardNumber={state.firstCardNumber}
@@ -55,18 +55,18 @@ const AddCardForm = ({ openModal }) => {
           cardType={state.cardType}
           ownerName={state.ownerName}
         />
-        <styled.ErrorMessageContainer>
+        <Styled.ErrorMessageContainer>
           {!state.isCardTypeSelected && (
             <ErrorMessage>카드사를 선택해주세요.</ErrorMessage>
           )}
-        </styled.ErrorMessageContainer>
-      </styled.CardContainer>
+        </Styled.ErrorMessageContainer>
+      </Styled.CardContainer>
       <CardNumberFieldSet />
       <ExpiredDateFieldSet />
       <CardOwnerFieldSet />
       <SecureCodeFieldSet />
       <PasswordFieldSet />
-      <styled.ButtonContainer>
+      <Styled.ButtonContainer>
         {isSubmittAble && (
           <Button
             type="link"
@@ -76,8 +76,8 @@ const AddCardForm = ({ openModal }) => {
             다음
           </Button>
         )}
-      </styled.ButtonContainer>
-    </styled.Container>
+      </Styled.ButtonContainer>
+    </Styled.Container>
   );
 };
 

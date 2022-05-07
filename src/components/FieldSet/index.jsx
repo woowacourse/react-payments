@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 import Label from '../Label/index';
 import ErrorMessage from '../ErrorMessage/index';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 
 const FieldSet = ({ id, description, children, errorMessage, isError }) => {
   return (
-    <styled.Container>
+    <Styled.Container>
       <Label id={id} description={description} />
       {children}
-      <styled.ErrorMessageContainer>
+      <Styled.ErrorMessageContainer>
         {isError && <ErrorMessage>{errorMessage}</ErrorMessage>}
-      </styled.ErrorMessageContainer>
-    </styled.Container>
+      </Styled.ErrorMessageContainer>
+    </Styled.Container>
   );
 };
 

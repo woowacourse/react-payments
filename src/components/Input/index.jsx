@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 import { INPUT_SCALE_NAMES } from '../../constant';
 
 const Input = ({ scale, ...rest }) => {
-  return <styled.Container scale={scale} {...rest} />;
+  return <Styled.Container scale={scale} {...rest} />;
 };
 
 Input.propTypes = {

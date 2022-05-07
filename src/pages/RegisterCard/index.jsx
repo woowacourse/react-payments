@@ -4,7 +4,7 @@ import useInputValue from '../../hooks/useInputValue';
 import useAPI from '../../hooks/useAPI';
 import Card from '../../components/Card';
 import Button from '../../components/Button';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 import { ENDPOINT, METHODS } from '../../constant';
 
 // fetch('https://moonheekim-payments-server.herokuapp.com/cards/', {
@@ -35,7 +35,7 @@ const RegisterCard = () => {
   };
 
   return state ? (
-    <styled.Container>
+    <Styled.Container>
       {isError ? (
         <h3>죄송합니다. 잠시 후에 다시 시도해주세요.</h3>
       ) : (
@@ -51,17 +51,17 @@ const RegisterCard = () => {
         cardType={state.cardType}
         ownerName={state.ownerName}
       />
-      <styled.CardAliasInput
+      <Styled.CardAliasInput
         value={alias}
         onChange={onChangeAlias}
         placeholder="카드 별칭을 입력해주세요"
       />
-      <styled.ButtonContainer>
+      <Styled.ButtonContainer>
         <Button onClick={onSubmitCardInformation} disabled={isLoading}>
           {isLoading ? '등록중' : '확인'}
         </Button>
-      </styled.ButtonContainer>
-    </styled.Container>
+      </Styled.ButtonContainer>
+    </Styled.Container>
   ) : null;
 };
 

@@ -3,7 +3,7 @@ import useInputValue from '../../hooks/useInputValue';
 import FieldSet from '../FieldSet';
 import Input from '../Input';
 import { checkPassword, checkNumberOnly } from '../../validation';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 import { ACTION, useCardFormContext } from '../../context/card-form-context';
 
 const PasswordFieldSet = () => {
@@ -54,7 +54,7 @@ const PasswordFieldSet = () => {
       isError={isFirstPasswordError && isSecondPasswordError}
     >
       {
-        <styled.Container>
+        <Styled.Container>
           <Input
             type="password"
             id="firstPassword"
@@ -71,9 +71,9 @@ const PasswordFieldSet = () => {
             value={secondPassword}
             onChange={onChangeSecondPassword}
           />
-          <styled.DotContainer>•</styled.DotContainer>
-          <styled.DotContainer>•</styled.DotContainer>
-        </styled.Container>
+          <Styled.DotContainer>•</Styled.DotContainer>
+          <Styled.DotContainer>•</Styled.DotContainer>
+        </Styled.Container>
       }
     </FieldSet>
   );
