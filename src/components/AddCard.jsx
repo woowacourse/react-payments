@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import arrowBackIcon from "../assets/images/arrowBackIcon.svg";
 
 import useResetInput from "../Hooks/useResetInput";
@@ -19,6 +19,7 @@ import {
 } from "./AddCard/";
 
 import { isValidCardInfo } from "../validators/validator";
+import { BACK_BUTTON_CONFIRM_MESSAGE } from "../constants/constants";
 
 const smallCardCss = {
   width: "213px",
@@ -33,23 +34,29 @@ const smallCardCss = {
 };
 
 export default function AddCard() {
+  const navigate = useNavigate();
   const [isNextButtonClicked, setNextButtonClicked] = useState(false);
   const { state, handleResetInput } = useResetInput();
   const { cardNumber, holderName, expireDate, securityCode, password } = state;
 
+  const handleBackButton = () => {
+    if (window.confirm(BACK_BUTTON_CONFIRM_MESSAGE)) {
+      navigate("/", { replace: true });
+      handleResetInput();
+    }
+  };
+
   return (
     <>
       <PageHeader>
-        <Link to="/possess-card">
-          <Button
-            onClick={handleResetInput}
-            type="button"
-            position={"static"}
-            isSvg={true}
-          >
-            {arrowBackIcon}
-          </Button>
-        </Link>
+        <Button
+          onClick={handleBackButton}
+          type="button"
+          position={"static"}
+          isSvg={true}
+        >
+          {arrowBackIcon}
+        </Button>
         카드 추가
       </PageHeader>
       <CardPreview
