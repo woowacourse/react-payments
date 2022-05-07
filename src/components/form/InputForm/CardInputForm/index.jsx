@@ -9,11 +9,8 @@ import Modal from '../../../commons/Modal';
 import CardCompanySelect from '../../CardCompanySelect';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../../types';
 import VirtualKeyboard from '../../VirtualKeyboard';
-import { useNavigate } from 'react-router-dom';
-import { generateNonDuplicatedId } from '../../../../utils/util';
 
-function CardInputForm({ cardInput, cardInputDispatch, cardListDispatch }) {
-  const navigate = useNavigate();
+function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction }) {
   const [isShowModal, setIsShowModal] = useState(false);
 
   const [{ isShow, elementKey }, setIsShowVirtualKeyboard] = useState({
@@ -32,15 +29,9 @@ function CardInputForm({ cardInput, cardInputDispatch, cardListDispatch }) {
 
     try {
       if (checkFormValidation({ expirationDate })) {
-        const randomId = generateNonDuplicatedId(cardType);
-        cardListDispatch({
-          type: 'ADD_CARD',
-          payload: {
-            id: randomId,
-            cardInput: { cardNumber, expirationDate, ownerName, securityCode, password, cardType },
-          },
+        formSubmitAction({
+          cardInput: { cardNumber, expirationDate, ownerName, securityCode, password, cardType },
         });
-        navigate('./success', { replace: true, state: { cardId: randomId } });
       }
     } catch ({ message }) {
       alert(message);
@@ -52,7 +43,7 @@ function CardInputForm({ cardInput, cardInputDispatch, cardListDispatch }) {
   };
 
   return (
-    <form className="card-input-form scroll-form" onSubmit={onSubmitInputForm} autoComplete="off">
+    <form className="card-input-form scroll-form" onSubmit={onSubmitInputForm}>
       {Object.keys(cardInput).map(key => {
         const TypeInputContainer = InputContainer[key];
         if (key === 'cardType') {
@@ -117,7 +108,7 @@ CardInputForm.propTypes = {
     cardType: PropTypes.string,
   }),
   cardInputDispatch: PropTypes.func,
-  cardListDispatch: PropTypes.func,
+  formSubmitAction: PropTypes.func,
 };
 
 export default CardInputForm;
