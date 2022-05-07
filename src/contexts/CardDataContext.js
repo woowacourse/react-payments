@@ -1,6 +1,6 @@
 import { createContext, useReducer, useMemo, useContext } from 'react';
 
-const CardListContext = createContext();
+const CardDataContext = createContext();
 
 function reducer(cardList, { type, data }) {
   const actionList = {
@@ -10,7 +10,7 @@ function reducer(cardList, { type, data }) {
     SELECT: () => {},
     INSERT: () => {
       const { cardData } = data;
-      return cardList.concat(cardData);
+      return cardList.concat({ ...cardData, id: new Date().getTime() });
     },
     UPDATE: () => {
       // 기존 컨텐츠를 업데이트한다.
@@ -23,17 +23,17 @@ function reducer(cardList, { type, data }) {
   return actionList[type]();
 }
 
-function CardListContextProvider({ children }) {
+function CardDataContextProvider({ children }) {
   const [cardList, dispatch] = useReducer(reducer, []);
   const value = useMemo(() => ({ cardList, dispatch }), [cardList]);
 
-  return <CardListContext.Provider value={value}>{children}</CardListContext.Provider>;
+  return <CardDataContext.Provider value={value}>{children}</CardDataContext.Provider>;
 }
 
-function useCardList() {
-  const context = useContext(CardListContext);
+function useCardDataContext() {
+  const context = useContext(CardDataContext);
   if (context === undefined) {
-    throw new Error('CardListContextProvider가 로드되지 않았습니다.');
+    throw new Error('CardDataContextProvider가 로드되지 않았습니다.');
   }
 
   const { cardList, dispatch } = context;
@@ -46,4 +46,4 @@ function useCardList() {
   return { cardList, insertCardData, updateCardData, deleteCardData };
 }
 
-export { CardListContext, CardListContextProvider, useCardList };
+export { CardDataContext, CardDataContextProvider, useCardDataContext };
