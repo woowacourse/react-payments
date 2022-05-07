@@ -1,5 +1,7 @@
 export const removeWhiteSpaces = (str: string) => str.replace(/\s/g, '');
 
+export const removePathnameCardEdit = (str: string) => str.replace(/\/card\/edit\//g, '');
+
 export const isNum = (str: string) => removeWhiteSpaces(str) && !Number.isNaN(Number(str));
 
 export const isEnglish = (str: string) => !/[^A-Za-z]/.test(str);

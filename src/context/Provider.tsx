@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, useReducer } from 'react';
-import { ActionType } from 'types';
+import { ActionType, CardType } from 'types';
 
 export type State = {
   firstInputCardNumber: string;
@@ -16,9 +16,10 @@ export type State = {
   chageCardType: boolean;
   completeCard: boolean;
   cardAlias: string;
+  cardList: Array<CardType>;
 };
 
-type Action = { type: ActionType; payload: string | boolean };
+type Action = { type: ActionType; payload: string | boolean | Array<CardType> };
 
 export type AppDispatch = Dispatch<Action>;
 // 변수명 통일감 있게
@@ -37,12 +38,16 @@ const initalState: State = {
   chageCardType: false,
   completeCard: false,
   cardAlias: '',
+  cardList: [],
 };
 
 export const AppStateContext = createContext<State>(initalState);
 export const AppDispatchContext = createContext<AppDispatch>(() => null);
 
-export function createAction(type: ActionType, payload: string | boolean): Action {
+export function createAction(
+  type: ActionType,
+  payload: string | boolean | Array<CardType>,
+): Action {
   return {
     type,
     payload,
@@ -120,6 +125,11 @@ function reducer(state: State, action: Action): any {
       return {
         ...state,
         cardAlias: action.payload,
+      };
+    case ActionType.SET_CARD_LIST:
+      return {
+        ...state,
+        cardList: action.payload,
       };
   }
 }

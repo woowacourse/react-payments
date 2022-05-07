@@ -21,6 +21,15 @@ function Navigation() {
     );
   }
 
+  if (pathname.includes('/card/edit/')) {
+    return (
+      <Wrapper>
+        <BackButton />
+        <PageTitle>카드수정</PageTitle>
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper>
       <BackButton />
