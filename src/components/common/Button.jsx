@@ -24,6 +24,6 @@ const ButtonText = styled.button`
   cursor: pointer;
 
   &:disabled {
-    color: "#ECEBF1";
+    color: #ecebf1;
   }
 `;

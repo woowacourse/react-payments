@@ -1,12 +1,12 @@
 export const CARD_TYPES = [
   { name: "포코", color: "gold" },
-  { name: "준", color: "#04c09e" },
-  { name: "공원", color: "green" },
+  { name: "준", color: "#9edbd0" },
+  { name: "공원", color: "#55bf55" },
   { name: "후이", color: "#9198e5" },
-  { name: "유세지", color: "#AB46D2" },
+  { name: "유세지", color: "#d873ff" },
   { name: "마르코", color: "#E76E9A" },
-  { name: "아놀드", color: "#FF5F00" },
-  { name: "록바", color: "#FBCD58" },
+  { name: "아놀드", color: "#ffa56f" },
+  { name: "록바", color: "#d19c89" },
 ];
 
 export const CARD_TYPES_DEFAULT = { name: "", color: "" };

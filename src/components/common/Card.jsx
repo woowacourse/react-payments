@@ -41,7 +41,7 @@ const CardBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000000;
+  color: #525252;
 
   margin: 10px 0;
 `;

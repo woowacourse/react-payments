@@ -27,7 +27,7 @@ export const CardModifyPage = () => {
         <>
           <Form onSubmit={(e) => setCardNickname(e)}>
             <FlexWrapper
-              height="calc(100vh - 45px)"
+              height="calc(100vh - 50px)"
               flexDirection="column"
               justifyContent="center"
             >
