@@ -6,22 +6,14 @@ import PageTemplate from '../../../components/commons/PageTemplate';
 import Card from '../../../components/card/Card';
 import CardInputForm from '../../../components/form/InputForm/CardInputForm';
 import { CARD_DEFINITION } from '../../../components/types';
-import ErrorPage from '../../404';
 import { ROUTE } from '../../../route';
 
-function EditCard({ cardList, cardListDispatch }) {
+function EditCard({ cardList, cardListDispatch, routeState: { cardId } }) {
   const navigate = useNavigate();
-  const { state } = useLocation();
 
   const [{ id, alias, ...cardInput }, cardInputDispatch] = useCardInput(
-    state && cardList.find(({ id }) => state.cardId === id),
+    cardList.find(({ id }) => cardId === id),
   );
-
-  if (!state) {
-    return <ErrorPage />;
-  }
-
-  const { cardId } = state;
 
   const formSubmitAction = payload => {
     cardListDispatch({ type: 'UPDATE_CARD', payload: { ...payload, id: cardId } });
@@ -43,6 +35,7 @@ function EditCard({ cardList, cardListDispatch }) {
 EditCard.propTypes = {
   cardList: PropTypes.arrayOf(CARD_DEFINITION),
   cardListDispatch: PropTypes.func,
+  routeState: PropTypes.object,
 };
 
 export default EditCard;
