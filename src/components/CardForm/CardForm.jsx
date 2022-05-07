@@ -1,118 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import useEasyForm from '../../hooks/useEasyForm';
-import CardPreview from '../common/CardPreview';
-import ToolTip from '../common/ToolTip';
-
-const StyledCardForm = styled.form`
-  margin: 0;
-
-  .submit-button {
-    background: none;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-
-    position: absolute;
-    width: 51px;
-    height: 34px;
-    right: 25px;
-    bottom: 16px;
-
-    text-align: right;
-
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 16px;
-
-    color: #04c09e;
-  }
-`;
-
-const StyledCardFieldContainer = styled.div`
-  margin: 16px 0;
-
-  .input-title {
-    display: inline-block;
-
-    font-size: 12px;
-    line-height: 14px;
-    vertical-align: top;
-
-    margin-bottom: 4px;
-
-    color: #525252;
-  }
-
-  .input-box {
-    display: flex;
-    height: 47px;
-    align-items: center;
-    margin-top: 0.375rem;
-    color: #d3d3d3;
-    border-radius: 0.25rem;
-    background-color: #ecebf1;
-  }
-
-  .transparent {
-    background-color: transparent;
-  }
-
-  .password {
-    background-color: #ecebf1;
-    width: 15%;
-    margin-right: 7px;
-  }
-
-  .disabled {
-    background-color: transparent;
-    width: 15%;
-    margin-right: 7px;
-  }
-
-  .name-length {
-    display: inline-block;
-    line-height: 14px;
-    float: right;
-  }
-
-  .cvc-block {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-`;
-
-const StyledInput = styled.input`
-  background-color: #ecebf1;
-  height: 45px;
-  width: 100%;
-  text-align: center;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  border-color: #9ca3af;
-  border: none;
-  border-radius: 0.25rem;
-
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 21px;
-  color: #525252;
-
-  &::placeholder {
-    letter-spacing: -0.02em;
-  }
-
-  &.error {
-    outline: 1px solid #ff9e9e;
-    outline-offset: -1px;
-    background-color: #ffc6c6;
-  }
-`;
+import CardPreview from '../CardPreview/CardPreview';
+import Field from '../Field/Field';
+import Label from '../Label/Label';
+import InputBox from '../InputBox/InputBox';
+import Input from '../Input/Input';
+import ToolTip from '../ToolTip/ToolTip';
+import SubmitButton from '../SubmitButton/SubmitButton';
 
 const CardForm = () => {
   const { registerForm, registerInput, watchingValues, errors } = useEasyForm({
@@ -168,14 +63,12 @@ const CardForm = () => {
         }}
       />
       <StyledCardForm {...registerForm({ onSubmit, onError })}>
-        <StyledCardFieldContainer className="Input-container">
-          <label className="input-title">카드 번호</label>
-          <div className="input-box">
-            <StyledInput
+        <Field>
+          <Label>카드 번호</Label>
+          <InputBox>
+            <Input
               type="text"
-              className={`input-basic ${
-                errors?.firstCardNumber ? 'error' : ''
-              }`}
+              className={`w-25 ${errors?.firstCardNumber ? 'error' : ''}`}
               {...registerInput('firstCardNumber', {
                 minLength: 4,
                 maxLength: 4,
@@ -185,11 +78,9 @@ const CardForm = () => {
               })}
             />
             <p>-</p>
-            <StyledInput
+            <Input
               type="text"
-              className={`input-basic ${
-                errors?.secondCardNumber ? 'error' : ''
-              }`}
+              className={`w-25 ${errors?.secondCardNumber ? 'error' : ''}`}
               {...registerInput('secondCardNumber', {
                 minLength: 4,
                 maxLength: 4,
@@ -199,11 +90,9 @@ const CardForm = () => {
               })}
             />
             <p>-</p>
-            <StyledInput
+            <Input
               type="password"
-              className={`input-basic ${
-                errors?.thirdCardNumber ? 'error' : ''
-              }`}
+              className={`w-25 ${errors?.thirdCardNumber ? 'error' : ''}`}
               {...registerInput('thirdCardNumber', {
                 minLength: 4,
                 maxLength: 4,
@@ -213,11 +102,9 @@ const CardForm = () => {
               })}
             />
             <p>-</p>
-            <StyledInput
+            <Input
               type="password"
-              className={`input-basic ${
-                errors?.fourthCardNumber ? 'error' : ''
-              }`}
+              className={`w-25 ${errors?.fourthCardNumber ? 'error' : ''}`}
               {...registerInput('fourthCardNumber', {
                 minLength: 4,
                 maxLength: 4,
@@ -226,14 +113,14 @@ const CardForm = () => {
                 watch: true,
               })}
             />
-          </div>
-        </StyledCardFieldContainer>
-        <StyledCardFieldContainer className="input-container">
-          <label className="input-title">만료일</label>
-          <div className="input-box w-50">
-            <StyledInput
+          </InputBox>
+        </Field>
+        <Field>
+          <Label>만료일</Label>
+          <InputBox className="w-50">
+            <Input
               type="text"
-              className={`input-basic ${errors?.expiredMonth ? 'error' : ''}`}
+              className={`w-50 ${errors?.expiredMonth ? 'error' : ''}`}
               placeholder="MM"
               {...registerInput('expiredMonth', {
                 minLength: 2,
@@ -244,9 +131,9 @@ const CardForm = () => {
               })}
             />
             <p>/</p>
-            <StyledInput
+            <Input
               type="text"
-              className={`input-basic ${errors?.expiredYear ? 'error' : ''}`}
+              className={`w-50 ${errors?.expiredYear ? 'error' : ''}`}
               placeholder="YY"
               {...registerInput('expiredYear', {
                 minLength: 2,
@@ -262,18 +149,18 @@ const CardForm = () => {
                 watch: true,
               })}
             />
-          </div>
-        </StyledCardFieldContainer>
-        <StyledCardFieldContainer className="input-container">
-          <label className="input-title">카드 소유자 이름 (선택)</label>
-          <span className="input-title name-length">
+          </InputBox>
+        </Field>
+        <Field>
+          <Label>카드 소유자 이름 (선택)</Label>
+          <span className="name-length">
             {' '}
             {watchingValues.owner?.length}/30
           </span>
-          <div className="input-box">
-            <StyledInput
+          <InputBox>
+            <Input
               type="text"
-              className={`input-basic ${errors?.owner ? 'error' : ''}`}
+              className={`${errors?.owner ? 'error' : ''}`}
               placeholder="카드에 표시된 이름과 동일하게 입력하세요."
               {...registerInput('owner', {
                 pattern: '(?:[A-Za-z]+ ?){0,3}',
@@ -281,15 +168,15 @@ const CardForm = () => {
                 watch: true,
               })}
             />
-          </div>
-        </StyledCardFieldContainer>
-        <StyledCardFieldContainer className="input-container">
-          <label className="input-title">보안코드 (CVC/CVV)</label>
+          </InputBox>
+        </Field>
+        <Field>
+          <Label>보안코드 (CVC/CVV)</Label>
           <div className="cvc-block">
-            <div className="input-box w-25">
-              <StyledInput
+            <InputBox className="w-25">
+              <Input
                 type="password"
-                className={`input-basic ${errors?.cvc ? 'error' : ''}`}
+                className={errors?.cvc ? 'error' : ''}
                 {...registerInput('cvc', {
                   minLength: 3,
                   maxLength: 4,
@@ -297,18 +184,18 @@ const CardForm = () => {
                   required: true,
                 })}
               />
-            </div>
-            <ToolTip tip="보안 코드는 보통 카드 뒷면 3-4자리 수입니다.">
-              ?
+            </InputBox>
+            <ToolTip icon="?">
+              보안 코드는 보통 카드 뒷면 3-4자리 수입니다
             </ToolTip>
           </div>
-        </StyledCardFieldContainer>
-        <StyledCardFieldContainer className="input-container">
-          <label className="input-title">비밀번호</label>
-          <div className="input-box transparent">
-            <StyledInput
+        </Field>
+        <Field>
+          <Label>비밀번호</Label>
+          <InputBox className="transparent">
+            <Input
               type="password"
-              className={`input-basic w-15 password ${
+              className={`password ${
                 errors?.firstPasswordDigit ? 'error' : ''
               }`}
               {...registerInput('firstPasswordDigit', {
@@ -318,9 +205,9 @@ const CardForm = () => {
                 required: true,
               })}
             />
-            <StyledInput
+            <Input
               type="password"
-              className={`input-basic w-15 password ${
+              className={`password ${
                 errors?.secondPasswordDigit ? 'error' : ''
               }`}
               {...registerInput('secondPasswordDigit', {
@@ -330,9 +217,9 @@ const CardForm = () => {
                 required: true,
               })}
             />
-            <StyledInput
+            <Input
               type="password"
-              className="input-basic w-15 disabled"
+              className="password"
               value="*"
               disabled
               {...registerInput('thirdPasswordDigit', {
@@ -341,9 +228,9 @@ const CardForm = () => {
                 pattern: '[0-9]',
               })}
             />
-            <StyledInput
+            <Input
               type="password"
-              className="input-basic w-15 disabled"
+              className="password"
               value="*"
               disabled
               {...registerInput('fourthPasswordDigit', {
@@ -352,14 +239,16 @@ const CardForm = () => {
                 pattern: '[0-9]',
               })}
             />
-          </div>
-        </StyledCardFieldContainer>
-        <button className="submit-button" type="submit">
-          다음
-        </button>
+          </InputBox>
+        </Field>
+        <SubmitButton type="submit">다음</SubmitButton>
       </StyledCardForm>
     </>
   );
 };
+
+const StyledCardForm = styled.form`
+  margin: 0;
+`;
 
 export default CardForm;

@@ -1,11 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import BackwardButton from './components/common/BackwardButton';
+import BackwardButton from './components/BackwardButton/BackwardButton';
 import CardForm from './components/CardForm/CardForm';
-
-const StyledApp = styled.div`
-  padding: 16px 24px;
-`;
 
 const App = () => {
   return (
@@ -15,5 +11,9 @@ const App = () => {
     </StyledApp>
   );
 };
+
+const StyledApp = styled.div`
+  padding: 16px 24px;
+`;
 
 export default App;
