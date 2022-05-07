@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-function ModalDimmed({ setIsShowModal, children }) {
+function ModalDimmed({ closeModal, children }) {
   const onClickDimmed = e => {
     const {
       target: { className },
     } = e;
 
     if (className.includes('modal-dimmed')) {
-      setIsShowModal(false);
+      closeModal();
     }
   };
   return (
@@ -18,7 +18,7 @@ function ModalDimmed({ setIsShowModal, children }) {
   );
 }
 
-function Modal({ children, setIsShowModal }) {
+function Modal({ children, closeModal }) {
   const [container] = useState(() => document.createElement('div'));
 
   useEffect(() => {
@@ -29,18 +29,18 @@ function Modal({ children, setIsShowModal }) {
   }, [container]);
 
   return ReactDOM.createPortal(
-    <ModalDimmed setIsShowModal={setIsShowModal}>{children}</ModalDimmed>,
+    <ModalDimmed closeModal={closeModal}>{children}</ModalDimmed>,
     container,
   );
 }
 
 ModalDimmed.propTypes = {
-  setIsShowModal: PropTypes.func,
+  closeModal: PropTypes.func,
   children: PropTypes.node,
 };
 
 Modal.propTypes = {
-  setIsShowModal: PropTypes.func,
+  closeModal: PropTypes.func,
   children: PropTypes.node,
 };
 

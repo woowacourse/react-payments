@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useCardList } from '../hooks/useCardList';
 import Landing from '../pages';
@@ -17,10 +17,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={ROUTE.home.route} element={<Landing />} />
+
           <Route
             path={ROUTE.addCard.route}
             element={<AddCard cardListDispatch={cardListDispatch} />}
           />
+
           <Route
             path={ROUTE.cardSuccess.route}
             element={
@@ -29,6 +31,7 @@ function App() {
               </RequiredRouteState>
             }
           />
+
           <Route
             path={ROUTE.editCard.route}
             element={
@@ -37,7 +40,9 @@ function App() {
               </RequiredRouteState>
             }
           />
+
           <Route path={ROUTE.cardList.route} element={<CardList cardList={cardList} />} />
+
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

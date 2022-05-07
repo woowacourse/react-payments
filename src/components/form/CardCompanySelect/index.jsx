@@ -3,10 +3,9 @@ import { uid } from 'react-uid';
 import PropTypes from 'prop-types';
 import { CARD_TYPE } from '../../../utils/constants';
 
-function CardCompanySelect({ setIsShowModal, cardInputDispatch }) {
+function CardCompanySelect({ closeModal, cardInputDispatch }) {
   const onClickOption = cardType => {
-    setIsShowModal(false);
-
+    closeModal();
     cardInputDispatch({ type: 'CHANGE_CARD_COMPANY', payload: { cardType } });
   };
   return (
@@ -26,7 +25,7 @@ function CardCompanySelect({ setIsShowModal, cardInputDispatch }) {
 }
 
 CardCompanySelect.propTypes = {
-  setIsShowModal: PropTypes.func,
+  closeModal: PropTypes.func,
   cardInputDispatch: PropTypes.func,
 };
 

@@ -9,14 +9,15 @@ import Modal from '../../../commons/Modal';
 import CardCompanySelect from '../../CardCompanySelect';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../../types';
 import VirtualKeyboard from '../../VirtualKeyboard';
+import { useModal } from '../../../../hooks/useModal';
 
 function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction }) {
-  const [isShowModal, setIsShowModal] = useState(false);
-
   const [{ isShow, elementKey }, setIsShowVirtualKeyboard] = useState({
     isShow: false,
     elementKey: null,
   });
+
+  const [isShowModal, openModal, closeModal] = useModal();
 
   const isComplete = useFormComplete(cardInput, checkFormCompletion);
 
@@ -39,7 +40,7 @@ function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction }) {
   };
 
   const onClickCardSelectButton = () => {
-    setIsShowModal(true);
+    openModal();
   };
 
   return (
@@ -85,12 +86,9 @@ function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction }) {
       </Position>
 
       {isShowModal && (
-        <Modal setIsShowModal={setIsShowModal}>
+        <Modal closeModal={closeModal}>
           <div className="modal">
-            <CardCompanySelect
-              setIsShowModal={setIsShowModal}
-              cardInputDispatch={cardInputDispatch}
-            />
+            <CardCompanySelect closeModal={closeModal} cardInputDispatch={cardInputDispatch} />
           </div>
         </Modal>
       )}
