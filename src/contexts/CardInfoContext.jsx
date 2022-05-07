@@ -3,6 +3,7 @@ import { createContext } from "react";
 import useInput from "../Hooks/useInput";
 
 import {
+  initialCardAlias,
   initialCardNumber,
   initialExpireDate,
   initialHolderName,
@@ -10,6 +11,7 @@ import {
   initialSecurityCode,
 } from "../data/initialData";
 import {
+  isInvalidCardAlias,
   isInValidCardNumber,
   isInValidExpireDate,
   isInValidHolderName,
@@ -62,15 +64,27 @@ const CardInfoProvider = ({ children }) => {
     initialPassword,
     isInvalidPassword
   );
+  const [cardAlias, handleCardAliasUpdate, setCardAlias] = useInput(
+    initialCardAlias,
+    isInvalidCardAlias
+  );
 
   const value = {
-    state: { cardNumber, expireDate, holderName, securityCode, password },
+    state: {
+      cardNumber,
+      expireDate,
+      holderName,
+      securityCode,
+      password,
+      cardAlias,
+    },
     setState: {
       setCardNumber,
       setExpireDate,
       setHolderName,
       setSecurityCode,
       setPassword,
+      setCardAlias,
     },
     actions: {
       handleCardNumberUpdate,
@@ -78,6 +92,7 @@ const CardInfoProvider = ({ children }) => {
       handleHolderNameUpdate,
       handleSecurityCodeUpdate,
       handlePasswordUpdate,
+      handleCardAliasUpdate,
     },
   };
 

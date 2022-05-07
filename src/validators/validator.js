@@ -16,6 +16,8 @@ export const isInvalidSecurityCode = (value) => !/^\d{0,3}$/.test(value);
 
 export const isInvalidPassword = (value) => !/^\d{0,1}$/.test(value);
 
+export const isInvalidCardAlias = (value) => !/^.{0,15}$/.test(value);
+
 export const isValidCardInfo = (
   cardNumber,
   expireDate,

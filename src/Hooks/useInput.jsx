@@ -66,6 +66,16 @@ export default function useInput(initialValue, validator) {
       };
     });
   };
+  const handleCardAlias = (value) => {
+    if (validator(value)) return;
+
+    setValue((prevValue) => {
+      return {
+        ...prevValue,
+        value,
+      };
+    });
+  };
 
   const onChange = (event, keyType) => {
     const {
@@ -95,6 +105,10 @@ export default function useInput(initialValue, validator) {
     if (name === "password") {
       handlePassword(value, keyType);
       return;
+    }
+
+    if (name === "cardAlias") {
+      handleCardAlias(value, keyType);
     }
   };
 

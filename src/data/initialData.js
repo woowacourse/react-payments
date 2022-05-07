@@ -48,3 +48,8 @@ export const initialPassword = {
     keyType: "secondPassword",
   },
 };
+
+export const initialCardAlias = {
+  value: "",
+  keyType: "cardAlias",
+};

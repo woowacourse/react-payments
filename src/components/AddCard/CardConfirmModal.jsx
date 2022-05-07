@@ -32,9 +32,16 @@ const bigCardCss = {
   cardNumberMarginBottom: "20px",
 };
 
+const StyledCardAliasDescription = styled.p`
+  margin-top: 10px;
+  color: #f38181;
+  font-size: 14px;
+`;
+
 export default function CardConfirmModal() {
   const {
-    state: { cardNumber, holderName, expireDate },
+    state: { cardNumber, holderName, expireDate, cardAlias },
+    actions: { handleCardAliasUpdate },
   } = useContext(CardInfoContext);
 
   return (
@@ -57,10 +64,18 @@ export default function CardConfirmModal() {
         />
         <Input
           name={"cardAlias"}
+          value={cardAlias.value}
+          onChange={handleCardAliasUpdate}
           width={"244px"}
-          borderBottom={"1px solid #eee"}
+          borderBottom={"1px solid #8b8b8b"}
         />
-        <Button type="submit">확인</Button>
+        {cardAlias.value.length > 0 ? (
+          <Button type="submit">확인</Button>
+        ) : (
+          <StyledCardAliasDescription>
+            카드 별칭을 1 ~ 15자로 입력해주세요.
+          </StyledCardAliasDescription>
+        )}
       </StyledCardConfirmModal>
     </>
   );
