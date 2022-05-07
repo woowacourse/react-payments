@@ -7,10 +7,12 @@ const CardScaleType = {
   small: {
     width: '208',
     height: '130',
+    fontSize: '16',
   },
   large: {
     width: '293',
     height: '183',
+    fontSize: '18',
   },
 };
 
@@ -43,7 +45,7 @@ const CardTop = styled.div`
 `;
 
 const CardName = styled.span`
-  font-size: 16px;
+  font-size: ${(props) => CardScaleType[props.size].fontSize}px;
   margin-left: 14px;
 `;
 
@@ -69,7 +71,7 @@ const CardChip = styled.div`
 const CardNumbers = styled.div`
   display: flex;
   position: absolute;
-  font-size: 16px;
+  font-size: ${(props) => CardScaleType[props.size].fontSize}px;
   bottom: 33px;
 
   & > span {
@@ -103,7 +105,7 @@ const CardOwnerContainer = styled.span`
   width: 160px;
   margin: 0 16px;
   padding-top: 10px;
-  font-size: 14px;
+  font-size: ${(props) => CardScaleType[props.size].fontSize}px;
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
@@ -116,7 +118,7 @@ const CardExpiredDateContainer = styled.span`
   top: 14px;
   right: 10px;
   width: fit-content;
-  font-size: 14px;
+  font-size: ${(props) => CardScaleType[props.size].fontSize}px;
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
@@ -126,11 +128,11 @@ const EmptyCard = ({ name, cardType, expiredMonth, expiredYear, cardNumbers, siz
   return (
     <EmptyCardWrapper color={cardType.color} size={size}>
       <CardTop>
-        <CardName>{cardType.name}</CardName>
+        <CardName size={size}>{cardType.name}</CardName>
       </CardTop>
       <CardMiddle>
         <CardChip />
-        <CardNumbers>
+        <CardNumbers size={size}>
           {cardNumbers[0] && <span>{cardNumbers[0]}</span>}
           {cardNumbers[1] && <span>{cardNumbers[1]}</span>}
           {cardNumbers[2] && (
@@ -143,8 +145,8 @@ const EmptyCard = ({ name, cardType, expiredMonth, expiredYear, cardNumbers, siz
       </CardMiddle>
       <CardBottom>
         <CardBottomInfo>
-          <CardOwnerContainer>{name}</CardOwnerContainer>
-          <CardExpiredDateContainer>
+          <CardOwnerContainer size={size}>{name}</CardOwnerContainer>
+          <CardExpiredDateContainer size={size}>
             {expiredMonth}
             {expiredYear && `/ ${expiredYear}`}
           </CardExpiredDateContainer>
