@@ -16,6 +16,8 @@ const initialState = {
   cvc: '',
   password1: '',
   password2: '',
+  name: '',
+  inputValid: false,
 };
 
 const reducer = (state, action) => {
@@ -50,6 +52,16 @@ const reducer = (state, action) => {
         password1: action.cardPasswords[0],
         password2: action.cardPasswords[1],
       };
+    case 'SET_CARD_NAME':
+      return {
+        ...state,
+        name: action.name,
+      };
+    case 'SET_CARD_INPUT_VALID':
+      return {
+        ...state,
+        inputValid: action.boolean,
+      };
     default:
       return state;
   }
@@ -62,7 +74,7 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <CardInfoContext.Provider value={{ state, setPage, dispatch }}>
+    <CardInfoContext.Provider value={{ state, page, setPage, dispatch }}>
       {page === PAGES.LIST ? <CardListPage /> : <CardAddPage />}
     </CardInfoContext.Provider>
   );

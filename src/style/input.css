@@ -81,3 +81,7 @@ input::-webkit-inner-spin-button {
 .input-inline {
   display: inline;
 }
+
+.input-card-name-width {
+  width: 330px;
+}

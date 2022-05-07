@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { CardInfoContext } from 'App';
 
-import { ERROR_MESSAGE } from 'constants';
+import { ERROR_MESSAGE, PAGES } from 'constants';
 
 function CardInputForm({ children }) {
-  const { state } = useContext(CardInfoContext);
+  const { state, setPage, dispatch } = useContext(CardInfoContext);
 
-  const { number1, number2, number3, number4, month, year, cvc } = state;
+  const { number1, number2, number3, number4, month, year, cvc, name } = state;
 
   const validator = (conditions) => {
     conditions.forEach(({ checker, errorMsg }) => {
@@ -67,13 +67,23 @@ function CardInputForm({ children }) {
     e.preventDefault();
 
     try {
+      if (name !== '') {
+        setPage(PAGES.LIST);
+        dispatch({ type: 'SET_CARD_INPUT_VALID', boolean: false });
+        return;
+      }
       checkCardInfo({ number1, number2, number3, number4, month, year, cvc });
+      dispatch({ type: 'SET_CARD_INPUT_VALID', boolean: true });
     } catch (error) {
       alert(error.message);
     }
   };
 
-  return <form onSubmit={handleSubmit}>{children}</form>;
+  return (
+    <form className="card-input-form" onSubmit={handleSubmit}>
+      {children}
+    </form>
+  );
 }
 
 export default CardInputForm;
