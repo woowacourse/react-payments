@@ -1,13 +1,7 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { CardInfoContext } from 'App';
-
-function Card({ isEmpty }) {
-  const { state } = useContext(CardInfoContext);
-
-  const { number1, number2, number3, number4, owner, month, year } = state.card;
-  console.log(state);
+function Card({ isEmpty, cardInfo }) {
+  const { number1, number2, number3, number4, owner, month, year } = cardInfo;
 
   return (
     <div className="card-box">

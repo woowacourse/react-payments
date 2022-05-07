@@ -80,7 +80,19 @@ const reducer = (state, action) => {
       };
     case ACTION.ADD_CARD:
       return {
-        card: { ...state.card },
+        card: {
+          number1: '',
+          number2: '',
+          number3: '',
+          number4: '',
+          month: '',
+          year: '',
+          owner: '',
+          cvc: '',
+          password1: '',
+          password2: '',
+          nickname: '',
+        },
         cards: [...state.cards, state.card],
       };
     default:

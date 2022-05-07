@@ -37,7 +37,6 @@ function CardNameInputForm({ children }) {
     try {
       checkCardNameInput(nickname);
       dispatch({ type: ACTION.ADD_CARD });
-      console.log(state);
       navigate('/react-payments');
     } catch (error) {
       alert(error.message);

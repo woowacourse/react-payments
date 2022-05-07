@@ -27,6 +27,7 @@ body {
   padding: 16px 24px;
   position: relative;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .link {

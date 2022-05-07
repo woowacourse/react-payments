@@ -1,3 +1,6 @@
+import { useContext } from 'react';
+import { CardInfoContext } from 'App';
+
 import Header from '../components/Header/Header';
 import Card from 'components/common/Card/Card';
 import PageTitle from 'components/common/PageTitle/PageTitle';
@@ -13,13 +16,16 @@ import CardPassword from 'components/CardPassword/CardPassword';
 import PrevPageSign from 'components/PrevPageSign/PrevPageSign';
 
 function CardAddPage() {
+  const { state } = useContext(CardInfoContext);
+  const { card } = state;
+
   return (
     <div className="app">
       <Header>
         <PrevPageSign />
         <PageTitle title="카드추가" />
       </Header>
-      <Card isEmpty={false} />
+      <Card isEmpty={false} cardInfo={card} />
       <CardInputForm>
         <CardNumber />
         <CardExpirationDate />
