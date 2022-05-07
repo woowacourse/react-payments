@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import Card from '../../components/Modules/Card';
 import CardNickNameForm from '../../components/Templates/CardNickNameForm';
 import { useNavigate } from 'react-router-dom';
-import { INPUT_ACTION } from '../../Reducer/InputtedInfoReducer';
-import { CARD_ACTION } from '../../Reducer/CardReducer';
+import CardDeleteButton from '../../components/Atoms/CardDeleteButton';
 
 const Page = styled.div`
   display: flex;
@@ -30,20 +29,9 @@ const CardSection = styled.div`
   margin-bottom: 33px;
 `;
 
-const DeleteButton = styled.button`
-  background-color: transparent;
-  color: red;
-  cursor: pointer;
-
-  &:hover {
-    color: #fc7272;
-  }
-`;
-
 function CardCompletePage() {
-  const { inputtedInfo, inputtedInfoDispatch, cardDispatch } =
-    useContext(CardContext);
   const navigator = useNavigate();
+  const { inputtedInfo } = useContext(CardContext);
 
   useEffect(() => {
     if (Object.keys(inputtedInfo).length === 0) {
@@ -53,21 +41,6 @@ function CardCompletePage() {
     }
   }, []);
 
-  const onDeleteClick = () => {
-    if (confirm('해당 카드를 삭제하시겠습니까?')) {
-      inputtedInfoDispatch({
-        type: INPUT_ACTION.CLEAR,
-      });
-
-      cardDispatch({
-        type: CARD_ACTION.DELETE,
-        value: inputtedInfo.cardNumber.value,
-      });
-
-      navigator('/react-payments/cardList');
-    }
-  };
-
   return (
     <Page>
       <Title>카드등록이 완료되었습니다.</Title>
@@ -75,7 +48,7 @@ function CardCompletePage() {
         <Card {...inputtedInfo} disable={true} />
       </CardSection>
       <CardNickNameForm link="/react-payments/cardList" />
-      <DeleteButton onClick={onDeleteClick}>카드삭제</DeleteButton>
+      <CardDeleteButton>카드삭제</CardDeleteButton>
     </Page>
   );
 }
