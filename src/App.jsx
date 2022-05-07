@@ -1,4 +1,4 @@
-import { useState, useReducer } from 'react';
+import { useState, useReducer, createContext } from 'react';
 
 import CardListPage from 'pages/CardListPage';
 import CardAddPage from 'pages/CardAddPage';
@@ -34,10 +34,10 @@ const reducer = (state, action) => {
         month: action.cardExpirationDate.month,
         year: action.cardExpirationDate.year,
       };
-    case 'SET_OWNER':
+    case 'SET_CARD_OWNER':
       return {
         ...state,
-        owner: action.cardOwner,
+        owner: action.owner,
       };
     case 'SET_CVC':
       return {
@@ -55,14 +55,16 @@ const reducer = (state, action) => {
   }
 };
 
+export const CardInfoContext = createContext(null);
+
 function App() {
   const [page, setPage] = useState(PAGES.LIST);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  return page === PAGES.LIST ? (
-    <CardListPage setPage={setPage} />
-  ) : (
-    <CardAddPage setPage={setPage} dispatch={dispatch} cardInfo={state} />
+  return (
+    <CardInfoContext.Provider value={{ state, setPage, dispatch }}>
+      {page === PAGES.LIST ? <CardListPage /> : <CardAddPage />}
+    </CardInfoContext.Provider>
   );
 }
 

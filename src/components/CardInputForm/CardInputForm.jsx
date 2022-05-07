@@ -1,6 +1,13 @@
+import { useContext } from 'react';
+import { CardInfoContext } from 'App';
+
 import { ERROR_MESSAGE } from 'constants';
 
-function CardInputForm({ cardInfo, children }) {
+function CardInputForm({ children }) {
+  const { state } = useContext(CardInfoContext);
+
+  const { number1, number2, number3, number4, month, year, cvc } = state;
+
   const validator = (conditions) => {
     conditions.forEach(({ checker, errorMsg }) => {
       if (checker()) throw new Error(errorMsg);
@@ -58,8 +65,6 @@ function CardInputForm({ cardInfo, children }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const { number1, number2, number3, number4, month, year, cvc } = cardInfo;
 
     try {
       checkCardInfo({ number1, number2, number3, number4, month, year, cvc });

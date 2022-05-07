@@ -12,37 +12,21 @@ import Tooltip from 'components/Tooltip/Tooltip';
 import CardPassword from 'components/CardPassword/CardPassword';
 import PrevPageSign from 'components/PrevPageSign/PrevPageSign';
 
-function CardAddPage({ setPage, dispatch, cardInfo }) {
+function CardAddPage() {
   return (
     <div className="app">
       <Header>
-        <PrevPageSign setPage={setPage} />
+        <PrevPageSign />
         <PageTitle title="카드추가" />
       </Header>
-      <Card isEmpty={false} cardInfo={cardInfo} />
-      <CardInputForm cardInfo={cardInfo}>
-        <CardNumber
-          cardNumbers={[cardInfo.number1, cardInfo.number2, cardInfo.number3, cardInfo.number4]}
-          setCardNumbers={(cardNumbers) => dispatch({ type: 'SET_CARD_NUMBERS', cardNumbers })}
-        />
-        <CardExpirationDate
-          cardExpirationDate={{ month: cardInfo.month, year: cardInfo.year }}
-          setCardExpirationDate={(cardExpirationDate) =>
-            dispatch({ type: 'SET_CRAD_EXPIRATION_DATE', cardExpirationDate })
-          }
-        />
-        <CardOwner
-          cardOwner={cardInfo.owner}
-          setOwner={(cardOwner) => dispatch({ type: 'SET_OWNER', cardOwner })}
-        />
-        <CVC cvc={cardInfo.cvc} setCVC={(cvc) => dispatch({ type: 'SET_CVC', cvc })} />
+      <Card isEmpty={false} />
+      <CardInputForm>
+        <CardNumber />
+        <CardExpirationDate />
+        <CardOwner />
+        <CVC />
         <Tooltip />
-        <CardPassword
-          cardPasswords={[cardInfo.password1, cardInfo.password2]}
-          setCardPasswords={(cardPasswords) =>
-            dispatch({ type: 'SET_CARD_PASSWORDS', cardPasswords })
-          }
-        />
+        <CardPassword />
         <Button text="다음" />
       </CardInputForm>
     </div>
