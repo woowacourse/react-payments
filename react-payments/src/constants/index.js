@@ -65,5 +65,6 @@ export const ERROR_MESSAGE = {
 export const REDUCER_TYPE = {
   CREATE: "CREATE",
   EDIT: "EDIT",
+  DELETE: "DELETE",
 };
 export const SUCCESS_MESSAGE = "성공적으로 입력됐습니다";

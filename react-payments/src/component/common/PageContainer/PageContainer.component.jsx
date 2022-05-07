@@ -1,10 +1,18 @@
 import styled from "styled-components";
+import { css } from "styled-components";
 
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 350px;
-  height: 850px;
+  ${({ type }) =>
+    type === "add"
+      ? css`
+          height: 850px;
+        `
+      : css`
+          height: 700px;
+        `}
   border: 1px solid ${({ theme }) => theme.colors.pageBorder};
   padding: 20px 15px;
   overflow: auto;

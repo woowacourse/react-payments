@@ -8,11 +8,15 @@ const CardControlButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-const CardControlButtonBox = () => {
+const CardControlButtonBox = ({ handleEditCard, handleDeleteCard }) => {
   return (
     <CardControlButtonWrapper>
-      <ModalButton type="edit">수정하기</ModalButton>
-      <ModalButton type="delete">삭제하기</ModalButton>
+      <ModalButton type="edit" onClick={handleEditCard}>
+        수정하기
+      </ModalButton>
+      <ModalButton type="delete" onClick={handleDeleteCard}>
+        삭제하기
+      </ModalButton>
     </CardControlButtonWrapper>
   );
 };

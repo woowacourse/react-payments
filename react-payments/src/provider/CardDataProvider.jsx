@@ -15,6 +15,11 @@ const reducer = (state, action) => {
       cards.splice(action.payload.id, 1, { ...card, ...action.payload });
       return [...cards];
     }
+    case REDUCER_TYPE.DELETE: {
+      const cards = [...state];
+      cards.splice(action.payload.id, 1);
+      return [...cards];
+    }
     default:
       return state;
   }

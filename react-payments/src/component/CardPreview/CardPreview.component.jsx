@@ -1,13 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import Card from "../common/Card/card.component";
 import styled from "styled-components";
-import { useContext, useState } from "react";
+import { useContext, useReducer, useState } from "react";
 import CardNameInput from "../CardNameInput/CardNameInput.component";
 import useReady from "../../hooks/useReady";
 import { isDuplicatedCardName, isInvalidCardName } from "../../util/validator";
 import { CardDataContext } from "../../provider/CardDataProvider";
 import MessageBox from "../common/MessageBox/messageBox.component";
 import { ERROR_MESSAGE, REDUCER_TYPE, SUCCESS_MESSAGE } from "../../constants";
+import Modal from "../common/Modal/modal.component";
+import CardControlButtonBox from "../CardControlButtonBox/CardControlButtonBox.component";
 
 const CardNameText = styled.div`
   font-weight: 700;
@@ -41,6 +43,7 @@ const ConfirmButton = styled.button`
   }
   &:disabled {
     background-color: #f0f0f0;
+    cursor: auto;
   }
 `;
 
@@ -71,9 +74,10 @@ const CardPreview = ({ cardDatum, idx }) => {
   );
 
   const [editOn, setEditOn] = useState(false);
+  const [isShowModal, toggleModal] = useReducer((prev) => !prev, false);
   const navigate = useNavigate();
 
-  const handleEditCard = (e, idx) => {
+  const handleEditCard = (idx) => {
     navigate(`add/${idx}`);
   };
 
@@ -92,6 +96,15 @@ const CardPreview = ({ cardDatum, idx }) => {
     closeEditForm();
   };
 
+  const handleDeleteCard = () => {
+    dispatch({
+      type: REDUCER_TYPE.DELETE,
+      payload: {
+        id: idx,
+      },
+    });
+  };
+
   const closeEditForm = () => {
     setEditOn(false);
   };
@@ -102,7 +115,7 @@ const CardPreview = ({ cardDatum, idx }) => {
 
   return (
     <>
-      <Card onClick={(e) => handleEditCard(e, idx)} {...cardDatum} />
+      <Card onClick={toggleModal} {...cardDatum} />
       <CardNameText>
         {editOn ? (
           <EditFormContainer>
@@ -144,6 +157,14 @@ const CardPreview = ({ cardDatum, idx }) => {
           </>
         )}
       </CardNameText>
+      {isShowModal && (
+        <Modal toggleModal={toggleModal} type="edit">
+          <CardControlButtonBox
+            handleEditCard={() => handleEditCard(idx)}
+            handleDeleteCard={handleDeleteCard}
+          />
+        </Modal>
+      )}
     </>
   );
 };

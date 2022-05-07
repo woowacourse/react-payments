@@ -118,7 +118,7 @@ const CardAddPage = () => {
   };
 
   return (
-    <PageContainer>
+    <PageContainer type="add">
       <Header>
         <LinkButton>{"<"}</LinkButton>
         <PageTitle type="header">카드 추가</PageTitle>
