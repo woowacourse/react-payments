@@ -24,13 +24,13 @@ const IconButtonWrapper = styled.div`
   right: 60%;
 `;
 
-export default function CardSecurityCodeInput({ securityCode, onChange, isInvalid }) {
+export default function CardSecurityCodeInput({ securityCode, onChange, isInvalid, isComplete }) {
   return (
     <InputFieldWrapper>
       <InputField
         labelText="보안 코드(CVC/CVV)"
         wrapperWidth="85px"
-        isComplete={securityCode.length === ADD_CARD_FORM_CONDITION.SECURITY_CODE_LENGTH}
+        isComplete={isComplete}
         isError={isInvalid}
         errorMessage={ADD_CARD_FORM_ERROR_MESSAGE.SECURITY_CODE}>
         <Input
@@ -40,7 +40,6 @@ export default function CardSecurityCodeInput({ securityCode, onChange, isInvali
           maxLength="3"
           onChange={e => onChange(e.target.value)}
           width="100%"
-          isComplete={securityCode.length === ADD_CARD_FORM_CONDITION.SECURITY_CODE_LENGTH}
           data-testid={'card-security-code-input'}
         />
       </InputField>

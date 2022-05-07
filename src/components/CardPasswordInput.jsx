@@ -5,13 +5,13 @@ import Input from './common/Input.jsx';
 
 import { ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_ERROR_MESSAGE, CREATE_MASKED_CHARACTERS } from '../constants';
 
-export default function CardPasswordInput({ password, onChange, isInvalid }) {
+export default function CardPasswordInput({ password, onChange, isInvalid, isComplete }) {
   return (
     <InputField
       labelText="카드 비밀번호 앞 두 자리"
       wrapperWidth="15%"
       horizontalAlign="flex-start"
-      isComplete={password.join('').length === ADD_CARD_FORM_CONDITION.PASSWORD_LENGTH}
+      isComplete={isComplete}
       isError={isInvalid}
       errorMessage={ADD_CARD_FORM_ERROR_MESSAGE.PASSWORD}
       separateEachInput={true}>
@@ -24,7 +24,6 @@ export default function CardPasswordInput({ password, onChange, isInvalid }) {
           onChange={e => onChange(e.target.value, index)}
           width="100%"
           placeholder={CREATE_MASKED_CHARACTERS(1)}
-          isComplete={password[index].length === 1}
           data-testid={`card-password-input-${index}`}
         />
       ))}

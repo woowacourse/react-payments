@@ -29,14 +29,14 @@ function InputCounter({ currLength = '0', maxLength, isComplete }) {
   );
 }
 
-export default function CardHolderNameInput({ holderName, onChange, isInvalid }) {
+export default function CardHolderNameInput({ holderName, onChange, isInvalid, isComplete }) {
   return (
     <InputFieldWrapper>
       <InputField
         labelText="카드 소유자 이름 (선택)"
         wrapperWidth="100%"
         horizontalAlign="flex-start"
-        isComplete={holderName !== ''}
+        isComplete={isComplete}
         isError={isInvalid}
         errorMessage={ADD_CARD_FORM_ERROR_MESSAGE.HOLDER_NAME}>
         <Input
@@ -46,14 +46,13 @@ export default function CardHolderNameInput({ holderName, onChange, isInvalid })
           onChange={e => onChange(e.target.value.toUpperCase())}
           width="100%"
           textAlign="left"
-          isComplete={holderName !== ''}
           data-testid={'card-holder-name-input'}
         />
       </InputField>
       <InputCounter
         currLength={holderName.length}
         maxLength={ADD_CARD_FORM_CONDITION.HOLDER_NAME_MAX_LENGTH}
-        isComplete={holderName !== ''}
+        isComplete={isComplete}
       />
     </InputFieldWrapper>
   );

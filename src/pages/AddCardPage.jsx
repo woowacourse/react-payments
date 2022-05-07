@@ -99,26 +99,31 @@ export default function AddCardPage() {
           cardNumber={cardNumber}
           onChange={onChangeCardNumberUnit}
           isInvalid={isInvalidCardNumberInput}
+          isComplete={isCompleteCardNumber}
         />
         <CardExpireDateInput
           expireDate={expireDate}
           onChange={onChangeExpireDateUnit}
           isInvalid={isInvalidExpireDateInput}
+          isComplete={isCompleteExpireDate}
         />
         <CardHolderNameInput
           holderName={holderName}
           onChange={onChangeHolderName}
           isInvalid={isInvalidCardHolderNameInput}
+          isComplete={holderName !== ''}
         />
         <CardSecurityCodeInput
           securityCode={securityCode}
           onChange={onChangeSecurityCode}
           isInvalid={isInvalidSecurityCodeInput}
+          isComplete={isCompleteSecurityCode}
         />
         <CardPasswordInput
           password={password}
           onChange={onChangePasswordUnit}
           isInvalid={isInvalidPasswordInputInput}
+          isComplete={isCompletePassword}
         />
         {isCompleteCardNumber && isCompleteExpireDate && isCompleteSecurityCode && isCompletePassword && (
           <CardInfoSubmitButton />
