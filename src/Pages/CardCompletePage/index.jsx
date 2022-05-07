@@ -72,7 +72,7 @@ function CardCompletePage() {
     <Page>
       <Title>카드등록이 완료되었습니다.</Title>
       <CardSection>
-        <Card {...inputtedInfo} />
+        <Card {...inputtedInfo} disable={true} />
       </CardSection>
       <CardNickNameForm link="/react-payments/cardList" />
       <DeleteButton onClick={onDeleteClick}>카드삭제</DeleteButton>

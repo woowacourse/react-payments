@@ -26,12 +26,13 @@ function useCard({ cardNumber, expiredDate, ownerName }) {
     ? Object.values(expiredDate.value).some(date => date)
       ? `${expiredDate.value.month}/${expiredDate.value.year}`
       : PLACEHOLDER.DATE
-    : '';
+    : PLACEHOLDER.DATE;
 
-  const ownerNameString = ownerName ? ownerName.value || PLACEHOLDER.NAME : '';
+  const ownerNameString = ownerName
+    ? ownerName.value || PLACEHOLDER.NAME
+    : PLACEHOLDER.NAME;
 
   const onCardClick = () => {
-    console.log(cardNumber);
     const currentCardInfo = cardData.find(
       cardInfo => cardInfo.cardNumber.value === cardNumber.value
     );

@@ -40,7 +40,7 @@ function CardAddPage() {
     <Page>
       <Head link="/react-payments/cardList">카드 추가</Head>
       <CardSection>
-        <Card {...inputtedInfo} />
+        <Card {...inputtedInfo} disable={true} />
       </CardSection>
       <CardAddFormContainer>
         <CardAddForm link="/react-payments/cardComplete" />

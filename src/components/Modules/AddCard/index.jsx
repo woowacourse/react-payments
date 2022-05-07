@@ -13,6 +13,7 @@ const CardContainer = styled.div`
   background-color: #d2d2d2;
   border-radius: 5px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 `;
 
 function AddCard({ link }) {

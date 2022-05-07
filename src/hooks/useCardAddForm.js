@@ -10,15 +10,15 @@ function useCardAddForm(navigator, link) {
     .map(key => (key === 'nickName' ? true : inputtedInfo[key].isValid))
     .every(isValid => isValid);
 
-  const checkExistCard = () => {
-    const cardNumberList = cardData.map(cardInfo =>
-      Object.values(cardInfo.cardNumber.value).join('')
-    );
+  const onAddFormSubmit = event => {
+    event.preventDefault();
 
-    return cardNumberList.find(
-      cardNumber =>
-        cardNumber === Object.values(inputtedInfo.cardNumber.value).join('')
-    );
+    if (isValidForm) {
+      saveNewCard();
+      return;
+    }
+
+    alert(MESSAGE.DENY_SAVE);
   };
 
   const saveNewCard = () => {
@@ -35,15 +35,15 @@ function useCardAddForm(navigator, link) {
     navigator(link);
   };
 
-  const onAddFormSubmit = event => {
-    event.preventDefault();
+  const checkExistCard = () => {
+    const cardNumberList = cardData.map(cardInfo =>
+      Object.values(cardInfo.cardNumber.value).join('')
+    );
 
-    if (isValidForm) {
-      saveNewCard();
-      return;
-    }
-
-    alert(MESSAGE.DENY_SAVE);
+    return cardNumberList.find(
+      cardNumber =>
+        cardNumber === Object.values(inputtedInfo.cardNumber.value).join('')
+    );
   };
 
   return { isValidForm, onAddFormSubmit };

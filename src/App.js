@@ -11,12 +11,12 @@ function App() {
       <CardContextProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="react-payments/cardAdd" element={<CardAddPage />} />
+            <Route path="/react-payments/cardAdd" element={<CardAddPage />} />
             <Route
-              path="react-payments/cardComplete"
+              path="/react-payments/cardComplete"
               element={<CardCompletePage />}
             />
-            <Route path="react-payments/cardList" element={<CardListPage />} />
+            <Route path="/react-payments/cardList" element={<CardListPage />} />
             <Route path="*" />
           </Routes>
         </BrowserRouter>
