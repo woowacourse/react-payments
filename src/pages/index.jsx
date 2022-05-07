@@ -1,16 +1,18 @@
 import React from 'react';
-import Header from '../components/commons/Header';
-import PropTypes from 'prop-types';
-function Page({ children }) {
+import { Link } from 'react-router-dom';
+import PageTemplate from '../components/commons/PageTemplate';
+
+function Landing() {
   return (
-    <div className="app">
-      <Header />
-      {children}
-    </div>
+    <PageTemplate>
+      <Link to="./list/add">
+        <div className="tab-box flex-center">카드 추가하기</div>
+      </Link>
+      <Link to="./list">
+        <div className="tab-box flex-center">카드 목록보기</div>
+      </Link>
+    </PageTemplate>
   );
 }
 
-Page.propTypes = {
-  children: PropTypes.node,
-};
-export default Page;
+export default Landing;
