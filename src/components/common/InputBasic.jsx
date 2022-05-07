@@ -8,6 +8,7 @@ export const InputBasic = ({
   onChange,
   onBlur,
   id,
+  dataTestId,
   pattern,
   width,
   inputRef,
@@ -25,6 +26,7 @@ export const InputBasic = ({
       maxLength={maxLength}
       onChange={onChange}
       onBlur={onBlur}
+      data-testId={dataTestId}
     />
   );
 };

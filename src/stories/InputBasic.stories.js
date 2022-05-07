@@ -1,4 +1,6 @@
 import React from "react";
+import { within, userEvent } from "@storybook/testing-library";
+
 import { InputBasic } from "components/common/InputBasic";
 import { RULE_INPUT } from "constants/constants";
 
@@ -7,7 +9,7 @@ export default {
   component: InputBasic,
 };
 
-const Template = (args) => <InputBasic {...args} />;
+const Template = (args) => <InputBasic dataTestId="input-0" {...args} />;
 
 export const TextInput = Template.bind({});
 TextInput.args = {
@@ -32,7 +34,14 @@ InvalidTextInput.args = {
   type: "text",
   placeholder: "test holder",
   pattern: RULE_INPUT.CARD_NUMBER_RULE,
-  value: "123d",
   maxLength: "4",
   width: "100%",
+};
+
+InvalidTextInput.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  await userEvent.type(canvas.getByTestId("input-0"), "123d", {
+    delay: 100,
+  });
 };
