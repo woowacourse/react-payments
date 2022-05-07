@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { ColorType } from '../../constant';
 import EmptyCard from './EmptyCard';
 
 const CardContainer = styled.div`
@@ -19,7 +18,7 @@ const Card = ({ name, cardType, expiredMonth, expiredYear, cardNumbers, onClick,
       <EmptyCard
         name={name}
         cardType={cardType}
-        expiredMoth={expiredMonth}
+        expiredMonth={expiredMonth}
         expiredYear={expiredYear}
         cardNumbers={cardNumbers}
         size={size}
