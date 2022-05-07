@@ -49,6 +49,10 @@ const ERROR_MESSAGES = {
   NOT_EXIST_CARD: "존재하지 않는 카드입니다.",
 };
 
+const INFO_MESSAGES = {
+  ASK_DELETE: "정말 삭제하시겠습니까?",
+};
+
 const COLORS = {
   MINT: "#04C09E",
   GRAY: "#D2D2D2",
@@ -80,6 +84,7 @@ export {
   MONTH,
   ACTION,
   ERROR_MESSAGES,
+  INFO_MESSAGES,
   COLORS,
   NAME,
   CARD_LIST,

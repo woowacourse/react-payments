@@ -17,7 +17,14 @@ import CardOwnerInput from "./CardOwnerInput";
 import CardCVCInput from "./CardCVCInput";
 import CardPasswordInput from "./CardPasswordInput";
 
-import { COLORS, CARD_NUMBER, CARD_SIZE, DUE_DATE, CVC } from "constant";
+import {
+  COLORS,
+  CARD_NUMBER,
+  CARD_SIZE,
+  DUE_DATE,
+  CVC,
+  INFO_MESSAGES,
+} from "constant";
 import { isValidCvc, isValidOwnerLength } from "validation";
 import { ReactComponent as ArrowImage } from "assets/arrow.svg";
 import { CardWrapper, FooterWrapper } from "pages/style";
@@ -109,7 +116,7 @@ function CardEditor({ isEdit, originData }) {
   };
 
   const handleRemoveCard = () => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
+    if (window.confirm(INFO_MESSAGES.ASK_DELETE)) {
       onRemove(originData.cardId);
       navigate("/", { replace: true });
     }

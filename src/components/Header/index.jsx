@@ -4,9 +4,9 @@ import { HeaderWrapper } from "./style";
 function Header({ headText, leftChild, rightChild }) {
   return (
     <HeaderWrapper>
-      {leftChild && <div>{leftChild}</div>}
+      <div>{leftChild}</div>
       <h1>{headText}</h1>
-      {rightChild && <div>{rightChild}</div>}
+      <div>{rightChild}</div>
     </HeaderWrapper>
   );
 }
