@@ -16,12 +16,22 @@ const cardNumberFormatter = (cardNumber) => {
   return newCardNumber.join('-');
 };
 
-function Card({ companyId, cardNumber, userName, expireMonth, expireYear, isMargin, onClick }) {
+function Card({
+  cardName,
+  companyId,
+  cardNumber,
+  userName,
+  expireMonth,
+  expireYear,
+  isMargin,
+  onClick,
+}) {
   const { name = '', color = 'gray', icon = '' } = CARD_COMPANY[companyId] || {};
 
   return (
     <Container color={color} companyId={companyId} isMargin={isMargin}>
       <div className="card" onClick={onClick}>
+        <div className="card-name">{cardName}</div>
         <div className="company-name">{name}</div>
         <div className="icon">{icon}</div>
         <div className="user-name">{userName}</div>
@@ -36,6 +46,7 @@ function Card({ companyId, cardNumber, userName, expireMonth, expireYear, isMarg
 }
 
 Card.defaultProps = {
+  cardName: '',
   companyId: '0',
   cardNumber: ['', '', '', ''],
   userName: '',
@@ -46,6 +57,7 @@ Card.defaultProps = {
 };
 
 Card.propTypes = {
+  cardName: PropTypes.string,
   companyId: PropTypes.string,
   cardNumber: PropTypes.arrayOf(PropTypes.string),
   userName: PropTypes.string,

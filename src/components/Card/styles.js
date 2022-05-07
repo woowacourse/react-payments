@@ -107,6 +107,15 @@ const Container = styled.div`
       border-radius: 0.25rem;
     }
 
+    > .card-name {
+      position: absolute;
+      top: 7%;
+      left: 5%;
+
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
     > .icon {
       position: absolute;
       top: 5.5%;
@@ -137,23 +146,28 @@ const Container = styled.div`
       }
     }
 
-    > .user-name {
+    > .expire-date {
       position: absolute;
-      top: 7%;
-      left: 5%;
+      top: 38%;
+      left: 28%;
 
-      font-weight: bold;
       font-size: 0.8rem;
+      font-style: italic;
+      opacity: 0.5;
     }
 
-    > .expire-date {
+    > .user-name {
       position: absolute;
       bottom: 22%;
       left: 5%;
 
-      font-size: 0.9rem;
-      font-style: italic;
-      opacity: 0.8;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      font-weight: bold;
+      font-size: 0.8rem;
+      letter-spacing: -0.006rem;
     }
 
     > .card-number {
