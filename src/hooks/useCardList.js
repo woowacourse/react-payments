@@ -1,29 +1,26 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
+import { isJSONArray } from '../utils/util';
 
-const defaultCardList = [];
+const defaultCardList = isJSONArray(localStorage.getItem('cardList'))
+  ? JSON.parse(localStorage.getItem('cardList'))
+  : [];
+
 const cardListReducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
     case 'ADD_CARD': {
-      const {
-        id,
-        cardInput: { cardNumber, expirationDate, ownerName, securityCode, password, cardType },
-      } = payload;
+      const { id, cardInput } = payload;
 
       return [
         ...state,
         {
           id,
-          cardNumber,
-          expirationDate,
-          ownerName,
-          securityCode,
-          password,
-          cardType,
-          alias: '별칭을 정해주세요',
+          alias: '',
+          ...cardInput,
         },
       ];
     }
+
     case 'CHANGE_ALIAS': {
       const { alias, id } = payload;
 
@@ -34,9 +31,26 @@ const cardListReducer = (state, action) => {
         return card;
       });
     }
+
+    case 'UPDATE_CARD': {
+      const { id, cardInput } = payload;
+
+      return state.map(card => {
+        if (card.id === id) {
+          return { ...card, id, ...cardInput };
+        }
+        return card;
+      });
+    }
   }
 };
 
 export const useCardList = () => {
-  return useReducer(cardListReducer, defaultCardList);
+  const [cardList, cardListDispatch] = useReducer(cardListReducer, defaultCardList);
+
+  useEffect(() => {
+    localStorage.setItem('cardList', JSON.stringify(cardList));
+  }, [cardList]);
+
+  return [cardList, cardListDispatch];
 };
