@@ -28,6 +28,11 @@ body {
   position: relative;
 }
 
+.link {
+  text-decoration: none;
+  color: black;
+}
+
 /* utils */
 .flex-center {
   display: flex;

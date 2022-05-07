@@ -1,24 +1,20 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import { CardInfoContext } from 'App';
 
-import { PAGE } from 'constants';
-
 function Card({ isEmpty }) {
-  const { state, setPage } = useContext(CardInfoContext);
+  const { state } = useContext(CardInfoContext);
 
   const { number1, number2, number3, number4, owner, month, year } = state;
-  const handleCardAdd = () => {
-    setPage(PAGE.ADD);
-  };
 
   return (
     <div className="card-box">
-      <div
-        className={isEmpty ? 'card-container card-empty' : 'card-container card-not-empty'}
-        onClick={handleCardAdd}
-      >
+      <div className={isEmpty ? 'card-container card-empty' : 'card-container card-not-empty'}>
         {isEmpty ? (
-          '+'
+          <Link className="link" to="/card-add">
+            +
+          </Link>
         ) : (
           <>
             <div className="card-top" />

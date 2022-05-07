@@ -1,8 +1,8 @@
-import { useState, useReducer, createContext } from 'react';
+import { useReducer, createContext } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import CardListPage from 'pages/CardListPage';
 import CardAddPage from 'pages/CardAddPage';
-import { PAGE } from 'constants';
 
 const initialState = {
   number1: '',
@@ -57,12 +57,14 @@ const reducer = (state, action) => {
 export const CardInfoContext = createContext(null);
 
 function App() {
-  const [page, setPage] = useState(PAGE.LIST);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <CardInfoContext.Provider value={{ state, setPage, dispatch }}>
-      {page === PAGE.LIST ? <CardListPage /> : <CardAddPage />}
+    <CardInfoContext.Provider value={{ state, dispatch }}>
+      <Routes>
+        <Route path="/react-payments" element={<CardListPage />} />
+        <Route path="/card-add" element={<CardAddPage />} />
+      </Routes>
     </CardInfoContext.Provider>
   );
 }

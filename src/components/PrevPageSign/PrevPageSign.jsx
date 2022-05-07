@@ -1,16 +1,11 @@
-import { useContext } from 'react';
-import { CardInfoContext } from 'App';
-
-import { PAGE } from 'constants';
+import { Link } from 'react-router-dom';
 
 function PrevPageSign() {
-  const { setPage } = useContext(CardInfoContext);
-
-  const handleClick = () => {
-    setPage(PAGE.LIST);
-  };
-
-  return <div className="prev-page-sign" onClick={handleClick} />;
+  return (
+    <Link to="/react-payments">
+      <div className="prev-page-sign" />
+    </Link>
+  );
 }
 
 export default PrevPageSign;

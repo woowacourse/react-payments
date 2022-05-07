@@ -1,6 +1,3 @@
-import { useContext } from 'react';
-import { CardInfoContext } from 'App';
-
 import Header from '../components/Header/Header';
 import Card from 'components/common/Card/Card';
 import PageTitle from 'components/common/PageTitle/PageTitle';
