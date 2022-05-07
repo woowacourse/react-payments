@@ -136,8 +136,16 @@ const CardAddPage = () => {
   return (
     <PageContainer type="add">
       <Header>
-        <LinkButton>{"<"}</LinkButton>
-        <PageTitle type="header">카드 추가</PageTitle>
+        <LinkButton
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          {"<"}
+        </LinkButton>
+        <PageTitle type="header">
+          {typeof id === "undefined" ? "카드 추가" : "카드 수정"}
+        </PageTitle>
       </Header>
 
       <Card
