@@ -5,12 +5,12 @@ import CardInfoContext from "../context/CardInfoContext";
 import { withReactContext } from "storybook-react-context";
 import CardAddPage from "./CardAddPage";
 
-const initialCardInfoState = {
-  cardNumber: ["", "", "", ""],
-  expireDate: ["", ""],
-  holderName: "",
-  securityCodeLength: 0,
-  passwordLength: [0, 0],
+const PageSharedStyle = {
+  width: "375px",
+  height: "750px",
+  margin: "auto",
+  backgroundColor: "#ffffff",
+  padding: "20px 28px",
 };
 
 export default {
@@ -19,45 +19,35 @@ export default {
   decorators: [
     withReactContext({
       Context: CardInfoContext,
-      initialState: { state: initialCardInfoState, setState: () => {} },
+      initialState: { state: {}, setState: () => {} },
     }),
     (Story) => (
-      <div
-        style={{
-          width: "375px",
-          height: "700px",
-          margin: "auto",
-          backgroundColor: "#ffffff",
-          padding: "20px 28px",
-        }}
-      >
+      <div style={PageSharedStyle}>
         <Story />
       </div>
     ),
   ],
 };
 
+const testIds = {
+  cardNumber: ["card-number", "array"],
+  expireDate: ["expire-date", "array"],
+  holderName: ["holder-name", "string"],
+  securityCode: ["security-code", "string"],
+  password: ["password", "array"],
+};
+
 const inputCardInfo = (cardInfo, canvas) => {
-  const cardNumberInputs = canvas.getAllByTestId("card-number");
-  const expireDateInputs = canvas.getAllByTestId("expire-date");
-  const holderNameInput = canvas.getByTestId("holder-name");
-  const securityCodeInput = canvas.getByTestId("security-code");
-  const passwordInputs = canvas.getAllByTestId("password");
-
-  cardNumberInputs.forEach((cardNumberInput, index) => {
-    userEvent.type(cardNumberInput, cardInfo.cardNumber[index]);
-  });
-
-  expireDateInputs.forEach((expireDateInput, index) => {
-    userEvent.type(expireDateInput, cardInfo.expireDate[index]);
-  });
-
-  userEvent.type(holderNameInput, cardInfo.holderName);
-
-  userEvent.type(securityCodeInput, cardInfo.securityCode);
-
-  passwordInputs.forEach((passwordInput, index) => {
-    userEvent.type(passwordInput, cardInfo.password[index]);
+  Object.entries(testIds).forEach(([key, [name, type]]) => {
+    if (type === "array") {
+      const inputs = canvas.getAllByTestId(name);
+      inputs.forEach((input, index) => {
+        userEvent.type(input, cardInfo[key][index]);
+      });
+    } else {
+      const input = canvas.getByTestId(name);
+      userEvent.type(input, cardInfo[key]);
+    }
   });
 };
 

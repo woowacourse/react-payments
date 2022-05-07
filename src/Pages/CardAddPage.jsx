@@ -102,6 +102,14 @@ export default function CardAddPage({ setPage }) {
     }
   };
 
+  const CardPreviewElement = (
+    <CardPreview
+      cardInfo={cardInfo}
+      isValidCardInfo={isValidCardInfo}
+      isSubmitted={isSubmitted}
+    />
+  );
+
   return (
     <CardInfoContext.Provider
       value={{ state: cardInfo, setState: setCardInfo }}
@@ -112,21 +120,20 @@ export default function CardAddPage({ setPage }) {
           page={PAGE_NAME.CARD_ADD}
           moveToListPage={moveToListPage}
         />
-        {isSubmitted && (
-          <SuccessMessage>카드 등록이 완료되었습니다.</SuccessMessage>
-        )}
-        <CardPreview
-          cardInfo={cardInfo}
-          isValidCardInfo={isValidCardInfo}
-          isSubmitted={isSubmitted}
-        />
         {!isSubmitted ? (
-          <CardInfoForm
-            handleFormSubmit={handleFormSubmit}
-            isValidCardInfo={isValidCardInfo}
-          />
+          <>
+            {CardPreviewElement}
+            <CardInfoForm
+              handleFormSubmit={handleFormSubmit}
+              isValidCardInfo={isValidCardInfo}
+            />
+          </>
         ) : (
-          <CardNicknameForm handleAddNickname={handleAddNickname} />
+          <>
+            <SuccessMessage>카드 등록이 완료되었습니다.</SuccessMessage>
+            {CardPreviewElement}
+            <CardNicknameForm handleAddNickname={handleAddNickname} />
+          </>
         )}
       </CardAddPageContainer>
     </CardInfoContext.Provider>
