@@ -9,7 +9,7 @@ import { CardListContext } from "../../../context/CardListProvider";
 
 const SetNickname = ({ setDone }) => {
   const { cardInfo, dispatch } = useContext(CardContext);
-  const { cardList, setCardList } = useContext(CardListContext);
+  const { updateCardList } = useContext(CardListContext);
   const navigate = useNavigate();
   const handleNickNameChange = (e) => {
     dispatch({
@@ -22,7 +22,7 @@ const SetNickname = ({ setDone }) => {
 
   const addCard = (e) => {
     e.preventDefault();
-    setCardList(cardList.concat(cardInfo));
+    updateCardList({ type: "addCardList", payload: cardInfo });
     dispatch({ type: "initialize" });
     setDone(false);
     navigate("/");

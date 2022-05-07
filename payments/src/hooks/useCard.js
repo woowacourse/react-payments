@@ -11,6 +11,7 @@ const initState = {
   color: "#d2d2d2",
   nickname: "",
 };
+
 const updateCard = (state, action) => {
   switch (action.type) {
     case "cardNumber":
