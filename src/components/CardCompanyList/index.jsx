@@ -37,11 +37,12 @@ function CardCompanyList({ onChange, handleModalClose }) {
 }
 
 CardCompanyList.defaultProps = {
+  onChange: () => {},
   handleModalClose: () => {},
 };
 
 CardCompanyList.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   handleModalClose: PropTypes.func,
 };
 
