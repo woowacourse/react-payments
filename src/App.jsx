@@ -22,13 +22,14 @@ function App() {
   };
 
   const updateNickNameByIndex = (index, nickName) => {
-    const cardInfo = cardInfoList[index];
-    cardInfo.nickName = nickName;
+    const updatedCardInfo = { ...cardInfoList[index] };
+    updatedCardInfo.nickName = nickName;
+    setCardInfoList(prevCardInfoList => {
+      const newCardInfoList = prevCardInfoList.slice();
+      newCardInfoList.splice(index, 1, updatedCardInfo);
+      return newCardInfoList;
+    });
   };
-
-  useEffect(() => {
-    console.log(cardInfoList);
-  });
 
   return (
     <div className="App">
