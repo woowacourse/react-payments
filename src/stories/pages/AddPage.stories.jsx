@@ -1,90 +1,42 @@
-import styled from 'styled-components';
+import { MemoryRouter } from 'react-router-dom';
+import { screen, userEvent } from '@storybook/testing-library';
 
-import CardInputs from '../../pages/AddPage/CardInputs';
-import { Button, Card } from '../../components';
-
-import { CardInfoContext } from '../../contexts';
-import { ReactComponent as Arrow } from '../../assets/arrow.svg';
+import { AddPage } from '../../pages';
 
 export default {
   title: 'Example/Page',
-  component: [CardInputs, Button, Card],
+  component: [AddPage],
+  decorators: [
+    Story => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 };
 
-const StyledPage = styled.form`
-  background: #fff;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-  width: 400px;
-  height: 757px;
-`;
-
-const Header = styled.div`
-  align-items: center;
-  display: flex;
-  margin-bottom: 25px;
-`;
-
-const Title = styled.span`
-  font-size: 16px;
-  margin-left: 18px;
-`;
-
-const StyledCard = styled(Card)`
-  align-self: center;
-  margin-bottom: 25px;
-`;
-
-const NextButton = styled(Button)`
-  align-self: end;
-`;
-
-function AddTemplate({ forwardValue }) {
-  return (
-    <CardInfoContext.Provider value={forwardValue}>
-      <StyledPage>
-        <Header>
-          <Button size="small">
-            <Arrow />
-          </Button>
-          <Title>카드 추가</Title>
-        </Header>
-        <StyledCard
-          bgColor="#ADD8E6"
-          size="medium"
-          name={forwardValue.cardOwnerName}
-          number={forwardValue.cardNumber}
-          validDate={forwardValue.validDate}
-        />
-        <CardInputs />
-        <NextButton color="#04C09E" fontWeight="bold">
-          다음
-        </NextButton>
-      </StyledPage>
-    </CardInfoContext.Provider>
-  );
+function AddTemplate() {
+  return <AddPage />;
 }
 
 const Add = AddTemplate.bind({});
-Add.args = {
-  forwardValue: {
-    cardNumber: '',
-    setCardNumber: () => {},
-    validDate: '',
-    setValidDate: () => {},
-    cardOwnerName: '',
-    setCardOwnerName: () => {},
-    CVC: '',
-    setCVC: () => {},
-    isModalOpen: false,
-    toggleModal: () => {},
-    firstPassword: '',
-    setFirstPassword: () => {},
-    secondPassword: '',
-    setSecondPassword: () => {},
-  },
+
+Add.play = async () => {
+  const cardNumberInput = screen.getByTestId('cardNumber');
+  await userEvent.type(cardNumberInput, '1111222233334444', {
+    delay: 100,
+  });
+
+  const CVCInput = screen.getByTestId('CVC');
+  await userEvent.type(CVCInput, '123', { delay: 100 });
+
+  const firstPasswordInput = screen.getByTestId('firstPassword');
+  await userEvent.type(firstPasswordInput, '1', { delay: 100 });
+  const secondPasswordInput = screen.getByTestId('secondPassword');
+  await userEvent.type(secondPasswordInput, '2', { delay: 100 });
+
+  // 위에서 제대로 입력되었을 경우에만 다음 버튼이 나타나므로 여기에서 에러가 나지 않으면 통과
+  screen.getByRole('button', { name: '다음' });
 };
 
 export { Add };

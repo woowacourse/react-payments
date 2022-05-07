@@ -12,6 +12,7 @@ export default function CardNumberInput() {
         <InputContainer>
           <Input
             description="카드 번호"
+            id="cardNumber"
             value={splitCardNumbers(encryptCardNumber(cardNumber), '-') ?? ''}
             maxLength={CARD_RULE.NUMBER_MAX_LENGTH + 3}
             onChangeFunc={setCardNumber}

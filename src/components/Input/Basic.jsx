@@ -35,6 +35,7 @@ function Input({
   margin,
   textAlign,
   width,
+  id,
   type,
   value,
   maxLength,
@@ -45,12 +46,14 @@ function Input({
 }) {
   return (
     <>
-      {description && <StyledLabel>{description}</StyledLabel>}
+      {description && <StyledLabel htmlFor={id}>{description}</StyledLabel>}
       <StyledInput
         margin={margin}
         min={min}
         textAlign={textAlign}
         width={width}
+        id={id}
+        data-testid={id}
         type={type}
         value={value}
         maxLength={maxLength}
@@ -78,6 +81,7 @@ Input.propTypes = {
   }),
   textAlign: PropTypes.string,
   width: PropTypes.string,
+  id: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.string,
   maxLength: PropTypes.number,

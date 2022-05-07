@@ -22,6 +22,7 @@ export default function CardPasswordInput() {
           <Input
             description="카드 비밀번호"
             margin={{ r: '7px' }}
+            id="firstPassword"
             type="password"
             width="43px"
             value={firstPassword}
@@ -31,6 +32,7 @@ export default function CardPasswordInput() {
           <Input
             margin={{ r: '26px' }}
             type="password"
+            id="secondPassword"
             width="43px"
             value={secondPassword}
             maxLength={1}

@@ -10,6 +10,7 @@ export default function CardCVCInput() {
         <InputContainer>
           <Input
             description="보안 코드(CVC/CVV)"
+            id="CVC"
             type="password"
             width="84px"
             value={CVC}

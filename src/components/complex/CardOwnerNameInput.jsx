@@ -21,6 +21,7 @@ export default function CardOwnerNameInput() {
           </OwnerNameLength>
           <Input
             description="카드 소유자 이름 (선택)"
+            id="ownerName"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             value={cardOwnerName}
             maxLength={CARD_RULE.OWNER_NAME_MAX_LENGTH}

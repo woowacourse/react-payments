@@ -12,6 +12,7 @@ export default function CardValidDateInput() {
           <Input
             description="만료일"
             width="137px"
+            id="validDate"
             type="month"
             value={validDate}
             min={`${NOW.YEAR}-${NOW.MONTH}`}

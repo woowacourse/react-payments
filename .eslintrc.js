@@ -31,6 +31,7 @@ module.exports = {
     'default-case': 'off',
     'default-param-last': 'off',
     'implicit-arrow-linebreak': 'off',
+    'import/no-extraneous-dependencies': 'off',
     'linebreak-style': 'off',
     'no-confusing-arrow': 'off',
     'object-curly-newline': 'off',
