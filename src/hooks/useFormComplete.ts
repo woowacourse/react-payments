@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CardInfoValidationTarget } from "types/cardInfo";
 
+// @TODO 타입 일반화 수정
 function useFormComplete(cardInfoValidation) {
   const [isComplete, setIsComplete] = useState(false);
 
