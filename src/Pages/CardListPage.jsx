@@ -49,6 +49,8 @@ const CardShapeButton = styled.div`
   }
 `;
 
+const DEFAULT_CARD_NAME = "Woowa Card";
+
 export default function CardListPage({ setPage }) {
   const [formDataArray] = useLocalStorage("card-info");
 
@@ -77,7 +79,7 @@ export default function CardListPage({ setPage }) {
           return (
             <CardItem key={card.nickname}>
               <CardPreview cardInfo={cardInfo} color={colorIndex} />
-              <CardNickname>{card.nickname}</CardNickname>
+              <CardNickname>{card.nickname || DEFAULT_CARD_NAME}</CardNickname>
             </CardItem>
           );
         })}

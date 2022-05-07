@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const StyledButton = styled.button`
-  width: 50px;
+  width: 70px;
   height: 30px;
 
   border: none;
