@@ -33,8 +33,11 @@ export const CardInfoWrapper = styled.div`
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
-  color: #575757;
   opacity: 0.9;
+`;
+
+export const CardAlias = styled.span`
+  color: ${props => (props.isNoneAlias ? '#CACACA' : '#575757')};
 `;
 
 export const CardAddButton = styled.button`

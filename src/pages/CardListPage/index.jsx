@@ -1,7 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import Head from 'components/Head';
 import Card from 'components/Card';
-import { Container, HeadTitle, CardListSection, CardInfoWrapper, CardAddButton } from './style';
+import {
+  Container,
+  HeadTitle,
+  CardListSection,
+  CardInfoWrapper,
+  CardAlias,
+  CardAddButton,
+} from './style';
 import { useCardListContext } from 'context/cardList';
 
 function CardListPage() {
@@ -19,7 +26,9 @@ function CardListPage() {
         {cardList.map(cardInfo => (
           <CardInfoWrapper key={cardInfo.id}>
             <Card {...cardInfo} />
-            <span>{cardInfo.alias}</span>
+            <CardAlias isNoneAlias={cardInfo.alias === ''}>
+              {!cardInfo.alias ? '별칭 없음' : cardInfo.alias}
+            </CardAlias>
           </CardInfoWrapper>
         ))}
         <CardAddButton onClick={handleClickCardAddButton}>+</CardAddButton>
