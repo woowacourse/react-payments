@@ -29,7 +29,7 @@ function useCardAddForm(navigator, link) {
 
     cardDispatch({
       type: CARD_ACTION.ADD,
-      value: { ...inputtedInfo, nickName: '이름 없음' },
+      value: { ...inputtedInfo, nickName: { value: '이름 없음' } },
     });
 
     navigator(link);

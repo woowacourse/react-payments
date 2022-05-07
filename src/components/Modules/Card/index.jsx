@@ -62,10 +62,11 @@ function Card({ cardNumber, expiredDate, ownerName }) {
     cardNumberString,
     expiredDateString,
     ownerNameString,
+    onCardClick,
   } = useCard({ cardNumber, expiredDate, ownerName });
 
   return (
-    <CardContainer>
+    <CardContainer onClick={onCardClick}>
       <CardCompanyName>{companyNameString}</CardCompanyName>
       <IC />
       <CardNumberContainer>{cardNumberString}</CardNumberContainer>
