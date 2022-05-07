@@ -26,7 +26,7 @@ const App = () => {
           <Routes>
             <Route path={ROUTE.MAIN} element={<MainPage />} />
             <Route path={ROUTE.ADD} element={<CardAppPage />} />
-            <Route path={ROUTE.CONFIRM} element={<ConfirmationPage />} />
+            <Route path={ROUTE.CONFIRM + ':id'} element={<ConfirmationPage />} />
           </Routes>
         </BrowserRouter>
       </CardDispatch.Provider>

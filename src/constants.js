@@ -59,7 +59,7 @@ export const ACTION = {
 export const ROUTE = {
   MAIN: '/react-payments/',
   ADD: '/react-payments/add',
-  CONFIRM: '/react-payments/confirm/:id',
+  CONFIRM: '/react-payments/confirm/',
 };
 
 export const ERROR_MESSAGE = {

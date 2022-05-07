@@ -21,6 +21,7 @@ import {
   cardPasswordInputInfoList,
   cardCompanyList,
 } from './data';
+import { ACTION, ROUTE } from 'constants';
 
 const initialCardInfo = {
   company: '',
@@ -140,8 +141,8 @@ const CardAppPage = () => {
       />
       {isFullFilled && (
         <Link
-          to={`/react-payments/confirm/${cardInfo.id}`}
-          onClick={() => dispatch({ type: 'CREATE_CARD', card: cardInfo })}
+          to={ROUTE.CONFIRM + cardInfo.id}
+          onClick={() => dispatch({ type: ACTION.CREATE_CARD, card: cardInfo })}
         >
           <Button theme={theme} className="next-button">
             다음
