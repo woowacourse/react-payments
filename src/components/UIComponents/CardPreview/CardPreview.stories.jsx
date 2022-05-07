@@ -1,4 +1,3 @@
-import React from "react";
 import CardPreview from "./CardPreview";
 
 export default {
@@ -6,11 +5,100 @@ export default {
   component: CardPreview,
 };
 
-const Template = (args) => <CardPreview {...args} />;
+const CardTemplate = (args) => <CardPreview {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
-  cardNumber: ["1234", "5678", "9012", "3456"],
-  holderName: "카드 소유자 이름",
-  expireDate: ["01", "25"],
+export const SmallCard = CardTemplate.bind({});
+SmallCard.args = {
+  cardNumber: {
+    firstCardNumber: {
+      value: "1234",
+      keyType: "firstCardNumber",
+    },
+    secondCardNumber: {
+      value: "1234",
+      keyType: "firstCardNumber",
+    },
+    thirdCardNumber: {
+      value: "1234",
+      keyType: "firstCardNumber",
+    },
+    fourthCardNumber: {
+      value: "1234",
+      keyType: "firstCardNumber",
+    },
+  },
+  expireDate: {
+    month: {
+      value: "12",
+      keyType: "month",
+    },
+    year: {
+      value: "22",
+      keyType: "month",
+    },
+  },
+  holderName: {
+    value: "KKOJAE",
+    keyType: "holderName",
+  },
+  canProceed: true,
+  cardCss: {
+    width: "213px",
+    height: "133px",
+    fontSize: "10px",
+    cardContainerMarginBottom: "25px",
+    cardChipWidth: "40px",
+    cardChipHeight: "26px",
+    cardNameMargin: "0 0 20px 0",
+    cardChipMarginBottom: "15px",
+    cardNumberMarginBottom: "12px",
+  },
+};
+
+export const BigCard = CardTemplate.bind({});
+BigCard.args = {
+  cardNumber: {
+    firstCardNumber: {
+      value: "1234",
+      keyType: "firstCardNumber",
+    },
+    secondCardNumber: {
+      value: "1234",
+      keyType: "firstCardNumber",
+    },
+    thirdCardNumber: {
+      value: "1234",
+      keyType: "firstCardNumber",
+    },
+    fourthCardNumber: {
+      value: "1234",
+      keyType: "firstCardNumber",
+    },
+  },
+  expireDate: {
+    month: {
+      value: "12",
+      keyType: "month",
+    },
+    year: {
+      value: "22",
+      keyType: "month",
+    },
+  },
+  holderName: {
+    value: "KKOJAE",
+    keyType: "holderName",
+  },
+  canProceed: true,
+  cardCss: {
+    width: "293px",
+    height: "183px",
+    fontSize: "14px",
+    cardContainerMarginBottom: "25px",
+    cardChipWidth: "55px",
+    cardChipHeight: "35px",
+    cardNameMargin: "8px 0 30px",
+    cardChipMarginBottom: "20px",
+    cardNumberMarginBottom: "20px",
+  },
 };

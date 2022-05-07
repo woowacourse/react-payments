@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { CardInfoContext } from "../../../contexts/CardInfoContext";
+import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
@@ -126,6 +125,48 @@ export default function CardPreview({
 }
 
 CardPreview.propTypes = {
+  cardNumber: PropTypes.shape({
+    firstCardNumber: PropTypes.shape({
+      value: PropTypes.string,
+      keyType: PropTypes.string,
+    }),
+    secondCardNumber: PropTypes.shape({
+      value: PropTypes.string,
+      keyType: PropTypes.string,
+    }),
+    thirdCardNumber: PropTypes.shape({
+      value: PropTypes.string,
+      keyType: PropTypes.string,
+    }),
+    fourthCardNumber: PropTypes.shape({
+      value: PropTypes.string,
+      keyType: PropTypes.string,
+    }),
+  }),
+  expireDate: PropTypes.shape({
+    month: PropTypes.shape({
+      value: PropTypes.string,
+      keyType: PropTypes.string,
+    }),
+    year: PropTypes.shape({
+      value: PropTypes.string,
+      keyType: PropTypes.string,
+    }),
+  }),
+  holderName: PropTypes.shape({
+    value: PropTypes.string,
+    keyType: PropTypes.string,
+  }),
   canProceed: PropTypes.bool,
-  cardCss: PropTypes.object,
+  cardCss: PropTypes.shape({
+    width: PropTypes.string,
+    height: PropTypes.string,
+    fontSize: PropTypes.string,
+    cardContainerMarginBottom: PropTypes.string,
+    cardChipWidth: PropTypes.string,
+    cardChipHeight: PropTypes.string,
+    cardNameMargin: PropTypes.string,
+    cardChipMarginBottom: PropTypes.string,
+    cardNumberMarginBottom: PropTypes.string,
+  }),
 };
