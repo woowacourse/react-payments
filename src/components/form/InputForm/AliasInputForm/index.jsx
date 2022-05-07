@@ -4,18 +4,20 @@ import { useFormComplete } from '../../../../hooks/useFormComplete';
 import Position from '../../../commons/Position';
 import PropTypes from 'prop-types';
 import UnderlineInput from '../../Input/UnderlineInput';
+import { CARD_DEFINITION } from '../../../types';
+import { ROUTE } from '../../../../route';
 
-function AliasInputForm({ cardId, cardListDispatch }) {
+function AliasInputForm({ card, cardListDispatch }) {
   const navigate = useNavigate();
-  const [alias, setAlias] = useState('');
+  const [alias, setAlias] = useState(card.alias ?? '');
 
   const isComplete = useFormComplete(alias, alias => alias.length > 0);
 
   const onSubmitInputForm = e => {
     e.preventDefault();
 
-    cardListDispatch({ type: 'CHANGE_ALIAS', payload: { alias, id: cardId } });
-    navigate('../list', { replace: true });
+    cardListDispatch({ type: 'CHANGE_ALIAS', payload: { alias, id: card.id } });
+    navigate(ROUTE.cardList.route, { replace: true });
   };
 
   const onChangeInput = e => {
@@ -42,7 +44,7 @@ function AliasInputForm({ cardId, cardListDispatch }) {
 }
 
 AliasInputForm.propTypes = {
-  cardId: PropTypes.string,
+  card: CARD_DEFINITION,
   cardListDispatch: PropTypes.func,
 };
 
