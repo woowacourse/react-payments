@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Input from '../Input';
+import { BlockInput } from '../Input';
 import InputLabel from '../InputLabel';
 
 const Container = styled.div`
@@ -46,14 +46,16 @@ function OwnerNameInput({ ownerName, handleInputChange, isValid, invalidMessage,
         <InputLabel label="카드 소유자 이름(선택)" />
         <LengthChecker>{ownerName.length} / 30</LengthChecker>
       </InputHeader>
-      <Input
+      <BlockInput
+        style={{
+          width: '100%',
+          textAlign: 'left',
+        }}
         value={ownerName}
         onChange={handleInputChange}
         type="text"
-        width="100%"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         maxLength="30"
-        isCenter={false}
         isValid={isValid}
       />
       <InvalidMessage>{isValid || !ownerName ? '' : invalidMessage}</InvalidMessage>

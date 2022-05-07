@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Input from '../Input';
+import { BlockInput } from '../Input';
 import InputLabel from '../InputLabel';
 import Tooltip from '../Tooltip';
 import MESSAGE from '../../constant/message';
@@ -44,11 +44,13 @@ function SecurityNumberInput({
     <Container width={width}>
       <InputLabel label="보안 코드(CVC/CVV)" />
       <InputBody>
-        <Input
+        <BlockInput
+          style={{
+            width: '84px',
+          }}
           value={securityNumber}
           onChange={handleInputChange}
           type="password"
-          width="84px"
           maxLength="3"
           isValid={isValid}
         />

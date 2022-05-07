@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Input from '../Input';
+import { BlockInput } from '../Input';
 import InputLabel from '../InputLabel';
 
 const Container = styled.div`
@@ -51,13 +51,15 @@ function CardNumbersInput({ cardNumbers, handleInputChange, isValid, invalidMess
         {cardNumbers.map((cardNumber, index) => {
           return (
             <Fragment key={index}>
-              <Input
+              <BlockInput
+                style={{
+                  width: '25%',
+                  backgroundColor: 'none',
+                  borderRadius: '0px',
+                }}
                 value={cardNumber}
                 onChange={handleInputChange}
                 type={index <= 1 ? 'text' : 'password'}
-                width="25%"
-                backgroundColor="none"
-                borderRadius="0px"
                 maxLength="4"
                 name={index}
                 isValid={isValidCardNumber(cardNumber)}

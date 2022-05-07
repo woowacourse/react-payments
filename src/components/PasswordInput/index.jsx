@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Input from '../Input';
+import { BlockInput } from '../Input';
 import InputLabel from '../InputLabel';
 import { numberRegex } from '../../constant/regularExpression';
 
@@ -46,8 +46,11 @@ function PasswordInput({ password, handleInputChange, isValid, invalidMessage, w
       <InputLabel label="카드 비밀번호" />
       <InputBody>
         {password.map((word, index) => (
-          <Input
+          <BlockInput
             key={index}
+            style={{
+              width: '43px',
+            }}
             value={word}
             onChange={handleInputChange}
             type="password"
@@ -58,14 +61,16 @@ function PasswordInput({ password, handleInputChange, isValid, invalidMessage, w
           />
         ))}
         {Array.from({ length: 2 }).map((_, index) => (
-          <Input
+          <BlockInput
             key={index}
+            style={{
+              width: '43px',
+              backgroundColor: '#fff',
+            }}
             type="password"
             defaultValue="."
-            width="43px"
             maxLength={1}
             disabled={true}
-            backgroundColor="#fff"
           />
         ))}
       </InputBody>

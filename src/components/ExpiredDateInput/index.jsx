@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Input from '../Input';
+import { BlockInput } from '../Input';
 import InputLabel from '../InputLabel';
 
 const Container = styled.div`
@@ -49,26 +49,30 @@ function ExpiredDateInput({ expiredDate, handleInputChange, isValid, invalidMess
     <Container width={width}>
       <InputLabel label="만료일" />
       <InputWrapper>
-        <Input
+        <BlockInput
+          style={{
+            width: '50%',
+            backgroundColor: 'none',
+            borderRadius: '0px',
+          }}
           value={month}
           onChange={handleInputChange}
           type="text"
-          width="50%"
-          backgroundColor="none"
-          borderRadius="0px"
           maxLength="2"
           placeholder="MM"
           name="month"
           isValid={isValidDate(month)}
         />
         /
-        <Input
+        <BlockInput
+          style={{
+            width: '50%',
+            backgroundColor: 'none',
+            borderRadius: '0px',
+          }}
           value={year}
           onChange={handleInputChange}
           type="text"
-          width="50%"
-          backgroundColor="none"
-          borderRadius="0px"
           maxLength="2"
           placeholder="YY"
           name="year"
