@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import useResetInput from "../../Hooks/useResetInput";
 
 const StyledCardInfoForm = styled.form`
   display: flex;
@@ -10,6 +11,7 @@ const StyledCardInfoForm = styled.form`
 
 export default function CardInfoForm({ children }) {
   const navigate = useNavigate();
+  const { handleResetInput } = useResetInput();
 
   const focusNextInput = ({ target }) => {
     if (target.value.length !== target.maxLength) return;
@@ -51,8 +53,8 @@ export default function CardInfoForm({ children }) {
 
     const cardInfo = JSON.parse(localStorage.getItem("cardInfo")) ?? [];
     cardInfo.push(completeCardInfo);
-
     localStorage.setItem("cardInfo", JSON.stringify(cardInfo));
+
     navigate("/possess-card", { replace: true });
   };
 
@@ -61,7 +63,10 @@ export default function CardInfoForm({ children }) {
       autoComplete="off"
       onChange={focusNextInput}
       onKeyDown={focusPrevInput}
-      onSubmit={handleSubmit}
+      onSubmit={(e) => {
+        handleSubmit(e);
+        handleResetInput();
+      }}
     >
       {children}
     </StyledCardInfoForm>
