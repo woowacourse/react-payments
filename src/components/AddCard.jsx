@@ -1,10 +1,12 @@
-import React from "react";
+import { useState } from "react";
 
 import CardPreview from "./UIComponents/CardPreview/CardPreview";
 import Button from "./UIComponents/Button/Button";
 
 import useInput from "../Hooks/useInput.jsx";
 
+import CardConfirmModal from "./AddCard/CardConfirmModal";
+import PageHeader from "./PageHeader";
 import {
   CardHolderNameInput,
   CardNumberInput,
@@ -13,6 +15,7 @@ import {
   CardExpireDateInput,
   CardInfoForm,
 } from "./AddCard/";
+
 import {
   initialCardNumber,
   initialPassword,
@@ -50,9 +53,11 @@ export default function AddCard() {
     initialPassword,
     isInvalidPassword
   );
+  const [isNextButtonClicked, setNextButtonClicked] = useState(false);
 
   return (
     <>
+      <PageHeader>카드 추가</PageHeader>
       <CardPreview
         cardNumber={cardNumber}
         holderName={holderName}
@@ -86,7 +91,24 @@ export default function AddCard() {
           onChange={handlePasswordUpdate}
         />
         {isValidCardInfo(cardNumber, expireDate, securityCode, password) && (
-          <Button text="다음" type="submit" />
+          <Button
+            text="다음"
+            type="button"
+            onClick={() => setNextButtonClicked((prevValue) => !prevValue)}
+          />
+        )}
+        {isNextButtonClicked && (
+          <CardConfirmModal
+            cardNumber={cardNumber}
+            holderName={holderName}
+            expireDate={expireDate}
+            canProceed={isValidCardInfo(
+              cardNumber,
+              expireDate,
+              securityCode,
+              password
+            )}
+          />
         )}
       </CardInfoForm>
     </>

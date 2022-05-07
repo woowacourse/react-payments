@@ -16,6 +16,7 @@ export const StyledInput = styled.input`
 
   outline: none;
   border: none;
+  border-bottom: ${(props) => props.borderBottom};
 
   /* 숫자 입력란 화살표 숨김 */
   /* Chrome, Safari, Edge, Opera */
@@ -38,9 +39,7 @@ export const StyledInput = styled.input`
 `;
 
 export default function Input(props) {
-  const { dataTargetGroup } = props;
-
-  return <StyledInput data-target-group={dataTargetGroup} {...props} />;
+  return <StyledInput {...props} />;
 }
 
 Input.propTypes = {
@@ -55,4 +54,5 @@ Input.defaultProps = {
   type: "text",
   width: "70px",
   textAlign: "center",
+  borderBottom: "none",
 };
