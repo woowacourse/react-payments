@@ -7,11 +7,7 @@ function Header() {
   const navigate = useNavigate();
 
   const onClick = () => {
-    // if (pathname !== ROUTE.home.route) {
-    //   navigate(-1);
-    //   return;
-    // }
-    navigate('..', { replace: true });
+    navigate(ROUTE.home.route, { replace: true });
   };
 
   return (
