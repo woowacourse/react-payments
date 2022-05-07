@@ -1,10 +1,12 @@
 import { useRef, useState } from 'react';
 
-const useEasyForm = ({
-  initialValues,
-  validationMode = 'onSubmit',
-  shouldUseReportValidity = true,
-}) => {
+const useEasyForm = (
+  { initialValues, validationMode, shouldUseReportValidity } = {
+    initialValues: {},
+    validationMode: 'onSubmit',
+    shouldUseReportValidity: true,
+  }
+) => {
   const [formState, setFormState] = useState({
     isSubmitting: false,
     errors: {},
