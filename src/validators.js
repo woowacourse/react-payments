@@ -71,10 +71,26 @@ const validateUserName = (userName) => {
   }
 };
 
+const validateCard = ({
+  cardNumber,
+  cardPassword,
+  expireMonth,
+  expireYear,
+  securityCode,
+  userName,
+}) => {
+  validateCardNumber(cardNumber);
+  validateCardPassword(cardPassword);
+  validateExpireDate({ expireMonth, expireYear });
+  validateSecurityCode(securityCode);
+  userName && validateUserName(userName);
+};
+
 export {
   validateCardNumber,
   validateExpireDate,
   validateCardPassword,
   validateSecurityCode,
   validateUserName,
+  validateCard,
 };

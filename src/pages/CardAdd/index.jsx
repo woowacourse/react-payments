@@ -16,20 +16,12 @@ import {
   CardPasswordField,
 } from 'components';
 
-import {
-  validateCardNumber,
-  validateCardPassword,
-  validateExpireDate,
-  validateSecurityCode,
-  validateUserName,
-} from 'validators';
-
 import { CARD_NUMBER, PATH } from 'constants';
+import { validateCard } from 'validators';
 
 function CardAdd({ setCard }) {
   const [state, dispatch] = useCardState();
-  const { isComplete, cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword } =
-    state;
+  const { isComplete, cardNumber, expireMonth, expireYear, userName } = state;
 
   const navigate = useNavigate();
 
@@ -61,11 +53,7 @@ function CardAdd({ setCard }) {
 
   const onClickNextButton = async () => {
     try {
-      validateCardNumber(cardNumber);
-      validateCardPassword(cardPassword);
-      validateExpireDate({ expireMonth, expireYear });
-      validateSecurityCode(securityCode);
-      userName && validateUserName(userName);
+      validateCard(state);
 
       setCard(state);
       await postCard(state);
