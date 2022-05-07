@@ -8,12 +8,12 @@ const getCardSize = size => {
     case 'medium':
       return {
         card: {
-          height: '133px',
+          height: '125px',
           padding: '19px',
           width: '213px',
         },
         title: {
-          marginBottom: '33px',
+          marginBottom: '25px',
           size: '10px',
         },
         magnet: {
