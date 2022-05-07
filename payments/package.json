@@ -61,5 +61,5 @@
     "node-sass": "^7.0.1",
     "webpack": "^5.72.0"
   },
-  "homepage": "."
+  "homepage": "https://judonghyeok.github.io/react-payments"
 }

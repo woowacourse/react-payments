@@ -48,9 +48,11 @@ const Home = () => {
           <p>{card.nickname}</p>
         </div>
       ))}
-      <Link to="/addcard">
-        <button className="home-container-card-add-btn">+</button>
-      </Link>
+      <div className="card-add-btn--container">
+        <Link to="/addcard">
+          <button className="home-container-card-add-btn">+</button>
+        </Link>
+      </div>
       <ConfirmCardControlModal />
     </div>
   );
