@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import useInputValue from '../../hooks/useInputValue';
 import FieldSet from '../FieldSet';
 import Input from '../Input';
-import DotMark from '../DotMark';
 import { checkPassword, checkNumberOnly } from '../../validation';
 import * as styled from './index.styled';
 import { ACTION, useCardFormContext } from '../../context/card-form-context';
@@ -72,8 +71,8 @@ const Password = () => {
             value={secondPassword}
             onChange={onChangeSecondPassword}
           />
-          <DotMark />
-          <DotMark />
+          <styled.DotContainer>•</styled.DotContainer>
+          <styled.DotContainer>•</styled.DotContainer>
         </styled.Container>
       }
     </FieldSet>
