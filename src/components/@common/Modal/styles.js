@@ -30,13 +30,14 @@ const Container = styled.div`
     min-height: 12.5rem;
     background-color: #fff;
 
-    padding: 1.25rem;
+    padding: 2rem 1.5rem;
     margin: 2rem 1.25rem;
 
     box-shadow: 0px 0.625rem 1.875rem 1.25rem ${COLORS['black-05']};
 
     ${responsive.notMobile(css`
       width: 620px;
+      padding: 1.5rem;
     `)}
   }
 
