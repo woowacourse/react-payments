@@ -12,7 +12,6 @@ const CardDataContext = createContext();
 function reducer(cardList, { type, data }) {
   const actionList = {
     PRELOAD: () => data,
-    SELECT: () => {},
     INSERT: () => {
       const { cardData } = data;
       return cardList.concat({ ...cardData, id: new Date().getTime() });
@@ -50,7 +49,7 @@ function CardDataContextProvider({ children }) {
 
       requestErrorHandler(response)(
         (successResult) => dispatch({ type: 'PRELOAD', data: successResult }),
-        (errorMessage) => alert(`서버에서 카드 목록을 로드에 실패하였습니다..\n${errorMessage}`),
+        (errorMessage) => alert(`서버에서 카드 목록 로드에 실패하였습니다.\n${errorMessage}`),
       );
     })();
   }, []);
@@ -80,7 +79,6 @@ function useCardDataContext() {
   };
 
   const handleUpdateCardData = async (index, cardData) => {
-    console.log(index);
     const { id } = cardList[index];
     const response = await requestUpdateCardData(id, cardData);
 
