@@ -21,7 +21,14 @@ const StyledLink = styled(Link)`
 
 const LinkButton = ({ children, path, onClick, type }) => {
   return (
-    <StyledLink to={path || "/"} onClick={onClick} type={type}>
+    <StyledLink
+      to={"/"}
+      state={{
+        data: path || "/",
+      }}
+      onClick={onClick}
+      type={type}
+    >
       {children}
     </StyledLink>
   );

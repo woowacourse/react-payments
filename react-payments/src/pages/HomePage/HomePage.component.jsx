@@ -21,7 +21,14 @@ const HomePage = () => {
       </Header>
       <CardGroup>
         <SavedCardList />
-        <CardAddLink to="/add">+</CardAddLink>
+        <CardAddLink
+          to={"/"}
+          state={{
+            data: "/add",
+          }}
+        >
+          +
+        </CardAddLink>
       </CardGroup>
     </PageContainer>
   );

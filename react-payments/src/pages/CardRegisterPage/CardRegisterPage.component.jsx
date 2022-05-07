@@ -114,7 +114,7 @@ const CardRegisterPage = () => {
         )}
       </CardRegisterGroup>
       {cardNameLengthReady && uniqueCardNameReady && (
-        <LinkButton type="submit" onClick={handleSubmitCardData}>
+        <LinkButton path="/" type="submit" onClick={handleSubmitCardData}>
           확인
         </LinkButton>
       )}
