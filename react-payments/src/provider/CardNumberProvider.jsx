@@ -32,7 +32,7 @@ const CardNumberProvider = ({ children }) => {
       maxLength: MAX_LENGTH.CARD_NUMBER,
       nextElement,
     });
-
+    console.log(cardNumber);
     setCardNumber({
       ...cardNumber,
       [target.name]: target.value,

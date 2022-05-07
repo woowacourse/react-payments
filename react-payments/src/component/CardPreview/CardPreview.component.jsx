@@ -159,7 +159,7 @@ const CardPreview = ({ cardDatum, idx }) => {
         <CardControlModal
           toggleModal={toggleModal}
           type="edit"
-          handleEditCard={() => handleEditCard(idx)}
+          handleEditCard={handleEditCard}
           handleDeleteCard={handleDeleteCard}
         />
       )}

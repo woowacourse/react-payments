@@ -78,7 +78,7 @@ const CardAddPage = () => {
     if (typeof id === "undefined" || !cardData[id]) {
       return;
     }
-
+    console.log(cardData[id]);
     setCardNumber(cardData[id].cardNumber);
     setExpireDate({
       month: cardData[id].month,

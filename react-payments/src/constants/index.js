@@ -74,6 +74,13 @@ export const ALERT_MEESAGE = {
   REGISTER: "등록이 완료되었습니다",
 };
 
+export const cardNumberEnum = {
+  first: 1,
+  second: 2,
+  third: 3,
+  fourth: 4,
+};
+
 export const SUCCESS_MESSAGE = "성공적으로 입력됐습니다";
 
 export const API_URL = "https://jungmin-react-payment.herokuapp.com";

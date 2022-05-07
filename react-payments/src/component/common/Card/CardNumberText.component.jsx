@@ -4,6 +4,7 @@ import Dot from "component/common/Dot/Dot.component";
 
 import { MIDDLE_CARD_NUMBER_LENGTH } from "constants/index";
 import { RowFlexWrapper } from "styles/wrapper";
+import { cardNumberEnum } from "constants";
 
 const CardNumberTextBox = styled.div`
   display: flex;
@@ -28,18 +29,23 @@ const CardNumberTextBox = styled.div`
 const CardNumberText = ({ cardNumbers, size }) => {
   return (
     <CardNumberTextBox size={size}>
-      {Object.values(cardNumbers).map((cardNumber, idx) => {
-        if (idx >= MIDDLE_CARD_NUMBER_LENGTH) {
-          return (
-            <RowFlexWrapper key={idx}>
-              {Array.from(cardNumber).map((_, idx) => (
-                <Dot size="small" formType="card-number" key={"dot" + idx} />
-              ))}
-            </RowFlexWrapper>
-          );
-        }
-        return <div key={idx}>{cardNumber}</div>;
-      })}
+      {Object.entries(cardNumbers)
+        .sort(
+          ([key, _], [newKey, __]) =>
+            cardNumberEnum[key] - cardNumberEnum[newKey]
+        )
+        .map(([_, cardNumber], idx) => {
+          if (idx >= MIDDLE_CARD_NUMBER_LENGTH) {
+            return (
+              <RowFlexWrapper key={idx}>
+                {Array.from(cardNumber).map((_, idx) => (
+                  <Dot size="small" formType="card-number" key={"dot" + idx} />
+                ))}
+              </RowFlexWrapper>
+            );
+          }
+          return <div key={idx}>{cardNumber}</div>;
+        })}
     </CardNumberTextBox>
   );
 };
