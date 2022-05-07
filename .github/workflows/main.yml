@@ -3,7 +3,7 @@ name: Build and GH-Page Deploy
 on:
   push:
     branches:
-      - albur-step1
+      - albur-step2
 
 jobs:
   build:
