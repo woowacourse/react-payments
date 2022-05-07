@@ -6,6 +6,10 @@ import InputField from './common/InputField.jsx';
 
 import { CARD_INFO_RULES } from '../constants';
 
+const InputFieldWrapper = styled.div`
+  position: relative;
+`;
+
 const StyledInputCounter = styled.p`
   position: absolute;
   top: 0;
@@ -26,27 +30,27 @@ function InputCounter({ currLength = '0', maxLength, isComplete }) {
 
 export default function CardHolderNameInput({ holderName, onChange }) {
   return (
-    <InputField
-      labelText="카드 소유자 이름 (선택)"
-      OptionalComponent={
-        <InputCounter
-          currLength={holderName.length}
-          maxLength={CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH}
+    <InputFieldWrapper>
+      <InputField
+        labelText="카드 소유자 이름 (선택)"
+        wrapperWidth="100%"
+        horizontalAlign="flex-start"
+        isComplete={holderName !== ''}>
+        <Input
+          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          type="text"
+          value={holderName}
+          onChange={onChange}
+          width="100%"
+          textAlign="left"
           isComplete={holderName !== ''}
         />
-      }
-      wrapperWidth="100%"
-      horizontalAlign="flex-start"
-      isComplete={holderName !== ''}>
-      <Input
-        placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        type="text"
-        value={holderName}
-        onChange={onChange}
-        width="100%"
-        textAlign="left"
+      </InputField>
+      <InputCounter
+        currLength={holderName.length}
+        maxLength={CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH}
         isComplete={holderName !== ''}
       />
-    </InputField>
+    </InputFieldWrapper>
   );
 }

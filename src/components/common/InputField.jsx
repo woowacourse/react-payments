@@ -39,7 +39,6 @@ const StyledInputContainer = styled.div`
 
 export default function InputField({
   labelText,
-  OptionalComponent,
   wrapperWidth,
   horizontalAlign,
   isComplete,
@@ -62,7 +61,6 @@ export default function InputField({
             {children}
           </StyledInputWrapper>
         )}
-        {OptionalComponent}
       </StyledInputContainer>
     </StyledInputField>
   );
