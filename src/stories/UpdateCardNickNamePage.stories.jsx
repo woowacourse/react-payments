@@ -1,6 +1,7 @@
 import React from 'react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { withReactContext } from 'storybook-react-context';
+import { within, userEvent } from '@storybook/testing-library';
 
 import { CardListContext } from '../context';
 import UpdateCardNickNamePage from './../pages/UpdateCardNickNamePage';
@@ -31,3 +32,8 @@ Default.args = {};
 
 export const FilledForm = Example.bind({});
 FilledForm.args = {};
+
+FilledForm.play = ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  userEvent.type(canvas.getByTestId('card-nickname-input'), '스토리북테스트카드');
+};

@@ -25,6 +25,7 @@ export default function CardPasswordInput({ password, onChange, isInvalid }) {
           width="100%"
           placeholder={CREATE_MASKED_CHARACTERS(1)}
           isComplete={password[index].length === 1}
+          data-testid={`card-password-input-${index}`}
         />
       ))}
     </InputField>

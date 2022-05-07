@@ -26,6 +26,7 @@ export default function CardNumberInput({ cardNumber, onChange, isInvalid }) {
             placeholder={index <= 1 ? '1 2 3 4' : CREATE_MASKED_CHARACTERS(4)}
             onChange={e => onChange(e.target.value, index)}
             isComplete={cardNumber[index].length === 4}
+            data-testid={`card-number-input-${index}`}
           />
           {index < ADD_CARD_FORM_CONDITION.NUMBER_UNIT_COUNT - 1 && cardNumber[index].length === 4 && <p>-</p>}
         </Fragment>

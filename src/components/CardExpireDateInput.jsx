@@ -21,6 +21,7 @@ export default function CardExpireDateInput({ expireDate, onChange, isInvalid })
         onChange={e => onChange(e.target.value, 0)}
         width="40px"
         isComplete={expireDate[0].length === 2}
+        data-testid={'card-expire-month-input'}
       />
       <p>/</p>
       <Input
@@ -30,6 +31,7 @@ export default function CardExpireDateInput({ expireDate, onChange, isInvalid })
         onChange={e => onChange(e.target.value, 1)}
         width="40px"
         isComplete={expireDate[1].length === 2}
+        data-testid={'card-expire-year-input'}
       />
     </InputField>
   );

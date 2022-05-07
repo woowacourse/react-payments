@@ -47,6 +47,7 @@ export default function CardHolderNameInput({ holderName, onChange, isInvalid })
           width="100%"
           textAlign="left"
           isComplete={holderName !== ''}
+          data-testid={'card-holder-name-input'}
         />
       </InputField>
       <InputCounter

@@ -91,7 +91,11 @@ export default function UpdateCardNickNamePage() {
           <>
             <CardItem size={'large'} isComplete={true} {...cardList[cardIndex]} />
             <Form onSubmit={handleCardNickNameSubmit}>
-              <CardNickNameInput name="nickname-input" placeholder={'카드 닉네임'} />
+              <CardNickNameInput
+                name="nickname-input"
+                placeholder={'카드 닉네임'}
+                data-testid={'card-nickname-input'}
+              />
               <ButtonWrapper>
                 <Button type="submit">확인</Button>
               </ButtonWrapper>

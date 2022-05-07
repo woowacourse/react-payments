@@ -41,6 +41,7 @@ export default function CardSecurityCodeInput({ securityCode, onChange, isInvali
           onChange={e => onChange(e.target.value)}
           width="100%"
           isComplete={securityCode.length === ADD_CARD_FORM_CONDITION.SECURITY_CODE_LENGTH}
+          data-testid={'card-security-code-input'}
         />
       </InputField>
       <IconButtonWrapper>
