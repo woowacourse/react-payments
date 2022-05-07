@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
-import { Loading, AddCard, RegisterCard, CardList } from './pages';
+import { Loading, AddCard, RegisterCard, CardList, NotFound } from './pages';
 
 const App = () => {
   return (
@@ -12,6 +12,7 @@ const App = () => {
           <Route path="/addCard" exact element={<AddCard />} />
           <Route path="/registerCard" exact element={<RegisterCard />} />
           <Route path="/" exact element={<CardList />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </Suspense>
