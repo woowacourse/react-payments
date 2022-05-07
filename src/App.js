@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalStyle from './GlobalStyle';
 
+import { CardInfoModifyPage } from './pages/CardInfoModifyPage';
+import { CardListPage } from './pages/CardListPage';
 import { CardRegisterPage } from './pages/CardRegisterPage';
 
 function App() {
@@ -12,14 +14,14 @@ function App() {
       <Style.App>
         <BrowserRouter>
           <Routes>
-            <Route path="/react-payments/" element={<div>카드 목록</div>} />
+            <Route path="/react-payments/" element={<CardListPage />} />
             <Route
               path="/react-payments/register"
               element={<CardRegisterPage />}
             />
             <Route
               path="/react-payments/modify/:cardId"
-              element={<div>카드 수정</div>}
+              element={<CardInfoModifyPage />}
             />
           </Routes>
         </BrowserRouter>

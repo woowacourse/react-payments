@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 
 import { cardInfoReducer } from '../reducer/cardInfo';
 
@@ -16,6 +16,8 @@ import { PageTitle } from '../components/common/PageTitle';
 import { ModalSelector } from '../components/common/ModalSelector';
 import { useModalSelector } from '../hooks/useModalSelector';
 import { CardPreview } from '../components/CardRegister/CardPreview';
+
+import { Layout } from '../components/common/styled';
 
 export const CardRegisterPage = () => {
   const [cardInfo, dispatch] = useReducer(cardInfoReducer, initialCardInfo);
@@ -43,11 +45,11 @@ export const CardRegisterPage = () => {
   }, [checkInputCompleted]);
 
   return (
-    <>
+    <Layout>
       <PageTitle>카드 추가</PageTitle>
       <CardPreview
         cardInfo={cardInfo}
-        onClick={() => openModal(COMPONENTS.CARD_TYPE)}
+        onClickCard={() => openModal(COMPONENTS.CARD_TYPE)}
       />
       <CardNumbersInput
         cardType={cardInfo.cardType}
@@ -88,6 +90,6 @@ export const CardRegisterPage = () => {
       </ModalSelector>
 
       <Button disabled={allCompleted ? false : true}>다음</Button>
-    </>
+    </Layout>
   );
 };

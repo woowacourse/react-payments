@@ -50,6 +50,7 @@ export const InputBox = styled.div`
   padding: ${(props) => props.padding || '0'};
 `;
 
-export const MarginTB10 = styled.div`
-  margin: 10px 0;
+export const Layout = styled.div`
+  padding: 24px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 `;

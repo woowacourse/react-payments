@@ -1,12 +1,17 @@
-import React from 'react';
+import styled from 'styled-components';
 
 import { Card } from '../common/Card';
-import { MarginTB10 } from '../common/styled';
 
-export const CardPreview = ({ cardInfo, onClick }) => {
+export const CardPreview = ({ cardInfo, onClickCard }) => {
   return (
-    <MarginTB10>
-      <Card cardInfo={cardInfo} onClick={onClick} />
-    </MarginTB10>
+    <Style.CardPreviewLayout>
+      <Card cardInfo={cardInfo} onClickCard={onClickCard} size="md" />
+    </Style.CardPreviewLayout>
   );
+};
+
+const Style = {
+  CardPreviewLayout: styled.div`
+    margin: 10px 0;
+  `,
 };
