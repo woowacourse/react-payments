@@ -29,22 +29,6 @@ const cardInputReducer = (state, action) => {
       };
     }
 
-    case 'CHANGE_SECURITY_CODE': {
-      const { securityCode } = payload;
-      return {
-        ...state,
-        securityCode: securityCode,
-      };
-    }
-
-    case 'CHANGE_PASSWORD': {
-      const { key, password } = payload;
-      return {
-        ...state,
-        password: { ...state.password, [`${key}`]: password },
-      };
-    }
-
     case 'CHANGE_PASSWORD_INPUT': {
       const { elementKey, value } = payload;
       const [stateName, stateKey] = elementKey.split(INPUT_ELEMENT_KEY_SEPARATOR);
@@ -86,6 +70,6 @@ const defaultCardInputState = {
   cardType: null,
 };
 
-export const useCardInput = () => {
-  return useReducer(cardInputReducer, defaultCardInputState);
+export const useCardInput = card => {
+  return useReducer(cardInputReducer, card ? { ...card } : defaultCardInputState);
 };
