@@ -4,14 +4,7 @@ import { within, userEvent } from "@storybook/testing-library";
 import CardInfoContext from "../context/CardInfoContext";
 import { withReactContext } from "storybook-react-context";
 import CardAddPage from "./CardAddPage";
-
-const PageSharedStyle = {
-  width: "375px",
-  height: "750px",
-  margin: "auto",
-  backgroundColor: "#ffffff",
-  padding: "20px 28px",
-};
+import { PageStoriesStyle } from "./PageStoriesStyle";
 
 export default {
   title: "Pages/CardAddPage",
@@ -22,7 +15,7 @@ export default {
       initialState: { state: {}, setState: () => {} },
     }),
     (Story) => (
-      <div style={PageSharedStyle}>
+      <div style={PageStoriesStyle}>
         <Story />
       </div>
     ),

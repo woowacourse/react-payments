@@ -1,5 +1,6 @@
 import React from "react";
 import CardListPage from "./CardListPage";
+import { PageStoriesStyle } from "./PageStoriesStyle";
 
 const firstSampleCardInfo = {
   "card-number": "1234567812345678",
@@ -24,15 +25,7 @@ export default {
   component: CardListPage,
   decorators: [
     (Story) => (
-      <div
-        style={{
-          width: "375px",
-          height: "700px",
-          margin: "auto",
-          backgroundColor: "#ffffff",
-          padding: "20px 28px",
-        }}
-      >
+      <div style={PageStoriesStyle}>
         <Story />
       </div>
     ),
