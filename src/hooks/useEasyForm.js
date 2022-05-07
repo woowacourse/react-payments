@@ -128,9 +128,11 @@ const useEasyForm = ({
     let isValid = true;
 
     if (!shouldUseReportValidity) {
-      isValid = Object.keys(inputElementsRef.current).every((name) =>
-        validate(name)
+      const validationResults = Object.keys(inputElementsRef.current).map(
+        (name) => validate(name)
       );
+
+      isValid = validationResults.every((validationResult) => validationResult);
     }
 
     updateFormState({
@@ -168,7 +170,6 @@ const useEasyForm = ({
       name,
       ref: bindElement(name, options),
       onChange,
-      onBlur: onChange,
       onKeyDown,
     };
   };
