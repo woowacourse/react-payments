@@ -15,6 +15,7 @@ function App() {
         <GlobalStyle />
         <Routes>
           <Route path={ROUTES.HOME} element={<PossessCard />} />
+          <Route path={ROUTES.HOME2} element={<PossessCard />} />
           <Route path={ROUTES.POSSESS_CARD} element={<PossessCard />} />
           <Route path={ROUTES.ADD_CARD} element={<AddCard />} />
         </Routes>
