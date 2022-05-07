@@ -1,15 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const Dot = () => {
+export const Dot = () => {
   return (
     <DotContainerStyle>
       <DotStyle />
     </DotContainerStyle>
   );
 };
-
-export default Dot;
 
 const DotContainerStyle = styled.div`
   display: flex;

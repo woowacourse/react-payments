@@ -2,10 +2,14 @@ import React, { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { CardContext } from "contexts/CardContext";
 
-import { FlexWrapper, InputContainer } from "components/common/styled";
-import { Card, Button } from "components/common";
-import { InputUnderline } from "components/common/InputUnderline";
-import { Form } from "components/common/Form";
+import {
+  FlexWrapper,
+  InputContainer,
+  Card,
+  Button,
+  Form,
+  InputUnderline,
+} from "components/common";
 
 export const CardModifyPage = ({ isEditMode = false }) => {
   const cards = useContext(CardContext);
@@ -14,7 +18,7 @@ export const CardModifyPage = ({ isEditMode = false }) => {
 
   const setCardNickname = (e) => {
     e.preventDefault();
-    // console.log(e.target["input-nickname"].value);
+
     cards.list[id].cardNickname =
       e.target["input-nickname"].value || cards.list[id].cardNickname;
 

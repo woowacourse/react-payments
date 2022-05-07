@@ -1,6 +1,6 @@
 import React from "react";
 
-import Dot from "components/common/Dot";
+import { Dot } from "components/common/Dot";
 
 export default {
   title: "Example/Dot",
@@ -14,7 +14,6 @@ export default {
   ],
 };
 
-const Template = (args) => <Dot />;
+const Template = () => <Dot />;
 
 export const DotTemplate = Template.bind({});
-DotTemplate.args = {};

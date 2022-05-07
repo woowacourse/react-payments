@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { CardContext } from "contexts/CardContext";
 import styled from "styled-components";
 
-import { FlexWrapper } from "components/common/styled";
-import { Card, Button, PageTitle } from "components/common";
-import { NewCard } from "components/common/NewCard";
+import {
+  Card,
+  Button,
+  PageTitle,
+  NewCard,
+  FlexWrapper,
+} from "components/common";
 
 export const CardListPage = () => {
   const navigate = useNavigate();

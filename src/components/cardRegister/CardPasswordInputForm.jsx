@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react";
 
-import { InputBasic } from "components/common/InputBasic";
-import { InputBox } from "components/common/InputBox";
-import { InputTitle } from "components/common/InputTitle";
-import { InputContainer } from "components/common/styled";
-import Dot from "components/common/Dot";
 import { RULE_INPUT } from "constants/constants";
+import {
+  InputBasic,
+  InputBox,
+  InputTitle,
+  InputContainer,
+  Dot,
+} from "components/common";
 
 export const CardPasswordInputForm = ({ handleCardPasswordCheck }) => {
   const [validate, setValidate] = useState(false);

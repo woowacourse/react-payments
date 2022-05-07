@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 
-import { InputBasic } from "components/common/InputBasic";
-import { InputBox } from "components/common/InputBox";
-import { TipButton } from "components/common/TipButton";
-import { InputTitle } from "components/common/InputTitle";
-import { FlexWrapper, InputContainer } from "components/common/styled";
 import { RULE_INPUT } from "constants/constants";
+import {
+  FlexWrapper,
+  InputBasic,
+  InputBox,
+  InputTitle,
+  InputContainer,
+  TipButton,
+} from "components/common";
 
 export const CVCInputForm = ({ handleCardCVCCheck, handleModalVisible }) => {
   const [validate, setValidate] = useState(false);

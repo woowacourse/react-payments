@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { useModal } from "hooks/useModal";
 import { CardContext } from "contexts/CardContext";
-import { useNavigate } from "react-router-dom";
 
-import { Button, Card, Modal, PageTitle } from "components/common";
+import { Button, Card, Form, Modal, PageTitle } from "components/common";
 import {
   CARD_TYPES,
   CARD_TYPES_DEFAULT,
@@ -18,11 +18,11 @@ import {
   CardSelectModal,
   CVCHelperModal,
 } from "components/cardRegister";
-import { Form } from "components/common/Form";
 
 export const CardRegisterPage = () => {
   const { modalVisibleState, setModalState, modalName } = useModal();
   const cards = useContext(CardContext);
+  const navigate = useNavigate();
   const [ownerName, setOwnerName] = useState("");
   const [allCompleted, setAllCompleted] = useState(false);
   const [expireDate, setExpireDate] = useState({
@@ -57,8 +57,6 @@ export const CardRegisterPage = () => {
       setCardType(() => CARD_TYPES_DEFAULT);
     }
   }, [checkInputs.cardNumbers]);
-
-  const navigate = useNavigate();
 
   const modalSelector = (name) => {
     return () => {

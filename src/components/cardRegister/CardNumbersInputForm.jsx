@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { InputBasic } from "components/common/InputBasic";
-import { InputBox } from "components/common/InputBox";
-import { InputTitle } from "components/common/InputTitle";
-import { InputContainer } from "components/common/styled";
 import { RULE_INPUT } from "constants/constants";
+import {
+  InputBasic,
+  InputBox,
+  InputTitle,
+  InputContainer,
+} from "components/common";
 
 const DEFAULT_CARD_NUMBERS_TYPE = [
   { name: "firstNumber", type: "text" },
