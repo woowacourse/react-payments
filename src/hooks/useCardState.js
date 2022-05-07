@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 
 const initialState = {
   cardName: '',
-  companyId: '0',
+  companyId: '',
   cardNumber: ['', '', '', ''],
   expireMonth: '',
   expireYear: '',
