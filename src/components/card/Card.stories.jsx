@@ -13,6 +13,8 @@ export const Deactivated = Template.bind({});
 
 Deactivated.args = {
   card: {
+    company: '',
+    theme: '',
     firstCardNumber: '',
     secondCardNumber: '',
     thirdCardNumber: '',
@@ -30,6 +32,8 @@ export const Activated = Template.bind({});
 
 Activated.args = {
   card: {
+    company: '안 카드',
+    theme: 'blue',
     firstCardNumber: '1234',
     secondCardNumber: '5678',
     thirdCardNumber: '1111',
