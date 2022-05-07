@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardNumber, CardOwner, CardPassword, CardSecurityCode, CardShape, DueDate, Footer } from '../components';
+import { CardNumber, CardOwner, CardPassword, CardSecurityCode, CardShape, DueDate, TextNav } from '../components';
 import useCardState from '../hooks/useCardState';
 
 function CardAdd() {
@@ -14,7 +14,7 @@ function CardAdd() {
       <CardOwner />
       <CardSecurityCode />
       <CardPassword />
-      <Footer isAllCompleted={isAllCompleted} />
+      <TextNav isAllCompleted={isAllCompleted} />
     </>
   );
 }

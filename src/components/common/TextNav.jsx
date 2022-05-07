@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import TextButton from './TextButton';
 
-const FooterContainer = styled.footer`
+const TextNavContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -11,10 +11,10 @@ const FooterContainer = styled.footer`
 `;
 
 const S = {
-  FooterContainer,
+  TextNavContainer,
 };
 
-function Footer({ isAllCompleted }) {
+function TextNav({ isAllCompleted }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -22,12 +22,12 @@ function Footer({ isAllCompleted }) {
     navigate('/card-add-complete');
   };
   return (
-    <S.FooterContainer>
+    <S.TextNavContainer>
       <TextButton hexColor={'#525252'} isVisible={isAllCompleted} handleClick={handleClick}>
         다음
       </TextButton>
-    </S.FooterContainer>
+    </S.TextNavContainer>
   );
 }
 
-export default React.memo(Footer);
+export default React.memo(TextNav);
