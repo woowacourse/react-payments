@@ -1,5 +1,6 @@
 import { useReducer, useCallback } from 'react';
 import useCardInfo from 'hooks/useCardInfo';
+import { Link } from 'react-router-dom';
 
 import FormInput from 'components/common/FormInput';
 import CardPreview from 'components/CardPreview';
@@ -127,9 +128,11 @@ const CardAppPage = () => {
         theme={theme}
       />
       {isFullFilled && (
-        <Button theme={theme} className="next-button">
-          다음
-        </Button>
+        <Link to="/react-payments/confirm">
+          <Button theme={theme} className="next-button">
+            다음
+          </Button>
+        </Link>
       )}
       {modalVisible && (
         <Modal handleModal={handleModal}>

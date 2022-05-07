@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ReactComponent as CardAddIcon } from 'assets/card_add_icon.svg';
 
