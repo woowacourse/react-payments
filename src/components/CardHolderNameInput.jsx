@@ -8,6 +8,7 @@ import { CARD_INFO_RULES } from '../constants';
 
 const InputFieldWrapper = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 const StyledInputCounter = styled.p`

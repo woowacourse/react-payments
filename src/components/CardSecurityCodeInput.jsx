@@ -12,6 +12,7 @@ import QuestionMarkIcon from '../assets/images/questionMarkIcon.svg';
 const SECURITY_CODE_DESCRIPTION = 'CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.';
 
 const InputFieldWrapper = styled.div`
+  width: 100%;
   position: relative;
   display: flex;
   align-items: center;

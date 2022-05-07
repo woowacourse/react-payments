@@ -8,6 +8,7 @@ import { Header, Title, GuideMessage } from '../components/common/styled';
 import GoBackButton from '../components/GoBackButton';
 import CardItem from '../components/CardItem';
 import Button from '../components/common/Button';
+import Form from '../components/common/Form';
 
 const Main = styled.main`
   display: flex;
@@ -17,13 +18,6 @@ const Main = styled.main`
 
 const GuideMessageWrapper = styled.div`
   margin: 80px auto;
-`;
-
-const CardNickNameForm = styled.form`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 const CardNickNameInput = styled.input`
@@ -96,12 +90,12 @@ export default function UpdateCardNickNamePage() {
         {cardInfoList[cardIndex] && (
           <>
             <CardItem size={'large'} isComplete={true} {...cardInfoList[cardIndex]} />
-            <CardNickNameForm onSubmit={handleCardNickNameSubmit}>
+            <Form onSubmit={handleCardNickNameSubmit}>
               <CardNickNameInput name="nickname-input" placeholder={'카드 닉네임'} />
               <ButtonWrapper>
                 <Button type="submit">확인</Button>
               </ButtonWrapper>
-            </CardNickNameForm>
+            </Form>
           </>
         )}
       </Main>

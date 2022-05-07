@@ -6,7 +6,6 @@ import { CardInfoListContext } from '../context';
 import {
   CardExpireDateInput,
   CardHolderNameInput,
-  CardInfoForm,
   CardNumberInput,
   CardPasswordInput,
   CardPreview,
@@ -14,6 +13,7 @@ import {
 } from '../components';
 import { Header, Title } from '../components/common/styled';
 import Button from './../components/common/Button';
+import Form from '../components/common/Form';
 import GoBackButton from '../components/GoBackButton';
 
 import { CARD_INFO_RULES } from '../constants';
@@ -115,9 +115,7 @@ export default function AddCardPage() {
   const CardInfoSubmitButton = () => {
     return (
       <ButtonWrapper>
-        <Button type="submit" onClick={handleCardInfoSubmit}>
-          다음
-        </Button>
+        <Button type="submit">다음</Button>
       </ButtonWrapper>
     );
   };
@@ -151,14 +149,14 @@ export default function AddCardPage() {
         expireDate={expireDate}
         isComplete={isValidCardNumber && isValidExpireDate && isValidSecurityCode && isValidPassword}
       />
-      <CardInfoForm autoComplete="off">
+      <Form onSubmit={handleCardInfoSubmit} autoComplete="off">
         <CardNumberInput cardNumber={cardNumber} onChange={handleCardNumberUpdate} />
         <CardExpireDateInput expireDate={expireDate} onChange={handleExpireDateUpdate} />
         <CardHolderNameInput holderName={holderName} onChange={handleHolderNameUpdate} />
         <CardSecurityCodeInput securityCode={securityCode} onChange={handleSecurityCodeUpdate} />
         <CardPasswordInput password={password} onChange={handlePasswordUpdate} />
         {isValidCardNumber && isValidExpireDate && isValidSecurityCode && isValidPassword && <CardInfoSubmitButton />}
-      </CardInfoForm>
+      </Form>
     </>
   );
 }
