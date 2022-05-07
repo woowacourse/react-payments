@@ -1,6 +1,6 @@
 import { putCardNickname } from 'apis';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Header, TextField } from 'components/@common';
@@ -13,6 +13,14 @@ function CardAddComplete({ card }) {
   const [cardNickname, setCardNickname] = useState('');
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const isCardAddComplete = cardNumber.every((unit) => unit !== '');
+
+    if (isCardAddComplete) return;
+
+    navigate(PATH.CARD_ADD);
+  }, [cardNumber, navigate]);
 
   const onChangeCardNickname = ({ target }) => {
     setCardNickname(target.value);
