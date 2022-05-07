@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CardInfoContext } from "../../contexts/CardInfoContext";
 import styled from "styled-components";
+
+import HelpIconImage from "../../assets/images/questionMark.svg";
 
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
-
-import HelpIconImage from "../../assets/images/questionMark.svg";
 
 import { CARD_INFO_RULES } from "../../constants/constants";
 
@@ -57,7 +58,12 @@ function HelpIcon({ description }) {
   );
 }
 
-export default function CardSecurityCodeInput({ securityCode, onChange }) {
+export default function CardSecurityCodeInput() {
+  const {
+    state: { securityCode },
+    actions: { handleSecurityCodeUpdate },
+  } = useContext(CardInfoContext);
+
   return (
     <InputField
       labelText={"보안 코드(CVC/CVV)"}
@@ -76,7 +82,7 @@ export default function CardSecurityCodeInput({ securityCode, onChange }) {
         width={"100%"}
         maxLength={3}
         required
-        onChange={(e) => onChange(e, securityCode.keyType)}
+        onChange={(e) => handleSecurityCodeUpdate(e, securityCode.keyType)}
         isComplete={
           securityCode.value.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
         }

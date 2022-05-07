@@ -1,10 +1,17 @@
+import { useContext } from "react";
+import { CardInfoContext } from "../../contexts/CardInfoContext";
+
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 
 import { CARD_INFO_RULES } from "../../constants/constants";
 
-export default function CardPasswordInput(props) {
-  const { password, onChange } = props;
+export default function CardPasswordInput() {
+  const {
+    state: { password },
+    actions: { handlePasswordUpdate },
+  } = useContext(CardInfoContext);
+
   const passwordList = Object.values(password);
   const passwordLength = passwordList.reduce(
     (sum, currentInput) => currentInput.value.length + sum,
@@ -30,7 +37,7 @@ export default function CardPasswordInput(props) {
           maxLength={1}
           required
           isComplete={password.value.length === 1}
-          onChange={(e) => onChange(e, password.keyType)}
+          onChange={(e) => handlePasswordUpdate(e, password.keyType)}
         />
       ))}
     </InputField>

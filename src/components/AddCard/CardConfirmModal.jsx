@@ -18,12 +18,7 @@ const StyledCardConfirmModal = styled.section`
   align-items: center;
 `;
 
-export default function CardConfirmModal({
-  cardNumber,
-  holderName,
-  expireDate,
-  canProceed,
-}) {
+export default function CardConfirmModal() {
   return (
     <>
       <StyledCardConfirmModal>
@@ -36,10 +31,7 @@ export default function CardConfirmModal({
           카드등록이 완료되었습니다.
         </PageHeader>
         <CardPreview
-          cardNumber={cardNumber}
-          holderName={holderName}
-          expireDate={expireDate}
-          canProceed={canProceed}
+          canProceed={true}
           width={"293px"}
           height={"183px"}
           fontSize={"14px"}

@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { CardInfoContext } from "../../contexts/CardInfoContext";
 import styled from "styled-components";
 
 import Input from "../UIComponents/Input/Input";
@@ -23,7 +25,12 @@ function InputCounter({ currLength = "0", maxLength, isComplete }) {
   );
 }
 
-export default function CardHolderNameInput({ holderName, onChange }) {
+export default function CardHolderNameInput() {
+  const {
+    state: { holderName },
+    actions: { handleHolderNameUpdate },
+  } = useContext(CardInfoContext);
+
   return (
     <InputField
       labelText={"카드 소유자 이름 (선택)"}
@@ -48,7 +55,7 @@ export default function CardHolderNameInput({ holderName, onChange }) {
         width={"100%"}
         textAlign={"left"}
         maxLength={30}
-        onChange={(e) => onChange(e, holderName.keyType)}
+        onChange={(e) => handleHolderNameUpdate(e, holderName.keyType)}
         isComplete={holderName.value !== ""}
       />
     </InputField>

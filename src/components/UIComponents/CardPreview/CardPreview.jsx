@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CardInfoContext } from "../../../contexts/CardInfoContext";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+
 import { CREATE_MASKED_CHARACTERS } from "../../../constants/constants";
 
 const CardContainer = styled.div`
@@ -65,9 +67,6 @@ const CardHolderName = styled.p`
 `;
 
 export default function CardPreview({
-  cardNumber,
-  holderName,
-  expireDate,
   canProceed,
   width,
   height,
@@ -79,6 +78,10 @@ export default function CardPreview({
   cardChipMarginBottom,
   cardNumberMarginBottom,
 }) {
+  const {
+    state: { cardNumber, holderName, expireDate },
+  } = useContext(CardInfoContext);
+
   const {
     firstCardNumber,
     secondCardNumber,
@@ -120,10 +123,16 @@ export default function CardPreview({
 }
 
 CardPreview.propTypes = {
-  cardNumber: PropTypes.object,
-  holderName: PropTypes.object,
-  expireDate: PropTypes.object,
   canProceed: PropTypes.bool,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  fontSize: PropTypes.string,
+  cardContainerMarginBottom: PropTypes.string,
+  cardChipWidth: PropTypes.string,
+  cardChipHeight: PropTypes.string,
+  cardNameMargin: PropTypes.string,
+  cardChipMarginBottom: PropTypes.string,
+  cardNumberMarginBottom: PropTypes.string,
 };
 
 CardPreview.defaultProps = {

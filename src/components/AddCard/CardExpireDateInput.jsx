@@ -1,11 +1,17 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 
 import { CARD_INFO_RULES } from "../../constants/constants";
+import { CardInfoContext } from "../../contexts/CardInfoContext";
 
-export default function CardExpireDateInput({ expireDate, onChange }) {
+export default function CardExpireDateInput() {
+  const {
+    state: { expireDate },
+    actions: { handleExpireDateUpdate },
+  } = useContext(CardInfoContext);
+
   const expireDateList = Object.values(expireDate);
   const expireDateLength = expireDateList.reduce(
     (sum, prev) => prev.value.length + sum,
@@ -31,7 +37,7 @@ export default function CardExpireDateInput({ expireDate, onChange }) {
             width={"40px"}
             maxLength={2}
             required
-            onChange={(e) => onChange(e, expireDate.keyType)}
+            onChange={(e) => handleExpireDateUpdate(e, expireDate.keyType)}
             isComplete={expireDate.value.length === 2}
           />
           {expireDate.keyType === "month" && <p>/</p>}

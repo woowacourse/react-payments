@@ -1,12 +1,16 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
+import { CardInfoContext } from "../../contexts/CardInfoContext";
 
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 
 import { CARD_INFO_RULES } from "../../constants/constants";
 
-export default function CardNumberInput(props) {
-  const { cardNumber, onChange } = props;
+export default function CardNumberInput() {
+  const {
+    state: { cardNumber },
+    actions: { handleCardNumberUpdate },
+  } = useContext(CardInfoContext);
 
   const cardNumberList = Object.values(cardNumber);
   const cardNumberLength = cardNumberList.reduce(
@@ -36,7 +40,7 @@ export default function CardNumberInput(props) {
             maxLength={4}
             autoFocus={cardNumber.keyType === "firstCardNumber"}
             required
-            onChange={(e) => onChange(e, cardNumber.keyType)}
+            onChange={(e) => handleCardNumberUpdate(e, cardNumber.keyType)}
             isComplete={
               cardNumber.value.length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
             }
