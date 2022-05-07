@@ -42,7 +42,7 @@ const App = () => {
           <Routes>
             <Route path="/react-payments/" element={<MainPage />}></Route>
             <Route path="/react-payments/add" element={<CardAppPage />}></Route>
-            <Route path="/react-payments/confirm" element={<ConfirmationPage />}></Route>
+            <Route path="/react-payments/confirm/:id" element={<ConfirmationPage />}></Route>
           </Routes>
         </BrowserRouter>
       </CardDispatch.Provider>

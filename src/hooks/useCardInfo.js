@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { checkFullFilled } from 'page/cardAdd/validator';
 import { isObject } from 'utils';
+import { v4 as uuid } from 'uuid';
 
 const useCardInfo = (initialCardInfo) => {
-  const [cardInfo, setCardInfo] = useState(initialCardInfo);
+  const [cardInfo, setCardInfo] = useState({ ...initialCardInfo, id: uuid() });
   const [isFullFilled, setIsFullFilled] = useState(false);
 
   useEffect(() => {

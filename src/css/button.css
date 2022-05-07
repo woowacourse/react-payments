@@ -1,6 +1,5 @@
 .next-button {
   position: absolute;
-  right: 0;
-
-  margin-right: 20px;
+  right: 20px;
+  bottom: 20px;
 }

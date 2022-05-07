@@ -131,7 +131,7 @@ const CardAppPage = () => {
       />
       {isFullFilled && (
         <Link
-          to="/react-payments/confirm"
+          to={`/react-payments/confirm/${cardInfo.id}`}
           onClick={() => dispatch({ type: 'CREATE_CARD', card: cardInfo })}
         >
           <Button theme={theme} className="next-button">
