@@ -23,7 +23,7 @@ const Container = styled.div`
     justify-content: space-between;
 
     & > div {
-      padding: 1.5rem 0;
+      padding: 1rem;
       height: 100%;
 
       &.fill {
@@ -47,7 +47,7 @@ const Container = styled.div`
   }
 
   ${responsive.notMobile(css`
-    width: 700px;
+    width: 720px;
     height: unset;
     box-shadow: 0px 0.625rem 1.875rem 1.25rem ${COLORS['black-05']};
 
