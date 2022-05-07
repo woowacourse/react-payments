@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useNavigate } from 'react-router-dom';
@@ -32,7 +32,9 @@ function AddCard() {
     cardCompanyErrorMessage,
   } = useContext(CardStateContext);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isListModalOpen, setIsListModalOpen] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isTipModalOpen, setIsTipModalOpen] = useState(false);
   const [cardData, setCardData] = useState();
 
   const navigate = useNavigate();
@@ -59,9 +61,10 @@ function AddCard() {
 
   const dispatch = useContext(CardDispatchContext);
 
-  const onClickCard = useCallback(() => {
-    dispatch({ type: TYPES.SET_LIST_MODAL_FLAG, flag: true });
-  }, []);
+  const onClickCard = () => {
+    setIsListModalOpen(true);
+  };
+  // dispatch({ type: TYPES.SET_LIST_MODAL_FLAG, flag: true });
 
   const onClickNextButton = () => {
     const newCardData = {
@@ -74,11 +77,11 @@ function AddCard() {
       cardPassword,
     };
     setCardData(newCardData);
-    setIsModalOpen(true);
+    setIsConfirmModalOpen(true);
   };
 
   const onCloseModal = () => {
-    setIsModalOpen(false);
+    setIsConfirmModalOpen(false);
   };
 
   const onSubmitForm = (cardData) => (event, nickname) => {
@@ -99,6 +102,7 @@ function AddCard() {
       <PageTitle hasPrevButton={true} onClickPrev={onClickPrev}>
         카드 추가
       </PageTitle>
+
       <ClickCardBox onClick={onClickCard}>
         <Card
           cardNumber={cardNumber}
@@ -109,6 +113,7 @@ function AddCard() {
           isSmall={true}
         />
       </ClickCardBox>
+
       <ErrorMessage
         value={cardCompanyIndex}
         validate={validator.checkCardCompany}
@@ -116,25 +121,28 @@ function AddCard() {
       >
         {cardCompanyErrorMessage}
       </ErrorMessage>
-      <CardNumber color={cardColor} />
+
+      <CardNumber color={cardColor} setIsListModalOpen={setIsListModalOpen} />
       <CardExpiration color={cardColor} />
       <CardOwner color={cardColor} />
-      <CardCvc color={cardColor} />
+      <CardCvc color={cardColor} onClickTooltip={() => setIsTipModalOpen(true)} />
       <CardPassword color={cardColor} />
+
       <NextButton onClick={onClickNextButton} disabled={!isAllInputValidated()} color={cardColor}>
         다음
       </NextButton>
-      <CardListModal />
-      <TipModal />
-      {isModalOpen && (
-        <Container>
-          <CardConfirmModal
-            cardData={cardData}
-            onCloseModal={onCloseModal}
-            onSubmitForm={onSubmitForm}
-          />
-        </Container>
+
+      {isListModalOpen && <CardListModal onCloseModal={() => setIsListModalOpen(false)} />}
+
+      {isConfirmModalOpen && (
+        <CardConfirmModal
+          cardData={cardData}
+          onCloseModal={onCloseModal}
+          onSubmitForm={onSubmitForm}
+        />
       )}
+
+      {isTipModalOpen && <TipModal onCloseModal={() => setIsTipModalOpen(false)} />}
     </Container>
   );
 }

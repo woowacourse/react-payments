@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import { useState } from 'react';
 import PageTitle from 'components/PageTitle';
 import Card from 'components/Card';
@@ -6,8 +5,7 @@ import Form from 'components/Form';
 import NextButton from 'components/NextButton';
 import FlexColumnBox from 'components/FlexColumnBox';
 import styled from 'styled-components';
-import Modal from 'components/Modal';
-import Backdrop from 'components/Backdrop';
+import ModalOverlay from 'common/Modal/ModalOverlay';
 
 export default function CardConfirmModal({ cardData, onCloseModal, onSubmitForm }) {
   const [nickname, setNickname] = useState(cardData.cardNickname ?? '');
@@ -17,39 +15,33 @@ export default function CardConfirmModal({ cardData, onCloseModal, onSubmitForm 
   };
 
   return (
-    <>
-      {ReactDOM.createPortal(<Backdrop />, document.getElementById('backdrop-root'))}
-      {ReactDOM.createPortal(
-        <Modal>
-          <PageTitle hasPrevButton={true} onClickPrev={onCloseModal}>
-            카드 별칭
-          </PageTitle>
-          <FlexColumnBox>
-            <Styled.TitleText>카드 별칭을 입력해주세요.</Styled.TitleText>
-            <Card
-              cardName={cardData.cardName}
-              cardColor={cardData.cardColor}
-              cardNumber={cardData.cardNumber}
-              cardExpiration={cardData.cardExpiration}
-              cardOwner={cardData.cardOwner}
-              isSmall={false}
-            />
-            <Form onSubmitForm={onSubmitForm(cardData)} nickname={nickname}>
-              <Styled.UnderlineInput
-                onChange={onChangeNicknameInput}
-                placeholder="카드 별칭"
-                type="text"
-                value={nickname}
-              />
-              <NextButton disabled={false} color={cardData.cardColor}>
-                확인
-              </NextButton>
-            </Form>
-          </FlexColumnBox>
-        </Modal>,
-        document.getElementById('overlay-root'),
-      )}
-    </>
+    <ModalOverlay>
+      <PageTitle hasPrevButton={true} onClickPrev={onCloseModal}>
+        카드 별칭
+      </PageTitle>
+      <FlexColumnBox>
+        <Styled.TitleText>카드 별칭을 입력해주세요.</Styled.TitleText>
+        <Card
+          cardName={cardData.cardName}
+          cardColor={cardData.cardColor}
+          cardNumber={cardData.cardNumber}
+          cardExpiration={cardData.cardExpiration}
+          cardOwner={cardData.cardOwner}
+          isSmall={false}
+        />
+        <Form onSubmitForm={onSubmitForm(cardData)} nickname={nickname}>
+          <Styled.UnderlineInput
+            onChange={onChangeNicknameInput}
+            placeholder="카드 별칭"
+            type="text"
+            value={nickname}
+          />
+          <NextButton disabled={false} color={cardData.cardColor}>
+            확인
+          </NextButton>
+        </Form>
+      </FlexColumnBox>
+    </ModalOverlay>
   );
 }
 

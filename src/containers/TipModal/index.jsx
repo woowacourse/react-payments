@@ -1,15 +1,10 @@
-import { useContext } from 'react';
-import ToastModal from 'components/ToastModal/ToastModal';
 import cvcImage from 'assets/jpg/cvc.jpg';
-import { CardStateContext } from 'store/card/CardContext';
-import { TYPES } from 'store/card/types';
+import ModalToast from 'common/Modal/ModalToast';
 
-export default function TipModal() {
-  const { tipModalFlag } = useContext(CardStateContext);
-
+export default function TipModal({ onCloseModal }) {
   return (
-    <ToastModal type={TYPES.SET_TIP_MODAL_FLAG} show={tipModalFlag}>
+    <ModalToast onCloseModal={onCloseModal}>
       <img alt="cvc 설명 이미지" src={cvcImage} />
-    </ToastModal>
+    </ModalToast>
   );
 }

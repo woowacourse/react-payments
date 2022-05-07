@@ -20,11 +20,11 @@ function CardList() {
   const { cards } = useContext(CardStateContext);
   const dispatch = useContext(CardDispatchContext);
   const [modalCardData, setModalCardData] = useState();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
   const onClickCard = (cardData) => {
     setModalCardData(cardData);
-    setIsModalOpen(true);
+    setIsConfirmModalOpen(true);
   };
 
   const onClickAnotherCard = () => {
@@ -32,7 +32,7 @@ function CardList() {
   };
 
   const onCloseModal = () => {
-    setIsModalOpen(false);
+    setIsConfirmModalOpen(false);
   };
 
   const onSubmitForm = (cardData) => (event, nickname) => {
@@ -82,14 +82,12 @@ function CardList() {
           <AnotherCard />
         </PointerBox>
       </FlexColumnBox>
-      {isModalOpen && (
-        <Container>
-          <CardConfirmModal
-            cardData={modalCardData}
-            onCloseModal={onCloseModal}
-            onSubmitForm={onSubmitForm}
-          />
-        </Container>
+      {isConfirmModalOpen && (
+        <CardConfirmModal
+          cardData={modalCardData}
+          onCloseModal={onCloseModal}
+          onSubmitForm={onSubmitForm}
+        />
       )}
     </Container>
   );

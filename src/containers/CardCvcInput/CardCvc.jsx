@@ -10,16 +10,12 @@ import InputBox from 'components/InputBox';
 import Tooltip from 'components/Tooltip';
 import { InputBasic } from 'components/Input';
 
-export default function CardCvc() {
+export default function CardCvc({ onClickTooltip }) {
   const { cardCvc, cardCvcErrorMessage, cardCompanyIndex } = useContext(CardStateContext);
   const dispatch = useContext(CardDispatchContext);
 
   const onChangeInput = (e) => {
     dispatch({ type: TYPES.SET_CVC, value: e.target.value });
-  };
-
-  const onClickTip = () => {
-    dispatch({ type: TYPES.SET_TIP_MODAL_FLAG, flag: true });
   };
 
   const cardColor = cardCompanyIndex === -1 ? '#737373' : CARD_COMPANIES[cardCompanyIndex].COLOR;
@@ -40,7 +36,7 @@ export default function CardCvc() {
             id={name}
           />
         </InputContainer>
-        <Tooltip onClick={onClickTip}>?</Tooltip>
+        <Tooltip onClick={onClickTooltip}>?</Tooltip>
       </InputBox>
       <ErrorMessage
         value={cardCvc}

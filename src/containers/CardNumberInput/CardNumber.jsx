@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import InputBox from 'components/InputBox';
 import { InputBasic } from 'components/Input';
 
-export default function CardNumber({ color }) {
+export default function CardNumber({ color, setIsListModalOpen }) {
   const { cardNumber, cardNumberErrorMessage, cardCompanyIndex } = useContext(CardStateContext);
 
   const dispatch = useContext(CardDispatchContext);
@@ -19,7 +19,7 @@ export default function CardNumber({ color }) {
   };
 
   const onFocusInput = () => {
-    cardCompanyIndex === -1 && dispatch({ type: TYPES.SET_LIST_MODAL_FLAG, flag: true });
+    cardCompanyIndex === -1 && setIsListModalOpen(true);
   };
 
   const name = '카드 번호';
