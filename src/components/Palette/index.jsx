@@ -4,17 +4,17 @@ import * as styled from './index.styled';
 import { useCardFormContext, ACTION } from '../../context/card-form-context';
 
 const cardList1 = [
-  { color: 'red', name: '포코 카드' },
-  { color: 'blue', name: '도리 카드' },
-  { color: 'green', name: '호프 카드' },
-  { color: 'purple', name: '공원 카드' },
+  { color: 'red', name: '롯데카드' },
+  { color: 'blue', name: '삼성카드' },
+  { color: 'green', name: 'NH농협카드' },
+  { color: 'purple', name: '신한카드' },
 ];
 
 const cardList2 = [
-  { color: 'mint', name: '콜라 카드' },
-  { color: 'pink', name: '블링 카드' },
-  { color: 'orange', name: '태태 카드' },
-  { color: 'yellow', name: '샐리 카드' },
+  { color: 'mint', name: '현대카드' },
+  { color: 'pink', name: '하나카드' },
+  { color: 'orange', name: 'BC카드' },
+  { color: 'yellow', name: 'KB국민카드' },
 ];
 
 const Palette = ({ closeModal }) => {
