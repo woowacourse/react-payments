@@ -108,14 +108,16 @@ function CardEditor() {
         <CardPasswordField cardPassword={cardPassword} onChange={onChangeCardState} />
 
         <div className="button-container right">
-          <Button
-            type="primary"
-            size="large"
-            isDisabled={!isComplete}
-            onClick={handleCardNameInputModalOpen}
-          >
-            다음
-          </Button>
+          <ToolTip align="left" text="모든 입력란을 입력해주세요." isDisabled={isComplete}>
+            <Button
+              type="primary"
+              size="large"
+              isDisabled={!isComplete}
+              onClick={handleCardNameInputModalOpen}
+            >
+              다음
+            </Button>
+          </ToolTip>
         </div>
 
         <CompanyModal>

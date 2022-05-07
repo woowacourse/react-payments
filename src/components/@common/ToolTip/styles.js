@@ -70,6 +70,7 @@ const ALIGN_TRANSFORM = {
 
 const Container = styled.div`
   position: relative;
+  display: inline;
   overflow: visible;
 
   > .tool-tip-text {
@@ -85,6 +86,12 @@ const Container = styled.div`
 
     opacity: 0;
     transition: opacity 0.3s ease;
+
+    ${({ isDisabled }) =>
+      isDisabled &&
+      css`
+        display: none;
+      `}
 
     &::after {
       content: '';
