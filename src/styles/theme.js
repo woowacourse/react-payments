@@ -30,6 +30,7 @@ const COLORS = {
   athensGray: '#ECEBF1',
   concrete: '#F3F3F3',
   white: '#fff',
+  'white-80': 'rgba(255,255,255,.8)',
 };
 
 const GRADATION = {
