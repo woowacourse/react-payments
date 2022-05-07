@@ -5,7 +5,14 @@ const cardListReducer = (state, action) => {
   switch (action.type) {
     case "CREATE": {
       newState = [...state, action.data];
-      console.log("newState", newState);
+      break;
+    }
+    case "EDIT_NICKNAME": {
+      newState = state.map((data) =>
+        data.cardId === action.targetId
+          ? { ...data, nickname: action.newNickname }
+          : data
+      );
       break;
     }
     default: {
@@ -44,9 +51,13 @@ function CardListProvider({ children }) {
     });
   };
 
+  const onEditNickname = (targetId, newNickname) => {
+    dispatch({ type: "EDIT_NICKNAME", targetId, newNickname });
+  };
+
   return (
     <CardListContext.Provider value={cardListData}>
-      <CardDispatchContext.Provider value={{ onCreate }}>
+      <CardDispatchContext.Provider value={{ onCreate, onEditNickname }}>
         {children}
       </CardDispatchContext.Provider>
     </CardListContext.Provider>

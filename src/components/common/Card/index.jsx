@@ -19,6 +19,7 @@ function Card({
   dueMonth,
   dueYear,
   onClick,
+  nickname,
 }) {
   return (
     <>
@@ -47,6 +48,7 @@ function Card({
           </CardBottomInfo>
         </CardBottom>
       </CardWrapper>
+      {nickname && size === "small" && <div>{nickname}</div>}
     </>
   );
 }
@@ -74,6 +76,7 @@ Card.propTypes = {
   dueMonth: PropTypes.string,
   dueYear: PropTypes.string,
   onClick: PropTypes.func,
+  nickname: PropTypes.string,
 };
 
 export default Card;

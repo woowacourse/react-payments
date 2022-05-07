@@ -13,7 +13,7 @@ import {
 function Home() {
   const navigate = useNavigate();
   const cardList = useContext(CardListContext);
-
+  console.log("홈 cardList", cardList);
   return (
     <PageWrapper>
       <Header headText="보유 카드" />
@@ -31,6 +31,7 @@ function Home() {
                 owner={data.owner}
                 dueMonth={data.dueDate.month}
                 dueYear={data.dueDate.year}
+                nickname={data.nickname}
               />
             );
           })}

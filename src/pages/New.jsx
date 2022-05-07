@@ -77,8 +77,6 @@ function New() {
 
     navigate(`/finish/${cardId.current}`, { replace: true });
     cardId.current += 1;
-    console.log(cardId);
-    console.log(cardId.current);
   };
 
   return (

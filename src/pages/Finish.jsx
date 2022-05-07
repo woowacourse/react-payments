@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { CardListContext } from "context/CardListProvider";
+import { CardListContext, CardDispatchContext } from "context/CardListProvider";
 import Card from "components/common/Card";
 import Button from "components/common/Button";
 import {
@@ -15,6 +15,18 @@ function Finish() {
   const navigate = useNavigate();
   const { id } = useParams();
   const cardList = useContext(CardListContext);
+  const { onEditNickname } = useContext(CardDispatchContext);
+
+  const [nickname, setNickname] = useState("");
+
+  const handleChangeNickname = (e) => {
+    setNickname(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    onEditNickname(Number(id), nickname);
+    navigate("/", { replace: true });
+  };
 
   const myCard = cardList.find((card) => Number(card.cardId) === Number(id));
 
@@ -35,9 +47,15 @@ function Finish() {
           dueYear={myCard.dueDate.year}
         />
       </CardWrapper>
-      <NicknameInput type="text" name="nickname" color="black" />
+      <NicknameInput
+        type="text"
+        name="nickname"
+        color="black"
+        value={nickname}
+        onChange={handleChangeNickname}
+      />
       <FooterWrapper>
-        <Button onClick={() => navigate("/", { replace: true })}>확인</Button>
+        <Button onClick={handleSubmit}>확인</Button>
       </FooterWrapper>
     </FinishPageWrapper>
   );
