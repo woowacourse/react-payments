@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import InfoLabel from '../../Atoms/InfoLabel';
-import useSecurityNumberInput from '../../../hooks/useSecurityNumberInput';
+import useSecurityNumberInput from '../../../hooks/Input/useSecurityNumberInput';
 
 const Container = styled.div`
   display: flex;

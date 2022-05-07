@@ -5,7 +5,7 @@ import CardOwnerInput from '../../Modules/CardOwnerInput';
 import SecurityNumberInput from '../../Modules/SecurityNumberInput';
 import PasswordInput from '../../Modules/PasswordInput';
 import SubmitButton from '../../Atoms/SubmitButton';
-import useCardAddForm from '../../../hooks/useCardAddForm';
+import useCardAddForm from '../../../hooks/Form/useCardAddForm';
 
 const FormContainer = styled.form`
   display: flex;

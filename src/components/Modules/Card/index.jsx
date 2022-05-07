@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import useCard from '../../../hooks/useCard';
+import useCard from '../../../hooks/Card/useCard';
 
 const CardContainer = styled.div`
   display: flex;

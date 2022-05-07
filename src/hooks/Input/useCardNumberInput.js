@@ -1,7 +1,7 @@
 import validator from 'validation';
 import { useContext, useEffect } from 'react';
-import useFocus from 'hooks/useFocus';
-import useSomeInput from 'hooks/useSomeInput';
+import useFocus from 'hooks/Input/useFocus';
+import useSomeInput from 'hooks/Input/useSomeInput';
 import { COUNT } from 'constant';
 import { numberRegex } from 'constant/regularExpression';
 import { CardContext } from 'context/CardContext';

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
-import useExpiredDateInput from '../../../hooks/useExpiredDateInput';
+import useExpiredDateInput from '../../../hooks/Input/useExpiredDateInput';
 import { DATE_INPUT_PLACEHOLDER } from '../../../constant';
 import { EXPIRED_DATE_INPUT_NAMES } from '../../../constant/inputNames';
 

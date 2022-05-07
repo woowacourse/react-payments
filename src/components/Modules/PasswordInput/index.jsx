@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
-import usePasswordInput from '../../../hooks/usePasswordInput';
+import usePasswordInput from '../../../hooks/Input/usePasswordInput';
 import { COUNT } from '../../../constant';
 import { PASSWORD_INPUT_NAMES } from '../../../constant/inputNames';
 

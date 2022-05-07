@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react';
 import { numberRegex } from 'constant/regularExpression';
 import validator from 'validation';
-import useFocus from 'hooks/useFocus';
-import useSomeInput from 'hooks/useSomeInput';
+import useFocus from 'hooks/Input/useFocus';
+import useSomeInput from 'hooks/Input/useSomeInput';
 import { CardContext } from 'context/CardContext';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import { COUNT } from '../../../constant';
-import useCardOwnerInput from '../../../hooks/useCardOwnerInput';
+import useCardOwnerInput from '../../../hooks/Input/useCardOwnerInput';
 import { EXPIRED_DATE_INPUT_NAMES } from '../../../constant/inputNames';
 
 const CountChecker = styled.span`

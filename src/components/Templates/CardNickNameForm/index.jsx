@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import SubmitButton from '../../Atoms/SubmitButton';
 import NickNameInput from '../../Modules/NickNameInput';
-import useCardNickNameForm from '../../../hooks/useCardNickNameForm';
+import useCardNickNameForm from '../../../hooks/Form/useCardNickNameForm';
 
 const Form = styled.form`
   display: flex;

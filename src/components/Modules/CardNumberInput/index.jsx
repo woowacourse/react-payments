@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
-import useCardNumberInput from '../../../hooks/useCardNumberInput';
+import useCardNumberInput from '../../../hooks/Input/useCardNumberInput';
 import { CARD_NUMBER_INPUT_NAMES } from '../../../constant/inputNames';
 
 const InputContainer = styled.div`

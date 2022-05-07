@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import useNickNameInput from '../../../hooks/useNickNameInput';
+import useNickNameInput from '../../../hooks/Input/useNickNameInput';
 import Input from '../../Atoms/Input';
 
 const InputWrapper = styled.div`
