@@ -36,7 +36,7 @@ const Label = styled.label`
 const Input = styled.input`
   background-color: #ecebf1;
   height: 45px;
-  min-width: 50px;
+  min-width: 32px;
   width: 100%;
   text-align: center;
   outline-offset: 2px;

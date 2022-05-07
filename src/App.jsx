@@ -26,8 +26,10 @@ function App() {
 
   return (
     <div className="app" ref={targetRef}>
-      <Header title={'카드추가'} />
-      {content}
+      <div className="content-container">
+        <Header title={'카드추가'} />
+        {content}
+      </div>
     </div>
   );
 }

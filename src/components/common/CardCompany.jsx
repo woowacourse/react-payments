@@ -20,8 +20,8 @@ const CompanyColorCircle = styled.div`
   }
 `;
 const CompanyName = styled.p`
-  margin: 0;
-  padding: 8px;
+  margin: 0 auto;
+  padding: 8px 0;
   color: ${LABEL_PRIMARY_COLOR};
 `;
 

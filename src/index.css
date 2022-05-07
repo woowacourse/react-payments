@@ -24,3 +24,9 @@ code {
   background-color: #fff;
   margin: auto;
 }
+
+.content-container {
+  width: 80%;
+  height: 100vh;
+  margin: auto;
+}
