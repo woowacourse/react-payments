@@ -66,6 +66,10 @@ const Container = styled.div`
     ${({ companyId }) =>
       !companyId &&
       css`
+        & > * {
+          display: none;
+        }
+
         &::after {
           content: '이곳을 눌러 카드사를 선택해주세요';
 
