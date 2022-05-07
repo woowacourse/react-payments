@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import CardContext from 'contexts';
+import PropTypes from 'prop-types';
 
 const formatCardNumber = (cardNumber) => {
   const newCardNumber = [...cardNumber].map((unit) => (unit === '' ? '0000' : unit));
@@ -14,24 +13,22 @@ const formatCardNumber = (cardNumber) => {
   return newCardNumber.join('-');
 };
 
-function Card() {
-  // eslint-disable-next-line operator-linebreak
-  const { isComplete, companyName, cardNumber, userName, expireMonth, expireYear } =
-    useContext(CardContext);
+function Card({ size, companyName, cardNumber, userName, expireMonth, expireYear }) {
+  const cardTextStyle = size === 'small' ? 'card-text' : 'card-text__big';
 
   return (
     <div className="card-box">
-      <div className={`small-card${isComplete ? '' : ' empty'}`}>
+      <div className={`${size}-card`}>
         <div className="card-top">
-          <span className="card-text">{companyName}</span>
+          <span className={cardTextStyle}>{companyName}</span>
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">{formatCardNumber(cardNumber)}</span>
+            <span className={cardTextStyle}>{formatCardNumber(cardNumber)}</span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text user-name">{userName}</span>
-            <span className="card-text expire-date">
+            <span className={`${cardTextStyle} user-name`}>{userName}</span>
+            <span className={`${cardTextStyle} expire-date`}>
               {expireMonth && expireYear && `${expireMonth} / ${expireYear}`}
             </span>
           </div>
@@ -40,5 +37,23 @@ function Card() {
     </div>
   );
 }
+
+Card.defaultProps = {
+  size: 'small',
+  companyName: '티거 카드 🐯',
+  cardNumber: ['', '', '', ''],
+  userName: '',
+  expireMonth: '',
+  expireYear: '',
+};
+
+Card.propTypes = {
+  size: PropTypes.string,
+  companyName: PropTypes.string,
+  cardNumber: PropTypes.arrayOf(PropTypes.string),
+  userName: PropTypes.string,
+  expireMonth: PropTypes.string,
+  expireYear: PropTypes.string,
+};
 
 export default Card;
