@@ -130,7 +130,6 @@ const reducer = (state, action) => {
       const updatedCards = state.cards.map((cardData) => {
         if (cardData.id === action.id) {
           cardData.cardNickname = action.nickname;
-          console.log('@@@@@', cardData);
         }
         return cardData;
       });

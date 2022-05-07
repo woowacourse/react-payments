@@ -17,10 +17,10 @@ export default function CardConfirmModal({ cardData, onCloseModal, onSubmitForm 
   return (
     <ModalOverlay>
       <PageTitle hasPrevButton={true} onClickPrev={onCloseModal}>
-        카드 별칭
+        카드명 수정
       </PageTitle>
       <FlexColumnBox>
-        <Styled.TitleText>카드 별칭을 입력해주세요.</Styled.TitleText>
+        <Styled.TitleText>카드명을 입력해주세요.</Styled.TitleText>
         <Card
           cardName={cardData.cardName}
           cardColor={cardData.cardColor}
@@ -32,9 +32,10 @@ export default function CardConfirmModal({ cardData, onCloseModal, onSubmitForm 
         <Form onSubmitForm={onSubmitForm(cardData)} nickname={nickname}>
           <Styled.UnderlineInput
             onChange={onChangeNicknameInput}
-            placeholder="카드 별칭"
+            placeholder="카드명"
             type="text"
             value={nickname}
+            autoFocus={true}
           />
           <NextButton disabled={false} color={cardData.cardColor}>
             확인
@@ -67,6 +68,10 @@ const Styled = {
     &:focus {
       border-bottom: 2px solid #555;
       outline: none;
+    }
+
+    &::placeholder {
+      color: #c5c3c3;
     }
   `,
 };
