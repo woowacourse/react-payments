@@ -106,7 +106,7 @@ const reducer = (state, action) => {
       };
     }
 
-    case TYPES.SUBMIT_CARD: {
+    case TYPES.ADD_CARD: {
       return {
         ...state,
         cards: [...state.cards, action.newCardData],
@@ -123,6 +123,26 @@ const reducer = (state, action) => {
       return {
         ...state,
         cards: action.cards,
+      };
+    }
+
+    case TYPES.UPDATE_NICKNAME: {
+      state.cards.forEach((cardData) => {
+        if (cardData.id === action.id) {
+          cardData.cardNickname = action.nickname;
+          console.log('@@@@@', cardData);
+        }
+      });
+
+      return {
+        ...state,
+        cards: state.cards,
+        cardNumber: ['', '', '', ''],
+        cardExpiration: ['', ''],
+        cardOwner: '',
+        cardCvc: '',
+        cardPassword: ['', ''],
+        cardCompanyIndex: -1,
       };
     }
 

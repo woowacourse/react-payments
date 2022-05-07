@@ -18,20 +18,31 @@ function CardList() {
   const navigate = useNavigate();
   const { cards } = useContext(CardStateContext);
   const dispatch = useContext(CardDispatchContext);
-  const [cardData, setCardData] = useState();
+  const [modalCardData, setModalCardData] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const onClickPrev = () => {
-    navigate('/add-card');
+  const onClickCard = (cardData) => {
+    console.log('onClickCard', cardData);
+    setModalCardData(cardData);
+    setIsModalOpen(true);
   };
 
-  const onClickCard = (cardData) => {
-    setCardData(cardData);
-    setIsModalOpen(true);
+  const onClickAnotherCard = () => {
+    navigate('/add-card');
   };
 
   const onCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const onSubmitForm = (cardData) => (event, nickname) => {
+    event.preventDefault();
+
+    const id = cardData.id;
+    dispatch({ type: TYPES.UPDATE_NICKNAME, nickname, id });
+
+    onCloseModal();
+    navigate('/card-list');
   };
 
   return (
@@ -60,13 +71,17 @@ function CardList() {
             </div>
           )}
         </DroppableArea>
-        <PointerBox onClick={onClickPrev}>
+        <PointerBox onClick={onClickAnotherCard}>
           <AnotherCard />
         </PointerBox>
       </FlexColumnBox>
       {isModalOpen && (
         <Container>
-          <CardConfirmModal cardData={cardData} onCloseModal={onCloseModal} />
+          <CardConfirmModal
+            cardData={modalCardData}
+            onCloseModal={onCloseModal}
+            onSubmitForm={onSubmitForm}
+          />
         </Container>
       )}
     </Container>

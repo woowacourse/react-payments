@@ -1,4 +1,6 @@
 import React, { useContext, useState, useCallback } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
 import { useNavigate } from 'react-router-dom';
 import validator from 'lib/validations';
 import { CARD_COMPANIES } from 'lib/constants';
@@ -79,6 +81,19 @@ function AddCard() {
     setIsModalOpen(false);
   };
 
+  const onSubmitForm = (cardData) => (event, nickname) => {
+    event.preventDefault();
+    const newCardData = {
+      ...cardData,
+      cardNickname: nickname,
+      id: uuidv4(),
+    };
+    dispatch({ type: TYPES.ADD_CARD, newCardData });
+
+    onCloseModal();
+    navigate('/card-list');
+  };
+
   return (
     <Container>
       <PageTitle hasPrevButton={true} onClickPrev={onClickPrev}>
@@ -113,7 +128,11 @@ function AddCard() {
       <TipModal />
       {isModalOpen && (
         <Container>
-          <CardConfirmModal cardData={cardData} onCloseModal={onCloseModal} />
+          <CardConfirmModal
+            cardData={cardData}
+            onCloseModal={onCloseModal}
+            onSubmitForm={onSubmitForm}
+          />
         </Container>
       )}
     </Container>

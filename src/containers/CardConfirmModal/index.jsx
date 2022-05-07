@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import PageTitle from 'components/PageTitle';
 import Card from 'components/Card';
 import Form from 'components/Form';
@@ -8,31 +8,12 @@ import FlexColumnBox from 'components/FlexColumnBox';
 import styled from 'styled-components';
 import Modal from 'components/Modal';
 import Backdrop from 'components/Backdrop';
-import { TYPES } from 'store/card/types';
-import { CardDispatchContext } from 'store/card/CardContext';
-import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from 'react-router-dom';
 
-export default function CardConfirmModal({ cardData, onCloseModal }) {
-  const [nickname, setNickname] = useState('');
-  const dispatch = useContext(CardDispatchContext);
-  const navigate = useNavigate();
+export default function CardConfirmModal({ cardData, onCloseModal, onSubmitForm }) {
+  const [nickname, setNickname] = useState(cardData.cardNickname ?? '');
 
   const onChangeNicknameInput = (e) => {
     setNickname(e.target.value);
-  };
-
-  const onSubmitForm = (event) => {
-    event.preventDefault();
-    const newCardData = {
-      ...cardData,
-      cardNickname: nickname,
-      id: uuidv4(),
-    };
-    dispatch({ type: TYPES.SUBMIT_CARD, newCardData });
-
-    onCloseModal();
-    navigate('/card-list');
   };
 
   return (
@@ -53,14 +34,15 @@ export default function CardConfirmModal({ cardData, onCloseModal }) {
               cardOwner={cardData.cardOwner}
               isSmall={false}
             />
-            <Form onSubmitForm={onSubmitForm} payload={nickname}>
+            <Form onSubmitForm={onSubmitForm(cardData)} nickname={nickname}>
               <Styled.UnderlineInput
                 onChange={onChangeNicknameInput}
                 placeholder="카드 별칭"
                 type="text"
+                value={nickname}
               />
               <NextButton disabled={false} color={cardData.cardColor}>
-                등록
+                확인
               </NextButton>
             </Form>
           </FlexColumnBox>
