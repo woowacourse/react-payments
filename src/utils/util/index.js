@@ -9,18 +9,31 @@ export const objectToString = ({ targetObject, separator = ' ', hideStartIndex }
 
 export const { generateNonDuplicatedId } = (function () {
   const history = new Set();
-  function generateId(name) {
-    return `${name}${[...new Array(10)].map(() => Math.floor(Math.random() * 10)).join('')}`;
+  function generateId() {
+    return `${[...new Array(10)].map(() => Math.floor(Math.random() * 10)).join('')}`;
   }
   return {
-    generateNonDuplicatedId(name) {
+    generateNonDuplicatedId() {
       history.forEach(item => console.log(item));
-      let id = generateId(name);
+      let id = generateId();
       while (history.has(id)) {
-        id = generateId(name);
+        id = generateId();
       }
       history.add(id);
       return id;
     },
   };
 })();
+
+export const isJSONArray = str => {
+  try {
+    const data = JSON.parse(str);
+
+    if (!data || !Array.isArray(data)) {
+      throw new Error('error');
+    }
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
