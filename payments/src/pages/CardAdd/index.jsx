@@ -12,6 +12,7 @@ import useModal from "../../hooks/useModal";
 import ConfirmAdd from "../../components/organisms/ConfirmAdd";
 import { useContext } from "react";
 import { CardContext } from "../../context/CardProvider";
+import { Link } from "react-router-dom";
 
 const CardAdd = () => {
   const { cardInfo, validateCardInfo } = useContext(CardContext);
@@ -51,7 +52,9 @@ const CardAdd = () => {
     <>
       <div className="card-add">
         <header>
-          <button>{"<"}</button>
+          <Link to={"/"}>
+            <button>{"<"}</button>
+          </Link>
           <p>카드 추가</p>
         </header>
         <div className="card-add__container">

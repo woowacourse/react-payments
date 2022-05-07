@@ -1,0 +1,41 @@
+.home--container {
+  width: 500px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  header {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    cursor: default;
+  }
+
+  .home--container-card {
+    width: 200px;
+    height: 130px;
+  }
+  .home-container-card-add-btn {
+    width: 220px;
+    height: 150px;
+    padding: 10px;
+    border: none;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  }
+  .labeled {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 9px;
+  }
+  a {
+    text-align: center;
+  }
+}

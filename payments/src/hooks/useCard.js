@@ -38,7 +38,16 @@ const validateArray = [
   validateSecureCode,
   validatePassword,
 ];
-
+const initState = {
+  cardNumber: ["", "", "", ""],
+  expiredDate: ["", ""],
+  ownerName: "",
+  secureCode: "",
+  password: ["", ""],
+  cardName: "",
+  color: "#d2d2d2",
+  nickname: "",
+};
 const updateCard = (state, action) => {
   switch (action.type) {
     case "cardNumber":
@@ -89,23 +98,14 @@ const updateCard = (state, action) => {
         ...state,
         nickname: action.payload.value,
       };
+    case "initialize":
+      return initState;
     default:
       return state;
   }
 };
 
 const useCard = () => {
-  const initState = {
-    cardNumber: ["", "", "", ""],
-    expiredDate: ["", ""],
-    ownerName: "",
-    secureCode: "",
-    password: ["", ""],
-    cardName: "",
-    color: "#d2d2d2",
-    nickname: "",
-  };
-
   const [cardInfo, dispatch] = useReducer(updateCard, initState);
 
   const validateCardInfo = () => {

@@ -3,12 +3,14 @@ import Card from "../../components/common/Card";
 import { Input } from "../../components/common/Input";
 import NextButton from "../../components/common/NextButton";
 import { CardContext } from "../../context/CardProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./index.scss";
+import { CardListContext } from "../../context/CardListProvider";
 
 const SetNickname = () => {
   const { cardInfo, dispatch } = useContext(CardContext);
-
+  const { cardList, setCardList } = useContext(CardListContext);
+  const navigate = useNavigate();
   const handleNickNameChange = (e) => {
     dispatch({
       type: "nickname",
@@ -18,11 +20,19 @@ const SetNickname = () => {
     });
   };
 
+  const addCard = (e) => {
+    e.preventDefault();
+    setCardList(cardList.concat(cardInfo));
+    dispatch({ type: "initialize" });
+    console.log(cardInfo);
+    navigate("/");
+  };
+
   return (
     <div className="nickname--container">
       <h2>카드등록이 완료되었습니다.</h2>
       <Card cardInfo={cardInfo} />
-      <form>
+      <form onSubmit={addCard}>
         <div className="input--container">
           <Input
             placeholder={"nickname"}
@@ -31,7 +41,7 @@ const SetNickname = () => {
           />
         </div>
         <div className="next-button--container">
-          <Link to="/">
+          <Link to="/" onClick={addCard}>
             <NextButton>다음</NextButton>
           </Link>
         </div>
