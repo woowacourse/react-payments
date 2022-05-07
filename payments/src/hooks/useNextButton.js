@@ -62,47 +62,47 @@ const useNextButton = (inputStates, setVisible) => {
   };
 
   const nextButtonClick = (e) => {
+    const formElement = e.currentTarget.parentNode.parentNode;
     try {
       doValidation(inputStates);
     } catch (error) {
-      alert(error.message);
       switch (error.message) {
         case ERROR_MESSAGE.SHORT_CARD_NUMBER:
           inputStates.cardNumber.some((input, idx) => {
             if (input.length !== 4) {
-              e.currentTarget.parentNode[idx].focus();
+              formElement[idx].focus();
               return true;
             }
           });
-          return;
+          throw error;
         case ERROR_MESSAGE.NOT_A_MONTH:
-          e.currentTarget.parentNode[4].focus();
-          return;
+          formElement[4].focus();
+          throw error;
         case ERROR_MESSAGE.NO_EXPIRE_MONTH:
-          e.currentTarget.parentNode[4].focus();
-          return;
+          formElement[4].focus();
+          throw error;
         case ERROR_MESSAGE.OUT_OF_RANGE_YEAR:
-          e.currentTarget.parentNode[5].focus();
-          return;
+          formElement[5].focus();
+          throw error;
         case ERROR_MESSAGE.NO_EXPIRE_YEAR:
-          e.currentTarget.parentNode[5].focus();
-          return;
+          formElement[5].focus();
+          throw error;
         case ERROR_MESSAGE.NO_SECURE_CODE:
-          e.currentTarget.parentNode[7].focus();
-          return;
+          formElement[7].focus();
+          throw error;
         case ERROR_MESSAGE.NO_PASSWORD:
           inputStates.password.some((input, idx) => {
             if (input === '') {
-              e.currentTarget.parentNode[9 + idx].focus();
+              formElement[9 + idx].focus();
               return true;
             }
           });
-          return;
+          throw error;
         case ERROR_MESSAGE.NO_CARD_TYPE:
           setVisible(true);
-          return;
+          throw error;
         default:
-          return;
+          throw error;
       }
     }
   };
