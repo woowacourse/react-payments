@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useCardFormContext } from '../../context/card-form-context';
 import { pareCardFormState } from '../../utils';
-import LinkButton from '../LinkButton';
+import Button from '../Button';
 import Header from '../Header';
 import Card from '../Card';
 
@@ -68,9 +68,13 @@ const AddCardForm = ({ openModal }) => {
       <Password />
       <styled.ButtonContainer>
         {isSubmittAble && (
-          <LinkButton to="/registerCard" state={pareCardFormState(state)}>
+          <Button
+            type="link"
+            to="/registerCard"
+            state={pareCardFormState(state)}
+          >
             다음
-          </LinkButton>
+          </Button>
         )}
       </styled.ButtonContainer>
     </styled.Container>
