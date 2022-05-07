@@ -104,7 +104,10 @@ export default function CardAddPage({ setPage }) {
   };
 
   const setFormValidity = (formElements) => {
-    setValidCardInfo(formElements.every((element) => element.validity.valid));
+    setValidCardInfo(
+      isCompleteCardInfo &&
+        formElements.every((element) => element.validity.valid)
+    );
   };
 
   const CardPreviewElement = (
