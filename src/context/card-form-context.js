@@ -6,21 +6,21 @@ const initialState = {
   secondCardNumber: '',
   thirdCardNumber: '',
   fourthCardNumber: '',
-  isCardNumberNotInput: true,
+  isInitialCardNumber: true,
   isCardNumberError: false,
   ownerName: '',
-  isOwnerNameNotInput: true,
+  isInitialOwnerName: true,
   isOwnerNameError: false,
   secureCode: '',
-  isSecureCodeNotInput: true,
+  isInitialSecureCode: true,
   isSecureCodeError: false,
   expiredMonth: '',
   expiredYear: '',
-  isExpiredDateNotInput: true,
+  isInitialExpiredDate: true,
   isExpiredDateError: false,
   firstPassword: '',
   secondPassword: '',
-  isPasswordNotInput: true,
+  isInitialPassword: true,
   isPasswordError: false,
   cardType: {
     color: 'red',
@@ -59,7 +59,7 @@ const cardFormReducer = (state, action) => {
         secondCardNumber,
         thirdCardNumber,
         fourthCardNumber,
-        isCardNumberNotInput: false,
+        isInitialCardNumber: false,
         isCardNumberError: false,
       };
     }
@@ -70,7 +70,7 @@ const cardFormReducer = (state, action) => {
       return {
         ...state,
         ownerName: action.data.ownerName,
-        isOwnerNameNotInput: false,
+        isInitialOwnerName: false,
         isOwnerNameError: false,
       };
     }
@@ -84,7 +84,7 @@ const cardFormReducer = (state, action) => {
       return {
         ...state,
         secureCode: action.data.secureCode,
-        isSecureCodeNotInput: false,
+        isInitialSecureCode: false,
         isSecureCodeError: false,
       };
     }
@@ -100,7 +100,7 @@ const cardFormReducer = (state, action) => {
         ...state,
         expiredMonth,
         expiredYear,
-        isExpiredDateNotInput: false,
+        isInitialExpiredDate: false,
         isExpiredDateError: false,
       };
     }
@@ -117,7 +117,7 @@ const cardFormReducer = (state, action) => {
         ...state,
         firstPassword,
         secondPassword,
-        isPasswordNotInput: false,
+        isInitialPassword: false,
       };
     }
     case ACTION.PASSWORD_ERROR: {

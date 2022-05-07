@@ -20,13 +20,13 @@ const AddCardForm = ({ openModal }) => {
 
   useEffect(() => {
     const cardNumberError =
-      state.isCardNumberError || state.isCardNumberNotInput;
-    const ownerNameError = state.isOwnerNameError || state.isOwnerNameNotInput;
+      state.isCardNumberError || state.isInitialCardNumber;
+    const ownerNameError = state.isOwnerNameError || state.isInitialOwnerName;
     const secureCodeError =
-      state.isSecureCodeError || state.isSecureCodeNotInput;
+      state.isSecureCodeError || state.isInitialSecureCode;
     const expiredDateError =
-      state.isExpiredDateError || state.isExpiredDateNotInput;
-    const passwordError = state.isPasswordError || state.isPasswordNotInput;
+      state.isExpiredDateError || state.isInitialExpiredDate;
+    const passwordError = state.isPasswordError || state.isInitialPassword;
 
     setSubmittAble(
       !cardNumberError &&
