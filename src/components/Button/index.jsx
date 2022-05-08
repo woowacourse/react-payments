@@ -2,9 +2,9 @@ import React from 'react';
 
 import { ButtonWrapperStyled, ButtonStyled } from './style';
 
-const Button = ({ color, disabled, children }) => {
+const Button = ({ marginTop, color, disabled, children }) => {
   return (
-    <ButtonWrapperStyled>
+    <ButtonWrapperStyled marginTop={marginTop}>
       <ButtonStyled type='submit' color={color} disabled={disabled}>
         {children}
       </ButtonStyled>

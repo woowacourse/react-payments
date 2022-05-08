@@ -13,6 +13,8 @@ import UPDATE_CARD_ALIAS from './action';
 
 import { noop } from '../../utils';
 
+import { isEmpty } from '../../utils';
+
 import { CARD_SIZE_UNIT } from '../../constants';
 
 const AliasModal = ({ visible, afterClick, children }) => {
@@ -24,7 +26,7 @@ const AliasModal = ({ visible, afterClick, children }) => {
   }, []);
 
   const onClickButton = useCallback(() => {
-    dispatch({ type: UPDATE_CARD_ALIAS, cardId: children.cardId, alias });
+    dispatch({ type: UPDATE_CARD_ALIAS, cardId: children[5], alias });
     afterClick();
   });
 
@@ -44,7 +46,7 @@ const AliasModal = ({ visible, afterClick, children }) => {
       <FlexCenter>
         <InputStyled value={alias} onChange={onChangeInput} />
       </FlexCenter>
-      <Button onClick={onClickButton}>확인</Button>
+      <Button marginTop='20px' disabled={isEmpty(alias)} color={children[4]} onClick={onClickButton}>확인</Button>
     </WrapperStyled>
   );
 };
