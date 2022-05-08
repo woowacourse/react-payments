@@ -8,7 +8,7 @@ import useModal from 'hooks/useModal';
 import Button from 'components/@common/Button';
 import { Card } from 'components';
 
-import { PAGE_LIST } from 'constants/';
+import { CARD_EDITOR_MODE, PAGE_LIST } from 'constants/';
 import { CardWallet, ButtonAddCard } from './styles';
 
 function CardList() {
@@ -28,6 +28,11 @@ function CardList() {
   const onClickCard = (index) => {
     setCardFocus(index);
     handleEditModalOpen();
+  };
+
+  const onClickAddButton = () => {
+    handleChangeEditIndex(CARD_EDITOR_MODE.NEW);
+    setPageLocation(PAGE_LIST.CARD_EDITOR);
   };
 
   const onClickEditButton = () => {
@@ -58,7 +63,7 @@ function CardList() {
       </div>
 
       <div className="layout-main-container bottom">
-        <ButtonAddCard onClick={() => setPageLocation(PAGE_LIST.CARD_EDITOR)}>
+        <ButtonAddCard onClick={onClickAddButton}>
           <div className="icon">➕</div>
           <p className="text">새로운 카드 추가</p>
         </ButtonAddCard>
