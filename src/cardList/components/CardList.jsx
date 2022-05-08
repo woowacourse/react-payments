@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Card from '../../addCard/components/Card';
 
@@ -38,5 +39,23 @@ function CardList({ cardList }) {
     </>
   );
 }
+
+CardList.propTypes = {
+  cardList: PropTypes.arrayOf({
+    card: PropTypes.shape({
+      firstCardNumber: PropTypes.string,
+      secondCardNumber: PropTypes.string,
+      thirdCardNumber: PropTypes.string,
+      fourthCardNumber: PropTypes.string,
+      expireMonth: PropTypes.string,
+      expireYear: PropTypes.string,
+      ownerName: PropTypes.string,
+      securityCode: PropTypes.string,
+      firstPassword: PropTypes.string,
+      secondPassword: PropTypes.string,
+    }),
+    nickName: PropTypes.string,
+  }).isRequired,
+};
 
 export default CardList;
