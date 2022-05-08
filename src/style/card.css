@@ -180,3 +180,7 @@ li:nth-child(1) {
 .card-add-link {
   padding: 50px 100px;
 }
+.link {
+  text-decoration: none;
+  color: black;
+}

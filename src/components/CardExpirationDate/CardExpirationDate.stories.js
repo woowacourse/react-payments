@@ -1,25 +1,16 @@
 import CardExpirationDate from './CardExpirationDate';
-import { useState } from 'react';
+import { MemoryRouter } from 'react-router-dom';
 
 export default {
   title: 'CardAddPage/CardExpirationDate',
   component: CardExpirationDate,
+  decorators: [
+    (CardExpirationDate) => (
+      <MemoryRouter>
+        <CardExpirationDate />
+      </MemoryRouter>
+    ),
+  ],
 };
 
-const Template = (args) => {
-  const [cardExpirationDate, setCardExpirationDate] = useState(args.cardExpirationDate);
-  return (
-    <CardExpirationDate
-      cardExpirationDate={cardExpirationDate}
-      setCardExpirationDate={setCardExpirationDate}
-    />
-  );
-};
-
-export const CardExpirationDateInput = Template.bind({});
-CardExpirationDateInput.args = {
-  cardExpirationDate: {
-    month: '',
-    year: '',
-  },
-};
+export const CardExpirationDateInput = () => <CardExpirationDate />;

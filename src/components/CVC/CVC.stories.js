@@ -1,17 +1,16 @@
 import CVC from './CVC';
-import { useState } from 'react';
+import { MemoryRouter } from 'react-router-dom';
 
 export default {
   title: 'CardAddPage/CVC',
   component: CVC,
+  decorators: [
+    (CVC) => (
+      <MemoryRouter>
+        <CVC />
+      </MemoryRouter>
+    ),
+  ],
 };
 
-const Template = (args) => {
-  const [cvc, setCVC] = useState(args.cvc);
-  return <CVC cvc={cvc} setCVC={setCVC} />;
-};
-
-export const CVCInput = Template.bind({});
-CVCInput.args = {
-  cvc: '',
-};
+export const CVCInput = () => <CVC />;

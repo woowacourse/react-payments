@@ -1,17 +1,16 @@
+import { MemoryRouter } from 'react-router-dom';
 import CardOwner from './CardOwner';
-import { useState } from 'react';
 
 export default {
   title: 'CardAddPage/CardOwner',
   component: CardOwner,
+  decorators: [
+    (CardOwner) => (
+      <MemoryRouter>
+        <CardOwner />
+      </MemoryRouter>
+    ),
+  ],
 };
 
-const Template = (args) => {
-  const [cardOwner, setOwner] = useState(args.cardOwner);
-  return <CardOwner cardOwner={cardOwner} setOwner={setOwner} />;
-};
-
-export const CardOwnerInput = Template.bind({});
-CardOwnerInput.args = {
-  cardOwner: '',
-};
+export const CardOwnerInput = () => <CardOwner />;
