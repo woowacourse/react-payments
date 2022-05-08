@@ -85,20 +85,6 @@ const reducer = (state, action) => {
       };
     }
 
-    case TYPES.SET_LIST_MODAL_FLAG: {
-      return {
-        ...state,
-        listModalFlag: action.flag,
-      };
-    }
-
-    case TYPES.SET_TIP_MODAL_FLAG: {
-      return {
-        ...state,
-        tipModalFlag: action.flag,
-      };
-    }
-
     case TYPES.SET_COMPANY_INDEX: {
       return {
         ...state,

@@ -64,7 +64,6 @@ function AddCard() {
   const onClickCard = () => {
     setIsListModalOpen(true);
   };
-  // dispatch({ type: TYPES.SET_LIST_MODAL_FLAG, flag: true });
 
   const onClickNextButton = () => {
     const newCardData = {

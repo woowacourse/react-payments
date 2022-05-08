@@ -9,7 +9,6 @@ export default function CardManageModal({
   onClickEditNickname,
   cardData,
 }) {
-  console.log('modalCardData', cardData);
   return (
     <ModalToast onCloseModal={onCloseModal}>
       <FlexColumnBox>

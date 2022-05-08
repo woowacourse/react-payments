@@ -24,10 +24,8 @@ export default function CardList() {
   const [isManageModalOpen, setIsManageModalOpen] = useState(false);
 
   const onClickCard = (cardData) => {
-    console.log('onClickCard', cardData);
     setModalCardData(cardData);
     setIsManageModalOpen(true);
-    // setIsConfirmModalOpen(true);
   };
 
   const onClickAnotherCard = () => {

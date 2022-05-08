@@ -17,8 +17,6 @@ const defaultCardState = {
   cardPasswordErrorMessage: '',
   cardCompanyIndex: -1,
   cardNickName: '',
-  listModalFlag: false,
-  tipModalFlag: false,
   cards: [],
 };
 
