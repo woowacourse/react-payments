@@ -1,13 +1,13 @@
 import { BrowserRouter } from 'react-router-dom'
 import { withReactContext } from 'storybook-react-context'
-import CardAddCompletePage from 'pages/NickNamePage'
+import NickName from 'pages/NickNamePage'
 
-import CardInfoContext from 'store/cardInfo-context'
+import CardInfoContext from 'context/cardInfo-context'
 
 const Template = () => {
   return (
     <BrowserRouter>
-      <CardAddCompletePage />
+      <NickName />
     </BrowserRouter>
   )
 }
@@ -27,12 +27,12 @@ const MOCK_DATA = {
     password: { first: '1', second: '2' },
     cardNickName: '',
   },
-  isFieldFulfilled: true,
+  isFormFulfilled: true,
 }
 
 export default {
-  title: 'CardAddCompletePage',
-  component: CardAddCompletePage,
+  title: 'NickName',
+  component: NickName,
   decorators: [
     withReactContext({
       Context: CardInfoContext,

@@ -1,14 +1,10 @@
 import { BrowserRouter } from 'react-router-dom'
 import AddPage from 'pages/AddPage'
 
-import { CardInfoProvider } from 'store/cardInfo-context'
-
 const Template = () => {
   return (
     <BrowserRouter>
-      <CardInfoProvider>
-        <AddPage />
-      </CardInfoProvider>
+      <AddPage />
     </BrowserRouter>
   )
 }

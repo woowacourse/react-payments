@@ -3,6 +3,8 @@ import { withThemesProvider } from 'storybook-addon-styled-component-theme'
 import { ThemeProvider } from 'styled-components'
 import theme from '../src/theme'
 
+import { CardInfoProvider } from '../src/context/cardInfo-context'
+
 addDecorator(withThemesProvider([theme]), ThemeProvider)
 
 export const parameters = {
@@ -14,3 +16,11 @@ export const parameters = {
     },
   },
 }
+
+export const decorators = [
+  (Story) => (
+    <CardInfoProvider>
+      <Story />
+    </CardInfoProvider>
+  ),
+]

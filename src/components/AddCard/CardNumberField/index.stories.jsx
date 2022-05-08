@@ -1,13 +1,7 @@
-import CardNumberField from 'components/CardNumberField'
-
-import { CardInfoProvider } from 'store/cardInfo-context'
+import CardNumberField from 'components/AddCard/CardNumberField'
 
 const Template = () => {
-  return (
-    <CardInfoProvider>
-      <CardNumberField />
-    </CardInfoProvider>
-  )
+  return <CardNumberField />
 }
 
 export default {

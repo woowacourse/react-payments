@@ -1,12 +1,7 @@
-import { CardInfoProvider } from 'context/cardInfo-context'
-import DueDateField from 'components/DueDateField'
+import DueDateField from 'components/AddCard/DueDateField'
 
 const Template = () => {
-  return (
-    <CardInfoProvider>
-      <DueDateField />
-    </CardInfoProvider>
-  )
+  return <DueDateField />
 }
 
 export default {

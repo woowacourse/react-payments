@@ -1,12 +1,7 @@
-import { CardInfoProvider } from 'context/cardInfo-context'
-import CVCField from 'components/CVCField'
+import CVCField from 'components/AddCard/CVCField'
 
 const Template = () => {
-  return (
-    <CardInfoProvider>
-      <CVCField />
-    </CardInfoProvider>
-  )
+  return <CVCField />
 }
 
 export default {

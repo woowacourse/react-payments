@@ -1,12 +1,7 @@
-import { CardInfoProvider } from 'context/cardInfo-context'
-import PasswordField from 'components/PasswordField'
+import PasswordField from 'components/AddCard/PasswordField'
 
 const Template = () => {
-  return (
-    <CardInfoProvider>
-      <PasswordField />
-    </CardInfoProvider>
-  )
+  return <PasswordField />
 }
 
 export default {

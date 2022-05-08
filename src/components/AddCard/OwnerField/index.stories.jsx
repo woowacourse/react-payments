@@ -1,12 +1,7 @@
-import { CardInfoProvider } from 'context/cardInfo-context'
-import OwnerField from 'components/OwnerField'
+import OwnerField from 'components/AddCard/OwnerField'
 
 const Template = () => {
-  return (
-    <CardInfoProvider>
-      <OwnerField />
-    </CardInfoProvider>
-  )
+  return <OwnerField />
 }
 
 export default {
