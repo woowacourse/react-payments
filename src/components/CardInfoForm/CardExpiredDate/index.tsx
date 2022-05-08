@@ -73,7 +73,7 @@ export default function CardExpiredDate({ validateFormValidation }: CardExpiredD
           style={{ paddingLeft: "40px" }}
           name="expiredDate"
           data-key="month"
-          pattern="^[0-9]{0,2}$"
+          pattern="^[0-1][0-9]{0,2}$"
         />
         <span className="expired-date-delimiter">/</span>
         <Input

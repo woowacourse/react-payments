@@ -40,7 +40,7 @@ export default function CardSecurityCode({ validateFormValidation }: CardSecurit
           onChange={handleChangesSecurityCode}
           maxLength={3}
           name="securityCode"
-          pattern="^[0-9]{0,3}$"
+          pattern="^[0-9]{1,3}$"
         />
         <UserGuide>
           <img width="160px" src={CVC} alt="cvc" />
