@@ -34,7 +34,7 @@ export default function CardSecurityCodeInput() {
       <Input
         type={"password"}
         placeholder={CREATE_MASKED_CHARACTERS(3)}
-        name={"security-code"}
+        name={"securityCode"}
         maxLength={3}
         required
         width={"full"}

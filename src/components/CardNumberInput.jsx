@@ -40,7 +40,7 @@ export default function CardNumberInput() {
               type={index <= 1 ? "text" : "password"}
               value={cardNumber[index]}
               placeholder={index <= 1 ? "1 2 3 4" : CREATE_MASKED_CHARACTERS(4)}
-              name={`card-number${index + 1}`}
+              name={`cardNumber${index + 1}`}
               maxLength={4}
               required
               isComplete={

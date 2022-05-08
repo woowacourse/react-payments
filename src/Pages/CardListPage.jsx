@@ -56,20 +56,20 @@ export default function CardListPage({ setPage }) {
 
   const parseCardInfo = (card) => {
     const cardNumberArray = [
-      card["card-number1"],
-      card["card-number2"],
-      card["card-number3"],
-      card["card-number4"],
+      card["cardNumber1"],
+      card["cardNumber2"],
+      card["cardNumber3"],
+      card["cardNumber4"],
     ];
-    const expireDateArray = [card["expire-date1"], card["expire-date2"]];
+    const expireDateArray = [card["expireDate1"], card["expireDate2"]];
 
     const cardInfo = {
       cardNumber: cardNumberArray,
       expireDate: expireDateArray,
-      holderName: card["holder-name"],
+      holderName: card["holderName"],
     };
 
-    const colorIndex = Number(card["card-number4"]) % 5;
+    const colorIndex = Number(card["cardNumber4"]) % 5;
 
     return { cardInfo, colorIndex };
   };
