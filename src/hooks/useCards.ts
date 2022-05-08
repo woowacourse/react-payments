@@ -1,5 +1,5 @@
 import API from "apis";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { CardInfoWithCardName } from "types/cardInfo";
 
 import useAsyncError from "./useAsyncError";
@@ -35,6 +35,14 @@ const reducer: CardsReducer = (state, action) => {
 function useCards() {
   const [cards, dispatch] = useReducer<CardsReducer>(reducer, []);
   const throwError = useAsyncError();
+  const [error, setError] = useState({ isError: false, errorMessage: null });
+
+  const showErrorMessage = (message: string) => {
+    setError({ isError: true, errorMessage: message });
+    setTimeout(() => {
+      setError({ isError: false, errorMessage: null });
+    }, 3000);
+  };
 
   useEffect(() => {
     (async function () {
@@ -51,20 +59,28 @@ function useCards() {
   const addCard = async (cardInfo: CardInfoWithCardName) => {
     const cardInfoWIthId = { ...cardInfo, id: cards.length + 1 };
 
-    dispatch({ type: "ADD_CARD", payload: cardInfoWIthId });
-
-    await API.addCard(cardInfoWIthId);
+    try {
+      await API.addCard(cardInfoWIthId);
+      dispatch({ type: "ADD_CARD", payload: cardInfoWIthId });
+    } catch ({ message }) {
+      showErrorMessage(message);
+    }
   };
 
   const editCard = async (id: number, partialCardInfo: Partial<CardInfoWithCardName>) => {
-    dispatch({ type: "EDIT_CARD", payload: { id, partialCardInfo } });
-    await API.editCard(id, partialCardInfo);
+    try {
+      await API.editCard(id, partialCardInfo);
+      dispatch({ type: "EDIT_CARD", payload: { id, partialCardInfo } });
+    } catch ({ message }) {
+      showErrorMessage(message);
+    }
   };
 
   return {
     cards,
     addCard,
     editCard,
+    error,
   };
 }
 

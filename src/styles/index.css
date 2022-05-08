@@ -5,6 +5,7 @@
 @import "./utils.css";
 @import "./header.css";
 @import "./complete.css";
+@import "./toast.css";
 
 * {
   box-sizing: border-box;

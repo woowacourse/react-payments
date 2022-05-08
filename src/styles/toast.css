@@ -1,0 +1,28 @@
+.toast {
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  bottom: 50px;
+  border-radius: 5px;
+  background-color: gray;
+  width: 208px;
+  height: 9%;
+  color: white;
+  padding: 0 10px;
+  animation-name: slideUp;
+  animation-duration: 0.2s;
+  animation-timing-function: linear;
+}
+
+@keyframes slideUp {
+  from {
+    width: 0;
+    transform: translateX(50%) translateY(100px);
+    opacity: 0.3;
+  }
+  to {
+    width: 208px;
+    transform: translateX(50%);
+    opacity: 1;
+  }
+}
