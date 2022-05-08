@@ -7,6 +7,8 @@ import { CardOwnerStyled, CardExpirationStyled } from './style';
 const CardRestInfo = ({ size, children }) => {
   const { cardOwner, cardExpiration } = children;
 
+  if (!cardExpiration) return null;
+
   const cardExpirationContent = () =>
     cardExpiration[0] || cardExpiration[1] ? cardExpiration.join('/') : 'MM/YY';
 

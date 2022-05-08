@@ -15,10 +15,11 @@ import { SHOW_MODAL } from './CardListModal/action';
 
 import CardAdditionStyled from './style';
 
+import ADD_CARD from './action';
+
 import { checkCardCompany } from '../../lib/validation';
 
 import { CARD_SIZE_UNIT } from '../../constants';
-
 
 const CardAddition = () => {
   const cardCompanyName = useCardState((state) => state.cardCompanyName);
@@ -28,7 +29,7 @@ const CardAddition = () => {
     [cardCompanyName],
   );
 
-  const [Modal, onModal, offModal] = useAliasModal(>);
+  const [AliasModal, onModal] = useAliasModal(() => { });
 
   const cardCompanyColor = useCardState((state) => state.cardCompanyColor);
   const cardNumber = useCardState((state) => state.cardNumber);
@@ -37,31 +38,39 @@ const CardAddition = () => {
   const dispatch = useCardDispatch();
 
   const onClickCard = useCallback(() => {
-    dispatch({ type: SHOW_MODAL });
+    dispatch({ type: SHOW_MODAL, });
   }, []);
 
-  // const onSubmit = useCallback(() => {
-  //   setCompleteTyping(true);
-  // }, []);
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const card = [cardCompanyName, cardNumber, cardOwner, cardExpiration, cardCompanyColor];
+
+    dispatch({ type: ADD_CARD, card });
+    onModal(card);
+  };
 
   return (
-    <CardAdditionStyled>
-      <PageTitle hasPrevButton={true}>카드 추가</PageTitle>
-      <Card
-        size={CARD_SIZE_UNIT.SMALL}
-        onClick={onClickCard}
-      >
-        {[cardCompanyName, cardNumber, cardOwner, cardExpiration, cardCompanyColor]}
-      </Card>
-      <ErrorMessage
-        setChildren={setCardCompanyError}
-        validation={cardCompanyNameValidation}
-      >
-        {cardCompanyError}
-      </ErrorMessage>
-      <CardAddForm />
+    <>
+      <CardAdditionStyled>
+        <PageTitle hasPrevButton={true}>카드 추가</PageTitle>
+        <Card
+          size={CARD_SIZE_UNIT.SMALL}
+          onClick={onClickCard}
+        >
+          {[cardCompanyName, cardNumber, cardOwner, cardExpiration, cardCompanyColor]}
+        </Card>
+        <ErrorMessage
+          setChildren={setCardCompanyError}
+          validation={cardCompanyNameValidation}
+        >
+          {cardCompanyError}
+        </ErrorMessage>
+        <CardAddForm onSubmit={onSubmit} />
+      </CardAdditionStyled>
       <CardListModal />
-    </CardAdditionStyled>
+      <AliasModal />
+    </>
   );
 }
 

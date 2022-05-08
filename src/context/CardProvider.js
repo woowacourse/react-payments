@@ -8,6 +8,7 @@ import TYPING_CARD_OWNER from '../system/CardOwner/action';
 import TYPING_CARD_CVC from '../system/CardCvc/actions';
 import TYPING_CARD_PASSWORD from '../system/CardPassword/action';
 import { SHOW_MODAL, HIDE_MODAL, SELECT_CARD_COMPANY } from '../pages/CardAddition/CardListModal/action';
+import ADD_CARD from '../pages/CardAddition/action';
 
 const initialState = {
   cardNumber: ['', '', '', ''],
@@ -88,6 +89,13 @@ const reducer = (state, action) => {
         ...state,
         cardCompanyName: action.name,
         cardCompanyColor: action.color,
+      };
+    }
+
+    case ADD_CARD: {
+      return {
+        ...state,
+        cards: [...state.cards, action.card],
       };
     }
 
