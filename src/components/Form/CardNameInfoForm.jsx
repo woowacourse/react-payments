@@ -1,53 +1,40 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import LineInput from '../Common/Input/LineInput';
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { CardContext, PageContext } from '../../context';
-import { isBlankValue, isNotKoreanOrSpace, isOverlappedValue } from '../../utils/validations';
-import { DISPATCH_TYPE } from '../../constants';
-import { DEFAULT_CARD_INFO } from '../../constants';
+import { isBlankValue, isOverlappedValue } from '../../utils/validations';
 import SubmitButton from '../Common/Button/SubmitButton';
+import { isKoreanInRange } from './validation';
+import useInputs from '../../hooks';
+import { DEFAULT_CARD_INFO } from '../../constants';
 
 function LineInputForm() {
-  const { cardList, cardInput, setCardList, cardInputDispatch } = useContext(CardContext);
+  const { cardList, cardInput, setCardList, setCardInput } = useContext(CardContext);
   const { setPage } = useContext(PageContext);
+  const [form, onChange, reset] = useInputs(cardInput);
+
+  const onChangeCardName = (e, validationFunc, dataType) => {
+    onChange(e, validationFunc, dataType);
+    setCardInput({ ...cardInput, cardDesignation: form.cardDesignation });
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (isOverlappedValue(cardInput.cardDesignation, cardList)) {
+    if (isOverlappedValue(form.cardDesignation, cardList)) {
       alert('동일한 명칭의 카드가 존재합니다.');
       return;
     }
 
-    if (isBlankValue(cardInput.cardDesignation)) {
+    if (isBlankValue(form.cardDesignation)) {
       alert('카드 이름이 공백입니다.');
       return;
     }
 
-    setCardList({ ...cardList, [cardInput.cardDesignation]: { ...cardInput } });
-    cardInputDispatch({
-      type: DISPATCH_TYPE.RESET,
-      payload: { ...DEFAULT_CARD_INFO },
-    });
+    setCardList({ ...cardList, [form.cardDesignation]: { ...cardInput } });
     setPage('cardListPage');
-  };
-
-  const onChangeCardDesignation = e => {
-    const {
-      target: { value: cardDesignation, maxLength },
-    } = e;
-
-    if (cardDesignation.length === maxLength) {
-      return;
-    }
-
-    if (isNotKoreanOrSpace(cardDesignation)) {
-      cardInputDispatch({
-        type: DISPATCH_TYPE.CHANGE_CARD_DESIGNATION,
-        payload: { cardDesignation },
-      });
-    }
+    setCardInput(DEFAULT_CARD_INFO);
+    reset(DEFAULT_CARD_INFO);
   };
 
   return (
@@ -55,8 +42,8 @@ function LineInputForm() {
       <LineInput>
         <input
           className="input-underline"
-          value={cardInput.cardDesignation}
-          onChange={e => onChangeCardDesignation(e, 10)}
+          value={form.cardDesignation}
+          onChange={e => onChangeCardName(e, isKoreanInRange, 'cardDesignation')}
           maxLength={15}
           required
         />

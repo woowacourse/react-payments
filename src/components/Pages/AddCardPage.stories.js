@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState, useReducer } from 'react';
 import { PageContext } from '../../context';
 import { CardContext } from '../../context';
 import { DEFAULT_CARD_INFO } from '../../constants';
@@ -83,19 +83,8 @@ function Template() {
     page: page,
     setPage: setPage,
     tempRouter: tempRouter,
+    setTempRouter: setTempRouter,
   };
-
-  useEffect(() => {
-    if (page === PAGE.ADD_CARD) {
-      setTempRouter({ addCard: 'app', completeAddCard: 'app hide', cardList: 'app hide' });
-    }
-    if (page === PAGE.COMPLETE_ADD_CARD) {
-      setTempRouter({ addCard: 'app hide', completeAddCard: 'app', cardList: 'app hide' });
-    }
-    if (page === PAGE.CARD_LIST) {
-      setTempRouter({ addCard: 'app hide', completeAddCard: 'app hide', cardList: 'app' });
-    }
-  }, [page]);
 
   return (
     <PageContext.Provider value={pageState}>

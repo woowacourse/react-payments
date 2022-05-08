@@ -10,105 +10,40 @@ import {
   checkUniqueCard,
   isNumberInRange,
 } from './validation';
-import { DISPATCH_TYPE } from '../../constants';
+import { DEFAULT_CARD_INFO } from '../../constants';
 import { CardContext, PageContext } from '../../context';
+import useInputs from '../../hooks';
 
 function InputForm() {
-  const { cardInput, cardInputDispatch, cardList } = useContext(CardContext);
+  const { cardList, setCardInput } = useContext(CardContext);
   const { setPage } = useContext(PageContext);
-  const { cardNumber, expirationDate, ownerName, securityCode, password } = cardInput;
   const [isComplete, setIsComplete] = useState(false);
-  const inputElementsRef = useRef([]);
+  const inputElementsRef = useRef(new Map());
+  const [form, onChange, reset] = useInputs(DEFAULT_CARD_INFO);
+  const { cardNumber, expirationDate, ownerName, securityCode, password } = form;
+
+  const handleChangeInputs = (e, validationFunc, dataType, key) => {
+    const {
+      target: { value: changedData, maxLength },
+    } = e;
+    onChange(e, validationFunc, dataType, key);
+
+    if (changedData.length === maxLength) {
+      focusNextInput(e.target);
+    }
+    setCardInput({ ...form });
+  };
 
   const nodePushRef = (id, node) => {
-    inputElementsRef.current[id] = node;
+    inputElementsRef.current.set(id, node);
   };
 
-  const focusNextInput = id => {
-    const keys = Object.keys(inputElementsRef.current);
-    const nextIndex = keys.indexOf(id) + 1;
-    const nextInput = inputElementsRef.current[keys[nextIndex]];
+  const focusNextInput = node => {
+    const refArray = Array(...inputElementsRef.current.values());
+    const nextIndex = refArray.indexOf(node) + 1;
+    const nextInput = refArray[nextIndex];
     if (nextInput) {
       nextInput.focus();
-    }
-  };
-
-  const onChangeCardNumber = (key, e) => {
-    const {
-      target: { value: cardNumber, maxLength },
-    } = e;
-
-    if (isNumberInRange(cardNumber, maxLength)) {
-      cardInputDispatch({ type: DISPATCH_TYPE.CHANGE_CARD_NUMBER, payload: { cardNumber, key } });
-
-      if (cardNumber.length === maxLength) {
-        focusNextInput(key);
-      }
-    }
-  };
-
-  const onChangeExpirationDate = (key, e) => {
-    const {
-      target: { value: date, maxLength },
-    } = e;
-
-    if (isNumberInRange(date, maxLength)) {
-      cardInputDispatch({ type: DISPATCH_TYPE.CHANGE_EXPIRATION_DATE, payload: { date, key } });
-
-      if (date.length === maxLength) {
-        focusNextInput(key);
-      }
-    }
-  };
-
-  const onChangeOwnerName = (key, e) => {
-    const {
-      target: { value: ownerName, maxLength },
-    } = e;
-
-    if (isAlphabetOrSpace(ownerName)) {
-      cardInputDispatch({
-        type: DISPATCH_TYPE.CHANGE_OWNER_NAME,
-        payload: { ownerName: ownerName.toUpperCase() },
-      });
-
-      if (ownerName.length === maxLength) {
-        focusNextInput(key);
-      }
-    }
-  };
-
-  const onChangeSecurityCode = (key, e) => {
-    const {
-      target: { value: securityCode, maxLength },
-    } = e;
-
-    if (isNumberInRange(securityCode, maxLength)) {
-      cardInputDispatch({
-        type: DISPATCH_TYPE.CHANGE_SECURITY_CODE,
-        payload: { securityCode },
-      });
-
-      if (securityCode.length === maxLength) {
-        focusNextInput(key);
-      }
-    }
-  };
-
-  const onChangePassword = (key, e) => {
-    const {
-      target: { value: password, maxLength },
-    } = e;
-
-    if (isNumberInRange(password, maxLength)) {
-      cardInputDispatch({
-        type: DISPATCH_TYPE.CHANGE_PASSWORD,
-        payload: { password, key },
-      });
-
-      if (password.length === maxLength) {
-        focusNextInput(key);
-      }
     }
   };
 
@@ -116,11 +51,9 @@ function InputForm() {
     e.preventDefault();
 
     try {
-      if (
-        checkFormValidation({ cardNumber, expirationDate, securityCode, password }) &&
-        checkUniqueCard(cardNumber, cardList)
-      ) {
+      if (checkFormValidation({ expirationDate }) && checkUniqueCard(cardNumber, cardList)) {
         setPage('completeAddCardPage');
+        reset(DEFAULT_CARD_INFO);
       }
     } catch ({ message }) {
       alert(message);
@@ -129,13 +62,13 @@ function InputForm() {
 
   useEffect(() => {
     try {
-      if (checkFormCompletion({ cardNumber, expirationDate, securityCode, password })) {
+      if (checkFormCompletion({ form })) {
         setIsComplete(true);
       }
     } catch (e) {
       setIsComplete(false);
     }
-  }, [cardNumber, expirationDate, ownerName, securityCode, password]);
+  }, [cardNumber, expirationDate, securityCode, password]);
 
   return (
     <form onSubmit={onClickNextButton}>
@@ -146,7 +79,7 @@ function InputForm() {
             className="input-basic"
             type={stateKey === 'firstColumn' || stateKey === 'secondColumn' ? 'text' : 'password'}
             value={cardNumber[stateKey]}
-            onChange={e => onChangeCardNumber(stateKey, e)}
+            onChange={e => handleChangeInputs(e, isNumberInRange, 'cardNumber', stateKey)}
             maxLength={4}
             required
             data-testid={stateKey}
@@ -162,7 +95,7 @@ function InputForm() {
             type="text"
             placeholder={stateKey === 'month' ? 'MM' : 'YY'}
             value={expirationDate[stateKey]}
-            onChange={e => onChangeExpirationDate(stateKey, e)}
+            onChange={e => handleChangeInputs(e, isNumberInRange, 'expirationDate', stateKey)}
             maxLength={2}
             required
             data-testid={stateKey}
@@ -176,7 +109,7 @@ function InputForm() {
           className="input-basic"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           value={ownerName}
-          onChange={e => onChangeOwnerName('ownerName', e)}
+          onChange={e => handleChangeInputs(e, isAlphabetOrSpace, 'ownerName')}
           maxLength={30}
           data-testid="ownerName"
           ref={nodePushRef.bind(this, 'ownerName')}
@@ -191,7 +124,7 @@ function InputForm() {
           className="input-basic"
           type="password"
           value={securityCode}
-          onChange={e => onChangeSecurityCode('securityCode', e)}
+          onChange={e => handleChangeInputs(e, isNumberInRange, 'securityCode')}
           maxLength={3}
           required
           data-testid="securityCode"
@@ -205,7 +138,7 @@ function InputForm() {
             className="input-basic"
             type="text"
             value={password[stateKey]}
-            onChange={e => onChangePassword(stateKey, e)}
+            onChange={e => handleChangeInputs(e, isNumberInRange, 'password', stateKey)}
             maxLength={1}
             required
             data-testid={stateKey}

@@ -1,10 +1,11 @@
-import React, { useReducer, useEffect, useState } from 'react';
-import { DISPATCH_TYPE, DEFAULT_CARD_INFO, DEFAULT_ROUTE_INFO, PAGE } from './constants';
+import React, { useEffect, useState } from 'react';
+import { DEFAULT_CARD_INFO, DEFAULT_ROUTE_INFO, PAGE } from './constants';
 import { CardContext, PageContext } from './context';
 import CardListPage from './components/Pages/CardListPage';
 import CompleteAddCardPage from './components/Pages/CompleteAddCardPage';
 import AddCardPage from './components/Pages/AddCardPage';
 
+/*
 const cardInputReducer = (state, action) => {
   const { type, payload } = action;
 
@@ -59,18 +60,19 @@ const cardInputReducer = (state, action) => {
       throw new Error();
   }
 };
+*/
 
 function App() {
   const [cardList, setCardList] = useState({});
   const [page, setPage] = useState(PAGE.ADD_CARD);
   const [tempRouter, setTempRouter] = useState(DEFAULT_ROUTE_INFO);
-  const [cardInput, cardInputDispatch] = useReducer(cardInputReducer, DEFAULT_CARD_INFO);
+  const [cardInput, setCardInput] = useState(DEFAULT_CARD_INFO);
 
   const cardState = {
     cardList: cardList,
     setCardList: setCardList,
     cardInput: cardInput,
-    cardInputDispatch: cardInputDispatch,
+    setCardInput: setCardInput,
   };
 
   const pageState = {

@@ -1,6 +1,14 @@
-import { hasSpace, isLengthBelow, isLengthOver, isNotNumber } from '../../utils/validations';
+import {
+  hasSpace,
+  isLengthBelow,
+  isLengthOver,
+  isNotKoreanOrSpace,
+  isNotNumber,
+} from '../../utils/validations';
 
-export const checkFormCompletion = ({ cardNumber, expirationDate, securityCode, password }) => {
+export const checkFormCompletion = ({ form }) => {
+  const { cardNumber, expirationDate, securityCode, password } = form;
+
   if (Object.keys(cardNumber).some(key => isLengthBelow(cardNumber[key], 4))) {
     throw new Error('카드 번호를 완벽히 입력해주세요');
   }
@@ -50,6 +58,18 @@ export const isNumberInRange = (value, maxLength) => {
   }
 
   if (isLengthOver(value, maxLength)) {
+    return false;
+  }
+
+  return true;
+};
+
+export const isKoreanInRange = (value, maxLength) => {
+  if (isLengthOver(value, maxLength)) {
+    return false;
+  }
+
+  if (!isNotKoreanOrSpace(value)) {
     return false;
   }
 
