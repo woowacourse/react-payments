@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { BlockInput } from '../Input';
 import InputLabel from '../InputLabel';
+import { CLASS } from 'constant/selector';
 
 const Container = styled.div`
   display: flex;
@@ -77,7 +78,9 @@ function ExpiredDateInput({ expiredDate, handleInputChange, isValid, invalidMess
           isValid={isValidDate(year)}
         />
       </InputWrapper>
-      <InvalidMessage>{isValid || isAllEmptyValue() ? '' : invalidMessage}</InvalidMessage>
+      <InvalidMessage className={CLASS.INVALID_INPUT_MESSAGE}>
+        {isValid || isAllEmptyValue() ? '' : invalidMessage}
+      </InvalidMessage>
     </Container>
   );
 }

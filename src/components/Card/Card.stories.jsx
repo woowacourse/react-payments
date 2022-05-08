@@ -16,7 +16,7 @@ const Template = args => {
       cardCompany={{ name: '포코카드', color: '#E24141' }}
       cardNumbers={['1111', '2222', '3333', '4444']}
       ownerName="VICTOR"
-      expiredDate="12/22"
+      expiredDate={{ month: '12', year: '22' }}
       {...args}
     />
   );
