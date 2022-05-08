@@ -17,13 +17,8 @@ import {
 import { ReactComponent as Arrow } from 'assets/arrow.svg';
 
 function AddCard() {
-  const {
-    encryptedCardNumber,
-    cardOwnerName,
-    validDate,
-    cardKind,
-    setCardKind,
-  } = useContext(CardContext);
+  const { maskedCardNumber, cardOwnerName, validDate, cardKind, setCardKind } =
+    useContext(CardContext);
   const [isCardPickModal, toggleCardPickModal] = useReducer(
     (visible) => !visible,
     false
@@ -42,7 +37,7 @@ function AddCard() {
         bgColor={cardKind.color}
         size="medium"
         name={cardOwnerName}
-        number={encryptedCardNumber}
+        number={maskedCardNumber}
         onClickFunc={toggleCardPickModal}
         title={cardKind.title}
         validDate={validDate}

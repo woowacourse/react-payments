@@ -3,10 +3,9 @@ import { useCallback, useState } from 'react';
 import { ERROR_MESSAGE } from 'constants';
 
 // TODO: refactor
-// TODO: encrypted -> masked
 export default function useCardNumber(initialValue) {
   const [cardNumber, setCardNumber] = useState(initialValue);
-  const [encryptedCardNumber, setEncryptedCardNumber] = useState(initialValue);
+  const [maskedCardNumber, setMaskedCardNumber] = useState(initialValue);
 
   const getComputedValue = (selectionStart, type = 'delete') => {
     const auxilaryNum = type === 'add' && 1;
@@ -42,13 +41,13 @@ export default function useCardNumber(initialValue) {
   };
 
   const getEncrytedNumbers = (numbers) => {
-    let encryptedNumbers = numbers;
+    let maskedNumbers = numbers;
 
     if (numbers.length > 8) {
-      encryptedNumbers = numbers.slice(0, 8) + '•'.repeat(numbers.length - 8);
+      maskedNumbers = numbers.slice(0, 8) + '•'.repeat(numbers.length - 8);
     }
 
-    return encryptedNumbers.match(/[\d•]{1,4}/g)?.join('-') ?? initialValue;
+    return maskedNumbers.match(/[\d•]{1,4}/g)?.join('-') ?? initialValue;
   };
 
   const handleCardNumber = useCallback(
@@ -60,8 +59,8 @@ export default function useCardNumber(initialValue) {
       const numbers = getNumbers(data, selectionStart);
       setCardNumber(numbers);
 
-      const encryptedNumbers = getEncrytedNumbers(numbers);
-      setEncryptedCardNumber(encryptedNumbers);
+      const maskedNumbers = getEncrytedNumbers(numbers);
+      setMaskedCardNumber(maskedNumbers);
 
       e.target.setCustomValidity('');
     },
@@ -77,7 +76,7 @@ export default function useCardNumber(initialValue) {
 
   return {
     cardNumber,
-    encryptedCardNumber,
+    maskedCardNumber,
     handleCardNumber,
     showCardNumberValidation,
   };

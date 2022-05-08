@@ -11,7 +11,7 @@ import styled from 'styled-components';
 function AddCardComplete() {
   // TODO: hook으로 하는 게 맞을까?
   const handleSubmitNewCardNickname = useAddCard('/card-list');
-  const { cardKind, cardOwnerName, encryptedCardNumber, validDate } =
+  const { cardKind, cardOwnerName, maskedCardNumber, validDate } =
     useContext(CardContext);
 
   return (
@@ -25,7 +25,7 @@ function AddCardComplete() {
         size="large"
         bgColor={cardKind.color}
         name={cardOwnerName}
-        number={encryptedCardNumber}
+        number={maskedCardNumber}
         title={cardKind.title}
         validDate={validDate}
       />

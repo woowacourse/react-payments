@@ -22,7 +22,7 @@ function CardForm() {
 
   const {
     cardNumber,
-    encryptedCardNumber,
+    maskedCardNumber,
     handleCardNumber,
     showCardNumberValidation,
     cardOwnerName,
@@ -50,7 +50,7 @@ function CardForm() {
           maxLength="19"
           pattern=".{17,19}"
           title={ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH}
-          value={encryptedCardNumber}
+          value={maskedCardNumber}
           onBlur={showCardNumberValidation}
           onChange={handleCardNumber}
           required
