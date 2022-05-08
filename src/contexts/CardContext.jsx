@@ -20,7 +20,7 @@ function cardKindReducer(state, action) {
   }
 }
 
-function CardInfoProvider({ children }) {
+function CardContextProvider({ children }) {
   const {
     cardNumber,
     encryptedCardNumber,
@@ -61,4 +61,4 @@ function CardInfoProvider({ children }) {
   );
 }
 
-export { CardContext, CardInfoProvider };
+export { CardContext, CardContextProvider };
