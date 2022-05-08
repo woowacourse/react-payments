@@ -9,7 +9,7 @@ function CardOwnerNameFieldset() {
   return (
     <Fieldset>
       <FieldsetHead>
-        <div className="d-flex justify-content-between">
+        <div css={{ display: 'flex', justifyContent: 'space-between' }}>
           <label>카드 소유자 이름(선택)</label>
           <div id="counter">
             <span>{name.length}</span>/<span>{MAX_NAME_LENGTH}</span>
