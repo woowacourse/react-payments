@@ -16,7 +16,7 @@ function App() {
           <Route path="/add-card" element={<AddCard />} />
           <Route path="/add-card-complete" element={<AddCardComplete />} />
           <Route path="/card-list" element={<CardList />} />
-          <Route path="*" element={<Navigate to="/card-list" replace />} />
+          <Route path="*" element={<Navigate replace to="/card-list" />} />
         </Routes>
       </CardContextProvider>
     </>
