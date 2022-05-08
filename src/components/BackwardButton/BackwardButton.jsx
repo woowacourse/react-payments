@@ -28,7 +28,6 @@ const BackwardButton = ({ children, ...rest }) => {
           d="M15 19l-7-7 7-7"
         />
       </svg>
-      <p>{children}</p>
     </StyledButton>
   );
 };
@@ -41,15 +40,6 @@ const StyledButton = styled.button`
   font: inherit;
   cursor: pointer;
   outline: inherit;
-
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 18px;
-  display: flex;
-  height: 28px;
-  align-items: center;
-  flex-direction: row;
-  gap: 8px;
 
   color: #383838;
 `;
