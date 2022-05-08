@@ -2,28 +2,29 @@ import { useState } from "react";
 import Modal from "../components/common/Modal";
 import Portal from "../Portal";
 
-const useModal = (element) => {
+const useModal = () => {
   const [visible, setVisible] = useState(false);
-
+  const [node, setNode] = useState(null);
   const closeModal = () => {
     setVisible(false);
   };
 
-  const openModal = () => {
+  const setElement = (element) => {
     setVisible(true);
+    setNode(element);
   };
 
   const ModalElement = () => {
     return (
       visible && (
         <Portal>
-          <Modal closeModal={closeModal}>{element}</Modal>
+          <Modal closeModal={closeModal}>{node}</Modal>
         </Portal>
       )
     );
   };
 
-  return [openModal, closeModal, ModalElement];
+  return [closeModal, ModalElement, setElement];
 };
 
 export default useModal;

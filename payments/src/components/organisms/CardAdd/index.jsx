@@ -16,26 +16,23 @@ import { Link } from "react-router-dom";
 
 const CardAdd = ({ setDone }) => {
   const { cardInfo, validateCardInfo } = useContext(CardContext);
+  const [closeModal, ModalElement, setElement] = useModal();
 
-  const [openConfirmModal, closeConfirmModal, ConfirmModal] = useModal(
-    <ConfirmAdd
-      closeModal={() => {
-        closeConfirmModal();
-      }}
-      submit={() => {
-        setDone(true);
-        closeConfirmModal();
-      }}
-    />
-  );
-  const [openColorPickerVisible, closeColorPickerVisible, ColorPickerModal] =
-    useModal(
-      <CardColorPicker
-        closeModal={() => {
-          closeColorPickerVisible();
+  const openColorPickerModal = () => {
+    setElement(<CardColorPicker closeModal={closeModal} />);
+  };
+
+  const openConfirmModal = () => {
+    setElement(
+      <ConfirmAdd
+        closeModal={closeModal}
+        submit={() => {
+          setDone(true);
+          closeModal();
         }}
       />
     );
+  };
 
   const { cardName } = cardInfo;
 
@@ -60,7 +57,7 @@ const CardAdd = ({ setDone }) => {
         </header>
         <div className="card-add__container">
           <div className="card-add__container-card">
-            <Card cardInfo={cardInfo} onClick={openColorPickerVisible} />
+            <Card cardInfo={cardInfo} onClick={openColorPickerModal} />
           </div>
           {Boolean(cardName) || (
             <span className="select-card-message">
@@ -77,8 +74,7 @@ const CardAdd = ({ setDone }) => {
           </form>
         </div>
       </div>
-      <ColorPickerModal />
-      <ConfirmModal />
+      <ModalElement />
     </>
   );
 };

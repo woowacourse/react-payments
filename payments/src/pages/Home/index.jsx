@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Card from "../../components/common/Card";
 import { CardListContext } from "../../context/CardListProvider";
 import { Link } from "react-router-dom";
@@ -8,27 +8,26 @@ import ConfirmCardControl from "../../components/organisms/ConfirmCardControl";
 
 const Home = () => {
   const { cardList, updateCardList } = useContext(CardListContext);
-  const [targetIndex, setTargetIndex] = useState(null);
-  const [
-    openConfirmCardControlModal,
-    closeConfirmCardControlModal,
-    ConfirmCardControlModal,
-  ] = useModal(
-    <ConfirmCardControl
-      closeModal={() => {
-        closeConfirmCardControlModal();
-      }}
-      removeCard={() => {
-        updateCardList({
-          type: "removeCard",
-          payload: {
-            targetIndex,
-          },
-        });
-        closeConfirmCardControlModal();
-      }}
-    />
-  );
+  const [closeConfirmCardControlModal, ConfirmCardControlModal, setModal] =
+    useModal();
+
+  const handleCardClick = (idx) => {
+    setModal(
+      <ConfirmCardControl
+        closeModal={closeConfirmCardControlModal}
+        removeCard={() => {
+          updateCardList({
+            type: "removeCard",
+            payload: {
+              targetIndex: idx,
+            },
+          });
+          closeConfirmCardControlModal();
+        }}
+      />
+    );
+  };
+
   return (
     <div className="home--container">
       <header>
@@ -40,8 +39,7 @@ const Home = () => {
             <Card
               cardInfo={card}
               onClick={() => {
-                openConfirmCardControlModal();
-                setTargetIndex(idx);
+                handleCardClick(idx);
               }}
             />
           </div>
