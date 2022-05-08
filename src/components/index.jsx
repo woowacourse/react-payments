@@ -8,7 +8,6 @@ import EditCard from '../pages/cardlist/edit';
 import CardSuccess from '../pages/cardlist/success';
 import NotFound from '../pages/404';
 import { ROUTE } from '../route';
-import RequiredRouteState from './commons/RequiredRouteState';
 function App() {
   const [cardList, cardListDispatch, getCard] = useCardList();
 
@@ -25,20 +24,12 @@ function App() {
 
           <Route
             path={ROUTE.cardSuccess.route}
-            element={
-              <RequiredRouteState>
-                <CardSuccess cardListDispatch={cardListDispatch} getCard={getCard} />
-              </RequiredRouteState>
-            }
+            element={<CardSuccess cardListDispatch={cardListDispatch} getCard={getCard} />}
           />
 
           <Route
             path={ROUTE.editCard.route}
-            element={
-              <RequiredRouteState>
-                <EditCard cardListDispatch={cardListDispatch} getCard={getCard} />
-              </RequiredRouteState>
-            }
+            element={<EditCard cardListDispatch={cardListDispatch} getCard={getCard} />}
           />
 
           <Route path={ROUTE.cardList.route} element={<CardList cardList={cardList} />} />
