@@ -53,7 +53,7 @@ DefaultAddCardPage.play = () => {
 
   userEvent.type(screen.getByTestId('ownerName'), 'Harry');
 
-  userEvent.type(screen.getByTestId('securityCode'), '123');
+  userEvent.type(screen.getByTestId('securityCode'), '555');
 
   userEvent.type(screen.getByTestId('firstNumber'), '88');
   userEvent.type(screen.getByTestId('secondNumber'), '99');
