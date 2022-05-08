@@ -11,6 +11,7 @@ import Head from '../../components/Templates/Head';
 import ModalPortal from '../../components/Templates/ModalPortal';
 import { Page, HeadContainer, BackButton, CardSection, Form, SubmitButtonContainer } from './style';
 import MESSAGE from '../../constant/message';
+import PATH from 'constant/path';
 import { useCardListContext } from 'context/cardList';
 import useCardCompany from '../../hooks/useCardCompany';
 import useCardNumbers from '../../hooks/useCardNumbers';
@@ -46,7 +47,7 @@ function CardAddPage({ isOpenModal, openModal }) {
   };
 
   const handleClickBackButton = () => {
-    navigate('/');
+    navigate(PATH.DEFAULT);
   };
 
   const handleSubmit = event => {
@@ -64,7 +65,7 @@ function CardAddPage({ isOpenModal, openModal }) {
 
     if (isAllValidInput()) {
       const cardId = addCard(cardInfo);
-      navigate('/cardAddCompletion', {
+      navigate(PATH.CARD_ADD_COMPLETION, {
         state: {
           cardId,
         },

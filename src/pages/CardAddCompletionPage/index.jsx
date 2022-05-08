@@ -6,6 +6,7 @@ import Card from 'components/Molecules/Card';
 import { Container, Title, CardSection, Form } from './style';
 import { useCardListContext } from 'context/cardList';
 import { CARD_SIZE } from 'constant/';
+import PATH from 'constant/path';
 
 function CardAddCompletionPage() {
   const cardAliasInput = useRef(null);
@@ -21,7 +22,7 @@ function CardAddCompletionPage() {
     const cardAlias = cardAliasInput.current.value;
 
     updateCardInfo({ ...cardInfo, alias: cardAlias });
-    navigate('/', { replace: true });
+    navigate(PATH.DEFAULT, { replace: true });
   };
 
   return (

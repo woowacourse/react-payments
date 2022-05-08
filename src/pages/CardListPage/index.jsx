@@ -10,13 +10,14 @@ import {
   CardAddButton,
 } from './style';
 import { useCardListContext } from 'context/cardList';
+import PATH from 'constant/path';
 
 function CardListPage() {
   const navigate = useNavigate();
   const { cardList } = useCardListContext();
 
   const handleClickCardAddButton = () => {
-    navigate('/cardAdd');
+    navigate(PATH.CARD_ADD);
   };
 
   return (
