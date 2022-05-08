@@ -1,9 +1,12 @@
 import React from 'react';
-import CVCInput from './CVCInput';
 import { UseFormRegisterOption } from '../../../hooks/useForm/types';
 import { useCardRegisterContext } from '../../../context';
+import PositiveNumberInput from '../../shared/PositiveNumberInput';
+import { useFormContext } from '../../../hooks/useForm/useFormContext';
+import { inputStyle } from './CVCInput.styled';
 
 function CVCInputContainer() {
+  const { register } = useFormContext();
   const { updateIsEditingCVC } = useCardRegisterContext();
 
   const registerOptions: UseFormRegisterOption = {
@@ -17,7 +20,7 @@ function CVCInputContainer() {
       value: 4,
     },
   };
-  return <CVCInput {...registerOptions} />;
+  return <PositiveNumberInput css={inputStyle} type="password" {...register('cvc', { ...registerOptions })} />;
 }
 
 export default CVCInputContainer;

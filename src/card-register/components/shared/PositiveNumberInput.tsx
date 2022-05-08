@@ -1,6 +1,6 @@
 import React from 'react';
 import { isObject } from '../../hooks/useForm/utils';
-import Input from './Input';
+import { inputStyle } from './Input';
 
 const PositiveNumberInput = React.forwardRef((props: any, ref) => {
   const removeNonPositiveValueOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +17,11 @@ const PositiveNumberInput = React.forwardRef((props: any, ref) => {
     };
   }
 
-  return <Input {...props} ref={ref} />; // onChange가 뒤에 있어야 한다
+  if (!_props.css) {
+    _props.css = inputStyle;
+  }
+
+  return <input {..._props} ref={ref} />; // onChange가 뒤에 있어야 한다
 });
 
 PositiveNumberInput.displayName = 'PositiveNumberInput';
