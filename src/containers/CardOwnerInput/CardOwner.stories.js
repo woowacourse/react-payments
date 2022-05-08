@@ -1,7 +1,7 @@
 import CardOwner from 'containers/CardOwnerInput/CardOwner';
 
 export default {
-  title: 'CardAddition/CardOwner',
+  title: 'containers/CardOwner',
   component: CardOwner,
 };
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import CardBox from 'components/CardBox/CardBox';
+import CardBox from 'common/CardBox/CardBox';
 
 export default function Card({
   cardNumber,

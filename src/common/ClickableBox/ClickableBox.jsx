@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default function PointerBox({ children, onClick }) {
+export default function ClickableBox({ children, onClick }) {
   return <Styled.PointerBox onClick={onClick}>{children}</Styled.PointerBox>;
 }
 

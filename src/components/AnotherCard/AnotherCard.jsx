@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import FlexColumnBox from 'components/FlexColumnBox/FlexColumnBox';
-import CardBox from 'components/CardBox/CardBox';
+import CardBox from 'common/CardBox/CardBox';
 
 export default function AnotherCard() {
   return (

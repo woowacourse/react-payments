@@ -7,12 +7,11 @@ import PageTitle from 'components/PageTitle/PageTitle';
 import AnotherCard from 'components/AnotherCard/AnotherCard';
 import Card from 'components/Card/Card';
 import FlexColumnBox from 'components/FlexColumnBox/FlexColumnBox';
-import Container from 'components/Container/Container';
-import PointerBox from 'components/PointerBox/PointerBox';
+import Container from 'common/Container/Container';
 import DroppableArea from 'common/DragDrop/DroppableArea';
 import DraggableCard from 'common/DragDrop/DraggableCard';
 import CardConfirmModal from 'containers/CardConfirmModal/CardConfirmModal';
-import ClickCardBox from 'common/ClickCardBox';
+import ClickableBox from 'common/ClickableBox/ClickableBox';
 import CardManageModal from 'containers/CardManageModal/CardManageModal';
 
 export default function CardList() {
@@ -63,7 +62,7 @@ export default function CardList() {
             <div ref={provided.innerRef} {...provided.droppableProps}>
               {cards.map((cardData, index) => (
                 <DraggableCard key={cardData.id} card={cardData} index={index}>
-                  <ClickCardBox onClick={() => onClickCard(cardData)}>
+                  <ClickableBox onClick={() => onClickCard(cardData)}>
                     <Card
                       cardNumber={cardData.cardNumber}
                       cardExpiration={cardData.cardExpiration}
@@ -72,7 +71,7 @@ export default function CardList() {
                       cardColor={cardData.cardColor}
                       isSmall={true}
                     />
-                  </ClickCardBox>
+                  </ClickableBox>
                   <Styled.CardNickname>{cardData.cardNickname}</Styled.CardNickname>
                 </DraggableCard>
               ))}
@@ -80,9 +79,9 @@ export default function CardList() {
             </div>
           )}
         </DroppableArea>
-        <PointerBox onClick={onClickAnotherCard}>
+        <ClickableBox onClick={onClickAnotherCard}>
           <AnotherCard />
-        </PointerBox>
+        </ClickableBox>
       </FlexColumnBox>
       {isConfirmModalOpen && (
         <CardConfirmModal

@@ -3,10 +3,10 @@ import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import validator from 'lib/validations';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
-import AutoFocusInputBox from 'common/AutoFocusInputBox';
+import AutoFocusInputBox from 'common/AutoFocus/AutoFocusInputBox';
 import Label from 'components/Label/Label';
-import InputContainer from 'components/InputContainer/InputContainer';
-import InputBox from 'components/InputBox/InputBox';
+import InputContainer from 'common/InputContainer/InputContainer';
+import InputBox from 'common/InputBox/InputBox';
 import { InputBasic } from 'components/Input/Input';
 
 export default function CardExpiration({ color }) {

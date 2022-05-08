@@ -1,7 +1,7 @@
 import CardNumber from 'containers/CardNumberInput/CardNumber';
 
 export default {
-  title: 'CardAddition/CardNumber',
+  title: 'containers/CardNumber',
   component: CardNumber,
 };
 

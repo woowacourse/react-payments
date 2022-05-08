@@ -1,7 +1,7 @@
 import CardPassword from 'containers/CardPasswordInput/CardPassword';
 
 export default {
-  title: 'CardAddition/CardPassword',
+  title: 'containers/CardPassword',
   component: CardPassword,
 };
 

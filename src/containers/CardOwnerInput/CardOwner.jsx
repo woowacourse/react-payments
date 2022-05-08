@@ -5,8 +5,8 @@ import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import Label from 'components/Label/Label';
-import InputContainer from 'components/InputContainer/InputContainer';
-import InputBox from 'components/InputBox/InputBox';
+import InputContainer from 'common/InputContainer/InputContainer';
+import InputBox from 'common/InputBox/InputBox';
 import styled from 'styled-components';
 import { InputBasicLeft } from 'components/Input/Input';
 

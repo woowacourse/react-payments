@@ -1,7 +1,7 @@
 import CardConfirmModal from 'containers/CardConfirmModal/CardConfirmModal';
 
 export default {
-  title: 'CardAddition/CardConfirmModal',
+  title: 'containers/CardConfirmModal',
   component: CardConfirmModal,
   args: {
     cardData: {

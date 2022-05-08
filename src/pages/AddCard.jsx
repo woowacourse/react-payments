@@ -15,11 +15,11 @@ import NextButton from 'components/NextButton/NextButton';
 import CardListModal from 'containers/CardListModal/CardListModal';
 import TipModal from 'containers/TipModal/TipModal';
 import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
-import ClickCardBox from 'common/ClickCardBox';
 import { CardStateContext, CardDispatchContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
-import Container from 'components/Container/Container';
+import Container from 'common/Container/Container';
 import CardConfirmModal from 'containers/CardConfirmModal/CardConfirmModal';
+import ClickableBox from 'common/ClickableBox/ClickableBox';
 
 function AddCard() {
   const {
@@ -102,7 +102,7 @@ function AddCard() {
         카드 추가
       </PageTitle>
 
-      <ClickCardBox onClick={onClickCard}>
+      <ClickableBox onClick={onClickCard}>
         <Card
           cardNumber={cardNumber}
           cardExpiration={cardExpiration}
@@ -111,7 +111,7 @@ function AddCard() {
           cardColor={cardColor}
           isSmall={true}
         />
-      </ClickCardBox>
+      </ClickableBox>
 
       <ErrorMessage
         value={cardCompanyIndex}

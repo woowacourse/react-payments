@@ -5,8 +5,8 @@ import { CARD_COMPANIES } from 'lib/constants';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import Label from 'components/Label/Label';
-import InputContainer from 'components/InputContainer/InputContainer';
-import InputBox from 'components/InputBox/InputBox';
+import InputContainer from 'common/InputContainer/InputContainer';
+import InputBox from 'common/InputBox/InputBox';
 import Tooltip from 'components/Tooltip/Tooltip';
 import { InputBasic } from 'components/Input/Input';
 

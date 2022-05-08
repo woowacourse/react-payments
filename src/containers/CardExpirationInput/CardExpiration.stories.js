@@ -1,7 +1,7 @@
 import CardExpiration from 'containers/CardExpirationInput/CardExpiration';
 
 export default {
-  title: 'CardAddition/CardExpiration',
+  title: 'containers/CardExpiration',
   component: CardExpiration,
 };
 

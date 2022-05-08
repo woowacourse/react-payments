@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PageTitle from 'components/PageTitle/PageTitle';
 import Card from 'components/Card/Card';
-import Form from 'components/Form/Form';
+import Form from 'common/Form/Form';
 import NextButton from 'components/NextButton/NextButton';
 import FlexColumnBox from 'components/FlexColumnBox/FlexColumnBox';
 import styled from 'styled-components';

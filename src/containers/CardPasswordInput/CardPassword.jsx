@@ -3,7 +3,7 @@ import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import validator from 'lib/validations';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
-import AutoFocusInputBox from 'common/AutoFocusInputBox';
+import AutoFocusInputBox from 'common/AutoFocus/AutoFocusInputBox';
 import Label from 'components/Label/Label';
 import Circle from 'components/Circle/Circle';
 import styled from 'styled-components';

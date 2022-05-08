@@ -1,7 +1,7 @@
 import PageTitle from 'components/PageTitle/PageTitle';
 
 export default {
-  title: 'CardAddition/PageTitle',
+  title: 'components/PageTitle',
   component: PageTitle,
 };
 

@@ -1,7 +1,7 @@
 import CardCvc from 'containers/CardCvcInput/CardCvc';
 
 export default {
-  title: 'CardAddition/CardCvc',
+  title: 'containers/CardCvc',
   component: CardCvc,
 };
 
