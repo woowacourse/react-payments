@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePaymentContext } from '../../context';
 import Card from '../../shared/components/card/Card';
 import ConfirmButton from '../components/card-form/confirm-button/ConfirmButton';
 import { useCardRegisterContext } from '../context';
@@ -8,21 +9,38 @@ import useForm from '../hooks/useForm/useForm';
 import S from '../styled';
 
 function CardRegisterConfirm() {
+  const { cardList, addCard } = usePaymentContext();
   const { card } = useCardRegisterContext();
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState<boolean>(true);
   const { handleSubmit, register, watch } = useForm({ shouldValidateOnChange: true, shouldShowNativeHint: true });
+  const prevCardListCount = React.useRef<number>(cardList.length);
 
   useEffect(() => {
     return watch('card-name', newValue => setDisabled(!newValue));
   }, [watch]);
 
   useEffect(() => {
-    const empty = (Object.keys(card) as (keyof typeof card)[]).some(key => card[key].length === 0);
+    const empty = (Object.keys(card) as (keyof typeof card)[]).some(key => {
+      if (key === 'ownerName') return false;
+      return card[key]?.length === 0;
+    });
     empty && navigate('/');
   }, [navigate, card]);
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>, result: UseFormSubmitResult) => {};
+  useEffect(() => {
+    if (prevCardListCount.current < cardList.length) {
+      prevCardListCount.current += 1;
+      navigate('/');
+    }
+  }, [navigate, cardList]);
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>, result: UseFormSubmitResult) => {
+    if (!result.isValid) return;
+    if (!result.values) return;
+    const cardName = result.values['card-name'];
+    cardName && addCard({ ...card, cardName });
+  };
   return (
     <S.CardRegisterConfirm>
       <h2>카드등록이 완료되었습니다</h2>

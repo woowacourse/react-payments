@@ -4,4 +4,5 @@ export type Card = {
   ownerName: string;
   cvc: string;
   password: string;
+  cardName?: string;
 };
