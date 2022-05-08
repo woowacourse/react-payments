@@ -39,5 +39,6 @@ const Style = {
     height: 100%;
     padding: 0 24px;
     text-align: center;
+    overflow: hidden;
   `,
 };

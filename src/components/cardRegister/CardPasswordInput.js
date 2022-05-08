@@ -10,6 +10,7 @@ import {
 } from '../common/styled';
 import Dot from '../common/Dot';
 import { AutoFocusInputContainer } from '../common/AutoFocusInputContainer';
+import styled from 'styled-components';
 
 export const CardPasswordInput = ({
   password,
@@ -38,28 +39,33 @@ export const CardPasswordInput = ({
   return (
     <InputContainer>
       <InputTitle>카드 비밀번호</InputTitle>
-      <InputBox
-        width="50%"
-        backgroundColor="transparent"
-        justifyContent="space-between"
-      >
+      <Style.PasswordInputBox>
         <AutoFocusInputContainer maxValueLength={1}>
-          <InputBasic
+          <Style.PasswordInputBasic
             value={password.firstNumber || ''}
             onChange={(e) => handlePasswordChange(e, 'firstNumber')}
             type="password"
-            width="20%"
           />
-          <InputBasic
+          <Style.PasswordInputBasic
             value={password.secondNumber || ''}
             onChange={(e) => handlePasswordChange(e, 'secondNumber')}
             type="password"
-            width="20%"
           />
           <Dot />
           <Dot />
         </AutoFocusInputContainer>
-      </InputBox>
+      </Style.PasswordInputBox>
     </InputContainer>
   );
+};
+
+const Style = {
+  PasswordInputBox: styled(InputBox)`
+    width: 50%;
+    background-color: transparent;
+    justify-content: space-between;
+  `,
+  PasswordInputBasic: styled(InputBasic)`
+    width: 20%;
+  `,
 };

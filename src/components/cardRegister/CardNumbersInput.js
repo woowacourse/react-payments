@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 
 import { MAX_LENGTH } from '../../constants/card';
 import { CARD_INFO_TYPES } from '../../reducer/types';
@@ -54,7 +55,7 @@ export const CardNumbersInput = ({
   return (
     <InputContainer>
       <InputTitle>카드 번호</InputTitle>
-      <InputBox color="#04c09e" padding="0 50px">
+      <Style.CardNumberInputBox>
         <AutoFocusInputContainer maxValueLength={MAX_LENGTH.EACH_CARD_NUMBER}>
           {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }) => (
             <InputBasic
@@ -65,7 +66,14 @@ export const CardNumbersInput = ({
             />
           )).reduce((prev, cur) => [prev, '-', cur])}
         </AutoFocusInputContainer>
-      </InputBox>
+      </Style.CardNumberInputBox>
     </InputContainer>
   );
+};
+
+const Style = {
+  CardNumberInputBox: styled(InputBox)`
+    color: #04c09e;
+    padding: 0 50px;
+  `,
 };

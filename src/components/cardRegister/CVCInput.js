@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
+import styled from 'styled-components';
 
 import { MAX_LENGTH } from '../../constants/card';
 import { CARD_INFO_TYPES } from '../../reducer/types';
 
 import { QuestionMark } from '../common/QuestionMark';
 import {
-  FlexWrapper,
   InputContainer,
   InputTitle,
   InputBasic,
@@ -33,12 +33,23 @@ export const CVCInput = ({ CVC, onCVCInput, onCardCVCCheck, openModal }) => {
   return (
     <InputContainer>
       <InputTitle>보안카드(CVC/CVV)</InputTitle>
-      <FlexWrapper alignItems={'baseline'} gap={'10px'}>
-        <InputBox width="25%">
+      <Style.CVCInputContainer>
+        <Style.CVCInputBox>
           <InputBasic type="password" value={CVC} onChange={handleCVCChange} />
-        </InputBox>
+        </Style.CVCInputBox>
         <QuestionMark onClick={openModal} />
-      </FlexWrapper>
+      </Style.CVCInputContainer>
     </InputContainer>
   );
+};
+
+const Style = {
+  CVCInputContainer: styled.div`
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  `,
+  CVCInputBox: styled(InputBox)`
+    width: 25%;
+  `,
 };

@@ -3,10 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 import cvc from '../../assets/cvc.png';
 
-const Image = styled.img`
-  height: 150px;
-`;
-
 export const CVCHelperModal = () => {
   return (
     <>
@@ -15,3 +11,7 @@ export const CVCHelperModal = () => {
     </>
   );
 };
+
+const Image = styled.img`
+  height: 150px;
+`;

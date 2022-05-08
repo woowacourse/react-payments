@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import { Card } from '../common/Card';
-import { FlexWrapper } from '../common/styled';
 
 export const CardPreview = ({ cardInfo, onClickCard }) => {
   return (
@@ -12,8 +11,9 @@ export const CardPreview = ({ cardInfo, onClickCard }) => {
 };
 
 const Style = {
-  CardPreviewLayout: styled(FlexWrapper)`
-    margin: 10px 0;
+  CardPreviewLayout: styled.div`
+    display: flex;
     justify-content: center;
+    margin: 10px 0;
   `,
 };

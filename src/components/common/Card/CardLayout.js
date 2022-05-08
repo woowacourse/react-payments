@@ -44,6 +44,7 @@ const Style = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: black;
 
     width: ${({ size }) =>
       CardLayoutSize[size]?.width || CardLayoutSize.md.width}px;

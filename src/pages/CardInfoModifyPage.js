@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
-import { FlexWrapper, InputBasic, Layout } from '../components/common/styled';
+import { InputBasic, Layout } from '../components/common/styled';
 import { initialCardInfo } from '../constants/card';
 
 export const CardInfoModifyPage = ({ cardInfo = initialCardInfo }) => {
@@ -30,7 +30,8 @@ const Style = {
     font-size: 22px;
     font-weight: unset;
   `,
-  CardWrapper: styled(FlexWrapper)`
+  CardWrapper: styled.div`
+    display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 10rem;
