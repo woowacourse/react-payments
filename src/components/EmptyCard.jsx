@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { ReactComponent as Plus } from 'assets/plus.svg';
 
 function EmptyCard() {
+  console.log('render empty');
   const navigate = useNavigate();
 
   return (

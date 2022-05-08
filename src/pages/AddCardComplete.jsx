@@ -1,23 +1,29 @@
-import styled from 'styled-components';
+import { useContext } from 'react';
 
 import { Button, Card } from 'components';
 
 import { useSubmit } from 'hooks';
 
+import { CardContext } from 'contexts/CardContext';
+
+import styled from 'styled-components';
+
 function AddCardComplete() {
   // TODO: hook으로 하는 게 맞을까?
   const handleSubmitNewCardNickname = useSubmit('/card-list');
+  const { cardKind, cardOwnerName, encryptedCardNumber, validDate } =
+    useContext(CardContext);
 
   return (
     <Styled.Root>
       <Styled.Title>카드 등록이 완료되었습니다.</Styled.Title>
       <Card
         size="large"
-        // bgColor={cardKind.color}
-        // name={cardOwnerName}
-        // number={encryptedCardNumber}
-        // title={cardKind.title}
-        // validDate={validDate}
+        bgColor={cardKind.color}
+        name={cardOwnerName}
+        number={encryptedCardNumber}
+        title={cardKind.title}
+        validDate={validDate}
       />
       <form onSubmit={handleSubmitNewCardNickname}>
         <Styled.CardNicknameInput />
