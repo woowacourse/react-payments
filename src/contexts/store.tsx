@@ -4,6 +4,7 @@ import { CardInfo, CardNumbers, Password, ExpiredDate } from "../types";
 
 type ActionType =
   | "RESET"
+  | "UPDATE_CARD"
   | "UPDATE_CARD_NUMBER"
   | "UPDATE_EXPIRED_DATE"
   | "UPDATE_PASSWORD"
@@ -15,6 +16,7 @@ type ActionType =
 type Action = {
   type: ActionType;
   payload?: {
+    cardInfo?: CardInfo;
     cardType?: string;
     cardNumbers?: string;
     expiredDate?: ExpiredDate;
@@ -30,16 +32,19 @@ type ContextValue = [CardInfo, React.Dispatch<Action>];
 
 // initialState
 const initialCardInfo: CardInfo = {
+  cardName: "",
   cardType: "empty",
   cardNumbers: ["", "", "", ""],
   expiredDate: { month: "", year: "" },
   userName: "",
   securityCode: "",
   password: ["", ""],
+  id: null,
 };
 
 // actions
 const RESET = "RESET";
+const UPDATE_CARD = "UPDATE_CARD";
 const UPDATE_CARD_NUMBER = "UPDATE_CARD_NUMBER";
 const UPDATE_EXPIRED_DATE = "UPDATE_EXPIRED_DATE";
 const UPDATE_PASSWORD = "UPDATE_PASSWORD";
@@ -48,10 +53,6 @@ const UPDATE_USER_NAME = "UPDATE_USER_NAME";
 const TRIM_USER_NAME = "TRIM_USER_NAME";
 const CHANGE_CARD_TYPE = "CHANGE_CARD_TYPE";
 
-// actionCreators;
-// const updateCardNumbers = payload => ({ type: UPDATE, payload });
-// const reset = () => ({ type: RESET });
-
 // reducer
 export const reducer = (state: CardInfo, action: Action) => {
   const { type, payload } = action;
@@ -59,6 +60,11 @@ export const reducer = (state: CardInfo, action: Action) => {
   switch (type) {
     case RESET:
       return initialCardInfo;
+    case UPDATE_CARD: {
+      const { cardInfo } = payload;
+
+      return cardInfo;
+    }
     case UPDATE_CARD_NUMBER: {
       const { cardNumbers, index } = payload;
       const newCardNumbers: CardNumbers = [...state.cardNumbers];

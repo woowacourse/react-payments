@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../../contexts/store";
+
 import ModalPortal from "../../Portal";
 
-export default function SelectCard({ onClose, changeCardType }) {
+interface SelectCardProps {
+  onClose: () => void;
+  changeCardType?: () => void;
+}
+
+export default function SelectCard({ onClose, changeCardType }: SelectCardProps) {
+  const [state, dispatch] = useContext(Context);
   const handleClick = e => {
     const { type } = e.target.dataset;
 
-    changeCardType(type);
+    dispatch({ type: "CHANGE_CARD_TYPE", payload: { cardType: type } });
+    changeCardType();
     onClose();
   };
 

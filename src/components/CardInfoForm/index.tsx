@@ -7,6 +7,7 @@ import CardSecurityCode from "./CardSecurityCode";
 import CardUserName from "./CardUserName";
 import useFormValidation from "../../hooks/useFormValidation";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router";
 
 const focusNextInput = (e: React.FormEvent<HTMLFormElement>) => {
   const targetInputElement = e.target;
@@ -25,8 +26,9 @@ const focusNextInput = (e: React.FormEvent<HTMLFormElement>) => {
   }
 };
 
-export default function CardInfoForm({ cardTypeValidation, showModal }) {
-  const [isNextButtonShown, setIsNextButtonShown] = useState(false);
+export default function CardInfoForm({ cardTypeValidation = false, showModal, mode = "add" }) {
+  const isAddMode = mode === "add";
+  const [isNextButtonShown, setIsNextButtonShown] = useState(!isAddMode);
   const { formValidation, validateFormValidation } = useFormValidation({
     cardNumbers: false,
     expiredDate: false,
@@ -35,15 +37,16 @@ export default function CardInfoForm({ cardTypeValidation, showModal }) {
     password: false,
   });
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const onSubmit = e => {
     e.preventDefault();
     setIsNextButtonShown(true);
-    navigate("/confirmAddCard");
+    isAddMode ? navigate("/confirmAddCard") : navigate(`/confirmEditCard/${id}`);
   };
 
   useEffect(() => {
-    if (Object.values(formValidation).every(validation => validation)) {
+    if (isAddMode && Object.values(formValidation).every(validation => validation)) {
       if (cardTypeValidation) {
         setIsNextButtonShown(true);
 

@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import CardAdd from "../components/CardAdd";
 import Card from "../common/Card";
 import Header from "../common/Header";
 import { useNavigate } from "react-router-dom";
+import { fetchGetCardList } from "../apis";
+import { Context } from "../contexts/store";
 
 export default function CardList() {
   const navigation = useNavigate();
   const [cardList, setCardList] = useState([]);
+  const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("card-list"));
-
-    if (data) setCardList(data);
+    fetchGetCardList().then(cardData => {
+      setCardList(cardData);
+      dispatch({ type: "RESET" });
+    });
   }, []);
 
   return (
@@ -20,7 +24,7 @@ export default function CardList() {
       <Header hasBackArrow={false} pageTitle="보유 카드" />
       <div className="card-list">
         <div className="card-list-container">
-          {cardList.map((card, index) => (
+          {cardList.map(card => (
             <Card
               key={card.id}
               cardInfo={card}
@@ -28,7 +32,8 @@ export default function CardList() {
               isCardName={true}
               isClick={true}
               onClick={() => {
-                navigation("/confirmAddCard");
+                dispatch({ type: "UPDATE_CARD", payload: { cardInfo: card } });
+                navigation(`/editCard/${card.id}`);
               }}
             />
           ))}

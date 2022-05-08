@@ -1,14 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
 
 import Input from "../../common/Input";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../../contexts/store";
+import { fetchAddCard, fetchEditCard } from "../../apis";
 
-export default function CardNameForm() {
+export default function CardNameForm({ mode }) {
+  const isAddMode = mode === "add";
   const [isNextButtonShown, setIsNextButtonShown] = useState(false);
-  const [cardName, setCardName] = useState("");
-  const navigate = useNavigate();
   const [state, dispatch] = useContext(Context);
+  const [cardName, setCardName] = useState(state.cardName);
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   const onChangeCardName = e => {
     setCardName(e.target.value);
@@ -28,22 +31,21 @@ export default function CardNameForm() {
       className="card-name-form h-100"
       onSubmit={e => {
         e.preventDefault();
-        // ToDo: 서버에 모든 정보 저장
-        const date = new Date();
-        const data = JSON.parse(localStorage.getItem("card-list"));
-        const id = date.getTime();
+        const cardData = { ...state, cardName };
 
-        let newData;
-
-        if (data) {
-          newData = [...data, { ...state, cardName, id }];
-        } else {
-          newData = [{ ...state, cardName, id }];
-        }
-
-        localStorage.setItem("card-list", JSON.stringify(newData));
-        dispatch({ type: "RESET" });
-        navigate("/cardList");
+        isAddMode
+          ? fetchAddCard(cardData)
+              .then(() => {
+                dispatch({ type: "RESET" });
+                navigate("/");
+              })
+              .catch(() => alert("서버 통신 오류"))
+          : fetchEditCard(cardData, id)
+              .then(() => {
+                dispatch({ type: "RESET" });
+                navigate("/");
+              })
+              .catch(() => alert("서버 통신 오류"));
       }}
     >
       <Input
