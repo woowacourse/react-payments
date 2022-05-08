@@ -36,6 +36,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "server": "json-server data.json --watch --port 4004",
     "test": "craco test",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject",
