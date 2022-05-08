@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { BlockInput } from '../Input';
 import InputLabel from '../InputLabel';
+import { PLACEHOLDER } from 'constant';
+import { CLASS } from 'constant/selector';
 
 const Container = styled.div`
   display: flex;
@@ -54,11 +56,13 @@ function OwnerNameInput({ ownerName, handleInputChange, isValid, invalidMessage,
         value={ownerName}
         onChange={handleInputChange}
         type="text"
-        placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+        placeholder={PLACEHOLDER.OWNER_NAME}
         maxLength="30"
         isValid={isValid}
       />
-      <InvalidMessage>{isValid || !ownerName ? '' : invalidMessage}</InvalidMessage>
+      <InvalidMessage className={CLASS.INVALID_INPUT_MESSAGE}>
+        {isValid || !ownerName ? '' : invalidMessage}
+      </InvalidMessage>
     </Container>
   );
 }
