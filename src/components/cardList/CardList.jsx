@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { CardsContext } from '../../CardsStore';
+import { CardsContext } from '../../context/CardsProvider';
 import Card from '../card/Card';
 
 function CardList() {

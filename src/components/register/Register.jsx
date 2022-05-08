@@ -1,6 +1,6 @@
 import { useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CardsContext } from '../../CardsStore';
+import { CardsContext } from '../../context/CardsProvider';
 import Card from '../card/Card';
 
 function Register() {

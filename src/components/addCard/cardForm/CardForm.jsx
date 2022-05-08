@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import Input from '../../input/Input';
-import { validNumber, validMaxLength, validRange } from '../../../validator';
-import { CARD } from '../../../constants';
+import { validNumber, validMaxLength, validRange } from '../../../validation/index';
+import { CARD } from '../../../constant';
 
-function AddCardForm({ card, updateCard, handleCardForm }) {
+function CardForm({ card, updateCard, handleCardForm }) {
   const onSubmitCardForm = (event) => {
     event.preventDefault();
     handleCardForm();
@@ -134,7 +134,7 @@ function AddCardForm({ card, updateCard, handleCardForm }) {
   );
 }
 
-AddCardForm.propTypes = {
+CardForm.propTypes = {
   card: PropTypes.shape({
     firstCardNumber: PropTypes.string.isRequired,
     secondCardNumber: PropTypes.string.isRequired,
@@ -151,4 +151,4 @@ AddCardForm.propTypes = {
   handleCardForm: PropTypes.func.isRequired,
 };
 
-export default AddCardForm;
+export default CardForm;

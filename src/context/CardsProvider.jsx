@@ -1,12 +1,16 @@
 import { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
 
 export const CardsContext = createContext();
 
-function CardsStore({ children }) {
+function CardsProvider({ children }) {
   const [cards, setCards] = useState([]);
 
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
   return <CardsContext.Provider value={{ cards, setCards }}>{children}</CardsContext.Provider>;
 }
 
-export default CardsStore;
+CardsProvider.propTypes = {
+  children: PropTypes.element,
+};
+
+export default CardsProvider;

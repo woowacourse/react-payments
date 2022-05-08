@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from './constants';
+import { ERROR_MESSAGE } from '../constant/index';
 
 const isOverMaxLength = (value, max) => value.length > max;
 

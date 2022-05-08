@@ -1,15 +1,15 @@
-import AddCardForm from './AddCardForm';
+import CardForm from './CardForm';
 
 export default {
-  title: 'AddCardForm',
-  component: AddCardForm,
+  title: 'CardForm',
+  component: CardForm,
 };
 
-const Template = (args) => <AddCardForm {...args} />;
+const Template = (args) => <CardForm {...args} />;
 
-export const CardForm = Template.bind({});
+export const CardFormExample = Template.bind({});
 
-CardForm.args = {
+CardFormExample.args = {
   card: {
     firstCardNumber: '',
     secondCardNumber: '',
