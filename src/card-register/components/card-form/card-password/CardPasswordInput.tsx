@@ -19,7 +19,11 @@ function CardPasswordInput(props: Props) {
       ) : (
         <PositiveNumberInput
           css={passwordInputStyle}
-          {...register(`password-${position}`, { maxLength: { value: 1 } })}
+          {...register(`password-${position}`, {
+            required: { value: true },
+            pattern: { value: '[0-9]', message: '비밀번호를 입력해 주세요' },
+            maxLength: { value: 1 },
+          })}
         />
       )}
     </div>

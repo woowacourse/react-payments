@@ -2,43 +2,28 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { useFormContext } from '../../../hooks/useForm/useFormContext';
 import PositiveNumberInput from '../../shared/PositiveNumberInput';
+import { ValidationOption } from '../../../hooks/useForm/types';
 
 function CardNumberInputContainer() {
   const { register } = useFormContext();
+  const validationOption = {
+    required: { value: true },
+    maxLength: { value: 4 },
+    pattern: {
+      value: '[0-9]{4}',
+      message: '4자리 숫자를 입력해 주세요',
+    },
+  };
 
   return (
     <Wrapper>
-      <PositiveNumberInput
-        type="text"
-        {...register('card-number-1', {
-          minLength: { value: 4, message: '최소 4글자 입니다' },
-          maxLength: { value: 4 },
-        })}
-      />
+      <PositiveNumberInput type="text" {...register('card-number-1', { ...validationOption })} />
       <Sepeartor />
-      <PositiveNumberInput
-        type="text"
-        {...register('card-number-2', {
-          minLength: { value: 4, message: '최소 4글자 입니다' },
-          maxLength: { value: 4 },
-        })}
-      />
+      <PositiveNumberInput type="text" {...register('card-number-2', { ...validationOption })} />
       <Sepeartor />
-      <PositiveNumberInput
-        type="password"
-        {...register('card-number-3', {
-          minLength: { value: 4, message: '최소 4글자 입니다' },
-          maxLength: { value: 4 },
-        })}
-      />
+      <PositiveNumberInput type="password" {...register('card-number-3', { ...validationOption })} />
       <Sepeartor />
-      <PositiveNumberInput
-        type="password"
-        {...register('card-number-4', {
-          minLength: { value: 4, message: '최소 4글자 입니다' },
-          maxLength: { value: 4 },
-        })}
-      />
+      <PositiveNumberInput type="password" {...register('card-number-4', { ...validationOption })} />
     </Wrapper>
   );
 }

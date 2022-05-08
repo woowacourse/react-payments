@@ -35,6 +35,7 @@ function ExpiredPeriodInputContainer() {
       <PositiveNumberInput
         type="text"
         {...register('expired-period-1', {
+          required: { value: true },
           maxLength: { value: 2 },
           pattern: { value: monthRegex, message: '날짜를 다시 확인해 주세요' },
           onChange: handleMonthOnChange,
@@ -44,6 +45,7 @@ function ExpiredPeriodInputContainer() {
       <PositiveNumberInput
         type="text"
         {...register('expired-period-2', {
+          required: { value: true },
           maxLength: { value: 2 },
           pattern: { value: yearRegex, message: '년도를 다시 확인해 주세요' },
         })}
