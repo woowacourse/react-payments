@@ -41,6 +41,7 @@ export default function CardSecurityCode({ validateFormValidation }: CardSecurit
           maxLength={3}
           name="securityCode"
           pattern="^[0-9]{1,3}$"
+          required
         />
         <UserGuide>
           <img width="160px" src={CVC} alt="cvc" />
