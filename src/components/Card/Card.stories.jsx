@@ -6,7 +6,7 @@ export default {
   title: 'Payment/Card',
   component: Card,
   argTypes: {
-    expiredDate: { control: { type: 'text' } },
+    size: { control: 'select', options: [CARD_SIZE.MEDIUM, CARD_SIZE.LARGE] },
   },
 };
 
