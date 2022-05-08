@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
@@ -7,11 +7,8 @@ import styled from 'styled-components';
 import { InputBasic } from '../common/styled';
 import { Button } from '../common/Button';
 import { Card } from '../common/Card';
-import {
-  deleteCardInfos,
-  getCardInfos,
-  setCardInfos,
-} from '../../utils/localStorage';
+import { deleteCardInfos, setCardInfos } from '../../utils/localStorage';
+import { BASE_URL } from '../../constants/path';
 
 export const CardNickName = ({
   cardInfo,
@@ -19,14 +16,11 @@ export const CardNickName = ({
   isModify,
 }) => {
   const navigate = useNavigate();
-  const cardId = useLocation().pathname.split('/')[3];
-  const info = isModify ? getCardInfos(cardId)[cardId] : cardInfo;
-
-  const [cardNickName, setCardNickName] = useState(info.cardNickName ?? '');
+  const [cardNickName, setCardNickName] = useState(cardInfo.cardNickName ?? '');
 
   const handleSubmitCardInfo = () => {
-    const id = info.id ?? nanoid();
-    const { password, CVC, ...safeCardInfo } = info;
+    const id = cardInfo.id ?? nanoid();
+    const { password, CVC, ...safeCardInfo } = cardInfo;
     const uploadCardInfo = {
       [id]: {
         ...safeCardInfo,
@@ -36,13 +30,13 @@ export const CardNickName = ({
     };
 
     setCardInfos(uploadCardInfo);
-    navigate('/react-payments');
+    navigate(BASE_URL);
   };
 
   const handleDeleteCard = () => {
     if (confirm('정말 삭제하시겠습니까?')) {
-      deleteCardInfos(info.id);
-      navigate('/react-payments');
+      deleteCardInfos(cardInfo.id);
+      navigate(BASE_URL);
     }
   };
 
@@ -50,7 +44,7 @@ export const CardNickName = ({
     <>
       <Style.CardWrapper>
         <Style.Message>{message}</Style.Message>
-        <Card size="lg" cardInfo={info} />
+        <Card size="lg" cardInfo={cardInfo} />
         <Style.ModifyCardNameInput
           value={cardNickName}
           onChange={(e) => {

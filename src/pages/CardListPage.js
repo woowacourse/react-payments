@@ -1,4 +1,4 @@
-import { CardLists } from '../components/CardList/CardLists';
+import { CardLists } from '../components/CardList';
 import { PageTitle } from '../components/common/PageTitle';
 import { Layout } from '../components/common/styled';
 import { getCardInfos } from '../utils/localStorage';

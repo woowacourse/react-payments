@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
+import PATH from '../../constants/path';
 import { Card } from '../common/Card';
-
 import { AddCardButton } from '../common/Card/AddCardButton';
 
 export const CardLists = ({ cardInfos }) => {
@@ -10,13 +10,13 @@ export const CardLists = ({ cardInfos }) => {
     <Style.CardListLayout>
       {Object.values(cardInfos).map((info) => (
         <Style.CardWrapper key={info.id}>
-          <Link to={`./modify/${info.id}`}>
+          <Link to={`${PATH.MODIFY}/${info.id}`}>
             <Card cardInfo={info} />
             <Style.NickNameWrapper>{info.cardNickName}</Style.NickNameWrapper>
           </Link>
         </Style.CardWrapper>
       ))}
-      <Link to={`./register`}>
+      <Link to={`${PATH.REGISTER}`}>
         <Style.CardWrapper>
           <AddCardButton />
         </Style.CardWrapper>

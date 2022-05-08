@@ -1,11 +1,20 @@
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardNickName } from '../components/CardNickName';
 import { InputBasic, Layout } from '../components/common/styled';
+import { getCardInfos } from '../utils/localStorage';
 
 export const CardInfoModifyPage = () => {
+  const cardId = useLocation().pathname.split('/')[3];
+  const cardInfo = getCardInfos()[cardId];
+
   return (
     <Style.ModifyPageLayout>
-      <CardNickName isModify message="수정할 별칭을 입력해주세요!" />
+      <CardNickName
+        isModify
+        cardInfo={cardInfo}
+        message="수정할 별칭을 입력해주세요!"
+      />
     </Style.ModifyPageLayout>
   );
 };
