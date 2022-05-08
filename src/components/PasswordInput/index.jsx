@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { BlockInput } from '../Input';
 import InputLabel from '../InputLabel';
 import { numberRegex } from '../../constant/regularExpression';
+import { CLASS } from 'constant/selector';
 
 const Container = styled.div`
   display: flex;
@@ -48,6 +49,7 @@ function PasswordInput({ password, handleInputChange, isValid, invalidMessage, w
         {password.map((word, index) => (
           <BlockInput
             key={index}
+            className={CLASS.INPUT_PASSWORD}
             style={{
               width: '43px',
             }}
@@ -74,7 +76,9 @@ function PasswordInput({ password, handleInputChange, isValid, invalidMessage, w
           />
         ))}
       </InputBody>
-      <InvalidMessage>{isValid || isAllEmptyValue() ? '' : invalidMessage}</InvalidMessage>
+      <InvalidMessage className={CLASS.INVALID_INPUT_MESSAGE}>
+        {isValid || isAllEmptyValue() ? '' : invalidMessage}
+      </InvalidMessage>
     </Container>
   );
 }
