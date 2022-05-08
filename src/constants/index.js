@@ -1,4 +1,4 @@
-export const API_URL = 'http://localhost:1337';
+export const API_URL = 'https://react-payments-albur.herokuapp.com';
 
 export const ERROR_MESSAGE = {
   INVALID_CARD_NUMBER_LENGTH: '14~16자리를 입력해주세요',
