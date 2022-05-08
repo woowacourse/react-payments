@@ -16,7 +16,7 @@
   height: 130px;
 
   font-size: 30px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.35);
   border-radius: 5px;
 
   user-select: none;
@@ -70,7 +70,7 @@
   height: 130px;
 
   background: #94dacd;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.35);
   border-radius: 5px;
 }
 
@@ -93,8 +93,7 @@
   width: 290px;
   height: 180px;
 
-  background: #94dacd;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.35);
   border-radius: 5px;
 }
 
@@ -175,7 +174,7 @@
 .card-text__big {
   margin: 0 16px;
 
-  font-size: 18px;
+  font-size: 14px;
   line-height: 20px;
   vertical-align: middle;
   font-weight: 400;
@@ -208,6 +207,13 @@
   display: inline-block;
   width: 16px;
   text-align: center;
+}
+
+.card-expired-date-delimiter {
+  display: inline-block;
+  width: 10px;
+  text-align: center;
+  padding-left: 2px;
 }
 
 .card-user-name {

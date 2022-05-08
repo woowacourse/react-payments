@@ -1,7 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
 import { Context } from "../../contexts/store";
-const cardType = {
+
+const CARD_TYPE = {
   empty: { color: "empty-card", name: "클릭하여 카드 선택" },
   poco: { color: "poco-card", name: "포코 카드" },
   jun: { color: "jun-card", name: "준 카드" },
@@ -13,29 +14,47 @@ const cardType = {
   sun: { color: "sun-card", name: "썬 카드" },
 };
 
-export default function Card({ showModal }) {
+interface CardProps {
+  showModal?: () => void;
+  size: string;
+}
+
+export default function Card({ showModal, size }: CardProps) {
   const [state, dispatch] = useContext(Context);
-  const { cardNumbers, expiredDate, userName } = state;
+  const { cardType, expiredDate, cardNumbers, userName } = state;
+  const cardSize = {
+    small: {
+      shape: "card-shape",
+      text: "card-text",
+      chip: "small-card__chip",
+    },
+    big: {
+      shape: "big-card",
+      text: "card-text__big",
+      chip: "big-card__chip",
+    },
+  };
 
   return (
     <div className="card-box">
       <div
-        className={`card-shape ${cardType[state.cardType].color}`}
+        className={`${cardSize[size].shape} ${CARD_TYPE[cardType].color}`}
         onClick={showModal}
         aria-hidden="true"
       >
         <div className="card-top">
-          <span className="card-text">{cardType[state.cardType].name}</span>
-          <span className="card-text">
-            <span className="card-expired-date">{expiredDate.month || "MM"}</span> /{" "}
+          <span className={cardSize[size].text}>{CARD_TYPE[cardType].name}</span>
+          <span className={cardSize[size].text}>
+            <span className="card-expired-date">{expiredDate.month || "MM"}</span>
+            <span className="card-expired-date-delimiter">/</span>
             <span className="card-expired-date">{expiredDate.year || "YY"}</span>
           </span>
         </div>
         <div className="card-middle">
-          <div className="small-card__chip"></div>
+          <div className={cardSize[size].chip} />
         </div>
         <div className="card-bottom">
-          <div className="card-text card-numbers-text">
+          <div className={`${cardSize[size].text} card-numbers-text`}>
             {cardNumbers.map((cardNumber, index) => {
               return (
                 <span className="card-number" key={index}>
@@ -44,7 +63,7 @@ export default function Card({ showModal }) {
               );
             })}
           </div>
-          <span className="card-text card-user-name">{userName || "NAME"}</span>
+          <span className={`${cardSize[size].text} card-user-name`}>{userName || "NAME"}</span>
         </div>
       </div>
     </div>

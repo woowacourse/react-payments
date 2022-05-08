@@ -4,6 +4,7 @@
 @import "./modal.css";
 @import "./utils.css";
 @import "./header.css";
+@import "./confirm.css";
 
 * {
   box-sizing: border-box;

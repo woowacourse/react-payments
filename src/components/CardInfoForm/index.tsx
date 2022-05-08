@@ -40,7 +40,7 @@ export default function CardInfoForm({ cardTypeValidation, showModal }) {
     e.preventDefault();
     alert("카드 등록이 완료되었습니다.");
     setIsNextButtonShown(true);
-    navigate("/samplePage");
+    navigate("/confirmAddCard");
   };
 
   useEffect(() => {

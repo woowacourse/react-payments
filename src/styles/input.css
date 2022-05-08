@@ -68,10 +68,11 @@
   background: none;
   outline: none;
 
+  font-size: 18px;
   margin: 16px 0;
   padding: 4px 0;
 
-  border-bottom: 1px solid #383838;
+  border-bottom: 2px solid #383838;
 }
 
 .user-guide-container {

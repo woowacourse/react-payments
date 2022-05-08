@@ -7,7 +7,7 @@ import { Context } from "../contexts/store";
 import useModal from "../hooks/useCardModal";
 import Modal from "../components/Modal";
 
-export default function NewCardAdd() {
+export default function AddCard() {
   const [cardTypeValidation, setCardTypeValidation] = useState(false);
   const [state, dispatch] = useContext(Context);
   const { isModalShow, showModal, hideModal } = useModal();
@@ -20,7 +20,7 @@ export default function NewCardAdd() {
   return (
     <>
       <Header />
-      <Card showModal={showModal} />
+      <Card showModal={showModal} size="small" />
       <CardInfoForm cardTypeValidation={cardTypeValidation} showModal={showModal} />
       {isModalShow && <Modal onClose={hideModal} changeCardType={changeCardType} />}
     </>
