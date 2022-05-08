@@ -35,9 +35,10 @@ const SetNickname = ({ setDone }) => {
       <form onSubmit={addCard}>
         <div className="input--container">
           <Input
-            placeholder={"nickname"}
+            placeholder={"이름 입력(30자 이하로 입력해주세요)"}
             onChange={handleNickNameChange}
             value={cardInfo.nickname}
+            maxLength={30}
           />
         </div>
         <div className="next-button--container">
