@@ -6,9 +6,14 @@ const isValidCardNumberUnit = value => {
 
 const isValidCardExpireDateUnit = (value, index) => {
   const parsedValue = value.startsWith('0') && value.length !== 1 ? value.slice(1) : value;
+
   if (index === 0) {
-    return value !== '0' && value !== '' && 1 <= Number(parsedValue) && Number(parsedValue) <= 12;
+    return (
+      /^\d{0,2}$/.test(parsedValue) &&
+      (value === '0' || value === '' || (1 <= Number(parsedValue) && Number(parsedValue) <= 12))
+    );
   }
+
   return /^\d{0,2}$/.test(parsedValue);
 };
 
