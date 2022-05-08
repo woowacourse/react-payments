@@ -48,7 +48,7 @@ export default function CardHolderNameInput() {
         type={"text"}
         value={holderName}
         placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
-        name={"holder-name"}
+        name={"holderName"}
         maxLength={"30"}
         isComplete={isComplete}
         pattern={"^[a-zA-Z]+$"}
