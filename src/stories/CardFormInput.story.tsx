@@ -8,7 +8,7 @@ import CardPasswordInputContainer from 'containers/card/CardPasswordInputContain
 import ExpiredPeriodInputContainer from 'containers/card/ExpiredPeriodInputContainer';
 
 export default {
-  title: 'Container/CardFormInput',
+  title: 'Component/CardFormInput',
   component: CardFormInput,
 } as ComponentMeta<typeof CardFormInput>;
 
@@ -30,12 +30,12 @@ const ExpiredPeriodInputTemplate: ComponentStory<typeof ExpiredPeriodInputContai
   <ExpiredPeriodInputContainer />
 );
 
-export const CVCInput = CVCInputTemplate.bind({});
+export const ExpiredPeriod = ExpiredPeriodInputTemplate.bind({});
 
-export const NumberInput = numberInputTemplate.bind({});
+export const CVC = CVCInputTemplate.bind({});
 
-export const OwnerInput = OwnerNameInputTemplate.bind({});
+export const Number = numberInputTemplate.bind({});
 
-export const PasswordInput = PasswordInputTemplate.bind({});
+export const Owner = OwnerNameInputTemplate.bind({});
 
-export const ExpiredPeriodInput = ExpiredPeriodInputTemplate.bind({});
+export const Password = PasswordInputTemplate.bind({});
