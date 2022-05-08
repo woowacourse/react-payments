@@ -14,7 +14,10 @@ function CardForm() {
   const { CVC, handleCVC, showCVCValidation } = useCVC('');
   const [firstPassword, handleFirstPassword] = useCardPassword('');
   const [secondPassword, handleSecondPassword] = useCardPassword('');
-  const [isToolTipOpen, toggleToolTip] = useReducer(visible => !visible, false);
+  const [isToolTipOpen, toggleToolTip] = useReducer(
+    (visible) => !visible,
+    false
+  );
   const handleSubmitNewCard = useNavigateTo('/add-card-complete');
 
   const {
@@ -126,7 +129,7 @@ function CardForm() {
         <Styled.Bullet>•</Styled.Bullet>
         <Styled.Bullet>•</Styled.Bullet>
       </div>
-      {requiredList.every(value => value !== '') && (
+      {requiredList.every((value) => value !== '') && (
         <Styled.NextButton color="#04C09E" fontWeight="bold" type="submit">
           다음
         </Styled.NextButton>

@@ -15,7 +15,7 @@ const CardOwnerNameLength = styled.div`
   left: 318px;
 `;
 
-const CardOwnerNameTemplate = args => (
+const CardOwnerNameTemplate = (args) => (
   <>
     <CardOwnerNameLength>0/30</CardOwnerNameLength>
     <Input {...args} />
@@ -28,7 +28,7 @@ CardOwnerName.args = {
   placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
 };
 
-const CVCTemplate = args => (
+const CVCTemplate = (args) => (
   <>
     <Input {...args.inputArgs} />
     <Button {...args.buttonArgs} />
@@ -61,7 +61,7 @@ const Bullet = styled.span`
   margin-right: 35px;
 `;
 
-const CardPasswordTemplate = args => (
+const CardPasswordTemplate = (args) => (
   <>
     <Input {...args.labeled} />
     <Input {...args.noLabeled} />

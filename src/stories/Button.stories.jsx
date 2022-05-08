@@ -16,7 +16,7 @@ export default {
   },
 };
 
-const Template = args => <Button {...args} />;
+const Template = (args) => <Button {...args} />;
 
 export const Arrow = Template.bind({});
 Arrow.args = {

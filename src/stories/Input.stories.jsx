@@ -5,7 +5,7 @@ export default {
   component: Input,
 };
 
-const Template = args => <Input {...args} />;
+const Template = (args) => <Input {...args} />;
 
 export const CardNumber = Template.bind({});
 CardNumber.args = {

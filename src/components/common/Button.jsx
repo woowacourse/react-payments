@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 import PropTypes from 'prop-types';
 
-const getButtonSize = size => {
+const getButtonSize = (size) => {
   switch (size) {
     case 'small':
       return { height: '25px', fontSize: '14px' };

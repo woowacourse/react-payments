@@ -25,7 +25,7 @@ function AddCard() {
     setCardKind,
   } = useContext(CardContext);
   const [isCardPickModal, toggleCardPickModal] = useReducer(
-    visible => !visible,
+    (visible) => !visible,
     false
   );
 

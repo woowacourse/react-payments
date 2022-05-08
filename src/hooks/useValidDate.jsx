@@ -24,7 +24,7 @@ export default function useValidDate(initialValue) {
     setValidDate(value);
   }, []);
 
-  const showValidDateValidation = e => {
+  const showValidDateValidation = (e) => {
     if (e.target.validity.patternMismatch) {
       e.target.setCustomValidity(ERROR_MESSAGE.INVALID_VALID_DATE);
       e.target.reportValidity();

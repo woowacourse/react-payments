@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 
 import PropTypes from 'prop-types';
 
-const getCardSize = size => {
+const getCardSize = (size) => {
   switch (size) {
     case 'medium':
       return {

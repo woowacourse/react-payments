@@ -41,7 +41,7 @@ export default function useCardNumber(initialValue) {
     );
   };
 
-  const getEncrytedNumbers = numbers => {
+  const getEncrytedNumbers = (numbers) => {
     let encryptedNumbers = numbers;
 
     if (numbers.length > 8) {
@@ -52,7 +52,7 @@ export default function useCardNumber(initialValue) {
   };
 
   const handleCardNumber = useCallback(
-    e => {
+    (e) => {
       // TODO: data 네이밍 바꾸기
       const { selectionStart } = e.target;
       const { data } = e.nativeEvent;

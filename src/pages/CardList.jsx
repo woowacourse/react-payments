@@ -2,11 +2,10 @@ import styled from 'styled-components';
 
 import { Card, EmptyCard, Header } from 'components';
 
-import { useGetCards } from 'hooks';
+import { useGetCardList } from 'hooks';
 
 function CardList() {
-  const cardList = useGetCards();
-  console.log(cardList);
+  const cardList = useGetCardList();
 
   return (
     <>
