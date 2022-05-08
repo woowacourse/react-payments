@@ -10,7 +10,6 @@ import ErrorMessage from '../../system/ErrorMessage';
 
 import CardAddForm from './CardAddForm';
 import CardListModal from './CardListModal';
-import AliasButton from './AliasButton';
 
 import { SHOW_MODAL } from './CardListModal/action';
 
@@ -29,7 +28,7 @@ const CardAddition = () => {
     [cardCompanyName],
   );
 
-  const [Modal, onModal, offModal] = useAliasModal(<AliasButton />);
+  const [Modal, onModal, offModal] = useAliasModal(>);
 
   const cardCompanyColor = useCardState((state) => state.cardCompanyColor);
   const cardNumber = useCardState((state) => state.cardNumber);

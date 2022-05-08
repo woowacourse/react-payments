@@ -18,6 +18,7 @@ const initialState = {
   cardCompanyName: '',
   cardCompanyColor: CARD_COMPANY_COLORS.UNSELECTED_COMPANY,
   modalVisible: false,
+  cards: [],
 };
 
 const reducer = (state, action) => {
