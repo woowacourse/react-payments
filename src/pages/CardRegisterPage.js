@@ -1,4 +1,5 @@
 import { useState, useEffect, useReducer } from 'react';
+import { nanoid } from 'nanoid';
 
 import { cardInfoReducer } from '../reducer/cardInfo';
 
@@ -18,8 +19,19 @@ import { useModalSelector } from '../hooks/useModalSelector';
 import { CardPreview } from '../components/CardRegister/CardPreview';
 
 import { Layout } from '../components/common/styled';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+
+const getStoredArray = (key) => {
+  return JSON.parse(localStorage.getItem(key)) ?? [];
+};
+
+const setStorage = (key, value) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
 
 export const CardRegisterPage = () => {
+  const navigate = useNavigate();
   const [cardInfo, dispatch] = useReducer(cardInfoReducer, initialCardInfo);
 
   const [openedModalComponent, openModal, closeModal] = useModalSelector();
@@ -43,6 +55,21 @@ export const CardRegisterPage = () => {
   useEffect(() => {
     setAllCompleted(Object.values(checkInputCompleted).every((check) => check));
   }, [checkInputCompleted]);
+
+  const handleSubmitCardInfo = () => {
+    const id = nanoid();
+    const uploadCardInfo = {
+      [id]: { ...cardInfo, id: [id] },
+    };
+
+    const storedIds = getStoredArray('cardIds');
+    const storedCardInfos = getStoredArray('cardInfos');
+
+    setStorage('cardIds', storedIds.concat(id));
+    setStorage('cardInfos', storedCardInfos.concat(uploadCardInfo));
+
+    navigate('/react-payments');
+  };
 
   return (
     <Layout>
@@ -89,7 +116,21 @@ export const CardRegisterPage = () => {
         <CVCHelperModal name={COMPONENTS.CVC} />
       </ModalSelector>
 
-      <Button disabled={allCompleted ? false : true}>다음</Button>
+      <Style.ButtonWrapper>
+        <Button
+          disabled={allCompleted ? false : true}
+          onClick={handleSubmitCardInfo}
+        >
+          다음
+        </Button>
+      </Style.ButtonWrapper>
     </Layout>
   );
+};
+
+const Style = {
+  ButtonWrapper: styled.div`
+    width: 100%;
+    text-align: right;
+  `,
 };

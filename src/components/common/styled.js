@@ -51,6 +51,7 @@ export const InputBox = styled.div`
 `;
 
 export const Layout = styled.div`
+  min-height: 680px;
   padding: 24px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 `;

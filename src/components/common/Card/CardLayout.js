@@ -7,15 +7,13 @@ export const CardLayout = ({
   children,
 }) => {
   return (
-    <Style.CardBox>
-      <Style.Card
-        size={size}
-        backgroundColor={backgroundColor}
-        onClick={onClickCard}
-      >
-        {children}
-      </Style.Card>
-    </Style.CardBox>
+    <Style.Card
+      size={size}
+      backgroundColor={backgroundColor}
+      onClick={onClickCard}
+    >
+      {children}
+    </Style.Card>
   );
 };
 
