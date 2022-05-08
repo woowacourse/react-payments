@@ -2,10 +2,14 @@ import React from 'react';
 import S from '../../styled';
 import { Card as TCard } from '../../types';
 
-function Card(props: TCard) {
-  const { cardNumber, ownerName, expiredPeriod } = props;
+type Props = {
+  marginBottom: string;
+} & TCard;
+
+function Card(props: Props) {
+  const { cardNumber, ownerName, expiredPeriod, marginBottom = '0' } = props;
   return (
-    <S.Card>
+    <S.Card marginBottom={marginBottom}>
       <div className="type">로이드 카드</div>
       <div className="chip-container">
         <div className="chip" />

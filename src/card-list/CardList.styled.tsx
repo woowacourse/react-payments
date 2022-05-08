@@ -4,7 +4,9 @@ const CardList = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 70vh;
+  height: 70vh;
+  overflow-y: scroll;
+  padding: 15px 0;
   background-color: white;
 `;
 

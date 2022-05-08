@@ -1,10 +1,19 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-const Card = styled.div`
+type Props = {
+  marginBottom: string;
+};
+
+const dynamicStyle = (props: Props) => css`
   width: 208px;
   height: 130px;
+  padding: 14px;
+  background: #e5e5e5;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+
+  margin-bottom: ${props.marginBottom ? props.marginBottom : '0'};
 
   // type
   & .type {
@@ -40,6 +49,10 @@ const Card = styled.div`
       letter-spacing: -1px;
     }
   }
+`;
+
+const Card = styled.div`
+  ${dynamicStyle}
 `;
 
 export default Card;
