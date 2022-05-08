@@ -19,7 +19,7 @@ export default function Home({ cards }: { cards: CardInfoWithCardName[] }) {
       <Header title="보유 카드" hasBackArrow={false} />
       {cards.map(cardInfo => (
         <div className="mb-30 flex-column-center" key={cardInfo.id}>
-          <Card cardInfo={cardInfo} marginBottom="10px" onClick={handleClickCard} />
+          <Card cardInfo={cardInfo} marginBottom="10px" onClickCard={handleClickCard} />
           <span className="card-nickname">{cardInfo.cardName}</span>
         </div>
       ))}

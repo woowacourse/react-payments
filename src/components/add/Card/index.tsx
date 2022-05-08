@@ -10,7 +10,7 @@ interface CardProps {
   size?: "big" | "small";
   marginBottom?: string;
   pointer?: boolean;
-  onClick?: (id: number) => void;
+  onClickCard?: (id: number) => void;
   onChangeCardType?: (name: CardName, color: CardColor) => void;
 }
 
@@ -20,8 +20,7 @@ export default function Card({
   size = "small",
   marginBottom,
   pointer = true,
-  // @TODO: 네이밍 구분
-  onClick,
+  onClickCard,
   onChangeCardType,
 }: CardProps) {
   const { cardNumbers, expirationDate, userName, cardType } = cardInfo;
@@ -32,8 +31,7 @@ export default function Card({
       <div
         className="card-box flex-center"
         style={{ marginBottom, cursor: pointer ? "pointer" : "auto" }}
-        // @TODO: 조건문 제거
-        onClick={onClick && (() => onClick(cardInfo.id))}
+        onClick={() => onClickCard(cardInfo.id)}
       >
         <div
           className={`${size}-card flex-column-center`}
