@@ -3,7 +3,7 @@ import CardPasswordInputContainer from './CardPasswordInputContainer';
 
 function CardPasswordInputContainerList() {
   return (
-    <div className="d-flex">
+    <div css={{ display: 'flex' }}>
       <CardPasswordInputContainer position={1} />
       <CardPasswordInputContainer position={2} />
       <CardPasswordInputContainer position={3} disabled />
