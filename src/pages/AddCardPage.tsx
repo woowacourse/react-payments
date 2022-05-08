@@ -22,13 +22,13 @@ function AddCardPage() {
   return (
     <Wrapper>
       {chageCardType ? <TypeButtonModal /> : <></>}
-      <Navigation />
       {completeCard ? (
         <>
           <CardCompleteContainer />
         </>
       ) : (
         <>
+          <Navigation />
           <CardContainer />
           <CardFormContainer />
         </>
