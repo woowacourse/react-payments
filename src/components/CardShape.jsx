@@ -30,7 +30,7 @@ function CardShape({ type = 'EMPTY_CARD', company, cardNumber, cardOwnerName, du
   const handleClickCompany = ({ id, color, name }) => {
     setHexColor(color);
     setCardCompanyName(name);
-    dispatch({ type: 'CARD_COMPANY', cardCompany: { id, color, name } });
+    dispatch({ type: 'CARD_COMPANY', cardCompany: { id, color, name }, isPickCompany: true });
     setIsShown(!isShown);
   };
 

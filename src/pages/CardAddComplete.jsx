@@ -47,7 +47,7 @@ function CardAddComplete() {
         </S.Span>
       </S.UnderLineInputWrapperForm>
       <TextNav
-        isAllCompleted={true}
+        isVisible={true}
         handleClick={() =>
           handleClick({
             number,

@@ -48,7 +48,7 @@ function CardAdd() {
       <CardOwner />
       <CardSecurityCode />
       <CardPassword />
-      <TextNav isAllCompleted={isCompleted} handleClick={handleClick} text={'다음'} />
+      <TextNav isVisible={isCompleted} handleClick={handleClick} text={'다음'} />
     </>
   );
 }

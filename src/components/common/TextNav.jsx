@@ -14,10 +14,10 @@ const S = {
   TextNavContainer,
 };
 
-function TextNav({ isAllCompleted, handleClick, text }) {
+function TextNav({ isVisible, handleClick, text }) {
   return (
     <S.TextNavContainer>
-      <TextButton hexColor={'#525252'} isVisible={isAllCompleted} handleClick={handleClick}>
+      <TextButton hexColor={'#525252'} isVisible={isVisible} handleClick={handleClick}>
         {text}
       </TextButton>
     </S.TextNavContainer>

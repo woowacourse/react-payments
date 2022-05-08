@@ -10,6 +10,7 @@ const initialState = {
     isCorrectOwnerName: false,
     isCorrectCardDate: false,
     isCorrectSecurityCode: false,
+    isPickCompany: false,
   },
   title: '',
   cardCompany: {},
@@ -93,6 +94,10 @@ function reducer(state, action) {
       return {
         ...state,
         cardCompany: action.cardCompany,
+        isAllCompleted: {
+          ...state.isAllCompleted,
+          isPickCompany: action.isPickCompany,
+        },
       };
     case 'INITIALIZE':
       return {
@@ -106,6 +111,7 @@ function reducer(state, action) {
           isCorrectOwnerName: false,
           isCorrectCardDate: false,
           isCorrectSecurityCode: false,
+          isPickCompany: false,
         },
         cardCompany: {},
       };
