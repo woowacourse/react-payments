@@ -2,6 +2,8 @@ import API from "apis";
 import { useEffect, useReducer } from "react";
 import { CardInfoWithCardName } from "types/cardInfo";
 
+import useAsyncError from "./useAsyncError";
+
 type CardsAction =
   | { type: "GET_CARD"; payload: CardInfoWithCardName[] }
   | { type: "ADD_CARD"; payload: CardInfoWithCardName }
@@ -32,12 +34,17 @@ const reducer: CardsReducer = (state, action) => {
 
 function useCards() {
   const [cards, dispatch] = useReducer<CardsReducer>(reducer, []);
+  const throwError = useAsyncError();
 
   useEffect(() => {
     (async function () {
-      const data = await API.getCards();
+      try {
+        const data = await API.getCards();
 
-      dispatch({ type: "GET_CARD", payload: data });
+        dispatch({ type: "GET_CARD", payload: data });
+      } catch ({ message }) {
+        throwError(new Error(message));
+      }
     })();
   }, []);
 
