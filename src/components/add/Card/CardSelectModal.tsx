@@ -21,11 +21,9 @@ interface CardSelectModalProps {
   onChangeCardType: (name: CardName, color: CardColor) => void;
 }
 
-export default function CardSelectModal({
-  isOpened,
-  closeModal,
-  onChangeCardType,
-}: CardSelectModalProps) {
+function CardSelectModal({ isOpened, closeModal, onChangeCardType }: CardSelectModalProps) {
+  console.log("모달");
+
   const handleClickCardType = useCallback(
     (name: CardName, color: CardColor) => () => {
       onChangeCardType(name, color);
@@ -53,3 +51,5 @@ export default function CardSelectModal({
     </Modal>
   );
 }
+
+export default React.memo(CardSelectModal);

@@ -110,9 +110,9 @@ function useCardInfoInput() {
     cardInfoDispatch({ type: "RESET_CARD_INFO", payload: null });
   };
 
-  const onChangeCardType = (name: CardName, color: CardColor) => {
+  const onChangeCardType = useCallback((name: CardName, color: CardColor) => {
     cardInfoDispatch({ type: "CHANGE_CARD_TYPE", payload: { name, color } });
-  };
+  }, []);
 
   const onChangeCardNumber: InputChangeFunction = useCallback(
     e => {
