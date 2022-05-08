@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import CardPasswordInputContainerList from "../components/card-form/card-password/CardPasswordInputContainerList";
+import CardPasswordInputContainerList from "../card-register/components/card-form/card-password/CardPasswordInputContainerList";
 
 export default {
   title: "Example/CardPasswordInputContainerList",

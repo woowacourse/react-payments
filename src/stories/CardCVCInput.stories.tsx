@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import CVCInputContainer from "../components/card-form/card-cvc/CVCInputContainer";
+import CVCInputContainer from "../card-register/components/card-form/card-cvc/CVCInputContainer";
 
 export default {
   title: "Example/CVCInputContainer",

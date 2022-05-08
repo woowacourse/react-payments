@@ -1,5 +1,53 @@
 import React, { createContext, useState, useContext, useMemo } from 'react';
-import { Card } from './card-list/types';
+import { Card } from './shared/types';
+
+const dummyCardList: Array<Card> = [
+  {
+    cardNumber: '1234123412341234',
+    expiredPeriod: '1234',
+    ownerName: 'THE OWNER',
+    cvc: '312',
+    password: '12',
+    cardName: '아부라',
+  },
+  {
+    cardNumber: '1234123412341234',
+    expiredPeriod: '1234',
+    ownerName: 'THE OWNER',
+    cvc: '312',
+    password: '12',
+    cardName: '카타부라',
+  },
+  {
+    cardNumber: '1234123412341234',
+    expiredPeriod: '1234',
+    ownerName: 'THE OWNER',
+    cvc: '312',
+    password: '12',
+    cardName: '카타부라',
+  },
+  {
+    cardNumber: '1234123412341234',
+    expiredPeriod: '1234',
+    ownerName: 'THE OWNER',
+    cvc: '312',
+    password: '12',
+  },
+  {
+    cardNumber: '1234123412341234',
+    expiredPeriod: '1234',
+    ownerName: 'THE OWNER',
+    cvc: '312',
+    password: '12',
+  },
+  {
+    cardNumber: '1234123412341234',
+    expiredPeriod: '1234',
+    ownerName: 'THE OWNER',
+    cvc: '312',
+    password: '12',
+  },
+];
 
 export type State = {
   cardList: Card[];
@@ -12,7 +60,7 @@ export const PaymentContext = createContext<State>({
 });
 
 export function PaymentProvider({ children }: { children: React.ReactNode }) {
-  const [cardList, setCardList] = useState<Array<Card>>([]);
+  const [cardList, setCardList] = useState<Array<Card>>(dummyCardList);
   const value = useMemo(
     () => ({
       cardList,
