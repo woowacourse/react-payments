@@ -33,6 +33,12 @@ export const CardNickName = ({
     navigate(BASE_URL);
   };
 
+  const handleEnterSubmit = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmitCardInfo();
+    }
+  };
+
   const handleDeleteCard = () => {
     if (confirm('정말 삭제하시겠습니까?')) {
       deleteCardInfos(cardInfo.id);
@@ -50,6 +56,7 @@ export const CardNickName = ({
           onChange={(e) => {
             setCardNickName(e.target.value);
           }}
+          onKeyDown={handleEnterSubmit}
           placeholder="별칭을 입력해주세요."
         />
       </Style.CardWrapper>
