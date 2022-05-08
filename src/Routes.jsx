@@ -1,19 +1,28 @@
-import CardAdd from './pages/CardAdd';
-import CardAddComplete from './pages/CardAddComplete';
-import CardList from './pages/CardList';
+import { Suspense, lazy } from 'react';
+
+const Loadable = Component => props =>
+  (
+    <Suspense>
+      <Component {...props} />
+    </Suspense>
+  );
+
+const CardAddPage = Loadable(lazy(() => import('./pages/CardAdd')));
+const CardAddCompletePage = Loadable(lazy(() => import('./pages/CardAddComplete')));
+const CardListPage = Loadable(lazy(() => import('./pages/CardList')));
 
 const routes = [
   {
     path: '/',
-    element: <CardAdd />,
+    element: <CardAddPage />,
   },
   {
     path: 'card-add-complete',
-    element: <CardAddComplete />,
+    element: <CardAddCompletePage />,
   },
   {
     path: 'card-list',
-    element: <CardList />,
+    element: <CardListPage />,
   },
 ];
 
