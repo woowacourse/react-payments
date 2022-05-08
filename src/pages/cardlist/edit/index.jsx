@@ -6,7 +6,7 @@ import PageTemplate from '../../../components/commons/PageTemplate';
 import Card from '../../../components/card/Card';
 import CardInputForm from '../../../components/form/InputForm/CardInputForm';
 import { ROUTE } from '../../../route';
-import withRouteState from '../../../components/commons/withRouteState';
+import withRouteState from '../../../helper/withRouteState';
 
 function EditCard({ cardListDispatch, getCard, routeState: { cardId } }) {
   const navigate = useNavigate();

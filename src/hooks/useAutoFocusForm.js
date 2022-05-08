@@ -1,5 +1,16 @@
 import { useCallback, useRef } from 'react';
-import { findNotCompletedInput } from '../utils/util/form';
+
+const findNotCompletedInput = (inputMap, currentInputKey) => {
+  const nextInputKey = Object.keys(inputMap).find(
+    key => key !== currentInputKey && inputMap[key].isComplete === false,
+  );
+
+  return (
+    inputMap[nextInputKey] ?? {
+      element: null,
+    }
+  );
+};
 
 export const useAutoFocusForm = () => {
   const inputElementsRef = useRef({});
