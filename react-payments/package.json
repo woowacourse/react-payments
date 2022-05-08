@@ -3,14 +3,16 @@
   "description": "리액트 페이먼츠",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://hwangstar156.github.io/react-payments/",
+  "homepage": "https://ronci.github.io/react-payments/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -65,7 +67,9 @@
     "@storybook/react": "^6.4.22",
     "@storybook/testing-library": "^0.0.11",
     "chromatic": "^6.5.4",
-    "webpack": "^5.72.0",
-    "gh-pages": "^3.2.3"
+    "gh-pages": "^3.2.3",
+    "postcss": "^8.4.13",
+    "storybook-react-context": "^0.6.0",
+    "webpack": "^5.72.0"
   }
 }

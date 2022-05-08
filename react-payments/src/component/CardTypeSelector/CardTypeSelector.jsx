@@ -1,20 +1,33 @@
 import { cardInfos } from "../../constants";
-import ColorBox from "../ColorBox/colorBox.component";
-import "./CardTypeSelector.css";
+import ColorBox from "../common/ColorBox/ColorBox.component";
+import styled from "styled-components";
+import { useContext } from "react";
+import { CardTypeContext } from "../../provider/CardTypeProvider";
 
-const CardTypeSelector = ({ currentCardType, onClickCardType }) => {
+const ColorTypeSelectorContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 25px;
+`;
+
+const CardTypeSelector = () => {
+  const {
+    state: { cardTypeInfo },
+    action: { onClickCardType },
+  } = useContext(CardTypeContext);
+
   return (
-    <div className="colorbox-grid-container">
-      {cardInfos.map((cardInfo, idx) => (
+    <ColorTypeSelectorContainer>
+      {cardInfos.map(({ cardName, cardType }, idx) => (
         <ColorBox
-          {...cardInfo}
-          currentCardType={currentCardType}
+          cardName={cardName}
+          cardType={cardType}
+          currentCardType={cardTypeInfo.cardType}
           key={idx}
-          idx={idx}
           onClickCardType={onClickCardType}
         />
       ))}
-    </div>
+    </ColorTypeSelectorContainer>
   );
 };
 

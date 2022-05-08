@@ -23,7 +23,29 @@ export const isInValidCardNumber = (cardNumber) =>
     (number) => number.length !== MAX_LENGTH.CARD_NUMBER
   );
 
-export const isInValidCardType = (cardType) => !cardType;
+export const isInValidCardType = (cardType) => cardType === "defaultCard";
 
 export const isInValidSecurityCode = (securityCode) =>
   securityCode.length !== MAX_LENGTH.SECURITY_CODE;
+
+export const isAllInputReady = ({
+  cardNumberReady,
+  expireDateReady,
+  securityCodeReady,
+  cardPasswordReady,
+  cardTypeReady,
+}) => {
+  return !(
+    cardNumberReady &&
+    expireDateReady &&
+    securityCodeReady &&
+    cardPasswordReady &&
+    cardTypeReady
+  );
+};
+
+export const isInValidCardName = (cardName) =>
+  cardName.length === 0 || cardName.length > MAX_LENGTH.CARD_NAME;
+
+export const isDuplicatedCardName = (newCardName, cardData) =>
+  cardData.some(({ cardName }) => cardName === newCardName);

@@ -1,53 +1,13 @@
 import { useEffect, useState } from "react";
-import { isInValidCardType } from "../util/validator";
 
-const isReady = ({
-  cardNumberReady,
-  expireDateReady,
-  securityCodeReady,
-  cardPasswordReady,
-  cardType,
-}) => {
-  return (
-    cardNumberReady &&
-    expireDateReady &&
-    securityCodeReady &&
-    cardPasswordReady &&
-    !isInValidCardType(cardType)
-  );
-};
-
-const useAllFormReady = ({
-  cardNumberReady,
-  expireDateReady,
-  securityCodeReady,
-  cardPasswordReady,
-  cardType,
-}) => {
-  const [allFormReady, setAllFormReady] = useState(false);
+const useReady = (state, validator, data) => {
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (
-      isReady({
-        cardNumberReady,
-        expireDateReady,
-        securityCodeReady,
-        cardPasswordReady,
-        cardType,
-      }) !== allFormReady
-    ) {
-      setAllFormReady((prevReady) => !prevReady);
-    }
-  }, [
-    cardNumberReady,
-    expireDateReady,
-    securityCodeReady,
-    cardPasswordReady,
-    cardType,
-    allFormReady,
-  ]);
+    setReady(!validator(state, data));
+  }, [state, ready, validator, data]);
 
-  return { allFormReady };
+  return [ready];
 };
 
-export default useAllFormReady;
+export default useReady;
