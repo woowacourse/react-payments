@@ -46,18 +46,24 @@ function useCards() {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     (async function () {
       try {
-        setIsLoading(true);
         const data = await API.getCards();
 
-        setIsLoading(false);
+        if (!isLoading) {
+          dispatch({ type: "GET_CARD", payload: data });
+        }
 
-        dispatch({ type: "GET_CARD", payload: data });
+        setIsLoading(false);
       } catch ({ message }) {
         throwError(new Error(message));
       }
     })();
+
+    return () => {
+      setIsLoading(false);
+    };
   }, []);
 
   const addCard = async (cardInfo: CardInfoWithCardName) => {
