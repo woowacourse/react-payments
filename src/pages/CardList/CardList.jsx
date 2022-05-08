@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { TYPES } from 'store/card/types';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
@@ -14,8 +13,7 @@ import CardConfirmModal from 'containers/CardConfirmModal/CardConfirmModal';
 import ClickableBox from 'common/ClickableBox/ClickableBox';
 import CardManageModal from 'containers/CardManageModal/CardManageModal';
 
-export default function CardList() {
-  const navigate = useNavigate();
+export default function CardList({ navigate }) {
   const { cards } = useContext(CardStateContext);
   const dispatch = useContext(CardDispatchContext);
   const [modalCardData, setModalCardData] = useState();

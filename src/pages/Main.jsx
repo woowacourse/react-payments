@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-export default function Main() {
-  const navigate = useNavigate();
+export default function Main({ navigate }) {
   useEffect(() => {
     navigate('/add-card');
 

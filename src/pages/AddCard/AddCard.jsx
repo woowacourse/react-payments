@@ -1,7 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-
-import { useNavigate } from 'react-router-dom';
 import validator from 'lib/validations';
 import { CARD_COMPANIES } from 'lib/constants';
 import Card from 'components/Card/Card';
@@ -21,7 +19,7 @@ import Container from 'common/Container/Container';
 import CardConfirmModal from 'containers/CardConfirmModal/CardConfirmModal';
 import ClickableBox from 'common/ClickableBox/ClickableBox';
 
-function AddCard() {
+function AddCard({ navigate }) {
   const {
     cardNumber,
     cardExpiration,
@@ -37,7 +35,6 @@ function AddCard() {
   const [isTipModalOpen, setIsTipModalOpen] = useState(false);
   const [cardData, setCardData] = useState();
 
-  const navigate = useNavigate();
   const onClickPrev = () => {
     navigate('/card-list');
   };
