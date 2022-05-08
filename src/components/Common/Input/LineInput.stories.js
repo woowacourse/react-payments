@@ -11,5 +11,5 @@ const Template = args => <LineInput {...args} />;
 export const CardNameInput = Template.bind({});
 
 CardNameInput.args = {
-  children: <input className="line-input" maxLength={15} required />,
+  children: <input className="input-underline" maxLength={15} required />,
 };

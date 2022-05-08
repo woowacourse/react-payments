@@ -1,11 +1,22 @@
 import React from 'react';
 import Card from './Card';
+import { CardContext } from '../../context';
+import { DEFAULT_CARD_INFO } from '../../constants';
+
 export default {
   component: Card,
   title: 'Card',
 };
 
-const Template = args => <Card {...args} />;
+const cardState = {
+  cardInput: DEFAULT_CARD_INFO,
+};
+
+const Template = args => (
+  <CardContext.Provider value={cardState}>
+    <Card {...args} />;
+  </CardContext.Provider>
+);
 
 export const smallCard = Template.bind({});
 

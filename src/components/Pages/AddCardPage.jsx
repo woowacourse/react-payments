@@ -1,13 +1,14 @@
 import React from 'react';
 import CardBasicInfoForm from '../Form/CardBasicInfoForm';
 import Card from '../Card/Card';
-import { PageContext } from '../../context';
+import { CardContext, PageContext } from '../../context';
 import { PAGE } from '../../constants';
 import { useContext } from 'react';
 import LeftArrowButton from '../Common/Button/LeftArrowButton';
 
 function AddCardPage() {
   const { setPage, tempRouter } = useContext(PageContext);
+  const { cardInput } = useContext(CardContext);
 
   return (
     <main className={tempRouter.addCard}>
@@ -15,7 +16,7 @@ function AddCardPage() {
         <LeftArrowButton onClick={() => setPage(PAGE.CARD_LIST)} />
         <h2 className="page-title">카드 추가</h2>
       </nav>
-      <Card cardBoxSize={'small'}></Card>
+      <Card cardInformation={cardInput} cardBoxSize={'small'}></Card>
       <CardBasicInfoForm />
     </main>
   );

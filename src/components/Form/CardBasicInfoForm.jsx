@@ -149,6 +149,7 @@ function InputForm() {
             onChange={e => onChangeCardNumber(stateKey, e)}
             maxLength={4}
             required
+            data-testid={stateKey}
             ref={nodePushRef.bind(this, stateKey)}
           />
         ))}
@@ -164,6 +165,7 @@ function InputForm() {
             onChange={e => onChangeExpirationDate(stateKey, e)}
             maxLength={2}
             required
+            data-testid={stateKey}
             ref={nodePushRef.bind(this, stateKey)}
           />
         ))}
@@ -176,6 +178,7 @@ function InputForm() {
           value={ownerName}
           onChange={e => onChangeOwnerName('ownerName', e)}
           maxLength={30}
+          data-testid="ownerName"
           ref={nodePushRef.bind(this, 'ownerName')}
         />
       </LabeledInput>
@@ -191,6 +194,7 @@ function InputForm() {
           onChange={e => onChangeSecurityCode('securityCode', e)}
           maxLength={3}
           required
+          data-testid="securityCode"
           ref={nodePushRef.bind(this, 'securityCode')}
         />
       </LabeledInput>
@@ -204,6 +208,7 @@ function InputForm() {
             onChange={e => onChangePassword(stateKey, e)}
             maxLength={1}
             required
+            data-testid={stateKey}
             ref={nodePushRef.bind(this, stateKey)}
           />
         ))}
