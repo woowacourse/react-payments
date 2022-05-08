@@ -49,14 +49,11 @@ export const CardRegisterPage = () => {
 
   useEffect(() => {
     setAllCompleted(Object.values(checkInputs).every((check) => check));
-  }, [checkInputs]);
-
-  useEffect(() => {
-    if (!checkInputs.cardNumbers) {
+    if (!checkInputs.cardNumbers && checkInputs.cardType) {
       setCheckInputs((prev) => ({ ...prev, cardType: false }));
       setCardType(() => CARD_TYPES_DEFAULT);
     }
-  }, [checkInputs.cardNumbers]);
+  }, [checkInputs]);
 
   const modalSelector = (name) => {
     return () => {
