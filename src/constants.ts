@@ -17,11 +17,11 @@ export const cardTypes = [
   },
   {
     name: '노랑카드',
-    color: '#F59001',
+    color: '#F5ED00',
   },
   {
     name: '주황카드',
-    color: '#F5ED00',
+    color: '#F59001',
   },
   {
     name: '초록카드',

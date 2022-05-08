@@ -13,9 +13,9 @@ export const transformToColor = (str: string) => {
     case '빨강카드':
       return '#EB1100';
     case '노랑카드':
-      return '#F59001';
-    case '주황카드':
       return '#F5ED00';
+    case '주황카드':
+      return '#F59001';
     case '초록카드':
       return '#12DB00';
     case '파랑카드':
