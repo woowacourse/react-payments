@@ -24,8 +24,13 @@ export default function useAddCard(nextPath) {
       cardNickname,
     };
 
+    const requiredList = [cardNumber, validDate, cardKind];
+    const isRequiredDataExist = requiredList.every((value) => value !== '');
+
     try {
-      await addCardFetcher(cardFormData);
+      if (isRequiredDataExist) {
+        await addCardFetcher(cardFormData);
+      }
 
       navigateToNextPath();
     } catch (err) {
