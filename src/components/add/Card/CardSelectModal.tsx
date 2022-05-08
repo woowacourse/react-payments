@@ -24,13 +24,10 @@ interface CardSelectModalProps {
 function CardSelectModal({ isOpened, closeModal, onChangeCardType }: CardSelectModalProps) {
   console.log("모달");
 
-  const handleClickCardType = useCallback(
-    (name: CardName, color: CardColor) => () => {
-      onChangeCardType(name, color);
-      closeModal();
-    },
-    [closeModal, onChangeCardType]
-  );
+  const handleClickCardType = (name: CardName, color: CardColor) => () => {
+    onChangeCardType(name, color);
+    closeModal();
+  };
 
   if (!isOpened) return null;
 
