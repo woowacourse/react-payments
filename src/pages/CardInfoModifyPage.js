@@ -1,11 +1,11 @@
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardNickName } from '../components/CardNickName';
 import { InputBasic, Layout } from '../components/common/styled';
 import { getCardInfos } from '../utils/localStorage';
 
 export const CardInfoModifyPage = () => {
-  const cardId = useLocation().pathname.split('/')[3];
+  const { cardId } = useParams();
   const cardInfo = getCardInfos()[cardId];
 
   return (

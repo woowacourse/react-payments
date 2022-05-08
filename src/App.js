@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import styled from 'styled-components';
+import PATH, { BASE_URL } from './constants/path';
 import GlobalStyle from './GlobalStyle';
 
 import { CardInfoModifyPage } from './pages/CardInfoModifyPage';
@@ -14,13 +15,10 @@ function App() {
       <Style.App>
         <BrowserRouter>
           <Routes>
-            <Route path="/react-payments/" element={<CardListPage />} />
+            <Route path={`${BASE_URL}`} element={<CardListPage />} />
+            <Route path={`${PATH.REGISTER}`} element={<CardRegisterPage />} />
             <Route
-              path="/react-payments/register"
-              element={<CardRegisterPage />}
-            />
-            <Route
-              path="/react-payments/modify/:cardId"
+              path={`${PATH.MODIFY}/:cardId`}
               element={<CardInfoModifyPage />}
             />
           </Routes>
