@@ -28,17 +28,7 @@ const stringValidator = (value, maxLength) => {
 };
 
 function useInput(options) {
-  const {
-    maxValue,
-    minValue,
-    initialValue,
-    maxLength,
-    minLength = 0,
-    autoFix = true,
-    type = 'string',
-    tryFocus = false,
-    inputs = [],
-  } = options || {};
+  const { initialValue, maxLength, type = 'string', tryFocus = false, inputs = [] } = options || {};
   const [value, setValue] = useState(initialValue || '');
   const [errorMessage, setErrorMessage] = useState('');
   const currentTarget = useRef(null);
