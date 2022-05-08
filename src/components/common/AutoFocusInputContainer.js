@@ -24,9 +24,10 @@ export const AutoFocusInputContainer = ({ children, maxValueLength }) => {
   };
 
   const compositeOnChange = (cb, index) => (e) => {
-    if (e.target.value.length >= maxValueLength + 1) {
+    if (e.target.value.length > maxValueLength) {
       return;
     }
+
     cb(e);
     moveFocus(e, index);
   };

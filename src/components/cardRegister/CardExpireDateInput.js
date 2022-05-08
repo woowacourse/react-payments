@@ -36,7 +36,7 @@ export const CardExpireDateInput = () => {
   };
 
   useEffect(() => {
-    if (expireDate.year === '' || expireDate.month === '') {
+    if (expireDate.year.length !== 2 || expireDate.month.length !== 2) {
       return;
     }
 
@@ -47,6 +47,10 @@ export const CardExpireDateInput = () => {
   }, [expireDate]);
 
   const updateTypedExpireDate = (e, name) => {
+    if (parseInt(e.target.value) > 12) {
+      return;
+    }
+
     const paddedDate =
       e.target.value.length === 1
         ? e.target.value.padStart(2, '0')
