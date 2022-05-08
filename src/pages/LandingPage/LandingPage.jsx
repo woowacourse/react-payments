@@ -21,7 +21,7 @@ const LandingPage = () => {
             cardList.map(({ id, alias, ...cardInfo }) => (
               <li>
                 <CardPreview key={id} {...cardInfo} />
-                <p style={{ margin: '14px', textAlign: 'center' }}>{alias}</p>
+                <p className="card-alias">{alias}</p>
               </li>
             ))}
           <li>
@@ -37,8 +37,25 @@ const LandingPage = () => {
 
 const StyledCardList = styled.ul`
   display: flex;
+  width: 100%;
+  height: 591px;
+  overflow: scroll;
   flex-direction: column;
   gap: 8px;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card-alias {
+    margin: 14px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+  }
 `;
 
 export default LandingPage;

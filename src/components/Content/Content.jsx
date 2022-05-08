@@ -10,7 +10,7 @@ const StyledContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  max-height: 100%;
   margin: 46px 22px 26px;
 `;
 
