@@ -40,7 +40,7 @@ function CardDataContextProvider({ children }) {
   const [currentEditIndex, setEditIndex] = useState(CARD_EDITOR_MODE.NEW);
   const [cardList, dispatch] = useReducer(reducer, []);
   const value = useMemo(
-    () => ({ cardList, currentEditIndex, dispatch, setEditIndex }),
+    () => ({ state: { cardList, currentEditIndex }, action: { dispatch, setEditIndex } }),
     [currentEditIndex, cardList],
   );
 
@@ -64,7 +64,8 @@ function useCardDataContext() {
     throw new Error('CardDataContextProvider가 로드되지 않았습니다.');
   }
 
-  const { cardList, dispatch, currentEditIndex, setEditIndex } = context;
+  const { cardList, currentEditIndex } = context.state;
+  const { dispatch, setEditIndex } = context.action;
 
   const handleChangeEditIndex = (index) => {
     setEditIndex(index);
