@@ -8,6 +8,7 @@ import Label from '../Label/Label';
 import InputBox from '../InputBox/InputBox';
 import Input from '../Input/Input';
 import ToolTip from '../ToolTip/ToolTip';
+import Footer from '../Footer/Footer';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import { convertFormDataToObject } from '../../utils/commons';
 import CardsContext from '../../contexts/CardsContext';
@@ -146,7 +147,6 @@ const CardForm = () => {
               {watchingValues.owner?.length}/30
             </span>
           </Label>
-
           <InputBox>
             <Input
               type="text"
@@ -234,7 +234,9 @@ const CardForm = () => {
             />
           </div>
         </Field>
-        <SubmitButton type="submit">다음</SubmitButton>
+        <Footer>
+          <SubmitButton type="submit">다음</SubmitButton>
+        </Footer>
       </StyledCardForm>
     </>
   );
@@ -242,6 +244,7 @@ const CardForm = () => {
 
 const StyledCardForm = styled.form`
   margin: 0;
+  width: 100%;
 `;
 
 export default CardForm;

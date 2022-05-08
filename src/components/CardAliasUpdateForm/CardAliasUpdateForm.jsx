@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Input from '../Input/Input';
 import SubmitButton from '../SubmitButton/SubmitButton';
+import Footer from '../Footer/Footer';
 import useEasyForm from '../../hooks/useEasyForm';
 
 const CardAliasUpdateForm = ({ onSubmit }) => {
@@ -28,7 +29,9 @@ const CardAliasUpdateForm = ({ onSubmit }) => {
           maxLength: 30,
         })}
       />
-      <SubmitButton type="submit">확인</SubmitButton>
+      <Footer>
+        <SubmitButton type="submit">확인</SubmitButton>
+      </Footer>
     </StyledForm>
   );
 };

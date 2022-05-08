@@ -30,19 +30,19 @@ const StyledInput = styled.input`
   }
 
   &.input-expired-date {
-    width: 67px;
+    width: 52px;
   }
 
   &.input-owner {
-    width: 331px;
+    width: 311px;
   }
 
   &.input-cvc {
-    width: 84px;
+    width: 74px;
   }
 
   &.input-password {
-    width: 43px;
+    width: 28px;
   }
 
   &.input-underline {
