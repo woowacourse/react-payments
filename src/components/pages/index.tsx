@@ -8,7 +8,7 @@ import { CardInfoWithCardName } from "types/cardInfo";
 export default function Home({ cards }: { cards: CardInfoWithCardName[] }) {
   const navigate = useNavigate();
 
-  const handleClickCard = (id: number) => {
+  const handleClickCard = (id: number) => () => {
     const cardInfo = cards.find(card => card.id === id);
 
     navigate(PATH.COMPLETE, { state: cardInfo });
