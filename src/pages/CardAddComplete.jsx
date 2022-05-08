@@ -1,9 +1,10 @@
 import React, { useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+
 import styled from 'styled-components';
 import { CardShape, TextNav } from '../components';
 import * as Common from '../components/common/styles';
-import useCardState from '../hooks/useCardState';
+
 import useDispatch from '../hooks/useDispatch';
 
 function CardAddComplete() {
@@ -15,8 +16,6 @@ function CardAddComplete() {
       cardInfo: { number, ownerName, dueDate, company },
     },
   } = useLocation();
-
-  const { dimensions, cardCompanyList } = useCardState();
 
   const handleClick = data => {
     if (targetRef.current.value.trim().length === 0) {
@@ -36,15 +35,7 @@ function CardAddComplete() {
       <S.TitleBox>
         <S.Title>카드등록이 완료되었습니다.</S.Title>
       </S.TitleBox>
-      <CardShape
-        type="USER_CARD"
-        company={company}
-        cardNumber={number}
-        cardOwnerName={ownerName}
-        dueDate={dueDate}
-        dimensions={dimensions}
-        cardCompanyList={cardCompanyList}
-      />
+      <CardShape type="USER_CARD" company={company} cardNumber={number} cardOwnerName={ownerName} dueDate={dueDate} />
       <S.UnderLineInputWrapperForm>
         <S.Span>
           <S.underLineInput ref={targetRef} />

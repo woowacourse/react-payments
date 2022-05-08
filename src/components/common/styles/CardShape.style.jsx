@@ -55,4 +55,26 @@ const GridContainer = styled.div`
   overflow-y: auto;
 `;
 
-export { CardContainer, CardBox, CardHeader, CardChip, CardBottom, CardNumber, CardInfo, CardParagraph, GridContainer };
+const CardAddBox = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 35px;
+`;
+
+export {
+  CardAddBox,
+  CardContainer,
+  CardBox,
+  CardHeader,
+  CardChip,
+  CardBottom,
+  CardNumber,
+  CardInfo,
+  CardParagraph,
+  GridContainer,
+};

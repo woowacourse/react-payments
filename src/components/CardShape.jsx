@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useDispatch from '../hooks/useDispatch';
+import { CARD_ADD_BOX_BG_COLOR } from '../theme';
 
 import CardCompany from './common/CardCompany';
 import Modal from './common/Modal';
@@ -10,6 +12,7 @@ import * as CardShapeStyle from './common/styles/CardShape.style';
 const S = { ...CommonStyle, ...CardShapeStyle };
 
 function CardShape({ type = 'EMPTY_CARD', company, cardNumber, cardOwnerName, dueDate, dimensions, cardCompanyList }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isShown, setIsShown] = useState(false);
@@ -19,6 +22,11 @@ function CardShape({ type = 'EMPTY_CARD', company, cardNumber, cardOwnerName, du
   const handleClickBox = () => {
     setIsShown(!isShown);
   };
+
+  const handleClickAddBox = () => {
+    navigate(`/`);
+  };
+
   const handleClickCompany = ({ id, color, name }) => {
     setHexColor(color);
     setCardCompanyName(name);
@@ -63,7 +71,7 @@ function CardShape({ type = 'EMPTY_CARD', company, cardNumber, cardOwnerName, du
   if (type === 'USER_CARD') {
     return (
       <S.CardContainer>
-        <S.CardBox onClick={handleClickBox} hexColor={company.color}>
+        <S.CardBox hexColor={company.color}>
           <S.CardHeader>
             <S.Span>{company.name}</S.Span>
           </S.CardHeader>
@@ -81,9 +89,16 @@ function CardShape({ type = 'EMPTY_CARD', company, cardNumber, cardOwnerName, du
       </S.CardContainer>
     );
   }
-  // if (type === '') {
-  //   console.log('');
-  // }
+
+  if (type === 'ADD') {
+    return (
+      <S.CardContainer>
+        <S.CardBox onClick={handleClickAddBox} hexColor={CARD_ADD_BOX_BG_COLOR}>
+          <S.CardAddBox>+</S.CardAddBox>
+        </S.CardBox>
+      </S.CardContainer>
+    );
+  }
 }
 
 export default CardShape;

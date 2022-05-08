@@ -1,5 +1,34 @@
 const initialState = {
-  cards: [],
+  cards: [
+    {
+      company: { id: 'company1', color: '#E24141', name: '포코 카드' },
+      dueDate: '02 / 23',
+      name: 'dd222222',
+      number: '2222 2222 **** ****',
+      ownerName: 'ASD1111111',
+    },
+    {
+      company: { id: 'company3', color: '#73BC6D', name: '공원 카드' },
+      dueDate: '02 / 23',
+      name: 'dd6666',
+      number: '2222 2222 **** ****',
+      ownerName: 'ASD2222222',
+    },
+    {
+      company: { id: 'company11', color: '#FBCD58', name: '썬 카드' },
+      dueDate: '02 / 23',
+      name: 'ddasdfasdf',
+      number: '2222 2222 **** ****',
+      ownerName: 'ASD333333',
+    },
+    {
+      company: { id: 'company13', color: '#cc1b32', name: '콜라 카드' },
+      dueDate: '02 / 23',
+      name: 'dd12323',
+      number: '2222 2222 **** ****',
+      ownerName: 'ASD4444444',
+    },
+  ],
   dimensions: { width: 0, height: 0 },
   cardOwnerName: 'NAME',
   cardNumber: '',
