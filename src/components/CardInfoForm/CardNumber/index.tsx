@@ -47,7 +47,6 @@ export default function CardNumber({ validateFormValidation }: CardNumberProps) 
               name="cardNumbers"
               data-index={index}
               pattern="^[•0-9]{1,4}$"
-              required
             />
             <span className="card-number-delimiter" />
           </React.Fragment>

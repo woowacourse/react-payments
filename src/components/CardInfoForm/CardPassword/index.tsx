@@ -46,7 +46,6 @@ export default function CardPassword({ validateFormValidation }: CardPasswordPro
         data-index={0}
         classes="password-input"
         pattern="^[0-9]$"
-        required
       />
       <Input
         type="password"
@@ -58,7 +57,6 @@ export default function CardPassword({ validateFormValidation }: CardPasswordPro
         data-index={1}
         classes="password-input"
         pattern="^[0-9]$"
-        required
       />
       <input
         className="input-basic rest-password-box w-15 password-input"

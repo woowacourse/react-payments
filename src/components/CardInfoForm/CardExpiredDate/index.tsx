@@ -74,7 +74,6 @@ export default function CardExpiredDate({ validateFormValidation }: CardExpiredD
           name="expiredDate"
           data-key="month"
           pattern="^[0-1][0-9]{0,1}$"
-          required
         />
         <span className="expired-date-delimiter">/</span>
         <Input
@@ -87,7 +86,6 @@ export default function CardExpiredDate({ validateFormValidation }: CardExpiredD
           name="expiredDate"
           data-key="year"
           pattern="^[0-9][0-9]{0,1}$"
-          required
         />
       </div>
     </InputContainer>
