@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { MAX_LENGTH } from '../../constants/card';
-import { CARD_INFO_TYPES } from '../../reducer/types';
 import { AutoFocusInputContainer } from '../common/AutoFocusInputContainer';
 
 import {
@@ -19,13 +18,13 @@ const DEFAULT_CARD_NUMBERS_TYPE = [
   { name: 'fourthNumber', type: 'password' },
 ];
 
-export const CardNumbersInput = ({
-  cardType,
-  cardNumbers,
-  onCardNumbersInput,
-  onCardNumberCheck,
-  openModal,
-}) => {
+export const CardNumbersInput = ({ cardType, openModal }) => {
+  const [cardNumbers, setCardNumbers] = useState({
+    firstNumber: '',
+    secondNumber: '',
+    thirdNumber: '',
+    fourthNumber: '',
+  });
   const handleNumberChange = (e, name) => {
     if (
       isNaN(e.nativeEvent.data) ||
@@ -34,33 +33,29 @@ export const CardNumbersInput = ({
       return;
     }
 
-    onCardNumbersInput({
-      type: CARD_INFO_TYPES.SET_CARD_NUMBER,
-      payload: { key: name, cardNumber: e.target.value },
-    });
+    setCardNumbers((prev) => ({ ...prev, [name]: e.target.value }));
   };
 
-  useEffect(() => {
-    const isCardNumbersCompleted = Object.values(cardNumbers).every(
-      (number) => number.length === MAX_LENGTH.EACH_CARD_NUMBER
-    );
+  const handleCardNumbersCompleted = () => {
+    console.log('card numbers completed');
 
-    onCardNumberCheck(isCardNumbersCompleted);
-
-    if (cardType.name === '' && isCardNumbersCompleted) {
-      openModal();
-    }
-  }, [cardNumbers]);
+    // if (cardType.name === '' && isCardNumbersCompleted) {
+    //   openModal();
+    // }
+  };
 
   return (
     <InputContainer>
       <InputTitle>카드 번호</InputTitle>
       <Style.CardNumberInputBox>
-        <AutoFocusInputContainer maxValueLength={MAX_LENGTH.EACH_CARD_NUMBER}>
+        <AutoFocusInputContainer
+          maxValueLength={MAX_LENGTH.EACH_CARD_NUMBER}
+          onCompleted={handleCardNumbersCompleted}
+        >
           {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }) => (
             <InputBasic
               key={name}
-              value={cardNumbers?.[name]}
+              value={cardNumbers[name]}
               onChange={(e) => handleNumberChange(e, name)}
               type={type}
             />

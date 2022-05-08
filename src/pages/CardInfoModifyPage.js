@@ -1,20 +1,18 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+import { CardNickName } from '../components/CardNickName';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 import { InputBasic, Layout } from '../components/common/styled';
 import { initialCardInfo } from '../constants/card';
 
 export const CardInfoModifyPage = ({ cardInfo = initialCardInfo }) => {
+  const [cardNickName, setCardNickName] = useState('');
+
+  const handleSubmitNickName = () => {};
   return (
     <Style.ModifyPageLayout>
-      <Style.CardWrapper>
-        <Style.Message>카드 등록이 완료되었습니다!</Style.Message>
-        <Card size="lg" cardInfo={cardInfo} />
-        <Style.ModifyCardNameInput />
-      </Style.CardWrapper>
-      <Style.ButtonWrapper>
-        <Button>확인</Button>
-      </Style.ButtonWrapper>
+      <CardNickName message="수정할 별칭을 입력해주세요!" />
     </Style.ModifyPageLayout>
   );
 };

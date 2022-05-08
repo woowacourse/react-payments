@@ -1,20 +1,18 @@
-import React from 'react';
+import { useState } from 'react';
 
 import { MAX_LENGTH } from '../../constants/card';
-import { CARD_INFO_TYPES } from '../../reducer/types';
 
 import { InputContainer, InputTitle, InputBasic } from '../common/styled';
 
-export const CardOwnerInput = ({ ownerName, onOwnerNameInput }) => {
+export const CardOwnerInput = () => {
+  const [ownerName, setOwnerName] = useState('');
+
   const handleOwnerNameChange = (e) => {
     if (e.target.value.length > MAX_LENGTH.OWNER_NAME) {
       return;
     }
 
-    onOwnerNameInput({
-      type: CARD_INFO_TYPES.SET_OWNER_NAME,
-      payload: { ownerName: e.target.value },
-    });
+    setOwnerName(e.target.value);
   };
 
   return (

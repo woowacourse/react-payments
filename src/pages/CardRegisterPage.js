@@ -1,69 +1,30 @@
-import { useState, useEffect, useReducer } from 'react';
+import { createContext } from 'react';
 import { nanoid } from 'nanoid';
 
-import { cardInfoReducer } from '../reducer/cardInfo';
-
-import { COMPONENTS, initialCardInfo, CARD_TYPES } from '../constants/card';
-
-import { CardExpireDateInput } from '../components/CardRegister/CardExpireDateInput';
-import { CardNumbersInput } from '../components/CardRegister/CardNumbersInput';
-import { CardOwnerInput } from '../components/CardRegister/CardOwnerInput';
-import { CardPasswordInput } from '../components/CardRegister/CardPasswordInput';
-import { CVCInput } from '../components/CardRegister/CVCInput';
-import { CardSelectModal } from '../components/CardRegister/CardSelectModal';
-import { CVCHelperModal } from '../components/CardRegister/CVCHelperModal';
-import { Button } from '../components/common/Button';
-import { PageTitle } from '../components/common/PageTitle';
-import { ModalSelector } from '../components/common/ModalSelector';
-import { useModalSelector } from '../hooks/useModalSelector';
-import { CardPreview } from '../components/CardRegister/CardPreview';
-
 import { Layout } from '../components/common/styled';
-import styled from 'styled-components';
+
 import { useNavigate } from 'react-router-dom';
+import { getStorage, setStorage } from '../utils/localStorage';
+import { ComponentSelector } from '../components/common/ComponentSelector';
+import { CardRegister } from '../components/CardRegister';
+import { useComponentSelector } from '../hooks/useComponentSelector';
+import { CardNickName } from '../components/CardNickName';
+// import { useContext } from 'react';
+import { initialCardInfo } from '../constants/card';
 
-const getStoredArray = (key) => {
-  return JSON.parse(localStorage.getItem(key)) ?? [];
-};
-
-const setStorage = (key, value) => {
-  localStorage.setItem(key, JSON.stringify(value));
-};
+export const CardInfoContext = createContext();
 
 export const CardRegisterPage = () => {
+  // const first = useContext(second);
   const navigate = useNavigate();
-  const [cardInfo, dispatch] = useReducer(cardInfoReducer, initialCardInfo);
-
-  const [openedModalComponent, openModal, closeModal] = useModalSelector();
-
-  const [checkInputCompleted, setCheckInputCompleted] = useState({
-    cardNumbers: false,
-    cardExpireDate: false,
-    cardCVC: false,
-    cardPassword: false,
-    cardType: false,
-  });
-
-  const [allCompleted, setAllCompleted] = useState(false);
-
-  const checkerFactory = (subject) => {
-    return (isCompleted) => {
-      setCheckInputCompleted((prev) => ({ ...prev, [subject]: isCompleted }));
-    };
-  };
-
-  useEffect(() => {
-    setAllCompleted(Object.values(checkInputCompleted).every((check) => check));
-  }, [checkInputCompleted]);
 
   const handleSubmitCardInfo = () => {
     const id = nanoid();
-    const uploadCardInfo = {
-      [id]: { ...cardInfo, id: [id] },
-    };
+    const { password, CVC, ...safeCardInfo } = cardInfo;
+    const uploadCardInfo = { ...safeCardInfo, id: [id] };
 
-    const storedIds = getStoredArray('cardIds');
-    const storedCardInfos = getStoredArray('cardInfos');
+    const storedIds = getStorage('cardIds');
+    const storedCardInfos = getStorage('cardInfos');
 
     setStorage('cardIds', storedIds.concat(id));
     setStorage('cardInfos', storedCardInfos.concat(uploadCardInfo));
@@ -71,66 +32,16 @@ export const CardRegisterPage = () => {
     navigate('/react-payments');
   };
 
+  const [selected, showNextComponent] = useComponentSelector();
+
   return (
     <Layout>
-      <PageTitle>카드 추가</PageTitle>
-      <CardPreview
-        cardInfo={cardInfo}
-        onClickCard={() => openModal(COMPONENTS.CARD_TYPE)}
-      />
-      <CardNumbersInput
-        cardType={cardInfo.cardType}
-        cardNumbers={cardInfo.cardNumbers}
-        onCardNumbersInput={dispatch}
-        onCardNumberCheck={checkerFactory(COMPONENTS.NUMBERS)}
-        openModal={() => openModal(COMPONENTS.CARD_TYPE)}
-      />
-      <CardExpireDateInput
-        expireDate={cardInfo.expireDate}
-        onExpireDateInput={dispatch}
-        onCardExpireCheck={checkerFactory(COMPONENTS.EXPIRE_DATE)}
-      />
-      <CardOwnerInput
-        ownerName={cardInfo.ownerName}
-        onOwnerNameInput={dispatch}
-      />
-      <CVCInput
-        CVC={cardInfo.CVC}
-        onCVCInput={dispatch}
-        onCardCVCCheck={checkerFactory(COMPONENTS.CVC)}
-        openModal={() => openModal(COMPONENTS.CVC)}
-      />
-      <CardPasswordInput
-        password={cardInfo.password}
-        onPasswordInput={dispatch}
-        onCardPasswordCheck={checkerFactory(COMPONENTS.PASSWORD)}
-      />
-      <ModalSelector selected={openedModalComponent} closeModal={closeModal}>
-        <CardSelectModal
-          name={COMPONENTS.CARD_TYPE}
-          cardTypes={CARD_TYPES}
-          closeModal={closeModal}
-          onCardType={dispatch}
-          onCardTypeCheck={checkerFactory(COMPONENTS.CARD_TYPE)}
-        />
-        <CVCHelperModal name={COMPONENTS.CVC} />
-      </ModalSelector>
-
-      <Style.ButtonWrapper>
-        <Button
-          disabled={allCompleted ? false : true}
-          onClick={handleSubmitCardInfo}
-        >
-          다음
-        </Button>
-      </Style.ButtonWrapper>
+      <CardInfoContext.Provider value={initialCardInfo}>
+        <ComponentSelector selected={selected}>
+          <CardRegister onSubmit={showNextComponent} />
+          <CardNickName />
+        </ComponentSelector>
+      </CardInfoContext.Provider>
     </Layout>
   );
-};
-
-const Style = {
-  ButtonWrapper: styled.div`
-    width: 100%;
-    text-align: right;
-  `,
 };

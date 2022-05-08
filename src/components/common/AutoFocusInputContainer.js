@@ -1,6 +1,10 @@
 import React, { useRef } from 'react';
 
-export const AutoFocusInputContainer = ({ children, maxValueLength }) => {
+export const AutoFocusInputContainer = ({
+  children,
+  maxValueLength,
+  onCompleted,
+}) => {
   const flattenChildren = React.Children.toArray(children);
   const inputChildren = flattenChildren.filter(
     (child) => child.type?.target === 'input'
@@ -24,12 +28,15 @@ export const AutoFocusInputContainer = ({ children, maxValueLength }) => {
   };
 
   const compositeOnChange = (cb, index) => (e) => {
+    if (e.target.value.length >= maxValueLength + 1) {
+      return;
+    }
     cb(e);
     moveFocus(e, index);
   };
 
   let idx = 0;
-  const refedInputChildren = flattenChildren.map((child) => {
+  const refedChildren = flattenChildren.map((child) => {
     if (child.type?.target === 'input') {
       const currentIndex = idx;
       idx += 1;
@@ -47,5 +54,12 @@ export const AutoFocusInputContainer = ({ children, maxValueLength }) => {
     return child;
   });
 
-  return <>{refedInputChildren}</>;
+  if (
+    onCompleted &&
+    inputChildren.every((input) => input.props.value?.length === maxValueLength)
+  ) {
+    onCompleted();
+  }
+
+  return <>{refedChildren}</>;
 };
