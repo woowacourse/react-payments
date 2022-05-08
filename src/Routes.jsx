@@ -14,15 +14,15 @@ const CardListPage = Loadable(lazy(() => import('./pages/CardList')));
 const routes = [
   {
     path: '/',
+    element: <CardListPage />,
+  },
+  {
+    path: '/card-add',
     element: <CardAddPage />,
   },
   {
     path: 'card-add-complete',
     element: <CardAddCompletePage />,
-  },
-  {
-    path: 'card-list',
-    element: <CardListPage />,
   },
 ];
 

@@ -12,7 +12,6 @@ function App() {
   const dispatch = useDispatch();
   const targetRef = useRef();
   const content = useRoutes(routes);
-
   const { title } = useCardState();
 
   useLayoutEffect(() => {

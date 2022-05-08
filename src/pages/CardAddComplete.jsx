@@ -28,7 +28,7 @@ function CardAddComplete() {
       type: 'ADD_CARD',
       card: data,
     });
-    navigate(`/card-list`);
+    navigate(`/`);
   };
 
   useEffect(() => {

@@ -24,7 +24,7 @@ function CardShape({ type = 'EMPTY_CARD', company, cardNumber, cardOwnerName, du
   };
 
   const handleClickAddBox = () => {
-    navigate(`/`);
+    navigate(`/card-add`);
   };
 
   const handleClickCompany = ({ id, color, name }) => {

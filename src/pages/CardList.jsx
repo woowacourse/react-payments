@@ -30,7 +30,9 @@ function CardList() {
           </S.CardItem>
         );
       })}
-      <CardShape type="ADD" />
+      <S.CardItem>
+        <CardShape type="ADD" />
+      </S.CardItem>
     </div>
   );
 }
