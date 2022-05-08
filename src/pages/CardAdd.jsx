@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 import { CardNumber, CardOwner, CardPassword, CardSecurityCode, CardShape, DueDate, TextNav } from '../components';
 import useCardState from '../hooks/useCardState';
+import useDispatch from '../hooks/useDispatch';
 
 function CardAdd() {
   const { cardNumber, cardOwnerName, dueDate, dimensions, cardCompany, cardCompanyList, isAllCompleted } =
     useCardState();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const isCompleted = Object.values(isAllCompleted).every(ok => ok);
@@ -24,6 +26,7 @@ function CardAdd() {
   const handleClick = () => {
     alert('카드 등록이 완료 되었습니다 :D');
     navigate(`/card-add-complete`, { state: { cardInfo } });
+    dispatch({ type: 'INITIALIZE' });
   };
 
   return (

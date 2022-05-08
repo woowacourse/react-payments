@@ -1,34 +1,5 @@
 const initialState = {
-  cards: [
-    {
-      company: { id: 'company1', color: '#E24141', name: '포코 카드' },
-      dueDate: '02 / 23',
-      name: 'dd222222',
-      number: '2222 2222 **** ****',
-      ownerName: 'ASD1111111',
-    },
-    {
-      company: { id: 'company3', color: '#73BC6D', name: '공원 카드' },
-      dueDate: '02 / 23',
-      name: 'dd6666',
-      number: '2222 2222 **** ****',
-      ownerName: 'ASD2222222',
-    },
-    {
-      company: { id: 'company11', color: '#FBCD58', name: '썬 카드' },
-      dueDate: '02 / 23',
-      name: 'ddasdfasdf',
-      number: '2222 2222 **** ****',
-      ownerName: 'ASD333333',
-    },
-    {
-      company: { id: 'company13', color: '#cc1b32', name: '콜라 카드' },
-      dueDate: '02 / 23',
-      name: 'dd12323',
-      number: '2222 2222 **** ****',
-      ownerName: 'ASD4444444',
-    },
-  ],
+  cards: [],
   dimensions: { width: 0, height: 0 },
   cardOwnerName: 'NAME',
   cardNumber: '',
@@ -121,6 +92,21 @@ function reducer(state, action) {
       return {
         ...state,
         cardCompany: action.cardCompany,
+      };
+    case 'INITIALIZE':
+      return {
+        ...state,
+        cardOwnerName: 'NAME',
+        cardNumber: '',
+        dueDate: 'MM / YY',
+        isAllCompleted: {
+          isFinishTypingCardNumber: false,
+          isCorrectPwd: false,
+          isCorrectOwnerName: false,
+          isCorrectCardDate: false,
+          isCorrectSecurityCode: false,
+        },
+        cardCompany: {},
       };
     default:
       throw new Error();
