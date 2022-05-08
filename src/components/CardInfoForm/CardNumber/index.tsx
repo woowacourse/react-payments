@@ -46,7 +46,7 @@ export default function CardNumber({ validateFormValidation }: CardNumberProps) 
               maxLength={4}
               name="cardNumbers"
               data-index={index}
-              pattern="^[•0-9]{0,4}$"
+              pattern="^[•0-9]{1,4}$"
             />
             <span className="card-number-delimiter" />
           </React.Fragment>
