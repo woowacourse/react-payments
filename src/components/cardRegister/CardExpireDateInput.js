@@ -12,6 +12,11 @@ import {
   InputBox,
 } from '../common/styled';
 
+const dateLimit = {
+  month: 12,
+  year: 99,
+};
+
 export const CardExpireDateInput = () => {
   const context = useContext(CardInfoContext);
 
@@ -36,14 +41,17 @@ export const CardExpireDateInput = () => {
   };
 
   useEffect(() => {
+    const isValidLength =
+      expireDate.month.length === 2 && expireDate.year.length === 2;
+
     context.setInputCompleted(
       'expireDate',
-      isAvailableDate(expireDate.month, expireDate.year)
+      isAvailableDate(expireDate.month, expireDate.year) && isValidLength
     );
   }, [expireDate]);
 
   const updateTypedExpireDate = (e, name) => {
-    if (parseInt(e.target.value) > 12) {
+    if (e.target.value > dateLimit[name]) {
       return;
     }
 
