@@ -36,8 +36,10 @@ const AliasModal = ({ visible, ButtonComponent, children }) => {
           </Card>
         </FlexCenter>
       </MarginBottomWrapper>
-      <InputStyled value={alias} onChange={onChangeInput} />
-      <ButtonComponent card={[...children, alias]}>확인</ButtonComponent>
+      <FlexCenter>
+        <InputStyled value={alias} onChange={onChangeInput} />
+      </FlexCenter>
+      <ButtonComponent card={[...children, alias]} />
     </WrapperStyled>
   );
 };

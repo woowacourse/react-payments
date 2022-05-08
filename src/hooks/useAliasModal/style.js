@@ -13,7 +13,7 @@ export const WrapperStyled = styled.div`
 export const TitleStyled = styled.h1`
   text-align: center;
   font-size: 24px;
-  color: var(--card-complete-color);
+  color: var(--card-alias-color);
 `;
 
 export const InputStyled = styled.input`
@@ -22,7 +22,7 @@ export const InputStyled = styled.input`
   text-align: center;
   font-size: 18px;
   outline: none;
-  color: var(--card-complete-color);
+  color: var(--card-alias-color);
   border: none;
   border-bottom: 1px solid var(--unselected-company);
 `;
