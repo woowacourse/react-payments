@@ -9,8 +9,30 @@ function CardForm({ card, updateCard, handleCardForm }) {
     handleCardForm();
   };
 
+  const moveFocus = (form, currentElement, direction) => {
+    const formInputArray = [...form];
+    const currentIndex = formInputArray.indexOf(currentElement);
+    formInputArray[currentIndex + direction]?.focus();
+  };
+
+  const handlePrevFocus = (e) => {
+    const { key, target } = e;
+    const { form, value } = target;
+
+    if (key !== 'Backspace' || value !== '') return;
+    moveFocus(form, target, -1);
+  };
+
+  const handleNextFocus = (e) => {
+    const { form, maxLength, value } = e.target;
+
+    if (value.length === maxLength) {
+      moveFocus(form, e.target, 1);
+    }
+  };
+
   return (
-    <form onSubmit={onSubmitCardForm}>
+    <form onSubmit={onSubmitCardForm} onChange={handleNextFocus} onKeyDown={handlePrevFocus}>
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
