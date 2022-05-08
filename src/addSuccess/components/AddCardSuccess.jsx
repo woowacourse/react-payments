@@ -14,7 +14,7 @@ function AddCardSuccess({ addCard }) {
     event.preventDefault();
 
     addCard({ ...card, nickName: cardNick });
-    navigator('/');
+    navigator('/', { replace: true });
   };
 
   return (
