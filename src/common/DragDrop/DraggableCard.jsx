@@ -22,5 +22,9 @@ const Styled = {
     text-align: center;
     margin-bottom: 25px;
     position: relative;
+    &:hover {
+      transform: scale(1.02);
+      transition: all 0.5s;
+    }
   `,
 };
