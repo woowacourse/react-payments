@@ -1,9 +1,9 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
 import { PageContext } from '../../context';
 import { CardContext } from '../../context';
 import { DEFAULT_CARD_INFO } from '../../constants';
 import { screen, userEvent } from '@storybook/testing-library';
-import { PAGE, DEFAULT_ROUTE_INFO, DISPATCH_TYPE } from '../../constants';
+import { PAGE, DEFAULT_ROUTE_INFO } from '../../constants';
 import AddCardPage from './AddCardPage';
 
 export default {
@@ -11,72 +11,17 @@ export default {
   title: 'AddCardPage',
 };
 
-const cardInputReducer = (state, action) => {
-  const { type, payload } = action;
-
-  switch (type) {
-    case DISPATCH_TYPE.CHANGE_CARD_NUMBER: {
-      const { key, cardNumber } = payload;
-      return {
-        ...state,
-        cardNumber: { ...state.cardNumber, [`${key}`]: cardNumber },
-      };
-    }
-    case DISPATCH_TYPE.CHANGE_EXPIRATION_DATE: {
-      const { key, date } = payload;
-      return {
-        ...state,
-        expirationDate: { ...state.expirationDate, [`${key}`]: date },
-      };
-    }
-    case DISPATCH_TYPE.CHANGE_OWNER_NAME: {
-      const { ownerName } = payload;
-      return {
-        ...state,
-        ownerName,
-      };
-    }
-    case DISPATCH_TYPE.CHANGE_SECURITY_CODE: {
-      const { securityCode } = payload;
-      return {
-        ...state,
-        securityCode: securityCode,
-      };
-    }
-    case DISPATCH_TYPE.CHANGE_PASSWORD: {
-      const { key, password } = payload;
-      return {
-        ...state,
-        password: { ...state.password, [`${key}`]: password },
-      };
-    }
-    case DISPATCH_TYPE.CHANGE_CARD_DESIGNATION: {
-      const { cardDesignation } = payload;
-      return {
-        ...state,
-        cardDesignation: cardDesignation,
-      };
-    }
-    case DISPATCH_TYPE.RESET: {
-      return { ...payload };
-    }
-
-    default:
-      throw new Error();
-  }
-};
-
 function Template() {
   const [cardList, setCardList] = useState({});
   const [page, setPage] = useState(PAGE.ADD_CARD);
   const [tempRouter, setTempRouter] = useState(DEFAULT_ROUTE_INFO);
-  const [cardInput, cardInputDispatch] = useReducer(cardInputReducer, DEFAULT_CARD_INFO);
+  const [cardInput, setCardInput] = useState(DEFAULT_CARD_INFO);
 
   const cardState = {
     cardList: cardList,
     setCardList: setCardList,
     cardInput: cardInput,
-    cardInputDispatch: cardInputDispatch,
+    setCardInput: setCardInput,
   };
 
   const pageState = {
