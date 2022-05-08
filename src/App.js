@@ -5,63 +5,6 @@ import CardListPage from './components/Pages/CardListPage';
 import CompleteAddCardPage from './components/Pages/CompleteAddCardPage';
 import AddCardPage from './components/Pages/AddCardPage';
 
-/*
-const cardInputReducer = (state, action) => {
-  const { type, payload } = action;
-
-  switch (type) {
-    case DISPATCH_TYPE.CHANGE_CARD_NUMBER: {
-      const { key, cardNumber } = payload;
-      return {
-        ...state,
-        cardNumber: { ...state.cardNumber, [`${key}`]: cardNumber },
-      };
-    }
-    case DISPATCH_TYPE.CHANGE_EXPIRATION_DATE: {
-      const { key, date } = payload;
-      return {
-        ...state,
-        expirationDate: { ...state.expirationDate, [`${key}`]: date },
-      };
-    }
-    case DISPATCH_TYPE.CHANGE_OWNER_NAME: {
-      const { ownerName } = payload;
-      return {
-        ...state,
-        ownerName,
-      };
-    }
-    case DISPATCH_TYPE.CHANGE_SECURITY_CODE: {
-      const { securityCode } = payload;
-      return {
-        ...state,
-        securityCode: securityCode,
-      };
-    }
-    case DISPATCH_TYPE.CHANGE_PASSWORD: {
-      const { key, password } = payload;
-      return {
-        ...state,
-        password: { ...state.password, [`${key}`]: password },
-      };
-    }
-    case DISPATCH_TYPE.CHANGE_CARD_DESIGNATION: {
-      const { cardDesignation } = payload;
-      return {
-        ...state,
-        cardDesignation: cardDesignation,
-      };
-    }
-    case DISPATCH_TYPE.RESET: {
-      return { ...payload };
-    }
-
-    default:
-      throw new Error();
-  }
-};
-*/
-
 function App() {
   const [cardList, setCardList] = useState({});
   const [page, setPage] = useState(PAGE.ADD_CARD);
