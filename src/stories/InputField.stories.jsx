@@ -4,7 +4,7 @@ import InputField from '../components/common/InputField';
 import { ADD_CARD_FORM_ERROR_MESSAGE } from '../constants';
 
 export default {
-  title: 'InputField',
+  title: 'Component/InputField',
   component: InputField,
 };
 

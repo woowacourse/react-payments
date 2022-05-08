@@ -2,7 +2,7 @@ import React from 'react';
 import CardItem from '../components/CardItem';
 
 export default {
-  title: 'CardItem',
+  title: 'Component/CardItem',
   component: CardItem,
 };
 

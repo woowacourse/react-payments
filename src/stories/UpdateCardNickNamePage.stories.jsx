@@ -8,7 +8,7 @@ import UpdateCardNickNamePage from './../pages/UpdateCardNickNamePage';
 import { MOCK_DATA } from './mock';
 
 export default {
-  title: 'UpdateCardNickNamePage',
+  title: 'Page/UpdateCardNickNamePage',
   component: UpdateCardNickNamePage,
   decorators: [
     withReactContext({

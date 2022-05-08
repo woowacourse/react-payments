@@ -8,7 +8,7 @@ import AddCardPage from './../pages/AddCardPage';
 import { MOCK_DATA } from './mock';
 
 export default {
-  title: 'AddCardPage',
+  title: 'Page/AddCardPage',
   component: AddCardPage,
   decorators: [
     withReactContext({

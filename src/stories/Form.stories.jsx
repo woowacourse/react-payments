@@ -5,7 +5,7 @@ import InputField from './../components/common/InputField';
 import Button from '../components/common/Button';
 
 export default {
-  title: 'Form',
+  title: 'Component/Form',
   component: Form,
 };
 

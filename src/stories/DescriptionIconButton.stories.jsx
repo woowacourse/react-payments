@@ -5,7 +5,7 @@ import DescriptionIconButton from './../components/common/DescriptionIconButton'
 import QuestionMarkIcon from '../assets/images/questionMarkIcon.svg';
 
 export default {
-  title: 'DescriptionIconButton',
+  title: 'Component/DescriptionIconButton',
   component: DescriptionIconButton,
 };
 

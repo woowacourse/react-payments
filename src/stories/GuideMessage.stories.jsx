@@ -2,7 +2,7 @@ import React from 'react';
 import { GuideMessage } from '../components/common/styled';
 
 export default {
-  title: 'GuideMessage',
+  title: 'Component/GuideMessage',
   component: GuideMessage,
 };
 

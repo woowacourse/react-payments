@@ -7,7 +7,7 @@ import CardListPage from './../pages/CardListPage';
 import { MOCK_DATA } from './mock';
 
 export default {
-  title: 'CardListPage',
+  title: 'Page/CardListPage',
   component: CardListPage,
   decorators: [
     withReactContext({
