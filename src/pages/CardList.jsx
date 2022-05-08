@@ -2,28 +2,42 @@ import styled from 'styled-components';
 
 import { Card, EmptyCard, Header } from 'components';
 
-// TODO: context api로 교체
-const cardList = Array.from({ length: 2 }, () => {
-  return { cardNickname: '공원카드' };
-});
+import { useGetCards } from 'hooks';
 
 function CardList() {
+  const cardList = useGetCards();
+  console.log(cardList);
+
   return (
     <>
       <Header title="보유 카드" />
       <Styled.CardList>
-        {cardList.map(({ cardNickname }, index) => (
-          <Styled.NicknamedCardContainer key={index}>
-            <Card
-            // bgColor={cardKind.color}
-            // name={cardOwnerName}
-            // number={encryptedCardNumber}
-            // title={cardKind.title}
-            // validDate={validDate}
-            />
-            <p>{cardNickname || '카드'}</p>
-          </Styled.NicknamedCardContainer>
-        ))}
+        {cardList &&
+          cardList.map(
+            (
+              {
+                attributes: {
+                  cardNumber,
+                  cardKind,
+                  cardNickname,
+                  cardOwnerName,
+                  validDate,
+                },
+              },
+              index
+            ) => (
+              <Styled.NicknamedCardContainer key={index}>
+                <Card
+                  bgColor={cardKind.color}
+                  name={cardOwnerName}
+                  number={cardNumber}
+                  title={cardKind.title}
+                  validDate={validDate}
+                />
+                <p>{cardNickname || '카드'}</p>
+              </Styled.NicknamedCardContainer>
+            )
+          )}
         <EmptyCard />
       </Styled.CardList>
     </>

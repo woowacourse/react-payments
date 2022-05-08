@@ -1,3 +1,5 @@
+export const API_URL = 'http://localhost:1337';
+
 export const ERROR_MESSAGE = {
   INVALID_CARD_NUMBER_LENGTH: '14~16자리를 입력해주세요',
   INVALID_CARD_OWNER_NAME: '영어로만 입력해주세요',

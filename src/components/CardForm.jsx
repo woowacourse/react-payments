@@ -2,7 +2,7 @@ import { useContext, useReducer } from 'react';
 
 import { Button, CVCTooltip, Input } from 'components';
 
-import { useCardPassword, useCVC, useSubmit } from 'hooks';
+import { useCardPassword, useCVC, useNavigateTo } from 'hooks';
 
 import { CardContext } from 'contexts/CardContext';
 
@@ -12,10 +12,10 @@ import { ERROR_MESSAGE, RULE } from 'constants';
 
 function CardForm() {
   const { CVC, handleCVC, showCVCValidation } = useCVC('');
-  const [firstPassword, setFirstPassword] = useCardPassword('');
-  const [secondPassword, setSecondPassword] = useCardPassword('');
+  const [firstPassword, handleFirstPassword] = useCardPassword('');
+  const [secondPassword, handleSecondPassword] = useCardPassword('');
   const [isToolTipOpen, toggleToolTip] = useReducer(visible => !visible, false);
-  const handleSubmitNewCard = useSubmit('/add-card-complete');
+  const handleSubmitNewCard = useNavigateTo('/add-card-complete');
 
   const {
     cardNumber,
@@ -60,7 +60,8 @@ function CardForm() {
           placeholder="MM / YY"
           value={validDate}
           width="137px"
-          onBlur={showValidDateValidation}
+          title={ERROR_MESSAGE.INVALID_VALID_DATE}
+          // onBlur={showValidDateValidation}
           onChange={handleValidDate}
           required
         />
@@ -111,7 +112,7 @@ function CardForm() {
           type="password"
           width="43px"
           value={firstPassword}
-          onChange={setFirstPassword}
+          onChange={handleFirstPassword}
           required
         />
         <Input
@@ -119,7 +120,7 @@ function CardForm() {
           type="password"
           width="43px"
           value={secondPassword}
-          onChange={setSecondPassword}
+          onChange={handleSecondPassword}
           required
         />
         <Styled.Bullet>•</Styled.Bullet>
