@@ -2,17 +2,29 @@ import React from 'react';
 import styled from 'styled-components';
 import { censorString } from '../../utils/commons';
 
-const CardPreview = ({
-  size,
-  brand,
-  firstCardNumber,
-  secondCardNumber,
-  thirdCardNumber,
-  fourthCardNumber,
-  owner,
-  expiredMonth,
-  expiredYear,
-}) => {
+const CardPreview = (
+  {
+    size,
+    brand,
+    firstCardNumber,
+    secondCardNumber,
+    thirdCardNumber,
+    fourthCardNumber,
+    owner,
+    expiredMonth,
+    expiredYear,
+  } = {
+    size: 'small',
+    brand: '',
+    firstCardNumber: '',
+    secondCardNumber: '',
+    thirdCardNumber: '',
+    fourthCardNumber: '',
+    owner: '',
+    expiredMonth: '',
+    expiredYear: '',
+  }
+) => {
   const isSmall = size === 'small' || !size;
   const cardSizeClass = isSmall ? 'small-card' : 'big-card';
   const cardChipClass = isSmall ? 'small-card__chip' : 'big-card__chip';

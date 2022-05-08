@@ -1,9 +1,13 @@
 import React from 'react';
+import { Reset } from 'styled-reset';
 import { addDecorator } from '@storybook/react';
 import { MemoryRouter } from 'react-router';
 
 addDecorator((story) => (
-  <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+  <>
+    <Reset />
+    <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+  </>
 ));
 
 export const parameters = {

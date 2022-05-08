@@ -3,12 +3,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CardAliasUpdateForm from '../../components/CardAliasUpdateForm/CardAliasUpdateForm';
 import CardPreview from '../../components/CardPreview/CardPreview';
-import Content from '../../components/Content/Content';
+import Content from '../../components/Layout/Content/Content';
 import CardsContext from '../../contexts/CardsContext';
 
 import { convertFormDataToObject } from '../../utils/commons';
 
-const CardAliasNamingPage = () => {
+const CardAliasUpdatePage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { updateCard } = useContext(CardsContext);
@@ -51,4 +51,4 @@ const VerticalGrid = styled.div`
   grid-template-rows: 150px 1fr 1fr;
 `;
 
-export default CardAliasNamingPage;
+export default CardAliasUpdatePage;

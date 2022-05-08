@@ -3,7 +3,7 @@ import React from 'react';
 import Input from './Input';
 
 export default {
-  title: 'Example/Input',
+  title: 'Component/Input',
   component: Input,
 };
 

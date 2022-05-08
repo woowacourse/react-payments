@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CardPreview from '../../components/CardPreview/CardPreview';
-import Header from '../../components/Header/Header';
-import Content from '../../components/Content/Content';
+import Header from '../../components/Layout/Header/Header';
+import Content from '../../components/Layout/Content/Content';
 import CardRegistrationButton from '../../components/CardRegistrationButton/CardRegistrationButton';
 import CardsContext from '../../contexts/CardsContext';
 

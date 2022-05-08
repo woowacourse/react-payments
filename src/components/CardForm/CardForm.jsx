@@ -8,7 +8,7 @@ import Label from '../Label/Label';
 import InputBox from '../InputBox/InputBox';
 import Input from '../Input/Input';
 import ToolTip from '../ToolTip/ToolTip';
-import Footer from '../Footer/Footer';
+import Footer from '../Layout/Footer/Footer';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import { convertFormDataToObject } from '../../utils/commons';
 import CardsContext from '../../contexts/CardsContext';

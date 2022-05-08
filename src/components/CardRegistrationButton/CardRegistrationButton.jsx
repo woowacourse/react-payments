@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const CardRegistration = () => (
   <StyledCardPreview className="card-box">
-    <div className="small-card">
+    <div className="empty-card">
       <div className="card-middle">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ const StyledCardPreview = styled.div`
   margin: 10px 0;
   color: #575757;
 
-  .small-card {
+  .empty-card {
     display: flex;
     flex-direction: column;
     align-items: center;

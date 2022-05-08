@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Input from '../Input/Input';
 import SubmitButton from '../SubmitButton/SubmitButton';
-import Footer from '../Footer/Footer';
+import Footer from '../Layout/Footer/Footer';
 import useEasyForm from '../../hooks/useEasyForm';
 
 const CardAliasUpdateForm = ({ onSubmit }) => {

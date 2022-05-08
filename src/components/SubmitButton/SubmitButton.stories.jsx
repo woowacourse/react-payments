@@ -2,7 +2,7 @@ import React from 'react';
 import SubmitButton from './SubmitButton';
 
 export default {
-  title: 'Example/SubmitButton',
+  title: 'Component/SubmitButton',
   component: SubmitButton,
 };
 

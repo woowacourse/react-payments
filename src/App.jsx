@@ -6,7 +6,7 @@ import CardsContext from './contexts/CardsContext';
 import useStore from './hooks/useStore';
 import LandingPage from './pages/LandingPage/LandingPage';
 import CardRegistrationPage from './pages/CardRegistrationPage.jsx/CardRegistrationPage';
-import CardAliasNamingPage from './pages/CardAliasNamingPage/CardAliasNamingPage';
+import CardAliasUpdatePage from './pages/CardAliasUpdatePage/CardAliasUpdatePage';
 
 const App = () => {
   const cardsApi = useStore();
@@ -19,7 +19,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/register" element={<CardRegistrationPage />} />
-            <Route path="/confirm" element={<CardAliasNamingPage />} />
+            <Route path="/confirm" element={<CardAliasUpdatePage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </CardsContext.Provider>
@@ -29,11 +29,13 @@ const App = () => {
 };
 
 const StyledApp = styled.div`
-  /* padding: 16px 24px; */
   display: flex;
   flex-direction: column;
-  height: 100%;
   align-items: stretch;
+  width: 375px;
+  min-width: 375px;
+  height: 700px;
+  position: relative;
 `;
 
 export default App;

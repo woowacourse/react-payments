@@ -24,8 +24,4 @@ input {
 
 #root {
   background-color: #fff;
-  width: 375px;
-  min-width: 375px;
-  height: 700px;
-  position: relative;
 }

@@ -4,7 +4,7 @@ import Input from '../Input/Input';
 import InputBox from './InputBox';
 
 export default {
-  title: 'Example/InputBox',
+  title: 'Component/InputBox',
   component: InputBox,
 };
 

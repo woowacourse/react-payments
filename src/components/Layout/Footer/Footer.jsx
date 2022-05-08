@@ -7,10 +7,12 @@ const Footer = ({ children }) => {
 
 const StyledFooter = styled.footer`
   position: absolute;
-  width: 51px;
+  display: flex;
+  flex-direction: row;
   height: 34px;
   right: 25px;
   bottom: 16px;
+  float: right;
 `;
 
 export default Footer;
