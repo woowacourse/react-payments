@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from '@emotion/styled';
 
 type CardInfo = {
   name: string;
@@ -10,24 +11,18 @@ type Props = {
   cardInfo: CardInfo;
 };
 
-const Button = ({ typeButtonClick, cardInfo }: Props) => (
-  <button
-    id={cardInfo.name}
-    onClick={typeButtonClick}
-    css={{
-      width: '50px',
-      height: '50px',
-      border: 'none',
-      borderRadius: '25px',
-      cursor: 'pointer',
-      marginBottom: '10px',
-      backgroundColor: cardInfo.color,
-    }}
-  />
-);
+const Button = styled.button(({ cardInfo }: { cardInfo: CardInfo }) => ({
+  width: '50px',
+  height: '50px',
+  border: 'none',
+  borderRadius: '25px',
+  cursor: 'pointer',
+  marginBottom: '10px',
+  backgroundColor: cardInfo.color,
+}));
 
 function TypeButton({ typeButtonClick, cardInfo }: Props) {
-  return <Button typeButtonClick={typeButtonClick} cardInfo={cardInfo} />;
+  return <Button id={cardInfo.name} onClick={typeButtonClick} cardInfo={cardInfo} />;
 }
 
 export default TypeButton;
