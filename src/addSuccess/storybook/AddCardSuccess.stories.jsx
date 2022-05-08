@@ -18,4 +18,6 @@ const Template = (args) => <AddCardSuccess {...args} />;
 
 export const CardForm = Template.bind({});
 
-CardForm.args = {};
+CardForm.args = {
+  addCard: () => {},
+};

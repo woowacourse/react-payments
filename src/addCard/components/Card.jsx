@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import AddCardContext from '../../AddCardContext';
 
-function Card({ completedCard }) {
+function Card({ completedCard, big }) {
   const { card } = completedCard || useContext(AddCardContext);
 
   const isEmptyCard = () => Object.values(card).every((value) => value === '');
 
   const getCardWrapperClassName = () => {
-    if (completedCard) return 'big-card';
+    if (big) return 'big-card';
     return isEmptyCard() ? 'empty-card' : 'small-card';
   };
 
@@ -16,15 +16,15 @@ function Card({ completedCard }) {
     <div className="card-box">
       <div className={getCardWrapperClassName()}>
         <div className="card-top">
-          <span className={completedCard ? 'card-text__big' : 'card-text'}>안카드</span>
+          <span className={big ? 'card-text__big' : 'card-text'}>안카드</span>
         </div>
         <div className="card-middle">
-          <div className={completedCard ? 'big-card__chip' : 'small-card__chip'} />
+          <div className={big ? 'big-card__chip' : 'small-card__chip'} />
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
             <span
-              className={completedCard ? 'card-text__big' : 'card-text'}
+              className={big ? 'card-text__big' : 'card-text'}
             >{`${card.firstCardNumber} ${card.secondCardNumber}`}</span>
             <input
               className="card-text-dot"
@@ -41,12 +41,12 @@ function Card({ completedCard }) {
           </div>
         </div>
         <div className="card-bottom__info">
-          <span className={completedCard ? 'card-text__big name-wrap' : 'card-text name-wrap'}>
+          <span className={big ? 'card-text__big name-wrap' : 'card-text name-wrap'}>
             {card.ownerName || 'NAME'}
           </span>
-          <span className={completedCard ? 'card-text__big' : 'card-text'}>{`${
-            card.expireMonth || 'MM'
-          }/${card.expireYear || 'YY'}`}</span>
+          <span className={big ? 'card-text__big' : 'card-text'}>{`${card.expireMonth || 'MM'}/${
+            card.expireYear || 'YY'
+          }`}</span>
         </div>
       </div>
     </div>
@@ -66,10 +66,12 @@ Card.propTypes = {
     firstPassword: PropTypes.string,
     secondPassword: PropTypes.string,
   }),
+  big: PropTypes.bool,
 };
 
 Card.defaultProps = {
   completedCard: null,
+  big: false,
 };
 
 export default Card;

@@ -133,3 +133,9 @@
   width: 100px;
   word-wrap: break-word;
 }
+
+.card-list-container {
+  height: 70%;
+  padding-top: 50px;
+  overflow: scroll;
+}
