@@ -6,7 +6,7 @@ import Card from '../../system/Card';
 
 import { WrapperStyled, TitleStyled, InputStyled } from './style';
 
-import { noop } from '../../../utils';
+import { noop } from '../../utils';
 
 const AliasModal = ({ visible, ButtonComponent, children }) => {
   const [
