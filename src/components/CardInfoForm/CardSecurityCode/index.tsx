@@ -5,12 +5,17 @@ import CVC from "../../../assets/cvcImage.png";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
 import UserGuide from "../../../common/UserGuide";
-import { checkSecurityCode } from "../../../validations/cardInfoForm";
 import { Context } from "../../../contexts/CardContext";
 
 interface CardSecurityProps {
-  validateFormValidation: any;
+  validateFormValidation: (key: string, isValid: boolean) => void;
 }
+
+const checkSecurityCode = (securityCode: string) => {
+  if (securityCode.length !== 3) {
+    throw new Error("3자리의 보안코드를 입력해주세요.");
+  }
+};
 
 export default function CardSecurityCode({ validateFormValidation }: CardSecurityProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);

@@ -4,12 +4,17 @@ import useInputValidation from "../../../hooks/useInputValidation";
 import { Password } from "../../../types";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
-import { checkCardPassword } from "../../../validations/cardInfoForm";
 import { Context } from "../../../contexts/CardContext";
 
 interface CardPasswordProps {
-  validateFormValidation: any;
+  validateFormValidation: (key: string, isValid: boolean) => void;
 }
+
+const checkCardPassword = (cardPassWord: Password) => {
+  if (!cardPassWord.every(password => password.length === 1)) {
+    throw new Error("비밀번호를 입력해주세요.");
+  }
+};
 
 export default function CardPassword({ validateFormValidation }: CardPasswordProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);

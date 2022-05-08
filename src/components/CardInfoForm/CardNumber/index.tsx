@@ -4,12 +4,17 @@ import useInputValidation from "../../../hooks/useInputValidation";
 import { CardNumbers } from "../../../types";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
-import { checkCardNumbers } from "../../../validations/cardInfoForm";
 import { Context } from "../../../contexts/CardContext";
 
 interface CardNumberProps {
-  validateFormValidation: any;
+  validateFormValidation: (key: string, isValid: boolean) => void;
 }
+
+const checkCardNumbers = (cardNumbers: CardNumbers) => {
+  if (!cardNumbers.every(cardNumber => cardNumber.length === 4)) {
+    throw new Error("카드 번호를 입력해주세요.");
+  }
+};
 
 export default function CardNumber({ validateFormValidation }: CardNumberProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);

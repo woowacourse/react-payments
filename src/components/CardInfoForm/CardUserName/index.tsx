@@ -4,12 +4,18 @@ import useInputValidation from "../../../hooks/useInputValidation";
 import { MAX_USER_NAME_LENGTH } from "../../../constants";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
-import { checkCardUserName } from "../../../validations/cardInfoForm";
 import { Context } from "../../../contexts/CardContext";
 
 interface CardUserNameProps {
-  validateFormValidation: any;
+  validateFormValidation: (key: string, isValid: boolean) => void;
 }
+
+const checkCardUserName = (cardUserName: string) => {
+  if (cardUserName.length === 0) {
+    throw new Error("소유자 이름을 입력해주세요.");
+  }
+};
+
 export default function CardUserName({ validateFormValidation }: CardUserNameProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
   const [cardInfo, dispatch] = useContext(Context);
