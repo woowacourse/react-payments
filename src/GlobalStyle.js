@@ -28,9 +28,11 @@ const GlobalStyle = createGlobalStyle`
   #root {
     background: #fff;
     box-sizing: border-box;
+    overflow-y: auto;
     padding: 30px;
     width: 400px;
-    min-height: 757px;
+    max-height: 757px;
+    min-height: 757px;  
   }
   
   `;
