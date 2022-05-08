@@ -30,7 +30,7 @@ function CardList() {
               <Styled.NicknamedCardContainer key={index}>
                 <Card
                   bgColor={cardKind.color}
-                  name={cardOwnerName}
+                  name={cardOwnerName || ' '}
                   number={getMaskedNumbers(cardNumber)}
                   title={cardKind.title}
                   validDate={validDate}

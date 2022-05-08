@@ -3,7 +3,7 @@ import useCardNumber from 'hooks/useCardNumber';
 import useCardOwnerName from 'hooks/useCardOwnerName';
 import useCardPassword from 'hooks/useCardPassword';
 import useCVC from 'hooks/useCVC';
-import useGetCards from './useGetCards';
+import useGetCardList from 'hooks/useGetCardList';
 import useNavigateTo from 'hooks/useNavigateTo';
 import useValidDate from 'hooks/useValidDate';
 
@@ -13,7 +13,7 @@ export {
   useCardOwnerName,
   useCardPassword,
   useCVC,
-  useGetCards,
+  useGetCardList,
   useNavigateTo,
   useValidDate,
 };
