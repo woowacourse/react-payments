@@ -19,6 +19,10 @@
   .home--container-card {
     width: 220px;
     height: 150px;
+    transition: 1s;
+    &:hover {
+      transform: scale(1.1);
+    }
   }
   .home-container-card-add-btn {
     width: 100%;
