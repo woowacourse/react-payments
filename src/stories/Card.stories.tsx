@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { CardInfoProvider } from "contexts/CardInfoProvider";
 import React from "react";
 
 import Card from "../components/add/Card";

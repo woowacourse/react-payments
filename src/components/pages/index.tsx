@@ -3,9 +3,9 @@ import Header from "components/common";
 import { PATH } from "constant/path";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { CardInfo } from "types/cardInfo";
+import { CardInfoWithCardName } from "types/cardInfo";
 
-export default function Home({ cards }: { cards: CardInfo[] }) {
+export default function Home({ cards }: { cards: CardInfoWithCardName[] }) {
   const navigate = useNavigate();
 
   const handleClickCard = (id: number) => {

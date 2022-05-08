@@ -16,8 +16,6 @@ function Add() {
     onBlurUserName,
     onChangeSecurityCode,
     onChangePassword,
-    onChangeCardName,
-    pullCardInfo,
   } = useCardInfoInput();
 
   return (

@@ -1,9 +1,9 @@
 import Card from "components/add/Card";
 import Input from "components/common/Input";
-import { CardInfoContext } from "contexts/CardInfoProvider";
 import useCardInfoForm from "hooks/useCardForm";
-import useGetCardInfo from "hooks/useGetCardInfo";
-import React, { useContext } from "react";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { InputChangeFunction } from "types";
 import { CardInfo } from "types/cardInfo";
 
 interface CompleteProps {
@@ -12,9 +12,14 @@ interface CompleteProps {
 }
 
 export default function Complete({ addCard, editCard }: CompleteProps) {
-  const { onChangeCardName } = useContext(CardInfoContext);
-  const cardInfo = useGetCardInfo();
-  const handleSubmit = useCardInfoForm(cardInfo, addCard, editCard);
+  const [cardName, setCardName] = useState("");
+  const onChangeCardName: InputChangeFunction = e => {
+    setCardName(e.target.value);
+  };
+
+  const location = useLocation();
+  const cardInfo = location.state as CardInfo;
+  const handleSubmit = useCardInfoForm({ ...cardInfo, cardName }, addCard, editCard);
 
   return (
     <div className="flex-column-center">
@@ -32,7 +37,7 @@ export default function Complete({ addCard, editCard }: CompleteProps) {
             placeholder="카드의 별칭을 입력해주세요."
             style={{ borderRadius: 0 }}
             onChange={onChangeCardName}
-            value={cardInfo.cardName}
+            value={cardName}
           />
         </div>
         <button type="submit" className="submit-button">

@@ -1,11 +1,9 @@
 import { PATH } from "constant/path";
-import { CardInfoContext } from "contexts/CardInfoProvider";
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { CardInfo } from "types/cardInfo";
+import { CardInfo, CardInfoWithCardName } from "types/cardInfo";
 
 function useCardInfoForm(
-  cardInfo: CardInfo,
+  cardInfo: CardInfoWithCardName,
   addCard: (cardInfo: CardInfo) => void,
   editCard: (id: number, partialCardInfo: Partial<CardInfo>) => void
 ) {

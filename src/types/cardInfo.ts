@@ -6,8 +6,12 @@ interface CardInfo {
   userName: string;
   securityCode: string;
   password: Password;
+}
+
+interface CardInfoWithCardName extends CardInfo {
   cardName: string;
 }
+
 type CardType = {
   name: CardName;
   color: CardColor;
@@ -57,6 +61,7 @@ export type {
   CardInfo,
   CardInfoValidation,
   CardInfoValidationTarget,
+  CardInfoWithCardName,
   CardName,
   CardNumbers,
   CardType,

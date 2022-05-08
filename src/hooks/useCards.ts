@@ -1,13 +1,13 @@
 import API from "apis";
 import { useEffect, useReducer } from "react";
-import { CardInfo } from "types/cardInfo";
+import { CardInfoWithCardName } from "types/cardInfo";
 
 type CardsAction =
-  | { type: "GET_CARD"; payload: CardInfo[] }
-  | { type: "ADD_CARD"; payload: CardInfo }
-  | { type: "EDIT_CARD"; payload: { id: number; partialCardInfo: Partial<CardInfo> } };
+  | { type: "GET_CARD"; payload: CardInfoWithCardName[] }
+  | { type: "ADD_CARD"; payload: CardInfoWithCardName }
+  | { type: "EDIT_CARD"; payload: { id: number; partialCardInfo: Partial<CardInfoWithCardName> } };
 
-type CardsReducer = (state: CardInfo[], action: CardsAction) => CardInfo[];
+type CardsReducer = (state: CardInfoWithCardName[], action: CardsAction) => CardInfoWithCardName[];
 
 const reducer: CardsReducer = (state, action) => {
   const { type, payload } = action;
@@ -41,7 +41,7 @@ function useCards() {
     })();
   }, []);
 
-  const addCard = async (cardInfo: CardInfo) => {
+  const addCard = async (cardInfo: CardInfoWithCardName) => {
     const cardInfoWIthId = { ...cardInfo, id: cards.length + 1 };
 
     dispatch({ type: "ADD_CARD", payload: cardInfoWIthId });
@@ -49,7 +49,7 @@ function useCards() {
     await API.addCard(cardInfoWIthId);
   };
 
-  const editCard = async (id: number, partialCardInfo: Partial<CardInfo>) => {
+  const editCard = async (id: number, partialCardInfo: Partial<CardInfoWithCardName>) => {
     dispatch({ type: "EDIT_CARD", payload: { id, partialCardInfo } });
     await API.editCard(id, partialCardInfo);
   };

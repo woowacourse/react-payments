@@ -58,9 +58,9 @@ export default function Card({
           </div>
         </div>
       </div>
-      {shouldShowTypeSelection && (
+      {/* {shouldShowTypeSelection && (
         <CardSelectModal isOpened={isModalOpened} closeModal={closeModal} />
-      )}
+      )} */}
     </>
   );
 }

@@ -1,8 +1,8 @@
-import { CardInfo } from "types/cardInfo";
+import { CardInfoWithCardName } from "types/cardInfo";
 
 const BASE_URL = "http://localhost:4000";
 
-async function getCards(): Promise<CardInfo[]> {
+async function getCards(): Promise<CardInfoWithCardName[]> {
   try {
     const response = await fetch(`${BASE_URL}/cards`, {
       method: "GET",
@@ -21,7 +21,7 @@ async function getCards(): Promise<CardInfo[]> {
   }
 }
 
-async function addCard(cardInfo: CardInfo) {
+async function addCard(cardInfo: CardInfoWithCardName) {
   try {
     await fetch(`${BASE_URL}/cards`, {
       method: "POST",
@@ -35,7 +35,7 @@ async function addCard(cardInfo: CardInfo) {
   }
 }
 
-async function editCard(id: number, partialCardInfo: Partial<CardInfo>) {
+async function editCard(id: number, partialCardInfo: Partial<CardInfoWithCardName>) {
   try {
     await fetch(`${BASE_URL}/cards/${id}`, {
       method: "PATCH",

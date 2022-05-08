@@ -18,8 +18,6 @@ type CardInfoAction =
   | { type: "CHANGE_USER_NAME"; payload: { userName: string } }
   | { type: "CHANGE_SECURITY_CODE"; payload: { securityCode: string } }
   | { type: "CHANGE_PASSWORD"; payload: { index: string; value: string } }
-  | { type: "CHANGE_CARD_NAME"; payload: { cardName: string } }
-  | { type: "PULL_CARD_INFO"; payload: { cardInfo: CardInfo } }
   | { type: "RESET_CARD_INFO"; payload: null }
   | { type: "BLUR_USER_NAME"; payload: null };
 
@@ -79,15 +77,6 @@ const reducer: CardInfoReducer = (state, action) => {
       return { ...state, password };
     }
 
-    case "CHANGE_CARD_NAME": {
-      const { cardName } = payload;
-
-      return { ...state, cardName };
-    }
-
-    case "PULL_CARD_INFO":
-      return payload.cardInfo;
-
     case "BLUR_USER_NAME":
       return { ...state, useName: state.userName.trim() };
   }
@@ -100,7 +89,6 @@ const initialCardInfo: CardInfo = {
   userName: "",
   securityCode: "",
   password: ["", ""],
-  cardName: "",
 };
 
 function useCardInfoInput() {
@@ -127,10 +115,6 @@ function useCardInfoInput() {
       errorMsg: null,
     },
   });
-
-  const pullCardInfo = (cardInfo: CardInfo) => {
-    cardInfoDispatch({ type: "PULL_CARD_INFO", payload: { cardInfo } });
-  };
 
   const resetCardInfo = () => {
     cardInfoDispatch({ type: "RESET_CARD_INFO", payload: null });
@@ -197,12 +181,6 @@ function useCardInfoInput() {
     }
   };
 
-  const onChangeCardName: InputChangeFunction = e => {
-    const value = e.target.value;
-
-    cardInfoDispatch({ type: "CHANGE_CARD_NAME", payload: { cardName: value } });
-  };
-
   // Validation
   const handleChangeValidation = <T,>(
     key: keyof CardInfoValidation,
@@ -259,8 +237,6 @@ function useCardInfoInput() {
     onBlurUserName,
     onChangeSecurityCode,
     onChangePassword,
-    onChangeCardName,
-    pullCardInfo,
   };
 }
 
