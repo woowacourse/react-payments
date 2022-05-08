@@ -9,6 +9,7 @@ import ErrorMessage from '../../system/ErrorMessage';
 
 import CardAddForm from './CardAddForm';
 import CardListModal from './CardListModal';
+import CardComplete from '../shared/CardComplete';
 
 import { SHOW_MODAL } from './CardListModal/action';
 
@@ -31,9 +32,15 @@ const CardAddition = () => {
   const cardExpiration = useCardState((state) => state.cardExpiration);
   const dispatch = useCardDispatch();
 
+  // const [completeTyping, setCompleteTyping] = useState(false);
+
   const onClickCard = useCallback(() => {
     dispatch({ type: SHOW_MODAL });
   }, []);
+
+  // const onSubmit = useCallback(() => {
+  //   setCompleteTyping(true);
+  // }, []);
 
   return (
     <CardAdditionStyled>
@@ -42,7 +49,7 @@ const CardAddition = () => {
         color={cardCompanyColor}
         onClick={onClickCard}
       >
-        {{ cardCompanyName, cardNumber, cardOwner, cardExpiration }}
+        {[cardCompanyName, cardNumber, cardOwner, cardExpiration]}
       </Card>
       <ErrorMessage
         setChildren={setCardCompanyError}
@@ -52,6 +59,7 @@ const CardAddition = () => {
       </ErrorMessage>
       <CardAddForm />
       <CardListModal />
+      <CardComplete />
     </CardAdditionStyled>
   );
 }

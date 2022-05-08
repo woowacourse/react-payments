@@ -7,7 +7,7 @@ import CardNumber from './CardNumber';
 import CardRestInfo from './CardRestInfo';
 
 const Card = ({ children, onClick, color }) => {
-  const { cardCompanyName, cardNumber, cardOwner, cardExpiration } = children;
+  const [cardCompanyName, cardNumber, cardOwner, cardExpiration] = children;
 
   return (
     <CardWrapperStyled onClick={onClick} color={color}>

@@ -28,6 +28,7 @@ const GlobalStyle = createGlobalStyle`
     --card-chip-background-color: #CBBA64;
     --dimmer-background-color: rgba(0, 0, 0, 0.5);
     --toast-background-color: #fff;
+    --card-complete-color: #383838;
   }
 
   body {
