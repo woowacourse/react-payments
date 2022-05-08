@@ -35,6 +35,7 @@ const reducer: CardsReducer = (state, action) => {
 function useCards() {
   const [cards, dispatch] = useReducer<CardsReducer>(reducer, []);
   const throwError = useAsyncError();
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({ isError: false, errorMessage: null });
 
   const showErrorMessage = (message: string) => {
@@ -47,7 +48,10 @@ function useCards() {
   useEffect(() => {
     (async function () {
       try {
+        setIsLoading(true);
         const data = await API.getCards();
+
+        setIsLoading(false);
 
         dispatch({ type: "GET_CARD", payload: data });
       } catch ({ message }) {
@@ -60,7 +64,9 @@ function useCards() {
     const cardInfoWIthId = { ...cardInfo, id: cards.length + 1 };
 
     try {
+      setIsLoading(true);
       await API.addCard(cardInfoWIthId);
+      setIsLoading(false);
       dispatch({ type: "ADD_CARD", payload: cardInfoWIthId });
     } catch ({ message }) {
       showErrorMessage(message);
@@ -69,7 +75,9 @@ function useCards() {
 
   const editCard = async (id: number, partialCardInfo: Partial<CardInfoWithCardName>) => {
     try {
+      setIsLoading(true);
       await API.editCard(id, partialCardInfo);
+      setIsLoading(false);
       dispatch({ type: "EDIT_CARD", payload: { id, partialCardInfo } });
     } catch ({ message }) {
       showErrorMessage(message);
@@ -81,6 +89,7 @@ function useCards() {
     addCard,
     editCard,
     error,
+    isLoading,
   };
 }
 

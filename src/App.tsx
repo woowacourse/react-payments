@@ -3,6 +3,7 @@ import Toast from "components/common/Toast";
 import Home from "components/pages";
 import Add from "components/pages/add";
 import Complete from "components/pages/complete";
+import Loading from "components/pages/Loading";
 import { PATH } from "constant/path";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -10,7 +11,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import useCards from "./hooks/useCards";
 
 export default function App() {
-  const { cards, addCard, editCard, error } = useCards();
+  const { cards, addCard, editCard, error, isLoading } = useCards();
+
+  if (isLoading) return <Loading />;
 
   return (
     <>
