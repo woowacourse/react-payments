@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Reset } from 'styled-reset';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import CardsContext from './contexts/CardsContext';
 import useStore from './hooks/useStore';
@@ -11,16 +12,19 @@ const App = () => {
   const cardsApi = useStore();
 
   return (
-    <StyledApp>
-      <CardsContext.Provider value={cardsApi}>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/register" element={<CardRegistrationPage />} />
-          <Route path="/confirm" element={<CardAliasNamingPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </CardsContext.Provider>
-    </StyledApp>
+    <>
+      <Reset />
+      <StyledApp>
+        <CardsContext.Provider value={cardsApi}>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/register" element={<CardRegistrationPage />} />
+            <Route path="/confirm" element={<CardAliasNamingPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </CardsContext.Provider>
+      </StyledApp>
+    </>
   );
 };
 
