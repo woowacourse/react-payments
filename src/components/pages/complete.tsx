@@ -4,7 +4,7 @@ import useCardInfoForm from "hooks/useCardForm";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { InputChangeFunction } from "types";
-import { CardInfo } from "types/cardInfo";
+import { CardInfo, CardInfoWithCardName } from "types/cardInfo";
 
 interface CompleteProps {
   addCard: (cardInfo: CardInfo) => void;
@@ -12,13 +12,13 @@ interface CompleteProps {
 }
 
 export default function Complete({ addCard, editCard }: CompleteProps) {
-  const [cardName, setCardName] = useState("");
+  const location = useLocation();
+  const cardInfo = location.state as CardInfoWithCardName;
+
+  const [cardName, setCardName] = useState(cardInfo?.cardName ?? "");
   const onChangeCardName: InputChangeFunction = e => {
     setCardName(e.target.value);
   };
-
-  const location = useLocation();
-  const cardInfo = location.state as CardInfo;
   const handleSubmit = useCardInfoForm({ ...cardInfo, cardName }, addCard, editCard);
 
   return (
