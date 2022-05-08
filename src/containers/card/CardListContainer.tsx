@@ -16,6 +16,23 @@ const CardAlias = styled.p(() => ({
   textAlign: 'center',
 }));
 
+const CardWrapper = styled.div(() => ({
+  display: 'flex',
+  position: 'relative',
+  flexDirection: 'column',
+  justifyContent: 'center',
+}));
+
+const CardButtonWrap = styled.div(() => ({
+  width: '44px',
+  display: 'flex',
+  position: 'absolute',
+  top: '6px',
+  right: '6px',
+  justifyContent: 'space-between',
+  zIndex: 10,
+}));
+
 const Wrapper = styled.div(() => ({
   display: 'flex',
   flexDirection: 'column',
@@ -32,7 +49,7 @@ function CardListContainer() {
       const response = await axios('http://localhost:4004/cards', {
         method: 'get',
       });
-      // 에러처리
+
       dispatch(createAction(ActionType.SET_CARD_LIST, response.data));
     }
 
@@ -43,9 +60,11 @@ function CardListContainer() {
     <Wrapper>
       {cardList.length > 0 ? (
         cardList.map((card: CardType) => (
-          <div key={uuidv4()}>
-            <EditButtonContainer id={card.id} />
-            <DeleteButtonContainer id={card.id} />
+          <CardWrapper key={uuidv4()}>
+            <CardButtonWrap>
+              <EditButtonContainer id={card.id} />
+              <DeleteButtonContainer id={card.id} />
+            </CardButtonWrap>
             <Card
               firstInputCardNumber={card.firstCardNumber}
               secondInputCardNumber={card.secondCardNumber}
@@ -57,7 +76,7 @@ function CardListContainer() {
               cardType={card.type}
             />
             <CardAlias>{card.alias}</CardAlias>
-          </div>
+          </CardWrapper>
         ))
       ) : (
         <></>

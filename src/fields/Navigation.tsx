@@ -1,13 +1,17 @@
 import React from 'react';
-import BackButton from 'components/navigater/BackButton';
 import PageTitle from 'components/navigater/PageTitle';
 import { useLocation } from 'react-router-dom';
 import styled from '@emotion/styled';
+import BackButtonContainer from 'containers/button/BackButtonContainer';
 
 const Wrapper = styled.nav(() => ({
   width: '100%',
   height: '50px',
   display: 'flex',
+
+  '& .margin': {
+    marginRight: '14px',
+  },
 }));
 
 function Navigation() {
@@ -24,7 +28,9 @@ function Navigation() {
   if (pathname.includes('/card/edit/')) {
     return (
       <Wrapper>
-        <BackButton />
+        <div className="margin">
+          <BackButtonContainer />
+        </div>
         <PageTitle>카드수정</PageTitle>
       </Wrapper>
     );
@@ -32,7 +38,9 @@ function Navigation() {
 
   return (
     <Wrapper>
-      <BackButton />
+      <div className="margin">
+        <BackButtonContainer />
+      </div>
       <PageTitle>카드추가</PageTitle>
     </Wrapper>
   );
