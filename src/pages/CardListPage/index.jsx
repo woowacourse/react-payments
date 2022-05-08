@@ -4,6 +4,8 @@ import Button from 'components/common/Button'
 import Card from 'components/common/Card'
 import Header from 'components/common/Header'
 
+import useLocalStorage from 'hooks/useLocalStorage'
+
 import { ReactComponent as AddCardBtn } from 'assets/addCard.svg'
 
 import { CenterItem, PageWrapper } from 'pages/style'
@@ -14,17 +16,16 @@ import {
 } from 'pages/CardListPage/style'
 
 function CardListPage() {
+  const [cardList] = useLocalStorage('cardList')
   const navigate = useNavigate()
-  const cardList = localStorage.getItem('cardList')
-    ? Object.entries(JSON.parse(localStorage.getItem('cardList')))
-    : []
+  const cardListArray = Object.entries(cardList)
 
   return (
     <PageWrapper>
-      <Header>보유카드({cardList.length}개)</Header>
+      <Header>보유카드({cardListArray.length}개)</Header>
       <CenterItem>
         <CardListWrapper>
-          {cardList.map(([key, value]) => (
+          {cardListArray.map(([key, value]) => (
             <PossessedCard key={key}>
               <Link
                 to={`/react-payments/nickname/${Object.values(

@@ -7,10 +7,12 @@ import CardInfoContext from 'context/cardInfo-context'
 import useAutoFocus from 'hooks/useAutoFocus'
 
 import Input from 'components/common/Input'
+
 import { GrayInputWrapper } from 'components/common/Input/style'
 
 import { CARD_NUMBER, ERROR_MESSAGE } from 'constant'
 import { isInvalidCardNumber } from 'validation'
+import useLocalStorage from 'hooks/useLocalStorage'
 
 function CardNumberField() {
   const {
@@ -25,6 +27,7 @@ function CardNumberField() {
   const { refList, moveToNextInput } = useAutoFocus({
     maxLength: CARD_NUMBER.UNIT_LENGTH,
   })
+  const [cardList] = useLocalStorage('cardList')
 
   const handleInputChange = ({ target }, key) => {
     const { value } = target
@@ -32,9 +35,7 @@ function CardNumberField() {
 
     handleCardNumberChange(target, key)
 
-    const cardListStorage = localStorage.getItem('cardList')
-    if (cardListStorage && key === 'fourth') {
-      const cardList = JSON.parse(cardListStorage)
+    if (key === 'fourth') {
       const { first, second, third } = cardNumber
       setIsError((prev) => {
         return {
