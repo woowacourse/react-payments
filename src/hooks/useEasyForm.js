@@ -165,7 +165,7 @@ const useEasyForm = (
   };
 
   const registerInput = (name, options) => {
-    const { initialValue, validation, watch, ...rest } = options;
+    const { initialValue, validation, watch, className, ...rest } = options;
 
     return {
       ...rest,
@@ -173,6 +173,7 @@ const useEasyForm = (
       ref: bindElement(name, options),
       onChange,
       onKeyDown,
+      className: `${className} ${formState.errors[name] ? 'error' : ''}`,
     };
   };
 

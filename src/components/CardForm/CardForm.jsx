@@ -14,7 +14,7 @@ import CardsContext from '../../contexts/CardsContext';
 
 const CardForm = () => {
   const navigate = useNavigate();
-  const { registerForm, registerInput, watchingValues, errors } = useEasyForm({
+  const { registerForm, registerInput, watchingValues } = useEasyForm({
     initialValues: {
       firstCardNumber: '',
       secondCardNumber: '',
@@ -60,7 +60,6 @@ const CardForm = () => {
           <InputBox>
             <Input
               type="text"
-              className={`w-25 ${errors?.firstCardNumber ? 'error' : ''}`}
               {...registerInput('firstCardNumber', {
                 minLength: 4,
                 maxLength: 4,
@@ -72,7 +71,6 @@ const CardForm = () => {
             <p>-</p>
             <Input
               type="text"
-              className={`w-25 ${errors?.secondCardNumber ? 'error' : ''}`}
               {...registerInput('secondCardNumber', {
                 minLength: 4,
                 maxLength: 4,
@@ -84,7 +82,6 @@ const CardForm = () => {
             <p>-</p>
             <Input
               type="password"
-              className={`w-25 ${errors?.thirdCardNumber ? 'error' : ''}`}
               {...registerInput('thirdCardNumber', {
                 minLength: 4,
                 maxLength: 4,
@@ -96,7 +93,6 @@ const CardForm = () => {
             <p>-</p>
             <Input
               type="password"
-              className={`w-25 ${errors?.fourthCardNumber ? 'error' : ''}`}
               {...registerInput('fourthCardNumber', {
                 minLength: 4,
                 maxLength: 4,
@@ -112,12 +108,12 @@ const CardForm = () => {
           <InputBox className="w-50">
             <Input
               type="text"
-              className={`w-50 ${errors?.expiredMonth ? 'error' : ''}`}
               placeholder="MM"
               {...registerInput('expiredMonth', {
+                className: 'input-expired-date',
                 minLength: 2,
                 maxLength: 2,
-                pattern: '^(0?[1-9]|1[012])$',
+                pattern: '0[1-9]|1[0-2]',
                 required: true,
                 watch: true,
               })}
@@ -125,9 +121,9 @@ const CardForm = () => {
             <p>/</p>
             <Input
               type="text"
-              className={`w-50 ${errors?.expiredYear ? 'error' : ''}`}
               placeholder="YY"
               {...registerInput('expiredYear', {
+                className: 'input-expired-date',
                 minLength: 2,
                 maxLength: 2,
                 pattern: '[0-9][0-9]',
@@ -144,17 +140,19 @@ const CardForm = () => {
           </InputBox>
         </Field>
         <Field>
-          <Label>카드 소유자 이름 (선택)</Label>
-          <span className="name-length">
-            {' '}
-            {watchingValues.owner?.length}/30
-          </span>
+          <Label>
+            카드 소유자 이름 (선택)
+            <span className="name-length">
+              {watchingValues.owner?.length}/30
+            </span>
+          </Label>
+
           <InputBox>
             <Input
               type="text"
-              className={`${errors?.owner ? 'error' : ''}`}
               placeholder="카드에 표시된 이름과 동일하게 입력하세요."
               {...registerInput('owner', {
+                className: 'input-owner',
                 pattern: '(?:[A-Za-z]+ ?){0,3}',
                 maxLength: 30,
                 watch: true,
@@ -165,11 +163,11 @@ const CardForm = () => {
         <Field>
           <Label>보안코드 (CVC/CVV)</Label>
           <div className="cvc-block">
-            <InputBox className="w-25">
+            <InputBox>
               <Input
                 type="password"
-                className={errors?.cvc ? 'error' : ''}
                 {...registerInput('cvc', {
+                  className: 'input-cvc',
                   minLength: 3,
                   maxLength: 4,
                   pattern: '[0-9]{3,4}',
@@ -184,37 +182,39 @@ const CardForm = () => {
         </Field>
         <Field>
           <Label>비밀번호</Label>
-          <InputBox className="transparent">
+          <div className="password-block">
+            <InputBox>
+              <Input
+                type="password"
+                className="input-password"
+                {...registerInput('firstPasswordDigit', {
+                  className: 'input-password',
+                  minLength: 1,
+                  maxLength: 1,
+                  pattern: '[0-9]',
+                  required: true,
+                })}
+              />
+            </InputBox>
+            <InputBox>
+              <Input
+                type="password"
+                {...registerInput('secondPasswordDigit', {
+                  className: 'input-password',
+                  minLength: 1,
+                  maxLength: 1,
+                  pattern: '[0-9]',
+                  required: true,
+                })}
+              />
+            </InputBox>
             <Input
               type="password"
-              className={`password ${
-                errors?.firstPasswordDigit ? 'error' : ''
-              }`}
-              {...registerInput('firstPasswordDigit', {
-                minLength: 1,
-                maxLength: 1,
-                pattern: '[0-9]',
-                required: true,
-              })}
-            />
-            <Input
-              type="password"
-              className={`password ${
-                errors?.secondPasswordDigit ? 'error' : ''
-              }`}
-              {...registerInput('secondPasswordDigit', {
-                minLength: 1,
-                maxLength: 1,
-                pattern: '[0-9]',
-                required: true,
-              })}
-            />
-            <Input
-              type="password"
-              className="password"
+              className="input-password"
               value="*"
               disabled
               {...registerInput('thirdPasswordDigit', {
+                className: 'input-password',
                 minLength: 1,
                 maxLength: 1,
                 pattern: '[0-9]',
@@ -222,16 +222,17 @@ const CardForm = () => {
             />
             <Input
               type="password"
-              className="password"
+              className="input-password"
               value="*"
               disabled
               {...registerInput('fourthPasswordDigit', {
+                className: 'input-password',
                 minLength: 1,
                 maxLength: 1,
                 pattern: '[0-9]',
               })}
             />
-          </InputBox>
+          </div>
         </Field>
         <SubmitButton type="submit">다음</SubmitButton>
       </StyledCardForm>

@@ -1,12 +1,12 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 
-const Input = forwardRef((props, ref) => {
+const Input = forwardRef(({ variant, ...props }, ref) => {
   return <StyledInput ref={ref} {...props} />;
 });
 
 const StyledInput = styled.input`
-  background-color: #ecebf1;
+  background-color: transparent;
   height: 45px;
   width: 100%;
   text-align: center;
@@ -26,14 +26,25 @@ const StyledInput = styled.input`
     letter-spacing: -0.02em;
   }
 
-  &:disabled {
-    background-color: transparent;
-  }
-
   &.error {
     outline: 1px solid #ff9e9e;
     outline-offset: -1px;
-    background-color: #ffc6c6;
+  }
+
+  &.input-expired-date {
+    width: 67px;
+  }
+
+  &.input-owner {
+    width: 331px;
+  }
+
+  &.input-cvc {
+    width: 84px;
+  }
+
+  &.input-password {
+    width: 43px;
   }
 `;
 

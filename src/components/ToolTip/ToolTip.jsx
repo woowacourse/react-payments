@@ -20,17 +20,14 @@ const StyledToolTip = styled.div`
   text-align: center;
   font-weight: 500;
   font-size: 20px;
-  line-height: 23px;
+  line-height: 27px;
   cursor: pointer;
 `;
 
 const StyledTip = styled.p`
   visibility: hidden;
   position: absolute;
-  width: 300px;
-  top: 50%;
-  left: 50%;
-  left: 32px;
+  max-width: 300px;
 
   text-align: justify;
   font-size: 14px;

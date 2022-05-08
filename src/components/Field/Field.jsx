@@ -13,24 +13,18 @@ const StyledField = styled.div`
     background-color: transparent;
   }
 
-  .password {
-    background-color: #ecebf1;
-    width: 15%;
-    margin-right: 7px;
-  }
-
-  .name-length {
-    display: inline-block;
-    font-size: 12px;
-    line-height: 14px;
-    float: right;
-    color: #525252;
-  }
-
   .cvc-block {
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 10px;
+  }
+
+  .password-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
   }
 `;
 

@@ -6,10 +6,10 @@ const InputBox = ({ children, ...rest }) => {
 };
 
 const StyledInputBox = styled.div`
-  display: flex;
+  display: inline-flex;
+  width: fit-content;
   height: 47px;
   align-items: center;
-  margin-top: 0.375rem;
   color: #d3d3d3;
   border-radius: 0.25rem;
   background-color: #ecebf1;

@@ -6,15 +6,19 @@ const Label = ({ children }) => {
 };
 
 const StyledLabel = styled.label`
-  display: inline-block;
+  display: block;
 
   font-size: 12px;
   line-height: 14px;
   vertical-align: top;
 
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 
   color: #525252;
+
+  .name-length {
+    float: right;
+  }
 `;
 
 export default Label;
