@@ -120,7 +120,8 @@ const useForm = (
     if (!field || !_fields.current) return;
 
     // 현재 필드가 유효성검사에 실패했다면 자동으로 넘어가지 않게 만든다
-    if (!input.validity.valid) {
+    // 값이 없는 경우에는 넘어가도록 한다
+    if (input.value.length > 0 && !input.validity.valid) {
       return;
     }
 
