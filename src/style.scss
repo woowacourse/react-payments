@@ -17,6 +17,15 @@ html, body {
   background-color: #ffffff;
 }
 
-input.touched:invalid {
+#card-register-form input.touched:invalid {
   background-color: rgb(242, 161, 161);
+}
+
+#card-register-confirm-form {
+  input:focus {
+    outline: none;
+  }
+  input.touched:invalid {
+    border-bottom: 3px solid rgb(239, 128, 128);
+  }  
 }

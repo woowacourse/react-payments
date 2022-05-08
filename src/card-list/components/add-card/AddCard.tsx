@@ -4,7 +4,7 @@ import S from '../../styled';
 
 type Props = {
   marginBottom: string;
-}
+};
 
 function AddCard({ marginBottom = '0' }: Props) {
   const navigate = useNavigate();

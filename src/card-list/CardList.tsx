@@ -1,7 +1,7 @@
 import React from 'react';
 import { usePaymentContext } from '../context';
 import AddCard from './components/add-card/AddCard';
-import Card from './components/card/Card';
+import Card from '../shared/components/card/Card';
 import S from './styled';
 
 function CardList() {

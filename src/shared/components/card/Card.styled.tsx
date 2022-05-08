@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 type Props = {
-  marginBottom: string;
+  marginBottom?: string;
 };
 
 const dynamicStyle = (props: Props) => css`

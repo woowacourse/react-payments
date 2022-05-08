@@ -1,7 +1,7 @@
 import React from 'react';
 import { UseFormRegisterOption } from '../../../hooks/useForm/types';
 import { useCardRegisterContext } from '../../../context';
-import PositiveNumberInput from '../../shared/PositiveNumberInput';
+import PositiveNumberInput from '../../common/PositiveNumberInput';
 import { useFormContext } from '../../../hooks/useForm/useFormContext';
 import { inputStyle } from './CVCInput.styled';
 

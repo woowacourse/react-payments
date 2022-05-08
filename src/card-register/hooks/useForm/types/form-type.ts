@@ -10,6 +10,7 @@ export type UseFormReturn = {
   handleSubmit: UseFormHandleSubmit;
   register: UseFormRegister;
   _fieldValueSubject: MutableRefObject<Subject | undefined>;
+  watch: (name: string, callback: (newValue: string) => void) => void;
 };
 
 export type UseFormProps = {

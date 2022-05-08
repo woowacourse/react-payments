@@ -12,6 +12,10 @@ function Navigation() {
     return <div css={style}>카드 리스트</div>;
   }
 
+  if (pathname === '/card-register-confirm') {
+    return null;
+  }
+
   const handleClick = () => {
     navigate('/');
   };

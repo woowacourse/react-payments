@@ -2,9 +2,11 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './shared/components/navigation/Navigation';
-import CardRegister from './card-register/CardRegister';
+import CardRegister from './card-register/register-page/CardRegister';
+import CardRegisterConfirm from './card-register/confirm-page/CardRegisterConfirm';
 import { PaymentProvider } from './context';
 import CardList from './card-list/CardList';
+import { CardRegisterProvider } from './card-register/context';
 
 function App() {
   return (
@@ -12,10 +14,13 @@ function App() {
       <BrowserRouter>
         <PaymentProvider>
           <Navigation />
-          <Routes>
-            <Route path="/" element={<CardList />} />
-            <Route path="/card-register" element={<CardRegister />} />
-          </Routes>
+          <CardRegisterProvider>
+            <Routes>
+              <Route path="/" element={<CardList />} />
+              <Route path="/card-register" element={<CardRegister />} />
+              <Route path="/card-register-confirm" element={<CardRegisterConfirm />} />
+            </Routes>
+          </CardRegisterProvider>
         </PaymentProvider>
       </BrowserRouter>
     </Page>

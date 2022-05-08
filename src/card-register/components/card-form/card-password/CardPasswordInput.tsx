@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFormContext } from '../../../hooks/useForm/useFormContext';
-import PositiveNumberInput from '../../shared/PositiveNumberInput';
+import PositiveNumberInput from '../../common/PositiveNumberInput';
 import { PasswordInput, passwordInputStyle } from './CardPasswordInput.styled';
 
 type Props = {

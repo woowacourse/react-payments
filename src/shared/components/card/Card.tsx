@@ -1,9 +1,10 @@
 import React from 'react';
-import S from '../../styled';
+import S from '../../../card-list/styled';
+import { transformCardNumber, transformToMMYY } from '../../../card-register/utils';
 import { Card as TCard } from '../../types';
 
 type Props = {
-  marginBottom: string;
+  marginBottom?: string;
 } & TCard;
 
 function Card(props: Props) {
@@ -14,10 +15,10 @@ function Card(props: Props) {
       <div className="chip-container">
         <div className="chip" />
       </div>
-      <div className="number">{cardNumber}</div>
+      <div className="number">{transformCardNumber(cardNumber)}</div>
       <div className="info">
         <S.OwnerName name={ownerName}>{ownerName}</S.OwnerName>
-        <span className="expired-period">{expiredPeriod.length > 0 ? expiredPeriod : 'MM / YY'}</span>
+        <span className="expired-period">{expiredPeriod.length > 0 ? transformToMMYY(expiredPeriod) : 'MM / YY'}</span>
       </div>
     </S.Card>
   );

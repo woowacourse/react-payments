@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useFormContext } from '../../../hooks/useForm/useFormContext';
-import PositiveNumberInput from '../../shared/PositiveNumberInput';
-import { ValidationOption } from '../../../hooks/useForm/types';
+import PositiveNumberInput from '../../common/PositiveNumberInput';
 
 function CardNumberInputContainer() {
   const { register } = useFormContext();

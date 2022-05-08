@@ -9,6 +9,8 @@ import {
   UseFormHandleSubmit,
   ErrorMessage,
   Subject,
+  UseFormReturn,
+  Subscription,
 } from './types';
 import { defaultErrorMessage } from './constants';
 import { nextFocus, prevFocus } from './autoFocus';
@@ -16,7 +18,7 @@ import createSubject from './createSubject';
 
 const useForm = (
   props: UseFormProps = { shouldValidateOnChange: false, shouldUseAutoFocus: false, shouldShowNativeHint: true },
-) => {
+): UseFormReturn => {
   const { shouldValidateOnChange, shouldUseAutoFocus, shouldShowNativeHint } = props;
   const [formState, setFormState] = useState<UseFormState>({
     isSubmitted: false,
@@ -30,6 +32,19 @@ const useForm = (
   const _fieldValueSubject = React.useRef<Subject>();
   !_fields.current && (_fields.current = new Map<string, Field>());
   !_fieldValueSubject.current && (_fieldValueSubject.current = createSubject());
+
+  const watch = (name: string, callback: (newValue: string) => void) => {
+    if (!_fieldValueSubject.current) return null;
+    const observer = {
+      notify: () => {
+        const field = getField(name);
+        if (!field) return;
+        const { _ref: input } = field;
+        callback(input.value);
+      },
+    };
+    return _fieldValueSubject.current.subscribe(name, observer).unsubscribe;
+  };
 
   const showNativeErrorHint = (input: HTMLInputElement, message: string | null) => {
     if (message && shouldShowNativeHint) {
@@ -261,6 +276,7 @@ const useForm = (
     handleSubmit,
     register,
     _fieldValueSubject,
+    watch,
   };
 };
 

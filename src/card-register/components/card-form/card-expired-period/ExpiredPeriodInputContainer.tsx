@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useFormContext } from '../../../hooks/useForm/useFormContext';
-import PositiveNumberInput from '../../shared/PositiveNumberInput';
+import PositiveNumberInput from '../../common/PositiveNumberInput';
 
 function ExpiredPeriodInputContainer() {
   const { register } = useFormContext();
