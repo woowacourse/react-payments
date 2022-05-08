@@ -29,8 +29,7 @@ function CardContainer() {
       const response = await axios(`http://localhost:4004/cards/${cardId}`, {
         method: 'get',
       });
-      // 에러처리
-      console.log(response);
+
       dispatch(createAction(ActionType.FIRST_INPUT_CARD_NUMBER, response.data.firstCardNumber));
       dispatch(createAction(ActionType.SECOND_INPUT_CARD_NUMBER, response.data.secondCardNumber));
       dispatch(createAction(ActionType.THIRD_INPUT_CARD_NUMBER, response.data.thirdCardNumber));

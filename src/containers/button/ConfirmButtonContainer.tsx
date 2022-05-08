@@ -33,7 +33,7 @@ function ConfirmButtonContainer() {
       methodType = 'patch';
     }
 
-    const response = await axios(pathName, {
+    await axios(pathName, {
       method: methodType,
       headers: {
         'Content-Type': 'application/json',
@@ -53,8 +53,6 @@ function ConfirmButtonContainer() {
         alias: cardAlias,
       }),
     });
-    // 에러처리
-    console.log(response);
 
     window.location.pathname = '/';
   };
