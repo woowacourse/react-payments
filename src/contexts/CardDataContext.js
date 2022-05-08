@@ -48,10 +48,10 @@ function CardDataContextProvider({ children }) {
     (async () => {
       const response = await requestGetCardData();
 
-      requestErrorHandler(response)(
-        (successResult) => dispatch({ type: 'PRELOAD', data: successResult }),
-        (errorMessage) => alert(`서버에서 카드 목록 로드에 실패하였습니다.\n${errorMessage}`),
-      );
+      requestErrorHandler(response)({
+        SUCCESS: (result) => dispatch({ type: 'PRELOAD', data: result }),
+        FAIL: (errorMessage) => alert(`서버에서 카드 목록 로드에 실패하였습니다.\n${errorMessage}`),
+      });
     })();
   }, []);
 
@@ -73,30 +73,30 @@ function useCardDataContext() {
   const handleInsertCardData = async (cardData) => {
     const response = await requestInsertCardData(cardData);
 
-    requestErrorHandler(response)(
-      (successResult) => dispatch({ type: 'INSERT', data: { cardData: successResult } }),
-      (errorMessage) => alert(errorMessage),
-    );
+    requestErrorHandler(response)({
+      SUCCESS: (result) => dispatch({ type: 'INSERT', data: { cardData: result } }),
+      FAIL: (errorMessage) => alert(errorMessage),
+    });
   };
 
   const handleUpdateCardData = async (index, cardData) => {
     const { id } = cardList[index];
     const response = await requestUpdateCardData(id, cardData);
 
-    requestErrorHandler(response)(
-      (successResult) => dispatch({ type: 'UPDATE', data: { index, cardData: successResult } }),
-      (errorMessage) => alert(errorMessage),
-    );
+    requestErrorHandler(response)({
+      SUCCESS: (result) => dispatch({ type: 'UPDATE', data: { index, cardData: result } }),
+      FAIL: (errorMessage) => alert(errorMessage),
+    });
   };
 
   const handleDeleteCardData = async (index) => {
     const { id } = cardList[index];
     const response = await requestDeleteCardData(id);
 
-    requestErrorHandler(response)(
-      () => dispatch({ type: 'DELETE', data: { index } }),
-      (errorMessage) => alert(errorMessage),
-    );
+    requestErrorHandler(response)({
+      SUCCESS: () => dispatch({ type: 'DELETE', data: { index } }),
+      FAIL: (errorMessage) => alert(errorMessage),
+    });
   };
 
   return {

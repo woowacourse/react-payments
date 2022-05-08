@@ -21,13 +21,13 @@ const request = async (url, option) => {
 
 export const requestErrorHandler =
   ({ status, content }) =>
-  (handleSuccess, handleFail) => {
+  ({ SUCCESS: handleRequestSuccess, FAIL: handleRequestFail }) => {
     if (status === REQUEST_STATUS.FAIL) {
-      handleFail(content);
+      handleRequestFail(content);
       return;
     }
 
-    handleSuccess(content);
+    handleRequestSuccess(content);
   };
 
 export const requestGetCardData = async () => {
