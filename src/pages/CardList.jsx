@@ -4,4 +4,4 @@ function CardList() {
   return <div>CardList</div>;
 }
 
-export default CardList;
+export default React.memo(CardList);

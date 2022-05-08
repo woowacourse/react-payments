@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import useCardState from '../hooks/useCardState';
 import useDispatch from '../hooks/useDispatch';
 
 import { HYPHEN_PRIMARY_COLOR } from '../theme';
@@ -12,8 +11,7 @@ const MAX_YEAR_CARD_EXPIRATION = 5;
 
 const getYears = (length, n) => Array.from({ length }, (_, i) => `${i + n}`.slice(2));
 
-function DueDate() {
-  const { dimensions } = useCardState();
+function DueDate({ dimensions }) {
   const dispatch = useDispatch();
 
   const now = useRef(new Date());
