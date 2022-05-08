@@ -45,6 +45,7 @@
         "scss": "never"
       }
     ],
+    "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "react/require-default-props": "off",
     "no-underscore-dangle": "off",

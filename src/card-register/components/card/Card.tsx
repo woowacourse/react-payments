@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import S from '../../../card-list/styled';
 
 type Props = {
   cardNumber: string;
@@ -25,7 +26,7 @@ function Card({ cardNumber, name, expiredPeriod, cvc, isActive, color, cardName,
           </div>
           <div className="number">{cardNumber}</div>
           <div className="info">
-            <OwnerNameSpan name={name}>{name.length > 0 ? name : 'NAME'}</OwnerNameSpan>
+            <S.OwnerName name={name}>{name.length > 0 ? name : 'NAME'}</S.OwnerName>
             <span className="expired-period">{expiredPeriod.length > 0 ? expiredPeriod : 'MM / YY'}</span>
           </div>
         </Front>
@@ -160,10 +161,6 @@ const Back = styled.div(() => ({
       paddingRight: '8px',
     },
   },
-}));
-
-const OwnerNameSpan = styled.span<{ name: string }>(({ name }) => ({
-  fontSize: `${Math.min(14, Math.max(4, 20 - Math.floor(name.length / 2)))}px`,
 }));
 
 export default Card;

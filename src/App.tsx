@@ -2,12 +2,16 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Navigation from './card-register/components/navigation/Navigation';
 import CardRegister from './card-register/CardRegister';
+import { PaymentProvider } from './context';
+import CardList from './card-list/CardList';
 
 function App() {
   return (
     <Page>
-      <Navigation />
-      <CardRegister />
+      <PaymentProvider>
+        <Navigation />
+        <CardList />
+      </PaymentProvider>
     </Page>
   );
 }
