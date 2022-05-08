@@ -1,7 +1,18 @@
-export const getStorage = (key) => {
-  return JSON.parse(localStorage.getItem(key)) ?? [];
+export const getCardInfos = () => {
+  return JSON.parse(localStorage.getItem('cardInfos')) ?? {};
 };
 
-export const setStorage = (key, value) => {
-  localStorage.setItem(key, JSON.stringify(value));
+export const setCardInfos = (value) => {
+  const storedCardInfos = getCardInfos();
+  localStorage.setItem(
+    'cardInfos',
+    JSON.stringify({ ...storedCardInfos, ...value })
+  );
+};
+
+export const deleteCardInfos = (id) => {
+  const storedCardInfos = getCardInfos();
+  delete storedCardInfos[id];
+
+  localStorage.setItem('cardInfos', JSON.stringify(storedCardInfos));
 };

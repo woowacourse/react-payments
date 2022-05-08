@@ -8,10 +8,11 @@ import { AddCardButton } from '../common/Card/AddCardButton';
 export const CardLists = ({ cardInfos }) => {
   return (
     <Style.CardListLayout>
-      {cardInfos.map((info) => (
+      {Object.values(cardInfos).map((info) => (
         <Style.CardWrapper key={info.id}>
           <Link to={`./modify/${info.id}`}>
             <Card cardInfo={info} />
+            <Style.NickNameWrapper>{info.cardNickName}</Style.NickNameWrapper>
           </Link>
         </Style.CardWrapper>
       ))}
@@ -28,12 +29,25 @@ const Style = {
   CardListLayout: styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 50px;
+    gap: 15px;
     margin: 24px 0;
+    height: 600px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
   `,
   CardWrapper: styled.div`
     display: flex;
     justify-content: center;
+  `,
+  NickNameWrapper: styled.p`
+    margin-top: 0.6rem;
+    color: black;
   `,
 };

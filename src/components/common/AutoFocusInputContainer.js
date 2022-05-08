@@ -1,10 +1,6 @@
 import React, { useRef } from 'react';
 
-export const AutoFocusInputContainer = ({
-  children,
-  maxValueLength,
-  onCompleted,
-}) => {
+export const AutoFocusInputContainer = ({ children, maxValueLength }) => {
   const flattenChildren = React.Children.toArray(children);
   const inputChildren = flattenChildren.filter(
     (child) => child.type?.target === 'input'
@@ -53,13 +49,6 @@ export const AutoFocusInputContainer = ({
 
     return child;
   });
-
-  if (
-    onCompleted &&
-    inputChildren.every((input) => input.props.value?.length === maxValueLength)
-  ) {
-    onCompleted();
-  }
 
   return <>{refedChildren}</>;
 };

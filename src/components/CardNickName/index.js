@@ -1,22 +1,67 @@
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { nanoid } from 'nanoid';
 import styled from 'styled-components';
+
+import { InputBasic } from '../common/styled';
 import { Button } from '../common/Button';
 import { Card } from '../common/Card';
-import { InputBasic } from '../common/styled';
-import { initialCardInfo } from '../../constants/card';
+import {
+  deleteCardInfos,
+  getCardInfos,
+  setCardInfos,
+} from '../../utils/localStorage';
 
 export const CardNickName = ({
-  cardInfo = initialCardInfo,
+  cardInfo,
   message = '카드 등록이 완료되었습니다!',
+  isModify,
 }) => {
+  const navigate = useNavigate();
+  const cardId = useLocation().pathname.split('/')[3];
+  const info = isModify ? getCardInfos(cardId)[cardId] : cardInfo;
+
+  const [cardNickName, setCardNickName] = useState(info.cardNickName ?? '');
+
+  const handleSubmitCardInfo = () => {
+    const id = info.id ?? nanoid();
+    const { password, CVC, ...safeCardInfo } = info;
+    const uploadCardInfo = {
+      [id]: {
+        ...safeCardInfo,
+        id: id,
+        cardNickName,
+      },
+    };
+
+    setCardInfos(uploadCardInfo);
+    navigate('/react-payments');
+  };
+
+  const handleDeleteCard = () => {
+    if (confirm('정말 삭제하시겠습니까?')) {
+      deleteCardInfos(info.id);
+      navigate('/react-payments');
+    }
+  };
+
   return (
     <>
       <Style.CardWrapper>
         <Style.Message>{message}</Style.Message>
-        <Card size="lg" cardInfo={cardInfo} />
-        <Style.ModifyCardNameInput />
+        <Card size="lg" cardInfo={info} />
+        <Style.ModifyCardNameInput
+          value={cardNickName}
+          onChange={(e) => {
+            setCardNickName(e.target.value);
+          }}
+          placeholder="별칭을 입력해주세요."
+        />
       </Style.CardWrapper>
       <Style.ButtonWrapper>
-        <Button>확인</Button>
+        {isModify && <Button onClick={handleDeleteCard}>삭제</Button>}
+        <Button onClick={handleSubmitCardInfo}>확인</Button>
       </Style.ButtonWrapper>
     </>
   );

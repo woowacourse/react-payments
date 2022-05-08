@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import { useContext, useState, useEffect } from 'react';
 
-import { CARD_INFO_TYPES } from '../../reducer/types';
+import styled from 'styled-components';
+import { CardInfoContext } from '../../providers/CardInfoProvider';
 import { isExpiredDate } from '../../utils/date';
 import { AutoFocusInputContainer } from '../common/AutoFocusInputContainer';
 
@@ -12,17 +12,13 @@ import {
   InputBox,
 } from '../common/styled';
 
-// const isInputValueFilledWithZero = (e) =>
-//   parseInt(e.nativeEvent.data) === 0 &&
-//   e.target.value.length === 2 &&
-//   parseInt(e.target.value) < 1;
-
 export const CardExpireDateInput = () => {
+  const context = useContext(CardInfoContext);
+
   const [expireDate, setExpireDate] = useState({
     month: '',
     year: '',
   });
-
   const handleMonthInput = (e) => {
     if (isNaN(e.nativeEvent.data) || parseInt(e.target.value) > 12) {
       return;
@@ -39,38 +35,41 @@ export const CardExpireDateInput = () => {
     setExpireDate((prev) => ({ ...prev, year: e.target.value }));
   };
 
-  const handleExpireDateInputCompleted = () => {
+  useEffect(() => {
     if (expireDate.year === '' || expireDate.month === '') {
       return;
     }
 
-    console.log(
-      isExpiredDate(expireDate.month, expireDate.year)
-        ? 'expired'
-        : 'yet expired'
+    context.setInputCompleted(
+      'expireDate',
+      isExpiredDate(expireDate.month, expireDate.year) ? false : true
     );
-  };
-  const adjustNumberOfDigit = (e, name) => {
-    if (e.target.value.length === 1)
-      setExpireDate((prev) => ({
-        ...prev,
-        [name]: e.target.value.padStart(2, '0'),
-      }));
+  }, [expireDate]);
+
+  const updateTypedExpireDate = (e, name) => {
+    const paddedDate =
+      e.target.value.length === 1
+        ? e.target.value.padStart(2, '0')
+        : e.target.value;
+
+    setExpireDate((prev) => ({
+      ...prev,
+      [name]: paddedDate,
+    }));
+
+    context.setCardExpireDate(name, paddedDate);
   };
 
   return (
     <InputContainer>
       <InputTitle>만료일</InputTitle>
       <Style.ExpireDateInputBox>
-        <AutoFocusInputContainer
-          maxValueLength={2}
-          onCompleted={handleExpireDateInputCompleted}
-        >
+        <AutoFocusInputContainer maxValueLength={2}>
           <Style.ExpireDateInputBasic
             value={expireDate.month}
             onChange={handleMonthInput}
             onBlur={(e) => {
-              adjustNumberOfDigit(e, 'month');
+              updateTypedExpireDate(e, 'month');
             }}
             type="text"
             placeholder="MM"
@@ -80,7 +79,7 @@ export const CardExpireDateInput = () => {
             value={expireDate.year}
             onChange={handleYearInput}
             onBlur={(e) => {
-              adjustNumberOfDigit(e, 'year');
+              updateTypedExpireDate(e, 'year');
             }}
             type="text"
             placeholder="YY"

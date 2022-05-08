@@ -1,10 +1,10 @@
 import { CardLists } from '../components/CardList/CardLists';
 import { PageTitle } from '../components/common/PageTitle';
 import { Layout } from '../components/common/styled';
-import { getStorage } from '../utils/localStorage';
+import { getCardInfos } from '../utils/localStorage';
 
 export const CardListPage = () => {
-  const storedCardInfos = getStorage('cardInfos');
+  const storedCardInfos = getCardInfos();
 
   return (
     <Layout>

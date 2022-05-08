@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 
 import { MAX_LENGTH } from '../../constants/card';
+import { CardInfoContext } from '../../providers/CardInfoProvider';
 
 import { QuestionMark } from '../common/QuestionMark';
 import {
@@ -12,6 +13,8 @@ import {
 } from '../common/styled';
 
 export const CVCInput = ({ openModal }) => {
+  const context = useContext(CardInfoContext);
+
   const [CVC, setCVC] = useState('');
 
   const handleCVCChange = (e) => {
@@ -25,17 +28,24 @@ export const CVCInput = ({ openModal }) => {
   useEffect(() => {
     const isCVCCompleted = CVC.length === MAX_LENGTH.CVC;
 
-    if (isCVCCompleted) {
-      console.log('CVC COMPLETED');
-    }
+    context.setInputCompleted('CVC', isCVCCompleted);
   }, [CVC]);
+
+  const updateTypedCVC = (e) => {
+    context.setCVC(e.target.value);
+  };
 
   return (
     <InputContainer>
       <InputTitle>보안카드(CVC/CVV)</InputTitle>
       <Style.CVCInputContainer>
         <Style.CVCInputBox>
-          <InputBasic type="password" value={CVC} onChange={handleCVCChange} />
+          <InputBasic
+            type="password"
+            value={CVC}
+            onChange={handleCVCChange}
+            onBlur={updateTypedCVC}
+          />
         </Style.CVCInputBox>
         <QuestionMark onClick={openModal} />
       </Style.CVCInputContainer>

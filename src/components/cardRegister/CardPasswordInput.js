@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import {
   InputContainer,
@@ -9,8 +9,11 @@ import {
 import Dot from '../common/Dot';
 import { AutoFocusInputContainer } from '../common/AutoFocusInputContainer';
 import styled from 'styled-components';
+import { CardInfoContext } from '../../providers/CardInfoProvider';
 
 export const CardPasswordInput = () => {
+  const context = useContext(CardInfoContext);
+
   const [password, setPassword] = useState({
     firstNumber: '',
     secondNumber: '',
@@ -22,20 +25,22 @@ export const CardPasswordInput = () => {
     }
 
     setPassword((prev) => ({ ...prev, [name]: e.target.value }));
+    context.setCardPassword(name, e.target.value);
   };
 
-  const handlePasswordCompleted = () => {
-    console.log('password Completed');
-  };
+  useEffect(() => {
+    const isCompletePassword = Object.values(password).every(
+      (number) => number
+    );
+
+    context.setInputCompleted('password', isCompletePassword);
+  }, [password]);
 
   return (
     <InputContainer>
       <InputTitle>카드 비밀번호</InputTitle>
       <Style.PasswordInputBox>
-        <AutoFocusInputContainer
-          maxValueLength={1}
-          onCompleted={handlePasswordCompleted}
-        >
+        <AutoFocusInputContainer maxValueLength={1}>
           <Style.PasswordInputBasic
             value={password.firstNumber || ''}
             onChange={(e) => handlePasswordChange(e, 'firstNumber')}
