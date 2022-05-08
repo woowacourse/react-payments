@@ -5,7 +5,6 @@ export const Container = styled.div`
   flex-direction: column;
   height: 700px;
   padding-bottom: 20px;
-  overflow: scroll;
 `;
 
 export const HeadTitle = styled.span`
@@ -22,7 +21,9 @@ export const CardListSection = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 26px;
+  height: 100%;
   margin-top: 65px;
+  overflow-y: scroll;
 `;
 
 export const CardInfoWrapper = styled.div`

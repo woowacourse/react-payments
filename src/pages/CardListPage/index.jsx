@@ -31,7 +31,9 @@ function CardListPage() {
             </CardAlias>
           </CardInfoWrapper>
         ))}
-        <CardAddButton onClick={handleClickCardAddButton}>+</CardAddButton>
+        <div>
+          <CardAddButton onClick={handleClickCardAddButton}>+</CardAddButton>
+        </div>
       </CardListSection>
     </Container>
   );
