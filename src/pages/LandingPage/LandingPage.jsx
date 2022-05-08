@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import CardPreview from '../../components/CardPreview/CardPreview';
 import Header from '../../components/Header/Header';
+import Content from '../../components/Content/Content';
 import CardRegistrationButton from '../../components/CardRegistrationButton/CardRegistrationButton';
 import CardsContext from '../../contexts/CardsContext';
 
@@ -14,7 +15,7 @@ const LandingPage = () => {
       <Header>
         <h2>보유카드</h2>
       </Header>
-      <div style={{ alignItems: 'center', height: '100%' }}>
+      <Content>
         <StyledCardList>
           {cardList &&
             cardList.map(({ id, alias, ...cardInfo }) => (
@@ -29,7 +30,7 @@ const LandingPage = () => {
             </Link>
           </li>
         </StyledCardList>
-      </div>
+      </Content>
     </>
   );
 };

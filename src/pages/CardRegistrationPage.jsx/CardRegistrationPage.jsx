@@ -1,6 +1,7 @@
 import React from 'react';
 import BackwardButton from '../../components/BackwardButton/BackwardButton';
 import CardForm from '../../components/CardForm/CardForm';
+import Content from '../../components/Content/Content';
 import Header from '../../components/Header/Header';
 
 const CardRegistrationPage = () => {
@@ -10,7 +11,9 @@ const CardRegistrationPage = () => {
         <BackwardButton />
         <h2>카드 추가</h2>
       </Header>
-      <CardForm />
+      <Content>
+        <CardForm />
+      </Content>
     </>
   );
 };

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { censorString } from '../../utils/commons';
 
 const CardPreview = ({
+  size,
   brand,
   firstCardNumber,
   secondCardNumber,
@@ -11,50 +12,79 @@ const CardPreview = ({
   owner,
   expiredMonth,
   expiredYear,
-}) => (
-  <StyledCardPreview className="card-box">
-    <div className="small-card">
-      <div className="card-top">
-        <span className="card-text">{brand ?? null}</span>
-      </div>
-      <div className="card-middle">
-        <div className="small-card__chip" />
-      </div>
-      <div className="card-bottom">
-        <div className="card-bottom__number">
-          <span className="card-text">{`${firstCardNumber} ${secondCardNumber} ${censorString(
-            thirdCardNumber
-          )} ${censorString(fourthCardNumber)}`}</span>
+}) => {
+  const isSmall = size === 'small' || !size;
+  const cardSizeClass = isSmall ? 'small-card' : 'big-card';
+  const cardChipClass = isSmall ? 'small-card__chip' : 'big-card__chip';
+  const cardTextClass = isSmall ? 'card-text' : 'card-text__big';
+
+  return (
+    <StyledCardPreview>
+      <div className={cardSizeClass}>
+        <div className="card-top">
+          <span className={cardTextClass}>{brand ?? null}</span>
         </div>
-        <div className="card-bottom__info">
-          <p className="card-text w-50 ellipsis">{owner.toUpperCase()}</p>
-          {(expiredMonth || expiredYear) && (
-            <span className="card-text">
-              {expiredMonth} {expiredMonth && expiredYear ? '/' : null}{' '}
-              {expiredYear}
-            </span>
-          )}
+        <div className="card-middle">
+          <div className={cardChipClass} />
+        </div>
+        <div className="card-bottom">
+          <div className="card-bottom__number">
+            <span
+              className={cardTextClass}
+            >{`${firstCardNumber} ${secondCardNumber} ${censorString(
+              thirdCardNumber
+            )} ${censorString(fourthCardNumber)}`}</span>
+          </div>
+          <div className="card-bottom__info">
+            <p className={`${cardTextClass} w-50 ellipsis`}>
+              {owner.toUpperCase()}
+            </p>
+            {(expiredMonth || expiredYear) && (
+              <span className={cardTextClass}>
+                {expiredMonth} {expiredMonth && expiredYear ? '/' : null}{' '}
+                {expiredYear}
+              </span>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  </StyledCardPreview>
-);
+    </StyledCardPreview>
+  );
+};
 
 const StyledCardPreview = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
   margin: 10px 0;
-  color: #525252;
+
+  .empty-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 208px;
+    height: 130px;
+
+    font-size: 30px;
+    color: #575757;
+
+    background: #e5e5e5;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+
+    user-select: none;
+  }
 
   .small-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 10px;
 
-    width: 198px;
+    width: 208px;
     height: 130px;
 
     background: #94dacd;
@@ -70,6 +100,30 @@ const StyledCardPreview = styled.div`
 
     background: #cbba64;
     border-radius: 4px;
+  }
+
+  .big-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 290px;
+    height: 180px;
+
+    background: #94dacd;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+  }
+
+  .big-card__chip {
+    width: 55.04px;
+    height: 35.77px;
+
+    background: #cbba64;
+    border-radius: 4px;
+
+    font-size: 24px;
   }
 
   .card-top {
@@ -114,18 +168,24 @@ const StyledCardPreview = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
   }
 
   .card-text {
-    display: block;
-    margin: 0;
+    margin: 0 16px;
 
-    /* vertical-align: middle; */
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 14px;
-    letter-spacing: 0.1em;
+    font-size: 14px;
+    line-height: 16px;
+    vertical-align: middle;
+    font-weight: 400;
+  }
+
+  .card-text__big {
+    margin: 0 16px;
+
+    font-size: 18px;
+    line-height: 20px;
+    vertical-align: middle;
+    font-weight: 400;
   }
 `;
 

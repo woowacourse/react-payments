@@ -8,9 +8,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  position: relative;
+  padding-top: 48px;
+  box-sizing: border-box;
+
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
   align-items: center;
   justify-content: center;
   background-color: #e5e5e5;
@@ -26,5 +28,4 @@ input {
   min-width: 375px;
   height: 700px;
   position: relative;
-  border-radius: 15px;
 }
