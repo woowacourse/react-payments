@@ -19,8 +19,8 @@ const LandingPage = () => {
         <StyledCardList>
           {cardList &&
             cardList.map(({ id, alias, ...cardInfo }) => (
-              <li>
-                <CardPreview key={id} {...cardInfo} />
+              <li key={id}>
+                <CardPreview {...cardInfo} />
                 <p className="card-alias">{alias}</p>
               </li>
             ))}

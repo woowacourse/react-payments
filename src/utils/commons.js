@@ -8,18 +8,15 @@ export const convertFormDataToObject = (formData) => {
   return object;
 };
 
-export const removeCrucialCardInfo = (card) => ({
-  id: card.id,
-  alias: card.alias,
-  brand: card.brand,
-  firstCardNumber: card.firstCardNumber,
-  secondCardNumber: card.secondCardNumber,
-  thirdCardNumber: card.thirdCardNumber,
-  fourthCardNumber: card.fourthCardNumber,
-  owner: card.owner,
-  expiredMonth: card.expiredMonth,
-  expiredYear: card.expiredYear,
-});
+export const removeCrucialCardInfo = (card) => {
+  const clonedCard = { ...card };
+
+  ['cvc', 'firstPasswordDigit', 'secondPasswordDigit'].forEach((key) => {
+    delete clonedCard[key];
+  });
+
+  return clonedCard;
+};
 
 export const censorString = (string, censoringCharacter = '•') => {
   return censoringCharacter.repeat(string.length);

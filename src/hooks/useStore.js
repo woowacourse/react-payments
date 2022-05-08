@@ -21,24 +21,25 @@ const useStore = () => {
         const newCard = { ...cardInfo, id: new Date().valueOf() };
         const safeCardInfo = removeCrucialCardInfo(newCard);
 
-        store.save([...cardList, newCard]);
+        store.post(newCard);
         setCardList((prevCardList) => [...prevCardList, safeCardInfo]);
 
         return safeCardInfo;
       },
       updateCard: (id, updatedCardInfo) => {
+        store.patch(id, updatedCardInfo);
+
         setCardList((prevCardList) => {
-          const updatedCardList = [...prevCardList];
-          const index = prevCardList.findIndex((card) => card.id === id);
+          const clonedCardList = [...prevCardList];
+          const index = clonedCardList.findIndex((card) => card.id === id);
+          const safeCardInfo = removeCrucialCardInfo(updatedCardInfo);
 
-          if (index) {
-            updatedCardList[index] = {
-              ...prevCardList[index],
-              ...updatedCardInfo,
-            };
-          }
+          clonedCardList[index] = {
+            ...clonedCardList[index],
+            ...safeCardInfo,
+          };
 
-          return updatedCardList;
+          return clonedCardList;
         });
       },
     }),
