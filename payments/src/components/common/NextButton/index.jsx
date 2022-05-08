@@ -1,9 +1,11 @@
 import "./index.scss";
 
-const NextButton = ({ children, onClick }) => {
+const NextButton = ({ children, onClick, testId }) => {
   return (
     <div className="next--button">
-      <button onClick={onClick}>{children}</button>
+      <button onClick={onClick} data-testid={testId}>
+        {children}
+      </button>
     </div>
   );
 };

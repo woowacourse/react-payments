@@ -55,6 +55,7 @@ const ExpiredDateInput = () => {
                 updateExpiredDate(target, idx);
               }}
               onKeyDown={handleKeyDown}
+              testId={`expired-date${idx}`}
             />
             {idx === 0 ? "/" : ""}
           </Fragment>

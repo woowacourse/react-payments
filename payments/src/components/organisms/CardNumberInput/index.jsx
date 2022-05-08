@@ -53,6 +53,7 @@ const CardNumberInput = () => {
               ref={(el) => (itemRef.current[idx] = el)}
               type={idx > 1 ? "password" : "text"}
               maxLength={INPUT_LENGTH}
+              testId={`card-number-input${idx}`}
             />
             {idx === NUM_OF_INPUT - 1 ? "" : "-"}
           </Fragment>

@@ -70,7 +70,7 @@ const CardAdd = ({ setDone }) => {
             <OwnerNameInput />
             <SecureCodeInput />
             <CardPasswordInput />
-            <NextButton>다음</NextButton>
+            <NextButton testId={"submit-card"}>다음</NextButton>
           </form>
         </div>
       </div>

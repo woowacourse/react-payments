@@ -31,6 +31,7 @@ const SecureCodeInput = () => {
           maxLength="3"
           value={secureCode}
           onChange={updateSecureCode}
+          testId={"secure-code"}
         />
       </InputContainer>
       <button type="button" className="help--button tooltip">

@@ -55,6 +55,7 @@ const CardPasswordInput = () => {
                   updateCardPassword(target, idx);
                 }}
                 onKeyDown={handleKeyDown}
+                testId={`password${idx}`}
               />
             </InputContainer>
           </div>

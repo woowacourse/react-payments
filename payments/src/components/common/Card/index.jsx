@@ -5,7 +5,11 @@ const Card = ({
   onClick,
 }) => {
   return (
-    <div className={`card__container ${color}`} onClick={onClick}>
+    <div
+      data-testId="card"
+      className={`card__container ${color}`}
+      onClick={onClick}
+    >
       <p className="card__name">{cardName}</p>
       <div className="rfid"></div>
       <div className="card__numbers">

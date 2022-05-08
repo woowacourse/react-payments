@@ -39,6 +39,7 @@ const OwnerNameInput = () => {
           onChange={({ target }) => {
             updateCardOwner(target);
           }}
+          testId={"owner-name"}
         />
       </InputContainer>
     </div>
