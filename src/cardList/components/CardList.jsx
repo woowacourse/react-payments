@@ -1,6 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function CardList() {
+  const navigator = useNavigate();
+
+  const moveToAddCard = () => {
+    navigator('/addCard');
+  };
+
   return (
     <>
       <div className="header-wrapper">
@@ -27,7 +34,13 @@ function CardList() {
           </div>
         </div>
         <span className="card-nickname">법인카드</span>
-        <div className="card-box">
+        <div
+          className="card-box add-card"
+          onClick={moveToAddCard}
+          onKeyDown={() => {}}
+          role="button"
+          tabIndex={0}
+        >
           <div className="empty-card">+</div>
         </div>
       </div>
