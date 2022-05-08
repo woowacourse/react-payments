@@ -1,20 +1,21 @@
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import Card from 'components/common/Card'
 import Input from 'components/common/Input'
 import Button from 'components/common/Button'
 
-import CardInfoContext from 'store/cardInfo-context'
+import CardInfoContext from 'context/cardInfo-context'
 
 import { CompleteText } from 'pages/NickNamePage/style'
 import { FooterWrapper, CenterItem, PageWrapper } from 'pages/style'
 import { BottomBorderInputWrapper } from 'components/common/Input/style'
 
 function NickNamePage() {
-  const { cardInfo, isFieldFulfilled, handleCardNickNameChange, clearContext } =
+  const { cardInfo, isFormFulfilled, clearContext } =
     useContext(CardInfoContext)
   const { id: paramId } = useParams()
+  const nickname = useRef()
 
   const isEditing = Object.keys(
     JSON.parse(localStorage.getItem('cardList')) || {}
@@ -28,7 +29,7 @@ function NickNamePage() {
         'cardList',
         JSON.stringify({
           ...prevCardList,
-          [paramId]: { ...editedCard, cardNickName: cardInfo.cardNickName },
+          [paramId]: { ...editedCard, cardNickName: nickname.current.value },
         })
       )
       return
@@ -39,14 +40,17 @@ function NickNamePage() {
     const prevCardList = JSON.parse(localStorage.getItem('cardList'))
     localStorage.setItem(
       'cardList',
-      JSON.stringify({ ...prevCardList, [cardId]: cardInfo })
+      JSON.stringify({
+        ...prevCardList,
+        [cardId]: { ...cardInfo, cardNickName: nickname.current.value },
+      })
     )
 
-    // state 비우기
+    // state 비우기🤔
     clearContext()
   }
 
-  return isFieldFulfilled || isEditing ? (
+  return isFormFulfilled || isEditing ? (
     <PageWrapper>
       <CompleteText>
         {isEditing ? '카드 닉네임 수정' : '카드등록이 완료되었습니다.'}
@@ -60,15 +64,13 @@ function NickNamePage() {
           }
         />
         <BottomBorderInputWrapper>
-          <Input color="black" onChange={handleCardNickNameChange} />
+          <Input color="black" ref={nickname} />
         </BottomBorderInputWrapper>
       </CenterItem>
       <FooterWrapper>
-        {cardInfo.cardNickName && (
-          <Button onClick={saveCardInfo}>
-            <Link to="/react-payments">확인</Link>
-          </Button>
-        )}
+        <Button onClick={saveCardInfo}>
+          <Link to="/react-payments">확인</Link>
+        </Button>
       </FooterWrapper>
     </PageWrapper>
   ) : (

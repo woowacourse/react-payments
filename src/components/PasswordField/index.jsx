@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import CardInfoContext from 'store/cardInfo-context'
+import CardInfoContext from 'context/cardInfo-context'
 
 import Field from 'components/common/Field'
 import Input from 'components/common/Input'
@@ -21,9 +21,9 @@ function PasswordField() {
     maxLength: PASSWORD.UNIT_LENGTH,
   })
 
-  const handleInputChange = (e) => {
-    handlePasswordChange(e)
-    moveToNextInput(e)
+  const handleInputChange = ({ target }, key) => {
+    handlePasswordChange(target, key)
+    moveToNextInput(target)
   }
 
   return (
@@ -34,7 +34,7 @@ function PasswordField() {
           dataset="first"
           value={password.first}
           maxLength={PASSWORD.UNIT_LENGTH}
-          onChange={handleInputChange}
+          onChange={(e) => handleInputChange(e, 'first')}
           ref={(node) => {
             refList.current[0] = node
           }}
@@ -46,7 +46,7 @@ function PasswordField() {
           dataset="second"
           value={password.second}
           maxLength={PASSWORD.UNIT_LENGTH}
-          onChange={handleInputChange}
+          onChange={(e) => handleInputChange(e, 'second')}
           ref={(node) => {
             refList.current[1] = node
           }}

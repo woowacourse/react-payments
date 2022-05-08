@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
-import { CardInfoProvider } from 'store/cardInfo-context'
+import { CardInfoProvider } from 'context/cardInfo-context'
 
 import AddPage from 'pages/AddPage'
 import CardListPage from 'pages/CardListPage'

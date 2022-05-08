@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import CardInfoContext from 'store/cardInfo-context'
+import CardInfoContext from 'context/cardInfo-context'
 
 import Field from 'components/common/Field'
 import Input from 'components/common/Input'

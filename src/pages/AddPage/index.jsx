@@ -21,7 +21,7 @@ import OwnerField from 'components/OwnerField'
 import CVCField from 'components/CVCField'
 import PasswordField from 'components/PasswordField'
 
-import CardInfoContext from 'store/cardInfo-context'
+import CardInfoContext from 'context/cardInfo-context'
 import Modal from 'components/common/Modal'
 import CardCompany from 'components/common/CardCompany'
 
@@ -29,7 +29,7 @@ function AddPage() {
   const {
     cardInfo,
     isError: { cardNumber, dueDate },
-    isFieldFulfilled,
+    isFormFulfilled,
     handleCardCompany,
   } = useContext(CardInfoContext)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -66,7 +66,7 @@ function AddPage() {
         <CVCField />
         <PasswordField />
         <FooterWrapper>
-          {isFieldFulfilled && (
+          {isFormFulfilled && (
             <Button type={'submit'} color={COLORS.MINT} onClick={handleSubmit}>
               다음
             </Button>

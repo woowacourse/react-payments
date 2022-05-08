@@ -3,7 +3,7 @@ import { useRef } from 'react'
 const useAutoFocus = ({ maxLength }) => {
   const refList = useRef([])
 
-  const moveToNextInput = ({ target }) => {
+  const moveToNextInput = (target) => {
     if (target.value.length < maxLength) return
 
     const curIndex = refList.current.indexOf(target)
