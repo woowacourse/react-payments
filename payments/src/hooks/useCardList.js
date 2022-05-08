@@ -25,7 +25,7 @@ const controllCardList = (state, action) => {
   }
 };
 
-const initState = JSON.parse(localStorage.getItem("CARD_LIST"));
+const initState = JSON.parse(localStorage.getItem("CARD_LIST")) ?? [];
 
 const useCardList = () => {
   const [cardList, updateCardList] = useReducer(controllCardList, initState);
