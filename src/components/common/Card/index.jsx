@@ -7,6 +7,7 @@ import {
   CardBottomNumber,
   CardBottomInfo,
   CardOwner,
+  Plus,
 } from 'components/common/Card/style'
 
 import { CARD_COMPANY } from 'constant'
@@ -18,11 +19,14 @@ function Card({ size, cardInfo }) {
   const ownerName = owner || 'NAME'
 
   return (
-    <CardWrapper size={size} color={CARD_COMPANY[company]}>
+    <CardWrapper size={size} color={CARD_COMPANY[company]} border={!company}>
       <CardTop>
         <CardText>{company}카드</CardText>
       </CardTop>
-      <CardMiddle size={size}></CardMiddle>
+      <CardMiddle size={size}>
+        <div></div>
+        {!company && <Plus>+</Plus>}
+      </CardMiddle>
       <CardBottom>
         <CardBottomNumber>
           <CardText>

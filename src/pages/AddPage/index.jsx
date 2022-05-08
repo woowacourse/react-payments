@@ -7,11 +7,11 @@ import Header from 'components/common/Header'
 import Modal from 'components/common/Modal'
 import CardCompany from 'components/common/CardCompany'
 
-import CardNumberField from 'components/CardNumberField'
-import DueDateField from 'components/DueDateField'
-import OwnerField from 'components/OwnerField'
-import CVCField from 'components/CVCField'
-import PasswordField from 'components/PasswordField'
+import CardNumberField from 'components/AddCard/CardNumberField'
+import DueDateField from 'components/AddCard/DueDateField'
+import OwnerField from 'components/AddCard/OwnerField'
+import CVCField from 'components/AddCard/CVCField'
+import PasswordField from 'components/AddCard/PasswordField'
 
 import {
   PageWrapper,
@@ -28,11 +28,11 @@ import CardInfoContext from 'context/cardInfo-context'
 function AddPage() {
   const {
     cardInfo,
-    isError: { cardNumber, dueDate },
+    isError: { cardNumber, dueMonth, dueYear },
     isFormFulfilled,
     handleCardCompany,
   } = useContext(CardInfoContext)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(!cardInfo.company)
 
   const navigate = useNavigate()
 
@@ -42,10 +42,11 @@ function AddPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
     if (cardNumber.error) {
       return alert(ALERT_MESSAGE.CHECK_CARD_NUMBER)
     }
-    if (dueDate.error) {
+    if (dueMonth.error || dueYear.error) {
       return alert(ALERT_MESSAGE.CHECK_DUE_DATE)
     }
     navigate(

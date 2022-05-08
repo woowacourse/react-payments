@@ -20,7 +20,11 @@ const CardWrapper = styled.div`
   padding: ${(props) => (props.size === 'small' ? '14px' : '20px')};
   width: ${(props) => (props.size === 'small' ? '208px' : '290px')};
   height: ${(props) => (props.size === 'small' ? '130px' : '180px')};
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  border: ${(props) => props.border && `solid 3px ${props.theme.colors.PINK}`};
+  box-shadow: ${(props) =>
+    props.border
+      ? `3px 3px 5px ${props.theme.colors.PINK}`
+      : '3px 3px 5px rgba(0, 0, 0, 0.25)'};
 `
 
 const CardTop = styled.div`
@@ -73,6 +77,12 @@ const CardBottomInfo = styled.div`
   justify-content: space-between;
 `
 
+const Plus = styled.span`
+  font-size: 50px;
+  margin-left: 50px;
+  margin-top: 10px;
+`
+
 export {
   CardWrapper,
   CardTop,
@@ -82,4 +92,5 @@ export {
   CardBottomNumber,
   CardBottomInfo,
   CardOwner,
+  Plus,
 }

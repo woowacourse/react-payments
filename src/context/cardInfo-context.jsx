@@ -8,7 +8,8 @@ const CardInfoContext = React.createContext()
 
 const initialError = {
   cardNumber: { error: false, errorMessage: '' },
-  dueDate: { error: false, errorMessage: '' },
+  dueMonth: { error: false, errorMessage: '' },
+  dueYear: { error: false, errorMessage: '' },
 }
 
 export function CardInfoProvider({ children }) {
@@ -57,18 +58,18 @@ export function CardInfoProvider({ children }) {
     })
   }
 
-  const handleOwnerChange = (e) => {
-    const { value } = e.target
+  const handleOwnerChange = (target) => {
+    const { value } = target
 
     dispatch({
       type: 'CHANGE_CARD_INFO',
       name: 'owner',
-      value: value,
+      value: value.toUpperCase(),
     })
   }
 
-  const handleCvcChange = (e) => {
-    const { value } = e.target
+  const handleCvcChange = (target) => {
+    const { value } = target
 
     dispatch({
       type: 'CHANGE_CARD_INFO',

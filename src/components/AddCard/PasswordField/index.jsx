@@ -7,9 +7,10 @@ import Input from 'components/common/Input'
 import useAutoFocus from 'hooks/useAutoFocus'
 
 import { GrayInputWrapper } from 'components/common/Input/style'
-import { Dot } from 'components/PasswordField/style'
+import { Dot } from 'components/AddCard/PasswordField/style'
 
 import { PASSWORD } from 'constant'
+import { isInvalidPassword } from 'validation'
 
 function PasswordField() {
   const {
@@ -22,6 +23,8 @@ function PasswordField() {
   })
 
   const handleInputChange = ({ target }, key) => {
+    const { value } = target
+    if (isInvalidPassword(value)) return
     handlePasswordChange(target, key)
     moveToNextInput(target)
   }

@@ -8,12 +8,20 @@ import Input from 'components/common/Input'
 import { GrayInputWrapper } from 'components/common/Input/style'
 
 import { OWNER } from 'constant'
+import { isInvalidOwner } from 'validation'
 
 function OwnerField() {
   const {
     cardInfo: { owner },
     handleOwnerChange,
   } = useContext(CardInfoContext)
+
+  const handleInputChange = ({ target }) => {
+    const { value } = target
+    if (isInvalidOwner(value)) return
+
+    handleOwnerChange(target)
+  }
 
   return (
     <Field
@@ -23,7 +31,7 @@ function OwnerField() {
       <GrayInputWrapper>
         <Input
           value={owner}
-          onChange={handleOwnerChange}
+          onChange={handleInputChange}
           maxLength={OWNER.MAX_LENGTH}
         />
       </GrayInputWrapper>

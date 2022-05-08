@@ -8,12 +8,20 @@ import Input from 'components/common/Input'
 import { GrayInputWrapper } from 'components/common/Input/style'
 
 import { CVC } from 'constant'
+import { isInvalidCVC } from 'validation'
 
 function CVCField() {
   const {
     cardInfo: { cvc },
     handleCvcChange,
   } = useContext(CardInfoContext)
+
+  const handleInputChange = ({ target }) => {
+    const { value } = target
+    if (isInvalidCVC(value)) return
+
+    handleCvcChange(target)
+  }
 
   return (
     <Field
@@ -25,7 +33,7 @@ function CVCField() {
           type="password"
           value={cvc}
           maxLength={CVC.UNIT_LENGTH}
-          onChange={handleCvcChange}
+          onChange={handleInputChange}
         />
       </GrayInputWrapper>
     </Field>

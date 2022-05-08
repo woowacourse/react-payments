@@ -15,7 +15,8 @@ function DueDateField() {
   const {
     cardInfo: { dueDate },
     isError: {
-      dueDate: { error, errorMessage },
+      dueMonth: { error: monthError, errorMessage: monthErrorMessage },
+      dueYear: { error: yearError, errorMessage: yearErrorMessage },
     },
     setIsError,
     handleDueDateChange,
@@ -35,7 +36,7 @@ function DueDateField() {
       setIsError((prev) => {
         return {
           ...prev,
-          dueDate: {
+          dueMonth: {
             error: value < MONTH.MIN || value > MONTH.MAX,
             errorMessage: ERROR_MESSAGE.INVALID_MONTH,
           },
@@ -46,7 +47,7 @@ function DueDateField() {
       setIsError((prev) => {
         return {
           ...prev,
-          dueDate: {
+          dueYear: {
             error: value < currentYear,
             errorMessage: ERROR_MESSAGE.INVALID_YEAR,
           },
@@ -58,8 +59,13 @@ function DueDateField() {
   }
 
   return (
-    <Field label="만료일" errorMessage={error && errorMessage}>
-      <GrayInputWrapper size={50} error={error && errorMessage}>
+    <Field
+      label="만료일"
+      errorMessage={
+        monthError ? monthErrorMessage : yearError && yearErrorMessage
+      }
+    >
+      <GrayInputWrapper size={50} error={monthError || yearError}>
         <Input
           value={dueDate.month}
           dataset="month"

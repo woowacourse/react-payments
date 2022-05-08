@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
 import CardListPage from 'pages/CardListPage'
 
-import { CardInfoProvider } from 'store/cardInfo-context'
+import { CardInfoProvider } from 'context/cardInfo-context'
 
 const Template = () => {
   return (
