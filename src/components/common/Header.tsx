@@ -6,7 +6,7 @@ interface HeaderProps {
   title: string;
 }
 
-export default function Header({ hasBackArrow = true, title }: HeaderProps) {
+function Header({ hasBackArrow = true, title }: HeaderProps) {
   const navigate = useNavigate();
 
   return (
@@ -20,3 +20,5 @@ export default function Header({ hasBackArrow = true, title }: HeaderProps) {
     </header>
   );
 }
+
+export default React.memo(Header);

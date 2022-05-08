@@ -1,5 +1,5 @@
 import Card from "components/add/Card";
-import Header from "components/common";
+import Header from "components/common/Header";
 import { PATH } from "constant/path";
 import React from "react";
 import { useNavigate } from "react-router-dom";

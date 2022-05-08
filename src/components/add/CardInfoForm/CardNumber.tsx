@@ -10,7 +10,7 @@ interface CardNumberProps {
   inputs: HTMLInputElement[];
 }
 
-export default function CardNumber({ cardNumbers, onChange, validation, inputs }: CardNumberProps) {
+function CardNumber({ cardNumbers, onChange, validation, inputs }: CardNumberProps) {
   return (
     <InputContainer title="카드번호" validation={validation}>
       <div className="input-box">
@@ -32,3 +32,5 @@ export default function CardNumber({ cardNumbers, onChange, validation, inputs }
     </InputContainer>
   );
 }
+
+export default React.memo(CardNumber);

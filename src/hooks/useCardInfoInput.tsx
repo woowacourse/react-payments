@@ -1,6 +1,6 @@
 import REGEXP from "constant/regexp";
 import { cardInfoValidator } from "lib/validation";
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useCallback, useEffect, useReducer, useState } from "react";
 import { InputChangeFunction } from "types";
 import {
   CardColor,
@@ -124,7 +124,7 @@ function useCardInfoInput() {
     cardInfoDispatch({ type: "CHANGE_CARD_TYPE", payload: { name, color } });
   };
 
-  const onChangeCardNumber: InputChangeFunction = e => {
+  const onChangeCardNumber: InputChangeFunction = useCallback(e => {
     const {
       value,
       dataset: { index },
@@ -133,9 +133,9 @@ function useCardInfoInput() {
     if (value === "" || REGEXP.NUMBER.test(value)) {
       cardInfoDispatch({ type: "CHANGE_CARD_NUMBER", payload: { index, cardNumber: value } });
     }
-  };
+  }, []);
 
-  const onChangeExpirationDate: InputChangeFunction = e => {
+  const onChangeExpirationDate: InputChangeFunction = useCallback(e => {
     const {
       value,
       dataset: { key },
@@ -144,9 +144,9 @@ function useCardInfoInput() {
     if (value === "" || REGEXP.NUMBER.test(value)) {
       cardInfoDispatch({ type: "CHANGE_EXPIRATION_DATE", payload: { key, value } });
     }
-  };
+  }, []);
 
-  const onChangeUserName: InputChangeFunction = e => {
+  const onChangeUserName: InputChangeFunction = useCallback(e => {
     const value = e.target.value;
 
     if (cardInfo.userName === "" && value === " ") {
@@ -156,21 +156,21 @@ function useCardInfoInput() {
     if (value === "" || REGEXP.ENGLISH.test(value)) {
       cardInfoDispatch({ type: "CHANGE_USER_NAME", payload: { userName: value } });
     }
-  };
+  }, []);
 
-  const onBlurUserName = () => {
+  const onBlurUserName = useCallback(() => {
     cardInfoDispatch({ type: "BLUR_USER_NAME", payload: null });
-  };
+  }, []);
 
-  const onChangeSecurityCode: InputChangeFunction = e => {
+  const onChangeSecurityCode: InputChangeFunction = useCallback(e => {
     const value = e.target.value;
 
     if (value === "" || REGEXP.NUMBER.test(value)) {
       cardInfoDispatch({ type: "CHANGE_SECURITY_CODE", payload: { securityCode: value } });
     }
-  };
+  }, []);
 
-  const onChangePassword: InputChangeFunction = e => {
+  const onChangePassword: InputChangeFunction = useCallback(e => {
     const {
       value,
       dataset: { index },
@@ -179,7 +179,7 @@ function useCardInfoInput() {
     if (value === "" || REGEXP.NUMBER.test(value)) {
       cardInfoDispatch({ type: "CHANGE_PASSWORD", payload: { index, value } });
     }
-  };
+  }, []);
 
   // Validation
   const handleChangeValidation = <T,>(

@@ -31,7 +31,7 @@ export default function Card({
       <div
         className="card-box flex-center"
         style={{ marginBottom, cursor: pointer ? "pointer" : "auto" }}
-        onClick={() => onClickCard(cardInfo.id)}
+        onClick={() => onClickCard?.(cardInfo.id)}
       >
         <div
           className={`${size}-card flex-column-center`}

@@ -1,6 +1,6 @@
 import Card from "components/add/Card";
 import CardInfoForm from "components/add/CardInfoForm";
-import Header from "components/common";
+import Header from "components/common/Header";
 import useCardInfoInput from "hooks/useCardInfoInput";
 import React from "react";
 

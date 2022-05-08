@@ -12,7 +12,7 @@ interface CardExpirationDateProps {
   inputs: HTMLInputElement[];
 }
 
-export default function CardExpirationDate({
+function CardExpirationDate({
   expirationDate,
   onChange,
   validation,
@@ -48,3 +48,5 @@ export default function CardExpirationDate({
     </InputContainer>
   );
 }
+
+export default React.memo(CardExpirationDate);

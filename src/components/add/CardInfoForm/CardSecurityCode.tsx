@@ -13,12 +13,7 @@ interface CardSecurityProps {
   inputs: HTMLInputElement[];
 }
 
-export default function CardSecurityCode({
-  securityCode,
-  onChange,
-  validation,
-  inputs,
-}: CardSecurityProps) {
+function CardSecurityCode({ securityCode, onChange, validation, inputs }: CardSecurityProps) {
   return (
     <InputContainer title="보안 코드(CVC/CVV)" validation={validation}>
       <div className="input-box w-25">
@@ -37,3 +32,5 @@ export default function CardSecurityCode({
     </InputContainer>
   );
 }
+
+export default React.memo(CardSecurityCode);

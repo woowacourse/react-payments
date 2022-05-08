@@ -11,7 +11,7 @@ interface CardUserNameProps {
   inputs: HTMLInputElement[];
 }
 
-export default function CardUserName({ userName, onChange, onBlur, inputs }: CardUserNameProps) {
+function CardUserName({ userName, onChange, onBlur, inputs }: CardUserNameProps) {
   return (
     <InputContainer
       title="카드 소유자 이름(선택)"
@@ -32,6 +32,8 @@ export default function CardUserName({ userName, onChange, onBlur, inputs }: Car
     </InputContainer>
   );
 }
+
+export default React.memo(CardUserName);
 
 function LengthIndicator({ length, maxLength }: { length: number; maxLength: number }) {
   return (
