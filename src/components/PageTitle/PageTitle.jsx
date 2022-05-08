@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export default function PageTitle({ children, onClickPrev, hasPrevButton }) {
   return (
     <Styled.PageTitleBox>
-      {hasPrevButton && <PrevButton onClick={onClickPrev}>&#8249;</PrevButton>}
+      {hasPrevButton && <PrevButton onClick={onClickPrev} />}
       <Styled.PageTitle>{children}</Styled.PageTitle>
     </Styled.PageTitleBox>
   );

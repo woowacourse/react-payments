@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export default function PrevButton({ children, onClick }) {
-  return <Styled.PrevButton onClick={onClick}>{children}</Styled.PrevButton>;
+export default function PrevButton({ onClick }) {
+  return <Styled.PrevButton onClick={onClick}>&#8249;</Styled.PrevButton>;
 }
 
 const Styled = {
