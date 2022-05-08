@@ -1,5 +1,5 @@
 import React from 'react';
-import CardNumberInputContainer from '../card-number/CardNumberInputContainer';
+import CardNumberInputContainer from './CardNumberInputContainer';
 import { FieldsetContent, Fieldset, FieldsetHead } from '../Fieldset';
 
 function CardNumberFieldset() {

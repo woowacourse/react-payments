@@ -1,5 +1,4 @@
 import React from 'react';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import IconBackArrow from '../../images/back-arrow.svg';
 
@@ -7,10 +6,7 @@ function BackButton() {
   return (
     <div>
       <Button type="button">
-        <img
-          src={IconBackArrow}
-          alt=""
-          />
+        <img src={IconBackArrow} alt="" />
       </Button>
     </div>
   );

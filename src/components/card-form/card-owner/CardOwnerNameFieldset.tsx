@@ -1,12 +1,11 @@
 import React from 'react';
 import { MAX_NAME_LENGTH } from '../../../constants';
-import { useAppState } from '../../../hooks/hooks';
-import CardOwnerNameInputContainer from '../card-owner/CardOwnerNameInputContainer';
+import useWatch from '../../../hooks/useForm/useWatch';
 import { FieldsetContent, Fieldset, FieldsetHead } from '../Fieldset';
+import CardOwnerNameInputContainer from './CardOwnerNameInputContainer';
 
 function CardOwnerNameFieldset() {
-  const { name } = useAppState();
-
+  const name = useWatch<string>('card-owner-name');
   return (
     <Fieldset>
       <FieldsetHead>

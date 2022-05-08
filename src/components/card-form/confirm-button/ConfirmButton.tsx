@@ -4,13 +4,12 @@ import React from 'react';
 type Props = {
   children: React.ReactNode;
   disabled?: boolean;
-  onClick: () => void;
 };
 
-function ConfirmButton({ children, onClick, disabled }: Props) {
+function ConfirmButton({ children, disabled }: Props) {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <button type="button" css={style} onClick={onClick} {...(disabled ? { disabled: true } : {})}>
+    <button type="submit" css={style} {...(disabled ? { disabled: true } : {})}>
       {children}
     </button>
   );

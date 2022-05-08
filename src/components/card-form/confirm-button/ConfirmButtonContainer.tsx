@@ -1,5 +1,7 @@
 import React from 'react';
 import { useAppState } from '../../../hooks/hooks';
+import { useFormContext } from '../../../hooks/useForm/useFormContext';
+import useWatch from '../../../hooks/useForm/useWatch';
 import ConfirmButton from './ConfirmButton';
 
 type Props = {
@@ -7,25 +9,24 @@ type Props = {
 };
 
 function ConfirmButtonContainer({ children }: Props) {
-  const { cardNumber, expiredPeriod, name, cvc, password } = useAppState();
-  const isPasswordFilled = password.every(pw => pw);
+  const [cn1, cn2, cn3, cn4] = [
+    useWatch<string>('card-number-1'),
+    useWatch<string>('card-number-2'),
+    useWatch<string>('card-number-3'),
+    useWatch<string>('card-number-4'),
+  ];
+  const [expiredPeriod1, expiredPeriod2] = [useWatch<string>('expired-period-1'), useWatch<string>('expired-period-2')];
+  const cvc = useWatch<string>('cvc');
+  const [password1, password2] = [useWatch<string>('password-1'), useWatch<string>('password-2')];
+  const cardNumber = `${cn1}${cn2}${cn3}${cn4}`;
+  const expiredPeriod = `${expiredPeriod1}${expiredPeriod2}`;
+  const password = `${password1}${password2}`;
 
-  let _disabled = true;
-  if (
-    cardNumber.length === 16 &&
-    expiredPeriod.length === 4 &&
-    name.length > 0 &&
-    cvc.length === 3 &&
-    isPasswordFilled
-  ) {
-    _disabled = false;
-  }
+  const disabled = !(cardNumber.length === 16 && expiredPeriod.length === 4 && cvc.length > 2 && password.length === 2);
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <ConfirmButton onClick={() => alert('다음으로 넘어갑니다')} {...(_disabled ? { disabled: true } : {})}>
-      {children}
-    </ConfirmButton>
+    <ConfirmButton {...(disabled ? { disabled: true } : {})}>{children}</ConfirmButton>
   );
 }
 

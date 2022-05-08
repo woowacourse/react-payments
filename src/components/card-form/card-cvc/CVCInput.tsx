@@ -1,13 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { transformNumToBullet } from '../../../utils';
+import { useFormContext } from '../../../hooks/useForm/useFormContext';
+import { UseFormRegisterOption } from '../../../hooks/useForm/types';
 
-type Props = {
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onFocus: (event: React.FocusEvent<HTMLInputElement>) => void;
-  onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
-  value: string;
-};
+type Props = UseFormRegisterOption;
 
 const Input = styled.input(() => ({
   backgroundColor: '#ECEBF1',
@@ -25,18 +21,9 @@ const Input = styled.input(() => ({
   },
 }));
 
-function CVCInput({ onChange, value, onFocus, onBlur }: Props) {
-  return (
-    <Input
-      id="card-cvc-input"
-      type="text"
-      onChange={onChange}
-      value={transformNumToBullet(value)}
-      placeholder=""
-      onFocus={onFocus}
-      onBlur={onBlur}
-    />
-  );
+function CVCInput(props: Props) {
+  const { register } = useFormContext();
+  return <Input id="card-cvc-input" type="password" {...register('cvc', { ...props })} />;
 }
 
 export default CVCInput;

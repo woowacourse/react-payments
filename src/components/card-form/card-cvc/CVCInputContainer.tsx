@@ -1,28 +1,12 @@
 import React from 'react';
 import CVCInput from './CVCInput';
-import { useAppDispatch, useAppState } from '../../../hooks/hooks';
+import { useAppDispatch } from '../../../hooks/hooks';
 import { createAction } from '../../Provider';
-import { ActionType } from '../../../types';
-import { isNum } from '../../../utils';
+import ActionType from '../../../types';
+import { UseFormRegisterOption } from '../../../hooks/useForm/types';
 
 function CVCInputContainer() {
-  const { cvc } = useAppState();
   const dispatch = useAppDispatch();
-
-  const handleChage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    const lastChar = value.slice(-1);
-
-    if (value.length > 3) return;
-
-    if (cvc.length < value.length) {
-      if (!isNum(lastChar)) return;
-      dispatch(createAction(ActionType.INPUT_CVC, cvc + lastChar));
-      return;
-    }
-
-    dispatch(createAction(ActionType.INPUT_CVC, cvc.slice(0, cvc.length - 1)));
-  };
 
   const onFocus = (event: React.FocusEvent<HTMLInputElement>) => {
     dispatch(createAction(ActionType.UPDATE_EDITING_CVC, true));
@@ -31,7 +15,19 @@ function CVCInputContainer() {
   const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     dispatch(createAction(ActionType.UPDATE_EDITING_CVC, false));
   };
-  return <CVCInput onChange={handleChage} value={cvc} onFocus={onFocus} onBlur={onBlur} />;
+
+  const registerOptions: UseFormRegisterOption = {
+    onBlur,
+    onFocus,
+    minLength: {
+      value: 3,
+      message: '3자리 이상 입력해 주세요',
+    },
+    maxLength: {
+      value: 4,
+    },
+  };
+  return <CVCInput {...registerOptions} />;
 }
 
 export default CVCInputContainer;
