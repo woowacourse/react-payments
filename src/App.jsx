@@ -30,6 +30,10 @@ const App = () => {
 
 const StyledApp = styled.div`
   padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: stretch;
 `;
 
 export default App;
