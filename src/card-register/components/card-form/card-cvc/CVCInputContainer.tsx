@@ -1,8 +1,8 @@
 import React from 'react';
 import CVCInput from './CVCInput';
 import { useAppDispatch } from '../../../hooks/hooks';
-import { createAction } from '../../Provider';
-import ActionType from '../../../types';
+import { createAction } from '../../contexts/Provider';
+import ActionType from '../../../../types';
 import { UseFormRegisterOption } from '../../../hooks/useForm/types';
 
 function CVCInputContainer() {

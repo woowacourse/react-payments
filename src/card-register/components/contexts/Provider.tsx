@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, useReducer } from 'react';
-import ActionType from '../types';
+import ActionType from '../../../types';
 
 export type State = {
   isEditingCVC: boolean;

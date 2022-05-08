@@ -1,18 +1,18 @@
 import React from 'react';
-import ExpiredPeriodInputContainer from '../card-expired-period/ExpiredPeriodInputContainer';
 import { FieldsetContent, Fieldset, FieldsetHead } from '../Fieldset';
+import CardPasswordInputContainerList from './CardPasswordInputContainerList';
 
-function ExpiredPeriodFieldset() {
+function CardPasswordFieldset() {
   return (
     <Fieldset>
       <FieldsetHead>
-        <label>만료일</label>
+        <label>카드 비밀번호</label>
       </FieldsetHead>
       <FieldsetContent>
-        <ExpiredPeriodInputContainer />
+        <CardPasswordInputContainerList />
       </FieldsetContent>
     </Fieldset>
   );
 }
 
-export default ExpiredPeriodFieldset;
+export default CardPasswordFieldset;

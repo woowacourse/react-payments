@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import IconBackArrow from '../../images/back-arrow.svg';
+import IconBackArrow from '../../../images/back-arrow.svg';
 
 function BackButton() {
   return (
