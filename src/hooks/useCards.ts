@@ -39,6 +39,7 @@ function useCards() {
   const [error, setError] = useState({ isError: false, errorMessage: null });
 
   const showErrorMessage = (message: string) => {
+    setIsLoading(false);
     setError({ isError: true, errorMessage: message });
     setTimeout(() => {
       setError({ isError: false, errorMessage: null });
