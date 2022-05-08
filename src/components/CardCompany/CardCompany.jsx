@@ -1,4 +1,4 @@
-import Circle from 'components/Circle';
+import Circle from 'components/Circle/Circle';
 import styled from 'styled-components';
 
 export default function CardCompany({ color, children, onClick, selected }) {

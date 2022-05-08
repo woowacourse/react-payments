@@ -1,4 +1,4 @@
-import PageTitle from 'components/PageTitle';
+import PageTitle from 'components/PageTitle/PageTitle';
 
 export default {
   title: 'CardAddition/PageTitle',

@@ -4,10 +4,10 @@ import validator from 'lib/validations';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import AutoFocusInputBox from 'common/AutoFocusInputBox';
-import Label from 'components/Label';
+import Label from 'components/Label/Label';
 import styled from 'styled-components';
-import InputBox from 'components/InputBox';
-import { InputBasic } from 'components/Input';
+import InputBox from 'components/InputBox/InputBox';
+import { InputBasic } from 'components/Input/Input';
 
 export default function CardNumber({ color, setIsListModalOpen }) {
   const { cardNumber, cardNumberErrorMessage, cardCompanyIndex } = useContext(CardStateContext);

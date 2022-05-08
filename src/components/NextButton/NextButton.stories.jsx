@@ -1,4 +1,4 @@
-import NextButton from 'components/NextButton';
+import NextButton from 'components/NextButton/NextButton';
 
 export default {
   title: 'CardAddition/NextButton',

@@ -4,10 +4,10 @@ import validator from 'lib/validations';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import AutoFocusInputBox from 'common/AutoFocusInputBox';
-import Label from 'components/Label';
-import Circle from 'components/Circle';
+import Label from 'components/Label/Label';
+import Circle from 'components/Circle/Circle';
 import styled from 'styled-components';
-import { InputBasic } from 'components/Input';
+import { InputBasic } from 'components/Input/Input';
 
 export default function CardPassword({ color }) {
   const { cardPassword, cardPasswordErrorMessage } = useContext(CardStateContext);

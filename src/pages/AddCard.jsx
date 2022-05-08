@@ -4,22 +4,22 @@ import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import validator from 'lib/validations';
 import { CARD_COMPANIES } from 'lib/constants';
-import Card from 'components/Card';
-import PageTitle from 'components/PageTitle';
+import Card from 'components/Card/Card';
+import PageTitle from 'components/PageTitle/PageTitle';
 import CardNumber from 'containers/CardNumberInput/CardNumber';
 import CardExpiration from 'containers/CardExpirationInput/CardExpiration';
 import CardOwner from 'containers/CardOwnerInput/CardOwner';
 import CardCvc from 'containers/CardCvcInput/CardCvc';
 import CardPassword from 'containers/CardPasswordInput/CardPassword';
-import NextButton from 'components/NextButton';
-import CardListModal from 'containers/CardListModal';
-import TipModal from 'containers/TipModal';
+import NextButton from 'components/NextButton/NextButton';
+import CardListModal from 'containers/CardListModal/CardListModal';
+import TipModal from 'containers/TipModal/TipModal';
 import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import ClickCardBox from 'common/ClickCardBox';
 import { CardStateContext, CardDispatchContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
-import Container from 'components/Container';
-import CardConfirmModal from 'containers/CardConfirmModal';
+import Container from 'components/Container/Container';
+import CardConfirmModal from 'containers/CardConfirmModal/CardConfirmModal';
 
 function AddCard() {
   const {

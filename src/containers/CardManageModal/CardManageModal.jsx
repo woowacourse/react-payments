@@ -1,7 +1,7 @@
 import ModalToast from 'common/Modal/ModalToast';
 import styled from 'styled-components';
-import RectangleButton from 'components/RectangleButton';
-import FlexColumnBox from 'components/FlexColumnBox';
+import RectangleButton from 'components/RectangleButton/RectangleButton';
+import FlexColumnBox from 'components/FlexColumnBox/FlexColumnBox';
 
 export default function CardManageModal({
   onCloseModal,
