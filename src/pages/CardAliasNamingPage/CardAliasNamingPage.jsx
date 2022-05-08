@@ -1,20 +1,16 @@
 import React, { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import CardAliasUpdateForm from '../../components/CardAliasUpdateForm/CardAliasUpdateForm';
 import CardPreview from '../../components/CardPreview/CardPreview';
 import Content from '../../components/Content/Content';
-import Input from '../../components/Input/Input';
-import SubmitButton from '../../components/SubmitButton/SubmitButton';
 import CardsContext from '../../contexts/CardsContext';
-import useEasyForm from '../../hooks/useEasyForm';
+
 import { convertFormDataToObject } from '../../utils/commons';
 
 const CardAliasNamingPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { registerForm, registerInput } = useEasyForm({
-    shouldUseReportValidity: false,
-  });
   const { updateCard } = useContext(CardsContext);
 
   const onSubmit = ({ target }) => {
@@ -30,28 +26,12 @@ const CardAliasNamingPage = () => {
     navigate('/');
   };
 
-  const onError = ({ target: { elements } }) => {
-    const firstInvalidInput = Array.from(elements).find(
-      ({ validationMessage }) => validationMessage !== ''
-    );
-
-    alert(`${firstInvalidInput.validationMessage} [${firstInvalidInput.name}]`);
-    firstInvalidInput.focus();
-  };
-
   return (
     <Content>
       <VerticalGrid>
         <StyledTitle>카드등록이 완료되었습니다.</StyledTitle>
         <CardPreview size="big" {...state} />
-        <form {...registerForm({ onSubmit, onError })}>
-          <Input
-            type="text"
-            placeholder="새 카드"
-            {...registerInput('alias', { maxLength: 30 })}
-          />
-          <SubmitButton type="submit">확인</SubmitButton>
-        </form>
+        <CardAliasUpdateForm onSubmit={onSubmit} />
       </VerticalGrid>
     </Content>
   );
