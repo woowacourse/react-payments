@@ -1,7 +1,9 @@
 import React from "react";
+
 import CardAdd from "../components/CardAdd";
 import Card from "../common/Card";
 import Header from "../common/Header";
+import { useNavigate } from "react-router-dom";
 
 const cardList = [
   {
@@ -14,6 +16,8 @@ const cardList = [
 ];
 
 export default function CardList() {
+  const navigation = useNavigate();
+
   return (
     <>
       <Header hasBackArrow={false} pageTitle="보유 카드" />
@@ -26,10 +30,16 @@ export default function CardList() {
               size="small"
               isCardName={true}
               isClick={true}
-              onClick={() => {}}
+              onClick={() => {
+                navigation("/confirmAddCard");
+              }}
             />
           ))}
-          <CardAdd />
+          <CardAdd
+            onClick={() => {
+              navigation("/addCard");
+            }}
+          />
         </div>
       </div>
     </>
