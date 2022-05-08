@@ -49,6 +49,13 @@ const dynamicStyle = (props: Props) => css`
       letter-spacing: -1px;
     }
   }
+
+  & .card-name {
+    font-weight: 800;
+    text-align: center;
+    font-size: 22px;
+    margin-top: 20px;
+  }
 `;
 
 const Card = styled.div`

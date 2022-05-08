@@ -10,7 +10,7 @@ function CardList() {
     <S.CardList>
       <AddCard marginBottom={cardList.length > 0 ? '20px' : '0'} />
       {cardList.map((card, index) => (
-        <Card key={index} marginBottom="20px" {...card} />
+        <Card key={index} marginBottom={card.cardName ? '50px' : '20px'} {...card} />
       ))}
     </S.CardList>
   );

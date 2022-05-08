@@ -8,7 +8,7 @@ type Props = {
 } & TCard;
 
 function Card(props: Props) {
-  const { cardNumber, ownerName, expiredPeriod, marginBottom = '0' } = props;
+  const { cardNumber, ownerName, expiredPeriod, marginBottom = '0', cardName } = props;
   return (
     <S.Card marginBottom={marginBottom}>
       <div className="type">로이드 카드</div>
@@ -20,6 +20,7 @@ function Card(props: Props) {
         <S.OwnerName name={ownerName}>{ownerName}</S.OwnerName>
         <span className="expired-period">{expiredPeriod.length > 0 ? transformToMMYY(expiredPeriod) : 'MM / YY'}</span>
       </div>
+      {cardName ? <div className="card-name">{cardName}</div> : null}
     </S.Card>
   );
 }
