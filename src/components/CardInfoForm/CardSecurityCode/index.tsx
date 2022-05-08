@@ -6,7 +6,7 @@ import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
 import UserGuide from "../../../common/UserGuide";
 import { checkSecurityCode } from "../../../validations/cardInfoForm";
-import { Context } from "../../../contexts/store";
+import { Context } from "../../../contexts/CardContext";
 
 interface CardSecurityProps {
   validateFormValidation: any;
@@ -14,8 +14,8 @@ interface CardSecurityProps {
 
 export default function CardSecurityCode({ validateFormValidation }: CardSecurityProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
-  const [state, dispatch] = useContext(Context);
-  const { securityCode } = state;
+  const [cardInfo, dispatch] = useContext(Context);
+  const { securityCode } = cardInfo;
 
   const handleChangesSecurityCode = e => {
     const targetSecurityCode: string = e.target.value;

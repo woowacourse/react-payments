@@ -5,15 +5,15 @@ import { MAX_USER_NAME_LENGTH } from "../../../constants";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
 import { checkCardUserName } from "../../../validations/cardInfoForm";
-import { Context } from "../../../contexts/store";
+import { Context } from "../../../contexts/CardContext";
 
 interface CardUserNameProps {
   validateFormValidation: any;
 }
 export default function CardUserName({ validateFormValidation }: CardUserNameProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
-  const [state, dispatch] = useContext(Context);
-  const { userName } = state;
+  const [cardInfo, dispatch] = useContext(Context);
+  const { userName } = cardInfo;
 
   const handleChangeCardUserName = e => {
     const targetCardUserName = e.target.value;

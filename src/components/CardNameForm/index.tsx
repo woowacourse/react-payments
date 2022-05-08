@@ -2,14 +2,14 @@ import React, { useEffect, useState, useContext } from "react";
 
 import Input from "../../common/Input";
 import { useNavigate, useParams } from "react-router-dom";
-import { Context } from "../../contexts/store";
+import { Context } from "../../contexts/CardContext";
 import { fetchAddCard, fetchEditCard } from "../../apis";
 
 export default function CardNameForm({ mode }) {
   const isAddMode = mode === "add";
   const [isNextButtonShown, setIsNextButtonShown] = useState(false);
-  const [state, dispatch] = useContext(Context);
-  const [cardName, setCardName] = useState(state.cardName);
+  const [cardInfo, dispatch] = useContext(Context);
+  const [cardName, setCardName] = useState(cardInfo.cardName);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -31,21 +31,17 @@ export default function CardNameForm({ mode }) {
       className="card-name-form h-100"
       onSubmit={e => {
         e.preventDefault();
-        const cardData = { ...state, cardName };
+        const cardData = { ...cardInfo, cardName };
 
         isAddMode
-          ? fetchAddCard(cardData)
-              .then(() => {
-                dispatch({ type: "RESET" });
-                navigate("/");
-              })
-              .catch(() => alert("서버 통신 오류"))
-          : fetchEditCard(cardData, id)
-              .then(() => {
-                dispatch({ type: "RESET" });
-                navigate("/");
-              })
-              .catch(() => alert("서버 통신 오류"));
+          ? fetchAddCard(cardData).then(() => {
+              dispatch({ type: "RESET" });
+              navigate("/");
+            })
+          : fetchEditCard(cardData, id).then(() => {
+              dispatch({ type: "RESET" });
+              navigate("/");
+            });
       }}
     >
       <Input

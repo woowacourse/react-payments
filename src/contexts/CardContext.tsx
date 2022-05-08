@@ -30,7 +30,7 @@ type Action = {
 
 type ContextValue = [CardInfo, React.Dispatch<Action>];
 
-// initialState
+// initialcardInfo
 const initialCardInfo: CardInfo = {
   cardName: "",
   cardType: "empty",
@@ -54,7 +54,7 @@ const TRIM_USER_NAME = "TRIM_USER_NAME";
 const CHANGE_CARD_TYPE = "CHANGE_CARD_TYPE";
 
 // reducer
-export const reducer = (state: CardInfo, action: Action) => {
+export const reducer = (cardInfo: CardInfo, action: Action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -67,54 +67,54 @@ export const reducer = (state: CardInfo, action: Action) => {
     }
     case UPDATE_CARD_NUMBER: {
       const { cardNumbers, index } = payload;
-      const newCardNumbers: CardNumbers = [...state.cardNumbers];
+      const newCardNumbers: CardNumbers = [...cardInfo.cardNumbers];
 
       newCardNumbers[index] = Number(index) < 2 ? cardNumbers : "•".repeat(cardNumbers.length);
 
-      return { ...state, cardNumbers: newCardNumbers };
+      return { ...cardInfo, cardNumbers: newCardNumbers };
     }
     case UPDATE_EXPIRED_DATE: {
       const { expiredDate, key } = payload;
       const newExpiredDate = {
-        ...state.expiredDate,
+        ...cardInfo.expiredDate,
       };
 
       newExpiredDate[key] = expiredDate;
 
-      return { ...state, expiredDate: newExpiredDate };
+      return { ...cardInfo, expiredDate: newExpiredDate };
     }
     case UPDATE_PASSWORD: {
       const { password, index } = payload;
-      const newPassword: Password = [...state.password];
+      const newPassword: Password = [...cardInfo.password];
 
       newPassword[index] = password;
 
-      return { ...state, password: newPassword };
+      return { ...cardInfo, password: newPassword };
     }
     case UPDATE_SECURITY_CODE: {
       const { securityCode } = payload;
 
-      return { ...state, securityCode };
+      return { ...cardInfo, securityCode };
     }
     case UPDATE_USER_NAME: {
       const { userName } = payload;
 
       const newUserName = userName.replace("  ", " ").toUpperCase();
 
-      return { ...state, userName: newUserName };
+      return { ...cardInfo, userName: newUserName };
     }
     case TRIM_USER_NAME: {
       const { userName } = payload;
 
-      return { ...state, userName: userName.trim() };
+      return { ...cardInfo, userName: userName.trim() };
     }
     case CHANGE_CARD_TYPE: {
       const { cardType } = payload;
 
-      return { ...state, cardType };
+      return { ...cardInfo, cardType };
     }
     default:
-      return state;
+      return cardInfo;
   }
 };
 
@@ -122,9 +122,9 @@ export const reducer = (state: CardInfo, action: Action) => {
 const Context = createContext<ContextValue | undefined>(undefined);
 
 const ContextProvider = ({ children }) => {
-  const [state, dispatch]: ContextValue = useReducer(reducer, initialCardInfo);
+  const [cardInfo, dispatch]: ContextValue = useReducer(reducer, initialCardInfo);
 
-  return <Context.Provider value={[state, dispatch]}>{children}</Context.Provider>;
+  return <Context.Provider value={[cardInfo, dispatch]}>{children}</Context.Provider>;
 };
 
 export { Context, ContextProvider };

@@ -5,7 +5,7 @@ import { CardNumbers } from "../../../types";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
 import { checkCardNumbers } from "../../../validations/cardInfoForm";
-import { Context } from "../../../contexts/store";
+import { Context } from "../../../contexts/CardContext";
 
 interface CardNumberProps {
   validateFormValidation: any;
@@ -13,8 +13,8 @@ interface CardNumberProps {
 
 export default function CardNumber({ validateFormValidation }: CardNumberProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
-  const [state, dispatch] = useContext(Context);
-  const { cardNumbers } = state;
+  const [cardInfo, dispatch] = useContext(Context);
+  const { cardNumbers } = cardInfo;
 
   const handleChangeCardNumbers = e => {
     const { value } = e.target;

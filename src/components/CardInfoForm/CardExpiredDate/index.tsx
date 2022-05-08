@@ -5,7 +5,7 @@ import { ExpiredDate } from "../../../types";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
 import { checkExpiredDate } from "../../../validations/cardInfoForm";
-import { Context } from "../../../contexts/store";
+import { Context } from "../../../contexts/CardContext";
 
 interface CardExpiredDateProps {
   validateFormValidation: any;
@@ -13,8 +13,8 @@ interface CardExpiredDateProps {
 
 export default function CardExpiredDate({ validateFormValidation }: CardExpiredDateProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
-  const [state, dispatch] = useContext(Context);
-  const { expiredDate } = state;
+  const [cardInfo, dispatch] = useContext(Context);
+  const { expiredDate } = cardInfo;
 
   const handleChangeExpired = e => {
     const { value } = e.target;

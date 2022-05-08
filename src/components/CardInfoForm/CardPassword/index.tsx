@@ -5,7 +5,7 @@ import { Password } from "../../../types";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
 import { checkCardPassword } from "../../../validations/cardInfoForm";
-import { Context } from "../../../contexts/store";
+import { Context } from "../../../contexts/CardContext";
 
 interface CardPasswordProps {
   validateFormValidation: any;
@@ -13,8 +13,8 @@ interface CardPasswordProps {
 
 export default function CardPassword({ validateFormValidation }: CardPasswordProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
-  const [state, dispatch] = useContext(Context);
-  const { password } = state;
+  const [cardInfo, dispatch] = useContext(Context);
+  const { password } = cardInfo;
 
   const handleChangeCardPassword = e => {
     const { value } = e.target;

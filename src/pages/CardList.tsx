@@ -5,12 +5,12 @@ import Card from "../common/Card";
 import Header from "../common/Header";
 import { useNavigate } from "react-router-dom";
 import { fetchGetCardList } from "../apis";
-import { Context } from "../contexts/store";
+import { Context } from "../contexts/CardContext";
 
 export default function CardList() {
   const navigation = useNavigate();
   const [cardList, setCardList] = useState([]);
-  const [state, dispatch] = useContext(Context);
+  const [cardInfo, dispatch] = useContext(Context);
 
   useEffect(() => {
     fetchGetCardList().then(cardData => {
