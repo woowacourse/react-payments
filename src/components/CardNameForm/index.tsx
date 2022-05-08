@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import Input from "../../common/Input";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../../contexts/store";
 
 export default function CardNameForm() {
   const [isNextButtonShown, setIsNextButtonShown] = useState(false);
   const [cardName, setCardName] = useState("");
   const navigate = useNavigate();
+  const [state, dispatch] = useContext(Context);
 
   const onChangeCardName = e => {
     setCardName(e.target.value);
@@ -27,6 +29,20 @@ export default function CardNameForm() {
       onSubmit={e => {
         e.preventDefault();
         // ToDo: 서버에 모든 정보 저장
+        const date = new Date();
+        const data = JSON.parse(localStorage.getItem("card-list"));
+        const id = date.getTime();
+
+        let newData;
+
+        if (data) {
+          newData = [...data, { ...state, cardName, id }];
+        } else {
+          newData = [{ ...state, cardName, id }];
+        }
+
+        localStorage.setItem("card-list", JSON.stringify(newData));
+        dispatch({ type: "RESET" });
         navigate("/cardList");
       }}
     >

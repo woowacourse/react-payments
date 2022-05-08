@@ -1,9 +1,19 @@
 import React from "react";
 
-export default function CardAdd({ onClick }) {
+import { useNavigate } from "react-router-dom";
+
+export default function CardAdd() {
+  const navigation = useNavigate();
+
   return (
     <div className="card-box">
-      <div className="add-card-shape" onClick={onClick} aria-hidden="true">
+      <div
+        className="add-card-shape"
+        onClick={() => {
+          navigation("/addCard");
+        }}
+        aria-hidden="true"
+      >
         <div id="cross" />
       </div>
     </div>

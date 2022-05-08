@@ -58,7 +58,7 @@ export const reducer = (state: CardInfo, action: Action) => {
 
   switch (type) {
     case RESET:
-      return { ...state, initialCardInfo };
+      return initialCardInfo;
     case UPDATE_CARD_NUMBER: {
       const { cardNumbers, index } = payload;
       const newCardNumbers: CardNumbers = [...state.cardNumbers];

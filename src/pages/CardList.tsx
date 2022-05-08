@@ -1,22 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import CardAdd from "../components/CardAdd";
 import Card from "../common/Card";
 import Header from "../common/Header";
 import { useNavigate } from "react-router-dom";
 
-const cardList = [
-  {
-    cardName: "엄카",
-    cardType: "jun",
-    cardNumbers: ["1234", "1234", "1234", "1234"],
-    expiredDate: { month: "12", year: "23" },
-    userName: "SEUNGCHAN ON",
-  },
-];
-
 export default function CardList() {
   const navigation = useNavigate();
+  const [cardList, setCardList] = useState([]);
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("card-list"));
+
+    if (data) setCardList(data);
+  }, []);
 
   return (
     <>
@@ -25,7 +22,7 @@ export default function CardList() {
         <div className="card-list-container">
           {cardList.map((card, index) => (
             <Card
-              key={index}
+              key={card.id}
               cardInfo={card}
               size="small"
               isCardName={true}
@@ -35,11 +32,7 @@ export default function CardList() {
               }}
             />
           ))}
-          <CardAdd
-            onClick={() => {
-              navigation("/addCard");
-            }}
-          />
+          <CardAdd />
         </div>
       </div>
     </>
