@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 import { CardInfoContext } from '../../providers/CardInfoProvider';
-import { isExpiredDate } from '../../utils/date';
+import { isAvailableDate } from '../../utils/date';
 import { AutoFocusInputContainer } from '../common/AutoFocusInputContainer';
 
 import {
@@ -36,13 +36,9 @@ export const CardExpireDateInput = () => {
   };
 
   useEffect(() => {
-    if (expireDate.year.length !== 2 || expireDate.month.length !== 2) {
-      return;
-    }
-
     context.setInputCompleted(
       'expireDate',
-      isExpiredDate(expireDate.month, expireDate.year) ? false : true
+      isAvailableDate(expireDate.month, expireDate.year)
     );
   }, [expireDate]);
 
