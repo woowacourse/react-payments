@@ -33,7 +33,6 @@ const Style = {
     margin: 24px 0;
     height: 600px;
     overflow-y: scroll;
-    overflow-x: hidden;
 
     &::-webkit-scrollbar {
       width: 5px;
