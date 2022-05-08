@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import Input from '../Input/Input';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import useEasyForm from '../../hooks/useEasyForm';
@@ -18,15 +19,25 @@ const CardAliasUpdateForm = ({ onSubmit }) => {
   };
 
   return (
-    <form {...registerForm({ onSubmit, onError })}>
+    <StyledForm {...registerForm({ onSubmit, onError })}>
       <Input
         type="text"
         placeholder="새 카드"
-        {...registerInput('alias', { maxLength: 30 })}
+        {...registerInput('alias', {
+          className: 'input-underline',
+          maxLength: 30,
+        })}
       />
       <SubmitButton type="submit">확인</SubmitButton>
-    </form>
+    </StyledForm>
   );
 };
+
+const StyledForm = styled.form`
+  display: flex;
+  margin-top: 20px;
+  align-items: center;
+  height: 50px;
+`;
 
 export default CardAliasUpdateForm;

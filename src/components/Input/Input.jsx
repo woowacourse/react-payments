@@ -7,14 +7,13 @@ const Input = forwardRef((props, ref) => {
 
 const StyledInput = styled.input`
   background-color: transparent;
-  height: 45px;
   width: 100%;
+  margin: 0 8px;
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;
   border-color: #9ca3af;
   border: none;
-  border-radius: 0.25rem;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
@@ -27,8 +26,7 @@ const StyledInput = styled.input`
   }
 
   &.error {
-    outline: 1px solid #ff9e9e;
-    outline-offset: -1px;
+    border-bottom: 1px solid #ff9e9e;
   }
 
   &.input-expired-date {
@@ -48,7 +46,6 @@ const StyledInput = styled.input`
   }
 
   &.input-underline {
-    border: 0;
     border-bottom: 1px solid black;
   }
 `;
