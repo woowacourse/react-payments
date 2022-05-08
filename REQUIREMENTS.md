@@ -42,11 +42,11 @@
 ## 2단계 필수 요구사항
 
 - [ ] Storybook 상호 작용 테스트
-- [ ] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
-- [ ] Context API를 활용해 전역 상태 관리 및 계층 재구성
+- [x] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
+- [x] Context API를 활용해 전역 상태 관리 및 계층 재구성
 
 ## 2단게 필수 구현사항
 
-- [ ] 카드 추가 확인
-  - [ ] [예외] 빈 값은 입력할 수 없다.
-- [ ] 카드 목록
+- [x] 카드 추가 확인
+  - [x] [예외] 빈 값은 입력할 수 없다.
+- [x] 카드 목록
