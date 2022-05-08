@@ -1,24 +1,14 @@
 import React from 'react';
 import CVCInput from './CVCInput';
-import { useAppDispatch } from '../../../hooks/hooks';
-import { createAction } from '../../contexts/Provider';
-import ActionType from '../../../../types';
 import { UseFormRegisterOption } from '../../../hooks/useForm/types';
+import { useCardRegisterContext } from '../../../context';
 
 function CVCInputContainer() {
-  const dispatch = useAppDispatch();
-
-  const onFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-    dispatch(createAction(ActionType.UPDATE_EDITING_CVC, true));
-  };
-
-  const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    dispatch(createAction(ActionType.UPDATE_EDITING_CVC, false));
-  };
+  const { updateIsEditingCVC } = useCardRegisterContext();
 
   const registerOptions: UseFormRegisterOption = {
-    onBlur,
-    onFocus,
+    onBlur: () => updateIsEditingCVC(false),
+    onFocus: () => updateIsEditingCVC(true),
     minLength: {
       value: 3,
       message: '3자리 이상 입력해 주세요',

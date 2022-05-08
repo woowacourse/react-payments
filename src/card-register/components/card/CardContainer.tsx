@@ -1,11 +1,11 @@
 import React from 'react';
-import { useAppState } from '../../hooks/hooks';
+import { useCardRegisterContext } from '../../context';
 import useWatch from '../../hooks/useForm/useWatch';
 import { transformCardNumber, transformNumToBullet, transformToMMYY } from '../../utils';
 import Card from './Card';
 
 function CardContainer() {
-  const { isEditingCVC } = useAppState();
+  const { isEditingCVC } = useCardRegisterContext();
   const [cn1, cn2, cn3, cn4] = [
     useWatch<string>('card-number-1'),
     useWatch<string>('card-number-2'),
