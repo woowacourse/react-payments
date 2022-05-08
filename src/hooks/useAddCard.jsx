@@ -3,19 +3,17 @@ import { useContext } from 'react';
 import { useNavigateTo } from 'hooks';
 
 import { CardContext } from 'contexts/CardContext';
-
 import { addCardFetcher } from 'utils/fetcher';
+import { ERROR_MESSAGE } from 'constants';
 
-export default function useAddCard(nextPath) {
-  const navigateToNextPath = useNavigateTo(nextPath);
+export default function useAddCard() {
   const navigateToHome = useNavigateTo('/card-list');
   const { cardNumber, cardOwnerName, validDate, cardKind } =
     useContext(CardContext);
 
-  const handler = async (e) => {
+  const handleAddCard = async (e) => {
     e.preventDefault();
     const cardNickname = e.target.nickname.value;
-
     const cardFormData = {
       cardNumber,
       cardOwnerName,
@@ -23,7 +21,6 @@ export default function useAddCard(nextPath) {
       cardKind,
       cardNickname,
     };
-
     const requiredList = [cardNumber, validDate, cardKind];
     const isRequiredDataExist = requiredList.every((value) => value !== '');
 
@@ -32,10 +29,10 @@ export default function useAddCard(nextPath) {
         await addCardFetcher(cardFormData);
       }
 
-      navigateToNextPath();
+      navigateToHome();
     } catch (err) {
       if (err.message === 'Failed to fetch') {
-        alert('현재 홈페이지 사용이 불가능합니다. 관리자에게 문의 바랍니다.');
+        alert(ERROR_MESSAGE.SERVICE_NOT_WORKING);
 
         return;
       }
@@ -45,5 +42,5 @@ export default function useAddCard(nextPath) {
     }
   };
 
-  return handler;
+  return handleAddCard;
 }

@@ -12,7 +12,7 @@ import getMaskedNumbers from 'utils/maskNumbers';
 
 function AddCardComplete() {
   // TODO: hook으로 하는 게 맞을까?
-  const handleSubmitNewCardNickname = useAddCard('/card-list');
+  const handleAddCard = useAddCard();
   const { cardNumber, cardKind, cardOwnerName, validDate } =
     useContext(CardContext);
 
@@ -31,8 +31,9 @@ function AddCardComplete() {
         title={cardKind.title}
         validDate={validDate}
       />
-      <form onSubmit={handleSubmitNewCardNickname}>
+      <form onSubmit={handleAddCard}>
         <Styled.CardNicknameInput
+          data-testid="nickname"
           name="nickname"
           placeholder="별명(선택사항)"
         />

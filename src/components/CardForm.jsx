@@ -20,7 +20,7 @@ function CardForm() {
     (visible) => !visible,
     false
   );
-  const handleSubmitNewCard = useNavigateTo('/add-card-complete');
+  const handleNavigate = useNavigateTo('/add-card-complete');
 
   const {
     cardNumber,
@@ -31,7 +31,6 @@ function CardForm() {
     showCardOwnerNameValidation,
     validDate,
     handleValidDate,
-    showValidDateValidation,
   } = useContext(CardContext);
 
   const requiredList = [
@@ -43,10 +42,11 @@ function CardForm() {
   ];
 
   return (
-    <Styled.Root onSubmit={handleSubmitNewCard}>
+    <Styled.Root onSubmit={handleNavigate}>
       <div>
         <Input
           autoFocus
+          data-testid="card-number"
           description="카드 번호"
           maxLength="19"
           pattern=".{17,19}"
@@ -59,13 +59,13 @@ function CardForm() {
       </div>
       <div>
         <Input
+          data-testid="valid-date"
           description="만료일"
           pattern="(0[1-9]|1[0-2])\/\d{2}"
           placeholder="MM / YY"
           value={validDate}
           width="137px"
           title={ERROR_MESSAGE.INVALID_VALID_DATE}
-          // onBlur={showValidDateValidation}
           onChange={handleValidDate}
           required
         />
@@ -75,6 +75,7 @@ function CardForm() {
           {cardOwnerName.length}/{RULE.CARD_OWNER_NAME_MAX_LENGTH}
         </Styled.CardOwnerNameLength>
         <Input
+          data-testid="card-owner-name"
           description="카드 소유자 이름 (선택)"
           maxLength="30"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
@@ -87,6 +88,7 @@ function CardForm() {
       </div>
       <div>
         <Input
+          data-testid="CVC"
           description="보안 코드(CVC/CVV)"
           minLength="2"
           title={ERROR_MESSAGE.INAVALID_CVC}
@@ -111,6 +113,7 @@ function CardForm() {
       </div>
       <div>
         <Input
+          data-testid="first-card-password"
           description="카드 비밀번호"
           margin={{ r: '7px' }}
           type="password"
@@ -120,6 +123,7 @@ function CardForm() {
           required
         />
         <Input
+          data-testid="second-card-password"
           margin={{ r: '26px' }}
           type="password"
           width="43px"
