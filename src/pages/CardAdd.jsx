@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { CardNumber, CardOwner, CardPassword, CardSecurityCode, CardShape, DueDate, TextNav } from '../components';
@@ -28,6 +28,10 @@ function CardAdd() {
     navigate(`/card-add-complete`, { state: { cardInfo } });
     dispatch({ type: 'INITIALIZE' });
   };
+
+  useEffect(() => {
+    dispatch({ type: 'HEADER_TITLE', title: '카드추가' });
+  }, [dispatch]);
 
   return (
     <>

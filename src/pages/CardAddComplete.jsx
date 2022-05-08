@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -30,6 +30,11 @@ function CardAddComplete() {
     });
     navigate(`/card-list`);
   };
+
+  useEffect(() => {
+    dispatch({ type: 'HEADER_TITLE', title: '' });
+  }, [dispatch]);
+
   return (
     <S.Container>
       <S.TitleBox>

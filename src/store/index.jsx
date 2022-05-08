@@ -11,6 +11,7 @@ const initialState = {
     isCorrectCardDate: false,
     isCorrectSecurityCode: false,
   },
+  title: '',
   cardCompany: {},
   cardCompanyList: [
     { id: 'company1', color: '#E24141', name: '포코 카드' },
@@ -107,6 +108,11 @@ function reducer(state, action) {
           isCorrectSecurityCode: false,
         },
         cardCompany: {},
+      };
+    case 'HEADER_TITLE':
+      return {
+        ...state,
+        title: action.title,
       };
     default:
       throw new Error();

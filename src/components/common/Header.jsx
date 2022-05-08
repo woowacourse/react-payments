@@ -21,6 +21,16 @@ const S = {
 };
 
 function Header({ title }) {
+  if (title === '') return null;
+
+  if (title === '보유카드') {
+    return (
+      <S.HeaderContainer>
+        <S.Title>{title}</S.Title>
+      </S.HeaderContainer>
+    );
+  }
+
   return (
     <S.HeaderContainer>
       <IoIosArrowBack

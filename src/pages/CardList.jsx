@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { CardShape } from '../components';
 import useCardState from '../hooks/useCardState';
+import useDispatch from '../hooks/useDispatch';
 
 function CardList() {
   const { cards } = useCardState();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: 'HEADER_TITLE', title: '보유카드' });
+  }, [dispatch]);
 
   return (
     <div>
