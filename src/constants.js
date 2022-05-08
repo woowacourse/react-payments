@@ -3,7 +3,7 @@ export const CARD = {
   DATE: {
     LENGTH: 2,
     RANGE: {
-      MIN: 1,
+      MIN: 0,
       MAX: 12,
     },
   },
@@ -26,5 +26,5 @@ export const CARD_COMPANY_LIST = [
 export const ERROR_MESSAGE = {
   OVER_MAX_LENGTH: '입력값의 최대 길이를 초과했습니다.',
   NOT_NUMBER: '숫자만 입력할 수 있습니다.',
-  INVALID_MONTH_RANGE: '1 ~ 12 까지의 숫자만 입력할 수 있습니다.',
+  INVALID_MONTH_RANGE: '01 ~ 12 까지의 숫자만 입력할 수 있습니다.',
 };
