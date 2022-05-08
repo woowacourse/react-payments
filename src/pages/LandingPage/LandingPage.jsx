@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import CardPreview from '../../components/CardPreview/CardPreview';
-import useStore from '../../hooks/useStore';
+import CardsContext from '../../contexts/CardsContext';
 
 const LandingPage = () => {
-  const { cardList } = useStore();
+  const { cardList } = useContext(CardsContext);
 
   return (
     <div>
       {cardList &&
-        cardList.map(({ id, ...cardInfo }) => (
-          <CardPreview key={id} {...cardInfo} />
+        cardList.map(({ id, alias, ...cardInfo }) => (
+          <>
+            <CardPreview key={id} {...cardInfo} />
+            <p>{alias}</p>
+          </>
         ))}
       <Link to="/register">카드 추가</Link>
     </div>

@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import useEasyForm from '../../hooks/useEasyForm';
-import useStore from '../../hooks/useStore';
 import CardPreview from '../CardPreview/CardPreview';
 import Field from '../Field/Field';
 import Label from '../Label/Label';
@@ -10,10 +9,8 @@ import InputBox from '../InputBox/InputBox';
 import Input from '../Input/Input';
 import ToolTip from '../ToolTip/ToolTip';
 import SubmitButton from '../SubmitButton/SubmitButton';
-import {
-  convertFormDataToObject,
-  removeCrucialCardInfo,
-} from '../../utils/commons';
+import { convertFormDataToObject } from '../../utils/commons';
+import CardsContext from '../../contexts/CardsContext';
 
 const CardForm = () => {
   const navigate = useNavigate();
@@ -30,18 +27,19 @@ const CardForm = () => {
     validationMode: 'onChange',
     shouldUseReportValidity: false,
   });
-  const { addCard } = useStore();
+  const { addCard } = useContext(CardsContext);
 
   const onSubmit = (event) => {
     const formData = new FormData(event.target);
 
     formData.append('brand', '우아한카드');
     formData.set('owner', formData.get('owner').trim().toUpperCase());
+    formData.set('alias', '새 카드');
 
     const cardInfo = convertFormDataToObject(formData);
+    const newCard = addCard(cardInfo);
 
-    addCard(cardInfo);
-    navigate('/confirm', { state: removeCrucialCardInfo(cardInfo) });
+    navigate('/confirm', { state: newCard });
   };
 
   const onError = ({ target: { elements } }) => {

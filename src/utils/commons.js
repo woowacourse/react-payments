@@ -10,6 +10,7 @@ export const convertFormDataToObject = (formData) => {
 
 export const removeCrucialCardInfo = (card) => ({
   id: card.id,
+  alias: card.alias,
   firstCardNumber: card.firstCardNumber,
   secondCardNumber: card.secondCardNumber,
   thirdCardNumber: card.thirdCardNumber,
