@@ -7,12 +7,12 @@ export default {
 };
 
 export const OwnerNameForm = () => {
-  const { cardInfo, dispatch } = useCard();
+  const { cardInfo, updateCard } = useCard();
 
   return (
     <OwnerNameInput
       ownerNameValue={cardInfo.ownerName}
-      onChangeOwner={dispatch}
+      onChangeOwner={updateCard}
     />
   );
 };

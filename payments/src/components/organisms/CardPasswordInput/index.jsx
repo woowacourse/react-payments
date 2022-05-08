@@ -18,11 +18,11 @@ const CardPasswordInput = () => {
 
   const {
     cardInfo: { password },
-    dispatch,
+    updateCard,
   } = useContext(CardContext);
 
   const updateCardPassword = (target, idx) => {
-    dispatch({
+    updateCard({
       type: "password",
       payload: {
         value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),

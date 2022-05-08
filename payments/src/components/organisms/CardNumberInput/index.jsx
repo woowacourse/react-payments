@@ -14,7 +14,7 @@ const BACKSPACE_KEY_CODE = 8;
 const CardNumberInput = () => {
   const {
     cardInfo: { cardNumber },
-    dispatch,
+    updateCard,
   } = useContext(CardContext);
 
   const { itemRef, controllInput, autoFocusBackward } = useControllInput({
@@ -22,7 +22,7 @@ const CardNumberInput = () => {
   });
 
   const updateCardNumber = (target, idx) => {
-    dispatch({
+    updateCard({
       type: "cardNumber",
       payload: {
         value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),

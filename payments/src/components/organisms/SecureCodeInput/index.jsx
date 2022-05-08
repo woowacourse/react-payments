@@ -11,10 +11,10 @@ const INPUT_LENGTH = 3;
 const SecureCodeInput = () => {
   const {
     cardInfo: { secureCode },
-    dispatch,
+    updateCard,
   } = useContext(CardContext);
   const updateSecureCode = ({ target }) => {
-    dispatch({
+    updateCard({
       type: "secureCode",
       payload: {
         value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),

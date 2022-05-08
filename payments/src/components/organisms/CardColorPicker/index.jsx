@@ -15,10 +15,10 @@ const CARD_CATEGORY = [
 ];
 
 const CardColorPicker = ({ closeModal }) => {
-  const { dispatch } = useContext(CardContext);
+  const { updateCard } = useContext(CardContext);
   const pickColor = (name, color) => {
     closeModal();
-    dispatch({
+    updateCard({
       type: "pickColor",
       payload: { cardName: name, color },
     });

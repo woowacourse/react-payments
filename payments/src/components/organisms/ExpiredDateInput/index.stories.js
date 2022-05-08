@@ -7,14 +7,14 @@ export default {
 };
 
 export const ExpiredDate = () => {
-  const { cardInfo, dispatch } = useCard();
+  const { cardInfo, updateCard } = useCard();
 
   const { expiredDate } = cardInfo;
 
   return (
     <ExpiredDateInput
       expiredDateValue={expiredDate}
-      onChangeExpiredDate={dispatch}
+      onChangeExpiredDate={updateCard}
     />
   );
 };

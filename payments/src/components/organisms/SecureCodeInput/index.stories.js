@@ -9,12 +9,12 @@ export default {
 export const SecureCode = () => {
   const {
     cardInfo: { secureCode },
-    dispatch,
+    updateCard,
   } = useCard();
   return (
     <SecureCodeInput
       secureCodeValue={secureCode}
-      onChangeSecureCode={dispatch}
+      onChangeSecureCode={updateCard}
     />
   );
 };

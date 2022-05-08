@@ -14,7 +14,7 @@ const BACKSPACE_KEY_CODE = 8;
 const ExpiredDateInput = () => {
   const {
     cardInfo: { expiredDate },
-    dispatch,
+    updateCard,
   } = useContext(CardContext);
 
   const { itemRef, controllInput, autoFocusBackward } = useControllInput({
@@ -22,7 +22,7 @@ const ExpiredDateInput = () => {
   });
 
   const updateExpiredDate = (target, idx) => {
-    dispatch({
+    updateCard({
       type: "expiredDate",
       payload: {
         value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),

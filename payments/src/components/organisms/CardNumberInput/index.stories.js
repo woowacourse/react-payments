@@ -7,9 +7,12 @@ export default {
 };
 
 export const CardNumber = () => {
-  const { cardInfo, dispatch } = useCard();
+  const { cardInfo, updateCard } = useCard();
 
   return (
-    <CardNumberInput cardNumberValue={cardInfo} onChangeCardNumber={dispatch} />
+    <CardNumberInput
+      cardNumberValue={cardInfo}
+      onChangeCardNumber={updateCard}
+    />
   );
 };

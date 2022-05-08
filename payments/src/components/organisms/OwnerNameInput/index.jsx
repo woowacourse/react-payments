@@ -11,10 +11,10 @@ const INPUT_LENGTH = 30;
 const OwnerNameInput = () => {
   const {
     cardInfo: { ownerName },
-    dispatch,
+    updateCard,
   } = useContext(CardContext);
   const updateCardOwner = (target) => {
-    dispatch({
+    updateCard({
       type: "ownerName",
       payload: {
         value: limitInputLength(

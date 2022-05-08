@@ -8,11 +8,11 @@ import "./index.scss";
 import { CardListContext } from "../../../context/CardListProvider";
 
 const SetNickname = ({ setDone }) => {
-  const { cardInfo, dispatch } = useContext(CardContext);
+  const { cardInfo, updateCard } = useContext(CardContext);
   const { updateCardList } = useContext(CardListContext);
   const navigate = useNavigate();
   const handleNickNameChange = (e) => {
-    dispatch({
+    updateCard({
       type: "nickname",
       payload: {
         value: e.target.value,
@@ -23,7 +23,7 @@ const SetNickname = ({ setDone }) => {
   const addCard = (e) => {
     e.preventDefault();
     updateCardList({ type: "addCardList", payload: cardInfo });
-    dispatch({ type: "initialize" });
+    updateCard({ type: "initialize" });
     setDone(false);
     navigate("/");
   };
