@@ -106,6 +106,11 @@ const useForm = (
     const field = getField(name);
     if (!field || !_fields.current) return;
 
+    // 현재 필드가 유효성검사에 실패했다면 자동으로 넘어가지 않게 만든다
+    if (!input.validity.valid) {
+      return;
+    }
+
     if (length === maxLength) {
       nextFocus(name, _fields.current);
     } else if (field.isBackspacePressedOnEmptyInput) {
