@@ -6,7 +6,7 @@ export type UseFormRegisterOption = Partial<{
   validate: ValidateHandler;
   onChange: ChangeHandler;
   onBlur: BlurHandler;
-  onFocus: BlurHandler;
+  onFocus: FocusHandler;
   required: ValidationOption<boolean>;
   maxLength: ValidationOption<number>;
   minLength: ValidationOption<number>;
@@ -17,8 +17,8 @@ export type UseFormRegisterOption = Partial<{
 
 export type UseFormRegisterReturn = {
   onChange: ChangeHandler;
-  onFocus: BlurHandler;
   onBlur: BlurHandler;
+  onFocus: FocusHandler;
   onKeyUp?: KeyUpHandler;
   ref: RefCallBack;
   name: string;

@@ -40,8 +40,3 @@ export type UseFormSubmitResult = {
   values?: FieldValues;
   errors?: FieldErrors;
 };
-
-export type FormControlProps = {
-  formState: UseFormState;
-  updateFormState: (newFormState: UseFormState) => void;
-} & UseFormProps;

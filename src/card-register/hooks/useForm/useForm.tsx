@@ -10,7 +10,6 @@ import {
   ErrorMessage,
   Subject,
   UseFormReturn,
-  Subscription,
 } from './types';
 import { defaultErrorMessage } from './constants';
 import { nextFocus, prevFocus } from './autoFocus';
