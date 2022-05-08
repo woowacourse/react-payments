@@ -21,7 +21,7 @@ function CardAddCompletionPage() {
     const cardAlias = cardAliasInput.current.value;
 
     updateCardInfo({ ...cardInfo, alias: cardAlias });
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   return (
