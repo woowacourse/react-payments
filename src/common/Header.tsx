@@ -2,7 +2,7 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 
-export default function Header({ hasBackArrow = true }) {
+export default function Header({ hasBackArrow = true, pageTitle }) {
   const navigate = useNavigate();
 
   return (
@@ -16,7 +16,7 @@ export default function Header({ hasBackArrow = true }) {
           aria-hidden
         ></span>
       )}
-      <h2 className="page-title">카드 추가</h2>
+      <h2 className="page-title">{pageTitle}</h2>
     </header>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AddCard from "./pages/AddCard";
-import SamplePage from "./pages/SamplePage";
+import CardList from "./pages/CardList";
 import ConfirmAddCard from "./pages/ConfirmAddCard";
 
 function App() {
@@ -11,9 +11,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<AddCard />} />
+          <Route path="/react-payments" element={<AddCard />} />
           <Route path="/addCard" element={<AddCard />} />
-          <Route path="/samplePage" element={<SamplePage />} />
           <Route path="/confirmAddCard" element={<ConfirmAddCard />} />
+          <Route path="/cardList" element={<CardList />} />
         </Routes>
       </Router>
     </div>

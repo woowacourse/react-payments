@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import Input from "../../common/Input";
+import { useNavigate } from "react-router-dom";
 
 export default function CardNameForm() {
   const [isNextButtonShown, setIsNextButtonShown] = useState(false);
   const [cardName, setCardName] = useState("");
+  const navigate = useNavigate();
 
   const onChangeCardName = e => {
     setCardName(e.target.value);
@@ -24,15 +26,14 @@ export default function CardNameForm() {
       className="card-name-form h-100"
       onSubmit={e => {
         e.preventDefault();
-        // 서버에 모든 정보 저장
-        // 카드 목록으로 넘어감
+        // ToDo: 서버에 모든 정보 저장
+        navigate("/cardList");
       }}
     >
       <Input
         shape="input-underline"
         placeholder="카드 이름을 입력해주세요."
         size="large"
-        required
         type="text"
         maxLength={10}
         value={cardName}

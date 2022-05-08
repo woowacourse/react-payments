@@ -1,0 +1,12 @@
+.card-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 600px;
+}
+
+.card-list-container {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import ModalPortal from "../../Portal";
 
-export default function Modal({ onClose, changeCardType }) {
+export default function SelectCard({ onClose, changeCardType }) {
   const handleClick = e => {
     const { type } = e.target.dataset;
 

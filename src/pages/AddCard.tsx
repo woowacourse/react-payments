@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 
-import Card from "../components/Card";
+import Card from "../common/Card";
 import CardInfoForm from "../components/CardInfoForm";
-import Header from "../components/Header";
+import Header from "../common/Header";
 import { Context } from "../contexts/store";
 import useModal from "../hooks/useCardModal";
-import Modal from "../components/Modal";
+import SelectCard from "../components/SelectCard";
 
 export default function AddCard() {
   const [cardTypeValidation, setCardTypeValidation] = useState(false);
@@ -19,10 +19,10 @@ export default function AddCard() {
 
   return (
     <>
-      <Header />
-      <Card showModal={showModal} size="small" />
+      <Header pageTitle="카드 추가" />
+      <Card cardInfo={state} isClick={true} onClick={showModal} size="small" />
       <CardInfoForm cardTypeValidation={cardTypeValidation} showModal={showModal} />
-      {isModalShow && <Modal onClose={hideModal} changeCardType={changeCardType} />}
+      {isModalShow && <SelectCard onClose={hideModal} changeCardType={changeCardType} />}
     </>
   );
 }

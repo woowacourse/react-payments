@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 
-import { Context } from "../../contexts/store";
+import { Context } from "../contexts/store";
 
 const CARD_TYPE = {
   empty: { color: "empty-card", name: "클릭하여 카드 선택" },
@@ -15,13 +15,21 @@ const CARD_TYPE = {
 };
 
 interface CardProps {
-  showModal?: () => void;
+  cardInfo: any;
+  onClick?: () => void;
   size: string;
+  isCardName?: boolean;
+  isClick?: boolean;
 }
 
-export default function Card({ showModal, size }: CardProps) {
-  const [state, dispatch] = useContext(Context);
-  const { cardType, expiredDate, cardNumbers, userName } = state;
+export default function Card({
+  cardInfo,
+  isClick = false,
+  onClick = () => {},
+  size,
+  isCardName = false,
+}: CardProps) {
+  const { cardName, cardType, expiredDate, cardNumbers, userName } = cardInfo;
   const cardSize = {
     small: {
       shape: "card-shape",
@@ -35,11 +43,15 @@ export default function Card({ showModal, size }: CardProps) {
     },
   };
 
+  console.log();
+
   return (
     <div className="card-box">
       <div
-        className={`${cardSize[size].shape} ${CARD_TYPE[cardType].color}`}
-        onClick={showModal}
+        className={`${cardSize[size].shape} ${CARD_TYPE[cardType].color} ${
+          isClick ? "cursor-pointer" : ""
+        }`}
+        onClick={onClick}
         aria-hidden="true"
       >
         <div className="card-top">
@@ -66,6 +78,7 @@ export default function Card({ showModal, size }: CardProps) {
           <span className={`${cardSize[size].text} card-user-name`}>{userName || "NAME"}</span>
         </div>
       </div>
+      {isCardName && <div className="card-name">{cardName}</div>}
     </div>
   );
 }

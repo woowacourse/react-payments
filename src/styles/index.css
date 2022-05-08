@@ -1,10 +1,11 @@
-@import "./card.css";
-@import "./input.css";
-@import "./button.css";
-@import "./modal.css";
-@import "./utils.css";
-@import "./header.css";
-@import "./confirm.css";
+@import "./card";
+@import "./input";
+@import "./button";
+@import "./modal";
+@import "./utils";
+@import "./header";
+@import "./confirm";
+@import "./cardList";
 
 * {
   box-sizing: border-box;
