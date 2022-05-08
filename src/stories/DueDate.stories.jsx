@@ -18,5 +18,5 @@ const Template = args => {
 export const Primary = Template.bind({});
 
 Primary.args = {
-  dimensions: { width: 754, height: 200 },
+  dimensions: { width: 1000, height: 1000 },
 };
