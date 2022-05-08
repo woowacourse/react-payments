@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { MAX_LENGTH } from '../constants';
+import { MAX_LENGTH } from '../../constants';
 import CardNumberInput from './CardNumberInput';
 import PasswordInput from './PasswordInput';
 import NameInput from './NameInput';
 import SecurityCodeInput from './SecurityCodeInput';
 import MonthInput from './MonthInput';
 import YearInput from './YearInput';
-import AddCardContext from '../AddCardContext';
+import AddCardContext from '../../AddCardContext';
 
 function AddCardForm({ addCard }) {
   const { card } = useContext(AddCardContext);

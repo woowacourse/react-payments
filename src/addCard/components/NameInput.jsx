@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { validator, checkMaxLength } from '../validator';
-import { MAX_LENGTH, MIN_LENGTH } from '../constants';
+import { validator, checkMaxLength } from '../../validator';
+import { MAX_LENGTH, MIN_LENGTH } from '../../constants';
 import Input from './Input';
 
 function NameInput({ value, name }) {

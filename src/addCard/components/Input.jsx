@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import AddCardContext from '../AddCardContext';
+import AddCardContext from '../../AddCardContext';
 
 function Input({ type, size, placeholder, length, minLength, name, value, required, validators }) {
   const { updateCard } = useContext(AddCardContext);

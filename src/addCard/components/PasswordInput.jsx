@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Input from './Input';
-import { MAX_LENGTH } from '../constants';
-import { validator, checkMaxLength, checkIsNaN } from '../validator';
+import { MAX_LENGTH } from '../../constants';
+import { validator, checkMaxLength, checkIsNaN } from '../../validator';
 
 function PasswordInput({ value, name }) {
   return (

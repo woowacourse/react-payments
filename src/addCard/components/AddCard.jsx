@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import AddCardForm from './AddCardForm';
 import Card from './Card';
-import { getCard } from '../util';
-import AddCardContext from '../AddCardContext';
+import { getCard } from '../../util';
+import AddCardContext from '../../AddCardContext';
 
 function AddCard() {
   const [card, setCard] = useState(getCard());

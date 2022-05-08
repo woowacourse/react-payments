@@ -1,6 +1,6 @@
 import React from 'react';
-import Card from '../components/Card.jsx';
-import { getCard } from '../util.js';
+import Card from '../components/Card';
+import { getCard } from '../../util';
 
 export default {
   title: 'Card',

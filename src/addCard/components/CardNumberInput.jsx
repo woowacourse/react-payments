@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { checkIsNaN, checkMaxLength, validator } from '../validator';
-import { MAX_LENGTH } from '../constants';
+import { checkIsNaN, checkMaxLength, validator } from '../../validator';
+import { MAX_LENGTH } from '../../constants';
 import Input from './Input';
 
 function CardNumberInput({ type, value, name }) {
