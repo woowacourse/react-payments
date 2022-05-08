@@ -99,6 +99,21 @@ const useForm = (
     onFocus && onFocus(event);
   };
 
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    if (!_fields.current || !_fieldValueSubject.current) return;
+    const input = event.target;
+    const { name } = input;
+    const field = getField(name);
+    if (!field) return;
+    const { onBlur, _ref } = field;
+
+    // input에 값이 없으면 touched를 제거한다.
+    // 다만 그래도 required인 필드기 때문에 실제로는 :invalid가상 클래스가 붙어있는 상태이다
+    !input.value && input.classList.remove('touched');
+
+    onBlur && onBlur(event);
+  };
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const { name, value } = event.target as HTMLInputElement;
     const field = getField(name);
@@ -212,6 +227,7 @@ const useForm = (
             _ref: ref,
             onChange: options?.onChange,
             onFocus: options?.onFocus,
+            onBlur: options?.onBlur,
             validate: options?.validate,
             validityMessage: {
               valueMissing: options?.required?.message || options?.minLength?.message,
@@ -227,7 +243,7 @@ const useForm = (
       onChange: event => handleChange(event),
       onKeyUp: shouldUseAutoFocus ? handleKeyUp : undefined,
       onKeyDown: shouldUseAutoFocus ? handleKeyDown : undefined,
-      onBlur: options?.onBlur,
+      onBlur: event => handleBlur(event),
       onFocus: event => handleFocus(event),
       name,
       // minLength가 있는데 처음에 값을 안넣고 submit하는걸 방지한다

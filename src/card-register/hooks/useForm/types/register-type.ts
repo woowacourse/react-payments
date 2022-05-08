@@ -17,6 +17,8 @@ export type UseFormRegisterOption = Partial<{
 
 export type UseFormRegisterReturn = {
   onChange: ChangeHandler;
+  onFocus: BlurHandler;
+  onBlur: BlurHandler;
   onKeyUp?: KeyUpHandler;
   ref: RefCallBack;
   name: string;

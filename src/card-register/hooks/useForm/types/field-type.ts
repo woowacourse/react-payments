@@ -1,4 +1,4 @@
-import { ValidateHandler, ChangeHandler } from './register-type';
+import { ValidateHandler, ChangeHandler, BlurHandler } from './register-type';
 
 export type NativeValidityErrorType = Exclude<keyof ValidityState, 'customError' | 'valid'>;
 
@@ -8,6 +8,8 @@ export type Field = {
   _ref: HTMLInputElement;
   validate?: ValidateHandler;
   onChange?: ChangeHandler;
+  onFocus?: BlurHandler;
+  onBlur?: BlurHandler;
   validityMessage: ValidityMessage;
   isBackspacePressedOnEmptyInput: boolean;
 };
