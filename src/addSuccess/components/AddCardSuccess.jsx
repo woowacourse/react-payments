@@ -1,13 +1,16 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Card from '../../addCard/components/Card';
 
 function AddCardSuccess() {
+  const card = useLocation().state;
+
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
-      <Card big />
+      <Card completedCard={card} />
       <div className="input-container flex-center w-100">
         <input
           className="input-underline w-75"

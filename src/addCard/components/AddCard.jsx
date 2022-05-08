@@ -15,10 +15,6 @@ function AddCard() {
 
   const contextValue = useMemo(() => ({ card, updateCard }), [card]);
 
-  const alertAddedCard = () => {
-    alert(`카드를 추가하였습니다. ${card.ownerName}의 카드`);
-  };
-
   return (
     <AddCardContext.Provider value={contextValue}>
       <div className="header-wrapper">
@@ -26,7 +22,7 @@ function AddCard() {
         <h2 className="page-title">카드 추가</h2>
       </div>
       <Card />
-      <AddCardForm addCard={alertAddedCard} />
+      <AddCardForm />
     </AddCardContext.Provider>
   );
 }

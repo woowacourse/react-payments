@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { MAX_LENGTH } from '../../constants';
 import CardNumberInput from './CardNumberInput';
 import PasswordInput from './PasswordInput';
@@ -9,12 +9,14 @@ import MonthInput from './MonthInput';
 import YearInput from './YearInput';
 import AddCardContext from '../../AddCardContext';
 
-function AddCardForm({ addCard }) {
+function AddCardForm() {
   const { card } = useContext(AddCardContext);
+
+  const navigator = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addCard();
+    navigator('/success', { state: { card }, replace: true });
   };
 
   return (
@@ -67,9 +69,5 @@ function AddCardForm({ addCard }) {
     </form>
   );
 }
-
-AddCardForm.propTypes = {
-  addCard: PropTypes.func.isRequired,
-};
 
 export default AddCardForm;
