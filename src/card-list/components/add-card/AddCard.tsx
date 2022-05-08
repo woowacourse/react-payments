@@ -1,9 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import S from '../../styled';
 
 function AddCard() {
+  const navigate = useNavigate();
   const handleClick = () => {
-    console.log('add card is clicked');
+    navigate('/card-register');
   };
   return <S.AddCard onClick={handleClick} />;
 }

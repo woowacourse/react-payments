@@ -2,13 +2,15 @@ import React from 'react';
 import styled from '@emotion/styled';
 import IconBackArrow from '../../../images/back-arrow.svg';
 
-function BackButton() {
+type Props = {
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+};
+
+function BackButton({ onClick }: Props) {
   return (
-    <div>
-      <Button type="button">
-        <img src={IconBackArrow} alt="" />
-      </Button>
-    </div>
+    <Button type="button" onClick={onClick}>
+      <img src={IconBackArrow} alt="" />
+    </Button>
   );
 }
 

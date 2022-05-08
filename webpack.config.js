@@ -5,6 +5,9 @@ module.exports = {
   mode: 'development',
   entry: join(__dirname, '/src/index.tsx'),
   devtool: 'source-map',
+  devServer: {
+    historyApiFallback: true,
+  },
   output: {
     filename: "main.js",
     path: join(__dirname, '/dist'),

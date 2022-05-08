@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './card-register/components/navigation/Navigation';
 import CardRegister from './card-register/CardRegister';
 import { PaymentProvider } from './context';
@@ -9,8 +10,13 @@ function App() {
   return (
     <Page>
       <PaymentProvider>
-        <Navigation />
-        <CardList />
+        <BrowserRouter>
+          <Navigation />
+          <Routes>
+            <Route path="/" element={<CardList />} />
+            <Route path="/card-register" element={<CardRegister />} />
+          </Routes>
+        </BrowserRouter>
       </PaymentProvider>
     </Page>
   );
