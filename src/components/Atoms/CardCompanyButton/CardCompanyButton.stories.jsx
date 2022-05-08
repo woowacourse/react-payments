@@ -2,7 +2,7 @@ import React from 'react';
 import CardCompanyButton from '.';
 
 export default {
-  title: 'Payment/CardCompanyButton',
+  title: 'Atoms/CardCompanyButton',
   component: CardCompanyButton,
 };
 

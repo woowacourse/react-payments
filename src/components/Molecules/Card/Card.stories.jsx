@@ -3,7 +3,7 @@ import Card from '.';
 import { CARD_SIZE } from 'constant/';
 
 export default {
-  title: 'Payment/Card',
+  title: 'Molecules/Card',
   component: Card,
   argTypes: {
     size: { control: 'select', options: [CARD_SIZE.MEDIUM, CARD_SIZE.LARGE] },

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import Head from 'components/Head';
-import Card from 'components/Card';
+import Card from 'components/Molecules/Card';
+import Head from 'components/Templates/Head';
 import {
   Container,
   HeadTitle,

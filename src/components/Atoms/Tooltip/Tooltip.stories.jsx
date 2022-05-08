@@ -1,9 +1,9 @@
 import React from 'react';
 import Tooltip from '.';
-import MESSAGE from '../../constant/message';
+import MESSAGE from '../../../constant/message';
 
 export default {
-  title: 'Payment/Tooltip',
+  title: 'Atoms/Tooltip',
   component: Tooltip,
 };
 

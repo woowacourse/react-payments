@@ -2,13 +2,13 @@ import React from 'react';
 import { expect } from '@storybook/jest';
 import { within, userEvent } from '@storybook/testing-library';
 import ExpiredDateInput from '.';
-import useExpiredDate from '../../hooks/useExpiredDate';
+import useExpiredDate from '../../../hooks/useExpiredDate';
 import { PLACEHOLDER } from 'constant';
-import MESSAGE from '../../constant/message';
+import MESSAGE from '../../../constant/message';
 import { CLASS } from 'constant/selector';
 
 export default {
-  title: 'Payment/ExpiredDateInput',
+  title: 'Molecules/ExpiredDateInput',
   component: ExpiredDateInput,
   argTypes: {
     expiredDate: {

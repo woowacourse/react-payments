@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BlockInput } from '../Input';
-import InputLabel from '../InputLabel';
+import { BlockInput } from '../../Atoms/Input';
+import InputLabel from '../../Atoms/InputLabel';
 import { PLACEHOLDER } from 'constant';
 import { CLASS } from 'constant/selector';
 

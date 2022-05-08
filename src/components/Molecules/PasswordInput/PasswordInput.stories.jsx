@@ -2,12 +2,12 @@ import React from 'react';
 import { expect } from '@storybook/jest';
 import { userEvent } from '@storybook/testing-library';
 import PasswordInput from '.';
-import usePassword from '../../hooks/usePassword';
-import MESSAGE from '../../constant/message';
+import usePassword from '../../../hooks/usePassword';
+import MESSAGE from '../../../constant/message';
 import { CLASS } from 'constant/selector';
 
 export default {
-  title: 'Payment/PasswordInput',
+  title: 'Molecules/PasswordInput',
   component: PasswordInput,
   argTypes: {
     password: {

@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import CardCompanyButton from '../CardCompanyButton';
+import CardCompanyButton from '../../Atoms/CardCompanyButton';
 
 const slideIn = keyframes`
   from {

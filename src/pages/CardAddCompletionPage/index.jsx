@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Card from 'components/Card';
-import { UnderlineInput } from 'components/Input';
-import Button from 'components/Button';
+import { UnderlineInput } from 'components/Atoms/Input';
+import Button from 'components/Atoms/Button';
+import Card from 'components/Molecules/Card';
 import { Container, Title, CardSection, Form } from './style';
 import { useCardListContext } from 'context/cardList';
 import { CARD_SIZE } from 'constant/';
