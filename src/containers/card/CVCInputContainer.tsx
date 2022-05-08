@@ -36,6 +36,9 @@ function CVCInputContainer() {
         onChange={handleChage}
         value={cvc}
         placeholder="000"
+        maxlength="3"
+        pattern="^[0-9]{3}$"
+        required={true}
         css={style}
       />
     </>

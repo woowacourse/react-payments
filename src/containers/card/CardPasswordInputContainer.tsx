@@ -44,6 +44,9 @@ function CardPasswordInputContainer() {
         onChange={handleFirstPasswordInput}
         value={firstPassword}
         placeholder="0"
+        maxlength="1"
+        pattern="^[0-9]{1}$"
+        required={true}
         css={style}
         ref={secondPasswordInputRef}
       />
@@ -52,6 +55,9 @@ function CardPasswordInputContainer() {
         onChange={handleSecondPasswordInput}
         value={secondPassword}
         placeholder="0"
+        maxlength="1"
+        pattern="^[0-9]{1}$"
+        required={true}
         css={style}
         ref={secondPasswordInputRef}
       />

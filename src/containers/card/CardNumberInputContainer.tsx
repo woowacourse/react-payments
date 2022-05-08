@@ -95,6 +95,9 @@ function CardNumberInputContainer() {
         onChange={handleFirstInputCardNumber}
         value={firstInputCardNumber}
         placeholder="0000"
+        maxlength="4"
+        pattern="^[0-9]{4}$"
+        required={true}
         css={style}
         ref={firstNumberInputRef}
       />
@@ -103,6 +106,9 @@ function CardNumberInputContainer() {
         onChange={handleSecondInputCardNumber}
         value={secondInputCardNumber}
         placeholder="0000"
+        maxlength="4"
+        pattern="^[0-9]{4}$"
+        required={true}
         css={style}
         ref={secondNumberInputRef}
       />
@@ -112,6 +118,9 @@ function CardNumberInputContainer() {
         value={thirdInputCardNumber}
         type="password"
         placeholder="0000"
+        maxlength="4"
+        pattern="^[0-9]{4}$"
+        required={true}
         css={style}
         ref={thirdNumberInputRef}
       />
@@ -121,6 +130,9 @@ function CardNumberInputContainer() {
         onChange={handleFourthInputCardNumber}
         value={fourthInputCardNumber}
         placeholder="0000"
+        maxlength="4"
+        pattern="^[0-9]{4}$"
+        required={true}
         css={style}
         ref={fourthnumberInputRef}
       />

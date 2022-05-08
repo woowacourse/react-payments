@@ -1,8 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import { useAppDispatch, useAppState } from 'hooks/hooks';
-import { MAX_NAME_LENGTH } from '../../constants';
-import { isEnglish, removeWhiteSpaces } from 'utils';
+import { removeWhiteSpaces } from 'utils';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';
 import CardFormInput from 'components/card/CardFormInput';
@@ -31,6 +30,9 @@ function CardOwnerNameInputContainer() {
         onChange={handleChage}
         value={name}
         placeholder="카드에 표시될 이름을 작성해주세요."
+        maxlength="2"
+        pattern="^[A-Z]{30}$"
+        required={true}
         css={style}
       />
     </>

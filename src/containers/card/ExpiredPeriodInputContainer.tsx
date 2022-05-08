@@ -7,8 +7,8 @@ import { isNum, removeWhiteSpaces } from 'utils';
 import CardFormInput from 'components/card/CardFormInput';
 
 const style = css({
-  height: '45px',
   maxWidth: '68px',
+  height: '45px',
 });
 
 function ExpiredPeriodInputContainer() {
@@ -25,14 +25,7 @@ function ExpiredPeriodInputContainer() {
       return;
     }
 
-    if (value.length > 2 || !isNum(value)) return;
-
-    if (
-      expiredPeriodYear === new Date().getFullYear().toString().substring(2, 4) &&
-      Number(value) < new Date().getMonth() + 1
-    ) {
-      return;
-    }
+    if (value.length > 2 || !isNum(value) || Number(value) > 12) return;
 
     if (value.length <= expiredPeriodMonth.length) {
       dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD_MONTH, value));
@@ -45,10 +38,6 @@ function ExpiredPeriodInputContainer() {
       return;
     }
 
-    if (Number(value) > 12) {
-      return;
-    }
-
     const removeSpaceValue = removeWhiteSpaces(value);
 
     if (removeSpaceValue.length === 2) secondExpiredPeriodInputRef.current?.focus();
@@ -58,13 +47,6 @@ function ExpiredPeriodInputContainer() {
 
   const handleYearChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-
-    if (
-      value === new Date().getFullYear().toString().substring(2, 4) &&
-      Number(expiredPeriodMonth) < new Date().getMonth() + 1
-    ) {
-      dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD_MONTH, ''));
-    }
 
     if (Number(value) === 0) {
       dispatch(createAction(ActionType.INPUT_EXPIRED_PERIOD_YEAR, ''));
@@ -87,6 +69,9 @@ function ExpiredPeriodInputContainer() {
         onChange={handleMonthChange}
         value={expiredPeriodMonth}
         placeholder="MM"
+        maxlength="2"
+        pattern="^[0-9]{2}$"
+        required={true}
         css={style}
       />
       /
@@ -95,6 +80,9 @@ function ExpiredPeriodInputContainer() {
         onChange={handleYearChange}
         value={expiredPeriodYear}
         placeholder="YY"
+        maxlength="2"
+        pattern="^[0-9]{2}$"
+        required={true}
         css={style}
         ref={secondExpiredPeriodInputRef}
       />
