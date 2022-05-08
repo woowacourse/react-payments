@@ -68,12 +68,12 @@ const StoredCardListPage = () => {
       <BackwardButton showBackWard={false}>보유 카드</BackwardButton>
       <StyledStoredCardList>
         {Object.values(storedList).map(({ cardName, values, id }) => (
-          <>
+          <article key={id}>
             <Link to={PATH.EDIT_CARD_PAGE} state={{ cardName, values, id }}>
-              <CardPreview key={cardName} values={values} />
+              <CardPreview values={values} />
             </Link>
             <TextBox fontSize="14px">{cardName}</TextBox>
-          </>
+          </article>
         ))}
 
         <Link to={PATH.ADD_CARD_PAGE}>
