@@ -86,6 +86,19 @@ const useForm = (
     return null;
   };
 
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    if (!_fields.current || !_fieldValueSubject.current) return;
+    const input = event.target;
+    const { name } = input;
+    const field = getField(name);
+    if (!field) return;
+    const { onFocus, _ref } = field;
+
+    !input.classList.contains('touched') && input.classList.add('touched');
+
+    onFocus && onFocus(event);
+  };
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const { name, value } = event.target as HTMLInputElement;
     const field = getField(name);
@@ -197,6 +210,7 @@ const useForm = (
           _fields.current.set(name, {
             _ref: ref,
             onChange: options?.onChange,
+            onFocus: options?.onFocus,
             validate: options?.validate,
             validityMessage: {
               valueMissing: options?.required?.message || options?.minLength?.message,
@@ -213,7 +227,7 @@ const useForm = (
       onKeyUp: shouldUseAutoFocus ? handleKeyUp : undefined,
       onKeyDown: shouldUseAutoFocus ? handleKeyDown : undefined,
       onBlur: options?.onBlur,
-      onFocus: options?.onFocus,
+      onFocus: event => handleFocus(event),
       name,
       // minLength가 있는데 처음에 값을 안넣고 submit하는걸 방지한다
       required: options?.required?.value || !!options?.minLength,
