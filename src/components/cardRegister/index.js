@@ -3,10 +3,10 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 import { CARD_TYPES, COMPONENTS, initialCardInfo } from '../../constants/card';
 import { useModalSelector } from '../../hooks/useModalSelector';
+import ModalPortal from '../../Portal';
 import { CardInfoContext } from '../../providers/CardInfoProvider';
 
 import { Button } from '../common/Button';
-import { ModalSelector } from '../common/ModalSelector';
 import { PageTitle } from '../common/PageTitle';
 import { CardExpireDateInput } from './CardExpireDateInput';
 import { CardNumbersInput } from './CardNumbersInput';
@@ -38,14 +38,14 @@ export const CardRegister = ({ onSubmit }) => {
       <CardOwnerInput />
       <CVCInput openModal={() => openModal(COMPONENTS.CVC)} />
       <CardPasswordInput />
-      <ModalSelector selected={openedModalComponent} closeModal={closeModal}>
+      <ModalPortal selected={openedModalComponent} closeModal={closeModal}>
         <CardSelectModal
           name={COMPONENTS.CARD_TYPE}
           cardTypes={CARD_TYPES}
           closeModal={closeModal}
         />
         <CVCHelperModal name={COMPONENTS.CVC} />
-      </ModalSelector>
+      </ModalPortal>
 
       <Style.ButtonWrapper>
         <Button disabled={allCompleted ? false : true} onClick={onSubmit}>
