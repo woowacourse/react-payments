@@ -21,7 +21,11 @@ function Add() {
   return (
     <>
       <Header title="카드 추가" />
-      <Card cardInfo={cardInfo} shouldShowTypeSelection={true} />
+      <Card
+        cardInfo={cardInfo}
+        shouldShowTypeSelection={true}
+        onChangeCardType={onChangeCardType}
+      />
       <CardInfoForm
         cardInfo={cardInfo}
         onChangeCardNumber={onChangeCardNumber}

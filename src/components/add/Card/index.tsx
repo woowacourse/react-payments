@@ -1,6 +1,6 @@
 import useModal from "hooks/useModal";
 import React from "react";
-import { CardInfo } from "types/cardInfo";
+import { CardColor, CardInfo, CardName } from "types/cardInfo";
 
 import CardSelectModal from "./CardSelectModal";
 
@@ -11,6 +11,7 @@ interface CardProps {
   marginBottom?: string;
   pointer?: boolean;
   onClick?: (id: number) => void;
+  onChangeCardType?: (name: CardName, color: CardColor) => void;
 }
 
 export default function Card({
@@ -19,7 +20,9 @@ export default function Card({
   size = "small",
   marginBottom,
   pointer = true,
+  // @TODO: 네이밍 구분
   onClick,
+  onChangeCardType,
 }: CardProps) {
   const { cardNumbers, expirationDate, userName, cardType } = cardInfo;
   const { isModalOpened, openModal, closeModal } = useModal(true);
@@ -29,6 +32,7 @@ export default function Card({
       <div
         className="card-box flex-center"
         style={{ marginBottom, cursor: pointer ? "pointer" : "auto" }}
+        // @TODO: 조건문 제거
         onClick={onClick && (() => onClick(cardInfo.id))}
       >
         <div
@@ -58,9 +62,13 @@ export default function Card({
           </div>
         </div>
       </div>
-      {/* {shouldShowTypeSelection && (
-        <CardSelectModal isOpened={isModalOpened} closeModal={closeModal} />
-      )} */}
+      {shouldShowTypeSelection && (
+        <CardSelectModal
+          isOpened={isModalOpened}
+          closeModal={closeModal}
+          onChangeCardType={onChangeCardType}
+        />
+      )}
     </>
   );
 }
