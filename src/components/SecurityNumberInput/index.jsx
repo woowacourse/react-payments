@@ -4,6 +4,7 @@ import { BlockInput } from '../Input';
 import InputLabel from '../InputLabel';
 import Tooltip from '../Tooltip';
 import MESSAGE from '../../constant/message';
+import { CLASS } from 'constant/selector';
 
 const Container = styled.div`
   display: flex;
@@ -45,6 +46,7 @@ function SecurityNumberInput({
       <InputLabel label="보안 코드(CVC/CVV)" />
       <InputBody>
         <BlockInput
+          className={CLASS.INPUT_SECURITY_NUMBER}
           style={{
             width: '84px',
           }}
@@ -56,7 +58,9 @@ function SecurityNumberInput({
         />
         <Tooltip message={MESSAGE.TOOLTIP_SECURITY_NUMBER} margin="0 0 0 11px" />
       </InputBody>
-      <InvalidMessage>{isValid || !securityNumber ? '' : invalidMessage}</InvalidMessage>
+      <InvalidMessage className={CLASS.INVALID_INPUT_MESSAGE}>
+        {isValid || !securityNumber ? '' : invalidMessage}
+      </InvalidMessage>
     </Container>
   );
 }
