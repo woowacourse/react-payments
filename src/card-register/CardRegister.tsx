@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 import { FormProvider } from './hooks/useForm/useFormContext';
 import useForm from './hooks/useForm/useForm';
 import CVCFieldset from './components/card-form/card-cvc/CVCFieldset';
@@ -11,13 +12,43 @@ import ConfirmButtonContainer from './components/card-form/confirm-button/Confir
 import CardContainer from './components/card/CardContainer';
 import { UseFormSubmitResult } from './hooks/useForm/types';
 import { CardRegisterProvider } from './context';
+import { Card } from '../card-list/types';
+import { usePaymentContext } from '../context';
 
 function CardRegister() {
+  const { cardList, addCard } = usePaymentContext();
+  const prevCardCount = React.useRef<number>(cardList.length);
+  const navigate = useNavigate();
   const methods = useForm({ shouldValidateOnChange: true, shouldShowNativeHint: true, shouldUseAutoFocus: true });
   const { handleSubmit } = methods;
   const onSubmit = (event: React.FormEvent<HTMLFormElement>, result: UseFormSubmitResult) => {
-    console.log(result);
+    const { values } = result;
+    if (!values) return;
+
+    const cardNumber = `${values['card-number-1']}${values['card-number-2']}${values['card-number-3']}${values['card-number-4']}`;
+    const ownerName = values['card-owner-name'];
+    const { cvc } = values;
+    const expiredPeriod = `${values['expired-period-1']}${values['expired-period-2']}`;
+    const password = `${values['password-1']}${values['password-2']}`;
+
+    const card: Card = {
+      cardNumber,
+      ownerName,
+      cvc,
+      expiredPeriod,
+      password,
+    };
+
+    addCard(card);
   };
+
+  useEffect(() => {
+    if (prevCardCount.current < cardList.length) {
+      prevCardCount.current = cardList.length;
+      navigate('/');
+    }
+  }, [navigate, cardList]);
+
   return (
     <CardRegisterProvider>
       <FormProvider {...methods}>

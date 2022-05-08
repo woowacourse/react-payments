@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Navigation from './card-register/components/navigation/Navigation';
+import Navigation from './shared/components/navigation/Navigation';
 import CardRegister from './card-register/CardRegister';
 import { PaymentProvider } from './context';
 import CardList from './card-list/CardList';
@@ -9,15 +9,15 @@ import CardList from './card-list/CardList';
 function App() {
   return (
     <Page>
-      <PaymentProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <PaymentProvider>
           <Navigation />
           <Routes>
             <Route path="/" element={<CardList />} />
             <Route path="/card-register" element={<CardRegister />} />
           </Routes>
-        </BrowserRouter>
-      </PaymentProvider>
+        </PaymentProvider>
+      </BrowserRouter>
     </Page>
   );
 }
