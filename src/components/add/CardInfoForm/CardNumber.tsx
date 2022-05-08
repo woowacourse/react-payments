@@ -1,16 +1,16 @@
-import { CardInfoContext } from "contexts/CardInfoProvider";
-import React, { useContext } from "react";
+import Input from "components/common/Input";
+import InputContainer from "components/common/InputContainer";
+import React from "react";
+import type { InputChangeFunction } from "types";
+import type { CardNumbers, Validation } from "types/cardInfo";
+interface CardNumberProps {
+  cardNumbers: CardNumbers;
+  onChange: InputChangeFunction;
+  validation: Validation;
+  inputs: HTMLInputElement[];
+}
 
-import Input from "../../common/Input";
-import InputContainer from "../../common/InputContainer";
-
-export default function CardNumber({ inputs }: { inputs: HTMLInputElement[] }) {
-  const {
-    cardInfo: { cardNumbers },
-    cardInfoValidation: { cardNumbers: validation },
-    onChangeCardNumber: onChange,
-  } = useContext(CardInfoContext);
-
+export default function CardNumber({ cardNumbers, onChange, validation, inputs }: CardNumberProps) {
   return (
     <InputContainer title="카드번호" validation={validation}>
       <div className="input-box">

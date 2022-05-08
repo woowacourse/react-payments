@@ -1,9 +1,9 @@
 import { PATH } from "constant/path";
-import { CardInfoContext } from "contexts/CardInfoProvider";
 import useFormComplete from "hooks/useFormComplete";
-import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import type { CardInfoValidationTarget } from "types/cardInfo";
+import { InputChangeFunction } from "types";
+import type { CardInfo, CardInfoValidation } from "types/cardInfo";
 
 import CardExpirationDate from "./CardExpirationDate";
 import CardNumber from "./CardNumber";
@@ -11,9 +11,31 @@ import CardPassword from "./CardPassword";
 import CardSecurityCode from "./CardSecurityCode";
 import CardUserName from "./CardUserName";
 
-export default function CardInfoForm() {
+interface CardInfoFormProps {
+  cardInfo: CardInfo;
+  onChangeCardNumber: InputChangeFunction;
+  onChangeExpirationDate: InputChangeFunction;
+  onChangeUserName: InputChangeFunction;
+  onBlurUserName: () => void;
+  onChangeSecurityCode: InputChangeFunction;
+  onChangePassword: InputChangeFunction;
+  resetCardInfo: () => void;
+  cardInfoValidation: CardInfoValidation;
+}
+
+export default function CardInfoForm({
+  cardInfo,
+  onChangeCardNumber,
+  onChangeExpirationDate,
+  onChangeUserName,
+  onBlurUserName,
+  onChangeSecurityCode,
+  onChangePassword,
+  resetCardInfo,
+  cardInfoValidation,
+}: CardInfoFormProps) {
   const navigate = useNavigate();
-  const { cardInfoValidation } = useContext(CardInfoContext);
+  const { cardNumbers, expirationDate, userName, securityCode, password } = cardInfo;
   const isNextButtonActive = useFormComplete(cardInfoValidation);
 
   const inputsRef = useRef<HTMLInputElement[]>(null);
@@ -26,17 +48,43 @@ export default function CardInfoForm() {
     e.preventDefault();
 
     if (window.confirm("카드를 등록하시겠습니까?")) {
-      navigate(PATH.COMPLETE);
+      navigate(PATH.COMPLETE, { state: cardInfo });
+      resetCardInfo();
     }
   };
 
   return (
     <form ref={formRef} id="card-info-form" onSubmit={handleSubmit}>
-      <CardNumber inputs={inputsRef.current} />
-      <CardExpirationDate inputs={inputsRef.current} />
-      <CardUserName inputs={inputsRef.current} />
-      <CardSecurityCode inputs={inputsRef.current} />
-      <CardPassword inputs={inputsRef.current} />
+      <CardNumber
+        cardNumbers={cardNumbers}
+        onChange={onChangeCardNumber}
+        validation={cardInfoValidation.cardNumbers}
+        inputs={inputsRef.current}
+      />
+      <CardExpirationDate
+        expirationDate={expirationDate}
+        onChange={onChangeExpirationDate}
+        validation={cardInfoValidation.expirationDate}
+        inputs={inputsRef.current}
+      />
+      <CardUserName
+        userName={userName}
+        onChange={onChangeUserName}
+        onBlur={onBlurUserName}
+        inputs={inputsRef.current}
+      />
+      <CardSecurityCode
+        securityCode={securityCode}
+        onChange={onChangeSecurityCode}
+        validation={cardInfoValidation.securityCode}
+        inputs={inputsRef.current}
+      />
+      <CardPassword
+        password={password}
+        onChange={onChangePassword}
+        validation={cardInfoValidation.password}
+        inputs={inputsRef.current}
+      />
       <button className="submit-button" disabled={!isNextButtonActive}>
         다음
       </button>

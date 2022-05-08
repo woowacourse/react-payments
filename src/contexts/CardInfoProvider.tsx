@@ -265,7 +265,6 @@ const CardInfoProvider = ({ children }) => {
     handleChangeValidation("password", cardInfo.password, cardInfoValidator["password"]);
   }, [cardInfo.password]);
 
-  // @TODO Context를 도메인별로 나눠서 분류해야할까?
   return (
     <CardInfoContext.Provider
       value={{

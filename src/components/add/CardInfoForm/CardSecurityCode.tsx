@@ -1,18 +1,24 @@
 import CVCImage from "assets/cvcImage.png";
-import { CardInfoContext } from "contexts/CardInfoProvider";
-import React, { useContext } from "react";
+import Input from "components/common/Input";
+import InputContainer from "components/common/InputContainer";
+import Tooltip from "components/common/Tooltip";
+import React from "react";
+import type { InputChangeFunction } from "types";
+import { Validation } from "types/cardInfo";
 
-import Input from "../../common/Input";
-import InputContainer from "../../common/InputContainer";
-import Tooltip from "../../common/Tooltip";
+interface CardSecurityProps {
+  securityCode: string;
+  onChange: InputChangeFunction;
+  validation: Validation;
+  inputs: HTMLInputElement[];
+}
 
-export default function CardSecurityCode({ inputs }: { inputs: HTMLInputElement[] }) {
-  const {
-    cardInfo: { securityCode },
-    cardInfoValidation: { securityCode: validation },
-    onChangeSecurityCode: onChange,
-  } = useContext(CardInfoContext);
-
+export default function CardSecurityCode({
+  securityCode,
+  onChange,
+  validation,
+  inputs,
+}: CardSecurityProps) {
   return (
     <InputContainer title="보안 코드(CVC/CVV)" validation={validation}>
       <div className="input-box w-25">

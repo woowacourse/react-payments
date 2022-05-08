@@ -9,7 +9,6 @@ function useCardInfoForm(
   addCard: (cardInfo: CardInfo) => void,
   editCard: (id: number, partialCardInfo: Partial<CardInfo>) => void
 ) {
-  const { resetCardInfo } = useContext(CardInfoContext);
   const navigate = useNavigate();
 
   const requestPattern = {
@@ -30,7 +29,6 @@ function useCardInfoForm(
 
     await requestFunction(...requestBody);
 
-    resetCardInfo();
     navigate(PATH.HOME);
   };
 
