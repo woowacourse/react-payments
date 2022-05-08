@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from '@emotion/styled';
 import { useFormContext } from '../../../hooks/useForm/useFormContext';
+import PositiveNumberInput from '../../shared/PositiveNumberInput';
+import { PasswordInput, passwordInputStyle } from './CardPasswordInput.styled';
 
 type Props = {
   position: number;
@@ -14,31 +15,16 @@ function CardPasswordInput(props: Props) {
   return (
     <div>
       {disabled ? (
-        <Input disabled placeholder="•" />
+        <PasswordInput disabled placeholder="•" />
       ) : (
-        <Input {...register(`password-${position}`, { maxLength: { value: 1 } })} />
+        <PositiveNumberInput
+          css={passwordInputStyle}
+          {...register(`password-${position}`, { maxLength: { value: 1 } })}
+        />
       )}
     </div>
   );
 }
 CardPasswordInput.displayName = 'CardPasswordInput';
-
-const Input = styled.input(() => ({
-  backgroundColor: '#ECEBF1',
-  height: '45px',
-  width: '43px',
-  borderRadius: '7px',
-  outline: 'none !important',
-  border: 'inherit',
-  fontSize: '21px',
-  textAlign: 'center',
-  marginRight: '7px',
-  '&:focus': {
-    boxShadow: 'none',
-  },
-  '&:disabled': {
-    backgroundColor: 'white',
-  },
-}));
 
 export default CardPasswordInput;
