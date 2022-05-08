@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '../../shared/components/card/Card';
 import ConfirmButton from '../components/card-form/confirm-button/ConfirmButton';
 import { useCardRegisterContext } from '../context';
@@ -8,12 +9,18 @@ import S from '../styled';
 
 function CardRegisterConfirm() {
   const { card } = useCardRegisterContext();
+  const navigate = useNavigate();
   const [disabled, setDisabled] = useState<boolean>(true);
   const { handleSubmit, register, watch } = useForm({ shouldValidateOnChange: true, shouldShowNativeHint: true });
 
   useEffect(() => {
     return watch('card-name', newValue => setDisabled(!newValue));
   }, [watch]);
+
+  useEffect(() => {
+    const empty = (Object.keys(card) as (keyof typeof card)[]).some(key => card[key].length === 0);
+    empty && navigate('/');
+  }, [navigate, card]);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>, result: UseFormSubmitResult) => {};
   return (
