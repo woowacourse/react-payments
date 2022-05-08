@@ -37,19 +37,17 @@
 ### step2
 
 - [ ] Storybook 상호 작용 테스트
-- [ ] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
-- [ ] Context API를 활용해 전역 상태 관리 및 계층 재구성
+- [x] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
+- [x] Context API를 활용해 전역 상태 관리 및 계층 재구성
 
 #### 카드 목록(main page)
 
 - [x] router를 이용하여 main page를 보여준다
 - [x] ➕ 을 클릭하면 카드 추가 화면으로 이동한다
 - [x] 추가된 카드 목록을 볼 수 있다
-- [ ] 스토리북 작성
 
 #### 카드 추가 확인
 
-- [ ] 입력이 완료된 카드가 보여진다
-- [ ] 카드 카테고리를 입력할 수 있다
-- [ ] '확인' 버튼을 누르면 카드 목록에 추가된다
-- [ ] 스토리북 작성
+- [x] 입력이 완료된 카드가 보여진다
+- [x] 카드 카테고리를 입력할 수 있다
+- [x] '확인' 버튼을 누르면 카드 목록에 추가된다

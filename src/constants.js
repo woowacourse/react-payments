@@ -13,14 +13,14 @@ export const CARD = {
 };
 
 export const CARD_COMPANY_LIST = [
-  { company: '안 카드', theme: 'blue' },
-  { company: '돔하디 카드', theme: 'red' },
-  { company: '마르코 카드', theme: 'green' },
-  { company: '록바 카드', theme: 'hot-pink' },
-  { company: '민초 카드', theme: 'mint' },
-  { company: '후이 카드', theme: 'pink' },
-  { company: '무비 카드', theme: 'orange' },
-  { company: '소피아 카드', theme: 'yellow' },
+  { id: 1, company: '안 카드', theme: 'blue' },
+  { id: 2, company: '돔하디 카드', theme: 'red' },
+  { id: 3, company: '마르코 카드', theme: 'green' },
+  { id: 4, company: '록바 카드', theme: 'hot-pink' },
+  { id: 5, company: '민초 카드', theme: 'mint' },
+  { id: 6, company: '후이 카드', theme: 'pink' },
+  { id: 7, company: '무비 카드', theme: 'orange' },
+  { id: 8, company: '소피아 카드', theme: 'yellow' },
 ];
 
 export const ERROR_MESSAGE = {

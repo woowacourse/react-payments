@@ -3,14 +3,14 @@ import Input from '../../input/Input';
 import { validNumber, validMaxLength, validRange } from '../../../validator';
 import { CARD } from '../../../constants';
 
-function AddCardForm({ card, updateCard, addCardList }) {
-  const handleSubmit = (event) => {
+function AddCardForm({ card, updateCard, handleCardForm }) {
+  const onSubmitCardForm = (event) => {
     event.preventDefault();
-    addCardList();
+    handleCardForm();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={onSubmitCardForm}>
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
@@ -147,8 +147,8 @@ AddCardForm.propTypes = {
     firstPassword: PropTypes.string,
     secondPassword: PropTypes.string,
   }).isRequired,
-  updateCard: PropTypes.func,
-  addCardList: PropTypes.func,
+  updateCard: PropTypes.func.isRequired,
+  handleCardForm: PropTypes.func.isRequired,
 };
 
 export default AddCardForm;

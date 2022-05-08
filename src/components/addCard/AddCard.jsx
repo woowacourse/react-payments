@@ -1,7 +1,7 @@
 import { useState, useContext, useReducer } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import uuid from 'react-uuid';
-import { CardsContext } from '../../store/cards';
+import { CardsContext } from '../../CardsStore';
 import { CARD_COMPANY_LIST } from '../../constants';
 import AddCardForm from './cardForm/AddCardForm';
 import Card from '../card/Card';
@@ -10,7 +10,9 @@ import CardCompany from './CardCompany';
 function AddCard() {
   const { setCards } = useContext(CardsContext);
   const [modalVisible, handleModal] = useReducer((visible) => !visible, true);
+  const navigate = useNavigate();
   const [card, setCard] = useState({
+    id: uuid(),
     company: '',
     theme: '',
     firstCardNumber: '',
@@ -31,8 +33,9 @@ function AddCard() {
     });
   };
 
-  const addCardList = () => {
+  const handleCardForm = () => {
     setCards((prevCards) => [...prevCards, card]);
+    navigate('/react-payments/register');
   };
 
   const handleCompany = (company, theme) => {
@@ -53,14 +56,14 @@ function AddCard() {
         <h2 className="page-title">카드 추가</h2>
       </div>
       <Card card={card} />
-      <AddCardForm card={card} updateCard={updateCard} addCardList={addCardList} />
+      <AddCardForm card={card} updateCard={updateCard} handleCardForm={handleCardForm} />
       {modalVisible && (
         <div className="modal-dimmed">
           <div className="modal">
             <div className="flex-wrap">
-              {CARD_COMPANY_LIST.map(({ company, theme }) => (
+              {CARD_COMPANY_LIST.map(({ id, company, theme }) => (
                 <CardCompany
-                  key={uuid()}
+                  key={id}
                   company={company}
                   theme={theme}
                   handleCompany={handleCompany}

@@ -1,8 +1,6 @@
 import { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import uuid from 'react-uuid';
-import { CardsContext } from '../../store/cards';
+import { CardsContext } from '../../CardsStore';
 import Card from '../card/Card';
 
 function CardList() {
@@ -15,8 +13,8 @@ function CardList() {
       </div>
       {cards.map((card) => (
         <>
-          <Card key={uuid()} card={card} />
-          <span className="card-nickname">법인카드</span>
+          <Card key={card.id} card={card} />
+          <span className="card-nickname">{card.category}</span>
         </>
       ))}
       <div className="card-box">
@@ -28,5 +26,4 @@ function CardList() {
   );
 }
 
-CardList.propTypes = {};
 export default CardList;
