@@ -17,6 +17,7 @@ function ExpiredPeriodInputContainer() {
     // 처음부터 2이상의 숫자를 입력한 경우
     if (value.length === 1 && Number(value) > 1) {
       input.value = `0${insertedNum}`;
+      input.setCustomValidity(''); // 이렇게 안하면 계속 invalid상태가 된다
       return;
     }
 
