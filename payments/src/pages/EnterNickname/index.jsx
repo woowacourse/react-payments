@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 import { UserListContext } from '../../context/userListContext';
 
 const EnterNickname = () => {
-  const { inputStates, updateInputStates } = useContext(UserContext);
-  const { userList, updateUserList } = useContext(UserListContext);
+  const { inputStates } = useContext(UserContext);
+  const { updateUserList } = useContext(UserListContext);
   const [nickName, setNickName] = useState('');
 
   const onChangeForm = (e) => {

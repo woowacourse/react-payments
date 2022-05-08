@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../../components/Card';
 import { UserListContext } from '../../context/userListContext';
@@ -8,10 +8,10 @@ import { initState } from '../../const';
 
 const CardList = () => {
   const { userList } = useContext(UserListContext);
-  const { inputStates, updateInputStates } = useContext(UserContext);
+  const { updateInputStates } = useContext(UserContext);
 
   const onclick = () => {
-    updateInputStates((prev) => (prev = initState));
+    updateInputStates(initState);
   };
 
   return (

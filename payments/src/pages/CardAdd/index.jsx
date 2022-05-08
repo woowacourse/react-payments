@@ -29,7 +29,7 @@ const CardAdd = () => {
           </Link>
           <p>카드 추가</p>
         </header>
-        <form className='card-add__form' onChange={onchange}>
+        <form className='card-add__form'>
           <Card state={inputStates} setVisible={setVisible} needBack={true} />
           <CardNumberInput state={cardNumber} updateForm={updateInputStates} />
           <ExpiredDateInput state={expiredDate} updateForm={updateInputStates} />
