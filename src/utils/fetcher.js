@@ -26,7 +26,6 @@ async function fetcher({
   return result;
 }
 
-// TODO: 은닉화된 카드번호를 저장...해야할듯 지금은 ㅠ
 function addCardFetcher(cardFormData) {
   return fetcher({
     method: 'POST',
