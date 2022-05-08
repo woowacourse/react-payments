@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 
-const Input = forwardRef(({ variant, ...props }, ref) => {
+const Input = forwardRef((props, ref) => {
   return <StyledInput ref={ref} {...props} />;
 });
 
@@ -45,6 +45,11 @@ const StyledInput = styled.input`
 
   &.input-password {
     width: 43px;
+  }
+
+  &.input-underline {
+    border: 0;
+    border-bottom: 1px solid black;
   }
 `;
 

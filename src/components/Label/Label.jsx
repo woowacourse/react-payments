@@ -7,13 +7,10 @@ const Label = ({ children }) => {
 
 const StyledLabel = styled.label`
   display: block;
+  margin-bottom: 8px;
 
   font-size: 12px;
   line-height: 14px;
-  vertical-align: top;
-
-  margin-bottom: 8px;
-
   color: #525252;
 
   .name-length {
