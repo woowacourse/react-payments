@@ -16,3 +16,7 @@ html, body {
 #card-form {
   background-color: #ffffff;
 }
+
+input.touched:invalid {
+  background-color: rgb(242, 161, 161);
+}
