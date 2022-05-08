@@ -14,7 +14,7 @@ function reducer(cardList, { type, data }) {
     PRELOAD: () => data,
     INSERT: () => {
       const { cardData } = data;
-      return cardList.concat({ ...cardData, id: new Date().getTime() });
+      return cardList.concat(cardData);
     },
     UPDATE: () => {
       const newCardList = [...cardList];
