@@ -7,17 +7,18 @@ const TextNavContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   width: 100%;
+  margin: auto;
 `;
 
 const S = {
   TextNavContainer,
 };
 
-function TextNav({ isAllCompleted, handleClick }) {
+function TextNav({ isAllCompleted, handleClick, text }) {
   return (
     <S.TextNavContainer>
       <TextButton hexColor={'#525252'} isVisible={isAllCompleted} handleClick={handleClick}>
-        다음
+        {text}
       </TextButton>
     </S.TextNavContainer>
   );
