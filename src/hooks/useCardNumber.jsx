@@ -5,7 +5,6 @@ import { ERROR_MESSAGE } from 'constants';
 // TODO: refactor
 export default function useCardNumber(initialValue) {
   const [cardNumber, setCardNumber] = useState(initialValue);
-  const [maskedCardNumber, setMaskedCardNumber] = useState(initialValue);
 
   const getComputedValue = (selectionStart, type = 'delete') => {
     const auxilaryNum = type === 'add' && 1;
@@ -40,16 +39,6 @@ export default function useCardNumber(initialValue) {
     );
   };
 
-  const getEncrytedNumbers = (numbers) => {
-    let maskedNumbers = numbers;
-
-    if (numbers.length > 8) {
-      maskedNumbers = numbers.slice(0, 8) + '•'.repeat(numbers.length - 8);
-    }
-
-    return maskedNumbers.match(/[\d•]{1,4}/g)?.join('-') ?? initialValue;
-  };
-
   const handleCardNumber = useCallback(
     (e) => {
       // TODO: data 네이밍 바꾸기
@@ -58,9 +47,6 @@ export default function useCardNumber(initialValue) {
 
       const numbers = getNumbers(data, selectionStart);
       setCardNumber(numbers);
-
-      const maskedNumbers = getEncrytedNumbers(numbers);
-      setMaskedCardNumber(maskedNumbers);
 
       e.target.setCustomValidity('');
     },
@@ -76,7 +62,6 @@ export default function useCardNumber(initialValue) {
 
   return {
     cardNumber,
-    maskedCardNumber,
     handleCardNumber,
     showCardNumberValidation,
   };

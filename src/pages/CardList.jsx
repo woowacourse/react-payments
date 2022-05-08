@@ -4,6 +4,8 @@ import { Card, EmptyCard, Header } from 'components';
 
 import { useGetCardList } from 'hooks';
 
+import getMaskedNumbers from 'utils/maskNumbers';
+
 function CardList() {
   const cardList = useGetCardList();
 
@@ -29,11 +31,11 @@ function CardList() {
                 <Card
                   bgColor={cardKind.color}
                   name={cardOwnerName}
-                  number={cardNumber}
+                  number={getMaskedNumbers(cardNumber)}
                   title={cardKind.title}
                   validDate={validDate}
                 />
-                <p>{cardNickname || '카드'}</p>
+                <Styled.CardNickname>{cardNickname}</Styled.CardNickname>
               </Styled.NicknamedCardContainer>
             )
           )}
@@ -56,6 +58,11 @@ const Styled = {
     display: flex;
     flex-direction: column;
     row-gap: 5px;
+  `,
+
+  CardNickname: styled.p`
+    font-size: 14px;
+    height: 14px;
   `,
 };
 

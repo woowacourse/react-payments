@@ -14,14 +14,14 @@ export default function useAddCard(nextPath) {
 
   const handler = async (e) => {
     e.preventDefault();
-    const nickname = e.target.nickname.value;
+    const cardNickname = e.target.nickname.value;
 
     const cardFormData = {
       cardNumber,
       cardOwnerName,
       validDate,
       cardKind,
-      nickname,
+      cardNickname,
     };
 
     try {

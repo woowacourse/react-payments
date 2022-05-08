@@ -21,12 +21,8 @@ function cardKindReducer(state, action) {
 }
 
 function CardContextProvider({ children }) {
-  const {
-    cardNumber,
-    maskedCardNumber,
-    handleCardNumber,
-    showCardNumberValidation,
-  } = useCardNumber('');
+  const { cardNumber, handleCardNumber, showCardNumberValidation } =
+    useCardNumber('');
   const { cardOwnerName, handleCardOwnerName, showCardOwnerNameValidation } =
     useCardOwnerName('');
   const { validDate, handleValidDate, showValidDateValidation } =
@@ -43,7 +39,6 @@ function CardContextProvider({ children }) {
     <CardContext.Provider
       value={{
         cardNumber,
-        maskedCardNumber,
         handleCardNumber,
         showCardNumberValidation,
         cardOwnerName,

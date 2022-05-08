@@ -10,6 +10,8 @@ import styled from 'styled-components';
 
 import { ERROR_MESSAGE, RULE } from 'constants';
 
+import getMaskedNumbers from 'utils/maskNumbers';
+
 function CardForm() {
   const { CVC, handleCVC, showCVCValidation } = useCVC('');
   const [firstPassword, handleFirstPassword] = useCardPassword('');
@@ -22,7 +24,6 @@ function CardForm() {
 
   const {
     cardNumber,
-    maskedCardNumber,
     handleCardNumber,
     showCardNumberValidation,
     cardOwnerName,
@@ -50,7 +51,7 @@ function CardForm() {
           maxLength="19"
           pattern=".{17,19}"
           title={ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH}
-          value={maskedCardNumber}
+          value={getMaskedNumbers(cardNumber, '')}
           onBlur={showCardNumberValidation}
           onChange={handleCardNumber}
           required

@@ -16,8 +16,10 @@ import {
 
 import { ReactComponent as Arrow } from 'assets/arrow.svg';
 
+import getMaskedNumbers from 'utils/maskNumbers';
+
 function AddCard() {
-  const { maskedCardNumber, cardOwnerName, validDate, cardKind, setCardKind } =
+  const { cardNumber, cardOwnerName, validDate, cardKind, setCardKind } =
     useContext(CardContext);
   const [isCardPickModal, toggleCardPickModal] = useReducer(
     (visible) => !visible,
@@ -37,7 +39,7 @@ function AddCard() {
         bgColor={cardKind.color}
         size="medium"
         name={cardOwnerName}
-        number={maskedCardNumber}
+        number={getMaskedNumbers(cardNumber, '')}
         onClickFunc={toggleCardPickModal}
         title={cardKind.title}
         validDate={validDate}
