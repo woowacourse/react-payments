@@ -1,23 +1,31 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import AddCardContext from '../../AddCardContext';
 
-function Card() {
+function Card({ big }) {
   const { card } = useContext(AddCardContext);
 
-  const isEmptyCard = Object.values(card).every((value) => value === '');
+  const isEmptyCard = () => Object.values(card).every((value) => value === '');
+
+  const getCardWrapperClassName = () => {
+    if (big) return 'big-card';
+    return isEmptyCard() ? 'empty-card' : 'small-card';
+  };
 
   return (
     <div className="card-box">
-      <div className={isEmptyCard ? 'empty-card' : 'small-card'}>
+      <div className={getCardWrapperClassName()}>
         <div className="card-top">
-          <span className="card-text">안카드</span>
+          <span className={big ? 'card-text__big' : 'card-text'}>안카드</span>
         </div>
         <div className="card-middle">
-          <div className="small-card__chip" />
+          <div className={big ? 'big-card__chip' : 'small-card__chip'} />
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">{`${card.firstCardNumber} ${card.secondCardNumber}`}</span>
+            <span
+              className={big ? 'card-text__big' : 'card-text'}
+            >{`${card.firstCardNumber} ${card.secondCardNumber}`}</span>
             <input
               className="card-text-dot"
               type="password"
@@ -33,8 +41,10 @@ function Card() {
           </div>
         </div>
         <div className="card-bottom__info">
-          <span className="card-text name-wrap">{card.ownerName || 'NAME'}</span>
-          <span className="card-text">{`${card.expireMonth || 'MM'}/${
+          <span className={big ? 'card-text__big name-wrap' : 'card-text name-wrap'}>
+            {card.ownerName || 'NAME'}
+          </span>
+          <span className={big ? 'card-text__big' : 'card-text'}>{`${card.expireMonth || 'MM'}/${
             card.expireYear || 'YY'
           }`}</span>
         </div>
@@ -42,5 +52,13 @@ function Card() {
     </div>
   );
 }
+
+Card.propTypes = {
+  big: PropTypes.bool,
+};
+
+Card.defaultProps = {
+  big: false,
+};
 
 export default Card;
