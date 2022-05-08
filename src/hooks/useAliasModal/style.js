@@ -18,7 +18,6 @@ export const TitleStyled = styled.h1`
 
 export const InputStyled = styled.input`
   padding: 6px;
-  margin-top: 33px;
   text-align: center;
   font-size: 18px;
   outline: none;

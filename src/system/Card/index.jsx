@@ -6,15 +6,15 @@ import CardChip from './CardChip';
 import CardNumber from './CardNumber';
 import CardRestInfo from './CardRestInfo';
 
-const Card = ({ children, onClick, color }) => {
-  const [cardCompanyName, cardNumber, cardOwner, cardExpiration] = children;
+const Card = ({ size, onClick, children }) => {
+  const [cardCompanyName, cardNumber, cardOwner, cardExpiration, cardCompanyColor] = children;
 
   return (
-    <CardWrapperStyled onClick={onClick} color={color}>
-      <CardCompanyName>{cardCompanyName}</CardCompanyName>
-      <CardChip />
-      <CardNumber>{cardNumber}</CardNumber>
-      <CardRestInfo>{{ cardOwner, cardExpiration }}</CardRestInfo>
+    <CardWrapperStyled size={size} color={cardCompanyColor} onClick={onClick} >
+      <CardCompanyName size={size}>{cardCompanyName}</CardCompanyName>
+      <CardChip size={size} />
+      <CardNumber size={size}>{cardNumber}</CardNumber>
+      <CardRestInfo size={size}>{{ cardOwner, cardExpiration }}</CardRestInfo>
     </CardWrapperStyled>
   );
 };
