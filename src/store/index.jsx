@@ -1,19 +1,5 @@
 const initialState = {
-  cards: [
-    // sample
-    {
-      id: '111',
-      name: '',
-      number: '',
-      ownerName: '',
-      dueDate: '',
-      company: {
-        id: '',
-        color: '',
-        name: '',
-      },
-    },
-  ],
+  cards: [],
   dimensions: { width: 0, height: 0 },
   cardOwnerName: 'NAME',
   cardNumber: '',
@@ -54,7 +40,7 @@ function reducer(state, action) {
     case 'ADD_CARD':
       return {
         ...state,
-        cards: [...state.cards, action.cards],
+        cards: [...state.cards, action.card],
       };
     case 'DIMENSIONS':
       return { ...state, dimensions: action.dimensions };

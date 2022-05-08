@@ -53,6 +53,37 @@ const Input = styled.input`
   }
 `;
 
+const UnderLineInputWrapperForm = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${props => props.width || '100%'};
+  margin-top: 0.375rem;
+  color: ${props => props.color};
+  border-radius: 0.25rem;
+`;
+
+const underLineInput = styled.input`
+  height: 45px;
+  min-width: 32px;
+  width: 100%;
+  text-align: center;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-top-width: 0;
+  border-bottom-width: 1;
+
+  &::placeholder {
+    color: ${PLACEHOLDER_PRIMARY_COLOR};
+  }
+  &:focus {
+    outline: 1px solid ${PLACEHOLDER_PRIMARY_COLOR};
+  }
+  &:disabled {
+    color: ${FONT_PRIMARY_COLOR};
+  }
+`;
+
 const DotContainer = styled.div`
   height: 45px;
   width: 100%;
@@ -68,4 +99,13 @@ const Span = styled.span`
   width: ${props => props.width};
 `;
 
-export { InputContainer, InputWrapperForm, Label, Input, DotContainer, Span };
+export {
+  InputContainer,
+  InputWrapperForm,
+  Label,
+  Input,
+  DotContainer,
+  Span,
+  UnderLineInputWrapperForm,
+  underLineInput,
+};
