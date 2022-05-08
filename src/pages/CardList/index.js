@@ -4,7 +4,7 @@ import { Layout } from '../index.styled';
 import useAPI from '../../hooks/useAPI';
 import Header from '../../components/Header';
 import Card from '../../components/Card';
-import { ENDPOINT, METHODS } from '../../constant';
+import { ENDPOINT, METHODS, PATH } from '../../constant';
 import * as Styled from './index.styled';
 
 const CardList = () => {
@@ -25,7 +25,7 @@ const CardList = () => {
   }, []);
 
   const onClickAddCardButton = () => {
-    navigate('/addCard');
+    navigate(PATH.ADD_CARD);
   };
 
   return (
