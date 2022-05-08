@@ -1,5 +1,4 @@
 import Button from '.';
-import 'index.css';
 
 export default {
   title: 'Component/@Common/Button',

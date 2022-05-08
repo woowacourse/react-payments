@@ -1,6 +1,5 @@
 import FieldSet from '.';
 import TextField from '../TextField';
-import 'index.css';
 
 export default {
   title: 'Component/@Common/FieldSet',
