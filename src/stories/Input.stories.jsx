@@ -1,8 +1,7 @@
 import { Input } from 'components';
 
 export default {
-  title: 'Example/Input',
-  component: Input,
+  title: 'Components/Input',
 };
 
 const Template = (args) => <Input {...args} />;

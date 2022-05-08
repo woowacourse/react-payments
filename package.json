@@ -65,6 +65,7 @@
     "prop-types": "^15.8.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "storybook-react-context": "^0.6.0",
     "webpack": "^5.72.0"
   },
   "homepage": "https://al-bur.github.io/react-payments/"

@@ -1,8 +1,7 @@
 import { Button } from 'components';
 
 export default {
-  title: 'Example/Button',
-  component: Button,
+  title: 'Components/Button',
   argTypes: {
     bgColor: { control: 'color' },
     shape: {

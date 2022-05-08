@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import { Button, CVCTooltip, Input } from 'components';
 
 export default {
-  title: 'Example/MixedComponents',
-  component: [Input, Button],
-  argTypes: {},
+  title: 'MixedComponents/MixedComponents',
 };
 
 const CardOwnerNameLength = styled.div`
