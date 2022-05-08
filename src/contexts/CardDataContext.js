@@ -6,6 +6,7 @@ import {
   requestInsertCardData,
   requestUpdateCardData,
 } from 'api';
+import { CARD_EDITOR_MODE } from 'constants/';
 
 const CardDataContext = createContext();
 
@@ -36,7 +37,7 @@ function reducer(cardList, { type, data }) {
 }
 
 function CardDataContextProvider({ children }) {
-  const [currentEditIndex, setEditIndex] = useState(-1);
+  const [currentEditIndex, setEditIndex] = useState(CARD_EDITOR_MODE.NEW);
   const [cardList, dispatch] = useReducer(reducer, []);
   const value = useMemo(
     () => ({ cardList, currentEditIndex, dispatch, setEditIndex }),
