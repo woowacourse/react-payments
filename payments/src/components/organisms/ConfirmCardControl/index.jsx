@@ -4,7 +4,10 @@ const ConfirmCardControl = ({ closeModal, removeCard }) => {
   return (
     <div className="confirm-card-control">
       <div className="button-container">
-        <button class="confirim-card-control-remove--btn" onClick={removeCard}>
+        <button
+          className="confirim-card-control-remove--btn"
+          onClick={removeCard}
+        >
           삭제
         </button>
       </div>
