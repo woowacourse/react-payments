@@ -25,8 +25,8 @@ const Input = ({
       type={type}
       underLine={underLine}
       placeholder={placeHolder}
-      width={`${width}px`}
-      height={`${height}px`}
+      width={width}
+      height={height}
       ref={innerRef}
       {...rest}
       className="input-box"
