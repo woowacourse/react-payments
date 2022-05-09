@@ -76,7 +76,9 @@ function useCardDataContext() {
 
     requestErrorHandler(response)({
       SUCCESS: (result) => dispatch({ type: 'INSERT', data: { cardData: result } }),
-      FAIL: (errorMessage) => alert(errorMessage),
+      FAIL: (errorMessage) => {
+        throw new Error(errorMessage);
+      },
     });
   };
 
@@ -86,7 +88,9 @@ function useCardDataContext() {
 
     requestErrorHandler(response)({
       SUCCESS: (result) => dispatch({ type: 'UPDATE', data: { index, cardData: result } }),
-      FAIL: (errorMessage) => alert(errorMessage),
+      FAIL: (errorMessage) => {
+        throw new Error(errorMessage);
+      },
     });
   };
 
@@ -96,7 +100,9 @@ function useCardDataContext() {
 
     requestErrorHandler(response)({
       SUCCESS: () => dispatch({ type: 'DELETE', data: { index } }),
-      FAIL: (errorMessage) => alert(errorMessage),
+      FAIL: (errorMessage) => {
+        throw new Error(errorMessage);
+      },
     });
   };
 

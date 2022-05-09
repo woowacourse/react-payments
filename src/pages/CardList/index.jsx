@@ -43,7 +43,13 @@ function CardList() {
   const onClickDeleteButton = async () => {
     if (!confirm('정말 해당 카드를 제거하시겠습니까?')) return;
 
-    await handleDeleteCardData(focusCardIndex);
+    try {
+      await handleDeleteCardData(focusCardIndex);
+    } catch (error) {
+      alert(error.message);
+      return;
+    }
+
     handleEditModalClose();
   };
 

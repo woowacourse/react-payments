@@ -78,9 +78,14 @@ function CardEditor() {
     const newCardData = { ...state };
     delete newCardData.isComplete;
 
-    CARD_EDITOR_MODE.NEW === currentEditIndex
-      ? await handleInsertCardData(newCardData)
-      : await handleUpdateCardData(currentEditIndex, newCardData);
+    try {
+      CARD_EDITOR_MODE.NEW === currentEditIndex
+        ? await handleInsertCardData(newCardData)
+        : await handleUpdateCardData(currentEditIndex, newCardData);
+    } catch (error) {
+      alert(error.message);
+      return;
+    }
 
     setPageLocation(PAGE_LIST.CARD_UPDATED);
   };
