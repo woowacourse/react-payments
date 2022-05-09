@@ -62,9 +62,7 @@ const useCardForm = ({ cardFormSchema }, path = undefined) => {
     navigate(path);
   };
 
-  const onSubmitAction = async (cardInfo) => {
-    console.log(cardInfo);
-
+  const onSubmitAction = async () => {
     navigateOnSubmit();
   };
 
