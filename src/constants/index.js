@@ -9,6 +9,13 @@ export const ERROR_MESSAGE = {
   INVALID_VALID_DATE: '유효한 날짜를 입력해주세요!',
 };
 
+export const PATH = {
+  ADD_CARD: '/add-card',
+  ADD_CARD_COMPLETE: '/add-card-complete',
+  ALL: '*',
+  CARD_LIST: '/card-list',
+};
+
 export const RULE = {
   CARD_NUMBER_MAX_LENGTH: 16,
   CARD_OWNER_NAME_MAX_LENGTH: 30,

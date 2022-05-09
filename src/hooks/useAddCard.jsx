@@ -4,11 +4,11 @@ import { useNavigateTo } from 'hooks';
 
 import { CardContext } from 'contexts/CardContext';
 
-import { ERROR_MESSAGE } from 'constants';
+import { ERROR_MESSAGE, PATH } from 'constants';
 import { addCardFetcher } from 'utils/fetcher';
 
 export default function useAddCard() {
-  const navigateToHome = useNavigateTo('/card-list');
+  const navigateToHome = useNavigateTo(PATH.CARD_LIST);
   const { cardNumber, cardOwnerName, validDate, cardKind } =
     useContext(CardContext);
 

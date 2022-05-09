@@ -13,6 +13,7 @@ import {
 import { CardContext } from 'contexts/CardContext';
 
 import { ReactComponent as Arrow } from 'assets/arrow.svg';
+import { PATH } from 'constants';
 import getMaskedNumbers from 'utils/maskNumbers';
 
 import styled from 'styled-components';
@@ -28,7 +29,7 @@ function AddCard() {
   return (
     <Styled.Root>
       <Header title="카드 추가">
-        <Link to="/card-list">
+        <Link to={PATH.CARD_LIST}>
           <Button size="small">
             <Arrow />
           </Button>

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as Plus } from 'assets/plus.svg';
+import { PATH } from 'constants';
 
 import styled from 'styled-components';
 
@@ -8,7 +9,7 @@ function EmptyCard() {
   const navigate = useNavigate();
 
   return (
-    <Styled.Root onClick={() => navigate('/add-card')}>
+    <Styled.Root onClick={() => navigate(PATH.ADD_CARD)}>
       <Plus />
     </Styled.Root>
   );

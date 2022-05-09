@@ -5,6 +5,8 @@ import { CardContextProvider } from 'contexts/CardContext';
 
 import { AddCard, AddCardComplete, CardList } from 'pages';
 
+import { PATH } from 'constants';
+
 import GlobalStyle from 'GlobalStyle';
 
 function App() {
@@ -13,10 +15,13 @@ function App() {
       <GlobalStyle />
       <CardContextProvider>
         <Routes>
-          <Route path="/add-card" element={<AddCard />} />
-          <Route path="/add-card-complete" element={<AddCardComplete />} />
-          <Route path="/card-list" element={<CardList />} />
-          <Route path="*" element={<Navigate replace to="/card-list" />} />
+          <Route path={PATH.ADD_CARD} element={<AddCard />} />
+          <Route path={PATH.ADD_CARD_COMPLETE} element={<AddCardComplete />} />
+          <Route path={PATH.CARD_LIST} element={<CardList />} />
+          <Route
+            path={PATH.ALL}
+            element={<Navigate replace to={PATH.CARD_LIST} />}
+          />
         </Routes>
       </CardContextProvider>
     </>

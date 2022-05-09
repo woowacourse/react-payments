@@ -6,7 +6,7 @@ import { useCardPassword, useCVC, useNavigateTo } from 'hooks';
 
 import { CardContext } from 'contexts/CardContext';
 
-import { ERROR_MESSAGE, RULE } from 'constants';
+import { ERROR_MESSAGE, PATH, RULE } from 'constants';
 import getMaskedNumbers from 'utils/maskNumbers';
 
 import styled from 'styled-components';
@@ -19,7 +19,7 @@ function CardForm() {
     (visible) => !visible,
     false
   );
-  const handleNavigate = useNavigateTo('/add-card-complete');
+  const handleNavigate = useNavigateTo(PATH.ADD_CARD_COMPLETE);
 
   const {
     cardNumber,
