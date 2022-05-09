@@ -3,6 +3,7 @@
   display: inline-block;
   max-width: 500px;
   padding: 2rem;
+
   header {
     display: flex;
     gap: 10px;
@@ -28,16 +29,7 @@
     height: 90%;
   }
 
-  .next--button {
-    position: relative;
-    display: flex;
-    justify-content: end;
-    top: 127px;
-    button {
-      text-decoration: none;
-      border: none;
-      background-color: inherit;
-      color: #04c09e;
-    }
+  a {
+    text-decoration: none;
   }
 }

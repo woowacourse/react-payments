@@ -20,6 +20,15 @@ const CardAdd = () => {
 
   const { cardNumber, expiredDate, ownerName, secureCode, password } = inputStates;
 
+  const onClickSubmit = (e) => {
+    try {
+      nextButtonClick(e);
+    } catch (error) {
+      alert(error.message);
+      e.preventDefault();
+    }
+  };
+
   return (
     <>
       <div className='card-add'>
@@ -36,7 +45,9 @@ const CardAdd = () => {
           <OwnerNameInput state={ownerName} updateForm={updateInputStates} />
           <SecureCodeInput state={secureCode} updateForm={updateInputStates} />
           <CardPasswordInput state={password} updateForm={updateInputStates} />
-          <NextButton onClick={nextButtonClick} />
+          <Link to={'/enterNickname'} onClick={onClickSubmit}>
+            <NextButton />
+          </Link>
         </form>
       </div>
       <CardColorPicker visible={visible} setVisible={setVisible} updateForm={updateInputStates} />

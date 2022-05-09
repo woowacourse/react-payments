@@ -1,21 +1,9 @@
 import Button from '../elements/Button';
-import { Link } from 'react-router-dom';
 import './index.scss';
-const NextButton = ({ onClick }) => {
-  const handleOnClick = (e) => {
-    try {
-      onClick(e);
-    } catch (error) {
-      alert(error.message);
-      e.preventDefault();
-    }
-  };
-
+const NextButton = () => {
   return (
     <div className='next--button'>
-      <Link to={'/enterNickname'} onClick={handleOnClick}>
-        <Button>다음</Button>
-      </Link>
+      <Button>다음</Button>
     </div>
   );
 };
