@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import AliasModal from './AliasModal';
 
-const useAliasModal = ({ afterClick }) => {
+const useAliasModal = (afterClick) => {
   const [visible, setVisible] = useState(false);
   const [card, setCard] = useState([]);
 

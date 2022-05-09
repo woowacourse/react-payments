@@ -1,8 +1,6 @@
 import React from 'react';
 
-import FlexSpaceBetween from '../../../components/FlexSpaceBetween';
-
-import { CardOwnerStyled, CardExpirationStyled } from './style';
+import { CardRestWrapperStyled, CardOwnerStyled, CardExpirationStyled } from './style';
 
 const CardRestInfo = ({ size, children }) => {
   const { cardOwner, cardExpiration } = children;
@@ -13,10 +11,10 @@ const CardRestInfo = ({ size, children }) => {
     cardExpiration[0] || cardExpiration[1] ? cardExpiration.join('/') : 'MM/YY';
 
   return (
-    <FlexSpaceBetween>
+    <CardRestWrapperStyled>
       <CardOwnerStyled size={size}>{cardOwner}</CardOwnerStyled>
       <CardExpirationStyled size={size}>{cardExpirationContent()}</CardExpirationStyled>
-    </FlexSpaceBetween>
+    </CardRestWrapperStyled>
   );
 };
 

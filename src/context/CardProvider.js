@@ -9,6 +9,8 @@ import TYPING_CARD_CVC from '../system/CardCvc/actions';
 import TYPING_CARD_PASSWORD from '../system/CardPassword/action';
 import { SHOW_MODAL, HIDE_MODAL, SELECT_CARD_COMPANY } from '../pages/CardAddition/CardListModal/action';
 import ADD_CARD from '../pages/CardAddition/action';
+import UPDATE_CARD_ALIAS from '../hooks/useAliasModal/action';
+import DELETE_CARD from '../pages/Home/Cards/action';
 
 const initialState = {
   cardNumber: ['', '', '', ''],
@@ -97,6 +99,27 @@ const reducer = (state, action) => {
         ...state,
         cards: [...state.cards, action.card],
       };
+    }
+
+    case UPDATE_CARD_ALIAS: {
+      const cards = [...state.cards];
+      const index = cards.findIndex((card) => card[1].join('') === action.cardNumber.join(''));
+      let card = [...cards[index]];
+
+      card[5] = action.alias;
+      cards[index] = card;
+
+      return {
+        ...state,
+        cards,
+      };
+    }
+
+    case DELETE_CARD: {
+      return {
+        ...state,
+        cards: state.cards.filter((card) => card[1] !== action.cardNumber),
+      }
     }
 
     default:

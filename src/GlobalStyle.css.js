@@ -29,6 +29,8 @@ const GlobalStyle = createGlobalStyle`
     --dimmer-background-color: rgba(0, 0, 0, 0.5);
     --toast-background-color: #fff;
     --card-alias-color: #383838;
+    --card-alias-bold-color: #575757;
+    --add-button-background-color: #e5e5e5;
   }
 
   body {

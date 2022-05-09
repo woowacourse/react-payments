@@ -18,7 +18,7 @@ import { isEmpty } from '../../utils';
 import { CARD_SIZE_UNIT } from '../../constants';
 
 const AliasModal = ({ visible, afterClick, children }) => {
-  const [alias, setAlias] = useState('');
+  const [alias, setAlias] = useState(children[5] || '');
   const dispatch = useCardDispatch();
 
   const onChangeInput = useCallback((e) => {
@@ -26,7 +26,7 @@ const AliasModal = ({ visible, afterClick, children }) => {
   }, []);
 
   const onClickButton = useCallback(() => {
-    dispatch({ type: UPDATE_CARD_ALIAS, cardId: children[5], alias });
+    dispatch({ type: UPDATE_CARD_ALIAS, cardNumber: children[1], alias });
     afterClick();
   });
 
@@ -46,7 +46,7 @@ const AliasModal = ({ visible, afterClick, children }) => {
       <FlexCenter>
         <InputStyled value={alias} onChange={onChangeInput} />
       </FlexCenter>
-      <Button marginTop='20px' disabled={isEmpty(alias)} color={children[4]} onClick={onClickButton}>확인</Button>
+      <Button type='button' marginTop='20px' disabled={isEmpty(alias)} color={children[4]} onClick={onClickButton}>확인</Button>
     </WrapperStyled>
   );
 };

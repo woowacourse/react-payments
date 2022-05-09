@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import useCardState from '../../hooks/useCardState';
 import useCardDispatch from '../../hooks/useCardDispatch';
@@ -29,9 +30,12 @@ const CardAddition = () => {
     [cardCompanyName],
   );
 
-  const [AliasModal, onModal] = useAliasModal(() => { });
+  const navigate = useNavigate();
+  const [AliasModal, onModal, offModal] = useAliasModal(() => {
+    offModal();
+    navigate('/');
+  });
 
-  const cards = useCardState((state) => state.cards);
   const cardCompanyColor = useCardState((state) => state.cardCompanyColor);
   const cardNumber = useCardState((state) => state.cardNumber);
   const cardOwner = useCardState((state) => state.cardOwner);
@@ -45,7 +49,7 @@ const CardAddition = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const card = [cardCompanyName, cardNumber, cardOwner, cardExpiration, cardCompanyColor, cards.length];
+    const card = [cardCompanyName, cardNumber, cardOwner, cardExpiration, cardCompanyColor];
 
     dispatch({ type: ADD_CARD, card });
     onModal(card);
