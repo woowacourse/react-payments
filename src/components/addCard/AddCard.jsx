@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import uuid from 'react-uuid';
 import { CardsContext } from '../../context/CardsProvider';
 import { CARD_COMPANY_LIST } from '../../constant/index';
-import AddCardForm from './cardForm/CardForm';
+import CardForm from './cardForm/CardForm';
 import Card from '../card/Card';
 import CardCompany from './cardCompany/CardCompany';
 
@@ -33,7 +33,7 @@ function AddCard() {
     });
   };
 
-  const handleCardForm = () => {
+  const handleCardFormSubmit = () => {
     setCards((prevCards) => [...prevCards, card]);
     navigate('/react-payments/register');
   };
@@ -56,7 +56,7 @@ function AddCard() {
         <h2 className="page-title">카드 추가</h2>
       </div>
       <Card card={card} />
-      <AddCardForm card={card} updateCard={updateCard} handleCardForm={handleCardForm} />
+      <CardForm card={card} updateCard={updateCard} handleCardFormSubmit={handleCardFormSubmit} />
       {modalVisible && (
         <div className="modal-dimmed">
           <div className="modal">

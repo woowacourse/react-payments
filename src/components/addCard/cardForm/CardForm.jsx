@@ -3,10 +3,10 @@ import Input from '../../input/Input';
 import { validNumber, validMaxLength, validRange } from '../../../validation/index';
 import { CARD } from '../../../constant';
 
-function CardForm({ card, updateCard, handleCardForm }) {
+function CardForm({ card, updateCard, handleCardFormSubmit }) {
   const onSubmitCardForm = (event) => {
     event.preventDefault();
-    handleCardForm();
+    handleCardFormSubmit();
   };
 
   const moveFocus = (form, currentElement, direction) => {
@@ -170,7 +170,7 @@ CardForm.propTypes = {
     secondPassword: PropTypes.string,
   }).isRequired,
   updateCard: PropTypes.func.isRequired,
-  handleCardForm: PropTypes.func.isRequired,
+  handleCardFormSubmit: PropTypes.func.isRequired,
 };
 
 export default CardForm;
