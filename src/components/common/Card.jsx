@@ -67,7 +67,6 @@ function Card({
   validDate,
   ...props
 }) {
-  // TODO: 네이밍 refactor
   const cardStyle = getCardSize(size);
 
   return (

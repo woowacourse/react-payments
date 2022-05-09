@@ -11,7 +11,6 @@ import styled from 'styled-components';
 import getMaskedNumbers from 'utils/maskNumbers';
 
 function AddCardComplete() {
-  // TODO: hook으로 하는 게 맞을까?
   const handleAddCard = useAddCard();
   const { cardNumber, cardKind, cardOwnerName, validDate } =
     useContext(CardContext);

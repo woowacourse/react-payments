@@ -2,8 +2,6 @@ import styled from 'styled-components';
 
 import { Button } from 'components';
 
-// TODO: 성능 최적화 영상 찍으면서 비교해보기
-// TODO: 컴포넌트 네이밍 다시하기
 function CardKindButton({ buttonBgColor, cardTitle, onClickFunc }) {
   const setCardKind = () => {
     onClickFunc({ type: 'SET_CARD_COLOR', color: buttonBgColor });

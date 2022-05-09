@@ -8,7 +8,6 @@ function EmptyCard() {
   const navigate = useNavigate();
 
   return (
-    // TODO: 이것도 훅으로 만들어야할까?...지금까지는 계속 비즈니스 로직을 hook으로 분리했었는데..
     <Styled.Root onClick={() => navigate('/add-card')}>
       <Plus />
     </Styled.Root>

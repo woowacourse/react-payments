@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react';
 
 import { ERROR_MESSAGE } from 'constants';
 
-// TODO: refactor
 export default function useCardNumber(initialValue) {
   const [cardNumber, setCardNumber] = useState(initialValue);
 
@@ -18,7 +17,6 @@ export default function useCardNumber(initialValue) {
   };
 
   const getNumbers = (data, selectionStart) => {
-    // TODO: 값 삭제시 커서 맨 끝으로 가는 거 수정하기
     if (data === null) {
       const computedValue = getComputedValue(selectionStart);
       return (
@@ -41,7 +39,6 @@ export default function useCardNumber(initialValue) {
 
   const handleCardNumber = useCallback(
     (e) => {
-      // TODO: data 네이밍 바꾸기
       const { selectionStart } = e.target;
       const { data } = e.nativeEvent;
 

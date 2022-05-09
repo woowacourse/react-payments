@@ -2,7 +2,6 @@ import { createContext, useReducer } from 'react';
 
 import { useCardNumber, useCardOwnerName, useValidDate } from 'hooks';
 
-// TODO: provider와 context 파일 나눠야하는지 고민하기
 const CardContext = createContext();
 
 function cardKindReducer(state, action) {
@@ -31,9 +30,6 @@ function CardContextProvider({ children }) {
     color: '#ADD8E6',
     title: '공원 카드',
   });
-
-  // TODO: 값 리셋하는 함수 필요
-  const reset = () => {};
 
   return (
     <CardContext.Provider

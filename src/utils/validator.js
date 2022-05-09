@@ -1,5 +1,3 @@
-// TODO: refactor
-
 const validator = ({ validatorConditions, response, result }) => {
   validatorConditions.forEach(({ checker, errorMessage }) => {
     if (checker({ response, result })) {

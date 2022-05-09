@@ -11,7 +11,6 @@ export default function useCardOwnerName(initialValue) {
     setCardOwnerName(target.value);
   }, []);
 
-  // TODO: useCallback의 효율성 생각해보자
   const showCardOwnerNameValidation = ({ target }) => {
     if (target.validity.patternMismatch) {
       target.setCustomValidity(ERROR_MESSAGE.INVALID_CARD_OWNER_NAME);
