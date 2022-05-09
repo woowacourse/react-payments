@@ -55,7 +55,7 @@ function CardNumber({ cardNumbers, isCorrectCardNumber }) {
             data-testid="cardNoA"
           />
         </Span>
-        <Span>-</Span>
+        <Span padding="8px">-</Span>
         <Span>
           <Input
             ref={cardNoBRef}
@@ -69,7 +69,7 @@ function CardNumber({ cardNumbers, isCorrectCardNumber }) {
             data-testid="cardNoB"
           />
         </Span>
-        <Span>-</Span>
+        <Span padding="8px">-</Span>
         <Span>
           <Input
             ref={cardNoCRef}
@@ -83,7 +83,7 @@ function CardNumber({ cardNumbers, isCorrectCardNumber }) {
             data-testid="cardNoC"
           />
         </Span>
-        <Span>-</Span>
+        <Span padding="8px">-</Span>
         <Span>
           <Input
             ref={cardNoDRef}

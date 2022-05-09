@@ -32,7 +32,7 @@ function DueDate({ dimensions, cardDate }) {
           placeholder="MM"
           dimensions={dimensions}
         />
-        <Span>/</Span>
+        <Span padding="8px">/</Span>
         <Calendar
           itemList={years}
           item={cardDate.year}
