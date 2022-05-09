@@ -8,7 +8,7 @@ const dummyCardList: Array<Card> = [
     ownerName: 'THE OWNER',
     cvc: '312',
     password: '12',
-    cardName: '아부라',
+    cardName: '나의카드1',
   },
   {
     cardNumber: '1234123412341234',
@@ -16,37 +16,8 @@ const dummyCardList: Array<Card> = [
     ownerName: 'THE OWNER',
     cvc: '312',
     password: '12',
-    cardName: '카타부라',
-  },
-  {
-    cardNumber: '1234123412341234',
-    expiredPeriod: '1234',
-    ownerName: 'THE OWNER',
-    cvc: '312',
-    password: '12',
-    cardName: '카타부라',
-  },
-  {
-    cardNumber: '1234123412341234',
-    expiredPeriod: '1234',
-    ownerName: 'THE OWNER',
-    cvc: '312',
-    password: '12',
-  },
-  {
-    cardNumber: '1234123412341234',
-    expiredPeriod: '1234',
-    ownerName: 'THE OWNER',
-    cvc: '312',
-    password: '12',
-  },
-  {
-    cardNumber: '1234123412341234',
-    expiredPeriod: '1234',
-    ownerName: 'THE OWNER',
-    cvc: '312',
-    password: '12',
-  },
+    cardName: '나의카드2',
+  }
 ];
 
 export type State = {
