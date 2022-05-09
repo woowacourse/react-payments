@@ -41,8 +41,11 @@ const ModalInner = styled.div`
   margin: 0 auto;
   padding: 16px;
   z-index: 1000;
-  overflow-y: auto;
   animation: slide-up 0.2s 0s ease;
+
+  &:hover {
+    overflow-y: auto;
+  }
 
   @keyframes slide-up {
     0% {
