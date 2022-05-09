@@ -2,7 +2,6 @@ import { Card, EmptyCard, Header, ModalPortal } from 'components';
 
 import { useGetCardList } from 'hooks';
 
-// import { ReactComponent as Spinner } from 'assets/spinner.svg';
 import Loading from 'assets/loading.png';
 import getMaskedNumbers from 'utils/maskNumbers';
 
