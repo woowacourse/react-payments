@@ -10,11 +10,11 @@ import {
   checkUniqueCard,
   isNumberInRange,
 } from './validation';
-import { DEFAULT_CARD_INFO } from '../../constants';
+import { DEFAULT_CARD_INFO, MAX_LENGTH } from '../../constants';
 import { CardContext, PageContext } from '../../context';
 import useInputs from '../../hooks';
 
-function InputForm() {
+function CardBasicInfoForm() {
   const { cardList, setCardInput } = useContext(CardContext);
   const { setPage } = useContext(PageContext);
   const [isComplete, setIsComplete] = useState(false);
@@ -80,7 +80,7 @@ function InputForm() {
             type={stateKey === 'firstColumn' || stateKey === 'secondColumn' ? 'text' : 'password'}
             value={cardNumber[stateKey]}
             onChange={e => handleChangeInputs(e, isNumberInRange, 'cardNumber', stateKey)}
-            maxLength={4}
+            maxLength={MAX_LENGTH.CARD_NUMBER}
             required
             data-testid={stateKey}
             ref={nodePushRef.bind(this, stateKey)}
@@ -96,7 +96,7 @@ function InputForm() {
             placeholder={stateKey === 'month' ? 'MM' : 'YY'}
             value={expirationDate[stateKey]}
             onChange={e => handleChangeInputs(e, isNumberInRange, 'expirationDate', stateKey)}
-            maxLength={2}
+            maxLength={MAX_LENGTH.CARD_EXPIRATION_DATE}
             required
             data-testid={stateKey}
             ref={nodePushRef.bind(this, stateKey)}
@@ -110,7 +110,7 @@ function InputForm() {
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           value={ownerName}
           onChange={e => handleChangeInputs(e, isAlphabetOrSpace, 'ownerName')}
-          maxLength={30}
+          maxLength={MAX_LENGTH.CARD_OWNER_NAME}
           data-testid="ownerName"
           ref={nodePushRef.bind(this, 'ownerName')}
         />
@@ -125,7 +125,7 @@ function InputForm() {
           type="password"
           value={securityCode}
           onChange={e => handleChangeInputs(e, isNumberInRange, 'securityCode')}
-          maxLength={3}
+          maxLength={MAX_LENGTH.CARD_SECURITY_CODE}
           required
           data-testid="securityCode"
           ref={nodePushRef.bind(this, 'securityCode')}
@@ -139,7 +139,7 @@ function InputForm() {
             type="text"
             value={password[stateKey]}
             onChange={e => handleChangeInputs(e, isNumberInRange, 'password', stateKey)}
-            maxLength={1}
+            maxLength={MAX_LENGTH.CARD_PASSWORD}
             required
             data-testid={stateKey}
             ref={nodePushRef.bind(this, stateKey)}
@@ -153,7 +153,7 @@ function InputForm() {
   );
 }
 
-InputForm.propTypes = {
+CardBasicInfoForm.propTypes = {
   handleChangePage: PropTypes.func,
 };
-export default InputForm;
+export default CardBasicInfoForm;

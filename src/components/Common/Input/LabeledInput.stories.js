@@ -1,5 +1,6 @@
 import React from 'react';
 import { uid } from 'react-uid';
+import { MAX_LENGTH } from '../../../constants';
 
 import LabeledInput from './LabeledInput';
 
@@ -19,7 +20,7 @@ CardNumberInput.args = {
       key={uid(stateKey)}
       className="input-basic"
       type={stateKey === 'first' || stateKey === 'second' ? 'text' : 'password'}
-      maxLength={4}
+      maxLength={MAX_LENGTH.CARD_NUMBER}
       required
     />
   )),
@@ -36,7 +37,7 @@ ExpirationDateInput.args = {
       className="input-basic"
       type="text"
       placeholder={stateKey === 'month' ? 'MM' : 'YY'}
-      maxLength={2}
+      maxLength={MAX_LENGTH.CARD_EXPIRATION_DATE}
       required
     />
   )),
@@ -51,7 +52,7 @@ OwnerNameInput.args = {
       type="text"
       className="input-basic"
       placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-      maxLength={30}
+      maxLength={MAX_LENGTH.CARD_OWNER_NAME}
     />
   ),
 };
@@ -62,7 +63,14 @@ SecurityCodeInput.args = {
   labelTitle: '보안코드(CVC/CVV)',
   inputSize: 'w-25',
   helpText: '카드 뒷면 서명란 또는 신용카드 번호 오른쪽 상단에 기재된 3자리 숫자',
-  children: <input className="input-basic" type="password" maxLength={3} required />,
+  children: (
+    <input
+      className="input-basic"
+      type="password"
+      maxLength={MAX_LENGTH.CARD_SECURITY_CODE}
+      required
+    />
+  ),
 };
 
 export const PasswordInput = Template.bind({});
@@ -71,6 +79,12 @@ PasswordInput.args = {
   labelTitle: '카드 비밀번호',
   inputSize: 'w-25',
   children: Object.keys({ first: '', second: '' }).map(stateKey => (
-    <input key={uid(stateKey)} className="input-basic" type="text" maxLength={1} required />
+    <input
+      key={uid(stateKey)}
+      className="input-basic"
+      type="text"
+      maxLength={MAX_LENGTH.CARD_PASSWORD}
+      required
+    />
   )),
 };

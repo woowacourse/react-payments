@@ -2,7 +2,7 @@ import React from 'react';
 import CardBasicInfoForm from '../Form/CardBasicInfoForm';
 import Card from '../Card/Card';
 import { CardContext, PageContext } from '../../context';
-import { PAGE } from '../../constants';
+import { CARD_SIZE, PAGE } from '../../constants';
 import { useContext } from 'react';
 import LeftArrowButton from '../Common/Button/LeftArrowButton';
 
@@ -16,7 +16,7 @@ function AddCardPage() {
         <LeftArrowButton onClick={() => setPage(PAGE.CARD_LIST)} />
         <h2 className="page-title">카드 추가</h2>
       </nav>
-      <Card cardInformation={cardInput} cardBoxSize={'small'}></Card>
+      <Card cardInformation={cardInput} cardBoxSize={CARD_SIZE.SMALL}></Card>
       <CardBasicInfoForm />
     </main>
   );
