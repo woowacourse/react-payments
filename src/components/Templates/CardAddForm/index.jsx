@@ -19,10 +19,10 @@ const ButtonContainer = styled.div`
 `;
 
 function CardAddForm({ link }) {
-  const { isValidForm, onAddFormSubmit } = useCardAddForm(link);
+  const { isValidForm, onCardInfoSubmit } = useCardAddForm(link);
 
   return (
-    <FormContainer onSubmit={onAddFormSubmit}>
+    <FormContainer onSubmit={onCardInfoSubmit}>
       <CardNumberInput />
       <ExpiredDateInput />
       <CardOwnerInput />

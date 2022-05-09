@@ -13,7 +13,7 @@ function useCardAddForm(link) {
     .map(key => inputtedInfo[key].isValid)
     .every(isValid => isValid);
 
-  const onAddFormSubmit = event => {
+  const onCardInfoSubmit = event => {
     event.preventDefault();
 
     if (isValidForm) {
@@ -49,7 +49,7 @@ function useCardAddForm(link) {
     );
   };
 
-  return { isValidForm, onAddFormSubmit };
+  return { isValidForm, onCardInfoSubmit };
 }
 
 export default useCardAddForm;
