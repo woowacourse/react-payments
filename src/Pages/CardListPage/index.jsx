@@ -1,10 +1,11 @@
+import { useContext, useEffect } from 'react';
+import { CardContext } from 'context/CardContext';
 import styled from 'styled-components';
 import Head from 'components/Modules/Head';
 import Card from 'components/Modules/Card';
-import { useContext } from 'react';
-import { CardContext } from 'context/CardContext';
 import AddCard from 'components/Modules/AddCard';
 import { LINK } from '../../constant/Link';
+import { INPUT_ACTION } from '../../Reducer/InputtedInfoReducer';
 
 const Page = styled.div`
   display: flex;
@@ -28,8 +29,14 @@ const Wrapper = styled.div`
 `;
 
 function CardListPage() {
-  const { cardData, inputtedInfo } = useContext(CardContext);
-  console.log('inputtedInfo :>> ', inputtedInfo);
+  const { cardData, inputtedInfoDispatch } = useContext(CardContext);
+
+  useEffect(() => {
+    inputtedInfoDispatch({
+      type: INPUT_ACTION.CLEAR,
+    });
+  }, []);
+
   return (
     <Page>
       <Head>보유 카드</Head>
