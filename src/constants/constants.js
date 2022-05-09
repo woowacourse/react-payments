@@ -14,6 +14,7 @@ export const CARD_TYPES_DEFAULT = { name: "", color: "" };
 export const MODAL_NAME = {
   CARD_TYPE: "cardType",
   CARD_CVC: "cardCVC",
+  ERROR: "error",
 };
 
 export const RULE_INPUT = {
