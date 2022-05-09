@@ -1,3 +1,5 @@
+const CURRENT_YEAR = Number(new Date().getFullYear().toString().slice(2));
+
 export const MASKED_CHARACTER = "•";
 
 export const CREATE_MASKED_CHARACTERS = (repeatCount) =>
@@ -21,7 +23,9 @@ export const CARD_INFO_RULES = {
 };
 
 export const GUIDE_MESSAGE = {
-  VALID_EXPIRE_DATE: "만료일은 0~9까지 숫자로 입력해주세요.",
+  VALID_EXPIRE_DATE: `년도는 ${CURRENT_YEAR}년 ~ ${
+    CURRENT_YEAR + 5
+  }년 사이로 입력해주세요.`,
   VALID_CARD_ALIAS: "카드 별칭을 1 ~ 15자로 입력해주세요.",
   VALID_HOLDER_NAME: "카드 소유자 이름은 영문 대문자만 입력해주세요.",
   VALID_CARD_NUMBER: "카드 번호는 0~9까지 숫자로 입력해주세요.",

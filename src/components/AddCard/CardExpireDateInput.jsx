@@ -1,10 +1,11 @@
 import { Fragment, useContext } from "react";
+import { CardInfoContext } from "../../contexts/CardInfoContext";
 
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 
 import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
-import { CardInfoContext } from "../../contexts/CardInfoContext";
+import { isCompleteExpireDate } from "../../validators/validator";
 
 export default function CardExpireDateInput() {
   const {
@@ -13,10 +14,7 @@ export default function CardExpireDateInput() {
   } = useContext(CardInfoContext);
 
   const expireDateList = Object.values(expireDate);
-  const expireDateLength = expireDateList.reduce(
-    (sum, prev) => prev.value.length + sum,
-    0
-  );
+  const [month, year] = expireDateList;
 
   return (
     <InputField
@@ -24,7 +22,7 @@ export default function CardExpireDateInput() {
       wrapperWidth={"135px"}
       horizontalAlign={"center"}
       guideMessage={GUIDE_MESSAGE.VALID_EXPIRE_DATE}
-      isComplete={expireDateLength === CARD_INFO_RULES.EXPIRE_DATE_LENGTH}
+      isComplete={isCompleteExpireDate("expireDate", [year.value, month.value])}
     >
       {expireDateList.map((expireDate) => (
         <Fragment key={expireDate.keyType}>
@@ -38,10 +36,10 @@ export default function CardExpireDateInput() {
             maxLength={CARD_INFO_RULES.EXPIRE_DATE_UNIT_LENGTH}
             required
             onChange={(e) => handleExpireDateUpdate(e, expireDate.keyType)}
-            isComplete={
-              expireDate.value.length ===
-              CARD_INFO_RULES.EXPIRE_DATE_UNIT_LENGTH
-            }
+            isComplete={isCompleteExpireDate(
+              expireDate.keyType,
+              expireDate.value
+            )}
           />
           {expireDate.keyType === "month" && <p>/</p>}
         </Fragment>
