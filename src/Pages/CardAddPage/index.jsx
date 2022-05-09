@@ -27,15 +27,7 @@ const CardAddFormContainer = styled.div`
 `;
 
 function CardAddPage() {
-  const { inputtedInfo, inputtedInfoDispatch } = useContext(CardContext);
-
-  useEffect(() => {
-    if (Object.keys(inputtedInfo).length !== 0) {
-      inputtedInfoDispatch({
-        type: INPUT_ACTION.CLEAR,
-      });
-    }
-  }, []);
+  const { inputtedInfo } = useContext(CardContext);
 
   return (
     <Page>
