@@ -19,7 +19,7 @@ function CardSubmitPage({ nextId }) {
   const [nickname, setNickname] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleInputChange = ({ target: { value } }) => {
+  const handleNicknameInputChange = ({ target: { value } }) => {
     const trimmedValue = value.trim();
     setNickname(trimmedValue);
     setErrorMessage('');
@@ -29,7 +29,7 @@ function CardSubmitPage({ nextId }) {
     }
   };
 
-  const handleClick = () => {
+  const handleClickSubmitButton = () => {
     if (
       !nickname ||
       !owner.name ||
@@ -75,14 +75,14 @@ function CardSubmitPage({ nextId }) {
             required
             name="nickname"
             value={nickname}
-            onChange={handleInputChange}
+            onChange={handleNicknameInputChange}
             data-testid="nickname"
           />
           <ErrorMessage>{errorMessage}</ErrorMessage>
         </Container>
       </SubmitContainer>
       <Footer>
-        <TextButton type="button" hexColor={LABEL_PRIMARY_COLOR} onClick={handleClick} isVisible>
+        <TextButton type="button" hexColor={LABEL_PRIMARY_COLOR} onClick={handleClickSubmitButton} isVisible>
           확인
         </TextButton>
       </Footer>
