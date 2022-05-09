@@ -115,7 +115,7 @@ export const CardRegisterPage = () => {
     try {
       cards.id++;
       cards.list.push(wrappingCardData);
-      navigate(`/cardName/${cardId}`);
+      navigate(`/cardEdit/${cardId}`);
     } catch (error) {
       errorState.errorMessage = error.message;
       modalSelector(MODAL_NAME.ERROR)();

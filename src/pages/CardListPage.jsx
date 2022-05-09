@@ -27,7 +27,9 @@ export const CardListPage = () => {
           >
             {cards.list.map((_, i) => (
               <Button
-                onClick={() => navigate(`/cardEdit/${cards.list[i].id}`)}
+                onClick={() =>
+                  navigate(`/cardEdit/${cards.list[i].id}?edit=true`)
+                }
                 textAlign="center"
                 key={cards.list[i].id}
               >

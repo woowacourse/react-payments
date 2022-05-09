@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { CardContext } from "contexts/CardContext";
 
 import {
@@ -11,10 +11,13 @@ import {
   InputUnderline,
 } from "components/common";
 
-export const CardModifyPage = ({ isEditMode = false }) => {
+export const CardModifyPage = () => {
   const cards = useContext(CardContext);
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { id } = useParams();
+
+  const isEditMode = searchParams.get("edit");
 
   const setCardNickname = (e) => {
     e.preventDefault();

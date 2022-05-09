@@ -14,11 +14,7 @@ function Payments() {
         <div className="App">
           <Routes>
             <Route path="/registerCard" element={<CardRegisterPage />} />
-            <Route path="/cardName/:id" element={<CardModifyPage />} />
-            <Route
-              path="/cardEdit/:id"
-              element={<CardModifyPage isEditMode={true} />}
-            />
+            <Route path="/cardEdit/:id" element={<CardModifyPage />} />
             <Route path="/cardList" element={<CardListPage />} />
             <Route path="*" element={<CardListPage />} />
           </Routes>
