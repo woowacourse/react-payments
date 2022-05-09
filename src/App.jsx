@@ -15,7 +15,7 @@ const StyledApp = styled.div`
 const App = () => {
   return (
     <CardContextProvider>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <StyledApp>
           <Routes>
             <Route exact path={PATH.HOME} element={<StoredCardListPage />} />
