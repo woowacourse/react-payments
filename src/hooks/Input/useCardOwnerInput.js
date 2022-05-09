@@ -7,7 +7,7 @@ import validator from 'validation';
 function useCardOwnerInput() {
   const { inputtedInfoDispatch } = useContext(CardContext);
   const [name, setName] = useState('');
-  const [validation, setValidation] = useState(false);
+  const [validation, setValidation] = useState(true);
 
   const onNameChange = ({ target, nativeEvent: { data } }) => {
     if (englishRegex.test(data) || !data) {
