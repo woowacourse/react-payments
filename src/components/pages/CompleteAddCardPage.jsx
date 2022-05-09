@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { CardContext } from '../../contexts/CardContext';
@@ -40,8 +40,14 @@ const CompleteAddCardPage = () => {
   const { values, setValues, initialField } = useContext(CardContext);
   const inputRef = useRef();
   const navigation = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const storeCard = async () => {
+    if (isSubmitting) {
+      return;
+    }
+
+    setIsSubmitting(true);
     const cardInfo = {
       cardName:
         inputRef.current.value.toUpperCase() ||
@@ -63,6 +69,7 @@ const CompleteAddCardPage = () => {
       return;
     }
     setValues(initialField);
+    setIsSubmitting(false);
   };
 
   return (
