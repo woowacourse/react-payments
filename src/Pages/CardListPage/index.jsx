@@ -22,8 +22,8 @@ const ListContainer = styled.div`
 `;
 
 function CardListPage() {
-  const { cardData } = useContext(CardContext);
-
+  const { cardData, inputtedInfo } = useContext(CardContext);
+  console.log('inputtedInfo :>> ', inputtedInfo);
   return (
     <Page>
       <Head>보유 카드</Head>

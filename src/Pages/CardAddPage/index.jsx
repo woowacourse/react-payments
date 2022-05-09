@@ -28,6 +28,8 @@ const CardAddFormContainer = styled.div`
 function CardAddPage() {
   const { inputtedInfo } = useContext(CardContext);
 
+  console.log(inputtedInfo);
+
   return (
     <Page>
       <Head link={LINK.CARD_LIST_PAGE}>카드 추가</Head>
