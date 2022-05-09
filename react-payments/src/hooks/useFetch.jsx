@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { ErrorContext } from "provider/ErrorContext";
 
 function useFetch(url) {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { setError } = useContext(ErrorContext);
 
   useEffect(() => {
     const callApi = async () => {
@@ -12,6 +13,10 @@ function useFetch(url) {
           method: "GET",
           headers: { "Content-type": "application/json" },
         });
+
+        if (!res.ok) {
+          throw new Error("서버에서 데이터를 불러오는데 실패했습니다");
+        }
         const data = (await res.json()).data;
         setData(data);
       } catch (err) {
@@ -22,8 +27,8 @@ function useFetch(url) {
     };
 
     callApi();
-  }, [url]);
+  }, [url, setError]);
 
-  return { data, loading, error };
+  return { data, loading };
 }
 export default useFetch;

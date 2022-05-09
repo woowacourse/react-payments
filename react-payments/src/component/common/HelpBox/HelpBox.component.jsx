@@ -3,10 +3,7 @@ import { useState } from "react";
 
 import { HELP_MESSAGE } from "constants/index";
 import { RowFlexWrapper } from "styles/wrapper";
-
-const HelpBoxContainer = styled.div`
-  position: relative;
-`;
+import Box from "styles/box";
 
 const HelpIcon = styled(RowFlexWrapper)`
   width: 27px;
@@ -40,7 +37,7 @@ const HelpModal = styled.div`
 const HelpBox = () => {
   const [isShown, setIsShown] = useState(false);
   return (
-    <HelpBoxContainer>
+    <Box position="relative">
       <HelpIcon
         role="button"
         onMouseEnter={() => setIsShown(true)}
@@ -49,7 +46,7 @@ const HelpBox = () => {
         ?
       </HelpIcon>
       {isShown && <HelpModal>{HELP_MESSAGE}</HelpModal>}
-    </HelpBoxContainer>
+    </Box>
   );
 };
 

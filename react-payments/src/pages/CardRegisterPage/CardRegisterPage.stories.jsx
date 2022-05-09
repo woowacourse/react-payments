@@ -9,6 +9,14 @@ import { ExpireDateContext } from "provider/ExpireDateProvider";
 import { SecurityCodeContext } from "provider/SecurityCodeProvider";
 import { UserNameContext } from "provider/UserNameProvider";
 import { CardTypeContext } from "provider/CardTypeProvider";
+import {
+  mockCardNumber,
+  mockCardPassword,
+  mockCardTypeInfo,
+  mockExpireDate,
+  mockSecurityCode,
+  mockUserName,
+} from "mock/cardInput";
 
 export default {
   title: "Pages/CardRegisterPage",
@@ -17,14 +25,7 @@ export default {
     withReactContext({
       Context: CardNumberContext,
       initialState: {
-        state: {
-          cardNumber: {
-            first: "1234",
-            second: "2345",
-            third: "6273",
-            fourth: "8283",
-          },
-        },
+        ...mockCardNumber,
         action: {
           resetCardNumber: action("reset-cardNumber"),
         },
@@ -33,12 +34,7 @@ export default {
     withReactContext({
       Context: ExpireDateContext,
       initialState: {
-        state: {
-          expireDate: {
-            month: "11",
-            year: "22",
-          },
-        },
+        ...mockExpireDate,
         action: {
           resetExpireDate: action("reset-expireDate"),
         },
@@ -47,9 +43,7 @@ export default {
     withReactContext({
       Context: UserNameContext,
       initialState: {
-        state: {
-          userName: "스밍",
-        },
+        ...mockUserName,
         action: {
           resetUserName: action("reset-userName"),
         },
@@ -58,9 +52,7 @@ export default {
     withReactContext({
       Context: SecurityCodeContext,
       initialState: {
-        state: {
-          securityCode: "123",
-        },
+        ...mockSecurityCode,
         action: {
           resetSecurityCode: action("reset-securityCode"),
         },
@@ -69,12 +61,7 @@ export default {
     withReactContext({
       Context: CardPasswordContext,
       initialState: {
-        state: {
-          cardPassword: {
-            first: "1",
-            second: "2",
-          },
-        },
+        ...mockCardPassword,
         action: {
           resetCardPassword: action("reset-cardPassword"),
         },
@@ -83,12 +70,7 @@ export default {
     withReactContext({
       Context: CardTypeContext,
       initialState: {
-        state: {
-          cardTypeInfo: {
-            cardName: "포코 카드",
-            cardType: "pocoCard",
-          },
-        },
+        ...mockCardTypeInfo,
         action: {
           resetCardTypeInfo: action("reset-cardTypeInfo"),
         },

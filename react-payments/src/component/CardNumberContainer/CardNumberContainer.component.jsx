@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 
 import Label from "component/common/Label/Label.component";
 import InputBox from "component/common/InputBox/InputBox.component";
@@ -9,7 +9,7 @@ import MessageBox from "component/common/MessageBox/MessageBox.component";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants";
 import { CardNumberContext } from "provider/CardNumberProvider";
 
-const CardNumberContainer = () => {
+const CardNumberContainer = memo(() => {
   const {
     state: { cardNumber, cardNumberReady },
     action: { onChangeCardNumber, onKeyDownCardNumber },
@@ -64,6 +64,6 @@ const CardNumberContainer = () => {
       )}
     </>
   );
-};
+});
 
 export default CardNumberContainer;

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 
 import Input from "component/common/Input/Input.component";
 import InputBox from "component/common/InputBox/InputBox.component";
@@ -9,7 +9,7 @@ import Label from "component/common/Label/Label.component";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants";
 import { ExpireDateContext } from "provider/ExpireDateProvider";
 
-const ExpireDateContainer = () => {
+const ExpireDateContainer = memo(() => {
   const {
     state: { expireDate, expireDateReady },
     action: { onChangeExpireDate, onKeyDownExpireDate },
@@ -47,6 +47,6 @@ const ExpireDateContainer = () => {
       )}
     </>
   );
-};
+});
 
 export default ExpireDateContainer;

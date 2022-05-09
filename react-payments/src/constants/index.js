@@ -68,12 +68,6 @@ export const REDUCER_TYPE = {
   INIT: "INIT",
 };
 
-export const ALERT_MEESAGE = {
-  EDIT: "수정이 완료되었습니다",
-  DELETE: "삭제가 완료되었습니다",
-  REGISTER: "등록이 완료되었습니다",
-};
-
 export const cardNumberEnum = {
   first: 1,
   second: 2,

@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-const StyledLink = styled(Link)`
+const StyledButton = styled.button`
   cursor: pointer;
-  text-decoration: none;
+  background: transparent;
+  border: none;
   ${({ type }) =>
     type === "submit"
       ? css`
@@ -19,11 +19,11 @@ const StyledLink = styled(Link)`
         `}
 `;
 
-const LinkButton = ({ children, path, onClick, type }) => {
+const LinkButton = ({ children, onClick, type }) => {
   return (
-    <StyledLink to={path || "/"} onClick={onClick} type={type}>
+    <StyledButton onClick={onClick} type={type}>
       {children}
-    </StyledLink>
+    </StyledButton>
   );
 };
 

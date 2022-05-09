@@ -1,13 +1,12 @@
-import styled from "styled-components";
+import { memo } from "react";
+import Box from "styles/box";
 
-const HeaderBox = styled.header`
-  display: flex;
-  gap: 25px;
-  align-items: center;
-`;
-
-const Header = ({ children }) => {
-  return <HeaderBox>{children}</HeaderBox>;
-};
+const Header = memo(({ children }) => {
+  return (
+    <Box display="flex" gap="25px" alignItems="center">
+      {children}
+    </Box>
+  );
+});
 
 export default Header;

@@ -51,3 +51,5 @@ export const isDuplicatedCardName = (newCardName, cardData) =>
   Object.entries(cardData).some(
     ([_, { cardName }]) => cardName === newCardName
   );
+
+export const isEdit = (id) => typeof id !== "undefined";

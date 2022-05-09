@@ -1,4 +1,4 @@
-import { useContext, useReducer, useState } from "react";
+import { memo, useContext, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -6,19 +6,16 @@ import Card from "component/common/Card/Card.component";
 import CardNameInput from "component/CardNameInput/CardNameInput.component";
 import MessageBox from "component/common/MessageBox/MessageBox.component";
 import CardControlModal from "component/CardControlModal/CardControlModal";
+import Box from "styles/box";
 
 import useReady from "hooks/useReady";
 import { isDuplicatedCardName, isInvalidCardName } from "util/validator";
 import { CardDataContext } from "provider/CardDataProvider";
-import {
-  ALERT_MEESAGE,
-  ERROR_MESSAGE,
-  REDUCER_TYPE,
-  SUCCESS_MESSAGE,
-} from "constants";
+import { ERROR_MESSAGE, REDUCER_TYPE, SUCCESS_MESSAGE } from "constants";
 import { deleteCard, editCard } from "api/cardApi";
 import { RowFlexWrapper } from "styles/wrapper";
 import { ColumnFlexWrapper } from "../../styles/wrapper";
+import { ErrorContext } from "provider/ErrorContext";
 
 const CardNameText = styled(RowFlexWrapper)`
   font-weight: 700;
@@ -52,11 +49,7 @@ const ConfirmButton = styled.button`
   }
 `;
 
-const EditFormBox = styled(RowFlexWrapper)`
-  margin-top: 5px;
-`;
-
-const CardPreview = ({ cardDatum, idx }) => {
+const CardPreview = memo(({ cardDatum }) => {
   const { cardData, dispatch } = useContext(CardDataContext);
   const [newCardName, setNewCardName] = useState("");
   const [newCardNameLengthReady] = useReady(newCardName, isInvalidCardName);
@@ -70,6 +63,7 @@ const CardPreview = ({ cardDatum, idx }) => {
   const [editOn, setEditOn] = useState(false);
   const [isShowModal, toggleModal] = useReducer((prev) => !prev, false);
   const navigate = useNavigate();
+  const { setError } = useContext(ErrorContext);
 
   const handleEditCard = () => {
     navigate(`add/${id}`);
@@ -79,7 +73,7 @@ const CardPreview = ({ cardDatum, idx }) => {
     setEditOn(true);
   };
 
-  const handleSubmitEditedName = () => {
+  const handleSubmitEditedName = async () => {
     dispatch({
       type: REDUCER_TYPE.EDIT,
       payload: {
@@ -88,19 +82,26 @@ const CardPreview = ({ cardDatum, idx }) => {
       },
     });
 
-    editCard(id, { cardName: newCardName });
+    try {
+      await editCard(id, { cardName: newCardName });
+    } catch (err) {
+      setError(err);
+    }
+
     closeEditForm();
-    window.alert(ALERT_MEESAGE.EDIT);
   };
 
-  const handleDeleteCard = () => {
+  const handleDeleteCard = async () => {
     dispatch({
       type: REDUCER_TYPE.DELETE,
       payload: { id },
     });
 
-    deleteCard(id);
-    window.alert(ALERT_MEESAGE.DELETE);
+    try {
+      await deleteCard(id);
+    } catch (err) {
+      setError(err);
+    }
   };
 
   const closeEditForm = () => {
@@ -117,7 +118,13 @@ const CardPreview = ({ cardDatum, idx }) => {
       <CardNameText gap="8">
         {editOn ? (
           <ColumnFlexWrapper gap="5">
-            <EditFormBox gap="10">
+            <Box
+              gap="10px"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              mt="5px"
+            >
               <CardNameInput
                 size="small"
                 value={newCardName}
@@ -130,7 +137,7 @@ const CardPreview = ({ cardDatum, idx }) => {
                 수정
               </ConfirmButton>
               <ConfirmButton onClick={closeEditForm}>X</ConfirmButton>
-            </EditFormBox>
+            </Box>
 
             {!newCardNameLengthReady && (
               <MessageBox type="error">
@@ -165,6 +172,6 @@ const CardPreview = ({ cardDatum, idx }) => {
       )}
     </>
   );
-};
+});
 
 export default CardPreview;

@@ -9,19 +9,23 @@ export const getCardList = async () => {
 
     return await response.json();
   } catch (err) {
-    console.log(err);
+    throw new Error("서버에서 문제가 발생하였습니다. 다시 시도해주세요");
   }
 };
 
 export const registerCard = async (data) => {
   try {
-    await fetch(`${API_URL}/api/cards`, {
+    const res = await fetch(`${API_URL}/api/car`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ data }),
     });
+
+    if (!res.ok) {
+      throw new Error("서버에서 문제가 발생하였습니다. 다시 시도해주세요");
+    }
   } catch (err) {
-    console.log(err);
+    throw new Error(err.message);
   }
 };
 
@@ -33,7 +37,7 @@ export const editCard = async (id, data) => {
       body: JSON.stringify({ data }),
     });
   } catch (err) {
-    console.log(err);
+    throw new Error("서버에서 문제가 발생하였습니다. 다시 시도해주세요");
   }
 };
 
@@ -44,6 +48,6 @@ export const deleteCard = async (id) => {
       headers: { "Content-type": "application/json" },
     });
   } catch (err) {
-    console.log(err);
+    throw new Error("서버에서 문제가 발생하였습니다. 다시 시도해주세요");
   }
 };

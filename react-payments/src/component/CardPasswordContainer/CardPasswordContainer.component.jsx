@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import styled from "styled-components";
+import { memo, useContext } from "react";
 
 import Label from "component/common/Label/Label.component";
 import InputBox from "component/common/InputBox/InputBox.component";
@@ -11,15 +10,9 @@ import VirtualKeyboard from "component/common/VirtualKeyboard/VirtualKeyboard.co
 import useKeyboardOn from "hooks/useKeyboardOn";
 import { CardPasswordContext } from "provider/CardPasswordProvider";
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants";
+import Box from "styles/box";
 
-const PasswordInputGroup = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  position: relative;
-`;
-
-const CardPasswordContainer = () => {
+const CardPasswordContainer = memo(() => {
   const {
     state: { cardPassword, cardPasswordReady },
     action: {
@@ -35,7 +28,7 @@ const CardPasswordContainer = () => {
   return (
     <>
       <Label>카드 비밀번호</Label>
-      <PasswordInputGroup>
+      <Box display="flex" alignItems="center" gap="10px" position="relative">
         <InputBox formType="card-password">
           <Input
             type="password"
@@ -67,7 +60,7 @@ const CardPasswordContainer = () => {
             onClickBackspaceButton={onClickCardPasswordBackspaceButton}
           />
         )}
-      </PasswordInputGroup>
+      </Box>
 
       {cardPasswordReady ? (
         <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
@@ -76,6 +69,6 @@ const CardPasswordContainer = () => {
       )}
     </>
   );
-};
+});
 
 export default CardPasswordContainer;

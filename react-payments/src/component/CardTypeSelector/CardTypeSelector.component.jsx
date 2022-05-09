@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useContext } from "react";
+import { memo, useContext } from "react";
 
 import ColorBox from "component/common/ColorBox/ColorBox.component";
 
@@ -12,7 +12,7 @@ const ColorTypeSelectorContainer = styled.div`
   gap: 25px;
 `;
 
-const CardTypeSelector = () => {
+const CardTypeSelector = memo(() => {
   const {
     state: { cardTypeInfo },
     action: { onClickCardType },
@@ -31,6 +31,6 @@ const CardTypeSelector = () => {
       ))}
     </ColorTypeSelectorContainer>
   );
-};
+});
 
 export default CardTypeSelector;

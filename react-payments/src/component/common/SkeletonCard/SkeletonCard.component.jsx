@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { ColumnFlexWrapper } from "../../../styles/wrapper";
+import Box from "styles/box";
 
 const Refresh = keyframes`
   0% {
@@ -11,10 +11,6 @@ const Refresh = keyframes`
   100% {
     background-position: 300px;
   }
-`;
-
-const SkeletonCardWrapper = styled(ColumnFlexWrapper)`
-  margin-bottom: 20px;
 `;
 
 const SkeletonCardContainer = styled.div`
@@ -47,10 +43,17 @@ const SkeletonCardText = styled.div`
 
 const SkeletonCardBox = () => {
   return (
-    <SkeletonCardWrapper gap="20">
+    <Box
+      gap="20px"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      mb="20px"
+    >
       <SkeletonCardContainer />
       <SkeletonCardText />
-    </SkeletonCardWrapper>
+    </Box>
   );
 };
 

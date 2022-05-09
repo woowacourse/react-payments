@@ -12,5 +12,9 @@ export const ColumnFlexWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: ${({ mt }) => `${mt}px`};
+  margin-bottom: ${({ mb }) => `${mb}px`};
+  margin-left: ${({ ml }) => `${ml}px`};
+  margin-right: ${({ mr }) => `${mr}px`};
   gap: ${({ gap }) => `${gap}px`};
 `;

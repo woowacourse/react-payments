@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 
 import Label from "component/common/Label/Label.component";
 import InputBox from "component/common/InputBox/InputBox.component";
@@ -6,7 +6,7 @@ import Input from "component/common/Input/Input.component";
 
 import { UserNameContext } from "provider/UserNameProvider";
 
-const UserNameContainer = () => {
+const UserNameContainer = memo(() => {
   const {
     state: { userName },
     action: { onChangeUserName },
@@ -30,6 +30,6 @@ const UserNameContainer = () => {
       </InputBox>
     </>
   );
-};
+});
 
 export default UserNameContainer;

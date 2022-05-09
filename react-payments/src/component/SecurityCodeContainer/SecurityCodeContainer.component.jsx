@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import styled from "styled-components";
 
 import Label from "component/common/Label/Label.component";
@@ -19,7 +19,7 @@ const SecurityCodeInputGroup = styled.div`
   position: relative;
 `;
 
-const SecurityCodeContainer = () => {
+const SecurityCodeContainer = memo(() => {
   const {
     state: { securityCode, securityCodeReady },
     action: {
@@ -63,6 +63,6 @@ const SecurityCodeContainer = () => {
       )}
     </>
   );
-};
+});
 
 export default SecurityCodeContainer;

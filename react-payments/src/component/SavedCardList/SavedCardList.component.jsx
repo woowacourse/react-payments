@@ -12,18 +12,15 @@ const SavedCardList = () => {
   const { cardData, dispatch } = useContext(CardDataContext);
 
   useEffect(() => {
-    if (data.length === 0) {
+    if (!data) {
       return;
     }
 
     dispatch({
       type: REDUCER_TYPE.INIT,
-      payload: data.reduce((acc, cur) => {
-        return {
-          ...acc,
-          [cur.id]: { id: cur.id, ...cur.attributes },
-        };
-      }, {}),
+      payload: Object.fromEntries(
+        data.map((card) => [card.id, { id: card.id, ...card.attributes }])
+      ),
     });
   }, [dispatch, data]);
 
