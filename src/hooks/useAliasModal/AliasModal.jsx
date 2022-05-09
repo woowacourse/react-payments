@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 
 import useCardDispatch from '../useCardDispatch';
 
@@ -18,6 +18,8 @@ import { isEmpty } from '../../utils';
 import { CARD_SIZE_UNIT } from '../../constants';
 
 const AliasModal = ({ visible, afterClick, children }) => {
+  const [animate, setAnimate] = useState(false);
+  const [localVisible, setLocalVisible] = useState(visible);
   const [alias, setAlias] = useState(children[5] || '');
   const dispatch = useCardDispatch();
 
@@ -28,10 +30,20 @@ const AliasModal = ({ visible, afterClick, children }) => {
   const onClickButton = useCallback(() => {
     dispatch({ type: UPDATE_CARD_ALIAS, cardNumber: children[1], alias });
     afterClick();
-  });
+  }, []);
+
+  useEffect(() => {
+    if (localVisible && !visible) {
+      setAnimate(true);
+      setTimeout(() => setAnimate(false), 400);
+    }
+    setLocalVisible(visible);
+  }, [localVisible, visible]);
+
+  if (!animate && !localVisible) return null;
 
   return (
-    <WrapperStyled visible={visible}>
+    <WrapperStyled disappear={!visible}>
       <TitleStyled>카드등록이 완료되었습니다.</TitleStyled>
       <MarginBottomWrapper>
         <FlexCenter>

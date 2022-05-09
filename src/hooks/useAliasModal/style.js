@@ -1,4 +1,22 @@
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
+
+const slideUp = keyframes`
+  from{
+    transform: translateX(100%);
+  }
+  to{
+    transform: translateX(0);
+  }
+`;
+
+const slideDown = keyframes`
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+`;
 
 export const WrapperStyled = styled.div`
   width: 100%;
@@ -6,10 +24,17 @@ export const WrapperStyled = styled.div`
   box-sizing: border-box;
   position: fixed;
   top: 0;
-  right: ${({ visible }) => (visible ? 0 : -100)}%;
   padding: 70px 20px 16px;
   background-color: var(--toast-background-color);
-  transition: right 0.4s linear;
+
+  animation-duration: 0.4s;
+  animation-timing-function: linear;
+  animation-name: ${slideUp};
+  animation-fill-mode: forwards;
+
+  ${({ disappear }) => disappear && css`
+    animation-name: ${slideDown};
+  `}
 `;
 
 export const TitleStyled = styled.h1`
