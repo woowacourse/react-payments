@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AddCardPage from './components/pages/AddCardPage';
-import StoredCardListPage from './components/pages/StoredCardListPage';
-import CompleteAddCardPage from './components/pages/CompleteAddCardPage';
-import EditCardPage from './components/pages/EditCardPage';
+import AddCardPage from './pages/AddCardPage';
+import StoredCardListPage from './pages/StoredCardListPage';
+import CompleteAddCardPage from './pages/CompleteAddCardPage';
+import EditCardPage from './pages/EditCardPage';
 import { PATH } from './utils/constants';
 import { CardContextProvider } from './contexts/CardContext';
 

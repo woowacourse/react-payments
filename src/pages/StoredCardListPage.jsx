@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { API_SERVER, PATH } from '../../utils/constants';
-import BackwardButton from '../common/BackwardButton';
-import Button from '../common/Button';
-import CardPreview from '../common/CardPreview';
-import TextBox from '../common/TextBox';
+import { API_SERVER, PATH } from '../utils/constants';
+import BackwardButton from '../components/common/BackwardButton';
+import Button from '../components/common/Button';
+import CardPreview from '../components/common/CardPreview';
+import TextBox from '../components/common/TextBox';
 
 const StyledStoredCardList = styled.div`
   margin: 65px 59px;

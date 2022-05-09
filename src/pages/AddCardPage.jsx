@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import initialCardSchema from '../../schema/cardSchema';
-import { PATH } from '../../utils/constants';
-import BackwardButton from '../common/BackwardButton';
-import CardForm from '../common/CardForm';
+import initialCardSchema from '../schema/cardSchema';
+import { PATH } from '../utils/constants';
+import BackwardButton from '../components/common/BackwardButton';
+import CardForm from '../components/common/CardForm';
 
 const AddCardPage = () => {
   return (

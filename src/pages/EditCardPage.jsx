@@ -1,17 +1,12 @@
 import React, { useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-  API_SERVER,
-  ERROR_MESSAGE,
-  MESSAGES,
-  PATH,
-} from '../../utils/constants';
-import BackwardButton from '../common/BackwardButton';
-import Button from '../common/Button';
-import CardPreview from '../common/CardPreview';
-import Input from '../common/Input';
-import TextBox from '../common/TextBox';
+import { API_SERVER, ERROR_MESSAGE, MESSAGES, PATH } from '../utils/constants';
+import BackwardButton from '../components/common/BackwardButton';
+import Button from '../components/common/Button';
+import CardPreview from '../components/common/CardPreview';
+import Input from '../components/common/Input';
+import TextBox from '../components/common/TextBox';
 
 const StyledCompleteEditCardPage = styled.div`
   display: flex;
