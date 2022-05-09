@@ -9,7 +9,7 @@ import {
   Dot,
 } from "components/common";
 
-export const CardPasswordInputForm = ({ handleCardPasswordCheck }) => {
+export const CardPasswordInput = ({ handleCardPasswordCheck }) => {
   const [validate, setValidate] = useState(false);
   const passwordInputRefs = useRef([]);
 

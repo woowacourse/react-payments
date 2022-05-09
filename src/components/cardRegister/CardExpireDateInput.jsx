@@ -9,7 +9,7 @@ import {
   InputContainer,
 } from "components/common";
 
-export const CardExpireDateInputForm = ({
+export const CardExpireDateInput = ({
   expireDate,
   handleExpireDateInput,
   handleCardExpireCheck,

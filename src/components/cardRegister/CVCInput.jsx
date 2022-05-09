@@ -10,7 +10,7 @@ import {
   TipButton,
 } from "components/common";
 
-export const CVCInputForm = ({ handleCardCVCCheck, handleModalVisible }) => {
+export const CVCInput = ({ handleCardCVCCheck, handleModalVisible }) => {
   const [validate, setValidate] = useState(false);
   const handleCVCChange = (e) => {
     if (isNaN(e.nativeEvent.data)) {

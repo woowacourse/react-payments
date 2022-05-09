@@ -17,11 +17,11 @@ import {
   MODAL_NAME,
 } from "constants/constants";
 import {
-  CardExpireDateInputForm,
-  CardNumbersInputForm,
-  CardOwnerInputForm,
-  CardPasswordInputForm,
-  CVCInputForm,
+  CardExpireDateInput,
+  CardNumbersInput,
+  CardOwnerInput,
+  CardPasswordInput,
+  CVCInput,
   CardSelectModal,
   CVCHelperModal,
 } from "components/cardRegister";
@@ -135,27 +135,27 @@ export const CardRegisterPage = () => {
         handleModalVisible={modalSelector(MODAL_NAME.CARD_TYPE)}
       />
       <Form onSubmit={handleFormSubmit}>
-        <CardNumbersInputForm
+        <CardNumbersInput
           cardType={cardType}
           cardNumbers={cardNumbers}
           handleModalVisible={modalSelector(MODAL_NAME.CARD_TYPE)}
           handleCardNumbersInput={setCardNumbers}
           handleCardNumberCheck={setCheckInputStateOf("cardNumbers")}
         />
-        <CardExpireDateInputForm
+        <CardExpireDateInput
           expireDate={expireDate}
           handleExpireDateInput={setExpireDate}
           handleCardExpireCheck={setCheckInputStateOf("cardExpireDate")}
         />
-        <CardOwnerInputForm
+        <CardOwnerInput
           ownerName={ownerName}
           handleOwnerNameInput={setOwnerName}
         />
-        <CVCInputForm
+        <CVCInput
           handleCardCVCCheck={setCheckInputStateOf("cardCVC")}
           handleModalVisible={modalSelector(MODAL_NAME.CARD_CVC)}
         />
-        <CardPasswordInputForm
+        <CardPasswordInput
           handleCardPasswordCheck={setCheckInputStateOf("cardPassword")}
         />
         <Button type="submit" disabled={!allCompleted}>
