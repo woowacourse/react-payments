@@ -12,6 +12,7 @@ const Container = styled.header`
   align-items: center;
 
   width: 100%;
+  height: 4.25rem;
 
   background-image: url(${Logo});
   background-repeat: no-repeat;
