@@ -45,7 +45,7 @@
 
 ## 필수 요구사항
 
-- [ ] Storybook 상호 작용 테스트
+- [x] Storybook 상호 작용 테스트
 - [x] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
 - [x] Context API를 활용해 전역 상태 관리 및 계층 재구성
 
