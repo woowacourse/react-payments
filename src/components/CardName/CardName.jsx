@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { CardInfoContext } from 'App';
+import { CardInfoContext } from 'contexts/CardInfoContextProvider';
 
 function CardName() {
   const { state, dispatch } = useContext(CardInfoContext);

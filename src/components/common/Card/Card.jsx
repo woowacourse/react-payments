@@ -1,16 +1,10 @@
 import { useContext } from 'react';
-import { CardInfoContext } from 'App';
+import { CardInfoContext } from 'contexts/CardInfoContextProvider';
 
-import { PAGES } from 'constants';
-
-function Card({ isEmpty, cardInfo }) {
-  const { state, setPage } = useContext(CardInfoContext);
+function Card({ isEmpty, cardInfo, handleCardAdd }) {
+  const { state } = useContext(CardInfoContext);
 
   const { number1, number2, number3, number4, owner, month, year } = state.inputs;
-
-  const handleCardAdd = () => {
-    setPage(PAGES.ADD);
-  };
 
   return (
     <div className="card-box">

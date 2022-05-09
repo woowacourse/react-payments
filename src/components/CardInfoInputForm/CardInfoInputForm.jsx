@@ -1,10 +1,13 @@
 import { useContext } from 'react';
-import { CardInfoContext } from 'App';
+import { CardInfoContext } from 'contexts/CardInfoContextProvider';
 
-import { ERROR_MESSAGE, PAGES } from 'constants';
+import { ERROR_MESSAGE } from 'constants';
+import { useNavigate } from 'react-router-dom';
 
 function CardInputForm({ children }) {
-  const { state, page, setPage, dispatch, nextId } = useContext(CardInfoContext);
+  const { state, dispatch } = useContext(CardInfoContext);
+
+  const navigate = useNavigate();
 
   const { number1, number2, number3, number4, month, year, cvc } = state.inputs;
 
@@ -67,24 +70,11 @@ function CardInputForm({ children }) {
     e.preventDefault();
 
     try {
-      if (page === PAGES.NAME) {
-        dispatch({
-          type: 'REGISTER_CARD',
-          card: {
-            id: nextId.current,
-            ...state.inputs,
-          },
-        });
-        nextId.current += 1;
-
-        setPage(PAGES.LIST);
-
-        return;
-      }
-
       checkCardInfo({ number1, number2, number3, number4, month, year, cvc });
+
       dispatch({ type: 'SET_CARD_INPUT_VALID', boolean: true });
-      setPage(PAGES.NAME);
+
+      navigate('/card-name');
     } catch (error) {
       alert(error.message);
     }

@@ -1,13 +1,10 @@
-import { useContext } from 'react';
-import { CardInfoContext } from 'App';
-
-import { PAGES } from 'constants';
+import { useNavigate } from 'react-router-dom';
 
 function PrevPageSign() {
-  const { setPage } = useContext(CardInfoContext);
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    setPage(PAGES.LIST);
+    navigate('/react-payments');
   };
 
   return <div className="prev-page-sign" onClick={handleClick} />;

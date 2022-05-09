@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { CardInfoContext } from 'App';
+import { CardInfoContext } from 'contexts/CardInfoContextProvider';
 
 import { LIMIT_LENGTH } from 'constants';
 import { limitInputLength, inputEnglishOnly } from 'utils';
