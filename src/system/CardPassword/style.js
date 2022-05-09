@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
 import FlexSpaceBetweenStyled from '../../components/FlexSpaceBetween/style';
+import FlexCenterStyled from '../../components/FlexCenter/style';
 
-const PasswordContainerStyled = styled(FlexSpaceBetweenStyled)`
+export const PasswordContainerStyled = styled(FlexSpaceBetweenStyled)`
   width: 220px;
 `;
 
-export default PasswordContainerStyled;
-
+export const PasswordWrapperStyled = styled(FlexCenterStyled)`
+  width: 43px;
+  height: 45px;
+`;

@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { noop } from '../../utils';
+
 import { ButtonWrapperStyled, ButtonStyled } from './style';
 
-const Button = ({ color, disabled, children }) => {
+const Button = ({ type, marginTop, color, disabled, children, onClick = noop }) => {
   return (
-    <ButtonWrapperStyled>
-      <ButtonStyled type='submit' color={color} disabled={disabled}>
+    <ButtonWrapperStyled marginTop={marginTop}>
+      <ButtonStyled type={type || 'submit'} color={color} disabled={disabled} onClick={onClick}>
         {children}
       </ButtonStyled>
     </ButtonWrapperStyled>

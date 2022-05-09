@@ -1,9 +1,19 @@
 import styled from 'styled-components';
 
-import FlexSpaceBetween from '../../../components/FlexSpaceBetween';
+import CARD_SIZE from '../constant';
 
-const CardRestInfoStyled = styled(FlexSpaceBetween)`
-  margin-top: 12px;
+import TextEllipsisStyled from '../../../components/TextEllipsis/style';
+import SpanTextStyled from '../../../components/SpanText/style';
+import FlexSpaceBetweenStyled from '../../../components/FlexSpaceBetween/style';
+
+export const CardOwnerStyled = styled(TextEllipsisStyled)(({ size }) => `
+  font-size: ${CARD_SIZE[size].cardFontSize};
+`);
+
+export const CardExpirationStyled = styled(SpanTextStyled)(({ size }) => `
+  font-size: ${CARD_SIZE[size].cardFontSize};
+`);
+
+export const CardRestWrapperStyled = styled(FlexSpaceBetweenStyled)`
+  height: unset;
 `;
-
-export default CardRestInfoStyled;

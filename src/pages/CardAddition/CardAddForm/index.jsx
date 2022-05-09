@@ -13,7 +13,7 @@ import ErrorMessage from '../../../system/ErrorMessage';
 import * as validator from '../../../lib/validation';
 import { isEmpty, isAllEmpty } from '../../../utils';
 
-const CardAddForm = () => {
+const CardAddForm = ({ onSubmit }) => {
   const cardNumber = useCardState((state) => state.cardNumber);
   const [cardNumberError, setCardNumberError] = useState('');
   const cardNumberValidation = useCallback(() =>
@@ -70,7 +70,7 @@ const CardAddForm = () => {
   };
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <CardNumber ref={inputs} />
       <ErrorMessage
         setChildren={setCardNumberError}

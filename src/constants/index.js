@@ -45,3 +45,8 @@ export const CARD_COMPANIES = [
   { NAME: '콜린 카드', COLOR: CARD_COMPANY_COLORS.COLEN_CARD_COMPANY },
   { NAME: '썬 카드', COLOR: CARD_COMPANY_COLORS.SUN_CARD_COMPANY },
 ];
+
+export const CARD_SIZE_UNIT = {
+  SMALL: 'SMALL',
+  BIG: 'BIG',
+};

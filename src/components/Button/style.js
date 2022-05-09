@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const ButtonWrapperStyled = styled.div`
+export const ButtonWrapperStyled = styled.div(({ marginTop }) => `
   display: flex;
   justify-content: flex-end;
-  margin-top: 8px;
-`;
+  margin-top: ${marginTop || '8px'};
+`);
 
 export const ButtonStyled = styled.button(({ color }) => `
   cursor: pointer;

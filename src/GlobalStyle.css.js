@@ -28,6 +28,9 @@ const GlobalStyle = createGlobalStyle`
     --card-chip-background-color: #CBBA64;
     --dimmer-background-color: rgba(0, 0, 0, 0.5);
     --toast-background-color: #fff;
+    --card-alias-color: #383838;
+    --card-alias-bold-color: #575757;
+    --add-button-background-color: #e5e5e5;
   }
 
   body {
@@ -42,6 +45,10 @@ const GlobalStyle = createGlobalStyle`
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
+  }
+
+  a {
+    text-decoration: none;
   }
 `;
 
