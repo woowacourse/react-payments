@@ -16,8 +16,8 @@ const StyledLabel = styled.label`
   color: #525252;
   letter-spacing: -0.085em;
 
-  ${props =>
-    props.isComplete &&
+  ${({ isComplete }) =>
+    isComplete &&
     `
     color: #04c09e;
   `}
@@ -36,14 +36,14 @@ const StyledInputWrapper = styled.div`
   width: ${props => props.width};
   padding: 12px;
 
-  ${props =>
-    props.isComplete &&
+  ${({ isComplete }) =>
+    isComplete &&
     `
     box-shadow: inset 0 0 2px #04c09e;
   `}
 
-  ${props =>
-    props.isError &&
+  ${({ isError }) =>
+    isError &&
     `
     box-shadow: inset 0 0 2px red;
   `}
