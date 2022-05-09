@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {
@@ -56,8 +56,8 @@ const StyledCompleteEditCardPage = styled.div`
 `;
 
 const EditCardPage = () => {
-  const [newName, setNewName] = useState();
   const navigation = useNavigate();
+  const inputRef = useRef();
   const {
     state: { cardName, values, id },
   } = useLocation();
@@ -69,7 +69,7 @@ const EditCardPage = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        cardName: newName ? newName.toUpperCase() : cardName,
+        cardName: inputRef.current.value.trim()?.toUpperCase() || cardName,
       }),
     });
 
@@ -99,13 +99,7 @@ const EditCardPage = () => {
       </Link>
       <TextBox fontSize="23px">카드 이름을 수정하세요.</TextBox>
       <CardPreview values={values} />
-      <Input
-        underLine
-        placeHolder={cardName}
-        onChange={(e) => {
-          setNewName(e.target.value);
-        }}
-      />
+      <Input underLine placeHolder={cardName} innerRef={inputRef} />
       <Button
         className="delete-button"
         onClick={async () => {
