@@ -53,21 +53,17 @@ const appStyles = css`
     font-family: 'NanumBarunGothic';
     margin: 0px;
     height: 100%;
+
+    ${responsive.notMobile(css`
+      background-color: #e2e7ed;
+    `)}
   }
 
   #root {
     width: 100%;
     height: 100%;
     position: relative;
-
-    ${responsive.notMobile(css`
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: center;
-      justify-content: center;
-      background-image: ${GRADATION['mystic-bottom']};
-    `)}
+    overflow: auto;
   }
 
   h1,

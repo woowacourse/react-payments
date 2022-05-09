@@ -20,7 +20,9 @@ const Container = styled.div`
   z-index: 255;
 
   ${responsive.notMobile(css`
+    display: block;
     align-items: center;
+    overflow-y: auto;
   `)}
 
   > .modal-content {
@@ -37,6 +39,7 @@ const Container = styled.div`
     ${responsive.notMobile(css`
       width: 540px;
       padding: 1.5rem;
+      margin: 15vh auto 10vh;
     `)}
   }
 

@@ -11,9 +11,12 @@ const Container = styled.div`
 
   width: 100%;
   height: 100%;
-  margin: 0 auto;
   background-color: ${COLORS.white};
   border-radius: ${LAYOUT.BORDER_RADIUS * 2}px;
+
+  ${responsive.notMobile(css`
+    margin: 10vh auto 10vh;
+  `)}
 
   .layout-content {
     padding: 0.5rem;
