@@ -39,7 +39,7 @@ const cardCompanyList = [
 
 function CardShape({ dimensions, cardCompany, cardNumbers, cardOwner, cardDate }) {
   const cardInfoDispatch = useContext(CardInfoDispatchContext);
-  const [isShown, setIsShown] = useState(false);
+  const [isShown, setIsShown] = useState(true);
 
   const handleClickBox = () => {
     setIsShown(!isShown);
