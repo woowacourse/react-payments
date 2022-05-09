@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
 import reactDom from 'react-dom';
 
-import { MODAL_STATE } from 'constants';
+import { MODAL_STATE } from 'constants/';
 import Container from './styles';
 
-function Modal({ className, handleClose, handleHidden, children }) {
+function Modal({ state, handleClose, handleHidden, children }) {
   const onAnimationEnd = () => {
-    if (className === MODAL_STATE.VISIBLE) return;
+    if (state === MODAL_STATE.VISIBLE) return;
 
     handleHidden();
   };
 
   const render = (
-    <Container className={className} onClick={handleClose} onAnimationEnd={onAnimationEnd}>
+    <Container className={state} onClick={handleClose} onAnimationEnd={onAnimationEnd}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         {children}
       </div>

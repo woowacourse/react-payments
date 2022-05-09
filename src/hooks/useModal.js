@@ -16,11 +16,12 @@ function useModal() {
   // 기존에는 커스텀훅에서 객체를 매번 새롭게 생성해서 반환했으니, 메모리 주소가 계속 바뀌어서...? 리액트가 변경되었다고 감지?
   // 나중에 더 찾아보기
   const render = useCallback(
-    ({ children }) => (
-      <Modal className={modalState} handleClose={handleDisappear} handleHidden={handleHidden}>
-        {children}
-      </Modal>
-    ),
+    ({ children }) =>
+      modalState !== MODAL_STATE.HIDDEN && (
+        <Modal state={modalState} handleClose={handleDisappear} handleHidden={handleHidden}>
+          {children}
+        </Modal>
+      ),
     [modalState],
   );
 
