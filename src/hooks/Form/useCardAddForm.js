@@ -9,9 +9,9 @@ function useCardAddForm(link) {
   const navigator = useNavigate();
   const { inputtedInfo, cardData, cardDispatch } = useContext(CardContext);
 
-  const isValidForm = Object.keys(inputtedInfo)
-    .map(key => inputtedInfo[key].isValid)
-    .every(isValid => isValid);
+  const isValidForm = Object.keys(inputtedInfo).every(
+    key => inputtedInfo[key].isValid
+  );
 
   const onCardInfoSubmit = event => {
     event.preventDefault();
