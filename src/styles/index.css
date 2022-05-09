@@ -2,11 +2,6 @@
 @import './input.css';
 @import './utils.css';
 
-   
-@import './card.css';
-@import './input.css';
-@import './utils.css';
-
 body {
   display: flex;
   flex-direction: column;
