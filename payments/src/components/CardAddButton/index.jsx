@@ -1,6 +1,6 @@
 import './index.scss';
 
-const ConfirmNickNameButton = () => {
+const CardAddButton = () => {
   return (
     <div className='confirm-nickname__button'>
       <div className='card-add__button'>+</div>
@@ -8,4 +8,4 @@ const ConfirmNickNameButton = () => {
   );
 };
 
-export default ConfirmNickNameButton;
+export default CardAddButton;
