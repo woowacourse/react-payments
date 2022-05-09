@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "hooks/useModal";
-import { CardContext } from "contexts/CardContext";
+import { CardContext, ErrorContext } from "contexts";
 
-import { Button, Card, Form, Modal, PageTitle } from "components/common";
+import {
+  Button,
+  Card,
+  Form,
+  Modal,
+  PageTitle,
+  ErrorModal,
+} from "components/common";
 import {
   CARD_TYPES,
   CARD_TYPES_DEFAULT,
@@ -22,6 +29,7 @@ import {
 export const CardRegisterPage = () => {
   const { modalVisibleState, setModalState, modalName } = useModal();
   const cards = useContext(CardContext);
+  const errorState = useContext(ErrorContext);
   const navigate = useNavigate();
   const [ownerName, setOwnerName] = useState("");
   const [allCompleted, setAllCompleted] = useState(false);
@@ -80,6 +88,8 @@ export const CardRegisterPage = () => {
         );
       case MODAL_NAME.CARD_CVC:
         return <CVCHelperModal />;
+      case MODAL_NAME.ERROR:
+        return <ErrorModal />;
       default:
         return <div>no data</div>;
     }
@@ -102,9 +112,14 @@ export const CardRegisterPage = () => {
         formData.elements["input_password-1"].value,
     };
 
-    cards.id++;
-    cards.list.push(wrappingCardData);
-    navigate(`/cardName/${cardId}`);
+    try {
+      cards.id++;
+      cards.list.push(wrappingCardData);
+      navigate(`/cardName/${cardId}`);
+    } catch (error) {
+      errorState.errorMessage = error.message;
+      modalSelector(MODAL_NAME.ERROR)();
+    }
   };
 
   return (

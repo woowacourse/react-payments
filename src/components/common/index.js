@@ -1,6 +1,7 @@
 export * from "./Button";
 export * from "./Card";
 export * from "./Dot";
+export * from "./ErrorModal";
 export * from "./Form";
 export * from "./InputBasic";
 export * from "./InputBox";
