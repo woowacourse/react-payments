@@ -25,7 +25,7 @@ export const CardExpireDateInput = ({
   }, [expireDate]);
 
   const handleMonthInput = (e) => {
-    if (parseInt(e.target.value) > 12) {
+    if (isNaN(e.target.value) || parseInt(e.target.value) > 12) {
       return;
     }
 
@@ -33,10 +33,6 @@ export const CardExpireDateInput = ({
   };
 
   const handleMonthBlur = (e) => {
-    if (isNaN(e.target.value)) {
-      return;
-    }
-
     if (e.target.value.length === 1) {
       e.target.value = "0" + e.target.value;
     }
@@ -45,14 +41,14 @@ export const CardExpireDateInput = ({
   };
 
   const handleYearInput = (e) => {
-    handleExpireDateInput((prev) => ({ ...prev, year: e.target.value }));
-  };
-
-  const handleYearBlur = (e) => {
     if (isNaN(e.target.value)) {
       return;
     }
 
+    handleExpireDateInput((prev) => ({ ...prev, year: e.target.value }));
+  };
+
+  const handleYearBlur = (e) => {
     if (e.target.value.length === 1) {
       e.target.value = "0" + e.target.value;
     }

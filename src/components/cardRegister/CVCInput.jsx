@@ -16,7 +16,8 @@ export const CVCInput = ({
   handleModalVisible,
 }) => {
   const handleCVCChange = (e) => {
-    if (isNaN(e.nativeEvent.data)) {
+    if (isNaN(e.target.value)) {
+      e.target.value = e.target.value.slice(0, e.target.value.length - 1);
       return;
     }
 

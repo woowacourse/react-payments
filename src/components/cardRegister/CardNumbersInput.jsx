@@ -44,6 +44,10 @@ export const CardNumbersInput = ({
   }, [cardNumbers]);
 
   const handleNumberChange = (e, name) => {
+    if (isNaN(e.target.value)) {
+      return;
+    }
+
     handleCardNumbersInput((prev) => ({ ...prev, [name]: e.target.value }));
   };
 

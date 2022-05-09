@@ -13,7 +13,8 @@ export const CardPasswordInput = ({ isValid, handleCardPasswordCheck }) => {
   const passwordInputRefs = useRef([]);
 
   const handlePasswordChange = (e) => {
-    if (isNaN(e.nativeEvent.data)) {
+    if (isNaN(e.target.value)) {
+      e.target.value = "";
       return;
     }
 
