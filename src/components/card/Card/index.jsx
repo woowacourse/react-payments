@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../types';
 import { objectToString } from '../../../utils/util';
@@ -9,7 +9,9 @@ function Card({ cardInformation: { cardNumber, expirationDate, ownerName, cardTy
     <div className="card-box">
       <div
         className="small-card"
-        style={{ backgroundColor: CARD_TYPE[cardType]?.color ?? '#e5e5e5' }}
+        style={{
+          backgroundColor: CARD_TYPE[cardType]?.color ?? '#e5e5e5',
+        }}
       >
         <div className="card-top">
           <span className="card-text">{CARD_TYPE[cardType]?.name ?? '카드사를 선택해주세요'}</span>
