@@ -6,9 +6,10 @@ import ErrorMessage from '../../common/ErrorMessage';
 import Input from '../../common/Input';
 import { InputPasswordWrapper } from './style';
 
+import { CardInfoContext } from '../../context/CardInfoProvider';
+
 import useInputHandler from '../../../hooks/useInputHandler';
 import { validatePassword } from '../../../validator';
-import { CardInfoContext } from '../../context/CardInfoProvider';
 import { isCorrectPwd } from '../checkInputs';
 
 function CardPassword() {
