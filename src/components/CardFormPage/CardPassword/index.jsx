@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { InputContainer, Label, InputWrapper } from '../../common/styled';
 import InactiveContainer from '../../common/InactiveContainer';
@@ -8,8 +8,12 @@ import { InputPasswordWrapper } from './style';
 
 import useInputHandler from '../../../hooks/useInputHandler';
 import { validatePassword } from '../../../validator';
+import { CardInfoContext } from '../../../context';
+import { isCorrectPwd } from '../checkInputs';
 
-function CardPassword({ pwd, isCorrectPwd }) {
+function CardPassword() {
+  const { pwd } = useContext(CardInfoContext);
+
   const { errorMessage, setErrorMessage, updateInputState } = useInputHandler(validatePassword, {
     type: 'UPDATE_PWD',
     key: 'pwd',
@@ -21,8 +25,8 @@ function CardPassword({ pwd, isCorrectPwd }) {
   };
 
   useEffect(() => {
-    if (isCorrectPwd) setErrorMessage('');
-  }, [isCorrectPwd]);
+    if (isCorrectPwd(pwd)) setErrorMessage('');
+  }, [pwd]);
 
   return (
     <InputContainer>

@@ -5,7 +5,7 @@ import CardCompany from '../../common/CardCompany';
 import Modal from '../../common/Modal';
 import { CardContainer, GridContainer } from './style';
 
-import { CardInfoDispatchContext } from '../../../context';
+import { CardInfoContext, CardInfoDispatchContext } from '../../../context';
 
 const cardCompanyList = [
   { color: '#E24141', name: '포코 카드' },
@@ -25,7 +25,8 @@ const cardCompanyList = [
   { color: '#192dff', name: '블링 카드' },
 ];
 
-function CardShape({ dimensions, cardCompany, cardNumbers, cardOwner, cardDate }) {
+function CardShape({ dimensions }) {
+  const { cardCompany, cardNumbers, cardDate, owner } = useContext(CardInfoContext);
   const cardInfoDispatch = useContext(CardInfoDispatchContext);
   const [isShown, setIsShown] = useState(true);
 
@@ -39,13 +40,13 @@ function CardShape({ dimensions, cardCompany, cardNumbers, cardOwner, cardDate }
       cardCompany: { hexColor, name },
     });
 
-    setIsShown(!isShown);
+    setIsShown(prevIsShown => !prevIsShown);
   };
 
   return (
     <CardContainer>
       <div onClick={handleClickBox}>
-        <Card cardCompany={cardCompany} cardNumbers={cardNumbers} cardOwner={cardOwner} cardDate={cardDate} />
+        <Card cardCompany={cardCompany} cardNumbers={cardNumbers} cardOwner={owner} cardDate={cardDate} />
       </div>
       <Modal isOpen={isShown} setIsOpen={setIsShown} dimensions={dimensions}>
         <GridContainer>

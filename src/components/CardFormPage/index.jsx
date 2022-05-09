@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useContext, useLayoutEffect, useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 
 import { LABEL_PRIMARY_COLOR } from '../../style';
@@ -16,26 +16,13 @@ import CardShape from './CardShape';
 import DueDate from './DueDate';
 
 import { CardInfoContext, SetPathContext } from '../../context';
+import { isRequiredCompleted } from './checkInputs';
 
 function CardFormPage({ targetRef }) {
   const setPath = useContext(SetPathContext);
-  const { cardCompany, cardNumbers, cardDate, owner, cardCode, pwd } = useContext(CardInfoContext);
+  const cardInfo = useContext(CardInfoContext);
 
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-
-  const isCorrectCardNumber = useMemo(() => Object.values(cardNumbers).join('').length === 16, [cardNumbers]);
-  const isCorrectPwd = useMemo(() => Object.values(pwd).join('').length === 2, [pwd]);
-  const isRequiredCompleted = useMemo(
-    () =>
-      cardCompany.name &&
-      cardCompany.hexColor &&
-      isCorrectCardNumber &&
-      cardDate.month &&
-      cardDate.year &&
-      cardCode.cvc.length === 3 &&
-      isCorrectPwd,
-    [cardCompany, cardDate, cardCode, isCorrectCardNumber, isCorrectPwd],
-  );
 
   const handleClickBackArrow = () => {
     setPath('list-card');
@@ -44,7 +31,7 @@ function CardFormPage({ targetRef }) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    if (!isRequiredCompleted) return;
+    if (!isRequiredCompleted(cardInfo)) return;
     setPath('submit-card');
   };
 
@@ -66,20 +53,14 @@ function CardFormPage({ targetRef }) {
         카드추가
       </Header>
       <Form onSubmit={handleSubmit}>
-        <CardShape
-          dimensions={dimensions}
-          cardCompany={cardCompany}
-          cardNumbers={cardNumbers}
-          cardOwner={owner}
-          cardDate={cardDate}
-        />
-        <CardNumber cardNumbers={cardNumbers} isCorrectCardNumber={isCorrectCardNumber} />
-        <DueDate dimensions={dimensions} cardDate={cardDate} />
-        <CardOwner owner={owner} />
-        <CardSecurityCode cardCode={cardCode} />
-        <CardPassword pwd={pwd} isCorrectPwd={isCorrectPwd} />
+        <CardShape dimensions={dimensions} />
+        <CardNumber />
+        <DueDate dimensions={dimensions} />
+        <CardOwner />
+        <CardSecurityCode />
+        <CardPassword />
         <Footer>
-          <TextButton hexColor={LABEL_PRIMARY_COLOR} isVisible={isRequiredCompleted}>
+          <TextButton hexColor={LABEL_PRIMARY_COLOR} isVisible={isRequiredCompleted(cardInfo)}>
             다음
           </TextButton>
         </Footer>

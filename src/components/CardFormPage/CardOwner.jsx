@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { InputContainer, InputWrapper, Label } from '../common/styled';
 import ErrorMessage from '../common/ErrorMessage';
@@ -7,10 +7,13 @@ import Input from '../common/Input';
 
 import useInputHandler from '../../hooks/useInputHandler';
 import { validateOwner } from '../../validator';
+import { CardInfoContext } from '../../context';
 
 const convertToUpperCase = word => word.toUpperCase();
 
-function CardOwner({ owner }) {
+function CardOwner() {
+  const { owner } = useContext(CardInfoContext);
+
   const { errorMessage, updateInputState } = useInputHandler(validateOwner, {
     type: 'UPDATE_OWNER',
     key: 'owner',

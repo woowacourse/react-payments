@@ -5,13 +5,14 @@ import { HYPHEN_PRIMARY_COLOR } from '../../style';
 import Calendar from '../common/Calendar';
 import { InputContainer, InputWrapper, Span, Label } from '../common/styled';
 
-import { CardInfoDispatchContext } from '../../context';
+import { CardInfoDispatchContext, CardInfoContext } from '../../context';
 
 const getList = (length, n) => Array.from({ length }, (_, i) => `${i + n}`.slice(2));
 const YEAR = getList(10, new Date().getFullYear());
 const MONTH = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
-function DueDate({ dimensions, cardDate }) {
+function DueDate({ dimensions }) {
+  const { cardDate } = useContext(CardInfoContext);
   const cardInfoDispatch = useContext(CardInfoDispatchContext);
 
   const setItem = key => value => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 
 import { HYPHEN_PRIMARY_COLOR } from '../../style';
 
@@ -8,8 +8,12 @@ import { InputContainer, InputWrapper, Label, Span } from '../common/styled';
 
 import useInputHandler from '../../hooks/useInputHandler';
 import { validateCardNumbers } from '../../validator';
+import { CardInfoContext } from '../../context';
+import { isCorrectCardNumber } from './checkInputs';
 
-function CardNumber({ cardNumbers, isCorrectCardNumber }) {
+function CardNumber() {
+  const { cardNumbers } = useContext(CardInfoContext);
+
   const { errorMessage, setErrorMessage, updateInputState } = useInputHandler(validateCardNumbers, {
     type: 'UPDATE_NUMBERS',
     key: 'cardNumbers',
@@ -36,10 +40,10 @@ function CardNumber({ cardNumbers, isCorrectCardNumber }) {
   };
 
   useEffect(() => {
-    if (isCorrectCardNumber) {
+    if (isCorrectCardNumber(cardNumbers)) {
       setErrorMessage('');
     }
-  }, [setErrorMessage, isCorrectCardNumber]);
+  }, [cardNumbers]);
 
   return (
     <InputContainer>
