@@ -75,9 +75,7 @@ const EditCardPage = () => {
 
     if (!response.ok) {
       alert(ERROR_MESSAGE.FAILED_EDIT);
-      return;
     }
-    navigation('/');
   };
 
   const deleteCard = async () => {
@@ -91,9 +89,7 @@ const EditCardPage = () => {
 
     if (!response.ok) {
       alert(ERROR_MESSAGE.FAILED_DELELTE);
-      return;
     }
-    navigation('/');
   };
 
   return (
@@ -113,7 +109,8 @@ const EditCardPage = () => {
       <Button
         className="delete-button"
         onClick={async () => {
-          await deleteCard(newName);
+          await deleteCard();
+          navigation('/');
         }}
       >
         삭제
@@ -122,7 +119,8 @@ const EditCardPage = () => {
       <Button
         className="edit-button"
         onClick={async () => {
-          await editCard(newName);
+          await editCard();
+          navigation('/');
         }}
       >
         수정
