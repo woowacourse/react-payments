@@ -23,7 +23,7 @@ function CardPasswordField({ cardPassword, onChange }) {
         placeholder="앞 2자리"
         maxLength={CARD_PASSWORD.LENGTH}
         onChange={onChange}
-        onBlur={() => handleError(!cardPassword)}
+        onBlur={handleError}
       />
       <PasswordMasking />
       <PasswordMasking />

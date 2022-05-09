@@ -29,7 +29,7 @@ function CardNumberField({ cardNumber, onChange }) {
           value={cardNumber[index]}
           maxLength={CARD_NUMBER.UNIT_LENGTH}
           onChange={(event) => onChange(event, { index })}
-          onBlur={() => handleError(!cardNumber.every((unit) => unit !== ''))}
+          onBlur={(event) => handleError(event, !cardNumber.every((unit) => unit !== ''))}
         />
       ))}
     </FieldSet>

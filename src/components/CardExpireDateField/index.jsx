@@ -27,7 +27,7 @@ function CardExpireDateField({ expireMonth, expireYear, onChange }) {
         placeholder="MM"
         maxLength={EXPIRE_DATE.MONTH_LENGTH}
         onChange={onChange}
-        onBlur={() => handleError(!expireMonth || !expireYear)}
+        onBlur={(event) => handleError(event, !expireMonth || !expireYear)}
       />
       /
       <TextField
@@ -37,7 +37,7 @@ function CardExpireDateField({ expireMonth, expireYear, onChange }) {
         placeholder="YY"
         maxLength={EXPIRE_DATE.YEAR_LENGTH}
         onChange={onChange}
-        onBlur={() => handleError(!expireMonth || !expireYear)}
+        onBlur={(event) => handleError(event, !expireMonth || !expireYear)}
       />
     </FieldSet>
   );
