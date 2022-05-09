@@ -21,14 +21,20 @@ function useExpiredDateInput(inputNames) {
 
   const isValid = Object.values(validations).every(valid => valid);
 
-  const onDateChange = ({ target, nativeEvent: { data, inputType } }) => {
+  const checkNewDateValid = (unit, newDate, data) => {
     if (
       (numberRegex.test(data) || !data) &&
-      target.value.length <= COUNT.DATE_MAX_COUNT
+      newDate.length <= COUNT.DATE_MAX_COUNT
     ) {
-      const unit = target.name;
-      const newDate = target.value;
+      return unit === inputNames[0] ? newDate <= COUNT.MAX_MONTH : true;
+    }
+  };
 
+  const onDateChange = ({ target, nativeEvent: { data, inputType } }) => {
+    const unit = target.name;
+    const newDate = target.value;
+
+    if (checkNewDateValid(unit, newDate, data)) {
       updateDate(unit, newDate);
       updateValidation(unit, newDate);
       focusPrevInput(unit, newDate, inputType);
