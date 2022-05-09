@@ -43,10 +43,11 @@ function useCardAddForm(link) {
       Object.values(cardInfo.cardNumber.value).join('')
     );
 
-    return cardNumberList.find(
-      cardNumber =>
-        cardNumber === Object.values(inputtedInfo.cardNumber.value).join('')
-    );
+    const inputtedCardNumber = Object.values(
+      inputtedInfo.cardNumber.value
+    ).join('');
+
+    return cardNumberList.includes(inputtedCardNumber);
   };
 
   return { isValidForm, onCardInfoSubmit };
