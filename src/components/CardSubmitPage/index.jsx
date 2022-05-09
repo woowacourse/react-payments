@@ -62,12 +62,12 @@ function CardSubmitPage({ nextId }) {
 
   const handleClick = () => {
     if (
-      !nickname &&
-      !owner.name &&
-      !cardDate.month &&
-      !cardDate.year &&
-      !cardCompany.hexColor &&
-      !cardCompany.name &&
+      !nickname ||
+      !owner.name ||
+      !cardDate.month ||
+      !cardDate.year ||
+      !cardCompany.hexColor ||
+      !cardCompany.name ||
       Object.values(cardNumbers).join('').length !== 16
     ) {
       return;
