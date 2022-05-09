@@ -35,11 +35,6 @@ const StyledStoredCardList = styled.div`
     color: '#575757';
   }
 
-  .card-box {
-    width: 206px;
-    margin: 0 0 5px;
-  }
-
   .card-box:hover {
     opacity: 0.6;
   }

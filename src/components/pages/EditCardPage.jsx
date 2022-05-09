@@ -23,12 +23,6 @@ const StyledCompleteEditCardPage = styled.div`
     margin: 114px 17px 77px;
   }
 
-  .small-card {
-    width: 293px;
-    height: 183px;
-    margin: 0px 17px 33px;
-  }
-
   .input-box {
     margin: 0 43px;
   }
@@ -98,7 +92,7 @@ const EditCardPage = () => {
         <BackwardButton showBackWard>카드 수정</BackwardButton>
       </Link>
       <TextBox fontSize="23px">카드 이름을 수정하세요.</TextBox>
-      <CardPreview values={values} />
+      <CardPreview values={values} size="large" />
       <Input underLine placeHolder={cardName} innerRef={inputRef} />
       <Button
         className="delete-button"

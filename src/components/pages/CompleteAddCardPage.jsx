@@ -23,12 +23,6 @@ const StyledCompleteAddCardPage = styled.div`
     margin: 114px 17px 77px;
   }
 
-  .small-card {
-    width: 293px;
-    height: 183px;
-    margin: 0px 17px 33px;
-  }
-
   .input-box {
     margin: 0 43px;
   }
@@ -74,7 +68,7 @@ const CompleteAddCardPage = () => {
   return (
     <StyledCompleteAddCardPage>
       <TextBox fontSize="23px">카드등록이 완료되었습니다.</TextBox>
-      <CardPreview values={values} />
+      <CardPreview values={values} size="large" />
       <Input
         underLine
         placeHolder="카드 별칭을 지정해주세요."
