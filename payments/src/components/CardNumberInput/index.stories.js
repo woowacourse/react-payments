@@ -1,8 +1,8 @@
-import CardNumberInput from ".";
-import useCard from "../../hooks/useCard";
+import CardNumberInput from '.';
+import useCard from '../../hooks/useCardInfoReducer';
 
 export default {
-  title: "CardNumberInput",
+  title: 'CardNumberInput',
   component: CardNumberInput,
 };
 

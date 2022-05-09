@@ -1,8 +1,8 @@
-import OwnerNameInput from ".";
-import useCard from "../../hooks/useCard";
+import OwnerNameInput from '.';
+import useCard from '../../hooks/useCardInfoReducer';
 
 export default {
-  title: "OwnerNameInput",
+  title: 'OwnerNameInput',
   component: OwnerNameInput,
 };
 

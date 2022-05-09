@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ColorPicker from '.';
-import useCard from '../../hooks/useCard';
+import useCard from '../../hooks/useCardInfoReducer';
 
 export default {
   title: 'ColorPicker',
