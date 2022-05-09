@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-
 import { Card, EmptyCard, Header, ModalPortal } from 'components';
 
 import { useGetCardList } from 'hooks';
 
-import getMaskedNumbers from 'utils/maskNumbers';
 // import { ReactComponent as Spinner } from 'assets/spinner.svg';
 import Loading from 'assets/loading.png';
+import getMaskedNumbers from 'utils/maskNumbers';
+
+import styled from 'styled-components';
 
 function CardList() {
   const { cardList, isLoading } = useGetCardList();

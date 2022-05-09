@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 
-import styled from 'styled-components';
-
 import { ReactComponent as Plus } from 'assets/plus.svg';
+
+import styled from 'styled-components';
 
 function EmptyCard() {
   const navigate = useNavigate();

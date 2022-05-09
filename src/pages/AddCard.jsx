@@ -1,22 +1,21 @@
 import { useContext, useReducer } from 'react';
 import { Link } from 'react-router-dom';
 
-import { CardContext } from 'contexts/CardContext';
-
-import styled from 'styled-components';
-
 import {
   Button,
   Card,
   CardForm,
   CardPickModal,
-  ModalPortal,
   Header,
+  ModalPortal,
 } from 'components';
 
-import { ReactComponent as Arrow } from 'assets/arrow.svg';
+import { CardContext } from 'contexts/CardContext';
 
+import { ReactComponent as Arrow } from 'assets/arrow.svg';
 import getMaskedNumbers from 'utils/maskNumbers';
+
+import styled from 'styled-components';
 
 function AddCard() {
   const { cardNumber, cardOwnerName, validDate, cardKind, setCardKind } =

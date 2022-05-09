@@ -1,10 +1,10 @@
-import { userEvent, within } from '@storybook/testing-library';
-
 import { withReactContext } from 'storybook-react-context';
 
-import { AddCardComplete } from 'pages';
+import { userEvent, within } from '@storybook/testing-library';
 
 import { CardContext } from 'contexts/CardContext';
+
+import { AddCardComplete } from 'pages';
 
 export default {
   title: 'Pages/AddCardComplete',
@@ -24,15 +24,17 @@ export default {
   ],
 };
 
-const Template = (args) => <AddCardComplete {...args} />;
+function Template(args) {
+  return <AddCardComplete {...args} />;
+}
 
 export const Default = Template.bind({});
 Default.args = {};
 
 export const Filled = Template.bind({});
 
-Filled.play = ({ canvasElement }) => {
+Filled.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
-  userEvent.type(canvas.getByTestId('nickname'), '만능 카드!');
+  await userEvent.type(canvas.getByTestId('nickname'), '만능 카드!');
 };

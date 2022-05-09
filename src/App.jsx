@@ -3,9 +3,9 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { CardContextProvider } from 'contexts/CardContext';
 
-import GlobalStyle from 'GlobalStyle';
-
 import { AddCard, AddCardComplete, CardList } from 'pages';
+
+import GlobalStyle from 'GlobalStyle';
 
 function App() {
   return (

@@ -8,11 +8,16 @@ export default function useCardNumber(initialValue) {
   const getComputedValue = (selectionStart, type = 'delete') => {
     const auxilaryNum = type === 'add' && 1;
 
-    if (0 <= selectionStart && selectionStart <= 4 + auxilaryNum) return 0;
-    if (4 + auxilaryNum < selectionStart && selectionStart <= 9 + auxilaryNum)
+    if (selectionStart >= 0 && selectionStart <= 4 + auxilaryNum) return 0;
+    if (4 + auxilaryNum < selectionStart && selectionStart <= 9 + auxilaryNum) {
       return 1;
-    if (9 + auxilaryNum < selectionStart && selectionStart <= 14 + auxilaryNum)
+    }
+    if (
+      9 + auxilaryNum < selectionStart &&
+      selectionStart <= 14 + auxilaryNum
+    ) {
       return 2;
+    }
     if (14 + auxilaryNum < selectionStart && selectionStart <= 19) return 3;
   };
 

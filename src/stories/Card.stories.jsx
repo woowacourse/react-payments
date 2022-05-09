@@ -4,7 +4,9 @@ export default {
   title: 'Components/Card',
 };
 
-const Template = (args) => <Card {...args} />;
+function Template(args) {
+  return <Card {...args} />;
+}
 
 export const Default = Template.bind({});
 Default.args = {

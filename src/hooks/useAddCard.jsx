@@ -3,8 +3,9 @@ import { useContext } from 'react';
 import { useNavigateTo } from 'hooks';
 
 import { CardContext } from 'contexts/CardContext';
-import { addCardFetcher } from 'utils/fetcher';
+
 import { ERROR_MESSAGE } from 'constants';
+import { addCardFetcher } from 'utils/fetcher';
 
 export default function useAddCard() {
   const navigateToHome = useNavigateTo('/card-list');

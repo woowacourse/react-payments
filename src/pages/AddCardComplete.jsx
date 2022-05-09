@@ -6,9 +6,9 @@ import { useAddCard } from 'hooks';
 
 import { CardContext } from 'contexts/CardContext';
 
-import styled from 'styled-components';
-
 import getMaskedNumbers from 'utils/maskNumbers';
+
+import styled from 'styled-components';
 
 function AddCardComplete() {
   const handleAddCard = useAddCard();

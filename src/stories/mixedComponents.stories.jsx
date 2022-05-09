@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-
 import { Button, CVCTooltip, Input } from 'components';
+
+import styled from 'styled-components';
 
 export default {
   title: 'MixedComponents/MixedComponents',
@@ -13,12 +13,14 @@ const CardOwnerNameLength = styled.div`
   left: 318px;
 `;
 
-const CardOwnerNameTemplate = (args) => (
-  <>
-    <CardOwnerNameLength>0/30</CardOwnerNameLength>
-    <Input {...args} />
-  </>
-);
+function CardOwnerNameTemplate(args) {
+  return (
+    <>
+      <CardOwnerNameLength>0/30</CardOwnerNameLength>
+      <Input {...args} />
+    </>
+  );
+}
 
 export const CardOwnerName = CardOwnerNameTemplate.bind({});
 CardOwnerName.args = {
@@ -26,13 +28,15 @@ CardOwnerName.args = {
   placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
 };
 
-const CVCTemplate = (args) => (
-  <>
-    <Input {...args.inputArgs} />
-    <Button {...args.buttonArgs} />
-    <CVCTooltip {...args.modalArgs} />
-  </>
-);
+function CVCTemplate(args) {
+  return (
+    <>
+      <Input {...args.inputArgs} />
+      <Button {...args.buttonArgs} />
+      <CVCTooltip {...args.modalArgs} />
+    </>
+  );
+}
 
 export const CVC = CVCTemplate.bind({});
 CVC.args = {
@@ -59,14 +63,16 @@ const Bullet = styled.span`
   margin-right: 35px;
 `;
 
-const CardPasswordTemplate = (args) => (
-  <>
-    <Input {...args.labeled} />
-    <Input {...args.noLabeled} />
-    <Bullet>•</Bullet>
-    <Bullet>•</Bullet>
-  </>
-);
+function CardPasswordTemplate(args) {
+  return (
+    <>
+      <Input {...args.labeled} />
+      <Input {...args.noLabeled} />
+      <Bullet>•</Bullet>
+      <Bullet>•</Bullet>
+    </>
+  );
+}
 
 export const CardPassword = CardPasswordTemplate.bind({});
 CardPassword.args = {

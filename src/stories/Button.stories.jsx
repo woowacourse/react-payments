@@ -15,7 +15,9 @@ export default {
   },
 };
 
-const Template = (args) => <Button {...args} />;
+function Template(args) {
+  return <Button {...args} />;
+}
 
 export const Arrow = Template.bind({});
 Arrow.args = {
@@ -31,7 +33,7 @@ Arrow.args = {
       <path
         d="M8.30426 1L1.36476 8.78658L9.15134 15.7261"
         stroke="#525252"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
     </svg>
   ),

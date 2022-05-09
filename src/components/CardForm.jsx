@@ -6,11 +6,10 @@ import { useCardPassword, useCVC, useNavigateTo } from 'hooks';
 
 import { CardContext } from 'contexts/CardContext';
 
-import styled from 'styled-components';
-
 import { ERROR_MESSAGE, RULE } from 'constants';
-
 import getMaskedNumbers from 'utils/maskNumbers';
+
+import styled from 'styled-components';
 
 function CardForm() {
   const { CVC, handleCVC, showCVCValidation } = useCVC('');

@@ -1,5 +1,6 @@
+import { useCallback, useState } from 'react';
+
 import { ERROR_MESSAGE } from 'constants';
-import { useState, useCallback } from 'react';
 
 export default function useCVC(initialValue) {
   const [CVC, setCVC] = useState(initialValue);

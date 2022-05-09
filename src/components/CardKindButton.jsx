@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-
 import { Button } from 'components';
+
+import styled from 'styled-components';
 
 function CardKindButton({ buttonBgColor, cardTitle, onClickFunc }) {
   const setCardKind = () => {

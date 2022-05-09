@@ -4,7 +4,9 @@ export default {
   title: 'Pages/CardList',
 };
 
-const Template = (args) => <CardList {...args} />;
+function Template(args) {
+  return <CardList {...args} />;
+}
 
 export const Default = Template.bind({});
 Default.args = {};

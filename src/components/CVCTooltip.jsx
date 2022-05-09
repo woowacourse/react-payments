@@ -1,8 +1,7 @@
 import { memo } from 'react';
+import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
-
-import PropTypes from 'prop-types';
 
 function Tooltip({ visible }) {
   return (
