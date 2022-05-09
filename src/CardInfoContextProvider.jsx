@@ -1,6 +1,5 @@
 import { useReducer, createContext } from 'react';
 import { ACTION } from 'constants';
-import React from 'react';
 
 const initialState = {
   card: {
