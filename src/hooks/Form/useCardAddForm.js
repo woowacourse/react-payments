@@ -3,7 +3,6 @@ import { MESSAGE } from 'constant/message';
 import { CardContext } from 'context/CardContext';
 import { CARD_ACTION } from 'Reducer/CardReducer';
 import { useNavigate } from 'react-router-dom';
-import { NO_CARD_NAME } from '../../constant';
 
 function useCardAddForm(link) {
   const navigator = useNavigate();
@@ -32,7 +31,7 @@ function useCardAddForm(link) {
 
     cardDispatch({
       type: CARD_ACTION.ADD,
-      value: { ...inputtedInfo, cardName: { value: NO_CARD_NAME } },
+      value: inputtedInfo,
     });
 
     navigator(link);

@@ -43,7 +43,7 @@ function CardListPage() {
       <ListContainer>
         {cardData.map(cardInfo => (
           <Wrapper
-            key={cardInfo.cardNumber.value.fist + cardInfo.cardName.value}
+            key={cardInfo.cardNumber.value.first + cardInfo.cardName.value}
           >
             <Card {...cardInfo} />
             <span>{cardInfo.cardName.value}</span>

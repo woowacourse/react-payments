@@ -3,23 +3,20 @@ import { CardContext } from 'context/CardContext';
 import { CARD_ACTION } from 'Reducer/CardReducer';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 import { useNavigate } from 'react-router-dom';
-import { MESSAGE } from '../../constant/message';
 
 function useCardNameForm(link) {
   const navigator = useNavigate();
-  const { inputtedInfo, cardDispatch, inputtedInfoDispatch } =
+  const { inputtedInfo, cardDispatch, cardData, inputtedInfoDispatch } =
     useContext(CardContext);
 
+  console.log(inputtedInfo, cardData);
+
   const { cardNumber, cardName } = inputtedInfo;
-  const isValidForm = cardName ? cardName.isValid : false;
 
   const onCardNameSubmit = event => {
     event.preventDefault();
 
-    if (!isValidForm) {
-      alert(MESSAGE.NO_CARD_NAME);
-      return;
-    }
+    console.log(event);
 
     cardDispatch({
       type: CARD_ACTION.NAME_EDIT,
@@ -34,7 +31,7 @@ function useCardNameForm(link) {
     navigator(link);
   };
 
-  return { isValidForm, onCardNameSubmit };
+  return { onCardNameSubmit };
 }
 
 export default useCardNameForm;

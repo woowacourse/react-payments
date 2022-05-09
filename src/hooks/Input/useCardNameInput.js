@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { CardContext } from 'context/CardContext';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 import { noSpecialCharacters } from '../../constant/regularExpression';
+import { NO_CARD_NAME } from '../../constant';
 
 function useCardNameInput() {
   const { inputtedInfoDispatch } = useContext(CardContext);
@@ -16,7 +17,7 @@ function useCardNameInput() {
   useEffect(() => {
     inputtedInfoDispatch({
       type: INPUT_ACTION.CARD_NAME,
-      value: cardName,
+      value: cardName || NO_CARD_NAME,
       valid: validation,
     });
   }, [cardName, validation]);

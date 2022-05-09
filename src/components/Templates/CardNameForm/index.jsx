@@ -19,13 +19,13 @@ const SubmitButtonWrapper = styled.div`
 `;
 
 function CardNameForm({ link }) {
-  const { isValidForm, onCardNameSubmit } = useCardNameForm(link);
+  const { onCardNameSubmit } = useCardNameForm(link);
 
   return (
     <Form onSubmit={onCardNameSubmit}>
       <CardNameInput />
       <SubmitButtonWrapper>
-        <SubmitButton hidden={!isValidForm}>확인</SubmitButton>
+        <SubmitButton>건너뛰기</SubmitButton>
       </SubmitButtonWrapper>
     </Form>
   );

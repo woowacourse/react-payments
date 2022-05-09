@@ -35,10 +35,7 @@ function CardCompletePage() {
   const navigator = useNavigate();
   const { inputtedInfo } = useContext(CardContext);
 
-  console.log('a');
-
   useEffect(() => {
-    console.log('compkete');
     if (Object.keys(inputtedInfo).length === 0) {
       alert(MESSAGE.INVALID_ACCESS);
       navigator(LINK.CARD_LIST_PAGE);
