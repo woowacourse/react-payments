@@ -15,7 +15,9 @@ import CardSecurityCode from './CardSecurityCode';
 import CardShape from './CardShape';
 import DueDate from './DueDate';
 
-import { CardInfoContext, SetPathContext } from '../../context';
+import { SetPathContext } from '../context/PathProvider';
+import { CardInfoContext } from '../context/CardInfoProvider';
+
 import { isRequiredCompleted } from './checkInputs';
 
 function CardFormPage({ targetRef }) {

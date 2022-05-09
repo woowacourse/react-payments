@@ -4,7 +4,9 @@ import CardFormPage from './components/CardFormPage';
 import CardListPage from './components/CardListPage';
 import CardSubmitPage from './components/CardSubmitPage';
 
-import { CardInfoProvider, CardListProvider, PathContext } from './context';
+import { CardInfoProvider } from './components/context/CardInfoProvider';
+import { CardListProvider } from './components/context/CardListProvider';
+import { PathContext } from './components/context/PathProvider';
 
 function App() {
   const path = useContext(PathContext);

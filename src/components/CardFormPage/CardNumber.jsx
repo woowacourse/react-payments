@@ -8,7 +8,7 @@ import { InputContainer, InputWrapper, Label, Span } from '../common/styled';
 
 import useInputHandler from '../../hooks/useInputHandler';
 import { validateCardNumbers } from '../../validator';
-import { CardInfoContext } from '../../context';
+import { CardInfoContext } from '../context/CardInfoProvider';
 import { isCorrectCardNumber } from './checkInputs';
 
 function CardNumber() {

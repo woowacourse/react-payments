@@ -8,7 +8,9 @@ import Footer from '../common/Footer';
 import TextButton from '../common/TextButton';
 import { Container, LinedInput, SubmitContainer, Title } from './style';
 
-import { CardListDispatchContext, CardInfoContext, SetPathContext, CardInfoDispatchContext } from '../../context';
+import { CardInfoContext, CardInfoDispatchContext } from '../context/CardInfoProvider';
+import { SetPathContext } from '../context/PathProvider';
+import { CardListDispatchContext } from '../context/CardListProvider';
 
 function CardSubmitPage({ nextId }) {
   const setPath = useContext(SetPathContext);

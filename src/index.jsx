@@ -4,7 +4,7 @@ import './index.css';
 
 import App from './App';
 
-import { PathProvider } from './context';
+import { PathProvider } from './components/context/PathProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

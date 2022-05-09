@@ -8,7 +8,7 @@ import { InputPasswordWrapper } from './style';
 
 import useInputHandler from '../../../hooks/useInputHandler';
 import { validatePassword } from '../../../validator';
-import { CardInfoContext } from '../../../context';
+import { CardInfoContext } from '../../context/CardInfoProvider';
 import { isCorrectPwd } from '../checkInputs';
 
 function CardPassword() {

@@ -1,3 +1,5 @@
+import React, { useReducer } from 'react';
+
 const initialCardInfoState = {
   cardCompany: {
     name: '',
@@ -24,6 +26,7 @@ const initialCardInfoState = {
     pwdNoB: '',
   },
 };
+
 const cardInfoReducer = (state, action) => {
   switch (action.type) {
     case 'UPDATE_COMPANY':
@@ -63,14 +66,17 @@ const cardInfoReducer = (state, action) => {
   }
 };
 
-const initialCardListState = [];
-const cardListReducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD_CARD_ITEM':
-      return [...state, action.card];
-    default:
-      return state;
-  }
+const CardInfoContext = React.createContext(null);
+const CardInfoDispatchContext = React.createContext(null);
+
+const CardInfoProvider = ({ children, initialState }) => {
+  const [cardInfo, cardInfoDispatch] = useReducer(cardInfoReducer, initialState ?? initialCardInfoState);
+
+  return (
+    <CardInfoContext.Provider value={cardInfo}>
+      <CardInfoDispatchContext.Provider value={cardInfoDispatch}>{children}</CardInfoDispatchContext.Provider>
+    </CardInfoContext.Provider>
+  );
 };
 
-export { initialCardInfoState, initialCardListState, cardInfoReducer, cardListReducer };
+export { CardInfoContext, CardInfoDispatchContext, CardInfoProvider };

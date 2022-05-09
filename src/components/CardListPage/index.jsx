@@ -5,7 +5,7 @@ import Header from '../common/Header';
 import AddCardItem from './AddCardItem';
 import { CardList } from './style';
 
-import { CardListContext } from '../../context';
+import { CardListContext } from '../context/CardListProvider';
 
 function CardListPage() {
   const cardList = useContext(CardListContext);

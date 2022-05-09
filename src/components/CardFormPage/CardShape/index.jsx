@@ -5,7 +5,7 @@ import CardCompany from '../../common/CardCompany';
 import Modal from '../../common/Modal';
 import { CardContainer, GridContainer } from './style';
 
-import { CardInfoContext, CardInfoDispatchContext } from '../../../context';
+import { CardInfoContext, CardInfoDispatchContext } from '../../context/CardInfoProvider';
 
 const cardCompanyList = [
   { color: '#E24141', name: '포코 카드' },

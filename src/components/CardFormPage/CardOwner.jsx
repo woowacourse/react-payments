@@ -7,7 +7,7 @@ import Input from '../common/Input';
 
 import useInputHandler from '../../hooks/useInputHandler';
 import { validateOwner } from '../../validator';
-import { CardInfoContext } from '../../context';
+import { CardInfoContext } from '../context/CardInfoProvider';
 
 const convertToUpperCase = word => word.toUpperCase();
 

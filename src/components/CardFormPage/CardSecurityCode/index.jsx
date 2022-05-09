@@ -8,7 +8,7 @@ import { Wrapper } from './style';
 
 import useInputHandler from '../../../hooks/useInputHandler';
 import { validateCardCode } from '../../../validator';
-import { CardInfoContext } from '../../../context';
+import { CardInfoContext } from '../../context/CardInfoProvider';
 
 const CVC_EXPLANATION = `CVC번호는 카드뒷면의 7자리 숫자 중 뒷 3자리입니다.`;
 

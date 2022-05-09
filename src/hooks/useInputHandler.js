@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { CardInfoDispatchContext } from '../context';
+import { CardInfoDispatchContext } from '../components/context/CardInfoProvider';
 
 function useInputHandler(validator, { type, key, prevData }) {
   const cardInfoDispatch = useContext(CardInfoDispatchContext);
