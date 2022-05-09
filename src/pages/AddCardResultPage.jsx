@@ -43,7 +43,7 @@ const ButtonWrapper = styled.div`
   bottom: 25px;
 `;
 
-export default function UpdateCardNickNamePage() {
+export default function AddCardResultPage() {
   const { id: cardIndex } = useParams();
   const { cardList, updateNickNameByIndex } = useContext(CardListContext);
   const navigate = useNavigate();
@@ -61,20 +61,14 @@ export default function UpdateCardNickNamePage() {
     e.preventDefault();
     const nickNameInputValue = e.target.elements['nickname-input'].value;
     if (nickNameInputValue === '') {
-      if (
-        confirm(
-          cardList[cardIndex].nickName
-            ? `기존 닉네임 [${cardList[cardIndex].nickName}]을 유지하시겠습니까?`
-            : '닉네임이 없는 상태를 유지하시겠습니까?'
-        )
-      ) {
+      if (confirm('닉네임을 지정하지 않고 카드를 등록하시겠습니까?')) {
         navigate('/', {
           replace: true,
         });
       }
       return;
     }
-    if (confirm(`[${nickNameInputValue}](으)로 카드 닉네임을 수정하시겠습니까?`)) {
+    if (confirm(`[${nickNameInputValue}](으)로 카드 닉네임을 등록하시겠습니까?`)) {
       updateNickNameByIndex(cardIndex, nickNameInputValue);
       navigate('/', {
         replace: true,
@@ -86,11 +80,11 @@ export default function UpdateCardNickNamePage() {
     <>
       <Header>
         <GoBackButton />
-        <Title>카드 닉네임 설정</Title>
+        <Title>카드 등록 완료</Title>
       </Header>
       <Main>
         <GuideMessageWrapper>
-          <GuideMessage>{'카드 닉네임을 수정하세요.'}</GuideMessage>
+          <GuideMessage>{'카드등록이 완료되었습니다.'}</GuideMessage>
         </GuideMessageWrapper>
         {cardList[cardIndex] && (
           <>
@@ -98,7 +92,7 @@ export default function UpdateCardNickNamePage() {
             <Form onSubmit={handleCardNickNameSubmit}>
               <CardNickNameInput
                 name="nickname-input"
-                placeholder={cardList[cardIndex].nickName || '카드 닉네임'}
+                placeholder={'카드 닉네임을 입력하세요'}
                 data-testid={'card-nickname-input'}
               />
               <ButtonWrapper>

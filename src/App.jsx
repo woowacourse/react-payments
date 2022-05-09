@@ -7,6 +7,7 @@ import Storage from './Storage';
 
 import CardListPage from './pages/CardListPage';
 import AddCardPage from './pages/AddCardPage';
+import AddCardResultPage from './pages/AddCardResultPage';
 import UpdateCardNickNamePage from './pages/UpdateCardNickNamePage';
 import WrongAccessPage from './pages/WrongAccessPage';
 
@@ -56,6 +57,7 @@ function App() {
         <Routes>
           <Route path="/" element={<CardListPage />} />
           <Route path="/addCard" element={<AddCardPage />} />
+          <Route path="/addCardResult/:id" element={<AddCardResultPage />} />
           <Route path="/updateCardNickName/:id" element={<UpdateCardNickNamePage />} />
           <Route path="/error" element={<WrongAccessPage />} />
           <Route path="*" element={<WrongAccessPage />} />
