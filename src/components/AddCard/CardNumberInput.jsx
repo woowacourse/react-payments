@@ -12,9 +12,9 @@ export default function CardNumberInput() {
     actions: { handleCardNumberUpdate },
   } = useContext(CardInfoContext);
 
-  const cardNumberList = Object.values(cardNumber);
+  const cardNumberList = Object.entries(cardNumber);
   const cardNumberLength = cardNumberList.reduce(
-    (sum, prev) => prev.value.length + sum,
+    (sum, currentCardNumber) => currentCardNumber[1].length + sum,
     0
   );
 
@@ -29,33 +29,36 @@ export default function CardNumberInput() {
         CARD_INFO_RULES.NUMBER_UNIT_COUNT * CARD_INFO_RULES.NUMBER_UNIT_LENGTH
       }
     >
-      {cardNumberList.map((cardNumber, index) => (
-        <Fragment key={cardNumber.keyType}>
-          <Input
-            name={"cardNumber"}
-            className={"cardNumber"}
-            value={cardNumber.value}
-            type={
-              index < CARD_INFO_RULES.NUMBER_UNIT_COUNT / 2
-                ? "number"
-                : "password"
-            }
-            placeholder={
-              index < CARD_INFO_RULES.NUMBER_UNIT_COUNT / 2
-                ? "1 2 3 4"
-                : "• • • •"
-            }
-            maxLength={CARD_INFO_RULES.NUMBER_UNIT_LENGTH}
-            autoFocus={cardNumber.keyType === "firstCardNumber"}
-            required
-            onChange={(e) => handleCardNumberUpdate(e, cardNumber.keyType)}
-            isComplete={
-              cardNumber.value.length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
-            }
-          />
-          {cardNumber.keyType !== "fourthCardNumber" && <p>-</p>}
-        </Fragment>
-      ))}
+      {cardNumberList.map((cardNumber, index) => {
+        const [cardNumberKey, cardNumberValue] = cardNumber;
+        return (
+          <Fragment key={cardNumberKey}>
+            <Input
+              name={"cardNumber"}
+              className={"cardNumber"}
+              value={cardNumberValue}
+              type={
+                index < CARD_INFO_RULES.NUMBER_UNIT_COUNT / 2
+                  ? "number"
+                  : "password"
+              }
+              placeholder={
+                index < CARD_INFO_RULES.NUMBER_UNIT_COUNT / 2
+                  ? "1 2 3 4"
+                  : "• • • •"
+              }
+              maxLength={CARD_INFO_RULES.NUMBER_UNIT_LENGTH}
+              autoFocus={cardNumberKey === "firstCardNumber"}
+              required
+              onChange={(e) => handleCardNumberUpdate(e, cardNumberKey)}
+              isComplete={
+                cardNumberValue.length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
+              }
+            />
+            {cardNumberKey !== "fourthCardNumber" && <p>-</p>}
+          </Fragment>
+        );
+      })}
     </InputField>
   );
 }

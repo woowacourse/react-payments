@@ -27,17 +27,17 @@ export const isValidCardInfo = (
   } = CARD_INFO_RULES;
 
   const cardNumberLength = Object.values(cardNumber).reduce(
-    (sum, currentInput) => currentInput.value.length + sum,
+    (sum, currentValue) => currentValue.length + sum,
     0
   );
 
   const passwordLength = Object.values(password).reduce(
-    (sum, currentInput) => currentInput.value.length + sum,
+    (sum, currentValue) => currentValue.length + sum,
     0
   );
 
   const expireDateLength = Object.values(expireDate).reduce(
-    (sum, currentInput) => currentInput.value.length + sum,
+    (sum, currentValue) => currentValue.length + sum,
     0
   );
 

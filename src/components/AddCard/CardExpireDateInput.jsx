@@ -13,8 +13,10 @@ export default function CardExpireDateInput() {
     actions: { handleExpireDateUpdate },
   } = useContext(CardInfoContext);
 
-  const expireDateList = Object.values(expireDate);
+  const expireDateList = Object.entries(expireDate);
   const [month, year] = expireDateList;
+  const monthValue = month[1];
+  const yearValue = year[1];
 
   return (
     <InputField
@@ -22,28 +24,28 @@ export default function CardExpireDateInput() {
       wrapperWidth={"135px"}
       horizontalAlign={"center"}
       guideMessage={GUIDE_MESSAGE.VALID_EXPIRE_DATE}
-      isComplete={isCompleteExpireDate("expireDate", [year.value, month.value])}
+      isComplete={isCompleteExpireDate("expireDate", [yearValue, monthValue])}
     >
-      {expireDateList.map((expireDate) => (
-        <Fragment key={expireDate.keyType}>
-          <Input
-            name={"expireDate"}
-            className={"expireDate"}
-            value={expireDate.value}
-            type={"text"}
-            placeholder={expireDate.keyType === "month" ? "MM" : "YY"}
-            width={"40px"}
-            maxLength={CARD_INFO_RULES.EXPIRE_DATE_UNIT_LENGTH}
-            required
-            onChange={(e) => handleExpireDateUpdate(e, expireDate.keyType)}
-            isComplete={isCompleteExpireDate(
-              expireDate.keyType,
-              expireDate.value
-            )}
-          />
-          {expireDate.keyType === "month" && <p>/</p>}
-        </Fragment>
-      ))}
+      {expireDateList.map((expireDate) => {
+        const [expireDateKey, expireDateValue] = expireDate;
+        return (
+          <Fragment key={expireDateKey}>
+            <Input
+              name={"expireDate"}
+              className={"expireDate"}
+              value={expireDateValue}
+              type={"text"}
+              placeholder={expireDateKey === "month" ? "MM" : "YY"}
+              width={"40px"}
+              maxLength={CARD_INFO_RULES.EXPIRE_DATE_UNIT_LENGTH}
+              required
+              onChange={(e) => handleExpireDateUpdate(e, expireDateKey)}
+              isComplete={isCompleteExpireDate(expireDateKey, expireDateValue)}
+            />
+            {expireDateKey === "month" && <p>/</p>}
+          </Fragment>
+        );
+      })}
     </InputField>
   );
 }

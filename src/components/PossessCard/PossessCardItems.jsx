@@ -16,26 +16,14 @@ const transformToCardPreviewTemplate = (cardInfo) => {
     return {
       cardAlias,
       cardNumber: {
-        firstCardNumber: {
-          value: firstCardNumber,
-        },
-        secondCardNumber: {
-          value: secondCardNumber,
-        },
-        thirdCardNumber: {
-          value: thirdCardNumber,
-        },
-        fourthCardNumber: {
-          value: fourthCardNumber,
-        },
+        firstCardNumber,
+        secondCardNumber,
+        thirdCardNumber,
+        fourthCardNumber,
       },
       expireDate: {
-        month: {
-          value: month,
-        },
-        year: {
-          value: year,
-        },
+        month,
+        year,
       },
       holderName: {
         value: holderName,

@@ -4,15 +4,12 @@ export default function useInput(initialValue, validator) {
   const [value, setValue] = useState(initialValue);
 
   const handleDate = (value, keyType) => {
-    if (validator(value, keyType)) return;
+    if (validator(value)) return;
 
     setValue((prevValue) => {
       return {
         ...prevValue,
-        [keyType]: {
-          ...prevValue[keyType],
-          value,
-        },
+        [keyType]: value,
       };
     });
   };
@@ -23,10 +20,7 @@ export default function useInput(initialValue, validator) {
     setValue((prevValue) => {
       return {
         ...prevValue,
-        [keyType]: {
-          ...prevValue[keyType],
-          value,
-        },
+        [keyType]: value,
       };
     });
   };
@@ -54,15 +48,13 @@ export default function useInput(initialValue, validator) {
   };
 
   const handlePassword = (value, keyType) => {
+    console.log(value);
     if (validator(value)) return;
 
     setValue((prevValue) => {
       return {
         ...prevValue,
-        [keyType]: {
-          ...prevValue[keyType],
-          value: "•",
-        },
+        [keyType]: "•".repeat(value.length),
       };
     });
   };

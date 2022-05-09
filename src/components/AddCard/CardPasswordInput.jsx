@@ -16,9 +16,9 @@ export default function CardPasswordInput() {
     actions: { handlePasswordUpdate },
   } = useContext(CardInfoContext);
 
-  const passwordList = Object.values(password);
+  const passwordList = Object.entries(password);
   const passwordLength = passwordList.reduce(
-    (sum, currentInput) => currentInput.value.length + sum,
+    (sum, currentPassword) => currentPassword[1].length + sum,
     0
   );
 
@@ -30,22 +30,25 @@ export default function CardPasswordInput() {
       guideMessage={GUIDE_MESSAGE.VALID_PASSWORD}
       isComplete={passwordLength === CARD_INFO_RULES.PASSWORD_LENGTH}
     >
-      {passwordList.map((password) => (
-        <Input
-          key={password.keyType}
-          name={"password"}
-          className={"password"}
-          type={"password"}
-          placeholder={MASKED_CHARACTER}
-          width={"100%"}
-          maxLength={CARD_INFO_RULES.PASSWORD_UNIT_LENGTH}
-          required
-          isComplete={
-            password.value.length === CARD_INFO_RULES.PASSWORD_UNIT_LENGTH
-          }
-          onChange={(e) => handlePasswordUpdate(e, password.keyType)}
-        />
-      ))}
+      {passwordList.map((password) => {
+        const [passwordKey, passwordValue] = password;
+        return (
+          <Input
+            key={passwordKey}
+            name={"password"}
+            className={"password"}
+            type={"password"}
+            placeholder={MASKED_CHARACTER}
+            width={"100%"}
+            maxLength={CARD_INFO_RULES.PASSWORD_UNIT_LENGTH}
+            required
+            isComplete={
+              passwordValue.length === CARD_INFO_RULES.PASSWORD_UNIT_LENGTH
+            }
+            onChange={(e) => handlePasswordUpdate(e, passwordKey)}
+          />
+        );
+      })}
     </InputField>
   );
 }

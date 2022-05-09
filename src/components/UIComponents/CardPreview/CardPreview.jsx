@@ -108,15 +108,15 @@ export default function CardPreview({
           cardChipMarginBottom={cardChipMarginBottom}
         />
         <CardNumber cardNumberMarginBottom={cardNumberMarginBottom}>
-          <p>{firstCardNumber.value}</p>
-          <p>{secondCardNumber.value}</p>
-          <p>{CREATE_MASKED_CHARACTERS(thirdCardNumber.value.length)}</p>
-          <p>{CREATE_MASKED_CHARACTERS(fourthCardNumber.value.length)}</p>
+          <p>{firstCardNumber}</p>
+          <p>{secondCardNumber}</p>
+          <p>{CREATE_MASKED_CHARACTERS(thirdCardNumber.length)}</p>
+          <p>{CREATE_MASKED_CHARACTERS(fourthCardNumber.length)}</p>
         </CardNumber>
         <CardBottomSection>
           <CardHolderName>{holderName.value}</CardHolderName>
           <p>
-            {month.value} {month.value.length !== 0 && "/"} {year.value}
+            {month} {month.length !== 0 && "/"} {year}
           </p>
         </CardBottomSection>
       </Card>
@@ -126,32 +126,14 @@ export default function CardPreview({
 
 CardPreview.propTypes = {
   cardNumber: PropTypes.shape({
-    firstCardNumber: PropTypes.shape({
-      value: PropTypes.string,
-      keyType: PropTypes.string,
-    }),
-    secondCardNumber: PropTypes.shape({
-      value: PropTypes.string,
-      keyType: PropTypes.string,
-    }),
-    thirdCardNumber: PropTypes.shape({
-      value: PropTypes.string,
-      keyType: PropTypes.string,
-    }),
-    fourthCardNumber: PropTypes.shape({
-      value: PropTypes.string,
-      keyType: PropTypes.string,
-    }),
+    firstCardNumber: PropTypes.string,
+    secondCardNumber: PropTypes.string,
+    thirdCardNumber: PropTypes.string,
+    fourthCardNumber: PropTypes.string,
   }),
   expireDate: PropTypes.shape({
-    month: PropTypes.shape({
-      value: PropTypes.string,
-      keyType: PropTypes.string,
-    }),
-    year: PropTypes.shape({
-      value: PropTypes.string,
-      keyType: PropTypes.string,
-    }),
+    month: PropTypes.string,
+    year: PropTypes.string,
   }),
   holderName: PropTypes.shape({
     value: PropTypes.string,

@@ -1,31 +1,13 @@
 export const INITIAL_CARD_NUMBER = {
-  firstCardNumber: {
-    value: "",
-    keyType: "firstCardNumber",
-  },
-  secondCardNumber: {
-    value: "",
-    keyType: "secondCardNumber",
-  },
-  thirdCardNumber: {
-    value: "",
-    keyType: "thirdCardNumber",
-  },
-  fourthCardNumber: {
-    value: "",
-    keyType: "fourthCardNumber",
-  },
+  firstCardNumber: "",
+  secondCardNumber: "",
+  thirdCardNumber: "",
+  fourthCardNumber: "",
 };
 
 export const INITIAL_EXPIRE_DATE = {
-  month: {
-    value: "",
-    keyType: "month",
-  },
-  year: {
-    value: "",
-    keyType: "year",
-  },
+  month: "",
+  year: "",
 };
 
 export const INITIAL_HOLDER_NAME = {
@@ -39,14 +21,8 @@ export const INITIAL_SECURITY_CODE = {
 };
 
 export const INITIAL_PASSWORD = {
-  firstPassword: {
-    value: "",
-    keyType: "firstPassword",
-  },
-  secondPassword: {
-    value: "",
-    keyType: "secondPassword",
-  },
+  firstPassword: "",
+  secondPassword: "",
 };
 
 export const INITIAL_CARD_ALIAS = {
