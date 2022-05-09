@@ -3,7 +3,6 @@ import Head from 'components/Modules/Head';
 import Card from 'components/Modules/Card';
 import { useContext } from 'react';
 import { CardContext } from 'context/CardContext';
-import { Fragment } from 'react';
 import AddCard from 'components/Modules/AddCard';
 import { LINK } from '../../constant/Link';
 
@@ -21,6 +20,13 @@ const ListContainer = styled.div`
   gap: 26px;
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+`;
+
 function CardListPage() {
   const { cardData, inputtedInfo } = useContext(CardContext);
   console.log('inputtedInfo :>> ', inputtedInfo);
@@ -29,12 +35,12 @@ function CardListPage() {
       <Head>보유 카드</Head>
       <ListContainer>
         {cardData.map(cardInfo => (
-          <Fragment
+          <Wrapper
             key={cardInfo.cardNumber.value.fist + cardInfo.cardName.value}
           >
             <Card {...cardInfo} />
             <span>{cardInfo.cardName.value}</span>
-          </Fragment>
+          </Wrapper>
         ))}
         <AddCard link={LINK.CARD_ADD_PAGE} />
       </ListContainer>
