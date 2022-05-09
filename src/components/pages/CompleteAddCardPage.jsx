@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import CardContext from '../../contexts/CardContext';
+import { CardContext } from '../../contexts/CardContext';
 import CardPreview from '../common/CardPreview';
 import TextBox from '../common/TextBox';
 import Input from '../common/Input';

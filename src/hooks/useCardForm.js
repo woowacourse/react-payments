@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useObjectRef from './useObjectRef';
 import useFormSchema from './useFormSchema';
 import { isBackspace } from '../utils/commons';
-import CardContext from '../contexts/CardContext';
+import { CardContext } from '../contexts/CardContext';
 
 const useCardForm = ({ cardFormSchema }, path = undefined) => {
   const navigate = useNavigate();

@@ -5,7 +5,7 @@ import ToolTip from './ToolTip';
 import useCardForm from '../../hooks/useCardForm';
 import InputFieldContainer from './InputFieldContainer';
 import Button from './Button';
-import CardContext from '../../contexts/CardContext';
+import { CardContext } from '../../contexts/CardContext';
 
 const StyledCardForm = styled.form`
   margin: 0;
