@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import Input from '../../input/Input';
-import { validNumber, validMaxLength, validRange } from '../../../validation/index';
-import { CARD } from '../../../constant';
+import Input from 'components/input/Input';
+import { validNumber, validMaxLength, validRange } from 'validation/index';
+import { CARD } from 'constant/index';
 
 function CardForm({ card, updateCard, handleCardFormSubmit }) {
   const onSubmitCardForm = (event) => {

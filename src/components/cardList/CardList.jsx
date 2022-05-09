@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { CardsContext } from '../../context/CardsProvider';
-import Card from '../card/Card';
+import { CardsContext } from 'context/CardsProvider';
+import Card from 'components/card/Card';
 
 function CardList() {
   const { cards } = useContext(CardsContext);

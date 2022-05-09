@@ -1,11 +1,11 @@
 import { useState, useContext, useReducer } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import uuid from 'react-uuid';
-import { CardsContext } from '../../context/CardsProvider';
-import { CARD_COMPANY_LIST } from '../../constant/index';
-import CardForm from './cardForm/CardForm';
-import Card from '../card/Card';
-import CardCompany from './cardCompany/CardCompany';
+import { CardsContext } from 'context/CardsProvider';
+import { CARD_COMPANY_LIST } from 'constant/index';
+import CardForm from 'components/addCard/cardForm/CardForm';
+import Card from 'components/card/Card';
+import CardCompany from 'components/addCard/cardCompany/CardCompany';
 
 function AddCard() {
   const { setCards } = useContext(CardsContext);

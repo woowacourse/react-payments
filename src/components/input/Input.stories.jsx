@@ -1,6 +1,6 @@
-import Input from './Input';
-import { CARD } from '../../constant/index';
-import { validNumber, validMaxLength, validRange } from '../../validation/index';
+import Input from 'components/input/Input';
+import { CARD } from 'constant/index';
+import { validNumber, validMaxLength, validRange } from 'validation/index';
 
 export default {
   title: 'Input',

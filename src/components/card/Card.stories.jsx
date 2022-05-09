@@ -1,6 +1,6 @@
-import Card from './Card';
-import '../../css/index.css';
-import '../../css/App.css';
+import Card from 'components/card/Card';
+import 'css/index.css';
+import 'css/App.css';
 
 export default {
   title: 'Card',

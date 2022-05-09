@@ -1,9 +1,9 @@
-import './css/App.css';
+import 'css/App.css';
 import { Route, Routes } from 'react-router-dom';
-import AddCard from './components/addCard/AddCard';
-import CardList from './components/cardList/CardList';
-import CardsProvider from './context/CardsProvider';
-import Register from './components/register/Register';
+import AddCard from 'components/addCard/AddCard';
+import CardList from 'components/cardList/CardList';
+import CardsProvider from 'context/CardsProvider';
+import Register from 'components/register/Register';
 
 function App() {
   return (
