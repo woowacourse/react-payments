@@ -17,6 +17,7 @@ const Input = ({
   placeHolder = '입력해주세요.',
   width,
   height,
+  innerRef,
   ...rest
 }) => {
   return (
@@ -26,6 +27,7 @@ const Input = ({
       placeholder={placeHolder}
       width={`${width}px`}
       height={`${height}px`}
+      ref={innerRef}
       {...rest}
       className="input-box"
     />

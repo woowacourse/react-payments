@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import CardContext from '../../contexts/CardContext';
@@ -43,14 +43,14 @@ const StyledCompleteAddCardPage = styled.div`
 `;
 
 const CompleteAddCardPage = () => {
-  const [cardName, setCardName] = useState('');
   const { values, setValues, initialField } = useContext(CardContext);
+  const inputRef = useRef();
   const navigation = useNavigate();
 
   const storeCard = async () => {
     const cardInfo = {
       cardName:
-        cardName.toUpperCase() ||
+        inputRef.current.value.toUpperCase() ||
         values.owner.toUpperCase() ||
         DEFAULT_CARD_NAME,
       values,
@@ -78,9 +78,7 @@ const CompleteAddCardPage = () => {
       <Input
         underLine
         placeHolder="카드 별칭을 지정해주세요."
-        onChange={(e) => {
-          setCardName(e.target.value.trim());
-        }}
+        innerRef={inputRef}
       />
       <Button
         onClick={async () => {
