@@ -6,17 +6,13 @@ import { useNavigate } from 'react-router-dom';
 
 function useCardNameForm(link) {
   const navigator = useNavigate();
-  const { inputtedInfo, cardDispatch, cardData, inputtedInfoDispatch } =
+  const { inputtedInfo, cardDispatch, inputtedInfoDispatch } =
     useContext(CardContext);
-
-  console.log(inputtedInfo, cardData);
 
   const { cardNumber, cardName } = inputtedInfo;
 
   const onCardNameSubmit = event => {
     event.preventDefault();
-
-    console.log(event);
 
     cardDispatch({
       type: CARD_ACTION.NAME_EDIT,
