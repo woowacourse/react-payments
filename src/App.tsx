@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Navigation from './shared/components/navigation/Navigation';
-import CardRegister from './card-register/register-page/CardRegister';
-import CardRegisterConfirm from './card-register/confirm-page/CardRegisterConfirm';
-import { PaymentProvider } from './context';
-import CardList from './card-list/CardList';
-import { CardRegisterProvider } from './card-register/context';
+import Navigation from './components/navigation/navigation/Navigation';
+import { PaymentProvider } from './PaymentContext';
+import CardList from './pages/card-list/CardList';
+import { CardRegisterProvider } from './pages/card-register/context';
+import CardRegister from './pages/card-register/CardRegister';
+import CardRegisterConfirm from './pages/card-register-confirm/CardRegisterConfirm';
 
 function App() {
   return (
