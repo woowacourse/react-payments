@@ -18,7 +18,11 @@ import { ReactComponent as Arrow } from '../../assets/arrow.svg';
 
 import { CardContext, CardInfoContext } from '../../contexts';
 import { NOW } from '../../constants';
-import { encryptCardNumber, makeValidDate } from '../../utils';
+import {
+  encryptCardNumber,
+  makeCardOwnerName,
+  makeValidDate,
+} from '../../utils';
 import { splitCardNumbers } from '../../utils/regExp';
 import isValidCardInputs from '../../utils/validator';
 
@@ -132,7 +136,7 @@ function AddPage() {
           bgColor={cardCompany.color}
           company={cardCompany.name}
           size="medium"
-          name={cardOwnerName}
+          name={makeCardOwnerName(cardOwnerName)}
           number={splitCardNumbers(encryptCardNumber(cardNumber), ' ') ?? ''}
           validDate={makeValidDate(validDate)}
           onClickFunc={toggleCardCompanyModal}

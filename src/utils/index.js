@@ -11,6 +11,9 @@ const makeValidDate = date => {
   return `${month}/${year.slice(-2)}`;
 };
 
+const makeCardOwnerName = name =>
+  name.length > 10 ? `${name.slice(0, 10)}...` : name;
+
 const preventBubbling = e => {
   e.stopPropagation();
 };
@@ -19,4 +22,10 @@ const preventEvent = e => {
   e.preventDefault();
 };
 
-export { encryptCardNumber, makeValidDate, preventBubbling, preventEvent };
+export {
+  encryptCardNumber,
+  makeValidDate,
+  makeCardOwnerName,
+  preventBubbling,
+  preventEvent,
+};
