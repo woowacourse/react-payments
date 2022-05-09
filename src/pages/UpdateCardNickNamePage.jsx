@@ -93,7 +93,7 @@ export default function UpdateCardNickNamePage() {
             <Form onSubmit={handleCardNickNameSubmit}>
               <CardNickNameInput
                 name="nickname-input"
-                placeholder={'카드 닉네임'}
+                placeholder={cardList[cardIndex].nickName || '카드 닉네임'}
                 data-testid={'card-nickname-input'}
               />
               <ButtonWrapper>
