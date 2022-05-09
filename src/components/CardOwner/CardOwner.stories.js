@@ -1,14 +1,14 @@
-import { MemoryRouter } from 'react-router-dom';
 import CardOwner from './CardOwner';
+import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {
   title: 'CardAddPage/CardOwner',
   component: CardOwner,
   decorators: [
     (CardOwner) => (
-      <MemoryRouter>
+      <CardInfoContextProvider>
         <CardOwner />
-      </MemoryRouter>
+      </CardInfoContextProvider>
     ),
   ],
 };

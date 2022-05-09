@@ -1,14 +1,14 @@
 import CardNumber from './CardNumber';
-import { MemoryRouter } from 'react-router-dom';
+import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {
   title: 'CardAddPage/CardNumber',
   component: CardNumber,
   decorators: [
     (CardNumber) => (
-      <MemoryRouter>
+      <CardInfoContextProvider>
         <CardNumber />
-      </MemoryRouter>
+      </CardInfoContextProvider>
     ),
   ],
 };

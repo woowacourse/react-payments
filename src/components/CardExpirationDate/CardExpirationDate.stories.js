@@ -1,14 +1,14 @@
 import CardExpirationDate from './CardExpirationDate';
-import { MemoryRouter } from 'react-router-dom';
+import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {
   title: 'CardAddPage/CardExpirationDate',
   component: CardExpirationDate,
   decorators: [
     (CardExpirationDate) => (
-      <MemoryRouter>
+      <CardInfoContextProvider>
         <CardExpirationDate />
-      </MemoryRouter>
+      </CardInfoContextProvider>
     ),
   ],
 };

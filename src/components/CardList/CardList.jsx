@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { CardInfoContext } from 'App';
+import { CardInfoContext } from 'CardInfoContextProvider';
 
 import Card from 'components/common/Card/Card';
 

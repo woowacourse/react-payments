@@ -1,14 +1,14 @@
 import CVC from './CVC';
-import { MemoryRouter } from 'react-router-dom';
+import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {
   title: 'CardAddPage/CVC',
   component: CVC,
   decorators: [
     (CVC) => (
-      <MemoryRouter>
+      <CardInfoContextProvider>
         <CVC />
-      </MemoryRouter>
+      </CardInfoContextProvider>
     ),
   ],
 };

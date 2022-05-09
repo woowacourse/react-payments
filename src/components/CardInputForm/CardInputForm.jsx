@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { CardInfoContext } from 'App';
+import { CardInfoContext } from 'CardInfoContextProvider';
 import { ERROR_MESSAGE } from 'constants';
 import { validator } from 'utils';
 

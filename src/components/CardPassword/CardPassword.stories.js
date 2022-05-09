@@ -1,14 +1,14 @@
 import CardPassword from './CardPassword';
-import { MemoryRouter } from 'react-router-dom';
+import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {
   title: 'CardAddPage/CardPassword',
   component: CardPassword,
   decorators: [
     (CardPassword) => (
-      <MemoryRouter>
+      <CardInfoContextProvider>
         <CardPassword />
-      </MemoryRouter>
+      </CardInfoContextProvider>
     ),
   ],
 };
