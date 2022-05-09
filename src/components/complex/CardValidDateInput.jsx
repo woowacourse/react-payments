@@ -11,7 +11,7 @@ export default function CardValidDateInput() {
         <InputContainer>
           <Input
             description="만료일"
-            width="137px"
+            width="200px"
             id="validDate"
             type="month"
             value={validDate}
