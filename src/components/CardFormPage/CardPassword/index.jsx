@@ -1,19 +1,13 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 
-import { InputContainer, Label, InputWrapper } from '../common/styled';
-import InactiveContainer from '../common/InactiveContainer';
-import ErrorMessage from '../common/ErrorMessage';
-import Input from '../common/Input';
+import { InputContainer, Label, InputWrapper } from '../../common/styled';
+import InactiveContainer from '../../common/InactiveContainer';
+import ErrorMessage from '../../common/ErrorMessage';
+import Input from '../../common/Input';
+import { InputPasswordWrapper } from './style';
 
-import useInputHandler from '../../hooks/useInputHandler';
-import { validatePassword } from '../../validator';
-
-const InputPasswordWrapper = styled.div`
-  display: flex;
-  gap: 1em;
-  width: 50%;
-`;
+import useInputHandler from '../../../hooks/useInputHandler';
+import { validatePassword } from '../../../validator';
 
 function CardPassword({ pwd, isCorrectPwd }) {
   const { errorMessage, setErrorMessage, updateInputState } = useInputHandler(validatePassword, {
@@ -28,7 +22,7 @@ function CardPassword({ pwd, isCorrectPwd }) {
 
   useEffect(() => {
     if (isCorrectPwd) setErrorMessage('');
-  }, [isCorrectPwd, setErrorMessage]);
+  }, [isCorrectPwd]);
 
   return (
     <InputContainer>

@@ -1,45 +1,14 @@
 import React, { useContext, useState } from 'react';
-import styled from 'styled-components';
 
-import { CardListDispatchContext, CardInfoContext, SetPathContext, CardInfoDispatchContext } from '../../context';
-import { LABEL_PRIMARY_COLOR, PLACEHOLDER_PRIMARY_COLOR } from '../../style';
+import { LABEL_PRIMARY_COLOR } from '../../style';
 
 import Card from '../common/Card';
 import ErrorMessage from '../common/ErrorMessage';
 import Footer from '../common/Footer';
 import TextButton from '../common/TextButton';
+import { Container, LinedInput, SubmitContainer, Title } from './style';
 
-const SubmitContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  gap: 16px;
-`;
-
-const Title = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 400;
-`;
-
-const LinedInput = styled.input`
-  text-align: center;
-  border: none;
-  border-bottom: 1px solid #000;
-  width: 80%;
-  font-size: 1.25rem;
-  padding: 8px;
-
-  &:focus {
-    outline: 1px solid ${PLACEHOLDER_PRIMARY_COLOR};
-  }
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+import { CardListDispatchContext, CardInfoContext, SetPathContext, CardInfoDispatchContext } from '../../context';
 
 function CardSubmitPage({ nextId }) {
   const setPath = useContext(SetPathContext);
@@ -91,6 +60,7 @@ function CardSubmitPage({ nextId }) {
     setNickname('');
     setPath('list-card');
   };
+
   return (
     <>
       <SubmitContainer>

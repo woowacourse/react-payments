@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from 'react';
+
 import { HYPHEN_PRIMARY_COLOR } from '../../style';
+
 import Input from '../common/Input';
 import ErrorMessage from '../common/ErrorMessage';
 import { InputContainer, InputWrapper, Label, Span } from '../common/styled';
+
 import useInputHandler from '../../hooks/useInputHandler';
 import { validateCardNumbers } from '../../validator';
 

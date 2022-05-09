@@ -1,6 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
-import { LABEL_PRIMARY_COLOR } from '../../style';
+import { LABEL_PRIMARY_COLOR } from '../../../style';
 
 const CompanyContainer = styled.div`
   display: flex;
@@ -25,13 +24,4 @@ const CompanyName = styled.p`
   color: ${LABEL_PRIMARY_COLOR};
 `;
 
-function CardCompany({ hexColor, name, handleClick }) {
-  return (
-    <CompanyContainer onClick={handleClick} data-testid="card-company">
-      <CompanyColorCircle hexColor={hexColor}></CompanyColorCircle>
-      <CompanyName>{name}</CompanyName>
-    </CompanyContainer>
-  );
-}
-
-export default CardCompany;
+export { CompanyContainer, CompanyColorCircle, CompanyName };

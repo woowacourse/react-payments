@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
-import { CardInfoDispatchContext } from '../../context';
+
 import { HYPHEN_PRIMARY_COLOR } from '../../style';
+
 import Calendar from '../common/Calendar';
 import { InputContainer, InputWrapper, Span, Label } from '../common/styled';
 
+import { CardInfoDispatchContext } from '../../context';
+
 const getList = (length, n) => Array.from({ length }, (_, i) => `${i + n}`.slice(2));
-const years = getList(10, new Date().getFullYear());
+const YEAR = getList(10, new Date().getFullYear());
 const MONTH = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
 function DueDate({ dimensions, cardDate }) {
@@ -34,7 +37,7 @@ function DueDate({ dimensions, cardDate }) {
         />
         <Span padding="8px">/</Span>
         <Calendar
-          itemList={years}
+          itemList={YEAR}
           item={cardDate.year}
           setItem={setItem('year')}
           placeholder="YY"

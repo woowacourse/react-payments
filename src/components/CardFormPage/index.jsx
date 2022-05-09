@@ -1,9 +1,12 @@
 import React, { useContext, useLayoutEffect, useMemo, useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 
+import { LABEL_PRIMARY_COLOR } from '../../style';
+
 import Header from '../common/Header';
 import Footer from '../common/Footer';
 import TextButton from '../common/TextButton';
+import { Form } from '../common/styled';
 
 import CardNumber from './CardNumber';
 import CardOwner from './CardOwner';
@@ -11,8 +14,7 @@ import CardPassword from './CardPassword';
 import CardSecurityCode from './CardSecurityCode';
 import CardShape from './CardShape';
 import DueDate from './DueDate';
-import { LABEL_PRIMARY_COLOR } from '../../style';
-import { Form } from '../common/styled';
+
 import { CardInfoContext, SetPathContext } from '../../context';
 
 function CardFormPage({ targetRef }) {

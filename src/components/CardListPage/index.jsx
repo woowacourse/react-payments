@@ -1,20 +1,15 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
-import CardListItem from './CardListItem';
 
+import CardListItem from './CardListItem';
 import Header from '../common/Header';
 import AddCardItem from './AddCardItem';
-import { CardListContext } from '../../context';
+import { CardList } from './style';
 
-const CardList = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-`;
+import { CardListContext } from '../../context';
 
 function CardListPage() {
   const cardList = useContext(CardListContext);
+
   return (
     <>
       <Header>보유 카드</Header>

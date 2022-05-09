@@ -1,23 +1,11 @@
 import React, { useContext, useState } from 'react';
-import styled from 'styled-components';
-import { CardInfoDispatchContext } from '../../context';
-import Card from '../common/Card';
 
-import CardCompany from '../common/CardCompany';
-import Modal from '../common/Modal';
+import Card from '../../common/Card';
+import CardCompany from '../../common/CardCompany';
+import Modal from '../../common/Modal';
+import { CardContainer, GridContainer } from './style';
 
-const CardContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-`;
-
-const GridContainer = styled.div`
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(4, 1fr);
-`;
+import { CardInfoDispatchContext } from '../../../context';
 
 const cardCompanyList = [
   { color: '#E24141', name: '포코 카드' },
