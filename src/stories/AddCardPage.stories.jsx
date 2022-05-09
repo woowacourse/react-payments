@@ -28,10 +28,10 @@ const Example = args => <AddCardPage />;
 export const Default = Example.bind({});
 Default.args = {};
 
-export const FilledForm = Example.bind({});
-FilledForm.args = {};
+export const WithCorrectInputValue = Example.bind({});
+WithCorrectInputValue.args = {};
 
-FilledForm.play = ({ canvasElement }) => {
+WithCorrectInputValue.play = ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   userEvent.type(canvas.getByTestId('card-number-input-0'), '1234');
@@ -48,4 +48,26 @@ FilledForm.play = ({ canvasElement }) => {
 
   userEvent.type(canvas.getByTestId('card-password-input-0'), '1');
   userEvent.type(canvas.getByTestId('card-password-input-1'), '2');
+};
+
+export const WithWrongInputValue = Example.bind({});
+WithWrongInputValue.args = {};
+
+WithWrongInputValue.play = ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  userEvent.type(canvas.getByTestId('card-number-input-0'), 'a');
+  userEvent.type(canvas.getByTestId('card-number-input-1'), 'b');
+  userEvent.type(canvas.getByTestId('card-number-input-2'), 'c');
+  userEvent.type(canvas.getByTestId('card-number-input-3'), 'd');
+
+  userEvent.type(canvas.getByTestId('card-expire-month-input'), 'a');
+  userEvent.type(canvas.getByTestId('card-expire-year-input'), 'b');
+
+  userEvent.type(canvas.getByTestId('card-holder-name-input'), '123');
+
+  userEvent.type(canvas.getByTestId('card-security-code-input'), 'asd');
+
+  userEvent.type(canvas.getByTestId('card-password-input-0'), 'a');
+  userEvent.type(canvas.getByTestId('card-password-input-1'), 'b');
 };
