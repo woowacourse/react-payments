@@ -5,6 +5,7 @@ import { UserListContext } from '../../context/userListContext';
 import { UserContext } from '../../context/userContext';
 import './index.scss';
 import { initState } from '../../const';
+import CardAddButton from '../../components/CardAddButton';
 
 const CardList = () => {
   const { userList } = useContext(UserListContext);
@@ -25,7 +26,7 @@ const CardList = () => {
           </div>
         ))}
         <Link to='/cardAdd' style={{ textDecoration: 'none' }} onClick={onclick}>
-          <div className='card-add__button'>+</div>
+          <CardAddButton></CardAddButton>
         </Link>
       </div>
     </div>
