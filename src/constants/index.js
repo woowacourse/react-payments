@@ -75,7 +75,7 @@ const ERROR_MESSAGE = {
     IS_EXPIRED: '이미 만료된 카드입니다.',
   },
   USER_NAME: {
-    IS_NOT_ENGLISH_NAME: '영어와 공백만 입력할 수 있습니다.',
+    IS_NOT_ENGLISH_NAME: '카드 사용자 이름은 영어와 공백만 입력할 수 있습니다.',
   },
   SECURITY_CODE: {
     IS_NOT_INTEGER: '보안 코드는 숫자로만 입력할 수 있습니다.',

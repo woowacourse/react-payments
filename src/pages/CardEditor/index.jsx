@@ -52,7 +52,14 @@ function CardEditor() {
     isComplete,
   } = state;
 
-  const onClickConfirmButton = async () => {
+  const {
+    Modal: CompanyModal,
+    handleModalOpen: handleCompanyModalOpen,
+    handleModalClose: handleCompanyModalClose,
+  } = useModal();
+  const { Modal: CardNameInputModal, handleModalOpen: handleCardNameInputModalOpen } = useModal();
+
+  const onClickPageSubmit = () => {
     try {
       validateCardNumber(cardNumber);
       validateCardPassword(cardPassword);
@@ -64,6 +71,10 @@ function CardEditor() {
       return;
     }
 
+    handleCardNameInputModalOpen();
+  };
+
+  const onClickCardNameSubmit = async () => {
     const newCardData = { ...state };
     delete newCardData.isComplete;
 
@@ -73,13 +84,6 @@ function CardEditor() {
 
     setPageLocation(PAGE_LIST.CARD_UPDATED);
   };
-
-  const {
-    Modal: CompanyModal,
-    handleModalOpen: handleCompanyModalOpen,
-    handleModalClose: handleCompanyModalClose,
-  } = useModal();
-  const { Modal: CardNameInputModal, handleModalOpen: handleCardNameInputModalOpen } = useModal();
 
   return (
     <>
@@ -113,7 +117,7 @@ function CardEditor() {
               type="primary"
               size="large"
               isDisabled={!isComplete}
-              onClick={handleCardNameInputModalOpen}
+              onClick={onClickPageSubmit}
             >
               다음
             </Button>
@@ -136,7 +140,7 @@ function CardEditor() {
             size="large"
             width="100%"
             isDisabled={!cardName}
-            onClick={onClickConfirmButton}
+            onClick={onClickCardNameSubmit}
           >
             다음
           </Button>
