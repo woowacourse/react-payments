@@ -25,7 +25,11 @@ function CompanyModal() {
                 onClick={onClickCardCompany}
                 key={name}
               >
-                <Button bgColor={color} shape="circle" />
+                <Button
+                  border="0.1px solid #bababa"
+                  bgColor={color}
+                  shape="circle"
+                />
                 <CardCompanyName>{name}</CardCompanyName>
               </CardCompany>
             ))}
