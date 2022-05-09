@@ -11,18 +11,16 @@ import {
 
 export const CardExpireDateInput = ({
   expireDate,
+  isValid,
   handleExpireDateInput,
   handleCardExpireCheck,
 }) => {
-  const [validate, setValidate] = useState(false);
-
   useEffect(() => {
     if (expireDate.year === "" || expireDate.month === "") {
       return;
     }
 
     const isValidate = isCardExpireDateValidate(expireDate);
-    setValidate(isValidate);
     handleCardExpireCheck(isValidate);
   }, [expireDate]);
 
@@ -64,7 +62,7 @@ export const CardExpireDateInput = ({
 
   return (
     <InputContainer>
-      <InputTitle isValid={validate}>만료일</InputTitle>
+      <InputTitle isValid={isValid}>만료일</InputTitle>
       <InputBox width="50%" justifyContent="center">
         <InputBasic
           width="25%"

@@ -9,8 +9,7 @@ import {
   Dot,
 } from "components/common";
 
-export const CardPasswordInput = ({ handleCardPasswordCheck }) => {
-  const [validate, setValidate] = useState(false);
+export const CardPasswordInput = ({ isValid, handleCardPasswordCheck }) => {
   const passwordInputRefs = useRef([]);
 
   const handlePasswordChange = (e) => {
@@ -26,13 +25,12 @@ export const CardPasswordInput = ({ handleCardPasswordCheck }) => {
       return false;
     });
 
-    setValidate(isCompletePassword);
     handleCardPasswordCheck(isCompletePassword);
   };
 
   return (
     <InputContainer>
-      <InputTitle isValid={validate}>카드 비밀번호</InputTitle>
+      <InputTitle isValid={isValid}>카드 비밀번호</InputTitle>
       <InputBox
         width="50%"
         backgroundColor="transparent"

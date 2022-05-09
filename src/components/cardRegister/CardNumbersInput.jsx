@@ -18,11 +18,11 @@ const DEFAULT_CARD_NUMBERS_TYPE = [
 export const CardNumbersInput = ({
   cardType,
   cardNumbers,
+  isValid,
   handleCardNumbersInput,
   handleCardNumberCheck,
   handleModalVisible,
 }) => {
-  const [validate, setValidate] = useState(false);
   const numberInputRefs = useRef([]);
 
   useEffect(() => {
@@ -36,7 +36,6 @@ export const CardNumbersInput = ({
       }
     );
 
-    setValidate(isCardNumbersCompleted);
     handleCardNumberCheck(isCardNumbersCompleted);
 
     if (cardType.name === "" && isCardNumbersCompleted) {
@@ -50,7 +49,7 @@ export const CardNumbersInput = ({
 
   return (
     <InputContainer>
-      <InputTitle isValid={validate}>카드 번호</InputTitle>
+      <InputTitle isValid={isValid}>카드 번호</InputTitle>
       <InputBox color="#04c09e" padding="0 5%">
         {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }, i) => (
           <InputBasic

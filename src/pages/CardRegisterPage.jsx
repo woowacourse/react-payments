@@ -138,12 +138,14 @@ export const CardRegisterPage = () => {
         <CardNumbersInput
           cardType={cardType}
           cardNumbers={cardNumbers}
+          isValid={checkInputs.cardNumbers}
           handleModalVisible={modalSelector(MODAL_NAME.CARD_TYPE)}
           handleCardNumbersInput={setCardNumbers}
           handleCardNumberCheck={setCheckInputStateOf("cardNumbers")}
         />
         <CardExpireDateInput
           expireDate={expireDate}
+          isValid={checkInputs.cardExpireDate}
           handleExpireDateInput={setExpireDate}
           handleCardExpireCheck={setCheckInputStateOf("cardExpireDate")}
         />
@@ -152,10 +154,12 @@ export const CardRegisterPage = () => {
           handleOwnerNameInput={setOwnerName}
         />
         <CVCInput
+          isValid={checkInputs.cardCVC}
           handleCardCVCCheck={setCheckInputStateOf("cardCVC")}
           handleModalVisible={modalSelector(MODAL_NAME.CARD_CVC)}
         />
         <CardPasswordInput
+          isValid={checkInputs.cardPassword}
           handleCardPasswordCheck={setCheckInputStateOf("cardPassword")}
         />
         <Button type="submit" disabled={!allCompleted}>

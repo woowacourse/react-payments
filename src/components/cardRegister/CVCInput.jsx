@@ -10,20 +10,22 @@ import {
   TipButton,
 } from "components/common";
 
-export const CVCInput = ({ handleCardCVCCheck, handleModalVisible }) => {
-  const [validate, setValidate] = useState(false);
+export const CVCInput = ({
+  isValid,
+  handleCardCVCCheck,
+  handleModalVisible,
+}) => {
   const handleCVCChange = (e) => {
     if (isNaN(e.nativeEvent.data)) {
       return;
     }
 
-    setValidate(e.target.value.length === 3);
     handleCardCVCCheck(e.target.value.length === 3);
   };
 
   return (
     <InputContainer>
-      <InputTitle htmlFor="input_CVC" isValid={validate}>
+      <InputTitle htmlFor="input_CVC" isValid={isValid}>
         보안카드(CVC/CVV)
       </InputTitle>
       <FlexWrapper alignItems="baseline" gap="10px">

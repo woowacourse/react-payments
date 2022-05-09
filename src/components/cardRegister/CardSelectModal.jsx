@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const CardSelectModal = ({
   cardTypes,
+  isValid,
   handleVisible,
   handleCardType,
   handleCardTypeCheck,
