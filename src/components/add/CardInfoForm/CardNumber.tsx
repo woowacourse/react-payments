@@ -1,17 +1,16 @@
+import Input from "components/common/Input";
+import InputContainer from "components/common/InputContainer";
 import React from "react";
 import type { InputChangeFunction } from "types";
 import type { CardNumbers, Validation } from "types/cardInfo";
-
-import Input from "../common/Input";
-import InputContainer from "../common/InputContainer";
-
 interface CardNumberProps {
   cardNumbers: CardNumbers;
   onChange: InputChangeFunction;
   validation: Validation;
   inputs: HTMLInputElement[];
 }
-export default function CardNumber({ cardNumbers, onChange, validation, inputs }: CardNumberProps) {
+
+function CardNumber({ cardNumbers, onChange, validation, inputs }: CardNumberProps) {
   return (
     <InputContainer title="카드번호" validation={validation}>
       <div className="input-box">
@@ -26,10 +25,12 @@ export default function CardNumber({ cardNumbers, onChange, validation, inputs }
               data-index={index}
               inputs={inputs}
             />
-            {index !== 3 && <span className="card-number-delimiter">-</span>}
+            <span className="card-number-delimiter" />
           </React.Fragment>
         ))}
       </div>
     </InputContainer>
   );
 }
+
+export default React.memo(CardNumber);

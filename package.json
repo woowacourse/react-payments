@@ -4,8 +4,10 @@
   "homepage": "https://euijinkk.github.io/react-payments/",
   "private": true,
   "dependencies": {
+    "json-server": "^0.17.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1"
   },
   "scripts": {
@@ -16,7 +18,8 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "server": "json-server db.json --watch --port 4000"
   },
   "eslintConfig": {
     "extends": [

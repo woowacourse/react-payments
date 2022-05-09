@@ -1,12 +1,16 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import type { InputChangeFunction } from "types";
-import type { CardInfo, CardInfoValidation, CardInfoValidationTarget } from "types/cardInfo";
+import { PATH } from "constant/path";
+import useFormComplete from "hooks/useFormComplete";
+import React, { useCallback, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { InputChangeFunction } from "types";
+import type { CardInfo, CardInfoValidation } from "types/cardInfo";
 
 import CardExpirationDate from "./CardExpirationDate";
 import CardNumber from "./CardNumber";
 import CardPassword from "./CardPassword";
 import CardSecurityCode from "./CardSecurityCode";
 import CardUserName from "./CardUserName";
+
 interface CardInfoFormProps {
   cardInfo: CardInfo;
   onChangeCardNumber: InputChangeFunction;
@@ -30,27 +34,23 @@ export default function CardInfoForm({
   resetCardInfo,
   cardInfoValidation,
 }: CardInfoFormProps) {
+  const navigate = useNavigate();
   const { cardNumbers, expirationDate, userName, securityCode, password } = cardInfo;
-  const [isNextButtonShown, setIsNextButtonShown] = useState(true);
+  const isNextButtonActive = useFormComplete(cardInfoValidation);
+
   const inputsRef = useRef<HTMLInputElement[]>(null);
   const formRef = useCallback((node: HTMLFormElement) => {
     if (!node) return;
     inputsRef.current = Array.from(node.querySelectorAll("input"));
   }, []);
 
-  useEffect(() => {
-    setIsNextButtonShown(
-      Object.keys(cardInfoValidation).every(
-        (key: keyof CardInfoValidationTarget) => cardInfoValidation[key].isValid
-      )
-    );
-  }, [cardInfoValidation]);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    resetCardInfo();
-    alert("카드 등록이 완료되었습니다.");
-    setIsNextButtonShown(false);
+
+    if (window.confirm("카드를 등록하시겠습니까?")) {
+      navigate(PATH.COMPLETE, { state: cardInfo });
+      resetCardInfo();
+    }
   };
 
   return (
@@ -85,7 +85,7 @@ export default function CardInfoForm({
         validation={cardInfoValidation.password}
         inputs={inputsRef.current}
       />
-      <button className="submit-button" disabled={!isNextButtonShown}>
+      <button className="submit-button" disabled={!isNextButtonActive}>
         다음
       </button>
     </form>

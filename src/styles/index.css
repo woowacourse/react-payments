@@ -4,6 +4,8 @@
 @import "./modal.css";
 @import "./utils.css";
 @import "./header.css";
+@import "./complete.css";
+@import "./toast.css";
 
 * {
   box-sizing: border-box;
@@ -44,9 +46,20 @@ input[type="number"]::-webkit-inner-spin-button {
   background-color: #fff;
   position: relative;
   border-radius: 15px;
+  padding: 16px 24px;
+  overflow-y: auto;
 }
 
-.App {
+.not-found {
+  width: 100%;
   height: 100%;
-  padding: 16px 24px;
+  font-size: 30px;
+}
+
+.not-found-description {
+  margin-bottom: 20px;
+}
+
+.not-found-redirect-button {
+  font-size: 20px;
 }

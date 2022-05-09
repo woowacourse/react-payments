@@ -1,7 +1,8 @@
+// import { CardInfoContext } from "contexts/CardInfoProvider";
 import React, { useCallback } from "react";
 import type { CardColor, CardName, CardType } from "types/cardInfo";
 
-import Modal from "../common/Modal";
+import Modal from "../../common/Modal";
 
 const cardType: CardType[] = [
   { name: "빨강 카드", color: "red" },
@@ -20,18 +21,13 @@ interface CardSelectModalProps {
   onChangeCardType: (name: CardName, color: CardColor) => void;
 }
 
-export default function CardSelectModal({
-  isOpened,
-  closeModal,
-  onChangeCardType,
-}: CardSelectModalProps) {
-  const handleClickCardType = useCallback(
-    (name: CardName, color: CardColor) => () => {
-      onChangeCardType(name, color);
-      closeModal();
-    },
-    [closeModal, onChangeCardType]
-  );
+function CardSelectModal({ isOpened, closeModal, onChangeCardType }: CardSelectModalProps) {
+  console.log("모달");
+
+  const handleClickCardType = (name: CardName, color: CardColor) => () => {
+    onChangeCardType(name, color);
+    closeModal();
+  };
 
   if (!isOpened) return null;
 
@@ -52,3 +48,5 @@ export default function CardSelectModal({
     </Modal>
   );
 }
+
+export default React.memo(CardSelectModal);

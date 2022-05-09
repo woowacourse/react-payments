@@ -1,9 +1,9 @@
 import React from "react";
-import type { InputChangeFunction } from "types";
-import type { ExpirationDate, Validation } from "types/cardInfo";
+import { InputChangeFunction } from "types";
+import { ExpirationDate, Validation } from "types/cardInfo";
 
-import Input from "../common/Input";
-import InputContainer from "../common/InputContainer";
+import Input from "../../common/Input";
+import InputContainer from "../../common/InputContainer";
 
 interface CardExpirationDateProps {
   expirationDate: ExpirationDate;
@@ -11,7 +11,8 @@ interface CardExpirationDateProps {
   validation: Validation;
   inputs: HTMLInputElement[];
 }
-export default function CardExpirationDate({
+
+function CardExpirationDate({
   expirationDate,
   onChange,
   validation,
@@ -47,3 +48,5 @@ export default function CardExpirationDate({
     </InputContainer>
   );
 }
+
+export default React.memo(CardExpirationDate);

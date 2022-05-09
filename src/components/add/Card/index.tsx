@@ -1,23 +1,40 @@
 import useModal from "hooks/useModal";
 import React from "react";
-import type { CardColor, CardInfo, CardName } from "types/cardInfo";
+import { CardColor, CardInfo, CardName } from "types/cardInfo";
 
 import CardSelectModal from "./CardSelectModal";
 
 interface CardProps {
   cardInfo: CardInfo;
-  onChangeCardType: (name: CardName, color: CardColor) => void;
+  shouldShowTypeSelection?: boolean;
+  size?: "big" | "small";
+  marginBottom?: string;
+  pointer?: boolean;
+  onClickCard?: (id: number) => () => void;
+  onChangeCardType?: (name: CardName, color: CardColor) => void;
 }
 
-export default function Card({ cardInfo, onChangeCardType }: CardProps) {
+export default function Card({
+  cardInfo,
+  shouldShowTypeSelection = false,
+  size = "small",
+  marginBottom,
+  pointer = true,
+  onClickCard,
+  onChangeCardType,
+}: CardProps) {
   const { cardNumbers, expirationDate, userName, cardType } = cardInfo;
   const { isModalOpened, openModal, closeModal } = useModal(true);
 
   return (
     <>
-      <div className="card-box flex-center">
+      <div
+        className="card-box flex-center"
+        style={{ marginBottom, cursor: pointer ? "pointer" : "auto" }}
+        onClick={onClickCard?.(cardInfo.id)}
+      >
         <div
-          className="empty-card flex-column-center"
+          className={`${size}-card flex-column-center`}
           style={{ backgroundColor: cardType.color }}
           onClick={openModal}
         >
@@ -29,7 +46,7 @@ export default function Card({ cardInfo, onChangeCardType }: CardProps) {
             </span>
           </div>
           <div className="card-middle">
-            <div className="small-card__chip"></div>
+            <div className={`${size}-card__chip`}></div>
           </div>
           <div className="card-bottom flex-column-horizontal-center">
             <div className="card-text card-numbers-text">
@@ -43,11 +60,13 @@ export default function Card({ cardInfo, onChangeCardType }: CardProps) {
           </div>
         </div>
       </div>
-      <CardSelectModal
-        isOpened={isModalOpened}
-        closeModal={closeModal}
-        onChangeCardType={onChangeCardType}
-      />
+      {
+        <CardSelectModal
+          isOpened={isModalOpened && shouldShowTypeSelection}
+          closeModal={closeModal}
+          onChangeCardType={onChangeCardType}
+        />
+      }
     </>
   );
 }

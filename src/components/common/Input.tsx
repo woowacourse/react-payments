@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useEffect, useRef } from "react";
+import React, { InputHTMLAttributes } from "react";
 
 const sizeTag = {
   tiny: "w-15",

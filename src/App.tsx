@@ -1,40 +1,35 @@
-import Card from "components/Card";
-import CardInfoForm from "components/CardInfoForm";
-import Header from "components/Header";
-import useCardInfoInput from "hooks/useCardInfoInput";
+import NotFound from "components/common/NotFound";
+import Toast from "components/common/Toast";
+import Home from "components/pages";
+import Add from "components/pages/add";
+import Complete from "components/pages/complete";
+import Loading from "components/pages/Loading";
+import { PATH } from "constant/path";
 import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-function App() {
-  const {
-    cardInfo,
-    cardInfoValidation,
-    onChangeCardType,
-    resetCardInfo,
-    onChangeCardNumber,
-    onChangeExpirationDate,
-    onChangeUserName,
-    onBlurUserName,
-    onChangeSecurityCode,
-    onChangePassword,
-  } = useCardInfoInput();
+import useCards from "./hooks/useCards";
+
+export default function App() {
+  const { cards, addCard, editCard, error, isLoading } = useCards();
+
+  if (isLoading) return <Loading />;
 
   return (
-    <div className="App">
-      <Header title="카드 추가" />
-      <Card cardInfo={cardInfo} onChangeCardType={onChangeCardType} />
-      <CardInfoForm
-        cardInfo={cardInfo}
-        onChangeCardNumber={onChangeCardNumber}
-        onChangeExpirationDate={onChangeExpirationDate}
-        onChangeUserName={onChangeUserName}
-        onBlurUserName={onBlurUserName}
-        onChangeSecurityCode={onChangeSecurityCode}
-        onChangePassword={onChangePassword}
-        resetCardInfo={resetCardInfo}
-        cardInfoValidation={cardInfoValidation}
-      />
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path={PATH.ADD} element={<Add />} />
+          <Route
+            path={PATH.COMPLETE}
+            element={<Complete addCard={addCard} editCard={editCard} />}
+          />
+          <Route path={PATH.HOME} element={<Home cards={cards} />} />
+          <Route path={PATH.HOME2} element={<Home cards={cards} />} />
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+      {error.isError && <Toast>{error.errorMessage}</Toast>}
+    </>
   );
 }
-
-export default App;

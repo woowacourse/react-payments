@@ -1,4 +1,5 @@
 interface CardInfo {
+  id?: number;
   cardType: CardType;
   cardNumbers: CardNumbers;
   expirationDate: ExpirationDate;
@@ -6,6 +7,11 @@ interface CardInfo {
   securityCode: string;
   password: Password;
 }
+
+interface CardInfoWithCardName extends CardInfo {
+  cardName: string;
+}
+
 type CardType = {
   name: CardName;
   color: CardColor;
@@ -32,7 +38,7 @@ interface ExpirationDate {
   year: string;
 }
 
-type CardInfoValidationTarget = Omit<CardInfo, "cardType" | "userName">;
+type CardInfoValidationTarget = Omit<CardInfo, "cardType" | "userName" | "cardName">;
 
 type CardInfoValidation = {
   [K in keyof CardInfoValidationTarget]: Validation;
@@ -44,11 +50,18 @@ interface Validation {
   errorMsg: string | null;
 }
 
+const isCardInfo = (value: any): value is CardInfo => {
+  if ("cardType" in value) return true;
+
+  return false;
+};
+
 export type {
   CardColor,
   CardInfo,
   CardInfoValidation,
   CardInfoValidationTarget,
+  CardInfoWithCardName,
   CardName,
   CardNumbers,
   CardType,
@@ -56,3 +69,5 @@ export type {
   Password,
   Validation,
 };
+
+export { isCardInfo };

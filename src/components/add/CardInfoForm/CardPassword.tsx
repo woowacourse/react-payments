@@ -1,10 +1,8 @@
+import Input from "components/common/Input";
+import InputContainer from "components/common/InputContainer";
 import React from "react";
 import type { InputChangeFunction } from "types";
 import type { Password, Validation } from "types/cardInfo";
-
-import Input from "../common/Input";
-import InputContainer from "../common/InputContainer";
-
 interface CardPasswordProps {
   password: Password;
   onChange: InputChangeFunction;
@@ -12,12 +10,7 @@ interface CardPasswordProps {
   inputs: HTMLInputElement[];
 }
 
-export default function CardPassword({
-  password,
-  onChange,
-  validation,
-  inputs,
-}: CardPasswordProps) {
+function CardPassword({ password, onChange, validation, inputs }: CardPasswordProps) {
   return (
     <InputContainer title="카드 비밀번호" validation={validation}>
       <Input
@@ -59,3 +52,5 @@ export default function CardPassword({
     </InputContainer>
   );
 }
+
+export default React.memo(CardPassword);
