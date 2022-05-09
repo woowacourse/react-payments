@@ -23,6 +23,7 @@ export const decorators = [
           <CardDataProvider>
             <ErrorProvider>
               <Story />
+              <div id="modal"></div>
             </ErrorProvider>
           </CardDataProvider>
         </FormDataProvider>
