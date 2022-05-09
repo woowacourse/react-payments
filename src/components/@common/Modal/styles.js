@@ -39,7 +39,7 @@ const Container = styled.div`
     ${responsive.notMobile(css`
       width: 540px;
       padding: 1.5rem;
-      margin: 15vh auto 10vh;
+      margin: 20vh auto 10vh;
     `)}
   }
 
