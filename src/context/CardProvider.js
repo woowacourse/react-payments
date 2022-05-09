@@ -12,7 +12,7 @@ import ADD_CARD from '../pages/CardAddition/action';
 import UPDATE_CARD_ALIAS from '../hooks/useAliasModal/action';
 import DELETE_CARD from '../pages/Home/Cards/action';
 
-const initialState = {
+const initialCardVar = {
   cardNumber: ['', '', '', ''],
   cardExpiration: ['', ''],
   cardOwner: '',
@@ -20,6 +20,10 @@ const initialState = {
   cardPassword: ['', ''],
   cardCompanyName: '',
   cardCompanyColor: CARD_COMPANY_COLORS.UNSELECTED_COMPANY,
+};
+
+const initialState = {
+  ...initialCardVar,
   modalVisible: false,
   cards: [],
 };
@@ -97,6 +101,7 @@ const reducer = (state, action) => {
     case ADD_CARD: {
       return {
         ...state,
+        ...initialCardVar,
         cards: [...state.cards, action.card],
       };
     }
