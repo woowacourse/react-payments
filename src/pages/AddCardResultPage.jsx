@@ -9,6 +9,7 @@ import GoBackButton from '../components/GoBackButton';
 import CardItem from '../components/CardItem';
 import Button from '../components/common/Button';
 import Form from '../components/common/Form';
+import { CONFIRM_MESSAGE } from '../constants';
 
 const Main = styled.main`
   display: flex;
@@ -60,19 +61,16 @@ export default function AddCardResultPage() {
   const handleCardNickNameSubmit = e => {
     e.preventDefault();
     const nickNameInputValue = e.target.elements['nickname-input'].value;
+
     if (nickNameInputValue === '') {
-      if (confirm('닉네임을 지정하지 않고 카드를 등록하시겠습니까?')) {
-        navigate('/', {
-          replace: true,
-        });
+      if (confirm(CONFIRM_MESSAGE.ADD_CARD_WITH_NO_NICKNAME)) {
+        navigate('/', { replace: true });
       }
       return;
     }
-    if (confirm(`[${nickNameInputValue}](으)로 카드 닉네임을 등록하시겠습니까?`)) {
+    if (confirm(CONFIRM_MESSAGE.ADD_CARD_WITH_NICKNAME(nickNameInputValue))) {
       updateNickNameByIndex(cardIndex, nickNameInputValue);
-      navigate('/', {
-        replace: true,
-      });
+      navigate('/', { replace: true });
     }
   };
 

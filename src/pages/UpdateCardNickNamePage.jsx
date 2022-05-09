@@ -10,6 +10,8 @@ import CardItem from '../components/CardItem';
 import Button from '../components/common/Button';
 import Form from '../components/common/Form';
 
+import { CONFIRM_MESSAGE } from '../constants';
+
 const Main = styled.main`
   display: flex;
   flex-direction: column;
@@ -60,25 +62,21 @@ export default function UpdateCardNickNamePage() {
   const handleCardNickNameSubmit = e => {
     e.preventDefault();
     const nickNameInputValue = e.target.elements['nickname-input'].value;
+
     if (nickNameInputValue === '') {
-      if (
-        confirm(
-          cardList[cardIndex].nickName
-            ? `기존 닉네임 [${cardList[cardIndex].nickName}]을 유지하시겠습니까?`
-            : '닉네임이 없는 상태를 유지하시겠습니까?'
-        )
-      ) {
-        navigate('/', {
-          replace: true,
-        });
+      const confirmMessage = cardList[cardIndex].nickName
+        ? CONFIRM_MESSAGE.KEEP_REGISTERED_NICKNAME(cardList[cardIndex].nickName)
+        : CONFIRM_MESSAGE.KEEP_NO_NICKNAME;
+
+      if (confirm(confirmMessage)) {
+        navigate('/', { replace: true });
       }
       return;
     }
-    if (confirm(`[${nickNameInputValue}](으)로 카드 닉네임을 수정하시겠습니까?`)) {
+
+    if (confirm(CONFIRM_MESSAGE.UPDATE_NICKNAME(nickNameInputValue))) {
       updateNickNameByIndex(cardIndex, nickNameInputValue);
-      navigate('/', {
-        replace: true,
-      });
+      navigate('/', { replace: true });
     }
   };
 

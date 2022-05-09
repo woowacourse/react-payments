@@ -19,7 +19,7 @@ import Button from './../components/common/Button';
 import Form from '../components/common/Form';
 import GoBackButton from '../components/GoBackButton';
 
-import { ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_SUBMIT_CONFIRM_MESSAGE } from '../constants';
+import { ADD_CARD_FORM_CONDITION, CONFIRM_MESSAGE } from '../constants';
 import {
   isValidCardExpireDateUnit,
   isValidCardHolderName,
@@ -65,7 +65,7 @@ export default function AddCardPage() {
   const handleCardInfoSubmit = e => {
     e.preventDefault();
     // eslint-disable-next-line no-restricted-globals
-    if (confirm(ADD_CARD_FORM_SUBMIT_CONFIRM_MESSAGE(cardNumber, expireDate, holderName))) {
+    if (confirm(CONFIRM_MESSAGE.ADD_CARD_FORM_SUBMIT(cardNumber, expireDate, holderName))) {
       const cardIndex = addNewCard({ cardNumber, expireDate, holderName });
       navigate(`/addCardResult/${cardIndex}`, {
         replace: true,
