@@ -17,7 +17,8 @@ const TextArea = styled.p`
   text-align: left;
   background-color: ${BUBBLE_PRIMARY_BG_COLOR};
   color: ${BUBBLE_PRIMARY_COLOR};
-  border-radius: 5%;
+  border-radius: 5px;
+  border: 1px solid ${BUBBLE_PRIMARY_COLOR};
 
   ${QuestionContainer}:hover & {
     display: block;
