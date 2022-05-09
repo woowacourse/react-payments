@@ -65,14 +65,7 @@ function CardSubmitPage({ nextId }) {
     <>
       <SubmitContainer>
         <Title>카드 등록이 완료되었습니다.</Title>
-        <Card
-          large
-          handleClickBox={() => {}}
-          cardCompany={cardCompany}
-          cardNumbers={cardNumbers}
-          cardOwner={owner}
-          cardDate={cardDate}
-        />
+        <Card large cardCompany={cardCompany} cardNumbers={cardNumbers} cardOwner={owner} cardDate={cardDate} />
         <Container>
           <LinedInput
             type="text"

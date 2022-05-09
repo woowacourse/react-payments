@@ -30,7 +30,7 @@ function CardShape({ dimensions, cardCompany, cardNumbers, cardOwner, cardDate }
   const [isShown, setIsShown] = useState(true);
 
   const handleClickBox = () => {
-    setIsShown(!isShown);
+    setIsShown(prevIsShown => !prevIsShown);
   };
 
   const handleClickCompany = ({ color: hexColor, name }) => {
@@ -44,13 +44,9 @@ function CardShape({ dimensions, cardCompany, cardNumbers, cardOwner, cardDate }
 
   return (
     <CardContainer>
-      <Card
-        handleClickBox={handleClickBox}
-        cardCompany={cardCompany}
-        cardNumbers={cardNumbers}
-        cardOwner={cardOwner}
-        cardDate={cardDate}
-      />
+      <div onClick={handleClickBox}>
+        <Card cardCompany={cardCompany} cardNumbers={cardNumbers} cardOwner={cardOwner} cardDate={cardDate} />
+      </div>
       <Modal isOpen={isShown} setIsOpen={setIsShown} dimensions={dimensions}>
         <GridContainer>
           {cardCompanyList.map(({ color, name }, index) => (

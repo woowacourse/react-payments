@@ -6,16 +6,9 @@ import { CardBottom, CardBox, CardChip, CardHeader, CardInfo, CardNumber, CardPa
 const convertToCardNumberString = ({ cardNoA, cardNoB, cardNoC, cardNoD }) =>
   `${cardNoA} ${cardNoB} ${'*'.repeat(cardNoC.length)} ${'*'.repeat(cardNoD.length)}`;
 
-function Card({
-  large,
-  handleClickBox,
-  cardCompany: { hexColor, name },
-  cardNumbers,
-  cardOwner,
-  cardDate: { month, year },
-}) {
+function Card({ large, cardCompany: { hexColor, name }, cardNumbers, cardOwner, cardDate: { month, year } }) {
   return (
-    <CardBox onClick={handleClickBox} hexColor={hexColor} large={large} data-testid="card">
+    <CardBox hexColor={hexColor} large={large} data-testid="card">
       <CardHeader>
         <Span>{name}</Span>
       </CardHeader>
