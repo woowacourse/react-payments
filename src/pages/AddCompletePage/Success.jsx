@@ -7,7 +7,7 @@ import { useInput } from '../../hooks';
 import { Button, Card, UnderlinedInput } from '../../components';
 
 import { CardContext } from '../../contexts';
-import { encryptCardNumber, makeValidDate } from '../../utils';
+import { encryptCardNumber, makeValidDate } from '../../utils/processCard';
 import { splitCardNumbers } from '../../utils/regExp';
 
 const Message = styled.div`

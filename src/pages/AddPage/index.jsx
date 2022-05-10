@@ -22,7 +22,7 @@ import {
   encryptCardNumber,
   makeCardOwnerName,
   makeValidDate,
-} from '../../utils';
+} from '../../utils/processCard';
 import { splitCardNumbers } from '../../utils/regExp';
 import isValidCardInputs from '../../utils/validator';
 
@@ -89,7 +89,7 @@ function AddPage() {
       },
     });
 
-    navigate('/complete');
+    navigate('../complete');
   };
 
   const forwardValue = useMemo(

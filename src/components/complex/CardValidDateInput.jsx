@@ -2,7 +2,7 @@ import { Input, InputContainer } from '..';
 
 import { CardInfoContext } from '../../contexts';
 import { NOW } from '../../constants';
-import { preventEvent } from '../../utils';
+import { preventEvent } from '../../utils/event';
 
 export default function CardValidDateInput() {
   return (

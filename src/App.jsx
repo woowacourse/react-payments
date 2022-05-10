@@ -14,11 +14,16 @@ function App() {
       <Router basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path="/" element={<CardListPage cards={state.cards} />} />
-          <Route path="/add" element={<AddPage />} />
-          <Route
-            path="/complete"
+          <Route path="/add" element={<AddPage />}>
+            <Route
+              path="complete"
+              element={<AddCompletePage card={state.card} />}
+            />
+          </Route>
+          {/* <Route
+            path="/add/complete"
             element={<AddCompletePage card={state.card} />}
-          />
+          /> */}
         </Routes>
       </Router>
     </CardContext.Provider>

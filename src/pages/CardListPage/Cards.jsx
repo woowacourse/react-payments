@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { DisplayCard } from '../../components/Card';
 
-import { encryptCardNumber, makeValidDate } from '../../utils';
+import { encryptCardNumber, makeValidDate } from '../../utils/processCard';
 import { splitCardNumbers } from '../../utils/regExp';
 
 const Card = styled(DisplayCard)`

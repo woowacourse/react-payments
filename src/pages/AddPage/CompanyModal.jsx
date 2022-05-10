@@ -10,7 +10,7 @@ import {
 
 import { CardInfoContext } from '../../contexts';
 import { CARD_COMPANY } from '../../constants';
-import { preventBubbling } from '../../utils';
+import { preventBubbling } from '../../utils/event';
 
 function CompanyModal() {
   return (

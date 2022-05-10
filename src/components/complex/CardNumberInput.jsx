@@ -2,7 +2,7 @@ import { Input, InputContainer } from '..';
 
 import { CardInfoContext } from '../../contexts';
 import { CARD_RULE } from '../../constants';
-import { encryptCardNumber } from '../../utils';
+import { encryptCardNumber } from '../../utils/processCard';
 import { splitCardNumbers } from '../../utils/regExp';
 
 export default function CardNumberInput() {
