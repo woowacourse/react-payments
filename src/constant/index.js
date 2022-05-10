@@ -55,6 +55,12 @@ const ALERT_MESSAGE = {
   CHECK_DUE_DATE: '만료일을 확인해주세요',
 }
 
+const PATH = {
+  MAIN: 'react-payments',
+  ADD: 'react-payments/add',
+  NICKNAME: 'react-payments/nickname/:id',
+}
+
 export {
   CARD_NUMBER,
   DUE_DATE,
@@ -66,4 +72,5 @@ export {
   CARD_COMPANY,
   ERROR_MESSAGE,
   ALERT_MESSAGE,
+  PATH,
 }

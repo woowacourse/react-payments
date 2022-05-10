@@ -7,7 +7,9 @@ import AddPage from 'pages/AddPage'
 import CardListPage from 'pages/CardListPage'
 import NickNamePage from 'pages/NickNamePage'
 
+import { PATH } from 'constant'
 import theme from 'theme'
+import NotFoundPage from 'pages/NotFoundPage'
 
 function App() {
   return (
@@ -15,20 +17,10 @@ function App() {
       <CardInfoProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="react-payments" element={<CardListPage />} />
-            <Route path="react-payments/add" element={<AddPage />} />
-            <Route
-              path="react-payments/nickname/:id"
-              element={<NickNamePage />}
-            />
-            <Route
-              path="*"
-              element={
-                <main>
-                  <p>There's nothing here!</p>
-                </main>
-              }
-            />
+            <Route path={PATH.MAIN} element={<CardListPage />} />
+            <Route path={PATH.ADD} element={<AddPage />} />
+            <Route path={PATH.NICKNAME} element={<NickNamePage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
       </CardInfoProvider>
