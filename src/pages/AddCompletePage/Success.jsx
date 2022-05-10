@@ -29,7 +29,7 @@ function Success({
 
   const onClickCheckButton = () => {
     dispatch({
-      type: 'ADD_CARD',
+      type: 'ADD_CARD_TO_LIST',
       cardName,
     });
 

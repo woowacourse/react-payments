@@ -77,7 +77,7 @@ function AddPage() {
 
   const onClickNextButton = () => {
     dispatch({
-      type: 'SAVE_CARD',
+      type: 'SAVE_CARD_INFO',
       card: {
         cardCompany: cardCompany.name,
         cardColor: cardCompany.color,

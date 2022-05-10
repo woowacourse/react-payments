@@ -5,12 +5,12 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'SAVE_CARD':
+    case 'SAVE_CARD_INFO':
       return {
         ...state,
         card: action.card,
       };
-    case 'ADD_CARD':
+    case 'ADD_CARD_TO_LIST':
       return {
         card: {},
         cardList: state.cardList.concat({
