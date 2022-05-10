@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import useInput from "hooks/useInput";
-import useCardNumber from "hooks/useCardNumber";
-import useCardPassword from "hooks/useCardPassword";
-import useCardDueDate from "hooks/useCardDueDate";
+import useCardNumber from "components/CardEditor/CardNumberInput/useCardNumber";
+import useCardPassword from "components/CardEditor/CardPasswordInput/useCardPassword";
+import useCardDueDate from "components/CardEditor/CardDueDateInput/useCardDueDate";
 import useModal from "hooks/useModal";
 
 import Header from "../Header";
