@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect } from 'react';
-import CardNumberInput from 'components/Modules/CardNumberInput';
 import { CardContext } from 'context/CardContext';
 import { noSpecialCharacters } from 'constant/regularExpression';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 import { NO_CARD_NAME } from 'constant';
+import CardNameInput from 'components/Modules/CardNameInput';
 
 function CardNameInputContainer() {
   const { inputtedInfoDispatch } = useContext(CardContext);
@@ -24,7 +24,7 @@ function CardNameInputContainer() {
   }, [cardName, validation]);
 
   return (
-    <CardNumberInput
+    <CardNameInput
       cardName={cardName}
       validation={validation}
       onCardNameChange={onCardNameChange}

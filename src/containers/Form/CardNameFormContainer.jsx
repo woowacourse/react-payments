@@ -4,7 +4,7 @@ import CardNameForm from 'components/Templates/CardNameForm';
 import { CardContext } from 'context/CardContext';
 import { CARD_ACTION } from 'Reducer/CardReducer';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
-import CardNumberInputContainer from 'containers/Input/CardNumberInputContainer';
+import CardNameInputContainer from 'containers/Input/CardNameInputContainer';
 
 function CardNameFormContainer({ link }) {
   const navigator = useNavigate();
@@ -30,7 +30,7 @@ function CardNameFormContainer({ link }) {
 
   return (
     <CardNameForm onCardNameSubmit={onCardNameSubmit}>
-      <CardNumberInputContainer />
+      <CardNameInputContainer />
     </CardNameForm>
   );
 }
