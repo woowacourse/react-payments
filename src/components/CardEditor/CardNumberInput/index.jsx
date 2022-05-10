@@ -4,6 +4,7 @@ import InputBox from "components/InputBox";
 import { Input } from "components/Input/style";
 import { CardInputWrapper } from "pages/style";
 import { CARD_NUMBER } from "constant";
+import { blockInputString } from "utils";
 
 function CardNumberInput({
   cardNumbers,
@@ -22,6 +23,7 @@ function CardNumberInput({
               value={cardNumbers[index]}
               onChange={(e) => handleChangeCardNumber(index, e)}
               data-testid={`card-number-${index}`}
+              onKeyDown={blockInputString}
             />
             {index < 3 && <span>-</span>}
           </React.Fragment>

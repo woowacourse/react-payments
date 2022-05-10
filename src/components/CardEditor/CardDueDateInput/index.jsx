@@ -3,6 +3,7 @@ import { CardInputWrapper } from "pages/style";
 import InputBox from "components/InputBox";
 import { Input } from "components/Input/style";
 import { NAME } from "constant";
+import { blockInputString } from "utils";
 
 function CardDueDateInput({
   dueDate,
@@ -21,6 +22,7 @@ function CardDueDateInput({
           onChange={handleChangeDueDate}
           placeholder="MM"
           data-testid="due-month"
+          onKeyDown={blockInputString}
         />
         <span>/</span>
         <Input
@@ -31,6 +33,7 @@ function CardDueDateInput({
           onChange={handleChangeDueDate}
           placeholder="YY"
           data-testid="due-year"
+          onKeyDown={blockInputString}
         />
       </InputBox>
     </CardInputWrapper>
