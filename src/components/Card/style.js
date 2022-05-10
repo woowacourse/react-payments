@@ -61,7 +61,7 @@ const CardOwner = styled.div`
   white-space: nowrap;
 `;
 
-const CardBottomNumber = styled.div`
+const CardNumber = styled.div`
   ${FlexAlignCenter}
   width: 100%;
   margin-bottom: 10px;
@@ -69,7 +69,7 @@ const CardBottomNumber = styled.div`
   height: 16px;
 `;
 
-const CardBottomInfo = styled.div`
+const CardInfo = styled.div`
   ${FlexAlignCenter}
   width: 100%;
   justify-content: space-between;
@@ -81,7 +81,7 @@ export {
   CardMiddle,
   CardBottom,
   CardText,
-  CardBottomNumber,
-  CardBottomInfo,
+  CardNumber,
+  CardInfo,
   CardOwner,
 };

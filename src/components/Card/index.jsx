@@ -6,8 +6,8 @@ import {
   CardMiddle,
   CardBottom,
   CardText,
-  CardBottomNumber,
-  CardBottomInfo,
+  CardNumber,
+  CardInfo,
   CardOwner,
 } from "./style";
 
@@ -32,7 +32,7 @@ function Card({
           <div />
         </CardMiddle>
         <CardBottom>
-          <CardBottomNumber>
+          <CardNumber>
             <CardText>
               {cardNumbers
                 .map((number, index) =>
@@ -40,13 +40,13 @@ function Card({
                 )
                 .join(" ")}
             </CardText>
-          </CardBottomNumber>
-          <CardBottomInfo>
+          </CardNumber>
+          <CardInfo>
             <CardOwner>{owner}</CardOwner>
             <CardText>
               {dueMonth}/{dueYear}
             </CardText>
-          </CardBottomInfo>
+          </CardInfo>
         </CardBottom>
       </CardWrapper>
       {nickname && size === CARD_SIZE.SMALL && <div>{nickname}</div>}
