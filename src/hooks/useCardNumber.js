@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { isFilledCardNumberLength, isOverCardNumberLength } from "validation";
 
-const useCardNumber = () => {
-  const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
+const useCardNumber = (initialValue) => {
+  const [cardNumbers, setCardNumbers] = useState(initialValue);
 
   const secondCardNumberInputRef = useRef();
   const thirdCardNumberInputRef = useRef();
@@ -31,7 +31,6 @@ const useCardNumber = () => {
 
   return {
     cardNumbers,
-    setCardNumbers,
     handleChangeCardNumber,
     cardNumberInputRefs,
   };

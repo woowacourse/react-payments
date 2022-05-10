@@ -33,7 +33,9 @@ function Home() {
                 dueMonth={data.dueDate.month}
                 dueYear={data.dueDate.year}
                 nickname={data.nickname}
-                onClick={() => navigate(`/edit/${data.id}`)}
+                onClick={() =>
+                  navigate(`/edit/${data.id}`, { state: { data } })
+                }
               />
             );
           })}

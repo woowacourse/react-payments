@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { CardListContext, CardDispatchContext } from "context/CardListProvider";
 import Card from "components/Card";
@@ -17,9 +17,11 @@ import {
 
 function Finish() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { id } = useParams();
+
   const [nickname, , handleChangeNickname] = useInput({
-    initialValue: "",
+    initialValue: location?.state?.nickname || "",
     validator: isValidNickname,
   });
   const cardList = useContext(CardListContext);

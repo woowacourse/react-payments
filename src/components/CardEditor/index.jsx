@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState, useEffect, useContext, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import useInput from "hooks/useInput";
 import useCardNumber from "hooks/useCardNumber";
 import useCardPassword from "hooks/useCardPassword";
@@ -31,47 +31,36 @@ import { ReactComponent as ArrowImage } from "assets/arrow.svg";
 import { CardWrapper, FooterWrapper } from "pages/style";
 import { CardDispatchContext } from "context/CardListProvider";
 
-function CardEditor({ isEdit, originData }) {
+function CardEditor({ isEdit }) {
   const navigate = useNavigate();
-  const {
-    cardNumbers,
-    setCardNumbers,
-    handleChangeCardNumber,
-    cardNumberInputRefs,
-  } = useCardNumber();
-  const { dueDate, setDueDate, handleChangeDueDate, yearInputRef, error } =
-    useCardDueDate();
-  const [owner, setOwner, handleChangeOwner] = useInput({
-    initialValue: "",
+  const location = useLocation();
+  const data = location?.state?.data;
+
+  const { cardNumbers, handleChangeCardNumber, cardNumberInputRefs } =
+    useCardNumber(data?.cardNumbers ?? ["", "", "", ""]);
+  const { dueDate, handleChangeDueDate, yearInputRef, error } = useCardDueDate(
+    data?.dueDate ?? { month: "", year: "" }
+  );
+  const [owner, , handleChangeOwner] = useInput({
+    initialValue: data?.owner ?? "",
     validator: isValidOwnerLength,
   });
-  const [cvc, setCvc, handleChangeCvc] = useInput({
-    initialValue: "",
+  const [cvc, , handleChangeCvc] = useInput({
+    initialValue: data?.cvc ?? "",
     validator: isValidCvc,
   });
-  const {
-    password,
-    setPassword,
-    handleChangePassword,
-    secondPasswordInputRef,
-  } = useCardPassword();
-  const [company, setCompany] = useState({ color: "", name: "" });
+  const { password, handleChangePassword, secondPasswordInputRef } =
+    useCardPassword(
+      data?.password ?? { firstPassword: "", secondPassword: "" }
+    );
+  const [company, setCompany] = useState(
+    data?.company ?? { color: "", name: "" }
+  );
   const { modalVisible, openModal, closeModal } = useModal();
   const [allRequired, setAllRequired] = useState(false);
 
   const { onCreate, onEditCard, onRemove } = useContext(CardDispatchContext);
   const cardId = useRef(Date.now());
-
-  useEffect(() => {
-    if (isEdit) {
-      setCardNumbers(originData.cardNumbers);
-      setDueDate(originData.dueDate);
-      setCompany(originData.company);
-      setPassword(originData.password);
-      setOwner(originData.owner);
-      setCvc(originData.cvc);
-    }
-  }, [isEdit, originData]);
 
   useEffect(() => {
     setAllRequired(
@@ -91,16 +80,11 @@ function CardEditor({ isEdit, originData }) {
 
   const handleSubmit = () => {
     if (isEdit) {
-      onEditCard(
-        originData.id,
-        cardNumbers,
-        dueDate,
-        owner,
-        cvc,
-        password,
-        company
-      );
-      navigate(`/finish/${originData.id}`, { replace: true });
+      onEditCard(data.id, cardNumbers, dueDate, owner, cvc, password, company);
+      navigate(`/finish/${data.id}`, {
+        replace: true,
+        state: { nickname: data.nickname },
+      });
       return;
     }
 
@@ -119,7 +103,7 @@ function CardEditor({ isEdit, originData }) {
 
   const handleRemoveCard = () => {
     if (window.confirm(INFO_MESSAGES.ASK_DELETE)) {
-      onRemove(originData.id);
+      onRemove(data.id);
       navigate("/", { replace: true });
     }
   };
@@ -185,25 +169,6 @@ function CardEditor({ isEdit, originData }) {
 
 CardEditor.propTypes = {
   isEdit: PropTypes.bool,
-  originData: PropTypes.shape({
-    id: PropTypes.number,
-    cardNumbers: PropTypes.array,
-    dueDate: PropTypes.shape({
-      month: PropTypes.string,
-      year: PropTypes.string,
-    }),
-    owner: PropTypes.string,
-    cvc: PropTypes.string,
-    password: PropTypes.shape({
-      firstPassword: PropTypes.string,
-      secondPassword: PropTypes.string,
-    }),
-    company: PropTypes.shape({
-      color: PropTypes.string,
-      name: PropTypes.string,
-    }),
-    nickname: PropTypes.string,
-  }),
 };
 
 export default CardEditor;

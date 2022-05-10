@@ -7,8 +7,8 @@ import {
 } from "validation";
 import { NAME } from "constant";
 
-const useCardDueDate = () => {
-  const [dueDate, setDueDate] = useState({ month: "", year: "" });
+const useCardDueDate = (initialValue) => {
+  const [dueDate, setDueDate] = useState(initialValue);
   const [error, setError] = useState({ month: false, year: false });
 
   const yearInputRef = useRef();
@@ -30,7 +30,7 @@ const useCardDueDate = () => {
     setDueDate({ ...dueDate, [name]: value });
   };
 
-  return { dueDate, setDueDate, handleChangeDueDate, yearInputRef, error };
+  return { dueDate, handleChangeDueDate, yearInputRef, error };
 };
 
 export default useCardDueDate;

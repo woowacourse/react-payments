@@ -1,11 +1,8 @@
 import { useRef, useState } from "react";
 import { isFilledPasswordLength, isOverPasswordLength } from "validation";
 
-const useCardPassword = () => {
-  const [password, setPassword] = useState({
-    firstPassword: "",
-    secondPassword: "",
-  });
+const useCardPassword = (initialValue) => {
+  const [password, setPassword] = useState(initialValue);
   const secondPasswordInputRef = useRef();
 
   const handleChangePassword = ({ target: { value, name } }) => {
@@ -20,7 +17,6 @@ const useCardPassword = () => {
 
   return {
     password,
-    setPassword,
     handleChangePassword,
     secondPasswordInputRef,
   };
