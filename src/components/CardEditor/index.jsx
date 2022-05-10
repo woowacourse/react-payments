@@ -64,7 +64,8 @@ function CardEditor({ isEdit }) {
 
   useEffect(() => {
     setAllRequired(
-      cardNumbers.join("").length === CARD_NUMBER.UNIT_LENGTH * 4 &&
+      cardNumbers.join("").length ===
+        CARD_NUMBER.UNIT_LENGTH * cardNumbers.length &&
         dueDate.month.length === DUE_DATE.UNIT_LENGTH &&
         dueDate.year.length === DUE_DATE.UNIT_LENGTH &&
         cvc.length === CVC.UNIT_LENGTH &&
