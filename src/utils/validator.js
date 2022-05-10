@@ -3,7 +3,7 @@ import { CARD_RULE } from '../constants';
 const isEmptyValue = requiredList => requiredList.some(value => value === '');
 
 const isValidCardNumber = cardNumber =>
-  cardNumber.length === CARD_RULE.NUMBER_MAX_LENGTH;
+  cardNumber.length >= CARD_RULE.NUMBER_MAX_LENGTH;
 
 const isValidCVC = CVC => CVC.length === CARD_RULE.CVC_LENGTH;
 

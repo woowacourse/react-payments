@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
+import { encryptCardNumber } from '../utils/processCard';
 
-import { isNumber } from '../utils/regExp';
+import { isNumber, splitCardNumbers } from '../utils/regExp';
 
 export default function useCardNumber(initialValue) {
   const [cardNumber, setCardNumber] = useState(initialValue);
@@ -40,5 +41,5 @@ export default function useCardNumber(initialValue) {
     []
   );
 
-  return [cardNumber, handler];
+  return [splitCardNumbers(encryptCardNumber(cardNumber), ' ') ?? '', handler];
 }

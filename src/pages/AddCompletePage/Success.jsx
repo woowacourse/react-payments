@@ -7,8 +7,7 @@ import { useInput } from '../../hooks';
 import { Button, Card, UnderlinedInput } from '../../components';
 
 import { CardContext } from '../../contexts';
-import { encryptCardNumber, makeValidDate } from '../../utils/processCard';
-import { splitCardNumbers } from '../../utils/regExp';
+import { makeCardOwnerName, makeValidDate } from '../../utils/processCard';
 
 const Message = styled.div`
   font-size: 24px;
@@ -43,8 +42,8 @@ function Success({
         bgColor={cardColor}
         company={cardCompany}
         size="large"
-        name={cardOwnerName}
-        number={splitCardNumbers(encryptCardNumber(cardNumber), ' ') ?? ''}
+        name={makeCardOwnerName(cardOwnerName)}
+        number={cardNumber}
         validDate={makeValidDate(validDate)}
       />
       <UnderlinedInput
