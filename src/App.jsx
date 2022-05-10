@@ -1,7 +1,8 @@
 import { memo, useReducer } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import { AddCompletePage, AddPage, CardListPage, NotFound } from './pages';
+import AddPageRouter from './router';
+import { CardListPage, NotFound } from './pages';
 
 import { CardContext } from './contexts';
 import { initialState, reducer } from './reducers';
@@ -17,11 +18,7 @@ function App() {
             path="/"
             element={<CardListPage cardList={state.cardList} />}
           />
-          <Route path="/add" element={<AddPage />} />
-          <Route
-            path="/complete"
-            element={<AddCompletePage card={state.card} />}
-          />
+          <Route path="/add/*" element={<AddPageRouter card={state.card} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
