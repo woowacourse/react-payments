@@ -24,6 +24,7 @@ function ExpirationDateInputContainer({
       cardInputDispatch({ type: 'CHANGE_EXPIRATION_DATE', payload: { date, key } });
     }
   };
+
   return (
     <LabelInputContainer
       labelTitle="만료일 (01~12의 월 / 년도)"
