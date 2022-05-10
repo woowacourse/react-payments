@@ -14,13 +14,13 @@ export default {
   ],
 };
 
-function CardListTemplate({ cards }) {
-  return <CardListPage cards={cards} />;
+function CardListTemplate({ cardList }) {
+  return <CardListPage cardList={cardList} />;
 }
 
 const CardList = CardListTemplate.bind({});
 CardList.args = {
-  cards: [
+  cardList: [
     {
       cardCompany: '하리 카드',
       cardColor: '#ADD8E6',

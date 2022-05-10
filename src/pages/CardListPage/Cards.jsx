@@ -14,10 +14,10 @@ const Card = styled(DisplayCard)`
   margin-bottom: 30px;
 `;
 
-function Cards({ cards }) {
+function Cards({ cardList }) {
   return (
     <>
-      {cards.map(card => {
+      {cardList.map(card => {
         const {
           cardColor,
           cardCompany,

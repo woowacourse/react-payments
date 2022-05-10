@@ -1,6 +1,6 @@
 const initialState = {
   card: {},
-  cards: [],
+  cardList: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,7 +13,10 @@ const reducer = (state = initialState, action) => {
     case 'ADD_CARD':
       return {
         card: {},
-        cards: state.cards.concat({ ...state.card, cardName: action.cardName }),
+        cardList: state.cardList.concat({
+          ...state.card,
+          cardName: action.cardName,
+        }),
       };
     default:
       return state;
