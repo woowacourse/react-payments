@@ -1,4 +1,4 @@
-import CardProvider from '../src/context/CardContext';
+import CardContext from 'store/card/CardContext';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -12,6 +12,6 @@ export const parameters = {
 
 export const decorators = [
   (Story) => {
-    return <CardProvider>{Story()}</CardProvider>;
+    return <CardContext>{Story()}</CardContext>;
   },
 ];
