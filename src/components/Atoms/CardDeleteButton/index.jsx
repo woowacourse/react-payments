@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import useCardDeleteButton from 'hooks/Button/useCardDeleteButton';
 
 const Button = styled.button`
   background-color: transparent;
@@ -11,9 +10,7 @@ const Button = styled.button`
   }
 `;
 
-function CardDeleteButton({ children }) {
-  const { onDeleteClick } = useCardDeleteButton();
-
+function CardDeleteButton({ onDeleteClick, children }) {
   return <Button onClick={onDeleteClick}>{children}</Button>;
 }
 

@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
-import useExpiredDateInput from '../../../hooks/Input/useExpiredDateInput';
 import { COUNT, DATE_INPUT_PLACEHOLDER, INPUT_TITLE } from '../../../constant';
-import { EXPIRED_DATE_INPUT_NAMES } from '../../../constant/inputNames';
 import { DATE_SEPARATOR } from '../../../constant/mark';
 
 const InputContainer = styled.div`
@@ -15,10 +13,7 @@ const InputContainer = styled.div`
   gap: 5px;
 `;
 
-function ExpiredDateInput() {
-  const { expiredDate, validations, inputRefs, onDateChange } =
-    useExpiredDateInput(EXPIRED_DATE_INPUT_NAMES);
-
+function ExpiredDateInput({ expiredDate, validations, inputRefs, onDateChange }) {
   return (
     <LabeledInput text={INPUT_TITLE.EXPIRED_DATE}>
       <InputWrapper>

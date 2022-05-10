@@ -1,12 +1,14 @@
-import validator from 'validation';
 import { useContext, useEffect } from 'react';
-import useSomeInput from 'hooks/Input/useSomeInput';
+import CardNumberInput from 'components/Modules/CardNumberInput';
+import { CardContext } from 'context/CardContext';
+import { CARD_NUMBER_INPUT_NAMES } from 'constant/inputNames';
+import validator from 'validation';
+import useSomeInput from 'hooks/useSomeInput';
 import { COUNT } from 'constant';
 import { numberRegex } from 'constant/regularExpression';
-import { CardContext } from 'context/CardContext';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 
-function useCardNumberInput(inputNames) {
+function CardNumberInputContainer() {
   const { inputtedInfoDispatch } = useContext(CardContext);
 
   const {
@@ -17,15 +19,12 @@ function useCardNumberInput(inputNames) {
     inputRefs,
     currentInputRef,
     focusPrevInput,
-  } = useSomeInput(inputNames, validator.validateCardNumber);
+  } = useSomeInput(CARD_NUMBER_INPUT_NAMES, validator.validateCardNumber);
 
   const isValid = Object.values(validations).every(valid => valid);
 
   const handleNumberChange = ({ target, nativeEvent: { data, inputType } }) => {
-    if (
-      (numberRegex.test(data) || !data) &&
-      target.value.length <= COUNT.CARD_NUMBER_MAX_COUNT
-    ) {
+    if ((numberRegex.test(data) || !data) && target.value.length <= COUNT.CARD_NUMBER_MAX_COUNT) {
       const order = target.name;
       const newNumber = target.value;
 
@@ -52,13 +51,14 @@ function useCardNumberInput(inputNames) {
     });
   }, [numbers, isValid]);
 
-  return {
-    numbers,
-    validations,
-    isValid,
-    inputRefs,
-    handleNumberChange,
-  };
+  return (
+    <CardNumberInput
+      numbers={numbers}
+      validations={validations}
+      inputRefs={inputRefs}
+      handleNumberChange={handleNumberChange}
+    />
+  );
 }
 
-export default useCardNumberInput;
+export default CardNumberInputContainer;

@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import SubmitButton from '../../Atoms/SubmitButton';
-import CardNameInput from '../../Modules/CardNameInput';
-import useCardNameForm from '../../../hooks/Form/useCardNameForm';
 
 const Form = styled.form`
   display: flex;
@@ -18,12 +16,10 @@ const SubmitButtonWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-function CardNameForm({ link }) {
-  const { onCardNameSubmit } = useCardNameForm(link);
-
+function CardNameForm({ onCardNameSubmit, children }) {
   return (
     <Form onSubmit={onCardNameSubmit}>
-      <CardNameInput />
+      {children}
       <SubmitButtonWrapper>
         <SubmitButton>건너뛰기</SubmitButton>
       </SubmitButtonWrapper>

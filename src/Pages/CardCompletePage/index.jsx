@@ -1,12 +1,12 @@
 import { useContext, useEffect } from 'react';
 import { CardContext } from 'context/CardContext';
 import styled from 'styled-components';
-import Card from 'components/Modules/Card';
-import CardNameForm from 'components/Templates/CardNameForm';
 import { useNavigate } from 'react-router-dom';
-import CardDeleteButton from 'components/Atoms/CardDeleteButton';
 import { LINK } from '../../constant/Link';
 import { MESSAGE } from '../../constant/message';
+import CardDeleteButtonContainer from 'containers/Button/CardDeleteButtonContainer';
+import CardContainer from 'containers/Card/CardContainer';
+import CardNameFormContainer from 'containers/Form/CardNameFormContainer';
 
 const Page = styled.div`
   display: flex;
@@ -47,10 +47,10 @@ function CardCompletePage() {
     <Page>
       <Title>카드등록이 완료되었습니다.</Title>
       <CardSection>
-        <Card {...inputtedInfo} disable={true} />
+        <CardContainer {...inputtedInfo} disable={true} />
       </CardSection>
-      <CardNameForm link={LINK.CARD_LIST_PAGE} />
-      <CardDeleteButton>카드삭제</CardDeleteButton>
+      <CardNameFormContainer link={LINK.CARD_LIST_PAGE} />
+      <CardDeleteButtonContainer />
     </Page>
   );
 }

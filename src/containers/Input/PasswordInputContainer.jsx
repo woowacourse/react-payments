@@ -1,11 +1,13 @@
 import { useContext, useEffect } from 'react';
-import { numberRegex } from 'constant/regularExpression';
-import validator from 'validation';
-import useSomeInput from 'hooks/Input/useSomeInput';
+import PasswordInput from 'components/Modules/PasswordInput';
 import { CardContext } from 'context/CardContext';
+import { PASSWORD_INPUT_NAMES } from 'constant/inputNames';
+import useSomeInput from 'hooks/useSomeInput';
+import validator from 'validation';
+import { numberRegex } from 'constant/regularExpression';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 
-function usePasswordInput(inputNames) {
+function PasswordInputContainer() {
   const { inputtedInfoDispatch } = useContext(CardContext);
 
   const {
@@ -16,7 +18,7 @@ function usePasswordInput(inputNames) {
     inputRefs,
     currentInputRef,
     focusPrevInput,
-  } = useSomeInput(inputNames, validator.validatePassword);
+  } = useSomeInput(PASSWORD_INPUT_NAMES, validator.validatePassword);
 
   const isValid = Object.values(validations).every(valid => valid);
 
@@ -51,13 +53,14 @@ function usePasswordInput(inputNames) {
     });
   }, [password, isValid]);
 
-  return {
-    password,
-    validations,
-    isValid,
-    inputRefs,
-    onPasswordChange,
-  };
+  return (
+    <PasswordInput
+      password={password}
+      validations={validations}
+      inputRefs={inputRefs}
+      onPasswordChange={onPasswordChange}
+    />
+  );
 }
 
-export default usePasswordInput;
+export default PasswordInputContainer;

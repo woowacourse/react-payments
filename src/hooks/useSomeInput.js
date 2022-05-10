@@ -2,9 +2,7 @@ import { useState, useRef } from 'react';
 import useFocus from './useFocus';
 
 function useSomeInput(entries, validate) {
-  const [stateObject, setStateObject] = useState(
-    Object.fromEntries(entries.map(key => [key, '']))
-  );
+  const [stateObject, setStateObject] = useState(Object.fromEntries(entries.map(key => [key, ''])));
   const [validations, setValidations] = useState(
     Object.fromEntries(entries.map(key => [key, false]))
   );

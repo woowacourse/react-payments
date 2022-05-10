@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
-import usePasswordInput from '../../../hooks/Input/usePasswordInput';
 import { COUNT, INPUT_TITLE } from '../../../constant';
-import { PASSWORD_INPUT_NAMES } from '../../../constant/inputNames';
 
 const InputContainer = styled.div`
   display: flex;
@@ -13,10 +11,7 @@ const InputContainer = styled.div`
   gap: 7px;
 `;
 
-function PasswordInput() {
-  const { password, validations, inputRefs, onPasswordChange } =
-    usePasswordInput(PASSWORD_INPUT_NAMES);
-
+function PasswordInput({ password, validations, inputRefs, onPasswordChange }) {
   return (
     <LabeledInput text={INPUT_TITLE.PASSWORD}>
       <InputContainer>
@@ -34,20 +29,18 @@ function PasswordInput() {
             isValid={validations[order]}
           />
         ))}
-        {Array.from({ length: COUNT.PASSWORD_DISABLE_COUNT }).map(
-          (_, index) => (
-            <Input
-              key={index}
-              value="."
-              width="43px"
-              height="45px"
-              type="password"
-              isValid={true}
-              disable={true}
-              readonly={true}
-            />
-          )
-        )}
+        {Array.from({ length: COUNT.PASSWORD_DISABLE_COUNT }).map((_, index) => (
+          <Input
+            key={index}
+            value="."
+            width="43px"
+            height="45px"
+            type="password"
+            isValid={true}
+            disable={true}
+            readonly={true}
+          />
+        ))}
       </InputContainer>
     </LabeledInput>
   );

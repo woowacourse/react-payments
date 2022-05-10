@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import InfoLabel from '../../Atoms/InfoLabel';
-import useSecurityNumberInput from '../../../hooks/Input/useSecurityNumberInput';
 import { COUNT, INPUT_TITLE } from '../../../constant';
 
 const Container = styled.div`
@@ -15,9 +14,7 @@ const InfoLabelContainer = styled.div`
   padding-top: 15px;
 `;
 
-function SecurityNumberInput() {
-  const { number, validation, onNumberChange } = useSecurityNumberInput();
-
+function SecurityNumberInput({ number, validation, onNumberChange }) {
   return (
     <Container>
       <LabeledInput text={INPUT_TITLE.SECURITY_NUMBER}>

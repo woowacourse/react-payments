@@ -1,10 +1,11 @@
-import { useState, useContext, useEffect } from 'react';
-import { englishRegex } from 'constant/regularExpression';
+import { useContext, useState, useEffect } from 'react';
+import CardOwnerInput from 'components/Modules/CardOwnerInput';
 import { CardContext } from 'context/CardContext';
-import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
+import { englishRegex } from 'constant/regularExpression';
 import validator from 'validation';
+import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 
-function useCardOwnerInput() {
+function CardOwnerInputContainer() {
   const { inputtedInfoDispatch } = useContext(CardContext);
   const [name, setName] = useState('');
   const [validation, setValidation] = useState(true);
@@ -30,12 +31,7 @@ function useCardOwnerInput() {
     });
   }, [name, validation]);
 
-  return {
-    name,
-    validation,
-    isValid: validation,
-    onNameChange,
-  };
+  return <CardOwnerInput name={name} validation={validation} onNameChange={onNameChange} />;
 }
 
-export default useCardOwnerInput;
+export default CardOwnerInputContainer;

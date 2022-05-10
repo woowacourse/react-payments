@@ -1,12 +1,14 @@
 import { useContext, useEffect } from 'react';
+import ExpiredDateInput from 'components/Modules/ExpiredDateInput';
+import { CardContext } from 'context/CardContext';
+import { EXPIRED_DATE_INPUT_NAMES } from 'constant/inputNames';
+import validator from 'validation';
 import { COUNT } from 'constant';
 import { numberRegex } from 'constant/regularExpression';
-import { CardContext } from 'context/CardContext';
+import useSomeInput from 'hooks/useSomeInput';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
-import validator from 'validation';
-import useSomeInput from 'hooks/Input/useSomeInput';
 
-function useExpiredDateInput(inputNames) {
+function ExpiredDateInputContainer() {
   const { inputtedInfoDispatch } = useContext(CardContext);
 
   const {
@@ -17,16 +19,13 @@ function useExpiredDateInput(inputNames) {
     inputRefs,
     currentInputRef,
     focusPrevInput,
-  } = useSomeInput(inputNames, validator.validateExpiredDate);
+  } = useSomeInput(EXPIRED_DATE_INPUT_NAMES, validator.validateExpiredDate);
 
   const isValid = Object.values(validations).every(valid => valid);
 
   const checkNewDateValid = (unit, newDate, data) => {
-    if (
-      (numberRegex.test(data) || !data) &&
-      newDate.length <= COUNT.DATE_MAX_COUNT
-    ) {
-      return unit === inputNames[0] ? newDate <= COUNT.MAX_MONTH : true;
+    if ((numberRegex.test(data) || !data) && newDate.length <= COUNT.DATE_MAX_COUNT) {
+      return unit === EXPIRED_DATE_INPUT_NAMES[0] ? newDate <= COUNT.MAX_MONTH : true;
     }
   };
 
@@ -61,13 +60,14 @@ function useExpiredDateInput(inputNames) {
     });
   }, [expiredDate, isValid]);
 
-  return {
-    expiredDate,
-    validations,
-    isValid,
-    inputRefs,
-    onDateChange,
-  };
+  return (
+    <ExpiredDateInput
+      expiredDate={expiredDate}
+      validations={validations}
+      inputRefs={inputRefs}
+      onDateChange={onDateChange}
+    />
+  );
 }
 
-export default useExpiredDateInput;
+export default ExpiredDateInputContainer;

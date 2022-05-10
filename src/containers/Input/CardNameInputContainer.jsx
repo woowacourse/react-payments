@@ -1,10 +1,11 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import CardNumberInput from 'components/Modules/CardNumberInput';
 import { CardContext } from 'context/CardContext';
+import { noSpecialCharacters } from 'constant/regularExpression';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
-import { noSpecialCharacters } from '../../constant/regularExpression';
-import { NO_CARD_NAME } from '../../constant';
+import { NO_CARD_NAME } from 'constant';
 
-function useCardNameInput() {
+function CardNameInputContainer() {
   const { inputtedInfoDispatch } = useContext(CardContext);
   const [cardName, setCardName] = useState('');
   const [validation, setValidation] = useState(false);
@@ -22,11 +23,13 @@ function useCardNameInput() {
     });
   }, [cardName, validation]);
 
-  return {
-    cardName,
-    validation,
-    onCardNameChange,
-  };
+  return (
+    <CardNumberInput
+      cardName={cardName}
+      validation={validation}
+      onCardNameChange={onCardNameChange}
+    />
+  );
 }
 
-export default useCardNameInput;
+export default CardNameInputContainer;

@@ -1,10 +1,11 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import SecurityNumberInput from 'components/Modules/SecurityNumberInput';
 import { numberRegex } from 'constant/regularExpression';
-import validator from 'validation';
 import { CardContext } from 'context/CardContext';
+import validator from 'validation';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
 
-function useSecurityNumberInput() {
+function SecurityNumberInputContainer() {
   const { inputtedInfoDispatch } = useContext(CardContext);
   const [number, setNumber] = useState('');
   const [validation, setValidation] = useState(false);
@@ -28,12 +29,9 @@ function useSecurityNumberInput() {
     });
   }, [number, validation]);
 
-  return {
-    number,
-    validation,
-    isValid: validation,
-    onNumberChange,
-  };
+  return (
+    <SecurityNumberInput number={number} validation={validation} onNumberChange={onNumberChange} />
+  );
 }
 
-export default useSecurityNumberInput;
+export default SecurityNumberInputContainer;

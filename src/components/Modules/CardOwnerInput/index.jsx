@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
 import { COUNT, INPUT_PLACEHOLDER, INPUT_TITLE } from '../../../constant';
-import useCardOwnerInput from '../../../hooks/Input/useCardOwnerInput';
-import { EXPIRED_DATE_INPUT_NAMES } from '../../../constant/inputNames';
 
 const CountChecker = styled.span`
   position: absolute;
@@ -15,11 +13,7 @@ const CountChecker = styled.span`
   color: #525252;
 `;
 
-function CardOwnerInput() {
-  const { name, validation, onNameChange } = useCardOwnerInput(
-    EXPIRED_DATE_INPUT_NAMES
-  );
-
+function CardOwnerInput({ name, validation, onNameChange }) {
   return (
     <>
       <LabeledInput text={INPUT_TITLE.OWNER_NAME}>

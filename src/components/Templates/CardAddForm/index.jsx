@@ -1,37 +1,25 @@
 import styled from 'styled-components';
-import CardNumberInput from '../../Modules/CardNumberInput';
-import ExpiredDateInput from '../../Modules/ExpiredDateInput';
-import CardOwnerInput from '../../Modules/CardOwnerInput';
-import SecurityNumberInput from '../../Modules/SecurityNumberInput';
-import PasswordInput from '../../Modules/PasswordInput';
 import SubmitButton from '../../Atoms/SubmitButton';
-import useCardAddForm from '../../../hooks/Form/useCardAddForm';
 
-const FormContainer = styled.form`
+const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: 19px;
 `;
 
-const ButtonContainer = styled.div`
+const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
 
-function CardAddForm({ link }) {
-  const { isValidForm, onCardInfoSubmit } = useCardAddForm(link);
-
+function CardAddForm({ isValidForm, onCardInfoSubmit, children }) {
   return (
-    <FormContainer onSubmit={onCardInfoSubmit}>
-      <CardNumberInput />
-      <ExpiredDateInput />
-      <CardOwnerInput />
-      <SecurityNumberInput />
-      <PasswordInput />
-      <ButtonContainer>
+    <FormWrapper onSubmit={onCardInfoSubmit}>
+      {children}
+      <ButtonWrapper>
         <SubmitButton hidden={!isValidForm}>다음</SubmitButton>
-      </ButtonContainer>
-    </FormContainer>
+      </ButtonWrapper>
+    </FormWrapper>
   );
 }
 

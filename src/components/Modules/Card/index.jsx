@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import useCard from '../../../hooks/Card/useCard';
 
 const CardContainer = styled.div`
   display: flex;
@@ -57,15 +56,14 @@ const CardOwnerName = styled.span`
   word-break: break-all;
 `;
 
-function Card({ cardNumber, expiredDate, ownerName, disable }) {
-  const {
-    companyNameString,
-    cardNumberString,
-    expiredDateString,
-    ownerNameString,
-    onCardClick,
-  } = useCard({ cardNumber, expiredDate, ownerName });
-
+function Card({
+  companyNameString,
+  cardNumberString,
+  expiredDateString,
+  ownerNameString,
+  onCardClick,
+  disable,
+}) {
   return (
     <CardContainer onClick={disable ? () => {} : onCardClick} disable={disable}>
       <CardCompanyName>{companyNameString}</CardCompanyName>

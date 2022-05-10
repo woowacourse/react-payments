@@ -1,19 +1,19 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router';
+import Card from 'components/Modules/Card';
+import { CardContext } from 'context/CardContext';
 import { COUNT, PLACEHOLDER } from 'constant';
 import { CARD_NUMBER_MARK } from 'constant/mark';
-import { CardContext } from 'context/CardContext';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
-import { useNavigate } from 'react-router-dom';
-import { LINK } from '../../constant/Link';
+import { LINK } from 'constant/Link';
 
-function useCard({ cardNumber, expiredDate, ownerName }) {
+function CardContainer({ cardNumber, expiredDate, ownerName, disable }) {
   const navigator = useNavigate();
   const { inputtedInfoDispatch, cardData } = useContext(CardContext);
 
   const companyNameString = '신한 카드';
 
-  const isValidCardNumber =
-    cardNumber && Object.values(cardNumber.value).some(number => number);
+  const isValidCardNumber = cardNumber && Object.values(cardNumber.value).some(number => number);
 
   const cardNumberString = () => {
     if (!isValidCardNumber) {
@@ -29,8 +29,7 @@ function useCard({ cardNumber, expiredDate, ownerName }) {
       .join(' ');
   };
 
-  const isValidExpiredDate =
-    expiredDate && Object.values(expiredDate.value).some(date => date);
+  const isValidExpiredDate = expiredDate && Object.values(expiredDate.value).some(date => date);
 
   const expiredDateString = () => {
     if (!isValidExpiredDate) {
@@ -63,13 +62,16 @@ function useCard({ cardNumber, expiredDate, ownerName }) {
     navigator(LINK.CARD_COMPLETE_PAGE);
   };
 
-  return {
-    companyNameString,
-    cardNumberString: cardNumberString(),
-    expiredDateString: expiredDateString(),
-    ownerNameString: ownerNameString(),
-    onCardClick,
-  };
+  return (
+    <Card
+      companyNameString={companyNameString}
+      cardNumberString={cardNumberString()}
+      expiredDateString={expiredDateString()}
+      ownerNameString={ownerNameString()}
+      onCardClick={onCardClick}
+      disable={disable}
+    />
+  );
 }
 
-export default useCard;
+export default CardContainer;

@@ -1,13 +1,14 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router';
+import CardNameForm from 'components/Templates/CardNameForm';
 import { CardContext } from 'context/CardContext';
 import { CARD_ACTION } from 'Reducer/CardReducer';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
-import { useNavigate } from 'react-router-dom';
+import CardNumberInputContainer from 'containers/Input/CardNumberInputContainer';
 
-function useCardNameForm(link) {
+function CardNameFormContainer({ link }) {
   const navigator = useNavigate();
-  const { inputtedInfo, cardDispatch, inputtedInfoDispatch } =
-    useContext(CardContext);
+  const { inputtedInfo, cardDispatch, inputtedInfoDispatch } = useContext(CardContext);
 
   const { cardNumber, cardName } = inputtedInfo;
 
@@ -27,7 +28,11 @@ function useCardNameForm(link) {
     navigator(link);
   };
 
-  return { onCardNameSubmit };
+  return (
+    <CardNameForm onCardNameSubmit={onCardNameSubmit}>
+      <CardNumberInputContainer />
+    </CardNameForm>
+  );
 }
 
-export default useCardNameForm;
+export default CardNameFormContainer;

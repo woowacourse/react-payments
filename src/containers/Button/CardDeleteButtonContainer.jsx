@@ -1,16 +1,15 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import CardDeleteButton from 'components/Atoms/CardDeleteButton';
 import { CardContext } from 'context/CardContext';
-import { CARD_ACTION } from 'Reducer/CardReducer';
+import { MESSAGE } from 'constant/message';
 import { INPUT_ACTION } from 'Reducer/InputtedInfoReducer';
-import { MESSAGE } from '../../constant/message';
-import { LINK } from '../../constant/Link';
+import { CARD_ACTION } from 'Reducer/CardReducer';
+import { LINK } from 'constant/Link';
 
-function useCardDeleteButton() {
+function CardDeleteButtonContainer() {
   const navigator = useNavigate();
-
-  const { inputtedInfo, inputtedInfoDispatch, cardDispatch } =
-    useContext(CardContext);
+  const { inputtedInfo, inputtedInfoDispatch, cardDispatch } = useContext(CardContext);
 
   const onDeleteClick = () => {
     if (confirm(MESSAGE.CARD_DELETE)) {
@@ -27,7 +26,7 @@ function useCardDeleteButton() {
     }
   };
 
-  return { onDeleteClick };
+  return <CardDeleteButton onDeleteClick={onDeleteClick}>카드삭제</CardDeleteButton>;
 }
 
-export default useCardDeleteButton;
+export default CardDeleteButtonContainer;

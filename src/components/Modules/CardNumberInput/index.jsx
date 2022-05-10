@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
-import useCardNumberInput from '../../../hooks/Input/useCardNumberInput';
-import { CARD_NUMBER_INPUT_NAMES } from '../../../constant/inputNames';
 import { COUNT, INPUT_TITLE } from '../../../constant';
 import { CARD_NUMBER_SEPARATOR } from '../../../constant/mark';
 
@@ -15,10 +13,7 @@ const InputContainer = styled.div`
   gap: 5px;
 `;
 
-function CardNumberInput() {
-  const { numbers, validations, inputRefs, handleNumberChange } =
-    useCardNumberInput(CARD_NUMBER_INPUT_NAMES);
-
+function CardNumberInput({ numbers, validations, inputRefs, handleNumberChange }) {
   return (
     <LabeledInput text={INPUT_TITLE.CARD_NUMBER}>
       <InputWrapper>
@@ -30,9 +25,7 @@ function CardNumberInput() {
                 name={order}
                 ref={inputRefs[order]}
                 value={numbers[order]}
-                type={
-                  index < COUNT.CARD_NUMBER_HIDE_COUNT ? 'number' : 'password'
-                }
+                type={index < COUNT.CARD_NUMBER_HIDE_COUNT ? 'number' : 'password'}
                 width="50px"
                 maxLength={COUNT.CARD_NUMBER_MAX_COUNT}
                 onChange={handleNumberChange}

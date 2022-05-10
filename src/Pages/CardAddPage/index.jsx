@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { CardContext } from 'context/CardContext';
 import styled from 'styled-components';
 import Head from 'components/Modules/Head';
-import Card from 'components/Modules/Card';
-import CardAddForm from 'components/Templates/CardAddForm';
 import { LINK } from '../../constant/Link';
+import CardContainer from 'containers/Card/CardContainer';
+import CardAddFormContainer from 'containers/Form/CardAddFormContainer';
 
 const Page = styled.div`
   width: 100%;
@@ -19,7 +19,7 @@ const CardSection = styled.div`
   margin-top: 25px;
 `;
 
-const CardAddFormContainer = styled.div`
+const CardAddFormSection = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 19px;
@@ -32,11 +32,11 @@ function CardAddPage() {
     <Page>
       <Head link={LINK.CARD_LIST_PAGE}>카드 추가</Head>
       <CardSection>
-        <Card {...inputtedInfo} disable={true} />
+        <CardContainer {...inputtedInfo} disable={true} />
       </CardSection>
-      <CardAddFormContainer>
-        <CardAddForm link={LINK.CARD_COMPLETE_PAGE} />
-      </CardAddFormContainer>
+      <CardAddFormSection>
+        <CardAddFormContainer link={LINK.CARD_COMPLETE_PAGE} />
+      </CardAddFormSection>
     </Page>
   );
 }

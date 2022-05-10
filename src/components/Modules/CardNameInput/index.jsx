@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { COUNT, INPUT_PLACEHOLDER } from '../../../constant';
-import useCardNameInput from '../../../hooks/Input/useCardNameInput';
 import Input from '../../Atoms/Input';
 
 const InputWrapper = styled.div`
@@ -10,9 +9,7 @@ const InputWrapper = styled.div`
   line-height: 21px;
 `;
 
-function CardNameInput() {
-  const { cardName, validation, onCardNameChange } = useCardNameInput();
-
+function CardNameInput({ cardName, validation, onCardNameChange }) {
   return (
     <InputWrapper>
       <Input
