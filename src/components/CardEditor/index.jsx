@@ -41,11 +41,11 @@ function CardEditor({ isEdit }) {
   const { dueDate, handleChangeDueDate, yearInputRef, error } = useCardDueDate(
     data?.dueDate ?? { month: "", year: "" }
   );
-  const [owner, , handleChangeOwner] = useInput({
+  const [owner, handleChangeOwner] = useInput({
     initialValue: data?.owner ?? "",
     validator: isValidOwnerLength,
   });
-  const [cvc, , handleChangeCvc] = useInput({
+  const [cvc, handleChangeCvc] = useInput({
     initialValue: data?.cvc ?? "",
     validator: isValidCvc,
   });

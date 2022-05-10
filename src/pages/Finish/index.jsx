@@ -20,7 +20,7 @@ function Finish() {
   const location = useLocation();
   const { id } = useParams();
 
-  const [nickname, , handleChangeNickname] = useInput({
+  const [nickname, handleChangeNickname] = useInput({
     initialValue: location?.state?.nickname || "",
     validator: isValidNickname,
   });
