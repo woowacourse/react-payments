@@ -32,9 +32,9 @@ const getCardSize = size => {
     case 'large':
       return {
         card: {
-          height: '163px',
+          height: '150px',
           padding: '26px',
-          width: '273px',
+          width: '260px',
         },
         title: {
           marginBottom: '35px',
@@ -46,10 +46,10 @@ const getCardSize = size => {
           width: '55px',
         },
         numberSet: {
-          marginBottom: '12px',
+          marginBottom: '10px',
         },
         detail: {
-          size: '21px',
+          size: '19px',
           height: '26px',
         },
       };
