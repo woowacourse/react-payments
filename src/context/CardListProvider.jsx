@@ -2,35 +2,29 @@ import React, { useReducer } from "react";
 import { ACTION } from "constant";
 
 const cardListReducer = (state, action) => {
-  let newState = [];
   switch (action.type) {
     case ACTION.CREATE: {
-      newState = [...state, action.data];
-      break;
+      return [...state, action.data];
     }
     case ACTION.EDIT_NICKNAME: {
-      newState = state.map((data) =>
+      return state.map((data) =>
         data.id === action.targetId
           ? { ...data, nickname: action.newNickname }
           : data
       );
-      break;
     }
     case ACTION.EDIT_CARD: {
-      newState = state.map((data) =>
+      return state.map((data) =>
         data.id === action.data.id ? { ...action.data } : data
       );
-      break;
     }
     case ACTION.REMOVE: {
-      newState = state.filter((data) => data.id !== action.targetId);
-      break;
+      return state.filter((data) => data.id !== action.targetId);
     }
     default: {
-      return newState;
+      return state;
     }
   }
-  return newState;
 };
 
 export const CardListContext = React.createContext();
