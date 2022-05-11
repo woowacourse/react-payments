@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { CardContext } from "../../../context/CardProvider";
 import { limitExceptUpperCase, limitInputLength } from "../../../util/input";
 import { Input } from "../../common/Input";
 import InputContainer from "../../common/InputContainer";
@@ -6,9 +8,13 @@ import "./index.scss";
 
 const INPUT_LENGTH = 30;
 
-const OwnerNameInput = ({ ownerNameValue, onChangeOwner }) => {
+const OwnerNameInput = () => {
+  const {
+    cardInfo: { ownerName },
+    updateCard,
+  } = useContext(CardContext);
   const updateCardOwner = (target) => {
-    onChangeOwner({
+    updateCard({
       type: "ownerName",
       payload: {
         value: limitInputLength(
@@ -23,17 +29,17 @@ const OwnerNameInput = ({ ownerNameValue, onChangeOwner }) => {
     <div className="ownername__input__container">
       <div className="label__container">
         <InputLabel>카드 소유자 이름(선택)</InputLabel>
-        <InputLabel>{`${ownerNameValue.length}/30`}</InputLabel>
-        <></>
+        <InputLabel>{`${ownerName.length}/30`}</InputLabel>
       </div>
       <InputContainer>
         <Input
           type="text"
-          value={ownerNameValue}
+          value={ownerName}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요.(영어 대문자만 입력가능합니다.)"
           onChange={({ target }) => {
             updateCardOwner(target);
           }}
+          testId={"owner-name"}
         />
       </InputContainer>
     </div>

@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { CardContext } from "../../../context/CardProvider";
 import useControllInput from "../../../hooks/useControllInput";
 import { blockCharacter, limitInputLength } from "../../../util/input";
 import { Input } from "../../common/Input";
@@ -9,13 +11,18 @@ const INPUT_LENGTH = 1;
 const NUM_OF_INPUT = 2;
 const BACKSPACE_KEY_CODE = 8;
 
-const CardPasswordInput = ({ passwordValue, onChangePassword }) => {
+const CardPasswordInput = () => {
   const { itemRef, controllInput, autoFocusBackward } = useControllInput({
     maxLength: INPUT_LENGTH,
   });
 
+  const {
+    cardInfo: { password },
+    updateCard,
+  } = useContext(CardContext);
+
   const updateCardPassword = (target, idx) => {
-    onChangePassword({
+    updateCard({
       type: "password",
       payload: {
         value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),
@@ -23,6 +30,12 @@ const CardPasswordInput = ({ passwordValue, onChangePassword }) => {
       },
     });
     controllInput(target);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {
+      autoFocusBackward(e.target);
+    }
   };
 
   return (
@@ -33,31 +46,25 @@ const CardPasswordInput = ({ passwordValue, onChangePassword }) => {
           <div className="password__input" key={idx}>
             <InputContainer>
               <Input
-                type="text"
+                type="password"
                 ref={(el) => {
                   itemRef.current[idx] = el;
                 }}
-                value={passwordValue[idx]}
+                value={password[idx]}
                 onChange={({ target }) => {
                   updateCardPassword(target, idx);
                 }}
-                onKeyDown={(e) => {
-                  if (
-                    e.keyCode === BACKSPACE_KEY_CODE &&
-                    e.target.value === ""
-                  ) {
-                    autoFocusBackward(e.target);
-                  }
-                }}
+                onKeyDown={handleKeyDown}
+                testId={`password${idx}`}
               />
             </InputContainer>
           </div>
         ))}
         <div className="password__input">
-          <div className="dot"></div>
+          <div className="dot" />
         </div>
         <div className="password__input">
-          <div className="dot"></div>
+          <div className="dot" />
         </div>
       </div>
     </div>

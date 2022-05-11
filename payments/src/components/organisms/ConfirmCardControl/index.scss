@@ -1,0 +1,41 @@
+.confirm-card-control {
+  background-color: rgb(241, 241, 241);
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  animation: risingUp 0.2s linear;
+
+  @keyframes risingUp {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .button-container {
+    width: 100%;
+    &:first-child {
+      border-bottom: 1px solid black;
+    }
+    text-align: center;
+  }
+
+  button {
+    width: 100%;
+    background-color: inherit;
+    cursor: pointer;
+    border: none;
+    font-size: 2rem;
+    padding: 0.5em;
+    font-weight: 500;
+  }
+
+  .confirim-card-control-remove--btn {
+    color: red;
+  }
+}

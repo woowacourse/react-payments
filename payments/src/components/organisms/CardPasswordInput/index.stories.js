@@ -7,10 +7,10 @@ export default {
 };
 
 export const CardPassword = () => {
-  const { cardInfo, dispatch } = useCard();
+  const { cardInfo, updateCard } = useCard();
   const { password } = cardInfo;
 
   return (
-    <CardPasswordInput passwordValue={password} onChangePassword={dispatch} />
+    <CardPasswordInput passwordValue={password} onChangePassword={updateCard} />
   );
 };

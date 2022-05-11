@@ -3,20 +3,26 @@ import InputContainer from "../../common/InputContainer";
 import { Input } from "../../common/Input";
 import "./index.scss";
 import InputLabel from "../../common/label";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { blockCharacter, limitInputLength } from "../../../util/input";
+import { CardContext } from "../../../context/CardProvider";
 
 const INPUT_LENGTH = 2;
 const NUM_OF_INPUT = 2;
 const BACKSPACE_KEY_CODE = 8;
 
-const ExpiredDateInput = ({ expiredDateValue, onChangeExpiredDate }) => {
+const ExpiredDateInput = () => {
+  const {
+    cardInfo: { expiredDate },
+    updateCard,
+  } = useContext(CardContext);
+
   const { itemRef, controllInput, autoFocusBackward } = useControllInput({
     maxLength: INPUT_LENGTH,
   });
 
   const updateExpiredDate = (target, idx) => {
-    onChangeExpiredDate({
+    updateCard({
       type: "expiredDate",
       payload: {
         value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),
@@ -24,6 +30,12 @@ const ExpiredDateInput = ({ expiredDateValue, onChangeExpiredDate }) => {
       },
     });
     controllInput(target);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {
+      autoFocusBackward(e.target);
+    }
   };
 
   return (
@@ -35,18 +47,15 @@ const ExpiredDateInput = ({ expiredDateValue, onChangeExpiredDate }) => {
             <Input
               placeholder={idx === 0 ? "MM" : "YY"}
               type="text"
-              value={expiredDateValue[idx]}
+              value={expiredDate[idx]}
               ref={(el) => {
                 itemRef.current[idx] = el;
               }}
               onChange={({ target }) => {
                 updateExpiredDate(target, idx);
               }}
-              onKeyDown={(e) => {
-                if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {
-                  autoFocusBackward(e.target);
-                }
-              }}
+              onKeyDown={handleKeyDown}
+              testId={`expired-date${idx}`}
             />
             {idx === 0 ? "/" : ""}
           </Fragment>

@@ -1,45 +1,18 @@
 import { useReducer } from "react";
+import validateArray from "../util/validate";
 
-const validateCardNum = ({ cardNumber }) => {
-  if (cardNumber.join("").length !== 16) {
-    throw new Error("카드 번호를 16자리 모두 입력해주세요");
-  }
-};
-const validateExpireDate = ({ expiredDate }) => {
-  if (expiredDate[0] > 12) {
-    throw new Error("월은 12월까지입니다.");
-  }
-  if (expiredDate.join("").length !== 4) {
-    throw new Error("만료일을 정확히 입력해 주세요");
-  }
+const initState = {
+  cardNumber: ["", "", "", ""],
+  expiredDate: ["", ""],
+  ownerName: "",
+  secureCode: "",
+  password: ["", ""],
+  cardName: "",
+  color: "#d2d2d2",
+  nickname: "",
 };
 
-const validateSecureCode = ({ secureCode }) => {
-  if (secureCode.length < 3) {
-    throw new Error("카드 뒷면의 보안코드 3자리를 입력해주세요");
-  }
-};
-const validatePassword = ({ password }) => {
-  if (password.join("").length !== 2) {
-    throw new Error("비밀번호 앞 두자리를 입력해 주세요");
-  }
-};
-
-const validateCardName = ({ cardName }) => {
-  if (cardName === "") {
-    throw new Error("카드 종류를 선택해주세요");
-  }
-};
-
-const validateArray = [
-  validateCardName,
-  validateCardNum,
-  validateExpireDate,
-  validateSecureCode,
-  validatePassword,
-];
-
-const updateCard = (state, action) => {
+const updateFunction = (state, action) => {
   switch (action.type) {
     case "cardNumber":
       return {
@@ -84,23 +57,20 @@ const updateCard = (state, action) => {
         color: action.payload.color,
         cardName: action.payload.cardName,
       };
+    case "nickname":
+      return {
+        ...state,
+        nickname: action.payload.value,
+      };
+    case "initialize":
+      return initState;
     default:
       return state;
   }
 };
 
 const useCard = () => {
-  const initState = {
-    cardNumber: ["", "", "", ""],
-    expiredDate: ["", ""],
-    ownerName: "",
-    secureCode: "",
-    password: ["", ""],
-    cardName: "",
-    color: "#d2d2d2",
-  };
-
-  const [cardInfo, dispatch] = useReducer(updateCard, initState);
+  const [cardInfo, updateCard] = useReducer(updateFunction, initState);
 
   const validateCardInfo = () => {
     validateArray.forEach((validateFunc) => {
@@ -108,7 +78,7 @@ const useCard = () => {
     });
   };
 
-  return { cardInfo, dispatch, validateCardInfo };
+  return { cardInfo, updateCard, validateCardInfo };
 };
 
 export default useCard;

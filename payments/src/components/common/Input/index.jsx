@@ -11,5 +11,6 @@ export const Input = forwardRef((props, ref) => (
     placeholder={props.placeholder}
     onKeyDown={props.onKeyDown}
     className="input__contents"
+    data-testid={props.testId}
   />
 ));

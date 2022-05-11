@@ -9,7 +9,7 @@ export default {
 // /{ visible, setVisible, updateForm }
 export const ColorPickModal = () => {
   const [visible, setVisible] = useState(true);
-  const { dispatch } = useCard();
+  const { updateCard } = useCard();
 
   return (
     <CardColorPicker
@@ -17,7 +17,7 @@ export const ColorPickModal = () => {
       closeModal={() => {
         setVisible(false);
       }}
-      onChangeCardName={dispatch}
+      onChangeCardName={updateCard}
     />
   );
 };

@@ -52,9 +52,6 @@
     }
   }
   animation: risingUp 0.2s linear;
-
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
   @keyframes risingUp {
     0% {
       transform: translateY(100%);
@@ -63,4 +60,7 @@
       transform: translateY(0);
     }
   }
+
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }

@@ -1,9 +1,5 @@
 .card-add {
-  height: 94vh;
-  display: inline-block;
-  max-width: 500px;
-  max-height: 600px;
-  padding: 2rem;
+  height: 100%;
   header {
     display: flex;
     gap: 10px;
@@ -43,5 +39,14 @@
     color: red;
     position: absolute;
     top: 20px;
+  }
+  .card-add__container-card {
+    width: 230px;
+    height: 200px;
+    margin-bottom: 20px;
+    .card__container {
+      width: 230px;
+      height: 150px;
+    }
   }
 }

@@ -1,0 +1,61 @@
+.home--container {
+  width: 500px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: default;
+
+  header {
+    position: absolute;
+    top: 0;
+    left: 1em;
+    p {
+      font-family: "Roboto";
+      font-size: 2rem;
+    }
+  }
+
+  .home--container-card {
+    width: 220px;
+    height: 150px;
+    transition: 1s;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  .home-container-card-add-btn {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border: none;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+    box-sizing: content-box;
+    &:hover {
+      color: aquamarine;
+      border: 1px solid aquamarine;
+    }
+  }
+
+  .labeled {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+  }
+  .card-add-btn--container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  a {
+    width: 220px;
+    height: 150px;
+  }
+}
