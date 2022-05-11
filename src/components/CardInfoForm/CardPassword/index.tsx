@@ -1,35 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import useInputValidation from "../../../hooks/useInputValidation";
 import { Password } from "../../../types";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
-import { checkCardPassword } from "../../../validations/cardInfoForm";
+import { Context } from "../../../contexts/CardContext";
 
 interface CardPasswordProps {
-  password: Password;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  validateFormValidation: any;
+  validateFormValidation: (key: string, isValid: boolean) => void;
 }
 
-export default function CardPassword({
-  password,
-  onChange,
-  validateFormValidation,
-}: CardPasswordProps) {
+const checkCardPassword = (cardPassWord: Password) => {
+  if (!cardPassWord.every(password => password.length === 1)) {
+    throw new Error("비밀번호를 입력해주세요.");
+  }
+};
+
+export default function CardPassword({ validateFormValidation }: CardPasswordProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
+  const [cardInfo, dispatch] = useContext(Context);
+  const { password } = cardInfo;
 
   const handleChangeCardPassword = e => {
     const { value } = e.target;
     const { index } = e.target.dataset;
-    const targetCardPassword = password;
+    const targetCardPassword: Password = [...password];
 
     targetCardPassword[index] = value;
 
     validateInput(targetCardPassword, checkCardPassword);
     validateFormValidation("password", isValidInput(targetCardPassword, checkCardPassword));
 
-    onChange(e);
+    dispatch({ type: "UPDATE_PASSWORD", payload: { password: value, index } });
   };
 
   return (
@@ -43,7 +45,7 @@ export default function CardPassword({
         name="password"
         data-index={0}
         classes="password-input"
-        pattern="^[0-9]{0,1}$"
+        pattern="^[0-9]$"
       />
       <Input
         type="password"
@@ -54,7 +56,7 @@ export default function CardPassword({
         name="password"
         data-index={1}
         classes="password-input"
-        pattern="^[0-9]{0,1}$"
+        pattern="^[0-9]$"
       />
       <input
         className="input-basic rest-password-box w-15 password-input"

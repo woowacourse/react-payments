@@ -1,35 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import useInputValidation from "../../../hooks/useInputValidation";
 import { CardNumbers } from "../../../types";
 import Input from "../../../common/Input";
 import InputContainer from "../../../common/InputContainer";
-import { checkCardNumbers } from "../../../validations/cardInfoForm";
+import { Context } from "../../../contexts/CardContext";
 
 interface CardNumberProps {
-  cardNumbers: CardNumbers;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  validateFormValidation: any;
+  validateFormValidation: (key: string, isValid: boolean) => void;
 }
 
-export default function CardNumber({
-  cardNumbers,
-  onChange,
-  validateFormValidation,
-}: CardNumberProps) {
+const checkCardNumbers = (cardNumbers: CardNumbers) => {
+  if (!cardNumbers.every(cardNumber => cardNumber.length === 4)) {
+    throw new Error("카드 번호를 입력해주세요.");
+  }
+};
+
+export default function CardNumber({ validateFormValidation }: CardNumberProps) {
   const { inputValidation, validateInput, isValidInput } = useInputValidation(false);
+  const [cardInfo, dispatch] = useContext(Context);
+  const { cardNumbers } = cardInfo;
 
   const handleChangeCardNumbers = e => {
     const { value } = e.target;
     const { index } = e.target.dataset;
-    const targetCardNumbers = cardNumbers;
+    const targetCardNumbers: CardNumbers = [...cardNumbers];
 
     targetCardNumbers[index] = value;
 
     validateInput(targetCardNumbers, checkCardNumbers);
     validateFormValidation("cardNumbers", isValidInput(targetCardNumbers, checkCardNumbers));
 
-    onChange(e);
+    dispatch({ type: "UPDATE_CARD_NUMBER", payload: { cardNumbers: value, index } });
   };
 
   return (
@@ -44,7 +46,7 @@ export default function CardNumber({
               maxLength={4}
               name="cardNumbers"
               data-index={index}
-              pattern="^[•0-9]{0,4}$"
+              pattern="^[•0-9]{1,4}$"
             />
             <span className="card-number-delimiter" />
           </React.Fragment>

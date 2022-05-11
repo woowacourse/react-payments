@@ -1,36 +1,24 @@
 import React from "react";
 
-import Card from "./components/Card";
-import CardInfoForm from "./components/CardInfoForm";
-import Header from "./components/Header";
-import { useCardInfo } from "./hooks/useCardInfo";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AddCard from "./pages/AddCard";
+import CardList from "./pages/CardList";
+import ConfirmAddCard from "./pages/ConfirmAddCard";
+import ConfirmEditCard from "./pages/ConfirmEditCard";
+import EditCard from "./pages/EditCard";
 
 function App() {
-  const {
-    cardInfo,
-    resetCardInfo,
-    onChangeCardNumber,
-    onChangeExpiredDate,
-    onChangeUserName,
-    onBlurUserName,
-    onChangeSecurityCode,
-    onChangePassword,
-  } = useCardInfo();
-
   return (
     <div className="App">
-      <Header />
-      <Card cardInfo={cardInfo} />
-      <CardInfoForm
-        cardInfo={cardInfo}
-        onChangeCardNumber={onChangeCardNumber}
-        onChangeExpiredDate={onChangeExpiredDate}
-        onChangeUserName={onChangeUserName}
-        onBlurUserName={onBlurUserName}
-        onChangeSecurityCode={onChangeSecurityCode}
-        onChangePassword={onChangePassword}
-        resetCardInfo={resetCardInfo}
-      />
+      <Router basename={process.env.PUBLIC_URL}>
+        <Routes>
+          <Route path="/" element={<CardList />} />
+          <Route path="/addCard" element={<AddCard />} />
+          <Route path="/editCard/:id" element={<EditCard />} />
+          <Route path="/confirmAddCard" element={<ConfirmAddCard />} />
+          <Route path="/confirmEditCard/:id" element={<ConfirmEditCard />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

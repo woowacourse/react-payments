@@ -2,11 +2,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  margin: 10px 0 25px;
+  flex-direction: column;
+  margin: 10px 0 24px;
 }
 
-.empty-card {
+.card-shape {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,13 +16,62 @@
   height: 130px;
 
   font-size: 30px;
-  color: #575757;
-
-  background: #e5e5e5;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.35);
   border-radius: 5px;
 
   user-select: none;
+}
+
+.add-card-shape {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 208px;
+  height: 130px;
+
+  border-radius: 5px;
+
+  background-color: #e5e5e5;
+  cursor: pointer;
+  user-select: none;
+}
+
+.empty-card {
+  color: #575757;
+  background: #e5e5e5;
+}
+.poco-card {
+  color: #e5e5e5;
+  background: #e24141;
+}
+.jun-card {
+  color: #e5e5e5;
+  background: #547ce4;
+}
+.park-card {
+  color: white;
+  background: #73bc6d;
+}
+.bran-card {
+  color: white;
+  background: #de59b9;
+}
+.loyd-card {
+  color: white;
+  background: #04c09e;
+}
+.dobi-card {
+  color: white;
+  background: #e76e9a;
+}
+.colin-card {
+  color: white;
+  background: #f37d3b;
+}
+.sun-card {
+  color: #575757;
+  background: #fbcd58;
 }
 
 .small-card {
@@ -35,7 +84,7 @@
   height: 130px;
 
   background: #94dacd;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.35);
   border-radius: 5px;
 }
 
@@ -58,14 +107,13 @@
   width: 290px;
   height: 180px;
 
-  background: #94dacd;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.35);
   border-radius: 5px;
 }
 
 .big-card__chip {
-  width: 55.04px;
-  height: 35.77px;
+  width: 55px;
+  height: 35px;
 
   background: #cbba64;
   border-radius: 4px;
@@ -121,10 +169,10 @@
 .card-text {
   margin: 0 16px;
 
-  font-size: 10px;
+  font-size: 11px;
   line-height: 16px;
   vertical-align: middle;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .card-numbers-text {
@@ -140,7 +188,7 @@
 .card-text__big {
   margin: 0 16px;
 
-  font-size: 18px;
+  font-size: 14px;
   line-height: 20px;
   vertical-align: middle;
   font-weight: 400;
@@ -175,6 +223,13 @@
   text-align: center;
 }
 
+.card-expired-date-delimiter {
+  display: inline-block;
+  width: 10px;
+  text-align: center;
+  padding-left: 2px;
+}
+
 .card-user-name {
   display: inline-block;
   width: 100%;
@@ -182,4 +237,27 @@
   padding-left: 16px;
   margin-top: 5px;
   overflow-wrap: break-word;
+}
+
+.card-name {
+  margin-top: 10px;
+  color: #575757;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#cross {
+  background: #575757;
+  height: 20px;
+  position: relative;
+  width: 4px;
+}
+#cross:after {
+  background: #575757;
+  content: "";
+  height: 4px;
+  left: -8px;
+  position: absolute;
+  top: 8px;
+  width: 20px;
 }

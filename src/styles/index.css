@@ -1,9 +1,11 @@
-@import "./card.css";
-@import "./input.css";
-@import "./button.css";
-@import "./modal.css";
-@import "./utils.css";
-@import "./header.css";
+@import "./card";
+@import "./input";
+@import "./button";
+@import "./modal";
+@import "./utils";
+@import "./header";
+@import "./confirm";
+@import "./cardList";
 
 * {
   box-sizing: border-box;
@@ -12,6 +14,7 @@
 body {
   display: flex;
   flex-direction: column;
+  height: 100vh;
   gap: 0.5rem;
   align-items: center;
   justify-content: center;
@@ -39,7 +42,7 @@ input[type="number"]::-webkit-inner-spin-button {
   width: 375px;
   min-width: 375px;
   height: 700px;
-  position: relative;
+  position: absolute;
   border-radius: 15px;
 }
 
