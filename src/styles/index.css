@@ -4,6 +4,12 @@
 @import './modal.css';
 @import './utils.css';
 @import './animaition.css';
+@import './virtualKeyboard.css';
+a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.7);
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -39,4 +45,5 @@ input {
   align-items: center;
 
   color: #383838;
+  cursor: pointer;
 }

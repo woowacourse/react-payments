@@ -1,4 +1,5 @@
-import { useReducer } from 'react';
+import { useCallback, useReducer } from 'react';
+import { INPUT_ELEMENT_KEY_SEPARATOR } from '../utils/constants';
 
 const cardInputReducer = (state, action) => {
   const { type, payload } = action;
@@ -11,6 +12,7 @@ const cardInputReducer = (state, action) => {
         cardNumber: { ...state.cardNumber, [`${key}`]: cardNumber },
       };
     }
+
     case 'CHANGE_EXPIRATION_DATE': {
       const { key, date } = payload;
       return {
@@ -26,20 +28,23 @@ const cardInputReducer = (state, action) => {
         ownerName,
       };
     }
-    case 'CHANGE_SECURITY_CODE': {
-      const { securityCode } = payload;
-      return {
-        ...state,
-        securityCode: securityCode,
-      };
+
+    case 'CHANGE_PASSWORD_INPUT': {
+      const { elementKey, value } = payload;
+      const [stateName, stateKey] = elementKey.split(INPUT_ELEMENT_KEY_SEPARATOR);
+
+      if (stateKey) {
+        return { ...state, [`${stateName}`]: { ...state[stateName], [`${stateKey}`]: value } };
+      }
+
+      return { ...state, [`${stateName}`]: value };
     }
-    case 'CHANGE_PASSWORD': {
-      const { key, password } = payload;
-      return {
-        ...state,
-        password: { ...state.password, [`${key}`]: password },
-      };
+
+    case 'CHANGE_CARD_COMPANY': {
+      const { cardType } = payload;
+      return { ...state, cardType };
     }
+
     default:
       throw new Error();
   }
@@ -62,8 +67,27 @@ const defaultCardInputState = {
     first: '',
     second: '',
   },
+  cardType: null,
 };
 
-export const useCardInput = () => {
-  return useReducer(cardInputReducer, defaultCardInputState);
+export const useCardInput = card => {
+  const [cardInput, cardInputDispatch] = useReducer(
+    cardInputReducer,
+    card ? { ...card } : defaultCardInputState,
+  );
+
+  const getInputState = useCallback(
+    key => {
+      const [stateName, stateKey] = key.split(INPUT_ELEMENT_KEY_SEPARATOR);
+
+      if (!stateKey) {
+        return cardInput[stateName];
+      }
+
+      return cardInput[stateName][stateKey];
+    },
+    [cardInput],
+  );
+
+  return [cardInput, cardInputDispatch, getInputState];
 };
