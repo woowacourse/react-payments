@@ -1,12 +1,10 @@
-import { useCallback } from 'react';
-import useInputAutoFocus from 'hooks/useInputAutoFocus';
 import PropTypes from 'prop-types';
-
+import useInputAutoFocus from 'hooks/useInputAutoFocus';
 import { isObject } from 'utils';
 
 const FormInput = ({
   className,
-  item,
+  type,
   inputTitle,
   inputInfoList,
   inputValue,
@@ -19,13 +17,10 @@ const FormInput = ({
     maxLength,
   });
 
-  const handleInputChange = useCallback(
-    (e) => {
-      handleChange(e, item);
-      autoFocusForward(e);
-    },
-    [item, handleChange, autoFocusForward],
-  );
+  const handleInputChange = (e) => {
+    handleChange(e, type);
+    autoFocusForward(e);
+  };
 
   return (
     <div className="input-container">
@@ -63,7 +58,7 @@ FormInput.propTypes = {
   /**
    * category of FormInput
    */
-  item: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   /**
    * name of FormInput
    */

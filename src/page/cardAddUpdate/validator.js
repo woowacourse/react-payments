@@ -37,6 +37,10 @@ export const validator = {
     return name === 'year' ? validateYear(value) : validateMonth(value);
   },
   ownerName(value) {
+    if (value.length > 20) {
+      alert('😈이름이 너무 길어요! 개명을 추천드려요.😈');
+    }
+
     return isEnglish(value);
   },
   privacyCode(value) {
@@ -44,6 +48,9 @@ export const validator = {
   },
   password(value) {
     return isNumber(Number(value));
+  },
+  alias() {
+    return true;
   },
 };
 
@@ -61,6 +68,8 @@ export const isFullPrivacyCode = (privacyCode) =>
 
 export const isFullPassword = (password) =>
   Object.values(password).every((value) => value.length === INPUT_MAX_LENGTH.PASSWORD);
+
+export const isFullCardAlias = (cardAlias) => cardAlias !== '';
 
 export const checkFullFilled = (cardInfo) => {
   const { cardNumber, company, expiryDate, privacyCode, password } = cardInfo;

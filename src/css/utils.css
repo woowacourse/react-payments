@@ -4,6 +4,12 @@
   align-items: center;
 }
 
+.flex-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .flex-column-center {
   display: flex;
   flex-direction: column;
@@ -26,8 +32,18 @@
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .tracking-wide {
   letter-spacing: 2px;
+}
+
+.right-bottom-edge {
+  position: absolute;
+  right: 24px;
+  bottom: 16px;
 }
 
 .mt-10 {

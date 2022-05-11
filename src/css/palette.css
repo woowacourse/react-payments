@@ -30,6 +30,14 @@
   color: #fbcd58;
 }
 
+.font-black {
+  color: black;
+}
+
+.font-default {
+  color: white;
+}
+
 .bg-red {
   background-color: #e24141;
 }

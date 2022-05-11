@@ -1,10 +1,10 @@
+@import 'css/button.css';
 @import 'css/card.css';
 @import 'css/input.css';
-@import 'css/button.css';
 @import 'css/modal.css';
-@import 'css/utils.css';
-@import 'css/tooltip.css';
 @import 'css/palette.css';
+@import 'css/tooltip.css';
+@import 'css/utils.css';
 
 body {
   display: flex;
@@ -14,10 +14,6 @@ body {
   margin: 30px 0;
 
   font-family: 'Roboto', sans-serif;
-}
-
-input {
-  font-size: 16px;
 }
 
 .root {
@@ -31,7 +27,6 @@ input {
 }
 
 .app {
-  height: 100%;
   padding: 16px 24px;
 }
 
@@ -52,6 +47,10 @@ input {
   color: #383838;
 }
 
+.content-title {
+  font-weight: 400;
+}
+
 .owner-name-length {
   position: absolute;
   top: -20px;
@@ -61,14 +60,40 @@ input {
   color: #525252;
 }
 
+.notFound-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.notFound-title {
+  width: 100%;
+  line-height: 1.4;
+  font-size: 16px;
+}
+
+.notFound-image {
+  width: 330px;
+}
+
+input {
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
 .fullFilled {
-  color: green;
   font-size: 12px;
   font-weight: 600;
+  color: green;
 }
 
 .unFullFilled {
-  color: red;
   font-size: 12px;
   font-weight: 600;
+  color: red;
 }
