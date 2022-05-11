@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import CardPreview from 'components/CardPreview';
 import Button from 'components/common/Button';
 import Header from 'components/common/Header';
-import { ReactComponent as DeleteIcon } from 'assets/delete_icon.svg';
+import DeleteIcon from 'assets/delete_icon.png';
 
 import CARD_API from 'api';
 import { CONFIRM_MESSAGE } from 'constants';
@@ -39,7 +39,7 @@ const CardListPage = () => {
                 theme="red"
                 handleClick={(e) => handleDeleteCard(e, card.id)}
               >
-                <DeleteIcon />
+                <img src={DeleteIcon} alt="카드삭제버튼" />
               </Button>
             </div>
           </Link>
