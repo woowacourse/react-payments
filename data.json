@@ -1,0 +1,49 @@
+{
+  "cards": [
+    {
+      "firstCardNumber": "1232",
+      "secondCardNumber": "1312",
+      "thirdCardNumber": "3123",
+      "fourthCardNumber": "1231",
+      "ownerName": "",
+      "month": "12",
+      "year": "31",
+      "cvcNum": "123",
+      "firstPasswordNum": "1",
+      "secondPasswordNum": "1",
+      "type": "주황카드",
+      "alias": "밥카",
+      "id": 1
+    },
+    {
+      "firstCardNumber": "1231",
+      "secondCardNumber": "2321",
+      "thirdCardNumber": "3132",
+      "fourthCardNumber": "1311",
+      "ownerName": "",
+      "month": "11",
+      "year": "11",
+      "cvcNum": "123",
+      "firstPasswordNum": "1",
+      "secondPasswordNum": "1",
+      "type": "노랑카드",
+      "alias": "adaddq",
+      "id": 2
+    },
+    {
+      "firstCardNumber": "1231",
+      "secondCardNumber": "2321",
+      "thirdCardNumber": "3213",
+      "fourthCardNumber": "1312",
+      "ownerName": "EWQ",
+      "month": "12",
+      "year": "32",
+      "cvcNum": "211",
+      "firstPasswordNum": "1",
+      "secondPasswordNum": "1",
+      "type": "빨강카드",
+      "alias": "안녕",
+      "id": 3
+    }
+  ]
+}

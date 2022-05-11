@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "es5",
     "lib": [
       "dom",
@@ -22,6 +23,6 @@
     "jsxImportSource": "@emotion/react"
   },
   "include": [
-    "src"
+    "src", "public"
   ]
 }

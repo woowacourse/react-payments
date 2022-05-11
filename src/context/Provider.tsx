@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, useReducer } from 'react';
-import { ActionType } from '../types';
+import { ActionType, CardType } from 'types';
 
 export type State = {
   firstInputCardNumber: string;
@@ -12,9 +12,14 @@ export type State = {
   cvc: string;
   firstPassword: string;
   secondPassword: string;
+  cardType: string;
+  chageCardType: boolean;
+  completeCard: boolean;
+  cardAlias: string;
+  cardList: Array<CardType>;
 };
 
-type Action = { type: ActionType; payload: string };
+type Action = { type: ActionType; payload: string | boolean | Array<CardType> };
 
 export type AppDispatch = Dispatch<Action>;
 
@@ -29,12 +34,20 @@ const initalState: State = {
   cvc: '',
   firstPassword: '',
   secondPassword: '',
+  cardType: '',
+  chageCardType: false,
+  completeCard: false,
+  cardAlias: '',
+  cardList: [],
 };
 
 export const AppStateContext = createContext<State>(initalState);
 export const AppDispatchContext = createContext<AppDispatch>(() => null);
 
-export function createAction(type: ActionType, payload: string): Action {
+export function createAction(
+  type: ActionType,
+  payload: string | boolean | Array<CardType>,
+): Action {
   return {
     type,
     payload,
@@ -92,6 +105,31 @@ function reducer(state: State, action: Action): any {
       return {
         ...state,
         secondPassword: action.payload,
+      };
+    case ActionType.CARD_TYPE:
+      return {
+        ...state,
+        cardType: action.payload,
+      };
+    case ActionType.CHANGE_CARD_TYPE:
+      return {
+        ...state,
+        chageCardType: action.payload,
+      };
+    case ActionType.COMPLETE_CARD:
+      return {
+        ...state,
+        completeCard: action.payload,
+      };
+    case ActionType.INPUT_CARD_ALIAS:
+      return {
+        ...state,
+        cardAlias: action.payload,
+      };
+    case ActionType.SET_CARD_LIST:
+      return {
+        ...state,
+        cardList: action.payload,
       };
   }
 }
