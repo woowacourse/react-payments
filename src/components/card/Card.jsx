@@ -1,13 +1,11 @@
 import PropTypes from 'prop-types';
 
 function Card({ card }) {
-  const isEmptyCard = Object.values(card).every((value) => value === '');
-
   return (
     <div className="card-box">
-      <div className={isEmptyCard ? 'empty-card' : 'small-card'}>
+      <div className={`empty-card bg-${card.theme}`}>
         <div className="card-top">
-          <span className="card-text">안카드</span>
+          <span className="card-text">{card.company}</span>
         </div>
         <div className="card-middle">
           <div className="small-card__chip" />
@@ -42,6 +40,8 @@ function Card({ card }) {
 
 Card.propTypes = {
   card: PropTypes.shape({
+    company: PropTypes.string.isRequired,
+    theme: PropTypes.string.isRequired,
     firstCardNumber: PropTypes.string.isRequired,
     secondCardNumber: PropTypes.string.isRequired,
     thirdCardNumber: PropTypes.string.isRequired,

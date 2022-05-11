@@ -16,6 +16,12 @@
     "react/function-component-definition": "off",
     "import/prefer-default-export": "off",
     "import/no-named-as-default": "off",
-    "import/no-named-as-default-member": "off"
+    "import/no-named-as-default-member": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "react/jsx-no-constructed-context-values": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "import/no-unresolved": "off",
+    "no-alert": "off"
   }
 }

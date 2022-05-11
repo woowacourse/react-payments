@@ -1,5 +1,7 @@
 ## 기능 구현 목록
 
+### step1
+
 - [x] 카드 추가 컴포넌트 HTML, CSS 구현
 
 - [x] AddCard 컴포넌트 구현
@@ -31,3 +33,20 @@
 
   - [x] 카드 정보를 제출한다
   - [x] AddCardForm 스토리북 작성
+
+### step2
+
+- [x] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
+- [x] Context API를 활용해 전역 상태 관리 및 계층 재구성
+
+#### 카드 목록(main page)
+
+- [x] router를 이용하여 main page를 보여준다
+- [x] ➕ 을 클릭하면 카드 추가 화면으로 이동한다
+- [x] 추가된 카드 목록을 볼 수 있다
+
+#### 카드 추가 확인
+
+- [x] 입력이 완료된 카드가 보여진다
+- [x] 카드 카테고리를 입력할 수 있다
+- [x] '확인' 버튼을 누르면 카드 목록에 추가된다

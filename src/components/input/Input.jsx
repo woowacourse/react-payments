@@ -5,7 +5,6 @@ function Input({
   size,
   placeholder,
   length,
-  minLength,
   min,
   max,
   name,
@@ -45,8 +44,8 @@ function Input({
       type={type}
       placeholder={placeholder}
       maxLength={length}
-      minLength={minLength || length}
-      required={optional ?? true}
+      minLength={optional ? '' : length}
+      required={!optional}
       onChange={handleChange}
     />
   );
@@ -57,7 +56,6 @@ Input.propTypes = {
   size: PropTypes.string,
   placeholder: PropTypes.string,
   length: PropTypes.number.isRequired,
-  minLength: PropTypes.number,
   min: PropTypes.number,
   max: PropTypes.number,
   name: PropTypes.string.isRequired,
@@ -68,6 +66,7 @@ Input.propTypes = {
     validNumber: PropTypes.func,
     validRange: PropTypes.func,
   }).isRequired,
+  optional: PropTypes.bool,
 };
 
 Input.defaultProps = {

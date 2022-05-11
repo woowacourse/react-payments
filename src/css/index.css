@@ -1,8 +1,9 @@
-@import './card.css';
-@import './input.css';
-@import './button.css';
-@import './utils.css';
-@import './helper.css';
+@import 'card.css';
+@import 'input.css';
+@import 'button.css';
+@import 'utils.css';
+@import 'helper.css';
+@import 'modal.css';
 
 body {
   display: flex;
@@ -17,6 +18,10 @@ input {
   font-size: 16px;
 }
 
+a {
+  text-decoration: none;
+}
+
 #root {
   background-color: #fff;
   width: 375px;
@@ -24,4 +29,5 @@ input {
   height: 700px;
   position: relative;
   border-radius: 15px;
+  overflow-y: auto;
 }
