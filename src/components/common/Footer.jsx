@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const FooterContainer = styled.header`
+const FooterContainer = styled.footer`
   display: flex;
   justify-content: flex-end;
   align-items: center;

@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PLACEHOLDER_PRIMARY_COLOR } from '../../style';
+import { INPUT_PRIMARY_BG_COLOR, PLACEHOLDER_PRIMARY_COLOR } from '../../style';
 
 const InputBox = styled.input`
-  background-color: #ecebf1;
+  background-color: ${INPUT_PRIMARY_BG_COLOR};
   height: 45px;
-  min-width: 50px;
-  width: 100%;
+  width: ${props => props.width || `50px`};
   text-align: center;
   outline-offset: 2px;
   border-radius: 0.25rem;
