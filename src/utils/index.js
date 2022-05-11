@@ -11,7 +11,7 @@ export const pareCardFormState = ({
   secondPassword,
   cardType,
 }) => {
-  const parsedState = {
+  return {
     firstCardNumber,
     secondCardNumber,
     thirdCardNumber,
@@ -24,6 +24,4 @@ export const pareCardFormState = ({
     secondPassword,
     cardType,
   };
-
-  return parsedState;
 };
