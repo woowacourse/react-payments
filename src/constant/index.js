@@ -14,7 +14,7 @@ export const METHODS = {
 
 export const REG_EXP = {
   NUMBER_ONLY: /^[0-9]+$/,
-  CHARACTER_ONLY: /^[a-z,A-Z]+$/,
+  CHARACTER_ONLY: /^[a-zA-Z]+$/,
 };
 
 export const CARD_COLOR_BY_NAME = {
