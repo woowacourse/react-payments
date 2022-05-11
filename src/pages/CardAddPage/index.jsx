@@ -1,31 +1,36 @@
-import { useState } from 'react';
-import Head from '../../components/Head';
-import Card from '../../components/Card';
-import CardNumbersInput from '../../components/CardNumbersInput';
-import ExpiredDateInput from '../../components/ExpiredDateInput';
-import OwnerNameInput from '../../components/OwnerNameInput';
-import SecurityNumberInput from '../../components/SecurityNumberInput';
-import PasswordInput from '../../components/PasswordInput';
-import SubmitButton from '../../components/SubmitButton';
-import { Page, CardSection, Form, SubmitButtonContainer } from './style';
+import { useNavigate } from 'react-router-dom';
+import Button from '../../components/Atoms/Button';
+import Card from '../../components/Molecules/Card';
+import CardNumbersInput from '../../components/Molecules/CardNumbersInput';
+import ExpiredDateInput from '../../components/Molecules/ExpiredDateInput';
+import OwnerNameInput from '../../components/Molecules/OwnerNameInput';
+import SecurityNumberInput from '../../components/Molecules/SecurityNumberInput';
+import PasswordInput from '../../components/Molecules/PasswordInput';
+import CardCompanySelector from '../../components/Molecules/CardCompanySelector';
+import Head from '../../components/Templates/Head';
+import ModalPortal from '../../components/Templates/ModalPortal';
+import { Page, HeadContainer, BackButton, CardSection, Form, SubmitButtonContainer } from './style';
 import MESSAGE from '../../constant/message';
+import PATH from 'constant/path';
+import { useCardListContext } from 'context/cardList';
+import useCardCompany from '../../hooks/useCardCompany';
 import useCardNumbers from '../../hooks/useCardNumbers';
 import useExpiredDate from '../../hooks/useExpiredDate';
 import useOwnerName from '../../hooks/useOwnerName';
 import useSecurityNumber from '../../hooks/useSecurityNumber';
 import usePassword from '../../hooks/usePassword';
-import useCardAdd from '../../hooks/useCardAdd';
+import BackButtonArrow from 'assets/images/backButtonArrow.svg';
 
-function CardAddPage() {
-  const [companyName, setCompanyName] = useState('포코카드');
+function CardAddPage({ isOpenModal, openModal }) {
+  const navigate = useNavigate();
+  const { addCard } = useCardListContext();
 
+  const { cardCompany, handleClickCardCompany } = useCardCompany();
   const { cardNumbers, isValidCardNumbers, handleChangeCardNumbersInput } = useCardNumbers();
-  const { expiredDate, convertedExpiredDate, isValidExpiredDate, handleChangeExpiredDateInput } =
-    useExpiredDate();
+  const { expiredDate, isValidExpiredDate, handleChangeExpiredDateInput } = useExpiredDate();
   const { ownerName, isValidOwnerName, handleChangeOwnerNameInput } = useOwnerName();
   const { securityNumber, isValidSecurityNumber, handleChangeSecurityNumber } = useSecurityNumber();
   const { password, isValidPassword, handleChangePassword } = usePassword();
-  const { addCard } = useCardAdd();
 
   const isAllValidInput = () => {
     return (
@@ -37,23 +42,56 @@ function CardAddPage() {
     );
   };
 
+  const handleClickCard = () => {
+    openModal();
+  };
+
+  const handleClickBackButton = () => {
+    navigate(PATH.DEFAULT);
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
 
+    const cardInfo = {
+      alias: '',
+      cardCompany,
+      cardNumbers,
+      expiredDate,
+      ownerName,
+      securityNumber,
+      password,
+    };
+
     if (isAllValidInput()) {
-      addCard();
+      const cardId = addCard(cardInfo);
+      navigate(PATH.CARD_ADD_COMPLETION, {
+        state: {
+          cardId,
+        },
+      });
     }
   };
 
   return (
     <Page>
-      <Head title="카드 추가" />
+      <Head
+        leftComponent={
+          <HeadContainer>
+            <BackButton type="click" onClick={handleClickBackButton}>
+              <img src={BackButtonArrow} />
+            </BackButton>
+            <span>카드 추가</span>
+          </HeadContainer>
+        }
+      />
       <CardSection>
         <Card
-          companyName={companyName}
+          cardCompany={cardCompany}
           cardNumbers={cardNumbers}
+          expiredDate={expiredDate}
           ownerName={ownerName}
-          expiredDate={convertedExpiredDate}
+          handleClickCard={handleClickCard}
         />
       </CardSection>
       <Form onSubmit={handleSubmit}>
@@ -89,9 +127,14 @@ function CardAddPage() {
           invalidMessage={MESSAGE.INVALID_PASSWORD}
         />
         <SubmitButtonContainer>
-          <SubmitButton label="다음" width={'51px'} height={'34px'} hidden={!isAllValidInput()} />
+          <Button type="submit" hidden={!isAllValidInput()}>
+            다음
+          </Button>
         </SubmitButtonContainer>
       </Form>
+      <ModalPortal isOpenModal={isOpenModal}>
+        <CardCompanySelector handleClickCardCompany={handleClickCardCompany} />
+      </ModalPortal>
     </Page>
   );
 }

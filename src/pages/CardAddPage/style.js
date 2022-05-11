@@ -7,6 +7,21 @@ export const Page = styled.div`
   flex-direction: column;
 `;
 
+export const HeadContainer = styled.div`
+  display: flex;
+  gap: 18px;
+  background-color: #fff;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #383838;
+`;
+
+export const BackButton = styled.button`
+  background-color: #fff;
+`;
+
 export const CardSection = styled.div`
   display: flex;
   justify-content: center;

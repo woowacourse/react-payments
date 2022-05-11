@@ -1,45 +1,47 @@
-import { createGlobalStyle } from 'styled-components';
+import { Routes, Route } from 'react-router-dom';
+import CardListPage from 'pages/CardListPage';
 import CardAddPage from './pages/CardAddPage/';
-
-const GlobalStyle = createGlobalStyle`
-  * {
-    margin: 0;
-    padding: 0;
-    border: none;
-    box-sizing: border-box;
-  }
-
-  body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: center;
-    justify-content: center;
-    background-color: #e5e5e5;
-  }
-  
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  #root {
-    background-color: #fff;
-    width: 375px;
-    min-width: 375px;
-    height: 700px;
-    position: relative;
-    border-radius: 15px;
-  }
-`;
+import CardAddCompletionPage from 'pages/CardAddCompletionPage';
+import { GlobalStyle, ModalContainer } from './style';
+import { CardListProvider } from './context/cardList';
+import useModal from './hooks/useModal';
 
 function App() {
+  const { isOpenModal, openModal, closeModal } = useModal();
+
+  const handleClickModalContainer = ({ target }) => {
+    if (target.id !== 'modal-container') {
+      return;
+    }
+
+    closeModal();
+  };
+
   return (
     <>
       <GlobalStyle />
       <div className="App">
-        <CardAddPage />
+        <CardListProvider>
+          <Routes>
+            <Route path="/" element={<CardListPage />} />
+            <Route
+              path="/cardAdd"
+              element={
+                <CardAddPage
+                  isOpenModal={isOpenModal}
+                  openModal={openModal}
+                  closeModal={closeModal}
+                />
+              }
+            />
+            <Route path="cardAddCompletion" element={<CardAddCompletionPage />} />
+          </Routes>
+        </CardListProvider>
+        <ModalContainer
+          id="modal-container"
+          visibility={isOpenModal ? 'visible' : 'hidden'}
+          onClick={handleClickModalContainer}
+        />
       </div>
     </>
   );
