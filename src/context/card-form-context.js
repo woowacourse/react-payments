@@ -27,24 +27,24 @@ const initialState = {
 };
 
 const ACTION = {
-  CARD_NUMBERS: 'CARD_NUMBERS',
-  CARD_NUMBERS_ERROR: 'CARD_NUMBERS_ERROR',
-  OWNER_NAME: 'OWNER_NAME',
-  OWNER_NAME_ERROR: 'OWNER_NAME_ERROR',
-  SECURE_CODE: 'SECURE_CODE',
-  SECURE_CODE_ERROR: 'SECURE_CODE_ERROR',
-  EXPIRED_DATE: 'EXPIRED_DATE',
-  EXPIRED_DATE_ERROR: 'EXPIRED_DATE_ERROR',
-  PASSWORD: 'PASSWORD',
-  PASSWORD_ERROR: 'PASSWORD_ERROR',
-  CARD_TYPE: 'CARD_TYPE',
+  SET_CARD_NUMBERS: 'SET_CARD_NUMBERS',
+  SET_CARD_NUMBERS_ERROR: 'SET_CARD_NUMBERS_ERROR',
+  SET_OWNER_NAME: 'SET_OWNER_NAME',
+  SET_OWNER_NAME_ERROR: 'SET_OWNER_NAME_ERROR',
+  SET_SECURE_CODE: 'SET_SECURE_CODE',
+  SET_SECURE_CODE_ERROR: 'SET_SECURE_CODE_ERROR',
+  SET_EXPIRED_DATE: 'SET_EXPIRED_DATE',
+  SET_EXPIRED_DATE_ERROR: 'SET_EXPIRED_DATE_ERROR',
+  SET_PASSWORD: 'SET_PASSWORD',
+  SET_PASSWORD_ERROR: 'SET_PASSWORD_ERROR',
+  SET_CARD_TYPE: 'SET_CARD_TYPE',
 };
 
 const CardFormContext = createContext(initialState);
 
 const cardFormReducer = (state, action) => {
   switch (action.type) {
-    case ACTION.CARD_NUMBERS: {
+    case ACTION.SET_CARD_NUMBERS: {
       const {
         firstCardNumber,
         secondCardNumber,
@@ -61,10 +61,10 @@ const cardFormReducer = (state, action) => {
         isCardNumberError: false,
       };
     }
-    case ACTION.CARD_NUMBERS_ERROR: {
+    case ACTION.SET_CARD_NUMBERS_ERROR: {
       return { ...state, isCardNumberError: true };
     }
-    case ACTION.OWNER_NAME: {
+    case ACTION.SET_OWNER_NAME: {
       return {
         ...state,
         ownerName: action.data.ownerName,
@@ -72,13 +72,13 @@ const cardFormReducer = (state, action) => {
         isOwnerNameError: false,
       };
     }
-    case ACTION.OWNER_NAME_ERROR: {
+    case ACTION.SET_OWNER_NAME_ERROR: {
       return {
         ...state,
         isOwnerNameError: true,
       };
     }
-    case ACTION.SECURE_CODE: {
+    case ACTION.SET_SECURE_CODE: {
       return {
         ...state,
         secureCode: action.data.secureCode,
@@ -86,13 +86,13 @@ const cardFormReducer = (state, action) => {
         isSecureCodeError: false,
       };
     }
-    case ACTION.SECURE_CODE_ERROR: {
+    case ACTION.SET_SECURE_CODE_ERROR: {
       return {
         ...state,
         isSecureCodeError: true,
       };
     }
-    case ACTION.EXPIRED_DATE: {
+    case ACTION.SET_EXPIRED_DATE: {
       const { expiredMonth, expiredYear } = action.data;
       return {
         ...state,
@@ -103,13 +103,13 @@ const cardFormReducer = (state, action) => {
       };
     }
 
-    case ACTION.EXPIRED_DATE_ERROR: {
+    case ACTION.SET_EXPIRED_DATE_ERROR: {
       return {
         ...state,
         isExpiredDateError: true,
       };
     }
-    case ACTION.PASSWORD: {
+    case ACTION.SET_PASSWORD: {
       const { firstPassword, secondPassword } = action.data;
       return {
         ...state,
@@ -118,12 +118,12 @@ const cardFormReducer = (state, action) => {
         isInitialPassword: false,
       };
     }
-    case ACTION.PASSWORD_ERROR: {
+    case ACTION.SET_PASSWORD_ERROR: {
       return {
         isPasswordError: true,
       };
     }
-    case ACTION.CARD_TYPE: {
+    case ACTION.SET_CARD_TYPE: {
       return {
         ...state,
         cardType: action.data.cardType,

@@ -22,7 +22,7 @@ const PasswordFieldSet = () => {
   useEffect(() => {
     const isError = isFirstPasswordError || isSecondPasswordError;
     if (!state.isPasswordError && isError)
-      dispatch({ type: ACTION.PASSWORD_ERROR });
+      dispatch({ type: ACTION.SET_PASSWORD_ERROR });
   }, [state, dispatch, isFirstPasswordError, isSecondPasswordError]);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const PasswordFieldSet = () => {
       return;
 
     dispatch({
-      type: ACTION.PASSWORD,
+      type: ACTION.SET_PASSWORD,
       data: { firstPassword, secondPassword },
     });
   }, [

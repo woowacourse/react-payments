@@ -28,7 +28,7 @@ const ExpiredDateFieldSet = () => {
       isExpiredYearError ||
       !checkExpiredDate(expiredYear, expiredMonth);
     if (!state.isExpiredDateError && isError)
-      dispatch({ type: ACTION.EXPIRED_DATE_ERROR });
+      dispatch({ type: ACTION.SET_EXPIRED_DATE_ERROR });
   }, [
     state,
     dispatch,
@@ -48,7 +48,7 @@ const ExpiredDateFieldSet = () => {
       return;
 
     dispatch({
-      type: ACTION.EXPIRED_DATE,
+      type: ACTION.SET_EXPIRED_DATE,
       data: { expiredMonth, expiredYear },
     });
   }, [

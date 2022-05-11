@@ -18,13 +18,13 @@ const CardOwnerFieldSet = () => {
 
   useEffect(() => {
     if (!state.isOwnerNameError && isOwnerNameError)
-      dispatch({ type: ACTION.OWNER_NAME_ERROR });
+      dispatch({ type: ACTION.SET_OWNER_NAME_ERROR });
   }, [state, dispatch, isOwnerNameError]);
 
   useEffect(() => {
     if (isOwnerNameError) return;
     dispatch({
-      type: ACTION.OWNER_NAME,
+      type: ACTION.SET_OWNER_NAME,
       data: { ownerName, isOwnerNameError },
     });
   }, [isOwnerNameError, ownerName, dispatch]);

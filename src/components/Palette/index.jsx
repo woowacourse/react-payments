@@ -11,7 +11,7 @@ const Palette = ({ closeModal }) => {
   const { dispatch } = useCardFormContext();
   const onClickCardSelector = (name) => () => {
     dispatch({
-      type: ACTION.CARD_TYPE,
+      type: ACTION.SET_CARD_TYPE,
       data: { cardType: name },
     });
     closeModal();

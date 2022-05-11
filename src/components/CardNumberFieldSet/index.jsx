@@ -35,7 +35,7 @@ const CardNumberFieldSet = () => {
       isThirdCardNumberError ||
       isFourthCardNumberError;
     if (!state.isCardNumberError && isError) {
-      dispatch({ type: ACTION.CARD_NUMBERS_ERROR });
+      dispatch({ type: ACTION.SET_CARD_NUMBERS_ERROR });
     }
   }, [
     state,
@@ -64,7 +64,7 @@ const CardNumberFieldSet = () => {
       return;
     }
     dispatch({
-      type: ACTION.CARD_NUMBERS,
+      type: ACTION.SET_CARD_NUMBERS,
       data: {
         firstCardNumber,
         secondCardNumber,

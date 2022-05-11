@@ -16,12 +16,12 @@ const SecureCodeFieldSet = () => {
 
   useEffect(() => {
     if (!state.isSecureCodeError && isSecureCodeError)
-      dispatch({ type: ACTION.SECURE_CODE_ERROR });
+      dispatch({ type: ACTION.SET_SECURE_CODE_ERROR });
   }, [dispatch, state, isSecureCodeError]);
 
   useEffect(() => {
     if (secureCode.length <= 0 || isSecureCodeError) return;
-    dispatch({ type: ACTION.SECURE_CODE, data: { secureCode } });
+    dispatch({ type: ACTION.SET_SECURE_CODE, data: { secureCode } });
   }, [secureCode, isSecureCodeError, dispatch]);
 
   return (
