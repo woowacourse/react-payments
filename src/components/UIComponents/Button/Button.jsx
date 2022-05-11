@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const StyledButton = styled.button`
-  width: 50px;
+  width: 70px;
   height: 30px;
 
   border: none;
@@ -20,11 +20,15 @@ const StyledButton = styled.button`
   }
 `;
 
-export default function Button({ text, onClick }) {
-  return <StyledButton type="submit">{text}</StyledButton>;
+export default function Button({ children: buttonText, ...props }) {
+  return (
+    <StyledButton type="submit" {...props}>
+      {buttonText}
+    </StyledButton>
+  );
 }
 
 Button.propTypes = {
-  text: PropTypes.string,
+  children: PropTypes.string,
   onClick: PropTypes.func,
 };

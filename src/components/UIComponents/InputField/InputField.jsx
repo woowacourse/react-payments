@@ -2,9 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const width = {
-  xs: "85px",
-  sm: "135px",
+import { textColor } from "components/UIComponents/styleConstants";
+
+const widthPreset = {
+  xs: "45px",
+  sm: "85px",
+  md: "135px",
+  xl: "80%",
   full: "100%",
 };
 
@@ -19,31 +23,29 @@ const StyledInputField = styled.div`
 const StyledLabel = styled.label`
   font-size: 12px;
   line-height: 14px;
-  color: ${(props) =>
-    props.state === "error"
-      ? "#d82424"
-      : props.state === "complete"
-      ? "#04c09e"
-      : "#525252"};
+  color: ${({ state }) => textColor[state]};
   letter-spacing: -0.085em;
 
   display: flex;
   gap: 10px;
-
-  .error-message {
-    color: #d82424;
-  }
 `;
 
 const StyledInputWrapper = styled.div`
   display: flex;
-  justify-content: ${(props) => props.align};
-  background: #ecebf1;
-  border-radius: 7px;
-  width: ${(props) => width[props.width]};
+  justify-content: ${({ align }) => align};
+  border-bottom: ${({ shape }) => shape === "underline" && "1px solid #000000"};
+
+  margin: ${({ width }) => width === "xl" && "auto"};
+  gap: ${({ isSplit }) => isSplit && "10px"};
+
+  ${({ isSplit }) => isSplit && "input {"}
+  background: ${({ shape }) => shape === "box" && "#ecebf1"};
+  border-radius: ${({ shape }) => shape === "box" && "7px"};
+  width: ${({ width }) => widthPreset[width]};
   padding: 12px;
 
-  box-shadow: ${(props) => props.isInvalid && "inset 0 0 0 1px #d82424"};
+  box-shadow: ${({ isInvalid }) => isInvalid && "inset 0 0 0 1px #d82424"};
+  ${({ isSplit }) => isSplit && "}"}
 `;
 
 const StyledInputContainer = styled.div`
@@ -59,8 +61,9 @@ export default function InputField({
   wrapperWidth,
   horizontalAlign,
   isComplete,
-  errorMessage,
   isInvalid,
+  shape,
+  isSplit,
 }) {
   return (
     <StyledInputField>
@@ -68,13 +71,14 @@ export default function InputField({
         state={isInvalid ? "error" : isComplete ? "complete" : "default"}
       >
         {labelText}
-        <span className="error-message">{errorMessage}</span>
       </StyledLabel>
       <StyledInputContainer>
         <StyledInputWrapper
           width={wrapperWidth}
           align={horizontalAlign}
           isInvalid={isInvalid}
+          shape={shape}
+          isSplit={isSplit}
         >
           {children}
         </StyledInputWrapper>
@@ -90,6 +94,11 @@ InputField.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
-  wrapperWidth: PropTypes.oneOf(["xs", "sm", "full"]),
+  shape: PropTypes.oneOf(["box", "underline"]),
+  wrapperWidth: PropTypes.oneOf(["xs", "sm", "md", "xl", "full"]),
   horizontalAlign: PropTypes.oneOf(["flex-start", "center", "space-around"]),
+};
+
+InputField.defaultProps = {
+  shape: "box",
 };

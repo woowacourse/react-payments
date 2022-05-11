@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const width = {
+import { textColor } from "components/UIComponents/styleConstants";
+
+const widthPreset = {
   sm: "40px",
   default: "70px",
   full: "100%",
@@ -11,14 +13,16 @@ const width = {
 export const StyledInput = styled.input`
   // 텍스트 선택 커서 색상 설정
   caret-color: #000000;
-  color: ${(props) => (props.isComplete ? "#04c09e" : "#525252")};
+
+  color: ${({ isComplete }) =>
+    isComplete ? textColor["complete"] : textColor["default"]};
   font-size: 18px;
   font-weight: 600;
   line-height: 21px;
-  text-align: ${(props) => props.textAlign};
+  text-align: ${({ textAlign }) => textAlign};
 
   background-color: transparent;
-  width: ${(props) => width[props.width]};
+  width: ${({ width }) => widthPreset[width]};
 
   outline: none;
   border: none;
@@ -43,7 +47,7 @@ export const StyledInput = styled.input`
   }
 
   &:invalid {
-    color: #d82424;
+    color: ${textColor["error"]};
   }
 `;
 

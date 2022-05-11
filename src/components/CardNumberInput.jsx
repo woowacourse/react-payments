@@ -1,17 +1,23 @@
-import React, { useCallback, useState } from "react";
-import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "../constants";
-import useArraySetState from "../useArraySetState";
-import Input from "./UIComponents/Input/Input";
-import InputField from "./UIComponents/InputField/InputField";
+import React, { useCallback, useContext, useState } from "react";
+import CardInfoContext from "context/CardInfoContext";
 
-export default function CardNumberInput({ cardNumber, setCardNumber }) {
+import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "utils/constants";
+
+import Input from "components/UIComponents/Input/Input";
+import InputField from "components/UIComponents/InputField/InputField";
+
+export default function CardNumberInput() {
   const [isInvalid, setInvalid] = useState(false);
+  const { state, setState } = useContext(CardInfoContext);
 
-  const setCardNumberArray = useArraySetState(setCardNumber);
+  const { cardNumber } = state;
 
   const handleInputChange = (e, order) => {
     setInvalid(false);
-    setCardNumberArray(e.target.value, order);
+
+    const newCardNumber = [...cardNumber];
+    newCardNumber[order] = e.target.value;
+    setState({ ...state, cardNumber: newCardNumber });
   };
 
   const triggerInvalid = useCallback(() => setInvalid(true), []);
@@ -34,7 +40,7 @@ export default function CardNumberInput({ cardNumber, setCardNumber }) {
               type={index <= 1 ? "text" : "password"}
               value={cardNumber[index]}
               placeholder={index <= 1 ? "1 2 3 4" : CREATE_MASKED_CHARACTERS(4)}
-              name={"card-number"}
+              name={`cardNumber${index + 1}`}
               maxLength={4}
               required
               isComplete={
@@ -43,6 +49,7 @@ export default function CardNumberInput({ cardNumber, setCardNumber }) {
               onChange={(e) => handleInputChange(e, index)}
               onInvalid={triggerInvalid}
               pattern={"^[0-9]+$"}
+              data-testid={"card-number"}
             />
             {index !== cardNumber.length - 1 && <p>-</p>}
           </React.Fragment>
