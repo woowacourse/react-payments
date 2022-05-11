@@ -76,7 +76,6 @@ const CardAddUpdatePage = () => {
     cardInfo;
 
   const [modalVisible, handleModal] = useToggle(false);
-  const [isCardFront, handleCardPosition] = useToggle(true);
 
   const [isCompanyFilled] = useIsFilled(COMPANY, company, false);
   const [isCardNumberFilled] = useIsFilled(CARD_NUMBER, cardNumber, false);
@@ -136,12 +135,7 @@ const CardAddUpdatePage = () => {
               </Button>
             </Link>
           </Header>
-          <CardPreview
-            cardInfo={cardInfo}
-            isCardFront={isCardFront}
-            handleModal={handleModal}
-            handleCardPosition={handleCardPosition}
-          />
+          <CardPreview cardInfo={cardInfo} handleModal={handleModal} />
           <Message name="company" isFilled={isCompanyFilled} align="text-center" />
 
           <FormInput
@@ -245,11 +239,7 @@ const CardAddUpdatePage = () => {
               {path === PATH.ADD ? '카드등록이 완료되었습니다.' : '카드수정이 완료되었습니다.'}
             </h2>
           </div>
-          <CardPreview
-            cardInfo={cardInfo}
-            isCardFront={isCardFront}
-            handleCardPosition={handleCardPosition}
-          />
+          <CardPreview cardInfo={cardInfo} />
           <div className="input-container flex-center w-100">
             <input
               className="input-underline w-75"

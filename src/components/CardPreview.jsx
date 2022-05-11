@@ -1,14 +1,10 @@
 import PropTypes from 'prop-types';
 import Button from 'components/common/Button';
 import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants';
+import useToggle from 'hooks/useToggle';
 
-const CardPreview = ({
-  cardInfo,
-  isCardFront,
-  handleModal,
-  handleCardPosition,
-  isVisibleButton,
-}) => {
+const CardPreview = ({ cardInfo, handleModal, isVisibleButton }) => {
+  const [isCardFront, handleCardPosition] = useToggle(true);
   const { cardNumber, ownerName, expiryDate, company, theme, privacyCode } = cardInfo;
   const { first, second, third, fourth } = cardNumber;
 
@@ -95,9 +91,7 @@ CardPreview.propTypes = {
     }),
     theme: PropTypes.string,
   }),
-  isCardFront: PropTypes.bool,
   handleModal: PropTypes.func,
-  handleCardPosition: PropTypes.func,
   isVisibleButton: PropTypes.string,
 };
 
