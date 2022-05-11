@@ -5,6 +5,11 @@
   margin: 10px 0;
 }
 
+.add-card:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
 .empty-card {
   display: flex;
   flex-direction: column;
@@ -127,4 +132,10 @@
 .name-wrap {
   width: 100px;
   word-wrap: break-word;
+}
+
+.card-list-container {
+  height: 70%;
+  padding-top: 50px;
+  overflow: scroll;
 }

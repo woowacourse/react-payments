@@ -11,6 +11,8 @@
     "react/react-in-jsx-scope": "warn",
     "react/prop-types": "warn",
     "react/require-default-props": "warn",
-    "no-param-reassign": "warn"
+    "no-param-reassign": "warn",
+    "react/function-component-definition": "warn",
+    "react/jsx-props-no-spreading": "warn"
   }
 }

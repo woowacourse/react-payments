@@ -4,11 +4,13 @@ export const MAX_LENGTH = {
   NAME: 30,
   SECURITY_CODE: 3,
   PASSWORD: 1,
+  CARDNICK: 10,
 };
 
 export const MIN_LENGTH = {
   NAME: 2,
   MONTH: 1,
+  CARDNICK: 1,
 };
 
 export const RANGE = {
