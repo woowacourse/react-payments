@@ -9,12 +9,12 @@ export default {
 const Template = (args) => <Card {...args} />;
 
 const makeArg = (cardComPanyName, color) => ({
-  children: {
+  children: [
     cardComPanyName,
-    cardNumber: ['1234', '5678', '4567', '7890'],
-    cardOwner: '마르코',
-    cardExpiration: ['05', '23'],
-  },
+    ['1234', '5678', '4567', '7890'],
+    '마르코',
+    ['05', '23'],
+  ],
   color,
 });
 

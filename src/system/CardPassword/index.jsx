@@ -5,11 +5,10 @@ import useCardDispatch from '../../hooks/useCardDispatch';
 
 import MarginBottomWrapper from '../../components/MarginBottomWrapper';
 import Label from '../../components/Label';
-import FlexCenter from '../../components/FlexCenter';
 import Circle from '../../components/Circle';
 
 import CardPasswordInput from './CardPasswordInput';
-import PasswordContainerStyled from './style';
+import { PasswordContainerStyled, PasswordWrapperStyled } from './style';
 
 import TYPING_CARD_PASSWORD from './action';
 
@@ -44,12 +43,12 @@ const CardPassword = (props, ref) => {
           onChange={onChangeInput(1)}
           ref={ref[9]}
         />
-        <FlexCenter>
+        <PasswordWrapperStyled>
           <Circle size='5px' color={cardCompanyColor} />
-        </FlexCenter>
-        <FlexCenter>
+        </PasswordWrapperStyled>
+        <PasswordWrapperStyled>
           <Circle size='5px' color={cardCompanyColor} />
-        </FlexCenter>
+        </PasswordWrapperStyled>
       </PasswordContainerStyled>
     </div>
   );

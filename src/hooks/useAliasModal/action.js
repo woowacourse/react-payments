@@ -1,0 +1,3 @@
+const UPDATE_CARD_ALIAS = 'UPDATE_CARD_ALIAS';
+
+export default UPDATE_CARD_ALIAS;

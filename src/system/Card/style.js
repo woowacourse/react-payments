@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
-const CardWrapperStyled = styled.div(({ color }) => `
+import CARD_SIZE from './constant';
+
+const CardWrapperStyled = styled.div(({ size, color }) => `
   cursor: pointer;
-  width: 208px;
-  height: 130px;
-  padding: 10px;
-  margin-bottom: 16px;
+  width: ${CARD_SIZE[size].width};
+  height: ${CARD_SIZE[size].height};
+  padding: ${CARD_SIZE[size].padding};
+  margin-bottom: ${CARD_SIZE[size].marginBottom};
   background-color: var(${color});
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
