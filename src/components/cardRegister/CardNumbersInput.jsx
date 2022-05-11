@@ -1,8 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import { InputBasic } from "../common/InputBasic";
-import { InputBox } from "../common/InputBox";
-import { InputContainer, InputTitle } from "../common/styled";
+import { RULE_INPUT } from "constants/constants";
+import {
+  InputBasic,
+  InputBox,
+  InputTitle,
+  InputContainer,
+} from "components/common";
 
 const DEFAULT_CARD_NUMBERS_TYPE = [
   { name: "firstNumber", type: "text" },
@@ -11,9 +15,10 @@ const DEFAULT_CARD_NUMBERS_TYPE = [
   { name: "fourthNumber", type: "password" },
 ];
 
-export const CardNumbersInputForm = ({
+export const CardNumbersInput = ({
   cardType,
   cardNumbers,
+  isValid,
   handleCardNumbersInput,
   handleCardNumberCheck,
   handleModalVisible,
@@ -39,7 +44,7 @@ export const CardNumbersInputForm = ({
   }, [cardNumbers]);
 
   const handleNumberChange = (e, name) => {
-    if (isNaN(e.nativeEvent.data) || e.target.value.length > 4) {
+    if (isNaN(e.target.value)) {
       return;
     }
 
@@ -48,14 +53,17 @@ export const CardNumbersInputForm = ({
 
   return (
     <InputContainer>
-      <InputTitle>카드 번호</InputTitle>
-      <InputBox color="#04c09e" padding="0 50px">
+      <InputTitle isValid={isValid}>카드 번호</InputTitle>
+      <InputBox color="#04c09e" padding="0 5%">
         {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }, i) => (
           <InputBasic
             key={name}
+            id={`input_card_number-${i}`}
             inputRef={(elem) => (numberInputRefs.current[i] = elem)}
             value={cardNumbers?.[name]}
             onChange={(e) => handleNumberChange(e, name)}
+            pattern={RULE_INPUT.CARD_NUMBER_RULE}
+            maxLength="4"
             type={type}
           />
         )).reduce((prev, cur) => [prev, "-", cur])}

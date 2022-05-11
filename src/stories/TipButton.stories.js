@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TipButton } from "../components/common/TipButton";
+import { TipButton } from "components/common/TipButton";
 
 export default {
   title: "Example/TipButton",

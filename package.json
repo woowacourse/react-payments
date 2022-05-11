@@ -7,6 +7,7 @@
     "gh-pages": "^3.2.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.5"
   },
@@ -44,6 +45,8 @@
     "@storybook/react": "^6.5.0-beta.1",
     "@storybook/testing-library": "^0.0.11",
     "chromatic": "^6.5.4",
+    "eslint": "^8.14.0",
+    "eslint-plugin-react": "^7.29.4",
     "webpack": "^5.72.0"
   },
   "eslintConfig": {

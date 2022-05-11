@@ -8,9 +8,6 @@ export const Card = ({
   ownerName,
   handleModalVisible,
 }) => {
-  const cardOwnerName = ownerName || "NAME";
-  const cardExpireMonth = expireDate.month || "MM";
-  const cardExpireYear = expireDate.year || "YY";
   const formattedCardNumbers = Object.values(cardNumbers)
     .map((number, idx) => (idx <= 1 ? number : "•".repeat(number.length)))
     .join(" ");
@@ -19,7 +16,7 @@ export const Card = ({
     <CardBox>
       <SmallCard backgroundColor={cardType.color} onClick={handleModalVisible}>
         <CardTop>
-          <CardText>{cardType.name}카드</CardText>
+          <CardText>{cardType.name && cardType.name + "카드"}</CardText>
         </CardTop>
         <CardMiddle>
           <SmallCardChip />
@@ -29,9 +26,9 @@ export const Card = ({
             <CardNumbersText>{formattedCardNumbers}</CardNumbersText>
           </CardBottomNumber>
           <CardBottomInfo>
-            <CardText>{cardOwnerName}</CardText>
+            <CardText>{ownerName || "NAME"}</CardText>
             <CardText>
-              {cardExpireMonth}/{cardExpireYear}
+              {expireDate.month || "MM"}/{expireDate.year || "YY"}
             </CardText>
           </CardBottomInfo>
         </CardBottom>
@@ -44,6 +41,7 @@ const CardBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #525252;
 
   margin: 10px 0;
 `;
@@ -116,6 +114,7 @@ const CardBottomInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 10px;
 `;
 
 const CardText = styled.span`

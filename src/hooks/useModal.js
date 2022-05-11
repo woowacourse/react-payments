@@ -10,5 +10,5 @@ export const useModal = () => {
     name && setModalName(name);
   };
 
-  return [modalVisibleState, setModalState, modalName];
+  return { modalVisibleState, setModalState, modalName };
 };

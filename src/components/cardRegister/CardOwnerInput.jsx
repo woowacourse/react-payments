@@ -1,9 +1,8 @@
 import React from "react";
 
-import { InputBasic } from "../common/InputBasic";
-import { InputContainer, InputTitle } from "../common/styled";
+import { InputBasic, InputTitle, InputContainer } from "components/common";
 
-export const CardOwnerInputForm = ({ ownerName, handleOwnerNameInput }) => {
+export const CardOwnerInput = ({ ownerName, handleOwnerNameInput }) => {
   const handleOwnerNameChange = (e) => {
     handleOwnerNameInput(e.target.value);
   };

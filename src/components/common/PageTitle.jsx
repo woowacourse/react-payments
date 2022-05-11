@@ -1,11 +1,10 @@
 import React from "react";
-
 import styled from "styled-components";
 
-export const PageTitle = ({ children }) => {
+export const PageTitle = ({ children, onClick, visible }) => {
   return (
     <PageTitleWrapperStyle>
-      <BackwardButton />
+      <BackwardButton onClick={onClick} visible={visible} />
       {children}
     </PageTitleWrapperStyle>
   );
@@ -20,6 +19,7 @@ const PageTitleWrapperStyle = styled.div`
 `;
 
 const BackwardButton = styled.span`
+  display: ${(props) => (props.visible ? "inline" : "none")};
   width: 8px;
   height: 8px;
   border: 1px;

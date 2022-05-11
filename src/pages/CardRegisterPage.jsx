@@ -1,38 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { useModal } from "../hooks/useModal";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useModal } from "hooks/useModal";
+import { CardContext, ErrorContext } from "contexts";
 
-import { Button, Card, Modal, PageTitle } from "../components/common";
+import {
+  Button,
+  Card,
+  Form,
+  Modal,
+  PageTitle,
+  ErrorModal,
+} from "components/common";
 import {
   CARD_TYPES,
   CARD_TYPES_DEFAULT,
   MODAL_NAME,
-} from "../constants/constants";
+} from "constants/constants";
 import {
-  CardExpireDateInputForm,
-  CardNumbersInputForm,
-  CardOwnerInputForm,
-  CardPasswordInputForm,
-  CVCInputForm,
+  CardExpireDateInput,
+  CardNumbersInput,
+  CardOwnerInput,
+  CardPasswordInput,
+  CVCInput,
   CardSelectModal,
   CVCHelperModal,
-} from "../components/cardRegister";
+} from "components/cardRegister";
 
 export const CardRegisterPage = () => {
-  const [modalVisibleState, setModalState, modalName] = useModal();
+  const { modalVisibleState, setModalState, modalName } = useModal();
+  const cards = useContext(CardContext);
+  const errorState = useContext(ErrorContext);
+  const navigate = useNavigate();
   const [ownerName, setOwnerName] = useState("");
-  const [CVC, setCVC] = useState("");
   const [allCompleted, setAllCompleted] = useState(false);
   const [expireDate, setExpireDate] = useState({
     month: "",
     year: "",
   });
-  const [password, setPassword] = useState({
-    firstNumber: "",
-    secondNumber: "",
-  });
   const [cardType, setCardType] = useState({
     name: "",
-    backgroundColor: "",
+    color: "",
   });
   const [cardNumbers, setCardNumbers] = useState({
     firstNumber: "",
@@ -50,14 +57,11 @@ export const CardRegisterPage = () => {
 
   useEffect(() => {
     setAllCompleted(Object.values(checkInputs).every((check) => check));
-  }, [checkInputs]);
-
-  useEffect(() => {
-    if (!checkInputs.cardNumbers) {
+    if (!checkInputs.cardNumbers && checkInputs.cardType) {
       setCheckInputs((prev) => ({ ...prev, cardType: false }));
       setCardType(() => CARD_TYPES_DEFAULT);
     }
-  }, [checkInputs.cardNumbers]);
+  }, [checkInputs]);
 
   const modalSelector = (name) => {
     return () => {
@@ -84,14 +88,45 @@ export const CardRegisterPage = () => {
         );
       case MODAL_NAME.CARD_CVC:
         return <CVCHelperModal />;
+      case MODAL_NAME.ERROR:
+        return <ErrorModal />;
       default:
         return <div>no data</div>;
     }
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const cardId = cards.id;
+    const formData = e.target;
+    const wrappingCardData = {
+      id: cardId,
+      cardNickname: cardType.name,
+      cardNumbers: cardNumbers,
+      cardType: cardType,
+      expireDate: expireDate,
+      ownerName: ownerName,
+      cardCVC: formData.elements["input_CVC"].value,
+      cardPassword:
+        formData.elements["input_password-0"].value +
+        formData.elements["input_password-1"].value,
+    };
+
+    try {
+      cards.id++;
+      cards.list.push(wrappingCardData);
+      navigate(`/cardEdit/${cardId}`);
+    } catch (error) {
+      errorState.errorMessage = error.message;
+      modalSelector(MODAL_NAME.ERROR)();
+    }
+  };
+
   return (
     <>
-      <PageTitle>카드 추가</PageTitle>
+      <PageTitle onClick={() => navigate("/cardList")} visible={true}>
+        카드 추가
+      </PageTitle>
       <Card
         cardType={cardType}
         cardNumbers={cardNumbers}
@@ -99,36 +134,38 @@ export const CardRegisterPage = () => {
         ownerName={ownerName}
         handleModalVisible={modalSelector(MODAL_NAME.CARD_TYPE)}
       />
-      <form>
-        <CardNumbersInputForm
+      <Form onSubmit={handleFormSubmit}>
+        <CardNumbersInput
           cardType={cardType}
           cardNumbers={cardNumbers}
+          isValid={checkInputs.cardNumbers}
           handleModalVisible={modalSelector(MODAL_NAME.CARD_TYPE)}
           handleCardNumbersInput={setCardNumbers}
           handleCardNumberCheck={setCheckInputStateOf("cardNumbers")}
         />
-        <CardExpireDateInputForm
+        <CardExpireDateInput
           expireDate={expireDate}
+          isValid={checkInputs.cardExpireDate}
           handleExpireDateInput={setExpireDate}
           handleCardExpireCheck={setCheckInputStateOf("cardExpireDate")}
         />
-        <CardOwnerInputForm
+        <CardOwnerInput
           ownerName={ownerName}
           handleOwnerNameInput={setOwnerName}
         />
-        <CVCInputForm
-          CVC={CVC}
-          handleCVCInput={setCVC}
+        <CVCInput
+          isValid={checkInputs.cardCVC}
           handleCardCVCCheck={setCheckInputStateOf("cardCVC")}
           handleModalVisible={modalSelector(MODAL_NAME.CARD_CVC)}
         />
-        <CardPasswordInputForm
-          password={password}
-          handlePasswordInput={setPassword}
+        <CardPasswordInput
+          isValid={checkInputs.cardPassword}
           handleCardPasswordCheck={setCheckInputStateOf("cardPassword")}
         />
-        <Button disabled={!allCompleted}>다음</Button>
-      </form>
+        <Button type="submit" disabled={!allCompleted}>
+          다음
+        </Button>
+      </Form>
       <Modal
         visible={modalVisibleState}
         handleVisible={() => setModalState(false)}
