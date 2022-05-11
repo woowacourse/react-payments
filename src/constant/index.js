@@ -30,6 +30,47 @@ const COLORS = {
   DARK_GRAY: '#525252',
   PINK: '#E36DB0',
   LIGHT_PINK: '#fcdfef',
+  WHITE: '#FFFFFF',
 }
 
-export { CARD_NUMBER, DUE_DATE, OWNER, CVC, PASSWORD, MONTH, COLORS }
+const CARD_COMPANY = {
+  포코: '#E24141',
+  준: '#547CE4',
+  공원: '#73BC6D',
+  브랜: '#DE59B9',
+  로이드: '#04C09E',
+  도비: '#E76E9A',
+  콜린: '#F37D3B',
+  썬: '#FBCD58',
+}
+
+const ERROR_MESSAGE = {
+  EXISTING_CARD_NUMBER: '이미 존재하는 카드번호입니다',
+  INVALID_MONTH: `${MONTH.MIN}~${MONTH.MAX}사이의 숫자를 입력해주세요`,
+  INVALID_YEAR: '현재 년도 이상의 값을 입력해주세요',
+}
+
+const ALERT_MESSAGE = {
+  CHECK_CARD_NUMBER: '카드번호를 확인해주세요',
+  CHECK_DUE_DATE: '만료일을 확인해주세요',
+}
+
+const PATH = {
+  MAIN: 'react-payments',
+  ADD: 'react-payments/add',
+  NICKNAME: 'react-payments/nickname/:id',
+}
+
+export {
+  CARD_NUMBER,
+  DUE_DATE,
+  OWNER,
+  CVC,
+  PASSWORD,
+  MONTH,
+  COLORS,
+  CARD_COMPANY,
+  ERROR_MESSAGE,
+  ALERT_MESSAGE,
+  PATH,
+}

@@ -1,91 +1,93 @@
-import { useState, useEffect } from 'react'
+import { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Card from 'components/common/Card'
 import Button from 'components/common/Button'
 import Header from 'components/common/Header'
+import Modal from 'components/common/Modal'
+import CardCompany from 'components/common/CardCompany'
+
+import CardNumberField from 'components/AddCard/CardNumberField'
+import DueDateField from 'components/AddCard/DueDateField'
+import OwnerField from 'components/AddCard/OwnerField'
+import CVCField from 'components/AddCard/CVCField'
+import PasswordField from 'components/AddCard/PasswordField'
 
 import {
   PageWrapper,
   CardWrapper,
   FooterWrapper,
   FormWrapper,
-} from 'pages/AddPage/style'
+  GridWrapper,
+} from 'pages/style'
 
-import { CARD_NUMBER, DUE_DATE, CVC, COLORS } from 'constant'
+import { COLORS, CARD_COMPANY, ALERT_MESSAGE } from 'constant'
 
-import CardNumberField from 'components/CardNumberField'
-import DueDateField from 'components/DueDateField'
-import OwnerField from 'components/OwnerField'
-import CVCField from 'components/CVCField'
-import PasswordField from 'components/PasswordField'
+import CardInfoContext from 'context/cardInfo-context'
 
 function AddPage() {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', ''])
-  const [dueDate, setDueDate] = useState({ month: '', year: '' })
-  const [owner, setOwner] = useState('')
-  const [cvc, setCvc] = useState('')
-  const [password, setPassword] = useState({
-    firstPassword: '',
-    secondPassword: '',
-  })
-  const [isFieldFulfilled, setIsFieldFulfilled] = useState(false)
-  const [error, setError] = useState({ dueMonth: false, dueYear: false })
+  const {
+    cardInfo,
+    isError: { cardNumber, dueMonth, dueYear },
+    isFormFulfilled,
+    handleCardCompany,
+  } = useContext(CardInfoContext)
+  const [isModalOpen, setIsModalOpen] = useState(!cardInfo.company)
 
-  useEffect(() => {
-    setIsFieldFulfilled(
-      cardNumbers.join('').length === CARD_NUMBER.UNIT_LENGTH * 4 &&
-        dueDate.month.length === DUE_DATE.UNIT_LENGTH &&
-        dueDate.year.length === DUE_DATE.UNIT_LENGTH &&
-        cvc.length === CVC.UNIT_LENGTH &&
-        password.firstPassword &&
-        password.secondPassword
-    )
-  }, [cardNumbers, dueDate, owner, cvc, password])
+  const navigate = useNavigate()
 
-  const handleSubmitChange = (e) => {
+  const openModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const handleSubmit = (e) => {
     e.preventDefault()
-    if (error.dueMonth || error.dueYear) {
-      alert('만료일을 확인해주세요')
-      return
+
+    if (cardNumber.error) {
+      return alert(ALERT_MESSAGE.CHECK_CARD_NUMBER)
     }
-    alert(`${owner}님의 카드가 등록되었습니다`)
+    if (dueMonth.error || dueYear.error) {
+      return alert(ALERT_MESSAGE.CHECK_DUE_DATE)
+    }
+    navigate(
+      `/react-payments/nickname/${Object.values(cardInfo.cardNumber).join('')}`
+    )
   }
 
   return (
     <PageWrapper>
       <Header backButton>카드 추가</Header>
-      <CardWrapper>
-        <Card
-          size="small"
-          company="우테코"
-          cardNumbers={cardNumbers}
-          owner={owner || 'NAME'}
-          dueMonth={dueDate.month || 'MM'}
-          dueYear={dueDate.year || 'YY'}
-        />
+      <CardWrapper onClick={openModal}>
+        <Card size="small" cardInfo={cardInfo} />
       </CardWrapper>
-      <FormWrapper onSubmit={handleSubmitChange}>
-        <CardNumberField
-          cardNumbers={cardNumbers}
-          setCardNumbers={setCardNumbers}
-        />
-        <DueDateField
-          dueDate={dueDate}
-          setDueDate={setDueDate}
-          error={error}
-          setError={setError}
-        />
-        <OwnerField owner={owner} setOwner={setOwner} />
-        <CVCField cvc={cvc} setCvc={setCvc} />
-        <PasswordField password={password} setPassword={setPassword} />
+      <FormWrapper onSubmit={handleSubmit}>
+        <CardNumberField />
+        <DueDateField />
+        <OwnerField />
+        <CVCField />
+        <PasswordField />
         <FooterWrapper>
-          {isFieldFulfilled && (
-            <Button type={'submit'} color={COLORS.MINT}>
+          {isFormFulfilled && (
+            <Button type={'submit'} color={COLORS.MINT} onClick={handleSubmit}>
               다음
             </Button>
           )}
         </FooterWrapper>
       </FormWrapper>
+      <Modal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
+        <GridWrapper>
+          {Object.entries(CARD_COMPANY).map(([company, color]) => (
+            <CardCompany
+              color={color}
+              company={company}
+              handleClick={() => {
+                handleCardCompany(company)
+              }}
+              key={company}
+            />
+          ))}
+        </GridWrapper>
+      </Modal>
     </PageWrapper>
   )
 }

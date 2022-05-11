@@ -1,17 +1,17 @@
 import { BrowserRouter } from 'react-router-dom'
-import AddPage from 'pages/AddPage'
+import CardListPage from 'pages/CardListPage'
 
 const Template = () => {
   return (
     <BrowserRouter>
-      <AddPage />
+      <CardListPage />
     </BrowserRouter>
   )
 }
 
 export default {
-  title: 'AddPage',
-  component: AddPage,
+  title: 'CardListPage',
+  component: CardListPage,
 }
 
 export const Default = Template.bind({})
