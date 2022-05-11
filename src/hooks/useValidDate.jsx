@@ -1,10 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useState } from 'react';
+
+import { ERROR_MESSAGE } from 'constants';
 
 export default function useValidDate(initialValue) {
   const [validDate, setValidDate] = useState(initialValue);
 
-  const handler = useCallback(({ target: { value } }) => {
-    if (value.slice(-1) === '/' && value.length !== 3) return;
+  const handleValidDate = useCallback(({ target: { value } }) => {
     // 정규식: 숫자와 /로 구성된 문자열이 아니면 return
     if (!/^$|^[0-9]{0,2}[/]{0,1}[0-9]{0,2}$/.test(value)) return;
 
@@ -23,5 +24,12 @@ export default function useValidDate(initialValue) {
     setValidDate(value);
   }, []);
 
-  return [validDate, handler];
+  const showValidDateValidation = (e) => {
+    if (e.target.validity.patternMismatch) {
+      e.target.setCustomValidity(ERROR_MESSAGE.INVALID_VALID_DATE);
+      e.target.reportValidity();
+    }
+  };
+
+  return { validDate, handleValidDate, showValidDateValidation };
 }

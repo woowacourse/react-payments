@@ -1,13 +1,12 @@
-import React from 'react';
-
-import Card from '../components/common/Card';
+import { Card } from 'components';
 
 export default {
-  title: 'Example/Card',
-  component: Card,
+  title: 'Components/Card',
 };
 
-const Template = args => <Card {...args} />;
+function Template(args) {
+  return <Card {...args} />;
+}
 
 export const Default = Template.bind({});
 Default.args = {

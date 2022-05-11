@@ -1,13 +1,12 @@
-import React from 'react';
-
-import Input from '../components/common/Input';
+import { Input } from 'components';
 
 export default {
-  title: 'Example/Input',
-  component: Input,
+  title: 'Components/Input',
 };
 
-const Template = args => <Input {...args} />;
+function Template(args) {
+  return <Input {...args} />;
+}
 
 export const CardNumber = Template.bind({});
 CardNumber.args = {
