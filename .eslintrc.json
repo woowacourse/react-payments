@@ -31,6 +31,7 @@
     "@typescript-eslint/no-explicit-any": "off",
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension":["warn",{"extensions":[".tsx"]}],
+    "react/jsx-props-no-spreading": "off",
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
     "import/extensions": [
@@ -44,6 +45,7 @@
         "scss": "never"
       }
     ],
+    "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "react/require-default-props": "off",
     "no-underscore-dangle": "off",
@@ -53,6 +55,7 @@
         "assert": "either" // either check for `htmlFor` or `nesting`
       }
     ],
-    "no-use-before-define": ["error", { "variable": false }]
+    "no-use-before-define": ["off"],
+    "@typescript-eslint/ban-types": "off"
   }
 }

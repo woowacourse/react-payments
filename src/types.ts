@@ -1,8 +1,9 @@
-export enum ActionType {
-  INPUT_CARDNUMBER = 'INPUT_CARDNUMBER',
-  INPUT_NAME = 'INPUT_NAME',
-  INPUT_EXPIRED_PERIOD = 'INPUT_EXPIRED_PERIOD',
-  INPUT_CVC = 'INPUT_CVC',
-  INPUT_PASSWORD = 'INPUT_PASSWORD',
-  UPDATE_EDITING_CVC = 'UPDATE_EDITING_CVC',
-}
+export type Card = {
+  cardType?: string;
+  cardNumber: string;
+  expiredPeriod: string;
+  ownerName: string;
+  cvc: string;
+  password: string;
+  cardName?: string;
+};
