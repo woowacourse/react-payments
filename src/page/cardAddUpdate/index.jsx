@@ -37,6 +37,7 @@ import {
   PASSWORD,
   PRIVACY_CODE,
 } from 'constants';
+import LoadingSpinner from 'components/common/LoadingSpinner';
 
 const initialCardInfo = {
   alias: '',
@@ -119,6 +120,10 @@ const CardAddUpdatePage = () => {
         });
     }
   }, []);
+
+  if (path === PATH.MODIFY && cardInfo === initialCardInfo) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div>

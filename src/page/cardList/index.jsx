@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import CardPreview from 'components/CardPreview';
@@ -8,9 +8,11 @@ import DeleteIcon from 'assets/delete_icon.png';
 
 import CARD_API from 'api';
 import { CONFIRM_MESSAGE } from 'constants';
+import LoadingSpinner from 'components/common/LoadingSpinner';
 
 const CardListPage = () => {
   const [cardList, setCardList] = useState([]);
+  const isLoading = useRef(true);
 
   const handleDeleteCard = async (e, cardId) => {
     e.preventDefault();
@@ -22,8 +24,15 @@ const CardListPage = () => {
   };
 
   useEffect(() => {
-    CARD_API.getCardList().then((response) => setCardList(response));
+    CARD_API.getCardList().then((response) => {
+      isLoading.current = false;
+      setCardList(response);
+    });
   }, []);
+
+  if (isLoading.current) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div>
