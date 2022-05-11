@@ -1,9 +1,23 @@
-export const isNumeric = (value) => !Number.isNaN(Number(value));
-export const isBackspace = (event) => event.keyCode === 8;
-export const hasProperty = (object, key) =>
-  Object.prototype.hasOwnProperty.call(object, key);
-export function* generateIndex(initialIndex) {
-  let index = initialIndex;
+export const convertFormDataToObject = (formData) => {
+  const object = {};
 
-  while (true) yield (index += 1);
-}
+  formData.forEach((value, key) => {
+    object[key] = value;
+  });
+
+  return object;
+};
+
+export const removeCrucialCardInfo = (card) => {
+  const clonedCard = { ...card };
+
+  ['cvc', 'firstPasswordDigit', 'secondPasswordDigit'].forEach((key) => {
+    delete clonedCard[key];
+  });
+
+  return clonedCard;
+};
+
+export const censorString = (string, censoringCharacter = '•') => {
+  return censoringCharacter.repeat(string.length);
+};
