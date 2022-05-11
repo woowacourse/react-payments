@@ -14,7 +14,7 @@ import { FooterWrapper, CenterItem, PageWrapper } from 'pages/style'
 import { BottomBorderInputWrapper } from 'components/common/Input/style'
 
 function NickNamePage() {
-  const { cardInfo, isFormFulfilled, clearContext } =
+  const { cardInfo, isFormFulfilled, clearCardInfo } =
     useContext(CardInfoContext)
   const { id: paramId } = useParams()
   const nickname = useRef()
@@ -32,12 +32,10 @@ function NickNamePage() {
       return
     }
 
-    // cardNumber를 id로 가지는 객체
     const cardId = Object.values(cardInfo.cardNumber).join('')
     setCardList(cardId, { ...cardInfo, cardNickName: nickname.current.value })
 
-    // state 비우기🤔
-    clearContext()
+    clearCardInfo()
   }
 
   return isFormFulfilled || isEditing ? (

@@ -89,7 +89,7 @@ export function CardInfoProvider({ children }) {
     })
   }
 
-  const clearContext = () => {
+  const clearCardInfo = () => {
     dispatch({
       type: 'CLEAR_CARD_INFO',
     })
@@ -108,7 +108,7 @@ export function CardInfoProvider({ children }) {
         handleOwnerChange,
         handleCvcChange,
         handlePasswordChange,
-        clearContext,
+        clearCardInfo,
       }}
     >
       {children}
