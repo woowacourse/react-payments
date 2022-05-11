@@ -1,8 +1,8 @@
-import CardPasswordInput from ".";
-import useCard from "../../hooks/useCard";
+import CardPasswordInput from '.';
+import useCard from '../../hooks/useCardInfoReducer';
 
 export default {
-  title: "CardPasswordInput",
+  title: 'CardPasswordInput',
   component: CardPasswordInput,
 };
 

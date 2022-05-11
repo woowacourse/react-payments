@@ -7,6 +7,7 @@
     "node-sass": "^7.0.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1"
   },
   "scripts": {
@@ -57,7 +58,8 @@
     "@storybook/react": "^6.4.22",
     "@storybook/testing-library": "^0.0.11",
     "gh-pages": "^3.2.3",
+    "storybook-react-context": "^0.6.0",
     "webpack": "^5.72.0"
   },
-  "homepage": "."
+  "homepage": "https://kangyunho1221.github.io/react-payments"
 }

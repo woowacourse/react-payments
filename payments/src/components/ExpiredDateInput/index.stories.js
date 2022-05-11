@@ -1,8 +1,8 @@
-import ExpiredDateInput from ".";
-import useCard from "../../hooks/useCard";
+import ExpiredDateInput from '.';
+import useCard from '../../hooks/useCardInfoReducer';
 
 export default {
-  title: "ExpiredDateInput",
+  title: 'ExpiredDateInput',
   component: ExpiredDateInput,
 };
 

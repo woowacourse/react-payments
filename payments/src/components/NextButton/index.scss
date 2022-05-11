@@ -1,5 +1,12 @@
 .next--button {
+  position: relative;
+  display: flex;
+  justify-content: end;
+  top: 127px;
   button {
+    border: none;
     cursor: pointer;
+    background-color: inherit;
+    color: #04c09e;
   }
 }

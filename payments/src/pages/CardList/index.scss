@@ -1,0 +1,25 @@
+.card-list__header {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  margin: 30px auto 30px 40px;
+  text-align: left;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  .user-nickname__tag {
+    text-align: center;
+  }
+}
+
+.card {
+  transition: all ease 0.7s 0s;
+  &:hover {
+    transform: scale(1.1);
+  }
+}

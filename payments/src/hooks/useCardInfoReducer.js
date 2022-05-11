@@ -68,7 +68,7 @@ const reducer = (state, action) => {
   }
 };
 
-const useCard = () => {
+const useCardInfoReducer = () => {
   const initState = {
     cardNumber: ['', '', '', ''],
     expiredDate: ['', ''],
@@ -83,4 +83,4 @@ const useCard = () => {
   return [inputStates, dispatch];
 };
 
-export default useCard;
+export default useCardInfoReducer;

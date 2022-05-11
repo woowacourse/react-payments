@@ -8,3 +8,13 @@ export const ERROR_MESSAGE = {
   NO_PASSWORD: '비밀번호 앞 두자리를 입력해 주세요',
   NO_CARD_TYPE: '카드 종류를 선택해주세요',
 };
+
+export const initState = {
+  cardNumber: ['', '', '', ''],
+  expiredDate: ['', ''],
+  ownerName: '',
+  secureCode: '',
+  password: ['', ''],
+  cardName: '',
+  color: '#d2d2d2',
+};

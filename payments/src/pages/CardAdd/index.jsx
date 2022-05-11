@@ -6,34 +6,48 @@ import CardPasswordInput from '../../components/CardPasswordInput';
 import ExpiredDateInput from '../../components/ExpiredDateInput';
 import OwnerNameInput from '../../components/OwnerNameInput';
 import SecureCodeInput from '../../components/SecureCodeInput';
-import useCard from '../../hooks/useCard';
 import NextButton from '../../components/NextButton';
 import CardColorPicker from '../../components/CardColorPicker';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import useNextButton from '../../hooks/useNextButton';
+import { UserContext } from '../../context/userContext';
+import { Link } from 'react-router-dom';
 
 const CardAdd = () => {
-  const [inputStates, updateInputStates] = useCard();
+  const { inputStates, updateInputStates } = useContext(UserContext);
   const [visible, setVisible] = useState(false);
   const { nextButtonClick } = useNextButton(inputStates, setVisible);
 
   const { cardNumber, expiredDate, ownerName, secureCode, password } = inputStates;
 
+  const onClickSubmit = (e) => {
+    try {
+      nextButtonClick(e);
+    } catch (error) {
+      alert(error.message);
+      e.preventDefault();
+    }
+  };
+
   return (
     <>
       <div className='card-add'>
         <header>
-          <button>{'<'}</button>
+          <Link to='/'>
+            <button>{'<'}</button>
+          </Link>
           <p>카드 추가</p>
         </header>
-        <form className='card-add__container' onChange={onchange}>
-          <Card state={inputStates} setVisible={setVisible} />
+        <form className='card-add__form'>
+          <Card state={inputStates} setVisible={setVisible} needBack={true} />
           <CardNumberInput state={cardNumber} updateForm={updateInputStates} />
           <ExpiredDateInput state={expiredDate} updateForm={updateInputStates} />
           <OwnerNameInput state={ownerName} updateForm={updateInputStates} />
           <SecureCodeInput state={secureCode} updateForm={updateInputStates} />
           <CardPasswordInput state={password} updateForm={updateInputStates} />
-          <NextButton onClick={nextButtonClick} />
+          <Link to={'/enterNickname'} onClick={onClickSubmit}>
+            <NextButton />
+          </Link>
         </form>
       </div>
       <CardColorPicker visible={visible} setVisible={setVisible} updateForm={updateInputStates} />

@@ -1,9 +1,8 @@
 import Button from '../elements/Button';
 import './index.scss';
-
-const NextButton = ({ onClick }) => {
+const NextButton = () => {
   return (
-    <div className='next--button' onClick={onClick}>
+    <div className='next--button'>
       <Button>다음</Button>
     </div>
   );
