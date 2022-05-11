@@ -11,8 +11,8 @@ const Container = styled.input`
   outline: 2px solid transparent;
   outline-offset: 2px;
   border: 1px solid ${COLORS.athensGray};
-  border-radius: ${LAYOUT.BORDER_RADIUS};
-  padding: 0rem 0.625rem;
+  border-radius: ${LAYOUT.BORDER_RADIUS}px;
+  padding: 0rem 0.325rem;
 
   background-color: ${COLORS.athensGray};
   transition: border-color ease 0.2s;

@@ -1,3 +1,25 @@
+const APP_NAME = '콤피 페이';
+
+const REQUEST_STATUS = {
+  SUCCESS: Symbol('리퀘스트 성공 결과'),
+  FAIL: Symbol('리퀘스트 실패 결과'),
+};
+
+const CARD_EDITOR_MODE = {
+  NEW: -1,
+};
+
+const CARD_COMPANY = {
+  1: { name: '포코 카드', color: 'purple', icon: '👾' },
+  2: { name: '준 카드', color: 'yellow', icon: '😆' },
+  3: { name: '공원 카드', color: 'sky', icon: '🌳' },
+  4: { name: '월터 카드', color: 'white', icon: '👻' },
+  5: { name: '콤피 카드', color: 'green', icon: '🦖' },
+  6: { name: '티거 카드', color: 'orange', icon: '🐯' },
+  7: { name: '민초 카드', color: 'blue', icon: '🌱' },
+  8: { name: '위니 카드', color: 'yellow', icon: '🧸' },
+};
+
 const CARD_NUMBER = {
   UNIT_COUNT: 4,
   UNIT_LENGTH: 4,
@@ -24,6 +46,20 @@ const CARD_PASSWORD = {
   LENGTH: 2,
 };
 
+const MODAL_STATE = {
+  HIDDEN: 'hidden',
+  VISIBLE: 'visible',
+  DISAPPEAR: 'disappear',
+};
+
+const PAGE_LIST = {
+  CARD_EDITOR: Symbol('카드 정보 추가/수정 페이지'),
+  CARD_UPDATED: Symbol('카드 정보 업데이트 완료 페이지'),
+  CARD_LIST: Symbol('등록된 카드 목록 페이지'),
+};
+
+const DEFAULT_PAGE = PAGE_LIST.CARD_LIST;
+
 const ERROR_MESSAGE = {
   IS_NOT_VALID_CARD: '카드 정보가 올바르지 않습니다.\n입력한 내용을 확인해주세요.',
   CARD_NUMBER: {
@@ -39,7 +75,7 @@ const ERROR_MESSAGE = {
     IS_EXPIRED: '이미 만료된 카드입니다.',
   },
   USER_NAME: {
-    IS_NOT_ENGLISH_NAME: '영어와 공백만 입력할 수 있습니다.',
+    IS_NOT_ENGLISH_NAME: '카드 사용자 이름은 영어와 공백만 입력할 수 있습니다.',
   },
   SECURITY_CODE: {
     IS_NOT_INTEGER: '보안 코드는 숫자로만 입력할 수 있습니다.',
@@ -51,4 +87,18 @@ const ERROR_MESSAGE = {
   },
 };
 
-export { CARD_NUMBER, EXPIRE_DATE, USER_NAME, SECURITY_CODE, CARD_PASSWORD, ERROR_MESSAGE };
+export {
+  APP_NAME,
+  CARD_EDITOR_MODE,
+  REQUEST_STATUS,
+  CARD_COMPANY,
+  CARD_NUMBER,
+  EXPIRE_DATE,
+  USER_NAME,
+  SECURITY_CODE,
+  CARD_PASSWORD,
+  MODAL_STATE,
+  PAGE_LIST,
+  DEFAULT_PAGE,
+  ERROR_MESSAGE,
+};

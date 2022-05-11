@@ -10,10 +10,10 @@ export default {
 };
 
 const Template = () => {
-  const { state, onChangeTextField } = useCardState();
+  const { state, onChangeCardState } = useCardState();
   const { cardPassword } = state;
 
-  return <CardPasswordField cardPassword={cardPassword} onChange={onChangeTextField} />;
+  return <CardPasswordField cardPassword={cardPassword} onChange={onChangeCardState} />;
 };
 
 export const DefaultCardPasswordField = Template.bind({});

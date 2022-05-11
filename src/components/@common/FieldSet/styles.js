@@ -22,10 +22,9 @@ const InputTitle = styled.span`
   display: flex;
   align-items: center;
 
-  font-size: 0.75rem;
-  line-height: 0.875rem;
+  font-size: 1rem;
 
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.85rem;
 
   color: ${COLORS.dorado};
 `;
@@ -42,6 +41,7 @@ const InputContainer = styled.div`
 
 const ErrorMessage = styled.div`
   font-size: 0.75rem;
+  height: 0.8rem;
   color: ${BRAND_COLORS.danger};
 `;
 

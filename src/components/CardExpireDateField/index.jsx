@@ -4,8 +4,8 @@ import useErrorMessage from 'hooks/useErrorMessage';
 import FieldSet from 'components/@common/FieldSet';
 import TextField from 'components/@common/TextField';
 
-import { validateExpireDate } from 'validators';
 import { EXPIRE_DATE } from 'constants';
+import { validateExpireDate } from 'validators';
 
 function CardExpireDateField({ expireMonth, expireYear, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({
@@ -14,7 +14,12 @@ function CardExpireDateField({ expireMonth, expireYear, onChange }) {
   });
 
   return (
-    <FieldSet title="만료일" inputWidth={50} errorMessage={errorMessage}>
+    <FieldSet
+      title="만료일"
+      inputWidth={50}
+      nextFocusLength={EXPIRE_DATE.MONTH_LENGTH}
+      errorMessage={errorMessage}
+    >
       <TextField
         name="expireMonth"
         type="number"
@@ -22,7 +27,7 @@ function CardExpireDateField({ expireMonth, expireYear, onChange }) {
         placeholder="MM"
         maxLength={EXPIRE_DATE.MONTH_LENGTH}
         onChange={onChange}
-        onBlur={() => handleError(!expireMonth || !expireYear)}
+        onBlur={(event) => handleError(event, !expireMonth || !expireYear)}
       />
       /
       <TextField
@@ -32,7 +37,7 @@ function CardExpireDateField({ expireMonth, expireYear, onChange }) {
         placeholder="YY"
         maxLength={EXPIRE_DATE.YEAR_LENGTH}
         onChange={onChange}
-        onBlur={() => handleError(!expireMonth || !expireYear)}
+        onBlur={(event) => handleError(event, !expireMonth || !expireYear)}
       />
     </FieldSet>
   );

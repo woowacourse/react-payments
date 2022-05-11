@@ -10,10 +10,10 @@ export default {
 };
 
 const Template = () => {
-  const { state, onChangeTextField } = useCardState();
+  const { state, onChangeCardState } = useCardState();
   const { cardNumber } = state;
 
-  return <CardNumberField cardNumber={cardNumber} onChange={onChangeTextField} />;
+  return <CardNumberField cardNumber={cardNumber} onChange={onChangeCardState} />;
 };
 
 export const DefaultCardNumberField = Template.bind({});

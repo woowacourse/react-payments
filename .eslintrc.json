@@ -26,6 +26,9 @@
     "implicit-arrow-linebreak": "off",
     "no-unused-expressions": "off",
     "no-confusing-arrow": "off",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "indent": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "no-restricted-globals": "off"
   }
 }

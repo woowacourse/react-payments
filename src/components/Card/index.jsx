@@ -1,6 +1,7 @@
+import { CARD_COMPANY } from 'constants';
 import PropTypes from 'prop-types';
 
-import { Container, CardContainer, ComponyName, UserName, ExpireDate, CardNumber } from './styles';
+import Container from './styles';
 
 const cardNumberFormatter = (cardNumber) => {
   const newCardNumber = [...cardNumber].map((unit) => (unit === '' ? '0000' : unit));
@@ -15,36 +16,55 @@ const cardNumberFormatter = (cardNumber) => {
   return newCardNumber.join('-');
 };
 
-function Card({ companyName, cardNumber, userName, expireMonth, expireYear, isComplete }) {
-  return (
-    <Container isComplete={isComplete}>
-      <CardContainer>
-        <ComponyName>{companyName}</ComponyName>
-        <UserName>{userName}</UserName>
+function Card({
+  cardName,
+  companyId,
+  cardNumber,
+  userName,
+  expireMonth,
+  expireYear,
+  isMargin,
+  onClick,
+}) {
+  const { name = '', color = 'gray', icon = '' } = CARD_COMPANY[companyId] || {};
 
-        <ExpireDate>{expireMonth && expireYear && `${expireMonth} / ${expireYear}`}</ExpireDate>
-        <CardNumber>{cardNumberFormatter(cardNumber)}</CardNumber>
-      </CardContainer>
+  return (
+    <Container color={color} companyId={companyId} isMargin={isMargin} isClick={!!onClick}>
+      <div className="card" onClick={onClick}>
+        <div className="card-name">{cardName}</div>
+        <div className="company-name">{name}</div>
+        <div className="icon">{icon}</div>
+        <div className="user-name">{userName}</div>
+
+        <div className="expire-date">
+          {expireMonth && expireYear && `${expireMonth} / ${expireYear}`}
+        </div>
+        <div className="card-number">{cardNumberFormatter(cardNumber)}</div>
+      </div>
     </Container>
   );
 }
 
 Card.defaultProps = {
-  companyName: '',
+  cardName: '',
+  companyId: '0',
   cardNumber: ['', '', '', ''],
   userName: '',
   expireMonth: '',
   expireYear: '',
-  isComplete: false,
+  isMargin: true,
+  onClick: null,
 };
 
 Card.propTypes = {
-  companyName: PropTypes.string,
+  cardName: PropTypes.string,
+  companyId: PropTypes.string,
   cardNumber: PropTypes.arrayOf(PropTypes.string),
   userName: PropTypes.string,
   expireMonth: PropTypes.string,
   expireYear: PropTypes.string,
-  isComplete: PropTypes.bool,
+  isMargin: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 export default Card;

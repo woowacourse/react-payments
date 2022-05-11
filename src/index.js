@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import { Global } from '@emotion/react';
 
-import 'styles/index.css';
+import { PageContextProvider } from 'contexts/PageContext';
+import appStyles from 'styles/app';
+
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Global styles={appStyles} />
+    <PageContextProvider>
+      <App />
+    </PageContextProvider>
   </React.StrictMode>,
 );

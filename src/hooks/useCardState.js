@@ -1,6 +1,8 @@
 import { useReducer } from 'react';
 
 const initialState = {
+  cardName: '',
+  companyId: '',
   cardNumber: ['', '', '', ''],
   expireMonth: '',
   expireYear: '',
@@ -18,7 +20,10 @@ function reducer(state, { type, contents }) {
     case 'cardNumber':
       {
         const { index, value } = contents;
-        newState.cardNumber[index] = cardNumberFormatter(value);
+        const newCardNumber = [...newState.cardNumber];
+
+        newCardNumber[index] = cardNumberFormatter(value);
+        newState.cardNumber = newCardNumber;
       }
       break;
 
@@ -38,34 +43,35 @@ const isInputComplete = (state) => {
   const necessaryInputState = { ...state };
 
   delete necessaryInputState.userName;
+  delete necessaryInputState.cardName;
 
   return Object.entries(necessaryInputState).every(([_, value]) => value !== '');
 };
 
-const useCardState = () => {
-  const [cardState, dispatch] = useReducer(reducer, initialState);
+const useCardState = (cardData) => {
+  const [cardState, dispatch] = useReducer(reducer, cardData || initialState);
   const isComplete = isInputComplete(cardState);
 
-  const onChangeTextField = ({ target }, option = {}) => {
-    const textFieldName = target.name;
+  const onChangeCardState = ({ currentTarget }, option = {}) => {
+    const { name: textFieldName, value: textFieldValue } = currentTarget;
 
     switch (textFieldName) {
       case 'cardNumber':
         dispatch({
           type: textFieldName,
-          contents: { index: option.index, value: target.value },
+          contents: { index: option.index, value: textFieldValue },
         });
         break;
 
       default:
         dispatch({
           type: textFieldName,
-          contents: target.value,
+          contents: textFieldValue,
         });
     }
   };
 
-  return { state: { ...cardState, isComplete }, onChangeTextField };
+  return { state: { ...cardState, isComplete }, onChangeCardState };
 };
 
 export default useCardState;

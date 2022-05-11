@@ -5,8 +5,8 @@ import FieldSet from 'components/@common/FieldSet';
 import TextField from 'components/@common/TextField';
 import InputLengthText from 'components/@common/InputLengthText';
 
-import { validateUserName } from 'validators';
 import { USER_NAME } from 'constants';
+import { validateUserName } from 'validators';
 
 function CardUserNameField({ userName, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({

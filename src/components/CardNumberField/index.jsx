@@ -4,8 +4,8 @@ import useErrorMessage from 'hooks/useErrorMessage';
 import FieldSet from 'components/@common/FieldSet';
 import TextField from 'components/@common/TextField';
 
-import { validateCardNumber } from 'validators';
 import { CARD_NUMBER } from 'constants';
+import { validateCardNumber } from 'validators';
 
 function CardNumberField({ cardNumber, onChange }) {
   const { errorMessage, handleError } = useErrorMessage({
@@ -14,7 +14,11 @@ function CardNumberField({ cardNumber, onChange }) {
   });
 
   return (
-    <FieldSet title="카드 번호" errorMessage={errorMessage}>
+    <FieldSet
+      title="카드 번호"
+      nextFocusLength={CARD_NUMBER.UNIT_LENGTH}
+      errorMessage={errorMessage}
+    >
       {Array.from({ length: CARD_NUMBER.UNIT_COUNT }).map((_, index) => (
         <TextField
           type={index < CARD_NUMBER.MASKING_INDEX ? 'number' : 'password'}
@@ -25,7 +29,7 @@ function CardNumberField({ cardNumber, onChange }) {
           value={cardNumber[index]}
           maxLength={CARD_NUMBER.UNIT_LENGTH}
           onChange={(event) => onChange(event, { index })}
-          onBlur={() => handleError(!cardNumber.every((unit) => unit !== ''))}
+          onBlur={(event) => handleError(event, !cardNumber.every((unit) => unit !== ''))}
         />
       ))}
     </FieldSet>

@@ -70,18 +70,28 @@ const ALIGN_TRANSFORM = {
 
 const Container = styled.div`
   position: relative;
+  display: inline;
   overflow: visible;
 
   > .tool-tip-text {
     position: absolute;
-    display: none;
-    border-radius: ${LAYOUT.BORDER_RADIUS};
+    visibility: hidden;
+    border-radius: ${LAYOUT.BORDER_RADIUS}px;
     text-align: center;
     background-color: #000;
     color: #fff;
-    min-width: 7.5rem;
+    white-space: nowrap;
     padding: 0.425rem;
     font-size: 0.75rem;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    ${({ isDisabled }) =>
+      isDisabled &&
+      css`
+        display: none;
+      `}
 
     &::after {
       content: '';
@@ -93,7 +103,8 @@ const Container = styled.div`
 
   &:hover {
     .tool-tip-text {
-      display: block;
+      visibility: visible;
+      opacity: 1;
     }
   }
 `;
