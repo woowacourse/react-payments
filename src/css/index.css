@@ -5,6 +5,7 @@
 @import 'css/palette.css';
 @import 'css/tooltip.css';
 @import 'css/utils.css';
+@import 'css/loading.css';
 
 body {
   display: flex;
