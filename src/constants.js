@@ -3,6 +3,11 @@ export const PATH = {
   ADD: 'add',
 };
 
+export const GET = 'GET';
+export const POST = 'POST';
+export const PATCH = 'PATCH';
+export const DELETE = 'DELETE';
+
 export const PASS = 'pass';
 export const FAIL = 'fail';
 export const STEP1 = 'step1';
