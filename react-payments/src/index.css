@@ -1,34 +1,3 @@
-:root {
-  --page-default-color: #fff;
-  --page-title-color: #383838;
-  --page-border-color: #e5e5e5;
-  --keyboard-hover-color: #80deea;
-  --keyboard-color: #00bcd4;
-  --error-message-color: tomato;
-  --success-message-color: #7dcd00;
-  --header-color: #525252;
-  --default-text-color: #04c09e;
-  --input-color: #ecebf1;
-  --input-border-color: #9ca3af;
-  --helpbox-border-color: #bababa;
-  --helpbox-text-color: #969696;
-  --helpbox-hover-color: #80deea;
-  --helpbox-color: #00bcd4;
-  --help-modal-text-color: #3a3a3abf;
-  --help-modal-color: #e5e5e5;
-  --poco-card-color: #e24141;
-  --jun-card-color: #547ce4;
-  --gongwon-card-color: #73bc6d;
-  --bran-card-color: #de59b9;
-  --roid-card-color: #04c09e;
-  --dobby-card-color: #e76e9a;
-  --collin-card-color: #f37d3b;
-  --sun-card-color: #fbcd58;
-  --card-chip-color: #cbba64;
-  --default-card-color: #94dacd;
-  --card-text-color: #575757;
-}
-
 body {
   display: flex;
   flex-direction: column;
@@ -36,6 +5,7 @@ body {
   align-items: center;
   justify-content: center;
   margin: 0;
+  font-family: "Jua", sans-serif;
 }
 
 input {
@@ -43,7 +13,7 @@ input {
 }
 
 #root {
-  background-color: var(--page-default-color);
+  background-color: #fff;
   width: 380px;
   min-width: 375px;
   height: 865px;
@@ -54,20 +24,4 @@ input {
 .app {
   height: 100%;
   padding: 16px 24px;
-}
-
-.page-title {
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 22px;
-  display: flex;
-  align-items: center;
-
-  color: var(--page-title-color);
-}
-
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

@@ -8,11 +8,11 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
-    "gh-pages": "^3.2.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "uuid": "^8.3.2",
+    "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -21,7 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public",
+    "build:storybook": "build-storybook -s public",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "chromatic": "npx chromatic --project-token=f5e114bf0896"
@@ -56,6 +56,7 @@
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.4.22",
+    "@storybook/addon-contexts": "^5.3.21",
     "@storybook/addon-essentials": "^6.4.22",
     "@storybook/addon-interactions": "^6.4.22",
     "@storybook/addon-links": "^6.4.22",
@@ -67,6 +68,9 @@
     "@storybook/react": "^6.4.22",
     "@storybook/testing-library": "^0.0.11",
     "chromatic": "^6.5.4",
+    "gh-pages": "^3.2.3",
+    "storybook-react-context": "^0.6.0",
+    "storybook-react-router": "^1.0.8",
     "webpack": "^5.72.0"
   }
 }

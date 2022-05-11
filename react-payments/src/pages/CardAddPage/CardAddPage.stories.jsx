@@ -1,8 +1,9 @@
-import CardAddPage from "./CardAddPage.component";
 import { userEvent, within } from "@storybook/testing-library";
 
+import CardAddPage from "pages/CardAddPage/CardAddPage.pages";
+
 export default {
-  title: "CardAddPage",
+  title: "Pages/CardAddPage",
   component: CardAddPage,
 };
 
@@ -14,31 +15,30 @@ DefaultCardAddPage.args = {};
 
 export const CompleteCardAddPage = Template.bind({});
 
-CompleteCardAddPage.play = async ({ canvasElement }) => {
+CompleteCardAddPage.play = ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
-  await userEvent.type(canvas.getByTestId("card-number-0"), "1234");
-  await userEvent.type(canvas.getByTestId("card-number-1"), "2345");
-  await userEvent.type(canvas.getByTestId("card-number-2"), "3456");
-  await userEvent.type(canvas.getByTestId("card-number-3"), "4567");
+  userEvent.type(canvas.getByTestId("card-number-0"), "1234");
+  userEvent.type(canvas.getByTestId("card-number-1"), "2345");
+  userEvent.type(canvas.getByTestId("card-number-2"), "3456");
+  userEvent.type(canvas.getByTestId("card-number-3"), "4567");
 
-  await userEvent.type(canvas.getByTestId("expire-date-0"), "12");
-  await userEvent.type(canvas.getByTestId("expire-date-1"), "22");
+  userEvent.type(canvas.getByTestId("expire-date-0"), "12");
+  userEvent.type(canvas.getByTestId("expire-date-1"), "22");
 
-  await userEvent.type(canvas.getByTestId("card-user-0"), "스밍");
+  userEvent.type(canvas.getByTestId("card-user"), "스밍");
 
-  await userEvent.click(canvas.getByTestId("security-code-0"));
-  await userEvent.click(canvas.getByTestId("1"));
-  await userEvent.click(canvas.getByTestId("2"));
-  await userEvent.click(canvas.getByTestId("3"));
-  await userEvent.click(canvas.getByTestId("X"));
+  userEvent.click(canvas.getByTestId("security-code"));
+  userEvent.click(canvas.getByTestId("1"));
+  userEvent.click(canvas.getByTestId("2"));
+  userEvent.click(canvas.getByTestId("3"));
+  userEvent.click(canvas.getByTestId("X"));
 
-  await userEvent.click(canvas.getAllByTestId("card-password-0")[0]);
-  await userEvent.click(canvas.getByTestId("1"));
-  await userEvent.click(canvas.getByTestId("2"));
-  await userEvent.click(canvas.getByTestId("X"));
+  userEvent.click(canvas.getAllByTestId("card-password")[0]);
+  userEvent.click(canvas.getByTestId("1"));
+  userEvent.click(canvas.getByTestId("2"));
+  userEvent.click(canvas.getByTestId("X"));
 
-  await userEvent.click(canvas.getByTestId("card"));
-  const colorBoxes = document.querySelector(".color-box");
-  await userEvent.click(colorBoxes);
+  userEvent.click(canvas.getByTestId("card"));
+  userEvent.click(canvas.getAllByTestId("color-box")[0]);
 };

@@ -1,4 +1,4 @@
-import { MAX_LENGTH, MAX_MONTH } from "../constants";
+import { MAX_LENGTH, MAX_MONTH } from "constants";
 
 export const isOverMaxLength = (target, maxLength) =>
   target.value.length > maxLength;
@@ -23,7 +23,33 @@ export const isInValidCardNumber = (cardNumber) =>
     (number) => number.length !== MAX_LENGTH.CARD_NUMBER
   );
 
-export const isInValidCardType = (cardType) => !cardType;
+export const isInValidCardType = (cardType) => cardType === "defaultCard";
 
 export const isInValidSecurityCode = (securityCode) =>
   securityCode.length !== MAX_LENGTH.SECURITY_CODE;
+
+export const isAllInputReady = ({
+  cardNumberReady,
+  expireDateReady,
+  securityCodeReady,
+  cardPasswordReady,
+  cardTypeReady,
+}) => {
+  return !(
+    cardNumberReady &&
+    expireDateReady &&
+    securityCodeReady &&
+    cardPasswordReady &&
+    cardTypeReady
+  );
+};
+
+export const isInvalidCardName = (cardName) =>
+  cardName.length === 0 || cardName.length > MAX_LENGTH.CARD_NAME;
+
+export const isDuplicatedCardName = (newCardName, cardData) =>
+  Object.entries(cardData).some(
+    ([_, { cardName }]) => cardName === newCardName
+  );
+
+export const isEdit = (id) => typeof id !== "undefined";
