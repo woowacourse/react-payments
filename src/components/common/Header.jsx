@@ -1,28 +1,17 @@
-import PropTypes from 'prop-types';
+import { memo } from 'react';
+import useHeader from 'hooks/useHeader';
+import styles from 'css/module/Header.module.css';
 
-const Header = ({ title, left, right }) => {
+const Header = () => {
+  const { title, left, right } = useHeader();
+
   return (
-    <div className="header-container">
+    <div className={styles.container}>
       {left}
-      <h2 className="page-title">{title}</h2>
+      <h2 className={styles.title}>{title}</h2>
       {right}
     </div>
   );
 };
 
-Header.propTypes = {
-  /**
-   * header title
-   */
-  title: PropTypes.string,
-  /**
-   * left side of header
-   */
-  left: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  /**
-   * right side of header
-   */
-  right: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-};
-
-export default Header;
+export default memo(Header);

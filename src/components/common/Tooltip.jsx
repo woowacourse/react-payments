@@ -2,6 +2,7 @@ import { useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import { ReactComponent as TooltipIcon } from 'assets/tooltip_icon.svg';
 import { TOOLTIP_TYPES } from 'constants';
+import styles from 'css/module/Tooltip.module.css';
 
 const Tooltip = ({ type }) => {
   const [isHover, setIsHover] = useState(false);
@@ -10,11 +11,11 @@ const Tooltip = ({ type }) => {
   const handleMouseLeave = () => setIsHover(false);
 
   return (
-    <div className="tooltip">
+    <div className={styles.container}>
       <TooltipIcon onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
       {isHover && (
         <div
-          className="tooltip-content"
+          className={styles.content}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >

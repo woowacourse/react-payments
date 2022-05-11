@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #383838;
+}

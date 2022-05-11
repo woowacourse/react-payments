@@ -17,7 +17,7 @@
   z-index: 10;
 }
 
-.modal-dimmed {
+.dimmer {
   width: 100%;
   height: 100%;
 
@@ -33,26 +33,4 @@
   border-radius: 15px;
 
   z-index: 5;
-}
-
-.modal-item-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  cursor: pointer;
-}
-
-.modal-item-dot {
-  width: 2.8rem;
-  height: 2.8rem;
-
-  margin: 0.5rem 1rem;
-  border-radius: 50%;
-  background-color: #94dacd;
-}
-
-.modal-item-name {
-  font-size: 12px;
 }

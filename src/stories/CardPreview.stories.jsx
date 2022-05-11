@@ -26,7 +26,6 @@ export default {
         THEME.YELLOW,
       ],
     },
-    handleModal: { action: 'open-modal' },
   },
 };
 

@@ -1,18 +1,18 @@
-import { useState, useEffect, useReducer, useCallback } from 'react';
+import { useReducer, useCallback, useContext, useRef } from 'react';
+import useCardInfo from 'hooks/useCardInfo';
+import { Link } from 'react-router-dom';
+import { CardDispatch } from 'App';
 
 import FormInput from 'components/common/FormInput';
 import CardPreview from 'components/CardPreview';
 import Modal from 'components/common/Modal';
 import CardCompany from 'components/CardCompany';
-import Header from 'components/common/Header';
 import Button from 'components/common/Button';
 import Tooltip from 'components/common/Tooltip';
-import { ReactComponent as PrevIcon } from 'assets/prev_icon.svg';
 
-import { validator, checkFullFilled } from './validator';
-import { isObject } from 'utils';
+import { moveInputFocus } from 'utils';
+import { validator } from './validator';
 import { CRYPTO_STRING, INPUT_MAX_LENGTH } from 'constants';
-
 import {
   cardNumberInputInfoList,
   expiryDateInputInfoList,
@@ -21,6 +21,7 @@ import {
   cardPasswordInputInfoList,
   cardCompanyList,
 } from './data';
+import { ACTION, ROUTE } from 'constants';
 
 const initialCardInfo = {
   company: '',
@@ -44,72 +45,46 @@ const initialCardInfo = {
 };
 
 const CardAppPage = () => {
-  const [cardInfo, setCardInfo] = useState(initialCardInfo);
+  const { dispatch } = useContext(CardDispatch);
+  const [cardInfo, isFullFilled, handleCardInfo] = useCardInfo(initialCardInfo);
   const [modalVisible, handleModal] = useReducer(
     useCallback((visible) => !visible, []),
     false,
   );
-  const [isfullFilled, setIsFullFilled] = useState(false);
   const { number, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
+  const inputRef = useRef([]);
 
-  useEffect(() => {
-    if (checkFullFilled(cardInfo)) {
-      setIsFullFilled(true);
-      return;
-    }
+  const handleInputChange = useCallback(
+    ({ target }, item, id, maxLength) => {
+      const { name, value } = target;
 
-    setIsFullFilled(false);
-  }, [cardInfo]);
+      if (!validator[item](value, name)) return;
 
-  const handleChange = useCallback(({ target }, item) => {
-    const { name, value } = target;
+      handleCardInfo({ item, name, value });
 
-    if (!validator[item](value, name)) return;
+      if (value.length >= maxLength) moveInputFocus(inputRef, id + 1);
+    },
+    [handleCardInfo],
+  );
 
-    setCardInfo((prevCardInfo) => {
-      if (isObject(prevCardInfo[item])) {
-        return {
-          ...prevCardInfo,
-          [item]: {
-            ...prevCardInfo[item],
-            [name]: value,
-          },
-        };
-      }
+  const handleClickCompany = useCallback(
+    (company, theme) => {
+      handleCardInfo({ item: 'company', value: company });
+      handleCardInfo({ item: 'theme', value: theme });
 
-      return {
-        ...prevCardInfo,
-        [item]: value,
-      };
-    });
-  }, []);
-
-  const handleClickCompany = useCallback((company, theme) => {
-    setCardInfo((prevCardInfo) => ({
-      ...prevCardInfo,
-      company,
-      theme,
-    }));
-
-    handleModal();
-  }, []);
+      handleModal();
+    },
+    [handleCardInfo],
+  );
 
   return (
-    <>
-      <Header
-        title="카드 추가"
-        left={
-          <Button>
-            <PrevIcon />
-          </Button>
-        }
-      />
+    <div>
       <CardPreview
         number={number}
         ownerName={ownerName}
         expiryDate={expiryDate}
         company={company}
-        handleModal={handleModal}
+        handleClick={handleModal}
         theme={theme}
       />
       <FormInput
@@ -117,8 +92,9 @@ const CardAppPage = () => {
         inputTitle="카드 번호"
         inputInfoList={cardNumberInputInfoList}
         inputValue={number}
-        onChange={handleChange}
+        onChange={handleInputChange}
         theme={theme}
+        inputRef={inputRef}
       />
       <FormInput
         className="w-50"
@@ -126,16 +102,18 @@ const CardAppPage = () => {
         inputTitle="만료일"
         inputInfoList={expiryDateInputInfoList}
         inputValue={expiryDate}
-        onChange={handleChange}
+        onChange={handleInputChange}
         theme={theme}
+        inputRef={inputRef}
       />
       <FormInput
         item="ownerName"
         inputTitle="카드 소유자 이름(선택)"
         inputInfoList={cardOwnerNameInputInfoList}
         inputValue={ownerName}
-        onChange={handleChange}
+        onChange={handleInputChange}
         theme={theme}
+        inputRef={inputRef}
       >
         <div className="owner-name-length">
           {ownerName.length} / {INPUT_MAX_LENGTH.OWNER_NAME}
@@ -145,9 +123,10 @@ const CardAppPage = () => {
         item="privacyCode"
         inputTitle="보안코드(CVC/CVV)"
         inputInfoList={privacyCodeInputInfoList}
-        onChange={handleChange}
+        onChange={handleInputChange}
         inputValue={privacyCode}
         theme={theme}
+        inputRef={inputRef}
       >
         <Tooltip type="PRIVACY_CODE" />
       </FormInput>
@@ -156,13 +135,19 @@ const CardAppPage = () => {
         inputTitle="카드 비밀번호"
         inputInfoList={cardPasswordInputInfoList}
         inputValue={{ ...password, third: CRYPTO_STRING, fourth: CRYPTO_STRING }}
-        onChange={handleChange}
+        onChange={handleInputChange}
         theme={theme}
+        inputRef={inputRef}
       />
-      {isfullFilled && (
-        <Button theme={theme} className="next-button">
-          다음
-        </Button>
+      {isFullFilled && (
+        <Link
+          to={ROUTE.CONFIRM + cardInfo.id}
+          onClick={() => dispatch({ type: ACTION.CREATE_CARD, card: cardInfo })}
+        >
+          <Button theme={theme} className="next-button">
+            다음
+          </Button>
+        </Link>
       )}
       {modalVisible && (
         <Modal handleModal={handleModal}>
@@ -178,7 +163,7 @@ const CardAppPage = () => {
           </div>
         </Modal>
       )}
-    </>
+    </div>
   );
 };
 

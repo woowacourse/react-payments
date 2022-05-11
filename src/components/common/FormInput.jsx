@@ -1,6 +1,7 @@
-import { useCallback, memo } from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { isObject } from 'utils';
+import styles from 'css/module/FormInput.module.css';
 
 const FormInput = ({
   className,
@@ -11,25 +12,21 @@ const FormInput = ({
   theme,
   onChange,
   children,
+  inputRef,
 }) => {
-  const handleChange = useCallback(
-    (e) => {
-      onChange(e, item);
-    },
-    [onChange, item],
-  );
-
   return (
-    <div className="input-container">
-      <label className="input-title">{inputTitle}</label>
-      <div className={`input-box ${className}`}>
-        {inputInfoList.map(({ name, className = '', ...rest }, index) => (
+    <div className={styles.container}>
+      <label className={styles.title}>{inputTitle}</label>
+      <div className={`${styles.inputContainer} ${className}`}>
+        {inputInfoList.map(({ id, name, className = '', maxLength, ...rest }, index) => (
           <input
             key={index}
             name={name}
+            ref={(elem) => (inputRef.current[id] = elem)}
             className={`input-basic ${className} font-${theme}`}
+            maxLength={maxLength}
             value={isObject(inputValue) ? inputValue[name] : inputValue}
-            onChange={handleChange}
+            onChange={(e) => onChange(e, item, id, maxLength)}
             {...rest}
           />
         ))}

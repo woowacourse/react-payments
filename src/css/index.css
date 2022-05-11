@@ -1,9 +1,7 @@
 @import 'card.css';
 @import 'input.css';
 @import 'button.css';
-@import 'modal.css';
 @import 'utils.css';
-@import 'tooltip.css';
 @import 'palette.css';
 
 body {
@@ -14,14 +12,7 @@ body {
   margin-top: 30px;
 
   font-family: 'Roboto', sans-serif;
-}
-
-h1 {
-  text-align: center;
-}
-
-input {
-  font-size: 16px;
+  overflow: hidden;
 }
 
 .root {
@@ -37,23 +28,4 @@ input {
 .app {
   height: 100%;
   padding: 16px 24px;
-}
-
-.header-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-
-  margin-bottom: 20px;
-}
-
-.page-title {
-  display: flex;
-  align-items: center;
-
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #383838;
 }

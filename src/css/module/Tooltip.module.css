@@ -1,8 +1,8 @@
-.tooltip {
+.container {
   position: relative;
 }
 
-.tooltip-content {
+.content {
   min-width: 200px;
 
   position: absolute;
