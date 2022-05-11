@@ -1,7 +1,7 @@
 @import 'button.css';
 @import 'card.css';
 @import 'input.css';
-@import 'pageTitle.css';
+@import 'title.css';
 @import 'tooltip.css';
 
 body {
@@ -26,6 +26,13 @@ body {
   height: 100%;
   padding: 16px 24px;
   position: relative;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
 }
 
 /* utils */

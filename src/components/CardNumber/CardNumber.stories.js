@@ -1,15 +1,16 @@
 import CardNumber from './CardNumber';
-import { useState } from 'react';
+import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {
   title: 'CardAddPage/CardNumber',
   component: CardNumber,
+  decorators: [
+    (CardNumber) => (
+      <CardInfoContextProvider>
+        <CardNumber />
+      </CardInfoContextProvider>
+    ),
+  ],
 };
 
-const Template = (args) => {
-  const [cardNumbers, setCardNumbers] = useState(args.cardNumbers);
-  return <CardNumber cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />;
-};
-
-export const CardNumberInput = Template.bind({});
-CardNumberInput.args = { cardNumbers: ['', '', '', ''] };
+export const CardNumberInput = () => <CardNumber />;

@@ -1,15 +1,16 @@
 import CardPassword from './CardPassword';
-import { useState } from 'react';
+import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {
   title: 'CardAddPage/CardPassword',
   component: CardPassword,
+  decorators: [
+    (CardPassword) => (
+      <CardInfoContextProvider>
+        <CardPassword />
+      </CardInfoContextProvider>
+    ),
+  ],
 };
 
-const Template = (args) => {
-  const [cardPasswords, setCardPasswords] = useState(args.cardPasswords);
-  return <CardPassword cardPasswords={cardPasswords} setCardPasswords={setCardPasswords} />;
-};
-
-export const CardPasswordsInput = Template.bind({});
-CardPasswordsInput.args = { cardPasswords: ['', ''] };
+export const CardPasswordsInput = () => <CardPassword />;

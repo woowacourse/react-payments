@@ -1,11 +1,11 @@
-import { PAGES } from 'constants';
+import { Link } from 'react-router-dom';
 
-function PrevPageSign({ setPage }) {
-  const handleClick = () => {
-    setPage(PAGES.LIST);
-  };
-
-  return <div className="prev-page-sign" onClick={handleClick} />;
+function PrevPageSign() {
+  return (
+    <Link to="/react-payments">
+      <div className="prev-page-sign" />
+    </Link>
+  );
 }
 
 export default PrevPageSign;

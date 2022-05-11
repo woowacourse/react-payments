@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 function Button({ text }) {
   return (
     <div className="button-box">
@@ -11,7 +9,3 @@ function Button({ text }) {
 }
 
 export default Button;
-
-Button.propTypes = {
-  text: PropTypes.string.isRequired,
-};

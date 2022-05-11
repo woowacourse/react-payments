@@ -1,25 +1,16 @@
 import CardExpirationDate from './CardExpirationDate';
-import { useState } from 'react';
+import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {
   title: 'CardAddPage/CardExpirationDate',
   component: CardExpirationDate,
+  decorators: [
+    (CardExpirationDate) => (
+      <CardInfoContextProvider>
+        <CardExpirationDate />
+      </CardInfoContextProvider>
+    ),
+  ],
 };
 
-const Template = (args) => {
-  const [cardExpirationDate, setCardExpirationDate] = useState(args.cardExpirationDate);
-  return (
-    <CardExpirationDate
-      cardExpirationDate={cardExpirationDate}
-      setCardExpirationDate={setCardExpirationDate}
-    />
-  );
-};
-
-export const CardExpirationDateInput = Template.bind({});
-CardExpirationDateInput.args = {
-  cardExpirationDate: {
-    month: '',
-    year: '',
-  },
-};
+export const CardExpirationDateInput = () => <CardExpirationDate />;

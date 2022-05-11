@@ -1,20 +1,14 @@
 import Header from '../components/Header/Header';
-import Card from 'components/common/Card/Card';
 import PageTitle from 'components/common/PageTitle/PageTitle';
+import CardList from 'components/CardList/CardList';
 
-import { PAGES } from 'constants';
-
-function CardListPage({ setPage }) {
-  const handleCardAdd = () => {
-    setPage(PAGES.ADD);
-  };
-
+function CardListPage() {
   return (
     <div className="app">
       <Header>
         <PageTitle title="보유카드" />
       </Header>
-      <Card isEmpty handleCardAdd={handleCardAdd} />
+      <CardList />
     </div>
   );
 }

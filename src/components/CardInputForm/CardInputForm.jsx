@@ -1,25 +1,30 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { CardInfoContext } from 'CardInfoContextProvider';
 import { ERROR_MESSAGE } from 'constants';
+import { validator } from 'utils';
 
-function CardInputForm({ cardInfo, children }) {
-  const validator = (conditions) => {
-    conditions.forEach(({ checker, errorMsg }) => {
-      if (checker()) throw new Error(errorMsg);
-    });
-  };
+function CardInputForm({ children }) {
+  const navigate = useNavigate();
 
-  const checkCardNumber = (number1, number2, number3, number4) => {
+  const { state } = useContext(CardInfoContext);
+
+  const { number1, number2, number3, number4, month, year, cvc } = state.card;
+
+  const isUnderCardNumberLength = (number1, number2, number3, number4) => {
     return number1.length < 4 || number2.length < 4 || number3.length < 4 || number4.length < 4;
   };
 
-  const checkMonth = (month) => {
+  const isIncorrectMonth = (month) => {
     return Number(month) > 12 || Number(month) < 1;
   };
 
-  const checkYear = (year) => {
+  const isIncorrectYear = (year) => {
     return Number(year) < 22;
   };
 
-  const checkMonthAndYear = (month, year) => {
+  const isIncorrectMonthAndYear = (month, year) => {
     const date = new Date();
     const currentMonth = date.getMonth() + 1;
     const currentYear = Number(date.getFullYear().toString().slice(2, 4));
@@ -27,42 +32,41 @@ function CardInputForm({ cardInfo, children }) {
     return Number(month) < currentMonth && Number(year) === currentYear;
   };
 
-  const checkCVC = (cvc) => {
+  const isUnderCVClength = (cvc) => {
     return cvc.length < 3;
   };
 
   const checkCardInfo = ({ number1, number2, number3, number4, month, year, cvc }) => {
     validator([
       {
-        checker: () => checkCardNumber(number1, number2, number3, number4),
-        errorMsg: ERROR_MESSAGE.CARD_NUMBER,
+        checker: () => isUnderCardNumberLength(number1, number2, number3, number4),
+        errorMsg: ERROR_MESSAGE.CARD_NUMBER_LENGTH,
       },
       {
-        checker: () => checkMonth(month),
+        checker: () => isIncorrectMonth(month),
         errorMsg: ERROR_MESSAGE.MONTH,
       },
       {
-        checker: () => checkYear(year),
+        checker: () => isIncorrectYear(year),
         errorMsg: ERROR_MESSAGE.YEAR,
       },
       {
-        checker: () => checkMonthAndYear(month, year),
+        checker: () => isIncorrectMonthAndYear(month, year),
         errorMsg: ERROR_MESSAGE.MONTH_AND_YEAR,
       },
       {
-        checker: () => checkCVC(cvc),
+        checker: () => isUnderCVClength(cvc),
         errorMsg: ERROR_MESSAGE.CVC,
       },
     ]);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const { number1, number2, number3, number4, month, year, cvc } = cardInfo;
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
     try {
       checkCardInfo({ number1, number2, number3, number4, month, year, cvc });
+      navigate('/card-add-success');
     } catch (error) {
       alert(error.message);
     }

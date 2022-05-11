@@ -1,17 +1,16 @@
 import CardOwner from './CardOwner';
-import { useState } from 'react';
+import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {
   title: 'CardAddPage/CardOwner',
   component: CardOwner,
+  decorators: [
+    (CardOwner) => (
+      <CardInfoContextProvider>
+        <CardOwner />
+      </CardInfoContextProvider>
+    ),
+  ],
 };
 
-const Template = (args) => {
-  const [cardOwner, setOwner] = useState(args.cardOwner);
-  return <CardOwner cardOwner={cardOwner} setOwner={setOwner} />;
-};
-
-export const CardOwnerInput = Template.bind({});
-CardOwnerInput.args = {
-  cardOwner: '',
-};
+export const CardOwnerInput = () => <CardOwner />;

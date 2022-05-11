@@ -1,14 +1,16 @@
 import PrevPageSign from './PrevPageSign';
-import { useState } from 'react';
+import { MemoryRouter } from 'react-router-dom';
 
 export default {
   title: 'CardAddPage/PrevPageSign',
   component: PrevPageSign,
+  decorators: [
+    (PrevPageSign) => (
+      <MemoryRouter>
+        <PrevPageSign />
+      </MemoryRouter>
+    ),
+  ],
 };
 
-const Template = (args) => {
-  const [page, setPage] = useState(args.page);
-  return <PrevPageSign setPage={setPage} />;
-};
-
-export const Default = Template.bind({});
+export const Default = () => <PrevPageSign />;

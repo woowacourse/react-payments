@@ -4,6 +4,9 @@
 }
 
 .button-style {
+  position: absolute;
+  right: 27px;
+  bottom: 16px;
   margin-right: 10px;
   font-size: 14px;
   font-weight: 700;

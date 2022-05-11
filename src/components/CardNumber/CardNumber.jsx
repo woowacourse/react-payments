@@ -1,9 +1,17 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { CardInfoContext } from 'CardInfoContextProvider';
 
-import { LIMIT_LENGTH } from 'constants';
+import { LIMIT_LENGTH, ACTION } from 'constants';
 import { limitInputLength, inputNumberOnly } from 'utils';
 
-function CardNumber({ cardNumbers, setCardNumbers }) {
+function CardNumber() {
+  const { state, dispatch } = useContext(CardInfoContext);
+
+  const { number1, number2, number3, number4 } = state.card;
+
+  const cardNumbers = [number1, number2, number3, number4];
+  const setCardNumbers = (cardNumbers) => dispatch({ type: ACTION.SET_CARD_NUMBERS, cardNumbers });
+
   const handleChange = (event) => {
     const { value, name } = event.target;
 
@@ -40,54 +48,24 @@ function CardNumber({ cardNumbers, setCardNumbers }) {
     <div className="input-container">
       <span className="input-title">카드 번호</span>
       <div className="input-box">
-        <input
-          name="number1"
-          className={`input-basic ${
-            cardNumbers[0].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
-          }`}
-          type="number"
-          onChange={handleChange}
-          value={cardNumbers[0]}
-          required
-        />
-        <input
-          name="number2"
-          className={`input-basic ${
-            cardNumbers[1].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
-          }`}
-          type="number"
-          onChange={handleChange}
-          value={cardNumbers[1]}
-          required
-        />
-        <input
-          name="number3"
-          className={`input-basic ${
-            cardNumbers[2].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
-          }`}
-          type="password"
-          onChange={handleChange}
-          value={cardNumbers[2]}
-          required
-        />
-        <input
-          name="number4"
-          className={`input-basic ${
-            cardNumbers[3].length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : null
-          }`}
-          type="password"
-          onChange={handleChange}
-          value={cardNumbers[3]}
-          required
-        />
+        {cardNumbers.map((cardNumber, idx) => {
+          return (
+            <input
+              name={`number${idx + 1}`}
+              className={`input-basic ${
+                cardNumber.length >= LIMIT_LENGTH.CARD_NUMBER ? 'input-correct' : ''
+              }`}
+              type={`${idx < 2 ? 'number' : 'password'}`}
+              onChange={handleChange}
+              value={cardNumber}
+              key={idx}
+              required
+            />
+          );
+        })}
       </div>
     </div>
   );
 }
 
 export default CardNumber;
-
-CardNumber.propTypes = {
-  cardNumbers: PropTypes.array.isRequired,
-  setCardNumbers: PropTypes.func.isRequired,
-};

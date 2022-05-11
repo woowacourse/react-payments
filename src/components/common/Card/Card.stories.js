@@ -1,8 +1,16 @@
 import Card from './Card';
+import { MemoryRouter } from 'react-router-dom';
 
 export default {
   title: 'Common/Card',
   component: Card,
+  decorators: [
+    (Card) => (
+      <MemoryRouter>
+        <Card />
+      </MemoryRouter>
+    ),
+  ],
 };
 
 const Template = (args) => <Card {...args} />;

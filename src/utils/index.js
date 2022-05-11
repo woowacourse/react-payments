@@ -14,4 +14,10 @@ const limitInputLength = (value, length) => {
   return value.slice(0, length);
 };
 
-export { inputNumberOnly, inputEnglishOnly, limitInputLength };
+const validator = (conditions) => {
+  conditions.forEach(({ checker, errorMsg }) => {
+    if (checker()) throw new Error(errorMsg);
+  });
+};
+
+export { inputNumberOnly, inputEnglishOnly, limitInputLength, validator };
