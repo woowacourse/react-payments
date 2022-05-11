@@ -1,6 +1,6 @@
-import { INPUT_TYPE } from '../constant';
+import { INPUT_TYPE } from 'constant';
 
-export default {
+const validator = {
   validateCardNumber: cardNumber => {
     const cardNumberRegex = /^[0-9]{4,4}$/;
 
@@ -41,3 +41,5 @@ export default {
     return !regex.test(data) && inputType !== INPUT_TYPE.BACKWARD;
   },
 };
+
+export default validator;

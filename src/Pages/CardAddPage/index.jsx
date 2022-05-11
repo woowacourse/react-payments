@@ -1,12 +1,10 @@
+import { useContext } from 'react';
+import { CardContext } from 'context/CardContext';
 import styled from 'styled-components';
-import Head from '../../components/Modules/Head';
-import Card from '../../components/Modules/Card';
-import CardAddForm from '../../components/Templates/CardAddForm';
-import { CardNumberContextProvider } from '../../context/CardNumberContext';
-import { CardOwnerContextProvider } from '../../context/CardOwnerContext';
-import { ExpiredDateContextProvider } from '../../context/ExpiredDateContext';
-import { PasswordContextProvider } from '../../context/PasswordContext';
-import { SecurityNumberContextProvider } from '../../context/SecurityNumberContext';
+import Head from 'components/Modules/Head';
+import { LINK } from '../../constant/Link';
+import CardContainer from 'containers/Card/CardContainer';
+import CardAddFormContainer from 'containers/Form/CardAddFormContainer';
 
 const Page = styled.div`
   width: 100%;
@@ -15,39 +13,31 @@ const Page = styled.div`
   flex-direction: column;
 `;
 
-const CardContainer = styled.div`
+const CardSection = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 25px;
 `;
 
-const AddFormContainer = styled.div`
+const CardAddFormSection = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 19px;
 `;
 
 function CardAddPage() {
+  const { inputtedInfo } = useContext(CardContext);
+
   return (
-    <CardNumberContextProvider>
-      <ExpiredDateContextProvider>
-        <CardOwnerContextProvider>
-          <SecurityNumberContextProvider>
-            <PasswordContextProvider>
-              <Page>
-                <Head>카드 추가</Head>
-                <CardContainer>
-                  <Card />
-                </CardContainer>
-                <AddFormContainer>
-                  <CardAddForm />
-                </AddFormContainer>
-              </Page>
-            </PasswordContextProvider>
-          </SecurityNumberContextProvider>
-        </CardOwnerContextProvider>
-      </ExpiredDateContextProvider>
-    </CardNumberContextProvider>
+    <Page>
+      <Head link={LINK.CARD_LIST_PAGE}>카드 추가</Head>
+      <CardSection>
+        <CardContainer {...inputtedInfo} disable={true} />
+      </CardSection>
+      <CardAddFormSection>
+        <CardAddFormContainer link={LINK.CARD_COMPLETE_PAGE} />
+      </CardAddFormSection>
+    </Page>
   );
 }
 

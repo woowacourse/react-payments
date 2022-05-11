@@ -3,7 +3,7 @@ import Head from '.';
 import '../../../index.css';
 
 export default {
-  title: 'Payment/Head',
+  title: 'Payment/Modules/Head',
   component: Head,
 };
 

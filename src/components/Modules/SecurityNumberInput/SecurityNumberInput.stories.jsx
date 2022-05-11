@@ -2,7 +2,7 @@ import React from 'react';
 import SecurityNumberInput from '.';
 
 export default {
-  title: 'Payment/SecurityNumberInput',
+  title: 'Payment/Modules/SecurityNumberInput',
   component: SecurityNumberInput,
 };
 

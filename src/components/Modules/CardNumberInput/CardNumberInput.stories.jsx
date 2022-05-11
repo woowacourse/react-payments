@@ -2,7 +2,7 @@ import React from 'react';
 import CardNumberInput from '.';
 
 export default {
-  title: 'Payment/CardNumberInput',
+  title: 'Payment/Modules/CardNumberInput',
   component: CardNumberInput,
 };
 

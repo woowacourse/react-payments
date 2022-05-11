@@ -3,7 +3,7 @@ import Input from '.';
 import '../../../index.css';
 
 export default {
-  title: 'Payment/Input',
+  title: 'Payment/Atoms/Input',
   component: Input,
   argTypes: {
     isCenter: { control: { type: 'boolean' } },

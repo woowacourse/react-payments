@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import { useContext } from 'react';
-import { CardOwnerContext } from '../../../context/CardOwnerContext';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
-import { COUNT } from '../../../constant';
+import { COUNT, INPUT_PLACEHOLDER, INPUT_TITLE } from '../../../constant';
 
 const CountChecker = styled.span`
   position: absolute;
@@ -15,12 +13,10 @@ const CountChecker = styled.span`
   color: #525252;
 `;
 
-function CardOwnerInput() {
-  const { name, validation, onNameChange } = useContext(CardOwnerContext);
-
+function CardOwnerInput({ name, validation, onNameChange }) {
   return (
     <>
-      <LabeledInput text="카드 소유자 이름(선택)">
+      <LabeledInput text={INPUT_TITLE.OWNER_NAME}>
         <CountChecker>
           {name.length}/{COUNT.OWNER_NAME_MAX_COUNT}
         </CountChecker>
@@ -29,7 +25,7 @@ function CardOwnerInput() {
           width="318px"
           height="45px"
           maxLength={COUNT.OWNER_NAME_MAX_COUNT}
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          placeholder={INPUT_PLACEHOLDER.OWNER_NAME}
           onChange={onNameChange}
           isCenter={false}
           isValid={validation}

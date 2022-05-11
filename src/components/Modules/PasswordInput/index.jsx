@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import { useContext } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import Input from '../../Atoms/Input';
-import { PasswordContext } from '../../../context/PasswordContext';
-import { COUNT } from '../../../constant';
+import { COUNT, INPUT_TITLE } from '../../../constant';
 
 const InputContainer = styled.div`
   display: flex;
@@ -13,12 +11,9 @@ const InputContainer = styled.div`
   gap: 7px;
 `;
 
-function PasswordInput() {
-  const { password, validations, inputRefs, onPasswordChange } =
-    useContext(PasswordContext);
-
+function PasswordInput({ password, validations, inputRefs, onPasswordChange }) {
   return (
-    <LabeledInput text="카드 비밀번호">
+    <LabeledInput text={INPUT_TITLE.PASSWORD}>
       <InputContainer>
         {Object.keys(password).map(order => (
           <Input
@@ -29,25 +24,23 @@ function PasswordInput() {
             width="43px"
             height="45px"
             type="password"
-            maxLength={1}
+            maxLength={COUNT.PASSWORD_MAX_LENGTH}
             onChange={onPasswordChange}
             isValid={validations[order]}
           />
         ))}
-        {Array.from({ length: COUNT.PASSWORD_DISABLE_COUNT }).map(
-          (_, index) => (
-            <Input
-              key={index}
-              value="."
-              width="43px"
-              height="45px"
-              type="password"
-              isValid={true}
-              disable={true}
-              readonly={true}
-            />
-          )
-        )}
+        {Array.from({ length: COUNT.PASSWORD_DISABLE_COUNT }).map((_, index) => (
+          <Input
+            key={index}
+            value="."
+            width="43px"
+            height="45px"
+            type="password"
+            isValid={true}
+            disable={true}
+            readonly={true}
+          />
+        ))}
       </InputContainer>
     </LabeledInput>
   );

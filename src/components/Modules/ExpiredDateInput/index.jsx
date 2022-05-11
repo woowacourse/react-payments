@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { useContext } from 'react';
 import LabeledInput from '../../Atoms/LabeledInput';
 import InputWrapper from '../../Atoms/InputWrapper';
 import Input from '../../Atoms/Input';
-import { ExpiredDateContext } from '../../../context/ExpiredDateContext';
-import { DATE_INPUT_PLACEHOLDER } from '../../../constant';
+import { COUNT, DATE_INPUT_PLACEHOLDER, INPUT_TITLE } from '../../../constant';
+import { DATE_SEPARATOR } from '../../../constant/mark';
 
 const InputContainer = styled.div`
   display: flex;
@@ -14,24 +13,21 @@ const InputContainer = styled.div`
   gap: 5px;
 `;
 
-function ExpiredDateInput() {
-  const { expiredDate, validations, inputRefs, onDateChange } =
-    useContext(ExpiredDateContext);
-
+function ExpiredDateInput({ expiredDate, validations, inputRefs, onDateChange }) {
   return (
-    <LabeledInput text="만료일">
+    <LabeledInput text={INPUT_TITLE.EXPIRED_DATE}>
       <InputWrapper>
         <InputContainer>
           {Object.keys(expiredDate).map((unit, index) => (
             <div key={unit}>
-              {index !== 0 && '/'}
+              {index !== 0 && DATE_SEPARATOR}
               <Input
                 name={unit}
                 ref={inputRefs[unit]}
                 value={expiredDate[unit]}
                 width="40px"
                 type="number"
-                maxLength={2}
+                maxLength={COUNT.DATE_MAX_COUNT}
                 placeholder={DATE_INPUT_PLACEHOLDER[unit]}
                 onChange={onDateChange}
                 isValid={validations[unit]}

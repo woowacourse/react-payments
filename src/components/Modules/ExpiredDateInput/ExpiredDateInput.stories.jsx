@@ -2,7 +2,7 @@ import React from 'react';
 import ExpiredDateInput from '.';
 
 export default {
-  title: 'Payment/ExpiredDateInput',
+  title: 'Payment/Modules/ExpiredDateInput',
   component: ExpiredDateInput,
 };
 
