@@ -1,11 +1,19 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-export const PageTitle = ({ children }) => {
+export const PageTitle = ({ children, isRoot }) => {
+  const navigate = useNavigate();
+
   return (
     <PageTitleWrapperStyle>
-      <BackwardButton />
+      {!isRoot && (
+        <BackwardButton
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
+      )}
       {children}
     </PageTitleWrapperStyle>
   );

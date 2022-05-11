@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import styled from 'styled-components';
 
 import { MAX_LENGTH } from '../../constants/card';
-import { CARD_INFO_TYPES } from '../../reducer/types';
+import { CardInfoContext } from '../../providers/CardInfoProvider';
 import { AutoFocusInputContainer } from '../common/AutoFocusInputContainer';
 
 import {
@@ -18,13 +19,16 @@ const DEFAULT_CARD_NUMBERS_TYPE = [
   { name: 'fourthNumber', type: 'password' },
 ];
 
-export const CardNumbersInput = ({
-  cardType,
-  cardNumbers,
-  onCardNumbersInput,
-  onCardNumberCheck,
-  openModal,
-}) => {
+export const CardNumbersInput = ({ openModal }) => {
+  const context = useContext(CardInfoContext);
+
+  const [cardNumbers, setCardNumbers] = useState({
+    firstNumber: '',
+    secondNumber: '',
+    thirdNumber: '',
+    fourthNumber: '',
+  });
+
   const handleNumberChange = (e, name) => {
     if (
       isNaN(e.nativeEvent.data) ||
@@ -33,10 +37,11 @@ export const CardNumbersInput = ({
       return;
     }
 
-    onCardNumbersInput({
-      type: CARD_INFO_TYPES.SET_CARD_NUMBER,
-      payload: { key: name, cardNumber: e.target.value },
-    });
+    setCardNumbers((prev) => ({ ...prev, [name]: e.target.value }));
+  };
+
+  const updateTypedCardNumber = (e, name) => {
+    context.setCardNumber(name, e.target.value);
   };
 
   useEffect(() => {
@@ -44,9 +49,9 @@ export const CardNumbersInput = ({
       (number) => number.length === MAX_LENGTH.EACH_CARD_NUMBER
     );
 
-    onCardNumberCheck(isCardNumbersCompleted);
+    context.setInputCompleted('cardNumbers', isCardNumbersCompleted);
 
-    if (cardType.name === '' && isCardNumbersCompleted) {
+    if (context.cardInfo.cardType.name === '' && isCardNumbersCompleted) {
       openModal();
     }
   }, [cardNumbers]);
@@ -54,18 +59,28 @@ export const CardNumbersInput = ({
   return (
     <InputContainer>
       <InputTitle>카드 번호</InputTitle>
-      <InputBox color="#04c09e" padding="0 50px">
+      <Style.CardNumberInputBox>
         <AutoFocusInputContainer maxValueLength={MAX_LENGTH.EACH_CARD_NUMBER}>
           {DEFAULT_CARD_NUMBERS_TYPE.map(({ name, type }) => (
             <InputBasic
               key={name}
-              value={cardNumbers?.[name]}
+              value={cardNumbers[name]}
               onChange={(e) => handleNumberChange(e, name)}
+              onBlur={(e) => {
+                updateTypedCardNumber(e, name);
+              }}
               type={type}
             />
           )).reduce((prev, cur) => [prev, '-', cur])}
         </AutoFocusInputContainer>
-      </InputBox>
+      </Style.CardNumberInputBox>
     </InputContainer>
   );
+};
+
+const Style = {
+  CardNumberInputBox: styled(InputBox)`
+    color: #04c09e;
+    padding: 0 50px;
+  `,
 };

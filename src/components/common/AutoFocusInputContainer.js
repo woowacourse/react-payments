@@ -24,12 +24,16 @@ export const AutoFocusInputContainer = ({ children, maxValueLength }) => {
   };
 
   const compositeOnChange = (cb, index) => (e) => {
+    if (e.target.value.length > maxValueLength) {
+      return;
+    }
+
     cb(e);
     moveFocus(e, index);
   };
 
   let idx = 0;
-  const refedInputChildren = flattenChildren.map((child) => {
+  const refedChildren = flattenChildren.map((child) => {
     if (child.type?.target === 'input') {
       const currentIndex = idx;
       idx += 1;
@@ -47,5 +51,5 @@ export const AutoFocusInputContainer = ({ children, maxValueLength }) => {
     return child;
   });
 
-  return <>{refedInputChildren}</>;
+  return <>{refedChildren}</>;
 };

@@ -1,12 +1,23 @@
-import React from 'react';
+import { useContext } from 'react';
+import styled from 'styled-components';
+import { CardInfoContext } from '../../providers/CardInfoProvider';
 
 import { Card } from '../common/Card';
-import { MarginTB10 } from '../common/styled';
 
-export const CardPreview = ({ cardInfo, onClick }) => {
+export const CardPreview = ({ onClickCard }) => {
+  const context = useContext(CardInfoContext);
+
   return (
-    <MarginTB10>
-      <Card cardInfo={cardInfo} onClick={onClick} />
-    </MarginTB10>
+    <Style.CardPreviewLayout>
+      <Card cardInfo={context.cardInfo} onClickCard={onClickCard} size="md" />
+    </Style.CardPreviewLayout>
   );
+};
+
+const Style = {
+  CardPreviewLayout: styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+  `,
 };
