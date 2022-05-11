@@ -34,3 +34,7 @@ input {
   position: relative;
   border-radius: 15px;
 }
+
+a {
+  text-decoration: none;
+}

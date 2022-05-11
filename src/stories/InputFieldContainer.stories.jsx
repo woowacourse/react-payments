@@ -10,5 +10,10 @@ const Template = (args) => <InputFieldContainer {...args} />;
 
 export const DefaultInputFieldContainer = Template.bind({});
 DefaultInputFieldContainer.args = {
-  children: <input className="input-basic w-15" />,
+  children: <input className="input-basic" />,
+};
+
+export const PasswordInputFieldContainer = Template.bind({});
+PasswordInputFieldContainer.args = {
+  children: <input type="password" className="input-basic password" />,
 };

@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { isBackspace, isNumeric } from '../utils/commons';
+import { isNumeric } from '../utils/commons';
 
 const InvalidNumberCharList = ['.', 'e', ' '];
 
 const useFormSchema = (formSchema) => {
-  const initialValues = {};
+  const initialField = {};
   const validationSchema = {};
   const initialErrors = {};
   const allowedKeyInput = {};
 
   const bindInitialValues = (fieldName, { initialValue = '' }) => {
-    initialValues[fieldName] = initialValue;
+    initialField[fieldName] = initialValue;
   };
 
   const bindValidationSchema = (
@@ -93,7 +93,6 @@ const useFormSchema = (formSchema) => {
     bindErrors(fieldName, schema);
   });
 
-  const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialErrors);
   const isInvalidInput = (fieldName, value) =>
     allowedKeyInput[fieldName].some((rule) => !rule(value));
@@ -125,26 +124,12 @@ const useFormSchema = (formSchema) => {
     }));
   };
 
-  const focusNextElement = (name, value, nextElement) => {
-    if (value.length >= formSchema[name].maxLength && nextElement)
-      nextElement.focus();
-  };
-
-  const focusPrevElement = (keyCode, name, prevElement) => {
-    if (isBackspace(keyCode) && values[name] === '' && prevElement) {
-      prevElement.focus();
-    }
-  };
-
   return {
-    values,
-    setValues,
+    initialField,
     isInvalidInput,
     errors,
     setErrorMessages,
     setErrorTrue,
-    focusNextElement,
-    focusPrevElement,
   };
 };
 

@@ -1,25 +1,30 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useObjectRef from './useObjectRef';
 import useFormSchema from './useFormSchema';
+import { isBackspace } from '../utils/commons';
+import { CardContext } from '../contexts/CardContext';
 
-// formSchema를 useFormSchema를 이용하여 사용 가능한 형태로 분해
-// onChange, onKeyDown으로 에러 체크 및 포커싱 지원
-// 외부에서 정의한 onSubmit, onSubmitError 사용하여 handleSubmit 생성
-const useCardForm = ({ cardFormSchema, onSubmit, onSubmitError }) => {
-  const {
-    values,
-    setValues,
-    isInvalidInput,
-    errors,
-    setErrorTrue,
-    setErrorMessages,
-    focusNextElement,
-    focusPrevElement,
-  } = useFormSchema(cardFormSchema);
+const useCardForm = ({ cardFormSchema }, path = undefined) => {
+  const navigate = useNavigate();
+  const { values, setValues } = useContext(CardContext);
+  const { isInvalidInput, errors, setErrorTrue, setErrorMessages } =
+    useFormSchema(cardFormSchema);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { ref, bindElement, getNextElement, getPrevElement } =
     useObjectRef(cardFormSchema);
+
+  const focusNextElement = (name, value, nextElement) => {
+    if (value.length >= cardFormSchema[name].maxLength && nextElement)
+      nextElement.focus();
+  };
+
+  const focusPrevElement = (keyCode, name, prevElement) => {
+    if (isBackspace(keyCode) && values[name] === '' && prevElement) {
+      prevElement.focus();
+    }
+  };
 
   const handleChange = (event) => {
     const {
@@ -50,6 +55,25 @@ const useCardForm = ({ cardFormSchema, onSubmit, onSubmitError }) => {
     focusPrevElement(keyCode, name, getPrevElement(name));
   };
 
+  const navigateOnSubmit = () => {
+    if (!path) {
+      return;
+    }
+    navigate(path);
+  };
+
+  const onSubmitAction = async () => {
+    navigateOnSubmit();
+  };
+
+  const focusErrorInput = (invalidInputRefs) => {
+    const firstInvalidInput = invalidInputRefs[0].element;
+    const { errorMessage } = errors[firstInvalidInput.name];
+
+    firstInvalidInput.focus();
+    alert(errorMessage);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -70,12 +94,12 @@ const useCardForm = ({ cardFormSchema, onSubmit, onSubmitError }) => {
         setErrorTrue(name);
       });
 
-      onSubmitError(errors, invalidInputRefs);
+      focusErrorInput(invalidInputRefs);
       return;
     }
 
     setIsSubmitting(true);
-    await onSubmit(values);
+    await onSubmitAction(values);
     setIsSubmitting(false);
   };
 
@@ -92,10 +116,9 @@ const useCardForm = ({ cardFormSchema, onSubmit, onSubmitError }) => {
   const getInputClassName = (fieldName, additionalClassName = '') =>
     `input-basic ${
       errors[fieldName]?.showError ? 'error' : ''
-    } ${additionalClassName}`;
+    } ${additionalClassName}`.trim();
 
   return {
-    values,
     isSubmitting,
     handleSubmit,
     registerInputProps,

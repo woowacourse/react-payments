@@ -10,6 +10,7 @@ const StyledButton = styled.button`
   font: inherit;
   cursor: pointer;
   outline: inherit;
+  margin-left: ${(props) => (props.showBackWard ? '0px' : '12px')};
 
   font-weight: 500;
   font-size: 16px;
@@ -21,12 +22,21 @@ const StyledButton = styled.button`
   gap: 8px;
 
   color: #383838;
+
+  &:hover {
+    font-weight: 700;
+  }
 `;
 
-const BackwardButton = ({ children, ...rest }) => {
+const BackwardButton = ({ showBackWard, children, ...rest }) => {
   return (
-    <StyledButton type="button" {...rest}>
-      <BackwardArrow />
+    <StyledButton
+      showBackWard={showBackWard}
+      type="button"
+      className="backward-button"
+      {...rest}
+    >
+      {showBackWard && <BackwardArrow />}
       <p>{children}</p>
     </StyledButton>
   );

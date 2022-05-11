@@ -22,3 +22,6 @@ yarn-error.log*
 
 # storybook
 storybook-static/
+
+# json-server
+db.json

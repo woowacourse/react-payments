@@ -1,43 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import CardPreview from './CardPreview';
 import ToolTip from './ToolTip';
 import useCardForm from '../../hooks/useCardForm';
 import InputFieldContainer from './InputFieldContainer';
+import Button from './Button';
+import { CardContext } from '../../contexts/CardContext';
 
 const StyledCardForm = styled.form`
   margin: 0;
-
   .submit-button {
-    background: none;
-    border: none;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    outline: inherit;
-
     position: absolute;
     width: 51px;
     height: 34px;
     right: 25px;
     bottom: 16px;
-
-    text-align: right;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 16px;
-    color: #04c09e;
   }
 `;
 
-const CardForm = ({ cardFormSchema, onSubmit, onSubmitError }) => {
-  const {
-    values,
-    isSubmitting,
-    handleSubmit,
-    registerInputProps,
-    getInputClassName,
-  } = useCardForm({ cardFormSchema, onSubmit, onSubmitError });
+const CardForm = ({ cardFormSchema }) => {
+  const { values } = useContext(CardContext);
+  const { isSubmitting, handleSubmit, registerInputProps, getInputClassName } =
+    useCardForm({ cardFormSchema }, '/complete-add-card');
 
   return (
     <>
@@ -147,9 +131,9 @@ const CardForm = ({ cardFormSchema, onSubmit, onSubmitError }) => {
             />
           </div>
         </InputFieldContainer>
-        <button className="submit-button" type="submit">
+        <Button className="submit-button" type="submit">
           다음
-        </button>
+        </Button>
       </StyledCardForm>
     </>
   );
