@@ -1,8 +1,18 @@
-import { CARD_NUMBER, CVC, DUE_DATE, MONTH, OWNER, PASSWORD } from "constant";
+import {
+  CARD_NUMBER,
+  CVC,
+  DUE_DATE,
+  MONTH,
+  OWNER,
+  PASSWORD,
+  NICKNAME,
+} from "constant";
 
 const isValidOwnerLength = (value) => value.length <= OWNER.MAX_LENGTH;
 
 const isValidCvc = (value) => value.length <= CVC.UNIT_LENGTH && !isNaN(value);
+
+const isValidNickname = (value) => value.length < NICKNAME.MAX_LENGTH;
 
 const isOverDueDateLength = (value) => value.length > DUE_DATE.UNIT_LENGTH;
 
@@ -28,6 +38,7 @@ const isExpiredYear = (value) => {
 export {
   isValidOwnerLength,
   isValidCvc,
+  isValidNickname,
   isOverCardNumberLength,
   isFilledCardNumberLength,
   isOverPasswordLength,

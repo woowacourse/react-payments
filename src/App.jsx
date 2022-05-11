@@ -1,25 +1,24 @@
-import { ThemeProvider, createGlobalStyle } from "styled-components";
-import CardAddPage from "pages/CardAddPage";
-import theme from "theme";
-
-const GlobalStyle = createGlobalStyle`
-  body {
-  margin: 0;
-  background-color: gray;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-`;
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CardListProvider from "context/CardListProvider";
+import Home from "pages/Home";
+import New from "pages/New";
+import Finish from "pages/Finish";
+import Edit from "pages/Edit";
+import NotFound from "pages/NotFound";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <CardAddPage />
-    </ThemeProvider>
+    <CardListProvider>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/new" element={<New />} />
+          <Route path="/finish/:id" element={<Finish />} />
+          <Route path="/edit/:id" element={<Edit />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </CardListProvider>
   );
 }
 
