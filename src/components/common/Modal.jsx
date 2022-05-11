@@ -36,8 +36,10 @@ const ModalInner = styled.div`
   background-color: ${PRIMARY_BG_COLOR};
   border-radius: 8px 8px 0 0;
   width: ${props => props.width}px;
-  height: 200px;
-  top: calc(${props => `${props.height - 200}px`});
+  height: ${props => `${props.height / 4}px`};
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
   margin: 0 auto;
   padding: 16px;
   z-index: 1000;
@@ -46,16 +48,17 @@ const ModalInner = styled.div`
 
   @keyframes slide-up {
     0% {
-      transform: translateY(50%);
-      top: calc(${props => `${props.height - 50}px`});
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 0%);
       height: 0;
       opacity: 0;
     }
 
     100% {
-      transform: translateY(0);
-      top: calc(${props => `${props.height - 200}px`});
-      height: 200px;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 0%);
       opacity: 1;
     }
   }

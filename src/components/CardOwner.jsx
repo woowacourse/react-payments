@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import useDispatch from '../hooks/useDispatch';
 import useInput from '../hooks/useInput';
+
 import ErrorMessage from './common/ErrorMessage';
 import LetterCounter from './common/LetterCounter';
 
@@ -7,7 +9,8 @@ import * as S from './common/styles';
 
 const MAX_NAME_LENGTH = 30;
 
-function CardOwner({ dispatch }) {
+function CardOwner() {
+  const dispatch = useDispatch();
   const [value, onChangeInputValue, isValid, errorMessage] = useInput({
     type: 'string',
     maxLength: MAX_NAME_LENGTH,

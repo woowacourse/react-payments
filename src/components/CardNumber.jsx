@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import useDispatch from '../hooks/useDispatch';
 import useInput from '../hooks/useInput';
+
 import { HYPHEN_PRIMARY_COLOR } from '../theme';
 import ErrorMessage from './common/ErrorMessage';
 import * as S from './common/styles';
@@ -11,7 +13,8 @@ const convertToCardNumberString = numbers => {
   return `${cardNoA} ${cardNoB} ${'*'.repeat(cardNoC.length)} ${'*'.repeat(cardNoD.length)}`;
 };
 
-function CardNumber({ dispatch }) {
+function CardNumber() {
+  const dispatch = useDispatch();
   const cardNoARef = useRef(null);
   const cardNoBRef = useRef(null);
   const cardNoCRef = useRef(null);

@@ -19,7 +19,7 @@ export const Primary = Template.bind({});
 Primary.args = {
   items: [1, 2, 3, 4],
   dimensions: {
-    width: 754,
-    height: 200,
+    width: 1000,
+    height: 1000,
   },
 };

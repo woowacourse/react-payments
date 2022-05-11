@@ -1,89 +1,18 @@
-import React, { useRef, useLayoutEffect, useReducer, useCallback } from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
+import { useRoutes } from 'react-router-dom';
 
-import {
-  CardNumber,
-  CardOwner,
-  CardPassword,
-  CardSecurityCode,
-  CardShape,
-  Footer,
-  Header,
-  DueDate,
-} from './components';
+import { Header } from './components';
+import useCardState from './hooks/useCardState';
 
-const initialState = {
-  dimensions: { width: 0, height: 0 },
-  cardOwnerName: 'NAME',
-  cardNumber: '',
-  dueDate: 'MM / YY',
-  isAllCompleted: {
-    isFinishTypingCardNumber: false,
-    isCorrectPwd: false,
-    isCorrectOwnerName: false,
-    isCorrectCardDate: false,
-    isCorrectSecurityCode: false,
-  },
-};
+import useDispatch from './hooks/useDispatch';
 
-function reducer(state, action) {
-  switch (action.type) {
-    case 'DIMENSIONS':
-      return { ...state, dimensions: action.dimensions };
-    case 'CARD_OWNER_NAME':
-      return {
-        ...state,
-        cardOwnerName: action.cardOwnerName,
-        isAllCompleted: {
-          ...state.isAllCompleted,
-          isCorrectOwnerName: action.isCorrectOwnerName,
-        },
-      };
-    case 'CARD_NUMBER':
-      return {
-        ...state,
-        cardNumber: action.cardNumber,
-        isAllCompleted: {
-          ...state.isAllCompleted,
-          isFinishTypingCardNumber: action.isFinishTypingCardNumber,
-        },
-      };
-    case 'DUE_DATE':
-      return {
-        ...state,
-        dueDate: action.dueDate,
-        isAllCompleted: {
-          ...state.isAllCompleted,
-          isCorrectCardDate: action.isCorrectCardDate,
-        },
-      };
-    case 'CARD_SECURITY_CODE':
-      return {
-        ...state,
-        cardSecurityCode: action.cardSecurityCode,
-        isAllCompleted: {
-          ...state.isAllCompleted,
-          isCorrectSecurityCode: action.isCorrectSecurityCode,
-        },
-      };
-    case 'CARD_PASSWORD':
-      return {
-        ...state,
-        isAllCompleted: {
-          ...state.isAllCompleted,
-          isCorrectPwd: action.isCorrectPwd,
-        },
-      };
-    default:
-      throw new Error();
-  }
-}
+import routes from './Routes';
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const useDispatch = useCallback(props => dispatch(props), [dispatch]);
+  const dispatch = useDispatch();
   const targetRef = useRef();
-
-  const isAllCompleted = Object.values(state.isAllCompleted).every(ok => ok);
+  const content = useRoutes(routes);
+  const { title } = useCardState();
 
   useLayoutEffect(() => {
     if (targetRef.current) {
@@ -95,23 +24,14 @@ function App() {
         },
       });
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="app" ref={targetRef}>
-      <Header title={'카드추가'} />
-      <CardShape
-        dimensions={state.dimensions}
-        cardNumber={state.cardNumber}
-        cardOwnerName={state.cardOwnerName}
-        cardDate={state.dueDate}
-      />
-      <CardNumber dispatch={useDispatch} />
-      <DueDate dispatch={useDispatch} dimensions={state.dimensions} />
-      <CardOwner dispatch={useDispatch} />
-      <CardSecurityCode dispatch={useDispatch} />
-      <CardPassword dispatch={useDispatch} />
-      <Footer isAllCompleted={isAllCompleted} />
+      <div className="content-container">
+        <Header title={title} />
+        {content}
+      </div>
     </div>
   );
 }
