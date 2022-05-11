@@ -15,11 +15,17 @@ const StyledLabel = styled.label`
   line-height: 14px;
   color: #525252;
   letter-spacing: -0.085em;
-  ${props =>
-    props.isComplete &&
+
+  ${({ isComplete }) =>
+    isComplete &&
     `
     color: #04c09e;
   `}
+`;
+
+const StyledErrorMessage = styled.span`
+  margin-left: 10px;
+  color: red;
 `;
 
 const StyledInputWrapper = styled.div`
@@ -29,6 +35,18 @@ const StyledInputWrapper = styled.div`
   border-radius: 7px;
   width: ${props => props.width};
   padding: 12px;
+
+  ${({ isComplete }) =>
+    isComplete &&
+    `
+    box-shadow: inset 0 0 2px #04c09e;
+  `}
+
+  ${({ isError }) =>
+    isError &&
+    `
+    box-shadow: inset 0 0 2px red;
+  `}
 `;
 
 const StyledInputContainer = styled.div`
@@ -39,30 +57,38 @@ const StyledInputContainer = styled.div`
 
 export default function InputField({
   labelText,
-  OptionalComponent,
   wrapperWidth,
   horizontalAlign,
   isComplete,
+  isError,
+  errorMessage,
   separateEachInput,
 
   children,
 }) {
   return (
     <StyledInputField>
-      <StyledLabel isComplete={isComplete}>{labelText}</StyledLabel>
+      <StyledLabel isComplete={isComplete}>
+        {labelText}
+        {isError && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
+      </StyledLabel>
       <StyledInputContainer>
         {separateEachInput ? (
           React.Children.toArray(children).map((child, index) => (
-            <StyledInputWrapper key={index} width={wrapperWidth} align={horizontalAlign}>
+            <StyledInputWrapper
+              key={index}
+              width={wrapperWidth}
+              align={horizontalAlign}
+              isComplete={isComplete}
+              isError={isError}>
               {child}
             </StyledInputWrapper>
           ))
         ) : (
-          <StyledInputWrapper width={wrapperWidth} align={horizontalAlign}>
+          <StyledInputWrapper width={wrapperWidth} align={horizontalAlign} isComplete={isComplete} isError={isError}>
             {children}
           </StyledInputWrapper>
         )}
-        {OptionalComponent}
       </StyledInputContainer>
     </StyledInputField>
   );
@@ -72,11 +98,13 @@ InputField.propTypes = {
   labelText: PropTypes.string,
   wrapperWidth: PropTypes.string,
   horizontalAlign: PropTypes.oneOf(['flex-start', 'center', 'space-around']),
-  separateEachInput: PropTypes.bool,
   isComplete: PropTypes.bool,
+  isError: PropTypes.bool,
+  separateEachInput: PropTypes.bool,
 };
 
 InputField.defaultProps = {
-  separateEachInput: false,
   isComplete: false,
+  isError: false,
+  separateEachInput: false,
 };

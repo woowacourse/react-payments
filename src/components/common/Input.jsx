@@ -38,13 +38,7 @@ export const StyledInput = styled.input`
 `;
 
 export default function Input(props) {
-  const { showPostFix, postfix } = props;
-  return (
-    <>
-      <StyledInput {...props} />
-      {showPostFix && <p>{postfix}</p>}
-    </>
-  );
+  return <StyledInput {...props} />;
 }
 
 Input.propTypes = {
@@ -59,7 +53,4 @@ Input.defaultProps = {
   type: 'text',
   width: '70px',
   textAlign: 'center',
-
-  showPostFix: false,
-  postfix: '',
 };

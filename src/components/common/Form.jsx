@@ -2,12 +2,14 @@ import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
 `;
 
-export default function CardInfoForm({ children }) {
+export default function Form({ children, onSubmit }) {
   const formRef = useRef('');
 
   const moveFocus = (curElement, direction) => {
@@ -37,7 +39,7 @@ export default function CardInfoForm({ children }) {
   }, []);
 
   return (
-    <StyledForm ref={formRef} onChange={handleNextInputFocus} onKeyDown={handlePrevInputFocus}>
+    <StyledForm ref={formRef} onSubmit={onSubmit} onChange={handleNextInputFocus} onKeyDown={handlePrevInputFocus}>
       {children}
     </StyledForm>
   );

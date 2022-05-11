@@ -2,13 +2,11 @@ import React from 'react';
 import Button from '../components/common/Button';
 
 export default {
-  title: 'Button',
+  title: 'Component/Button',
   component: Button,
 };
 
-const Template = args => <Button {...args} />;
+const Template = args => <Button>sample</Button>;
 
 export const Default = Template.bind({});
-Default.args = {
-  text: 'sample',
-};
+Default.args = {};
