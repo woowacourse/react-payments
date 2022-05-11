@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 
 const Label = ({ id, description }) => {
-  return <styled.Container htmlFor={id}>{description}</styled.Container>;
+  return <Styled.Container htmlFor={id}>{description}</Styled.Container>;
 };
 
 Label.propTypes = {

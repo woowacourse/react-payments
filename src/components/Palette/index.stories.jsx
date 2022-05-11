@@ -4,7 +4,7 @@ export default {
   title: 'Palette',
   component: Palette,
   argTypes: {
-    onClickCardSelector: {
+    closeModal: {
       table: {
         disable: true,
       },
@@ -14,12 +14,10 @@ export default {
 
 const Template = (args) => <Palette {...args} />;
 
+const closeModal = () => {};
+
 export const Example = Template.bind({});
 
-const onClickCardSelector = (type) => () => {
-  console.log(type);
-};
-
 Example.args = {
-  onClickCardSelector,
+  closeModal,
 };

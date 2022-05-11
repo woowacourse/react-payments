@@ -1,6 +1,31 @@
+export const PATH = {
+  HOME: '/',
+  ADD_CARD: '/addCard',
+  REGISTER_CARD: '/registerCard',
+};
+
+export const ENDPOINT =
+  'https://moonheekim-payments-server.herokuapp.com/cards';
+
+export const METHODS = {
+  GET: 'GET',
+  POST: 'POST',
+};
+
 export const REG_EXP = {
   NUMBER_ONLY: /^[0-9]+$/,
-  CHARACTER_ONLY: /^[a-z,A-Z]+$/,
+  CHARACTER_ONLY: /^[a-zA-Z]+$/,
+};
+
+export const CARD_COLOR_BY_NAME = {
+  롯데카드: 'red',
+  삼성카드: 'blue',
+  NH농협카드: 'green',
+  신한카드: 'purple',
+  현대카드: 'mint',
+  하나카드: 'pink',
+  BC카드: 'orange',
+  KB국민카드: 'yellow',
 };
 
 export const COLOR_TYPE = {
@@ -23,6 +48,17 @@ export const COLOR_NAMES = [
   'orange',
   'yellow',
   'mint',
+];
+
+export const CARD_TYPE_NAMES = [
+  '롯데카드',
+  '삼성카드',
+  'NH농협카드',
+  '신한카드',
+  '현대카드',
+  '하나카드',
+  'BC카드',
+  'KB국민카드',
 ];
 
 export const INPUT_SCALE_TYPE = {

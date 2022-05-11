@@ -5,6 +5,11 @@ export default {
   component: Button,
 
   argTypes: {
+    type: {
+      table: {
+        disable: true,
+      },
+    },
     children: {
       description: '버튼에 들어갈 설명',
       control: {

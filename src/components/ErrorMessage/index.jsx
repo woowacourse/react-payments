@@ -1,13 +1,13 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 
-const ErrorMessage = ({ message }) => {
-  return <styled.Container>{message}</styled.Container>;
+const ErrorMessage = ({ children }) => {
+  return <Styled.Container>🚫 {children}</Styled.Container>;
 };
 
 ErrorMessage.propTypes = {
-  message: PropTypes.string,
+  children: PropTypes.string,
 };
 
 export default memo(ErrorMessage);

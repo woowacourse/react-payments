@@ -1,28 +1,27 @@
 import PropTypes from 'prop-types';
-import { COLOR_NAMES } from '../../constant';
-import * as styled from './index.styled';
+import { CARD_TYPE_NAMES, CARD_COLOR_BY_NAME } from '../../constant';
+import * as Styled from './index.styled';
 
 const Card = ({
-  name,
-  ownerName,
-  color = 'red',
-  expiredMonth,
-  expiredYear,
+  onClick,
   firstCardNumber,
   secondCardNumber,
   thirdCardNumber,
   fourthCardNumber,
-  onClick,
+  expiredMonth,
+  expiredYear,
+  cardType,
+  ownerName,
 }) => {
   return (
-    <styled.Container onClick={onClick}>
-      <styled.EmptyCard color={color}>
-        <styled.CardTop>
-          <styled.CardName>{name ? name : '카드이름'}</styled.CardName>
-        </styled.CardTop>
-        <styled.CardMiddle>
-          <styled.CardChip />
-          <styled.CardNumbers>
+    <Styled.Container onClick={onClick}>
+      <Styled.EmptyCard color={CARD_COLOR_BY_NAME[cardType]}>
+        <Styled.CardTop>
+          <Styled.CardName>{cardType ? cardType : '카드이름'}</Styled.CardName>
+        </Styled.CardTop>
+        <Styled.CardMiddle>
+          <Styled.CardChip />
+          <Styled.CardNumbers>
             {firstCardNumber && <span>{firstCardNumber}</span>}
             {secondCardNumber && <span>{secondCardNumber}</span>}
             {thirdCardNumber && (
@@ -31,26 +30,25 @@ const Card = ({
             {fourthCardNumber && (
               <span>{'•'.repeat(fourthCardNumber.length)}</span>
             )}
-          </styled.CardNumbers>
-        </styled.CardMiddle>
-        <styled.CardBottom>
-          <styled.CardBottomInfo>
-            <styled.CardOwnerContainer>
-              {ownerName ? ownerName : 'NAME'}
-            </styled.CardOwnerContainer>
-            <styled.CardExpiredDateContainer>
+          </Styled.CardNumbers>
+        </Styled.CardMiddle>
+        <Styled.CardBottom>
+          <Styled.CardBottomInfo>
+            <Styled.CardOwnerContainer>
+              {ownerName ? ownerName.toUpperCase() : 'NAME'}
+            </Styled.CardOwnerContainer>
+            <Styled.CardExpiredDateContainer>
               {expiredMonth ? expiredMonth : 'MM'}
               {` / ${expiredYear ? expiredYear : 'YY'}`}
-            </styled.CardExpiredDateContainer>
-          </styled.CardBottomInfo>
-        </styled.CardBottom>
-      </styled.EmptyCard>
-    </styled.Container>
+            </Styled.CardExpiredDateContainer>
+          </Styled.CardBottomInfo>
+        </Styled.CardBottom>
+      </Styled.EmptyCard>
+    </Styled.Container>
   );
 };
 
 Card.propTypes = {
-  color: PropTypes.oneOf(COLOR_NAMES),
   name: PropTypes.string,
   ownerName: PropTypes.string,
   expiredMonth: PropTypes.string,
@@ -59,6 +57,7 @@ Card.propTypes = {
   secondCardNumber: PropTypes.string,
   thirdCardNumber: PropTypes.string,
   fourthCardNumber: PropTypes.string,
+  cardType: PropTypes.oneOf(CARD_TYPE_NAMES),
   onClick: PropTypes.func,
 };
 

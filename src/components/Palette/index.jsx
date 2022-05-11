@@ -1,50 +1,50 @@
 import PropTypes from 'prop-types';
 import ColorPicker from './ColorPicker';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
+import { CARD_COLOR_BY_NAME } from '../../constant';
+import { useCardFormContext, ACTION } from '../../context/card-form-context';
 
-const cardList1 = [
-  { color: 'red', name: '포코 카드' },
-  { color: 'blue', name: '도리 카드' },
-  { color: 'green', name: '호프 카드' },
-  { color: 'purple', name: '공원 카드' },
-];
+const CARD_LIST1 = ['롯데카드', '삼성카드', 'NH농협카드', '신한카드'];
+const CARD_LIST2 = ['현대카드', '하나카드', 'BC카드', 'KB국민카드'];
 
-const cardList2 = [
-  { color: 'mint', name: '콜라 카드' },
-  { color: 'pink', name: '블링 카드' },
-  { color: 'orange', name: '태태 카드' },
-  { color: 'yellow', name: '샐리 카드' },
-];
+const Palette = ({ closeModal }) => {
+  const { dispatch } = useCardFormContext();
+  const onClickCardSelector = (name) => () => {
+    dispatch({
+      type: ACTION.SET_CARD_TYPE,
+      data: { cardType: name },
+    });
+    closeModal();
+  };
 
-const Palette = ({ onClickCardSelector }) => {
   return (
-    <styled.Container>
-      <styled.ColorPickerContainer>
-        {cardList1.map(({ color, name }) => (
+    <Styled.Container>
+      <Styled.ColorPickerContainer>
+        {CARD_LIST1.map((name) => (
           <ColorPicker
-            color={color}
+            color={CARD_COLOR_BY_NAME[name]}
             name={name}
             key={name}
-            onClick={onClickCardSelector(color, name)}
+            onClick={onClickCardSelector(name)}
           />
         ))}
-      </styled.ColorPickerContainer>
-      <styled.ColorPickerContainer>
-        {cardList2.map(({ color, name }) => (
+      </Styled.ColorPickerContainer>
+      <Styled.ColorPickerContainer>
+        {CARD_LIST2.map((name) => (
           <ColorPicker
-            color={color}
+            color={CARD_COLOR_BY_NAME[name]}
             name={name}
             key={name}
-            onClick={onClickCardSelector(color, name)}
+            onClick={onClickCardSelector(name)}
           />
         ))}
-      </styled.ColorPickerContainer>
-    </styled.Container>
+      </Styled.ColorPickerContainer>
+    </Styled.Container>
   );
 };
 
 Palette.propTypes = {
-  onClickCardSelector: PropTypes.func,
+  closeModal: PropTypes.func,
 };
 
 export default Palette;

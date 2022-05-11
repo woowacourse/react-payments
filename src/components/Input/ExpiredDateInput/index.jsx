@@ -1,6 +1,6 @@
 import Input from '../index';
 import PropTypes from 'prop-types';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 
 const ExpiredDateInput = ({
   expiredMonth,
@@ -9,23 +9,25 @@ const ExpiredDateInput = ({
   onChangeExpiredYear,
 }) => {
   return (
-    <styled.Container>
+    <Styled.Container>
       <Input
         scale="medium"
         placeholder={'MM'}
         maxLength={2}
         value={expiredMonth}
         onChange={onChangeExpiredMonth}
+        data-testid="expired-month-input"
       />
-      <styled.SlashContainer>/</styled.SlashContainer>
+      <Styled.SlashContainer>/</Styled.SlashContainer>
       <Input
         scale="medium"
         placeholder={'YY'}
         maxLength={2}
         value={expiredYear}
         onChange={onChangeExpiredYear}
+        data-testid="expired-year-input"
       />
-    </styled.Container>
+    </Styled.Container>
   );
 };
 

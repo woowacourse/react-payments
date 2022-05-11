@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useInputValue = ({ isValidateInput, isInputAvailableValue }) => {
+const useInputValue = ({ isValidateInput, isInputAvailableValue } = {}) => {
   const [value, setValue] = useState('');
   const [isError, setError] = useState(false);
 

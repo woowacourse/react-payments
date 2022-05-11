@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import { COLOR_NAMES } from '../../../constant';
-import * as styled from './index.styled';
+import * as Styled from './index.styled';
 
 const ColorPicker = ({ color, name, onClick }) => {
   return (
-    <styled.Container onClick={onClick}>
-      <styled.OptionContainer color={color} />
-      <styled.DescriptionContainer>{name}</styled.DescriptionContainer>
-    </styled.Container>
+    <Styled.Container onClick={onClick}>
+      <Styled.OptionContainer color={color} />
+      <Styled.DescriptionContainer>{name}</Styled.DescriptionContainer>
+    </Styled.Container>
   );
 };
 
