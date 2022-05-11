@@ -1,24 +1,45 @@
 import { useState, useCallback } from 'react';
+import { encryptCardNumber } from '../utils/processCard';
 
-import { splitCardNumbers } from '../utils/regExp';
+import { isNumber, splitCardNumbers } from '../utils/regExp';
 
 export default function useCardNumber(initialValue) {
   const [cardNumber, setCardNumber] = useState(initialValue);
-  const [encryptedCardNumber, setEncryptedCardNumber] = useState(initialValue);
 
-  const handler = useCallback(({ target: { value } }) => {
-    const numbers = value.replaceAll('-', '');
+  const handler = useCallback(
+    async ({ target, nativeEvent: { data: key } }) => {
+      const { selectionStart } = target;
 
-    setCardNumber(numbers);
+      await setCardNumber(prevState => {
+        const insertIdx =
+          selectionStart -
+          parseInt(selectionStart / 5, 10) -
+          (selectionStart % 5 !== 0 ? 1 : 0);
 
-    let processedNumbers = numbers;
+        let state =
+          key && isNumber(key)
+            ? prevState.slice(0, insertIdx) +
+              key +
+              prevState.slice(insertIdx, prevState.length)
+            : prevState;
 
-    if (numbers.length > 8) {
-      processedNumbers = numbers.slice(0, 8) + '•'.repeat(numbers.length - 8);
-    }
+        if (!key) {
+          const removeIdx = selectionStart - parseInt(selectionStart / 5, 10);
 
-    setEncryptedCardNumber(splitCardNumbers(processedNumbers) ?? initialValue);
-  }, []);
+          state =
+            prevState.slice(0, removeIdx) +
+            prevState.slice(removeIdx + 1, prevState.length);
+        }
 
-  return { cardNumber, handler, encryptedCardNumber };
+        return state;
+      });
+
+      const cursor = selectionStart + (selectionStart % 5 === 0 && key ? 1 : 0);
+
+      await target.setSelectionRange(cursor, cursor);
+    },
+    []
+  );
+
+  return [splitCardNumbers(encryptCardNumber(cardNumber), ' ') ?? '', handler];
 }

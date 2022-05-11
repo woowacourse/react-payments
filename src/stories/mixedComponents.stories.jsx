@@ -1,14 +1,12 @@
-import React from 'react';
-
 import styled from 'styled-components';
 
-import Button from '../components/Button';
-import Input from '../components/Input';
-import Modal from '../components/Modal';
+import { Button, Input, Modal } from '../components';
+
+import { CARD_RULE } from '../constants';
 
 export default {
   title: 'Example/MixedComponents',
-  component: [Input, Button],
+  component: [Input, Button, Modal],
   argTypes: {},
 };
 
@@ -20,9 +18,11 @@ const CardOwnerNameLength = styled.div`
 `;
 
 function CardOwnerNameTemplate(args) {
+  const { maxLength } = args;
+
   return (
     <>
-      <CardOwnerNameLength>0/30</CardOwnerNameLength>
+      <CardOwnerNameLength>0/{maxLength}</CardOwnerNameLength>
       <Input {...args} />
     </>
   );
@@ -32,13 +32,15 @@ export const CardOwnerName = CardOwnerNameTemplate.bind({});
 CardOwnerName.args = {
   description: '카드 소유자 이름 (선택)',
   placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
+  maxLength: CARD_RULE.OWNER_NAME_MAX_LENGTH,
 };
 
 function CVCTemplate({ inputArgs, buttonArgs, modalArgs }) {
+  const { children } = buttonArgs;
   return (
     <>
       <Input {...inputArgs} />
-      <Button {...buttonArgs} />
+      <Button {...buttonArgs}>{children}</Button>
       <Modal {...modalArgs} />
     </>
   );
@@ -50,18 +52,22 @@ CVC.args = {
     description: '보안 코드(CVC/CVV)',
     type: 'password',
     width: '84px',
+    maxLength: CARD_RULE.CVC_LENGTH,
   },
   buttonArgs: {
     border: '1px solid #BABABA',
     color: '#969696',
-    content: '?',
+    children: '?',
     margin: {
       l: '11px',
     },
     shape: 'circle',
     size: 'small',
   },
-  modalArgs: { visible: true },
+  modalArgs: {
+    visible: true,
+    description: '카드 뒷면에 적힌 유효성 검사 코드',
+  },
 };
 
 const Bullet = styled.span`
@@ -89,6 +95,7 @@ CardPassword.args = {
     },
     type: 'password',
     width: '43px',
+    maxLength: 1,
   },
   noLabeled: {
     margin: {
@@ -96,5 +103,6 @@ CardPassword.args = {
     },
     type: 'password',
     width: '43px',
+    maxLength: 1,
   },
 };

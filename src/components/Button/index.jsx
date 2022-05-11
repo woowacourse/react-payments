@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import styled, { css } from 'styled-components';
 
 import PropTypes from 'prop-types';
@@ -34,9 +34,9 @@ const StyledButton = styled.button`
 function Button({
   bgColor,
   border,
+  children,
   className,
   color,
-  content,
   fontWeight,
   margin,
   shape,
@@ -51,7 +51,6 @@ function Button({
       border={border}
       buttonStyle={buttonStyle}
       color={color}
-      content={content}
       fontWeight={fontWeight}
       margin={margin}
       shape={shape}
@@ -59,7 +58,7 @@ function Button({
       className={className}
       onClick={onClickFunc}
     >
-      {content}
+      {children}
     </StyledButton>
   );
 }
@@ -77,9 +76,9 @@ Button.defaultProps = {
 Button.propTypes = {
   bgColor: PropTypes.string,
   border: PropTypes.string,
+  children: PropTypes.node,
   className: PropTypes.string,
   color: PropTypes.string,
-  content: PropTypes.node,
   fontWeight: PropTypes.string,
   margin: PropTypes.shape({
     t: PropTypes.string,

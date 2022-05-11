@@ -1,16 +1,22 @@
-import React from 'react';
-import CARD_RULE from '../../constants';
-import { Input } from '../common';
+import { Input, InputContainer } from '..';
 
-export default function CardNumberInput({ number, setNumber }) {
+import { CardInfoContext } from '../../contexts';
+import { CARD_RULE } from '../../constants';
+
+export default function CardNumberInput() {
   return (
-    <div>
-      <Input
-        description="카드 번호"
-        value={number}
-        maxLength={CARD_RULE.NUMBER_MAX_LENGTH + 3}
-        onChangeFunc={setNumber}
-      />
-    </div>
+    <CardInfoContext.Consumer>
+      {({ cardNumber, setCardNumber }) => (
+        <InputContainer>
+          <Input
+            description="카드 번호"
+            id="cardNumber"
+            value={cardNumber}
+            maxLength={CARD_RULE.NUMBER_MAX_LENGTH + 3}
+            onChangeFunc={setCardNumber}
+          />
+        </InputContainer>
+      )}
+    </CardInfoContext.Consumer>
   );
 }

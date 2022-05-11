@@ -1,4 +1,11 @@
+import { CARD_RULE } from '../constants';
+
 const isEmptyValue = requiredList => requiredList.some(value => value === '');
+
+const isValidCardNumber = cardNumber =>
+  cardNumber.length >= CARD_RULE.NUMBER_MAX_LENGTH;
+
+const isValidCVC = CVC => CVC.length === CARD_RULE.CVC_LENGTH;
 
 const isValidCardInputs = (
   cardNumber,
@@ -13,8 +20,11 @@ const isValidCardInputs = (
     throw new Error();
   }
 
-  const month = validDate.split('/')[0];
-  if (month < 1 || month > 12) {
+  if (!isValidCardNumber(cardNumber)) {
+    throw new Error();
+  }
+
+  if (!isValidCVC(CVC)) {
     throw new Error();
   }
 };

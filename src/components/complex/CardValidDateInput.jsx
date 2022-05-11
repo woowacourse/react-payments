@@ -1,18 +1,26 @@
-import React from 'react';
-import CARD_RULE from '../../constants';
-import { Input } from '../common';
+import { Input, InputContainer } from '..';
 
-export default function CardValidDateInput({ validDate, setValidDate }) {
+import { CardInfoContext } from '../../contexts';
+import { NOW } from '../../constants';
+import { preventEvent } from '../../utils/event';
+
+export default function CardValidDateInput() {
   return (
-    <div>
-      <Input
-        description="만료일"
-        placeholder="MM / YY"
-        width="137px"
-        value={validDate}
-        maxLength={CARD_RULE.VALID_DATE_MAX_LENGTH + 1}
-        onChangeFunc={setValidDate}
-      />
-    </div>
+    <CardInfoContext.Consumer>
+      {({ validDate, setValidDate }) => (
+        <InputContainer>
+          <Input
+            description="만료일"
+            width="200px"
+            id="validDate"
+            type="month"
+            value={validDate}
+            min={`${NOW.YEAR}-${NOW.MONTH}`}
+            onChangeFunc={setValidDate}
+            onKeyDownFunc={preventEvent}
+          />
+        </InputContainer>
+      )}
+    </CardInfoContext.Consumer>
   );
 }
