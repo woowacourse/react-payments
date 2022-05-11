@@ -33,6 +33,7 @@ FieldSet.propTypes = {
   description: PropTypes.string,
   errorMessage: PropTypes.string,
   children: PropTypes.element,
+  isError: PropTypes.bool,
 };
 
 export default FieldSet;

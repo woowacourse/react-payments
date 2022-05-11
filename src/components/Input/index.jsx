@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const InputWrapper = styled.input`
   text-align: center;
-  width: ${props => InputScaleType[props.scale]}px;
+  width: ${(props) => InputScaleType[props.scale]}px;
   height: 45px;
   background-color: #ecebf1;
   color: #04c09e;
@@ -19,7 +19,7 @@ const InputWrapper = styled.input`
 
 const InputScaleType = {
   large: '318',
-  medium: '70',
+  medium: '58',
   small: '43',
 };
 

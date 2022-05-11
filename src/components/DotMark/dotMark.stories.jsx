@@ -6,6 +6,6 @@ export default {
   component: DotMark,
 };
 
-const Template = args => <DotMark {...args} />;
+const Template = (args) => <DotMark {...args} />;
 
 export const Example = Template.bind({});

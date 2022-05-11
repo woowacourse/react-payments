@@ -6,7 +6,7 @@ import Input from '../../Input';
 import FieldSet from '../../FieldSet';
 
 const CardOwnerContainer = styled.div`
-  padding-top: 30px;
+  padding-top: 10px;
   position: relative;
   width: fit-content;
   height: fit-content;
@@ -15,11 +15,11 @@ const CardOwnerContainer = styled.div`
 const MaxNumberIndicator = styled.span`
   font-size: 12px;
   position: absolute;
-  top: 35px;
+  top: 16px;
   right: 20px;
 `;
 
-const showOwnerNameLength = ownerName => {
+const showOwnerNameLength = (ownerName) => {
   const ownerNameLength = String(ownerName.length);
   return `${ownerNameLength.padStart(2, '0')}/30`;
 };
@@ -41,6 +41,7 @@ const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
           maxLength={30}
           value={ownerName}
           onChange={onChangeOwnerName}
+          data-testid="card-owner-name"
         />
       </FieldSet>
     </CardOwnerContainer>

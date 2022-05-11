@@ -28,6 +28,7 @@ const ExpiredDate = ({
 };
 
 ExpiredDate.propTypes = {
+  expiredMonth: PropTypes.string,
   expiredYear: PropTypes.string,
   onChangeExpiredMonth: PropTypes.func,
   onChangeExpiredYear: PropTypes.func,

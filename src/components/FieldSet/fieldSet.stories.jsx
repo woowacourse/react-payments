@@ -7,13 +7,14 @@ export default {
   component: Fieldset,
 };
 
-const Template = args => <Fieldset {...args} />;
+const Template = (args) => <Fieldset {...args} />;
 
 export const Example = Template.bind({});
 
 Example.args = {
   id: 'cardNumber',
   description: '카드 번호',
-  children: <CardNumberInput />,
+  children: <CardNumberInput cardNumbers={['1111', '1111', '1111', '1111']} />,
   errorMessage: '유효한 카드 번호가 아닙니다.',
+  isError: false,
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -37,13 +38,15 @@ const Arrow = styled.div`
   transform: rotate(45deg);
 `;
 
-const Header = ({ title }) => {
+const Header = ({ children }) => {
   return (
     <HeaderWrapper>
-      <BackButton type="button">
-        <Arrow />
-      </BackButton>
-      <Title>{title}</Title>
+      <Link to="/react-payments/list">
+        <BackButton type="button">
+          <Arrow />
+        </BackButton>
+      </Link>
+      <Title>{children}</Title>
     </HeaderWrapper>
   );
 };

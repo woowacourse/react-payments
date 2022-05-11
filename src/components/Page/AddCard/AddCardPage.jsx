@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardNumber, ExpiredDate, CardOwnerName, SecureCode, Password } from './index';
 
@@ -14,12 +15,15 @@ import {
 } from '../../../validation';
 
 import Card from '../../Card';
-import Modal from '../../Modal';
 import Palette from '../../Palette';
 import useInputValue from '../../../hooks/useInputValue';
 
+import { CardIndexContext, CardListContext } from '../../../contexts';
+
 const Container = styled.form`
   display: flex;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
   position: relative;
 `;
@@ -30,9 +34,26 @@ const NextButtonWrapper = styled.div`
   bottom: 0;
 `;
 
+const Dimmed = styled.div`
+  display: none;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #00000080;
+  z-index: 10;
+
+  &.is-active {
+    display: block;
+    visibility: visible;
+  }
+`;
+
 const AddCardPage = () => {
-  const [isValidatedForm, setIsValidatedForm] = useState(false);
-  const [isValidatedValueLength, setIsValidatedValueLength] = useState(false);
+  const { setCardList } = useContext(CardListContext);
+  const { cardIndex, setCardIndex } = useContext(CardIndexContext);
 
   const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] = useInputValue({
     validation: checkCardNumber,
@@ -69,63 +90,37 @@ const AddCardPage = () => {
     validation: checkPassword,
   });
 
-  const [cardInfo, setCardInfo] = useState({ color: 'red', name: '포코 카드' });
+  const [cardType, setCardType] = useState({ color: 'red', name: '포코 카드' });
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
-  useEffect(() => {
-    setIsValidatedForm(
-      !isFirstCardNumberError &&
-        !isSecondCardNumberError &&
-        !isThirdCardNumberError &&
-        !isFourthCardNumberError &&
-        !isExpiredMonthError &&
-        !isExpiredYearError &&
-        !isOwnerNameError &&
-        !isSecureCodeError &&
-        !isFirstPasswordError &&
-        !isSecondPasswordError,
-    );
-  }, [
-    isFirstCardNumberError,
-    isSecondCardNumberError,
-    isThirdCardNumberError,
-    isFourthCardNumberError,
-    isExpiredMonthError,
-    isExpiredYearError,
-    isOwnerNameError,
-    isSecureCodeError,
-    isFirstPasswordError,
-    isSecondPasswordError,
-  ]);
+  const isValidatedForm =
+    !isFirstCardNumberError &&
+    !isSecondCardNumberError &&
+    !isThirdCardNumberError &&
+    !isFourthCardNumberError &&
+    !isExpiredMonthError &&
+    !isExpiredYearError &&
+    !isOwnerNameError &&
+    !isSecureCodeError &&
+    !isFirstPasswordError &&
+    !isSecondPasswordError;
 
-  useEffect(() => {
-    setIsValidatedValueLength(
-      firstCardNumber.length > 0 &&
-        secondCardNumber.length > 0 &&
-        thirdCardNumber.length > 0 &&
-        fourthCardNumber.length > 0 &&
-        firstPassword.length > 0 &&
-        secondPassword.length > 0 &&
-        secureCode.length > 0 &&
-        expiredMonth.length > 0 &&
-        expiredYear.length > 0,
-    );
-  }, [
-    firstCardNumber,
-    secondCardNumber,
-    thirdCardNumber,
-    fourthCardNumber,
-    firstPassword,
-    secondPassword,
-    secureCode,
-    expiredMonth,
-    expiredYear,
-  ]);
+  const isValidatedValueLength =
+    firstCardNumber.length > 0 &&
+    secondCardNumber.length > 0 &&
+    thirdCardNumber.length > 0 &&
+    fourthCardNumber.length > 0 &&
+    firstPassword.length > 0 &&
+    secondPassword.length > 0 &&
+    secureCode.length > 0 &&
+    expiredMonth.length > 0 &&
+    expiredYear.length > 0;
 
-  const onSubmitCardForm = e => {
-    e.preventDefault();
-    alert('카드 등록이 완료되었습니다!❤️🧡💛💚💙💜');
+  const onSubmitCardForm = () => {
+    const newCardObj = createCardObject();
+    setCardList((prevCard) => [...prevCard, newCardObj]);
+    setCardIndex(cardIndex + 1);
   };
 
   const openModal = () => {
@@ -136,20 +131,34 @@ const AddCardPage = () => {
     setIsModalOpened(false);
   };
 
-  const onClickCardSelector = card => () => {
-    setCardInfo(card);
+  const onClickCardSelector = (card) => () => {
+    setCardType(card);
+  };
+
+  const createCardObject = () => {
+    return {
+      id: cardIndex,
+      nickName: '',
+      ownerName: ownerName,
+      cardType: cardType,
+      cardNumber: [firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber],
+      expiredDate: { expiredMonth: expiredMonth, expiredYear: expiredYear },
+      secureCode: secureCode,
+      password: [firstPassword, secondPassword],
+    };
   };
 
   return (
-    <Container onSubmit={onSubmitCardForm}>
-      <Header title="카드 추가" />
+    <Container>
+      <Header>카드추가</Header>
       <Card
         name={ownerName}
         expiredMonth={expiredMonth}
         expiredYear={expiredYear}
         cardNumbers={[firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber]}
-        cardInfo={cardInfo}
+        cardType={cardType}
         onClick={openModal}
+        size="small"
       />
       <CardNumber
         cardNumbers={[firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber]}
@@ -190,16 +199,15 @@ const AddCardPage = () => {
       />
       {isValidatedForm && isValidatedValueLength && (
         <NextButtonWrapper>
-          <NextButton name="submitButton" type="submit">
-            다음
-          </NextButton>
+          <Link to="/react-payments/result">
+            <NextButton name="submitButton" onClick={onSubmitCardForm}>
+              다음
+            </NextButton>
+          </Link>
         </NextButtonWrapper>
       )}
-      {isModalOpened && (
-        <Modal onClickDimmed={closeModal}>
-          <Palette onClickCardSelector={onClickCardSelector} />
-        </Modal>
-      )}
+      <Dimmed onClick={closeModal} className={isModalOpened ? 'is-active' : ''} />
+      <Palette onClickCardSelector={onClickCardSelector} isModalOpened={isModalOpened} />
     </Container>
   );
 };

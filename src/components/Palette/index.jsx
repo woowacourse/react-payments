@@ -10,6 +10,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: fit-content;
   align-items: center;
   border: none;
   padding: 26px 0;
@@ -18,12 +19,22 @@ const Container = styled.div`
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 
+  visibility: hidden;
+  transform: translateY(180px);
+  transition: transform 300ms ease-in-out;
+
   z-index: 10;
+
+  &.is-active {
+    visibility: visible;
+    transform: translateY(60px);
+  }
 `;
 
 const SelectorContainer = styled.div`
   display: flex;
   width: 100%;
+  height: fit-content;
   justify-content: center;
   align-items: center;
   & > div {
@@ -31,13 +42,13 @@ const SelectorContainer = styled.div`
   }
 `;
 
-const Palette = ({ onClickCardSelector }) => {
+const Palette = ({ onClickCardSelector, isModalOpened }) => {
   return (
-    <Container>
+    <Container className={isModalOpened ? 'is-active' : ''}>
       <SelectorContainer>
         {cardInfoList
           .filter((_, index) => index < 4)
-          .map(card => (
+          .map((card) => (
             <Selector
               key={card.id}
               color={card.color}
@@ -49,7 +60,7 @@ const Palette = ({ onClickCardSelector }) => {
       <SelectorContainer>
         {cardInfoList
           .filter((_, index) => index >= 4)
-          .map(card => (
+          .map((card) => (
             <Selector
               key={card.id}
               color={card.color}

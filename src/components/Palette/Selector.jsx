@@ -12,7 +12,7 @@ const SelectorWrapper = styled.div`
 `;
 
 const OptionWrapper = styled.div`
-  background-color: ${props => ColorType[props.color]};
+  background-color: ${(props) => ColorType[props.color]};
   width: 37px;
   height: 37px;
   border-radius: 50%;

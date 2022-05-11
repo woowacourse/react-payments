@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "react-app"],
+  "extends": ["react-app", "prettier"],
   "settings": {
     "import/resolver": {
       "node": {
@@ -16,36 +16,14 @@
     "no-var": "error",
     "max-depth": ["error", 2],
     "no-console": "warn",
-    "no-param-reassign": [
-      "error",
-      {
-        "props": false
-      }
-    ],
-    "linebreak-style": "off",
-    "import/extensions": "off",
-    "no-alert": "off",
-    "operator-linebreak": "off",
-    "comma-dangle": "off",
-    "object-curly-newline": "off",
-    "class-methods-use-this": "off",
-    "implicit-arrow-linebreak": "off",
-    "consistent-return": "off",
-    "object-shorthand": "off",
-    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
-    "no-underscore-dangle": "off",
-    "no-restricted-globals": "off",
-    "no-unused-expressions": ["warn", { "allowShortCircuit": true, "allowTernary": true }],
-    "import/prefer-default-export": "off",
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+    "object-curly-newline": ["error", { "ObjectPattern": { "multiline": true } }],
+    "operator-linebreak": ["error", "after"],
     "arrow-body-style": "off",
-    "arrow-parens": "off",
-    "react/function-component-definition": "off",
-    "react/prop-types": "off",
-    "react/require-default-props": "off",
-    "react/no-unused-prop-types": "off",
-    "react/react-in-jsx-scope": "off",
+    "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
     "react/jsx-curly-brace-presence": "off",
-    "react/jsx-props-no-spreading": "off",
-    "react/jsx-filename-extension": "off"
+    "react/jsx-props-no-spreading": ["error", { "custom": "ignore" }],
+    "react/jsx-filename-extension": "off",
+    "react/prop-types": "off"
   }
 }

@@ -6,7 +6,7 @@ export default {
   component: ErrorMessage,
 };
 
-const Template = args => <ErrorMessage {...args} />;
+const Template = (args) => <ErrorMessage {...args} />;
 
 export const Example = Template.bind({});
 
