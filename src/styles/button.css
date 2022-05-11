@@ -1,3 +1,12 @@
+button {
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.2);
+}
+
 .button-container {
   padding: 10px;
 }
@@ -7,23 +16,24 @@
 }
 
 .button {
-  border: none;
-  border-radius: 5px;
   padding: 10px 20px;
-  font-weight: bold;
+  border-radius: 5px;
+  background-color: var(--blue-600);
   font-size: 15px;
-  color: #fff;
-  background-color: rgb(71, 104, 255);
-  cursor: pointer;
+  font-weight: bold;
+  color: var(--white);
   transition: background-color 0.2s ease;
-}
-
-.button:hover {
-  filter: brightness(1.2);
 }
 
 .button:disabled {
   cursor: default;
-  background-color: #ddd;
+  background-color: var(--gray-300);
   filter: brightness(1);
+}
+
+.previous-button {
+  margin-right: 17px;
+  background-color: var(--white);
+  font-size: 25px;
+  color: var(--gray-800);
 }

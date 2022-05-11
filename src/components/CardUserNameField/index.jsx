@@ -1,13 +1,14 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import useErrorMessage from 'hooks/useErrorMessage';
+import CardContext from 'contexts';
 
-import FieldSet from 'components/@common/FieldSet';
-import TextField from 'components/@common/TextField';
+import { FieldSet, TextField } from 'components/@common';
 
 import { USER_NAME } from 'constants';
 import { validateUserName } from 'validators';
 
-function CardUserNameField({ userName, onChange }) {
+function CardUserNameField() {
+  const { userName, onChangeTextField } = useContext(CardContext);
   const { errorMessage, handleError } = useErrorMessage({
     state: userName,
     validate: validateUserName,
@@ -20,21 +21,12 @@ function CardUserNameField({ userName, onChange }) {
         value={userName}
         placeholder="소유자명은 영문만 입력 가능"
         maxLength={USER_NAME.MAX_LENGTH}
-        onChange={onChange}
+        onChange={onChangeTextField}
         onBlur={handleError}
       />
       <div className="input-length-text">{`${userName.length} / ${USER_NAME.MAX_LENGTH}`}</div>
     </FieldSet>
   );
 }
-
-CardUserNameField.defaultProps = {
-  userName: '',
-};
-
-CardUserNameField.propTypes = {
-  userName: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-};
 
 export default CardUserNameField;

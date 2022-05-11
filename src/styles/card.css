@@ -1,41 +1,37 @@
 .card-box {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-
   margin: 30px 0 40px;
 }
 
 .empty-card {
+  width: 246px;
+  height: 144px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  width: 208px;
-  height: 130px;
-
-  font-size: 30px;
-  color: #575757;
-
-  background: #e5e5e5;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  background: var(--gray-200);
+  box-shadow: 3px 3px 5px var(--shadow);
   border-radius: 5px;
-
-  user-select: none;
+  font-size: 30px;
+  color: var(--gray-700);
 }
 
 .small-card {
+  width: 246px;
+  height: 144px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  width: 246px;
-  height: 144px;
-  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  box-shadow: 3px 25px 25px rgba(0, 0, 0, 0.15);
+  background-image: linear-gradient(135deg, var(--blue-500) 0%, var(--purple) 100%);
+  box-shadow: 3px 3px 5px var(--shadow);
   border-radius: 5px;
   overflow: hidden;
   transition: filter 0.3s ease;
@@ -46,55 +42,61 @@
 }
 
 .small-card::before {
-  position: absolute;
-  content: '';
-  display: block;
   width: 40px;
   height: 26px;
-  left: 14px;
+
+  position: absolute;
   top: 45%;
-  transform: translateY(-50%);
-  background: #cbba64;
+  left: 14px;
+  display: block;
+
+  content: '';
+  background: var(--yellow);
   border-radius: 4px;
+  transform: translateY(-50%);
 }
 
 .big-card {
+  width: 290px;
+  height: 180px;
+
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  width: 290px;
-  height: 180px;
-
-  background: #94dacd;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  background-image: linear-gradient(135deg, var(--blue-500) 0%, var(--purple) 100%);
+  box-shadow: 3px 3px 5px var(--shadow);
   border-radius: 5px;
 }
 
-.big-card__chip {
-  width: 55.04px;
-  height: 35.77px;
+.big-card::before {
+  width: 55px;
+  height: 35px;
 
-  background: #cbba64;
+  position: absolute;
+  top: 45%;
+  left: 20px;
+  display: block;
+
+  content: '';
+  background: var(--yellow);
   border-radius: 4px;
-
-  font-size: 24px;
+  transform: translateY(-50%);
 }
 
 .card-top {
   width: 100%;
   height: 100%;
-
   display: flex;
-  align-items: top;
   padding: 15px 0;
+  align-items: top;
 }
 
 .card-bottom {
   width: 100%;
   height: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,16 +107,14 @@
 .card-bottom__number {
   width: 100%;
   height: 100%;
-
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: center;
 }
 
 .card-bottom__info {
   width: 100%;
   height: 100%;
-
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -125,7 +125,7 @@
   font-size: 14px;
   line-height: 16px;
   vertical-align: middle;
-  color: #fff;
+  color: var(--white);
 }
 
 .card-text.user-name {
@@ -144,9 +144,17 @@
 
 .card-text__big {
   margin: 0 16px;
-
-  font-size: 18px;
+  font-size: 16px;
   line-height: 20px;
   vertical-align: middle;
   font-weight: 400;
+  color: var(--white);
+}
+
+.card-nickname {
+  margin-top: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
 }

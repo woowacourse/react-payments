@@ -1,18 +1,20 @@
 import PropTypes from 'prop-types';
 
-function Button({ isDisabled, onClick, children }) {
+function Button({ className, isDisabled, onClick, children }) {
   return (
-    <button className="button" type="button" onClick={onClick} disabled={isDisabled}>
+    <button type="button" className={className} onClick={onClick} disabled={isDisabled}>
       {children}
     </button>
   );
 }
 
 Button.defaultProps = {
+  className: 'button',
   isDisabled: false,
 };
 
 Button.propTypes = {
+  className: PropTypes.string,
   isDisabled: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
 };

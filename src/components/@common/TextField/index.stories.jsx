@@ -1,5 +1,4 @@
 import TextField from '.';
-import 'index.css';
 
 export default {
   title: 'Component/@Common/TextField',

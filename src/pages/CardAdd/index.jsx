@@ -1,7 +1,11 @@
-import useCardState from 'hooks/useCardState';
+import { postCard } from 'apis';
 
-import Header from 'components/@common/Header';
-import Button from 'components/@common/Button';
+import { useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useCardState from 'hooks/useCardState';
+import CardContext from 'contexts';
+
+import { Button, Header } from 'components/@common';
 
 import {
   Card,
@@ -12,56 +16,49 @@ import {
   CardPasswordField,
 } from 'components';
 
-import {
-  validateCardNumber,
-  validateCardPassword,
-  validateExpireDate,
-  validateSecurityCode,
-  validateUserName,
-} from 'validators';
+import { CARD_NUMBER, PATH } from 'constants';
+import { validateCard } from 'validators';
 
-import { CARD_NUMBER } from 'constants';
-
-function CardAdd() {
+function CardAdd({ setCard }) {
   const [state, dispatch] = useCardState();
-  const { cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword } = state;
-  const { isComplete } = state;
+  const { isComplete, cardNumber, expireMonth, expireYear, userName } = state;
 
-  const onChangeTextField = ({ target }, option = {}) => {
-    const textFieldName = target.name;
+  const navigate = useNavigate();
 
-    switch (textFieldName) {
-      case CARD_NUMBER.TEXT_FIELD_NAME:
-        dispatch({
-          type: textFieldName,
-          contents: { index: option.index, value: target.value },
-        });
-        break;
-
-      default:
-        dispatch({
-          type: textFieldName,
-          contents: target.value,
-        });
-    }
+  const onClickPreviousButton = () => {
+    navigate(PATH.CARD_LIST);
   };
 
-  const onClickConfirmButton = () => {
-    try {
-      validateCardNumber(cardNumber);
-      validateCardPassword(cardPassword);
-      validateExpireDate({ expireMonth, expireYear });
-      validateSecurityCode(securityCode);
-      userName && validateUserName(userName);
+  const onChangeTextField = useCallback(
+    ({ target }, option = {}) => {
+      const textFieldName = target.name;
 
-      alert(`
-        리뷰어님 체크용 ✅
-        카드번호: ${cardNumber.join('-')}
-        만료일: ${expireMonth} / ${expireYear}
-        소유자: ${userName}
-        보안 코드: ${securityCode}
-        비밀 번호: ${cardPassword}
-      `);
+      switch (textFieldName) {
+        case CARD_NUMBER.TEXT_FIELD_NAME:
+          dispatch({
+            type: textFieldName,
+            contents: { index: option.index, value: target.value },
+          });
+          break;
+
+        default:
+          dispatch({
+            type: textFieldName,
+            contents: target.value,
+          });
+      }
+    },
+    [dispatch],
+  );
+
+  const onClickNextButton = async () => {
+    try {
+      validateCard(state);
+
+      setCard(state);
+      await postCard(state);
+
+      navigate(PATH.CARD_ADD_COMPLETE);
     } catch (error) {
       alert(error.message);
     }
@@ -69,27 +66,29 @@ function CardAdd() {
 
   return (
     <>
-      <Header>카드 추가</Header>
+      <div className="header">
+        <Button className="previous-button" onClick={onClickPreviousButton}>
+          &lt;
+        </Button>
+        <Header>카드 추가</Header>
+      </div>
       <Card
-        companyName="티거 카드 🐯"
         cardNumber={cardNumber}
         userName={userName}
         expireMonth={expireMonth}
         expireYear={expireYear}
-        isComplete={isComplete}
       />
-      <CardNumberField cardNumber={cardNumber} onChange={onChangeTextField} />
-      <CardExpireDateField
-        expireMonth={expireMonth}
-        expireYear={expireYear}
-        onChange={onChangeTextField}
-      />
-      <CardUserNameField userName={userName} onChange={onChangeTextField} />
-      <CardSecurityField securityCode={securityCode} onChange={onChangeTextField} />
-      <CardPasswordField cardPassword={cardPassword} onChange={onChangeTextField} />
-
+      <CardContext.Provider
+        value={useMemo(() => ({ ...state, onChangeTextField }), [state, onChangeTextField])}
+      >
+        <CardNumberField />
+        <CardExpireDateField />
+        <CardUserNameField />
+        <CardSecurityField />
+        <CardPasswordField />
+      </CardContext.Provider>
       <div className="button-container right">
-        <Button isDisabled={!isComplete} onClick={onClickConfirmButton}>
+        <Button isDisabled={!isComplete} onClick={onClickNextButton}>
           다음
         </Button>
       </div>

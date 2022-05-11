@@ -1,3 +1,10 @@
+const PATH = {
+  JSON_SERVER_BASE_URL: 'https://tigers-react-payments.herokuapp.com',
+  CARD_LIST: '/react-payments/',
+  CARD_ADD: '/react-payments/card-add',
+  CARD_ADD_COMPLETE: '/react-payments/card-add-complete',
+};
+
 const CARD_NUMBER = {
   TEXT_FIELD_NAME: 'cardNumber',
   UNIT_COUNT: 4,
@@ -61,4 +68,4 @@ const ERROR_MESSAGE = {
   },
 };
 
-export { CARD_NUMBER, EXPIRE_DATE, USER_NAME, SECURITY_CODE, CARD_PASSWORD, ERROR_MESSAGE };
+export { PATH, CARD_NUMBER, EXPIRE_DATE, USER_NAME, SECURITY_CODE, CARD_PASSWORD, ERROR_MESSAGE };

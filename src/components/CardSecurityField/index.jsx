@@ -1,13 +1,14 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import useErrorMessage from 'hooks/useErrorMessage';
+import CardContext from 'contexts';
 
-import FieldSet from 'components/@common/FieldSet';
-import TextField from 'components/@common/TextField';
+import { FieldSet, TextField } from 'components/@common';
 
 import { SECURITY_CODE } from 'constants';
 import { validateSecurityCode } from 'validators';
 
-function CardSecurityField({ securityCode, onChange }) {
+function CardSecurityField() {
+  const { securityCode, onChangeTextField } = useContext(CardContext);
   const { errorMessage, handleError } = useErrorMessage({
     state: securityCode,
     validate: validateSecurityCode,
@@ -20,21 +21,12 @@ function CardSecurityField({ securityCode, onChange }) {
         name={SECURITY_CODE.TEXT_FIELD_NAME}
         value={securityCode}
         maxLength={SECURITY_CODE.LENGTH}
-        onChange={onChange}
+        onChange={onChangeTextField}
         onBlur={handleError}
       />
       <div className="input-security-code-tip">?</div>
     </FieldSet>
   );
 }
-
-CardSecurityField.defaultProps = {
-  securityCode: '',
-};
-
-CardSecurityField.propTypes = {
-  securityCode: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-};
 
 export default CardSecurityField;

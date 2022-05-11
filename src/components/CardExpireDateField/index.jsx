@@ -1,13 +1,14 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import useErrorMessage from 'hooks/useErrorMessage';
+import CardContext from 'contexts';
 
-import FieldSet from 'components/@common/FieldSet';
-import TextField from 'components/@common/TextField';
+import { FieldSet, TextField } from 'components/@common';
 
 import { EXPIRE_DATE } from 'constants';
 import { validateExpireDate } from 'validators';
 
-function CardExpireDateField({ expireMonth, expireYear, onChange }) {
+function CardExpireDateField() {
+  const { expireMonth, expireYear, onChangeTextField } = useContext(CardContext);
   const { errorMessage, handleError } = useErrorMessage({
     state: { expireMonth, expireYear },
     validate: validateExpireDate,
@@ -21,7 +22,7 @@ function CardExpireDateField({ expireMonth, expireYear, onChange }) {
         value={expireMonth}
         placeholder="MM"
         maxLength={EXPIRE_DATE.MONTH.LENGTH}
-        onChange={onChange}
+        onChange={onChangeTextField}
         onBlur={handleError}
       />
       /
@@ -30,22 +31,11 @@ function CardExpireDateField({ expireMonth, expireYear, onChange }) {
         value={expireYear}
         placeholder="YY"
         maxLength={EXPIRE_DATE.YEAR.LENGTH}
-        onChange={onChange}
+        onChange={onChangeTextField}
         onBlur={handleError}
       />
     </FieldSet>
   );
 }
-
-CardExpireDateField.defaultProps = {
-  expireMonth: '',
-  expireYear: '',
-};
-
-CardExpireDateField.propTypes = {
-  expireMonth: PropTypes.string,
-  expireYear: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-};
 
 export default CardExpireDateField;

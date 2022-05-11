@@ -1,8 +1,9 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useReducer } from 'react';
 
 import { CARD_NUMBER, USER_NAME } from 'constants';
 
 const initialState = {
+  companyName: '티거 카드 🐯',
   cardNumber: ['', '', '', ''],
   expireMonth: '',
   expireYear: '',
@@ -43,11 +44,7 @@ const isInputComplete = (state) => {
 
 const useCardState = () => {
   const [cardState, dispatch] = useReducer(reducer, initialState);
-  const [isComplete, setComplete] = useState(false);
-
-  useEffect(() => {
-    setComplete(isInputComplete(cardState));
-  }, [cardState]);
+  const isComplete = isInputComplete(cardState);
 
   return [{ ...cardState, isComplete }, dispatch];
 };

@@ -13,45 +13,50 @@ const formatCardNumber = (cardNumber) => {
   return newCardNumber.join('-');
 };
 
-function Card({ companyName, cardNumber, userName, expireMonth, expireYear, isComplete }) {
+function Card({ size, companyName, cardNumber, userName, expireMonth, expireYear, cardNickname }) {
+  const cardTextStyle = size === 'small' ? 'card-text' : 'card-text__big';
+
   return (
     <div className="card-box">
-      <div className={`small-card${isComplete ? '' : ' empty'}`}>
+      <div className={`${size}-card`}>
         <div className="card-top">
-          <span className="card-text">{companyName}</span>
+          <span className={cardTextStyle}>{companyName}</span>
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">{formatCardNumber(cardNumber)}</span>
+            <span className={cardTextStyle}>{formatCardNumber(cardNumber)}</span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text user-name">{userName}</span>
-            <span className="card-text expire-date">
+            <span className={`${cardTextStyle} user-name`}>{userName}</span>
+            <span className={`${cardTextStyle} expire-date`}>
               {expireMonth && expireYear && `${expireMonth} / ${expireYear}`}
             </span>
           </div>
         </div>
       </div>
+      <span className="card-nickname">{cardNickname}</span>
     </div>
   );
 }
 
 Card.defaultProps = {
-  companyName: '',
+  size: 'small',
+  companyName: '티거 카드 🐯',
   cardNumber: ['', '', '', ''],
   userName: '',
   expireMonth: '',
   expireYear: '',
-  isComplete: false,
+  cardNickname: '',
 };
 
 Card.propTypes = {
+  size: PropTypes.string,
   companyName: PropTypes.string,
   cardNumber: PropTypes.arrayOf(PropTypes.string),
   userName: PropTypes.string,
   expireMonth: PropTypes.string,
   expireYear: PropTypes.string,
-  isComplete: PropTypes.bool,
+  cardNickname: PropTypes.string,
 };
 
 export default Card;
