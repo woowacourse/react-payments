@@ -28,7 +28,13 @@ body {
   position: relative;
 }
 
-/* utils */
+.main-scroll {
+  margin-top: 20px;
+  width: 327px;
+  height: 600px;
+  overflow-y: scroll;
+}
+
 .flex-center {
   display: flex;
   justify-content: center;
@@ -72,6 +78,10 @@ body {
 
 .w-75 {
   width: 75%;
+}
+
+.w-65 {
+  width: 65%;
 }
 
 .w-50 {

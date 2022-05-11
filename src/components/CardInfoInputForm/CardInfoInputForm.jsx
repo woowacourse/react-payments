@@ -1,6 +1,16 @@
-import { ERROR_MESSAGE } from 'constants';
+import { useContext } from 'react';
+import { CardInfoContext } from 'contexts/CardInfoContextProvider';
 
-function CardInputForm({ cardInfo, children }) {
+import { ERROR_MESSAGE } from 'constants';
+import { useNavigate } from 'react-router-dom';
+
+function CardInputForm({ children }) {
+  const { state, dispatch } = useContext(CardInfoContext);
+
+  const navigate = useNavigate();
+
+  const { number1, number2, number3, number4, month, year, cvc } = state.inputs;
+
   const validator = (conditions) => {
     conditions.forEach(({ checker, errorMsg }) => {
       if (checker()) throw new Error(errorMsg);
@@ -59,16 +69,22 @@ function CardInputForm({ cardInfo, children }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { number1, number2, number3, number4, month, year, cvc } = cardInfo;
-
     try {
       checkCardInfo({ number1, number2, number3, number4, month, year, cvc });
+
+      dispatch({ type: 'SET_CARD_INPUT_VALID', boolean: true });
+
+      navigate('/card-name');
     } catch (error) {
       alert(error.message);
     }
   };
 
-  return <form onSubmit={handleSubmit}>{children}</form>;
+  return (
+    <form className="card-input-form" onSubmit={handleSubmit}>
+      {children}
+    </form>
+  );
 }
 
 export default CardInputForm;

@@ -1,9 +1,17 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { CardInfoContext } from 'contexts/CardInfoContextProvider';
 
 import { inputNumberOnly, limitInputLength } from 'utils';
 import { LIMIT_LENGTH } from 'constants';
 
-function CardPassword({ cardPasswords, setCardPasswords }) {
+function CardPassword() {
+  const { state, dispatch } = useContext(CardInfoContext);
+
+  const cardPasswords = [state.inputs.password1, state.inputs.password2];
+
+  const setCardPasswords = (cardPasswords) =>
+    dispatch({ type: 'SET_CARD_PASSWORDS', cardPasswords });
+
   const handleChange = (event) => {
     const { value, name } = event.target;
 
@@ -36,7 +44,7 @@ function CardPassword({ cardPasswords, setCardPasswords }) {
       <input
         name="password1"
         className={`input-basic w-15 input-password  ${
-          cardPasswords[0].length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : null
+          cardPasswords[0]?.length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : ''
         }`}
         type="password"
         onChange={handleChange}
@@ -46,7 +54,7 @@ function CardPassword({ cardPasswords, setCardPasswords }) {
       <input
         name="password2"
         className={`input-basic w-15 input-password ${
-          cardPasswords[1].length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : null
+          cardPasswords[1]?.length >= LIMIT_LENGTH.CARD_PASSWORD ? 'input-correct' : ''
         }`}
         type="password"
         onChange={handleChange}
@@ -70,8 +78,3 @@ function CardPassword({ cardPasswords, setCardPasswords }) {
 }
 
 export default CardPassword;
-
-CardPassword.propTypes = {
-  cardPasswords: PropTypes.array.isRequired,
-  setCardPasswords: PropTypes.func.isRequired,
-};

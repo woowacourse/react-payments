@@ -1,9 +1,15 @@
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { CardInfoContext } from 'contexts/CardInfoContextProvider';
 
-import { inputNumberOnly, limitInputLength } from 'utils';
 import { LIMIT_LENGTH } from 'constants';
+import { inputNumberOnly, limitInputLength } from 'utils';
 
-function CVC({ cvc, setCVC }) {
+function CVC() {
+  const { state, dispatch } = useContext(CardInfoContext);
+  const { cvc } = state.inputs;
+
+  const setCVC = (cvc) => dispatch({ type: 'SET_CVC', cvc });
+
   const handleChange = (event) => {
     const { value } = event.target;
 
@@ -22,7 +28,7 @@ function CVC({ cvc, setCVC }) {
       <span className="input-title">보안코드(CVC/CVV)</span>
       <input
         name="cvc"
-        className={`input-basic w-25 ${cvc.length >= LIMIT_LENGTH.CVC ? 'input-correct' : null} `}
+        className={`input-basic w-25 ${cvc?.length >= LIMIT_LENGTH.CVC ? 'input-correct' : ''} `}
         type="password"
         onChange={handleChange}
         value={cvc}
@@ -33,8 +39,3 @@ function CVC({ cvc, setCVC }) {
 }
 
 export default CVC;
-
-CVC.propTypes = {
-  cvc: PropTypes.string.isRequired,
-  setCVC: PropTypes.func.isRequired,
-};

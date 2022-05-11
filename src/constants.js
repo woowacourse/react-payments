@@ -25,6 +25,7 @@ const LIMIT_LENGTH = {
 const PAGES = {
   LIST: 'listPage',
   ADD: 'addPage',
+  NAME: 'namePage',
 };
 
 const CVC_DESCRIPTION = '카드 뒷면에 있는 3자리 숫자를 입력해주세요.';

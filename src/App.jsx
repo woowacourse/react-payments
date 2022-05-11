@@ -1,15 +1,22 @@
-import { useState } from 'react';
+import CardInfoContextProvider from 'contexts/CardInfoContextProvider';
+
 import CardListPage from 'pages/CardListPage';
 import CardAddPage from 'pages/CardAddPage';
-import { PAGES } from 'constants';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import CardNamePage from 'pages/CardNamePage';
 
 function App() {
-  const [page, setPage] = useState(PAGES.LIST);
-
-  return page === PAGES.LIST ? (
-    <CardListPage setPage={setPage} />
-  ) : (
-    <CardAddPage setPage={setPage} />
+  return (
+    <BrowserRouter>
+      <CardInfoContextProvider>
+        <Routes>
+          <Route path="/react-payments" element={<CardListPage />}></Route>
+          <Route path="/card-add" element={<CardAddPage />}></Route>
+          <Route path="/card-name" element={<CardNamePage />}></Route>
+        </Routes>
+      </CardInfoContextProvider>
+    </BrowserRouter>
   );
 }
 

@@ -1,8 +1,10 @@
-import { PAGES } from 'constants';
+import { useNavigate } from 'react-router-dom';
 
-function PrevPageSign({ setPage }) {
+function PrevPageSign() {
+  const navigate = useNavigate();
+
   const handleClick = () => {
-    setPage(PAGES.LIST);
+    navigate('/react-payments');
   };
 
   return <div className="prev-page-sign" onClick={handleClick} />;

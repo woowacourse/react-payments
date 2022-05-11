@@ -1,12 +1,23 @@
+import { useContext } from 'react';
+import { CardInfoContext } from 'contexts/CardInfoContextProvider';
+
 import Header from '../components/Header/Header';
+import Main from 'components/Main/Main';
+
 import Card from 'components/common/Card/Card';
 import PageTitle from 'components/common/PageTitle/PageTitle';
 
-import { PAGES } from 'constants';
+import { useNavigate } from 'react-router-dom';
 
-function CardListPage({ setPage }) {
+function CardListPage() {
+  const { state } = useContext(CardInfoContext);
+  console.log(state);
+  const cards = state.cards;
+
+  const navigate = useNavigate();
+
   const handleCardAdd = () => {
-    setPage(PAGES.ADD);
+    navigate('/card-add');
   };
 
   return (
@@ -14,7 +25,12 @@ function CardListPage({ setPage }) {
       <Header>
         <PageTitle title="보유카드" />
       </Header>
-      <Card isEmpty handleCardAdd={handleCardAdd} />
+      <Main>
+        {cards.map((card) => {
+          return <Card key={card.id} cardInfo={card} />;
+        })}
+        <Card isEmpty handleCardAdd={handleCardAdd} />
+      </Main>
     </div>
   );
 }
