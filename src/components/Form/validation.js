@@ -1,6 +1,14 @@
-import { hasSpace, isLengthBelow, isLengthOver, isNotNumber } from '../../utils/validations';
+import {
+  hasSpace,
+  isLengthBelow,
+  isLengthOver,
+  isNotKoreanOrSpace,
+  isNotNumber,
+} from '../../utils/validations';
 
-export const checkFormCompletion = ({ cardNumber, expirationDate, securityCode, password }) => {
+export const checkFormCompletion = ({ form }) => {
+  const { cardNumber, expirationDate, securityCode, password } = form;
+
   if (Object.keys(cardNumber).some(key => isLengthBelow(cardNumber[key], 4))) {
     throw new Error('카드 번호를 완벽히 입력해주세요');
   }
@@ -27,6 +35,19 @@ export const checkFormValidation = ({ expirationDate }) => {
   return true;
 };
 
+export const checkUniqueCard = (cardInfo, cardList) => {
+  const isOverlap = Object.keys(cardList).some(key => {
+    return Object.keys(cardInfo).every(
+      numKey => cardInfo[numKey] === cardList[key].cardNumber[numKey],
+    );
+  });
+
+  if (isOverlap) {
+    throw new Error('이미 같은 번호의 카드가 존재합니다.');
+  }
+  return true;
+};
+
 export const isNumberInRange = (value, maxLength) => {
   if (hasSpace(value)) {
     return false;
@@ -37,6 +58,18 @@ export const isNumberInRange = (value, maxLength) => {
   }
 
   if (isLengthOver(value, maxLength)) {
+    return false;
+  }
+
+  return true;
+};
+
+export const isKoreanInRange = (value, maxLength) => {
+  if (isLengthOver(value, maxLength)) {
+    return false;
+  }
+
+  if (!isNotKoreanOrSpace(value)) {
     return false;
   }
 

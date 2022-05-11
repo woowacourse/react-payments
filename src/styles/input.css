@@ -2,6 +2,12 @@
   margin: 16px 0;
 }
 
+.input-box-underline {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0);
+}
+
 .input-box {
   display: flex;
   align-items: center;
@@ -35,14 +41,11 @@
 }
 
 .input-underline {
-  text-align: center;
   border: none;
-  background: none;
   outline: none;
-
-  margin: 16px 0;
-  padding: 4px 0;
-
+  text-align: center;
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0);
   border-bottom: 1px solid #383838;
 }
 
@@ -50,25 +53,6 @@
   width: 100%;
   text-align: center;
   color: #04c09e;
-}
-
-.help-content {
-  border: 1px solid #bababa;
-  border-radius: 100%;
-  width: 32px;
-  text-align: center;
-  padding-left: 1px;
-  padding-top: 1px;
-}
-
-.help-content-text {
-  position: absolute;
-  right: 30px;
-
-  color: #04c09e;
-  font-size: 12px;
-  text-align: center;
-  width: 200px;
 }
 
 input.error {

@@ -13,6 +13,7 @@
     "react-dom": "^18.0.0",
     "react-scripts": "5.0.1",
     "react-uid": "^2.3.2",
+    "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -23,7 +24,8 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "deploy": "gh-pages -d build",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+    "chromatic": "npx chromatic --project-token=9df885803f04"
   },
   "eslintConfig": {
     "extends": [
@@ -64,9 +66,11 @@
     "@storybook/preset-create-react-app": "^4.1.0",
     "@storybook/react": "^6.4.22",
     "@storybook/testing-library": "^0.0.11",
+    "chromatic": "^6.5.4",
     "eslint": "^8.14.0",
     "eslint-plugin-react": "^7.29.4",
     "prettier": "^2.6.2",
+    "storybook-react-context": "^0.6.0",
     "webpack": "^5.72.0"
   }
 }

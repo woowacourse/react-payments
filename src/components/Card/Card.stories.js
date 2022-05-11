@@ -1,24 +1,57 @@
 import React from 'react';
-import Card from './';
+import Card from './Card';
+import { CardContext } from '../../context';
+import { DEFAULT_CARD_INFO } from '../../constants';
+
 export default {
   component: Card,
   title: 'Card',
 };
 
-const Template = args => <Card {...args} />;
+const cardState = {
+  cardInput: DEFAULT_CARD_INFO,
+};
 
-export const DefaultCard = Template.bind({});
+const Template = args => (
+  <CardContext.Provider value={cardState}>
+    <Card {...args} />;
+  </CardContext.Provider>
+);
 
-DefaultCard.args = {
-  cardNumber: {
-    first: '1234',
-    second: '4567',
-    third: '8910',
-    forth: '1234',
+export const smallCard = Template.bind({});
+
+smallCard.args = {
+  cardInformation: {
+    cardNumber: {
+      first: '1234',
+      second: '4567',
+      third: '8910',
+      forth: '1234',
+    },
+    expirationDate: {
+      month: '11',
+      year: '24',
+    },
+    ownerName: 'UM JI HYEOK',
   },
-  expirationDate: {
-    month: '11',
-    year: '24',
+  cardBoxSize: 'small',
+};
+
+export const bigCard = Template.bind({});
+
+bigCard.args = {
+  cardInformation: {
+    cardNumber: {
+      first: '1234',
+      second: '4567',
+      third: '8910',
+      forth: '1234',
+    },
+    expirationDate: {
+      month: '11',
+      year: '24',
+    },
+    ownerName: 'UM JI HYEOK',
   },
-  ownerName: 'JANG JUN HYEOK',
+  cardBoxSize: 'big',
 };

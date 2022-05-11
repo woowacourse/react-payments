@@ -1,7 +1,5 @@
 @import './card.css';
 @import './input.css';
-@import './button.css';
-@import './modal.css';
 @import './utils.css';
 
 body {
@@ -31,6 +29,10 @@ input {
   padding: 16px 24px;
 }
 
+.hide {
+  display: none;
+}
+
 .page-title {
   font-weight: 500;
   font-size: 20px;
@@ -39,4 +41,16 @@ input {
   align-items: center;
 
   color: #383838;
+}
+
+.complete-page-title {
+  font-weight: 400;
+  font-size: 25px;
+  margin: 130px 0 80px 0;
+  justify-content: center;
+}
+
+nav {
+  display: flex;
+  align-items: center;
 }
