@@ -1,5 +1,5 @@
 {
-  "homepage": "https://uk960214.github.io/react-payments",
+  "homepage": ".",
   "name": "react-payments",
   "version": "0.1.0",
   "private": true,
@@ -7,6 +7,7 @@
     "prop-types": "^15.8.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
@@ -20,7 +21,7 @@
     "deploy": "gh-pages -d build",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "chromatic": "npx chromatic --project-token=67f92342b528"
+    "chromatic": "npx chromatic --project-token=bbd18bbfa9f5"
   },
   "eslintConfig": {
     "extends": [

@@ -32,24 +32,20 @@ const StyledInputContainer = styled.div`
   gap: 10px;
 `;
 
-const StyledErrorMessage = styled.span`
+const StyledGuideMessage = styled.span`
   margin-left: 4px;
   font-size: 11px;
   color: #f38181;
 `;
 
-export default function InputField({
-  labelText,
-  children,
+function InputWrapper({
+  inputChildren,
   wrapperWidth,
   horizontalAlign,
-  isComplete,
-  errorMessage,
-  OptionalComponent,
   splitCount,
 }) {
-  const InputChildren = splitCount ? (
-    children.map((inputComponent, index) => (
+  return splitCount ? (
+    inputChildren.map((inputComponent, index) => (
       <StyledInputWrapper
         key={index}
         width={`calc(${wrapperWidth} / ${splitCount})`}
@@ -60,20 +56,36 @@ export default function InputField({
     ))
   ) : (
     <StyledInputWrapper width={wrapperWidth} align={horizontalAlign}>
-      {children}
+      {inputChildren}
     </StyledInputWrapper>
   );
+}
 
+export default function InputField({
+  labelText,
+  children,
+  wrapperWidth,
+  horizontalAlign,
+  isComplete,
+  guideMessage,
+  OptionalComponent,
+  splitCount,
+}) {
   return (
     <StyledInputField>
       <StyledLabel isComplete={isComplete}>
         {labelText}
         {!isComplete && (
-          <StyledErrorMessage>{`(${errorMessage})`}</StyledErrorMessage>
+          <StyledGuideMessage>{`(${guideMessage})`}</StyledGuideMessage>
         )}
       </StyledLabel>
       <StyledInputContainer>
-        {InputChildren}
+        <InputWrapper
+          inputChildren={children}
+          wrapperWidth={wrapperWidth}
+          horizontalAlign={horizontalAlign}
+          splitCount={splitCount}
+        />
         {OptionalComponent}
       </StyledInputContainer>
     </StyledInputField>
@@ -82,10 +94,14 @@ export default function InputField({
 
 InputField.propTypes = {
   labelText: PropTypes.string,
+  guideMessage: PropTypes.string,
+  wrapperWidth: PropTypes.string,
+  horizontalAlign: PropTypes.oneOf(["flex-start", "center", "space-around"]),
+  isComplete: PropTypes.oneOf([true, false]),
+  splitCount: PropTypes.number,
+  OptionalComponent: PropTypes.node,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
-  wrapperWidth: PropTypes.string,
-  horizontalAlign: PropTypes.oneOf(["flex-start", "center", "space-around"]),
 };

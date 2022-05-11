@@ -1,4 +1,3 @@
-import React from "react";
 import Input from "./Input";
 
 export default {
@@ -10,7 +9,11 @@ const Template = (args) => <Input {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  placeholder: "placeholder",
-  name: "default-input",
+  name: "Default",
+  className: "Default",
   type: "text",
+  placeholder: "Default",
+  width: "100%",
+  maxLength: 3,
+  isComplete: false,
 };

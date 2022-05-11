@@ -1,6 +1,16 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  src: url('./assets/fonts/Roboto-Black.ttf'), 
+  url('./assets/fonts/Roboto-Bold.ttf'),
+  url('./assets/fonts/Roboto-Light.ttf'),
+  url('./assets/fonts/Roboto-Medium.ttf'),
+  url('./assets/fonts/Roboto-Regular.ttf'),
+  url('./assets/fonts/Roboto-Thin.ttf'),
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

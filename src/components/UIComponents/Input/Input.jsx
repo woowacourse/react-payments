@@ -16,6 +16,7 @@ export const StyledInput = styled.input`
 
   outline: none;
   border: none;
+  border-bottom: ${(props) => props.borderBottom};
 
   /* 숫자 입력란 화살표 숨김 */
   /* Chrome, Safari, Edge, Opera */
@@ -37,17 +38,18 @@ export const StyledInput = styled.input`
   }
 `;
 
-const Input = React.forwardRef((props, ref) => {
-  return <StyledInput {...props} ref={ref} />;
-});
-
-export default Input;
+export default function Input(props) {
+  return <StyledInput {...props} />;
+}
 
 Input.propTypes = {
   name: PropTypes.string,
+  className: PropTypes.string,
   type: PropTypes.oneOf(["text", "number", "password"]),
   placeholder: PropTypes.string,
   width: PropTypes.string,
+  maxLength: PropTypes.number,
+  isComplete: PropTypes.oneOf([true, false]),
 };
 
 Input.defaultProps = {
@@ -55,4 +57,5 @@ Input.defaultProps = {
   type: "text",
   width: "70px",
   textAlign: "center",
+  borderBottom: "none",
 };

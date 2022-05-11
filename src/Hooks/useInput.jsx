@@ -1,72 +1,108 @@
 import { useState } from "react";
-import { INPUT_KEY_TABLE } from "../constants/constants";
 
-export default function useInput(initialValue, validator, inputRef) {
+export default function useInput(initialValue, validator) {
   const [value, setValue] = useState(initialValue);
 
-  const handleDate = (value, order) => {
-    const parsedValue =
-      value.startsWith("0") && value.length !== 1 ? value.slice(1) : value;
-
-    if (validator(parsedValue, order)) return;
-
-    setValue((prevValue) => {
-      const newValue = [...prevValue];
-      newValue[order] =
-        parsedValue.length === 1 && Number(parsedValue) !== 0
-          ? `0${parsedValue}`
-          : parsedValue;
-
-      return newValue;
-    });
-  };
-
-  const handleNumbers = (value, order, type, name, typeMaxLength) => {
-    const targetIndex = INPUT_KEY_TABLE[type].findIndex(
-      (targetNumber) => targetNumber === name
-    );
-
+  const handleDate = (value, keyType) => {
     if (validator(value)) return;
 
     setValue((prevValue) => {
-      const newValue = [...prevValue];
-      newValue[order] = value;
-      return newValue;
+      return {
+        ...prevValue,
+        [keyType]: value,
+      };
     });
-
-    if (value.length === typeMaxLength) {
-      inputRef.current[type][targetIndex + 1]?.focus();
-    }
   };
 
-  const handleUpperCaseName = (value) => {
+  const handleCardNumber = (value, keyType) => {
     if (validator(value)) return;
 
-    setValue(value.toUpperCase());
+    setValue((prevValue) => {
+      return {
+        ...prevValue,
+        [keyType]: value,
+      };
+    });
   };
 
-  const onChange = (event, type, order, typeMaxLength) => {
-    const { target } = event;
-    const { value, name } = target;
-
-    if (type === "expireDate") {
-      handleDate(value, order);
-      return;
-    }
-
-    if (type === "cardNumbers" || type === "passwordNumbers") {
-      handleNumbers(value, order, type, name, typeMaxLength);
-      return;
-    }
-
-    if (type === "holderName") {
-      handleUpperCaseName(value);
-      return;
-    }
-
+  const handleNameToUpperCase = (value) => {
     if (validator(value)) return;
-    setValue(value);
+
+    setValue((prevValue) => {
+      return {
+        ...prevValue,
+        value: value.toUpperCase(),
+      };
+    });
   };
 
-  return [value, onChange];
+  const handleSecurityCode = (value) => {
+    if (validator(value)) return;
+
+    setValue((prevValue) => {
+      return {
+        ...prevValue,
+        value: "•".repeat(value.length),
+      };
+    });
+  };
+
+  const handlePassword = (value, keyType) => {
+    console.log(value);
+    if (validator(value)) return;
+
+    setValue((prevValue) => {
+      return {
+        ...prevValue,
+        [keyType]: "•".repeat(value.length),
+      };
+    });
+  };
+  const handleCardAlias = (value) => {
+    if (validator(value)) return;
+
+    setValue((prevValue) => {
+      return {
+        ...prevValue,
+        value,
+      };
+    });
+  };
+
+  const onChange = (event, keyType) => {
+    const {
+      target: { value, name },
+    } = event;
+
+    if (name === "expireDate") {
+      handleDate(value, keyType);
+      return;
+    }
+
+    if (name === "cardNumber") {
+      handleCardNumber(value, keyType);
+      return;
+    }
+
+    if (name === "holderName") {
+      handleNameToUpperCase(value);
+      return;
+    }
+
+    if (name === "securityCode") {
+      handleSecurityCode(value);
+      return;
+    }
+
+    if (name === "password") {
+      handlePassword(value, keyType);
+      return;
+    }
+
+    if (name === "cardAlias") {
+      handleCardAlias(value, keyType);
+    }
+  };
+
+  return [value, onChange, setValue];
 }
