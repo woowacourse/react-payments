@@ -15,6 +15,8 @@ import {
   PossessedCard,
 } from 'pages/CardListPage/style'
 
+import { PATH } from 'constant'
+
 function CardListPage() {
   const [cardList] = useLocalStorage('cardList')
   const navigate = useNavigate()
@@ -28,9 +30,9 @@ function CardListPage() {
           {cardListArray.map(([key, value]) => (
             <PossessedCard key={key}>
               <Link
-                to={`/react-payments/nickname/${Object.values(
-                  value.cardNumber
-                ).join('')}`}
+                to={`${PATH.NICKNAME}/${Object.values(value.cardNumber).join(
+                  ''
+                )}`}
               >
                 <Card size="small" cardInfo={value} />
               </Link>

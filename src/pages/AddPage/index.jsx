@@ -21,7 +21,7 @@ import {
   GridWrapper,
 } from 'pages/style'
 
-import { COLORS, CARD_COMPANY, ALERT_MESSAGE } from 'constant'
+import { COLORS, CARD_COMPANY, ALERT_MESSAGE, PATH } from 'constant'
 
 import CardInfoContext from 'context/cardInfo-context'
 
@@ -49,9 +49,7 @@ function AddPage() {
     if (dueMonth.error || dueYear.error) {
       return alert(ALERT_MESSAGE.CHECK_DUE_DATE)
     }
-    navigate(
-      `/react-payments/nickname/${Object.values(cardInfo.cardNumber).join('')}`
-    )
+    navigate(`${PATH.NICKNAME}/${Object.values(cardInfo.cardNumber).join('')}`)
   }
 
   return (

@@ -15,11 +15,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CardInfoProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Routes>
             <Route path={PATH.MAIN} element={<CardListPage />} />
             <Route path={PATH.ADD} element={<AddPage />} />
-            <Route path={PATH.NICKNAME} element={<NickNamePage />} />
+            <Route path={`${PATH.NICKNAME}/:id`} element={<NickNamePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

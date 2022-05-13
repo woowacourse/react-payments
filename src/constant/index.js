@@ -56,9 +56,9 @@ const ALERT_MESSAGE = {
 }
 
 const PATH = {
-  MAIN: 'react-payments',
-  ADD: 'react-payments/add',
-  NICKNAME: 'react-payments/nickname/:id',
+  MAIN: '/',
+  ADD: '/add',
+  NICKNAME: '/nickname',
 }
 
 export {
