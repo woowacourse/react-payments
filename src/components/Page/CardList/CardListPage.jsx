@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { CardListContext } from 'contexts';
 
 import Card from 'components/Card';
-import PlusCard from 'components/Card/PlusCard';
 import Label from 'components/Label';
 
 const Container = styled.div`
@@ -45,6 +44,19 @@ const PlusCardWrapper = styled.div`
   margin-top: 20px;
 `;
 
+const PlusCard = styled.button`
+  width: 208px;
+  height: 130px;
+  text-align: center;
+  font-size: 30px;
+  border-style: none;
+  border-radius: 4px;
+  &:hover {
+    border: 2px solid #94dacd;
+    color: #94dacd;
+  }
+`;
+
 const CardListPage = () => {
   const { cardList } = useContext(CardListContext);
 
@@ -68,7 +80,7 @@ const CardListPage = () => {
       </CardListContainer>
       <PlusCardWrapper>
         <Link to="/react-payments/">
-          <PlusCard />
+          <PlusCard>+</PlusCard>
         </Link>
       </PlusCardWrapper>
     </Container>
