@@ -1,10 +1,22 @@
 import React, { useEffect, useState, useReducer } from 'react'
-import reducer from 'context/reduce'
-import { initialCardInfo } from 'context/constant'
+import reducer from 'context/reducer'
 
 import { CARD_NUMBER, DUE_DATE, CVC } from 'constant'
 
 const CardInfoContext = React.createContext()
+
+const CHANGE_CARD_COMPANY = 'CHANGE_CARD_COMPANY'
+const CHANGE_CARD_INFO = 'CHANGE_CARD_INFO'
+const CLEAR_CARD_INFO = 'CLEAR_CARD_INFO'
+
+const initialCardInfo = {
+  company: '',
+  cardNumber: { first: '', second: '', third: '', fourth: '' },
+  dueDate: { month: '', year: '' },
+  owner: '',
+  cvc: '',
+  password: { first: '', second: '' },
+}
 
 const initialError = {
   cardNumber: { error: false, errorMessage: '' },
@@ -12,7 +24,7 @@ const initialError = {
   dueYear: { error: false, errorMessage: '' },
 }
 
-export function CardInfoProvider({ children }) {
+function CardInfoProvider({ children }) {
   const [cardInfo, dispatch] = useReducer(reducer, initialCardInfo)
   const [isError, setIsError] = useState(initialError)
   const [isFormFulfilled, setIsFormFulfilled] = useState(false)
@@ -33,14 +45,14 @@ export function CardInfoProvider({ children }) {
   }, [cardInfo])
 
   const handleCardCompany = (company) => {
-    dispatch({ type: 'CHANGE_CARD_COMPANY', name: 'company', value: company })
+    dispatch({ type: CHANGE_CARD_COMPANY, name: 'company', value: company })
   }
 
   const handleCardNumberChange = (target, key) => {
     const { value } = target
 
     dispatch({
-      type: 'CHANGE_CARD_INFO',
+      type: CHANGE_CARD_INFO,
       name: 'cardNumber',
       key: key,
       value: value,
@@ -51,7 +63,7 @@ export function CardInfoProvider({ children }) {
     const { value } = target
 
     dispatch({
-      type: 'CHANGE_CARD_INFO',
+      type: CHANGE_CARD_INFO,
       name: 'dueDate',
       key: key,
       value: value,
@@ -62,7 +74,7 @@ export function CardInfoProvider({ children }) {
     const { value } = target
 
     dispatch({
-      type: 'CHANGE_CARD_INFO',
+      type: CHANGE_CARD_INFO,
       name: 'owner',
       value: value.toUpperCase(),
     })
@@ -72,7 +84,7 @@ export function CardInfoProvider({ children }) {
     const { value } = target
 
     dispatch({
-      type: 'CHANGE_CARD_INFO',
+      type: CHANGE_CARD_INFO,
       name: 'cvc',
       value: value,
     })
@@ -82,7 +94,7 @@ export function CardInfoProvider({ children }) {
     const { value } = target
 
     dispatch({
-      type: 'CHANGE_CARD_INFO',
+      type: CHANGE_CARD_INFO,
       name: 'password',
       key: key,
       value: value,
@@ -91,7 +103,7 @@ export function CardInfoProvider({ children }) {
 
   const clearCardInfo = () => {
     dispatch({
-      type: 'CLEAR_CARD_INFO',
+      type: CLEAR_CARD_INFO,
     })
   }
 
@@ -117,3 +129,11 @@ export function CardInfoProvider({ children }) {
 }
 
 export default CardInfoContext
+
+export {
+  CardInfoProvider,
+  initialCardInfo,
+  CHANGE_CARD_COMPANY,
+  CHANGE_CARD_INFO,
+  CLEAR_CARD_INFO,
+}
