@@ -19,7 +19,7 @@ function PasswordField() {
   } = useContext(CardInfoContext)
 
   const { refList, moveToNextInput } = useAutoFocus({
-    maxLength: PASSWORD.UNIT_LENGTH,
+    maxLength: [PASSWORD.UNIT_LENGTH, PASSWORD.UNIT_LENGTH],
   })
 
   const handleInputChange = ({ target }, key) => {

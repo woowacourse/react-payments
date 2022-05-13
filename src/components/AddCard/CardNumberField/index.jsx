@@ -25,7 +25,12 @@ function CardNumberField() {
   } = useContext(CardInfoContext)
 
   const { refList, moveToNextInput } = useAutoFocus({
-    maxLength: CARD_NUMBER.UNIT_LENGTH,
+    maxLength: [
+      CARD_NUMBER.UNIT_LENGTH,
+      CARD_NUMBER.UNIT_LENGTH,
+      CARD_NUMBER.UNIT_LENGTH,
+      CARD_NUMBER.UNIT_LENGTH,
+    ],
   })
   const [cardList] = useLocalStorage('cardList')
 

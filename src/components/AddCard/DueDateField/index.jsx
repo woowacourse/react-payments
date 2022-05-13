@@ -23,7 +23,7 @@ function DueDateField() {
   } = useContext(CardInfoContext)
 
   const { refList, moveToNextInput } = useAutoFocus({
-    maxLength: DUE_DATE.UNIT_LENGTH,
+    maxLength: [DUE_DATE.UNIT_LENGTH, DUE_DATE.UNIT_LENGTH],
   })
 
   const handleInputChange = ({ target }, key) => {
