@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CardIndexContext, CardListContext } from 'contexts/index';
+import { useCardListStore } from 'contexts/index';
 import useInputValue from 'hooks/useInputValue';
 import { checkCardNickName } from 'validation';
 
@@ -46,18 +46,17 @@ const NextButtonWrapper = styled.div`
 `;
 
 const AddCardResultPage = () => {
-  const { cardList, setCardList } = useContext(CardListContext);
-  const { cardIndex } = useContext(CardIndexContext);
+  const { cardList, setCardList } = useCardListStore();
 
   const [cardNickName, isCardNickNameError, onChangeCardNickName] = useInputValue({
     validation: checkCardNickName,
   });
 
-  const { ownerName, cardType, cardNumbers, expiredDate } = cardList[cardIndex - 1];
+  const { ownerName, cardType, cardNumbers, expiredDate } = cardList[cardList.length - 1];
 
   const submitCardNickName = () => {
     const updatedCardList = cardList.map((item) =>
-      item.id === cardIndex - 1 ? { ...item, nickName: cardNickName } : item,
+      item.id === cardList.length - 1 ? { ...item, nickName: cardNickName } : item,
     );
     setCardList(updatedCardList);
   };

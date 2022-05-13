@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CardListContext } from 'contexts';
+import { useCardListStore } from 'contexts';
 
 import Card from 'components/Card';
 import Label from 'components/Label';
@@ -58,7 +58,7 @@ const PlusCard = styled.button`
 `;
 
 const CardListPage = () => {
-  const { cardList } = useContext(CardListContext);
+  const { cardList } = useCardListStore();
 
   return (
     <Container>
