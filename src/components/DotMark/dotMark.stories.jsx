@@ -1,5 +1,5 @@
 import React from 'react';
-import DotMark from './index';
+import DotMark from 'components/DotMark/index';
 
 export default {
   title: 'DotMark',

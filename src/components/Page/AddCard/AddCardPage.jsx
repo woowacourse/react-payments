@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardNumber, ExpiredDate, CardOwnerName, SecureCode, Password } from './index';
 
-import NextButton from '../../Button';
-import Header from '../../Header';
+import NextButton from 'components/Button';
+import Header from 'components/Header';
 import {
   checkExpiredMonth,
   checkExpiredYear,
@@ -12,13 +12,13 @@ import {
   checkSecureCode,
   checkPassword,
   checkCardNumber,
-} from '../../../validation';
+} from 'validation';
 
-import Card from '../../Card';
-import Palette from '../../Palette';
-import useInputValue from '../../../hooks/useInputValue';
+import Card from 'components/Card';
+import Palette from 'components/Palette';
+import useInputValue from 'hooks/useInputValue';
 
-import { CardIndexContext, CardListContext } from '../../../contexts';
+import { CardIndexContext, CardListContext } from 'contexts';
 
 const Container = styled.form`
   display: flex;

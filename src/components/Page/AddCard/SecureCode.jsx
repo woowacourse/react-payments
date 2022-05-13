@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import FieldSet from '../../FieldSet';
-import Input from '../../Input';
-import Tooltip from '../../ToolTip';
+
+import FieldSet from 'components/FieldSet';
+import Input from 'components/Input';
+import Tooltip from 'components/ToolTip';
 
 const SecureCodeInputContainer = styled.div`
   width: fit-content;

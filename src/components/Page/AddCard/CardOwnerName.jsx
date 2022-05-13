@@ -2,8 +2,8 @@ import React from 'react';
 
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Input from '../../Input';
-import FieldSet from '../../FieldSet';
+import Input from 'components/Input';
+import FieldSet from 'components/FieldSet';
 
 const CardOwnerContainer = styled.div`
   padding-top: 10px;

@@ -1,8 +1,8 @@
 import React from 'react';
-import Input from './index';
-import CardNumberInput from './CardNumberInput';
-import ExpiredDateInput from './ExpiredDateInput';
-import CardNickNameInput from './CardNickNameInput';
+import Input from 'components/Input/index';
+import CardNumberInput from 'components/Input/CardNumberInput';
+import ExpiredDateInput from 'components/Input/ExpiredDateInput';
+import CardNickNameInput from 'components/Input/CardNickNameInput';
 
 export default {
   title: 'Input',

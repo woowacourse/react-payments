@@ -2,15 +2,15 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CardIndexContext, CardListContext } from '../../../contexts/index';
-import useInputValue from '../../../hooks/useInputValue';
-import { checkCardNickName } from '../../../validation';
+import { CardIndexContext, CardListContext } from 'contexts/index';
+import useInputValue from 'hooks/useInputValue';
+import { checkCardNickName } from 'validation';
 
-import NextButton from '../../Button';
-import Card from '../../Card';
-import CardNickNameInput from '../../Input/CardNickNameInput';
+import NextButton from 'components/Button';
+import Card from 'components/Card';
+import CardNickNameInput from 'components/Input/CardNickNameInput';
 
-import ErrorMessage from '../../ErrorMessage';
+import ErrorMessage from 'components/ErrorMessage';
 
 const Container = styled.div`
   display: flex;

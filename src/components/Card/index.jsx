@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import EmptyCard from './EmptyCard';
+import EmptyCard from 'components/Card/EmptyCard';
 
 const CardContainer = styled.div`
   position: relative;

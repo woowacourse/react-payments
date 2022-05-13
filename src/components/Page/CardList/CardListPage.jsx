@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CardListContext } from '../../../contexts';
+import { CardListContext } from 'contexts';
 
-import Card from '../../Card';
-import PlusCard from '../../Card/PlusCard';
-import Label from '../../Label';
+import Card from 'components/Card';
+import PlusCard from 'components/Card/PlusCard';
+import Label from 'components/Label';
 
 const Container = styled.div`
   display: flex;

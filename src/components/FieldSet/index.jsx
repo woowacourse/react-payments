@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Label from '../Label/index';
-import ErrorMessage from '../ErrorMessage/index';
+import Label from 'components/Label/index';
+import ErrorMessage from 'components/ErrorMessage/index';
 
 const FieldSetContainer = styled.fieldset`
   border: none;

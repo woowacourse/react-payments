@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { ColorType } from '../../constant';
+import { ColorType } from 'constant';
 
 const CardScaleType = {
   small: {

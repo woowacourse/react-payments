@@ -1,12 +1,12 @@
 import React from 'react';
-import Label from './index';
+import Label from 'components/Label/index';
 
 export default {
   title: 'Label',
   component: Label,
 };
 
-const Template = args => <Label {...args} />;
+const Template = (args) => <Label {...args} />;
 
 export const Example = Template.bind({});
 

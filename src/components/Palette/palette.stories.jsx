@@ -1,5 +1,5 @@
 import React from 'react';
-import Palette from './index';
+import Palette from 'components/Palette/index';
 
 export default {
   title: 'Palette',

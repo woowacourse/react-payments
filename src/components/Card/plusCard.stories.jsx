@@ -1,5 +1,5 @@
 import React from 'react';
-import PlusCard from './PlusCard';
+import PlusCard from 'components/Card/PlusCard';
 
 export default {
   title: 'PlusCard',

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Input from './index';
+import Input from 'components/Input/index';
 
 const ExpiredDateWrapper = styled.div`
   width: fit-content;

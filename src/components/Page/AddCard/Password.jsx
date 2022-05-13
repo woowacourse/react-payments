@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import FieldSet from '../../FieldSet';
-import Input from '../../Input';
-import DotMark from '../../DotMark';
+import FieldSet from 'components/FieldSet';
+import Input from 'components/Input';
+import DotMark from 'components/DotMark';
 
 const PasswordInputContainer = styled.div`
   display: flex;

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import AddCardPage from './components/Page/AddCard/AddCardPage';
-import AddCardResultPage from './components/Page/AddCardResult/AddCardResult';
-import CardListPage from './components/Page/CardList/CardListPage';
-import { CardListContext, CardIndexContext } from './contexts';
+import { CardListContext, CardIndexContext } from 'contexts';
+
+import AddCardPage from 'components/Page/AddCard/AddCardPage';
+import AddCardResultPage from 'components/Page/AddCardResult/AddCardResult';
+import CardListPage from 'components/Page/CardList/CardListPage';
 
 const App = () => {
   const [cardList, setCardList] = useState([]);
