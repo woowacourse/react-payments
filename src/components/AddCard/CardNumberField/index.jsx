@@ -20,7 +20,7 @@ function CardNumberField() {
     isError: {
       cardNumber: { error, errorMessage },
     },
-    handleCardNumberChange,
+    setCardNumberChange,
     setIsError,
   } = useContext(CardInfoContext)
 
@@ -38,7 +38,7 @@ function CardNumberField() {
     const { value } = target
     if (isInvalidCardNumber(value)) return
 
-    handleCardNumberChange(target, key)
+    setCardNumberChange(target, key)
 
     if (key === 'fourth') {
       const { first, second, third } = cardNumber

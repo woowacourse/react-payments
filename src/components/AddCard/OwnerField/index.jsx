@@ -13,14 +13,14 @@ import { isInvalidOwner } from 'validation'
 function OwnerField() {
   const {
     cardInfo: { owner },
-    handleOwnerChange,
+    setOwner,
   } = useContext(CardInfoContext)
 
   const handleInputChange = ({ target }) => {
     const { value } = target
     if (isInvalidOwner(value)) return
 
-    handleOwnerChange(target)
+    setOwner(value)
   }
 
   return (

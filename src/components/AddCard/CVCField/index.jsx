@@ -13,14 +13,14 @@ import { isInvalidCVC } from 'validation'
 function CVCField() {
   const {
     cardInfo: { cvc },
-    handleCvcChange,
+    setCvc,
   } = useContext(CardInfoContext)
 
   const handleInputChange = ({ target }) => {
     const { value } = target
     if (isInvalidCVC(value)) return
 
-    handleCvcChange(target)
+    setCvc(target)
   }
 
   return (

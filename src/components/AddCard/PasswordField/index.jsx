@@ -15,7 +15,7 @@ import { isInvalidPassword } from 'validation'
 function PasswordField() {
   const {
     cardInfo: { password },
-    handlePasswordChange,
+    setPassword,
   } = useContext(CardInfoContext)
 
   const { refList, moveToNextInput } = useAutoFocus({
@@ -25,7 +25,7 @@ function PasswordField() {
   const handleInputChange = ({ target }, key) => {
     const { value } = target
     if (isInvalidPassword(value)) return
-    handlePasswordChange(target, key)
+    setPassword(target, key)
     moveToNextInput(target)
   }
 

@@ -30,7 +30,7 @@ function AddPage() {
     cardInfo,
     isError: { cardNumber, dueMonth, dueYear },
     isFormFulfilled,
-    handleCardCompany,
+    setCardCompany,
   } = useContext(CardInfoContext)
   const [isModalOpen, setIsModalOpen] = useState(!cardInfo.company)
 
@@ -79,7 +79,7 @@ function AddPage() {
               color={color}
               company={company}
               handleClick={() => {
-                handleCardCompany(company)
+                setCardCompany(company)
               }}
               key={company}
             />

@@ -19,7 +19,7 @@ function DueDateField() {
       dueYear: { error: yearError, errorMessage: yearErrorMessage },
     },
     setIsError,
-    handleDueDateChange,
+    setDueDate,
   } = useContext(CardInfoContext)
 
   const { refList, moveToNextInput } = useAutoFocus({
@@ -30,7 +30,7 @@ function DueDateField() {
     const { value } = target
     if (isInvalidDueDate(value)) return
 
-    handleDueDateChange(target, key)
+    setDueDate(target, key)
 
     if (key === 'month') {
       setIsError((prev) => {

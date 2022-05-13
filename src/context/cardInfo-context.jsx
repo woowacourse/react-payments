@@ -44,11 +44,11 @@ function CardInfoProvider({ children }) {
     )
   }, [cardInfo])
 
-  const handleCardCompany = (company) => {
+  const setCardCompany = (company) => {
     dispatch({ type: CHANGE_CARD_COMPANY, name: 'company', value: company })
   }
 
-  const handleCardNumberChange = (target, key) => {
+  const setCardNumber = (target, key) => {
     const { value } = target
 
     dispatch({
@@ -59,7 +59,7 @@ function CardInfoProvider({ children }) {
     })
   }
 
-  const handleDueDateChange = (target, key) => {
+  const setDueDate = (target, key) => {
     const { value } = target
 
     dispatch({
@@ -70,7 +70,7 @@ function CardInfoProvider({ children }) {
     })
   }
 
-  const handleOwnerChange = (target) => {
+  const setOwner = (target) => {
     const { value } = target
 
     dispatch({
@@ -80,7 +80,7 @@ function CardInfoProvider({ children }) {
     })
   }
 
-  const handleCvcChange = (target) => {
+  const setCvc = (target) => {
     const { value } = target
 
     dispatch({
@@ -90,7 +90,7 @@ function CardInfoProvider({ children }) {
     })
   }
 
-  const handlePasswordChange = (target, key) => {
+  const setPassword = (target, key) => {
     const { value } = target
 
     dispatch({
@@ -114,12 +114,12 @@ function CardInfoProvider({ children }) {
         isFormFulfilled,
         isError,
         setIsError,
-        handleCardCompany,
-        handleCardNumberChange,
-        handleDueDateChange,
-        handleOwnerChange,
-        handleCvcChange,
-        handlePasswordChange,
+        setCardCompany,
+        setCardNumber,
+        setDueDate,
+        setOwner,
+        setCvc,
+        setPassword,
         clearCardInfo,
       }}
     >
