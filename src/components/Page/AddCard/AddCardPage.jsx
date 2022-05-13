@@ -141,7 +141,7 @@ const AddCardPage = () => {
       nickName: '',
       ownerName: ownerName,
       cardType: cardType,
-      cardNumber: [firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber],
+      cardNumbers: [firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber],
       expiredDate: { expiredMonth: expiredMonth, expiredYear: expiredYear },
       secureCode: secureCode,
       password: [firstPassword, secondPassword],

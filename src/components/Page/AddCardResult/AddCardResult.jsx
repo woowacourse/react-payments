@@ -53,7 +53,7 @@ const AddCardResultPage = () => {
     validation: checkCardNickName,
   });
 
-  const { ownerName, cardType, cardNumber, expiredDate } = cardList[cardIndex - 1];
+  const { ownerName, cardType, cardNumbers, expiredDate } = cardList[cardIndex - 1];
 
   const submitCardNickName = () => {
     const updatedCardList = cardList.map((item) =>
@@ -70,7 +70,7 @@ const AddCardResultPage = () => {
           name={ownerName}
           expiredMonth={expiredDate.expiredMonth}
           expiredYear={expiredDate.expiredYear}
-          cardNumbers={cardNumber}
+          cardNumbers={cardNumbers}
           cardType={cardType}
           size={'large'}
         />

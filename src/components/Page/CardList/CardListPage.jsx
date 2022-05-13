@@ -70,7 +70,7 @@ const CardListPage = () => {
               name={card.ownerName}
               expiredMonth={card.expiredDate.expiredMonth}
               expiredYear={card.expiredDate.expiredYear}
-              cardNumbers={card.cardNumber}
+              cardNumbers={card.cardNumbers}
               cardType={card.cardType}
               size={'small'}
             />
