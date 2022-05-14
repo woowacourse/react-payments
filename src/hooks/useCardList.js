@@ -4,33 +4,34 @@ const useCardList = (initialCardList, saveCardListToStorage) => {
   const [state, setState] = useState(initialCardList);
 
   const addNewCard = newCard => {
-    let index;
-
+    let newId;
     setState(prevCardList => {
       const newCardList = [...prevCardList];
+      newId = newCardList[newCardList.length - 1]?.id + 1 || 1;
+      newCard.id = newId;
       newCardList.push(newCard);
-      index = newCardList.length - 1;
 
       saveCardListToStorage(newCardList);
       return newCardList;
     });
-    return index;
+    return newId;
   };
 
-  const updateNickNameByIndex = (index, nickName) => {
-    const updatedCardInfo = { ...state[index] };
-    updatedCardInfo.nickName = nickName;
-
+  const updateNickNameById = (id, nickName) => {
     setState(prevCardList => {
+      const cardIndex = prevCardList.findIndex(card => card.id === Number(id));
+      const updatedCardInfo = { ...prevCardList[cardIndex] };
+      updatedCardInfo.nickName = nickName;
+
       const newCardList = [...prevCardList];
-      newCardList.splice(index, 1, updatedCardInfo);
+      newCardList.splice(cardIndex, 1, updatedCardInfo);
 
       saveCardListToStorage(newCardList);
       return newCardList;
     });
   };
 
-  return [state, addNewCard, updateNickNameByIndex];
+  return [state, addNewCard, updateNickNameById];
 };
 
 export default useCardList;

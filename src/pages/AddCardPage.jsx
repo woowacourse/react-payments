@@ -67,10 +67,9 @@ export default function AddCardPage() {
     e.preventDefault();
     // eslint-disable-next-line no-restricted-globals
     if (confirm(CONFIRM_MESSAGE.ADD_CARD_FORM_SUBMIT(cardNumber, expireDate, holderName))) {
-      const cardIndex = addNewCard({ cardNumber, expireDate, holderName });
-      navigate(`/addCardResult/${cardIndex}`, {
+      const newCardId = addNewCard({ cardNumber, expireDate, holderName });
+      navigate(`/addCardResult/${newCardId}`, {
         replace: true,
-        state: { fromAddCardForm: true, cardIndex },
       });
     }
   };

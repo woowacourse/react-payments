@@ -47,9 +47,11 @@ const ButtonWrapper = styled.div`
 `;
 
 export default function UpdateCardNickNamePage() {
-  const { id: cardIndex } = useParams();
-  const { cardList, updateNickNameByIndex } = useContext(CardListContext);
+  const { id: cardId } = useParams();
+  const { cardList, updateNickNameById } = useContext(CardListContext);
   const navigate = useNavigate();
+
+  const cardIndex = cardList.findIndex(card => card.id === Number(cardId));
 
   useEffect(() => {
     if (!cardList[cardIndex]) {
@@ -76,7 +78,7 @@ export default function UpdateCardNickNamePage() {
     }
 
     if (confirm(CONFIRM_MESSAGE.UPDATE_NICKNAME(nickNameInputValue))) {
-      updateNickNameByIndex(cardIndex, nickNameInputValue);
+      updateNickNameById(cardId, nickNameInputValue);
       navigate('/', { replace: true });
     }
   };

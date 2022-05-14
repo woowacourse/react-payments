@@ -9,14 +9,14 @@ export const CardListContext = React.createContext({
 });
 
 export function CardListProvider({ children }) {
-  const [cardList, addNewCard, updateNickNameByIndex] = useCardList(Storage.cardList, Storage.saveCardList);
+  const [cardList, addNewCard, updateNickNameById] = useCardList(Storage.cardList, Storage.saveCardList);
 
   return (
     <CardListContext.Provider
       value={{
         cardList,
         addNewCard,
-        updateNickNameByIndex,
+        updateNickNameById,
       }}>
       {children}
     </CardListContext.Provider>

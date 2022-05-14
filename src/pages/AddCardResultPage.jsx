@@ -46,9 +46,11 @@ const ButtonWrapper = styled.div`
 `;
 
 export default function AddCardResultPage() {
-  const { id: cardIndex } = useParams();
-  const { cardList, updateNickNameByIndex } = useContext(CardListContext);
+  const { id: cardId } = useParams();
+  const { cardList, updateNickNameById } = useContext(CardListContext);
   const navigate = useNavigate();
+
+  const cardIndex = cardList.findIndex(card => card.id === Number(cardId));
 
   useEffect(() => {
     if (!cardList[cardIndex]) {
@@ -69,8 +71,9 @@ export default function AddCardResultPage() {
       }
       return;
     }
+
     if (confirm(CONFIRM_MESSAGE.ADD_CARD_WITH_NICKNAME(nickNameInputValue))) {
-      updateNickNameByIndex(cardIndex, nickNameInputValue);
+      updateNickNameById(cardId, nickNameInputValue);
       navigate('/', { replace: true });
     }
   };

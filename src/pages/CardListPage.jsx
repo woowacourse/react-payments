@@ -84,11 +84,11 @@ export default function CardListPage() {
   function CardList() {
     return (
       <StyledCardList>
-        {cardList.map((cardInfo, index) => (
-          <Link key={index} to={`/updateCardNickName/${index}`}>
+        {cardList.map(cardInfo => (
+          <Link key={cardInfo.id} to={`/updateCardNickName/${cardInfo.id}`}>
             <CardListItem>
               <CardItem size={'small'} isComplete={true} {...cardInfo} />
-              <CardNickName>{cardInfo.nickName || `나의 카드 ${index + 1}`}</CardNickName>
+              <CardNickName>{cardInfo.nickName || `나의 카드 ${cardInfo.id}`}</CardNickName>
             </CardListItem>
           </Link>
         ))}
