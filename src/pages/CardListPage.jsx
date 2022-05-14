@@ -85,8 +85,8 @@ export default function CardListPage() {
     return (
       <StyledCardList>
         {cardList.map((cardInfo, index) => (
-          <Link to={`/updateCardNickName/${index}`}>
-            <CardListItem key={index}>
+          <Link key={index} to={`/updateCardNickName/${index}`}>
+            <CardListItem>
               <CardItem size={'small'} isComplete={true} {...cardInfo} />
               <CardNickName>{cardInfo.nickName || `나의 카드 ${index + 1}`}</CardNickName>
             </CardListItem>
