@@ -5,6 +5,14 @@
 <p align="middle">React 모바일 페이먼츠 애플리케이션</p>
 </p>
 
+### [💳 페이먼츠 데모페이지](https://soyi47.github.io/react-payments/)
+
+<br >
+
+### [📙 페이먼츠 스토리북 페이지](https://step2--626b2045894f24004ac86cf9.chromatic.com)
+
+<br >
+
 ## 🚀 Getting Started
 
 > `Component-Driven Development` 에 따라 UI를 구성하고 재사용 가능한 `Component`를 작성합니다.
