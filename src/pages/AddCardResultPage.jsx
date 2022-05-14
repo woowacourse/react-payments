@@ -3,7 +3,8 @@ import { useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CardListContext } from '../context';
+import { CardListContext } from '../context/CardListContext';
+
 import { Header, Title, GuideMessage } from '../components/common/styled';
 import GoBackButton from '../components/GoBackButton';
 import CardItem from '../components/CardItem';

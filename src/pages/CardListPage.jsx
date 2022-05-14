@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CardListContext } from '../context';
+import { CardListContext } from '../context/CardListContext';
 
 import CardItem from '../components/CardItem';
 import { GuideMessage, Header, Title } from '../components/common/styled';

@@ -3,7 +3,8 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { withReactContext } from 'storybook-react-context';
 import { within, userEvent } from '@storybook/testing-library';
 
-import { CardListContext } from '../context';
+import { CardListContext } from '../context/CardListContext';
+
 import UpdateCardNickNamePage from './../pages/UpdateCardNickNamePage';
 import { MOCK_DATA } from './mock';
 
