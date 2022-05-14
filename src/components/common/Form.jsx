@@ -39,7 +39,7 @@ export default function Form({ children, onSubmit }) {
   }, []);
 
   return (
-    <StyledForm ref={formRef} onSubmit={onSubmit} onChange={handleNextInputFocus} onKeyDown={handlePrevInputFocus}>
+    <StyledForm ref={formRef} onSubmit={onSubmit} onKeyUp={handleNextInputFocus} onKeyDown={handlePrevInputFocus}>
       {children}
     </StyledForm>
   );
