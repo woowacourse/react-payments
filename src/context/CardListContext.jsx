@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useCardList from '../hooks/useCardList';
 import Storage from '../Storage';
 
 export const CardListContext = React.createContext({
@@ -8,34 +9,7 @@ export const CardListContext = React.createContext({
 });
 
 export function CardListProvider({ children }) {
-  const [cardList, setCardInfoList] = useState(Storage.cardList);
-
-  const addNewCard = newCardInfo => {
-    let index;
-
-    setCardInfoList(prevCardInfoList => {
-      const newCardInfoList = prevCardInfoList.slice();
-      newCardInfoList.push(newCardInfo);
-      index = newCardInfoList.length - 1;
-
-      Storage.saveCardList(newCardInfoList);
-      return newCardInfoList;
-    });
-    return index;
-  };
-
-  const updateNickNameByIndex = (index, nickName) => {
-    const updatedCardInfo = { ...cardList[index] };
-    updatedCardInfo.nickName = nickName;
-
-    setCardInfoList(prevCardInfoList => {
-      const newCardInfoList = prevCardInfoList.slice();
-      newCardInfoList.splice(index, 1, updatedCardInfo);
-
-      Storage.saveCardList(newCardInfoList);
-      return newCardInfoList;
-    });
-  };
+  const [cardList, addNewCard, updateNickNameByIndex] = useCardList(Storage.cardList, Storage.saveCardList);
 
   return (
     <CardListContext.Provider
