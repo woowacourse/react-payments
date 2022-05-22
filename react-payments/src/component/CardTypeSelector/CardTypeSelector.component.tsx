@@ -3,7 +3,7 @@ import { memo, useContext } from "react";
 
 import ColorBox from "component/common/ColorBox/ColorBox.component";
 
-import { cardInfos } from "constants";
+import { cardInfos } from "constants/index";
 import { CardTypeContext } from "provider/CardTypeProvider";
 
 const ColorTypeSelectorContainer = styled.div`
@@ -13,10 +13,14 @@ const ColorTypeSelectorContainer = styled.div`
 `;
 
 const CardTypeSelector = memo(() => {
+  const cardTypeContext = useContext(CardTypeContext);
+  if (!cardTypeContext) {
+    throw new Error("Cannot find CardTypeContext");
+  }
   const {
     state: { cardTypeInfo },
     action: { onClickCardType },
-  } = useContext(CardTypeContext);
+  } = cardTypeContext;
 
   return (
     <ColorTypeSelectorContainer>

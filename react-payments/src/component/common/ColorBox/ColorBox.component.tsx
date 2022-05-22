@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 import Dot from "component/common/Dot/Dot.component";
+import { CardType, CardTypeInfoType } from "types";
 
 const ColorBoxContainer = styled.div`
   height: 62px;
@@ -11,7 +12,9 @@ const ColorBoxContainer = styled.div`
   cursor: pointer;
 `;
 
-const ColorBoxText = styled.div`
+const ColorBoxText = styled.div<
+  Omit<ColorBoxProps, "onClickCardType" | "cardName">
+>`
   font-size: 12px;
   ${({ currentCardType, cardType }) =>
     currentCardType === cardType &&
@@ -21,7 +24,17 @@ const ColorBoxText = styled.div`
     `};
 `;
 
-const ColorBox = ({ cardType, cardName, onClickCardType, currentCardType }) => {
+export interface ColorBoxProps extends CardTypeInfoType {
+  onClickCardType: ({ cardType, cardName }: CardTypeInfoType) => void;
+  currentCardType: CardType;
+}
+
+const ColorBox = ({
+  cardType,
+  cardName,
+  onClickCardType,
+  currentCardType,
+}: ColorBoxProps) => {
   return (
     <ColorBoxContainer
       data-testid="color-box"

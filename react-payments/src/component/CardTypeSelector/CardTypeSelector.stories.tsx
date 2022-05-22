@@ -1,15 +1,12 @@
-import { action } from "@storybook/addon-actions";
 import CardTypeSelector from "component/CardTypeSelector/CardTypeSelector.component";
+import { Meta, Story } from "@storybook/react";
 
 export default {
   title: "CardTypeSelector",
   component: CardTypeSelector,
-};
+} as Meta;
 
-const Template = (args) => <CardTypeSelector {...args} />;
+const Template: Story = (args) => <CardTypeSelector {...args} />;
 
 export const DefaultCardTypeSelector = Template.bind({});
-DefaultCardTypeSelector.args = {
-  currentCardType: "pocoCard",
-  onClickCardType: action("clicked"),
-};
+DefaultCardTypeSelector.args = {};
