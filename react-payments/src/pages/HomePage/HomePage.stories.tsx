@@ -4,13 +4,14 @@ import { action } from "@storybook/addon-actions";
 import HomePage from "pages/HomePage/HomePage.pages";
 import { CardDataContext } from "provider/CardDataProvider";
 import defaultCardData from "mock/cardData";
+import { Meta, Story } from "@storybook/react";
 
 export default {
   title: "Pages/HomePage",
   component: HomePage,
-};
+} as Meta;
 
-const Template = (args) => <HomePage {...args} />;
+const Template: Story = (args) => <HomePage {...args} />;
 
 export const DefaultHomePage = Template.bind({});
 DefaultHomePage.args = {};

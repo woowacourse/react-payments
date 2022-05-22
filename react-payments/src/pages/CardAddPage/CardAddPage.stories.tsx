@@ -1,13 +1,14 @@
 import { userEvent, within } from "@storybook/testing-library";
 
 import CardAddPage from "pages/CardAddPage/CardAddPage.pages";
+import { Meta, Story } from "@storybook/react";
 
 export default {
   title: "Pages/CardAddPage",
   component: CardAddPage,
-};
+} as Meta;
 
-const Template = (args) => <CardAddPage {...args} />;
+const Template: Story = (args) => <CardAddPage {...args} />;
 
 export const DefaultCardAddPage = Template.bind({});
 

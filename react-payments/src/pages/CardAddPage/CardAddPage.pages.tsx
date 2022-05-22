@@ -29,7 +29,7 @@ const CardAddPage = () => {
           {"<"}
         </LinkButton>
         <PageTitle type="header">
-          {isEdit() ? "카드 수정" : "카드 추가"}
+          {isEdit(id) ? "카드 수정" : "카드 추가"}
         </PageTitle>
       </Header>
       <CardAddForm id={id} toggleShowModal={toggleShowModal} />

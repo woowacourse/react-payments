@@ -17,6 +17,7 @@ import {
   mockSecurityCode,
   mockUserName,
 } from "mock/cardInput";
+import { Meta, Story } from "@storybook/react";
 
 export default {
   title: "Pages/CardRegisterPage",
@@ -77,9 +78,9 @@ export default {
       },
     }),
   ],
-};
+} as Meta;
 
-const Template = (args) => <CardRegisterPage {...args} />;
+const Template: Story = (args) => <CardRegisterPage {...args} />;
 
 export const DefaultCardRegisterPage = Template.bind({});
 DefaultCardRegisterPage.args = {};

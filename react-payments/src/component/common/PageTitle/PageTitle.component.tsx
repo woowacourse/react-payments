@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-const PageTitle = styled.h1`
+const PageTitle = styled.h1<{ type?: string }>`
   ${({ type }) =>
     type === "header"
       ? css`

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const PageContainer = styled.div`
+const PageContainer = styled.div<{ type?: string }>`
   display: flex;
   flex-direction: column;
   width: 350px;
