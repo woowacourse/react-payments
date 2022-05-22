@@ -2,10 +2,10 @@ import React, { createContext, useCallback, useState } from "react";
 
 import useReady from "hooks/useReady";
 import { isCompletePasswordInput, isInValidCardPassword } from "util/validator";
-import { CardPasswordType } from "types";
+import { SeveralInputType } from "types";
 
 interface InitialContextState {
-  cardPassword: CardPasswordType;
+  cardPassword: SeveralInputType;
   cardPasswordReady: boolean;
 }
 
@@ -24,7 +24,7 @@ const initialState = {
 
 const CardPasswordProvider = ({ children }: { children: React.ReactNode }) => {
   const [cardPassword, setCardPassword] =
-    useState<CardPasswordType>(initialState);
+    useState<SeveralInputType>(initialState);
   const [cardPasswordReady] = useReady(cardPassword, isInValidCardPassword);
 
   const onChangeCardPassword = ({ target }: { target: HTMLInputElement }) => {

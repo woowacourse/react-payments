@@ -31,12 +31,12 @@ export const cardInfos = [
     cardName: "썬 카드",
     cardType: "sunCard",
   },
-];
+] as const;
 
 export const defaultCardInfo = {
   cardName: "",
   cardType: "defaultCard",
-};
+} as const;
 
 export const MAX_LENGTH = {
   CARD_NUMBER: 4,

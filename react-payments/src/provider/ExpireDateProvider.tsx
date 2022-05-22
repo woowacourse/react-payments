@@ -4,10 +4,10 @@ import { isInValidExpireDate, isOverMaxLength } from "util/validator";
 import { focusNextElement, focusPrevElement } from "util/focus";
 import { MAX_LENGTH } from "constants/index";
 import useReady from "hooks/useReady";
-import { ExpireDateType } from "types";
+import { SeveralInputType } from "types";
 
 interface InitialContextState {
-  expireDate: ExpireDateType;
+  expireDate: SeveralInputType;
   expireDateReady: boolean;
 }
 
@@ -25,7 +25,7 @@ const initialState = {
 };
 
 const ExpireDateProvider = ({ children }: { children: React.ReactNode }) => {
-  const [expireDate, setExpireDate] = useState<ExpireDateType>(initialState);
+  const [expireDate, setExpireDate] = useState<SeveralInputType>(initialState);
   const [expireDateReady] = useReady(expireDate, isInValidExpireDate);
 
   const onChangeExpireDate = ({ target }: { target: HTMLInputElement }) => {
@@ -33,13 +33,13 @@ const ExpireDateProvider = ({ children }: { children: React.ReactNode }) => {
       return;
     }
 
-    const nextElement = target.nextSibling?.nextSibling;
-    if (nextElement) {
+    const element = target.nextSibling?.nextSibling as HTMLInputElement | null;
+    if (element) {
       focusNextElement({
         target,
         value: expireDate,
         maxLength: MAX_LENGTH.EXPIRE_DATE,
-        nextElement,
+        element,
       });
     }
 
@@ -56,12 +56,13 @@ const ExpireDateProvider = ({ children }: { children: React.ReactNode }) => {
     target: HTMLInputElement;
     key: string;
   }) => {
-    const prevElement = target.previousSibling?.previousSibling;
-    if (prevElement) {
+    const element = target.previousSibling
+      ?.previousSibling as HTMLInputElement | null;
+    if (element) {
       focusPrevElement({
         target,
         key,
-        prevElement,
+        element,
       });
     }
   };

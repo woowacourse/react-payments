@@ -1,7 +1,7 @@
 export interface CardDataType {
   id: string;
-  cardNumber: CardNumberType;
-  cardPassword: CardPasswordType;
+  cardNumber: SeveralInputType;
+  cardPassword: SeveralInputType;
   securityCode: SecurityCodeType;
   userName: UserNameType;
   cardName: CardNameType;
@@ -17,11 +17,7 @@ export interface AllCardData {
 export type EditedCardData<T, KP> = Partial<T> &
   { [K in keyof KP]-?: K extends keyof T ? T[K] : never };
 
-export type CardNumberType = {
-  [key: string]: string;
-};
-
-export type CardPasswordType = {
+export type SeveralInputType = {
   [key: string]: string;
 };
 
@@ -31,11 +27,18 @@ export type UserNameType = string;
 
 export type CardNameType = string;
 
-export type ExpireDateType = {
-  [key: string]: string;
-};
+export type CardType =
+  | "defaultCard"
+  | "pocoCard"
+  | "junCard"
+  | "gongwonCard"
+  | "branCard"
+  | "roidCard"
+  | "dobbyCard"
+  | "collinCard"
+  | "sunCard";
 
 export type CardTypeInfoType = {
   cardName: string;
-  cardType: string;
+  cardType: CardType;
 };
