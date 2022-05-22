@@ -1,14 +1,14 @@
 import React, { createContext, useReducer } from "react";
 import { REDUCER_TYPE } from "constants/index";
-import { AllCardData, CardDataType, EditedCardData } from "types";
+import { AllCardData, CardDataType, WithRequiredProperty } from "types";
 
 export const initCardDataAction = (cardData: AllCardData) => ({
   type: REDUCER_TYPE.INIT,
   payload: cardData,
 });
 
-export const editCardDataAction = <KP extends keyof CardDataType>(
-  editedData: Pick<CardDataType, KP>
+export const editCardDataAction = (
+  editedData: WithRequiredProperty<Partial<CardDataType>, "id">
 ) => ({
   type: REDUCER_TYPE.EDIT,
   payload: editedData,
@@ -25,7 +25,7 @@ type CardDataActions =
   | ReturnType<typeof deletedCardDataAction>;
 
 interface InitialContextValue {
-  cardData: CardDataType | {};
+  cardData: AllCardData;
   dispatch: React.Dispatch<CardDataActions>;
 }
 

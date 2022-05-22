@@ -13,7 +13,18 @@ interface InitialContextState {
 
 interface InitialContextValue {
   state: InitialContextState;
-  action: {};
+  action: {
+    onChangeExpireDate: ({ target }: { target: HTMLInputElement }) => void;
+    onKeyDownExpireDate: ({
+      target,
+      key,
+    }: {
+      target: HTMLInputElement;
+      key: string;
+    }) => void;
+    resetExpireDate: () => void;
+    setExpireDate: React.Dispatch<React.SetStateAction<SeveralInputType>>;
+  };
 }
 
 export const ExpireDateContext =

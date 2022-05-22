@@ -1,4 +1,9 @@
-import { useCallback, useContext, useEffect } from "react";
+import React, {
+  DispatchWithoutAction,
+  useCallback,
+  useContext,
+  useEffect,
+} from "react";
 import styled from "styled-components";
 
 import CardNumberContainer from "component/CardNumberContainer/CardNumberContainer.component";
@@ -19,8 +24,7 @@ import useReady from "hooks/useReady";
 import { isAllInputReady, isEdit } from "util/validator";
 import LinkButton from "component/common/LinkButton/LinkButton.component";
 import { editCard } from "api/cardApi";
-import { CardDataContext } from "provider/CardDataProvider";
-import { REDUCER_TYPE } from "constants";
+import { CardDataContext, editCardDataAction } from "provider/CardDataProvider";
 import { ErrorContext } from "provider/ErrorContext";
 
 const Form = styled.form`
@@ -28,31 +32,58 @@ const Form = styled.form`
   flex-direction: column;
 `;
 
-const CardAddForm = ({ toggleShowModal, id }) => {
+const CardAddForm = ({
+  toggleShowModal,
+  id,
+}: {
+  toggleShowModal: DispatchWithoutAction;
+  id: string | undefined;
+}) => {
+  const cardTypeContext = useContext(CardTypeContext);
+  const cardNumberContext = useContext(CardNumberContext);
+  const expireDateContext = useContext(ExpireDateContext);
+  const userNameContext = useContext(UserNameContext);
+  const securityCodeContext = useContext(SecurityCodeContext);
+  const cardPasswordContext = useContext(CardPasswordContext);
+  const cardDataContext = useContext(CardDataContext);
+  const errorContext = useContext(ErrorContext);
+
+  if (!cardNumberContext) throw new Error("Cannot find CardNumberContext");
+  if (!cardTypeContext) throw new Error("Cannot find CardTypeContext");
+  if (!expireDateContext) throw new Error("Cannot find ExpireDateContext");
+  if (!userNameContext) throw new Error("Cannot find UserNameContext");
+  if (!securityCodeContext) throw new Error("Cannot find SecurityCodeContext");
+  if (!cardPasswordContext) throw new Error("Cannot find CardPasswordContext");
+  if (!cardDataContext) throw new Error("Cannot find CardDataContext");
+  if (!errorContext) throw new Error("Cannot find ErrorContext");
+
   const {
     state: { cardTypeInfo, cardTypeReady },
     action: { setCardTypeInfo, resetCardTypeInfo },
-  } = useContext(CardTypeContext);
+  } = cardTypeContext;
   const {
     state: { cardNumber, cardNumberReady },
     action: { setCardNumber, resetCardNumber },
-  } = useContext(CardNumberContext);
+  } = cardNumberContext;
   const {
     state: { expireDate, expireDateReady },
     action: { setExpireDate, resetExpireDate },
-  } = useContext(ExpireDateContext);
+  } = expireDateContext;
   const {
     state: { userName },
     action: { setUserName, resetUserName },
-  } = useContext(UserNameContext);
+  } = userNameContext;
   const {
     state: { securityCode, securityCodeReady },
     action: { setSecurityCode, resetSecurityCode },
-  } = useContext(SecurityCodeContext);
+  } = securityCodeContext;
   const {
     state: { cardPassword, cardPasswordReady },
     action: { setCardPassword, resetCardPassword },
-  } = useContext(CardPasswordContext);
+  } = cardPasswordContext;
+  const { cardData, dispatch } = cardDataContext;
+  const { setError } = errorContext;
+
   const [allFormReady] = useReady(
     {
       cardNumberReady,
@@ -63,9 +94,6 @@ const CardAddForm = ({ toggleShowModal, id }) => {
     },
     isAllInputReady
   );
-  const { cardData, dispatch } = useContext(CardDataContext);
-  const { setError } = useContext(ErrorContext);
-
   const navigate = useNavigate();
 
   const resetCardStatus = useCallback(() => {
@@ -85,13 +113,13 @@ const CardAddForm = ({ toggleShowModal, id }) => {
   ]);
 
   useEffect(() => {
-    if (isEdit(id) && cardData.length === 0) {
+    if (isEdit(id) && Object.keys(cardData).length === 0) {
       navigate("/");
     }
-  }, [cardData.length, id, navigate]);
+  }, [Object.keys(cardData).length, id, navigate]);
 
   useEffect(() => {
-    if (!isEdit(id) || !cardData[id]) {
+    if (typeof id === "undefined" || !cardData[id]) {
       resetCardStatus();
       return;
     }
@@ -118,9 +146,10 @@ const CardAddForm = ({ toggleShowModal, id }) => {
   ]);
 
   const handleEditCard = () => {
-    dispatch({
-      type: REDUCER_TYPE.EDIT,
-      payload: {
+    if (typeof id === "undefined") return;
+
+    dispatch(
+      editCardDataAction({
         id: id,
         month: expireDate.month,
         year: expireDate.year,
@@ -129,8 +158,8 @@ const CardAddForm = ({ toggleShowModal, id }) => {
         cardNumber,
         securityCode,
         cardPassword,
-      },
-    });
+      })
+    );
     try {
       editCard(id, {
         month: expireDate.month,
@@ -142,13 +171,15 @@ const CardAddForm = ({ toggleShowModal, id }) => {
         cardPassword,
       });
     } catch (err) {
-      setError(err);
+      if (err instanceof Error) {
+        setError(err);
+      }
     }
 
     resetCardStatus();
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isEdit(id)) {
       handleEditCard();

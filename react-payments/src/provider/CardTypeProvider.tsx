@@ -12,7 +12,11 @@ interface InitialContextState {
 
 interface InitialContextValue {
   state: InitialContextState;
-  action: {};
+  action: {
+    onClickCardType: ({ cardType, cardName }: CardTypeInfoType) => void;
+    resetCardTypeInfo: () => void;
+    setCardTypeInfo: React.Dispatch<React.SetStateAction<CardTypeInfoType>>;
+  };
 }
 
 export const CardTypeContext = createContext<InitialContextValue | null>(null);

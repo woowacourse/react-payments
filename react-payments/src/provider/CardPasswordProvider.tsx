@@ -11,7 +11,13 @@ interface InitialContextState {
 
 interface InitialContextValue {
   state: InitialContextState;
-  action: {};
+  action: {
+    onChangeCardPassword: ({ target }: { target: HTMLInputElement }) => void;
+    onClickCardPasswordBackspaceButton: () => void;
+    onClickCardPasswordVirtualKeyboard: (value: string) => void;
+    resetCardPassword: () => void;
+    setCardPassword: React.Dispatch<React.SetStateAction<SeveralInputType>>;
+  };
 }
 
 export const CardPasswordContext =

@@ -3,6 +3,8 @@ import styled, { css } from "styled-components";
 import CardNumberText from "component/common/Card/CardNumberText.component";
 import { ColumnFlexWrapper } from "styles/wrapper";
 import { RowFlexWrapper } from "styles/wrapper";
+import { CardDataType, CardType } from "types";
+import React from "react";
 
 const CardTop = styled.div`
   width: 100%;
@@ -23,7 +25,7 @@ const CardMiddle = styled.div`
   align-items: center;
 `;
 
-const CardChip = styled.div`
+const CardChip = styled.div<{ size?: string }>`
   left: 95px;
   top: 122px;
 
@@ -42,7 +44,10 @@ const CardChip = styled.div`
         `}
 `;
 
-const CardBox = styled(ColumnFlexWrapper)`
+const CardBox = styled(ColumnFlexWrapper)<{
+  cardType: CardType;
+  size?: string;
+}>`
   font-size: 30px;
   color: ${({ theme }) => theme.colors.cardText};
 
@@ -89,7 +94,7 @@ const CardBottomInfo = styled.div`
   justify-content: space-between;
 `;
 
-const CardText = styled.span`
+const CardText = styled.span<{ size?: string }>`
   margin: 0 16px;
 
   ${({ size }) =>
@@ -106,6 +111,15 @@ const CardText = styled.span`
   font-weight: 400;
 `;
 
+interface CardProps
+  extends Pick<
+    CardDataType,
+    "userName" | "month" | "year" | "cardNumber" | "cardTypeInfo"
+  > {
+  onClick: (e: React.MouseEvent) => void;
+  size?: string;
+}
+
 const Card = ({
   userName,
   month,
@@ -114,7 +128,7 @@ const Card = ({
   cardTypeInfo,
   onClick,
   size,
-}) => {
+}: CardProps) => {
   return (
     <CardContainer onClick={onClick} data-testid="card">
       <CardBox cardType={cardTypeInfo.cardType} size={size}>

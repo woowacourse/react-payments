@@ -13,7 +13,18 @@ interface InitialContextState {
 
 interface InitialContextValue {
   state: InitialContextState;
-  action: {};
+  action: {
+    onChangeCardNumber: ({ target }: { target: HTMLInputElement }) => void;
+    onKeyDownCardNumber: ({
+      target,
+      key,
+    }: {
+      target: HTMLInputElement;
+      key: string;
+    }) => void;
+    resetCardNumber: () => void;
+    setCardNumber: React.Dispatch<React.SetStateAction<SeveralInputType>>;
+  };
 }
 
 export const CardNumberContext =

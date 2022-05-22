@@ -9,7 +9,11 @@ interface InitialContextState {
 
 interface InitialContextValue {
   state: InitialContextState;
-  action: {};
+  action: {
+    onChangeUserName: ({ target }: { target: HTMLInputElement }) => void;
+    resetUserName: () => void;
+    setUserName: React.Dispatch<React.SetStateAction<string>>;
+  };
 }
 
 export const UserNameContext = createContext<InitialContextValue | null>(null);

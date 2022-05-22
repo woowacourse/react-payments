@@ -12,7 +12,13 @@ interface InitialContextState {
 
 interface InitialContextValue {
   state: InitialContextState;
-  action: {};
+  action: {
+    onChangeSecurityCode: ({ target }: { target: HTMLInputElement }) => void;
+    onClickSecurityVirtualKeyboard: (value: string) => void;
+    onClickSecurityBackspaceButton: () => void;
+    resetSecurityCode: () => void;
+    setSecurityCode: React.Dispatch<React.SetStateAction<string>>;
+  };
 }
 
 export const SecurityCodeContext =

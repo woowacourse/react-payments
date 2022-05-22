@@ -7,15 +7,12 @@ export interface CardDataType {
   cardName: CardNameType;
   month: string;
   year: string;
-  CardTypeInfo: CardTypeInfoType;
+  cardTypeInfo: CardTypeInfoType;
 }
 
 export interface AllCardData {
   [key: string]: CardDataType;
 }
-
-export type EditedCardData<T, KP> = Partial<T> &
-  { [K in keyof KP]-?: K extends keyof T ? T[K] : never };
 
 export type SeveralInputType = {
   [key: string]: string;
@@ -42,3 +39,8 @@ export type CardTypeInfoType = {
   cardName: string;
   cardType: CardType;
 };
+
+export type WithRequiredProperty<Type, P extends keyof Type> = Type &
+  {
+    [Property in P]-?: Type[Property];
+  };
