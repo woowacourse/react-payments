@@ -44,3 +44,17 @@ export type WithRequiredProperty<Type, P extends keyof Type> = Type &
   {
     [Property in P]-?: Type[Property];
   };
+
+export enum CardNumberEnum {
+  first = 1,
+  second,
+  third,
+  fourth,
+}
+
+export const getProperty = <T, K extends keyof T>(
+  object: T,
+  propertyName: K
+): T[K] => {
+  return object[propertyName];
+};

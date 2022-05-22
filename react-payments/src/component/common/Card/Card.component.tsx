@@ -111,7 +111,7 @@ const CardText = styled.span<{ size?: string }>`
   font-weight: 400;
 `;
 
-interface CardProps
+export interface CardProps
   extends Pick<
     CardDataType,
     "userName" | "month" | "year" | "cardNumber" | "cardTypeInfo"

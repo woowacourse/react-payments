@@ -4,9 +4,9 @@ import Dot from "component/common/Dot/Dot.component";
 
 import { MIDDLE_CARD_NUMBER_LENGTH } from "constants/index";
 import { RowFlexWrapper } from "styles/wrapper";
-import { cardNumberEnum } from "constants";
+import { SeveralInputType, CardNumberEnum, getProperty } from "types";
 
-const CardNumberTextBox = styled.div`
+const CardNumberTextBox = styled.div<{ size?: string }>`
   display: flex;
   vertical-align: middle;
   font-weight: 500;
@@ -26,13 +26,19 @@ const CardNumberTextBox = styled.div`
         `}
 `;
 
-const CardNumberText = ({ cardNumbers, size }) => {
+interface CardNumberTextProps {
+  cardNumbers: SeveralInputType;
+  size?: string;
+}
+
+const CardNumberText = ({ cardNumbers, size }: CardNumberTextProps) => {
   return (
     <CardNumberTextBox size={size}>
-      {Object.entries(cardNumbers)
+      {Object.keys(cardNumbers)
         .sort(
-          ([key, _], [newKey, __]) =>
-            cardNumberEnum[key] - cardNumberEnum[newKey]
+          (key, newKey) =>
+            getProperty(CardNumberEnum, key as keyof typeof CardNumberEnum) -
+            getProperty(CardNumberEnum, newKey as keyof typeof CardNumberEnum)
         )
         .map(([_, cardNumber], idx) => {
           if (idx >= MIDDLE_CARD_NUMBER_LENGTH) {
