@@ -1,10 +1,14 @@
 import { useState, useEffect, useContext } from "react";
 import { ErrorContext } from "provider/ErrorContext";
 
-function useFetch(url) {
+function useFetch(url: string) {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const { setError } = useContext(ErrorContext);
+  const [loading, setLoading] = useState<boolean>(true);
+  const errorContext = useContext(ErrorContext);
+  if (!errorContext) {
+    throw new Error("Cannot find ErrorContext");
+  }
+  const { setError } = errorContext;
 
   useEffect(() => {
     const callApi = async () => {
@@ -20,7 +24,9 @@ function useFetch(url) {
         const data = (await res.json()).data;
         setData(data);
       } catch (err) {
-        setError(err);
+        if (err instanceof Error) {
+          setError(err);
+        }
       } finally {
         setLoading(false);
       }

@@ -2,17 +2,17 @@ import React, { createContext, useEffect, useState } from "react";
 
 interface InitialContextValue {
   error: null | Error;
-  setError: {};
+  setError: React.Dispatch<React.SetStateAction<null | Error>>;
 }
 
 export const ErrorContext = createContext<InitialContextValue | null>(null);
 
 const ErrorProvider = ({ children }: { children: React.ReactNode }) => {
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<null | Error>(null);
 
   useEffect(() => {
     if (error) {
-      throw new Error(error);
+      throw new Error(error.message);
     }
   }, [error]);
 

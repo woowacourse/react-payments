@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
-const useKeyboardOn = (ready) => {
-  const [keyboardOn, setKeyboardOn] = useState(false);
+const useKeyboardOn = (ready: boolean) => {
+  const [keyboardOn, setKeyboardOn] = useState<boolean>(false);
 
   const openKeyboard = () => {
     setKeyboardOn(true);
@@ -15,7 +15,7 @@ const useKeyboardOn = (ready) => {
     ready && closeKeyboard();
   }, [closeKeyboard, ready]);
 
-  const onKeyDown = (e) => {
+  const onKeyDown = (e: React.KeyboardEvent) => {
     e.preventDefault();
   };
 
