@@ -1,22 +1,35 @@
-import { createContext, useCallback, useState } from "react";
+import React, { createContext, useCallback, useState } from "react";
 
-import { MAX_LENGTH } from "constants";
+import { MAX_LENGTH } from "constants/index";
 import useReady from "hooks/useReady";
 import { isInValidSecurityCode } from "util/validator";
+import { SecurityCodeType } from "types";
 
-export const SecurityCodeContext = createContext();
+interface InitialContextState {
+  securityCode: SecurityCodeType;
+  securityCodeReady: boolean;
+}
+
+interface InitialContextValue {
+  state: InitialContextState;
+  action: {};
+}
+
+export const SecurityCodeContext =
+  createContext<InitialContextValue | null>(null);
 
 const initialState = "";
 
-const SecurityCodeProvider = ({ children }) => {
-  const [securityCode, setSecurityCode] = useState(initialState);
+const SecurityCodeProvider = ({ children }: { children: React.ReactNode }) => {
+  const [securityCode, setSecurityCode] =
+    useState<SecurityCodeType>(initialState);
   const [securityCodeReady] = useReady(securityCode, isInValidSecurityCode);
 
-  const onChangeSecurityCode = ({ target }) => {
+  const onChangeSecurityCode = ({ target }: { target: HTMLInputElement }) => {
     setSecurityCode(target.value);
   };
 
-  const onClickSecurityVirtualKeyboard = (value) => {
+  const onClickSecurityVirtualKeyboard = (value: string) => {
     if (securityCode.length >= MAX_LENGTH.SECURITY_CODE) {
       return;
     }

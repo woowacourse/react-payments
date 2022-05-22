@@ -1,34 +1,47 @@
-import { createContext, useCallback, useState } from "react";
+import React, { createContext, useCallback, useState } from "react";
 
 import { isInValidExpireDate, isOverMaxLength } from "util/validator";
 import { focusNextElement, focusPrevElement } from "util/focus";
-import { MAX_LENGTH } from "constants";
+import { MAX_LENGTH } from "constants/index";
 import useReady from "hooks/useReady";
+import { ExpireDateType } from "types";
 
-export const ExpireDateContext = createContext();
+interface InitialContextState {
+  expireDate: ExpireDateType;
+  expireDateReady: boolean;
+}
+
+interface InitialContextValue {
+  state: InitialContextState;
+  action: {};
+}
+
+export const ExpireDateContext =
+  createContext<InitialContextValue | null>(null);
 
 const initialState = {
   month: "",
   year: "",
 };
 
-const ExpireDateProvider = ({ children }) => {
-  const [expireDate, setExpireDate] = useState(initialState);
+const ExpireDateProvider = ({ children }: { children: React.ReactNode }) => {
+  const [expireDate, setExpireDate] = useState<ExpireDateType>(initialState);
   const [expireDateReady] = useReady(expireDate, isInValidExpireDate);
 
-  const onChangeExpireDate = ({ target }) => {
+  const onChangeExpireDate = ({ target }: { target: HTMLInputElement }) => {
     if (isOverMaxLength(target, MAX_LENGTH.EXPIRE_DATE)) {
       return;
     }
 
     const nextElement = target.nextSibling?.nextSibling;
-
-    focusNextElement({
-      target,
-      value: expireDate,
-      maxLength: MAX_LENGTH.EXPIRE_DATE,
-      nextElement,
-    });
+    if (nextElement) {
+      focusNextElement({
+        target,
+        value: expireDate,
+        maxLength: MAX_LENGTH.EXPIRE_DATE,
+        nextElement,
+      });
+    }
 
     setExpireDate({
       ...expireDate,
@@ -36,15 +49,21 @@ const ExpireDateProvider = ({ children }) => {
     });
   };
 
-  const onKeyDownExpireDate = ({ target, key }) => {
+  const onKeyDownExpireDate = ({
+    target,
+    key,
+  }: {
+    target: HTMLInputElement;
+    key: string;
+  }) => {
     const prevElement = target.previousSibling?.previousSibling;
-
-    focusPrevElement({
-      target,
-      key,
-      value: expireDate,
-      prevElement,
-    });
+    if (prevElement) {
+      focusPrevElement({
+        target,
+        key,
+        prevElement,
+      });
+    }
   };
 
   const resetExpireDate = useCallback(() => {

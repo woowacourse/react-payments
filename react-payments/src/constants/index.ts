@@ -66,7 +66,7 @@ export const REDUCER_TYPE = {
   EDIT: "EDIT",
   DELETE: "DELETE",
   INIT: "INIT",
-};
+} as const;
 
 export const cardNumberEnum = {
   first: 1,
