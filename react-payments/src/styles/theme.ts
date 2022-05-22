@@ -33,7 +33,7 @@ const colors = {
   twitterBlue: "#1DA1F2",
   confirmButton: "#AAB8C2",
   confirmButtonHover: "#657786",
-};
+} as const;
 
 const theme = { colors };
 

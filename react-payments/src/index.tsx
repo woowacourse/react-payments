@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
@@ -13,7 +12,9 @@ import ErrorProvider from "provider/ErrorContext";
 import ErrorBoundary from "component/common/Errorboundary/Errorboundary";
 import FormDataProvider from "provider/FormDataProvider";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 root.render(
   <BrowserRouter basename="react-payments">
     <ThemeProvider theme={theme}>

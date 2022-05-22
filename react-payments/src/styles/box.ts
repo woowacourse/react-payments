@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, { BoxType } from "styled-components";
 
-const Box = styled.div`
+const Box = styled.div<BoxType>`
   background-color: ${({ bg }) => bg};
   flex-direction: ${({ flexDirection }) => flexDirection};
   color: ${({ color }) => color};
