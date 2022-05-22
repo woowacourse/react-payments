@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ModalButton = styled.button`
+const ModalButton = styled.button<{ styleType?: "edit" | "delete" }>`
   width: 120px;
   height: 60px;
   border-radius: 8px;
@@ -10,12 +10,16 @@ const ModalButton = styled.button`
   letter-spacing: 0.03rem;
   color: ${({ theme }) => theme.colors.cardText};
   border: 1.5px solid
-    ${({ theme, type }) =>
-      type === "edit" ? theme.colors.twitterBlue : theme.colors.errorMessage};
+    ${({ theme, styleType }) =>
+      styleType === "edit"
+        ? theme.colors.twitterBlue
+        : theme.colors.errorMessage};
   cursor: pointer;
   &:hover {
-    background-color: ${({ theme, type }) =>
-      type === "edit" ? theme.colors.twitterBlue : theme.colors.errorMessage};
+    background-color: ${({ theme, styleType }) =>
+      styleType === "edit"
+        ? theme.colors.twitterBlue
+        : theme.colors.errorMessage};
     color: white;
   }
 `;
