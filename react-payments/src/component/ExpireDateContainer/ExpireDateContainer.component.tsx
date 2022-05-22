@@ -6,14 +6,18 @@ import ConnectorBox from "component/common/ConnectorBox/ConnectorBox.component";
 import MessageBox from "component/common/MessageBox/MessageBox.component";
 import Label from "component/common/Label/Label.component";
 
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants/index";
 import { ExpireDateContext } from "provider/ExpireDateProvider";
 
 const ExpireDateContainer = memo(() => {
+  const expireDateContext = useContext(ExpireDateContext);
+  if (!expireDateContext) {
+    throw new Error("Cannot find ExpireDateContext");
+  }
   const {
     state: { expireDate, expireDateReady },
     action: { onChangeExpireDate, onKeyDownExpireDate },
-  } = useContext(ExpireDateContext);
+  } = expireDateContext;
 
   return (
     <>
@@ -41,9 +45,11 @@ const ExpireDateContainer = memo(() => {
       </InputBox>
 
       {expireDateReady ? (
-        <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
+        <MessageBox styleType="success">{SUCCESS_MESSAGE}</MessageBox>
       ) : (
-        <MessageBox type="error">{ERROR_MESSAGE["expire-date"]} </MessageBox>
+        <MessageBox styleType="error">
+          {ERROR_MESSAGE["expire-date"]}{" "}
+        </MessageBox>
       )}
     </>
   );

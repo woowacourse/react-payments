@@ -15,13 +15,7 @@ interface InitialContextValue {
   state: InitialContextState;
   action: {
     onChangeExpireDate: ({ target }: { target: HTMLInputElement }) => void;
-    onKeyDownExpireDate: ({
-      target,
-      key,
-    }: {
-      target: HTMLInputElement;
-      key: string;
-    }) => void;
+    onKeyDownExpireDate: (event: React.KeyboardEvent<HTMLInputElement>) => void;
     resetExpireDate: () => void;
     setExpireDate: React.Dispatch<React.SetStateAction<SeveralInputType>>;
   };
@@ -60,13 +54,11 @@ const ExpireDateProvider = ({ children }: { children: React.ReactNode }) => {
     });
   };
 
-  const onKeyDownExpireDate = ({
-    target,
-    key,
-  }: {
-    target: HTMLInputElement;
-    key: string;
-  }) => {
+  const onKeyDownExpireDate = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    const target = event.target as HTMLInputElement;
+    const { key } = event;
     const element = target.previousSibling
       ?.previousSibling as HTMLInputElement | null;
     if (element) {
