@@ -1,6 +1,7 @@
-import { API_URL } from "../constants";
+import { API_URL } from "constants/index";
+import { AllCardData, CardDataType } from "types";
 
-export const getCardList = async () => {
+export const getCardList = async (): Promise<AllCardData> => {
   try {
     const response = await fetch(`${API_URL}/api/cards`, {
       method: "GET",
@@ -13,7 +14,9 @@ export const getCardList = async () => {
   }
 };
 
-export const registerCard = async (data) => {
+export const registerCard = async (
+  data: Omit<CardDataType, "id">
+): Promise<void> => {
   try {
     const res = await fetch(`${API_URL}/api/car`, {
       method: "POST",
@@ -25,11 +28,16 @@ export const registerCard = async (data) => {
       throw new Error("서버에서 문제가 발생하였습니다. 다시 시도해주세요");
     }
   } catch (err) {
-    throw new Error(err.message);
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    }
   }
 };
 
-export const editCard = async (id, data) => {
+export const editCard = async <KP extends keyof CardDataType>(
+  id: string,
+  data: Pick<CardDataType, KP>
+): Promise<void> => {
   try {
     await fetch(`${API_URL}/api/cards/${id}`, {
       method: "PUT",
@@ -41,7 +49,7 @@ export const editCard = async (id, data) => {
   }
 };
 
-export const deleteCard = async (id) => {
+export const deleteCard = async (id: string): Promise<void> => {
   try {
     await fetch(`${API_URL}/api/cards/${id}`, {
       method: "DELETE",
