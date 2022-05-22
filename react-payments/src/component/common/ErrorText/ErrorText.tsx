@@ -14,7 +14,12 @@ const ErrorDescription = styled.div`
   letter-spacing: 0.1rem;
 `;
 
-const ErrorText = ({ label, children }) => {
+export interface ErrorTextProps {
+  label: string;
+  children: React.ReactNode;
+}
+
+const ErrorText = ({ label, children }: ErrorTextProps) => {
   return (
     <ColumnFlexWrapper gap="50" mt="100">
       <ErrorTitle>{label}</ErrorTitle>

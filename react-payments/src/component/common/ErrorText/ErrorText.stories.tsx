@@ -1,11 +1,12 @@
-import ErrorText from "./ErrorText";
+import ErrorText, { ErrorTextProps } from "./ErrorText";
+import { Meta, Story } from "@storybook/react";
 
 export default {
   title: "Common/ErrorText",
   component: ErrorText,
-};
+} as Meta;
 
-export const NetworkErrorText = (args) => (
+export const NetworkErrorText: Story<ErrorTextProps> = (args) => (
   <ErrorText {...args}>
     서버에 문제가 생겼습니다.
     <br />
@@ -16,7 +17,7 @@ NetworkErrorText.args = {
   label: "서버 에러입니다!",
 };
 
-export const RouteErrorText = (args) => (
+export const RouteErrorText: Story<ErrorTextProps> = (args) => (
   <ErrorText {...args}>없는 페이지 입니다.</ErrorText>
 );
 RouteErrorText.args = {
