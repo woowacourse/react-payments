@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -18,7 +18,7 @@ import { UserNameContext } from "provider/UserNameProvider";
 
 import { isDuplicatedCardName, isInvalidCardName } from "util/validator";
 import { registerCard } from "api/cardApi";
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants/index";
 import useReady from "hooks/useReady";
 import { ErrorContext } from "provider/ErrorContext";
 
@@ -36,32 +36,50 @@ const Form = styled.form`
 `;
 
 const CardRegisterForm = () => {
-  const { cardData } = useContext(CardDataContext);
-  const {
-    state: { cardNumber },
-    action: { resetCardNumber },
-  } = useContext(CardNumberContext);
-  const {
-    state: { expireDate },
-    action: { resetExpireDate },
-  } = useContext(ExpireDateContext);
-  const {
-    state: { userName },
-    action: { resetUserName },
-  } = useContext(UserNameContext);
+  const cardTypeContext = useContext(CardTypeContext);
+  const cardNumberContext = useContext(CardNumberContext);
+  const expireDateContext = useContext(ExpireDateContext);
+  const userNameContext = useContext(UserNameContext);
+  const securityCodeContext = useContext(SecurityCodeContext);
+  const cardPasswordContext = useContext(CardPasswordContext);
+  const cardDataContext = useContext(CardDataContext);
+  const errorContext = useContext(ErrorContext);
+
+  if (!cardNumberContext) throw new Error("Cannot find CardNumberContext");
+  if (!cardTypeContext) throw new Error("Cannot find CardTypeContext");
+  if (!expireDateContext) throw new Error("Cannot find ExpireDateContext");
+  if (!userNameContext) throw new Error("Cannot find UserNameContext");
+  if (!securityCodeContext) throw new Error("Cannot find SecurityCodeContext");
+  if (!cardPasswordContext) throw new Error("Cannot find CardPasswordContext");
+  if (!cardDataContext) throw new Error("Cannot find CardDataContext");
+  if (!errorContext) throw new Error("Cannot find ErrorContext");
+
   const {
     state: { cardTypeInfo },
     action: { resetCardTypeInfo },
-  } = useContext(CardTypeContext);
+  } = cardTypeContext;
+  const {
+    state: { cardNumber },
+    action: { resetCardNumber },
+  } = cardNumberContext;
+  const {
+    state: { expireDate },
+    action: { resetExpireDate },
+  } = expireDateContext;
+  const {
+    state: { userName },
+    action: { resetUserName },
+  } = userNameContext;
   const {
     state: { securityCode },
     action: { resetSecurityCode },
-  } = useContext(SecurityCodeContext);
+  } = securityCodeContext;
   const {
     state: { cardPassword },
     action: { resetCardPassword },
-  } = useContext(CardPasswordContext);
-  const { setError } = useContext(ErrorContext);
+  } = cardPasswordContext;
+  const { cardData } = cardDataContext;
+  const { setError } = errorContext;
 
   const [cardName, setCardName] = useState("");
   const [cardNameLengthReady] = useReady(cardName, isInvalidCardName);
@@ -97,15 +115,17 @@ const CardRegisterForm = () => {
         cardPassword,
       });
     } catch (err) {
-      setError(err);
+      if (err instanceof Error) {
+        setError(err);
+      }
     }
   };
 
-  const onChangeCardName = (e) => {
+  const onChangeCardName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardName(e.target.value);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleSubmitCardData();
   };
@@ -128,17 +148,17 @@ const CardRegisterForm = () => {
           ready={cardNameLengthReady && uniqueCardNameReady}
         />
         {!cardNameLengthReady && (
-          <MessageBox type="error">
+          <MessageBox styleType="error">
             {ERROR_MESSAGE["card-name-length"]}
           </MessageBox>
         )}
         {!uniqueCardNameReady && (
-          <MessageBox type="error">
+          <MessageBox styleType="error">
             {ERROR_MESSAGE["unique-card-name"]}
           </MessageBox>
         )}
         {cardNameLengthReady && uniqueCardNameReady && (
-          <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
+          <MessageBox styleType="success">{SUCCESS_MESSAGE}</MessageBox>
         )}
       </CardRegisterGroup>
       {cardNameLengthReady && uniqueCardNameReady && (

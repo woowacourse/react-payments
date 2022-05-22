@@ -116,7 +116,7 @@ export interface CardProps
     CardDataType,
     "userName" | "month" | "year" | "cardNumber" | "cardTypeInfo"
   > {
-  onClick: (e: React.MouseEvent) => void;
+  onClick?: (e: React.MouseEvent) => void;
   size?: string;
 }
 
