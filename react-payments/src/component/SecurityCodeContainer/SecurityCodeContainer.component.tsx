@@ -9,7 +9,7 @@ import HelpBox from "component/common/HelpBox/HelpBox.component";
 import useKeyboardOn from "hooks/useKeyboardOn";
 import VirtualKeyboard from "component/common/VirtualKeyboard/VirtualKeyboard.component";
 
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants/index";
 import { SecurityCodeContext } from "provider/SecurityCodeProvider";
 
 const SecurityCodeInputGroup = styled.div`
@@ -20,6 +20,10 @@ const SecurityCodeInputGroup = styled.div`
 `;
 
 const SecurityCodeContainer = memo(() => {
+  const securityCodeContext = useContext(SecurityCodeContext);
+  if (!securityCodeContext) {
+    throw new Error("Cannot find SecurityCodeContext");
+  }
   const {
     state: { securityCode, securityCodeReady },
     action: {
@@ -27,7 +31,7 @@ const SecurityCodeContainer = memo(() => {
       onClickSecurityVirtualKeyboard,
       onClickSecurityBackspaceButton,
     },
-  } = useContext(SecurityCodeContext);
+  } = securityCodeContext;
 
   const { keyboardOn, openKeyboard, closeKeyboard, onKeyDown } =
     useKeyboardOn(securityCodeReady);
@@ -57,9 +61,11 @@ const SecurityCodeContainer = memo(() => {
       </SecurityCodeInputGroup>
 
       {securityCodeReady ? (
-        <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
+        <MessageBox styleType="success">{SUCCESS_MESSAGE}</MessageBox>
       ) : (
-        <MessageBox type="error">{ERROR_MESSAGE["security-code"]} </MessageBox>
+        <MessageBox styleType="error">
+          {ERROR_MESSAGE["security-code"]}{" "}
+        </MessageBox>
       )}
     </>
   );
