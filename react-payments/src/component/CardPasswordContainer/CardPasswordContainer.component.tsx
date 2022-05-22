@@ -57,8 +57,16 @@ const CardPasswordContainer = memo(() => {
           />
         </InputBox>
 
-        <Dot size="small" formType="card-password" cardType="defaultCard" />
-        <Dot size="small" formType="card-password" cardType="defaultCard" />
+        <Dot
+          styleSize="small"
+          formType="card-password"
+          cardType="defaultCard"
+        />
+        <Dot
+          styleSize="small"
+          formType="card-password"
+          cardType="defaultCard"
+        />
         {keyboardOn && (
           <VirtualKeyboard
             onClickVirtualKeyboard={onClickCardPasswordVirtualKeyboard}

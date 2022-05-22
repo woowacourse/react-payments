@@ -1,26 +1,27 @@
-import Dot from "component/common/Dot/Dot.component";
+import Dot, { DotProps } from "component/common/Dot/Dot.component";
+import { Meta, Story } from "@storybook/react";
 
 export default {
   title: "Common/Dot",
   component: Dot,
-};
+} as Meta;
 
-const Template = (args) => <Dot {...args} />;
+const Template: Story<DotProps> = (args) => <Dot {...args} />;
 
 export const PasswordDot = Template.bind({});
 PasswordDot.args = {
-  size: "small",
+  styleSize: "small",
   formType: "card-password",
 };
 
 export const CardNumberDot = Template.bind({});
 CardNumberDot.args = {
-  size: "small",
+  styleSize: "small",
   formType: "card-number",
 };
 
 export const ColorBoxDot = Template.bind({});
 ColorBoxDot.args = {
-  size: "huge",
+  styleSize: "huge",
   cardType: "pocoCard",
 };

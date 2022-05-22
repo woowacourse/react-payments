@@ -1,10 +1,17 @@
 import styled, { css } from "styled-components";
 import { RowFlexWrapper } from "styles/wrapper";
+import { CardType } from "types";
 
-const StyledDot = styled.div`
+export interface DotProps {
+  styleSize?: string;
+  formType?: string;
+  cardType?: CardType;
+}
+
+const StyledDot = styled.div<DotProps>`
   border-radius: 50%;
-  ${({ size }) =>
-    size === "huge"
+  ${({ styleSize }) =>
+    styleSize === "huge"
       ? css`
           width: 37px;
           height: 37px;
@@ -14,12 +21,12 @@ const StyledDot = styled.div`
           height: 5px;
         `}
   background: ${({ theme, cardType }) =>
-    theme.colors[cardType] || theme.colors.cardText}
+    cardType ? theme.colors[cardType] : theme.colors.cardText}
 `;
 
-const StyledDotBox = styled(RowFlexWrapper)`
-  ${({ formType, size }) =>
-    size === "small" &&
+const StyledDotBox = styled(RowFlexWrapper)<DotProps>`
+  ${({ formType, styleSize }) =>
+    styleSize === "small" &&
     (formType === "card-password"
       ? css`
           width: 43px;
@@ -31,7 +38,7 @@ const StyledDotBox = styled(RowFlexWrapper)`
         `)}
 `;
 
-const Dot = (props) => {
+const Dot = (props: DotProps) => {
   return (
     <StyledDotBox {...props}>
       <StyledDot {...props} />

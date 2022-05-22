@@ -45,7 +45,7 @@ const CardNumberText = ({ cardNumbers, size }: CardNumberTextProps) => {
             return (
               <RowFlexWrapper key={idx}>
                 {Array.from(cardNumber).map((_, idx) => (
-                  <Dot size="small" formType="card-number" key={idx} />
+                  <Dot styleSize="small" formType="card-number" key={idx} />
                 ))}
               </RowFlexWrapper>
             );

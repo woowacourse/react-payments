@@ -40,7 +40,7 @@ const ColorBox = ({
       data-testid="color-box"
       onClick={() => onClickCardType({ cardType, cardName })}
     >
-      <Dot size="huge" cardType={cardType} />
+      <Dot styleSize="huge" cardType={cardType} />
       <ColorBoxText currentCardType={currentCardType} cardType={cardType}>
         {cardName}
       </ColorBoxText>
