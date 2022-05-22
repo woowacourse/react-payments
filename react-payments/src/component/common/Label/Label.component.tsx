@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-const Label = styled.label`
+const Label = styled.label<{ styleType?: string }>`
   display: flex;
   align-items: center;
 
@@ -10,8 +10,8 @@ const Label = styled.label`
   margin-bottom: 4px;
   color: ${({ theme }) => theme.colors.header};
 
-  ${({ type }) =>
-    type === "user-name" &&
+  ${({ styleType }) =>
+    styleType === "user-name" &&
     css`
       display: flex;
       width: 90%;

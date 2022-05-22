@@ -7,14 +7,18 @@ import Input from "component/common/Input/Input.component";
 import { UserNameContext } from "provider/UserNameProvider";
 
 const UserNameContainer = memo(() => {
+  const userNameContext = useContext(UserNameContext);
+  if (!userNameContext) {
+    throw new Error("Cannot find UserNameContext");
+  }
   const {
     state: { userName },
     action: { onChangeUserName },
-  } = useContext(UserNameContext);
+  } = userNameContext;
 
   return (
     <>
-      <Label type="user-name">
+      <Label styleType="user-name">
         <div>카드 소유자 이름(선택)</div>
         <div>{`${userName.length}/30`}</div>
       </Label>
