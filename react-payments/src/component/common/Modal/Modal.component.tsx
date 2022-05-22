@@ -1,3 +1,5 @@
+import { CardControlModalProps } from "component/CardControlModal/CardControlModal";
+import { DispatchWithoutAction } from "react";
 import styled from "styled-components";
 import { css } from "styled-components";
 import { RowFlexWrapper } from "styles/wrapper";
@@ -12,14 +14,13 @@ const DimmedModal = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-
   background: rgba(0, 0, 0, 0.5);
 `;
 
-const ModalBox = styled(RowFlexWrapper)`
+const ModalBox = styled(RowFlexWrapper)<{ styleType: string | undefined }>`
   width: 380px;
-  ${({ type }) =>
-    type === "edit"
+  ${({ styleType }) =>
+    styleType === "edit"
       ? css`
           height: 100px;
         `
@@ -31,10 +32,15 @@ const ModalBox = styled(RowFlexWrapper)`
   background: ${({ theme }) => theme.colors.pageDefault};
 `;
 
-const Modal = ({ toggleModal, children, type }) => {
+interface ModalProps extends Pick<CardControlModalProps, "toggleModal"> {
+  children: React.ReactNode;
+  styleType: string | undefined;
+}
+
+const Modal = ({ toggleModal, children, styleType }: ModalProps) => {
   return (
     <DimmedModal onClick={toggleModal}>
-      <ModalBox type={type}>{children}</ModalBox>
+      <ModalBox styleType={styleType}>{children}</ModalBox>
     </DimmedModal>
   );
 };

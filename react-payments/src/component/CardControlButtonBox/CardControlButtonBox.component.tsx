@@ -1,11 +1,10 @@
+import { CardControlModalProps } from "component/CardControlModal/CardControlModal";
 import ModalButton from "component/common/ModalButton/ModalButton.component";
 
 import { RowFlexWrapper } from "styles/wrapper";
 
-export interface CardControlButtonBoxProps {
-  handleEditCard: () => void;
-  handleDeleteCard: () => Promise<void>;
-}
+export interface CardControlButtonBoxProps
+  extends Pick<CardControlModalProps, "handleDeleteCard" | "handleEditCard"> {}
 
 const CardControlButtonBox = ({
   handleEditCard,
