@@ -29,8 +29,14 @@ const KeyBoardContainer = styled.div`
   z-index: 3;
 `;
 
+export interface VirtualKeyboardProps {
+  onClickVirtualKeyboard: (value: string) => void;
+  onClickBackspaceButton: () => void;
+  onClickCloseButton: () => void;
+}
+
 const getShuffleArray = () => {
-  const keyboardArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const keyboardArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
   return keyboardArray.sort((_) => Math.random() - 0.5);
 };
 
@@ -38,7 +44,7 @@ const VirtualKeyboard = ({
   onClickVirtualKeyboard,
   onClickCloseButton,
   onClickBackspaceButton,
-}) => {
+}: VirtualKeyboardProps) => {
   const keyboardArray = getShuffleArray();
   return (
     <KeyBoardContainer>

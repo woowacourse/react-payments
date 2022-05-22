@@ -1,13 +1,17 @@
 import { action } from "@storybook/addon-actions";
-
-import VirtualKeyboard from "component/common/VirtualKeyboard/VirtualKeyboard.component";
+import { Meta, Story } from "@storybook/react";
+import VirtualKeyboard, {
+  VirtualKeyboardProps,
+} from "component/common/VirtualKeyboard/VirtualKeyboard.component";
 
 export default {
   title: "Common/VirtualKeyboard",
   component: VirtualKeyboard,
-};
+} as Meta;
 
-const Template = (args) => <VirtualKeyboard {...args} />;
+const Template: Story<VirtualKeyboardProps> = (args) => (
+  <VirtualKeyboard {...args} />
+);
 
 export const DefaultVirtualKeyboard = Template.bind({});
 DefaultVirtualKeyboard.args = {
