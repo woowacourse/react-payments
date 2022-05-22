@@ -45,6 +45,12 @@ export type WithRequiredProperty<Type, P extends keyof Type> = Type &
     [Property in P]-?: Type[Property];
   };
 
+export type WithoutMappedProperty<Type, P extends keyof Type, MappedType> =
+  Type &
+    {
+      [Property in P]: MappedType;
+    };
+
 export enum CardNumberEnum {
   first = 1,
   second,

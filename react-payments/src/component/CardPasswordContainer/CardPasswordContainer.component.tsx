@@ -9,10 +9,16 @@ import VirtualKeyboard from "component/common/VirtualKeyboard/VirtualKeyboard.co
 
 import useKeyboardOn from "hooks/useKeyboardOn";
 import { CardPasswordContext } from "provider/CardPasswordProvider";
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants/index";
+
 import Box from "styles/box";
 
 const CardPasswordContainer = memo(() => {
+  const cardPasswordContext = useContext(CardPasswordContext);
+  if (!cardPasswordContext) {
+    throw new Error("Cannot find CardPasswordContext");
+  }
+
   const {
     state: { cardPassword, cardPasswordReady },
     action: {
@@ -20,7 +26,7 @@ const CardPasswordContainer = memo(() => {
       onClickCardPasswordBackspaceButton,
       onClickCardPasswordVirtualKeyboard,
     },
-  } = useContext(CardPasswordContext);
+  } = cardPasswordContext;
 
   const { keyboardOn, openKeyboard, closeKeyboard, onKeyDown } =
     useKeyboardOn(cardPasswordReady);
@@ -63,9 +69,11 @@ const CardPasswordContainer = memo(() => {
       </Box>
 
       {cardPasswordReady ? (
-        <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
+        <MessageBox styleType="success">{SUCCESS_MESSAGE}</MessageBox>
       ) : (
-        <MessageBox type="error">{ERROR_MESSAGE["card-password"]} </MessageBox>
+        <MessageBox styleType="error">
+          {ERROR_MESSAGE["card-password"]}{" "}
+        </MessageBox>
       )}
     </>
   );
