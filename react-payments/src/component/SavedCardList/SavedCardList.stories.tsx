@@ -3,6 +3,7 @@ import { withReactContext } from "storybook-react-context";
 
 import SavedCardList from "component/SavedCardList/SavedCardList.component";
 import { CardDataContext } from "provider/CardDataProvider";
+import { Meta, Story } from "@storybook/react";
 
 export default {
   title: "SavedCardList",
@@ -49,7 +50,9 @@ export default {
       },
     }),
   ],
-};
+} as Meta;
 
-export const DefaultSavedCardList = (args) => <SavedCardList {...args} />;
+export const DefaultSavedCardList: Story = (args) => (
+  <SavedCardList {...args} />
+);
 DefaultSavedCardList.args = {};

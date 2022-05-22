@@ -4,24 +4,23 @@ import CardPreview from "component/CardPreview/CardPreview.component";
 import SkeletonCardBox from "component/common/SkeletonCard/SkeletonCard.component";
 
 import useFetch from "hooks/useFetch";
-import { API_URL, REDUCER_TYPE } from "constants";
-import { CardDataContext } from "provider/CardDataProvider";
+import { API_URL } from "constants/index";
+import { CardDataContext, initCardDataAction } from "provider/CardDataProvider";
 
 const SavedCardList = () => {
   const { data, loading } = useFetch(`${API_URL}/api/cards`);
-  const { cardData, dispatch } = useContext(CardDataContext);
+  const cardDataContext = useContext(CardDataContext);
+  if (!cardDataContext) {
+    throw new Error("Cannot find CardDataContext");
+  }
+  const { cardData, dispatch } = cardDataContext;
 
   useEffect(() => {
     if (!data) {
       return;
     }
 
-    dispatch({
-      type: REDUCER_TYPE.INIT,
-      payload: Object.fromEntries(
-        data.map((card) => [card.id, { id: card.id, ...card.attributes }])
-      ),
-    });
+    dispatch(initCardDataAction(data));
   }, [dispatch, data]);
 
   return (
