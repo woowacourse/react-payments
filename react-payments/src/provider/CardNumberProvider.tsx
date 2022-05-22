@@ -15,13 +15,7 @@ interface InitialContextValue {
   state: InitialContextState;
   action: {
     onChangeCardNumber: ({ target }: { target: HTMLInputElement }) => void;
-    onKeyDownCardNumber: ({
-      target,
-      key,
-    }: {
-      target: HTMLInputElement;
-      key: string;
-    }) => void;
+    onKeyDownCardNumber: (event: React.KeyboardEvent<HTMLInputElement>) => void;
     resetCardNumber: () => void;
     setCardNumber: React.Dispatch<React.SetStateAction<SeveralInputType>>;
   };
@@ -66,13 +60,11 @@ const CardNumberProvider = ({ children }: { children: React.ReactNode }) => {
     setCardNumber({ ...initialState });
   }, []);
 
-  const onKeyDownCardNumber = ({
-    target,
-    key,
-  }: {
-    target: HTMLInputElement;
-    key: string;
-  }) => {
+  const onKeyDownCardNumber = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    const target = event.target as HTMLInputElement;
+    const { key } = event;
     const element = target.previousSibling
       ?.previousSibling as HTMLInputElement | null;
 

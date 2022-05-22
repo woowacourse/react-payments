@@ -15,7 +15,7 @@ const useKeyboardOn = (ready: boolean) => {
     ready && closeKeyboard();
   }, [closeKeyboard, ready]);
 
-  const onKeyDown = (e: React.KeyboardEvent) => {
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
   };
 

@@ -6,14 +6,18 @@ import Input from "component/common/Input/Input.component";
 import ConnectorBox from "component/common/ConnectorBox/ConnectorBox.component";
 import MessageBox from "component/common/MessageBox/MessageBox.component";
 
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants/index";
 import { CardNumberContext } from "provider/CardNumberProvider";
 
 const CardNumberContainer = memo(() => {
+  const cardNumberContext = useContext(CardNumberContext);
+  if (!cardNumberContext) {
+    throw new Error("Cannot find CardNumberContext");
+  }
   const {
     state: { cardNumber, cardNumberReady },
     action: { onChangeCardNumber, onKeyDownCardNumber },
-  } = useContext(CardNumberContext);
+  } = cardNumberContext;
 
   return (
     <>
@@ -58,9 +62,11 @@ const CardNumberContainer = memo(() => {
       </InputBox>
 
       {cardNumberReady ? (
-        <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
+        <MessageBox styleType="success">{SUCCESS_MESSAGE}</MessageBox>
       ) : (
-        <MessageBox type="error">{ERROR_MESSAGE["card-number"]} </MessageBox>
+        <MessageBox styleType="error">
+          {ERROR_MESSAGE["card-number"]}{" "}
+        </MessageBox>
       )}
     </>
   );

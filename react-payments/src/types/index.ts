@@ -10,9 +10,9 @@ export interface CardDataType {
   cardTypeInfo: CardTypeInfoType;
 }
 
-export interface AllCardData {
+export type AllCardData = {
   [key: string]: CardDataType;
-}
+};
 
 export type SeveralInputType = {
   [key: string]: string;
@@ -50,6 +50,14 @@ export enum CardNumberEnum {
   second,
   third,
   fourth,
+}
+
+export enum FormTypeEnum {
+  "expire-date" = "expire-date",
+  "security-code" = "security-code",
+  "card-password" = "card-password",
+  "card-number" = "card-number",
+  "user-name" = "user-name",
 }
 
 export const getProperty = <T, K extends keyof T>(

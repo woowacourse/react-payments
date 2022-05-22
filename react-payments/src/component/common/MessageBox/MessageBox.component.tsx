@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const MessageBox = styled.div`
+const MessageBox = styled.div<{ styleType: "success" | "error" }>`
   margin-top: 10px;
   font-size: 12px;
-  color: ${({ type, theme }) =>
-    type === "success"
+  color: ${({ styleType, theme }) =>
+    styleType === "success"
       ? theme.colors.successMessage
       : theme.colors.errorMessage};
 `;

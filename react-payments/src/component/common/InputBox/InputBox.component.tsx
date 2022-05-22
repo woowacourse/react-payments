@@ -1,6 +1,11 @@
 import styled from "styled-components";
+import { FormTypeEnum } from "types";
 
-const InputBox = styled.div`
+export interface InputBoxProps {
+  formType: keyof typeof FormTypeEnum;
+}
+
+const InputBox = styled.div<InputBoxProps>`
   display: flex;
   height: 45px;
   align-items: center;
