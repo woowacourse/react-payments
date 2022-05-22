@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { css } from "styled-components";
 
-const CardNameInput = styled.input`
+export interface CardNameInputProps {
+  ready: boolean;
+  styleSize?: string;
+}
+
+const CardNameInput = styled.input<CardNameInputProps>`
   border: transparent;
   text-align: center;
   border-bottom: 1.5px solid
@@ -10,8 +15,8 @@ const CardNameInput = styled.input`
   &:focus {
     outline: none;
   }
-  ${({ size }) =>
-    size === "small"
+  ${({ styleSize }) =>
+    styleSize === "small"
       ? css`
           width: 122px;
           height: 18px;
