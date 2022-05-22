@@ -35,7 +35,7 @@ const HelpModal = styled.div`
 `;
 
 const HelpBox = () => {
-  const [isShown, setIsShown] = useState(false);
+  const [isShown, setIsShown] = useState<boolean>(false);
   return (
     <Box position="relative">
       <HelpIcon
