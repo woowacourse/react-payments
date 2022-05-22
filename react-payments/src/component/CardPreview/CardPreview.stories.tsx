@@ -1,15 +1,19 @@
-import CardPreview from "component/CardPreview/CardPreview.component";
+import CardPreview, {
+  CardPreviewProps,
+} from "component/CardPreview/CardPreview.component";
+import { Meta, Story } from "@storybook/react";
 
 export default {
   title: "CardPreview",
   component: CardPreview,
-};
+} as Meta;
 
-const Template = (args) => <CardPreview {...args} />;
+const Template: Story<CardPreviewProps> = (args) => <CardPreview {...args} />;
 
 export const DefaultCardPreview = Template.bind({});
 DefaultCardPreview.args = {
   cardDatum: {
+    id: "0",
     cardName: "우연 카드",
     cardNumber: {
       first: "1112",
@@ -25,5 +29,4 @@ DefaultCardPreview.args = {
     year: "12",
     userName: "우연",
   },
-  idx: 0,
 };

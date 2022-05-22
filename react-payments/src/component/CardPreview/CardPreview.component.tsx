@@ -1,4 +1,4 @@
-import { memo, useContext, useReducer, useState } from "react";
+import React, { memo, useContext, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -10,12 +10,17 @@ import Box from "styles/box";
 
 import useReady from "hooks/useReady";
 import { isDuplicatedCardName, isInvalidCardName } from "util/validator";
-import { CardDataContext } from "provider/CardDataProvider";
-import { ERROR_MESSAGE, REDUCER_TYPE, SUCCESS_MESSAGE } from "constants";
+import {
+  CardDataContext,
+  deletedCardDataAction,
+  editCardDataAction,
+} from "provider/CardDataProvider";
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from "constants/index";
 import { deleteCard, editCard } from "api/cardApi";
 import { RowFlexWrapper } from "styles/wrapper";
 import { ColumnFlexWrapper } from "../../styles/wrapper";
 import { ErrorContext } from "provider/ErrorContext";
+import { CardDataType } from "types";
 
 const CardNameText = styled(RowFlexWrapper)`
   font-weight: 700;
@@ -49,8 +54,19 @@ const ConfirmButton = styled.button`
   }
 `;
 
-const CardPreview = memo(({ cardDatum }) => {
-  const { cardData, dispatch } = useContext(CardDataContext);
+export interface CardPreviewProps {
+  cardDatum: Omit<CardDataType, "cardPassword" | "securityCode">;
+}
+
+const CardPreview = memo(({ cardDatum }: CardPreviewProps) => {
+  const cardDataContext = useContext(CardDataContext);
+  const errorContext = useContext(ErrorContext);
+  if (!cardDataContext) throw new Error("Cannot find cardDataContext");
+  if (!errorContext) throw new Error("Cannot find errorContext");
+
+  const { cardData, dispatch } = cardDataContext;
+  const { setError } = errorContext;
+
   const [newCardName, setNewCardName] = useState("");
   const [newCardNameLengthReady] = useReady(newCardName, isInvalidCardName);
   const [uniqueNewCardNameReady] = useReady(
@@ -63,7 +79,6 @@ const CardPreview = memo(({ cardDatum }) => {
   const [editOn, setEditOn] = useState(false);
   const [isShowModal, toggleModal] = useReducer((prev) => !prev, false);
   const navigate = useNavigate();
-  const { setError } = useContext(ErrorContext);
 
   const handleEditCard = () => {
     navigate(`add/${id}`);
@@ -74,33 +89,28 @@ const CardPreview = memo(({ cardDatum }) => {
   };
 
   const handleSubmitEditedName = async () => {
-    dispatch({
-      type: REDUCER_TYPE.EDIT,
-      payload: {
-        id,
-        cardName: newCardName,
-      },
-    });
+    dispatch(editCardDataAction({ id, cardName: newCardName }));
 
     try {
       await editCard(id, { cardName: newCardName });
     } catch (err) {
-      setError(err);
+      if (err instanceof Error) {
+        setError(err);
+      }
     }
 
     closeEditForm();
   };
 
   const handleDeleteCard = async () => {
-    dispatch({
-      type: REDUCER_TYPE.DELETE,
-      payload: { id },
-    });
+    dispatch(deletedCardDataAction({ id }));
 
     try {
       await deleteCard(id);
     } catch (err) {
-      setError(err);
+      if (err instanceof Error) {
+        setError(err);
+      }
     }
   };
 
@@ -108,7 +118,7 @@ const CardPreview = memo(({ cardDatum }) => {
     setEditOn(false);
   };
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewCardName(e.target.value);
   };
 
@@ -126,7 +136,7 @@ const CardPreview = memo(({ cardDatum }) => {
               mt="5px"
             >
               <CardNameInput
-                size="small"
+                styleSize="small"
                 value={newCardName}
                 onChange={onChange}
               />
@@ -140,17 +150,17 @@ const CardPreview = memo(({ cardDatum }) => {
             </Box>
 
             {!newCardNameLengthReady && (
-              <MessageBox type="error">
+              <MessageBox styleType="error">
                 {ERROR_MESSAGE["card-name-length"]}
               </MessageBox>
             )}
             {!uniqueNewCardNameReady && (
-              <MessageBox type="error">
+              <MessageBox styleType="error">
                 {ERROR_MESSAGE["unique-card-name"]}
               </MessageBox>
             )}
             {newCardNameLengthReady && uniqueNewCardNameReady && (
-              <MessageBox type="success">{SUCCESS_MESSAGE}</MessageBox>
+              <MessageBox styleType="success">{SUCCESS_MESSAGE}</MessageBox>
             )}
           </ColumnFlexWrapper>
         ) : (

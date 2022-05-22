@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { css } from "styled-components";
 
 export interface CardNameInputProps {
-  ready: boolean;
+  ready?: boolean;
   styleSize?: string;
 }
 
