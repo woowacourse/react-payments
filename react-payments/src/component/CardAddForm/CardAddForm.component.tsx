@@ -32,13 +32,12 @@ const Form = styled.form`
   flex-direction: column;
 `;
 
-const CardAddForm = ({
-  toggleShowModal,
-  id,
-}: {
+export interface CardAddFormProps {
   toggleShowModal: DispatchWithoutAction;
   id: string | undefined;
-}) => {
+}
+
+const CardAddForm = ({ toggleShowModal, id }: CardAddFormProps) => {
   const cardTypeContext = useContext(CardTypeContext);
   const cardNumberContext = useContext(CardNumberContext);
   const expireDateContext = useContext(ExpireDateContext);
