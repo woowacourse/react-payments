@@ -32,9 +32,9 @@ const ModalBox = styled(RowFlexWrapper)<{ styleType: string | undefined }>`
   background: ${({ theme }) => theme.colors.pageDefault};
 `;
 
-interface ModalProps extends Pick<CardControlModalProps, "toggleModal"> {
+export interface ModalProps extends Pick<CardControlModalProps, "toggleModal"> {
   children: React.ReactNode;
-  styleType: string | undefined;
+  styleType?: string;
 }
 
 const Modal = ({ toggleModal, children, styleType }: ModalProps) => {
