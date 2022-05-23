@@ -20,7 +20,7 @@ import { deleteCard, editCard } from "api/cardApi";
 import { RowFlexWrapper } from "styles/wrapper";
 import { ColumnFlexWrapper } from "../../styles/wrapper";
 import { ErrorContext } from "provider/ErrorContext";
-import { CardDataType } from "types";
+import { CardDataType, FetchingCardDataType } from "types";
 
 const CardNameText = styled(RowFlexWrapper)`
   font-weight: 700;
@@ -55,7 +55,7 @@ const ConfirmButton = styled.button`
 `;
 
 export interface CardPreviewProps {
-  cardDatum: Omit<CardDataType, "cardPassword" | "securityCode">;
+  cardDatum: FetchingCardDataType;
 }
 
 const CardPreview = memo(({ cardDatum }: CardPreviewProps) => {
@@ -74,7 +74,8 @@ const CardPreview = memo(({ cardDatum }: CardPreviewProps) => {
     isDuplicatedCardName,
     cardData
   );
-  const { cardName, id } = cardDatum;
+  const { id } = cardDatum;
+  const { cardName } = cardDatum.attributes;
 
   const [editOn, setEditOn] = useState(false);
   const [isShowModal, toggleModal] = useReducer((prev) => !prev, false);
@@ -124,7 +125,7 @@ const CardPreview = memo(({ cardDatum }: CardPreviewProps) => {
 
   return (
     <>
-      <Card onClick={toggleModal} {...cardDatum} />
+      <Card onClick={toggleModal} {...cardDatum.attributes} />
       <CardNameText gap="8">
         {editOn ? (
           <ColumnFlexWrapper gap="5">

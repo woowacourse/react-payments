@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { ErrorContext } from "provider/ErrorContext";
-import { AllCardData } from "types";
+import { AllFetchingCardDataType } from "types";
 
 function useFetch(url: string) {
-  const [data, setData] = useState<AllCardData | null>(null);
+  const [data, setData] = useState<AllFetchingCardDataType | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const errorContext = useContext(ErrorContext);
   if (!errorContext) {
@@ -22,7 +22,7 @@ function useFetch(url: string) {
         if (!res.ok) {
           throw new Error("서버에서 데이터를 불러오는데 실패했습니다");
         }
-        const data: AllCardData = (await res.json()).data;
+        const data: AllFetchingCardDataType = (await res.json()).data;
         setData(data);
       } catch (err) {
         if (err instanceof Error) {

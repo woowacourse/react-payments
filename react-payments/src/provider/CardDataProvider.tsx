@@ -1,8 +1,13 @@
 import React, { createContext, useReducer } from "react";
 import { REDUCER_TYPE } from "constants/index";
-import { AllCardData, CardDataType, WithRequiredProperty } from "types";
+import {
+  AllCardData,
+  AllFetchingCardDataType,
+  CardDataType,
+  WithRequiredProperty,
+} from "types";
 
-export const initCardDataAction = (cardData: AllCardData) => ({
+export const initCardDataAction = (cardData: AllFetchingCardDataType) => ({
   type: REDUCER_TYPE.INIT,
   payload: cardData,
 });
@@ -25,7 +30,7 @@ type CardDataActions =
   | ReturnType<typeof deletedCardDataAction>;
 
 interface InitialContextValue {
-  cardData: AllCardData;
+  cardData: AllFetchingCardDataType;
   dispatch: React.Dispatch<CardDataActions>;
 }
 
@@ -33,7 +38,7 @@ export const CardDataContext = createContext<InitialContextValue | null>(null);
 
 const initialState = {};
 
-const reducer = (state: AllCardData, action: CardDataActions) => {
+const reducer = (state: AllFetchingCardDataType, action: CardDataActions) => {
   switch (action.type) {
     case REDUCER_TYPE.EDIT: {
       const cards = { ...state };

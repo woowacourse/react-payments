@@ -14,7 +14,6 @@ const SavedCardList = () => {
     throw new Error("Cannot find CardDataContext");
   }
   const { cardData, dispatch } = cardDataContext;
-
   useEffect(() => {
     if (!data) {
       return;
