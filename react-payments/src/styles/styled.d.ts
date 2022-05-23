@@ -23,4 +23,8 @@ declare module "styled-components" {
     keyof Omit<DefaultBoxType, "children">,
     string
   >;
+
+  export type TextType = {
+    [key: string]: string;
+  };
 }
