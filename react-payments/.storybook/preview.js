@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import FormDataProvider from "../src/provider/FormDataProvider";
 import { BrowserRouter } from "react-router-dom";
 import CardDataProvider from "../src/provider/CardDataProvider";
-import ErrorProvider from "provider/ErrorContext.jsx";
+import ErrorProvider from "provider/ErrorContext";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
