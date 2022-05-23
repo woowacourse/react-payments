@@ -12,18 +12,30 @@ const CardNumberTextBox = styled.div<{ size?: string }>`
   font-weight: 500;
   margin-bottom: 5px;
 
-  ${({ size }) =>
-    size === "big"
-      ? css`
+  ${({ size }) => {
+    switch (size) {
+      case "big":
+        return css`
           font-size: 18px;
           gap: 16px;
           letter-spacing: 5px;
-        `
-      : css`
+        `;
+      case "small":
+        return css`
+          font-size: 10px;
+          gap: 6px;
+          letter-spacing: 1px;
+        `;
+      default:
+        return css`
           font-size: 14px;
           gap: 10px;
           letter-spacing: 3px;
-        `}
+        `;
+    }
+  }}
+
+  ${({ size }) => (size === "big" ? css`` : css``)}
 `;
 
 interface CardNumberTextProps {
@@ -34,9 +46,9 @@ interface CardNumberTextProps {
 const CardNumberText = ({ cardNumbers, size }: CardNumberTextProps) => {
   return (
     <CardNumberTextBox size={size}>
-      {Object.keys(cardNumbers)
+      {Object.entries(cardNumbers)
         .sort(
-          (key, newKey) =>
+          ([key, _], [newKey, __]) =>
             getProperty(CardNumberEnum, key as keyof typeof CardNumberEnum) -
             getProperty(CardNumberEnum, newKey as keyof typeof CardNumberEnum)
         )

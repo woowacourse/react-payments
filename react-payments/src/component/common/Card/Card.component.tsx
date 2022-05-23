@@ -32,16 +32,25 @@ const CardChip = styled.div<{ size?: string }>`
   background: ${({ theme }) => theme.colors.cardChip};
   border-radius: 4px;
 
-  ${({ size }) =>
-    size === "big"
-      ? css`
+  ${({ size }) => {
+    switch (size) {
+      case "big":
+        return css`
           width: 55.04px;
           height: 35.77px;
-        `
-      : css`
+        `;
+      case "small":
+        return css`
+          width: 23px;
+          height: 13px;
+        `;
+      default:
+        return css`
           width: 40px;
           height: 26px;
-        `}
+        `;
+    }
+  }}
 `;
 
 const CardBox = styled(ColumnFlexWrapper)<{
@@ -59,16 +68,25 @@ const CardBox = styled(ColumnFlexWrapper)<{
   background: ${({ theme, cardType }) =>
     theme.colors[cardType] || theme.colors.defaultCard};
 
-  ${({ size }) =>
-    size === "big"
-      ? css`
+  ${({ size }) => {
+    switch (size) {
+      case "big":
+        return css`
           width: 290px;
           height: 180px;
-        `
-      : css`
+        `;
+      case "small":
+        return css`
+          width: 230px
+          height: 150px;
+        `;
+      default:
+        return css`
           width: 208px;
           height: 130px;
-        `}
+        `;
+    }
+  }}
 `;
 
 const CardContainer = styled(RowFlexWrapper)`
@@ -97,16 +115,26 @@ const CardBottomInfo = styled.div`
 const CardText = styled.span<{ size?: string }>`
   margin: 0 16px;
 
-  ${({ size }) =>
-    size === "big"
-      ? css`
+  ${({ size }) => {
+    switch (size) {
+      case "big":
+        return css`
           font-size: 18px;
           line-height: 20px;
-        `
-      : css`
+        `;
+      case "small":
+        return css`
+          width: 10px;
+          height: 13px;
+        `;
+      default:
+        return css`
           font-size: 12px;
           line-height: 16px;
-        `}
+        `;
+    }
+  }}
+
   vertical-align: middle;
   font-weight: 400;
 `;
