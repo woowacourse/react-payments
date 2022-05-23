@@ -7,6 +7,7 @@ declare module "styled-components" {
 
   export interface FlexWrapper {
     children: React.ReactNode;
+    width?: string;
     gap?: string;
     mt?: string;
     mb?: string;
@@ -29,5 +30,6 @@ declare module "styled-components" {
     color?: string;
     fontWeight?: string;
     underline?: boolean;
+    pointer?: boolean;
   };
 }

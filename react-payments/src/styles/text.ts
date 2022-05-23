@@ -9,6 +9,11 @@ const Text = styled.div<TextType>`
     css`
       text-decoration: underline #2ac1bc;
     `}
+  ${({ pointer }) =>
+    pointer &&
+    css`
+      cursor: pointer;
+    `}
 `;
 
 export default Text;

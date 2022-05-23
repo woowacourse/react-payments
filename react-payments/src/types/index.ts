@@ -14,6 +14,15 @@ export type AllCardData = {
   [key: string]: CardDataType;
 };
 
+export interface FetchingCardDataType {
+  id: string;
+  attributes: Omit<CardDataType, "id">;
+}
+
+export type AllFetchingCardDataType = {
+  [key: string]: FetchingCardDataType;
+};
+
 export type SeveralInputType = {
   [key: string]: string;
 };
