@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 
-const PageTitle = styled.h1<{ type?: string }>`
-  ${({ type }) =>
-    type === "header"
+const PageTitle = styled.h1<{ styleType?: string }>`
+  ${({ styleType }) =>
+    styleType === "header"
       ? css`
           font-size: 16px;
           line-height: 19px;

@@ -19,15 +19,13 @@ const StyledButton = styled.button`
         `}
 `;
 
-const LinkButton = ({
-  children,
-  onClick,
-  type,
-}: {
+export interface LinkButtonProps {
   children: React.ReactNode;
   onClick?: (event: React.MouseEvent) => void;
   type?: "submit" | "button" | undefined;
-}) => {
+}
+
+const LinkButton = ({ children, onClick, type }: LinkButtonProps) => {
   return (
     <StyledButton onClick={onClick} type={type}>
       {children}

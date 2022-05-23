@@ -28,7 +28,7 @@ const CardAddPage = () => {
         >
           {"<"}
         </LinkButton>
-        <PageTitle type="header">
+        <PageTitle styleType="header">
           {isEdit(id) ? "카드 수정" : "카드 추가"}
         </PageTitle>
       </Header>

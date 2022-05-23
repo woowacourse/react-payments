@@ -18,7 +18,7 @@ const HomePage = () => {
   return (
     <PageContainer>
       <Header>
-        <PageTitle type="header">보유 카드</PageTitle>
+        <PageTitle styleType="header">보유 카드</PageTitle>
       </Header>
       <CardGroup>
         <SavedCardList />
