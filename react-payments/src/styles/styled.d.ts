@@ -25,6 +25,9 @@ declare module "styled-components" {
   >;
 
   export type TextType = {
-    [key: string]: string;
+    fontSize?: string;
+    color?: string;
+    fontWeight?: string;
+    underline?: boolean;
   };
 }
