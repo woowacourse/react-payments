@@ -23,7 +23,7 @@ const initState = {
   nickname: "",
 };
 
-const updateFunction = (state, action) => {
+const cardReducer = (state, action) => {
   switch (action.type) {
     case CARD_ACTION.SET_CARD_NUMBER:
       return {
@@ -81,7 +81,7 @@ const updateFunction = (state, action) => {
 };
 
 const useCard = () => {
-  const [cardInfo, updateCard] = useReducer(updateFunction, initState);
+  const [cardInfo, updateCard] = useReducer(cardReducer, initState);
 
   const validateCardInfo = () => {
     validateArray.forEach((validateFunc) => {

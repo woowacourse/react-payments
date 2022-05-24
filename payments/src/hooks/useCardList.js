@@ -5,7 +5,7 @@ export const CARD_LIST_ACTION = {
   REMOVE_CARD: "cardList/REMOVE_CARD",
 };
 
-const controlCardList = (state, action) => {
+const cardReducer = (state, action) => {
   switch (action.type) {
     case CARD_LIST_ACTION.ADD_CARD:
       return [...state, action.payload];
@@ -22,7 +22,7 @@ const controlCardList = (state, action) => {
 const initState = JSON.parse(localStorage.getItem("CARD_LIST")) ?? [];
 
 const useCardList = () => {
-  const [cardList, updateCardList] = useReducer(controlCardList, initState);
+  const [cardList, updateCardList] = useReducer(cardReducer, initState);
 
   return { cardList, updateCardList };
 };
