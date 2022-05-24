@@ -1,7 +1,7 @@
 import "./index.scss";
 
 import Card from "../../common/Card";
-import { Input } from "../../common/Input";
+import Input from "../../common/Input";
 import NextButton from "../../common/NextButton";
 
 import { useCardContext } from "../../../context/CardProvider";
@@ -9,7 +9,6 @@ import { useCardListContext } from "../../../context/CardListProvider";
 
 import { CARD_LIST_ACTION } from "../../../hooks/useCardList";
 import { CARD_ACTION } from "../../../hooks/useCard";
-
 import { Link, useNavigate } from "react-router-dom";
 
 const NicknameInputContainer = ({ setDone }) => {

@@ -1,6 +1,6 @@
 import "./index.scss";
 import InputContainer from "../../common/InputContainer";
-import { Input } from "../../common/Input";
+import Input from "../../common/Input";
 import InputLabel from "../../common/label";
 
 import { useCardContext } from "../../../context/CardProvider";

@@ -1,7 +1,7 @@
 import "./index.scss";
 import { Fragment } from "react";
 
-import { Input } from "../../common/Input";
+import Input from "../../common/Input";
 import InputLabel from "../../common/label";
 import InputContainer from "../../common/InputContainer";
 

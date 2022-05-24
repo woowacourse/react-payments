@@ -1,6 +1,6 @@
 import "./index.scss";
 import InputContainer from "../../common/InputContainer";
-import { Input } from "../../common/Input";
+import Input from "../../common/Input";
 import useControlInput from "../../../hooks/useControlInput";
 import InputLabel from "../../common/label";
 import { Fragment } from "react";

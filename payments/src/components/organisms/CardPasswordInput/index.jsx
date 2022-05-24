@@ -1,5 +1,5 @@
 import "./index.scss";
-import { Input } from "../../common/Input";
+import Input from "../../common/Input";
 import InputContainer from "../../common/InputContainer";
 import InputLabel from "../../common/label";
 
