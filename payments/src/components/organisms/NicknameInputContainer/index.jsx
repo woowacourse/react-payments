@@ -9,7 +9,7 @@ import { CardListContext } from "../../../context/CardListProvider";
 import { CARD_LIST_ACTION } from "../../../hooks/useCardList";
 import { CARD_ACTION } from "../../../hooks/useCard";
 
-const SetNickname = ({ setDone }) => {
+const NicknameInputContainer = ({ setDone }) => {
   const { cardInfo, updateCard } = useContext(CardContext);
   const { updateCardList } = useContext(CardListContext);
   const navigate = useNavigate();
@@ -53,4 +53,4 @@ const SetNickname = ({ setDone }) => {
   );
 };
 
-export default SetNickname;
+export default NicknameInputContainer;
