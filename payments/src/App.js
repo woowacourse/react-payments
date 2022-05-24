@@ -8,14 +8,19 @@ import CardAddPage from "./pages/CardAddPage";
 const App = () => {
   return (
     <CardListProvider>
-      <CardProvider>
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/addCard" element={<CardAddPage />} />
-          </Routes>
-        </BrowserRouter>
-      </CardProvider>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/addCard"
+            element={
+              <CardProvider>
+                <CardAddPage />
+              </CardProvider>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </CardListProvider>
   );
 };
