@@ -5,11 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 94vh;
-  display: inline-block;
-  max-width: 500px;
-  max-height: 700px;
-  padding: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+  background-color: antiquewhite;
 }
 
 code {
@@ -21,6 +21,22 @@ button {
   padding: 0;
 }
 
+#top {
+  width: 600px;
+  height: 90vh;
+  position: relative;
+  display: inline-block;
+  border: 1px solid gray;
+  border-radius: 1em;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 #root {
+  overflow: scroll;
   height: 100%;
+  padding: 2rem;
+  margin: 1rem 0;
 }
