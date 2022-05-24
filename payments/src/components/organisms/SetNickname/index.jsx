@@ -6,6 +6,7 @@ import { CardContext } from "../../../context/CardProvider";
 import { Link, useNavigate } from "react-router-dom";
 import "./index.scss";
 import { CardListContext } from "../../../context/CardListProvider";
+import { CARD_LIST_ACTION } from "../../../hooks/useCardList";
 
 const SetNickname = ({ setDone }) => {
   const { cardInfo, updateCard } = useContext(CardContext);
@@ -22,7 +23,7 @@ const SetNickname = ({ setDone }) => {
 
   const addCard = (e) => {
     e.preventDefault();
-    updateCardList({ type: "addCardList", payload: cardInfo });
+    updateCardList({ type: CARD_LIST_ACTION.ADD_CARD, payload: cardInfo });
     updateCard({ type: "initialize" });
     setDone(false);
     navigate("/");

@@ -6,6 +6,7 @@ import "./index.scss";
 import useModal from "../../hooks/useModal";
 import ConfirmCardControl from "../../components/organisms/ConfirmCardControl";
 import { useEffect } from "react";
+import { CARD_LIST_ACTION } from "../../hooks/useCardList";
 
 const Home = () => {
   const { cardList, updateCardList } = useContext(CardListContext);
@@ -22,7 +23,7 @@ const Home = () => {
         closeModal={closeConfirmCardControlModal}
         removeCard={() => {
           updateCardList({
-            type: "removeCard",
+            type: CARD_LIST_ACTION.REMOVE_CARD,
             payload: {
               targetIndex: idx,
             },
