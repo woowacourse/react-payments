@@ -36,7 +36,7 @@ const SecureCodeInput = () => {
       </InputContainer>
       <button type="button" className="help--button tooltip">
         ?
-        <span className="tooltiptext tooltip-bottom">
+        <span className="tooltip-text tooltip-bottom">
           카드 뒷면의 세자리 숫자를 확인해주세요!
         </span>
       </button>

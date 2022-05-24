@@ -34,7 +34,7 @@ const CardColorPicker = ({ closeModal }) => {
           onClick={() => {
             pickColor(card.name, card.color);
           }}
-          role={"pick"}
+          role="pick"
           setVisible={closeModal}
         />
       ))}

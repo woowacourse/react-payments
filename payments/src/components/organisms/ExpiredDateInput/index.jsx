@@ -1,4 +1,4 @@
-import useControllInput from "../../../hooks/useControllInput";
+import useControlInput from "../../../hooks/useControlInput";
 import InputContainer from "../../common/InputContainer";
 import { Input } from "../../common/Input";
 import "./index.scss";
@@ -17,7 +17,7 @@ const ExpiredDateInput = () => {
     updateCard,
   } = useContext(CardContext);
 
-  const { itemRef, controllInput, autoFocusBackward } = useControllInput({
+  const { itemRef, controlInput, autoFocusBackward } = useControlInput({
     maxLength: INPUT_LENGTH,
   });
 
@@ -29,7 +29,7 @@ const ExpiredDateInput = () => {
         index: idx,
       },
     });
-    controllInput(target);
+    controlInput(target);
   };
 
   const handleKeyDown = (e) => {

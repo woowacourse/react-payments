@@ -6,7 +6,7 @@ const Card = ({
 }) => {
   return (
     <div
-      data-testId="card"
+      data-testid="card"
       className={`card__container ${color}`}
       onClick={onClick}
     >

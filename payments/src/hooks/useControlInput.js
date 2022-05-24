@@ -1,9 +1,9 @@
 import { useRef } from "react";
 
-const useControllInput = ({ maxLength }) => {
+const useControlInput = ({ maxLength }) => {
   const itemRef = useRef([]);
 
-  const controllInput = (target) => {
+  const controlInput = (target) => {
     if (target.value.length >= maxLength) {
       autoFocusForward(target);
     }
@@ -23,8 +23,8 @@ const useControllInput = ({ maxLength }) => {
 
   return {
     itemRef,
-    controllInput,
+    controlInput,
     autoFocusBackward,
   };
 };
-export default useControllInput;
+export default useControlInput;

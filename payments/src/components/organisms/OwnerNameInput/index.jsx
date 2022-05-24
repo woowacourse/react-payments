@@ -26,7 +26,7 @@ const OwnerNameInput = () => {
   };
 
   return (
-    <div className="ownername__input__container">
+    <div className="owner-name__input__container">
       <div className="label__container">
         <InputLabel>카드 소유자 이름(선택)</InputLabel>
         <InputLabel>{`${ownerName.length}/30`}</InputLabel>

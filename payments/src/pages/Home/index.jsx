@@ -47,7 +47,7 @@ const Home = () => {
         </div>
       ))}
       <div className="card-add-btn--container">
-        <Link to="/addcard">
+        <Link to="/addCard">
           <button className="home-container-card-add-btn">+</button>
         </Link>
       </div>

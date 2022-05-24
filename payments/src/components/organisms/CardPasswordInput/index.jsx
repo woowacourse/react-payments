@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { CardContext } from "../../../context/CardProvider";
-import useControllInput from "../../../hooks/useControllInput";
+import useControlInput from "../../../hooks/useControlInput";
 import { blockCharacter, limitInputLength } from "../../../util/input";
 import { Input } from "../../common/Input";
 import InputContainer from "../../common/InputContainer";
@@ -12,7 +12,7 @@ const NUM_OF_INPUT = 2;
 const BACKSPACE_KEY_CODE = 8;
 
 const CardPasswordInput = () => {
-  const { itemRef, controllInput, autoFocusBackward } = useControllInput({
+  const { itemRef, controlInput, autoFocusBackward } = useControlInput({
     maxLength: INPUT_LENGTH,
   });
 
@@ -29,7 +29,7 @@ const CardPasswordInput = () => {
         index: idx,
       },
     });
-    controllInput(target);
+    controlInput(target);
   };
 
   const handleKeyDown = (e) => {

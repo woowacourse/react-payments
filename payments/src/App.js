@@ -12,7 +12,7 @@ const App = () => {
         <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/addcard" element={<CardAddPage />} />
+            <Route path="/addCard" element={<CardAddPage />} />
           </Routes>
         </BrowserRouter>
       </CardProvider>

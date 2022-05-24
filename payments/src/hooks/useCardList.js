@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 
-const controllCardList = (state, action) => {
+const controlCardList = (state, action) => {
   switch (action.type) {
     case "addCardList":
       localStorage.setItem(
@@ -28,7 +28,7 @@ const controllCardList = (state, action) => {
 const initState = JSON.parse(localStorage.getItem("CARD_LIST")) ?? [];
 
 const useCardList = () => {
-  const [cardList, updateCardList] = useReducer(controllCardList, initState);
+  const [cardList, updateCardList] = useReducer(controlCardList, initState);
 
   return { cardList, updateCardList };
 };
