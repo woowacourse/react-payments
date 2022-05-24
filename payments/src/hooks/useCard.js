@@ -1,6 +1,17 @@
 import { useReducer } from "react";
 import validateArray from "../util/validate";
 
+export const CARD_ACTION = {
+  SET_CARD_NUMBER: "card/SET_CARD_NUMBER",
+  SET_EXPIRED_DATE: "card/SET_EXPIRED_DATE",
+  SET_OWNER_NAME: "card/SET_OWNER_NAME",
+  SET_SECURE_CODE: "card/SET_SECURE_CODE",
+  SET_PASSWORD: "card/SET_PASSWORD",
+  SET_CARD_NAME: "card/SET_CARD_NAME",
+  SET_NICKNAME: "card/SET_NICKNAME",
+  INITIALIZE: "card/INITIALIZE",
+};
+
 const initState = {
   cardNumber: ["", "", "", ""],
   expiredDate: ["", ""],
@@ -14,7 +25,7 @@ const initState = {
 
 const updateFunction = (state, action) => {
   switch (action.type) {
-    case "cardNumber":
+    case CARD_ACTION.SET_CARD_NUMBER:
       return {
         ...state,
         cardNumber: [
@@ -23,7 +34,7 @@ const updateFunction = (state, action) => {
           ...state.cardNumber.slice(action.payload.index + 1),
         ],
       };
-    case "expiredDate":
+    case CARD_ACTION.SET_EXPIRED_DATE:
       return {
         ...state,
         expiredDate: [
@@ -32,17 +43,17 @@ const updateFunction = (state, action) => {
           ...state.expiredDate.slice(action.payload.index + 1),
         ],
       };
-    case "ownerName":
+    case CARD_ACTION.SET_OWNER_NAME:
       return {
         ...state,
         ownerName: action.payload.value,
       };
-    case "secureCode":
+    case CARD_ACTION.SET_SECURE_CODE:
       return {
         ...state,
         secureCode: action.payload.value,
       };
-    case "password":
+    case CARD_ACTION.SET_PASSWORD:
       return {
         ...state,
         password: [
@@ -51,18 +62,18 @@ const updateFunction = (state, action) => {
           ...state.password.slice(action.payload.index + 1),
         ],
       };
-    case "pickColor":
+    case CARD_ACTION.SET_CARD_NAME:
       return {
         ...state,
         color: action.payload.color,
         cardName: action.payload.cardName,
       };
-    case "nickname":
+    case CARD_ACTION.SET_NICKNAME:
       return {
         ...state,
         nickname: action.payload.value,
       };
-    case "initialize":
+    case CARD_ACTION.INITIALIZE:
       return initState;
     default:
       return state;

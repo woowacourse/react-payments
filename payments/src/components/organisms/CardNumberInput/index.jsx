@@ -6,6 +6,7 @@ import InputLabel from "../../common/label";
 import { Fragment, useContext } from "react";
 import { blockCharacter, limitInputLength } from "../../../util/input";
 import { CardContext } from "../../../context/CardProvider";
+import { CARD_ACTION } from "../../../hooks/useCard";
 
 const INPUT_LENGTH = 4;
 const NUM_OF_INPUT = 4;
@@ -23,7 +24,7 @@ const CardNumberInput = () => {
 
   const updateCardNumber = (target, idx) => {
     updateCard({
-      type: "cardNumber",
+      type: CARD_ACTION.SET_CARD_NUMBER,
       payload: {
         value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),
         index: idx,

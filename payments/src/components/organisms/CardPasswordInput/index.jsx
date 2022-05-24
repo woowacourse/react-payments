@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { CardContext } from "../../../context/CardProvider";
+import { CARD_ACTION } from "../../../hooks/useCard";
 import useControlInput from "../../../hooks/useControlInput";
 import { blockCharacter, limitInputLength } from "../../../util/input";
 import { Input } from "../../common/Input";
@@ -23,7 +24,7 @@ const CardPasswordInput = () => {
 
   const updateCardPassword = (target, idx) => {
     updateCard({
-      type: "password",
+      type: CARD_ACTION.SET_PASSWORD,
       payload: {
         value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),
         index: idx,

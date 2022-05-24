@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { CardContext } from "../../../context/CardProvider";
+import { CARD_ACTION } from "../../../hooks/useCard";
 import Color from "../../common/Color";
 import "./index.scss";
 
@@ -19,7 +20,7 @@ const CardColorPicker = ({ closeModal }) => {
   const pickColor = (name, color) => {
     closeModal();
     updateCard({
-      type: "pickColor",
+      type: CARD_ACTION.SET_CARD_NAME,
       payload: { cardName: name, color },
     });
   };

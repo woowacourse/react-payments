@@ -6,6 +6,7 @@ import InputLabel from "../../common/label";
 import { Fragment, useContext } from "react";
 import { blockCharacter, limitInputLength } from "../../../util/input";
 import { CardContext } from "../../../context/CardProvider";
+import { CARD_ACTION } from "../../../hooks/useCard";
 
 const INPUT_LENGTH = 2;
 const NUM_OF_INPUT = 2;
@@ -23,7 +24,7 @@ const ExpiredDateInput = () => {
 
   const updateExpiredDate = (target, idx) => {
     updateCard({
-      type: "expiredDate",
+      type: CARD_ACTION.SET_EXPIRED_DATE,
       payload: {
         value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),
         index: idx,

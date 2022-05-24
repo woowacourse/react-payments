@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { CardContext } from "../../../context/CardProvider";
+import { CARD_ACTION } from "../../../hooks/useCard";
 import { limitExceptUpperCase, limitInputLength } from "../../../util/input";
 import { Input } from "../../common/Input";
 import InputContainer from "../../common/InputContainer";
@@ -15,7 +16,7 @@ const OwnerNameInput = () => {
   } = useContext(CardContext);
   const updateCardOwner = (target) => {
     updateCard({
-      type: "ownerName",
+      type: CARD_ACTION.SET_OWNER_NAME,
       payload: {
         value: limitInputLength(
           limitExceptUpperCase(target.value),

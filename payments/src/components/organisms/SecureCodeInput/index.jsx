@@ -5,6 +5,7 @@ import InputLabel from "../../common/label";
 import { blockCharacter, limitInputLength } from "../../../util/input";
 import { CardContext } from "../../../context/CardProvider";
 import { useContext } from "react";
+import { CARD_ACTION } from "../../../hooks/useCard";
 
 const INPUT_LENGTH = 3;
 
@@ -15,7 +16,7 @@ const SecureCodeInput = () => {
   } = useContext(CardContext);
   const updateSecureCode = ({ target }) => {
     updateCard({
-      type: "secureCode",
+      type: CARD_ACTION.SET_SECURE_CODE,
       payload: {
         value: limitInputLength(blockCharacter(target.value), INPUT_LENGTH),
       },
