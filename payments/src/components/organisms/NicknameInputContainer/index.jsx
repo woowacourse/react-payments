@@ -34,7 +34,7 @@ const NicknameInputContainer = ({ setDone }) => {
 
   return (
     <div className="nickname--container">
-      <h2>카드등록이 완료되었습니다.</h2>
+      <h1 className="nickname--container-title">카드등록이 완료되었습니다.</h1>
       <Card cardInfo={cardInfo} />
       <form onSubmit={addCard}>
         <div className="input--container">
