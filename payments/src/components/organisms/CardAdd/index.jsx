@@ -10,12 +10,12 @@ import NextButton from "../../common/NextButton";
 import CardColorPicker from "../CardColorPicker";
 import useModal from "../../../hooks/useModal";
 import ConfirmAdd from "../ConfirmAdd";
-import { useContext } from "react";
-import { CardContext } from "../../../context/CardProvider";
+
+import { useCardContext } from "../../../context/CardProvider";
 import { Link } from "react-router-dom";
 
 const CardAdd = ({ setDone }) => {
-  const { cardInfo, validateCardInfo } = useContext(CardContext);
+  const { cardInfo, validateCardInfo } = useCardContext();
   const [closeModal, ModalElement, setElement] = useModal();
 
   const openColorPickerModal = () => {

@@ -1,9 +1,9 @@
 import "./index.scss";
-import { useContext } from "react";
-import { CardContext } from "../../../context/CardProvider";
+
+import { useCardContext } from "../../../context/CardProvider";
 
 const ConfirmAdd = ({ closeModal, submit }) => {
-  const { cardInfo } = useContext(CardContext);
+  const { cardInfo } = useCardContext();
 
   return (
     <div className="confirm-add">

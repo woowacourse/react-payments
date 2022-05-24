@@ -1,6 +1,5 @@
-import { useContext } from "react";
 import Card from "../../components/common/Card";
-import { CardListContext } from "../../context/CardListProvider";
+import { useCardListContext } from "../../context/CardListProvider";
 import { Link } from "react-router-dom";
 import "./index.scss";
 import useModal from "../../hooks/useModal";
@@ -9,7 +8,7 @@ import { useEffect } from "react";
 import { CARD_LIST_ACTION } from "../../hooks/useCardList";
 
 const Home = () => {
-  const { cardList, updateCardList } = useContext(CardListContext);
+  const { cardList, updateCardList } = useCardListContext();
   const [closeConfirmCardControlModal, ConfirmCardControlModal, setModal] =
     useModal();
 

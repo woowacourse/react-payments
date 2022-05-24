@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { createContext } from "react";
 import useCardList from "../hooks/useCardList";
 
@@ -11,4 +12,10 @@ export const CardListProvider = ({ children }) => {
       {children}
     </CardListContext.Provider>
   );
+};
+
+export const useCardListContext = () => {
+  const context = useContext(CardListContext);
+  if (!context) throw new Error("no CardListContext");
+  return context;
 };

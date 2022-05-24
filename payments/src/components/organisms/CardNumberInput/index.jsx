@@ -3,9 +3,9 @@ import InputContainer from "../../common/InputContainer";
 import { Input } from "../../common/Input";
 import useControlInput from "../../../hooks/useControlInput";
 import InputLabel from "../../common/label";
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import { blockCharacter, limitInputLength } from "../../../util/input";
-import { CardContext } from "../../../context/CardProvider";
+import { useCardContext } from "../../../context/CardProvider";
 import { CARD_ACTION } from "../../../hooks/useCard";
 
 const INPUT_LENGTH = 4;
@@ -16,7 +16,7 @@ const CardNumberInput = () => {
   const {
     cardInfo: { cardNumber },
     updateCard,
-  } = useContext(CardContext);
+  } = useCardContext();
 
   const { itemRef, controlInput, autoFocusBackward } = useControlInput({
     maxLength: INPUT_LENGTH,

@@ -1,11 +1,14 @@
-import { useContext } from "react";
-import { CardContext } from "../../../context/CardProvider";
-import { CARD_ACTION } from "../../../hooks/useCard";
-import { limitExceptUpperCase, limitInputLength } from "../../../util/input";
+import "./index.scss";
+
 import { Input } from "../../common/Input";
 import InputContainer from "../../common/InputContainer";
 import InputLabel from "../../common/label";
-import "./index.scss";
+
+import { useCardContext } from "../../../context/CardProvider";
+
+import { CARD_ACTION } from "../../../hooks/useCard";
+
+import { limitExceptUpperCase, limitInputLength } from "../../../util/input";
 
 const INPUT_LENGTH = 30;
 
@@ -13,7 +16,7 @@ const OwnerNameInput = () => {
   const {
     cardInfo: { ownerName },
     updateCard,
-  } = useContext(CardContext);
+  } = useCardContext();
   const updateCardOwner = (target) => {
     updateCard({
       type: CARD_ACTION.SET_OWNER_NAME,

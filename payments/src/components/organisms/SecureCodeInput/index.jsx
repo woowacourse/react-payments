@@ -1,11 +1,13 @@
+import "./index.scss";
 import InputContainer from "../../common/InputContainer";
 import { Input } from "../../common/Input";
-import "./index.scss";
 import InputLabel from "../../common/label";
-import { blockCharacter, limitInputLength } from "../../../util/input";
-import { CardContext } from "../../../context/CardProvider";
-import { useContext } from "react";
+
+import { useCardContext } from "../../../context/CardProvider";
+
 import { CARD_ACTION } from "../../../hooks/useCard";
+
+import { blockCharacter, limitInputLength } from "../../../util/input";
 
 const INPUT_LENGTH = 3;
 
@@ -13,7 +15,7 @@ const SecureCodeInput = () => {
   const {
     cardInfo: { secureCode },
     updateCard,
-  } = useContext(CardContext);
+  } = useCardContext();
   const updateSecureCode = ({ target }) => {
     updateCard({
       type: CARD_ACTION.SET_SECURE_CODE,

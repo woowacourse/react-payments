@@ -1,17 +1,20 @@
-import React, { useContext } from "react";
+import "./index.scss";
+
 import Card from "../../common/Card";
 import { Input } from "../../common/Input";
 import NextButton from "../../common/NextButton";
-import { CardContext } from "../../../context/CardProvider";
-import { Link, useNavigate } from "react-router-dom";
-import "./index.scss";
-import { CardListContext } from "../../../context/CardListProvider";
+
+import { useCardContext } from "../../../context/CardProvider";
+import { useCardListContext } from "../../../context/CardListProvider";
+
 import { CARD_LIST_ACTION } from "../../../hooks/useCardList";
 import { CARD_ACTION } from "../../../hooks/useCard";
 
+import { Link, useNavigate } from "react-router-dom";
+
 const NicknameInputContainer = ({ setDone }) => {
-  const { cardInfo, updateCard } = useContext(CardContext);
-  const { updateCardList } = useContext(CardListContext);
+  const { cardInfo, updateCard } = useCardContext();
+  const { updateCardList } = useCardListContext();
   const navigate = useNavigate();
   const handleNickNameChange = (e) => {
     updateCard({

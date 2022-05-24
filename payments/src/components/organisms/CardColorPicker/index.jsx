@@ -1,8 +1,9 @@
-import { useContext } from "react";
-import { CardContext } from "../../../context/CardProvider";
-import { CARD_ACTION } from "../../../hooks/useCard";
-import Color from "../../common/Color";
 import "./index.scss";
+
+import Color from "../../common/Color";
+
+import { useCardContext } from "../../../context/CardProvider";
+import { CARD_ACTION } from "../../../hooks/useCard";
 
 const CARD_CATEGORY = [
   { name: "록1바", color: "red" },
@@ -16,7 +17,7 @@ const CARD_CATEGORY = [
 ];
 
 const CardColorPicker = ({ closeModal }) => {
-  const { updateCard } = useContext(CardContext);
+  const { updateCard } = useCardContext();
   const pickColor = (name, color) => {
     closeModal();
     updateCard({

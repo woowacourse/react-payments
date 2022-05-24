@@ -1,12 +1,14 @@
-import { useContext } from "react";
-import { CardContext } from "../../../context/CardProvider";
-import { CARD_ACTION } from "../../../hooks/useCard";
-import useControlInput from "../../../hooks/useControlInput";
-import { blockCharacter, limitInputLength } from "../../../util/input";
+import "./index.scss";
 import { Input } from "../../common/Input";
 import InputContainer from "../../common/InputContainer";
 import InputLabel from "../../common/label";
-import "./index.scss";
+
+import { useCardContext } from "../../../context/CardProvider";
+
+import { CARD_ACTION } from "../../../hooks/useCard";
+import useControlInput from "../../../hooks/useControlInput";
+
+import { blockCharacter, limitInputLength } from "../../../util/input";
 
 const INPUT_LENGTH = 1;
 const NUM_OF_INPUT = 2;
@@ -20,7 +22,7 @@ const CardPasswordInput = () => {
   const {
     cardInfo: { password },
     updateCard,
-  } = useContext(CardContext);
+  } = useCardContext();
 
   const updateCardPassword = (target, idx) => {
     updateCard({

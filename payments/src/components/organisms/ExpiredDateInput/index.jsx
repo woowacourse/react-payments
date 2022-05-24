@@ -1,12 +1,16 @@
-import useControlInput from "../../../hooks/useControlInput";
-import InputContainer from "../../common/InputContainer";
-import { Input } from "../../common/Input";
 import "./index.scss";
+import { Fragment } from "react";
+
+import { Input } from "../../common/Input";
 import InputLabel from "../../common/label";
-import { Fragment, useContext } from "react";
-import { blockCharacter, limitInputLength } from "../../../util/input";
-import { CardContext } from "../../../context/CardProvider";
+import InputContainer from "../../common/InputContainer";
+
+import { useCardContext } from "../../../context/CardProvider";
+
+import useControlInput from "../../../hooks/useControlInput";
 import { CARD_ACTION } from "../../../hooks/useCard";
+
+import { blockCharacter, limitInputLength } from "../../../util/input";
 
 const INPUT_LENGTH = 2;
 const NUM_OF_INPUT = 2;
@@ -16,7 +20,7 @@ const ExpiredDateInput = () => {
   const {
     cardInfo: { expiredDate },
     updateCard,
-  } = useContext(CardContext);
+  } = useCardContext();
 
   const { itemRef, controlInput, autoFocusBackward } = useControlInput({
     maxLength: INPUT_LENGTH,
