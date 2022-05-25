@@ -1,5 +1,6 @@
 export default {
-  DEFAULT: '/',
-  CARD_ADD: '/cardAdd',
-  CARD_ADD_COMPLETION: '/cardAddCompletion',
+  ROOT: '/',
+  CARD_LIST: '/cards',
+  CARD_ADD: '/cards/create',
+  CARD_ADD_COMPLETION: '/cards/complete',
 };

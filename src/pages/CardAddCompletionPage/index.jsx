@@ -22,7 +22,7 @@ function CardAddCompletionPage() {
     const cardAlias = cardAliasInput.current.value;
 
     updateCardInfo({ ...cardInfo, alias: cardAlias });
-    navigate(PATH.DEFAULT, { replace: true });
+    navigate(PATH.CARD_LIST, { replace: true });
   };
 
   return (

@@ -1,10 +1,11 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import CardListPage from 'pages/CardListPage';
 import CardAddPage from './pages/CardAddPage/';
 import CardAddCompletionPage from 'pages/CardAddCompletionPage';
 import { GlobalStyle, ModalContainer } from './style';
 import { CardListProvider } from './context/cardList';
 import useModal from './hooks/useModal';
+import PATH from 'constant/path';
 
 function App() {
   const { isOpenModal, openModal, closeModal } = useModal();
@@ -23,9 +24,10 @@ function App() {
       <div className="App">
         <CardListProvider>
           <Routes>
-            <Route path="/" element={<CardListPage />} />
+            <Route path={PATH.ROOT} element={<Navigate replace to={PATH.CARD_LIST} />} />
+            <Route path={PATH.CARD_LIST} element={<CardListPage />} />
             <Route
-              path="/cardAdd"
+              path={PATH.CARD_ADD}
               element={
                 <CardAddPage
                   isOpenModal={isOpenModal}
@@ -34,7 +36,7 @@ function App() {
                 />
               }
             />
-            <Route path="cardAddCompletion" element={<CardAddCompletionPage />} />
+            <Route path={PATH.CARD_ADD_COMPLETION} element={<CardAddCompletionPage />} />
           </Routes>
         </CardListProvider>
         <ModalContainer

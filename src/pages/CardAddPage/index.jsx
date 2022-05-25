@@ -47,7 +47,7 @@ function CardAddPage({ isOpenModal, openModal }) {
   };
 
   const handleClickBackButton = () => {
-    navigate(PATH.DEFAULT);
+    navigate(PATH.CARD_LIST);
   };
 
   const handleSubmit = event => {
