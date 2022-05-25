@@ -4,7 +4,7 @@ import Button from 'components/button/Button';
 
 function BackButtonContainer() {
   const handleBackButtonClick = () => {
-    window.location.pathname = '/';
+    window.location.pathname = '/card';
   };
 
   return <Button onClick={handleBackButtonClick} buttonType="back" />;
