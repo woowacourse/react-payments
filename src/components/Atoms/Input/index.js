@@ -17,8 +17,6 @@ export const BlockInput = styled(Input)`
   &:focus {
     outline-color: ${props => (props.isValid ? '#04c09e' : 'red')};
   }
-
-  ${props => props.style}
 `;
 
 export const UnderlineInput = styled(Input)`
@@ -32,6 +30,4 @@ export const UnderlineInput = styled(Input)`
   &:focus {
     outline: none;
   }
-
-  ${props => props.style}
 `;

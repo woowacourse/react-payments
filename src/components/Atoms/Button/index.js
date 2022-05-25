@@ -11,8 +11,6 @@ const Button = styled.button`
   color: #04c09e;
   background-color: white;
   cursor: pointer;
-
-  ${props => props.style}
 `;
 
 export default Button;
