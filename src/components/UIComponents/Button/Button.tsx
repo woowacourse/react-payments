@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 const StyledButton = styled.button`
   width: 70px;
@@ -20,15 +19,14 @@ const StyledButton = styled.button`
   }
 `;
 
-export default function Button({ children: buttonText, ...props }) {
+type Props = {
+  children: string;
+};
+
+export default function Button({ children: buttonText, ...props }: Props) {
   return (
     <StyledButton type="submit" {...props}>
       {buttonText}
     </StyledButton>
   );
 }
-
-Button.propTypes = {
-  children: PropTypes.string,
-  onClick: PropTypes.func,
-};

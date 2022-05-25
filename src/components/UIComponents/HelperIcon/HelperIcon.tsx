@@ -32,7 +32,11 @@ const StyledDescription = styled.p`
   box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.4);
 `;
 
-const HelperIcon = React.memo(({ description }) => {
+type Props = {
+  description: string;
+};
+
+const HelperIcon = React.memo(({ description }: Props) => {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
   return (

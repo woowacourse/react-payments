@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 
 import { textColor } from "components/UIComponents/styleConstants";
 
@@ -51,16 +50,18 @@ export const StyledInput = styled.input`
   }
 `;
 
-export default function Input(props) {
+type Props = {
+  name: string;
+  type: "text" | "number" | "password";
+  placeholder: string;
+  width: "sm";
+  default;
+  full;
+};
+
+export default function Input(props: Props) {
   return <StyledInput {...props} />;
 }
-
-Input.propTypes = {
-  name: PropTypes.string,
-  type: PropTypes.oneOf(["text", "number", "password"]),
-  placeholder: PropTypes.string,
-  width: PropTypes.oneOf(["sm", "default", "full"]),
-};
 
 Input.defaultProps = {
   name: "default name",
