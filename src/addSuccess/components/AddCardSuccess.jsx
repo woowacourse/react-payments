@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Card from '../../addCard/components/Card';
 import { MAX_LENGTH, MIN_LENGTH } from '../../constants';
 
-function AddCardSuccess({ addCard }) {
+function AddCardSuccess({ card, addCard }) {
   const [cardNick, setCardNick] = useState('');
-
-  const card = useLocation().state;
 
   const navigator = useNavigate();
 
@@ -22,7 +20,7 @@ function AddCardSuccess({ addCard }) {
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
-      <Card completedCard={card} big />
+      <Card big />
       <form className="w-100" onSubmit={handleSubmit}>
         <div className="input-container flex-center w-100">
           <input

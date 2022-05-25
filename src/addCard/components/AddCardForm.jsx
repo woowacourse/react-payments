@@ -16,7 +16,7 @@ function AddCardForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigator('/success', { state: { card }, replace: true });
+    navigator('/success', { replace: true });
   };
 
   return (

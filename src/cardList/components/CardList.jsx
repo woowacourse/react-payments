@@ -19,8 +19,8 @@ function CardList({ cardList }) {
         <div className="app flex-column-center">
           {cardList.map((card, index) => {
             return (
-              <React.Fragment key={card.card.ownerName + String(index)}>
-                <Card completedCard={card} />
+              <React.Fragment key={card.ownerName + String(index)}>
+                <Card completedCard={{ card }} />
                 <span className="card-nickname">{card.nickName}</span>
               </React.Fragment>
             );

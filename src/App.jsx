@@ -37,7 +37,7 @@ function App() {
           <Routes>
             <Route path="/" element={<CardList cardList={cardList} />} />
             <Route path="/addCard" element={<AddCard />} />
-            <Route path="/success" element={<AddCardSuccess addCard={addCard} />} />
+            <Route path="/success" element={<AddCardSuccess card={card} addCard={addCard} />} />
           </Routes>
         </Router>
       </AddCardContext.Provider>
