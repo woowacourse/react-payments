@@ -42,15 +42,15 @@ export default function Input(props) {
   return <StyledInput {...props} />;
 }
 
-Input.propTypes = {
-  name: PropTypes.string,
-  className: PropTypes.string,
-  type: PropTypes.oneOf(["text", "number", "password"]),
-  placeholder: PropTypes.string,
-  width: PropTypes.string,
-  maxLength: PropTypes.number,
-  isComplete: PropTypes.oneOf([true, false]),
-};
+// Input.propTypes = {
+//   name: PropTypes.string,
+//   className: PropTypes.string,
+//   type: PropTypes.oneOf(["text", "number", "password"]),
+//   placeholder: PropTypes.string,
+//   width: PropTypes.string,
+//   maxLength: PropTypes.number,
+//   isComplete: PropTypes.oneOf([true, false]),
+// };
 
 Input.defaultProps = {
   name: "default name",

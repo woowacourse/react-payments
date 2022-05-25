@@ -39,7 +39,7 @@ export const LOCAL_STORAGE_KEY = {
 
 export const ROUTES = {
   HOME: "/",
-  HOME2: "/react-payments/",
+  HOME2: "/react-payments",
   POSSESS_CARD: "/react-payments/possess-card",
   ADD_CARD: "/react-payments/add-card",
 };

@@ -9,11 +9,13 @@ import {
   GUIDE_MESSAGE,
   MASKED_CHARACTER,
 } from "../../constants/constants";
+import { isInvalidPassword } from "../../validators/validator";
+import { setPassword } from "../../reducer/cardReducer";
 
 export default function CardPasswordInput() {
   const {
     state: { password },
-    actions: { handlePasswordUpdate },
+    dispatch,
   } = useContext(CardInfoContext);
 
   const passwordList = Object.entries(password);
@@ -21,6 +23,12 @@ export default function CardPasswordInput() {
     (sum, currentPassword) => currentPassword[1].length + sum,
     0
   );
+
+  const handlePasswordUpdate = (e, passwordOrder) => {
+    if (isInvalidPassword(e.target.value)) return;
+
+    dispatch(setPassword({ value: e.target.value, passwordOrder }));
+  };
 
   return (
     <InputField

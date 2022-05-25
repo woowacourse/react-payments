@@ -5,18 +5,28 @@ import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 
 import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
-import { isCompleteExpireDate } from "../../validators/validator";
+import {
+  isCompleteExpireDate,
+  isInValidExpireDate,
+} from "../../validators/validator";
+import { setExpireDate } from "../../reducer/cardReducer";
 
 export default function CardExpireDateInput() {
   const {
     state: { expireDate },
-    actions: { handleExpireDateUpdate },
+    dispatch,
   } = useContext(CardInfoContext);
 
   const expireDateList = Object.entries(expireDate);
   const [month, year] = expireDateList;
   const monthValue = month[1];
   const yearValue = year[1];
+
+  const handleExpireDateUpdate = ({ target: { value } }, dateType) => {
+    if (isInValidExpireDate(value)) return;
+
+    dispatch(setExpireDate({ value, dateType }));
+  };
 
   return (
     <InputField

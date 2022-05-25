@@ -1,10 +1,14 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {
   CARD_REGISTER_SUCCESS_MESSAGE,
   GUIDE_MESSAGE,
+  ROUTES,
 } from "../../constants/constants";
 import { CardInfoContext } from "../../contexts/CardInfoContext";
+import { setCardAlias, setInitialState } from "../../reducer/cardReducer";
+import { isInvalidCardAlias } from "../../validators/validator";
 
 import PageHeader from "../PageHeader";
 import Button from "../UIComponents/Button/Button";
@@ -43,10 +47,27 @@ const StyledCardAliasGuideMessage = styled.p`
 `;
 
 export default function CardConfirmModal() {
-  const {
-    state: { cardNumber, holderName, expireDate, cardAlias },
-    actions: { handleCardAliasUpdate },
-  } = useContext(CardInfoContext);
+  const { state, dispatch } = useContext(CardInfoContext);
+  const { cardNumber, holderName, expireDate, cardAlias } = state;
+
+  const navigate = useNavigate();
+
+  const handleCardAliasUpdate = ({ target: { value } }) => {
+    if (isInvalidCardAlias(value)) return;
+
+    dispatch(setCardAlias({ value }));
+  };
+
+  const handleSubmitButton = () => {
+    window.alert(CARD_REGISTER_SUCCESS_MESSAGE);
+
+    const storage = JSON.parse(localStorage.getItem("cardInfo")) ?? [];
+    storage.push(state);
+    localStorage.setItem("cardInfo", JSON.stringify(storage));
+
+    dispatch(setInitialState());
+    navigate(ROUTES.HOME, { replace: true });
+  };
 
   return (
     <>
@@ -68,16 +89,13 @@ export default function CardConfirmModal() {
         />
         <Input
           name={"cardAlias"}
-          value={cardAlias.value}
+          value={cardAlias}
           onChange={handleCardAliasUpdate}
           width={"244px"}
           borderBottom={"1px solid #8b8b8b"}
         />
-        {cardAlias.value.length > 0 ? (
-          <Button
-            onClick={() => window.alert(CARD_REGISTER_SUCCESS_MESSAGE)}
-            type="submit"
-          >
+        {cardAlias.length > 0 ? (
+          <Button onClick={handleSubmitButton} type="submit">
             확인
           </Button>
         ) : (

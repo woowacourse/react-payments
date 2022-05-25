@@ -1,36 +1,5 @@
 import styled from "styled-components";
-
 import CardPreview from "../UIComponents/CardPreview/CardPreview";
-
-const transformToCardPreviewTemplate = (cardInfo) => {
-  return cardInfo.map((info) => {
-    const { cardAlias, holderName, expireDate, cardNumber } = info;
-    const [month, year] = expireDate.split(",");
-    const [
-      firstCardNumber,
-      secondCardNumber,
-      thirdCardNumber,
-      fourthCardNumber,
-    ] = cardNumber.split(",");
-
-    return {
-      cardAlias,
-      cardNumber: {
-        firstCardNumber,
-        secondCardNumber,
-        thirdCardNumber,
-        fourthCardNumber,
-      },
-      expireDate: {
-        month,
-        year,
-      },
-      holderName: {
-        value: holderName,
-      },
-    };
-  });
-};
 
 const StyledCardAlias = styled.p`
   font-size: 13px;
@@ -50,8 +19,7 @@ const smallCardCss__marginBottom10px = {
 };
 
 export default function PossessCardItems() {
-  const cardInfo = JSON.parse(localStorage.getItem("cardInfo")) ?? [];
-  const cardInfoItems = transformToCardPreviewTemplate(cardInfo);
+  const cardInfoItems = JSON.parse(localStorage.getItem("cardInfo")) ?? [];
 
   return cardInfoItems.map((cardInfoItem, index) => (
     <div key={index}>

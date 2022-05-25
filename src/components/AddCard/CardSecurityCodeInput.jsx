@@ -12,6 +12,8 @@ import {
   CREATE_MASKED_CHARACTERS,
   GUIDE_MESSAGE,
 } from "../../constants/constants";
+import { isInvalidSecurityCode } from "../../validators/validator";
+import { setSecurityCode } from "../../reducer/cardReducer";
 
 const StyledIconContainer = styled.div`
   position: relative;
@@ -65,8 +67,19 @@ export function HelpIcon({ description }) {
 export default function CardSecurityCodeInput() {
   const {
     state: { securityCode },
-    actions: { handleSecurityCodeUpdate },
+    dispatch,
   } = useContext(CardInfoContext);
+
+  const handleSecurityCodeUpdate = (event) => {
+    const { value } = event.target;
+
+    if (Number.isNaN(value) || isInvalidSecurityCode(value)) {
+      event.preventDefault();
+      return;
+    }
+
+    dispatch(setSecurityCode({ value }));
+  };
 
   return (
     <InputField
@@ -74,9 +87,7 @@ export default function CardSecurityCodeInput() {
       wrapperWidth={"85px"}
       guideMessage={GUIDE_MESSAGE.VALID_SECURITY_CODE}
       OptionalComponent={<HelpIcon description={SECURITY_CODE_DESCRIPTION} />}
-      isComplete={
-        securityCode.value.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
-      }
+      isComplete={securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
     >
       <Input
         name={"securityCode"}
@@ -88,9 +99,9 @@ export default function CardSecurityCodeInput() {
         width={"100%"}
         maxLength={CARD_INFO_RULES.SECURITY_CODE_LENGTH}
         required
-        onChange={(e) => handleSecurityCodeUpdate(e, securityCode.keyType)}
+        onChange={(e) => handleSecurityCodeUpdate(e, "securityCode")}
         isComplete={
-          securityCode.value.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
+          securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
         }
       />
     </InputField>

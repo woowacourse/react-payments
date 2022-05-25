@@ -114,7 +114,7 @@ export default function CardPreview({
           <p>{CREATE_MASKED_CHARACTERS(fourthCardNumber.length)}</p>
         </CardNumber>
         <CardBottomSection>
-          <CardHolderName>{holderName.value}</CardHolderName>
+          <CardHolderName>{holderName}</CardHolderName>
           <p>
             {month} {month.length !== 0 && "/"} {year}
           </p>
@@ -124,31 +124,31 @@ export default function CardPreview({
   );
 }
 
-CardPreview.propTypes = {
-  cardNumber: PropTypes.shape({
-    firstCardNumber: PropTypes.string,
-    secondCardNumber: PropTypes.string,
-    thirdCardNumber: PropTypes.string,
-    fourthCardNumber: PropTypes.string,
-  }),
-  expireDate: PropTypes.shape({
-    month: PropTypes.string,
-    year: PropTypes.string,
-  }),
-  holderName: PropTypes.shape({
-    value: PropTypes.string,
-    keyType: PropTypes.string,
-  }),
-  canProceed: PropTypes.bool,
-  cardCss: PropTypes.shape({
-    width: PropTypes.string,
-    height: PropTypes.string,
-    fontSize: PropTypes.string,
-    cardContainerMarginBottom: PropTypes.string,
-    cardChipWidth: PropTypes.string,
-    cardChipHeight: PropTypes.string,
-    cardNameMargin: PropTypes.string,
-    cardChipMarginBottom: PropTypes.string,
-    cardNumberMarginBottom: PropTypes.string,
-  }),
-};
+// CardPreview.propTypes = {
+//   cardNumber: PropTypes.shape({
+//     firstCardNumber: PropTypes.string,
+//     secondCardNumber: PropTypes.string,
+//     thirdCardNumber: PropTypes.string,
+//     fourthCardNumber: PropTypes.string,
+//   }),
+//   expireDate: PropTypes.shape({
+//     month: PropTypes.string,
+//     year: PropTypes.string,
+//   }),
+//   holderName: PropTypes.shape({
+//     value: PropTypes.string,
+//     keyType: PropTypes.string,
+//   }),
+//   canProceed: PropTypes.bool,
+//   cardCss: PropTypes.shape({
+//     width: PropTypes.string,
+//     height: PropTypes.string,
+//     fontSize: PropTypes.string,
+//     cardContainerMarginBottom: PropTypes.string,
+//     cardChipWidth: PropTypes.string,
+//     cardChipHeight: PropTypes.string,
+//     cardNameMargin: PropTypes.string,
+//     cardChipMarginBottom: PropTypes.string,
+//     cardNumberMarginBottom: PropTypes.string,
+//   }),
+// };

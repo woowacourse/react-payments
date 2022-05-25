@@ -1,8 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import arrowBackIcon from "../../assets/images/arrowBackIcon.svg";
-
-import useResetInput from "../../Hooks/useResetInput";
 
 import CardPreview from "../UIComponents/CardPreview/CardPreview";
 import Button from "../UIComponents/Button/Button";
@@ -20,6 +18,8 @@ import {
 
 import { isValidCardInfo } from "../../validators/validator";
 import { BACK_BUTTON_CONFIRM_MESSAGE, ROUTES } from "../../constants/constants";
+import { CardInfoContext } from "../../contexts/CardInfoContext";
+import { setInitialState } from "../../reducer/cardReducer";
 
 const smallCardCss = {
   width: "213px",
@@ -36,13 +36,14 @@ const smallCardCss = {
 export default function AddCard() {
   const navigate = useNavigate();
   const [isNextButtonClicked, setNextButtonClicked] = useState(false);
-  const { state, handleResetInput } = useResetInput();
+  const { state, dispatch } = useContext(CardInfoContext);
+
   const { cardNumber, holderName, expireDate, securityCode, password } = state;
 
   const handleBackButton = () => {
     if (window.confirm(BACK_BUTTON_CONFIRM_MESSAGE)) {
       navigate(ROUTES.HOME, { replace: true });
-      handleResetInput();
+      dispatch(setInitialState());
     }
   };
 

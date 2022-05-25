@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import useResetInput from "../../Hooks/useResetInput";
 import { LOCAL_STORAGE_KEY, ROUTES } from "../../constants/constants";
 
 const StyledCardInfoForm = styled.form`
@@ -12,7 +11,6 @@ const StyledCardInfoForm = styled.form`
 
 export default function CardInfoForm({ children }) {
   const navigate = useNavigate();
-  const { handleResetInput } = useResetInput();
 
   const focusNextInput = ({ target }) => {
     if (target.value.length !== target.maxLength) return;
@@ -38,6 +36,7 @@ export default function CardInfoForm({ children }) {
   };
 
   const handleSubmit = (event) => {
+    console.log("123");
     event.preventDefault();
     const formData = new FormData(event.target);
 
@@ -67,7 +66,7 @@ export default function CardInfoForm({ children }) {
       onKeyDown={focusPrevInput}
       onSubmit={(e) => {
         handleSubmit(e);
-        handleResetInput();
+        // handleResetInput();
       }}
     >
       {children}

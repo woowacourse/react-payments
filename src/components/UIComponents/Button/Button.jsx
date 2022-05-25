@@ -41,16 +41,16 @@ export default function Button({ type, onClick, position, children, isSvg }) {
   );
 }
 
-Button.propTypes = {
-  children: PropTypes.PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.string,
-  ]),
-  position: PropTypes.string,
-  isSvg: PropTypes.oneOf([true, false]),
-  type: PropTypes.string,
-  onClick: PropTypes.func,
-};
+// Button.propTypes = {
+//   children: PropTypes.PropTypes.oneOfType([
+//     PropTypes.arrayOf(PropTypes.element),
+//     PropTypes.string,
+//   ]),
+//   position: PropTypes.string,
+//   isSvg: PropTypes.oneOf([true, false]),
+//   type: PropTypes.string,
+//   onClick: PropTypes.func,
+// };
 
 Button.defaultProps = {
   position: "absolute",

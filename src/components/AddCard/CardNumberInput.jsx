@@ -5,11 +5,13 @@ import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 
 import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
+import { setCardNumber } from "../../reducer/cardReducer";
+import { isInValidCardNumber } from "../../validators/validator";
 
 export default function CardNumberInput() {
   const {
     state: { cardNumber },
-    actions: { handleCardNumberUpdate },
+    dispatch,
   } = useContext(CardInfoContext);
 
   const cardNumberList = Object.entries(cardNumber);
@@ -17,6 +19,12 @@ export default function CardNumberInput() {
     (sum, currentCardNumber) => currentCardNumber[1].length + sum,
     0
   );
+
+  const handleCardNumberUpdate = ({ target: { value } }, cardNumberOrder) => {
+    if (isInValidCardNumber(value)) return;
+
+    dispatch(setCardNumber({ value, cardNumberOrder }));
+  };
 
   return (
     <InputField

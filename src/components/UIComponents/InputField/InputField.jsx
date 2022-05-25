@@ -92,16 +92,16 @@ export default function InputField({
   );
 }
 
-InputField.propTypes = {
-  labelText: PropTypes.string,
-  guideMessage: PropTypes.string,
-  wrapperWidth: PropTypes.string,
-  horizontalAlign: PropTypes.oneOf(["flex-start", "center", "space-around"]),
-  isComplete: PropTypes.oneOf([true, false]),
-  splitCount: PropTypes.number,
-  OptionalComponent: PropTypes.node,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-};
+// InputField.propTypes = {
+//   labelText: PropTypes.string,
+//   guideMessage: PropTypes.string,
+//   wrapperWidth: PropTypes.string,
+//   horizontalAlign: PropTypes.oneOf(["flex-start", "center", "space-around"]),
+//   isComplete: PropTypes.oneOf([true, false]),
+//   splitCount: PropTypes.number,
+//   OptionalComponent: PropTypes.node,
+//   children: PropTypes.oneOfType([
+//     PropTypes.arrayOf(PropTypes.node),
+//     PropTypes.node,
+//   ]),
+// };

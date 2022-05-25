@@ -44,7 +44,7 @@ export const isValidCardInfo = (
   return (
     cardNumberLength === NUMBER_UNIT_COUNT * NUMBER_UNIT_LENGTH &&
     expireDateLength === EXPIRE_DATE_LENGTH &&
-    securityCode.value.length === SECURITY_CODE_LENGTH &&
+    securityCode.length === SECURITY_CODE_LENGTH &&
     passwordLength === PASSWORD_LENGTH
   );
 };
