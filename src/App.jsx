@@ -5,13 +5,14 @@ import CardAddCompletionPage from 'pages/CardAddCompletionPage';
 import { GlobalStyle, ModalContainer } from 'style';
 import { CardListProvider } from 'context/cardList';
 import useModal from 'hooks/useModal';
+import { ID } from 'constant/selector';
 import PATH from 'constant/path';
 
 function App() {
   const { isOpenModal, openModal, closeModal } = useModal();
 
   const handleClickModalContainer = ({ target }) => {
-    if (target.id !== 'modal-container') {
+    if (target.id !== ID.MODAL_CONTAINER) {
       return;
     }
 
@@ -40,7 +41,7 @@ function App() {
           </Routes>
         </CardListProvider>
         <ModalContainer
-          id="modal-container"
+          id={ID.MODAL_CONTAINER}
           visibility={isOpenModal ? 'visible' : 'hidden'}
           onClick={handleClickModalContainer}
         />
