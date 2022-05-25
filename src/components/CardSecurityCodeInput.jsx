@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
-import CardInfoContext from "context/CardInfoContext.jsx";
+import CardInfoContext from "context/CardInfoContext";
 
-import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "utils/constants.js";
+import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "utils/constants";
 
-import Input from "components/UIComponents/Input/Input.jsx";
-import InputField from "components/UIComponents/InputField/InputField.jsx";
-import HelperIcon from "components/UIComponents/HelperIcon/HelperIcon.jsx";
+import Input from "components/UIComponents/Input/Input";
+import InputField from "components/UIComponents/InputField/InputField";
+import HelperIcon from "components/UIComponents/HelperIcon/HelperIcon";
 
 const SECURITY_CODE_DESCRIPTION =
   "CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.";
