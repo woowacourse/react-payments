@@ -2,18 +2,3 @@
 @import './typhography';
 @import './flex';
 @import './components/helptip';
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-html, body {
-  font-family: 'Fira Mono', monospace;
-}
-
-#root {
-  height: 100vh;
-  background-color: #303030;
-  padding: 40px;
-}
