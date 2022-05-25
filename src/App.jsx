@@ -1,8 +1,8 @@
 import { useState } from "react";
 import GlobalStyle from "globalStyles.jsx";
 
-import CardAddPage from "pages/CardAddPage.jsx";
-import CardListPage from "pages/CardListPage.jsx";
+import CardAddPage from "Pages/CardAddPage";
+import CardListPage from "Pages/CardListPage.jsx";
 import { PAGE_NAME } from "utils/constants.js";
 
 function App() {
