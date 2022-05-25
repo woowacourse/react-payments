@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 const style = css({
-  width: '375px',
+  width: '100%',
   height: '100%',
   position: 'absolute',
   top: '0px',

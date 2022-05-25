@@ -9,10 +9,9 @@ import { ActionType } from 'types';
 
 const buttonContainerStyle = css({
   width: '375px',
-  height: '160px',
   padding: '0 30px',
-  position: 'absolute',
-  top: '100px',
+  margin: 'auto',
+  marginTop: '100px',
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
 });

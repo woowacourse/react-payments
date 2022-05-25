@@ -2,9 +2,7 @@ import React from 'react';
 import { css } from '@emotion/react';
 
 const style = css({
-  position: 'absolute',
-  right: '25px',
-  bottom: '16px',
+  marginLeft: '300px',
   backgroundColor: 'inherit',
   border: 'none',
   fontSize: '16px',
