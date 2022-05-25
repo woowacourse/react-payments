@@ -13,7 +13,7 @@ export type State = {
   firstPassword: string;
   secondPassword: string;
   cardType: string;
-  chageCardType: boolean;
+  changeCardType: boolean;
   completeCard: boolean;
   cardAlias: string;
   cardList: Array<CardType>;
@@ -35,7 +35,7 @@ const initalState: State = {
   firstPassword: '',
   secondPassword: '',
   cardType: '',
-  chageCardType: false,
+  changeCardType: false,
   completeCard: false,
   cardAlias: '',
   cardList: [],
@@ -114,7 +114,7 @@ function reducer(state: State, action: Action): any {
     case ActionType.CHANGE_CARD_TYPE:
       return {
         ...state,
-        chageCardType: action.payload,
+        changeCardType: action.payload,
       };
     case ActionType.COMPLETE_CARD:
       return {
