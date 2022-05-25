@@ -6,3 +6,11 @@ export const parameters = {
     },
   },
 };
+
+export const decorators = [
+  (Story) => (
+    <div style={{ padding: '16px 24px' }}>
+      <Story />
+    </div>
+  ),
+];
