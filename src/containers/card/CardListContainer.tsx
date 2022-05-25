@@ -58,7 +58,7 @@ function CardListContainer() {
 
   return (
     <Wrapper>
-      {cardList.length > 0 ? (
+      {cardList.length > 0 &&
         cardList.map((card: CardType) => (
           <CardWrapper key={uuidv4()}>
             <CardButtonWrap>
@@ -77,10 +77,7 @@ function CardListContainer() {
             />
             <CardAlias>{card.alias}</CardAlias>
           </CardWrapper>
-        ))
-      ) : (
-        <></>
-      )}
+        ))}
       <AddCardContainer />
     </Wrapper>
   );
