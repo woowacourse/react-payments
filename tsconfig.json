@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es2015", "es6", "esnext", "dom"],
+    "allowJs": true,
+    "sourceMap": true,
+    "baseUrl": "src",
+    "outDir": "dist",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "keyofStringsOnly": true
+  },
+  "include": ["src"],
+  "exclude": ["./node_modules/**/*"]
+}
