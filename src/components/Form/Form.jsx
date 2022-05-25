@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-import { cardInfoValidationError } from "utils/cardInfoValidationError.js";
+import { cardInfoValidationError } from "utils/cardInfoValidationError";
 
 const StyledCardInfoForm = styled.form`
   display: flex;

@@ -1,11 +1,11 @@
 import React, { useCallback, useContext, useState } from "react";
-import CardInfoContext from "context/CardInfoContext.jsx";
+import CardInfoContext from "context/CardInfoContext";
 
-import { CARD_INFO_RULES } from "utils/constants.js";
+import { CARD_INFO_RULES } from "utils/constants";
 
-import Input from "components/UIComponents/Input/Input.jsx";
-import InputField from "components/UIComponents/InputField/InputField.jsx";
-import WordCounter from "components/UIComponents/WordCounter/WordCounter.jsx";
+import Input from "components/UIComponents/Input/Input";
+import InputField from "components/UIComponents/InputField/InputField";
+import WordCounter from "components/UIComponents/WordCounter/WordCounter";
 
 export default function CardHolderNameInput() {
   const [isInvalid, setInvalid] = useState(false);

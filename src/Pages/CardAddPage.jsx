@@ -1,12 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import useLocalStorage from "useLocalStorage.jsx";
-import CardInfoContext from "context/CardInfoContext.jsx";
+import useLocalStorage from "useLocalStorage";
+import CardInfoContext from "context/CardInfoContext";
 
-import PageHeader from "containers/PageHeader.jsx";
-import CardInfoForm from "containers/CardInfoForm.jsx";
-import CardNicknameForm from "containers/CardNicknameForm.jsx";
+import PageHeader from "containers/PageHeader";
+import CardInfoForm from "containers/CardInfoForm";
+import CardNicknameForm from "containers/CardNicknameForm";
 
 import { CardPreview } from "components";
 
@@ -17,7 +17,7 @@ import {
   NICKNAME_REGISTER_SUCCESS_MESSAGE,
   NICKNAME_REGISTER_FAIL_MESSAGE,
   PAGE_NAME,
-} from "../utils/constants.js";
+} from "../utils/constants";
 
 const {
   NUMBER_UNIT_COUNT,
