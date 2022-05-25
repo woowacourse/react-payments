@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BlockInput } from '../../Atoms/Input';
-import InputLabel from '../../Atoms/InputLabel';
-import Tooltip from '../../Atoms/Tooltip';
-import MESSAGE from '../../../constant/message';
+import { BlockInput } from 'components/Atoms/Input';
+import InputLabel from 'components/Atoms/InputLabel';
+import Tooltip from 'components/Atoms/Tooltip';
+import MESSAGE from 'constant/message';
 import { CLASS } from 'constant/selector';
 
 const Container = styled.div`

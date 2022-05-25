@@ -2,9 +2,9 @@ import React from 'react';
 import { expect } from '@storybook/jest';
 import { within, userEvent } from '@storybook/testing-library';
 import CardNumbersInput from '.';
-import useCardNumbers from '../../../hooks/useCardNumbers';
+import useCardNumbers from 'hooks/useCardNumbers';
 import { PLACEHOLDER } from 'constant';
-import MESSAGE from '../../../constant/message';
+import MESSAGE from 'constant/message';
 
 export default {
   title: 'Molecules/CardNumbersInput',

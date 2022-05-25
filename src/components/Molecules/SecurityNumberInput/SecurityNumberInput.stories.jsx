@@ -2,8 +2,8 @@ import React from 'react';
 import { expect } from '@storybook/jest';
 import { userEvent } from '@storybook/testing-library';
 import SecurityNumberInput from '.';
-import useSecurityNumber from '../../../hooks/useSecurityNumber';
-import MESSAGE from '../../../constant/message';
+import useSecurityNumber from 'hooks/useSecurityNumber';
+import MESSAGE from 'constant/message';
 import { CLASS } from 'constant/selector';
 
 export default {

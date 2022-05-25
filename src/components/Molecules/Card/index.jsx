@@ -7,9 +7,8 @@ import {
   CardOwnerName,
   sizeTable,
 } from './style';
-import { DEFAULT_TEXT } from '../../../constant';
-import { CARD_NUMBER_MARK, DATE_SEPARATOR } from '../../../constant/mark';
-import { CARD_SIZE } from 'constant/';
+import { CARD_SIZE, DEFAULT_TEXT } from 'constant';
+import { CARD_NUMBER_MARK, DATE_SEPARATOR } from 'constant/mark';
 
 function Card({
   cardCompany,

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
-import validator from '../validation';
-import { numberRegex } from '../constant/regularExpression';
+import validator from 'validation';
+import { numberRegex } from 'constant/regularExpression';
 
 const usePassword = () => {
   const [password, setPassword] = useState(['', '']);

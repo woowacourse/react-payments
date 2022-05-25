@@ -1,10 +1,10 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import CardListPage from 'pages/CardListPage';
-import CardAddPage from './pages/CardAddPage/';
+import CardAddPage from 'pages/CardAddPage/';
 import CardAddCompletionPage from 'pages/CardAddCompletionPage';
-import { GlobalStyle, ModalContainer } from './style';
-import { CardListProvider } from './context/cardList';
-import useModal from './hooks/useModal';
+import { GlobalStyle, ModalContainer } from 'style';
+import { CardListProvider } from 'context/cardList';
+import useModal from 'hooks/useModal';
 import PATH from 'constant/path';
 
 function App() {

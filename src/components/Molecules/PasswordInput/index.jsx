@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BlockInput } from '../../Atoms/Input';
-import InputLabel from '../../Atoms/InputLabel';
-import { numberRegex } from '../../../constant/regularExpression';
+import { BlockInput } from 'components/Atoms/Input';
+import InputLabel from 'components/Atoms/InputLabel';
+import { numberRegex } from 'constant/regularExpression';
 import { CLASS } from 'constant/selector';
 
 const Container = styled.div`

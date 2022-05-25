@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
-import validator from '../validation';
-import { numberRegex } from '../constant/regularExpression';
-import { CARD_NUMBER_MARK, CARD_NUMBER_SEPARATOR } from '../constant/mark';
+import validator from 'validation';
+import { numberRegex } from 'constant/regularExpression';
+import { CARD_NUMBER_MARK, CARD_NUMBER_SEPARATOR } from 'constant/mark';
 
 const useCardNumbers = () => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);

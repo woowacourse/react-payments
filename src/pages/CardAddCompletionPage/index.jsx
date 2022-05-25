@@ -5,7 +5,7 @@ import Button from 'components/Atoms/Button';
 import Card from 'components/Molecules/Card';
 import { Container, Title, CardSection, Form } from './style';
 import { useCardListContext } from 'context/cardList';
-import { CARD_SIZE } from 'constant/';
+import { CARD_SIZE } from 'constant';
 import PATH from 'constant/path';
 
 function CardAddCompletionPage() {

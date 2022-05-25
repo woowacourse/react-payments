@@ -2,9 +2,9 @@ import React from 'react';
 import { expect } from '@storybook/jest';
 import { within, userEvent } from '@storybook/testing-library';
 import OwnerNameInput from '.';
-import useOwnerName from '../../../hooks/useOwnerName';
+import useOwnerName from 'hooks/useOwnerName';
 import { PLACEHOLDER } from 'constant';
-import MESSAGE from '../../../constant/message';
+import MESSAGE from 'constant/message';
 import { CLASS } from 'constant/selector';
 
 export default {
