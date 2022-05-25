@@ -14,13 +14,13 @@ const StyledWordCounter = styled.p`
   letter-spacing: -0.085em;
 `;
 type Props = {
-  currLength: string;
-  maxLength: String;
+  currLength: number;
+  maxLength: string;
   state: string;
 };
 
 const WordCounter = React.memo(
-  ({ currLength = "0", maxLength, state }: Props) => {
+  ({ currLength = 0, maxLength, state }: Props) => {
     return (
       <StyledWordCounter state={state}>
         {currLength}/{maxLength}

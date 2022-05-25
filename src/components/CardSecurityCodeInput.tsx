@@ -17,7 +17,7 @@ export default function CardSecurityCodeInput() {
 
   const { securityCodeLength } = state;
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInvalid(false);
 
     setState({ ...state, securityCodeLength: e.target.value.length });

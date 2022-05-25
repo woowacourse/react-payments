@@ -12,7 +12,10 @@ export default function CardExpireDateInput() {
 
   const { expireDate } = state;
 
-  const handleInputChange = (e, order) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    order: number
+  ) => {
     setInvalid(false);
 
     const newExpireDate = [...expireDate];

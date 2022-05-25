@@ -10,7 +10,7 @@ export interface CardInfoStateTypeInterface {
 
 interface CardInfoContextInterface {
   state: CardInfoStateTypeInterface;
-  setState: () => void;
+  setState: (state: CardInfoStateTypeInterface) => void;
 }
 
 const initialCardInfoState = {

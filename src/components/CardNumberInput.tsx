@@ -12,7 +12,10 @@ export default function CardNumberInput() {
 
   const { cardNumber } = state;
 
-  const handleInputChange = (e, order) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    order: number
+  ) => {
     setInvalid(false);
 
     const newCardNumber = [...cardNumber];

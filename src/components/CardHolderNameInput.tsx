@@ -14,7 +14,7 @@ export default function CardHolderNameInput() {
 
   const { holderName } = state;
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInvalid(false);
 
     setState({ ...state, holderName: e.target.value.toUpperCase() });
@@ -23,11 +23,6 @@ export default function CardHolderNameInput() {
   const triggerInvalid = useCallback(() => setInvalid(true), []);
 
   const isComplete = holderName !== "";
-
-  const inputStyles = {
-    width: "full",
-    textAlign: "left",
-  };
 
   return (
     <InputField
@@ -49,13 +44,13 @@ export default function CardHolderNameInput() {
         value={holderName}
         placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
         name={"holderName"}
-        maxLength={"30"}
+        maxLength={30}
         isComplete={isComplete}
         pattern={"^[a-zA-Z]+$"}
         onChange={handleInputChange}
         onInvalid={triggerInvalid}
         data-testid={"holder-name"}
-        {...inputStyles}
+        width={"full"}
       />
     </InputField>
   );

@@ -56,13 +56,13 @@ const StyledInputContainer = styled.div`
 type Props = {
   labelText: string;
   children: React.ReactNode;
-  OptionalComponent: React.ReactNode;
+  OptionalComponent?: React.ReactNode;
   wrapperWidth: "xs" | "sm" | "md" | "xl" | "full";
-  horizontalAlign: "flex-start" | "center" | "space-around";
-  isComplete: boolean;
-  isInvalid: boolean;
-  shape: "box" | "underline";
-  isSplit: boolean;
+  horizontalAlign?: "flex-start" | "center" | "space-around";
+  isComplete?: boolean;
+  isInvalid?: boolean;
+  shape?: "box" | "underline";
+  isSplit?: boolean;
 };
 
 export default function InputField({
@@ -70,10 +70,10 @@ export default function InputField({
   children,
   OptionalComponent,
   wrapperWidth,
-  horizontalAlign,
+  horizontalAlign = "flex-start",
   isComplete,
   isInvalid,
-  shape,
+  shape = "box",
   isSplit,
 }: Props) {
   return (
@@ -98,7 +98,3 @@ export default function InputField({
     </StyledInputField>
   );
 }
-
-InputField.defaultProps = {
-  shape: "box",
-};

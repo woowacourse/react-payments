@@ -50,17 +50,16 @@ export const StyledInput = styled.input`
   }
 `;
 
-type Props = {
-  name: string;
+type CustomProps = {
   type: "text" | "number" | "password";
-  placeholder: string;
-  width: "sm";
-  default;
-  full;
+  width: "sm" | "default" | "full";
+  isComplete: boolean;
 };
 
+type Props = CustomProps & React.InputHTMLAttributes<HTMLInputElement>;
+
 export default function Input(props: Props) {
-  return <StyledInput {...props} />;
+  return <StyledInput {...(props as Object)} />;
 }
 
 Input.defaultProps = {
