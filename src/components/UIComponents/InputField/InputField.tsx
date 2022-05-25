@@ -54,7 +54,7 @@ const StyledInputContainer = styled.div`
 `;
 
 type Props = {
-  labelText: string;
+  labelText?: string;
   children: React.ReactNode;
   OptionalComponent?: React.ReactNode;
   wrapperWidth: "xs" | "sm" | "md" | "xl" | "full";

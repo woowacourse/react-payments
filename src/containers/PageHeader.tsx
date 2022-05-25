@@ -37,7 +37,17 @@ const StyledPageTitle = React.memo(styled.h1`
   letter-spacing: -0.085em;
 `);
 
-export default function PageHeader({ isSubmitted, page, moveToListPage }) {
+type Props = {
+  isSubmitted?: boolean;
+  page: string;
+  moveToListPage?: () => void;
+};
+
+export default function PageHeader({
+  isSubmitted,
+  page,
+  moveToListPage,
+}: Props) {
   return (
     <StyledPageHeaderContainer>
       {!isSubmitted && (

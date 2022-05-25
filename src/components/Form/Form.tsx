@@ -15,9 +15,9 @@ const StyledCardInfoForm = styled.form`
 
 type Props = {
   children: React.ReactNode;
-  onSubmit: (formData: Object) => {};
-  isComplete: boolean;
-  setFormValidity: (formInputArray: Node[]) => void;
+  onSubmit: (formData: Object) => void;
+  isComplete?: boolean;
+  setFormValidity?: (formInputArray: Node[]) => void;
 };
 
 export default function Form({

@@ -103,10 +103,13 @@ const CardHolderName = styled.p`
 const CardExpireDate = styled.p``;
 
 type Props = {
-  cardInfo: CardInfoStateTypeInterface;
-  isValidCardInfo: boolean;
-  isSubmitted: boolean;
-  color: 0 | 1 | 2 | 3 | 4 | "default" | "complete";
+  cardInfo: Pick<
+    CardInfoStateTypeInterface,
+    "cardNumber" | "expireDate" | "holderName"
+  >;
+  isValidCardInfo?: boolean;
+  isSubmitted?: boolean;
+  color?: number | "default" | "complete";
 };
 
 export default function CardPreview({

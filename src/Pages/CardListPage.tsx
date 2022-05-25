@@ -5,6 +5,7 @@ import { CardPreview } from "components";
 import PageHeader from "containers/PageHeader";
 import useLocalStorage from "useLocalStorage";
 import { PAGE_NAME } from "utils/constants";
+import { CardInfoStateTypeInterface } from "context/CardInfoContext";
 
 const CardList = styled.div`
   display: flex;
@@ -54,14 +55,17 @@ const DEFAULT_CARD_NAME = "Woowa Card";
 export default function CardListPage({ setPage }) {
   const [formDataArray] = useLocalStorage("card-info");
 
-  const parseCardInfo = (card) => {
-    const cardNumberArray = [
+  const parseCardInfo = (card: CardInfoStateTypeInterface) => {
+    const cardNumberArray: string[] = [
       card["cardNumber1"],
       card["cardNumber2"],
       card["cardNumber3"],
       card["cardNumber4"],
     ];
-    const expireDateArray = [card["expireDate1"], card["expireDate2"]];
+    const expireDateArray: string[] = [
+      card["expireDate1"],
+      card["expireDate2"],
+    ];
 
     const cardInfo = {
       cardNumber: cardNumberArray,

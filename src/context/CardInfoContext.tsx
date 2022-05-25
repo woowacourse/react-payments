@@ -6,6 +6,7 @@ export interface CardInfoStateTypeInterface {
   expireDate: string[];
   securityCodeLength: number;
   passwordLength: number[];
+  nickname?: string;
 }
 
 interface CardInfoContextInterface {

@@ -2,7 +2,9 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import useLocalStorage from "useLocalStorage";
-import CardInfoContext from "context/CardInfoContext";
+import CardInfoContext, {
+  CardInfoStateTypeInterface,
+} from "context/CardInfoContext";
 
 import PageHeader from "containers/PageHeader";
 import CardInfoForm from "containers/CardInfoForm";
@@ -52,7 +54,7 @@ export default function CardAddPage({ setPage }) {
 
   const [isValidCardInfo, setValidCardInfo] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
-  const [currentCardIndex, setCurrentCardIndex] = useState(null);
+  const [currentCardIndex, setCurrentCardIndex] = useState<number | null>(null);
 
   const [formDataArray, saveFormData] = useLocalStorage("card-info");
 
@@ -75,7 +77,7 @@ export default function CardAddPage({ setPage }) {
     isCompleteSecurityCode &&
     isCompletePassword;
 
-  const handleFormSubmit = (formData) => {
+  const handleFormSubmit = (formData: CardInfoStateTypeInterface) => {
     try {
       setCurrentCardIndex(formDataArray.length);
       saveFormData([...formDataArray, formData]);
@@ -88,7 +90,7 @@ export default function CardAddPage({ setPage }) {
 
   const moveToListPage = () => setPage(PAGE_NAME.CARD_LIST);
 
-  const handleAddNickname = ({ nickname }) => {
+  const handleAddNickname = ({ nickname }: { nickname: string }) => {
     const currentCardInfo = formDataArray[currentCardIndex];
     currentCardInfo.nickname = nickname;
 
@@ -103,7 +105,7 @@ export default function CardAddPage({ setPage }) {
     }
   };
 
-  const setFormValidity = (formElements) => {
+  const setFormValidity = (formElements: HTMLInputElement[]) => {
     setValidCardInfo(
       isCompleteCardInfo &&
         formElements.every((element) => element.validity.valid)

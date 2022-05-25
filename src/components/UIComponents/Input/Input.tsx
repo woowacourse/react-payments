@@ -53,7 +53,7 @@ export const StyledInput = styled.input`
 type CustomProps = {
   type: "text" | "number" | "password";
   width: "sm" | "default" | "full";
-  isComplete: boolean;
+  isComplete?: boolean;
 };
 
 type Props = CustomProps & React.InputHTMLAttributes<HTMLInputElement>;
