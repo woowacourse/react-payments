@@ -12,6 +12,13 @@ export default {
       </MemoryRouter>
     ),
   ],
+  argTypes: {
+    addCard: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 const Template = (args) => <AddCardSuccess {...args} />;
