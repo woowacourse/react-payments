@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { validator, checkMaxLength, checkIsNaN, checkRange } from '../../validator';
+import { validator, checkMaxLength, checkIsNaN, checkRange, checkValidDate } from '../../validator';
 import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../../constants';
 import Input from './Input';
 
-function MonthInput({ value, name }) {
+function MonthInput({ value, name, expireYear }) {
   return (
     <Input
       placeholder="MM"
@@ -16,6 +16,7 @@ function MonthInput({ value, name }) {
         validator(checkMaxLength, value, MAX_LENGTH.DATE),
         validator(checkIsNaN, value),
         validator(checkRange, RANGE.MONTH_MIN, RANGE.MONTH_MAX, value),
+        validator(checkValidDate, value, expireYear),
       ]}
     />
   );
@@ -24,6 +25,7 @@ function MonthInput({ value, name }) {
 MonthInput.propTypes = {
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  expireYear: PropTypes.string.isRequired,
 };
 
 export default MonthInput;

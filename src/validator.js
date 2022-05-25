@@ -19,6 +19,23 @@ export const checkRange = (min, max, value) => {
   }
 };
 
+export const checkValidDate = (expireMonth, expireYear) => {
+  if (expireMonth && expireYear && expireYear.length === 2) {
+    const now = new Date();
+    const currentYear = String(now.getFullYear()).substring(2);
+    const currentMonth = now.getMonth() + 1;
+
+    if (+expireYear < +currentYear) {
+      throw new Error(ERROR_MESSAGE.INVALID_DATE);
+    }
+    if (+expireYear === +currentYear) {
+      if (+expireMonth < currentMonth) {
+        throw new Error(ERROR_MESSAGE.INVALID_DATE);
+      }
+    }
+  }
+};
+
 export const validator = (validate, ...args) => {
   return {
     validate: () => validate(...args),
