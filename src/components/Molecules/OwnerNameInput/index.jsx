@@ -60,9 +60,7 @@ function OwnerNameInput({ ownerName, handleInputChange, isValid, invalidMessage,
         maxLength="30"
         isValid={isValid}
       />
-      <InvalidMessage className={CLASS.INVALID_INPUT_MESSAGE}>
-        {isValid || !ownerName ? '' : invalidMessage}
-      </InvalidMessage>
+      {isValid || !ownerName || <InvalidMessage>{invalidMessage}</InvalidMessage>}
     </Container>
   );
 }

@@ -78,9 +78,7 @@ function ExpiredDateInput({ expiredDate, handleInputChange, isValid, invalidMess
           isValid={isValidDate(year)}
         />
       </InputWrapper>
-      <InvalidMessage className={CLASS.INVALID_INPUT_MESSAGE}>
-        {isValid || isAllEmptyValue() ? '' : invalidMessage}
-      </InvalidMessage>
+      {isValid || isAllEmptyValue() || <InvalidMessage>{invalidMessage}</InvalidMessage>}
     </Container>
   );
 }

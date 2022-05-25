@@ -70,7 +70,7 @@ function CardNumbersInput({ cardNumbers, handleInputChange, isValid, invalidMess
           );
         })}
       </InputWrapper>
-      <InvalidMessage>{isValid || isAllEmptyValue() ? '' : invalidMessage}</InvalidMessage>
+      {isValid || isAllEmptyValue() || <InvalidMessage>{invalidMessage}</InvalidMessage>}
     </Container>
   );
 }
