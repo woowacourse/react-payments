@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import PageTitle from 'components/navigater/PageTitle';
 
-import { PageWrapper } from './stlye';
+import { PageWrapper } from './style';
 
 function WrongPathPage() {
   return (

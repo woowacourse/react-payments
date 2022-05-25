@@ -17,3 +17,7 @@ export const TitleWrapper = styled.div(css`
   display: flex;
   align-items: center;
 `);
+
+export const MarginWrapper = styled.div`
+  margin-right: 20px;
+`;
