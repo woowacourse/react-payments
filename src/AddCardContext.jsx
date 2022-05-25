@@ -1,8 +1,8 @@
 import React from 'react';
-import { getCard } from './util';
+import { Card } from './util';
 
 const defaultCardContext = {
-  card: getCard(),
+  card: Card(),
   updateCard: () => {},
 };
 

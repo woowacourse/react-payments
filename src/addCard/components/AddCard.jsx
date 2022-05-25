@@ -2,11 +2,11 @@ import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddCardForm from './AddCardForm';
 import Card from './Card';
-import { getCard } from '../../util';
+import { Card as CardConstructor } from '../../util';
 import AddCardContext from '../../AddCardContext';
 
 function AddCard() {
-  const [card, setCard] = useState(getCard());
+  const [card, setCard] = useState(CardConstructor());
 
   const navigator = useNavigate();
 
