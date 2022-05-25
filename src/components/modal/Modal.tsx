@@ -1,7 +1,7 @@
 import React from 'react';
-import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
-const style = css({
+const ModalStyled = styled.div({
   width: '100%',
   height: '100%',
   position: 'absolute',
@@ -11,13 +11,7 @@ const style = css({
 });
 
 function Modal({ children, typeButtonClick }: { children: React.ReactNode; typeButtonClick: any }) {
-  return (
-    <>
-      <div onClick={typeButtonClick} css={style}>
-        {children}
-      </div>
-    </>
-  );
+  return <ModalStyled onClick={typeButtonClick}>{children}</ModalStyled>;
 }
 
 export default Modal;
