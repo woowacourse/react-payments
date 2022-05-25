@@ -1,29 +1,17 @@
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddCardForm from './AddCardForm';
 import Card from './Card';
-import { Card as CardConstructor } from '../../util';
-import AddCardContext from '../../AddCardContext';
 
 function AddCard() {
-  const [card, setCard] = useState(CardConstructor());
-
   const navigator = useNavigate();
-
-  const updateCard = (name, value) => {
-    setCard((prevCard) => {
-      return { ...prevCard, [name]: value };
-    });
-  };
 
   const goBack = () => {
     navigator(-1);
   };
 
-  const contextValue = useMemo(() => ({ card, updateCard }), [card]);
-
   return (
-    <AddCardContext.Provider value={contextValue}>
+    <>
       <div className="header-wrapper">
         <div
           className="back-button"
@@ -37,7 +25,7 @@ function AddCard() {
       </div>
       <Card />
       <AddCardForm />
-    </AddCardContext.Provider>
+    </>
   );
 }
 
