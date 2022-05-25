@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { validator, checkMaxLength, checkIsNaN, checkValidDate } from '../../validator';
 import { MAX_LENGTH } from '../../constants';
 import Input from './Input';
+import AddCardContext from '../../AddCardContext';
 
 function YearInput({ value, name, expireMonth }) {
+  const { updateCard } = useContext(AddCardContext);
+
   return (
     <Input
+      shape="input-basic"
       placeholder="YY"
       length={MAX_LENGTH.DATE}
       value={value}
@@ -16,6 +20,7 @@ function YearInput({ value, name, expireMonth }) {
         validator(checkIsNaN, value),
         validator(checkValidDate, expireMonth, value),
       ]}
+      onChange={updateCard}
     />
   );
 }

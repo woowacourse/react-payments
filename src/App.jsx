@@ -11,7 +11,7 @@ function App() {
   const [cardList, setCardList] = useState([]);
   const [card, setCard] = useState(CardConstructor());
 
-  const updateCard = (name, value) => {
+  const updateCard = (value, name) => {
     setCard((prevCard) => {
       return { ...prevCard, [name]: value };
     });
@@ -19,7 +19,7 @@ function App() {
 
   const initCard = () => {
     Object.keys(CardConstructor()).forEach((cardKey) => {
-      updateCard(cardKey, '');
+      updateCard('', cardKey);
     });
   };
 
