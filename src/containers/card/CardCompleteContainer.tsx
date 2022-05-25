@@ -28,7 +28,6 @@ const style = css({
 const CardCompleteTitle = styled.h1(() => ({
   width: '100%',
   fontSize: '20px',
-  marginTop: '130px',
   marginBottom: '78px',
   textAlign: 'center',
 }));

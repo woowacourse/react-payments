@@ -1,23 +1,18 @@
 import React from 'react';
-import { css } from '@emotion/react';
-import Navigation from 'fields/Navigation';
-import CardListContainer from 'containers/card/CardListContainer';
 
-const style = css({
-  width: '375px',
-  height: '675px',
-  overflow: 'scroll',
-  margin: '0 auto',
-  padding: '22px 28px 16px 28px',
-  backgroundColor: '#ffffff',
-});
+import CardListContainer from 'containers/card/CardListContainer';
+import PageTitle from 'components/navigater/PageTitle';
+
+import { PageWrapper, TitleWrapper } from './stlye';
 
 function CardListPage() {
   return (
-    <div css={style}>
-      <Navigation />
+    <PageWrapper>
+      <TitleWrapper>
+        <PageTitle>보유카드</PageTitle>
+      </TitleWrapper>
       <CardListContainer />
-    </div>
+    </PageWrapper>
   );
 }
 
