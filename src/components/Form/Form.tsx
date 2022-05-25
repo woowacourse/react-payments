@@ -60,7 +60,7 @@ export default function Form({
   };
 
   const handleNextFocus = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { maxLength, value } = e.target as HTMLInputElement;
+    const { maxLength, value } = e.target;
 
     if (value.length !== maxLength) return;
 
