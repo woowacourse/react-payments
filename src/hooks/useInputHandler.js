@@ -1,12 +1,12 @@
-import { useContext, useState } from 'react';
-import { CardInfoDispatchContext } from '../components/context/CardInfoProvider';
+import { useContext, useState } from "react";
+import { CardInfoDispatchContext } from "components/context/CardInfoProvider";
 
 function useInputHandler(validator, { type, key, prevData }) {
   const cardInfoDispatch = useContext(CardInfoDispatchContext);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const updateInputState = ({ name, value }) => {
-    setErrorMessage('');
+    setErrorMessage("");
 
     try {
       validator(value);

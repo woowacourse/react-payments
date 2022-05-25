@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import ErrorMessage from '../components/common/ErrorMessage';
+import ErrorMessage from "components/common/ErrorMessage";
 
 export default {
-  title: 'ErrorMessage',
+  title: "Common/ErrorMessage",
   component: ErrorMessage,
   argTypes: {
-    children: { control: 'text' },
+    children: { control: "text" },
   },
 };
 
-const Template = args => <ErrorMessage {...args} />;
+const Template = (args) => <ErrorMessage {...args} />;
 
 export const Primary = Template.bind({});
 
 Primary.args = {
-  children: 'coke taetae',
+  children: "coke taetae",
 };

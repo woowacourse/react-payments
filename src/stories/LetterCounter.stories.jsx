@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import LetterCounter from '../components/common/LetterCounter';
+import LetterCounter from "components/common/LetterCounter";
 
 export default {
-  title: 'LetterCounter',
+  title: "Common/LetterCounter",
   component: LetterCounter,
   argTypes: {
-    currentLength: { control: 'number' },
-    maxLength: { control: 'number' },
+    currentLength: { control: "number" },
+    maxLength: { control: "number" },
   },
 };
 
-const Template = args => <LetterCounter {...args} />;
+const Template = (args) => <LetterCounter {...args} />;
 
 export const Primary = Template.bind({});
 
