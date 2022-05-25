@@ -13,12 +13,19 @@ const StyledCardInfoForm = styled.form`
   }
 `;
 
+type Props = {
+  children: React.ReactNode;
+  onSubmit: (formData: Object) => {};
+  isComplete: boolean;
+  setFormValidity: (formInputArray: Node[]) => void;
+};
+
 export default function Form({
   children,
   onSubmit,
   isComplete,
   setFormValidity = () => {},
-}) {
+}: Props) {
   const formRef = useRef(null);
   const isInitMount = useRef(true);
 
@@ -33,7 +40,7 @@ export default function Form({
     setFormInputArray([...formRef.current]);
   }, []);
 
-  const focusFormInput = (currInput, direction) => {
+  const focusFormInput = (currInput: Node, direction: number) => {
     const currentIndex = formInputArray.indexOf(currInput);
 
     const focusTarget = formInputArray[currentIndex + direction];
@@ -43,25 +50,26 @@ export default function Form({
     focusTarget.focus();
   };
 
-  const handlePrevFocus = (e) => {
-    const { key, target } = e;
+  const handlePrevFocus = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
     const { value } = target;
 
-    if (key !== "Backspace" || value !== "") return;
+    if (e.key !== "Backspace" || value !== "") return;
 
     focusFormInput(target, -1);
   };
 
-  const handleNextFocus = (e) => {
-    const { target } = e;
-    const { maxLength, value } = target;
+  const handleNextFocus = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { maxLength, value } = e.target as HTMLInputElement;
 
     if (value.length !== maxLength) return;
 
-    focusFormInput(target, 1);
+    focusFormInput(e.target as Node, 1);
   };
 
-  const handleFormValidation = ({ target }) => {
+  const handleFormValidation = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
     if (target.validity.patternMismatch) {
       const message = cardInfoValidationError[target.name];
       target.setCustomValidity(message);
@@ -72,14 +80,16 @@ export default function Form({
     target.reportValidity();
   };
 
-  const handleFormChange = (e) => {
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleNextFocus(e);
     handleFormValidation(e);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.target).entries());
+    const formData = Object.fromEntries(
+      new FormData(e.target as HTMLFormElement).entries()
+    );
 
     onSubmit(formData);
   };
