@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { PLACEHOLDER_PRIMARY_COLOR } from '../../style';
+import styled from "styled-components";
+import { PLACEHOLDER_PRIMARY_COLOR } from "style";
 
 const SubmitContainer = styled.div`
   display: flex;

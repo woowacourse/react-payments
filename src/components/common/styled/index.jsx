@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { INPUT_PRIMARY_BG_COLOR, LABEL_PRIMARY_COLOR } from '../../../style';
+import styled from "styled-components";
+import { INPUT_PRIMARY_BG_COLOR, LABEL_PRIMARY_COLOR } from "style";
 
 const Form = styled.form`
   display: flex;
@@ -9,8 +9,8 @@ const Form = styled.form`
 `;
 
 const InputContainer = styled.div`
-  position: ${props => props.position || 'static'};
-  width: ${props => props.width || '100%'};
+  position: ${(props) => props.position || "static"};
+  width: ${(props) => props.width || "100%"};
   margin: 16px 0;
 `;
 
@@ -19,10 +19,10 @@ const InputWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: fit-content;
-  width: ${props => props.width || '100%'};
+  width: ${(props) => props.width || "100%"};
   margin-top: 0.375rem;
   padding: 8px;
-  color: ${props => props.color};
+  color: ${(props) => props.color};
   border-radius: 0.25rem;
   background-color: ${INPUT_PRIMARY_BG_COLOR};
 `;
@@ -37,7 +37,7 @@ const Label = styled.label`
 `;
 
 const Span = styled.span`
-  padding: ${props => props.padding || '0'};
+  padding: ${(props) => props.padding || "0"};
 `;
 
 export { Form, InputContainer, InputWrapper, Label, Span };

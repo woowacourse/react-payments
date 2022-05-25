@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import { ITEM_HOVER_PRIMARY_BG_COLOR, LABEL_PRIMARY_COLOR } from '../../../style';
+import styled from "styled-components";
+import { ITEM_HOVER_PRIMARY_BG_COLOR, LABEL_PRIMARY_COLOR } from "style";
 
 const CalendarContainer = styled.div``;
 
 const SelectLayer = styled.div`
-  display: ${props => (props.isShown ? 'block' : 'none')};
+  display: ${(props) => (props.isShown ? "block" : "none")};
   width: 100%;
   margin: 16px;
 `;

@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Button = styled.button`
-  visibility: ${props => (props.isVisible ? 'viisble' : 'hidden')};
-  color: ${props => props.hexColor};
+  visibility: ${(props) => (props.isVisible ? "viisble" : "hidden")};
+  color: ${(props) => props.hexColor};
   font-size: 1rem;
   padding: 8px;
 
@@ -14,7 +14,7 @@ const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    color: ${props => `${props.hexColor}90`};
+    color: ${(props) => `${props.hexColor}90`};
   }
 `;
 

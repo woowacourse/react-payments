@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { ADD_CARD_ITEM_BG_COLOR } from '../../../style';
+import styled from "styled-components";
+import { ADD_CARD_ITEM_BG_COLOR } from "style";
 
 const CardBox = styled.div`
   display: flex;

@@ -1,7 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { BsDot } from 'react-icons/bs';
-import { DOT_PRIMARY_COLOR } from '../../style';
+import React from "react";
+import styled from "styled-components";
+import { BsDot } from "react-icons/bs";
+
+import { DOT_PRIMARY_COLOR } from "style";
 
 const DotContainer = styled.div`
   width: 100%;

@@ -1,22 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
-import { InputContainer, InputWrapper, Label } from '../common/styled';
-import ErrorMessage from '../common/ErrorMessage';
-import LetterCounter from '../common/LetterCounter';
-import Input from '../common/Input';
+import useInputHandler from "hooks/useInputHandler";
+import { validateOwner } from "validator";
+import { CardInfoContext } from "components/context/CardInfoProvider";
 
-import useInputHandler from '../../hooks/useInputHandler';
-import { validateOwner } from '../../validator';
-import { CardInfoContext } from '../context/CardInfoProvider';
+import { InputContainer, InputWrapper, Label } from "../../common/styled";
+import ErrorMessage from "components/common/ErrorMessage";
+import LetterCounter from "components/common/LetterCounter";
+import Input from "components/common/Input";
 
-const convertToUpperCase = word => word.toUpperCase();
+const convertToUpperCase = (word) => word.toUpperCase();
 
 function CardOwner() {
   const { owner } = useContext(CardInfoContext);
 
   const { errorMessage, updateInputState } = useInputHandler(validateOwner, {
-    type: 'UPDATE_OWNER',
-    key: 'owner',
+    type: "UPDATE_OWNER",
+    key: "owner",
     prevData: owner,
   });
 

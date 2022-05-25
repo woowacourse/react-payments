@@ -1,65 +1,65 @@
-import React, { useReducer } from 'react';
+import React, { useReducer } from "react";
 
 const initialCardInfoState = {
   cardCompany: {
-    name: '',
-    hexColor: '#ffffff',
+    name: "",
+    hexColor: "#ffffff",
   },
   cardNumbers: {
-    cardNoA: '',
-    cardNoB: '',
-    cardNoC: '',
-    cardNoD: '',
+    cardNoA: "",
+    cardNoB: "",
+    cardNoC: "",
+    cardNoD: "",
   },
   cardDate: {
-    month: '',
-    year: '',
+    month: "",
+    year: "",
   },
   owner: {
-    name: '',
+    name: "",
   },
   cardCode: {
-    cvc: '',
+    cvc: "",
   },
   pwd: {
-    pwdNoA: '',
-    pwdNoB: '',
+    pwdNoA: "",
+    pwdNoB: "",
   },
 };
 
 const cardInfoReducer = (state, action) => {
   switch (action.type) {
-    case 'UPDATE_COMPANY':
+    case "UPDATE_COMPANY":
       return {
         ...state,
         cardCompany: action.cardCompany,
       };
-    case 'UPDATE_NUMBERS':
+    case "UPDATE_NUMBERS":
       return {
         ...state,
         cardNumbers: action.cardNumbers,
       };
-    case 'UPDATE_DATE':
+    case "UPDATE_DATE":
       return {
         ...state,
         cardDate: action.cardDate,
       };
-    case 'UPDATE_OWNER':
+    case "UPDATE_OWNER":
       return {
         ...state,
         owner: action.owner,
       };
-    case 'UPDATE_CARD_CODE':
+    case "UPDATE_CARD_CODE":
       return {
         ...state,
         cardCode: action.cardCode,
       };
-    case 'UPDATE_PWD':
+    case "UPDATE_PWD":
       return {
         ...state,
         pwd: action.pwd,
       };
-    case 'RESET_CARD_INFO':
+    case "RESET_CARD_INFO":
       return { ...initialCardInfoState };
     default:
       return state;
@@ -70,11 +70,16 @@ const CardInfoContext = React.createContext(null);
 const CardInfoDispatchContext = React.createContext(null);
 
 const CardInfoProvider = ({ children, initialState }) => {
-  const [cardInfo, cardInfoDispatch] = useReducer(cardInfoReducer, initialState ?? initialCardInfoState);
+  const [cardInfo, cardInfoDispatch] = useReducer(
+    cardInfoReducer,
+    initialState ?? initialCardInfoState
+  );
 
   return (
     <CardInfoContext.Provider value={cardInfo}>
-      <CardInfoDispatchContext.Provider value={cardInfoDispatch}>{children}</CardInfoDispatchContext.Provider>
+      <CardInfoDispatchContext.Provider value={cardInfoDispatch}>
+        {children}
+      </CardInfoDispatchContext.Provider>
     </CardInfoContext.Provider>
   );
 };

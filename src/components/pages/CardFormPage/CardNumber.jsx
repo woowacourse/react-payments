@@ -1,24 +1,32 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from "react";
 
-import { HYPHEN_PRIMARY_COLOR } from '../../style';
+import { HYPHEN_PRIMARY_COLOR } from "style";
 
-import Input from '../common/Input';
-import ErrorMessage from '../common/ErrorMessage';
-import { InputContainer, InputWrapper, Label, Span } from '../common/styled';
+import useInputHandler from "hooks/useInputHandler";
+import { validateCardNumbers } from "validator";
+import { CardInfoContext } from "components/context/CardInfoProvider";
+import { isCorrectCardNumber } from "./checkInputs";
 
-import useInputHandler from '../../hooks/useInputHandler';
-import { validateCardNumbers } from '../../validator';
-import { CardInfoContext } from '../context/CardInfoProvider';
-import { isCorrectCardNumber } from './checkInputs';
+import Input from "components/common/Input";
+import ErrorMessage from "components/common/ErrorMessage";
+import {
+  InputContainer,
+  InputWrapper,
+  Label,
+  Span,
+} from "components/common/styled";
 
 function CardNumber() {
   const { cardNumbers } = useContext(CardInfoContext);
 
-  const { errorMessage, setErrorMessage, updateInputState } = useInputHandler(validateCardNumbers, {
-    type: 'UPDATE_NUMBERS',
-    key: 'cardNumbers',
-    prevData: cardNumbers,
-  });
+  const { errorMessage, setErrorMessage, updateInputState } = useInputHandler(
+    validateCardNumbers,
+    {
+      type: "UPDATE_NUMBERS",
+      key: "cardNumbers",
+      prevData: cardNumbers,
+    }
+  );
 
   const cardNoARef = useRef(null);
   const cardNoBRef = useRef(null);
@@ -28,7 +36,10 @@ function CardNumber() {
 
   const handleInputChange = ({ target }) => {
     cardNoRefs.every((cardNoRef, index) => {
-      if (target === cardNoRef.current && cardNoRef.current.value.length === 4) {
+      if (
+        target === cardNoRef.current &&
+        cardNoRef.current.value.length === 4
+      ) {
         if (index === cardNoRefs.length - 1) return false;
         cardNoRefs[index + 1].current.focus();
         return false;
@@ -41,7 +52,7 @@ function CardNumber() {
 
   useEffect(() => {
     if (isCorrectCardNumber(cardNumbers)) {
-      setErrorMessage('');
+      setErrorMessage("");
     }
   }, [cardNumbers]);
 

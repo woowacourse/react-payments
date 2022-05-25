@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import Modal from '../Modal';
-import Input from '../Input';
-import { Span } from '../styled';
-import { CalendarContainer, Item, List, SelectLayer, SelectListWrapper } from './style';
+import Modal from "../Modal";
+import Input from "../Input";
+import { Span } from "../styled";
+import {
+  CalendarContainer,
+  Item,
+  List,
+  SelectLayer,
+  SelectListWrapper,
+} from "./style";
 
 function Calendar({ itemList, placeholder, setItem, dimensions, item }) {
   const [isShown, setIsShown] = useState(false);
@@ -11,7 +17,7 @@ function Calendar({ itemList, placeholder, setItem, dimensions, item }) {
     setIsShown(!isShown);
   };
 
-  const handleClickDate = selectedItem => {
+  const handleClickDate = (selectedItem) => {
     handleClickBox();
     setItem(selectedItem);
   };
@@ -25,8 +31,12 @@ function Calendar({ itemList, placeholder, setItem, dimensions, item }) {
         <SelectLayer isShown={isShown}>
           <SelectListWrapper>
             <List>
-              {itemList.map(tem => (
-                <Item key={tem} onClick={() => handleClickDate(tem)} data-testid="item">
+              {itemList.map((tem) => (
+                <Item
+                  key={tem}
+                  onClick={() => handleClickDate(tem)}
+                  data-testid="item"
+                >
                   {tem}
                 </Item>
               ))}

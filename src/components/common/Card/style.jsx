@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 const CardBox = styled.div`
   display: flex;
@@ -8,17 +8,17 @@ const CardBox = styled.div`
   width: 208px;
   height: 130px;
   padding: 16px;
-  background-color: ${props => props.hexColor};
+  background-color: ${(props) => props.hexColor};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   margin: 10px 0 0;
   cursor: pointer;
 
   &:hover {
-    background-color: ${props => `${props.hexColor}cc`};
+    background-color: ${(props) => `${props.hexColor}cc`};
   }
 
-  ${props =>
+  ${(props) =>
     props.large &&
     css`
       width: 290px;
@@ -46,7 +46,15 @@ const CardParagraph = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: ${props => props.width}px;
+  width: ${(props) => props.width}px;
 `;
 
-export { CardBox, CardHeader, CardChip, CardInfo, CardBottom, CardNumber, CardParagraph };
+export {
+  CardBox,
+  CardHeader,
+  CardChip,
+  CardInfo,
+  CardBottom,
+  CardNumber,
+  CardParagraph,
+};

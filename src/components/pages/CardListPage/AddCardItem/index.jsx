@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
-import { HiOutlinePlus } from 'react-icons/hi';
+import React, { useContext } from "react";
+import { HiOutlinePlus } from "react-icons/hi";
 
-import { CardBox } from './style';
+import { SetPathContext } from "components/context/PathProvider";
 
-import { SetPathContext } from '../../context/PathProvider';
+import { CardBox } from "./style";
 
 function AddCardItem() {
   const setPath = useContext(SetPathContext);
 
   const handleClick = () => {
-    setPath('add-card');
+    setPath("add-card");
   };
 
   return (

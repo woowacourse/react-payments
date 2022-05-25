@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { BsQuestionCircle } from 'react-icons/bs';
+import React, { useState } from "react";
+import { BsQuestionCircle } from "react-icons/bs";
 
-import { LABEL_PRIMARY_COLOR } from '../../../style';
+import { LABEL_PRIMARY_COLOR } from "style";
 
-import { QuestionContainer, TextArea } from './style';
+import { QuestionContainer, TextArea } from "./style";
 
 function QuestionIcon({ children: textContent }) {
   const [isShown, setIsShown] = useState();

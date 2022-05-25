@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { LABEL_PRIMARY_COLOR } from '../../../style';
+import styled from "styled-components";
+import { LABEL_PRIMARY_COLOR } from "style";
 
 const CompanyContainer = styled.div`
   display: flex;
@@ -9,13 +9,13 @@ const CompanyContainer = styled.div`
   cursor: pointer;
 `;
 const CompanyColorCircle = styled.div`
-  background-color: ${props => props.hexColor};
+  background-color: ${(props) => props.hexColor};
   width: 40px;
   height: 40px;
   border-radius: 50%;
 
   &:hover {
-    background-color: ${props => `${props.hexColor}cc`};
+    background-color: ${(props) => `${props.hexColor}cc`};
   }
 `;
 const CompanyName = styled.p`

@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-import { BUBBLE_PRIMARY_BG_COLOR, BUBBLE_PRIMARY_COLOR } from '../../../style';
+import styled from "styled-components";
+import { BUBBLE_PRIMARY_BG_COLOR, BUBBLE_PRIMARY_COLOR } from "style";
 
 const QuestionContainer = styled.div`
   position: relative;
 `;
 
 const TextArea = styled.p`
-  display: ${props => (props.isShown ? 'block' : 'none')};
+  display: ${(props) => (props.isShown ? "block" : "none")};
   position: absolute;
   min-width: 200px;
   bottom: 10px;

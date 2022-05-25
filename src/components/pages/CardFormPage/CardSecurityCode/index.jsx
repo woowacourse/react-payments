@@ -1,14 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
-import ErrorMessage from '../../common/ErrorMessage';
-import { InputContainer, Span, Label, InputWrapper } from '../../common/styled';
-import QuestionContainer from '../../common/QuestionIcon';
-import Input from '../../common/Input';
-import { Wrapper } from './style';
+import useInputHandler from "hooks/useInputHandler";
+import { validateCardCode } from "validator";
 
-import useInputHandler from '../../../hooks/useInputHandler';
-import { validateCardCode } from '../../../validator';
-import { CardInfoContext } from '../../context/CardInfoProvider';
+import { CardInfoContext } from "components/context/CardInfoProvider";
+
+import ErrorMessage from "components/common/ErrorMessage";
+import {
+  InputContainer,
+  Span,
+  Label,
+  InputWrapper,
+} from "components/common/styled";
+import QuestionContainer from "components/common/QuestionIcon";
+import Input from "components/common/Input";
+import { Wrapper } from "./style";
 
 const CVC_EXPLANATION = `CVC번호는 카드뒷면의 7자리 숫자 중 뒷 3자리입니다.`;
 
@@ -16,8 +22,8 @@ function CardSecurityCode() {
   const { cardCode } = useContext(CardInfoContext);
 
   const { errorMessage, updateInputState } = useInputHandler(validateCardCode, {
-    type: 'UPDATE_CARD_CODE',
-    key: 'cardCode',
+    type: "UPDATE_CARD_CODE",
+    key: "cardCode",
     prevData: cardCode,
   });
 

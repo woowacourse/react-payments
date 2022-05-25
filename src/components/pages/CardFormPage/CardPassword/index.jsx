@@ -1,32 +1,35 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from "react";
 
-import { InputContainer, Label, InputWrapper } from '../../common/styled';
-import InactiveContainer from '../../common/InactiveContainer';
-import ErrorMessage from '../../common/ErrorMessage';
-import Input from '../../common/Input';
-import { InputPasswordWrapper } from './style';
+import useInputHandler from "hooks/useInputHandler";
+import { validatePassword } from "validator";
+import { isCorrectPwd } from "../checkInputs";
 
-import { CardInfoContext } from '../../context/CardInfoProvider';
+import { CardInfoContext } from "components/context/CardInfoProvider";
 
-import useInputHandler from '../../../hooks/useInputHandler';
-import { validatePassword } from '../../../validator';
-import { isCorrectPwd } from '../checkInputs';
+import { InputContainer, Label, InputWrapper } from "components/common/styled";
+import InactiveContainer from "components/common/InactiveContainer";
+import ErrorMessage from "components/common/ErrorMessage";
+import Input from "components/common/Input";
+import { InputPasswordWrapper } from "./style";
 
 function CardPassword() {
   const { pwd } = useContext(CardInfoContext);
 
-  const { errorMessage, setErrorMessage, updateInputState } = useInputHandler(validatePassword, {
-    type: 'UPDATE_PWD',
-    key: 'pwd',
-    prevData: pwd,
-  });
+  const { errorMessage, setErrorMessage, updateInputState } = useInputHandler(
+    validatePassword,
+    {
+      type: "UPDATE_PWD",
+      key: "pwd",
+      prevData: pwd,
+    }
+  );
 
   const handleInputChange = ({ target }) => {
     updateInputState(target);
   };
 
   useEffect(() => {
-    if (isCorrectPwd(pwd)) setErrorMessage('');
+    if (isCorrectPwd(pwd)) setErrorMessage("");
   }, [pwd]);
 
   return (
