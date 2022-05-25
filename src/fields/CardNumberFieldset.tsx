@@ -1,21 +1,18 @@
 import React from 'react';
-import { css } from '@emotion/react';
-import { FieldBody, FieldHead, FieldSet } from './Fieldset';
+
 import CardFormLabel from 'components/card/CardFormLabel';
 import CardNumberInputContainer from 'containers/card/CardNumberInputContainer';
 
-const headStyle = css({
-  marginBottom: '8px',
-});
+import { FieldBody, FieldHead, FieldSet } from './style';
 
 function CardNumberFieldset() {
   return (
     <>
       <FieldSet>
-        <FieldHead style={headStyle}>
+        <FieldHead style={{ marginBottom: '10px' }}>
           <CardFormLabel>카드 번호</CardFormLabel>
         </FieldHead>
-        <FieldBody>
+        <FieldBody style={{ marginBottom: '20px' }}>
           <CardNumberInputContainer />
         </FieldBody>
       </FieldSet>

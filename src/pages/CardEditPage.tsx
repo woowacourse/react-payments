@@ -6,11 +6,10 @@ import TypeButtonModal from 'containers/modal/TypeButtonModalContainer';
 import CardCompleteContainer from 'containers/card/CardCompleteContainer';
 import BackButtonContainer from 'containers/button/BackButtonContainer';
 import PageTitle from 'components/navigater/PageTitle';
-import { MarginWrapper } from 'components/margin';
 
 import { useAppState } from 'hooks/hooks';
 
-import { PageWrapper, TitleWrapper } from './stlye';
+import { MarginWrapper, PageWrapper, TitleWrapper } from './style';
 
 function CardEditPage() {
   const { completeCard, changeCardType } = useAppState();
@@ -24,7 +23,7 @@ function CardEditPage() {
         <>
           <TitleWrapper>
             <BackButtonContainer />
-            <MarginWrapper css={{ marginRight: '20px' }} />
+            <MarginWrapper />
             <PageTitle>카드수정</PageTitle>
           </TitleWrapper>
           <CardContainer />

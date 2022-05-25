@@ -1,15 +1,17 @@
 import React from 'react';
+
 import CardFormLabel from 'components/card/CardFormLabel';
 import CardPasswordInputContainer from 'containers/card/CardPasswordInputContainer';
-import { FieldBody, FieldHead, FieldSet } from './Fieldset';
+
+import { FieldBody, FieldHead, FieldSet } from './style';
 
 function CardPasswordFieldset() {
   return (
     <FieldSet>
-      <FieldHead>
+      <FieldHead style={{ marginBottom: '10px' }}>
         <CardFormLabel>카드 비밀번호</CardFormLabel>
       </FieldHead>
-      <FieldBody>
+      <FieldBody style={{ marginBottom: '20px' }}>
         <CardPasswordInputContainer />
       </FieldBody>
     </FieldSet>

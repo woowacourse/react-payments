@@ -9,8 +9,7 @@ import PageTitle from 'components/navigater/PageTitle';
 
 import { useAppState } from 'hooks/hooks';
 
-import { PageWrapper, TitleWrapper } from './stlye';
-import { MarginWrapper } from 'components/margin';
+import { MarginWrapper, PageWrapper, TitleWrapper } from './style';
 
 function AddCardPage() {
   const { completeCard, changeCardType } = useAppState();
@@ -28,7 +27,7 @@ function AddCardPage() {
       {changeCardType && <TypeButtonModal />}
       <TitleWrapper>
         <BackButtonContainer />
-        <MarginWrapper css={{ marginRight: '20px' }} />
+        <MarginWrapper />
         <PageTitle>카드추가</PageTitle>
       </TitleWrapper>
       <CardContainer />

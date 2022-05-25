@@ -1,21 +1,17 @@
 import React from 'react';
-import { css } from '@emotion/react';
-import { FieldBody, FieldHead, FieldSet } from './Fieldset';
+
 import CardFormLabel from 'components/card/CardFormLabel';
 import CVCInputContainer from 'containers/card/CVCInputContainer';
 
-const bodyStyle = css({
-  display: 'flex',
-  justifyContent: 'flex-start',
-});
+import { FieldBody, FieldHead, FieldSet } from './style';
 
 function CVCFieldset() {
   return (
     <FieldSet>
-      <FieldHead>
+      <FieldHead style={{ marginBottom: '10px' }}>
         <CardFormLabel>보안 코드(CVC/CVV)</CardFormLabel>
       </FieldHead>
-      <FieldBody stlye={bodyStyle}>
+      <FieldBody style={{ marginBottom: '20px' }}>
         <CVCInputContainer />
         <div className="helptip">
           <div className="helptip-content">
