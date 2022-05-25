@@ -22,11 +22,12 @@ const CardDiv = styled.div(({ cardColor }: { cardColor: string }) => ({
   width: '208px',
   height: '130px',
   padding: '14px',
-  marginBottom: '20px',
   background: cardColor,
   boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.25)',
   borderRadius: '5px',
   cursor: 'pointer',
+  margin: 'auto',
+  marginBottom: '50px',
 
   // type
   '& .type': {
@@ -82,28 +83,26 @@ function Card({
   handleCardClick,
 }: Props) {
   return (
-    <>
-      <CardDiv onClick={handleCardClick} className="card" cardColor={transformToColor(cardType)}>
-        <div className="type">{cardType}</div>
-        <div className="chip-container">
-          <div className="chip"></div>
-        </div>
-        <div className="number">
-          <div className="number-child">{firstInputCardNumber}</div>
-          <div className="number-child">{secondInputCardNumber}</div>
-          <div className="number-child">{transformNumToBullet(thirdInputCardNumber)}</div>
-          <div className="number-child">{transformNumToBullet(fourthInputCardNumber)}</div>
-        </div>
-        <div className="info">
-          <OwnerNameSpan name={name}>{name}</OwnerNameSpan>
-          <span className="expired-period">
-            {expiredPeriodYear
-              ? `${expiredPeriodMonth} / ${expiredPeriodYear}`
-              : `${expiredPeriodMonth}`}
-          </span>
-        </div>
-      </CardDiv>
-    </>
+    <CardDiv onClick={handleCardClick} className="card" cardColor={transformToColor(cardType)}>
+      <div className="type">{cardType}</div>
+      <div className="chip-container">
+        <div className="chip"></div>
+      </div>
+      <div className="number">
+        <div className="number-child">{firstInputCardNumber}</div>
+        <div className="number-child">{secondInputCardNumber}</div>
+        <div className="number-child">{transformNumToBullet(thirdInputCardNumber)}</div>
+        <div className="number-child">{transformNumToBullet(fourthInputCardNumber)}</div>
+      </div>
+      <div className="info">
+        <OwnerNameSpan name={name}>{name}</OwnerNameSpan>
+        <span className="expired-period">
+          {expiredPeriodYear
+            ? `${expiredPeriodMonth} / ${expiredPeriodYear}`
+            : `${expiredPeriodMonth}`}
+        </span>
+      </div>
+    </CardDiv>
   );
 }
 
