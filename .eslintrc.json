@@ -1,18 +1,24 @@
 {
+  "parser": "@typescript-eslint/parser",
   "env": {
     "browser": true,
     "es6": true,
     "node": true
   },
-  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "extends": ["airbnb", "plugin:prettier/recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
     "no-unused-vars": "warn",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/react-in-jsx-scope": "warn",
     "react/prop-types": "warn",
     "react/require-default-props": "warn",
     "no-param-reassign": "warn",
     "react/function-component-definition": "warn",
-    "react/jsx-props-no-spreading": "warn"
+    "react/jsx-props-no-spreading": "warn",
+    "no-undef": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "import/no-named-as-default": "off"
   }
 }

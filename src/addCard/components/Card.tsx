@@ -2,8 +2,27 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import AddCardContext from '../../AddCardContext';
 
-function Card({ completedCard, big }) {
-  const { card } = completedCard || useContext(AddCardContext);
+type CardType = {
+  expireMonth: string;
+  expireYear: string;
+  firstCardNumber: string;
+  firstPassword: string;
+  fourthCardNumber: string;
+  nickName: string;
+  ownerName: string;
+  secondCardNumber: string;
+  secondPassword: string;
+  securityCode: string;
+  thirdCardNumber: string;
+};
+
+interface CardProps {
+  completedCard: CardType;
+  big: boolean;
+}
+
+function Card({ completedCard, big }: CardProps): JSX.Element {
+  const { card }: CardType | any = completedCard || useContext(AddCardContext);
 
   const isEmptyCard = () => Object.values(card).every((value) => value === '');
 
