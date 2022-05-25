@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import PropTypes, { string } from "prop-types";
 
 import { CREATE_MASKED_CHARACTERS } from "utils/constants";
-import CardInfoContext from "context/CardInfoContext";
+import CardInfoContext, {
+  CardInfoStateTypeInterface,
+} from "context/CardInfoContext";
 
 const CARD_SIZE_BEFORE_SUBMIT = {
   width: "213px",
@@ -101,12 +102,19 @@ const CardHolderName = styled.p`
 
 const CardExpireDate = styled.p``;
 
+type Props = {
+  cardInfo: CardInfoStateTypeInterface;
+  isValidCardInfo: boolean;
+  isSubmitted: boolean;
+  color: 0 | 1 | 2 | 3 | 4 | "default" | "complete";
+};
+
 export default function CardPreview({
   cardInfo,
   isValidCardInfo,
   isSubmitted,
-  color,
-}) {
+  color = "default",
+}: Props) {
   const { state } = useContext(CardInfoContext);
   const { cardNumber, holderName, expireDate } = { ...cardInfo, ...state };
 
@@ -139,20 +147,3 @@ export default function CardPreview({
     </CardContainer>
   );
 }
-
-CardPreview.propTypes = {
-  cardInfo: PropTypes.shape({
-    cardInfo: PropTypes.shape({
-      cardNumber: PropTypes.arrayOf(string),
-      holderName: PropTypes.string,
-      expireDate: PropTypes.arrayOf(string),
-    }),
-  }),
-  isValidCardInfo: PropTypes.bool,
-  isSubmitted: PropTypes.bool,
-  color: PropTypes.oneOf([0, 1, 2, 3, 4, "default", "complete"]),
-};
-
-CardPreview.defaultProp = {
-  color: "default",
-};
