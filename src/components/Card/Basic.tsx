@@ -37,11 +37,11 @@ const getCardSize = (size: 'medium' | 'large') => {
         },
         title: {
           marginBottom: '35px',
-          size: '17px',
+          size: '15px',
         },
         magnet: {
           height: '36px',
-          marginBottom: '20px',
+          marginBottom: '16px',
           width: '55px',
         },
         numberSet: {
