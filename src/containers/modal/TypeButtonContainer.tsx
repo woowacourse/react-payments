@@ -6,7 +6,7 @@ import TypeButton from 'components/button/TypeButton';
 
 import { cardTypes } from '../../constants';
 import { createAction } from 'context/Provider';
-import { useAppDispatch } from 'hooks/hooks';
+import { useAppDispatch } from 'hooks';
 import { ActionType } from 'types';
 
 const ButtonContainerStyled = styled.div({

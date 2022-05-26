@@ -2,7 +2,7 @@ import React from 'react';
 
 import CardFormInput from 'components/card/CardFormInput';
 
-import { useAppDispatch, useAppState } from 'hooks/hooks';
+import { useAppDispatch, useAppState } from 'hooks';
 import { removeWhiteSpaces } from 'utils';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';

@@ -7,7 +7,7 @@ import CardCompleteContainer from 'containers/card/CardCompleteContainer';
 import BackButtonContainer from 'containers/button/BackButtonContainer';
 import PageTitle from 'components/navigater/PageTitle';
 
-import { useAppState } from 'hooks/hooks';
+import { useAppState } from 'hooks';
 
 import { MarginWrapper, PageWrapper, TitleWrapper } from './style';
 

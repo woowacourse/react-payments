@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 
 import CardFormInput from 'components/card/CardFormInput';
 
-import { useAppDispatch, useAppState } from 'hooks/hooks';
+import { useAppDispatch, useAppState } from 'hooks';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';
 

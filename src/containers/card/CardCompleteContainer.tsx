@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Card from 'components/card/Card';
-import { useAppDispatch, useAppState } from 'hooks/hooks';
+import { useAppDispatch, useAppState } from 'hooks';
 import ConfirmButtonContainer from 'containers/button/ConfirmButtonContainer';
 import CardFormInput from 'components/card/CardFormInput';
 import { css } from '@emotion/react';

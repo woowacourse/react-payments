@@ -10,3 +10,7 @@ export function useAppDispatch(): AppDispatch {
   const dispatch = useContext(AppDispatchContext);
   return dispatch;
 }
+
+export function useCard() {
+  return;
+}

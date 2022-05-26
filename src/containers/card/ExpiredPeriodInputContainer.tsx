@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import CardFormInput from 'components/card/CardFormInput';
 
-import { useAppDispatch, useAppState } from 'hooks/hooks';
+import { useAppDispatch, useAppState } from 'hooks';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';
 import { isNum, removeWhiteSpaces } from 'utils';

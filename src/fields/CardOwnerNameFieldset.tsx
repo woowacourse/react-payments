@@ -4,7 +4,7 @@ import CardFormLabel from 'components/card/CardFormLabel';
 
 import CardOwnerNameInputContainer from 'containers/card/CardOwnerNameInputContainer';
 
-import { useAppState } from 'hooks/hooks';
+import { useAppState } from 'hooks';
 
 import { MAX_NAME_LENGTH } from '../constants';
 

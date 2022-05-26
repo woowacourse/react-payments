@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useAppDispatch, useAppState } from 'hooks/hooks';
+import { useAppDispatch, useAppState } from 'hooks';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';
 import Button from 'components/button/Button';
