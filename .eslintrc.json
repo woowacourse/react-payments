@@ -5,6 +5,7 @@
     "es6": true,
     "node": true
   },
+  "plugins": ["@typescript-eslint"],
   "extends": ["airbnb", "plugin:prettier/recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
     "no-unused-vars": "warn",
@@ -19,6 +20,10 @@
     "import/no-unresolved": "off",
     "import/extensions": "off",
     "@typescript-eslint/no-empty-function": "off",
-    "import/no-named-as-default": "off"
+    "import/no-named-as-default": "off",
+    "react/prop-types": "off",
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "no-shadow": "warn"
   }
 }

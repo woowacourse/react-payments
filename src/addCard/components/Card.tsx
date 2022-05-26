@@ -1,32 +1,20 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import AddCardContext from '../../AddCardContext';
-
-type CardType = {
-  expireMonth: string;
-  expireYear: string;
-  firstCardNumber: string;
-  firstPassword: string;
-  fourthCardNumber: string;
-  nickName: string;
-  ownerName: string;
-  secondCardNumber: string;
-  secondPassword: string;
-  securityCode: string;
-  thirdCardNumber: string;
-};
+import { CardType, CardTypeWithNick, AddCardContextInterface } from '../../types/CardType';
 
 interface CardProps {
-  completedCard: CardType;
+  completedCard: CardTypeWithNick;
   big: boolean;
 }
 
 function Card({ completedCard, big }: CardProps): JSX.Element {
-  const { card }: CardType | any = completedCard || useContext(AddCardContext);
+  const card: CardType | CardTypeWithNick =
+    completedCard || useContext<AddCardContextInterface>(AddCardContext).card;
 
-  const isEmptyCard = () => Object.values(card).every((value) => value === '');
+  const isEmptyCard = (): boolean => Object.values(card).every((value) => value === '');
 
-  const getCardWrapperClassName = () => {
+  const getCardWrapperClassName = (): string => {
     if (big) return 'big-card';
     return isEmptyCard() ? 'empty-card' : 'small-card';
   };
