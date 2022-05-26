@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Styled from './index.styled';
 
-interface Props {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   scale: 'large' | 'medium' | 'small';
 }
 

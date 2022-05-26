@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import * as Styled from './index.styled';
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-}
+type Props = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ children, ...rest }: Props) => {
+const Button = ({ children, ...rest }: PropsWithChildren<Props>) => {
   return <Styled.Button {...rest}>{children}</Styled.Button>;
 };
 

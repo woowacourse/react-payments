@@ -1,13 +1,20 @@
+import React from 'react';
 import Input from '../index';
-import PropTypes from 'prop-types';
 import * as Styled from './index.styled';
+
+interface Props {
+  expiredMonth: string;
+  expiredYear: string;
+  onChangeExpiredMonth: () => void;
+  onChangeExpiredYear: () => void;
+}
 
 const ExpiredDateInput = ({
   expiredMonth,
   expiredYear,
   onChangeExpiredMonth,
   onChangeExpiredYear,
-}) => {
+}: Props) => {
   return (
     <Styled.Container>
       <Input
@@ -29,13 +36,6 @@ const ExpiredDateInput = ({
       />
     </Styled.Container>
   );
-};
-
-ExpiredDateInput.propTypes = {
-  expiredMonth: PropTypes.string,
-  expiredYear: PropTypes.string,
-  onChangeExpiredMonth: PropTypes.func,
-  onChangeExpiredYear: PropTypes.func,
 };
 
 export default ExpiredDateInput;
