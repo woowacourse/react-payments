@@ -6,7 +6,7 @@ import PageHeader from "containers/PageHeader";
 import useLocalStorage from "useLocalStorage";
 import { PAGE_NAME } from "utils/constants";
 import { CardInfoStateTypeInterface } from "context/CardInfoContext";
-import { Page } from "App";
+import { PageType } from "App";
 
 const CardList = styled.div`
   display: flex;
@@ -57,7 +57,7 @@ const initialCardInfoArray: CardInfoStateTypeInterface[] = [];
 export default function CardListPage({
   setPage,
 }: {
-  setPage: React.Dispatch<React.SetStateAction<Page>>;
+  setPage: React.Dispatch<React.SetStateAction<PageType>>;
 }) {
   const [formDataArray] = useLocalStorage("card-info", initialCardInfoArray);
 
