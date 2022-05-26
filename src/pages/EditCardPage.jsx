@@ -1,7 +1,10 @@
 import React, { useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
+
 import { API_SERVER, ERROR_MESSAGE, MESSAGES, PATH } from '../utils/constants';
+
 import BackwardButton from '../components/common/BackwardButton';
 import Button from '../components/common/Button';
 import CardPreview from '../components/common/CardPreview';
@@ -23,7 +26,7 @@ const StyledCompleteEditCardPage = styled.div`
   }
 
   .input-box::placeholder {
-    color: '#737373';
+    color: ${(props) => props.GRAY_500};
   }
 
   .button {

@@ -32,7 +32,7 @@ const StyledStoredCardList = styled.div`
     font-size: 30px;
     line-height: 35px;
     text-align: center;
-    color: '#575757';
+    color: ${(props) => props.theme.GRAY_600};
   }
 
   .card-box:hover {

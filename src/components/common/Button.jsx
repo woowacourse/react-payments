@@ -13,7 +13,7 @@ const StyledButton = styled.button`
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
-  color: ${(props) => props.color || '#04c09e'};
+  color: ${(props) => props.color || props.theme.MINT};
   background-color: ${(props) => props.backgroundColor || 'transparent'};
 
   &:active,

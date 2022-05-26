@@ -29,7 +29,7 @@ const StyledToolTip = styled.div`
     top: 50%;
     left: 50%;
     left: 32px;
-    background-color: white;
+    background-color: ${(props) => props.theme.WHITE};
     border-radius: 4px;
     box-shadow: 0px 0px 5.3px rgba(0, 0, 0, 0.028),
       0px 0px 17.9px rgba(0, 0, 0, 0.042), 0px 0px 80px rgba(0, 0, 0, 0.07);
