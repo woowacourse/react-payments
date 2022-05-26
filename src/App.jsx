@@ -18,18 +18,13 @@ const App = () => {
       <Router basename={process.env.PUBLIC_URL}>
         <StyledApp>
           <Routes>
-            <Route exact path={PATH.HOME} element={<StoredCardListPage />} />
-            <Route exact path={PATH.ADD_CARD_PAGE} element={<AddCardPage />} />
+            <Route path={PATH.HOME} element={<StoredCardListPage />} />
+            <Route path={PATH.ADD_CARD_PAGE} element={<AddCardPage />} />
             <Route
-              exact
               path={PATH.COMPLETE_ADD_PAGE}
               element={<CompleteAddCardPage />}
             />
-            <Route
-              exact
-              path={PATH.EDIT_CARD_PAGE}
-              element={<EditCardPage />}
-            />
+            <Route path={PATH.EDIT_CARD_PAGE} element={<EditCardPage />} />
             <Route path="*" element={<StoredCardListPage />} />
           </Routes>
         </StyledApp>
