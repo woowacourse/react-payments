@@ -1,7 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { textColor } from "components/UIComponents/styleConstants";
+
+type WidthType = "sm" | "default" | "full";
 
 const widthPreset = {
   sm: "40px",
@@ -11,21 +13,22 @@ const widthPreset = {
 
 export const StyledInput = styled.input<{
   isComplete?: boolean;
-  textAlign?;
-  width?;
+  textAlign?: Pick<React.CSSProperties, "textAlign">;
+  width?: WidthType;
 }>`
-  // 텍스트 선택 커서 색상 설정
-  caret-color: #000000;
+  ${({ isComplete = false, textAlign = "left", width = "default" }) => css`
+    // 텍스트 선택 커서 색상 설정
+    caret-color: #000000;
 
-  color: ${({ isComplete }) =>
-    isComplete ? textColor["complete"] : textColor["default"]};
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 21px;
-  text-align: ${({ textAlign }) => textAlign};
+    color: ${isComplete ? textColor["complete"] : textColor["default"]};
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 21px;
+    text-align: ${textAlign};
 
-  background-color: transparent;
-  width: ${({ width }) => widthPreset[width]};
+    background-color: transparent;
+    width: ${widthPreset[width]};
+  `}
 
   outline: none;
   border: none;
@@ -56,9 +59,9 @@ export const StyledInput = styled.input<{
 
 type CustomProps = {
   type: "text" | "number" | "password";
-  width: "sm" | "default" | "full";
+  width: WidthType;
   isComplete?: boolean;
-  textAlign;
+  textAlign: Pick<React.CSSProperties, "textAlign">;
 };
 
 type Props = CustomProps & React.InputHTMLAttributes<HTMLInputElement>;
