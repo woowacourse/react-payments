@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
+interface ErrorMessageProps {
+  children: React.ReactNode;
+}
+
 const ErrorMessageCotainer = styled.span`
   width: 100%;
   padding: 8px 8px 8px 0;
@@ -10,7 +14,7 @@ const ErrorMessageCotainer = styled.span`
   min-height: 25px;
 `;
 
-function ErrorMessage({ children }) {
+function ErrorMessage({ children }: ErrorMessageProps) {
   return <ErrorMessageCotainer>{children}</ErrorMessageCotainer>;
 }
 

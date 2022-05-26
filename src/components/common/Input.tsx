@@ -3,10 +3,19 @@ import styled from "styled-components";
 
 import { INPUT_PRIMARY_BG_COLOR, PLACEHOLDER_PRIMARY_COLOR } from "style";
 
+interface InputProps {
+  onChange?: () => void;
+  type: "text" | "number" | "password";
+  name?: string;
+  placeholder?: string;
+  readOnly?: boolean;
+  value?: string;
+}
+
 const InputBox = styled.input`
   background-color: ${INPUT_PRIMARY_BG_COLOR};
   height: 45px;
-  width: ${(props) => props.width || `50px`};
+  width: ${(props) => props.width || "50px"};
   text-align: center;
   outline-offset: 2px;
   border-radius: 0.25rem;
@@ -20,8 +29,10 @@ const InputBox = styled.input`
   }
 `;
 
-const Input = React.forwardRef(({ onChange, type, name, ...rest }, ref) => (
-  <InputBox ref={ref} onChange={onChange} type={type} name={name} {...rest} />
-));
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ onChange, type, name, ...rest }, ref) => (
+    <InputBox ref={ref} onChange={onChange} type={type} name={name} {...rest} />
+  )
+);
 
 export default Input;

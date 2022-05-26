@@ -1,6 +1,14 @@
-const isCorrectCardNumber = numbers => Object.values(numbers).join('').length === 16;
-const isCorrectPwd = password => Object.values(password).join('').length === 2;
-const isRequiredCompleted = ({ cardCompany, cardNumbers, cardDate, cardCode, pwd }) =>
+const isCorrectCardNumber = (numbers) =>
+  Object.values(numbers).join("").length === 16;
+const isCorrectPwd = (password) =>
+  Object.values(password).join("").length === 2;
+const isRequiredCompleted = ({
+  cardCompany,
+  cardNumbers,
+  cardDate,
+  cardCode,
+  pwd,
+}) =>
   cardCompany?.name &&
   cardCompany?.hexColor &&
   isCorrectCardNumber(cardNumbers) &&

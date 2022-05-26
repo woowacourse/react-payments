@@ -5,6 +5,11 @@ import { LABEL_PRIMARY_COLOR } from "style";
 
 import { Span } from "./styled";
 
+interface LetterCounterProps {
+  currentLength: number;
+  maxLength: number;
+}
+
 const Paragraph = styled.p`
   margin: 0;
   position: absolute;
@@ -16,7 +21,7 @@ const Paragraph = styled.p`
   color: ${LABEL_PRIMARY_COLOR};
 `;
 
-function LetterCounter({ currentLength, maxLength }) {
+function LetterCounter({ currentLength, maxLength }: LetterCounterProps) {
   return (
     <Paragraph>
       <Span padding="0">{currentLength || 0}</Span>

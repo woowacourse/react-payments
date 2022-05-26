@@ -12,7 +12,7 @@ interface InputWrapperProps {
 }
 
 interface SpanProps {
-  readonly padding: string;
+  readonly padding?: string;
 }
 
 const Form = styled.form`

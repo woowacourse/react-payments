@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
+interface FooterProps {
+  children: React.ReactNode;
+}
+
 const FooterContainer = styled.footer`
   display: flex;
   justify-content: flex-end;
@@ -8,7 +12,7 @@ const FooterContainer = styled.footer`
   width: 100%;
 `;
 
-function Footer({ children }) {
+function Footer({ children }: FooterProps) {
   return <FooterContainer>{children}</FooterContainer>;
 }
 

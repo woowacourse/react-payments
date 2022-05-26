@@ -11,13 +11,30 @@ import {
   SelectListWrapper,
 } from "./styled";
 
-function Calendar({ itemList, placeholder, setItem, dimensions, item }) {
+interface CalendarProps {
+  itemList: string[];
+  placeholder: string;
+  setItem: React.Dispatch<React.SetStateAction<string>>;
+  dimensions: {
+    width: number;
+    height: number;
+  };
+  item: string;
+}
+
+function Calendar({
+  itemList,
+  placeholder,
+  setItem,
+  dimensions,
+  item,
+}: CalendarProps) {
   const [isShown, setIsShown] = useState(false);
   const handleClickBox = () => {
-    setIsShown(!isShown);
+    setIsShown((prev) => !prev);
   };
 
-  const handleClickDate = (selectedItem) => {
+  const handleClickDate = (selectedItem: string) => {
     handleClickBox();
     setItem(selectedItem);
   };

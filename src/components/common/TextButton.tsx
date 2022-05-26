@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-const Button = styled.button`
+interface TextButtonProps {
+  children: React.ReactNode;
+  isVisible: boolean;
+  hexColor: string;
+}
+
+const Button = styled.button<Partial<TextButtonProps>>`
   visibility: ${(props) => (props.isVisible ? "viisble" : "hidden")};
   color: ${(props) => props.hexColor};
   font-size: 1rem;
@@ -18,8 +24,17 @@ const Button = styled.button`
   }
 `;
 
-function TextButton({ children: text, ...rest }) {
-  return <Button {...rest}>{text}</Button>;
+function TextButton({
+  children: text,
+  isVisible,
+  hexColor,
+  ...rest
+}: TextButtonProps) {
+  return (
+    <Button isVisible={isVisible} hexColor={hexColor} {...rest}>
+      {text}
+    </Button>
+  );
 }
 
 export default TextButton;

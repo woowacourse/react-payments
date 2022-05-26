@@ -1,5 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+
+interface HeaderProps {
+  children: React.ReactNode;
+  leadingButton: JSX.Element;
+}
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -14,11 +19,11 @@ const Title = styled.span`
   font-size: 1.5rem;
 `;
 
-function Header({ children: title, leadingButton }) {
+function Header({ children, leadingButton }: HeaderProps) {
   return (
     <HeaderContainer>
-      {leadingButton && leadingButton}
-      <Title>{title}</Title>
+      {leadingButton !== undefined && leadingButton}
+      <Title>{children}</Title>
     </HeaderContainer>
   );
 }

@@ -5,11 +5,15 @@ import { LABEL_PRIMARY_COLOR } from "style";
 
 import { QuestionContainer, TextArea } from "./styled";
 
-function QuestionIcon({ children: textContent }) {
-  const [isShown, setIsShown] = useState();
+interface QuestionIconProps {
+  children: React.ReactNode;
+}
+
+function QuestionIcon({ children: textContent }: QuestionIconProps) {
+  const [isShown, setIsShown] = useState(false);
 
   const handleClickBox = () => {
-    setIsShown(!isShown);
+    setIsShown((prev) => !prev);
   };
 
   return (

@@ -6,7 +6,7 @@ interface CardBoxProps {
 }
 
 interface CardParagraphProps {
-  width: number;
+  width: string;
 }
 
 const CardBox = styled.div<CardBoxProps>`
@@ -61,7 +61,7 @@ const CardParagraph = styled.p<CardParagraphProps>`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: ${(props) => props.width}px;
+  width: ${(props) => props.width};
 `;
 
 export {

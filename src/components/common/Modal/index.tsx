@@ -2,7 +2,17 @@ import React from "react";
 
 import { ModalContainer, ModalInner, ModalOverlay } from "./styled";
 
-function Modal({ isOpen, setIsOpen, dimensions: { width, height }, children }) {
+interface ModalProps {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  dimensions: {
+    width: number;
+    height: number;
+  };
+  children: React.ReactNode;
+}
+
+function Modal({ isOpen, setIsOpen, dimensions: { width, height }, children }: ModalProps) {
   return (
     <ModalContainer isOpen={isOpen}>
       <ModalOverlay
