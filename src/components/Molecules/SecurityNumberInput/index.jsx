@@ -58,7 +58,11 @@ function SecurityNumberInput({
         />
         <Tooltip message={MESSAGE.TOOLTIP_SECURITY_NUMBER} margin="0 0 0 11px" />
       </InputBody>
-      {isValid || !securityNumber ? '' : <InvalidMessage>{invalidMessage}</InvalidMessage>}
+      {isValid || !securityNumber ? (
+        ''
+      ) : (
+        <InvalidMessage className={CLASS.INVALID_INPUT_MESSAGE}>{invalidMessage}</InvalidMessage>
+      )}
     </Container>
   );
 }

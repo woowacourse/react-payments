@@ -76,7 +76,9 @@ function PasswordInput({ password, handleInputChange, isValid, invalidMessage, w
           />
         ))}
       </InputBody>
-      {isValid || isAllEmptyValue() || <InvalidMessage>{invalidMessage}</InvalidMessage>}
+      {isValid || isAllEmptyValue() || (
+        <InvalidMessage className={CLASS.INVALID_INPUT_MESSAGE}>{invalidMessage}</InvalidMessage>
+      )}
     </Container>
   );
 }
