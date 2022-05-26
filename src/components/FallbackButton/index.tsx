@@ -1,3 +1,4 @@
+import React from 'react';
 import * as Styled from './index.styled';
 import { useNavigate } from 'react-router-dom';
 
