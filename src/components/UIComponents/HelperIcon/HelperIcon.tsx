@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import styled from "styled-components";
 
 import HelpIconImage from "assets/images/questionMark.svg";
@@ -37,13 +37,16 @@ type Props = {
 };
 
 const HelperIcon = React.memo(({ description }: Props) => {
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+  const [isDescriptionOpen, toggleDescriptionOpen] = useReducer(
+    (isOpen) => !isOpen,
+    false
+  );
 
   return (
     <StyledIconContainer>
       <StyledIcon
         src={HelpIconImage}
-        onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
+        onClick={toggleDescriptionOpen}
         role={"button"}
       />
       <StyledDescription isOpen={isDescriptionOpen}>
