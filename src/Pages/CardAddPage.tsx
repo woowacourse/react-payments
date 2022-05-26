@@ -49,6 +49,8 @@ const SuccessMessage = styled.h1`
   margin: 80px auto;
 `;
 
+const initialCardInfoArray: CardInfoStateTypeInterface[] = [];
+
 export default function CardAddPage({ setPage }) {
   const [cardInfo, setCardInfo] = useState(initialCardInfoState);
 
@@ -56,7 +58,10 @@ export default function CardAddPage({ setPage }) {
   const [isSubmitted, setSubmitted] = useState(false);
   const [currentCardIndex, setCurrentCardIndex] = useState<number | null>(null);
 
-  const [formDataArray, saveFormData] = useLocalStorage("card-info");
+  const [formDataArray, saveFormData] = useLocalStorage(
+    "card-info",
+    initialCardInfoArray
+  );
 
   const isCompleteCardNumber =
     cardInfo.cardNumber.join("").length ===

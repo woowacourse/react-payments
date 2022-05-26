@@ -51,9 +51,10 @@ const CardShapeButton = styled.div`
 `;
 
 const DEFAULT_CARD_NAME = "Woowa Card";
+const initialCardInfoArray: CardInfoStateTypeInterface[] = [];
 
 export default function CardListPage({ setPage }) {
-  const [formDataArray] = useLocalStorage("card-info");
+  const [formDataArray] = useLocalStorage("card-info", initialCardInfoArray);
 
   const parseCardInfo = (card: CardInfoStateTypeInterface) => {
     const cardNumberArray: string[] = [
