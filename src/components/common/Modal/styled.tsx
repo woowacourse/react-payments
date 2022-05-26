@@ -1,7 +1,22 @@
 import styled from "styled-components";
 import { DIMMED_PRIMARY_BG_COLOR, PRIMARY_BG_COLOR } from "style";
 
-const ModalContainer = styled.div`
+interface ModalContainerProps {
+  isOpen: boolean;
+}
+
+interface ModalOverlayProps {
+  isOpen: boolean;
+  width: number;
+  height: number;
+}
+
+interface ModalInnerProps {
+  width: number;
+  height: number;
+}
+
+const ModalContainer = styled.div<ModalContainerProps>`
   display: ${(props) => (props.isOpen ? "flex" : "none")};
   width: 100%;
   height: 100%;
@@ -14,7 +29,7 @@ const ModalContainer = styled.div`
   justify-content: center;
 `;
 
-const ModalOverlay = styled.div`
+const ModalOverlay = styled.div<ModalOverlayProps>`
   display: ${(props) => (props.isOpen ? "block" : "none")};
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
@@ -28,7 +43,7 @@ const ModalOverlay = styled.div`
   z-index: 999;
 `;
 
-const ModalInner = styled.div`
+const ModalInner = styled.div<ModalInnerProps>`
   display: flex;
   justify-content: center;
   box-sizing: border-box;

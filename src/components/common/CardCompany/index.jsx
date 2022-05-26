@@ -1,6 +1,6 @@
 import React from "react";
 
-import { CompanyColorCircle, CompanyContainer, CompanyName } from "./style";
+import { CompanyColorCircle, CompanyContainer, CompanyName } from "./styled";
 
 function CardCompany({ hexColor, name, handleClick }) {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ModalContainer, ModalInner, ModalOverlay } from "./style";
+import { ModalContainer, ModalInner, ModalOverlay } from "./styled";
 
 function Modal({ isOpen, setIsOpen, dimensions: { width, height }, children }) {
   return (

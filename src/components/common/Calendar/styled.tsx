@@ -1,9 +1,13 @@
 import styled from "styled-components";
 import { ITEM_HOVER_PRIMARY_BG_COLOR, LABEL_PRIMARY_COLOR } from "style";
 
+interface SelectLayerProps {
+  isShown: boolean;
+}
+
 const CalendarContainer = styled.div``;
 
-const SelectLayer = styled.div`
+const SelectLayer = styled.div<SelectLayerProps>`
   display: ${(props) => (props.isShown ? "block" : "none")};
   width: 100%;
   margin: 16px;

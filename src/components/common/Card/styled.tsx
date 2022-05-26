@@ -1,6 +1,15 @@
 import styled, { css } from "styled-components";
 
-const CardBox = styled.div`
+interface CardBoxProps {
+  hexColor: string;
+  large: boolean;
+}
+
+interface CardParagraphProps {
+  width: number;
+}
+
+const CardBox = styled.div<CardBoxProps>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -25,7 +34,9 @@ const CardBox = styled.div`
       height: 180px;
     `}
 `;
+
 const CardHeader = styled.div``;
+
 const CardChip = styled.div`
   width: 45px;
   height: 25px;
@@ -33,16 +44,20 @@ const CardChip = styled.div`
   border-radius: 10%;
   background-color: #cbba64;
 `;
+
 const CardBottom = styled.div`
   width: 100%;
 `;
+
 const CardNumber = styled.div``;
+
 const CardInfo = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
 `;
-const CardParagraph = styled.p`
+
+const CardParagraph = styled.p<CardParagraphProps>`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -9,7 +9,7 @@ import {
   List,
   SelectLayer,
   SelectListWrapper,
-} from "./style";
+} from "./styled";
 
 function Calendar({ itemList, placeholder, setItem, dimensions, item }) {
   const [isShown, setIsShown] = useState(false);

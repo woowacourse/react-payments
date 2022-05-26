@@ -3,7 +3,7 @@ import { BsQuestionCircle } from "react-icons/bs";
 
 import { LABEL_PRIMARY_COLOR } from "style";
 
-import { QuestionContainer, TextArea } from "./style";
+import { QuestionContainer, TextArea } from "./styled";
 
 function QuestionIcon({ children: textContent }) {
   const [isShown, setIsShown] = useState();

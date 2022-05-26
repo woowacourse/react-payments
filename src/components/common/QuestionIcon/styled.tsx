@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import { BUBBLE_PRIMARY_BG_COLOR, BUBBLE_PRIMARY_COLOR } from "style";
 
+interface TextAreaProps {
+  isShown: boolean;
+}
+
 const QuestionContainer = styled.div`
   position: relative;
 `;
 
-const TextArea = styled.p`
+const TextArea = styled.p<TextAreaProps>`
   display: ${(props) => (props.isShown ? "block" : "none")};
   position: absolute;
   min-width: 200px;

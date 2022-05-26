@@ -9,7 +9,7 @@ import {
   CardInfo,
   CardNumber,
   CardParagraph,
-} from "./style";
+} from "./styled";
 
 const convertToCardNumberString = ({ cardNoA, cardNoB, cardNoC, cardNoD }) =>
   `${cardNoA} ${cardNoB} ${"*".repeat(cardNoC.length)} ${"*".repeat(

@@ -1,6 +1,20 @@
 import styled from "styled-components";
 import { INPUT_PRIMARY_BG_COLOR, LABEL_PRIMARY_COLOR } from "style";
 
+interface InputContainerProps {
+  readonly position: string;
+  readonly width: string;
+}
+
+interface InputWrapperProps {
+  readonly color: string;
+  readonly width: string;
+}
+
+interface SpanProps {
+  readonly padding: string;
+}
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -8,13 +22,13 @@ const Form = styled.form`
   align-items: flex-start;
 `;
 
-const InputContainer = styled.div`
+const InputContainer = styled.div<InputContainerProps>`
   position: ${(props) => props.position || "static"};
   width: ${(props) => props.width || "100%"};
   margin: 16px 0;
 `;
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<InputWrapperProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,7 +50,7 @@ const Label = styled.label`
   color: ${LABEL_PRIMARY_COLOR};
 `;
 
-const Span = styled.span`
+const Span = styled.span<SpanProps>`
   padding: ${(props) => props.padding || "0"};
 `;
 
