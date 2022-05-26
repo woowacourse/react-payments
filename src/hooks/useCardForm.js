@@ -63,7 +63,7 @@ const useCardForm = ({ cardFormSchema }, path = null) => {
     navigate(path);
   };
 
-  const onSubmitAction = async () => {
+  const onSubmitAction = () => {
     navigateOnSubmit();
   };
 
