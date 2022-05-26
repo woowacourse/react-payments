@@ -1,8 +1,14 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import * as Styled from './index.styled';
 
-const Modal = ({ children, isModalOpened, closeModal }) => {
+interface Props {
+  children: React.ReactNode;
+  isModalOpened: boolean;
+  closeModal: () => void;
+}
+
+const Modal = ({ children, isModalOpened, closeModal }: Props) => {
   const root = document.getElementById('modal-root');
 
   return isModalOpened && root
@@ -14,12 +20,6 @@ const Modal = ({ children, isModalOpened, closeModal }) => {
         root,
       )
     : null;
-};
-
-Modal.propTypes = {
-  children: PropTypes.element,
-  isModalOpened: PropTypes.bool,
-  closeModal: PropTypes.func,
 };
 
 export default Modal;
