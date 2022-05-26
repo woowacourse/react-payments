@@ -1,5 +1,7 @@
 import { Action, State } from 'types';
 
+import { cardActionTypes } from 'actions';
+
 const initialState: State = {
   card: {
     cardColor: '#D2D2D2',
@@ -16,12 +18,12 @@ const initialState: State = {
 
 const reducer = (state = initialState, action: Action) => {
   switch (action.type) {
-    case 'SAVE_CARD_INFO':
+    case cardActionTypes.SAVE_CARD_INFO:
       return {
         ...state,
         card: action.payload,
       };
-    case 'ADD_CARD_TO_LIST':
+    case cardActionTypes.ADD_CARD_TO_LIST:
       return {
         card: {},
         cardList: state.cardList.concat({

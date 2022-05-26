@@ -4,7 +4,7 @@ import { memo, useContext } from 'react';
 
 import { CardContext } from 'contexts';
 import { CardType } from 'types';
-import actions from 'actions';
+import { actions } from 'actions';
 import styled from 'styled-components';
 import { useInput } from 'hooks';
 import { useNavigate } from 'react-router-dom';

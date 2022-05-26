@@ -24,7 +24,7 @@ import CardInputs from './CardInputs';
 import { CardType } from 'types';
 import CompanyModal from './CompanyModal';
 import { NOW } from 'constants/index';
-import actions from 'actions';
+import { actions } from 'actions';
 import isValidCardInputs from 'utils/validator';
 import { useNavigate } from 'react-router-dom';
 
