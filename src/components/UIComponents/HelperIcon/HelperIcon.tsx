@@ -13,7 +13,7 @@ const StyledIcon = styled.img`
   }
 `;
 
-const StyledDescription = styled.p`
+const StyledDescription = styled.p<{ isOpen: boolean }>`
   ${({ isOpen }) => !isOpen && `display: none;`}
   position: absolute;
   top: 5px;

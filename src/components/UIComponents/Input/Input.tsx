@@ -9,7 +9,11 @@ const widthPreset = {
   full: "100%",
 };
 
-export const StyledInput = styled.input`
+export const StyledInput = styled.input<{
+  isComplete?: boolean;
+  textAlign?;
+  width?;
+}>`
   // 텍스트 선택 커서 색상 설정
   caret-color: #000000;
 
@@ -54,12 +58,13 @@ type CustomProps = {
   type: "text" | "number" | "password";
   width: "sm" | "default" | "full";
   isComplete?: boolean;
+  textAlign;
 };
 
 type Props = CustomProps & React.InputHTMLAttributes<HTMLInputElement>;
 
 export default function Input(props: Props) {
-  return <StyledInput {...(props as Object)} />;
+  return <StyledInput {...(props as Props)} />;
 }
 
 Input.defaultProps = {

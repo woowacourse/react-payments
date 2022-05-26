@@ -19,7 +19,7 @@ const StyledInputField = styled.div`
   position: relative;
 `;
 
-const StyledLabel = styled.label`
+const StyledLabel = styled.label<{ state: "default" | "error" | "complete" }>`
   font-size: 12px;
   line-height: 14px;
   color: ${({ state }) => textColor[state]};
@@ -29,7 +29,12 @@ const StyledLabel = styled.label`
   gap: 10px;
 `;
 
-const StyledInputWrapper = styled.div`
+const StyledInputWrapper = styled.div<
+  Pick<Props, "isSplit" | "shape" | "isInvalid"> & {
+    width: string;
+    align: string;
+  }
+>`
   display: flex;
   justify-content: ${({ align }) => align};
   border-bottom: ${({ shape }) => shape === "underline" && "1px solid #000000"};

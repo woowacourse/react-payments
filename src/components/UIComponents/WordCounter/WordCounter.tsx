@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { textColor } from "components/UIComponents/styleConstants";
 
-const StyledWordCounter = styled.p`
+const StyledWordCounter = styled.p<{ state: "default" | "error" | "complete" }>`
   position: absolute;
   top: 0;
   right: 0;
@@ -15,8 +15,8 @@ const StyledWordCounter = styled.p`
 `;
 type Props = {
   currLength: number;
-  maxLength: string;
-  state: string;
+  maxLength: number;
+  state: "default" | "error" | "complete";
 };
 
 const WordCounter = React.memo(

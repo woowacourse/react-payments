@@ -50,16 +50,20 @@ export default function Form({
     focusTarget.focus();
   };
 
-  const handlePrevFocus = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const target = e.target as HTMLInputElement;
+  const handlePrevFocus: React.KeyboardEventHandler<HTMLFormElement> = (
+    event: React.KeyboardEvent<HTMLFormElement>
+  ) => {
+    const target = event.target as HTMLInputElement;
     const { value } = target;
 
-    if (e.key !== "Backspace" || value !== "") return;
+    if (event.key !== "Backspace" || value !== "") return;
 
     focusFormInput(target, -1);
   };
 
-  const handleNextFocus = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNextFocus: React.FormEventHandler<HTMLFormElement> = (
+    e: React.ChangeEvent<HTMLFormElement>
+  ) => {
     const { maxLength, value } = e.target;
 
     if (value.length !== maxLength) return;
@@ -67,9 +71,9 @@ export default function Form({
     focusFormInput(e.target as Node, 1);
   };
 
-  const handleFormValidation = ({
+  const handleFormValidation: React.FormEventHandler<HTMLFormElement> = ({
     target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
+  }: React.ChangeEvent<HTMLFormElement>) => {
     if (target.validity.patternMismatch) {
       const message = cardInfoValidationError[target.name];
       target.setCustomValidity(message);
@@ -80,7 +84,9 @@ export default function Form({
     target.reportValidity();
   };
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFormChange: React.FormEventHandler<HTMLFormElement> = (
+    e: React.ChangeEvent<HTMLFormElement>
+  ) => {
     handleNextFocus(e);
     handleFormValidation(e);
   };
