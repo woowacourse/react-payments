@@ -5,6 +5,7 @@ module.exports = {
     node: true,
   },
   extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:storybook/recommended'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -12,7 +13,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react'],
+  plugins: ['react', 'prettier', '@typescript-eslint'],
   rules: {
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 'off',
