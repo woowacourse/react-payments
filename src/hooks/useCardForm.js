@@ -68,7 +68,7 @@ const useCardForm = ({ cardFormSchema }, path = null) => {
   };
 
   const focusErrorInput = (invalidInputRefs) => {
-    const firstInvalidInput = invalidInputRefs[0].element;
+    const [{ element: firstInvalidInput }] = invalidInputRefs;
     const { errorMessage } = errors[firstInvalidInput.name];
 
     firstInvalidInput.focus();
