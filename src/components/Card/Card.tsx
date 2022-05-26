@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 import CardBox from 'common/CardBox/CardBox';
+import { CardColor } from 'types/cardInfo';
+
+interface CardProps {
+  cardNumber: number;
+  cardOwner: string;
+  cardExpiration: string[];
+  cardName: string;
+  cardColor: CardColor;
+  isSmall: boolean;
+}
 
 export default function Card({
   cardNumber,
@@ -8,7 +18,7 @@ export default function Card({
   cardName,
   cardColor,
   isSmall,
-}) {
+}: CardProps) {
   const cardExpirationContent = () =>
     cardExpiration[0] || cardExpiration[1] ? cardExpiration.join('/') : 'MM/YY';
 
@@ -30,7 +40,7 @@ export default function Card({
           <Styled.CardText isSmall={isSmall}>{'•'.repeat(cardNumber[3].length)}</Styled.CardText>
         </Styled.CardBottomNumber>
         <Styled.CardBottomInfo>
-          <Styled.CardTextEllipsis>{cardOwner || 'NAME'}</Styled.CardTextEllipsis>
+          <Styled.CardTextEllipsis isSmall={isSmall}>{cardOwner || 'NAME'}</Styled.CardTextEllipsis>
           <Styled.CardText isSmall={isSmall}>{cardExpirationContent()}</Styled.CardText>
         </Styled.CardBottomInfo>
       </Styled.CardBottom>
@@ -65,7 +75,7 @@ const Styled = {
     flex-direction: column;
   `,
 
-  CardText: styled.span`
+  CardText: styled.span<{ isSmall: boolean }>`
     line-height: 16px;
     vertical-align: middle;
     font-weight: 400;
@@ -78,7 +88,7 @@ const Styled = {
     `}
   `,
 
-  SmallCardChip: styled.div`
+  SmallCardChip: styled.div<{ isSmall: boolean }>`
     ${({ isSmall }) => `
       width: ${isSmall ? '40px' : '60px'}; 
       height: ${isSmall ? '26px' : '40px'}; 
@@ -88,7 +98,7 @@ const Styled = {
     `}
   `,
 
-  CardBottomNumber: styled.div`
+  CardBottomNumber: styled.div<{ isSmall: boolean }>`
     ${({ isSmall }) => `
     margin-bottom: ${isSmall ? '10px' : '14px'};
   `}
@@ -100,7 +110,7 @@ const Styled = {
     justify-content: space-between;
   `,
 
-  CardTextEllipsis: styled.span`
+  CardTextEllipsis: styled.span<{ isSmall: boolean }>`
     ${({ isSmall }) => `
       line-height: 16px;
       vertical-align: middle;
