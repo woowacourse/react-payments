@@ -5,8 +5,10 @@ import CardAddPage from "Pages/CardAddPage";
 import CardListPage from "Pages/CardListPage";
 import { PAGE_NAME } from "utils/constants";
 
+export type Page = "CardList" | "CardAdd";
+
 function App() {
-  const [page, setPage] = useState(PAGE_NAME.CARD_LIST);
+  const [page, setPage] = useState<Page>(PAGE_NAME.CARD_LIST);
 
   const router = {
     CardList: <CardListPage setPage={setPage} />,

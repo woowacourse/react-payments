@@ -25,4 +25,4 @@ export const CARD_INFO_RULES = {
 export const PAGE_NAME = {
   CARD_LIST: "CardList",
   CARD_ADD: "CardAdd",
-};
+} as const;

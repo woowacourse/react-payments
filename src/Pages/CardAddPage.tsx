@@ -20,6 +20,7 @@ import {
   NICKNAME_REGISTER_FAIL_MESSAGE,
   PAGE_NAME,
 } from "../utils/constants";
+import { Page } from "App";
 
 const {
   NUMBER_UNIT_COUNT,
@@ -51,7 +52,11 @@ const SuccessMessage = styled.h1`
 
 const initialCardInfoArray: CardInfoStateTypeInterface[] = [];
 
-export default function CardAddPage({ setPage }) {
+export default function CardAddPage({
+  setPage,
+}: {
+  setPage: React.Dispatch<React.SetStateAction<Page>>;
+}) {
   const [cardInfo, setCardInfo] = useState(initialCardInfoState);
 
   const [isValidCardInfo, setValidCardInfo] = useState(false);
