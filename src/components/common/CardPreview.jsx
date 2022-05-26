@@ -114,7 +114,7 @@ const CardPreview = ({ values, size = 'small' }) => {
     <StyledCardPreview className="card-box" size={size}>
       <div className="small-card">
         <div className="card-top">
-          <span className="card-text">{brand ?? null}</span>
+          <span className="card-text">{brand && brand}</span>
         </div>
         <div className="card-middle">
           <div className="small-card__chip" />
