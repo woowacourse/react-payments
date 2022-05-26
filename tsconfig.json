@@ -12,8 +12,9 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "allowSyntheticDefaultImports": true,
-    "keyofStringsOnly": true
+    "declaration": true, //컴파일시 .d.ts 파일도 자동으로 함께생성 (현재쓰는 모든 타입이 정의된 파일)
+    "removeComments": true, //컴파일시 주석제거
+    "esModuleInterop": true
   },
   "include": ["src"],
   "exclude": ["./node_modules/**/*"]
