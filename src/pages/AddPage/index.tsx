@@ -1,7 +1,6 @@
 import { AppContainer, Button } from 'components';
 import { CardContext, CardInfoContext } from 'contexts';
 import { Header, NextButton, StyledCard, Title } from './styled';
-import { makeCardOwnerName, makeValidDate } from 'utils/processCard';
 import {
   memo,
   useCallback,
@@ -26,6 +25,7 @@ import CompanyModal from './CompanyModal';
 import { NOW } from 'constants/index';
 import { actions } from 'actions';
 import isValidCardInputs from 'utils/validator';
+import { makeValidDate } from 'utils/processCard';
 import { useNavigate } from 'react-router-dom';
 
 function AddPage() {
@@ -159,7 +159,7 @@ function AddPage() {
           bgColor={cardCompany.color}
           company={cardCompany.name}
           size="medium"
-          name={makeCardOwnerName(cardOwnerName)}
+          name={cardOwnerName}
           number={cardNumber}
           validDate={makeValidDate(validDate)}
           onClickFunc={toggleCardCompanyModal}

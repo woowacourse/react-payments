@@ -1,10 +1,10 @@
 import { Button, Card, UnderlinedInput } from 'components';
-import { makeCardOwnerName, makeValidDate } from 'utils/processCard';
 import { memo, useContext } from 'react';
 
 import { CardContext } from 'contexts';
 import { CardType } from 'types';
 import { actions } from 'actions';
+import { makeValidDate } from 'utils/processCard';
 import styled from 'styled-components';
 import { useInput } from 'hooks';
 import { useNavigate } from 'react-router-dom';
@@ -43,7 +43,7 @@ function Success({
         bgColor={cardColor}
         company={cardCompany}
         size="large"
-        name={makeCardOwnerName(cardOwnerName)}
+        name={cardOwnerName}
         number={cardNumber}
         validDate={makeValidDate(validDate)}
       />

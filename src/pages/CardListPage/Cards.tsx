@@ -1,7 +1,6 @@
-import { makeCardOwnerName, makeValidDate } from 'utils/processCard';
-
 import { DisplayCard } from 'components/Card';
 import { State } from 'types';
+import { makeValidDate } from 'utils/processCard';
 import { memo } from 'react';
 import styled from 'styled-components';
 
@@ -35,7 +34,7 @@ function Cards({ cardList }: Props) {
             bgColor={cardColor}
             cardName={cardName}
             company={cardCompany}
-            ownerName={makeCardOwnerName(cardOwnerName)}
+            ownerName={cardOwnerName}
             number={cardNumber}
             size="medium"
             validDate={makeValidDate(validDate)}

@@ -13,7 +13,4 @@ const makeValidDate = (date: CardType['validDate']) => {
   return `${month}/${year.slice(-2)}`;
 };
 
-const makeCardOwnerName = (name: CardType['cardOwnerName']) =>
-  name.length > 10 ? `${name.slice(0, 10)}...` : name;
-
-export { encryptCardNumber, makeValidDate, makeCardOwnerName };
+export { encryptCardNumber, makeValidDate };

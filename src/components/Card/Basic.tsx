@@ -129,14 +129,12 @@ const OwnerName = styled.span`
   color: #525252;
   display: inline-block;
   font-weight: bold;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  width: 130px;
-  word-break: break-all;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-all;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  width: 50%;
 
   ${({
     cardStyle: { size, height },
