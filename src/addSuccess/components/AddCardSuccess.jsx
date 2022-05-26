@@ -36,7 +36,7 @@ function AddCardSuccess({ card, addCard }) {
             minLength={MIN_LENGTH.CARDNICK}
             value={cardNick}
             required
-            validators={[validator(checkMaxLength, cardNick, MAX_LENGTH.CARDNICK)]}
+            validators={[validator(checkMaxLength, MAX_LENGTH.CARDNICK)]}
             onChange={updateCardNick}
           />
         </div>

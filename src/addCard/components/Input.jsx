@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function Input({
@@ -12,26 +11,28 @@ function Input({
   required,
   validators,
   onChange,
+  onBlur,
 }) {
-  const handleChange = (event) => {
-    onChange(event.target.value, name);
-  };
-
-  const checkValidation = () => {
+  const checkValidation = (targetValue) => {
     validators.forEach((validator) => {
-      validator.validate();
+      validator.validate(targetValue);
     });
   };
 
-  useEffect(() => {
-    if (value === '') return;
+  const handleChange = (event) => {
     try {
-      checkValidation();
+      checkValidation(event.target.value);
+      onChange(event.target.value, name);
     } catch (error) {
-      onChange(value.substr(0, value.length - 1), name);
       alert(error.message);
     }
-  }, [value]);
+  };
+
+  const handleBlur = () => {
+    if (onBlur) {
+      onBlur(name);
+    }
+  };
 
   return (
     <input
@@ -44,6 +45,7 @@ function Input({
       minLength={minLength || length}
       required={required}
       onChange={handleChange}
+      onBlur={handleBlur}
     />
   );
 }
@@ -59,6 +61,7 @@ Input.propTypes = {
   required: PropTypes.bool,
   validators: PropTypes.arrayOf(PropTypes.shape({ validate: PropTypes.func })).isRequired,
   onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
 };
 
 Input.defaultProps = {
@@ -68,6 +71,7 @@ Input.defaultProps = {
   minLength: 0,
   name: '',
   required: true,
+  onBlur: null,
 };
 
 export default Input;

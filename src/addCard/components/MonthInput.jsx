@@ -17,10 +17,9 @@ function MonthInput({ value, name, expireYear }) {
       value={value}
       name={name}
       validators={[
-        validator(checkMaxLength, value, MAX_LENGTH.DATE),
-        validator(checkIsNaN, value),
-        validator(checkRange, RANGE.MONTH_MIN, RANGE.MONTH_MAX, value),
-        validator(checkValidDate, value, expireYear),
+        validator(checkMaxLength, MAX_LENGTH.DATE),
+        validator(checkIsNaN),
+        validator(checkRange, RANGE.MONTH_MIN, RANGE.MONTH_MAX),
       ]}
       onChange={updateCard}
     />

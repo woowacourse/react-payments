@@ -16,16 +16,12 @@ Deactivated.args = {};
 export const Activated = Template.bind({});
 
 Activated.args = {
-  completedCard: {
-    card: CardConstructor('1324', '1234', '1234', '1234', '3', '23', 'dom', '123', '1', '2'),
-  },
+  completedCard: CardConstructor('1324', '1234', '1234', '1234', '3', '23', 'dom', '123', '1', '2'),
 };
 
 export const BigActivated = Template.bind({});
 
 BigActivated.args = {
-  completedCard: {
-    card: CardConstructor('1324', '1234', '1234', '1234', '3', '23', 'dom', '123', '1', '2'),
-  },
+  completedCard: CardConstructor('1324', '1234', '1234', '1234', '3', '23', 'dom', '123', '1', '2'),
   big: true,
 };
