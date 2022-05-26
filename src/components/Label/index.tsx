@@ -1,6 +1,4 @@
-import React from 'react';
-import { memo } from 'react';
-import PropTypes from 'prop-types';
+import React, { memo } from 'react';
 import * as Styled from './index.styled';
 
 interface Props extends React.LabelHTMLAttributes<HTMLLabelElement> {
@@ -9,11 +7,6 @@ interface Props extends React.LabelHTMLAttributes<HTMLLabelElement> {
 
 const Label = ({ id, description }: Props) => {
   return <Styled.Container htmlFor={id}>{description}</Styled.Container>;
-};
-
-Label.propTypes = {
-  id: PropTypes.string,
-  description: PropTypes.string,
 };
 
 export default memo(Label);
