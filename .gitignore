@@ -25,3 +25,6 @@ storybook-static/
 
 # json-server
 db.json
+
+# env 
+.env

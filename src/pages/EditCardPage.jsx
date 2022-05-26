@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import { API_SERVER, ERROR_MESSAGE, MESSAGES, PATH } from '../utils/constants';
+import { ERROR_MESSAGE, MESSAGES, PATH } from '../utils/constants';
 
 import BackwardButton from '../components/common/BackwardButton';
 import Button from '../components/common/Button';
@@ -63,8 +63,7 @@ const EditCardPage = () => {
 
   const editCard = async () => {
     await fetchEditCard({
-      API_URL: `${API_SERVER}/cards/${id}`,
-
+      API_URL: `${process.env.REACT_APP_CARD_API}/cards/${id}`,
       body: {
         cardName: inputRef.current.value.trim()?.toUpperCase() || cardName,
       },
@@ -81,7 +80,7 @@ const EditCardPage = () => {
     }
 
     await fetchDeleteCard({
-      API_URL: `${API_SERVER}/cards/${id}`,
+      API_URL: `${process.env.REACT_APP_CARD_API}/cards/${id}`,
     });
 
     if (errorWithDeleting) {

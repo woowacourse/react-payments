@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { API_SERVER, ERROR_MESSAGE, PATH } from '../utils/constants';
+import { ERROR_MESSAGE, PATH } from '../utils/constants';
 import BackwardButton from '../components/common/BackwardButton';
 import Button from '../components/common/Button';
 import CardPreview from '../components/common/CardPreview';
@@ -55,11 +55,14 @@ const StoredCardListPage = () => {
   } = useFetch('get');
 
   useEffect(() => {
-    fetchGetCardList({ API_URL: `${API_SERVER}/cards` });
+    fetchGetCardList({ API_URL: `${process.env.REACT_APP_CARD_API}/cards` });
+  }, []);
+
+  useEffect(() => {
     if (errorWithGetting) {
       alert(ERROR_MESSAGE.FAILED_GET);
     }
-  }, []);
+  }, [errorWithGetting]);
 
   return (
     <>

@@ -11,12 +11,7 @@ import TextBox from '../components/common/TextBox';
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
 
-import {
-  API_SERVER,
-  DEFAULT_CARD_NAME,
-  ERROR_MESSAGE,
-  PATH,
-} from '../utils/constants';
+import { DEFAULT_CARD_NAME, ERROR_MESSAGE, PATH } from '../utils/constants';
 
 import useFetch from '../hooks/useFetch';
 
@@ -70,7 +65,7 @@ const CompleteAddCardPage = () => {
     };
 
     await fetchPostCard({
-      API_URL: `${API_SERVER}/cards`,
+      API_URL: `${process.env.REACT_APP_CARD_API}/cards`,
       body: cardInfo,
     });
 

@@ -17,8 +17,8 @@ export default function useFetch(method = 'get') {
         const response = await axios[method](API_URL, body);
         setData(response.data);
       } catch (err) {
-        setPending(false);
         setError(err.message);
+        setPending(false);
       }
     },
     [method]

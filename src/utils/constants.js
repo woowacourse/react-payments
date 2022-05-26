@@ -1,5 +1,3 @@
-export const API_SERVER = 'https://nine-paymets-server.herokuapp.com';
-
 export const DEFAULT_CARD_NAME = '기본 카드';
 
 export const PATH = {
