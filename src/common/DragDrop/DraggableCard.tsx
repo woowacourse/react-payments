@@ -1,7 +1,13 @@
+import { PropsWithChildren } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 
-export default function DraggableCard({ children, card, index }) {
+interface Props {
+  card: { id: string };
+  index: number;
+}
+
+export default function DraggableCard({ children, card, index }: PropsWithChildren<Props>) {
   return (
     <Draggable key={card.id} draggableId={card.id} index={index}>
       {(provided) => (
