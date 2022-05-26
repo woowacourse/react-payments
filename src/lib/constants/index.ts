@@ -7,4 +7,4 @@ export const CARD_COMPANIES = [
   { NAME: '도비 카드', COLOR: '#E76E9A' },
   { NAME: '콜린 카드', COLOR: '#F37D3B' },
   { NAME: '썬 카드', COLOR: '#FBCD58' },
-];
+] as const;

@@ -1,17 +1,17 @@
 import { Dispatch, PropsWithChildren } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { TYPES } from 'types/cardInfo';
+import { TYPES } from 'store/card/types';
 
 interface Action {
-  type: TYPES['SET_CARD_ORDER'];
+  type: typeof TYPES['SET_CARD_ORDER'];
   cards: object[];
 }
 
 interface Props {
   cards: object[];
   dispatch: Dispatch<Action>;
-  type: TYPES['SET_CARD_ORDER'];
+  type: typeof TYPES['SET_CARD_ORDER'];
 }
 
 export default function DroppableArea({
