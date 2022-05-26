@@ -8,7 +8,6 @@ import SecurityCodeInput from './SecurityCodeInput';
 import MonthInput from './MonthInput';
 import YearInput from './YearInput';
 import AddCardContext from '../../AddCardContext';
-import { checkValidDate } from '../../validator';
 
 function AddCardForm() {
   const { card } = useContext(AddCardContext);
