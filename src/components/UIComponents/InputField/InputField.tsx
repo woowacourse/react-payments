@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { textColor } from "components/UIComponents/styleConstants";
 
@@ -35,21 +35,23 @@ const StyledInputWrapper = styled.div<
     align: string;
   }
 >`
-  display: flex;
-  justify-content: ${({ align }) => align};
-  border-bottom: ${({ shape }) => shape === "underline" && "1px solid #000000"};
+  ${({ isSplit, shape, isInvalid, width, align }) => css`
+    display: flex;
+    justify-content: ${align};
+    border-bottom: ${shape === "underline" && "1px solid #000000"};
 
-  margin: ${({ width }) => width === "xl" && "auto"};
-  gap: ${({ isSplit }) => isSplit && "10px"};
+    margin: ${width === "xl" && "auto"};
+    gap: ${isSplit && "10px"};
 
-  ${({ isSplit }) => isSplit && "input {"}
-  background: ${({ shape }) => shape === "box" && "#ecebf1"};
-  border-radius: ${({ shape }) => shape === "box" && "7px"};
-  width: ${({ width }) => widthPreset[width]};
-  padding: 12px;
+    ${isSplit && "input {"}
+    background: ${shape === "box" && "#ecebf1"};
+    border-radius: ${shape === "box" && "7px"};
+    width: ${widthPreset[width]};
+    padding: 12px;
 
-  box-shadow: ${({ isInvalid }) => isInvalid && "inset 0 0 0 1px #d82424"};
-  ${({ isSplit }) => isSplit && "}"}
+    box-shadow: ${isInvalid && "inset 0 0 0 1px #d82424"};
+    ${isSplit && "}"}
+  `}
 `;
 
 const StyledInputContainer = styled.div`

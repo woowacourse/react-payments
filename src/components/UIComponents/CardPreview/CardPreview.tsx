@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { CREATE_MASKED_CHARACTERS } from "utils/constants";
 import CardInfoContext, {
@@ -43,28 +43,32 @@ const CardContainer = styled.div`
 const cardSize = (isSubmitted) =>
   isSubmitted ? CARD_SIZE_AFTER_SUBMIT : CARD_SIZE_BEFORE_SUBMIT;
 
-const SmallCard = styled.div<{ isSubmitted: boolean; colorType }>(
-  ({ isSubmitted, colorType }) => ({
-    display: "flex",
-    "flex-direction": "column",
-    "justify-content": cardSize(isSubmitted).justifyContent,
+const SmallCard = styled.div<{ isSubmitted: boolean; colorType }>`
+  ${({ isSubmitted, colorType }) => {
+    const { justifyContent, width, height, padding, fontSize, lineHeight } =
+      cardSize(isSubmitted);
+    return css`
+      display: flex;
+      flex-direction: column;
+      justify-content: ${justifyContent};
 
-    width: cardSize(isSubmitted).width,
-    height: cardSize(isSubmitted).height,
-    padding: cardSize(isSubmitted).padding,
+      width: ${width};
+      height: ${height};
+      padding: ${padding};
 
-    "background-color": CARD_COLORS[colorType],
-    "box-shadow": "3px 3px 5px rgba(0, 0, 0, 0.25)",
-    "border-radius": "5px",
+      background-color: ${CARD_COLORS[colorType]};
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+      border-radius: 5px;
 
-    color: (colorType === 0 || colorType === 1) && "#ffffff",
+      color: ${(colorType === 0 || colorType === 1) && "#ffffff"};
 
-    "font-size": cardSize(isSubmitted).fontSize,
-    "line-height": cardSize(isSubmitted).lineHeight,
-    "vertical-align": "middle",
-    "font-weight": "400",
-  })
-);
+      font-size: ${fontSize};
+      line-height: ${lineHeight};
+      vertical-align: middle;
+      font-weight: 400;
+    `;
+  }}
+`;
 
 const CardName = React.memo(styled.p`
   margin-bottom: 20px;
@@ -118,7 +122,7 @@ export default function CardPreview({
   cardInfo,
   isValidCardInfo,
   isSubmitted,
-  color = "default",
+  color,
 }: Props) {
   const { state } = useContext(CardInfoContext);
   const { cardNumber, holderName, expireDate } = { ...cardInfo, ...state };
