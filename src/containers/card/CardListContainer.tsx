@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
-import Card from 'components/card/Card';
 import styled from '@emotion/styled';
-import DeleteButtonContainer from '../button/DeleteButtonContainer';
-import { ActionType, CardType } from 'types';
-import { useAppDispatch, useAppState } from 'hooks/hooks';
-import { createAction } from 'context/Provider';
-import EditButtonContainer from 'containers/button/EditButtonContainer';
 import { v4 as uuidv4 } from 'uuid';
+
+import Card from 'components/card/Card';
+
+import DeleteButtonContainer from '../button/DeleteButtonContainer';
+import EditButtonContainer from 'containers/button/EditButtonContainer';
 import AddCardContainer from './AddCardContainer';
+
+import { useCard } from 'hooks';
+import { CardType } from 'types';
 
 const CardAlias = styled.p(() => ({
   fontWeight: '800',
@@ -41,18 +42,9 @@ const Wrapper = styled.div(() => ({
 }));
 
 function CardListContainer() {
-  const { cardList } = useAppState();
-  const dispatch = useAppDispatch();
+  const { cardList, getCards } = useCard();
 
   useEffect(() => {
-    async function getCards() {
-      const response = await axios('http://localhost:4004/cards', {
-        method: 'get',
-      });
-
-      dispatch(createAction(ActionType.SET_CARD_LIST, response.data));
-    }
-
     getCards();
   }, []);
 
