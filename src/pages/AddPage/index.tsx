@@ -21,8 +21,10 @@ import {
 
 import { ReactComponent as Arrow } from 'assets/arrow.svg';
 import CardInputs from './CardInputs';
+import { CardType } from 'types';
 import CompanyModal from './CompanyModal';
 import { NOW } from 'constants/index';
+import actions from 'actions';
 import isValidCardInputs from 'utils/validator';
 import { useNavigate } from 'react-router-dom';
 
@@ -89,18 +91,18 @@ function AddPage() {
   );
 
   const onClickNextButton = () => {
-    dispatch({
-      type: 'SAVE_CARD_INFO',
-      card: {
-        cardCompany: cardCompany.name,
-        cardColor: cardCompany.color,
-        cardNumber,
-        cardOwnerName,
-        validDate,
-        CVC,
-        password: firstPassword + secondPassword,
-      },
-    });
+    const card: CardType = {
+      cardName: '',
+      cardCompany: cardCompany.name,
+      cardColor: cardCompany.color,
+      cardNumber,
+      cardOwnerName,
+      validDate,
+      cardCVC: CVC,
+      cardPassword: firstPassword + secondPassword,
+    };
+
+    dispatch(actions.saveCardInfo(card));
 
     navigate('../complete');
   };

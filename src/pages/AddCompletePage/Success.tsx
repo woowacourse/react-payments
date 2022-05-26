@@ -4,6 +4,7 @@ import { memo, useContext } from 'react';
 
 import { CardContext } from 'contexts';
 import { CardType } from 'types';
+import actions from 'actions';
 import styled from 'styled-components';
 import { useInput } from 'hooks';
 import { useNavigate } from 'react-router-dom';
@@ -30,10 +31,7 @@ function Success({
   const dispatch = useContext(CardContext);
 
   const onClickCheckButton = () => {
-    dispatch({
-      type: 'ADD_CARD_TO_LIST',
-      cardName,
-    });
+    dispatch(actions.addCardToList(cardName));
 
     navigate('/');
   };
