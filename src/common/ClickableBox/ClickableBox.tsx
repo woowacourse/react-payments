@@ -1,6 +1,11 @@
+import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-export default function ClickableBox({ children, onClick }) {
+interface Props {
+  onClick: () => null;
+}
+
+export default function ClickableBox({ children, onClick }: PropsWithChildren<Props>) {
   return <Styled.PointerBox onClick={onClick}>{children}</Styled.PointerBox>;
 }
 
