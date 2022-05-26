@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { API_SERVER, PATH } from '../utils/constants';
+import { API_SERVER, ERROR_MESSAGE, PATH } from '../utils/constants';
 import BackwardButton from '../components/common/BackwardButton';
 import Button from '../components/common/Button';
 import CardPreview from '../components/common/CardPreview';
 import TextBox from '../components/common/TextBox';
+import useFetch from '../hooks/useFetch';
 
 const StyledStoredCardList = styled.div`
   margin: 65px 59px;
@@ -47,29 +48,32 @@ const StyledStoredCardList = styled.div`
 `;
 
 const StoredCardListPage = () => {
-  const [storedList, setStoredList] = useState({});
+  const {
+    error: errorWithGetting,
+    data: cardList,
+    fetch: fetchGetCardList,
+  } = useFetch('get');
 
   useEffect(() => {
-    async function fetchStoredCardList() {
-      const fetchedCards = await fetch(`${API_SERVER}/cards`);
-      const response = await fetchedCards.json();
-      return response;
+    fetchGetCardList({ API_URL: `${API_SERVER}/cards` });
+    if (errorWithGetting) {
+      alert(ERROR_MESSAGE.FAILED_GET);
     }
-    fetchStoredCardList().then(setStoredList);
   }, []);
 
   return (
     <>
       <BackwardButton showBackWard={false}>보유 카드</BackwardButton>
       <StyledStoredCardList>
-        {Object.values(storedList).map(({ cardName, values, id }) => (
-          <article key={id}>
-            <Link to={PATH.EDIT_CARD_PAGE} state={{ cardName, values, id }}>
-              <CardPreview values={values} />
-            </Link>
-            <TextBox fontSize="14px">{cardName}</TextBox>
-          </article>
-        ))}
+        {cardList &&
+          Object.values(cardList).map(({ cardName, values, id }) => (
+            <article key={id}>
+              <Link to={PATH.EDIT_CARD_PAGE} state={{ cardName, values, id }}>
+                <CardPreview values={values} />
+              </Link>
+              <TextBox fontSize="14px">{cardName}</TextBox>
+            </article>
+          ))}
 
         <Link to={PATH.ADD_CARD_PAGE}>
           <Button color="#575757" backgroundColor="#E5E5E5">

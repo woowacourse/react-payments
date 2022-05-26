@@ -10,6 +10,7 @@ import Button from '../components/common/Button';
 import CardPreview from '../components/common/CardPreview';
 import Input from '../components/common/Input';
 import TextBox from '../components/common/TextBox';
+import useFetch from '../hooks/useFetch';
 
 const StyledCompleteEditCardPage = styled.div`
   display: flex;
@@ -49,23 +50,27 @@ const StyledCompleteEditCardPage = styled.div`
 
 const EditCardPage = () => {
   const navigation = useNavigate();
+
   const inputRef = useRef();
+
   const {
     state: { cardName, values, id },
   } = useLocation();
 
+  const { error: errorWithEditing, fetch: fetchEditCard } = useFetch('patch');
+  const { error: errorWithDeleting, fetch: fetchDeleteCard } =
+    useFetch('delete');
+
   const editCard = async () => {
-    const response = await fetch(`${API_SERVER}/cards/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+    await fetchEditCard({
+      API_URL: `${API_SERVER}/cards/${id}`,
+
+      body: {
         cardName: inputRef.current.value.trim()?.toUpperCase() || cardName,
-      }),
+      },
     });
 
-    if (!response.ok) {
+    if (errorWithEditing) {
       alert(ERROR_MESSAGE.FAILED_EDIT);
     }
   };
@@ -75,12 +80,12 @@ const EditCardPage = () => {
       return;
     }
 
-    const response = await fetch(`${API_SERVER}/cards/${id}`, {
-      method: 'DELETE',
+    await fetchDeleteCard({
+      API_URL: `${API_SERVER}/cards/${id}`,
     });
 
-    if (!response.ok) {
-      alert(ERROR_MESSAGE.FAILED_DELELTE);
+    if (errorWithDeleting) {
+      alert(ERROR_MESSAGE.FAILED_DELETE);
     }
   };
 
