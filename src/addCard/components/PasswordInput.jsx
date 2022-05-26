@@ -15,10 +15,7 @@ function PasswordInput({ value, name }) {
       length={MAX_LENGTH.PASSWORD}
       value={value}
       name={name}
-      validators={[
-        validator(checkMaxLength, value, MAX_LENGTH.PASSWORD),
-        validator(checkIsNaN, value),
-      ]}
+      validators={[validator(checkMaxLength, MAX_LENGTH.PASSWORD), validator(checkIsNaN)]}
       onChange={updateCard}
     />
   );

@@ -17,7 +17,7 @@ function NameInput({ value, name }) {
       name={name}
       value={value}
       required={false}
-      validators={[validator(checkMaxLength, value, MAX_LENGTH.NAME)]}
+      validators={[validator(checkMaxLength, MAX_LENGTH.NAME)]}
       onChange={updateCard}
     />
   );

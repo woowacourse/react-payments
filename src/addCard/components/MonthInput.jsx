@@ -8,6 +8,15 @@ import AddCardContext from '../../AddCardContext';
 function MonthInput({ value, name, expireYear }) {
   const { updateCard } = useContext(AddCardContext);
 
+  const checkDate = (targetName) => {
+    try {
+      checkValidDate(value, expireYear);
+    } catch (error) {
+      alert(error.message);
+      updateCard('', targetName);
+    }
+  };
+
   return (
     <Input
       shape="input-basic"
@@ -17,12 +26,12 @@ function MonthInput({ value, name, expireYear }) {
       value={value}
       name={name}
       validators={[
-        validator(checkMaxLength, value, MAX_LENGTH.DATE),
-        validator(checkIsNaN, value),
-        validator(checkRange, RANGE.MONTH_MIN, RANGE.MONTH_MAX, value),
-        validator(checkValidDate, value, expireYear),
+        validator(checkMaxLength, MAX_LENGTH.DATE),
+        validator(checkIsNaN),
+        validator(checkRange, RANGE.MONTH_MIN, RANGE.MONTH_MAX),
       ]}
       onChange={updateCard}
+      onBlur={checkDate}
     />
   );
 }

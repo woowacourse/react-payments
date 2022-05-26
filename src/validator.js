@@ -13,8 +13,8 @@ export const checkMaxLength = (value, length) => {
   }
 };
 
-export const checkRange = (min, max, value) => {
-  if (isOutOfRange(min, max, +value)) {
+export const checkRange = (value, min, max) => {
+  if (value && isOutOfRange(min, max, +value)) {
     throw new Error(ERROR_MESSAGE.INVALID_MONTH_RANGE);
   }
 };
@@ -38,6 +38,6 @@ export const checkValidDate = (expireMonth, expireYear) => {
 
 export const validator = (validate, ...args) => {
   return {
-    validate: () => validate(...args),
+    validate: (value) => validate(value, ...args),
   };
 };

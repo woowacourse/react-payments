@@ -20,7 +20,7 @@ function CardList({ cardList }) {
           {cardList.map((card, index) => {
             return (
               <React.Fragment key={card.ownerName + String(index)}>
-                <Card completedCard={{ card }} />
+                <Card completedCard={card} />
                 <span className="card-nickname">{card.nickName}</span>
               </React.Fragment>
             );

@@ -15,10 +15,7 @@ function SecurityCodeInput({ value, name }) {
       length={MAX_LENGTH.SECURITY_CODE}
       value={value}
       name={name}
-      validators={[
-        validator(checkMaxLength, value, MAX_LENGTH.SECURITY_CODE),
-        validator(checkIsNaN, value),
-      ]}
+      validators={[validator(checkMaxLength, MAX_LENGTH.SECURITY_CODE), validator(checkIsNaN)]}
       onChange={updateCard}
     />
   );
