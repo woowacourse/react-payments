@@ -1,12 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
 body {
   background: #e5e5e5;
   display: flex;
-  font-family: 'Roboto', 'Malgun Gothic';
+  font-family: 'Gowun Dodum', 'Roboto', sans-serif;
   justify-content: center;
 }
 
 ::placeholder {
-  font-family: 'Roboto', 'Malgun Gothic' !important;
+  font-family: 'Gowun Dodum', 'Roboto', sans-serif !important;
 }
 
 @keyframes fadein {

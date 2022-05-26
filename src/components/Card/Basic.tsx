@@ -21,7 +21,7 @@ const getCardSize = (size: 'medium' | 'large') => {
           width: '40px',
         },
         numberSet: {
-          marginBottom: '12px',
+          marginBottom: '6px',
         },
         detail: {
           size: '17px',
@@ -45,7 +45,7 @@ const getCardSize = (size: 'medium' | 'large') => {
           width: '55px',
         },
         numberSet: {
-          marginBottom: '10px',
+          marginBottom: '6px',
         },
         detail: {
           size: '19px',
