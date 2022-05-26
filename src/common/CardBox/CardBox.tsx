@@ -1,6 +1,13 @@
+import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
+import { CardColor } from 'types/cardInfo';
 
-export default function CardBox({ children, isSmall, color }) {
+interface Props {
+  isSmall?: boolean;
+  color: CardColor;
+}
+
+export default function CardBox({ children, isSmall, color }: PropsWithChildren<Props>) {
   return (
     <Styled.CardBox isSmall={isSmall} color={color}>
       {children}
@@ -9,7 +16,7 @@ export default function CardBox({ children, isSmall, color }) {
 }
 
 const Styled = {
-  CardBox: styled.div(
+  CardBox: styled.div<{ isSmall: boolean; color: CardColor }>(
     ({ isSmall, color }) => `
   display: flex;
   flex-direction: column;
