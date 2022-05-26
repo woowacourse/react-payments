@@ -1,15 +1,17 @@
 import React, { useRef } from 'react';
-import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+
+import CardFormInput from 'components/card/CardFormInput';
+
 import { useAppDispatch, useAppState } from 'hooks/hooks';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';
 import { isNum, removeWhiteSpaces } from 'utils';
-import CardFormInput from 'components/card/CardFormInput';
 
-const style = css({
-  maxWidth: '68px',
-  height: '45px',
-});
+const ExpiredPeriodInputContainerStyled = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 function ExpiredPeriodInputContainer() {
   const { expiredPeriodMonth, expiredPeriodYear } = useAppState();
@@ -63,7 +65,7 @@ function ExpiredPeriodInputContainer() {
   };
 
   return (
-    <>
+    <ExpiredPeriodInputContainerStyled>
       <CardFormInput
         type="text"
         onChange={handleMonthChange}
@@ -72,7 +74,8 @@ function ExpiredPeriodInputContainer() {
         maxlength="2"
         pattern="^[0-9]{2}$"
         required={true}
-        css={style}
+        width="60px"
+        height="50px"
       />
       /
       <CardFormInput
@@ -83,10 +86,11 @@ function ExpiredPeriodInputContainer() {
         maxlength="2"
         pattern="^[0-9]{2}$"
         required={true}
-        css={style}
+        width="60px"
+        height="50px"
         ref={secondExpiredPeriodInputRef}
       />
-    </>
+    </ExpiredPeriodInputContainerStyled>
   );
 }
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import ButtonText from 'components/modal/ButtonText';
@@ -19,7 +18,7 @@ const ButtonContainerStyled = styled.div({
   gridTemplateColumns: 'repeat(3, 1fr)',
 });
 
-const ButtonWraperStyled = styled.div({
+const ButtonWrapperStyled = styled.div({
   width: '100px',
   height: '100px',
   display: 'flex',
@@ -40,10 +39,10 @@ function TypeButtonContainer() {
   return (
     <ButtonContainerStyled>
       {cardTypes.map((cardInfo) => (
-        <ButtonWraperStyled key={cardInfo.name}>
+        <ButtonWrapperStyled key={cardInfo.name}>
           <TypeButton typeButtonClick={handleTypeButtonClick} cardInfo={cardInfo} />
           <ButtonText typeButtonClick={handleTypeButtonClick} cardInfo={cardInfo} />
-        </ButtonWraperStyled>
+        </ButtonWrapperStyled>
       ))}
     </ButtonContainerStyled>
   );

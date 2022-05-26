@@ -1,15 +1,10 @@
 import React, { useRef } from 'react';
-import { css } from '@emotion/react';
+
+import CardFormInput from 'components/card/CardFormInput';
+
 import { useAppDispatch, useAppState } from 'hooks/hooks';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';
-import CardFormInput from 'components/card/CardFormInput';
-
-const style = css({
-  width: '43px',
-  height: '45px',
-  marginRight: '7px',
-});
 
 function CardPasswordInputContainer() {
   const { firstPassword, secondPassword } = useAppState();
@@ -47,7 +42,8 @@ function CardPasswordInputContainer() {
         maxlength="1"
         pattern="^[0-9]{1}$"
         required={true}
-        css={style}
+        width="60px"
+        height="50px"
         ref={secondPasswordInputRef}
       />
       <CardFormInput
@@ -58,11 +54,12 @@ function CardPasswordInputContainer() {
         maxlength="1"
         pattern="^[0-9]{1}$"
         required={true}
-        css={style}
+        width="60px"
+        height="50px"
         ref={secondPasswordInputRef}
       />
-      <CardFormInput placeholder="•" disabled={true} css={style} />
-      <CardFormInput placeholder="•" disabled={true} css={style} />
+      <CardFormInput placeholder="•" disabled={true} width="60px" height="50px" />
+      <CardFormInput placeholder="•" disabled={true} width="60px" height="50px" />
     </>
   );
 }

@@ -1,16 +1,11 @@
 import React, { useRef } from 'react';
-import { css } from '@emotion/react';
+
+import CardFormInput from 'components/card/CardFormInput';
+
 import { useAppDispatch, useAppState } from 'hooks/hooks';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';
 import { isNum, removeWhiteSpaces } from 'utils';
-import CardFormInput from 'components/card/CardFormInput';
-
-const style = css({
-  height: '47px',
-  border: 'none',
-  maxWidth: '70px',
-});
 
 function CardNumberInputContainer() {
   const {
@@ -98,10 +93,10 @@ function CardNumberInputContainer() {
         maxlength="4"
         pattern="^[0-9]{4}$"
         required={true}
-        css={style}
+        width="60px"
+        height="50px"
         ref={firstNumberInputRef}
       />
-      -
       <CardFormInput
         onChange={handleSecondInputCardNumber}
         value={secondInputCardNumber}
@@ -109,10 +104,10 @@ function CardNumberInputContainer() {
         maxlength="4"
         pattern="^[0-9]{4}$"
         required={true}
-        css={style}
+        width="60px"
+        height="50px"
         ref={secondNumberInputRef}
       />
-      -
       <CardFormInput
         onChange={handleThirdInputCardNumber}
         value={thirdInputCardNumber}
@@ -121,10 +116,10 @@ function CardNumberInputContainer() {
         maxlength="4"
         pattern="^[0-9]{4}$"
         required={true}
-        css={style}
+        width="60px"
+        height="50px"
         ref={thirdNumberInputRef}
       />
-      -
       <CardFormInput
         type="password"
         onChange={handleFourthInputCardNumber}
@@ -133,7 +128,8 @@ function CardNumberInputContainer() {
         maxlength="4"
         pattern="^[0-9]{4}$"
         required={true}
-        css={style}
+        width="60px"
+        height="50px"
         ref={fourthnumberInputRef}
       />
     </>

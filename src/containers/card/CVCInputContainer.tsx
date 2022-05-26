@@ -1,16 +1,10 @@
 import React from 'react';
-import { css } from '@emotion/react';
+
 import { useAppDispatch, useAppState } from 'hooks/hooks';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';
 import { isNum, removeWhiteSpaces } from 'utils';
 import CardFormInput from 'components/card/CardFormInput';
-
-const style = css({
-  maxWidth: '84px',
-  height: '45px',
-  marginRight: '11px',
-});
 
 function CVCInputContainer() {
   const { cvc } = useAppState();
@@ -39,7 +33,8 @@ function CVCInputContainer() {
         maxlength="3"
         pattern="^[0-9]{3}$"
         required={true}
-        css={style}
+        width="60px"
+        height="50px"
       />
     </>
   );
