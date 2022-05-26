@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import { useCardFormContext } from '../../context/card-form-context';
 import { pareCardFormState } from '../../utils';
 import { PATH } from '../../constant';
-import Button from '../Button';
+import Link from '../Link';
 import Card from '../Card';
-
 import CardNumberFieldSet from '../CardNumberFieldSet';
 import CardOwnerFieldSet from '../CardOwnerFieldSet';
 import ExpiredDateFieldSet from '../ExpiredDateFieldSet';
@@ -67,13 +66,9 @@ const AddCardForm = ({ openModal }) => {
       <PasswordFieldSet />
       <Styled.ButtonContainer>
         {isSubmittAble && (
-          <Button
-            type="link"
-            to={PATH.REGISTER_CARD}
-            state={pareCardFormState(state)}
-          >
+          <Link to={PATH.REGISTER_CARD} state={pareCardFormState(state)}>
             다음
-          </Button>
+          </Link>
         )}
       </Styled.ButtonContainer>
     </Styled.Container>
