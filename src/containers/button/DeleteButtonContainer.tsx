@@ -1,9 +1,19 @@
 import React from 'react';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import axios from 'axios';
+
 import { useAppDispatch, useAppState } from 'hooks';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';
-import Button from 'components/button/Button';
+
+const DeleteButtonStyled = styled.button(
+  css`
+    border: none;
+    background: inherit;
+    cursor: pointer;
+  `,
+);
 
 function DeleteButtonContainer({ id }: { id: string }) {
   const { cardList } = useAppState();
@@ -21,7 +31,11 @@ function DeleteButtonContainer({ id }: { id: string }) {
     }
   };
 
-  return <Button id={id} onClick={handleDeleteButtonClick} buttonType="remove" />;
+  return (
+    <DeleteButtonStyled id={id} onClick={handleDeleteButtonClick}>
+      삭제
+    </DeleteButtonStyled>
+  );
 }
 
 export default DeleteButtonContainer;
