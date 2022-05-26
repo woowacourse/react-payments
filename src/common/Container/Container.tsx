@@ -1,6 +1,11 @@
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-export default function Container({ children }) {
+interface Props {
+  children: ReactNode;
+}
+
+export default function Container({ children }: Props) {
   return <Styled.Container>{children}</Styled.Container>;
 }
 
