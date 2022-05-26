@@ -89,11 +89,11 @@ export default function CardListPage({
       <PageHeader page={PAGE_NAME.CARD_LIST} />
       <CardList>
         {formDataArray.map((card) => {
-          const { cardInfo, colorIndex } = parseCardInfo(card);
+          const { colorIndex } = parseCardInfo(card);
 
           return (
             <CardItem key={card.nickname}>
-              <CardPreview cardInfo={cardInfo} color={colorIndex} />
+              <CardPreview color={colorIndex} />
               <CardNickname>{card.nickname || DEFAULT_CARD_NAME}</CardNickname>
             </CardItem>
           );

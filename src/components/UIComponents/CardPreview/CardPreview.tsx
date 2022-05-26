@@ -2,9 +2,8 @@ import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 
 import { CREATE_MASKED_CHARACTERS } from "utils/constants";
-import CardInfoContext, {
-  CardInfoStateTypeInterface,
-} from "context/CardInfoContext";
+import { CardInfoStateTypeInterface } from "context/CardInfoContext";
+import { CardInfoContext } from "context/CardInfoContextProvider";
 
 const CARD_SIZE_BEFORE_SUBMIT = {
   width: "213px",
@@ -109,7 +108,7 @@ const CardHolderName = styled.p`
 const CardExpireDate = styled.p``;
 
 type Props = {
-  cardInfo: Pick<
+  cardInfo?: Pick<
     CardInfoStateTypeInterface,
     "cardNumber" | "expireDate" | "holderName"
   >;

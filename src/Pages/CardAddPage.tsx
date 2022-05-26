@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 
 import useLocalStorage from "useLocalStorage";
-import CardInfoContext, {
-  CardInfoStateTypeInterface,
-} from "context/CardInfoContext";
+import { CardInfoStateTypeInterface } from "context/CardInfoContext";
 
 import PageHeader from "containers/PageHeader";
 import CardInfoForm from "containers/CardInfoForm";
@@ -21,6 +19,7 @@ import {
   PAGE_NAME,
 } from "../utils/constants";
 import { PageType } from "App";
+import { CardInfoContext } from "context/CardInfoContextProvider";
 
 const {
   NUMBER_UNIT_COUNT,
@@ -29,14 +28,6 @@ const {
   SECURITY_CODE_LENGTH,
   PASSWORD_LENGTH,
 } = CARD_INFO_RULES;
-
-const initialCardInfoState = {
-  cardNumber: ["", "", "", ""],
-  expireDate: ["", ""],
-  holderName: "",
-  securityCodeLength: 0,
-  passwordLength: [0, 0],
-};
 
 const CardAddPageContainer = styled.div`
   display: flex;
@@ -57,7 +48,7 @@ export default function CardAddPage({
 }: {
   setPage: React.Dispatch<React.SetStateAction<PageType>>;
 }) {
-  const [cardInfo, setCardInfo] = useState(initialCardInfoState);
+  const { state: cardInfo } = useContext(CardInfoContext);
 
   const [isValidCardInfo, setValidCardInfo] = useState(false);
   const [isSubmitted, setSubmitted] = useState(false);
@@ -131,33 +122,29 @@ export default function CardAddPage({
   );
 
   return (
-    <CardInfoContext.Provider
-      value={{ state: cardInfo, setState: setCardInfo }}
-    >
-      <CardAddPageContainer>
-        <PageHeader
-          isSubmitted={isSubmitted}
-          page={PAGE_NAME.CARD_ADD}
-          moveToListPage={moveToListPage}
-        />
-        {!isSubmitted ? (
-          <>
-            {CardPreviewElement}
-            <CardInfoForm
-              handleFormSubmit={handleFormSubmit}
-              isCompleteCardInfo={isCompleteCardInfo}
-              isValidCardInfo={isValidCardInfo}
-              setFormValidity={setFormValidity}
-            />
-          </>
-        ) : (
-          <>
-            <SuccessMessage>카드 등록이 완료되었습니다.</SuccessMessage>
-            {CardPreviewElement}
-            <CardNicknameForm handleAddNickname={handleAddNickname} />
-          </>
-        )}
-      </CardAddPageContainer>
-    </CardInfoContext.Provider>
+    <CardAddPageContainer>
+      <PageHeader
+        isSubmitted={isSubmitted}
+        page={PAGE_NAME.CARD_ADD}
+        moveToListPage={moveToListPage}
+      />
+      {!isSubmitted ? (
+        <>
+          {CardPreviewElement}
+          <CardInfoForm
+            handleFormSubmit={handleFormSubmit}
+            isCompleteCardInfo={isCompleteCardInfo}
+            isValidCardInfo={isValidCardInfo}
+            setFormValidity={setFormValidity}
+          />
+        </>
+      ) : (
+        <>
+          <SuccessMessage>카드 등록이 완료되었습니다.</SuccessMessage>
+          {CardPreviewElement}
+          <CardNicknameForm handleAddNickname={handleAddNickname} />
+        </>
+      )}
+    </CardAddPageContainer>
   );
 }

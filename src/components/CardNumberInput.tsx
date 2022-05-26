@@ -1,10 +1,10 @@
 import React, { useCallback, useContext, useState } from "react";
-import CardInfoContext from "context/CardInfoContext";
 
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "utils/constants";
 
 import Input from "components/UIComponents/Input/Input";
 import InputField from "components/UIComponents/InputField/InputField";
+import { CardInfoContext } from "context/CardInfoContextProvider";
 
 export default function CardNumberInput() {
   const [isInvalid, setInvalid] = useState(false);

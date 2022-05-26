@@ -1,5 +1,10 @@
 import React, { useMemo, useState } from "react";
-import CardInfoContext from "./CardInfoContext";
+import { CardInfoStateTypeInterface } from "./CardInfoContext";
+
+interface CardInfoContextInterface {
+  state: CardInfoStateTypeInterface;
+  setState: (state: CardInfoStateTypeInterface) => void;
+}
 
 const initialCardInfoState = {
   cardNumber: ["", "", "", ""],
@@ -8,6 +13,9 @@ const initialCardInfoState = {
   securityCodeLength: 0,
   passwordLength: [0, 0],
 };
+
+export const CardInfoContext =
+  React.createContext<null | CardInfoContextInterface>(null);
 
 export default function CardInfoContextProvider({ children }) {
   const [cardInfo, setCardInfo] = useState(initialCardInfoState);

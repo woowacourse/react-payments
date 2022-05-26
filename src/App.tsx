@@ -5,6 +5,8 @@ import CardAddPage from "Pages/CardAddPage";
 import CardListPage from "Pages/CardListPage";
 import { PAGE_NAME } from "utils/constants";
 
+import CardInfoContextProvider from "context/CardInfoContextProvider";
+
 export type PageType = "CardList" | "CardAdd";
 
 function App() {
@@ -18,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <GlobalStyle />
-      {router[page]}
+      <CardInfoContextProvider>{router[page]}</CardInfoContextProvider>
     </div>
   );
 }
