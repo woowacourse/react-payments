@@ -27,7 +27,7 @@ const CardDiv = styled.div(({ cardColor }: { cardColor: string }) => ({
   borderRadius: '5px',
   cursor: 'pointer',
   margin: 'auto',
-  marginBottom: '50px',
+  marginBottom: '10px',
 
   // type
   '& .type': {

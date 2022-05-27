@@ -3,7 +3,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const ConfirmButtonStyled = styled.button({
-  marginLeft: '300px',
+  marginLeft: '280px',
   backgroundColor: 'inherit',
   border: 'none',
   fontSize: '16px',

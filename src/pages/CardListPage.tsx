@@ -11,7 +11,7 @@ function CardListPage() {
       <TitleWrapper>
         <PageTitle>보유카드</PageTitle>
       </TitleWrapper>
-      <CardListContainer />
+      <CardListContainer flexDirection="column" marginBottom="30px" />
     </PageWrapper>
   );
 }

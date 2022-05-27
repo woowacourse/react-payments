@@ -27,7 +27,7 @@ function AddCardPage() {
       {changeCardType && <TypeButtonModal />}
       <TitleWrapper>
         <BackButtonContainer />
-        <MarginWrapper />
+        <MarginWrapper marginRight="20px" />
         <PageTitle>카드추가</PageTitle>
       </TitleWrapper>
       <CardContainer />

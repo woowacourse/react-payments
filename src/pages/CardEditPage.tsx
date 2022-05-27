@@ -23,7 +23,7 @@ function CardEditPage() {
         <>
           <TitleWrapper>
             <BackButtonContainer />
-            <MarginWrapper />
+            <MarginWrapper marginRight="20px" />
             <PageTitle>카드수정</PageTitle>
           </TitleWrapper>
           <CardContainer />
