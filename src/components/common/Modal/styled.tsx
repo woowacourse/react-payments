@@ -57,6 +57,7 @@ const ModalInner = styled.div<ModalInnerProps>`
   padding: 16px;
   z-index: 1000;
   animation: slide-up 0.2s 0s ease;
+  overflow-y: hidden;
 
   &:hover {
     overflow-y: auto;
