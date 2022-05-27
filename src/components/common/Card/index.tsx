@@ -1,5 +1,7 @@
 import React from "react";
 
+import type { CardNumbers } from "types";
+
 import { Span } from "../styled";
 import {
   CardBottom,
@@ -11,17 +13,10 @@ import {
   CardParagraph,
 } from "./styled";
 
-interface CardNumbersInterface {
-  cardNoA: string;
-  cardNoB: string;
-  cardNoC: string;
-  cardNoD: string;
-}
-
 interface CardProps {
   large: boolean | undefined;
   cardCompany: { hexColor: string; name: string };
-  cardNumbers: CardNumbersInterface;
+  cardNumbers: CardNumbers;
   cardOwner: { name: string };
   cardDate: { month: string; year: string };
 }
@@ -31,7 +26,7 @@ const convertToCardNumberString = ({
   cardNoB,
   cardNoC,
   cardNoD,
-}: CardNumbersInterface) =>
+}: CardNumbers) =>
   `${cardNoA} ${cardNoB} ${"*".repeat(cardNoC.length)} ${"*".repeat(
     cardNoD.length
   )}`;

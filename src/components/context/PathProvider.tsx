@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 
-const PathContext = React.createContext(null);
-const SetPathContext = React.createContext(null);
+interface PathProviderProps {
+  children: React.ReactNode;
+}
 
-const PathProvider = ({ children }) => {
+const PathContext = React.createContext<string | null>(null);
+const SetPathContext = React.createContext<React.Dispatch<
+  React.SetStateAction<string>
+> | null>(null);
+
+const PathProvider = ({ children }: PathProviderProps) => {
   const [path, setPath] = useState("list-card");
 
   return (
