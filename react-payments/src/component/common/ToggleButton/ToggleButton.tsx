@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 
 const CheckBoxWrapper = styled.div`
@@ -46,10 +47,18 @@ const CheckBox = styled.input`
   }
 `;
 
-function ToggleButton() {
+function ToggleButton({
+  setChecked,
+}: {
+  setChecked: Dispatch<SetStateAction<boolean>>;
+}) {
+  const onChange = () => {
+    setChecked((prev) => !prev);
+  };
+
   return (
     <CheckBoxWrapper>
-      <CheckBox id="checkbox" type="checkbox" />
+      <CheckBox id="checkbox" type="checkbox" onChange={onChange} />
       <CheckBoxLabel htmlFor="checkbox" />
     </CheckBoxWrapper>
   );
