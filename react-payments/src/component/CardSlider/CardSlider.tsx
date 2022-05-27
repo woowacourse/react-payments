@@ -6,8 +6,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import Card from "component/common/Card/Card.component";
 import SkeletonCardBox from "component/common/SkeletonCard/SkeletonCard.component";
 import PaymentLabel from "component/PaymentLabel/PaymentLabel";
-import { ColumnFlexWrapper } from "styles/wrapper";
-import Box from "styles/box";
+import CardAddLink from "component/CardAddLink/CardAddLink.component";
 
 function CardSlider() {
   const { data, loading } = useFetch(`${API_URL}/api/cards`);
@@ -20,7 +19,7 @@ function CardSlider() {
   const slideRef = useRef<HTMLDivElement | null>(null);
 
   const nextSlide = () => {
-    if (currentSlide >= Object.keys(cardData).length - 1) {
+    if (currentSlide >= Object.keys(cardData).length) {
       return;
     } else {
       setCurrentSlide(currentSlide + 1);
@@ -38,7 +37,9 @@ function CardSlider() {
   useEffect(() => {
     if (slideRef.current !== null) {
       slideRef.current.style.transition = "all 0.5s ease-in-out";
-      slideRef.current.style.transform = `translateX(-${currentSlide}00%)`;
+      slideRef.current.style.transform = `translateX(calc(-${currentSlide}00% - ${
+        currentSlide * 80
+      }px))`;
     }
   }, [currentSlide]);
 
@@ -63,6 +64,9 @@ function CardSlider() {
             <Card {...cardDatum.attributes} key={cardDatum.id} />
           ))
         )}
+        <div>
+          <CardAddLink to="/add">+</CardAddLink>
+        </div>
       </Slider>
     </div>
   );

@@ -1,7 +1,7 @@
 import Slider from "./Slider";
 
 import { Meta, Story } from "@storybook/react";
-import React from "react";
+import React, { MutableRefObject } from "react";
 
 export default {
   title: "Slider",
@@ -15,8 +15,11 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<{ children: React.ReactNode }> = (args) => (
-  <Slider {...args} />
-);
+const Template: Story<{
+  children: React.ReactNode;
+  slideRef: MutableRefObject<null | HTMLDivElement>;
+  prevSlide: () => void;
+  nextSlide: () => void;
+}> = (args) => <Slider {...args} />;
 
 export const DefaultSlider = Template.bind({});

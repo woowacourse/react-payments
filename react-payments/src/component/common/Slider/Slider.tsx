@@ -33,13 +33,25 @@ function Slider({
 }) {
   return (
     <RowFlexWrapper gap="35">
-      <Text fontSize="30px" fontWeight="600" color="#575757" pointer={true}>
+      <Text
+        fontSize="30px"
+        fontWeight="600"
+        color="#575757"
+        pointer={true}
+        onClick={prevSlide}
+      >
         {"<"}
       </Text>
       <SliderContainer>
         <SlideContainer ref={slideRef}>{children}</SlideContainer>
       </SliderContainer>
-      <Text fontSize="30px" fontWeight="600" color="#575757" pointer={true}>
+      <Text
+        fontSize="30px"
+        fontWeight="600"
+        color="#575757"
+        pointer={true}
+        onClick={nextSlide}
+      >
         {">"}
       </Text>
     </RowFlexWrapper>
