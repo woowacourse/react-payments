@@ -1,6 +1,8 @@
 import TermsOfUseContainer from "./TermsOfUseContainer";
 
 import { Meta, Story } from "@storybook/react";
+import { Dispatch, SetStateAction } from "react";
+import { action } from "@storybook/addon-actions";
 
 export default {
   title: "TermsOfUseContainer",
@@ -14,7 +16,11 @@ export default {
   ],
 } as Meta;
 
-const Template: Story = (args) => <TermsOfUseContainer {...args} />;
+const Template: Story<{ setChecked: Dispatch<SetStateAction<boolean>> }> = (
+  args
+) => <TermsOfUseContainer {...args} />;
 
 export const DefaultTermsOfUseContainer = Template.bind({});
-DefaultTermsOfUseContainer.args = {};
+DefaultTermsOfUseContainer.args = {
+  setChecked: action("setChecked"),
+};

@@ -1,9 +1,14 @@
 import ToggleButton from "component/common/ToggleButton/ToggleButton";
 import PaymentLabel from "component/PaymentLabel/PaymentLabel";
+import { Dispatch, SetStateAction } from "react";
 import Box from "styles/box";
 import Text from "styles/text";
 
-function TermsOfUseContainer() {
+function TermsOfUseContainer({
+  setChecked,
+}: {
+  setChecked: Dispatch<SetStateAction<boolean>>;
+}) {
   return (
     <Box
       display="flex"
@@ -21,7 +26,7 @@ function TermsOfUseContainer() {
         <Text fontSize="10px" fontWeight="700" color="#333333">
           주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.
         </Text>
-        <ToggleButton />
+        <ToggleButton setChecked={setChecked} />
       </Box>
     </Box>
   );

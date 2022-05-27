@@ -6,7 +6,9 @@ export default {
   component: PaymentPage,
 } as Meta;
 
-const Template: Story = (args) => <PaymentPage {...args} />;
+const Template: Story<{ price: number }> = (args) => <PaymentPage {...args} />;
 
 export const DefaultPaymentPage = Template.bind({});
-DefaultPaymentPage.args = {};
+DefaultPaymentPage.args = {
+  price: 43000,
+};
