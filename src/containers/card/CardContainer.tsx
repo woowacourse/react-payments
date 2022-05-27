@@ -51,19 +51,17 @@ function CardContainer() {
   };
 
   return (
-    <>
-      <Card
-        firstInputCardNumber={firstInputCardNumber}
-        secondInputCardNumber={secondInputCardNumber}
-        thirdInputCardNumber={thirdInputCardNumber}
-        fourthInputCardNumber={fourthInputCardNumber}
-        name={name}
-        expiredPeriodMonth={expiredPeriodMonth}
-        expiredPeriodYear={expiredPeriodYear}
-        cardType={cardType}
-        handleCardClick={handleCardClick}
-      />
-    </>
+    <Card
+      firstInputCardNumber={firstInputCardNumber}
+      secondInputCardNumber={secondInputCardNumber}
+      thirdInputCardNumber={thirdInputCardNumber}
+      fourthInputCardNumber={fourthInputCardNumber}
+      name={name}
+      expiredPeriodMonth={expiredPeriodMonth}
+      expiredPeriodYear={expiredPeriodYear}
+      cardType={cardType}
+      handleCardClick={handleCardClick}
+    />
   );
 }
 
