@@ -9,7 +9,8 @@ type CardColor =
   | '#04C09E'
   | '#E76E9A'
   | '#F37D3B'
-  | '#FBCD58';
+  | '#FBCD58'
+  | '#e5e5e5';
 
 type CardAction = { type: typeof TYPES; cards: typeof CARD_COMPANIES };
 

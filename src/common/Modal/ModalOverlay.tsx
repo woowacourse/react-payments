@@ -1,7 +1,12 @@
+import { PropsWithChildren } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
-export default function ModalToast({ children, onCloseModal }) {
+interface Props {
+  onCloseModal(): void;
+}
+
+export default function ModalOverlay({ children, onCloseModal }: PropsWithChildren<Props>) {
   return (
     <>
       {ReactDOM.createPortal(
@@ -18,19 +23,16 @@ export default function ModalToast({ children, onCloseModal }) {
 
 const Styled = {
   Modal: styled.div`
+    height: 100%;
+    width: 400px;
+    padding: 16px 24px;
+    margin: 30px 0;
+    background-color: #fff;
+    border-radius: 5px;
     position: fixed;
-    left: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 220px;
-    padding: 34px 0;
-    border-radius: 5px 5px 0 0;
-    background: #fff;
-    z-index: 10;
-    transition: bottom 0.4s linear;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
   `,
 
   Backdrop: styled.div`
@@ -40,6 +42,6 @@ const Styled = {
     width: 100%;
     height: 100vh;
     z-index: 10;
-    background: rgba(0, 0, 0, 0.5);
+    background: #f5f5f5;
   `,
 };
