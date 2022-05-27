@@ -26,7 +26,7 @@ type CardListAction = {
 
 interface CardListProviderProps {
   children: React.ReactNode;
-  initialState: CardListState;
+  initialState?: CardListState;
 }
 
 const CardListContext = React.createContext<CardListState | null>(null);

@@ -1,3 +1,5 @@
+export type Route = "add-card" | "submit-card" | "list-card";
+
 export interface Validator {
   (value: string);
 }

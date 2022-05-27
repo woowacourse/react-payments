@@ -7,7 +7,7 @@ type CardInfoAction = {
 
 interface CardInfoProviderProps {
   children: React.ReactNode;
-  initialState: CardInfoState;
+  initialState?: CardInfoState;
 }
 
 const initialCardInfoState: CardInfoState = {

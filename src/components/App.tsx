@@ -1,5 +1,7 @@
 import React, { useRef, useContext } from "react";
 
+import type { Route } from "types";
+
 import { CardInfoProvider } from "components/context/CardInfoProvider";
 import { CardListProvider } from "components/context/CardListProvider";
 import { PathContext } from "components/context/PathProvider";
@@ -13,7 +15,7 @@ function App() {
   const targetRef = useRef();
   const nextId = useRef(1);
 
-  const checkRoutes = (route) => {
+  const checkRoutes = (route: Route) => {
     switch (route) {
       case "add-card":
         return <CardFormPage targetRef={targetRef} />;
