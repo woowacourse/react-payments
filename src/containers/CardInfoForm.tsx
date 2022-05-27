@@ -16,7 +16,7 @@ type Props = {
   handleFormSubmit: (formData: CardInfoStateTypeInterface) => void;
   isCompleteCardInfo: boolean;
   isValidCardInfo: boolean;
-  setFormValidity: (formInputArray: Node[]) => void;
+  setFormValidity: (formInputArray: HTMLInputElement[]) => void;
 };
 
 export default function CardInfoForm({

@@ -17,7 +17,7 @@ type Props = {
   children: React.ReactNode;
   onSubmit: (formData: Object) => void;
   isComplete?: boolean;
-  setFormValidity?: (formInputArray: Node[]) => void;
+  setFormValidity?: (formInputArray: HTMLInputElement[]) => void;
 };
 
 export default function Form({
