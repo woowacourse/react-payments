@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 interface HeaderProps {
   children: React.ReactNode;
-  leadingButton: JSX.Element;
+  leadingButton?: JSX.Element;
 }
 
 const HeaderContainer = styled.header`

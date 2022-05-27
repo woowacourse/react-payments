@@ -3,7 +3,7 @@ import { HiOutlinePlus } from "react-icons/hi";
 
 import { SetPathContext } from "components/context/PathProvider";
 
-import { CardBox } from "./style";
+import { CardBox } from "./styled";
 
 function AddCardItem() {
   const setPath = useContext(SetPathContext);

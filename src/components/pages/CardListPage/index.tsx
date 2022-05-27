@@ -5,7 +5,7 @@ import { CardListContext } from "components/context/CardListProvider";
 import Header from "components/common/Header";
 import CardListItem from "./CardListItem";
 import AddCardItem from "./AddCardItem";
-import { CardList } from "./style";
+import { CardList } from "./styled";
 
 function CardListPage() {
   const cardList = useContext(CardListContext);
