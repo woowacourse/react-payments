@@ -123,15 +123,15 @@ const CardAddForm = ({ toggleShowModal, id }: CardAddFormProps) => {
       return;
     }
 
-    setCardNumber(cardData[id].cardNumber);
+    setCardNumber(cardData[id].attributes.cardNumber);
     setExpireDate({
-      month: cardData[id].month,
-      year: cardData[id].year,
+      month: cardData[id].attributes.month,
+      year: cardData[id].attributes.year,
     });
-    setUserName(cardData[id].userName);
-    setSecurityCode(cardData[id].securityCode);
-    setCardPassword(cardData[id].cardPassword);
-    setCardTypeInfo(cardData[id].cardTypeInfo);
+    setUserName(cardData[id].attributes.userName);
+    setSecurityCode(cardData[id].attributes.securityCode);
+    setCardPassword(cardData[id].attributes.cardPassword);
+    setCardTypeInfo(cardData[id].attributes.cardTypeInfo);
   }, [
     id,
     cardData,

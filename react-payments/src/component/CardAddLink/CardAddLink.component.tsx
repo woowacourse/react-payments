@@ -9,7 +9,6 @@ const CardAddLink = styled(Link)`
   align-items: center;
   flex-direction: column;
   color: ${({ theme }) => theme.colors.cardText};
-
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
