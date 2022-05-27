@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 
+import type { Month } from "types";
+
 import { HYPHEN_PRIMARY_COLOR } from "style";
 
 import {
@@ -15,10 +17,17 @@ import {
   Label,
 } from "components/common/styled";
 
-const getList = (length, n) =>
-  Array.from({ length }, (_, i) => `${i + n}`.slice(2));
-const YEAR = getList(10, new Date().getFullYear());
-const MONTH = [
+interface DueDateProps {
+  dimensions: {
+    width: number;
+    height: number;
+  };
+}
+
+const getYearList = (length: number, currentYear: number) =>
+  Array.from({ length }, (_, i) => `${i + currentYear}`.slice(2));
+const YEAR = getYearList(10, new Date().getFullYear());
+const MONTH: Month[] = [
   "01",
   "02",
   "03",
@@ -33,11 +42,11 @@ const MONTH = [
   "12",
 ];
 
-function DueDate({ dimensions }) {
+function DueDate({ dimensions }: DueDateProps) {
   const { cardDate } = useContext(CardInfoContext);
   const cardInfoDispatch = useContext(CardInfoDispatchContext);
 
-  const setItem = (key) => (value) => {
+  const setItem = (key: string) => (value: string) => {
     cardInfoDispatch({
       type: "UPDATE_DATE",
       cardDate: {

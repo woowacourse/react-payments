@@ -9,7 +9,7 @@ import ErrorMessage from "components/common/ErrorMessage";
 import LetterCounter from "components/common/LetterCounter";
 import Input from "components/common/Input";
 
-const convertToUpperCase = (word) => word.toUpperCase();
+const convertToUpperCase = (word: string) => word.toUpperCase();
 
 function CardOwner() {
   const { owner } = useContext(CardInfoContext);
@@ -20,7 +20,9 @@ function CardOwner() {
     prevData: owner,
   });
 
-  const handleInputChange = ({ target: { name, value } }) => {
+  const handleInputChange = ({
+    target: { name, value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
     updateInputState({ name, value: convertToUpperCase(value) });
   };
 
@@ -33,7 +35,7 @@ function CardOwner() {
           <Input
             type="text"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-            maxLength="30"
+            maxLength={30}
             onChange={handleInputChange}
             value={owner.name}
             name="name"

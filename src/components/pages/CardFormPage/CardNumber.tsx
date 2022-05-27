@@ -28,13 +28,15 @@ function CardNumber() {
     }
   );
 
-  const cardNoARef = useRef(null);
-  const cardNoBRef = useRef(null);
-  const cardNoCRef = useRef(null);
-  const cardNoDRef = useRef(null);
+  const cardNoARef = useRef<HTMLInputElement | null>(null);
+  const cardNoBRef = useRef<HTMLInputElement | null>(null);
+  const cardNoCRef = useRef<HTMLInputElement | null>(null);
+  const cardNoDRef = useRef<HTMLInputElement | null>(null);
   const cardNoRefs = [cardNoARef, cardNoBRef, cardNoCRef, cardNoDRef];
 
-  const handleInputChange = ({ target }) => {
+  const handleInputChange = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
     cardNoRefs.every((cardNoRef, index) => {
       if (
         target === cardNoRef.current &&

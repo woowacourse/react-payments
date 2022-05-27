@@ -10,7 +10,12 @@ import {
 import Card from "components/common/Card";
 import CardCompany from "components/common/CardCompany";
 import Modal from "components/common/Modal";
-import { CardContainer, GridContainer } from "./style";
+import { CardContainer, GridContainer } from "./styled";
+
+interface HandleClickCompanyArgs {
+  color: string;
+  name: string;
+}
 
 function CardShape({ dimensions }) {
   const { cardCompany, cardNumbers, cardDate, owner } =
@@ -22,7 +27,10 @@ function CardShape({ dimensions }) {
     setIsShown((prevIsShown) => !prevIsShown);
   };
 
-  const handleClickCompany = ({ color: hexColor, name }) => {
+  const handleClickCompany = ({
+    color: hexColor,
+    name,
+  }: HandleClickCompanyArgs) => {
     cardInfoDispatch({
       type: "UPDATE_COMPANY",
       cardCompany: { hexColor, name },

@@ -19,7 +19,11 @@ import CardSecurityCode from "./CardSecurityCode";
 import CardShape from "./CardShape";
 import DueDate from "./DueDate";
 
-function CardFormPage({ targetRef }) {
+interface CardFormPageProps {
+  targetRef: React.MutableRefObject<HTMLElement>;
+}
+
+function CardFormPage({ targetRef }: CardFormPageProps) {
   const setPath = useContext(SetPathContext);
   const cardInfo = useContext(CardInfoContext);
 
@@ -29,7 +33,7 @@ function CardFormPage({ targetRef }) {
     setPath("list-card");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     if (!isRequiredCompleted(cardInfo)) return;

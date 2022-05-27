@@ -14,7 +14,7 @@ import {
 } from "./styled";
 
 interface CardProps {
-  large: boolean | undefined;
+  large?: boolean;
   cardCompany: { hexColor: string; name: string };
   cardNumbers: CardNumbers;
   cardOwner: { name: string };

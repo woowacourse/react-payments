@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { INPUT_PRIMARY_BG_COLOR, LABEL_PRIMARY_COLOR } from "style";
 
 interface InputContainerProps {
-  readonly position: string;
-  readonly width: string;
+  readonly position?: string;
+  readonly width?: string;
 }
 
 interface InputWrapperProps {
-  readonly color: string;
-  readonly width: string;
+  readonly color?: string;
+  readonly width?: string;
 }
 
 interface SpanProps {

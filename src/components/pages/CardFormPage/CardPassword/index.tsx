@@ -10,7 +10,7 @@ import { InputContainer, Label, InputWrapper } from "components/common/styled";
 import InactiveContainer from "components/common/InactiveContainer";
 import ErrorMessage from "components/common/ErrorMessage";
 import Input from "components/common/Input";
-import { InputPasswordWrapper } from "./style";
+import { InputPasswordWrapper } from "./styled";
 
 function CardPassword() {
   const { pwd } = useContext(CardInfoContext);
@@ -24,7 +24,9 @@ function CardPassword() {
     }
   );
 
-  const handleInputChange = ({ target }) => {
+  const handleInputChange = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
     updateInputState(target);
   };
 

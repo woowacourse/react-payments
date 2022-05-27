@@ -14,7 +14,7 @@ import {
 } from "components/common/styled";
 import QuestionContainer from "components/common/QuestionIcon";
 import Input from "components/common/Input";
-import { Wrapper } from "./style";
+import { Wrapper } from "./styled";
 
 const CVC_EXPLANATION = `CVC번호는 카드뒷면의 7자리 숫자 중 뒷 3자리입니다.`;
 
@@ -27,7 +27,9 @@ function CardSecurityCode() {
     prevData: cardCode,
   });
 
-  const handleInputChange = ({ target }) => {
+  const handleInputChange = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
     updateInputState(target);
   };
 
@@ -40,7 +42,7 @@ function CardSecurityCode() {
             <Span>
               <Input
                 type="password"
-                maxLength="3"
+                maxLength={3}
                 onChange={handleInputChange}
                 value={cardCode.cvc}
                 name="cvc"

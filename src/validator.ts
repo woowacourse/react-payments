@@ -1,6 +1,4 @@
-interface Validator {
-  (value: string);
-}
+import type { Validator } from "types";
 
 const MAX_CARD_NUMBER_UNIT = 4;
 const validateCardNumbers: Validator = (value) => {

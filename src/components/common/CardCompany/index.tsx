@@ -5,7 +5,7 @@ import { CompanyColorCircle, CompanyContainer, CompanyName } from "./styled";
 interface CardCompanyProps {
   hexColor: string;
   name: string;
-  handleClick: () => void;
+  handleClick: React.MouseEventHandler<HTMLElement>;
 }
 
 function CardCompany({ hexColor, name, handleClick }: CardCompanyProps) {

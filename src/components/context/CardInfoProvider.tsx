@@ -1,42 +1,8 @@
 import React, { useReducer } from "react";
-import type { Month, Reducer } from "types";
-
-interface CardInfoState {
-  cardCompany: {
-    name: string;
-    hexColor: string;
-  };
-  cardNumbers: {
-    cardNoA: string;
-    cardNoB: string;
-    cardNoC: string;
-    cardNoD: string;
-  };
-  cardDate: {
-    month: Month;
-    year: string;
-  };
-  owner: {
-    name: string;
-  };
-  cardCode: {
-    cvc: string;
-  };
-  pwd: {
-    pwdNoA: string;
-    pwdNoB: string;
-  };
-}
+import type { CardInfoActionType, CardInfoState, Reducer } from "types";
 
 type CardInfoAction = {
-  type:
-    | "UPDATE_COMPANY"
-    | "UPDATE_NUMBERS"
-    | "UPDATE_DATE"
-    | "UPDATE_OWNER"
-    | "UPDATE_CARD_CODE"
-    | "UPDATE_PWD"
-    | "RESET_CARD_INFO";
+  type: CardInfoActionType;
 } & Partial<CardInfoState>;
 
 interface CardInfoProviderProps {

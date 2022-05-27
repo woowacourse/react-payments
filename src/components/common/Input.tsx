@@ -4,12 +4,15 @@ import styled from "styled-components";
 import { INPUT_PRIMARY_BG_COLOR, PLACEHOLDER_PRIMARY_COLOR } from "style";
 
 interface InputProps {
-  onChange?: () => void;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   type: "text" | "number" | "password";
   name?: string;
   placeholder?: string;
   readOnly?: boolean;
   value?: string;
+  maxLength?: number;
+  required?: boolean;
+  width?: string;
 }
 
 const InputBox = styled.input`
