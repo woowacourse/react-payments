@@ -1,6 +1,11 @@
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-export default function InputBox({ children }) {
+interface Props {
+  children: ReactNode;
+}
+
+export default function InputBox({ children }: Props) {
   return <Styled.InputBox>{children}</Styled.InputBox>;
 }
 

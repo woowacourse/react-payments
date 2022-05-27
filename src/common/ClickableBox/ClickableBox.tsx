@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  onClick: () => null;
+  onClick: () => void;
 }
 
 export default function ClickableBox({ children, onClick }: PropsWithChildren<Props>) {

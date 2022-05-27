@@ -1,6 +1,11 @@
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-export default function HoverBox({ children }) {
+interface Props {
+  children: ReactNode;
+}
+
+export default function HoverBox({ children }: Props) {
   return <Styled.HoverBox>{children}</Styled.HoverBox>;
 }
 

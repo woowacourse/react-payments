@@ -6,8 +6,15 @@ import NextButton from 'components/NextButton/NextButton';
 import FlexColumnBox from 'components/FlexColumnBox/FlexColumnBox';
 import styled from 'styled-components';
 import ModalOverlay from 'common/Modal/ModalOverlay';
+import { defaultCardState } from 'store/card/CardContext';
 
-export default function CardConfirmModal({ cardData, onCloseModal, onSubmitForm }) {
+interface Props {
+  cardData: typeof defaultCardState;
+  onCloseModal: () => void;
+  onSubmitForm: () => void;
+}
+
+export default function CardConfirmModal({ cardData, onCloseModal, onSubmitForm }: Props) {
   const [nickname, setNickname] = useState(cardData.cardNickname ?? '');
 
   const onChangeNicknameInput = (e) => {
