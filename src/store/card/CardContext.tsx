@@ -1,10 +1,8 @@
-import { createContext, useReducer } from 'react';
+import { createContext, Dispatch, useReducer } from 'react';
 import reducer from 'store/card/reducer';
+import { CardAction } from 'types/cardInfo';
 
-export const CardStateContext = createContext();
-export const CardDispatchContext = createContext();
-
-const defaultCardState = {
+export const defaultCardState = {
   cardNumber: ['', '', '', ''],
   cardNumberErrorMessage: '',
   cardExpiration: ['', ''],
@@ -19,6 +17,9 @@ const defaultCardState = {
   cardNickName: '',
   cards: [],
 };
+
+export const CardStateContext = createContext(defaultCardState);
+export const CardDispatchContext = createContext<Dispatch<CardAction>>(undefined);
 
 const CardContext = ({ children }) => {
   const [cardState, dispatchCardAction] = useReducer(reducer, defaultCardState);

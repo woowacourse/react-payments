@@ -1,6 +1,9 @@
 import { TYPES } from 'store/card/types';
+import { defaultCardState } from 'store/card/CardContext';
 
-const reducer = (state, action) => {
+// TODO action 타입 any 대체
+
+const reducer = (state: typeof defaultCardState, action: any) => {
   switch (action.type) {
     case TYPES.SET_NUMBER: {
       const cardNumber = [...state.cardNumber];
