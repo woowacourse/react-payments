@@ -13,9 +13,13 @@ import Card from "components/common/Card";
 import ErrorMessage from "components/common/ErrorMessage";
 import Footer from "components/common/Footer";
 import TextButton from "components/common/TextButton";
-import { Container, LinedInput, SubmitContainer, Title } from "./style";
+import { Container, LinedInput, SubmitContainer, Title } from "./styled";
 
-function CardSubmitPage({ nextId }) {
+interface CardSubmitPageProps {
+  nextId: React.MutableRefObject<number>;
+}
+
+function CardSubmitPage({ nextId }: CardSubmitPageProps) {
   const setPath = useContext(SetPathContext);
   const { cardCompany, cardNumbers, owner, cardDate } =
     useContext(CardInfoContext);
@@ -25,7 +29,9 @@ function CardSubmitPage({ nextId }) {
   const [nickname, setNickname] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleNicknameInputChange = ({ target: { value } }) => {
+  const handleNicknameInputChange = ({
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
     const trimmedValue = value.trim();
     setNickname(trimmedValue);
     setErrorMessage("");

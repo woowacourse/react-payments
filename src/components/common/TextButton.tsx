@@ -2,9 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 interface TextButtonProps {
+  type?: "button";
   children: React.ReactNode;
   isVisible: boolean;
   hexColor: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Button = styled.button<Partial<TextButtonProps>>`
@@ -28,10 +30,16 @@ function TextButton({
   children: text,
   isVisible,
   hexColor,
+  onClick,
   ...rest
 }: TextButtonProps) {
   return (
-    <Button isVisible={isVisible} hexColor={hexColor} {...rest}>
+    <Button
+      isVisible={isVisible}
+      hexColor={hexColor}
+      onClick={onClick}
+      {...rest}
+    >
       {text}
     </Button>
   );
