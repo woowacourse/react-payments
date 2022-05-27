@@ -24,3 +24,5 @@ yarn-error.log*
 
 .eslintrc.json
 ..prettierrc.json
+
+dist

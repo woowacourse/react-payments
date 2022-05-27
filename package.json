@@ -1,8 +1,15 @@
 {
-  "name": "react-payments",
-  "version": "1.0.0",
-  "description": "<p align=\"middle\" >   <img src=\"https://techcourse-storage.s3.ap-northeast-2.amazonaws.com/0fefce79602043a9b3281ee1dd8f4be6\" width=\"400\"> </p> <h2 align=\"middle\">Level2 - 페이먼츠</h2> <p align=\"middle\">React 모바일 페이먼츠 애플리케이션</p> </p>",
-  "main": ".cz-config.js",
+  "name": "kyoul-pay",
+  "version": "0.0.1",
+  "description": "pay for everywhere service",
+  "keywords": [
+    "react",
+    "typescript",
+    "payment"
+  ],
+  "private": false,
+  "main": "dist/index.js",
+  "browser": "./browser/specific/main.js",
   "dependencies": {
     "@emotion/babel-preset-css-prop": "^11.2.0",
     "@emotion/css": "^11.9.0",
@@ -29,6 +36,7 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^7.0.0",
     "json-server": "^0.17.0",
+    "kyoul-pay": "^0.0.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
@@ -42,13 +50,17 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "server": "json-server data.json --watch --port 4004",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "rm -rf dist && mkdir dist && tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yunjin-kim/react-payments.git"
+    "url": "https://github.com/yunjin-kim/kyoul-payment"
   },
-  "author": "",
+  "contributors": [
+    "yunjin-kim"
+  ],
+  "author": "yunjin-kim",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/yunjin-kim/react-payments/issues"
