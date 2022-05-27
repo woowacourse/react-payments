@@ -1,6 +1,16 @@
+import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-export default function RectangleButton({ children, onClick, colorType }) {
+interface Props {
+  onClick(): void;
+  colorType: string;
+}
+
+export default function RectangleButton({
+  children,
+  onClick,
+  colorType,
+}: PropsWithChildren<Props>) {
   return (
     <Styled.Box onClick={onClick}>
       <Styled.Span colorType={colorType}>{children}</Styled.Span>
@@ -24,7 +34,7 @@ const Styled = {
     }
   `,
 
-  Span: styled.span`
+  Span: styled.span<{ colorType: string }>`
     font-size: 18px;
     color: ${({ colorType }) => colorType === 'delete' && 'red'};
   `,

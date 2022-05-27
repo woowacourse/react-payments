@@ -1,7 +1,17 @@
 import PrevButton from 'components/PrevButton/PrevButton';
+import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-export default function PageTitle({ children, onClickPrev, hasPrevButton }) {
+interface Props {
+  onClickPrev(): void;
+  hasPrevButton: boolean;
+}
+
+export default function PageTitle({
+  children,
+  onClickPrev,
+  hasPrevButton,
+}: PropsWithChildren<Props>) {
   return (
     <Styled.PageTitleBox>
       {hasPrevButton && <PrevButton onClick={onClickPrev} />}

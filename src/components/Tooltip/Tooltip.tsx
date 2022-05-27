@@ -1,6 +1,10 @@
 import styled from 'styled-components';
+import { PropsWithChildren } from 'react';
 
-export default function Tooltip({ onClick, children }) {
+interface Props {
+  onClick(): void;
+}
+export default function Tooltip({ onClick, children }: PropsWithChildren<Props>) {
   return <Styled.Tooltip onClick={onClick}>{children}</Styled.Tooltip>;
 }
 

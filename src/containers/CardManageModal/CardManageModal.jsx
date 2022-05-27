@@ -20,7 +20,9 @@ export default function CardManageModal({
           <RectangleButton onClick={onDeleteCard} colorType="delete">
             카드 삭제
           </RectangleButton>
-          <RectangleButton onClick={onClickEditNickname}>카드명 수정</RectangleButton>
+          <RectangleButton onClick={onClickEditNickname} colorType="modify">
+            카드명 수정
+          </RectangleButton>
         </Styled.FlexBox>
       </FlexColumnBox>
     </ModalToast>

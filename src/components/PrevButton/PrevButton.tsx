@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export default function PrevButton({ onClick }) {
+interface Props {
+  onClick(): void;
+}
+
+export default function PrevButton({ onClick }: Props) {
   return <Styled.PrevButton onClick={onClick}>&#8249;</Styled.PrevButton>;
 }
 

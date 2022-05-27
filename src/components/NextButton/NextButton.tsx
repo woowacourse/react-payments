@@ -1,6 +1,19 @@
+import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
+import { CardColor } from 'types/cardInfo';
 
-export default function NextButton({ onClick, disabled, children, color }) {
+interface Props {
+  onClick(): void;
+  disabled: boolean;
+  color: CardColor;
+}
+
+export default function NextButton({
+  onClick,
+  disabled,
+  children,
+  color,
+}: PropsWithChildren<Props>) {
   return (
     <Styled.NextButtonBox>
       <Styled.NextButton color={color} onClick={onClick} disabled={disabled}>
@@ -18,7 +31,7 @@ const Styled = {
     margin-left: auto;
   `,
 
-  NextButton: styled.button`
+  NextButton: styled.button<{ color: string }>`
     cursor: pointer;
     color: #fff;
     background-color: ${({ color }) => color};
