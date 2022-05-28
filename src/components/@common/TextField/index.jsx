@@ -19,7 +19,7 @@ TextField.defaultProps = {
   type: 'text',
   className: 'input-basic',
   placeholder: '',
-  maxLength: 0,
+  maxLength: 15,
   onBlur: () => {},
 };
 
