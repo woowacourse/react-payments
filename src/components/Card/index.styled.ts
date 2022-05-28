@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { COLOR_TYPE } from '../../constant';
-import { TColor } from '../../types';
 
 export const Container = styled.div`
   position: relative;
@@ -11,7 +9,7 @@ export const Container = styled.div`
   margin: 10px 0;
 `;
 
-export const EmptyCard = styled.div<{ color: TColor }>`
+export const EmptyCard = styled.div<{ color: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,7 +21,7 @@ export const EmptyCard = styled.div<{ color: TColor }>`
   font-size: 30px;
   color: #575757;
 
-  background: ${({ color }) => COLOR_TYPE[color] || 'white'};
+  background: ${({ color }) => color || 'white'};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 

@@ -17,49 +17,16 @@ export const REG_EXP = {
   CHARACTER_ONLY: /^[a-zA-Z]+$/,
 };
 
-export const CARD_COLOR_BY_NAME = {
-  롯데카드: 'red',
-  삼성카드: 'blue',
-  NH농협카드: 'green',
-  신한카드: 'purple',
-  현대카드: 'mint',
-  하나카드: 'pink',
-  BC카드: 'orange',
-  KB국민카드: 'yellow',
+export const CARD_TYPE = {
+  롯데카드: { color: '#E24141' },
+  삼성카드: { color: '#547CE4' },
+  NH농협카드: { color: '#73BC6D' },
+  신한카드: { color: '#DE59B9' },
+  현대카드: { color: '#04C09E' },
+  하나카드: { color: '#E76E9A' },
+  BC카드: { color: '#F37D3B' },
+  KB국민카드: { color: '#FBCD58' },
 } as const;
-
-export const COLOR_TYPE = {
-  red: '#E24141',
-  blue: '#547CE4',
-  green: '#73BC6D',
-  purple: '#DE59B9',
-  mint: '#04C09E',
-  pink: '#E76E9A',
-  orange: ' #F37D3B',
-  yellow: '#FBCD58',
-} as const;
-
-export const COLOR_NAMES = [
-  'red',
-  'blue',
-  'green',
-  'purple',
-  'pink',
-  'orange',
-  'yellow',
-  'mint',
-];
-
-export const CARD_TYPE_NAMES = [
-  '롯데카드',
-  '삼성카드',
-  'NH농협카드',
-  '신한카드',
-  '현대카드',
-  '하나카드',
-  'BC카드',
-  'KB국민카드',
-];
 
 export const INPUT_SCALE_TYPE = {
   large: '318',

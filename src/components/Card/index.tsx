@@ -1,5 +1,5 @@
 import React from 'react';
-import { CARD_COLOR_BY_NAME } from '../../constant';
+import { CARD_TYPE } from '../../constant';
 import { TCard } from '../../types';
 import * as Styled from './index.styled';
 
@@ -15,7 +15,6 @@ interface Props {
   cardType: TCard;
   onClick: () => void;
 }
-// cartType 나중에 최상위에서 타입 지정하기
 
 const Card = ({
   onClick,
@@ -30,7 +29,7 @@ const Card = ({
 }: Props) => {
   return (
     <Styled.Container onClick={onClick}>
-      <Styled.EmptyCard color={CARD_COLOR_BY_NAME[cardType]}>
+      <Styled.EmptyCard color={CARD_TYPE[cardType]?.color ?? 'white'}>
         <Styled.CardTop>
           <Styled.CardName>{cardType ? cardType : '카드이름'}</Styled.CardName>
         </Styled.CardTop>

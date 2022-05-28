@@ -1,9 +1,8 @@
 import React from 'react';
-import { TColor } from '../../../types';
 import * as Styled from './index.styled';
 
 interface Props {
-  color: TColor;
+  color: string;
   name: string;
   onClick: () => void;
 }

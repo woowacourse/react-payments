@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { TColor } from '../../../types';
-import { COLOR_TYPE } from '../../../constant';
 
 export const Container = styled.div`
   display: flex;
@@ -11,8 +9,8 @@ export const Container = styled.div`
   width: 80px;
 `;
 
-export const OptionContainer = styled.div<{ color: TColor }>`
-  background-color: ${({ color }) => COLOR_TYPE[color]};
+export const OptionContainer = styled.div<{ color: string }>`
+  background-color: ${({ color }) => color};
   width: 37px;
   height: 37px;
   border-radius: 50%;

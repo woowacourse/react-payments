@@ -1,13 +1,3 @@
-export type TColor =
-  | 'red'
-  | 'blue'
-  | 'green'
-  | 'purple'
-  | 'pink'
-  | 'orange'
-  | 'yellow'
-  | 'mint';
-
 export type TCard =
   | '롯데카드'
   | '삼성카드'
