@@ -1,4 +1,4 @@
-import { useReducer, createContext } from 'react';
+import { useReducer } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Layout from 'components/common/Layout';
@@ -8,19 +8,18 @@ import CardAppPage from 'page/cardAdd';
 import ConfirmationPage from 'page/confirmation';
 import reducer from 'reducer/card';
 import { ROUTE, BASENAME } from 'constants';
+import { CardContext } from 'hooks/useCardContext';
 
 const initialState = {
   cards: [],
 };
-
-export const CardDispatch = createContext(null);
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <Layout>
-      <CardDispatch.Provider value={{ state, dispatch }}>
+      <CardContext.Provider value={{ state, dispatch }}>
         <BrowserRouter basename={BASENAME}>
           <Header />
           <Routes>
@@ -30,7 +29,7 @@ const App = () => {
             <Route path={ROUTE.NO_MATCHED} element={<Navigate to={ROUTE.MAIN} />} />
           </Routes>
         </BrowserRouter>
-      </CardDispatch.Provider>
+      </CardContext.Provider>
     </Layout>
   );
 };

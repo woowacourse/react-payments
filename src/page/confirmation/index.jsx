@@ -1,7 +1,6 @@
-import { useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useAlias from 'hooks/useAlias';
-import { CardDispatch } from 'App';
+import useCardContext from 'hooks/useCardContext';
 
 import CardPreview from 'components/CardPreview';
 import Button from 'components/common/Button';
@@ -13,7 +12,7 @@ import { INPUT_MAX_LENGTH } from 'constants';
 
 const ConfirmationPage = () => {
   const navigate = useNavigate();
-  const { state, dispatch } = useContext(CardDispatch);
+  const { state, dispatch } = useCardContext();
   const { id } = useParams();
   const { theme, company, number, expiryDate, ownerName } = state.cards.find(
     (card) => card.id === id,

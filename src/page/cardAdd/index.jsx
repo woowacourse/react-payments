@@ -1,7 +1,6 @@
-import { useReducer, useCallback, useContext, useRef } from 'react';
+import { useReducer, useCallback, useRef } from 'react';
 import useCardInfo from 'hooks/useCardInfo';
 import { useNavigate } from 'react-router-dom';
-import { CardDispatch } from 'App';
 
 import FormInput from 'components/common/FormInput';
 import CardPreview from 'components/CardPreview';
@@ -22,6 +21,7 @@ import {
   cardCompanyList,
 } from './data';
 import { ACTION, ROUTE } from 'constants';
+import useCardContext from 'hooks/useCardContext';
 
 const initialCardInfo = {
   company: '',
@@ -46,7 +46,7 @@ const initialCardInfo = {
 
 const CardAppPage = () => {
   const navigate = useNavigate();
-  const { dispatch } = useContext(CardDispatch);
+  const { dispatch } = useCardContext();
   const [cardInfo, isFullFilled, handleCardInfo] = useCardInfo(initialCardInfo);
   const [modalVisible, handleModal] = useReducer((visible) => !visible, false);
   const { number, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
