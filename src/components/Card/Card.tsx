@@ -1,13 +1,8 @@
 import styled from 'styled-components';
 import CardBox from 'common/CardBox/CardBox';
-import { CardColor } from 'types/cardInfo';
+import { CardData } from 'types/cardInfo';
 
-interface CardProps {
-  cardNumber: number;
-  cardOwner: string;
-  cardExpiration: string[];
-  cardName: string;
-  cardColor: CardColor;
+export interface CardProps extends CardData {
   isSmall: boolean;
 }
 

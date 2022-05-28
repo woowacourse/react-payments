@@ -6,12 +6,16 @@ import NextButton from 'components/NextButton/NextButton';
 import FlexColumnBox from 'components/FlexColumnBox/FlexColumnBox';
 import styled from 'styled-components';
 import ModalOverlay from 'common/Modal/ModalOverlay';
-import { defaultCardState } from 'store/card/CardContext';
+import { CardData } from 'types/cardInfo';
+
+interface func {
+  (event: React.FormEvent<HTMLFormElement>, nickname: string): void;
+}
 
 interface Props {
-  cardData: typeof defaultCardState;
-  onCloseModal: () => void;
-  onSubmitForm: () => void;
+  cardData: CardData;
+  onCloseModal(): void;
+  onSubmitForm(cardData: CardData): func;
 }
 
 export default function CardConfirmModal({ cardData, onCloseModal, onSubmitForm }: Props) {
@@ -22,7 +26,7 @@ export default function CardConfirmModal({ cardData, onCloseModal, onSubmitForm 
   };
 
   return (
-    <ModalOverlay>
+    <ModalOverlay onCloseModal={onCloseModal}>
       <PageTitle hasPrevButton={true} onClickPrev={onCloseModal}>
         카드명 수정
       </PageTitle>

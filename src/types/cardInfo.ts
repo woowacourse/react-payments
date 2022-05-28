@@ -14,4 +14,13 @@ type CardColor =
 
 type CardAction = { type: typeof TYPES; cards: typeof CARD_COMPANIES };
 
+export interface CardData {
+  cardNumber: number;
+  cardOwner: string;
+  cardExpiration: string[];
+  cardName: string;
+  cardColor: CardColor;
+  cardNickname?: string;
+}
+
 export type { CardColor, CardAction };

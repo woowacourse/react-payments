@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { CardColor } from 'types/cardInfo';
 
 interface Props {
-  onClick(): void;
+  onClick?(): void;
   disabled: boolean;
   color: CardColor;
 }
