@@ -88,8 +88,8 @@ const validateCard = ({
 
 export {
   validateCardNumber,
-  validateExpireDate,
   validateCardPassword,
+  validateExpireDate,
   validateSecurityCode,
   validateUserName,
   validateCard,
