@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { PATH } from 'constants';
+import { ERROR_MESSAGE, PATH } from 'constants';
 
 const getCards = async () => {
-  const response = await axios.get(`${PATH.JSON_SERVER_BASE_URL}/cards`);
+  const response = await axios.get(`${PATH.JSON_SERVER_BASE_URL}/cards`).catch(() => {
+    throw new Error(ERROR_MESSAGE.REQUEST.FAIL_TO_GET_CARDS);
+  });
 
   return response.data;
 };

@@ -14,9 +14,13 @@ function CardList() {
 
   useEffect(() => {
     const updateCards = async () => {
-      const newCards = await getCards();
+      try {
+        const newCards = await getCards();
 
-      setCards(newCards);
+        setCards(newCards);
+      } catch (error) {
+        alert(error.message);
+      }
     };
 
     updateCards();
