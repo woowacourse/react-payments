@@ -1,8 +1,8 @@
-import { ReactNode } from 'react';
+import { ReactElement } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  children: ReactNode;
+  children: ReactElement;
 }
 
 export default function HoverBox({ children }: Props) {

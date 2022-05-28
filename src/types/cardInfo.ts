@@ -15,6 +15,8 @@ type CardAction = {
   index?: number;
   errorMessage?: string;
   newCardData?: object;
+  nickname?: string;
+  id?: string;
 };
 
 interface CardData {
@@ -24,6 +26,9 @@ interface CardData {
   cardName: string;
   cardColor: string;
   cardNickname?: string;
+  id?: string;
+  cardCvc?: string;
+  cardPassword?: string[];
 }
 
 export type { CardColor, CardAction, CardData };

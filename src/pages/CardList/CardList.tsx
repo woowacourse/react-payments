@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { ReactNode, useContext, useState } from 'react';
 import styled from 'styled-components';
 import { TYPES } from 'store/card/types';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
@@ -12,15 +12,37 @@ import DraggableCard from 'common/DragDrop/DraggableCard';
 import CardConfirmModal from 'containers/CardConfirmModal/CardConfirmModal';
 import ClickableBox from 'common/ClickableBox/ClickableBox';
 import CardManageModal from 'containers/CardManageModal/CardManageModal';
+import { onSubmitFormType } from 'common/Form/Form';
 
-export default function CardList({ navigate }) {
+const initialCardDataState = {
+  cardNumber: [],
+  cardOwner: '',
+  cardExpiration: [],
+  cardName: '',
+  cardColor: '',
+  id: '',
+};
+
+interface CardData {
+  cardNumber: string[];
+  cardOwner: string;
+  cardExpiration: string[];
+  cardName: string;
+  cardColor: string;
+  cardNickname: string;
+  id: string;
+  cardCvc: string;
+  cardPassword: string[];
+}
+
+export default function CardList({ navigate }: { navigate: (arg0: string) => void }) {
   const { cards } = useContext(CardStateContext);
   const dispatch = useContext(CardDispatchContext);
-  const [modalCardData, setModalCardData] = useState();
+  const [modalCardData, setModalCardData] = useState(initialCardDataState);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isManageModalOpen, setIsManageModalOpen] = useState(false);
 
-  const onClickCard = (cardData) => {
+  const onClickCard = (cardData: CardData) => {
     setModalCardData(cardData);
     setIsManageModalOpen(true);
   };
@@ -29,17 +51,19 @@ export default function CardList({ navigate }) {
     navigate('/add-card');
   };
 
-  const onSubmitForm = (cardData) => (event, nickname) => {
-    event.preventDefault();
+  const onSubmitForm =
+    (cardData: CardData): onSubmitFormType =>
+    (event, nickname) => {
+      event.preventDefault();
 
-    const id = cardData.id;
-    dispatch({ type: TYPES.UPDATE_NICKNAME, nickname, id });
+      const id = cardData.id;
+      dispatch({ type: TYPES.UPDATE_NICKNAME, nickname, id });
 
-    setIsConfirmModalOpen(false);
-    navigate('/card-list');
-  };
+      setIsConfirmModalOpen(false);
+      navigate('/card-list');
+    };
 
-  const onDeleteCard = (id) => {
+  const onDeleteCard = (id: string) => {
     if (id && confirm('등록된 카드를 삭제하시겠습니까?')) {
       dispatch({ type: TYPES.DELETE_CARD, id });
       setIsManageModalOpen(false);
@@ -56,26 +80,28 @@ export default function CardList({ navigate }) {
       <PageTitle hasPrevButton={false}>보유 카드</PageTitle>
       <FlexColumnBox>
         <DroppableArea cards={cards} dispatch={dispatch} type={TYPES.SET_CARD_ORDER}>
-          {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
-              {cards.map((cardData, index) => (
-                <DraggableCard key={cardData.id} card={cardData} index={index}>
-                  <ClickableBox onClick={() => onClickCard(cardData)}>
-                    <Card
-                      cardNumber={cardData.cardNumber}
-                      cardExpiration={cardData.cardExpiration}
-                      cardOwner={cardData.cardOwner}
-                      cardName={cardData.cardName}
-                      cardColor={cardData.cardColor}
-                      isSmall={true}
-                    />
-                  </ClickableBox>
-                  <Styled.CardNickname>{cardData.cardNickname}</Styled.CardNickname>
-                </DraggableCard>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
+          {(provided: any) => {
+            return (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                {cards.map((cardData: CardData, index: number) => (
+                  <DraggableCard key={cardData.id} card={cardData} index={index}>
+                    <ClickableBox onClick={() => onClickCard(cardData)}>
+                      <Card
+                        cardNumber={cardData.cardNumber}
+                        cardExpiration={cardData.cardExpiration}
+                        cardOwner={cardData.cardOwner}
+                        cardName={cardData.cardName}
+                        cardColor={cardData.cardColor}
+                        isSmall={true}
+                      />
+                    </ClickableBox>
+                    <Styled.CardNickname>{cardData.cardNickname}</Styled.CardNickname>
+                  </DraggableCard>
+                ))}
+                {provided.placeholder}
+              </div>
+            ) as ReactNode;
+          }}
         </DroppableArea>
         <ClickableBox onClick={onClickAnotherCard}>
           <AnotherCard />

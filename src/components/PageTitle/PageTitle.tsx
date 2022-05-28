@@ -3,7 +3,7 @@ import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  onClickPrev(): void;
+  onClickPrev?(): void;
   hasPrevButton: boolean;
 }
 

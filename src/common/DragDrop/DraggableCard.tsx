@@ -1,9 +1,10 @@
 import { PropsWithChildren } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
+import { CardData } from 'types/cardInfo';
 
 interface Props {
-  card: { id: string };
+  card: CardData;
   index: number;
 }
 
