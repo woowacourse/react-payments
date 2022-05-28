@@ -8,12 +8,17 @@ import Label from 'components/Label/Label';
 import InputContainer from 'common/InputContainer/InputContainer';
 import InputBox from 'common/InputBox/InputBox';
 import { InputBasic } from 'components/Input/Input';
+import { CardColor } from 'types/cardInfo';
 
-export default function CardExpiration({ color }) {
+interface Props {
+  color: CardColor;
+}
+
+export default function CardExpiration({ color }: Props) {
   const { cardExpiration, cardExpirationErrorMessage } = useContext(CardStateContext);
   const dispatch = useContext(CardDispatchContext);
 
-  const onChangeInput = (index) => (e) => {
+  const onChangeInput = (index: number) => (e) => {
     dispatch({ type: TYPES.SET_EXPIRATION, value: e.target.value, index });
   };
   const name = '만료일';

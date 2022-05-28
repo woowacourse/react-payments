@@ -9,7 +9,7 @@ type CardColor =
   | '#FBCD58'
   | '#e5e5e5';
 
-type CardAction = { type: string; value: string };
+type CardAction = { type: string; value?: string; index?: number };
 
 interface CardData {
   cardNumber: number;

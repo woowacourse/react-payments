@@ -5,11 +5,15 @@ import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
 import { TYPES } from 'store/card/types';
 import ModalToast from 'common/Modal/ModalToast';
 
-export default function CardListModal({ onCloseModal }) {
+interface Props {
+  onCloseModal(): void;
+}
+
+export default function CardListModal({ onCloseModal }: Props) {
   const { cardCompanyIndex } = useContext(CardStateContext);
   const dispatch = useContext(CardDispatchContext);
 
-  const onChooseCompany = (index) =>
+  const onChooseCompany = (index: number) =>
     useCallback(() => {
       dispatch({ type: TYPES.SET_COMPANY_INDEX, index });
       onCloseModal();

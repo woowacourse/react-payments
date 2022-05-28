@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import validator from 'lib/validations';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
@@ -8,13 +8,19 @@ import Label from 'components/Label/Label';
 import styled from 'styled-components';
 import InputBox from 'common/InputBox/InputBox';
 import { InputBasic } from 'components/Input/Input';
+import { CardColor } from 'types/cardInfo';
 
-export default function CardNumber({ color, setIsListModalOpen }) {
+interface Props {
+  color: CardColor;
+  setIsListModalOpen(arg0: boolean): void;
+}
+
+export default function CardNumber({ color, setIsListModalOpen }: Props) {
   const { cardNumber, cardNumberErrorMessage, cardCompanyIndex } = useContext(CardStateContext);
 
   const dispatch = useContext(CardDispatchContext);
 
-  const onChangeInput = (index) => (e) => {
+  const onChangeInput = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: TYPES.SET_NUMBER, value: e.target.value, index });
   };
 
@@ -94,7 +100,7 @@ const Styled = {
 
   ExtendedInputContainer: styled.div`
     display: flex;
-    width: ${({ width }) => width || '100%'};
+    width: '100%';
     background-color: #ecebf1;
     border-radius: 0.25rem;
     justify-content: space-between;

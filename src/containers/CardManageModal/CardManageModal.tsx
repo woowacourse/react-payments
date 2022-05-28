@@ -2,13 +2,21 @@ import ModalToast from 'common/Modal/ModalToast';
 import styled from 'styled-components';
 import RectangleButton from 'components/RectangleButton/RectangleButton';
 import FlexColumnBox from 'components/FlexColumnBox/FlexColumnBox';
+import { CardData } from 'types/cardInfo';
+
+interface Props {
+  onCloseModal(): void;
+  onDeleteCard(): void;
+  onClickEditNickname(): void;
+  cardData: CardData;
+}
 
 export default function CardManageModal({
   onCloseModal,
   onDeleteCard,
   onClickEditNickname,
   cardData,
-}) {
+}: Props) {
   return (
     <ModalToast onCloseModal={onCloseModal}>
       <FlexColumnBox>
