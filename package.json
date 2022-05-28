@@ -79,6 +79,7 @@
     "eslint-plugin-storybook": "^0.5.11",
     "gh-pages": "^3.2.3",
     "prettier": "^2.6.2",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
     "webpack": "^5.72.0"
   },
   "homepage": "https://woose28.github.io/react-payments/"
