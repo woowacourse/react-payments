@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
 import validator from 'lib/validations';
 import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
@@ -9,12 +9,13 @@ import InputContainer from 'common/InputContainer/InputContainer';
 import InputBox from 'common/InputBox/InputBox';
 import styled from 'styled-components';
 import { InputBasicLeft } from 'components/Input/Input';
+import { CardColor } from 'types/cardInfo';
 
-export default function CardOwner({ color }) {
+export default function CardOwner({ color }: { color: CardColor }) {
   const { cardOwner, cardOwnerErrorMessage } = useContext(CardStateContext);
   const dispatch = useContext(CardDispatchContext);
 
-  const onChangeInput = (e) => {
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: TYPES.SET_OWNER, value: e.target.value });
   };
   const name = '카드소유자 이름(선택)';
@@ -59,7 +60,7 @@ const Styled = {
     justify-content: space-between;
     margin-bottom: 4px;
   `,
-  NameLength: styled.p`
+  NameLength: styled.p<{ isLengthValidated: boolean }>`
     margin: 0;
     letter-spacing: -0.05em;
     font-size: 12px;

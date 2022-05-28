@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  width: string;
+  width?: string;
 }
 
 export default function InputContainer({ children, width }: PropsWithChildren<Props>) {

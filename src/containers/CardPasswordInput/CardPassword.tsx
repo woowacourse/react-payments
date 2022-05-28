@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import ErrorMessage from 'containers/ErrorMessage/ErrorMessage';
 import validator from 'lib/validations';
 import { CardDispatchContext, CardStateContext } from 'store/card/CardContext';
@@ -8,12 +8,13 @@ import Label from 'components/Label/Label';
 import Circle from 'components/Circle/Circle';
 import styled from 'styled-components';
 import { InputBasic } from 'components/Input/Input';
+import { CardColor } from 'types/cardInfo';
 
-export default function CardPassword({ color }) {
+export default function CardPassword({ color }: { color: CardColor }) {
   const { cardPassword, cardPasswordErrorMessage } = useContext(CardStateContext);
   const dispatch = useContext(CardDispatchContext);
 
-  const onChangeInput = (index) => (e) => {
+  const onChangeInput = (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: TYPES.SET_PASSWORD, value: e.target.value, index });
   };
 

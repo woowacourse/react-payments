@@ -1,8 +1,19 @@
-import { useContext, useEffect } from 'react';
+import { PropsWithChildren, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { CardDispatchContext } from 'store/card/CardContext';
 
-export default function ErrorMessage({ value, children, validate, type }) {
+interface Props {
+  value: string | string[];
+  validate(value: string | string[]): void;
+  type: string;
+}
+
+export default function ErrorMessage({
+  value,
+  children,
+  validate,
+  type,
+}: PropsWithChildren<Props>) {
   const dispatch = useContext(CardDispatchContext);
 
   useEffect(() => {
