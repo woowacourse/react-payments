@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLOR_TYPE } from '../../constant';
+import { TColor } from '../../types';
 
 export const Container = styled.div`
   position: relative;
@@ -10,7 +11,7 @@ export const Container = styled.div`
   margin: 10px 0;
 `;
 
-export const EmptyCard = styled.div`
+export const EmptyCard = styled.div<{ color: TColor }>`
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,6 +1,21 @@
-import PropTypes from 'prop-types';
-import { CARD_TYPE_NAMES, CARD_COLOR_BY_NAME } from '../../constant';
+import React from 'react';
+import { CARD_COLOR_BY_NAME } from '../../constant';
+import { TCard } from '../../types';
 import * as Styled from './index.styled';
+
+interface Props {
+  name: string;
+  ownerName: string;
+  expiredMonth: string;
+  expiredYear: string;
+  firstCardNumber: string;
+  secondCardNumber: string;
+  thirdCardNumber: string;
+  fourthCardNumber: string;
+  cardType: TCard;
+  onClick: () => void;
+}
+// cartType 나중에 최상위에서 타입 지정하기
 
 const Card = ({
   onClick,
@@ -12,7 +27,7 @@ const Card = ({
   expiredYear,
   cardType,
   ownerName,
-}) => {
+}: Props) => {
   return (
     <Styled.Container onClick={onClick}>
       <Styled.EmptyCard color={CARD_COLOR_BY_NAME[cardType]}>
@@ -46,19 +61,6 @@ const Card = ({
       </Styled.EmptyCard>
     </Styled.Container>
   );
-};
-
-Card.propTypes = {
-  name: PropTypes.string,
-  ownerName: PropTypes.string,
-  expiredMonth: PropTypes.string,
-  expiredYear: PropTypes.string,
-  firstCardNumber: PropTypes.string,
-  secondCardNumber: PropTypes.string,
-  thirdCardNumber: PropTypes.string,
-  fourthCardNumber: PropTypes.string,
-  cardType: PropTypes.oneOf(CARD_TYPE_NAMES),
-  onClick: PropTypes.func,
 };
 
 export default Card;
