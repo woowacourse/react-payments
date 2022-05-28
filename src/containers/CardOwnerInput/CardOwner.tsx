@@ -9,9 +9,8 @@ import InputContainer from 'common/InputContainer/InputContainer';
 import InputBox from 'common/InputBox/InputBox';
 import styled from 'styled-components';
 import { InputBasicLeft } from 'components/Input/Input';
-import { CardColor } from 'types/cardInfo';
 
-export default function CardOwner({ color }: { color: CardColor }) {
+export default function CardOwner({ color }: { color: string }) {
   const { cardOwner, cardOwnerErrorMessage } = useContext(CardStateContext);
   const dispatch = useContext(CardDispatchContext);
 

@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 import { lighten } from 'polished';
 
-export const InputBasic = styled.input`
+export const InputBasic = styled.input<{ color: string }>`
   background-color: #ecebf1;
   border-radius: 0.25rem;
   border-color: #9ca3af;
   padding-left: 5px;
   height: 45px;
-  width: ${({ width }) => width || '100%'};
+  width: 100%;
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;

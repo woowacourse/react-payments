@@ -1,10 +1,9 @@
 import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
-import { CardColor } from 'types/cardInfo';
 
 interface Props {
   size: string;
-  color: CardColor;
+  color: string;
 }
 
 export default function Circle({ children, size, color }: PropsWithChildren<Props>) {

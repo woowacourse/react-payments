@@ -1,11 +1,10 @@
 import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
-import { CardColor } from 'types/cardInfo';
 
 interface Props {
   onClick?(): void;
   disabled: boolean;
-  color: CardColor;
+  color: string;
 }
 
 export default function NextButton({

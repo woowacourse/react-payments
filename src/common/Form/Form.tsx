@@ -1,7 +1,8 @@
 import React, { PropsWithChildren } from 'react';
 
+export type onSubmitFormType = (event: React.FormEvent<HTMLFormElement>, nickname: string) => void;
 interface Props {
-  onSubmitForm(event: React.FormEvent<HTMLFormElement>, nickname: string): void;
+  onSubmitForm: onSubmitFormType;
   nickname: string;
 }
 

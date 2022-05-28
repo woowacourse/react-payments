@@ -8,10 +8,9 @@ import Label from 'components/Label/Label';
 import InputContainer from 'common/InputContainer/InputContainer';
 import InputBox from 'common/InputBox/InputBox';
 import { InputBasic } from 'components/Input/Input';
-import { CardColor } from 'types/cardInfo';
 
 interface Props {
-  color: CardColor;
+  color: string;
 }
 
 export default function CardExpiration({ color }: Props) {

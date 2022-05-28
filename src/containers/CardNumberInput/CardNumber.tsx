@@ -8,10 +8,9 @@ import Label from 'components/Label/Label';
 import styled from 'styled-components';
 import InputBox from 'common/InputBox/InputBox';
 import { InputBasic } from 'components/Input/Input';
-import { CardColor } from 'types/cardInfo';
 
 interface Props {
-  color: CardColor;
+  color: string;
   setIsListModalOpen(arg0: boolean): void;
 }
 

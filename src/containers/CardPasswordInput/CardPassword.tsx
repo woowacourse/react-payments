@@ -8,9 +8,8 @@ import Label from 'components/Label/Label';
 import Circle from 'components/Circle/Circle';
 import styled from 'styled-components';
 import { InputBasic } from 'components/Input/Input';
-import { CardColor } from 'types/cardInfo';
 
-export default function CardPassword({ color }: { color: CardColor }) {
+export default function CardPassword({ color }: { color: string }) {
   const { cardPassword, cardPasswordErrorMessage } = useContext(CardStateContext);
   const dispatch = useContext(CardDispatchContext);
 

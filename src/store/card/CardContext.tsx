@@ -14,6 +14,7 @@ export const defaultCardState = {
   cardPassword: ['', ''],
   cardPasswordErrorMessage: '',
   cardCompanyIndex: -1,
+  cardCompanyErrorMessage: '',
   cardNickname: '',
   cards: [],
 };

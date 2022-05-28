@@ -18,8 +18,20 @@ import { TYPES } from 'store/card/types';
 import Container from 'common/Container/Container';
 import CardConfirmModal from 'containers/CardConfirmModal/CardConfirmModal';
 import ClickableBox from 'common/ClickableBox/ClickableBox';
+import { onSubmitFormType } from 'common/Form/Form';
+import { CardData } from 'types/cardInfo';
 
-function AddCard({ navigate }) {
+const initialCardDataState = {
+  cardName: '',
+  cardColor: '',
+  cardNumber: [],
+  cardExpiration: [],
+  cardOwner: '',
+  cardCvc: '',
+  cardPassword: [],
+};
+
+function AddCard({ navigate }: { navigate: (arg0: string) => void }) {
   const {
     cardNumber,
     cardExpiration,
@@ -33,7 +45,7 @@ function AddCard({ navigate }) {
   const [isListModalOpen, setIsListModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isTipModalOpen, setIsTipModalOpen] = useState(false);
-  const [cardData, setCardData] = useState();
+  const [cardData, setCardData] = useState(initialCardDataState);
 
   const onClickPrev = () => {
     navigate('/card-list');
@@ -80,18 +92,20 @@ function AddCard({ navigate }) {
     setIsConfirmModalOpen(false);
   };
 
-  const onSubmitForm = (cardData) => (event, nickname) => {
-    event.preventDefault();
-    const newCardData = {
-      ...cardData,
-      cardNickname: nickname,
-      id: uuidv4(),
-    };
-    dispatch({ type: TYPES.ADD_CARD, newCardData });
+  const onSubmitForm =
+    (cardData: CardData): onSubmitFormType =>
+    (event, nickname) => {
+      event.preventDefault();
+      const newCardData = {
+        ...cardData,
+        cardNickname: nickname,
+        id: uuidv4(),
+      };
+      dispatch({ type: TYPES.ADD_CARD, newCardData });
 
-    onCloseModal();
-    navigate('/card-list');
-  };
+      onCloseModal();
+      navigate('/card-list');
+    };
 
   return (
     <Container>
@@ -111,7 +125,7 @@ function AddCard({ navigate }) {
       </ClickableBox>
 
       <ErrorMessage
-        value={cardCompanyIndex}
+        value={String(cardCompanyIndex)}
         validate={validator.checkCardCompany}
         type={TYPES.SET_COMPANY_ERROR_MESSAGE}
       >
