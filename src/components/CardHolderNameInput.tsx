@@ -14,10 +14,12 @@ export default function CardHolderNameInput() {
 
   const { holderName } = state;
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = ({
+    target: { value },
+  }) => {
     setInvalid(false);
 
-    setState({ ...state, holderName: e.target.value.toUpperCase() });
+    setState({ payload: { holderName: value.toUpperCase() } });
   };
 
   const triggerInvalid = useCallback(() => setInvalid(true), []);

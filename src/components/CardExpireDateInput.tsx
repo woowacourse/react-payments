@@ -5,6 +5,7 @@ import { CARD_INFO_RULES } from "utils/constants";
 import Input from "components/UIComponents/Input/Input";
 import InputField from "components/UIComponents/InputField/InputField";
 import { CardInfoContext } from "context/CardInfoContextProvider";
+import { OrderedInputUpdateHandlerInterface } from "./CardInputInterface";
 
 export default function CardExpireDateInput() {
   const [isInvalid, setInvalid] = useState(false);
@@ -12,16 +13,15 @@ export default function CardExpireDateInput() {
 
   const { expireDate } = state;
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    order: number
-  ) => {
-    setInvalid(false);
+  const handleInputChange: OrderedInputUpdateHandlerInterface =
+    (order) =>
+    ({ target: { value: inputValue } }) => {
+      setInvalid(false);
 
-    const newExpireDate = [...expireDate];
-    newExpireDate[order] = e.target.value;
-    setState({ ...state, expireDate: newExpireDate });
-  };
+      const newExpireDate = [...expireDate];
+      newExpireDate[order] = inputValue;
+      setState({ payload: { expireDate: newExpireDate } });
+    };
 
   const triggerInvalid = useCallback(() => setInvalid(true), []);
 
@@ -44,7 +44,7 @@ export default function CardExpireDateInput() {
         required
         width={"sm"}
         isComplete={expireDate[0].length === 2}
-        onChange={(e) => handleInputChange(e, 0)}
+        onChange={(e) => handleInputChange(0)}
         onInvalid={triggerInvalid}
         pattern={"^$|(^0?[1-9]$)|(^1?[0-2]$)"}
         data-testid={"expire-date"}
@@ -59,7 +59,7 @@ export default function CardExpireDateInput() {
         required
         width={"sm"}
         isComplete={expireDate[1].length === 2}
-        onChange={(e) => handleInputChange(e, 1)}
+        onChange={(e) => handleInputChange(1)}
         onInvalid={triggerInvalid}
         pattern={"^$|(^2?[2-6]$)"}
         data-testid={"expire-date"}

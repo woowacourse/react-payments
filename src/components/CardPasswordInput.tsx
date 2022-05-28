@@ -5,6 +5,7 @@ import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "utils/constants";
 import Input from "components/UIComponents/Input/Input";
 import InputField from "components/UIComponents/InputField/InputField";
 import { CardInfoContext } from "context/CardInfoContextProvider";
+import { OrderedInputUpdateHandlerInterface } from "./CardInputInterface";
 
 export default function CardPasswordInput() {
   const [isInvalid, setInvalid] = useState(false);
@@ -13,13 +14,15 @@ export default function CardPasswordInput() {
 
   const { passwordLength } = state;
 
-  const handleInputChange = (e, order) => {
-    setInvalid(false);
+  const handleInputChange: OrderedInputUpdateHandlerInterface =
+    (order) =>
+    ({ target: { value: inputValue } }) => {
+      setInvalid(false);
 
-    const newPasswordLength = [...passwordLength];
-    newPasswordLength[order] = e.target.value.length;
-    setState({ ...state, passwordLength: newPasswordLength });
-  };
+      const newPasswordLength = [...passwordLength];
+      newPasswordLength[order] = inputValue.length;
+      setState({ payload: { passwordLength: newPasswordLength } });
+    };
 
   const triggerInvalid = useCallback(() => setInvalid(true), []);
 
@@ -45,7 +48,7 @@ export default function CardPasswordInput() {
             required
             width={"full"}
             isComplete={passwordLength[index] === 1}
-            onChange={(e) => handleInputChange(e, index)}
+            onChange={handleInputChange(index)}
             onInvalid={triggerInvalid}
             pattern={"^[0-9]+$"}
             data-testid={"password"}

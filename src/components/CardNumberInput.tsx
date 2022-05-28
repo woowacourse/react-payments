@@ -5,6 +5,7 @@ import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "utils/constants";
 import Input from "components/UIComponents/Input/Input";
 import InputField from "components/UIComponents/InputField/InputField";
 import { CardInfoContext } from "context/CardInfoContextProvider";
+import { OrderedInputUpdateHandlerInterface } from "./CardInputInterface";
 
 export default function CardNumberInput() {
   const [isInvalid, setInvalid] = useState(false);
@@ -12,16 +13,16 @@ export default function CardNumberInput() {
 
   const { cardNumber } = state;
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    order: number
-  ) => {
-    setInvalid(false);
+  const handleInputChange: OrderedInputUpdateHandlerInterface =
+    (order) =>
+    ({ target: { value } }) => {
+      setInvalid(false);
 
-    const newCardNumber = [...cardNumber];
-    newCardNumber[order] = e.target.value;
-    setState({ ...state, cardNumber: newCardNumber });
-  };
+      const newCardNumber = [...cardNumber];
+      newCardNumber[order] = value;
+
+      setState({ payload: { cardNumber: newCardNumber } });
+    };
 
   const triggerInvalid = useCallback(() => setInvalid(true), []);
 
@@ -49,7 +50,7 @@ export default function CardNumberInput() {
               isComplete={
                 cardNumber[index].length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
               }
-              onChange={(e) => handleInputChange(e, index)}
+              onChange={handleInputChange(index)}
               onInvalid={triggerInvalid}
               pattern={"^[0-9]+$"}
               data-testid={"card-number"}
