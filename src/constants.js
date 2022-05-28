@@ -53,7 +53,7 @@ export const DATE_RANGE = {
 
 export const BASENAME = '/react-payments/';
 
-export const SERVER_URL = 'http://localhost:9000/';
+export const SERVER_URL = 'https://movie-payments.herokuapp.com/';
 
 export const ROUTE = {
   MAIN: '/',
