@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import styled from "styled-components";
 
 import useLocalStorage from "hooks/useLocalStorage";
-import { CardInfoStateTypeInterface } from "context/CardInfoContext";
+import { CardInfoStateTypeInterface } from "context/CardInfoContextProvider";
 
 import PageHeader from "containers/PageHeader";
 import CardInfoForm from "containers/CardInfoForm";

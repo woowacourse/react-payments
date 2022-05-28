@@ -1,5 +1,13 @@
 import React, { useReducer } from "react";
-import { CardInfoStateTypeInterface } from "./CardInfoContext";
+
+export interface CardInfoStateTypeInterface {
+  cardNumber: string[];
+  holderName: string;
+  expireDate: string[];
+  securityCodeLength: number;
+  passwordLength: number[];
+  nickname?: string;
+}
 
 interface CardInfoContextInterface {
   state: CardInfoStateTypeInterface;

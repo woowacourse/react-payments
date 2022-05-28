@@ -10,7 +10,8 @@ import {
 } from "components";
 
 import Button from "components/UIComponents/Button/Button";
-import { CardInfoStateTypeInterface } from "context/CardInfoContext";
+
+import { CardInfoStateTypeInterface } from "context/CardInfoContextProvider";
 
 type Props = {
   handleFormSubmit: (formData: CardInfoStateTypeInterface) => void;

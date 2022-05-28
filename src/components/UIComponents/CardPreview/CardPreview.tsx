@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import styled, { css } from "styled-components";
 
 import { CREATE_MASKED_CHARACTERS } from "utils/constants";
-import { CardInfoStateTypeInterface } from "context/CardInfoContext";
-import { CardInfoContext } from "context/CardInfoContextProvider";
+import {
+  CardInfoContext,
+  CardInfoStateTypeInterface,
+} from "context/CardInfoContextProvider";
 
 const CARD_SIZE_BEFORE_SUBMIT = {
   width: "213px",

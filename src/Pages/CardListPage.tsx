@@ -5,7 +5,7 @@ import { CardPreview } from "components";
 import PageHeader from "containers/PageHeader";
 import useLocalStorage from "hooks/useLocalStorage";
 import { PAGE_NAME } from "utils/constants";
-import { CardInfoStateTypeInterface } from "context/CardInfoContext";
+import { CardInfoStateTypeInterface } from "context/CardInfoContextProvider";
 import { PageType } from "App";
 
 const CardList = styled.div`

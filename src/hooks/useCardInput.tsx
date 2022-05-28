@@ -1,6 +1,9 @@
-import { CardInfoStateTypeInterface } from "context/CardInfoContext";
-import { CardInfoContext } from "context/CardInfoContextProvider";
 import { useCallback, useContext, useState } from "react";
+
+import {
+  CardInfoContext,
+  CardInfoStateTypeInterface,
+} from "context/CardInfoContextProvider";
 
 function useCardInput<T extends keyof CardInfoStateTypeInterface>(infoKey: T) {
   const [isInvalid, setInvalid] = useState(false);
