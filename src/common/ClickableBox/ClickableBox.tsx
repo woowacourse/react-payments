@@ -10,8 +10,9 @@ export default function ClickableBox({ children, onClick }: PropsWithChildren<Pr
 }
 
 const Styled = {
-  PointerBox: styled.span`
+  PointerBox: styled.div`
     cursor: pointer;
-    max-width: 208px;
+    text-align: center;
+    margin: 10px 0;
   `,
 };
