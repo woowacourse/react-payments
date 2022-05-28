@@ -1,6 +1,6 @@
 import { useReducer, useCallback, useContext, useRef } from 'react';
 import useCardInfo from 'hooks/useCardInfo';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CardDispatch } from 'App';
 
 import FormInput from 'components/common/FormInput';
@@ -45,6 +45,7 @@ const initialCardInfo = {
 };
 
 const CardAppPage = () => {
+  const navigate = useNavigate();
   const { dispatch } = useContext(CardDispatch);
   const [cardInfo, isFullFilled, handleCardInfo] = useCardInfo(initialCardInfo);
   const [modalVisible, handleModal] = useReducer(
@@ -77,8 +78,14 @@ const CardAppPage = () => {
     [handleCardInfo],
   );
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch({ type: ACTION.CREATE_CARD, card: cardInfo });
+    navigate(ROUTE.CONFIRM + cardInfo.id);
+  };
+
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <CardPreview
         number={number}
         ownerName={ownerName}
@@ -140,14 +147,9 @@ const CardAppPage = () => {
         inputRef={inputRef}
       />
       {isFullFilled && (
-        <Link
-          to={ROUTE.CONFIRM + cardInfo.id}
-          onClick={() => dispatch({ type: ACTION.CREATE_CARD, card: cardInfo })}
-        >
-          <Button theme={theme} className="next-button">
-            다음
-          </Button>
-        </Link>
+        <Button theme={theme} className="next-button">
+          다음
+        </Button>
       )}
       {modalVisible && (
         <Modal handleModal={handleModal}>
@@ -163,7 +165,7 @@ const CardAppPage = () => {
           </div>
         </Modal>
       )}
-    </div>
+    </form>
   );
 };
 
