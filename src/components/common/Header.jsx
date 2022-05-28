@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import useHeader from 'hooks/useHeader';
 import styles from 'css/module/Header.module.css';
 
@@ -14,4 +13,4 @@ const Header = () => {
   );
 };
 
-export default memo(Header);
+export default Header;

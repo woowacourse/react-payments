@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { memo } from 'react';
 
 const Layout = ({ children }) => {
   return (
@@ -18,4 +17,4 @@ Layout.propTypes = {
   children: PropTypes.element,
 };
 
-export default memo(Layout);
+export default Layout;

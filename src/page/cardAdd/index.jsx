@@ -48,10 +48,7 @@ const CardAppPage = () => {
   const navigate = useNavigate();
   const { dispatch } = useContext(CardDispatch);
   const [cardInfo, isFullFilled, handleCardInfo] = useCardInfo(initialCardInfo);
-  const [modalVisible, handleModal] = useReducer(
-    useCallback((visible) => !visible, []),
-    false,
-  );
+  const [modalVisible, handleModal] = useReducer((visible) => !visible, false);
   const { number, ownerName, expiryDate, company, theme, password, privacyCode } = cardInfo;
   const inputRef = useRef([]);
 
@@ -68,15 +65,12 @@ const CardAppPage = () => {
     [handleCardInfo],
   );
 
-  const handleClickCompany = useCallback(
-    (company, theme) => {
-      handleCardInfo({ item: 'company', value: company });
-      handleCardInfo({ item: 'theme', value: theme });
+  const handleClickCompany = (company, theme) => {
+    handleCardInfo({ item: 'company', value: company });
+    handleCardInfo({ item: 'theme', value: theme });
 
-      handleModal();
-    },
-    [handleCardInfo],
-  );
+    handleModal();
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();

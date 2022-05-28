@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import PropTypes from 'prop-types';
 import styles from 'css/module/CardCompany.module.css';
 
@@ -26,4 +25,4 @@ CardCompany.propTypes = {
   theme: PropTypes.string.isRequired,
 };
 
-export default memo(CardCompany);
+export default CardCompany;

@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import PropTypes from 'prop-types';
 import styles from 'css/module/Button.module.css';
 
@@ -35,4 +34,4 @@ Button.defaultProps = {
   handleClick: undefined,
 };
 
-export default memo(Button);
+export default Button;
