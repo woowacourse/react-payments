@@ -1,28 +1,30 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "utils/constants";
 
 import Input from "components/UIComponents/Input/Input";
 import InputField from "components/UIComponents/InputField/InputField";
 import HelperIcon from "components/UIComponents/HelperIcon/HelperIcon";
-import { CardInfoContext } from "context/CardInfoContextProvider";
+
+import useCardInput from "hooks/useCardInput";
 
 const SECURITY_CODE_DESCRIPTION =
   "CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.";
 
 export default function CardSecurityCodeInput() {
-  const [isInvalid, setInvalid] = useState(false);
-
-  const { state, setState } = useContext(CardInfoContext);
-
-  const { securityCodeLength } = state;
+  const {
+    targetState: securityCodeLength,
+    setTargetState: setSecurityCodeLength,
+    isInvalid,
+    setInvalid,
+    triggerInvalid,
+  } = useCardInput("securityCodeLength");
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = ({
     target: { value: inputValue },
   }) => {
     setInvalid(false);
-
-    setState({ payload: { securityCodeLength: inputValue.length } });
+    setSecurityCodeLength(inputValue.length);
   };
 
   return (
@@ -42,7 +44,7 @@ export default function CardSecurityCodeInput() {
         width={"full"}
         isComplete={securityCodeLength === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
         pattern={"^[0-9]+$"}
-        onInvalid={() => setInvalid(true)}
+        onInvalid={triggerInvalid}
         onChange={handleInputChange}
         data-testid={"security-code"}
       />

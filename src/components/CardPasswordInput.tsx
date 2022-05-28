@@ -1,30 +1,37 @@
-import React, { useCallback, useContext, useState } from "react";
+import React from "react";
 
+import { changeArrayElement } from "utils";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "utils/constants";
 
 import Input from "components/UIComponents/Input/Input";
 import InputField from "components/UIComponents/InputField/InputField";
-import { CardInfoContext } from "context/CardInfoContextProvider";
+
 import { OrderedInputUpdateHandlerInterface } from "./CardInputInterface";
 
+import useCardInput from "hooks/useCardInput";
+
 export default function CardPasswordInput() {
-  const [isInvalid, setInvalid] = useState(false);
-
-  const { state, setState } = useContext(CardInfoContext);
-
-  const { passwordLength } = state;
+  const {
+    targetState: passwordLength,
+    setTargetState: setPasswordLength,
+    isInvalid,
+    setInvalid,
+    triggerInvalid,
+  } = useCardInput("passwordLength");
 
   const handleInputChange: OrderedInputUpdateHandlerInterface =
     (order) =>
     ({ target: { value: inputValue } }) => {
       setInvalid(false);
 
-      const newPasswordLength = [...passwordLength];
-      newPasswordLength[order] = inputValue.length;
-      setState({ payload: { passwordLength: newPasswordLength } });
-    };
+      const newPasswordLength = changeArrayElement({
+        array: passwordLength,
+        index: order,
+        value: inputValue.length,
+      });
 
-  const triggerInvalid = useCallback(() => setInvalid(true), []);
+      setPasswordLength(newPasswordLength);
+    };
 
   return (
     <InputField

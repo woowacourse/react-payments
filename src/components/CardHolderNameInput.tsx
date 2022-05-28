@@ -1,28 +1,28 @@
-import React, { useCallback, useContext, useState } from "react";
+import React from "react";
 
 import { CARD_INFO_RULES } from "utils/constants";
 
 import Input from "components/UIComponents/Input/Input";
 import InputField from "components/UIComponents/InputField/InputField";
 import WordCounter from "components/UIComponents/WordCounter/WordCounter";
-import { CardInfoContext } from "context/CardInfoContextProvider";
+
+import useCardInput from "hooks/useCardInput";
 
 export default function CardHolderNameInput() {
-  const [isInvalid, setInvalid] = useState(false);
-
-  const { state, setState } = useContext(CardInfoContext);
-
-  const { holderName } = state;
+  const {
+    targetState: holderName,
+    setTargetState: setHolderName,
+    isInvalid,
+    setInvalid,
+    triggerInvalid,
+  } = useCardInput("holderName");
 
   const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = ({
     target: { value },
   }) => {
     setInvalid(false);
-
-    setState({ payload: { holderName: value.toUpperCase() } });
+    setHolderName(value.toUpperCase());
   };
-
-  const triggerInvalid = useCallback(() => setInvalid(true), []);
 
   const isComplete = holderName !== "";
 

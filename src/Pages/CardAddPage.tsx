@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import styled from "styled-components";
 
-import useLocalStorage from "useLocalStorage";
+import useLocalStorage from "hooks/useLocalStorage";
 import { CardInfoStateTypeInterface } from "context/CardInfoContext";
 
 import PageHeader from "containers/PageHeader";

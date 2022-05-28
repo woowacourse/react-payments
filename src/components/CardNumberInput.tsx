@@ -1,30 +1,37 @@
-import React, { useCallback, useContext, useState } from "react";
+import React from "react";
 
+import { changeArrayElement } from "utils";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "utils/constants";
 
 import Input from "components/UIComponents/Input/Input";
 import InputField from "components/UIComponents/InputField/InputField";
-import { CardInfoContext } from "context/CardInfoContextProvider";
+
 import { OrderedInputUpdateHandlerInterface } from "./CardInputInterface";
 
-export default function CardNumberInput() {
-  const [isInvalid, setInvalid] = useState(false);
-  const { state, setState } = useContext(CardInfoContext);
+import useCardInput from "hooks/useCardInput";
 
-  const { cardNumber } = state;
+export default function CardNumberInput() {
+  const {
+    targetState: cardNumber,
+    setTargetState: setCardNumber,
+    isInvalid,
+    setInvalid,
+    triggerInvalid,
+  } = useCardInput("cardNumber");
 
   const handleInputChange: OrderedInputUpdateHandlerInterface =
     (order) =>
-    ({ target: { value } }) => {
+    ({ target: { value: inputValue } }) => {
       setInvalid(false);
 
-      const newCardNumber = [...cardNumber];
-      newCardNumber[order] = value;
+      const newCardNumber = changeArrayElement({
+        array: cardNumber,
+        index: order,
+        value: inputValue,
+      });
 
-      setState({ payload: { cardNumber: newCardNumber } });
+      setCardNumber(newCardNumber);
     };
-
-  const triggerInvalid = useCallback(() => setInvalid(true), []);
 
   return (
     <InputField
