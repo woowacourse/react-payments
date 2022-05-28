@@ -19,7 +19,7 @@ const FormInput = ({
       <label className={styles.title} id={inputTitle}>
         {inputTitle}
       </label>
-      <div className={`${styles.inputContainer} ${className}`} aria-labelledby={inputTitle}>
+      <div className={`${styles['input-container']} ${className}`} aria-labelledby={inputTitle}>
         {inputInfoList.map(({ id, name, className, maxLength, ...rest }, index) => (
           <input
             key={index}

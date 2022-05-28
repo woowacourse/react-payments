@@ -1,11 +1,10 @@
 import PropTypes from 'prop-types';
+import styles from './index.module.css';
 
 const Layout = ({ children }) => {
   return (
-    <div className="layout">
-      <div className="root">
-        <div className="app">{children}</div>
-      </div>
+    <div className={styles.container}>
+      <div className={styles.app}>{children}</div>
     </div>
   );
 };

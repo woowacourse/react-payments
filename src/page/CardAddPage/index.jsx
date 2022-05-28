@@ -22,6 +22,7 @@ import {
 } from './data';
 import { ACTION, ROUTE } from 'constants';
 import useCardContext from 'hooks/useCardContext';
+import styles from './index.module.css';
 
 const initialCardInfo = {
   company: '',
@@ -147,7 +148,7 @@ const CardAppPage = () => {
       )}
       {modalVisible && (
         <Modal handleModal={handleModal}>
-          <div className="flex-wrap">
+          <div className={styles['card-company-list']}>
             {cardCompanyList.map(({ company, theme }, index) => (
               <CardCompany
                 key={index}

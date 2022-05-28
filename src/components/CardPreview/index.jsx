@@ -1,6 +1,8 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants';
+import styles from './index.module.css';
+import 'css/palette.css';
 
 const CardPreview = ({ theme, company, number, expiryDate, ownerName, handleClick }) => {
   const { first, second, third, fourth } = number;
@@ -9,31 +11,31 @@ const CardPreview = ({ theme, company, number, expiryDate, ownerName, handleClic
   const year = expiryDate.year || DEFAULT_CARD_INFO.EXPIRY_YEAR;
 
   return (
-    <div className="card-box">
+    <div className={styles.container}>
       <div
-        className={`empty-card bg-${theme} ${handleClick && 'cursor-pointer'}`}
+        className={`${styles.card} bg-${theme} ${handleClick && 'cursor-pointer'}`}
         onClick={handleClick}
       >
-        <div className="card-top">
-          <span className="card-text">{company}</span>
+        <div className={styles.top}>
+          <span className={styles.text}>{company}</span>
         </div>
-        <div className="card-middle">
-          <div className="small-card__chip"></div>
+        <div className={styles.middle}>
+          <div className={styles.chip} />
         </div>
-        <div className="card-bottom">
-          <div className="card-bottom__number">
-            <span className="card-text card-text__default">{first}</span>
-            <span className="card-text card-text__default">{second}</span>
-            <span className="card-text card-text__default card-text__privacy">
+        <div className={styles.bottom}>
+          <div className={styles['number-container']}>
+            <span className={`${styles.text} ${styles.number}`}>{first}</span>
+            <span className={`${styles.text} ${styles.number}`}>{second}</span>
+            <span className={`${styles.text} ${styles.number} ${styles.privacy}`}>
               {CRYPTO_STRING.repeat(third.length)}
             </span>
-            <span className="card-text card-text__default card-text__privacy">
+            <span className={`${styles.text} ${styles.number} ${styles.privacy}`}>
               {CRYPTO_STRING.repeat(fourth.length)}
             </span>
           </div>
-          <div className="card-bottom__info">
-            <span className="card-text card-text__control">{upperCaseOwnerName}</span>
-            <span className="card-text">
+          <div className={styles['info-container']}>
+            <span className={`${styles.text} ${styles.owner}`}>{upperCaseOwnerName}</span>
+            <span className={styles.text}>
               {month} / {year}
             </span>
           </div>

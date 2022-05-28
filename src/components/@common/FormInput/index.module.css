@@ -13,7 +13,7 @@
   margin-bottom: 4px;
 }
 
-.inputContainer {
+.input-container {
   display: flex;
   align-items: center;
   gap: 7px;
@@ -40,4 +40,95 @@
   padding: 0 12px;
 
   font-size: 16px;
+}
+
+:global .input-basic {
+  width: 100%;
+  height: 45px;
+  padding: 0 12px;
+
+  background-color: #ecebf1;
+  text-align: center;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: #9ca3af;
+  border: none;
+  border-radius: 7px;
+
+  font-size: 16px;
+}
+
+:global .input-disabled {
+  background: none;
+}
+
+:global .owner-name-length {
+  position: absolute;
+  top: -20px;
+  right: 0;
+
+  font-size: 12px;
+  color: #525252;
+}
+
+/* utlis */
+
+:global .text-left {
+  text-align: left;
+}
+
+:global .tracking-wide {
+  letter-spacing: 2px;
+}
+
+:global .mt-10 {
+  margin-top: 2.5rem;
+}
+
+:global .mt-20 {
+  margin-top: 5rem;
+}
+
+:global .mt-30 {
+  margin-top: 7.5rem;
+}
+
+:global .mt-40 {
+  margin-top: 9rem;
+}
+
+:global .mt-50 {
+  margin-top: 11.5rem;
+}
+
+:global .mr-n15 {
+  margin-right: -15px;
+}
+
+:global .mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+:global .w-100 {
+  width: 100%;
+}
+
+:global .w-75 {
+  width: 75%;
+}
+
+:global .w-50 {
+  width: 50%;
+}
+
+:global .w-25 {
+  width: 25%;
+}
+
+:global .w-15 {
+  width: 15%;
+}
+
+:global .w-5 {
+  width: 5%;
 }

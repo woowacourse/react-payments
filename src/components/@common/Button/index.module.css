@@ -6,3 +6,13 @@
   padding: 5px 10px;
   cursor: pointer;
 }
+
+:global .next-button {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+:global .cursor-pointer {
+  cursor: pointer;
+}
