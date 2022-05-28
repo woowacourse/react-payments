@@ -18,14 +18,18 @@ const getLatestCard = async () => {
 const postCard = async (card) => {
   const { cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword } = card;
 
-  await axios.post(`${PATH.JSON_SERVER_BASE_URL}/cards`, {
-    cardNumber,
-    expireMonth,
-    expireYear,
-    userName,
-    securityCode,
-    cardPassword,
-  });
+  await axios
+    .post(`${PATH.JSON_SERVER_BASE_URL}/cards`, {
+      cardNumber,
+      expireMonth,
+      expireYear,
+      userName,
+      securityCode,
+      cardPassword,
+    })
+    .catch(() => {
+      throw new Error(ERROR_MESSAGE.REQUEST.FAIL_TO_POST_CARD);
+    });
 };
 
 const putCardNickname = async (cardNickname) => {
