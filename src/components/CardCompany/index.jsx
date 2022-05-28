@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 const CardCompany = ({ company, onClickCompany, theme }) => {
   return (
-    <div className={styles.container} onClick={() => onClickCompany(company, theme)}>
-      <div className={`${styles.dot} bg-${theme}`}></div>
-      <span className={styles.name}>{company}</span>
+    <div className={cx('container')} onClick={() => onClickCompany(company, theme)}>
+      <div className={`${cx('dot')} bg-${theme}`}></div>
+      <span className={cx('name')}>{company}</span>
     </div>
   );
 };

@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants';
 import styles from './index.module.css';
 import 'css/palette.css';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 const CardPreview = ({ theme, company, number, expiryDate, ownerName, handleClick }) => {
   const { first, second, third, fourth } = number;
@@ -11,31 +14,31 @@ const CardPreview = ({ theme, company, number, expiryDate, ownerName, handleClic
   const year = expiryDate.year || DEFAULT_CARD_INFO.EXPIRY_YEAR;
 
   return (
-    <div className={styles.container}>
+    <div className={cx('container')}>
       <div
-        className={`${styles.card} bg-${theme} ${handleClick && 'cursor-pointer'}`}
+        className={`${cx('card')} bg-${theme} ${handleClick && 'cursor-pointer'}`}
         onClick={handleClick}
       >
-        <div className={styles.top}>
-          <span className={styles.text}>{company}</span>
+        <div className={cx('top')}>
+          <span className={cx('text')}>{company}</span>
         </div>
-        <div className={styles.middle}>
-          <div className={styles.chip} />
+        <div className={cx('middle')}>
+          <div className={cx('chip')} />
         </div>
-        <div className={styles.bottom}>
-          <div className={styles['number-container']}>
-            <span className={`${styles.text} ${styles.number}`}>{first}</span>
-            <span className={`${styles.text} ${styles.number}`}>{second}</span>
-            <span className={`${styles.text} ${styles.number} ${styles.privacy}`}>
+        <div className={cx('bottom')}>
+          <div className={cx('number-container')}>
+            <span className={cx('text', 'number')}>{first}</span>
+            <span className={cx('text', 'number')}>{second}</span>
+            <span className={cx('text', 'number', 'privacy')}>
               {CRYPTO_STRING.repeat(third.length)}
             </span>
-            <span className={`${styles.text} ${styles.number} ${styles.privacy}`}>
+            <span className={cx('text', 'number', 'privacy')}>
               {CRYPTO_STRING.repeat(fourth.length)}
             </span>
           </div>
-          <div className={styles['info-container']}>
-            <span className={`${styles.text} ${styles.owner}`}>{upperCaseOwnerName}</span>
-            <span className={styles.text}>
+          <div className={cx('info-container')}>
+            <span className={cx('text', 'owner')}>{upperCaseOwnerName}</span>
+            <span className={cx('text')}>
               {month} / {year}
             </span>
           </div>

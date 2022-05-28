@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 const Button = ({ className, theme, handleClick, children }) => {
   return (
-    <button className={`${styles.container} ${className} font-${theme}`} onClick={handleClick}>
+    <button className={`${cx('container')} ${className} font-${theme}`} onClick={handleClick}>
       {children}
     </button>
   );

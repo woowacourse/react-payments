@@ -9,6 +9,9 @@ import styles from './index.module.css';
 import validate from './validator';
 import { ACTION, ROUTE } from 'constants';
 import { INPUT_MAX_LENGTH } from 'constants';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 const ConfirmationPage = () => {
   const navigate = useNavigate();
@@ -31,8 +34,8 @@ const ConfirmationPage = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <p className={styles.title}>카드등록이 완료되었습니다.</p>
+    <div className={cx('container')}>
+      <p className={cx('title')}>카드등록이 완료되었습니다.</p>
       <CardPreview
         number={number}
         ownerName={ownerName}
@@ -41,7 +44,7 @@ const ConfirmationPage = () => {
         theme={theme}
       />
       <input
-        className={styles.input}
+        className={cx('input')}
         value={alias}
         onChange={(e) => handleAlias(e.target.value)}
         placeholder="카드 이름"

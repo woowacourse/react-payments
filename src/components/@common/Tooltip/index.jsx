@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { ReactComponent as TooltipIcon } from 'assets/tooltip_icon.svg';
 import { TOOLTIP_TYPES } from 'constants';
 import styles from './index.module.css';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 const Tooltip = ({ type }) => {
   const [isHover, setIsHover] = useState(false);
@@ -11,11 +14,11 @@ const Tooltip = ({ type }) => {
   const handleMouseLeave = () => setIsHover(false);
 
   return (
-    <div className={styles.container}>
+    <div className={cx('container')}>
       <TooltipIcon onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
       {isHover && (
         <div
-          className={styles.content}
+          className={cx('content')}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >

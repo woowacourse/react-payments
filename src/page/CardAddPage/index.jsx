@@ -23,6 +23,9 @@ import {
 import { ACTION, ROUTE } from 'constants';
 import useCardContext from 'hooks/useCardContext';
 import styles from './index.module.css';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 const initialCardInfo = {
   company: '',
@@ -148,7 +151,7 @@ const CardAppPage = () => {
       )}
       {modalVisible && (
         <Modal handleModal={handleModal}>
-          <div className={styles['card-company-list']}>
+          <div className={cx('card-company-list')}>
             {cardCompanyList.map(({ company, theme }, index) => (
               <CardCompany
                 key={index}

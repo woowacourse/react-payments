@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 const Layout = ({ children }) => {
   return (
-    <div className={styles.container}>
-      <div className={styles.app}>{children}</div>
+    <div className={cx('container')}>
+      <div className={cx('app')}>{children}</div>
     </div>
   );
 };

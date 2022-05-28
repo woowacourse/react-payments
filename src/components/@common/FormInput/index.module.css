@@ -42,22 +42,6 @@
   font-size: 16px;
 }
 
-:global .input-basic {
-  width: 100%;
-  height: 45px;
-  padding: 0 12px;
-
-  background-color: #ecebf1;
-  text-align: center;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  border-color: #9ca3af;
-  border: none;
-  border-radius: 7px;
-
-  font-size: 16px;
-}
-
 :global .input-disabled {
   background: none;
 }

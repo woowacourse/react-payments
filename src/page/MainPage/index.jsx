@@ -6,13 +6,16 @@ import CardPreview from 'components/CardPreview';
 
 import styles from './index.module.css';
 import { ROUTE } from 'constants';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 const MainPage = () => {
   const { state } = useCardContext();
 
   return (
-    <div className={styles.container}>
-      <div className={styles.cardList}>
+    <div className={cx('container')}>
+      <div className={cx('card-list')}>
         <>
           {state.cards.map(({ id, theme, company, number, expiryDate, ownerName, alias }) => (
             <div key={id}>
@@ -23,12 +26,12 @@ const MainPage = () => {
                 expiryDate={expiryDate}
                 ownerName={ownerName}
               />
-              <p className={styles.alias}>{alias ?? company}</p>
+              <p className={cx('alias')}>{alias ?? company}</p>
             </div>
           ))}
         </>
         <Link to={ROUTE.ADD}>
-          <CardAddIcon className={styles.AddIcon} />
+          <CardAddIcon className={cx('add-icon')} />
         </Link>
       </div>
     </div>

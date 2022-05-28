@@ -2,6 +2,9 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { isObject } from 'utils';
 import styles from './index.module.css';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 const FormInput = ({
   className,
@@ -15,17 +18,17 @@ const FormInput = ({
   inputRef,
 }) => {
   return (
-    <div className={styles.container}>
-      <label className={styles.title} id={inputTitle}>
+    <div className={cx('container')}>
+      <label className={cx('title')} id={inputTitle}>
         {inputTitle}
       </label>
-      <div className={`${styles['input-container']} ${className}`} aria-labelledby={inputTitle}>
+      <div className={`${cx('input-container')} ${className}`} aria-labelledby={inputTitle}>
         {inputInfoList.map(({ id, name, className, maxLength, ...rest }, index) => (
           <input
             key={index}
             name={name}
             ref={(elem) => (inputRef.current[id] = elem)}
-            className={`input-basic ${className || ''} font-${theme}`}
+            className={`${cx('input')} ${className || ''} font-${theme}`}
             maxLength={maxLength}
             value={isObject(inputValue) ? inputValue[name] : inputValue}
             onChange={(e) => onChange(e, item, id, maxLength)}

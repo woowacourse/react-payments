@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import styles from './index.module.css';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 const Modal = ({ handleModal, children }) => {
   return (
     <>
-      <div className={styles.dimmer} onClick={handleModal}></div>
-      <div className={styles.modal}>{children}</div>
+      <div className={cx('dimmer')} onClick={handleModal}></div>
+      <div className={cx('modal')}>{children}</div>
     </>
   );
 };
