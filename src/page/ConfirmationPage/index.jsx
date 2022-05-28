@@ -6,9 +6,11 @@ import { CardPreview, Button } from 'components';
 
 import styles from './index.module.css';
 import validate from './validator';
-import { ACTION, ROUTE } from 'constants';
+import { ACTION } from 'actions/card';
+import { ROUTE } from 'constants';
 import { INPUT_MAX_LENGTH } from 'constants';
 import classNames from 'classnames/bind';
+import axios from 'axios';
 
 const cx = classNames.bind(styles);
 
@@ -25,11 +27,18 @@ const ConfirmationPage = () => {
     try {
       validate(state.cards, alias);
 
+      patchCard();
       dispatch({ type: ACTION.SET_ALIAS, alias, id });
       navigate(ROUTE.MAIN);
     } catch (error) {
       alert(error.message);
     }
+  };
+
+  const patchCard = async () => {
+    await axios.patch(`/cards/${id}`, {
+      alias: alias,
+    });
   };
 
   return (

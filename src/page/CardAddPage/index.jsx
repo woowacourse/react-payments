@@ -15,10 +15,12 @@ import {
   cardPasswordInputInfoList,
   cardCompanyList,
 } from './data';
-import { ACTION, ROUTE } from 'constants';
+import { ACTION } from 'actions/card';
+import { ROUTE } from 'constants';
 import useCardContext from 'hooks/useCardContext';
 import styles from './index.module.css';
 import classNames from 'classnames/bind';
+import axios from 'axios';
 
 const cx = classNames.bind(styles);
 
@@ -73,8 +75,13 @@ const CardAddPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    postCard();
     dispatch({ type: ACTION.CREATE_CARD, card: cardInfo });
     navigate(ROUTE.CONFIRM + cardInfo.id);
+  };
+
+  const postCard = async () => {
+    await axios.post('/cards', cardInfo);
   };
 
   return (

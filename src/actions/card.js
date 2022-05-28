@@ -1,0 +1,5 @@
+export const ACTION = {
+  INITIALIZE: 'INITIALIZE',
+  SET_ALIAS: 'SET_ALIAS',
+  CREATE_CARD: 'CREATE_CARD',
+};

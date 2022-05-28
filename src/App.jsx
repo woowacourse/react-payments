@@ -5,8 +5,11 @@ import { Layout, Header } from 'components';
 import { MainPage, CardAddPage, ConfirmationPage } from 'page';
 
 import reducer from 'reducer/card';
-import { ROUTE, BASENAME } from 'constants';
+import { ROUTE, BASENAME, SERVER_URL } from 'constants';
 import { CardContext } from 'hooks/useCardContext';
+import axios from 'axios';
+
+axios.defaults.baseURL = SERVER_URL;
 
 const initialState = {
   cards: [],
