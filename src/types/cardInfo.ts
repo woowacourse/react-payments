@@ -1,6 +1,3 @@
-import { TYPES } from 'store/card/types';
-import { CARD_COMPANIES } from 'lib/constants';
-
 type CardColor =
   | '#E24141'
   | '#547CE4'
@@ -12,9 +9,9 @@ type CardColor =
   | '#FBCD58'
   | '#e5e5e5';
 
-type CardAction = { type: typeof TYPES; cards: typeof CARD_COMPANIES };
+type CardAction = { type: string; value: string };
 
-export interface CardData {
+interface CardData {
   cardNumber: number;
   cardOwner: string;
   cardExpiration: string[];
@@ -23,4 +20,4 @@ export interface CardData {
   cardNickname?: string;
 }
 
-export type { CardColor, CardAction };
+export type { CardColor, CardAction, CardData };

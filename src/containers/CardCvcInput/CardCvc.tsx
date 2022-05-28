@@ -10,7 +10,11 @@ import InputBox from 'common/InputBox/InputBox';
 import Tooltip from 'components/Tooltip/Tooltip';
 import { InputBasic } from 'components/Input/Input';
 
-export default function CardCvc({ onClickTooltip }) {
+interface Props {
+  onClickTooltip(): void;
+}
+
+export default function CardCvc({ onClickTooltip }: Props) {
   const { cardCvc, cardCvcErrorMessage, cardCompanyIndex } = useContext(CardStateContext);
   const dispatch = useContext(CardDispatchContext);
 
@@ -29,7 +33,7 @@ export default function CardCvc({ onClickTooltip }) {
         <InputContainer width="23%">
           <InputBasic
             type="password"
-            maxLength="3"
+            maxLength={3}
             value={cardCvc}
             color={cardColor}
             onChange={onChangeInput}

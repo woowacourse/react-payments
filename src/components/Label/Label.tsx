@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface Props {
   htmlFor: string;
-  marginBottom: string;
+  marginBottom?: string;
 }
 
 export default function Label({ children, htmlFor, marginBottom }: PropsWithChildren<Props>) {

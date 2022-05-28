@@ -27,7 +27,7 @@ export default function CardPassword({ color }) {
           <InputBasic
             type="password"
             width="43px"
-            maxLength="1"
+            maxLength={1}
             color={color}
             value={cardPassword[0]}
             onChange={onChangeInput(0)}
@@ -36,7 +36,7 @@ export default function CardPassword({ color }) {
           <InputBasic
             type="password"
             width="43px"
-            maxLength="1"
+            maxLength={1}
             color={color}
             value={cardPassword[1]}
             onChange={onChangeInput(1)}

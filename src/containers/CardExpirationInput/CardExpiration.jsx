@@ -28,7 +28,7 @@ export default function CardExpiration({ color }) {
               type="text"
               placeholder="MM"
               width="48%"
-              maxLength="2"
+              maxLength={2}
               color={color}
               value={cardExpiration[0]}
               onChange={onChangeInput(0)}
@@ -38,7 +38,7 @@ export default function CardExpiration({ color }) {
               type="text"
               placeholder="YY"
               width="48%"
-              maxLength="2"
+              maxLength={2}
               color={color}
               value={cardExpiration[1]}
               onChange={onChangeInput(1)}
