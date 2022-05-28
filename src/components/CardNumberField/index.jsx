@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import useErrorMessage from 'hooks/useErrorMessage';
-import CardContext from 'contexts';
+import { CardContext } from 'contexts';
 
 import { FieldSet, TextField } from 'components/@common';
 

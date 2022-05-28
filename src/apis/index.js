@@ -14,11 +14,9 @@ const getLatestCard = async () => {
 };
 
 const postCard = async (card) => {
-  const { companyName, cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword } =
-    card;
+  const { cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword } = card;
 
   await axios.post(`${PATH.JSON_SERVER_BASE_URL}/cards`, {
-    companyName,
     cardNumber,
     expireMonth,
     expireYear,

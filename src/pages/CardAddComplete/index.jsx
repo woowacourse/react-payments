@@ -1,15 +1,16 @@
 import { putCardNickname } from 'apis';
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CardContext } from 'contexts';
 
 import { Button, Header, TextField } from 'components/@common';
 import { Card } from 'components';
 
 import { PATH } from 'constants';
 
-function CardAddComplete({ card }) {
-  const { cardCompany, cardNumber, userName, expireMonth, expireYear } = card;
+function CardAddComplete() {
+  const { cardNumber, userName, expireMonth, expireYear } = useContext(CardContext);
   const [cardNickname, setCardNickname] = useState('');
 
   const navigate = useNavigate();
@@ -39,7 +40,6 @@ function CardAddComplete({ card }) {
       </div>
       <Card
         size="big"
-        cardCompany={cardCompany}
         cardNumber={cardNumber}
         userName={userName}
         expireMonth={expireMonth}
