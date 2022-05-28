@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { CardPreview } from "components";
 import PageHeader from "containers/PageHeader";
-import useLocalStorage from "useLocalStorage";
+import useLocalStorage from "hooks/useLocalStorage";
 import { PAGE_NAME } from "utils/constants";
 import { CardInfoStateTypeInterface } from "context/CardInfoContext";
 import { PageType } from "App";
