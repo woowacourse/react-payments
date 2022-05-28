@@ -4,7 +4,7 @@ import { isObject } from 'utils';
 import { v4 as uuid } from 'uuid';
 
 const useCardInfo = (initialCardInfo) => {
-  const [cardInfo, setCardInfo] = useState({ ...initialCardInfo, id: uuid() });
+  const [cardInfo, setCardInfo] = useState(() => ({ ...initialCardInfo, id: uuid() }));
   const [isFullFilled, setIsFullFilled] = useState(false);
 
   useEffect(() => {
