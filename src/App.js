@@ -4,7 +4,7 @@ import { PATH } from 'constants';
 
 function App() {
   return (
-    <Router>
+    <Router basename={PATH.BASE_NAME}>
       <Routes>
         <Route path={PATH.CARD_LIST} element={<CardList />} />
         <Route path={PATH.CARD_ADD} element={<CardAdd />} />
