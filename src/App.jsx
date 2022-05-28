@@ -10,7 +10,7 @@ import routes from './Routes';
 
 function App() {
   const dispatch = useDispatch();
-  const targetRef = useRef();
+  const targetRef = useRef(null);
   const content = useRoutes(routes);
   const { title } = useCardState();
 
