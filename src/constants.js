@@ -56,10 +56,13 @@ export const ACTION = {
   CREATE_CARD: 'CREATE_CARD',
 };
 
+export const BASENAME = '/react-payments/';
+
 export const ROUTE = {
-  MAIN: '/react-payments/',
-  ADD: '/react-payments/add',
-  CONFIRM: '/react-payments/confirm/',
+  MAIN: '/',
+  ADD: '/add',
+  CONFIRM: '/confirm/',
+  NO_MATCHED: '/*',
 };
 
 export const ERROR_MESSAGE = {
