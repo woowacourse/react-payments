@@ -1,19 +1,22 @@
+import { BrowserRouter } from 'react-router-dom';
 import CardAdd from '.';
-import 'index.css';
 
 export default {
   title: 'Page/CardAdd',
   component: CardAdd,
+  decorators: [
+    (Story) => (
+      <BrowserRouter>
+        <Story />
+      </BrowserRouter>
+    ),
+  ],
   parameters: {
     layout: 'centered',
   },
 };
 
-const Template = (args) => (
-  <div className="App">
-    <CardAdd {...args} />
-  </div>
-);
+const Template = (args) => <CardAdd {...args} />;
 
 export const CardAddPage = Template.bind({});
 CardAddPage.args = {};

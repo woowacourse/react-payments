@@ -11,7 +11,7 @@ export default {
 
 const Template = (args) => (
   <FieldSet {...args}>
-    <TextField></TextField>
+    <TextField />
   </FieldSet>
 );
 
