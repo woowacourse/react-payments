@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import useCardContext from 'hooks/useCardContext';
 
 import { ReactComponent as CardAddIcon } from 'assets/card_add_icon.svg';
-import CardPreview from 'components/CardPreview';
+import { CardPreview } from 'components';
 
 import styles from './index.module.css';
 import { ROUTE } from 'constants';

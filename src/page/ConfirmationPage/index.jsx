@@ -2,8 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import useAlias from 'hooks/useAlias';
 import useCardContext from 'hooks/useCardContext';
 
-import CardPreview from 'components/CardPreview';
-import Button from 'components/@common/Button';
+import { CardPreview, Button } from 'components';
 
 import styles from './index.module.css';
 import validate from './validator';

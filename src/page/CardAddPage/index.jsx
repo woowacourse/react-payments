@@ -2,12 +2,7 @@ import { useReducer, useCallback, useRef } from 'react';
 import useCardInfo from 'hooks/useCardInfo';
 import { useNavigate } from 'react-router-dom';
 
-import FormInput from 'components/@common/FormInput';
-import CardPreview from 'components/CardPreview';
-import Modal from 'components/@common/Modal';
-import CardCompany from 'components/CardCompany';
-import Button from 'components/@common/Button';
-import Tooltip from 'components/@common/Tooltip';
+import { FormInput, CardPreview, Modal, CardCompany, Button, Tooltip } from 'components';
 
 import { moveInputFocus } from 'utils';
 import { validator } from './validator';
@@ -48,7 +43,7 @@ const initialCardInfo = {
   theme: '',
 };
 
-const CardAppPage = () => {
+const CardAddPage = () => {
   const navigate = useNavigate();
   const { dispatch } = useCardContext();
   const [cardInfo, isFullFilled, handleCardInfo] = useCardInfo(initialCardInfo);
@@ -167,4 +162,4 @@ const CardAppPage = () => {
   );
 };
 
-export default CardAppPage;
+export default CardAddPage;
