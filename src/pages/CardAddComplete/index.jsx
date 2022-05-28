@@ -28,9 +28,13 @@ function CardAddComplete() {
   };
 
   const onClickConfirmButton = async () => {
-    await putCardNickname(cardNickname);
+    try {
+      await putCardNickname(cardNickname);
 
-    navigate(PATH.CARD_LIST);
+      navigate(PATH.CARD_LIST);
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (

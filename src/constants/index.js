@@ -45,6 +45,7 @@ const ERROR_MESSAGE = {
   REQUEST: {
     FAIL_TO_GET_CARDS: '보유 카드를 불러올 수 없습니다. 관리자에게 문의하십시오.',
     FAIL_TO_POST_CARD: '카드를 추가할 수 없습니다. 관리자에게 문의하십시오.',
+    FAIL_TO_PUT_CARD_NICKNAME: '카드의 별칭을 설정할 수 없습니다. 관리자에게 문의하십시오.',
   },
   IS_NOT_VALID_CARD: '카드 정보가 올바르지 않습니다.\n입력한 내용을 확인해주세요.',
   CARD_NUMBER: {

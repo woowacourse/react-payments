@@ -35,10 +35,14 @@ const postCard = async (card) => {
 const putCardNickname = async (cardNickname) => {
   const [cardId, cardInfo] = await getLatestCard();
 
-  await axios.put(`${PATH.JSON_SERVER_BASE_URL}/cards/${cardId}`, {
-    ...cardInfo,
-    cardNickname,
-  });
+  await axios
+    .put(`${PATH.JSON_SERVER_BASE_URL}/cards/${cardId}`, {
+      ...cardInfo,
+      cardNickname,
+    })
+    .catch(() => {
+      throw new Error(ERROR_MESSAGE.REQUEST.FAIL_TO_PUT_CARD_NICKNAME);
+    });
 };
 
 export { getCards, postCard, putCardNickname };
