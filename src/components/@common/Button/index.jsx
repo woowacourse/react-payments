@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import styles from 'css/module/Button.module.css';
+import styles from './index.module.css';
 
 const Button = ({ className, theme, handleClick, children }) => {
   return (

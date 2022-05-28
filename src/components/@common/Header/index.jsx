@@ -1,5 +1,5 @@
 import useHeader from 'hooks/useHeader';
-import styles from 'css/module/Header.module.css';
+import styles from './index.module.css';
 
 const Header = () => {
   const { title, left, right } = useHeader();

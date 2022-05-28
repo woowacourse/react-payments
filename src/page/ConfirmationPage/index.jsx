@@ -3,9 +3,9 @@ import useAlias from 'hooks/useAlias';
 import useCardContext from 'hooks/useCardContext';
 
 import CardPreview from 'components/CardPreview';
-import Button from 'components/common/Button';
+import Button from 'components/@common/Button';
 
-import styles from 'css/module/ConfirmationPage.module.css';
+import styles from './index.module.css';
 import validate from './validator';
 import { ACTION, ROUTE } from 'constants';
 import { INPUT_MAX_LENGTH } from 'constants';

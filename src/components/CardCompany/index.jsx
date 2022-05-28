@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import styles from 'css/module/CardCompany.module.css';
+import styles from './index.module.css';
 
 const CardCompany = ({ company, onClickCompany, theme }) => {
   return (

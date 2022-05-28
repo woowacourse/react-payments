@@ -4,7 +4,7 @@ import useCardContext from 'hooks/useCardContext';
 import { ReactComponent as CardAddIcon } from 'assets/card_add_icon.svg';
 import CardPreview from 'components/CardPreview';
 
-import styles from 'css/module/MainPage.module.css';
+import styles from './index.module.css';
 import { ROUTE } from 'constants';
 
 const MainPage = () => {

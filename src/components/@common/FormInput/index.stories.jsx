@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FormInput from 'components/common/FormInput';
+import FormInput from 'components/@common/FormInput';
 
 import 'css/input.css';
 import 'css/utils.css';

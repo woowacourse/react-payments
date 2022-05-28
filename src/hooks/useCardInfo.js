@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { checkFullFilled } from 'page/cardAdd/validator';
+import { checkFullFilled } from 'page/CardAddPage/validator';
 import { isObject } from 'utils';
 import { v4 as uuid } from 'uuid';
 

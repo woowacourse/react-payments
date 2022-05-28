@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { isObject } from 'utils';
-import styles from 'css/module/FormInput.module.css';
+import styles from './index.module.css';
 
 const FormInput = ({
   className,

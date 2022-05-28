@@ -1,11 +1,11 @@
 import { useReducer } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import Layout from 'components/common/Layout';
-import Header from 'components/common/Header';
-import MainPage from 'page/main';
-import CardAppPage from 'page/cardAdd';
-import ConfirmationPage from 'page/confirmation';
+import Layout from 'components/@common/Layout';
+import Header from 'components/@common/Header';
+import MainPage from 'page/MainPage';
+import CardAppPage from 'page/CardAddPage';
+import ConfirmationPage from 'page/ConfirmationPage';
 import reducer from 'reducer/card';
 import { ROUTE, BASENAME } from 'constants';
 import { CardContext } from 'hooks/useCardContext';

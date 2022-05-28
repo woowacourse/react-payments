@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Button from 'components/common/Button';
+import Button from 'components/@common/Button';
 import { ReactComponent as PrevIcon } from 'assets/prev_icon.svg';
 import { ROUTE } from 'constants';
 
