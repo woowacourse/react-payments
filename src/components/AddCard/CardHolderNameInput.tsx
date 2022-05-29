@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { ChangeEvent, useContext } from "react";
 import { CardInfoContext } from "../../contexts/CardInfoContext";
 import styled from "styled-components";
 
@@ -6,8 +6,14 @@ import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 
 import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
-import { isInValidHolderName } from "../../validators/validator.ts";
+import { isInValidHolderName } from "../../validators/validator";
 import { setHolderName } from "../../reducer/cardReducer";
+
+interface IInputCounter {
+  currLength: number;
+  maxLength: number;
+  isComplete: boolean;
+}
 
 const StyledInputCounter = styled.p`
   position: absolute;
@@ -15,11 +21,16 @@ const StyledInputCounter = styled.p`
   right: 0;
   font-size: 12px;
   line-height: 14px;
-  color: ${(props) => (props.isComplete ? "#04c09e" : "#525252")};
+  color: ${(props: { isComplete: boolean }) =>
+    props.isComplete ? "#04c09e" : "#525252"};
   letter-spacing: -0.085em;
 `;
 
-export function InputCounter({ currLength = "0", maxLength, isComplete }) {
+export function InputCounter({
+  currLength = 0,
+  maxLength,
+  isComplete,
+}: IInputCounter) {
   return (
     <StyledInputCounter isComplete={isComplete}>
       {currLength}/{maxLength}
@@ -33,7 +44,11 @@ export default function CardHolderNameInput() {
     dispatch,
   } = useContext(CardInfoContext);
 
-  const handleHolderNameUpdate = ({ target: { value } }) => {
+  const handleHolderNameUpdate = (event: ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { value },
+    } = event;
+
     if (isInValidHolderName(value)) return;
 
     dispatch(setHolderName({ value }));

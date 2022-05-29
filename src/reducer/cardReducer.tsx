@@ -1,21 +1,13 @@
 import type { IInitialState } from "../types/cardInfoState";
 
-type TCardNumberOrders =
-  | "firstCardNumber"
-  | "secondCardNumber"
-  | "thirdCardNumber"
-  | "fourthCardNumber";
-
 interface ISetCardNumberPayload {
   value: string;
-  cardNumberOrder: TCardNumberOrders;
+  cardNumberOrder: string;
 }
-
-type TExpireDateTypes = "month" | "year";
 
 interface ISetExpireDatePayload {
   value: string;
-  dateType: TExpireDateTypes;
+  dateType: string;
 }
 
 interface ISetHolderNamePayload {
@@ -26,11 +18,9 @@ interface ISetSecurityCodePayload {
   value: string;
 }
 
-type TPasswordOrderTypes = "firstPassword" | "secondPassword";
-
 interface ISetPasswordPayload {
   value: string;
-  passwordOrder: TPasswordOrderTypes;
+  passwordOrder: string;
 }
 
 interface ISetCardAliasPayload {

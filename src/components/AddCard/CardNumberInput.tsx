@@ -1,12 +1,10 @@
-import { Fragment, useContext } from "react";
+import { ChangeEvent, Fragment, useContext } from "react";
 import { CardInfoContext } from "../../contexts/CardInfoContext";
-
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
-
 import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
 import { setCardNumber } from "../../reducer/cardReducer";
-import { isInValidCardNumber } from "../../validators/validator.ts";
+import { isInValidCardNumber } from "../../validators/validator";
 
 export default function CardNumberInput() {
   const {
@@ -20,7 +18,14 @@ export default function CardNumberInput() {
     0
   );
 
-  const handleCardNumberUpdate = ({ target: { value } }, cardNumberOrder) => {
+  const handleCardNumberUpdate = (
+    event: ChangeEvent<HTMLInputElement>,
+    cardNumberOrder: string
+  ) => {
+    const {
+      target: { value },
+    } = event;
+
     if (isInValidCardNumber(value)) return;
 
     dispatch(setCardNumber({ value, cardNumberOrder }));

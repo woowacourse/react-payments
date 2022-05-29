@@ -1,30 +1,32 @@
+import { ChangeEvent } from "react";
 import styled from "styled-components";
 
 interface IInputProps {
   name:
+    | "cardNumber"
+    | "expireDate"
+    | "holderName"
     | "securityCode"
     | "password"
-    | "cardNumber"
-    | "holderName"
-    | "cardAlias"
-    | "expireDate";
+    | "cardAlias";
   className:
+    | "cardNumber"
+    | "expireDate"
+    | "holderName"
     | "securityCode"
     | "password"
-    | "cardNumber"
-    | "holderName"
-    | "cardAlias"
-    | "expireDate";
+    | "cardAlias";
   type: "password" | "number" | "text";
-  placeholder: string;
+  value?: string;
+  placeholder?: string;
   width?: string;
   maxLength?: number;
   textAlign?: string;
   borderBottom?: string;
   autoFocus?: boolean;
-  required: boolean;
-  onChange: () => void;
-  isComplete: boolean;
+  required?: boolean;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  isComplete?: boolean;
 }
 
 export const StyledInput = styled.input`

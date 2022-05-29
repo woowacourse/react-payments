@@ -1,16 +1,14 @@
-import { useContext } from "react";
+import { ChangeEvent, useContext } from "react";
 import { CardInfoContext } from "../../contexts/CardInfoContext";
-
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
-
+import { isInvalidPassword } from "../../validators/validator";
+import { setPassword } from "../../reducer/cardReducer";
 import {
   CARD_INFO_RULES,
   GUIDE_MESSAGE,
   MASKED_CHARACTER,
 } from "../../constants/constants";
-import { isInvalidPassword } from "../../validators/validator.ts";
-import { setPassword } from "../../reducer/cardReducer";
 
 export default function CardPasswordInput() {
   const {
@@ -24,7 +22,13 @@ export default function CardPasswordInput() {
     0
   );
 
-  const handlePasswordUpdate = ({ target: { value } }, passwordOrder) => {
+  const handlePasswordUpdate = (
+    event: ChangeEvent<HTMLInputElement>,
+    passwordOrder: string
+  ) => {
+    const {
+      target: { value },
+    } = event;
     if (isInvalidPassword(value)) return;
 
     dispatch(setPassword({ value, passwordOrder }));

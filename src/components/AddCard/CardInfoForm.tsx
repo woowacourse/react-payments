@@ -1,7 +1,12 @@
-import React from "react";
+import { ChangeEvent, FormEvent, KeyboardEvent, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { LOCAL_STORAGE_KEY, ROUTES } from "../../constants/constants";
+import { setInitialState } from "../../reducer/cardReducer";
+import { CardInfoContext } from "../../contexts/CardInfoContext";
+import {
+  CARD_REGISTER_SUCCESS_MESSAGE,
+  ROUTES,
+} from "../../constants/constants";
 
 const StyledCardInfoForm = styled.form`
   display: flex;
@@ -9,10 +14,13 @@ const StyledCardInfoForm = styled.form`
   gap: 20px;
 `;
 
-export default function CardInfoForm({ children }) {
+export default function CardInfoForm({ children }: { children: any }) {
+  const { state, dispatch } = useContext(CardInfoContext);
   const navigate = useNavigate();
 
-  const focusNextInput = ({ target }) => {
+  const focusNextInput = (event: ChangeEvent<HTMLFormElement>) => {
+    const { target } = event;
+
     if (target.value.length !== target.maxLength) return;
 
     const targetInputList = [...target.form].filter((input) =>
@@ -23,8 +31,9 @@ export default function CardInfoForm({ children }) {
     targetInputList[nextIndex]?.focus();
   };
 
-  const focusPrevInput = (event) => {
-    const { target } = event;
+  const focusPrevInput = (event: KeyboardEvent<HTMLFormElement>) => {
+    const target = event.target as HTMLFormElement;
+
     if (target.value.length !== 0 || event.key !== "Backspace") return;
 
     const targetInputList = [...target.form].filter((input) =>
@@ -35,27 +44,15 @@ export default function CardInfoForm({ children }) {
     targetInputList[prevIndex]?.focus();
   };
 
-  const handleSubmit = (event) => {
-    console.log("123");
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
+    window.alert(CARD_REGISTER_SUCCESS_MESSAGE);
 
-    const cardDataList = [...formData.entries()];
+    const storage = JSON.parse(localStorage.getItem("cardInfo") || "") ?? [];
+    storage.push(state);
+    localStorage.setItem("cardInfo", JSON.stringify(storage));
 
-    const completeCardInfo = cardDataList.reduce((resultCardInfo, cardData) => {
-      const [cardInfoKey, cardInfoValue] = cardData;
-      resultCardInfo[cardInfoKey] = resultCardInfo[cardInfoKey]
-        ? (resultCardInfo[cardInfoKey] += `,${cardInfoValue}`)
-        : (resultCardInfo[cardInfoKey] = cardInfoValue);
-
-      return resultCardInfo;
-    }, {});
-
-    const cardInfo =
-      JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY.CARD_INFO)) ?? [];
-    cardInfo.push(completeCardInfo);
-    localStorage.setItem(LOCAL_STORAGE_KEY.CARD_INFO, JSON.stringify(cardInfo));
-
+    dispatch(setInitialState());
     navigate(ROUTES.HOME, { replace: true });
   };
 

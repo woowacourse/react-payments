@@ -3,7 +3,7 @@ import styled from "styled-components";
 import addIcon from "../assets/images/addIcon.svg";
 
 import PageHeader from "../components/PageHeader";
-import PossessCardItems from "../components/PossessCard/PossessCardItems";
+import { PossessCardItems } from "../components/PossessCard";
 import Button from "../components/UIComponents/Button/Button";
 
 import { ROUTES } from "../constants/constants";
