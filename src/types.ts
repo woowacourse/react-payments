@@ -15,3 +15,5 @@ export interface CardCompany {
 export type CardCompanyList = Record<number, CardCompany>;
 
 export type ModalState = 'hidden' | 'visible' | 'disappear';
+
+export type CardData = {};
