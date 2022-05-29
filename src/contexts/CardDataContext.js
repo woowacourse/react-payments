@@ -67,11 +67,11 @@ function useCardDataContext() {
   const { cardList, currentEditIndex } = context.state;
   const { dispatch, setEditIndex } = context.action;
 
-  const handleChangeEditIndex = (index) => {
+  const setCardEditIndex = (index) => {
     setEditIndex(index);
   };
 
-  const handleInsertCardData = async (cardData) => {
+  const addCardData = async (cardData) => {
     const response = await requestInsertCardData(cardData);
 
     requestErrorHandler(response)({
@@ -82,7 +82,7 @@ function useCardDataContext() {
     });
   };
 
-  const handleUpdateCardData = async (index, cardData) => {
+  const updateCardData = async (index, cardData) => {
     const { id } = cardList[index];
     const response = await requestUpdateCardData(id, cardData);
 
@@ -94,7 +94,7 @@ function useCardDataContext() {
     });
   };
 
-  const handleDeleteCardData = async (index) => {
+  const removeCardData = async (index) => {
     const { id } = cardList[index];
     const response = await requestDeleteCardData(id);
 
@@ -109,10 +109,10 @@ function useCardDataContext() {
   return {
     cardList,
     currentEditIndex,
-    handleChangeEditIndex,
-    handleInsertCardData,
-    handleUpdateCardData,
-    handleDeleteCardData,
+    setCardEditIndex,
+    addCardData,
+    updateCardData,
+    removeCardData,
   };
 }
 

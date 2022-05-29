@@ -23,7 +23,7 @@ function CardList() {
     handleModalClose: handleEditModalClose,
   } = useModal();
 
-  const { cardList, handleChangeEditIndex, handleDeleteCardData } = useCardDataContext();
+  const { cardList, setCardEditIndex, removeCardData } = useCardDataContext();
 
   const onClickCard = (index) => {
     setCardFocus(index);
@@ -31,12 +31,12 @@ function CardList() {
   };
 
   const onClickAddButton = () => {
-    handleChangeEditIndex(CARD_EDITOR_MODE.NEW);
+    setCardEditIndex(CARD_EDITOR_MODE.NEW);
     setPageLocation(PAGE_LIST.CARD_EDITOR);
   };
 
   const onClickEditButton = () => {
-    handleChangeEditIndex(focusCardIndex);
+    setCardEditIndex(focusCardIndex);
     setPageLocation(PAGE_LIST.CARD_EDITOR);
   };
 
@@ -44,7 +44,7 @@ function CardList() {
     if (!confirm('정말 해당 카드를 제거하시겠습니까?')) return;
 
     try {
-      await handleDeleteCardData(focusCardIndex);
+      await removeCardData(focusCardIndex);
     } catch (error) {
       alert(error.message);
       return;

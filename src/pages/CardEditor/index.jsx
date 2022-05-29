@@ -31,8 +31,7 @@ import {
 
 function CardEditor() {
   const { setPageTitle, setPageLocation } = usePageContext();
-  const { cardList, currentEditIndex, handleInsertCardData, handleUpdateCardData } =
-    useCardDataContext();
+  const { cardList, currentEditIndex, addCardData, updateCardData } = useCardDataContext();
 
   useEffect(
     () => setPageTitle(CARD_EDITOR_MODE.NEW === currentEditIndex ? '카드 추가' : '카드 편집'),
@@ -80,8 +79,8 @@ function CardEditor() {
 
     try {
       CARD_EDITOR_MODE.NEW === currentEditIndex
-        ? await handleInsertCardData(newCardData)
-        : await handleUpdateCardData(currentEditIndex, newCardData);
+        ? await addCardData(newCardData)
+        : await updateCardData(currentEditIndex, newCardData);
     } catch (error) {
       alert(error.message);
       return;

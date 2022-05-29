@@ -12,14 +12,14 @@ function CardUpdated() {
   const { setPageTitle, setPageLocation } = usePageContext();
   useEffect(() => setPageTitle('카드 등록 완료'), []);
 
-  const { cardList = {}, currentEditIndex, handleChangeEditIndex } = useCardDataContext();
+  const { cardList = {}, currentEditIndex, setCardEditIndex } = useCardDataContext();
   const { cardName, companyId, cardNumber, expireMonth, expireYear, userName } =
     CARD_EDITOR_MODE.NEW === currentEditIndex
       ? cardList[cardList.length - 1] || {}
       : cardList[currentEditIndex] || {};
 
   const onClickListButton = () => {
-    handleChangeEditIndex(CARD_EDITOR_MODE.NEW);
+    setCardEditIndex(CARD_EDITOR_MODE.NEW);
     setPageLocation(PAGE_LIST.CARD_LIST);
   };
 
