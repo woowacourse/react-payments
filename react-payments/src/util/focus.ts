@@ -1,14 +1,16 @@
 interface FocusNextParams {
   target: HTMLInputElement;
-  value: object;
+  value: {
+    [key: string]: string;
+  };
   maxLength: number;
-  nextElement: HTMLInputElement | null;
+  nextElement: HTMLInputElement;
 }
 
 interface FocusPrevParams {
   target: HTMLInputElement;
   key: string;
-  prevElement: HTMLInputElement | null;
+  prevElement: HTMLInputElement;
 }
 
 export const focusNextElement = ({
