@@ -1,8 +1,12 @@
-import PropTypes from 'prop-types';
-
+import * as React from 'react';
 import Container from './styles';
 
-function InputLengthText({ maxLength, children }) {
+interface PropTypes {
+  maxLength?: number;
+  children: React.ReactNode;
+}
+
+function InputLengthText({ maxLength, children }: PropTypes) {
   return (
     <Container inputLength={children} maxLength={maxLength.toString()}>
       {`${children} / ${maxLength.toString()}`}
@@ -12,10 +16,6 @@ function InputLengthText({ maxLength, children }) {
 
 InputLengthText.defaultProps = {
   maxLength: 0,
-};
-
-InputLengthText.propTypes = {
-  maxLength: PropTypes.number,
 };
 
 export default InputLengthText;
