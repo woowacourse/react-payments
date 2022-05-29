@@ -4,7 +4,8 @@
     "baseUrl": "./src",
     "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "moduleResolution": "node"
   },
   "include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }
