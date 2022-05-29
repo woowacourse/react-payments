@@ -2,7 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as BackwardArrow } from '../../assets/backwardArrow.svg';
 
-const StyledButton = styled.button`
+import { ButtonType } from '../../types/type';
+
+interface BackwardButtonProp {
+  showBackWard: boolean;
+  children: React.ReactNode;
+  type: ButtonType;
+  className: string;
+}
+
+const StyledButton = styled.button<BackwardButtonProp>`
   background: none;
   color: inherit;
   border: none;
@@ -28,13 +37,17 @@ const StyledButton = styled.button`
   }
 `;
 
-const BackwardButton = ({ showBackWard, children, ...rest }) => {
+const BackwardButton = ({
+  showBackWard,
+  children,
+  ...rest
+}: BackwardButtonProp) => {
   return (
     <StyledButton
+      {...rest}
       showBackWard={showBackWard}
       type="button"
       className="backward-button"
-      {...rest}
     >
       {showBackWard && <BackwardArrow />}
       <p>{children}</p>

@@ -39,5 +39,19 @@ module.exports = {
     ],
     'react/prop-types': [0],
     'jsx-a11y/label-has-associated-control': ['off'],
+    'react/jsx-filename-extension': [0],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' },
+    ],
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        moduleDirectory: ['src', 'node_modules'],
+      },
+    },
   },
 };
