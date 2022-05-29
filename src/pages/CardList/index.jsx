@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import { useEffect, useState } from 'react';
 import { usePageContext } from 'contexts/PageContext';
 import { useCardDataContext } from 'contexts/CardDataContext';
