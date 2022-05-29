@@ -20,7 +20,7 @@ import {
   CardNameField,
 } from 'components';
 
-import { PAGE_LIST, CARD_EDITOR_MODE } from 'constants/';
+import { PAGE_LIST, CARD_EDIT_TARGET_INDEX } from 'constants/';
 import {
   validateCardNumber,
   validateCardPassword,
@@ -34,7 +34,7 @@ function CardEditor() {
   const { cardList, currentEditIndex, addCardData, updateCardData } = useCardDataContext();
 
   useEffect(
-    () => setPageTitle(CARD_EDITOR_MODE.NEW === currentEditIndex ? '카드 추가' : '카드 편집'),
+    () => setPageTitle(CARD_EDIT_TARGET_INDEX.NEW === currentEditIndex ? '카드 추가' : '카드 편집'),
     [],
   );
 
@@ -78,7 +78,7 @@ function CardEditor() {
     delete newCardData.isComplete;
 
     try {
-      CARD_EDITOR_MODE.NEW === currentEditIndex
+      CARD_EDIT_TARGET_INDEX.NEW === currentEditIndex
         ? await addCardData(newCardData)
         : await updateCardData(currentEditIndex, newCardData);
     } catch (error) {

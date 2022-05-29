@@ -6,7 +6,7 @@ import {
   requestInsertCardData,
   requestUpdateCardData,
 } from 'api';
-import { CARD_EDITOR_MODE } from 'constants/';
+import { CARD_EDIT_TARGET_INDEX } from 'constants/';
 
 const CardDataContext = createContext();
 
@@ -37,7 +37,7 @@ function reducer(cardList, { type, data }) {
 }
 
 function CardDataContextProvider({ children }) {
-  const [currentEditIndex, setEditIndex] = useState(CARD_EDITOR_MODE.NEW);
+  const [currentEditIndex, setEditIndex] = useState(CARD_EDIT_TARGET_INDEX.NEW);
   const [cardList, dispatch] = useReducer(reducer, []);
   const value = useMemo(
     () => ({ state: { cardList, currentEditIndex }, action: { dispatch, setEditIndex } }),
@@ -66,6 +66,11 @@ function useCardDataContext() {
 
   const { cardList, currentEditIndex } = context.state;
   const { dispatch, setEditIndex } = context.action;
+
+  const getCardData = (cardIndex) =>
+    CARD_EDIT_TARGET_INDEX.NEW === cardIndex
+      ? cardList[cardList.length - 1] || {}
+      : cardList[currentEditIndex] || {};
 
   const setCardEditIndex = (index) => {
     setEditIndex(index);
@@ -109,6 +114,7 @@ function useCardDataContext() {
   return {
     cardList,
     currentEditIndex,
+    getCardData,
     setCardEditIndex,
     addCardData,
     updateCardData,
