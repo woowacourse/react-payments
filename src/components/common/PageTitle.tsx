@@ -1,7 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-export const PageTitle = ({ children, onClick, visible }) => {
+interface PageTitleComponent {
+  children: React.ReactNode;
+  onClick: () => void;
+  visible: boolean;
+}
+
+export const PageTitle = ({
+  children,
+  onClick,
+  visible,
+}: PageTitleComponent) => {
   return (
     <PageTitleWrapperStyle>
       <BackwardButton onClick={onClick} visible={visible} />
@@ -18,7 +28,7 @@ const PageTitleWrapperStyle = styled.div`
   align-items: center;
 `;
 
-const BackwardButton = styled.span`
+const BackwardButton = styled.span<{ visible: boolean }>`
   display: ${(props) => (props.visible ? "inline" : "none")};
   width: 8px;
   height: 8px;
