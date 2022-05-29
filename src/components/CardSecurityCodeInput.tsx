@@ -25,7 +25,7 @@ const IconButtonWrapper = styled.div`
 `;
 
 interface Props {
-  securityCode: string[];
+  securityCode: string;
   onChange: (value?: string, index?: number) => void;
   isInvalid: boolean;
   isComplete: boolean;

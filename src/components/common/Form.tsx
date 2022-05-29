@@ -45,7 +45,12 @@ export default function Form({ children, onSubmit }: Props) {
   }, []);
 
   return (
-    <StyledForm ref={formRef} onSubmit={onSubmit} onKeyUp={handleNextInputFocus} onKeyDown={handlePrevInputFocus}>
+    <StyledForm
+      ref={formRef}
+      onSubmit={onSubmit}
+      onKeyUp={handleNextInputFocus}
+      onKeyDown={handlePrevInputFocus}
+      autoComplete="off">
       {children}
     </StyledForm>
   );

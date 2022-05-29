@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-import { useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 

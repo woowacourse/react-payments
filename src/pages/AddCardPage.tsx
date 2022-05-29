@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ import {
   CardSecurityCodeInput,
 } from '../components';
 import { Header, Title } from '../components/common/styled';
-import Button from './../components/common/Button';
+import Button from '../components/common/Button';
 import Form from '../components/common/Form';
 import GoBackButton from '../components/GoBackButton';
 
@@ -36,34 +36,48 @@ const ButtonWrapper = styled.div`
 `;
 
 export default function AddCardPage() {
-  const [cardNumber, onChangeCardNumberUnit, isCompleteCardNumber, isInvalidCardNumberInput] = useInputArray(
+  const {
+    state: cardNumber,
+    onChange: onChangeCardNumberUnit,
+    isComplete: isCompleteCardNumber,
+    isError: isInvalidCardNumberInput,
+  } = useInputArray(
     ['', '', '', ''],
     isValidCardNumberUnit,
     ADD_CARD_FORM_CONDITION.NUMBER_UNIT_COUNT * ADD_CARD_FORM_CONDITION.NUMBER_UNIT_LENGTH
   );
 
-  const [expireDate, onChangeExpireDateUnit, isCompleteExpireDate, isInvalidExpireDateInput] = useInputArray(
-    ['', ''],
-    isValidCardExpireDateUnit,
-    ADD_CARD_FORM_CONDITION.EXPIRE_DATE_LENGTH
-  );
+  const {
+    state: expireDate,
+    onChange: onChangeExpireDateUnit,
+    isComplete: isCompleteExpireDate,
+    isError: isInvalidExpireDateInput,
+  } = useInputArray(['', ''], isValidCardExpireDateUnit, ADD_CARD_FORM_CONDITION.EXPIRE_DATE_LENGTH);
 
-  const [holderName, onChangeHolderName, _, isInvalidCardHolderNameInput] = useInput('', isValidCardHolderName);
-  const [securityCode, onChangeSecurityCode, isCompleteSecurityCode, isInvalidSecurityCodeInput] = useInput(
-    '',
-    isValidCardSecurityCode,
-    ADD_CARD_FORM_CONDITION.SECURITY_CODE_LENGTH
-  );
-  const [password, onChangePasswordUnit, isCompletePassword, isInvalidPasswordInputInput] = useInputArray(
-    ['', ''],
-    isValidCardPasswordUnit,
-    ADD_CARD_FORM_CONDITION.PASSWORD_LENGTH
-  );
+  const {
+    state: holderName,
+    onChange: onChangeHolderName,
+    isError: isInvalidCardHolderNameInput,
+  } = useInput('', isValidCardHolderName);
+
+  const {
+    state: securityCode,
+    onChange: onChangeSecurityCode,
+    isComplete: isCompleteSecurityCode,
+    isError: isInvalidSecurityCodeInput,
+  } = useInput('', isValidCardSecurityCode, ADD_CARD_FORM_CONDITION.SECURITY_CODE_LENGTH);
+
+  const {
+    state: password,
+    onChange: onChangePasswordUnit,
+    isComplete: isCompletePassword,
+    isError: isInvalidPasswordInputInput,
+  } = useInputArray(['', ''], isValidCardPasswordUnit, ADD_CARD_FORM_CONDITION.PASSWORD_LENGTH);
 
   const { addNewCard } = useContext(CardListContext);
   const navigate = useNavigate();
 
-  const handleCardInfoSubmit = e => {
+  const handleCardInfoSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // eslint-disable-next-line no-restricted-globals
     if (confirm(CONFIRM_MESSAGE.ADD_CARD_FORM_SUBMIT(cardNumber, expireDate, holderName))) {
@@ -94,7 +108,7 @@ export default function AddCardPage() {
         expireDate={expireDate}
         isComplete={isCompleteCardNumber && isCompleteExpireDate && isCompleteSecurityCode && isCompletePassword}
       />
-      <Form onSubmit={handleCardInfoSubmit} autoComplete="off">
+      <Form onSubmit={handleCardInfoSubmit}>
         <CardNumberInput
           cardNumber={cardNumber}
           onChange={onChangeCardNumberUnit}

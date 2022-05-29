@@ -12,7 +12,7 @@ const ADD_CARD_FORM_CONDITION = {
 };
 
 const CONFIRM_MESSAGE = {
-  ADD_CARD_FORM_SUBMIT: (cardNumber: string[], expireDate: string[], holderName: string) => `
+  ADD_CARD_FORM_SUBMIT: (cardNumber: string[], expireDate: string[], holderName: string): string => `
     카드번호: ${cardNumber.join(' - ')}
     만료일: ${expireDate.join('/')}
     소유자: ${holderName}
