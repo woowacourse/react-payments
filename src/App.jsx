@@ -56,12 +56,12 @@ function App() {
               <Route path={PATH.CARD_ADD_COMPLETION} element={<CardAddCompletionPage />} />
             </Routes>
           </CardListProvider>
+          <ModalContainer
+            id={ID.MODAL_CONTAINER}
+            visibility={isOpenModal ? 'visible' : 'hidden'}
+            onClick={handleClickModalContainer}
+          />
         </ThemeProvider>
-        <ModalContainer
-          id={ID.MODAL_CONTAINER}
-          visibility={isOpenModal ? 'visible' : 'hidden'}
-          onClick={handleClickModalContainer}
-        />
       </div>
     </>
   );

@@ -32,7 +32,7 @@ const CompanyName = styled.span`
   font-size: 12px;
   line-height: 14px;
   letter-spacing: -0.085em;
-  color: #525252;
+  color: ${({ theme }) => theme.PALETTE.GRAY_004};
 `;
 
 function CardCompanyButton({ color, name, handleClickCardCompany }: CardCompanyButtonProps) {
