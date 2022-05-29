@@ -25,6 +25,6 @@
     "jsxImportSource": "@emotion/react"
   },
   "include": [
-    "./src/lib/**/*.tsx", "./src/lib/**/*.ts", "src", "public"
+    "src", "public"
   ]
 }
