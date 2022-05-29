@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export const TipButton = ({ onClick = () => {}, contents, color }) => {
+export const TipButton = ({ onClick, contents, color }) => {
   return (
     <TipButtonContainerStyle onClick={onClick} color={color}>
       <div>{contents}</div>
