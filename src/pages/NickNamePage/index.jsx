@@ -12,6 +12,7 @@ import useLocalStorage from 'hooks/useLocalStorage'
 import { CompleteText } from 'pages/NickNamePage/style'
 import { FooterWrapper, CenterItem, PageWrapper } from 'pages/style'
 import { BottomBorderInputWrapper } from 'components/common/Input/style'
+import { PATH } from 'constants'
 
 function NickNamePage() {
   const { cardInfo, isFormFulfilled, clearCardInfo } =
@@ -45,6 +46,7 @@ function NickNamePage() {
       </CompleteText>
       <CenterItem>
         <Card
+          size="large"
           cardInfo={
             isEditing
               ? JSON.parse(localStorage.getItem('cardList'))[paramId]
@@ -57,7 +59,7 @@ function NickNamePage() {
       </CenterItem>
       <FooterWrapper>
         <Button onClick={saveCardInfo}>
-          <Link to="/react-payments">확인</Link>
+          <Link to={PATH.MAIN}>확인</Link>
         </Button>
       </FooterWrapper>
     </PageWrapper>
