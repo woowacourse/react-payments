@@ -9,4 +9,4 @@ export const CARD_TYPE = {
   son: { name: '손 카드', color: '#F37D3B' },
   ronaldo: { name: '호날두 카드', color: '#E76E9A' },
   messi: { name: '메시 카드', color: 'skyblue' },
-};
+} as const;
