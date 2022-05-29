@@ -54,7 +54,7 @@ export interface KeyEventTarget extends Target {
   key: string;
 }
 
-export interface CardNumberFunction {
+interface CardNumberFunction {
   onChangeCardNumber: ({ target }: Target) => void;
   onKeyDownCardNumber: ({ target, key }: KeyEventTarget) => void;
   resetCardNumber: () => void;
@@ -66,7 +66,7 @@ export interface CardNumberContextProvider {
 }
 
 //CardPasswordProvider
-export interface CardPasswordFunction {
+interface CardPasswordFunction {
   onChangeCardPassword: ({ target }: Target) => void;
   onClickCardPasswordBackspaceButton: () => void;
   onClickCardPasswordVirtualKeyboard: (value: string) => void;
@@ -76,4 +76,15 @@ export interface CardPasswordFunction {
 export interface CardPasswordContextProvider {
   state: { cardPassword: CardPassword; cardPasswordReady: boolean };
   action: CardPasswordFunction;
+}
+
+//CardTypeProvider
+export interface CardTypeFunction {
+  onClickCardType: ({ cardType, cardName }: CardType) => void;
+  resetCardTypeInfo: () => void;
+}
+
+export interface CardTypeContextProvider {
+  state: { cardTypeInfo: CardType; cardTypeReady: boolean };
+  action: CardTypeFunction;
 }

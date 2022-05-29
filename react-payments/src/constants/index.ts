@@ -36,7 +36,7 @@ export const cardInfos = [
 export const defaultCardInfo = {
   cardName: "",
   cardType: "defaultCard",
-} as const;
+};
 
 export const MAX_LENGTH = {
   CARD_NUMBER: 4,
