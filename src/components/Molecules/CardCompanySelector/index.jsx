@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import CardCompanyButton from 'components/Atoms/CardCompanyButton';
+import { CARD_COMPANY_LIST } from 'constant/cardCompany';
 
 const slideIn = keyframes`
   from {
@@ -25,21 +26,10 @@ const Container = styled.div`
   animation: ${slideIn} 0.3s linear;
 `;
 
-const cardCompanyList = [
-  { name: '포코카드', color: '#E24141' },
-  { name: '준카드', color: '#547CE4' },
-  { name: '공원카드', color: '#73BC6D' },
-  { name: '브랜카드', color: '#DE59B9' },
-  { name: '로이드카드', color: '#4CD2BA' },
-  { name: '도비카드', color: '#E76E9A' },
-  { name: '콜린카드', color: '#F37D3B' },
-  { name: '썬카드', color: '#FBCD58' },
-];
-
 function CardCompanySelector({ handleClickCardCompany }) {
   return (
     <Container>
-      {cardCompanyList.map((cardCompany, index) => (
+      {CARD_COMPANY_LIST.map((cardCompany, index) => (
         <CardCompanyButton
           key={cardCompany.name + index}
           name={cardCompany.name}
