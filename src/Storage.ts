@@ -1,3 +1,5 @@
+import { Card } from './type';
+
 const STORAGE_KEY = {
   CARD_LIST: 'card-list',
 };
@@ -7,7 +9,7 @@ const EMPTY_VALUE = {
 };
 
 class Storage {
-  #cardList;
+  #cardList: Card[];
 
   constructor() {
     this.#cardList = this.getInitialValue(STORAGE_KEY.CARD_LIST, EMPTY_VALUE.CARD_LIST);
@@ -17,12 +19,12 @@ class Storage {
     return this.#cardList;
   }
 
-  getInitialValue(key, emptyValue) {
-    const savedValue = localStorage.getItem(key);
+  getInitialValue(key: string, emptyValue: any) {
+    const savedValue: string = localStorage.getItem(key);
     return savedValue ? JSON.parse(savedValue) : emptyValue;
   }
 
-  saveCardList(value) {
+  saveCardList(value: Card[]) {
     localStorage.setItem(STORAGE_KEY.CARD_LIST, JSON.stringify(value));
   }
 }

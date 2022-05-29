@@ -1,10 +1,16 @@
 import { useState } from 'react';
 import { Card } from '../type';
 
-const useCardList = (initialCardList: Card[], saveCardListToStorage: (value: Card[]) => void) => {
+interface Returns {
+  state: Card[];
+  addNewCard: (newCard: Card) => number;
+  updateNickNameById: (id: number, nickName: string) => void;
+}
+
+const useCardList = (initialCardList: Card[], saveCardListToStorage: (value: Card[]) => void): Returns => {
   const [state, setState] = useState(initialCardList);
 
-  const addNewCard = (newCard: Card) => {
+  const addNewCard = (newCard: Card): number => {
     let newId: number;
     setState((prevCardList: Card[]) => {
       const newCardList: Card[] = [...prevCardList];
@@ -32,7 +38,7 @@ const useCardList = (initialCardList: Card[], saveCardListToStorage: (value: Car
     });
   };
 
-  return [state, addNewCard, updateNickNameById];
+  return { state, addNewCard, updateNickNameById };
 };
 
 export default useCardList;
