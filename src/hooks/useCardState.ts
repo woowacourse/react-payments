@@ -1,9 +1,9 @@
 import { useReducer } from 'react';
 
+import { ArrayContents, CardState, Payload } from '@/types';
 import { CARD_NUMBER, USER_NAME } from '@/constants';
 
 const initialState = {
-  companyName: '티거 카드 🐯',
   cardNumber: ['', '', '', ''],
   expireMonth: '',
   expireYear: '',
@@ -12,34 +12,42 @@ const initialState = {
   cardPassword: '',
 };
 
-const formatCardNumber = (cardNumber) => cardNumber.replace(/[^0-9]/g, '');
+const formatCardNumber = (cardNumber: string) => cardNumber.replace(/[^0-9]/g, '');
 
-function reducer(state, { type, contents }) {
+function reducer(state: CardState, { type, contents }: Payload) {
   const newState = { ...state };
 
   switch (type) {
     case CARD_NUMBER.TEXT_FIELD_NAME: {
-      const { index, value } = contents;
+      const { index, value } = contents as ArrayContents;
       newState.cardNumber[index] = formatCardNumber(value);
       break;
     }
     case USER_NAME.TEXT_FIELD_NAME: {
-      newState.userName = contents.toUpperCase();
+      newState.userName = (contents as string).toUpperCase();
       break;
     }
     default:
-      newState[type] = contents;
+      newState[type] = contents as string;
   }
 
   return newState;
 }
 
-const isInputComplete = (state) => {
+const isInputComplete = (state: CardState) => {
   const necessaryInputState = { ...state };
 
   delete necessaryInputState.userName;
 
-  return Object.entries(necessaryInputState).every(([_, value]) => value !== '');
+  const inputComplete = Object.entries(necessaryInputState).every(([key, value]) => {
+    if (key === CARD_NUMBER.TEXT_FIELD_NAME) {
+      return (value as string[]).every((unit) => unit !== '');
+    }
+
+    return (value as string) !== '';
+  });
+
+  return inputComplete;
 };
 
 const useCardState = () => {

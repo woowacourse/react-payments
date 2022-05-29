@@ -1,19 +1,6 @@
+import { CardState, ExpireDate } from '@/types';
 import { isNumber, isEnglishName } from '@/utils';
 import { CARD_NUMBER, CARD_PASSWORD, ERROR_MESSAGE, EXPIRE_DATE, SECURITY_CODE } from '@/constants';
-
-interface CardState {
-  cardNumber: string[];
-  cardPassword: string;
-  expireMonth: string;
-  expireYear: string;
-  securityCode: string;
-  userName: string;
-}
-
-interface ExpireDate {
-  expireMonth: string;
-  expireYear: string;
-}
 
 const isExpiredDate = (year: number, month: number) => {
   const inputDate = new Date();
