@@ -1,7 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import { InputType } from '../../types/type';
 
-const StyledInput = styled.input`
+interface InputProps {
+  type?: InputType;
+  underLine?: boolean;
+  placeHolder?: string;
+  width?: string;
+  height?: string;
+  innerRef?: React.RefObject<HTMLInputElement>;
+}
+
+const StyledInput = styled.input<InputProps>`
   border: none;
   border-bottom: ${(props) => (props.underLine ? '2px solid black;' : 'none')};
   text-align: center;
@@ -19,7 +29,7 @@ const Input = ({
   height,
   innerRef,
   ...rest
-}) => {
+}: InputProps) => {
   return (
     <StyledInput
       type={type}
