@@ -10,7 +10,7 @@ function CardEditConfirm({ focusCardIndex, onClickCloseButton }) {
   const { setPageLocation } = usePageContext();
   const { getCardData, setCardEditIndex, removeCardData } = useCardDataContext();
 
-  const focusCardData = getCardData[focusCardIndex];
+  const focusCardData = getCardData(focusCardIndex);
 
   const onClickEditButton = () => {
     setCardEditIndex(focusCardIndex);

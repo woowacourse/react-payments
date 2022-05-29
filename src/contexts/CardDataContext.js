@@ -70,7 +70,7 @@ function useCardDataContext() {
   const getCardData = (cardIndex) =>
     CARD_EDIT_TARGET_INDEX.NEW === cardIndex
       ? cardList[cardList.length - 1] || {}
-      : cardList[currentEditIndex] || {};
+      : cardList[cardIndex] || {};
 
   const setCardEditIndex = (index) => {
     setEditIndex(index);
