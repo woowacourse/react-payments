@@ -15,7 +15,7 @@ function useModal() {
   // 추정 원인 : 버그 수정 전에는 기존 앨리먼트 비교 없이, 계속해서 모달이 새롭게 그려지고 있었는 것으로 추정.
   // 기존에는 커스텀훅에서 객체를 매번 새롭게 생성해서 반환했으니, 메모리 주소가 계속 바뀌어서...? 리액트가 변경되었다고 감지?
   // 나중에 더 찾아보기
-  const render = useCallback(
+  const ModalContainer = useCallback(
     ({ children }) =>
       modalState !== MODAL_STATE.HIDDEN && (
         <Modal state={modalState} handleClose={handleDisappear} handleHidden={handleHidden}>
@@ -26,7 +26,7 @@ function useModal() {
   );
 
   return {
-    Modal: render,
+    Modal: ModalContainer,
     handleModalOpen: handleVisible,
     handleModalClose: handleDisappear,
   };
