@@ -4,7 +4,12 @@ import { HeaderWrapper } from 'components/common/Header/style'
 import Button from 'components/common/Button'
 import { ReactComponent as Arrow } from 'assets/arrow.svg'
 
-function Header({ backButton, children }) {
+interface HeaderType {
+  children: React.ReactNode
+  backButton: boolean
+}
+
+function Header({ backButton, children }: HeaderType) {
   const navigate = useNavigate()
 
   return (
