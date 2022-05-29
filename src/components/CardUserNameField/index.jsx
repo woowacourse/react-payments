@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import useErrorMessage from 'hooks/useErrorMessage';
-import { CardContext } from 'contexts';
+import useErrorMessage from '@/hooks/useErrorMessage';
+import { CardContext } from '@/contexts';
 
-import { FieldSet, TextField } from 'components/@common';
+import { FieldSet, TextField } from '@/components/@common';
 
-import { USER_NAME } from 'constants';
-import { validateUserName } from 'validators';
+import { validateUserName } from '@/validators';
+import { USER_NAME } from '@/constants';
 
 function CardUserNameField() {
   const { userName, onChangeTextField } = useContext(CardContext);

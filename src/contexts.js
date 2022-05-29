@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
-import useCardState from 'hooks/useCardState';
-import { CARD_NUMBER } from 'constants';
+import useCardState from '@/hooks/useCardState';
+import { CARD_NUMBER } from '@/constants';
 
 const CardContext = React.createContext(null);
 

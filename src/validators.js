@@ -1,5 +1,5 @@
-import { isNumber, isEnglishName } from 'utils';
-import { CARD_NUMBER, CARD_PASSWORD, ERROR_MESSAGE, EXPIRE_DATE, SECURITY_CODE } from 'constants';
+import { isNumber, isEnglishName } from '@/utils';
+import { CARD_NUMBER, CARD_PASSWORD, ERROR_MESSAGE, EXPIRE_DATE, SECURITY_CODE } from '@/constants';
 
 const isExpiredDate = (year, month) => {
   const inputDate = new Date();

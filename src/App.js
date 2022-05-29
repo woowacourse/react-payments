@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { CardAdd, CardAddComplete, CardList } from 'pages';
-import { PATH } from 'constants';
+import { CardAdd, CardAddComplete, CardList } from '@/pages';
+import { PATH } from '@/constants';
 
 function App() {
   return (

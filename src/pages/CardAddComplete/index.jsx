@@ -1,13 +1,12 @@
-import { putCardNickname } from 'apis';
-
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CardContext } from 'contexts';
+import { CardContext } from '@/contexts';
 
-import { Button, Header, TextField } from 'components/@common';
-import { Card } from 'components';
+import { Button, Header, TextField } from '@/components/@common';
+import { Card } from '@/components';
 
-import { PATH } from 'constants';
+import { PATH } from '@/constants';
+import { putCardNickname } from '@/apis';
 
 function CardAddComplete() {
   const { cardNumber, userName, expireMonth, expireYear } = useContext(CardContext);

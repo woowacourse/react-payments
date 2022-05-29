@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ERROR_MESSAGE, PATH } from 'constants';
+import { ERROR_MESSAGE, PATH } from '@/constants';
 
 const getCards = async () => {
   const response = await axios.get(`${PATH.JSON_SERVER_BASE_URL}/cards`).catch(() => {

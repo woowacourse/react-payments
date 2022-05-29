@@ -1,12 +1,11 @@
-import { getCards } from 'apis';
-
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Header } from 'components/@common';
-import { Card } from 'components';
+import { Header } from '@/components/@common';
+import { Card } from '@/components';
 
-import { PATH } from 'constants';
+import { PATH } from '@/constants';
+import { getCards } from '@/apis';
 
 function CardList() {
   const [cards, setCards] = useState([]);

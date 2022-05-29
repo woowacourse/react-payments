@@ -1,10 +1,8 @@
-import { postCard } from 'apis';
-
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CardContext } from 'contexts';
+import { CardContext } from '@/contexts';
 
-import { Button, Header } from 'components/@common';
+import { Button, Header } from '@/components/@common';
 
 import {
   Card,
@@ -13,10 +11,11 @@ import {
   CardUserNameField,
   CardSecurityField,
   CardPasswordField,
-} from 'components';
+} from '@/components';
 
-import { PATH } from 'constants';
-import { validateCard } from 'validators';
+import { PATH } from '@/constants';
+import { validateCard } from '@/validators';
+import { postCard } from '@/apis';
 
 function CardAdd() {
   const { isComplete, cardNumber, expireMonth, expireYear, userName, securityCode, cardPassword } =
