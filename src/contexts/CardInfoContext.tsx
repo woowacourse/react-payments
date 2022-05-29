@@ -1,19 +1,13 @@
-import { createContext, useReducer } from "react";
+import React, { createContext, useReducer } from "react";
 import { initialState, reducer } from "../reducer/cardReducer";
 
-const CardInfoContext = createContext({
-  state: {
-    cardNumber: {},
-    expireDate: {},
-    holderName: {},
-    securityCode: {},
-    password: {},
-    cardAlias: {},
-  },
-  dispatch: () => {},
-});
+const CardInfoContext = createContext({});
 
-const CardInfoProvider = ({ children }) => {
+const CardInfoProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}): JSX.Element => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const value = {
