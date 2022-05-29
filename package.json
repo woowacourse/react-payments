@@ -71,6 +71,8 @@
     "@storybook/preset-create-react-app": "^4.1.0",
     "@storybook/react": "^6.4.22",
     "@storybook/testing-library": "^0.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
     "chromatic": "^6.5.4",
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
