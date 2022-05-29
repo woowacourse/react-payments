@@ -9,9 +9,9 @@ function Button({ className, type, action, size, width, isDisabled, onClick, chi
       buttonType={type}
       type={action}
       size={size}
-      onClick={onClick}
+      width={width}
       disabled={isDisabled}
-      style={{ width }}
+      onClick={onClick}
     >
       {children}
     </Container>
