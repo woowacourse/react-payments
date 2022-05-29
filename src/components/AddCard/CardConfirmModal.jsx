@@ -8,7 +8,7 @@ import {
 } from "../../constants/constants";
 import { CardInfoContext } from "../../contexts/CardInfoContext";
 import { setCardAlias, setInitialState } from "../../reducer/cardReducer";
-import { isInvalidCardAlias } from "../../validators/validator";
+import { isInvalidCardAlias } from "../../validators/validator.ts";
 
 import PageHeader from "../PageHeader";
 import Button from "../UIComponents/Button/Button";

@@ -6,7 +6,7 @@ import InputField from "../UIComponents/InputField/InputField";
 
 import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
 import { setCardNumber } from "../../reducer/cardReducer";
-import { isInValidCardNumber } from "../../validators/validator";
+import { isInValidCardNumber } from "../../validators/validator.ts";
 
 export default function CardNumberInput() {
   const {

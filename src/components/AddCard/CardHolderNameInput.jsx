@@ -6,7 +6,7 @@ import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 
 import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
-import { isInValidHolderName } from "../../validators/validator";
+import { isInValidHolderName } from "../../validators/validator.ts";
 import { setHolderName } from "../../reducer/cardReducer";
 
 const StyledInputCounter = styled.p`

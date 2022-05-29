@@ -6,9 +6,10 @@ import InputField from "../UIComponents/InputField/InputField";
 
 import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
 import {
-  isCompleteExpireDate,
+  isCompleteExpireMonth,
+  isCompleteExpireYear,
   isInValidExpireDate,
-} from "../../validators/validator";
+} from "../../validators/validator.ts";
 import { setExpireDate } from "../../reducer/cardReducer";
 
 export default function CardExpireDateInput() {
@@ -34,7 +35,9 @@ export default function CardExpireDateInput() {
       wrapperWidth={"135px"}
       horizontalAlign={"center"}
       guideMessage={GUIDE_MESSAGE.VALID_EXPIRE_DATE}
-      isComplete={isCompleteExpireDate("expireDate", [yearValue, monthValue])}
+      isComplete={
+        isCompleteExpireMonth(monthValue) && isCompleteExpireYear(yearValue)
+      }
     >
       {expireDateList.map((expireDate) => {
         const [expireDateKey, expireDateValue] = expireDate;
@@ -50,7 +53,11 @@ export default function CardExpireDateInput() {
               maxLength={CARD_INFO_RULES.EXPIRE_DATE_UNIT_LENGTH}
               required
               onChange={(e) => handleExpireDateUpdate(e, expireDateKey)}
-              isComplete={isCompleteExpireDate(expireDateKey, expireDateValue)}
+              isComplete={
+                expireDateKey === "month"
+                  ? isCompleteExpireMonth(expireDateValue)
+                  : isCompleteExpireYear(expireDateValue)
+              }
             />
             {expireDateKey === "month" && <p>/</p>}
           </Fragment>

@@ -9,7 +9,7 @@ import {
   GUIDE_MESSAGE,
   MASKED_CHARACTER,
 } from "../../constants/constants";
-import { isInvalidPassword } from "../../validators/validator";
+import { isInvalidPassword } from "../../validators/validator.ts";
 import { setPassword } from "../../reducer/cardReducer";
 
 export default function CardPasswordInput() {
@@ -24,10 +24,10 @@ export default function CardPasswordInput() {
     0
   );
 
-  const handlePasswordUpdate = (e, passwordOrder) => {
-    if (isInvalidPassword(e.target.value)) return;
+  const handlePasswordUpdate = ({ target: { value } }, passwordOrder) => {
+    if (isInvalidPassword(value)) return;
 
-    dispatch(setPassword({ value: e.target.value, passwordOrder }));
+    dispatch(setPassword({ value, passwordOrder }));
   };
 
   return (

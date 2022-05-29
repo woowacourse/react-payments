@@ -56,7 +56,7 @@ export default function CardInfoForm({ children }) {
     cardInfo.push(completeCardInfo);
     localStorage.setItem(LOCAL_STORAGE_KEY.CARD_INFO, JSON.stringify(cardInfo));
 
-    navigate(ROUTES.POSSESS_CARD, { replace: true });
+    navigate(ROUTES.HOME, { replace: true });
   };
 
   return (
@@ -66,7 +66,6 @@ export default function CardInfoForm({ children }) {
       onKeyDown={focusPrevInput}
       onSubmit={(e) => {
         handleSubmit(e);
-        // handleResetInput();
       }}
     >
       {children}

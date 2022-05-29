@@ -12,7 +12,7 @@ import {
   CREATE_MASKED_CHARACTERS,
   GUIDE_MESSAGE,
 } from "../../constants/constants";
-import { isInvalidSecurityCode } from "../../validators/validator";
+import { isInvalidSecurityCode } from "../../validators/validator.ts";
 import { setSecurityCode } from "../../reducer/cardReducer";
 
 const StyledIconContainer = styled.div`
