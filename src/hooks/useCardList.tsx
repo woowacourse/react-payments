@@ -3,17 +3,18 @@ import { Card } from '../type';
 
 interface Returns {
   state: Card[];
-  addNewCard: (newCard: Card) => number;
-  updateNickNameById: (id: number, nickName: string) => void;
+  addNewCard: (newCard: Omit<Card, 'id'>) => number;
+  updateNickNameById: (id: string, nickName: string) => void;
 }
 
 const useCardList = (initialCardList: Card[], saveCardListToStorage: (value: Card[]) => void): Returns => {
   const [state, setState] = useState(initialCardList);
 
-  const addNewCard = (newCard: Card): number => {
+  const addNewCard = (card: Omit<Card, 'id'>): number => {
     let newId: number;
     setState((prevCardList: Card[]) => {
       const newCardList: Card[] = [...prevCardList];
+      const newCard: Card = { ...card, id: null };
       newId = newCardList[newCardList.length - 1]?.id + 1 || 1;
       newCard.id = newId;
       newCardList.push(newCard);
@@ -24,7 +25,7 @@ const useCardList = (initialCardList: Card[], saveCardListToStorage: (value: Car
     return newId;
   };
 
-  const updateNickNameById = (id: number, nickName: string) => {
+  const updateNickNameById = (id: string, nickName: string) => {
     setState((prevCardList: Card[]) => {
       const cardIndex: number = prevCardList.findIndex(card => card.id === Number(id));
       const updatedCardInfo: Card = { ...prevCardList[cardIndex] };

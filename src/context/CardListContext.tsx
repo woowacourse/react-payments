@@ -5,8 +5,8 @@ import { Card } from '../type';
 
 interface CardListContextInterface {
   cardList: Card[];
-  addNewCard: (newCard: Card) => number;
-  updateNickNameById: (id: number, nickName: string) => void;
+  addNewCard: (newCard: Omit<Card, 'id'>) => number;
+  updateNickNameById: (id: string, nickName: string) => void;
 }
 
 export const CardListContext = React.createContext<CardListContextInterface | null>(null);
