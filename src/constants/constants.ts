@@ -1,6 +1,6 @@
-import { card } from "types";
+import { cardType } from "types";
 
-export const CARD_TYPES: Array<card> = [
+export const CARD_TYPES: Array<cardType> = [
   { name: "포코", color: "gold" },
   { name: "준", color: "#9edbd0" },
   { name: "공원", color: "#55bf55" },
@@ -11,7 +11,7 @@ export const CARD_TYPES: Array<card> = [
   { name: "록바", color: "#d19c89" },
 ];
 
-export const CARD_TYPES_DEFAULT: card = { name: "", color: "" };
+export const CARD_TYPES_DEFAULT: cardType = { name: "", color: "" };
 
 export const MODAL_NAME = {
   CARD_TYPE: "cardType",

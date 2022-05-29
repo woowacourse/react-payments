@@ -1,4 +1,19 @@
 interface card {
+  id: number;
+  list: Array<cardData>;
+}
+
+interface cardData {
+  cardCVC: string;
+  cardNickname: string;
+  cardNumbers: cardNumbers;
+  cardPassword: string;
+  cardType: cardType;
+  expireDate: expireDate;
+  ownerName: ownerName;
+}
+
+interface cardType {
   name: string;
   color: string;
 }
@@ -17,4 +32,4 @@ interface expireDate {
 
 type ownerName = string;
 
-export type { card, cardNumbers, expireDate, ownerName };
+export type { card, cardType, cardNumbers, expireDate, ownerName };

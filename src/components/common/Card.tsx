@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { COLORS } from "constants/color";
-import { card, cardNumbers, expireDate, ownerName } from "types";
+import { cardType, cardNumbers, expireDate, ownerName } from "types";
 
 interface CardComponent {
-  cardType: card;
+  cardType: cardType;
   cardNumbers: cardNumbers;
   expireDate: expireDate;
   ownerName: ownerName;
