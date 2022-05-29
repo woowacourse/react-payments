@@ -1,6 +1,6 @@
-import { COLORS } from "constants/color";
 import React from "react";
 import styled from "styled-components";
+import { COLORS } from "constants/color";
 import { card, cardNumbers, expireDate, ownerName } from "types";
 
 interface CardComponent {
@@ -53,7 +53,7 @@ const CardBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${COLORS.GRAY_200};
+  color: ${COLORS.GRAY_100};
 
   margin: 10px 0;
 `;
@@ -67,7 +67,7 @@ const SmallCard = styled.div<{ backgroundColor: string }>`
   width: 208px;
   height: 130px;
 
-  background: ${(props) => props.backgroundColor || COLORS.GRAY_100};
+  background: ${(props) => props.backgroundColor || COLORS.WHITE_200};
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;

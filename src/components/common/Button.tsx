@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { COLORS } from "constants/color";
 import { textAlign, buttonType } from "types";
 
 interface ButtonComponent {
@@ -32,13 +33,13 @@ const ButtonBox = styled.div<{ textAlign: textAlign }>`
 `;
 
 const ButtonText = styled.button`
-  color: #04c09e;
+  color: ${COLORS.GREEN_100};
   background-color: transparent;
   border: none;
   font-weight: bold;
   cursor: pointer;
 
   &:disabled {
-    color: #ecebf1;
+    color: ${COLORS.WHITE_100};
   }
 `;
