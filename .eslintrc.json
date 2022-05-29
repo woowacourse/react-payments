@@ -3,12 +3,19 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["react-app", "eslint:recommended", "plugin:prettier/recommended", "airbnb"],
-  "parser": "@babel/eslint-parser",
+  "extends": [
+    "react-app",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "airbnb"
+  ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2021,
     "sourceType": "module"
   },
+  "plugins": ["@typescript-eslint"],
   "ignorePatterns": ["src/stories/*", "*.stories.*"],
   "rules": {
     "import/extensions": "off",
