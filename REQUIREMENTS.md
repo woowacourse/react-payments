@@ -1,3 +1,12 @@
+# 3단계 요구사항
+
+JavaScript => TypeScript 마이그레이션
+
+- [x] constant
+- [x] validation
+- [x] hooks
+- [x] mock
+
 # 2단계 요구사항
 
 ## 1단계에서 추가적으로 반영해야 하는 점들
@@ -9,8 +18,8 @@
 ## 필수 요구사항
 
 - [x] Storybook 상호 작용 테스트
-- [ ] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
-- [ ] Context API를 활용해 전역 상태 관리 및 계층 재구성
+- [x] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
+- [x] Context API를 활용해 전역 상태 관리 및 계층 재구성
 
 ## 컴포넌트 분리
 

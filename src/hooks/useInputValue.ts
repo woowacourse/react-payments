@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-const useInputValue = ({ validation }) => {
+type Validation = { validation: Function };
+
+const useInputValue = ({ validation }: Validation) => {
   const [value, setValue] = useState('');
   const [isError, setError] = useState(false);
 

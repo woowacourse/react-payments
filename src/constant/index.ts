@@ -1,3 +1,5 @@
+import { CardInfoItem } from './types';
+
 export const REG_EXP = {
   NUMBER_ONLY: /^[0-9]+$/,
   CHARACTER_ONLY: /^[a-z,A-Z]+$/,
@@ -14,7 +16,7 @@ export const ColorType = {
   yellow: '#FBCD58',
 };
 
-export const cardInfoList = [
+export const cardInfoList: Array<CardInfoItem> = [
   {
     id: 1,
     name: '포코 카드',
