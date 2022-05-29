@@ -68,10 +68,7 @@ export default function CardSecurityCodeInput() {
   } = useContext(CardInfoContext);
 
   const handleSecurityCodeUpdate = (event: ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = event;
-
+    const { value } = event.target;
     if (Number.isNaN(value) || isInvalidSecurityCode(value)) {
       event.preventDefault();
       return;

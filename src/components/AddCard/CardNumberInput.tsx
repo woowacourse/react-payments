@@ -22,10 +22,7 @@ export default function CardNumberInput() {
     event: ChangeEvent<HTMLInputElement>,
     cardNumberOrder: string
   ) => {
-    const {
-      target: { value },
-    } = event;
-
+    const { value } = event.target;
     if (isInValidCardNumber(value)) return;
 
     dispatch(setCardNumber({ value, cardNumberOrder }));

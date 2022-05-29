@@ -48,7 +48,7 @@ export default function CardInfoForm({ children }: { children: any }) {
     event.preventDefault();
     window.alert(CARD_REGISTER_SUCCESS_MESSAGE);
 
-    const storage = JSON.parse(localStorage.getItem("cardInfo") || "") ?? [];
+    const storage = JSON.parse(localStorage.getItem("cardInfo") || "[]");
     storage.push(state);
     localStorage.setItem("cardInfo", JSON.stringify(storage));
 

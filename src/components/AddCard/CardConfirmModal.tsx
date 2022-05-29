@@ -45,10 +45,7 @@ export default function CardConfirmModal() {
   const { cardNumber, holderName, expireDate, cardAlias } = state;
 
   const handleCardAliasUpdate = (event: ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = event;
-
+    const { value } = event.target;
     if (isInvalidCardAlias(value)) return;
 
     dispatch(setCardAlias({ value }));

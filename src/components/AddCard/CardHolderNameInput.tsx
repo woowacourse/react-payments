@@ -45,10 +45,7 @@ export default function CardHolderNameInput() {
   } = useContext(CardInfoContext);
 
   const handleHolderNameUpdate = (event: ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = event;
-
+    const { value } = event.target;
     if (isInValidHolderName(value)) return;
 
     dispatch(setHolderName({ value }));

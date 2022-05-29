@@ -26,9 +26,7 @@ export default function CardPasswordInput() {
     event: ChangeEvent<HTMLInputElement>,
     passwordOrder: string
   ) => {
-    const {
-      target: { value },
-    } = event;
+    const { value } = event.target;
     if (isInvalidPassword(value)) return;
 
     dispatch(setPassword({ value, passwordOrder }));

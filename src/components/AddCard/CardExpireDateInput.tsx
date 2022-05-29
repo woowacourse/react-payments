@@ -27,9 +27,7 @@ export default function CardExpireDateInput() {
     event: ChangeEvent<HTMLInputElement>,
     dateType: string
   ) => {
-    const {
-      target: { value },
-    } = event;
+    const { value } = event.target;
     if (isInValidExpireDate(value)) return;
 
     dispatch(setExpireDate({ value, dateType }));

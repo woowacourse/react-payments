@@ -20,8 +20,9 @@ const smallCardCss__marginBottom10px = {
 };
 
 export default function PossessCardItems() {
-  const cardInfoItems: [] | IInitialState[] =
-    JSON.parse(localStorage.getItem("cardInfo") || "") ?? [];
+  const cardInfoItems: [] | IInitialState[] = JSON.parse(
+    localStorage.getItem("cardInfo") || "[]"
+  );
 
   return (
     <>
