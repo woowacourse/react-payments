@@ -5,7 +5,7 @@ import CardBack from './components/card-preview/flipable-card/card-back/CardBack
 import FlipableCardWrapper from './components/card-preview/flipable-card/FlipableCardWrapper.styled';
 import FlipableCard from './components/card-preview/flipable-card/FlipableCard.styled';
 import HelpTip from './components/card-form/helptip/HelpTip.styled';
-import { PasswordInput, passwordInputStyle } from './components/card-form/card-password/CardPasswordInput.styled';
+import { PasswordInput, passwordInputStyle } from './components/card-form/card-password/CardPassword.styled';
 
 const S = {
   CardRegisterConfirm,

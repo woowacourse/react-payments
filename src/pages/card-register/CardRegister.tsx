@@ -8,11 +8,11 @@ import { UseFormSubmitResult } from '../../hooks/useForm/types';
 import S from './styled';
 import { FormProvider } from '../../hooks/useForm/useFormContext';
 import CardPreview from './components/card-preview/CardPreview';
-import CardNumberFieldset from './components/card-form/card-number/CardNumberFieldset';
-import ExpiredPeriodFieldset from './components/card-form/card-expired-period/ExpiredPeriodFieldset';
-import CardOwnerNameFieldset from './components/card-form/card-owner/CardOwnerNameFieldset';
-import CVCFieldset from './components/card-form/card-cvc/CVCFieldset';
-import CardPasswordFieldset from './components/card-form/card-password/CardPasswordFieldset';
+import CardNumber from './components/card-form/card-number/CardNumber';
+import CardExpiredPeriod from './components/card-form/card-expired-period/CardExpiredPeriod';
+import CardOwnerName from './components/card-form/card-owner/CardOwnerName';
+import CardCVC from './components/card-form/card-cvc/CardCVC';
+import CardPassword from './components/card-form/card-password/CardPassword';
 import ConfirmButtonContainer from './components/card-form/confirm-button/ConfirmButtonContainer';
 
 function CardRegister() {
@@ -55,11 +55,11 @@ function CardRegister() {
           >
             <CardPreview />
           </div>
-          <CardNumberFieldset />
-          <ExpiredPeriodFieldset />
-          <CardOwnerNameFieldset />
-          <CVCFieldset />
-          <CardPasswordFieldset />
+          <CardNumber />
+          <CardExpiredPeriod />
+          <CardOwnerName />
+          <CardCVC />
+          <CardPassword />
           <ConfirmButtonContainer>다음</ConfirmButtonContainer>
         </form>
       </FormProvider>
