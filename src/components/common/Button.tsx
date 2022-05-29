@@ -1,7 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import { textAlign, buttonType } from "types";
 
-export const Button = ({ children, onClick, disabled, type, textAlign }) => {
+interface ButtonComponent {
+  children: React.ReactNode;
+  onClick: () => void;
+  disabled: boolean;
+  type: buttonType;
+  textAlign: textAlign;
+}
+
+export const Button = ({
+  children,
+  onClick,
+  disabled,
+  type,
+  textAlign,
+}: ButtonComponent) => {
   return (
     <ButtonBox textAlign={textAlign}>
       <ButtonText onClick={onClick} type={type} disabled={disabled}>
@@ -11,7 +26,7 @@ export const Button = ({ children, onClick, disabled, type, textAlign }) => {
   );
 };
 
-const ButtonBox = styled.div`
+const ButtonBox = styled.div<{ textAlign: textAlign }>`
   width: 100%;
   text-align: ${(props) => (props.textAlign ? props.textAlign : "right")};
 `;
