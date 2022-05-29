@@ -1,7 +1,12 @@
-import PropTypes from "prop-types";
 import { HeaderWrapper } from "./style";
 
-function Header({ headText, leftChild, rightChild }) {
+interface HeaderProps {
+  headText: string;
+  leftChild: React.ReactNode;
+  rightChild: React.ReactNode;
+}
+
+function Header({ headText, leftChild, rightChild }: HeaderProps) {
   return (
     <HeaderWrapper>
       <div>{leftChild}</div>
@@ -10,11 +15,5 @@ function Header({ headText, leftChild, rightChild }) {
     </HeaderWrapper>
   );
 }
-
-Header.propTypes = {
-  leftChild: PropTypes.node,
-  rightChild: PropTypes.node,
-  headText: PropTypes.string,
-};
 
 export default Header;

@@ -1,7 +1,11 @@
-import PropTypes from "prop-types";
 import { ModalForm, ModalOverlay } from "./style";
 
-function Modal({ children, closeModal }) {
+interface ModalProps {
+  children: React.ReactNode;
+  closeModal: () => void;
+}
+
+function Modal({ children, closeModal }: ModalProps) {
   return (
     <>
       <ModalOverlay onClick={closeModal} />
@@ -9,10 +13,5 @@ function Modal({ children, closeModal }) {
     </>
   );
 }
-
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  closeModal: PropTypes.func,
-};
 
 export default Modal;

@@ -1,7 +1,12 @@
-import PropTypes from "prop-types";
 import { ColorBoxWrapper, ColorCircle } from "./style";
 
-function ColorBox({ color, name, onClick }) {
+interface ColorBoxProps {
+  color: string;
+  name: string;
+  onClick: () => void;
+}
+
+function ColorBox({ color, name, onClick }: ColorBoxProps) {
   return (
     <ColorBoxWrapper onClick={onClick}>
       <ColorCircle color={color}></ColorCircle>
@@ -9,11 +14,5 @@ function ColorBox({ color, name, onClick }) {
     </ColorBoxWrapper>
   );
 }
-
-ColorBox.propTypes = {
-  color: PropTypes.string.isRequired,
-  name: PropTypes.string,
-  onClick: PropTypes.func,
-};
 
 export default ColorBox;

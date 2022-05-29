@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { InputBoxStyleProps } from ".";
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<InputBoxStyleProps>`
   display: flex;
   align-items: center;
   height: 45px;

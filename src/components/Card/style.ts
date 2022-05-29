@@ -1,12 +1,13 @@
 import styled, { css } from "styled-components";
 import { CARD_SIZE } from "constant";
+import { CardWrapperProps } from ".";
 
 const FlexAlignCenter = css`
   display: flex;
   align-items: center;
 `;
 
-const CardWrapper = styled.div`
+const CardWrapper = styled.div<CardWrapperProps>`
   ${FlexAlignCenter}
   background-color: ${(props) => props.color || props.theme.colors.GRAY};
   flex-direction: column;
@@ -30,7 +31,7 @@ const CardTop = styled.div`
   width: 100%;
 `;
 
-const CardMiddle = styled.div`
+const CardMiddle = styled.div<{ size: string }>`
   ${FlexAlignCenter}
   width: 100%;
 
