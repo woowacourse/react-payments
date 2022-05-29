@@ -45,6 +45,7 @@ module.exports = {
       'ignorePackages',
       { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' },
     ],
+    'react/require-default-props': 'off',
   },
   settings: {
     'import/resolver': {

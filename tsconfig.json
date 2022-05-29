@@ -15,7 +15,8 @@
     /* Completeness */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
 
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "allowJs": true
   },
   "include": ["src", "src/types/index.d.ts"]
 }
