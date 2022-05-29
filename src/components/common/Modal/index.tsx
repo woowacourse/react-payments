@@ -1,6 +1,12 @@
 import { Dimmer } from 'components/common/Modal/style'
 
-function Modal({ isOpen, setIsOpen, children }) {
+interface ModalType {
+  isOpen: boolean
+  setIsOpen: (isOpen: boolean) => {}
+  children: React.ReactNode
+}
+
+function Modal({ isOpen, setIsOpen, children }: ModalType) {
   const handleDimmerClick = () => {
     setIsOpen(false)
   }

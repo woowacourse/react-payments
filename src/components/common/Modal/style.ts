@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 
-const Dimmer = styled.div`
-  display: ${(props) => (props.isOpen ? 'flex' : 'none')};
+interface DimmerType {
+  isOpen: boolean
+}
+
+const Dimmer = styled.div<DimmerType>`
+  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
   justify-content: center;
   width: 100%;
   height: 100%;
