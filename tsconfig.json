@@ -2,10 +2,10 @@
   "compilerOptions": {
     /* Language and Environment */
     "target": "es2016",
-    "jsx": "react",
+    "jsx": "react-jsx",
 
     /* Modules */
-    "module": "commonjs",
+    "module": "es6",
     "baseUrl": "src",
 
     /* Interop Constraints */
@@ -17,7 +17,6 @@
 
     /* Completeness */
     "skipLibCheck": true,
-
     "allowJs": true
   },
   "include": ["src"]
