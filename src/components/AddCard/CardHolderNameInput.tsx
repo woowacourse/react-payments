@@ -40,7 +40,7 @@ export default function CardHolderNameInput({
   dispatch,
 }: {
   holderName: string;
-  dispatch: (value: any) => void;
+  dispatch: React.Dispatch<any>;
 }) {
   const { updateHandler } = useUpdateHandler(
     dispatch,

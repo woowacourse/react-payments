@@ -16,7 +16,7 @@ export default function CardExpireDateInput({
   dispatch,
 }: {
   expireDate: IExpireDateState;
-  dispatch: (value: any) => void;
+  dispatch: React.Dispatch<any>;
 }) {
   const expireDateList = Object.entries(expireDate);
   const [month, year] = expireDateList;

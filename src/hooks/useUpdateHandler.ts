@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 import { ISetPayload, ISetPayloadWithType } from "../types/cardInfoState";
 
 export default function useUpdateHandler(
-  dispatch: (value: any) => void,
+  dispatch: React.Dispatch<any>,
   setCallback: <T>(payload: T) => {
     type: string;
     payload: T;

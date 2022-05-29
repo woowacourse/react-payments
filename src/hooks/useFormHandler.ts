@@ -6,7 +6,7 @@ import { IInitialState } from "../types/cardInfoState";
 
 export default function useFormHandler(
   state: IInitialState,
-  dispatch: (value: any) => void
+  dispatch: React.Dispatch<any>
 ) {
   const navigate = useNavigate();
 
