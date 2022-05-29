@@ -1,21 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Input from './Input';
 import { MAX_LENGTH } from '../../constants';
 import { validator, checkMaxLength, checkIsNaN } from '../../validator';
+import AddCardContext from '../../AddCardContext';
 
 function PasswordInput({ value, name }) {
+  const { updateCard } = useContext(AddCardContext);
+
   return (
     <Input
-      size="w-15 mr-10"
+      shape="input-basic w-15 mr-10"
       type="password"
       length={MAX_LENGTH.PASSWORD}
       value={value}
       name={name}
-      validators={[
-        validator(checkMaxLength, value, MAX_LENGTH.PASSWORD),
-        validator(checkIsNaN, value),
-      ]}
+      validators={[validator(checkMaxLength, MAX_LENGTH.PASSWORD), validator(checkIsNaN)]}
+      onChange={updateCard}
     />
   );
 }

@@ -16,7 +16,7 @@ function AddCardForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigator('/success', { state: { card }, replace: true });
+    navigator('/success', { replace: true });
   };
 
   return (
@@ -33,9 +33,9 @@ function AddCardForm() {
       <div className="input-container">
         <span className="input-title">만료일</span>
         <div className="input-box w-50">
-          <MonthInput value={card.expireMonth} name="expireMonth" />
+          <MonthInput value={card.expireMonth} name="expireMonth" expireYear={card.expireYear} />
           /
-          <YearInput value={card.expireYear} name="expireYear" />
+          <YearInput value={card.expireYear} name="expireYear" expireMonth={card.expireMonth} />
         </div>
       </div>
       <div className="input-container">

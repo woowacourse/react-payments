@@ -13,14 +13,31 @@ export const checkMaxLength = (value, length) => {
   }
 };
 
-export const checkRange = (min, max, value) => {
-  if (isOutOfRange(min, max, +value)) {
+export const checkRange = (value, min, max) => {
+  if (value && isOutOfRange(min, max, +value)) {
     throw new Error(ERROR_MESSAGE.INVALID_MONTH_RANGE);
+  }
+};
+
+export const checkValidDate = (expireMonth, expireYear) => {
+  if (expireMonth && expireYear && expireYear.length === 2) {
+    const now = new Date();
+    const currentYear = String(now.getFullYear()).substring(2);
+    const currentMonth = now.getMonth() + 1;
+
+    if (+expireYear < +currentYear) {
+      throw new Error(ERROR_MESSAGE.INVALID_DATE);
+    }
+    if (+expireYear === +currentYear) {
+      if (+expireMonth < currentMonth) {
+        throw new Error(ERROR_MESSAGE.INVALID_DATE);
+      }
+    }
   }
 };
 
 export const validator = (validate, ...args) => {
   return {
-    validate: () => validate(...args),
+    validate: (value) => validate(value, ...args),
   };
 };

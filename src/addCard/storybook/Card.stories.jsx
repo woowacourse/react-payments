@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '../components/Card';
-import { getCard } from '../../util';
+import { Card as CardConstructor } from '../../util';
 
 export default {
   title: 'Card',
@@ -16,38 +16,12 @@ Deactivated.args = {};
 export const Activated = Template.bind({});
 
 Activated.args = {
-  completedCard: {
-    card: getCard({
-      firstCardNumber: '1324',
-      secondCardNumber: '1234',
-      thirdCardNumber: '1234',
-      fourthCardNumber: '1234',
-      expireMonth: '3',
-      expireYear: '23',
-      ownerName: 'dom',
-      securityCode: '123',
-      firstPassword: '1',
-      secondPassword: '2',
-    }),
-  },
+  completedCard: CardConstructor('1324', '1234', '1234', '1234', '3', '23', 'dom', '123', '1', '2'),
 };
 
 export const BigActivated = Template.bind({});
 
 BigActivated.args = {
-  completedCard: {
-    card: getCard({
-      firstCardNumber: '1324',
-      secondCardNumber: '1234',
-      thirdCardNumber: '1234',
-      fourthCardNumber: '1234',
-      expireMonth: '3',
-      expireYear: '23',
-      ownerName: 'dom',
-      securityCode: '123',
-      firstPassword: '1',
-      secondPassword: '2',
-    }),
-  },
+  completedCard: CardConstructor('1324', '1234', '1234', '1234', '3', '23', 'dom', '123', '1', '2'),
   big: true,
 };

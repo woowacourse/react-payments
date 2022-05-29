@@ -1,22 +1,37 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { validator, checkMaxLength, checkIsNaN, checkRange } from '../../validator';
+import { validator, checkMaxLength, checkIsNaN, checkRange, checkValidDate } from '../../validator';
 import { MAX_LENGTH, MIN_LENGTH, RANGE } from '../../constants';
 import Input from './Input';
+import AddCardContext from '../../AddCardContext';
 
-function MonthInput({ value, name }) {
+function MonthInput({ value, name, expireYear }) {
+  const { updateCard } = useContext(AddCardContext);
+
+  const checkDate = (targetName) => {
+    try {
+      checkValidDate(value, expireYear);
+    } catch (error) {
+      alert(error.message);
+      updateCard('', targetName);
+    }
+  };
+
   return (
     <Input
+      shape="input-basic"
       placeholder="MM"
       length={MAX_LENGTH.DATE}
       minLength={MIN_LENGTH.MONTH}
       value={value}
       name={name}
       validators={[
-        validator(checkMaxLength, value, MAX_LENGTH.DATE),
-        validator(checkIsNaN, value),
-        validator(checkRange, RANGE.MONTH_MIN, RANGE.MONTH_MAX, value),
+        validator(checkMaxLength, MAX_LENGTH.DATE),
+        validator(checkIsNaN),
+        validator(checkRange, RANGE.MONTH_MIN, RANGE.MONTH_MAX),
       ]}
+      onChange={updateCard}
+      onBlur={checkDate}
     />
   );
 }
@@ -24,6 +39,7 @@ function MonthInput({ value, name }) {
 MonthInput.propTypes = {
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  expireYear: PropTypes.string.isRequired,
 };
 
 export default MonthInput;

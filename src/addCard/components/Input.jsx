@@ -1,33 +1,42 @@
-import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import AddCardContext from '../../AddCardContext';
 
-function Input({ type, size, placeholder, length, minLength, name, value, required, validators }) {
-  const { updateCard } = useContext(AddCardContext);
-
-  const handleChange = (event) => {
-    updateCard(name, event.target.value);
-  };
-
-  const checkValidation = () => {
+function Input({
+  type,
+  shape,
+  placeholder,
+  length,
+  minLength,
+  name,
+  value,
+  required,
+  validators,
+  onChange,
+  onBlur,
+}) {
+  const checkValidation = (targetValue) => {
     validators.forEach((validator) => {
-      validator.validate();
+      validator.validate(targetValue);
     });
   };
 
-  useEffect(() => {
-    if (value === '') return;
+  const handleChange = (event) => {
     try {
-      checkValidation();
+      checkValidation(event.target.value);
+      onChange(event.target.value, name);
     } catch (error) {
-      updateCard(name, value.substr(0, value.length - 1));
       alert(error.message);
     }
-  }, [value]);
+  };
+
+  const handleBlur = () => {
+    if (onBlur) {
+      onBlur(name);
+    }
+  };
 
   return (
     <input
-      className={`input-basic ${size}`}
+      className={`${shape}`}
       name={name}
       value={value}
       type={type}
@@ -36,28 +45,33 @@ function Input({ type, size, placeholder, length, minLength, name, value, requir
       minLength={minLength || length}
       required={required}
       onChange={handleChange}
+      onBlur={handleBlur}
     />
   );
 }
 
 Input.propTypes = {
   type: PropTypes.string,
-  size: PropTypes.string,
+  shape: PropTypes.string,
   placeholder: PropTypes.string,
   length: PropTypes.number.isRequired,
   minLength: PropTypes.number,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   value: PropTypes.string.isRequired,
   required: PropTypes.bool,
   validators: PropTypes.arrayOf(PropTypes.shape({ validate: PropTypes.func })).isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
 };
 
 Input.defaultProps = {
   type: 'text',
-  size: '',
+  shape: '',
   placeholder: '',
   minLength: 0,
+  name: '',
   required: true,
+  onBlur: null,
 };
 
 export default Input;
