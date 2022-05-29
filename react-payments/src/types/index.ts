@@ -98,3 +98,16 @@ export interface ExpireDateContextProvider {
   state: { expireDate: ExpireDate; expireDateReady: boolean };
   action: ExpireDateFunction;
 }
+
+//SecurityCodeProvider
+interface SecurityCodeFunction {
+  onChangeSecurityCode: ({ target }: Target) => void;
+  onClickSecurityVirtualKeyboard: (value: string) => void;
+  onClickSecurityBackspaceButton: () => void;
+  resetSecurityCode: () => void;
+}
+
+export interface SecurityCodeContextProvider {
+  state: { securityCode: SecurityCode; securityCodeReady: boolean };
+  action: SecurityCodeFunction;
+}
