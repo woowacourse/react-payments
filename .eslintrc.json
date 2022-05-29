@@ -11,19 +11,20 @@
   },
   "ignorePatterns": ["src/stories/*", "*.stories.*"],
   "rules": {
-    "react/react-in-jsx-scope": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
     "import/no-extraneous-dependencies": "off",
     "react/jsx-filename-extension": "off",
-    "jsx-a11y/control-has-associated-label": "off",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
     "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/control-has-associated-label": "off",
     "jsx-a11y/interactive-supports-focus": "off",
     "jsx-a11y/label-has-associated-control": "off",
-    "object-curly-newline": "off",
-    "import/no-unresolved": "off",
-    "no-unused-vars": "warn",
-    "react/prop-types": "off",
     "implicit-arrow-linebreak": "off",
     "no-unused-expressions": "off",
+    "no-unused-vars": "warn",
+    "object-curly-newline": "off",
     "operator-linebreak": "off"
   }
 }
