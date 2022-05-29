@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { ErrorContext } from "contexts";
 import { TipButton } from ".";
 import { COLORS } from "constants/color";
+import { errorStateType } from "types";
 
 export const ErrorModal = () => {
-  const errorState = useContext(ErrorContext);
+  const errorState: errorStateType = useContext(ErrorContext);
 
   return (
     <>
