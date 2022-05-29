@@ -1,21 +1,19 @@
 export type CardName = string;
 
-export type CardNumberKeys = "first" | "second" | "third" | "fourth";
-
+type CardNumberKeys = "first" | "second" | "third" | "fourth";
 export type CardNumber = {
   [key in CardNumberKeys]?: string;
 };
 
-export type CardPasswordKeys = "first" | "second";
-
+type CardPasswordKeys = "first" | "second";
 export type CardPassword = {
   [key in CardPasswordKeys]?: string;
 };
 
-export interface ExpireDate {
-  month: string;
-  year: string;
-}
+type ExpireDateKeys = "month" | "year";
+export type ExpireDate = {
+  [key in ExpireDateKeys]?: string;
+};
 
 export interface CardType {
   cardName: string;
@@ -46,14 +44,14 @@ export interface Target {
   target: HTMLInputElement;
 }
 
-// CardDataProvider
-export type CardDataAction = { type: "CREATE"; payload: CardData };
-
-// CardNumberProvider
 export interface KeyEventTarget extends Target {
   key: string;
 }
 
+// CardDataProvider
+export type CardDataAction = { type: "CREATE"; payload: CardData };
+
+// CardNumberProvider
 interface CardNumberFunction {
   onChangeCardNumber: ({ target }: Target) => void;
   onKeyDownCardNumber: ({ target, key }: KeyEventTarget) => void;
@@ -79,7 +77,7 @@ export interface CardPasswordContextProvider {
 }
 
 //CardTypeProvider
-export interface CardTypeFunction {
+interface CardTypeFunction {
   onClickCardType: ({ cardType, cardName }: CardType) => void;
   resetCardTypeInfo: () => void;
 }
@@ -87,4 +85,16 @@ export interface CardTypeFunction {
 export interface CardTypeContextProvider {
   state: { cardTypeInfo: CardType; cardTypeReady: boolean };
   action: CardTypeFunction;
+}
+
+//ExpireDateProvider
+interface ExpireDateFunction {
+  onChangeExpireDate: ({ target }: Target) => void;
+  onKeyDownExpireDate: ({ target, key }: KeyEventTarget) => void;
+  resetExpireDate: () => void;
+}
+
+export interface ExpireDateContextProvider {
+  state: { expireDate: ExpireDate; expireDateReady: boolean };
+  action: ExpireDateFunction;
 }
