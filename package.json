@@ -46,6 +46,8 @@
     "@storybook/testing-library": "^0.0.11",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.5",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
     "chromatic": "^6.5.4",
     "eslint": "^8.14.0",
     "eslint-plugin-react": "^7.29.4",
