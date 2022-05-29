@@ -18,7 +18,7 @@ function useModal() {
   const ModalContainer = useCallback(
     ({ children }) =>
       modalState !== MODAL_STATE.HIDDEN && (
-        <Modal state={modalState} handleClose={handleDisappear} handleHidden={handleHidden}>
+        <Modal state={modalState} onClickDimmer={handleDisappear} onHiddenEnd={handleHidden}>
           {children}
         </Modal>
       ),
