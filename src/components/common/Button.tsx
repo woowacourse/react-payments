@@ -1,7 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
+interface ButtonProps {
+  children: React.ReactNode;
+  color: string;
+  backgroundColor: string;
+}
+
+const StyledButton = styled.button<ButtonProps>`
   background: none;
   border: none;
   padding: 0;
@@ -28,7 +34,7 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ children, color, backgroundColor, ...rest }) => {
+const Button = ({ children, color, backgroundColor, ...rest }: ButtonProps) => {
   return (
     <StyledButton
       className="button"
