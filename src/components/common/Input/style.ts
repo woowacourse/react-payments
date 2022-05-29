@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 
-const InputWrapper = styled.input`
+interface GrayInputWrapperType {
+  error?: boolean
+  size?: number
+}
+
+const InputBox = styled.input`
   background-color: transparent;
   border: none;
   text-align: center;
@@ -21,22 +26,18 @@ const InputWrapper = styled.input`
   }
 `
 
-const GrayInputWrapper = styled.div`
+const GrayInputWrapper = styled.div<GrayInputWrapperType>`
   display: flex;
   align-items: center;
   height: 45px;
   border-radius: 7px;
   box-sizing: border-box;
 
-  background: ${(props) =>
-    props.background ||
-    (props.error && props.theme.colors.LIGHT_PINK) ||
-    props.theme.colors.LIGHT_GRAY};
-  border: ${(props) =>
-    props.border ||
-    (props.error && `solid 2px ${props.theme.colors.PINK}`) ||
-    'none'};
-  width: ${(props) => props.size || 100}%;
+  background: ${({ theme, error }) =>
+    (error && theme.colors.LIGHT_PINK) || theme.colors.LIGHT_GRAY};
+  border: ${({ theme, error }) =>
+    (error && `solid 2px ${theme.colors.PINK}`) || 'none'};
+  width: ${({ size }) => size || 100}%;
 `
 
 const BottomBorderInputWrapper = styled.div`
@@ -46,4 +47,4 @@ const BottomBorderInputWrapper = styled.div`
   margin-bottom: 185px;
 `
 
-export { InputWrapper, GrayInputWrapper, BottomBorderInputWrapper }
+export { InputBox, GrayInputWrapper, BottomBorderInputWrapper }
