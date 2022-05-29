@@ -18,6 +18,8 @@ export type CardCompanyList = Record<number, CardCompany>;
 
 export type ModalState = 'hidden' | 'visible' | 'disappear';
 
+export type PageState = 'edit' | 'update' | 'list';
+
 export interface CardData {
   id?: number;
   cardName?: string;
@@ -31,6 +33,20 @@ export interface CardData {
 }
 
 export type CardList = Array<CardData>;
+
+/* 컨텍스트 */
+
+export interface PageContextState {
+  state: {
+    pageTitle: string;
+    pageLocation: string;
+  };
+
+  action: {
+    setTitle: React.Dispatch<React.SetStateAction<string>>;
+    setLocation: React.Dispatch<React.SetStateAction<PageState>>;
+  };
+}
 
 export type CardDataContextAction = 'PRELOAD' | 'INSERT' | 'UPDATE' | 'DELETE';
 

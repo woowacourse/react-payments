@@ -1,8 +1,9 @@
 import { createContext, useState, useContext } from 'react';
 
-import { DEFAULT_PAGE } from 'constants';
+import { DEFAULT_PAGE } from 'constants/';
+import { PageContextState, PageState } from 'types';
 
-const PageContext = createContext();
+const PageContext = createContext<PageContextState | null>(null);
 
 function PageContextProvider({ children }) {
   const [pageTitle, setTitle] = useState('');
@@ -23,8 +24,8 @@ function usePageContext() {
   const { pageTitle, pageLocation } = context.state;
   const { setTitle, setLocation } = context.action;
 
-  const setPageTitle = (title) => setTitle(title);
-  const setPageLocation = (pageCode) => setLocation(pageCode);
+  const setPageTitle = (title: string) => setTitle(title);
+  const setPageLocation = (pageCode: PageState) => setLocation(pageCode);
 
   return { pageTitle, pageLocation, setPageTitle, setPageLocation };
 }

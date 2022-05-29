@@ -1,4 +1,4 @@
-import { RequestStatus, CardCompany, ModalState } from 'types';
+import { RequestStatus, CardCompany, ModalState, PageState } from 'types';
 
 const APP_NAME = '콤피 페이';
 
@@ -54,10 +54,10 @@ const MODAL_STATE: Record<string, ModalState> = {
   DISAPPEAR: 'disappear',
 };
 
-const PAGE_LIST = {
-  CARD_EDITOR: Symbol('카드 정보 추가/수정 페이지'),
-  CARD_UPDATED: Symbol('카드 정보 업데이트 완료 페이지'),
-  CARD_LIST: Symbol('등록된 카드 목록 페이지'),
+const PAGE_LIST: Record<string, PageState> = {
+  CARD_EDITOR: 'edit',
+  CARD_UPDATED: 'update',
+  CARD_LIST: 'list',
 };
 
 const DEFAULT_PAGE = PAGE_LIST.CARD_LIST;
