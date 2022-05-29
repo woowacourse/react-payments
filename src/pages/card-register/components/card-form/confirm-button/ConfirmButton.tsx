@@ -9,7 +9,7 @@ type Props = {
 function ConfirmButton({ children, disabled }: Props) {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <button type="submit" css={style} {...(disabled ? { disabled: true } : {})}>
+    <button type="submit" css={style} disabled={!!disabled}>
       {children}
     </button>
   );
