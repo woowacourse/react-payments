@@ -11,7 +11,7 @@ const StyledIcon = styled.img`
   }
 `;
 
-const StyledDescription = styled.p`
+const StyledDescription = styled.p<{ isOpen: boolean }>`
   ${props => !props.isOpen && `display: none;`}
   position: absolute;
 
@@ -30,8 +30,13 @@ const StyledDescription = styled.p`
   box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.4);
 `;
 
-export default function DescriptionIconButton({ iconImage, description }) {
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+interface Props {
+  iconImage: string;
+  description: string;
+}
+
+export default function DescriptionIconButton({ iconImage, description }: Props) {
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(false);
 
   return (
     <StyledIconContainer>

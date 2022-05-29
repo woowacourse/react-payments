@@ -1,7 +1,7 @@
 import React from 'react';
 
-import InputField from './common/InputField.jsx';
-import Input from './common/Input.jsx';
+import InputField from './common/InputField';
+import Input from './common/Input';
 
 import { ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_ERROR_MESSAGE, CREATE_MASKED_CHARACTERS } from '../constants';
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Input from './common/Input.jsx';
-import InputField from './common/InputField.jsx';
-import DescriptionIconButton from './common/DescriptionIconButton.jsx';
+import Input from './common/Input';
+import InputField from './common/InputField';
+import DescriptionIconButton from './common/DescriptionIconButton';
 
 import { ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_ERROR_MESSAGE, CREATE_MASKED_CHARACTERS } from '../constants';
 

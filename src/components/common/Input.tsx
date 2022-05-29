@@ -2,7 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-export const StyledInput = styled.input`
+type StyleProps = {
+  isComplete: boolean;
+  textAlign: string;
+};
+
+export const StyledInput = styled.input<StyleProps>`
   // 텍스트 선택 커서 색상 설정
   caret-color: #000000;
   color: ${props => (props.isComplete ? '#04c09e' : '#525252')};
@@ -37,7 +42,9 @@ export const StyledInput = styled.input`
   }
 `;
 
-export default function Input(props) {
+type Props = StyleProps & React.InputHTMLAttributes<HTMLInputElement>;
+
+export default function Input(props: Props) {
   return <StyledInput {...props} />;
 }
 

@@ -10,7 +10,7 @@ const StyledInputField = styled.div`
   position: relative;
 `;
 
-const StyledLabel = styled.label`
+const StyledLabel = styled.label<{ isComplete: boolean }>`
   font-size: 12px;
   line-height: 14px;
   color: #525252;
@@ -28,7 +28,7 @@ const StyledErrorMessage = styled.span`
   color: red;
 `;
 
-const StyledInputWrapper = styled.div`
+const StyledInputWrapper = styled.div<{ align: string; width: string; isComplete: boolean; isError: boolean }>`
   display: flex;
   justify-content: ${props => props.align};
   background: #ecebf1;
@@ -55,6 +55,17 @@ const StyledInputContainer = styled.div`
   gap: 10px;
 `;
 
+interface Props {
+  labelText: string;
+  wrapperWidth: string;
+  horizontalAlign: string;
+  isComplete: boolean;
+  isError: boolean;
+  errorMessage: string;
+  separateEachInput: boolean;
+  children: React.ReactNode;
+}
+
 export default function InputField({
   labelText,
   wrapperWidth,
@@ -63,9 +74,8 @@ export default function InputField({
   isError,
   errorMessage,
   separateEachInput,
-
   children,
-}) {
+}: Props) {
   return (
     <StyledInputField>
       <StyledLabel isComplete={isComplete}>
