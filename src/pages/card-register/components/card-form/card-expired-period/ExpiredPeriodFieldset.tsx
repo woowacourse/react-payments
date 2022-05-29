@@ -1,16 +1,16 @@
 import React from 'react';
-import { FieldsetContent, Fieldset, FieldsetHead } from '../Fieldset';
+import Fieldset from '../Fieldset';
 import ExpiredPeriodInputContainer from './ExpiredPeriodInputContainer';
 
 function ExpiredPeriodFieldset() {
   return (
     <Fieldset>
-      <FieldsetHead>
+      <Fieldset.Head>
         <label>만료일</label>
-      </FieldsetHead>
-      <FieldsetContent>
+      </Fieldset.Head>
+      <Fieldset.Content>
         <ExpiredPeriodInputContainer />
-      </FieldsetContent>
+      </Fieldset.Content>
     </Fieldset>
   );
 }

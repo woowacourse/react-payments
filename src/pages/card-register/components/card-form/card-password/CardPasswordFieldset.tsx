@@ -1,16 +1,16 @@
 import React from 'react';
-import { FieldsetContent, Fieldset, FieldsetHead } from '../Fieldset';
+import Fieldset from '../Fieldset';
 import CardPasswordInputContainerList from './CardPasswordInputContainerList';
 
 function CardPasswordFieldset() {
   return (
     <Fieldset>
-      <FieldsetHead>
+      <Fieldset.Head>
         <label>카드 비밀번호</label>
-      </FieldsetHead>
-      <FieldsetContent>
+      </Fieldset.Head>
+      <Fieldset.Content>
         <CardPasswordInputContainerList />
-      </FieldsetContent>
+      </Fieldset.Content>
     </Fieldset>
   );
 }

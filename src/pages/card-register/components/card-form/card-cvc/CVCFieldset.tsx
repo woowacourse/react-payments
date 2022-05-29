@@ -1,15 +1,15 @@
 import React from 'react';
 import CVCInputContainer from './CVCInputContainer';
-import { FieldsetContent, Fieldset, FieldsetHead } from '../Fieldset';
+import Fieldset from '../Fieldset';
 import S from '../../../styled';
 
 function CVCFieldset() {
   return (
     <Fieldset>
-      <FieldsetHead>
+      <Fieldset.Head>
         <label htmlFor="card-cvc-input">보안 코드(CVC/CVV)</label>
-      </FieldsetHead>
-      <FieldsetContent>
+      </Fieldset.Head>
+      <Fieldset.Content>
         <div css={{ display: 'flex', alignItems: 'center' }}>
           <CVCInputContainer />
           <S.HelpTip>
@@ -19,7 +19,7 @@ function CVCFieldset() {
             </div>
           </S.HelpTip>
         </div>
-      </FieldsetContent>
+      </Fieldset.Content>
     </Fieldset>
   );
 }
