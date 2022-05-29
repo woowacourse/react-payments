@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { usePageContext } from 'contexts/PageContext';
+import { PageContextProvider, usePageContext } from 'contexts/PageContext';
 import { CardDataContextProvider } from 'contexts/CardDataContext';
 
 import CardUpdated from 'pages/CardUpdated';
@@ -29,9 +29,11 @@ function App() {
 
 function ContextWrap() {
   return (
-    <CardDataContextProvider>
-      <App />
-    </CardDataContextProvider>
+    <PageContextProvider>
+      <CardDataContextProvider>
+        <App />
+      </CardDataContextProvider>
+    </PageContextProvider>
   );
 }
 
