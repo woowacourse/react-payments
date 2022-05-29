@@ -1,6 +1,9 @@
 import React from 'react';
+
 import ConfirmButton from 'components/card/ConfirmButton';
+
 import { INPUT } from '../../constants';
+
 import { useAppDispatch, useAppState } from 'hooks';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';

@@ -78,6 +78,5 @@ const CardListContainer = forwardRef<HTMLDivElement, Props>(
     );
   },
 );
-// }
 
 export default CardListContainer;

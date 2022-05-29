@@ -1,5 +1,7 @@
 import React from 'react';
+
 import Modal from 'components/modal/Modal';
+
 import { createAction } from 'context/Provider';
 import { useAppDispatch } from 'hooks';
 import { ActionType } from 'types';

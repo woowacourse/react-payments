@@ -1,10 +1,11 @@
 import React from 'react';
 
+import CardFormInput from 'components/card/CardFormInput';
+
 import { useAppDispatch, useAppState } from 'hooks';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';
 import { isNum, removeWhiteSpaces } from 'utils';
-import CardFormInput from 'components/card/CardFormInput';
 
 function CVCInputContainer() {
   const { cvc } = useAppState();
