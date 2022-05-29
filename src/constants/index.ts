@@ -23,17 +23,7 @@ const MONTH = {
   MAX: 12,
 }
 
-const COLORS = {
-  MINT: '#04C09E',
-  GRAY: '#D2D2D2',
-  LIGHT_GRAY: '#ecebf1',
-  DARK_GRAY: '#525252',
-  PINK: '#E36DB0',
-  LIGHT_PINK: '#fcdfef',
-  WHITE: '#FFFFFF',
-}
-
-const CARD_COMPANY = {
+const CARD_COMPANY: { [key: string]: string } = {
   포코: '#E24141',
   준: '#547CE4',
   공원: '#73BC6D',
@@ -68,7 +58,6 @@ export {
   CVC,
   PASSWORD,
   MONTH,
-  COLORS,
   CARD_COMPANY,
   ERROR_MESSAGE,
   ALERT_MESSAGE,

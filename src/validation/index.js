@@ -1,4 +1,4 @@
-import { CARD_NUMBER, DUE_DATE, OWNER, CVC, PASSWORD } from 'constant'
+import { CARD_NUMBER, DUE_DATE, OWNER, CVC, PASSWORD } from 'constants'
 
 const isNumber = (value) => isNaN(value)
 

@@ -7,7 +7,7 @@ import AddPage from 'pages/AddPage'
 import CardListPage from 'pages/CardListPage'
 import NickNamePage from 'pages/NickNamePage'
 
-import { PATH } from 'constant'
+import { PATH } from 'constants'
 import theme from 'theme'
 import NotFoundPage from 'pages/NotFoundPage'
 
