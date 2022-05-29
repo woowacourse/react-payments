@@ -14,7 +14,7 @@ import {
 export const CardModifyPage = () => {
   const cards = useContext(CardContext);
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const { id } = useParams();
 
   const isEditMode = searchParams.get("edit");

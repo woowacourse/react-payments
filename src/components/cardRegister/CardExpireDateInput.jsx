@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { currentDate } from "utils/currentDate";
 import { RULE_INPUT } from "constants/constants";
