@@ -4,6 +4,7 @@ import {
   CardNumber,
   CardPassword,
   ExpireDate,
+  ReadyGroup,
   SecurityCode,
 } from "../types";
 
@@ -22,7 +23,7 @@ export const isInValidCardPassword = (cardPassword: CardPassword) =>
 
 export const isCompletePasswordInput = (cardPassword: CardPassword) =>
   Object.values(cardPassword).every(
-    (password) => password >= MAX_LENGTH.CARD_PASSWORD
+    (password) => password.length >= MAX_LENGTH.CARD_PASSWORD
   );
 
 export const isInValidCardNumber = (cardNumber: CardNumber) =>
@@ -35,14 +36,6 @@ export const isInValidCardType = (cardType: string) =>
 
 export const isInValidSecurityCode = (securityCode: SecurityCode) =>
   securityCode.length !== MAX_LENGTH.SECURITY_CODE;
-
-interface ReadyGroup {
-  cardNumberReady: boolean;
-  expireDateReady: boolean;
-  securityCodeReady: boolean;
-  cardPasswordReady: boolean;
-  cardTypeReady: boolean;
-}
 
 export const isAllInputReady = ({
   cardNumberReady,

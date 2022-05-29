@@ -1,16 +1,16 @@
 export type CardName = string;
 
-export interface CardNumber {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-}
+export type CardNumberKeys = "first" | "second" | "third" | "fourth";
 
-export interface CardPassword {
-  first: string;
-  second: string;
-}
+export type CardNumber = {
+  [key in CardNumberKeys]?: string;
+};
+
+export type CardPasswordKeys = "first" | "second";
+
+export type CardPassword = {
+  [key in CardPasswordKeys]?: string;
+};
 
 export interface ExpireDate {
   month: string;
@@ -33,14 +33,23 @@ export interface CardData extends ExpireDate {
   userName: UserName;
 }
 
-// CardDataProvider
-export type CardDataAction = { type: "CREATE"; payload: CardData };
+export interface ReadyGroup {
+  cardNumberReady: boolean;
+  expireDateReady: boolean;
+  securityCodeReady: boolean;
+  cardPasswordReady: boolean;
+  cardTypeReady: boolean;
+}
 
-// CardNumberProvider
+//Provider
 export interface Target {
   target: HTMLInputElement;
 }
 
+// CardDataProvider
+export type CardDataAction = { type: "CREATE"; payload: CardData };
+
+// CardNumberProvider
 export interface KeyEventTarget extends Target {
   key: string;
 }
@@ -54,4 +63,17 @@ export interface CardNumberFunction {
 export interface CardNumberContextProvider {
   state: { cardNumber: CardNumber; cardNumberReady: boolean };
   action: CardNumberFunction;
+}
+
+//CardPasswordProvider
+export interface CardPasswordFunction {
+  onChangeCardPassword: ({ target }: Target) => void;
+  onClickCardPasswordBackspaceButton: () => void;
+  onClickCardPasswordVirtualKeyboard: (value: string) => void;
+  resetCardPassword: () => void;
+}
+
+export interface CardPasswordContextProvider {
+  state: { cardPassword: CardPassword; cardPasswordReady: boolean };
+  action: CardPasswordFunction;
 }

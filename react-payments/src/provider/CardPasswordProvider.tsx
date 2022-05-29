@@ -1,28 +1,39 @@
 import { createContext, useState } from "react";
 import useReady from "../hooks/useReady";
+import { CardPassword, CardPasswordContextProvider, Target } from "../types";
 import {
   isCompletePasswordInput,
   isInValidCardPassword,
 } from "../util/validator";
 
-export const CardPasswordContext = createContext();
-
-const initialCardPassword = {
+const initialCardPassword: CardPassword = {
   first: "",
   second: "",
 };
 
-const CardPasswordProvider = ({ children }) => {
+export const CardPasswordContext = createContext<CardPasswordContextProvider>({
+  state: { cardPassword: initialCardPassword, cardPasswordReady: false },
+  action: {
+    onChangeCardPassword: ({ target }) => null,
+    onClickCardPasswordBackspaceButton: () => null,
+    onClickCardPasswordVirtualKeyboard: (value) => null,
+    resetCardPassword: () => null,
+  },
+});
+
+const CardPasswordProvider = ({ children }: { children: React.ReactNode }) => {
   const [cardPassword, setCardPassword] = useState(initialCardPassword);
   const [cardPasswordReady] = useReady(cardPassword, isInValidCardPassword);
 
-  const onChangeCardPassword = ({ target }) => {
-    setCardPassword({
-      [target.name]: target.value,
-    });
+  const onChangeCardPassword = ({ target }: Target) => {
+    if (target.name === "first" || target.name === "second") {
+      setCardPassword({
+        [target.name]: target.value,
+      });
+    }
   };
 
-  const onClickCardPasswordVirtualKeyboard = (value) => {
+  const onClickCardPasswordVirtualKeyboard = (value: string) => {
     if (isCompletePasswordInput(cardPassword)) {
       return;
     }
@@ -37,6 +48,9 @@ const CardPasswordProvider = ({ children }) => {
 
   const onClickCardPasswordBackspaceButton = () => {
     setCardPassword((prev) => {
+      if (prev.first === undefined || prev.second === undefined) {
+        return prev;
+      }
       if (prev.second === "") {
         return { ...prev, first: prev.first.slice(0, -1) };
       }
