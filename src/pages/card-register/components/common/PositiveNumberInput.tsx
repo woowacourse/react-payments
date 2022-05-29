@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
+import { SerializedStyles } from '@emotion/react';
 import { isObject } from '../../../../hooks/useForm/utils';
 import { inputStyle } from './Input';
 
-const PositiveNumberInput = React.forwardRef((props: any, ref) => {
+type Props = {
+  css?: SerializedStyles;
+} & InputHTMLAttributes<HTMLInputElement>;
+
+const PositiveNumberInput = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
   const removeNonPositiveValueOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target as HTMLInputElement;
     input.value = input.value.replace(/[^0-9]/g, '');
   };
 
-  const _props = (isObject(props) ? { ...props } : { onChange: removeNonPositiveValueOnChange }) as any;
+  const _props = (isObject(props) ? { ...props } : { onChange: removeNonPositiveValueOnChange }) as Props;
   if (Object.prototype.hasOwnProperty.call(_props, 'onChange')) {
     const { onChange: customOnChange } = _props as any;
     _props.onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
