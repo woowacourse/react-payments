@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "noImplicitAny": false,
+    "outDir": "./build",
+    "sourceMap": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "moduleResolution": "node", //moduleResolution을 'node'로 설정했다면 ‘node_modules’폴더를 찾아 모듈을 검색
+    "noEmit": true,
+    "allowJs": true,
+    "resolveJsonModule": true
+  },
+  "extends": "./tsconfig.paths.json"
+}
+// {
+//   "compilerOptions": {
+//     "baseUrl": "src/",
+//     "target": "es5",
+//     "lib": ["dom", "dom.iterable", "esnext"],
+//     "allowJs": true,
+//     "skipLibCheck": true,
+//     "esModuleInterop": true,
+//     "allowSyntheticDefaultImports": true,
+//     "strict": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "module": "esnext",
+//     "moduleResolution": "node",
+//     "resolveJsonModule": true,
+//     "isolatedModules": true,
+//     "noEmit": true,
+//     "jsx": "react"
+
+//   },
+//   "include": ["src"],
+//   "exclude": ["**/*.test.ts", "**/*.test.tsx"]
+// }
