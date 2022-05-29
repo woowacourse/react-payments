@@ -41,7 +41,6 @@ const ExpireDateProvider = ({ children }) => {
     focusPrevElement({
       target,
       key,
-      value: expireDate,
       prevElement,
     });
   };

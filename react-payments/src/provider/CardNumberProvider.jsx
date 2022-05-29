@@ -44,7 +44,6 @@ const CardNumberProvider = ({ children }) => {
     focusPrevElement({
       target,
       key,
-      value: cardNumber,
       prevElement,
     });
   };
