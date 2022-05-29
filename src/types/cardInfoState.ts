@@ -28,6 +28,18 @@ type TPasswordLength = 0 | 1;
 type TExpireDateLength = 0 | 1 | 2;
 type TCardNumberLength = 0 | 1 | 2 | 3 | 4;
 
+interface ICardCss {
+  width: string;
+  height: string;
+  fontSize: string;
+  cardContainerMarginBottom: string;
+  cardChipWidth: string;
+  cardChipHeight: string;
+  cardNameMargin: string;
+  cardChipMarginBottom: string;
+  cardNumberMarginBottom: string;
+}
+
 export type {
   ICardNumberState,
   IExpireDateState,
@@ -36,4 +48,5 @@ export type {
   TPasswordLength,
   TExpireDateLength,
   TCardNumberLength,
+  ICardCss,
 };

@@ -1,22 +1,30 @@
-import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
-
 import { CREATE_MASKED_CHARACTERS } from "../../../constants/constants";
+import type {
+  ICardCss,
+  ICardNumberState,
+  IExpireDateState,
+} from "../../../types/cardInfoState";
 
-const CardContainer = styled.div`
+const StyledCardContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 
-  margin-bottom: ${(props) => props.cardContainerMarginBottom};
+  margin-bottom: ${(props: { cardContainerMarginBottom: string }) =>
+    props.cardContainerMarginBottom};
 `;
 
-const Card = styled.div`
+const StyledCard = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: ${(props) => props.width};
+  width: ${(props: {
+    width: string;
+    height: string;
+    fontSize: string;
+    isComplete: boolean;
+  }) => props.width};
   height: ${(props) => props.height};
   padding: 14px 16px;
 
@@ -30,12 +38,16 @@ const Card = styled.div`
   font-weight: 400;
 `;
 
-const CardName = styled.p`
-  margin: ${(props) => props.cardNameMargin};
+const StyledCardName = styled.p`
+  margin: ${(props: { cardNameMargin: string }) => props.cardNameMargin};
 `;
 
-const CardChip = styled.div`
-  width: ${(props) => props.cardChipWidth};
+const StyledCardChip = styled.div`
+  width: ${(props: {
+    cardChipWidth: string;
+    cardChipHeight: string;
+    cardChipMarginBottom: string;
+  }) => props.cardChipWidth};
   height: ${(props) => props.cardChipHeight};
 
   background: #cbba64;
@@ -44,23 +56,24 @@ const CardChip = styled.div`
   margin-bottom: ${(props) => props.cardChipMarginBottom};
 `;
 
-const CardNumber = styled.div`
+const StyledCardNumber = styled.div`
   display: flex;
   align-items: center;
   height: 10px;
   gap: 10px;
 
-  margin-bottom: ${(props) => props.cardNumberMarginBottom};
+  margin-bottom: ${(props: { cardNumberMarginBottom: string }) =>
+    props.cardNumberMarginBottom};
 `;
 
-const CardBottomSection = styled.div`
+const StyledCardBottomSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 10px;
 `;
 
-const CardHolderName = styled.p`
+const StyledCardHolderName = styled.p`
   width: 55%;
   word-wrap: break-word;
 `;
@@ -71,6 +84,12 @@ export default function CardPreview({
   cardNumber,
   holderName,
   expireDate,
+}: {
+  canProceed: boolean;
+  cardCss: ICardCss;
+  cardNumber: ICardNumberState;
+  holderName: string;
+  expireDate: IExpireDateState;
 }) {
   const {
     firstCardNumber,
@@ -94,61 +113,34 @@ export default function CardPreview({
   } = cardCss;
 
   return (
-    <CardContainer cardContainerMarginBottom={cardContainerMarginBottom}>
-      <Card
+    <StyledCardContainer cardContainerMarginBottom={cardContainerMarginBottom}>
+      <StyledCard
         isComplete={canProceed}
         width={width}
         height={height}
         fontSize={fontSize}
       >
-        <CardName cardNameMargin={cardNameMargin}>Woowa Card</CardName>
-        <CardChip
+        <StyledCardName cardNameMargin={cardNameMargin}>
+          Woowa Card
+        </StyledCardName>
+        <StyledCardChip
           cardChipWidth={cardChipWidth}
           cardChipHeight={cardChipHeight}
           cardChipMarginBottom={cardChipMarginBottom}
         />
-        <CardNumber cardNumberMarginBottom={cardNumberMarginBottom}>
+        <StyledCardNumber cardNumberMarginBottom={cardNumberMarginBottom}>
           <p>{firstCardNumber}</p>
           <p>{secondCardNumber}</p>
           <p>{CREATE_MASKED_CHARACTERS(thirdCardNumber.length)}</p>
           <p>{CREATE_MASKED_CHARACTERS(fourthCardNumber.length)}</p>
-        </CardNumber>
-        <CardBottomSection>
-          <CardHolderName>{holderName}</CardHolderName>
+        </StyledCardNumber>
+        <StyledCardBottomSection>
+          <StyledCardHolderName>{holderName}</StyledCardHolderName>
           <p>
             {month} {month.length !== 0 && "/"} {year}
           </p>
-        </CardBottomSection>
-      </Card>
-    </CardContainer>
+        </StyledCardBottomSection>
+      </StyledCard>
+    </StyledCardContainer>
   );
 }
-
-// CardPreview.propTypes = {
-//   cardNumber: PropTypes.shape({
-//     firstCardNumber: PropTypes.string,
-//     secondCardNumber: PropTypes.string,
-//     thirdCardNumber: PropTypes.string,
-//     fourthCardNumber: PropTypes.string,
-//   }),
-//   expireDate: PropTypes.shape({
-//     month: PropTypes.string,
-//     year: PropTypes.string,
-//   }),
-//   holderName: PropTypes.shape({
-//     value: PropTypes.string,
-//     keyType: PropTypes.string,
-//   }),
-//   canProceed: PropTypes.bool,
-//   cardCss: PropTypes.shape({
-//     width: PropTypes.string,
-//     height: PropTypes.string,
-//     fontSize: PropTypes.string,
-//     cardContainerMarginBottom: PropTypes.string,
-//     cardChipWidth: PropTypes.string,
-//     cardChipHeight: PropTypes.string,
-//     cardNameMargin: PropTypes.string,
-//     cardChipMarginBottom: PropTypes.string,
-//     cardNumberMarginBottom: PropTypes.string,
-//   }),
-// };
