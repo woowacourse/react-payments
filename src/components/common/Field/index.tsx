@@ -9,7 +9,21 @@ import {
   InputHelperWrapper,
 } from 'components/common/Field/style'
 
-function Field({ label, errorMessage, children, helpText, countHelper }) {
+type FieldProps = {
+  children: React.ReactNode
+  label: string
+  errorMessage?: string
+  helpText?: string
+  countHelper?: string
+}
+
+function Field({
+  label,
+  errorMessage,
+  children,
+  helpText,
+  countHelper,
+}: FieldProps) {
   const [mouseHover, setMouseHover] = useState(false)
 
   const handleMouseHover = () => {
