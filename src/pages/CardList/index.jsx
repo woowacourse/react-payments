@@ -18,8 +18,8 @@ function CardList() {
 
   const {
     Modal: EditModal,
-    handleModalOpen: handleEditModalOpen,
-    handleModalClose: handleEditModalClose,
+    modalOpen: handleEditModalOpen,
+    modalClose: handleEditModalClose,
   } = useModal();
 
   const { cardList, setCardEditIndex } = useCardDataContext();

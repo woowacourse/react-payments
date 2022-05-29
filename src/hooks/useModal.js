@@ -27,8 +27,8 @@ function useModal() {
 
   return {
     Modal: ModalContainer,
-    handleModalOpen: handleVisible,
-    handleModalClose: handleDisappear,
+    modalOpen: handleVisible,
+    modalClose: handleDisappear,
   };
 }
 

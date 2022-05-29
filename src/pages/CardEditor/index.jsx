@@ -53,10 +53,10 @@ function CardEditor() {
 
   const {
     Modal: CompanyModal,
-    handleModalOpen: handleCompanyModalOpen,
-    handleModalClose: handleCompanyModalClose,
+    modalOpen: handleCompanyModalOpen,
+    modalClose: handleCompanyModalClose,
   } = useModal();
-  const { Modal: CardNameInputModal, handleModalOpen: handleCardNameInputModalOpen } = useModal();
+  const { Modal: CardNameInputModal, modalOpen: handleCardNameInputModalOpen } = useModal();
 
   const onClickPageSubmit = () => {
     try {
