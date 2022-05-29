@@ -58,7 +58,7 @@ const StyledInputContainer = styled.div`
 interface Props {
   labelText: string;
   wrapperWidth: string;
-  horizontalAlign: string;
+  horizontalAlign?: string;
   isComplete: boolean;
   isError: boolean;
   errorMessage: string;

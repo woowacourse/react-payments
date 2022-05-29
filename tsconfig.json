@@ -6,8 +6,9 @@
     "preserveConstEnums": true,
     "outFile": "../../built/local/tsc.js",
     "sourceMap": true,
-    "jsx": "react"
+    "jsx": "react",
+    "moduleResolution": "node"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "src/custom.d.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

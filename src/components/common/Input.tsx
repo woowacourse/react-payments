@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 type StyleProps = {
-  isComplete: boolean;
-  textAlign: string;
+  isComplete?: boolean;
+  textAlign?: string;
 };
 
 export const StyledInput = styled.input<StyleProps>`

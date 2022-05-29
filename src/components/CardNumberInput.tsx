@@ -3,9 +3,16 @@ import React, { Fragment } from 'react';
 import Input from './common/Input';
 import InputField from './common/InputField';
 
-import { ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_ERROR_MESSAGE, CREATE_MASKED_CHARACTERS } from '../constants';
+import { ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_ERROR_MESSAGE, CREATE_MASKED_CHARACTERS } from '../constants/index';
 
-export default function CardNumberInput({ cardNumber, onChange, isInvalid, isComplete }) {
+interface Props {
+  cardNumber: string[];
+  onChange: (value?: string, index?: number) => void;
+  isInvalid: boolean;
+  isComplete: boolean;
+}
+
+export default function CardNumberInput({ cardNumber, onChange, isInvalid, isComplete }: Props) {
   return (
     <InputField
       labelText="카드 번호"
@@ -19,7 +26,7 @@ export default function CardNumberInput({ cardNumber, onChange, isInvalid, isCom
           <Input
             type={index <= 1 ? 'text' : 'password'}
             value={cardNumber[index]}
-            maxLength="4"
+            maxLength={4}
             placeholder={index <= 1 ? '1 2 3 4' : CREATE_MASKED_CHARACTERS(4)}
             onChange={e => onChange(e.target.value, index)}
             data-testid={`card-number-input-${index}`}

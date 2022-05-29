@@ -3,10 +3,17 @@ import React from 'react';
 import Input from './common/Input';
 import InputField from './common/InputField';
 
-import { ADD_CARD_FORM_ERROR_MESSAGE } from '../constants';
+import { ADD_CARD_FORM_ERROR_MESSAGE } from '../constants/index';
 
-export default function CardExpireDateInput({ expireDate, onChange, isInvalid, isComplete }) {
-  const onChangeWithParsedValue = (e, index) => {
+interface Props {
+  expireDate: string[];
+  onChange: (value?: string, index?: number) => void;
+  isInvalid: boolean;
+  isComplete: boolean;
+}
+
+export default function CardExpireDateInput({ expireDate, onChange, isInvalid, isComplete }: Props) {
+  const onChangeWithParsedValue = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const { value } = e.target;
 
     let parsedValue = value;

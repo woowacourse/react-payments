@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { CREATE_MASKED_CHARACTERS } from '../constants';
+import { CREATE_MASKED_CHARACTERS } from '../constants/index';
 
-const CardContainer = styled.div`
+const CardContainer = styled.div<{ isComplete: boolean; size: 'small' | 'large' }>`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -35,7 +35,7 @@ const CardContainer = styled.div`
     `}
 `;
 
-const CardName = styled.p`
+const CardName = styled.p<{ size: 'small' | 'large' }>`
   ${props =>
     props.size === 'small' &&
     `
@@ -55,7 +55,7 @@ const CardName = styled.p`
     `}
 `;
 
-const CardChip = styled.div`
+const CardChip = styled.div<{ size: 'small' | 'large' }>`
   position: relative;
   background: #cbba64;
   border-radius: 4px;
@@ -77,7 +77,7 @@ const CardChip = styled.div`
     `}
 `;
 
-const CardNumber = styled.p`
+const CardNumber = styled.p<{ size: 'small' | 'large' }>`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -96,7 +96,7 @@ const CardNumber = styled.p`
     `}
 `;
 
-const CardBottomSection = styled.div`
+const CardBottomSection = styled.div<{ size: 'small' | 'large' }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -126,7 +126,15 @@ const CardExpireDate = styled.p`
   margin: 0;
 `;
 
-export default function CardItem({ size, cardNumber, holderName, expireDate, isComplete }) {
+interface Props {
+  size: 'small' | 'large';
+  cardNumber: string[];
+  holderName: string;
+  expireDate: string[];
+  isComplete: boolean;
+}
+
+export default function CardItem({ size, cardNumber, holderName, expireDate, isComplete }: Props) {
   return (
     <CardContainer size={size} isComplete={isComplete}>
       <CardName size={size}>{isComplete && '우아한카드'}</CardName>
@@ -138,8 +146,8 @@ export default function CardItem({ size, cardNumber, holderName, expireDate, isC
         <span>{CREATE_MASKED_CHARACTERS(cardNumber[3].length)}</span>
       </CardNumber>
       <CardBottomSection size={size}>
-        <CardHolderName size={size}>{holderName}</CardHolderName>
-        <CardExpireDate size={size}>
+        <CardHolderName>{holderName}</CardHolderName>
+        <CardExpireDate>
           {expireDate[0]} {expireDate[0].length !== 0 && '/'} {expireDate[1]}
         </CardExpireDate>
       </CardBottomSection>
