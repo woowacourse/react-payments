@@ -18,11 +18,11 @@ function CardNumber() {
   return (
     <Fieldset>
       <Fieldset.Head marginBottom="8px">
-        <label htmlFor="a">카드 번호</label>
+        <label htmlFor="card-number">카드 번호</label>
       </Fieldset.Head>
       <Fieldset.Content>
         <Wrapper>
-          <PositiveNumberInput type="text" {...register('card-number-1', { ...validationOption })} />
+          <PositiveNumberInput id="card-number" type="text" {...register('card-number-1', { ...validationOption })} />
           <Sepeartor />
           <PositiveNumberInput type="text" {...register('card-number-2', { ...validationOption })} />
           <Sepeartor />
