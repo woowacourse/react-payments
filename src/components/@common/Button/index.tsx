@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Container from './styles';
 
-interface PropType {
+interface PropTypes {
   className?: string;
   type?: 'default' | 'primary' | 'warning' | 'danger' | 'success' | 'info';
   action?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
@@ -12,7 +12,16 @@ interface PropType {
   children: React.ReactNode;
 }
 
-function Button({ className, type, action, size, width, isDisabled, onClick, children }: PropType) {
+function Button({
+  className,
+  type,
+  action,
+  size,
+  width,
+  isDisabled,
+  onClick,
+  children,
+}: PropTypes) {
   return (
     <Container
       className={`button ${className}`}

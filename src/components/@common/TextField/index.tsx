@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Container from './styles';
 
-interface PropType {
+interface PropTypes {
   type?: React.HTMLInputTypeAttribute;
   name: string;
   value: string;
@@ -11,7 +11,7 @@ interface PropType {
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
 
-function TextField({ type, name, value, placeholder, maxLength, onChange, onBlur }: PropType) {
+function TextField({ type, name, value, placeholder, maxLength, onChange, onBlur }: PropTypes) {
   return (
     <Container
       type={type}
