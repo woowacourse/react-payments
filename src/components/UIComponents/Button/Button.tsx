@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 interface IButtonProps {
   type: "button" | "submit" | "reset";
-  onClick: () => void;
+  onClick?: () => void;
   position: string;
   children: any;
   isSvg?: boolean;

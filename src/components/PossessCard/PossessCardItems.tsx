@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IInitialState } from "../../types/cardInfoState";
 import CardPreview from "../UIComponents/CardPreview/CardPreview";
 
 const StyledCardAlias = styled.p`
@@ -19,16 +20,21 @@ const smallCardCss__marginBottom10px = {
 };
 
 export default function PossessCardItems() {
-  const cardInfoItems = JSON.parse(localStorage.getItem("cardInfo")) ?? [];
+  const cardInfoItems: [] | IInitialState[] =
+    JSON.parse(localStorage.getItem("cardInfo") || "") ?? [];
 
-  return cardInfoItems.map((cardInfoItem, index) => (
-    <div key={index}>
-      <CardPreview
-        {...cardInfoItem}
-        canProceed={true}
-        cardCss={smallCardCss__marginBottom10px}
-      />
-      <StyledCardAlias>{cardInfoItem.cardAlias}</StyledCardAlias>
-    </div>
-  ));
+  return (
+    <>
+      {cardInfoItems.map((cardInfoItem, index) => (
+        <div key={index}>
+          <CardPreview
+            {...cardInfoItem}
+            canProceed={true}
+            cardCss={smallCardCss__marginBottom10px}
+          />
+          <StyledCardAlias>{cardInfoItem.cardAlias}</StyledCardAlias>
+        </div>
+      ))}
+    </>
+  );
 }
