@@ -9,7 +9,7 @@ import useAutoFocus from 'hooks/useAutoFocus'
 import { GrayInputWrapper } from 'components/common/Input/style'
 import { Dot } from 'components/AddCard/PasswordField/style'
 
-import { PASSWORD } from 'constant'
+import { PASSWORD } from 'constants/index'
 import { isInvalidPassword } from 'validation'
 
 function PasswordField() {
@@ -22,7 +22,10 @@ function PasswordField() {
     maxLength: [PASSWORD.UNIT_LENGTH, PASSWORD.UNIT_LENGTH],
   })
 
-  const handleInputChange = ({ target }, key) => {
+  const handleInputChange = (
+    { target }: React.ChangeEvent<HTMLInputElement>,
+    key: string
+  ) => {
     const { value } = target
     if (isInvalidPassword(value)) return
     setPassword(target, key)
@@ -34,11 +37,10 @@ function PasswordField() {
       <GrayInputWrapper size={12}>
         <Input
           type="password"
-          dataset="first"
           value={password.first}
           maxLength={PASSWORD.UNIT_LENGTH}
           onChange={(e) => handleInputChange(e, 'first')}
-          ref={(node) => {
+          ref={(node: HTMLInputElement) => {
             refList.current[0] = node
           }}
         />
@@ -46,11 +48,10 @@ function PasswordField() {
       <GrayInputWrapper size={12}>
         <Input
           type="password"
-          dataset="second"
           value={password.second}
           maxLength={PASSWORD.UNIT_LENGTH}
           onChange={(e) => handleInputChange(e, 'second')}
-          ref={(node) => {
+          ref={(node: HTMLInputElement) => {
             refList.current[1] = node
           }}
         />
