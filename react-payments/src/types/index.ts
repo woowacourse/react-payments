@@ -111,3 +111,14 @@ export interface SecurityCodeContextProvider {
   state: { securityCode: SecurityCode; securityCodeReady: boolean };
   action: SecurityCodeFunction;
 }
+
+//UserNameProvider
+interface UserNameFunction {
+  onChangeUserName: ({ target }: Target) => void;
+  resetUserName: () => void;
+}
+
+export interface UserNameContextProvider {
+  state: { userName: UserName };
+  action: UserNameFunction;
+}
