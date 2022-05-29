@@ -33,4 +33,25 @@ export interface CardData extends ExpireDate {
   userName: UserName;
 }
 
+// CardDataProvider
 export type CardDataAction = { type: "CREATE"; payload: CardData };
+
+// CardNumberProvider
+export interface Target {
+  target: HTMLInputElement;
+}
+
+export interface KeyEventTarget extends Target {
+  key: string;
+}
+
+export interface CardNumberFunction {
+  onChangeCardNumber: ({ target }: Target) => void;
+  onKeyDownCardNumber: ({ target, key }: KeyEventTarget) => void;
+  resetCardNumber: () => void;
+}
+
+export interface CardNumberContextProvider {
+  state: { cardNumber: CardNumber; cardNumberReady: boolean };
+  action: CardNumberFunction;
+}

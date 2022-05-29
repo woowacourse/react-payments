@@ -4,13 +4,13 @@ interface FocusNextParams {
     [key: string]: string;
   };
   maxLength: number;
-  nextElement: HTMLInputElement;
+  nextElement: HTMLInputElement | null;
 }
 
 interface FocusPrevParams {
   target: HTMLInputElement;
   key: string;
-  prevElement: HTMLInputElement;
+  prevElement: HTMLInputElement | null;
 }
 
 export const focusNextElement = ({
@@ -19,7 +19,10 @@ export const focusNextElement = ({
   maxLength,
   nextElement,
 }: FocusNextParams) => {
-  if (isNextFocus({ target, value, maxLength, nextElement })) {
+  if (
+    isNextFocus({ target, value, maxLength, nextElement }) &&
+    nextElement !== null
+  ) {
     nextElement.focus();
   }
 };
@@ -29,7 +32,7 @@ export const focusPrevElement = ({
   key,
   prevElement,
 }: FocusPrevParams) => {
-  if (isPrevFocus({ target, key, prevElement })) {
+  if (isPrevFocus({ target, key, prevElement }) && prevElement !== null) {
     prevElement.focus();
   }
 };
