@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import arrowBackIcon from "../../assets/images/arrowBackIcon.svg";
+import arrowBackIcon from "../assets/images/arrowBackIcon.svg";
 
-import CardPreview from "../UIComponents/CardPreview/CardPreview";
-import Button from "../UIComponents/Button/Button";
+import CardPreview from "../components/UIComponents/CardPreview/CardPreview";
+import Button from "../components/UIComponents/Button/Button";
 
-import CardConfirmModal from "./CardConfirmModal";
-import PageHeader from "../PageHeader";
+import CardConfirmModal from "../components/AddCard/CardConfirmModal";
+import PageHeader from "../components/PageHeader";
 import {
   CardHolderNameInput,
   CardNumberInput,
@@ -14,12 +14,12 @@ import {
   CardSecurityCodeInput,
   CardExpireDateInput,
   CardInfoForm,
-} from ".";
+} from "../components/AddCard";
 
-import { isValidCardInfo } from "../../validators/validator";
-import { BACK_BUTTON_CONFIRM_MESSAGE, ROUTES } from "../../constants/constants";
-import { CardInfoContext } from "../../contexts/CardInfoContext";
-import { setInitialState } from "../../reducer/cardReducer";
+import { isValidCardInfo } from "../validators/validator.ts";
+import { BACK_BUTTON_CONFIRM_MESSAGE, ROUTES } from "../constants/constants";
+import { CardInfoContext } from "../contexts/CardInfoContext";
+import { setInitialState } from "../reducer/cardReducer";
 
 const smallCardCss = {
   width: "213px",
