@@ -1,4 +1,11 @@
 import styled from 'styled-components';
+import { CompanyName as CompanyNameType, CompanyColor as CompanyColorType } from 'types/index';
+
+interface CardCompanyButtonProps {
+  color: CompanyColorType;
+  name: CompanyNameType;
+  handleClickCardCompany: (name: CompanyNameType, color: CompanyColorType) => void;
+}
 
 const Container = styled.div`
   display: flex;
@@ -28,7 +35,7 @@ const CompanyName = styled.span`
   color: #525252;
 `;
 
-function CardCompanyButton({ color, name, handleClickCardCompany }) {
+function CardCompanyButton({ color, name, handleClickCardCompany }: CardCompanyButtonProps) {
   return (
     <Container
       onClick={() => {
