@@ -3467,7 +3467,7 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@typescript-eslint/eslint-plugin@^5.5.0":
+"@typescript-eslint/eslint-plugin@^5.26.0", "@typescript-eslint/eslint-plugin@^5.5.0":
   version "5.26.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.26.0.tgz#c1f98ccba9d345e38992975d3ca56ed6260643c2"
   integrity sha512-oGCmo0PqnRZZndr+KwvvAUvD3kNE4AfyoGCwOZpoCncSh4MVD06JTE8XQa2u9u+NX5CsyZMBTEc2C72zx38eYA==
@@ -3489,7 +3489,7 @@
   dependencies:
     "@typescript-eslint/utils" "5.26.0"
 
-"@typescript-eslint/parser@^5.5.0":
+"@typescript-eslint/parser@^5.26.0", "@typescript-eslint/parser@^5.5.0":
   version "5.26.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-5.26.0.tgz#a61b14205fe2ab7533deb4d35e604add9a4ceee2"
   integrity sha512-n/IzU87ttzIdnAH5vQ4BBDnLPly7rC5VnjN3m0xBG82HK6rhRxnCb3w/GyWbNDghPd+NktJqB/wl6+YkzZ5T5Q==
