@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route exact path="/react-payments" element={<CardList />} />
           <Route path="/react-payments/add" element={<AddCard />} />
-          <Route path="/react-payments/register" element={<Register />} />
+          <Route path="/react-payments/register/:cardId" element={<Register />} />
         </Routes>
       </CardsProvider>
     </div>
