@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useReducer } from 'react'
 import reducer from 'context/reducer'
 
-import { CARD_NUMBER, DUE_DATE, CVC } from 'constant'
+import { CARD_NUMBER, DUE_DATE, CVC } from 'constants'
 
 const CardInfoContext = React.createContext()
 

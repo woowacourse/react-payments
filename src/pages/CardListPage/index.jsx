@@ -15,7 +15,7 @@ import {
   PossessedCard,
 } from 'pages/CardListPage/style'
 
-import { PATH } from 'constant'
+import { PATH } from 'constants'
 
 function CardListPage() {
   const [cardList] = useLocalStorage('cardList')
