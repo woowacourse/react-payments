@@ -1,6 +1,10 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "react-jsx"
   },
-  "include": ["typings/**/*", "src/**/*"]
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }
