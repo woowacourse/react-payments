@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     /* Language and Environment */
-    "target": "es2016",
+    "target": "es2022",
     "jsx": "react-jsx",
 
     /* Modules */
-    "module": "es6",
-    "baseUrl": "src",
+    // "module": "ES6",
+    "module": "commonJs",
+    "baseUrl": "./src/",
 
     /* Interop Constraints */
     "esModuleInterop": true,
@@ -19,5 +20,5 @@
     "skipLibCheck": true,
     "allowJs": true
   },
-  "include": ["src"]
+  "include": ["./src/"]
 }

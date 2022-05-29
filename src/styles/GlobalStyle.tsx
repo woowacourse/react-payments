@@ -1,6 +1,6 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
@@ -43,16 +43,4 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export const ModalContainer = styled.div`
-  visibility: ${props => props.visibility};
-  position: absolute;
-  top: 0px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  background-color: rgba(0, 0, 0, 0.4);
-  overflow: hidden;
-`;
+export default GlobalStyle;
