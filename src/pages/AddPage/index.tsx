@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Card from 'components/common/Card'
@@ -21,7 +21,7 @@ import {
   GridWrapper,
 } from 'pages/style'
 
-import { COLORS, CARD_COMPANY, ALERT_MESSAGE, PATH } from 'constant'
+import { CARD_COMPANY, ALERT_MESSAGE, PATH } from 'constants/index'
 
 import CardInfoContext from 'context/cardInfo-context'
 
@@ -40,7 +40,7 @@ function AddPage() {
     setIsModalOpen(true)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (cardNumber.error) {
@@ -66,7 +66,7 @@ function AddPage() {
         <PasswordField />
         <FooterWrapper>
           {isFormFulfilled && (
-            <Button type={'submit'} color={COLORS.MINT} onClick={handleSubmit}>
+            <Button type={'submit'} onClick={handleSubmit}>
               다음
             </Button>
           )}
