@@ -15,7 +15,7 @@ export default function CardPasswordInput({
   dispatch,
 }: {
   password: IPasswordState;
-  dispatch: (value: any) => void;
+  dispatch: React.Dispatch<any>;
 }) {
   const { updateHandler } = useUpdateHandler(
     dispatch,

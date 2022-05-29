@@ -66,7 +66,7 @@ export default function CardSecurityCodeInput({
   dispatch,
 }: {
   securityCode: string;
-  dispatch: (value: any) => void;
+  dispatch: React.Dispatch<any>;
 }) {
   const { updateHandler } = useUpdateHandler(
     dispatch,

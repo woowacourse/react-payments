@@ -12,7 +12,7 @@ export default function CardNumberInput({
   dispatch,
 }: {
   cardNumber: ICardNumberState;
-  dispatch: (value: any) => void;
+  dispatch: React.Dispatch<any>;
 }) {
   const { updateHandler } = useUpdateHandler(
     dispatch,
