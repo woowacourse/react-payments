@@ -1,5 +1,3 @@
-import { ChangeEvent, useContext } from "react";
-import { CardInfoContext } from "../../contexts/CardInfoContext";
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 import { isInvalidPassword } from "../../validators/validator";
@@ -9,28 +7,27 @@ import {
   GUIDE_MESSAGE,
   MASKED_CHARACTER,
 } from "../../constants/constants";
+import useUpdateHandler from "../../hooks/useUpdateHandler";
+import { IPasswordState } from "../../types/cardInfoState";
 
-export default function CardPasswordInput() {
-  const {
-    state: { password },
+export default function CardPasswordInput({
+  password,
+  dispatch,
+}: {
+  password: IPasswordState;
+  dispatch: (value: any) => void;
+}) {
+  const { updateHandler } = useUpdateHandler(
     dispatch,
-  } = useContext(CardInfoContext);
+    setPassword,
+    isInvalidPassword
+  );
 
   const passwordList = Object.entries(password);
   const passwordLength = passwordList.reduce(
     (sum, currentPassword) => currentPassword[1].length + sum,
     0
   );
-
-  const handlePasswordUpdate = (
-    event: ChangeEvent<HTMLInputElement>,
-    passwordOrder: string
-  ) => {
-    const { value } = event.target;
-    if (isInvalidPassword(value)) return;
-
-    dispatch(setPassword({ value, passwordOrder }));
-  };
 
   return (
     <InputField
@@ -55,7 +52,7 @@ export default function CardPasswordInput() {
             isComplete={
               passwordValue.length === CARD_INFO_RULES.PASSWORD_UNIT_LENGTH
             }
-            onChange={(e) => handlePasswordUpdate(e, passwordKey)}
+            onChange={(e) => updateHandler(e, passwordKey)}
           />
         );
       })}

@@ -1,9 +1,6 @@
-import { ChangeEvent, Fragment, useContext } from "react";
-import { CardInfoContext } from "../../contexts/CardInfoContext";
-
+import { Fragment } from "react";
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
-
 import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
 import {
   isCompleteExpireMonth,
@@ -11,27 +8,26 @@ import {
   isInValidExpireDate,
 } from "../../validators/validator";
 import { setExpireDate } from "../../reducer/cardReducer";
+import useUpdateHandler from "../../hooks/useUpdateHandler";
+import { IExpireDateState } from "../../types/cardInfoState";
 
-export default function CardExpireDateInput() {
-  const {
-    state: { expireDate },
-    dispatch,
-  } = useContext(CardInfoContext);
-
+export default function CardExpireDateInput({
+  expireDate,
+  dispatch,
+}: {
+  expireDate: IExpireDateState;
+  dispatch: (value: any) => void;
+}) {
   const expireDateList = Object.entries(expireDate);
   const [month, year] = expireDateList;
   const monthValue = month[1];
   const yearValue = year[1];
 
-  const handleExpireDateUpdate = (
-    event: ChangeEvent<HTMLInputElement>,
-    dateType: string
-  ) => {
-    const { value } = event.target;
-    if (isInValidExpireDate(value)) return;
-
-    dispatch(setExpireDate({ value, dateType }));
-  };
+  const { updateHandler } = useUpdateHandler(
+    dispatch,
+    setExpireDate,
+    isInValidExpireDate
+  );
 
   return (
     <InputField
@@ -57,7 +53,7 @@ export default function CardExpireDateInput() {
                 width={"40px"}
                 maxLength={CARD_INFO_RULES.EXPIRE_DATE_UNIT_LENGTH}
                 required
-                onChange={(e) => handleExpireDateUpdate(e, expireDateKey)}
+                onChange={(e) => updateHandler(e, expireDateKey)}
                 isComplete={
                   expireDateKey === "month"
                     ? isCompleteExpireMonth(expireDateValue)

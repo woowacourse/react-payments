@@ -24,6 +24,14 @@ interface IInitialState {
   cardAlias: string;
 }
 
+interface ISetPayload {
+  value: string;
+}
+
+interface ISetPayloadWithType extends ISetPayload {
+  type: string;
+}
+
 type TPasswordLength = 0 | 1;
 type TExpireDateLength = 0 | 1 | 2;
 type TCardNumberLength = 0 | 1 | 2 | 3 | 4;
@@ -49,4 +57,6 @@ export type {
   TExpireDateLength,
   TCardNumberLength,
   ICardCss,
+  ISetPayload,
+  ISetPayloadWithType,
 };

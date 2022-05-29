@@ -1,10 +1,8 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import arrowBackIcon from "../assets/images/arrowBackIcon.svg";
-
 import CardPreview from "../components/UIComponents/CardPreview/CardPreview";
 import Button from "../components/UIComponents/Button/Button";
-
 import CardConfirmModal from "../components/AddCard/CardConfirmModal";
 import PageHeader from "../components/PageHeader";
 import {
@@ -15,7 +13,6 @@ import {
   CardExpireDateInput,
   CardInfoForm,
 } from "../components/AddCard";
-
 import { isValidCardInfo } from "../validators/validator";
 import { BACK_BUTTON_CONFIRM_MESSAGE, ROUTES } from "../constants/constants";
 import { CardInfoContext } from "../contexts/CardInfoContext";
@@ -35,8 +32,8 @@ const smallCardCss = {
 };
 
 export default function AddCard() {
-  const navigate = useNavigate();
   const [isNextButtonClicked, setNextButtonClicked] = useState(false);
+  const navigate = useNavigate();
   const {
     state,
     dispatch,
@@ -78,11 +75,14 @@ export default function AddCard() {
         cardCss={smallCardCss}
       />
       <CardInfoForm>
-        <CardNumberInput />
-        <CardExpireDateInput />
-        <CardHolderNameInput />
-        <CardSecurityCodeInput />
-        <CardPasswordInput />
+        <CardNumberInput cardNumber={cardNumber} dispatch={dispatch} />
+        <CardExpireDateInput expireDate={expireDate} dispatch={dispatch} />
+        <CardHolderNameInput holderName={holderName} dispatch={dispatch} />
+        <CardSecurityCodeInput
+          securityCode={securityCode}
+          dispatch={dispatch}
+        />
+        <CardPasswordInput password={password} dispatch={dispatch} />
         {isValidCardInfo(cardNumber, expireDate, securityCode, password) && (
           <Button
             type={"button"}

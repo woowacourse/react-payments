@@ -18,7 +18,7 @@ export const isInValidHolderName = (value: string): boolean =>
   !/(^[a-z]{0,30}$)/i.test(value);
 
 export const isInvalidSecurityCode = (value: string): boolean =>
-  !/^\d{0,3}$/.test(value);
+  Number.isNaN(value) || !/^\d{0,3}$/.test(value);
 
 export const isInvalidPassword = (value: string): boolean =>
   !/^\d{0,1}$/.test(value);

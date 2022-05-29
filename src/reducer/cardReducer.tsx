@@ -1,32 +1,5 @@
 import type { IInitialState } from "../types/cardInfoState";
 
-interface ISetCardNumberPayload {
-  value: string;
-  cardNumberOrder: string;
-}
-
-interface ISetExpireDatePayload {
-  value: string;
-  dateType: string;
-}
-
-interface ISetHolderNamePayload {
-  value: string;
-}
-
-interface ISetSecurityCodePayload {
-  value: string;
-}
-
-interface ISetPasswordPayload {
-  value: string;
-  passwordOrder: string;
-}
-
-interface ISetCardAliasPayload {
-  value: string;
-}
-
 const CARD_NUMBER = "CARD_NUMBER";
 const EXPIRE_DATE = "EXPIRE_DATE";
 const HOLDER_NAME = "HOLDER_NAME";
@@ -55,32 +28,32 @@ export const initialState: IInitialState = {
   cardAlias: "",
 };
 
-export const setCardNumber = (payload: ISetCardNumberPayload) => ({
+export const setCardNumber = <T extends unknown>(payload: T) => ({
   type: CARD_NUMBER,
   payload,
 });
 
-export const setExpireDate = (payload: ISetExpireDatePayload) => ({
+export const setExpireDate = <T extends unknown>(payload: T) => ({
   type: EXPIRE_DATE,
   payload,
 });
 
-export const setHolderName = (payload: ISetHolderNamePayload) => ({
+export const setHolderName = <T extends unknown>(payload: T) => ({
   type: HOLDER_NAME,
   payload,
 });
 
-export const setSecurityCode = (payload: ISetSecurityCodePayload) => ({
+export const setSecurityCode = <T extends unknown>(payload: T) => ({
   type: SECURITY_CODE,
   payload,
 });
 
-export const setPassword = (payload: ISetPasswordPayload) => ({
+export const setPassword = <T extends unknown>(payload: T) => ({
   type: PASSWORD,
   payload,
 });
 
-export const setCardAlias = (payload: ISetCardAliasPayload) => ({
+export const setCardAlias = <T extends unknown>(payload: T) => ({
   type: CARD_ALIAS,
   payload,
 });
@@ -94,7 +67,7 @@ export const reducer = (state = initialState, action: any): IInitialState => {
         ...state,
         cardNumber: {
           ...state.cardNumber,
-          [action.payload.cardNumberOrder]: action.payload.value,
+          [action.payload.type]: action.payload.value,
         },
       };
 
@@ -103,7 +76,7 @@ export const reducer = (state = initialState, action: any): IInitialState => {
         ...state,
         expireDate: {
           ...state.expireDate,
-          [action.payload.dateType]: action.payload.value,
+          [action.payload.type]: action.payload.value,
         },
       };
 
@@ -124,7 +97,7 @@ export const reducer = (state = initialState, action: any): IInitialState => {
         ...state,
         password: {
           ...state.password,
-          [action.payload.passwordOrder]: action.payload.value,
+          [action.payload.type]: action.payload.value,
         },
       };
 

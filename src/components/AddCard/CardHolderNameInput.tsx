@@ -1,13 +1,10 @@
-import { ChangeEvent, useContext } from "react";
-import { CardInfoContext } from "../../contexts/CardInfoContext";
 import styled from "styled-components";
-
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
-
 import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
 import { isInValidHolderName } from "../../validators/validator";
 import { setHolderName } from "../../reducer/cardReducer";
+import useUpdateHandler from "../../hooks/useUpdateHandler";
 
 interface IInputCounter {
   currLength: number;
@@ -38,18 +35,18 @@ export function InputCounter({
   );
 }
 
-export default function CardHolderNameInput() {
-  const {
-    state: { holderName },
+export default function CardHolderNameInput({
+  holderName,
+  dispatch,
+}: {
+  holderName: string;
+  dispatch: (value: any) => void;
+}) {
+  const { updateHandler } = useUpdateHandler(
     dispatch,
-  } = useContext(CardInfoContext);
-
-  const handleHolderNameUpdate = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    if (isInValidHolderName(value)) return;
-
-    dispatch(setHolderName({ value }));
-  };
+    setHolderName,
+    isInValidHolderName
+  );
 
   return (
     <InputField
@@ -75,7 +72,7 @@ export default function CardHolderNameInput() {
         width={"100%"}
         textAlign={"left"}
         maxLength={CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH}
-        onChange={handleHolderNameUpdate}
+        onChange={updateHandler}
         isComplete={holderName !== ""}
       />
     </InputField>

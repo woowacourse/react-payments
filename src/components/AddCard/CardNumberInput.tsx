@@ -1,32 +1,30 @@
-import { ChangeEvent, Fragment, useContext } from "react";
-import { CardInfoContext } from "../../contexts/CardInfoContext";
+import { Fragment } from "react";
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
 import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
 import { setCardNumber } from "../../reducer/cardReducer";
 import { isInValidCardNumber } from "../../validators/validator";
+import { ICardNumberState } from "../../types/cardInfoState";
+import useUpdateHandler from "../../hooks/useUpdateHandler";
 
-export default function CardNumberInput() {
-  const {
-    state: { cardNumber },
+export default function CardNumberInput({
+  cardNumber,
+  dispatch,
+}: {
+  cardNumber: ICardNumberState;
+  dispatch: (value: any) => void;
+}) {
+  const { updateHandler } = useUpdateHandler(
     dispatch,
-  } = useContext(CardInfoContext);
+    setCardNumber,
+    isInValidCardNumber
+  );
 
   const cardNumberList = Object.entries(cardNumber);
   const cardNumberLength = cardNumberList.reduce(
     (sum, currentCardNumber) => currentCardNumber[1].length + sum,
     0
   );
-
-  const handleCardNumberUpdate = (
-    event: ChangeEvent<HTMLInputElement>,
-    cardNumberOrder: string
-  ) => {
-    const { value } = event.target;
-    if (isInValidCardNumber(value)) return;
-
-    dispatch(setCardNumber({ value, cardNumberOrder }));
-  };
 
   return (
     <InputField
@@ -60,7 +58,7 @@ export default function CardNumberInput() {
               maxLength={CARD_INFO_RULES.NUMBER_UNIT_LENGTH}
               autoFocus={cardNumberKey === "firstCardNumber"}
               required
-              onChange={(e) => handleCardNumberUpdate(e, cardNumberKey)}
+              onChange={(e) => updateHandler(e, cardNumberKey)}
               isComplete={
                 cardNumberValue.length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
               }

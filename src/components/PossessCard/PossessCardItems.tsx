@@ -19,11 +19,11 @@ const smallCardCss__marginBottom10px = {
   cardNumberMarginBottom: "12px",
 };
 
-export default function PossessCardItems() {
-  const cardInfoItems: [] | IInitialState[] = JSON.parse(
-    localStorage.getItem("cardInfo") || "[]"
-  );
-
+export default function PossessCardItems({
+  cardInfoItems,
+}: {
+  cardInfoItems: [] | IInitialState[];
+}) {
   return (
     <>
       {cardInfoItems.map((cardInfoItem, index) => (

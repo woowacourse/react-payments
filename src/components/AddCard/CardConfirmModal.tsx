@@ -1,7 +1,8 @@
-import { ChangeEvent, useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
 import { GUIDE_MESSAGE } from "../../constants/constants";
 import { CardInfoContext } from "../../contexts/CardInfoContext";
+import useUpdateHandler from "../../hooks/useUpdateHandler";
 import { setCardAlias } from "../../reducer/cardReducer";
 import { isInvalidCardAlias } from "../../validators/validator";
 import PageHeader from "../PageHeader";
@@ -43,13 +44,11 @@ const StyledCardAliasGuideMessage = styled.p`
 export default function CardConfirmModal() {
   const { state, dispatch } = useContext(CardInfoContext);
   const { cardNumber, holderName, expireDate, cardAlias } = state;
-
-  const handleCardAliasUpdate = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    if (isInvalidCardAlias(value)) return;
-
-    dispatch(setCardAlias({ value }));
-  };
+  const { updateHandler } = useUpdateHandler(
+    dispatch,
+    setCardAlias,
+    isInvalidCardAlias
+  );
 
   return (
     <>
@@ -73,7 +72,7 @@ export default function CardConfirmModal() {
           name={"cardAlias"}
           className={"cardAlias"}
           value={cardAlias}
-          onChange={handleCardAliasUpdate}
+          onChange={updateHandler}
           width={"244px"}
           required
           borderBottom={"1px solid #8b8b8b"}

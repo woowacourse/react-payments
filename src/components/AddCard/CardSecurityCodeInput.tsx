@@ -1,5 +1,4 @@
-import { ChangeEvent, useContext, useState } from "react";
-import { CardInfoContext } from "../../contexts/CardInfoContext";
+import { useState } from "react";
 import styled from "styled-components";
 import HelpIconImage from "../../assets/images/questionMark.svg";
 import Input from "../UIComponents/Input/Input";
@@ -11,6 +10,7 @@ import {
   CREATE_MASKED_CHARACTERS,
   GUIDE_MESSAGE,
 } from "../../constants/constants";
+import useUpdateHandler from "../../hooks/useUpdateHandler";
 
 const StyledIconContainer = styled.div`
   position: relative;
@@ -61,21 +61,18 @@ export function HelpIcon({ description }: { description: string }) {
   );
 }
 
-export default function CardSecurityCodeInput() {
-  const {
-    state: { securityCode },
+export default function CardSecurityCodeInput({
+  securityCode,
+  dispatch,
+}: {
+  securityCode: string;
+  dispatch: (value: any) => void;
+}) {
+  const { updateHandler } = useUpdateHandler(
     dispatch,
-  } = useContext(CardInfoContext);
-
-  const handleSecurityCodeUpdate = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    if (Number.isNaN(value) || isInvalidSecurityCode(value)) {
-      event.preventDefault();
-      return;
-    }
-
-    dispatch(setSecurityCode({ value }));
-  };
+    setSecurityCode,
+    isInvalidSecurityCode
+  );
 
   return (
     <InputField
@@ -95,7 +92,7 @@ export default function CardSecurityCodeInput() {
         width={"100%"}
         maxLength={CARD_INFO_RULES.SECURITY_CODE_LENGTH}
         required
-        onChange={(e) => handleSecurityCodeUpdate(e)}
+        onChange={(e) => updateHandler(e)}
         isComplete={
           securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
         }

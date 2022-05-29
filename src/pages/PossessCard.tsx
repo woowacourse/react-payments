@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import addIcon from "../assets/images/addIcon.svg";
-
 import PageHeader from "../components/PageHeader";
 import { PossessCardItems } from "../components/PossessCard";
 import Button from "../components/UIComponents/Button/Button";
-
 import { ROUTES } from "../constants/constants";
+import { IInitialState } from "../types/cardInfoState";
 
 const StyledPossessCardContainer = styled.div`
   display: flex;
@@ -33,11 +32,14 @@ const StyledButtonWrapper = styled.div`
 `;
 
 export default function PossessCard() {
+  const cardInfoItems: [] | IInitialState[] = JSON.parse(
+    localStorage.getItem("cardInfo") || "[]"
+  );
   return (
     <>
       <PageHeader>보유 카드</PageHeader>
       <StyledPossessCardContainer>
-        <PossessCardItems />
+        <PossessCardItems cardInfoItems={cardInfoItems} />
         <Link to={ROUTES.ADD_CARD}>
           <StyledButtonWrapper>
             <Button type={"button"} position={"static"} isSvg={true}>
