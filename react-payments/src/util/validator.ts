@@ -3,7 +3,6 @@ import {
   CardData,
   CardNumber,
   CardPassword,
-  CardType,
   ExpireDate,
   SecurityCode,
 } from "../types";
@@ -31,7 +30,7 @@ export const isInValidCardNumber = (cardNumber: CardNumber) =>
     (number) => number.length !== MAX_LENGTH.CARD_NUMBER
   );
 
-export const isInValidCardType = ({ cardType }: Pick<CardType, "cardType">) =>
+export const isInValidCardType = (cardType: string) =>
   cardType === "defaultCard";
 
 export const isInValidSecurityCode = (securityCode: SecurityCode) =>
@@ -61,7 +60,7 @@ export const isAllInputReady = ({
   );
 };
 
-export const isInValidCardName = ({ cardName }: Pick<CardType, "cardName">) =>
+export const isInValidCardName = (cardName: string) =>
   cardName.length === 0 || cardName.length > MAX_LENGTH.CARD_NAME;
 
 export const isDuplicatedCardName = (
