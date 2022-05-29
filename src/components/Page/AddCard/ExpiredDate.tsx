@@ -3,13 +3,21 @@ import PropTypes from 'prop-types';
 import FieldSet from 'components/FieldSet';
 import ExpiredDateInput from 'components/Input/ExpiredDateInput';
 
+type ExpiredDateProps = {
+  expiredMonth: string;
+  expiredYear: string;
+  onChangeExpiredMonth: Function;
+  onChangeExpiredYear: Function;
+  isError: boolean;
+};
+
 const ExpiredDate = ({
   expiredMonth,
   expiredYear,
   onChangeExpiredMonth,
   onChangeExpiredYear,
   isError,
-}) => {
+}: ExpiredDateProps) => {
   return (
     <FieldSet
       id="expiredNumber"

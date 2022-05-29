@@ -19,12 +19,18 @@ const MaxNumberIndicator = styled.span`
   right: 20px;
 `;
 
-const showOwnerNameLength = (ownerName) => {
+const showOwnerNameLength = (ownerName: string): string => {
   const ownerNameLength = String(ownerName.length);
   return `${ownerNameLength.padStart(2, '0')}/30`;
 };
 
-const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
+type CardOwnerNameProps = {
+  ownerName: string;
+  onChangeOwnerName: Function;
+  isError: boolean;
+};
+
+const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }: CardOwnerNameProps) => {
   return (
     <CardOwnerContainer>
       <MaxNumberIndicator>{showOwnerNameLength(ownerName)}</MaxNumberIndicator>
@@ -41,7 +47,7 @@ const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
           maxLength={30}
           value={ownerName}
           onChange={onChangeOwnerName}
-          data-testid="card-owner-name"
+          // data-testid="card-owner-name"
         />
       </FieldSet>
     </CardOwnerContainer>

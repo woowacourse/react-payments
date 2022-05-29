@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { useCardListStore } from 'contexts/index';
 import useInputValue from 'hooks/useInputValue';
-import { checkCardNickName } from 'validation';
+import { checkCardNickName } from 'validation/index';
 
 import NextButton from 'components/Button';
 import Card from 'components/Card';

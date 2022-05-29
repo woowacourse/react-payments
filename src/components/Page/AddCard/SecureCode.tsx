@@ -13,7 +13,13 @@ const SecureCodeInputContainer = styled.div`
   align-items: center;
 `;
 
-const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
+type SecureCodeProps = {
+  secureCode: String;
+  onChangeSecureCode: Function;
+  isError: boolean;
+};
+
+const SecureCode = ({ secureCode, onChangeSecureCode, isError }: SecureCodeProps) => {
   return (
     <FieldSet
       id="secureCode"
@@ -29,7 +35,7 @@ const SecureCode = ({ secureCode, onChangeSecureCode, isError }) => {
           maxLength={3}
           value={secureCode}
           onChange={onChangeSecureCode}
-          data-testid="secure-code"
+          // data-testid="secure-code"
         />
         <Tooltip />
       </SecureCodeInputContainer>

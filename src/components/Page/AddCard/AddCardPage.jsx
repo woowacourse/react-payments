@@ -12,7 +12,7 @@ import {
   checkSecureCode,
   checkPassword,
   checkCardNumber,
-} from 'validation';
+} from 'validation/index';
 
 import Card from 'components/Card';
 import Palette from 'components/Palette';
@@ -177,16 +177,19 @@ const AddCardPage = () => {
         onChangeExpiredMonth={onChangeExpiredMonth}
         onChangeExpiredYear={onChangeExpiredYear}
         isError={isExpiredMonthError || isExpiredYearError}
+        data-testid="expired-date"
       />
       <CardOwnerName
         ownerName={ownerName}
         onChangeOwnerName={onChangeOwnerName}
         isError={isOwnerNameError}
+        data-testid="card-owner-name"
       />
       <SecureCode
         secureCode={secureCode}
         onChangeSecureCode={onChangeSecureCode}
         isError={isSecureCodeError}
+        data-testid="secure-code"
       />
       <Password
         firstPassword={firstPassword}
@@ -194,6 +197,7 @@ const AddCardPage = () => {
         secondPassword={secondPassword}
         onChangeSecondPassword={onChangeSecondPassword}
         isError={isFirstPasswordError || isSecondPasswordError}
+        data-testid="password"
       />
       {isValidatedForm && isValidatedValueLength && (
         <NextButtonWrapper>

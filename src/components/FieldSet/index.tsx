@@ -18,7 +18,15 @@ const FieldSetContainer = styled.fieldset`
   }
 `;
 
-const FieldSet = ({ id, description, children, errorMessage, isError }) => {
+type FiledSetProps = {
+  id: any;
+  description: String;
+  children: any;
+  errorMessage: String;
+  isError: boolean;
+};
+
+const FieldSet = ({ id, description, children, errorMessage, isError }: FiledSetProps) => {
   return (
     <FieldSetContainer>
       <Label id={id} description={description} />

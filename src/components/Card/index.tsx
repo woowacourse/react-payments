@@ -12,7 +12,25 @@ const CardContainer = styled.div`
   margin: 10px 0;
 `;
 
-const Card = ({ name, cardType, expiredMonth, expiredYear, cardNumbers, onClick, size }) => {
+type CardProps = {
+  name: String;
+  cardType: any;
+  expiredMonth: String;
+  expiredYear: String;
+  cardNumbers: Array<String>;
+  onClick: Function;
+  size: String;
+};
+
+const Card = ({
+  name,
+  cardType,
+  expiredMonth,
+  expiredYear,
+  cardNumbers,
+  onClick,
+  size,
+}: CardProps) => {
   return (
     <CardContainer onClick={onClick}>
       <EmptyCard

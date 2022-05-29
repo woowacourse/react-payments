@@ -6,6 +6,7 @@ JavaScript => TypeScript 마이그레이션
 - [x] validation
 - [x] hooks
 - [x] mock
+- [x] react component
 
 # 2단계 요구사항
 

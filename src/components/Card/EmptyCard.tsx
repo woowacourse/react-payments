@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { ColorType } from 'constant';
+import { ColorType } from 'constant/index';
 
 const CardScaleType = {
   small: {
@@ -68,7 +68,7 @@ const CardChip = styled.div`
   border-radius: 4px;
 `;
 
-const CardNumbers = styled.div`
+const CardNumbersBox = styled.div`
   display: flex;
   position: absolute;
   font-size: ${(props) => CardScaleType[props.size].fontSize}px;
@@ -124,7 +124,23 @@ const CardExpiredDateContainer = styled.span`
   font-weight: 400;
 `;
 
-const EmptyCard = ({ name, cardType, expiredMonth, expiredYear, cardNumbers, size }) => {
+type EmptyCardProps = {
+  name: String;
+  cardType: any;
+  expiredMonth: String;
+  expiredYear: String;
+  cardNumbers: Array<String>;
+  size: String;
+};
+
+const EmptyCard = ({
+  name,
+  cardType,
+  expiredMonth,
+  expiredYear,
+  cardNumbers,
+  size,
+}: EmptyCardProps) => {
   return (
     <EmptyCardWrapper color={cardType.color} size={size}>
       <CardTop>
@@ -132,7 +148,7 @@ const EmptyCard = ({ name, cardType, expiredMonth, expiredYear, cardNumbers, siz
       </CardTop>
       <CardMiddle>
         <CardChip />
-        <CardNumbers size={size}>
+        <CardNumbersBox size={size}>
           {cardNumbers[0] && <span>{cardNumbers[0]}</span>}
           {cardNumbers[1] && <span>{cardNumbers[1]}</span>}
           {cardNumbers[2] && (
@@ -141,7 +157,7 @@ const EmptyCard = ({ name, cardType, expiredMonth, expiredYear, cardNumbers, siz
           {cardNumbers[3] && (
             <span>{Array.from({ length: cardNumbers[3].length }).map((_, index) => '•')}</span>
           )}
-        </CardNumbers>
+        </CardNumbersBox>
       </CardMiddle>
       <CardBottom>
         <CardBottomInfo>
@@ -157,8 +173,8 @@ const EmptyCard = ({ name, cardType, expiredMonth, expiredYear, cardNumbers, siz
 };
 
 EmptyCard.propTypes = {
-  cardInfo: PropTypes.object,
   name: PropTypes.string,
+  cardType: PropTypes.object,
   expiredMonth: PropTypes.string,
   expiredYear: PropTypes.string,
   cardNumbers: PropTypes.array,

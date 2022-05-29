@@ -11,13 +11,21 @@ const PasswordInputContainer = styled.div`
   gap: 10px;
 `;
 
+type PasswordProps = {
+  firstPassword: string;
+  secondPassword: string;
+  onChangeFirstPassword: Function;
+  onChangeSecondPassword: Function;
+  isError: boolean;
+};
+
 const Password = ({
   firstPassword,
   secondPassword,
   onChangeFirstPassword,
   onChangeSecondPassword,
   isError,
-}) => {
+}: PasswordProps) => {
   return (
     <FieldSet
       id="password"
@@ -33,7 +41,7 @@ const Password = ({
           maxLength={1}
           value={firstPassword}
           onChange={onChangeFirstPassword}
-          data-testid="first-password"
+          // data-testid="first-password"
         />
         <Input
           type="password"
@@ -42,7 +50,7 @@ const Password = ({
           maxLength={1}
           value={secondPassword}
           onChange={onChangeSecondPassword}
-          data-testid="second-password"
+          // data-testid="second-password"
         />
         <DotMark />
         <DotMark />

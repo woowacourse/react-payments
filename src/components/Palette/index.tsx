@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Selector from 'components/Palette/Selector';
-import { cardInfoList } from 'constant';
+import { cardInfoList } from 'constant/index';
 
 const Container = styled.div`
   position: absolute;
@@ -42,7 +42,12 @@ const SelectorContainer = styled.div`
   }
 `;
 
-const Palette = ({ onClickCardSelector, isModalOpened }) => {
+type PaletteProps = {
+  onClickCardSelector: Function;
+  isModalOpened: boolean;
+};
+
+const Palette = ({ onClickCardSelector, isModalOpened }: PaletteProps) => {
   return (
     <Container className={isModalOpened ? 'is-active' : ''}>
       <SelectorContainer>

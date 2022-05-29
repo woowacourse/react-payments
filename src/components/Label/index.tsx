@@ -7,7 +7,12 @@ const LabelWrapper = styled.label`
   font-size: 12px;
 `;
 
-const Label = ({ id, description }) => {
+type LabelProps = {
+  id: Number;
+  description: String;
+};
+
+const Label = ({ id, description }: LabelProps) => {
   return <LabelWrapper htmlFor={id}>{description}</LabelWrapper>;
 };
 
