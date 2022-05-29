@@ -11,7 +11,7 @@ function Modal({ state, handleClose, handleHidden, children }) {
     handleHidden();
   };
 
-  const render = (
+  const ModalContainer = (
     <Container className={state} onClick={handleClose} onAnimationEnd={onAnimationEnd}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         {children}
@@ -19,8 +19,8 @@ function Modal({ state, handleClose, handleHidden, children }) {
     </Container>
   );
 
-  const modalContainer = document.getElementById('root');
-  return reactDom.createPortal(render, modalContainer);
+  const $root = document.getElementById('root');
+  return reactDom.createPortal(ModalContainer, $root);
 }
 
 Modal.defaultProps = {
