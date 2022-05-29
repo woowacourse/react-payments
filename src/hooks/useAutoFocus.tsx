@@ -1,9 +1,13 @@
 import { useRef } from 'react'
 
-const useAutoFocus = ({ maxLength }) => {
-  const refList = useRef([])
+interface useAutoFocusType {
+  maxLength: number[]
+}
 
-  const moveToNextInput = (target) => {
+const useAutoFocus = ({ maxLength }: useAutoFocusType) => {
+  const refList = useRef<Array<HTMLInputElement>>([])
+
+  const moveToNextInput = (target: HTMLInputElement) => {
     const curIndex = refList.current.indexOf(target)
     if (target.value.length < maxLength[curIndex]) return
 
