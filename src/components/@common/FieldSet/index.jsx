@@ -4,25 +4,21 @@ import PropTypes from 'prop-types';
 import { getIndexFromSameTag, setFocusSameTagByIndex } from 'utils';
 import { Container, InputTitle, InputContainer, ErrorMessage } from './styles';
 
-function FieldSet({ title, errorMessage, inputWidth, nextFocusLength, children }) {
+function FieldSet({ title, errorMessage, inputWidth, children }) {
   const inputContainer = useRef();
 
   const handleTextFieldAutoFocus = ({ target }) => {
-    const { value, tagName } = target;
+    const { value, tagName, maxLength } = target;
     const textFieldLength = value.length;
 
-    if (
-      !nextFocusLength ||
-      tagName !== 'INPUT' ||
-      (textFieldLength > 0 && textFieldLength < nextFocusLength)
-    ) {
+    if (!maxLength || tagName !== 'INPUT' || (textFieldLength > 0 && textFieldLength < maxLength)) {
       return;
     }
 
     const currentIndex = getIndexFromSameTag(inputContainer.current, target);
     const targetIndex =
       (value.length === 0 && currentIndex - 1) ||
-      (value.length === nextFocusLength && currentIndex + 1) ||
+      (value.length === maxLength && currentIndex + 1) ||
       0;
 
     setFocusSameTagByIndex(target, targetIndex);
@@ -47,14 +43,12 @@ FieldSet.defaultProps = {
   title: '',
   errorMessage: '',
   inputWidth: 100,
-  nextFocusLength: 0,
 };
 
 FieldSet.propTypes = {
   title: PropTypes.string,
   errorMessage: PropTypes.string,
   inputWidth: PropTypes.number,
-  nextFocusLength: PropTypes.number,
 };
 
 export default FieldSet;
