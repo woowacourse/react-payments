@@ -25,7 +25,7 @@ export interface CardData {
   cardName?: string;
   companyId: number;
   cardNumber: [number];
-  expireMount: number;
+  expireMonth: number;
   expireYear: number;
   userName: string;
   securityCode: number;
