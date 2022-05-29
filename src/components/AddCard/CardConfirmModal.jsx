@@ -11,7 +11,7 @@ import { setCardAlias, setInitialState } from "../../reducer/cardReducer";
 import { isInvalidCardAlias } from "../../validators/validator.ts";
 
 import PageHeader from "../PageHeader";
-import Button from "../UIComponents/Button/Button";
+import Button from "../UIComponents/Button/Button.tsx";
 import CardPreview from "../UIComponents/CardPreview/CardPreview";
 import Input from "../UIComponents/Input/Input";
 
@@ -89,9 +89,11 @@ export default function CardConfirmModal() {
         />
         <Input
           name={"cardAlias"}
+          className={"cardAlias"}
           value={cardAlias}
           onChange={handleCardAliasUpdate}
           width={"244px"}
+          required
           borderBottom={"1px solid #8b8b8b"}
         />
         {cardAlias.length > 0 ? (

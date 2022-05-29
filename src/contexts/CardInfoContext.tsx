@@ -1,7 +1,28 @@
-import React, { createContext, useReducer } from "react";
+import { createContext, useReducer } from "react";
 import { initialState, reducer } from "../reducer/cardReducer";
 
-const CardInfoContext = createContext({});
+const CardInfoContext = createContext({
+  state: {
+    cardNumber: {
+      firstCardNumber: "",
+      secondCardNumber: "",
+      thirdCardNumber: "",
+      fourthCardNumber: "",
+    },
+    expireDate: {
+      month: "",
+      year: "",
+    },
+    holderName: "",
+    securityCode: "",
+    password: {
+      firstPassword: "",
+      secondPassword: "",
+    },
+    cardAlias: "",
+  },
+  dispatch: (value: any) => {},
+});
 
 const CardInfoProvider = ({
   children,
