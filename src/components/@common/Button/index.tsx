@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
+import { ButtonProps } from '@/types/commonComponents';
 
-function Button({ className, isDisabled, onClick, children }) {
+function Button({ className, isDisabled, onClick, children }: ButtonProps) {
   return (
     <button type="button" className={className} onClick={onClick} disabled={isDisabled}>
       {children}
