@@ -1,18 +1,23 @@
 import PropTypes from 'prop-types';
 import useInputAutoFocus from 'hooks/useInputAutoFocus';
 import { isObject } from 'utils';
+import { useContext } from 'react';
+import { CardInfoContext } from 'context/cardInfoProvider';
 
 const FormInput = ({
   className,
   type,
   inputTitle,
   inputInfoList,
-  inputValue,
-  theme,
+
   maxLength,
   handleChange,
   children,
 }) => {
+  const { cardInfo } = useContext(CardInfoContext);
+  const inputValue = cardInfo[type];
+  const theme = cardInfo['theme'];
+
   const { inputRefList, autoFocusForward } = useInputAutoFocus({
     maxLength,
   });

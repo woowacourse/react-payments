@@ -3,9 +3,10 @@ import Button from 'components/common/Button';
 import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants';
 import useToggle from 'hooks/useToggle';
 
-const CardPreview = ({ cardInfo, handleModal, isVisibleButton }) => {
+const CardPreview = ({ cardInfo, handleModal, isVisibleButton, theme }) => {
   const [isCardFront, handleCardPosition] = useToggle(true);
-  const { cardNumber, ownerName, expiryDate, company, theme, privacyCode } = cardInfo;
+
+  const { cardNumber, ownerName, expiryDate, company, privacyCode } = cardInfo;
   const { first, second, third, fourth } = cardNumber;
 
   const upperCaseOwnerName = ownerName.toUpperCase() || DEFAULT_CARD_INFO.OWNER_NAME;
