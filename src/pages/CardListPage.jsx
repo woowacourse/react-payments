@@ -1,4 +1,4 @@
-import Header from '../components/Header/Header';
+import Header from '../components/Header/Header.tsx';
 import PageTitle from 'components/common/PageTitle/PageTitle';
 import CardList from 'components/CardList/CardList';
 

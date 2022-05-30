@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { CardInfoContext } from 'CardInfoContextProvider';
 
-import Header from '../components/Header/Header';
+import Header from '../components/Header/Header.tsx';
 import Card from 'components/common/Card/Card';
 import PageTitle from 'components/common/PageTitle/PageTitle';
 import Button from 'components/common/Button/Button';
