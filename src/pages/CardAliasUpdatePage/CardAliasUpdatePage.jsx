@@ -6,8 +6,6 @@ import CardPreview from '../../components/CardPreview/CardPreview';
 import Content from '../../components/Layout/Content/Content';
 import CardsContext from '../../contexts/CardsContext';
 
-import { convertFormDataToObject } from '../../utils/commons';
-
 const CardAliasUpdatePage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -18,7 +16,7 @@ const CardAliasUpdatePage = () => {
     const alias = formData.get('alias').trim();
 
     if (alias !== '') {
-      const cardInfo = convertFormDataToObject(formData);
+      const cardInfo = Object.fromEntries(formData);
 
       updateCard(state.id, cardInfo);
     }

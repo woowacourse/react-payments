@@ -10,7 +10,6 @@ import Input from '../Input/Input';
 import ToolTip from '../ToolTip/ToolTip';
 import Footer from '../Layout/Footer/Footer';
 import SubmitButton from '../SubmitButton/SubmitButton';
-import { convertFormDataToObject } from '../../utils/commons';
 import CardsContext from '../../contexts/CardsContext';
 
 const CardForm = () => {
@@ -37,7 +36,7 @@ const CardForm = () => {
     formData.set('owner', formData.get('owner').trim().toUpperCase());
     formData.set('alias', '새 카드');
 
-    const cardInfo = convertFormDataToObject(formData);
+    const cardInfo = Object.fromEntries(formData);
     const newCard = addCard(cardInfo);
 
     navigate('/confirm', { state: newCard });
