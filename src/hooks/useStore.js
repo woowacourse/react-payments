@@ -7,9 +7,7 @@ const useStore = () => {
 
   useEffect(() => {
     const savedCardList = store.load() || [];
-    const safeCardInfoList = savedCardList.map((card) =>
-      removeCrucialCardInfo(card)
-    );
+    const safeCardInfoList = savedCardList.map(removeCrucialCardInfo);
 
     setCardList(safeCardInfoList);
   }, []);
