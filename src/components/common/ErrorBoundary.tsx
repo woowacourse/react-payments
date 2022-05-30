@@ -20,7 +20,7 @@ const initialState: State = {
 };
 
 class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryProps>, State> {
-  public state: State = {
+  state: State = {
     hasError: false,
     error: null,
   };
@@ -30,11 +30,11 @@ class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryProps>, Sta
     this.setState(initialState);
   }
 
-  public static getDerivedStateFromError(error: Error): State {
+  static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
   }
 
-  public render() {
+  render() {
     const { Fallback } = this.props;
 
     if (this.state.hasError) {
