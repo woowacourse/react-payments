@@ -1,0 +1,27 @@
+.arrow {
+  display: inline-block;
+  content: "";
+  width: 15px;
+  height: 15px;
+  border-top: 2px solid #000;
+  border-right: 2px solid #000;
+  transform: rotate(225deg) translateY(-3px);
+  margin: 0 6px 0 6px;
+  cursor: pointer;
+}
+
+.page-header {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 28px;
+}
+
+.page-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 12px;
+  color: #383838;
+}

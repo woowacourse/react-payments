@@ -1,0 +1,52 @@
+@import "./card";
+@import "./input";
+@import "./button";
+@import "./modal";
+@import "./utils";
+@import "./header";
+@import "./confirm";
+@import "./cardList";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e5e5;
+  font-family: "Roboto";
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+input {
+  font-size: 16px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#root {
+  background-color: #fff;
+  width: 375px;
+  min-width: 375px;
+  height: 700px;
+  position: absolute;
+  border-radius: 15px;
+}
+
+.App {
+  height: 100%;
+  padding: 16px 24px;
+}
