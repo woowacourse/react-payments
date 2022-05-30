@@ -36,6 +36,12 @@ const LIMIT_LENGTH = {
   NICKNAME: 10,
 };
 
+const PATH = {
+  REACT_PAYMENTS: '/react-payments',
+  CARD_ADD: '/card-add',
+  CARD_ADD_SUCCESS: '/card-add-success',
+};
+
 const CVC_DESCRIPTION = '카드 뒷면에 있는 3자리 숫자를 입력해주세요.';
 
-export { ERROR_MESSAGE, MONTH, LIMIT_LENGTH, CVC_DESCRIPTION, ACTION };
+export { ERROR_MESSAGE, MONTH, LIMIT_LENGTH, CVC_DESCRIPTION, ACTION, PATH };
