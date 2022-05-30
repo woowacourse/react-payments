@@ -6,7 +6,7 @@ import { IInitialState } from "../types/cardInfoState";
 import useBackButtonHandler from "../hooks/useBackButtonHandler";
 import CardPreview from "../components/UIComponents/CardPreview/CardPreview";
 import Button from "../components/UIComponents/Button/Button";
-import CardConfirmModal from "../components/AddCard/CardConfirmModal";
+import CardConfirmModal from "../components/Modal/CardConfirmModal";
 import PageHeader from "../components/PageHeader";
 import {
   CardHolderNameInput,

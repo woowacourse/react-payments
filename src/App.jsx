@@ -1,10 +1,8 @@
 import GlobalStyle from "./globalStyles";
 import { Routes, Route } from "react-router-dom";
-
 import { CardInfoProvider } from "./contexts/CardInfoContext";
 import PossessCard from "./pages/PossessCard";
 import AddCard from "./pages/AddCard";
-
 import { ROUTES } from "./constants/constants";
 
 function App() {
