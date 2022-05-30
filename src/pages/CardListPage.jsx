@@ -1,6 +1,6 @@
-import Header from '../components/Header/Header.tsx';
-import PageTitle from 'components/common/PageTitle/PageTitle';
-import CardList from 'components/CardList/CardList';
+import Header from '../components/Header/index.tsx';
+import PageTitle from 'components/common/PageTitle';
+import CardList from 'components/CardList';
 
 function CardListPage() {
   return (

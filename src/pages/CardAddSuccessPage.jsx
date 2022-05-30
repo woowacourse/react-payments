@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import { CardInfoContext } from 'CardInfoContextProvider';
 
-import Button from 'components/common/Button/Button';
-import Card from 'components/common/Card/Card';
-import CardNameInputForm from 'components/CardNameInputForm/CardNameInputForm';
-import NoticeMessage from 'components/common/NoticeMessage/NoticeMessage';
-import CardNickname from 'components/CardNickname/CardNickname';
+import Button from 'components/common/Button';
+import Card from 'components/common/Card';
+import CardNameInputForm from 'components/CardNameInputForm';
+import NoticeMessage from 'components/common/NoticeMessage';
+import CardNickname from 'components/CardNickname';
 
 function CardAddSuccessPage() {
   const { state } = useContext(CardInfoContext);

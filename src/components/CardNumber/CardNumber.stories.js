@@ -1,4 +1,4 @@
-import CardNumber from './CardNumber';
+import CardNumber from '.';
 import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {

@@ -1,4 +1,4 @@
-import CardPassword from './CardPassword';
+import CardPassword from '.';
 import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {

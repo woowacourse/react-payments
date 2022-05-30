@@ -1,4 +1,4 @@
-import CVC from './CVC';
+import CVC from '.';
 import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {

@@ -1,4 +1,4 @@
-import CardExpirationDate from './CardExpirationDate';
+import CardExpirationDate from '.';
 import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {

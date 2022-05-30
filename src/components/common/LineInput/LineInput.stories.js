@@ -1,4 +1,4 @@
-import LineInput from './LineInput';
+import LineInput from '.';
 import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {

@@ -1,4 +1,4 @@
-import CardNickname from './CardNickname';
+import CardNickname from '.';
 import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {

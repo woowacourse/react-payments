@@ -1,4 +1,4 @@
-import CardOwner from './CardOwner';
+import CardOwner from '.';
 import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {

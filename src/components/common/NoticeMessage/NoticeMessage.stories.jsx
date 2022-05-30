@@ -1,4 +1,4 @@
-import NoticeMessage from './NoticeMessage';
+import NoticeMessage from '.';
 import CardInfoContextProvider from 'CardInfoContextProvider';
 
 export default {
