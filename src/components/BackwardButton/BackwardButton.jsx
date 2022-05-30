@@ -1,13 +1,12 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import ICONS from '../../constants/icons';
+import * as S from './BackwardButton.styled';
 
 const BackwardButton = ({ children, ...rest }) => {
   const navigate = useNavigate();
 
   return (
-    <StyledButton
+    <S.Button
       {...rest}
       type="button"
       onClick={() => {
@@ -15,20 +14,8 @@ const BackwardButton = ({ children, ...rest }) => {
       }}
     >
       {ICONS.BACKWARD}
-    </StyledButton>
+    </S.Button>
   );
 };
-
-const StyledButton = styled.button`
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-
-  color: #383838;
-`;
 
 export default BackwardButton;

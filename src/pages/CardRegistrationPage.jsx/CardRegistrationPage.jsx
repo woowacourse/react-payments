@@ -1,4 +1,3 @@
-import React from 'react';
 import BackwardButton from '../../components/BackwardButton/BackwardButton';
 import CardForm from '../../components/CardForm/CardForm';
 import Content from '../../components/Layout/Content/Content';
