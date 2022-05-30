@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useCardList } from '../hooks/useCardList';
 import Landing from '../pages';
@@ -15,7 +14,7 @@ function App() {
     <div className="root">
       <BrowserRouter>
         <Routes>
-          <Route path={ROUTE.home.route} element={<Landing />} />
+          <Route path={ROUTE.home.route} element={<Landing cardList={cardList} />} />
 
           <Route
             path={ROUTE.addCard.route}

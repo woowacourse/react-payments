@@ -1,5 +1,5 @@
 export const ROUTE = {
-  home: { pageTitle: '홈 화면', route: '/' },
+  home: { pageTitle: '결제 화면', route: '/' },
   cardList: { pageTitle: '보유 카드', route: '/cardlist' },
   addCard: { pageTitle: '카드 추가', route: '/cardlist/add' },
   editCard: { pageTitle: '카드 수정', route: '/cardlist/edit' },

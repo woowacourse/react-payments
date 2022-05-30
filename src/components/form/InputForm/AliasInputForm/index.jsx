@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormComplete } from '../../../../hooks/useFormComplete.ts';
 import Position from '../../../commons/Position';
@@ -17,7 +17,7 @@ function AliasInputForm({ card, cardListDispatch }) {
     e.preventDefault();
 
     cardListDispatch({ type: 'CHANGE_ALIAS', payload: { alias, id: card.id } });
-    navigate(ROUTE.cardList.route, { replace: true });
+    navigate(ROUTE.home.route, { replace: true });
   };
 
   const onChangeInput = (e) => {
