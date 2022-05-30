@@ -4,7 +4,7 @@ const ERROR_MESSAGE = {
   YEAR: '만료년도가 잘못 입력되었습니다. 만료년도는 현재년도 이후로 입력해주세요.',
   MONTH_AND_YEAR: '만료일이 잘못 입력되었습니다. 만료일은 현재 날짜 이후로 입력해주세요.',
   CVC: '보안코드가 잘못 입력되었습니다. 보안코드는 3자리로 입력해주세요.',
-};
+} as const;
 
 const MONTH = {
   JANUARY: 1,
@@ -12,7 +12,7 @@ const MONTH = {
   FEBRUARY: 2,
   SEPTEMBER: 9,
   LEADING_ZERO: '0',
-};
+} as const;
 
 const LIMIT_LENGTH = {
   EXPIRATION_DATE: 2,
@@ -20,14 +20,14 @@ const LIMIT_LENGTH = {
   CARD_OWNER: 30,
   CARD_PASSWORD: 1,
   CVC: 3,
-};
+} as const;
 
 const PAGES = {
   LIST: 'listPage',
   ADD: 'addPage',
   NAME: 'namePage',
-};
+} as const;
 
-const CVC_DESCRIPTION = '카드 뒷면에 있는 3자리 숫자를 입력해주세요.';
+const CVC_DESCRIPTION = '카드 뒷면에 있는 3자리 숫자를 입력해주세요.' as const;
 
 export { ERROR_MESSAGE, MONTH, LIMIT_LENGTH, CVC_DESCRIPTION, PAGES };
