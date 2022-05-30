@@ -24,9 +24,9 @@ const OPTIONS = (method, body) => {
 
 const CARD_API = {
   // create
-  async addCard(cardInfo) {
+  addCard(cardInfo) {
     try {
-      await fetch(`${API_BASE_URL}/cardList`, OPTIONS(POST, cardInfo));
+      fetch(`${API_BASE_URL}/cardList`, OPTIONS(POST, cardInfo));
     } catch (e) {
       throw Error('카드 등록 과정에서 오류가 발생했습니다.');
     }
@@ -55,9 +55,9 @@ const CARD_API = {
     }
   },
   // update
-  async updateCard(id, cardInfo) {
+  updateCard(id, cardInfo) {
     try {
-      await fetch(`${API_BASE_URL}/cardList/${id}`, OPTIONS(PATCH, cardInfo));
+      fetch(`${API_BASE_URL}/cardList/${id}`, OPTIONS(PATCH, cardInfo));
     } catch (e) {
       throw Error('카드 수정 과정에서 오류가 발생했습니다.');
     }
