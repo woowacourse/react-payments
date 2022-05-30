@@ -2,7 +2,12 @@ import "./index.scss";
 
 import { useCardContext } from "../../../context/CardProvider";
 
-const ConfirmAdd = ({ closeModal, submit }) => {
+interface ConfirmAddProps {
+  closeModal: () => void;
+  submit: () => void;
+}
+
+const ConfirmAdd = ({ closeModal, submit }: ConfirmAddProps) => {
   const { cardInfo } = useCardContext();
 
   return (

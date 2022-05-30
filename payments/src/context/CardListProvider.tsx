@@ -1,10 +1,19 @@
-import { useContext } from "react";
+import React, { Dispatch, useContext } from "react";
 import { createContext } from "react";
+import { CardListAction } from "../hooks/type/useCardListAction";
 import useCardList from "../hooks/useCardList";
 
-export const CardListContext = createContext(null);
+export const CardListContext =
+  createContext<{
+    cardList: Card[];
+    updateCardList: Dispatch<CardListAction>;
+  } | null>(null);
 
-export const CardListProvider = ({ children }) => {
+export const CardListProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const { cardList, updateCardList } = useCardList();
 
   return (

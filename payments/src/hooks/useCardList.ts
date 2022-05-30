@@ -6,15 +6,13 @@ export const CARD_LIST_ACTION = {
   REMOVE_CARD: "cardList/REMOVE_CARD",
 };
 
-const cardReducer = (state: Card[], action: CardListAction) => {
+const cardReducer = (state: Card[], action: CardListAction): Card[] => {
   switch (action.type) {
     case CARD_LIST_ACTION.ADD_CARD:
-      return [...state, action.payload];
+      return [...state, action.payload as Card];
     case CARD_LIST_ACTION.REMOVE_CARD:
-      return [
-        ...state.slice(0, action.payload.targetIndex),
-        ...state.slice(action.payload.targetIndex + 1),
-      ];
+      const { targetIndex } = action.payload as { targetIndex: number };
+      return [...state.slice(0, targetIndex), ...state.slice(targetIndex + 1)];
     default:
       return state;
   }

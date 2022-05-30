@@ -1,6 +1,14 @@
 import "./index.scss";
 
-const ConfirmCardControl = ({ closeModal, removeCard }) => {
+interface ConfirmCardControlProps {
+  closeModal: () => void;
+  removeCard: () => void;
+}
+
+const ConfirmCardControl = ({
+  closeModal,
+  removeCard,
+}: ConfirmCardControlProps) => {
   return (
     <div className="confirm-card-control">
       <div className="button-container">

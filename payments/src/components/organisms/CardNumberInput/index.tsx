@@ -3,7 +3,7 @@ import InputContainer from "../../common/InputContainer";
 import Input from "../../common/Input";
 import useControlInput from "../../../hooks/useControlInput";
 import InputLabel from "../../common/label";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import { blockCharacter, limitInputLength } from "../../../util/input";
 import { useCardContext } from "../../../context/CardProvider";
 import { CARD_ACTION } from "../../../hooks/useCard";
@@ -22,7 +22,7 @@ const CardNumberInput = () => {
     maxLength: INPUT_LENGTH,
   });
 
-  const updateCardNumber = (target, idx) => {
+  const updateCardNumber = (target: HTMLInputElement, idx: number) => {
     updateCard({
       type: CARD_ACTION.SET_CARD_NUMBER,
       payload: {
@@ -33,9 +33,9 @@ const CardNumberInput = () => {
     controlInput(target);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {
-      autoFocusBackward(e.target);
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode === BACKSPACE_KEY_CODE && e.currentTarget.value === "") {
+      autoFocusBackward(e.currentTarget);
     }
   };
 
@@ -43,15 +43,17 @@ const CardNumberInput = () => {
     <div className="card-number__input__container">
       <InputLabel>카드 번호</InputLabel>
       <InputContainer>
-        {new Array(NUM_OF_INPUT).fill().map((_, idx) => (
+        {new Array(NUM_OF_INPUT).fill(null).map((_, idx) => (
           <Fragment key={idx}>
             <Input
-              onChange={({ target }) => {
+              onChange={({ target }: { target: HTMLInputElement }) => {
                 updateCardNumber(target, idx);
               }}
               onKeyDown={handleKeyDown}
               value={cardNumber[idx]}
-              ref={(el) => (itemRef.current[idx] = el)}
+              ref={(el) => {
+                if (el) itemRef.current[idx] = el;
+              }}
               type={idx > 1 ? "password" : "text"}
               maxLength={INPUT_LENGTH}
               testId={`card-number-input${idx}`}

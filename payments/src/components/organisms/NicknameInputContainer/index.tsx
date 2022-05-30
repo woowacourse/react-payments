@@ -10,24 +10,33 @@ import { useCardListContext } from "../../../context/CardListProvider";
 import { CARD_LIST_ACTION } from "../../../hooks/useCardList";
 import { CARD_ACTION } from "../../../hooks/useCard";
 import { Link, useNavigate } from "react-router-dom";
+import React from "react";
 
-const NicknameInputContainer = ({ setDone }) => {
+const NicknameInputContainer = ({
+  setDone,
+}: {
+  setDone: (done: boolean) => void;
+}) => {
   const { cardInfo, updateCard } = useCardContext();
   const { updateCardList } = useCardListContext();
   const navigate = useNavigate();
-  const handleNickNameChange = (e) => {
+  const handleNickNameChange = ({ target }: { target: HTMLInputElement }) => {
     updateCard({
       type: CARD_ACTION.SET_NICKNAME,
       payload: {
-        value: e.target.value,
+        value: target.value,
       },
     });
   };
 
-  const addCard = (e) => {
-    e.preventDefault();
+  const addCard = (
+    e: React.MouseEvent<HTMLAnchorElement> | React.FormEvent<HTMLFormElement>
+  ) => {
+    if ("preventDefault" in e) {
+      e.preventDefault();
+    }
     updateCardList({ type: CARD_LIST_ACTION.ADD_CARD, payload: cardInfo });
-    updateCard({ type: CARD_ACTION.INITIALIZE });
+    updateCard({ type: CARD_ACTION.INITIALIZE, payload: {} });
     setDone(false);
     navigate("/");
   };

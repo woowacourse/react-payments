@@ -1,9 +1,14 @@
 import "./index.scss";
 
+interface CardProps {
+  cardInfo: Card;
+  onClick?: () => void;
+}
+
 const Card = ({
   cardInfo: { cardNumber, expiredDate, ownerName, cardName, color },
   onClick,
-}) => {
+}: CardProps) => {
   return (
     <div
       data-testid="card"

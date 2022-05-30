@@ -16,7 +16,7 @@ const SecureCodeInput = () => {
     cardInfo: { secureCode },
     updateCard,
   } = useCardContext();
-  const updateSecureCode = ({ target }) => {
+  const updateSecureCode = ({ target }: { target: HTMLInputElement }) => {
     updateCard({
       type: CARD_ACTION.SET_SECURE_CODE,
       payload: {
@@ -31,7 +31,7 @@ const SecureCodeInput = () => {
       <InputContainer>
         <Input
           type="password"
-          maxLength="3"
+          maxLength={3}
           value={secureCode}
           onChange={updateSecureCode}
           testId={"secure-code"}

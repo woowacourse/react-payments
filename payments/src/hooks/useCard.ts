@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import validateArray from "../util/validate";
-import { cardAction } from "./type/useCardAction";
+import { CardAction } from "./type/useCardAction";
 
 export const CARD_ACTION = {
   SET_CARD_NUMBER: "card/SET_CARD_NUMBER",
@@ -24,15 +24,15 @@ const initState = {
   nickname: "",
 };
 
-const cardReducer = (state: Card, action: cardAction) => {
+const cardReducer = (state: Card, action: CardAction): Card => {
   switch (action.type) {
     case CARD_ACTION.SET_CARD_NUMBER:
       return {
         ...state,
         cardNumber: [
           ...state.cardNumber.slice(0, action.payload.index),
-          action.payload.value,
-          ...state.cardNumber.slice(action.payload.index + 1),
+          action.payload.value as string,
+          ...state.cardNumber.slice((action.payload.index as number) + 1),
         ],
       };
     case CARD_ACTION.SET_EXPIRED_DATE:
@@ -40,39 +40,39 @@ const cardReducer = (state: Card, action: cardAction) => {
         ...state,
         expiredDate: [
           ...state.expiredDate.slice(0, action.payload.index),
-          action.payload.value,
-          ...state.expiredDate.slice(action.payload.index + 1),
+          action.payload.value as string,
+          ...state.expiredDate.slice((action.payload.index as number) + 1),
         ],
       };
     case CARD_ACTION.SET_OWNER_NAME:
       return {
         ...state,
-        ownerName: action.payload.value,
+        ownerName: action.payload.value as string,
       };
     case CARD_ACTION.SET_SECURE_CODE:
       return {
         ...state,
-        secureCode: action.payload.value,
+        secureCode: action.payload.value as string,
       };
     case CARD_ACTION.SET_PASSWORD:
       return {
         ...state,
         password: [
           ...state.password.slice(0, action.payload.index),
-          action.payload.value,
-          ...state.password.slice(action.payload.index + 1),
+          action.payload.value as string,
+          ...state.password.slice((action.payload.index as number) + 1),
         ],
       };
     case CARD_ACTION.SET_CARD_NAME:
       return {
         ...state,
-        color: action.payload.color,
-        cardName: action.payload.cardName,
+        color: action.payload.color as string,
+        cardName: action.payload.cardName as string,
       };
     case CARD_ACTION.SET_NICKNAME:
       return {
         ...state,
-        nickname: action.payload.value,
+        nickname: action.payload.value as string,
       };
     case CARD_ACTION.INITIALIZE:
       return initState;
@@ -82,7 +82,7 @@ const cardReducer = (state: Card, action: cardAction) => {
 };
 
 const useCard = () => {
-  const [cardInfo, updateCard] = useReducer<React.Reducer<Card, cardAction>>(
+  const [cardInfo, updateCard] = useReducer<React.Reducer<Card, CardAction>>(
     cardReducer,
     initState
   );

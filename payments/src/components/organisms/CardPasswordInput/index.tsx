@@ -24,7 +24,7 @@ const CardPasswordInput = () => {
     updateCard,
   } = useCardContext();
 
-  const updateCardPassword = (target, idx) => {
+  const updateCardPassword = (target: HTMLInputElement, idx: number) => {
     updateCard({
       type: CARD_ACTION.SET_PASSWORD,
       payload: {
@@ -35,9 +35,9 @@ const CardPasswordInput = () => {
     controlInput(target);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {
-      autoFocusBackward(e.target);
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode === BACKSPACE_KEY_CODE && e.currentTarget.value === "") {
+      autoFocusBackward(e.currentTarget);
     }
   };
 
@@ -45,13 +45,13 @@ const CardPasswordInput = () => {
     <div className="password__input__container">
       <InputLabel>카드비밀번호</InputLabel>
       <div className="password__inputs">
-        {new Array(NUM_OF_INPUT).fill().map((_, idx) => (
+        {new Array(NUM_OF_INPUT).fill(null).map((_, idx) => (
           <div className="password__input" key={idx}>
             <InputContainer>
               <Input
                 type="password"
                 ref={(el) => {
-                  itemRef.current[idx] = el;
+                  if (el) itemRef.current[idx] = el;
                 }}
                 value={password[idx]}
                 onChange={({ target }) => {

@@ -17,7 +17,7 @@ const OwnerNameInput = () => {
     cardInfo: { ownerName },
     updateCard,
   } = useCardContext();
-  const updateCardOwner = (target) => {
+  const updateCardOwner = (target: HTMLInputElement) => {
     updateCard({
       type: CARD_ACTION.SET_OWNER_NAME,
       payload: {

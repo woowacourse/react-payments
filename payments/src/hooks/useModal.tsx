@@ -9,19 +9,21 @@ const useModal = () => {
     setVisible(false);
   };
 
-  const setElement = (element: React.ReactNode) => {
+  const setElement = (element?: React.ReactNode) => {
     setVisible(true);
     setNode(element);
   };
 
-  const ModalElement = () =>
-    visible && (
+  const ModalElement = (): React.ReactElement =>
+    visible ? (
       <Portal>
         <Modal closeModal={closeModal}>{node}</Modal>
       </Portal>
+    ) : (
+      <></>
     );
 
-  return [closeModal, ModalElement, setElement];
+  return { closeModal, ModalElement, setElement };
 };
 
 export default useModal;

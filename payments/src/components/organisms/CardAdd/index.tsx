@@ -13,10 +13,11 @@ import ConfirmAdd from "../ConfirmAdd";
 
 import { useCardContext } from "../../../context/CardProvider";
 import { Link } from "react-router-dom";
+import { FormEvent } from "react";
 
-const CardAdd = ({ setDone }) => {
+const CardAdd = ({ setDone }: { setDone: (done: boolean) => void }) => {
   const { cardInfo, validateCardInfo } = useCardContext();
-  const [closeModal, ModalElement, setElement] = useModal();
+  const { closeModal, ModalElement, setElement } = useModal();
 
   const openColorPickerModal = () => {
     setElement(<CardColorPicker closeModal={closeModal} />);
@@ -36,12 +37,12 @@ const CardAdd = ({ setDone }) => {
 
   const { cardName } = cardInfo;
 
-  const submitCard = (e) => {
+  const submitCard = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       validateCardInfo();
       openConfirmModal();
-    } catch (e) {
+    } catch (e: any) {
       alert(e.message);
     }
   };

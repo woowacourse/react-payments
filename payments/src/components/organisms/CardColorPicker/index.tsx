@@ -16,9 +16,9 @@ const CARD_CATEGORY = [
   { name: "록8바", color: "gold" },
 ];
 
-const CardColorPicker = ({ closeModal }) => {
+const CardColorPicker = ({ closeModal }: { closeModal: () => void }) => {
   const { updateCard } = useCardContext();
-  const pickColor = (name, color) => {
+  const pickColor = (name: string, color: string) => {
     closeModal();
     updateCard({
       type: CARD_ACTION.SET_CARD_NAME,
@@ -35,9 +35,8 @@ const CardColorPicker = ({ closeModal }) => {
           color={card.color}
           onClick={() => {
             pickColor(card.name, card.color);
+            closeModal();
           }}
-          role="pick"
-          setVisible={closeModal}
         />
       ))}
     </div>

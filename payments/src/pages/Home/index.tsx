@@ -4,13 +4,16 @@ import { Link } from "react-router-dom";
 import "./index.scss";
 import useModal from "../../hooks/useModal";
 import ConfirmCardControl from "../../components/organisms/ConfirmCardControl";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { CARD_LIST_ACTION } from "../../hooks/useCardList";
 
 const Home = () => {
   const { cardList, updateCardList } = useCardListContext();
-  const [closeConfirmCardControlModal, ConfirmCardControlModal, setModal] =
-    useModal();
+  const {
+    closeModal: closeConfirmCardControlModal,
+    ModalElement: ConfirmCardControlModal,
+    setElement: setModal,
+  } = useModal();
 
   useEffect(() => {
     localStorage.setItem("CARD_LIST", JSON.stringify(cardList));

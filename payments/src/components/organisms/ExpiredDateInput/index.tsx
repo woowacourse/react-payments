@@ -26,7 +26,7 @@ const ExpiredDateInput = () => {
     maxLength: INPUT_LENGTH,
   });
 
-  const updateExpiredDate = (target, idx) => {
+  const updateExpiredDate = (target: HTMLInputElement, idx: number) => {
     updateCard({
       type: CARD_ACTION.SET_EXPIRED_DATE,
       payload: {
@@ -37,9 +37,9 @@ const ExpiredDateInput = () => {
     controlInput(target);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === "") {
-      autoFocusBackward(e.target);
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.keyCode === BACKSPACE_KEY_CODE && e.currentTarget.value === "") {
+      autoFocusBackward(e.currentTarget);
     }
   };
 
@@ -47,14 +47,14 @@ const ExpiredDateInput = () => {
     <div className="expire__input__container">
       <InputLabel>만료일</InputLabel>
       <InputContainer>
-        {new Array(NUM_OF_INPUT).fill().map((_, idx) => (
+        {new Array(NUM_OF_INPUT).fill(null).map((_, idx) => (
           <Fragment key={idx}>
             <Input
               placeholder={idx === 0 ? "MM" : "YY"}
               type="text"
               value={expiredDate[idx]}
               ref={(el) => {
-                itemRef.current[idx] = el;
+                if (el) itemRef.current[idx] = el;
               }}
               onChange={({ target }) => {
                 updateExpiredDate(target, idx);
