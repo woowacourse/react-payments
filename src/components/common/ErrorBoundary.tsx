@@ -25,10 +25,10 @@ class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryProps>, Sta
     error: null,
   };
 
-  resetErrorBoundary() {
+  resetErrorBoundary = () => {
     this.props.onReset?.();
     this.setState(initialState);
-  }
+  };
 
   static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
