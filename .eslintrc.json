@@ -17,6 +17,9 @@
   },
   "plugins": ["@typescript-eslint"],
   "ignorePatterns": ["src/stories/*", "*.stories.*"],
+  "globals": {
+    "JSX": true
+  },
   "rules": {
     "import/extensions": "off",
     "import/no-unresolved": "off",
