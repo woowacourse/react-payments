@@ -3,13 +3,7 @@ module.exports = {
     browser: true,
     es2022: true,
   },
-  extends: [
-    'react-app',
-    'plugin:react/recommended',
-    'airbnb',
-    'plugin:prettier/recommended',
-    'plugin:storybook/recommended',
-  ],
+  extends: ['react-app', 'plugin:prettier/recommended'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -17,6 +11,11 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+  overrides: [
+    {
+      files: ['**/*.stories.*'],
+    },
+  ],
   plugins: ['react'],
   rules: {
     'react/function-component-definition': [
@@ -37,5 +36,6 @@ module.exports = {
     ],
     'react/prop-types': [0],
     'jsx-a11y/label-has-associated-control': ['off'],
+    'import/no-anonymous-default-export': 'off',
   },
 };
