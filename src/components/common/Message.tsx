@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-
 import { PASS, FAIL, GUIDE_MESSAGE } from 'constants/index';
 
 interface MessageProps {

@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 
 interface ModalProps {
   handleModal: () => void;
@@ -14,11 +13,6 @@ const Modal = ({ handleModal, children }: ModalProps) => {
     </div>,
     document.getElementById('portal') as HTMLElement,
   );
-};
-
-Modal.propTypes = {
-  handleModal: PropTypes.func,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 export default Modal;

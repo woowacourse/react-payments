@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-
+import { createContext, useReducer } from 'react';
+import useIsFilled from 'hooks/useIsFilled';
+import reducer from 'page/cardAddUpdate/reducer';
 import {
   CRYPTO_STRING,
   CARD_NUMBER,
@@ -8,9 +10,6 @@ import {
   PASSWORD,
   PRIVACY_CODE,
 } from 'constants/index';
-import useIsFilled from 'hooks/useIsFilled';
-import reducer from 'page/cardAddUpdate/reducer';
-import { createContext, useReducer } from 'react';
 import { CardInfo } from 'types';
 
 export interface CardInfoContextValue {

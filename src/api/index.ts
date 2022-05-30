@@ -1,9 +1,10 @@
 import { GET, POST, PATCH, DELETE } from 'constants/index';
 import { CardInfo } from 'types';
 
+type Method = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 const API_BASE_URL = 'https://json-web-server-lokba.herokuapp.com';
 
-const OPTIONS = (method: string, body?: object) => {
+const OPTIONS = (method: Method, body?: object) => {
   switch (method) {
     case GET:
     case DELETE:
@@ -24,7 +25,6 @@ const OPTIONS = (method: string, body?: object) => {
 };
 
 const CARD_API = {
-  // create
   addCard(cardInfo: CardInfo) {
     try {
       fetch(`${API_BASE_URL}/cardList`, OPTIONS(POST, cardInfo));
@@ -32,7 +32,6 @@ const CARD_API = {
       throw Error('카드 등록 과정에서 오류가 발생했습니다.');
     }
   },
-  // read
   async getCard(cardId: string) {
     try {
       const response = await fetch(`${API_BASE_URL}/cardList/${cardId}`, OPTIONS(GET));
@@ -55,7 +54,6 @@ const CARD_API = {
       throw Error('카드 목록 불러오기 과정에서 오류가 발생했습니다.');
     }
   },
-  // update
   updateCard(id: string, cardInfo: CardInfo) {
     try {
       fetch(`${API_BASE_URL}/cardList/${id}`, OPTIONS(PATCH, cardInfo));
@@ -63,7 +61,6 @@ const CARD_API = {
       throw Error('카드 수정 과정에서 오류가 발생했습니다.');
     }
   },
-  // delete
   async deleteCard(id: string) {
     try {
       await fetch(`${API_BASE_URL}/cardList/${id}`, OPTIONS(DELETE));

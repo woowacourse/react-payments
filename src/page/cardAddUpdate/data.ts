@@ -1,7 +1,17 @@
 import { v4 as uuid } from 'uuid';
 import { COMPANY_LIST, THEME } from 'constants/index';
 
-export const cardNumberInputInfoList = [
+export interface InputInfo {
+  id: string;
+  type: string;
+  className?: string;
+  name?: string;
+  autoFocus?: boolean;
+  placeholder?: string;
+  disabled?: boolean;
+}
+
+export const cardNumberInputInfoList: InputInfo[] = [
   {
     id: uuid(),
     type: 'text',
@@ -29,7 +39,7 @@ export const cardNumberInputInfoList = [
   },
 ];
 
-export const expiryDateInputInfoList = [
+export const expiryDateInputInfoList: InputInfo[] = [
   {
     id: uuid(),
     type: 'text',
@@ -45,7 +55,7 @@ export const expiryDateInputInfoList = [
   },
 ];
 
-export const cardOwnerNameInputInfoList = [
+export const cardOwnerNameInputInfoList: InputInfo[] = [
   {
     id: uuid(),
     type: 'text',
@@ -54,7 +64,7 @@ export const cardOwnerNameInputInfoList = [
   },
 ];
 
-export const privacyCodeInputInfoList = [
+export const privacyCodeInputInfoList: InputInfo[] = [
   {
     id: uuid(),
     type: 'password',
@@ -62,7 +72,7 @@ export const privacyCodeInputInfoList = [
   },
 ];
 
-export const cardPasswordInputInfoList = [
+export const cardPasswordInputInfoList: InputInfo[] = [
   {
     id: uuid(),
     type: 'password',

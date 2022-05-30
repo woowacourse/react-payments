@@ -1,27 +1,27 @@
-export interface CardNumber {
+interface StringAnyDictionary {
+  [key: string]: any;
+}
+
+export interface CardNumber extends StringAnyDictionary {
   first: string;
   second: string;
   third: string;
   fourth: string;
 }
 
-export interface ExpiryDate {
+export interface ExpiryDate extends StringAnyDictionary {
   month: string;
   year: string;
 }
 
-export interface Password {
+export interface Password extends StringAnyDictionary {
   first: string;
   second: string;
   third: string;
   fourth: string;
 }
 
-interface Dictionary {
-  [key: string]: any;
-}
-
-export interface CardInfo extends Dictionary {
+export interface CardInfo extends StringAnyDictionary {
   alias: string;
   theme: string;
   company: string;
@@ -32,3 +32,14 @@ export interface CardInfo extends Dictionary {
   password: Password;
   id: string;
 }
+
+export type CardInfoKey =
+  | 'alias'
+  | 'theme'
+  | 'company'
+  | 'cardNumber'
+  | 'expiryDate'
+  | 'ownerName'
+  | 'privacyCode'
+  | 'password'
+  | 'id';

@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
 import Button from 'components/common/Button';
-import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants/index';
 import useToggle from 'hooks/useToggle';
+import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants/index';
 import { CardInfo } from 'types';
 
 interface CardPreviewProps {
@@ -75,33 +74,6 @@ const CardPreview = ({ cardInfo, isVisibleButton, theme, handleModal }: CardPrev
 
 CardPreview.defaultProps = {
   isCardFront: true,
-};
-
-CardPreview.propTypes = {
-  cardInfo: PropTypes.shape({
-    company: PropTypes.string,
-    cardNumber: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-      third: PropTypes.string,
-      fourth: PropTypes.string,
-    }),
-    expiryDate: PropTypes.shape({
-      month: PropTypes.string,
-      year: PropTypes.string,
-    }),
-    ownerName: PropTypes.string,
-    privacyCode: PropTypes.string,
-    password: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-      third: PropTypes.string,
-      fourth: PropTypes.string,
-    }),
-    theme: PropTypes.string,
-  }),
-  handleModal: PropTypes.func,
-  isVisibleButton: PropTypes.string,
 };
 
 export default CardPreview;

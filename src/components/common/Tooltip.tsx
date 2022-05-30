@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types';
 import useHover from 'hooks/useHover';
 import { ReactComponent as TooltipIcon } from 'assets/tooltip_icon.svg';
 import { TOOLTIP_TYPES } from 'constants/index';
 
+type ToolTipType = 'PRIVACY_CODE';
+
 interface TooltipProps {
-  type: string;
+  type: ToolTipType;
 }
 
 const Tooltip = ({ type }: TooltipProps) => {
@@ -24,10 +25,6 @@ const Tooltip = ({ type }: TooltipProps) => {
       )}
     </div>
   );
-};
-
-Tooltip.propTypes = {
-  type: PropTypes.string,
 };
 
 export default Tooltip;

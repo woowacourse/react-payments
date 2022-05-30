@@ -1,16 +1,16 @@
-import PropTypes from 'prop-types';
-import useInputAutoFocus from 'hooks/useInputAutoFocus';
-import { isObject } from 'utils';
 import { useContext } from 'react';
+import useInputAutoFocus from 'hooks/useInputAutoFocus';
 import { CardInfoContext, CardInfoContextValue } from 'context/cardInfoProvider';
+import { CardInfoKey } from 'types';
+import { InputInfo } from 'page/cardAddUpdate/data';
 
 interface FormInputProps {
   className: string;
-  type: string;
+  type: CardInfoKey;
   inputTitle: string;
-  inputInfoList: any[];
+  inputInfoList: InputInfo[];
   maxLength: number;
-  handleChange: (e: any, type: string) => void;
+  handleChange: (e: React.ChangeEvent<HTMLElement>, type: string) => void;
   children?: React.ReactNode;
 }
 
@@ -45,7 +45,9 @@ const FormInput = ({
             key={id}
             name={name}
             className={`input-basic ${className} font-${theme}`}
-            value={isObject(inputValue) ? inputValue[name] : inputValue}
+            value={
+              typeof inputValue !== 'string' && name !== undefined ? inputValue[name] : inputValue
+            }
             onChange={handleInputChange}
             maxLength={maxLength}
             ref={(el) => (inputRefList.current[index] = el)}
@@ -62,41 +64,6 @@ FormInput.defaultProps = {
   className: '',
   cardInfo: {},
   handleChange: undefined,
-};
-
-FormInput.propTypes = {
-  /**
-   * className of FormInput
-   */
-  className: PropTypes.string,
-  /**
-   * category of FormInput
-   */
-  type: PropTypes.string.isRequired,
-  /**
-   * name of FormInput
-   */
-  inputTitle: PropTypes.string.isRequired,
-  /**
-   * information of input tags in FormInput
-   */
-  inputInfoList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string,
-      type: PropTypes.string.isRequired,
-      placeholder: PropTypes.string,
-      className: PropTypes.string,
-    }),
-  ).isRequired,
-  /**
-   * card information for input value
-   */
-  inputValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**
-   * handle change event of input tag
-   */
-  handleChange: PropTypes.func,
 };
 
 export default FormInput;
