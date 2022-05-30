@@ -6,6 +6,7 @@
 @import "./header";
 @import "./confirm";
 @import "./cardList";
+@import "./spinner.css";
 
 * {
   box-sizing: border-box;
