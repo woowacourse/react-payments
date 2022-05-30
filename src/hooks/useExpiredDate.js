@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
-import validator from '../validation';
-import { expiredDateInputRegex } from '../constant/regularExpression';
-import { DATE_SEPARATOR } from '../constant/mark';
+import validator from 'validation';
+import { expiredDateInputRegex } from 'constant/regularExpression';
+import { DATE_SEPARATOR } from 'constant/mark';
 
 const useExpiredDate = () => {
   const [expiredDate, setExpiredDate] = useState({ month: '', year: '' });

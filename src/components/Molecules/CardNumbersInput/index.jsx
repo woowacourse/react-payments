@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BlockInput } from '../../Atoms/Input';
-import InputLabel from '../../Atoms/InputLabel';
+import { BlockInput } from 'components/Atoms/Input';
+import InputLabel from 'components/Atoms/InputLabel';
 import { PLACEHOLDER } from 'constant';
 
 const Container = styled.div`
@@ -70,7 +70,7 @@ function CardNumbersInput({ cardNumbers, handleInputChange, isValid, invalidMess
           );
         })}
       </InputWrapper>
-      <InvalidMessage>{isValid || isAllEmptyValue() ? '' : invalidMessage}</InvalidMessage>
+      {isValid || isAllEmptyValue() || <InvalidMessage>{invalidMessage}</InvalidMessage>}
     </Container>
   );
 }

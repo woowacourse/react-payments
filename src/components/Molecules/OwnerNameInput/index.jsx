@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { BlockInput } from '../../Atoms/Input';
-import InputLabel from '../../Atoms/InputLabel';
+import { BlockInput } from 'components/Atoms/Input';
+import InputLabel from 'components/Atoms/InputLabel';
 import { PLACEHOLDER } from 'constant';
 import { CLASS } from 'constant/selector';
 
@@ -60,9 +60,9 @@ function OwnerNameInput({ ownerName, handleInputChange, isValid, invalidMessage,
         maxLength="30"
         isValid={isValid}
       />
-      <InvalidMessage className={CLASS.INVALID_INPUT_MESSAGE}>
-        {isValid || !ownerName ? '' : invalidMessage}
-      </InvalidMessage>
+      {isValid || !ownerName || (
+        <InvalidMessage className={CLASS.INVALID_INPUT_MESSAGE}>{invalidMessage}</InvalidMessage>
+      )}
     </Container>
   );
 }

@@ -1,4 +1,11 @@
 import styled from 'styled-components';
+import { CompanyName as CompanyNameType, CompanyColor as CompanyColorType } from 'types/index';
+
+interface CardCompanyButtonProps {
+  color: CompanyColorType;
+  name: CompanyNameType;
+  handleClickCardCompany: (name: CompanyNameType, color: CompanyColorType) => void;
+}
 
 const Container = styled.div`
   display: flex;
@@ -25,10 +32,10 @@ const CompanyName = styled.span`
   font-size: 12px;
   line-height: 14px;
   letter-spacing: -0.085em;
-  color: #525252;
+  color: ${({ theme }) => theme.PALETTE.GRAY_004};
 `;
 
-function CardCompanyButton({ color, name, handleClickCardCompany }) {
+function CardCompanyButton({ color, name, handleClickCardCompany }: CardCompanyButtonProps) {
   return (
     <Container
       onClick={() => {

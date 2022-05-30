@@ -8,11 +8,9 @@ const Button = styled.button`
   font-size: 14px;
   line-height: 16px;
   text-align: right;
-  color: #04c09e;
-  background-color: white;
+  color: ${({ theme }) => theme.PALETTE.MINT_002};
+  background-color: ${({ theme }) => theme.PALETTE.WHITE_001};
   cursor: pointer;
-
-  ${props => props.style}
 `;
 
 export default Button;

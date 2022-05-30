@@ -1,25 +1,68 @@
 import { useNavigate } from 'react-router-dom';
-import Button from '../../components/Atoms/Button';
-import Card from '../../components/Molecules/Card';
-import CardNumbersInput from '../../components/Molecules/CardNumbersInput';
-import ExpiredDateInput from '../../components/Molecules/ExpiredDateInput';
-import OwnerNameInput from '../../components/Molecules/OwnerNameInput';
-import SecurityNumberInput from '../../components/Molecules/SecurityNumberInput';
-import PasswordInput from '../../components/Molecules/PasswordInput';
-import CardCompanySelector from '../../components/Molecules/CardCompanySelector';
-import Head from '../../components/Templates/Head';
-import ModalPortal from '../../components/Templates/ModalPortal';
-import { Page, HeadContainer, BackButton, CardSection, Form, SubmitButtonContainer } from './style';
-import MESSAGE from '../../constant/message';
+import styled from 'styled-components';
+import Button from 'components/Atoms/Button';
+import Card from 'components/Molecules/Card';
+import CardNumbersInput from 'components/Molecules/CardNumbersInput';
+import ExpiredDateInput from 'components/Molecules/ExpiredDateInput';
+import OwnerNameInput from 'components/Molecules/OwnerNameInput';
+import SecurityNumberInput from 'components/Molecules/SecurityNumberInput';
+import PasswordInput from 'components/Molecules/PasswordInput';
+import CardCompanySelector from 'components/Molecules/CardCompanySelector';
+import Head from 'components/Templates/Head';
+import ModalPortal from 'components/Templates/ModalPortal';
+import MESSAGE from 'constant/message';
 import PATH from 'constant/path';
 import { useCardListContext } from 'context/cardList';
-import useCardCompany from '../../hooks/useCardCompany';
-import useCardNumbers from '../../hooks/useCardNumbers';
-import useExpiredDate from '../../hooks/useExpiredDate';
-import useOwnerName from '../../hooks/useOwnerName';
-import useSecurityNumber from '../../hooks/useSecurityNumber';
-import usePassword from '../../hooks/usePassword';
+import useCardCompany from 'hooks/useCardCompany';
+import useCardNumbers from 'hooks/useCardNumbers';
+import useExpiredDate from 'hooks/useExpiredDate';
+import useOwnerName from 'hooks/useOwnerName';
+import useSecurityNumber from 'hooks/useSecurityNumber';
+import usePassword from 'hooks/usePassword';
 import BackButtonArrow from 'assets/images/backButtonArrow.svg';
+
+const Page = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const HeadContainer = styled.div`
+  display: flex;
+  gap: 18px;
+  background-color: #fff;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #383838;
+`;
+
+const BackButton = styled.button`
+  background-color: #fff;
+`;
+
+const CardSection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 100%;
+  height: 158px;
+  padding-top: 25px;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding: 25px 28px 16px;
+  gap: 15px;
+`;
+
+const SubmitButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
 
 function CardAddPage({ isOpenModal, openModal }) {
   const navigate = useNavigate();
@@ -47,7 +90,7 @@ function CardAddPage({ isOpenModal, openModal }) {
   };
 
   const handleClickBackButton = () => {
-    navigate(PATH.DEFAULT);
+    navigate(PATH.CARD_LIST);
   };
 
   const handleSubmit = event => {

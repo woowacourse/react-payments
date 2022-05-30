@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
-import validator from '../validation';
-import { ownerNameInputRegex } from '../constant/regularExpression';
+import validator from 'validation';
+import { ownerNameInputRegex } from 'constant/regularExpression';
 
 const useOwnerName = () => {
   const [ownerName, setOwnerName] = useState('');

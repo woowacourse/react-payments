@@ -1,24 +1,15 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import { ID } from 'constant/selector';
 
 function ModalPortal({ isOpenModal, children }) {
-  const [isMounted, setIsMounted] = useState(false);
-
   const modalContainer = useRef(null);
 
   useEffect(() => {
-    if (!isMounted) {
-      setIsMounted(true);
-    }
-
-    modalContainer.current = document.getElementById('modal-container');
-
-    return () => {
-      setIsMounted(false);
-    };
+    modalContainer.current = document.getElementById(ID.MODAL_CONTAINER);
   }, []);
 
-  if (modalContainer.current && isOpenModal) {
+  if (isOpenModal && modalContainer.current) {
     return ReactDOM.createPortal(children, modalContainer.current);
   }
 

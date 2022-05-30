@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
-import validator from '../validation';
-import { numberRegex } from '../constant/regularExpression';
+import validator from 'validation';
+import { numberRegex } from 'constant/regularExpression';
 
 const useSecurityNumber = () => {
   const [securityNumber, setSecurityNumber] = useState('');
