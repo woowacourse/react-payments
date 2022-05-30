@@ -20,10 +20,13 @@ const CardListPage = () => {
     cardId: string,
   ): Promise<void> => {
     e.preventDefault();
-
-    if (window.confirm(CONFIRM_MESSAGE)) {
-      await CARD_API.deleteCard(cardId);
-      await CARD_API.getCardList().then((response) => setCardList(response));
+    try {
+      if (window.confirm(CONFIRM_MESSAGE)) {
+        await CARD_API.deleteCard(cardId);
+        await CARD_API.getCardList().then((response) => setCardList(response));
+      }
+    } catch (e) {
+      alert(e);
     }
   };
 
