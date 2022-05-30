@@ -1,3 +1,5 @@
+import { Option, TextFieldEvent } from '.';
+
 interface ButtonProps {
   className: string;
   isDisabled: boolean;
@@ -9,7 +11,7 @@ interface FieldSetProps {
   title: string;
   inputWidth: number;
   errorMessage: string;
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }
 
 interface HeaderProps {
@@ -24,7 +26,7 @@ interface TextFieldProps {
   value: string;
   placeholder: string;
   maxLength: number;
-  onChange: () => void;
+  onChange: ({ target }: TextFieldEvent, option: Option) => void;
   onBlur: () => void;
 }
 

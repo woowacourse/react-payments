@@ -26,7 +26,7 @@ interface Children {
 interface ErrorChecker {
   state: CardStateType;
   validate: (state: CardStateType) => void;
-  isAnyValueEmpty: boolean;
+  isAnyValueEmpty?: boolean;
 }
 
 interface Option {

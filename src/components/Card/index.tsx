@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
+import CardProps from '@/types/components';
 
-const formatCardNumber = (cardNumber) => {
+const formatCardNumber = (cardNumber: string[]) => {
   const newCardNumber = [...cardNumber].map((unit) => (unit === '' ? '0000' : unit));
   const maskingIndexes = [2, 3];
 
@@ -13,7 +14,15 @@ const formatCardNumber = (cardNumber) => {
   return newCardNumber.join('-');
 };
 
-function Card({ size, companyName, cardNumber, userName, expireMonth, expireYear, cardNickname }) {
+function Card({
+  size,
+  companyName,
+  cardNumber,
+  userName,
+  expireMonth,
+  expireYear,
+  cardNickname,
+}: CardProps) {
   const cardTextStyle = size === 'small' ? 'card-text' : 'card-text__big';
 
   return (
