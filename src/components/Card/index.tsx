@@ -51,20 +51,17 @@ function Card({
 Card.defaultProps = {
   size: 'small',
   companyName: '티거 카드 🐯',
-  cardNumber: ['', '', '', ''],
   userName: '',
-  expireMonth: '',
-  expireYear: '',
   cardNickname: '',
 };
 
 Card.propTypes = {
   size: PropTypes.string,
   companyName: PropTypes.string,
-  cardNumber: PropTypes.arrayOf(PropTypes.string),
+  cardNumber: PropTypes.arrayOf(PropTypes.string).isRequired,
   userName: PropTypes.string,
-  expireMonth: PropTypes.string,
-  expireYear: PropTypes.string,
+  expireMonth: PropTypes.string.isRequired,
+  expireYear: PropTypes.string.isRequired,
   cardNickname: PropTypes.string,
 };
 

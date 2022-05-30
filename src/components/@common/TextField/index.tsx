@@ -19,7 +19,7 @@ function TextField({
       value={value}
       placeholder={placeholder}
       maxLength={maxLength}
-      onChange={onChange}
+      onChange={onChange as () => void}
       onBlur={onBlur}
     />
   );

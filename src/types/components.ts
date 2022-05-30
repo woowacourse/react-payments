@@ -1,11 +1,11 @@
 interface CardProps {
-  size: string;
-  companyName: string;
+  size?: string;
+  companyName?: string;
   cardNumber: string[];
-  userName: string;
+  userName?: string;
   expireMonth: string;
   expireYear: string;
-  cardNickname: string;
+  cardNickname?: string;
 }
 
 export default CardProps;
