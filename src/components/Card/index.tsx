@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { CARD_SIZE } from "constant";
 import {
   CardWrapper,
@@ -11,6 +10,21 @@ import {
   CardOwner,
 } from "./style";
 
+export interface CardWrapperProps {
+  size: string;
+  color: string;
+}
+
+interface CardProps extends CardWrapperProps {
+  company: string;
+  cardNumbers: string[];
+  owner: string;
+  dueMonth: string;
+  dueYear: string;
+  onClick: () => void;
+  nickname: string;
+}
+
 function Card({
   size,
   color,
@@ -21,7 +35,7 @@ function Card({
   dueYear,
   onClick,
   nickname,
-}) {
+}: CardProps) {
   return (
     <>
       <CardWrapper size={size} color={color} onClick={onClick}>
@@ -53,31 +67,5 @@ function Card({
     </>
   );
 }
-
-Card.propTypes = {
-  /**
-   * 카드 크기 타입
-   */
-  size: PropTypes.string,
-  /**
-   * 카드사
-   */
-  company: PropTypes.string,
-  /**
-   * 카드번호 배열
-   */
-  cardNumbers: PropTypes.array,
-  /**
-   * 소유자
-   */
-  owner: PropTypes.string,
-  /**
-   * 만료일
-   */
-  dueMonth: PropTypes.string,
-  dueYear: PropTypes.string,
-  onClick: PropTypes.func,
-  nickname: PropTypes.string,
-};
 
 export default Card;

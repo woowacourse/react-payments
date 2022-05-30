@@ -14,7 +14,7 @@ const ColorBoxWrapper = styled.div`
   }
 `;
 
-const ColorCircle = styled.div`
+const ColorCircle = styled.div<{ color: string }>`
   border-radius: 50%;
   background-color: ${(props) => props.color};
   width: 50px;
