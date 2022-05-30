@@ -1,5 +1,6 @@
-import { useReducer } from "react";
+import React, { useReducer } from "react";
 import validateArray from "../util/validate";
+import { cardAction } from "./type/useCardAction";
 
 export const CARD_ACTION = {
   SET_CARD_NUMBER: "card/SET_CARD_NUMBER",
@@ -10,7 +11,7 @@ export const CARD_ACTION = {
   SET_CARD_NAME: "card/SET_CARD_NAME",
   SET_NICKNAME: "card/SET_NICKNAME",
   INITIALIZE: "card/INITIALIZE",
-};
+} as const;
 
 const initState = {
   cardNumber: ["", "", "", ""],
@@ -23,7 +24,7 @@ const initState = {
   nickname: "",
 };
 
-const cardReducer = (state, action) => {
+const cardReducer = (state: Card, action: cardAction) => {
   switch (action.type) {
     case CARD_ACTION.SET_CARD_NUMBER:
       return {
@@ -81,7 +82,10 @@ const cardReducer = (state, action) => {
 };
 
 const useCard = () => {
-  const [cardInfo, updateCard] = useReducer(cardReducer, initState);
+  const [cardInfo, updateCard] = useReducer<React.Reducer<Card, cardAction>>(
+    cardReducer,
+    initState
+  );
 
   const validateCardInfo = () => {
     validateArray.forEach((validateFunc) => {

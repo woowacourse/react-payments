@@ -1,11 +1,12 @@
-import { useReducer } from "react";
+import React, { useReducer } from "react";
+import { CardListAction } from "./type/useCardListAction";
 
 export const CARD_LIST_ACTION = {
   ADD_CARD: "cardList/ADD_CARD",
   REMOVE_CARD: "cardList/REMOVE_CARD",
 };
 
-const cardReducer = (state, action) => {
+const cardReducer = (state: Card[], action: CardListAction) => {
   switch (action.type) {
     case CARD_LIST_ACTION.ADD_CARD:
       return [...state, action.payload];
@@ -19,10 +20,12 @@ const cardReducer = (state, action) => {
   }
 };
 
-const initState = JSON.parse(localStorage.getItem("CARD_LIST")) ?? [];
+const initState = JSON.parse(localStorage.getItem("CARD_LIST") ?? "") ?? [];
 
 const useCardList = () => {
-  const [cardList, updateCardList] = useReducer(cardReducer, initState);
+  const [cardList, updateCardList] = useReducer<
+    React.Reducer<Card[], CardListAction>
+  >(cardReducer, initState);
 
   return { cardList, updateCardList };
 };

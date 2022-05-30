@@ -16,7 +16,7 @@ const Home = () => {
     localStorage.setItem("CARD_LIST", JSON.stringify(cardList));
   }, [cardList]);
 
-  const handleCardClick = (idx) => {
+  const handleCardClick = (idx: number) => {
     setModal(
       <ConfirmCardControl
         closeModal={closeConfirmCardControlModal}
