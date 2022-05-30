@@ -6,7 +6,7 @@ const ACTION = {
   SET_CARD_PASSWORDS: 'SET_CARD_PASSWORDS',
   SET_CARD_NICKNAME: 'SET_CARD_NICKNAME',
   ADD_CARD: 'ADD_CARD',
-};
+} as const;
 
 const ERROR_MESSAGE = {
   CARD_NUMBER_LENGTH: '카드번호가 잘못 입력되었습니다. 카드번호는 16자리로 입력해주세요.',
@@ -17,7 +17,7 @@ const ERROR_MESSAGE = {
   NICKNAME_NOT_STRING:
     '카드 별명이 잘못 입력되었습니다. 카드 별명은 한글 혹은 영어로 입력해주세요.',
   NICKNAME_IS_BLANK: '카드 별명이 잘못 입력되었습니다. 카드 별명을 최소 한자 이상 입력해주세요.',
-};
+} as const;
 
 const MONTH = {
   JANUARY: 1,
@@ -25,7 +25,7 @@ const MONTH = {
   FEBRUARY: 2,
   SEPTEMBER: 9,
   LEADING_ZERO: '0',
-};
+} as const;
 
 const LIMIT_LENGTH = {
   EXPIRATION_DATE: 2,
@@ -34,14 +34,14 @@ const LIMIT_LENGTH = {
   CARD_PASSWORD: 1,
   CVC: 3,
   NICKNAME: 10,
-};
+} as const;
 
 const PATH = {
   REACT_PAYMENTS: '/react-payments',
   CARD_ADD: '/card-add',
   CARD_ADD_SUCCESS: '/card-add-success',
-};
+} as const;
 
-const CVC_DESCRIPTION = '카드 뒷면에 있는 3자리 숫자를 입력해주세요.';
+const CVC_DESCRIPTION = '카드 뒷면에 있는 3자리 숫자를 입력해주세요.' as const;
 
 export { ERROR_MESSAGE, MONTH, LIMIT_LENGTH, CVC_DESCRIPTION, ACTION, PATH };
