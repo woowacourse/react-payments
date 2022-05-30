@@ -59,12 +59,6 @@ const Form = styled.form`
   gap: 15px;
 `;
 
-const FormRow = styled.div`
-  display: flex;
-  align-items: ${props => props.alignItems};
-  gap: ${props => props.gap};
-`;
-
 const SubmitButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
