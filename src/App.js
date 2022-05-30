@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { CardListContext, CardIndexContext, CardListProvider } from 'contexts';
+import { CardListProvider } from 'contexts';
 
 import AddCardPage from 'components/Page/AddCard/AddCardPage';
 import AddCardResultPage from 'components/Page/AddCardResult/AddCardResult';
