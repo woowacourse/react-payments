@@ -1,4 +1,3 @@
-import { INPUT_ELEMENT_KEY_SEPARATOR } from './../utils/constants/index';
 import { CARD_TYPE } from '@/utils/constants';
 
 export type CardNumberInput = {

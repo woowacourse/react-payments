@@ -35,11 +35,11 @@ const defaultCardList: Card[] = isJSONArray(localStorage.getItem('cardList') as 
   ? (JSON.parse(localStorage.getItem('cardList') as string) as Card[])
   : [];
 
-export type CardListState = typeof defaultCardList;
+export type CardListState = Card[];
 export type CardListDispatch = React.Dispatch<CardListAction>;
 export type GetCard = (id: string) => Card | undefined;
 
-const cardListReducer = (state: Card[], action: CardListAction) => {
+const cardListReducer = (state: CardListState, action: CardListAction) => {
   const { type } = action;
 
   switch (type) {

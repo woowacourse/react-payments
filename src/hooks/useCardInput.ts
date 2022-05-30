@@ -84,7 +84,7 @@ export type CardInputState = CardInput;
 export type CardInputDispatch = React.Dispatch<CardInputReducerAction>;
 export type GetInputState = (key: string) => string;
 
-const cardInputReducer = (state: CardInput, action: CardInputReducerAction) => {
+const cardInputReducer = (state: CardInputState, action: CardInputReducerAction) => {
   const { type } = action;
 
   switch (type) {
