@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 
 function CardListPage() {
   const { state } = useContext(CardInfoContext);
-  console.log(state);
   const cards = state.cards;
 
   const navigate = useNavigate();
