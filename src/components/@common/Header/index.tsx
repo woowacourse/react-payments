@@ -11,7 +11,7 @@ function Header({ onClickPreviousButton, children }: PropTypes) {
     <Container>
       {onClickPreviousButton && (
         <div className="previous-button" onClick={onClickPreviousButton}>
-          &lt;
+          {'<'}
         </div>
       )}
       <div className="title">{children}</div>
