@@ -1,14 +1,16 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import { MAX_LENGTH } from '../../constants/card';
-import { CardInfoContext } from '../../providers/CardInfoProvider';
+import { MAX_LENGTH } from "../../constants/card";
+import useCardInfoContext from "../../hooks/useCardInfoContext";
+import { setOwnerNameComplete } from "../../providers/CardInfoCompleteProvider";
+import { setCardOwnerName } from "../../providers/CardInfoProvider";
 
-import { InputContainer, InputTitle, InputBasic } from '../common/styled';
+import { InputContainer, InputTitle, InputBasic } from "../common/styled";
 
 export const CardOwnerInput = () => {
-  const context = useContext(CardInfoContext);
+  const { infoDispatch, completeDispatch } = useCardInfoContext();
 
-  const [ownerName, setOwnerName] = useState('');
+  const [ownerName, setOwnerName] = useState("");
 
   const handleOwnerNameChange = (e) => {
     if (e.target.value.length > MAX_LENGTH.OWNER_NAME) {
@@ -19,11 +21,11 @@ export const CardOwnerInput = () => {
   };
 
   const updateTypedOwnerName = (e) => {
-    context.setCardOwnerName(e.target.value);
+    infoDispatch(setCardOwnerName(e.target.value));
   };
 
   useEffect(() => {
-    context.setInputCompleted('ownerName', !!ownerName);
+    completeDispatch(setOwnerNameComplete(!!ownerName));
   }, [ownerName]);
 
   return (

@@ -1,13 +1,11 @@
-import React from 'react';
+import styled from "styled-components";
 
-import styled from 'styled-components';
-
-import { Shimmer } from '../Shimmer';
-import { CardLayout } from './CardLayout';
+import { Shimmer } from "../Shimmer";
+import { CardLayout } from "./CardLayout";
 
 export const Card = ({
   cardInfo: {
-    cardType,
+    cardType: { name, backgroundColor },
     cardNumbers,
     expireDate: { month, year },
     ownerName,
@@ -16,17 +14,17 @@ export const Card = ({
   onClickCard,
 }) => {
   const formattedCardNumbers = Object.values(cardNumbers)
-    .map((number, idx) => (idx <= 1 ? number : '•'.repeat(number.length)))
-    .join(' ');
+    .map((number, idx) => (idx <= 1 ? number : "•".repeat(number.length)))
+    .join(" ");
 
   return (
     <CardLayout
       size={size}
-      backgroundColor={cardType.color}
+      backgroundColor={backgroundColor}
       onClickCard={onClickCard}
     >
       <CardTop>
-        <CardText>{cardType.name}카드</CardText>
+        <CardText>{name}카드</CardText>
       </CardTop>
       <CardMiddle>
         <SmallCardChip />
@@ -36,9 +34,9 @@ export const Card = ({
           <CardNumbersText>{formattedCardNumbers}</CardNumbersText>
         </CardBottomNumber>
         <CardBottomInfo>
-          <CardText>{ownerName || 'NAME'}</CardText>
+          <CardText>{ownerName || "NAME"}</CardText>
           <CardText>
-            {month || 'MM'}/{year || 'YY'}
+            {month || "MM"}/{year || "YY"}
           </CardText>
         </CardBottomInfo>
       </CardBottom>

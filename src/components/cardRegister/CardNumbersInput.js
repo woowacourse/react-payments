@@ -1,33 +1,38 @@
-import { useState, useContext, useEffect } from 'react';
-import styled from 'styled-components';
+import { useState, useContext, useEffect } from "react";
+import styled from "styled-components";
 
-import { MAX_LENGTH } from '../../constants/card';
-import { CardInfoContext } from '../../providers/CardInfoProvider';
-import { AutoFocusInputContainer } from '../common/AutoFocusInputContainer';
+import { MAX_LENGTH } from "../../constants/card";
+import {
+  CardInfoCompleteDispatchContext,
+  setCardNumberComplete,
+} from "../../providers/CardInfoCompleteProvider";
+import {
+  CardInfoDispatchContext,
+  CardInfoStateContext,
+  setCardNumber,
+} from "../../providers/CardInfoProvider";
+import { AutoFocusInputContainer } from "../common/AutoFocusInputContainer";
 
 import {
   InputContainer,
   InputTitle,
   InputBasic,
   InputBox,
-} from '../common/styled';
+} from "../common/styled";
 
 const DEFAULT_CARD_NUMBERS_TYPE = [
-  { name: 'firstNumber', type: 'text' },
-  { name: 'secondNumber', type: 'text' },
-  { name: 'thirdNumber', type: 'password' },
-  { name: 'fourthNumber', type: 'password' },
+  { name: "firstNumber", type: "text" },
+  { name: "secondNumber", type: "text" },
+  { name: "thirdNumber", type: "password" },
+  { name: "fourthNumber", type: "password" },
 ];
 
 export const CardNumbersInput = ({ openModal }) => {
-  const context = useContext(CardInfoContext);
+  const cardInfo = useContext(CardInfoStateContext);
+  const infoDispatch = useContext(CardInfoDispatchContext);
+  const completeDispatch = useContext(CardInfoCompleteDispatchContext);
 
-  const [cardNumbers, setCardNumbers] = useState({
-    firstNumber: '',
-    secondNumber: '',
-    thirdNumber: '',
-    fourthNumber: '',
-  });
+  const [cardNumbers, setCardNumbers] = useState(cardInfo.cardNumbers);
 
   const handleNumberChange = (e, name) => {
     if (
@@ -41,7 +46,11 @@ export const CardNumbersInput = ({ openModal }) => {
   };
 
   const updateTypedCardNumber = (e, name) => {
-    context.setCardNumber(name, e.target.value);
+    if (!name) {
+      console.log(name);
+      return;
+    }
+    infoDispatch(setCardNumber(name, e.target.value));
   };
 
   useEffect(() => {
@@ -49,9 +58,9 @@ export const CardNumbersInput = ({ openModal }) => {
       (number) => number.length === MAX_LENGTH.EACH_CARD_NUMBER
     );
 
-    context.setInputCompleted('cardNumbers', isCardNumbersCompleted);
+    completeDispatch(setCardNumberComplete(isCardNumbersCompleted));
 
-    if (context.cardInfo.cardType.name === '' && isCardNumbersCompleted) {
+    if (cardInfo.cardType.name === "" && isCardNumbersCompleted) {
       openModal();
     }
   }, [cardNumbers]);
@@ -71,7 +80,7 @@ export const CardNumbersInput = ({ openModal }) => {
               }}
               type={type}
             />
-          )).reduce((prev, cur) => [prev, '-', cur])}
+          )).reduce((prev, cur) => [prev, "-", cur])}
         </AutoFocusInputContainer>
       </Style.CardNumberInputBox>
     </InputContainer>

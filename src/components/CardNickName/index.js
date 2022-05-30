@@ -1,26 +1,31 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { nanoid } from 'nanoid';
-import styled from 'styled-components';
+import { nanoid } from "nanoid";
+import styled from "styled-components";
 
-import { InputBasic } from '../common/styled';
-import { Button } from '../common/Button';
-import { Card } from '../common/Card';
-import { deleteCardInfos, setCardInfos } from '../../utils/localStorage';
-import { BASE_URL } from '../../constants/path';
+import { InputBasic } from "../common/styled";
+import { Button } from "../common/Button";
+import { Card } from "../common/Card";
+import { deleteCardInfos, setCardInfos } from "../../utils/localStorage";
+import { BASE_URL } from "../../constants/path";
+import useCardInfoContext from "../../hooks/useCardInfoContext";
 
 export const CardNickName = ({
   cardInfo,
-  message = '카드 등록이 완료되었습니다!',
+  message = "카드 등록이 완료되었습니다!",
   isModify,
 }) => {
+  const { cardInfo: infoContext } = useCardInfoContext();
+  const currentCardInfo = cardInfo ?? infoContext;
   const navigate = useNavigate();
-  const [cardNickName, setCardNickName] = useState(cardInfo.cardNickName ?? '');
+  const [cardNickName, setCardNickName] = useState(
+    currentCardInfo.cardNickName ?? ""
+  );
 
   const handleSubmitCardInfo = () => {
-    const id = cardInfo.id ?? nanoid();
-    const { password, CVC, ...safeCardInfo } = cardInfo;
+    const id = currentCardInfo.id ?? nanoid();
+    const { password, CVC, ...safeCardInfo } = currentCardInfo;
     const uploadCardInfo = {
       [id]: {
         ...safeCardInfo,
@@ -34,14 +39,14 @@ export const CardNickName = ({
   };
 
   const handleEnterSubmit = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSubmitCardInfo();
     }
   };
 
   const handleDeleteCard = () => {
-    if (confirm('정말 삭제하시겠습니까?')) {
-      deleteCardInfos(cardInfo.id);
+    if (confirm("정말 삭제하시겠습니까?")) {
+      deleteCardInfos(currentCardInfo.id);
       navigate(BASE_URL);
     }
   };
@@ -50,7 +55,7 @@ export const CardNickName = ({
     <>
       <Style.CardWrapper>
         <Style.Message>{message}</Style.Message>
-        <Card size="lg" cardInfo={cardInfo} />
+        <Card size="lg" cardInfo={currentCardInfo} />
         <Style.ModifyCardNameInput
           value={cardNickName}
           onChange={(e) => {
