@@ -65,11 +65,7 @@ function AddPage() {
         <CVCField />
         <PasswordField />
         <FooterWrapper>
-          {isFormFulfilled && (
-            <Button type={'submit'} onClick={handleSubmit}>
-              다음
-            </Button>
-          )}
+          {isFormFulfilled && <Button type={'submit'}>다음</Button>}
         </FooterWrapper>
       </FormWrapper>
       <Modal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
