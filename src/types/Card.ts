@@ -1,3 +1,4 @@
+import { INPUT_ELEMENT_KEY_SEPARATOR } from './../utils/constants/index';
 import { CARD_TYPE } from '@/utils/constants';
 
 export type CardNumberInput = {
@@ -12,6 +13,8 @@ export type CardExpirationDateInput = {
   year: string;
 };
 
+export type CardOwnerNameInput = string;
+
 export type CardSecurityCodeInput = string;
 
 export type CardPasswordInput = {
@@ -19,14 +22,38 @@ export type CardPasswordInput = {
   second: string;
 };
 
-export type CardTypeInput = keyof typeof CARD_TYPE;
+export type CardType = keyof typeof CARD_TYPE | null;
 
 export interface Card {
   id: string;
   alias: string;
   cardNumber: CardNumberInput;
   expirationDate: CardExpirationDateInput;
+  ownerName: CardOwnerNameInput;
   securityCode: CardSecurityCodeInput;
   password: CardPasswordInput;
-  cardType: CardTypeInput;
+  cardType: CardType;
 }
+
+export type CardInput = Omit<Card, 'id' | 'alias'>;
+
+export type CardExcludeInput = Omit<Card, keyof CardInput>;
+
+export type CardInputType =
+  | `cardNumber/first`
+  | `cardNumber/second`
+  | `cardNumber/third`
+  | `cardNumber/forth`
+  | 'expirationDate/month'
+  | 'expirationDate/year'
+  | 'ownerName'
+  | 'securityCode'
+  | 'password/first'
+  | 'password/second';
+
+export type CardPasswordTypeInput =
+  | `cardNumber/third`
+  | `cardNumber/forth`
+  | 'securityCode'
+  | 'password/first'
+  | 'password/second';
