@@ -2,11 +2,11 @@ import { useCallback, useRef } from 'react';
 
 const findNotCompletedInput = (inputMap, currentInputKey) => {
   const nextInputKey = Object.keys(inputMap).find(
-    key => key !== currentInputKey && inputMap[key].isComplete === false,
+    (key) => key !== currentInputKey && inputMap[key].isComplete === false,
   );
 
   return (
-    inputMap[nextInputKey] ?? {
+    (nextInputKey && inputMap[nextInputKey]) ?? {
       element: null,
     }
   );

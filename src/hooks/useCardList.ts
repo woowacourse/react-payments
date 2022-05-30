@@ -4,7 +4,7 @@ import { isJSONArray } from '../utils/util';
 import { Card, CardInput } from '@/types/Card';
 export const enum CardListReducerActionType {
   ADD_CARD = 'ADD_CARD',
-  CHANGE_ALIAS = 'CHANGE',
+  CHANGE_ALIAS = 'CHANGE_ALIAS',
   UPDATE_CARD = 'UPDATE_CARD',
 }
 

@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export const useVirtualKeyboard = () => {
   const [currentFocusInputInfo, setCurrentFocusInputInfo] = useState({
