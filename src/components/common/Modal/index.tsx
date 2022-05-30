@@ -1,8 +1,9 @@
+import { Dispatch, SetStateAction } from 'react'
 import { Dimmer } from 'components/common/Modal/style'
 
 interface ModalType {
   isOpen: boolean
-  setIsOpen: (isOpen: boolean) => {}
+  setIsOpen: Dispatch<SetStateAction<boolean>>
   children: React.ReactNode
 }
 
