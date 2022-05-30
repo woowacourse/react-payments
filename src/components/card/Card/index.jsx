@@ -1,10 +1,7 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { CARD_NUMBER_TYPE, EXPIRATION_DATE_TYPE, PASSWORD_TYPE } from '../../types';
 import { objectToString } from '../../../utils/util';
 import { CARD_TYPE } from '../../../utils/constants';
 
-function Card({ cardInformation: { cardNumber, expirationDate, ownerName, cardType } }) {
+function Card({ cardNumber, expirationDate, ownerName, cardType }) {
   return (
     <div className="card-box">
       <div
@@ -36,16 +33,5 @@ function Card({ cardInformation: { cardNumber, expirationDate, ownerName, cardTy
     </div>
   );
 }
-
-Card.propTypes = {
-  cardInformation: PropTypes.shape({
-    cardNumber: CARD_NUMBER_TYPE,
-    expirationDate: EXPIRATION_DATE_TYPE,
-    ownerName: PropTypes.string,
-    securityCode: PropTypes.string,
-    password: PASSWORD_TYPE,
-    cardType: PropTypes.string,
-  }),
-};
 
 export default Card;

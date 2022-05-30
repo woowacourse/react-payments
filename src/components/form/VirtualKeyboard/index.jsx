@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { uid } from 'react-uid';
 import { isNumberInRange } from '../../../utils/validation/form';
-const shuffle = array => {
+const shuffle = (array) => {
   const target = [...array];
   return target.sort(() => Math.random() - 0.5);
 };
@@ -17,7 +17,7 @@ function VirtualKeyboard({
   elementState,
   elementKey,
 }) {
-  const onClickNumber = e => {
+  const onClickNumber = (e) => {
     const {
       target: { textContent },
     } = e;
@@ -28,7 +28,7 @@ function VirtualKeyboard({
       element?.focus();
 
       cardInputDispatch({
-        type: 'CHANGE_PASSWORD_INPUT',
+        type: 'CHANGE_PASSWORD_TYPE_INPUT_VALUE',
         payload: { elementKey, value: `${elementState}${textContent}` },
       });
     }
@@ -43,7 +43,7 @@ function VirtualKeyboard({
 
   const onClickBackSpace = () => {
     cardInputDispatch({
-      type: 'CHANGE_PASSWORD_INPUT',
+      type: 'CHANGE_PASSWORD_TYPE_INPUT_VALUE',
       payload: { elementKey, value: elementState.slice(0, -1) },
     });
   };
@@ -54,7 +54,7 @@ function VirtualKeyboard({
 
   return (
     <div className="virtual-keyboard-wrapper">
-      {shuffle(array).map(number => (
+      {shuffle(array).map((number) => (
         <div key={uid(number)} className="virtual-keyboard-item" onClick={onClickNumber}>
           {number}
         </div>

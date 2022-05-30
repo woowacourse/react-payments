@@ -1,0 +1,107 @@
+.pay-inner {
+  padding: 0px 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 600px;
+}
+
+.pay-inner h2 {
+  border-bottom: 3px solid #dddddd;
+
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.card-slider {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.card-wrapper {
+  display: flex;
+  gap: 20px;
+
+  background-color: #f6f6f6;
+  padding: 10px 20px;
+
+  overflow-x: scroll;
+  border-radius: 4px;
+}
+
+.card-direction {
+  color: #575757;
+  font-size: 1.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.pay-amount {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pay-amount > span {
+  box-sizing: border-box;
+
+  position: relative;
+}
+
+.pay-amount > span::after {
+  content: '';
+  width: 90%;
+  border: 3px solid skyblue;
+  opacity: 0.5;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.agreement-information {
+  font-size: 0.8rem;
+}
+
+.pay-button-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  gap: 10px;
+}
+
+.pay-button-form button {
+  background-color: #dddddd;
+
+  flex: 1;
+  padding: 10px;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+
+  font-size: 1.3rem;
+}
+
+.pay-button-form button.focus {
+  background-color: #2ac1bc;
+}
+
+.pay-button-form button:hover {
+  background-color: #2ac1bc;
+}
+
+.card-item-wrapper.card-focus {
+  opacity: 0.99;
+}
+
+.card-item-wrapper {
+  opacity: 0.5;
+  cursor: pointer;
+}

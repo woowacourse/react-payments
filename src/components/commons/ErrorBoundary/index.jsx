@@ -12,13 +12,9 @@ class ErrorBoundary extends Component {
     return { hasError: true };
   }
 
-  componentDidCatch() {
-    console.log('hi');
-  }
+  componentDidCatch() {}
 
-  componentWillUnmount() {
-    console.log('cehck');
-  }
+  componentWillUnmount() {}
 
   render() {
     return this.state.hasError ? <ErrorPage /> : this.props.children;
