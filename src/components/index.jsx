@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-=======
->>>>>>> 3aea1817ac5bcc9b702b2f2a2d217568f57dffe0
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useCardList } from '../hooks/useCardList';
 import Landing from '../pages';
