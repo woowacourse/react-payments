@@ -1,5 +1,5 @@
 {
-  "homepage": "https://github.com/kkojae91/react-payments",
+  "homepage": "https://kkojae91.github.io/react-payments",
   "name": "react-payments",
   "version": "0.1.0",
   "private": true,
@@ -20,8 +20,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public",
-    "chromatic": "npx chromatic --project-token=bbd18bbfa9f5"
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
