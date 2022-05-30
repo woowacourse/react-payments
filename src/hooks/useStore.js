@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import store from '../store/store';
 import { removeCrucialCardInfo } from '../utils/commons';
 
@@ -12,39 +12,34 @@ const useStore = () => {
     setCardList(safeCardInfoList);
   }, []);
 
-  const cardsApi = useMemo(
-    () => ({
-      cardList,
-      addCard: (cardInfo) => {
-        const newCard = { ...cardInfo, id: new Date().valueOf() };
-        const safeCardInfo = removeCrucialCardInfo(newCard);
+  const addCard = (cardInfo) => {
+    const newCard = { ...cardInfo, id: new Date().valueOf() };
+    const safeCardInfo = removeCrucialCardInfo(newCard);
 
-        store.post(newCard);
-        setCardList((prevCardList) => [...prevCardList, safeCardInfo]);
+    store.post(newCard);
+    setCardList((prevCardList) => [...prevCardList, safeCardInfo]);
 
-        return safeCardInfo;
-      },
-      updateCard: (id, updatedCardInfo) => {
-        store.patch(id, updatedCardInfo);
+    return safeCardInfo;
+  };
 
-        setCardList((prevCardList) => {
-          const clonedCardList = [...prevCardList];
-          const index = clonedCardList.findIndex((card) => card.id === id);
-          const safeCardInfo = removeCrucialCardInfo(updatedCardInfo);
+  const updateCard = (id, updatedCardInfo) => {
+    store.patch(id, updatedCardInfo);
 
-          clonedCardList[index] = {
-            ...clonedCardList[index],
-            ...safeCardInfo,
-          };
+    setCardList((prevCardList) => {
+      const clonedCardList = [...prevCardList];
+      const index = clonedCardList.findIndex((card) => card.id === id);
+      const safeCardInfo = removeCrucialCardInfo(updatedCardInfo);
 
-          return clonedCardList;
-        });
-      },
-    }),
-    [cardList]
-  );
+      clonedCardList[index] = {
+        ...clonedCardList[index],
+        ...safeCardInfo,
+      };
 
-  return cardsApi;
+      return clonedCardList;
+    });
+  };
+
+  return { cardList, addCard, updateCard };
 };
 
 export default useStore;
