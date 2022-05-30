@@ -14,6 +14,7 @@ import { CardPasswordInput } from "./CardPasswordInput";
 import { CardSelectModal } from "./CardSelectModal";
 import { CVCHelperModal } from "./CVCHelperModal";
 import useCardInfoContext from "../../hooks/useCardInfoContext";
+import { BackwardButton } from "../common/BackwardButton";
 
 export const CardRegister = ({ onSubmit }) => {
   const { cardInfo, completeInfo } = useCardInfoContext();
@@ -24,7 +25,10 @@ export const CardRegister = ({ onSubmit }) => {
 
   return (
     <>
-      <PageTitle>카드 추가</PageTitle>
+      <PageTitle>
+        <BackwardButton />
+        카드 추가
+      </PageTitle>
       <CardPreview
         cardInfo={cardInfo}
         onClickCard={() => openModal(COMPONENTS.CARD_TYPE)}
