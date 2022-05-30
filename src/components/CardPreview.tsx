@@ -1,10 +1,18 @@
 import PropTypes from 'prop-types';
 import Button from 'components/common/Button';
-import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants';
+import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants/index';
 import useToggle from 'hooks/useToggle';
+import { CardInfo } from 'types';
 
-const CardPreview = ({ cardInfo, handleModal, isVisibleButton, theme }) => {
-  const [isCardFront, handleCardPosition] = useToggle(true);
+interface CardPreviewProps {
+  cardInfo: CardInfo;
+  isVisibleButton?: string;
+  theme: string;
+  handleModal?: () => void;
+}
+
+const CardPreview = ({ cardInfo, isVisibleButton, theme, handleModal }: CardPreviewProps) => {
+  const { isToggle: isCardFront, handleToggle: handleCardPosition } = useToggle(true);
 
   const { cardNumber, ownerName, expiryDate, company, privacyCode } = cardInfo;
   const { first, second, third, fourth } = cardNumber;

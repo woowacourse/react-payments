@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { COMPANY_LIST, THEME } from 'constants';
+import { COMPANY_LIST, THEME } from 'constants/index';
 
 export const cardNumberInputInfoList = [
   {

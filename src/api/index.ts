@@ -1,8 +1,9 @@
-import { GET, POST, PATCH, DELETE } from 'constants';
+import { GET, POST, PATCH, DELETE } from 'constants/index';
+import { CardInfo } from 'types';
 
 const API_BASE_URL = 'https://json-web-server-lokba.herokuapp.com';
 
-const OPTIONS = (method, body) => {
+const OPTIONS = (method: string, body?: object) => {
   switch (method) {
     case GET:
     case DELETE:
@@ -24,7 +25,7 @@ const OPTIONS = (method, body) => {
 
 const CARD_API = {
   // create
-  addCard(cardInfo) {
+  addCard(cardInfo: CardInfo) {
     try {
       fetch(`${API_BASE_URL}/cardList`, OPTIONS(POST, cardInfo));
     } catch (e) {
@@ -32,7 +33,7 @@ const CARD_API = {
     }
   },
   // read
-  async getCard(cardId) {
+  async getCard(cardId: string) {
     try {
       const response = await fetch(`${API_BASE_URL}/cardList/${cardId}`, OPTIONS(GET));
 
@@ -55,7 +56,7 @@ const CARD_API = {
     }
   },
   // update
-  updateCard(id, cardInfo) {
+  updateCard(id: string, cardInfo: CardInfo) {
     try {
       fetch(`${API_BASE_URL}/cardList/${id}`, OPTIONS(PATCH, cardInfo));
     } catch (e) {
@@ -63,7 +64,7 @@ const CARD_API = {
     }
   },
   // delete
-  async deleteCard(id) {
+  async deleteCard(id: string) {
     try {
       await fetch(`${API_BASE_URL}/cardList/${id}`, OPTIONS(DELETE));
     } catch (e) {

@@ -1,8 +1,14 @@
 import { useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { PASS, FAIL, GUIDE_MESSAGE } from 'constants';
 
-const Message = ({ name, isFilled, align = 'text-left' }) => {
+import { PASS, FAIL, GUIDE_MESSAGE } from 'constants/index';
+
+interface MessageProps {
+  name: string;
+  isFilled: boolean;
+  align: string;
+}
+
+const Message = ({ name, isFilled, align }: MessageProps) => {
   const type = useMemo(() => (isFilled ? PASS : FAIL), [isFilled]);
 
   return (
@@ -12,10 +18,8 @@ const Message = ({ name, isFilled, align = 'text-left' }) => {
   );
 };
 
-Message.propTypes = {
-  name: PropTypes.string,
-  isFilled: PropTypes.bool,
-  align: PropTypes.string,
+Message.defaultProps = {
+  align: 'text-left',
 };
 
 export default Message;

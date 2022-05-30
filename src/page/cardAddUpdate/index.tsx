@@ -23,9 +23,9 @@ import {
   cardPasswordInputInfoList,
   cardCompanyList,
 } from 'page/cardAddUpdate/data';
-import { PATH, STEP1, STEP2, INPUT_MAX_LENGTH } from 'constants';
+import { PATH, STEP1, STEP2, INPUT_MAX_LENGTH } from 'constants/index';
 import LoadingSpinner from 'components/common/LoadingSpinner';
-import { CardInfoContext, initialCardInfo } from 'context/cardInfoProvider';
+import { CardInfoContext, CardInfoContextValue, initialCardInfo } from 'context/cardInfoProvider';
 
 const CardAddUpdatePage = () => {
   const navigate = useNavigate();
@@ -41,20 +41,21 @@ const CardAddUpdatePage = () => {
     isPasswordFilled,
     isFullFilled,
     dispatch,
-  } = useContext(CardInfoContext);
+  } = useContext(CardInfoContext) as CardInfoContextValue;
 
   const { alias, ownerName, theme } = cardInfo;
 
   // 카드 추가 단계(step) - STEP1 || STEP2
   const [step, setStep] = useState(STEP1);
-  const [modalVisible, handleModal] = useToggle(false);
+  const { isToggle: modalVisible, handleToggle: handleModal } = useToggle(false);
 
-  const handleInputChange = ({ target: { name, value } }, type) => {
+  const handleInputChange = (e: any, type: string) => {
+    const { name, value } = e.target;
     if (!validator[type](value, name)) return;
     dispatch({ type, name, value });
   };
 
-  const handleCompanyClick = (company, theme) => {
+  const handleCompanyClick = (company: string, theme: string) => {
     dispatch({ type: 'company', value: company });
     dispatch({ type: 'theme', value: theme });
     handleModal();
@@ -64,7 +65,7 @@ const CardAddUpdatePage = () => {
     if (path === PATH.ADD) {
       CARD_API.addCard(cardInfo);
     } else {
-      CARD_API.updateCard(cardId, cardInfo);
+      CARD_API.updateCard(cardId as string, cardInfo);
     }
 
     navigate('/react-payments');
@@ -72,7 +73,7 @@ const CardAddUpdatePage = () => {
 
   useEffect(() => {
     if (path === PATH.MODIFY) {
-      CARD_API.getCard(cardId)
+      CARD_API.getCard(cardId as string)
         .then((response) => dispatch({ type: 'load', value: response }))
         .catch((e) => {
           navigate('/react-payments/notFound');

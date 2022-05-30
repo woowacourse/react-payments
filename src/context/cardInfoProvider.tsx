@@ -1,11 +1,30 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { CRYPTO_STRING } from 'constants';
-import { CARD_NUMBER, COMPANY, EXPIRY_DATE, PASSWORD, PRIVACY_CODE } from 'constants';
+
+import {
+  CRYPTO_STRING,
+  CARD_NUMBER,
+  COMPANY,
+  EXPIRY_DATE,
+  PASSWORD,
+  PRIVACY_CODE,
+} from 'constants/index';
 import useIsFilled from 'hooks/useIsFilled';
 import reducer from 'page/cardAddUpdate/reducer';
 import { createContext, useReducer } from 'react';
+import { CardInfo } from 'types';
 
-export const CardInfoContext = createContext();
+export interface CardInfoContextValue {
+  cardInfo: CardInfo;
+  isCompanyFilled: boolean;
+  isCardNumberFilled: boolean;
+  isExpiryDateFilled: boolean;
+  isPrivacyCodeFilled: boolean;
+  isPasswordFilled: boolean;
+  isFullFilled: boolean;
+  dispatch: any;
+}
+
+export const CardInfoContext = createContext<CardInfoContextValue | null>(null);
 
 export const initialCardInfo = {
   alias: '',

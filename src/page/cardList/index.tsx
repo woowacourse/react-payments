@@ -7,14 +7,18 @@ import Header from 'components/common/Header';
 import DeleteIcon from 'assets/delete_icon.png';
 
 import CARD_API from 'api';
-import { CONFIRM_MESSAGE } from 'constants';
+import { CONFIRM_MESSAGE } from 'constants/index';
 import LoadingSpinner from 'components/common/LoadingSpinner';
+import { CardInfo } from 'types';
 
 const CardListPage = () => {
-  const [cardList, setCardList] = useState([]);
+  const [cardList, setCardList] = useState<CardInfo[]>([]);
   const isLoading = useRef(true);
 
-  const handleDeleteCard = async (e, cardId) => {
+  const handleDeleteCard = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    cardId: string,
+  ): Promise<void> => {
     e.preventDefault();
 
     if (window.confirm(CONFIRM_MESSAGE)) {
@@ -46,7 +50,7 @@ const CardListPage = () => {
               <Button
                 className="card-delete-button"
                 theme="red"
-                handleClick={(e) => handleDeleteCard(e, card.id)}
+                handleClick={(e: any) => handleDeleteCard(e, card.id)}
               >
                 <img src={DeleteIcon} alt="카드삭제버튼" />
               </Button>
