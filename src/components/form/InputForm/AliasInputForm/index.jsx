@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useFormComplete } from '../../../../hooks/useFormComplete';
+import { useFormComplete } from '../../../../hooks/useFormComplete.ts';
 import Position from '../../../commons/Position';
 import PropTypes from 'prop-types';
 import UnderlineInput from '../../Input/UnderlineInput';
@@ -11,16 +11,16 @@ function AliasInputForm({ card, cardListDispatch }) {
   const navigate = useNavigate();
   const [alias, setAlias] = useState(card.alias ?? '');
 
-  const isComplete = useFormComplete(alias, alias => alias.length > 0);
+  const isComplete = useFormComplete(alias, (alias) => alias.length > 0);
 
-  const onSubmitInputForm = e => {
+  const onSubmitInputForm = (e) => {
     e.preventDefault();
 
     cardListDispatch({ type: 'CHANGE_ALIAS', payload: { alias, id: card.id } });
     navigate(ROUTE.cardList.route, { replace: true });
   };
 
-  const onChangeInput = e => {
+  const onChangeInput = (e) => {
     const {
       target: { value },
     } = e;
