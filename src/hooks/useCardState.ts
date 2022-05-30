@@ -54,7 +54,7 @@ const useCardState = () => {
   const [cardState, dispatch] = useReducer(reducer, initialState);
   const isComplete = isInputComplete(cardState);
 
-  return [{ ...cardState, isComplete }, dispatch];
+  return { state: { ...cardState, isComplete }, dispatch };
 };
 
 export default useCardState;

@@ -1,14 +1,16 @@
 import React, { useCallback, useMemo } from 'react';
 import useCardState from '@/hooks/useCardState';
+
+import { Children, InputCardState, Option, TextFieldEvent } from '@/types';
 import { CARD_NUMBER } from '@/constants';
 
-const CardContext = React.createContext(null);
+const CardContext = React.createContext<InputCardState | null>(null);
 
-function CardContextProvider({ children }) {
-  const [state, dispatch] = useCardState();
+function CardContextProvider({ children }: Children) {
+  const { state, dispatch } = useCardState();
 
   const onChangeTextField = useCallback(
-    ({ target }, option = {}) => {
+    ({ target }: TextFieldEvent, option: Option) => {
       const textFieldName = target.name;
 
       switch (textFieldName) {

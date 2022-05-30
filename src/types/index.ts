@@ -19,10 +19,18 @@ interface ExpireDate {
 
 type CardStateType = string | string[] | ExpireDate;
 
+interface Children {
+  children: JSX.Element;
+}
+
 interface ErrorChecker {
   state: CardStateType;
   validate: (state: CardStateType) => void;
   isAnyValueEmpty: boolean;
+}
+
+interface Option {
+  index: number;
 }
 
 interface Payload {
@@ -30,4 +38,30 @@ interface Payload {
   contents: string | ArrayContents;
 }
 
-export { ArrayContents, CardState, CardStateType, ErrorChecker, ExpireDate, Payload };
+interface TextFieldEventTarget {
+  name: string;
+  value: string;
+}
+
+interface TextFieldEvent {
+  target: TextFieldEventTarget;
+}
+
+interface InputCardState extends CardState {
+  isComplete: boolean;
+  onChangeTextField: ({ target }: TextFieldEvent, option: Option) => void;
+}
+
+export {
+  ArrayContents,
+  CardState,
+  CardStateType,
+  Children,
+  ErrorChecker,
+  ExpireDate,
+  Option,
+  Payload,
+  TextFieldEvent,
+  TextFieldEventTarget,
+  InputCardState,
+};
