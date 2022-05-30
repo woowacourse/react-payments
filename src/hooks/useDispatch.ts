@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { UserDispatch } from '../contexts';
+import { UserContext } from '../contexts';
 
 function useDispatch() {
-  const dispatch = useContext(UserDispatch);
+  const { dispatch } = useContext(UserContext);
   if (!dispatch) throw new Error('Cannot find UserDispatch');
   return dispatch;
 }

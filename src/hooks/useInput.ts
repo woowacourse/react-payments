@@ -1,9 +1,24 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 
-const convertToUpperCase = word => word.toUpperCase();
-const notAlphabet = word => /[^a-zA-Z\s]/.test(word);
+interface Options {
+  initialValue: string;
+  maxLength: number;
+  type: string;
+  tryFocus: boolean;
+  inputs: [];
+}
 
-const numberValidator = (value, maxLength) => {
+interface HandleFocusProps {
+  target: any;
+  max: number;
+  min: number;
+  cokeList: [] | any;
+}
+
+const convertToUpperCase = (word: string) => word.toUpperCase();
+const notAlphabet = (word: string) => /[^a-zA-Z\s]/.test(word);
+
+const numberValidator = (value: string, maxLength: number) => {
   if (value.includes(' ') || Number.isNaN(Number(value))) {
     throw new Error('숫자만 입력해주세요.');
   }
@@ -17,7 +32,7 @@ const numberValidator = (value, maxLength) => {
   }
 };
 
-const stringValidator = (value, maxLength) => {
+const stringValidator = (value: string, maxLength: number) => {
   if (notAlphabet(value)) {
     throw new Error('영어만 입력해 주세요.');
   }
@@ -27,15 +42,15 @@ const stringValidator = (value, maxLength) => {
   }
 };
 
-function useInput(options) {
+function useInput(options: Options) {
   const { initialValue, maxLength, type = 'string', tryFocus = false, inputs = [] } = options || {};
-  const [value, setValue] = useState(initialValue || '');
-  const [errorMessage, setErrorMessage] = useState('');
-  const currentTarget = useRef(null);
+  const [value, setValue] = useState<string>(initialValue || '');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const currentTarget: any = useRef(null);
   const isValid = useRef(false);
 
   const handleNumber = useCallback(
-    (receivedValue, targetName = '') => {
+    (receivedValue: string, targetName = '') => {
       const result = receivedValue;
 
       try {
@@ -47,21 +62,21 @@ function useInput(options) {
         if (targetName === '') {
           setValue(result);
         } else {
-          setValue(prev => ({
-            ...prev,
+          setValue((prev: string) => ({
+            ...(prev as any),
             [targetName]: result,
           }));
         }
       } catch (err) {
         isValid.current = false;
-        setErrorMessage(err.message);
+        setErrorMessage((err as Error).message);
       }
     },
     [maxLength],
   );
 
   const handleString = useCallback(
-    receivedValue => {
+    (receivedValue: string) => {
       const result = convertToUpperCase(receivedValue);
 
       try {
@@ -72,14 +87,14 @@ function useInput(options) {
         setValue(result);
       } catch (err) {
         isValid.current = false;
-        setErrorMessage(err.message);
+        setErrorMessage((err as Error).message);
       }
     },
     [maxLength],
   );
 
   const onChangeInput = useCallback(
-    e => {
+    (e: any) => {
       const targetValue = e.target.value || '';
       const targetName = e.target.name || '';
       currentTarget.current = e;
@@ -94,17 +109,17 @@ function useInput(options) {
     [type, handleNumber, handleString],
   );
 
-  const handleFocus = useCallback(({ target, max, min = 0, cokeList = [] }) => {
-    const go = index => {
+  const handleFocus = useCallback(({ target, max, min = 0, cokeList = [] }: HandleFocusProps) => {
+    const go = (index: number) => {
       if (index !== cokeList.length - 1) cokeList[index + 1].current.focus();
       return false;
     };
-    const back = index => {
+    const back = (index: number) => {
       if (index !== min) cokeList[index - 1].current.focus();
       return false;
     };
 
-    cokeList.every((cardNoRef, index) => {
+    cokeList.every((cardNoRef: any, index: number) => {
       if (target !== cardNoRef.current) return true;
 
       if (target.value.length === max) go(index);
@@ -117,7 +132,7 @@ function useInput(options) {
   useEffect(() => {
     if (!tryFocus || !currentTarget.current) return;
 
-    handleFocus({ target: currentTarget.current.target, max: maxLength, cokeList: inputs });
+    handleFocus({ target: currentTarget.current.target, max: maxLength, cokeList: inputs } as HandleFocusProps);
   }, [value, tryFocus, inputs, handleFocus, maxLength]);
 
   return [value, onChangeInput, isValid.current, errorMessage];
