@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import PageTemplate from '../components/commons/PageTemplate';
 import { ROUTE } from '../route';
