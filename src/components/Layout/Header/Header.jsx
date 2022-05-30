@@ -1,11 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const Header = ({ children }) => {
-  return <StyledHeader>{children}</StyledHeader>;
-};
-
-const StyledHeader = styled.header`
+const Header = styled.header`
   position: absolute;
   margin: 22px 24px 0px;
   width: auto;

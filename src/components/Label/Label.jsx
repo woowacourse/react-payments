@@ -1,11 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const Label = ({ children }) => {
-  return <StyledLabel>{children}</StyledLabel>;
-};
-
-const StyledLabel = styled.label`
+const Label = styled.label`
   display: block;
   margin-bottom: 8px;
 

@@ -1,11 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const InputBox = ({ children, ...rest }) => {
-  return <StyledInputBox {...rest}>{children}</StyledInputBox>;
-};
-
-const StyledInputBox = styled.div`
+const InputBox = styled.div`
   display: inline-flex;
   width: fit-content;
   height: 47px;

@@ -1,11 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const Footer = ({ children }) => {
-  return <StyledFooter>{children}</StyledFooter>;
-};
-
-const StyledFooter = styled.footer`
+const Footer = styled.footer`
   position: absolute;
   display: flex;
   flex-direction: row;
