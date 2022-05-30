@@ -1,3 +1,5 @@
+import { initialCardInfo } from 'context/cardInfoProvider';
+
 const reducer = (state, action) => {
   const { type, name, value } = action;
 
@@ -61,6 +63,10 @@ const reducer = (state, action) => {
           [name]: value,
         },
       };
+    case ACTION_TYPES.RESET:
+      return {
+        ...initialCardInfo,
+      };
 
     default:
       return state;
@@ -77,6 +83,7 @@ const ACTION_TYPES = {
   OWNER_NAME: 'ownerName',
   PRIVACY_CODE: 'privacyCode',
   PASSWORD: 'password',
+  RESET: 'reset',
 };
 
 export default reducer;
