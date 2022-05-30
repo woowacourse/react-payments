@@ -1,23 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import ICONS from '../../constants/icons';
 
 const CardRegistration = () => (
   <StyledCardPreview className="card-box">
     <div className="empty-card">
-      <div className="card-middle">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          style={{ height: '20px', width: '20px' }}
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
-          <path
-            fillRule="evenodd"
-            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </div>
+      <div className="card-middle">{ICONS.PLUS}</div>
     </div>
   </StyledCardPreview>
 );
