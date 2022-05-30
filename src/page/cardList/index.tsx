@@ -45,7 +45,7 @@ const CardListPage = () => {
         {cardList.map((card) => (
           <Link key={card.id} to={`/react-payments/modify/${card.id}`}>
             <div className="flex-column-center card-item-wrapper">
-              <CardPreview cardInfo={card} isVisibleButton="hide" theme={card.theme} />
+              <CardPreview info={card} isVisibleButton="hide" theme={card.theme} />
               <span className="text-center">{card.alias}</span>
               <Button
                 className="card-delete-button"

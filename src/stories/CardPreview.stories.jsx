@@ -15,7 +15,7 @@ const Template = (args) => <CardPreview {...args} />;
 
 export const CardPreviewTemplate = Template.bind({});
 CardPreviewTemplate.args = {
-  cardInfo: {
+  info: {
     company: '무비카드',
     cardNumber: {
       first: '1234',
@@ -26,5 +26,5 @@ CardPreviewTemplate.args = {
     ownerName: '록바',
     expiryDate: { month: '10', year: '23' },
   },
-  isCardFront: true,
+  isFrontView: true,
 };

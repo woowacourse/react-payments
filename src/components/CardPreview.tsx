@@ -4,16 +4,16 @@ import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants/i
 import { CardInfo } from 'types';
 
 interface CardPreviewProps {
-  cardInfo: CardInfo;
+  info: CardInfo;
   isVisibleButton?: string;
   theme: string;
   handleModal?: () => void;
 }
 
-const CardPreview = ({ cardInfo, isVisibleButton, theme, handleModal }: CardPreviewProps) => {
-  const { isToggle: isCardFront, handleToggle: handleCardPosition } = useToggle(true);
+const CardPreview = ({ info, isVisibleButton, theme, handleModal }: CardPreviewProps) => {
+  const { isToggle: isFrontView, handleToggle: handlePosition } = useToggle(true);
 
-  const { cardNumber, ownerName, expiryDate, company, privacyCode } = cardInfo;
+  const { cardNumber, ownerName, expiryDate, company, privacyCode } = info;
   const { first, second, third, fourth } = cardNumber;
 
   const upperCaseOwnerName = ownerName.toUpperCase() || DEFAULT_CARD_INFO.OWNER_NAME;
@@ -23,7 +23,7 @@ const CardPreview = ({ cardInfo, isVisibleButton, theme, handleModal }: CardPrev
   return (
     <div className="card-box">
       <div className={`empty-card bg-${theme}`} onClick={handleModal}>
-        {isCardFront ? (
+        {isFrontView ? (
           <>
             <div className="card-top">
               <span className="card-text">{company}</span>
@@ -62,18 +62,15 @@ const CardPreview = ({ cardInfo, isVisibleButton, theme, handleModal }: CardPrev
         )}
         {!company && <Button className="card-add-button">+</Button>}
       </div>
-      <Button
-        className={'card-change-button ' + `${isVisibleButton}`}
-        handleClick={handleCardPosition}
-      >
-        {isCardFront ? 'Back' : 'Front'}
+      <Button className={'card-change-button ' + `${isVisibleButton}`} handleClick={handlePosition}>
+        {isFrontView ? 'Back' : 'Front'}
       </Button>
     </div>
   );
 };
 
 CardPreview.defaultProps = {
-  isCardFront: true,
+  isFrontView: true,
 };
 
 export default CardPreview;

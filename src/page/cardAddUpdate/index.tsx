@@ -100,7 +100,7 @@ const CardAddUpdatePage = () => {
               </Button>
             </Link>
           </Header>
-          <CardPreview handleModal={handleModal} cardInfo={cardInfo} theme={theme} />
+          <CardPreview handleModal={handleModal} info={cardInfo} theme={theme} />
           <Message name="company" isFilled={isCompanyFilled} align="text-center" />
 
           <FormInput
@@ -191,7 +191,7 @@ const CardAddUpdatePage = () => {
               {path === PATH.ADD ? '카드등록이 완료되었습니다.' : '카드수정이 완료되었습니다.'}
             </h2>
           </div>
-          <CardPreview cardInfo={cardInfo} theme={theme} />
+          <CardPreview info={cardInfo} theme={theme} />
           <div className="input-container flex-center w-100">
             <input
               className="input-underline w-75"
