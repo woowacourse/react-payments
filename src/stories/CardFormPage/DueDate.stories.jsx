@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
-import DueDate from '../../components/CardFormPage/DueDate';
-import { CardInfoContext } from '../../context';
+import React, { useContext } from "react";
+import DueDate from "components/pages/CardFormPage/DueDate";
+import { CardInfoContext } from "components/context/CardInfoProvider";
 
 export default {
-  title: 'DueDate',
+  title: "CardFormPage/DueDate",
   component: DueDate,
   argTypes: {
-    dimensions: { control: 'object' },
+    dimensions: { control: "object" },
   },
 };
 
-const Template = args => {
+const Template = (args) => {
   const { cardDate } = useContext(CardInfoContext);
   return <DueDate {...args} cardDate={cardDate} />;
 };

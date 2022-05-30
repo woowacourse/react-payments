@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import CardSecurityCode from '../../components/CardFormPage/CardSecurityCode';
-import { CardInfoContext } from '../../context';
+import React, { useContext } from "react";
+import CardSecurityCode from "components/pages/CardFormPage/CardSecurityCode";
+import { CardInfoContext } from "components/context/CardInfoProvider";
 
 export default {
-  title: 'CardSecurityCode',
+  title: "CardFormPage/CardSecurityCode",
   component: CardSecurityCode,
 };
 

@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import Calendar from '../components/common/Calendar';
+import React, { useState } from "react";
+import Calendar from "components/common/Calendar";
 
 export default {
-  title: 'Calendar',
+  title: "Common/Calendar",
   component: Calendar,
   argTypes: {
-    itemList: { control: 'array' },
-    dimensions: { control: 'object' },
+    itemList: { control: "array" },
+    dimensions: { control: "object" },
   },
 };
 
-const Template = args => {
+const Template = (args) => {
   const [item, setItem] = useState();
   return <Calendar {...args} setItem={setItem} item={item} />;
 };

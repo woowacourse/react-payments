@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import CardOwner from '../../components/CardFormPage/CardOwner';
-import { CardInfoContext } from '../../context';
+import React, { useContext } from "react";
+import CardOwner from "components/pages/CardFormPage/CardOwner";
+import { CardInfoContext } from "components/context/CardInfoProvider";
 
 export default {
-  title: 'CardOwner',
+  title: "CardFormPage/CardOwner",
   component: CardOwner,
 };
 
