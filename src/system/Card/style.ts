@@ -2,7 +2,12 @@ import styled from 'styled-components';
 
 import CARD_SIZE from './constant';
 
-const CardWrapperStyled = styled.div(({ size, color }) => `
+type Arg = {
+  size: string,
+  color: string,
+};
+
+const CardWrapperStyled = styled.div(({ size, color }: Arg) => `
   cursor: pointer;
   width: ${CARD_SIZE[size].width};
   height: ${CARD_SIZE[size].height};
