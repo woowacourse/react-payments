@@ -1,13 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Input from './index';
+import Input from 'components/Input/index';
 
-const CardNumberWrapper = styled.div`
+const CardNumbersWrapper = styled.div`
   width: fit-content;
   height: fit-content;
   background-color: #ecebf1;
   border-radius: 7px;
+
+  & > div {
+    display: flex;
+  }
 `;
 
 const Dash = styled.span`
@@ -17,13 +21,21 @@ const Dash = styled.span`
   color: #111;
 `;
 
-const CardNumberInput = ({
+type CardNumbersInputProps = {
+  onChangeFirstCardNumber: Function;
+  onChangeSecondCardNumber: Function;
+  onChangeThirdCardNumber: Function;
+  onChangeFourthCardNumber: Function;
+  cardNumbers: Array<number>;
+};
+
+const CardNumbersInput = ({
   onChangeFirstCardNumber,
   onChangeSecondCardNumber,
   onChangeThirdCardNumber,
   onChangeFourthCardNumber,
   cardNumbers,
-}) => {
+}: CardNumbersInputProps) => {
   const [currentElementIndex, setCurrentElementIndex] = useState(0);
 
   const firstCardNumberRef = useRef(null);
@@ -38,7 +50,14 @@ const CardNumberInput = ({
     fourthCardNumberRef,
   ];
 
-  const onChangeCardNumber = (e) => {
+  const cardChangeEvents = [
+    onChangeFirstCardNumber,
+    onChangeSecondCardNumber,
+    onChangeThirdCardNumber,
+    onChangeFourthCardNumber,
+  ];
+
+  const onChangeCardNumbers = (e) => {
     if (e.target.value.length === 4) {
       const nextFocusIndex = cardRefList.findIndex(
         (cardElement) => cardElement.current.value.length < 4,
@@ -55,61 +74,28 @@ const CardNumberInput = ({
   }, [currentElementIndex]);
 
   return (
-    <CardNumberWrapper>
-      <Input
-        scale="medium"
-        value={cardNumbers[0]}
-        onChange={(e) => {
-          onChangeFirstCardNumber(e);
-          onChangeCardNumber(e);
-        }}
-        maxLength={4}
-        ref={firstCardNumberRef}
-        data-testid="first-card-number"
-      />
-      <Dash>-</Dash>
-      <Input
-        scale="medium"
-        value={cardNumbers[1]}
-        onChange={(e) => {
-          onChangeSecondCardNumber(e);
-          onChangeCardNumber(e);
-        }}
-        maxLength={4}
-        ref={secondCardNumberRef}
-        data-testid="second-card-number"
-      />
-      <Dash>-</Dash>
-      <Input
-        scale="medium"
-        type="password"
-        value={cardNumbers[2]}
-        onChange={(e) => {
-          onChangeThirdCardNumber(e);
-          onChangeCardNumber(e);
-        }}
-        maxLength={4}
-        ref={thirdCardNumberRef}
-        data-testid="third-card-number"
-      />
-      <Dash>-</Dash>
-      <Input
-        scale="medium"
-        type="password"
-        value={cardNumbers[3]}
-        onChange={(e) => {
-          onChangeFourthCardNumber(e);
-          onChangeCardNumber(e);
-        }}
-        maxLength={4}
-        ref={fourthCardNumberRef}
-        data-testid="fourth-card-number"
-      />
-    </CardNumberWrapper>
+    <CardNumbersWrapper>
+      {cardNumbers.map((card, index) => (
+        <>
+          <Input
+            scale="medium"
+            value={cardNumbers[index]}
+            key={index}
+            onChange={(e) => {
+              cardChangeEvents[index](e);
+              onChangeCardNumbers(e);
+            }}
+            maxLength={4}
+            ref={cardRefList[index]}
+          />
+          {index < 3 && <Dash>-</Dash>}
+        </>
+      ))}
+    </CardNumbersWrapper>
   );
 };
 
-CardNumberInput.propTypes = {
+CardNumbersInput.propTypes = {
   onChangeFirstCardNumber: PropTypes.func,
   onChangeSecondCardNumber: PropTypes.func,
   onChangeThirdCardNumber: PropTypes.func,
@@ -120,4 +106,4 @@ CardNumberInput.propTypes = {
   fourthCardNumber: PropTypes.string,
 };
 
-export default CardNumberInput;
+export default CardNumbersInput;

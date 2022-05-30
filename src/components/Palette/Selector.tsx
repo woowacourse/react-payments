@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { ColorType } from '../../constant';
+import { ColorType } from 'constant/index';
 
 const SelectorWrapper = styled.div`
   display: flex;
@@ -23,7 +23,13 @@ const DescriptionWrapper = styled.span`
   font-size: 12px;
 `;
 
-const Selector = ({ color, name, onClick }) => {
+type SelectorProps = {
+  color: string;
+  name: string;
+  onClick: Function;
+};
+
+const Selector = ({ color, name, onClick }: SelectorProps) => {
   return (
     <SelectorWrapper onClick={onClick}>
       <OptionWrapper color={color} />

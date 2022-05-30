@@ -1,6 +1,6 @@
 import React from 'react';
-import Fieldset from './index';
-import CardNumberInput from '../Input/CardNumberInput';
+import Fieldset from 'components/FieldSet/index';
+import CardNumberInput from 'components/Input/CardNumberInput';
 
 export default {
   title: 'FieldSet',

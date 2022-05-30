@@ -1,8 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FieldSet from '../../FieldSet';
-import CardNumberInput from '../../Input/CardNumberInput';
+import FieldSet from 'components/FieldSet/index';
+import CardNumberInput from 'components/Input/CardNumberInput';
+
+type CardNumberProps = {
+  cardNumbers: Array<number>;
+  onChangeFirstCardNumber: Function;
+  onChangeSecondCardNumber: Function;
+  onChangeThirdCardNumber: Function;
+  onChangeFourthCardNumber: Function;
+  isError: boolean;
+};
 
 const CardNumber = ({
   cardNumbers,
@@ -11,7 +20,7 @@ const CardNumber = ({
   onChangeThirdCardNumber,
   onChangeFourthCardNumber,
   isError,
-}) => {
+}: CardNumberProps) => {
   return (
     <FieldSet
       id="cardNumber"

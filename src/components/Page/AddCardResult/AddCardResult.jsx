@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CardIndexContext, CardListContext } from '../../../contexts/index';
-import useInputValue from '../../../hooks/useInputValue';
-import { checkCardNickName } from '../../../validation';
+import { useCardListStore } from 'contexts/index';
+import useInputValue from 'hooks/useInputValue';
+import { checkCardNickName } from 'validation/index';
 
-import NextButton from '../../Button';
-import Card from '../../Card';
-import CardNickNameInput from '../../Input/CardNickNameInput';
+import NextButton from 'components/Button';
+import Card from 'components/Card';
+import CardNickNameInput from 'components/Input/CardNickNameInput';
 
-import ErrorMessage from '../../ErrorMessage';
+import ErrorMessage from 'components/ErrorMessage';
 
 const Container = styled.div`
   display: flex;
@@ -46,18 +46,17 @@ const NextButtonWrapper = styled.div`
 `;
 
 const AddCardResultPage = () => {
-  const { cardList, setCardList } = useContext(CardListContext);
-  const { cardIndex } = useContext(CardIndexContext);
+  const { cardList, setCardList } = useCardListStore();
 
   const [cardNickName, isCardNickNameError, onChangeCardNickName] = useInputValue({
     validation: checkCardNickName,
   });
 
-  const { ownerName, cardType, cardNumber, expiredDate } = cardList[cardIndex - 1];
+  const { ownerName, cardType, cardNumbers, expiredDate } = cardList[cardList.length - 1];
 
   const submitCardNickName = () => {
     const updatedCardList = cardList.map((item) =>
-      item.id === cardIndex - 1 ? { ...item, nickName: cardNickName } : item,
+      item.id === cardList.length - 1 ? { ...item, nickName: cardNickName } : item,
     );
     setCardList(updatedCardList);
   };
@@ -70,7 +69,7 @@ const AddCardResultPage = () => {
           name={ownerName}
           expiredMonth={expiredDate.expiredMonth}
           expiredYear={expiredDate.expiredYear}
-          cardNumbers={cardNumber}
+          cardNumbers={cardNumbers}
           cardType={cardType}
           size={'large'}
         />

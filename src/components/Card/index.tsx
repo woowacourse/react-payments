@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import EmptyCard from './EmptyCard';
+import EmptyCard from 'components/Card/EmptyCard';
 
 const CardContainer = styled.div`
   position: relative;
@@ -12,7 +12,28 @@ const CardContainer = styled.div`
   margin: 10px 0;
 `;
 
-const Card = ({ name, cardType, expiredMonth, expiredYear, cardNumbers, onClick, size }) => {
+type CardProps = {
+  name: string;
+  cardType: {
+    name: string;
+    color: string;
+  };
+  expiredMonth: string;
+  expiredYear: string;
+  cardNumbers: Array<string>;
+  onClick: Function;
+  size: string;
+};
+
+const Card = ({
+  name,
+  cardType,
+  expiredMonth,
+  expiredYear,
+  cardNumbers,
+  onClick,
+  size,
+}: CardProps) => {
   return (
     <CardContainer onClick={onClick}>
       <EmptyCard

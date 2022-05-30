@@ -2,8 +2,8 @@ import React from 'react';
 import CardListPage from './CardListPage';
 
 import { withReactContext } from 'storybook-react-context';
-import { CardListContext } from '../../../contexts/index';
-import { initialCardObject } from '../../../mock/index';
+import { CardListContext } from 'contexts/index';
+import { initialCardObject } from 'mock/index';
 
 export default {
   title: 'CardListPage',

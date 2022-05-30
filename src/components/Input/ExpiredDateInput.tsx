@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Input from './index';
+import Input from 'components/Input/index';
 
 const ExpiredDateWrapper = styled.div`
   width: fit-content;
@@ -17,12 +17,19 @@ const Slash = styled.span`
   margin: 0 2px;
 `;
 
+type ExpiredDateInputProps = {
+  expiredMonth: string;
+  expiredYear: string;
+  onChangeExpiredMonth: Function;
+  onChangeExpiredYear: Function;
+};
+
 const ExpiredDateInput = ({
   expiredMonth,
   expiredYear,
   onChangeExpiredMonth,
   onChangeExpiredYear,
-}) => {
+}: ExpiredDateInputProps) => {
   return (
     <ExpiredDateWrapper>
       <Input
@@ -32,7 +39,6 @@ const ExpiredDateInput = ({
         maxLength={2}
         value={expiredMonth}
         onChange={onChangeExpiredMonth}
-        data-testid="expired-month"
       />
       <Slash>/</Slash>
       <Input
@@ -42,7 +48,6 @@ const ExpiredDateInput = ({
         maxLength={2}
         value={expiredYear}
         onChange={onChangeExpiredYear}
-        data-testid="expired-year"
       />
     </ExpiredDateWrapper>
   );

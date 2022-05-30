@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardNumber, ExpiredDate, CardOwnerName, SecureCode, Password } from './index';
 
-import NextButton from '../../Button';
-import Header from '../../Header';
+import NextButton from 'components/Button';
+import Header from 'components/Header';
 import {
   checkExpiredMonth,
   checkExpiredYear,
@@ -12,13 +12,13 @@ import {
   checkSecureCode,
   checkPassword,
   checkCardNumber,
-} from '../../../validation';
+} from 'validation/index';
 
-import Card from '../../Card';
-import Palette from '../../Palette';
-import useInputValue from '../../../hooks/useInputValue';
+import Card from 'components/Card';
+import Palette from 'components/Palette';
+import useInputValue from 'hooks/useInputValue';
 
-import { CardIndexContext, CardListContext } from '../../../contexts';
+import { useCardListStore } from 'contexts';
 
 const Container = styled.form`
   display: flex;
@@ -52,8 +52,7 @@ const Dimmed = styled.div`
 `;
 
 const AddCardPage = () => {
-  const { setCardList } = useContext(CardListContext);
-  const { cardIndex, setCardIndex } = useContext(CardIndexContext);
+  const { cardList, setCardList } = useCardListStore();
 
   const [firstCardNumber, isFirstCardNumberError, onChangeFirstCardNumber] = useInputValue({
     validation: checkCardNumber,
@@ -120,7 +119,6 @@ const AddCardPage = () => {
   const onSubmitCardForm = () => {
     const newCardObj = createCardObject();
     setCardList((prevCard) => [...prevCard, newCardObj]);
-    setCardIndex(cardIndex + 1);
   };
 
   const openModal = () => {
@@ -137,11 +135,11 @@ const AddCardPage = () => {
 
   const createCardObject = () => {
     return {
-      id: cardIndex,
+      id: cardList.length,
       nickName: '',
       ownerName: ownerName,
       cardType: cardType,
-      cardNumber: [firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber],
+      cardNumbers: [firstCardNumber, secondCardNumber, thirdCardNumber, fourthCardNumber],
       expiredDate: { expiredMonth: expiredMonth, expiredYear: expiredYear },
       secureCode: secureCode,
       password: [firstPassword, secondPassword],

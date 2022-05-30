@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import FieldSet from '../../FieldSet';
-import Input from '../../Input';
-import DotMark from '../../DotMark';
+import FieldSet from 'components/FieldSet';
+import Input from 'components/Input';
+import DotMark from 'components/DotMark';
 
 const PasswordInputContainer = styled.div`
   display: flex;
@@ -11,13 +11,21 @@ const PasswordInputContainer = styled.div`
   gap: 10px;
 `;
 
+type PasswordProps = {
+  firstPassword: string;
+  secondPassword: string;
+  onChangeFirstPassword: Function;
+  onChangeSecondPassword: Function;
+  isError: boolean;
+};
+
 const Password = ({
   firstPassword,
   secondPassword,
   onChangeFirstPassword,
   onChangeSecondPassword,
   isError,
-}) => {
+}: PasswordProps) => {
   return (
     <FieldSet
       id="password"
@@ -33,7 +41,6 @@ const Password = ({
           maxLength={1}
           value={firstPassword}
           onChange={onChangeFirstPassword}
-          data-testid="first-password"
         />
         <Input
           type="password"
@@ -42,7 +49,6 @@ const Password = ({
           maxLength={1}
           value={secondPassword}
           onChange={onChangeSecondPassword}
-          data-testid="second-password"
         />
         <DotMark />
         <DotMark />

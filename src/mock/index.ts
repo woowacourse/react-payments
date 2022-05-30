@@ -1,4 +1,6 @@
-export const initialCardObject = [
+import { CardObject } from './types';
+
+export const initialCardObject: Array<CardObject> = [
   {
     id: 1,
     nickName: 'ddd',

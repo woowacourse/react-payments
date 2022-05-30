@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Label from '../Label/index';
-import ErrorMessage from '../ErrorMessage/index';
+import Label from 'components/Label/index';
+import ErrorMessage from 'components/ErrorMessage/index';
 
 const FieldSetContainer = styled.fieldset`
   border: none;
@@ -18,7 +18,15 @@ const FieldSetContainer = styled.fieldset`
   }
 `;
 
-const FieldSet = ({ id, description, children, errorMessage, isError }) => {
+type FiledSetProps = {
+  id: any;
+  description: string;
+  children: any;
+  errorMessage: string;
+  isError: boolean;
+};
+
+const FieldSet = ({ id, description, children, errorMessage, isError }: FiledSetProps) => {
   return (
     <FieldSetContainer>
       <Label id={id} description={description} />

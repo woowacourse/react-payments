@@ -2,8 +2,8 @@ import React from 'react';
 
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Input from '../../Input';
-import FieldSet from '../../FieldSet';
+import Input from 'components/Input';
+import FieldSet from 'components/FieldSet';
 
 const CardOwnerContainer = styled.div`
   padding-top: 10px;
@@ -19,12 +19,18 @@ const MaxNumberIndicator = styled.span`
   right: 20px;
 `;
 
-const showOwnerNameLength = (ownerName) => {
+const showOwnerNameLength = (ownerName: string): string => {
   const ownerNameLength = String(ownerName.length);
   return `${ownerNameLength.padStart(2, '0')}/30`;
 };
 
-const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
+type CardOwnerNameProps = {
+  ownerName: string;
+  onChangeOwnerName: Function;
+  isError: boolean;
+};
+
+const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }: CardOwnerNameProps) => {
   return (
     <CardOwnerContainer>
       <MaxNumberIndicator>{showOwnerNameLength(ownerName)}</MaxNumberIndicator>
@@ -41,7 +47,6 @@ const CardOwnerName = ({ ownerName, onChangeOwnerName, isError }) => {
           maxLength={30}
           value={ownerName}
           onChange={onChangeOwnerName}
-          data-testid="card-owner-name"
         />
       </FieldSet>
     </CardOwnerContainer>
