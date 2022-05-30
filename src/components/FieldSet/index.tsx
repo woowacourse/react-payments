@@ -20,9 +20,9 @@ const FieldSetContainer = styled.fieldset`
 
 type FiledSetProps = {
   id: any;
-  description: String;
+  description: string;
   children: any;
-  errorMessage: String;
+  errorMessage: string;
   isError: boolean;
 };
 

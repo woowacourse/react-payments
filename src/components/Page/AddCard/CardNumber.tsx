@@ -5,7 +5,7 @@ import FieldSet from 'components/FieldSet/index';
 import CardNumberInput from 'components/Input/CardNumberInput';
 
 type CardNumberProps = {
-  cardNumbers: Array<Number>;
+  cardNumbers: Array<number>;
   onChangeFirstCardNumber: Function;
   onChangeSecondCardNumber: Function;
   onChangeThirdCardNumber: Function;

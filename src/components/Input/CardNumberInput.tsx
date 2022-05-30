@@ -21,13 +21,21 @@ const Dash = styled.span`
   color: #111;
 `;
 
+type CardNumbersInputProps = {
+  onChangeFirstCardNumber: Function;
+  onChangeSecondCardNumber: Function;
+  onChangeThirdCardNumber: Function;
+  onChangeFourthCardNumber: Function;
+  cardNumbers: Array<number>;
+};
+
 const CardNumbersInput = ({
   onChangeFirstCardNumber,
   onChangeSecondCardNumber,
   onChangeThirdCardNumber,
   onChangeFourthCardNumber,
   cardNumbers,
-}) => {
+}: CardNumbersInputProps) => {
   const [currentElementIndex, setCurrentElementIndex] = useState(0);
 
   const firstCardNumberRef = useRef(null);

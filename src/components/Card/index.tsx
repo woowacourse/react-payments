@@ -13,13 +13,16 @@ const CardContainer = styled.div`
 `;
 
 type CardProps = {
-  name: String;
-  cardType: any;
-  expiredMonth: String;
-  expiredYear: String;
-  cardNumbers: Array<String>;
+  name: string;
+  cardType: {
+    name: string;
+    color: string;
+  };
+  expiredMonth: string;
+  expiredYear: string;
+  cardNumbers: Array<string>;
   onClick: Function;
-  size: String;
+  size: string;
 };
 
 const Card = ({

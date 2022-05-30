@@ -24,8 +24,8 @@ const DescriptionWrapper = styled.span`
 `;
 
 type SelectorProps = {
-  color: String;
-  name: String;
+  color: string;
+  name: string;
   onClick: Function;
 };
 

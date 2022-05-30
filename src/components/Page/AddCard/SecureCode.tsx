@@ -14,7 +14,7 @@ const SecureCodeInputContainer = styled.div`
 `;
 
 type SecureCodeProps = {
-  secureCode: String;
+  secureCode: string;
   onChangeSecureCode: Function;
   isError: boolean;
 };
@@ -35,7 +35,6 @@ const SecureCode = ({ secureCode, onChangeSecureCode, isError }: SecureCodeProps
           maxLength={3}
           value={secureCode}
           onChange={onChangeSecureCode}
-          // data-testid="secure-code"
         />
         <Tooltip />
       </SecureCodeInputContainer>

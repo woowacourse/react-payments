@@ -18,8 +18,8 @@ const Slash = styled.span`
 `;
 
 type ExpiredDateInputProps = {
-  expiredMonth: String;
-  expiredYear: String;
+  expiredMonth: string;
+  expiredYear: string;
   onChangeExpiredMonth: Function;
   onChangeExpiredYear: Function;
 };
@@ -39,7 +39,6 @@ const ExpiredDateInput = ({
         maxLength={2}
         value={expiredMonth}
         onChange={onChangeExpiredMonth}
-        // data-testid="expired-month"
       />
       <Slash>/</Slash>
       <Input
@@ -49,7 +48,6 @@ const ExpiredDateInput = ({
         maxLength={2}
         value={expiredYear}
         onChange={onChangeExpiredYear}
-        // data-testid="expired-year"
       />
     </ExpiredDateWrapper>
   );

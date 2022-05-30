@@ -125,12 +125,15 @@ const CardExpiredDateContainer = styled.span`
 `;
 
 type EmptyCardProps = {
-  name: String;
-  cardType: any;
-  expiredMonth: String;
-  expiredYear: String;
-  cardNumbers: Array<String>;
-  size: String;
+  name: string;
+  cardType: {
+    name: string;
+    color: string;
+  };
+  expiredMonth: string;
+  expiredYear: string;
+  cardNumbers: Array<string>;
+  size: string;
 };
 
 const EmptyCard = ({
