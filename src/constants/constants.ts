@@ -4,7 +4,7 @@ interface ILocalStorageKey {
 
 interface IRoutes {
   HOME: "/";
-  ADD_CARD: "/react-payments/add-card";
+  ADD_CARD: "/add-card";
 }
 
 const CURRENT_YEAR = Number(new Date().getFullYear().toString().slice(2));
@@ -48,5 +48,5 @@ export const LOCAL_STORAGE_KEY: ILocalStorageKey = {
 
 export const ROUTES: IRoutes = {
   HOME: "/",
-  ADD_CARD: "/react-payments/add-card",
+  ADD_CARD: "/add-card",
 };
