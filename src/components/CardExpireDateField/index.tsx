@@ -25,7 +25,6 @@ function CardExpireDateField() {
         onChange={onChangeTextField}
         onBlur={handleError}
       />
-      /
       <TextField
         name={EXPIRE_DATE.YEAR.TEXT_FIELD_NAME}
         value={expireYear}
