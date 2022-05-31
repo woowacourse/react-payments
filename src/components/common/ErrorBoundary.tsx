@@ -1,9 +1,12 @@
-import React, { Component, ErrorInfo, ReactNode } from "react";
+import React, { Component, PropsWithChildren } from "react";
+export interface FallbackProps {
+  message: string;
+  resetErrorBoundary: () => void;
+}
 
-import Error from "./Error";
-
-interface Props {
-  children: ReactNode;
+interface ErrorBoundaryProps {
+  Fallback: React.ComponentType<FallbackProps>;
+  onReset?: () => void;
 }
 
 interface State {
@@ -11,19 +14,33 @@ interface State {
   error: Error;
 }
 
-class ErrorBoundary extends Component<Props, State> {
-  public state: State = {
+const initialState: State = {
+  hasError: false,
+  error: null,
+};
+
+class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryProps>, State> {
+  state: State = {
     hasError: false,
     error: null,
   };
 
-  public static getDerivedStateFromError(error: Error): State {
+  resetErrorBoundary = () => {
+    this.props.onReset?.();
+    this.setState(initialState);
+  };
+
+  static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
   }
 
-  public render() {
+  render() {
+    const { Fallback } = this.props;
+
     if (this.state.hasError) {
-      return <Error message={this.state.error.message} />;
+      return (
+        <Fallback message={this.state.error.message} resetErrorBoundary={this.resetErrorBoundary} />
+      );
     }
 
     return this.props.children;

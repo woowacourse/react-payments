@@ -22,8 +22,6 @@ interface CardSelectModalProps {
 }
 
 function CardSelectModal({ isOpened, closeModal, onChangeCardType }: CardSelectModalProps) {
-  console.log("모달");
-
   const handleClickCardType = (name: CardName, color: CardColor) => () => {
     onChangeCardType(name, color);
     closeModal();
