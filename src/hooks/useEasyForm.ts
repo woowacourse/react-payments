@@ -13,7 +13,7 @@ type FormState<T extends Values> = {
 type InputElementRef = { element: HTMLInputElement; customValidate?: Function };
 type Validation = { assert: Function; message: string };
 type Props = {
-  initialValues: Record<string, string>;
+  initialValues: Values;
   validationMode: 'onSubmit' | 'onChange';
   shouldUseReportValidity: boolean;
 };
