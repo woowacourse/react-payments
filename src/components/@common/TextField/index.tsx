@@ -1,6 +1,16 @@
 import PropTypes from 'prop-types';
+import { TextFieldProps } from '@/types/commonComponents';
 
-function TextField({ type, className, name, value, placeholder, maxLength, onChange, onBlur }) {
+function TextField({
+  type,
+  className,
+  name,
+  value,
+  placeholder,
+  maxLength,
+  onChange,
+  onBlur,
+}: TextFieldProps) {
   return (
     <input
       type={type}
@@ -9,7 +19,7 @@ function TextField({ type, className, name, value, placeholder, maxLength, onCha
       value={value}
       placeholder={placeholder}
       maxLength={maxLength}
-      onChange={onChange}
+      onChange={onChange as () => void}
       onBlur={onBlur}
     />
   );
@@ -19,7 +29,8 @@ TextField.defaultProps = {
   type: 'text',
   className: 'input-basic',
   placeholder: '',
-  maxLength: 0,
+  maxLength: 15,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onBlur: () => {},
 };
 

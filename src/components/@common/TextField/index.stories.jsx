@@ -17,6 +17,7 @@ StringField.args = {
 
 const NumberField = Template.bind({});
 NumberField.args = {
+  type: 'number',
   placeholder: '숫자 입력창',
 };
 

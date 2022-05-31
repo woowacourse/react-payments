@@ -1,11 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import 'styles/index.css';
-import App from './App';
+
+import '@/styles/index.css';
+
+import { CardContextProvider } from '@/contexts';
+
+import App from '@/App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
-    <App />
+    <CardContextProvider>
+      <App />
+    </CardContextProvider>
   </React.StrictMode>,
 );

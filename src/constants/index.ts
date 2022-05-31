@@ -1,8 +1,9 @@
 const PATH = {
   JSON_SERVER_BASE_URL: 'https://tigers-react-payments.herokuapp.com',
-  CARD_LIST: '/react-payments/',
-  CARD_ADD: '/react-payments/card-add',
-  CARD_ADD_COMPLETE: '/react-payments/card-add-complete',
+  BASE_NAME: '/react-payments',
+  CARD_LIST: '/',
+  CARD_ADD: '/card-add',
+  CARD_ADD_COMPLETE: '/card-add-complete',
 };
 
 const CARD_NUMBER = {
@@ -42,6 +43,11 @@ const CARD_PASSWORD = {
 };
 
 const ERROR_MESSAGE = {
+  REQUEST: {
+    FAIL_TO_GET_CARDS: '보유 카드를 불러올 수 없습니다. 관리자에게 문의하십시오.',
+    FAIL_TO_POST_CARD: '카드를 추가할 수 없습니다. 관리자에게 문의하십시오.',
+    FAIL_TO_PUT_CARD_NICKNAME: '카드의 별칭을 설정할 수 없습니다. 관리자에게 문의하십시오.',
+  },
   IS_NOT_VALID_CARD: '카드 정보가 올바르지 않습니다.\n입력한 내용을 확인해주세요.',
   CARD_NUMBER: {
     IS_NOT_LENGTH: `카드번호를 ${

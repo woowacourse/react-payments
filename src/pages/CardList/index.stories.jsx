@@ -1,9 +1,9 @@
 import { BrowserRouter } from 'react-router-dom';
-import CardAdd from '.';
+import CardList from '.';
 
 export default {
-  title: 'Page/CardAdd',
-  component: CardAdd,
+  title: 'Page/CardList',
+  component: CardList,
   decorators: [
     (Story) => (
       <BrowserRouter>
@@ -16,7 +16,7 @@ export default {
   },
 };
 
-const Template = (args) => <CardAdd {...args} />;
+const Template = (args) => <CardList {...args} />;
 
-export const CardAddPage = Template.bind({});
-CardAddPage.args = {};
+export const CardListPage = Template.bind({});
+CardListPage.args = {};

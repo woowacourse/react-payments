@@ -1,7 +1,8 @@
-import { isNumber, isEnglishName } from 'utils';
-import { CARD_NUMBER, CARD_PASSWORD, ERROR_MESSAGE, EXPIRE_DATE, SECURITY_CODE } from 'constants';
+import { CardState, ExpireDate } from '@/types';
+import { isNumber, isEnglishName } from '@/utils';
+import { CARD_NUMBER, CARD_PASSWORD, ERROR_MESSAGE, EXPIRE_DATE, SECURITY_CODE } from '@/constants';
 
-const isExpiredDate = (year, month) => {
+const isExpiredDate = (year: number, month: number) => {
   const inputDate = new Date();
 
   inputDate.setFullYear(year);
@@ -17,18 +18,18 @@ const isExpiredDate = (year, month) => {
   return true;
 };
 
-const validateCardNumber = (cardNumber) => {
+const validateCardNumber = (cardNumber: string[]) => {
   if (cardNumber.join('').length < CARD_NUMBER.UNIT_COUNT * CARD_NUMBER.UNIT_LENGTH) {
     throw new Error(ERROR_MESSAGE.CARD_NUMBER.IS_NOT_LENGTH);
   }
 };
 
-const validateExpireDate = ({ expireMonth, expireYear }) => {
+const validateExpireDate = ({ expireMonth, expireYear }: ExpireDate) => {
   if (!isNumber(expireMonth) || !isNumber(expireYear)) {
     throw new Error(ERROR_MESSAGE.EXPIRE_DATE.IS_NOT_INTEGER);
   }
 
-  if (expireMonth < EXPIRE_DATE.MONTH.MIN || expireMonth > EXPIRE_DATE.MONTH.MAX) {
+  if (Number(expireMonth) < EXPIRE_DATE.MONTH.MIN || Number(expireMonth) > EXPIRE_DATE.MONTH.MAX) {
     throw new Error(ERROR_MESSAGE.EXPIRE_DATE.IS_NOT_VALIDATE_MONTH);
   }
 
@@ -40,12 +41,12 @@ const validateExpireDate = ({ expireMonth, expireYear }) => {
     throw new Error(ERROR_MESSAGE.EXPIRE_DATE.IS_NOT_YEAR_LENGTH);
   }
 
-  if (isExpiredDate(Number(expireYear) + EXPIRE_DATE.YEAR.UNIT, expireMonth)) {
+  if (isExpiredDate(Number(expireYear) + EXPIRE_DATE.YEAR.UNIT, Number(expireMonth))) {
     throw new Error(ERROR_MESSAGE.EXPIRE_DATE.IS_EXPIRED);
   }
 };
 
-const validateCardPassword = (cardPassword) => {
+const validateCardPassword = (cardPassword: string) => {
   if (!isNumber(cardPassword)) {
     throw new Error(ERROR_MESSAGE.CARD_PASSWORD.IS_NOT_INTEGER);
   }
@@ -55,7 +56,7 @@ const validateCardPassword = (cardPassword) => {
   }
 };
 
-const validateSecurityCode = (securityCode) => {
+const validateSecurityCode = (securityCode: string) => {
   if (!isNumber(securityCode)) {
     throw new Error(ERROR_MESSAGE.SECURITY_CODE.IS_NOT_INTEGER);
   }
@@ -65,7 +66,7 @@ const validateSecurityCode = (securityCode) => {
   }
 };
 
-const validateUserName = (userName) => {
+const validateUserName = (userName: string) => {
   if (!isEnglishName(userName)) {
     throw new Error(ERROR_MESSAGE.USER_NAME.IS_NOT_ENGLISH_NAME);
   }
@@ -78,7 +79,7 @@ const validateCard = ({
   expireYear,
   securityCode,
   userName,
-}) => {
+}: CardState) => {
   validateCardNumber(cardNumber);
   validateCardPassword(cardPassword);
   validateExpireDate({ expireMonth, expireYear });
@@ -88,8 +89,8 @@ const validateCard = ({
 
 export {
   validateCardNumber,
-  validateExpireDate,
   validateCardPassword,
+  validateExpireDate,
   validateSecurityCode,
   validateUserName,
   validateCard,

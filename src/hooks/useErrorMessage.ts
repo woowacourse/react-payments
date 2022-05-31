@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { ErrorChecker } from '@/types';
 
-function useErrorMessage({ state, validate, isAnyValueEmpty = false }) {
-  const [errorMessage, setErrorMessage] = useState(null);
+function useErrorMessage({ state, validate, isAnyValueEmpty = false }: ErrorChecker) {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleError = () => {
     if (isAnyValueEmpty) return;

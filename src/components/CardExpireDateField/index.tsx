@@ -1,18 +1,18 @@
 import { useContext } from 'react';
-import useErrorMessage from 'hooks/useErrorMessage';
-import CardContext from 'contexts';
+import useErrorMessage from '@/hooks/useErrorMessage';
+import { CardContext } from '@/contexts';
 
-import { FieldSet, TextField } from 'components/@common';
+import { FieldSet, TextField } from '@/components/@common';
 
-import { EXPIRE_DATE } from 'constants';
-import { validateExpireDate } from 'validators';
+import { validateExpireDate } from '@/validators';
+import { EXPIRE_DATE } from '@/constants';
 
 function CardExpireDateField() {
   const { expireMonth, expireYear, onChangeTextField } = useContext(CardContext);
   const { errorMessage, handleError } = useErrorMessage({
     state: { expireMonth, expireYear },
     validate: validateExpireDate,
-    isAnyValueEmpty: !expireMonth || !expireYear,
+    isAnyValueEmpty: expireMonth && expireYear === '',
   });
 
   return (
@@ -25,7 +25,6 @@ function CardExpireDateField() {
         onChange={onChangeTextField}
         onBlur={handleError}
       />
-      /
       <TextField
         name={EXPIRE_DATE.YEAR.TEXT_FIELD_NAME}
         value={expireYear}
