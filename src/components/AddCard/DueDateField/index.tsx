@@ -1,16 +1,24 @@
 import { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import Field from 'components/common/Field'
 import useAutoFocus from 'hooks/useAutoFocus'
 
 import CardInfoContext from 'context/cardInfo-context'
 
+import Field from 'components/common/Field'
 import Input from 'components/common/Input'
+
 import { GrayInputWrapper } from 'components/common/Input/style'
 
 import { isInvalidDueDate } from 'validation'
-import { DUE_DATE, MONTH, ERROR_MESSAGE } from 'constant'
+import { DUE_DATE, MONTH, ERROR_MESSAGE } from 'constants/index'
+
+interface IsErrorType {
+  cardNumber: { error: boolean; errorMessage: string }
+  dueMonth: { error: boolean; errorMessage: string }
+  dueYear: { error: boolean; errorMessage: string }
+}
+
 function DueDateField() {
   const {
     cardInfo: { dueDate },
@@ -19,32 +27,35 @@ function DueDateField() {
       dueYear: { error: yearError, errorMessage: yearErrorMessage },
     },
     setIsError,
-    handleDueDateChange,
+    setDueDate,
   } = useContext(CardInfoContext)
 
   const { refList, moveToNextInput } = useAutoFocus({
-    maxLength: DUE_DATE.UNIT_LENGTH,
+    maxLength: [DUE_DATE.UNIT_LENGTH, DUE_DATE.UNIT_LENGTH],
   })
 
-  const handleInputChange = ({ target }, key) => {
+  const handleInputChange = (
+    { target }: React.ChangeEvent<HTMLInputElement>,
+    key: string
+  ) => {
     const { value } = target
     if (isInvalidDueDate(value)) return
 
-    handleDueDateChange(target, key)
+    setDueDate(target, key)
 
     if (key === 'month') {
-      setIsError((prev) => {
+      setIsError((prev: IsErrorType) => {
         return {
           ...prev,
           dueMonth: {
-            error: value < MONTH.MIN || value > MONTH.MAX,
+            error: +value < MONTH.MIN || +value > MONTH.MAX,
             errorMessage: ERROR_MESSAGE.INVALID_MONTH,
           },
         }
       })
     } else {
       const currentYear = new Date().getFullYear().toString().slice(2)
-      setIsError((prev) => {
+      setIsError((prev: IsErrorType) => {
         return {
           ...prev,
           dueYear: {
@@ -68,19 +79,17 @@ function DueDateField() {
       <GrayInputWrapper size={50} error={monthError || yearError}>
         <Input
           value={dueDate.month}
-          dataset="month"
           maxLength={DUE_DATE.UNIT_LENGTH}
           onChange={(e) => handleInputChange(e, 'month')}
-          ref={(node) => {
+          ref={(node: HTMLInputElement) => {
             refList.current[0] = node
           }}
         />
         <Input
           value={dueDate.year}
-          dataset="year"
           maxLength={DUE_DATE.UNIT_LENGTH}
           onChange={(e) => handleInputChange(e, 'year')}
-          ref={(node) => {
+          ref={(node: HTMLInputElement) => {
             refList.current[1] = node
           }}
         />

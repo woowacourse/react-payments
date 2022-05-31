@@ -7,7 +7,7 @@ import AddPage from 'pages/AddPage'
 import CardListPage from 'pages/CardListPage'
 import NickNamePage from 'pages/NickNamePage'
 
-import { PATH } from 'constant'
+import { PATH } from 'constants'
 import theme from 'theme'
 import NotFoundPage from 'pages/NotFoundPage'
 
@@ -15,11 +15,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CardInfoProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Routes>
             <Route path={PATH.MAIN} element={<CardListPage />} />
             <Route path={PATH.ADD} element={<AddPage />} />
-            <Route path={PATH.NICKNAME} element={<NickNamePage />} />
+            <Route path={`${PATH.NICKNAME}/:id`} element={<NickNamePage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>

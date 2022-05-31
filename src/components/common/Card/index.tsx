@@ -10,9 +10,33 @@ import {
   Plus,
 } from 'components/common/Card/style'
 
-import { CARD_COMPANY } from 'constant'
+import { CARD_COMPANY } from 'constants/index'
 
-function Card({ size, cardInfo }) {
+interface DueDateType {
+  month: string
+  year: string
+}
+
+interface CardNumberType {
+  first: string
+  second: string
+  third: string
+  fourth: string
+}
+
+interface CardInfoType {
+  company: string
+  cardNumber: CardNumberType
+  owner: string
+  dueDate: DueDateType
+}
+
+interface CardType {
+  size: 'small' | 'large'
+  cardInfo: CardInfoType
+}
+
+function Card({ size = 'small', cardInfo }: CardType) {
   const { company, cardNumber, owner, dueDate } = cardInfo
   const month = dueDate.month || 'MM'
   const year = dueDate.year || 'YY'

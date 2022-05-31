@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import PropTypes from 'prop-types'
 
 import CardInfoContext from 'context/cardInfo-context'
 
@@ -7,20 +6,22 @@ import Field from 'components/common/Field'
 import Input from 'components/common/Input'
 import { GrayInputWrapper } from 'components/common/Input/style'
 
-import { CVC } from 'constant'
+import { CVC } from 'constants/index'
 import { isInvalidCVC } from 'validation'
 
 function CVCField() {
   const {
     cardInfo: { cvc },
-    handleCvcChange,
+    setCvc,
   } = useContext(CardInfoContext)
 
-  const handleInputChange = ({ target }) => {
+  const handleInputChange = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = target
     if (isInvalidCVC(value)) return
 
-    handleCvcChange(target)
+    setCvc(target)
   }
 
   return (
@@ -38,11 +39,6 @@ function CVCField() {
       </GrayInputWrapper>
     </Field>
   )
-}
-
-CVCField.propTypes = {
-  cvc: PropTypes.string,
-  setCvc: PropTypes.func,
 }
 
 export default CVCField

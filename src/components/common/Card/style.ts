@@ -1,5 +1,14 @@
 import styled, { css } from 'styled-components'
 
+interface CardWrapperType {
+  size: string
+  border?: boolean
+}
+
+interface CardMiddleType {
+  size: string
+}
+
 const FullSize = css`
   width: 100%;
 `
@@ -9,22 +18,30 @@ const FlexAlignCenter = css`
   align-items: center;
 `
 
-const CardWrapper = styled.div`
+const cardSizeTypes: { [key: string]: string } = {
+  small: css`
+    font-size: 16px;
+    padding: 14px;
+    width: 208px;
+    height: 130px;
+  `,
+  large: css`
+    font-size: 18px;
+    padding: 20px;
+    width: 290px;
+    height: 180px;
+  `,
+}
+
+const CardWrapper = styled.div<CardWrapperType>`
   ${FlexAlignCenter}
-  color: #525252;
+  color: ${({ theme }) => theme.colors.DARK_GRAY};
   background-color: ${(props) => props.color || props.theme.colors.GRAY};
   flex-direction: column;
   justify-content: space-between;
   border-radius: 5px;
-  font-size: ${(props) => (props.size === 'small' ? '16px' : '18px')};
-  padding: ${(props) => (props.size === 'small' ? '14px' : '20px')};
-  width: ${(props) => (props.size === 'small' ? '208px' : '290px')};
-  height: ${(props) => (props.size === 'small' ? '130px' : '180px')};
-  border: ${(props) => props.border && `solid 3px ${props.theme.colors.PINK}`};
-  box-shadow: ${(props) =>
-    props.border
-      ? `3px 3px 5px ${props.theme.colors.PINK}`
-      : '3px 3px 5px rgba(0, 0, 0, 0.25)'};
+  ${({ size }) => cardSizeTypes[size]}
+  box-shadow: '3px 3px 5px rgba(0, 0, 0, 0.25)';
 `
 
 const CardTop = styled.div`
@@ -32,12 +49,12 @@ const CardTop = styled.div`
   ${FlexAlignCenter}
 `
 
-const CardMiddle = styled.div`
+const CardMiddle = styled.div<CardMiddleType>`
   ${FullSize}
   ${FlexAlignCenter}
 
   & div {
-    background: #cbba64;
+    background: ${({ theme }) => theme.colors.YELLOW};
     border-radius: 4px;
     width: ${(props) => (props.size === 'small' ? '40px' : '55px')};
     height: ${(props) => (props.size === 'small' ? '26px' : '36px')};

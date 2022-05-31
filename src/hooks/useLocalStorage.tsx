@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
-function useLocalStorage(key) {
+function useLocalStorage(key: string) {
   const [state, setState] = useState(
-    JSON.parse(localStorage.getItem(key)) || {}
+    JSON.parse(localStorage.getItem(key) || '') || {}
   )
 
-  const setData = (id, value) => {
+  const setData = (id: string, value: object) => {
     setState(
       localStorage.setItem(key, JSON.stringify({ ...state, [id]: value }))
     )

@@ -5,7 +5,13 @@ import {
   CompanyName,
 } from 'components/common/CardCompany/style'
 
-function CardCompany({ color, company, handleClick }) {
+interface CardCompanyType {
+  color: string
+  company: string
+  handleClick: React.MouseEventHandler<HTMLDivElement>
+}
+
+function CardCompany({ color, company, handleClick }: CardCompanyType) {
   return (
     <CompanyWrapper onClick={handleClick}>
       <CompanyCircle color={color} />

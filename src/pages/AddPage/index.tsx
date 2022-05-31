@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Card from 'components/common/Card'
@@ -21,7 +21,7 @@ import {
   GridWrapper,
 } from 'pages/style'
 
-import { COLORS, CARD_COMPANY, ALERT_MESSAGE } from 'constant'
+import { CARD_COMPANY, ALERT_MESSAGE, PATH } from 'constants/index'
 
 import CardInfoContext from 'context/cardInfo-context'
 
@@ -30,7 +30,7 @@ function AddPage() {
     cardInfo,
     isError: { cardNumber, dueMonth, dueYear },
     isFormFulfilled,
-    handleCardCompany,
+    setCardCompany,
   } = useContext(CardInfoContext)
   const [isModalOpen, setIsModalOpen] = useState(!cardInfo.company)
 
@@ -40,7 +40,7 @@ function AddPage() {
     setIsModalOpen(true)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (cardNumber.error) {
@@ -49,9 +49,7 @@ function AddPage() {
     if (dueMonth.error || dueYear.error) {
       return alert(ALERT_MESSAGE.CHECK_DUE_DATE)
     }
-    navigate(
-      `/react-payments/nickname/${Object.values(cardInfo.cardNumber).join('')}`
-    )
+    navigate(`${PATH.NICKNAME}/${Object.values(cardInfo.cardNumber).join('')}`)
   }
 
   return (
@@ -67,11 +65,7 @@ function AddPage() {
         <CVCField />
         <PasswordField />
         <FooterWrapper>
-          {isFormFulfilled && (
-            <Button type={'submit'} color={COLORS.MINT} onClick={handleSubmit}>
-              다음
-            </Button>
-          )}
+          {isFormFulfilled && <Button type={'submit'}>다음</Button>}
         </FooterWrapper>
       </FormWrapper>
       <Modal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
@@ -81,7 +75,7 @@ function AddPage() {
               color={color}
               company={company}
               handleClick={() => {
-                handleCardCompany(company)
+                setCardCompany(company)
               }}
               key={company}
             />

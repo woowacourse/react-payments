@@ -7,20 +7,22 @@ import Input from 'components/common/Input'
 
 import { GrayInputWrapper } from 'components/common/Input/style'
 
-import { OWNER } from 'constant'
+import { OWNER } from 'constants/index'
 import { isInvalidOwner } from 'validation'
 
 function OwnerField() {
   const {
     cardInfo: { owner },
-    handleOwnerChange,
+    setOwner,
   } = useContext(CardInfoContext)
 
-  const handleInputChange = ({ target }) => {
+  const handleInputChange = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = target
     if (isInvalidOwner(value)) return
 
-    handleOwnerChange(target)
+    setOwner(target)
   }
 
   return (
