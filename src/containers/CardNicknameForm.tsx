@@ -5,7 +5,11 @@ import Button from "components/UIComponents/Button/Button";
 import Input from "components/UIComponents/Input/Input";
 import InputField from "components/UIComponents/InputField/InputField";
 
-export default function CardNicknameForm({ handleAddNickname }) {
+type Props = {
+  handleAddNickname: (FormData: Object) => void;
+};
+
+export default function CardNicknameForm({ handleAddNickname }: Props) {
   const [nicknameLength, setNicknameLength] = useState(0);
   return (
     <Form onSubmit={handleAddNickname}>

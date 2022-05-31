@@ -1,6 +1,6 @@
 export const MASKED_CHARACTER = "•";
 
-export const CREATE_MASKED_CHARACTERS = (repeatCount) =>
+export const CREATE_MASKED_CHARACTERS = (repeatCount: number) =>
   `${MASKED_CHARACTER} `.repeat(repeatCount).trim();
 
 export const CARD_REGISTER_SUCCESS_MESSAGE =
@@ -25,4 +25,4 @@ export const CARD_INFO_RULES = {
 export const PAGE_NAME = {
   CARD_LIST: "CardList",
   CARD_ADD: "CardAdd",
-};
+} as const;

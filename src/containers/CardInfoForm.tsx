@@ -11,12 +11,21 @@ import {
 
 import Button from "components/UIComponents/Button/Button";
 
+import { CardInfoStateTypeInterface } from "context/CardInfoContextProvider";
+
+type Props = {
+  handleFormSubmit: (formData: CardInfoStateTypeInterface) => void;
+  isCompleteCardInfo: boolean;
+  isValidCardInfo: boolean;
+  setFormValidity: (formElementArray: HTMLFormElement[]) => void;
+};
+
 export default function CardInfoForm({
   handleFormSubmit,
   isCompleteCardInfo,
   isValidCardInfo,
   setFormValidity,
-}) {
+}: Props) {
   return (
     <Form
       onSubmit={handleFormSubmit}

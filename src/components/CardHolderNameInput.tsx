@@ -1,33 +1,30 @@
-import React, { useCallback, useContext, useState } from "react";
-import CardInfoContext from "context/CardInfoContext.jsx";
+import React from "react";
 
-import { CARD_INFO_RULES } from "utils/constants.js";
+import { CARD_INFO_RULES } from "utils/constants";
 
-import Input from "components/UIComponents/Input/Input.jsx";
-import InputField from "components/UIComponents/InputField/InputField.jsx";
-import WordCounter from "components/UIComponents/WordCounter/WordCounter.jsx";
+import Input from "components/UIComponents/Input/Input";
+import InputField from "components/UIComponents/InputField/InputField";
+import WordCounter from "components/UIComponents/WordCounter/WordCounter";
+
+import useCardInput from "hooks/useCardInput";
 
 export default function CardHolderNameInput() {
-  const [isInvalid, setInvalid] = useState(false);
+  const {
+    targetState: holderName,
+    setTargetState: setHolderName,
+    isInvalid,
+    setInvalid,
+    triggerInvalid,
+  } = useCardInput("holderName");
 
-  const { state, setState } = useContext(CardInfoContext);
-
-  const { holderName } = state;
-
-  const handleInputChange = (e) => {
+  const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = ({
+    target: { value },
+  }) => {
     setInvalid(false);
-
-    setState({ ...state, holderName: e.target.value.toUpperCase() });
+    setHolderName(value.toUpperCase());
   };
-
-  const triggerInvalid = useCallback(() => setInvalid(true), []);
 
   const isComplete = holderName !== "";
-
-  const inputStyles = {
-    width: "full",
-    textAlign: "left",
-  };
 
   return (
     <InputField
@@ -49,13 +46,13 @@ export default function CardHolderNameInput() {
         value={holderName}
         placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
         name={"holderName"}
-        maxLength={"30"}
+        maxLength={30}
         isComplete={isComplete}
         pattern={"^[a-zA-Z]+$"}
         onChange={handleInputChange}
         onInvalid={triggerInvalid}
         data-testid={"holder-name"}
-        {...inputStyles}
+        width={"full"}
       />
     </InputField>
   );

@@ -3,8 +3,10 @@ import styled from "styled-components";
 
 import { CardPreview } from "components";
 import PageHeader from "containers/PageHeader";
-import useLocalStorage from "useLocalStorage";
+import useLocalStorage from "hooks/useLocalStorage";
 import { PAGE_NAME } from "utils/constants";
+import { CardInfoStateTypeInterface } from "context/CardInfoContextProvider";
+import { PageType } from "App";
 
 const CardList = styled.div`
   display: flex;
@@ -50,18 +52,26 @@ const CardShapeButton = styled.div`
 `;
 
 const DEFAULT_CARD_NAME = "Woowa Card";
+const initialCardInfoArray: CardInfoStateTypeInterface[] = [];
 
-export default function CardListPage({ setPage }) {
-  const [formDataArray] = useLocalStorage("card-info");
+export default function CardListPage({
+  setPage,
+}: {
+  setPage: React.Dispatch<React.SetStateAction<PageType>>;
+}) {
+  const [formDataArray] = useLocalStorage("card-info", initialCardInfoArray);
 
-  const parseCardInfo = (card) => {
-    const cardNumberArray = [
+  const parseCardInfo = (card: CardInfoStateTypeInterface) => {
+    const cardNumberArray: string[] = [
       card["cardNumber1"],
       card["cardNumber2"],
       card["cardNumber3"],
       card["cardNumber4"],
     ];
-    const expireDateArray = [card["expireDate1"], card["expireDate2"]];
+    const expireDateArray: string[] = [
+      card["expireDate1"],
+      card["expireDate2"],
+    ];
 
     const cardInfo = {
       cardNumber: cardNumberArray,
@@ -79,11 +89,11 @@ export default function CardListPage({ setPage }) {
       <PageHeader page={PAGE_NAME.CARD_LIST} />
       <CardList>
         {formDataArray.map((card) => {
-          const { cardInfo, colorIndex } = parseCardInfo(card);
+          const { colorIndex } = parseCardInfo(card);
 
           return (
             <CardItem key={card.nickname}>
-              <CardPreview cardInfo={cardInfo} color={colorIndex} />
+              <CardPreview color={colorIndex} />
               <CardNickname>{card.nickname || DEFAULT_CARD_NAME}</CardNickname>
             </CardItem>
           );

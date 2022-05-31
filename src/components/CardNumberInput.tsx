@@ -1,26 +1,37 @@
-import React, { useCallback, useContext, useState } from "react";
-import CardInfoContext from "context/CardInfoContext";
+import React from "react";
 
+import { changeArrayElement } from "utils";
 import { CARD_INFO_RULES, CREATE_MASKED_CHARACTERS } from "utils/constants";
 
 import Input from "components/UIComponents/Input/Input";
 import InputField from "components/UIComponents/InputField/InputField";
 
+import { OrderedInputUpdateHandlerInterface } from "./CardInputInterface";
+
+import useCardInput from "hooks/useCardInput";
+
 export default function CardNumberInput() {
-  const [isInvalid, setInvalid] = useState(false);
-  const { state, setState } = useContext(CardInfoContext);
+  const {
+    targetState: cardNumber,
+    setTargetState: setCardNumber,
+    isInvalid,
+    setInvalid,
+    triggerInvalid,
+  } = useCardInput("cardNumber");
 
-  const { cardNumber } = state;
+  const handleInputChange: OrderedInputUpdateHandlerInterface =
+    (order) =>
+    ({ target: { value: inputValue } }) => {
+      setInvalid(false);
 
-  const handleInputChange = (e, order) => {
-    setInvalid(false);
+      const newCardNumber = changeArrayElement({
+        array: cardNumber,
+        index: order,
+        value: inputValue,
+      });
 
-    const newCardNumber = [...cardNumber];
-    newCardNumber[order] = e.target.value;
-    setState({ ...state, cardNumber: newCardNumber });
-  };
-
-  const triggerInvalid = useCallback(() => setInvalid(true), []);
+      setCardNumber(newCardNumber);
+    };
 
   return (
     <InputField
@@ -46,7 +57,7 @@ export default function CardNumberInput() {
               isComplete={
                 cardNumber[index].length === CARD_INFO_RULES.NUMBER_UNIT_LENGTH
               }
-              onChange={(e) => handleInputChange(e, index)}
+              onChange={handleInputChange(index)}
               onInvalid={triggerInvalid}
               pattern={"^[0-9]+$"}
               data-testid={"card-number"}

@@ -1,6 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import styled, { css } from "styled-components";
 
 import { textColor } from "components/UIComponents/styleConstants";
 
@@ -20,7 +19,7 @@ const StyledInputField = styled.div`
   position: relative;
 `;
 
-const StyledLabel = styled.label`
+const StyledLabel = styled.label<{ state: "default" | "error" | "complete" }>`
   font-size: 12px;
   line-height: 14px;
   color: ${({ state }) => textColor[state]};
@@ -30,22 +29,29 @@ const StyledLabel = styled.label`
   gap: 10px;
 `;
 
-const StyledInputWrapper = styled.div`
-  display: flex;
-  justify-content: ${({ align }) => align};
-  border-bottom: ${({ shape }) => shape === "underline" && "1px solid #000000"};
+const StyledInputWrapper = styled.div<
+  Pick<Props, "isSplit" | "shape" | "isInvalid"> & {
+    width: string;
+    align: string;
+  }
+>`
+  ${({ isSplit, shape, isInvalid, width, align }) => css`
+    display: flex;
+    justify-content: ${align};
+    border-bottom: ${shape === "underline" && "1px solid #000000"};
 
-  margin: ${({ width }) => width === "xl" && "auto"};
-  gap: ${({ isSplit }) => isSplit && "10px"};
+    margin: ${width === "xl" && "auto"};
+    gap: ${isSplit && "10px"};
 
-  ${({ isSplit }) => isSplit && "input {"}
-  background: ${({ shape }) => shape === "box" && "#ecebf1"};
-  border-radius: ${({ shape }) => shape === "box" && "7px"};
-  width: ${({ width }) => widthPreset[width]};
-  padding: 12px;
+    ${isSplit && "input {"}
+    background: ${shape === "box" && "#ecebf1"};
+    border-radius: ${shape === "box" && "7px"};
+    width: ${widthPreset[width]};
+    padding: 12px;
 
-  box-shadow: ${({ isInvalid }) => isInvalid && "inset 0 0 0 1px #d82424"};
-  ${({ isSplit }) => isSplit && "}"}
+    box-shadow: ${isInvalid && "inset 0 0 0 1px #d82424"};
+    ${isSplit && "}"}
+  `}
 `;
 
 const StyledInputContainer = styled.div`
@@ -54,17 +60,29 @@ const StyledInputContainer = styled.div`
   gap: 10px;
 `;
 
+type Props = {
+  labelText?: string;
+  children: React.ReactNode;
+  OptionalComponent?: React.ReactNode;
+  wrapperWidth: "xs" | "sm" | "md" | "xl" | "full";
+  horizontalAlign?: "flex-start" | "center" | "space-around";
+  isComplete?: boolean;
+  isInvalid?: boolean;
+  shape?: "box" | "underline";
+  isSplit?: boolean;
+};
+
 export default function InputField({
   labelText,
   children,
   OptionalComponent,
   wrapperWidth,
-  horizontalAlign,
+  horizontalAlign = "flex-start",
   isComplete,
   isInvalid,
-  shape,
+  shape = "box",
   isSplit,
-}) {
+}: Props) {
   return (
     <StyledInputField>
       <StyledLabel
@@ -87,18 +105,3 @@ export default function InputField({
     </StyledInputField>
   );
 }
-
-InputField.propTypes = {
-  labelText: PropTypes.string,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-  shape: PropTypes.oneOf(["box", "underline"]),
-  wrapperWidth: PropTypes.oneOf(["xs", "sm", "md", "xl", "full"]),
-  horizontalAlign: PropTypes.oneOf(["flex-start", "center", "space-around"]),
-};
-
-InputField.defaultProps = {
-  shape: "box",
-};

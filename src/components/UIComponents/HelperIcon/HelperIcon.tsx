@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import styled from "styled-components";
 
 import HelpIconImage from "assets/images/questionMark.svg";
@@ -13,7 +13,7 @@ const StyledIcon = styled.img`
   }
 `;
 
-const StyledDescription = styled.p`
+const StyledDescription = styled.p<{ isOpen: boolean }>`
   ${({ isOpen }) => !isOpen && `display: none;`}
   position: absolute;
   top: 5px;
@@ -32,14 +32,21 @@ const StyledDescription = styled.p`
   box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.4);
 `;
 
-const HelperIcon = React.memo(({ description }) => {
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
+type Props = {
+  description: string;
+};
+
+const HelperIcon = React.memo(({ description }: Props) => {
+  const [isDescriptionOpen, toggleDescriptionOpen] = useReducer(
+    (isOpen) => !isOpen,
+    false
+  );
 
   return (
     <StyledIconContainer>
       <StyledIcon
         src={HelpIconImage}
-        onClick={() => setIsDescriptionOpen(!isDescriptionOpen)}
+        onClick={toggleDescriptionOpen}
         role={"button"}
       />
       <StyledDescription isOpen={isDescriptionOpen}>
