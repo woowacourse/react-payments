@@ -1,4 +1,4 @@
-import PrevPageSign from './PrevPageSign';
+import PrevPageSign from '.';
 import { MemoryRouter } from 'react-router-dom';
 
 export default {

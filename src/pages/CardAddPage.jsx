@@ -1,19 +1,19 @@
 import { useContext } from 'react';
 import { CardInfoContext } from 'CardInfoContextProvider';
 
-import Header from '../components/Header/Header';
-import Card from 'components/common/Card/Card';
-import PageTitle from 'components/common/PageTitle/PageTitle';
-import Button from 'components/common/Button/Button';
+import Header from '../components/Header/index.tsx';
+import Card from 'components/common/Card';
+import PageTitle from 'components/common/PageTitle';
+import Button from 'components/common/Button';
 
-import CardInputForm from 'components/CardInputForm/CardInputForm';
-import CardNumber from 'components/CardNumber/CardNumber';
-import CardExpirationDate from 'components/CardExpirationDate/CardExpirationDate';
-import CardOwner from 'components/CardOwner/CardOwner';
-import CVC from 'components/CVC/CVC';
-import Tooltip from 'components/Tooltip/Tooltip';
-import CardPassword from 'components/CardPassword/CardPassword';
-import PrevPageSign from 'components/PrevPageSign/PrevPageSign';
+import CardInputForm from 'components/CardInputForm';
+import CardNumber from 'components/CardNumber';
+import CardExpirationDate from 'components/CardExpirationDate';
+import CardOwner from 'components/CardOwner';
+import CVC from 'components/CVC';
+import Tooltip from 'components/Tooltip';
+import CardPassword from 'components/CardPassword';
+import PrevPageSign from 'components/PrevPageSign';
 
 function CardAddPage() {
   const { state } = useContext(CardInfoContext);

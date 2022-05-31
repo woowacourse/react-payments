@@ -1,4 +1,4 @@
-import Card from './Card';
+import Card from '.';
 import { MemoryRouter } from 'react-router-dom';
 
 export default {

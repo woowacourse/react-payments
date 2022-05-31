@@ -1,16 +1,8 @@
-import CardExpirationDate from './CardExpirationDate';
-import CardInfoContextProvider from 'CardInfoContextProvider';
+import CardExpirationDate from '.';
 
 export default {
   title: 'CardAddPage/CardExpirationDate',
   component: CardExpirationDate,
-  decorators: [
-    (CardExpirationDate) => (
-      <CardInfoContextProvider>
-        <CardExpirationDate />
-      </CardInfoContextProvider>
-    ),
-  ],
 };
 
 export const CardExpirationDateInput = () => <CardExpirationDate />;

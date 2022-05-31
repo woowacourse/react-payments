@@ -1,16 +1,8 @@
-import CardNickname from './CardNickname';
-import CardInfoContextProvider from 'CardInfoContextProvider';
+import CardNickname from '.';
 
 export default {
   title: 'CardAddSuccessPage/CardNickname',
   component: CardNickname,
-  decorators: [
-    (CardNickname) => (
-      <CardInfoContextProvider>
-        <CardNickname />
-      </CardInfoContextProvider>
-    ),
-  ],
 };
 
 export const CardNicknameInput = () => <CardNickname />;

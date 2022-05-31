@@ -1,16 +1,8 @@
-import CVC from './CVC';
-import CardInfoContextProvider from 'CardInfoContextProvider';
+import CVC from '.';
 
 export default {
   title: 'CardAddPage/CVC',
   component: CVC,
-  decorators: [
-    (CVC) => (
-      <CardInfoContextProvider>
-        <CVC />
-      </CardInfoContextProvider>
-    ),
-  ],
 };
 
 export const CVCInput = () => <CVC />;

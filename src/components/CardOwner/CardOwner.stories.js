@@ -1,16 +1,8 @@
-import CardOwner from './CardOwner';
-import CardInfoContextProvider from 'CardInfoContextProvider';
+import CardOwner from '.';
 
 export default {
   title: 'CardAddPage/CardOwner',
   component: CardOwner,
-  decorators: [
-    (CardOwner) => (
-      <CardInfoContextProvider>
-        <CardOwner />
-      </CardInfoContextProvider>
-    ),
-  ],
 };
 
 export const CardOwnerInput = () => <CardOwner />;

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { CardInfoContext } from 'CardInfoContextProvider';
 
-import Card from 'components/common/Card/Card';
+import Card from 'components/common/Card';
 
 function CardList() {
   const { state } = useContext(CardInfoContext);

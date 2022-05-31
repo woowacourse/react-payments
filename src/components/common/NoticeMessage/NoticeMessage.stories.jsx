@@ -1,16 +1,8 @@
-import NoticeMessage from './NoticeMessage';
-import CardInfoContextProvider from 'CardInfoContextProvider';
+import NoticeMessage from '.';
 
 export default {
   title: 'CardAddSuccessPage/NoticeMessage',
   component: NoticeMessage,
-  decorators: [
-    (NoticeMessage) => (
-      <CardInfoContextProvider>
-        <NoticeMessage />
-      </CardInfoContextProvider>
-    ),
-  ],
 };
 const Template = (args) => <NoticeMessage {...args} />;
 

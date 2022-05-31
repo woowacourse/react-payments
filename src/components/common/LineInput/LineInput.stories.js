@@ -1,16 +1,8 @@
-import LineInput from './LineInput';
-import CardInfoContextProvider from 'CardInfoContextProvider';
+import LineInput from '.';
 
 export default {
   title: 'CardAddSuccessPage/LineInput',
   component: LineInput,
-  decorators: [
-    (LineInput) => (
-      <CardInfoContextProvider>
-        <LineInput />
-      </CardInfoContextProvider>
-    ),
-  ],
 };
 
 export const LineUserInput = () => <LineInput />;
