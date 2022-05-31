@@ -1,7 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { COLORS } from "constants/color";
 
-export const Modal = ({ children, visible, handleVisible }) => {
+interface ModalComponent {
+  children: React.ReactNode;
+  visible: boolean;
+  handleVisible: () => void;
+}
+
+export const Modal = ({ children, visible, handleVisible }: ModalComponent) => {
   return (
     <ModalDimmedStyle onClick={handleVisible} isVisible={visible}>
       <ModalStyle>{children}</ModalStyle>
@@ -9,7 +16,7 @@ export const Modal = ({ children, visible, handleVisible }) => {
   );
 };
 
-const ModalDimmedStyle = styled.div`
+const ModalDimmedStyle = styled.div<{ isVisible: boolean }>`
   width: 100%;
   height: 100%;
 
@@ -39,7 +46,7 @@ const ModalStyle = styled.div`
   align-items: center;
   flex-wrap: wrap;
 
-  background: #fff;
+  background: ${COLORS.WHITE_50};
   z-index: 10;
   flex-direction: column;
 `;

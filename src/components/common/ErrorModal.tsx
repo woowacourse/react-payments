@@ -2,9 +2,12 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { ErrorContext } from "contexts";
 import { TipButton } from ".";
+import { COLORS } from "constants/color";
+import { errorStateType } from "types";
 
 export const ErrorModal = () => {
-  const errorState = useContext(ErrorContext);
+  const errorState: errorStateType = useContext(ErrorContext);
+
   return (
     <>
       <TipButton contents="!"></TipButton>
@@ -19,6 +22,6 @@ export const ErrorModal = () => {
 };
 
 const ErrorMessage = styled.p`
-  color: red;
+  color: ${COLORS.RED_100};
   font-weight: bold;
 `;

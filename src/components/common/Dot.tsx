@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { COLORS } from "constants/color";
 
 export const Dot = () => {
   return (
@@ -19,7 +20,7 @@ const DotContainerStyle = styled.div`
 
 const DotStyle = styled.div`
   border-radius: 50%;
-  background-color: #04c09e;
+  background-color: ${COLORS.GREEN_100};
   width: 4px;
   height: 4px;
 `;

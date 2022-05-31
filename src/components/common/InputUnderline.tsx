@@ -1,5 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import { COLORS } from "constants/color";
+import { inputType } from "types";
+
+interface InputUnderlineComponent {
+  type: inputType;
+  placeholder: string;
+  value: string;
+  onChange: () => void;
+  id: string;
+  width: string;
+  pattern: string;
+  inputRef: React.RefObject<HTMLInputElement>;
+  maxLength: number;
+}
 
 export const InputUnderline = ({
   type,
@@ -11,7 +25,7 @@ export const InputUnderline = ({
   pattern,
   inputRef,
   maxLength,
-}) => {
+}: InputUnderlineComponent) => {
   return (
     <InputUnderlineStyle
       width={width}
@@ -29,14 +43,14 @@ export const InputUnderline = ({
 
 const InputUnderlineStyle = styled.input`
   background-color: transparent;
-  color: #000000;
+  color: ${COLORS.BLACK_100};
   height: 45px;
   width: ${(props) => props.width || "100%"};
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;
   font-size: 16px;
-  border-color: #737373;
+  border-color: ${COLORS.GRAY_250};
   border-style: none none solid none;
   border-width: 1.5px;
 `;

@@ -16,42 +16,37 @@ export const CardListPage = () => {
   const cards = useContext(CardContext);
 
   return (
-    <>
-      {cards.list && (
-        <>
-          <PageTitle>보유카드</PageTitle>
-          <FlexWrapper
-            height="calc(100vh - 50px)"
-            flexDirection="column"
-            justifyContent="flex-start"
-          >
-            {cards.list.map((_, i) => (
-              <Button
-                onClick={() =>
-                  navigate(`/cardEdit/${cards.list[i].id}?edit=true`)
-                }
-                textAlign="center"
-                key={cards.list[i].id}
-              >
-                <Card
-                  cardType={cards.list[i].cardType}
-                  cardNumbers={cards.list[i].cardNumbers}
-                  expireDate={cards.list[i].expireDate}
-                  ownerName={cards.list[i].ownerName}
-                />
-                <CardNickname>{cards.list[i].cardNickname}</CardNickname>
-              </Button>
-            ))}
+    cards.list && (
+      <>
+        <PageTitle>보유카드</PageTitle>
+        <FlexWrapper
+          height="calc(100vh - 50px)"
+          flexDirection="column"
+          justifyContent="flex-start"
+        >
+          {cards.list.map((_, i) => (
             <Button
-              onClick={() => navigate("/RegisterCard")}
+              onClick={() =>
+                navigate(`/cardEdit/${cards.list[i].id}?edit=true`)
+              }
               textAlign="center"
+              key={cards.list[i].id}
             >
-              <NewCard></NewCard>
+              <Card
+                cardType={cards.list[i].cardType}
+                cardNumbers={cards.list[i].cardNumbers}
+                expireDate={cards.list[i].expireDate}
+                ownerName={cards.list[i].ownerName}
+              />
+              <CardNickname>{cards.list[i].cardNickname}</CardNickname>
             </Button>
-          </FlexWrapper>
-        </>
-      )}
-    </>
+          ))}
+          <Button onClick={() => navigate("/RegisterCard")} textAlign="center">
+            <NewCard></NewCard>
+          </Button>
+        </FlexWrapper>
+      </>
+    )
   );
 };
 

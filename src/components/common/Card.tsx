@@ -1,5 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import { COLORS } from "constants/color";
+import { cardType, cardNumbers, expireDate, ownerName } from "types";
+
+interface CardComponent {
+  cardType: cardType;
+  cardNumbers: cardNumbers;
+  expireDate: expireDate;
+  ownerName: ownerName;
+  handleModalVisible: () => void;
+}
 
 export const Card = ({
   cardType,
@@ -7,9 +17,11 @@ export const Card = ({
   expireDate,
   ownerName,
   handleModalVisible,
-}) => {
+}: CardComponent) => {
   const formattedCardNumbers = Object.values(cardNumbers)
-    .map((number, idx) => (idx <= 1 ? number : "•".repeat(number.length)))
+    .map((number: string, idx: number) =>
+      idx <= 1 ? number : "•".repeat(number.length)
+    )
     .join(" ");
 
   return (
@@ -41,12 +53,12 @@ const CardBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #525252;
+  color: ${COLORS.GRAY_300};
 
   margin: 10px 0;
 `;
 
-const SmallCard = styled.div`
+const SmallCard = styled.div<{ backgroundColor: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,7 +67,7 @@ const SmallCard = styled.div`
   width: 208px;
   height: 130px;
 
-  background: ${(props) => props.backgroundColor || "#D2D2D2"};
+  background: ${(props) => props.backgroundColor || COLORS.WHITE_200};
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -68,7 +80,7 @@ const SmallCardChip = styled.div`
   left: 95px;
   top: 122px;
 
-  background: #cbba64;
+  background: ${COLORS.YELLOW_100};
   border-radius: 4px;
 `;
 

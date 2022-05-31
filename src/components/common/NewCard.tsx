@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { COLORS } from "constants/color";
 
 export const NewCard = () => {
   return (
@@ -13,7 +14,7 @@ const CardBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #e5e5e5;
+  background-color: ${COLORS.WHITE_125};
 
   width: 208px;
   height: 130px;
@@ -24,7 +25,7 @@ const CardBox = styled.div`
 `;
 
 const CardSymbol = styled.div`
-  color: #575757;
+  color: ${COLORS.GRAY_275};
   font-weight: bold;
   font-size: 36px;
 `;
