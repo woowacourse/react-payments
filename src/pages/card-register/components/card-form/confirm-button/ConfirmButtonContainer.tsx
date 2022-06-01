@@ -24,7 +24,7 @@ function ConfirmButtonContainer({ children }: Props) {
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <ConfirmButton {...(disabled ? { disabled: true } : {})}>{children}</ConfirmButton>
+    <ConfirmButton disabled={disabled}>{children}</ConfirmButton>
   );
 }
 

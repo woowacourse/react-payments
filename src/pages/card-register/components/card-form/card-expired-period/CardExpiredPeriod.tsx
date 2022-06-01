@@ -2,8 +2,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { useFormContext } from '../../../../../hooks/useForm/useFormContext';
 import PositiveNumberInput from '../../common/PositiveNumberInput';
+import Fieldset from '../Fieldset';
 
-function ExpiredPeriodInputContainer() {
+function ExpiredPeriod() {
   const { register } = useFormContext();
 
   const handleMonthOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,26 +33,34 @@ function ExpiredPeriodInputContainer() {
   const yearRegex = `(${year[0]}[${year[1]}-9]|[${Math.min(Number(year[0]) + 1, 9)}-9][0-9])`;
 
   return (
-    <Row>
-      <PositiveNumberInput
-        type="text"
-        {...register('expired-period-1', {
-          required: { value: true },
-          maxLength: { value: 2 },
-          pattern: { value: monthRegex, message: '날짜를 다시 확인해 주세요' },
-          onChange: handleMonthOnChange,
-        })}
-      />
-      <Seperator />
-      <PositiveNumberInput
-        type="text"
-        {...register('expired-period-2', {
-          required: { value: true },
-          maxLength: { value: 2 },
-          pattern: { value: yearRegex, message: '년도를 다시 확인해 주세요' },
-        })}
-      />
-    </Row>
+    <Fieldset>
+      <Fieldset.Head>
+        <label htmlFor="expired-period">만료일</label>
+      </Fieldset.Head>
+      <Fieldset.Content>
+        <Row>
+          <PositiveNumberInput
+            id="expired-period"
+            type="text"
+            {...register('expired-period-1', {
+              required: { value: true },
+              maxLength: { value: 2 },
+              pattern: { value: monthRegex, message: '날짜를 다시 확인해 주세요' },
+              onChange: handleMonthOnChange,
+            })}
+          />
+          <Seperator />
+          <PositiveNumberInput
+            type="text"
+            {...register('expired-period-2', {
+              required: { value: true },
+              maxLength: { value: 2 },
+              pattern: { value: yearRegex, message: '년도를 다시 확인해 주세요' },
+            })}
+          />
+        </Row>
+      </Fieldset.Content>
+    </Fieldset>
   );
 }
 
@@ -77,4 +86,4 @@ const Seperator = styled.div`
   }
 `;
 
-export default ExpiredPeriodInputContainer;
+export default ExpiredPeriod;
