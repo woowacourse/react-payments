@@ -1,11 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const Field = ({ children, ...rest }) => {
-  return <StyledField {...rest}>{children}</StyledField>;
-};
-
-const StyledField = styled.div`
+const Field = styled.div`
   margin: 16px 0;
   position: relative;
 

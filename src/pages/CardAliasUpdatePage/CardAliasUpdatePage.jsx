@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import CardAliasUpdateForm from '../../components/CardAliasUpdateForm/CardAliasUpdateForm';
 import CardPreview from '../../components/CardPreview/CardPreview';
 import Content from '../../components/Layout/Content/Content';
 import CardsContext from '../../contexts/CardsContext';
-
-import { convertFormDataToObject } from '../../utils/commons';
+import * as S from './CardAliasUpdatePage.styled';
 
 const CardAliasUpdatePage = () => {
   const navigate = useNavigate();
@@ -18,7 +16,7 @@ const CardAliasUpdatePage = () => {
     const alias = formData.get('alias').trim();
 
     if (alias !== '') {
-      const cardInfo = convertFormDataToObject(formData);
+      const cardInfo = Object.fromEntries(formData);
 
       updateCard(state.id, cardInfo);
     }
@@ -28,27 +26,13 @@ const CardAliasUpdatePage = () => {
 
   return (
     <Content>
-      <VerticalGrid>
-        <StyledTitle>카드등록이 완료되었습니다.</StyledTitle>
+      <S.VerticalGridBox>
+        <S.Title>카드등록이 완료되었습니다.</S.Title>
         <CardPreview size="big" {...state} />
         <CardAliasUpdateForm onSubmit={onSubmit} />
-      </VerticalGrid>
+      </S.VerticalGridBox>
     </Content>
   );
 };
-
-const StyledTitle = styled.h2`
-  margin-top: 100px;
-  font-size: 24px;
-  line-height: 28px;
-  font-weight: 400;
-  text-align: center;
-`;
-
-const VerticalGrid = styled.div`
-  height: 100%;
-  display: grid;
-  grid-template-rows: 150px 1fr 1fr;
-`;
 
 export default CardAliasUpdatePage;

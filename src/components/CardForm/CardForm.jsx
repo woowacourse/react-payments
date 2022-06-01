@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import useEasyForm from '../../hooks/useEasyForm';
 import CardPreview from '../CardPreview/CardPreview';
 import Field from '../Field/Field';
@@ -10,8 +9,8 @@ import Input from '../Input/Input';
 import ToolTip from '../ToolTip/ToolTip';
 import Footer from '../Layout/Footer/Footer';
 import SubmitButton from '../SubmitButton/SubmitButton';
-import { convertFormDataToObject } from '../../utils/commons';
 import CardsContext from '../../contexts/CardsContext';
+import * as S from './CardForm.styled';
 
 const CardForm = () => {
   const navigate = useNavigate();
@@ -37,7 +36,7 @@ const CardForm = () => {
     formData.set('owner', formData.get('owner').trim().toUpperCase());
     formData.set('alias', '새 카드');
 
-    const cardInfo = convertFormDataToObject(formData);
+    const cardInfo = Object.fromEntries(formData);
     const newCard = addCard(cardInfo);
 
     navigate('/confirm', { state: newCard });
@@ -55,7 +54,7 @@ const CardForm = () => {
   return (
     <>
       <CardPreview {...{ ...watchingValues, brand: '우아한카드' }} />
-      <StyledCardForm {...registerForm({ onSubmit, onError })}>
+      <S.CardForm {...registerForm({ onSubmit, onError })}>
         <Field>
           <Label>카드 번호</Label>
           <InputBox>
@@ -237,14 +236,9 @@ const CardForm = () => {
         <Footer>
           <SubmitButton type="submit">다음</SubmitButton>
         </Footer>
-      </StyledCardForm>
+      </S.CardForm>
     </>
   );
 };
-
-const StyledCardForm = styled.form`
-  margin: 0;
-  width: 100%;
-`;
 
 export default CardForm;

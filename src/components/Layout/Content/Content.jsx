@@ -1,11 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const Content = ({ children }) => {
-  return <StyledContent>{children}</StyledContent>;
-};
-
-const StyledContent = styled.div`
+const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

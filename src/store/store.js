@@ -1,11 +1,11 @@
 const store = {
   key: 'react-payments',
   cache: null,
-  init() {
-    this.cache = JSON.parse(localStorage.getItem(this.key)) || [];
-  },
   load() {
-    return [...this.cache];
+    if (!this.cache)
+      this.cache = JSON.parse(localStorage.getItem(this.key)) || [];
+
+    return this.cache;
   },
   save(data) {
     this.cache = [...data];
@@ -26,7 +26,5 @@ const store = {
     this.save(data);
   },
 };
-
-store.init();
 
 export default store;

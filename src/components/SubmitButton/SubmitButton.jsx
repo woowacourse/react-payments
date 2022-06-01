@@ -1,11 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const SubmitButton = ({ children, ...rest }) => {
-  return <StyledButton {...rest}>{children}</StyledButton>;
-};
-
-const StyledButton = styled.button`
+const SubmitButton = styled.button`
   background: none;
   border: none;
   padding: 0;

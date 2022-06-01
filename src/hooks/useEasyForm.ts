@@ -1,28 +1,47 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, ChangeEventHandler, FormEventHandler } from 'react';
+
+type Name = HTMLInputElement['name'];
+type Values = Record<Name, any>;
+type FormState<T extends Values> = {
+  isSubmitting: boolean;
+  isSubmitted: boolean;
+  errors: Partial<{
+    [name in keyof T]: string;
+  }>;
+  watchingValues: Partial<T>;
+};
+type InputElementRef = { element: HTMLInputElement; customValidate?: Function };
+type Validation = { assert: Function; message: string };
+type Props = {
+  initialValues: Values;
+  validationMode: 'onSubmit' | 'onChange';
+  shouldUseReportValidity: boolean;
+};
 
 const useEasyForm = (
-  { initialValues, validationMode, shouldUseReportValidity } = {
+  { initialValues, validationMode, shouldUseReportValidity }: Props = {
     initialValues: {},
     validationMode: 'onSubmit',
     shouldUseReportValidity: true,
   }
 ) => {
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<FormState<typeof initialValues>>({
     isSubmitting: false,
+    isSubmitted: false,
     errors: {},
     watchingValues: initialValues,
   });
-  const inputElementsRef = useRef({});
-  const inputElementList = [];
+  const inputElementsRef = useRef<Record<Name, InputElementRef>>({});
+  const inputElementList: InputElementRef[] = [];
 
-  const updateFormState = (state) => {
+  const updateFormState = (state: Partial<FormState<typeof initialValues>>) => {
     setFormState((prevFormState) => ({
       ...prevFormState,
       ...state,
     }));
   };
 
-  const updateWatchingValues = (name, state) => {
+  const updateWatchingValues = (name: Name, state: string) => {
     setFormState((prevFormState) => ({
       ...prevFormState,
       watchingValues: {
@@ -32,7 +51,7 @@ const useEasyForm = (
     }));
   };
 
-  const updateErrors = (name, state) => {
+  const updateErrors = (name: Name, state: Validation['message']) => {
     setFormState((prevFormState) => ({
       ...prevFormState,
       errors: {
@@ -43,9 +62,12 @@ const useEasyForm = (
   };
 
   const bindElement =
-    (name, { validation: customValidation }) =>
-    (element) => {
-      const inputElement = {
+    (
+      name: Name,
+      { validation: customValidation }: { validation: Validation[] }
+    ) =>
+    (element: HTMLInputElement) => {
+      const inputElement: InputElementRef = {
         element,
       };
 
@@ -69,7 +91,7 @@ const useEasyForm = (
       inputElementList.push(inputElement);
     };
 
-  const getNextElementByName = (name) => {
+  const getNextElementByName = (name: Name) => {
     const elementId = inputElementList.findIndex(
       (inputElement) => inputElement.element.name === name
     );
@@ -77,7 +99,7 @@ const useEasyForm = (
     return inputElementList[elementId + 1];
   };
 
-  const getPrevElementByName = (name) => {
+  const getPrevElementByName = (name: Name) => {
     const elementId = inputElementList.findIndex(
       (inputElement) => inputElement.element.name === name
     );
@@ -85,7 +107,7 @@ const useEasyForm = (
     return inputElementList[elementId - 1];
   };
 
-  const validate = (name) => {
+  const validate = (name: Name) => {
     const inputElement = inputElementsRef.current[name];
     let isValid = true;
 
@@ -102,7 +124,7 @@ const useEasyForm = (
     return isValid;
   };
 
-  const onChange = ({ target }) => {
+  const onChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     const { name, value } = target;
 
     if (validationMode === 'onChange') {
@@ -111,12 +133,18 @@ const useEasyForm = (
 
     updateWatchingValues(name, value);
 
-    if (value.length >= target.getAttribute('maxlength')) {
+    if (value.length >= Number(target.getAttribute('maxlength'))) {
       getNextElementByName(name)?.element.focus();
     }
   };
 
-  const onKeyDown = ({ keyCode, target: { name, value } }) => {
+  const onKeyDown = ({
+    keyCode,
+    target: { name, value },
+  }: {
+    keyCode: number;
+    target: HTMLInputElement;
+  }) => {
     const isBackspace = keyCode === 8;
 
     if (isBackspace && value === '') {
@@ -124,39 +152,52 @@ const useEasyForm = (
     }
   };
 
-  const handleSubmit = (onSubmit, onError) => async (event) => {
-    event.preventDefault();
+  const handleSubmit =
+    (
+      onSubmit: Function,
+      onError?: Function
+    ): FormEventHandler<HTMLFormElement> =>
+    async (event) => {
+      event.preventDefault();
 
-    let isValid = true;
+      let isValid = true;
 
-    if (!shouldUseReportValidity) {
-      const validationResults = Object.keys(inputElementsRef.current).map(
-        (name) => validate(name)
-      );
+      if (!shouldUseReportValidity) {
+        const validationResults = Object.keys(inputElementsRef.current).map(
+          (name) => validate(name)
+        );
 
-      isValid = validationResults.every((validationResult) => validationResult);
-    }
-
-    updateFormState({
-      isSubmitting: true,
-    });
-
-    try {
-      if (isValid) {
-        onSubmit(event);
-
-        return;
+        isValid = validationResults.every(
+          (validationResult) => validationResult
+        );
       }
 
-      if (onError) onError(event);
-    } finally {
       updateFormState({
-        isSubmitted: true,
+        isSubmitting: true,
       });
-    }
-  };
 
-  const registerForm = ({ onSubmit, onError }) => {
+      try {
+        if (isValid) {
+          onSubmit(event);
+
+          return;
+        }
+
+        if (onError) onError(event);
+      } finally {
+        updateFormState({
+          isSubmitted: true,
+        });
+      }
+    };
+
+  const registerForm = ({
+    onSubmit,
+    onError,
+  }: {
+    onSubmit: Function;
+    onError?: Function;
+  }) => {
     return {
       onSubmit: handleSubmit(onSubmit, onError),
       disabled: formState.isSubmitting,
@@ -164,7 +205,15 @@ const useEasyForm = (
     };
   };
 
-  const registerInput = (name, options) => {
+  const registerInput = (
+    name: Name,
+    options: {
+      initialValue: any;
+      validation: Validation[];
+      watch?: boolean;
+      className: string;
+    }
+  ) => {
     const { initialValue, validation, watch, className, ...rest } = options;
 
     return {

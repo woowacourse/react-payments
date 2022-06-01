@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import Input from '../Input/Input';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import Footer from '../Layout/Footer/Footer';
 import useEasyForm from '../../hooks/useEasyForm';
+import * as S from './CardAliasUpdateForm.styled';
 
 const CardAliasUpdateForm = ({ onSubmit }) => {
   const { registerForm, registerInput } = useEasyForm({
@@ -20,7 +20,7 @@ const CardAliasUpdateForm = ({ onSubmit }) => {
   };
 
   return (
-    <StyledForm {...registerForm({ onSubmit, onError })}>
+    <S.Form {...registerForm({ onSubmit, onError })}>
       <Input
         type="text"
         placeholder="새 카드"
@@ -32,15 +32,8 @@ const CardAliasUpdateForm = ({ onSubmit }) => {
       <Footer>
         <SubmitButton type="submit">확인</SubmitButton>
       </Footer>
-    </StyledForm>
+    </S.Form>
   );
 };
-
-const StyledForm = styled.form`
-  display: flex;
-  margin-top: 20px;
-  align-items: center;
-  height: 50px;
-`;
 
 export default CardAliasUpdateForm;
