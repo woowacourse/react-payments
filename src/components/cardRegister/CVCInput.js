@@ -1,38 +1,39 @@
-import { useState, useEffect, useContext } from 'react';
-import styled from 'styled-components';
+import { useState, useEffect } from "react";
+import styled from "styled-components";
 
-import { MAX_LENGTH } from '../../constants/card';
-import { CardInfoContext } from '../../providers/CardInfoProvider';
+import { MAX_LENGTH } from "../../constants/card";
+import useCardInfoContext from "../../hooks/useCardInfoContext";
+import { setCVCComplete } from "../../providers/CardInfoCompleteProvider";
+import { setCVC } from "../../providers/CardInfoProvider";
 
-import { QuestionMark } from '../common/QuestionMark';
+import { QuestionMark } from "../common/QuestionMark";
 import {
   InputContainer,
   InputTitle,
   InputBasic,
   InputBox,
-} from '../common/styled';
+} from "../common/styled";
 
 export const CVCInput = ({ openModal }) => {
-  const context = useContext(CardInfoContext);
-
-  const [CVC, setCVC] = useState('');
+  const { infoDispatch, completeDispatch } = useCardInfoContext();
+  const [CVC, setCVCInput] = useState("");
 
   const handleCVCChange = (e) => {
     if (isNaN(e.nativeEvent.data) || e.target.value.length > MAX_LENGTH.CVC) {
       return;
     }
 
-    setCVC(e.target.value);
+    setCVCInput(e.target.value);
   };
 
   useEffect(() => {
     const isCVCCompleted = CVC.length === MAX_LENGTH.CVC;
 
-    context.setInputCompleted('CVC', isCVCCompleted);
+    completeDispatch(setCVCComplete(isCVCCompleted));
   }, [CVC]);
 
   const updateTypedCVC = (e) => {
-    context.setCVC(e.target.value);
+    infoDispatch(setCVC(e.target.value));
   };
 
   return (

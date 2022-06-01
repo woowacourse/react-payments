@@ -1,13 +1,16 @@
-import { useContext } from 'react';
-
-import styled from 'styled-components';
-import { CardInfoContext } from '../../providers/CardInfoProvider';
+import styled from "styled-components";
+import useCardInfoContext from "../../hooks/useCardInfoContext";
+import { setCardTypeComplete } from "../../providers/CardInfoCompleteProvider";
+import { setCardType } from "../../providers/CardInfoProvider";
 
 export const CardSelectModal = ({ cardTypes, closeModal }) => {
-  const context = useContext(CardInfoContext);
+  const { infoDispatch, completeDispatch } = useCardInfoContext();
+
   const handleCardTypeSelect = (cardType) => {
-    context.setCardType(cardType);
-    context.setInputCompleted('cardType', true);
+    const { name, color } = cardType;
+
+    infoDispatch(setCardType(name, color));
+    completeDispatch(setCardTypeComplete(true));
     closeModal();
   };
 
@@ -44,7 +47,7 @@ const ModalItemDotStyle = styled.div`
   border-radius: 50%;
   width: 2.8rem;
   height: 2.8rem;
-  background-color: ${(props) => props.backgroundColor || '#94daca'};
+  background-color: ${(props) => props.backgroundColor || "#94daca"};
   cursor: pointer;
 `;
 const ModalItemNameStyle = styled.span`

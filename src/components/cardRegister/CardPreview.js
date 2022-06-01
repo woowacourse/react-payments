@@ -1,15 +1,15 @@
-import { useContext } from 'react';
-import styled from 'styled-components';
-import { CardInfoContext } from '../../providers/CardInfoProvider';
+import { useContext } from "react";
+import styled from "styled-components";
+import { CardInfoStateContext } from "../../providers/CardInfoProvider";
 
-import { Card } from '../common/Card';
+import { Card } from "../common/Card";
 
 export const CardPreview = ({ onClickCard }) => {
-  const context = useContext(CardInfoContext);
+  const cardInfo = useContext(CardInfoStateContext);
 
   return (
     <Style.CardPreviewLayout>
-      <Card cardInfo={context.cardInfo} onClickCard={onClickCard} size="md" />
+      <Card cardInfo={cardInfo} onClickCard={onClickCard} size="md" />
     </Style.CardPreviewLayout>
   );
 };

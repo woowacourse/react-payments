@@ -1,36 +1,36 @@
-import { useContext } from 'react';
+import styled from "styled-components";
+import { CARD_TYPES, COMPONENTS } from "../../constants/card";
+import { useModalSelector } from "../../hooks/useModalSelector";
+import ModalPortal from "../../Portal";
 
-import styled from 'styled-components';
-import { CARD_TYPES, COMPONENTS, initialCardInfo } from '../../constants/card';
-import { useModalSelector } from '../../hooks/useModalSelector';
-import ModalPortal from '../../Portal';
-import { CardInfoContext } from '../../providers/CardInfoProvider';
-
-import { Button } from '../common/Button';
-import { PageTitle } from '../common/PageTitle';
-import { CardExpireDateInput } from './CardExpireDateInput';
-import { CardNumbersInput } from './CardNumbersInput';
-import { CardOwnerInput } from './CardOwnerInput';
-import { CardPasswordInput } from './CardPasswordInput';
-import { CardPreview } from './CardPreview';
-import { CardSelectModal } from './CardSelectModal';
-import { CVCHelperModal } from './CVCHelperModal';
-import { CVCInput } from './CVCInput';
+import { Button } from "../common/Button";
+import { PageTitle } from "../common/PageTitle";
+import { CardPreview } from "./CardPreview";
+import { CardNumbersInput } from "./CardNumbersInput";
+import { CardExpireDateInput } from "./CardExpireDateInput";
+import { CardOwnerInput } from "./CardOwnerInput";
+import { CVCInput } from "./CVCInput";
+import { CardPasswordInput } from "./CardPasswordInput";
+import { CardSelectModal } from "./CardSelectModal";
+import { CVCHelperModal } from "./CVCHelperModal";
+import useCardInfoContext from "../../hooks/useCardInfoContext";
+import { BackwardButton } from "../common/BackwardButton";
 
 export const CardRegister = ({ onSubmit }) => {
-  const context = useContext(CardInfoContext);
+  const { cardInfo, completeInfo } = useCardInfoContext();
 
   const [openedModalComponent, openModal, closeModal] = useModalSelector();
 
-  const allCompleted = Object.values(context.checkInputCompleted).every(
-    (check) => check
-  );
+  const allCompleted = Object.values(completeInfo).every((check) => check);
 
   return (
     <>
-      <PageTitle>카드 추가</PageTitle>
+      <PageTitle>
+        <BackwardButton />
+        카드 추가
+      </PageTitle>
       <CardPreview
-        cardInfo={initialCardInfo}
+        cardInfo={cardInfo}
         onClickCard={() => openModal(COMPONENTS.CARD_TYPE)}
       />
       <CardNumbersInput openModal={() => openModal(COMPONENTS.CARD_TYPE)} />
