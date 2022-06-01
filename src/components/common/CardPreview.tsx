@@ -2,8 +2,18 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 import useCardPreview from '../../hooks/useCardPreview';
+import { CardValues } from '../../types/type';
 
-const StyledCardPreview = styled.div`
+interface CardPreviewProps {
+  values: CardValues;
+  size: 'large' | 'small';
+}
+
+interface StyledCardPreviewProps {
+  size: 'large' | 'small';
+}
+
+const StyledCardPreview = styled.div<StyledCardPreviewProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,7 +113,7 @@ const StyledCardPreview = styled.div`
   }
 `;
 
-const CardPreview = ({ values, size = 'small' }) => {
+const CardPreview = ({ values, size = 'small' }: CardPreviewProps) => {
   const { getCardInfo } = useCardPreview();
   const { brand, cardNumber, expiredDate, owner } = getCardInfo(values);
   const cardNumberText = `${cardNumber[0]} ${cardNumber[1]} ${'•'.repeat(
@@ -114,7 +124,7 @@ const CardPreview = ({ values, size = 'small' }) => {
     <StyledCardPreview className="card-box" size={size}>
       <div className="small-card">
         <div className="card-top">
-          <span className="card-text">{brand ?? null}</span>
+          <span className="card-text">{brand && brand}</span>
         </div>
         <div className="card-middle">
           <div className="small-card__chip" />

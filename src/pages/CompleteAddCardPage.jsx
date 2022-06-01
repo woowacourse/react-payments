@@ -1,17 +1,19 @@
 import React, { useContext, useRef, useState } from 'react';
+
 import styled from 'styled-components';
+
 import { useNavigate } from 'react-router-dom';
+
 import { CardContext } from '../contexts/CardContext';
+
 import CardPreview from '../components/common/CardPreview';
 import TextBox from '../components/common/TextBox';
 import Input from '../components/common/Input';
 import Button from '../components/common/Button';
-import {
-  API_SERVER,
-  DEFAULT_CARD_NAME,
-  ERROR_MESSAGE,
-  PATH,
-} from '../utils/constants';
+
+import { DEFAULT_CARD_NAME, ERROR_MESSAGE, PATH } from '../utils/constants';
+
+import useFetch from '../hooks/useFetch';
 
 const StyledCompleteAddCardPage = styled.div`
   display: flex;
@@ -38,9 +40,14 @@ const StyledCompleteAddCardPage = styled.div`
 
 const CompleteAddCardPage = () => {
   const { values, setValues, initialField } = useContext(CardContext);
+
   const inputRef = useRef();
+
   const navigation = useNavigate();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const { error: errorWithPosting, fetch: fetchPostCard } = useFetch('post');
 
   const storeCard = async () => {
     if (isSubmitting) {
@@ -48,6 +55,7 @@ const CompleteAddCardPage = () => {
     }
 
     setIsSubmitting(true);
+
     const cardInfo = {
       cardName:
         inputRef.current.value.toUpperCase() ||
@@ -56,18 +64,16 @@ const CompleteAddCardPage = () => {
       values,
     };
 
-    const response = await fetch(`${API_SERVER}/cards`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(cardInfo),
+    await fetchPostCard({
+      API_URL: `${process.env.REACT_APP_CARD_API}/cards`,
+      body: cardInfo,
     });
 
-    if (!response.ok) {
+    if (errorWithPosting) {
       alert(ERROR_MESSAGE.FAILED_POST);
       return;
     }
+
     setValues(initialField);
     setIsSubmitting(false);
   };

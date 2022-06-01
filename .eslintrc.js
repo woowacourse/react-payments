@@ -9,6 +9,8 @@ module.exports = {
     'airbnb',
     'plugin:prettier/recommended',
     'plugin:storybook/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -17,7 +19,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react'],
+  plugins: ['react', '@typescript-eslint'],
   rules: {
     'react/function-component-definition': [
       2,
@@ -37,5 +39,20 @@ module.exports = {
     ],
     'react/prop-types': [0],
     'jsx-a11y/label-has-associated-control': ['off'],
+    'react/jsx-filename-extension': [0],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      { js: 'never', jsx: 'never', ts: 'never', tsx: 'never' },
+    ],
+    'react/require-default-props': 'off',
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        moduleDirectory: ['src', 'node_modules'],
+      },
+    },
   },
 };

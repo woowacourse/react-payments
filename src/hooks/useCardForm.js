@@ -5,13 +5,14 @@ import useFormSchema from './useFormSchema';
 import { isBackspace } from '../utils/commons';
 import { CardContext } from '../contexts/CardContext';
 
-const useCardForm = ({ cardFormSchema }, path = undefined) => {
+const useCardForm = ({ cardFormSchema }, path = null) => {
   const navigate = useNavigate();
   const { values, setValues } = useContext(CardContext);
   const { isInvalidInput, errors, setErrorTrue, setErrorMessages } =
     useFormSchema(cardFormSchema);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const { ref, bindElement, getNextElement, getPrevElement } =
     useObjectRef(cardFormSchema);
 
@@ -62,12 +63,12 @@ const useCardForm = ({ cardFormSchema }, path = undefined) => {
     navigate(path);
   };
 
-  const onSubmitAction = async () => {
+  const onSubmitAction = () => {
     navigateOnSubmit();
   };
 
   const focusErrorInput = (invalidInputRefs) => {
-    const firstInvalidInput = invalidInputRefs[0].element;
+    const [{ element: firstInvalidInput }] = invalidInputRefs;
     const { errorMessage } = errors[firstInvalidInput.name];
 
     firstInvalidInput.focus();

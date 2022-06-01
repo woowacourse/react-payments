@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+interface InputFieldContainerProps {
+  children: React.ReactNode;
+}
 const StyledInputFieldContainer = styled.div`
   margin: 16px 0;
 
@@ -81,7 +84,10 @@ const StyledInputFieldContainer = styled.div`
   }
 `;
 
-const InputFieldContainer = ({ children, ...rest }) => {
+const InputFieldContainer = ({
+  children,
+  ...rest
+}: InputFieldContainerProps) => {
   return (
     <StyledInputFieldContainer className="input-container" {...rest}>
       {children}

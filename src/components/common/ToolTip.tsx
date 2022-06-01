@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+interface ToolTipProps {
+  children: React.ReactNode;
+  tip: string;
+}
 const StyledToolTip = styled.div`
   position: relative;
 
@@ -29,7 +33,7 @@ const StyledToolTip = styled.div`
     top: 50%;
     left: 50%;
     left: 32px;
-    background-color: white;
+    background-color: ${(props) => props.theme.WHITE};
     border-radius: 4px;
     box-shadow: 0px 0px 5.3px rgba(0, 0, 0, 0.028),
       0px 0px 17.9px rgba(0, 0, 0, 0.042), 0px 0px 80px rgba(0, 0, 0, 0.07);
@@ -37,7 +41,7 @@ const StyledToolTip = styled.div`
   }
 `;
 
-const ToolTip = ({ children, tip }) => {
+const ToolTip = ({ children, tip }: ToolTipProps) => {
   return (
     <StyledToolTip>
       <div className="icon" data-testid="icon">
