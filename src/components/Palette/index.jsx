@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import ColorPicker from './ColorPicker';
 import * as Styled from './index.styled';
-import { CARD_COLOR_BY_NAME } from '../../constant';
+import { CARD_TYPE } from '../../constant';
 import { useCardFormContext, ACTION } from '../../context/card-form-context';
 
 const CARD_LIST1 = ['롯데카드', '삼성카드', 'NH농협카드', '신한카드'];
@@ -22,7 +22,7 @@ const Palette = ({ closeModal }) => {
       <Styled.ColorPickerContainer>
         {CARD_LIST1.map((name) => (
           <ColorPicker
-            color={CARD_COLOR_BY_NAME[name]}
+            color={CARD_TYPE[name].color}
             name={name}
             key={name}
             onClick={onClickCardSelector(name)}
@@ -32,7 +32,7 @@ const Palette = ({ closeModal }) => {
       <Styled.ColorPickerContainer>
         {CARD_LIST2.map((name) => (
           <ColorPicker
-            color={CARD_COLOR_BY_NAME[name]}
+            color={CARD_TYPE[name].color}
             name={name}
             key={name}
             onClick={onClickCardSelector(name)}

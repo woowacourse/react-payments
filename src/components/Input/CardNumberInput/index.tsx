@@ -1,6 +1,18 @@
+import React from 'react';
 import Input from '../index';
 import PropTypes from 'prop-types';
 import * as Styled from './index.styled';
+
+interface Props {
+  onChangeFirstCardNumber: () => void;
+  onChangeSecondCardNumber: () => void;
+  onChangeThirdCardNumber: () => void;
+  onChangeFourthCardNumber: () => void;
+  firstCardNumber: string;
+  secondCardNumber: string;
+  thirdCardNumber: string;
+  fourthCardNumber: string;
+}
 
 const CardNumberInput = ({
   onChangeFirstCardNumber,
@@ -11,7 +23,7 @@ const CardNumberInput = ({
   secondCardNumber,
   thirdCardNumber,
   fourthCardNumber,
-}) => {
+}: Props) => {
   return (
     <Styled.Container>
       <Input

@@ -1,20 +1,19 @@
-import PropTypes from 'prop-types';
-import { COLOR_NAMES } from '../../../constant';
+import React from 'react';
 import * as Styled from './index.styled';
 
-const ColorPicker = ({ color, name, onClick }) => {
+interface Props {
+  color: string;
+  name: string;
+  onClick: () => void;
+}
+
+const ColorPicker = ({ color, name, onClick }: Props) => {
   return (
     <Styled.Container onClick={onClick}>
       <Styled.OptionContainer color={color} />
       <Styled.DescriptionContainer>{name}</Styled.DescriptionContainer>
     </Styled.Container>
   );
-};
-
-ColorPicker.propTypes = {
-  color: PropTypes.oneOf(COLOR_NAMES),
-  name: PropTypes.string,
-  onClick: PropTypes.func,
 };
 
 export default ColorPicker;

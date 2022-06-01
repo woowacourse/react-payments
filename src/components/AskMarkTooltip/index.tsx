@@ -1,3 +1,4 @@
+import React from 'react';
 import { memo } from 'react';
 import * as Styled from './index.styled';
 

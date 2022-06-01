@@ -1,9 +1,23 @@
-import PropTypes from 'prop-types';
+import React from 'react';
 import Label from '../Label/index';
 import ErrorMessage from '../ErrorMessage/index';
 import * as Styled from './index.styled';
 
-const FieldSet = ({ id, description, children, errorMessage, isError }) => {
+interface Props {
+  id: string;
+  children: React.ReactNode;
+  description: string;
+  errorMessage: string;
+  isError: boolean;
+}
+
+const FieldSet = ({
+  id,
+  description,
+  children,
+  errorMessage,
+  isError,
+}: Props) => {
   return (
     <Styled.Container>
       <Label id={id} description={description} />
@@ -13,14 +27,6 @@ const FieldSet = ({ id, description, children, errorMessage, isError }) => {
       </Styled.ErrorMessageContainer>
     </Styled.Container>
   );
-};
-
-FieldSet.propTypes = {
-  id: PropTypes.string,
-  description: PropTypes.string,
-  errorMessage: PropTypes.string,
-  children: PropTypes.element,
-  isError: PropTypes.bool,
 };
 
 export default FieldSet;

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const Container = styled.button`
   width: fit-content;
@@ -17,7 +16,7 @@ export const Container = styled.button`
   }
 `;
 
-export const GeneralButton = styled.button`
+export const Button = styled.button`
   width: fit-content;
   height: 44px;
   color: #04c09e;
@@ -31,16 +30,4 @@ export const GeneralButton = styled.button`
     color: grey;
     cursor: progress;
   }
-`;
-
-export const LinkButton = styled(Link)`
-  width: fit-content;
-  height: 44px;
-  color: #04c09e;
-  font-size: 14px;
-  font-weight: 700;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
 `;
