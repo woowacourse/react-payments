@@ -1,22 +1,28 @@
 {
-  "name": "payments",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "github-pages": "^3.0.2",
-    "node-sass": "^7.0.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1"
+  "name": "react-yunho-payments",
+  "description": "fun-payments-components",
+  "keywords": [
+    "woowa",
+    "react",
+    "component"
+  ],
+  "author": {
+    "name": "kangyunho",
+    "email": "ansghkdbsgh@gmail.com"
   },
+  "version": "0.0.1",
+  "private": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "browser": "./browser/specific/main.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "prepare": "rm -rf dis && mkdir dist && tsc"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +51,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "@types/node": "^17.0.36",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.5",
+    "github-pages": "^3.0.2",
+    "node-sass": "^7.0.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.7.2"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.4.22",

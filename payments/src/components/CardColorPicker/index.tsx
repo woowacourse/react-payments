@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { MutableRefObject, useRef } from 'react';
 import Color from '../Color';
 import ModalContainer from '../ModalContainer';
 import './index.scss';
@@ -15,7 +15,7 @@ const cardCategory = [
 ];
 
 const CardColorPicker = ({ visible, setVisible, updateForm }) => {
-  const modalCotnets = useRef(null);
+  const modalCotnets: MutableRefObject<HTMLDivElement> = useRef(null);
 
   return (
     <ModalContainer contentsRef={modalCotnets} visible={visible} setVisible={setVisible}>

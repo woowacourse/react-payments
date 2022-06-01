@@ -1,13 +1,19 @@
-import { useMemo, useRef } from 'react';
+import { Dispatch, MutableRefObject, SetStateAction, useMemo, useRef } from 'react';
 import './index.scss';
+
+interface CardPageProps {
+  state: { cardNumber; expiredDate; ownerName; cardName; color; secureCode };
+  setVisible?: Dispatch<SetStateAction<boolean>>;
+  needBack?: boolean;
+}
 
 const Card = ({
   state: { cardNumber, expiredDate, ownerName, cardName, color, secureCode },
   setVisible,
   needBack = false,
-}) => {
-  const cardFront = useRef();
-  const cardBack = useRef();
+}: CardPageProps) => {
+  const cardFront: MutableRefObject<HTMLDivElement> = useRef();
+  const cardBack: MutableRefObject<HTMLDivElement> = useRef();
 
   const mouserOver = useMemo(
     () =>

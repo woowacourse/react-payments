@@ -30,7 +30,7 @@ const EnterNickname = () => {
       </header>
       <form onChange={onChangeForm}>
         <Card state={inputStates}></Card>
-        <Input className='enter-nickname__input' placeholder='카드이름입력란'></Input>
+        <Input placeholder='카드이름입력란'></Input>
         <div className='enter__button'>
           <Link to='/' onClick={onClick}>
             <Button className='confirm__button'>확인</Button>

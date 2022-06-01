@@ -16,7 +16,7 @@ const ExpiredDateInput = ({ state, updateForm }) => {
     <div className='expire__input__container'>
       <InputLabel>만료일</InputLabel>
       <InputContainer>
-        {new Array(NUM_OF_INPUT).fill().map((_, idx) => (
+        {new Array<number>(NUM_OF_INPUT).fill(0).map((_, idx) => (
           <Fragment key={idx}>
             <Input
               placeholder={idx === 0 ? 'MM' : 'YY'}
@@ -33,7 +33,8 @@ const ExpiredDateInput = ({ state, updateForm }) => {
                 });
               }}
               onKeyDown={(e) => {
-                if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === '') {
+                const target = e.target as HTMLInputElement;
+                if (e.keyCode === BACKSPACE_KEY_CODE && target.value === '') {
                   autoFocusBackward(e.target);
                 }
               }}

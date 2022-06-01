@@ -22,9 +22,10 @@ const CardNumberInput = ({ state, updateForm }) => {
     <div className='card-number__input__container'>
       <InputLabel>카드 번호</InputLabel>
       <InputContainer>
-        {new Array(NUM_OF_INPUT).fill().map((_, idx) => (
+        {new Array<number>(NUM_OF_INPUT).fill(0).map((_, idx) => (
           <Fragment key={idx}>
             <Input
+              onKeyDown={onKeyDown}
               onChange={({ target }) => {
                 autoFocusForward(target);
                 updateForm({
@@ -32,7 +33,6 @@ const CardNumberInput = ({ state, updateForm }) => {
                   payload: { value: target.value, index: idx },
                 });
               }}
-              onKeyDown={onKeyDown}
               value={state[idx]}
               ref={(el) => (itemRef.current[idx] = el)}
               type={idx > 1 ? 'password' : 'text'}

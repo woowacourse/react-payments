@@ -15,7 +15,7 @@ const CardPasswordInput = ({ state, updateForm }) => {
     <div className='password__input__container'>
       <InputLabel>카드비밀번호</InputLabel>
       <div className='password__inputs'>
-        {new Array(NUM_OF_INPUT).fill().map((_, idx) => (
+        {new Array<number>(NUM_OF_INPUT).fill(0).map((_, idx) => (
           <div className='password__input' key={idx}>
             <InputContainer>
               <Input
@@ -32,7 +32,8 @@ const CardPasswordInput = ({ state, updateForm }) => {
                   });
                 }}
                 onKeyDown={(e) => {
-                  if (e.keyCode === BACKSPACE_KEY_CODE && e.target.value === '') {
+                  const target = e.target as HTMLInputElement;
+                  if (e.keyCode === BACKSPACE_KEY_CODE && target.value === '') {
                     autoFocusBackward(e.target);
                   }
                 }}

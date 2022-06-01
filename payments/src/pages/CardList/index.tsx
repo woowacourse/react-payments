@@ -21,7 +21,7 @@ const CardList = () => {
       <div className='card-list'>
         {userList.map((user, index) => (
           <div className='card' key={index}>
-            <Card className='card' state={user.userInfo}></Card>
+            <Card state={user.userInfo}></Card>
             <p className='user-nickname__tag'>{user.nickName}</p>
           </div>
         ))}

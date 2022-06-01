@@ -1,7 +1,11 @@
-import { forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import './index.scss';
 
-export const Input = forwardRef((props, ref) => {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  type?: 'password' | 'text';
+}
+
+export const Input = forwardRef((props: InputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
   const { type, value, placeholder, onChange, onKeyDown, className, ...otherProps } = props;
   return (
     <input
