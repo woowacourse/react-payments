@@ -51,15 +51,15 @@ export const DATE_RANGE = {
   MIN_YEAR: 22,
 };
 
-export const ACTION = {
-  SET_ALIAS: 'SET_ALIAS',
-  CREATE_CARD: 'CREATE_CARD',
-};
+export const BASENAME = '/react-payments/';
+
+export const SERVER_URL = 'https://movie-payments.herokuapp.com/';
 
 export const ROUTE = {
-  MAIN: '/react-payments/',
-  ADD: '/react-payments/add',
-  CONFIRM: '/react-payments/confirm/',
+  MAIN: '/',
+  ADD: '/add',
+  CONFIRM: '/confirm/',
+  NO_MATCHED: '/*',
 };
 
 export const ERROR_MESSAGE = {

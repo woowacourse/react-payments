@@ -1,0 +1,22 @@
+.container {
+  overflow: scroll;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-icon {
+  cursor: pointer;
+  margin: 30px 0;
+}
+
+.alias {
+  text-align: center;
+}

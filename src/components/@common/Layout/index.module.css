@@ -1,0 +1,14 @@
+.container {
+  width: 375px;
+  height: 700px;
+
+  position: relative;
+
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+.app {
+  height: 100%;
+  padding: 16px 24px;
+}
