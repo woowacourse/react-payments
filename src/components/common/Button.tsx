@@ -19,7 +19,13 @@ const StyledButton = styled.button`
   }
 `;
 
-export default function Button({ children, ...props }) {
+interface Props {
+  children: React.ReactNode;
+  type?: 'submit' | 'button' | 'reset';
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+export default function Button({ children, ...props }: Props) {
   return <StyledButton {...props}>{children}</StyledButton>;
 }
 

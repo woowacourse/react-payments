@@ -1,11 +1,18 @@
 import React from 'react';
 
-import InputField from './common/InputField.jsx';
-import Input from './common/Input.jsx';
+import InputField from './common/InputField';
+import Input from './common/Input';
 
-import { ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_ERROR_MESSAGE, CREATE_MASKED_CHARACTERS } from '../constants';
+import { ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_ERROR_MESSAGE, CREATE_MASKED_CHARACTERS } from '../constants/index';
 
-export default function CardPasswordInput({ password, onChange, isInvalid, isComplete }) {
+interface Props {
+  password: string[];
+  onChange: (value?: string, index?: number) => void;
+  isInvalid: boolean;
+  isComplete: boolean;
+}
+
+export default function CardPasswordInput({ password, onChange, isInvalid, isComplete }: Props) {
   return (
     <InputField
       labelText="카드 비밀번호 앞 두 자리"
@@ -20,7 +27,7 @@ export default function CardPasswordInput({ password, onChange, isInvalid, isCom
           key={index}
           type="password"
           value={password[index]}
-          maxLength="1"
+          maxLength={1}
           onChange={e => onChange(e.target.value, index)}
           width="100%"
           placeholder={CREATE_MASKED_CHARACTERS(1)}

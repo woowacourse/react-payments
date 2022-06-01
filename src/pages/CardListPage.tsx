@@ -1,8 +1,8 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CardListContext } from '../context';
+import { CardListContext } from '../context/CardListContext';
 
 import CardItem from '../components/CardItem';
 import { GuideMessage, Header, Title } from '../components/common/styled';
@@ -84,11 +84,11 @@ export default function CardListPage() {
   function CardList() {
     return (
       <StyledCardList>
-        {cardList.map((cardInfo, index) => (
-          <Link to={`/updateCardNickName/${index}`}>
-            <CardListItem key={index}>
+        {cardList.map(cardInfo => (
+          <Link key={cardInfo.id} to={`/updateCardNickName/${cardInfo.id}`}>
+            <CardListItem>
               <CardItem size={'small'} isComplete={true} {...cardInfo} />
-              <CardNickName>{cardInfo.nickName || `나의 카드 ${index + 1}`}</CardNickName>
+              <CardNickName>{cardInfo.nickName || `나의 카드 ${cardInfo.id}`}</CardNickName>
             </CardListItem>
           </Link>
         ))}

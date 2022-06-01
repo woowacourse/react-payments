@@ -1,6 +1,6 @@
 const MASKED_CHARACTER = '•';
 
-const CREATE_MASKED_CHARACTERS = repeatCount => `${MASKED_CHARACTER} `.repeat(repeatCount).trim();
+const CREATE_MASKED_CHARACTERS = (repeatCount: number) => `${MASKED_CHARACTER} `.repeat(repeatCount).trim();
 
 const ADD_CARD_FORM_CONDITION = {
   NUMBER_UNIT_LENGTH: 4,
@@ -12,7 +12,7 @@ const ADD_CARD_FORM_CONDITION = {
 };
 
 const CONFIRM_MESSAGE = {
-  ADD_CARD_FORM_SUBMIT: (cardNumber, expireDate, holderName) => `
+  ADD_CARD_FORM_SUBMIT: (cardNumber: string[], expireDate: string[], holderName: string): string => `
     카드번호: ${cardNumber.join(' - ')}
     만료일: ${expireDate.join('/')}
     소유자: ${holderName}
@@ -21,12 +21,12 @@ const CONFIRM_MESSAGE = {
   `,
 
   ADD_CARD_WITH_NO_NICKNAME: '닉네임을 지정하지 않고 카드를 등록하시겠습니까?',
-  ADD_CARD_WITH_NICKNAME: nickName => `[${nickName}](으)로 카드 닉네임을 등록하시겠습니까?`,
+  ADD_CARD_WITH_NICKNAME: (nickName: string) => `[${nickName}](으)로 카드 닉네임을 등록하시겠습니까?`,
 
   KEEP_NO_NICKNAME: '닉네임이 없는 상태를 유지하시겠습니까?',
-  KEEP_REGISTERED_NICKNAME: nickName => `기존 닉네임 [${nickName}]을 유지하시겠습니까?`,
-  
-  UPDATE_NICKNAME: (nickName) => `[${nickName}](으)로 카드 닉네임을 수정하시겠습니까?`
+  KEEP_REGISTERED_NICKNAME: (nickName: string) => `기존 닉네임 [${nickName}]을 유지하시겠습니까?`,
+
+  UPDATE_NICKNAME: (nickName: string) => `[${nickName}](으)로 카드 닉네임을 수정하시겠습니까?`,
 };
 
 const ADD_CARD_FORM_ERROR_MESSAGE = {

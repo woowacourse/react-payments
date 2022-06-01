@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Input from './common/Input.jsx';
-import InputField from './common/InputField.jsx';
-import DescriptionIconButton from './common/DescriptionIconButton.jsx';
+import Input from './common/Input';
+import InputField from './common/InputField';
+import DescriptionIconButton from './common/DescriptionIconButton';
 
-import { ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_ERROR_MESSAGE, CREATE_MASKED_CHARACTERS } from '../constants';
+import { ADD_CARD_FORM_ERROR_MESSAGE, CREATE_MASKED_CHARACTERS } from '../constants/index';
 
 import QuestionMarkIcon from '../assets/images/questionMarkIcon.svg';
 
@@ -24,7 +24,14 @@ const IconButtonWrapper = styled.div`
   right: 60%;
 `;
 
-export default function CardSecurityCodeInput({ securityCode, onChange, isInvalid, isComplete }) {
+interface Props {
+  securityCode: string;
+  onChange: (value?: string, index?: number) => void;
+  isInvalid: boolean;
+  isComplete: boolean;
+}
+
+export default function CardSecurityCodeInput({ securityCode, onChange, isInvalid, isComplete }: Props) {
   return (
     <InputFieldWrapper>
       <InputField
@@ -37,7 +44,7 @@ export default function CardSecurityCodeInput({ securityCode, onChange, isInvali
           type="password"
           placeholder={CREATE_MASKED_CHARACTERS(3)}
           value={securityCode}
-          maxLength="3"
+          maxLength={3}
           onChange={e => onChange(e.target.value)}
           width="100%"
           data-testid={'card-security-code-input'}

@@ -2,7 +2,8 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { withReactContext } from 'storybook-react-context';
 
-import { CardListContext } from './../context';
+import { CardListContext } from './../context/CardListContext';
+
 import CardListPage from './../pages/CardListPage';
 import { MOCK_DATA } from './mock';
 

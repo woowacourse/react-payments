@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { To, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import GoBackIcon from '../assets/images/goBackIcon.svg';
@@ -23,7 +24,7 @@ export default function GoBackButton() {
   return (
     <StyledIconContainer
       onClick={() => {
-        navigate(-1, { replace: true });
+        navigate(-1 as To, { replace: true });
       }}>
       <img src={GoBackIcon} alt="Go Back" />
     </StyledIconContainer>

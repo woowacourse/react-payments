@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Input from './common/Input.jsx';
-import InputField from './common/InputField.jsx';
+import Input from './common/Input';
+import InputField from './common/InputField';
 
-import { ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_ERROR_MESSAGE } from '../constants';
+import { ADD_CARD_FORM_CONDITION, ADD_CARD_FORM_ERROR_MESSAGE } from '../constants/index';
 
 const InputFieldWrapper = styled.div`
   position: relative;
   width: 100%;
 `;
 
-const StyledInputCounter = styled.p`
+const StyledInputCounter = styled.p<{ isComplete: boolean }>`
   position: absolute;
   top: 0;
   right: 0;
@@ -21,7 +21,13 @@ const StyledInputCounter = styled.p`
   letter-spacing: -0.085em;
 `;
 
-function InputCounter({ currLength = '0', maxLength, isComplete }) {
+interface InputCounterProps {
+  currLength: number;
+  maxLength: number;
+  isComplete: boolean;
+}
+
+function InputCounter({ currLength = 0, maxLength, isComplete }: InputCounterProps) {
   return (
     <StyledInputCounter isComplete={isComplete}>
       {currLength}/{maxLength}
@@ -29,7 +35,14 @@ function InputCounter({ currLength = '0', maxLength, isComplete }) {
   );
 }
 
-export default function CardHolderNameInput({ holderName, onChange, isInvalid, isComplete }) {
+interface Props {
+  holderName: string;
+  onChange: (value?: string, index?: number) => void;
+  isInvalid: boolean;
+  isComplete: boolean;
+}
+
+export default function CardHolderNameInput({ holderName, onChange, isInvalid, isComplete }: Props) {
   return (
     <InputFieldWrapper>
       <InputField

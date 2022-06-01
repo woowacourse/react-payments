@@ -8,6 +8,11 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.1",
+    "@types/node": "^17.0.35",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.5",
+    "@types/styled-components": "^5.1.25",
     "prop-types": "^15.8.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -15,6 +20,7 @@
     "react-scripts": "5.0.1",
     "storybook-react-context": "^0.6.0",
     "styled-components": "^5.3.5",
+    "typescript": "^4.7.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -25,8 +31,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public",
-    "chromatic": "npx chromatic --project-token=67f92342b528"
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [

@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Route, Routes } from 'react-router-dom';
 
-import { CardListContext } from './context';
-import Storage from './Storage';
+import { CardListProvider } from './context/CardListContext';
 
 import CardListPage from './pages/CardListPage';
 import AddCardPage from './pages/AddCardPage';
@@ -22,38 +21,9 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  const [cardList, setCardInfoList] = useState(Storage.cardList);
-
-  const addNewCard = newCardInfo => {
-    let index;
-
-    setCardInfoList(prevCardInfoList => {
-      const newCardInfoList = prevCardInfoList.slice();
-      newCardInfoList.push(newCardInfo);
-      index = newCardInfoList.length - 1;
-
-      Storage.saveCardList(newCardInfoList);
-      return newCardInfoList;
-    });
-    return index;
-  };
-
-  const updateNickNameByIndex = (index, nickName) => {
-    const updatedCardInfo = { ...cardList[index] };
-    updatedCardInfo.nickName = nickName;
-
-    setCardInfoList(prevCardInfoList => {
-      const newCardInfoList = prevCardInfoList.slice();
-      newCardInfoList.splice(index, 1, updatedCardInfo);
-
-      Storage.saveCardList(newCardInfoList);
-      return newCardInfoList;
-    });
-  };
-
   return (
     <AppContainer>
-      <CardListContext.Provider value={{ cardList, addNewCard, updateNickNameByIndex }}>
+      <CardListProvider>
         <Routes>
           <Route path="/" element={<CardListPage />} />
           <Route path="/addCard" element={<AddCardPage />} />
@@ -62,7 +32,7 @@ function App() {
           <Route path="/error" element={<WrongAccessPage />} />
           <Route path="*" element={<WrongAccessPage />} />
         </Routes>
-      </CardListContext.Provider>
+      </CardListProvider>
     </AppContainer>
   );
 }

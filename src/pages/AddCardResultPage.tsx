@@ -1,15 +1,15 @@
 /* eslint-disable no-restricted-globals */
-import { useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { CardListContext } from '../context';
+import { CardListContext } from '../context/CardListContext';
+
 import { Header, Title, GuideMessage } from '../components/common/styled';
 import GoBackButton from '../components/GoBackButton';
 import CardItem from '../components/CardItem';
 import Button from '../components/common/Button';
 import Form from '../components/common/Form';
-
 import { CONFIRM_MESSAGE } from '../constants';
 
 const Main = styled.main`
@@ -45,10 +45,12 @@ const ButtonWrapper = styled.div`
   bottom: 25px;
 `;
 
-export default function UpdateCardNickNamePage() {
-  const { id: cardIndex } = useParams();
-  const { cardList, updateNickNameByIndex } = useContext(CardListContext);
+export default function AddCardResultPage() {
+  const { id: cardId } = useParams();
+  const { cardList, updateNickNameById } = useContext(CardListContext);
   const navigate = useNavigate();
+
+  const cardIndex = cardList.findIndex(card => card.id === Number(cardId));
 
   useEffect(() => {
     if (!cardList[cardIndex]) {
@@ -64,18 +66,14 @@ export default function UpdateCardNickNamePage() {
     const nickNameInputValue = e.target.elements['nickname-input'].value;
 
     if (nickNameInputValue === '') {
-      const confirmMessage = cardList[cardIndex].nickName
-        ? CONFIRM_MESSAGE.KEEP_REGISTERED_NICKNAME(cardList[cardIndex].nickName)
-        : CONFIRM_MESSAGE.KEEP_NO_NICKNAME;
-
-      if (confirm(confirmMessage)) {
+      if (confirm(CONFIRM_MESSAGE.ADD_CARD_WITH_NO_NICKNAME)) {
         navigate('/', { replace: true });
       }
       return;
     }
 
-    if (confirm(CONFIRM_MESSAGE.UPDATE_NICKNAME(nickNameInputValue))) {
-      updateNickNameByIndex(cardIndex, nickNameInputValue);
+    if (confirm(CONFIRM_MESSAGE.ADD_CARD_WITH_NICKNAME(nickNameInputValue))) {
+      updateNickNameById(cardId, nickNameInputValue);
       navigate('/', { replace: true });
     }
   };
@@ -84,11 +82,11 @@ export default function UpdateCardNickNamePage() {
     <>
       <Header>
         <GoBackButton />
-        <Title>카드 닉네임 설정</Title>
+        <Title>카드 등록 완료</Title>
       </Header>
       <Main>
         <GuideMessageWrapper>
-          <GuideMessage>{'카드 닉네임을 수정하세요.'}</GuideMessage>
+          <GuideMessage>{'카드등록이 완료되었습니다.'}</GuideMessage>
         </GuideMessageWrapper>
         {cardList[cardIndex] && (
           <>
@@ -96,7 +94,7 @@ export default function UpdateCardNickNamePage() {
             <Form onSubmit={handleCardNickNameSubmit}>
               <CardNickNameInput
                 name="nickname-input"
-                placeholder={cardList[cardIndex].nickName || '카드 닉네임'}
+                placeholder={'카드 닉네임을 입력하세요'}
                 data-testid={'card-nickname-input'}
               />
               <ButtonWrapper>
