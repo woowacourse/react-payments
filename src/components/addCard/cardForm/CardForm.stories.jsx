@@ -1,4 +1,4 @@
-import CardForm from './CardForm';
+import CardForm from 'components/addCard/cardForm/CardForm';
 
 export default {
   title: 'CardForm',

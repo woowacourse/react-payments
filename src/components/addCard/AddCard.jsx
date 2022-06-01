@@ -35,7 +35,7 @@ function AddCard() {
 
   const handleCardFormSubmit = () => {
     setCards((prevCards) => [...prevCards, card]);
-    navigate('/react-payments/register');
+    navigate('/react-payments/register/:cardId', { state: card.id });
   };
 
   const handleCompany = (company, theme) => {

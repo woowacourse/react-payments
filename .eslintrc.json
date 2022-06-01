@@ -22,6 +22,7 @@
     "react/jsx-no-constructed-context-values": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "import/no-unresolved": "off",
-    "no-alert": "off"
+    "no-alert": "off",
+    "no-undef": "off"
   }
 }
