@@ -1,9 +1,8 @@
-import { memo } from 'react';
-import PropTypes from 'prop-types';
+import { memo, ReactElement } from 'react';
 
 import styled from 'styled-components';
 
-function Tooltip({ visible }) {
+function Tooltip({ visible }: { visible: boolean }): ReactElement {
   return (
     <>
       {visible && (
@@ -12,10 +11,6 @@ function Tooltip({ visible }) {
     </>
   );
 }
-
-Tooltip.propTypes = {
-  visible: PropTypes.bool,
-};
 
 const Styled = {
   Tooltip: styled.div`

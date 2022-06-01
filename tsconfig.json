@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "module": "ES6",
+    "target": "ES6",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "outDir": "build",
+    "moduleResolution": "Node"
+  },
+  "include": ["src", "custom.d.ts"],
+  "exclude": ["build", "node_modules"]
+}

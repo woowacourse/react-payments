@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom';
+import { ReactElement } from 'react';
 
 import { ReactComponent as Plus } from 'assets/plus.svg';
-import { PATH } from 'constants';
+import { PATH } from 'constants/index';
 
 import styled from 'styled-components';
 
-function EmptyCard() {
+function EmptyCard(): ReactElement {
   const navigate = useNavigate();
 
   return (

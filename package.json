@@ -45,6 +45,11 @@
     ]
   },
   "devDependencies": {
+    "typescript": "^4.7.2",
+    "@types/jest": "^27.5.1",
+    "@types/node": "^17.0.36",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.5",
     "@storybook/addon-actions": "^6.4.22",
     "@storybook/addon-essentials": "^6.4.22",
     "@storybook/addon-interactions": "^6.4.22",
@@ -55,6 +60,8 @@
     "@storybook/preset-create-react-app": "^4.1.0",
     "@storybook/react": "^6.4.22",
     "@storybook/testing-library": "^0.0.11",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.25",
     "chromatic": "^6.5.4",
     "eslint": "^8.14.0",
     "eslint-config-airbnb": "^19.0.4",
