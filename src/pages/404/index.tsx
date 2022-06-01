@@ -1,4 +1,3 @@
-import React from 'react';
 import NotFound from '../../components/commons/NotFound';
 import PageTemplate from '../../components/commons/PageTemplate';
 

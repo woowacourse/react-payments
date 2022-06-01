@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useFormComplete } from '../../../../hooks/useFormComplete';
+import { useFormComplete } from '../../../../hooks/useFormComplete.ts';
 import { checkFormCompletion, checkFormValidation } from '../../../../utils/validation/form';
-import InputContainer from '../../InputContainer/TypeInputContainer';
-import { uid } from 'react-uid';
 import Position from '../../../commons/Position';
 import Modal from '../../../commons/Modal';
 import CardCompanySelect from '../../CardCompanySelect';
@@ -32,7 +30,7 @@ function CardInputForm({ cardInput, cardInputDispatch, formSubmitAction, getInpu
 
   const isComplete = useFormComplete(cardInput, checkFormCompletion);
 
-  const onSubmitInputForm = e => {
+  const onSubmitInputForm = (e) => {
     e.preventDefault();
 
     const { cardNumber, expirationDate, ownerName, securityCode, password, cardType } = cardInput;

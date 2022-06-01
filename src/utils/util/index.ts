@@ -1,4 +1,12 @@
-export const objectToString = ({ targetObject, separator = ' ', hideStartIndex }) => {
+export const objectToString = ({
+  targetObject,
+  separator = ' ',
+  hideStartIndex,
+}: {
+  targetObject: { [key: string]: string };
+  separator?: string;
+  hideStartIndex: number;
+}) => {
   if (hideStartIndex) {
     return Object.values(targetObject)
       .map((value, index) => (index >= hideStartIndex ? '*'.repeat(value.length) : value))
@@ -8,13 +16,14 @@ export const objectToString = ({ targetObject, separator = ' ', hideStartIndex }
 };
 
 export const { generateNonDuplicatedId } = (function () {
-  const history = new Set();
-  function generateId() {
+  const history: Set<string> = new Set();
+
+  function generateId(): string {
     return `${[...new Array(10)].map(() => Math.floor(Math.random() * 10)).join('')}`;
   }
+
   return {
-    generateNonDuplicatedId() {
-      history.forEach(item => console.log(item));
+    generateNonDuplicatedId(): string {
       let id = generateId();
       while (history.has(id)) {
         id = generateId();
@@ -25,7 +34,7 @@ export const { generateNonDuplicatedId } = (function () {
   };
 })();
 
-export const isJSONArray = str => {
+export const isJSONArray = (str: string) => {
   try {
     const data = JSON.parse(str);
 
