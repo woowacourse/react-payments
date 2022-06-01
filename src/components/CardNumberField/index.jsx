@@ -14,11 +14,7 @@ function CardNumberField({ cardNumber, onChange }) {
   });
 
   return (
-    <FieldSet
-      title="카드 번호"
-      nextFocusLength={CARD_NUMBER.UNIT_LENGTH}
-      errorMessage={errorMessage}
-    >
+    <FieldSet title="카드 번호" errorMessage={errorMessage}>
       {Array.from({ length: CARD_NUMBER.UNIT_COUNT }).map((_, index) => (
         <TextField
           type={index < CARD_NUMBER.MASKING_INDEX ? 'number' : 'password'}

@@ -20,7 +20,7 @@ import {
   CardNameField,
 } from 'components';
 
-import { PAGE_LIST, CARD_EDITOR_MODE } from 'constants/';
+import { PAGE_LIST, CARD_EDIT_TARGET_INDEX } from 'constants/';
 import {
   validateCardNumber,
   validateCardPassword,
@@ -31,11 +31,10 @@ import {
 
 function CardEditor() {
   const { setPageTitle, setPageLocation } = usePageContext();
-  const { cardList, currentEditIndex, handleInsertCardData, handleUpdateCardData } =
-    useCardDataContext();
+  const { cardList, currentEditIndex, addCardData, updateCardData } = useCardDataContext();
 
   useEffect(
-    () => setPageTitle(CARD_EDITOR_MODE.NEW === currentEditIndex ? '카드 추가' : '카드 편집'),
+    () => setPageTitle(CARD_EDIT_TARGET_INDEX.NEW === currentEditIndex ? '카드 추가' : '카드 편집'),
     [],
   );
 
@@ -54,10 +53,10 @@ function CardEditor() {
 
   const {
     Modal: CompanyModal,
-    handleModalOpen: handleCompanyModalOpen,
-    handleModalClose: handleCompanyModalClose,
+    modalOpen: handleCompanyModalOpen,
+    modalClose: handleCompanyModalClose,
   } = useModal();
-  const { Modal: CardNameInputModal, handleModalOpen: handleCardNameInputModalOpen } = useModal();
+  const { Modal: CardNameInputModal, modalOpen: handleCardNameInputModalOpen } = useModal();
 
   const onClickPageSubmit = () => {
     try {
@@ -79,9 +78,9 @@ function CardEditor() {
     delete newCardData.isComplete;
 
     try {
-      CARD_EDITOR_MODE.NEW === currentEditIndex
-        ? await handleInsertCardData(newCardData)
-        : await handleUpdateCardData(currentEditIndex, newCardData);
+      CARD_EDIT_TARGET_INDEX.NEW === currentEditIndex
+        ? await addCardData(newCardData)
+        : await updateCardData(currentEditIndex, newCardData);
     } catch (error) {
       alert(error.message);
       return;

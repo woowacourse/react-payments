@@ -1,15 +1,17 @@
+import { RequestStatus, CardCompany, ModalState, PageState } from 'types';
+
 const APP_NAME = '콤피 페이';
 
-const REQUEST_STATUS = {
-  SUCCESS: Symbol('리퀘스트 성공 결과'),
-  FAIL: Symbol('리퀘스트 실패 결과'),
+const REQUEST_STATUS: RequestStatus = {
+  SUCCESS: 0,
+  FAIL: 1,
 };
 
-const CARD_EDITOR_MODE = {
+const CARD_EDIT_TARGET_INDEX = {
   NEW: -1,
 };
 
-const CARD_COMPANY = {
+const CARD_COMPANY: Record<number, CardCompany> = {
   1: { name: '포코 카드', color: 'purple', icon: '👾' },
   2: { name: '준 카드', color: 'yellow', icon: '😆' },
   3: { name: '공원 카드', color: 'sky', icon: '🌳' },
@@ -46,16 +48,16 @@ const CARD_PASSWORD = {
   LENGTH: 2,
 };
 
-const MODAL_STATE = {
+const MODAL_STATE: Record<string, ModalState> = {
   HIDDEN: 'hidden',
   VISIBLE: 'visible',
   DISAPPEAR: 'disappear',
 };
 
-const PAGE_LIST = {
-  CARD_EDITOR: Symbol('카드 정보 추가/수정 페이지'),
-  CARD_UPDATED: Symbol('카드 정보 업데이트 완료 페이지'),
-  CARD_LIST: Symbol('등록된 카드 목록 페이지'),
+const PAGE_LIST: Record<string, PageState> = {
+  CARD_EDITOR: 'edit',
+  CARD_UPDATED: 'update',
+  CARD_LIST: 'list',
 };
 
 const DEFAULT_PAGE = PAGE_LIST.CARD_LIST;
@@ -89,7 +91,7 @@ const ERROR_MESSAGE = {
 
 export {
   APP_NAME,
-  CARD_EDITOR_MODE,
+  CARD_EDIT_TARGET_INDEX,
   REQUEST_STATUS,
   CARD_COMPANY,
   CARD_NUMBER,

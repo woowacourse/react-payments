@@ -1,20 +1,16 @@
-import { createContext, useState, useMemo, useContext } from 'react';
+import { createContext, useState, useContext } from 'react';
 
-import { DEFAULT_PAGE } from 'constants';
+import { DEFAULT_PAGE } from 'constants/';
+import { PageContextState, PageState } from 'types';
 
-const PageContext = createContext();
+const PageContext = createContext<PageContextState | null>(null);
 
 function PageContextProvider({ children }) {
   const [pageTitle, setTitle] = useState('');
   const [pageLocation, setLocation] = useState(DEFAULT_PAGE);
 
-  const value = useMemo(
-    () => ({
-      state: { pageTitle, pageLocation },
-      action: { setTitle, setLocation },
-    }),
-    [pageTitle, pageLocation],
-  );
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
+  const value = { state: { pageTitle, pageLocation }, action: { setTitle, setLocation } };
 
   return <PageContext.Provider value={value}>{children}</PageContext.Provider>;
 }
@@ -28,8 +24,8 @@ function usePageContext() {
   const { pageTitle, pageLocation } = context.state;
   const { setTitle, setLocation } = context.action;
 
-  const setPageTitle = (title) => setTitle(title);
-  const setPageLocation = (pageCode) => setLocation(pageCode);
+  const setPageTitle = (title: string) => setTitle(title);
+  const setPageLocation = (pageCode: PageState) => setLocation(pageCode);
 
   return { pageTitle, pageLocation, setPageTitle, setPageLocation };
 }

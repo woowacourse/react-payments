@@ -6,13 +6,14 @@ import {
   requestInsertCardData,
   requestUpdateCardData,
 } from 'api';
-import { CARD_EDITOR_MODE } from 'constants/';
+import { CARD_EDIT_TARGET_INDEX } from 'constants/';
+import { CardDataContextState, CardDataContextDispatch, CardList, CardData } from 'types';
 
-const CardDataContext = createContext();
+const CardDataContext = createContext<CardDataContextState | null>(null);
 
-function reducer(cardList, { type, data }) {
+function reducer(cardList: CardList, { type, data }: CardDataContextDispatch): CardList {
   const actionList = {
-    PRELOAD: () => data,
+    PRELOAD: () => data as CardList,
     INSERT: () => {
       const { cardData } = data;
       return cardList.concat(cardData);
@@ -37,7 +38,7 @@ function reducer(cardList, { type, data }) {
 }
 
 function CardDataContextProvider({ children }) {
-  const [currentEditIndex, setEditIndex] = useState(CARD_EDITOR_MODE.NEW);
+  const [currentEditIndex, setEditIndex] = useState(CARD_EDIT_TARGET_INDEX.NEW);
   const [cardList, dispatch] = useReducer(reducer, []);
   const value = useMemo(
     () => ({ state: { cardList, currentEditIndex }, action: { dispatch, setEditIndex } }),
@@ -67,11 +68,14 @@ function useCardDataContext() {
   const { cardList, currentEditIndex } = context.state;
   const { dispatch, setEditIndex } = context.action;
 
-  const handleChangeEditIndex = (index) => {
+  const getCardData = (cardIndex: number): CardData =>
+    CARD_EDIT_TARGET_INDEX.NEW === cardIndex ? cardList[cardList.length - 1] : cardList[cardIndex];
+
+  const setCardEditIndex = (index: number) => {
     setEditIndex(index);
   };
 
-  const handleInsertCardData = async (cardData) => {
+  const addCardData = async (cardData: CardData): Promise<void> => {
     const response = await requestInsertCardData(cardData);
 
     requestErrorHandler(response)({
@@ -82,7 +86,7 @@ function useCardDataContext() {
     });
   };
 
-  const handleUpdateCardData = async (index, cardData) => {
+  const updateCardData = async (index: number, cardData: CardData): Promise<void> => {
     const { id } = cardList[index];
     const response = await requestUpdateCardData(id, cardData);
 
@@ -94,7 +98,7 @@ function useCardDataContext() {
     });
   };
 
-  const handleDeleteCardData = async (index) => {
+  const removeCardData = async (index: number): Promise<void> => {
     const { id } = cardList[index];
     const response = await requestDeleteCardData(id);
 
@@ -109,10 +113,11 @@ function useCardDataContext() {
   return {
     cardList,
     currentEditIndex,
-    handleChangeEditIndex,
-    handleInsertCardData,
-    handleUpdateCardData,
-    handleDeleteCardData,
+    getCardData,
+    setCardEditIndex,
+    addCardData,
+    updateCardData,
+    removeCardData,
   };
 }
 

@@ -1,13 +1,17 @@
-import PropTypes from 'prop-types';
-
+import * as React from 'react';
 import Container from './styles';
 
-function Header({ onClickPreviousButton, children }) {
+interface PropTypes {
+  onClickPreviousButton?: React.MouseEventHandler<HTMLDivElement>;
+  children: React.ReactNode;
+}
+
+function Header({ onClickPreviousButton, children }: PropTypes) {
   return (
     <Container>
       {onClickPreviousButton && (
         <div className="previous-button" onClick={onClickPreviousButton}>
-          &lt;
+          {'<'}
         </div>
       )}
       <div className="title">{children}</div>
@@ -17,10 +21,6 @@ function Header({ onClickPreviousButton, children }) {
 
 Header.defaultProps = {
   onClickPreviousButton: null,
-};
-
-Header.propTypes = {
-  onClickPreviousButton: PropTypes.func,
 };
 
 export default Header;

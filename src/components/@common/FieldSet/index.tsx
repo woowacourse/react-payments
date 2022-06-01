@@ -1,28 +1,31 @@
-import { useRef } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import { useRef, RefObject } from 'react';
 
 import { getIndexFromSameTag, setFocusSameTagByIndex } from 'utils';
 import { Container, InputTitle, InputContainer, ErrorMessage } from './styles';
 
-function FieldSet({ title, errorMessage, inputWidth, nextFocusLength, children }) {
-  const inputContainer = useRef();
+interface PropTypes {
+  title: string;
+  errorMessage?: string;
+  inputWidth?: number;
+  children: React.ReactNode;
+}
+
+function FieldSet({ title, errorMessage, inputWidth, children }: PropTypes) {
+  const inputContainer: RefObject<HTMLDivElement> = useRef();
 
   const handleTextFieldAutoFocus = ({ target }) => {
-    const { value, tagName } = target;
+    const { value, tagName, maxLength }: HTMLInputElement = target;
     const textFieldLength = value.length;
 
-    if (
-      !nextFocusLength ||
-      tagName !== 'INPUT' ||
-      (textFieldLength > 0 && textFieldLength < nextFocusLength)
-    ) {
+    if (!maxLength || tagName !== 'INPUT' || (textFieldLength > 0 && textFieldLength < maxLength)) {
       return;
     }
 
-    const currentIndex = getIndexFromSameTag(inputContainer.current, target);
-    const targetIndex =
+    const currentIndex: number = getIndexFromSameTag(inputContainer.current, target);
+    const targetIndex: number =
       (value.length === 0 && currentIndex - 1) ||
-      (value.length === nextFocusLength && currentIndex + 1) ||
+      (value.length === maxLength && currentIndex + 1) ||
       0;
 
     setFocusSameTagByIndex(target, targetIndex);
@@ -44,17 +47,8 @@ function FieldSet({ title, errorMessage, inputWidth, nextFocusLength, children }
 }
 
 FieldSet.defaultProps = {
-  title: '',
   errorMessage: '',
   inputWidth: 100,
-  nextFocusLength: 0,
-};
-
-FieldSet.propTypes = {
-  title: PropTypes.string,
-  errorMessage: PropTypes.string,
-  inputWidth: PropTypes.number,
-  nextFocusLength: PropTypes.number,
 };
 
 export default FieldSet;

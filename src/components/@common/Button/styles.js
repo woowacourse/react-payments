@@ -50,6 +50,10 @@ const Container = styled.button`
 
   ${({ buttonType }) => BUTTON_TYPE[buttonType]}
   ${({ size }) => BUTTON_SIZE[size]}
+  ${({ width }) =>
+    css`
+      width: ${width};
+    `}
 
   &:hover {
     filter: brightness(0.9);

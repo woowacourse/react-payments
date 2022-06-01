@@ -5,21 +5,19 @@ import { useCardDataContext } from 'contexts/CardDataContext';
 import Button from 'components/@common/Button';
 import { Card } from 'components';
 
-import { CARD_COMPANY, PAGE_LIST, CARD_EDITOR_MODE } from 'constants/';
+import { CARD_COMPANY, PAGE_LIST, CARD_EDIT_TARGET_INDEX } from 'constants/';
 import ResultMessage from './styles';
 
 function CardUpdated() {
   const { setPageTitle, setPageLocation } = usePageContext();
   useEffect(() => setPageTitle('카드 등록 완료'), []);
 
-  const { cardList = {}, currentEditIndex, handleChangeEditIndex } = useCardDataContext();
+  const { getCardData, currentEditIndex, setCardEditIndex } = useCardDataContext();
   const { cardName, companyId, cardNumber, expireMonth, expireYear, userName } =
-    CARD_EDITOR_MODE.NEW === currentEditIndex
-      ? cardList[cardList.length - 1] || {}
-      : cardList[currentEditIndex] || {};
+    getCardData(currentEditIndex);
 
   const onClickListButton = () => {
-    handleChangeEditIndex(CARD_EDITOR_MODE.NEW);
+    setCardEditIndex(CARD_EDIT_TARGET_INDEX.NEW);
     setPageLocation(PAGE_LIST.CARD_LIST);
   };
 
