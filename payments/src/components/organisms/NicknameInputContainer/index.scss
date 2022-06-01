@@ -1,0 +1,51 @@
+.nickname--container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  width: 500px;
+  align-items: center;
+  position: relative;
+  gap: 30px;
+
+  a {
+    border: none;
+    text-decoration: none;
+  }
+
+  .nickname--container-title {
+    cursor: default;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 100px;
+  }
+
+  .card__container {
+    cursor: default;
+    width: 300px;
+    height: 190px;
+  }
+
+  form {
+    width: 50%;
+  }
+
+  .input--container {
+    border-bottom: 1px solid black;
+    input:focus {
+      outline: none;
+    }
+    input {
+      color: black;
+    }
+  }
+
+  .next-button--container {
+    position: absolute;
+    width: 100%;
+    text-align: right;
+    bottom: 10%;
+    right: 10%;
+  }
+}

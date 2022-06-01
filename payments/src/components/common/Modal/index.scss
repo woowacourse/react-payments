@@ -1,9 +1,10 @@
 .modal--container {
   width: 100%;
-  max-width: 600px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
+  border-radius: 1em;
+
+  height: 90vh;
+  position: absolute;
+  bottom: 0;
   left: 0;
   display: flex;
   flex-direction: column;
@@ -13,7 +14,12 @@
   background-color: rgba(0, 0, 0, 0.6);
   width: 100%;
   flex: 1;
+  border-start-start-radius: 1em;
+  border-start-end-radius: 1em;
 }
 .modal-contents {
   background-color: rgba(0, 0, 0, 0.6);
+  border-end-end-radius: 1em;
+  border-end-start-radius: 1em;
+  overflow: hidden;
 }
