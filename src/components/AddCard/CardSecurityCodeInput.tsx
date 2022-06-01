@@ -1,17 +1,16 @@
-import { useContext, useState } from "react";
-import { CardInfoContext } from "../../contexts/CardInfoContext";
+import { useState } from "react";
 import styled from "styled-components";
-
 import HelpIconImage from "../../assets/images/questionMark.svg";
-
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
-
+import { isInvalidSecurityCode } from "../../validators/validator";
+import { setSecurityCode } from "../../reducer/cardReducer";
 import {
   CARD_INFO_RULES,
   CREATE_MASKED_CHARACTERS,
   GUIDE_MESSAGE,
 } from "../../constants/constants";
+import useUpdateHandler from "../../hooks/useUpdateHandler";
 
 const StyledIconContainer = styled.div`
   position: relative;
@@ -24,7 +23,7 @@ const StyledIcon = styled.img`
 `;
 
 const StyledDescription = styled.p`
-  ${(props) => !props.isOpen && `display: none;`}
+  ${(props: { isOpen: boolean }) => !props.isOpen && `display: none;`}
   position: absolute;
   top: 5px;
   right: -205px;
@@ -46,7 +45,7 @@ const StyledDescription = styled.p`
 export const SECURITY_CODE_DESCRIPTION =
   "CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.";
 
-export function HelpIcon({ description }) {
+export function HelpIcon({ description }: { description: string }) {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
   return (
@@ -62,11 +61,18 @@ export function HelpIcon({ description }) {
   );
 }
 
-export default function CardSecurityCodeInput() {
-  const {
-    state: { securityCode },
-    actions: { handleSecurityCodeUpdate },
-  } = useContext(CardInfoContext);
+export default function CardSecurityCodeInput({
+  securityCode,
+  dispatch,
+}: {
+  securityCode: string;
+  dispatch: React.Dispatch<any>;
+}) {
+  const { updateHandler } = useUpdateHandler(
+    dispatch,
+    setSecurityCode,
+    isInvalidSecurityCode
+  );
 
   return (
     <InputField
@@ -74,9 +80,7 @@ export default function CardSecurityCodeInput() {
       wrapperWidth={"85px"}
       guideMessage={GUIDE_MESSAGE.VALID_SECURITY_CODE}
       OptionalComponent={<HelpIcon description={SECURITY_CODE_DESCRIPTION} />}
-      isComplete={
-        securityCode.value.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
-      }
+      isComplete={securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH}
     >
       <Input
         name={"securityCode"}
@@ -88,9 +92,9 @@ export default function CardSecurityCodeInput() {
         width={"100%"}
         maxLength={CARD_INFO_RULES.SECURITY_CODE_LENGTH}
         required
-        onChange={(e) => handleSecurityCodeUpdate(e, securityCode.keyType)}
+        onChange={(e) => updateHandler(e)}
         isComplete={
-          securityCode.value.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
+          securityCode.length === CARD_INFO_RULES.SECURITY_CODE_LENGTH
         }
       />
     </InputField>

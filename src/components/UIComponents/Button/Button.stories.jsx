@@ -1,7 +1,7 @@
 import ArrowBackIcon from "../../../assets/images/arrowBackIcon.svg";
 import HelpIconImage from "../../../assets/images/questionMark.svg";
 
-import Button from "./Button";
+import Button from "./Button.tsx";
 
 export default {
   title: "Button",

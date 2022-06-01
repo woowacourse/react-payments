@@ -1,14 +1,13 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import arrowBackIcon from "../../assets/images/arrowBackIcon.svg";
-
-import useResetInput from "../../Hooks/useResetInput";
-
-import CardPreview from "../UIComponents/CardPreview/CardPreview";
-import Button from "../UIComponents/Button/Button";
-
-import CardConfirmModal from "./CardConfirmModal";
-import PageHeader from "../PageHeader";
+import { useContext, useState } from "react";
+import arrowBackIcon from "../assets/images/arrowBackIcon.svg";
+import { isValidCardInfo } from "../validators/validator";
+import { CardInfoContext } from "../contexts/CardInfoContext";
+import { IInitialState } from "../types/cardInfoState";
+import useBackButtonHandler from "../hooks/useBackButtonHandler";
+import CardPreview from "../components/UIComponents/CardPreview/CardPreview";
+import Button from "../components/UIComponents/Button/Button";
+import CardConfirmModal from "../components/Modal/CardConfirmModal";
+import PageHeader from "../components/PageHeader";
 import {
   CardHolderNameInput,
   CardNumberInput,
@@ -16,10 +15,7 @@ import {
   CardSecurityCodeInput,
   CardExpireDateInput,
   CardInfoForm,
-} from ".";
-
-import { isValidCardInfo } from "../../validators/validator";
-import { BACK_BUTTON_CONFIRM_MESSAGE, ROUTES } from "../../constants/constants";
+} from "../components/AddCard";
 
 const smallCardCss = {
   width: "213px",
@@ -34,23 +30,21 @@ const smallCardCss = {
 };
 
 export default function AddCard() {
-  const navigate = useNavigate();
   const [isNextButtonClicked, setNextButtonClicked] = useState(false);
-  const { state, handleResetInput } = useResetInput();
-  const { cardNumber, holderName, expireDate, securityCode, password } = state;
+  const {
+    state,
+    dispatch,
+  }: { state: IInitialState; dispatch: React.Dispatch<any> } =
+    useContext(CardInfoContext);
 
-  const handleBackButton = () => {
-    if (window.confirm(BACK_BUTTON_CONFIRM_MESSAGE)) {
-      navigate(ROUTES.HOME, { replace: true });
-      handleResetInput();
-    }
-  };
+  const { cardNumber, holderName, expireDate, securityCode, password } = state;
+  const { handleBackButtonClick } = useBackButtonHandler(dispatch);
 
   return (
     <>
       <PageHeader>
         <Button
-          onClick={handleBackButton}
+          onClick={handleBackButtonClick}
           type={"button"}
           position={"static"}
           isSvg={true}
@@ -72,11 +66,14 @@ export default function AddCard() {
         cardCss={smallCardCss}
       />
       <CardInfoForm>
-        <CardNumberInput />
-        <CardExpireDateInput />
-        <CardHolderNameInput />
-        <CardSecurityCodeInput />
-        <CardPasswordInput />
+        <CardNumberInput cardNumber={cardNumber} dispatch={dispatch} />
+        <CardExpireDateInput expireDate={expireDate} dispatch={dispatch} />
+        <CardHolderNameInput holderName={holderName} dispatch={dispatch} />
+        <CardSecurityCodeInput
+          securityCode={securityCode}
+          dispatch={dispatch}
+        />
+        <CardPasswordInput password={password} dispatch={dispatch} />
         {isValidCardInfo(cardNumber, expireDate, securityCode, password) && (
           <Button
             type={"button"}

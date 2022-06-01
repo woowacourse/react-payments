@@ -1,11 +1,16 @@
-import { useContext } from "react";
-import { CardInfoContext } from "../../contexts/CardInfoContext";
 import styled from "styled-components";
-
 import Input from "../UIComponents/Input/Input";
 import InputField from "../UIComponents/InputField/InputField";
-
 import { CARD_INFO_RULES, GUIDE_MESSAGE } from "../../constants/constants";
+import { isInValidHolderName } from "../../validators/validator";
+import { setHolderName } from "../../reducer/cardReducer";
+import useUpdateHandler from "../../hooks/useUpdateHandler";
+
+interface IInputCounter {
+  currLength: number;
+  maxLength: number;
+  isComplete: boolean;
+}
 
 const StyledInputCounter = styled.p`
   position: absolute;
@@ -13,11 +18,16 @@ const StyledInputCounter = styled.p`
   right: 0;
   font-size: 12px;
   line-height: 14px;
-  color: ${(props) => (props.isComplete ? "#04c09e" : "#525252")};
+  color: ${(props: { isComplete: boolean }) =>
+    props.isComplete ? "#04c09e" : "#525252"};
   letter-spacing: -0.085em;
 `;
 
-export function InputCounter({ currLength = "0", maxLength, isComplete }) {
+export function InputCounter({
+  currLength = 0,
+  maxLength,
+  isComplete,
+}: IInputCounter) {
   return (
     <StyledInputCounter isComplete={isComplete}>
       {currLength}/{maxLength}
@@ -25,11 +35,18 @@ export function InputCounter({ currLength = "0", maxLength, isComplete }) {
   );
 }
 
-export default function CardHolderNameInput() {
-  const {
-    state: { holderName },
-    actions: { handleHolderNameUpdate },
-  } = useContext(CardInfoContext);
+export default function CardHolderNameInput({
+  holderName,
+  dispatch,
+}: {
+  holderName: string;
+  dispatch: React.Dispatch<any>;
+}) {
+  const { updateHandler } = useUpdateHandler(
+    dispatch,
+    setHolderName,
+    isInValidHolderName
+  );
 
   return (
     <InputField
@@ -37,26 +54,26 @@ export default function CardHolderNameInput() {
       wrapperWidth={"100%"}
       horizontalAlign={"flex-start"}
       guideMessage={GUIDE_MESSAGE.VALID_HOLDER_NAME}
-      isComplete={holderName.value !== ""}
+      isComplete={holderName !== ""}
       OptionalComponent={
         <InputCounter
-          currLength={holderName.value.length}
+          currLength={holderName.length}
           maxLength={CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH}
-          isComplete={holderName.value !== ""}
+          isComplete={holderName !== ""}
         />
       }
     >
       <Input
         name={"holderName"}
         className={"holderName"}
-        value={holderName.value}
+        value={holderName}
         type={"text"}
         placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
         width={"100%"}
         textAlign={"left"}
         maxLength={CARD_INFO_RULES.HOLDER_NAME_MAX_LENGTH}
-        onChange={(e) => handleHolderNameUpdate(e, holderName.keyType)}
-        isComplete={holderName.value !== ""}
+        onChange={updateHandler}
+        isComplete={holderName !== ""}
       />
     </InputField>
   );

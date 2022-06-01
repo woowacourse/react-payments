@@ -1,8 +1,17 @@
+interface ILocalStorageKey {
+  CARD_INFO: "cardInfo";
+}
+
+interface IRoutes {
+  HOME: "/";
+  ADD_CARD: "/add-card";
+}
+
 const CURRENT_YEAR = Number(new Date().getFullYear().toString().slice(2));
 
 export const MASKED_CHARACTER = "•";
 
-export const CREATE_MASKED_CHARACTERS = (repeatCount) =>
+export const CREATE_MASKED_CHARACTERS = (repeatCount: number): string =>
   `${MASKED_CHARACTER}`.repeat(repeatCount);
 
 export const CARD_REGISTER_SUCCESS_MESSAGE =
@@ -33,13 +42,11 @@ export const GUIDE_MESSAGE = {
   VALID_SECURITY_CODE: "카드 뒷 면에 있는 3자리 숫자를 적어주세요.",
 };
 
-export const LOCAL_STORAGE_KEY = {
+export const LOCAL_STORAGE_KEY: ILocalStorageKey = {
   CARD_INFO: "cardInfo",
 };
 
-export const ROUTES = {
+export const ROUTES: IRoutes = {
   HOME: "/",
-  HOME2: "/react-payments/",
-  POSSESS_CARD: "/react-payments/possess-card",
-  ADD_CARD: "/react-payments/add-card",
+  ADD_CARD: "/add-card",
 };

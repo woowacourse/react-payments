@@ -1,20 +1,27 @@
 import styled from "styled-components";
-import PropTypes from "prop-types";
+
+interface IButtonProps {
+  type: "button" | "submit" | "reset";
+  onClick?: () => void;
+  position: string;
+  children: any;
+  isSvg?: boolean;
+}
 
 const StyledButton = styled.button`
-  width: ${(props) => (props.isSvg ? "30px" : "50px")};
+  width: ${(props: IButtonProps) => (props.isSvg ? "30px" : "50px")};
   height: 30px;
 
   border: none;
   background-color: inherit;
   opacity: inherit;
 
-  color: ${(props) => (props.isSvg ? "#464646" : "#04c09e")};
+  color: ${(props: IButtonProps) => (props.isSvg ? "#464646" : "#04c09e")};
   font-size: 16px;
   line-height: 16px;
   font-weight: bold;
 
-  position: ${(props) => props.position};
+  position: ${(props: IButtonProps) => props.position};
   right: 20px;
   bottom: 25px;
 
@@ -28,7 +35,13 @@ const StyledImg = styled.img`
   width: 25px;
 `;
 
-export default function Button({ type, onClick, position, children, isSvg }) {
+export default function Button({
+  type,
+  onClick,
+  position,
+  children,
+  isSvg,
+}: IButtonProps) {
   return (
     <StyledButton
       onClick={onClick}
@@ -40,17 +53,6 @@ export default function Button({ type, onClick, position, children, isSvg }) {
     </StyledButton>
   );
 }
-
-Button.propTypes = {
-  children: PropTypes.PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.string,
-  ]),
-  position: PropTypes.string,
-  isSvg: PropTypes.oneOf([true, false]),
-  type: PropTypes.string,
-  onClick: PropTypes.func,
-};
 
 Button.defaultProps = {
   position: "absolute",

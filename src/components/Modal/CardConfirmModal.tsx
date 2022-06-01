@@ -1,11 +1,10 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import {
-  CARD_REGISTER_SUCCESS_MESSAGE,
-  GUIDE_MESSAGE,
-} from "../../constants/constants";
+import { GUIDE_MESSAGE } from "../../constants/constants";
 import { CardInfoContext } from "../../contexts/CardInfoContext";
-
+import useUpdateHandler from "../../hooks/useUpdateHandler";
+import { setCardAlias } from "../../reducer/cardReducer";
+import { isInvalidCardAlias } from "../../validators/validator";
 import PageHeader from "../PageHeader";
 import Button from "../UIComponents/Button/Button";
 import CardPreview from "../UIComponents/CardPreview/CardPreview";
@@ -43,10 +42,13 @@ const StyledCardAliasGuideMessage = styled.p`
 `;
 
 export default function CardConfirmModal() {
-  const {
-    state: { cardNumber, holderName, expireDate, cardAlias },
-    actions: { handleCardAliasUpdate },
-  } = useContext(CardInfoContext);
+  const { state, dispatch } = useContext(CardInfoContext);
+  const { cardNumber, holderName, expireDate, cardAlias } = state;
+  const { updateHandler } = useUpdateHandler(
+    dispatch,
+    setCardAlias,
+    isInvalidCardAlias
+  );
 
   return (
     <>
@@ -68,18 +70,15 @@ export default function CardConfirmModal() {
         />
         <Input
           name={"cardAlias"}
-          value={cardAlias.value}
-          onChange={handleCardAliasUpdate}
+          className={"cardAlias"}
+          value={cardAlias}
+          onChange={updateHandler}
           width={"244px"}
+          required
           borderBottom={"1px solid #8b8b8b"}
         />
-        {cardAlias.value.length > 0 ? (
-          <Button
-            onClick={() => window.alert(CARD_REGISTER_SUCCESS_MESSAGE)}
-            type="submit"
-          >
-            확인
-          </Button>
+        {cardAlias.length > 0 ? (
+          <Button type="submit">확인</Button>
         ) : (
           <StyledCardAliasGuideMessage>
             {GUIDE_MESSAGE.VALID_CARD_ALIAS}
