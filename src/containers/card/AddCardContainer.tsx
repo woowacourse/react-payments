@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
+
 import Button from 'components/button/Button';
 
 const Wrapper = styled.div(() => ({
   width: '208px',
-  height: '122px',
+  height: '130px',
   backgroundColor: '#E5E5E5',
   borderRadius: '5px',
   display: 'flex',
@@ -13,14 +14,16 @@ const Wrapper = styled.div(() => ({
 }));
 
 function AddCardContainer() {
-  const handleAddCradButtonClick = () => {
+  const handleAddCardButtonClick = () => {
     window.location.pathname = '/card/add';
   };
 
   return (
-    <Wrapper>
-      <Button onClick={handleAddCradButtonClick} buttonType="plus" />
-    </Wrapper>
+    <div>
+      <Wrapper>
+        <Button onClick={handleAddCardButtonClick} buttonType="plus" />
+      </Wrapper>
+    </div>
   );
 }
 

@@ -1,5 +1,6 @@
-import styled from '@emotion/styled';
 import React, { forwardRef } from 'react';
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 type Props = {
   className?: string;
@@ -11,14 +12,18 @@ type Props = {
   pattern?: string;
   required?: boolean;
   disabled?: boolean;
-  css?: any;
+  width?: string;
+  height?: string;
 };
 
-const Input = styled.input(() => ({
-  textAlign: 'center',
-  fontSize: '20px',
-  border: 'none',
-}));
+const Input = styled.input(
+  css`
+    text-align: center;
+    font-size: 20px;
+    border: none;
+  `,
+  (props) => ({ width: props.width, height: props.height }),
+);
 
 const CardFormInput = forwardRef<HTMLInputElement, Props>((props, ref) => {
   return <Input {...props} ref={ref} />;

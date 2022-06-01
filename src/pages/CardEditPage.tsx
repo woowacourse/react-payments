@@ -1,39 +1,36 @@
 import React from 'react';
-import styled from '@emotion/styled';
-import Navigation from 'fields/Navigation';
+
 import CardContainer from 'containers/card/CardContainer';
 import CardFormContainer from 'containers/card/CardFormContainer';
 import TypeButtonModal from 'containers/modal/TypeButtonModalContainer';
-import { useAppState } from 'hooks/hooks';
 import CardCompleteContainer from 'containers/card/CardCompleteContainer';
+import BackButtonContainer from 'containers/button/BackButtonContainer';
+import PageTitle from 'components/navigater/PageTitle';
 
-const Wrapper = styled.div(() => ({
-  width: '375px',
-  height: '675px',
-  margin: '0 auto',
-  padding: '22px 28px 16px 28px',
-  position: 'relative',
-  backgroundColor: '#ffffff',
-}));
+import { useAppState } from 'hooks';
+
+import { MarginWrapper, PageWrapper, TitleWrapper } from './style';
 
 function CardEditPage() {
-  const { completeCard, chageCardType } = useAppState();
+  const { completeCard, changeCardType } = useAppState();
 
   return (
-    <Wrapper>
-      {chageCardType ? <TypeButtonModal /> : <></>}
+    <PageWrapper>
+      {changeCardType && <TypeButtonModal />}
       {completeCard ? (
-        <>
-          <CardCompleteContainer />
-        </>
+        <CardCompleteContainer />
       ) : (
         <>
-          <Navigation />
+          <TitleWrapper>
+            <BackButtonContainer />
+            <MarginWrapper marginRight="20px" />
+            <PageTitle>카드수정</PageTitle>
+          </TitleWrapper>
           <CardContainer />
           <CardFormContainer />
         </>
       )}
-    </Wrapper>
+    </PageWrapper>
   );
 }
 

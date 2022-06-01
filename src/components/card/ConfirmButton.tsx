@@ -1,10 +1,9 @@
 import React from 'react';
-import { css } from '@emotion/react';
 
-const style = css({
-  position: 'absolute',
-  right: '25px',
-  bottom: '16px',
+import styled from '@emotion/styled';
+
+const ConfirmButtonStyled = styled.button({
+  marginLeft: '280px',
   backgroundColor: 'inherit',
   border: 'none',
   fontSize: '16px',
@@ -21,9 +20,9 @@ type Props = {
 
 function ConfirmButton({ type, onClick, disabled, children }: Props) {
   return (
-    <button type={type} css={style} onClick={onClick} {...(disabled ? { disabled: true } : '')}>
+    <ConfirmButtonStyled type={type} onClick={onClick} {...(disabled ? { disabled: true } : '')}>
       {children}
-    </button>
+    </ConfirmButtonStyled>
   );
 }
 

@@ -1,11 +1,6 @@
 import React from 'react';
+import styled from '@emotion/styled';
 import { css } from '@emotion/react';
-
-const style = css({
-  width: '20px',
-  height: '20px',
-  cursor: 'pointer',
-});
 
 type Props = {
   id?: string;
@@ -13,13 +8,18 @@ type Props = {
   buttonType: string;
 };
 
+const ButtonStyled = styled.img(css`
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+`);
+
 function Button({ id, onClick, buttonType }: Props) {
   return (
-    <img
+    <ButtonStyled
       id={id}
       onClick={onClick}
       src={`/img/${buttonType}-icon.png`}
-      css={style}
       alt={`${buttonType}-icon`}
     />
   );

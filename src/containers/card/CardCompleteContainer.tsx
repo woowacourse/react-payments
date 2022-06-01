@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Card from 'components/card/Card';
-import { useAppDispatch, useAppState } from 'hooks/hooks';
-import ConfirmButtonContainer from 'containers/button/ConfirmButtonContainer';
-import CardFormInput from 'components/card/CardFormInput';
 import { css } from '@emotion/react';
+
+import Card from 'components/card/Card';
+import CardFormInput from 'components/card/CardFormInput';
+
+
+import ConfirmButtonContainer from 'containers/button/ConfirmButtonContainer';
+
+import { useAppDispatch, useAppState } from 'hooks';
 import { removeWhiteSpaces } from 'utils';
 import { createAction } from 'context/Provider';
 import { ActionType } from 'types';
@@ -28,7 +32,6 @@ const style = css({
 const CardCompleteTitle = styled.h1(() => ({
   width: '100%',
   fontSize: '20px',
-  marginTop: '130px',
   marginBottom: '78px',
   textAlign: 'center',
 }));

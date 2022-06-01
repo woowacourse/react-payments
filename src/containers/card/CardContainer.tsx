@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { createAction } from 'context/Provider';
-import { useAppDispatch, useAppState } from 'hooks/hooks';
-import { ActionType } from 'types';
+
 import Card from 'components/card/Card';
+
+import { createAction } from 'context/Provider';
+import { useAppDispatch, useAppState } from 'hooks';
+import { ActionType } from 'types';
 import { removePathnameCardEdit } from 'utils';
 
 function CardContainer() {
@@ -51,19 +53,17 @@ function CardContainer() {
   };
 
   return (
-    <>
-      <Card
-        firstInputCardNumber={firstInputCardNumber}
-        secondInputCardNumber={secondInputCardNumber}
-        thirdInputCardNumber={thirdInputCardNumber}
-        fourthInputCardNumber={fourthInputCardNumber}
-        name={name}
-        expiredPeriodMonth={expiredPeriodMonth}
-        expiredPeriodYear={expiredPeriodYear}
-        cardType={cardType}
-        handleCardClick={handleCardClick}
-      />
-    </>
+    <Card
+      firstInputCardNumber={firstInputCardNumber}
+      secondInputCardNumber={secondInputCardNumber}
+      thirdInputCardNumber={thirdInputCardNumber}
+      fourthInputCardNumber={fourthInputCardNumber}
+      name={name}
+      expiredPeriodMonth={expiredPeriodMonth}
+      expiredPeriodYear={expiredPeriodYear}
+      cardType={cardType}
+      handleCardClick={handleCardClick}
+    />
   );
 }
 

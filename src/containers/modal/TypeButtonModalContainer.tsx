@@ -1,9 +1,12 @@
 import React from 'react';
+
 import Modal from 'components/modal/Modal';
+
 import { createAction } from 'context/Provider';
-import { useAppDispatch } from 'hooks/hooks';
+import { useAppDispatch } from 'hooks';
 import { ActionType } from 'types';
 import TypeButtonContainer from './TypeButtonContainer';
+import ModalPortal from 'portal';
 
 function TypeButtonModal() {
   const dispatch = useAppDispatch();
@@ -12,11 +15,11 @@ function TypeButtonModal() {
     dispatch(createAction(ActionType.CHANGE_CARD_TYPE, false));
   };
   return (
-    <>
+    <ModalPortal>
       <Modal typeButtonClick={handleTypeModalClick}>
         <TypeButtonContainer />
       </Modal>
-    </>
+    </ModalPortal>
   );
 }
 
