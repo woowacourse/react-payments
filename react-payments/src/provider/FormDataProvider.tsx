@@ -5,7 +5,7 @@ import ExpireDateProvider from "./ExpireDateProvider";
 import SecurityCodeProvider from "./SecurityCodeProvider";
 import UserNameProvider from "./UserNameProvider";
 
-const FormDataProvider = ({ children }) => {
+const FormDataProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <CardTypeProvider>
       <CardNumberProvider>

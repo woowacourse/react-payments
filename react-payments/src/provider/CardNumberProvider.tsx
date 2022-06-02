@@ -3,27 +3,41 @@ import { isInValidCardNumber, isOverMaxLength } from "../util/validator";
 import { MAX_LENGTH } from "../constants";
 import { focusNextElement, focusPrevElement } from "../util/focus";
 import useReady from "../hooks/useReady";
+import {
+  Target,
+  KeyEventTarget,
+  CardNumberContextProvider,
+  CardNumber,
+} from "../types";
 
-export const CardNumberContext = createContext();
-
-const initialCardNumber = {
+const initialCardNumber: CardNumber = {
   first: "",
   second: "",
   third: "",
   fourth: "",
 };
 
-const CardNumberProvider = ({ children }) => {
+export const CardNumberContext = createContext<CardNumberContextProvider>({
+  state: { cardNumber: initialCardNumber, cardNumberReady: false },
+  action: {
+    onChangeCardNumber: ({ target }) => null,
+    onKeyDownCardNumber: ({ target, key }) => null,
+    resetCardNumber: () => null,
+  },
+});
+
+const CardNumberProvider = ({ children }: { children: React.ReactNode }) => {
   const [cardNumber, setCardNumber] = useState(initialCardNumber);
 
   const [cardNumberReady] = useReady(cardNumber, isInValidCardNumber);
 
-  const onChangeCardNumber = ({ target }) => {
+  const onChangeCardNumber = ({ target }: Target) => {
     if (isOverMaxLength(target, MAX_LENGTH.CARD_NUMBER)) {
       return;
     }
 
-    const nextElement = target.nextSibling?.nextSibling;
+    const nextElement = target.nextSibling
+      ?.nextSibling as HTMLInputElement | null;
 
     focusNextElement({
       target,
@@ -38,13 +52,13 @@ const CardNumberProvider = ({ children }) => {
     });
   };
 
-  const onKeyDownCardNumber = ({ target, key }) => {
-    const prevElement = target.previousSibling?.previousSibling;
+  const onKeyDownCardNumber = ({ target, key }: KeyEventTarget) => {
+    const prevElement = target.previousSibling
+      ?.previousSibling as HTMLInputElement | null;
 
     focusPrevElement({
       target,
       key,
-      value: cardNumber,
       prevElement,
     });
   };
