@@ -1,15 +1,19 @@
-import PropTypes from 'prop-types';
 import Button from 'components/common/Button';
-import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants';
+import useToggle from 'hooks/useToggle';
+import { CARD_BACK_MESSAGE, CRYPTO_STRING, DEFAULT_CARD_INFO } from 'constants/index';
+import { CardInfo } from 'types';
 
-const CardPreview = ({
-  cardInfo,
-  isCardFront,
-  handleModal,
-  handleCardPosition,
-  isVisibleButton,
-}) => {
-  const { cardNumber, ownerName, expiryDate, company, theme, privacyCode } = cardInfo;
+interface CardPreviewProps {
+  info: CardInfo;
+  isVisibleButton?: string;
+  theme: string;
+  handleModal?: () => void;
+}
+
+const CardPreview = ({ info, isVisibleButton, theme, handleModal }: CardPreviewProps) => {
+  const { isToggle: isFrontView, handleToggle: handlePosition } = useToggle(true);
+
+  const { cardNumber, ownerName, expiryDate, company, privacyCode } = info;
   const { first, second, third, fourth } = cardNumber;
 
   const upperCaseOwnerName = ownerName.toUpperCase() || DEFAULT_CARD_INFO.OWNER_NAME;
@@ -19,7 +23,7 @@ const CardPreview = ({
   return (
     <div className="card-box">
       <div className={`empty-card bg-${theme}`} onClick={handleModal}>
-        {isCardFront ? (
+        {isFrontView ? (
           <>
             <div className="card-top">
               <span className="card-text">{company}</span>
@@ -58,47 +62,15 @@ const CardPreview = ({
         )}
         {!company && <Button className="card-add-button">+</Button>}
       </div>
-      <Button
-        className={'card-change-button ' + `${isVisibleButton}`}
-        handleClick={handleCardPosition}
-      >
-        {isCardFront ? 'Back' : 'Front'}
+      <Button className={'card-change-button ' + `${isVisibleButton}`} handleClick={handlePosition}>
+        {isFrontView ? 'Back' : 'Front'}
       </Button>
     </div>
   );
 };
 
 CardPreview.defaultProps = {
-  isCardFront: true,
-};
-
-CardPreview.propTypes = {
-  cardInfo: PropTypes.shape({
-    company: PropTypes.string,
-    cardNumber: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-      third: PropTypes.string,
-      fourth: PropTypes.string,
-    }),
-    expiryDate: PropTypes.shape({
-      month: PropTypes.string,
-      year: PropTypes.string,
-    }),
-    ownerName: PropTypes.string,
-    privacyCode: PropTypes.string,
-    password: PropTypes.shape({
-      first: PropTypes.string,
-      second: PropTypes.string,
-      third: PropTypes.string,
-      fourth: PropTypes.string,
-    }),
-    theme: PropTypes.string,
-  }),
-  isCardFront: PropTypes.bool,
-  handleModal: PropTypes.func,
-  handleCardPosition: PropTypes.func,
-  isVisibleButton: PropTypes.string,
+  isFrontView: true,
 };
 
 export default CardPreview;

@@ -3,6 +3,11 @@ export const PATH = {
   ADD: 'add',
 };
 
+export const GET = 'GET';
+export const POST = 'POST';
+export const PATCH = 'PATCH';
+export const DELETE = 'DELETE';
+
 export const PASS = 'pass';
 export const FAIL = 'fail';
 export const STEP1 = 'step1';
@@ -59,14 +64,14 @@ export const DATE_RANGE = {
   MIN_YEAR: 22,
 };
 
-export const TOOLTIP_TYPES = {
+export const TOOLTIP_TYPES: { [key: string]: string } = {
   PRIVACY_CODE: `보안 코드는 온라인으로 카드를 사용할 경우 신용카드 보안을 위한 추가 수단을 제공합니다.`,
 };
 
 export const CARD_BACK_MESSAGE = '이 카드를 도난 분실하면 일주일 이내로 연락 주시기 바랍니다.';
 export const CONFIRM_MESSAGE = '해당 카드를 카드 목록에서 삭제하시겠습니까?';
 
-export const GUIDE_MESSAGE = {
+export const GUIDE_MESSAGE: { [key: string]: { pass: string; fail: string } } = {
   company: { [PASS]: '카드사가 입력되었습니다.', [FAIL]: '카드사를 입력해주세요.' },
   cardNumber: { [PASS]: '카드 번호가 입력되었습니다.', [FAIL]: '카드 번호를 입력해주세요.' },
   expiryDate: { [PASS]: '만료일이 입력되었습니다.', [FAIL]: '만료일을 입력해주세요.' },

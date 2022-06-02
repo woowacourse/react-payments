@@ -1,4 +1,22 @@
-const reducer = (state, action) => {
+import { initialCardInfo } from 'context/cardInfoProvider';
+import { CardInfo } from 'types';
+
+const ACTION_TYPES = {
+  LOAD: 'load',
+  ALIAS: 'alias',
+  THEME: 'theme',
+  COMPANY: 'company',
+  CARD_NUMBER: 'cardNumber',
+  EXPIRY_DATE: 'expiryDate',
+  OWNER_NAME: 'ownerName',
+  PRIVACY_CODE: 'privacyCode',
+  PASSWORD: 'password',
+  RESET: 'reset',
+};
+
+type Action = keyof typeof ACTION_TYPES;
+
+const reducer = (state: CardInfo, action: { type: Action; name: string; value: any }) => {
   const { type, name, value } = action;
 
   switch (type) {
@@ -61,22 +79,14 @@ const reducer = (state, action) => {
           [name]: value,
         },
       };
+    case ACTION_TYPES.RESET:
+      return {
+        ...initialCardInfo,
+      };
 
     default:
       return state;
   }
-};
-
-const ACTION_TYPES = {
-  LOAD: 'load',
-  ALIAS: 'alias',
-  THEME: 'theme',
-  COMPANY: 'company',
-  CARD_NUMBER: 'cardNumber',
-  EXPIRY_DATE: 'expiryDate',
-  OWNER_NAME: 'ownerName',
-  PRIVACY_CODE: 'privacyCode',
-  PASSWORD: 'password',
 };
 
 export default reducer;

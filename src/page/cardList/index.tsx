@@ -1,29 +1,45 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import CardPreview from 'components/CardPreview';
 import Button from 'components/common/Button';
 import Header from 'components/common/Header';
-import { ReactComponent as DeleteIcon } from 'assets/delete_icon.svg';
+import DeleteIcon from 'assets/delete_icon.png';
 
 import CARD_API from 'api';
-import { CONFIRM_MESSAGE } from 'constants';
+import { CONFIRM_MESSAGE } from 'constants/index';
+import LoadingSpinner from 'components/common/LoadingSpinner';
+import { CardInfo } from 'types';
 
 const CardListPage = () => {
-  const [cardList, setCardList] = useState([]);
+  const [cardList, setCardList] = useState<CardInfo[]>([]);
+  const isLoading = useRef(true);
 
-  const handleDeleteCard = async (e, cardId) => {
+  const handleDeleteCard = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    cardId: string,
+  ): Promise<void> => {
     e.preventDefault();
-
-    if (window.confirm(CONFIRM_MESSAGE)) {
-      await CARD_API.deleteCard(cardId);
-      await CARD_API.getCardList().then((response) => setCardList(response));
+    try {
+      if (window.confirm(CONFIRM_MESSAGE)) {
+        await CARD_API.deleteCard(cardId);
+        await CARD_API.getCardList().then((response) => setCardList(response));
+      }
+    } catch (e) {
+      alert(e);
     }
   };
 
   useEffect(() => {
-    CARD_API.getCardList().then((response) => setCardList(response));
+    CARD_API.getCardList().then((response) => {
+      isLoading.current = false;
+      setCardList(response);
+    });
   }, []);
+
+  if (isLoading.current) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div>
@@ -32,14 +48,14 @@ const CardListPage = () => {
         {cardList.map((card) => (
           <Link key={card.id} to={`/react-payments/modify/${card.id}`}>
             <div className="flex-column-center card-item-wrapper">
-              <CardPreview cardInfo={card} isVisibleButton="hide" theme="red" />
+              <CardPreview info={card} isVisibleButton="hide" theme={card.theme} />
               <span className="text-center">{card.alias}</span>
               <Button
                 className="card-delete-button"
                 theme="red"
-                handleClick={(e) => handleDeleteCard(e, card.id)}
+                handleClick={(e: any) => handleDeleteCard(e, card.id)}
               >
-                <DeleteIcon />
+                <img src={DeleteIcon} alt="카드삭제버튼" />
               </Button>
             </div>
           </Link>

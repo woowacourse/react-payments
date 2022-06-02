@@ -1,10 +1,15 @@
-import PropTypes from 'prop-types';
 import useHover from 'hooks/useHover';
 import { ReactComponent as TooltipIcon } from 'assets/tooltip_icon.svg';
-import { TOOLTIP_TYPES } from 'constants';
+import { TOOLTIP_TYPES } from 'constants/index';
 
-const Tooltip = ({ type }) => {
-  const [isHover, handleMouseEnter, handleMouseLeave] = useHover(false);
+type ToolTipType = 'PRIVACY_CODE';
+
+interface TooltipProps {
+  type: ToolTipType;
+}
+
+const Tooltip = ({ type }: TooltipProps) => {
+  const { isHover, handleMouseEnter, handleMouseLeave } = useHover(false);
 
   return (
     <div className="tooltip">
@@ -20,10 +25,6 @@ const Tooltip = ({ type }) => {
       )}
     </div>
   );
-};
-
-Tooltip.propTypes = {
-  type: PropTypes.string,
 };
 
 export default Tooltip;

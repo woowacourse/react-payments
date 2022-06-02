@@ -8,9 +8,16 @@ import {
   isFullCompany,
   isFullCardAlias,
 } from 'page/cardAddUpdate/validator';
-import { COMPANY, CARD_NUMBER, EXPIRY_DATE, PRIVACY_CODE, PASSWORD, CARD_ALIAS } from 'constants';
+import {
+  COMPANY,
+  CARD_NUMBER,
+  EXPIRY_DATE,
+  PRIVACY_CODE,
+  PASSWORD,
+  CARD_ALIAS,
+} from 'constants/index';
 
-const isFilledValidator = {
+const isFilledValidator: { [key: string]: { func: (value: any) => boolean } } = {
   [COMPANY]: { func: isFullCompany },
   [CARD_NUMBER]: { func: isFullNumber },
   [EXPIRY_DATE]: { func: isFullExpiryDate },
@@ -19,7 +26,7 @@ const isFilledValidator = {
   [CARD_ALIAS]: { func: isFullCardAlias },
 };
 
-const useIsFilled = (type, targetValue, initialState) => {
+const useIsFilled = (type: string, targetValue: number | string, initialState: boolean) => {
   const [isFilled, setIsFilled] = useState(initialState);
 
   useEffect(() => {

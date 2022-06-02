@@ -44,6 +44,10 @@
   font-weight: 500;
 }
 
+.card-delete-button > img {
+  width: 37px;
+}
+
 .hide {
   display: none;
 }
