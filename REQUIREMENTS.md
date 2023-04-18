@@ -42,11 +42,26 @@
   - 값을 입력하면 다음 값으로 auto focusing 된다.
 
 - [ ] 다음 버튼
+
   - 등록 폼이 모두 입력될 경우 보여주고, 입력되지 않은 입력 값이 있다면 버튼을 숨긴다.
   - 다음 버튼을 누르면 카드를 등록하고 카드 목록 페이지로 이동한다.
+
     <br>
 
 ## 🪄 구현 순서
 
 - [ ] 나의 카드 목록 페이지 구현
+  - [ ] Header 컴포넌트 구현
+  - [ ] Title 컴포넌트 구현
+  - [ ] CardAddButton 컴포넌트 구현
+  - [ ] CardItem 컴포넌트 구현
+  - [ ] CardList 컴포넌트 구현
 - [ ] 카드 추가 페이지 구현
+  - [ ] Input 컴포넌트 구현
+  - [ ] Label 컴포넌트 구현
+  - [ ] Form 컴포넌트 구현
+    - [ ] CardInput 컴포넌트 구현
+    - [ ] ExpirationInput 컴포넌트 구현
+    - [ ] NameInput 컴포넌트 구현
+    - [ ] SecurityInput 컴포넌트 구현
+    - [ ] PasswordInput 컴포넌트 구현
