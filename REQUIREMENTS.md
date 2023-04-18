@@ -57,8 +57,8 @@
   - [x] CardItem 컴포넌트 구현
   - [x] CardList 컴포넌트 구현
 - [ ] 카드 추가 페이지 구현
-  - [ ] Input 컴포넌트 구현
-  - [ ] Label 컴포넌트 구현
+  - [x] Input 컴포넌트 구현
+  - [x] Label 컴포넌트 구현
   - [ ] Form 컴포넌트 구현
     - [ ] CardInput 컴포넌트 구현
     - [ ] ExpirationInput 컴포넌트 구현
