@@ -1,9 +1,14 @@
-import { Card } from "../types/card";
+import { CardType } from "../types/card";
+import Card from "./common/Card";
 
 interface CardProps {
-  card: Card;
+  card: CardType;
 }
 
 export const CardItem = ({ card }: CardProps) => {
-  return <div>CardItem</div>;
+  return (
+    <Card backgroundColor={card.color}>
+      <div></div>
+    </Card>
+  );
 };

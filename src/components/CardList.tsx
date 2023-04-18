@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import EmptyCard from "./common/EmptyCard";
 import { CardItem } from "./CardItem";
-import { Card } from "../types/card";
+import { CardType } from "../types/card";
+import { EmptyCard } from "./EmptyCard";
 
 interface CardListProps {
-  cards: Card[];
+  cards: CardType[];
 }
 
 export const CardList = ({ cards }: CardListProps) => {
@@ -36,5 +36,5 @@ const GuideText = styled.div`
 const List = styled.ul`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 46px;
 `;
