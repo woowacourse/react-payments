@@ -7,7 +7,7 @@ export default {
 };
 
 const Template: StoryFn<typeof EmptyCard> = (args: {
-  backgroundColor: string;
+  backgroundColor?: string;
 }): React.ReactElement => <EmptyCard {...args} />;
 
 export const Purple = Template.bind({});

@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
-interface Props {
-  backgroundColor: string;
+interface EmptyCardProps {
+  backgroundColor?: string;
 }
 
-export default function EmptyCard({ backgroundColor }: Props) {
+export default function EmptyCard({
+  backgroundColor = "lightGrey",
+}: EmptyCardProps) {
   return (
     <CardWrapper backgroundColor={backgroundColor}>
       <PlusIcon>+</PlusIcon>
@@ -21,8 +23,8 @@ const CardWrapper = styled.div<{ backgroundColor: string }>`
   height: 123px;
   background-color: ${(props) => props.backgroundColor};
   border-radius: 5px;
-
-  margin: 0 auto;
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 const PlusIcon = styled.div`
@@ -31,4 +33,5 @@ const PlusIcon = styled.div`
   height: 32px;
   font-size: 30px;
   font-weight: 600;
+  /* color: ${(props) => props.theme.color.grey4}; */
 `;
