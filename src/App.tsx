@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import CardListPage from './components/pages/CardListPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
