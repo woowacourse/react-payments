@@ -1,14 +1,18 @@
 import { StoryFn } from "@storybook/react";
-import EmptyCard from "../components/common/EmptyCard";
+import Card from "../components/common/Card";
 
 export default {
-  title: "stories/EmptyCard",
-  component: EmptyCard,
+  title: "Card",
+  component: Card,
 };
 
-const Template: StoryFn<typeof EmptyCard> = (args: {
+const Template: StoryFn<typeof Card> = (args: {
   backgroundColor?: string;
-}): React.ReactElement => <EmptyCard {...args} />;
+}): React.ReactElement => (
+  <Card {...args}>
+    <></>
+  </Card>
+);
 
 export const Purple = Template.bind({});
 Purple.args = {
