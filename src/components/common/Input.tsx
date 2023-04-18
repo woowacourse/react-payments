@@ -6,14 +6,31 @@ interface Props extends StyleInputProps {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   maxLength?: number;
   type?: string;
+  inputmode?:
+    | "text"
+    | "search"
+    | "none"
+    | "tel"
+    | "url"
+    | "email"
+    | "numeric"
+    | "decimal"
+    | undefined;
 }
 
 interface StyleInputProps {
   customInputStyle?: CSSProp;
 }
 
-function Input({ value, onChange, ...props }: Props) {
-  return <InputStyle value={value} onChange={onChange} {...props} />;
+function Input({ value, onChange, inputmode, ...props }: Props) {
+  return (
+    <InputStyle
+      value={value}
+      onChange={onChange}
+      inputMode={inputmode ?? "none"}
+      {...props}
+    />
+  );
 }
 
 export default Input;

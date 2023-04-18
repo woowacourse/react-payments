@@ -54,6 +54,7 @@ function CardNumber() {
           onChange={cardChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
+          inputmode="numeric"
         />
         <p>-</p>
         <Input
@@ -62,6 +63,7 @@ function CardNumber() {
           onChange={cardChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
+          inputmode="numeric"
         />
         <p>-</p>
 
@@ -71,6 +73,7 @@ function CardNumber() {
           onChange={cardChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
+          inputmode="numeric"
           type={"password"}
         />
         <p>-</p>
@@ -81,6 +84,7 @@ function CardNumber() {
           onChange={cardChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
+          inputmode="numeric"
           type={"password"}
         />
       </CardNumberInputContainer>
