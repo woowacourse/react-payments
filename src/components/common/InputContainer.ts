@@ -15,6 +15,7 @@ const InputContainer = styled.div<{ width: string }>`
   border: 0;
   border-radius: 7px;
   padding: 0 12px;
+  margin-top: 3px;
 
   font-size: 18px;
   line-height: 21px;

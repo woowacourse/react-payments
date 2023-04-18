@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Label = styled.label`
-  font-size: 10px;
+  font-size: 12px;
 `;
 
 export default Label;
