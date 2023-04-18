@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { InputContainer, Input, Label } from "../common";
 
-const ExpirationDateInput = () => {
+const CardExpirationDateInput = () => {
   return (
     <Label>
       만료일
@@ -18,4 +18,4 @@ const Span = styled.span`
   color: #737373;
 `;
 
-export default ExpirationDateInput;
+export default CardExpirationDateInput;
