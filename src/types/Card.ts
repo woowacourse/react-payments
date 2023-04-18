@@ -1,4 +1,5 @@
 export interface Card {
+  id: number;
   cardNumber: {
     first: number;
     second: number;

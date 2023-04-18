@@ -55,7 +55,7 @@
   - [x] Title 컴포넌트 구현
   - [x] CardAddButton 컴포넌트 구현
   - [x] CardItem 컴포넌트 구현
-  - [ ] CardList 컴포넌트 구현
+  - [x] CardList 컴포넌트 구현
 - [ ] 카드 추가 페이지 구현
   - [ ] Input 컴포넌트 구현
   - [ ] Label 컴포넌트 구현
