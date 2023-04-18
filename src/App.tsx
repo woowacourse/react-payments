@@ -1,7 +1,11 @@
-import React from 'react';
+import { CardNumberInput } from './components/CardNumberInput';
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <CardNumberInput />
+    </div>
+  );
 }
 
 export default App;
