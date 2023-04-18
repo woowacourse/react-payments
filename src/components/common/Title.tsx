@@ -12,7 +12,6 @@ const Title = ({ title }: TitleProps) => {
 const TitleContainer = styled.h3`
   font-weight: 700;
   font-size: 18px;
-  text-align: center;
 
   color: #575757;
 
