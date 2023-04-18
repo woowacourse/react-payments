@@ -19,6 +19,16 @@ const CardNumberInput = () => {
         }),
       };
     });
+
+    moveFocus(target);
+  };
+
+  const moveFocus = (target: HTMLInputElement) => {
+    const input = target.nextElementSibling;
+
+    if (!(input instanceof HTMLInputElement) || !input) return;
+
+    if (target.value.length === 4) input.focus();
   };
 
   return (
@@ -32,6 +42,9 @@ const CardNumberInput = () => {
         maxLength={4}
         value={cardNumber.number1}
         onChange={handleCardNumber}
+        placeholder="0000"
+        autoFocus
+        required
       />
       <input
         type="text"
@@ -40,6 +53,8 @@ const CardNumberInput = () => {
         aria-labelledby="card-label"
         value={cardNumber.number2}
         onChange={handleCardNumber}
+        placeholder="0000"
+        required
       />
       <input
         type="password"
@@ -48,6 +63,8 @@ const CardNumberInput = () => {
         aria-labelledby="card-label"
         value={cardNumber.number3}
         onChange={handleCardNumber}
+        placeholder="0000"
+        required
       />
       <input
         type="password"
@@ -56,6 +73,8 @@ const CardNumberInput = () => {
         aria-labelledby="card-label"
         value={cardNumber.number4}
         onChange={handleCardNumber}
+        placeholder="0000"
+        required
       />
     </>
   );
