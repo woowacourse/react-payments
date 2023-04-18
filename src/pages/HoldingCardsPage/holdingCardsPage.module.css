@@ -1,0 +1,19 @@
+.container {
+  padding: 20px 36px 0;
+}
+
+.header {
+  height: 64px;
+}
+
+.subTitle {
+  text-align: center;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 9px;
+  row-gap: 46px;
+}

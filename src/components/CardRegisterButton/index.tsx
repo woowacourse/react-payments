@@ -1,8 +1,12 @@
 import styles from './cardRegisterButton.module.css';
 
-const CardRegisterButton = () => {
+interface Props {
+  onClick: () => void;
+}
+
+const CardRegisterButton = ({ onClick }: Props) => {
   return (
-    <button type="button" className={styles.button}>
+    <button type="button" className={styles.button} onClick={onClick}>
       <svg
         width={16}
         height={16}
