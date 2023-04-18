@@ -1,30 +1,33 @@
 
-import {Meta, Story} from "@storybook/react";
+import {Meta, StoryObj} from "@storybook/react";
 
-import Input, { InputProps } from '../components/Input';
+import Input from '../components/Input';
 
-export default {
+const meta: Meta<typeof Input> = {
   component: Input,
   title: 'Input',
-} as Meta
-
-const Template:Story<InputProps>= (args) => <Input {...args} />;
-
-export const TextInput = Template.bind({});
-export const NumberInput = Template.bind({});
-export const PasswordInput = Template.bind({});
-
-TextInput.args = {
-  kind: "text",
-  placeholder:""
-};
-
-NumberInput.args = {
-  kind: "number",
-  placeholder:"MM",
 }
 
-PasswordInput.args = {
-  kind: "password",
+export default meta;
+type Story = StoryObj<typeof Input>
+
+export const TextInput: Story = {
+  args: {
+  type: "text",
   placeholder:""
+  }
+}
+
+export const NumberInput: Story = {
+  args: {
+  type: "number",
+  placeholder:"MM",
+  }
+}
+
+export const PasswordInput: Story = {
+  args: {
+  type: "password",
+  placeholder:""
+  }
 }
