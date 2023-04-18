@@ -1,5 +1,11 @@
 # 구현 목록
 
+## 페이지
+
+- [ ] Home
+- [ ] CardRegistration
+- [ ] NotFound
+
 ## Component
 
 - [ ] App
