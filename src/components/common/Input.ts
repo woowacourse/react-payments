@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Input = styled.input<{ width: string }>`
+const Input = styled.input<{ width: string; textAlign: string }>`
   width: ${(props) => props.width};
 
   background-color: transparent;
@@ -8,8 +8,7 @@ const Input = styled.input<{ width: string }>`
   border: none;
   outline: none;
 
-  text-align: center;
-  line-height: -1;
+  text-align: ${(props) => props.textAlign};
 `;
 
 export default Input;

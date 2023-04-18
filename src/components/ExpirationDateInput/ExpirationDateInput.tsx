@@ -6,9 +6,9 @@ const ExpirationDateInput = () => {
     <Label>
       만료일
       <InputContainer width="137px">
-        <Input placeholder="MM" width="40px" type="text" maxLength={2} required />
+        <Input textAlign="center" width="40px" placeholder="MM" type="text" maxLength={2} required />
         <Span>/</Span>
-        <Input placeholder="YY" width="40px" type="text" maxLength={2} required />
+        <Input textAlign="center" width="40px" placeholder="YY" type="text" maxLength={2} required />
       </InputContainer>
     </Label>
   );
