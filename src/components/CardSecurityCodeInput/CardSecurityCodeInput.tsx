@@ -1,6 +1,6 @@
 import { InputContainer, Input, Label } from "../common";
 
-const SecurityCodeInput = () => {
+const CardSecurityCodeInput = () => {
   return (
     <Label>
       보안 코드(CVC/CVV)
@@ -11,4 +11,4 @@ const SecurityCodeInput = () => {
   );
 };
 
-export default SecurityCodeInput;
+export default CardSecurityCodeInput;
