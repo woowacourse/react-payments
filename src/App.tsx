@@ -1,5 +1,11 @@
+import PaymentsInputContainer from './containers/PaymentsInputContainer';
+
 function App() {
-  return <div>앱</div>;
+  return (
+    <div>
+      <PaymentsInputContainer />
+    </div>
+  );
 }
 
 export default App;
