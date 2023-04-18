@@ -50,6 +50,17 @@ const GlobalStyle = createGlobalStyle`
   *::after {
     box-sizing: border-box;
   }
+  
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-inner-spin-button, 
+  input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
 `;
 
 export default GlobalStyle;
