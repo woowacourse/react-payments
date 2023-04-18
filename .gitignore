@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# storybook
+/src/stories/assets
+/src/stories/Button*
+/src/stories/header*
+/src/stories/page*
+
