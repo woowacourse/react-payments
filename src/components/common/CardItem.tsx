@@ -2,24 +2,27 @@ import styled from 'styled-components';
 import { Card } from '../../types/Card';
 
 interface CardItemProps {
-  card: Card;
+  card?: Card;
 }
 
 const CardItem = ({ card }: CardItemProps) => {
-  const { cardNumber, name, expirationDate } = card;
   return (
     <CardItemContainer>
       <ICChip></ICChip>
-      <CardNumberContainer>
-        <p>{cardNumber.first}</p>
-        <p>{cardNumber.second}</p>
-        <p>{cardNumber.third}</p>
-        <p>{cardNumber.fourth}</p>
-      </CardNumberContainer>
-      <CardInfoContainer>
-        <CardNameContainer>{name}</CardNameContainer>
-        <CardExpirationContainer>{`${expirationDate.month}/${expirationDate.year}`}</CardExpirationContainer>
-      </CardInfoContainer>
+      {card && (
+        <>
+          <CardNumberContainer>
+            <p>{card.cardNumber.first}</p>
+            <p>{card.cardNumber.second}</p>
+            <p>{card.cardNumber.third}</p>
+            <p>{card.cardNumber.fourth}</p>
+          </CardNumberContainer>
+          <CardInfoContainer>
+            <CardNameContainer>{card.name}</CardNameContainer>
+            <CardExpirationContainer>{`${card.expirationDate.month}/${card.expirationDate.year}`}</CardExpirationContainer>
+          </CardInfoContainer>
+        </>
+      )}
     </CardItemContainer>
   );
 };

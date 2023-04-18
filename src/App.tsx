@@ -1,7 +1,7 @@
-import React from 'react';
 import CardListPage from './components/pages/CardListPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
+import CardRegistrationPage from './components/pages/CardRegistrationPage';
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<CardListPage />} />
+          <Route path='/register' element={<CardRegistrationPage />} />
         </Routes>
       </BrowserRouter>
     </AppContainer>
