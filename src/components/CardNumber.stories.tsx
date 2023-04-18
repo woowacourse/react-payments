@@ -12,7 +12,5 @@ export default cardNumber;
 type Story = StoryObj<typeof cardNumber>;
 
 export const Example = {
-  args: {
-    label: "카드 번호",
-  },
+  args: {},
 } satisfies Story;

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import Input from "./Input";
+import Input from "./common/Input";
 import styled, { css } from "styled-components";
+import FormLabel from "./common/FormLabel";
+import ErrorSpan from "./common/ErrorSpan";
 
 interface CardNumberObj {
   first: string;
@@ -9,11 +11,7 @@ interface CardNumberObj {
   fourth: string;
 }
 
-export interface CardNumberProps {
-  label: string;
-}
-
-function CardNumber({ label }: CardNumberProps) {
+function CardNumber() {
   const [cardNumber, setCardNumber] = useState({
     first: "",
     second: "",
@@ -48,7 +46,7 @@ function CardNumber({ label }: CardNumberProps) {
 
   return (
     <div>
-      <label>{label}</label>
+      <FormLabel>카드 번호</FormLabel>
       <CardNumberInputContainer>
         <Input
           data-set-order="first"
@@ -86,9 +84,7 @@ function CardNumber({ label }: CardNumberProps) {
           type={"password"}
         />
       </CardNumberInputContainer>
-      {cardError?.isError && (
-        <ErrorParagraph>{cardError?.message}</ErrorParagraph>
-      )}
+      {cardError?.isError && <ErrorSpan>{cardError?.message}</ErrorSpan>}
     </div>
   );
 }
@@ -107,8 +103,4 @@ const CardNumberInput = css`
   letter-spacing: 3px;
   text-align: center;
   font-size: 18px;
-`;
-
-const ErrorParagraph = styled.p`
-  color: red;
 `;
