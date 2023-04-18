@@ -1,4 +1,5 @@
 import { CardList } from "../components/CardList";
+import { Header } from "../components/common/Header";
 
 const mockData = [
   {
@@ -18,7 +19,8 @@ const mockData = [
 export const Home = () => {
   return (
     <>
-      <CardList cards={mockData} />
+      <Header text="보유카드" />
+      <CardList cards={[]} />
     </>
   );
 };

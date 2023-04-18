@@ -15,5 +15,7 @@ const PlusIcon = styled.div`
   height: 32px;
   font-size: 30px;
   font-weight: 600;
+  color: #575757;
+
   /* color: ${(props) => props.theme.color.grey4}; */
 `;

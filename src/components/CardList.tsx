@@ -25,11 +25,12 @@ const CardListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 33px;
 `;
 
 const GuideText = styled.div`
   font-size: 14px;
+  font-weight: 700;
+  color: #575757;
   margin-bottom: 10px;
 `;
 
