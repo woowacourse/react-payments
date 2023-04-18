@@ -24,9 +24,11 @@ const HeaderContainer = styled.header`
 `;
 
 const LeftChildWrapper = styled.div`
+  display: flex;
   width: 15%;
 
-  text-align: center;
+  justify-content: center;
+  vertical-align: middle;
 `;
 
 const TitleWrapper = styled.h1`
