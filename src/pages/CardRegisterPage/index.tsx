@@ -6,7 +6,11 @@ import TooltipButton from '../../components/TooltipButton';
 
 import styles from './cardRegisterPage.module.css';
 
-const CardRegisterPage = () => {
+interface Props {
+  registerCard: (card: any) => void;
+}
+
+const CardRegisterPage = ({ registerCard }: Props) => {
   const navigate = useNavigate();
 
   const [cardNumber1, setCardNumber1] = useState('');
@@ -123,7 +127,7 @@ const CardRegisterPage = () => {
       owner,
     };
 
-    localStorage.setItem('cards', JSON.stringify(cardData));
+    registerCard(cardData);
     navigate('/');
   };
 
