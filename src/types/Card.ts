@@ -7,8 +7,8 @@ export interface Card {
     fourth: number;
   };
   expirationDate: {
-    month: string;
-    year: string;
+    month: number;
+    year: number;
   };
   name: string;
   securityCode: number;
