@@ -11,7 +11,9 @@
 ## components
 
 - Page
-  - header문구와 뒤로가기 버튼 등을 관리한다.
+  - 공통되는 페이지를 관리한다.
+- Header
+  - Header 문구와 뒤로가기 버튼을 관리한다.
 - Button
 - Card
   - input form에 입력되고 있는 카드 정보를 보여준다.
