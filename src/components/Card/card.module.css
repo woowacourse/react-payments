@@ -1,0 +1,25 @@
+.container {
+  width: 213px;
+  height: 133px;
+  background: #333;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  padding: 47px 14px 0px;
+  color: #fff;
+}
+
+.chip {
+  width: 40px;
+  height: 26px;
+  background: #cbba64;
+  border-radius: 4px;
+}
+
+.cardNumber {
+  margin: 10px 0 8px;
+}
+
+.detailContainer {
+  display: flex;
+  justify-content: space-between;
+}
