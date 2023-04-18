@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+## 기능 목록
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. 카드 등록 기능 구현
+2. 등록된 카드 목록을 보여주는 기능 구현
+3. 카드 번호 입력기능 구현
+   - 숫자만 입력 할 수 있게 제한 ( 숫자가 아닌 값이 들어가면 화면에 보여지지 않게 )
+   - 숫자 4개를 입력하면 다음칸으로 넘어가는 기능
+   - 마지막 8개 숫자는 보이지 않게 제한
+4. 만료일 입력기능 구현
+   - 숫자만 입력 할 수 있게 제한 ( 숫자가 아닌 값이 들어가면 화면에 보여지지 않게 )
+   - 숫자 2개를 입력하면 다음칸으로 넘어가는 기능
+   - 각 월-일 에 올 수 있는 숫자 제한
+5. 소유자 이름 입력기능 구현
+   - 0부터 30자 까지만 입력할 수 있게 제한
+   - 문자만 입력할 수 있게 제한
+6. 보안코드 입력기능 구현
+   - 숫자만 입력 할 수 있게 제한 ( 숫자가 아닌 값이 들어가면 화면에 보여지지 않게 )
+   - 3자리만 입력할 수 있게 제한
+7. 비밀번호 입력기능 구현
+   - 숫자만 입력 할 수 있게 제한 ( 숫자가 아닌 값이 들어가면 화면에 보여지지 않게 )
+   - 숫자 1개를 입력하면 다음칸으로 넘어가는 기능
+8. 입력한 정보가 카드에 반영되는 기능 구현 (입력될 때마다)
+9. 필수로 입력되어야하는 값이 입력되지 않았을 때 "다음"버튼을 보이지 않게
+10. 필수 입력값이 유효성겁사를 통과했을 때 통과되었다는 체크 표시
 
-## Available Scripts
+## 디렉토리 구조
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+├── public
+│
+├── src
+│ ├── components
+│ │ ├── Header
+│ │ ├── InputBox
+│ │ ├── Card
+│ │ ├── AddCardButton
+│ │ └── Footer
+│ │
+│ ├── pages
+│ │ ├── CardList
+│ │ └── AddCard
+│ │
+│ ├── assets
+│ │
+│ ├── hooks
+│ │
+│ ├── style
+│ │ ├── globalStyle
+│ │ ├── style.d.ts
+│ │ └── theme
+│ ├── constants
+│ ├── type
+│ └── utils
+│  
+│
+├── App
+├── index
+└── Router
