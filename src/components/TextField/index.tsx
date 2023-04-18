@@ -1,27 +1,39 @@
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler } from 'react';
 
 import styles from './textField.module.css';
 
-const TextField = () => {
-  const [cardNumber, setCardNumber] = useState('');
+interface Props {
+  id: string;
+  label: string;
+  size: string;
+  type: string;
+  maxLength: number;
+  required: boolean;
+  onChange: (value: string) => void;
+}
 
+const TextField = ({
+  id,
+  label,
+  size,
+  type,
+  maxLength,
+  required,
+  onChange,
+}: Props) => {
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    if (Number.isNaN(Number(e.target.value))) return;
-    if (e.target.value === ' ') return;
-
-    setCardNumber(e.target.value);
+    onChange(e.target.value);
   };
 
   return (
     <div className={styles.container}>
-      <label htmlFor="card-number">카드 번호</label>
+      <label htmlFor={id}>{label}</label>
       <input
-        className={styles.input}
-        id="card-number"
-        type="text"
-        required
-        maxLength={16}
-        value={cardNumber}
+        className={`${styles.input} ${styles[size]}`}
+        id={id}
+        type={type}
+        required={required}
+        maxLength={maxLength}
         onChange={handleChange}
       />
     </div>
