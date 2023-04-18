@@ -1,7 +1,13 @@
-import React from 'react';
+import AddCardButton from '../components/AddCardButton/AddCardButton';
+import EmptyHeader from '../EmptyHeader/EmptyHeader';
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <EmptyHeader />
+      <AddCardButton />
+    </>
+  );
 };
 
 export default Home;
