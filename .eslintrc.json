@@ -28,7 +28,19 @@
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ],
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "comma-dangle": [1, "always-multiline"],
+    "react/jsx-props-no-spreading": "off"
   },
   "ignorePatterns": ["dist/*", "node_modules/*", "src/stories/*"]
 }
