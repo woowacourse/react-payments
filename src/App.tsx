@@ -1,10 +1,15 @@
-import Header from './components/common/Header/Header';
+import { Routes, Route } from 'react-router-dom';
+import CardListPage from './components/CardListPage';
+import CardAddPage from './components/CardAddPage';
 
 function App() {
   return (
-    <>
-      <Header content={'아'} />
-    </>
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<CardListPage />} />
+        <Route path="/add-card" element={<CardAddPage />} />
+      </Routes>
+    </div>
   );
 }
 
