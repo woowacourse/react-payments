@@ -1,13 +1,9 @@
-import EmptyCard from "../components/common/EmptyCard";
-
-// interface Props {
-//   goAddCardPage: () => void;
-// }
+import { CardList } from "../components/CardList";
 
 export const Home = () => {
   return (
     <>
-      <EmptyCard backgroundColor="green"></EmptyCard>
+      <CardList cards={[]} />
     </>
   );
 };
