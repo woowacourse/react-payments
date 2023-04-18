@@ -32,9 +32,8 @@ const LeftChildWrapper = styled.div`
 const TitleWrapper = styled.h1`
   width: 85%;
 
-  font-family: 'Roboto';
   font-weight: 500;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 19px;
 
   color: #383838;
