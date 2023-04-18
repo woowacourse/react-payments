@@ -1,7 +1,9 @@
+import AddCardButton from '../components/AddCardButton';
+
 const Home = () => {
   return (
     <>
-      <div>hello</div>
+      <AddCardButton></AddCardButton>
     </>
   );
 };
