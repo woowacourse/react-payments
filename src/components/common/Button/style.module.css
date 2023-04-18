@@ -8,6 +8,7 @@ button {
   cursor: pointer;
 
   font-weight: 600;
+  font-size: 14px;
 
   transition: all 0.2s ease-in-out;
 }
