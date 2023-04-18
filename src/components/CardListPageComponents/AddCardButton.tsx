@@ -5,8 +5,8 @@ const AddCardButton = () => {
 };
 
 const AddCardButtonBox = styled.button`
-  width: 208px;
-  height: 123px;
+  width: 213px;
+  height: 133px;
 
   border: none;
 

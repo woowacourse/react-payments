@@ -11,6 +11,11 @@ body {
 
   font-family: 'Apple SD Gothic Neo', 'Noto Sans KR'
 }
+
+p{
+  margin: 0;
+  padding: 0;
+}
 `;
 
 export default GlobalStyle;
