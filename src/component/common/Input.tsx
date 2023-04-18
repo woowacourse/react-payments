@@ -1,29 +1,19 @@
-import { ChangeEvent } from "react";
+import { HTMLAttributes } from "react";
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLInputElement> {
   type: string;
-  placeholder: string;
-  inputMode?:
-    | "search"
-    | "text"
-    | "email"
-    | "tel"
-    | "url"
-    | "none"
-    | "numeric"
-    | "decimal"
-    | undefined;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function Input(props: Props) {
-  const { type, onChange, placeholder, inputMode } = props;
+  const { type, onChange, placeholder, inputMode, defaultValue, style } = props;
   return (
     <input
+      style={style}
       type={type}
       inputMode={inputMode}
       onChange={onChange}
       placeholder={placeholder}
+      value={defaultValue}
     />
   );
 }
