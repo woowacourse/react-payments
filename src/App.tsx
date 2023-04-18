@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import CardListPage from './components/CardListPage';
-import CardAddPage from './components/CardAddPage';
+import CardListPage from './pages/CardListPage';
+import CardAddPage from './pages/CardAddPage';
 
 function App() {
   return (
