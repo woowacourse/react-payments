@@ -14,3 +14,18 @@ body {
   font-family: sans-serif;
   font-size: 16px;
 }
+
+body {
+  background-color: whitesmoke;
+}
+
+.app {
+  position: relative;
+  left: 50%;
+  width: 375px;
+  height: 812px;
+  margin: 36px 0;
+
+  background-color: white;
+  transform: translateX(-50%);
+}
