@@ -15,5 +15,5 @@ const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 };
 
 export const InputTest = (args: any) => (
-  <Input type="text" onChange={handleChange} value="실험용"></Input>
+  <Input type="text" onChange={handleChange} placeholder="실험용"></Input>
 );
