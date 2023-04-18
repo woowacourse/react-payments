@@ -1,6 +1,10 @@
+import CardLabel from '../CardLabel/CardLabel';
+import CardNumberInput from '../CardNumberInput/CardNumberInput';
 import styled from 'styled-components';
-import CardNumberInput from '../components/CardNumberInput/CardNumberInput';
-import CardLabel from '../components/CardLabel/CardLabel';
+
+interface CardInformationProps {
+  labelText: string;
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -9,10 +13,10 @@ const Wrapper = styled.div`
   border-radius: 7px;
 `;
 
-const AddCard = () => {
+const CardInformation = ({ labelText }: CardInformationProps) => {
   return (
     <>
-      <CardLabel labelText="카드 번호" />
+      <CardLabel labelText={labelText} />
       <Wrapper>
         <CardNumberInput type="text" maxLength={4} />
         <CardNumberInput type="text" maxLength={4} />
@@ -23,4 +27,4 @@ const AddCard = () => {
   );
 };
 
-export default AddCard;
+export default CardInformation;
