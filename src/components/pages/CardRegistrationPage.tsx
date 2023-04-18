@@ -3,6 +3,7 @@ import Header from '../common/Header';
 import { LeftArrowIcon } from '../../assets/icons';
 import CardItem from '../common/CardItem';
 import { Link } from 'react-router-dom';
+import CardNumberInput from '../inputs/CardNumberInput';
 
 const CardRegistrationPage = () => {
   return (
@@ -18,7 +19,9 @@ const CardRegistrationPage = () => {
       <CardItemContainer>
         <CardItem></CardItem>
       </CardItemContainer>
-      <FormContainer></FormContainer>
+      <FormContainer>
+        <CardNumberInput />
+      </FormContainer>
     </>
   );
 };
