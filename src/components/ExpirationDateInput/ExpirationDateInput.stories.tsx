@@ -1,3 +1,4 @@
+import GlobalStyle from "../../styled/GlobalStyle";
 import ExpirationDateInput from "./ExpirationDateInput";
 
 export default {
@@ -5,4 +6,9 @@ export default {
   component: ExpirationDateInput,
 };
 
-export const Default = () => <ExpirationDateInput></ExpirationDateInput>;
+export const Default = () => (
+  <>
+    <GlobalStyle />
+    <ExpirationDateInput></ExpirationDateInput>
+  </>
+);

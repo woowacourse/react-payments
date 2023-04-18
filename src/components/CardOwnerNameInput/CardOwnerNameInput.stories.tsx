@@ -1,3 +1,4 @@
+import GlobalStyle from "../../styled/GlobalStyle";
 import CardOwnerNameInput from "./CardOwnerNameInput";
 
 export default {
@@ -5,4 +6,9 @@ export default {
   component: CardOwnerNameInput,
 };
 
-export const Default = () => <CardOwnerNameInput></CardOwnerNameInput>;
+export const Default = () => (
+  <>
+    <GlobalStyle />
+    <CardOwnerNameInput></CardOwnerNameInput>
+  </>
+);

@@ -1,3 +1,4 @@
+import GlobalStyle from "../../styled/GlobalStyle";
 import SecurityCodeInput from "./SecurityCodeInput";
 
 export default {
@@ -5,4 +6,9 @@ export default {
   component: SecurityCodeInput,
 };
 
-export const Default = () => <SecurityCodeInput></SecurityCodeInput>;
+export const Default = () => (
+  <>
+    <GlobalStyle />
+    <SecurityCodeInput></SecurityCodeInput>
+  </>
+);
