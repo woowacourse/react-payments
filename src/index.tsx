@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { $ } from "utils/selector";
 
-const root = ReactDOM.createRoot($("root"));
+const root = ReactDOM.createRoot($("#root"));
 root.render(
   <React.StrictMode>
     <App />
