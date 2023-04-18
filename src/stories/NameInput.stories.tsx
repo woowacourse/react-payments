@@ -1,7 +1,7 @@
 import React from "react";
 import { Story } from "@storybook/react";
 
-import { InputBox, InputBoxProps } from "../components/InputBox";
+import { InputBox, InputBoxProps } from "../components/common/InputBox";
 
 export default {
   component: InputBox,
