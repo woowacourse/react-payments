@@ -1,34 +1,18 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es6": true,
+    "node": true
   },
-  "extends": [
-    "airbnb"
-    // "plugin:import/errors",
-    // "plugin:import/warnings",
-    // "plugin:prettier/recommended"
-  ],
-  "overrides": [],
+  "extends": ["airbnb", "airbnb-typescript"],
   "parserOptions": {
-    "ecmaVersion": "latest",
-    "sourceType": "module"
+    "project": "./tsconfig.json"
   },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-        // "moduleDirectory": ["node_modules", "src/"] // 절대경로 노드 설정
-      }
-    }
-  },
-  "plugins": ["react"],
   "rules": {
     "react/jsx-filename-extension": [
-      2,
+      1,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ],
-    "import/no-extraneous-dependencies": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -39,8 +23,19 @@
         "tsx": "never"
       }
     ],
-    "comma-dangle": [1, "always-multiline"],
-    "react/jsx-props-no-spreading": "off"
+    "linebreak-style": "off",
+    "react/react-in-jsx-scope": 0,
+    "react/jsx-uses-react": 0,
+    "react/prop-types": 0,
+    "import/no-unresolved": "off",
+    "comma-dangle": "off"
   },
-  "ignorePatterns": ["dist/*", "node_modules/*", "src/stories/*"]
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
 }
