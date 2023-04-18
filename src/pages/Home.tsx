@@ -1,4 +1,4 @@
-import AddCardButton from '../components/AddCardButton';
+import AddCardButton from '../components/AddCardButton/AddCardButton';
 
 const Home = () => {
   return (

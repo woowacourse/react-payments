@@ -6,6 +6,7 @@ const LinkWrapper = styled(Link)`
   justify-content: center;
   text-decoration: none;
   color: #575757;
+  margin-top: 100px;
 `;
 
 const Button = styled.button`
@@ -15,6 +16,7 @@ const Button = styled.button`
   border-radius: 5px;
   text-align: center;
   font-size: 30px;
+  margin-top: 20px;
 `;
 
 const AddCardButton = () => {
