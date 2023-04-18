@@ -5,15 +5,16 @@ export interface InputBoxProps {
   labelText: string;
   placeholder?: string;
   render?: () => JSX.Element;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function InputBox(props: InputBoxProps) {
-  const { labelText, placeholder, render } = props;
+  const { labelText, placeholder, render, handleChange } = props;
   return (
     <InputContainer>
       {render && render()}
       <Label>{labelText}</Label>
-      <Input placeholder={placeholder} />
+      <Input placeholder={placeholder} onChange={handleChange} />
     </InputContainer>
   );
 }
