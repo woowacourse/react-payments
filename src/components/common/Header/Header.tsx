@@ -4,14 +4,13 @@ import leftIcon from '../../../assets/left-icon.svg';
 
 interface HeaderProps extends ComponentPropsWithoutRef<'header'> {
   content: string;
+  isOverlayPage?: boolean;
 }
 
-function Header({ content, ...attributes }: HeaderProps) {
+function Header({ content, isOverlayPage = false, ...attributes }: HeaderProps) {
   return (
     <header className={styles.header} {...attributes}>
-      <div>
-        <img src={leftIcon} alt="left back icon" />
-      </div>
+      {isOverlayPage && <img src={leftIcon} alt="left back icon" />}
       <h3>{content}</h3>
     </header>
   );
