@@ -1,11 +1,15 @@
 import { ThemeProvider } from "styled-components";
-import EmptyCard from "./components/common/EmptyCard";
 import { theme } from "./style/global";
+import { Home } from "./page/Home";
+import AddCard from "./page/AddCard";
+import { useState } from "react";
 
 function App() {
+  const [isHome, setIsHome] = useState(true);
+
   return (
     <ThemeProvider theme={theme}>
-      <EmptyCard />
+      {isHome ? <Home /> : <AddCard />}
     </ThemeProvider>
   );
 }
