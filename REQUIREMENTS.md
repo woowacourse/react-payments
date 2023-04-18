@@ -52,7 +52,7 @@
 
 - [ ] 나의 카드 목록 페이지 구현
   - [x] Header 컴포넌트 구현
-  - [ ] Title 컴포넌트 구현
+  - [x] Title 컴포넌트 구현
   - [ ] CardAddButton 컴포넌트 구현
   - [ ] CardItem 컴포넌트 구현
   - [ ] CardList 컴포넌트 구현
