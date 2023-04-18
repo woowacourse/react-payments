@@ -1,0 +1,8 @@
+{
+  "short_name": "React-Payment",
+  "name": "Create React-Payment mission",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
