@@ -25,11 +25,13 @@
   height: 26px;
   background-color: var(--gold-color);
   border-radius: 4px;
+  margin-top: 31px;
 }
 
 .word {
   color: var(--grey-100);
   font-size: 13px;
+  height: 16px;
 }
 
 .wrap {
@@ -40,4 +42,5 @@
 .cardNumber {
   color: var(--grey-100);
   font-size: large;
+  height: 23px;
 }
