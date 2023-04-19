@@ -14,7 +14,9 @@ export const CardItem = ({ card }: CardProps) => {
         <CardNumbers>{card.numbers}</CardNumbers>
         <InfoWrapper>
           <Name>{card.owner ? card.owner : "NAME"}</Name>
-          <ExpiryDate>{card.expiryDate}</ExpiryDate>
+          <ExpiryDate>
+            {card.expiryDate ? card.expiryDate : "MM / YY"}
+          </ExpiryDate>
         </InfoWrapper>
       </Container>
     </Card>
