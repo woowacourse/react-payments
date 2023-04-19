@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledBackButton = styled.button`
+const Button = styled.button`
   width: 10px;
   height: 10px;
   border-left: 1.5px solid black;
@@ -9,5 +9,5 @@ const StyledBackButton = styled.button`
 `;
 
 export const BackButton = () => {
-  return <StyledBackButton />;
+  return <Button />;
 };

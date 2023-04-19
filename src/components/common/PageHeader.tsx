@@ -2,7 +2,7 @@ import type { PropsWithChildren, ReactNode } from 'react';
 import styled from 'styled-components';
 import { Text } from './Text';
 
-const StyledHeader = styled.header`
+const Header = styled.header`
   display: flex;
   align-items: center;
   gap: 16px;
@@ -18,9 +18,9 @@ export const PageHeader = (props: PageHeaderProps) => {
   const { leading, children } = props;
 
   return (
-    <StyledHeader>
+    <Header>
       {leading}
       <Text size="large">{children}</Text>
-    </StyledHeader>
+    </Header>
   );
 };

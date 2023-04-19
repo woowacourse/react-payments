@@ -13,4 +13,4 @@ export const Page = (props: PropsWithChildren) => {
   return <StyledPage>{children}</StyledPage>;
 };
 
-Page.Header = PageHeader
+Page.Header = PageHeader;
