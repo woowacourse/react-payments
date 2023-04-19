@@ -40,7 +40,6 @@ interface PaymentsInputProps {
   title: string;
   inputInformationList: InputInformation[];
   inputDivideLetter?: string | '';
-  dataId?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -48,11 +47,12 @@ interface InputInformation {
   type: string;
   isRequired: boolean;
   maxLength: number;
+  name: string;
 }
 
 export type { PaymentsInputProps };
 
-function PaymentsInput({ title, inputInformationList, inputDivideLetter, dataId, onChange }: PaymentsInputProps) {
+function PaymentsInput({ title, inputInformationList, inputDivideLetter, onChange }: PaymentsInputProps) {
   const inputAmount = inputInformationList.length;
   return (
     <div>
@@ -61,12 +61,11 @@ function PaymentsInput({ title, inputInformationList, inputDivideLetter, dataId,
         {Array.from({ length: inputAmount - 1 }, (_, i) => (
           <>
             <InputItem
-              name={title}
+              name={inputInformationList[i].name}
               key={i}
               type={inputInformationList[i].type}
               maxLength={inputInformationList[i].maxLength}
               onChange={onChange}
-              data-id={dataId}
               data-index={i}
               required={inputInformationList[i].isRequired}
             />
@@ -74,11 +73,10 @@ function PaymentsInput({ title, inputInformationList, inputDivideLetter, dataId,
           </>
         ))}
         <InputItem
-          name={title}
+          name={inputInformationList[inputAmount - 1].name}
           type={inputInformationList[inputAmount - 1].type}
           maxLength={inputInformationList[inputAmount - 1].maxLength}
           onChange={onChange}
-          data-id={dataId}
           data-index={inputAmount - 1}
           required={inputInformationList[inputAmount - 1].isRequired}
         />
