@@ -9,6 +9,7 @@ interface CardInputProps {
   value: string;
   order?: number;
   required: boolean;
+  autofocus?: boolean;
 }
 
 const Input = styled.input`
@@ -27,6 +28,7 @@ const CardInput = forwardRef(
       value,
       order,
       required,
+      autofocus,
     }: CardInputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
@@ -40,6 +42,7 @@ const CardInput = forwardRef(
         onChange={onChange}
         value={value}
         data-order={order}
+        autoFocus={autofocus}
       />
     );
   }

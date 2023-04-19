@@ -67,6 +67,7 @@ const CardNumbers = () => {
           order={0}
           placeholder={'0000'}
           required={true}
+          autofocus={true}
         />
         {refObject[0].current?.value.length === 4 && <Pargraph>-</Pargraph>}
         <CardInput
