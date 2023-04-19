@@ -4,17 +4,22 @@ import ExpirationDateInput from "./FormInputs/ExpirationDateInput";
 import NameInput from "./FormInputs/NameInput";
 import PasswordInput from "./FormInputs/PasswordInput";
 import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
+import CardPreview from "./CardPreview";
 
 const CardRegisterForm = () => {
   return (
-    <form>
-      <CardNumberInput />
-      <ExpirationDateInput />
-      <NameInput />
-      <SecurityCodeInput />
-      <PasswordInput />
-      <S.Button>다음</S.Button>
-    </form>
+    <div>
+      <CardPreview />
+
+      <form>
+        <CardNumberInput />
+        <ExpirationDateInput />
+        <NameInput />
+        <SecurityCodeInput />
+        <PasswordInput />
+        <S.Button>다음</S.Button>
+      </form>
+    </div>
   );
 };
 
