@@ -1,4 +1,4 @@
-/* eslint-disable react/require-default-props */
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const CardContainer = styled.div<{ isAddFrom: boolean }>`
@@ -6,7 +6,7 @@ const CardContainer = styled.div<{ isAddFrom: boolean }>`
   width: 214px;
   height: 134px;
   background-color: ${props => (props.isAddFrom ? `#333333` : `#E5E5E5`)};
-  font-size: 16px;
+  font-size: 18px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   color: white;
@@ -26,6 +26,7 @@ const ICChipTemplate = styled.div`
 const CardNumberTemplate = styled.div`
   display: flex;
   justify-content: space-between;
+  height: 18px;
 `;
 
 const CardInfoTemplate = styled.div`
@@ -40,6 +41,7 @@ const CardDetail = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 6px;
+  font-size: 14px;
 `;
 
 const AddButton = styled.button`
@@ -51,18 +53,18 @@ const AddButton = styled.button`
 `;
 
 interface CardProps {
-  cardNumber?: [string, string, string, string] | null;
-  expirationDate?: ExpirationDate | null;
-  owner?: string | null;
+  cardNumber?: [string, string, string, string];
+  expirationDate?: ExpirationDate;
+  owner?: string;
   isAddForm: boolean;
 }
 
 interface ExpirationDate {
-  year: number;
-  month: number;
+  year: string;
+  month: string;
 }
 
-function Card({ cardNumber = null, expirationDate = null, owner = null, isAddForm }: CardProps) {
+function Card({ cardNumber, expirationDate = { year: 'YY', month: 'MM' }, owner = 'NAME', isAddForm }: CardProps) {
   return (
     <CardContainer isAddFrom={isAddForm}>
       {isAddForm ? (
@@ -76,14 +78,18 @@ function Card({ cardNumber = null, expirationDate = null, owner = null, isAddFor
             </CardNumberTemplate>
             <CardDetail>
               <div>{owner}</div>
-              <div>
-                {String(expirationDate?.month).padStart(2, '0')}/{expirationDate?.year}
-              </div>
+              {expirationDate && (
+                <div>
+                  {expirationDate.month.padStart(2, '0')}/{expirationDate.year}
+                </div>
+              )}
             </CardDetail>
           </CardInfoTemplate>
         </>
       ) : (
-        <AddButton type="button">+</AddButton>
+        <Link to="/registration">
+          <AddButton type="button">+</AddButton>
+        </Link>
       )}
     </CardContainer>
   );

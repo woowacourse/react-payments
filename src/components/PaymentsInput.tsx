@@ -16,14 +16,19 @@ const InputContainer = styled.div`
   margin-top: 8.67px;
   background: #ecebf1;
   border-radius: 7px;
+  input[type='password'] {
+    font-family: Verdana;
+  }
 `;
 
-const InputItem = styled.input`
-  width: 50px;
+const InputItem = styled.input<{ maxLength: number }>`
+  width: ${({ maxLength }) => maxLength * 12}px;
   font-size: 18px;
   text-align: center;
   background: none;
   border: none;
+  outline: none;
+  letter-spacing: 0.1em;
 `;
 
 const InputDivider = styled.div`
@@ -34,7 +39,7 @@ interface PaymentsInputProps {
   title: string;
   inputAmount: number;
   maxLength: number;
-  inputDivideLetter: string | null;
+  inputDivideLetter?: string | '';
 }
 
 export type { PaymentsInputProps };
@@ -46,11 +51,11 @@ function PaymentsInput({ title, inputAmount, maxLength, inputDivideLetter }: Pay
       <InputContainer>
         {Array.from({ length: inputAmount - 1 }, (_, i) => (
           <>
-            <InputItem key={i} type="text" maxLength={maxLength} />
-            <InputDivider>{inputDivideLetter}</InputDivider>
+            <InputItem name={title} key={i} type="text" maxLength={maxLength} />
+            {inputDivideLetter && <InputDivider>{inputDivideLetter}</InputDivider>}
           </>
         ))}
-        <InputItem type="text" maxLength={maxLength} />
+        <InputItem name={title} type="password" maxLength={maxLength} autoComplete="off" />
       </InputContainer>
     </div>
   );
