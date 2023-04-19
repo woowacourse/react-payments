@@ -28,6 +28,8 @@ const Ul = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 46px;
+
+  overflow: scroll;
 `;
 
 export default CardList;

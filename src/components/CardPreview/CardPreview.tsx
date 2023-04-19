@@ -46,7 +46,7 @@ const CardLayout = styled.li`
 
   background-color: #333333;
 
-  height: 133px;
+  min-height: 133px;
   width: 213px;
 
   border-radius: 5px;
