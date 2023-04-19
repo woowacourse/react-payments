@@ -1,9 +1,9 @@
-import React from 'react';
+import notFound from '../images/notFoundCat.png';
 
 const NotFound = () => {
   return (
     <>
-      <h1>해당 페이지를 찾지 못했습니다. 🥹</h1>
+      <img src={notFound} alt="notFound" />
     </>
   );
 };
