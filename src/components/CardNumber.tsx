@@ -26,22 +26,35 @@ function CardNumber() {
 
   const cardChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const value = event.currentTarget.value as string;
-    const name = event.currentTarget.dataset["setOrder"];
+    const name = event.currentTarget.dataset["setOrder"] as
+      | "first"
+      | "second"
+      | "third"
+      | "fourth";
 
     if (!name) return;
 
-    if (![...value].every((val) => /[0-9]/.test(val))) {
-      setCardError({
-        isError: true,
-        message: "숫자만 입력해 주세요",
-      });
-    } else {
+    if (!/\d/g.test(value)) return;
+
+    try {
+      if (value.length !== 4) {
+        throw new Error(`4글자를 입력해 주세요`);
+      }
+
       setCardError({
         isError: false,
         message: "",
       });
+    } catch (error) {
+      if (error instanceof Error) {
+        setCardError({
+          isError: true,
+          message: error.message,
+        });
+      }
+    } finally {
+      setCardNumber((prev) => ({ ...prev, [name]: value }));
     }
-    setCardNumber((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
