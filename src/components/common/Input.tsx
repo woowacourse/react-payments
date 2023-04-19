@@ -18,6 +18,8 @@ const InputUnit = styled.input`
   box-sizing: border-box;
   height: 4.5rem;
 
+  padding: 0 1rem;
+
   background: #ecebf1;
   border-radius: 0.7rem;
 
