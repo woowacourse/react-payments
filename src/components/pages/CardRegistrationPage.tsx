@@ -7,6 +7,7 @@ import CardNumberInput from '../inputs/CardNumberInput';
 import ExpirationDateInput from '../inputs/ExpirationDateInput';
 import NameInput from '../inputs/NameInput';
 import SecurityCodeInput from '../inputs/SecurityCodeInput';
+import PasswordInput from '../inputs/PasswordInput';
 
 const CardRegistrationPage = () => {
   return (
@@ -27,6 +28,7 @@ const CardRegistrationPage = () => {
         <ExpirationDateInput />
         <NameInput />
         <SecurityCodeInput />
+        <PasswordInput />
       </FormContainer>
     </>
   );

@@ -64,4 +64,4 @@
     - [x] ExpirationInput 컴포넌트 구현
     - [x] NameInput 컴포넌트 구현
     - [x] SecurityInput 컴포넌트 구현
-    - [ ] PasswordInput 컴포넌트 구현
+    - [x] PasswordInput 컴포넌트 구현

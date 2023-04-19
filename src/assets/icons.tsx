@@ -13,3 +13,15 @@ export const LeftArrowIcon = () => (
     />
   </svg>
 );
+
+export const DotIcon = () => (
+  <svg
+    width='45'
+    height='45'
+    viewBox='0 0 5 5'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <circle cx='2.5' cy='2.5' r='0.3' fill='black' />
+  </svg>
+);

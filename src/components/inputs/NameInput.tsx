@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
+import InputGroup from '../common/InputGroup';
 
 const NameInput = () => {
   return (
-    <InputBox labelValue={<LabelValue length={0} />}>
-      <Input
-        placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
-        textAlign='start'
-      ></Input>
-    </InputBox>
+    <InputGroup labelValue={<LabelValue length={0} />}>
+      <InputBox>
+        <Input
+          placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
+          textAlign='start'
+        ></Input>
+      </InputBox>
+    </InputGroup>
   );
 };
 
