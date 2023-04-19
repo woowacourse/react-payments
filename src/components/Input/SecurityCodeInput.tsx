@@ -1,17 +1,11 @@
 import { Input } from 'components/common';
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler } from 'react';
 
-export function SecurityCodeInput() {
-  const [securityCode, setSecurityCode] = useState('');
+interface SecurityInputProps {
+  value: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+}
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value } = e.target;
-    const isNumber = !isNaN(Number(value));
-
-    if (!isNumber) return;
-
-    setSecurityCode(value);
-  };
-
-  return <Input value={securityCode} type="password" maxLength={3} onChange={handleChange} />;
+export function SecurityCodeInput({ value, onChange }: SecurityInputProps) {
+  return <Input value={value} type="password" maxLength={3} onChange={onChange} />;
 }

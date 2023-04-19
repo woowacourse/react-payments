@@ -1,6 +1,5 @@
-import { storiesOf, StoryFn } from '@storybook/react';
-import useState from 'storybook-addon-state';
-import { CardNumberInputs, ValueAndOnChange } from './CardNumberInputs';
+import { StoryFn } from '@storybook/react';
+import { CardNumberInputs } from './CardNumberInputs';
 
 export default {
   title: 'CardNumberInputs',
