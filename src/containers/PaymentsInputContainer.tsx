@@ -67,29 +67,44 @@ function PaymentsInputContainer({ setCardInformation }: PaymentInputContainerPro
     <PaymentsForm onSubmit={handleForm}>
       <PaymentsInput
         title="카드 번호"
-        inputAmount={4}
-        maxLength={4}
+        inputInformationList={[
+          { type: 'text', isRequired: true, maxLength: 4 },
+          { type: 'text', isRequired: true, maxLength: 4 },
+          { type: 'password', isRequired: true, maxLength: 4 },
+          { type: 'password', isRequired: true, maxLength: 4 },
+        ]}
         inputDivideLetter="-"
         dataId="cardNumber"
         onChange={onChangeCardNumber}
       />
       <PaymentsInput
         title="만료일"
-        inputAmount={2}
-        maxLength={2}
+        inputInformationList={[
+          { type: 'text', isRequired: true, maxLength: 2 },
+          { type: 'text', isRequired: true, maxLength: 2 },
+        ]}
         inputDivideLetter="/"
         dataId="expirationDate"
         onChange={onChangeExpirationDate}
       />
       <PaymentsInput
         title="카드 소유자 이름(선택)"
-        inputAmount={1}
-        maxLength={30}
+        inputInformationList={[{ type: 'text', isRequired: false, maxLength: 30 }]}
         dataId="owner"
         onChange={onChangeOwner}
       />
-      <PaymentsInput title="보안 코드(CVC/CVV)" inputAmount={1} maxLength={3} />
-      <PaymentsInput title="카드 비밀번호" inputAmount={2} maxLength={1} inputDivideLetter="" />
+      <PaymentsInput
+        title="보안 코드(CVC/CVV)"
+        inputInformationList={[{ type: 'password', isRequired: true, maxLength: 3 }]}
+      />
+      <PaymentsInput
+        title="카드 비밀번호"
+        inputInformationList={[
+          { type: 'password', isRequired: true, maxLength: 1 },
+          { type: 'password', isRequired: true, maxLength: 1 },
+        ]}
+        inputDivideLetter=""
+      />
       <NextButton type="submit">다음</NextButton>
     </PaymentsForm>
   );
