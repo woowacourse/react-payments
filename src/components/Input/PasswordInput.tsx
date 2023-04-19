@@ -1,50 +1,44 @@
 import { Input } from 'components/common';
-import { ChangeEventHandler, useRef, useState } from 'react';
+import React, { ChangeEvent, ChangeEventHandler, useRef, useState } from 'react';
+import { ValueAndOnChange } from './types';
 
-export function PasswordInput() {
-  const firstDigitRef = useRef<HTMLInputElement>(null);
-  const secondDigitRef = useRef<HTMLInputElement>(null);
+interface PasswordInputProps {
+  first: ValueAndOnChange;
+  second: ValueAndOnChange;
+}
 
-  const [firstDigit, setFirstDigit] = useState('');
-  const [secondDigit, setSecondDigit] = useState('');
+export function PasswordInput(props: PasswordInputProps) {
+  const { first, second } = props;
+  const inputRefs = Object.keys(props).map(() => React.createRef<HTMLInputElement>());
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    if (e.target === firstDigitRef.current) {
-      const { value } = e.target;
-      const isNumber = !isNaN(Number(value));
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    index: number,
+    onChange: ChangeEventHandler<HTMLInputElement>
+  ) => {
+    const value = e.target.value;
 
-      if (!isNumber) return;
-
-      setFirstDigit(value);
+    if (index < Object.keys(props).length - 1 && value.length === e.target.maxLength) {
+      inputRefs[index + 1].current?.focus();
     }
-
-    if (e.target === secondDigitRef.current) {
-      const { value } = e.target;
-      const isNumber = !isNaN(Number(value));
-
-      if (!isNumber) {
-        setSecondDigit(value.slice(0, -1));
-        return;
-      }
-      setSecondDigit(value);
-    }
+    onChange(e);
   };
 
   return (
     <>
       <Input
-        value={firstDigit}
+        ref={inputRefs[0]}
+        value={first.value}
         type="password"
         maxLength={1}
-        ref={firstDigitRef}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e, 0, first.onChange)}
       />
       <Input
-        value={secondDigit}
+        ref={inputRefs[1]}
+        value={second.value}
         type="password"
         maxLength={1}
-        ref={secondDigitRef}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e, 1, second.onChange)}
       />
     </>
   );
