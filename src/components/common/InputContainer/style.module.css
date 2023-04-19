@@ -10,3 +10,15 @@
   font-size: 12px;
   font-weight: 600;
 }
+
+.subInformation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.characterCounter {
+  height: 15px;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #727272;
+}
