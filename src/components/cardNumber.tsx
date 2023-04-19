@@ -20,6 +20,7 @@ export function CardNumber() {
           return (
             <>
               <Input
+                key={cardInput}
                 handleChange={handleChange}
                 handleError={() =>
                   handleError(
@@ -28,6 +29,11 @@ export function CardNumber() {
                   )
                 }
                 name={cardInput}
+                type={
+                  cardInput === "third" || cardInput === "fourth"
+                    ? "password"
+                    : "text"
+                }
                 maxLength={4}
               />
               {index < original.length - 1 && "-"}
