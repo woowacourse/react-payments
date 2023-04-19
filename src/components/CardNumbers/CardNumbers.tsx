@@ -61,6 +61,7 @@ const CardNumbers = () => {
           onChange={handleCardInputChange}
           value={typing[0]}
           order={0}
+          placeholder={'0000'}
         />
         {refObject[0].current?.value.length === 4 && <p>-</p>}
         <CardInput
@@ -70,6 +71,7 @@ const CardNumbers = () => {
           onChange={handleCardInputChange}
           value={typing[1]}
           order={1}
+          placeholder={'0000'}
         />
         {refObject[1].current?.value.length === 4 && <p>-</p>}
         <CardInput
@@ -79,6 +81,7 @@ const CardNumbers = () => {
           onChange={handleCardInputChange}
           value={typing[2]}
           order={2}
+          placeholder={'0000'}
         />
         {refObject[2].current?.value.length === 4 && <p>-</p>}
         <CardInput
@@ -88,6 +91,7 @@ const CardNumbers = () => {
           onChange={handleCardInputChange}
           value={typing[3]}
           order={3}
+          placeholder={'0000'}
         />
       </Wrapper>
     </>
