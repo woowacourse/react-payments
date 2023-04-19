@@ -1,4 +1,6 @@
 import React from 'react';
+import './InputCardData.css';
+
 export type InputProps = {
   value: string;
   onChange: (e: React.ChangeEvent) => void;
@@ -11,7 +13,7 @@ const InputCardData = ({ value, onChange, status, errorMessage }: InputProps) =>
   // TODO : status
   return (
     <div>
-      <input value={value} onChange={onChange} />
+      <input className="input-box" value={value} onChange={onChange} />
       {status ? '' : <span>{errorMessage}</span>}
     </div>
   );
