@@ -32,3 +32,22 @@ CardNumberInput.args = {
     e.target.value = (numbers.match(/\d{1,4}|\*{1,4}/g) ?? []).join(" - ");
   },
 };
+
+export const ExpiryDateInput = Template.bind({});
+
+ExpiryDateInput.args = {
+  label: "expiryDate",
+  width: "137px",
+  placeholder: "MM / YY",
+  textPosition: "center",
+  event: (e) => {
+    const value = e.target.value.replaceAll(" / ", "");
+
+    if (value.length > 4) {
+      e.target.value = e.target.value.slice(0, -1);
+      return;
+    }
+
+    e.target.value = (value.match(/\d{1,2}/g) ?? []).join(" / ");
+  },
+};
