@@ -7,7 +7,7 @@ const Input = (props: InputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (value.length >= 4) {
+    if (value.length >= 2) {
       inputRef.current?.blur();
       const nextInput = inputRef.current?.nextElementSibling;
       if (nextInput && nextInput instanceof HTMLElement) {
