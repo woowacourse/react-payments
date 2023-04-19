@@ -77,7 +77,7 @@ export const CardCVC: Story = {
     labelText: '보안 코드(CVC/CVV)',
     inputInfoList: [
       {
-        type: 'number',
+        type: 'password',
         maxLength: 3,
         width: '75px',
       },
@@ -90,12 +90,12 @@ export const CardPWD: Story = {
     labelText: '카드 비밀번호',
     inputInfoList: [
       {
-        type: 'number',
+        type: 'password',
         maxLength: 1,
         width: '40px',
       },
       {
-        type: 'number',
+        type: 'password',
         maxLength: 1,
         width: '40px',
       },

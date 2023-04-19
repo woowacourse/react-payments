@@ -22,7 +22,7 @@ const Input = ({ labelText, inputInfoList }: InputProps) => {
           {inputInfoList.map(({ type, placeholder, maxLength, width }) => {
             return (
               <StyledInput
-                type={type === 'text' ? 'text' : 'number'}
+                type={type}
                 name={labelText}
                 maxLength={maxLength}
                 width={width}
@@ -55,11 +55,6 @@ const StyledInput = styled.input`
   background: transparent;
   border: none;
   border-bottom: 1px solid #525252;
-  ${(prop) =>
-    prop.type === 'password' &&
-    `
-      -webkit-text-security: disc;
-    `};
 
   & + & {
     margin-left: 8px;
