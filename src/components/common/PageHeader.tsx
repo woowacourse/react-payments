@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import { Text } from './Text';
 
 const StyledHeader = styled.header`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
   padding: 20px 36px;
 `;
 
@@ -15,7 +19,7 @@ export const PageHeader = (props: PageHeaderProps) => {
 
   return (
     <StyledHeader>
-      {leading}  
+      {leading}
       <Text size="large">{children}</Text>
     </StyledHeader>
   );
