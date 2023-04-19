@@ -29,7 +29,7 @@ const CardNumberInput = () => {
 
   return (
     <>
-      <label htmlFor="card-label">카드 번호</label>
+      <S.Label htmlFor="card-label">카드 번호</S.Label>
       <S.InputBox>
         <S.Input
           type="text"
@@ -37,6 +37,7 @@ const CardNumberInput = () => {
           id="card-label"
           aria-labelledby="card-label"
           maxLength={4}
+          inputMode="numeric"
           value={cardNumber.number1}
           ref={(el) => handleRef(el, 0)}
           onChange={handleCardNumber}
@@ -48,8 +49,9 @@ const CardNumberInput = () => {
         <S.Input
           type="text"
           name="number2"
-          maxLength={4}
           aria-labelledby="card-label"
+          maxLength={4}
+          inputMode="numeric"
           value={cardNumber.number2}
           ref={(el) => handleRef(el, 1)}
           onChange={handleCardNumber}
@@ -60,8 +62,9 @@ const CardNumberInput = () => {
         <S.Input
           type="password"
           name="number3"
-          maxLength={4}
           aria-labelledby="card-label"
+          maxLength={4}
+          inputMode="numeric"
           value={cardNumber.number3}
           ref={(el) => handleRef(el, 2)}
           onChange={handleCardNumber}
@@ -72,8 +75,9 @@ const CardNumberInput = () => {
         <S.Input
           type="password"
           name="number4"
-          maxLength={4}
           aria-labelledby="card-label"
+          maxLength={4}
+          inputMode="numeric"
           value={cardNumber.number4}
           ref={(el) => handleRef(el, 3)}
           onChange={handleCardNumber}
@@ -86,19 +90,24 @@ const CardNumberInput = () => {
 };
 
 const S = {
+  Label: styled.label`
+    color: var(--label-color);
+  `,
+
   InputBox: styled.div`
     display: flex;
     justify-content: center;
-    width: 318px;
+    width: 88vw;
     height: 48px;
+    margin-top: 14px;
     background: var(--input-background);
     border-radius: 8px;
   `,
 
   Input: styled.input`
     background: var(--input-background);
-    width: 48px;
-    margin: 0 8px;
+    width: 16vw;
+    margin: 0 2.2vw;
     text-align: center;
   `,
 

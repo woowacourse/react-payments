@@ -24,6 +24,7 @@ export const GlobalStyle = createGlobalStyle`
   /* Colors *****************************************/
   :root {
     --input-background:#ecebf1;
+    --label-color: #525252;
   }
 
   #root {
