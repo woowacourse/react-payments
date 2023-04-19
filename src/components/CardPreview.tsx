@@ -1,20 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CardPreview = () => {
+type CardPreviewProps = {
+  cardNumbers: string[];
+  cardOwner: string[];
+  cardExpirationDate: string[];
+};
+
+const CardPreview = ({ cardNumbers, cardOwner, cardExpirationDate }: CardPreviewProps) => {
   return (
     <CardPreviewWrapper>
       <CardChip />
       <CardNumberWrapper>
-        <CardNumber>1111</CardNumber>
-        <CardNumber>1111</CardNumber>
-        <CardNumber>1111</CardNumber>
-        <CardNumber>1111</CardNumber>
+        {cardNumbers.map((cardNumber) => (
+          <CardNumber>{cardNumber}</CardNumber>
+        ))}
       </CardNumberWrapper>
       <CardInfo>
-        <div>이름</div>
+        <div>{cardOwner[0]}</div>
         <div>
-          <span>04</span>/<span>21</span>
+          <span>{cardExpirationDate[0]}</span>/<span>{cardExpirationDate[1]}</span>
         </div>
       </CardInfo>
     </CardPreviewWrapper>

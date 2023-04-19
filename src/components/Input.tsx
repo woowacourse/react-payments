@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
 type InputInfo = {
@@ -6,6 +6,8 @@ type InputInfo = {
   placeholder?: string;
   maxLength: number;
   width: string;
+  value?: string;
+  onChange: (e: ChangeEvent) => void;
 };
 
 type InputProps = {
@@ -19,14 +21,17 @@ const Input = ({ labelText, inputInfoList }: InputProps) => {
       <StyledInputLabel>
         {labelText}
         <div>
-          {inputInfoList.map(({ type, placeholder, maxLength, width }) => {
+          {inputInfoList.map(({ type, placeholder, maxLength, width, value, onChange }, index) => {
             return (
               <StyledInput
                 type={type}
-                name={labelText}
+                name={`${labelText}${index}`}
                 maxLength={maxLength}
                 width={width}
                 placeholder={placeholder}
+                data-id={index}
+                value={value}
+                onChange={onChange}
               />
             );
           })}
@@ -39,6 +44,10 @@ const Input = ({ labelText, inputInfoList }: InputProps) => {
 const StyledInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  & + & {
+    margin-top: 18px;
+  }
 `;
 
 const StyledInputLabel = styled.label`
