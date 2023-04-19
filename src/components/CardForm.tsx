@@ -6,6 +6,8 @@ import { ExpiryDateInput } from "./ExpiryDateInput";
 import { OwnerInput } from "./OwnerInput";
 import { PasswordInput } from "./PasswordInput";
 import { FormEvent } from "react";
+import { pushData } from "../page/Home";
+import { useNavigate } from "react-router-dom";
 
 interface CardFormProps {
   cardInfo: CardType;
@@ -13,13 +15,33 @@ interface CardFormProps {
 }
 
 export const CardForm = ({ cardInfo, setCardInfo }: CardFormProps) => {
+  const history = useNavigate();
+
+  const moveToHome = () => {
+    history("/");
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
 
-    console.log(data); //if(isValidate) return;
+    console.log(data);
 
+    const newCard = {
+      numbers: data.cardNumber,
+      expiryDate: data.expiryDate,
+      owner: data.owner,
+      color: "#525252",
+      CVC: Number(data.cvc),
+      password: [Number(data.password1), Number(data.password2)],
+    };
+
+    pushData(newCard);
+    moveToHome();
+
+    console.log(newCard);
+    //if(isValidate) return;
     // dataUpdate 로컬 스토리지?
     //페이지 이동
   };
