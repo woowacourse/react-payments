@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Card from '../Card';
+import Card from '../Common/Card';
 import CardNumberInput from '../Input/CardNumberInput';
 import ExpireDateInput from '../Input/ExpireDateInput';
 import OwnerNameInput from '../Input/OwnerNameInput';

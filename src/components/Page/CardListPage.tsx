@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { CardType } from '../../types';
-import Card from '../Card';
+import Card from '../Common/Card';
 import PageTemplate from '../Template/PageTemplate';
 
 interface CardListPageProps {

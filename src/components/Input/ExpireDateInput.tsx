@@ -1,6 +1,6 @@
 import React from 'react';
-import InputSection from '../InputSection';
-import InputBox from '../InputBox';
+import InputSection from '../Box/InputSection';
+import InputBox from '../Common/InputBox';
 import { InputStateProps } from '../../types';
 
 const ExpireDateInput = (props: InputStateProps) => {
