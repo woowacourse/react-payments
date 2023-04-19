@@ -5,10 +5,11 @@ const REGEX = Object.freeze({
   STRING: /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/,
   MONTH: /^(1[0-2]|[1-9])$/,
 });
+
 export const validation = {
-  date(input: string) {
-    this.isNumber(input);
-    this.isCorrectMonth(input);
+  month(input: string) {
+    validation.isNumber(input);
+    validation.isCorrectMonth(input);
   },
 
   isNumber(input: string) {
@@ -30,5 +31,3 @@ export const validation = {
     }
   },
 };
-
-export type TValidation = typeof validation;
