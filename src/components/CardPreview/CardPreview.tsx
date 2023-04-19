@@ -20,7 +20,7 @@ const CardPreview = ({ card }: CardPreviewProps) => {
         <span>{"•".repeat(cardNumber.fourthGroup.length)}</span>
       </NumberContainer>
       <InfoContainer>
-        <span>{ownerName ? ownerName : "NAME"}</span>
+        <Span>{ownerName ? ownerName : "NAME"}</Span>
         <span>
           {expirationDate.month ? expirationDate.month : "MM"} / {expirationDate.year ? expirationDate.year : "YY"}
         </span>
@@ -30,6 +30,11 @@ const CardPreview = ({ card }: CardPreviewProps) => {
 };
 
 export default CardPreview;
+
+const Span = styled.span`
+  width: 100px;
+  overflow: hidden;
+`;
 
 const CardLayout = styled.li`
   position: relative;

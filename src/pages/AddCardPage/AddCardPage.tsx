@@ -89,7 +89,7 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
       <Form onSubmit={addCard}>
         <CardNumberInput onChange={handleCardNumber} />
         <CardExpirationDateInput onChange={handleExpirationDate} />
-        <CardOwnerNameInput onChange={handleOwnerName} />
+        <CardOwnerNameInput nameLength={ownerName.length} onChange={handleOwnerName} />
         <CardSecurityCodeInput onChange={handleSecurityCode} />
         <CardPasswordInput onChange={handlePassword} />
         <ButtonBox>

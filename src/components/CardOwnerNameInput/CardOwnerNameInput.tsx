@@ -1,13 +1,18 @@
+import styled from "styled-components";
 import { InputContainer, Input, Label } from "../common";
 
 type CardOwnerNameInputProp = {
+  nameLength: number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const CardOwnerNameInput = ({ onChange }: CardOwnerNameInputProp) => {
+const CardOwnerNameInput = ({ onChange, nameLength }: CardOwnerNameInputProp) => {
   return (
     <Label>
-      카드 소유자 이름(선택)
+      <Div>
+        <span>카드 소유자 이름(선택)</span>
+        <span>{nameLength} / 30</span>
+      </Div>
       <InputContainer width="318px">
         <Input
           width="100%"
@@ -22,5 +27,10 @@ const CardOwnerNameInput = ({ onChange }: CardOwnerNameInputProp) => {
     </Label>
   );
 };
+
+const Div = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 export default CardOwnerNameInput;

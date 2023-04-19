@@ -9,6 +9,6 @@ export default {
 export const Default = () => (
   <>
     <GlobalStyle />
-    <CardOwnerNameInput onChange={() => {}}></CardOwnerNameInput>
+    <CardOwnerNameInput nameLength={0} onChange={() => {}}></CardOwnerNameInput>
   </>
 );
