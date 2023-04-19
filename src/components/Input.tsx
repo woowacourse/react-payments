@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Input = styled.input`
-  width: ${(props) => props.about}px;
+  width: ${(props) => props.width}px;
   height: 14px;
 
   display: flex;

@@ -26,7 +26,7 @@
   - [x] UI
   - [ ] 숫자가 아닌 값이 입력 된 경우 에러 발생
   - [x] 뒤 8자리는 `type="password"`로 지정
-  - [ ] 4자리씩 입력 받는 `input` 4개로 구성, 이전 `input`에 4자리 입력 완료시 다음 `input`으로 focus 이동
+  - [x] 4자리씩 입력 받는 `input` 4개로 구성, 이전 `input`에 4자리 입력 완료시 다음 `input`으로 focus 이동
 - [ ] ExpirationDateInput 컴포넌트
   - [x] UI
   - [ ] 한자리 숫자 입력시 자동으로 앞에 `0`추가

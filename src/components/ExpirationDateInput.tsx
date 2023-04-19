@@ -4,9 +4,21 @@ import { Input } from './Input';
 export function ExpirationDateInput() {
   return (
     <InputWrapper width={137}>
-      <Input about={'24'} minLength={2} maxLength={2} required />
+      <Input
+        width={'24'}
+        minLength={2}
+        maxLength={2}
+        required
+        inputMode="numeric"
+      />
       &nbsp;/&nbsp;
-      <Input about={'24'} minLength={2} maxLength={2} required />
+      <Input
+        width={'24'}
+        minLength={2}
+        maxLength={2}
+        required
+        inputMode="numeric"
+      />
     </InputWrapper>
   );
 }
