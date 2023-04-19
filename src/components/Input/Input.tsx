@@ -3,11 +3,11 @@ import { InputProps } from '../../types/props';
 import { useEffect, useRef } from 'react';
 
 const Input = (props: InputProps) => {
-  const { name, value, onChange, width, type, placeholder } = props;
+  const { value, onChange, width, type, name, placeholder, maxLength } = props;
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (value.length >= 2) {
+    if (value.length >= maxLength) {
       inputRef.current?.blur();
       const nextInput = inputRef.current?.nextElementSibling;
       if (nextInput && nextInput instanceof HTMLElement) {
@@ -25,6 +25,7 @@ const Input = (props: InputProps) => {
       type={type}
       placeholder={placeholder}
       ref={inputRef}
+      maxLength={maxLength}
     />
   );
 };
