@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import * as T from 'types';
 import * as S from './style';
@@ -33,17 +34,19 @@ function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: Credi
   return (
     <S.CreditCardLayout isVaild={isVaild()}>
       <S.CreditCardICChip />
-      <S.CreditCardNumber>
-        {convertSecuredCreditCard(number).map((num) => <div>{num}</div>)}
-      </S.CreditCardNumber>
-      <S.CreditCardConatiner>
-        <S.CreditCardBox>
-          {owner}
-        </S.CreditCardBox>
-        <S.CreditCardBox>
-          {expiry}
-        </S.CreditCardBox>
-      </S.CreditCardConatiner>
+      <S.Booooxx>
+        <S.CreditCardNumber>
+          {convertSecuredCreditCard(number).map((num, idx) => <div key={idx}>{num}</div>)}
+        </S.CreditCardNumber>
+        <S.CreditCardConatiner>
+          <S.CreditCardBox>
+            {owner}
+          </S.CreditCardBox>
+          <S.CreditCardBox>
+            {expiry}
+          </S.CreditCardBox>
+        </S.CreditCardConatiner>
+      </S.Booooxx>
     </S.CreditCardLayout>
   );
 }

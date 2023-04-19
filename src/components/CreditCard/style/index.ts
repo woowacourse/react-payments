@@ -33,8 +33,14 @@ export const CreditCardICChip = styled.div`
     margin-bottom: 15px;
 `;
 
+export const Booooxx = styled.div`
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 12px;
+    align-items: center
+`;
+
 export const CreditCardConatiner = styled.div`
-    margin-top: 13px;
     display: flex;
     justify-content: space-between;
 `;
@@ -43,11 +49,11 @@ export const CreditCardNumber = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 10px;
-    justify-items: center;
+    justify-items: flex-start;
 `;
 
 export const CreditCardBox = styled.div`
     display: flex;
-    align-items: center;
+    align-items: start;
     letter-spacing: 2px;
 `;
