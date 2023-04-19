@@ -1,28 +1,50 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { InputWrapper } from './InputWrapper';
 import { Input } from './Input';
 import styled from 'styled-components';
 
-export function ExpirationDateInput() {
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
+interface Props {
+  monthInputRef: React.RefObject<HTMLInputElement>;
+  moveFocusToOwnerName: () => void;
+  expirationDate: {
+    month: string;
+    year: string;
+  };
+  setExpirationDate: React.Dispatch<
+    React.SetStateAction<{
+      month: string;
+      year: string;
+    }>
+  >;
+}
 
-  const monthInputRef = useRef<HTMLInputElement>(null);
+export function ExpirationDateInput({
+  monthInputRef,
+  moveFocusToOwnerName,
+  expirationDate,
+  setExpirationDate,
+}: Props) {
   const yearInputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    if (expirationDate.year.length === 2) moveFocusToOwnerName();
+  }, [expirationDate.year]);
+
   const handleBackspacePress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && year === '') {
+    if (e.key === 'Backspace' && expirationDate.year === '') {
       e.preventDefault();
       monthInputRef.current?.focus();
     }
   };
 
   const validateDate = () => {
-    if (!isValidDate(month, year)) {
+    if (!isValidDate(expirationDate.month, expirationDate.year)) {
       alert('유효한 날짜가 아닙니다.');
 
-      setMonth('');
-      setYear('');
+      setExpirationDate({
+        month: '',
+        year: '',
+      });
 
       monthInputRef.current?.focus();
     }
@@ -36,7 +58,7 @@ export function ExpirationDateInput() {
       <InputWrapper width={137}>
         <Input
           ref={monthInputRef}
-          value={month}
+          value={expirationDate.month}
           width={'30'}
           minLength={2}
           maxLength={2}
@@ -44,7 +66,10 @@ export function ExpirationDateInput() {
           inputMode="numeric"
           placeholder="MM"
           onChange={(e) => {
-            setMonth(e.target.value);
+            setExpirationDate({
+              ...expirationDate,
+              month: e.target.value,
+            });
 
             if (e.target.value.length === 2) yearInputRef.current?.focus();
           }}
@@ -52,7 +77,7 @@ export function ExpirationDateInput() {
         &nbsp;/&nbsp;
         <Input
           ref={yearInputRef}
-          value={year}
+          value={expirationDate.year}
           width={'30'}
           minLength={2}
           maxLength={2}
@@ -60,7 +85,10 @@ export function ExpirationDateInput() {
           inputMode="numeric"
           placeholder="YY"
           onChange={(e) => {
-            setYear(e.target.value);
+            setExpirationDate({
+              ...expirationDate,
+              year: e.target.value,
+            });
           }}
           onKeyDown={handleBackspacePress}
           onBlur={validateDate}

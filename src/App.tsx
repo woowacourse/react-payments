@@ -1,11 +1,9 @@
-import { CardNumberInput } from './components/input/CardNumberInput';
-import { ExpirationDateInput } from './components/input/ExpirationDateInput';
+import { AddNewCardForm } from './components/AddNewCardForm';
 
 function App() {
   return (
     <div className="App">
-      <CardNumberInput />
-      <ExpirationDateInput />
+      <AddNewCardForm />
     </div>
   );
 }

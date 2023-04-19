@@ -1,12 +1,24 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { InputWrapper } from './InputWrapper';
 import { Input } from './Input';
 import styled from 'styled-components';
 
-export function SecurityCodeInput() {
-  const [securityCode, setSecurityCode] = useState('');
+interface Props {
+  securityCodeInputRef: React.RefObject<HTMLInputElement>;
+  moveFocusToPassword: () => void;
+  securityCode: string;
+  setSecurityCode: React.Dispatch<React.SetStateAction<string>>;
+}
 
-  const securityCodeInputRef = useRef<HTMLInputElement>(null);
+export function SecurityCodeInput({
+  securityCodeInputRef,
+  moveFocusToPassword,
+  securityCode,
+  setSecurityCode,
+}: Props) {
+  useEffect(() => {
+    if (securityCode.length === 3) moveFocusToPassword();
+  }, [securityCode]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isNumeric(e.target.value)) {

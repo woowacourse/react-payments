@@ -1,18 +1,35 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components';
 import { InputWrapper } from './InputWrapper';
 import { Input } from './Input';
 
-export const PasswordInput = () => {
-  const [firstNumber, setFirstNumber] = useState('');
-  const [secondNumber, setSecondNumber] = useState('');
-  const firstInputRef = useRef<HTMLInputElement>(null);
+interface Props {
+  passwordInputRef: React.RefObject<HTMLInputElement>;
+  activateNextButton: () => void;
+  password: {
+    firstPassword: string;
+    secondPassword: string;
+  };
+  setPassword: React.Dispatch<
+    React.SetStateAction<{
+      firstPassword: string;
+      secondPassword: string;
+    }>
+  >;
+}
+
+export const PasswordInput = ({
+  passwordInputRef,
+  activateNextButton,
+  password,
+  setPassword,
+}: Props) => {
   const secondInputRef = useRef<HTMLInputElement>(null);
 
   const handleBackspacePress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Backspace' && secondNumber === '') {
+    if (e.key === 'Backspace' && password.secondPassword === '') {
       e.preventDefault();
-      firstInputRef.current?.focus();
+      passwordInputRef.current?.focus();
     }
   };
 
@@ -22,10 +39,12 @@ export const PasswordInput = () => {
 
       alert('유효한 비밀번호가 아닙니다.');
       e.target.value = '';
-      setFirstNumber('');
-      setSecondNumber('');
+      setPassword({
+        firstPassword: '',
+        secondPassword: '',
+      });
 
-      firstInputRef.current?.focus();
+      passwordInputRef.current?.focus();
     }
   };
 
@@ -37,8 +56,8 @@ export const PasswordInput = () => {
       <Style.Wrapper>
         <InputWrapper width={43}>
           <Input
-            ref={firstInputRef}
-            value={firstNumber}
+            ref={passwordInputRef}
+            value={password.firstPassword}
             width={43}
             maxLength={1}
             type="password"
@@ -46,7 +65,12 @@ export const PasswordInput = () => {
             required
             onChange={(e) => {
               validatePassword(e);
-              setFirstNumber(e.target.value);
+
+              setPassword({
+                ...password,
+                firstPassword: e.target.value,
+              });
+
               if (e.target.value.length === 1) secondInputRef.current?.focus();
             }}
             placeholder="•"
@@ -55,7 +79,7 @@ export const PasswordInput = () => {
         <InputWrapper width={43}>
           <Input
             ref={secondInputRef}
-            value={secondNumber}
+            value={password.secondPassword}
             width={43}
             maxLength={1}
             type="password"
@@ -63,7 +87,13 @@ export const PasswordInput = () => {
             required
             onChange={(e) => {
               validatePassword(e);
-              setSecondNumber(e.target.value);
+
+              setPassword({
+                ...password,
+                secondPassword: e.target.value,
+              });
+
+              if (e.target.value) activateNextButton();
             }}
             onKeyDown={handleBackspacePress}
             placeholder="•"

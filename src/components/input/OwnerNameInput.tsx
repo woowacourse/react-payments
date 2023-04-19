@@ -1,10 +1,20 @@
-import { useState } from 'react';
 import { InputWrapper } from './InputWrapper';
 import { Input } from './Input';
 import styled from 'styled-components';
 
-export function OwnerNameInput() {
-  const [ownerName, setOwnerName] = useState('');
+interface Props {
+  ownerNameInputRef: React.RefObject<HTMLInputElement>;
+  moveFocusToSecurityCode: () => void;
+  ownerName: string;
+  setOwnerName: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export function OwnerNameInput({
+  ownerNameInputRef,
+  moveFocusToSecurityCode,
+  ownerName,
+  setOwnerName,
+}: Props) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!isValidName(e.target.value)) {
       alert('유효한 이름이 아닙니다.');
@@ -23,12 +33,16 @@ export function OwnerNameInput() {
       </Style.Label>
       <InputWrapper width={318}>
         <Input
+          ref={ownerNameInputRef}
           value={ownerName}
           width={'318'}
           minLength={1}
           maxLength={30}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           onChange={handleInputChange}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') moveFocusToSecurityCode();
+          }}
         />
       </InputWrapper>
     </>

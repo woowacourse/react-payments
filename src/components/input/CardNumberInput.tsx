@@ -3,16 +3,31 @@ import { InputWrapper } from './InputWrapper';
 import { Input } from './Input';
 import styled from 'styled-components';
 
+interface Props {
+  moveFocusToExpirationDate: () => void;
+  cardNumber: {
+    0: string;
+    1: string;
+    2: string;
+    3: string;
+  };
+  setCardNumber: React.Dispatch<
+    React.SetStateAction<{
+      0: string;
+      1: string;
+      2: string;
+      3: string;
+    }>
+  >;
+}
+
 const HYPHEN = styled.span``;
 
-export function CardNumberInput() {
-  const [cardNumber, setCardNumber] = useState({
-    0: '',
-    1: '',
-    2: '',
-    3: '',
-  });
-
+export function CardNumberInput({
+  moveFocusToExpirationDate,
+  cardNumber,
+  setCardNumber,
+}: Props) {
   const firstInputRef = useRef<HTMLInputElement>(null);
   const secondInputRef = useRef<HTMLInputElement>(null);
   const thirdInputRef = useRef<HTMLInputElement>(null);
@@ -142,6 +157,7 @@ export function CardNumberInput() {
               ...cardNumber,
               3: e.target.value,
             });
+            if (e.target.value.length === 4) moveFocusToExpirationDate();
           }}
           onKeyDown={(e) => {
             if (e.key === 'Backspace' && cardNumber[3] === '') {

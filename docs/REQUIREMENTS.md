@@ -1,12 +1,12 @@
 ## 기능 목록
 
-- [ ] Card 컴포넌트
-  - [ ] UI
-  - [ ] 등록된 카드 정보를 보여준다
+- [x] CardViewer 컴포넌트
+  - [x] UI
+  - [x] 등록된 카드 정보를 보여준다
 
 ### 보유 카드 목록 페이지
 
-- [ ] CardViewer 컴포넌트
+- [ ] CardList 컴포넌트
   - [ ] UI
   - [ ] 등록일자 기준 내림차순 정렬 (sort 함수 사용하거나 저장할 때 unshift 함수로 배열 앞에 추가하기)
 - [ ] AddNewCardButton 컴포넌트
