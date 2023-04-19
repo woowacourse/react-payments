@@ -1,7 +1,7 @@
+import { Input } from 'components/common';
 import { ChangeEventHandler, useRef, useState } from 'react';
-import Input from 'components/common/Input/Input';
 
-function PasswordInput() {
+export function PasswordInput() {
   const firstDigitRef = useRef<HTMLInputElement>(null);
   const secondDigitRef = useRef<HTMLInputElement>(null);
 
@@ -51,5 +51,3 @@ function PasswordInput() {
     </>
   );
 }
-
-export default PasswordInput;

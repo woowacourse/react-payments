@@ -1,5 +1,5 @@
 import { StoryFn } from '@storybook/react';
-import ExpirationDateInput from './ExpirationDateInput';
+import { ExpirationDateInput } from './ExpirationDateInput';
 
 export default {
   title: 'ExpirationDateInput',

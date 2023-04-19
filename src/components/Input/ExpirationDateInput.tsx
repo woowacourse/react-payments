@@ -1,7 +1,7 @@
+import { Input } from 'components/common';
 import { ChangeEventHandler, useRef, useState } from 'react';
-import Input from 'components/common/Input/Input';
 
-function ExpirationDateInput() {
+export function ExpirationDateInput() {
   const monthRef = useRef<HTMLInputElement>(null);
   const yearRef = useRef<HTMLInputElement>(null);
 
@@ -53,5 +53,3 @@ function ExpirationDateInput() {
     </>
   );
 }
-
-export default ExpirationDateInput;

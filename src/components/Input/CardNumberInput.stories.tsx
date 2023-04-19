@@ -1,5 +1,5 @@
 import { StoryFn } from '@storybook/react';
-import CardNumberInput from './CardNumberInput';
+import { CardNumberInput } from './CardNumberInput';
 
 export default {
   title: 'CardNumberInput',
