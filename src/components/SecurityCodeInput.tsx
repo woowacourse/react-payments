@@ -17,7 +17,9 @@ const SecurityCodeInput = () => {
 
   return (
     <>
-      <S.Label htmlFor="code">보안 코드&#40;CVC/CVV&#41;</S.Label>
+      <label className="label-text" htmlFor="code">
+        보안 코드&#40;CVC/CVV&#41;
+      </label>
       <S.Wrapper>
         <S.Input
           type="password"
@@ -40,14 +42,10 @@ const SecurityCodeInput = () => {
 };
 
 const S = {
-  Label: styled.label`
-    color: var(--label-color);
-  `,
-
   Wrapper: styled.div`
     display: flex;
     align-items: center;
-    margin-top: 14px;
+    margin-top: 12px;
   `,
 
   Input: styled.input`
@@ -57,6 +55,7 @@ const S = {
     padding: 0 28px;
     background: var(--input-background);
     border-radius: 8px;
+    font-size: 14px;
     text-align: center;
   `,
 
@@ -102,7 +101,7 @@ const S = {
   Caption: styled.p<{ codeLength: number }>`
     color: var(--caption-color);
     font-size: 12px;
-    margin: 10px 0 20px 4px;
+    margin: 8px 0 16px 4px;
     visibility: ${({ codeLength }) =>
       codeLength === 3 && `${HIDDEN_ELEMENT_STYLE}`};
   `,

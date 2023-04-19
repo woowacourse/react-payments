@@ -31,7 +31,9 @@ const ExpirationDateInput = () => {
 
   return (
     <>
-      <S.Label htmlFor="date-label">만료일</S.Label>
+      <label className="label-text" htmlFor="date-label">
+        만료일
+      </label>
       <S.InputBox>
         <S.Input
           type="text"
@@ -68,16 +70,12 @@ const ExpirationDateInput = () => {
 };
 
 const S = {
-  Label: styled.label`
-    color: var(--label-color);
-  `,
-
   InputBox: styled.div`
     display: flex;
     justify-content: center;
     width: 40vw;
     height: 48px;
-    margin-top: 14px;
+    margin-top: 12px;
     background: var(--input-background);
     border-radius: 8px;
   `,
@@ -87,6 +85,7 @@ const S = {
     width: 12vw;
     margin: 0 2.2vw;
     text-align: center;
+    font-size: 14px;
   `,
 
   Hyphen: styled.p<{ month: string }>`
@@ -99,7 +98,7 @@ const S = {
   Caption: styled.p<{ date: string[] }>`
     color: var(--caption-color);
     font-size: 12px;
-    margin: 10px 0 20px 4px;
+    margin: 8px 0 16px 4px;
     visibility: ${({ date }) =>
       date.join("").length === 4 && `${HIDDEN_ELEMENT_STYLE}`};
   `,

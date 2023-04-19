@@ -30,7 +30,9 @@ const CardNumberInput = () => {
 
   return (
     <>
-      <S.Label htmlFor="card-label">카드 번호</S.Label>
+      <label className="label-text" htmlFor="card-label">
+        카드 번호
+      </label>
       <S.InputBox>
         <S.Input
           type="text"
@@ -94,24 +96,21 @@ const CardNumberInput = () => {
 };
 
 const S = {
-  Label: styled.label`
-    color: var(--label-color);
-  `,
-
   InputBox: styled.div`
     display: flex;
     justify-content: center;
     width: 88vw;
     height: 48px;
-    margin-top: 14px;
+    margin-top: 12px;
     background: var(--input-background);
     border-radius: 8px;
   `,
 
   Input: styled.input`
     background: var(--input-background);
-    width: 16vw;
+    width: 14vw;
     margin: 0 2.2vw;
+    font-size: 14px;
     text-align: center;
   `,
 
@@ -125,7 +124,7 @@ const S = {
   Caption: styled.p<{ cardNumbers: string[] }>`
     color: var(--caption-color);
     font-size: 12px;
-    margin: 10px 0 20px 4px;
+    margin: 8px 0 16px 4px;
     visibility: ${({ cardNumbers }) =>
       cardNumbers.join("").length === 16 && `${HIDDEN_ELEMENT_STYLE}`};
   `,

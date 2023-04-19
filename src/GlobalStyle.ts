@@ -35,6 +35,12 @@ export const GlobalStyle = createGlobalStyle`
     justify-content: center;
   }
 
+  .label-text {
+    color: var(--label-color);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
   // reset.css
   /* http://meyerweb.com/eric/tools/css/reset/ 
     v2.0 | 20110126

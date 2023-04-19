@@ -20,7 +20,9 @@ const NameInput = () => {
   return (
     <>
       <S.Wrapper>
-        <S.Label htmlFor="name">카드 소유자 이름&#40;선택&#41;</S.Label>
+        <label className="label-text" htmlFor="name">
+          카드 소유자 이름&#40;선택&#41;
+        </label>
         <p>{name.length}/30</p>
       </S.Wrapper>
       <S.Input
@@ -32,22 +34,18 @@ const NameInput = () => {
         onChange={handleName}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
       />
-      <S.Caption>영문 이름을 30자 이하로 입력해 주세요.</S.Caption>
     </>
   );
 };
 
 const S = {
-  Label: styled.label`
-    color: var(--label-color);
-  `,
-
   Wrapper: styled.div`
     display: flex;
     justify-content: space-between;
 
     & p {
       color: var(--label-color);
+      font-size: 12px;
     }
   `,
 
@@ -55,16 +53,11 @@ const S = {
     display: block;
     width: 88vw;
     height: 48px;
-    margin-top: 14px;
+    margin: 10px 0 36px;
     padding: 0 28px;
+    font-size: 14px;
     background: var(--input-background);
     border-radius: 8px;
-  `,
-
-  Caption: styled.p`
-    color: var(--gray-color-400);
-    font-size: 12px;
-    margin: 10px 0 20px 4px;
   `,
 };
 

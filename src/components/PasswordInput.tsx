@@ -28,7 +28,9 @@ const PasswordInput = () => {
 
   return (
     <>
-      <S.Label htmlFor="password-label">카드 비밀번호</S.Label>
+      <label className="label-text" htmlFor="password-label">
+        카드 비밀번호
+      </label>
       <S.InputBox>
         <S.Input
           type="text"
@@ -66,20 +68,17 @@ const PasswordInput = () => {
 };
 
 const S = {
-  Label: styled.label`
-    color: var(--label-color);
-  `,
-
   InputBox: styled.div`
     display: flex;
     height: 48px;
-    margin-top: 14px;
+    margin-top: 12px;
   `,
 
   Input: styled.input`
     background: var(--input-background);
     width: 12vw;
     margin-right: 2.2vw;
+    font-size: 14px;
     text-align: center;
     border-radius: 8px;
   `,
@@ -87,7 +86,7 @@ const S = {
   HiddenPassword: styled.p`
     width: 12vw;
     margin-right: 2.2vw;
-    font-size: 32px;
+    font-size: 30px;
     text-align: center;
     line-height: 48px;
     border-radius: 8px;
@@ -96,7 +95,7 @@ const S = {
   Caption: styled.p<{ password: string[] }>`
     color: var(--caption-color);
     font-size: 12px;
-    margin: 10px 0 20px 4px;
+    margin: 8px 0 16px 4px;
     visibility: ${({ password }) =>
       password.join("").length === 2 && `${HIDDEN_ELEMENT_STYLE}`};
   `,
