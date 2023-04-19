@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, {
+  ForwardedRef,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import Input from "./common/Input";
 import styled, { css } from "styled-components";
 import FormLabel from "./common/FormLabel";
 import ErrorSpan from "./common/ErrorSpan";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 
-interface CardNumberObj {
+export interface CardNumberObj {
   first: string;
   second: string;
   third: string;
   fourth: string;
 }
 
-function CardNumber() {
+interface Props {}
+
+export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
   const [cardNumber, setCardNumber] = useState({
     first: "",
     second: "",
@@ -57,7 +65,7 @@ function CardNumber() {
   return (
     <div>
       <FormLabel>카드 번호</FormLabel>
-      <CardNumberInputContainer>
+      <CardNumberInputContainer ref={ref}>
         <Input
           data-order="first"
           value={cardNumber["first"]}
@@ -85,6 +93,7 @@ function CardNumber() {
           customInputStyle={CardNumberInput}
           inputmode="numeric"
           type={"password"}
+          placeholder="●●●●"
         />
         <p>-</p>
 
@@ -96,14 +105,13 @@ function CardNumber() {
           customInputStyle={CardNumberInput}
           inputmode="numeric"
           type={"password"}
+          placeholder="●●●●"
         />
       </CardNumberInputContainer>
       {cardError?.isError && <ErrorSpan>{cardError?.message}</ErrorSpan>}
     </div>
   );
-}
-
-export default CardNumber;
+});
 
 const CardNumberInputContainer = styled.div`
   display: flex;

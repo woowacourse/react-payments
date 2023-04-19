@@ -46,6 +46,7 @@ function ExpireDate() {
         onChange={expireDateChange}
         maxLength={5}
         customInputStyle={ExpireDateInput}
+        placeholder="MM / YY"
       />
       {expireError && <ErrorSpan>{"유효한 만료일이 아닙니다."}</ErrorSpan>}
     </ExpireDateContainer>

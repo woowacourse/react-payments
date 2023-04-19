@@ -5,6 +5,7 @@ interface Props extends StyleInputProps {
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   maxLength?: number;
+  placeholder?: string;
   type?: string;
   inputmode?:
     | "text"
@@ -22,12 +23,13 @@ interface StyleInputProps {
   customInputStyle?: CSSProp;
 }
 
-function Input({ value, onChange, inputmode, ...props }: Props) {
+function Input({ value, placeholder, onChange, inputmode, ...props }: Props) {
   return (
     <InputStyle
       value={value}
       onChange={onChange}
       inputMode={inputmode ?? "none"}
+      placeholder={placeholder}
       {...props}
     />
   );
@@ -36,7 +38,7 @@ function Input({ value, onChange, inputmode, ...props }: Props) {
 export default Input;
 
 const InputStyle = styled.input<StyleInputProps>`
-  width: ${(props) => props.width ?? "318px"};
+  /* width: ${(props) => props.width ?? "318px"}; */
   height: 45px;
 
   background-color: #ecebf1;

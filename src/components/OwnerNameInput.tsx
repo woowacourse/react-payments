@@ -6,6 +6,7 @@ import {
   CONTINUOUS_EMPTY_REGEXP,
   ONLY_ENG_AND_EMPTY_REGEXP,
 } from "src/utils/regexp";
+import styled, { css } from "styled-components";
 
 function OwnerNameInput() {
   const [ownerName, setOwnerName] = useState("");
@@ -53,15 +54,39 @@ function OwnerNameInput() {
   };
 
   return (
-    <div>
-      <div>
+    <OwnerNameInputContainer>
+      <LabelContainer>
         <FormLabel>카드 소유자 이름(선택)</FormLabel>
         <span>{`${ownerName.length} / 30`}</span>
-      </div>
-      <Input value={ownerName} onChange={ownerNameChange} />
+      </LabelContainer>
+      <Input
+        value={ownerName}
+        onChange={ownerNameChange}
+        customInputStyle={OwnerNameStyle}
+      />
       {error.isError && <ErrorSpan>{error.message}</ErrorSpan>}
-    </div>
+    </OwnerNameInputContainer>
   );
 }
 
 export default OwnerNameInput;
+
+const OwnerNameInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+`;
+
+const LabelContainer = styled.div`
+  display: flex;
+  width: 318px;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const OwnerNameStyle = css`
+  width: 318px;
+
+  font-size: 18px;
+  font-weight: 500;
+`;

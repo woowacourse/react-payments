@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FormLabel from "./common/FormLabel";
 import Input from "./common/Input";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
+import styled, { css } from "styled-components";
 
 function SecurityCode() {
   const [code, setCode] = useState("");
@@ -14,11 +15,30 @@ function SecurityCode() {
   };
 
   return (
-    <div>
+    <SecurityCodeContainer>
       <FormLabel>{"보안 코드(CVC/CVV)"}</FormLabel>
-      <Input value={code} onChange={codeChange} maxLength={3} type="password" />
-    </div>
+      <Input
+        value={code}
+        onChange={codeChange}
+        maxLength={3}
+        type="password"
+        customInputStyle={SecurityInput}
+      />
+    </SecurityCodeContainer>
   );
 }
 
 export default SecurityCode;
+
+const SecurityCodeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+`;
+
+const SecurityInput = css`
+  width: 84px;
+  letter-spacing: 7px;
+  text-align: center;
+  font-size: 28px;
+`;
