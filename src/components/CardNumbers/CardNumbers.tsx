@@ -15,6 +15,10 @@ interface RefType {
   [key: number]: React.RefObject<HTMLInputElement>;
 }
 
+interface TypingType {
+  [key: number]: string;
+}
+
 const CardNumbers = () => {
   const refObject: RefType = {
     0: useRef<HTMLInputElement>(null),
@@ -23,7 +27,7 @@ const CardNumbers = () => {
     3: useRef<HTMLInputElement>(null),
   };
 
-  const [typing, setTyping] = useState<any>({
+  const [typing, setTyping] = useState<TypingType>({
     0: '',
     1: '',
     2: '',
