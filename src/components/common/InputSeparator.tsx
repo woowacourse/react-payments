@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-const InputSeparator = styled.span`
+const InputSeparator = styled.span<{ isActive?: boolean }>`
+  visibility: ${({ isActive }) => (isActive ? 'visible' : 'hidden')};
   display: flex;
   justify-content: center;
   align-items: center;

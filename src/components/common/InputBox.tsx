@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const InputBox = styled.div<{ width?: string }>`
+const InputBox = styled.div<{ width?: string; isError?: boolean }>`
   display: flex;
   height: 45px;
   width: ${({ width }) => width || '100%'};
@@ -9,6 +9,8 @@ const InputBox = styled.div<{ width?: string }>`
 
   box-sizing: border-box;
   background: #ecebf1;
+
+  border: ${({ isError }) => (isError ? '1px solid #ec2f1b' : 'none')};
   border-radius: 7px;
 `;
 

@@ -37,7 +37,7 @@ const CardRegistrationPage = () => {
 const FormContainer = styled.section`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
   padding: 28px;
 `;
 
