@@ -1,0 +1,49 @@
+.container {
+  width: 213px;
+  height: 133px;
+  margin: auto;
+
+  background: var(--card-color);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+
+  border-radius: 5px;
+  font-size: small;
+}
+
+.chip {
+  position: relative;
+  width: 40px;
+  height: 26px;
+  left: 14px;
+  top: 47px;
+
+  background: #cbba64;
+  border-radius: 4px;
+}
+
+.number {
+  color: white;
+
+  width: 90%;
+  position: relative;
+  top: 55px;
+  left: 10px;
+
+  letter-spacing: 3px;
+}
+
+.name {
+  color: white;
+
+  position: relative;
+  top: 60px;
+  left: 10px;
+}
+
+.expireDate {
+  color: white;
+
+  position: relative;
+  top: 60px;
+  left: 118px;
+}
