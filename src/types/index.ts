@@ -1,16 +1,18 @@
+export type CardNumber = {
+  firstGroup: string;
+  secondGroup: string;
+  thirdGroup: string;
+  fourthGroup: string;
+};
+
+export type CardExpirationDate = {
+  month: string;
+  year: string;
+};
+
 export type Card = {
-  number: {
-    firstGroup: string;
-    secondGroup: string;
-    thirdGroup: string;
-    fourthGroup: string;
-  };
-
-  expirationDate: {
-    month: string;
-    year: string;
-  };
-
+  number: CardNumber;
+  expirationDate: CardExpirationDate;
   ownerName: string;
   securityCode: string;
   password: string;
