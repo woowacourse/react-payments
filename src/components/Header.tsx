@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Header = ({ title }: { title: string }) => {
   return (
     <StyledHeader>
-      <StyledLeftArrowButton />
+      <StyledLeftArrowButton title={title} />
       <StyledHeaderTitle>{title}</StyledHeaderTitle>
     </StyledHeader>
   );
