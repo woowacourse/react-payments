@@ -21,7 +21,10 @@ export function CardPassword() {
             <Input
               handleChange={handleChange}
               handleError={() =>
-                handleError(original.join(""), validation.isNumber)
+                handleError(
+                  Object.values(password).join(""),
+                  validation.isNumber
+                )
               }
               name={cardInput}
               maxLength={MAX_LENGTH.PASSWORD}
