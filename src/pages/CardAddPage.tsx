@@ -1,21 +1,32 @@
-import Button from '../components/common/Button/Button';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { Card } from '../types';
 import Header from '../components/common/Header/Header';
-import Input from '../components/common/Input/Input';
+import CardItem from '../components/CardItem/CardItem';
+import CardAddForm from '../components/CardAddForm/CardAddForm';
 
-function CardAddPage() {
+interface CardAddPageProps {
+  addCard: Dispatch<SetStateAction<Card[]>>;
+}
+
+const initialCardInformation: Card = {
+  number: ['', '', '', ''],
+  expirationDate: {
+    month: '',
+    year: '',
+  },
+  ownerName: '',
+  securityCode: '',
+  password: ['', ''],
+};
+
+function CardAddPage({ addCard }: CardAddPageProps) {
+  const [cardInformation, setCardInformation] = useState(initialCardInformation);
+
   return (
     <>
       <Header content="카드 추가" isOverlayPage={true} />
-      <Input
-        label="카드 소유자 이름"
-        type="text"
-        name="owner-name"
-        id="owner-name"
-        placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-      />
-      <Button onClick={() => console.log('clicked')} className="submit-button" primary={true}>
-        완료
-      </Button>
+      <CardItem className="mg-b-24" information={cardInformation} />
+      <CardAddForm onChange={setCardInformation} onSubmit={addCard} />
     </>
   );
 }
