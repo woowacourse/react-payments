@@ -10,8 +10,6 @@ const St = {
     width: 280px;
     height: 160px;
 
-    margin-left: 13%;
-
     background: #333333;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
@@ -19,8 +17,8 @@ const St = {
     padding: 40px 20px 15px 20px;
   `,
   ICDiv: styled.div`
-    width: 22%;
-    height: 39%;
+    width: 53px;
+    height: 36px;
 
     background: #cbba64;
     border-radius: 4px;
@@ -29,6 +27,8 @@ const St = {
   CardNumberSection: styled.section`
     display: flex;
     gap: 12px;
+
+    height: 25px;
   `,
 
   CardNumber: styled.h2`
@@ -41,6 +41,8 @@ const St = {
   CardInfoSection: styled.section`
     display: flex;
     justify-content: space-between;
+
+    height: 21px;
   `,
 
   CardInfo: styled.h2`

@@ -16,16 +16,16 @@ const St = {
   `,
 
   Input: styled.input`
-    width: 95%;
+    width: 100%;
 
     border: none;
 
     text-align: center;
     background: inherit;
-    font-size: 18px;
+    font-size: 15px;
   `,
 
-  Title: styled.div`
+  Title: styled.h1`
     display: flex;
     justify-content: space-between;
     padding-bottom: 10px;

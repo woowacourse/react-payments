@@ -12,7 +12,7 @@ const St = {
     justify-content: center;
     gap: 5px;
 
-    width: 10%;
+    width: 17%;
     height: 7vh;
 
     border-radius: 7px;
@@ -30,7 +30,7 @@ const St = {
     font-size: 30px;
   `,
 
-  Title: styled.div`
+  Title: styled.h1`
     padding-bottom: 10px;
 
     font: 500 14px/16px "Roboto";
@@ -42,7 +42,7 @@ const St = {
 
   LastDigits: styled.div`
     text-align: center;
-    width: 8%;
+    width: 15%;
     font-size: 30px;
   `,
 };

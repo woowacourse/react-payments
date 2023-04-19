@@ -1,16 +1,5 @@
 import { createGlobalStyle } from "styled-components";
 
-export const FadeInUp = `
-@keyframes fadeInUp {
-  from {
-      transform: translate3d(0, 100%, 0);
-  }
-  to {
-      transform: translateZ(0);
-  }
-}
-`;
-
 const GlobalStyle = createGlobalStyle`
 html,
 body,
@@ -26,6 +15,7 @@ h4,
 h5,
 h6,
 p,
+button,
 blockquote,
 pre,
 a,
@@ -63,6 +53,7 @@ ul,
 li,
 fieldset,
 form,
+input,
 label,
 legend,
 table,

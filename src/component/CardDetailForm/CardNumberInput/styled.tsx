@@ -16,7 +16,7 @@ const St = {
   `,
 
   Input: styled.input`
-    width: 15%;
+    width: 20%;
 
     border: none;
 
@@ -26,7 +26,7 @@ const St = {
     letter-spacing: 2px;
   `,
 
-  Title: styled.div`
+  Title: styled.h1`
     padding-bottom: 10px;
 
     font: 500 14px/16px "Roboto";

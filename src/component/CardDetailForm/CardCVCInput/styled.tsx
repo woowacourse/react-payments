@@ -12,7 +12,7 @@ const St = {
     justify-content: center;
     gap: 5px;
 
-    width: 20%;
+    width: 30%;
     height: 7vh;
 
     border-radius: 7px;
@@ -31,7 +31,7 @@ const St = {
     letter-spacing: 4px;
   `,
 
-  Title: styled.div`
+  Title: styled.h1`
     padding-bottom: 10px;
 
     font: 500 14px/16px "Roboto";
