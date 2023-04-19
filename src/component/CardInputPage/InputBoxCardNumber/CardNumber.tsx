@@ -1,8 +1,10 @@
 import { ChangeEvent } from "react";
 import { validateCardNumber } from "../../../validation/cardNumber";
+import Input from "../../common/Input";
 
 interface Props {
   setCardNumber?: React.Dispatch<React.SetStateAction<number[]>>;
+  setError?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // 각 인풋창에서 change event발생 시 일어나는 일들
@@ -16,25 +18,25 @@ export default function CardNumber(props: Props) {
 
   return (
     <>
-      <input
+      <Input
         type="number"
         inputMode="numeric"
         onChange={onChangeCardNumber}
         placeholder="X X X X"
       />
-      <input
+      <Input
         type="password"
         inputMode="numeric"
         onChange={onChangeCardNumber}
         placeholder="X X X X"
       />
-      <input
+      <Input
         type="password"
         inputMode="numeric"
         onChange={onChangeCardNumber}
         placeholder="X X X X"
       />
-      <input
+      <Input
         type="number"
         inputMode="numeric"
         onChange={onChangeCardNumber}
