@@ -1,4 +1,6 @@
 import React from 'react';
+import './InputCardPassword.css';
+
 export type InputCardPasswordProps = {
   value: string;
   onChange: (e: React.ChangeEvent) => void;
@@ -6,6 +8,7 @@ export type InputCardPasswordProps = {
   errorMessage: string;
   className: string;
   maxDataLength: number;
+  width: string;
 };
 
 const InputCardPassword = ({
@@ -14,10 +17,18 @@ const InputCardPassword = ({
   status,
   errorMessage,
   maxDataLength,
+  width,
 }: InputCardPasswordProps) => {
   return (
-    <div>
-      <input type="password" maxLength={maxDataLength} value={value} onChange={onChange} />
+    <div className="input-password-container">
+      <input
+        className="input-password"
+        type="password"
+        maxLength={maxDataLength}
+        value={value}
+        onChange={onChange}
+        style={{ width }}
+      />
       {status ? '' : <span>{errorMessage}</span>}
     </div>
   );
