@@ -1,5 +1,5 @@
 import CardLabel from '../CardLabel/CardLabel';
-import CardNumberInput from '../CardNumberInput/CardNumberInput';
+import CardNumberInput from '../CardInput/CardInput';
 import styled from 'styled-components';
 
 interface CardInformationProps {
