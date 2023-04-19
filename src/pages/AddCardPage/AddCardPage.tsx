@@ -7,6 +7,7 @@ import CardSecurityCodeInput from "../../components/CardSecurityCodeInput/CardSe
 import CardPasswordInput from "../../components/CardPasswordInput/CardPasswordInput";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Container } from "../../components/common";
 
 const AddCardPage = () => {
   return (
@@ -26,17 +27,6 @@ const AddCardPage = () => {
     </Container>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 19px;
-
-  padding: 26px 28px;
-
-  background-color: #fff;
-`;
 
 const Form = styled.form`
   display: flex;
