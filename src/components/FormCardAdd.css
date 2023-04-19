@@ -1,0 +1,10 @@
+.add-card-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+.add-card-submit {
+  display: flex;
+  flex-direction: row-reverse;
+}
