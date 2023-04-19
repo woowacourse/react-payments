@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  gap: 9px;
+}
+
+.card {
+  display: flex;
+  padding: 8px 12px;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 0 auto 0 auto;
+  background-color: var(--grey-500);
+  width: 208px;
+  height: 123px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 3px 3px 10px var(--grey-300);
+  font-size: 20px;
+}
+
+.chip {
+  width: 40px;
+  height: 26px;
+  background-color: var(--gold-color);
+  border-radius: 4px;
+}
+
+.word {
+  color: var(--grey-100);
+  font-size: 13px;
+}
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cardNumber {
+  color: var(--grey-100);
+  font-size: large;
+}
