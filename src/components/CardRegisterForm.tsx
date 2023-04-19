@@ -1,6 +1,7 @@
 import CardNumberInput from "./CardNumberInput";
 import ExpirationDateInput from "./ExpirationDateInput";
 import NameInput from "./NameInput";
+import PasswordInput from "./PasswordInput";
 import SecurityCodeInput from "./SecurityCodeInput";
 
 const CardRegisterForm = () => {
@@ -10,6 +11,7 @@ const CardRegisterForm = () => {
       <ExpirationDateInput />
       <NameInput />
       <SecurityCodeInput />
+      <PasswordInput />
     </form>
   );
 };
