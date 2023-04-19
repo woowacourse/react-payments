@@ -11,6 +11,11 @@ const Wrapper = styled.div`
   border-radius: 7px;
 `;
 
+const LabelContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const CardOwnerName = () => {
   const [ownerName, setOwnerName] = useState('');
   const cardOwnerNameRef = useRef<HTMLInputElement>(null);
@@ -26,10 +31,12 @@ const CardOwnerName = () => {
 
   return (
     <>
-      <CardLabel labelText="카드 소유자 이름(선택)" />
-      <CardLabel
-        labelText={`${cardOwnerNameRef.current?.value.length || 0} / 30`}
-      />
+      <LabelContainer>
+        <CardLabel labelText="카드 소유자 이름(선택)" />
+        <CardLabel
+          labelText={`${cardOwnerNameRef.current?.value.length || 0} / 30`}
+        />
+      </LabelContainer>
       <Wrapper>
         <CardInput
           type="text"

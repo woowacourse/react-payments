@@ -11,6 +11,22 @@ const Wrapper = styled.div`
   border-radius: 7px;
 `;
 
+const QuestionButton = styled.button`
+  width: 27px;
+  height: 27px;
+  margin-left: 12px;
+  border: 1px solid #969696;
+  color: #969696;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const SecurityCode = () => {
   const [securityCode, setSecurityCode] = useState('');
   const securityCodeRef = useRef<HTMLInputElement>(null);
@@ -26,17 +42,20 @@ const SecurityCode = () => {
   return (
     <>
       <CardLabel labelText="보안 코드(CVC/CVV)" />
-      <Wrapper>
-        <CardInput
-          type="password"
-          maxLength={3}
-          ref={securityCodeRef}
-          onChange={handleCardInputChange}
-          value={securityCode}
-          placeholder="•••"
-          required={true}
-        />
-      </Wrapper>
+      <InputWrapper>
+        <Wrapper>
+          <CardInput
+            type="password"
+            maxLength={3}
+            ref={securityCodeRef}
+            onChange={handleCardInputChange}
+            value={securityCode}
+            placeholder="•••"
+            required={true}
+          />
+        </Wrapper>
+        <QuestionButton>?</QuestionButton>
+      </InputWrapper>
     </>
   );
 };

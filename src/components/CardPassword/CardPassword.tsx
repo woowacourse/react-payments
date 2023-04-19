@@ -11,6 +11,21 @@ const Wrapper = styled.div`
   border-radius: 7px;
 `;
 
+const PasswordInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  > * {
+    width: 45px;
+    margin-right: 8px;
+  }
+`;
+
+const Pargraph = styled.p`
+  width: 45px;
+  text-align: center;
+`;
+
 interface RefType {
   [key: number]: React.RefObject<HTMLInputElement>;
 }
@@ -47,28 +62,34 @@ const CardPassword = () => {
   return (
     <>
       <CardLabel labelText="카드 비밀번호" />
-      <Wrapper>
-        <CardInput
-          type="password"
-          maxLength={1}
-          ref={refObject[0]}
-          onChange={handleCardInputChange}
-          value={password[0]}
-          order={0}
-          placeholder="•"
-          required={true}
-        />
-        <CardInput
-          type="password"
-          maxLength={1}
-          ref={refObject[1]}
-          onChange={handleCardInputChange}
-          value={password[1]}
-          order={1}
-          placeholder="•"
-          required={true}
-        />
-      </Wrapper>
+      <PasswordInputWrapper>
+        <Wrapper>
+          <CardInput
+            type="password"
+            maxLength={1}
+            ref={refObject[0]}
+            onChange={handleCardInputChange}
+            value={password[0]}
+            order={0}
+            placeholder="•"
+            required={true}
+          />
+        </Wrapper>
+        <Wrapper>
+          <CardInput
+            type="password"
+            maxLength={1}
+            ref={refObject[1]}
+            onChange={handleCardInputChange}
+            value={password[1]}
+            order={1}
+            placeholder="•"
+            required={true}
+          />
+        </Wrapper>
+        <Pargraph>•</Pargraph>
+        <Pargraph>•</Pargraph>
+      </PasswordInputWrapper>
     </>
   );
 };
