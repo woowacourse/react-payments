@@ -32,6 +32,10 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 19px;
+
+  padding: 26px 28px;
+
+  background-color: #fff;
 `;
 
 const Form = styled.form`

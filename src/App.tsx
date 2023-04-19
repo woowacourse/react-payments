@@ -1,11 +1,18 @@
 import styled from "styled-components";
 import GlobalStyle from "./styled/GlobalStyle";
+import AddCardPage from "./pages/AddCardPage/AddCardPage";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Layout></Layout>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<></>} />
+          <Route path="/addCard" element={<AddCardPage />} />
+        </Routes>
+      </Layout>
     </>
   );
 }
