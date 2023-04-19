@@ -1,22 +1,57 @@
-import React from 'react'
-import styled from 'styled-components';
-import { InputTitle } from './InputContainer';
+import { ChangeEvent } from "react";
+import styled from "styled-components";
+import { InputTitle } from "./InputField";
 
-export interface InputProps{
+type InputMode =
+  | "text"
+  | "search"
+  | "none"
+  | "tel"
+  | "url"
+  | "email"
+  | "numeric"
+  | "decimal";
+
+export interface InputProps {
   id?: InputTitle;
   type: string;
   placeholder?: string;
+  maxLength?: number;
+  onInput?: (event: ChangeEvent<HTMLInputElement>) => void;
+  inputMode?: InputMode;
+  textAlign?: string;
+  isNumber?: boolean;
 }
 
-const StyledInput = styled.input`
-  border:none;
-  background-color:#ECEBF1;
-  font-size:18px;
-  font-weight:500;
-`
+const StyledInput = styled.input<{ textAlign?: string }>`
+  border: none;
+  background-color: #ecebf1;
+  font-size: 18px;
+  font-weight: 500;
+  width: 100%;
+  text-align: ${(props) => props.textAlign};
+`;
 
-export default function Input({placeholder, type,id}:InputProps) {
+export default function Input({
+  inputMode = "text",
+  textAlign = "baseline",
+  isNumber,
+  ...rest
+}: InputProps) {
+  const onInput = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.currentTarget) return;
+    event.currentTarget.value = event.currentTarget.value.replace(
+      /[^0-9]/g,
+      ""
+    );
+  };
+  const defaultOnInput = (event: ChangeEvent<HTMLInputElement>) => {};
   return (
-    <StyledInput type={type} placeholder={placeholder} id={id} />
-  )
+    <StyledInput
+      textAlign={textAlign}
+      inputMode={inputMode}
+      onInput={isNumber ? onInput : defaultOnInput}
+      {...rest}
+    />
+  );
 }
