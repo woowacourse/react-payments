@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { SEPERATED_CARD_NUMBER_LENGTH } from "../constants";
+import { INPUT_MAX_LENGTH, SEPERATED_CARD_NUMBER_LENGTH } from "../constants";
 import CardInput from "./CardInput";
 
 const CardInputForm = () => {
@@ -61,14 +61,19 @@ const CardInputForm = () => {
       <CardInputWrapper>
         <label htmlFor="cardNumber">카드 번호</label>
         <CardInput
-          type="cardNumber"
+          id="cardNumber"
+          placeholder="카드 번호를 입력해 주세요."
+          value={cardNumber}
+          isSecured={false}
+          isAutoFocus={true}
+          isRequired={true}
+          maxLength={INPUT_MAX_LENGTH.CARD_NUMBER}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             handleCardNumberChanged(e);
           }}
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
             handleCardNumberKey(e);
           }}
-          value={cardNumber}
         />
         {/* <span>잘못됨</span> */}
       </CardInputWrapper>
@@ -76,36 +81,51 @@ const CardInputForm = () => {
       <CardInputWrapper>
         <label htmlFor="expiredDate">만료일</label>
         <CardInput
-          type="expiredDate"
+          id="expiredDate"
+          placeholder="MM / YY"
+          width="137px"
+          value={expiredDate}
+          isSecured={false}
+          isAutoFocus={false}
+          isRequired={true}
+          maxLength={INPUT_MAX_LENGTH.EXPIRED_DATE}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             handleExpiredDateChanged(e)
           }
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
             handleExpiredDateKey(e);
           }}
-          value={expiredDate}
         />
       </CardInputWrapper>
 
       <CardInputWrapper>
         <label htmlFor="ownerName">카드 소유자 이름 (선택)</label>
         <CardInput
-          type="ownerName"
+          id="ownerName"
+          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          value={ownerName}
+          isSecured={false}
+          isAutoFocus={false}
+          isRequired={false}
+          maxLength={INPUT_MAX_LENGTH.OWNER_NAME}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setOwnerName(e.target.value)
           }
-          value={ownerName}
         />
       </CardInputWrapper>
 
       <CardInputWrapper>
         <label htmlFor="cvc">보안 코드(CVC/CVV)</label>
         <CardInput
-          type="cvc"
+          id="cvc"
+          value={cvc}
+          isSecured={false}
+          isAutoFocus={false}
+          isRequired={true}
+          maxLength={INPUT_MAX_LENGTH.CVC}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCvc(e.target.value)
           }
-          value={cvc}
         />
       </CardInputWrapper>
 
@@ -113,22 +133,32 @@ const CardInputForm = () => {
         <label htmlFor="password">카드 비밀번호</label>
         <PasswordInputWrapper>
           <CardInput
-            type="password"
+            id="password"
+            width="84px"
+            value={password[0]}
+            isSecured={true}
+            isAutoFocus={false}
+            isRequired={true}
+            maxLength={INPUT_MAX_LENGTH.PASSWORD}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               const newPassword = [...password];
               newPassword[0] = e.target.value;
               setPassword(newPassword);
             }}
-            value={password[0]}
           />
           <CardInput
-            type="password"
+            id="password"
+            width="84px"
+            value={password[1]}
+            isSecured={true}
+            isAutoFocus={false}
+            isRequired={true}
+            maxLength={INPUT_MAX_LENGTH.PASSWORD}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               const newPassword = [...password];
               newPassword[1] = e.target.value;
               setPassword(newPassword);
             }}
-            value={password[1]}
           />
         </PasswordInputWrapper>
       </CardInputWrapper>
