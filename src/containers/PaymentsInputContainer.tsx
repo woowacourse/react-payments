@@ -63,6 +63,7 @@ function PaymentsInputContainer({ setCardInformation }: PaymentInputContainerPro
   const onChangeCardNumber = (e: ChangeEvent<HTMLInputElement>) => {
     const { target } = e;
     const index = target.getAttribute('data-index');
+    target.value = target.value.replace(/[^0-9]/g, '');
 
     setCardNumber(Number(index), target.value);
   };
@@ -70,12 +71,26 @@ function PaymentsInputContainer({ setCardInformation }: PaymentInputContainerPro
   const onChangeExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
     const { target } = e;
     const index = target.getAttribute('data-index');
+    target.value = target.value.replace(/[^0-9]/g, '');
 
     setExpirationDate(Number(index), target.value);
   };
 
   const onChangeOwner = (e: ChangeEvent<HTMLInputElement>) => {
-    setOwner(e.target.value);
+    const { target } = e;
+    target.value = target.value.replace(/[^a-z|A-Z|ㄱ-ㅎ|가-힣]/g, '');
+
+    setOwner(target.value);
+  };
+
+  const onChangeCVC = (e: ChangeEvent<HTMLInputElement>) => {
+    const { target } = e;
+    target.value = target.value.replace(/[^0-9]/g, '');
+  };
+
+  const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    const { target } = e;
+    target.value = target.value.replace(/[^0-9]/g, '');
   };
 
   return (
@@ -108,6 +123,7 @@ function PaymentsInputContainer({ setCardInformation }: PaymentInputContainerPro
       <PaymentsInput
         title="보안 코드(CVC/CVV)"
         inputInformationList={[{ type: 'password', isRequired: true, maxLength: 3, name: 'securityCode' }]}
+        onChange={onChangeCVC}
       />
       <PaymentsInput
         title="카드 비밀번호"
@@ -116,6 +132,7 @@ function PaymentsInputContainer({ setCardInformation }: PaymentInputContainerPro
           { type: 'password', isRequired: true, maxLength: 1, name: 'cardPassword' },
         ]}
         inputDivideLetter=""
+        onChange={onChangePassword}
       />
       <NextButton type="submit">다음</NextButton>
     </PaymentsForm>
