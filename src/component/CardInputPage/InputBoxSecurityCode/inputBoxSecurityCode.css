@@ -1,0 +1,31 @@
+/* .input-box-security-code {
+} */
+.input-box-security-code p:last-child {
+  margin-left: 2%;
+  color: red;
+  font-weight: bold;
+  visibility: hidden;
+}
+
+.input-box-security-code p:last-child.visible {
+  visibility: visible;
+}
+
+.input-security-code {
+  width: 23%;
+}
+
+.button-security-code {
+  border: 1px solid var(--security-code-button-border);
+  border-radius: 50%;
+  color: var(--security-code-button-text);
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+
+  width: 27px;
+  height: 27px;
+
+  font-size: 1.3rem;
+
+  margin-left: 3%;
+}
