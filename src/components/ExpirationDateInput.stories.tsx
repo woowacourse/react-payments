@@ -8,8 +8,5 @@ export default {
 
 const Template: StoryFn<{}> = (args: {}) => <ExpirationDateInput {...args} />;
 
-export const CardNumbersInput = Template.bind({});
-CardNumbersInput.args = {
-  type: 'text',
-  maxLength: 2,
-};
+export const Default = Template.bind({});
+Default.args = {};

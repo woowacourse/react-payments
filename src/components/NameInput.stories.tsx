@@ -8,5 +8,5 @@ export default {
 
 const Template: StoryFn<{}> = (args: {}) => <NameInput {...args} />;
 
-export const CardNumbersInput = Template.bind({});
-CardNumbersInput.args = {};
+export const Default = Template.bind({});
+Default.args = {};
