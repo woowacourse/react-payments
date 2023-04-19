@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useRef, useState } from 'react';
-import Input from './Input/Input';
+import Input from 'components/common/Input/Input';
 
 function PasswordInput() {
   const firstDigitRef = useRef<HTMLInputElement>(null);

@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useState } from 'react';
-import Input from './Input/Input';
+import Input from 'components/common/Input/Input';
 
 const NOT_ALPHABET_REGEX = /[^A-Za-z]/gi;
 
