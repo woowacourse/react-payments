@@ -16,6 +16,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "styled-components": "^5.3.9",
     "typescript": "*",
     "web-vitals": "^2.1.0"
   },
@@ -67,6 +68,7 @@
     "@storybook/preset-create-react-app": "^4.1.2",
     "@storybook/react": "^6.5.7",
     "@storybook/testing-library": "^0.0.11",
+    "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "babel-plugin-named-exports-order": "^0.0.2",
     "eslint": "^8.2.0",
