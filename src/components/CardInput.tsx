@@ -1,10 +1,12 @@
-import React, { ChangeEvent, Dispatch } from "react";
+import React from "react";
 import styled from "styled-components";
+import { MAX_LENGTH_CARD_NUMBER } from "../constants";
 
 interface CardInputType {
   type: "cardNumber" | "expiredDate" | "ownerName" | "cvc" | "password";
+  value: number | string | undefined;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value: number | undefined;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const CardInput = (props: CardInputType) => {
@@ -13,11 +15,12 @@ const CardInput = (props: CardInputType) => {
       return (
         <InputWrapper
           id={props.type}
-          placeholder="카드 번호를 입력해주세요."
           autoFocus
           required
           value={props.value}
+          maxLength={MAX_LENGTH_CARD_NUMBER}
           onChange={props.onChange}
+          onKeyDown={props.onKeyDown}
         />
       );
     case "expiredDate":
@@ -26,7 +29,11 @@ const CardInput = (props: CardInputType) => {
           id={props.type}
           placeholder="MM / YY"
           style={{ width: "137px" }}
+          value={props.value}
           required
+          maxLength={5}
+          onChange={props.onChange}
+          onKeyDown={props.onKeyDown}
         />
       );
     case "ownerName":
@@ -34,6 +41,9 @@ const CardInput = (props: CardInputType) => {
         <InputWrapper
           id={props.type}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          value={props.value}
+          maxLength={30}
+          onChange={props.onChange}
         />
       );
     case "cvc":
@@ -43,15 +53,20 @@ const CardInput = (props: CardInputType) => {
           type="password"
           style={{ width: "84px" }}
           required
+          maxLength={3}
+          value={props.value}
         />
       );
     case "password":
       return (
         <InputWrapper
-          id={props.type}
+          // id={props.type}
           type="password"
           style={{ width: "37px" }}
           required
+          value={props.value}
+          onChange={props.onChange}
+          maxLength={1}
         />
       );
   }
@@ -61,12 +76,12 @@ const InputWrapper = styled.input`
   width: 318px;
   height: 45px;
 
-  padding-left: 10px;
+  padding: 0 10px;
   text-align: center;
   background: #ecebf1;
   border-radius: 7px;
 
-  font-size: 15px;
+  font-size: 18px;
   color: black;
   border: none;
 
