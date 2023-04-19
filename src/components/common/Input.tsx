@@ -4,8 +4,7 @@ export interface InputProps {
   label: string;
   width: string;
   placeholder: string;
-  type: string;
-  position: string;
+  textPosition: string;
   event: (e: any) => void;
 }
 
@@ -13,15 +12,13 @@ export const Input = ({
   label,
   width,
   placeholder,
-  type,
-  position: textPosition,
+  textPosition,
   event,
 }: InputProps) => {
   return (
     <>
       <InputField
         placeholder={placeholder}
-        type={type}
         id={label}
         name={label}
         width={width}
@@ -38,4 +35,12 @@ const InputField = styled.input<{ textPosition: string; width: string }>`
   background-color: #ecebf1;
   border-radius: 7px;
   text-align: ${(props) => props.textPosition};
+
+  font-size: 18px;
+  font-weight: 600;
+
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;

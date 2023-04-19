@@ -1,0 +1,34 @@
+import { StoryFn } from "@storybook/react";
+import { Input, InputProps } from "../components/common/Input";
+
+export default {
+  title: "Input",
+  component: Input,
+};
+
+const Template: StoryFn<typeof Input> = (
+  args: InputProps
+): React.ReactElement => <Input {...args} />;
+
+export const CardNumberInput = Template.bind({});
+
+CardNumberInput.args = {
+  label: "cardNumber",
+  width: "318px",
+  placeholder: "",
+  textPosition: "center",
+  event: (e) => {
+    const value = e.target.value.replaceAll(" - ", "");
+
+    if (value.length > 16) {
+      e.target.value = e.target.value.slice(0, -1);
+      return;
+    }
+
+    // 카드번호 저장 로직
+
+    const numbers = value.slice(0, 8) + "*".repeat(value.slice(8).length);
+
+    e.target.value = (numbers.match(/\d{1,4}|\*{1,4}/g) ?? []).join(" - ");
+  },
+};
