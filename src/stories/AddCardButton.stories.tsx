@@ -4,12 +4,12 @@ import AddCardButton from "../components/AddCardButton";
 
 const meta: Meta<typeof AddCardButton> = {
   component: AddCardButton,
-  title: "AddCardButton",
+  title: "Button",
 };
 
 export default meta;
 type Story = StoryObj<typeof AddCardButton>;
 
-export const AddButton: Story = {
+export const AddCard: Story = {
   args: {},
 };
