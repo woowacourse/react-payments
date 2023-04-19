@@ -7,7 +7,7 @@ const St = {
     justify-content: center;
     gap: 5px;
 
-    width: 100vw;
+    width: 100%;
     height: 7vh;
 
     border-radius: 7px;
@@ -23,6 +23,7 @@ const St = {
     text-align: center;
     background: inherit;
     font-size: 20px;
+    letter-spacing: 2px;
   `,
 
   Title: styled.div`

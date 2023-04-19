@@ -16,13 +16,13 @@ const St = {
   `,
 
   Input: styled.input`
-    width: 80%;
+    width: 95%;
 
     border: none;
 
     text-align: center;
     background: inherit;
-    font-size: 20px;
+    font-size: 18px;
   `,
 
   Title: styled.div`

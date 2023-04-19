@@ -23,12 +23,7 @@ const St = {
     text-align: center;
     background: inherit;
     font-size: 20px;
-
-    &[type="number"]::-webkit-outer-spin-button,
-    &[type="number"]::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
+    letter-spacing: 2px;
   `,
 
   Title: styled.div`
