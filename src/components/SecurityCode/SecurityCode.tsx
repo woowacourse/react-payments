@@ -34,7 +34,7 @@ const SecurityCode = () => {
           onChange={handleCardInputChange}
           value={securityCode}
           placeholder="•••"
-          required={false}
+          required={true}
         />
       </Wrapper>
     </>

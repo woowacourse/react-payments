@@ -56,7 +56,7 @@ const CardPassword = () => {
           value={password[0]}
           order={0}
           placeholder="•"
-          required={false}
+          required={true}
         />
         <CardInput
           type="password"
@@ -66,7 +66,7 @@ const CardPassword = () => {
           value={password[1]}
           order={1}
           placeholder="•"
-          required={false}
+          required={true}
         />
       </Wrapper>
     </>

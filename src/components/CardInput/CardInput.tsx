@@ -3,12 +3,12 @@ import styled from 'styled-components';
 
 interface CardInputProps {
   type: string;
+  value: string;
   maxLength?: number;
   placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string;
   order?: number;
-  required: boolean;
+  required?: boolean;
   autofocus?: boolean;
 }
 
