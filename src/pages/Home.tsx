@@ -1,5 +1,5 @@
 import AddCardButton from '../components/AddCardButton/AddCardButton';
-import EmptyHeader from '../EmptyHeader/EmptyHeader';
+import EmptyHeader from '../components/EmptyHeader/EmptyHeader';
 
 const Home = () => {
   return (
