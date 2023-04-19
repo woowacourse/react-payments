@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   backgroundColor?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 type Ref = HTMLInputElement;
