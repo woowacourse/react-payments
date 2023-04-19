@@ -37,10 +37,10 @@
   - [x] 영문이 아닌 경우 에러 발생
   - [x] 이름의 길이가 30자 초과일 경우 에러 발생
   - [x] 현재 입력한 이름 문자열의 길이를 우측 상단에 `n/30` 형식으로 렌더링
-- [ ] SecurityCodeInput 컴포넌트
-  - [ ] UI
-  - [ ] 총 길이 3자리
-  - [ ] `type="password"`로 지정
+- [x] SecurityCodeInput 컴포넌트
+  - [x] UI
+  - [x] 총 길이 3자리
+  - [x] `type="password"`로 지정
 - [ ] PasswordInput 컴포넌트
   - [ ] UI
   - [ ] 앞의 두자리만 입력
