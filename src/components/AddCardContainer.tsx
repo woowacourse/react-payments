@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import CardPreview from './CardPreview';
 import Input from './Input';
 import { useCardDispatch } from '../context/CardContext';
+import { isAlphabet, isNumber, regEx } from '../utils/validateInput';
 
 const AddCardContainer = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -18,9 +19,22 @@ const AddCardContainer = () => {
     (state: string[], setState: React.Dispatch<React.SetStateAction<string[]>>) =>
     (e: ChangeEvent) => {
       if (!(e.target instanceof HTMLInputElement)) return;
-      const copyState = [...state];
-      copyState[Number(e.target.dataset.id)] = e.target.value;
 
+      switch (e.target.type) {
+        case 'password':
+          if (!isNumber(e.target.value))
+            e.target.value = e.target.value.replace(regEx.notNumber, '');
+          break;
+        case 'text':
+          if (!isAlphabet(e.target.value))
+            e.target.value = e.target.value.replace(regEx.notAlphbet, '');
+          break;
+        default:
+      }
+
+      const copyState = [...state];
+
+      copyState[Number(e.target.dataset.id)] = e.target.value;
       setState(copyState);
     };
 

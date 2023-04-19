@@ -15,6 +15,13 @@ type InputProps = {
   inputInfoList: InputInfo[];
 };
 
+const handleMaxLength = (e: ChangeEvent) => {
+  if (!(e.target instanceof HTMLInputElement)) return;
+  if (e.target.value.length > e.target.maxLength) {
+    e.target.value = e.target.value.slice(0, e.target.maxLength);
+  }
+};
+
 const Input = ({ labelText, inputInfoList }: InputProps) => {
   return (
     <StyledInputWrapper>
@@ -31,7 +38,10 @@ const Input = ({ labelText, inputInfoList }: InputProps) => {
                 placeholder={placeholder}
                 data-id={index}
                 value={value}
-                onChange={onChange}
+                onChange={(e) => {
+                  handleMaxLength(e);
+                  onChange(e);
+                }}
               />
             );
           })}
