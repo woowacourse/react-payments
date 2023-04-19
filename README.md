@@ -1,46 +1,89 @@
-# Getting Started with Create React App
+<h2 align="middle">💵</h2>
+<h1 align="middle">페이먼츠</h1>
+<p align="middle">우아한테크코스 레벨2 페이먼츠 미션</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br>
 
-## Available Scripts
+사진 넣기
 
-In the project directory, you can run:
+<br>
 
-### `npm start`
+### 🧑‍🤝‍🧑 페어 (페어 프로그래밍으로 개발)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<table>
+  <tr>
+    <td align="center" width="120px">
+      <a href="https://github.com/woo-jk" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/73513965?v=4" alt="룩소(우정균) 프로필" />
+      </a>
+    </td>
+    <td align="center" width="120px">
+      <a href="https://github.com/hae-on" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/80464961?v=4" alt="해온(백솔비) 프로필" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/woo-jk" target="_blank">
+      룩소(우정균)
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/hae-on" target="_blank">
+        해온(백솔비) 
+      </a>
+    </td>
+  </tr>
+</table>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<br>
 
-### `npm test`
+### 📍 학습 목표
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Component-Driven Development에 따라 UI를 구성하고 재사용 가능한 Component를 작성합니다.
+- 모바일 타겟의 웹 앱을 구현하며 사용하기 편리한 모바일 UI/UX에 대해 고민해봅니다.
+- 다른 라이브러리나 프레임워크 없이 오로지 React만으로 상태를 관리하고 컴포넌트를 설계합니다.
+- 재사용 가능한 Component를 직접 작성하고 사용합니다.
 
-### `npm run build`
+<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 📝 실행 방법
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- <a href="">앱 바로 실행하기</a>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 터미널에서 npm 설치(`npm install`) 후 `npm start` 커맨드로 앱을 실행할 수 있다.
 
-### `npm run eject`
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 🎯 기능 목록
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+카드 등록을 위한 form을 CDD로 구현한다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Storybook으로 UI 컴포넌트 렌더링
+- REQUIREMENTS.md에 요구 사항 도출
+- 재사용 가능한 Component 작성
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<br>
 
-## Learn More
+### ✅ 프로그래밍 요구 사항
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+가독성과 재사용성을 유의하며 기능을 구현한다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Readability**
+
+  - custom hook을 이용여 재사용 가능한 기능을 추출한다.
+  - 공통적으로 사용되는 UI 컴포넌트를 재사용 가능하게 구현한다.
+
+  <br>
+
+- **Reusability**
+
+  - 각 스토리에 명확한 이름을 지정하고, 스토리 이름을 통해 컴포넌트의 사용 사례를 쉽게 이해할 수 있도록 한다.
+  - 변동 가능한 값에 대해 사용자가 직접 조작해볼 수 있게 하여 컴포넌트를 더욱 쉽게 이해할 수 있도록 한다.
+
+  <br>
+
+---
+
+<a href="https://github.com/woowacourse">@woowacourse</a>
