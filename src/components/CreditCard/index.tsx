@@ -3,23 +3,37 @@ import * as T from 'types';
 import * as S from './style';
 
 export type CreditCardProps = {
+  fullFilled: boolean;
   creditCard: Pick<T.CreditCard, 'number' | 'expiry' | 'owner'>;
 };
 
 const convertSecuredCreditCard = (number: string) => {
   const creditCardNumberLength = number.length;
-  const foo = creditCardNumberLength <= 8
+  const securedCreditNumber = creditCardNumberLength <= 8
     ? number
     : number.slice(0, 8) + '*'.repeat(number.length - 8);
-  return foo.split('').reduce((a, b, i) => {
+  return securedCreditNumber.split('').reduce((a, b, i) => {
     a[Math.floor(i / 4)].push(b);
     return a;
   }, [[], [], [], []] as string[][]);
 };
 
-function CreditCard({ creditCard: { expiry, number, owner } }: CreditCardProps) {
+function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: CreditCardProps) {
+  const isVaild = () => {
+    if (!fullFilled) return true;
+
+    if (number.length !== 16) return false;
+    if (!number) return false;
+
+    if (!expiry) return false;
+
+    return true;
+  };
+
+  console.log(isVaild());
+
   return (
-    <S.CreditCardLayout>
+    <S.CreditCardLayout isVaild={isVaild()}>
       <S.CreditCardICChip />
       <S.CreditCardNumber>
         {convertSecuredCreditCard(number).map((num) => <div>{num}</div>)}

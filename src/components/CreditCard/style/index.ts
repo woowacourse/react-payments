@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const CreditCardLayout = styled.div`
+type Props = {
+  isVaild: boolean
+};
+
+export const CreditCardLayout = styled.div<Props>`
     width: 213px;
     height: 133px;
     background-color: #333333;
@@ -8,6 +12,7 @@ export const CreditCardLayout = styled.div`
     border-radius: 5px;
     padding: 14px;
 
+    
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
@@ -15,6 +20,8 @@ export const CreditCardLayout = styled.div`
     line-height: 14px;
     color: #FFFFFF;
     letter-spacing: 6px;
+
+    border: ${(props) => (props.isVaild ? '' : '2px solid red')};
 `;
 
 export const CreditCardICChip = styled.div`

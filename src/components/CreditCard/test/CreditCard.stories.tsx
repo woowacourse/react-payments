@@ -12,11 +12,30 @@ export default {
 
 const Template: Story<CreditCardProps> = (args) => <CreditCard {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const PerfectCreditCard = Template.bind({});
+PerfectCreditCard.args = {
+  fullFilled: true,
   creditCard: {
     number: '1234123412341234',
     expiry: '03/45',
     owner: 'NOAH',
+  },
+};
+
+export const OwnerLessCreditCard = Template.bind({});
+OwnerLessCreditCard.args = {
+  fullFilled: true,
+  creditCard: {
+    number: '1234123412341234',
+    expiry: '03/45',
+  },
+};
+
+export const invaildCreditCard = Template.bind({});
+invaildCreditCard.args = {
+  fullFilled: true,
+  creditCard: {
+    number: '12341234123',
+    expiry: '03/45',
   },
 };
