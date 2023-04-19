@@ -28,7 +28,8 @@
     "react/jsx-uses-react": 0,
     "react/prop-types": 0,
     "import/no-unresolved": "off",
-    "comma-dangle": "off"
+    "@typescript-eslint/comma-dangle": "off",
+    "react/jsx-props-no-spreading": "off"
   },
   "overrides": [
     {
