@@ -10,9 +10,9 @@ const CardNumberInput = () => {
         <InputSeparator>-</InputSeparator>
         <Input />
         <InputSeparator>-</InputSeparator>
-        <Input />
+        <Input type='password' />
         <InputSeparator>-</InputSeparator>
-        <Input />
+        <Input type='password' />
       </>
     </InputBox>
   );
