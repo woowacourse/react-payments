@@ -3,6 +3,7 @@ import Input from "./common/Input";
 import styled, { css } from "styled-components";
 import FormLabel from "./common/FormLabel";
 import ErrorSpan from "./common/ErrorSpan";
+import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 
 interface CardNumberObj {
   first: string;
@@ -34,7 +35,7 @@ function CardNumber() {
 
     if (!name) return;
 
-    if (!/\d/g.test(value)) return;
+    if (!ONLY_NUMBER_REGEXP.test(value)) return;
 
     try {
       if (value.length !== 4) {

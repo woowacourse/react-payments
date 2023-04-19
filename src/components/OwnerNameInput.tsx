@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import FormLabel from "./common/FormLabel";
 import Input from "./common/Input";
 import ErrorSpan from "./common/ErrorSpan";
+import {
+  CONTINUOUS_EMPTY_REGEXP,
+  ONLY_ENG_AND_EMPTY_REGEXP,
+} from "src/utils/regexp";
 
 function OwnerNameInput() {
   const [ownerName, setOwnerName] = useState("");
@@ -16,11 +20,11 @@ function OwnerNameInput() {
     const value = event.currentTarget.value as string;
 
     try {
-      if (!/^[a-zA-Z][a-zA-Z ]*$/.test(value)) {
+      if (!ONLY_ENG_AND_EMPTY_REGEXP.test(value)) {
         throw new Error("카드 소유자 이름은 영어와 공백만 입력 가능합니다.");
       }
 
-      if (/[ ]{2,}/.test(value)) {
+      if (CONTINUOUS_EMPTY_REGEXP.test(value)) {
         throw new Error(
           "카드 소유자 이름은 공백을 연속해서 작성할 수 없습니다.",
         );

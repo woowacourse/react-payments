@@ -3,10 +3,11 @@ import Input from "./common/Input";
 import styled, { css } from "styled-components";
 import ErrorSpan from "./common/ErrorSpan";
 import FormLabel from "./common/FormLabel";
+import { ONLY_MONTH_REGEXP } from "src/utils/regexp";
 
 function isValidMonth(month: string) {
   // 입력값이 문자열이 아니거나, 1월 ~ 12월이 아닐 경우 false를 반환
-  if (!/^(1[0-2]|[1-9])$/.test(month)) {
+  if (!ONLY_MONTH_REGEXP.test(month)) {
     return false;
   }
   // 입력값이 1월 ~ 12월일 경우 true를 반환
