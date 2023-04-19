@@ -16,26 +16,24 @@ export function CardNumber() {
   return (
     <Wrapper>
       <InputBox type={"NUMBER"} error={error}>
-        <Input handleChange={handleChange} name={"first"} maxLength={4} />
-        -
-        <Input handleChange={handleChange} name={"second"} maxLength={4} />
-        -
-        <Input
-          handleChange={handleChange}
-          name="third"
-          type="password"
-          maxLength={4}
-        />
-        -
-        <Input
-          handleChange={handleChange}
-          handleError={() =>
-            handleError(Object.values(cardNumber).join(""), validation.isNumber)
-          }
-          name="fourth"
-          type="password"
-          maxLength={4}
-        />
+        {Object.keys(cardNumber).map((cardInput, index, original) => {
+          return (
+            <>
+              <Input
+                handleChange={handleChange}
+                handleError={() =>
+                  handleError(
+                    Object.values(cardNumber).join(""),
+                    validation.isNumber
+                  )
+                }
+                name={cardInput}
+                maxLength={4}
+              />
+              {index < original.length - 1 && "-"}
+            </>
+          );
+        })}
       </InputBox>
     </Wrapper>
   );
