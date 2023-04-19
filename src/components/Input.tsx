@@ -2,23 +2,12 @@ import { ChangeEvent } from "react";
 import styled from "styled-components";
 import { InputTitle } from "./InputField";
 
-type InputMode =
-  | "text"
-  | "search"
-  | "none"
-  | "tel"
-  | "url"
-  | "email"
-  | "numeric"
-  | "decimal";
-
 export interface InputProps {
   id?: InputTitle;
   type: string;
   placeholder?: string;
   maxLength?: number;
   onInput?: (event: ChangeEvent<HTMLInputElement>) => void;
-  inputMode?: InputMode;
   textAlign?: string;
   isNumber?: boolean;
 }
@@ -33,7 +22,6 @@ const StyledInput = styled.input<{ textAlign?: string }>`
 `;
 
 export default function Input({
-  inputMode = "text",
   textAlign = "baseline",
   isNumber,
   ...rest
@@ -49,7 +37,7 @@ export default function Input({
   return (
     <StyledInput
       textAlign={textAlign}
-      inputMode={inputMode}
+      inputMode={isNumber ? "numeric" : "text"}
       onInput={isNumber ? onInput : defaultOnInput}
       {...rest}
     />

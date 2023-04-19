@@ -15,7 +15,13 @@ const Wrapper = styled.div`
 export default function CvcInput() {
   return (
     <Wrapper>
-      <Input type="password" textAlign="center" isNumber={true} maxLength={3} />
+      <Input
+        type="password"
+        textAlign="center"
+        isNumber={true}
+        maxLength={3}
+        id="cvc"
+      />
     </Wrapper>
   );
 }

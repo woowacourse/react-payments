@@ -1,4 +1,3 @@
-import { ChangeEvent } from "react";
 import styled from "styled-components";
 import Input from "./Input";
 
@@ -25,33 +24,14 @@ export default function CardNumberInput() {
         maxLength={4}
         id="cardNumber"
         type="text"
-        inputMode="numeric"
         textAlign="center"
       />
       <Dash>-</Dash>
-      <Input
-        isNumber={true}
-        maxLength={4}
-        type="text"
-        inputMode="numeric"
-        textAlign="center"
-      />
+      <Input isNumber={true} maxLength={4} type="text" textAlign="center" />
       <Dash>-</Dash>
-      <Input
-        isNumber={true}
-        maxLength={4}
-        type="password"
-        inputMode="numeric"
-        textAlign="center"
-      />
+      <Input isNumber={true} maxLength={4} type="password" textAlign="center" />
       <Dash>-</Dash>
-      <Input
-        isNumber={true}
-        maxLength={4}
-        type="password"
-        inputMode="numeric"
-        textAlign="center"
-      />
+      <Input isNumber={true} maxLength={4} type="password" textAlign="center" />
     </Wrapper>
   );
 }
