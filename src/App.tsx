@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { Card } from './types';
 import CardListPage from './pages/CardListPage';
 import CardAddPage from './pages/CardAddPage';
-import { useState } from 'react';
-import { Card } from './types';
 
 function App() {
   const [cardList, setCardList] = useState<Card[]>([]);

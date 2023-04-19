@@ -1,6 +1,6 @@
-import SupportingText from '../SupportingText/SupportingText';
 import styles from './style.module.css';
 import { ReactNode } from 'react';
+import SupportingText from '../SupportingText/SupportingText';
 
 interface InputContainerProps {
   label: string;

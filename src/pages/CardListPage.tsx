@@ -1,8 +1,8 @@
+import { Card } from '../types';
 import { Link } from 'react-router-dom';
 import Header from '../components/common/Header/Header';
 import Button from '../components/common/Button/Button';
 import CardList from '../components/CardList/CardList';
-import { Card } from '../types';
 
 interface CardListPageProps {
   cardList: Card[];

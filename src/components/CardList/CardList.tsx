@@ -1,6 +1,6 @@
+import styles from './style.module.css';
 import { Card } from '../../types';
 import CardItem from '../CardItem/CardItem';
-import styles from './style.module.css';
 
 interface CardListProps {
   cardList: Card[];
