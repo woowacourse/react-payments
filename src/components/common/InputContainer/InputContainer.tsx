@@ -6,6 +6,7 @@ interface InputContainerProps {
   label: string;
   id: string;
   children: ReactNode;
+  required?: boolean;
   supportingText?: string;
   characterCounter?: number[];
 }
@@ -14,12 +15,16 @@ function InputContainer({
   label,
   id,
   children,
+  required = false,
   supportingText,
   characterCounter,
 }: InputContainerProps) {
   return (
     <div className={styles.inputContainer}>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id}>
+        {label}
+        {required && <span className={styles.required}> *</span>}
+      </label>
       {children}
       <div className={styles.subInformation}>
         {supportingText && <SupportingText message={supportingText} />}
