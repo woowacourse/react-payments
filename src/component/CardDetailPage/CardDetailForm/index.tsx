@@ -8,10 +8,21 @@ import CardPasswordInput from "./CardPasswordInput";
 
 import St from "./styled";
 
-function CardDetailForm() {
+type CardDetailFormProps = {
+  changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  CardNumberHidden: string;
+};
+
+function CardDetailForm({
+  changeCardNumber,
+  CardNumberHidden,
+}: CardDetailFormProps) {
   return (
     <St.Form>
-      <CardNumberInput />
+      <CardNumberInput
+        changeCardNumber={changeCardNumber}
+        CardNumberHidden={CardNumberHidden}
+      />
       <CardDateInput />
       <CardOwnerNameInput />
       <CardCVCInput />
