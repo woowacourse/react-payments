@@ -21,6 +21,10 @@ interface Props {
 const CardRegisterForm = ({ registerCard }: Props) => {
   const navigate = useNavigate();
 
+  const today = new Date();
+  const currentYear = today.getFullYear() % 100;
+  const currentMonth = today.getMonth() + 1;
+
   const [cardNumber1, setCardNumber1] = useState('');
   const [cardNumber2, setCardNumber2] = useState('');
   const [cardNumber3, setCardNumber3] = useState('');
@@ -54,6 +58,14 @@ const CardRegisterForm = ({ registerCard }: Props) => {
 
   const isNotAlphabet = (value: string) => {
     return !/^[a-zA-Z\s]*$/.test(value);
+  };
+
+  const isValidExpiredDate = (month: number, year: number) => {
+    if (month < 1 || month > 12) return false;
+    if (year < currentYear) return false;
+    if (year === currentYear && month <= currentMonth) return false;
+
+    return true;
   };
 
   const handleNumberChange = (
@@ -94,6 +106,12 @@ const CardRegisterForm = ({ registerCard }: Props) => {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+
+    if (!isValidExpiredDate(Number(expiredMonth), Number(expiredYear))) {
+      alert('유효한 만료일이 아닙니다. 다시 입력해주세요.');
+      inputRefs[4].current?.focus();
+      return;
+    }
 
     const cardData = {
       cardNumber1,
