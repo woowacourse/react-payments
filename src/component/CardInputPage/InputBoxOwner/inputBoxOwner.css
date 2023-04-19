@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
 .input-box-card-owner p:last-child {
   margin-left: 2%;
   color: red;
@@ -22,4 +23,9 @@
 .input-card-owner {
   grid-column: 1/3;
   width: 100%;
+
+  text-align: left;
+  letter-spacing: normal;
+
+  padding-left: 3%;
 }

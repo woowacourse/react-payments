@@ -17,7 +17,6 @@ export default function InputBoxSecurityCode() {
         className="input-security-code"
         type="number"
         onChange={onChangeCallback}
-        placeholder="X X X"
         inputMode="numeric"
       ></Input>
       <button className="button-security-code" type="button">

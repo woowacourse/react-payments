@@ -12,14 +12,12 @@ export default function CardPassword(props: Props) {
         className="input-password"
         type="password"
         onChange={() => {}}
-        placeholder="X"
         inputMode="numeric"
       ></Input>
       <Input
         className="input-password"
         type="password"
         onChange={() => {}}
-        placeholder="X"
         inputMode="numeric"
       ></Input>
       <input
