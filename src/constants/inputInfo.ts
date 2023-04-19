@@ -7,6 +7,12 @@ export const LABEL = {
 } as const;
 
 export const PLACEHOLDER = Object.freeze({
-  DATE: ["MM", "YY"],
-  NAME: ["카드에 표시된 이름과 동일하게 입력하세요."],
+  MONTH: "MM",
+  YEAR: "YY",
+  NAME: "카드에 표시된 이름과 동일하게 입력하세요.",
+});
+
+export const MAX_LENGTH = Object.freeze({
+  NAME: 30,
+  DATE: 2,
 });
