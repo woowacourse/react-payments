@@ -37,5 +37,8 @@ function Layout(props: Props) {
 export default Layout;
 
 const LayoutContainer = styled.div`
-  margin: 22px 24px;
+  width: 375px;
+
+  margin: 22px auto;
+  padding: 0 24px;
 `;
