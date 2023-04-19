@@ -12,6 +12,7 @@ const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputProps) => 
       <InputContainer width="137px">
         <Input
           name="month"
+          inputMode="numeric"
           textAlign="center"
           width="40px"
           placeholder="MM"
@@ -24,6 +25,7 @@ const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputProps) => 
         <Span>/</Span>
         <Input
           name="year"
+          inputMode="numeric"
           textAlign="center"
           width="40px"
           placeholder="YY"

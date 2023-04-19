@@ -11,6 +11,7 @@ const CardSecurityCodeInput = ({ onChange }: CardSecurityCodeInputProp) => {
       <InputContainer width="84px">
         <Input
           textAlign="center"
+          inputMode="numeric"
           width="100%"
           type="password"
           minLength={3}
