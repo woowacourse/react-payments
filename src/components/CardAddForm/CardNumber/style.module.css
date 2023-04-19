@@ -12,12 +12,17 @@
   box-shadow: 0 0 0 3px rgba(141, 201, 255, 0.4);
 }
 
+.container.error {
+  background-color: #fff6f6;
+  border-color: #eb7171;
+}
+
+.container.error:focus-within {
+  box-shadow: 0 0 0 3px rgba(255, 177, 177, 0.4);
+}
+
 .container input {
   text-align: center;
   border: none !important;
   box-shadow: none !important;
 }
-
-/* .container input:focus {
-  box-shadow: none;
-} */
