@@ -1,9 +1,7 @@
 import { ChangeEventHandler, useRef, useState } from 'react';
 import Input from './Input/Input';
 
-type Props = {};
-
-function ExpiredDateInput({}: Props) {
+function ExpirationDateInput() {
   const monthRef = useRef<HTMLInputElement>(null);
   const yearRef = useRef<HTMLInputElement>(null);
 
@@ -56,4 +54,4 @@ function ExpiredDateInput({}: Props) {
   );
 }
 
-export default ExpiredDateInput;
+export default ExpirationDateInput;
