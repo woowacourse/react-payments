@@ -2,10 +2,10 @@
 import CreditCard from 'components/CreditCard';
 import Input from 'components/Input';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from './style';
 
-type CreditCardPasswordType = { first?: string, second?: string };
+type CreditCardPasswordType = { first: string, second: string };
 
 function CreditCardRegister() {
   const navigate = useNavigate();
@@ -25,13 +25,24 @@ function CreditCardRegister() {
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCreditCardCVC(event.target.value);
   };
-  const [creditCardPassword, setCreditCardPassword] = useState<CreditCardPasswordType>();
+  const [creditCardPassword, setCreditCardPassword] = useState<CreditCardPasswordType>({ first: '', second: '' });
   const handleChangeCreditCardFirstPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCreditCardPassword({ ...creditCardPassword, first: event.target.value });
   };
   const handleChangeCreditCardSecondPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCreditCardPassword({ ...creditCardPassword, second: event.target.value });
   };
+
+  const [isFullFilled, setIsFullFilled] = useState(false);
+  useEffect(() => {
+    if (creditCardCVC === '') return setIsFullFilled(false);
+    if (creditCardExpiry === '') return setIsFullFilled(false);
+    if (creditCardCVC === '') return setIsFullFilled(false);
+    if (creditCardPassword.first === '' || creditCardPassword.second === '') return setIsFullFilled(false);
+
+    return setIsFullFilled(true);
+  }, [creditCardNumber, creditCardExpiry, creditCardCVC, creditCardPassword]);
+
   return (
     <S.CreditCardRegisterLayout>
       <S.CreditCardRegisterTopSheet>
@@ -79,7 +90,7 @@ function CreditCardRegister() {
           <Input type="string" value="*" width="48px" textAlign="center" onChange={() => { }} />
         </S.Box>
         <S.ButtonWrapper>
-          <S.ResigerButton type="submit" onClick={() => navigate('/')}>확인</S.ResigerButton>
+          <S.ResigerButton disabled={!isFullFilled} type="submit" onClick={() => navigate('/')}>확인</S.ResigerButton>
         </S.ButtonWrapper>
       </S.CreditCardRegisterForm>
     </S.CreditCardRegisterLayout>

@@ -51,4 +51,5 @@ export const ButtonWrapper = styled.div`
 
 export const ResigerButton = styled.button`
     font-weight: 700;
+
 `;
