@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as ChevronLeft } from '../assets/previous.svg';
 
@@ -28,10 +29,14 @@ interface HeaderProps {
 export type { HeaderProps };
 
 function Header({ title, hasBackHistory }: HeaderProps) {
+  const navigate = useNavigate();
+
+  const navigatePrevious = () => navigate(-1);
+
   return (
     <StyledHeader>
       {hasBackHistory && (
-        <BackHistory>
+        <BackHistory onClick={navigatePrevious}>
           <ChevronLeft />
         </BackHistory>
       )}
