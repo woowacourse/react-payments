@@ -1,5 +1,5 @@
 import { StoryFn } from '@storybook/react';
-import NameInput from './NameInput';
+import { NameInput } from './NameInput';
 
 export default {
   title: 'NameInput',

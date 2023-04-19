@@ -1,7 +1,7 @@
+import { Input } from 'components/common';
 import { ChangeEventHandler, useState } from 'react';
-import Input from 'components/common/Input/Input';
 
-function SecurityCodeInput() {
+export function SecurityCodeInput() {
   const [securityCode, setSecurityCode] = useState('');
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -17,5 +17,3 @@ function SecurityCodeInput() {
 
   return <Input value={securityCode} type="password" maxLength={3} onChange={handleChange} />;
 }
-
-export default SecurityCodeInput;

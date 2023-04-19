@@ -1,9 +1,9 @@
+import { Input } from 'components/common';
 import { ChangeEventHandler, useState } from 'react';
-import Input from 'components/common/Input/Input';
 
 const NOT_ALPHABET_REGEX = /[^A-Za-z]/gi;
 
-function NameInput() {
+export function NameInput() {
   const [name, setName] = useState('');
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -24,5 +24,3 @@ function NameInput() {
     </>
   );
 }
-
-export default NameInput;

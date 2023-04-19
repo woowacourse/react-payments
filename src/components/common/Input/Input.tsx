@@ -7,7 +7,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 
 type Ref = HTMLInputElement;
 
-const Input = forwardRef<Ref, InputProps>(({ backgroundColor, ...props }, ref) => {
+export const Input = forwardRef<Ref, InputProps>(({ backgroundColor, ...props }, ref) => {
   return <Styled.Input backgroundColor={backgroundColor} ref={ref} {...props} />;
 });
 
@@ -16,4 +16,3 @@ const Styled = {
     background-color: ${({ backgroundColor }) => backgroundColor ?? 'white'};
   `,
 };
-export default Input;

@@ -1,8 +1,8 @@
+import { Input } from 'components/common';
 import { ChangeEventHandler, useState } from 'react';
-import Input from 'components/common/Input/Input';
 
 const DEFAULT_CARD_NUMBER = '0000';
-function CardNumberInput() {
+export function CardNumberInput() {
   const [cardNumbers, setCardNumbers] = useState({
     0: '',
     1: '',
@@ -67,5 +67,3 @@ function CardNumberInput() {
     </>
   );
 }
-
-export default CardNumberInput;

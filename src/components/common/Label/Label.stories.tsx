@@ -1,5 +1,5 @@
 import { StoryFn } from '@storybook/react';
-import Label, { Props } from './Label';
+import { Label, Props } from './Label';
 
 export default {
   title: 'Label',
