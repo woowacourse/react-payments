@@ -16,6 +16,7 @@ const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputProps) => 
           width="40px"
           placeholder="MM"
           type="text"
+          minLength={2}
           maxLength={2}
           required
           onChange={onChange}
@@ -27,6 +28,7 @@ const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputProps) => 
           width="40px"
           placeholder="YY"
           type="text"
+          minLength={2}
           maxLength={2}
           required
           onChange={onChange}

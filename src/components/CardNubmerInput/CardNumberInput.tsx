@@ -14,6 +14,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           textAlign="center"
           width="40px"
           type="text"
+          minLength={4}
           maxLength={4}
           required
           onChange={onChange}
@@ -24,6 +25,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           textAlign="center"
           width="40px"
           type="text"
+          minLength={4}
           maxLength={4}
           required
           onChange={onChange}
@@ -34,6 +36,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           textAlign="center"
           width="40px"
           type="password"
+          minLength={4}
           maxLength={4}
           required
           onChange={onChange}
@@ -44,6 +47,7 @@ const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
           textAlign="center"
           width="40px"
           type="password"
+          minLength={4}
           maxLength={4}
           required
           onChange={onChange}

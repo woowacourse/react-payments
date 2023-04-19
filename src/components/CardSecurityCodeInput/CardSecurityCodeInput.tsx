@@ -9,7 +9,15 @@ const CardSecurityCodeInput = ({ onChange }: CardSecurityCodeInputProp) => {
     <Label>
       보안 코드(CVC/CVV)
       <InputContainer width="84px">
-        <Input textAlign="center" width="100%" type="password" maxLength={3} required onChange={onChange} />
+        <Input
+          textAlign="center"
+          width="100%"
+          type="password"
+          minLength={3}
+          maxLength={3}
+          required
+          onChange={onChange}
+        />
       </InputContainer>
     </Label>
   );
