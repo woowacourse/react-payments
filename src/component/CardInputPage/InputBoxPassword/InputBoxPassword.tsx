@@ -1,19 +1,20 @@
 import { useState, ChangeEvent } from "react";
-import Input from "../../common/Input";
 import CardPassword from "./CardPassword";
 
+import "./inputBoxPassword.css";
+
 export default function InputBoxPassword() {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(true);
 
   const onChangeCallback = (event: ChangeEvent<HTMLInputElement>) => {
     // setNameLength(event.target.value.trim().length);
   };
 
   return (
-    <div>
+    <div className="input-box-card-password">
       <p>카드 비밀번호</p>
       <CardPassword />
-      <p>error message</p>
+      <p className={error ? "visible" : ""}>error message</p>
     </div>
   );
 }
