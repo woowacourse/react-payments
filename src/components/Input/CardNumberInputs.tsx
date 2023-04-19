@@ -1,10 +1,6 @@
 import { Input } from 'components/common';
-import { ChangeEventHandler, useState } from 'react';
-
-export type ValueAndOnChange = {
-  value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-};
+import { ValueAndOnChange } from './types';
+import React, { ChangeEvent, ChangeEventHandler } from 'react';
 
 interface CardNumberInputProps {
   valueAndOnChanges: ValueAndOnChange[];
@@ -13,16 +9,34 @@ interface CardNumberInputProps {
 const DEFAULT_CARD_NUMBER = '0000';
 
 export function CardNumberInputs({ valueAndOnChanges }: CardNumberInputProps) {
+  const inputRefs = valueAndOnChanges.map(() => React.createRef<HTMLInputElement>());
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    index: number,
+    onChange: ChangeEventHandler<HTMLInputElement>
+  ) => {
+    const value = e.target.value;
+
+    if (index < valueAndOnChanges.length - 1 && value.length === e.target.maxLength) {
+      inputRefs[index + 1].current?.focus();
+    }
+    onChange(e);
+  };
+
   return (
     <>
       {valueAndOnChanges.map(({ value, onChange }, index) => (
-        <Input
-          value={value}
-          type={index < 2 ? 'text' : 'password'}
-          maxLength={4}
-          onChange={onChange}
-          placeholder={DEFAULT_CARD_NUMBER}
-        />
+        <>
+          <Input
+            ref={inputRefs[index]}
+            value={value}
+            type={index < 2 ? 'text' : 'password'}
+            maxLength={4}
+            onChange={(e) => handleChange(e, index, onChange)}
+            placeholder={DEFAULT_CARD_NUMBER}
+          />
+          {index < valueAndOnChanges.length - 1 && <span>-</span>}
+        </>
       ))}
     </>
   );
