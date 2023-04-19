@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import CardNumberInput from "./CardNumberInput";
-import ExpirationDateInput from "./ExpirationDateInput";
-import NameInput from "./NameInput";
-import PasswordInput from "./PasswordInput";
-import SecurityCodeInput from "./SecurityCodeInput";
+import CardNumberInput from "./FormInputs/CardNumberInput";
+import ExpirationDateInput from "./FormInputs/ExpirationDateInput";
+import NameInput from "./FormInputs/NameInput";
+import PasswordInput from "./FormInputs/PasswordInput";
+import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
 
 const CardRegisterForm = () => {
   return (
