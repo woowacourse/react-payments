@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
@@ -23,14 +23,7 @@ interface TypingType {
   [key: number]: string;
 }
 
-const CardNumbers = () => {
-  const refObject: RefType = {
-    0: useRef<HTMLInputElement>(null),
-    1: useRef<HTMLInputElement>(null),
-    2: useRef<HTMLInputElement>(null),
-    3: useRef<HTMLInputElement>(null),
-  };
-
+const CardNumbers = ({ refs }: { refs: RefType }) => {
   const [typing, setTyping] = useState<TypingType>({
     0: '',
     1: '',
@@ -48,9 +41,9 @@ const CardNumbers = () => {
 
     setTyping({ ...typing, [currentOrder]: e.target.value });
 
-    if (refObject[currentOrder].current?.value.length === 4) {
+    if (refs[currentOrder].current?.value.length === 4) {
       if (currentOrder === 3) return;
-      refObject[currentOrder + 1].current?.focus();
+      refs[currentOrder + 1].current?.focus();
     }
   };
 
@@ -61,7 +54,7 @@ const CardNumbers = () => {
         <CardInput
           type="text"
           maxLength={4}
-          ref={refObject[0]}
+          ref={refs[0]}
           onChange={handleCardInputChange}
           value={typing[0]}
           order={0}
@@ -69,33 +62,33 @@ const CardNumbers = () => {
           required={true}
           autofocus={true}
         />
-        {refObject[0].current?.value.length === 4 && <Pargraph>-</Pargraph>}
+        {refs[0].current?.value.length === 4 && <Pargraph>-</Pargraph>}
         <CardInput
           type="text"
           maxLength={4}
-          ref={refObject[1]}
+          ref={refs[1]}
           onChange={handleCardInputChange}
           value={typing[1]}
           order={1}
           placeholder={'0000'}
           required={true}
         />
-        {refObject[1].current?.value.length === 4 && <Pargraph>-</Pargraph>}
+        {refs[1].current?.value.length === 4 && <Pargraph>-</Pargraph>}
         <CardInput
           type="password"
           maxLength={4}
-          ref={refObject[2]}
+          ref={refs[2]}
           onChange={handleCardInputChange}
           value={typing[2]}
           order={2}
           placeholder={'0000'}
           required={true}
         />
-        {refObject[2].current?.value.length === 4 && <Pargraph>-</Pargraph>}
+        {refs[2].current?.value.length === 4 && <Pargraph>-</Pargraph>}
         <CardInput
           type="password"
           maxLength={4}
-          ref={refObject[3]}
+          ref={refs[3]}
           onChange={handleCardInputChange}
           value={typing[3]}
           order={3}

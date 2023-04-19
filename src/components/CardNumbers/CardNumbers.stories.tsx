@@ -1,4 +1,5 @@
-import { StoryObj, Meta } from '@storybook/react';
+import React, { useRef } from 'react';
+import { Meta } from '@storybook/react';
 import CardNumbers from './CardNumbers';
 
 const meta = {
@@ -8,6 +9,13 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+export const CardNumbersStory = () => {
+  const cardNumberRefs = {
+    0: useRef<HTMLInputElement>(null),
+    1: useRef<HTMLInputElement>(null),
+    2: useRef<HTMLInputElement>(null),
+    3: useRef<HTMLInputElement>(null),
+  };
 
-export const CardNumbersStory: Story = {};
+  return <CardNumbers refs={cardNumberRefs} />;
+};

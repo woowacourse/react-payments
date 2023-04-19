@@ -1,5 +1,6 @@
-import { StoryObj, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import CardOwnerName from './CardOwnerName';
+import { useRef } from 'react';
 
 const meta = {
   component: CardOwnerName,
@@ -8,6 +9,8 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+export const CardOwnerNameStory = () => {
+  const cardNumberRefs = useRef<HTMLInputElement>(null);
 
-export const CardOwnerNameStory: Story = {};
+  return <CardOwnerName ref={cardNumberRefs} />;
+};

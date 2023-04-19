@@ -1,7 +1,7 @@
 import CardInput from '../CardInput/CardInput';
 import CardLabel from '../CardLabel/CardLabel';
 import styled from 'styled-components';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,12 +23,7 @@ interface TypingType {
   [key: number]: string;
 }
 
-const ExpiredDate = () => {
-  const refObject: RefType = {
-    0: useRef<HTMLInputElement>(null),
-    1: useRef<HTMLInputElement>(null),
-  };
-
+const ExpiredDate = ({ refs }: { refs: RefType }) => {
   const [typing, setTyping] = useState<TypingType>({
     0: '',
     1: '',
@@ -47,7 +42,7 @@ const ExpiredDate = () => {
   };
 
   const validateDate = (currentOrder: number) => {
-    const currentRef = refObject[currentOrder];
+    const currentRef = refs[currentOrder];
 
     if (currentRef.current === null) return;
     // todo
@@ -59,7 +54,7 @@ const ExpiredDate = () => {
       return;
     }
 
-    refObject[currentOrder + 1].current?.focus();
+    refs[currentOrder + 1].current?.focus();
 
     if (!/^(0[1-9]|1[0-2])/g.test(currentRef.current.value)) {
       setTyping({ ...typing, 0: '' });
@@ -75,7 +70,7 @@ const ExpiredDate = () => {
         <CardInput
           type="text"
           maxLength={2}
-          ref={refObject[0]}
+          ref={refs[0]}
           onChange={handleCardInputChange}
           value={typing[0]}
           order={0}
@@ -86,7 +81,7 @@ const ExpiredDate = () => {
         <CardInput
           type="text"
           maxLength={2}
-          ref={refObject[1]}
+          ref={refs[1]}
           onChange={handleCardInputChange}
           value={typing[1]}
           order={1}

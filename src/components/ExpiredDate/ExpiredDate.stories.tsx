@@ -1,5 +1,6 @@
-import { StoryObj, Meta } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import ExpiredDate from './ExpiredDate';
+import React, { useRef } from 'react';
 
 const meta = {
   component: ExpiredDate,
@@ -8,6 +9,11 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+export const CardExpiredDateStory = () => {
+  const cardExpiredDateRefs = {
+    0: useRef<HTMLInputElement>(null),
+    1: useRef<HTMLInputElement>(null),
+  };
 
-export const ExpiredDateStory: Story = {};
+  return <ExpiredDate refs={cardExpiredDateRefs} />;
+};
