@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const CardRegister = () => {
   return (
     <CardRegisterWrapper>
       <CardRegisterMessage>새로운 카드를 등록해주세요.</CardRegisterMessage>
-      <CardRegisterButton>+</CardRegisterButton>
+      <CardRegisterButton to="addCard">+</CardRegisterButton>
     </CardRegisterWrapper>
   );
 };
@@ -24,7 +25,7 @@ const CardRegisterMessage = styled.span`
   opacity: 0.9;
 `;
 
-const CardRegisterButton = styled.button`
+const CardRegisterButton = styled(Link)`
   font-size: 30px;
   line-height: 35px;
 
@@ -35,6 +36,10 @@ const CardRegisterButton = styled.button`
   background-color: #e5e5e5;
   border: none;
   border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default CardRegister;

@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Header = ({ title }: { title: string }) => {
   return (
     <StyledHeader>
-      <StyledLeftArrowButton title={title} />
+      <StyledLeftArrowButton to="/" title={title} />
       <StyledHeaderTitle>{title}</StyledHeaderTitle>
     </StyledHeader>
   );
 };
 
-const StyledLeftArrowButton = styled.button`
+const StyledLeftArrowButton = styled(Link)`
   display: ${(props) => (props.title === '보유카드' ? 'none' : 'block')};
 
   position: relative;

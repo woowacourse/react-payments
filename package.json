@@ -65,6 +65,7 @@
     "babel-plugin-named-exports-order": "^0.0.2",
     "prettier": "^2.8.7",
     "prop-types": "^15.8.1",
+    "react-router-dom": "^6.10.0",
     "storybook": "^7.0.5",
     "styled-components": "^5.3.9",
     "webpack": "^5.79.0"
