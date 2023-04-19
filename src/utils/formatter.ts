@@ -5,12 +5,8 @@ const formatExpirationDate = (input: string) => {
   return formattedValue.slice(0, 5);
 };
 
-const formatNumberInput = (input: string) => {
-  return input.replace(/\D/g, '');
+const formatEnglishCapitalization = (input: string) => {
+  return input.toUpperCase();
 };
 
-const formatEnglishName = (input: string) => {
-  return input.replace(/[^a-zA-Z]/g, '').toUpperCase();
-};
-
-export { formatExpirationDate, formatNumberInput, formatEnglishName };
+export { formatExpirationDate, formatEnglishCapitalization };
