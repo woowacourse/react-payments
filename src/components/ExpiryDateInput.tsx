@@ -1,7 +1,6 @@
 import { Container } from "./CardNumberInput";
 import { Input } from "./common/Input";
 import { InputLabel } from "./common/InputLabel";
-import styled from "styled-components";
 
 interface ExpiryDateInputProps {
   setExpiryDate: (value: string) => void;
