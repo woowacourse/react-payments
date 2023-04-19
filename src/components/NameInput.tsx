@@ -62,7 +62,7 @@ const S = {
   `,
 
   Caption: styled.p`
-    color: var(--gray-color);
+    color: var(--gray-color-400);
     font-size: 12px;
     margin: 10px 0 20px 4px;
   `,

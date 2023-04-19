@@ -92,16 +92,16 @@ const S = {
   Hyphen: styled.p<{ month: string }>`
     font-weight: 900;
     align-self: center;
-    visibility: ${({ month: cardNumber }) =>
-      cardNumber.length !== 2 && `${HIDDEN_ELEMENT_STYLE}`};
+    visibility: ${({ month }) =>
+      month.length !== 2 && `${HIDDEN_ELEMENT_STYLE}`};
   `,
 
   Caption: styled.p<{ date: string[] }>`
     color: var(--caption-color);
     font-size: 12px;
     margin: 10px 0 20px 4px;
-    visibility: ${({ date: cardNumbers }) =>
-      cardNumbers.join("").length === 4 && `${HIDDEN_ELEMENT_STYLE}`};
+    visibility: ${({ date }) =>
+      date.join("").length === 4 && `${HIDDEN_ELEMENT_STYLE}`};
   `,
 };
 

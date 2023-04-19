@@ -11,12 +11,10 @@ export const GlobalStyle = createGlobalStyle`
   body {
     font-family: "Noto Sans KR", sans-serif;
     /* hidden scroll */
-    -ms-overflow-style: none;
     scrollbar-width: none;
   }
 
-  body::-webkit-scrollbar,
-  dialog::-webkit-scrollbar {
+  body::-webkit-scrollbar {
     /* hidden scroll */
     display: none;
   }
@@ -25,7 +23,9 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     --input-background:#ecebf1;
     --label-color: #525252;
-    --gray-color: #727272;
+    --gray-color-200: #BABABA;
+    --gray-color-300: #969696;
+    --gray-color-400: #727272;
     --caption-color: #ee3507;
   }
 
