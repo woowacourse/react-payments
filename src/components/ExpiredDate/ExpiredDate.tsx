@@ -11,6 +11,10 @@ const Wrapper = styled.div`
   border-radius: 7px;
 `;
 
+const Pargraph = styled.p`
+  width: 16px;
+`;
+
 interface RefType {
   [key: number]: React.RefObject<HTMLInputElement>;
 }
@@ -46,6 +50,7 @@ const ExpiredDate = () => {
     const currentRef = refObject[currentOrder];
 
     if (currentRef.current === null) return;
+    // todo
     if (currentRef.current.value.length !== 2) return;
 
     if (currentOrder === 1) {
@@ -75,8 +80,9 @@ const ExpiredDate = () => {
           value={typing[0]}
           order={0}
           placeholder="MM"
+          required={true}
         />
-        <p>/</p>
+        <Pargraph>/</Pargraph>
         <CardInput
           type="text"
           maxLength={2}
@@ -85,6 +91,7 @@ const ExpiredDate = () => {
           value={typing[1]}
           order={1}
           placeholder="YY"
+          required={true}
         />
       </Wrapper>
     </>

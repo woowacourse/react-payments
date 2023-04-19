@@ -11,6 +11,10 @@ const Wrapper = styled.div`
   border-radius: 7px;
 `;
 
+const Pargraph = styled.p`
+  width: 32px;
+`;
+
 interface RefType {
   [key: number]: React.RefObject<HTMLInputElement>;
 }
@@ -62,8 +66,9 @@ const CardNumbers = () => {
           value={typing[0]}
           order={0}
           placeholder={'0000'}
+          required={true}
         />
-        {refObject[0].current?.value.length === 4 && <p>-</p>}
+        {refObject[0].current?.value.length === 4 && <Pargraph>-</Pargraph>}
         <CardInput
           type="text"
           maxLength={4}
@@ -72,8 +77,9 @@ const CardNumbers = () => {
           value={typing[1]}
           order={1}
           placeholder={'0000'}
+          required={true}
         />
-        {refObject[1].current?.value.length === 4 && <p>-</p>}
+        {refObject[1].current?.value.length === 4 && <Pargraph>-</Pargraph>}
         <CardInput
           type="password"
           maxLength={4}
@@ -82,8 +88,9 @@ const CardNumbers = () => {
           value={typing[2]}
           order={2}
           placeholder={'0000'}
+          required={true}
         />
-        {refObject[2].current?.value.length === 4 && <p>-</p>}
+        {refObject[2].current?.value.length === 4 && <Pargraph>-</Pargraph>}
         <CardInput
           type="password"
           maxLength={4}
@@ -92,6 +99,7 @@ const CardNumbers = () => {
           value={typing[3]}
           order={3}
           placeholder={'0000'}
+          required={true}
         />
       </Wrapper>
     </>

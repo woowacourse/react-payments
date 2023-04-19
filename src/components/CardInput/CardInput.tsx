@@ -7,18 +7,27 @@ interface CardInputProps {
   placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
-  order: number;
+  order?: number;
+  required: boolean;
 }
 
 const Input = styled.input`
-  width: 80px;
+  width: fill-available;
   height: 45px;
   text-align: center;
 `;
 
 const CardInput = forwardRef(
   (
-    { type, maxLength, placeholder, onChange, value, order }: CardInputProps,
+    {
+      type,
+      maxLength,
+      placeholder,
+      onChange,
+      value,
+      order,
+      required,
+    }: CardInputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
@@ -26,7 +35,7 @@ const CardInput = forwardRef(
         type={type}
         maxLength={maxLength}
         placeholder={placeholder}
-        required
+        required={required}
         ref={ref}
         onChange={onChange}
         value={value}
