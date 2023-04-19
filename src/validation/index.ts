@@ -2,7 +2,7 @@ import { ERROR_MESSAGE } from "../constants/errors";
 
 const REGEX = Object.freeze({
   NUMBER: /^[0-9]+$/,
-  STRING: /^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/,
+  STRING: /^[ㄱ-ㅎ가-힣a-zA-Z]+$/,
   MONTH: /^(1[0-2]|[1-9])$/,
 });
 
@@ -25,8 +25,7 @@ export const validation = {
   },
 
   isCorrectMonth(input: string) {
-    const pureText = input[0] === "0" ? input.substring(1) : input;
-    if (!REGEX.MONTH.test(pureText)) {
+    if (!REGEX.MONTH.test(input)) {
       throw new Error(ERROR_MESSAGE.INVALID_DATE);
     }
   },
