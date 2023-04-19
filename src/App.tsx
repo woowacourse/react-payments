@@ -10,13 +10,17 @@ import { Card } from "./types";
 function App() {
   const [cards, setCards] = useState<Card[]>([]);
 
+  const addCard = (card: Card) => {
+    setCards([...cards, card]);
+  };
+
   return (
     <>
       <GlobalStyle />
       <Layout>
         <Routes>
           <Route index path="/" element={<CardListPage cards={cards} />} />
-          <Route path="/addCard" element={<AddCardPage />} />
+          <Route path="/addCard" element={<AddCardPage onSubmit={addCard} />} />
         </Routes>
       </Layout>
     </>
@@ -30,6 +34,7 @@ export const Layout = styled.div`
   display: flex;
 
   justify-content: center;
+  align-items: center;
 
   background-color: #eeeeee;
 `;
