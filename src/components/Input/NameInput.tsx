@@ -1,25 +1,20 @@
 import { Input } from 'components/common';
 import { ChangeEventHandler, useState } from 'react';
 
-const NOT_ALPHABET_REGEX = /[^A-Za-z]/gi;
+interface NameInputProps {
+  value: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+}
 
-export function NameInput() {
-  const [name, setName] = useState('');
-
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const value = e.target.value.replace(NOT_ALPHABET_REGEX, '').toUpperCase();
-
-    setName(value);
-  };
-
+export function NameInput({ value, onChange }: NameInputProps) {
   return (
     <>
       <Input
-        value={name}
+        value={value}
         type="text"
         maxLength={30}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요"
-        onChange={handleChange}
+        onChange={onChange}
       />
     </>
   );
