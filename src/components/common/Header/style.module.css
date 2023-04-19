@@ -1,16 +1,18 @@
 .header {
-  margin-bottom: 20px;
+  position: relative;
+  margin-bottom: 24px;
+  height: 20px;
 }
 
 .header a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-block;
 }
 
 .header h3 {
-  padding-top: 2px;
+  display: inline-block;
+  position: absolute;
   font-size: 16px;
   font-weight: 600;
+  text-align: center;
   color: #575757;
 }
