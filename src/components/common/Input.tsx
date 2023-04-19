@@ -36,8 +36,8 @@ const InputField = styled.input<{ textPosition: string; width: string }>`
   border-radius: 7px;
   text-align: ${(props) => props.textPosition};
 
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
 
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;

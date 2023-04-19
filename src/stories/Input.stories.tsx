@@ -51,3 +51,20 @@ ExpiryDateInput.args = {
     e.target.value = (value.match(/\d{1,2}/g) ?? []).join(" / ");
   },
 };
+
+export const OwnerInput = Template.bind({});
+
+OwnerInput.args = {
+  label: "owner",
+  width: "318px",
+  placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
+  textPosition: "left",
+  event: (e) => {
+    if (e.target.value.length > 30) {
+      e.target.value = e.target.value.slice(0, -1);
+      return;
+    }
+
+    e.target.value = e.target.value.toUpperCase();
+  },
+};
