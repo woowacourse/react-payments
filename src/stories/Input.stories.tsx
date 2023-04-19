@@ -17,7 +17,7 @@ CardNumberInput.args = {
   width: "318px",
   placeholder: "",
   textPosition: "center",
-  event: (e) => {
+  handleInput: (e) => {
     const value = e.target.value.replaceAll(" - ", "");
 
     if (value.length > 16) {
@@ -40,7 +40,7 @@ ExpiryDateInput.args = {
   width: "137px",
   placeholder: "MM / YY",
   textPosition: "center",
-  event: (e) => {
+  handleInput: (e) => {
     const value = e.target.value.replaceAll(" / ", "");
 
     if (value.length > 4) {
@@ -59,7 +59,7 @@ OwnerInput.args = {
   width: "318px",
   placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
   textPosition: "left",
-  event: (e) => {
+  handleInput: (e) => {
     if (e.target.value.length > 30) {
       e.target.value = e.target.value.slice(0, -1);
       return;
@@ -76,7 +76,7 @@ CVCInput.args = {
   width: "84px",
   placeholder: "",
   textPosition: "center",
-  event: (e) => {
+  handleInput: (e) => {
     if (e.target.value.length > 3 || !/\d$/.test(e.target.value)) {
       e.target.value = e.target.value.slice(0, -1);
       return;
@@ -93,7 +93,7 @@ PasswordInput.args = {
   width: "43px",
   placeholder: "",
   textPosition: "center",
-  event: (e) => {
+  handleInput: (e) => {
     if (e.target.value.length > 1 || !/\d$/.test(e.target.value)) {
       e.target.value = e.target.value.slice(0, -1);
       return;

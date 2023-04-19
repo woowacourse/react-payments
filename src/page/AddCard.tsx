@@ -3,6 +3,7 @@ import { CardItem } from "../components/CardItem";
 import { Header } from "../components/common/Header";
 import { CardType } from "../types/card";
 import styled from "styled-components";
+import { CardNumberInput } from "../components/CardNumberInput";
 
 export const AddCard = () => {
   const [cardInfo, setCardInfo] = useState<CardType>({
@@ -17,6 +18,12 @@ export const AddCard = () => {
       <Header text="카드 추가" />
       <Main>
         <CardItem card={cardInfo} />
+        <CardNumberInput
+          setCardNumbers={(numbers: string) => {
+            setCardInfo({ ...cardInfo, numbers: numbers });
+          }}
+          cardNumbers={cardInfo.numbers}
+        />
       </Main>
     </>
   );
