@@ -12,5 +12,5 @@ export default meta;
 export const CardOwnerNameStory = () => {
   const cardNumberRefs = useRef<HTMLInputElement>(null);
 
-  return <CardOwnerName ref={cardNumberRefs} />;
+  return <CardOwnerName nameRef={cardNumberRefs} />;
 };

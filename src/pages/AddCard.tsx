@@ -30,7 +30,7 @@ const AddCard = () => {
       <Card></Card>
       <CardNumbers refs={cardNumberRefs} />
       <ExpiredDate refs={cardExpiredDateRefs} />
-      <CardOwnerName ref={cardOwnerNameRef} />
+      <CardOwnerName nameRef={cardOwnerNameRef} />
       <SecurityCode />
       <CardPassword />
     </>

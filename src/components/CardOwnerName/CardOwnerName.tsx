@@ -16,7 +16,11 @@ const LabelContainer = styled.div`
   justify-content: space-between;
 `;
 
-const CardOwnerName = ({ ref }: { ref: React.RefObject<HTMLInputElement> }) => {
+const CardOwnerName = ({
+  nameRef,
+}: {
+  nameRef: React.RefObject<HTMLInputElement>;
+}) => {
   const [ownerName, setOwnerName] = useState('');
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,13 +36,13 @@ const CardOwnerName = ({ ref }: { ref: React.RefObject<HTMLInputElement> }) => {
     <>
       <LabelContainer>
         <CardLabel labelText="카드 소유자 이름(선택)" />
-        <CardLabel labelText={`${ref.current?.value.length || 0} / 30`} />
+        <CardLabel labelText={`${nameRef.current?.value.length || 0} / 30`} />
       </LabelContainer>
       <Wrapper>
         <CardInput
           type="text"
           maxLength={30}
-          ref={ref}
+          ref={nameRef}
           onChange={handleCardInputChange}
           value={ownerName}
           placeholder="카드에 표시된 영어 이름을 입력하세요."
