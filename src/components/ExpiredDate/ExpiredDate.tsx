@@ -76,7 +76,7 @@ const ExpiredDate = () => {
           order={0}
           placeholder="MM"
         />
-        {refObject[0].current?.value.length === 2 && <p>/</p>}
+        <p>/</p>
         <CardInput
           type="text"
           maxLength={2}
