@@ -2,9 +2,9 @@
   "parser": "@typescript-eslint/parser",
   "extends": [
     "airbnb",
-    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
+    "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "prettier"
   ],
@@ -22,12 +22,27 @@
     "import/prefer-default-export": "off",
     "import/no-unresolved": "off",
     "import/extensions": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    ],
     "react/prefer-stateless-function": "off",
     "react/destructuring-assignment": "off",
     "react/no-unused-state": "off",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
-    "react/function-component-definition": ["error", { "namedComponents": "arrow-function" }]
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function"
+      }
+    ]
   }
 }
