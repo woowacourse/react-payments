@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useState } from 'react';
-import Input from './Input/Input';
+import Input from 'components/common/Input/Input';
 
 const DEFAULT_CARD_NUMBER = '0000';
 function CardNumberInput() {
@@ -31,7 +31,7 @@ function CardNumberInput() {
   };
 
   return (
-    <section>
+    <>
       <Input
         data-id={0}
         value={cardNumbers[0]}
@@ -64,7 +64,7 @@ function CardNumberInput() {
         onChange={validateInput}
         placeholder={DEFAULT_CARD_NUMBER}
       />
-    </section>
+    </>
   );
 }
 
