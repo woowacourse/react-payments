@@ -22,9 +22,9 @@
 - [ ] 다음 버튼 클릭시 보유 카드 목록에 새로운 카드 등록 (local storage 활용)
 - [ ] 뒤로가기 버튼 클릭시 form 내부 모든 input 초기화 + 보유 카드 목록 페이지로 이동
 
-- [ ] CardNumberInput 컴포넌트
+- [x] CardNumberInput 컴포넌트
   - [x] UI
-  - [ ] 숫자가 아닌 값이 입력 된 경우 에러 발생
+  - [x] 숫자가 아닌 값이 입력 된 경우 에러 발생
   - [x] 뒤 8자리는 `type="password"`로 지정
   - [x] 4자리씩 입력 받는 `input` 4개로 구성, 이전 `input`에 4자리 입력 완료시 다음 `input`으로 focus 이동
 - [ ] ExpirationDateInput 컴포넌트
