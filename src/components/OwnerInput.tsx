@@ -13,6 +13,7 @@ const OwnerInfo = {
   width: "318px",
   placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
   textPosition: "left",
+  type: "text",
 };
 
 export const OwnerInput = ({ setOwner, owner }: OwnerInputProps) => {

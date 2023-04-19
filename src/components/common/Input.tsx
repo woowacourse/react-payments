@@ -5,6 +5,7 @@ export interface InputProps {
   width: string;
   placeholder: string;
   textPosition: string;
+  type: string;
   handleInput: (e: any) => void;
 }
 
@@ -13,6 +14,7 @@ export const Input = ({
   width,
   placeholder,
   textPosition,
+  type,
   handleInput,
 }: InputProps) => {
   return (
@@ -24,6 +26,7 @@ export const Input = ({
         width={width}
         onInput={handleInput}
         textPosition={textPosition}
+        type={type}
       />
     </>
   );

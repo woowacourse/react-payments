@@ -12,6 +12,7 @@ const CVCInfo = {
   width: "84px",
   placeholder: "",
   textPosition: "center",
+  type: "password",
 };
 
 export const CVCInput = ({ setCVC }: CVCInputProps) => {
@@ -21,7 +22,6 @@ export const CVCInput = ({ setCVC }: CVCInputProps) => {
       return;
     }
 
-    e.target.value = e.target.value.replaceAll(/\d/g, "●");
     setCVC(Number(e.target.value));
   };
 

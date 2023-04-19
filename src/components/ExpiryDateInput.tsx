@@ -12,6 +12,7 @@ const ExpiryDateInfo = {
   width: "137px",
   placeholder: "MM / YY",
   textPosition: "center",
+  type: "text",
 };
 
 export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {

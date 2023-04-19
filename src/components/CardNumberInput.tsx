@@ -11,6 +11,7 @@ const cardNumberInputInfo = {
   width: "318px",
   placeholder: "",
   textPosition: "center",
+  type: "text",
 };
 
 export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
