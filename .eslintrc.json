@@ -29,7 +29,8 @@
     "react/prop-types": 0,
     "import/no-unresolved": "off",
     "@typescript-eslint/comma-dangle": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "import/no-extraneous-dependencies": [0, { "devDependencies": true }]
   },
   "overrides": [
     {
