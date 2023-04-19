@@ -7,6 +7,7 @@ type InputInfo = {
   maxLength: number;
   width: string;
   value?: string;
+  center: boolean;
   onChange: (e: ChangeEvent) => void;
 };
 
@@ -28,23 +29,26 @@ const Input = ({ labelText, inputInfoList }: InputProps) => {
       <StyledInputLabel>
         {labelText}
         <div>
-          {inputInfoList.map(({ type, placeholder, maxLength, width, value, onChange }, index) => {
-            return (
-              <StyledInput
-                type={type}
-                name={`${labelText}${index}`}
-                maxLength={maxLength}
-                width={width}
-                placeholder={placeholder}
-                data-id={index}
-                value={value}
-                onChange={(e) => {
-                  handleMaxLength(e);
-                  onChange(e);
-                }}
-              />
-            );
-          })}
+          {inputInfoList.map(
+            ({ type, placeholder, maxLength, width, value, center, onChange }, index) => {
+              return (
+                <StyledInput
+                  type={type}
+                  name={`${labelText}${index}`}
+                  maxLength={maxLength}
+                  width={width}
+                  placeholder={placeholder}
+                  data-id={index}
+                  value={value}
+                  data-center={center}
+                  onChange={(e) => {
+                    handleMaxLength(e);
+                    onChange(e);
+                  }}
+                />
+              );
+            },
+          )}
         </div>
       </StyledInputLabel>
     </StyledInputWrapper>
@@ -74,7 +78,10 @@ const StyledInput = styled.input`
   background: transparent;
   border: none;
   border-bottom: 1px solid #525252;
-
+  padding: 12px;
+  &[data-center='true'] {
+    text-align: center;
+  }
   & + & {
     margin-left: 8px;
   }
