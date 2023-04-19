@@ -10,6 +10,7 @@ const StyledCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: end;
+  position: relative;
 `;
 const StyledTitle = styled.div`
   color: #383838;
@@ -20,7 +21,7 @@ const StyledTitle = styled.div`
 const StyledMagnet = styled.div`
   background: #cbba64;
   position: absolute;
-  top: 73px;
+  top: 60px;
   width: 40px;
   height: 26px;
   margin-bottom: 15px;

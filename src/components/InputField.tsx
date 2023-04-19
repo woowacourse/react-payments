@@ -28,7 +28,7 @@ const INPUT_INFO = {
   },
   cvc: {
     title: "보안 코드(CVC/CVV)",
-    width: "84px",
+    width: "122px",
   },
   password: {
     title: "카드 비밀번호",
