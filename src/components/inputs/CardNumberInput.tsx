@@ -4,7 +4,7 @@ import InputSeparator from '../common/InputSeparator';
 
 const CardNumberInput = () => {
   return (
-    <InputBox width='100%' labelValue='카드 번호'>
+    <InputBox labelValue='카드 번호'>
       <>
         <Input />
         <InputSeparator>-</InputSeparator>

@@ -5,6 +5,7 @@ import CardItem from '../common/CardItem';
 import { Link } from 'react-router-dom';
 import CardNumberInput from '../inputs/CardNumberInput';
 import ExpirationDateInput from '../inputs/ExpirationDateInput';
+import NameInput from '../inputs/NameInput';
 
 const CardRegistrationPage = () => {
   return (
@@ -23,6 +24,7 @@ const CardRegistrationPage = () => {
       <FormContainer>
         <CardNumberInput />
         <ExpirationDateInput />
+        <NameInput />
       </FormContainer>
     </>
   );

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import Label from './Label';
 
 interface InputBoxProps {
-  width: string;
-  labelValue: string;
+  width?: string;
+  labelValue: string | React.ReactElement;
   children: React.ReactElement;
 }
 
@@ -16,8 +16,8 @@ const InputBox = ({ width, labelValue, children }: InputBoxProps) => {
   );
 };
 
-const InputBoxContainer = styled.div<{ width: string }>`
-  width: ${(props) => props.width};
+const InputBoxContainer = styled.div<{ width?: string }>`
+  width: ${(props) => props.width || '100%'};
 `;
 
 const InputContainer = styled.div`

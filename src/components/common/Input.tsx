@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Input = styled.input`
+const Input = styled.input<{ textAlign?: string }>`
   width: 100%;
   height: 100%;
 
@@ -11,7 +11,7 @@ const Input = styled.input`
   font-size: 18px;
 
   outline: none;
-  text-align: center;
+  text-align: ${({ textAlign }) => textAlign || 'center'};
 `;
 
 export default Input;
