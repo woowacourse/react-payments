@@ -1,6 +1,6 @@
 export type Props = { text: string };
 
-function Title({ text }: Props) {
+function Label({ text }: Props) {
   return (
     <>
       <span>{text}</span>
@@ -8,4 +8,4 @@ function Title({ text }: Props) {
   );
 }
 
-export default Title;
+export default Label;
