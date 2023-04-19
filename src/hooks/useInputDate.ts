@@ -7,9 +7,9 @@ export function useInputDate() {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
-    e.target.value = value.padStart(2, "0");
-    if (name === "month") setMonth(value.padStart(2, "0"));
-    else setYear(value.padStart(2, "0"));
+    //e.target.value = value.padStart(2, "0");
+    if (name === "month") setMonth(value);
+    else setYear(value);
   }
 
   return { month, year, handleChange };
