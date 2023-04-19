@@ -24,6 +24,7 @@ export function InputBox(props: InputBoxProps) {
 }
 
 const InputContainer = styled.div`
+  position: relative;
   width: 100%;
 
   display: flex;
@@ -33,7 +34,7 @@ const InputContainer = styled.div`
 const Label = styled.label`
   font: var(--text-caption);
   color: var(--grey-300);
-  margin: 0.7rem;
+  margin-bottom: 0.3rem;
 `;
 
 const InputWrapper = styled.div`
