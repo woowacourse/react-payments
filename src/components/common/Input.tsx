@@ -1,14 +1,17 @@
+import { InputHTMLAttributes } from "react";
 import styled from "styled-components";
-
-export interface InputProps {
-  placeholder?: string;
+import { InputOption } from "../../type/input";
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleError?: () => void;
 }
 
 export function Input(props: InputProps) {
-  const { placeholder, handleChange } = props;
+  const { handleChange, handleError, ...restProps } = props;
 
-  return <InputUnit placeholder={placeholder} onChange={handleChange} />;
+  return (
+    <InputUnit onChange={handleChange} onBlur={handleError} {...restProps} />
+  );
 }
 
 const InputUnit = styled.input`
@@ -18,4 +21,6 @@ const InputUnit = styled.input`
 
   background: #ecebf1;
   border-radius: 0.7rem;
+
+  text-align: center;
 `;
