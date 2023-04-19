@@ -2,6 +2,7 @@ import { useFocus } from "hooks/useFocus";
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
+import { HIDDEN_ELEMENT_STYLE } from "constants/style";
 
 const CardNumberInput = () => {
   const { handleRef, moveFocus } = useFocus();
@@ -45,7 +46,7 @@ const CardNumberInput = () => {
           autoFocus
           required
         />
-        <S.Hyphen length={cardNumber.number1}>-</S.Hyphen>
+        <S.Hyphen cardNumber={cardNumber.number1}>-</S.Hyphen>
         <S.Input
           type="text"
           name="number2"
@@ -58,7 +59,7 @@ const CardNumberInput = () => {
           placeholder="0000"
           required
         />
-        <S.Hyphen length={cardNumber.number2}>-</S.Hyphen>
+        <S.Hyphen cardNumber={cardNumber.number2}>-</S.Hyphen>
         <S.Input
           type="password"
           name="number3"
@@ -71,7 +72,7 @@ const CardNumberInput = () => {
           placeholder="0000"
           required
         />
-        <S.Hyphen length={cardNumber.number3}>-</S.Hyphen>
+        <S.Hyphen cardNumber={cardNumber.number3}>-</S.Hyphen>
         <S.Input
           type="password"
           name="number4"
@@ -85,6 +86,9 @@ const CardNumberInput = () => {
           required
         />
       </S.InputBox>
+      <S.Caption cardNumbers={Object.values(cardNumber)}>
+        숫자 16자리를 모두 입력해 주세요.
+      </S.Caption>
     </>
   );
 };
@@ -111,16 +115,19 @@ const S = {
     text-align: center;
   `,
 
-  Hyphen: styled.p<{ length: string }>`
+  Hyphen: styled.p<{ cardNumber: string }>`
     font-weight: 900;
     align-self: center;
-    visibility: ${({ length }) =>
-      length.length !== 4 &&
-      `
-        visibility: hidden;
-        opacity: 0; 
-        pointer-events: none;
-      `};
+    visibility: ${({ cardNumber }) =>
+      cardNumber.length !== 4 && `${HIDDEN_ELEMENT_STYLE}`};
+  `,
+
+  Caption: styled.p<{ cardNumbers: string[] }>`
+    color: var(--caption-color);
+    font-size: 12px;
+    margin: 10px 0 0 4px;
+    visibility: ${({ cardNumbers }) =>
+      cardNumbers.join("").length === 16 && `${HIDDEN_ELEMENT_STYLE}`};
   `,
 };
 
