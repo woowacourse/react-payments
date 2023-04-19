@@ -10,5 +10,3 @@ export const PLACEHOLDER = Object.freeze({
   DATE: ["MM", "YY"],
   NAME: ["카드에 표시된 이름과 동일하게 입력하세요."],
 });
-
-export type LabelOption = keyof typeof LABEL;

@@ -1,5 +1,3 @@
-export interface InputOption {
-  name?: string;
-  type?: string;
-  maxLength?: number;
-}
+import { LABEL } from "../constants/inputInfo";
+
+export type LabelOption = keyof typeof LABEL;
