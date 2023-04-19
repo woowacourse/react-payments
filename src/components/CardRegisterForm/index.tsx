@@ -1,11 +1,8 @@
 import {
   ChangeEvent,
-  ChangeEventHandler,
   Dispatch,
   FormEventHandler,
-  ForwardedRef,
   SetStateAction,
-  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -13,9 +10,9 @@ import { useNavigate } from 'react-router-dom';
 
 import Card from '../Card';
 import Input, { Focus } from '../Input';
+import TooltipButton from '../TooltipButton';
 
 import styles from './cardRegisterForm.module.css';
-import TooltipButton from '../TooltipButton';
 
 interface Props {
   registerCard: (card: any) => void;
@@ -55,6 +52,10 @@ const CardRegisterForm = ({ registerCard }: Props) => {
     return Number.isNaN(Number(value)) || value === ' ';
   };
 
+  const isNotAlphabet = (value: string) => {
+    return !/^[a-zA-Z\s]*$/.test(value);
+  };
+
   const handleNumberChange = (
     event: ChangeEvent<HTMLInputElement>,
     setNumber: Dispatch<SetStateAction<string>>,
@@ -81,7 +82,10 @@ const CardRegisterForm = ({ registerCard }: Props) => {
   ) => {
     const { value, maxLength } = event.target;
 
-    setOwner(value);
+    if (value.length === 1 && value === ' ') return;
+    if (isNotAlphabet(value)) return;
+
+    setOwner(value.toUpperCase());
 
     if (value.length === maxLength) {
       inputRefs[index + 1].current?.focus();
@@ -96,7 +100,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
       cardNumber2,
       expiredMonth,
       expiredYear,
-      owner,
+      owner: owner.trim(),
     };
 
     registerCard(cardData);
