@@ -1,25 +1,24 @@
 import styled from 'styled-components';
+import { CardType } from '../types';
 
-interface Props {
-  cardNumber?: string;
-  ownerName?: string;
-  expireDate?: string;
-}
-
-const Card = (props: Props) => {
-  const { cardNumber, ownerName, expireDate } = props;
+const Card = ({
+  cardNumber = [],
+  ownerName,
+  expireDate = [],
+}: Pick<CardType, 'cardNumber' | 'expireDate' | 'ownerName'>) => {
   return (
     <CardWrapper>
       <CardChip></CardChip>
       <CardNumberArea>
-        {cardNumber &&
-          [cardNumber.slice(0, 4), cardNumber.slice(4, 8), '∙∙∙∙', '∙∙∙∙'].map((number) => (
-            <CardNumber>{number}</CardNumber>
-          ))}
+        {cardNumber.map((number, index) => (
+          <CardNumber>
+            {number.length ? (index >= 2 ? '∙'.repeat(number.length) : number) : null}
+          </CardNumber>
+        ))}
       </CardNumberArea>
       <CardInfoArea>
         <OwnerName>{ownerName || 'NAME'}</OwnerName>
-        <ExpireDate>{expireDate || 'MM/YY'}</ExpireDate>
+        <ExpireDate>{expireDate.join('') !== '' ? expireDate.join('/') : 'MM/YY'}</ExpireDate>
       </CardInfoArea>
     </CardWrapper>
   );
@@ -66,6 +65,7 @@ const CardNumberArea = styled.div`
 const CardNumber = styled.p`
   font-size: 15px;
   letter-spacing: 0.5px;
+  width: 21%;
 `;
 
 const CardInfoArea = styled.div`
