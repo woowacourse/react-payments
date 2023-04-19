@@ -16,4 +16,5 @@ export const MAX_LENGTH = Object.freeze({
   NAME: 30,
   DATE: 2,
   CODE: 3,
+  PASSWORD: 1,
 });
