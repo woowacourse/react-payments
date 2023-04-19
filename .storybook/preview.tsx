@@ -1,3 +1,5 @@
+import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import type { Preview } from '@storybook/react';
 
 const preview: Preview = {
@@ -11,5 +13,13 @@ const preview: Preview = {
     },
   },
 };
+
+export const decorators = [
+  Story => (
+    <MemoryRouter initialEntries={['/']}>
+      <Story />
+    </MemoryRouter>
+  ),
+];
 
 export default preview;
