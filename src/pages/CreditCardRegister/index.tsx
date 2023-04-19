@@ -66,7 +66,7 @@ function CreditCardRegister() {
         </S.Box>
         <S.Box>
           <S.CreditCardRegisterLabel>만료일</S.CreditCardRegisterLabel>
-          <Input type="string" value={creditCardExpiry} width="40%" textAlign="center" onChange={handleChangeCreditCardExpiry} />
+          <Input placeholder="MM/YY" type="string" value={creditCardExpiry} width="40%" textAlign="center" onChange={handleChangeCreditCardExpiry} />
         </S.Box>
         <S.Box>
           <S.FlexBox>
@@ -76,7 +76,7 @@ function CreditCardRegister() {
               /30
             </S.CreditCardRegisterLabel>
           </S.FlexBox>
-          <Input type="string" value={creditCardOwner} width="100%" textAlign="start" onChange={handleChangeCreditCardOwner} />
+          <Input placeholder="카드에 표시된 이름과 동일하게 입력하세요." type="string" value={creditCardOwner} width="100%" textAlign="start" onChange={handleChangeCreditCardOwner} />
         </S.Box>
         <S.Box>
           <S.CreditCardRegisterLabel>보안 코드(CVC/CVV)</S.CreditCardRegisterLabel>
