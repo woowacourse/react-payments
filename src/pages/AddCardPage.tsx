@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
 import FormCardAdd from '../components/FormCardAdd';
 import useCardNumber from '../hooks/useCardNumber';
 import { formatExpireDate, handleNumberInput } from '../utils/util';
+
 import './AddCardPage.css';
 
 const AddCardPage = () => {
@@ -70,10 +72,18 @@ const AddCardPage = () => {
     status: false,
   };
 
+  const navigate = useNavigate();
+
+  const onBackButtonClick = () => {
+    navigate('/');
+  };
+
   return (
     <div className="add-card-page">
       <div className="add-card-page-header">
-        <button className="back-button">{'<'}</button>
+        <button className="back-button" onClick={onBackButtonClick}>
+          {'<'}
+        </button>
         <h3>뒤로 가기</h3>
       </div>
       <section className="add-card-page-body">
