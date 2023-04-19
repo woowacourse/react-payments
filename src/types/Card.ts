@@ -1,16 +1,16 @@
 export interface Card {
   id: number;
   cardNumber: {
-    first: number;
-    second: number;
-    third: number;
-    fourth: number;
+    first: string;
+    second: string;
+    third: string;
+    fourth: string;
   };
   expirationDate: {
-    month: number;
-    year: number;
+    month: string;
+    year: string;
   };
   name: string;
-  securityCode: number;
-  password: number;
+  securityCode: string;
+  password: string;
 }
