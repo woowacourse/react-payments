@@ -30,6 +30,12 @@ const Ul = styled.ul`
   gap: 46px;
 
   overflow: scroll;
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background-color: transparent;
+  }
 `;
 
 export default CardList;
