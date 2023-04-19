@@ -113,6 +113,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
             <div className={styles.inputContainer}>
               <input
                 type="text"
+                minLength={4}
                 maxLength={4}
                 required
                 autoFocus
@@ -122,6 +123,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
               <span>-</span>
               <input
                 type="text"
+                minLength={4}
                 maxLength={4}
                 required
                 value={cardNumber2}
@@ -130,6 +132,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
               <span>-</span>
               <input
                 type="password"
+                minLength={4}
                 maxLength={4}
                 required
                 value={cardNumber3}
@@ -138,6 +141,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
               <span>-</span>
               <input
                 type="password"
+                minLength={4}
                 maxLength={4}
                 required
                 value={cardNumber4}
@@ -151,6 +155,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
             <div className={styles.expirationDate}>
               <input
                 type="text"
+                minLength={2}
                 maxLength={2}
                 required
                 placeholder="MM"
@@ -160,6 +165,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
               <span>/</span>
               <input
                 type="text"
+                minLength={2}
                 maxLength={2}
                 required
                 placeholder="YY"
@@ -188,7 +194,9 @@ const CardRegisterPage = ({ registerCard }: Props) => {
               <div className={styles.cvc}>
                 <input
                   type="password"
+                  minLength={3}
                   maxLength={3}
+                  required
                   value={cvc}
                   onChange={(e) => handleNumberChange(e, setCvc)}
                 />
@@ -202,13 +210,17 @@ const CardRegisterPage = ({ registerCard }: Props) => {
             <div className={styles.cardPassword}>
               <input
                 type="password"
+                minLength={1}
                 maxLength={1}
+                required
                 value={cardPassword1}
                 onChange={(e) => handleNumberChange(e, setCardPassword1)}
               />
               <input
                 type="password"
+                minLength={1}
                 maxLength={1}
+                required
                 value={cardPassword2}
                 onChange={(e) => handleNumberChange(e, setCardPassword2)}
               />
