@@ -36,8 +36,12 @@ export const CardForm = ({ cardInfo, setCardInfo }: CardFormProps) => {
         }}
       />
       <PasswordInput
-        setPassword={(password: number[]) => {
-          setCardInfo({ ...cardInfo, password: password });
+        password={cardInfo.password}
+        setPassword={(number: number[]) => {
+          setCardInfo({
+            ...cardInfo,
+            password: number,
+          });
         }}
       />
     </Form>

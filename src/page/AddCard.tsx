@@ -13,7 +13,7 @@ export const AddCard = () => {
     expiryDate: "MM/YY",
     color: "#333333",
     CVC: 123,
-    password: [1, 2],
+    password: [0, 0],
   });
 
   return (
