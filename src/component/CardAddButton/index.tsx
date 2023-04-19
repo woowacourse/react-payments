@@ -1,5 +1,4 @@
 import React from "react";
-import CardDetailView from "../CardDetailView";
 import St from "./styled";
 
 function CardAddButton() {

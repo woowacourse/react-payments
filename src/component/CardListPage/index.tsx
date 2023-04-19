@@ -1,7 +1,7 @@
 import React from "react";
 import St from "./styled";
-import CardListHeader from "../CardListHeader";
-import CardList from "../CardList";
+import CardListHeader from "./CardListHeader";
+import CardList from "./CardList";
 
 function CardListPage() {
   return (

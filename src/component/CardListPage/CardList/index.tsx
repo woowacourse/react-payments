@@ -1,6 +1,6 @@
 import React from "react";
-import CardAddButton from "../CardAddButton";
-import CardDetailView from "../CardDetailView";
+import CardAddButton from "../../CardAddButton";
+import CardDetailView from "../../CardDetailView";
 import St from "./styled";
 
 function CardList() {
