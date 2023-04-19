@@ -27,11 +27,7 @@ function CardNumber() {
 
   const cardChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const value = event.currentTarget.value as string;
-    const name = event.currentTarget.dataset["setOrder"] as
-      | "first"
-      | "second"
-      | "third"
-      | "fourth";
+    const name = event.currentTarget.dataset["order"] as keyof CardNumberObj;
 
     if (!name) return;
 
@@ -63,7 +59,7 @@ function CardNumber() {
       <FormLabel>카드 번호</FormLabel>
       <CardNumberInputContainer>
         <Input
-          data-set-order="first"
+          data-order="first"
           value={cardNumber["first"]}
           onChange={cardChange}
           maxLength={4}
@@ -72,7 +68,7 @@ function CardNumber() {
         />
         <p>-</p>
         <Input
-          data-set-order="second"
+          data-order="second"
           value={cardNumber["second"]}
           onChange={cardChange}
           maxLength={4}
@@ -82,7 +78,7 @@ function CardNumber() {
         <p>-</p>
 
         <Input
-          data-set-order="third"
+          data-order="third"
           value={cardNumber["third"]}
           onChange={cardChange}
           maxLength={4}
@@ -93,7 +89,7 @@ function CardNumber() {
         <p>-</p>
 
         <Input
-          data-set-order="fourth"
+          data-order="fourth"
           value={cardNumber["fourth"]}
           onChange={cardChange}
           maxLength={4}
