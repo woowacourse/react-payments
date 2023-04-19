@@ -1,18 +1,6 @@
-.inputForm {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.inputForm label {
-  color: #525252;
-  font-size: 14px;
-}
-
-.inputForm input {
-  width: 100%;
-  max-width: 350px;
-  padding: 15px 12px;
+.input {
+  min-width: 10px;
+  padding: 12px 12px;
   border-radius: 7px;
   border: 1px solid #d6d6d6;
   outline: 0;
@@ -20,7 +8,16 @@
   transition: all 0.2s ease-in-out;
 }
 
-.inputForm input:focus {
+.input:focus {
   border-color: #8dc9ff;
   box-shadow: 0 0 0 3px rgba(141, 201, 255, 0.4);
+}
+
+.input.error {
+  background-color: #fff6f6;
+  border-color: #eb7171;
+}
+
+.input.error:focus {
+  box-shadow: 0 0 0 3px rgba(255, 177, 177, 0.4);
 }
