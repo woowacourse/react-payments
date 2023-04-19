@@ -25,7 +25,7 @@ const CardNumberInput = () => {
       };
     });
 
-    moveFocus(target);
+    moveFocus(target, 4);
   };
 
   return (
@@ -125,7 +125,7 @@ const S = {
   Caption: styled.p<{ cardNumbers: string[] }>`
     color: var(--caption-color);
     font-size: 12px;
-    margin: 10px 0 0 4px;
+    margin: 10px 0 20px 4px;
     visibility: ${({ cardNumbers }) =>
       cardNumbers.join("").length === 16 && `${HIDDEN_ELEMENT_STYLE}`};
   `,
