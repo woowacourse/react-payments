@@ -5,11 +5,12 @@ import { CardType } from "../types/card";
 import styled from "styled-components";
 import { CardNumberInput } from "../components/CardNumberInput";
 import { ExpiryDateInput } from "../components/ExpiryDateInput";
+import { OwnerInput } from "../components/OwnerInput";
 
 export const AddCard = () => {
   const [cardInfo, setCardInfo] = useState<CardType>({
     numbers: "",
-    owner: "NAME",
+    owner: "",
     expiryDate: "MM/YY",
     color: "#333333",
   });
@@ -27,6 +28,12 @@ export const AddCard = () => {
         <ExpiryDateInput
           setExpiryDate={(date: string) => {
             setCardInfo({ ...cardInfo, expiryDate: date });
+          }}
+        />
+        <OwnerInput
+          owner={cardInfo.owner}
+          setOwner={(owner: string) => {
+            setCardInfo({ ...cardInfo, owner: owner });
           }}
         />
       </Main>

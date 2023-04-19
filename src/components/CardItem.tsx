@@ -13,7 +13,7 @@ export const CardItem = ({ card }: CardProps) => {
         <IcChip />
         <CardNumbers>{card.numbers}</CardNumbers>
         <InfoWrapper>
-          <Name>{card.owner}</Name>
+          <Name>{card.owner ? card.owner : "NAME"}</Name>
           <ExpiryDate>{card.expiryDate}</ExpiryDate>
         </InfoWrapper>
       </Container>
