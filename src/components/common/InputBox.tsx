@@ -1,12 +1,14 @@
 import React, { ReactElement } from "react";
 import styled from "styled-components";
-import { LabelOption, LABEL, PLACEHOLDER } from "../../constants/inputInfo";
+import { LABEL, PLACEHOLDER } from "../../constants/inputInfo";
+import { LabelOption } from "../../type/input";
+
 import { Input } from "./Input";
 export interface InputBoxProps {
   type: LabelOption;
   render?: () => JSX.Element;
   children: React.ReactNode;
-  error?: string;
+  error?: string | null;
 }
 
 export function InputBox(props: InputBoxProps) {
