@@ -2,6 +2,8 @@ import { ChangeEvent } from "react";
 import { validateCardNumber } from "../../../validation/cardNumber";
 import Input from "../../common/Input";
 
+import "./cardNumber.css";
+
 interface Props {
   setCardNumber?: React.Dispatch<React.SetStateAction<number[]>>;
   setError?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,24 +21,28 @@ export default function CardNumber(props: Props) {
   return (
     <>
       <Input
+        className="first input-card-number"
         type="number"
         inputMode="numeric"
         onChange={onChangeCardNumber}
         placeholder="X X X X"
       />
       <Input
+        className=" input-card-number"
         type="password"
         inputMode="numeric"
         onChange={onChangeCardNumber}
         placeholder="X X X X"
       />
       <Input
+        className=" input-card-number"
         type="password"
         inputMode="numeric"
         onChange={onChangeCardNumber}
         placeholder="X X X X"
       />
       <Input
+        className="last input-card-number"
         type="number"
         inputMode="numeric"
         onChange={onChangeCardNumber}
