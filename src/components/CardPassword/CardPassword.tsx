@@ -46,7 +46,7 @@ const CardPassword = () => {
 
   return (
     <>
-      <CardLabel labelText="보안 코드(CVC/CVV)" />
+      <CardLabel labelText="카드 비밀번호" />
       <Wrapper>
         <CardInput
           type="password"
