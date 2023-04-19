@@ -3,7 +3,7 @@ import CardDetailHeader from "./index";
 
 export default {
   component: CardDetailHeader,
-  title: "CardDetailHeader",
+  title: "CardDetail/CardDetailHeader",
 };
 
 const Template = () => <CardDetailHeader />;

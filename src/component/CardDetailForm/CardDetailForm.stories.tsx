@@ -3,7 +3,7 @@ import CardDetailForm from "./index";
 
 export default {
   component: CardDetailForm,
-  title: "CardDetailForm",
+  title: "CardDetail/CardDetailForm",
 };
 
 const Template = () => <CardDetailForm />;

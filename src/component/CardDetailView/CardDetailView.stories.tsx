@@ -3,7 +3,7 @@ import CardDetailView from "./index";
 
 export default {
   component: CardDetailView,
-  title: "CardDetailView",
+  title: "CardDetail/CardDetailView",
 };
 
 const Template = () => <CardDetailView />;
