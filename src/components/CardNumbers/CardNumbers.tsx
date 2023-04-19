@@ -23,13 +23,26 @@ const CardNumbers = () => {
     3: useRef<HTMLInputElement>(null),
   };
 
-  const [currentOrder, setCurrentOrder] = useState<number>(0);
+  const [typing, setTyping] = useState<any>({
+    0: '',
+    1: '',
+    2: '',
+    3: '',
+  });
 
-  const handleCardInputChange = () => {
+  const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!(e.target instanceof HTMLInputElement)) return;
+    const currentOrder = Number(e.target.dataset['order']);
+
+    if (/[^0-9]/g.test(e.target.value)) {
+      return;
+    }
+
+    setTyping({ ...typing, [currentOrder]: e.target.value });
+
     if (refObject[currentOrder].current?.value.length === 4) {
       if (currentOrder === 3) return;
       refObject[currentOrder + 1].current?.focus();
-      setCurrentOrder(currentOrder + 1);
     }
   };
 
@@ -42,6 +55,8 @@ const CardNumbers = () => {
           maxLength={4}
           ref={refObject[0]}
           onChange={handleCardInputChange}
+          value={typing[0]}
+          order={0}
         />
         {refObject[0].current?.value.length === 4 && <p>-</p>}
         <CardInput
@@ -49,6 +64,8 @@ const CardNumbers = () => {
           maxLength={4}
           ref={refObject[1]}
           onChange={handleCardInputChange}
+          value={typing[1]}
+          order={1}
         />
         {refObject[1].current?.value.length === 4 && <p>-</p>}
         <CardInput
@@ -56,6 +73,8 @@ const CardNumbers = () => {
           maxLength={4}
           ref={refObject[2]}
           onChange={handleCardInputChange}
+          value={typing[2]}
+          order={2}
         />
         {refObject[2].current?.value.length === 4 && <p>-</p>}
         <CardInput
@@ -63,6 +82,8 @@ const CardNumbers = () => {
           maxLength={4}
           ref={refObject[3]}
           onChange={handleCardInputChange}
+          value={typing[3]}
+          order={3}
         />
       </Wrapper>
     </>
