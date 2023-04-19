@@ -66,24 +66,28 @@ const AddCardContainer = () => {
               type: 'number',
               maxLength: 4,
               width: '75px',
+              center: true,
               onChange: onChangeState(cardNumbers, setCardNumbers),
             },
             {
               type: 'number',
               maxLength: 4,
               width: '75px',
+              center: true,
               onChange: onChangeState(cardNumbers, setCardNumbers),
             },
             {
-              type: 'number',
+              type: 'password',
               maxLength: 4,
               width: '75px',
+              center: true,
               onChange: onChangeState(cardNumbers, setCardNumbers),
             },
             {
-              type: 'number',
+              type: 'password',
               maxLength: 4,
               width: '75px',
+              center: true,
               onChange: onChangeState(cardNumbers, setCardNumbers),
             },
           ]}
@@ -96,6 +100,7 @@ const AddCardContainer = () => {
               placeholder: 'MM',
               maxLength: 2,
               width: '75px',
+              center: true,
               onChange: onChangeState(cardExpirationDate, setCardExpirationDate),
             },
             {
@@ -103,6 +108,7 @@ const AddCardContainer = () => {
               placeholder: 'YY',
               maxLength: 2,
               width: '75px',
+              center: true,
               onChange: onChangeState(cardExpirationDate, setCardExpirationDate),
             },
           ]}
@@ -114,7 +120,8 @@ const AddCardContainer = () => {
               type: 'text',
               placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
               maxLength: 30,
-              width: '250px',
+              width: '100%',
+              center: false,
               onChange: onChangeState(cardOwner, setCardOwner),
             },
           ]}
@@ -126,6 +133,7 @@ const AddCardContainer = () => {
               type: 'password',
               maxLength: 3,
               width: '75px',
+              center: false,
               onChange: onChangeState(cardCVC, setCardCVC),
             },
           ]}
@@ -137,12 +145,14 @@ const AddCardContainer = () => {
               type: 'password',
               maxLength: 1,
               width: '40px',
+              center: false,
               onChange: onChangeState(cardPWD, setCardPWD),
             },
             {
               type: 'password',
               maxLength: 1,
               width: '40px',
+              center: false,
               onChange: onChangeState(cardPWD, setCardPWD),
             },
           ]}

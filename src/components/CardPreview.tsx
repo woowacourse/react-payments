@@ -12,9 +12,25 @@ const CardPreview = ({ cardNumbers, cardOwner, cardExpirationDate }: CardPreview
     <CardPreviewWrapper>
       <CardChip />
       <CardNumberWrapper>
-        {cardNumbers.map((cardNumber) => (
-          <CardNumber>{cardNumber}</CardNumber>
-        ))}
+        {cardNumbers.map((cardNumber, index) => {
+          if (index < 2) {
+            return (
+              <CardNumber>
+                <div>{cardNumber}</div>
+              </CardNumber>
+            );
+          } else {
+            return (
+              <CardNumber>
+                {Array(cardNumber.length)
+                  .fill(0)
+                  .map(() => (
+                    <Dot />
+                  ))}
+              </CardNumber>
+            );
+          }
+        })}
       </CardNumberWrapper>
       <CardInfo>
         <div>{cardOwner[0]}</div>
@@ -53,10 +69,19 @@ const CardNumberWrapper = styled.ul`
   display: flex;
   margin-top: 12px;
   margin-left: 4px;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
+  font-size: 14px;
 `;
 
 const CardNumber = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  line-height: 1.6;
+
+  width: 36px;
+
   & + & {
     margin-left: 12px;
   }
@@ -71,6 +96,18 @@ const CardInfo = styled.div`
   justify-content: space-between;
   margin-left: 4px;
   margin-right: 6px;
+`;
+
+const Dot = styled.span`
+  display: inline-block;
+  background-color: #fff;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+
+  & + & {
+    margin-left: 4px;
+  }
 `;
 
 export default CardPreview;
