@@ -1,8 +1,6 @@
-import { HTMLAttributes } from "react";
+import { InputHTMLAttributes } from "react";
 
-interface Props extends HTMLAttributes<HTMLInputElement> {
-  type: string;
-}
+interface Props extends InputHTMLAttributes<HTMLInputElement> {}
 
 export default function Input(props: Props) {
   const { type, onChange, placeholder, inputMode, defaultValue, style } = props;
