@@ -10,7 +10,11 @@ function CardList({ cardList }: CardListProps) {
   return (
     <>
       {cardList.length ? (
-        cardList.map((card) => <CardItem information={card} />)
+        <div className={styles.container}>
+          {cardList.map((card) => (
+            <CardItem information={card} />
+          ))}
+        </div>
       ) : (
         <h4 className={styles.emptyListMessage}>새로운 카드를 등록해주세요.</h4>
       )}
