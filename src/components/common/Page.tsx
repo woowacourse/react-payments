@@ -12,9 +12,11 @@ const Page = (props: PageType) => {
 const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
 
   background: white;
+  padding: 100px;
 `;
 
 export default Page;
