@@ -13,7 +13,25 @@ const AddCardPage = () => {
   return (
     <Container>
       <AppBar title={"카드 추가"} leftChild={<Link to="/">〈</Link>} />
-      <CardPreview />
+      <CardPreview
+        card={{
+          number: {
+            firstGroup: "",
+            secondGroup: "",
+            thirdGroup: "",
+            fourthGroup: "",
+          },
+
+          expirationDate: {
+            month: "",
+            year: "",
+          },
+
+          ownerName: "",
+          securityCode: "",
+          password: "",
+        }}
+      />
       <Form>
         <CardNumberInput />
         <CardExpirationDateInput />

@@ -1,26 +1,35 @@
 import styled from "styled-components";
+import { Card } from "../../types";
 
-const CardPreview = () => {
+type CardPreviewProps = {
+  card: Card;
+};
+
+const CardPreview = ({ card }: CardPreviewProps) => {
+  const { number, ownerName, expirationDate } = card;
+
   return (
-    <Card>
+    <CardLayout>
       <ICChip></ICChip>
       <NumberContainer>
-        <span>1234</span>
-        <span>1234</span>
-        <span>••••</span>
-        <span>••••</span>
+        <span>{number.firstGroup}</span>
+        <span>{number.firstGroup}</span>
+        <span>{"•".repeat(number.thirdGroup.length)}</span>
+        <span>{"•".repeat(number.fourthGroup.length)}</span>
       </NumberContainer>
       <InfoContainer>
-        <span>제레미</span>
-        <span>04 / 21</span>
+        <span>{ownerName ? ownerName : "NAME"}</span>
+        <span>
+          {expirationDate.month ? expirationDate.month : "MM"} / {expirationDate.year ? expirationDate.year : "YY"}
+        </span>
       </InfoContainer>
-    </Card>
+    </CardLayout>
   );
 };
 
 export default CardPreview;
 
-const Card = styled.div`
+const CardLayout = styled.div`
   position: relative;
 
   display: flex;
