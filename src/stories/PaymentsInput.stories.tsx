@@ -17,11 +17,11 @@ export const ExpirationDate: Story = {
 };
 
 export const CardOwner: Story = {
-  args: { title: '카드 소유자 이름(선택)', inputAmount: 1, maxLength: 30, inputDivideLetter: null },
+  args: { title: '카드 소유자 이름(선택)', inputAmount: 1, maxLength: 30 },
 };
 
 export const SecurityCode: Story = {
-  args: { title: '보언 코드(CVC/CVV)', inputAmount: 1, maxLength: 3, inputDivideLetter: null },
+  args: { title: '보언 코드(CVC/CVV)', inputAmount: 1, maxLength: 3 },
 };
 
 export const CardPassword: Story = {
