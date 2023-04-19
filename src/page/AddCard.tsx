@@ -3,11 +3,7 @@ import { CardItem } from "../components/CardItem";
 import { Header } from "../components/common/Header";
 import { CardType } from "../types/card";
 import styled from "styled-components";
-import { CardNumberInput } from "../components/CardNumberInput";
-import { ExpiryDateInput } from "../components/ExpiryDateInput";
-import { OwnerInput } from "../components/OwnerInput";
-import { CVCInput } from "../components/CVCInput";
-import { PasswordInput } from "../components/PasswordInput";
+import { CardForm } from "../components/CardForm";
 
 export const AddCard = () => {
   const [cardInfo, setCardInfo] = useState<CardType>({
@@ -24,32 +20,7 @@ export const AddCard = () => {
       <Header text="카드 추가" />
       <Main>
         <CardItem card={cardInfo} />
-        <CardNumberInput
-          setCardNumbers={(numbers: string) => {
-            setCardInfo({ ...cardInfo, numbers: numbers });
-          }}
-        />
-        <ExpiryDateInput
-          setExpiryDate={(date: string) => {
-            setCardInfo({ ...cardInfo, expiryDate: date });
-          }}
-        />
-        <OwnerInput
-          owner={cardInfo.owner}
-          setOwner={(owner: string) => {
-            setCardInfo({ ...cardInfo, owner: owner });
-          }}
-        />
-        <CVCInput
-          setCVC={(CVC: number) => {
-            setCardInfo({ ...cardInfo, CVC: CVC });
-          }}
-        />
-        <PasswordInput
-          setPassword={(password: number[]) => {
-            setCardInfo({ ...cardInfo, password: password });
-          }}
-        />
+        <CardForm cardInfo={cardInfo} setCardInfo={setCardInfo} />
       </Main>
     </>
   );
