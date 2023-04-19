@@ -1,18 +1,19 @@
-import { useState } from "react";
-import { ThemeProvider } from "styled-components";
-import { theme } from "./style/global";
 import { Home } from "./page/Home";
 import { AddCard } from "./page/AddCard";
 import { GlobalStyle } from "./style/resetStyle";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 const App = () => {
-  const [isHome, setIsHome] = useState(true);
-
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <GlobalStyle />
-      {isHome ? <Home /> : <AddCard />}
-    </ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/addCard" element={<AddCard />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };
 

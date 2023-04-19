@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import Card from "./common/Card";
+import { Link } from "react-router-dom";
 
 export const EmptyCard = () => {
   return (
-    <Card>
-      <PlusIcon>+</PlusIcon>
-    </Card>
+    <Link to="/addCard">
+      <Card>
+        <PlusIcon>+</PlusIcon>
+      </Card>
+    </Link>
   );
 };
 
@@ -16,6 +19,4 @@ const PlusIcon = styled.div`
   font-size: 30px;
   font-weight: 600;
   color: #575757;
-
-  /* color: ${(props) => props.theme.color.grey4}; */
 `;
