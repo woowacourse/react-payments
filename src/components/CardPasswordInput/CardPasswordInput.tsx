@@ -1,16 +1,20 @@
 import styled from "styled-components";
 import { InputContainer, Input, Label } from "../common";
 
-const CardPasswordInput = () => {
+type CardPasswordInputProps = {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const CardPasswordInput = ({ onChange }: CardPasswordInputProps) => {
   return (
     <Label>
       카드 비밀번호
       <Div>
         <InputContainer width="43px">
-          <Input textAlign="center" width="100%" type="password" maxLength={1} required />
+          <Input textAlign="center" width="100%" type="password" maxLength={1} required onChange={onChange} />
         </InputContainer>
         <InputContainer width="43px">
-          <Input textAlign="center" width="100%" type="password" maxLength={1} required />
+          <Input textAlign="center" width="100%" type="password" maxLength={1} required onChange={onChange} />
         </InputContainer>
         <PasswordIcon>•</PasswordIcon>
         <PasswordIcon>•</PasswordIcon>

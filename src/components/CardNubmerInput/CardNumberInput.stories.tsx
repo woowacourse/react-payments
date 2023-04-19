@@ -9,6 +9,6 @@ export default {
 export const Default = () => (
   <>
     <GlobalStyle />
-    <CardNumberInput></CardNumberInput>
+    <CardNumberInput onChange={() => {}}></CardNumberInput>
   </>
 );

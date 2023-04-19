@@ -1,6 +1,10 @@
 import { InputContainer, Input, Label } from "../common";
 
-const CardOwnerNameInput = () => {
+type CardOwnerNameInputProp = {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const CardOwnerNameInput = ({ onChange }: CardOwnerNameInputProp) => {
   return (
     <Label>
       카드 소유자 이름(선택)
@@ -12,6 +16,7 @@ const CardOwnerNameInput = () => {
           type="text"
           maxLength={30}
           required
+          onChange={onChange}
         />
       </InputContainer>
     </Label>

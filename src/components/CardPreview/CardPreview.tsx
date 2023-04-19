@@ -1,21 +1,23 @@
 import styled from "styled-components";
 import { Card } from "../../types";
 
+type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate">;
+
 type CardPreviewProps = {
-  card: Card;
+  card: PreviewCard;
 };
 
 const CardPreview = ({ card }: CardPreviewProps) => {
-  const { number, ownerName, expirationDate } = card;
+  const { cardNumber, ownerName, expirationDate } = card;
 
   return (
     <CardLayout>
       <ICChip></ICChip>
       <NumberContainer>
-        <span>{number.firstGroup}</span>
-        <span>{number.firstGroup}</span>
-        <span>{"•".repeat(number.thirdGroup.length)}</span>
-        <span>{"•".repeat(number.fourthGroup.length)}</span>
+        <span>{cardNumber.firstGroup}</span>
+        <span>{cardNumber.secondGroup}</span>
+        <span>{"•".repeat(cardNumber.thirdGroup.length)}</span>
+        <span>{"•".repeat(cardNumber.fourthGroup.length)}</span>
       </NumberContainer>
       <InfoContainer>
         <span>{ownerName ? ownerName : "NAME"}</span>
@@ -29,7 +31,7 @@ const CardPreview = ({ card }: CardPreviewProps) => {
 
 export default CardPreview;
 
-const CardLayout = styled.div`
+const CardLayout = styled.li`
   position: relative;
 
   display: flex;

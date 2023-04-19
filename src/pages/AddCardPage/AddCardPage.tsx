@@ -8,36 +8,68 @@ import CardPasswordInput from "../../components/CardPasswordInput/CardPasswordIn
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Container } from "../../components/common";
+import { useState } from "react";
+import { CardExpirationDate, CardNumber } from "../../types";
 
 const AddCardPage = () => {
+  const [cardNumber, setCardNumber] = useState<CardNumber>({
+    firstGroup: "",
+    secondGroup: "",
+    thirdGroup: "",
+    fourthGroup: "",
+  });
+
+  const [expirationDate, setExpirationDate] = useState<CardExpirationDate>({
+    month: "",
+    year: "",
+  });
+
+  const [ownerName, setOwnerName] = useState<string>("");
+  const [securityCode, setSecurityCode] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const targetGroup = e.target.name;
+
+    setCardNumber({ ...cardNumber, [targetGroup]: value });
+  };
+
+  const handleExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const dateType = e.target.name;
+
+    setExpirationDate({ ...expirationDate, [dateType]: value });
+  };
+
+  const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const name = e.target.value;
+
+    setOwnerName(name);
+  };
+
+  const handleSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const code = e.target.value;
+
+    setSecurityCode(code);
+  };
+
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const pw = e.target.value;
+
+    setPassword(pw);
+  };
+
   return (
     <Container>
       <AppBar title={"카드 추가"} leftChild={<Link to="/">〈</Link>} />
-      <CardPreview
-        card={{
-          number: {
-            firstGroup: "",
-            secondGroup: "",
-            thirdGroup: "",
-            fourthGroup: "",
-          },
-
-          expirationDate: {
-            month: "",
-            year: "",
-          },
-
-          ownerName: "",
-          securityCode: "",
-          password: "",
-        }}
-      />
+      <CardPreview card={{ cardNumber, expirationDate, ownerName }} />
       <Form>
-        <CardNumberInput />
-        <CardExpirationDateInput />
-        <CardOwnerNameInput />
-        <CardSecurityCodeInput />
-        <CardPasswordInput />
+        <CardNumberInput onChange={handleCardNumber} />
+        <CardExpirationDateInput onChange={handleExpirationDate} />
+        <CardOwnerNameInput onChange={handleOwnerName} />
+        <CardSecurityCodeInput onChange={handleSecurityCode} />
+        <CardPasswordInput onChange={handlePassword} />
         <ButtonBox>
           <Button>다음</Button>
         </ButtonBox>

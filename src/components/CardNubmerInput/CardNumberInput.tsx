@@ -1,17 +1,53 @@
 import { InputContainer, Input, Label } from "../common";
 
-const CardNumberInput = () => {
+type CardNumberInputProps = {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const CardNumberInput = ({ onChange }: CardNumberInputProps) => {
   return (
     <Label>
       카드번호
       <InputContainer width="318px">
-        <Input textAlign="center" width="40px" type="text" maxLength={4} required />
+        <Input
+          name="firstGroup"
+          textAlign="center"
+          width="40px"
+          type="text"
+          maxLength={4}
+          required
+          onChange={onChange}
+        />
         <span>-</span>
-        <Input textAlign="center" width="40px" type="text" maxLength={4} required />
+        <Input
+          name="secondGroup"
+          textAlign="center"
+          width="40px"
+          type="text"
+          maxLength={4}
+          required
+          onChange={onChange}
+        />
         <span>-</span>
-        <Input textAlign="center" width="40px" type="password" maxLength={4} required />
+        <Input
+          name="thirdGroup"
+          textAlign="center"
+          width="40px"
+          type="password"
+          maxLength={4}
+          required
+          onChange={onChange}
+        />
         <span>-</span>
-        <Input textAlign="center" width="40px" type="password" maxLength={4} required />
+        <Input
+          name="fourthGroup"
+          textAlign="center"
+          width="40px"
+          type="password"
+          maxLength={4}
+          required
+          onChange={onChange}
+        />
       </InputContainer>
     </Label>
   );

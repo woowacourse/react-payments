@@ -7,11 +7,12 @@ type CardListProps = {
 
 const CardList = ({ cards }: CardListProps) => {
   return (
-    <div>
-      {cards.map((card) => (
-        <CardPreview card={card} />
-      ))}
-    </div>
+    <ul>
+      {cards.map((card) => {
+        const { cardNumber, ownerName, expirationDate } = card;
+        return <CardPreview card={{ cardNumber, ownerName, expirationDate }} />;
+      })}
+    </ul>
   );
 };
 

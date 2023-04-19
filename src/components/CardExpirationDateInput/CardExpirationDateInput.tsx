@@ -1,14 +1,36 @@
 import styled from "styled-components";
 import { InputContainer, Input, Label } from "../common";
 
-const CardExpirationDateInput = () => {
+type CardExpirationDateInputProps = {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputProps) => {
   return (
     <Label>
       만료일
       <InputContainer width="137px">
-        <Input textAlign="center" width="40px" placeholder="MM" type="text" maxLength={2} required />
+        <Input
+          name="month"
+          textAlign="center"
+          width="40px"
+          placeholder="MM"
+          type="text"
+          maxLength={2}
+          required
+          onChange={onChange}
+        />
         <Span>/</Span>
-        <Input textAlign="center" width="40px" placeholder="YY" type="text" maxLength={2} required />
+        <Input
+          name="year"
+          textAlign="center"
+          width="40px"
+          placeholder="YY"
+          type="text"
+          maxLength={2}
+          required
+          onChange={onChange}
+        />
       </InputContainer>
     </Label>
   );
