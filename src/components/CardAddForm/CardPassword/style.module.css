@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.container input {
+  width: 42px;
+  text-align: center;
+}
+
+.passwordPlaceholder {
+  display: flex;
+  margin-left: 16px;
+  gap: 24px;
+}
