@@ -30,8 +30,6 @@ function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: Credi
     return true;
   };
 
-  console.log(isVaild());
-
   return (
     <S.CreditCardLayout isVaild={isVaild()}>
       <S.CreditCardICChip />
