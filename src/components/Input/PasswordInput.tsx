@@ -13,10 +13,8 @@ export function PasswordInput() {
       const { value } = e.target;
       const isNumber = !isNaN(Number(value));
 
-      if (!isNumber) {
-        setFirstDigit(value.slice(0, -1));
-        return;
-      }
+      if (!isNumber) return;
+
       setFirstDigit(value);
     }
 
