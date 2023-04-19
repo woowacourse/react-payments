@@ -1,5 +1,9 @@
+import styled from "styled-components";
+
 import { useEffect, useState } from "react";
+import { Input } from "./common/Input";
 import { InputBox } from "./common/InputBox";
+import { LabelOption, LABEL, PLACEHOLDER } from "../constants/inputInfo";
 
 export function CardNumber() {
   const [cardNumber, setCardNumber] = useState<string>("");
@@ -10,6 +14,13 @@ export function CardNumber() {
   }
 
   return (
-    <InputBox labelText="카드 번호" handleChange={handleChange}></InputBox>
+    <div style={{ width: "31.8rem" }} id="wrapper">
+      <InputBox type={"NUMBER"}>
+        <Input handleChange={handleChange}></Input>
+        <Input handleChange={handleChange}></Input>
+        <Input handleChange={handleChange}></Input>
+        <Input handleChange={handleChange}></Input>
+      </InputBox>
+    </div>
   );
 }
