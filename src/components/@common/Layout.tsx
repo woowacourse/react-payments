@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import Header from "src/components/Header";
+import Header from "./Header";
 import { useLocation } from "react-router-dom";
 
-function Layout() {
+interface Props {
+  children: React.ReactNode;
+}
+
+function Layout(props: Props) {
   const location = useLocation();
   const [headProps, setHeadProps] = useState({
     text: "보유카드",
@@ -25,6 +29,7 @@ function Layout() {
   return (
     <LayoutContainer>
       <Header headingText={headProps.text} backButton={headProps.backButton} />
+      {props.children}
     </LayoutContainer>
   );
 }

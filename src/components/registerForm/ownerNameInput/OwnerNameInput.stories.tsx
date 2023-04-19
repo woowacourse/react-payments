@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import OwnerNameInput from "./OwnerNameInput";
+import OwnerNameInput from ".";
 
 const ownerNameInput = {
   component: OwnerNameInput,

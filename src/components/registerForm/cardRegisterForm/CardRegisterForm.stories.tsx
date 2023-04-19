@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import CardRegisterForm from "./CardRegisterForm";
+import CardRegisterForm from ".";
 
 const cardRegister = {
   component: CardRegisterForm,

@@ -1,8 +1,8 @@
 import React, { forwardRef, useState } from "react";
-import Input from "src/components/common/Input";
+import Input from "src/components/@common/Input";
 import styled, { css } from "styled-components";
-import FormLabel from "src/components/common/FormLabel";
-import ErrorSpan from "src/components/common/ErrorSpan";
+import FormLabel from "src/components/@common/FormLabel";
+import ErrorSpan from "src/components/@common/ErrorSpan";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 
 export interface CardNumberObj {

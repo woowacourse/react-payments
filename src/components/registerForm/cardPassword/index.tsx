@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Input from "src/components/common/Input";
-import FormLabel from "src/components/common/FormLabel";
+import Input from "src/components/@common/Input";
+import FormLabel from "src/components/@common/FormLabel";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import styled, { css } from "styled-components";
 

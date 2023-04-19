@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 import React, { useRef } from "react";
-import { CardNumber } from "./CardNumber";
+import { CardNumber } from ".";
 
 const cardNumber = {
   component: CardNumber,

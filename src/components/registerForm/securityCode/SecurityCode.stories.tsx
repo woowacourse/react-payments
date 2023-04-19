@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import SecurityCode from "./SecurityCode";
+import SecurityCode from ".";
 
 const securityCode = {
   component: SecurityCode,
