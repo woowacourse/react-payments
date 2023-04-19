@@ -11,7 +11,7 @@ export const Default = () => (
   <>
     <GlobalStyle />
     <Layout>
-      <CardListPage />
+      <CardListPage cards={[]} />
     </Layout>
   </>
 );

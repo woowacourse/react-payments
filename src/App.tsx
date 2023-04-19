@@ -1,15 +1,21 @@
 import styled from "styled-components";
 import GlobalStyle from "./styled/GlobalStyle";
 import AddCardPage from "./pages/AddCardPage/AddCardPage";
+import CardListPage from "./pages/CardListPage/CardListPage";
+
 import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import { Card } from "./types";
 
 function App() {
+  const [cards, setCards] = useState<Card[]>([]);
+
   return (
     <>
       <GlobalStyle />
       <Layout>
         <Routes>
-          <Route path="/" element={<></>} />
+          <Route index path="/" element={<CardListPage cards={cards} />} />
           <Route path="/addCard" element={<AddCardPage />} />
         </Routes>
       </Layout>
@@ -17,14 +23,12 @@ function App() {
   );
 }
 
-const Layout = styled.div`
-  min-width: 375px;
-  width: 100vw;
+export const Layout = styled.div`
+  width: 100%;
   height: 100vh;
 
   display: flex;
 
-  align-items: center;
   justify-content: center;
 
   background-color: #eeeeee;
