@@ -1,14 +1,20 @@
+import type { ChangeEventHandler, HTMLInputTypeAttribute } from 'react';
 import styled from 'styled-components';
 
 type InputProps = {
+  type?: HTMLInputTypeAttribute;
   width?: number;
   center?: boolean;
-  placeHolder?: string;
+  placeholder?: string;
+  onChange?: (value: string) => void;
+  value: string;
+  disabled?: boolean;
 };
 
 type StyledInputProps = {
   $width?: number;
   $center?: boolean;
+  disabled?: boolean;
 };
 
 const StyledInput = styled.input<StyledInputProps>`
@@ -17,14 +23,28 @@ const StyledInput = styled.input<StyledInputProps>`
 
   border: none;
   border-radius: 8px;
-  background: #ecebf1;
+  background: ${(props) => (props.disabled ? 'none' : '#ecebf1')};
 
   font-size: 18px;
   text-align: ${(props) => (props.$center ? 'center' : 'initial')};
 `;
 
 export const Input = (props: InputProps) => {
-  const { width, center, placeHolder } = props;
+  const { type, width, center, placeholder, value, onChange, disabled } = props;
 
-  return <StyledInput $width={width} $center={center} placeholder={placeHolder} />;
+  const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    onChange?.(event.target.value);
+  };
+
+  return (
+    <StyledInput
+      type={type}
+      $width={width}
+      $center={center}
+      placeholder={placeholder}
+      onChange={handleInputChange}
+      value={value}
+      disabled={disabled}
+    />
+  );
 };
