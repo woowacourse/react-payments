@@ -1,0 +1,38 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 213px;
+  height: 133px;
+  background-color: #333333;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.card-track-1 {
+  height: 47px;
+}
+
+.ic-chip {
+  width: 40px;
+  height: 26px;
+  margin-left: 14px;
+  background-color: #cbba64;
+  border-radius: 4px;
+}
+
+.card-track-3 {
+  padding: 7px 0;
+}
+.card-track-3 span {
+  margin-left: 19px;
+}
+
+.card-track-4 {
+  margin: 0 19px;
+  display: flex;
+  margin-bottom: 13px;
+  justify-content: space-between;
+}

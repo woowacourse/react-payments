@@ -13,7 +13,7 @@ type Story = StoryObj<typeof Card>;
 export const Primary: Story = {
   args: {
     cardNumber: '1111222233334444',
-    owner: 'LEE',
-    expireDate: '01/01',
+    cardOwner: 'LEE',
+    expired: '01/01',
   },
 };
