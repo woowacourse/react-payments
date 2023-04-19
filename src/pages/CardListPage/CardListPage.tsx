@@ -10,7 +10,7 @@ const CardListPage = () => {
       <CardList
         cards={[
           {
-            number: {
+            cardNumber: {
               firstGroup: "1234",
               secondGroup: "1234",
               thirdGroup: "1234",

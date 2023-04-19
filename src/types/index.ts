@@ -11,7 +11,7 @@ export type CardExpirationDate = {
 };
 
 export type Card = {
-  number: CardNumber;
+  cardNumber: CardNumber;
   expirationDate: CardExpirationDate;
   ownerName: string;
   securityCode: string;
