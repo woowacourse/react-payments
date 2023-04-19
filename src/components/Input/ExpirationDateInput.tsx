@@ -1,50 +1,50 @@
 import { Input } from 'components/common';
-import { ChangeEventHandler, useRef, useState } from 'react';
+import React, { ChangeEventHandler, ChangeEvent } from 'react';
 
-export function ExpirationDateInput() {
-  const monthRef = useRef<HTMLInputElement>(null);
-  const yearRef = useRef<HTMLInputElement>(null);
+export type ValueAndOnChange = {
+  value: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+};
 
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
+interface ExpirationProps {
+  month: ValueAndOnChange;
+  year: ValueAndOnChange;
+}
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    if (e.target === monthRef.current) {
-      const { value } = e.target;
-      const isNumber = !isNaN(Number(value));
+export function ExpirationDateInput(props: ExpirationProps) {
+  const { month, year } = props;
+  const inputRefs = Object.keys(props).map(() => React.createRef<HTMLInputElement>());
 
-      if (!isNumber) return;
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    index: number,
+    onChange: ChangeEventHandler<HTMLInputElement>
+  ) => {
+    const value = e.target.value;
 
-      setMonth(value);
+    if (index < Object.keys(props).length - 1 && value.length === e.target.maxLength) {
+      inputRefs[index + 1].current?.focus();
     }
-
-    if (e.target === yearRef.current) {
-      const { value } = e.target;
-      const isNumber = !isNaN(Number(value));
-
-      if (!isNumber) return;
-
-      setYear(value);
-    }
+    onChange(e);
   };
 
   return (
     <>
       <Input
-        value={month}
+        ref={inputRefs[0]}
+        value={month.value}
         type="text"
         maxLength={2}
         placeholder="MM"
-        ref={monthRef}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e, 0, month.onChange)}
       />
       <Input
-        value={year}
+        ref={inputRefs[1]}
+        value={year.value}
         type="text"
         maxLength={2}
         placeholder="YY"
-        ref={yearRef}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e, 1, year.onChange)}
       />
     </>
   );
