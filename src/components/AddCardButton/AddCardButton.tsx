@@ -19,6 +19,14 @@ const Button = styled.button`
 
   border-radius: 5px;
 
+  box-shadow: 5px 5px 5px #adadad;
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translate(2px, 2px);
+  }
+
   cursor: pointer;
 `;
 export default AddCardButton;

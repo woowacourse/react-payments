@@ -29,6 +29,10 @@ const Ul = styled.ul`
   align-items: center;
   gap: 46px;
 
+  width: 100%;
+
+  padding-bottom: 20px;
+
   overflow: scroll;
 
   ::-webkit-scrollbar {

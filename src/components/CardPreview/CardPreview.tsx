@@ -31,11 +31,6 @@ const CardPreview = ({ card }: CardPreviewProps) => {
 
 export default CardPreview;
 
-const Span = styled.span`
-  width: 100px;
-  overflow: hidden;
-`;
-
 const CardLayout = styled.li`
   position: relative;
 
@@ -54,6 +49,14 @@ const CardLayout = styled.li`
 
   font-size: 14px;
   color: white;
+
+  box-shadow: 5px 5px 5px #5f5f5f;
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translate(3px, 3px);
+  }
 `;
 
 const ICChip = styled.div`
@@ -88,4 +91,9 @@ const InfoContainer = styled.div`
   padding: 0px 4px;
 
   font-size: 12px;
+`;
+
+const Span = styled.span`
+  width: 100px;
+  overflow: hidden;
 `;
