@@ -1,6 +1,5 @@
 import { InputHTMLAttributes } from "react";
 import styled from "styled-components";
-import { InputOption } from "../../type/input";
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleError?: () => void;

@@ -5,9 +5,6 @@ export function useInputDate() {
   const [month, setMonth] = useState<string>("");
   const [year, setYear] = useState<string>("");
 
-  useEffect(() => {
-    console.log(month);
-  }, [month]);
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     e.target.value = value.padStart(2, "0");
