@@ -6,7 +6,9 @@ import InputBoxOwner from "../InputBoxOwner/InputBoxOwner";
 import InputBoxPassword from "../InputBoxPassword/InputBoxPassword";
 import InputBoxSecurityCode from "../InputBoxSecurityCode/InputBoxSecurityCode";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+
+import "./cardInputForm.css";
 
 const initialFormCondition = {
   cardNumber: true,
@@ -22,18 +24,16 @@ export default function CardInputForm() {
   const isFormComplete = Object.values(isFormFilled).every(Boolean);
   console.log(isFormFilled, isFormComplete);
 
-  // formelement.addEventListner('submit', (e) => {
-  //     e.preventDefault();
-  //     formdata
-  //     validation 다 입력됐는지 확인해서
-  //     다 입력됐으면 setCardState(
-  //     아니면 return
-  //     )
+  const formElement = useRef<HTMLFormElement>(null);
 
-  // })
+  useEffect(() => {
+    formElement.current?.addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
+  }, []);
 
   return (
-    <form>
+    <form ref={formElement} className="form">
       <CardPreview card={{}} />
       <InputBoxCardNumber />
       <InputBoxExpirationDate />
