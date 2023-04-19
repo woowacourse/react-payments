@@ -1,10 +1,9 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CardPreview from './CardPreview';
 import Input from './Input';
-
-import { Link } from 'react-router-dom';
+import { useCardDispatch } from '../context/CardContext';
 
 const AddCardContainer = () => {
   const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
@@ -12,6 +11,8 @@ const AddCardContainer = () => {
   const [cardOwner, setCardOwner] = useState<string[]>(['']);
   const [cardCVC, setCardCVC] = useState<string[]>(['']);
   const [cardPWD, setCardPWD] = useState<string[]>(['', '']);
+  const setCard = useCardDispatch();
+  const navigate = useNavigate();
 
   const onChangeState =
     (state: string[], setState: React.Dispatch<React.SetStateAction<string[]>>) =>
@@ -22,6 +23,15 @@ const AddCardContainer = () => {
 
       setState(copyState);
     };
+
+  const onSubmitCard = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+
+    setCard((prev) => {
+      return [...prev, { cardNumbers, cardExpirationDate, cardOwner, cardCVC, cardPWD }];
+    });
+    navigate('/');
+  };
 
   useEffect(() => {
     console.log(cardNumbers, cardExpirationDate, cardCVC, cardPWD, cardOwner);
@@ -123,7 +133,7 @@ const AddCardContainer = () => {
             },
           ]}
         />
-        <StyledSubmitButton to="/">다음</StyledSubmitButton>
+        <StyledSubmitButton onClick={onSubmitCard}>다음</StyledSubmitButton>
       </StyledForm>
     </AddCardContainerWrapper>
   );
@@ -141,7 +151,7 @@ const StyledForm = styled.form`
   flex-direction: column;
 `;
 
-const StyledSubmitButton = styled(Link)`
+const StyledSubmitButton = styled.button`
   align-self: end;
   border: none;
   background-color: transparent;
