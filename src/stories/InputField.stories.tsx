@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import CardNumberInput from "../components/CardNumberInput";
+import CvcInput from "../components/CvcInput";
 import ExpiracyInput from "../components/ExpiracyInput";
 import InputField from "../components/InputField";
 import OwnerInput from "../components/OwnerInput";
@@ -31,5 +32,12 @@ export const Owner: Story = {
     kind: "owner",
     children: <OwnerInput />,
     inputLength: "0/30",
+  },
+};
+
+export const Cvc: Story = {
+  args: {
+    kind: "cvc",
+    children: <CvcInput />,
   },
 };

@@ -10,6 +10,7 @@ export type InputTitle =
 export interface InputContainerProps {
   kind: InputTitle;
   children: JSX.Element;
+  inputLength?: string;
 }
 
 const INPUT_INFO = {
@@ -43,6 +44,8 @@ const Wrapper = styled.div<{ width: string }>`
 `;
 
 const Label = styled.label`
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 3px;
   width: 318px;
   font-size: 12px;
@@ -51,10 +54,22 @@ const Label = styled.label`
   color: #525252;
 `;
 
-export default function InputField({ kind, children }: InputContainerProps) {
+const InputLengthText = styled.span`
+  letter-spacing: 1px;
+`;
+
+export default function InputField({
+  kind,
+  children,
+  inputLength,
+}: InputContainerProps) {
   return (
     <Wrapper width={INPUT_INFO[kind].width}>
-      <Label htmlFor={kind}>{INPUT_INFO[kind].title}</Label>
+      <Label htmlFor={kind}>
+        <span>{INPUT_INFO[kind].title}</span>
+        <InputLengthText>{inputLength}</InputLengthText>
+      </Label>
+
       {children}
     </Wrapper>
   );
