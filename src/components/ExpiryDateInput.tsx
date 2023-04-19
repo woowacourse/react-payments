@@ -16,11 +16,15 @@ const ExpiryDateInfo = {
 
 export const ExpiryDateInput = ({ setExpiryDate }: ExpiryDateInputProps) => {
   const handleInput = (e: any) => {
-    const value = e.target.value.replaceAll(" / ", "");
+    let value = e.target.value.replaceAll(" / ", "");
 
     if (value.length > 4) {
       e.target.value = e.target.value.slice(0, -1);
       return;
+    }
+
+    if (e.target.value.length === 2 && !/[^2-9]/g.test(e.target.value[0])) {
+      value = "0" + value;
     }
 
     e.target.value = (value.match(/\d{1,2}/g) ?? []).join(" / ");
