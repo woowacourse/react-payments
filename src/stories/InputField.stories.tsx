@@ -4,6 +4,7 @@ import CvcInput from "../components/CvcInput";
 import ExpiracyInput from "../components/ExpiracyInput";
 import InputField from "../components/InputField";
 import OwnerInput from "../components/OwnerInput";
+import PasswordInput from "../components/PasswordInput";
 
 const meta: Meta<typeof InputField> = {
   component: InputField,
@@ -39,5 +40,12 @@ export const Cvc: Story = {
   args: {
     kind: "cvc",
     children: <CvcInput />,
+  },
+};
+
+export const Password: Story = {
+  args: {
+    kind: "password",
+    children: <PasswordInput />,
   },
 };
