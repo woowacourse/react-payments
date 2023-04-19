@@ -36,10 +36,10 @@ export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
   );
 };
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  height: 70px;
+  height: 65px;
 `;

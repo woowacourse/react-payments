@@ -39,8 +39,14 @@ const InputField = styled.input<{ textPosition: string; width: string }>`
   font-size: 16px;
   font-weight: 500;
 
+  padding: 0 10px;
+
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+
+  &::placeholder {
+    font-size: 14px;
   }
 `;

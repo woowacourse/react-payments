@@ -1,3 +1,4 @@
+import { Container } from "./CardNumberInput";
 import { Input } from "./common/Input";
 import { InputLabel } from "./common/InputLabel";
 import styled from "styled-components";
@@ -38,14 +39,6 @@ export const OwnerInput = ({ setOwner, owner }: OwnerInputProps) => {
     </Container>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  height: 70px;
-`;
 
 const Row = styled.div`
   display: flex;
