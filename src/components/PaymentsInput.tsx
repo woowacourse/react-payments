@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import type { ChangeEvent } from 'react';
 
 const LabelTitle = styled.div`
   font-size: 12px;
@@ -40,22 +41,39 @@ interface PaymentsInputProps {
   inputAmount: number;
   maxLength: number;
   inputDivideLetter?: string | '';
+  dataId?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export type { PaymentsInputProps };
 
-function PaymentsInput({ title, inputAmount, maxLength, inputDivideLetter }: PaymentsInputProps) {
+function PaymentsInput({ title, inputAmount, maxLength, inputDivideLetter, dataId, onChange }: PaymentsInputProps) {
   return (
     <div>
       <LabelTitle>{title}</LabelTitle>
       <InputContainer>
         {Array.from({ length: inputAmount - 1 }, (_, i) => (
           <>
-            <InputItem name={title} key={i} type="text" maxLength={maxLength} />
+            <InputItem
+              name={title}
+              key={i}
+              type="text"
+              maxLength={maxLength}
+              onChange={onChange}
+              data-id={dataId}
+              data-index={i}
+            />
             {inputDivideLetter && <InputDivider>{inputDivideLetter}</InputDivider>}
           </>
         ))}
-        <InputItem name={title} type="password" maxLength={maxLength} autoComplete="off" />
+        <InputItem
+          name={title}
+          type="text"
+          maxLength={maxLength}
+          onChange={onChange}
+          data-id={dataId}
+          data-index={inputAmount - 1}
+        />
       </InputContainer>
     </div>
   );

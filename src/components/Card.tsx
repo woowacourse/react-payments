@@ -53,18 +53,33 @@ const AddButton = styled.button`
 `;
 
 interface CardProps {
-  cardNumber?: [string, string, string, string];
-  expirationDate?: ExpirationDate;
-  owner?: string;
+  cardInformation?: CardInformation;
   isAddForm: boolean;
 }
+
+interface CardInformation {
+  cardNumber: CardNumber;
+  expirationDate: ExpirationDate;
+  owner?: string;
+}
+
+type CardNumber = [string, string, string, string];
 
 interface ExpirationDate {
   year: string;
   month: string;
 }
 
-function Card({ cardNumber, expirationDate = { year: 'YY', month: 'MM' }, owner = 'NAME', isAddForm }: CardProps) {
+export type { CardInformation, CardNumber };
+
+const defaultCardInformation: CardInformation = {
+  cardNumber: ['', '', '', ''],
+  expirationDate: { year: 'YY', month: 'MM' },
+  owner: 'NAME',
+};
+
+function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps) {
+  const { cardNumber, expirationDate, owner } = cardInformation;
   return (
     <CardContainer isAddFrom={isAddForm}>
       {isAddForm ? (

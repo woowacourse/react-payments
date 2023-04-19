@@ -12,9 +12,11 @@ export default meta;
 
 export const Default: Story = {
   args: {
-    cardNumber: ['1234', '1234', '1234', '1234'],
-    expirationDate: { year: 'YY', month: 'MM' },
-    owner: 'NAME',
+    cardInformation: {
+      cardNumber: ['1234', '1234', '1234', '1234'],
+      expirationDate: { year: 'YY', month: 'MM' },
+      owner: 'NAME',
+    },
     isAddForm: true,
   },
 };
