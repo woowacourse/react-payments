@@ -1,9 +1,10 @@
 import React from 'react';
+import * as S from './components/CreditCard/style';
 
 function App() {
   return (
     <div>
-      dd
+      <S.CreditCardLayout>sfdsd</S.CreditCardLayout>
     </div>
   );
 }
