@@ -1,4 +1,11 @@
-import { ChangeEventHandler, FormEventHandler, useState } from 'react';
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  Dispatch,
+  FormEventHandler,
+  SetStateAction,
+  useState,
+} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import Card from '../../components/Card';
@@ -42,78 +49,17 @@ const CardRegisterPage = ({ registerCard }: Props) => {
     return Number.isNaN(Number(value)) || value === ' ';
   };
 
-  const handleCardNumber1Change: ChangeEventHandler<HTMLInputElement> = (
-    event,
+  const handleNumberChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    setNumber: Dispatch<SetStateAction<string>>,
   ) => {
     if (isNotNumber(event.target.value)) return;
 
-    setCardNumber1(event.target.value);
-  };
-
-  const handleCardNumber2Change: ChangeEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
-    if (isNotNumber(event.target.value)) return;
-
-    setCardNumber2(event.target.value);
-  };
-
-  const handleCardNumber3Change: ChangeEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
-    if (isNotNumber(event.target.value)) return;
-
-    setCardNumber3(event.target.value);
-  };
-
-  const handleCardNumber4Change: ChangeEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
-    if (isNotNumber(event.target.value)) return;
-
-    setCardNumber4(event.target.value);
-  };
-
-  const handleExpiredMonthChange: ChangeEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
-    if (isNotNumber(event.target.value)) return;
-
-    setExpiredMonth(event.target.value);
-  };
-
-  const handleExpiredYearChange: ChangeEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
-    if (isNotNumber(event.target.value)) return;
-
-    setExpiredYear(event.target.value);
+    setNumber(event.target.value);
   };
 
   const handleOwnerChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setOwner(event.target.value);
-  };
-
-  const handleCvcChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    if (isNotNumber(event.target.value)) return;
-
-    setCvc(event.target.value);
-  };
-
-  const handleCardPassword1Change: ChangeEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
-    if (isNotNumber(event.target.value)) return;
-
-    setCardPassword1(event.target.value);
-  };
-
-  const handleCardPassword2Change: ChangeEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
-    if (isNotNumber(event.target.value)) return;
-
-    setCardPassword2(event.target.value);
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
@@ -152,7 +98,15 @@ const CardRegisterPage = ({ registerCard }: Props) => {
         <h1 className="text-title">카드 추가</h1>
       </header>
       <main className={styles.formContainer}>
-        <Card />
+        <Card
+          cardNumber1={cardNumber1}
+          cardNumber2={cardNumber2}
+          cardNumber3={cardNumber3}
+          cardNumber4={cardNumber4}
+          owner={owner}
+          expiredMonth={expiredMonth}
+          expiredYear={expiredYear}
+        />
         <form className={styles.form} onSubmit={handleSubmit}>
           <label>
             카드 번호
@@ -163,7 +117,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
                 required
                 autoFocus
                 value={cardNumber1}
-                onChange={handleCardNumber1Change}
+                onChange={(e) => handleNumberChange(e, setCardNumber1)}
               />
               <span>-</span>
               <input
@@ -171,7 +125,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
                 maxLength={4}
                 required
                 value={cardNumber2}
-                onChange={handleCardNumber2Change}
+                onChange={(e) => handleNumberChange(e, setCardNumber2)}
               />
               <span>-</span>
               <input
@@ -179,7 +133,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
                 maxLength={4}
                 required
                 value={cardNumber3}
-                onChange={handleCardNumber3Change}
+                onChange={(e) => handleNumberChange(e, setCardNumber3)}
               />
               <span>-</span>
               <input
@@ -187,7 +141,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
                 maxLength={4}
                 required
                 value={cardNumber4}
-                onChange={handleCardNumber4Change}
+                onChange={(e) => handleNumberChange(e, setCardNumber4)}
               />
             </div>
           </label>
@@ -201,7 +155,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
                 required
                 placeholder="MM"
                 value={expiredMonth}
-                onChange={handleExpiredMonthChange}
+                onChange={(e) => handleNumberChange(e, setExpiredMonth)}
               />
               <span>/</span>
               <input
@@ -210,7 +164,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
                 required
                 placeholder="YY"
                 value={expiredYear}
-                onChange={handleExpiredYearChange}
+                onChange={(e) => handleNumberChange(e, setExpiredYear)}
               />
             </div>
           </label>
@@ -236,7 +190,7 @@ const CardRegisterPage = ({ registerCard }: Props) => {
                   type="password"
                   maxLength={3}
                   value={cvc}
-                  onChange={handleCvcChange}
+                  onChange={(e) => handleNumberChange(e, setCvc)}
                 />
               </div>
               <TooltipButton />
@@ -250,13 +204,13 @@ const CardRegisterPage = ({ registerCard }: Props) => {
                 type="password"
                 maxLength={1}
                 value={cardPassword1}
-                onChange={handleCardPassword1Change}
+                onChange={(e) => handleNumberChange(e, setCardPassword1)}
               />
               <input
                 type="password"
                 maxLength={1}
                 value={cardPassword2}
-                onChange={handleCardPassword2Change}
+                onChange={(e) => handleNumberChange(e, setCardPassword2)}
               />
               <p>﹒</p>
               <p>﹒</p>
