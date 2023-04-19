@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import { validateCardNumber } from "../../../validation/cardNumber";
 import Input from "../../common/Input";
 
@@ -6,46 +6,62 @@ import "./cardNumber.css";
 
 interface Props {
   setCardNumber?: React.Dispatch<React.SetStateAction<number[]>>;
-  setError?: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-// 각 인풋창에서 change event발생 시 일어나는 일들
-const onChangeCardNumber = (e: ChangeEvent<HTMLInputElement>) => {
-  validateCardNumber(e.target.value);
-};
-
 export default function CardNumber(props: Props) {
-  // 입력이 완료된 값을 state 변경해서 카드 이미지에 넘버를 넘겨주는 함수
-  const { setCardNumber } = props;
+  const [error1, setError1] = useState(false);
+  const [error2, setError2] = useState(false);
+  const [error3, setError3] = useState(false);
+  const [error4, setError4] = useState(false);
+
+  const { setError } = props;
+
+  useEffect(() => {
+    setError(error1 || error2 || error3 || error4);
+  }, [error1, error2, error3, error4]);
+
+  const onChangeCardNumber =
+    (setError: React.Dispatch<React.SetStateAction<boolean>>) =>
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+
+      if (value.length > 4) {
+        e.target.value = value.slice(0, 4);
+      }
+
+      if (validateCardNumber(e.target.value)) setError(false);
+      else setError(true);
+    };
 
   return (
     <>
       <Input
         className="first input-card-number"
-        type="number"
+        type="text"
         inputMode="numeric"
-        onChange={onChangeCardNumber}
+        onChange={onChangeCardNumber(setError1)}
         placeholder="X X X X"
       />
       <Input
         className=" input-card-number"
         type="password"
         inputMode="numeric"
-        onChange={onChangeCardNumber}
+        onChange={onChangeCardNumber(setError2)}
         placeholder="X X X X"
       />
       <Input
         className=" input-card-number"
         type="password"
         inputMode="numeric"
-        onChange={onChangeCardNumber}
+        onChange={onChangeCardNumber(setError3)}
         placeholder="X X X X"
       />
       <Input
         className="last input-card-number"
-        type="number"
+        type="text"
         inputMode="numeric"
-        onChange={onChangeCardNumber}
+        onChange={onChangeCardNumber(setError4)}
         placeholder="X X X X"
       />
     </>
