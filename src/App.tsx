@@ -1,12 +1,26 @@
+import styled from "styled-components";
 import GlobalStyle from "./styled/GlobalStyle";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <div className="App">안녕하세요</div>
+      <Layout></Layout>
     </>
   );
 }
+
+const Layout = styled.div`
+  min-width: 375px;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background-color: #eeeeee;
+`;
 
 export default App;
