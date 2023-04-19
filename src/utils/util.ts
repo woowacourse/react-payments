@@ -47,3 +47,13 @@ export const handleNumberInput = (data: string): string => {
 
   return data;
 };
+
+const ALPHABET = ' ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+export const isAlphabetInput = (data: string): boolean => {
+  return ALPHABET.includes(data);
+};
+
+export const isNumberInput = (data: string): boolean => {
+  return NUMBERS.includes(data);
+};
