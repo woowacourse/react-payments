@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { InputWrapper } from './InputWrapper';
 import { Input } from './Input';
+import styled from 'styled-components';
 
 export function ExpirationDateInput() {
   const [month, setMonth] = useState('');
@@ -28,39 +29,44 @@ export function ExpirationDateInput() {
   };
 
   return (
-    <InputWrapper width={137}>
-      <Input
-        ref={monthInputRef}
-        value={month}
-        width={'30'}
-        minLength={2}
-        maxLength={2}
-        required
-        inputMode="numeric"
-        placeholder="MM"
-        onChange={(e) => {
-          setMonth(e.target.value);
+    <>
+      <Style.Label>
+        <Style.Title>만료일</Style.Title>
+      </Style.Label>
+      <InputWrapper width={137}>
+        <Input
+          ref={monthInputRef}
+          value={month}
+          width={'30'}
+          minLength={2}
+          maxLength={2}
+          required
+          inputMode="numeric"
+          placeholder="MM"
+          onChange={(e) => {
+            setMonth(e.target.value);
 
-          if (e.target.value.length === 2) yearInputRef.current?.focus();
-        }}
-      />
-      &nbsp;/&nbsp;
-      <Input
-        ref={yearInputRef}
-        value={year}
-        width={'30'}
-        minLength={2}
-        maxLength={2}
-        required
-        inputMode="numeric"
-        placeholder="YY"
-        onChange={(e) => {
-          setYear(e.target.value);
-        }}
-        onKeyDown={handleBackspacePress}
-        onBlur={validateDate}
-      />
-    </InputWrapper>
+            if (e.target.value.length === 2) yearInputRef.current?.focus();
+          }}
+        />
+        &nbsp;/&nbsp;
+        <Input
+          ref={yearInputRef}
+          value={year}
+          width={'30'}
+          minLength={2}
+          maxLength={2}
+          required
+          inputMode="numeric"
+          placeholder="YY"
+          onChange={(e) => {
+            setYear(e.target.value);
+          }}
+          onKeyDown={handleBackspacePress}
+          onBlur={validateDate}
+        />
+      </InputWrapper>
+    </>
   );
 }
 
@@ -85,4 +91,18 @@ const isValidDate = (month: string, year: string) => {
   return Number(year) === Number(currentYear)
     ? Number(month) >= Number(currentMonth)
     : false;
+};
+
+const Style = {
+  Label: styled.div`
+    width: 318px;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 12px;
+  `,
+  Title: styled.span`
+    color: #2f2f2f;
+  `,
 };

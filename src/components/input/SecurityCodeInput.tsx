@@ -68,9 +68,6 @@ const Style = {
 
     font-size: 12px;
   `,
-  NameLength: styled.span`
-    color: #2f2f2f;
-  `,
   Title: styled.span`
     color: #2f2f2f;
   `,

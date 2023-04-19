@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { OwnerNameInput } from '../../components/OwnerNameInput';
+import { OwnerNameInput } from '../../components/input/OwnerNameInput';
 
 const meta = {
   title: 'Example/Input',

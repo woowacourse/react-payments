@@ -1,5 +1,5 @@
-import { CardNumberInput } from './components/CardNumberInput';
-import { ExpirationDateInput } from './components/ExpirationDateInput';
+import { CardNumberInput } from './components/input/CardNumberInput';
+import { ExpirationDateInput } from './components/input/ExpirationDateInput';
 
 function App() {
   return (

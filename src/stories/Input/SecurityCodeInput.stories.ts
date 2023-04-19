@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { SecurityCodeInput } from '../../components/SecurityCodeInput';
+import { SecurityCodeInput } from '../../components/input/SecurityCodeInput';
 
 const meta = {
   title: 'Example/Input',

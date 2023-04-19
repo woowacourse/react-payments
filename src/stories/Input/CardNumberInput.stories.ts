@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { CardNumberInput } from '../../components/CardNumberInput';
+import { CardNumberInput } from '../../components/input/CardNumberInput';
 
 const meta = {
   title: 'Example/Input',
