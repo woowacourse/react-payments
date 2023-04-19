@@ -43,6 +43,7 @@ const IcChip = styled.div`
 
 const CardNumbers = styled.div`
   text-align: center;
+  height: 15px;
 `;
 
 const InfoWrapper = styled.div`
