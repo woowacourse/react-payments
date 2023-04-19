@@ -27,6 +27,9 @@ const CardOwnerName = () => {
   return (
     <>
       <CardLabel labelText="카드 소유자 이름(선택)" />
+      <CardLabel
+        labelText={`${cardOwnerNameRef.current?.value.length || 0} / 30`}
+      />
       <Wrapper>
         <CardInput
           type="text"
