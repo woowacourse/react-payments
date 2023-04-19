@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { ReactComponent as Dot } from '../assets/white-dot.svg';
 
 const CardContainer = styled.div<{ isAddFrom: boolean }>`
   position: relative;
@@ -25,8 +26,19 @@ const ICChipTemplate = styled.div`
 
 const CardNumberTemplate = styled.div`
   display: flex;
-  justify-content: space-between;
   height: 18px;
+  & > * {
+    min-width: 36px;
+    margin-right: 14px;
+  }
+`;
+
+const CardNumberItem = styled.div`
+  display: flex;
+  align-items: center;
+  & > * {
+    width: 8px;
+  }
 `;
 
 const CardInfoTemplate = styled.div`
@@ -87,9 +99,17 @@ function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps
           <ICChipTemplate />
           <CardInfoTemplate>
             <CardNumberTemplate>
-              {cardNumber?.map(number => (
-                <div>{number}</div>
-              ))}
+              {cardNumber?.map((number, index) =>
+                index < 2 ? (
+                  <CardNumberItem>{number}</CardNumberItem>
+                ) : (
+                  <CardNumberItem>
+                    {Array.from({ length: number.length }, () => (
+                      <Dot />
+                    ))}
+                  </CardNumberItem>
+                ),
+              )}
             </CardNumberTemplate>
             <CardDetail>
               <div>{owner}</div>
