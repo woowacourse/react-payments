@@ -1,10 +1,10 @@
-import React, { ReactElement } from "react";
+import React, { HTMLAttributes, ReactElement } from "react";
 import styled from "styled-components";
 import { LABEL, PLACEHOLDER } from "../../constants/inputInfo";
 import { LabelOption } from "../../type/input";
 
 import { Input } from "./Input";
-export interface InputBoxProps {
+export interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   type: LabelOption;
   render?: () => JSX.Element;
   children: React.ReactNode;
@@ -12,12 +12,12 @@ export interface InputBoxProps {
 }
 
 export function InputBox(props: InputBoxProps) {
-  const { type, render, children, error } = props;
+  const { type, render, children, error, ...restProps } = props;
   return (
     <InputContainer>
       {render && render()}
       <Label>{LABEL[type]}</Label>
-      <InputWrapper>{children}</InputWrapper>
+      <InputWrapper {...restProps}>{children}</InputWrapper>
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </InputContainer>
   );
