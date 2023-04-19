@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { CardNumberInput } from "../components/CardNumberInput";
 import { ExpiryDateInput } from "../components/ExpiryDateInput";
 import { OwnerInput } from "../components/OwnerInput";
+import { CVCInput } from "../components/CvcInput";
 
 export const AddCard = () => {
   const [cardInfo, setCardInfo] = useState<CardType>({
@@ -13,6 +14,8 @@ export const AddCard = () => {
     owner: "",
     expiryDate: "MM/YY",
     color: "#333333",
+    CVC: 123,
+    password: [1, 2],
   });
 
   return (
@@ -34,6 +37,11 @@ export const AddCard = () => {
           owner={cardInfo.owner}
           setOwner={(owner: string) => {
             setCardInfo({ ...cardInfo, owner: owner });
+          }}
+        />
+        <CVCInput
+          setCVC={(CVC: number) => {
+            setCardInfo({ ...cardInfo, CVC: CVC });
           }}
         />
       </Main>

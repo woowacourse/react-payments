@@ -3,4 +3,6 @@ export interface CardType {
   expiryDate: string;
   owner?: string;
   color: string;
+  CVC: number;
+  password: number[];
 }
