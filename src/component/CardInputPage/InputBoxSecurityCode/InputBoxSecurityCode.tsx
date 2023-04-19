@@ -2,12 +2,15 @@ import { useState, ChangeEvent } from "react";
 import Input from "../../common/Input";
 
 import "./inputBoxSecurityCode.css";
+import { validateSecurityNumber } from "../../../validation/securityNumber";
 
 export default function InputBoxSecurityCode() {
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
 
-  const onChangeCallback = (event: ChangeEvent<HTMLInputElement>) => {
-    // setNameLength(event.target.value.trim().length);
+  const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 3) e.target.value = e.target.value.slice(0, 3);
+
+    setError(!validateSecurityNumber(e.target.value));
   };
 
   return (
@@ -15,7 +18,7 @@ export default function InputBoxSecurityCode() {
       <p>보안 코드(CVC/CVV)</p>
       <Input
         className="input-security-code"
-        type="number"
+        type="password"
         onChange={onChangeCallback}
         inputMode="numeric"
       ></Input>
