@@ -4,6 +4,7 @@ import { Header } from "../components/common/Header";
 import { CardType } from "../types/card";
 import styled from "styled-components";
 import { CardNumberInput } from "../components/CardNumberInput";
+import { ExpiryDateInput } from "../components/ExpiryDateInput";
 
 export const AddCard = () => {
   const [cardInfo, setCardInfo] = useState<CardType>({
@@ -22,7 +23,11 @@ export const AddCard = () => {
           setCardNumbers={(numbers: string) => {
             setCardInfo({ ...cardInfo, numbers: numbers });
           }}
-          cardNumbers={cardInfo.numbers}
+        />
+        <ExpiryDateInput
+          setExpiryDate={(date: string) => {
+            setCardInfo({ ...cardInfo, expiryDate: date });
+          }}
         />
       </Main>
     </>

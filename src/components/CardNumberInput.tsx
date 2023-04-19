@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 interface CardNumberInputProps {
   setCardNumbers: (numbers: string) => void;
-  cardNumbers: string;
 }
 
 const cardNumberInputInfo = {
@@ -37,7 +36,7 @@ export const CardNumberInput = ({ setCardNumbers }: CardNumberInputProps) => {
   );
 };
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
