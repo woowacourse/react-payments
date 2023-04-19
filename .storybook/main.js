@@ -14,4 +14,7 @@ module.exports = {
   features: {
     interactionsDebugger: true,
   },
+  typescript: {
+    reactDocgen: "react-docgen-typescript-plugin"
+  }
 };

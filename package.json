@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@storybook/cli": "^7.0.5",
+    "@storybook/react-docgen-typescript-plugin": "^1.0.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
