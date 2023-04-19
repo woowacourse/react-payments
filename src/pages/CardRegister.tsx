@@ -1,5 +1,7 @@
+import Layout from "src/components/common/Layout";
+
 function CardRegister() {
-  return <div>CardRegister</div>;
+  return <Layout></Layout>;
 }
 
 export default CardRegister;
