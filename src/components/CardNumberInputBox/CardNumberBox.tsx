@@ -1,59 +1,61 @@
 import { ChangeEvent, useState } from 'react';
 import Input from '../Input/Input';
-import * as styled from './PasswordBox.styled';
+import * as styled from './CardNumberInputBox.styled';
 import { isNumeric } from '../../validator';
 
-export interface PasswordsState {
+export interface NumbersState {
   first: string;
   second: string;
+  third: string;
+  fourth: string;
   [key: string]: string;
 }
 
-const PasswordBox = () => {
-  const [passwords, setPasswords] = useState<PasswordsState>({
+const CardNumberInputBox = () => {
+  const [numbers, setNumbers] = useState<NumbersState>({
     first: '',
     second: '',
+    third: '',
+    fourth: '',
   });
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
-    if (!isNumeric(value)) {
-      return setErrorMessage('숫자만 입력하세요');
-    }
+    if (!isNumeric(value)) return setErrorMessage('숫자만 입력 가능');
 
     if (errorMessage) setErrorMessage('');
 
-    if (value.length > 1) return;
+    if (value.length > 4) return;
 
-    setPasswords({
-      ...passwords,
+    setNumbers({
+      ...numbers,
       [name]: value,
     });
   };
 
   return (
-    <styled.PasswordBox>
+    <styled.CardNumberInputBox>
       <label>
-        <span>카드 비밀번호</span>
+        <div>카드 번호</div>
         <div>
-          {Object.keys(passwords).map((key) => {
+          {Object.keys(numbers).map((key) => {
             return (
               <Input
                 key={key}
                 name={key}
-                value={passwords[key]}
+                value={numbers[key]}
                 onChange={onChange}
-                width="small"
+                width="large"
                 type="text"
-                maxLength={1}
+                maxLength={4}
               />
             );
           })}
         </div>
       </label>
       <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
-    </styled.PasswordBox>
+    </styled.CardNumberInputBox>
   );
 };
 
-export default PasswordBox;
+export default CardNumberInputBox;

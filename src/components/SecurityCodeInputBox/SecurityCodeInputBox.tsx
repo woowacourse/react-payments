@@ -24,7 +24,13 @@ const SecurityCodeInputBox = () => {
       <label>
         <span>보안 코드(CVC/CVV)</span>
         <div>
-          <Input value={securityCode} onChange={onChange} width="small" type="text" maxLength={3} />
+          <Input
+            value={securityCode}
+            onChange={onChange}
+            width="middle"
+            type="text"
+            maxLength={3}
+          />
         </div>
       </label>
       <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
