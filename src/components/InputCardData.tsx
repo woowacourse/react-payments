@@ -7,13 +7,14 @@ export type InputProps = {
   status: boolean;
   errorMessage: string;
   className: string;
+  name: string;
 };
 
-const InputCardData = ({ value, onChange, status, errorMessage }: InputProps) => {
+const InputCardData = ({ value, onChange, status, errorMessage, name }: InputProps) => {
   // TODO : status
   return (
     <div>
-      <input className="input-box" value={value} onChange={onChange} />
+      <input className="input-box" value={value} onChange={onChange} name={name} />
       {status ? '' : <span>{errorMessage}</span>}
     </div>
   );

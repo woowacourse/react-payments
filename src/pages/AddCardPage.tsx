@@ -4,34 +4,28 @@ import Card from '../components/Card';
 import FormCardAdd from '../components/FormCardAdd';
 import Header from '../components/Header';
 import useCardNumber from '../hooks/useCardNumber';
+import usePasswordInput from '../hooks/usePasswordInput';
 import { formatExpireDate, handleNumberInput, isAlphabetInput, isNumberInput } from '../utils/util';
 
 import './AddCardPage.css';
 
 const AddCardPage = () => {
   const [cardType, setCardType] = useState('현대');
-  const [cardNumber, maskedCardNumber, handleCardNumber] = useCardNumber('');
-
+  const [cardNumber, onChangeCardNumber] = usePasswordInput({
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  });
   const [cardOwner, setCardOwner] = useState('');
   const [cardExpireDate, setCardExpireDate] = useState('');
   const [securityCode, setSecurityCode] = useState('');
   const [cardPassword1, setCardPassword1] = useState('');
   const [cardPassword2, setCardPassword2] = useState('');
 
-  const cardNumberData = {
-    value: maskedCardNumber,
-    onChange: (e: any) => {
-      // TODO: 숫자 처리 해야함
-      const lastWord = e.target.value[e.target.value.length - 1];
-      handleCardNumber(e.target.value, lastWord);
-    },
-    status: false,
-  };
-
   const cardExpireData = {
     value: cardExpireDate,
     onChange: (e: any) => {
-      // TODO: 숫자가 아닌 값 예외처리
       const lastWord = e.target.value[e.target.value.length - 1];
 
       if (e.target.value.length > 5) return;
@@ -86,6 +80,19 @@ const AddCardPage = () => {
     navigate('/');
   };
 
+  const cardNumberData = {
+    value: cardNumber,
+    onChange: (e: any) => {
+      const lastWord = e.target.value[e.target.value.length - 1];
+
+      if (e.target.value.length > 4) return;
+      if (e.target.value.length > 0 && !isNumberInput(lastWord)) return;
+
+      onChangeCardNumber(e);
+    },
+    status: false,
+  };
+
   return (
     <div className="add-card-page">
       <Header>
@@ -97,12 +104,13 @@ const AddCardPage = () => {
       <section className="add-card-page-body">
         <Card
           cardType={cardType}
-          cardNumber={cardNumber}
+          cardNumber={cardNumber as any}
           cardOwner={cardOwner}
           expired={cardExpireDate}
         />
         <FormCardAdd
           cardNumberData={cardNumberData}
+          cardNData={cardNumberData}
           cardExpireData={cardExpireData}
           cardOwnerData={cardOwnerData}
           securityCodeData={securityCodeData}

@@ -57,3 +57,7 @@ export const isAlphabetInput = (data: string): boolean => {
 export const isNumberInput = (data: string): boolean => {
   return NUMBERS.includes(data);
 };
+
+export const changeNumberToMask = (data: string): string => {
+  return '·'.repeat(data.length);
+};

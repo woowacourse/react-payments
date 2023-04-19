@@ -1,4 +1,5 @@
 .input-box {
+  display: block;
   background-color: #ecebf1;
   border: none;
   border-radius: 7px;

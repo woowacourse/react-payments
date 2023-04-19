@@ -1,9 +1,16 @@
 import React from 'react';
+import { changeNumberToMask } from '../utils/util';
 import './Card.css';
 
+type CardNumber = {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+};
 type CardProps = {
   cardType: string;
-  cardNumber: string;
+  cardNumber: CardNumber;
   cardOwner: string;
   expired: string;
 };
@@ -18,7 +25,9 @@ const Card = ({ cardType, cardNumber, cardOwner, expired }: CardProps) => {
         <div className="ic-chip"></div>
       </div>
       <div className="card-track-3">
-        <span>{cardNumber}</span>
+        <span>{`${cardNumber.first} ${cardNumber.second} ${changeNumberToMask(
+          cardNumber.third
+        )} ${changeNumberToMask(cardNumber.fourth)}`}</span>
       </div>
       <div className="card-track-4">
         <span>{cardOwner}</span>

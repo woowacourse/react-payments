@@ -2,12 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
 import Header from '../components/Header';
+import { CardNumber } from '../type';
 import './CardListPage.css';
 
 type CardType = {
   id: number;
   cardType: string;
-  cardNumber: string;
+  cardNumber: CardNumber;
   cardOwner: string;
   expired: string;
 };
