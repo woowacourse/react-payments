@@ -1,12 +1,12 @@
 import { StoryFn } from '@storybook/react';
-import Title, { Props } from './Title';
+import Label, { Props } from './Label';
 
 export default {
-  title: 'Title',
-  component: Title,
+  title: 'Label',
+  component: Label,
 };
 
-const Template: StoryFn<Props> = (args: Props) => <Title {...args} />;
+const Template: StoryFn<Props> = (args: Props) => <Label {...args} />;
 
 export const CardNumbers = Template.bind({});
 CardNumbers.args = {
