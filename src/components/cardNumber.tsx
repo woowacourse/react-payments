@@ -4,23 +4,42 @@ import { useEffect, useState } from "react";
 import { Input } from "./common/Input";
 import { InputBox } from "./common/InputBox";
 import { LabelOption, LABEL, PLACEHOLDER } from "../constants/inputInfo";
+import { useInputNumber } from "../hooks/useInputNumber";
+import { useError } from "../hooks/useError";
+import { validation } from "../validation";
 
 export function CardNumber() {
-  const [cardNumber, setCardNumber] = useState<string>("");
-
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const target = e.target as HTMLInputElement;
-    setCardNumber(target.value);
-  }
+  const { cardNumber, handleChange } = useInputNumber();
+  const { error, handleError } = useError();
 
   return (
-    <div style={{ width: "31.8rem" }} id="wrapper">
-      <InputBox type={"NUMBER"}>
-        <Input handleChange={handleChange}></Input>
-        <Input handleChange={handleChange}></Input>
-        <Input handleChange={handleChange}></Input>
-        <Input handleChange={handleChange}></Input>
+    <Wrapper>
+      <InputBox type={"NUMBER"} error={error}>
+        <Input handleChange={handleChange} name={"first"} maxLength={4} />
+        -
+        <Input handleChange={handleChange} name={"second"} maxLength={4} />
+        -
+        <Input
+          handleChange={handleChange}
+          name="third"
+          type="password"
+          maxLength={4}
+        />
+        -
+        <Input
+          handleChange={handleChange}
+          handleError={() =>
+            handleError(Object.values(cardNumber).join(""), validation.isNumber)
+          }
+          name="fourth"
+          type="password"
+          maxLength={4}
+        />
       </InputBox>
-    </div>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.section`
+  width: 31.8rem;
+`;
