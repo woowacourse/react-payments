@@ -3,7 +3,7 @@ import CardOwnerNameInput from "./index";
 
 export default {
   component: CardOwnerNameInput,
-  title: "CardOwnerNameInput",
+  title: "CardDetailForm/CardOwnerNameInput",
 };
 
 const Template = () => <CardOwnerNameInput />;

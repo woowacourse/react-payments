@@ -3,7 +3,7 @@ import CardPasswordInput from "./index";
 
 export default {
   component: CardPasswordInput,
-  title: "CardPasswordInput",
+  title: "CardDetailForm/CardPasswordInput",
 };
 
 const Template = () => <CardPasswordInput />;

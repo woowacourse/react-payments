@@ -3,7 +3,7 @@ import St from "./styled";
 
 function CardCVCInput() {
   return (
-    <>
+    <section>
       <St.Title>보안 코드(CVC/CVV)</St.Title>
       <St.Contents>
         <St.InputSection>
@@ -15,7 +15,7 @@ function CardCVCInput() {
         </St.InputSection>
         <St.Button>?</St.Button>
       </St.Contents>
-    </>
+    </section>
   );
 }
 

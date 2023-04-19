@@ -3,7 +3,7 @@ import CardCVCInput from "./index";
 
 export default {
   component: CardCVCInput,
-  title: "CardCVCInput",
+  title: "CardDetailForm/CardCVCInput",
 };
 
 const Template = () => <CardCVCInput />;

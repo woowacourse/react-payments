@@ -3,7 +3,7 @@ import St from "./styled";
 
 function CardPasswordInput() {
   return (
-    <>
+    <section>
       <St.Title>카드 비밀번호</St.Title>
       <St.Contents>
         <St.InputSection>
@@ -23,7 +23,7 @@ function CardPasswordInput() {
         <St.LastDigits>•</St.LastDigits>
         <St.LastDigits>•</St.LastDigits>
       </St.Contents>
-    </>
+    </section>
   );
 }
 

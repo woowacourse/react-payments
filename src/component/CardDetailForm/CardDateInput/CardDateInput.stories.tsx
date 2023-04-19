@@ -3,7 +3,7 @@ import CardDateInput from "./index";
 
 export default {
   component: CardDateInput,
-  title: "CardDateInput",
+  title: "CardDetailForm/CardDateInput",
 };
 
 const Template = () => <CardDateInput />;
