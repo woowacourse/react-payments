@@ -26,7 +26,7 @@ export function CardNumberInput() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { maxLength, value, tabIndex } = e.target;
 
-    if (!validater(value)) {
+    if (!validator(value)) {
       alert('유효하지 않은 입력값입니다!');
       e.target.value = value.replace(/[^0-9]/g, '');
       return;
@@ -58,6 +58,7 @@ export function CardNumberInput() {
           ref={firstInputRef}
           tabIndex={0}
           onChange={handleInputChange}
+          placeholder="0000"
         />
         <HYPHEN
           style={{ visibility: maxLengthReached[0] ? 'visible' : 'hidden' }}
@@ -73,6 +74,7 @@ export function CardNumberInput() {
           ref={secondInputRef}
           tabIndex={1}
           onChange={handleInputChange}
+          placeholder="0000"
         />
         <HYPHEN
           style={{ visibility: maxLengthReached[1] ? 'visible' : 'hidden' }}
@@ -89,6 +91,7 @@ export function CardNumberInput() {
           ref={thirdInputRef}
           tabIndex={2}
           onChange={handleInputChange}
+          placeholder="••••"
         />
         <HYPHEN
           style={{ visibility: maxLengthReached[2] ? 'visible' : 'hidden' }}
@@ -105,6 +108,7 @@ export function CardNumberInput() {
           ref={fourthInputRef}
           tabIndex={3}
           onChange={handleInputChange}
+          placeholder="••••"
         />
       </InputWrapper>
       {}
@@ -112,6 +116,6 @@ export function CardNumberInput() {
   );
 }
 
-function validater(input: string) {
+const validator = (input: string) => {
   return /^[0-9]+$|^$/.test(input);
-}
+};
