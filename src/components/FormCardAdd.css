@@ -8,3 +8,8 @@
   display: flex;
   flex-direction: row-reverse;
 }
+
+.card-owner-container-header {
+  display: flex;
+  justify-content: space-between;
+}

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
 import FormCardAdd from '../components/FormCardAdd';
+import Header from '../components/Header';
 import useCardNumber from '../hooks/useCardNumber';
-import { formatExpireDate, handleNumberInput } from '../utils/util';
+import { formatExpireDate, handleNumberInput, isAlphabetInput, isNumberInput } from '../utils/util';
 
 import './AddCardPage.css';
 
@@ -31,6 +32,10 @@ const AddCardPage = () => {
     value: cardExpireDate,
     onChange: (e: any) => {
       // TODO: 숫자가 아닌 값 예외처리
+      const lastWord = e.target.value[e.target.value.length - 1];
+
+      if (e.target.value.length > 5) return;
+      if (e.target.value.length > 0 && !isNumberInput(lastWord)) return;
       setCardExpireDate(formatExpireDate(e.target.value));
     },
     status: false,
@@ -39,7 +44,10 @@ const AddCardPage = () => {
   const cardOwnerData = {
     value: cardOwner,
     onChange: (e: any) => {
-      // TODO : 영문자가 아닌 값 예외처리
+      const lastWord = e.target.value[e.target.value.length - 1];
+
+      if (e.target.value.length > 30) return;
+      if (e.target.value.length > 0 && !isAlphabetInput(lastWord.toUpperCase())) return;
       setCardOwner(e.target.value.toUpperCase());
     },
     status: false,
@@ -80,12 +88,12 @@ const AddCardPage = () => {
 
   return (
     <div className="add-card-page">
-      <div className="add-card-page-header">
+      <Header>
         <button className="back-button" onClick={onBackButtonClick}>
           {'<'}
         </button>
         <h3>뒤로 가기</h3>
-      </div>
+      </Header>
       <section className="add-card-page-body">
         <Card
           cardType={cardType}

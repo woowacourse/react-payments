@@ -34,8 +34,10 @@ const FormCardAdd = ({
         />
       </div>
       <div>
-        <span>카드 소유자 이름(선택)</span>
-        <span>0/30</span>
+        <div className="card-owner-container-header">
+          <span>카드 소유자 이름(선택)</span>
+          <span>{cardOwnerData.value.length}/30</span>
+        </div>
         <InputCardData
           value={cardOwnerData.value}
           onChange={cardOwnerData.onChange}

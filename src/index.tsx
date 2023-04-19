@@ -5,11 +5,12 @@ import './index.css';
 // import App from './App';
 import AddCardPage from './pages/AddCardPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import CardListPage from './pages/CardListPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div>카드 목록</div>,
+    element: <CardListPage />,
   },
   {
     path: '/add',
