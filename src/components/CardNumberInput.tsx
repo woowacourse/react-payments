@@ -18,18 +18,10 @@ const Dash = styled.span`
 `;
 
 export default function CardNumberInput() {
-  const onInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.currentTarget) return;
-    event.currentTarget.value = event.currentTarget.value.replace(
-      /[^0-9]/g,
-      ""
-    );
-  };
-
   return (
     <Wrapper>
       <Input
-        onInput={onInput}
+        isNumber={true}
         maxLength={4}
         id="cardNumber"
         type="text"
@@ -38,7 +30,7 @@ export default function CardNumberInput() {
       />
       <Dash>-</Dash>
       <Input
-        onInput={onInput}
+        isNumber={true}
         maxLength={4}
         type="text"
         inputMode="numeric"
@@ -46,7 +38,7 @@ export default function CardNumberInput() {
       />
       <Dash>-</Dash>
       <Input
-        onInput={onInput}
+        isNumber={true}
         maxLength={4}
         type="password"
         inputMode="numeric"
@@ -54,7 +46,7 @@ export default function CardNumberInput() {
       />
       <Dash>-</Dash>
       <Input
-        onInput={onInput}
+        isNumber={true}
         maxLength={4}
         type="password"
         inputMode="numeric"
