@@ -6,7 +6,8 @@ import styled from "styled-components";
 import { CardNumberInput } from "../components/CardNumberInput";
 import { ExpiryDateInput } from "../components/ExpiryDateInput";
 import { OwnerInput } from "../components/OwnerInput";
-import { CVCInput } from "../components/CvcInput";
+import { CVCInput } from "../components/CVCInput";
+import { PasswordInput } from "../components/PasswordInput";
 
 export const AddCard = () => {
   const [cardInfo, setCardInfo] = useState<CardType>({
@@ -42,6 +43,11 @@ export const AddCard = () => {
         <CVCInput
           setCVC={(CVC: number) => {
             setCardInfo({ ...cardInfo, CVC: CVC });
+          }}
+        />
+        <PasswordInput
+          setPassword={(password: number[]) => {
+            setCardInfo({ ...cardInfo, password: password });
           }}
         />
       </Main>
