@@ -2,15 +2,49 @@ import styled from 'styled-components';
 import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
+import { useState } from 'react';
 
 const NameInput = () => {
+  const [input, setInput] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+
+    if (isNotInputEnglish(inputValue)) {
+      setErrorMessage('영어만 입력해주세요');
+      return;
+    }
+    if (isOverLength(inputValue)) {
+      setErrorMessage('30자 이하로 입력해주세요');
+      return;
+    }
+
+    setInput(inputValue.toUpperCase());
+    setErrorMessage('');
+  };
+
+  const isNotInputEnglish = (inputValue: string) => {
+    const regExp = /^[a-zA-Z\s]*$/;
+    return !regExp.test(inputValue);
+  };
+
+  const isOverLength = (inputValue: string) => {
+    return inputValue.length > 30;
+  };
+
   return (
-    <InputGroup labelValue={<LabelValue length={0} />}>
-      <InputBox>
+    <InputGroup
+      labelValue={<LabelValue length={input.length} />}
+      errorMessage={errorMessage}
+    >
+      <InputBox isError={!!errorMessage}>
         <Input
           placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
           textAlign='start'
-        ></Input>
+          value={input}
+          onChange={handleChangeInput}
+        />
       </InputBox>
     </InputGroup>
   );
