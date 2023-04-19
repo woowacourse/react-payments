@@ -6,22 +6,30 @@ export type CreditCardProps = {
   creditCard: Pick<T.CreditCard, 'number' | 'expiry' | 'owner'>;
 };
 
-function CreditCard({ creditCard }: CreditCardProps) {
+const convertSecuredCreditCard = (number: string) => {
+  const creditCardNumberLength = number.length;
+  const foo = creditCardNumberLength <= 8
+    ? number
+    : number.slice(0, 8) + '*'.repeat(number.length - 8);
+  return foo.split('').reduce((a, b, i) => {
+    a[Math.floor(i / 4)].push(b);
+    return a;
+  }, [[], [], [], []] as string[][]);
+};
+
+function CreditCard({ creditCard: { expiry, number, owner } }: CreditCardProps) {
   return (
     <S.CreditCardLayout>
       <S.CreditCardICChip />
       <S.CreditCardNumber>
-        <div>1234</div>
-        <div>1234</div>
-        <div>****</div>
-        <div>****</div>
+        {convertSecuredCreditCard(number).map((num) => <div>{num}</div>)}
       </S.CreditCardNumber>
       <S.CreditCardConatiner>
         <S.CreditCardBox>
-          {creditCard.owner}
+          {owner}
         </S.CreditCardBox>
         <S.CreditCardBox>
-          12/34
+          {expiry}
         </S.CreditCardBox>
       </S.CreditCardConatiner>
     </S.CreditCardLayout>

@@ -33,8 +33,10 @@ export const CreditCardConatiner = styled.div`
 `;
 
 export const CreditCardNumber = styled.div`
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 10px;
+    justify-items: center;
 `;
 
 export const CreditCardBox = styled.div`

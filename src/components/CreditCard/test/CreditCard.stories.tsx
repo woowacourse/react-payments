@@ -16,7 +16,7 @@ export const Primary = Template.bind({});
 Primary.args = {
   creditCard: {
     number: '1234123412341234',
-    expiry: '0345',
+    expiry: '03/45',
     owner: 'NOAH',
   },
 };
