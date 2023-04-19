@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Input = styled.input`
   width: ${(props) => props.width}px;
-  height: 49px;
+  height: 45px;
 
   display: flex;
   align-items: center;

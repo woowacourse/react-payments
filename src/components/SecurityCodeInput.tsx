@@ -42,6 +42,7 @@ export function SecurityCodeInput() {
           placeholder="•••"
           onChange={handleInputChange}
           onBlur={validateSecurityCode}
+          inputMode="numeric"
           type="password"
           required
         />

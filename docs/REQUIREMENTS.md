@@ -41,11 +41,11 @@
   - [x] UI
   - [x] 총 길이 3자리
   - [x] `type="password"`로 지정
-- [ ] PasswordInput 컴포넌트
-  - [ ] UI
-  - [ ] 앞의 두자리만 입력
-  - [ ] 숫자가 아닌 경우 에러 발생
-  - [ ] `type="password"`로 지정
+- [x] PasswordInput 컴포넌트
+  - [x] UI
+  - [x] 앞의 두자리만 입력
+  - [x] 숫자가 아닌 경우 에러 발생
+  - [x] `type="password"`로 지정
 - [ ] 다음 버튼 컴포넌트 (그냥 styled component로 대체 가능)
 
 <br/>
