@@ -9,7 +9,7 @@ const StyledCreditCardView = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   gap: 6px;
-  
+
   width: 200px;
   height: 130px;
 
@@ -51,7 +51,9 @@ export const CreditCardView = (props: CreditCardViewProps) => {
       <ICChip />
       <CardNumber>
         {partialCardNumbers.map((partialCardNumber) => (
-          <Text size="small" key={partialCardNumber}>{partialCardNumber}</Text>
+          <Text size="small" key={partialCardNumber}>
+            {partialCardNumber}
+          </Text>
         ))}
         <Text size="small">••••</Text>
         <Text size="small">••••</Text>
