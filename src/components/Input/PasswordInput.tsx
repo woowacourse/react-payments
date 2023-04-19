@@ -1,5 +1,5 @@
 import { Input } from 'components/common';
-import React, { ChangeEvent, ChangeEventHandler, useRef, useState } from 'react';
+import React, { ChangeEvent, ChangeEventHandler } from 'react';
 import { ValueAndOnChange } from './types';
 
 interface PasswordInputProps {
