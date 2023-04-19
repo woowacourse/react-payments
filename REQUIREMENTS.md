@@ -60,8 +60,8 @@
   - [x] Input 컴포넌트 구현
   - [x] Label 컴포넌트 구현
   - [ ] Form 컴포넌트 구현
-    - [ ] CardInput 컴포넌트 구현
-    - [ ] ExpirationInput 컴포넌트 구현
+    - [x] CardInput 컴포넌트 구현
+    - [x] ExpirationInput 컴포넌트 구현
     - [ ] NameInput 컴포넌트 구현
     - [ ] SecurityInput 컴포넌트 구현
     - [ ] PasswordInput 컴포넌트 구현
