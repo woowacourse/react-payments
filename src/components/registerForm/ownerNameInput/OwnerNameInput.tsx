@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import FormLabel from "./common/FormLabel";
-import Input from "./common/Input";
-import ErrorSpan from "./common/ErrorSpan";
+import FormLabel from "src/components/common/FormLabel";
+import Input from "src/components/common/Input";
+import ErrorSpan from "src/components/common/ErrorSpan";
 import {
   CONTINUOUS_EMPTY_REGEXP,
   ONLY_ENG_AND_EMPTY_REGEXP,
