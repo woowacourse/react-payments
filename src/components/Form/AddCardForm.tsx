@@ -100,7 +100,6 @@ function AddCardForm() {
       <CardNumberContainer>
         <CardNumberInputs valueAndOnChanges={valueAndOnChanges} />
       </CardNumberContainer>
-
       <Label text="만료일" />
       <ExpirationDateContainer>
         <ExpirationDateInput
@@ -108,23 +107,22 @@ function AddCardForm() {
           year={{ value: year, onChange: handleYearInputChange }}
         />
       </ExpirationDateContainer>
-
       <Label text="카드 소유자 이름(선택)" />
       <NameInputContainer>
         <NameInput value={name} onChange={handleNameInputChange} />
       </NameInputContainer>
-
       <Label text="보안 코드(CVC/CVV)" />
       <SecurityCodeInputContainer>
         <SecurityCodeInput value={securityCode} onChange={handleSecurityCodeChange} />
       </SecurityCodeInputContainer>
-
       <Label text="카드 비밀번호" />
       <PasswordInputContainer>
         <PasswordInput
           first={{ value: firstDigit, onChange: handleFirstPasswordInputChange }}
           second={{ value: secondDigit, onChange: handleSecondPasswordInputChange }}
         />
+        <DotContainer>•</DotContainer>
+        <DotContainer>•</DotContainer>
       </PasswordInputContainer>
       <button type="submit">다음</button>
     </FormContainer>
@@ -132,9 +130,12 @@ function AddCardForm() {
 }
 
 const FormContainer = styled.form`
-  border: 2px solid black;
   display: flex;
   flex-direction: column;
+  Label {
+    margin-bottom: 12px;
+  }
+
   button {
     position: absolute;
     bottom: 20px;
@@ -144,18 +145,53 @@ const FormContainer = styled.form`
 
 const CardNumberContainer = styled(Container)`
   justify-content: center;
+  width: 318px;
   Input {
     width: 15%;
     text-align: center;
   }
 `;
 
-const ExpirationDateContainer = styled(Container)``;
+const ExpirationDateContainer = styled(Container)`
+  width: 137px;
+  justify-content: center;
+  Input {
+    text-align: center;
+  }
+`;
 
-const NameInputContainer = styled(Container)``;
+const NameInputContainer = styled(Container)`
+  width: 318px;
+`;
 
-const SecurityCodeInputContainer = styled(Container)``;
+const SecurityCodeInputContainer = styled(Container)`
+  width: 84px;
 
-const PasswordInputContainer = styled(Container)``;
+  Input {
+    text-align: center;
+    margin-left: 0.5rem;
+    letter-spacing: 0.5rem;
+  }
+`;
+
+const PasswordInputContainer = styled(Container)`
+  background-color: rgba(255, 255, 255, 0);
+  width: 60%;
+  padding: 0;
+  align-items: center;
+  Input {
+    width: 44px;
+    height: 44px;
+    text-align: center;
+    background-color: #ecebf1;
+    margin-right: 7px;
+    border-radius: 7px;
+  }
+`;
+
+const DotContainer = styled.div`
+  padding: 0 20px;
+  font-size: 19px;
+`;
 
 export default AddCardForm;

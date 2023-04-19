@@ -5,12 +5,12 @@ export const Container = styled.div`
   flex-direction: row;
   background-color: #ecebf1;
   border-radius: 7px;
-  padding: 10px;
-  width: 80%;
+  padding: 12px;
 
   Input {
     width: 100%;
     background-color: rgba(255, 255, 255, 0);
     border: none;
+    font-size: 18px;
   }
 `;

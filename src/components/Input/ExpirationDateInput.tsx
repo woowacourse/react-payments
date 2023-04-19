@@ -1,5 +1,6 @@
 import { Input } from 'components/common';
 import React, { ChangeEventHandler, ChangeEvent } from 'react';
+import styled from 'styled-components';
 
 export type ValueAndOnChange = {
   value: string;
@@ -38,6 +39,7 @@ export function ExpirationDateInput(props: ExpirationProps) {
         placeholder="MM"
         onChange={(e) => handleChange(e, 0, month.onChange)}
       />
+      <SLASH />
       <Input
         ref={inputRefs[1]}
         value={year.value}
@@ -49,3 +51,9 @@ export function ExpirationDateInput(props: ExpirationProps) {
     </>
   );
 }
+
+const SLASH = styled.span`
+  &::before {
+    content: '/';
+  }
+`;
