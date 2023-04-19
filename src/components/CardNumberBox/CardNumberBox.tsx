@@ -1,9 +1,9 @@
 import { ChangeEvent, useState } from 'react';
-import Input from '../Input/Input';
 import * as styled from './CardNumberBox.styles';
 import { isNumeric } from '../../validator';
+import { generateInputs } from '../generator';
 
-interface Numbers {
+export interface NumbersState {
   first: string;
   second: string;
   third: string;
@@ -12,7 +12,7 @@ interface Numbers {
 }
 
 const CardNumberBox = () => {
-  const [numbers, setNumbers] = useState<Numbers>({
+  const [numbers, setNumbers] = useState<NumbersState>({
     first: '',
     second: '',
     third: '',
@@ -33,24 +33,11 @@ const CardNumberBox = () => {
     });
   };
 
-  const generateInputs = () => {
-    return Object.keys(numbers).map((key) => (
-      <Input
-        key={key}
-        name={key}
-        value={numbers[key]}
-        onChange={onChange}
-        width="large"
-        type="text"
-      />
-    ));
-  };
-
   return (
     <styled.CardNumberBox>
       <label>
         <div>카드 번호</div>
-        <div>{generateInputs()}</div>
+        <div>{generateInputs(numbers, onChange, 'large')}</div>
       </label>
       <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
     </styled.CardNumberBox>

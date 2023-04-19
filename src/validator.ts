@@ -1,7 +1,5 @@
-export const validateNumeric = (value: string) => {
-  const isContainNumbers = /[0-9]/.test(value);
-
-  if (!isContainNumbers) throw new Error('숫자만 입력하라 이거야');
+export const isNumeric = (value: string) => {
+  return /^[0-9]*$/.test(value);
 };
 
 export const validateMonth = (value: number) => {
@@ -23,7 +21,7 @@ export const validateExpirationDate = (expirationYear: number, expirationMonth: 
 
 export const validateValidUserName = (userName: string) => {
   const isEmpty = !userName.length;
-  const isValidFormat = /^[A-Za-z](?:\s?[A-Za-z])*$/.test(userName);
+  const isValidFormat = /^([A-Za-z](?:\s?[A-Za-z])*)*$/.test(userName);
   const isValidLength = userName.length <= 30;
 
   if (isEmpty) return;
@@ -33,15 +31,15 @@ export const validateValidUserName = (userName: string) => {
   throw new Error('영문으로 이루어진 이름을 입력해주세요.');
 };
 
-export const validateCardExpirationValue = (month: string, year: string) => {
-  try {
-    validateNumeric(month);
-    validateNumeric(year);
+// export const validateCardExpirationValue = (month: string, year: string) => {
+//   try {
+//     validateNumeric(month);
+//     validateNumeric(year);
 
-    // Number
-    validateMonth(Number(month));
-    validateExpirationDate(Number(year), Number(month));
-  } catch (error) {
-    console.error(error);
-  }
-};
+//     // Number
+//     validateMonth(Number(month));
+//     validateExpirationDate(Number(year), Number(month));
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };

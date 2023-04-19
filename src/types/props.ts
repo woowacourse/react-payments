@@ -1,9 +1,10 @@
+export type width = 'small' | 'middle' | 'large';
+
 export interface InputProps {
-  name: string;
   value: string;
   onChange: React.ChangeEventHandler;
-  width: 'small' | 'middle' | 'large';
+  width: width;
   type: 'password' | 'number' | 'text';
+  name?: string;
   placeholder?: string;
-  // inputRef: React.MutableRefObject<HTMLInputElement | null>;
 }

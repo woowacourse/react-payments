@@ -1,16 +1,16 @@
 import { ChangeEvent, useState } from 'react';
-import Input from '../Input/Input';
 import * as styled from './ExpirationDateInputBox.styles';
 import { isNumeric } from '../../validator';
+import { generateInputs } from '../generator';
 
-interface DateStates {
+export interface DateState {
   month: string;
   year: string;
   [key: string]: string;
 }
 
 const ExpirationDateInputBox = (props: any) => {
-  const [date, setDate] = useState<DateStates>({
+  const [date, setDate] = useState<DateState>({
     month: '',
     year: '',
   });
@@ -29,24 +29,11 @@ const ExpirationDateInputBox = (props: any) => {
     });
   };
 
-  const generateInputs = () => {
-    return Object.keys(date).map((key) => (
-      <Input
-        key={key}
-        name={key}
-        value={date[key]}
-        onChange={onChange}
-        width="middle"
-        type="text"
-      />
-    ));
-  };
-
   return (
     <styled.ExpirationDateInputBox>
       <label>
         <div>만료일</div>
-        <div>{generateInputs()}</div>
+        <div>{generateInputs(date, onChange, 'middle', 'MMYY')}</div>
       </label>
       <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
     </styled.ExpirationDateInputBox>
