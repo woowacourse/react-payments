@@ -8,10 +8,8 @@ export function SecurityCodeInput() {
     const { value } = e.target;
     const isNumber = !isNaN(Number(value));
 
-    if (!isNumber) {
-      setSecurityCode(value.slice(0, -1));
-      return;
-    }
+    if (!isNumber) return;
+
     setSecurityCode(value);
   };
 

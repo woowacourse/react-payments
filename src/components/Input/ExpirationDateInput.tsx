@@ -13,10 +13,8 @@ export function ExpirationDateInput() {
       const { value } = e.target;
       const isNumber = !isNaN(Number(value));
 
-      if (!isNumber) {
-        setMonth(value.slice(0, -1));
-        return;
-      }
+      if (!isNumber) return;
+
       setMonth(value);
     }
 
@@ -24,10 +22,8 @@ export function ExpirationDateInput() {
       const { value } = e.target;
       const isNumber = !isNaN(Number(value));
 
-      if (!isNumber) {
-        setYear(value.slice(0, -1));
-        return;
-      }
+      if (!isNumber) return;
+
       setYear(value);
     }
   };
