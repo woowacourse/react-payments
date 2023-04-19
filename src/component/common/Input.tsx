@@ -1,11 +1,24 @@
 import { InputHTMLAttributes } from "react";
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {}
+import styles from "./Input.module.css";
+
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  // className?: string;
+}
 
 export default function Input(props: Props) {
-  const { type, onChange, placeholder, inputMode, defaultValue, style } = props;
+  const {
+    type,
+    onChange,
+    placeholder,
+    inputMode,
+    defaultValue,
+    style,
+    className,
+  } = props;
   return (
     <input
+      className={`${styles.input} ${className}`}
       style={style}
       type={type}
       inputMode={inputMode}
