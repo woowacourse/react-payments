@@ -1,12 +1,13 @@
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
+import * as S from './style';
 
 function Home() {
   const navigate = useNavigate();
   return (
-    <div>
-      <div>보유카드</div>
-      <div>
+    <S.HomeLayout>
+      <S.HomeHeader>보유카드</S.HomeHeader>
+      <S.CreditCardList>
         <CreditCard
           fullFilled
           creditCard={{
@@ -31,15 +32,12 @@ function Home() {
             owner: 'NOAH',
           }}
         />
-      </div>
-
-      <div>
-        <div>새로운 카드를 등록해주세요.</div>
-        <div>
-          <button type="button" onClick={() => navigate('/register')}>+</button>
-        </div>
-      </div>
-    </div>
+      </S.CreditCardList>
+      <S.RegisterCreditCardContainer>
+        <S.RegisterCreditCardText>새로운 카드를 등록해주세요.</S.RegisterCreditCardText>
+        <S.RegisterCreditCardButton type="button" onClick={() => navigate('/register')}>+</S.RegisterCreditCardButton>
+      </S.RegisterCreditCardContainer>
+    </S.HomeLayout>
   );
 }
 export default Home;
