@@ -2,7 +2,11 @@ import { useState } from 'react';
 import CardInfoInput from '../CardInfoInput/CardInfoInput';
 import Input from '../Input/Input';
 
-const CardNumberInput = () => {
+type CardNumberInputProps = {
+  updateCardNumber: (cardNumber: string) => void;
+};
+
+const CardNumberInput = ({ updateCardNumber }: CardNumberInputProps) => {
   const [cardNumber, setCardNumber] = useState('');
 
   const addHyphensInCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,6 +17,7 @@ const CardNumberInput = () => {
     const cardNumberWithHyphens = (hyphenRemovedCardNumber.match(/.{1,4}/g) || []).join('-');
 
     setCardNumber(cardNumberWithHyphens);
+    updateCardNumber(cardNumber);
   };
 
   return (
