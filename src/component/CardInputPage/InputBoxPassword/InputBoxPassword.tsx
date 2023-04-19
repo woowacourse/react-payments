@@ -13,7 +13,7 @@ export default function InputBoxPassword() {
   return (
     <div className="input-box-card-password">
       <p>카드 비밀번호</p>
-      <CardPassword />
+      <CardPassword setError={setError} />
       <p className={error ? "visible" : ""}>error message</p>
     </div>
   );
