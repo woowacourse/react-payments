@@ -85,3 +85,20 @@ CVCInput.args = {
     e.target.value = e.target.value.replaceAll(/\d/g, "●");
   },
 };
+
+export const PasswordInput = Template.bind({});
+
+PasswordInput.args = {
+  label: "password",
+  width: "43px",
+  placeholder: "",
+  textPosition: "center",
+  event: (e) => {
+    if (e.target.value.length > 1 || !/\d$/.test(e.target.value)) {
+      e.target.value = e.target.value.slice(0, -1);
+      return;
+    }
+
+    e.target.value = e.target.value.replaceAll(/\d/g, "●");
+  },
+};
