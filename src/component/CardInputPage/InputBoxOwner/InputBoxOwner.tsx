@@ -4,11 +4,17 @@ import Input from "../../common/Input";
 import "./inputBoxOwner.css";
 
 export default function InputBoxOwner() {
-  const [error, setError] = useState(true);
   const [nameLength, setNameLength] = useState(0);
 
-  const onChangeCallback = (event: ChangeEvent<HTMLInputElement>) => {
-    setNameLength(event.target.value.trim().length);
+  const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+      .split(/\s{2,}/)
+      .filter((spelling) => spelling !== "")
+      .join(" ");
+
+    e.target.value = value.slice(0, 30);
+
+    setNameLength(e.target.value.trim().length);
   };
 
   return (
@@ -22,7 +28,7 @@ export default function InputBoxOwner() {
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         inputMode="text"
       ></Input>
-      <p className={error ? "visible" : ""}>error message</p>
+      <p>TBD</p>
     </div>
   );
 }
