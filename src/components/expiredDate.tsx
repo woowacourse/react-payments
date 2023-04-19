@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { MAX_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
 import { useError } from "../hooks/useError";
 import { useInputDate } from "../hooks/useInputDate";
 import { validation } from "../validation";
@@ -16,14 +17,16 @@ export function ExpiredDate() {
           handleChange={handleChange}
           handleError={() => handleError(month, validation.isNumber)}
           name="month"
-          maxLength={2}
+          maxLength={MAX_LENGTH.DATE}
+          placeholder={PLACEHOLDER.MONTH}
         />
         /
         <Input
           handleChange={handleChange}
           handleError={() => handleError(year, validation.isNumber)}
           name="year"
-          maxLength={2}
+          maxLength={MAX_LENGTH.DATE}
+          placeholder={PLACEHOLDER.YEAR}
         />
       </InputBox>
     </Wrapper>
