@@ -113,5 +113,5 @@ export function CardNumberInput() {
 }
 
 function validater(input: string) {
-  return /^[0-9]+$/.test(input);
+  return /^[0-9]+$|^$/.test(input);
 }
