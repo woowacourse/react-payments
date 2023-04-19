@@ -17,6 +17,7 @@ export const Input = styled.input<InputProps>`
     :focus {
         outline: none;
     }
+    margin-right: 10px;
 `;
 
 export default {};

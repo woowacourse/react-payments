@@ -5,7 +5,7 @@ export type InputProps<T> = {
   value: T,
   width: string,
   textAlign: 'center' | 'start', // 수정 필ㅇ
-  onChange: () => void,
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
 };
 
 type InputValueType = string | number | readonly string[] | undefined;
