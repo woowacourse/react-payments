@@ -8,6 +8,7 @@ interface InputContainerProps {
   children: ReactNode;
   required?: boolean;
   supportingText?: string;
+  isError?: boolean;
   characterCounter?: number[];
 }
 
@@ -17,6 +18,7 @@ function InputContainer({
   children,
   required = false,
   supportingText,
+  isError = false,
   characterCounter,
 }: InputContainerProps) {
   return (
@@ -27,7 +29,7 @@ function InputContainer({
       </label>
       {children}
       <div className={styles.subInformation}>
-        {supportingText && <SupportingText message={supportingText} />}
+        {supportingText && <SupportingText message={supportingText} isError={isError} />}
         {characterCounter && (
           <span className={styles.characterCounter}>
             {characterCounter[0]}/{characterCounter[1]}
