@@ -24,7 +24,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/main"
+            path="/"
             element={<CardListPage creditCardList={creditCardList} />}
           />
           <Route

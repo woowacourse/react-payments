@@ -96,7 +96,7 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
     };
 
     e.preventDefault();
-    navigate("/main");
+    navigate("/");
     addCreditCard(newCard);
   };
 
