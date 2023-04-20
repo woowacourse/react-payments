@@ -14,6 +14,8 @@ import { CardPassword } from "./components/cardPassword";
 import { AddCardForm } from "./components/addCardForm";
 import { Card } from "./components/common/card";
 import { CardList } from "./pages/cardList";
+import { AddCard } from "./pages/addCard";
+import { ValidateProvider } from "./contexts/validate";
 
 function App() {
   return (
@@ -24,7 +26,7 @@ function App() {
           <Router>
             <Routes>
               <Route path="/" element={<CardList />}></Route>
-              <Route path="/add-card" element={<AddCardForm />}></Route>
+              <Route path="/add-card" element={<AddCard />}></Route>
               <Route path="/card" element={<Card />}></Route>
             </Routes>
           </Router>
