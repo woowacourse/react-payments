@@ -112,9 +112,13 @@ const FormCardAdd = ({
             minDataLength={3}
             passwordType="password-cvc"
           />
-          <button>
+          <button type="button" className="cvc-info-button">
             <img src={cvcInfo} alt="cvc_info" />
           </button>
+          <div className="cvc-info-box">
+            <p>CVC란?</p>
+            <p>카드 뒷면의 3자리 숫자입니다.</p>
+          </div>
         </div>
       </div>
       <div className="card-password-container">

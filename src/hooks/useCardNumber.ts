@@ -9,9 +9,6 @@ const useCardNumber = (initialState: string) => {
     setCardNumber((cardNumber) => cardNumber + lastWord);
 
     setMaskedNumber(() => formatCardNumber(cardNumber));
-
-    console.log(`cardNumber: ${cardNumber}`);
-    console.log(`maskedNumber: ${maskedNumber}`);
   };
 
   return [cardNumber, maskedNumber, handleCardNumber] as const;
