@@ -1,29 +1,39 @@
-import { useContext } from "react";
 import styled from "styled-components";
-import {
-  DataContext,
-  NameContext,
-  NumberContext,
-} from "../../contexts/cardInfo";
 
-export function Card() {
-  const { cardNumber } = useContext(NumberContext);
-  const { month, year } = useContext(DataContext);
-  const { userName } = useContext(NameContext);
+interface INumber {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+}
 
+export interface CardInfo {
+  cardNumber: INumber;
+  date: any;
+  userName: string;
+  code?: string;
+  password?: string;
+}
+
+interface CardItemProps {
+  info: CardInfo;
+}
+
+export function CardItem(props: CardInfo) {
+  const { cardNumber, date, userName } = props;
   return (
     <CardContainer>
       <Magnetic />
       <NumberWrapper>
-        <NumberItem>{cardNumber["first"]}</NumberItem>
-        <NumberItem>{cardNumber["second"]}</NumberItem>
-        <NumberItem>{"•".repeat(cardNumber["third"].length)}</NumberItem>
-        <NumberItem>{"•".repeat(cardNumber["fourth"].length)}</NumberItem>
+        <NumberItem>{cardNumber?.first}</NumberItem>
+        <NumberItem>{cardNumber?.second}</NumberItem>
+        <NumberItem>{"•".repeat(4)}</NumberItem>
+        <NumberItem>{"•".repeat(4)}</NumberItem>
       </NumberWrapper>
       <InfoWrapper>
         <Name>{userName}</Name>
         <Date>
-          {month}/{year}
+          {date?.month}/{date?.year}
         </Date>
       </InfoWrapper>
     </CardContainer>
