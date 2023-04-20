@@ -1,7 +1,8 @@
+import { CardInfo } from '../../App';
 import * as styled from './MyCardPage.styled';
 import { useNavigate } from 'react-router-dom';
 
-const MyCardPage = (props: any) => {
+const MyCardPage = ({ cardList }: { cardList: CardInfo[] }) => {
   const navigation = useNavigate();
 
   const handleClick = () => {
@@ -16,58 +17,7 @@ const MyCardPage = (props: any) => {
           <styled.ButtonIcon>+</styled.ButtonIcon>
         </styled.Card>
       </styled.CardRegisterButtonContainer>
-      <styled.CardList>
-        <styled.Card bgColor="#333333">
-          <styled.Rectangle />
-          <styled.CardInformationContainer>
-            <styled.CardNumber>
-              <span>1111</span>
-              <span>2222</span>
-              <styled.EllipseContainer>
-                <styled.Ellipse />
-                <styled.Ellipse />
-                <styled.Ellipse />
-                <styled.Ellipse />
-              </styled.EllipseContainer>
-              <styled.EllipseContainer>
-                <styled.Ellipse />
-                <styled.Ellipse />
-                <styled.Ellipse />
-                <styled.Ellipse />
-              </styled.EllipseContainer>
-            </styled.CardNumber>
-            <styled.CardNameAndExpirationDateContainer>
-              <styled.CardName>NAME</styled.CardName>
-              <styled.ExpirationDate>MM/YY</styled.ExpirationDate>
-            </styled.CardNameAndExpirationDateContainer>
-          </styled.CardInformationContainer>
-        </styled.Card>
-        <styled.Card bgColor="red">
-          <styled.Rectangle />
-          <styled.CardInformationContainer>
-            <styled.CardNumber>
-              <span>1111</span>
-              <span>2222</span>
-              <styled.EllipseContainer>
-                <styled.Ellipse />
-                <styled.Ellipse />
-                <styled.Ellipse />
-                <styled.Ellipse />
-              </styled.EllipseContainer>
-              <styled.EllipseContainer>
-                <styled.Ellipse />
-                <styled.Ellipse />
-                <styled.Ellipse />
-                <styled.Ellipse />
-              </styled.EllipseContainer>
-            </styled.CardNumber>
-            <styled.CardNameAndExpirationDateContainer>
-              <styled.CardName>NAME</styled.CardName>
-              <styled.ExpirationDate>MM/YY</styled.ExpirationDate>
-            </styled.CardNameAndExpirationDateContainer>
-          </styled.CardInformationContainer>
-        </styled.Card>
-      </styled.CardList>
+      <styled.CardList></styled.CardList>
     </styled.MyCardPage>
   );
 };

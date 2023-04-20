@@ -9,6 +9,7 @@ import ExpirationDateInputBox from '../../components/ExpirationDateInputBox/Expi
 import OwnerNameInputBox from '../../components/OwnerNameInputBox/OwnerNameInputBox';
 import SecurityCodeInputBox from '../../components/SecurityCodeInputBox/SecurityCodeInputBox';
 import PasswordInputBox from '../../components/PasswordInputBox/PasswordInputBox';
+import CardPreview from '../../components/CardPreview/CardPreview';
 
 const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) => {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
@@ -40,7 +41,7 @@ const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) =>
   return (
     <>
       {/* <Header /> */}
-      {/* <Card /> */}
+      <CardPreview cardInfo={cardInfo} />
       <styled.CardRegisterForm>
         <CardNumberInputBox numbers={cardInfo.numbers} setCardInfo={setCardInfo} />
         <ExpirationDateInputBox
