@@ -6,8 +6,6 @@ import St from "./styled";
 function CardList() {
   return (
     <St.ListSection>
-      <CardDetailView />
-      <CardDetailView />
       <CardAddButton />
     </St.ListSection>
   );

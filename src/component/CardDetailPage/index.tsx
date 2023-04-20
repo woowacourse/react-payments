@@ -74,10 +74,15 @@ function CardDetailPage() {
       setCardPassword([cardPassword[0], password]);
     }
   };
+
   return (
     <St.Page>
       <CardDetailHeader />
-      <CardDetailView />
+      <CardDetailView
+        cardNumberHidden={cardNumberHidden}
+        cardDate={cardDate}
+        cardOwnerName={cardOwnerName}
+      />
       <CardDetailForm
         changeCardNumber={changeCardNumber}
         cardNumberHidden={cardNumberHidden}

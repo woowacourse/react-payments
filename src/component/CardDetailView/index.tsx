@@ -2,19 +2,26 @@ import React, { useState, useEffect } from "react";
 
 import St from "./styled";
 
-function CardDetailView() {
+type CardDetailViewProps = {
+  cardNumberHidden: string;
+  cardDate: string;
+  cardOwnerName: string;
+};
+
+function CardDetailView({
+  cardNumberHidden,
+  cardDate,
+  cardOwnerName,
+}: CardDetailViewProps) {
   return (
     <St.CreditCard>
       <St.ICDiv />
       <St.CardNumberSection>
-        <St.CardNumber>1234</St.CardNumber>
-        <St.CardNumber>5678</St.CardNumber>
-        <St.CardNumber>••••</St.CardNumber>
-        <St.CardNumber>••••</St.CardNumber>
+        <St.CardNumber>{cardNumberHidden.replaceAll("-", " ")}</St.CardNumber>
       </St.CardNumberSection>
       <St.CardInfoSection>
-        <St.CardInfo>SUN</St.CardInfo>
-        <St.CardInfo>04/21</St.CardInfo>
+        <St.CardInfo>{cardOwnerName ? cardOwnerName : "NAME"}</St.CardInfo>
+        <St.CardInfo>{cardDate ? cardDate : "MM/YY"}</St.CardInfo>
       </St.CardInfoSection>
     </St.CreditCard>
   );
