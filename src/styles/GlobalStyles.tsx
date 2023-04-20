@@ -74,6 +74,10 @@ const GlobalStyles = createGlobalStyle`
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }}
+
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
 `;
 
 export default GlobalStyles;
