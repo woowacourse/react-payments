@@ -8,18 +8,22 @@
   color: #fff;
 }
 
-.chip {
-  width: 40px;
-  height: 26px;
-  background: #cbba64;
-  border-radius: 4px;
-}
-
 .cardNumber {
+  display: flex;
+  column-gap: 10px;
+  height: 16px;
   margin: 10px 0 8px;
 }
 
 .detailContainer {
   display: flex;
   justify-content: space-between;
+}
+
+.number {
+  letter-spacing: 0.2em;
+}
+
+.password {
+  letter-spacing: -0.2em;
 }
