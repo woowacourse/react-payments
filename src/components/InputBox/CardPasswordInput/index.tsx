@@ -42,20 +42,24 @@ const PasswordInputBox = ({
           <span>카드 비밀번호</span>
         </styled.LabelHeader>
         <styled.InputContainer>
-          {Object.keys(password).map((key) => {
-            return (
-              <Input
-                key={key}
-                name={key}
-                value={password[key]}
-                onChange={onChange}
-                type="password"
-                width="xs"
-                center={true}
-                maxLength={1}
-              />
-            );
-          })}
+          {Object.keys(password).map((key) => (
+            <Input
+              key={key}
+              name={key}
+              value={password[key]}
+              onChange={onChange}
+              type="password"
+              width="xs"
+              center={true}
+              maxLength={1}
+            />
+          ))}
+          <styled.HiddenPassword>
+            <div />
+          </styled.HiddenPassword>
+          <styled.HiddenPassword>
+            <div />
+          </styled.HiddenPassword>
         </styled.InputContainer>
       </label>
       <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>

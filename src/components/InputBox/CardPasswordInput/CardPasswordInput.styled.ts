@@ -16,11 +16,29 @@ export const LabelHeader = styled.div`
 `;
 
 export const InputContainer = styled.div`
-  display: inline-block;
+  display: flex;
   border-radius: 10px;
 
-  & > input:not(:last-child) {
+  & > :not(:last-child) {
     margin-right: 8px;
+  }
+`;
+
+export const HiddenPassword = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: inherit;
+  width: 45px;
+
+  div {
+    height: 5px;
+    width: 5px;
+
+    background-color: black;
+
+    border-radius: 50%;
   }
 `;
 
