@@ -103,3 +103,10 @@ export const QuestionMark = styled.div`
     padding-right: 11px;
     padding-top: 9px;
 `;
+
+export const ErrorMessage = styled.div`
+    font-size: 12px;
+    color: red;
+    margin-top: 5px;
+    margin-bottom: 5px;
+`;
