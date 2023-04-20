@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Payments App",
+  "name": "Woowacourse React Payments App",
   "icons": [
     {
       "src": "favicon.ico",
