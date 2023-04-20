@@ -4,7 +4,7 @@ import CardRegister from "src/pages/CardRegister";
 
 function CardRoutes() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/card-list" element={<CardList />} />
         <Route path="/card-register" element={<CardRegister />} />
