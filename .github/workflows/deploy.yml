@@ -11,6 +11,8 @@ jobs:
       contents: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
+    env:
+      GENERATE_SOURCEMAP: false
 
     steps:
       - uses: actions/checkout@v2
