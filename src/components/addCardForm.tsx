@@ -1,18 +1,22 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { updateData } from "../utils/localStorage";
+import styled from 'styled-components';
 
-import { ValidateContext, ValidateProvider } from "../contexts/validate";
-import { Validator } from "../type/validator";
-import { getFormFields, IFormData } from "../utils/formData";
+import { Validator } from '../type/validator';
 
-import { CardNumber } from "./cardNumber";
-import { CardPassword } from "./cardPassword";
-import { ExpiredDate } from "./expiredDate";
-import { SecurityCode } from "./securityCode";
-import { UserName } from "./userName";
+import { updateData } from '../utils/localStorage';
+import { getFormFields, IFormData } from '../utils/formData';
+
+import { ValidateContext } from '../contexts/validate';
+
+import {
+  CardNumber,
+  CardPassword,
+  ExpiredDate,
+  SecurityCode,
+  UserName,
+} from './Input';
 
 export function AddCardForm() {
   const navigate = useNavigate();
@@ -30,19 +34,19 @@ export function AddCardForm() {
   ]);
 
   function moveCardList() {
-    navigate("/");
+    navigate('/');
   }
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const target = e.target as HTMLFormElement;
     const fields: IFormData = getFormFields(target);
-    updateData(fields, "cards");
+    updateData(fields, 'cards');
     moveCardList();
   }
 
   function checkAllValid() {
     const isValid = (valid: Validator) =>
-      Object.values(valid).every((x) => x === "");
+      Object.values(valid).every((x) => x === '');
     isValid(valid) === true && setIsComplete(true);
   }
 
@@ -55,7 +59,7 @@ export function AddCardForm() {
       <SecurityCode />
       <CardPassword />
       <ButtonWrapper>
-        <CompleteButton type="submit">다음</CompleteButton>
+        <CompleteButton type='submit'>다음</CompleteButton>
       </ButtonWrapper>
     </Form>
     // </ValidateProvider>

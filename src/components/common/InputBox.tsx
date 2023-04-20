@@ -1,9 +1,10 @@
-import React, { HTMLAttributes, ReactElement } from "react";
-import styled from "styled-components";
-import { LABEL, PLACEHOLDER } from "../../constants/inputInfo";
-import { LabelOption } from "../../type/input";
+import React from 'react';
 
-import { Input } from "./Input";
+import styled from 'styled-components';
+
+import { LABEL } from '../../constants/inputInfo';
+import { LabelOption } from '../../type/input';
+
 export interface InputBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   type: LabelOption;
   render?: () => JSX.Element;

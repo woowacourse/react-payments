@@ -1,5 +1,6 @@
-import { InputHTMLAttributes } from "react";
-import styled from "styled-components";
+import { InputHTMLAttributes } from 'react';
+
+import styled from 'styled-components';
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleError?: () => void;

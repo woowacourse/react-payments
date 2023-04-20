@@ -1,13 +1,17 @@
-import { useContext, useEffect } from "react";
-import styled from "styled-components";
-import { MAX_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
-import { DataContext } from "../contexts/cardInfo";
-import { ValidateContext } from "../contexts/validate";
-import { useError } from "../hooks/useError";
-import { useInputDate } from "../hooks/useInputDate";
-import { validation } from "../validation";
-import { Input } from "./common/Input";
-import { InputBox } from "./common/InputBox";
+import { useContext, useEffect } from 'react';
+
+import styled from 'styled-components';
+
+import { MAX_LENGTH, PLACEHOLDER } from '../../constants/inputInfo';
+
+import { DataContext } from '../../contexts/cardInfo';
+import { ValidateContext } from '../../contexts/validate';
+
+import { useError } from '../../hooks/useError';
+
+import { validation } from '../../validation';
+
+import { Input, InputBox } from '../common';
 
 export function ExpiredDate() {
   const { month, year, handleChange } = useContext(DataContext);
@@ -15,16 +19,16 @@ export function ExpiredDate() {
   const { valid, changeValid } = useContext(ValidateContext);
 
   useEffect(() => {
-    changeValid("validDate", error);
+    changeValid('validDate', error);
   }, [month, year]);
 
   return (
     <Wrapper>
-      <InputBox type={"DATE"} error={error}>
+      <InputBox type={'DATE'} error={error}>
         <Input
           handleChange={handleChange}
           handleError={() => handleError(month, validation.isNumber)}
-          name="month"
+          name='month'
           maxLength={MAX_LENGTH.DATE}
           placeholder={PLACEHOLDER.MONTH}
         />
@@ -32,7 +36,7 @@ export function ExpiredDate() {
         <Input
           handleChange={handleChange}
           handleError={() => handleError(year, validation.isNumber)}
-          name="year"
+          name='year'
           maxLength={MAX_LENGTH.DATE}
           placeholder={PLACEHOLDER.YEAR}
         />

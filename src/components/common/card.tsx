@@ -1,10 +1,12 @@
-import { useContext } from "react";
-import styled from "styled-components";
+import { useContext } from 'react';
+
+import styled from 'styled-components';
+
 import {
   DataContext,
   NameContext,
   NumberContext,
-} from "../../contexts/cardInfo";
+} from '../../contexts/cardInfo';
 
 export function Card() {
   const { cardNumber } = useContext(NumberContext);
@@ -15,10 +17,10 @@ export function Card() {
     <CardContainer>
       <Magnetic />
       <NumberWrapper>
-        <NumberItem>{cardNumber["first"]}</NumberItem>
-        <NumberItem>{cardNumber["second"]}</NumberItem>
-        <NumberItem>{"•".repeat(cardNumber["third"].length)}</NumberItem>
-        <NumberItem>{"•".repeat(cardNumber["fourth"].length)}</NumberItem>
+        <NumberItem>{cardNumber['first']}</NumberItem>
+        <NumberItem>{cardNumber['second']}</NumberItem>
+        <NumberItem>{'•'.repeat(cardNumber['third'].length)}</NumberItem>
+        <NumberItem>{'•'.repeat(cardNumber['fourth'].length)}</NumberItem>
       </NumberWrapper>
       <InfoWrapper>
         <Name>{userName}</Name>

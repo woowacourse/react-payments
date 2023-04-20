@@ -1,12 +1,15 @@
-import styled from "styled-components";
+import { useContext, useEffect } from 'react';
 
-import { useContext, useEffect } from "react";
-import { Input } from "./common/Input";
-import { InputBox } from "./common/InputBox";
-import { useError } from "../hooks/useError";
-import { validation } from "../validation";
-import { NumberContext } from "../contexts/cardInfo";
-import { ValidateContext } from "../contexts/validate";
+import styled from 'styled-components';
+
+import { useError } from '../../hooks/useError';
+
+import { validation } from '../../validation';
+
+import { NumberContext } from '../../contexts/cardInfo';
+import { ValidateContext } from '../../contexts/validate';
+
+import { Input, InputBox } from '../common';
 
 export function CardNumber() {
   const { cardNumber, handleChange } = useContext(NumberContext);
@@ -14,7 +17,7 @@ export function CardNumber() {
   const { valid, changeValid } = useContext(ValidateContext);
 
   useEffect(() => {
-    changeValid("validCardNumber", error);
+    changeValid('validCardNumber', error);
   }, [
     cardNumber.first,
     cardNumber.second,
@@ -24,7 +27,7 @@ export function CardNumber() {
 
   return (
     <Wrapper>
-      <InputBox type={"NUMBER"} error={error}>
+      <InputBox type={'NUMBER'} error={error}>
         {Object.keys(cardNumber).map((cardInput, index, original) => {
           return (
             <>
@@ -33,19 +36,19 @@ export function CardNumber() {
                 handleChange={handleChange}
                 handleError={() =>
                   handleError(
-                    Object.values(cardNumber).join(""),
+                    Object.values(cardNumber).join(''),
                     validation.isNumber
                   )
                 }
                 name={cardInput}
                 type={
-                  cardInput === "third" || cardInput === "fourth"
-                    ? "password"
-                    : "text"
+                  cardInput === 'third' || cardInput === 'fourth'
+                    ? 'password'
+                    : 'text'
                 }
                 maxLength={4}
               />
-              {index < original.length - 1 && "-"}
+              {index < original.length - 1 && '-'}
             </>
           );
         })}

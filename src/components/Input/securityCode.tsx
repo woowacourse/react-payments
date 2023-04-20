@@ -1,13 +1,17 @@
-import { useContext, useEffect } from "react";
-import styled from "styled-components";
-import { MAX_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
-import { ValidateContext } from "../contexts/validate";
-import { useError } from "../hooks/useError";
-import { useInputCode } from "../hooks/useInputCode";
-import { validation } from "../validation";
-import { CountText } from "./common/countText";
-import { Input } from "./common/Input";
-import { InputBox } from "./common/InputBox";
+import { useContext, useEffect } from 'react';
+
+import styled from 'styled-components';
+
+import { MAX_LENGTH } from '../../constants/inputInfo';
+
+import { ValidateContext } from '../../contexts/validate';
+
+import { useError } from '../../hooks/useError';
+import { useInputCode } from '../../hooks/useInputCode';
+
+import { validation } from '../../validation';
+
+import { Input, InputBox } from '../common';
 
 export function SecurityCode() {
   const { code, handleChange } = useInputCode();
@@ -15,20 +19,20 @@ export function SecurityCode() {
   const { valid, changeValid } = useContext(ValidateContext);
 
   useEffect(() => {
-    changeValid("validCode", error);
+    changeValid('validCode', error);
   }, [code]);
 
   return (
     <Wrapper>
-      <InputBox type={"CODE"} error={error}>
+      <InputBox type={'CODE'} error={error}>
         <Input
           handleChange={handleChange}
           handleError={() => handleError(code, validation.isNumber)}
           maxLength={MAX_LENGTH.CODE}
-          type="password"
+          type='password'
         />
       </InputBox>
-      <Img src="/assets/helpIc.svg" />
+      <Img src='/assets/helpIc.svg' />
     </Wrapper>
   );
 }

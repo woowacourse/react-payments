@@ -1,8 +1,9 @@
-import styled from "styled-components";
-import { useCountText } from "../../hooks/useCountText";
+import styled from 'styled-components';
+
+import { useCountText } from '../../hooks/useCountText';
 
 export function CountText(maxLength: number) {
-  const { count, handleChange } = useCountText();
+  const { count } = useCountText();
 
   return (
     <Wrapper>

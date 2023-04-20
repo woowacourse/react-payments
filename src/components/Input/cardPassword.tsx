@@ -1,12 +1,17 @@
-import { useContext, useEffect } from "react";
-import styled from "styled-components";
-import { MAX_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
-import { ValidateContext } from "../contexts/validate";
-import { useError } from "../hooks/useError";
-import { useInputPassword } from "../hooks/useInputPassword";
-import { validation } from "../validation";
-import { Input } from "./common/Input";
-import { InputBox } from "./common/InputBox";
+import { useContext, useEffect } from 'react';
+
+import styled from 'styled-components';
+
+import { MAX_LENGTH } from '../../constants/inputInfo';
+
+import { ValidateContext } from '../../contexts/validate';
+
+import { useError } from '../../hooks/useError';
+import { useInputPassword } from '../../hooks/useInputPassword';
+
+import { validation } from '../../validation';
+
+import { Input, InputBox } from '../common';
 
 export function CardPassword() {
   const { password, handleChange } = useInputPassword();
@@ -14,15 +19,16 @@ export function CardPassword() {
   const { valid, changeValid } = useContext(ValidateContext);
 
   useEffect(() => {
-    changeValid("validPassword", error);
+    changeValid('validPassword', error);
   }, [password]);
 
   return (
     <Wrapper>
       <InputBox
-        type={"PASSWORD"}
+        type={'PASSWORD'}
         error={error}
-        style={{ backgroundColor: "transparent" }}>
+        style={{ backgroundColor: 'transparent' }}
+      >
         {Object.keys(password).map((cardInput, _, original) => {
           return (
             <Input
@@ -30,14 +36,14 @@ export function CardPassword() {
               handleChange={handleChange}
               handleError={() =>
                 handleError(
-                  Object.values(password).join(""),
+                  Object.values(password).join(''),
                   validation.isNumber
                 )
               }
               name={cardInput}
               maxLength={MAX_LENGTH.PASSWORD}
-              type="password"
-              style={{ marginRight: "0.7rem" }}
+              type='password'
+              style={{ marginRight: '0.7rem' }}
             />
           );
         })}

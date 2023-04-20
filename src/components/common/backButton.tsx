@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
+
+import styled from 'styled-components';
 
 export function BackButton() {
   const navigate = useNavigate();
@@ -10,8 +11,8 @@ export function BackButton() {
 
   return (
     <Button
-      src="/assets/backButtonIc.svg"
-      alt="back-button"
+      src='/assets/backButtonIc.svg'
+      alt='back-button'
       onClick={movePrevPage}
     />
   );
