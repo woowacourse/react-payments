@@ -14,10 +14,10 @@ import * as S from './style';
 function CreditCardRegister() {
   const navigate = useNavigate();
 
-  const [creditCardNumber, setCreditCardNumber, numberErrorMessage] = useInput('' as string, creditCard.isValidNumber);
-  const [creditCardExpiry, setCreditCardExpiry, expiryErrorMessage] = useInput('' as string, creditCard.isValidExpiry);
-  const [creditCardOwner, setCreditCardOwner, ownerErrorMessage] = useInput('' as string, creditCard.isValidOwner);
-  const [creditCardCVC, setCreditCardCVC, CVCErrorMessage] = useInput('' as string, creditCard.isValidCVC);
+  const [creditCardNumber, setCreditCardNumber, numberErrorMessage] = useInput<string>('', creditCard.isValidNumber);
+  const [creditCardExpiry, setCreditCardExpiry, expiryErrorMessage] = useInput<string>('', creditCard.isValidExpiry);
+  const [creditCardOwner, setCreditCardOwner, ownerErrorMessage] = useInput<string>('', creditCard.isValidOwner);
+  const [creditCardCVC, setCreditCardCVC, CVCErrorMessage] = useInput<string>('', creditCard.isValidCVC);
   const [creditCardPassword, setCreditCardPassword, passwordErrorMessage] = useInput<Type.CreditCardPasswordType>(
     { first: '', second: '' },
     creditCard.isValidPassword,
