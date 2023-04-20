@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 
-import HoldingCardsPage from './HoldingCardsPage';
-import CardRegisterPage from './CardRegisterPage';
+import HoldingCardsPage from './pages/HoldingCardsPage';
+import CardRegisterPage from './pages/CardRegisterPage';
 
-import type { CardInfo } from '../types/card';
+import type { CardInfo } from './types/card';
 
-function App() {
+const App = () => {
   const [cards, setCards] = useState<CardInfo[]>([]);
 
   useEffect(() => {
@@ -36,6 +36,6 @@ function App() {
       />
     </Routes>
   );
-}
+};
 
 export default App;
