@@ -1,36 +1,46 @@
+import { CardInputValidation, ExpirationDateFormat } from '../../../types';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Input from '../../common/Input/Input';
+import { useError } from '../../../hooks/useError';
+import validator from '../../../utils/validator';
 import { formatExpirationDate } from '../../../utils/formatter';
-import { useInputContainer } from '../../../hooks/useInputContainer';
-import { CardInputValidation } from '../../../types';
+import { ChangeEvent } from 'react';
 
 interface CardExpirationDateProps {
-  validator: (input: string) => boolean;
-  onValidation: (key: keyof CardInputValidation, value: boolean) => void;
+  handleValidationChange: (key: keyof CardInputValidation, value: boolean) => void;
+  onChange: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
+  value: ExpirationDateFormat;
 }
 
-function CardExpirationDate({ validator, onValidation }: CardExpirationDateProps) {
-  const { inputValue, handleInputChange, isError, handleInputBlur } = useInputContainer({
-    formatter: formatExpirationDate,
-    validator,
-    onValidation,
+function CardExpirationDate({ onChange, handleValidationChange, value }: CardExpirationDateProps) {
+  const [isError, onErrorBlur] = useError({
+    validator: validator.expirationDate,
+    handleValidationChange,
   });
+
+  const expirationDate = formatExpirationDate(`${value.month}${value.year}`);
 
   return (
     <InputContainer
       label="만료일"
-      id="expiration-date"
-      supportingText="연/년도(MM/YY) 순서로 4자리 숫자"
+      id="expirationDate"
+      isError={isError}
+      supportingText={
+        isError ? '카드에 표시된 만료일을 (MM/YY) 순서로 동일하게 입력해주세요' : undefined
+      }
+      required
     >
       <Input
         type="text"
-        id="expiration-date"
-        value={inputValue}
+        id="expirationDate"
+        data-name="expirationDate"
+        value={expirationDate}
+        placeholder="연/년도(MM/YY) 순서로 4자리 숫자를 입력해주세요"
         isError={isError}
         maxLength={5}
-        autoComplete="off"
-        onChange={handleInputChange}
-        onBlur={handleInputBlur}
+        autoComplete="cc-csc"
+        onChange={onChange}
+        onBlur={onErrorBlur}
       />
     </InputContainer>
   );
