@@ -23,3 +23,8 @@ body {
   justify-content: center;
   background-color: var(--grey-100);
 }
+
+ul,
+li {
+  list-style: none;
+}
