@@ -21,9 +21,11 @@
 }
 
 .number {
+  width: 36px;
   letter-spacing: 0.2em;
 }
 
 .password {
+  width: 42px;
   letter-spacing: -0.2em;
 }
