@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { CardType } from "../types/card";
-import Card from "./common/Card";
+import { CardType } from "../../types/card";
+import Card from "../common/Card";
 
 interface CardProps {
   card: CardType;

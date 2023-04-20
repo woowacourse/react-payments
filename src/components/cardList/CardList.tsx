@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { CardItem } from "./CardItem";
-import { CardType } from "../types/card";
+import { CardType } from "../../types/card";
 import { EmptyCard } from "./EmptyCard";
 
 interface CardListProps {

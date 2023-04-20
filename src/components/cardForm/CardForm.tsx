@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CardType } from "../types/card";
+import { CardType } from "../../types/card";
 import { CVCInput } from "./CVCInput";
 import { CardNumberInput } from "./CardNumberInput";
 import { ExpiryDateInput } from "./ExpiryDateInput";
@@ -36,7 +36,7 @@ export const CardForm = ({
       numbers: cardInfo.numbers,
       expiryDate: cardInfo.expiryDate,
       owner: cardInfo.owner,
-      color: "#525252",
+      color: "#de75d0",
       CVC: Number(data.cvc),
       password: [Number(data.password1), Number(data.password2)],
     } as CardType;

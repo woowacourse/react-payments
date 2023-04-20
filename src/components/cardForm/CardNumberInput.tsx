@@ -1,6 +1,6 @@
-import { InputLabel } from "./common/InputLabel";
-import { Input } from "./common/Input";
-import styled from "styled-components";
+import { Container } from "../common/Container";
+import { InputLabel } from "../common/InputLabel";
+import { Input } from "../common/Input";
 import { useState } from "react";
 
 interface CardNumberInputProps {
@@ -58,15 +58,12 @@ export const CardNumberInput = ({
   return (
     <Container>
       <InputLabel text="카드 번호" name="cardNumber" />
-      <Input {...cardNumberInputInfo} handleInput={handleInput} />
+      <Input
+        error={{ isValid: true, errorMessage: "" }}
+        {...cardNumberInputInfo}
+        handleInput={handleInput}
+        handleChange={(e) => {}}
+      />
     </Container>
   );
 };
-
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  height: 65px;
-`;

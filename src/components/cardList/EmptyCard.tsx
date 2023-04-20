@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Card from "./common/Card";
+import Card from "../common/Card";
 import { Link } from "react-router-dom";
 
 export const EmptyCard = () => {

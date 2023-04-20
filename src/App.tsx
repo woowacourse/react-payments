@@ -10,10 +10,12 @@ const App = () => {
 
   useEffect(() => {
     const savedCards = localStorage.getItem("cards");
+
     if (savedCards) {
       setCards(JSON.parse(savedCards));
       return;
     }
+
     setCards(JSON.parse("[]"));
   }, []);
 

@@ -1,6 +1,7 @@
-import { Container } from "./CardNumberInput";
-import { Input } from "./common/Input";
-import { InputLabel } from "./common/InputLabel";
+import { Container } from "../common/Container";
+
+import { Input } from "../common/Input";
+import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
 
 interface OwnerInputProps {
@@ -36,7 +37,12 @@ export const OwnerInput = ({ setOwner, owner }: OwnerInputProps) => {
           name="ownerLength"
         />
       </Row>
-      <Input {...OwnerInfo} handleInput={handleInput} />
+      <Input
+        error={{ isValid: true, errorMessage: "" }}
+        {...OwnerInfo}
+        handleInput={handleInput}
+        handleChange={(e) => {}}
+      />
     </Container>
   );
 };

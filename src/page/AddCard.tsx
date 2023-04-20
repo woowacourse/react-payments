@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { CardItem } from "../components/CardItem";
+import { CardItem } from "../components/cardList/CardItem";
 import { Header } from "../components/common/Header";
 import { CardType } from "../types/card";
 import styled from "styled-components";
-import { CardForm } from "../components/CardForm";
+import { CardForm } from "../components/cardForm/CardForm";
 import { Link } from "react-router-dom";
 
 interface AddCardProps {

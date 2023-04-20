@@ -1,6 +1,7 @@
-import { Container } from "./CardNumberInput";
-import { Input } from "./common/Input";
-import { InputLabel } from "./common/InputLabel";
+import { Container } from "../common/Container";
+
+import { Input } from "../common/Input";
+import { InputLabel } from "../common/InputLabel";
 
 const CVCInfo = {
   label: "cvc",
@@ -21,7 +22,12 @@ export const CVCInput = () => {
   return (
     <Container>
       <InputLabel text="보안 코드 (CVC/CVV)" name="CVC" />
-      <Input {...CVCInfo} handleInput={handleInput} />
+      <Input
+        {...CVCInfo}
+        handleInput={handleInput}
+        handleChange={(e) => {}}
+        error={{ isValid: true, errorMessage: "" }}
+      />
     </Container>
   );
 };

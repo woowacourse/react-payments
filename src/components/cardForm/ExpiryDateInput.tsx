@@ -1,8 +1,7 @@
-import { Container } from "./common/Container";
-import { Input } from "./common/Input";
-import { InputLabel } from "./common/InputLabel";
+import { Container } from "../common/Container";
+import { Input } from "../common/Input";
+import { InputLabel } from "../common/InputLabel";
 import { useState } from "react";
-import styled from "styled-components";
 
 interface ExpiryDateInputProps {
   expiryDate: string;
@@ -79,7 +78,7 @@ export const ExpiryDateInput = ({
         handleInput={handleInput}
         handleChange={handleOutFocusEvent}
         error={{
-          isValid: isValid && isCompleted,
+          isValid: isValid && (isCompleted || !expiryDate),
           errorMessage: getValidMessage(),
         }}
       />
