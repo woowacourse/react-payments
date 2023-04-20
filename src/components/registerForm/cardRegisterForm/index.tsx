@@ -1,19 +1,19 @@
 import React from "react";
-import { CardNumber } from "../../CardNumber";
+import { CardNumber } from "../CardNumber";
 import ExpireDate from "../ExpireDate";
 import OwnerNameInput from "../OwnerNameInput";
 import SecurityCode from "../SecurityCode";
-import CardPassword from "../../CardPassword";
+import CardPassword from "../CardPassword";
 import styled from "styled-components";
 
 function CardRegisterForm() {
   return (
     <Form>
-      <CardNumber></CardNumber>
-      <ExpireDate></ExpireDate>
-      <OwnerNameInput></OwnerNameInput>
-      <SecurityCode></SecurityCode>
-      <CardPassword></CardPassword>
+      <CardNumber />
+      <ExpireDate />
+      <OwnerNameInput />
+      <SecurityCode />
+      <CardPassword />
       <div style={{ display: "flex", justifyContent: "end" }}>
         <NextButton>다음</NextButton>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import FormLabel from "src/components/@common/FormLabel";
 import Input from "src/components/@common/Input";
 import ErrorSpan from "src/components/@common/ErrorSpan";
@@ -7,9 +7,11 @@ import {
   ONLY_ENG_AND_EMPTY_REGEXP,
 } from "src/utils/regexp";
 import styled, { css } from "styled-components";
+import { InputValuesContext } from "../Main";
 
 function OwnerNameInput() {
-  const [ownerName, setOwnerName] = useState("");
+  const [cardInput, setCardInput] = useContext(InputValuesContext);
+
   const [error, setError] = useState({
     isError: false,
     message: "",
@@ -48,7 +50,11 @@ function OwnerNameInput() {
       });
     } finally {
       if (value.length <= 30) {
-        setOwnerName(value.toUpperCase());
+        if (!setCardInput) return;
+        setCardInput((prev) => ({
+          ...prev,
+          ownerName: value.toUpperCase().trim(),
+        }));
       }
     }
   };
@@ -57,10 +63,10 @@ function OwnerNameInput() {
     <OwnerNameInputContainer>
       <LabelContainer>
         <FormLabel>카드 소유자 이름(선택)</FormLabel>
-        <span>{`${ownerName.length} / 30`}</span>
+        <span>{`${cardInput.ownerName.length} / 30`}</span>
       </LabelContainer>
       <Input
-        value={ownerName}
+        value={cardInput.ownerName}
         onChange={ownerNameChange}
         customInputStyle={OwnerNameStyle}
       />

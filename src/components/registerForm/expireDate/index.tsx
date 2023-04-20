@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Input from "src/components/@common/Input";
 import styled, { css } from "styled-components";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import FormLabel from "src/components/@common/FormLabel";
-import { ONLY_MONTH_REGEXP } from "src/utils/regexp";
+import { ONLY_MONTH_REGEXP, ONLY_NUMBER_REGEXP } from "src/utils/regexp";
+import { InputValuesContext } from "../Main";
 
 function isValidMonth(month: string) {
   // 입력값이 문자열이 아니거나, 1월 ~ 12월이 아닐 경우 false를 반환
@@ -15,7 +16,8 @@ function isValidMonth(month: string) {
 }
 
 function ExpireDate() {
-  const [expireDate, setExpireDate] = useState("");
+  const [cardInput, setCardInput] = useContext(InputValuesContext);
+
   const [expireError, setExpireError] = useState(false);
 
   const expireDateChange: React.ChangeEventHandler<HTMLInputElement> = (
@@ -24,25 +26,34 @@ function ExpireDate() {
     const value = event.currentTarget.value as string;
     const [curMM, _, curYY] = new Date().toLocaleDateString("en-US").split("/");
     const [MM, YY] = value.split("/");
+    const date = value.replace("/", "");
 
-    if (
-      value.length === 5 &&
-      (!isValidMonth(MM) || curYY > YY || (curYY === YY && curMM > MM))
-    ) {
-      setExpireError(true);
-    } else {
+    if (!ONLY_NUMBER_REGEXP.test(date)) return;
+
+    try {
+      if (
+        date.length === 4 &&
+        (!isValidMonth(MM) || curYY > YY || (curYY === YY && curMM > MM))
+      ) {
+        throw new Error();
+      }
+
       setExpireError(false);
-    }
+    } catch {
+      setExpireError(true);
+    } finally {
+      const expire = date.match(/.{1,2}/g) ?? [];
 
-    const expire = value.replace("/", "").match(/.{1,2}/g) ?? [];
-    setExpireDate(expire.join("/"));
+      if (!setCardInput) return;
+      setCardInput((prev) => ({ ...prev, expireDate: expire.join("/") }));
+    }
   };
 
   return (
     <ExpireDateContainer>
       <FormLabel>{"만료일"}</FormLabel>
       <Input
-        value={expireDate}
+        value={cardInput.expireDate}
         onChange={expireDateChange}
         maxLength={5}
         customInputStyle={ExpireDateInput}

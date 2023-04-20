@@ -1,9 +1,10 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useState, useContext, useMemo } from "react";
 import Input from "src/components/@common/Input";
 import styled, { css } from "styled-components";
 import FormLabel from "src/components/@common/FormLabel";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
+import { InputValuesContext } from "../Main";
 
 export interface CardNumberObj {
   first: string;
@@ -15,12 +16,8 @@ export interface CardNumberObj {
 interface Props {}
 
 export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
-  const [cardNumber, setCardNumber] = useState({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-  });
+  const [cardInput, setCardInput] = useContext(InputValuesContext);
+  // const [cardNumber, setCardNumber] = useState(cardNumberData);
 
   const [cardError, setCardError] = useState({
     isError: false,
@@ -52,7 +49,11 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
         });
       }
     } finally {
-      setCardNumber((prev) => ({ ...prev, [name]: value }));
+      if (!setCardInput) return;
+      setCardInput((prev) => ({
+        ...prev,
+        cardNumbers: { ...prev.cardNumbers, [name]: value },
+      }));
     }
   };
 
@@ -62,7 +63,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
       <CardNumberInputContainer ref={ref}>
         <Input
           data-order="first"
-          value={cardNumber["first"]}
+          value={cardInput.cardNumbers["first"]}
           onChange={cardChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
@@ -71,7 +72,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
         <p>-</p>
         <Input
           data-order="second"
-          value={cardNumber["second"]}
+          value={cardInput.cardNumbers["second"]}
           onChange={cardChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
@@ -81,7 +82,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
 
         <Input
           data-order="third"
-          value={cardNumber["third"]}
+          value={cardInput.cardNumbers["third"]}
           onChange={cardChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
@@ -93,7 +94,7 @@ export const CardNumber = forwardRef<HTMLDivElement, Props>(({}, ref) => {
 
         <Input
           data-order="fourth"
-          value={cardNumber["fourth"]}
+          value={cardInput.cardNumbers["fourth"]}
           onChange={cardChange}
           maxLength={4}
           customInputStyle={CardNumberInput}
