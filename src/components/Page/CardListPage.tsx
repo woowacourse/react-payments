@@ -1,13 +1,10 @@
+import React from 'react';
 import styled from 'styled-components';
-import { CardType } from '../../types';
+import { CardType, PageProps } from '../../types';
 import Card from '../Common/Card';
 import PageTemplate from '../Template/PageTemplate';
 
-interface CardListPageProps {
-  navigate: (page: string) => void;
-}
-
-const CardListPage = ({ navigate }: CardListPageProps) => {
+const CardListPage = ({ navigate }: PageProps) => {
   const onClickAdd = () => {
     navigate('register');
   };
@@ -15,16 +12,13 @@ const CardListPage = ({ navigate }: CardListPageProps) => {
   const cardList: CardType[] = JSON.parse(localStorage.getItem('cardList') || '[]');
 
   return (
-    <PageTemplate title={'보유카드'}>
-      {cardList.length ? (
-        <CardList>
-          {cardList.map((card) => (
-            <Card key={card.id} {...card} />
-          ))}
-        </CardList>
-      ) : (
-        <GuideMessage>새로운 카드를 등록해주세요</GuideMessage>
-      )}
+    <PageTemplate title="보유카드">
+      {cardList.length === 0 && <GuideMessage>새로운 카드를 등록해주세요</GuideMessage>}
+      <CardList>
+        {cardList.map((card) => (
+          <Card key={card.id} {...card} />
+        ))}
+      </CardList>
       <CardAddButton onClick={onClickAdd}>+</CardAddButton>
     </PageTemplate>
   );
