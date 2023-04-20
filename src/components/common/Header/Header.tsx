@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+
 type Props = {
   text: string;
   onClickBackButton?: () => void;
@@ -5,11 +7,23 @@ type Props = {
 
 function Header({ text, onClickBackButton }: Props) {
   return (
-    <div>
-      {onClickBackButton && <button onClick={onClickBackButton}>{'<'}</button>}
-      <span>{text}</span>
-    </div>
+    <Container>
+      {onClickBackButton ? (
+        <BackButton onClick={onClickBackButton}>&lt; &nbsp; {text}</BackButton>
+      ) : (
+        <BackButton onClick={onClickBackButton}>&nbsp; {text}</BackButton>
+      )}
+    </Container>
   );
 }
 
+const Container = styled.div`
+  padding: 10px;
+  margin-right: auto;
+`;
+
+const BackButton = styled.span`
+  margin-right: 18px;
+  cursor: pointer;
+`;
 export default Header;
