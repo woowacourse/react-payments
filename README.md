@@ -17,12 +17,12 @@
 
 <table>
   <tr>
-    <td align="center" width="120px">
+    <td align="center" width="140px">
       <a href="https://github.com/feb-dain" target="_blank">
         <img src="https://avatars.githubusercontent.com/u/108778921?v=4" alt="야미(이다인) 프로필" />
       </a>
     </td>
-    <td align="center" width="120px">
+    <td align="center" width="140px">
       <a href="https://github.com/gyeongza" target="_blank">
         <img src="https://avatars.githubusercontent.com/u/62369936?v=4" alt="에이든(박경현) 프로필" />
       </a>
