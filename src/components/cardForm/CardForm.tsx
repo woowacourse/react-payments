@@ -5,8 +5,10 @@ import ExpirationDateInput from '../cardForm/ExpirationDateInput';
 import NameInput from '../cardForm/NameInput';
 import SecurityCodeInput from '../cardForm/SecurityCodeInput';
 import PasswordInput from '../cardForm/PasswordInput';
+import { useNavigate } from 'react-router-dom';
 
 interface CardFormProps {
+  onSubmitForm: () => void;
   onChangeForm: (
     cardNumber: string[],
     expirationDate: string[],
@@ -14,7 +16,7 @@ interface CardFormProps {
   ) => void;
 }
 
-const CardForm = ({ onChangeForm }: CardFormProps) => {
+const CardForm = ({ onSubmitForm, onChangeForm }: CardFormProps) => {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [expirationDate, setExpirationDate] = useState(['', '']);
   const [name, setName] = useState('');
@@ -28,6 +30,8 @@ const CardForm = ({ onChangeForm }: CardFormProps) => {
   const [passwordError, setPasswordError] = useState('');
 
   const [buttonActive, setButtonActive] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (
@@ -70,6 +74,8 @@ const CardForm = ({ onChangeForm }: CardFormProps) => {
 
   const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    onSubmitForm();
+    navigate('/');
   };
 
   return (

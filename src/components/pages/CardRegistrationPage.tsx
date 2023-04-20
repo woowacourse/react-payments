@@ -7,7 +7,11 @@ import CardForm from '../cardForm/CardForm';
 import { useState } from 'react';
 import { CardItemInfo } from '../../types/Card';
 
-const CardRegistrationPage = () => {
+interface CardRegistrationPageProps {
+  addCardItem: (cardItem: CardItemInfo) => void;
+}
+
+const CardRegistrationPage = ({ addCardItem }: CardRegistrationPageProps) => {
   const [cardItem, setCardItem] = useState<CardItemInfo>({
     id: 0,
     cardNumber: ['', '', '', ''],
@@ -29,21 +33,29 @@ const CardRegistrationPage = () => {
     setCardItem(updatedCard);
   };
 
+  const handleSubmitForm = () => {
+    addCardItem(cardItem);
+  };
+
   return (
     <>
-      <Header
-        title='카드추가'
-        leftChild={
-          <Link to={'/'}>
-            <LeftArrowIcon />
-          </Link>
-        }
-      />
+      <Header title='카드추가' leftChild={<BackButton />} />
       <CardItemContainer>
         <CardItem card={cardItem} />
       </CardItemContainer>
-      <CardForm onChangeForm={handleChangeForm} />
+      <CardForm
+        onSubmitForm={handleSubmitForm}
+        onChangeForm={handleChangeForm}
+      />
     </>
+  );
+};
+
+const BackButton = () => {
+  return (
+    <Link to={'/'}>
+      <LeftArrowIcon />
+    </Link>
   );
 };
 

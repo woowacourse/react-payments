@@ -57,7 +57,7 @@ const ICChip = styled.div`
   border-radius: 4px;
 `;
 
-const CardNumberContainer = styled.p`
+const CardNumberContainer = styled.div`
   display: flex;
   justify-content: space-between;
 

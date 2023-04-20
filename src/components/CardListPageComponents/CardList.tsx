@@ -1,16 +1,16 @@
 import styled from 'styled-components';
-import { Card } from '../../types/Card';
+import { CardItemInfo } from '../../types/Card';
 import CardItem from '../common/CardItem';
 
 interface CardListProps {
-  cardList: Card[];
+  cardList: CardItemInfo[];
 }
 
 const CardList = ({ cardList }: CardListProps) => {
   return (
     <CardListContainer>
-      {cardList.map((card) => (
-        <CardItem card={card} />
+      {cardList.map((card, index) => (
+        <CardItem card={card} key={index} />
       ))}
     </CardListContainer>
   );
