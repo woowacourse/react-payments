@@ -6,18 +6,22 @@ import './index.css';
 import AddCardPage from './pages/AddCardPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CardListPage from './pages/CardListPage';
-// basename: process.env.PUBLIC_URL,
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <CardListPage />,
+    },
+    {
+      path: '/add',
+      element: <AddCardPage />,
+    },
+  ],
   {
-    path: '/',
-    element: <CardListPage />,
-  },
-  {
-    path: '/add',
-    element: <AddCardPage />,
-  },
-]);
+    basename: process.env.PUBLIC_URL,
+  }
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<RouterProvider router={router} />);
