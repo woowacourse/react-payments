@@ -16,6 +16,8 @@ function CardNumberInput({
       <St.InputSection>
         <St.Input
           type="text"
+          minLength={19}
+          required
           value={cardNumberHidden}
           onInput={changeCardNumber}
         ></St.Input>

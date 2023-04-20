@@ -14,6 +14,8 @@ function CardDateInput({ changeCardDate, cardDate }: CardDateInputProps) {
         <St.Input
           type="text"
           value={cardDate}
+          minLength={5}
+          required
           onInput={changeCardDate}
           placeholder="MM/YY"
         ></St.Input>

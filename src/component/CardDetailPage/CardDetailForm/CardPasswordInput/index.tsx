@@ -29,6 +29,8 @@ function CardPasswordInput({
             type="password"
             ref={inputRef1}
             value={cardPassword[0]}
+            minLength={1}
+            required
             onInput={(e) => {
               toNextInput(e);
               changeCardPassword(e);
@@ -41,6 +43,8 @@ function CardPasswordInput({
             type="password"
             ref={inputRef2}
             value={cardPassword[1]}
+            minLength={1}
+            required
             onInput={changeCardPassword}
           ></St.Input>
         </St.InputSection>

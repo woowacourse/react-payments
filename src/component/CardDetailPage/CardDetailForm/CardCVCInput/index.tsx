@@ -14,6 +14,8 @@ function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
           <St.Input
             type="password"
             value={cardCVC}
+            minLength={3}
+            required
             onInput={changeCardCVC}
           ></St.Input>
         </St.InputSection>

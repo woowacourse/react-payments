@@ -23,6 +23,8 @@ type CardDetailFormProps = {
 
   changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => void;
   cardPassword: [string, string];
+
+  submitCreditCard: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
 function CardDetailForm({
@@ -36,9 +38,10 @@ function CardDetailForm({
   cardCVC,
   changeCardPassword,
   cardPassword,
+  submitCreditCard,
 }: CardDetailFormProps) {
   return (
-    <St.Form>
+    <St.Form onSubmit={submitCreditCard}>
       <CardNumberInput
         changeCardNumber={changeCardNumber}
         cardNumberHidden={cardNumberHidden}
