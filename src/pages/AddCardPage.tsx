@@ -4,57 +4,48 @@ import Card from '../components/Card';
 import FormCardAdd from '../components/FormCardAdd';
 import Header from '../components/Header';
 import useCardNumber from '../hooks/useCardNumber';
+import useInput from '../hooks/useInput';
 import usePasswordInput from '../hooks/usePasswordInput';
 import { formatExpireDate, handleNumberInput, isAlphabetInput, isNumberInput } from '../utils/util';
 
 import './AddCardPage.css';
 
+const cardExpireCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const length = e.target.value.length;
+  const lastWord = e.target.value[length - 1];
+  return length <= 5 && length > 0 && (isNumberInput(lastWord) || lastWord === '/');
+};
+
+const securityCodeCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
+  return e.target.value.length <= 3;
+};
+const cardOwnerCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const length = e.target.value.length;
+  const lastWord = e.target.value[length - 1];
+  return length <= 30 && !(length > 0 && !isAlphabetInput(lastWord.toUpperCase()));
+};
+
+const stringToUpperCase = (data: string): string => {
+  return data.toUpperCase();
+};
+
 const AddCardPage = () => {
+  const navigate = useNavigate();
   const [cardType, setCardType] = useState('현대');
+
   const [cardNumber, onChangeCardNumber] = usePasswordInput({
     first: '',
     second: '',
     third: '',
     fourth: '',
   });
+  const cardExpireData = useInput('', cardExpireCondition, formatExpireDate);
+  const securityCodeData = useInput('', securityCodeCondition, handleNumberInput);
+  const cardOwnerData = useInput('', cardOwnerCondition, stringToUpperCase);
+
   const [cardOwner, setCardOwner] = useState('');
-  const [cardExpireDate, setCardExpireDate] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
   const [cardPassword1, setCardPassword1] = useState('');
   const [cardPassword2, setCardPassword2] = useState('');
-
-  const cardExpireData = {
-    value: cardExpireDate,
-    onChange: (e: any) => {
-      const lastWord = e.target.value[e.target.value.length - 1];
-
-      if (e.target.value.length > 5) return;
-      if (e.target.value.length > 0 && !(isNumberInput(lastWord) || lastWord === '/')) return;
-      setCardExpireDate(formatExpireDate(e.target.value));
-    },
-    status: false,
-  };
-
-  const cardOwnerData = {
-    value: cardOwner,
-    onChange: (e: any) => {
-      const lastWord = e.target.value[e.target.value.length - 1];
-
-      if (e.target.value.length > 30) return;
-      if (e.target.value.length > 0 && !isAlphabetInput(lastWord.toUpperCase())) return;
-      setCardOwner(e.target.value.toUpperCase());
-    },
-    status: false,
-  };
-
-  const securityCodeData = {
-    value: securityCode,
-    onChange: (e: any) => {
-      if (e.target.value.length > 3) return;
-      setSecurityCode(handleNumberInput(e.target.value));
-    },
-    status: false,
-  };
 
   const cardPassword1Data = {
     value: cardPassword1,
@@ -73,8 +64,6 @@ const AddCardPage = () => {
     },
     status: false,
   };
-
-  const navigate = useNavigate();
 
   const onBackButtonClick = () => {
     navigate('/');
@@ -106,7 +95,7 @@ const AddCardPage = () => {
           cardType={cardType}
           cardNumber={cardNumber as any}
           cardOwner={cardOwner}
-          expired={cardExpireDate}
+          expired={cardExpireData.value}
         />
         <FormCardAdd
           cardNumberData={cardNumberData}
