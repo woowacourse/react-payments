@@ -15,7 +15,13 @@ const CardList = ({ cards }: CardListProps) => {
         const { firstGroup, secondGroup, thirdGroup, fourthGroup } = cardNumber;
         const key = `${firstGroup}${secondGroup}${thirdGroup}${fourthGroup}`;
 
-        return <CardPreview key={key} card={{ cardNumber, ownerName, expirationDate }} />;
+        return (
+          <CardPreview
+            key={key}
+            card={{ cardNumber, ownerName, expirationDate }}
+            style={{ transition: "all 0.3s ease", transform: "translate(3px, 3px)" }}
+          />
+        );
       })}
 
       <AddCardButton />

@@ -5,13 +5,15 @@ type PreviewCard = Pick<Card, "cardNumber" | "ownerName" | "expirationDate">;
 
 type CardPreviewProps = {
   card: PreviewCard;
+  style: { transition: string; transform: string };
 };
 
-const CardPreview = ({ card }: CardPreviewProps) => {
+const CardPreview = ({ card, style }: CardPreviewProps) => {
   const { cardNumber, ownerName, expirationDate } = card;
+  const { transition, transform } = style;
 
   return (
-    <CardLayout>
+    <CardLayout transition={transition} transform={transform}>
       <ICChip width={31} height={24} viewBox="0 0 31 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect
           x={0.375}
@@ -60,7 +62,7 @@ const CardPreview = ({ card }: CardPreviewProps) => {
 
 export default CardPreview;
 
-const CardLayout = styled.li`
+const CardLayout = styled.li<{ transition: string; transform: string }>`
   position: relative;
 
   display: flex;
@@ -81,10 +83,10 @@ const CardLayout = styled.li`
 
   box-shadow: 5px 5px 5px #5f5f5f;
 
-  transition: all 0.3s ease;
+  transition: ${({ transition }) => transition};
 
   &:hover {
-    transform: translate(3px, 3px);
+    transform: ${({ transform }) => transform};
   }
 `;
 
