@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { FormEvent } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import Card from "../components/Card";
 import CardInputForm from "../components/CardInputForm";
 import Header from "../components/common/Header";
 import Page from "../components/common/Page";
 import { CardType } from "../types";
+import { getLocalStorage, setLocalStorage } from "../utils";
 
 const AddCard = () => {
   const [card, setCard] = useState<CardType>({
@@ -15,12 +17,14 @@ const AddCard = () => {
     color: "pink",
   });
 
-  useEffect(() => {
-    setCard(card);
-    console.log("^^");
-  }, [card, card.expiredDate]);
+  const registerCard = (e: FormEvent) => {
+    // e.preventDefault();
+    console.log(card);
+    const cards = getLocalStorage("card");
+    setLocalStorage("card", [...cards, card]);
+  };
 
-  console.log("card ", card);
+  // console.log(card);
 
   return (
     <Page>
@@ -31,7 +35,11 @@ const AddCard = () => {
         expiredDate={card.expiredDate}
         cardNumber={card.cardNumber}
       />
-      <CardInputForm card={card} setCard={setCard} />
+      <CardInputForm
+        card={card}
+        setCard={setCard}
+        onSubmit={(e: FormEvent) => registerCard(e)}
+      />
     </Page>
   );
 };
