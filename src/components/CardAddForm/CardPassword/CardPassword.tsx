@@ -1,65 +1,46 @@
 import styles from './style.module.css';
+import { ChangeEvent } from 'react';
 import InputContainer from '../../common/InputContainer/InputContainer';
 import Input from '../../common/Input/Input';
-import { CardInputValidation } from '../../../types';
-import { useInputContainer } from '../../../hooks/useInputContainer';
-import { formatNumberInput } from '../../../utils/formatter';
+import { CardInputValidation, PasswordFormat } from '../../../types';
+import { useError } from '../../../hooks/useError';
+import validator from '../../../utils/validator';
 
 interface CardPasswordProps {
-  validator: (input: string) => boolean;
-  onValidation: (key: keyof CardInputValidation, value: boolean) => void;
+  handleValidationChange: (key: keyof CardInputValidation, value: boolean) => void;
+  onChange: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
+  values: PasswordFormat;
 }
 
-function CardPassword({ validator, onValidation }: CardPasswordProps) {
-  const {
-    inputValue: inputValue1,
-    handleInputChange: handleInputChange1,
-    isError: isError1,
-    handleInputBlur: handleInputBlur1,
-  } = useInputContainer({
-    formatter: formatNumberInput,
-    validator,
-    onValidation,
-  });
-
-  const {
-    inputValue: inputValue2,
-    handleInputChange: handleInputChang2,
-    isError: isError2,
-    handleInputBlur: handleInputBlur2,
-  } = useInputContainer({
-    formatter: formatNumberInput,
-    validator,
-    onValidation,
+function CardPassword({ handleValidationChange, onChange, values }: CardPasswordProps) {
+  const [isError, onErrorBlur] = useError({
+    validator: validator.password,
+    handleValidationChange,
+    inputs: values,
   });
 
   return (
-    <InputContainer label="비밀 번호" id="password">
-      <div className={styles.container}>
-        <Input
-          type="password"
-          id="password"
-          value={inputValue1}
-          isError={isError1}
-          minLength={1}
-          maxLength={1}
-          autoComplete="off"
-          data-id="0"
-          onChange={handleInputChange1}
-          onBlur={handleInputBlur1}
-        />
-        <Input
-          type="password"
-          id="password1"
-          value={inputValue2}
-          isError={isError2}
-          minLength={1}
-          maxLength={1}
-          autoComplete="off"
-          data-id="1"
-          onChange={handleInputChang2}
-          onBlur={handleInputBlur2}
-        />
+    <InputContainer
+      label="비밀 번호"
+      id="password"
+      supportingText={isError ? '카드 비밀번호 앞 2자리 숫자를 입력해주세요' : undefined}
+      isError={isError}
+      required
+    >
+      <div className={styles.container} onBlur={onErrorBlur}>
+        {values.map((password, index) => (
+          <Input
+            type="password"
+            id={index === 0 ? 'password' : `cardNumber${index}`}
+            value={password}
+            maxLength={1}
+            isError={isError}
+            autoComplete="off"
+            data-index={index}
+            data-name="password"
+            onChange={onChange}
+          />
+        ))}
         <div className={styles.passwordPlaceholder}>
           <div className="passwordItem">•</div>
           <div className="passwordItem">•</div>
