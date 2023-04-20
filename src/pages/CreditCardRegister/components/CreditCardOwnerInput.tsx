@@ -1,21 +1,23 @@
 import Input from '../../../components/Input';
 import * as S from '../style';
+import InputLayout from './InputLayout';
 
 type Props = {
-  creditCardOwner: string,
-  setCreditCardOwner: React.Dispatch<React.SetStateAction<string>>,
+  creditCardOwner: string;
+  errorMessage: string | null;
+  setCreditCardOwner: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function CreditCardOwnerInput({ creditCardOwner, setCreditCardOwner }: Props) {
+function CreditCardOwnerInput({ creditCardOwner, errorMessage, setCreditCardOwner }: Props) {
   const handleChangeCreditCardOwner = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newName = (event.target.value).toUpperCase();
+    const newName = event.target.value.toUpperCase();
     if (newName.length <= 30) {
       setCreditCardOwner(newName);
     }
   };
 
   return (
-    <>
+    <InputLayout errorMessage={errorMessage}>
       <S.FlexBox justifyContent="space-between">
         <S.CreditCardRegisterLabel>카드 소유자 이름 (선택)</S.CreditCardRegisterLabel>
         <S.CreditCardRegisterLabel>
@@ -31,7 +33,8 @@ function CreditCardOwnerInput({ creditCardOwner, setCreditCardOwner }: Props) {
         textAlign="start"
         onChange={handleChangeCreditCardOwner}
       />
-    </>
+      {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+    </InputLayout>
   );
 }
 

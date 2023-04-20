@@ -2,13 +2,15 @@ import { useRef, useState } from 'react';
 import creditCard from '../../../domains/creditCard';
 import Input from '../../../components/Input';
 import * as S from '../style';
+import InputLayout from './InputLayout';
 
 type Props = {
   creditCardNumber: string;
+  errorMessage: string | null;
   setCreditCardNumber: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props) {
+function CreditCardNumberInput({ creditCardNumber, errorMessage, setCreditCardNumber }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
 
@@ -17,7 +19,8 @@ function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props)
 
     if (newCreditCarNumber.length > 16) return;
 
-    const markedNumber = creditCard.convertSecuredCreditCard(newCreditCarNumber)
+    const markedNumber = creditCard
+      .convertSecuredCreditCard(newCreditCarNumber)
       .filter((numbers) => !!numbers.length)
       .map((numbers) => numbers.join(''))
       .join(' - ');
@@ -27,7 +30,7 @@ function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props)
   };
 
   return (
-    <S.RelativeBox>
+    <InputLayout errorMessage={errorMessage}>
       <S.CreditCardRegisterLabel>카드 번호</S.CreditCardRegisterLabel>
       <Input
         type="string"
@@ -39,15 +42,11 @@ function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props)
             inputRef.current.focus();
           }
         }}
-        onChange={() => { }}
+        onChange={() => {}}
       />
-      <S.HiddentInput
-        ref={inputRef}
-        type="string"
-        value={creditCardNumber}
-        onChange={handleChangeCreditCardNumber}
-      />
-    </S.RelativeBox>
+      <S.HiddenInput ref={inputRef} type="string" value={creditCardNumber} onChange={handleChangeCreditCardNumber} />
+      {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+    </InputLayout>
   );
 }
 

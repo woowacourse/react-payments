@@ -9,10 +9,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "react/jsx-filename-extension": [
-      1,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -31,7 +28,9 @@
     "@typescript-eslint/comma-dangle": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-extraneous-dependencies": [0, { "devDependencies": true }],
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "operator-linebreak": "off",
+    "max-len": ["error", { "code": 120 }]
   },
   "overrides": [
     {

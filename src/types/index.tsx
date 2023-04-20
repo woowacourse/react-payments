@@ -1,6 +1,6 @@
 export type CreditCardPasswordType = {
-  first: string,
-  second: string
+  first: string;
+  second: string;
 };
 
 export type CreditCard = {

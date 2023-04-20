@@ -1,12 +1,14 @@
 import Input from '../../../components/Input';
 import * as S from '../style';
+import InputLayout from './InputLayout';
 
 type Props = {
-  creditCardExpiry: string,
-  setCreditCardExpiry: React.Dispatch<React.SetStateAction<string>>,
+  creditCardExpiry: string;
+  errorMessage: string | null;
+  setCreditCardExpiry: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function CreditCardExpiryInput({ creditCardExpiry, setCreditCardExpiry }: Props) {
+function CreditCardExpiryInput({ creditCardExpiry, errorMessage, setCreditCardExpiry }: Props) {
   const handleChangeCreditCardExpiry = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newCardExpiry = event.target.value.replaceAll('/', '');
 
@@ -19,10 +21,18 @@ function CreditCardExpiryInput({ creditCardExpiry, setCreditCardExpiry }: Props)
   };
 
   return (
-    <>
+    <InputLayout errorMessage={errorMessage}>
       <S.CreditCardRegisterLabel>만료일</S.CreditCardRegisterLabel>
-      <Input placeholder="MM /YY" type="string" value={creditCardExpiry} width="40%" textAlign="center" onChange={handleChangeCreditCardExpiry} />
-    </>
+      <Input
+        placeholder="MM /YY"
+        type="string"
+        value={creditCardExpiry}
+        width="40%"
+        textAlign="center"
+        onChange={handleChangeCreditCardExpiry}
+      />
+      {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
+    </InputLayout>
   );
 }
 
