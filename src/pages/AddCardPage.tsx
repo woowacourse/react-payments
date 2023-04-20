@@ -29,6 +29,10 @@ const stringToUpperCase = (data: string): string => {
   return data.toUpperCase();
 };
 
+const cardPasswordCondition = (e: React.ChangeEvent<HTMLInputElement>) => {
+  return e.target.value.length <= 1;
+};
+
 const AddCardPage = () => {
   const navigate = useNavigate();
   const [cardType, setCardType] = useState('현대');
@@ -42,28 +46,8 @@ const AddCardPage = () => {
   const cardExpireData = useInput('', cardExpireCondition, formatExpireDate);
   const securityCodeData = useInput('', securityCodeCondition, handleNumberInput);
   const cardOwnerData = useInput('', cardOwnerCondition, stringToUpperCase);
-
-  const [cardOwner, setCardOwner] = useState('');
-  const [cardPassword1, setCardPassword1] = useState('');
-  const [cardPassword2, setCardPassword2] = useState('');
-
-  const cardPassword1Data = {
-    value: cardPassword1,
-    onChange: (e: any) => {
-      if (e.target.value.length > 1) return;
-      setCardPassword1(handleNumberInput(e.target.value));
-    },
-    status: false,
-  };
-
-  const cardPassword2Data = {
-    value: cardPassword2,
-    onChange: (e: any) => {
-      if (e.target.value.length > 1) return;
-      setCardPassword2(handleNumberInput(e.target.value));
-    },
-    status: false,
-  };
+  const cardPassword1Data = useInput('', cardPasswordCondition, handleNumberInput);
+  const cardPassword2Data = useInput('', cardPasswordCondition, handleNumberInput);
 
   const onBackButtonClick = () => {
     navigate('/');
@@ -94,7 +78,7 @@ const AddCardPage = () => {
         <Card
           cardType={cardType}
           cardNumber={cardNumber as any}
-          cardOwner={cardOwner}
+          cardOwner={cardOwnerData.value}
           expired={cardExpireData.value}
         />
         <FormCardAdd
