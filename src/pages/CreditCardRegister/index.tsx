@@ -19,12 +19,6 @@ function CreditCardRegister() {
   const [creditCardExpiry, setCreditCardExpiry] = useState('');
 
   const [creditCardOwner, setCreditCardOwner] = useState('');
-  const handleChangeCreditCardOwner = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newName = (event.target.value).toUpperCase();
-    if (newName.length <= 30) {
-      setCreditCardOwner(newName);
-    }
-  };
 
   const [creditCardCVC, setCreditCardCVC] = useState('');
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,7 +99,7 @@ function CreditCardRegister() {
         />
         <CreditCardOwnerInput
           creditCardOwner={creditCardOwner}
-          onChange={handleChangeCreditCardOwner}
+          setCreditCardOwner={setCreditCardOwner}
         />
         <CreditCardCVCInput
           creditCardCVC={creditCardCVC}
