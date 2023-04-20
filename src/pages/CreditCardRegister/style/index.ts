@@ -98,3 +98,20 @@ export const ErrorMessage = styled.div`
   font-weight: 700;
   color: rgba(255, 100, 100);
 `;
+
+export const CVCInputLayout = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const GuideMessage = styled.div`
+  color: #969696;
+  border: 1px solid #969696;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
