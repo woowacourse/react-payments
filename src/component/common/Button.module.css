@@ -1,7 +1,4 @@
 .button {
-  /* position: absolute;
-  right: 0;
-  bottom: 0; */
   margin-right: 0;
   margin-left: auto;
   font-size: 14px;
@@ -10,4 +7,5 @@
   height: 34px;
   width: 51px;
   background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
 }
