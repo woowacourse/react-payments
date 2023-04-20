@@ -17,6 +17,7 @@ type Story = StoryObj<typeof InputField>;
 const defaultState = {
   value: "",
   onChange: () => {},
+  name: "",
 };
 
 export const CardNumber: Story = {

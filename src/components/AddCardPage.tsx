@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import styled from "styled-components";
 import { useInput } from "../hooks/useInput";
 import Card from "./Card";
@@ -11,6 +11,10 @@ import NextButton from "./NextButton";
 import OwnerInput from "./OwnerInput";
 import PasswordInput from "./PasswordInput";
 import PrevButton from "./PrevButton";
+
+interface AddCardPageProps {
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+}
 
 const Page = styled.div`
   position: relative;
@@ -43,7 +47,7 @@ const InputWrapper = styled.div`
   gap: 25px;
 `;
 
-const InputWrapperParent = styled.div`
+const InputWrapperParent = styled.form`
   display: flex;
   justify-content: center;
   margin-top: 40px;
@@ -61,20 +65,20 @@ const NextButtonWrapper = styled.div`
   bottom: 25px;
 `;
 
-export default function AddCardPage() {
-  const firstNumber = useInput("");
-  const secondNumber = useInput("");
-  const thirdNumber = useInput("");
-  const fourthNumber = useInput("");
+export default function AddCardPage({ onSubmit }: AddCardPageProps) {
+  const firstCardNumber = useInput("", "firstCardNumber");
+  const secondCardNumber = useInput("", "secondCardNumber");
+  const thirdCardNumber = useInput("", "thirdCardNumber");
+  const fourthCardNumber = useInput("", "fourthCardNumber");
 
-  const year = useInput("");
-  const month = useInput("");
+  const year = useInput("", "year");
+  const month = useInput("", "month");
 
-  const owner = useInput("");
-  const cvc = useInput("");
+  const owner = useInput("", "owner");
+  const cvc = useInput("", "cvc");
 
-  const firstPassword = useInput("");
-  const secondPassword = useInput("");
+  const firstPassword = useInput("", "firstPassword");
+  const secondPassword = useInput("", "secondPassword");
 
   return (
     <Page>
@@ -85,10 +89,10 @@ export default function AddCardPage() {
       <CardWrapper>
         <Card
           cardNumberSet={[
-            firstNumber.value,
-            secondNumber.value,
-            thirdNumber.value,
-            fourthNumber.value,
+            firstCardNumber.value,
+            secondCardNumber.value,
+            thirdCardNumber.value,
+            fourthCardNumber.value,
           ]}
           expiracy={`${month.value ? month.value : "MM"}/${
             year.value ? year.value : "YY"
@@ -96,14 +100,14 @@ export default function AddCardPage() {
           owner={owner.value}
         />
       </CardWrapper>
-      <InputWrapperParent>
+      <InputWrapperParent onSubmit={onSubmit}>
         <InputWrapper>
           <InputField kind="cardNumber">
             <CardNumberInput
-              firstNumber={firstNumber}
-              secondNumber={secondNumber}
-              thirdNumber={thirdNumber}
-              fourthNumber={fourthNumber}
+              firstNumber={firstCardNumber}
+              secondNumber={secondCardNumber}
+              thirdNumber={thirdCardNumber}
+              fourthNumber={fourthCardNumber}
             />
           </InputField>
           <InputField kind="expiracy">

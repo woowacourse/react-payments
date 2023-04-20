@@ -56,7 +56,6 @@ export default function PasswordInput({
         <Input
           isNumber={true}
           maxLength={1}
-          id="password"
           type="password"
           textAlign="center"
           {...secondPassword}
