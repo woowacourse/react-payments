@@ -1,5 +1,5 @@
+import type { CardType } from '../../types';
 import styled from 'styled-components';
-import { CardType } from '../../types';
 
 const Card = ({
   cardNumber = [],
@@ -11,9 +11,7 @@ const Card = ({
       <CardChip></CardChip>
       <CardNumberArea>
         {cardNumber.map((number, index) => (
-          <CardNumber>
-            {number.length ? (index >= 2 ? '∙'.repeat(number.length) : number) : null}
-          </CardNumber>
+          <CardNumber>{number.length ? (index >= 2 ? '∙'.repeat(number.length) : number) : null}</CardNumber>
         ))}
       </CardNumberArea>
       <CardInfoArea>

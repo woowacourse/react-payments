@@ -1,12 +1,14 @@
+import type { CardType, PageProps } from '../../types';
+import { Page } from '../../types';
 import { useState } from 'react';
+import styled from 'styled-components';
+
 import Card from '../common/Card';
 import CardNumberInput from '../box/inputSection/CardNumberInput';
 import ExpireDateInput from '../box/inputSection/ExpireDateInput';
 import OwnerNameInput from '../box/inputSection/OwnerNameInput';
 import SecurityCodeInput from '../box/inputSection/SecurityCodeInput';
 import CardPasswordInput from '../box/inputSection/CardPasswordInput';
-import styled from 'styled-components';
-import { CardType, Page, PageProps } from '../../types';
 import PageTemplate from '../template/PageTemplate';
 
 interface CardFormState extends Omit<CardType, 'id' | 'cardPassword'> {

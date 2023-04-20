@@ -1,7 +1,7 @@
-import React from 'react';
-import InputSectionTemplate from '../../template/InputSectionTemplate';
+import type { InputStateProps } from '../../../types';
+
 import InputBox, { InputType } from '../../common/InputBox';
-import { InputStateProps } from '../../../types';
+import InputSectionTemplate from '../../template/InputSectionTemplate';
 
 const OwnerNameInput = (props: InputStateProps) => {
   const inputs: InputType[] = [

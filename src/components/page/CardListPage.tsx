@@ -1,6 +1,7 @@
-import React from 'react';
+import type { CardType, PageProps } from '../../types';
+import { Page } from '../../types';
 import styled from 'styled-components';
-import { CardType, Page, PageProps } from '../../types';
+
 import Card from '../common/Card';
 import PageTemplate from '../template/PageTemplate';
 

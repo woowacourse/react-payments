@@ -1,8 +1,8 @@
-import React from 'react';
-import InputSectionTemplate from '../../template/InputSectionTemplate';
-import InputBox, { InputType } from '../../common/InputBox';
-import { InputStateProps } from '../../../types';
+import type { InputStateProps } from '../../../types';
 import styled from 'styled-components';
+
+import InputBox, { InputType } from '../../common/InputBox';
+import InputSectionTemplate from '../../template/InputSectionTemplate';
 
 interface CardPasswordInputProps {
   cardPassword1Props: InputStateProps;

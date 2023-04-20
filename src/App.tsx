@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import CardRegisterPage from './components/page/CardRegisterPage';
-import CardListPage from './components/page/CardListPage';
-import styled from 'styled-components';
 import { Page } from './types';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
+import CardListPage from './components/page/CardListPage';
+import CardRegisterPage from './components/page/CardRegisterPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>(Page.list);
