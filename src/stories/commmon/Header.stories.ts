@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Header from '../components/common/Header/Header';
+import Header from '../../components/common/Header/Header';
 
 const meta = {
-  title: 'Payments/Header',
+  title: 'Payments/Common/Header',
   component: Header,
   tags: ['autodocs'],
 } satisfies Meta<typeof Header>;
@@ -19,5 +19,6 @@ export const CardList: Story = {
 export const CardAdd: Story = {
   args: {
     content: '카드 추가',
+    isOverlayPage: true,
   },
 };
