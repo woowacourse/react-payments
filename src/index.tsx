@@ -11,7 +11,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename={window.location.pathname || ''}>
+    <BrowserRouter
+      basename={
+        process.env.NODE_ENV === 'production' ? process.env.PUBLIC_URL : ''
+      }
+    >
       <App />
     </BrowserRouter>
   </React.StrictMode>,
