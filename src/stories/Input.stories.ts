@@ -15,7 +15,7 @@ export const CardNumber: Story = {
   args: {
     value: '',
     onChange: () => console.log('onChange CardNumber Input'),
-    width: 'large',
+    width: 'l',
     type: 'number',
   },
 };
@@ -24,7 +24,7 @@ export const OwnerName: Story = {
   args: {
     value: '',
     onChange: () => console.log('onChange OwnerName Input'),
-    width: 'large',
+    width: 'xl',
     type: 'text',
     placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
   },
@@ -34,7 +34,7 @@ export const CVC: Story = {
   args: {
     value: '',
     onChange: () => console.log('onChange CVC Input'),
-    width: 'middle',
+    width: 'm',
     type: 'number',
   },
 };
@@ -43,7 +43,7 @@ export const CardPassword: Story = {
   args: {
     value: '',
     onChange: () => console.log('onChange CardPassword  Input'),
-    width: 'small',
+    width: 'xs',
     type: 'password',
   },
 };

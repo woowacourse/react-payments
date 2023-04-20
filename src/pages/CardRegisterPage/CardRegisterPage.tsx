@@ -1,4 +1,4 @@
-import CardNumberInputBox from '../../components/CardNumberInputBox/CardNumberBox';
+import CardNumberInputBox from '../../components/CardNumberInputBox/CardNumberInputBox';
 import ExpirationDateInputBox from '../../components/ExpirationDateInputBox/ExpirationDateInputBox';
 import OwnerNameInputBox from '../../components/OwnerNameInputBox/OwnerNameInputBox';
 import PasswordInputBox from '../../components/PasswordInputBox/PasswordInputBox';

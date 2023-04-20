@@ -23,18 +23,18 @@ const OwnerNameInputBox = (props: any) => {
       <label>
         <styled.LabelHeader>
           <span>카드 소유자 이름(선택)</span>
-          <span>0 / 30</span>
+          <span>0/30</span>
         </styled.LabelHeader>
-        <div>
+        <styled.InputContainer>
           <Input
             value={ownerName}
             onChange={onChange}
-            width="large"
+            width="xl"
             type="text"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             maxLength={30}
           />
-        </div>
+        </styled.InputContainer>
       </label>
       <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
     </styled.OwnerNameInputBox>

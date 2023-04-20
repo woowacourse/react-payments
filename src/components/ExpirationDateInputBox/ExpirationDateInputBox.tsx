@@ -14,7 +14,7 @@ const ExpirationDateInputBox = (props: any) => {
     month: '',
     year: '',
   });
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('asdasd');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
     if (!isNumeric(value)) return setErrorMessage('숫자만 입력 가능');
@@ -32,8 +32,10 @@ const ExpirationDateInputBox = (props: any) => {
   return (
     <styled.ExpirationDateInputBox>
       <label>
-        <div>만료일</div>
-        <div>
+        <styled.LabelHeader>
+          <span>만료일</span>
+        </styled.LabelHeader>
+        <styled.InputContainer>
           {Object.keys(date).map((key) => {
             return (
               <Input
@@ -41,13 +43,13 @@ const ExpirationDateInputBox = (props: any) => {
                 name={key}
                 value={date[key]}
                 onChange={onChange}
-                width="middle"
+                width="s"
                 type="text"
                 maxLength={2}
               />
             );
           })}
-        </div>
+        </styled.InputContainer>
       </label>
       <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
     </styled.ExpirationDateInputBox>

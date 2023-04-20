@@ -1,4 +1,4 @@
-export type width = 'small' | 'middle' | 'large';
+export type width = 'xs' | 's' | 'm' | 'l' | 'xl';
 
 export interface InputProps {
   value: string;

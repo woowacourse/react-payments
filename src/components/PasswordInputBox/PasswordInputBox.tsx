@@ -34,8 +34,10 @@ const PasswordInputBox = () => {
   return (
     <styled.PasswordInputBox>
       <label>
-        <span>카드 비밀번호</span>
-        <div>
+        <styled.LabelHeader>
+          <span>카드 비밀번호</span>
+        </styled.LabelHeader>
+        <styled.InputContainer>
           {Object.keys(passwords).map((key) => {
             return (
               <Input
@@ -43,13 +45,13 @@ const PasswordInputBox = () => {
                 name={key}
                 value={passwords[key]}
                 onChange={onChange}
-                width="small"
+                width="xs"
                 type="text"
                 maxLength={1}
               />
             );
           })}
-        </div>
+        </styled.InputContainer>
       </label>
       <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
     </styled.PasswordInputBox>

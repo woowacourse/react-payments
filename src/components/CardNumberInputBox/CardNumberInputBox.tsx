@@ -36,8 +36,10 @@ const CardNumberInputBox = () => {
   return (
     <styled.CardNumberInputBox>
       <label>
-        <div>카드 번호</div>
-        <div>
+        <styled.LabelHeader>
+          <span>카드 번호</span>
+        </styled.LabelHeader>
+        <styled.InputContainer>
           {Object.keys(numbers).map((key) => {
             return (
               <Input
@@ -45,13 +47,13 @@ const CardNumberInputBox = () => {
                 name={key}
                 value={numbers[key]}
                 onChange={onChange}
-                width="middle"
+                width="xl"
                 type="text"
                 maxLength={4}
               />
             );
           })}
-        </div>
+        </styled.InputContainer>
       </label>
       <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>
     </styled.CardNumberInputBox>
