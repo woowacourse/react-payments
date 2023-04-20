@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import React from "react";
+import type { Meta } from "@storybook/react";
+import React, { useRef } from "react";
 import SecurityCode from ".";
 
 const securityCode = {
@@ -9,8 +9,15 @@ const securityCode = {
 
 export default securityCode;
 
-type Story = StoryObj<typeof securityCode>;
+export const Example = () => {
+  const registerCard = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
 
-export const Example = {
-  args: {},
-} satisfies Story;
+  return (
+    <form onSubmit={registerCard}>
+      <SecurityCode />
+      <button>다음</button>
+    </form>
+  );
+};
