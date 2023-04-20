@@ -1,18 +1,39 @@
-import React, { useState } from 'react';
-import Input from '../../components/@common/Input/Input';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Card from '../../components/@common/Card/Card';
+import { CardRegisterInfo } from '../../types/card.type';
+import { useCardRegisterContext } from '../../context/CardRegisterContext';
+import * as Styled from './MyCardList.styles';
+
 export default function MyCardList() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { cardRegisterInfo, initCardRegisterInfo } = useCardRegisterContext();
+  const [registeredCards, setRegisteredCards] = useState<CardRegisterInfo[]>(
+    JSON.parse(localStorage.getItem('CardList') ?? '[]')
+  );
+
+  useEffect(() => {
+    if (location.state?.isReadyForRegister) {
+      localStorage.setItem(
+        'CardList',
+        JSON.stringify([cardRegisterInfo, ...registeredCards])
+      );
+      setRegisteredCards((prev) => [cardRegisterInfo, ...prev]);
+      initCardRegisterInfo();
+    }
+
+    return () => {
+      window.history.replaceState({}, document.title);
+    };
+  }, []);
+
   return (
-    <Input>
-      <Input.Field asChild>
-        <StyledInput />
-      </Input.Field>
-      <Input.Limit limit={30} />
-      <Input.Label>카드번호</Input.Label>
-    </Input>
+    <Styled.Root dir="column" align="center">
+      {registeredCards.map((card, index) => (
+        <Card key={index} {...card} />
+      ))}
+      <Card addButton onClick={() => navigate('./registerCard')} />
+    </Styled.Root>
   );
 }
-
-const StyledInput = styled.input`
-  /* background: gray; */
-`;
