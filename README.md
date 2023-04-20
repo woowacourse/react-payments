@@ -2,7 +2,13 @@
 
 ## FE 5기 레벨2 React 모바일 페이먼츠 애플리케이션
 
-// 이미지가 올 자리
+### 카드 목록
+
+<img width="500" alt="스크린샷 2023-04-20 오후 4 14 04" src="https://user-images.githubusercontent.com/57981252/233289228-d305aae2-8b53-4524-9226-4e498a1be373.png">
+
+### 카드 추가
+
+<img width="557" alt="스크린샷 2023-04-20 오후 4 13 57" src="https://user-images.githubusercontent.com/57981252/233289217-477de041-ed42-4b59-9aae-1921496e9b0e.png">
 
 <br>
 
