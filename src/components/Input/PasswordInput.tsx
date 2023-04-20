@@ -32,6 +32,7 @@ export function PasswordInput(props: PasswordInputProps) {
         type="password"
         maxLength={1}
         onChange={(e) => handleChange(e, 0, first.onChange)}
+        required
       />
       <Input
         ref={inputRefs[1]}
@@ -39,6 +40,7 @@ export function PasswordInput(props: PasswordInputProps) {
         type="password"
         maxLength={1}
         onChange={(e) => handleChange(e, 1, second.onChange)}
+        required
       />
     </>
   );
