@@ -1,12 +1,6 @@
 import styled from "styled-components";
 import { IcChip } from "../assets";
-
-interface CardType {
-  color: string;
-  name: string;
-  expiredDate: number;
-  cardNumber: number;
-}
+import { CardType } from "../types";
 
 const Card = (props: CardType) => {
   return (
@@ -15,7 +9,7 @@ const Card = (props: CardType) => {
       <CardInfoWrapper>
         <span>{props.cardNumber}</span>
         <div>
-          <span>{props.name}</span>
+          <span>{props.ownerName}</span>
           <span>{props.expiredDate}</span>
         </div>
       </CardInfoWrapper>
