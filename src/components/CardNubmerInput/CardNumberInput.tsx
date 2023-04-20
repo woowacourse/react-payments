@@ -18,7 +18,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           name="firstGroup"
           inputMode="numeric"
           textAlign="center"
-          width="40px"
+          width="55px"
           type="text"
           minLength={4}
           maxLength={4}
@@ -32,7 +32,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           name="secondGroup"
           inputMode="numeric"
           textAlign="center"
-          width="40px"
+          width="55px"
           type="text"
           minLength={4}
           maxLength={4}
@@ -45,7 +45,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           name="thirdGroup"
           inputMode="numeric"
           textAlign="center"
-          width="40px"
+          width="55px"
           type="password"
           minLength={4}
           maxLength={4}
@@ -58,7 +58,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           name="fourthGroup"
           inputMode="numeric"
           textAlign="center"
-          width="40px"
+          width="55px"
           type="password"
           minLength={4}
           maxLength={4}
