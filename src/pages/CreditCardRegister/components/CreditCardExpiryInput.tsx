@@ -19,10 +19,10 @@ function CreditCardExpiryInput({ creditCardExpiry, setCreditCardExpiry }: Props)
   };
 
   return (
-    <>
+    <S.Box>
       <S.CreditCardRegisterLabel>만료일</S.CreditCardRegisterLabel>
       <Input placeholder="MM /YY" type="string" value={creditCardExpiry} width="40%" textAlign="center" onChange={handleChangeCreditCardExpiry} />
-    </>
+    </S.Box>
   );
 }
 

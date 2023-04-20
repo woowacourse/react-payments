@@ -15,7 +15,7 @@ function CreditCardCVCInput({ creditCardCVC, setCreditCardCVC }: Props) {
   };
 
   return (
-    <>
+    <S.Box>
       <S.CreditCardRegisterLabel>보안 코드(CVC/CVV)</S.CreditCardRegisterLabel>
 
       <S.FlexBox justifyContent="flex-start" alignItems="center">
@@ -24,7 +24,7 @@ function CreditCardCVCInput({ creditCardCVC, setCreditCardCVC }: Props) {
           <S.QuestionMark>?</S.QuestionMark>
         </S.QuestionBox>
       </S.FlexBox>
-    </>
+    </S.Box>
   );
 }
 

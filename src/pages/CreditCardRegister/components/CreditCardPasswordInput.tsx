@@ -27,7 +27,7 @@ function CreditCardPasswordInput({
     }
   };
   return (
-    <>
+    <S.Box>
       <S.CreditCardRegisterLabel>카드 비밀번호</S.CreditCardRegisterLabel>
       <S.FlexBox justifyContent="flex-start">
         <Input type="password" value={creditCardPassword?.first} width="48px" textAlign="center" onChange={handleChangeCreditCardFirstPassword} />
@@ -35,7 +35,7 @@ function CreditCardPasswordInput({
         <S.PasswordBox>•</S.PasswordBox>
         <S.PasswordBox>•</S.PasswordBox>
       </S.FlexBox>
-    </>
+    </S.Box>
   );
 }
 

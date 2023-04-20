@@ -110,3 +110,5 @@ export const ErrorMessage = styled.div`
     margin-top: 5px;
     margin-bottom: 5px;
 `;
+
+export const Box = styled.div``;
