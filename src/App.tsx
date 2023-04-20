@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import CardRegisterPage from './components/page/CardRegisterPage';
 import CardListPage from './components/page/CardListPage';
 import styled from 'styled-components';

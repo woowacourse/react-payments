@@ -1,4 +1,3 @@
-import React from 'react';
 import InputSectionTemplate from '../../template/InputSectionTemplate';
 import InputBox, { InputType } from '../../common/InputBox';
 import { InputStateProps } from '../../../types';

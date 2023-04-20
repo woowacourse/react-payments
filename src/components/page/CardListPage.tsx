@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { CardType, Page, PageProps } from '../../types';
 import Card from '../common/Card';

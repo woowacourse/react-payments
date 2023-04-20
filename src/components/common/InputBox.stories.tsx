@@ -1,4 +1,3 @@
-import React from 'react';
 import InputBox, { InputType } from './InputBox';
 
 // eslint-disable-next-line import/no-anonymous-default-export

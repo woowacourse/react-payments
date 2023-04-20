@@ -1,4 +1,3 @@
-import React from 'react';
 import InputSectionTemplate from './InputSectionTemplate';
 import InputBox from '../common/InputBox';
 
