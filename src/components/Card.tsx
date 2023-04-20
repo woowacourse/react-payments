@@ -28,8 +28,8 @@ const CardNumberTemplate = styled.div`
   display: flex;
   height: 18px;
   & > * {
-    min-width: 36px;
-    margin-right: 14px;
+    min-width: 44px;
+    margin-right: 4px;
   }
 `;
 
@@ -37,7 +37,7 @@ const CardNumberItem = styled.div`
   display: flex;
   align-items: center;
   & > * {
-    width: 8px;
+    width: 9px;
   }
 `;
 
@@ -82,7 +82,7 @@ interface ExpirationDate {
   month: string;
 }
 
-export type { CardInformation, CardNumber };
+export type { CardInformation, CardNumber, ExpirationDate };
 
 const defaultCardInformation: CardInformation = {
   cardNumber: ['', '', '', ''],
@@ -112,10 +112,10 @@ function Card({ cardInformation = defaultCardInformation, isAddForm }: CardProps
               )}
             </CardNumberTemplate>
             <CardDetail>
-              <div>{owner}</div>
+              <div>{owner?.slice(0, 12)}</div>
               {expirationDate && (
                 <div>
-                  {expirationDate.month.padStart(2, '0')}/{expirationDate.year}
+                  {expirationDate.month.padStart(2, '0')}/{expirationDate.year.padStart(2, '0')}
                 </div>
               )}
             </CardDetail>

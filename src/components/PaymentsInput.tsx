@@ -18,22 +18,21 @@ const InputContainer = styled.div`
   background: #ecebf1;
   border-radius: 7px;
   input[type='password'] {
-    font-family: Verdana;
-    ::placeholder {
-      font-family: 'Roboto';
-      font-weight: 600;
-    }
+    text-align: center;
   }
 `;
 
 const InputItem = styled.input<{ maxLength: number }>`
   width: ${({ maxLength }) => maxLength * 12}px;
   font-size: 18px;
-  text-align: center;
   background: none;
   border: none;
   outline: none;
   letter-spacing: 0.1em;
+  ::placeholder {
+    font-size: 14px;
+    letter-spacing: 0.0625rem;
+  }
 `;
 
 const InputDivider = styled.div`
