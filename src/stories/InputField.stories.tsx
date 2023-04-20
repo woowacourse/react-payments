@@ -14,24 +14,36 @@ const meta: Meta<typeof InputField> = {
 export default meta;
 type Story = StoryObj<typeof InputField>;
 
+const defaultState = {
+  value: "",
+  onChange: () => {},
+};
+
 export const CardNumber: Story = {
   args: {
     kind: "cardNumber",
-    children: <CardNumberInput />,
+    children: (
+      <CardNumberInput
+        firstNumber={defaultState}
+        secondNumber={defaultState}
+        thirdNumber={defaultState}
+        fourthNumber={defaultState}
+      />
+    ),
   },
 };
 
 export const Expiracy: Story = {
   args: {
     kind: "expiracy",
-    children: <ExpiracyInput />,
+    children: <ExpiracyInput year={defaultState} month={defaultState} />,
   },
 };
 
 export const Owner: Story = {
   args: {
     kind: "owner",
-    children: <OwnerInput />,
+    children: <OwnerInput owner={defaultState} />,
     inputLength: "0/30",
   },
 };
@@ -39,13 +51,18 @@ export const Owner: Story = {
 export const Cvc: Story = {
   args: {
     kind: "cvc",
-    children: <CvcInput />,
+    children: <CvcInput cvc={defaultState} />,
   },
 };
 
 export const Password: Story = {
   args: {
     kind: "password",
-    children: <PasswordInput />,
+    children: (
+      <PasswordInput
+        firstPassword={defaultState}
+        secondPassword={defaultState}
+      />
+    ),
   },
 };
