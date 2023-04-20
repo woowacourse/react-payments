@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -8,10 +7,6 @@ import * as S from './style';
 function Home() {
   const navigate = useNavigate();
   const [creditCardList, setCreditCardList] = useState<Type.CreditCard[]>([]);
-
-  const addNewCreditCard = (newCreditCard: Type.CreditCard) => {
-    setCreditCardList([...creditCardList, newCreditCard]);
-  };
 
   useEffect(() => {
     setCreditCardList(JSON.parse(localStorage.getItem('creditCards') || '[]'));
