@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import St from "./styled";
+import { useNavigate } from "react-router-dom";
+
 import CardDetailHeader from "./CardDetailHeader";
 import CardDetailView from "../CardDetailView";
 import CardDetailForm from "./CardDetailForm";
+
+import St from "./styled";
 
 type CreditCard = {
   cardNumberOrigin: string;
@@ -24,6 +27,7 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
   const [cardOwnerName, setCardOwnerName] = useState("");
   const [cardCVC, setCardCVC] = useState("");
   const [cardPassword, setCardPassword] = useState<[string, string]>(["", ""]);
+  const navigate = useNavigate();
 
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const cardNumber = e.target.value.replace(/[^\d•]/g, "").slice(0, 16); // 16자리 이상은 자르기
@@ -98,6 +102,7 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
       cardPassword,
     };
 
+    navigate("/");
     addCreditCard(newCard);
   };
 

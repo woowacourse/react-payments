@@ -16,7 +16,7 @@ const St = {
   `,
 
   Input: styled.input`
-    width: 25%;
+    width: 60%;
 
     border: none;
 

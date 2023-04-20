@@ -1,5 +1,5 @@
 import React from "react";
-import CardAddButton from "../../CardAddButton";
+import CardAddButton from "./CardAddButton";
 import St from "./styled";
 
 function CardList() {
