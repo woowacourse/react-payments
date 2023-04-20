@@ -1,29 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import ErrorSpan from "src/components/@common/ErrorSpan";
 import FormLabel from "src/components/@common/FormLabel";
 import Input from "src/components/@common/Input";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import styled, { css } from "styled-components";
+import { InputValuesContext } from "../Main";
 
 function SecurityCode() {
-  const [code, setCode] = useState("");
+  const [cardInput, setCardInput] = useContext(InputValuesContext);
+  const [error, setError] = useState(false);
 
   const codeChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const value = event.currentTarget.value as string;
     if (!ONLY_NUMBER_REGEXP.test(value)) return;
 
-    setCode(value);
+    try {
+      if (value.length > 0 && value.length !== 3) throw new Error();
+      setError(false);
+    } catch {
+      setError(true);
+    } finally {
+      if (!setCardInput) return;
+      setCardInput((prev) => ({ ...prev, securityCode: value }));
+    }
   };
 
   return (
     <SecurityCodeContainer>
       <FormLabel>{"보안 코드(CVC/CVV)"}</FormLabel>
       <Input
-        value={code}
+        value={cardInput.securityCode}
         onChange={codeChange}
         maxLength={3}
         type="password"
         customInputStyle={SecurityInput}
       />
+      {error && <ErrorSpan>보안 코드는 3자리 입니다.</ErrorSpan>}
     </SecurityCodeContainer>
   );
 }

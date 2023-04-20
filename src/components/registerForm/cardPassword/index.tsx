@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Input from "src/components/@common/Input";
 import FormLabel from "src/components/@common/FormLabel";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import styled, { css } from "styled-components";
+import { InputValuesContext } from "../Main";
+import ErrorSpan from "src/components/@common/ErrorSpan";
 
 interface CardPasswordObj {
   first: string;
@@ -10,10 +12,9 @@ interface CardPasswordObj {
 }
 
 function CardPassword() {
-  const [password, setPassword] = useState({
-    first: "",
-    second: "",
-  });
+  const [cardInput, setCardInput] = useContext(InputValuesContext);
+
+  const [passwordError, setPasswordError] = useState(false);
 
   const passwordChange: React.ChangeEventHandler<HTMLInputElement> = (
     event,
@@ -22,7 +23,23 @@ function CardPassword() {
     const name = event.currentTarget.dataset["order"] as keyof CardPasswordObj;
     if (!ONLY_NUMBER_REGEXP.test(value)) return;
 
-    setPassword((prev) => ({ ...prev, [name]: value }));
+    try {
+      if (value.length !== 1) {
+        throw new Error();
+      }
+      setPasswordError(false);
+    } catch {
+      setPasswordError(true);
+    } finally {
+      if (!setCardInput) return;
+      setCardInput((prev) => ({
+        ...prev,
+        password: {
+          ...prev.password,
+          [name]: value,
+        },
+      }));
+    }
   };
 
   return (
@@ -31,7 +48,7 @@ function CardPassword() {
       <PasswordInputContainer>
         <Input
           data-order="first"
-          value={password["first"]}
+          value={cardInput.password["first"]}
           onChange={passwordChange}
           maxLength={1}
           inputmode="numeric"
@@ -40,7 +57,7 @@ function CardPassword() {
         />
         <Input
           data-order="second"
-          value={password["second"]}
+          value={cardInput.password["second"]}
           onChange={passwordChange}
           maxLength={1}
           inputmode="numeric"
@@ -50,6 +67,9 @@ function CardPassword() {
         <DotParagraph>•</DotParagraph>
         <DotParagraph>•</DotParagraph>
       </PasswordInputContainer>
+      {passwordError && (
+        <ErrorSpan>비밀번호 앞 2자리를 입력해주세요.</ErrorSpan>
+      )}
     </CardPasswordContainer>
   );
 }
