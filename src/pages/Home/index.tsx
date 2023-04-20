@@ -41,9 +41,7 @@ function Home() {
         )}
         <S.RegisterCreditCardButton
           type="button"
-          onClick={() => navigate('/register', {
-            state: addNewCreditCard
-          })}
+          onClick={() => navigate('/register')}
         >
           +
         </S.RegisterCreditCardButton>
