@@ -31,7 +31,7 @@ function CardPassword({ handleValidationChange, onChange, values }: CardPassword
         {values.map((password, index) => (
           <Input
             type="password"
-            id={index === 0 ? 'password' : `cardNumber${index}`}
+            id={index === 0 ? 'password' : `password${index}`}
             value={password}
             maxLength={1}
             isError={isError}
