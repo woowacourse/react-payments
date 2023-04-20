@@ -16,11 +16,12 @@ interface CardInputType {
 
 const CardInput = (props: CardInputType) => {
   return (
-    <InputWrapper
+    <CardInputWrapper
       id={props.id}
       placeholder={props.placeholder}
       style={{ width: props.width }}
       value={props.value}
+      type={props.isSecured ? "password" : "text"}
       autoFocus={props.isAutoFocus}
       required={props.isRequired}
       maxLength={props.maxLength}
@@ -30,7 +31,7 @@ const CardInput = (props: CardInputType) => {
   );
 };
 
-const InputWrapper = styled.input`
+const CardInputWrapper = styled.input`
   width: 318px;
   height: 45px;
 
@@ -41,12 +42,15 @@ const InputWrapper = styled.input`
   background: #ecebf1;
   border-radius: 7px;
 
-  font-size: 18px;
+  font-size: 19px;
   color: black;
   border: none;
 
   &:focus {
     outline-color: #525252;
+  }
+  &::placeholder {
+    font-size: 15px;
   }
 `;
 
