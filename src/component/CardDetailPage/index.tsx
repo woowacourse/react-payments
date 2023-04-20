@@ -5,27 +5,27 @@ import CardDetailView from "../CardDetailView";
 import CardDetailForm from "./CardDetailForm";
 
 function CardDetailPage() {
-  const [CardNumberOrigin, setCardNumberOrigin] = useState("");
-  const [CardNumberHidden, setCardNumberHidden] = useState("");
+  const [cardNumberOrigin, setCardNumberOrigin] = useState("");
+  const [cardNumberHidden, setCardNumberHidden] = useState("");
+  const [cardDate, setCardDate] = useState("");
 
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const cardNumber = e.target.value.replace(/[^\d•]/g, "").slice(0, 16); // 16자리 이상은 자르기
 
     //오리진 저장
-    if (CardNumberOrigin.length > 8) {
+    if (cardNumberOrigin.length > 8) {
       // 별 표시 출력과 관련된 로직
-      if (CardNumberOrigin.length < cardNumber.length) {
+      if (cardNumberOrigin.length < cardNumber.length) {
         // 추가시
-        setCardNumberOrigin(CardNumberOrigin + cardNumber.slice(-1));
+        setCardNumberOrigin(cardNumberOrigin + cardNumber.slice(-1));
       }
 
-      if (CardNumberOrigin.length > cardNumber.length) {
+      if (cardNumberOrigin.length > cardNumber.length) {
         // 제거시
-        setCardNumberOrigin(CardNumberOrigin.slice(0, -1));
+        setCardNumberOrigin(cardNumberOrigin.slice(0, -1));
       }
     }
-
-    if (CardNumberOrigin.length <= 8) {
+    if (cardNumberOrigin.length <= 8) {
       setCardNumberOrigin(cardNumber);
     }
 
@@ -35,19 +35,26 @@ function CardDetailPage() {
         ? cardNumber.slice(0, 8) + "•".repeat(cardNumber.length - 8)
         : cardNumber;
     const showNumber = hiddenNumber.match(/.{1,4}/g);
-
     const resultNumber = showNumber ? showNumber.join("-") : "";
-
     setCardNumberHidden(resultNumber);
   };
 
+  const changeCardDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const dateString = e.target.value.replace(/[^\d]/g, "").slice(0, 4);
+    const expirationDate = dateString.match(/.{1,2}/g);
+    const resultDate = expirationDate ? expirationDate.join("/") : "";
+
+    setCardDate(resultDate);
+  };
   return (
     <St.Page>
       <CardDetailHeader />
       <CardDetailView />
       <CardDetailForm
         changeCardNumber={changeCardNumber}
-        CardNumberHidden={CardNumberHidden}
+        cardNumberHidden={cardNumberHidden}
+        changeCardDate={changeCardDate}
+        cardDate={cardDate}
       />
     </St.Page>
   );

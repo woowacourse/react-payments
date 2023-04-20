@@ -3,12 +3,12 @@ import St from "./styled";
 
 type CardNumberInputProps = {
   changeCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  CardNumberHidden: string;
+  cardNumberHidden: string;
 };
 
 function CardNumberInput({
   changeCardNumber,
-  CardNumberHidden,
+  cardNumberHidden,
 }: CardNumberInputProps) {
   return (
     <section>
@@ -16,7 +16,7 @@ function CardNumberInput({
       <St.InputSection>
         <St.Input
           type="text"
-          value={CardNumberHidden}
+          value={cardNumberHidden}
           onInput={changeCardNumber}
         ></St.Input>
       </St.InputSection>
