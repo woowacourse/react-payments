@@ -5,14 +5,26 @@ interface InputSectionType {
   label: string;
   isCountLength?: boolean;
   children: React.ReactNode;
+  inputValues?: string;
+  maxLength?: number;
 }
 
-const InputSection = ({ label, isCountLength, children }: InputSectionType) => {
+const InputSection = ({
+  label,
+  isCountLength,
+  children,
+  maxLength,
+  inputValues,
+}: InputSectionType) => {
   return (
     <InputSectionWrapper>
       <InputLabelWrapper>
         <p>{label}</p>
-        {isCountLength && <p>0/30</p>}
+        {isCountLength && maxLength && (
+          <p>
+            {inputValues?.length} / {maxLength}
+          </p>
+        )}
       </InputLabelWrapper>
       <ChildrenWrapper>{children}</ChildrenWrapper>
     </InputSectionWrapper>
@@ -41,6 +53,7 @@ const InputLabelWrapper = styled.div`
 
 const ChildrenWrapper = styled.div`
   display: flex;
+  align-items: center;
   & > *:not(:last-of-type) {
     margin-right: 10px;
   }
