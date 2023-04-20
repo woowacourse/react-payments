@@ -16,7 +16,7 @@ export const LabelHeader = styled.div`
 `;
 
 export const InputContainer = styled.div`
-  background-color: #ecebf1;
+  background-color: #e5e5e5;
   border-radius: 10px;
 `;
 

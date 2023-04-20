@@ -3,7 +3,7 @@ import { InputProps } from '../../types/props';
 
 const InputWidth = {
   xl: '100%',
-  l: '100px',
+  l: '20%',
   m: '60px',
   s: '60px',
   xs: '45px',
@@ -13,7 +13,7 @@ export const Input = styled.input<InputProps>`
   width: ${(props) => InputWidth[props.width]};
   height: 45px;
 
-  background-color: #ecebf1;
+  background-color: #e5e5e5;
 
   border-radius: 10px;
   border: none;
@@ -22,6 +22,4 @@ export const Input = styled.input<InputProps>`
   font-size: 18px;
   letter-spacing: 2px;
   text-align: center;
-
-  opacity: 0.6;
 `;

@@ -6,13 +6,12 @@ import * as styled from './CardNumbersInput.styled';
 import { isNumeric } from '../../../domain/validator';
 import { CardInfo } from '../../../App';
 
-const CardNumberInputBox = ({
-  setCardInfo,
-  numbers,
-}: {
+interface CardNumberInputBoxProps {
   setCardInfo: CallableFunction;
   numbers: any;
-}) => {
+}
+
+const CardNumberInputBox = ({ setCardInfo, numbers }: CardNumberInputBoxProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChange = ({ target: { name, value } }: ChangeEvent<HTMLInputElement>) => {
@@ -40,19 +39,26 @@ const CardNumberInputBox = ({
           <span>카드 번호</span>
         </styled.LabelHeader>
         <styled.InputContainer>
-          {Object.keys(numbers).map((key) => {
-            return (
-              <Input
-                key={key}
-                name={key}
-                value={numbers[key]}
-                onChange={onChange}
-                width="xl"
-                type="text"
-                maxLength={4}
-              />
-            );
-          })}
+          <styled.Inputs>
+            {Object.keys(numbers).map((key, index) => {
+              return (
+                <>
+                  <Input
+                    key={key}
+                    name={key}
+                    value={numbers[key]}
+                    onChange={onChange}
+                    width="l"
+                    type={index < 2 ? 'text' : 'password'}
+                    maxLength={4}
+                  />
+                  <styled.CardNumberDivision>
+                    {index !== 3 && numbers[key].length === 4 ? '-' : ''}
+                  </styled.CardNumberDivision>
+                </>
+              );
+            })}
+          </styled.Inputs>
         </styled.InputContainer>
       </label>
       <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>

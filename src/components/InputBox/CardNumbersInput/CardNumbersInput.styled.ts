@@ -16,11 +16,27 @@ export const LabelHeader = styled.div`
 `;
 
 export const InputContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-column-gap: 20px;
-  background-color: #ecebf1;
+  display: flex;
+  justify-content: center;
+
+  background-color: red;
+  background-color: #e5e5e5;
   border-radius: 10px;
+`;
+
+export const Inputs = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+  min-width: 280px;
+`;
+
+export const CardNumberDivision = styled.span`
+  width: 7px;
+
+  font-size: 17px;
+  font-weight: 900;
 `;
 
 export const ErrorMessage = styled.p`

@@ -91,7 +91,6 @@ export const ExpirationMonth = styled.div``;
 export const ExpirationYear = styled.div`
   span {
     display: block;
-    background-color: blue;
     width: 14px;
   }
 `;
