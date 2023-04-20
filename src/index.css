@@ -22,6 +22,7 @@ body {
   align-items: center;
   justify-content: center;
   background-color: var(--grey-100);
+  font-family: 'Pretendard';
 }
 
 ul,
