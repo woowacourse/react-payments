@@ -23,6 +23,7 @@ const CardNumberInput = ({ cardNumber, onChange }: CardNumberInputProps) => {
           minLength={4}
           maxLength={4}
           required
+          autoFocus
           onChange={onChange}
         />
         <span>-</span>
