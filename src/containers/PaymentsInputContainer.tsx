@@ -2,9 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardInformation } from '../components/Card';
 import PaymentsInput from '../components/PaymentsInput';
+import QuestionToolTip from '../components/QuestionToolTip';
+import checkExpirationDate from '../domain/validator';
 import useWrappingContext from '../hooks/useWrappingContext';
 import CardListStore from '../store';
 import type { ChangeEvent, FormEvent } from 'react';
+
+const CVC_MESSAGE = 'CVV/CVC 번호는 카드 뒷 면에 있는 3자리 숫자이며 카드 보안을 위한 번호입니다.';
 
 const PaymentsForm = styled.form`
   max-width: 318px;
@@ -13,13 +17,15 @@ const PaymentsForm = styled.form`
     :nth-child(2) {
       max-width: 138px;
     }
-    :nth-child(4) {
-      max-width: 112px;
-    }
     :nth-child(5) {
       max-width: 100px;
     }
   }
+`;
+
+const PaymentsInputWrapper = styled.div`
+  display: flex;
+  align-items: flex-end;
 `;
 
 const NextButton = styled.button`
@@ -51,6 +57,13 @@ function PaymentsInputContainer({ setCardInformation }: PaymentInputContainerPro
     const owner = formData.get('owner');
     const cardNumber = formData.getAll('cardNumber');
     const expirationDate = formData.getAll('expirationDate');
+    try {
+      checkExpirationDate(expirationDate as [string, string]);
+    } catch (error) {
+      alert(error);
+      return;
+    }
+
     const cardInformation = {
       owner,
       cardNumber,
@@ -78,7 +91,7 @@ function PaymentsInputContainer({ setCardInformation }: PaymentInputContainerPro
 
   const onChangeOwner = (e: ChangeEvent<HTMLInputElement>) => {
     const { target } = e;
-    target.value = target.value.replace(/[^a-z|A-Z|ㄱ-ㅎ|가-힣]/g, '');
+    target.value = target.value.replace(/[^a-z|A-Z]/g, '').toUpperCase();
 
     setOwner(target.value);
   };
@@ -98,10 +111,10 @@ function PaymentsInputContainer({ setCardInformation }: PaymentInputContainerPro
       <PaymentsInput
         title="카드 번호"
         inputInformationList={[
-          { type: 'text', isRequired: true, pattern: [4, 4], name: 'cardNumber' },
-          { type: 'text', isRequired: true, pattern: [4, 4], name: 'cardNumber' },
-          { type: 'password', isRequired: true, pattern: [4, 4], name: 'cardNumber' },
-          { type: 'password', isRequired: true, pattern: [4, 4], name: 'cardNumber' },
+          { type: 'text', isRequired: true, pattern: [4, 4], name: 'cardNumber', placeholder: '1234' },
+          { type: 'text', isRequired: true, pattern: [4, 4], name: 'cardNumber', placeholder: '1234' },
+          { type: 'password', isRequired: true, pattern: [4, 4], name: 'cardNumber', placeholder: '1234' },
+          { type: 'password', isRequired: true, pattern: [4, 4], name: 'cardNumber', placeholder: '1234' },
         ]}
         inputDivideLetter="-"
         onChange={onChangeCardNumber}
@@ -109,28 +122,36 @@ function PaymentsInputContainer({ setCardInformation }: PaymentInputContainerPro
       <PaymentsInput
         title="만료일"
         inputInformationList={[
-          { type: 'text', isRequired: true, pattern: [1, 2], name: 'expirationDate' },
-          { type: 'text', isRequired: true, pattern: [2, 2], name: 'expirationDate' },
+          { type: 'text', isRequired: true, pattern: [2, 2], name: 'expirationDate', placeholder: 'MM' },
+          { type: 'text', isRequired: true, pattern: [2, 2], name: 'expirationDate', placeholder: 'YY' },
         ]}
         inputDivideLetter="/"
         onChange={onChangeExpirationDate}
       />
       <PaymentsInput
         title="카드 소유자 이름(선택)"
-        inputInformationList={[{ type: 'text', isRequired: false, pattern: [0, 30], name: 'owner' }]}
+        inputInformationList={[
+          {
+            type: 'text',
+            isRequired: false,
+            pattern: [0, 30],
+            name: 'owner',
+            placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
+          },
+        ]}
         onChange={onChangeOwner}
       />
-      <PaymentsInput
-        title="보안 코드(CVC/CVV)"
-        inputInformationList={[{ type: 'password', isRequired: true, pattern: [3, 3], name: 'securityCode' }]}
-        onChange={onChangeCVC}
-      />
+      <PaymentsInputWrapper>
+        <PaymentsInput
+          title="보안 코드(CVC/CVV)"
+          inputInformationList={[{ type: 'password', isRequired: true, pattern: [3, 3], name: 'securityCode' }]}
+          onChange={onChangeCVC}
+        />
+        <QuestionToolTip questionMessage={CVC_MESSAGE} />
+      </PaymentsInputWrapper>
       <PaymentsInput
         title="카드 비밀번호"
-        inputInformationList={[
-          { type: 'password', isRequired: true, pattern: [1, 1], name: 'cardPassword' },
-          { type: 'password', isRequired: true, pattern: [1, 1], name: 'cardPassword' },
-        ]}
+        inputInformationList={[{ type: 'password', isRequired: true, pattern: [4, 4], name: 'cardPassword' }]}
         inputDivideLetter=""
         onChange={onChangePassword}
       />
