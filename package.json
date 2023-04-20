@@ -1,6 +1,7 @@
 {
   "name": "react-payments",
   "version": "0.1.0",
+  "homepage": "https://guridaek.github.io/react-payments",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -19,6 +20,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -72,6 +75,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-storybook": "^0.6.11",
+    "gh-pages": "^5.0.0",
     "prettier": "^2.8.7",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.5",
