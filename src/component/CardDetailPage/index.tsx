@@ -10,6 +10,7 @@ function CardDetailPage() {
   const [cardDate, setCardDate] = useState("");
   const [cardOwnerName, setCardOwnerName] = useState("");
   const [cardCVC, setCardCVC] = useState("");
+  const [cardPassword, setCardPassword] = useState<[string, string]>(["", ""]);
 
   const changeCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const cardNumber = e.target.value.replace(/[^\d•]/g, "").slice(0, 16); // 16자리 이상은 자르기
@@ -60,6 +61,19 @@ function CardDetailPage() {
     const cvc = e.target.value.replace(/[^\d]/g, "").slice(0, 3);
     setCardCVC(cvc);
   };
+
+  const changeCardPassword = (e: React.FormEvent<HTMLInputElement>) => {
+    const password = e.currentTarget.value.replace(/[^\d]/g, "").slice(0, 1);
+    const inputID = e.currentTarget.id;
+
+    if (inputID === "first") {
+      setCardPassword([password, cardPassword[1]]);
+    }
+
+    if (inputID === "second") {
+      setCardPassword([cardPassword[0], password]);
+    }
+  };
   return (
     <St.Page>
       <CardDetailHeader />
@@ -73,6 +87,8 @@ function CardDetailPage() {
         cardOwnerName={cardOwnerName}
         changeCardCVC={changeCardCVC}
         cardCVC={cardCVC}
+        cardPassword={cardPassword}
+        changeCardPassword={changeCardPassword}
       />
     </St.Page>
   );

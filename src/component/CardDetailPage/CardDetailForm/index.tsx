@@ -20,6 +20,9 @@ type CardDetailFormProps = {
 
   changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
   cardCVC: string;
+
+  changeCardPassword: (e: React.FormEvent<HTMLInputElement>) => void;
+  cardPassword: [string, string];
 };
 
 function CardDetailForm({
@@ -31,6 +34,8 @@ function CardDetailForm({
   cardOwnerName,
   changeCardCVC,
   cardCVC,
+  changeCardPassword,
+  cardPassword,
 }: CardDetailFormProps) {
   return (
     <St.Form>
@@ -44,7 +49,10 @@ function CardDetailForm({
         cardOwnerName={cardOwnerName}
       />
       <CardCVCInput changeCardCVC={changeCardCVC} cardCVC={cardCVC} />
-      <CardPasswordInput />
+      <CardPasswordInput
+        changeCardPassword={changeCardPassword}
+        cardPassword={cardPassword}
+      />
       <St.SubmitButton type="submit" value={"다음"} />
     </St.Form>
   );
