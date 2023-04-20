@@ -1,20 +1,27 @@
 import styled from 'styled-components';
+import { Card } from './types';
 
-type Props = {};
+type Props = {
+  card: Card;
+};
 
-export function CreditCard({}: Props) {
+export function CreditCard({ card }: Props) {
   return (
     <Styled.Wrapper>
       <Styled.Chip />
       <Styled.CardNumbers>
-        <span>1234</span>
-        <span>1234</span>
+        <span>{card.numbers[0]}</span>
+        <span>{card.numbers[1]}</span>
         <span>••••</span>
         <span>••••</span>
       </Styled.CardNumbers>
       <Styled.Container>
-        <Styled.Name>PARK YEONG YEONG</Styled.Name>
-        <Styled.ExpirationDate>04/21</Styled.ExpirationDate>
+        <Styled.Name>{card.name}</Styled.Name>
+        <Styled.ExpirationDate>
+          <Styled.Month>{card.expirationDate.month}</Styled.Month>
+          <Styled.DateSeparator>/</Styled.DateSeparator>
+          <Styled.Year>{card.expirationDate.year}</Styled.Year>
+        </Styled.ExpirationDate>
       </Styled.Container>
     </Styled.Wrapper>
   );
@@ -25,9 +32,6 @@ const Styled = {
     position: relative;
     width: 213px;
     height: 133px;
-    left: 81px;
-    top: 75px;
-
     background: #333333;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
@@ -49,17 +53,19 @@ const Styled = {
     position: absolute;
     width: 169px;
     height: 10px;
-    left: 19px;
+    left: 24px;
     top: 84px;
 
     span {
+      width: 34px;
       color: #ffffff;
       font-size: 14px;
     }
   `,
+
   Container: styled.div`
     position: absolute;
-    width: 169px;
+    width: 174px;
     height: 10px;
     left: 19px;
     top: 107px;
@@ -70,8 +76,24 @@ const Styled = {
     color: #ffffff;
     font-size: 12px;
   `,
-  ExpirationDate: styled.span`
+  ExpirationDate: styled.div`
     color: #ffffff;
     font-size: 12px;
+    width: 36px;
+    height: 10px;
+    display: flex;
+  `,
+
+  Month: styled.span`
+    width: 14px;
+  `,
+
+  Year: styled.span`
+    width: 14px;
+  `,
+
+  DateSeparator: styled.span`
+    width: 6px;
+    text-align: center;
   `,
 };
