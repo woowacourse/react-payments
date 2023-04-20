@@ -1,17 +1,22 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 
-const NameInput = () => {
-  const [name, setName] = useState("");
+type Name = string;
 
+interface Props {
+  name: Name;
+  setName: Dispatch<SetStateAction<Name>>;
+}
+
+const NameInput = ({ name, setName }: Props) => {
   const handleName = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const value = target.value.toUpperCase().trimStart();
     if (value.includes("  ")) return;
 
     setName(
       changeToValidValue(value, {
-        length: 30,
+        length: 20,
         regex: /[^a-z A-Z]/g,
       })
     );
@@ -23,13 +28,13 @@ const NameInput = () => {
         <label className="label-text" htmlFor="name">
           카드 소유자 이름&#40;선택&#41;
         </label>
-        <p>{name.length}/30</p>
+        <p>{name.length}/20</p>
       </S.Wrapper>
       <S.Input
         type="text"
         name="name"
         id="name"
-        maxLength={30}
+        maxLength={20}
         value={name}
         onChange={handleName}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."

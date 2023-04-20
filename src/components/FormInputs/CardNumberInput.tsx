@@ -1,18 +1,23 @@
 import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
 
-const CardNumberInput = () => {
-  const { handleRef, moveFocus } = useFocus();
+interface CardNumber {
+  number1: string;
+  number2: string;
+  number3: string;
+  number4: string;
+}
 
-  const [cardNumber, setCardNumber] = useState({
-    number1: "",
-    number2: "",
-    number3: "",
-    number4: "",
-  });
+interface Props {
+  cardNumber: CardNumber;
+  setCardNumber: Dispatch<SetStateAction<CardNumber>>;
+}
+
+const CardNumberInput = ({ cardNumber, setCardNumber }: Props) => {
+  const { handleRef, moveFocus } = useFocus();
 
   const handleCardNumber = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setCardNumber((prevState) => {

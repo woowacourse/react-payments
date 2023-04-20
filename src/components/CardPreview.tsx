@@ -1,19 +1,37 @@
 import styled from "styled-components";
 
-const CardPreview = () => {
+interface CardInfo {
+  cardNumber: {
+    number1: string;
+    number2: string;
+    number3: string;
+    number4: string;
+  };
+
+  date: {
+    month: string;
+    year: string;
+  };
+
+  name: string;
+}
+
+const CardPreview = ({ cardNumber, date, name }: CardInfo) => {
   return (
     <S.Card>
       <S.Chip />
       <S.CardInfo>
         <S.Numbers>
-          <S.Span>1234</S.Span>
-          <S.Span>1234</S.Span>
-          <S.Secret>ㆍㆍㆍㆍ</S.Secret>
-          <S.Secret>ㆍㆍㆍㆍ</S.Secret>
+          <S.Span>{cardNumber.number1}</S.Span>
+          <S.Span>{cardNumber.number2}</S.Span>
+          <S.Secret>{cardNumber.number3.replaceAll(/[0-9]/gi, "ㆍ")}</S.Secret>
+          <S.Secret>{cardNumber.number4.replaceAll(/[0-9]/gi, "ㆍ")}</S.Secret>
         </S.Numbers>
         <S.Wrapper>
-          <p>SUN</p>
-          <S.Date>04/21</S.Date>
+          <p>{name}</p>
+          <S.Date>{`${date.month} ${date.month.length === 2 ? "/" : ""} ${
+            date.year
+          }`}</S.Date>
         </S.Wrapper>
       </S.CardInfo>
     </S.Card>

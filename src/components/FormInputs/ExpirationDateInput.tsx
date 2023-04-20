@@ -1,16 +1,21 @@
 import { useFocus } from "hooks/useFocus";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { changeToValidValue } from "utils/inputValidator";
 import { HIDDEN_ELEMENT_STYLE } from "constants/style";
 
-const ExpirationDateInput = () => {
-  const { handleRef, moveFocus } = useFocus();
+interface Date {
+  month: string;
+  year: string;
+}
 
-  const [date, setDate] = useState({
-    month: "",
-    year: "",
-  });
+interface Props {
+  date: Date;
+  setDate: Dispatch<SetStateAction<Date>>;
+}
+
+const ExpirationDateInput = ({ date, setDate }: Props) => {
+  const { handleRef, moveFocus } = useFocus();
 
   const handleDate = ({ target }: ChangeEvent<HTMLInputElement>) => {
     const value = Number(target.value);
