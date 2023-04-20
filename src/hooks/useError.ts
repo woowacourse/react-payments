@@ -6,7 +6,7 @@ export function useError() {
   function handleError(input: any, validator: (input: string) => void) {
     try {
       validator(input);
-      setError(null);
+      setError("");
     } catch (e) {
       console.error(e);
       const error = e as Error;
