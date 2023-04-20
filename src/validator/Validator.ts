@@ -11,3 +11,9 @@ export const isValidMonth = (value: string) => {
 
   return 0 <= number && number <= 12;
 };
+
+export const isCapitalAlphabetic = (value: string) => {
+  const REGEX = /^[A-Z]*$/;
+
+  return REGEX.test(value);
+};
