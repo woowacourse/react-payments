@@ -16,6 +16,7 @@ export const CardNumber: Story = {
     inputInfoList: [
       {
         type: 'number',
+        minLength: 4,
         maxLength: 4,
         width: '75px',
         value: '',
@@ -24,6 +25,7 @@ export const CardNumber: Story = {
       },
       {
         type: 'number',
+        minLength: 4,
         maxLength: 4,
         width: '75px',
         center: true,
@@ -32,6 +34,7 @@ export const CardNumber: Story = {
       },
       {
         type: 'number',
+        minLength: 4,
         maxLength: 4,
         width: '75px',
         value: '',
@@ -40,6 +43,7 @@ export const CardNumber: Story = {
       },
       {
         type: 'number',
+        minLength: 4,
         maxLength: 4,
         width: '75px',
         value: '',
@@ -57,6 +61,7 @@ export const CardExpirationDate: Story = {
       {
         type: 'number',
         placeholder: 'MM',
+        minLength: 2,
         maxLength: 2,
         width: '75px',
         value: '',
@@ -66,6 +71,7 @@ export const CardExpirationDate: Story = {
       {
         type: 'number',
         placeholder: 'YY',
+        minLength: 2,
         maxLength: 2,
         width: '75px',
         value: '',
@@ -83,6 +89,7 @@ export const CardOwner: Story = {
       {
         type: 'text',
         placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
+        minLength: 2,
         maxLength: 30,
         width: '250px',
         value: '',
@@ -99,6 +106,7 @@ export const CardCVC: Story = {
     inputInfoList: [
       {
         type: 'password',
+        minLength: 3,
         maxLength: 3,
         width: '75px',
         value: '',
@@ -115,6 +123,7 @@ export const CardPWD: Story = {
     inputInfoList: [
       {
         type: 'password',
+        minLength: 1,
         maxLength: 1,
         width: '40px',
         value: '',
@@ -123,6 +132,7 @@ export const CardPWD: Story = {
       },
       {
         type: 'password',
+        minLength: 1,
         maxLength: 1,
         width: '40px',
         value: '',

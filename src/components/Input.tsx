@@ -4,6 +4,7 @@ import styled from 'styled-components';
 type InputInfo = {
   type: string;
   placeholder?: string;
+  minLength: number;
   maxLength: number;
   width: string;
   value?: string;
@@ -17,13 +18,6 @@ type InputProps = {
   children?: React.ReactNode;
 };
 
-const handleMaxLength = (e: ChangeEvent) => {
-  if (!(e.target instanceof HTMLInputElement)) return;
-  if (e.target.value.length > e.target.maxLength) {
-    e.target.value = e.target.value.slice(0, e.target.maxLength);
-  }
-};
-
 const Input = ({ labelText, inputInfoList, children }: InputProps) => {
   return (
     <StyledInputWrapper>
@@ -34,10 +28,15 @@ const Input = ({ labelText, inputInfoList, children }: InputProps) => {
         </StyledInputLabelContainer>
         <div>
           {inputInfoList.map(
-            ({ type, placeholder, maxLength, width, value, center, onChange }, index) => {
+            (
+              { type, placeholder, minLength, maxLength, width, value, center, onChange },
+              index,
+            ) => {
               return (
                 <StyledInput
-                  type={type}
+                  pattern={`.{${minLength},}`}
+                  required={minLength !== 0}
+                  type={type === 'number' ? 'text' : type}
                   name={`${labelText}${index}`}
                   maxLength={maxLength}
                   width={width}
@@ -45,10 +44,7 @@ const Input = ({ labelText, inputInfoList, children }: InputProps) => {
                   data-id={index}
                   value={value}
                   data-center={center}
-                  onChange={(e) => {
-                    handleMaxLength(e);
-                    onChange(e);
-                  }}
+                  onChange={onChange}
                 />
               );
             },
