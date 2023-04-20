@@ -2,8 +2,9 @@
 /* eslint-disable max-len */
 import CreditCard from 'components/CreditCard';
 import Input from 'components/Input';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
+import * as Type from 'types';
 import * as S from './style';
 
 type CreditCardPasswordType = { first: string, second: string };
@@ -94,6 +95,25 @@ function CreditCardRegister() {
     return setIsFullFilled(true);
   }, [creditCardNumber, creditCardExpiry, creditCardCVC, creditCardPassword]);
 
+  const handleSubmit = () => {
+    if (isFullFilled) {
+      const newCreditCard: Type.CreditCard = {
+        number: creditCardNumber,
+        expiry: creditCardExpiry,
+        owner: creditCardOwner,
+        cvc: creditCardCVC,
+        password: {
+          first: creditCardPassword.first,
+          second: creditCardPassword.second,
+        },
+      };
+      alert(JSON.stringify(newCreditCard));
+      navigate('/');
+    } else {
+      alert('Please fill all fields');
+    }
+  };
+
   return (
     <S.CreditCardRegisterLayout>
       <S.CreditCardRegisterTopSheet>
@@ -160,7 +180,7 @@ function CreditCardRegister() {
           </S.FlexBox>
         </S.Box>
         <S.ButtonWrapper>
-          <S.ResigerButton disabled={!isFullFilled} type="submit" onClick={() => navigate('/')}>확인</S.ResigerButton>
+          <S.ResigerButton disabled={!isFullFilled} type="button" onClick={() => handleSubmit()}>확인</S.ResigerButton>
         </S.ButtonWrapper>
       </S.CreditCardRegisterForm>
     </S.CreditCardRegisterLayout>

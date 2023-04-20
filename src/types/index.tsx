@@ -2,6 +2,9 @@ export type CreditCard = {
   number: string;
   expiry: string;
   owner?: string;
-  cvv: string;
-  password: string;
+  cvc: string;
+  password: {
+    first: string;
+    second: string;
+  };
 };
