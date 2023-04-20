@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { convertSecuredCreditCard } from 'domains/creditCard';
+import creditCard from '../../../domains/creditCard';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
@@ -17,7 +17,7 @@ function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props)
 
     if (newCreditCarNumber.length > 16) return;
 
-    const markedNumber = convertSecuredCreditCard(newCreditCarNumber)
+    const markedNumber = creditCard.convertSecuredCreditCard(newCreditCarNumber)
       .filter((numbers) => !!numbers.length)
       .map((numbers) => numbers.join(''))
       .join(' - ');
