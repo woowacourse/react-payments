@@ -30,8 +30,6 @@ export const CardForm = ({
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
 
-    console.log(data);
-
     const newCard = {
       numbers: cardInfo.numbers,
       expiryDate: cardInfo.expiryDate,
@@ -46,12 +44,8 @@ export const CardForm = ({
       localStorage.setItem("cards", JSON.stringify(newData));
       return newData;
     });
-    moveToHome();
 
-    console.log(newCard);
-    //if(isValidate) return;
-    // dataUpdate 로컬 스토리지?
-    //페이지 이동
+    moveToHome();
   };
 
   return (

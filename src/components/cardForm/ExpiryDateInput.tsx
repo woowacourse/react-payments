@@ -59,7 +59,6 @@ export const ExpiryDateInput = ({
       setIsCompleted(true);
       validateExpiryDate(e.target.value);
     }
-    console.log(e.target.value);
   };
 
   const getValidMessage = (): string => {
