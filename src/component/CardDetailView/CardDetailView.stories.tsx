@@ -1,11 +1,19 @@
 import React from "react";
+import type { Meta, StoryObj } from "@storybook/react";
 import CardDetailView from "./index";
 
-// export default {
-//   component: CardDetailView,
-//   title: "CardDetail/CardDetailView",
-// };
+const meta = {
+  component: CardDetailView,
+  title: "CardDetail/CardDetailView",
+} satisfies Meta<typeof CardDetailView>;
 
-// const Template = () => <CardDetailView />;
+export default meta;
+type Story = StoryObj<typeof meta>;
 
-// export const Primary = Template.bind({});
+export const Primary: Story = {
+  args: {
+    cardNumberHidden: "1111-2222-••••-••••",
+    cardDate: "12/25",
+    cardOwnerName: "루루&가람",
+  },
+};
