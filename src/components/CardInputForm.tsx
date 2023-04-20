@@ -21,7 +21,6 @@ const CardInputForm = (props: CardInputFormType) => {
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
 
   const handleCardNumberChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value.length);
     e.target.value.length > SEPERATED_CARD_NUMBER_LENGTH.SECOND
       ? (card.cardNumber =
           e.target.value.substring(0, 12) +
@@ -210,12 +209,9 @@ const CardInputForm = (props: CardInputFormType) => {
           <p>카드 뒷면의 보안 3자리 숫자를 입력해 주세요.</p>
         </AnswerBoxWrapper>
       )}
-      {/* <button type="submit">
-        다음 */}
       <NextLink type="submit" onClick={props.onSubmit} to="/">
         다음
       </NextLink>
-      {/* </button> */}
     </CardInputFormWrapper>
   );
 };
@@ -241,21 +237,6 @@ const CardInputFormWrapper = styled.form`
   height: 100%;
 
   padding: 20px;
-
-  & > button {
-    text-align: end;
-    background: transparent;
-    border: none;
-
-    font-weight: 700;
-    font-size: 14px;
-
-    cursor: pointer;
-    :active {
-      opacity: 50%;
-      transform: scale(0.98);
-    }
-  }
 `;
 
 const InputSetWrapper = styled.div`

@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import CardInputForm from "../components/CardInputForm";
 import Header from "../components/common/Header";
 import Page from "../components/common/Page";
-import { CARD_RANDOM_COLOR } from "../constants";
+import { CARD_COLOR } from "../constants";
 import { CardType } from "../types";
 import { getLocalStorage, setLocalStorage } from "../utils";
 
@@ -15,7 +15,7 @@ const AddCard = () => {
     ownerName: "",
     cvc: "",
     password: ["", ""],
-    color: CARD_RANDOM_COLOR[Math.floor(Math.random() * 10)],
+    color: CARD_COLOR[Math.floor(Math.random() * 10)],
   });
 
   const registerCard = (e: FormEvent) => {
