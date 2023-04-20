@@ -1,0 +1,54 @@
+name: NodeJS with Webpack
+
+on:
+  # step1브랜치에 커밋을 push할 때마다 실행
+  push:
+    branches: ['step1']
+
+jobs:
+  # deploy라는 job에 배포에 필요한 과정 기술
+  deploy:
+    runs-on: ubuntu-latest # 우분투에서 실행
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      # 레포지토리의 코드를 사용하기 위한 것. 이게 없으면 빈 폴더
+      - uses: actions/checkout@v3
+
+      # node.js를 사용
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules' # node_modules폴더 캐싱
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          # cache hit이 발생하지 않았을 경우, restore-keys 에 있는 것을 꺼냄
+          # 단, npm ci 명령은 실행되며 기존의 node_modules 캐시를 기반으로 추가된 패키지만 설치
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        # cache hit이 발생한 경우 (즉 package-lock.json이 변경되지 않은 경우)
+        # npm ci 실행은 skip
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci # package-lock.json에 적혀있는 패키지를 그대로 설치
+
+      - name: Build
+        run: npm run build # package.json에 빌드 스크립트 여기에 적기
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build # build값의 output 경로에 들어있는 파일들을 gh-pages브랜치에 올려줌
