@@ -21,12 +21,6 @@ function CreditCardRegister() {
   const [creditCardOwner, setCreditCardOwner] = useState('');
 
   const [creditCardCVC, setCreditCardCVC] = useState('');
-  const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newCVC = event.target.value;
-    if (newCVC.length <= 3) {
-      setCreditCardCVC(newCVC);
-    }
-  };
 
   const [creditCardPassword, setCreditCardPassword] = useState<CreditCardPasswordType>({ first: '', second: '' });
   const handleChangeCreditCardFirstPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +97,7 @@ function CreditCardRegister() {
         />
         <CreditCardCVCInput
           creditCardCVC={creditCardCVC}
-          onChange={handleChangeCreditCardCVC}
+          setCreditCardCVC={setCreditCardCVC}
         />
         <CreditCardPasswordInput
           creditCardPassword={creditCardPassword}
