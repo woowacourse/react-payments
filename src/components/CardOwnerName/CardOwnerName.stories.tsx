@@ -10,7 +10,12 @@ const meta = {
 export default meta;
 
 export const CardOwnerNameStory = () => {
-  const [ownerName, setOwnerName] = useState('');
+  const [cardOwnerName, setCardOwnerName] = useState('');
 
-  return <CardOwnerName ownerName={ownerName} setOwnerName={setOwnerName} />;
+  return (
+    <CardOwnerName
+      cardOwnerName={cardOwnerName}
+      setCardOwnerName={setCardOwnerName}
+    />
+  );
 };
