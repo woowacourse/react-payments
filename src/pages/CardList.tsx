@@ -1,17 +1,35 @@
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 import Layout from "src/components/@common/Layout";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import useCardList from "src/hooks/useCardList";
+import Card from "src/components/@common/Card";
 
 function CardList() {
   const navigation = useNavigate();
-  const [cardList, setCardList] = useState([]);
+  const { cardList } = useCardList({ key: "card-list" });
+
+  const cardLists = useMemo(
+    () =>
+      cardList.map((card) => {
+        const { cardNumbers, ownerName, expireDate } = card;
+        return (
+          <Card
+            key={cardNumbers + expireDate}
+            cardNumber={cardNumbers}
+            ownerName={ownerName}
+            expireDate={expireDate}
+          />
+        );
+      }),
+    [cardList],
+  );
 
   return (
     <Layout>
       <CardListSection>
         {cardList.length ? (
-          <div></div>
+          cardLists
         ) : (
           <CardRegisterParagarph>
             새로운 카드를 등록해주세요.
