@@ -61,7 +61,7 @@ const S = {
   Button: styled.button`
     width: 208px;
     height: 123px;
-    margin-top: 30px;
+    margin: 30px 0 40px;
     font-size: 34px;
     background: #e5e5e5;
     border-radius: 5px;
