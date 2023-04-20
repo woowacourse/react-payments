@@ -96,22 +96,21 @@ function CreditCardRegister() {
   }, [creditCardNumber, creditCardExpiry, creditCardCVC, creditCardPassword]);
 
   const handleSubmit = () => {
-    if (isFullFilled) {
-      const newCreditCard: Type.CreditCard = {
-        number: creditCardNumber,
-        expiry: creditCardExpiry,
-        owner: creditCardOwner,
-        cvc: creditCardCVC,
-        password: {
-          first: creditCardPassword.first,
-          second: creditCardPassword.second,
-        },
-      };
-      alert(JSON.stringify(newCreditCard));
-      navigate('/');
-    } else {
-      alert('Please fill all fields');
-    }
+    if (!isFullFilled) return;
+
+    const newCreditCard: Type.CreditCard = {
+      number: creditCardNumber,
+      expiry: creditCardExpiry,
+      owner: creditCardOwner,
+      cvc: creditCardCVC,
+      password: {
+        first: creditCardPassword.first,
+        second: creditCardPassword.second,
+      },
+    };
+    const existCreditCard = JSON.parse(localStorage.getItem('creditCards') || '[]');
+    localStorage.setItem('creditCards', JSON.stringify([...existCreditCard, newCreditCard]));
+    navigate('/');
   };
 
   return (

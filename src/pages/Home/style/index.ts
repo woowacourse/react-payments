@@ -17,10 +17,10 @@ export const CreditCardList = styled.div`
 `;
 
 export const RegisterCreditCardContainer = styled.div`
-    margin-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 40px;
 `;
 
 export const RegisterCreditCardText = styled.span`
