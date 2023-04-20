@@ -40,24 +40,22 @@ const CardNumberInputBox = ({ setCardInfo, numbers }: CardNumberInputBoxProps) =
         </styled.LabelHeader>
         <styled.InputContainer>
           <styled.Inputs>
-            {Object.keys(numbers).map((key, index) => {
-              return (
-                <>
-                  <Input
-                    key={key}
-                    name={key}
-                    value={numbers[key]}
-                    onChange={onChange}
-                    width="l"
-                    type={index < 2 ? 'text' : 'password'}
-                    maxLength={4}
-                  />
-                  <styled.CardNumberDivision>
-                    {index !== 3 && numbers[key].length === 4 ? '-' : ''}
-                  </styled.CardNumberDivision>
-                </>
-              );
-            })}
+            {Object.keys(numbers).map((key, index) => (
+              <>
+                <Input
+                  key={key}
+                  name={key}
+                  value={numbers[key]}
+                  onChange={onChange}
+                  width="l"
+                  type={index < 2 ? 'text' : 'password'}
+                  maxLength={4}
+                />
+                <styled.CardNumberDivision>
+                  {index !== 3 && numbers[key].length === 4 ? '-' : ''}
+                </styled.CardNumberDivision>
+              </>
+            ))}
           </styled.Inputs>
         </styled.InputContainer>
       </label>

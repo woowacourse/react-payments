@@ -5,7 +5,7 @@ const InputWidth = {
   xl: '100%',
   l: '20%',
   m: '60px',
-  s: '60px',
+  s: '35px',
   xs: '45px',
 };
 
