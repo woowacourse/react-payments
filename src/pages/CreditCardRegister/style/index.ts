@@ -62,6 +62,7 @@ export const ResigerButton = styled.button`
 export const HiddentInput = styled.input`
     opacity: 0;
     position: absolute;
+    text-align: center;
     top: 50%;
     left: 0;
     right: 0;
