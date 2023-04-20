@@ -39,6 +39,7 @@ export default function InputBoxSecurityCode(props: Props) {
     <div className="input-box-security-code">
       <p>보안 코드(CVC/CVV)</p>
       <Input
+        name="security-code"
         className="input-security-code"
         type="password"
         onChange={onChangeCallback}

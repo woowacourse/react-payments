@@ -8,6 +8,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 export default function Input(props: Props) {
   const {
+    name,
     type,
     onChange,
     placeholder,
@@ -18,6 +19,7 @@ export default function Input(props: Props) {
   } = props;
   return (
     <input
+      name={name}
       className={`${styles.input} ${className}`}
       style={style}
       type={type}

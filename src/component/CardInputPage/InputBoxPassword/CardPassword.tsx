@@ -51,12 +51,14 @@ export default function CardPassword(props: Props) {
   return (
     <div className="input-box-card-password">
       <Input
+        name="card-password-1"
         className="input-password"
         type="password"
         onChange={onChangePassword(setInputStatus1)}
         inputMode="numeric"
       ></Input>
       <Input
+        name="card-password-2"
         className="input-password"
         type="password"
         onChange={onChangePassword(setInputStatus2)}

@@ -45,6 +45,7 @@ export default function InputBoxExpirationDate(props: Props) {
     <div className="input-box-expiration-date">
       <p>만료일</p>
       <Input
+        name="expiration-date"
         className="input-expiration-date"
         type="text"
         onChange={changeExpirationDate}
