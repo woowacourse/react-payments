@@ -49,6 +49,7 @@ export const CardForm = ({ cardInfo, setCardInfo }: CardFormProps) => {
   return (
     <Form onSubmit={handleSubmit}>
       <CardNumberInput
+        cardNumbers={cardInfo.numbers}
         setCardNumbers={(numbers: string) => {
           setCardInfo({ ...cardInfo, numbers: numbers });
         }}

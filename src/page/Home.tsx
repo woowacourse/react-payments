@@ -3,7 +3,7 @@ import { Header } from "../components/common/Header";
 
 const mockData = [
   {
-    numbers: "1234-1234-1243-1234",
+    numbers: "1234123412431234",
     owner: "DAHYE YUN",
     expiryDate: "12/25",
     color: "#525252",
@@ -11,7 +11,7 @@ const mockData = [
     password: [1, 2],
   },
   {
-    numbers: "1111-2222-3333-4444",
+    numbers: "1111222233334444",
     owner: "ABC",
     expiryDate: "11/11",
     color: "#BA55D3",
