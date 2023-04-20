@@ -3,8 +3,15 @@ import Input from '../common/Input';
 import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 
-const SecurityCodeInput = () => {
-  const [input, setInput] = useState('');
+interface SecurityCodeInputProps {
+  securityCode: string;
+  setSecurityCode: (securityCode: string) => void;
+}
+
+const SecurityCodeInput = ({
+  securityCode,
+  setSecurityCode,
+}: SecurityCodeInputProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +23,7 @@ const SecurityCodeInput = () => {
     }
     if (isOverLength(inputValue)) return;
 
-    setInput(inputValue.toUpperCase());
+    setSecurityCode(inputValue.toUpperCase());
     setErrorMessage('');
   };
 
@@ -31,7 +38,11 @@ const SecurityCodeInput = () => {
   return (
     <InputGroup labelValue={'보안 코드(CVC/CVV)'} errorMessage={errorMessage}>
       <InputBox width='100px' isError={!!errorMessage}>
-        <Input type='password' value={input} onChange={handleChangeInput} />
+        <Input
+          type='password'
+          value={securityCode}
+          onChange={handleChangeInput}
+        />
       </InputBox>
     </InputGroup>
   );

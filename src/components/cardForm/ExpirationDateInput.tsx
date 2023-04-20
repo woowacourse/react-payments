@@ -4,27 +4,34 @@ import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import InputSeparator from '../common/InputSeparator';
 
-const ExpirationDateInput = () => {
-  const [inputs, setInputs] = useState(['', '']);
+interface ExpirationDateInputProps {
+  expirationDate: string[];
+  setExpirationDate: (expirationDate: string[]) => void;
+}
+
+const ExpirationDateInput = ({
+  expirationDate,
+  setExpirationDate,
+}: ExpirationDateInputProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
 
   useEffect(() => {
-    if (!inputs[0].length && !inputs[1].length) return;
+    if (!expirationDate[0].length && !expirationDate[1].length) return;
 
-    if (inputs[0].length < 2 || inputs[1].length < 2) {
+    if (expirationDate[0].length < 2 || expirationDate[1].length < 2) {
       setErrorMessage('만료일은 MM/YY 형식으로 입력해주세요');
       return;
     }
 
-    if (inputs[0].length === 2 && !isValidMonth(inputs[0])) {
+    if (expirationDate[0].length === 2 && !isValidMonth(expirationDate[0])) {
       setErrorMessage('유효한 달을 입력해주세요');
       return;
     }
 
     setErrorMessage('');
-  }, [inputs]);
+  }, [expirationDate]);
 
   const handleChangeInput =
     (inputIndex: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,10 +43,10 @@ const ExpirationDateInput = () => {
       }
       if (isOverLength(inputValue)) return;
 
-      const newInputs = [...inputs];
+      const newInputs = [...expirationDate];
       newInputs[inputIndex] = inputValue;
 
-      setInputs(newInputs);
+      setExpirationDate(newInputs);
 
       if (isNextInputFocusable(inputValue, inputIndex)) {
         refs[inputIndex + 1].current?.focus();
@@ -68,7 +75,7 @@ const ExpirationDateInput = () => {
         <Input
           placeholder='MM'
           ref={refs[0]}
-          value={inputs[0]}
+          value={expirationDate[0]}
           onChange={handleChangeInput(0)}
         />
         <InputSeparator color='#737373' isActive>
@@ -77,7 +84,7 @@ const ExpirationDateInput = () => {
         <Input
           placeholder='YY'
           ref={refs[1]}
-          value={inputs[1]}
+          value={expirationDate[1]}
           onChange={handleChangeInput(1)}
         />
       </InputBox>

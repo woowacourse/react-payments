@@ -1,13 +1,9 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../common/Header';
 import { LeftArrowIcon } from '../../assets/icons';
 import CardItem from '../common/CardItem';
-import { Link } from 'react-router-dom';
-import CardNumberInput from '../inputs/CardNumberInput';
-import ExpirationDateInput from '../inputs/ExpirationDateInput';
-import NameInput from '../inputs/NameInput';
-import SecurityCodeInput from '../inputs/SecurityCodeInput';
-import PasswordInput from '../inputs/PasswordInput';
+import CardForm from '../cardForm/CardForm';
 
 const CardRegistrationPage = () => {
   return (
@@ -23,23 +19,10 @@ const CardRegistrationPage = () => {
       <CardItemContainer>
         <CardItem></CardItem>
       </CardItemContainer>
-      <FormContainer>
-        <CardNumberInput />
-        <ExpirationDateInput />
-        <NameInput />
-        <SecurityCodeInput />
-        <PasswordInput />
-      </FormContainer>
+      <CardForm />
     </>
   );
 };
-
-const FormContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 28px;
-`;
 
 const CardItemContainer = styled.section`
   display: flex;

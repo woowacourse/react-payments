@@ -4,8 +4,12 @@ import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import { useState } from 'react';
 
-const NameInput = () => {
-  const [input, setInput] = useState('');
+interface NameInputProps {
+  name: string;
+  setName: (name: string) => void;
+}
+
+const NameInput = ({ name, setName }: NameInputProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +24,7 @@ const NameInput = () => {
       return;
     }
 
-    setInput(inputValue.toUpperCase());
+    setName(inputValue.toUpperCase());
     setErrorMessage('');
   };
 
@@ -35,14 +39,14 @@ const NameInput = () => {
 
   return (
     <InputGroup
-      labelValue={<LabelValue length={input.length} />}
+      labelValue={<LabelValue length={name.length} />}
       errorMessage={errorMessage}
     >
       <InputBox isError={!!errorMessage}>
         <Input
           placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
           textAlign='start'
-          value={input}
+          value={name}
           onChange={handleChangeInput}
         />
       </InputBox>

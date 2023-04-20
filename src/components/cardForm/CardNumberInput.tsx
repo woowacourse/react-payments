@@ -4,8 +4,15 @@ import InputBox from '../common/InputBox';
 import InputGroup from '../common/InputGroup';
 import InputSeparator from '../common/InputSeparator';
 
-const CardNumberInput = () => {
-  const [inputs, setInputs] = useState(['', '', '', '']);
+interface CardNumberInputProps {
+  cardNumber: string[];
+  setCardNumber: (cardNumber: string[]) => void;
+}
+
+const CardNumberInput = ({
+  cardNumber,
+  setCardNumber,
+}: CardNumberInputProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const refs = [
@@ -27,10 +34,10 @@ const CardNumberInput = () => {
       if (isNextInputFocusable(inputValue, inputIndex))
         refs[inputIndex + 1].current?.focus();
 
-      const newInputs = [...inputs];
-      newInputs[inputIndex] = inputValue;
+      const newCardNumber = [...cardNumber];
+      newCardNumber[inputIndex] = inputValue;
 
-      setInputs(newInputs);
+      setCardNumber(newCardNumber);
       setErrorMessage('');
     };
 
@@ -51,26 +58,26 @@ const CardNumberInput = () => {
       <InputBox isError={!!errorMessage}>
         <Input
           ref={refs[0]}
-          value={inputs[0]}
+          value={cardNumber[0]}
           onChange={handleChangeInput(0)}
         />
-        <InputSeparator isActive={inputs[0].length === 4}>-</InputSeparator>
+        <InputSeparator isActive={cardNumber[0].length === 4}>-</InputSeparator>
         <Input
           ref={refs[1]}
-          value={inputs[1]}
+          value={cardNumber[1]}
           onChange={handleChangeInput(1)}
         />
-        <InputSeparator isActive={inputs[1].length === 4}>-</InputSeparator>
+        <InputSeparator isActive={cardNumber[1].length === 4}>-</InputSeparator>
         <Input
           ref={refs[2]}
-          value={inputs[2]}
+          value={cardNumber[2]}
           type='password'
           onChange={handleChangeInput(2)}
         />
-        <InputSeparator isActive={inputs[2].length === 4}>-</InputSeparator>
+        <InputSeparator isActive={cardNumber[2].length === 4}>-</InputSeparator>
         <Input
           ref={refs[3]}
-          value={inputs[3]}
+          value={cardNumber[3]}
           type='password'
           onChange={handleChangeInput(3)}
         />

@@ -5,8 +5,12 @@ import InputGroup from '../common/InputGroup';
 import { DotIcon } from '../../assets/icons';
 import { useState, useRef } from 'react';
 
-const PasswordInput = () => {
-  const [inputs, setInputs] = useState(['', '']);
+interface PasswordInputProps {
+  password: string[];
+  setPassword: (password: string[]) => void;
+}
+
+const PasswordInput = ({ password, setPassword }: PasswordInputProps) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const refs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
@@ -21,10 +25,10 @@ const PasswordInput = () => {
       }
       if (isOverLength(inputValue)) return;
 
-      const newInputs = [...inputs];
+      const newInputs = [...password];
       newInputs[inputIndex] = inputValue;
 
-      setInputs(newInputs);
+      setPassword(newInputs);
 
       if (isNextInputFocusable(inputValue, inputIndex)) {
         refs[inputIndex + 1].current?.focus();
@@ -50,7 +54,7 @@ const PasswordInput = () => {
           <Input
             type='password'
             ref={refs[0]}
-            value={inputs[0]}
+            value={password[0]}
             onChange={handleChangeInput(0)}
           ></Input>
         </InputBox>
@@ -58,7 +62,7 @@ const PasswordInput = () => {
           <Input
             type='password'
             ref={refs[1]}
-            value={inputs[1]}
+            value={password[1]}
             onChange={handleChangeInput(1)}
           ></Input>
         </InputBox>
