@@ -73,5 +73,5 @@
     "storybook": "^7.0.5",
     "webpack": "^5.79.0"
   },
-  "homepage": "https://suyoungj.github.io/react-payments/"
+  "homepage": "."
 }
