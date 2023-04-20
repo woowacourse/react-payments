@@ -1,5 +1,7 @@
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { MAX_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
+import { ValidateContext } from "../contexts/validate";
 import { useError } from "../hooks/useError";
 import { useInputPassword } from "../hooks/useInputPassword";
 import { validation } from "../validation";
@@ -9,6 +11,11 @@ import { InputBox } from "./common/InputBox";
 export function CardPassword() {
   const { password, handleChange } = useInputPassword();
   const { error, handleError } = useError();
+  const { valid, changeValid } = useContext(ValidateContext);
+
+  useEffect(() => {
+    changeValid("validPassword", error);
+  }, [password]);
 
   return (
     <Wrapper>
@@ -19,6 +26,7 @@ export function CardPassword() {
         {Object.keys(password).map((cardInput, _, original) => {
           return (
             <Input
+              key={cardInput}
               handleChange={handleChange}
               handleError={() =>
                 handleError(

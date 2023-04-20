@@ -1,5 +1,7 @@
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { MAX_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
+import { ValidateContext } from "../contexts/validate";
 import { useError } from "../hooks/useError";
 import { useInputCode } from "../hooks/useInputCode";
 import { validation } from "../validation";
@@ -10,6 +12,11 @@ import { InputBox } from "./common/InputBox";
 export function SecurityCode() {
   const { code, handleChange } = useInputCode();
   const { error, handleError } = useError();
+  const { valid, changeValid } = useContext(ValidateContext);
+
+  useEffect(() => {
+    changeValid("validCode", error);
+  }, [code]);
 
   return (
     <Wrapper>

@@ -1,5 +1,8 @@
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { MAX_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
+import { NameContext } from "../contexts/cardInfo";
+import { ValidateContext } from "../contexts/validate";
 import { useError } from "../hooks/useError";
 import { useInputName } from "../hooks/useInputName";
 import { validation } from "../validation";
@@ -8,8 +11,13 @@ import { Input } from "./common/Input";
 import { InputBox } from "./common/InputBox";
 
 export function UserName() {
-  const { userName, handleChange } = useInputName();
+  const { userName, handleChange } = useContext(NameContext);
   const { error, handleError } = useError();
+  const { valid, changeValid } = useContext(ValidateContext);
+
+  useEffect(() => {
+    changeValid("validName", error);
+  }, [userName]);
 
   return (
     <Wrapper>
