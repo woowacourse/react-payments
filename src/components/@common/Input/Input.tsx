@@ -4,107 +4,158 @@ import React, {
   PropsWithChildren,
   useContext,
   useState,
-  ReactElement,
-  ReactNode,
   Children,
   isValidElement,
   cloneElement,
-  HTMLAttributes,
   InputHTMLAttributes,
+  PropsWithRenderProps,
+  RenderProps,
+  ReactNode,
+  ReactElement,
+  useId,
+  RefObject,
+  useRef,
+  useEffect,
+  LabelHTMLAttributes,
 } from 'react';
-import * as Styled from './input.styles';
+import { getAllChildElement } from '../../../utils/jsx';
+import * as Styled from './Input.styles';
 
-export const getChildElement = (
-  children: ReactNode,
-  elementType: any
-): [ReactElement | null, ReturnType<typeof Children.toArray>] => {
-  let targetChild: [ReactElement] | null = null;
-  const childrenArray = Children.toArray(children);
-  const restChildren = childrenArray.filter((child) => {
-    if (isValidElement(child) && child.type === elementType) {
-      targetChild = targetChild ?? [child];
-      return false;
-    }
+interface InputContext {
+  id: string;
+  value: string;
+  onChange(e: ChangeEvent<HTMLInputElement>): void;
+}
 
-    return true;
-  });
+interface InputItemsContext {
+  itemMap: Map<string, { ref: RefObject<HTMLInputElement | null> }>;
+}
 
-  return [targetChild, restChildren];
-};
-
-const InputContext = createContext({
+const InputContext = createContext<InputContext>({
+  id: '',
   value: '',
-  onChange(e: ChangeEvent<HTMLInputElement>) {
-    //
-  },
+  onChange(e: ChangeEvent<HTMLInputElement>) {},
+});
+
+const InputItemsContext = createContext<InputItemsContext>({
+  itemMap: new Map(),
 });
 
 const useInputContext = () => useContext(InputContext);
+const useInputItemsContext = () => useContext(InputItemsContext);
+
+function InputItemsProvider({ children }: PropsWithChildren) {
+  const itemMap = useRef<InputItemsContext['itemMap']>(new Map()).current;
+
+  return (
+    <InputItemsContext.Provider value={{ itemMap }}>
+      {children}
+    </InputItemsContext.Provider>
+  );
+}
+
+function InputItem({ children }: PropsWithChildren) {
+  const { itemMap } = useInputItemsContext();
+  const childrenArray = Children.toArray(children);
+  const child = childrenArray[0];
+  const ref = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    itemMap.set('field', { ref });
+  }, []);
+
+  validateAsChild(childrenArray);
+
+  if (isValidElement<{ ref: RefObject<HTMLInputElement | null> }>(child)) {
+    return cloneElement(child, { ref });
+  }
+
+  throw new Error('Not valid element');
+}
 
 function Input(props: PropsWithChildren) {
   const { children } = props;
+  const id = useId();
   const [value, setValue] = useState<string>('');
-  const childrenArray = Children.toArray(children);
-
-  const [LabelComponent, labelRestChildren] = getChildElement(
-    children,
-    (<Label />).type
-  );
-
-  const [LimitComponent, limitRestChildren] = getChildElement(
-    labelRestChildren,
-    (<Limit limit={30} />).type
-  );
+  const FieldComponents = getAllChildElement(children, (<Field />).type);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
 
+  if (!FieldComponents) throw new Error('Must use at least 1 Field');
+  if (FieldComponents.length > 1) throw new Error('Must use only 1 Field');
+
   return (
     <InputContext.Provider
       value={{
+        id,
         value,
         onChange,
       }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        {LabelComponent && LabelComponent}
-        {LimitComponent && LimitComponent}
-      </div>
-      {limitRestChildren}
+      <InputItemsProvider>{children}</InputItemsProvider>
     </InputContext.Provider>
   );
 }
 
 interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
   asChild?: boolean;
+  onPatternMatch?(value: string): void;
+  onPatternMismatch?(value: string): void;
 }
 
 function Field(props: PropsWithChildren<FieldProps>) {
-  const { children, asChild = false, pattern = '', placeholder = '' } = props;
-  const { value, onChange } = useInputContext();
+  const {
+    asChild = false,
+    id: idProps,
+    children,
+    pattern,
+    onPatternMatch,
+    onPatternMismatch,
+    value: valueProps,
+    onChange: onChangeProps,
+    ...restProps
+  } = props;
+  const { id, value, onChange } = useInputContext();
   const childrenArray = Children.toArray(children);
+  const child = childrenArray[0];
 
-  if (asChild && childrenArray.length > 1)
-    throw new Error('자식은 하나만 어쩌구');
-  if (asChild && childrenArray.length === 0) throw new Error('자식은 필수');
+  const localOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange(e);
+    onChangeProps?.(e);
+  };
 
-  if (
-    asChild &&
-    isValidElement<{
-      onChange(e: ChangeEvent<HTMLInputElement>): void;
-      placeholder: string;
-      pattern: string;
-    }>(childrenArray[0])
-  ) {
-    return cloneElement(childrenArray[0], { onChange, placeholder, pattern });
+  if (asChild) validateAsChild(childrenArray);
+
+  if (pattern && new RegExp(pattern).test(value)) {
+    onPatternMatch?.(value);
+  }
+
+  if (pattern && !new RegExp(pattern).test(value)) {
+    onPatternMismatch?.(value);
+  }
+
+  if (asChild && isValidElement<InputContext & { pattern: string }>(child)) {
+    return (
+      <InputItem>
+        {cloneElement(child, {
+          onChange: localOnChange,
+          value: valueProps ? String(valueProps) : value,
+          id: idProps ? `${idProps}-${id}` : id,
+          pattern,
+          ...restProps,
+        })}
+      </InputItem>
+    );
   }
 
   return (
     <input
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
+      id={idProps ? `${idProps}-${id}` : id}
+      value={valueProps ?? value}
+      onChange={localOnChange}
       pattern={pattern}
+      {...restProps}
     />
   );
 }
@@ -113,39 +164,96 @@ function PinField() {
   return <input />;
 }
 
-function Label(props: PropsWithChildren) {
-  const { children } = props;
-  return <label>{children}</label>;
+interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
+  asChild?: boolean;
+}
+
+function Label(props: PropsWithChildren<LabelProps>) {
+  const { asChild = false, children, ...restProps } = props;
+  const { itemMap } = useInputItemsContext();
+  const [fieldId, setFieldId] = useState('');
+  const childrenArray = Children.toArray(children);
+  const child = childrenArray[0];
+
+  useEffect(() => {
+    const fieldItem = itemMap.get('field');
+
+    if (fieldItem && fieldItem.ref.current) {
+      setFieldId(fieldItem.ref.current.id);
+    }
+  }, [itemMap]);
+
+  if (asChild) validateAsChild(childrenArray);
+
+  if (asChild && isValidElement<{ htmlFor: string }>(child)) {
+    return cloneElement(child, {
+      ...restProps,
+      htmlFor: fieldId,
+    });
+  }
+
+  return (
+    <label htmlFor={fieldId} {...restProps}>
+      {children}
+    </label>
+  );
 }
 
 interface LimitProps {
   limit: number;
 }
 
-function Limit(props: PropsWithChildren<LimitProps>) {
-  const { limit } = props;
+interface LimitRenderProps {
+  value: InputContext['value'];
+  limit: LimitProps['limit'];
+}
+
+function Limit(props: PropsWithRenderProps<LimitProps, LimitRenderProps>) {
+  const { children, limit } = props;
   const { value } = useInputContext();
 
-  return (
-    <span>
-      {value.length ?? 0}/{limit}
-    </span>
-  );
+  const resolvedChildren = getResolvedChildren(children, {
+    value,
+    limit,
+  });
+
+  return <Styled.Limit>{resolvedChildren}</Styled.Limit>;
 }
 
-function Information() {
-  return <button></button>;
+interface MessageProps {
+  pattern: string | null;
+  onInvalid?(value: string): void;
 }
 
-function Message() {
-  return <div></div>;
+function Message(props: PropsWithChildren<MessageProps>) {
+  const { children, pattern, onInvalid } = props;
+  const { value } = useInputContext();
+
+  if (pattern && !new RegExp(pattern).test(value)) {
+    onInvalid?.(value);
+  }
+
+  return <div>{children}</div>;
 }
 
 Input.Field = Field;
 Input.PinField = PinField;
 Input.Label = Label;
 Input.Limit = Limit;
-Input.Information = Information;
 Input.Message = Message;
 
 export default Input;
+
+const validateAsChild = (
+  childrenArray: ReturnType<typeof Children.toArray>
+) => {
+  if (childrenArray.length > 1) throw new Error('자식은 하나만');
+  if (childrenArray.length === 0) throw new Error('자식은 필수');
+};
+
+const getResolvedChildren: <T>(
+  children: ReactNode | RenderProps<T>,
+  props: T
+) => ReactNode | ReactElement<T> = (children, props) => {
+  return typeof children === 'function' ? children(props) : children;
+};
