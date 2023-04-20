@@ -1,22 +1,12 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import * as T from 'types';
+import { convertSecuredCreditCard } from 'domains/creditCard';
 import * as S from './style';
 
 export type CreditCardProps = {
   fullFilled: boolean;
   creditCard: Pick<T.CreditCard, 'number' | 'expiry' | 'owner'>;
-};
-
-const convertSecuredCreditCard = (number: string) => {
-  const creditCardNumberLength = number.length;
-  const securedCreditNumber = creditCardNumberLength <= 8
-    ? number
-    : number.slice(0, 8) + '•'.repeat(number.length - 8);
-  return securedCreditNumber.split('').reduce((a, b, i) => {
-    a[Math.floor(i / 4)].push(b);
-    return a;
-  }, [[], [], [], []] as string[][]);
 };
 
 function CreditCard({ fullFilled, creditCard: { expiry, number, owner } }: CreditCardProps) {
