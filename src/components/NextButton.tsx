@@ -15,7 +15,6 @@ const Wrapper = styled.button<{ isDisable: boolean }>`
 `;
 
 export default function NextButton({ isDisable }: NextButtonProps) {
-  console.log(isDisable);
   return (
     <Wrapper isDisable={isDisable} disabled={isDisable}>
       다음
