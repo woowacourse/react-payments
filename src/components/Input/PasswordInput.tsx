@@ -2,7 +2,7 @@ import { Input } from 'components/common';
 import React, { ChangeEvent, ChangeEventHandler } from 'react';
 import { ValueAndOnChange } from './types';
 
-interface PasswordInputProps {
+export interface PasswordInputProps {
   first: ValueAndOnChange;
   second: ValueAndOnChange;
 }

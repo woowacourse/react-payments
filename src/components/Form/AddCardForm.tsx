@@ -6,7 +6,6 @@ import {
   CardNumberInputs,
 } from 'components/Input';
 import styled from 'styled-components';
-import { Label } from 'components/common';
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import { Container } from 'components/style/InputContainer';
 import CardDB from 'db/Cards';
@@ -15,13 +14,13 @@ import { ValueAndOnChange } from 'components/Input/types';
 import { CreditCard } from 'components/common/Card/CreditCard';
 import { useCardFormValid } from 'hooks/useCardFormValid';
 
-type Props = {
+export type AddCardFormProps = {
   onSubmit: () => void;
 };
 
 const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
 
-function AddCardForm({ onSubmit }: Props) {
+function AddCardForm({ onSubmit }: AddCardFormProps) {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
 
   const [month, setMonth] = useState('');
