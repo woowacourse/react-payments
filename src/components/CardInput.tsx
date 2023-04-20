@@ -19,7 +19,10 @@ const CardInput = (props: CardInputType) => {
     <CardInputWrapper
       id={props.id}
       placeholder={props.placeholder}
-      style={{ width: props.width }}
+      style={{
+        width: props.width,
+        marginRight: `${props.isSecured && "6px"}`,
+      }}
       value={props.value}
       type={props.isSecured ? "password" : "text"}
       autoFocus={props.isAutoFocus}

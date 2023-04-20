@@ -3,11 +3,21 @@ import { IcChip } from "../assets";
 import { CardType } from "../types";
 
 const Card = (props: CardType) => {
+  const cardNumberArray = props.cardNumber.replaceAll(" - ", " ").split(" ");
+
   return (
     <CardWrapper style={{ background: props.color }}>
       <img src={IcChip} alt="ic-chip" />
       <CardInfoWrapper>
-        <span>{props.cardNumber}</span>
+        <div>
+          {cardNumberArray.map((cardNumber, index) => {
+            return index > 1 ? (
+              <span style={{ letterSpacing: "-3px" }}>{cardNumber}</span>
+            ) : (
+              <span style={{ letterSpacing: "4px" }}>{cardNumber}</span>
+            );
+          })}
+        </div>
         <div>
           <span>{props.ownerName}</span>
           <span>{props.expiredDate}</span>
@@ -41,15 +51,20 @@ const CardInfoWrapper = styled.div`
   width: 100%;
   height: 55px;
 
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: white;
 
   padding: 8px 5px;
   box-sizing: border-box;
+
   & > div {
     display: flex;
     justify-content: space-between;
+
+    & > span {
+      font-weight: 900;
+    }
   }
 `;
 
