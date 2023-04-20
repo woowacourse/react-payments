@@ -13,6 +13,7 @@ import Input, { Focus } from '../Input';
 import TooltipButton from '../TooltipButton';
 
 import styles from './cardRegisterForm.module.css';
+import Tooltip from '../Tooltip';
 
 interface Props {
   registerCard: (card: any) => void;
@@ -68,40 +69,38 @@ const CardRegisterForm = ({ registerCard }: Props) => {
     return true;
   };
 
+  const autoFocusNextInput = (target: HTMLInputElement) => {
+    const { value, maxLength, tabIndex } = target;
+
+    if (tabIndex === inputRefs.length - 1) return;
+
+    if (value.length === maxLength) {
+      inputRefs[tabIndex + 1].current?.focus();
+    }
+  };
+
   const handleNumberChange = (
     event: ChangeEvent<HTMLInputElement>,
     setNumber: Dispatch<SetStateAction<string>>,
-    index: number,
   ) => {
-    const { value, maxLength } = event.target;
+    const { value } = event.target;
 
     if (isNotNumber(value)) return;
 
     setNumber(value);
 
-    if (value.length === maxLength) {
-      if (index === 9) {
-        return;
-      }
-
-      inputRefs[index + 1].current?.focus();
-    }
+    autoFocusNextInput(event.target);
   };
 
-  const handleOwnerChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    const { value, maxLength } = event.target;
+  const handleOwnerChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
 
     if (value.length === 1 && value === ' ') return;
     if (isNotAlphabet(value)) return;
 
     setOwner(value.toUpperCase());
 
-    if (value.length === maxLength) {
-      inputRefs[index + 1].current?.focus();
-    }
+    autoFocusNextInput(event.target);
   };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
@@ -145,9 +144,10 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={4}
               maxLength={4}
               required
+              tabIndex={0}
               autoFocus
               value={cardNumber1}
-              onChange={(e) => handleNumberChange(e, setCardNumber1, 0)}
+              onChange={(e) => handleNumberChange(e, setCardNumber1)}
               ref={inputRefs[0]}
             />
             <span>-</span>
@@ -156,8 +156,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={4}
               maxLength={4}
               required
+              tabIndex={1}
               value={cardNumber2}
-              onChange={(e) => handleNumberChange(e, setCardNumber2, 1)}
+              onChange={(e) => handleNumberChange(e, setCardNumber2)}
               ref={inputRefs[1]}
             />
             <span>-</span>
@@ -166,8 +167,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={4}
               maxLength={4}
               required
+              tabIndex={2}
               value={cardNumber3}
-              onChange={(e) => handleNumberChange(e, setCardNumber3, 2)}
+              onChange={(e) => handleNumberChange(e, setCardNumber3)}
               ref={inputRefs[2]}
             />
             <span>-</span>
@@ -176,8 +178,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={4}
               maxLength={4}
               required
+              tabIndex={3}
               value={cardNumber4}
-              onChange={(e) => handleNumberChange(e, setCardNumber4, 3)}
+              onChange={(e) => handleNumberChange(e, setCardNumber4)}
               ref={inputRefs[3]}
             />
           </div>
@@ -191,9 +194,10 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={2}
               maxLength={2}
               required
+              tabIndex={4}
               placeholder="MM"
               value={expiredMonth}
-              onChange={(e) => handleNumberChange(e, setExpiredMonth, 4)}
+              onChange={(e) => handleNumberChange(e, setExpiredMonth)}
               ref={inputRefs[4]}
             />
             <span>/</span>
@@ -202,9 +206,10 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={2}
               maxLength={2}
               required
+              tabIndex={5}
               placeholder="YY"
               value={expiredYear}
-              onChange={(e) => handleNumberChange(e, setExpiredYear, 5)}
+              onChange={(e) => handleNumberChange(e, setExpiredYear)}
               ref={inputRefs[5]}
             />
           </div>
@@ -217,8 +222,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               type="text"
               maxLength={30}
               placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+              tabIndex={6}
               value={owner}
-              onChange={(e) => handleOwnerChange(e, 6)}
+              onChange={(e) => handleOwnerChange(e)}
               ref={inputRefs[6]}
             />
           </div>
@@ -233,12 +239,15 @@ const CardRegisterForm = ({ registerCard }: Props) => {
                 minLength={3}
                 maxLength={3}
                 required
+                tabIndex={7}
                 value={cvc}
-                onChange={(e) => handleNumberChange(e, setCvc, 7)}
+                onChange={(e) => handleNumberChange(e, setCvc)}
                 ref={inputRefs[7]}
               />
             </div>
-            <TooltipButton />
+            <Tooltip>
+              <TooltipButton />
+            </Tooltip>
           </div>
         </label>
 
@@ -250,8 +259,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={1}
               maxLength={1}
               required
+              tabIndex={8}
               value={cardPassword1}
-              onChange={(e) => handleNumberChange(e, setCardPassword1, 8)}
+              onChange={(e) => handleNumberChange(e, setCardPassword1)}
               ref={inputRefs[8]}
             />
             <Input
@@ -259,8 +269,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               minLength={1}
               maxLength={1}
               required
+              tabIndex={9}
               value={cardPassword2}
-              onChange={(e) => handleNumberChange(e, setCardPassword2, 9)}
+              onChange={(e) => handleNumberChange(e, setCardPassword2)}
               ref={inputRefs[9]}
             />
             <p>﹒</p>
