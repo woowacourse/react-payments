@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { CardInfo } from '../../App';
 import { useState } from 'react';
 
+import Header from '../../components/Header/Header';
 import CardNumberInputBox from '../../components/CardNumberInputBox/CardNumberInputBox';
 import ExpirationDateInputBox from '../../components/ExpirationDateInputBox/ExpirationDateInputBox';
 import OwnerNameInputBox from '../../components/OwnerNameInputBox/OwnerNameInputBox';
@@ -40,8 +41,7 @@ const CardRegisterPage = ({ setCardList }: { setCardList: CallableFunction }) =>
 
   return (
     <>
-      {/* <Header /> */}
-      <CardPreview cardInfo={cardInfo} />
+      <CardPreview cardInfo={cardInfo} bgColor="#333333" />
       <styled.CardRegisterForm>
         <CardNumberInputBox numbers={cardInfo.numbers} setCardInfo={setCardInfo} />
         <ExpirationDateInputBox
