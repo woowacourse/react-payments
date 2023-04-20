@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useError } from "./useError";
 
 export function useInputNumber() {
   const [cardNumber, setCardNumber] = useState({

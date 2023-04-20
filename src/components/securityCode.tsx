@@ -1,11 +1,10 @@
 import { useContext, useEffect } from "react";
 import styled from "styled-components";
-import { MAX_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
+import { MAX_LENGTH } from "../constants/inputInfo";
 import { ValidateContext } from "../contexts/validate";
 import { useError } from "../hooks/useError";
 import { useInputCode } from "../hooks/useInputCode";
 import { validation } from "../validation";
-import { CountText } from "./common/countText";
 import { Input } from "./common/Input";
 import { InputBox } from "./common/InputBox";
 

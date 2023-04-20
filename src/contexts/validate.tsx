@@ -1,5 +1,4 @@
 import React, { createContext, useState } from "react";
-import { Validator } from "../type/validator";
 
 const initialValue: any = {
   validCardNumber: null,

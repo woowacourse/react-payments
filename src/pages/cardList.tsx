@@ -1,17 +1,11 @@
 import styled from "styled-components";
-
 import { useNavigate } from "react-router-dom";
-
-import { Card } from "../components/common/card";
-import { BackButton } from "../components/common/backButton";
 import { Header } from "../components/common/Header";
-
 import { getData } from "../utils/localStorage";
 import { useState } from "react";
 import { CardInfo, CardItem } from "../components/common/cardItem";
 
 export function CardList() {
-  // const cards = []; //card.length === 0 이면 h3 없어도 됨
   const [cards, setCards] = useState<CardInfo[]>(getData("cards"));
 
   const navigate = useNavigate();

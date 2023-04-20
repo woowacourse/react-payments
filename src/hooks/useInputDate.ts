@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useError } from "./useError";
+import { useState } from "react";
 
 export function useInputDate() {
   const [month, setMonth] = useState<string>("");
@@ -7,7 +6,6 @@ export function useInputDate() {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
-    //e.target.value = value.padStart(2, "0");
     if (name === "month") setMonth(value);
     else setYear(value);
   }

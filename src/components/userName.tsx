@@ -4,7 +4,6 @@ import { MAX_LENGTH, PLACEHOLDER } from "../constants/inputInfo";
 import { NameContext } from "../contexts/cardInfo";
 import { ValidateContext } from "../contexts/validate";
 import { useError } from "../hooks/useError";
-import { useInputName } from "../hooks/useInputName";
 import { validation } from "../validation";
 import { CountText } from "./common/countText";
 import { Input } from "./common/Input";

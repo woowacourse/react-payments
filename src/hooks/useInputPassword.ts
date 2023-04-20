@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useError } from "./useError";
+import { useState } from "react";
 
 export function useInputPassword() {
   const [password, setPassword] = useState({
