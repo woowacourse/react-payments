@@ -9,7 +9,7 @@ function App() {
   const [cards, setCards] = useState<CardType[]>([]);
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Home cards={cards} />}></Route>
