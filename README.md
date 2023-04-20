@@ -1,46 +1,78 @@
-# Getting Started with Create React App
+# 💳
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## FE 5기 레벨2 React 모바일 페이먼츠 애플리케이션
 
-## Available Scripts
+// 이미지가 올 자리
 
-In the project directory, you can run:
+<br>
 
-### `yarn start`
+### 🧑‍🤝‍🧑 페어 (페어 프로그래밍으로 개발)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<table>
+  <tr>
+    <td align="center" width="120px">
+      <a href="https://github.com/shackstack" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/57981252?v=4" alt="노아(김홍동) 프로필" />
+      </a>
+    </td>
+    <td align="center" width="120px">
+      <a href="https://github.com/gabrielyoon7" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/69189073?v=4" alt="가브리엘(윤주현) 프로필" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/nlom0218" target="_blank">
+        노아(김홍동)
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/gabrielyoon7" target="_blank">
+        가브리엘(윤주현) 
+      </a>
+    </td>
+  </tr>
+</table>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<br>
 
-### `yarn test`
+### 📝 실행 방법
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- <a href="https://gabrielyoon7.github.io/react-payments/">앱 바로 실행하기</a>
 
-### `yarn build`
+- 터미널에서 yarn 설치(`yarn`) 후 `yarn start` 커맨드로 앱을 실행할 수 있다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 🎯 기능 목록
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br>
 
-### `yarn eject`
+### 📝 필수 요구 사항
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- 카드 등록을 위한 form을 CDD로 구현한다.
+- Storybook으로 UI 컴포넌트 렌더링
+- REQUIREMENTS.md에 요구 사항 도출
+- 재사용 가능한 Component 작성
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### ✅ 프로그래밍 요구사항
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 이전 미션의 프로그래밍 요구사항은 기본으로 포함한다.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Readability
 
-## Learn More
+- custom hook을 이용여 재사용 가능한 기능을 추출한다.
+- 공통적으로 사용되는 UI 컴포넌트를 재사용 가능하게 구현한다.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Reusability
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 각 스토리에 명확한 이름을 지정하고, 스토리 이름을 통해 컴포넌트의 사용 사례를 쉽게 이해할 수 있도록 한다.
+- 변동 가능한 값에 대해 사용자가 직접 조작해볼 수 있게 하여 컴포넌트를 더욱 쉽게 이해할 수 있도록 한다.
+
+<br>
+
+---
+
+<a href="https://github.com/woowacourse">@woowacourse</a>
