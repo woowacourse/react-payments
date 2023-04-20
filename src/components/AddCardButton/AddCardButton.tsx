@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   color: #575757;
+  cursor: pointer;
 `;
 
 const Button = styled.button`

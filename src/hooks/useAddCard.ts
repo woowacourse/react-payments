@@ -17,7 +17,7 @@ const useAddCard = () => {
     0: '',
     1: '',
   });
-  const [isActive, setIsActive] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
     const { 0: expiredMonth, 1: expiredYear } = expiredDate;
@@ -34,10 +34,10 @@ const useAddCard = () => {
       !firstPassword ||
       !secondPassword
     ) {
-      setIsActive(false);
+      setDisabled(true);
       return;
     }
-    setIsActive(true);
+    setDisabled(false);
   }, [expiredDate, cardNumbers, securityCode, password]);
 
   return {
@@ -51,7 +51,7 @@ const useAddCard = () => {
     setSecurityCode,
     password,
     setPassword,
-    isActive,
+    disabled,
   };
 };
 
