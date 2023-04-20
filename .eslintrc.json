@@ -24,6 +24,7 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "react/require-default-props": "off",
     "import/no-extraneous-dependencies": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
