@@ -9,6 +9,11 @@ interface CardInfoType {
   };
   expireDate: string;
   ownerName: string;
+  securityCode: string;
+  password: {
+    first: string;
+    second: string;
+  };
 }
 const initialCardInfos = {
   cardNumbers: {
@@ -19,6 +24,11 @@ const initialCardInfos = {
   },
   expireDate: "",
   ownerName: "",
+  securityCode: "",
+  password: {
+    first: "",
+    second: "",
+  },
 };
 
 export const InputValuesContext = createContext<
