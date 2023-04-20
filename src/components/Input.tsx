@@ -19,6 +19,20 @@ type InputProps = {
 };
 
 const Input = ({ labelText, inputInfoList, children }: InputProps) => {
+  const inputRefs = Array(inputInfoList.length)
+    .fill(0)
+    .map(() => React.createRef<HTMLInputElement>());
+
+  const moveFocus = (e: ChangeEvent) => {
+    if (!(e.target instanceof HTMLInputElement)) return;
+
+    if (
+      e.target.value.length === e.target.maxLength &&
+      Number(e.target.dataset.id) + 1 < inputRefs.length
+    )
+      inputRefs[Number(e.target.dataset.id) + 1].current?.focus();
+  };
+
   return (
     <StyledInputWrapper>
       <StyledInputLabel>
@@ -44,7 +58,11 @@ const Input = ({ labelText, inputInfoList, children }: InputProps) => {
                   data-id={index}
                   value={value}
                   data-center={center}
-                  onChange={onChange}
+                  ref={inputRefs[index]}
+                  onChange={(e) => {
+                    moveFocus(e);
+                    onChange(e);
+                  }}
                 />
               );
             },
