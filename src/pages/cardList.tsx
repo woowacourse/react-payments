@@ -64,4 +64,6 @@ const Button = styled.button`
   height: 13.3rem;
 
   font-size: 3rem;
+
+  cursor: pointer;
 `;

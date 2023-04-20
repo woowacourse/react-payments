@@ -24,5 +24,5 @@ const Button = styled.img`
   top: 2rem;
   left: 2.4rem;
 
-  cursor: pot;
+  cursor: pointer;
 `;
