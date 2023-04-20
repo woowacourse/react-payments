@@ -10,17 +10,15 @@ const meta = {
 } satisfies Meta<typeof CardNumberInput>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
-export const CardNumber: Story = {
-  args: {
-    moveFocusToExpirationDate: () => {},
-    cardNumber: {
-      0: '',
-      1: '',
-      2: '',
-      3: '',
-    },
-    setCardNumber: () => {},
-  },
+export const CardNumber = () => {
+  const [cardNumber, setCardNumber] = useState({ 0: '', 1: '', 2: '', 3: '' });
+
+  return (
+    <CardNumberInput
+      moveFocusToExpirationDate={() => {}}
+      cardNumber={cardNumber}
+      setCardNumber={setCardNumber}
+    />
+  );
 };
