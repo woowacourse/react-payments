@@ -2,7 +2,10 @@
 
 ## FE 5기 레벨2 React 모바일 페이먼츠 애플리케이션
 
-// 이미지가 올 자리
+<img width="1704" alt="image" src="https://user-images.githubusercontent.com/69189073/233289234-b1d09ba3-58ea-4f64-9080-f846c5cbea67.png">
+
+<img width="856" alt="image" src="https://user-images.githubusercontent.com/69189073/233289025-58cbef02-efaa-4e25-b46e-3196cf751582.png">
+
 
 <br>
 
