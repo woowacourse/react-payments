@@ -14,7 +14,7 @@ function CardListPage({ cardList }: CardListPageProps) {
       <Header content="나의 카드" />
       <CardList cardList={cardList} />
       <Link to={'/add-card'}>
-        <Button className="add-button">카드 추가하기</Button>
+        <Button className="add-button center-hoz-item w-250">카드 추가하기</Button>
       </Link>
     </>
   );
