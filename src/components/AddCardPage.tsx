@@ -69,19 +69,36 @@ const NextButtonWrapper = styled.div`
 `;
 
 export default function AddCardPage({ onSubmit, onClick }: AddCardPageProps) {
-  const firstCardNumber = useInput("", "firstCardNumber");
-  const secondCardNumber = useInput("", "secondCardNumber");
-  const thirdCardNumber = useInput("", "thirdCardNumber");
-  const fourthCardNumber = useInput("", "fourthCardNumber");
+  const firstCardNumber = useInput("", { name: "firstCardNumber" });
+  const secondCardNumber = useInput("", { name: "secondCardNumber" });
+  const thirdCardNumber = useInput("", { name: "thirdCardNumber" });
+  const fourthCardNumber = useInput("", { name: "fourthCardNumber" });
 
-  const year = useInput("", "year");
-  const month = useInput("", "month");
+  const monthValidate = (month: string) => {
+    return Number(month) <= 12 && Number(month) >= 0;
+  };
 
-  const owner = useInput("", "owner");
-  const cvc = useInput("", "cvc");
+  const yearValidate = (year: string) => {
+    const currentYear = new Date().getFullYear();
+    return Number(year) >= 0;
+  };
 
-  const firstPassword = useInput("", "firstPassword");
-  const secondPassword = useInput("", "secondPassword");
+  const year = useInput("", {
+    name: "year",
+    validate: yearValidate,
+    errorMessage: "카드의 연도를 확인해주세요",
+  });
+  const month = useInput("", {
+    name: "month",
+    validate: monthValidate,
+    errorMessage: "카드의 달을 확인해주세요.",
+  });
+
+  const owner = useInput("", { name: "owner" });
+  const cvc = useInput("", { name: "cvc" });
+
+  const firstPassword = useInput("", { name: "firstPassword" });
+  const secondPassword = useInput("", { name: "secondPassword" });
 
   const [isOpenToolTip, setIsOpenToolTip] = useState(false);
 

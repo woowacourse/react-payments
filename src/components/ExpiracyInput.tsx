@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { UseInputProps } from "../hooks/useInput";
 import Input from "./Input";
+import ToolTip from "./ToolTip";
 
 interface ExpiracyInputProps {
   year: UseInputProps;
@@ -12,6 +13,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   background-color: #ecebf1;
   height: 45px;
   border-radius: 7px;
@@ -30,6 +32,7 @@ const Slash = styled.span`
   color: #737373;
 `;
 export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
+  console.log(year, month);
   return (
     <Wrapper>
       <InputWrapper>
@@ -56,6 +59,8 @@ export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
           {...year}
         />
       </InputWrapper>
+      {month.error && <ToolTip text={month.error} />}
+      {year.error && <ToolTip text={year.error} />}
     </Wrapper>
   );
 }
