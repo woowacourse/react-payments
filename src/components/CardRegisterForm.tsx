@@ -8,6 +8,7 @@ import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
 import CardPreview from "./CardPreview";
 import { getFormData } from "utils/formDataGetter";
 import { areValidInfo } from "validation";
+import Header from "./Header";
 
 const CardRegisterForm = () => {
   const [cardNumber, setCardNumber] = useState({
@@ -38,6 +39,8 @@ const CardRegisterForm = () => {
 
   return (
     <div>
+      <Header navigator={true} title="카드 추가" />
+
       <CardPreview cardNumber={cardNumber} date={date} name={name} />
 
       <form onSubmit={handleForm}>

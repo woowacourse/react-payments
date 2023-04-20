@@ -52,7 +52,7 @@ const S = {
     display: block;
     width: 24vw;
     height: 48px;
-    padding: 0 8vw;
+    padding: 0 4vw;
     background: var(--input-background);
     border-radius: 8px;
     font-size: 14px;

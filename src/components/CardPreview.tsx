@@ -47,7 +47,7 @@ const S = {
     width: 213px;
     height: 133px;
     padding: 0 15px;
-    margin: 30px auto 20px;
+    margin: 30px auto 26px;
     border-radius: 5px;
     font-size: 14px;
     background: var(--darken-color);
