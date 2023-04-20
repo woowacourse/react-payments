@@ -75,6 +75,8 @@ const CardNameContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  height: 13px;
+
   color: white;
   font-weight: 600;
   font-size: 10px;

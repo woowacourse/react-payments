@@ -90,6 +90,10 @@ const LabelContainer = styled.div`
 `;
 
 const OwnerNameStyle = css`
+  width: 100%;
+
   font-size: 18px;
   font-weight: 500;
+
+  letter-spacing: 1px;
 `;
