@@ -1,9 +1,12 @@
 import React, { MouseEvent } from "react";
 import styled from "styled-components";
+import { CardInfo } from "../types";
 import AddCardButton from "./AddCardButton";
+import Card from "./Card";
 
 interface HomePageProps {
-  onAddCardClick: (event: MouseEvent<HTMLElement>) => void;
+  cardList: CardInfo[];
+  onClick: (event: MouseEvent<HTMLElement>) => void;
 }
 
 const Page = styled.div`
@@ -33,16 +36,27 @@ const CardWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 46px;
   gap: 46px;
 `;
 
-export default function Homepage({ onAddCardClick }: HomePageProps) {
+export default function Homepage({ onClick, cardList }: HomePageProps) {
   return (
     <Page>
       <Title>보유카드</Title>
-      <AddInformation>새로운 카드를 등록해주세요.</AddInformation>
+      {cardList.length === 0 && (
+        <AddInformation>새로운 카드를 등록해주세요.</AddInformation>
+      )}
       <CardWrapper>
-        <AddCardButton onClick={onAddCardClick} />
+        {cardList.map((card, index) => (
+          <Card
+            key={`${card.owner}${index}`}
+            owner={card.owner}
+            cardNumberSet={Object.values(card.cardNumber)}
+            expiracy={`${card.expiracy.month}/${card.expiracy.year}`}
+          />
+        ))}
+        <AddCardButton onClick={onClick} />
       </CardWrapper>
     </Page>
   );
