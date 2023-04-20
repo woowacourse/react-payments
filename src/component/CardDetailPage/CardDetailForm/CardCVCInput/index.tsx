@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import St from "./styled";
 
-function CardCVCInput() {
+type CardCVCInputProps = {
+  changeCardCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  cardCVC: string;
+};
+function CardCVCInput({ changeCardCVC, cardCVC }: CardCVCInputProps) {
   return (
     <section>
       <St.Title>보안 코드(CVC/CVV)</St.Title>
@@ -9,8 +13,8 @@ function CardCVCInput() {
         <St.InputSection>
           <St.Input
             type="password"
-            inputMode="numeric"
-            maxLength={3}
+            value={cardCVC}
+            onInput={changeCardCVC}
           ></St.Input>
         </St.InputSection>
         <St.Button>?</St.Button>
