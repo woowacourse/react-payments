@@ -30,7 +30,8 @@ const SecurityCodeInput = ({
   };
 
   const isNotInputNumber = (inputValue: string) => {
-    return Number.isNaN(Number(inputValue));
+    const regex = /^\d{0,3}$/;
+    return !regex.test(inputValue);
   };
 
   const isOverLength = (inputValue: string) => {
