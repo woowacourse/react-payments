@@ -21,5 +21,5 @@ export const Input = styled.input<InputProps>`
   font-weight: 600;
   font-size: 18px;
   letter-spacing: 2px;
-  text-align: center;
+  text-align: ${(props) => props.center && 'center'};
 `;

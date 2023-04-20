@@ -48,8 +48,9 @@ const ExpirationDateInputBox = ({
                   name={key}
                   value={expirationDate[key]}
                   onChange={onChange}
-                  width="s"
                   type="text"
+                  width="s"
+                  center={true}
                   maxLength={2}
                   placeholder={index === 0 ? 'MM' : 'YY'}
                 />

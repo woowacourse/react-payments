@@ -49,8 +49,9 @@ const PasswordInputBox = ({
                 name={key}
                 value={password[key]}
                 onChange={onChange}
-                width="xs"
                 type="text"
+                width="xs"
+                center={true}
                 maxLength={1}
               />
             );

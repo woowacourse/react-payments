@@ -1,9 +1,22 @@
 import * as styled from './Input.styled';
-import { InputProps } from '../../types/props';
+// import { InputProps } from '../../types/props';
 import { useEffect, useRef } from 'react';
 
+export type width = 'xs' | 's' | 'm' | 'l' | 'xl';
+
+export interface InputProps {
+  value: string;
+  onChange: React.ChangeEventHandler;
+  width: width;
+  center?: boolean;
+  type: 'password' | 'number' | 'text';
+  maxLength: number;
+  name?: string;
+  placeholder?: string;
+}
+
 const Input = (props: InputProps) => {
-  const { value, onChange, width, type, name, placeholder, maxLength } = props;
+  const { value, onChange, width, type, center, name, placeholder, maxLength } = props;
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -21,6 +34,7 @@ const Input = (props: InputProps) => {
       name={name}
       value={value}
       onChange={onChange}
+      center={center}
       width={width}
       type={type}
       placeholder={placeholder}

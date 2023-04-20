@@ -47,8 +47,9 @@ const CardNumberInputBox = ({ setCardInfo, numbers }: CardNumberInputBoxProps) =
                   name={key}
                   value={numbers[key]}
                   onChange={onChange}
-                  width="l"
                   type={index < 2 ? 'text' : 'password'}
+                  width="l"
+                  center={true}
                   maxLength={4}
                 />
                 <styled.CardNumberDivision>

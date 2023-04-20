@@ -42,8 +42,9 @@ const OwnerNameInputBox = ({
           <Input
             value={ownerName}
             onChange={onChange}
-            width="xl"
             type="text"
+            center={false}
+            width="xl"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             maxLength={30}
           />
