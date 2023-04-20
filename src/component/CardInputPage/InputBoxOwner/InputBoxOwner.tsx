@@ -3,7 +3,13 @@ import Input from "../../common/Input";
 
 import "./inputBoxOwner.css";
 
-export default function InputBoxOwner() {
+interface Props {
+  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function InputBoxOwner(props: Props) {
+  const { setIsComplete } = props;
+
   const [nameLength, setNameLength] = useState(0);
 
   const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
@@ -14,6 +20,7 @@ export default function InputBoxOwner() {
 
     e.target.value = value.slice(0, 30);
 
+    setIsComplete(true);
     setNameLength(e.target.value.trim().length);
   };
 
