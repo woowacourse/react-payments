@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import FormLabel from "src/components/@common/FormLabel";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import { InputValuesContext } from "../Main";
+import { InputValuesContext } from "../InputValueContext";
 
 export interface CardNumberObj {
   first: string;

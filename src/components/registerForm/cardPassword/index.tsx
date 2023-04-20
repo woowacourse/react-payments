@@ -3,7 +3,7 @@ import Input from "src/components/@common/Input";
 import FormLabel from "src/components/@common/FormLabel";
 import { ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import styled, { css } from "styled-components";
-import { InputValuesContext } from "../Main";
+import { InputValuesContext } from "../InputValueContext";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 
 interface CardPasswordObj {

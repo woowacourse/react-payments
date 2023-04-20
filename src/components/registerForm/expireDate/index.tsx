@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import FormLabel from "src/components/@common/FormLabel";
 import { MMYY_REGEXP, ONLY_NUMBER_REGEXP } from "src/utils/regexp";
-import { InputValuesContext } from "../Main";
+import { InputValuesContext } from "../InputValueContext";
 
 function ExpireDate() {
   const [cardInput, setCardInput] = useContext(InputValuesContext);

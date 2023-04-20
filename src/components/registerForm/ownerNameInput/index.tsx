@@ -7,7 +7,7 @@ import {
   ONLY_ENG_AND_EMPTY_REGEXP,
 } from "src/utils/regexp";
 import styled, { css } from "styled-components";
-import { InputValuesContext } from "../Main";
+import { InputValuesContext } from "../InputValueContext";
 
 function OwnerNameInput() {
   const [cardInput, setCardInput] = useContext(InputValuesContext);

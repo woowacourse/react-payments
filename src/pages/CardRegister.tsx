@@ -2,7 +2,7 @@ import { useContext, useMemo, useState } from "react";
 import Card from "src/components/@common/Card";
 import Layout from "src/components/@common/Layout";
 import CardRegisterForm from "src/components/RegisterForm/CardRegisterForm";
-import { InputValuesContext } from "src/components/RegisterForm/Main";
+import { InputValuesContext } from "src/components/RegisterForm/InputValueContext";
 
 function CardRegister() {
   const [inputValueContext] = useContext(InputValuesContext);

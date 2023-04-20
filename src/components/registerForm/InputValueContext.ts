@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 
-interface CardInfoType {
+export interface CardInfoType {
   cardNumbers: {
     first: string;
     second: string;

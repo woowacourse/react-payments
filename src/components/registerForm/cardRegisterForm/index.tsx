@@ -5,7 +5,7 @@ import OwnerNameInput from "../OwnerNameInput";
 import SecurityCode from "../SecurityCode";
 import CardPassword from "../CardPassword";
 import styled from "styled-components";
-import { InputValuesContext } from "../Main";
+import { InputValuesContext } from "../InputValueContext";
 import useCardList from "src/hooks/useCardList";
 import { useNavigate } from "react-router-dom";
 
