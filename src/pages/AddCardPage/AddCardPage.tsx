@@ -12,11 +12,11 @@ import { useState } from "react";
 import { Card, CardExpirationDate, CardNumber, CardPassword } from "../../types";
 import { useNavigate } from "react-router-dom";
 import {
-  isCapitalAlphabetic,
   isNumeric,
   isFulfilledObject,
   isFulfilledString,
   isValidMonth,
+  isValidOwnerName,
 } from "../../validator/Validator";
 
 type AddCardPageProps = {
@@ -66,9 +66,12 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
   const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
 
-    if (!isCapitalAlphabetic(name)) return;
+    if (!isValidOwnerName(name)) {
+      alert("영문만 입력 가능합니다.");
+      return;
+    }
 
-    setOwnerName(name);
+    setOwnerName(name.toUpperCase());
   };
 
   const handleSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
