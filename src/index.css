@@ -49,3 +49,8 @@ a {
 .w-250 {
   width: 250px;
 }
+
+.hide {
+  opacity: 0;
+  pointer-events: none;
+}
