@@ -8,7 +8,7 @@ export const BackButton = ({ path }: Props) => {
   return (
     <Style.Wrapper
       onClick={() => {
-        window.location.href = path;
+        window.location.href = `${process.env.PUBLIC_URL}/${path}`;
       }}
     >
       <svg

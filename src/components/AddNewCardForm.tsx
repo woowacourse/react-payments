@@ -69,7 +69,7 @@ export const AddNewCardForm = () => {
           password,
         });
 
-        window.location.href = '/';
+        window.location.href = `${process.env.PUBLIC_URL}/`;
       }}
     >
       <CardViewer

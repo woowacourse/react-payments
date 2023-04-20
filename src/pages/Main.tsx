@@ -15,7 +15,9 @@ export const Main = () => {
           <Style.EmptyCardListWrapper>
             <Style.Caption>새로운 카드를 등록해주세요.</Style.Caption>
             <Style.AddCardButton
-              onClick={() => (window.location.href = '/register')}
+              onClick={() =>
+                (window.location.href = `${process.env.PUBLIC_URL}/register`)
+              }
             >
               +
             </Style.AddCardButton>
@@ -35,7 +37,9 @@ export const Main = () => {
         )}
         {cardList.length !== 0 && (
           <Style.AddCardButton
-            onClick={() => (window.location.href = '/register')}
+            onClick={() =>
+              (window.location.href = `${process.env.PUBLIC_URL}/register`)
+            }
           >
             +
           </Style.AddCardButton>
