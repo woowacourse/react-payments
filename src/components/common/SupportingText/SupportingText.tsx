@@ -6,7 +6,7 @@ interface SupportingTextProps {
 }
 
 function SupportingText({ message, isError = false }: SupportingTextProps) {
-  return <p className={`${styles.message} ${isError && styles.error}`}>{message}</p>;
+  return <p className={`${styles.message} ${isError ? styles.error : ''}`}>{message}</p>;
 }
 
 export default SupportingText;
