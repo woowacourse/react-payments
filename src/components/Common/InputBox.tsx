@@ -26,23 +26,20 @@ const InputBox = ({
   separator,
   isFullWidth = false,
 }: InputBoxProps) => {
-  const isInputValueString = typeof inputValues === 'string';
+  const onChangeInput = (type: string, index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (type === 'number' && isNaN(Number(e.target.value))) {
+      return;
+    }
 
-  const onChangeInput =
-    (type: string, index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (type === 'number' && isNaN(Number(e.target.value))) {
-        return;
-      }
+    if (typeof inputValues === 'string') {
+      setInputValues(e.target.value);
+      return;
+    }
 
-      if (isInputValueString) {
-        setInputValues(e.target.value);
-        return;
-      }
-
-      const newInputValues = inputValues.slice();
-      newInputValues[index] = e.target.value;
-      setInputValues(newInputValues);
-    };
+    const newInputValues = inputValues.slice();
+    newInputValues[index] = e.target.value;
+    setInputValues(newInputValues);
+  };
 
   return (
     <InputsBoxWrapper isFullWidth={isFullWidth} align={align}>
@@ -51,10 +48,10 @@ const InputBox = ({
           {index > 0 && <Separator>{separator}</Separator>}
           <Input
             type="text"
-            value={isInputValueString ? inputValues : inputValues[index]}
+            value={typeof inputValues === 'string' ? inputValues : inputValues[index]}
             onChange={onChangeInput(type, index)}
             placeholder={placeholder}
-            minLength={maxLength}
+            minLength={required ? maxLength : 0}
             maxLength={maxLength}
             align={align}
             textSecurity={textSecurity}
