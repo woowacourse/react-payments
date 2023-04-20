@@ -3,17 +3,8 @@ import Input from "src/components/@common/Input";
 import styled, { css } from "styled-components";
 import ErrorSpan from "src/components/@common/ErrorSpan";
 import FormLabel from "src/components/@common/FormLabel";
-import { ONLY_MONTH_REGEXP, ONLY_NUMBER_REGEXP } from "src/utils/regexp";
+import { MMYY_REGEXP, ONLY_NUMBER_REGEXP } from "src/utils/regexp";
 import { InputValuesContext } from "../Main";
-
-function isValidMonth(month: string) {
-  // 입력값이 문자열이 아니거나, 1월 ~ 12월이 아닐 경우 false를 반환
-  if (!ONLY_MONTH_REGEXP.test(month)) {
-    return false;
-  }
-  // 입력값이 1월 ~ 12월일 경우 true를 반환
-  return true;
-}
 
 function ExpireDate() {
   const [cardInput, setCardInput] = useContext(InputValuesContext);
@@ -32,8 +23,10 @@ function ExpireDate() {
 
     try {
       if (
-        date.length === 4 &&
-        (!isValidMonth(MM) || curYY > YY || (curYY === YY && curMM > MM))
+        value.length > 0 &&
+        (!MMYY_REGEXP.test(date) ||
+          curYY.slice(2) > YY ||
+          (curYY.slice(2) === YY && curMM > MM))
       ) {
         throw new Error();
       }
