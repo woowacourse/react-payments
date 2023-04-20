@@ -1,6 +1,7 @@
 {
   "name": "react-payments",
   "version": "0.1.0",
+  "homepage": "https://ashleysyheo.github.io/react-payments",
   "private": true,
   "dependencies": {
     "react": "^18.2.0",
