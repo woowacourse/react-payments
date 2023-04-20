@@ -79,6 +79,10 @@ const CardInfoArea = styled.div`
   font-size: 11px;
 `;
 
-const OwnerName = styled.p``;
+const OwnerName = styled.p`
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 
 const ExpireDate = styled.p``;
