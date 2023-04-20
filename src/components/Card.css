@@ -9,6 +9,7 @@
   color: white;
   font-size: 12px;
   font-weight: 500;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 }
 
 .card-track-1 {

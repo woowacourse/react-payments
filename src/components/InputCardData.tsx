@@ -8,11 +8,15 @@ export type InputProps = {
   name: string;
 };
 
-const InputCardData = ({ value, onChange, name }: InputProps) => {
+const InputCardData = ({ value, onChange, name, className }: InputProps) => {
   return (
-    <div>
-      <input className="input-box" value={value} onChange={onChange} name={name} required />
-    </div>
+    <input
+      className={`input-box ${className}`}
+      value={value}
+      onChange={onChange}
+      name={name}
+      required
+    />
   );
 };
 

@@ -2,7 +2,7 @@
   background-color: #e5e5e5;
   border-radius: 5px;
   width: 208px;
-  height: 123px;
+  padding: 49px 0;
   border: none;
   font-family: 'Roboto';
   font-style: normal;
@@ -13,10 +13,19 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-
   color: #575757;
 }
 
 .add-card-button:hover {
   cursor: pointer;
+}
+
+.add-card-page-body {
+  display: flex;
+  overflow-y: scroll;
+  flex-direction: column;
+  gap: 46px;
+  align-items: center;
+  justify-content: space-around;
+  margin: 36px 0;
 }

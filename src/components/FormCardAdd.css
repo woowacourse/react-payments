@@ -8,6 +8,51 @@
   display: flex;
   flex-direction: row-reverse;
 }
+.card-number-label {
+  color: #525252;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.card-number-input-container {
+  display: flex;
+  background-color: #ecebf1;
+  align-items: center;
+  padding: 5px;
+  border-radius: 7px;
+  font-size: 18px;
+}
+
+.card-number {
+  width: 40px;
+  text-align: center;
+  border: none;
+  background-color: #ecebf1;
+  height: 45px;
+  font-size: 18px;
+}
+
+.card-expired {
+  display: block;
+  text-align: center;
+  border: none;
+  background-color: #ecebf1;
+  width: 80px;
+  height: 45px;
+  border-radius: 7px;
+  font-size: 18px;
+}
+
+.card-owner {
+  display: block;
+  padding-left: 10px;
+  border: none;
+  background-color: #ecebf1;
+  height: 45px;
+  width: 100%;
+  font-size: 18px;
+  border-radius: 7px;
+}
 
 .card-owner-container-header {
   display: flex;

@@ -6,7 +6,7 @@ export type InputCardPasswordProps = {
   onChange: (e: React.ChangeEvent) => void;
   maxDataLength: number;
   minDataLength: number;
-  width: string;
+  passwordType: string;
   name?: string;
 };
 
@@ -15,23 +15,20 @@ const InputCardPassword = ({
   onChange,
   maxDataLength,
   minDataLength,
-  width,
+  passwordType,
   name,
 }: InputCardPasswordProps) => {
   return (
-    <div className="input-password-container">
-      <input
-        className="input-password"
-        type="password"
-        maxLength={maxDataLength}
-        minLength={minDataLength}
-        value={value}
-        onChange={onChange}
-        style={{ width }}
-        name={name}
-        required
-      />
-    </div>
+    <input
+      className={`input-password-container ${passwordType}`}
+      type="password"
+      maxLength={maxDataLength}
+      minLength={minDataLength}
+      value={value}
+      onChange={onChange}
+      name={name}
+      required
+    />
   );
 };
 

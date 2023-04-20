@@ -26,18 +26,20 @@ const CardListPage = () => {
       <Header>
         <h3>보유카드</h3>
       </Header>
-      {cardList.map((card: CardType) => (
-        <Card
-          key={card.id}
-          cardType={card.cardType}
-          cardNumber={card.cardNumber}
-          cardOwner={card.cardOwner}
-          expired={card.expired}
-        />
-      ))}
-      <button className="add-card-button" onClick={onAddButton}>
-        +
-      </button>
+      <div className="add-card-page-body">
+        {cardList.map((card: CardType) => (
+          <Card
+            key={card.id}
+            cardType={card.cardType}
+            cardNumber={card.cardNumber}
+            cardOwner={card.cardOwner}
+            expired={card.expired}
+          />
+        ))}
+        <button className="add-card-button" onClick={onAddButton}>
+          +
+        </button>
+      </div>
     </div>
   );
 };
