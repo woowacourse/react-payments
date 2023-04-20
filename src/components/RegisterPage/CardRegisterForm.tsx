@@ -9,8 +9,11 @@ import CardPreview from "./CardPreview";
 import { getFormData } from "utils/formDataGetter";
 import { areValidInfo } from "validation";
 import Header from "../Header";
+import { useNavigate } from "react-router-dom";
 
 const CardRegisterForm = () => {
+  const navigate = useNavigate();
+
   const [cardNumber, setCardNumber] = useState({
     number1: "",
     number2: "",
@@ -32,9 +35,13 @@ const CardRegisterForm = () => {
     if (!formData) return;
     const formDataObject = Object.fromEntries(formData);
 
-    areValidInfo(formDataObject)
-      ? localStorage.setItem("card", JSON.stringify(formDataObject))
-      : alert("값을 모두 입력해 주세요.");
+    if (areValidInfo(formDataObject)) {
+      localStorage.setItem("card", JSON.stringify(formDataObject));
+
+      navigate("/");
+    } else {
+      alert("값을 모두 입력해 주세요.");
+    }
   };
 
   return (
