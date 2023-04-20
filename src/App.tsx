@@ -4,9 +4,10 @@ import { Card, CardContext } from './context/CardContext';
 import AddCardPage from './pages/AddCardPage';
 
 import MyCardPage from './pages/MyCardPage';
+import { getLocalStorage } from './utils/localStorage';
 
 function App() {
-  const [cardList, setCardList] = useState<Card[]>([]);
+  const [cardList, setCardList] = useState<Card[]>(getLocalStorage('cardList') as Card[]);
 
   return (
     <CardContext.Provider value={{ cardList, setCardList }}>

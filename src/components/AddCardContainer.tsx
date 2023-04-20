@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import CardPreview from './CardPreview';
@@ -74,14 +74,9 @@ const AddCardContainer = () => {
     setCard((prev) => {
       return [...prev, { cardNumbers, cardExpirationDate, cardOwner, cardCVC, cardPWD }];
     });
-
     navigate('/');
     setExpirationError(false);
   };
-
-  useEffect(() => {
-    console.log(cardNumbers, cardExpirationDate, cardCVC, cardPWD, cardOwner);
-  }, [cardNumbers, cardExpirationDate, cardCVC, cardPWD, cardOwner]);
 
   return (
     <AddCardContainerWrapper>
