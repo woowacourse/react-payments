@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import CardNumberInput from "./FormInputs/CardNumberInput";
 import ExpirationDateInput from "./FormInputs/ExpirationDateInput";
 import NameInput from "./FormInputs/NameInput";
 import PasswordInput from "./FormInputs/PasswordInput";
 import SecurityCodeInput from "./FormInputs/SecurityCodeInput";
 import CardPreview from "./CardPreview";
+import { getFormData } from "utils/formDataGetter";
+import { areValidInfo } from "validation";
 
 const CardRegisterForm = () => {
   const [cardNumber, setCardNumber] = useState({
@@ -22,11 +24,23 @@ const CardRegisterForm = () => {
 
   const [name, setName] = useState("");
 
+  const handleForm = (event: FormEvent) => {
+    event.preventDefault();
+
+    const formData = getFormData(event.target);
+    if (!formData) return;
+    const formDataObject = Object.fromEntries(formData);
+
+    areValidInfo(formDataObject)
+      ? localStorage.setItem("card", JSON.stringify(formDataObject))
+      : alert("값을 모두 입력해 주세요.");
+  };
+
   return (
     <div>
       <CardPreview cardNumber={cardNumber} date={date} name={name} />
 
-      <form>
+      <form onSubmit={handleForm}>
         <CardNumberInput
           cardNumber={cardNumber}
           setCardNumber={setCardNumber}
