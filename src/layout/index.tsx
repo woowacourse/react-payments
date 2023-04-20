@@ -21,8 +21,6 @@ const Style = {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    background-color: #c8c8c8;
   `,
   ChildrenContainer: styled.div`
     width: max-content;
