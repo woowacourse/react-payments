@@ -1,5 +1,10 @@
 .container {
+  height: 80%;
   margin-bottom: 36px;
+  overflow: auto;
+}
+
+.listContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
