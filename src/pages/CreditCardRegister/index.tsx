@@ -40,8 +40,11 @@ function CreditCardRegister() {
 
   useEffect(() => {
     if (creditCardCVC === '') return setIsFullFilled(false);
+    if (creditCardCVC.length < 3) return setIsFullFilled(false);
     if (creditCardExpiry === '') return setIsFullFilled(false);
-    if (creditCardCVC === '') return setIsFullFilled(false);
+    if (creditCardExpiry.length < 5) return setIsFullFilled(false);
+    if (creditCardNumber === '') return setIsFullFilled(false);
+    if (creditCardNumber.length < 16) return setIsFullFilled(false);
     if (creditCardPassword.first === '' || creditCardPassword.second === '') return setIsFullFilled(false);
 
     return setIsFullFilled(true);
