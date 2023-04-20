@@ -71,6 +71,7 @@ const CardNumberWrapper = styled.ul`
   margin-left: 4px;
   letter-spacing: 1px;
   font-size: 14px;
+  height: 20px;
 `;
 
 const CardNumber = styled.li`
