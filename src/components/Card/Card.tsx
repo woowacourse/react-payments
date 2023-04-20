@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   font-size: 14px;
+  margin-bottom: 32px;
 `;
 
 const ChipWrapper = styled.div`

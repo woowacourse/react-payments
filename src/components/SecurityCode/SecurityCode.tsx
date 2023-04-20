@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   align-items: center;
   background: #ecebf1;
   border-radius: 7px;
+  margin-bottom: 20px;
 `;
 
 const QuestionButton = styled.button`
@@ -20,11 +21,12 @@ const QuestionButton = styled.button`
   border-radius: 50%;
   text-align: center;
   cursor: pointer;
+  tab
 `;
 
 const InputWrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: baseline;
 `;
 
 interface SecurityCodeProps {
@@ -58,7 +60,9 @@ const SecurityCode = ({ securityCode, setSecurityCode }: SecurityCodeProps) => {
             required={true}
           />
         </Wrapper>
-        <QuestionButton>?</QuestionButton>
+        <QuestionButton type="button" tabIndex={-1}>
+          ?
+        </QuestionButton>
       </InputWrapper>
     </>
   );

@@ -8,6 +8,13 @@ import { CardType } from '../types/Card';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import useAddCard from '../hooks/useAddCard';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 32px 0;
+`;
 
 interface SetCardsProps {
   cards: CardType[];
@@ -41,11 +48,13 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
 
   return (
     <form onSubmit={handleSetCards}>
-      <Card
-        cardNumbers={cardNumbers}
-        expiredDate={expiredDate}
-        cardOwnerName={cardOwnerName}
-      ></Card>
+      <Wrapper>
+        <Card
+          cardNumbers={cardNumbers}
+          expiredDate={expiredDate}
+          cardOwnerName={cardOwnerName}
+        />
+      </Wrapper>
       <CardNumbers cardNumbers={cardNumbers} setCardNumbers={setCardNumbers} />
       <ExpiredDate expiredDate={expiredDate} setExpiredDate={setExpiredDate} />
       <CardOwnerName

@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   align-items: center;
   background: #ecebf1;
   border-radius: 7px;
+  margin-bottom: 20px;
 `;
 
 const Pargraph = styled.p`

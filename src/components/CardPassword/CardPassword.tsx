@@ -9,11 +9,12 @@ const Wrapper = styled.div`
   align-items: center;
   background: #ecebf1;
   border-radius: 7px;
+  margin-bottom: 20px;
 `;
 
 const PasswordInputWrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: baseline;
 
   > * {
     width: 45px;
