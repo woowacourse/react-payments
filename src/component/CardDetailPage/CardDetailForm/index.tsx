@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import CardNumberInput from "./CardNumberInput";
 import CardDateInput from "./CardDateInput";
