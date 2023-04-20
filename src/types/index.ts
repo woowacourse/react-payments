@@ -5,10 +5,9 @@ export type CardNumber = {
   fourthGroup: string;
 };
 
-export type CardExpirationDate = {
-  month: string;
-  year: string;
-};
+export type CardExpirationDateKey = "month" | "year";
+
+export type CardExpirationDate = Record<CardExpirationDateKey, string>;
 
 export type Card = {
   cardNumber: CardNumber;

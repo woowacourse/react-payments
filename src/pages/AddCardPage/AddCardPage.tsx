@@ -48,6 +48,8 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
     const value = e.target.value;
     const dateType = e.target.name;
 
+    if (!isNumeric(value)) return;
+
     setExpirationDate({ ...expirationDate, [dateType]: value });
   };
 
