@@ -1,37 +1,45 @@
+import { ChangeEvent } from 'react';
+import { CardInputValidation } from '../../../types';
 import Input from '../../common/Input/Input';
 import InputContainer from '../../common/InputContainer/InputContainer';
-import { CardInputValidation } from '../../../types';
-import { useInputContainer } from '../../../hooks/useInputContainer';
-import { formatNumberInput } from '../../../utils/formatter';
+import { useError } from '../../../hooks/useError';
+import validator from '../../../utils/validator';
 
 interface CardSecurityCodeProps {
-  validator: (input: string) => boolean;
-  onValidation: (key: keyof CardInputValidation, value: boolean) => void;
+  handleValidationChange: (key: keyof CardInputValidation, value: boolean) => void;
+  onChange: ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
 }
 
-function CardSecurityCode({ validator, onValidation }: CardSecurityCodeProps) {
-  const { inputValue, handleInputChange, isError, handleInputBlur } = useInputContainer({
-    formatter: formatNumberInput,
-    validator,
-    onValidation,
+function CardSecurityCode({ handleValidationChange, onChange, value }: CardSecurityCodeProps) {
+  const [isError, onErrorBlur] = useError({
+    validator: validator.securityCode,
+    handleValidationChange,
   });
 
   return (
     <InputContainer
       label="보안 코드 (CVC/CVV)"
-      id="security-code"
-      supportingText="카드 뒷면의 CVC 번호 3자리 숫자를 입력해주세요"
+      id="securityCode"
+      supportingText={
+        isError
+          ? '카드에 표시된 CVC/CVV 번호와 동일하게 입력해주세요'
+          : '카드 뒷면의 CVC 번호 3자리 숫자를 입력해주세요'
+      }
+      isError={isError}
+      required
     >
       <Input
         type="password"
-        id="security-code"
-        value={inputValue}
+        id="securityCode"
+        data-name="securityCode"
+        value={value}
         minLength={3}
         maxLength={4}
         isError={isError}
         autoComplete="off"
-        onChange={handleInputChange}
-        onBlur={handleInputBlur}
+        onChange={onChange}
+        onBlur={onErrorBlur}
       />
     </InputContainer>
   );
