@@ -1,37 +1,31 @@
 import styled from "styled-components";
 
-interface CardInfo {
-  cardNumber: {
-    number1: string;
-    number2: string;
-    number3: string;
-    number4: string;
-  };
-
-  date: {
-    month: string;
-    year: string;
-  };
-
+interface Props {
+  number1: string;
+  number2: string;
+  number3: string;
+  number4: string;
+  month: string;
+  year: string;
   name: string;
 }
 
-const CardPreview = ({ cardNumber, date, name }: CardInfo) => {
+const CardPreview = ({ cardInfo }: { cardInfo: Props }) => {
   return (
     <S.Card>
       <S.Chip />
       <S.CardInfo>
         <S.Numbers>
-          <S.Span>{cardNumber.number1}</S.Span>
-          <S.Span>{cardNumber.number2}</S.Span>
-          <S.Secret>{cardNumber.number3.replaceAll(/[0-9]/gi, "ㆍ")}</S.Secret>
-          <S.Secret>{cardNumber.number4.replaceAll(/[0-9]/gi, "ㆍ")}</S.Secret>
+          <S.Span>{cardInfo.number1}</S.Span>
+          <S.Span>{cardInfo.number2}</S.Span>
+          <S.Secret>{cardInfo.number3.replaceAll(/[0-9]/gi, "ㆍ")}</S.Secret>
+          <S.Secret>{cardInfo.number4.replaceAll(/[0-9]/gi, "ㆍ")}</S.Secret>
         </S.Numbers>
         <S.Wrapper>
-          <p>{name}</p>
-          <S.Date>{`${date.month} ${date.month.length === 2 ? "/" : ""} ${
-            date.year
-          }`}</S.Date>
+          <p>{cardInfo.name}</p>
+          <S.Date>{`${cardInfo.month} ${
+            cardInfo.month.length === 2 ? "/" : ""
+          } ${cardInfo.year}`}</S.Date>
         </S.Wrapper>
       </S.CardInfo>
     </S.Card>

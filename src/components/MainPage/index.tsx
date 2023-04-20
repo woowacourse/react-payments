@@ -1,4 +1,5 @@
 import Header from "components/Header";
+import CardPreview from "components/RegisterPage/CardPreview";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -9,11 +10,17 @@ const MainPage = () => {
     navigate("/register");
   };
 
+  const getCards = localStorage.getItem("card");
+  const cardInfoObject = JSON.parse(getCards as string);
+
   return (
     <div>
       <Header navigator={false} title="보유카드" />
-      <S.Message>새로운 카드를 등록해 주세요.</S.Message>
-      <S.Button onClick= {goToRegister}>+</S.Button>
+
+      {cardInfoObject && <CardPreview cardInfo={cardInfoObject}></CardPreview>}
+
+      {!cardInfoObject && <S.Message>새로운 카드를 등록해 주세요.</S.Message>}
+      <S.Button onClick={goToRegister}>+</S.Button>
     </div>
   );
 };
@@ -26,6 +33,7 @@ const S = {
   Button: styled.button`
     width: 208px;
     height: 123px;
+    font-size: 34px;
     background: #e5e5e5;
     border-radius: 5px;
     cursor: pointer;

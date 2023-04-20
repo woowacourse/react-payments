@@ -28,6 +28,8 @@ const CardRegisterForm = () => {
 
   const [name, setName] = useState("");
 
+  const cardInfo = { ...cardNumber, ...date, name };
+
   const handleForm = (event: FormEvent) => {
     event.preventDefault();
 
@@ -48,7 +50,7 @@ const CardRegisterForm = () => {
     <div>
       <Header navigator={true} title="카드 추가" />
 
-      <CardPreview cardNumber={cardNumber} date={date} name={name} />
+      <CardPreview cardInfo={cardInfo} />
 
       <form onSubmit={handleForm}>
         <CardNumberInput
