@@ -26,6 +26,8 @@ const ContentContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  padding: 20px 0;
 `;
 
 export default CardListPage;
