@@ -1,32 +1,38 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { Card } from '../types';
 import Header from '../components/common/Header/Header';
 import CardItem from '../components/CardItem/CardItem';
 import CardAddForm from '../components/CardAddForm/CardAddForm';
+import { useCardAddition } from '../hooks/useCardAddition';
 
 interface CardAddPageProps {
   addCard: Dispatch<SetStateAction<Card[]>>;
 }
 
-const initialCardInformation: Card = {
-  number: ['', '', '', ''],
-  expirationDate: {
-    month: '',
-    year: '',
-  },
-  ownerName: '',
-  securityCode: '',
-  password: ['', ''],
-};
-
 function CardAddPage({ addCard }: CardAddPageProps) {
-  const [cardInformation, setCardInformation] = useState(initialCardInformation);
+  const {
+    cardInformation,
+    onCardNumberChange,
+    onOwnerNameChange,
+    onExpirationDateChange,
+    onSecurityCodeChange,
+    onPasswordChange,
+    onCardInformationSubmit,
+  } = useCardAddition(addCard);
 
   return (
     <>
       <Header content="카드 추가" isOverlayPage={true} />
-      <CardItem className="mg-b-24" information={cardInformation} />
-      <CardAddForm onChange={setCardInformation} onSubmit={addCard} />
+      <CardItem className="mg-b-24 center-hoz-item" information={cardInformation} />
+      <CardAddForm
+        cardInformation={cardInformation}
+        onCardNumberChange={onCardNumberChange}
+        onOwnerNameChange={onOwnerNameChange}
+        onExpirationDateChange={onExpirationDateChange}
+        onSecurityCodeChange={onSecurityCodeChange}
+        onPasswordChange={onPasswordChange}
+        onCardInformationSubmit={onCardInformationSubmit}
+      />
     </>
   );
 }
