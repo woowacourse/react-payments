@@ -2,6 +2,7 @@ import { Container } from "../common/Container";
 import { Input } from "../common/Input";
 import { InputLabel } from "../common/InputLabel";
 import styled from "styled-components";
+import { useState } from "react";
 
 const passwordInfo = {
   width: "43px",
@@ -11,10 +12,22 @@ const passwordInfo = {
 };
 
 export const PasswordInput = () => {
+  const [isCompleted, setIsCompleted] = useState(true);
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 1 || !/\d$/.test(e.target.value)) {
       e.target.value = e.target.value.slice(0, -1);
       return;
+    }
+  };
+
+  const handleOutFocusEvent = (e: any) => {
+    const value = e.target.value;
+
+    setIsCompleted(false);
+
+    if (value.length === 1) {
+      setIsCompleted(true);
     }
   };
 
@@ -23,17 +36,20 @@ export const PasswordInput = () => {
       <InputLabel text="비밀번호" name="password" />
       <Row>
         <Input
-          error={{ isValid: true, errorMessage: "" }}
+          error={{
+            isValid: isCompleted,
+            errorMessage: "비밀번호를 입력하세요.",
+          }}
           {...passwordInfo}
           handleInput={handleInput}
-          handleChange={(e) => {}}
+          handleChange={handleOutFocusEvent}
           label="password1"
         />
         <Input
           error={{ isValid: true, errorMessage: "" }}
           {...passwordInfo}
           handleInput={handleInput}
-          handleChange={(e) => {}}
+          handleChange={handleOutFocusEvent}
           label="password2"
         />
         <HiddenPassword>●</HiddenPassword>
