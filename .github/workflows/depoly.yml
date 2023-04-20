@@ -2,7 +2,7 @@ name: NodeJS with Webpack
 
 on:
   push:
-    branches: [step1] // step1이 푸쉬되면 자동으로 반영
+    branches: [step1]
 
 jobs:
   deploy:
@@ -20,9 +20,9 @@ jobs:
 
       - run: |
           npm ci
-          npm run build // 빌드 명령어
+          npm run build
       - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-          publish_branch: step1-page // 반영되는 브랜치명
+          publish_branch: step1-page
