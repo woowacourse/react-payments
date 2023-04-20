@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as S from './style';
 
 export type InputProps<T> = {
-  type: 'string' | 'number' | 'date' | 'datetime';
+  type: 'string' | 'number' | 'date' | 'datetime' | 'password';
   value: T,
   width: string,
   textAlign: 'center' | 'start',
   placeholder?: string,
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
   onClick?: () => void,
 };
 
@@ -28,3 +29,7 @@ function Input<T extends InputValueType>({
   );
 }
 export default Input;
+
+Input.defaultProps = {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => { }
+};

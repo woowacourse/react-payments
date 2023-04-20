@@ -39,9 +39,13 @@ export const Box = styled.div`
     position: relative;
 `;
 
-export const FlexBox = styled.div`
+type FlexBoxProps = {
+  justifyContent: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
+};
+
+export const FlexBox = styled.div<FlexBoxProps>`
     display: flex;
-    justify-content: space-between;
+    justify-content: ${(props) => props.justifyContent};
 `;
 
 export const CreditCardRegisterLabel = styled.div`
@@ -66,4 +70,15 @@ export const HiddentInput = styled.input`
     top: 50%;
     left: 0;
     right: 0;
+`;
+
+export const PasswordBox = styled.div`
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ECEBF1;
+    border-radius: 7px;
 `;

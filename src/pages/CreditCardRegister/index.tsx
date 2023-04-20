@@ -28,13 +28,17 @@ function CreditCardRegister() {
 
   const [creditCardNumber, setCreditCardNumber] = useState('');
   const handleChangeCreditCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const markedNumber = convertSecuredCreditCard(event.target.value)
+    const newCreditCarNumber = event.target.value;
+
+    if (newCreditCarNumber.length > 16) return;
+
+    const markedNumber = convertSecuredCreditCard(newCreditCarNumber)
       .filter((numbers) => !!numbers.length)
       .map((numbers) => numbers.join(''))
       .join(' - ');
 
     setMarkedCreditCardNumber(markedNumber);
-    setCreditCardNumber(event.target.value);
+    setCreditCardNumber(newCreditCarNumber);
   };
 
   const [creditCardExpiry, setCreditCardExpiry] = useState('');
@@ -59,16 +63,25 @@ function CreditCardRegister() {
 
   const [creditCardCVC, setCreditCardCVC] = useState('');
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCreditCardCVC(event.target.value);
+    const newCVC = event.target.value;
+    if (newCVC.length <= 3) {
+      setCreditCardCVC(newCVC);
+    }
   };
 
   const [creditCardPassword, setCreditCardPassword] = useState<CreditCardPasswordType>({ first: '', second: '' });
   const handleChangeCreditCardFirstPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCreditCardPassword({ ...creditCardPassword, first: event.target.value });
+    const newFirstPassword = event.target.value;
+    if (newFirstPassword.length <= 1) {
+      setCreditCardPassword({ ...creditCardPassword, first: event.target.value });
+    }
   };
 
   const handleChangeCreditCardSecondPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCreditCardPassword({ ...creditCardPassword, second: event.target.value });
+    const newSecondPassword = event.target.value;
+    if (newSecondPassword.length <= 1) {
+      setCreditCardPassword({ ...creditCardPassword, second: event.target.value });
+    }
   };
 
   const [isFullFilled, setIsFullFilled] = useState(false);
@@ -124,7 +137,7 @@ function CreditCardRegister() {
           <Input placeholder="MM /YY" type="string" value={creditCardExpiry} width="40%" textAlign="center" onChange={handleChangeCreditCardExpiry} />
         </S.Box>
         <S.Box>
-          <S.FlexBox>
+          <S.FlexBox justifyContent="space-between">
             <S.CreditCardRegisterLabel>카드 소유자 이름 (선택)</S.CreditCardRegisterLabel>
             <S.CreditCardRegisterLabel>
               {creditCardOwner.length}
@@ -135,14 +148,16 @@ function CreditCardRegister() {
         </S.Box>
         <S.Box>
           <S.CreditCardRegisterLabel>보안 코드(CVC/CVV)</S.CreditCardRegisterLabel>
-          <Input type="string" value={creditCardCVC} width="72px" textAlign="center" onChange={handleChangeCreditCardCVC} />
+          <Input type="password" value={creditCardCVC} width="72px" textAlign="center" onChange={handleChangeCreditCardCVC} />
         </S.Box>
         <S.Box>
           <S.CreditCardRegisterLabel>카드 비밀번호</S.CreditCardRegisterLabel>
-          <Input type="string" value={creditCardPassword?.first} width="48px" textAlign="center" onChange={handleChangeCreditCardFirstPassword} />
-          <Input type="string" value={creditCardPassword?.second} width="48px" textAlign="center" onChange={handleChangeCreditCardSecondPassword} />
-          <Input type="string" value="*" width="48px" textAlign="center" onChange={() => { }} />
-          <Input type="string" value="*" width="48px" textAlign="center" onChange={() => { }} />
+          <S.FlexBox justifyContent="flex-start">
+            <Input type="password" value={creditCardPassword?.first} width="48px" textAlign="center" onChange={handleChangeCreditCardFirstPassword} />
+            <Input type="password" value={creditCardPassword?.second} width="48px" textAlign="center" onChange={handleChangeCreditCardSecondPassword} />
+            <S.PasswordBox>•</S.PasswordBox>
+            <S.PasswordBox>•</S.PasswordBox>
+          </S.FlexBox>
         </S.Box>
         <S.ButtonWrapper>
           <S.ResigerButton disabled={!isFullFilled} type="submit" onClick={() => navigate('/')}>확인</S.ResigerButton>
