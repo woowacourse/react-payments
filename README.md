@@ -24,33 +24,56 @@
 
 ## 디렉토리 구조
 
-├── public
-│
-├── src
-│ ├── components
-│ │ ├── Header
-│ │ ├── InputBox
-│ │ ├── Card
-│ │ ├── AddCardButton
-│ │ └── Footer
-│ │
-│ ├── pages
-│ │ ├── CardList
-│ │ └── AddCard
-│ │
-│ ├── assets
-│ │
-│ ├── hooks
-│ │
-│ ├── style
-│ │ ├── globalStyle
-│ │ ├── style.d.ts
-│ │ └── theme
-│ ├── constants
-│ ├── type
-│ └── utils
-│  
-│
-├── App
-├── index
-└── Router
+```
+📦src
+ ┣ 📂components
+ ┃ ┣ 📂common
+ ┃ ┃ ┣ 📜backButton.tsx
+ ┃ ┃ ┣ 📜card.tsx
+ ┃ ┃ ┣ 📜cardItem.tsx
+ ┃ ┃ ┣ 📜countText.tsx
+ ┃ ┃ ┣ 📜Header.tsx
+ ┃ ┃ ┣ 📜Input.tsx
+ ┃ ┃ ┗ 📜InputBox.tsx
+ ┃ ┣ 📜addCardForm.tsx
+ ┃ ┣ 📜cardNumber.tsx
+ ┃ ┣ 📜cardPassword.tsx
+ ┃ ┣ 📜expiredDate.tsx
+ ┃ ┣ 📜index.tsx
+ ┃ ┣ 📜securityCode.tsx
+ ┃ ┗ 📜userName.tsx
+ ┣ 📂constants
+ ┃ ┣ 📜errors.ts
+ ┃ ┣ 📜index.ts
+ ┃ ┗ 📜inputInfo.ts
+ ┣ 📂contexts
+ ┃ ┣ 📜cardInfo.tsx
+ ┃ ┗ 📜validate.tsx
+ ┣ 📂hooks
+ ┃ ┣ 📜useCountText.ts
+ ┃ ┣ 📜useError.ts
+ ┃ ┣ 📜useInputCode.ts
+ ┃ ┣ 📜useInputDate.ts
+ ┃ ┣ 📜useInputName.ts
+ ┃ ┣ 📜useInputNumber.ts
+ ┃ ┗ 📜useInputPassword.ts
+ ┣ 📂pages
+ ┃ ┣ 📜addCard.tsx
+ ┃ ┗ 📜cardList.tsx
+ ┣ 📂stories
+ ┃ ┗ 📜NameInput.stories.tsx
+ ┣ 📂styles
+ ┃ ┣ 📜global-style.ts
+ ┃ ┗ 📜variables.js
+ ┣ 📂type
+ ┃ ┣ 📜input.ts
+ ┃ ┗ 📜validator.ts
+ ┣ 📂utils
+ ┃ ┣ 📜formData.ts
+ ┃ ┗ 📜localStorage.ts
+ ┣ 📂validation
+ ┃ ┗ 📜index.ts
+ ┣ 📜App.tsx
+ ┣ 📜index.tsx
+ ┗ 📜react-app-env.d.ts
+```
