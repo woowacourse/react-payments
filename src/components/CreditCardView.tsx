@@ -35,32 +35,42 @@ const CardNumber = styled.div`
   display: flex;
   gap: 10px;
   letter-spacing: 2px;
+
+  height: 12px;
 `;
 
 const CardAdditionalInfo = styled.div`
   display: flex;
   justify-content: space-between;
+
+  height: 12px;
 `;
 
 export const CreditCardView = (props: CreditCardViewProps) => {
   const { name, cardNumbers, expirationDate } = props;
-  const partialCardNumbers = /(\d{4})(\d{4})(\d{4})(\d{4})/.exec(cardNumbers)!.slice(1, 3);
+
+  const getPartialCardNumber = (index: number) => {
+    const partialCardNumber = cardNumbers.slice(index * 4, (index + 1) * 4);
+
+    return [0, 1].includes(index) ? partialCardNumber : partialCardNumber.replaceAll(/\d/g, '•');
+  };
+
+  const partialCardNumbers = [0, 1, 2, 3].map(getPartialCardNumber);
 
   return (
     <StyledCreditCardView>
       <ICChip />
       <CardNumber>
-        {partialCardNumbers.map((partialCardNumber) => (
-          <Text size="small" key={partialCardNumber}>
+        {partialCardNumbers.map((partialCardNumber, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Text size="small" key={index}>
             {partialCardNumber}
           </Text>
         ))}
-        <Text size="small">••••</Text>
-        <Text size="small">••••</Text>
       </CardNumber>
       <CardAdditionalInfo>
         <Text size="small">{name}</Text>
-        <Text size="small">{expirationDate.join('/')}</Text>
+        {expirationDate.some(Boolean) && <Text size="small">{expirationDate.join('/')}</Text>}
       </CardAdditionalInfo>
     </StyledCreditCardView>
   );
