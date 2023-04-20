@@ -1,6 +1,6 @@
-import type { Dispatch } from 'react';
-import { useState } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components';
+import { useFocusChain } from '../hooks/useFocusChain';
 import { Input } from './common/Input';
 
 const StyledCardPasswordInput = styled.div`
@@ -8,48 +8,50 @@ const StyledCardPasswordInput = styled.div`
   gap: 8px;
 `;
 
-export const CardPasswordInput = () => {
-  const [password1, setPassword1] = useState('');
-  const [password2, setPassword2] = useState('');
+type CardPasswordInputProps = {
+  value: string;
+  onChange: (value: string) => void;
+};
 
-  const handleCardPasswordChange = (dispatch: Dispatch<string>) => (value: string) => {
-    if (!/^\d?$/.test(value)) return;
+export const CardPasswordInput = (props: CardPasswordInputProps) => {
+  const { value, onChange } = props;
 
-    dispatch(value);
+  const password1Ref = useRef<HTMLInputElement>(null);
+  const password2Ref = useRef<HTMLInputElement>(null);
+
+  const { next } = useFocusChain([password1Ref, password2Ref]);
+
+  const handleCardPasswordChange = (index: number) => (newValue: string) => {
+    if (!/^\d?$/.test(newValue)) return;
+
+    if (/^\d$/.test(newValue)) next();
+
+    const password = Array.from(value);
+    password[index] = newValue;
+
+    onChange(password.join(''));
   };
 
   return (
     <StyledCardPasswordInput>
       <Input
-        value={password1}
-        onChange={handleCardPasswordChange(setPassword1)}
+        ref={password1Ref}
+        value={value[0] ?? ''}
+        onChange={handleCardPasswordChange(0)}
         width={5}
         center
         type="password"
       />
       <Input
-        value={password2}
-        onChange={handleCardPasswordChange(setPassword2)}
+        ref={password2Ref}
+        value={value[1] ?? ''}
+        onChange={handleCardPasswordChange(1)}
         width={5}
         center
         type="password"
       />
-      <Input
-        value="*"
-        onChange={handleCardPasswordChange(setPassword2)}
-        width={5}
-        center
-        type="password"
-        disabled
-      />
-      <Input
-        value="*"
-        onChange={handleCardPasswordChange(setPassword2)}
-        width={5}
-        center
-        type="password"
-        disabled
-      />
+      <Input value="*" width={5} center type="password" disabled />
+      <Input value="*" width={5} center type="password" disabled />
     </StyledCardPasswordInput>
   );
 };

@@ -1,4 +1,5 @@
 import type { ChangeEventHandler, HTMLInputTypeAttribute } from 'react';
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 type InputProps = {
@@ -29,7 +30,7 @@ const StyledInput = styled.input<StyledInputProps>`
   text-align: ${(props) => (props.$center ? 'center' : 'initial')};
 `;
 
-export const Input = (props: InputProps) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { type, width, center, placeholder, value, onChange, disabled } = props;
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -38,6 +39,7 @@ export const Input = (props: InputProps) => {
 
   return (
     <StyledInput
+      ref={ref}
       type={type}
       $width={width}
       $center={center}
@@ -47,4 +49,4 @@ export const Input = (props: InputProps) => {
       disabled={disabled}
     />
   );
-};
+});

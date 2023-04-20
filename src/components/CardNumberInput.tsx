@@ -1,6 +1,6 @@
-import type { Dispatch } from 'react';
-import { useState } from 'react';
+import { useRef } from 'react';
 import styled from 'styled-components';
+import { useFocusChain } from '../hooks/useFocusChain';
 import { Input } from './common/Input';
 
 const StyledCardNumberInput = styled.div`
@@ -12,31 +12,61 @@ const StyledCardNumberInput = styled.div`
   }
 `;
 
-export const CardNumberInput = () => {
-  const [cardNumber1, setCardNumber1] = useState('');
-  const [cardNumber2, setCardNumber2] = useState('');
-  const [cardNumber3, setCardNumber3] = useState('');
-  const [cardNumber4, setCardNumber4] = useState('');
+type CardNumberInputProps = {
+  value: string;
+  onChange: (value: string) => void;
+};
 
-  const handleCardNumberChange = (dispatch: Dispatch<string>) => (value: string) => {
-    if (!/^\d{0,4}$/.test(value)) return;
+export const CardNumberInput = (props: CardNumberInputProps) => {
+  const { value, onChange } = props;
 
-    dispatch(value);
+  const cardNumberRef1 = useRef<HTMLInputElement>(null);
+  const cardNumberRef2 = useRef<HTMLInputElement>(null);
+  const cardNumberRef3 = useRef<HTMLInputElement>(null);
+  const cardNumberRef4 = useRef<HTMLInputElement>(null);
+
+  const { next } = useFocusChain([cardNumberRef1, cardNumberRef2, cardNumberRef3, cardNumberRef4]);
+
+  const getPartialCardNumber = (index: number) => {
+    return value.slice(index * 4, (index + 1) * 4);
+  };
+
+  const handleCardNumberChange = (index: number) => (newValue: string) => {
+    if (!/^\d{0,4}$/.test(newValue)) return;
+
+    if (/^\d{4}$/.test(newValue)) next();
+
+    const partialCardNumbers = [0, 1, 2, 3].map(getPartialCardNumber);
+    partialCardNumbers[index] = newValue;
+
+    onChange(partialCardNumbers.join(''));
   };
 
   return (
     <StyledCardNumberInput>
-      <Input value={cardNumber1} onChange={handleCardNumberChange(setCardNumber1)} center />
-      <Input value={cardNumber2} onChange={handleCardNumberChange(setCardNumber2)} center />
       <Input
-        value={cardNumber3}
-        onChange={handleCardNumberChange(setCardNumber3)}
+        ref={cardNumberRef1}
+        value={getPartialCardNumber(0)}
+        onChange={handleCardNumberChange(0)}
+        center
+      />
+      <Input
+        ref={cardNumberRef2}
+        value={getPartialCardNumber(1)}
+        onChange={handleCardNumberChange(1)}
+        center
+      />
+      <Input
+        ref={cardNumberRef3}
+        value={getPartialCardNumber(2)}
+        onChange={handleCardNumberChange(2)}
         center
         type="password"
       />
       <Input
-        value={cardNumber4}
-        onChange={handleCardNumberChange(setCardNumber4)}
+        ref={cardNumberRef4}
+        value={getPartialCardNumber(3)}
+        onChange={handleCardNumberChange(3)}
         center
         type="password"
       />
