@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-const LinkWrapper = styled(Link)`
+const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   text-decoration: none;
@@ -20,10 +20,11 @@ const Button = styled.button`
 `;
 
 const AddCardButton = () => {
+  const navigate = useNavigate();
   return (
-    <LinkWrapper to={'/add-card'}>
-      <Button>+</Button>
-    </LinkWrapper>
+    <Wrapper>
+      <Button onClick={() => navigate('/add-card')}>+</Button>
+    </Wrapper>
   );
 };
 

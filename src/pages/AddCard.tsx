@@ -5,7 +5,7 @@ import SecurityCode from '../components/SecurityCode/SecurityCode';
 import CardPassword from '../components/CardPassword/CardPassword';
 import Card from '../components/Card/Card';
 import { CardType } from '../types/Card';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import useAddCard from '../hooks/useAddCard';
 
@@ -29,15 +29,18 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
     isActive,
   } = useAddCard();
 
+  const navigate = useNavigate();
+
   const handleSetCards = () => {
     setCards([
       ...cards,
       { id: uuidv4(), cardNumbers, expiredDate, cardOwnerName },
     ]);
+    navigate('/');
   };
 
   return (
-    <>
+    <form onSubmit={handleSetCards}>
       <Card
         cardNumbers={cardNumbers}
         expiredDate={expiredDate}
@@ -54,12 +57,8 @@ const AddCard = ({ cards, setCards }: SetCardsProps) => {
         setSecurityCode={setSecurityCode}
       />
       <CardPassword password={password} setPassword={setPassword} />
-      {isActive && (
-        <Link to={'/'}>
-          <button onClick={handleSetCards}>다음</button>
-        </Link>
-      )}
-    </>
+      {isActive && <button>다음</button>}
+    </form>
   );
 };
 
