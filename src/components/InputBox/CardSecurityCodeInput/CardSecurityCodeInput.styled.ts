@@ -16,9 +16,12 @@ export const LabelHeader = styled.div`
 `;
 
 export const InputContainer = styled.div`
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   background-color: #e5e5e5;
   border-radius: 10px;
+
+  width: 25%;
 `;
 
 export const ErrorMessage = styled.p`

@@ -42,7 +42,7 @@ const SecurityCodeInputBox = ({
           <Input
             value={securityCode}
             onChange={onChange}
-            type="text"
+            type="password"
             width="m"
             center={true}
             maxLength={3}

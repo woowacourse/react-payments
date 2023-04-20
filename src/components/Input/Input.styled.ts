@@ -4,7 +4,7 @@ import { InputProps } from '../../types/props';
 const InputWidth = {
   xl: '100%',
   l: '20%',
-  m: '60px',
+  m: '80px',
   s: '35px',
   xs: '45px',
 };
@@ -19,7 +19,7 @@ export const Input = styled.input<InputProps>`
   border: none;
 
   font-weight: 600;
-  font-size: 18px;
+  font-size: ${(props) => (props.type === 'password' ? '24px' : '18px')};
   letter-spacing: 2px;
   text-align: ${(props) => props.center && 'center'};
 `;
