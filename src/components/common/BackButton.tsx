@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -9,5 +10,11 @@ const Button = styled.button`
 `;
 
 export const BackButton = () => {
-  return <Button />;
+  const navigate = useNavigate();
+
+  const handleOnClickBackButton = () => {
+    navigate(-1);
+  };
+
+  return <Button onClick={handleOnClickBackButton} />;
 };

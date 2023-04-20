@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Text } from './common/Text';
 
@@ -23,6 +24,11 @@ type NewCreditCardButtonProps = {
 
 export const NewCreditCardButton = (props: NewCreditCardButtonProps) => {
   const { helperText } = props;
+  const navigate = useNavigate();
+
+  const handleOnClickNewCreditCardButton = () => {
+    navigate('/register');
+  };
 
   return (
     <ButtonContainer>
@@ -31,7 +37,7 @@ export const NewCreditCardButton = (props: NewCreditCardButtonProps) => {
           새로운 카드를 등록해주세요.
         </Text>
       )}
-      <Button>+</Button>
+      <Button onClick={handleOnClickNewCreditCardButton}>+</Button>
     </ButtonContainer>
   );
 };
