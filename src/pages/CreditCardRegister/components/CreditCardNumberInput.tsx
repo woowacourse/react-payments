@@ -1,15 +1,31 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { convertSecuredCreditCard } from 'domains/creditCard';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
 type Props = {
-  markedCreditCardNumber: string;
   creditCardNumber: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  setCreditCardNumber: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function CreditCardNumberInput({ markedCreditCardNumber, creditCardNumber, onChange }: Props) {
+function CreditCardNumberInput({ creditCardNumber, setCreditCardNumber }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
+
+  const handleChangeCreditCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newCreditCarNumber = event.target.value;
+
+    if (newCreditCarNumber.length > 16) return;
+
+    const markedNumber = convertSecuredCreditCard(newCreditCarNumber)
+      .filter((numbers) => !!numbers.length)
+      .map((numbers) => numbers.join(''))
+      .join(' - ');
+
+    setMarkedCreditCardNumber(markedNumber);
+    setCreditCardNumber(newCreditCarNumber);
+  };
+
   return (
     <S.RelativeBox>
       <S.CreditCardRegisterLabel>카드 번호</S.CreditCardRegisterLabel>
@@ -29,7 +45,7 @@ function CreditCardNumberInput({ markedCreditCardNumber, creditCardNumber, onCha
         ref={inputRef}
         type="string"
         value={creditCardNumber}
-        onChange={onChange}
+        onChange={handleChangeCreditCardNumber}
       />
     </S.RelativeBox>
   );

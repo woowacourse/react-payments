@@ -1,7 +1,6 @@
 import CreditCard from 'components/CreditCard';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { convertSecuredCreditCard } from 'domains/creditCard';
 import * as Type from 'types';
 import CreditCardNumberInput from './components/CreditCardNumberInput';
 import CreditCardExpiryInput from './components/CreditCardExpiryInput';
@@ -15,22 +14,7 @@ type CreditCardPasswordType = { first: string, second: string };
 function CreditCardRegister() {
   const navigate = useNavigate();
 
-  const [markedCreditCardNumber, setMarkedCreditCardNumber] = useState('');
-
   const [creditCardNumber, setCreditCardNumber] = useState('');
-  const handleChangeCreditCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newCreditCarNumber = event.target.value;
-
-    if (newCreditCarNumber.length > 16) return;
-
-    const markedNumber = convertSecuredCreditCard(newCreditCarNumber)
-      .filter((numbers) => !!numbers.length)
-      .map((numbers) => numbers.join(''))
-      .join(' - ');
-
-    setMarkedCreditCardNumber(markedNumber);
-    setCreditCardNumber(newCreditCarNumber);
-  };
 
   const [creditCardExpiry, setCreditCardExpiry] = useState('');
   const handleChangeCreditCardExpiry = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,9 +106,8 @@ function CreditCardRegister() {
       </S.PreviewCreditCard>
       <S.CreditCardRegisterForm>
         <CreditCardNumberInput
-          markedCreditCardNumber={markedCreditCardNumber}
           creditCardNumber={creditCardNumber}
-          onChange={handleChangeCreditCardNumber}
+          setCreditCardNumber={setCreditCardNumber}
         />
         <CreditCardExpiryInput
           creditCardExpiry={creditCardExpiry}

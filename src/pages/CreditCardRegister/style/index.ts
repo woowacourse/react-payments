@@ -30,10 +30,6 @@ export const PreviewCreditCard = styled.div`
 export const CreditCardRegisterForm = styled.form`
     display: grid;
     row-gap: 20px;
-
-    #hiddenInput{
-        visibility: hidden;
-    }
 `;
 
 export const RelativeBox = styled.div`
