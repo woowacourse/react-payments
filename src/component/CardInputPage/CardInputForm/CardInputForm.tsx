@@ -21,8 +21,14 @@ const initialFormCondition = {
 export default function CardInputForm() {
   const [isFormFilled, setIsFormFilled] = useState(initialFormCondition);
 
+  const [isCardNumberComplete, setIsCardNumberComplete] = useState(false);
+  const [isExpirationDateComplete, setIsExpirationDateComplete] =
+    useState(false);
+  const [isOwnerComplete, setIsOwnerComplete] = useState(false);
+  const [isSecurityComplete, setIsSecurityComplete] = useState(false);
+  const [isPasswordComplete, setIsPasswordComplete] = useState(false);
+
   const isFormComplete = Object.values(isFormFilled).every(Boolean);
-  console.log(isFormFilled, isFormComplete);
 
   const formElement = useRef<HTMLFormElement>(null);
 
@@ -32,14 +38,30 @@ export default function CardInputForm() {
     });
   }, []);
 
+  useEffect(() => {
+    if (
+      isCardNumberComplete &&
+      isExpirationDateComplete &&
+      isSecurityComplete &&
+      isPasswordComplete
+    )
+      console.log("입력이 완료되었습니다!");
+    else console.log("미완성 입력이에요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ");
+  }, [
+    isCardNumberComplete,
+    isExpirationDateComplete,
+    isSecurityComplete,
+    isPasswordComplete,
+  ]);
+
   return (
     <form ref={formElement} className="form">
       <CardPreview card={{}} />
-      <InputBoxCardNumber />
-      <InputBoxExpirationDate />
-      <InputBoxOwner />
-      <InputBoxSecurityCode />
-      <InputBoxPassword />
+      <InputBoxCardNumber setIsComplete={setIsCardNumberComplete} />
+      <InputBoxExpirationDate setIsComplete={setIsExpirationDateComplete} />
+      <InputBoxOwner setIsComplete={setIsOwnerComplete} />
+      <InputBoxSecurityCode setIsComplete={setIsSecurityComplete} />
+      <InputBoxPassword setIsComplete={setIsPasswordComplete} />
       {isFormComplete && <Button type="submit">다음</Button>}
     </form>
   );
