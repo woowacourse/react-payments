@@ -27,8 +27,18 @@
   color: #525252;
 }
 
+label {
+  position: relative;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #525252;
+}
+
 .inputContainer > input {
-  width: 25%;
+  width: 50px;
   background: transparent;
   border: none;
   text-align: center;
@@ -40,6 +50,10 @@
 
 .inputContainer > input[type='password'] {
   letter-spacing: -0.2em;
+}
+
+.inputContainer > input[type='password']::placeholder {
+  letter-spacing: 0.05em;
 }
 
 .expirationDate {
@@ -67,6 +81,11 @@
   letter-spacing: 0.05em;
 }
 
+.nameContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
 .ownerName {
   width: 318px;
   height: 45px;
@@ -74,6 +93,12 @@
   background: #ecebf1;
   border: none;
   border-radius: 7px;
+}
+
+.ownerNameLength {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .ownerName > input {
@@ -150,4 +175,15 @@
   font-size: 14px;
   line-height: 16px;
   cursor: pointer;
+}
+
+.errorMessage {
+  height: 15px;
+  margin-top: 5px;
+  color: #e40000;
+}
+
+.errorContainer {
+  height: 15px;
+  margin-top: 5px;
 }

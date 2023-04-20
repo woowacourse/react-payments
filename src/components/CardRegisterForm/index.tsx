@@ -10,10 +10,10 @@ import { useNavigate } from 'react-router-dom';
 
 import Card from '../Card';
 import Input, { Focus } from '../Input';
+import Tooltip from '../Tooltip';
 import TooltipButton from '../TooltipButton';
 
 import styles from './cardRegisterForm.module.css';
-import Tooltip from '../Tooltip';
 
 interface Props {
   registerCard: (card: any) => void;
@@ -54,7 +54,9 @@ const CardRegisterForm = ({ registerCard }: Props) => {
     cardPassword2.length === 1;
 
   const isNotNumber = (value: string) => {
-    return Number.isNaN(Number(value)) || value === ' ';
+    return (
+      Number.isNaN(Number(value)) || value.includes(' ') || value.includes('.')
+    );
   };
 
   const isNotAlphabet = (value: string) => {
@@ -149,6 +151,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               value={cardNumber1}
               onChange={(e) => handleNumberChange(e, setCardNumber1)}
               ref={inputRefs[0]}
+              placeholder="0000"
             />
             <span>-</span>
             <Input
@@ -160,8 +163,10 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               value={cardNumber2}
               onChange={(e) => handleNumberChange(e, setCardNumber2)}
               ref={inputRefs[1]}
+              placeholder="0000"
             />
             <span>-</span>
+
             <Input
               type="password"
               minLength={4}
@@ -171,6 +176,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               value={cardNumber3}
               onChange={(e) => handleNumberChange(e, setCardNumber3)}
               ref={inputRefs[2]}
+              placeholder="0000"
             />
             <span>-</span>
             <Input
@@ -182,6 +188,7 @@ const CardRegisterForm = ({ registerCard }: Props) => {
               value={cardNumber4}
               onChange={(e) => handleNumberChange(e, setCardNumber4)}
               ref={inputRefs[3]}
+              placeholder="0000"
             />
           </div>
         </label>
@@ -215,20 +222,23 @@ const CardRegisterForm = ({ registerCard }: Props) => {
           </div>
         </label>
 
-        <label>
-          카드 소유자 이름(선택)
-          <div className={styles.ownerName}>
-            <Input
-              type="text"
-              maxLength={30}
-              placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-              tabIndex={6}
-              value={owner}
-              onChange={(e) => handleOwnerChange(e)}
-              ref={inputRefs[6]}
-            />
-          </div>
-        </label>
+        <div>
+          <label>
+            카드 소유자 이름(선택)
+            <span className={styles.ownerNameLength}>{owner.length} / 20</span>
+            <div className={styles.ownerName}>
+              <Input
+                type="text"
+                maxLength={20}
+                placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+                tabIndex={6}
+                value={owner}
+                onChange={(e) => handleOwnerChange(e)}
+                ref={inputRefs[6]}
+              />
+            </div>
+          </label>
+        </div>
 
         <label>
           보안 코드(CVC/CVV)
