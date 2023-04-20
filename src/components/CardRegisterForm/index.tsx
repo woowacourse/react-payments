@@ -13,10 +13,12 @@ import Input, { Focus } from '../Input';
 import Tooltip from '../Tooltip';
 import TooltipButton from '../TooltipButton';
 
+import type { CardInfo } from '../../types/card';
+
 import styles from './cardRegisterForm.module.css';
 
 interface Props {
-  registerCard: (card: any) => void;
+  registerCard: (card: CardInfo) => void;
 }
 
 const CardRegisterForm = ({ registerCard }: Props) => {

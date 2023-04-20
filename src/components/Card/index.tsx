@@ -1,14 +1,6 @@
-import styles from './card.module.css';
+import type { CardInfo } from '../../types/card';
 
-interface Props {
-  cardNumber1: string;
-  cardNumber2: string;
-  cardNumber3: string;
-  cardNumber4: string;
-  expiredMonth: string;
-  expiredYear: string;
-  owner: string;
-}
+import styles from './card.module.css';
 
 const Card = ({
   cardNumber1,
@@ -18,7 +10,7 @@ const Card = ({
   owner,
   expiredMonth,
   expiredYear,
-}: Props) => {
+}: CardInfo) => {
   return (
     <div className={styles.container}>
       <svg
@@ -84,10 +76,14 @@ const Card = ({
         <span className={styles.number}>{cardNumber1}</span>
         <span className={styles.number}>{cardNumber2}</span>
         <span className={styles.password}>
-          {'﹒'.repeat(cardNumber3.length)}
+          {cardNumber3 !== undefined
+            ? '﹒'.repeat(cardNumber3.length)
+            : '﹒﹒﹒﹒'}
         </span>
         <span className={styles.password}>
-          {'﹒'.repeat(cardNumber4.length)}
+          {cardNumber4 !== undefined
+            ? '﹒'.repeat(cardNumber4.length)
+            : '﹒﹒﹒﹒'}
         </span>
       </div>
       <div className={styles.detailContainer}>

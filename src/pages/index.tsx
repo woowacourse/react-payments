@@ -4,8 +4,10 @@ import { Route, Routes } from 'react-router';
 import HoldingCardsPage from './HoldingCardsPage';
 import CardRegisterPage from './CardRegisterPage';
 
+import type { CardInfo } from '../types/card';
+
 function App() {
-  const [cards, setCards] = useState<any[]>([]);
+  const [cards, setCards] = useState<CardInfo[]>([]);
 
   useEffect(() => {
     const cardsData = localStorage.getItem('cards');
@@ -21,7 +23,7 @@ function App() {
     }
   }, [cards]);
 
-  const registerCard = (card: any) => {
+  const registerCard = (card: CardInfo) => {
     setCards([...cards, card]);
   };
 

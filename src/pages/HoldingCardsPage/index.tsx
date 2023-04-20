@@ -4,9 +4,10 @@ import Card from '../../components/Card';
 import CardRegisterButton from '../../components/CardRegisterButton';
 
 import styles from './holdingCardsPage.module.css';
+import type { CardInfo } from '../../types/card';
 
 interface Props {
-  cards: any[];
+  cards: CardInfo[];
 }
 
 const HoldingCardsPage = ({ cards }: Props) => {
@@ -29,7 +30,16 @@ const HoldingCardsPage = ({ cards }: Props) => {
         )}
         <section className={styles.cardContainer}>
           {cards.map((card, index) => (
-            <Card key={index} />
+            <Card
+              cardNumber1={card.cardNumber1}
+              cardNumber2={card.cardNumber2}
+              cardNumber3={card.cardNumber3}
+              cardNumber4={card.cardNumber4}
+              expiredMonth={card.expiredMonth}
+              expiredYear={card.expiredYear}
+              owner={card.owner}
+              key={index}
+            />
           ))}
           <CardRegisterButton onClick={handleClick} />
         </section>
