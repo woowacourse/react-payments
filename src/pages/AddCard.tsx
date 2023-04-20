@@ -1,5 +1,5 @@
-import React, { FormEvent } from "react";
-import { SetStateAction, useEffect, useState } from "react";
+import { FormEvent } from "react";
+import { useState } from "react";
 import Card from "../components/Card";
 import CardInputForm from "../components/CardInputForm";
 import Header from "../components/common/Header";
@@ -8,13 +8,26 @@ import { CardType } from "../types";
 import { getLocalStorage, setLocalStorage } from "../utils";
 
 const AddCard = () => {
+  const randomColor = [
+    "red",
+    "pink",
+    "green",
+    "blue",
+    "black",
+    "gray",
+    "yellow",
+    "orange",
+    "aqua",
+    "lime",
+  ];
+
   const [card, setCard] = useState<CardType>({
     cardNumber: "",
     expiredDate: "",
     ownerName: "",
     cvc: "",
     password: ["", ""],
-    color: "pink",
+    color: randomColor[Math.floor(Math.random() * 10)],
   });
 
   const registerCard = (e: FormEvent) => {

@@ -17,16 +17,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto';
     font-style: normal;
   }
-
-  :root {
-    /* --primary-color: #ec4a0a;
-    --lighten-color: #f6a88a;
-    --grey-100: #ffffff;
-    --grey-200: #d0d5dd;
-    --grey-300: #667085;
-    --grey-400: #344054;
-    --grey-500: #000000; */
-  }
 `;
 
 export default GlobalStyle;
