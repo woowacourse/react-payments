@@ -14,7 +14,7 @@ const InputCardData = ({ value, onChange, status, errorMessage, name }: InputPro
   // TODO : status
   return (
     <div>
-      <input className="input-box" value={value} onChange={onChange} name={name} />
+      <input className="input-box" value={value} onChange={onChange} name={name} required />
       {status ? '' : <span>{errorMessage}</span>}
     </div>
   );

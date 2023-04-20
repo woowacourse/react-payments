@@ -7,6 +7,7 @@ export type InputCardPasswordProps = {
   status: boolean;
   errorMessage: string;
   maxDataLength: number;
+  minDataLength: number;
   width: string;
   name?: string;
 };
@@ -17,6 +18,7 @@ const InputCardPassword = ({
   status,
   errorMessage,
   maxDataLength,
+  minDataLength,
   width,
   name,
 }: InputCardPasswordProps) => {
@@ -26,10 +28,12 @@ const InputCardPassword = ({
         className="input-password"
         type="password"
         maxLength={maxDataLength}
+        minLength={minDataLength}
         value={value}
         onChange={onChange}
         style={{ width }}
         name={name}
+        required
       />
       {status ? '' : <span>{errorMessage}</span>}
     </div>

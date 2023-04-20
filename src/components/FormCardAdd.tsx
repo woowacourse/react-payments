@@ -66,6 +66,7 @@ const FormCardAdd = ({
           status={cardNumberData.status}
           errorMessage="잘못된 값"
           name="third"
+          minDataLength={4}
           maxDataLength={4}
           width="100px"
         />
@@ -75,6 +76,7 @@ const FormCardAdd = ({
           status={cardNumberData.status}
           errorMessage="잘못된 값"
           name="fourth"
+          minDataLength={4}
           maxDataLength={4}
           width="100px"
         />
@@ -113,6 +115,7 @@ const FormCardAdd = ({
             status={securityCodeData.status}
             errorMessage="잘못된 값"
             maxDataLength={3}
+            minDataLength={3}
             width="84px"
           />
           <button>
@@ -129,6 +132,7 @@ const FormCardAdd = ({
             status={cardPassword1Data.status}
             errorMessage=""
             maxDataLength={1}
+            minDataLength={1}
             width="45px"
           />
           <InputCardPassword
@@ -137,6 +141,7 @@ const FormCardAdd = ({
             status={cardPassword2Data.status}
             errorMessage=""
             maxDataLength={1}
+            minDataLength={1}
             width="45px"
           />
           <img src={passwordDotImg} alt="비밀번호" />
