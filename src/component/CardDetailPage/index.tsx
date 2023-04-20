@@ -6,15 +6,7 @@ import CardDetailView from "../CardDetailView";
 import CardDetailForm from "./CardDetailForm";
 
 import St from "./styled";
-
-type CreditCard = {
-  cardNumberOrigin: string;
-  cardNumberHidden: string;
-  cardDate: string;
-  cardOwnerName: string;
-  cardCVC: string;
-  cardPassword: [string, string];
-};
+import { CreditCard } from "../../types/card";
 
 type CardDetailPageProps = {
   addCreditCard: (card: CreditCard) => void;
@@ -63,6 +55,7 @@ function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
 
   const changeCardDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const dateString = e.target.value.replace(/[^\d]/g, "").slice(0, 4);
+
     const expirationDate = dateString.match(/.{1,2}/g);
     const resultDate = expirationDate ? expirationDate.join("/") : "";
 

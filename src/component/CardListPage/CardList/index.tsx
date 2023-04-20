@@ -2,15 +2,7 @@ import React from "react";
 import CardAddButton from "./CardAddButton";
 import St from "./styled";
 import CardDetailView from "../../CardDetailView";
-
-type CreditCard = {
-  cardNumberOrigin: string;
-  cardNumberHidden: string;
-  cardDate: string;
-  cardOwnerName: string;
-  cardCVC: string;
-  cardPassword: [string, string];
-};
+import { CreditCard } from "../../../types/card";
 
 type CardListProps = {
   creditCardList: CreditCard[];

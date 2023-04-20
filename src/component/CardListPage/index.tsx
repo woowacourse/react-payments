@@ -2,15 +2,7 @@ import React from "react";
 import St from "./styled";
 import CardListHeader from "./CardListHeader";
 import CardList from "./CardList";
-
-type CreditCard = {
-  cardNumberOrigin: string;
-  cardNumberHidden: string;
-  cardDate: string;
-  cardOwnerName: string;
-  cardCVC: string;
-  cardPassword: [string, string];
-};
+import { CreditCard } from "../../types/card";
 
 type CardListPageProps = {
   creditCardList: CreditCard[];
