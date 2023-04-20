@@ -39,7 +39,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Build
-        run: npm run build
+        run: CI='' npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
