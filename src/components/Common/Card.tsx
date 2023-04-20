@@ -48,7 +48,7 @@ const CardWrapper = styled.div`
 const CardChip = styled.div`
   position: absolute;
   left: 16px;
-  top: 48px;
+  top: 42px;
   background: #cbba64;
   border-radius: 4px;
   width: 40px;

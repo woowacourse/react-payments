@@ -27,5 +27,5 @@ const PageWrapper = styled.main`
   min-width: 375px;
   width: 375px;
 
-  padding: 0 28px;
+  padding: 0 28px 28px 28px;
 `;
