@@ -18,6 +18,8 @@ const router = createBrowserRouter([
       },
     ],
   },
-]);
+], {
+  basename: '/react-payments'
+});
 
 export default router;
