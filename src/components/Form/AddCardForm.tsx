@@ -4,16 +4,22 @@ import {
   SecurityCodeInput,
   PasswordInput,
   CardNumberInputs,
-  ValueAndOnChange,
 } from 'components/Input';
 import styled from 'styled-components';
 import { Label } from 'components/common';
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import { Container } from 'components/style/InputContainer';
+import CardDB from 'db/Cards';
+import { Card } from 'components/common/Card/types';
+import { ValueAndOnChange } from 'components/Input/types';
+
+type Props = {
+  onSubmit: () => void;
+};
 
 const NOT_ALPHABET_REGEX = /[^A-Za-z\s]/gi;
 
-function AddCardForm() {
+function AddCardForm({ onSubmit }: Props) {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
 
   const [month, setMonth] = useState('');
@@ -94,8 +100,27 @@ function AddCardForm() {
     setSecondDigit(value);
   };
 
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    if (!month || !firstDigit || !secondDigit) {
+      alert('모든 항목을 입력해주세요.');
+      return;
+    }
+
+    const card: Card = {
+      numbers: cardNumbers,
+      expirationDate: { month: month, year: year },
+      name: name,
+      securityCode: securityCode,
+      password: { first: firstDigit, second: secondDigit },
+    };
+
+    CardDB.registerCard(card);
+    onSubmit();
+  };
+
   return (
-    <FormContainer>
+    <FormContainer onSubmit={handleSubmit}>
       <Label text="카드 번호" />
       <CardNumberContainer>
         <CardNumberInputs valueAndOnChanges={valueAndOnChanges} />
