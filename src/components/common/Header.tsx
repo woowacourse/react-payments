@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface HeaderProps {
   title: string;
@@ -23,14 +23,14 @@ const HeaderUnit = styled.header`
   align-items: center;
   height: 5.6rem;
 
-  font-size: 2rem;
   margin-bottom: 2rem;
 
   width: 100%;
 `;
 
 const Title = styled.h2`
-  font-size: 1.6rem;
+  font-size: 2rem;
+  font-weight: bold;
 
   margin-left: 5rem;
 `;

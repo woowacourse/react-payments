@@ -1,29 +1,26 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-import { Card } from "../components/common/card";
-import { BackButton } from "../components/common/backButton";
-import { Header } from "../components/common/Header";
+import { getData } from '../utils/localStorage';
+import { useState } from 'react';
 
-import { getData } from "../utils/localStorage";
-import { useState } from "react";
-import { CardInfo, CardItem } from "../components/common/cardItem";
+import { Header, CardInfo, CardItem } from '../components/common';
 
 export function CardList() {
   // const cards = []; //card.length === 0 이면 h3 없어도 됨
-  const [cards, setCards] = useState<CardInfo[]>(getData("cards"));
+  const [cards, setCards] = useState<CardInfo[]>(getData('cards'));
 
   const navigate = useNavigate();
   function moveAddCardPage() {
-    navigate("/add-card");
+    navigate('/add-card');
   }
 
   return (
     <CardListContainer>
-      <Header title="보유 카드" />
+      <Header title='보유 카드' />
       <Section>
-        <h3>{cards?.length === 0 ? "새로운 카드를 추가하세요" : ""}</h3>
+        <h3>{cards?.length === 0 ? '새로운 카드를 추가하세요' : ''}</h3>
         {cards &&
           cards?.map((card) => {
             return (
@@ -31,7 +28,8 @@ export function CardList() {
                 key={card.userName}
                 cardNumber={card?.cardNumber}
                 date={card?.date}
-                userName={card?.userName}></CardItem>
+                userName={card?.userName}
+              ></CardItem>
             );
           })}
         <Button onClick={moveAddCardPage}>+</Button>
