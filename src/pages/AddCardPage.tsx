@@ -43,17 +43,17 @@ const AddCardPage = () => {
     third: '',
     fourth: '',
   });
-  const cardExpireData = useInput('', cardExpireCondition, formatExpireDate);
-  const securityCodeData = useInput('', securityCodeCondition, handleNumberInput);
-  const cardOwnerData = useInput('', cardOwnerCondition, stringToUpperCase);
-  const cardPassword1Data = useInput('', cardPasswordCondition, handleNumberInput);
-  const cardPassword2Data = useInput('', cardPasswordCondition, handleNumberInput);
+  const cardExpire = useInput('', cardExpireCondition, formatExpireDate);
+  const securityCode = useInput('', securityCodeCondition, handleNumberInput);
+  const cardOwner = useInput('', cardOwnerCondition, stringToUpperCase);
+  const cardPassword1 = useInput('', cardPasswordCondition, handleNumberInput);
+  const cardPassword2 = useInput('', cardPasswordCondition, handleNumberInput);
 
   const onBackButtonClick = () => {
     navigate('/');
   };
 
-  const cardNumberData = {
+  const cardNumberProps = {
     value: cardNumber,
     onChange: (e: any) => {
       const lastWord = e.target.value[e.target.value.length - 1];
@@ -78,17 +78,16 @@ const AddCardPage = () => {
         <Card
           cardType={cardType}
           cardNumber={cardNumber as any}
-          cardOwner={cardOwnerData.value}
-          expired={cardExpireData.value}
+          cardOwner={cardOwner.value}
+          expired={cardExpire.value}
         />
         <FormCardAdd
-          cardNumberData={cardNumberData}
-          cardNData={cardNumberData}
-          cardExpireData={cardExpireData}
-          cardOwnerData={cardOwnerData}
-          securityCodeData={securityCodeData}
-          cardPassword1Data={cardPassword1Data}
-          cardPassword2Data={cardPassword2Data}
+          cardNumber={cardNumberProps}
+          cardExpire={cardExpire}
+          cardOwner={cardOwner}
+          securityCode={securityCode}
+          cardPassword1={cardPassword1}
+          cardPassword2={cardPassword2}
         />
       </section>
     </div>

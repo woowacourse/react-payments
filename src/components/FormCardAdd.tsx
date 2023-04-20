@@ -8,18 +8,18 @@ import { fetchData } from '../utils/fetchData';
 import { useNavigate } from 'react-router-dom';
 
 const FormCardAdd = ({
-  cardNumberData,
-  cardExpireData,
-  cardOwnerData,
-  securityCodeData,
-  cardPassword1Data,
-  cardPassword2Data,
+  cardNumber,
+  cardExpire,
+  cardOwner,
+  securityCode,
+  cardPassword1,
+  cardPassword2,
 }: any) => {
   const navigate = useNavigate();
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const { first, second, third, fourth } = cardNumberData.value;
+    const { first, second, third, fourth } = cardNumber.value;
 
     const postData = {
       cardType: '현대',
@@ -29,12 +29,12 @@ const FormCardAdd = ({
         third,
         fourth,
       },
-      cardOwner: cardOwnerData.value,
-      expired: cardExpireData.value,
-      securityCode: securityCodeData.value,
+      cardOwner: cardOwner.value,
+      expired: cardExpire.value,
+      securityCode: securityCode.value,
       cardPassword: {
-        first: cardPassword1Data.value,
-        second: cardPassword2Data.value,
+        first: cardPassword1.value,
+        second: cardPassword2.value,
       },
     };
     fetchData(postData);
@@ -45,25 +45,25 @@ const FormCardAdd = ({
       <div>
         <span>카드 번호</span>
         <InputCardData
-          value={cardNumberData.value.first}
-          onChange={cardNumberData.onChange}
-          status={cardNumberData.status}
+          value={cardNumber.value.first}
+          onChange={cardNumber.onChange}
+          status={cardNumber.status}
           className="example"
           errorMessage="잘못된 값"
           name="first"
         />
         <InputCardData
-          value={cardNumberData.value.second}
-          onChange={cardNumberData.onChange}
-          status={cardNumberData.status}
+          value={cardNumber.value.second}
+          onChange={cardNumber.onChange}
+          status={cardNumber.status}
           className="example"
           errorMessage="잘못된 값"
           name="second"
         />
         <InputCardPassword
-          value={cardNumberData.value.third}
-          onChange={cardNumberData.onChange}
-          status={cardNumberData.status}
+          value={cardNumber.value.third}
+          onChange={cardNumber.onChange}
+          status={cardNumber.status}
           errorMessage="잘못된 값"
           name="third"
           minDataLength={4}
@@ -71,9 +71,9 @@ const FormCardAdd = ({
           width="100px"
         />
         <InputCardPassword
-          value={cardNumberData.value.fourth}
-          onChange={cardNumberData.onChange}
-          status={cardNumberData.status}
+          value={cardNumber.value.fourth}
+          onChange={cardNumber.onChange}
+          status={cardNumber.status}
           errorMessage="잘못된 값"
           name="fourth"
           minDataLength={4}
@@ -84,9 +84,9 @@ const FormCardAdd = ({
       <div>
         <span>만료일</span>
         <InputCardData
-          value={cardExpireData.value}
-          onChange={cardExpireData.onChange}
-          status={cardExpireData.status}
+          value={cardExpire.value}
+          onChange={cardExpire.onChange}
+          status={cardExpire.status}
           className="example"
           errorMessage="잘못된 값"
           name="expire"
@@ -95,12 +95,12 @@ const FormCardAdd = ({
       <div>
         <div className="card-owner-container-header">
           <span>카드 소유자 이름(선택)</span>
-          <span>{cardOwnerData.value.length}/30</span>
+          <span>{cardOwner.value.length}/30</span>
         </div>
         <InputCardData
-          value={cardOwnerData.value}
-          onChange={cardOwnerData.onChange}
-          status={cardOwnerData.status}
+          value={cardOwner.value}
+          onChange={cardOwner.onChange}
+          status={cardOwner.status}
           className="example"
           errorMessage="잘못된 값"
           name="owner"
@@ -110,9 +110,9 @@ const FormCardAdd = ({
         <span>보안코드(CVC/CVV)</span>
         <div className="card-security-code-box">
           <InputCardPassword
-            value={securityCodeData.value}
-            onChange={securityCodeData.onChange}
-            status={securityCodeData.status}
+            value={securityCode.value}
+            onChange={securityCode.onChange}
+            status={securityCode.status}
             errorMessage="잘못된 값"
             maxDataLength={3}
             minDataLength={3}
@@ -127,18 +127,18 @@ const FormCardAdd = ({
         <span>카드 비밀번호</span>
         <div className="card-password-input-box">
           <InputCardPassword
-            value={cardPassword1Data.value}
-            onChange={cardPassword1Data.onChange}
-            status={cardPassword1Data.status}
+            value={cardPassword1.value}
+            onChange={cardPassword1.onChange}
+            status={cardPassword1.status}
             errorMessage=""
             maxDataLength={1}
             minDataLength={1}
             width="45px"
           />
           <InputCardPassword
-            value={cardPassword2Data.value}
-            onChange={cardPassword2Data.onChange}
-            status={cardPassword2Data.status}
+            value={cardPassword2.value}
+            onChange={cardPassword2.onChange}
+            status={cardPassword2.status}
             errorMessage=""
             maxDataLength={1}
             minDataLength={1}
