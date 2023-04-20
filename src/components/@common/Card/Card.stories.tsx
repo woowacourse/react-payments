@@ -1,5 +1,3 @@
-// src/components/Card/Card.stories.tsx
-
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import Card, { CardProps } from './Card';

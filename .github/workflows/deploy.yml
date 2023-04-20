@@ -11,40 +11,28 @@ jobs:
       contents: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
-    env:
-      GENERATE_SOURCEMAP: false
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2.4.0
+      - uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 18
 
       - id: cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Install Dependencies
+      - run: npm ci
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install
 
-      - name: Build Application
-        run: npm run build
+      - run: npm run build
 
-      - name: Build Storybook
-        run: npm run build-storybook
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3.9.3
+      - uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          git_push_options: '--no-verify'
-          publish_dir: |
-            ./build
-            ./storybook-static
+          publish_dir: ./build
