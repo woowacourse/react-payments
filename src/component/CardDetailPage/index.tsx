@@ -4,7 +4,20 @@ import CardDetailHeader from "./CardDetailHeader";
 import CardDetailView from "../CardDetailView";
 import CardDetailForm from "./CardDetailForm";
 
-function CardDetailPage() {
+type CreditCard = {
+  cardNumberOrigin: string;
+  cardNumberHidden: string;
+  cardDate: string;
+  cardOwnerName: string;
+  cardCVC: string;
+  cardPassword: [string, string];
+};
+
+type CardDetailPageProps = {
+  addCreditCard: (card: CreditCard) => void;
+};
+
+function CardDetailPage({ addCreditCard }: CardDetailPageProps) {
   const [cardNumberOrigin, setCardNumberOrigin] = useState("");
   const [cardNumberHidden, setCardNumberHidden] = useState("");
   const [cardDate, setCardDate] = useState("");
@@ -75,6 +88,19 @@ function CardDetailPage() {
     }
   };
 
+  const submitCreditCard = () => {
+    const newCard: CreditCard = {
+      cardNumberOrigin,
+      cardNumberHidden,
+      cardDate,
+      cardOwnerName,
+      cardCVC,
+      cardPassword,
+    };
+
+    addCreditCard(newCard);
+  };
+
   return (
     <St.Page>
       <CardDetailHeader />
@@ -94,6 +120,7 @@ function CardDetailPage() {
         cardCVC={cardCVC}
         cardPassword={cardPassword}
         changeCardPassword={changeCardPassword}
+        submitCreditCard={submitCreditCard}
       />
     </St.Page>
   );
