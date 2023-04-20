@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
@@ -7,12 +8,22 @@ type Props = {
 };
 
 function CreditCardCVCInput({ creditCardCVC, setCreditCardCVC }: Props) {
+  const [error, setError] = useState(false);
+
   const handleChangeCreditCardCVC = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newCVC = event.target.value;
+    const newCVC = event.target.value.replace(/\D/g, '');
     if (newCVC.length <= 3) {
       setCreditCardCVC(newCVC);
     }
   };
+
+  useEffect(() => {
+    if (creditCardCVC.length > 0 && creditCardCVC.length < 3) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+  }, [creditCardCVC]);
 
   return (
     <S.Box>
@@ -24,6 +35,7 @@ function CreditCardCVCInput({ creditCardCVC, setCreditCardCVC }: Props) {
           <S.QuestionMark>?</S.QuestionMark>
         </S.QuestionBox>
       </S.FlexBox>
+      {error && <S.ErrorMessage>CVC/CVV 번호는 3자리 숫자여야 합니다.</S.ErrorMessage>}
     </S.Box>
   );
 }
