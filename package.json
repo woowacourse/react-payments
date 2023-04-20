@@ -2,6 +2,7 @@
   "name": "a",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://cruelladevil.github.io/react-lunch/",
   "dependencies": {
     "@storybook/addon-essentials": "^7.0.5",
     "@storybook/addon-interactions": "^7.0.5",
