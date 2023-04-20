@@ -37,7 +37,10 @@ const FormCardAdd = ({
         second: cardPassword2.value,
       },
     };
-    fetchData(postData);
+    if (!fetchData(postData)) {
+      alert('이미 등록된 카드입니다.');
+      return;
+    }
     navigate('/');
   };
   return (

@@ -16,7 +16,6 @@ const splitStringIntoGroups = (str: string, groupSize: number): string[] => {
 
 export const formatCardNumber = (cardNumber: string): string => {
   if (cardNumber.length <= 4) return cardNumber;
-  //   console.log(splitStringIntoGroups(cardNumber, 4));
   const splitCardNumber = splitStringIntoGroups(cardNumber, 4)
     .map((number, index) => {
       if (index > 1) return '*'.repeat(number.length);
