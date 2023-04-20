@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useInput } from "../hooks/useInput";
 import Card from "./Card";
 import CardNumberInput from "./CardNumberInput";
 import CvcInput from "./CvcInput";
@@ -60,7 +61,21 @@ const NextButtonWrapper = styled.div`
   bottom: 25px;
 `;
 
-export default function AddCardPage({ cardNumberSet }: any) {
+export default function AddCardPage() {
+  const firstNumber = useInput("");
+  const secondNumber = useInput("");
+  const thirdNumber = useInput("");
+  const fourthNumber = useInput("");
+
+  const year = useInput("");
+  const month = useInput("");
+
+  const owner = useInput("");
+  const cvc = useInput("");
+
+  const firstPassword = useInput("");
+  const secondPassword = useInput("");
+
   return (
     <Page>
       <TitleWrapper>
@@ -68,29 +83,48 @@ export default function AddCardPage({ cardNumberSet }: any) {
         <Title>카드 추가</Title>
       </TitleWrapper>
       <CardWrapper>
-        <Card cardNumberSet={cardNumberSet} />
+        <Card
+          cardNumberSet={[
+            firstNumber.value,
+            secondNumber.value,
+            thirdNumber.value,
+            fourthNumber.value,
+          ]}
+          expiracy={`${month.value ? month.value : "MM"}/${
+            year.value ? year.value : "YY"
+          }`}
+          owner={owner.value}
+        />
       </CardWrapper>
       <InputWrapperParent>
         <InputWrapper>
           <InputField kind="cardNumber">
-            <CardNumberInput />
+            <CardNumberInput
+              firstNumber={firstNumber}
+              secondNumber={secondNumber}
+              thirdNumber={thirdNumber}
+              fourthNumber={fourthNumber}
+            />
           </InputField>
           <InputField kind="expiracy">
-            <ExpiracyInput />
+            <ExpiracyInput year={year} month={month} />
           </InputField>
-          <InputField kind="owner" inputLength="0/30">
-            <OwnerInput />
+          <InputField kind="owner" inputLength={`${0}/30`}>
+            <OwnerInput owner={owner} />
           </InputField>
           <InputField kind="cvc">
             <CvcWrapper>
-              <CvcInput />
+              <CvcInput cvc={cvc} />
               <CvcButtonWrapper>
                 <InformationButton />
               </CvcButtonWrapper>
             </CvcWrapper>
           </InputField>
           <InputField kind="password">
-            <PasswordInput />
+            <PasswordInput
+              firstPassword={firstPassword}
+              secondPassword={secondPassword}
+            />
           </InputField>
         </InputWrapper>
         <NextButtonWrapper>

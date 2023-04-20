@@ -1,13 +1,7 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, InputHTMLAttributes } from "react";
 import styled from "styled-components";
-import { InputTitle } from "./InputField";
 
-export interface InputProps {
-  id?: InputTitle;
-  type: string;
-  placeholder?: string;
-  maxLength?: number;
-  onInput?: (event: ChangeEvent<HTMLInputElement>) => void;
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   textAlign?: string;
   isNumber?: boolean;
 }
@@ -33,7 +27,8 @@ export default function Input({
       ""
     );
   };
-  const defaultOnInput = (event: ChangeEvent<HTMLInputElement>) => {};
+  const defaultOnInput = () => {};
+
   return (
     <StyledInput
       textAlign={textAlign}

@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+interface CardProps {
+  cardNumberSet: string[];
+  owner: string;
+  expiracy: string;
+}
+
 const StyledCard = styled.div`
   width: 213px;
   height: 133px;
@@ -66,18 +72,24 @@ const StyledExpiracy = styled.span`
   font-size: 14px;
 `;
 
-export default function Card({ cardNumberSet, owner, expiracy }: any) {
+const ENCRYPT_INDEX = 2;
+
+export default function Card({ cardNumberSet, owner, expiracy }: CardProps) {
   return (
     <StyledCard>
       <StyledTitle></StyledTitle>
       <StyledMagnet />
       <div>
         <StyledCardNumber>
-          {cardNumberSet.map((num: any) => (
-            <StyledCardNumberItem>{num}</StyledCardNumberItem>
+          {cardNumberSet.map((cardNumberItem: string, index: number) => (
+            <StyledCardNumberItem key={`${index}${cardNumberItem}`}>
+              {index >= ENCRYPT_INDEX
+                ? "·".repeat(cardNumberItem.length)
+                : cardNumberItem}
+            </StyledCardNumberItem>
           ))}
         </StyledCardNumber>
-        <StyledOwnerName>{owner}</StyledOwnerName>
+        <StyledOwnerName>{owner ? owner : "NAME"}</StyledOwnerName>
         <StyledExpiracy>{expiracy}</StyledExpiracy>
       </div>
     </StyledCard>

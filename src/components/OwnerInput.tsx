@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { UseInputProps } from "../hooks/useInput";
 import Input from "./Input";
+
+export interface OwnerInputProps {
+  owner: UseInputProps;
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +17,7 @@ const Wrapper = styled.div`
   padding-left: 8px;
 `;
 
-export default function OwnerInput() {
+export default function OwnerInput({ owner }: OwnerInputProps) {
   return (
     <Wrapper>
       <Input
@@ -20,6 +25,7 @@ export default function OwnerInput() {
         maxLength={30}
         id="owner"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+        {...owner}
       />
     </Wrapper>
   );

@@ -1,6 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { UseInputProps } from "../hooks/useInput";
 import Input from "./Input";
+
+export interface PasswordInputProps {
+  firstPassword: UseInputProps;
+  secondPassword: UseInputProps;
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -30,7 +36,10 @@ const WhiteWrapper = styled.div`
   border-radius: 7px;
 `;
 
-export default function PasswordInput() {
+export default function PasswordInput({
+  firstPassword,
+  secondPassword,
+}: PasswordInputProps) {
   return (
     <Wrapper>
       <GrayWrapper>
@@ -40,6 +49,7 @@ export default function PasswordInput() {
           id="password"
           type="password"
           textAlign="center"
+          {...firstPassword}
         />
       </GrayWrapper>
       <GrayWrapper>
@@ -49,6 +59,7 @@ export default function PasswordInput() {
           id="password"
           type="password"
           textAlign="center"
+          {...secondPassword}
         />
       </GrayWrapper>
       <WhiteWrapper>•</WhiteWrapper>

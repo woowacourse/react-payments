@@ -1,6 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { UseInputProps } from "../hooks/useInput";
 import Input from "./Input";
+
+interface ExpiracyInputProps {
+  year: UseInputProps;
+  month: UseInputProps;
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,7 +29,7 @@ const Slash = styled.span`
   font-weight: 500;
   color: #737373;
 `;
-export default function ExpiracyInput() {
+export default function ExpiracyInput({ year, month }: ExpiracyInputProps) {
   return (
     <Wrapper>
       <InputWrapper>
@@ -34,6 +40,7 @@ export default function ExpiracyInput() {
           isNumber={true}
           placeholder="MM"
           textAlign="center"
+          {...month}
         />
       </InputWrapper>
       <Slash>/</Slash>
@@ -44,6 +51,7 @@ export default function ExpiracyInput() {
           isNumber={true}
           placeholder="YY"
           textAlign="center"
+          {...year}
         />
       </InputWrapper>
     </Wrapper>

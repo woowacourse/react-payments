@@ -1,5 +1,13 @@
 import styled from "styled-components";
+import { UseInputProps } from "../hooks/useInput";
 import Input from "./Input";
+
+interface CardNumberInputProps {
+  firstNumber: UseInputProps;
+  secondNumber: UseInputProps;
+  thirdNumber: UseInputProps;
+  fourthNumber: UseInputProps;
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,7 +24,12 @@ const Dash = styled.span`
   margin: 0 7px;
 `;
 
-export default function CardNumberInput() {
+export default function CardNumberInput({
+  firstNumber,
+  secondNumber,
+  thirdNumber,
+  fourthNumber,
+}: CardNumberInputProps) {
   return (
     <Wrapper>
       <Input
@@ -25,13 +38,32 @@ export default function CardNumberInput() {
         id="cardNumber"
         type="text"
         textAlign="center"
+        {...firstNumber}
       />
       <Dash>-</Dash>
-      <Input isNumber={true} maxLength={4} type="text" textAlign="center" />
+      <Input
+        isNumber={true}
+        maxLength={4}
+        type="text"
+        textAlign="center"
+        {...secondNumber}
+      />
       <Dash>-</Dash>
-      <Input isNumber={true} maxLength={4} type="password" textAlign="center" />
+      <Input
+        isNumber={true}
+        maxLength={4}
+        type="password"
+        textAlign="center"
+        {...thirdNumber}
+      />
       <Dash>-</Dash>
-      <Input isNumber={true} maxLength={4} type="password" textAlign="center" />
+      <Input
+        isNumber={true}
+        maxLength={4}
+        type="password"
+        textAlign="center"
+        {...fourthNumber}
+      />
     </Wrapper>
   );
 }

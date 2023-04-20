@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { UseInputProps } from "../hooks/useInput";
 import Input from "./Input";
+
+interface CvcInputProps {
+  cvc: UseInputProps;
+}
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +17,7 @@ const Wrapper = styled.div`
   padding: 0 16px;
 `;
 
-export default function CvcInput() {
+export default function CvcInput({ cvc }: CvcInputProps) {
   return (
     <Wrapper>
       <Input
@@ -21,6 +26,7 @@ export default function CvcInput() {
         isNumber={true}
         maxLength={3}
         id="cvc"
+        {...cvc}
       />
     </Wrapper>
   );
