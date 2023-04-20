@@ -22,19 +22,18 @@ function OwnerNameInput() {
   ) => {
     const value = event.currentTarget.value as string;
 
+    if (!ONLY_ENG_AND_EMPTY_REGEXP.test(value)) return;
     try {
-      if (!ONLY_ENG_AND_EMPTY_REGEXP.test(value)) {
-        throw new Error("카드 소유자 이름은 영어와 공백만 입력 가능합니다.");
-      }
+      if (value.length > 0) {
+        if (CONTINUOUS_EMPTY_REGEXP.test(value)) {
+          throw new Error(
+            "카드 소유자 이름은 공백을 연속해서 작성할 수 없습니다.",
+          );
+        }
 
-      if (CONTINUOUS_EMPTY_REGEXP.test(value)) {
-        throw new Error(
-          "카드 소유자 이름은 공백을 연속해서 작성할 수 없습니다.",
-        );
-      }
-
-      if (value.length < 3 || value.length > 30) {
-        throw new Error("카드 소유자 이름은 3글자 이상 30글자 이하입니다.");
+        if (value.length < 3 || value.length > 30) {
+          throw new Error("카드 소유자 이름은 3글자 이상 30글자 이하입니다.");
+        }
       }
 
       setError({
@@ -53,7 +52,7 @@ function OwnerNameInput() {
         if (!setCardInput) return;
         setCardInput((prev) => ({
           ...prev,
-          ownerName: value.toUpperCase().trim(),
+          ownerName: value.toUpperCase(),
         }));
       }
     }
@@ -85,14 +84,12 @@ const OwnerNameInputContainer = styled.div`
 
 const LabelContainer = styled.div`
   display: flex;
-  width: 318px;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
 `;
 
 const OwnerNameStyle = css`
-  width: 318px;
-
   font-size: 18px;
   font-weight: 500;
 `;
