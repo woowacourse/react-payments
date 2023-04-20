@@ -1,19 +1,23 @@
 import styled from "styled-components";
 import { InputContainer, Input, Label } from "../common";
+import { CardPassword } from "../../types";
 
 type CardPasswordInputProps = {
-  password: string;
+  password: CardPassword;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const CardPasswordInput = ({ password, onChange }: CardPasswordInputProps) => {
+  const { first, second } = password;
+
   return (
     <Label>
       카드 비밀번호
       <Div>
         <InputContainer width="43px">
           <Input
-            value={password[0]}
+            name="first"
+            value={first}
             textAlign="center"
             inputMode="numeric"
             width="100%"
@@ -25,7 +29,8 @@ const CardPasswordInput = ({ password, onChange }: CardPasswordInputProps) => {
         </InputContainer>
         <InputContainer width="43px">
           <Input
-            value={password[1]}
+            name="second"
+            value={second}
             textAlign="center"
             inputMode="numeric"
             width="100%"

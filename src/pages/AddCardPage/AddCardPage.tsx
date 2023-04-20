@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Container } from "../../components/common";
 import { useState } from "react";
-import { Card, CardExpirationDate, CardNumber } from "../../types";
+import { Card, CardExpirationDate, CardNumber, CardPassword } from "../../types";
 import { useNavigate } from "react-router-dom";
 import { isNumeric } from "../../validator/Validator";
 
@@ -32,7 +32,11 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
 
   const [ownerName, setOwnerName] = useState<string>("");
   const [securityCode, setSecurityCode] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [password, setPassword] = useState<CardPassword>({
+    first: "",
+    second: "",
+  });
+
   const navigate = useNavigate();
 
   const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,13 +66,18 @@ const AddCardPage = ({ onSubmit }: AddCardPageProps) => {
   const handleSecurityCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     const code = e.target.value;
 
+    if (!isNumeric(code)) return;
+
     setSecurityCode(code);
   };
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const pw = e.target.value;
+    const targetDigit = e.target.name;
 
-    setPassword(pw);
+    if (!isNumeric(pw)) return;
+
+    setPassword({ ...password, [targetDigit]: pw });
   };
 
   const addCard = (e: React.FormEvent) => {
