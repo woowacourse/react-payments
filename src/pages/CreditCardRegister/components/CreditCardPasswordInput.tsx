@@ -1,4 +1,5 @@
 import * as Type from 'types';
+import { useEffect, useState } from 'react';
 import Input from '../../../components/Input';
 import * as S from '../style';
 
@@ -13,6 +14,8 @@ type Props = {
 function CreditCardPasswordInput({
   creditCardPassword, setCreditCardPassword
 }: Props) {
+  const [error, setError] = useState(false);
+
   const handleChangeCreditCardFirstPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newFirstPassword = event.target.value;
     if (newFirstPassword.length <= 1) {
@@ -26,6 +29,18 @@ function CreditCardPasswordInput({
       setCreditCardPassword({ ...creditCardPassword, second: event.target.value });
     }
   };
+
+  useEffect(() => {
+    if (creditCardPassword.first.length === 0 && creditCardPassword.second.length === 0) {
+      setError(false);
+    } else if (creditCardPassword.first.length > 0 || creditCardPassword.second.length > 0) {
+      setError(true);
+    }
+    if (creditCardPassword.first.length > 0 && creditCardPassword.second.length > 0) {
+      setError(false);
+    }
+  }, [creditCardPassword]);
+
   return (
     <S.Box>
       <S.CreditCardRegisterLabel>카드 비밀번호</S.CreditCardRegisterLabel>
@@ -35,6 +50,7 @@ function CreditCardPasswordInput({
         <S.PasswordBox>•</S.PasswordBox>
         <S.PasswordBox>•</S.PasswordBox>
       </S.FlexBox>
+      {error && <S.ErrorMessage>비밀 번호는 앞 2자리를 입력하셔야 합니다.</S.ErrorMessage>}
     </S.Box>
   );
 }
