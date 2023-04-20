@@ -1,3 +1,5 @@
+import React from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AddNewCardForm } from '../../components/AddNewCardForm';
@@ -11,4 +13,8 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const NewCardForm: Story = {};
+export const NewCardForm: Story = {
+  args: {
+    addNewCardFormRef: React.createRef(),
+  },
+};

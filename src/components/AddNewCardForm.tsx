@@ -6,6 +6,7 @@ import { OwnerNameInput } from './input/OwnerNameInput';
 import { SecurityCodeInput } from './input/SecurityCodeInput';
 import { PasswordInput } from './input/PasswordInput';
 import { CardViewer } from './CardViewer';
+import { cardDataService } from '../domains/cardDataService';
 
 export const AddNewCardForm = () => {
   const [isInputFinish, setIsInputFinish] = useState(false);
@@ -60,13 +61,15 @@ export const AddNewCardForm = () => {
       onSubmit={(e) => {
         e.preventDefault();
 
-        console.log(
+        cardDataService.addNewCard({
           cardNumber,
           expirationDate,
           ownerName,
           securityCode,
-          password
-        );
+          password,
+        });
+
+        window.location.href = '/';
       }}
     >
       <CardViewer
@@ -74,37 +77,39 @@ export const AddNewCardForm = () => {
         expirationDate={expirationDate}
         ownerName={ownerName}
       />
-      <CardNumberInput
-        moveFocusToExpirationDate={moveFocusToExpirationDate}
-        cardNumber={cardNumber}
-        setCardNumber={setCardNumber}
-      />
-      <ExpirationDateInput
-        monthInputRef={monthInputRef}
-        moveFocusToOwnerName={moveFocusToOwnerName}
-        expirationDate={expirationDate}
-        setExpirationDate={setExpirationDate}
-      />
-      <OwnerNameInput
-        ownerNameInputRef={ownerNameInputRef}
-        moveFocusToSecurityCode={moveFocusToSecurityCode}
-        ownerName={ownerName}
-        setOwnerName={setOwnerName}
-      />
-      <SecurityCodeInput
-        securityCodeInputRef={securityCodeInputRef}
-        moveFocusToPassword={moveFocusToPassword}
-        securityCode={securityCode}
-        setSecurityCode={setSecurityCode}
-      />
-      <PasswordInput
-        passwordInputRef={passwordInputRef}
-        activateNextButton={activateNextButton}
-        password={password}
-        setPassword={setPassword}
-      />
+      <Style.InputContainer>
+        <CardNumberInput
+          moveFocusToExpirationDate={moveFocusToExpirationDate}
+          cardNumber={cardNumber}
+          setCardNumber={setCardNumber}
+        />
+        <ExpirationDateInput
+          monthInputRef={monthInputRef}
+          moveFocusToOwnerName={moveFocusToOwnerName}
+          expirationDate={expirationDate}
+          setExpirationDate={setExpirationDate}
+        />
+        <OwnerNameInput
+          ownerNameInputRef={ownerNameInputRef}
+          moveFocusToSecurityCode={moveFocusToSecurityCode}
+          ownerName={ownerName}
+          setOwnerName={setOwnerName}
+        />
+        <SecurityCodeInput
+          securityCodeInputRef={securityCodeInputRef}
+          moveFocusToPassword={moveFocusToPassword}
+          securityCode={securityCode}
+          setSecurityCode={setSecurityCode}
+        />
+        <PasswordInput
+          passwordInputRef={passwordInputRef}
+          activateNextButton={activateNextButton}
+          password={password}
+          setPassword={setPassword}
+        />
+      </Style.InputContainer>
       <Style.ButtonContainer>
-        <Style.NextButton disabled={!isInputFinish}>다음</Style.NextButton>
+        {isInputFinish && <Style.NextButton>다음</Style.NextButton>}
       </Style.ButtonContainer>
     </Style.Wrapper>
   );
@@ -112,6 +117,14 @@ export const AddNewCardForm = () => {
 
 const Style = {
   Wrapper: styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 19px;
+
+    width: max-content;
+  `,
+  InputContainer: styled.div`
     display: flex;
     flex-direction: column;
 
@@ -126,6 +139,9 @@ const Style = {
     width: 100%;
   `,
   NextButton: styled.button`
-    /* all: unset; */
+    all: unset;
+
+    font-weight: bold;
+    cursor: pointer;
   `,
 };

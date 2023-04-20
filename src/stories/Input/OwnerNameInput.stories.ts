@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { OwnerNameInput } from '../../components/input/OwnerNameInput';
@@ -11,4 +12,11 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const OwnerName: Story = {};
+export const OwnerName: Story = {
+  args: {
+    ownerNameInputRef: React.createRef(),
+    moveFocusToSecurityCode: () => {},
+    ownerName: '',
+    setOwnerName: () => {},
+  },
+};

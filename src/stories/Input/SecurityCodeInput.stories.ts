@@ -1,3 +1,5 @@
+import React from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { SecurityCodeInput } from '../../components/input/SecurityCodeInput';
@@ -11,4 +13,11 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const SecurityCode: Story = {};
+export const SecurityCode: Story = {
+  args: {
+    securityCodeInputRef: React.createRef(),
+    moveFocusToPassword: () => {},
+    securityCode: '',
+    setSecurityCode: () => {},
+  },
+};

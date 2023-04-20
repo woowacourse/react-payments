@@ -1,3 +1,5 @@
+import React from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { PasswordInput } from '../../components/input/PasswordInput';
@@ -11,4 +13,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Password: Story = {};
+export const Password: Story = {
+  args: {
+    passwordInputRef: React.createRef(),
+    activateNextButton: () => {},
+    password: {
+      firstPassword: '',
+      secondPassword: '',
+    },
+    setPassword: () => {},
+  },
+};

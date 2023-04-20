@@ -15,5 +15,11 @@ type Story = StoryObj<typeof meta>;
 export const ExpirationDate: Story = {
   args: {
     monthInputRef: React.createRef(),
+    moveFocusToOwnerName: () => {},
+    expirationDate: {
+      month: '',
+      year: '',
+    },
+    setExpirationDate: () => {},
   },
 };

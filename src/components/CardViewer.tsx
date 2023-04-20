@@ -21,6 +21,7 @@ export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
       <Style.CardNumberContainer>
         {Object.values(cardNumber).map((number, index) => (
           <Style.NumberInput
+            key={index}
             value={number}
             type={index > 1 ? 'password' : 'text'}
             disabled
@@ -29,9 +30,11 @@ export function CardViewer({ cardNumber, expirationDate, ownerName }: Props) {
       </Style.CardNumberContainer>
       <Style.NameAndDateContainer>
         <span>{ownerName}</span>
-        <span>
-          {expirationDate.month}/{expirationDate.year}
-        </span>
+        {expirationDate.month !== '' && (
+          <span>
+            {expirationDate.month}/{expirationDate.year}
+          </span>
+        )}
       </Style.NameAndDateContainer>
     </Style.Wrapper>
   );
@@ -54,6 +57,7 @@ const Style = {
 
     color: white;
     padding: 14px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   `,
   ICChip: styled.div`
     width: 40px;
