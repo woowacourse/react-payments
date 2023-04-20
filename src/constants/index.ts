@@ -17,4 +17,22 @@ const PASSWORD_DIGIT_INDEX = Object.freeze({
   SECOND: 1,
 });
 
-export { INPUT_MAX_LENGTH, SEPERATED_CARD_NUMBER_LENGTH, PASSWORD_DIGIT_INDEX };
+const CARD_RANDOM_COLOR = [
+  "red",
+  "pink",
+  "green",
+  "blue",
+  "black",
+  "gray",
+  "yellow",
+  "orange",
+  "aqua",
+  "lime",
+];
+
+export {
+  INPUT_MAX_LENGTH,
+  SEPERATED_CARD_NUMBER_LENGTH,
+  PASSWORD_DIGIT_INDEX,
+  CARD_RANDOM_COLOR,
+};

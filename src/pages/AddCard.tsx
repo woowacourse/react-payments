@@ -4,40 +4,25 @@ import Card from "../components/Card";
 import CardInputForm from "../components/CardInputForm";
 import Header from "../components/common/Header";
 import Page from "../components/common/Page";
+import { CARD_RANDOM_COLOR } from "../constants";
 import { CardType } from "../types";
 import { getLocalStorage, setLocalStorage } from "../utils";
 
 const AddCard = () => {
-  const randomColor = [
-    "red",
-    "pink",
-    "green",
-    "blue",
-    "black",
-    "gray",
-    "yellow",
-    "orange",
-    "aqua",
-    "lime",
-  ];
-
   const [card, setCard] = useState<CardType>({
     cardNumber: "",
     expiredDate: "",
     ownerName: "",
     cvc: "",
     password: ["", ""],
-    color: randomColor[Math.floor(Math.random() * 10)],
+    color: CARD_RANDOM_COLOR[Math.floor(Math.random() * 10)],
   });
 
   const registerCard = (e: FormEvent) => {
-    // e.preventDefault();
     console.log(card);
     const cards = getLocalStorage("card");
     setLocalStorage("card", [...cards, card]);
   };
-
-  // console.log(card);
 
   return (
     <Page>
